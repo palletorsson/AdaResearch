@@ -176,6 +176,32 @@ interior has. The bay is correct, gated, tested, and inert on this corpus.
 It ships (a body under 4.5 m and under ~8 m wide that meets an interior
 wall will use it), and rung 2 is where the 63 mid-size bodies actually go.
 
+## RUNG 2 BUILT AND MEASURED (regen 2026-08-15 08:46)
+
+Two halves. NEGOTIATOR: the crossability rule read `body_m[0]` alone at
+rotation 0 and refused an 18 x 6 m body for its 18 when it is 6 across
+turned — the court is a rectangle a body can be TURNED in. Now the narrow
+side must cross; if only the turned orientation does, the court is granted
+turned (rotation +90, court dims swapped, assembler stamps the row's
+rotation so plan and building agree); a body whose NARROW side still
+severs the corridor is refused with the honest text: "a WORLD, not an
+exhibit — Palle's ruling". ASSEMBLER: the joint budget scales with the
+building it follows — clamp(0.6 x segment length, 40, 80) m — and doubles
+once when the queue is backed up (> 6 waiting), so the corridor pays its
+debt at the next seam instead of carrying balconies chapters behind their
+rooms.
+
+```
+           placed  interior  courts  rejected  escalation
+before        900       442     127       256         114
+after         943       448     164       213          95
+```
+
++43 placed, +37 in courts, -19 escalations, -43 rejected. Prediction said
+"-> ~40 escalations"; measured 95. The gap is the 32 worlds plus square
+bodies over 12 m that no turn helps — rung 3's population, now named by
+the refusal text itself.
+
 ## PREDICTION (revised, still before rung 1's measurement)
 
 Rung 1: escalations 114 → ~106 (the 6 candidates, some in two chapters).

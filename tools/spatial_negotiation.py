@@ -827,12 +827,30 @@ def negotiate(contract: SpatialContract, plan: FloorPlan, occ: Occupancy,
             # refusing a wide float for severing a floor it never touches is
             # how weather_vector_field (12.4 m of hanging vectors) ended up
             # refused from the one venue built for it.
-            if contract.preferred_venue == "courtyard"                     and tile_w >= 6 and int(_m.ceil(contract.body_m[0])) > tile_w - 3:
+            # SPIKE 09 RUNG 2 - the court is a RECTANGLE the body can be
+            # TURNED in. This rule read body_m[0] alone, at rotation 0, and
+            # refused an 18 x 6 m body for its 18 when it is 6 m across turned
+            # 90 deg. 63 mid-size bodies escalated on exactly this. Now: the
+            # narrower side must cross; if only the turned orientation does,
+            # the court is granted turned and its dims swap to match - the
+            # assembler stamps the row's rotation, so plan and building agree.
+            body_x, body_z = float(contract.body_m[0]), float(contract.body_m[1])
+            court_rot = contract.rotations[0]
+            if contract.preferred_venue == "courtyard" and tile_w >= 6                     and int(_m.ceil(body_x)) > tile_w - 3                     and int(_m.ceil(body_z)) <= tile_w - 3:
+                court_rot = (contract.rotations[0] + 90) % 360
+                court = [court[1], court[0]]
+                ladder.append(Trace(
+                    "escalation", "compromised",
+                    f"courtyard granted TURNED: {body_x:.1f} m across would "
+                    f"sever a {tile_w}-cell corridor, {body_z:.1f} m across "
+                    f"leaves a walkable column"))
+            if contract.preferred_venue == "courtyard" and tile_w >= 6                     and int(_m.ceil(min(body_x, body_z))) > tile_w - 3:
                 ladder.append(Trace(
                     "escalation", "fail",
-                    f"courtyard refused: a {contract.body_m[0]:.1f} m body "
-                    f"leaves no walkable column in a {tile_w}-cell corridor "
-                    f"(widest crossable is {tile_w - 3}); open ground instead"))
+                    f"courtyard refused: {body_x:.1f} x {body_z:.1f} m body - "
+                    f"even its narrow side leaves no walkable column in a "
+                    f"{tile_w}-cell corridor (widest crossable is {tile_w - 3}); "
+                    f"a WORLD, not an exhibit - Palle's ruling (spike 09 rung 3)"))
             else:
                 ladder.append(Trace(
                     "escalation", "pass",
@@ -841,7 +859,7 @@ def negotiate(contract: SpatialContract, plan: FloorPlan, occ: Occupancy,
                     f"(body + 3 m apron each side; no roof, so height is free)"))
                 return Placement(
                     artifact=contract.lookup, slot=contract.preferred_venue,
-                    anchor=(0, 0), rotation=contract.rotations[0],
+                    anchor=(0, 0), rotation=court_rot,
                     mode="freestanding", wall=None, wall_rect=None,
                     venue=contract.preferred_venue,
                     support_height_m=0.0, score=1.0, result="ACCEPT",
@@ -851,7 +869,7 @@ def negotiate(contract: SpatialContract, plan: FloorPlan, occ: Occupancy,
                     # no cell in the building's plan grid, but an ACCEPT without
                     # masks is a silent decision — the suite rightly refuses it,
                     # and the assembler seals from the same envelope.
-                    masks=masks(contract, contract.rotations[0], "freestanding"),
+                    masks=masks(contract, court_rot, "freestanding"),
                     contract=contract, court_m=court)
         # ── SPIKE 09 RUNG 1: THE BAY. A precinct body that would fit the tile
         # WIDTH but not any room in it is not homeless — the tile can open a

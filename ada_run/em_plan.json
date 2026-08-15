@@ -2,7 +2,7 @@
   "schema": "adaresearch.em_plan.v2",
   "_readme": "Placements resolved by tools/spatial_negotiation.py. Read by commons/scenes/endless_museum.gd under --em-plan. A museum key absent here deals exactly as it did before.",
   "_spine_run": {
-    "at": "2026-08-15T06:57:21",
+    "at": "2026-08-15T08:46:09",
     "owner": {
       "sainsbury-false-perspective-enfilade": "primitives",
       "uffizi-spine-enfilade": "transformation",
@@ -707,6 +707,27 @@
           "wall": null
         },
         {
+          "token": "scale_lines",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            7,
+            106
+          ]
+        },
+        {
           "token": "grabcolorcollection",
           "cell": [
             11,
@@ -726,12 +747,12 @@
         {
           "token": "triangle_line_puzzle",
           "cell": [
-            5,
-            47
+            32,
+            42
           ],
           "tile_cell": [
-            -9,
-            33
+            18,
+            28
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -777,12 +798,12 @@
         {
           "token": "mystic_writing_pad",
           "cell": [
-            32,
-            42
+            6,
+            46
           ],
           "tile_cell": [
-            18,
-            28
+            -8,
+            32
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -862,12 +883,12 @@
         {
           "token": "grab_sphere_point_snap",
           "cell": [
-            8,
-            43
+            27,
+            50
           ],
           "tile_cell": [
-            -6,
-            29
+            13,
+            36
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -985,12 +1006,12 @@
         {
           "token": "catalyst_foe",
           "cell": [
-            27,
-            50
+            31,
+            46
           ],
           "tile_cell": [
-            13,
-            36
+            17,
+            32
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -1070,12 +1091,12 @@
         {
           "token": "quad_line_puzzle",
           "cell": [
-            25,
-            47
+            12,
+            41
           ],
           "tile_cell": [
-            11,
-            33
+            -2,
+            27
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -1087,12 +1108,12 @@
         {
           "token": "grab_trihedron",
           "cell": [
-            14,
-            46
+            26,
+            48
           ],
           "tile_cell": [
-            0,
-            32
+            12,
+            34
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -1104,12 +1125,12 @@
         {
           "token": "grab_octahedron",
           "cell": [
-            31,
-            41
+            11,
+            46
           ],
           "tile_cell": [
-            17,
-            27
+            -3,
+            32
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -1121,12 +1142,12 @@
         {
           "token": "path_game_controller",
           "cell": [
-            31,
-            46
+            8,
+            43
           ],
           "tile_cell": [
-            17,
-            32
+            -6,
+            29
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -1155,12 +1176,12 @@
         {
           "token": "pyramid_edit",
           "cell": [
-            6,
-            46
+            31,
+            40
           ],
           "tile_cell": [
-            -8,
-            32
+            17,
+            26
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -1227,12 +1248,12 @@
         {
           "token": "octapod_crawler",
           "cell": [
-            12,
-            39
+            26,
+            55
           ],
           "tile_cell": [
-            -2,
-            25
+            12,
+            41
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -1244,12 +1265,12 @@
         {
           "token": "armadillo_eggling",
           "cell": [
-            29,
-            48
+            14,
+            46
           ],
           "tile_cell": [
-            15,
-            34
+            0,
+            32
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -1278,12 +1299,12 @@
         {
           "token": "polyhedron_nets_cube",
           "cell": [
-            18,
-            54
+            29,
+            48
           ],
           "tile_cell": [
-            4,
-            40
+            15,
+            34
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -1295,12 +1316,12 @@
         {
           "token": "folding_cube",
           "cell": [
-            25,
-            49
+            24,
+            50
           ],
           "tile_cell": [
-            11,
-            35
+            10,
+            36
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -1312,12 +1333,12 @@
         {
           "token": "sphere",
           "cell": [
-            26,
-            55
+            6,
+            50
           ],
           "tile_cell": [
-            12,
-            41
+            -8,
+            36
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -1346,12 +1367,12 @@
         {
           "token": "exhibit_furniture",
           "cell": [
-            32,
-            53
+            16,
+            56
           ],
           "tile_cell": [
-            18,
-            39
+            2,
+            42
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -1456,12 +1477,12 @@
         {
           "token": "sphere_low",
           "cell": [
-            6,
-            50
+            32,
+            53
           ],
           "tile_cell": [
-            -8,
-            36
+            18,
+            39
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -1473,12 +1494,12 @@
         {
           "token": "snap_octahedron_puzzle",
           "cell": [
-            26,
-            48
+            16,
+            46
           ],
           "tile_cell": [
-            12,
-            34
+            2,
+            32
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -1490,12 +1511,12 @@
         {
           "token": "sphere_mid",
           "cell": [
-            11,
-            43
+            7,
+            47
           ],
           "tile_cell": [
-            -3,
-            29
+            -7,
+            33
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -1507,12 +1528,12 @@
         {
           "token": "sphere_high",
           "cell": [
-            30,
-            55
+            31,
+            43
           ],
           "tile_cell": [
-            16,
-            41
+            17,
+            29
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -1541,12 +1562,12 @@
         {
           "token": "star_primitive",
           "cell": [
-            30,
-            40
+            12,
+            39
           ],
           "tile_cell": [
-            16,
-            26
+            -2,
+            25
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -1579,12 +1600,12 @@
         {
           "token": "truncatedtetrahedron",
           "cell": [
-            13,
-            56
+            30,
+            55
           ],
           "tile_cell": [
-            -1,
-            42
+            16,
+            41
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -1596,12 +1617,12 @@
         {
           "token": "snap_tetrahedron_puzzle",
           "cell": [
-            24,
-            50
+            25,
+            45
           ],
           "tile_cell": [
-            10,
-            36
+            11,
+            31
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -1614,11 +1635,11 @@
           "token": "righttriangle",
           "cell": [
             30,
-            42
+            39
           ],
           "tile_cell": [
             16,
-            28
+            25
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -1664,12 +1685,12 @@
         {
           "token": "snap_cube_puzzle",
           "cell": [
-            16,
-            46
+            25,
+            51
           ],
           "tile_cell": [
-            2,
-            32
+            11,
+            37
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -1681,12 +1702,12 @@
         {
           "token": "capsule_radials_rings",
           "cell": [
-            25,
-            45
+            11,
+            54
           ],
           "tile_cell": [
-            11,
-            31
+            -3,
+            40
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -1757,12 +1778,12 @@
         {
           "token": "snap_pyramid_puzzle",
           "cell": [
-            25,
-            51
+            24,
+            52
           ],
           "tile_cell": [
-            11,
-            37
+            10,
+            38
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -1774,12 +1795,12 @@
         {
           "token": "pyramid",
           "cell": [
-            24,
-            52
+            9,
+            42
           ],
           "tile_cell": [
-            10,
-            38
+            -5,
+            28
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -1808,12 +1829,12 @@
         {
           "token": "code_display",
           "cell": [
-            27,
-            52
+            17,
+            54
           ],
           "tile_cell": [
-            13,
-            38
+            3,
+            40
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -1859,12 +1880,12 @@
         {
           "token": "aalto_vase",
           "cell": [
-            12,
-            50
+            26,
+            53
           ],
           "tile_cell": [
-            -2,
-            36
+            12,
+            39
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -1895,10 +1916,6 @@
         {
           "token": "science_screen",
           "why": "faces_out_of_wall: at 0deg the back points (0, -1), but this wall needs (-1, 0)"
-        },
-        {
-          "token": "scale_lines",
-          "why": "escalation: precinct: no exterior venue is large enough either"
         },
         {
           "token": "grid_lines",
@@ -2789,19 +2806,23 @@
         {
           "token": "pattern_atlas_gallery",
           "cell": [
-            20,
-            10
+            0,
+            0
           ],
           "tile_cell": [
-            6,
-            -4
+            -14,
+            -14
           ],
-          "rotation": 0,
+          "rotation": 90,
           "mode": "freestanding",
-          "venue": "porch",
+          "venue": "courtyard",
           "support_height_m": 0.0,
-          "slot": "grande-galerie-axial/porch",
-          "wall": null
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            11,
+            17
+          ]
         },
         {
           "token": "pattern_loom",
@@ -2823,36 +2844,36 @@
         {
           "token": "pattern_machine_c",
           "cell": [
-            20,
-            56
+            18,
+            10
           ],
           "tile_cell": [
-            6,
-            42
+            4,
+            -4
           ],
-          "rotation": 0,
+          "rotation": 90,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "interior",
           "support_height_m": 0.0,
-          "slot": "grande-galerie-axial/outside",
+          "slot": "grande-galerie-axial/1,2",
           "wall": null
         },
         {
           "token": "pattern_maker_station",
           "cell": [
-            26,
-            53
+            17,
+            50
           ],
           "tile_cell": [
-            12,
-            39
+            3,
+            36
           ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "outside",
+          "rotation": 270,
+          "mode": "against_wall",
+          "venue": "interior",
           "support_height_m": 0.0,
-          "slot": "grande-galerie-axial/outside",
-          "wall": null
+          "slot": "grande-galerie-axial/1,30",
+          "wall": "west"
         },
         {
           "token": "pattern_tile_puzzle",
@@ -3095,18 +3116,18 @@
         {
           "token": "vr_tile_editor",
           "cell": [
-            12,
-            53
+            25,
+            9
           ],
           "tile_cell": [
-            -2,
-            39
+            11,
+            -5
           ],
-          "rotation": 0,
+          "rotation": 270,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "porch",
           "support_height_m": 0.0,
-          "slot": "grande-galerie-axial/outside",
+          "slot": "grande-galerie-axial/porch",
           "wall": null
         },
         {
@@ -3155,7 +3176,7 @@
         "h": 64
       },
       "apron": 14,
-      "interior_count": 24,
+      "interior_count": 26,
       "sequence": "symmetry"
     },
     {
@@ -3368,19 +3389,23 @@
         {
           "token": "tiling_demo",
           "cell": [
-            21,
-            50
+            0,
+            0
           ],
           "tile_cell": [
-            7,
-            36
+            -14,
+            -14
           ],
-          "rotation": 0,
+          "rotation": 90,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "courtyard",
           "support_height_m": 0.0,
-          "slot": "altes-rotunda-hub/outside",
-          "wall": null
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            18,
+            25
+          ]
         },
         {
           "token": "pattern_tile_4x4",
@@ -3423,12 +3448,12 @@
         {
           "token": "vr_tile_editor_mirror",
           "cell": [
-            7,
-            46
+            30,
+            45
           ],
           "tile_cell": [
-            -7,
-            32
+            16,
+            31
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -3457,11 +3482,11 @@
         {
           "token": "pattern_maker_station",
           "cell": [
-            34,
+            11,
             46
           ],
           "tile_cell": [
-            20,
+            -3,
             32
           ],
           "rotation": 0,
@@ -3470,6 +3495,27 @@
           "support_height_m": 0.0,
           "slot": "altes-rotunda-hub/outside",
           "wall": null
+        },
+        {
+          "token": "facade_builder",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            7,
+            19
+          ]
         },
         {
           "token": "combine_capsule",
@@ -3529,12 +3575,12 @@
         {
           "token": "row_3_x",
           "cell": [
-            10,
-            43
+            21,
+            46
           ],
           "tile_cell": [
-            -4,
-            29
+            7,
+            32
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -3584,12 +3630,12 @@
         {
           "token": "grid_3d_4x4x4",
           "cell": [
-            32,
-            41
+            21,
+            50
           ],
           "tile_cell": [
-            18,
-            27
+            7,
+            36
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -3754,12 +3800,12 @@
         {
           "token": "sequencer",
           "cell": [
-            35,
-            50
+            27,
+            52
           ],
           "tile_cell": [
-            21,
-            36
+            13,
+            38
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -3771,11 +3817,28 @@
         {
           "token": "step_sequencer_ambient",
           "cell": [
-            38,
+            14,
+            52
+          ],
+          "tile_cell": [
+            0,
+            38
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "altes-rotunda-hub/outside",
+          "wall": null
+        },
+        {
+          "token": "standalone_disco",
+          "cell": [
+            5,
             46
           ],
           "tile_cell": [
-            24,
+            -9,
             32
           ],
           "rotation": 0,
@@ -3794,14 +3857,6 @@
         {
           "token": "xyz_slider_plate",
           "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "facade_builder",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "standalone_disco",
-          "why": "body_inside_room: body cell (18, 19) is wall or void"
         }
       ],
       "room": {
@@ -4599,19 +4654,23 @@
         {
           "token": "mario_cube",
           "cell": [
-            30,
-            57
+            0,
+            0
           ],
           "tile_cell": [
-            16,
-            43
+            -14,
+            -14
           ],
-          "rotation": 0,
+          "rotation": 90,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "courtyard",
           "support_height_m": 0.0,
-          "slot": "castelvecchio-endstopped-enfilade/outside",
-          "wall": null
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            7,
+            23
+          ]
         },
         {
           "token": "archimedean_tunnel",
@@ -4629,6 +4688,27 @@
           "support_height_m": 0.0,
           "slot": "castelvecchio-endstopped-enfilade/outside",
           "wall": null
+        },
+        {
+          "token": "rainbow",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            6,
+            54
+          ]
         },
         {
           "token": "platonicsolids",
@@ -4743,12 +4823,12 @@
         {
           "token": "loom_drum_persian_p6",
           "cell": [
-            12,
-            41
+            31,
+            57
           ],
           "tile_cell": [
-            -2,
-            27
+            17,
+            43
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -4781,12 +4861,12 @@
         {
           "token": "color_sets_overview",
           "cell": [
-            33,
-            46
+            25,
+            58
           ],
           "tile_cell": [
-            19,
-            32
+            11,
+            44
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -4798,12 +4878,12 @@
         {
           "token": "banding_gradient",
           "cell": [
-            18,
-            58
+            12,
+            41
           ],
           "tile_cell": [
-            4,
-            44
+            -2,
+            27
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -4954,12 +5034,12 @@
         {
           "token": "subpixel_display",
           "cell": [
-            16,
-            53
+            31,
+            42
           ],
           "tile_cell": [
-            2,
-            39
+            17,
+            28
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -4971,12 +5051,12 @@
         {
           "token": "gradient_interpolator",
           "cell": [
-            20,
-            57
+            16,
+            53
           ],
           "tile_cell": [
-            6,
-            43
+            2,
+            39
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -4993,10 +5073,6 @@
         },
         {
           "token": "spectrum_forest",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "rainbow",
           "why": "escalation: precinct: no exterior venue is large enough either"
         }
       ],
@@ -5167,19 +5243,23 @@
         {
           "token": "riemann_pi",
           "cell": [
-            20,
-            8
+            0,
+            0
           ],
           "tile_cell": [
-            6,
-            -6
+            -14,
+            -14
           ],
-          "rotation": 0,
+          "rotation": 90,
           "mode": "freestanding",
-          "venue": "porch",
+          "venue": "courtyard",
           "support_height_m": 0.0,
-          "slot": "grande-galerie-axial/porch",
-          "wall": null
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            14,
+            32
+          ]
         },
         {
           "token": "distribution_sampler",
@@ -5218,35 +5298,35 @@
         {
           "token": "particle_flow_swarm",
           "cell": [
-            20,
-            58
+            16,
+            10
           ],
           "tile_cell": [
-            6,
-            44
+            2,
+            -4
           ],
           "rotation": 0,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "interior",
           "support_height_m": 0.0,
-          "slot": "grande-galerie-axial/outside",
+          "slot": "grande-galerie-axial/1,2",
           "wall": null
         },
         {
           "token": "VectorFieldFlow",
           "cell": [
-            20,
-            54
+            24,
+            10
           ],
           "tile_cell": [
-            6,
-            40
+            10,
+            -4
           ],
           "rotation": 0,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "interior",
           "support_height_m": 0.0,
-          "slot": "grande-galerie-axial/outside",
+          "slot": "grande-galerie-axial/11,2",
           "wall": null
         }
       ],
@@ -5256,7 +5336,7 @@
         "h": 64
       },
       "apron": 14,
-      "interior_count": 11,
+      "interior_count": 13,
       "sequence": "change"
     },
     {
@@ -6928,6 +7008,27 @@
           "wall": "west"
         },
         {
+          "token": "network_analysis",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            11,
+            26
+          ]
+        },
+        {
           "token": "hits_reset_display",
           "cell": [
             15,
@@ -7318,10 +7419,6 @@
         },
         {
           "token": "forcedirected3d",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "network_analysis",
           "why": "escalation: precinct: no exterior venue is large enough either"
         },
         {
@@ -8197,19 +8294,23 @@
         {
           "token": "WavePaintings",
           "cell": [
-            21,
-            11
+            0,
+            0
           ],
           "tile_cell": [
-            7,
-            -3
+            -14,
+            -14
           ],
-          "rotation": 0,
+          "rotation": 90,
           "mode": "freestanding",
-          "venue": "porch",
+          "venue": "courtyard",
           "support_height_m": 0.0,
-          "slot": "louisiana-pavilion-chain/porch",
-          "wall": null
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            8,
+            28
+          ]
         },
         {
           "token": "PendulumWave",
@@ -8249,17 +8350,17 @@
           "token": "OscillationCurve",
           "cell": [
             21,
-            53
+            9
           ],
           "tile_cell": [
             7,
-            39
+            -5
           ],
           "rotation": 0,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "porch",
           "support_height_m": 0.0,
-          "slot": "louisiana-pavilion-chain/outside",
+          "slot": "louisiana-pavilion-chain/porch",
           "wall": null
         },
         {
@@ -8367,19 +8468,23 @@
         {
           "token": "geometric_transformations",
           "cell": [
-            21,
-            57
+            0,
+            0
           ],
           "tile_cell": [
-            7,
-            43
+            -14,
+            -14
           ],
-          "rotation": 0,
+          "rotation": 90,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "courtyard",
           "support_height_m": 0.0,
-          "slot": "louisiana-pavilion-chain/outside",
-          "wall": null
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            9,
+            19
+          ]
         },
         {
           "token": "VRAudioMonitor",
@@ -8401,12 +8506,12 @@
         {
           "token": "dual_display_test",
           "cell": [
-            21,
-            8
+            16,
+            12
           ],
           "tile_cell": [
-            7,
-            -6
+            2,
+            -2
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -8469,12 +8574,12 @@
         {
           "token": "harmonic_motion_demo",
           "cell": [
-            14,
-            51
+            21,
+            53
           ],
           "tile_cell": [
-            0,
-            37
+            7,
+            39
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -8537,11 +8642,11 @@
         {
           "token": "unit_circle_advanced",
           "cell": [
-            34,
+            13,
             52
           ],
           "tile_cell": [
-            20,
+            -1,
             38
           ],
           "rotation": 0,
@@ -8554,12 +8659,12 @@
         {
           "token": "unit_circle",
           "cell": [
-            6,
-            51
+            28,
+            54
           ],
           "tile_cell": [
-            -8,
-            37
+            14,
+            40
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -8649,16 +8754,37 @@
           "wall": null
         },
         {
-          "token": "fluency_seam",
+          "token": "sine_space",
           "cell": [
-            16,
-            8
+            0,
+            0
           ],
           "tile_cell": [
-            2,
-            -6
+            -14,
+            -14
           ],
           "rotation": 90,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            17,
+            23
+          ]
+        },
+        {
+          "token": "fluency_seam",
+          "cell": [
+            26,
+            10
+          ],
+          "tile_cell": [
+            12,
+            -4
+          ],
+          "rotation": 0,
           "mode": "freestanding",
           "venue": "porch",
           "support_height_m": 0.0,
@@ -8668,14 +8794,14 @@
         {
           "token": "sine_wall_corridor",
           "cell": [
-            9,
-            57
+            35,
+            51
           ],
           "tile_cell": [
-            -5,
-            43
+            21,
+            37
           ],
-          "rotation": 270,
+          "rotation": 0,
           "mode": "freestanding",
           "venue": "outside",
           "support_height_m": 0.0,
@@ -8778,12 +8904,12 @@
         {
           "token": "coupled_oscillator_lattice",
           "cell": [
-            10,
-            44
+            20,
+            58
           ],
           "tile_cell": [
-            -4,
-            30
+            6,
+            44
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -8794,6 +8920,40 @@
         },
         {
           "token": "timbre_sculptor",
+          "cell": [
+            24,
+            11
+          ],
+          "tile_cell": [
+            10,
+            -3
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "porch",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/porch",
+          "wall": null
+        },
+        {
+          "token": "additive_wave_demo",
+          "cell": [
+            16,
+            10
+          ],
+          "tile_cell": [
+            2,
+            -4
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "porch",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/porch",
+          "wall": null
+        },
+        {
+          "token": "MarioSoundController",
           "cell": [
             24,
             51
@@ -8810,13 +8970,47 @@
           "wall": null
         },
         {
-          "token": "additive_wave_demo",
+          "token": "RackMoogBass",
           "cell": [
-            18,
+            10,
+            44
+          ],
+          "tile_cell": [
+            -4,
+            30
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
+        },
+        {
+          "token": "Rack303Acid",
+          "cell": [
+            13,
+            60
+          ],
+          "tile_cell": [
+            -1,
+            46
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
+        },
+        {
+          "token": "chord_tension_spring",
+          "cell": [
+            19,
             49
           ],
           "tile_cell": [
-            4,
+            5,
             35
           ],
           "rotation": 0,
@@ -8827,14 +9021,14 @@
           "wall": null
         },
         {
-          "token": "MarioSoundController",
+          "token": "RackDX7Piano",
           "cell": [
-            17,
-            51
+            12,
+            44
           ],
           "tile_cell": [
-            3,
-            37
+            -2,
+            30
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -8844,7 +9038,126 @@
           "wall": null
         },
         {
-          "token": "RackMoogBass",
+          "token": "VectorForces",
+          "cell": [
+            17,
+            55
+          ],
+          "tile_cell": [
+            3,
+            41
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
+        },
+        {
+          "token": "harmonic_distance_table",
+          "cell": [
+            12,
+            59
+          ],
+          "tile_cell": [
+            -2,
+            45
+          ],
+          "rotation": 0,
+          "mode": "host_mounted",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
+        },
+        {
+          "token": "audio_catalog_tablet",
+          "cell": [
+            15,
+            57
+          ],
+          "tile_cell": [
+            1,
+            43
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
+        },
+        {
+          "token": "wave_interference_3d",
+          "cell": [
+            17,
+            49
+          ],
+          "tile_cell": [
+            3,
+            35
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
+        },
+        {
+          "token": "MelodyChaser3D",
+          "cell": [
+            25,
+            59
+          ],
+          "tile_cell": [
+            11,
+            45
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
+        },
+        {
+          "token": "RackSineBasic",
+          "cell": [
+            14,
+            58
+          ],
+          "tile_cell": [
+            0,
+            44
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
+        },
+        {
+          "token": "interactable_demo",
+          "cell": [
+            10,
+            47
+          ],
+          "tile_cell": [
+            -4,
+            33
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
+        },
+        {
+          "token": "AudioContr",
           "cell": [
             32,
             45
@@ -8861,201 +9174,14 @@
           "wall": null
         },
         {
-          "token": "Rack303Acid",
-          "cell": [
-            32,
-            58
-          ],
-          "tile_cell": [
-            18,
-            44
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "outside",
-          "support_height_m": 0.0,
-          "slot": "louisiana-pavilion-chain/outside",
-          "wall": null
-        },
-        {
-          "token": "chord_tension_spring",
-          "cell": [
-            27,
-            51
-          ],
-          "tile_cell": [
-            13,
-            37
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "outside",
-          "support_height_m": 0.0,
-          "slot": "louisiana-pavilion-chain/outside",
-          "wall": null
-        },
-        {
-          "token": "RackDX7Piano",
-          "cell": [
-            26,
-            52
-          ],
-          "tile_cell": [
-            12,
-            38
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "outside",
-          "support_height_m": 0.0,
-          "slot": "louisiana-pavilion-chain/outside",
-          "wall": null
-        },
-        {
-          "token": "VectorForces",
-          "cell": [
-            28,
-            53
-          ],
-          "tile_cell": [
-            14,
-            39
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "outside",
-          "support_height_m": 0.0,
-          "slot": "louisiana-pavilion-chain/outside",
-          "wall": null
-        },
-        {
-          "token": "harmonic_distance_table",
-          "cell": [
-            14,
-            54
-          ],
-          "tile_cell": [
-            0,
-            40
-          ],
-          "rotation": 0,
-          "mode": "host_mounted",
-          "venue": "outside",
-          "support_height_m": 0.0,
-          "slot": "louisiana-pavilion-chain/outside",
-          "wall": null
-        },
-        {
-          "token": "audio_catalog_tablet",
-          "cell": [
-            13,
-            55
-          ],
-          "tile_cell": [
-            -1,
-            41
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "outside",
-          "support_height_m": 0.0,
-          "slot": "louisiana-pavilion-chain/outside",
-          "wall": null
-        },
-        {
-          "token": "wave_interference_3d",
-          "cell": [
-            29,
-            55
-          ],
-          "tile_cell": [
-            15,
-            41
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "outside",
-          "support_height_m": 0.0,
-          "slot": "louisiana-pavilion-chain/outside",
-          "wall": null
-        },
-        {
-          "token": "MelodyChaser3D",
-          "cell": [
-            11,
-            48
-          ],
-          "tile_cell": [
-            -3,
-            34
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "outside",
-          "support_height_m": 0.0,
-          "slot": "louisiana-pavilion-chain/outside",
-          "wall": null
-        },
-        {
-          "token": "RackSineBasic",
-          "cell": [
-            30,
-            56
-          ],
-          "tile_cell": [
-            16,
-            42
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "outside",
-          "support_height_m": 0.0,
-          "slot": "louisiana-pavilion-chain/outside",
-          "wall": null
-        },
-        {
-          "token": "interactable_demo",
-          "cell": [
-            34,
-            47
-          ],
-          "tile_cell": [
-            20,
-            33
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "outside",
-          "support_height_m": 0.0,
-          "slot": "louisiana-pavilion-chain/outside",
-          "wall": null
-        },
-        {
-          "token": "AudioContr",
-          "cell": [
-            14,
-            59
-          ],
-          "tile_cell": [
-            0,
-            45
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "outside",
-          "support_height_m": 0.0,
-          "slot": "louisiana-pavilion-chain/outside",
-          "wall": null
-        },
-        {
           "token": "mario_test_sound_ui",
           "cell": [
-            28,
-            59
+            9,
+            49
           ],
           "tile_cell": [
-            14,
-            45
+            -5,
+            35
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -9067,12 +9193,12 @@
         {
           "token": "vr_map_loader_kiosk",
           "cell": [
-            31,
-            57
+            7,
+            51
           ],
           "tile_cell": [
-            17,
-            43
+            -7,
+            37
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -9084,12 +9210,12 @@
         {
           "token": "SoundscapeRadioRack",
           "cell": [
-            25,
-            50
+            28,
+            59
           ],
           "tile_cell": [
-            11,
-            36
+            14,
+            45
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -9101,12 +9227,12 @@
         {
           "token": "ElphabaDress",
           "cell": [
-            29,
-            60
+            24,
+            57
           ],
           "tile_cell": [
-            15,
-            46
+            10,
+            43
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -9118,11 +9244,11 @@
         {
           "token": "vowel_sound_board",
           "cell": [
-            13,
+            24,
             60
           ],
           "tile_cell": [
-            -1,
+            10,
             46
           ],
           "rotation": 0,
@@ -9177,12 +9303,12 @@
         {
           "token": "RackAmbientDrone",
           "cell": [
-            31,
-            44
+            16,
+            59
           ],
           "tile_cell": [
-            17,
-            30
+            2,
+            45
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -9194,12 +9320,29 @@
         {
           "token": "exhibit_furniture",
           "cell": [
-            28,
-            50
+            7,
+            54
           ],
           "tile_cell": [
-            14,
-            36
+            -7,
+            40
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
+        },
+        {
+          "token": "resonating_metallophone",
+          "cell": [
+            26,
+            60
+          ],
+          "tile_cell": [
+            12,
+            46
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -9272,6 +9415,57 @@
           ]
         },
         {
+          "token": "beat_frequency_demo",
+          "cell": [
+            6,
+            52
+          ],
+          "tile_cell": [
+            -8,
+            38
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
+        },
+        {
+          "token": "sine_oscillation",
+          "cell": [
+            12,
+            57
+          ],
+          "tile_cell": [
+            -2,
+            43
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
+        },
+        {
+          "token": "dna_specimen",
+          "cell": [
+            15,
+            60
+          ],
+          "tile_cell": [
+            1,
+            46
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
+        },
+        {
           "token": "double_helix_scene",
           "cell": [
             0,
@@ -9291,6 +9485,91 @@
             13,
             13
           ]
+        },
+        {
+          "token": "VectorCrossProduct",
+          "cell": [
+            9,
+            55
+          ],
+          "tile_cell": [
+            -5,
+            41
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
+        },
+        {
+          "token": "holographicdisplay",
+          "cell": [
+            32,
+            58
+          ],
+          "tile_cell": [
+            18,
+            44
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
+        },
+        {
+          "token": "electronicscales",
+          "cell": [
+            29,
+            60
+          ],
+          "tile_cell": [
+            15,
+            46
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
+        },
+        {
+          "token": "multimeter",
+          "cell": [
+            10,
+            57
+          ],
+          "tile_cell": [
+            -4,
+            43
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
+        },
+        {
+          "token": "biomagneticresonator",
+          "cell": [
+            33,
+            46
+          ],
+          "tile_cell": [
+            19,
+            32
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
         },
         {
           "token": "hallway_scene",
@@ -9367,6 +9646,74 @@
           "support_height_m": 0.95,
           "slot": "louisiana-pavilion-chain/3,2",
           "wall": null
+        },
+        {
+          "token": "catalyst_target",
+          "cell": [
+            11,
+            45
+          ],
+          "tile_cell": [
+            -3,
+            31
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
+        },
+        {
+          "token": "queer_cylinder_target",
+          "cell": [
+            31,
+            49
+          ],
+          "tile_cell": [
+            17,
+            35
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
+        },
+        {
+          "token": "petri_dish_worms",
+          "cell": [
+            11,
+            58
+          ],
+          "tile_cell": [
+            -3,
+            44
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
+        },
+        {
+          "token": "abject_bench",
+          "cell": [
+            23,
+            50
+          ],
+          "tile_cell": [
+            9,
+            36
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
         }
       ],
       "rejected": [
@@ -9377,10 +9724,6 @@
         {
           "token": "science_screen",
           "why": "support_matches_contract: slot offers 'podium', artifact needs 'wall'"
-        },
-        {
-          "token": "sine_space",
-          "why": "escalation: precinct: no exterior venue is large enough either"
         },
         {
           "token": "wave_propagation_3d",
@@ -9403,44 +9746,8 @@
           "why": "wall_is_available: slot louisiana-pavilion-chain/3,2 does not back onto a wall"
         },
         {
-          "token": "resonating_metallophone",
-          "why": "physical_overlap: 1 body cells collide with SphericalHarmonics"
-        },
-        {
           "token": "SystemsMusicTest",
           "why": "body_inside_room: body cell (14, 16) is wall or void"
-        },
-        {
-          "token": "beat_frequency_demo",
-          "why": "physical_overlap: 1 body cells collide with SphericalHarmonics"
-        },
-        {
-          "token": "sine_oscillation",
-          "why": "physical_overlap: 1 body cells collide with transformation_cube"
-        },
-        {
-          "token": "dna_specimen",
-          "why": "wall_is_available: slot louisiana-pavilion-chain/3,2 does not back onto a wall"
-        },
-        {
-          "token": "VectorCrossProduct",
-          "why": "physical_overlap: 1 body cells collide with transformation_cube"
-        },
-        {
-          "token": "holographicdisplay",
-          "why": "wall_is_available: slot louisiana-pavilion-chain/3,2 does not back onto a wall"
-        },
-        {
-          "token": "electronicscales",
-          "why": "wall_is_available: slot louisiana-pavilion-chain/3,2 does not back onto a wall"
-        },
-        {
-          "token": "multimeter",
-          "why": "physical_overlap: 1 body cells collide with transformation_cube"
-        },
-        {
-          "token": "biomagneticresonator",
-          "why": "physical_overlap: 1 body cells collide with transformation_cube"
         },
         {
           "token": "CircleSpiral",
@@ -9449,22 +9756,6 @@
         {
           "token": "coloredlines",
           "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "catalyst_target",
-          "why": "physical_overlap: 1 body cells collide with PendulumWave"
-        },
-        {
-          "token": "queer_cylinder_target",
-          "why": "physical_overlap: 2 body cells collide with cable_builder"
-        },
-        {
-          "token": "petri_dish_worms",
-          "why": "physical_overlap: 1 body cells collide with transformation_cube"
-        },
-        {
-          "token": "abject_bench",
-          "why": "physical_overlap: 1 body cells collide with transformation_cube"
         }
       ],
       "room": {
@@ -9553,35 +9844,39 @@
         {
           "token": "trng_vs_prng",
           "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            9,
+            29
+          ]
+        },
+        {
+          "token": "entropy_axiom",
+          "cell": [
             20,
-            10
+            8
           ],
           "tile_cell": [
             6,
-            -4
+            -6
           ],
           "rotation": 0,
           "mode": "freestanding",
           "venue": "porch",
           "support_height_m": 0.0,
           "slot": "soane-cabinet-vista/porch",
-          "wall": null
-        },
-        {
-          "token": "entropy_axiom",
-          "cell": [
-            10,
-            43
-          ],
-          "tile_cell": [
-            -4,
-            29
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "outside",
-          "support_height_m": 0.0,
-          "slot": "soane-cabinet-vista/outside",
           "wall": null
         },
         {
@@ -9604,11 +9899,11 @@
         {
           "token": "GaussianBlurCircle",
           "cell": [
-            33,
+            7,
             44
           ],
           "tile_cell": [
-            19,
+            -7,
             30
           ],
           "rotation": 0,
@@ -9799,18 +10094,18 @@
         {
           "token": "hardware_entropy_decay",
           "cell": [
-            21,
-            45
+            24,
+            8
           ],
           "tile_cell": [
-            7,
-            31
+            10,
+            -6
           ],
-          "rotation": 0,
+          "rotation": 90,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "porch",
           "support_height_m": 0.0,
-          "slot": "soane-cabinet-vista/outside",
+          "slot": "soane-cabinet-vista/porch",
           "wall": null
         },
         {
@@ -9850,12 +10145,12 @@
         {
           "token": "random_walk_128",
           "cell": [
-            20,
-            51
+            32,
+            47
           ],
           "tile_cell": [
-            6,
-            37
+            18,
+            33
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -10011,18 +10306,18 @@
         {
           "token": "bubble_particles",
           "cell": [
-            12,
-            50
+            15,
+            11
           ],
           "tile_cell": [
-            -2,
-            36
+            1,
+            -3
           ],
           "rotation": 0,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "porch",
           "support_height_m": 0.0,
-          "slot": "soane-cabinet-vista/outside",
+          "slot": "soane-cabinet-vista/porch",
           "wall": null
         },
         {
@@ -10085,20 +10380,41 @@
           ]
         },
         {
-          "token": "random_walk_terrarium",
+          "token": "random_decay_multimesh",
           "cell": [
-            4,
-            45
+            0,
+            0
           ],
           "tile_cell": [
-            -10,
-            31
+            -14,
+            -14
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            8,
+            23
+          ]
+        },
+        {
+          "token": "random_walk_terrarium",
+          "cell": [
+            22,
+            12
+          ],
+          "tile_cell": [
+            8,
+            -2
           ],
           "rotation": 0,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "porch",
           "support_height_m": 0.0,
-          "slot": "soane-cabinet-vista/outside",
+          "slot": "soane-cabinet-vista/porch",
           "wall": null
         },
         {
@@ -10125,12 +10441,12 @@
         {
           "token": "random_walk_collection",
           "cell": [
-            25,
-            46
+            20,
+            45
           ],
           "tile_cell": [
-            11,
-            32
+            6,
+            31
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -10142,12 +10458,12 @@
         {
           "token": "pipe_dream",
           "cell": [
-            6,
-            43
+            20,
+            51
           ],
           "tile_cell": [
-            -8,
-            29
+            6,
+            37
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -10176,12 +10492,12 @@
         {
           "token": "gaussian_random",
           "cell": [
-            6,
-            48
+            25,
+            53
           ],
           "tile_cell": [
-            -8,
-            34
+            11,
+            39
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -10193,11 +10509,28 @@
         {
           "token": "GaussianBlurShader",
           "cell": [
-            16,
+            20,
+            48
+          ],
+          "tile_cell": [
+            6,
+            34
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "soane-cabinet-vista/outside",
+          "wall": null
+        },
+        {
+          "token": "GaussianPaintSplatter",
+          "cell": [
+            17,
             46
           ],
           "tile_cell": [
-            2,
+            3,
             32
           ],
           "rotation": 0,
@@ -10210,12 +10543,12 @@
         {
           "token": "rice_verifier_booth",
           "cell": [
-            12,
-            36
+            29,
+            39
           ],
           "tile_cell": [
-            -2,
-            22
+            15,
+            25
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -10227,12 +10560,12 @@
         {
           "token": "monte_carlo",
           "cell": [
-            14,
-            45
+            22,
+            44
           ],
           "tile_cell": [
-            0,
-            31
+            8,
+            30
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -10244,12 +10577,12 @@
         {
           "token": "distribution_sampler",
           "cell": [
-            25,
-            43
+            19,
+            44
           ],
           "tile_cell": [
-            11,
-            29
+            5,
+            30
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -10261,12 +10594,12 @@
         {
           "token": "force_field_visualizer",
           "cell": [
-            26,
-            47
+            21,
+            46
           ],
           "tile_cell": [
-            12,
-            33
+            7,
+            32
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -10295,12 +10628,12 @@
         {
           "token": "perlin_noise_bridge",
           "cell": [
-            25,
-            49
+            30,
+            38
           ],
           "tile_cell": [
-            11,
-            35
+            16,
+            24
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -10312,12 +10645,12 @@
         {
           "token": "abject_bench",
           "cell": [
-            26,
-            50
+            28,
+            38
           ],
           "tile_cell": [
-            12,
-            36
+            14,
+            24
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -10329,12 +10662,12 @@
         {
           "token": "random_number_book_page_collection",
           "cell": [
-            7,
-            49
+            16,
+            51
           ],
           "tile_cell": [
-            -7,
-            35
+            2,
+            37
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -10346,12 +10679,29 @@
         {
           "token": "tree_gen",
           "cell": [
-            13,
+            28,
             54
           ],
           "tile_cell": [
-            -1,
+            14,
             40
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "soane-cabinet-vista/outside",
+          "wall": null
+        },
+        {
+          "token": "sculpt_one",
+          "cell": [
+            33,
+            41
+          ],
+          "tile_cell": [
+            19,
+            27
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -10384,12 +10734,12 @@
         {
           "token": "breathing_room",
           "cell": [
-            8,
-            47
+            23,
+            45
           ],
           "tile_cell": [
-            -6,
-            33
+            9,
+            31
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -10401,12 +10751,12 @@
         {
           "token": "curl_noise_particles",
           "cell": [
-            13,
-            42
+            24,
+            54
           ],
           "tile_cell": [
-            -1,
-            28
+            10,
+            40
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -10418,12 +10768,12 @@
         {
           "token": "VectorCrossProduct",
           "cell": [
-            25,
-            52
+            22,
+            47
           ],
           "tile_cell": [
-            11,
-            38
+            8,
+            33
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -10433,14 +10783,31 @@
           "wall": null
         },
         {
-          "token": "catalyst_target",
+          "token": "pollock_painting_in_3d",
           "cell": [
-            26,
-            53
+            25,
+            48
           ],
           "tile_cell": [
-            12,
-            39
+            11,
+            34
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "soane-cabinet-vista/outside",
+          "wall": null
+        },
+        {
+          "token": "catalyst_target",
+          "cell": [
+            24,
+            44
+          ],
+          "tile_cell": [
+            10,
+            30
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -10452,12 +10819,29 @@
         {
           "token": "monte_carlo_dartboard",
           "cell": [
-            7,
-            46
+            18,
+            49
           ],
           "tile_cell": [
-            -7,
-            32
+            4,
+            35
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "soane-cabinet-vista/outside",
+          "wall": null
+        },
+        {
+          "token": "bias_visualizer",
+          "cell": [
+            15,
+            50
+          ],
+          "tile_cell": [
+            1,
+            36
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -10470,11 +10854,11 @@
           "token": "noise_mixer",
           "cell": [
             14,
-            53
+            45
           ],
           "tile_cell": [
             0,
-            39
+            31
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -10486,12 +10870,12 @@
         {
           "token": "worley_noise",
           "cell": [
-            5,
-            46
+            28,
+            36
           ],
           "tile_cell": [
-            -9,
-            32
+            14,
+            22
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -10503,12 +10887,12 @@
         {
           "token": "miura_crawler",
           "cell": [
-            12,
-            53
+            25,
+            43
           ],
           "tile_cell": [
-            -2,
-            39
+            11,
+            29
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -10520,12 +10904,97 @@
         {
           "token": "kresling_spire",
           "cell": [
-            11,
-            37
+            26,
+            44
           ],
           "tile_cell": [
-            -3,
-            23
+            12,
+            30
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "soane-cabinet-vista/outside",
+          "wall": null
+        },
+        {
+          "token": "kaleidocycle_enemy",
+          "cell": [
+            17,
+            50
+          ],
+          "tile_cell": [
+            3,
+            36
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "soane-cabinet-vista/outside",
+          "wall": null
+        },
+        {
+          "token": "scissor_stalker",
+          "cell": [
+            16,
+            54
+          ],
+          "tile_cell": [
+            2,
+            40
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "soane-cabinet-vista/outside",
+          "wall": null
+        },
+        {
+          "token": "origami_droideka",
+          "cell": [
+            14,
+            47
+          ],
+          "tile_cell": [
+            0,
+            33
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "soane-cabinet-vista/outside",
+          "wall": null
+        },
+        {
+          "token": "armadillo_eggling",
+          "cell": [
+            37,
+            45
+          ],
+          "tile_cell": [
+            23,
+            31
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "soane-cabinet-vista/outside",
+          "wall": null
+        },
+        {
+          "token": "r_c",
+          "cell": [
+            27,
+            43
+          ],
+          "tile_cell": [
+            13,
+            29
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -10549,16 +11018,8 @@
           "why": "escalation: precinct: no exterior venue is large enough either"
         },
         {
-          "token": "random_decay_multimesh",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
           "token": "galton_board",
           "why": "faces_out_of_wall: at 0deg the back points (0, -1), but this wall needs (1, 0)"
-        },
-        {
-          "token": "GaussianPaintSplatter",
-          "why": "faces_out_of_wall: at 0deg the back points (0, -1), but this wall needs (0, 1)"
         },
         {
           "token": "random_bell_curve",
@@ -10573,20 +11034,8 @@
           "why": "escalation: precinct: no exterior venue is large enough either"
         },
         {
-          "token": "sculpt_one",
-          "why": "body_inside_room: body cell (17, 15) is wall or void"
-        },
-        {
-          "token": "pollock_painting_in_3d",
-          "why": "faces_out_of_wall: at 0deg the back points (0, -1), but this wall needs (-1, 0)"
-        },
-        {
           "token": "extreme_randomness",
           "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "bias_visualizer",
-          "why": "body_inside_room: body cell (24, 15) is wall or void"
         },
         {
           "token": "facade_grammar_demo",
@@ -10605,28 +11054,8 @@
           "why": "escalation: precinct: no exterior venue is large enough either"
         },
         {
-          "token": "kaleidocycle_enemy",
-          "why": "required_access.front: all 1 access cells blocked \u2014 nowhere to stand on the front"
-        },
-        {
-          "token": "scissor_stalker",
-          "why": "circulation_on_floor: 2 clearance cells fall outside the floor"
-        },
-        {
-          "token": "origami_droideka",
-          "why": "circulation_on_floor: 2 clearance cells fall outside the floor"
-        },
-        {
-          "token": "armadillo_eggling",
-          "why": "body_inside_room: body cell (14, 18) is wall or void"
-        },
-        {
           "token": "cube_projectile_spawner",
           "why": "body_inside_room: body cell (14, 18) is wall or void"
-        },
-        {
-          "token": "r_c",
-          "why": "required_access.front: all 1 access cells blocked \u2014 nowhere to stand on the front"
         }
       ],
       "room": {
@@ -11534,6 +11963,27 @@
           "wall": null
         },
         {
+          "token": "disease_spread_ca",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            15,
+            28
+          ]
+        },
+        {
           "token": "volumetric_fog_ca",
           "cell": [
             19,
@@ -11558,10 +12008,6 @@
         },
         {
           "token": "7_8_hexagon_ca_vr",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "disease_spread_ca",
           "why": "escalation: precinct: no exterior venue is large enough either"
         }
       ],
@@ -11702,19 +12148,23 @@
         {
           "token": "cantor_pagoda_vr",
           "cell": [
-            20,
-            54
+            0,
+            0
           ],
           "tile_cell": [
-            6,
-            40
+            -14,
+            -14
           ],
-          "rotation": 0,
+          "rotation": 90,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "courtyard",
           "support_height_m": 0.0,
-          "slot": "pompidou-plateau-libre/outside",
-          "wall": null
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            10,
+            26
+          ]
         },
         {
           "token": "fractal_recursion_circles",
@@ -11812,12 +12262,12 @@
         {
           "token": "fractal_scene",
           "cell": [
-            37,
-            53
+            20,
+            56
           ],
           "tile_cell": [
-            23,
-            39
+            6,
+            42
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -11969,19 +12419,23 @@
         {
           "token": "example_8_4_cantor_pagoda_vr",
           "cell": [
-            20,
-            60
+            0,
+            0
           ],
           "tile_cell": [
-            6,
-            46
+            -14,
+            -14
           ],
-          "rotation": 0,
+          "rotation": 90,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "courtyard",
           "support_height_m": 0.0,
-          "slot": "pompidou-plateau-libre/outside",
-          "wall": null
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            10,
+            26
+          ]
         },
         {
           "token": "fractal_cantor_set",
@@ -12090,6 +12544,27 @@
           "wall": null
         },
         {
+          "token": "box_counting_dimension",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            13,
+            17
+          ]
+        },
+        {
           "token": "mandelbrot_dive",
           "cell": [
             17,
@@ -12179,14 +12654,73 @@
           ]
         },
         {
-          "token": "cube_cabin",
+          "token": "koch_curve",
           "cell": [
-            11,
-            48
+            0,
+            0
           ],
           "tile_cell": [
-            -3,
-            34
+            -14,
+            -14
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            6,
+            47
+          ]
+        },
+        {
+          "token": "cube_cabin",
+          "cell": [
+            7,
+            53
+          ],
+          "tile_cell": [
+            -7,
+            39
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "pompidou-plateau-libre/outside",
+          "wall": null
+        },
+        {
+          "token": "diffusion_limited_aggregation",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            7,
+            23
+          ]
+        },
+        {
+          "token": "fibonacci_sequences",
+          "cell": [
+            31,
+            57
+          ],
+          "tile_cell": [
+            17,
+            43
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -12215,12 +12749,12 @@
         {
           "token": "golden_rectangle",
           "cell": [
-            30,
-            48
+            16,
+            53
           ],
           "tile_cell": [
-            16,
-            34
+            2,
+            39
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -12232,14 +12766,14 @@
         {
           "token": "fibonacci_terrain",
           "cell": [
-            4,
-            53
+            13,
+            59
           ],
           "tile_cell": [
-            -10,
-            39
+            -1,
+            45
           ],
-          "rotation": 90,
+          "rotation": 0,
           "mode": "freestanding",
           "venue": "outside",
           "support_height_m": 0.0,
@@ -12313,6 +12847,27 @@
           "support_height_m": 0.95,
           "slot": "pompidou-plateau-libre/9,5",
           "wall": null
+        },
+        {
+          "token": "mandelbrot_set",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            16,
+            23
+          ]
         },
         {
           "token": "complexity_pattern",
@@ -12476,6 +13031,23 @@
           "wall": null
         },
         {
+          "token": "Hilbert3D",
+          "cell": [
+            9,
+            47
+          ],
+          "tile_cell": [
+            -5,
+            33
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "pompidou-plateau-libre/outside",
+          "wall": null
+        },
+        {
           "token": "space_filling_curve_gallery",
           "cell": [
             23,
@@ -12528,36 +13100,12 @@
           "why": "escalation: precinct: no exterior venue is large enough either"
         },
         {
-          "token": "box_counting_dimension",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "koch_curve",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "diffusion_limited_aggregation",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "fibonacci_sequences",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
           "token": "curation_station",
           "why": "escalation: precinct: no exterior venue is large enough either"
         },
         {
           "token": "julia_set",
           "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "mandelbrot_set",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "Hilbert3D",
-          "why": "body_inside_room: body cell (14, 20) is wall or void"
         }
       ],
       "room": {
@@ -12574,19 +13122,23 @@
         {
           "token": "grammar_provenance",
           "cell": [
-            20,
-            11
+            0,
+            0
           ],
           "tile_cell": [
-            6,
-            -3
+            -14,
+            -14
           ],
-          "rotation": 0,
+          "rotation": 90,
           "mode": "freestanding",
-          "venue": "porch",
+          "venue": "courtyard",
           "support_height_m": 0.0,
-          "slot": "grande-galerie-axial/porch",
-          "wall": null
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            7,
+            24
+          ]
         },
         {
           "token": "lsystem_editor",
@@ -12731,19 +13283,23 @@
         {
           "token": "markov_chains",
           "cell": [
-            20,
-            54
+            0,
+            0
           ],
           "tile_cell": [
-            6,
-            40
+            -14,
+            -14
           ],
-          "rotation": 0,
+          "rotation": 90,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "courtyard",
           "support_height_m": 0.0,
-          "slot": "grande-galerie-axial/outside",
-          "wall": null
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            10,
+            26
+          ]
         },
         {
           "token": "parametric_lsystem",
@@ -12833,11 +13389,28 @@
         {
           "token": "example_8_3_recursion_circles_vr",
           "cell": [
-            20,
+            17,
+            11
+          ],
+          "tile_cell": [
+            3,
+            -3
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "interior",
+          "support_height_m": 0.0,
+          "slot": "grande-galerie-axial/1,2",
+          "wall": null
+        },
+        {
+          "token": "ForestCompetition",
+          "cell": [
+            25,
             8
           ],
           "tile_cell": [
-            6,
+            11,
             -6
           ],
           "rotation": 0,
@@ -12845,23 +13418,6 @@
           "venue": "porch",
           "support_height_m": 0.0,
           "slot": "grande-galerie-axial/porch",
-          "wall": null
-        },
-        {
-          "token": "ForestCompetition",
-          "cell": [
-            35,
-            53
-          ],
-          "tile_cell": [
-            21,
-            39
-          ],
-          "rotation": 90,
-          "mode": "freestanding",
-          "venue": "outside",
-          "support_height_m": 0.0,
-          "slot": "grande-galerie-axial/outside",
           "wall": null
         },
         {
@@ -12884,18 +13440,18 @@
         {
           "token": "genetic_tree_sculptor",
           "cell": [
-            24,
-            8
+            10,
+            53
           ],
           "tile_cell": [
-            10,
-            -6
+            -4,
+            39
           ],
           "rotation": 0,
           "mode": "freestanding",
-          "venue": "porch",
+          "venue": "outside",
           "support_height_m": 0.0,
-          "slot": "grande-galerie-axial/porch",
+          "slot": "grande-galerie-axial/outside",
           "wall": null
         },
         {
@@ -12939,62 +13495,66 @@
         {
           "token": "pattern_atlas_gallery",
           "cell": [
-            20,
-            60
+            0,
+            0
           ],
           "tile_cell": [
-            6,
-            46
+            -14,
+            -14
           ],
-          "rotation": 0,
+          "rotation": 90,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "courtyard",
           "support_height_m": 0.0,
-          "slot": "grande-galerie-axial/outside",
-          "wall": null
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            11,
+            17
+          ]
         },
         {
           "token": "godel_statement_plaque",
           "cell": [
             15,
-            13
+            50
           ],
           "tile_cell": [
             1,
-            -1
+            36
           ],
           "rotation": 0,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.0,
-          "slot": "grande-galerie-axial/1,2",
+          "slot": "grande-galerie-axial/1,30",
           "wall": null
         },
         {
           "token": "incompleteness_scale",
           "cell": [
             25,
-            13
+            50
           ],
           "tile_cell": [
             11,
-            -1
+            36
           ],
           "rotation": 0,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.0,
-          "slot": "grande-galerie-axial/11,2",
+          "slot": "grande-galerie-axial/11,30",
           "wall": null
         },
         {
           "token": "enigma_rotor_stack",
           "cell": [
-            17,
+            18,
             47
           ],
           "tile_cell": [
-            3,
+            4,
             33
           ],
           "rotation": 0,
@@ -13007,29 +13567,29 @@
         {
           "token": "escher_staircase",
           "cell": [
-            16,
-            8
+            33,
+            53
           ],
           "tile_cell": [
-            2,
-            -6
+            19,
+            39
           ],
           "rotation": 0,
           "mode": "freestanding",
-          "venue": "porch",
+          "venue": "outside",
           "support_height_m": 0.0,
-          "slot": "grande-galerie-axial/porch",
+          "slot": "grande-galerie-axial/outside",
           "wall": null
         },
         {
           "token": "angle_sum_triangle",
           "cell": [
-            17,
-            13
+            20,
+            12
           ],
           "tile_cell": [
-            3,
-            -1
+            6,
+            -2
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -13058,7 +13618,7 @@
         "h": 64
       },
       "apron": 14,
-      "interior_count": 17,
+      "interior_count": 18,
       "sequence": "lsystems"
     },
     {
@@ -13312,19 +13872,23 @@
         {
           "token": "neural_network_visualization",
           "cell": [
-            31,
-            49
+            0,
+            0
           ],
           "tile_cell": [
-            17,
-            35
+            -14,
+            -14
           ],
-          "rotation": 0,
+          "rotation": 90,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "courtyard",
           "support_height_m": 0.0,
-          "slot": "dia-beacon-field/outside",
-          "wall": null
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            12,
+            19
+          ]
         }
       ],
       "rejected": [
@@ -13572,21 +14136,46 @@
           ]
         },
         {
-          "token": "softbody_gallery_part2",
+          "token": "rainbow",
           "cell": [
-            22,
-            47
+            0,
+            0
           ],
           "tile_cell": [
-            8,
-            33
+            -14,
+            -14
           ],
-          "rotation": 0,
+          "rotation": 90,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "courtyard",
           "support_height_m": 0.0,
-          "slot": "mezquita-hypostyle/outside",
-          "wall": null
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            6,
+            54
+          ]
+        },
+        {
+          "token": "softbody_gallery_part2",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            12,
+            32
+          ]
         },
         {
           "token": "softstopscene",
@@ -13642,14 +14231,14 @@
         {
           "token": "radiolaria",
           "cell": [
-            39,
-            46
+            22,
+            48
           ],
           "tile_cell": [
-            25,
-            32
+            8,
+            34
           ],
-          "rotation": 90,
+          "rotation": 0,
           "mode": "freestanding",
           "venue": "outside",
           "support_height_m": 0.0,
@@ -13659,12 +14248,12 @@
         {
           "token": "MolecularDesigner",
           "cell": [
-            5,
-            46
+            29,
+            47
           ],
           "tile_cell": [
-            -9,
-            32
+            15,
+            33
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -13676,12 +14265,12 @@
         {
           "token": "mass_spring_bench",
           "cell": [
-            22,
-            52
+            11,
+            48
           ],
           "tile_cell": [
-            8,
-            38
+            -3,
+            34
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -13833,12 +14422,12 @@
         {
           "token": "SphericalHarmonics",
           "cell": [
-            19,
-            52
+            16,
+            46
           ],
           "tile_cell": [
-            5,
-            38
+            2,
+            32
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -13855,10 +14444,6 @@
         },
         {
           "token": "soft_mushrooms",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "rainbow",
           "why": "escalation: precinct: no exterior venue is large enough either"
         }
       ],
@@ -14817,19 +15402,23 @@
         {
           "token": "neural_network_visualization",
           "cell": [
-            21,
-            49
+            0,
+            0
           ],
           "tile_cell": [
-            7,
-            35
+            -14,
+            -14
           ],
-          "rotation": 0,
+          "rotation": 90,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "courtyard",
           "support_height_m": 0.0,
-          "slot": "chichu-buried-cells/outside",
-          "wall": null
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            12,
+            19
+          ]
         },
         {
           "token": "backpropagation_flow",
@@ -14849,21 +15438,109 @@
           "wall": null
         },
         {
-          "token": "computer_vision_vr",
+          "token": "neural_networks_vr",
           "cell": [
-            21,
-            55
+            0,
+            0
           ],
           "tile_cell": [
-            7,
-            41
+            -14,
+            -14
           ],
-          "rotation": 0,
+          "rotation": 90,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "courtyard",
           "support_height_m": 0.0,
-          "slot": "chichu-buried-cells/outside",
-          "wall": null
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            15,
+            34
+          ]
+        },
+        {
+          "token": "computer_vision_vr",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            8,
+            31
+          ]
+        },
+        {
+          "token": "convolutional_neural_networks_cnns_vr",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            9,
+            57
+          ]
+        },
+        {
+          "token": "explainable_ai_xai_vr",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            13,
+            36
+          ]
+        },
+        {
+          "token": "transformers_vr",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            17,
+            22
+          ]
         },
         {
           "token": "lstms_vr",
@@ -14884,6 +15561,27 @@
           "court": [
             17,
             17
+          ]
+        },
+        {
+          "token": "generative_adversarial_networks_gans_vr",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            18,
+            25
           ]
         }
       ],
@@ -14909,27 +15607,7 @@
           "why": "escalation: precinct: no exterior venue is large enough either"
         },
         {
-          "token": "neural_networks_vr",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "convolutional_neural_networks_cnns_vr",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "explainable_ai_xai_vr",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "transformers_vr",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
           "token": "variational_autoencoders_vaes_vr",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "generative_adversarial_networks_gans_vr",
           "why": "escalation: precinct: no exterior venue is large enough either"
         },
         {
@@ -14972,19 +15650,23 @@
         {
           "token": "force_directed_layout",
           "cell": [
-            20,
-            11
+            0,
+            0
           ],
           "tile_cell": [
-            6,
-            -3
+            -14,
+            -14
           ],
-          "rotation": 0,
+          "rotation": 90,
           "mode": "freestanding",
-          "venue": "porch",
+          "venue": "courtyard",
           "support_height_m": 0.0,
-          "slot": "grande-galerie-axial/porch",
-          "wall": null
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            8,
+            23
+          ]
         },
         {
           "token": "pathfinding3d",
@@ -15010,19 +15692,40 @@
         {
           "token": "kosaraju_algorithm",
           "cell": [
-            20,
-            55
+            17,
+            10
           ],
           "tile_cell": [
-            6,
-            41
+            3,
+            -4
           ],
           "rotation": 0,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "interior",
           "support_height_m": 0.0,
-          "slot": "grande-galerie-axial/outside",
+          "slot": "grande-galerie-axial/1,2",
           "wall": null
+        },
+        {
+          "token": "network_analysis",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            11,
+            26
+          ]
         },
         {
           "token": "karger_algorithm",
@@ -15065,18 +15768,18 @@
         {
           "token": "tarjan_algorithm",
           "cell": [
-            10,
-            53
+            25,
+            8
           ],
           "tile_cell": [
-            -4,
-            39
+            11,
+            -6
           ],
           "rotation": 0,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "porch",
           "support_height_m": 0.0,
-          "slot": "grande-galerie-axial/outside",
+          "slot": "grande-galerie-axial/porch",
           "wall": null
         },
         {
@@ -15103,12 +15806,12 @@
         {
           "token": "push_relabel_algorithm",
           "cell": [
-            27,
-            54
+            11,
+            52
           ],
           "tile_cell": [
-            13,
-            40
+            -3,
+            38
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -15120,12 +15823,12 @@
         {
           "token": "edmonds_algorithm",
           "cell": [
-            35,
-            53
+            20,
+            56
           ],
           "tile_cell": [
-            21,
-            39
+            6,
+            42
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -15153,10 +15856,6 @@
           "why": "escalation: precinct: no exterior venue is large enough either"
         },
         {
-          "token": "network_analysis",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
           "token": "networkflow3d",
           "why": "escalation: precinct: no exterior venue is large enough either"
         },
@@ -15174,7 +15873,7 @@
         "h": 64
       },
       "apron": 14,
-      "interior_count": 2,
+      "interior_count": 3,
       "sequence": "graphtheory"
     },
     {
@@ -16255,19 +16954,23 @@
         {
           "token": "bifurcation_walkway",
           "cell": [
-            21,
-            47
+            0,
+            0
           ],
           "tile_cell": [
-            7,
-            33
+            -14,
+            -14
           ],
-          "rotation": 0,
+          "rotation": 90,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "courtyard",
           "support_height_m": 0.0,
-          "slot": "teshima-droplet/outside",
-          "wall": null
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            9,
+            19
+          ]
         },
         {
           "token": "pyramid_edit",
@@ -16413,11 +17116,11 @@
           "token": "ordered_grid",
           "cell": [
             21,
-            54
+            47
           ],
           "tile_cell": [
             7,
-            40
+            33
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -16429,12 +17132,12 @@
         {
           "token": "ca_bridge",
           "cell": [
-            16,
-            53
+            21,
+            51
           ],
           "tile_cell": [
-            2,
-            39
+            7,
+            37
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -16445,6 +17148,57 @@
         },
         {
           "token": "rigid_sculpture",
+          "cell": [
+            29,
+            47
+          ],
+          "tile_cell": [
+            15,
+            33
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "teshima-droplet/outside",
+          "wall": null
+        },
+        {
+          "token": "fluid_form",
+          "cell": [
+            12,
+            47
+          ],
+          "tile_cell": [
+            -2,
+            33
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "teshima-droplet/outside",
+          "wall": null
+        },
+        {
+          "token": "phi_slider",
+          "cell": [
+            28,
+            51
+          ],
+          "tile_cell": [
+            14,
+            37
+          ],
+          "rotation": 0,
+          "mode": "host_mounted",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "teshima-droplet/outside",
+          "wall": null
+        },
+        {
+          "token": "preserved_pattern",
           "cell": [
             33,
             47
@@ -16461,14 +17215,14 @@
           "wall": null
         },
         {
-          "token": "fluid_form",
+          "token": "pattern_tile_4x4",
           "cell": [
-            26,
-            54
+            7,
+            47
           ],
           "tile_cell": [
-            12,
-            40
+            -7,
+            33
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -16478,30 +17232,13 @@
           "wall": null
         },
         {
-          "token": "phi_slider",
+          "token": "transforming_pattern",
           "cell": [
-            9,
-            47
-          ],
-          "tile_cell": [
-            -5,
-            33
-          ],
-          "rotation": 0,
-          "mode": "host_mounted",
-          "venue": "outside",
-          "support_height_m": 0.0,
-          "slot": "teshima-droplet/outside",
-          "wall": null
-        },
-        {
-          "token": "preserved_pattern",
-          "cell": [
-            30,
+            13,
             51
           ],
           "tile_cell": [
-            16,
+            -1,
             37
           ],
           "rotation": 0,
@@ -16512,7 +17249,7 @@
           "wall": null
         },
         {
-          "token": "pattern_tile_4x4",
+          "token": "turing_pattern",
           "cell": [
             32,
             42
@@ -16529,7 +17266,7 @@
           "wall": null
         },
         {
-          "token": "transforming_pattern",
+          "token": "reaction_diffusion",
           "cell": [
             11,
             43
@@ -16546,48 +17283,14 @@
           "wall": null
         },
         {
-          "token": "turing_pattern",
-          "cell": [
-            4,
-            47
-          ],
-          "tile_cell": [
-            -10,
-            33
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "outside",
-          "support_height_m": 0.0,
-          "slot": "teshima-droplet/outside",
-          "wall": null
-        },
-        {
-          "token": "reaction_diffusion",
-          "cell": [
-            37,
-            47
-          ],
-          "tile_cell": [
-            23,
-            33
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "outside",
-          "support_height_m": 0.0,
-          "slot": "teshima-droplet/outside",
-          "wall": null
-        },
-        {
           "token": "edge_core",
           "cell": [
-            22,
-            52
+            19,
+            47
           ],
           "tile_cell": [
-            8,
-            38
+            5,
+            33
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -16599,12 +17302,12 @@
         {
           "token": "qfep_reactor",
           "cell": [
-            24,
-            51
+            23,
+            47
           ],
           "tile_cell": [
-            10,
-            37
+            9,
+            33
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -16616,12 +17319,12 @@
         {
           "token": "edge_of_chaos_unlocked",
           "cell": [
-            24,
-            53
+            26,
+            47
           ],
           "tile_cell": [
-            10,
-            39
+            12,
+            33
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -16633,12 +17336,12 @@
         {
           "token": "reactive_particles",
           "cell": [
-            33,
-            50
+            15,
+            47
           ],
           "tile_cell": [
-            19,
-            36
+            1,
+            33
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -16650,12 +17353,12 @@
         {
           "token": "queer_morphology_specimen",
           "cell": [
-            10,
-            42
+            33,
+            52
           ],
           "tile_cell": [
-            -4,
-            28
+            19,
+            38
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -16667,12 +17370,12 @@
         {
           "token": "flower_lab",
           "cell": [
-            5,
-            46
+            38,
+            47
           ],
           "tile_cell": [
-            -9,
-            32
+            24,
+            33
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -16684,12 +17387,12 @@
         {
           "token": "dna_specimen",
           "cell": [
-            33,
-            43
+            8,
+            51
           ],
           "tile_cell": [
-            19,
-            29
+            -6,
+            37
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -16701,11 +17404,11 @@
         {
           "token": "grab_sphere_phi",
           "cell": [
-            30,
+            14,
             55
           ],
           "tile_cell": [
-            16,
+            0,
             41
           ],
           "rotation": 0,
@@ -16876,19 +17579,23 @@
         {
           "token": "algorithmic_bias",
           "cell": [
-            21,
-            47
+            0,
+            0
           ],
           "tile_cell": [
-            7,
-            33
+            -14,
+            -14
           ],
-          "rotation": 0,
+          "rotation": 90,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "courtyard",
           "support_height_m": 0.0,
-          "slot": "uffizi-spine-enfilade/outside",
-          "wall": null
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            7,
+            23
+          ]
         },
         {
           "token": "merge_conflict_visualizer",
@@ -17012,12 +17719,12 @@
         {
           "token": "bias_atlas_room",
           "cell": [
-            37,
-            47
+            21,
+            49
           ],
           "tile_cell": [
-            23,
-            33
+            7,
+            35
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -17131,12 +17838,12 @@
         {
           "token": "MolecularDesigner",
           "cell": [
-            21,
-            52
+            26,
+            48
           ],
           "tile_cell": [
-            7,
-            38
+            12,
+            34
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -18820,6 +19527,27 @@
           "wall": null
         },
         {
+          "token": "scale_lines",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            7,
+            106
+          ]
+        },
+        {
           "token": "grabcolorcollection",
           "cell": [
             11,
@@ -18839,12 +19567,12 @@
         {
           "token": "triangle_line_puzzle",
           "cell": [
-            5,
-            47
+            32,
+            42
           ],
           "tile_cell": [
-            -9,
-            33
+            18,
+            28
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -18890,12 +19618,12 @@
         {
           "token": "mystic_writing_pad",
           "cell": [
-            32,
-            42
+            6,
+            46
           ],
           "tile_cell": [
-            18,
-            28
+            -8,
+            32
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -18975,12 +19703,12 @@
         {
           "token": "grab_sphere_point_snap",
           "cell": [
-            8,
-            43
+            27,
+            50
           ],
           "tile_cell": [
-            -6,
-            29
+            13,
+            36
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -19098,12 +19826,12 @@
         {
           "token": "catalyst_foe",
           "cell": [
-            27,
-            50
+            31,
+            46
           ],
           "tile_cell": [
-            13,
-            36
+            17,
+            32
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -19183,12 +19911,12 @@
         {
           "token": "quad_line_puzzle",
           "cell": [
-            25,
-            47
+            12,
+            41
           ],
           "tile_cell": [
-            11,
-            33
+            -2,
+            27
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -19200,12 +19928,12 @@
         {
           "token": "grab_trihedron",
           "cell": [
-            14,
-            46
+            26,
+            48
           ],
           "tile_cell": [
-            0,
-            32
+            12,
+            34
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -19217,12 +19945,12 @@
         {
           "token": "grab_octahedron",
           "cell": [
-            31,
-            41
+            11,
+            46
           ],
           "tile_cell": [
-            17,
-            27
+            -3,
+            32
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -19234,12 +19962,12 @@
         {
           "token": "path_game_controller",
           "cell": [
-            31,
-            46
+            8,
+            43
           ],
           "tile_cell": [
-            17,
-            32
+            -6,
+            29
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -19268,12 +19996,12 @@
         {
           "token": "pyramid_edit",
           "cell": [
-            6,
-            46
+            31,
+            40
           ],
           "tile_cell": [
-            -8,
-            32
+            17,
+            26
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -19340,12 +20068,12 @@
         {
           "token": "octapod_crawler",
           "cell": [
-            12,
-            39
+            26,
+            55
           ],
           "tile_cell": [
-            -2,
-            25
+            12,
+            41
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -19357,12 +20085,12 @@
         {
           "token": "armadillo_eggling",
           "cell": [
-            29,
-            48
+            14,
+            46
           ],
           "tile_cell": [
-            15,
-            34
+            0,
+            32
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -19391,12 +20119,12 @@
         {
           "token": "polyhedron_nets_cube",
           "cell": [
-            18,
-            54
+            29,
+            48
           ],
           "tile_cell": [
-            4,
-            40
+            15,
+            34
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -19408,12 +20136,12 @@
         {
           "token": "folding_cube",
           "cell": [
-            25,
-            49
+            24,
+            50
           ],
           "tile_cell": [
-            11,
-            35
+            10,
+            36
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -19425,12 +20153,12 @@
         {
           "token": "sphere",
           "cell": [
-            26,
-            55
+            6,
+            50
           ],
           "tile_cell": [
-            12,
-            41
+            -8,
+            36
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -19459,12 +20187,12 @@
         {
           "token": "exhibit_furniture",
           "cell": [
-            32,
-            53
+            16,
+            56
           ],
           "tile_cell": [
-            18,
-            39
+            2,
+            42
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -19569,12 +20297,12 @@
         {
           "token": "sphere_low",
           "cell": [
-            6,
-            50
+            32,
+            53
           ],
           "tile_cell": [
-            -8,
-            36
+            18,
+            39
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -19586,12 +20314,12 @@
         {
           "token": "snap_octahedron_puzzle",
           "cell": [
-            26,
-            48
+            16,
+            46
           ],
           "tile_cell": [
-            12,
-            34
+            2,
+            32
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -19603,12 +20331,12 @@
         {
           "token": "sphere_mid",
           "cell": [
-            11,
-            43
+            7,
+            47
           ],
           "tile_cell": [
-            -3,
-            29
+            -7,
+            33
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -19620,12 +20348,12 @@
         {
           "token": "sphere_high",
           "cell": [
-            30,
-            55
+            31,
+            43
           ],
           "tile_cell": [
-            16,
-            41
+            17,
+            29
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -19654,12 +20382,12 @@
         {
           "token": "star_primitive",
           "cell": [
-            30,
-            40
+            12,
+            39
           ],
           "tile_cell": [
-            16,
-            26
+            -2,
+            25
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -19692,12 +20420,12 @@
         {
           "token": "truncatedtetrahedron",
           "cell": [
-            13,
-            56
+            30,
+            55
           ],
           "tile_cell": [
-            -1,
-            42
+            16,
+            41
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -19709,12 +20437,12 @@
         {
           "token": "snap_tetrahedron_puzzle",
           "cell": [
-            24,
-            50
+            25,
+            45
           ],
           "tile_cell": [
-            10,
-            36
+            11,
+            31
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -19727,11 +20455,11 @@
           "token": "righttriangle",
           "cell": [
             30,
-            42
+            39
           ],
           "tile_cell": [
             16,
-            28
+            25
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -19777,12 +20505,12 @@
         {
           "token": "snap_cube_puzzle",
           "cell": [
-            16,
-            46
+            25,
+            51
           ],
           "tile_cell": [
-            2,
-            32
+            11,
+            37
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -19794,12 +20522,12 @@
         {
           "token": "capsule_radials_rings",
           "cell": [
-            25,
-            45
+            11,
+            54
           ],
           "tile_cell": [
-            11,
-            31
+            -3,
+            40
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -19870,12 +20598,12 @@
         {
           "token": "snap_pyramid_puzzle",
           "cell": [
-            25,
-            51
+            24,
+            52
           ],
           "tile_cell": [
-            11,
-            37
+            10,
+            38
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -19887,12 +20615,12 @@
         {
           "token": "pyramid",
           "cell": [
-            24,
-            52
+            9,
+            42
           ],
           "tile_cell": [
-            10,
-            38
+            -5,
+            28
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -19921,12 +20649,12 @@
         {
           "token": "code_display",
           "cell": [
-            27,
-            52
+            17,
+            54
           ],
           "tile_cell": [
-            13,
-            38
+            3,
+            40
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -19972,12 +20700,12 @@
         {
           "token": "aalto_vase",
           "cell": [
-            12,
-            50
+            26,
+            53
           ],
           "tile_cell": [
-            -2,
-            36
+            12,
+            39
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -20008,10 +20736,6 @@
         {
           "token": "science_screen",
           "why": "faces_out_of_wall: at 0deg the back points (0, -1), but this wall needs (-1, 0)"
-        },
-        {
-          "token": "scale_lines",
-          "why": "escalation: precinct: no exterior venue is large enough either"
         },
         {
           "token": "grid_lines",
@@ -20900,19 +21624,23 @@
         {
           "token": "pattern_atlas_gallery",
           "cell": [
-            20,
-            10
+            0,
+            0
           ],
           "tile_cell": [
-            6,
-            -4
+            -14,
+            -14
           ],
-          "rotation": 0,
+          "rotation": 90,
           "mode": "freestanding",
-          "venue": "porch",
+          "venue": "courtyard",
           "support_height_m": 0.0,
-          "slot": "grande-galerie-axial/porch",
-          "wall": null
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            11,
+            17
+          ]
         },
         {
           "token": "pattern_loom",
@@ -20934,36 +21662,36 @@
         {
           "token": "pattern_machine_c",
           "cell": [
-            20,
-            56
+            18,
+            10
           ],
           "tile_cell": [
-            6,
-            42
+            4,
+            -4
           ],
-          "rotation": 0,
+          "rotation": 90,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "interior",
           "support_height_m": 0.0,
-          "slot": "grande-galerie-axial/outside",
+          "slot": "grande-galerie-axial/1,2",
           "wall": null
         },
         {
           "token": "pattern_maker_station",
           "cell": [
-            26,
-            53
+            17,
+            50
           ],
           "tile_cell": [
-            12,
-            39
+            3,
+            36
           ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "outside",
+          "rotation": 270,
+          "mode": "against_wall",
+          "venue": "interior",
           "support_height_m": 0.0,
-          "slot": "grande-galerie-axial/outside",
-          "wall": null
+          "slot": "grande-galerie-axial/1,30",
+          "wall": "west"
         },
         {
           "token": "pattern_tile_puzzle",
@@ -21206,18 +21934,18 @@
         {
           "token": "vr_tile_editor",
           "cell": [
-            12,
-            53
+            25,
+            9
           ],
           "tile_cell": [
-            -2,
-            39
+            11,
+            -5
           ],
-          "rotation": 0,
+          "rotation": 270,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "porch",
           "support_height_m": 0.0,
-          "slot": "grande-galerie-axial/outside",
+          "slot": "grande-galerie-axial/porch",
           "wall": null
         },
         {
@@ -21266,7 +21994,7 @@
         "h": 64
       },
       "apron": 14,
-      "interior_count": 24,
+      "interior_count": 26,
       "sequence": "symmetry"
     },
     "altes-rotunda-hub": {
@@ -21478,19 +22206,23 @@
         {
           "token": "tiling_demo",
           "cell": [
-            21,
-            50
+            0,
+            0
           ],
           "tile_cell": [
-            7,
-            36
+            -14,
+            -14
           ],
-          "rotation": 0,
+          "rotation": 90,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "courtyard",
           "support_height_m": 0.0,
-          "slot": "altes-rotunda-hub/outside",
-          "wall": null
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            18,
+            25
+          ]
         },
         {
           "token": "pattern_tile_4x4",
@@ -21533,12 +22265,12 @@
         {
           "token": "vr_tile_editor_mirror",
           "cell": [
-            7,
-            46
+            30,
+            45
           ],
           "tile_cell": [
-            -7,
-            32
+            16,
+            31
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -21567,11 +22299,11 @@
         {
           "token": "pattern_maker_station",
           "cell": [
-            34,
+            11,
             46
           ],
           "tile_cell": [
-            20,
+            -3,
             32
           ],
           "rotation": 0,
@@ -21580,6 +22312,27 @@
           "support_height_m": 0.0,
           "slot": "altes-rotunda-hub/outside",
           "wall": null
+        },
+        {
+          "token": "facade_builder",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            7,
+            19
+          ]
         },
         {
           "token": "combine_capsule",
@@ -21639,12 +22392,12 @@
         {
           "token": "row_3_x",
           "cell": [
-            10,
-            43
+            21,
+            46
           ],
           "tile_cell": [
-            -4,
-            29
+            7,
+            32
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -21694,12 +22447,12 @@
         {
           "token": "grid_3d_4x4x4",
           "cell": [
-            32,
-            41
+            21,
+            50
           ],
           "tile_cell": [
-            18,
-            27
+            7,
+            36
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -21864,12 +22617,12 @@
         {
           "token": "sequencer",
           "cell": [
-            35,
-            50
+            27,
+            52
           ],
           "tile_cell": [
-            21,
-            36
+            13,
+            38
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -21881,11 +22634,28 @@
         {
           "token": "step_sequencer_ambient",
           "cell": [
-            38,
+            14,
+            52
+          ],
+          "tile_cell": [
+            0,
+            38
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "altes-rotunda-hub/outside",
+          "wall": null
+        },
+        {
+          "token": "standalone_disco",
+          "cell": [
+            5,
             46
           ],
           "tile_cell": [
-            24,
+            -9,
             32
           ],
           "rotation": 0,
@@ -21904,14 +22674,6 @@
         {
           "token": "xyz_slider_plate",
           "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "facade_builder",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "standalone_disco",
-          "why": "body_inside_room: body cell (18, 19) is wall or void"
         }
       ],
       "room": {
@@ -22708,19 +23470,23 @@
         {
           "token": "mario_cube",
           "cell": [
-            30,
-            57
+            0,
+            0
           ],
           "tile_cell": [
-            16,
-            43
+            -14,
+            -14
           ],
-          "rotation": 0,
+          "rotation": 90,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "courtyard",
           "support_height_m": 0.0,
-          "slot": "castelvecchio-endstopped-enfilade/outside",
-          "wall": null
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            7,
+            23
+          ]
         },
         {
           "token": "archimedean_tunnel",
@@ -22738,6 +23504,27 @@
           "support_height_m": 0.0,
           "slot": "castelvecchio-endstopped-enfilade/outside",
           "wall": null
+        },
+        {
+          "token": "rainbow",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            6,
+            54
+          ]
         },
         {
           "token": "platonicsolids",
@@ -22852,12 +23639,12 @@
         {
           "token": "loom_drum_persian_p6",
           "cell": [
-            12,
-            41
+            31,
+            57
           ],
           "tile_cell": [
-            -2,
-            27
+            17,
+            43
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -22890,12 +23677,12 @@
         {
           "token": "color_sets_overview",
           "cell": [
-            33,
-            46
+            25,
+            58
           ],
           "tile_cell": [
-            19,
-            32
+            11,
+            44
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -22907,12 +23694,12 @@
         {
           "token": "banding_gradient",
           "cell": [
-            18,
-            58
+            12,
+            41
           ],
           "tile_cell": [
-            4,
-            44
+            -2,
+            27
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -23063,12 +23850,12 @@
         {
           "token": "subpixel_display",
           "cell": [
-            16,
-            53
+            31,
+            42
           ],
           "tile_cell": [
-            2,
-            39
+            17,
+            28
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -23080,12 +23867,12 @@
         {
           "token": "gradient_interpolator",
           "cell": [
-            20,
-            57
+            16,
+            53
           ],
           "tile_cell": [
-            6,
-            43
+            2,
+            39
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -23102,10 +23889,6 @@
         },
         {
           "token": "spectrum_forest",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "rainbow",
           "why": "escalation: precinct: no exterior venue is large enough either"
         }
       ],
@@ -23907,19 +24690,23 @@
         {
           "token": "WavePaintings",
           "cell": [
-            21,
-            11
+            0,
+            0
           ],
           "tile_cell": [
-            7,
-            -3
+            -14,
+            -14
           ],
-          "rotation": 0,
+          "rotation": 90,
           "mode": "freestanding",
-          "venue": "porch",
+          "venue": "courtyard",
           "support_height_m": 0.0,
-          "slot": "louisiana-pavilion-chain/porch",
-          "wall": null
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            8,
+            28
+          ]
         },
         {
           "token": "PendulumWave",
@@ -23959,17 +24746,17 @@
           "token": "OscillationCurve",
           "cell": [
             21,
-            53
+            9
           ],
           "tile_cell": [
             7,
-            39
+            -5
           ],
           "rotation": 0,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "porch",
           "support_height_m": 0.0,
-          "slot": "louisiana-pavilion-chain/outside",
+          "slot": "louisiana-pavilion-chain/porch",
           "wall": null
         },
         {
@@ -24077,19 +24864,23 @@
         {
           "token": "geometric_transformations",
           "cell": [
-            21,
-            57
+            0,
+            0
           ],
           "tile_cell": [
-            7,
-            43
+            -14,
+            -14
           ],
-          "rotation": 0,
+          "rotation": 90,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "courtyard",
           "support_height_m": 0.0,
-          "slot": "louisiana-pavilion-chain/outside",
-          "wall": null
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            9,
+            19
+          ]
         },
         {
           "token": "VRAudioMonitor",
@@ -24111,12 +24902,12 @@
         {
           "token": "dual_display_test",
           "cell": [
-            21,
-            8
+            16,
+            12
           ],
           "tile_cell": [
-            7,
-            -6
+            2,
+            -2
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -24179,12 +24970,12 @@
         {
           "token": "harmonic_motion_demo",
           "cell": [
-            14,
-            51
+            21,
+            53
           ],
           "tile_cell": [
-            0,
-            37
+            7,
+            39
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -24247,11 +25038,11 @@
         {
           "token": "unit_circle_advanced",
           "cell": [
-            34,
+            13,
             52
           ],
           "tile_cell": [
-            20,
+            -1,
             38
           ],
           "rotation": 0,
@@ -24264,12 +25055,12 @@
         {
           "token": "unit_circle",
           "cell": [
-            6,
-            51
+            28,
+            54
           ],
           "tile_cell": [
-            -8,
-            37
+            14,
+            40
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -24359,16 +25150,37 @@
           "wall": null
         },
         {
-          "token": "fluency_seam",
+          "token": "sine_space",
           "cell": [
-            16,
-            8
+            0,
+            0
           ],
           "tile_cell": [
-            2,
-            -6
+            -14,
+            -14
           ],
           "rotation": 90,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            17,
+            23
+          ]
+        },
+        {
+          "token": "fluency_seam",
+          "cell": [
+            26,
+            10
+          ],
+          "tile_cell": [
+            12,
+            -4
+          ],
+          "rotation": 0,
           "mode": "freestanding",
           "venue": "porch",
           "support_height_m": 0.0,
@@ -24378,14 +25190,14 @@
         {
           "token": "sine_wall_corridor",
           "cell": [
-            9,
-            57
+            35,
+            51
           ],
           "tile_cell": [
-            -5,
-            43
+            21,
+            37
           ],
-          "rotation": 270,
+          "rotation": 0,
           "mode": "freestanding",
           "venue": "outside",
           "support_height_m": 0.0,
@@ -24488,12 +25300,12 @@
         {
           "token": "coupled_oscillator_lattice",
           "cell": [
-            10,
-            44
+            20,
+            58
           ],
           "tile_cell": [
-            -4,
-            30
+            6,
+            44
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -24504,6 +25316,40 @@
         },
         {
           "token": "timbre_sculptor",
+          "cell": [
+            24,
+            11
+          ],
+          "tile_cell": [
+            10,
+            -3
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "porch",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/porch",
+          "wall": null
+        },
+        {
+          "token": "additive_wave_demo",
+          "cell": [
+            16,
+            10
+          ],
+          "tile_cell": [
+            2,
+            -4
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "porch",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/porch",
+          "wall": null
+        },
+        {
+          "token": "MarioSoundController",
           "cell": [
             24,
             51
@@ -24520,13 +25366,47 @@
           "wall": null
         },
         {
-          "token": "additive_wave_demo",
+          "token": "RackMoogBass",
           "cell": [
-            18,
+            10,
+            44
+          ],
+          "tile_cell": [
+            -4,
+            30
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
+        },
+        {
+          "token": "Rack303Acid",
+          "cell": [
+            13,
+            60
+          ],
+          "tile_cell": [
+            -1,
+            46
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
+        },
+        {
+          "token": "chord_tension_spring",
+          "cell": [
+            19,
             49
           ],
           "tile_cell": [
-            4,
+            5,
             35
           ],
           "rotation": 0,
@@ -24537,14 +25417,14 @@
           "wall": null
         },
         {
-          "token": "MarioSoundController",
+          "token": "RackDX7Piano",
           "cell": [
-            17,
-            51
+            12,
+            44
           ],
           "tile_cell": [
-            3,
-            37
+            -2,
+            30
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -24554,7 +25434,126 @@
           "wall": null
         },
         {
-          "token": "RackMoogBass",
+          "token": "VectorForces",
+          "cell": [
+            17,
+            55
+          ],
+          "tile_cell": [
+            3,
+            41
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
+        },
+        {
+          "token": "harmonic_distance_table",
+          "cell": [
+            12,
+            59
+          ],
+          "tile_cell": [
+            -2,
+            45
+          ],
+          "rotation": 0,
+          "mode": "host_mounted",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
+        },
+        {
+          "token": "audio_catalog_tablet",
+          "cell": [
+            15,
+            57
+          ],
+          "tile_cell": [
+            1,
+            43
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
+        },
+        {
+          "token": "wave_interference_3d",
+          "cell": [
+            17,
+            49
+          ],
+          "tile_cell": [
+            3,
+            35
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
+        },
+        {
+          "token": "MelodyChaser3D",
+          "cell": [
+            25,
+            59
+          ],
+          "tile_cell": [
+            11,
+            45
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
+        },
+        {
+          "token": "RackSineBasic",
+          "cell": [
+            14,
+            58
+          ],
+          "tile_cell": [
+            0,
+            44
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
+        },
+        {
+          "token": "interactable_demo",
+          "cell": [
+            10,
+            47
+          ],
+          "tile_cell": [
+            -4,
+            33
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
+        },
+        {
+          "token": "AudioContr",
           "cell": [
             32,
             45
@@ -24571,201 +25570,14 @@
           "wall": null
         },
         {
-          "token": "Rack303Acid",
-          "cell": [
-            32,
-            58
-          ],
-          "tile_cell": [
-            18,
-            44
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "outside",
-          "support_height_m": 0.0,
-          "slot": "louisiana-pavilion-chain/outside",
-          "wall": null
-        },
-        {
-          "token": "chord_tension_spring",
-          "cell": [
-            27,
-            51
-          ],
-          "tile_cell": [
-            13,
-            37
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "outside",
-          "support_height_m": 0.0,
-          "slot": "louisiana-pavilion-chain/outside",
-          "wall": null
-        },
-        {
-          "token": "RackDX7Piano",
-          "cell": [
-            26,
-            52
-          ],
-          "tile_cell": [
-            12,
-            38
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "outside",
-          "support_height_m": 0.0,
-          "slot": "louisiana-pavilion-chain/outside",
-          "wall": null
-        },
-        {
-          "token": "VectorForces",
-          "cell": [
-            28,
-            53
-          ],
-          "tile_cell": [
-            14,
-            39
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "outside",
-          "support_height_m": 0.0,
-          "slot": "louisiana-pavilion-chain/outside",
-          "wall": null
-        },
-        {
-          "token": "harmonic_distance_table",
-          "cell": [
-            14,
-            54
-          ],
-          "tile_cell": [
-            0,
-            40
-          ],
-          "rotation": 0,
-          "mode": "host_mounted",
-          "venue": "outside",
-          "support_height_m": 0.0,
-          "slot": "louisiana-pavilion-chain/outside",
-          "wall": null
-        },
-        {
-          "token": "audio_catalog_tablet",
-          "cell": [
-            13,
-            55
-          ],
-          "tile_cell": [
-            -1,
-            41
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "outside",
-          "support_height_m": 0.0,
-          "slot": "louisiana-pavilion-chain/outside",
-          "wall": null
-        },
-        {
-          "token": "wave_interference_3d",
-          "cell": [
-            29,
-            55
-          ],
-          "tile_cell": [
-            15,
-            41
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "outside",
-          "support_height_m": 0.0,
-          "slot": "louisiana-pavilion-chain/outside",
-          "wall": null
-        },
-        {
-          "token": "MelodyChaser3D",
-          "cell": [
-            11,
-            48
-          ],
-          "tile_cell": [
-            -3,
-            34
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "outside",
-          "support_height_m": 0.0,
-          "slot": "louisiana-pavilion-chain/outside",
-          "wall": null
-        },
-        {
-          "token": "RackSineBasic",
-          "cell": [
-            30,
-            56
-          ],
-          "tile_cell": [
-            16,
-            42
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "outside",
-          "support_height_m": 0.0,
-          "slot": "louisiana-pavilion-chain/outside",
-          "wall": null
-        },
-        {
-          "token": "interactable_demo",
-          "cell": [
-            34,
-            47
-          ],
-          "tile_cell": [
-            20,
-            33
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "outside",
-          "support_height_m": 0.0,
-          "slot": "louisiana-pavilion-chain/outside",
-          "wall": null
-        },
-        {
-          "token": "AudioContr",
-          "cell": [
-            14,
-            59
-          ],
-          "tile_cell": [
-            0,
-            45
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "outside",
-          "support_height_m": 0.0,
-          "slot": "louisiana-pavilion-chain/outside",
-          "wall": null
-        },
-        {
           "token": "mario_test_sound_ui",
           "cell": [
-            28,
-            59
+            9,
+            49
           ],
           "tile_cell": [
-            14,
-            45
+            -5,
+            35
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -24777,12 +25589,12 @@
         {
           "token": "vr_map_loader_kiosk",
           "cell": [
-            31,
-            57
+            7,
+            51
           ],
           "tile_cell": [
-            17,
-            43
+            -7,
+            37
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -24794,12 +25606,12 @@
         {
           "token": "SoundscapeRadioRack",
           "cell": [
-            25,
-            50
+            28,
+            59
           ],
           "tile_cell": [
-            11,
-            36
+            14,
+            45
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -24811,12 +25623,12 @@
         {
           "token": "ElphabaDress",
           "cell": [
-            29,
-            60
+            24,
+            57
           ],
           "tile_cell": [
-            15,
-            46
+            10,
+            43
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -24828,11 +25640,11 @@
         {
           "token": "vowel_sound_board",
           "cell": [
-            13,
+            24,
             60
           ],
           "tile_cell": [
-            -1,
+            10,
             46
           ],
           "rotation": 0,
@@ -24887,12 +25699,12 @@
         {
           "token": "RackAmbientDrone",
           "cell": [
-            31,
-            44
+            16,
+            59
           ],
           "tile_cell": [
-            17,
-            30
+            2,
+            45
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -24904,12 +25716,29 @@
         {
           "token": "exhibit_furniture",
           "cell": [
-            28,
-            50
+            7,
+            54
           ],
           "tile_cell": [
-            14,
-            36
+            -7,
+            40
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
+        },
+        {
+          "token": "resonating_metallophone",
+          "cell": [
+            26,
+            60
+          ],
+          "tile_cell": [
+            12,
+            46
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -24982,6 +25811,57 @@
           ]
         },
         {
+          "token": "beat_frequency_demo",
+          "cell": [
+            6,
+            52
+          ],
+          "tile_cell": [
+            -8,
+            38
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
+        },
+        {
+          "token": "sine_oscillation",
+          "cell": [
+            12,
+            57
+          ],
+          "tile_cell": [
+            -2,
+            43
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
+        },
+        {
+          "token": "dna_specimen",
+          "cell": [
+            15,
+            60
+          ],
+          "tile_cell": [
+            1,
+            46
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
+        },
+        {
           "token": "double_helix_scene",
           "cell": [
             0,
@@ -25001,6 +25881,91 @@
             13,
             13
           ]
+        },
+        {
+          "token": "VectorCrossProduct",
+          "cell": [
+            9,
+            55
+          ],
+          "tile_cell": [
+            -5,
+            41
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
+        },
+        {
+          "token": "holographicdisplay",
+          "cell": [
+            32,
+            58
+          ],
+          "tile_cell": [
+            18,
+            44
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
+        },
+        {
+          "token": "electronicscales",
+          "cell": [
+            29,
+            60
+          ],
+          "tile_cell": [
+            15,
+            46
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
+        },
+        {
+          "token": "multimeter",
+          "cell": [
+            10,
+            57
+          ],
+          "tile_cell": [
+            -4,
+            43
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
+        },
+        {
+          "token": "biomagneticresonator",
+          "cell": [
+            33,
+            46
+          ],
+          "tile_cell": [
+            19,
+            32
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
         },
         {
           "token": "hallway_scene",
@@ -25077,6 +26042,74 @@
           "support_height_m": 0.95,
           "slot": "louisiana-pavilion-chain/3,2",
           "wall": null
+        },
+        {
+          "token": "catalyst_target",
+          "cell": [
+            11,
+            45
+          ],
+          "tile_cell": [
+            -3,
+            31
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
+        },
+        {
+          "token": "queer_cylinder_target",
+          "cell": [
+            31,
+            49
+          ],
+          "tile_cell": [
+            17,
+            35
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
+        },
+        {
+          "token": "petri_dish_worms",
+          "cell": [
+            11,
+            58
+          ],
+          "tile_cell": [
+            -3,
+            44
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
+        },
+        {
+          "token": "abject_bench",
+          "cell": [
+            23,
+            50
+          ],
+          "tile_cell": [
+            9,
+            36
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/outside",
+          "wall": null
         }
       ],
       "rejected": [
@@ -25087,10 +26120,6 @@
         {
           "token": "science_screen",
           "why": "support_matches_contract: slot offers 'podium', artifact needs 'wall'"
-        },
-        {
-          "token": "sine_space",
-          "why": "escalation: precinct: no exterior venue is large enough either"
         },
         {
           "token": "wave_propagation_3d",
@@ -25113,44 +26142,8 @@
           "why": "wall_is_available: slot louisiana-pavilion-chain/3,2 does not back onto a wall"
         },
         {
-          "token": "resonating_metallophone",
-          "why": "physical_overlap: 1 body cells collide with SphericalHarmonics"
-        },
-        {
           "token": "SystemsMusicTest",
           "why": "body_inside_room: body cell (14, 16) is wall or void"
-        },
-        {
-          "token": "beat_frequency_demo",
-          "why": "physical_overlap: 1 body cells collide with SphericalHarmonics"
-        },
-        {
-          "token": "sine_oscillation",
-          "why": "physical_overlap: 1 body cells collide with transformation_cube"
-        },
-        {
-          "token": "dna_specimen",
-          "why": "wall_is_available: slot louisiana-pavilion-chain/3,2 does not back onto a wall"
-        },
-        {
-          "token": "VectorCrossProduct",
-          "why": "physical_overlap: 1 body cells collide with transformation_cube"
-        },
-        {
-          "token": "holographicdisplay",
-          "why": "wall_is_available: slot louisiana-pavilion-chain/3,2 does not back onto a wall"
-        },
-        {
-          "token": "electronicscales",
-          "why": "wall_is_available: slot louisiana-pavilion-chain/3,2 does not back onto a wall"
-        },
-        {
-          "token": "multimeter",
-          "why": "physical_overlap: 1 body cells collide with transformation_cube"
-        },
-        {
-          "token": "biomagneticresonator",
-          "why": "physical_overlap: 1 body cells collide with transformation_cube"
         },
         {
           "token": "CircleSpiral",
@@ -25159,22 +26152,6 @@
         {
           "token": "coloredlines",
           "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "catalyst_target",
-          "why": "physical_overlap: 1 body cells collide with PendulumWave"
-        },
-        {
-          "token": "queer_cylinder_target",
-          "why": "physical_overlap: 2 body cells collide with cable_builder"
-        },
-        {
-          "token": "petri_dish_worms",
-          "why": "physical_overlap: 1 body cells collide with transformation_cube"
-        },
-        {
-          "token": "abject_bench",
-          "why": "physical_overlap: 1 body cells collide with transformation_cube"
         }
       ],
       "room": {
@@ -25262,35 +26239,39 @@
         {
           "token": "trng_vs_prng",
           "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            9,
+            29
+          ]
+        },
+        {
+          "token": "entropy_axiom",
+          "cell": [
             20,
-            10
+            8
           ],
           "tile_cell": [
             6,
-            -4
+            -6
           ],
           "rotation": 0,
           "mode": "freestanding",
           "venue": "porch",
           "support_height_m": 0.0,
           "slot": "soane-cabinet-vista/porch",
-          "wall": null
-        },
-        {
-          "token": "entropy_axiom",
-          "cell": [
-            10,
-            43
-          ],
-          "tile_cell": [
-            -4,
-            29
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "outside",
-          "support_height_m": 0.0,
-          "slot": "soane-cabinet-vista/outside",
           "wall": null
         },
         {
@@ -25313,11 +26294,11 @@
         {
           "token": "GaussianBlurCircle",
           "cell": [
-            33,
+            7,
             44
           ],
           "tile_cell": [
-            19,
+            -7,
             30
           ],
           "rotation": 0,
@@ -25508,18 +26489,18 @@
         {
           "token": "hardware_entropy_decay",
           "cell": [
-            21,
-            45
+            24,
+            8
           ],
           "tile_cell": [
-            7,
-            31
+            10,
+            -6
           ],
-          "rotation": 0,
+          "rotation": 90,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "porch",
           "support_height_m": 0.0,
-          "slot": "soane-cabinet-vista/outside",
+          "slot": "soane-cabinet-vista/porch",
           "wall": null
         },
         {
@@ -25559,12 +26540,12 @@
         {
           "token": "random_walk_128",
           "cell": [
-            20,
-            51
+            32,
+            47
           ],
           "tile_cell": [
-            6,
-            37
+            18,
+            33
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -25720,18 +26701,18 @@
         {
           "token": "bubble_particles",
           "cell": [
-            12,
-            50
+            15,
+            11
           ],
           "tile_cell": [
-            -2,
-            36
+            1,
+            -3
           ],
           "rotation": 0,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "porch",
           "support_height_m": 0.0,
-          "slot": "soane-cabinet-vista/outside",
+          "slot": "soane-cabinet-vista/porch",
           "wall": null
         },
         {
@@ -25794,20 +26775,41 @@
           ]
         },
         {
-          "token": "random_walk_terrarium",
+          "token": "random_decay_multimesh",
           "cell": [
-            4,
-            45
+            0,
+            0
           ],
           "tile_cell": [
-            -10,
-            31
+            -14,
+            -14
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            8,
+            23
+          ]
+        },
+        {
+          "token": "random_walk_terrarium",
+          "cell": [
+            22,
+            12
+          ],
+          "tile_cell": [
+            8,
+            -2
           ],
           "rotation": 0,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "porch",
           "support_height_m": 0.0,
-          "slot": "soane-cabinet-vista/outside",
+          "slot": "soane-cabinet-vista/porch",
           "wall": null
         },
         {
@@ -25834,12 +26836,12 @@
         {
           "token": "random_walk_collection",
           "cell": [
-            25,
-            46
+            20,
+            45
           ],
           "tile_cell": [
-            11,
-            32
+            6,
+            31
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -25851,12 +26853,12 @@
         {
           "token": "pipe_dream",
           "cell": [
-            6,
-            43
+            20,
+            51
           ],
           "tile_cell": [
-            -8,
-            29
+            6,
+            37
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -25885,12 +26887,12 @@
         {
           "token": "gaussian_random",
           "cell": [
-            6,
-            48
+            25,
+            53
           ],
           "tile_cell": [
-            -8,
-            34
+            11,
+            39
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -25902,11 +26904,28 @@
         {
           "token": "GaussianBlurShader",
           "cell": [
-            16,
+            20,
+            48
+          ],
+          "tile_cell": [
+            6,
+            34
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "soane-cabinet-vista/outside",
+          "wall": null
+        },
+        {
+          "token": "GaussianPaintSplatter",
+          "cell": [
+            17,
             46
           ],
           "tile_cell": [
-            2,
+            3,
             32
           ],
           "rotation": 0,
@@ -25919,12 +26938,12 @@
         {
           "token": "rice_verifier_booth",
           "cell": [
-            12,
-            36
+            29,
+            39
           ],
           "tile_cell": [
-            -2,
-            22
+            15,
+            25
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -25936,12 +26955,12 @@
         {
           "token": "monte_carlo",
           "cell": [
-            14,
-            45
+            22,
+            44
           ],
           "tile_cell": [
-            0,
-            31
+            8,
+            30
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -25953,12 +26972,12 @@
         {
           "token": "distribution_sampler",
           "cell": [
-            25,
-            43
+            19,
+            44
           ],
           "tile_cell": [
-            11,
-            29
+            5,
+            30
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -25970,12 +26989,12 @@
         {
           "token": "force_field_visualizer",
           "cell": [
-            26,
-            47
+            21,
+            46
           ],
           "tile_cell": [
-            12,
-            33
+            7,
+            32
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -26004,12 +27023,12 @@
         {
           "token": "perlin_noise_bridge",
           "cell": [
-            25,
-            49
+            30,
+            38
           ],
           "tile_cell": [
-            11,
-            35
+            16,
+            24
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -26021,12 +27040,12 @@
         {
           "token": "abject_bench",
           "cell": [
-            26,
-            50
+            28,
+            38
           ],
           "tile_cell": [
-            12,
-            36
+            14,
+            24
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -26038,12 +27057,12 @@
         {
           "token": "random_number_book_page_collection",
           "cell": [
-            7,
-            49
+            16,
+            51
           ],
           "tile_cell": [
-            -7,
-            35
+            2,
+            37
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -26055,12 +27074,29 @@
         {
           "token": "tree_gen",
           "cell": [
-            13,
+            28,
             54
           ],
           "tile_cell": [
-            -1,
+            14,
             40
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "soane-cabinet-vista/outside",
+          "wall": null
+        },
+        {
+          "token": "sculpt_one",
+          "cell": [
+            33,
+            41
+          ],
+          "tile_cell": [
+            19,
+            27
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -26093,12 +27129,12 @@
         {
           "token": "breathing_room",
           "cell": [
-            8,
-            47
+            23,
+            45
           ],
           "tile_cell": [
-            -6,
-            33
+            9,
+            31
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -26110,12 +27146,12 @@
         {
           "token": "curl_noise_particles",
           "cell": [
-            13,
-            42
+            24,
+            54
           ],
           "tile_cell": [
-            -1,
-            28
+            10,
+            40
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -26127,12 +27163,12 @@
         {
           "token": "VectorCrossProduct",
           "cell": [
-            25,
-            52
+            22,
+            47
           ],
           "tile_cell": [
-            11,
-            38
+            8,
+            33
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -26142,14 +27178,31 @@
           "wall": null
         },
         {
-          "token": "catalyst_target",
+          "token": "pollock_painting_in_3d",
           "cell": [
-            26,
-            53
+            25,
+            48
           ],
           "tile_cell": [
-            12,
-            39
+            11,
+            34
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "soane-cabinet-vista/outside",
+          "wall": null
+        },
+        {
+          "token": "catalyst_target",
+          "cell": [
+            24,
+            44
+          ],
+          "tile_cell": [
+            10,
+            30
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -26161,12 +27214,29 @@
         {
           "token": "monte_carlo_dartboard",
           "cell": [
-            7,
-            46
+            18,
+            49
           ],
           "tile_cell": [
-            -7,
-            32
+            4,
+            35
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "soane-cabinet-vista/outside",
+          "wall": null
+        },
+        {
+          "token": "bias_visualizer",
+          "cell": [
+            15,
+            50
+          ],
+          "tile_cell": [
+            1,
+            36
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -26179,11 +27249,11 @@
           "token": "noise_mixer",
           "cell": [
             14,
-            53
+            45
           ],
           "tile_cell": [
             0,
-            39
+            31
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -26195,12 +27265,12 @@
         {
           "token": "worley_noise",
           "cell": [
-            5,
-            46
+            28,
+            36
           ],
           "tile_cell": [
-            -9,
-            32
+            14,
+            22
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -26212,12 +27282,12 @@
         {
           "token": "miura_crawler",
           "cell": [
-            12,
-            53
+            25,
+            43
           ],
           "tile_cell": [
-            -2,
-            39
+            11,
+            29
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -26229,12 +27299,97 @@
         {
           "token": "kresling_spire",
           "cell": [
-            11,
-            37
+            26,
+            44
           ],
           "tile_cell": [
-            -3,
-            23
+            12,
+            30
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "soane-cabinet-vista/outside",
+          "wall": null
+        },
+        {
+          "token": "kaleidocycle_enemy",
+          "cell": [
+            17,
+            50
+          ],
+          "tile_cell": [
+            3,
+            36
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "soane-cabinet-vista/outside",
+          "wall": null
+        },
+        {
+          "token": "scissor_stalker",
+          "cell": [
+            16,
+            54
+          ],
+          "tile_cell": [
+            2,
+            40
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "soane-cabinet-vista/outside",
+          "wall": null
+        },
+        {
+          "token": "origami_droideka",
+          "cell": [
+            14,
+            47
+          ],
+          "tile_cell": [
+            0,
+            33
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "soane-cabinet-vista/outside",
+          "wall": null
+        },
+        {
+          "token": "armadillo_eggling",
+          "cell": [
+            37,
+            45
+          ],
+          "tile_cell": [
+            23,
+            31
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "soane-cabinet-vista/outside",
+          "wall": null
+        },
+        {
+          "token": "r_c",
+          "cell": [
+            27,
+            43
+          ],
+          "tile_cell": [
+            13,
+            29
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -26258,16 +27413,8 @@
           "why": "escalation: precinct: no exterior venue is large enough either"
         },
         {
-          "token": "random_decay_multimesh",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
           "token": "galton_board",
           "why": "faces_out_of_wall: at 0deg the back points (0, -1), but this wall needs (1, 0)"
-        },
-        {
-          "token": "GaussianPaintSplatter",
-          "why": "faces_out_of_wall: at 0deg the back points (0, -1), but this wall needs (0, 1)"
         },
         {
           "token": "random_bell_curve",
@@ -26282,20 +27429,8 @@
           "why": "escalation: precinct: no exterior venue is large enough either"
         },
         {
-          "token": "sculpt_one",
-          "why": "body_inside_room: body cell (17, 15) is wall or void"
-        },
-        {
-          "token": "pollock_painting_in_3d",
-          "why": "faces_out_of_wall: at 0deg the back points (0, -1), but this wall needs (-1, 0)"
-        },
-        {
           "token": "extreme_randomness",
           "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "bias_visualizer",
-          "why": "body_inside_room: body cell (24, 15) is wall or void"
         },
         {
           "token": "facade_grammar_demo",
@@ -26314,28 +27449,8 @@
           "why": "escalation: precinct: no exterior venue is large enough either"
         },
         {
-          "token": "kaleidocycle_enemy",
-          "why": "required_access.front: all 1 access cells blocked \u2014 nowhere to stand on the front"
-        },
-        {
-          "token": "scissor_stalker",
-          "why": "circulation_on_floor: 2 clearance cells fall outside the floor"
-        },
-        {
-          "token": "origami_droideka",
-          "why": "circulation_on_floor: 2 clearance cells fall outside the floor"
-        },
-        {
-          "token": "armadillo_eggling",
-          "why": "body_inside_room: body cell (14, 18) is wall or void"
-        },
-        {
           "token": "cube_projectile_spawner",
           "why": "body_inside_room: body cell (14, 18) is wall or void"
-        },
-        {
-          "token": "r_c",
-          "why": "required_access.front: all 1 access cells blocked \u2014 nowhere to stand on the front"
         }
       ],
       "room": {
@@ -27241,6 +28356,27 @@
           "wall": null
         },
         {
+          "token": "disease_spread_ca",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            15,
+            28
+          ]
+        },
+        {
           "token": "volumetric_fog_ca",
           "cell": [
             19,
@@ -27265,10 +28401,6 @@
         },
         {
           "token": "7_8_hexagon_ca_vr",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "disease_spread_ca",
           "why": "escalation: precinct: no exterior venue is large enough either"
         }
       ],
@@ -27408,19 +28540,23 @@
         {
           "token": "cantor_pagoda_vr",
           "cell": [
-            20,
-            54
+            0,
+            0
           ],
           "tile_cell": [
-            6,
-            40
+            -14,
+            -14
           ],
-          "rotation": 0,
+          "rotation": 90,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "courtyard",
           "support_height_m": 0.0,
-          "slot": "pompidou-plateau-libre/outside",
-          "wall": null
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            10,
+            26
+          ]
         },
         {
           "token": "fractal_recursion_circles",
@@ -27518,12 +28654,12 @@
         {
           "token": "fractal_scene",
           "cell": [
-            37,
-            53
+            20,
+            56
           ],
           "tile_cell": [
-            23,
-            39
+            6,
+            42
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -27675,19 +28811,23 @@
         {
           "token": "example_8_4_cantor_pagoda_vr",
           "cell": [
-            20,
-            60
+            0,
+            0
           ],
           "tile_cell": [
-            6,
-            46
+            -14,
+            -14
           ],
-          "rotation": 0,
+          "rotation": 90,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "courtyard",
           "support_height_m": 0.0,
-          "slot": "pompidou-plateau-libre/outside",
-          "wall": null
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            10,
+            26
+          ]
         },
         {
           "token": "fractal_cantor_set",
@@ -27796,6 +28936,27 @@
           "wall": null
         },
         {
+          "token": "box_counting_dimension",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            13,
+            17
+          ]
+        },
+        {
           "token": "mandelbrot_dive",
           "cell": [
             17,
@@ -27885,14 +29046,73 @@
           ]
         },
         {
-          "token": "cube_cabin",
+          "token": "koch_curve",
           "cell": [
-            11,
-            48
+            0,
+            0
           ],
           "tile_cell": [
-            -3,
-            34
+            -14,
+            -14
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            6,
+            47
+          ]
+        },
+        {
+          "token": "cube_cabin",
+          "cell": [
+            7,
+            53
+          ],
+          "tile_cell": [
+            -7,
+            39
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "pompidou-plateau-libre/outside",
+          "wall": null
+        },
+        {
+          "token": "diffusion_limited_aggregation",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            7,
+            23
+          ]
+        },
+        {
+          "token": "fibonacci_sequences",
+          "cell": [
+            31,
+            57
+          ],
+          "tile_cell": [
+            17,
+            43
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -27921,12 +29141,12 @@
         {
           "token": "golden_rectangle",
           "cell": [
-            30,
-            48
+            16,
+            53
           ],
           "tile_cell": [
-            16,
-            34
+            2,
+            39
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -27938,14 +29158,14 @@
         {
           "token": "fibonacci_terrain",
           "cell": [
-            4,
-            53
+            13,
+            59
           ],
           "tile_cell": [
-            -10,
-            39
+            -1,
+            45
           ],
-          "rotation": 90,
+          "rotation": 0,
           "mode": "freestanding",
           "venue": "outside",
           "support_height_m": 0.0,
@@ -28019,6 +29239,27 @@
           "support_height_m": 0.95,
           "slot": "pompidou-plateau-libre/9,5",
           "wall": null
+        },
+        {
+          "token": "mandelbrot_set",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            16,
+            23
+          ]
         },
         {
           "token": "complexity_pattern",
@@ -28182,6 +29423,23 @@
           "wall": null
         },
         {
+          "token": "Hilbert3D",
+          "cell": [
+            9,
+            47
+          ],
+          "tile_cell": [
+            -5,
+            33
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "pompidou-plateau-libre/outside",
+          "wall": null
+        },
+        {
           "token": "space_filling_curve_gallery",
           "cell": [
             23,
@@ -28234,36 +29492,12 @@
           "why": "escalation: precinct: no exterior venue is large enough either"
         },
         {
-          "token": "box_counting_dimension",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "koch_curve",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "diffusion_limited_aggregation",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "fibonacci_sequences",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
           "token": "curation_station",
           "why": "escalation: precinct: no exterior venue is large enough either"
         },
         {
           "token": "julia_set",
           "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "mandelbrot_set",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "Hilbert3D",
-          "why": "body_inside_room: body cell (14, 20) is wall or void"
         }
       ],
       "room": {
@@ -28524,19 +29758,23 @@
         {
           "token": "neural_network_visualization",
           "cell": [
-            31,
-            49
+            0,
+            0
           ],
           "tile_cell": [
-            17,
-            35
+            -14,
+            -14
           ],
-          "rotation": 0,
+          "rotation": 90,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "courtyard",
           "support_height_m": 0.0,
-          "slot": "dia-beacon-field/outside",
-          "wall": null
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            12,
+            19
+          ]
         }
       ],
       "rejected": [
@@ -28783,21 +30021,46 @@
           ]
         },
         {
-          "token": "softbody_gallery_part2",
+          "token": "rainbow",
           "cell": [
-            22,
-            47
+            0,
+            0
           ],
           "tile_cell": [
-            8,
-            33
+            -14,
+            -14
           ],
-          "rotation": 0,
+          "rotation": 90,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "courtyard",
           "support_height_m": 0.0,
-          "slot": "mezquita-hypostyle/outside",
-          "wall": null
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            6,
+            54
+          ]
+        },
+        {
+          "token": "softbody_gallery_part2",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            12,
+            32
+          ]
         },
         {
           "token": "softstopscene",
@@ -28853,14 +30116,14 @@
         {
           "token": "radiolaria",
           "cell": [
-            39,
-            46
+            22,
+            48
           ],
           "tile_cell": [
-            25,
-            32
+            8,
+            34
           ],
-          "rotation": 90,
+          "rotation": 0,
           "mode": "freestanding",
           "venue": "outside",
           "support_height_m": 0.0,
@@ -28870,12 +30133,12 @@
         {
           "token": "MolecularDesigner",
           "cell": [
-            5,
-            46
+            29,
+            47
           ],
           "tile_cell": [
-            -9,
-            32
+            15,
+            33
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -28887,12 +30150,12 @@
         {
           "token": "mass_spring_bench",
           "cell": [
-            22,
-            52
+            11,
+            48
           ],
           "tile_cell": [
-            8,
-            38
+            -3,
+            34
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -29044,12 +30307,12 @@
         {
           "token": "SphericalHarmonics",
           "cell": [
-            19,
-            52
+            16,
+            46
           ],
           "tile_cell": [
-            5,
-            38
+            2,
+            32
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -29066,10 +30329,6 @@
         },
         {
           "token": "soft_mushrooms",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "rainbow",
           "why": "escalation: precinct: no exterior venue is large enough either"
         }
       ],
@@ -29669,19 +30928,23 @@
         {
           "token": "neural_network_visualization",
           "cell": [
-            21,
-            49
+            0,
+            0
           ],
           "tile_cell": [
-            7,
-            35
+            -14,
+            -14
           ],
-          "rotation": 0,
+          "rotation": 90,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "courtyard",
           "support_height_m": 0.0,
-          "slot": "chichu-buried-cells/outside",
-          "wall": null
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            12,
+            19
+          ]
         },
         {
           "token": "backpropagation_flow",
@@ -29701,21 +30964,109 @@
           "wall": null
         },
         {
-          "token": "computer_vision_vr",
+          "token": "neural_networks_vr",
           "cell": [
-            21,
-            55
+            0,
+            0
           ],
           "tile_cell": [
-            7,
-            41
+            -14,
+            -14
           ],
-          "rotation": 0,
+          "rotation": 90,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "courtyard",
           "support_height_m": 0.0,
-          "slot": "chichu-buried-cells/outside",
-          "wall": null
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            15,
+            34
+          ]
+        },
+        {
+          "token": "computer_vision_vr",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            8,
+            31
+          ]
+        },
+        {
+          "token": "convolutional_neural_networks_cnns_vr",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            9,
+            57
+          ]
+        },
+        {
+          "token": "explainable_ai_xai_vr",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            13,
+            36
+          ]
+        },
+        {
+          "token": "transformers_vr",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            17,
+            22
+          ]
         },
         {
           "token": "lstms_vr",
@@ -29736,6 +31087,27 @@
           "court": [
             17,
             17
+          ]
+        },
+        {
+          "token": "generative_adversarial_networks_gans_vr",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            18,
+            25
           ]
         }
       ],
@@ -29761,27 +31133,7 @@
           "why": "escalation: precinct: no exterior venue is large enough either"
         },
         {
-          "token": "neural_networks_vr",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "convolutional_neural_networks_cnns_vr",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "explainable_ai_xai_vr",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "transformers_vr",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
           "token": "variational_autoencoders_vaes_vr",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "generative_adversarial_networks_gans_vr",
           "why": "escalation: precinct: no exterior venue is large enough either"
         },
         {
@@ -30180,19 +31532,23 @@
         {
           "token": "bifurcation_walkway",
           "cell": [
-            21,
-            47
+            0,
+            0
           ],
           "tile_cell": [
-            7,
-            33
+            -14,
+            -14
           ],
-          "rotation": 0,
+          "rotation": 90,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "courtyard",
           "support_height_m": 0.0,
-          "slot": "teshima-droplet/outside",
-          "wall": null
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            9,
+            19
+          ]
         },
         {
           "token": "pyramid_edit",
@@ -30338,11 +31694,11 @@
           "token": "ordered_grid",
           "cell": [
             21,
-            54
+            47
           ],
           "tile_cell": [
             7,
-            40
+            33
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -30354,12 +31710,12 @@
         {
           "token": "ca_bridge",
           "cell": [
-            16,
-            53
+            21,
+            51
           ],
           "tile_cell": [
-            2,
-            39
+            7,
+            37
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -30370,6 +31726,57 @@
         },
         {
           "token": "rigid_sculpture",
+          "cell": [
+            29,
+            47
+          ],
+          "tile_cell": [
+            15,
+            33
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "teshima-droplet/outside",
+          "wall": null
+        },
+        {
+          "token": "fluid_form",
+          "cell": [
+            12,
+            47
+          ],
+          "tile_cell": [
+            -2,
+            33
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "teshima-droplet/outside",
+          "wall": null
+        },
+        {
+          "token": "phi_slider",
+          "cell": [
+            28,
+            51
+          ],
+          "tile_cell": [
+            14,
+            37
+          ],
+          "rotation": 0,
+          "mode": "host_mounted",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "teshima-droplet/outside",
+          "wall": null
+        },
+        {
+          "token": "preserved_pattern",
           "cell": [
             33,
             47
@@ -30386,14 +31793,14 @@
           "wall": null
         },
         {
-          "token": "fluid_form",
+          "token": "pattern_tile_4x4",
           "cell": [
-            26,
-            54
+            7,
+            47
           ],
           "tile_cell": [
-            12,
-            40
+            -7,
+            33
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -30403,30 +31810,13 @@
           "wall": null
         },
         {
-          "token": "phi_slider",
+          "token": "transforming_pattern",
           "cell": [
-            9,
-            47
-          ],
-          "tile_cell": [
-            -5,
-            33
-          ],
-          "rotation": 0,
-          "mode": "host_mounted",
-          "venue": "outside",
-          "support_height_m": 0.0,
-          "slot": "teshima-droplet/outside",
-          "wall": null
-        },
-        {
-          "token": "preserved_pattern",
-          "cell": [
-            30,
+            13,
             51
           ],
           "tile_cell": [
-            16,
+            -1,
             37
           ],
           "rotation": 0,
@@ -30437,7 +31827,7 @@
           "wall": null
         },
         {
-          "token": "pattern_tile_4x4",
+          "token": "turing_pattern",
           "cell": [
             32,
             42
@@ -30454,7 +31844,7 @@
           "wall": null
         },
         {
-          "token": "transforming_pattern",
+          "token": "reaction_diffusion",
           "cell": [
             11,
             43
@@ -30471,48 +31861,14 @@
           "wall": null
         },
         {
-          "token": "turing_pattern",
-          "cell": [
-            4,
-            47
-          ],
-          "tile_cell": [
-            -10,
-            33
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "outside",
-          "support_height_m": 0.0,
-          "slot": "teshima-droplet/outside",
-          "wall": null
-        },
-        {
-          "token": "reaction_diffusion",
-          "cell": [
-            37,
-            47
-          ],
-          "tile_cell": [
-            23,
-            33
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "outside",
-          "support_height_m": 0.0,
-          "slot": "teshima-droplet/outside",
-          "wall": null
-        },
-        {
           "token": "edge_core",
           "cell": [
-            22,
-            52
+            19,
+            47
           ],
           "tile_cell": [
-            8,
-            38
+            5,
+            33
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -30524,12 +31880,12 @@
         {
           "token": "qfep_reactor",
           "cell": [
-            24,
-            51
+            23,
+            47
           ],
           "tile_cell": [
-            10,
-            37
+            9,
+            33
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -30541,12 +31897,12 @@
         {
           "token": "edge_of_chaos_unlocked",
           "cell": [
-            24,
-            53
+            26,
+            47
           ],
           "tile_cell": [
-            10,
-            39
+            12,
+            33
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -30558,12 +31914,12 @@
         {
           "token": "reactive_particles",
           "cell": [
-            33,
-            50
+            15,
+            47
           ],
           "tile_cell": [
-            19,
-            36
+            1,
+            33
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -30575,12 +31931,12 @@
         {
           "token": "queer_morphology_specimen",
           "cell": [
-            10,
-            42
+            33,
+            52
           ],
           "tile_cell": [
-            -4,
-            28
+            19,
+            38
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -30592,12 +31948,12 @@
         {
           "token": "flower_lab",
           "cell": [
-            5,
-            46
+            38,
+            47
           ],
           "tile_cell": [
-            -9,
-            32
+            24,
+            33
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -30609,12 +31965,12 @@
         {
           "token": "dna_specimen",
           "cell": [
-            33,
-            43
+            8,
+            51
           ],
           "tile_cell": [
-            19,
-            29
+            -6,
+            37
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -30626,11 +31982,11 @@
         {
           "token": "grab_sphere_phi",
           "cell": [
-            30,
+            14,
             55
           ],
           "tile_cell": [
-            16,
+            0,
             41
           ],
           "rotation": 0,

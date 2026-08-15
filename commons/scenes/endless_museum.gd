@@ -1655,10 +1655,22 @@ func _build_segment() -> void:
 		_court_queue.append(cr)
 	var joint: Array = []
 	var joint_depth: int = 0
+	# SPIKE 09 RUNG 2 — the joint budget scales with the BUILDING it follows.
+	# A flat 40 m let the queue grow without bound (134 queued on a forces-
+	# only loop; balconies arriving chapters after their rooms). A 90 m
+	# Uffizi earns a deeper joint than a 53 m Grande Galerie: budget =
+	# clamp(0.6 * segment length, 40, 80). And when the queue is BACKED UP
+	# (more than one building's worth waiting), the budget doubles once —
+	# the corridor pays back its debt at the next seam instead of carrying
+	# it forever. Gated: an empty queue is still zero depth, zero nodes.
+	var joint_budget: int = clampi(int(0.6 * float(h + VESTIBULE_H)), COURT_JOINT_MAX_DEPTH, 80)
+	if _court_queue.size() > 6:
+		joint_budget *= 2
+		print("[em-court] queue backed up (%d) — joint budget doubled to %d m" % [_court_queue.size(), joint_budget])
 	while not _court_queue.is_empty():
 		var head: Dictionary = _court_queue[0]
 		var hd: int = maxi(int((head.get("court", [0, 3]) as Array)[1]), 3)
-		if not joint.is_empty() and joint_depth + hd > COURT_JOINT_MAX_DEPTH:
+		if not joint.is_empty() and joint_depth + hd > joint_budget:
 			break
 		joint.append(_court_queue.pop_front())
 		joint_depth += hd
@@ -1952,6 +1964,7 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 		# SAID. An override whose row the plan no longer places is counted idle
 		# at the end — reported, never guessed at.
 		var yaw_override: float = float(row.get("rotation", 0.0))
+		var fine_override: Array = []          # the hand's 0.2 m offset, if any
 		var removed_by_hand := false
 		for ov_v in _edit_overrides:
 			var ov: Dictionary = ov_v as Dictionary
@@ -1975,6 +1988,8 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 				print("[em-edit] %s turned by hand %.0f -> %.0f"
 					% [tok, yaw_override, float(ov["rotation"])])
 				yaw_override = float(ov["rotation"])
+			if ov.get("offset") is Array:
+				fine_override = (ov["offset"] as Array).duplicate()
 			break
 		if removed_by_hand:
 			continue
@@ -2005,6 +2020,8 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 			"x": tx, "y": tz + VESTIBULE_H, "rank": 2,
 			"top": float(row.get("support_height_m", 0.0)),
 		}
+		if not fine_override.is_empty():
+			cell["offset"] = fine_override
 		# The rotation is a NEGOTIATED result, not a hint. HANDOVER §6: "one
 		# authored rotation is a preference; two or more is a constraint", and
 		# every turn away from the authored value is recorded on the placement.
@@ -2580,6 +2597,13 @@ func _stamp(seg: Node3D, scene_path: String, lookup: String, cell: Dictionary,
 				_deal_stats["plinths"] = int(_deal_stats.get("plinths", 0)) + 1
 	node.position = Vector3(float(cell.get("x", 0)) + 0.5,
 		float(cell.get("top", 0.0)) + lift, float(cell.get("y", 0)) + 0.5)
+	# the hand's FINE offset (metres, 0.2 snap, from an override) — visual
+	# only: the seal and the walk map stay on the cell, because a body 0.4 m
+	# to the left still owns the same floor. Applied to the transform, never
+	# to the cell, so nothing keyed on cells (overrides, seals, records) drifts.
+	var fine: Variant = cell.get("offset", null)
+	if fine is Array and (fine as Array).size() >= 3:
+		node.position += Vector3(float((fine as Array)[0]), float((fine as Array)[1]), float((fine as Array)[2]))
 	# The negotiated turn, applied BEFORE the node enters the tree — the same
 	# order the dressing-room builder and the config sweep both use, so an
 	# artifact that builds differently per facing builds the right one first time.
@@ -3298,6 +3322,7 @@ func _input(event: InputEvent) -> void:
 			print("[em-edit] editor sheathed — TAB to resume; unsaved rulings stay in memory")
 		return
 	if _edit_mode and event is InputEventKey and event.pressed and not event.echo:
+		_edit_shift = (event as InputEventKey).shift_pressed
 		if _edit_handle_key((event as InputEventKey).keycode):
 			return
 	if event is InputEventMouseButton and event.pressed:
@@ -3380,12 +3405,18 @@ func _edit_handle_key(key: int) -> bool:
 				var sg: Node = r.get("seg")
 				if String(r.get("chapter", "")) == "" and sg != null 						and is_instance_valid(sg) and sg.has_meta("em_chapter"):
 					r["chapter"] = String(sg.get_meta("em_chapter"))
-		KEY_LEFT:  _edit_nudge(-1, 0)
-		KEY_RIGHT: _edit_nudge(1, 0)
-		KEY_UP:    _edit_nudge(0, -1)
-		KEY_DOWN:  _edit_nudge(0, 1)
-		KEY_Q:     _edit_rotate(-90.0)
-		KEY_R:     _edit_rotate(90.0)
+		# arrows: whole cells; SHIFT+arrows: 0.2 m fine steps (visual offset,
+		# seal stays on the cell). PGUP/PGDN: 0.2 m in y (always fine).
+		# Q/R: 15 deg; SHIFT+Q/R: 90 deg. Every step is a ruling on the
+		# override; nothing is a free transform.
+		KEY_LEFT:  _edit_fine(-0.2, 0, 0) if _edit_shift else _edit_nudge(-1, 0)
+		KEY_RIGHT: _edit_fine(0.2, 0, 0) if _edit_shift else _edit_nudge(1, 0)
+		KEY_UP:    _edit_fine(0, 0, -0.2) if _edit_shift else _edit_nudge(0, -1)
+		KEY_DOWN:  _edit_fine(0, 0, 0.2) if _edit_shift else _edit_nudge(0, 1)
+		KEY_PAGEUP:   _edit_fine(0, 0.2, 0)
+		KEY_PAGEDOWN: _edit_fine(0, -0.2, 0)
+		KEY_Q:     _edit_rotate(-90.0 if _edit_shift else -15.0)
+		KEY_R:     _edit_rotate(90.0 if _edit_shift else 15.0)
 		KEY_DELETE:
 			if _edit_sel >= 0 and String((_edit_records[_edit_sel] as Dictionary).get("kind", "")) == "prop":
 				print("[em-edit] props are dressed by em_props' rules, not placed by the plan — no per-copy removal (v1)")
@@ -3558,6 +3589,43 @@ func _edit_prop_nudge(dy: float) -> void:
 			moved += 1
 	_edit_dirty = true
 	print("[em-edit] %s -> h %.2f (convention; %d live copies previewed)" % [tok, h, moved])
+
+
+var _edit_shift: bool = false
+
+
+## The 0.2 m fine nudge. A visual offset recorded on the override as
+## `offset` [dx, dy, dz] metres, snapped to 0.2 — applied by _stamp AFTER the
+## cell places the body, so the seal and the walk map keep the cell. The
+## live node previews it. Props are refused here as everywhere (their
+## convention is height, ruled by UP/DOWN unshifted).
+func _edit_fine(dx: float, dy: float, dz: float) -> void:
+	if _edit_sel < 0 or _edit_sel >= _edit_records.size():
+		return
+	var r: Dictionary = _edit_records[_edit_sel]
+	if String(r.get("kind", "")) == "prop":
+		if dy != 0.0:
+			_edit_prop_nudge(dy)   # PGUP/PGDN on a prop = the same 0.2 height ruling
+		else:
+			print("[em-edit] %s is a wall prop — no fine offset (v1)" % r.get("token"))
+		return
+	var node: Node3D = r.get("node") as Node3D
+	if node == null or not is_instance_valid(node):
+		return
+	var ov: Dictionary = _mod_editor.call(
+		"override_for", _edit_records, _edit_sel, _edit_overrides)
+	var off: Array = ov.get("offset", [0.0, 0.0, 0.0])
+	if off.size() < 3:
+		off = [0.0, 0.0, 0.0]
+	off = [snappedf(float(off[0]) + dx, 0.2), snappedf(float(off[1]) + dy, 0.2),
+		snappedf(float(off[2]) + dz, 0.2)]
+	# a zero offset is no ruling — drop the key rather than store three zeros
+	if is_zero_approx(float(off[0])) and is_zero_approx(float(off[1])) and is_zero_approx(float(off[2])):
+		ov.erase("offset")
+	else:
+		ov["offset"] = off
+	node.position += Vector3(dx, dy, dz)
+	_edit_dirty = true
 
 
 func _edit_nudge(dx: int, dz: int) -> void:

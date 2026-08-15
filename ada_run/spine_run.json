@@ -1,33 +1,32 @@
 {
  "schema": "adaresearch.spine_run.v1",
- "at": "2026-08-15T06:57:21",
+ "at": "2026-08-15T08:46:09",
  "totals": {
   "sequences": 24,
   "rows": 799,
   "anchors": 799,
   "offered": 1156,
-  "placed": 900,
-  "interior": 442,
-  "rejected": 256,
+  "placed": 943,
+  "interior": 448,
+  "rejected": 213,
   "housed_sequences": 0,
   "lineages": 481,
-  "lineages_walled": 116,
-  "interior_share": 0.3824,
+  "lineages_walled": 114,
+  "interior_share": 0.3875,
   "exterior_venues": {
-   "outside": 244,
-   "courtyard": 121,
-   "porch": 87,
+   "outside": 243,
+   "courtyard": 158,
+   "porch": 88,
    "balcony": 6
   },
   "reasons": {
-   "escalation": 114,
-   "physical_overlap": 98,
-   "body_inside_room": 20,
-   "circulation_on_floor": 8,
-   "faces_out_of_wall": 7,
-   "wall_is_available": 4,
+   "escalation": 95,
+   "physical_overlap": 88,
+   "body_inside_room": 15,
+   "circulation_on_floor": 6,
+   "faces_out_of_wall": 5,
    "support_matches_contract": 3,
-   "required_access.front": 2
+   "wall_is_available": 1
   }
  },
  "sequences": [
@@ -38,20 +37,20 @@
    "anchors": 82,
    "no_brief": 0,
    "offered": 115,
-   "placed": 105,
+   "placed": 106,
    "interior": 28,
-   "rejected": 10,
+   "rejected": 9,
    "venues": {
     "porch": 7,
     "interior": 28,
-    "courtyard": 10,
+    "courtyard": 11,
     "outside": 60
    },
    "reasons": {
     "body_inside_room": 4,
-    "escalation": 2,
     "physical_overlap": 2,
     "faces_out_of_wall": 1,
+    "escalation": 1,
     "circulation_on_floor": 1
    },
    "reason_examples": [
@@ -60,16 +59,16 @@
      "why": "faces_out_of_wall: at 0deg the back points (0, -1), but this wall needs (-1, 0)"
     },
     {
-     "token": "scale_lines",
-     "why": "escalation: precinct: no exterior venue is large enough either"
-    },
-    {
      "token": "grid_lines",
      "why": "body_inside_room: body cell (18, 14) is wall or void"
     },
     {
      "token": "triangleprofiles",
      "why": "body_inside_room: body cell (18, 14) is wall or void"
+    },
+    {
+     "token": "dome",
+     "why": "escalation: precinct: no exterior venue is large enough either"
     }
    ],
    "slots": 16,
@@ -199,7 +198,7 @@
    "housed": false,
    "shortfall": 87,
    "why_museum": "crowned",
-   "seconds": 17.0
+   "seconds": 22.0
   },
   {
    "sequence": "transformation",
@@ -280,7 +279,7 @@
    "housed": false,
    "shortfall": 19,
    "why_museum": "em_order rotation",
-   "seconds": 5.3
+   "seconds": 6.6
   },
   {
    "sequence": "symmetry",
@@ -290,12 +289,12 @@
    "no_brief": 0,
    "offered": 29,
    "placed": 28,
-   "interior": 24,
+   "interior": 26,
    "rejected": 1,
    "venues": {
-    "interior": 24,
-    "porch": 1,
-    "outside": 3
+    "interior": 26,
+    "courtyard": 1,
+    "porch": 1
    },
    "reasons": {
     "escalation": 1
@@ -343,11 +342,11 @@
     "paradox_stalker",
     "mill_alhambra_p6m"
    ],
-   "interior_share": 0.8276,
+   "interior_share": 0.8966,
    "housed": false,
-   "shortfall": 5,
+   "shortfall": 3,
    "why_museum": "em_order rotation",
-   "seconds": 2.9
+   "seconds": 2.0
   },
   {
    "sequence": "array_tutorial",
@@ -356,18 +355,17 @@
    "anchors": 23,
    "no_brief": 0,
    "offered": 40,
-   "placed": 36,
+   "placed": 38,
    "interior": 21,
-   "rejected": 4,
+   "rejected": 2,
    "venues": {
     "interior": 21,
     "porch": 4,
-    "outside": 8,
-    "courtyard": 3
+    "courtyard": 5,
+    "outside": 8
    },
    "reasons": {
-    "escalation": 3,
-    "body_inside_room": 1
+    "escalation": 2
    },
    "reason_examples": [
     {
@@ -377,14 +375,6 @@
     {
      "token": "xyz_slider_plate",
      "why": "escalation: precinct: no exterior venue is large enough either"
-    },
-    {
-     "token": "facade_builder",
-     "why": "escalation: precinct: no exterior venue is large enough either"
-    },
-    {
-     "token": "standalone_disco",
-     "why": "body_inside_room: body cell (18, 19) is wall or void"
     }
    ],
    "slots": 17,
@@ -439,7 +429,7 @@
    "housed": false,
    "shortfall": 19,
    "why_museum": "em_order rotation",
-   "seconds": 9.2
+   "seconds": 10.7
   },
   {
    "sequence": "color",
@@ -448,19 +438,19 @@
    "anchors": 50,
    "no_brief": 0,
    "offered": 69,
-   "placed": 66,
+   "placed": 67,
    "interior": 29,
-   "rejected": 3,
+   "rejected": 2,
    "venues": {
     "interior": 29,
     "porch": 5,
-    "outside": 20,
-    "courtyard": 11,
+    "outside": 19,
+    "courtyard": 13,
     "balcony": 1
    },
    "reasons": {
-    "escalation": 2,
-    "support_matches_contract": 1
+    "support_matches_contract": 1,
+    "escalation": 1
    },
    "reason_examples": [
     {
@@ -469,10 +459,6 @@
     },
     {
      "token": "spectrum_forest",
-     "why": "escalation: precinct: no exterior venue is large enough either"
-    },
-    {
-     "token": "rainbow",
      "why": "escalation: precinct: no exterior venue is large enough either"
     }
    ],
@@ -557,7 +543,7 @@
    "housed": false,
    "shortfall": 40,
    "why_museum": "em_order rotation",
-   "seconds": 8.6
+   "seconds": 11.2
   },
   {
    "sequence": "change",
@@ -567,12 +553,11 @@
    "no_brief": 0,
    "offered": 14,
    "placed": 14,
-   "interior": 11,
+   "interior": 13,
    "rejected": 0,
    "venues": {
-    "interior": 11,
-    "porch": 1,
-    "outside": 2
+    "interior": 13,
+    "courtyard": 1
    },
    "reasons": {},
    "reason_examples": [],
@@ -598,11 +583,11 @@
     "particle_flow_swarm",
     "VectorFieldFlow"
    ],
-   "interior_share": 0.7857,
+   "interior_share": 0.9286,
    "housed": false,
-   "shortfall": 3,
+   "shortfall": 1,
    "why_museum": "crowned",
-   "seconds": 0.8
+   "seconds": 0.5
   },
   {
    "sequence": "forces",
@@ -611,20 +596,20 @@
    "anchors": 151,
    "no_brief": 0,
    "offered": 200,
-   "placed": 96,
+   "placed": 97,
    "interior": 27,
-   "rejected": 104,
+   "rejected": 103,
    "venues": {
     "porch": 8,
     "interior": 27,
-    "courtyard": 17,
+    "courtyard": 18,
     "outside": 40,
     "balcony": 4
    },
    "reasons": {
     "physical_overlap": 85,
-    "escalation": 6,
     "body_inside_room": 6,
+    "escalation": 5,
     "circulation_on_floor": 5,
     "faces_out_of_wall": 2
    },
@@ -858,7 +843,7 @@
    "housed": false,
    "shortfall": 173,
    "why_museum": "crowned",
-   "seconds": 68.7
+   "seconds": 71.4
   },
   {
    "sequence": "formfinding",
@@ -931,7 +916,7 @@
    "housed": false,
    "shortfall": 9,
    "why_museum": "em_order rotation",
-   "seconds": 1.9
+   "seconds": 2.0
   },
   {
    "sequence": "wavefunctions",
@@ -940,21 +925,20 @@
    "anchors": 81,
    "no_brief": 0,
    "offered": 107,
-   "placed": 83,
+   "placed": 97,
    "interior": 36,
-   "rejected": 24,
+   "rejected": 10,
    "venues": {
     "interior": 36,
-    "courtyard": 14,
-    "porch": 4,
-    "outside": 29
+    "courtyard": 17,
+    "porch": 6,
+    "outside": 38
    },
    "reasons": {
-    "physical_overlap": 10,
-    "escalation": 7,
-    "wall_is_available": 4,
+    "escalation": 6,
     "body_inside_room": 2,
-    "support_matches_contract": 1
+    "support_matches_contract": 1,
+    "wall_is_available": 1
    },
    "reason_examples": [
     {
@@ -966,11 +950,11 @@
      "why": "support_matches_contract: slot offers 'podium', artifact needs 'wall'"
     },
     {
-     "token": "sine_space",
+     "token": "wave_propagation_3d",
      "why": "escalation: precinct: no exterior venue is large enough either"
     },
     {
-     "token": "wave_propagation_3d",
+     "token": "wave_interference",
      "why": "escalation: precinct: no exterior venue is large enough either"
     }
    ],
@@ -979,7 +963,7 @@
    "rooms_on_disk": 107,
    "rooms_authored": 106,
    "lineages": 63,
-   "lineages_walled": 11,
+   "lineages_walled": 10,
    "cast": [
     "rotatescalecubes",
     "rotating_cube_demo",
@@ -1093,7 +1077,7 @@
    "housed": false,
    "shortfall": 71,
    "why_museum": "em_order rotation",
-   "seconds": 38.0
+   "seconds": 33.4
   },
   {
    "sequence": "randomness",
@@ -1102,22 +1086,20 @@
    "anchors": 64,
    "no_brief": 0,
    "offered": 83,
-   "placed": 60,
+   "placed": 70,
    "interior": 23,
-   "rejected": 23,
+   "rejected": 13,
    "venues": {
     "interior": 23,
-    "courtyard": 8,
-    "porch": 1,
-    "outside": 27,
+    "courtyard": 10,
+    "porch": 4,
+    "outside": 32,
     "balcony": 1
    },
    "reasons": {
-    "escalation": 10,
-    "body_inside_room": 6,
-    "faces_out_of_wall": 3,
-    "required_access.front": 2,
-    "circulation_on_floor": 2
+    "escalation": 9,
+    "body_inside_room": 3,
+    "faces_out_of_wall": 1
    },
    "reason_examples": [
     {
@@ -1133,8 +1115,8 @@
      "why": "escalation: precinct: no exterior venue is large enough either"
     },
     {
-     "token": "random_decay_multimesh",
-     "why": "escalation: precinct: no exterior venue is large enough either"
+     "token": "galton_board",
+     "why": "faces_out_of_wall: at 0deg the back points (0, -1), but this wall needs (1, 0)"
     }
    ],
    "slots": 53,
@@ -1142,7 +1124,7 @@
    "rooms_on_disk": 83,
    "rooms_authored": 82,
    "lineages": 46,
-   "lineages_walled": 6,
+   "lineages_walled": 4,
    "cast": [
     "slot_machine",
     "coin_toss",
@@ -1232,7 +1214,7 @@
    "housed": false,
    "shortfall": 60,
    "why_museum": "em_order rotation",
-   "seconds": 40.6
+   "seconds": 37.9
   },
   {
    "sequence": "noise",
@@ -1313,17 +1295,17 @@
    "anchors": 23,
    "no_brief": 0,
    "offered": 35,
-   "placed": 32,
+   "placed": 33,
    "interior": 22,
-   "rejected": 3,
+   "rejected": 2,
    "venues": {
     "interior": 22,
-    "courtyard": 7,
+    "courtyard": 8,
     "porch": 2,
     "outside": 1
    },
    "reasons": {
-    "escalation": 3
+    "escalation": 2
    },
    "reason_examples": [
     {
@@ -1332,10 +1314,6 @@
     },
     {
      "token": "7_8_hexagon_ca_vr",
-     "why": "escalation: precinct: no exterior venue is large enough either"
-    },
-    {
-     "token": "disease_spread_ca",
      "why": "escalation: precinct: no exterior venue is large enough either"
     }
    ],
@@ -1395,18 +1373,17 @@
    "anchors": 45,
    "no_brief": 0,
    "offered": 65,
-   "placed": 53,
+   "placed": 59,
    "interior": 36,
-   "rejected": 12,
+   "rejected": 6,
    "venues": {
     "interior": 36,
     "porch": 3,
-    "courtyard": 8,
+    "courtyard": 14,
     "outside": 6
    },
    "reasons": {
-    "escalation": 11,
-    "body_inside_room": 1
+    "escalation": 6
    },
    "reason_examples": [
     {
@@ -1503,7 +1480,7 @@
    "housed": false,
    "shortfall": 29,
    "why_museum": "em_order rotation",
-   "seconds": 11.3
+   "seconds": 11.0
   },
   {
    "sequence": "lsystems",
@@ -1513,13 +1490,13 @@
    "no_brief": 0,
    "offered": 30,
    "placed": 27,
-   "interior": 17,
+   "interior": 18,
    "rejected": 3,
    "venues": {
-    "porch": 5,
-    "interior": 17,
-    "courtyard": 2,
-    "outside": 3
+    "courtyard": 5,
+    "interior": 18,
+    "porch": 2,
+    "outside": 2
    },
    "reasons": {
     "escalation": 3
@@ -1576,11 +1553,11 @@
     "escher_staircase",
     "angle_sum_triangle"
    ],
-   "interior_share": 0.5667,
+   "interior_share": 0.6,
    "housed": false,
-   "shortfall": 13,
+   "shortfall": 12,
    "why_museum": "crowned",
-   "seconds": 2.3
+   "seconds": 1.7
   },
   {
    "sequence": "proceduralgeneration",
@@ -1593,10 +1570,10 @@
    "interior": 3,
    "rejected": 8,
    "venues": {
-    "courtyard": 6,
+    "courtyard": 7,
     "interior": 3,
     "porch": 2,
-    "outside": 3
+    "outside": 2
    },
    "reasons": {
     "escalation": 8
@@ -1662,17 +1639,17 @@
    "anchors": 16,
    "no_brief": 0,
    "offered": 30,
-   "placed": 27,
+   "placed": 28,
    "interior": 13,
-   "rejected": 3,
+   "rejected": 2,
    "venues": {
     "porch": 5,
     "interior": 13,
-    "courtyard": 4,
-    "outside": 5
+    "courtyard": 6,
+    "outside": 4
    },
    "reasons": {
-    "escalation": 3
+    "escalation": 2
    },
    "reason_examples": [
     {
@@ -1682,10 +1659,6 @@
     {
      "token": "soft_mushrooms",
      "why": "escalation: precinct: no exterior venue is large enough either"
-    },
-    {
-     "token": "rainbow",
-     "why": "escalation: precinct: no exterior venue is large enough either"
     }
    ],
    "slots": 15,
@@ -1693,7 +1666,7 @@
    "rooms_on_disk": 30,
    "rooms_authored": 30,
    "lineages": 13,
-   "lineages_walled": 4,
+   "lineages_walled": 5,
    "cast": [
     "softmill",
     "jelly_cube",
@@ -1812,7 +1785,7 @@
    "housed": false,
    "shortfall": 27,
    "why_museum": "crowned",
-   "seconds": 250.9
+   "seconds": 266.7
   },
   {
    "sequence": "boolean_surfaces",
@@ -1850,7 +1823,7 @@
    "housed": false,
    "shortfall": 1,
    "why_museum": "em_order rotation",
-   "seconds": 0.4
+   "seconds": 0.5
   },
   {
    "sequence": "swarmintelligence",
@@ -1918,7 +1891,7 @@
    "housed": false,
    "shortfall": 8,
    "why_museum": "em_order rotation",
-   "seconds": 3.6
+   "seconds": 4.4
   },
   {
    "sequence": "machinelearning",
@@ -1927,17 +1900,16 @@
    "anchors": 19,
    "no_brief": 0,
    "offered": 25,
-   "placed": 12,
+   "placed": 17,
    "interior": 3,
-   "rejected": 13,
+   "rejected": 8,
    "venues": {
     "porch": 2,
-    "courtyard": 5,
-    "interior": 3,
-    "outside": 2
+    "courtyard": 12,
+    "interior": 3
    },
    "reasons": {
-    "escalation": 13
+    "escalation": 8
    },
    "reason_examples": [
     {
@@ -1994,7 +1966,7 @@
    "housed": false,
    "shortfall": 22,
    "why_museum": "em_order rotation",
-   "seconds": 4.5
+   "seconds": 4.0
   },
   {
    "sequence": "graphtheory",
@@ -2003,17 +1975,17 @@
    "anchors": 14,
    "no_brief": 0,
    "offered": 18,
-   "placed": 10,
-   "interior": 2,
-   "rejected": 8,
+   "placed": 11,
+   "interior": 3,
+   "rejected": 7,
    "venues": {
-    "interior": 2,
+    "interior": 3,
+    "courtyard": 5,
     "porch": 1,
-    "courtyard": 3,
-    "outside": 4
+    "outside": 2
    },
    "reasons": {
-    "escalation": 8
+    "escalation": 7
    },
    "reason_examples": [
     {
@@ -2059,11 +2031,11 @@
     "push_relabel_algorithm",
     "edmonds_algorithm"
    ],
-   "interior_share": 0.1111,
+   "interior_share": 0.1667,
    "housed": false,
-   "shortfall": 16,
+   "shortfall": 15,
    "why_museum": "crowned",
-   "seconds": 6.1
+   "seconds": 5.3
   },
   {
    "sequence": "foundationscrisis",
@@ -2157,8 +2129,8 @@
    "venues": {
     "interior": 22,
     "porch": 7,
-    "outside": 19,
-    "courtyard": 1
+    "courtyard": 2,
+    "outside": 18
    },
    "reasons": {
     "escalation": 1,
@@ -2237,7 +2209,7 @@
    "housed": false,
    "shortfall": 29,
    "why_museum": "em_order rotation",
-   "seconds": 3.1
+   "seconds": 3.2
   },
   {
    "sequence": "postfoundationscrisis",
@@ -2252,7 +2224,8 @@
    "venues": {
     "interior": 21,
     "porch": 4,
-    "outside": 3
+    "courtyard": 1,
+    "outside": 2
    },
    "reasons": {
     "escalation": 1
@@ -2304,7 +2277,7 @@
    "housed": false,
    "shortfall": 8,
    "why_museum": "crowned",
-   "seconds": 3.2
+   "seconds": 3.4
   }
  ],
  "plan": {

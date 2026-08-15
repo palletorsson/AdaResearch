@@ -71,7 +71,16 @@ func _run() -> void:
 	inst.call("_edit_handle_key", KEY_RIGHT)
 	inst.call("_edit_handle_key", KEY_RIGHT)
 	inst.call("_edit_handle_key", KEY_DOWN)
+	inst.set("_edit_shift", true)     # SHIFT+R = the 90 deg the trial asserts
 	inst.call("_edit_handle_key", KEY_R)
+	inst.set("_edit_shift", false)
+	# v3: the fine nudge. SHIFT+LEFT twice = -0.4 m x, PGUP once = +0.2 m y;
+	# an `offset` ruling of [-0.4, 0.2, 0.0] must land in the file.
+	inst.set("_edit_shift", true)
+	inst.call("_edit_handle_key", KEY_LEFT)
+	inst.call("_edit_handle_key", KEY_LEFT)
+	inst.set("_edit_shift", false)
+	inst.call("_edit_handle_key", KEY_PAGEUP)
 	# ── v2: the palette. [ browses the chapter the camera stands in; ENTER
 	# stamps the pick 2.5 m ahead and records an ADD ruling.
 	#
@@ -150,12 +159,17 @@ func _run() -> void:
 					% [ov.get("rotation"), want_rot, base_rot])
 			if String(ov.get("provenance", "")) != "hand":
 				fails.append("provenance %s != hand" % ov.get("provenance"))
+				var off: Array = ov.get("offset", [])
+				if off.size() < 3:
+					fails.append("no `offset` ruling - the fine nudge wrote nothing")
+				elif absf(float(off[0]) + 0.4) > 0.01 or absf(float(off[1]) - 0.2) > 0.01 or absf(float(off[2])) > 0.01:
+					fails.append("offset %s != [-0.4, 0.2, 0.0]" % str(off))
 	_verdict(fails)
 
 
 func _verdict(fails: Array[String]) -> void:
 	if fails.is_empty():
-		print("EDITOR TRIAL: PASS — E picked, arrows moved, R turned, F5 wrote the ruling")
+		print("EDITOR TRIAL: PASS — E picked, arrows moved, SHIFT-arrows fine-nudged, R turned, F5 wrote the ruling")
 	else:
 		print("EDITOR TRIAL: FAIL %d" % fails.size())
 		for f in fails:

@@ -152,7 +152,7 @@ static func hud(root: Node) -> Label:
 
 static func hud_text(records: Array, sel: int, overrides: Array, dirty: bool,
 		pal: Array = [], pal_i: int = -1) -> String:
-	var head := "[EDIT]  E select · arrows move · Q/R rotate · DEL remove · [ ] palette · ENTER add · F5 save"
+	var head := "[EDIT]  E select · arrows move (SHIFT 0.2 m) · PGUP/PGDN 0.2 m · Q/R turn 15° (SHIFT 90°) · DEL · [ ] palette · ENTER add · F5 save"
 	if pal_i >= 0 and pal_i < pal.size():
 		head += "
 add: %s  (%d/%d) — ENTER places it 2.5 m ahead" % [
