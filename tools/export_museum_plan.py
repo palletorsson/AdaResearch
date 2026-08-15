@@ -140,6 +140,11 @@ def plan_museum(key: str, tokens: list[str]) -> dict[str, Any]:
             # court dims ride the row only when the negotiator granted a court;
             # absent otherwise, so v1 rows are byte-identical.
             **({"court": list(p.court_m)} if getattr(p, "court_m", None) else {}),
+            # Rung 3: a broad court can preserve the spine with a protected
+            # bridge. The negotiator names that topology; the assembler only
+            # renders it. Absent for every original centred court.
+            **({"court_access": p.court_access}
+               if getattr(p, "court_access", None) else {}),
             # SPIKE 09 rung 1: the bay the tile must open for this row, in TILE
             # coordinates (apron subtracted HERE, same law as tile_cell). Absent
             # on every row the bay rung did not touch — v1 rows byte-identical.

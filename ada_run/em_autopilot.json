@@ -1,28 +1,24 @@
 {
- "cells_unlearned": 6,
+ "cells_unlearned": 7,
  "done": true,
- "elapsed_s": 33.1666666666661,
- "frontier_z": 44,
- "goal_z": 102.0,
- "museums_target": 3,
- "ok": false,
- "reason": "no_route",
+ "elapsed_s": 185.150000000039,
+ "frontier_z": 724,
+ "goal_z": 611.0,
+ "museums_target": 6,
+ "ok": true,
+ "reason": "",
  "seams": [
   [
-   0.0,
-   34.0
+   509.0,
+   611.0
   ],
   [
-   34.0,
-   68.0
-  ],
-  [
-   68.0,
-   102.0
+   611.0,
+   725.0
   ]
  ],
- "segments_built": 3,
- "stall_events": 14,
- "x": 7.49890041351318,
- "z": 44.6490669250488
+ "segments_built": 7,
+ "stall_events": 7,
+ "x": 9.55298614501953,
+ "z": 611.03076171875
 }

@@ -222,6 +222,41 @@ class NegotiationTests(unittest.TestCase):
         self.assertTrue(any(t.rule == "containment" for t in p.traces),
                         "the decision must name the category")
 
+    def test_a_broad_precinct_gets_a_bridge_courtyard(self) -> None:
+        """Rung 3: the court may widen beside the route, not across it.
+
+        An 18 m square cannot leave a walkable column in the 15 m Sainsbury
+        spine in either rotation. It is still small enough to be experienced
+        as part of the museum, so the negotiated topology is a bridge court.
+        """
+        from dataclasses import replace
+        base = sc.resolve("neural_network_visualization")
+        c = replace(base, body_m=[18.0, 18.0, base.body_m[2]],
+                    footprint_cells=[18, 18], containment="precinct",
+                    preferred_venue="courtyard")
+        p = neg.negotiate(c, fp.from_museum("sainsbury-false-perspective-enfilade"),
+                          neg.Occupancy())
+        self.assertEqual("ACCEPT", p.result)
+        self.assertEqual("courtyard", p.venue)
+        self.assertEqual("bridge", p.court_access)
+        self.assertEqual([24, 24], p.court_m)
+        self.assertTrue(any(t.rule == "escalation" and "bridge courtyard" in t.detail
+                            for t in p.traces))
+
+    def test_a_world_over_40m_stays_for_a_dedicated_map(self) -> None:
+        """The bridge is not a loophole that turns a world into a corridor."""
+        from dataclasses import replace
+        base = sc.resolve("neural_network_visualization")
+        c = replace(base, body_m=[41.0, 41.0, base.body_m[2]],
+                    footprint_cells=[41, 41], containment="precinct",
+                    preferred_venue="courtyard")
+        p = neg.negotiate(c, fp.from_museum("sainsbury-false-perspective-enfilade"),
+                          neg.Occupancy())
+        self.assertEqual("REJECT", p.result)
+        self.assertIsNone(p.court_access)
+        self.assertTrue(any(t.status == "fail" and "dedicated map required" in t.detail
+                            for t in p.traces))
+
     def test_presentation_overlap_costs_score_but_never_validity(self) -> None:
         plan = fp.build_enfilade(bays=3)
         occ = neg.Occupancy()

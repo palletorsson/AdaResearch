@@ -3,7 +3,45 @@
 *Fast-changing implementation state. Doctrine lives in `doc/SPATIAL_PIPELINE.md`
 (915 lines, commits `fdbfeb8d6` + `a8b7fef18`) on `origin/palm-scanner-door-entry`.*
 
-Updated 2026-08-14.
+Updated 2026-08-15.
+
+## What changed on 08-15 — rung three became the bridge-courtyard
+
+Palle's ruling is now explicit: a broad precinct up to 40 m may stay in the
+museum when the building gives it a courtyard beside a continuous bridge.
+The plan owns that exception as `court_access: "bridge"`; the assembler does
+not guess it from dimensions. Larger worlds still refuse and ask for a
+dedicated map.
+
+The 1 m-grid assembly now builds a 4 m bridge, a single 4 m court gate, and a
+3 m walkable apron around the artifact body. The court core is deliberately
+absent from the walk map. Existing centered courtyards retain their old
+clamping and topology.
+
+Full-corpus regeneration changed the negotiated result from 943 placed / 213
+rejected to **1010 placed / 146 rejected**: 68 placements carry bridge access,
+67 previously refused works enter, and size escalations fall from 95 to 29.
+No bridge body exceeds 40 m. The remaining 28 larger precinct worlds retain
+dedicated-map refusal.
+
+The compact assembled `em_plan.json` delivery subset is a different scope: 17
+museum formulas, 762 placements, 30 refusals, and 51 bridge courts. Keep those
+delivery counts distinct from the 24-sequence negotiation corpus above.
+
+Evidence:
+
+- `test_spatial_contract.py`: 23/23.
+- `test_em_plan_chapters.py`: 1/1.
+- `test_em_bridge_courts.gd`: PASS (route, gate, core, apron, legacy court).
+- `test_em_bays.gd`: PASS; `test_em_vr_floor.gd`: PASS (636 VR floor
+  colliders, zero desktop floor colliders).
+- Six-museum real-collision autopilot: PASS at z=611 m in 185.2 s. Seven
+  recovery events resolved; artifact teardown still emits the existing
+  freed-object/process-frame cleanup errors after the route succeeds.
+- Forward capture: `ada_run/spatial_recommendation/bridge_court_dark_oak.png`.
+
+`ada_run/em_overrides.json` remains absent: this is a negotiated rule and a
+plan/assembler capability, not a hidden hand-placement exception.
 
 ## What changed on 08-14 — the museum entered the shipped game loop
 

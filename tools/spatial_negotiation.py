@@ -336,6 +336,12 @@ class Placement:
     #: never re-derives it from the body — re-deriving is how the two sides
     #: drift (the 4 m vestibule offset was exactly that, spike 03).
     court_m: list[int] | None = None
+    #: How a courtyard preserves the endless route. None is the original
+    #: centred court. ``bridge`` means the court expands beside a protected
+    #: through-bridge, so a broad precinct can be entered without its body
+    #: severing the museum. This is a negotiated result: the assembler may
+    #: render it, but may not infer it from body size.
+    court_access: str | None = None
     #: SPIKE 09 rung 1: interior wall cells (plan-grid coords, apron included)
     #: the tile must open into floor for this placement to exist. Set only by
     #: the bay rung. The assembler subtracts the apron and applies them to the
@@ -352,6 +358,7 @@ class Placement:
             "support_height_m": self.support_height_m,
             "score": round(self.score, 3), "result": self.result,
             "court_m": self.court_m,
+            "court_access": self.court_access,
             "bay_cells": [list(c) for c in self.bay_cells] if self.bay_cells else None,
             "exceptions": self.exceptions,
             "rules": [t.as_dict() for t in self.traces],
@@ -680,6 +687,13 @@ def hang_on_wall(contract: SpatialContract, wall: WallSurface,
 #: is a demolition — the template's rooms stop being rooms.
 BAY_MAX_CELLS = 24
 
+#: Rung 3: a broad precinct up to this size stays in the endless museum, in a
+#: courtyard beside a protected bridge. Larger bodies are worlds: giving a
+#: 300 m scene a 306 m joint would turn the curriculum walk into empty travel,
+#: so those remain explicit dedicated-map work rather than silently scaling
+#: down or monopolising the spine.
+BRIDGE_COURT_MAX_M = 40.0
+
 
 def _try_bay(contract: SpatialContract, plan: FloorPlan, occ: Occupancy,
              ladder: list[Trace]) -> Placement | None:
@@ -844,18 +858,30 @@ def negotiate(contract: SpatialContract, plan: FloorPlan, occ: Occupancy,
                     f"courtyard granted TURNED: {body_x:.1f} m across would "
                     f"sever a {tile_w}-cell corridor, {body_z:.1f} m across "
                     f"leaves a walkable column"))
-            if contract.preferred_venue == "courtyard" and tile_w >= 6                     and int(_m.ceil(min(body_x, body_z))) > tile_w - 3:
-                ladder.append(Trace(
-                    "escalation", "fail",
-                    f"courtyard refused: {body_x:.1f} x {body_z:.1f} m body - "
-                    f"even its narrow side leaves no walkable column in a "
-                    f"{tile_w}-cell corridor (widest crossable is {tile_w - 3}); "
-                    f"a WORLD, not an exhibit - Palle's ruling (spike 09 rung 3)"))
-            else:
+            court_access: str | None = None
+            if (contract.preferred_venue == "courtyard" and tile_w >= 6
+                    and int(_m.ceil(min(body_x, body_z))) > tile_w - 3):
+                if max(body_x, body_z) <= BRIDGE_COURT_MAX_M:
+                    court_access = "bridge"
+                    ladder.append(Trace(
+                        "escalation", "compromised",
+                        f"bridge courtyard granted: {body_x:.1f} x {body_z:.1f} m "
+                        f"would sever the {tile_w}-cell spine even turned, so its "
+                        f"3 m apron expands beside a protected through-bridge"))
+                else:
+                    ladder.append(Trace(
+                        "escalation", "fail",
+                        f"courtyard refused: {body_x:.1f} x {body_z:.1f} m body - "
+                        f"even its narrow side leaves no walkable column in a "
+                        f"{tile_w}-cell corridor (widest crossable is {tile_w - 3}); "
+                        f"over {BRIDGE_COURT_MAX_M:.0f} m is a WORLD, not a bridge "
+                        f"court - dedicated map required (Palle's rung 3 ruling)"))
+                    court = []
+            if court:
                 ladder.append(Trace(
                     "escalation", "pass",
                     f"precinct: a {court[0]} x {court[1]} cell "
-                    f"{contract.preferred_venue} made to measure "
+                    f"{('bridge ' if court_access else '')}{contract.preferred_venue} made to measure "
                     f"(body + 3 m apron each side; no roof, so height is free)"))
                 return Placement(
                     artifact=contract.lookup, slot=contract.preferred_venue,
@@ -870,7 +896,8 @@ def negotiate(contract: SpatialContract, plan: FloorPlan, occ: Occupancy,
                     # masks is a silent decision — the suite rightly refuses it,
                     # and the assembler seals from the same envelope.
                     masks=masks(contract, court_rot, "freestanding"),
-                    contract=contract, court_m=court)
+                    contract=contract, court_m=court,
+                    court_access=court_access)
         # ── SPIKE 09 RUNG 1: THE BAY. A precinct body that would fit the tile
         # WIDTH but not any room in it is not homeless — the tile can open a
         # bay: interior wall cells inside the body's envelope become floor.

@@ -2,7 +2,7 @@
   "schema": "adaresearch.em_plan.v2",
   "_readme": "Placements resolved by tools/spatial_negotiation.py. Read by commons/scenes/endless_museum.gd under --em-plan. A museum key absent here deals exactly as it did before.",
   "_spine_run": {
-    "at": "2026-08-15T08:46:09",
+    "at": "2026-08-15T16:47:54",
     "owner": {
       "sainsbury-false-perspective-enfilade": "primitives",
       "uffizi-spine-enfilade": "transformation",
@@ -1021,6 +1021,28 @@
           "wall": null
         },
         {
+          "token": "dome",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            26,
+            26
+          ],
+          "court_access": "bridge"
+        },
+        {
           "token": "folded_strip",
           "cell": [
             21,
@@ -1926,10 +1948,6 @@
           "why": "body_inside_room: body cell (18, 14) is wall or void"
         },
         {
-          "token": "dome",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
           "token": "artifact_workstation",
           "why": "body_inside_room: body cell (19, 38) is wall or void"
         },
@@ -2340,6 +2358,28 @@
           "wall": null
         },
         {
+          "token": "carousel_cake",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            21,
+            21
+          ],
+          "court_access": "bridge"
+        },
+        {
           "token": "translation_cube_demo",
           "cell": [
             24,
@@ -2667,12 +2707,7 @@
           "wall": null
         }
       ],
-      "rejected": [
-        {
-          "token": "carousel_cake",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        }
-      ],
+      "rejected": [],
       "room": {
         "w": 43,
         "h": 58
@@ -2804,6 +2839,28 @@
           "wall": null
         },
         {
+          "token": "GeneticProgramming",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            36,
+            30
+          ],
+          "court_access": "bridge"
+        },
+        {
           "token": "pattern_atlas_gallery",
           "cell": [
             0,
@@ -2844,18 +2901,18 @@
         {
           "token": "pattern_machine_c",
           "cell": [
-            18,
+            21,
             10
           ],
           "tile_cell": [
-            4,
+            7,
             -4
           ],
           "rotation": 90,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.0,
-          "slot": "grande-galerie-axial/1,2",
+          "slot": "grande-galerie-axial/11,2",
           "wall": null
         },
         {
@@ -3116,18 +3173,18 @@
         {
           "token": "vr_tile_editor",
           "cell": [
-            25,
-            9
+            21,
+            54
           ],
           "tile_cell": [
-            11,
-            -5
+            7,
+            40
           ],
-          "rotation": 270,
+          "rotation": 0,
           "mode": "freestanding",
-          "venue": "porch",
+          "venue": "outside",
           "support_height_m": 0.0,
-          "slot": "grande-galerie-axial/porch",
+          "slot": "grande-galerie-axial/outside",
           "wall": null
         },
         {
@@ -3165,12 +3222,7 @@
           "wall": null
         }
       ],
-      "rejected": [
-        {
-          "token": "GeneticProgramming",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        }
-      ],
+      "rejected": [],
       "room": {
         "w": 41,
         "h": 64
@@ -3317,6 +3369,50 @@
           "support_height_m": 0.0,
           "slot": "altes-rotunda-hub/porch",
           "wall": null
+        },
+        {
+          "token": "facade_grammar_demo",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            20,
+            22
+          ],
+          "court_access": "bridge"
+        },
+        {
+          "token": "xyz_slider_plate",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            25,
+            24
+          ],
+          "court_access": "bridge"
         },
         {
           "token": "grid_model",
@@ -3849,16 +3945,7 @@
           "wall": null
         }
       ],
-      "rejected": [
-        {
-          "token": "facade_grammar_demo",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "xyz_slider_plate",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        }
-      ],
+      "rejected": [],
       "room": {
         "w": 43,
         "h": 57
@@ -4631,6 +4718,28 @@
           "wall": null
         },
         {
+          "token": "spectrum_forest",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            26,
+            26
+          ],
+          "court_access": "bridge"
+        },
+        {
           "token": "SpectrumVisualizer",
           "cell": [
             0,
@@ -5070,10 +5179,6 @@
         {
           "token": "science_screen",
           "why": "support_matches_contract: slot offers 'floor', artifact needs 'wall'"
-        },
-        {
-          "token": "spectrum_forest",
-          "why": "escalation: precinct: no exterior venue is large enough either"
         }
       ],
       "room": {
@@ -6776,6 +6881,28 @@
           ]
         },
         {
+          "token": "vector_field",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            27,
+            27
+          ],
+          "court_access": "bridge"
+        },
+        {
           "token": "quantum_field",
           "cell": [
             0,
@@ -6974,6 +7101,28 @@
           ]
         },
         {
+          "token": "vector_joint_playground",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            24,
+            24
+          ],
+          "court_access": "bridge"
+        },
+        {
           "token": "chaos_attractor",
           "cell": [
             27,
@@ -7006,6 +7155,28 @@
           "support_height_m": 0.0,
           "slot": "sainsbury-false-perspective-enfilade/1,3",
           "wall": "west"
+        },
+        {
+          "token": "forcedirected3d",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            28,
+            29
+          ],
+          "court_access": "bridge"
         },
         {
           "token": "network_analysis",
@@ -7306,10 +7477,6 @@
           "why": "physical_overlap: 4 body cells collide with complexity_dial_workbench"
         },
         {
-          "token": "vector_field",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
           "token": "vector_fields",
           "why": "circulation_on_floor: 3 clearance cells fall outside the floor"
         },
@@ -7382,10 +7549,6 @@
           "why": "physical_overlap: 1 body cells collide with launch_arc"
         },
         {
-          "token": "vector_joint_playground",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
           "token": "ConeTwistBag",
           "why": "faces_out_of_wall: at 0deg the back points (0, -1), but this wall needs (-1, 0)"
         },
@@ -7416,10 +7579,6 @@
         {
           "token": "example_2_8_two_body_attraction_vr",
           "why": "physical_overlap: 1 body cells collide with launch_arc"
-        },
-        {
-          "token": "forcedirected3d",
-          "why": "escalation: precinct: no exterior venue is large enough either"
         },
         {
           "token": "orbital_mechanics_demo",
@@ -7505,6 +7664,28 @@
     {
       "museum": "castelvecchio-pinch-v2",
       "artifacts": [
+        {
+          "token": "gradient_descent",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            26,
+            26
+          ],
+          "court_access": "bridge"
+        },
         {
           "token": "partial_derivative_terrain",
           "cell": [
@@ -7979,10 +8160,6 @@
       ],
       "rejected": [
         {
-          "token": "gradient_descent",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
           "token": "science_screen",
           "why": "physical_overlap: 2 body cells collide with descent_marble_toy"
         }
@@ -7998,6 +8175,28 @@
     {
       "museum": "louisiana-pavilion-chain",
       "artifacts": [
+        {
+          "token": "rotatescalecubes",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            24,
+            25
+          ],
+          "court_access": "bridge"
+        },
         {
           "token": "rotating_cube_demo",
           "cell": [
@@ -8885,6 +9084,28 @@
           ]
         },
         {
+          "token": "wave_propagation_3d",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            29,
+            29
+          ],
+          "court_access": "bridge"
+        },
+        {
           "token": "chladni_plate",
           "cell": [
             26,
@@ -9106,6 +9327,28 @@
           "wall": null
         },
         {
+          "token": "wave_interference",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            20,
+            19
+          ],
+          "court_access": "bridge"
+        },
+        {
           "token": "MelodyChaser3D",
           "cell": [
             25,
@@ -9299,6 +9542,50 @@
             14,
             14
           ]
+        },
+        {
+          "token": "john_cage_tech_noir",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            19,
+            21
+          ],
+          "court_access": "bridge"
+        },
+        {
+          "token": "tech_noir_audio",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            22,
+            20
+          ],
+          "court_access": "bridge"
         },
         {
           "token": "RackAmbientDrone",
@@ -9572,6 +9859,28 @@
           "wall": null
         },
         {
+          "token": "coloredlines",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            31,
+            34
+          ],
+          "court_access": "bridge"
+        },
+        {
           "token": "hallway_scene",
           "cell": [
             0,
@@ -9718,28 +10027,8 @@
       ],
       "rejected": [
         {
-          "token": "rotatescalecubes",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
           "token": "science_screen",
           "why": "support_matches_contract: slot offers 'podium', artifact needs 'wall'"
-        },
-        {
-          "token": "wave_propagation_3d",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "wave_interference",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "john_cage_tech_noir",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "tech_noir_audio",
-          "why": "escalation: precinct: no exterior venue is large enough either"
         },
         {
           "token": "air_music_display_case",
@@ -9752,10 +10041,6 @@
         {
           "token": "CircleSpiral",
           "why": "body_inside_room: body cell (17, 29) is wall or void"
-        },
-        {
-          "token": "coloredlines",
-          "why": "escalation: precinct: no exterior venue is large enough either"
         }
       ],
       "room": {
@@ -9899,19 +10184,24 @@
         {
           "token": "GaussianBlurCircle",
           "cell": [
-            7,
-            44
+            0,
+            0
           ],
           "tile_cell": [
-            -7,
-            30
+            -14,
+            -14
           ],
           "rotation": 0,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "courtyard",
           "support_height_m": 0.0,
-          "slot": "soane-cabinet-vista/outside",
-          "wall": null
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            17,
+            27
+          ],
+          "court_access": "bridge"
         },
         {
           "token": "2d_in_3d_randomness_vis",
@@ -10177,6 +10467,28 @@
           "wall": null
         },
         {
+          "token": "hazards_demo",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            22,
+            22
+          ],
+          "court_access": "bridge"
+        },
+        {
           "token": "edible_mushroom",
           "cell": [
             16,
@@ -10230,6 +10542,28 @@
           "support_height_m": 0.95,
           "slot": "soane-cabinet-vista/4,6@free",
           "wall": null
+        },
+        {
+          "token": "mushrooms",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            17,
+            17
+          ],
+          "court_access": "bridge"
         },
         {
           "token": "random_edge_profile",
@@ -10458,12 +10792,12 @@
         {
           "token": "pipe_dream",
           "cell": [
-            20,
-            51
+            15,
+            50
           ],
           "tile_cell": [
-            6,
-            37
+            1,
+            36
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -10492,12 +10826,12 @@
         {
           "token": "gaussian_random",
           "cell": [
-            25,
-            53
+            20,
+            50
           ],
           "tile_cell": [
-            11,
-            39
+            6,
+            36
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -10509,12 +10843,12 @@
         {
           "token": "GaussianBlurShader",
           "cell": [
-            20,
-            48
+            6,
+            42
           ],
           "tile_cell": [
-            6,
-            34
+            -8,
+            28
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -10526,11 +10860,11 @@
         {
           "token": "GaussianPaintSplatter",
           "cell": [
-            17,
+            18,
             46
           ],
           "tile_cell": [
-            3,
+            4,
             32
           ],
           "rotation": 0,
@@ -10543,12 +10877,12 @@
         {
           "token": "rice_verifier_booth",
           "cell": [
-            29,
-            39
+            24,
+            48
           ],
           "tile_cell": [
-            15,
-            25
+            10,
+            34
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -10558,14 +10892,36 @@
           "wall": null
         },
         {
-          "token": "monte_carlo",
+          "token": "random_bell_curve",
           "cell": [
-            22,
-            44
+            0,
+            0
           ],
           "tile_cell": [
-            8,
-            30
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            26,
+            27
+          ],
+          "court_access": "bridge"
+        },
+        {
+          "token": "monte_carlo",
+          "cell": [
+            7,
+            49
+          ],
+          "tile_cell": [
+            -7,
+            35
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -10577,12 +10933,12 @@
         {
           "token": "distribution_sampler",
           "cell": [
-            19,
-            44
+            8,
+            41
           ],
           "tile_cell": [
-            5,
-            30
+            -6,
+            27
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -10594,12 +10950,12 @@
         {
           "token": "force_field_visualizer",
           "cell": [
-            21,
-            46
+            29,
+            37
           ],
           "tile_cell": [
-            7,
-            32
+            15,
+            23
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -10645,12 +11001,12 @@
         {
           "token": "abject_bench",
           "cell": [
-            28,
-            38
+            12,
+            36
           ],
           "tile_cell": [
-            14,
-            24
+            -2,
+            22
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -10662,12 +11018,12 @@
         {
           "token": "random_number_book_page_collection",
           "cell": [
-            16,
-            51
+            11,
+            45
           ],
           "tile_cell": [
-            2,
-            37
+            -3,
+            31
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -10679,12 +11035,12 @@
         {
           "token": "tree_gen",
           "cell": [
-            28,
-            54
+            23,
+            53
           ],
           "tile_cell": [
-            14,
-            40
+            9,
+            39
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -10734,12 +11090,12 @@
         {
           "token": "breathing_room",
           "cell": [
-            23,
-            45
+            21,
+            44
           ],
           "tile_cell": [
-            9,
-            31
+            7,
+            30
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -10768,12 +11124,12 @@
         {
           "token": "VectorCrossProduct",
           "cell": [
-            22,
-            47
+            23,
+            45
           ],
           "tile_cell": [
-            8,
-            33
+            9,
+            31
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -10785,29 +11141,12 @@
         {
           "token": "pollock_painting_in_3d",
           "cell": [
-            25,
-            48
+            19,
+            53
           ],
           "tile_cell": [
-            11,
-            34
-          ],
-          "rotation": 90,
-          "mode": "freestanding",
-          "venue": "outside",
-          "support_height_m": 0.0,
-          "slot": "soane-cabinet-vista/outside",
-          "wall": null
-        },
-        {
-          "token": "catalyst_target",
-          "cell": [
-            24,
-            44
-          ],
-          "tile_cell": [
-            10,
-            30
+            5,
+            39
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -10817,14 +11156,53 @@
           "wall": null
         },
         {
-          "token": "monte_carlo_dartboard",
+          "token": "catalyst_target",
           "cell": [
-            18,
-            49
+            20,
+            48
           ],
           "tile_cell": [
-            4,
-            35
+            6,
+            34
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "soane-cabinet-vista/outside",
+          "wall": null
+        },
+        {
+          "token": "extreme_randomness",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            17,
+            17
+          ],
+          "court_access": "bridge"
+        },
+        {
+          "token": "monte_carlo_dartboard",
+          "cell": [
+            10,
+            51
+          ],
+          "tile_cell": [
+            -4,
+            37
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -10836,12 +11214,12 @@
         {
           "token": "bias_visualizer",
           "cell": [
-            15,
-            50
+            11,
+            38
           ],
           "tile_cell": [
-            1,
-            36
+            -3,
+            24
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -10851,14 +11229,80 @@
           "wall": null
         },
         {
-          "token": "noise_mixer",
+          "token": "facade_grammar_demo",
           "cell": [
-            14,
-            45
+            0,
+            0
           ],
           "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            20,
+            22
+          ],
+          "court_access": "bridge"
+        },
+        {
+          "token": "pheromone_terrain",
+          "cell": [
             0,
-            31
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            26,
+            26
+          ],
+          "court_access": "bridge"
+        },
+        {
+          "token": "random_space",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            17,
+            26
+          ],
+          "court_access": "bridge"
+        },
+        {
+          "token": "noise_mixer",
+          "cell": [
+            21,
+            47
+          ],
+          "tile_cell": [
+            7,
+            33
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -10869,6 +11313,57 @@
         },
         {
           "token": "worley_noise",
+          "cell": [
+            3,
+            45
+          ],
+          "tile_cell": [
+            -11,
+            31
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "soane-cabinet-vista/outside",
+          "wall": null
+        },
+        {
+          "token": "miura_crawler",
+          "cell": [
+            28,
+            54
+          ],
+          "tile_cell": [
+            14,
+            40
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "soane-cabinet-vista/outside",
+          "wall": null
+        },
+        {
+          "token": "kresling_spire",
+          "cell": [
+            19,
+            43
+          ],
+          "tile_cell": [
+            5,
+            29
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "soane-cabinet-vista/outside",
+          "wall": null
+        },
+        {
+          "token": "kaleidocycle_enemy",
           "cell": [
             28,
             36
@@ -10885,64 +11380,13 @@
           "wall": null
         },
         {
-          "token": "miura_crawler",
-          "cell": [
-            25,
-            43
-          ],
-          "tile_cell": [
-            11,
-            29
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "outside",
-          "support_height_m": 0.0,
-          "slot": "soane-cabinet-vista/outside",
-          "wall": null
-        },
-        {
-          "token": "kresling_spire",
-          "cell": [
-            26,
-            44
-          ],
-          "tile_cell": [
-            12,
-            30
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "outside",
-          "support_height_m": 0.0,
-          "slot": "soane-cabinet-vista/outside",
-          "wall": null
-        },
-        {
-          "token": "kaleidocycle_enemy",
-          "cell": [
-            17,
-            50
-          ],
-          "tile_cell": [
-            3,
-            36
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "outside",
-          "support_height_m": 0.0,
-          "slot": "soane-cabinet-vista/outside",
-          "wall": null
-        },
-        {
           "token": "scissor_stalker",
           "cell": [
-            16,
+            13,
             54
           ],
           "tile_cell": [
-            2,
+            -1,
             40
           ],
           "rotation": 0,
@@ -10955,12 +11399,12 @@
         {
           "token": "origami_droideka",
           "cell": [
-            14,
-            47
+            22,
+            46
           ],
           "tile_cell": [
-            0,
-            33
+            8,
+            32
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -10972,14 +11416,31 @@
         {
           "token": "armadillo_eggling",
           "cell": [
-            37,
+            26,
             45
           ],
           "tile_cell": [
-            23,
+            12,
             31
           ],
-          "rotation": 90,
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "soane-cabinet-vista/outside",
+          "wall": null
+        },
+        {
+          "token": "cube_projectile_spawner",
+          "cell": [
+            13,
+            47
+          ],
+          "tile_cell": [
+            -1,
+            33
+          ],
+          "rotation": 0,
           "mode": "freestanding",
           "venue": "outside",
           "support_height_m": 0.0,
@@ -10989,11 +11450,11 @@
         {
           "token": "r_c",
           "cell": [
-            27,
+            22,
             43
           ],
           "tile_cell": [
-            13,
+            8,
             29
           ],
           "rotation": 0,
@@ -11006,24 +11467,12 @@
       ],
       "rejected": [
         {
-          "token": "hazards_demo",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
           "token": "nature_system_demo",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "mushrooms",
           "why": "escalation: precinct: no exterior venue is large enough either"
         },
         {
           "token": "galton_board",
           "why": "faces_out_of_wall: at 0deg the back points (0, -1), but this wall needs (1, 0)"
-        },
-        {
-          "token": "random_bell_curve",
-          "why": "escalation: precinct: no exterior venue is large enough either"
         },
         {
           "token": "bubbles_random",
@@ -11034,28 +11483,8 @@
           "why": "escalation: precinct: no exterior venue is large enough either"
         },
         {
-          "token": "extreme_randomness",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "facade_grammar_demo",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "pheromone_terrain",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
           "token": "ca_bridge",
           "why": "body_inside_room: body cell (22, 14) is wall or void"
-        },
-        {
-          "token": "random_space",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "cube_projectile_spawner",
-          "why": "body_inside_room: body cell (14, 18) is wall or void"
         }
       ],
       "room": {
@@ -11146,6 +11575,50 @@
           ]
         },
         {
+          "token": "WhiteNoiseGallery",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            26,
+            28
+          ],
+          "court_access": "bridge"
+        },
+        {
+          "token": "MeltingBerniniScene",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            19,
+            19
+          ],
+          "court_access": "bridge"
+        },
+        {
           "token": "dark_sphere",
           "cell": [
             25,
@@ -11222,6 +11695,28 @@
           "wall": null
         },
         {
+          "token": "voxelnoise",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            38,
+            38
+          ],
+          "court_access": "bridge"
+        },
+        {
           "token": "flow_field_painter",
           "cell": [
             19,
@@ -11237,6 +11732,28 @@
           "support_height_m": 0.0,
           "slot": "kanazawa-room-matrix/4,10@free",
           "wall": null
+        },
+        {
+          "token": "shader_noise_space",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            25,
+            34
+          ],
+          "court_access": "bridge"
         },
         {
           "token": "noise_space",
@@ -11258,6 +11775,28 @@
             16,
             16
           ]
+        },
+        {
+          "token": "noisesphere",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            38,
+            36
+          ],
+          "court_access": "bridge"
         },
         {
           "token": "complexity_pattern",
@@ -11368,27 +11907,7 @@
       ],
       "rejected": [
         {
-          "token": "WhiteNoiseGallery",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "MeltingBerniniScene",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
           "token": "noiselayers",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "voxelnoise",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "shader_noise_space",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "noisesphere",
           "why": "escalation: precinct: no exterior venue is large enough either"
         },
         {
@@ -11690,6 +12209,50 @@
           "support_height_m": 0.0,
           "slot": "neue-nationalgalerie-free-plan/porch",
           "wall": null
+        },
+        {
+          "token": "hexagon_ca_vr",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            42,
+            37
+          ],
+          "court_access": "bridge"
+        },
+        {
+          "token": "7_8_hexagon_ca_vr",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            42,
+            37
+          ],
+          "court_access": "bridge"
         },
         {
           "token": "crossway_ca",
@@ -12001,16 +12564,7 @@
           "wall": null
         }
       ],
-      "rejected": [
-        {
-          "token": "hexagon_ca_vr",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "7_8_hexagon_ca_vr",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        }
-      ],
+      "rejected": [],
       "room": {
         "w": 43,
         "h": 55
@@ -12167,6 +12721,28 @@
           ]
         },
         {
+          "token": "carousel_cake",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            21,
+            21
+          ],
+          "court_access": "bridge"
+        },
+        {
           "token": "fractal_recursion_circles",
           "cell": [
             25,
@@ -12237,6 +12813,50 @@
           "support_height_m": 0.95,
           "slot": "pompidou-plateau-libre/3,5",
           "wall": null
+        },
+        {
+          "token": "inverted_tree_cloud",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            18,
+            21
+          ],
+          "court_access": "bridge"
+        },
+        {
+          "token": "recursive_tree",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            22,
+            22
+          ],
+          "court_access": "bridge"
         },
         {
           "token": "branching_growth_algorithm",
@@ -12715,19 +13335,24 @@
         {
           "token": "fibonacci_sequences",
           "cell": [
-            31,
-            57
+            0,
+            0
           ],
           "tile_cell": [
-            17,
-            43
+            -14,
+            -14
           ],
           "rotation": 0,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "courtyard",
           "support_height_m": 0.0,
-          "slot": "pompidou-plateau-libre/outside",
-          "wall": null
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            20,
+            18
+          ],
+          "court_access": "bridge"
         },
         {
           "token": "romanesco",
@@ -12749,11 +13374,11 @@
         {
           "token": "golden_rectangle",
           "cell": [
-            16,
+            24,
             53
           ],
           "tile_cell": [
-            2,
+            10,
             39
           ],
           "rotation": 0,
@@ -12767,11 +13392,11 @@
           "token": "fibonacci_terrain",
           "cell": [
             13,
-            59
+            57
           ],
           "tile_cell": [
             -1,
-            45
+            43
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -12779,6 +13404,50 @@
           "support_height_m": 0.0,
           "slot": "pompidou-plateau-libre/outside",
           "wall": null
+        },
+        {
+          "token": "curation_station",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            25,
+            19
+          ],
+          "court_access": "bridge"
+        },
+        {
+          "token": "julia_set",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            18,
+            18
+          ],
+          "court_access": "bridge"
         },
         {
           "token": "julia_set_explorer",
@@ -13033,12 +13702,12 @@
         {
           "token": "Hilbert3D",
           "cell": [
-            9,
-            47
+            25,
+            59
           ],
           "tile_cell": [
-            -5,
-            33
+            11,
+            45
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -13084,27 +13753,7 @@
       ],
       "rejected": [
         {
-          "token": "carousel_cake",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "inverted_tree_cloud",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "recursive_tree",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
           "token": "mobius_world",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "curation_station",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "julia_set",
           "why": "escalation: precinct: no exterior venue is large enough either"
         }
       ],
@@ -13370,6 +14019,28 @@
           "wall": null
         },
         {
+          "token": "CityGenerator",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            24,
+            24
+          ],
+          "court_access": "bridge"
+        },
+        {
           "token": "lsystem_dungeon",
           "cell": [
             18,
@@ -13419,6 +14090,28 @@
           "support_height_m": 0.0,
           "slot": "grande-galerie-axial/porch",
           "wall": null
+        },
+        {
+          "token": "curation_station",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            25,
+            19
+          ],
+          "court_access": "bridge"
         },
         {
           "token": "branching_coral",
@@ -13565,6 +14258,28 @@
           "wall": null
         },
         {
+          "token": "museum_hall_shell",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            36,
+            25
+          ],
+          "court_access": "bridge"
+        },
+        {
           "token": "escher_staircase",
           "cell": [
             33,
@@ -13599,20 +14314,7 @@
           "wall": null
         }
       ],
-      "rejected": [
-        {
-          "token": "CityGenerator",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "curation_station",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "museum_hall_shell",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        }
-      ],
+      "rejected": [],
       "room": {
         "w": 41,
         "h": 64
@@ -13624,6 +14326,28 @@
     {
       "museum": "dia-beacon-field",
       "artifacts": [
+        {
+          "token": "GeneticProgramming",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            36,
+            30
+          ],
+          "court_access": "bridge"
+        },
         {
           "token": "space_colonization_algorithm",
           "cell": [
@@ -13644,6 +14368,28 @@
             14,
             14
           ]
+        },
+        {
+          "token": "genetic_programming",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            36,
+            31
+          ],
+          "court_access": "bridge"
         },
         {
           "token": "inverted_tree_cloud",
@@ -13688,6 +14434,28 @@
           ]
         },
         {
+          "token": "caverandomwalk",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            26,
+            26
+          ],
+          "court_access": "bridge"
+        },
+        {
           "token": "dark_sphere",
           "cell": [
             18,
@@ -13703,6 +14471,28 @@
           "support_height_m": 0.95,
           "slot": "dia-beacon-field/2,22",
           "wall": null
+        },
+        {
+          "token": "organic_space",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            32,
+            31
+          ],
+          "court_access": "bridge"
         },
         {
           "token": "branching_growth_algorithm",
@@ -13747,14 +14537,36 @@
           ]
         },
         {
-          "token": "sculpt_one",
+          "token": "maze_generation",
           "cell": [
-            26,
-            11
+            0,
+            0
           ],
           "tile_cell": [
-            12,
-            -3
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            36,
+            36
+          ],
+          "court_access": "bridge"
+        },
+        {
+          "token": "sculpt_one",
+          "cell": [
+            21,
+            10
+          ],
+          "tile_cell": [
+            7,
+            -4
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -13764,20 +14576,42 @@
           "wall": null
         },
         {
-          "token": "layered_membrane",
+          "token": "curation_station",
           "cell": [
-            19,
-            8
+            0,
+            0
           ],
           "tile_cell": [
-            5,
-            -6
+            -14,
+            -14
           ],
           "rotation": 0,
           "mode": "freestanding",
-          "venue": "porch",
+          "venue": "courtyard",
           "support_height_m": 0.0,
-          "slot": "dia-beacon-field/porch",
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            25,
+            19
+          ],
+          "court_access": "bridge"
+        },
+        {
+          "token": "layered_membrane",
+          "cell": [
+            21,
+            49
+          ],
+          "tile_cell": [
+            7,
+            35
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "dia-beacon-field/outside",
           "wall": null
         },
         {
@@ -13819,14 +14653,36 @@
           "wall": null
         },
         {
-          "token": "triangleprofiles",
+          "token": "dome",
           "cell": [
-            21,
-            49
+            0,
+            0
           ],
           "tile_cell": [
-            7,
-            35
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            26,
+            26
+          ],
+          "court_access": "bridge"
+        },
+        {
+          "token": "triangleprofiles",
+          "cell": [
+            14,
+            48
+          ],
+          "tile_cell": [
+            0,
+            34
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -13838,11 +14694,11 @@
         {
           "token": "mirror_cellular_texture_for_3d",
           "cell": [
-            14,
+            29,
             48
           ],
           "tile_cell": [
-            0,
+            15,
             34
           ],
           "rotation": 0,
@@ -13892,34 +14748,6 @@
         }
       ],
       "rejected": [
-        {
-          "token": "GeneticProgramming",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "genetic_programming",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "caverandomwalk",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "organic_space",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "maze_generation",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "curation_station",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "dome",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
         {
           "token": "rhizomatic_maze_space",
           "why": "escalation: precinct: no exterior venue is large enough either"
@@ -14009,6 +14837,28 @@
           ]
         },
         {
+          "token": "soft_mushroom",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            25,
+            23
+          ],
+          "court_access": "bridge"
+        },
+        {
           "token": "cloth_straps",
           "cell": [
             19,
@@ -14096,6 +14946,28 @@
           "support_height_m": 0.0,
           "slot": "mezquita-hypostyle/porch",
           "wall": null
+        },
+        {
+          "token": "soft_mushrooms",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            24,
+            23
+          ],
+          "court_access": "bridge"
         },
         {
           "token": "breathing_room",
@@ -14437,16 +15309,7 @@
           "wall": null
         }
       ],
-      "rejected": [
-        {
-          "token": "soft_mushroom",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "soft_mushrooms",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        }
-      ],
+      "rejected": [],
       "room": {
         "w": 45,
         "h": 57
@@ -14458,6 +15321,50 @@
     {
       "museum": "castelvecchio-pinch-v2",
       "artifacts": [
+        {
+          "token": "voxel_noise_demo",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            38,
+            38
+          ],
+          "court_access": "bridge"
+        },
+        {
+          "token": "marchingcubes_voxel_noise_demo",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            38,
+            38
+          ],
+          "court_access": "bridge"
+        },
         {
           "token": "animated_noise_explorer",
           "cell": [
@@ -14495,6 +15402,72 @@
             15,
             11
           ]
+        },
+        {
+          "token": "curation_station",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            25,
+            19
+          ],
+          "court_access": "bridge"
+        },
+        {
+          "token": "gyroid_demo",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            26,
+            26
+          ],
+          "court_access": "bridge"
+        },
+        {
+          "token": "GyroidDemo",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            26,
+            26
+          ],
+          "court_access": "bridge"
         },
         {
           "token": "mc_shapes_gallery",
@@ -14558,12 +15531,12 @@
         {
           "token": "marching_cubes_sculpt_vr",
           "cell": [
-            26,
-            8
+            21,
+            10
           ],
           "tile_cell": [
-            12,
-            -6
+            7,
+            -4
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -14622,6 +15595,28 @@
           "support_height_m": 0.95,
           "slot": "castelvecchio-pinch-v2/2,18",
           "wall": null
+        },
+        {
+          "token": "queer_marching_cave",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            25,
+            25
+          ],
+          "court_access": "bridge"
         },
         {
           "token": "metaball_world",
@@ -14731,18 +15726,6 @@
       ],
       "rejected": [
         {
-          "token": "voxel_noise_demo",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "marchingcubes_voxel_noise_demo",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "curation_station",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
           "token": "mc_cave",
           "why": "escalation: precinct: no exterior venue is large enough either"
         },
@@ -14759,14 +15742,6 @@
           "why": "escalation: precinct: no exterior venue is large enough either"
         },
         {
-          "token": "gyroid_demo",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "GyroidDemo",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
           "token": "mc_flat_landscape",
           "why": "escalation: precinct: no exterior venue is large enough either"
         },
@@ -14780,10 +15755,6 @@
         },
         {
           "token": "marching_cubes",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "queer_marching_cave",
           "why": "escalation: precinct: no exterior venue is large enough either"
         },
         {
@@ -15002,6 +15973,28 @@
           "wall": null
         },
         {
+          "token": "boid_manager",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            31,
+            30
+          ],
+          "court_access": "bridge"
+        },
+        {
           "token": "pompeii_mosaic_floor",
           "cell": [
             15,
@@ -15111,11 +16104,11 @@
           "token": "ant_agent",
           "cell": [
             12,
-            16
+            18
           ],
           "tile_cell": [
             -2,
-            2
+            4
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -15230,10 +16223,6 @@
         {
           "token": "FlowFieldMain",
           "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "boid_manager",
-          "why": "escalation: precinct: no exterior venue is large enough either"
         }
       ],
       "room": {
@@ -15248,14 +16237,58 @@
       "museum": "chichu-buried-cells",
       "artifacts": [
         {
-          "token": "evolutionary_algorithms",
+          "token": "evolved_creatures",
           "cell": [
-            27,
-            8
+            0,
+            0
           ],
           "tile_cell": [
-            13,
-            -6
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            46,
+            46
+          ],
+          "court_access": "bridge"
+        },
+        {
+          "token": "evolvingflowers",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            26,
+            26
+          ],
+          "court_access": "bridge"
+        },
+        {
+          "token": "evolutionary_algorithms",
+          "cell": [
+            23,
+            11
+          ],
+          "tile_cell": [
+            9,
+            -3
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -15309,12 +16342,12 @@
         {
           "token": "simulated_annealing",
           "cell": [
-            20,
-            10
+            27,
+            8
           ],
           "tile_cell": [
-            6,
-            -4
+            13,
+            -6
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -15345,30 +16378,35 @@
           ]
         },
         {
-          "token": "loss_function_comparator",
+          "token": "evolving_flowers",
           "cell": [
-            17,
-            20
+            0,
+            0
           ],
           "tile_cell": [
-            3,
-            6
+            -14,
+            -14
           ],
           "rotation": 0,
           "mode": "freestanding",
-          "venue": "interior",
+          "venue": "courtyard",
           "support_height_m": 0.0,
-          "slot": "chichu-buried-cells/3,6",
-          "wall": null
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            26,
+            26
+          ],
+          "court_access": "bridge"
         },
         {
-          "token": "gradient_descent_landscape",
+          "token": "loss_function_comparator",
           "cell": [
-            18,
+            17,
             26
           ],
           "tile_cell": [
-            4,
+            3,
             12
           ],
           "rotation": 0,
@@ -15377,6 +16415,45 @@
           "support_height_m": 0.95,
           "slot": "chichu-buried-cells/3,12",
           "wall": null
+        },
+        {
+          "token": "gradient_descent_landscape",
+          "cell": [
+            25,
+            20
+          ],
+          "tile_cell": [
+            11,
+            6
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "interior",
+          "support_height_m": 0.0,
+          "slot": "chichu-buried-cells/11,6",
+          "wall": null
+        },
+        {
+          "token": "random_forest_visualization",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            26,
+            26
+          ],
+          "court_access": "bridge"
         },
         {
           "token": "svm_visualization",
@@ -15423,18 +16500,18 @@
         {
           "token": "backpropagation_flow",
           "cell": [
-            17,
+            25,
             25
           ],
           "tile_cell": [
-            3,
+            11,
             11
           ],
           "rotation": 0,
           "mode": "freestanding",
           "venue": "interior",
-          "support_height_m": 0.95,
-          "slot": "chichu-buried-cells/3,12",
+          "support_height_m": 0.0,
+          "slot": "chichu-buried-cells/11,12",
           "wall": null
         },
         {
@@ -15564,6 +16641,28 @@
           ]
         },
         {
+          "token": "variational_autoencoders_vaes_vr",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            36,
+            24
+          ],
+          "court_access": "bridge"
+        },
+        {
           "token": "generative_adversarial_networks_gans_vr",
           "cell": [
             0,
@@ -15583,35 +16682,33 @@
             18,
             25
           ]
+        },
+        {
+          "token": "anomaly_detection",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            24,
+            24
+          ],
+          "court_access": "bridge"
         }
       ],
       "rejected": [
         {
-          "token": "evolved_creatures",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "evolvingflowers",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "evolving_flowers",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
           "token": "enhanced_kmeans",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "random_forest_visualization",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "variational_autoencoders_vaes_vr",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "anomaly_detection",
           "why": "escalation: precinct: no exterior venue is large enough either"
         },
         {
@@ -15646,6 +16743,28 @@
           "support_height_m": 0.95,
           "slot": "grande-galerie-axial/4,22",
           "wall": null
+        },
+        {
+          "token": "curation_station",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            25,
+            19
+          ],
+          "court_access": "bridge"
         },
         {
           "token": "force_directed_layout",
@@ -15690,6 +16809,28 @@
           ]
         },
         {
+          "token": "rhizomatic_structure",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            26,
+            23
+          ],
+          "court_access": "bridge"
+        },
+        {
           "token": "kosaraju_algorithm",
           "cell": [
             17,
@@ -15726,6 +16867,28 @@
             11,
             26
           ]
+        },
+        {
+          "token": "networkflow3d",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            38,
+            38
+          ],
+          "court_access": "bridge"
         },
         {
           "token": "karger_algorithm",
@@ -15804,6 +16967,50 @@
           ]
         },
         {
+          "token": "forcedirected3d",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            28,
+            29
+          ],
+          "court_access": "bridge"
+        },
+        {
+          "token": "mst_visualization",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            36,
+            41
+          ],
+          "court_access": "bridge"
+        },
+        {
           "token": "push_relabel_algorithm",
           "cell": [
             11,
@@ -15845,26 +17052,6 @@
         },
         {
           "token": "KonigsbergBridge",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "curation_station",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "rhizomatic_structure",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "networkflow3d",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "forcedirected3d",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "mst_visualization",
           "why": "escalation: precinct: no exterior venue is large enough either"
         }
       ],
@@ -16990,6 +18177,28 @@
           "wall": null
         },
         {
+          "token": "tech_noir_audio",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            22,
+            20
+          ],
+          "court_access": "bridge"
+        },
+        {
           "token": "edge_particles",
           "cell": [
             18,
@@ -17420,10 +18629,6 @@
         }
       ],
       "rejected": [
-        {
-          "token": "tech_noir_audio",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
         {
           "token": "lambda_slider",
           "why": "support_matches_contract: slot offers 'podium', artifact needs 'wall'"
@@ -19841,6 +21046,28 @@
           "wall": null
         },
         {
+          "token": "dome",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            26,
+            26
+          ],
+          "court_access": "bridge"
+        },
+        {
           "token": "folded_strip",
           "cell": [
             21,
@@ -20746,10 +21973,6 @@
           "why": "body_inside_room: body cell (18, 14) is wall or void"
         },
         {
-          "token": "dome",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
           "token": "artifact_workstation",
           "why": "body_inside_room: body cell (19, 38) is wall or void"
         },
@@ -21159,6 +22382,28 @@
           "wall": null
         },
         {
+          "token": "carousel_cake",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            21,
+            21
+          ],
+          "court_access": "bridge"
+        },
+        {
           "token": "translation_cube_demo",
           "cell": [
             24,
@@ -21486,12 +22731,7 @@
           "wall": null
         }
       ],
-      "rejected": [
-        {
-          "token": "carousel_cake",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        }
-      ],
+      "rejected": [],
       "room": {
         "w": 43,
         "h": 58
@@ -21622,6 +22862,28 @@
           "wall": null
         },
         {
+          "token": "GeneticProgramming",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            36,
+            30
+          ],
+          "court_access": "bridge"
+        },
+        {
           "token": "pattern_atlas_gallery",
           "cell": [
             0,
@@ -21662,18 +22924,18 @@
         {
           "token": "pattern_machine_c",
           "cell": [
-            18,
+            21,
             10
           ],
           "tile_cell": [
-            4,
+            7,
             -4
           ],
           "rotation": 90,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.0,
-          "slot": "grande-galerie-axial/1,2",
+          "slot": "grande-galerie-axial/11,2",
           "wall": null
         },
         {
@@ -21934,18 +23196,18 @@
         {
           "token": "vr_tile_editor",
           "cell": [
-            25,
-            9
+            21,
+            54
           ],
           "tile_cell": [
-            11,
-            -5
+            7,
+            40
           ],
-          "rotation": 270,
+          "rotation": 0,
           "mode": "freestanding",
-          "venue": "porch",
+          "venue": "outside",
           "support_height_m": 0.0,
-          "slot": "grande-galerie-axial/porch",
+          "slot": "grande-galerie-axial/outside",
           "wall": null
         },
         {
@@ -21983,12 +23245,7 @@
           "wall": null
         }
       ],
-      "rejected": [
-        {
-          "token": "GeneticProgramming",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        }
-      ],
+      "rejected": [],
       "room": {
         "w": 41,
         "h": 64
@@ -22134,6 +23391,50 @@
           "support_height_m": 0.0,
           "slot": "altes-rotunda-hub/porch",
           "wall": null
+        },
+        {
+          "token": "facade_grammar_demo",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            20,
+            22
+          ],
+          "court_access": "bridge"
+        },
+        {
+          "token": "xyz_slider_plate",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            25,
+            24
+          ],
+          "court_access": "bridge"
         },
         {
           "token": "grid_model",
@@ -22666,16 +23967,7 @@
           "wall": null
         }
       ],
-      "rejected": [
-        {
-          "token": "facade_grammar_demo",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "xyz_slider_plate",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        }
-      ],
+      "rejected": [],
       "room": {
         "w": 43,
         "h": 57
@@ -23447,6 +24739,28 @@
           "wall": null
         },
         {
+          "token": "spectrum_forest",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            26,
+            26
+          ],
+          "court_access": "bridge"
+        },
+        {
           "token": "SpectrumVisualizer",
           "cell": [
             0,
@@ -23886,10 +25200,6 @@
         {
           "token": "science_screen",
           "why": "support_matches_contract: slot offers 'floor', artifact needs 'wall'"
-        },
-        {
-          "token": "spectrum_forest",
-          "why": "escalation: precinct: no exterior venue is large enough either"
         }
       ],
       "room": {
@@ -23902,6 +25212,28 @@
     },
     "castelvecchio-pinch-v2": {
       "artifacts": [
+        {
+          "token": "gradient_descent",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            26,
+            26
+          ],
+          "court_access": "bridge"
+        },
         {
           "token": "partial_derivative_terrain",
           "cell": [
@@ -24376,10 +25708,6 @@
       ],
       "rejected": [
         {
-          "token": "gradient_descent",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
           "token": "science_screen",
           "why": "physical_overlap: 2 body cells collide with descent_marble_toy"
         }
@@ -24394,6 +25722,28 @@
     },
     "louisiana-pavilion-chain": {
       "artifacts": [
+        {
+          "token": "rotatescalecubes",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            24,
+            25
+          ],
+          "court_access": "bridge"
+        },
         {
           "token": "rotating_cube_demo",
           "cell": [
@@ -25281,6 +26631,28 @@
           ]
         },
         {
+          "token": "wave_propagation_3d",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            29,
+            29
+          ],
+          "court_access": "bridge"
+        },
+        {
           "token": "chladni_plate",
           "cell": [
             26,
@@ -25502,6 +26874,28 @@
           "wall": null
         },
         {
+          "token": "wave_interference",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            20,
+            19
+          ],
+          "court_access": "bridge"
+        },
+        {
           "token": "MelodyChaser3D",
           "cell": [
             25,
@@ -25695,6 +27089,50 @@
             14,
             14
           ]
+        },
+        {
+          "token": "john_cage_tech_noir",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            19,
+            21
+          ],
+          "court_access": "bridge"
+        },
+        {
+          "token": "tech_noir_audio",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            22,
+            20
+          ],
+          "court_access": "bridge"
         },
         {
           "token": "RackAmbientDrone",
@@ -25968,6 +27406,28 @@
           "wall": null
         },
         {
+          "token": "coloredlines",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            31,
+            34
+          ],
+          "court_access": "bridge"
+        },
+        {
           "token": "hallway_scene",
           "cell": [
             0,
@@ -26114,28 +27574,8 @@
       ],
       "rejected": [
         {
-          "token": "rotatescalecubes",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
           "token": "science_screen",
           "why": "support_matches_contract: slot offers 'podium', artifact needs 'wall'"
-        },
-        {
-          "token": "wave_propagation_3d",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "wave_interference",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "john_cage_tech_noir",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "tech_noir_audio",
-          "why": "escalation: precinct: no exterior venue is large enough either"
         },
         {
           "token": "air_music_display_case",
@@ -26148,10 +27588,6 @@
         {
           "token": "CircleSpiral",
           "why": "body_inside_room: body cell (17, 29) is wall or void"
-        },
-        {
-          "token": "coloredlines",
-          "why": "escalation: precinct: no exterior venue is large enough either"
         }
       ],
       "room": {
@@ -26294,19 +27730,24 @@
         {
           "token": "GaussianBlurCircle",
           "cell": [
-            7,
-            44
+            0,
+            0
           ],
           "tile_cell": [
-            -7,
-            30
+            -14,
+            -14
           ],
           "rotation": 0,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "courtyard",
           "support_height_m": 0.0,
-          "slot": "soane-cabinet-vista/outside",
-          "wall": null
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            17,
+            27
+          ],
+          "court_access": "bridge"
         },
         {
           "token": "2d_in_3d_randomness_vis",
@@ -26572,6 +28013,28 @@
           "wall": null
         },
         {
+          "token": "hazards_demo",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            22,
+            22
+          ],
+          "court_access": "bridge"
+        },
+        {
           "token": "edible_mushroom",
           "cell": [
             16,
@@ -26625,6 +28088,28 @@
           "support_height_m": 0.95,
           "slot": "soane-cabinet-vista/4,6@free",
           "wall": null
+        },
+        {
+          "token": "mushrooms",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            17,
+            17
+          ],
+          "court_access": "bridge"
         },
         {
           "token": "random_edge_profile",
@@ -26853,12 +28338,12 @@
         {
           "token": "pipe_dream",
           "cell": [
-            20,
-            51
+            15,
+            50
           ],
           "tile_cell": [
-            6,
-            37
+            1,
+            36
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -26887,12 +28372,12 @@
         {
           "token": "gaussian_random",
           "cell": [
-            25,
-            53
+            20,
+            50
           ],
           "tile_cell": [
-            11,
-            39
+            6,
+            36
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -26904,12 +28389,12 @@
         {
           "token": "GaussianBlurShader",
           "cell": [
-            20,
-            48
+            6,
+            42
           ],
           "tile_cell": [
-            6,
-            34
+            -8,
+            28
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -26921,11 +28406,11 @@
         {
           "token": "GaussianPaintSplatter",
           "cell": [
-            17,
+            18,
             46
           ],
           "tile_cell": [
-            3,
+            4,
             32
           ],
           "rotation": 0,
@@ -26938,12 +28423,12 @@
         {
           "token": "rice_verifier_booth",
           "cell": [
-            29,
-            39
+            24,
+            48
           ],
           "tile_cell": [
-            15,
-            25
+            10,
+            34
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -26953,14 +28438,36 @@
           "wall": null
         },
         {
-          "token": "monte_carlo",
+          "token": "random_bell_curve",
           "cell": [
-            22,
-            44
+            0,
+            0
           ],
           "tile_cell": [
-            8,
-            30
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            26,
+            27
+          ],
+          "court_access": "bridge"
+        },
+        {
+          "token": "monte_carlo",
+          "cell": [
+            7,
+            49
+          ],
+          "tile_cell": [
+            -7,
+            35
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -26972,12 +28479,12 @@
         {
           "token": "distribution_sampler",
           "cell": [
-            19,
-            44
+            8,
+            41
           ],
           "tile_cell": [
-            5,
-            30
+            -6,
+            27
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -26989,12 +28496,12 @@
         {
           "token": "force_field_visualizer",
           "cell": [
-            21,
-            46
+            29,
+            37
           ],
           "tile_cell": [
-            7,
-            32
+            15,
+            23
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -27040,12 +28547,12 @@
         {
           "token": "abject_bench",
           "cell": [
-            28,
-            38
+            12,
+            36
           ],
           "tile_cell": [
-            14,
-            24
+            -2,
+            22
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -27057,12 +28564,12 @@
         {
           "token": "random_number_book_page_collection",
           "cell": [
-            16,
-            51
+            11,
+            45
           ],
           "tile_cell": [
-            2,
-            37
+            -3,
+            31
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -27074,12 +28581,12 @@
         {
           "token": "tree_gen",
           "cell": [
-            28,
-            54
+            23,
+            53
           ],
           "tile_cell": [
-            14,
-            40
+            9,
+            39
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -27129,12 +28636,12 @@
         {
           "token": "breathing_room",
           "cell": [
-            23,
-            45
+            21,
+            44
           ],
           "tile_cell": [
-            9,
-            31
+            7,
+            30
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -27163,12 +28670,12 @@
         {
           "token": "VectorCrossProduct",
           "cell": [
-            22,
-            47
+            23,
+            45
           ],
           "tile_cell": [
-            8,
-            33
+            9,
+            31
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -27180,29 +28687,12 @@
         {
           "token": "pollock_painting_in_3d",
           "cell": [
-            25,
-            48
+            19,
+            53
           ],
           "tile_cell": [
-            11,
-            34
-          ],
-          "rotation": 90,
-          "mode": "freestanding",
-          "venue": "outside",
-          "support_height_m": 0.0,
-          "slot": "soane-cabinet-vista/outside",
-          "wall": null
-        },
-        {
-          "token": "catalyst_target",
-          "cell": [
-            24,
-            44
-          ],
-          "tile_cell": [
-            10,
-            30
+            5,
+            39
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -27212,14 +28702,53 @@
           "wall": null
         },
         {
-          "token": "monte_carlo_dartboard",
+          "token": "catalyst_target",
           "cell": [
-            18,
-            49
+            20,
+            48
           ],
           "tile_cell": [
-            4,
-            35
+            6,
+            34
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "soane-cabinet-vista/outside",
+          "wall": null
+        },
+        {
+          "token": "extreme_randomness",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            17,
+            17
+          ],
+          "court_access": "bridge"
+        },
+        {
+          "token": "monte_carlo_dartboard",
+          "cell": [
+            10,
+            51
+          ],
+          "tile_cell": [
+            -4,
+            37
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -27231,12 +28760,12 @@
         {
           "token": "bias_visualizer",
           "cell": [
-            15,
-            50
+            11,
+            38
           ],
           "tile_cell": [
-            1,
-            36
+            -3,
+            24
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -27246,14 +28775,80 @@
           "wall": null
         },
         {
-          "token": "noise_mixer",
+          "token": "facade_grammar_demo",
           "cell": [
-            14,
-            45
+            0,
+            0
           ],
           "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            20,
+            22
+          ],
+          "court_access": "bridge"
+        },
+        {
+          "token": "pheromone_terrain",
+          "cell": [
             0,
-            31
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            26,
+            26
+          ],
+          "court_access": "bridge"
+        },
+        {
+          "token": "random_space",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            17,
+            26
+          ],
+          "court_access": "bridge"
+        },
+        {
+          "token": "noise_mixer",
+          "cell": [
+            21,
+            47
+          ],
+          "tile_cell": [
+            7,
+            33
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -27264,6 +28859,57 @@
         },
         {
           "token": "worley_noise",
+          "cell": [
+            3,
+            45
+          ],
+          "tile_cell": [
+            -11,
+            31
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "soane-cabinet-vista/outside",
+          "wall": null
+        },
+        {
+          "token": "miura_crawler",
+          "cell": [
+            28,
+            54
+          ],
+          "tile_cell": [
+            14,
+            40
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "soane-cabinet-vista/outside",
+          "wall": null
+        },
+        {
+          "token": "kresling_spire",
+          "cell": [
+            19,
+            43
+          ],
+          "tile_cell": [
+            5,
+            29
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "soane-cabinet-vista/outside",
+          "wall": null
+        },
+        {
+          "token": "kaleidocycle_enemy",
           "cell": [
             28,
             36
@@ -27280,64 +28926,13 @@
           "wall": null
         },
         {
-          "token": "miura_crawler",
-          "cell": [
-            25,
-            43
-          ],
-          "tile_cell": [
-            11,
-            29
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "outside",
-          "support_height_m": 0.0,
-          "slot": "soane-cabinet-vista/outside",
-          "wall": null
-        },
-        {
-          "token": "kresling_spire",
-          "cell": [
-            26,
-            44
-          ],
-          "tile_cell": [
-            12,
-            30
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "outside",
-          "support_height_m": 0.0,
-          "slot": "soane-cabinet-vista/outside",
-          "wall": null
-        },
-        {
-          "token": "kaleidocycle_enemy",
-          "cell": [
-            17,
-            50
-          ],
-          "tile_cell": [
-            3,
-            36
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "outside",
-          "support_height_m": 0.0,
-          "slot": "soane-cabinet-vista/outside",
-          "wall": null
-        },
-        {
           "token": "scissor_stalker",
           "cell": [
-            16,
+            13,
             54
           ],
           "tile_cell": [
-            2,
+            -1,
             40
           ],
           "rotation": 0,
@@ -27350,12 +28945,12 @@
         {
           "token": "origami_droideka",
           "cell": [
-            14,
-            47
+            22,
+            46
           ],
           "tile_cell": [
-            0,
-            33
+            8,
+            32
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -27367,14 +28962,31 @@
         {
           "token": "armadillo_eggling",
           "cell": [
-            37,
+            26,
             45
           ],
           "tile_cell": [
-            23,
+            12,
             31
           ],
-          "rotation": 90,
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "soane-cabinet-vista/outside",
+          "wall": null
+        },
+        {
+          "token": "cube_projectile_spawner",
+          "cell": [
+            13,
+            47
+          ],
+          "tile_cell": [
+            -1,
+            33
+          ],
+          "rotation": 0,
           "mode": "freestanding",
           "venue": "outside",
           "support_height_m": 0.0,
@@ -27384,11 +28996,11 @@
         {
           "token": "r_c",
           "cell": [
-            27,
+            22,
             43
           ],
           "tile_cell": [
-            13,
+            8,
             29
           ],
           "rotation": 0,
@@ -27401,24 +29013,12 @@
       ],
       "rejected": [
         {
-          "token": "hazards_demo",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
           "token": "nature_system_demo",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "mushrooms",
           "why": "escalation: precinct: no exterior venue is large enough either"
         },
         {
           "token": "galton_board",
           "why": "faces_out_of_wall: at 0deg the back points (0, -1), but this wall needs (1, 0)"
-        },
-        {
-          "token": "random_bell_curve",
-          "why": "escalation: precinct: no exterior venue is large enough either"
         },
         {
           "token": "bubbles_random",
@@ -27429,28 +29029,8 @@
           "why": "escalation: precinct: no exterior venue is large enough either"
         },
         {
-          "token": "extreme_randomness",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "facade_grammar_demo",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "pheromone_terrain",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
           "token": "ca_bridge",
           "why": "body_inside_room: body cell (22, 14) is wall or void"
-        },
-        {
-          "token": "random_space",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "cube_projectile_spawner",
-          "why": "body_inside_room: body cell (14, 18) is wall or void"
         }
       ],
       "room": {
@@ -27540,6 +29120,50 @@
           ]
         },
         {
+          "token": "WhiteNoiseGallery",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            26,
+            28
+          ],
+          "court_access": "bridge"
+        },
+        {
+          "token": "MeltingBerniniScene",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            19,
+            19
+          ],
+          "court_access": "bridge"
+        },
+        {
           "token": "dark_sphere",
           "cell": [
             25,
@@ -27616,6 +29240,28 @@
           "wall": null
         },
         {
+          "token": "voxelnoise",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            38,
+            38
+          ],
+          "court_access": "bridge"
+        },
+        {
           "token": "flow_field_painter",
           "cell": [
             19,
@@ -27631,6 +29277,28 @@
           "support_height_m": 0.0,
           "slot": "kanazawa-room-matrix/4,10@free",
           "wall": null
+        },
+        {
+          "token": "shader_noise_space",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            25,
+            34
+          ],
+          "court_access": "bridge"
         },
         {
           "token": "noise_space",
@@ -27652,6 +29320,28 @@
             16,
             16
           ]
+        },
+        {
+          "token": "noisesphere",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            38,
+            36
+          ],
+          "court_access": "bridge"
         },
         {
           "token": "complexity_pattern",
@@ -27762,27 +29452,7 @@
       ],
       "rejected": [
         {
-          "token": "WhiteNoiseGallery",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "MeltingBerniniScene",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
           "token": "noiselayers",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "voxelnoise",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "shader_noise_space",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "noisesphere",
           "why": "escalation: precinct: no exterior venue is large enough either"
         },
         {
@@ -28083,6 +29753,50 @@
           "support_height_m": 0.0,
           "slot": "neue-nationalgalerie-free-plan/porch",
           "wall": null
+        },
+        {
+          "token": "hexagon_ca_vr",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            42,
+            37
+          ],
+          "court_access": "bridge"
+        },
+        {
+          "token": "7_8_hexagon_ca_vr",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            42,
+            37
+          ],
+          "court_access": "bridge"
         },
         {
           "token": "crossway_ca",
@@ -28394,16 +30108,7 @@
           "wall": null
         }
       ],
-      "rejected": [
-        {
-          "token": "hexagon_ca_vr",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "7_8_hexagon_ca_vr",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        }
-      ],
+      "rejected": [],
       "room": {
         "w": 43,
         "h": 55
@@ -28559,6 +30264,28 @@
           ]
         },
         {
+          "token": "carousel_cake",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            21,
+            21
+          ],
+          "court_access": "bridge"
+        },
+        {
           "token": "fractal_recursion_circles",
           "cell": [
             25,
@@ -28629,6 +30356,50 @@
           "support_height_m": 0.95,
           "slot": "pompidou-plateau-libre/3,5",
           "wall": null
+        },
+        {
+          "token": "inverted_tree_cloud",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            18,
+            21
+          ],
+          "court_access": "bridge"
+        },
+        {
+          "token": "recursive_tree",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            22,
+            22
+          ],
+          "court_access": "bridge"
         },
         {
           "token": "branching_growth_algorithm",
@@ -29107,19 +30878,24 @@
         {
           "token": "fibonacci_sequences",
           "cell": [
-            31,
-            57
+            0,
+            0
           ],
           "tile_cell": [
-            17,
-            43
+            -14,
+            -14
           ],
           "rotation": 0,
           "mode": "freestanding",
-          "venue": "outside",
+          "venue": "courtyard",
           "support_height_m": 0.0,
-          "slot": "pompidou-plateau-libre/outside",
-          "wall": null
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            20,
+            18
+          ],
+          "court_access": "bridge"
         },
         {
           "token": "romanesco",
@@ -29141,11 +30917,11 @@
         {
           "token": "golden_rectangle",
           "cell": [
-            16,
+            24,
             53
           ],
           "tile_cell": [
-            2,
+            10,
             39
           ],
           "rotation": 0,
@@ -29159,11 +30935,11 @@
           "token": "fibonacci_terrain",
           "cell": [
             13,
-            59
+            57
           ],
           "tile_cell": [
             -1,
-            45
+            43
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -29171,6 +30947,50 @@
           "support_height_m": 0.0,
           "slot": "pompidou-plateau-libre/outside",
           "wall": null
+        },
+        {
+          "token": "curation_station",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            25,
+            19
+          ],
+          "court_access": "bridge"
+        },
+        {
+          "token": "julia_set",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            18,
+            18
+          ],
+          "court_access": "bridge"
         },
         {
           "token": "julia_set_explorer",
@@ -29425,12 +31245,12 @@
         {
           "token": "Hilbert3D",
           "cell": [
-            9,
-            47
+            25,
+            59
           ],
           "tile_cell": [
-            -5,
-            33
+            11,
+            45
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -29476,27 +31296,7 @@
       ],
       "rejected": [
         {
-          "token": "carousel_cake",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "inverted_tree_cloud",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "recursive_tree",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
           "token": "mobius_world",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "curation_station",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "julia_set",
           "why": "escalation: precinct: no exterior venue is large enough either"
         }
       ],
@@ -29510,6 +31310,28 @@
     },
     "dia-beacon-field": {
       "artifacts": [
+        {
+          "token": "GeneticProgramming",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            36,
+            30
+          ],
+          "court_access": "bridge"
+        },
         {
           "token": "space_colonization_algorithm",
           "cell": [
@@ -29530,6 +31352,28 @@
             14,
             14
           ]
+        },
+        {
+          "token": "genetic_programming",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            36,
+            31
+          ],
+          "court_access": "bridge"
         },
         {
           "token": "inverted_tree_cloud",
@@ -29574,6 +31418,28 @@
           ]
         },
         {
+          "token": "caverandomwalk",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            26,
+            26
+          ],
+          "court_access": "bridge"
+        },
+        {
           "token": "dark_sphere",
           "cell": [
             18,
@@ -29589,6 +31455,28 @@
           "support_height_m": 0.95,
           "slot": "dia-beacon-field/2,22",
           "wall": null
+        },
+        {
+          "token": "organic_space",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            32,
+            31
+          ],
+          "court_access": "bridge"
         },
         {
           "token": "branching_growth_algorithm",
@@ -29633,14 +31521,36 @@
           ]
         },
         {
-          "token": "sculpt_one",
+          "token": "maze_generation",
           "cell": [
-            26,
-            11
+            0,
+            0
           ],
           "tile_cell": [
-            12,
-            -3
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            36,
+            36
+          ],
+          "court_access": "bridge"
+        },
+        {
+          "token": "sculpt_one",
+          "cell": [
+            21,
+            10
+          ],
+          "tile_cell": [
+            7,
+            -4
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -29650,20 +31560,42 @@
           "wall": null
         },
         {
-          "token": "layered_membrane",
+          "token": "curation_station",
           "cell": [
-            19,
-            8
+            0,
+            0
           ],
           "tile_cell": [
-            5,
-            -6
+            -14,
+            -14
           ],
           "rotation": 0,
           "mode": "freestanding",
-          "venue": "porch",
+          "venue": "courtyard",
           "support_height_m": 0.0,
-          "slot": "dia-beacon-field/porch",
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            25,
+            19
+          ],
+          "court_access": "bridge"
+        },
+        {
+          "token": "layered_membrane",
+          "cell": [
+            21,
+            49
+          ],
+          "tile_cell": [
+            7,
+            35
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "dia-beacon-field/outside",
           "wall": null
         },
         {
@@ -29705,14 +31637,36 @@
           "wall": null
         },
         {
-          "token": "triangleprofiles",
+          "token": "dome",
           "cell": [
-            21,
-            49
+            0,
+            0
           ],
           "tile_cell": [
-            7,
-            35
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            26,
+            26
+          ],
+          "court_access": "bridge"
+        },
+        {
+          "token": "triangleprofiles",
+          "cell": [
+            14,
+            48
+          ],
+          "tile_cell": [
+            0,
+            34
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -29724,11 +31678,11 @@
         {
           "token": "mirror_cellular_texture_for_3d",
           "cell": [
-            14,
+            29,
             48
           ],
           "tile_cell": [
-            0,
+            15,
             34
           ],
           "rotation": 0,
@@ -29778,34 +31732,6 @@
         }
       ],
       "rejected": [
-        {
-          "token": "GeneticProgramming",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "genetic_programming",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "caverandomwalk",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "organic_space",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "maze_generation",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "curation_station",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "dome",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
         {
           "token": "rhizomatic_maze_space",
           "why": "escalation: precinct: no exterior venue is large enough either"
@@ -29892,6 +31818,28 @@
             16,
             16
           ]
+        },
+        {
+          "token": "soft_mushroom",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            25,
+            23
+          ],
+          "court_access": "bridge"
         },
         {
           "token": "cloth_straps",
@@ -29981,6 +31929,28 @@
           "support_height_m": 0.0,
           "slot": "mezquita-hypostyle/porch",
           "wall": null
+        },
+        {
+          "token": "soft_mushrooms",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            24,
+            23
+          ],
+          "court_access": "bridge"
         },
         {
           "token": "breathing_room",
@@ -30322,16 +32292,7 @@
           "wall": null
         }
       ],
-      "rejected": [
-        {
-          "token": "soft_mushroom",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "soft_mushrooms",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        }
-      ],
+      "rejected": [],
       "room": {
         "w": 45,
         "h": 57
@@ -30529,6 +32490,28 @@
           "wall": null
         },
         {
+          "token": "boid_manager",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            31,
+            30
+          ],
+          "court_access": "bridge"
+        },
+        {
           "token": "pompeii_mosaic_floor",
           "cell": [
             15,
@@ -30638,11 +32621,11 @@
           "token": "ant_agent",
           "cell": [
             12,
-            16
+            18
           ],
           "tile_cell": [
             -2,
-            2
+            4
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -30757,10 +32740,6 @@
         {
           "token": "FlowFieldMain",
           "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "boid_manager",
-          "why": "escalation: precinct: no exterior venue is large enough either"
         }
       ],
       "room": {
@@ -30774,14 +32753,58 @@
     "chichu-buried-cells": {
       "artifacts": [
         {
-          "token": "evolutionary_algorithms",
+          "token": "evolved_creatures",
           "cell": [
-            27,
-            8
+            0,
+            0
           ],
           "tile_cell": [
-            13,
-            -6
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            46,
+            46
+          ],
+          "court_access": "bridge"
+        },
+        {
+          "token": "evolvingflowers",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            26,
+            26
+          ],
+          "court_access": "bridge"
+        },
+        {
+          "token": "evolutionary_algorithms",
+          "cell": [
+            23,
+            11
+          ],
+          "tile_cell": [
+            9,
+            -3
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -30835,12 +32858,12 @@
         {
           "token": "simulated_annealing",
           "cell": [
-            20,
-            10
+            27,
+            8
           ],
           "tile_cell": [
-            6,
-            -4
+            13,
+            -6
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -30871,30 +32894,35 @@
           ]
         },
         {
-          "token": "loss_function_comparator",
+          "token": "evolving_flowers",
           "cell": [
-            17,
-            20
+            0,
+            0
           ],
           "tile_cell": [
-            3,
-            6
+            -14,
+            -14
           ],
           "rotation": 0,
           "mode": "freestanding",
-          "venue": "interior",
+          "venue": "courtyard",
           "support_height_m": 0.0,
-          "slot": "chichu-buried-cells/3,6",
-          "wall": null
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            26,
+            26
+          ],
+          "court_access": "bridge"
         },
         {
-          "token": "gradient_descent_landscape",
+          "token": "loss_function_comparator",
           "cell": [
-            18,
+            17,
             26
           ],
           "tile_cell": [
-            4,
+            3,
             12
           ],
           "rotation": 0,
@@ -30903,6 +32931,45 @@
           "support_height_m": 0.95,
           "slot": "chichu-buried-cells/3,12",
           "wall": null
+        },
+        {
+          "token": "gradient_descent_landscape",
+          "cell": [
+            25,
+            20
+          ],
+          "tile_cell": [
+            11,
+            6
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "interior",
+          "support_height_m": 0.0,
+          "slot": "chichu-buried-cells/11,6",
+          "wall": null
+        },
+        {
+          "token": "random_forest_visualization",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            26,
+            26
+          ],
+          "court_access": "bridge"
         },
         {
           "token": "svm_visualization",
@@ -30949,18 +33016,18 @@
         {
           "token": "backpropagation_flow",
           "cell": [
-            17,
+            25,
             25
           ],
           "tile_cell": [
-            3,
+            11,
             11
           ],
           "rotation": 0,
           "mode": "freestanding",
           "venue": "interior",
-          "support_height_m": 0.95,
-          "slot": "chichu-buried-cells/3,12",
+          "support_height_m": 0.0,
+          "slot": "chichu-buried-cells/11,12",
           "wall": null
         },
         {
@@ -31090,6 +33157,28 @@
           ]
         },
         {
+          "token": "variational_autoencoders_vaes_vr",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            36,
+            24
+          ],
+          "court_access": "bridge"
+        },
+        {
           "token": "generative_adversarial_networks_gans_vr",
           "cell": [
             0,
@@ -31109,35 +33198,33 @@
             18,
             25
           ]
+        },
+        {
+          "token": "anomaly_detection",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            24,
+            24
+          ],
+          "court_access": "bridge"
         }
       ],
       "rejected": [
         {
-          "token": "evolved_creatures",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "evolvingflowers",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "evolving_flowers",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
           "token": "enhanced_kmeans",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "random_forest_visualization",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "variational_autoencoders_vaes_vr",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
-          "token": "anomaly_detection",
           "why": "escalation: precinct: no exterior venue is large enough either"
         },
         {
@@ -31566,6 +33653,28 @@
           "support_height_m": 1.4,
           "slot": "teshima-droplet/7,22",
           "wall": null
+        },
+        {
+          "token": "tech_noir_audio",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
+          "wall": null,
+          "court": [
+            22,
+            20
+          ],
+          "court_access": "bridge"
         },
         {
           "token": "edge_particles",
@@ -31998,10 +34107,6 @@
         }
       ],
       "rejected": [
-        {
-          "token": "tech_noir_audio",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
         {
           "token": "lambda_slider",
           "why": "support_matches_contract: slot offers 'podium', artifact needs 'wall'"

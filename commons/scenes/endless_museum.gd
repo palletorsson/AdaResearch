@@ -232,6 +232,8 @@ var _stamp_refusal: String = ""   # why the LAST _stamp said no — set at every
 var _edit_pal_i: int = -1
 var _mod_editor = null
 const COURT_JOINT_MAX_DEPTH := 40  # metres of court per joint before the next building
+const BRIDGE_COURT_PATH_W := 4     # protected through-route beside a broad court
+const BRIDGE_COURT_APRON := 3      # negotiated body+3m each side; walk this ring
 var _force_vr: bool = false       # --em-vr forces the headset path
 var _vr: bool = false             # resolved once in _ready
 var _vr_cam: Camera3D = null      # the XR eye, cached
@@ -1850,8 +1852,99 @@ func _build_courtyard(seg: Node3D, solid: StaticBody3D, w: int, tile_h: int,
 		var dims: Array = c.get("court", [])
 		if dims.size() < 2:
 			continue
-		var cw: int = clampi(int(dims[0]), 3, w)
+		var access: String = String(c.get("access", ""))
+		# A bridge court is allowed to grow BESIDE the spine. A centred court is
+		# still clamped to it. This distinction comes from the plan row; the
+		# builder never guesses topology from dimensions.
+		var cw: int = maxi(int(dims[0]), 3) if access == "bridge" else clampi(int(dims[0]), 3, w)
 		var cd: int = maxi(int(dims[1]), 3)
+		if access == "bridge":
+			# ── RUNG 3: BRIDGE + COURTYARD ───────────────────────────────
+			# The main route is a four-metre strip. The made-to-measure court
+			# expands east of it, so a body too broad for either rotation can
+			# never sever the endless museum. Only the negotiated three-metre
+			# apron around the body's central footprint joins the walk map: the
+			# bridge is guaranteed, the court is entered, and collision inside
+			# the work is never advertised as floor.
+			var total_w: int = BRIDGE_COURT_PATH_W + cw
+			# The bridge is a route, not more pale stone. Dark oak is already the
+			# museum's hand-contact material (benches/plinths), so it reads under
+			# the bright court sky and visually connects the visitor to the work.
+			var m_bridge: Material = _sm("plinth")
+			_box(seg, Vector3(BRIDGE_COURT_PATH_W / 2.0, -0.05, zcur + cd / 2.0),
+				Vector3(BRIDGE_COURT_PATH_W, 0.30, cd),
+				Color(0.31, 0.29, 0.25), m_bridge)
+			_box(seg, Vector3(BRIDGE_COURT_PATH_W + cw / 2.0, -0.1, zcur + cd / 2.0),
+				Vector3(cw, 0.2, cd), Color(0.145, 0.155, 0.145), m_deck)
+			if _vr:
+				_add_col(solid,
+					Vector3(BRIDGE_COURT_PATH_W / 2.0, -0.05, zcur + cd / 2.0),
+					Vector3(BRIDGE_COURT_PATH_W, 0.30, cd))
+				_add_col(solid,
+					Vector3(BRIDGE_COURT_PATH_W + cw / 2.0, -0.1, zcur + cd / 2.0),
+					Vector3(cw, 0.2, cd))
+			var gate0: int = zcur + maxi(1, int(cd / 2.0) - 2)
+			var gate1: int = mini(zcur + cd - 1, gate0 + 4)
+			for zz in range(zcur, zcur + cd):
+				for x in range(1, BRIDGE_COURT_PATH_W):
+					_walk_cells[Vector2i(x, zbase + zz)] = true
+				var lz: int = zz - zcur
+				for lx in range(0, cw):
+					# The divider is solid except at the named entrance. Do not
+					# advertise cells behind its rail as directly reachable from
+					# the bridge — that is how the autopilot learns false floor.
+					if lx == 0 and not (zz >= gate0 and zz < gate1):
+						continue
+					var on_apron: bool = lx < BRIDGE_COURT_APRON \
+						or lx >= cw - BRIDGE_COURT_APRON \
+						or lz < BRIDGE_COURT_APRON \
+						or lz >= cd - BRIDGE_COURT_APRON
+					if on_apron:
+						_walk_cells[Vector2i(BRIDGE_COURT_PATH_W + lx, zbase + zz)] = true
+			# Outer rails frame the precinct. A four-metre opening at midspan
+			# interrupts the divider rail: the bridge is not merely an overlook;
+			# the visitor can step from it into the apron and circle the work.
+			# Rails sit OUTSIDE the negotiated court cells. A one-cell-thick
+			# wall here would consume one metre of the promised three-metre
+			# apron while the plan still claimed all three.
+			for rail_x in [-0.125, total_w + 0.125]:
+				_box(seg, Vector3(rail_x, 0.55, zcur + cd / 2.0),
+					Vector3(0.25, 1.1, cd), wall_col, m_wall)
+				_add_col(solid, Vector3(rail_x, 0.55, zcur + cd / 2.0),
+					Vector3(0.25, 1.1, cd))
+			for edge_z in [zcur - 0.125, zcur + cd + 0.125]:
+				_box(seg,
+					Vector3(BRIDGE_COURT_PATH_W + cw / 2.0, 0.55, edge_z),
+					Vector3(cw, 1.1, 0.25), wall_col, m_wall)
+				_add_col(solid,
+					Vector3(BRIDGE_COURT_PATH_W + cw / 2.0, 0.55, edge_z),
+					Vector3(cw, 1.1, 0.25))
+			for rail_span in [[zcur, gate0], [gate1, zcur + cd]]:
+				var rz0: int = int(rail_span[0])
+				var rz1: int = int(rail_span[1])
+				if rz1 <= rz0:
+					continue
+				_box(seg, Vector3(BRIDGE_COURT_PATH_W + 0.08, 0.55,
+					(rz0 + rz1) / 2.0), Vector3(0.16, 1.1, rz1 - rz0),
+					Color(0.24, 0.23, 0.21), m_bridge)
+				_add_col(solid, Vector3(BRIDGE_COURT_PATH_W + 0.08, 0.55,
+					(rz0 + rz1) / 2.0), Vector3(0.16, 1.1, rz1 - rz0))
+			var bridge_cell: Dictionary = {
+				"x": BRIDGE_COURT_PATH_W + int(cw / 2.0),
+				"y": zcur + int(cd / 2.0), "rank": 2, "top": 0.0,
+			}
+			if _stamp(seg, String(c.get("scene", "")), String(c.get("token", "")),
+					bridge_cell, zbase, 1, {}, false, 0.0,
+					float(c.get("rotation", 0.0))):
+				_deal_stats["courts"] = int(_deal_stats.get("courts", 0)) + 1
+				_deal_stats["bridge_courts"] = int(_deal_stats.get("bridge_courts", 0)) + 1
+				print("[em-court] %s ENTERED by bridge in a %d x %d m court"
+					% [String(c.get("token", "?")), cw, cd])
+			else:
+				print("[em-court] bridge court %s refused — %s"
+					% [String(c.get("token", "?")), _stamp_refusal])
+			zcur += cd
+			continue
 		if String(c.get("venue", "courtyard")) == "balcony":
 			# ── THE BALCONY VOID — the aerial venue, spike 08's other half.
 			# The walker keeps a side gallery (x 0..3, walkable); a 1.1 m rail
@@ -1978,6 +2071,7 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 				continue
 			courts.append({"token": ctok, "scene": cscene,
 				"court": row.get("court", []),
+				"access": String(row.get("court_access", "")),
 				"rotation": float(row.get("rotation", 0.0)),
 				"venue": venue,
 				"chapter": String(entry.get("sequence", ""))})
