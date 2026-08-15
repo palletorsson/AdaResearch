@@ -41,6 +41,17 @@ def main() -> int:
         # correctly-registered prediction read as "pair not measured".
         def _bare(s: str) -> str:
             s = s.strip().strip("`'\"")
+            # "cut=axis against cut=margin" — a builder naming the axis inline with an equals
+            # sign, which is just as readable as "rule 90" and just as unparseable if we only
+            # strip leading WORDS. Drop a "<name>=" prefix when <name> is one of this
+            # artifact's axes. Second time this parser has been too literal about English.
+            if "=" in s:
+                head, _, tail = s.partition("=")
+                axnames = {a.lower() for a in
+                           ((json.loads((REG / f"{tok}.json").read_text(encoding="utf-8"))
+                             ["artifacts"][tok].get("dna") or {}).get("axes") or {})}
+                if head.strip().lower() in axnames and tail.strip():
+                    s = tail.strip()
             parts = s.split()
             if len(parts) > 1 and parts[0].lower() in {a.lower() for a in
                     ((json.loads((REG / f"{tok}.json").read_text(encoding="utf-8"))
