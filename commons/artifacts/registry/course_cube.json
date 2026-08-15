@@ -1,0 +1,179 @@
+{
+	"artifacts": {
+		"course_cube": {
+			"name": "Course Cube",
+			"lookup_name": "course_cube",
+			"scene": "res://commons/artifacts/course_cube/course_cube.tscn",
+			"class_name": "CourseCube",
+			"category": "transforms",
+			"artifact_type": "synthesis",
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "compact",
+			"description": "One displacement, five plans for making it, three ways of looking at what happened. A start point, a 0.20 m cube, and 0.44 m legs: up-then-across, across-then-up, up-then-into-the-picture, across alone, or one diagonal with no order at all. The `reading` axis decides what stands in the room - the road as a 60 mm tube with a junction ball at the corner it turns and the cube at the far end; or the two ends alone, dim where it started and bright where it finished, with nothing whatever between them; or no cube at all and the three basis arrows carried unrotated from start to end with the resultant drawn between them. Because translations commute, lift_lateral, lateral_lift and free are one destination by three roads, so under `ends` and under `frame` those three values are the same picture to the byte and under `path` they are three obviously different ones. The axis is not broken in two of its three columns; it is photographing the group law. Nothing animates, nothing is printed, nothing is random.",
+			"tags": [
+				"translation",
+				"transformation",
+				"commutativity",
+				"abelian_group",
+				"path_versus_destination",
+				"order",
+				"basis",
+				"synthesis",
+				"transforms"
+			],
+			"dev_themes": [
+				"transforms",
+				"math",
+				"synthesis",
+				"order is in the road, not in the answer"
+			],
+			"interactions": [
+				"stand at reading=path and walk lift_lateral against lateral_lift: two mirrored elbows, one cube",
+				"switch to reading=ends and look for the difference: there is none, and that is the claim",
+				"at reading=frame watch the three arrows arrive unturned - a translation moves the frame and rotates nothing",
+				"compare free against lift_lateral at every reading: a third road to the same corner, visible in exactly one of them"
+			],
+			"capacity": "SEE that two translations in the opposite order are the same translation - and that an axis distinguishing them is distinguishing the road, not the result",
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"x_translation_cube",
+					"y_translation_cube",
+					"z_translation_cube",
+					"translation_cube_demo",
+					"vector_addition",
+					"matrix_4x4_viewer"
+				],
+				"preferred_zone": "teaching",
+				"footprint_source": "computed_from_geometry",
+				"footprint_note": "Every variant occupies the same 0.69 x 0.69 x 0.69 m box by construction - the extent anchor is the union over both axes and all five courses, and the visible geometry reaches every face of it (the start cube the three low faces, the lift_lateral end cube and the end triads the three high ones). layout=ladder stands the five courses in a row at 0.80 m pitch (about 3.9 m wide) and is a design view, not a map placement."
+			},
+			"measurements": {
+				"aabb_size": [
+					0.69,
+					0.69,
+					0.69
+				],
+				"aabb_center": [
+					0.025,
+					0.575,
+					0.025
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.69,
+				"source": "computed_from_geometry, identical for all 15 variants because _add_extent_anchor writes it: lo = S - CUBE/2 = (-0.32, 0.23, -0.32), hi = S + (LEG + max(CUBE/2, TRIAD)) = (0.37, 0.92, 0.37), with S = (-0.22, 0.33, -0.22). Re-derived in a Python replica of the same constants; no Godot was run."
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			],
+			"dna": {
+				"promoted": "2026-08-15",
+				"stage": "synthesis",
+				"sources": [
+					"x_translation_cube",
+					"y_translation_cube",
+					"z_translation_cube",
+					"translation_cube_demo"
+				],
+				"axes": {
+				 "course": [
+				  "lift_lateral",
+				  "lateral_lift",
+				  "lift_depth",
+				  "lateral",
+				  "free"
+				 ],
+				 "reading": [
+				  "path",
+				  "ends",
+				  "frame"
+				 ]
+				},
+				"framing": 0.62,
+				"default": "course=lift_lateral, reading=path. lift_lateral is translation_cube_demo's own export default (gd:45) - 1 of 1 in the only vocabulary that owns these words - and it is also where the family's other three land when they are asked what a translation starts with: axis_translation_cube's script default is `lift` (gd:66), and lift_lateral's first leg IS lift. (The three .tscn members override that default one each - x=lateral, y=lift, z=depth - so the family has no majority single word, which is one more reason not to take their list.) reading=path because the only member that declares a second axis of this kind defaults it to `ghost` (axis_translation_cube gd:95), the route sampled as four fading cubes; `path` is that value's honest geometry twin, and it is also the one reading in which every value of `course` is visible, so the default cell is the one that shows the artifact has an axis at all.",
+				"note": "WHAT THE VALUES MEAN, derived from the members' code. THE FAMILY FIRST, because it is not four artifacts: x_translation_cube, y_translation_cube and z_translation_cube are three .tscn files in one folder pointing at ONE script, commons/artifacts/axis_translation_cube/axis_translation_cube.gd, and the entire difference between the three scenes is `axis` (0/1/2), `course` (lateral/lift/depth) and a cube_color. The script says so at gd:46 - ONE BODY, FOUR NAMES, four because axis_translation_cube.tscn is the same script again with nothing overridden. This is the sixth time the corpus has found one scene wearing several registry names, and it is the tell the CLAUDE.md note predicts: identical export counts across sibling tokens. translation_cube_demo is a genuinely separate object (commons/primitives/translation/translation_cube_demo.gd, a two-door puzzle). COURSE, five values, translation_cube_demo's list character for character and in its order (gd:45), because it is the only one of the two vocabularies that names a COMPOSITE move. lift_lateral = up for 0.44 m, then across for 0.44 m; the shipped plan and the family default; the elbow lands at the top left of the square. lateral_lift = the same two moves dealt the other way; the elbow lands at the bottom right; same start, same end, other road. lift_depth = up, then INTO the picture; +Z lies 0.79 along capture_config_sweep's own view direction so the second leg photographs at about 62% of its length, which is z_translation_cube's lesson (its description calls depth the axis a display case hides best) asked of a plan rather than of a single run. lateral = one leg and no turn; the degenerate case, and the one word that survives from the OTHER vocabulary unchanged, so this value is in both lists at once. free = both moves conceded at once, one diagonal to the same corner as lift_lateral, no elbow; translation_cube_demo builds it exactly this way (gd:219-220: diagonal = lift*target_y + side*span, dir = diagonal.normalized(), span = diagonal.length()). HOW THE OTHER VOCABULARY MAPS ON: x_/y_/z_translation_cube declare course = lateral | lift | depth, three single runs, because their cube travels once. Here `lateral` is that value verbatim; `lift` is the first leg of lift_lateral and of lift_depth and never stands alone; `depth` is the second leg of lift_depth. Nothing of theirs is lost, and one thing of theirs is fixed on the way: their registry entries declare the order [lift, lateral, depth] while the code enum is (lateral, lift, depth) - the same three words, a different order - and the code is what renders. READING, three values, and the word is the corpus's shared one for which aspect of the same thing is drawn (regime_threshold trace|bob|envelope, depth_well whole|tips|cost, sampling_bench sample|truth|error, plumb_room rock|standing|line - fifteen artifacts carry it in that sense). path = the road as a body: one 60 mm tube per leg, a 42 mm junction ball at every interior corner, and the 0.20 m cube at the far end. `lateral` and `free` have no interior corner and get no ball, which is the honest picture of them - a course with no order has no corner to show. ends = the destination: two cubes, the start one dim at emission 0.10 and the end one bright at 0.55, and nothing whatever in between. This is axis_translation_cube's `account = terminus` exactly (gd:616-619, 'before and after, nothing between... its silence about the middle is the argument'). frame = the operation: no cubes at all, the three basis arrows at the start, the same three arrows carried to the end (parallel, unrotated - a translation moves the frame and turns nothing), and the resultant displacement as one straight arrow between the two origins. The arrows are painted the three members' own cube_color values, so the basis of this artifact is literally the three bodies of the family: +X is x_translation_cube's (1.00, 0.40, 0.30), +Y is y_translation_cube's (0.30, 0.80, 0.40), +Z is z_translation_cube's (0.30, 0.50, 1.00). DOES THE MEMBER VARY THE PATH OR THE DESTINATION, which is the question the brief asked and the code answers: translation_cube_demo._path_points (gd:230-238) accumulates the legs, so lift_lateral returns S, S+Y*t, S+Y*t+X*s and lateral_lift returns S, S+X*s, S+X*s+Y*t - different middles, identical last element - and _leg_plan feeds that same walk to the door constraint, the arrows, the slot plate, the rail rods and the ghost. So the member varies the PATH, and its destination is a constant across three of its five values. It is NOT a time-domain axis: there is no _process, no Timer and no randf in that file; the order is also enforced in constrained_door._physics_process on a grabbed knob, which no still can photograph, but the order is BUILT as standing geometry in three of the five guides. THE THESIS SOMEONE COULD DISAGREE WITH: translations form an abelian group, so lift_lateral and lateral_lift name one displacement and an axis that tells them apart is telling apart the road and not the result. The disagreement available, and it is a real one: that the road IS the operation - that a door which must go up before it goes out has performed a different act from one that goes out before it goes up, whatever the two end states share, and that the group law is an abstraction which throws away precisely the part a body feels. This artifact does not settle that. It puts the two claims in three columns and makes the reader choose which column is the picture of the truth.",
+				"predicted_degeneracy": {
+					"pair": "lift_depth against lateral, in the frame reading",
+					"percent": 36.3,
+					"arithmetic": "Rasterised BEFORE ANY CAPTURE in the critic's own currency. The 15 variants were built in Python from the same constants (same _leg_plan, same accumulation, same S, LEG 0.44, CUBE 0.20, TUBE_R 0.030, TRIAD 0.15), ray-cast analytically - boxes as slabs, tubes as flat-capped cylinders, junction balls as spheres, arrowheads as short cylinders at half the cone's base radius - through capture_config_sweep's camera (FOV 34, PAD 1.9, YAW 0.62, PITCH -0.26, framing 0.62 on the 0.69 m union AABB, giving dist 2.3024, 760 x 760 at 2x supersample), key light at rotation_degrees (-42, -35, 0) energy 1.25 plus the rig's fill at (-20, 130, 0) energy 0.45, ambient 0.20, ACES at exposure 0.78. Then artifact_dna_critic's pipeline unchanged: crop to the union of the two frames' subject boxes, neutralise each frame's own corner, grey, resize 160 x 160, mean of the hottest 5%. QUIETEST NON-NULL PAIR WITHIN A NAMED CONTEXT: lift_depth vs lateral at reading=frame, 36.29% focus / 3.03% frame. WHY THAT PAIR: `frame` is seven rods, of which the three-arrow start triad is shared by every course, so only the end triad and the resultant can differ; lift_depth and lateral are the two courses whose ends are furthest apart, which makes their union crop the largest in the sheet and dilutes the hottest 5% hardest. Full predicted sheet, focus %, course pairs (ll=lift_lateral, tl=lateral_lift, ld=lift_depth, la=lateral, fr=free) - reading=path: ll-tl 41.69, ll-fr 41.40, tl-fr 41.62, tl-ld 45.11, ld-fr 45.25, ll-ld 45.28, ld-la 45.31, tl-la 45.58, ll-la 45.88, la-fr 45.92; reading=ends: ll-tl 0.00, ll-fr 0.00, tl-fr 0.00, tl-ld 45.10, ld-fr 45.10, ll-ld 45.10, ld-la 45.32, la-fr 45.69, tl-la 45.69, ll-la 45.69; reading=frame: ll-tl 0.00, ll-fr 0.00, tl-fr 0.00, ld-la 36.29, tl-ld 37.58, ld-fr 37.58, ll-ld 37.58, la-fr 40.78, tl-la 40.78, ll-la 40.78. Reading pairs, within each course (path-ends / ends-frame / path-frame): lift_lateral 38.32 / 44.72 / 44.79; lateral_lift 40.18 / 44.72 / 44.74; lift_depth 34.35 / 44.80 / 44.88; lateral 38.23 / 45.73 / 45.81; free 33.40 / 44.72 / 44.79. Cross-checked against the CROSS-axis rows as predict_pairs.py insists: the overall quietest non-null in the whole sheet is path vs ends at course=free, 33.40%, a READING pair, and it is named here so nobody reports it as a surprise. Axis means: course 34.40% focus, reading 42.28%. Subject share of frame in the replica: path 3.5-4.9%, ends 4.5-5.0%, frame 1.5-1.9% - `frame` is seven thin rods in a 0.69 m box and sits under the corpus's 6% bar, which is why TUBE_R was raised from 0.022 to 0.030 and CUBE from 0.18 to 0.20 before this was registered; if the critic reports subject share under 1% on the frame column, the arrowheads are not drawing. THIS PREDICTION IS NOT A FLOOR, AND THAT IS THE ONE PLACE IT DEPARTS FROM EVERY OTHER PREDICTION IN THIS CORPUS. Every non-null pair in the sheet lands between 33% and 46% - a 1.4x band - because this artifact is a handful of bright marks on flat ground and every non-null pair moves a mark wholly off its old pixels, so the hottest 5% is full-swing in all of them and the metric has almost no headroom left. The ordering inside that band is therefore the WEAKEST claim registered here and I expect it to be wrong; the strong claims are that the six null pairs are exactly zero and that nothing non-null is anywhere near the 6% twin bar. IF THE SWEEP DISAGREES, check the harness before the design: (a) tools/check_dna_declarations.py - a value the code cannot reach falls back and prints identical tiles, which would fake the nulls; (b) _rejects.json - both axes are String enums and a numericised token would be refused in silence, which is how tier_terrarium published ten frames of its own default; (c) whether the sheet was captured with --max=15, because at the default cap of 9 build_dna_gallery trims the LATER axis from the tail and the whole sheet becomes 5 x 1 = path only, in which the nulls do not exist. If any non-null pair reads under 15%, or if the `course` axis reads flat at reading=path, the artifact did not build - not the axis.",
+					"registered": "2026-08-15, before the first capture"
+				},
+				"designed_nulls": [
+					{
+						"a": {"course": "lift_lateral", "reading": "ends"},
+						"b": {"course": "lateral_lift", "reading": "ends"},
+						"under_percent": 0.05,
+						"why": "THE HEADLINE, and it is zero BY CONSTRUCTION rather than by luck. `ends` draws the start cube at S and the end cube at the last point of the walk. _path_points accumulates the legs, so each component of that last point receives exactly ONE addition of the same operand whichever order the legs are dealt in: lift_lateral gives (S.x + 0.44, S.y + 0.44, S.z) and lateral_lift gives (S.x + 0.44, S.y + 0.44, S.z), the same two float32 additions in the other sequence. Not near-equal - equal to the bit. Two identical meshes at two identical transforms under an identical camera is one photograph taken twice, so anything above 0.05% is not a finding about commutativity, it is a bug: a non-determinism in the build, a stray randf, or the harness photographing something other than what it set. That is why the ceiling is tight."
+					},
+					{
+						"a": {"course": "lift_lateral", "reading": "ends"},
+						"b": {"course": "free", "reading": "ends"},
+						"under_percent": 0.05,
+						"why": "The same destination by a THIRD road. free's single leg is dir = (lift*LEG + side*LEG).normalized() and span = that vector's length, so its end point is S + normalized*length. That round trip is not obviously exact, so it was checked in float32 rather than assumed: (0.44, 0.44, 0) normalised and re-scaled by its own length returns 0.4399999976158142 in both components, bit-identical to LEG. So this null is exact too, not merely tight."
+					},
+					{
+						"a": {"course": "lateral_lift", "reading": "ends"},
+						"b": {"course": "free", "reading": "ends"},
+						"under_percent": 0.05,
+						"why": "Follows from the two above; registered separately because the critic ranks pairs, not equivalence classes, and a null that is only implied is a null nobody checks."
+					},
+					{
+						"a": {"course": "lift_lateral", "reading": "frame"},
+						"b": {"course": "lateral_lift", "reading": "frame"},
+						"under_percent": 0.05,
+						"why": "The same law seen through the basis instead of through the body. `frame` draws a triad at S, a triad at the end point, and one arrow between them - all three built from S and the end point and nothing else - so it is path-blind for exactly the reason `ends` is. Two of three readings being null on this pair is the design, not a redundancy: it says the road survives ONE way of looking and no other."
+					},
+					{
+						"a": {"course": "lift_lateral", "reading": "frame"},
+						"b": {"course": "free", "reading": "frame"},
+						"under_percent": 0.05,
+						"why": "As above, with free's exact end point."
+					},
+					{
+						"a": {"course": "lateral_lift", "reading": "frame"},
+						"b": {"course": "free", "reading": "frame"},
+						"under_percent": 0.05,
+						"why": "As above."
+					}
+				],
+				"designed_nulls_why": "Six, and they are three equalities seen twice rather than six coincidences: lift_lateral, lateral_lift and free are one group element, and `ends` and `frame` are the two readings that photograph the group element rather than the road. The tempting seventh was rejected on the record: `lateral` against the other four under `ends` LOOKS as though it should share the start cube and differ only in one end cube, which it does - but a moved cube is a large change and the replica puts it at 45.7%, so that relation is registered here as a RELATION and not a null. If (lateral, ends) ever comes back closer to (lift_lateral, ends) than a cube's worth, the end point is not being recomputed per course. The inherited null nobody declared is also worth naming here, because it is where this artifact came from: translation_cube_demo's own sweep is 5 x 5, and under guide=ghost its _guide_ghost draws only pts[pts.size()-1] (gd:597), so THREE of that artifact's five course values render byte-identical in that column. It has been promoted since 2026-08-05 with no null registered against it.",
+				"fixture": {
+					"layout": "single"
+				},
+				"fixture_why": "The artifact can stand as all five courses in a row (layout=ladder, 0.80 m pitch, about 3.9 m wide) but the SWEEP must see one course at a time: capture_config_sweep unions the AABB across a spec's variants, so a five-wide row in the same spec frames every single against four metres and photographs it as a speck. layout is an export and not an axis - wave 13 paid a whole sweep for that lesson - and it ships at single, so the fixture is a belt over braces.",
+				"kin": "axis_translation_cube's second axis `account` (ghost | sweep | terminus | formula | none) is this artifact's `reading` one generation back, and the mapping is on the record: terminus IS `ends`, value for value and argument for argument (its own comment calls it 'before and after, nothing between'); sweep and ghost are two ways of saying `path`, the route held at once and the route sampled; formula and none are declined below. translation_cube_demo's second axis `guide` (arrows | none | slot | rail | ghost) is a sibling and NOT a parent: it is about how a permission is put into a room as hardware, which is a question about the fixture rather than about the displacement. `reading` is the corpus's established word for which aspect of one thing is drawn - regime_threshold (trace | bob | envelope), depth_well (whole | tips | cost), sampling_bench (sample | truth | error), plumb_room (rock | standing | line), fifteen artifacts in all - and regime_threshold's `trace` against its `envelope` is the nearest neighbour in the whole corpus to `path` against `ends`. `course` is the family's own word and is declared nowhere outside commons/artifacts/registry/transforms.json, so there is no collision to negotiate. vector_addition and matrix_4x4_viewer are kin by subject: the first draws the same commuting sum as arrows and never draws the two orders as two roads; the second holds translation in a matrix's fourth column, where the commutation is a fact about the algebra and not about a body.",
+				"declines": [
+					"The x_/y_/z_translation_cube vocabulary (lateral | lift | depth) as this axis's values. Refused because it names single runs and therefore cannot say lift_lateral against lateral_lift, which is the only thing this artifact exists to argue - three of the five pictures below cannot be spoken in it. Nothing of it is lost: `lateral` is carried over verbatim, `lift` is the first leg of two values, `depth` is the second leg of lift_depth. One thing of it is CORRECTED on the way, and it is the sort of drift check_dna_declarations.py exists for: those three registry entries declare the order [lift, lateral, depth] while the code's enum is (lateral, lift, depth). Same words, different order; the code renders, so the code is quoted.",
+					"A sixth value `depth`, a single +Z run, which would make the mapping between the two vocabularies total. Refused because the sweep would gain a cell that is a second photograph of z_translation_cube rather than an argument, and because the composite word lift_depth already carries the depth leg into the comparison where it can be read against lift_lateral - which is the only place the foreshortening says anything.",
+					"axis_translation_cube's `account` values `formula` and `none`. formula's whole content is a Label3D reading \"p'.y = p.y + d\" and an interval; none removes every label. Both are arguments about typography and about what a caption is worth, and a tile whose value is a rendered word naming its own variant is a tile about a font. `terminus` and the two route values were taken; these two were not. Nothing is printed anywhere in this artifact.",
+					"translation_cube_demo's second axis `guide` (arrows | none | slot | rail | ghost). Not refused as a design - it is a good axis and its `slot` and `rail` values are the best geometry in the family - refused because under two axes it would put the fixture in the second knob and leave the argument with nowhere to go. It is also where the member's own undeclared null lives (guide=ghost draws only the last point), and inheriting a hidden degeneracy without declaring it is how a sweep publishes identical tiles and calls them evidence.",
+					"Every caption plate and live readout. axis_translation_cube prints \"y = 0.372 / moving\", an axis name, and a formula label; translation_cube_demo prints \"1.Up\" and \"2.Slide\" beside each leg. The corner is the readout here. A caption saying which order was chosen would make the sweep a test of whether the renderer can draw text.",
+					"Every animation, rate, duration and randomness. axis_translation_cube's argument is a MOTION - _process, travel_speed, wait_time, a four-cube trail that shifts each frame - and constrained_door's is a clamp in _physics_process on a grabbed knob. Neither is photographable, and this corpus has already spent a pass on info_board's five duration exports rendering six identical tiles. There is no _process, no Timer and no randf in this file; every value builds one deterministic mesh, so two builds of one variant are the same bytes, which is what makes the designed nulls checkable at 0.05% rather than at 3%.",
+					"A `speed`, `travel_distance` or `cube_size` axis. axis_translation_cube exports all three as floats. A longer leg or a bigger cube photographed from one station is a bigger picture of the same claim, and worse: unequal legs would make lift_lateral and lateral_lift merely different rather than mirror images, which is exactly the confound the null is built to exclude. LEG is one constant used by both legs of every course.",
+					"translation_cube_demo's own leg lengths (target_y 0.25 up, door_width + gap 0.52 out). Taken as ONE length instead, for the reason above, and it is the one place this synthesis overrules a member's numbers rather than its words."
+				],
+				"sweep_command": "python tools/build_dna_gallery.py --slug=course-cube --tokens=course_cube --max=15",
+				"sweep_note": "THE FULL SHEET NEEDS --max=15. `course` is declared first and is never trimmed; `reading` is second, and build_dna_gallery trims the LATER axis from the tail until the cross product fits its cap, so at the default --max=9 the 5 x 3 sheet renders as 5 x 1 = path only. That is the one column in which every course looks different, so the artifact would photograph as a healthy loud axis and its entire argument - six null pairs living in `ends` and `frame` - would never be captured. A green sheet at --max=9 is the failure mode here, not the success.",
+				"placements": 0
+			}
+		}
+	}
+}

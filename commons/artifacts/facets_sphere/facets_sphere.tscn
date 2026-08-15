@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/facets_sphere/facets_sphere.gd" id="1_fsp"]
+
+[node name="FacetsSphere" type="Node3D"]
+script = ExtResource("1_fsp")

@@ -1,0 +1,142 @@
+{
+	"artifacts": {
+		"facets_sphere": {
+			"name": "Facets Sphere",
+			"lookup_name": "facets_sphere",
+			"scene": "res://commons/artifacts/facets_sphere/facets_sphere.tscn",
+			"class_name": "FacetsSphere",
+			"category": "geometry",
+			"artifact_type": "synthesis",
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "compact",
+			"description": "One body, built as real non-indexed triangles at a fixed subdivision, under the three things a polygon renderer can say about its own construction. `shown` paints a 2 px white band along every triangle edge - the mesh confesses what it is made of. `hidden` swaps that material for a plain lit one: it does not smooth anything, it does not touch a vertex, it removes the DRAWN edge and leaves the BUILT edge where it was. `only` keeps the bands and drops the fill. Three bodies carry the axis, one from each member of the family at the literal that member actually ships: a 16 x 16 sphere (512 triangles, smooth normals), sphere_low's 1 x 10 lantern (20 triangles, smooth normals, a decagonal bipyramid) and grab_trihedron's four-vertex wedge (4 faces, flat normals). Nothing animates, nothing is printed, nothing is random, and the triangle count never changes along the facets axis.",
+			"tags": [
+				"facets",
+				"polygon",
+				"tessellation",
+				"wireframe",
+				"representation",
+				"sphere",
+				"polyhedron",
+				"synthesis",
+				"geometry"
+			],
+			"dev_themes": [
+				"geometry",
+				"primitives",
+				"synthesis",
+				"the seam between what is built and what is presented"
+			],
+			"interactions": [
+				"stand at body=sphere_fine and turn facets from shown to hidden: 512 triangles do not go anywhere, the ink does",
+				"hold sphere_coarse at hidden and look at the OUTLINE - a decagonal bipyramid shades like a ball and is silhouetted like a lantern, and no material can fix that",
+				"take the trihedron to hidden and count the faces anyway: flat normals mean the brightness steps survive, so hidden conceals nothing on the one body whose own truth line says a solid is its topology",
+				"at facets=only compare sphere_fine with sphere_coarse: the same 1.0 m ball, 512 edges against 20, and neither of them is the object"
+			],
+			"capacity": "SEE that `smooth` is not a property an object has but a claim a material makes on its behalf - and that turning the claim off changes the picture without changing a single vertex",
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"sphere_low",
+					"sphere_mid",
+					"sphere_high",
+					"grab_trihedron",
+					"grab_octahedron"
+				],
+				"preferred_zone": "entry",
+				"footprint_source": "computed_from_geometry",
+				"footprint_note": "Every single-layout variant sits inside the SAME 1.0 x 1.0 x 1.0 m box: the spheres are radius 0.50 centred at y 0.50, and the trihedron's four vertices are normalised to half-extent 0.50 about the same centre (grab_trihedron ships 0.6; this is its own _fit_to_box argument applied to the body instead of the figure). layout=ladder stands the three bodies in a row at 1.30 m pitch (about 3.6 m wide) and is a design view, not a map placement."
+			},
+			"measurements": {
+				"aabb_size": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"aabb_center": [
+					0.0,
+					0.5,
+					0.0
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 1.0,
+				"source": "computed_from_geometry, and identical for all nine variants by construction: the spheres are radius 0.50 about (0, 0.50, 0) and the trihedron's literal is +-HALF in every axis about the same point, so the union AABB over the whole sweep is exactly the unit cube. Re-derived in a Python replica of the same constants; no Godot was run."
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			],
+			"dna": {
+				"promoted": "2026-08-15",
+				"stage": "synthesis",
+				"sources": [
+					"grab_trihedron",
+					"sphere_high",
+					"sphere_low"
+				],
+				"axes": {
+				 "facets": [
+				  "shown",
+				  "hidden",
+				  "only"
+				 ],
+				 "body": [
+				  "sphere_fine",
+				  "sphere_coarse",
+				  "trihedron"
+				 ]
+				},
+				"default": "facets=shown, body=sphere_fine. shown is the members' default 3 of 3 - grab_trihedron gd:53, sphere_high gd:40, sphere_low gd:46 all ship `shown`, and in all three it is the SimpleGrid material the artifact has always worn. It means the same thing here: the mesh confesses its triangles. body=sphere_fine because sphere_high is the member whose own qfep line states the family thesis ('smooth is just faceted with the facets small enough to forgive') and 16 x 16 is the literal its code has always used - the registry's own doc_discrepancy note records that its description said 32 and the shipping code has always been 16, so the default is pinned to the code.",
+				"note": "WHAT THE VALUES MEAN, from the members' code. THE CENSUS FIRST: facets is declared by exactly three artifacts in the whole 2671-entry corpus - grab_trihedron, sphere_high, sphere_low - with the same three words in the same order and the same default. sphere_mid, the third sibling of the sphere trio, is NOT a member: it declares `resolution` and `budget_bias` and never took the word. So: three members, one vocabulary, and the vocabulary is a copy - their `_build_material()` bodies are the same seventeen lines three times over, down to the comment about MeshInstance3D already owning a `skin` property. AND NO, sphere_high AND sphere_low ARE NOT ONE SCENE UNDER TWO NAMES. Checked: two scenes (godotmeshes/sphere_high.tscn, godotmeshes/sphere_low.tscn), two scripts, two BASE_COLORs (0.9,0.8,0.3 against 0.8,0.3,0.9) and two genuinely different second axes - sphere_high's `tessellation` is a square resolution ladder (coarse 4, low 7, high 16, ultra 32, rings = radial_segments = n) while sphere_low's `grain` is an anisotropic budget (meridian [1,10], parallel [10,3], even [4,4], the same ~20 quads spent in three directions). What IS one implementation under three names is the facets half, grab_trihedron included. facets, three values, the family's list character for character and in its order. shown = GridMaterialFactory.make(BASE_COLOR, {}), the SimpleGrid shader: it reads VERTEX_ID % 3 as a barycentric coordinate and paints a band `width` = 2.0 px wide along every triangle edge, white albedo plus the shader's emissionColor - which the factory never sets, so it is the shader's default RED - at emission_strength 2.0. The band is 2 px in SCREEN space whatever the triangle's size. hidden = a plain StandardMaterial3D, albedo BASE_COLOR, emission BASE_COLOR * 0.3, and NOTHING ELSE. only = the same SimpleGrid with show_only_wireframe, which sets show_interior = false, so the fill goes to ALPHA 0 and the bands are all that is left. THE ONE THING THE CODE SAYS THAT THE OBVIOUS STORY DOES NOT: `hidden` does not smooth anything. It does not set a normal, change a mesh, raise a subdivision or move a silhouette - all three members' facets branch assigns a MATERIAL and returns. So hidden removes the DRAWN edge and leaves the BUILT edge exactly where it was, and whether the object then reads as smooth is decided by two things facets cannot reach: the normals the mesh carries, and how many triangles there are. hidden is not a lie the axis tells; it is the axis declining to speak, and the silence passes for smoothness only where the geometry was already hiding the facets. body, three values, named by which member's mesh is standing there, at the literal that member actually ships. sphere_fine = rings 16, radial_segments 16 - sphere_high's TESSELLATION['high'] - 512 triangles, SMOOTH radial normals as SphereMesh writes them; the body on which hidden conceals most, because the normals were already pretending. sphere_coarse = rings 1, radial_segments 10 - sphere_low's GRAIN['meridian'], its shipped literal - 20 triangles, smooth normals, and because Godot's `rings` counts horizontal rings the mesh has rings+1 = 2 stacks, which makes it a decagonal BIPYRAMID: it shades like a ball and is silhouetted like a lantern, so hidden conceals the interior and cannot touch the outline. trihedron = grab_trihedron's shipped four-vertex wedge (apex plus a base triangle), 4 flat-shaded faces, one normal per face exactly as PrimitiveMeshBuilder._add_triangle emits them; flat normals mean the facets survive as steps in brightness, so hidden conceals nothing here at all - on the one member whose own truth line says a solid is its topology and not its material. THE NORMAL TREATMENT IS NOT A THIRD AXIS: it is each member's own builder carried over unchanged, and it is the whole reason the three bodies disagree about what hidden is worth. EXTENTS, because `only` is a sparse subject and the framing has to be checked against it (all figures from the Python replica at dna.framing 0.6, 760 x 760, per the critic's own subject_fraction): shown and hidden measure 20.8% of frame on sphere_fine, 13.3% on sphere_coarse, 13.8% on the trihedron; `only` measures 12.0%, 3.2% and 1.34%. The smallest, the trihedron at only, is 1.34% - six times the critic's BLANK_SUBJECT floor of 0.2% and above floating_sphere_field's legitimate 0.83%, so it is sparse and not empty. THE THESIS SOMEONE COULD DISAGREE WITH: that `facets` is not a display option but a claim about whether a smooth object exists at all - and that the family's own promise, sphere_high's 'smooth is just faceted with the facets small enough to forgive', is false of the family's own code. The disagreement available: that the wireframe is a teaching overlay and not the object, so removing it reveals the object rather than concealing it. The trihedron at hidden is where that quarrel is visible, because there the removal reveals nothing the shading had not already told you.",
+				"predicted_degeneracy": {
+					"pair": "shown against hidden, on the trihedron body",
+					"percent": 9.9,
+					"arithmetic": "Rasterised BEFORE ANY CAPTURE in the critic's own currency: all nine variants rebuilt in Python from the same constants (same UV-sphere generator with stacks = rings + 1 and the same quad diagonal, same four-vertex wedge, same per-face and per-vertex normals), z-buffered through capture_config_sweep's default rig - FOV 34, PAD 1.9, yaw 0.62, pitch -0.26, framing 0.6, 760 x 760, background 0.055/0.055/0.070, ambient 0.62/0.65/0.72 at 0.55, key 1.25 at (-42,-35), fill 0.45 at (-20,130), FILMIC - with SimpleGrid's own edge maths (closestEdge = smoothstep(0, 1, dist_px / width), width 2.0) and its unset RED emissionColor at strength 2.0, then artifact_dna_critic's pipeline unchanged: crop to the union of the two frames' subject boxes, neutralise each frame's corner background, grey, resize 160 x 160, mean of the hottest 5%. Closest pair: shown vs hidden on the trihedron, 9.94% focus / 4.49% frame. WHY THAT PAIR: the trihedron has FOUR triangles, so shown paints five or six visible bands and nothing else, and those bands are the only pixels where the two frames differ by more than the uniform 0.3 emission step that hidden adds over the whole solid. Every other body has more edges, and every other pair changes the fill. Full predicted sheet, focus % / frame %. facets pairs within a body - sphere_fine: shown-hidden 14.45/4.99, shown-only 56.42/28.51, hidden-only 59.03/30.98; sphere_coarse: shown-hidden 14.68/3.38, shown-only 56.65/22.08, hidden-only 59.20/24.90; trihedron: shown-hidden 9.94/4.49, shown-only 37.07/17.02, hidden-only 46.79/21.42. body pairs within a facets value - shown: fine-coarse 64.28/16.96, fine-trihedron 64.49/22.05, coarse-trihedron 58.08/15.89; hidden: fine-coarse 59.61/15.48, fine-trihedron 59.48/21.64, coarse-trihedron 59.16/16.83; only: fine-coarse 52.45/10.33, fine-trihedron 47.88/7.52, coarse-trihedron 26.90/1.70. Axis means: facets 39.36% focus, body 54.70% focus. Nothing under the critic's 6% twin bar; the minimum in the whole sheet is 9.94%, and the one pair that comes close to a LOCAL verdict is (only, sphere_coarse) against (only, trihedron) at 1.70% frame with a 26.90% peak - two sparse line drawings that barely overlap. THE PREDICTION IS A FLOOR: the replica has one Lambert term per light, no shadows, no AO, no specular and only a 2x box downsample where the real capture renders at 1x with no MSAA, and every prior prediction in this corpus under-read by 1.5x to 6.7x. If the sweep comes back BELOW 9.9% on this pair, or if ANY body pair reads under 25%, check the harness before the design: (a) tools/check_dna_declarations.py - a value the code cannot reach falls back and prints identical tiles; (b) _rejects.json - both axes are String enums whose values are non-numeric words, so cabinet_sweep.coerce() cannot numericise them and a silent typed refusal should be impossible, which makes a non-empty rejects file a fact about the harness; (c) whether the sheet was captured with --max=9 or more, because the cross product is exactly 9 and at any smaller cap build_dna_gallery trims `body` from the tail and the trihedron - where the pre-registered closest pair lives - is never photographed. If instead the FACETS axis reads under 6% anywhere on the SPHERES, the material is not being swapped at all: read the per-pair rows and not the headline, because 39.36% is a mean over pairs that run from 9.94 to 59.20 and a live pair will hide a dead one.",
+					"registered": "2026-08-15, before the first capture"
+				},
+				"designed_nulls": [],
+				"designed_nulls_why": "None, honestly, and the brief asked for one. The proposed null was that at a fine enough subdivision `shown` and `hidden` become indistinguishable from the sweep camera - the family's own promise, in sphere_high's words, that smooth is faceted with the facets small enough to forgive. THE CODE FORBIDS IT, and the arithmetic is not close. `shown` is not a shading of the facets, it is a SCREEN-SPACE ink: SimpleGrid.gdshader computes edge_distance = baryCoord / (dBaryCoord * width), which is the perpendicular distance to the edge in PIXELS divided by width, so the band is about 2 px wide however small the triangle gets. Halving the triangle does not halve the band; it doubles the number of bands. Coverage therefore GROWS with triangle count and `shown` converges on a white ball, not on `hidden`. Predicted: shown vs hidden reads 14.45% focus at 512 triangles and 14.68% at 20 - a null would need under 6% - and its FRAME number RISES from 3.38% to 4.99%, a factor of 1.48, in the direction opposite to the promise. So the null is registered here as a RELATION and not as a null, which is the falsifiable claim this artifact is actually making: (1) the shown-vs-hidden PEAK is flat across the two spheres (14.68 -> 14.45, a fall of 1.6% relative) because the per-pixel contrast of one band is set by the shader and not by the mesh, while (2) the shown-vs-hidden AREA rises by half (3.38 -> 4.99) because the bands multiply. If the sweep instead shows the area FALLING as the mesh gets finer, the family's smoothness story is true of its own code and this artifact's thesis is wrong. The one thing that IS null by construction, and worth checking as a control: `facets` never touches a vertex, so within a body the subject bounding box must be identical across all three values. In the replica it is, to the pixel - sphere_fine (185,186,574,574), sphere_coarse (187,186,572,559), trihedron (258,186,630,627), each repeated three times. A bounding box that MOVES across facets means a material is reaching geometry and no number off that run is about the axis.",
+				"framing": 0.6,
+				"framing_why": "At the default framing 1.0 the fit-by-diagonal on a 1.0 m cube puts the camera 5.38 m out and the sphere covers about 7% of frame, near the ~6% bar at which an inflated AABB starts eating the subject. 0.6 brings it to 3.23 m for a half-frame of 0.987 m against a worst-case projected half-extent of about 0.70 m (the cube's silhouette at yaw 0.62), so the whole body still clears the edge by 40% while the spheres rise to about 21% of frame and the sparsest variant - the trihedron at only - to 1.34%.",
+				"fixture": {
+					"layout": "single"
+				},
+				"fixture_why": "The artifact can stand as all three bodies in a row (layout=ladder, 1.30 m pitch, about 3.6 m wide) but the SWEEP must see one body at a time: capture_config_sweep unions the AABB across a spec's variants, so a three-wide row in the same spec frames every single against four metres and photographs it as a speck. layout is an export and not an axis, and it ships at single, so the fixture is a belt over braces.",
+				"kin": "grab_trihedron's second axis `figure` = wedge | corner | regular | inverted is the same question one level down - WHICH trihedral solid, three planes meeting at a point being a definition rather than a shape. It is kin and it is not taken: it argues about silhouette inside one body, where this artifact's `body` argues across the family's three. sphere_high's `tessellation` (coarse 4 | low 7 | high 16 | ultra 32) and sphere_low's `grain` (meridian [1,10] | parallel [10,3] | even [4,4]) are the two halves of the same resolution question - how MUCH budget and in which DIRECTION - and sphere_mid carries both under other names (`resolution`, `budget_bias`), which is the tell that the sphere trio is one artifact wearing three tokens. `body` takes one shipped point from each rather than the ladder, and the mapping is one line: sphere_fine = sphere_high at tessellation=high, sphere_coarse = sphere_low at grain=meridian, trihedron = grab_trihedron at figure=wedge. A room holding sphere_high at tessellation=high and this bench at body=sphere_fine is saying one thing twice. grab_octahedron is a sibling by handling (grab_trihedron's own registry names it) and declares no facets axis.",
+				"declines": [
+					"grab_trihedron's `figure` axis (wedge | corner | regular | inverted). Named as kin above and refused as a second axis here: it varies the solid inside one member, and crossing it with facets would produce a 3 x 4 sheet about trihedra rather than about the family's shared word. It is also already promoted and already measured on its own token.",
+					"sphere_high's `tessellation` and sphere_low's `grain` as a resolution axis of their own. Refused because a 4 x 3 or 3 x 3 sheet against facets is a sheet about RESOLUTION, and the argument here is about what a material ADMITS. `body` takes each member's shipped literal instead, which keeps the subdivision comparison (20 triangles against 512) without making it the subject.",
+					"sphere_mid. It is the third sibling of the sphere trio and it is NOT a member of this family - it declares `resolution` and `budget_bias` and never adopted `facets`. Recorded so the census reads three and not four, and so nobody 'completes' the family by promoting a fourth member into it.",
+					"The members' three BASE_COLORs (yellow 0.9/0.8/0.3, purple 0.8/0.3/0.9, cyan 0.2/0.8/1.0). One colour here - sphere_low's, the darkest of the three, so the white band has the most to argue with. Three colours would put a hue change inside every `body` pair and make that axis partly a fact about paint.",
+					"GridMaterialFactory.make_parametric(). The factory's OWN docstring says artifacts that vary tessellation as a parameter should use ParametricGrid, 'because the visual encoding stays legible at every density' - and sphere_high, which varies tessellation, ignores it and uses make(). Followed the members and not the docstring, and on purpose: ParametricGrid paints N x M lines from UV coordinates REGARDLESS of triangle density, so its lines are not the mesh's edges. An artifact whose whole claim is that the drawn lines ARE the triangles cannot draw them from UVs.",
+					"An indexed mesh. Both sphere members build with Godot's SphereMesh, which is INDEXED, and SimpleGrid derives its barycentric coordinate from VERTEX_ID % 3 - which on an indexed surface is a fact about vertex-buffer order rather than about the triangle. grab_trihedron is the one member where the shader works as written, because PrimitiveMeshBuilder emits through SurfaceTool without ever calling index(). This artifact does the same, so `shown` really is this mesh's own triangle edges. This is the second place the family's code disagrees with itself and the second time the trihedron is the one that is right.",
+					"grab_trihedron's open base. Its shipped mesh generates three faces and no base, so the solid is an open shell with V - E + F = 4 - 6 + 3 = 1 - its own registry entry records this as a doc_discrepancy against an @identity that promises the Euler relation, left as found because closing it would change 7 live placements. Closed here, because an open shell at `hidden` photographs as a hole and the axis would be measuring a missing face instead of a concealed edge. Winding is forced outward per face against the solid's centroid rather than trusted from the shipped index order.",
+					"grab_trihedron's shipped trihedron_size 0.6, which gives a 1.2 m box. Normalised to 0.5 so all three bodies occupy the same 1.0 m cube and the sweep's fixed camera is identical for every variant - which is grab_trihedron's own _fit_to_box argument ('the axis changes silhouette and never size'), applied to the body instead of the figure.",
+					"grab_trihedron's XRToolsPickable base, its shelf snap, its _process and its ax_button material toggle. This is a bench body, not a held one; and the button is dead in the shipped scene anyway (alternate_material is null in grab_trihedron.tscn, so pressing it swaps nothing), which is exactly the unreachable critical_parameter that made the facets axis necessary in the first place.",
+					"Any caption, readout, triangle count or Label3D. The triangle count is the argument and printing it would make the tile a photograph of a number. Nothing is printed anywhere in the file.",
+					"Any animation, rate, or randomness. There is no _process, no Timer, no randf and no unseeded anything: both meshes are generated from integer loops over fixed constants, so two builds of one value are the same mesh."
+				],
+				"sweep_command": "python tools/build_dna_gallery.py --slug=facets-sphere --tokens=facets_sphere --max=9",
+				"sweep_note": "The cross product is exactly 3 x 3 = 9, which fits build_dna_gallery's default cap with nothing to spare. `facets` is declared first and is never trimmed; `body` is second and gets trimmed from the tail, so at any cap below 9 the sheet renders as 3 x 1 = sphere_fine only and the trihedron - on which the pre-registered closest pair lives, and which is the body that carries the flat-normal half of the argument - is never photographed. Pass --max=9 explicitly rather than relying on the default staying 9.",
+				"placements": 0
+			}
+		}
+	}
+}

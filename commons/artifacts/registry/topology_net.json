@@ -1,0 +1,172 @@
+{
+	"artifacts": {
+		"topology_net": {
+			"name": "Topology Net",
+			"lookup_name": "topology_net",
+			"scene": "res://commons/artifacts/topology_net/topology_net.tscn",
+			"class_name": "TopologyNet",
+			"category": "machinelearning",
+			"artifact_type": "synthesis",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "compact",
+			"description": "One network of 24 spheres and the rods between them, laid out under eight topologies drawn from two vocabularies that have never been made to meet. Five are layer widths from the neural members - graded 8-6-5-3, flat 11-11 with no hidden layer at all, deep 2 x 11, widened 3-16-3, pinched 11-1-10 - and three are connectivity rules from the rhizomatic member: rhizome, a minimum spanning tree, and the rhizome cut in two. The node budget is fixed at 24 in every value, so the spheres are a constant and the rods are the whole argument. Three readings, each built geometry: the net; every rod on a shortest route from ENTRY to EXIT, thickened; and the narrowest cross-section, marked by max-flow and hooped. Nothing animates, nothing is printed, nothing is random - the scatter is Halton, the tree is Prim's, the cut is max-flow, the routes are BFS.",
+			"tags": [
+				"topology",
+				"network",
+				"graph",
+				"neural_network",
+				"rhizome",
+				"deleuze",
+				"bottleneck",
+				"min_cut",
+				"synthesis",
+				"machinelearning"
+			],
+			"dev_themes": [
+				"machine_learning",
+				"alternative_geometries",
+				"synthesis",
+				"a network's shape is a claim about how information can travel"
+			],
+			"interactions": [
+				"walk the topology axis at reading=routes: every layered value goes entirely gold because in a stratified net all routes are the same length, the rhizome lights a bundle of 9 rods out of 55, the tree lights the one route it has, and severed lights nothing",
+				"stand at (tree, cut) and at (pinched, cut): both mark exactly one sphere, which is the real synonym across the two vocabularies - a tree is pinched everywhere at once, a pinched net exactly once",
+				"count the rods at deep and at tree: 44 against 23, and 2048 routes against 1, on the same 24 spheres. A feedforward net is not a tree",
+				"at (severed, anything) the three readings are the same photograph, because a network already in two pieces has no route to thicken and no cut left to take"
+			],
+			"capacity": "SEE that layer width and connectivity are two vocabularies for one question - how can information travel through this - and that they do not line up the way either tradition assumes",
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"neural_network_visualization",
+					"neural_networks_vr",
+					"rhizomatic_maze_space",
+					"maze_generation",
+					"graph_traversal",
+					"backpropagation_flow"
+				],
+				"preferred_zone": "teaching",
+				"footprint_source": "computed_from_geometry",
+				"footprint_note": "Every single-layout variant sits inside 0.916 x 0.936 x 0.735 m. The envelope is a design constraint and not a coincidence: columns are pitched so the station count never changes the span, a column of 2 is spread over the same height as a column of 16, and severed's fragments are compressed toward the cut by exactly the drift they are then given, so the gap is a gap and not extra width. layout=ladder stands all eight topologies in a row at 1.15 m pitch (about 8.1 m wide) and is a design view, not a map placement."
+			},
+			"measurements": {
+				"aabb_size": [
+					0.903,
+					0.808,
+					0.658
+				],
+				"aabb_center": [
+					0.0,
+					0.5,
+					0.0
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.903,
+				"source": "computed_from_geometry for the DEFAULT variant (topology=graded, reading=net): 24 spheres of r 0.024 and 104 rods of r 0.013, the ENTRY-EXIT span 1.05 m laid along R_AX = (0.813878, 0, -0.581035) and the columns spread over 0.76 m in y about CENTRE_Y 0.50. Re-derived in a Python replica of the same constants; no Godot was run. Union over all 24 variants is 0.916 x 0.936 x 0.735 (the extra y is the cut hoops on graded's outermost marked node), and the widest single variant is 0.915 m."
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			],
+			"dna": {
+				"promoted": "2026-08-15",
+				"stage": "synthesis",
+				"sources": [
+					"neural_network_visualization",
+					"neural_networks_vr",
+					"rhizomatic_maze_space"
+				],
+				"axes": {
+				 "topology": [
+				  "graded",
+				  "flat",
+				  "deep",
+				  "widened",
+				  "pinched",
+				  "rhizome",
+				  "tree",
+				  "severed"
+				 ],
+				 "reading": [
+				  "net",
+				  "routes",
+				  "cut"
+				 ]
+				},
+				"framing": 0.62,
+				"framing_why": "The subject is a sparse lattice of thin rods, so at framing 1.0 the replica measures the non-background share at 4.6 percent of frame and at tree it falls to 2.2 - under the bar at which the corpus stops trusting a number at all. 0.62 leaves an effective PAD of 1.18 on the union AABB's half-diagonal (0.751 m at 2.893 m) and lifts the default variant to 8.1 percent with nothing clipped: the object's widest screen projection is 1.10 m against a 1.71 m frame.",
+				"default": "topology=graded, reading=net. graded is the neural members' default 2 of 2 (neural_network_visualization.gd:102 and NeuralNetworks_VR.gd:50 both ship `graded`), and it means the same thing here: the shipped tapering stack, the diagram a network is usually drawn as. Across the whole family it is 2 of 3 - rhizomatic_maze_space ships `rhizome` - and the tie is broken toward the neural word because two of the three sources are neural and because a taper is the shape a reader arrives already holding, which is what a default is for. net because it is the network with nothing said about it yet, the base both other readings are built on top of.",
+				"note": "WHAT THE VALUES MEAN, from the members' code. topology, eight values, the union of two vocabularies each kept in its own members' order. FROM THE NEURAL MEMBERS (graded | flat | deep | widened | pinched, verbatim and in order, both of them) as LAYER WIDTHS between a designated ENTRY and EXIT, 22 interior nodes at every value so all eight spend exactly 24 spheres: graded = 8-6-5-3, a taper, 104 rods, 720 routes, narrowest cross-section 3 - the members' shipped stacks (nnv 4-6-4-2, nnvr 5-4-3-2) at this budget. flat = 11-11. THE MEMBERS' `flat` IS NOT `equal widths`: read the code, nnv sets hidden = [] (gd:114) and nnvr sets [5, 2] (gd:79), which is NO HIDDEN LAYER AT ALL, input wired straight to output, and nnv's comment calls it the architecture that provably cannot learn the XOR data it is standing in front of. So flat here is flat in DEPTH - two columns, one curtain of 121 rods doing all the work, 143 rods, 121 routes, narrowest cross-section 11, a whole column. deep = 2 x 11, eleven thin bays, 44 rods, 2048 routes, narrowest cross-section 2 - the fewest rods and the most routes in the whole set. widened = 3-16-3, a bulge, 102 rods, 144 routes, narrowest cross-section 3 (there are two cuts of size 3, the outer columns; the residual graph names the near one). pinched = 11-1-10, a one-sphere waist, 42 rods, 110 routes, narrowest cross-section 1 - everything the network knows passes through one number, and you can point at it. FROM rhizomatic_maze_space (rhizome | tree | severed, its order) as CONNECTIVITY RULES over one Halton scatter of the same 24 points, so that position is held constant and only the rods move: rhizome = every node reaching for its nearest neighbours, routes closing into loops, no root and no last node - 55 rods, narrowest cross-section 2, and only 9 of those 55 lie on a shortest route, so the tangle is mostly detour. tree = Prim's minimum spanning tree from ENTRY, the member's own figure (RhizomaticMazeGenerator.gd:74-79, `no cycle: one origin, a strict descent, and between any two points exactly one route`) - exactly 23 rods, which is 24 minus 1, which is what makes it a tree, and EXACTLY ONE route from ENTRY to EXIT, 10 rods long. severed = the rhizome grown in full and then cut, every rod crossing the middle band removed and the two fragments standing apart - 38 rods, ZERO routes, narrowest cross-section 0. WHICH WORDS ARE SYNONYMS ACROSS THE TWO VOCABULARIES, WHICH IS THE POINT OF THE ARTIFACT AND IS NOT WHAT THE BRIEF PREDICTED. The brief proposed that a feedforward net IS a tree in D&G's sense, so that deep and tree might be one object and the neural family simply had no word for rhizome. Half of that is right and the load-bearing half is wrong. A feedforward net has no lateral edge and no return, so it can never be a rhizome - that stands. But it is not a tree either, and the arithmetic is not close: nnv's deep is 4-3-3-3-3-3-2, 21 neurons and 54 weights where a tree on 21 nodes has 20 edges, and the routes from one input to one output number 3^5 = 243; nnvr's deep is 5-4-4-4-4-4-2, 27 nodes, 92 lines, 4^5 = 1024 routes. On this artifact's own graphs deep has 44 rods and 2048 routes against tree's 23 rods and 1 route. A stratified net does not have too FEW paths, it has enormously many, all of exactly the same length. What the brief was reaching for is real but it is a different word: D&G's *arborescent* is about stratification, hierarchy and an imposed direction, while the graph-theorist's *tree* is about acyclicity, and a feedforward net is the first without being the second. THE SYNONYM THAT SURVIVES IS pinched AND tree. Minimum ENTRY-EXIT vertex cut, computed exactly by max-flow on the split-vertex network: tree 1, pinched 1, deep 2, rhizome 2, graded 3, widened 3, flat 11, severed 0. A tree's bottleneck is 1 because every internal node on its unique route is one; a pinched net's is 1 because someone built a waist. The difference is not whether there is a bottleneck but how many - a tree is pinched everywhere at once, a pinched net exactly once - and that is a claim the cut reading photographs rather than asserts. reading, three values, three ways of being shown one built network, each of them geometry and none of them an overlay: net = the 24 spheres and the rods, the shape as such. routes = every rod lying on a SHORTEST route from ENTRY to EXIT, rebuilt at 0.025 m instead of 0.013 and in the route colour, computed exactly by two BFS passes. This is where the three regimes separate absolutely, and it is a structural fact rather than a rendering choice: in a stratified net every route is the same length, so `shortest` selects nothing and all 104 / 143 / 44 / 102 / 42 rods go gold; in a rhizome routes have many lengths, so it selects a bundle of 9 out of 55; in a tree there is only ever one route, so one thread lights and 13 rods stay grey; in a severed network there is no route at all. cut = the narrowest cross-section, built. The minimum vertex cut's spheres are rebuilt at 0.038 m, a hoop of radius 0.078 is laid round each one in the plane across the flow, and every rod touching one of them is recoloured - flat marks a whole column of 11 and 132 of its 143 rods, pinched marks one sphere, tree marks one sphere, severed marks nothing. The cut is read off the residual graph, which names the SOURCE-SIDE minimal cut, so a value with several minimum cuts always marks the same one. THE THESIS SOMEONE COULD DISAGREE WITH: that layer width and connectivity are two vocabularies for one question, and that the neural tradition's five words and Deleuze and Guattari's are commensurable at all. The disagreement available, and it is a good one: that `rhizome` is a claim about a social or conceptual field and not about a graph, so building it as 55 rods between 24 spheres is exactly the flattening D&G were arguing against - that the moment you can compute its minimum cut you have made it arborescent. The artifact cannot settle that; what it can do is put the two pictures at the same scale, on the same 24 spheres, and let the quarrel be about something visible.",
+				"predicted_degeneracy": {
+					"pair": "rhizome against tree, in the net reading",
+					"percent": 25.3,
+					"arithmetic": "Rasterised BEFORE ANY CAPTURE in the critic's own currency: the geometry built in Python from the same constants (same Halton scatter, same Prim, same max-flow, same BFS - the transliteration reproduces all eight graphs' rod counts, cut sets, distances and route sets exactly), z-buffered through capture_config_sweep's camera (FOV 34, PAD 1.9, yaw 0.62, pitch -0.26, 760 x 760, framing 0.62 on the union AABB of all 24 variants), then artifact_dna_critic's pipeline unchanged - crop to the union of the two frames' subject boxes, neutralise each frame's corner background, grey, resize 160 x 160, mean of the hottest 5%. Closest topology pair inside any one reading: rhizome vs tree at net, 25.26% focus / 2.08% frame. WHY THAT PAIR: they are the only two values built on IDENTICAL node positions - the same 24 Halton points, the same ENTRY and EXIT - so every sphere in one frame is a sphere in the same place in the other, and the entire difference is 55 rods against 23. Rods are 0.013 m against spheres at 0.024 and they are thin enough that a 160 x 160 downsample eats most of them. Runners-up on the topology axis: rhizome vs tree at cut 28.69%, deep vs widened at net 32.55%, deep vs widened at cut 33.23%; the mean over all topology pairs is 41.7% and the loudest is pinched vs tree at routes, 54.13%. THE SMALLEST NON-DESIGNED NUMBER IN THE WHOLE SHEET IS NOT ON THIS AXIS: it is tree at net against tree at cut, 3.75% focus / 0.19% frame, and it is expected to sit just above the critic's 3.0% INERT_FOCUS line. That is not a fault and it must not be repaired into one: marking a tree's narrowest cross-section means enlarging ONE sphere of 24 and hooping it, and the reason it barely shows is the finding - a tree's bottleneck is not a special place, because a tree is nothing but bottlenecks. The rest of the reading axis is loud (deep net vs routes 45.5%, pinched net vs routes 46.7%), which is exactly the hazard CLAUDE.md names: the bite headline is a PEAK, so read the per-pair rows in sweep_topology-net_bite.json and do not let a 46% route pair certify the cut pairs. THE PREDICTION IS A FLOOR: the replica has one light, flat shading, no shadows, AO or antialiasing, and every prior prediction in this corpus under-read by 1.5x to 6.7x. If the sweep comes back BELOW 25.3% on rhizome vs tree at net, or below 3.7% on tree net-vs-cut, stop and check the harness before the design: (a) tools/check_dna_declarations.py - a value the code cannot reach falls back and prints identical tiles; (b) _rejects.json - both axes are String enums and a numericised token would be refused in silence; (c) whether the sheet was captured with --max=24, because at the default cap of 9 build_dna_gallery trims the LATER axis from the tail and the 8 x 3 sheet renders as 8 x 1 = net only, in which case the whole reading axis and both designed nulls were never photographed at all.",
+					"registered": "2026-08-15, before the first capture"
+				},
+				"designed_nulls": [
+					{
+						"a": {
+							"topology": "severed",
+							"reading": "net"
+						},
+						"b": {
+							"topology": "severed",
+							"reading": "routes"
+						},
+						"under_percent": 0.5,
+						"why": "Identical by construction, and the replica measures 0.000% focus / 0.000% frame. The routes reading thickens every rod lying on a shortest ENTRY-EXIT route; severed has no ENTRY-EXIT route at all, because the fissure is the plane through the middle and ENTRY and EXIT are nailed at the two ends, so BFS returns distance -1 and the hot set is empty. The pass therefore emits zero geometry and the two frames are the same mesh. IF IT BREAKS, that is the finding and not a bug: some rod is carrying a route across a cut that is supposed to have severed the graph, which would mean the fissure band did not actually disconnect the two fragments and the sever is theatre."
+					},
+					{
+						"a": {
+							"topology": "severed",
+							"reading": "net"
+						},
+						"b": {
+							"topology": "severed",
+							"reading": "cut"
+						},
+						"under_percent": 0.5,
+						"why": "Identical by construction, replica 0.000% / 0.000%. The cut reading marks the minimum ENTRY-EXIT vertex cut; a graph already in two components has a maximum flow of 0 and therefore an EMPTY minimum cut, so there is no sphere to enlarge, no hoop to lay and no rod to recolour. You cannot mark the narrowest cross-section of a network that has none, and that is the whole content of the value: a rupture is what happens when the bottleneck has already been taken. IF IT BREAKS, the max-flow found something to cut on a graph whose cut is provably empty - i.e. the sever left an edge crossing the fissure - and the same suspicion applies as above. Taken with the pair above this is a THREE-WAY null: all three readings of severed are one photograph, and severed is the only value in the artifact for which the reading axis has nothing to say."
+					}
+				],
+				"designed_nulls_why": "Two registered, and they are the same fact twice. The tempting third is (tree, routes) against (tree, net) on the ground that a tree's unique route is most of the tree - it is not: 10 of 23 rods, and the replica puts it at 27.69%, a whole figure away. It is registered here as a RELATION rather than a null: if (tree, routes) comes back near (tree, net), the route finder is lighting the whole tree instead of the one path through it, which would mean the BFS is running on an undirected graph where the shortest-route test does not discriminate. In wave 15 five of five designed nulls held; these two are stronger than any of those because they do not depend on two similar things looking similar, they depend on a pass emitting no geometry.",
+				"fixture": {
+					"layout": "single"
+				},
+				"fixture_why": "The artifact can stand as all eight topologies in a row (layout=ladder, 1.15 m pitch, about 8.1 m wide) but the SWEEP must see one network at a time: capture_config_sweep unions the AABB across a spec's variants, so an eight-wide row in the same spec frames every single against eight metres and photographs it as a speck. layout is an export and not an axis - wave 13's lesson, that an all-rungs value declared inside an axis poisons the framing of every other value - and it ships at single, so the fixture is a belt over braces.",
+				"kin": "maze_generation is the tree to rhizomatic_maze_space's rhizome by its own account (RhizomaticMazeSpace.gd:11 says `contrasts with maze_generation (tree-structured vs rhizomatic)`) and is kin by subject, not taken as a source because it argues about generation and not about shape. backpropagation_flow and the LSTM artifacts share the neural members' bodies but their axes are about signal and time, which a still cannot hold. graph_traversal and the connectivity artifacts (Kosaraju, Tarjan) are the nearest thing in the corpus to this artifact's cut reading - mutual reachability is not the same as being connected - and the mapping is one line: their strong components are what severed produces and this artifact's min cut is what makes one. Not taken as sources because their vocabulary is about ALGORITHMS run on a graph rather than about the graph's shape. rhizomatic_maze_space's fourth value `plateau` is named here so nobody looks for it, and declined (see declines).",
+				"declines": [
+					"rhizomatic_maze_space's `plateau` (`a continuous, self-vibrating region of intensities whose development avoids any orientation toward a culmination point` - four stacked levels collapsing into one dense flat mat). Refused on the member's own evidence: its still_note says `expect plateau to be the loudest value by far - a 25 m tower collapsing to a flat mat is a silhouette change, not a texture one`. Its entire bite is EXTENT, and this artifact fits every value into one envelope on purpose so that a comparison is a comparison. A plateau built at the same height as everything else is not a plateau, it is a claim with its evidence removed, so it is left where it works.",
+					"THE BRIEF'S CENTRAL CLAIM, that a feedforward net IS a tree in D&G's sense and that `deep` and `tree` may be the same object, so that their identity in the net reading should be pre-registered as a designed null. Overruled from the members' code, and it is the one place this synthesis contradicts its instructions outright. rhizomatic_maze_space's tree is a graph-theoretic tree and says so; the neural members' deep is 4-3-3-3-3-3-2 with 54 weights on 21 nodes (a tree would have 20) and 243 routes from one input to one output, or 5-4-4-4-4-4-2 with 92 lines and 1024 routes. Registering that null would have shipped a pass whose finding was a fact about a category error. The correct synonym, derived rather than assumed, is pinched and tree at minimum vertex cut 1, and it is now the artifact's thesis.",
+					"THE BRIEF'S OTHER GUESS, that neural_network_visualization and neural_networks_vr are probably one scene under two names. Checked and false: two directories, two .tscn files, two scripts of 40,962 and 35,860 bytes, two class names, and five different layer stacks each (4-6-4-2 / 4-2 / 4-3-3-3-3-3-2 / 4-10-2 / 4-1-4-2 at diagram scale against 5-4-3-2 / 5-2 / 5-4-4-4-4-4-2 / 5-7-2 / 5-1-2 at building scale, glass rooms you walk through). What IS shared is the axis vocabulary, verbatim and in order, and nnv's own comment says so at gd:71. One vocabulary, two bodies - which is a rarer and more interesting thing than the corpus's usual one-scene-many-names family, because it means the words were agreed on deliberately.",
+					"The neural members' `flat` read as `equal widths`, which is what the brief glossed it as. The code says otherwise in both members - hidden = [] and [5, 2], no hidden layer at all - so flat is flat in DEPTH here. Recorded because the wrong gloss would have produced a value indistinguishable from graded and a sweep that measured nothing.",
+					"rhizomatic_maze_space's three-nearest-neighbour rule, at this budget only. The member picks 3 (RhizomaticMazeGenerator.gd:64) over 250 nodes; at 24 nodes three leaves a single articulation vertex - brute-forced, node 2, removing it disconnects ENTRY from EXIT, minimum vertex cut 1 - so the rhizome would photograph with a bottleneck and contradict its own value. Four is the smallest k at which the cut exceeds one (k=3 gives 45 rods and cut 1; k=4 gives 55 and cut 2; k=5 gives 70 and cut 3). The rule is kept, the number is scaled, and the measurement is on the record.",
+					"The member's growing sever. rhizomatic_maze_space drifts the two fragments apart and gets wider doing it, which is right there and wrong here: every value has to occupy the same box or the sweep measures size instead of shape. The surviving nodes are compressed toward the cut by exactly the drift they are about to be given, so the gap is a gap and not extra width. The member's own defence of drifting at all is kept verbatim in spirit - CONNECTION IS NOT A VISIBLE PROPERTY, two halves that no longer reach each other look exactly like two halves that do - and it is the reason the fragments move rather than merely disconnect.",
+					"Every caption plate, every label, every number rendered in the frame. The rod count IS the rod count; the one gold thread IS the fact that a tree has one route; the single blue sphere IS the minimum cut. A tile whose value is a rendered word naming its own variant is a tile about typography.",
+					"neural_network_visualization's `presentation` (analysis | museum), its training_iterations, batch_size, training_speed, learning_rate and auto_train; neural_networks_vr's show_backprop, room_height, weight_line_thickness, enable_bias_neurons and activation_function; rhizomatic_maze_space's branch_probability, growth_iterations, merge_threshold, chamber_probability, organic_distortion, tunnel_segments and its two bench flags. The time-domain ones are unphotographable and both members already decline them for that reason. The rest are how MUCH and how BIG, not what the shape claims.",
+					"Any animation, rate, seed export or randomness. There is no _process, no Timer, no randf, no randi and no RandomNumberGenerator anywhere in the file: the scatter is Halton(2, 3, 5), the tree is Prim's with a strict-minimum tie rule, the cut is Edmonds-Karp on the split-vertex network and the routes are BFS. Two builds of one variant are the same mesh, so rhizomatic_maze_space's `layout_draw = pinned` bench flag - which exists only because that artifact draws its layout from the unseeded global RNG - has no counterpart here and needs none."
+				],
+				"sweep_command": "python tools/build_dna_gallery.py --slug=topology-net --tokens=topology_net --max=24",
+				"sweep_note": "THE FULL SHEET NEEDS --max=24. `topology` is declared first and is never trimmed; `reading` is second and build_dna_gallery trims the LATER axis from the tail until the cross product fits its cap, so at the default --max=9 the 8 x 3 sheet renders as 8 x 1 = net only. That would photograph the topology axis and NOTHING else: no routes, no cut, and neither designed null, since both live entirely inside the reading axis. It would also look completely healthy - eight distinct tiles, a 41.7% mean - which is the exact shape of a sheet that answers a question nobody asked.",
+				"placements": 0
+			}
+		}
+	}
+}

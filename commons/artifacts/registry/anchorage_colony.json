@@ -1,0 +1,157 @@
+{
+	"artifacts": {
+		"anchorage_colony": {
+			"name": "Anchorage Colony",
+			"lookup_name": "anchorage_colony",
+			"scene": "res://commons/artifacts/anchorage_colony/anchorage_colony.tscn",
+			"class_name": "AnchorageColony",
+			"category": "swarmintelligence",
+			"artifact_type": "synthesis",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "compact",
+			"description": "One nest at the centre of a 1.0 m ground disc, four constellations of standing food anchors on a circle of radius 0.44, and the cheapest network each one forces. pair is two anchors at unequal radii 0.440 and 0.374 (the ants' (15,15) and (-15,-10)); triad is three at 120 degrees; ring is six at 30 degrees of phase; scattered is five from a fixed draw seeded with the members' own 20260730. The network is the Euclidean minimum spanning tree over the nest and the anchors, by Prim with a lexicographic tie-break, followed by one Steiner pass that solves a Fermat point by 2000 Weiszfeld iterations and inserts a junction only if the answer lands more than 1 mm from the vertex. It inserts none at pair (168.69 degrees), none at triad (120.000 degrees exactly - the nest IS the Fermat point of its own food), one at ring, two at scattered. The field reading builds PhysarumGrid.process_step as real relief: deposit, decay 0.95, 4-neighbour in-place lerp 0.5, 64 x 64, 100 fixed iterations, no agents. Nothing animates, nothing is printed, nothing is unseeded.",
+			"tags": [
+				"anchorage",
+				"boundary_condition",
+				"steiner_tree",
+				"minimum_spanning_tree",
+				"fermat_point",
+				"stigmergy",
+				"pheromone",
+				"swarm",
+				"synthesis",
+				"swarmintelligence"
+			],
+			"dev_themes": [
+				"swarm",
+				"emergence",
+				"synthesis",
+				"the boundary condition is the algorithm"
+			],
+			"interactions": [
+				"stand at reading=anchors and walk the four anchorages: nothing has been computed yet and the answer is already decided",
+				"at anchorage=triad compare anchors against network: the three roads meet at the nest at 120 degrees because the nest was already standing on the Fermat point",
+				"at anchorage=ring count the roads - six, not a rim; and find the one junction dome, which is the only place the Steiner pass fired on a symmetric constellation",
+				"at reading=field watch the mounds pool: only at scattered are two anchors close enough for their reliefs to run together"
+			],
+			"capacity": "SEE that a self-organising system does not choose its own shape - the layout of its fixed points does, and that layout is an input the family had been treating as decoration",
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"ant_colony_v2",
+					"physarum_colony",
+					"ant_colony_optimization",
+					"flow_field_main",
+					"mst_visualization"
+				],
+				"preferred_zone": "teaching",
+				"footprint_source": "computed_from_geometry",
+				"footprint_note": "Every single-layout variant sits inside 1.0 x 0.178 x 1.0 m: the ground disc is radius 0.50 at y 0 to 0.012, the anchors stand at radius 0.44 with a 0.055 pad (outer edge 0.495) and a 0.16 m post, and nothing else is taller. layout=ladder stands the four anchorages in a row at 1.20 m pitch (about 4.2 m wide) and is a design view, not a map placement."
+			},
+			"measurements": {
+				"aabb_size": [
+					1.0,
+					0.178,
+					1.0
+				],
+				"aabb_center": [
+					0.0,
+					0.089,
+					0.0
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 1.0,
+				"source": "computed_from_geometry, identical for all 12 variants: the ground disc (BASE_R 0.50) sets x and z, and the tallest body is an anchor post at BASE_H + PAD_H + POST_H = 0.178. The field relief peaks at 0.103 and a road ridge with a junction dome reaches 0.127, both under the posts. Re-derived in a Python replica of the same constants; no Godot was run."
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			],
+			"dna": {
+				"promoted": "2026-08-15",
+				"stage": "synthesis",
+				"sources": [
+					"AntColonyV2",
+					"ant_colony_v2",
+					"PhysarumColony",
+					"physarum_colony"
+				],
+				"axes": {
+				 "anchorage": [
+				  "pair",
+				  "triad",
+				  "ring",
+				  "scattered"
+				 ],
+				 "reading": [
+				  "network",
+				  "anchors",
+				  "field"
+				 ]
+				},
+				"framing": 0.46,
+				"framing_why": "The body is a 1.0 m disc 0.178 m tall - the exact shape the corpus's fit-by-DIAGONAL trap was written for. At framing 1.0 the camera fits a 1.482 m diagonal and the subject lands at about 4.6% of frame, under the 6% bar. At 0.46 it is 17.7-20.8% across the twelve variants with no variant touching a frame edge (measured in the replica; nearest approach 68 px of 760).",
+				"default": "anchorage=pair, reading=network. THE DEFAULT IS A SPLIT DECISION AND HERE IS THE COUNT. Four registry names, two scenes: ant_colony_v2 and AntColonyV2 ship `pair`, physarum_colony and PhysarumColony ship `triad` - 2-2 by name and 1-1 by scene, so the member vote does not decide it. Three things break the tie for `pair`. (1) BOTH scenes' @export_enum lists pair FIRST, character for character - `pair, triad, ring, scattered` - so pair is the family's first word even in the file that defaults to triad. (2) physarum's two registry blocks list triad first, but that is its DEFAULT order and not its enum order, so it is not a claim about the vocabulary; the ants' two blocks list the enum order and agree with both scenes. (3) pair is the value with no argument in it: two anchors admit exactly one topology, so the default still is the one where the axis's claim is at its weakest, which is where a default belongs. reading has no member vote at all - neither scene has a second axis - so it is chosen: `network` is what both members actually put on screen once their physics has run (markers plus a grown field), while `anchors` is the state at t=0 that no member ever ships as a resting look. NOTE THE DECLARED ORDER: apply_dna_block derives both axes from the code and puts the DEFAULT leftmost, so `reading` is declared network, anchors, field while the @export_enum reads anchors, network, field. That is the tool's convention and not a disagreement; `anchorage` shows no such difference only because pair is first in the enum as well.",
+				"note": "WHAT THE VALUES MEAN, from the members' code. FOUR NAMES, TWO SCENES: ant_colony_v2 and AntColonyV2 both resolve to res://algorithms/swarmintelligence/ants_v2/AntColonyV2.tscn (uid hgbhr48651so); physarum_colony and PhysarumColony both resolve to res://algorithms/swarmintelligence/physarum/PhysarumColony.tscn (uid ptqav8cu4wdp). Counted and stated because it is the fifth time this corpus has found one scene under several registry names, and because it changes what 'four members agree' means - it is two bodies agreeing, not four. anchorage, four values, the family's list in both scenes' enum order. pair = two anchors, and the two members disagree about which two: the ants' are ASYMMETRIC, (15,0,15) at 21.213 m and (-15,0,-10) at 18.028 m, while physarum's are symmetric at (-20,0,0) and (20,0,0). The ants' are taken, scaled by 0.0207395 so the farther lands on the canonical circle at 0.440 and the nearer at 0.374 - the 1.177 ratio survives - because the asymmetry is the one thing pair carries that no other value does, and because it makes the nest's interior angle 168.69 degrees rather than a trivial 180. triad = three anchors, and here the members disagree about the WORD: the ants' (18,0,0), (-9,0,15.6), (-9,0,-15.6) are 18 m out and 120 degrees apart, while physarum's (0,0,0), (15,0,15), (-15,0,-15) are COLLINEAR - all three on the line z = x - so its own docstring's 'three-armed Y' cannot exist, the cheapest join being the straight segment through the middle anchor. The ants' triad is taken and the rounding is dropped (18 sin 120 = 15.588, shipped as 15.6) so the 120 degrees is exact. ring = six anchors on the circle at 30 degrees of phase - the ants' RING_COUNT and RING_PHASE, the phase being a considered constraint (it exists precisely so no ring anchor lands on a triad spoke) where physarum's eight at phase 0 carry none. scattered = five anchors from a fixed 32-bit LCG seeded 20260730, the members' own seed constant, uniform in the disc of radius 0.44 (r = R sqrt u), rejected while any two would sit closer than 0.22 - which is 0.5 of the radius, the ants' 10 m in +-20 m exactly - or an anchor would sit within 0.12 of the nest. The draw takes the first five candidates and returns radii 0.222, 0.231, 0.236, 0.253, 0.303 with a minimum separation of 0.231. It was NOT re-seeded to spread them further; that is the constellation the seed gives and it is stated rather than tuned. BOTH MEMBERS' scattered IS ALREADY SEEDED - same constant, five anchors, rejection sampling in both - so the corpus's unseeded-generative trap is closed in this family and nothing here had to fix it. reading, three values, this artifact's own word, because neither member has a second axis. The ground disc, the nest dome and the anchor pads and posts stand in ALL THREE, so the constellation is the constant and only the answer moves. anchors = the boundary condition alone: N pads, N posts, one nest, nothing computed. It is the thesis frame - the input, before any algorithm has run, and it already contains the answer. network = the cheapest roads as raised causeways, triangular in section, 0.068 wide and 0.065 tall so they have a silhouette from a camera 15 degrees above the ground rather than being paint the pitch flattens away. WHAT IS COMPUTED: the Euclidean minimum spanning tree over the nest and the anchors by Prim from the nest, ties broken lexicographically on (in-tree index, outside index), then ONE Steiner pass in index order - for each vertex of tree-degree 2 or more, take the neighbour pair subtending the smallest angle, solve the Fermat point of that triangle by 2000 Weiszfeld iterations from the centroid, and insert a junction only if the answer lands more than 1 mm away. That is a spanning-tree heuristic and NOT a Steiner minimal tree: it splits a vertex at most once and never revisits a junction, so at ring it improves one spoke pair of six and leaves the rest. Results, computed: pair MST 0.8138, smallest angle at the nest 168.690 degrees, Fermat residual 0.000000, DECLINED, 0 junctions. triad MST 1.3200, smallest angle 120.0000 degrees, residual 0.000146 m, DECLINED, 0 junctions - AND THAT DECLINE IS THE FINDING: the ants put three anchors at 120 degrees round a nest at the centre, which stands the nest exactly on the Fermat point of its own food, so the Steiner problem was solved by the boundary condition before the first ant walked, and the solve running and returning the nest is the proof rather than a skipped branch. ring MST 2.6400, network 2.5221, 1 junction at (0.254, 0.000) - and the ring is where the axis says the most: radius equals side, so nest-to-anchor and anchor-to-anchor cost the same, 31 candidate edges tie across the six Prim rounds, and THE MINIMUM SPANNING TREE IS NOT UNIQUE. The tie-break returns the star; five rim edges and one spoke is another tree of the same length. scattered MST 1.2221, network 1.1153, 2 junctions at (-0.073, 0.102) and (-0.052, -0.139), the nest at degree 4 and one anchor at degree 2 both splitting. field = the medium itself, built as relief instead of displaced in a shader. It is PhysarumGrid.process_step verbatim with process_attractors in front of it: deposit 1.0 inside 0.09 of every anchor (capped at 10.0, the members' own cap), decay 0.95, then a 4-neighbour in-place lerp at 0.5 over the interior, row-major, 64 x 64, 100 fixed iterations, no agents. The in-place order makes the blur slightly anisotropic; that is the members' blur and it is kept. Relief is built only where the field exceeds 0.12 so the sand shows between the mounds, and the height scale is pinned to 9.5 - the measured steady state of a lone anchor at these iterations - so the PEAK is 0.09 m at every anchor of every value and the axis moves the mounds' FOOTPRINT, never their height. Cells above 0.12: pair 887, triad 1060, scattered 1952, ring 2158. ONE DEVIATION FROM THE MEMBERS' KERNEL, DECLARED: both PheromoneGrid.process_diffusion and PhysarumGrid.process_step guard the blur with `if cell > 0.001`, so a cell holding zero is never written and the field CANNOT SPREAD INTO EMPTY GROUND ON ITS OWN. With agents laying trail everywhere that guard is a speed optimisation; with no agents it freezes the field inside the deposit discs and would make this reading a duplicate of anchors. It is removed. The guard is worth reading twice as a fact about the members: in both of them the medium only blurs where a walker has already been, so the celebrated self-written map is written by the walkers and not by the chemistry. THE THESIS SOMEONE COULD DISAGREE WITH: the colony does not choose its shape - the anchorage chooses it, and the family ships the anchor layout as set dressing while it is the entire input to the algorithm. The disagreement available: that the boundary condition only bounds the solution SET and the search still does the work, so a still of the anchors is not a still of the answer. The anchors reading is where that quarrel is visible, because it shows the input with nothing computed and the network reading beside it shows how little was left to compute - and ring is where the objection is strongest, because there the anchorage leaves not one answer but many of equal length.",
+				"predicted_degeneracy": {
+					"pair": "pair against triad, in the network reading",
+					"percent": 37.2,
+					"arithmetic": "Rasterised BEFORE ANY CAPTURE in the critic's own currency: the twelve variants built in Python from the same constants (same LCG, same Prim, same Weiszfeld, same field kernel), z-buffered through capture_config_sweep's camera (FOV 34, PAD 1.9, yaw 0.62, pitch -0.26, 760 x 760, framing 0.46 on the union AABB of all 12), one key at 1.25 and one fill at 0.45 in the default rig's directions, Uncharted2 filmic, then artifact_dna_critic's pipeline unchanged - crop to the union of the two frames' subject boxes, neutralise each frame's corner background, grey, resize 160 x 160, mean of the hottest 5%. Closest anchorage pair anywhere: pair vs triad in `network`, 37.17% focus / 6.19% frame. Runner-up pair vs triad in `anchors`, 37.55% / 3.92%. WHY THAT PAIR: it is the pair with the fewest post silhouettes in play - two against three, all five at disjoint bearings (45 and 213.69 against 0, 120, 240) - and the fewest roads, 0.814 m of causeway against 1.320 m. THE HONEST WARNING, AND IT IS THE POINT OF PRE-REGISTERING THIS ONE: THE METRIC SATURATES HERE. A post is a dark green body (0.07, 0.30, 0.10) against pale sand (0.80, 0.70, 0.50) and covers about 2.3% of the cropped frame, so five differing posts is 11.5% of the crop against a hottest-5% window of 1280 px in 25600. Both the replica and the real render therefore sample only full-contrast pixels, and the number is bounded by post-against-sand contrast rather than by how many posts differ. The consequence is measurable in the sheet and is the falsifiable claim: `anchors` compresses into 37.55-39.11 and `network` into 37.17-41.25, spreads of 1.6 and 4.1 points across six pairs each, while `field` spreads 53.19-66.46, 13.3 points - so the RANKING inside anchors and network is weakly determined and only field resolves it. Full predicted sheet, focus %: anchors - p-t 37.55, p-r 38.91, p-s 38.89, t-r 38.67, t-s 38.99, r-s 39.11; network - p-t 37.17, p-r 39.22, p-s 40.67, t-r 39.01, t-s 38.53, r-s 41.25; field - p-t 60.79, p-r 65.64, p-s 53.19, t-r 66.46, t-s 55.10, r-s 64.74. Axis mean 46.3% focus. reading pairs, per anchorage (anchors-network / anchors-field / network-field): pair 9.90 / 32.84 / 32.14; triad 23.02 / 46.42 / 46.07; ring 27.44 / 63.77 / 63.36; scattered 24.05 / 47.70 / 47.26; axis mean 39.2%. Subject share 18.1-20.8% of frame at framing 0.46; no variant reaches a frame edge. THE PREDICTION IS A FLOOR EVERYWHERE ELSE IN THIS CORPUS AND ONLY PARTLY ONE HERE: the replica has one light, flat shading, no shadows, AO or antialiasing, and every prior prediction under-read by 1.5x to 6.7x - but a saturated metric cannot be under-read by 6x, so expect the real sweep between 37% and roughly 50% on this pair, not above it. If the sweep comes back BELOW 37% on pair-vs-triad in network, or if any anchorage pair anywhere reads under 30%, check the harness before the design: (a) tools/check_dna_declarations.py - a value the code cannot reach falls back to pair/network and prints identical tiles; (b) _rejects.json - both axes are String enums and a numericised token would be refused in silence; (c) whether the sheet was captured with --max=12, because at the default cap of 9 build_dna_gallery trims the LATER axis from the tail and the 4 x 3 sheet renders as 4 x 2, losing every `field` tile and with it the only reading that resolves the ranking. If instead the FIELD reading fails to spread wider than `anchors`, the relief is not being built and the deposit mask or the removed blur guard is the place to look.",
+					"registered": "2026-08-15, before the first capture"
+				},
+				"designed_nulls": [
+					{
+						"a": {
+							"anchorage": "pair",
+							"reading": "anchors"
+						},
+						"b": {
+							"anchorage": "pair",
+							"reading": "network"
+						},
+						"under_percent": 14,
+						"why": "By construction the smallest cell-to-cell step in the whole sheet, and it is the thesis stated as a measurement. The ground, the nest, the two pads and the two posts are the SAME MESHES in both cells; the only difference is the network layer, and at pair that layer is the least ink the axis can add - 0.814 m of causeway against ring's 2.640 m of minimum spanning tree, a ratio of 0.308 - laid as two arms meeting at the nest at 168.690 degrees, which is within 11.31 degrees of one straight line. So the network reading at pair adds ONE mark and not two, and the Steiner pass confirms it by returning the nest itself to 0.000000 m and inserting nothing. Predicted 9.90% focus / 0.50% frame in the replica; registered at under 14 to leave the real render's contact shadows their room. If this pair comes back ABOVE 20%, the causeway is being built somewhere other than between the nest and the anchors."
+					}
+				],
+				"designed_nulls_why": "Only one, and it is a construction MINIMUM rather than an identity - stated as such. No two anchorage values share an anchor count (2, 3, 6, 5) or a single anchor position, so there is no pair of cells in the anchorage axis that is the same object twice, and manufacturing one would have meant moving an anchor off the members' geometry to make a number come out. The countable prediction registered instead is the junction census: the sheet must contain ZERO junction domes at pair and at triad, exactly ONE at ring and exactly TWO at scattered. A junction at triad means the Weiszfeld solve did not converge (its residual is 0.000146 m against a 0.001 m drop threshold, which is the tightest margin in the file); a junction at pair means the smallest-angle search picked the wrong pair; a second junction at ring means the pass revisited a vertex it is written to visit once.",
+				"fixture": {
+					"layout": "single"
+				},
+				"fixture_why": "The artifact can stand as all four anchorages in a row (layout=ladder, 1.20 m pitch, about 4.2 m wide) but the SWEEP must see one at a time: capture_config_sweep unions the AABB across a spec's variants, so a four-wide row in the same spec frames every single against four metres and photographs it as a speck. layout is an export and not an axis, and it ships at single, so the fixture is a belt over braces.",
+				"kin": "ant_colony_optimization is the ants' own successor (quality weighting, tandem running, modes) and carries the same nest-and-food geometry without declaring it as an axis; mst_visualization draws the minimum spanning tree this artifact computes, on an abstract graph rather than on a ground plane, and is kin by algorithm rather than by subject. flow_field_main is the near-miss worth naming: PhysarumColony's own header calls it the contrast case - an EXTERNAL field against a self-created one - which is the same argument as this artifact's from the other side, and its axis is about the field's shape rather than about the fixed points that pin it. boid_manager and boids_aquarium declare `accord` over the same sequence and are the other half of the swarm family: accord is about what the agents do to each other, anchorage is about what the world does to all of them, and a room holding both is saying the two halves of one sentence.",
+				"declines": [
+					"physarum's `triad`. Its three attractors are (0,0,0), (15,0,15) and (-15,0,-15) - COLLINEAR, all on z = x - so the Fermat point degenerates onto the middle anchor, the 'three-armed Y' its own docstring promises cannot be drawn, and its triad is its pair with a stop in the middle at 45 degrees of rotation. Recorded as the place this synthesis overrules a member from its own source: the ants' equilateral triad is taken because it is the only one of the two that poses a Steiner problem at all, and the rounding is dropped (18 sin 120 = 15.588 m, shipped as 15.6) so the 120 degrees is exact rather than 119.96.",
+					"physarum's symmetric `pair` at (-20,0,0) and (20,0,0). Not refused as a claim - it is the clean one-road case and its note explains that a third attractor was deleted from this value so that pair would stop reading as a twin of triad. Refused because the ants' asymmetric pair carries more: unequal radii mean the nest's interior angle is 168.690 degrees and not a trivial 180, so the Steiner decline at pair is a computed result rather than a symmetry.",
+					"physarum's eight-anchor `ring` at phase 0. Six is taken with the ants' 30 degrees of phase, because that phase exists for a stated reason - it keeps every ring anchor off a triad spoke, which is exactly the twin the ants' own promotion note says it had to fix - and eight anchors at phase 0 carry no such constraint. Six also makes radius equal side, which is what produces this artifact's best finding: at ring the minimum spanning tree is not unique.",
+					"The members' `> 0.001` blur guard. Both PheromoneGrid.process_diffusion and PhysarumGrid.process_step skip any cell holding zero, so their medium cannot spread into empty ground and only blurs where an agent has already deposited. Sound with agents, fatal without them - it would freeze the field inside the deposit discs and make the field reading a copy of anchors. Removed, and the fact recorded rather than quietly fixed: in both members the self-written map is written by the walkers, not by the chemistry.",
+					"The full agent simulation. AntColonyV2 spawns 100 SimpleAnt bodies and PhysarumColony 300-500 PhysarumAgents, both stepped in _physics_process; simulation artifacts are the corpus's named headless hang class and nothing here has a _process, a Timer or an await. What is drawn instead is stated exactly in the note and is not a picture of a simulation: a minimum spanning tree with one Steiner pass, and a hundred fixed iterations of the members' own diffusion kernel.",
+					"physarum's twenty-second CAROUSEL. Its four layouts already existed inside set_distribution() and were reachable only by standing still and waiting for a hardcoded timer, which is a time-domain knob and invisible to a still. anchorage is the standing configuration, legible in the first frame.",
+					"Every caption plate. Both members print their own value on a Label3D - 'ANT COLONY %-7s' and 'PHYSARUM %-8s'. Nothing is printed here: the count of posts, the shape of the roads and the spread of the mounds are the argument, and a tile whose difference is a rendered word naming its own variant is a tile about typography.",
+					"physarum's EMISSION (vein_color * slime * 2.0 above a 0.1 threshold) and the ants' `emissive` key. The relief's height is the reading; the corpus's blind critiques found bloom fattening silhouettes past the geometry that drew them, and an emissive green mound on this bench would be measuring glow.",
+					"The ants' DOWNWARD displacement. ant_valley.gdshader does VERTEX.y -= intensity (a valley) where physarum_veins.gdshader does VERTEX.y += slime (a ridge). Physarum's sign is taken: a 0.09 m valley in a 1.0 m disc seen from 15 degrees above the ground is a hole the camera cannot see into, and this corpus has lost a pass to exactly that geometry before.",
+					"num_ants, num_agents, grid_resolution, terrain_size and every rate. More agents or a finer grid photographed from one station is a smoother picture of the same claim. The grid is pinned at 64 x 64 and 100 iterations so two builds of one value are the same mesh, and none of those constants are exports."
+				],
+				"sweep_command": "python tools/build_dna_gallery.py --slug=anchorage-colony --tokens=anchorage_colony --max=12",
+				"sweep_note": "THE FULL SHEET NEEDS --max=12. `anchorage` is declared first and is never trimmed; `reading` is second, and build_dna_gallery trims the LATER axis from the tail until the cross product fits its cap, so at the default --max=9 the 4 x 3 sheet renders as 4 x 2 and every `field` tile is lost - which is the one reading whose numbers spread far enough to rank the anchorage pairs at all.",
+				"placements": 0
+			}
+		}
+	}
+}

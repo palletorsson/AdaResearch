@@ -1,0 +1,143 @@
+{
+	"artifacts": {
+		"curve_pair": {
+			"name": "Curve Pair",
+			"lookup_name": "curve_pair",
+			"scene": "res://commons/artifacts/curve_pair/curve_pair.tscn",
+			"class_name": "CurvePair",
+			"category": "change",
+			"artifact_type": "synthesis",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "compact",
+			"description": "One function at a time, built as a stack of horizontal rails on a 1.00 m panel: the integral above, the function in the middle, the rate below, each a 32 mm hexagonal tube. Going DOWN a rail is differentiating and going UP is integrating - that is the whole grammar, and each of the three operations is a contiguous window on the stack. `pair` takes the middle and bottom rails, `area` takes the middle rail alone with the signed area under it built as a solid 50 mm slab standing on the datum where f is positive and hanging beneath it where f is negative, `bridge` takes all three with the slab and both joins. A join is beaded: wherever the lower rail crosses its datum the rail above it has a turning point at the same x, and a white plumb line joins the two beads. Every rail is normalised to its own peak - the family's rate peaks span 10.7x and its integral peaks 4.2x, so a shared scale would leave the ramp's rate a 1 mm nudge - which means magnitudes are not comparable here and shape and sign are, and shape is what the argument is about. Nothing animates, nothing is printed, nothing is random.",
+			"tags": [
+				"calculus",
+				"derivative",
+				"integral",
+				"fundamental_theorem",
+				"antiderivative",
+				"accumulation",
+				"rate",
+				"synthesis",
+				"change"
+			],
+			"dev_themes": [
+				"change",
+				"calculus",
+				"synthesis",
+				"a shared vocabulary is a chain only if the words agree"
+			],
+			"interactions": [
+				"stand at operation=pair and walk the five curves: count the beads. wave has four, hump one, spike one, ramp and step none - a curve's turning points are a fact you can count off the plumb lines, not read off a label",
+				"at curve=hump, operation=pair the lower rail is dead straight. That is the argument: the derivative of the hump IS the ramp, upside down. If it is curved, this artifact took the wrong dialect of `hump` and the family's chain has one fewer link",
+				"at operation=area compare ramp with step - both hang half their slab below the datum and stand half above it, and the signed area of both is exactly nothing",
+				"at operation=bridge follow one plumb line up: the top rail turns exactly where the middle rail crosses, and the middle rail turns exactly where the bottom rail crosses. The theorem, twice, in one object",
+				"at curve=step, operation=bridge look at the bottom rail: the derivative of a step is a narrow bell, half-height at |cx| = 0.40 where the spike's is at 1.18. Then walk to curve=spike and read the same shape as a function"
+			],
+			"capacity": "SEE that a rate, a quantity and an accumulation are three readings of one drawn line, and that the five words a family shares are a chain only where the family agrees what the words mean",
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"derivative_pair",
+					"integral_area",
+					"ftc_bridge",
+					"riemann_pump",
+					"slope_tangent_demo"
+				],
+				"preferred_zone": "teaching",
+				"footprint_source": "computed_from_geometry",
+				"footprint_note": "Every single-layout variant is one flat panel 1.05 m wide, at most 0.86 m tall and 0.06 m deep, standing vertically and turned to face the approach. Its world footprint is 0.85 x 0.62 m because the panel is rotated 0.62 rad about Y. layout=ladder stands all five curves in a row at 1.20 m pitch (about 5.8 m wide) and is a design view, not a map placement."
+			},
+			"measurements": {
+				"aabb_size": [
+					0.8522,
+					0.837,
+					0.6124
+				],
+				"aabb_center": [
+					0.0,
+					0.7255,
+					0.0
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.8578,
+				"source": "computed_from_geometry for the DEFAULT variant (curve=hump, operation=pair), re-derived in a Python replica of the same constants; no Godot was run. Union over all 15 variants is 0.8522 x 0.8578 x 0.6217, centred (0, 0.7251, 0). Per-variant vertical extent ranges from 0.431 ((hump, area) and (spike, area) - a positive function's area lies entirely on one side of the datum) to 0.848, a spread of 1.97x, which is why the three operations were given three different rail pitches: on one pitch `area` would have been a 0.23 m body beside `bridge`'s 0.82 m one."
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			],
+			"dna": {
+				"promoted": "2026-08-15",
+				"stage": "synthesis",
+				"sources": [
+					"derivative_pair",
+					"ftc_bridge",
+					"integral_area"
+				],
+				"axes": {
+				 "curve": [
+				  "hump",
+				  "wave",
+				  "ramp",
+				  "spike",
+				  "step"
+				 ],
+				 "operation": [
+				  "pair",
+				  "area",
+				  "bridge"
+				 ]
+				},
+				"default": "curve=hump, operation=pair. hump is the members' default 2 OF 3, NOT 1 of 3 as the brief had it: integral_area gd:68 ships `hump` and ftc_bridge gd:66 ships `hump`; derivative_pair gd:63 is the odd one at `wave`. The brief also said integral_area's declared ORDER differs from the other two, and that a synthesis therefore has 'one vocabulary in two orders' to reconcile. IN THE CODE THERE IS ONE ORDER: all three @export_enum lines and all three const CURVES read (\"wave\",\"hump\",\"ramp\",\"spike\",\"step\") character for character. THE SECOND ORDER IS THE TOOL'S. tools/apply_dna_block.py:130-134 moves the export default to the front of every generated list - 'Default first, then the rest in source order - a sweep reads left to right and the legacy lineage should be the leftmost tile' - and artifact_dna_critic.py:73 relies on it. derivative_pair's default is `wave`, which was already first, so its generated block looks like the code; integral_area's is `hump`, so its block starts with hump; ftc_bridge's block is hand-written and keeps the source order even though its default is `hump` too. Same family, same rule, three different-looking blocks. THIS ARTIFACT REPRODUCED IT WHILE BEING BUILT: apply_dna_block wrote `curve` here as hump-first for exactly the same reason, and it is left that way because the tool's convention is the convention. So the finding is not that somebody mistyped a list - it is that the registry's axis order is a fact about the DEFAULT and not about the vocabulary, and reading it as vocabulary drift is a category error the brief made and a synthesis could have shipped. operation=pair because it is the smallest complete statement the family makes (a quantity and its rate), because it is the reading all three members contain - derivative_pair IS it, integral_area reaches it at tally=antiderivative, ftc_bridge at evidence=trace - and because it is the reading this token is named for.",
+				"note": "WHAT THE VALUES MEAN, derived from the members' code and not transcribed. curve, five values, the family's list in the family's order. Every one is a function of cx = lerp(-TAU, TAU, u), the members' own mapping (derivative_pair gd:152, integral_area gd:170, ftc_bridge gd:168), and four of the five are the SAME EXPRESSION in all three members. wave = sin(cx) + 0.35 sin(2cx) - two periods and a harmonic; four turning points, and derivative_pair's comment claims exactly four (gd:37), which the code bears out: cos(cx) + 0.7 cos(2cx) = 0 gives cos cx = 0.4350, i.e. cx = +-1.1208 and +-5.1624. hump = 1 - (2u-1)^2, ftc_bridge's PARABOLA (gd:186) and NOT the siblings' sin(u*PI) (derivative_pair gd:160, integral_area gd:186); the family holds two different functions under one word and ftc_bridge's own comment says so (gd:164-166). One turning point, ends level. ramp = cx/TAU, a straight climb from -1 to +1; no turning point, and its rate is the one flat rail in the artifact. spike = exp(-cx^2/2) - a GAUSSIAN, not a triangle and not a delta; half-height at |cx| = 1.177. step = (2/pi) atan(2.5 cx) - an ARCTANGENT, not a Heaviside; it is smooth, so it has a derivative, and ftc_bridge (gd:31-33) says why the family refuses a real jump: a discontinuous f would be a counter-example to the theorem the bridge carries rather than an instance of it. operation, three values, one per member and named for what is built. pair = the middle and bottom rails, f above and f' below - derivative_pair's `stacked` (gd:223-235, its own words 'Top: y = f(x). Bottom: y = f'(x)') - with a bead wherever f turns, a bead directly beneath it where f' crosses its datum, and a plumb line joining them: derivative_pair gd:15, 'where the top peaks the bottom crosses zero', as a body you could hang a weight from. area = the middle rail alone at full height with the signed area under it as a SOLID slab 50 mm thick, standing on the datum where f is positive (ftc_bridge's pos_col, which is integral_area's area_color) and hanging beneath it where f is negative (ftc_bridge's neg_col); continuous, not strips, because strips versus blocks is integral_area's SECOND axis and not this one's. bridge = all three rails, the slab under the middle one, and BOTH joins beaded - the top rail turns where the middle crosses, the middle turns where the bottom crosses. THE ARGUMENT, AND IT IS NOT THE BRIEF'S. The brief said the five words are closed under d/dx: hump' is wave-ish, ramp' is a step, step' is a spike. Two of those three are false in the code. ramp' = 1/TAU, a CONSTANT - a flat line, which is not one of the five words; that is the link the list does not have. hump' under the siblings' half-sine is (1/4) cos(u pi), a falling half-cosine, also not one of the five. step' = (2/pi) 2.5/(1 + 6.25 cx^2), a Lorentzian, and `spike` is a Gaussian: same shape class, half-height at 0.40 against 1.18, so the derivative of a step is a NARROWER spike than the spike - a link that holds as a shape and not as an equation, which is exactly what a still can carry and an equation cannot. And one link the brief did not ask for is EXACT, on one condition: under ftc_bridge's parabola hump' = -2cx/TAU^2 = -(2/TAU) ramp = -0.3183 ramp, at every point, and equivalently the integral of the ramp is -(TAU/2) hump. SO THE ONE WORD THE FAMILY DISAGREES ABOUT IS THE ONE WORD THAT DECIDES WHETHER THE FAMILY IS A CHAIN. This artifact takes the parabola, on the record and against 2 of 3 members, because it is the reading under which the shared vocabulary means something. The list is therefore a CHAIN WITH GAPS - two links, one member whose derivative is again itself in kind (wave' = cos cx + 0.7 cos 2cx, a wave with its harmonic doubled, so not the same wave), one word whose derivative has no name - and the gaps are where the vocabulary ran out. THE THESIS SOMEONE COULD DISAGREE WITH: a shared axis word is not a shared meaning, and a family that declares one vocabulary in three artifacts can still be three vocabularies. The disagreement available: that `hump` means 'one arch over the whole span' and a parabola and a half-sine are both arches, so nothing is wrong and this artifact has manufactured a crack out of an implementation detail. That quarrel is visible at (hump, pair) and nowhere else: the lower rail is straight or it is not. THE CLAMP, AND IT IS A STATEMENT. Each rail is scaled by its own peak. Measured over the five curves the rate's peak spans 1.70 (wave) down to 0.1592 (ramp) in units of amplitude per unit cx, 10.7x, and the integral's spans 8.378 (hump) down to 2.000 (wave), 4.19x; the function's spans only 1.1746 to 0.8957, 1.31x. On one shared scale wave and step would set the frame and the ramp's rate would be a 1 mm nudge off its datum, indistinguishable from a dead axis - which is precisely the 'do not let one variant's derivative run off to ten times another's' fault, arriving from the other direction. So magnitudes are NOT comparable between rails or between curves here; shape and sign are. ftc_bridge does exactly this to its own rate plot (gd:342: 'Normalised per curve so the rate always fills its band'). A constant rail - ramp's rate, the only one - normalises to +1 and draws flat at the top of its band, which is what a constant positive rate looks like when only shape survives.",
+				"predicted_degeneracy": {
+					"pair": "ramp against step, in the area operation",
+					"percent": 58.1,
+					"arithmetic": "Rasterised BEFORE ANY CAPTURE in the critic's own currency: the geometry rebuilt in Python from the same constants (same five functions, same central-difference rate, same trapezoid integral, same rails, same slab), z-buffered through capture_config_sweep's camera (RES 760, FOV 34, PAD 1.9, YAW 0.62, PITCH -0.26, framing 0.55 on the union AABB of all 15 variants, dist 2.324 m, frame 1.421 m at the subject), then artifact_dna_critic's pipeline unchanged - crop to the union of the two frames' subject boxes, neutralise each frame's own corner background, grey, resize 160 x 160, mean of the hottest 5%. Closest pair on the curve axis: ramp vs step at operation=area, 58.08% focus / 9.94% frame. WHY THAT PAIR: they are the only two ODD members. Both cross the datum exactly once, at the centre, so both slabs are the same solid in silhouette - one lobe hanging below on the left, one standing above on the right, and a signed total of exactly nothing. They differ only in profile: the ramp's lobes are triangles and the step's are near-rectangles, because atan(2.5 cx) is already at 0.88 of its peak by |cx| = 1.6 while the ramp is at 0.25. Runners-up, all in `area` and all for the same reason (the slab is the only large filled region in this artifact, so it dominates every comparison it appears in): hump vs step 60.11, hump vs ramp 60.64, spike vs step 60.66, ramp vs spike 61.85. Axis means: curve 66.16% focus / 16.21% frame, operation 67.20% / 17.06%. AND A SECOND PREDICTION, WHICH IS ABOUT THE INSTRUMENT AND NOT THE ARTIFACT: FOCUS WILL SATURATE. The whole predicted sheet lies between 58.1% and 68.7% focus - a 10.6-point band on a statistic that runs to 100 - because this artifact is line art in a void. Subject share runs 5.9% to 19.9% of frame, so the hottest 5% of a 160 x 160 crop (1280 pixels) is comparable to or larger than the total ink, focus degenerates into 'the mean over everything drawn', and almost every pixel of ink moves between any two variants. The statistic that ranks here is FRAME, which spans 8.60% to 24.86%: by frame the closest curve pair is spike vs step at operation=pair, 8.60%, and the closest of all is (spike, area) vs (spike, bridge) at 9.23%. If the sweep comes back with focus values spread over more than about 25 points, the replica is wrong about the lighting and the frame ranking should be believed over the focus one. THE PREDICTION IS A FLOOR: the replica has two directional lights, flat per-triangle shading, no shadows, no AO, no antialiasing, and every prior prediction in this corpus under-read by 1.5x to 6.7x - but this one is the unusual case where under-reading is impossible on focus, because the metric is already near its ceiling. If any pair comes back BELOW 40% focus, or below 5% frame, check the harness before the design: (a) tools/check_dna_declarations.py - a value the code cannot reach falls back and prints identical tiles; (b) ada_run/sweep/_rejects.json - all three exports are String enums and a numericised token would be refused in silence; (c) whether the sheet was captured with --max=15, because at the default cap of 9 build_dna_gallery trims `operation` from the tail to [pair] and `area` - the operation the pre-registered closest pair lives in - is never photographed at all.",
+					"registered": "2026-08-15, before the first capture"
+				},
+				"designed_nulls": [],
+				"designed_nulls_why": "The identity is real and it is not a null, and saying which is the whole point of registering it. THE IDENTITY: under ftc_bridge's parabola, d(hump)/dcx = -2 cx / TAU^2 and ramp = cx / TAU, so hump' = -(2/TAU) ramp = -0.3183 ramp, exactly, at every point - and inversely the integral of the ramp is -(TAU/2) hump = -3.1416 hump. That is the brief's 'some function's derivative equals another function exactly', found in the code. WHY IT CANNOT BE A FRAME NULL HERE, three reasons and each is enough. (1) THE SIGN. Every rail is normalised to its own peak, so hump'_norm = -ramp_norm: the two are MIRROR IMAGES about their datum, and a mirrored line is not the same photograph as the line. (2) THE RAIL. hump's rate is drawn on the LOWER rail of (hump, pair) at y 0.515 in RATE_COLOR (1.00, 0.55, 0.25); ramp's function is drawn on the UPPER rail of (ramp, pair) at y 0.925 in FN_COLOR (0.55, 0.85, 1.00). Different height, different colour. (3) THE UNIT OF CAPTURE. The sweep photographs whole cells, and no whole cell in this sheet is any other whole cell: (hump, pair) is a parabola over a straight line, (ramp, pair) is a straight line over a flat line, predicted 67.66% focus / 9.78% frame apart. So the identity is registered here as a RELATION with a falsification test that any reader can run off the sheet without a tool: AT (hump, pair) THE LOWER RAIL MUST BE DEAD STRAIGHT. If it is curved, then `hump` in this artifact is not the parabola, the case for overruling 2 of 3 members on that word collapses, and the family's chain has one fewer link than this note claims. The second-order version is the same test one rung up: at (ramp, bridge) the TOP rail must be a parabola, and it must be the same parabola as the MIDDLE rail of (hump, bridge) turned upside down. Neither test is a percentage, which is why neither is filed as a null.",
+				"fixture": {
+					"layout": "single"
+				},
+				"fixture_why": "The artifact can stand as all five curves in a row (layout=ladder, 1.20 m pitch, about 5.8 m wide) but the SWEEP must see one at a time: capture_config_sweep unions the AABB across a spec's variants (gd:404-435), so one six-metre row in the same spec frames every single against six metres and photographs it as a speck. layout is an export and not an axis - wave 13 paid for that lesson - and it ships at single, so the fixture is a belt over braces. Nothing else needs pinning: there is no _process, no Timer and no randf in the file, so unlike all three members this artifact needs no sweep_speed or pulse_speed frozen to 0 the way ftc_bridge's own fixture does.",
+				"framing": 0.55,
+				"framing_why": "Fit-by-diagonal on a flat panel. The union AABB is 0.8522 x 0.8578 x 0.6217 with a diagonal of 1.3597, but the body is a 1.05 m sheet 0.06 m thick turned to face the standpoint, so at framing 1.0 the camera retreats to 4.22 m and the ink lands at 2-4% of frame. At 0.55 the camera sits at 2.32 m, the frame is 1.421 m at the subject, the panel fills 74% of it in width and 60% in height with no clipping, and subject share runs 5.9% to 19.9%. The sparsest cells are the `pair` variants at 5.9-6.4%: that is not the inflated-AABB symptom, it is what two thin tubes in a void measure, and the `area` and `bridge` variants of the same curve run 2-3x higher because a slab is a filled region.",
+				"kin": "riemann_pump is the same accumulation with the approximation as its subject (`resolution` = pump | coarse | mid | fine, `comparison` = rules | overlay | bracket | single) and is where integral_area's declined `tally` question properly lives. slope_tangent_demo asks this artifact's `pair` question at a single point rather than across a span, and its `phase` axis (traverse | crest | steepest | trough) names in words the very places this artifact beads: `crest` and `trough` are the two kinds of turning point, `steepest` is the rate's own extremum. The `evidence` ladder - result | trace | longhand ( | axiom) - is shared by ftc_bridge, slope_tangent_demo, velocity_arrow and zeno_staircase, and is declined here (see declines). partial_derivative_terrain carries the same operator into two variables. `curve` itself is declared by exactly three tokens in the whole 2671-entry corpus, all three in change.json, all three sources of this artifact: it is a closed family of three and this is its fourth member.",
+				"declines": [
+					"THE BRIEF'S CHAIN, as stated. It said the derivative of a hump is wave-ish, of a ramp is a step, of a step is a spike. Only the third survives contact with the code, and only as a shape rather than an equation: ramp' is a CONSTANT and hump' under the siblings' half-sine is a half-cosine, and neither is one of the five words. Overruled from the members' own expressions, and the corrected chain - two links, one gap, one word with two meanings - is a better argument than the one it replaces, because it is about the family rather than about calculus.",
+					"THE BRIEF'S CENSUS. It said integral_area declares a different ORDER and that ftc_bridge and derivative_pair agree on the default. Both are backwards: the order is identical in all three scripts and differs only in integral_area's registry block, and the default is `hump` in integral_area and ftc_bridge against `wave` in derivative_pair. Recorded because a synthesis that had trusted either would have shipped the wrong default and a fabricated finding about vocabulary drift.",
+					"The siblings' `hump` = sin(u*PI). Not refused as a curve - it is a perfectly good arch - refused as the meaning of the word, because under it the family's list has one fewer link and the artifact's whole argument would be that a shared vocabulary is arbitrary. Under ftc_bridge's parabola the argument is that a shared vocabulary is nearly a chain and the near is where the interest is. This is the one place this synthesis overrules a 2-of-3 majority of its members, and the falsification test is written into designed_nulls_why.",
+					"integral_area's `tally` (strips | blocks | column | antiderivative). Three of its four values are answers to 'how is the amount displayed' - a region, an approximation, a scalar bar, a curve - and two of those are gauges by construction: `column` is a bar chart with one bar and `blocks` is a Riemann sum, which is riemann_pump's whole subject and its `resolution` axis. The fourth, `antiderivative`, is not declined at all: it is this artifact's `bridge`, drawn as a rail in a stack instead of a second line on one panel. The slab here is continuous, the limit rather than the approximation.",
+					"derivative_pair's `panels` (stacked | overlaid | tower | phase). `stacked` is this artifact's `pair`; `tower` adds f'' and is the same axis one rung longer, which the three-rail stack already generalises in the other direction; `overlaid` puts two rails on one datum and would make the normalisation dishonest, because two curves sharing an axis assert a shared unit that this artifact has just spent its whole note refusing. `phase` - plotting (f, f') with no x at all - is the one genuinely different object in the family and deserves its own token, not a value of `operation`, because nothing else in a three-rail stack is a parametric plot.",
+					"ftc_bridge's `evidence` (result | trace | longhand) and every caption. `longhand` prints two numbers and equates them (gd:430: '∫ f' dx = %+.2f     f(b) − f(a) = %+.2f'), `trace` prints an f'(x) tag, and the shipped `result` prints the theorem itself on the beam (gd:275). Nothing is printed here. The plumb lines are the equation: a tile whose value is a rendered formula naming its own variant is a tile about typography, and the axis that varies how much text is on the object is an axis about text.",
+					"Every animation. All three members run a _process: derivative_pair scrubs a sweep line (gd:138-143), integral_area lights strips left to right (gd:153-160), ftc_bridge runs a pulse along the deck and re-lights each segment behind it (gd:301-315). A rate, a duration and a phase are invisible to a still - the info_board lesson - and integral_area's own registry has to pin sweep_phase for exactly this reason. There is no _process, no Timer and no randf anywhere in this file, so two builds of one value are the same mesh.",
+					"amplitude, horizontal_span, samples, panel_gap, bridge_span, pillar_height, arch_segments and every colour export. A bigger panel photographed from one station is a bigger picture of the same claim. SPAN is pinned at 1.00 m and SAMPLES at 96 (derivative_pair's own default) so the five curves are commensurable, and the colours are constants lifted from the members one by one so a room holding this artifact beside derivative_pair does not have to learn two palettes.",
+					"A `layout` axis, and a `ladder` value inside `operation`. Five curves in a row is a design view; declared as an axis value it would union a 5.8 m AABB with every single and photograph the singles as specks. It is an export pinned by dna.fixture."
+				],
+				"sweep_command": "python tools/build_dna_gallery.py --slug=curve-pair --tokens=curve_pair --max=15",
+				"sweep_note": "THE FULL SHEET NEEDS --max=15. `curve` is declared first and is never trimmed; `operation` is second and build_dna_gallery trims the LATER axis from the tail until the cross product fits its cap, so at the default --max=9 the 5 x 3 sheet renders as 5 x 1 = pair only - and `area`, the operation the pre-registered closest pair lives in and the only one that builds a slab, is never photographed. A sheet captured at the default cap would show ten thin-line tiles, report a large uniform bite, and be a fact about the budget. Second: read the PER-PAIR rows in doc/reports/sweep_curve-pair_bite.json and not the headline. Both axes are predicted to bite hard and the whole predicted sheet lies in a 10.6-point band on focus, so a peak tells you nothing here; the ranking that carries information is the FRAME column.",
+				"placements": 0
+			}
+		}
+	}
+}

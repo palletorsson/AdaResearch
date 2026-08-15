@@ -34,6 +34,19 @@ def main() -> int:
         if " against " not in head:
             print(f"{tok:<18} prediction not parseable: {pair!r}"); continue
         va, vb = [s.strip() for s in head.split(" against ",1)]
+        # A builder writing "rule 90 against rule 250" is writing English, not a lookup key.
+        # Strip a leading axis-name word so the value matches the enum ("90"), and strip
+        # surrounding quotes/backticks while we are here. Being brittle about this made a
+        # correctly-registered prediction read as "pair not measured".
+        def _bare(s: str) -> str:
+            s = s.strip().strip("`'\"")
+            parts = s.split()
+            if len(parts) > 1 and parts[0].lower() in {a.lower() for a in
+                    ((json.loads((REG / f"{tok}.json").read_text(encoding="utf-8"))
+                      ["artifacts"][tok].get("dna") or {}).get("axes") or {})}:
+                return " ".join(parts[1:])
+            return s
+        va, vb = _bare(va), _bare(vb)
         axes = list(((e.get("dna") or {}).get("axes") or {}).keys())
         bite = REPO / "doc" / "reports" / f"sweep_{tok}_bite.json"
         if not bite.exists():

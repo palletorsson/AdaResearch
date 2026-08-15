@@ -1,0 +1,169 @@
+{
+	"artifacts": {
+		"rule_bench": {
+			"name": "Rule Bench",
+			"lookup_name": "rule_bench",
+			"scene": "res://commons/artifacts/rule_bench/rule_bench.tscn",
+			"class_name": "RuleBench",
+			"category": "emergence",
+			"artifact_type": "synthesis",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "compact",
+			"description": "One elementary cellular automaton - ca_bridge's update copied byte for byte, periodic wrap, a single live cell in the middle of row 0 - built as a 1.19 x 1.00 m wall of 20 mm cubes on a 24 mm lattice, 48 cells wide and 40 generations deep, grown downward so the spacetime diagram is a thing you walk along. One rule per variant, and the same wall drawn at three distances from the mechanism: `lookup` builds the rule's own eight-row neighbourhood table as eight three-cell tiles over the cell each produces, in the order 111 down to 000, so the output blocks read left to right as the rule number in base two; `front` draws generation 39 alone, standing on the rebate with all its history gone; `spacetime` stacks all forty. Rules 30 (chaos), 90 (the Sierpinski gasket), 110 (the universal one), 250 (isolated cells die, so a pure alternating lattice) and 218. 218 is 90 with neighbourhood 111 switched on - one bit of eight - and because 90 never puts three live cells in a row, 218 builds the same wall as 90 cell for cell; 250 is also one bit from 218 and differs from it in 23 percent of the cells. Nothing animates, nothing is printed, nothing is random.",
+			"tags": [
+				"rule",
+				"cellular_automata",
+				"elementary_ca",
+				"wolfram",
+				"emergence",
+				"local_law",
+				"spacetime_diagram",
+				"lookup_table",
+				"synthesis"
+			],
+			"dev_themes": [
+				"cellular_automata",
+				"emergence",
+				"synthesis",
+				"a local law and the global form nobody wrote down"
+			],
+			"interactions": [
+				"walk the wall at reading=spacetime and read the four forms off the body: 30 is a broken deck, 90 a nest of triangles, 110 a wall with gliders crossing it, 250 a lattice that computes nothing",
+				"stand at reading=lookup and spell the number: the eight output blocks, read left to right and top to bottom, ARE 00011110 for rule 30",
+				"put rule=90 and rule=218 side by side at reading=spacetime: two different numbers, one wall, because the bit they differ in is never reached from this seed",
+				"then put rule=218 and rule=250 side by side: also one bit apart, and 441 of the 1920 cells change",
+				"at reading=front the wall is empty except for one bright row - a 1-D automaton's present tense is a fortieth of what you can see of it"
+			],
+			"capacity": "SEE that a rule is a local law and its form is not written anywhere in it - and that the distance between mechanism and form is not a metaphor but a number you can read off two walls one bit apart",
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"ca_bridge",
+					"lifeform_walker",
+					"mold_network",
+					"structure_growth",
+					"pheromone_terrain",
+					"complexity_pattern",
+					"ca_rule_explorer"
+				],
+				"preferred_zone": "teaching",
+				"footprint_source": "computed_from_geometry",
+				"footprint_note": "Every single-layout variant is the SAME body: a 1.192 x 1.000 x 0.020 m backplate turned to face bearing 0.62 rad, with cells standing at most 0.018 m proud of it, so the world box is 0.982 x 1.000 x 0.711 and one grid cell holds it. The pitch was cut from 25 mm to 24 mm for exactly that reason - at 25 mm the world width is 1.021 and the footprint doubles. layout=ladder stands all five rules in a row at 1.35 m pitch (about 6.5 m wide) and is a design view, not a map placement."
+			},
+			"measurements": {
+				"aabb_size": [
+					0.982,
+					1.0,
+					0.711
+				],
+				"aabb_center": [
+					-0.006,
+					0.55,
+					-0.007
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 1.0,
+				"source": "computed_from_geometry in a Python replica built from the same constants; no Godot was run. The box is the BACKPLATE plus the 18 mm cell relief, rotated by FRONT_YAW 0.62: 1.192 cos 0.62 + 0.038 sin 0.62 = 0.982 in x, 1.192 sin 0.62 + 0.038 cos 0.62 = 0.711 in z. It is IDENTICAL for all fifteen variants by construction - the backplate and its rebate are drawn before the axis is consulted - which is the whole reason a rule that fills the field and a rule that draws a thread frame the same."
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			],
+			"dna": {
+				"promoted": "2026-08-15",
+				"stage": "synthesis",
+				"framing": 0.78,
+				"sources": [
+					"ca_bridge",
+					"lifeform_walker",
+					"mold_network",
+					"structure_growth",
+					"pheromone_terrain"
+				],
+				"axes": {
+				 "rule": [
+				  "30",
+				  "90",
+				  "110",
+				  "250",
+				  "218"
+				 ],
+				 "reading": [
+				  "spacetime",
+				  "front",
+				  "lookup"
+				 ]
+				},
+				"default": "rule=30, reading=spacetime. 30 is ca_bridge's shipped @export default (gd:58, `var rule: int = 30`), which its .tscn does not override and which all four of its placements walk; its registry records the same and says so from a seven-string measurement across five maps. spacetime is the members' shipped behaviour rather than a new choice: ca_bridge builds one row per generation and LEAVES THEM ALL STANDING - a bridge is its own history - so the default cell is the picture the family already ships, and it is also the largest subject, which is what solve_framing should be solving on.",
+				"note": "WHAT THE VALUES MEAN, from the members' code. THE FAMILY FIRST: five artifacts declare `rule` and carry FOUR disjoint value lists, and the lists are not a drift - they are four distances from the mechanism. ca_bridge names the law by its NUMBER (30 | 90 | 110 | 250: the literal integer whose bits ARE the lookup table, gd:207 `(rule >> ((a<<2)|(b<<1)|c)) & 1`), which is as close to the mechanism as naming gets and tells a reader nothing. lifeform_walker names it by its NICKNAME (life | highlife | seeds | replicator | maze | coral, RULES = {\"life\": [[3],[2,3]], \"coral\": [[3],[4,5,6,7,8]], ... gd:72-79) - birth/survival bands under the culture's name for the GLOBAL FORM they produce. mold_network and structure_growth name it by its TENDENCY (reinforce | explore | compact | strand, RULE_BANDS = \"4-6/5-7\" | \"3-6/4-7\" | \"5-7/6-8\" | \"2-4/5-6\", CellularAutomata3D_Flexible gd:111-116, glossed in that file as \"commits on little evidence\", \"dies wherever it is crowded\"). pheromone_terrain names it by the AGENT'S ACT (trail | sniff | avoid | grid; each value changes one clause of _choose_next_position - which neighbours are candidates, or the SIGN of the comparison - and nothing else). Number, tendency, act, nickname: a ladder from the code to the phenomenon, and where a family sits on it says who the artifact was written for. THE BRIEF'S READING SURVIVED THE CODE, with one correction: pheromone's `sniff` is not a further rung but the SAME rung as reinforce/explore seen from inside the walker rather than from above the colony, so the ladder has three rungs occupied by four vocabularies, not four. RULE, five values, ca_bridge's four numbers character for character and in its order, plus one. 30 = class 3, left XOR (centre OR right); a chaotic deck, 37.2 percent of this field. 90 = class 2, left XOR right; the Sierpinski gasket, nested self-similar gaps, 12.7 percent - and at width 48 the light cone reaches the edges at generation 24 and the wrap folds the gasket back into a second nucleation, which is ca_bridge's own periodic behaviour at its shipped width 31, not something introduced here. 110 = class 4, the universal one; structure with gliders crossing it, 25.5 percent. 250 = the control: neighbourhood 010 maps to 0, so an isolated cell DIES and a single seed can only alternate - a pure checkerboard lattice, 35.6 percent, a rule that fills the wall and computes nothing. (ca_bridge's registry calls 250 near-solid at 87.5 percent; that is true at its width 31 over 120 rows, where the wrap eventually welds the lattice shut, and this bench's 40 rows stop before it does. Both numbers were re-derived here from the same code - at 31 x 120 this implementation returns 48.0 / 23.5 / 49.7 / 87.5 percent, ca_bridge's measured ladder_note to the decimal, which is the check that the transcription is faithful.) 218 = NOT ca_bridge's, and the reason the axis has five values instead of four. 218 is 90 with the single bit for neighbourhood 111 switched on. From a single seed rule 90 never produces three live cells in a row - checked over all forty generations, its exercised neighbourhoods are {000, 001, 010, 100, 101} - so that bit is never read, and 218 builds THE SAME WALL AS 90, cell for cell, while being a different number with a different table. 250 is ALSO one bit from 218 (neighbourhood 101), and that bit is read constantly: 15.2 percent of the frame changes. Equal edit distance in the mechanism, 0 percent against 15 percent in the form. That pair of numbers is the artifact's whole claim, and it is the reason the value exists; it was not chosen for its picture. READING, three values, the ladder made into a knob. lookup = the mechanism as a body. Eight tiles - index 7 first, so 111 | 110 | 101 | 100 across the top and 011 | 010 | 001 | 000 across the bottom - each a three-cell neighbourhood over the single cell it produces. Every socket is built whether or not it is filled, because a lookup table has all eight rows under every rule and only the OUTPUTS are the rule's opinion; so two rules differ here in exactly popcount(a XOR b) output blocks out of eight, and the eight blocks read in order spell the rule number in base two. This is what a rule NUMBER actually is, standing up. front = the present tense. Generation 39 alone, in the position it occupies in the wall, with everything above it gone. This is mold_network's `wake: none` in its own words (\"the object is only what is alive right now\", Flexible gd:120) and it is lifeform_walker's 6x6 torso, which shows a current state and no history at all. For a 1-D automaton the present is one row in forty - two and a half percent of the picture - and that thinness is the reading, not a fault in it. spacetime = the global form. All forty generations stacked and standing, which is ca_bridge's own shipped behaviour: it spawns a cube per live cell and never removes one, so a bridge IS its spacetime diagram. This is the rung with the nicknames on it - the gasket, the deck, the lattice. THE THESIS SOMEONE COULD DISAGREE WITH: a rule is a local law and its global form is written nowhere in it, so the distance between the mechanism and the phenomenon is real and measurable - here, twenty times, from 0.6 percent of frame at `front` to 15-19 percent at `spacetime` for the same pairs of rules. The disagreement available, and it is a good one: all the information is in eight bits, so the wall adds nothing and the three readings are three renderings of one fact. The (90, 218) cell is where that objection is strongest - two numbers, one wall, and the wall is plainly not telling you which number you are looking at - and it is exactly where it costs something, because (218, 250) sits on the same shelf one bit away and is a different world.",
+				"predicted_degeneracy": {
+					"pair": "rule 90 against rule 250, in the front reading",
+					"percent": 5.2,
+					"arithmetic": "Rasterised BEFORE ANY CAPTURE in the critic's own currency: the geometry rebuilt in Python from the same constants (same update, same wrap, same seed, same box sizes), projected through capture_config_sweep's camera (FOV 34, PAD 1.9, yaw 0.62, pitch -0.26, 760 x 760, framing 0.78 on the union AABB of all 15 variants, which is the backplate), painter-sorted by layer with one directional light and flat shading, then run through artifact_dna_critic's pipeline unchanged - crop to the union of the two frames' subject boxes, neutralise each frame's corner background, grey, resize 160 x 160, mean of the hottest 5%. Closest NON-NULL pair in the sheet: 90 vs 250 at reading=front, 5.20% focus / 0.26% frame. WHY THAT PAIR: at `front` only generation 39 is drawn, 48 cells of 20 mm on a 1.19 x 1.00 m body, so the whole reading is 2.4% of the panel before any comparison; and the last rows of 90 and 250 are the SAME alternating lattice except in a 17-cell band in the middle (indices 16 to 32) where 90's wrap has emptied - 8 differing cells out of 48, a sixth of a fortieth of the picture. AND IT MUST BE A DOUBLE ENTRY: 250 vs 218 at reading=front is predicted 5.20% as well, to the decimal, because 218's front row IS 90's front row. If those two rows differ by more than rounding, the sweep did not set what it thinks it set - read _rejects.json first. Full predicted sheet, focus % / frame %. reading=front: 90-218 0.00/0.00, 90-250 5.20/0.26, 250-218 5.20/0.26, 30-250 10.03/0.50, 30-90 11.47/0.57, 30-218 11.47/0.57, 30-110 12.09/0.60, 90-110 13.82/0.69, 110-218 13.82/0.69, 110-250 16.28/0.81. reading=lookup: 250-218 37.88/1.89, 90-218 38.44/1.92, then seven pairs between 57.57 and 57.91 - the axis saturates here, because one output block is already 3.4% of the crop and the critic's focus is the hottest 5%, so two blocks fill it. reading=spacetime: 90-218 0.00/0.00 and every other pair between 65.79 and 66.85 focus, 15.20 to 19.22 frame. Reading pairs at fixed rule run 63.8 to 67.4 focus. Axis means excluding the designed nulls: rule 39.6% focus, reading 65.1% focus. THE LADDER IS IN THE FRAME NUMBER, NOT THE FOCUS ONE: focus saturates above about 3% of crop, so the three readings all read 'BITES' at their peak, and the twenty-fold spread between front (0.26-0.81% frame) and spacetime (15.2-19.2% frame) is the claim. Read the frame column. THE PREDICTION IS A FLOOR: the replica has one light, flat shading, no shadows, AO or antialiasing, and every prior prediction in this corpus under-read by 1.5x to 6.7x. If the sweep comes back BELOW 5.2% on the named pair, or if any spacetime pair other than 90-218 reads under 30% focus, check the harness before the design: (a) tools/check_dna_declarations.py - a value the code cannot reach falls back and prints identical tiles; (b) _rejects.json - `rule` is a String enum whose values look like INTEGERS, which is tier_terrarium's exact fault, and although capture_config_sweep now converts back through the property's enum hint (gd:1387-1412) this is the first axis in the corpus to depend on that fix; (c) whether the sheet was captured with --max=15, because at the default cap of 9 build_dna_gallery trims `reading` from the tail to [spacetime] and neither the predicted pair nor the second null exists. If instead the FRONT reading shows no subject at all, the wall did not build - `front` is legitimately an almost empty panel with one bright row on the rebate, so check the rebate is there before concluding NO RENDER.",
+					"registered": "2026-08-15, before the first capture"
+				},
+				"designed_nulls": [
+					{
+						"a": {
+							"rule": "90",
+							"reading": "spacetime"
+						},
+						"b": {
+							"rule": "218",
+							"reading": "spacetime"
+						},
+						"under_percent": 0.5,
+						"why": "IDENTICAL BY CONSTRUCTION, to the byte. 90 is 01011010 and 218 is 11011010: they differ in exactly one bit, the output for neighbourhood 111. From a single centre seed rule 90 never produces three live cells in a row - its exercised neighbourhood set over all forty generations is {000, 001, 010, 100, 101} - so that bit is never read and the two rules emit the same 48 x 40 grid, cell for cell, verified by comparing the arrays. Two different numbers, two different lookup tables, one wall. Predicted 0.00% focus / 0.00% frame; anything above 0.5% is render noise or a mis-set value, and anything above 2% means the sweep is not sending what it says it is."
+					},
+					{
+						"a": {
+							"rule": "90",
+							"reading": "front"
+						},
+						"b": {
+							"rule": "218",
+							"reading": "front"
+						},
+						"under_percent": 0.5,
+						"why": "The same null, seen at the other end of the ladder. `front` draws generation 39 of the same grid, so if the walls are identical the rows are identical. It is registered separately because it is a different picture and a different tile, and because it is the check that the null is a fact about the AUTOMATON and not about the spacetime renderer: a null that held at spacetime and broke at front would mean the wall builder is reading something other than the grid."
+					}
+				],
+				"designed_nulls_why": "Both nulls are the same pair of rules and they are the artifact's argument rather than a spare check. The tempting third - (90, lookup) against (218, lookup) - is deliberately NOT a null and is the pre-registered closest pair's twin: there the two rules differ in exactly one output block of eight, predicted 38.4% focus / 1.9% frame. The three cells together are the experiment: one bit apart and 0.00% at spacetime, one bit apart and 38% at lookup, and one bit apart from 250 at 15% of frame. If any of those three moves the wrong way the thesis is in trouble, which is what a pre-registration is for.",
+				"fixture": {
+					"layout": "single"
+				},
+				"fixture_why": "The bench can stand all five rules in a row (layout=ladder, 1.35 m pitch, about 6.5 m wide) but the SWEEP must see one wall at a time: capture_config_sweep unions the AABB across a spec's variants, so a five-wide row in the same spec frames every single against six and a half metres and photographs it as a speck. layout is an export and not an axis, and it ships at single, so the fixture is a belt over braces. NOTE WHAT IS NOT FIXTURED, and why nothing needs to be: there is no time knob here. ca_bridge needed dna.fixture.build_rows 120 because it grows one row per 0.05 s and a still at the settle time catches a different stump per value; this bench builds all forty generations synchronously inside _ready, has no _process, no Timer and no randf anywhere in the file, so the frame is complete at frame one and two builds of one value are the same mesh. That is the one place the members' harness debt did not have to be inherited.",
+				"kin": "complexity_pattern carries `rule` with lifeform_walker's six Life values character for character and is the sixth member of the family - not taken as a source because it is lifeform_walker's automaton as a flat field and would have added a vocabulary already represented, but it is the artifact to compare lifeform_walker against, and those two SHOULD measure alike. ca_rule_explorer and ca_columns are the same 1-D automaton in the same registry (ca_bridge's own note names them: 1D-to-bridge against 2D-to-towers) and are kin by mechanism; neither declares an axis. The word `rule` is also carried by artifacts outside this family for a different question and is not claimed here. On the value side: this bench's `reading` is mold_network's `wake` (hold | fade | none) generalised - `wake` asks how much of the history is still standing and answers it in units of the automaton's own state count, which is the same question `front` against `spacetime` asks in units of generations. A room holding mold_network at wake=none and this bench at reading=front is saying one thing twice, and the mapping is one line: none = front, hold = spacetime, with `lookup` having no counterpart anywhere in the family because no member ever shows its own table.",
+				"declines": [
+					"Sharing a value list across the family, which is what a synthesis is usually for. ca_bridge, mold_network and pheromone_terrain each say in their own registries that their values CANNOT be compared with the others' - 'a different alphabet', 'these should NOT be compared as a family measurement', 'the word carries; the numbers must not' - and they are right: a Life-family band over 8 Moore neighbours and a three-cell elementary table are different automata. So this bench does not unify the vocabularies. It builds the ONE substrate on which the disagreement is legible (ca_bridge's elementary CA, of which the Life rules are the 2-D cousins) and turns the distance between the vocabularies into the second axis instead. That is the one place this synthesis overrules its brief: the brief asked for the other families' words to be MAPPED onto the numbers in this note, and the code says they cannot be - there is no elementary rule that means `coral`, and inventing one would be exactly the science_screen fault of declaring values the code cannot reach. What is mapped instead is the DISTANCE, which is a real relation and is the `reading` axis.",
+					"`wake` as a second axis, and lifeform_walker's `rule` values as a third. wake is mold_network's and is honestly this bench's `reading` under another word (see kin); running both would sweep the same question twice. The Life values are declined for ca_bridge's own recorded reason, quoted from its registry: they 'would name a mechanism this object does not have'.",
+					"A fifth ca_bridge value, and ca_bridge's own rejects. Its registry records that 184 and 22 were dropped for filling about 3% of the deck - a thread, not a bridge - and that judgement is inherited rather than re-litigated. The fifth value here is 218, which is NOT from ca_bridge's ladder and is not offered as one: it exists to make the (90, 218) null and the (218, 250) contrast, and it is the only place this artifact adds to a member's declared list.",
+					"A random or dense initial row. ca_bridge exports random_initial_row and initial_density and declines them as an axis because `randf()` is unseeded - four random-start frames would be four different bridges and any bite number would measure the RNG. The same refusal holds here and is stronger: the seed is a single cell, it is the same cell under every rule, and it is drawn in off-white precisely so a reader can see that the one thing the five variants share is not the law.",
+					"Width, generation count, cell size and every colour. A wider wall or a deeper one is a bigger picture of the same claim; 48 x 40 is pinned so the light cone reaches the edges at generation 24 and the wrap - ca_bridge's own periodic wrap - is visible in the lower third under every rule. None of these are exports.",
+					"Any caption, number or legend. The lookup reading already spells the rule number in cubes; a printed '30' beside it would be a tile about typography, which is what postulate_bench declined its members' Label3D plates for.",
+					"Any animation, growth, rate or randomness. The whole wall is built synchronously in _ready from integer arithmetic; there is no _process, no Timer, no randf and no unseeded anything in the file."
+				],
+				"sweep_command": "python tools/build_dna_gallery.py --slug=rule-bench --tokens=rule_bench --max=15",
+				"sweep_note": "THE FULL SHEET NEEDS --max=15. `rule` is declared first and is never trimmed; `reading` is second and build_dna_gallery trims the LATER axis from the tail until the cross product fits its cap, so at the default --max=9 the 5 x 3 sheet renders as 5 x 1 = spacetime only - and both designed nulls survive that (they are spacetime cells) while the pre-registered closest pair, which lives at `front`, does not exist at all.",
+				"placements": 0
+			}
+		}
+	}
+}
