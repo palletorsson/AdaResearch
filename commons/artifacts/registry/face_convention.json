@@ -1,0 +1,157 @@
+{
+	"artifacts": {
+		"face_convention": {
+			"name": "Face Convention",
+			"lookup_name": "face_convention",
+			"scene": "res://commons/artifacts/face_convention/face_convention.tscn",
+			"class_name": "FaceConvention",
+			"category": "primitives",
+			"artifact_type": "synthesis",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "compact",
+			"description": "Four poles on a rail, each carrying one triangle, built as a 1.03 x 0.56 x 0.08 m stand. The four flags are the four ways a triangle's two orientation declarations can stand to each other: the sign its VERTEX ORDER produces, and the sign of the NORMAL somebody stored with those vertices. Pole 0 has both pointing at you, pole 3 has both pointing away, and poles 1 and 2 disagree with themselves. The convention axis then deletes what it does not accept: none keeps all four, winding keeps 0 and 1, normal keeps 0 and 2, both keeps only 0. The two notations that parasol_triangle says encode the same fact keep THE SAME NUMBER OF FLAGS AND A DIFFERENT SET OF THEM. Nothing animates, nothing is printed, nothing is random, and a culled flag leaves its pole standing, so no variant is ever blank.",
+			"tags": [
+				"triangle",
+				"plane",
+				"winding_order",
+				"backface_culling",
+				"surface_normal",
+				"orientation",
+				"convention",
+				"primitives",
+				"synthesis"
+			],
+			"dev_themes": [
+				"primitives",
+				"synthesis",
+				"a face is a convention, not a property"
+			],
+			"interactions": [
+				"stand at convention=none, sidedness=two_tone and read the rank: two blue flags then two ochre. That is the WINDING, made legible as colour, and it is the only declaration you can see",
+				"now put convention=normal beside it: flags 1 and 3 are gone. Nothing in the first picture said which two would go, because the paint follows the order and says nothing about the normal",
+				"put convention=winding and convention=normal side by side: two flags each, and not the same two. Same tally, different world",
+				"set convention=both: one flag on four poles. A sheet has to satisfy two declarations it was never made to keep consistent",
+				"set sidedness=inverted at any enforcing convention: the exact complement stands. The geometry did not move by a micron; only the naming did",
+				"set sidedness=flat at convention=none: four identical flags over four different declarations, and no way at all to tell them apart until something enforces one"
+			],
+			"capacity": "SEE that a triangle's front is not in its three points - that it is a convention laid over them, stated twice in two languages that nothing forces to agree, and invisible until one of them is enforced",
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"parasol_triangle",
+					"coincident_face",
+					"penrose_triangle",
+					"impossible_trident",
+					"triangle",
+					"frequency_shell"
+				],
+				"preferred_zone": "teaching",
+				"footprint_source": "computed_from_geometry",
+				"footprint_note": "Every single-layout variant is THE SAME BODY: a 1.030 x 0.5615 x 0.075 m extent turned to face bearing 0.62 rad, so the world box is 0.882 x 0.562 x 0.660 and one grid cell holds it. It is identical for all sixteen cells by construction - the rail, the four poles and a layers=0 anchor at the full extent are built before the axes are consulted, and the flags never reach outside the anchor. layout=ladder stands all four conventions in a row at 1.15 m pitch (about 4.6 m wide) and is a design view, not a map placement."
+			},
+			"measurements": {
+				"aabb_size": [
+					0.882,
+					0.562,
+					0.66
+				],
+				"aabb_center": [
+					0.0,
+					0.281,
+					0.0
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.882,
+				"source": "computed_from_geometry from the script constants; no Godot was run. The AnchorExtent box is RAIL_W x BODY_H x RAIL_D = 1.030 x 0.5615 x 0.075 centred at y 0.28075, rotated by FRONT_YAW 0.62: 1.030 cos 0.62 + 0.075 sin 0.62 = 0.882 in x, 1.030 sin 0.62 + 0.075 cos 0.62 = 0.660 in z. The anchor exists precisely so this box is IDENTICAL in all sixteen cells - without it a cell with one flag would measure narrower than a cell with four and the camera would creep in on the sparse tiles, turning a framing change into a measured difference."
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			],
+			"dna": {
+				"promoted": "2026-08-15",
+				"stage": "synthesis",
+				"framing": 0.56,
+				"sources": [
+					"parasol_triangle",
+					"coincident_face",
+					"penrose_triangle",
+					"impossible_trident"
+				],
+				"axes": {
+				 "sidedness": [
+				  "two_tone",
+				  "flat",
+				  "inverted",
+				  "split"
+				 ],
+				 "convention": [
+				  "none",
+				  "normal",
+				  "winding",
+				  "both"
+				 ]
+				},
+				"default": "sidedness=two_tone + convention=none, which is parasol_triangle's shipped pair character for character (gd:52 `var sidedness: String = \"two_tone\"`, gd:67 `var convention: String = \"none\"`), and both are the leftmost value of their own @export_enum so apply_dna_block leaves the order alone. It is also the honest cell to default to: at convention=none nothing is culled, so the stand ships as the plane BEFORE anybody has enforced anything - four flags on four poles, two blue and two ochre, which is the picture the family already makes. parasol has 8 placements and none of them passes a config key; this token has none yet.",
+				"note": "WHAT THE VALUES MEAN, from the members' code. THE FAMILY FIRST: four artifacts about one thing a polygon cannot answer from its own vertices. parasol_triangle asks WHICH SIDE (sidedness two_tone|flat|inverted|split, convention none|normal|winding|both) and is the only member that names the mechanism - gd:29-33, `a triangle is three points IN AN ORDER, and that order is the ONLY thing that gives a flat sheet a front and a back`. coincident_face asks WHICH DEPTH when two faces claim the same one, and answers that the exact boundary is a coin toss per pixel (separation coincident|clear|hairline|inverted). penrose_triangle asks WHICH JOINT, and how much a figure confesses about the one that cannot close (disclosure marker|bare|seam|exploded|sealed). impossible_trident asks WHICH PRONG, and where a contradiction is allowed to live (fault global|confessed|none|doubled). Side, depth, joint, prong: four unanswerable questions, and this bench takes the first because it is the only one the machine actually ACTS on - a face it does not accept is not drawn. THE CORRECTION THE CODE FORCED, and it is this synthesis's whole point. parasol says the normal and the winding `encode the same fact and neither is visible`. Half of that is wrong, and parasol's own material says so: gd:149 sets cull_mode = CULL_DISABLED, switching OFF the one of the two notations a rasteriser can execute. A GPU has no normal test - a stored normal only feeds shading - so of the two languages, ONE IS ENFORCED AND THE OTHER IS ONLY BELIEVED, and nothing whatever forces them to agree. Every source does the same thing: coincident_face's slabs, penrose's beams and the trident's tines are all built so that nothing is ever hidden. The family is four artifacts about facing, none of which lets the machine decide a face. SIDEDNESS, four values, parasol's own list and order. two_tone = the shipped parasol: the winding made legible as colour, a flag wound toward you painted its declared FRONT colour and one wound away painted its BACK, so the rank reads blue blue ochre ochre and the ORDER is the only declaration in the picture. flat = one neutral colour on both faces (parasol's own FLAT_COLOR 0.86,0.86,0.88, gd:76), the claim withdrawn entirely - four identical flags over four different declarations, which is what a triangle looks like when nobody has decided which way it faces, and the honest opposite of the artifact's thesis. inverted = the convention reversed; the geometry does not move by a micron and the naming does. Under convention=none that is a repaint and nothing else, which is the registered null; under any enforcing convention it stands the exact COMPLEMENT of the flags two_tone stands, because a reversal that does not reverse what survives is a reversal in name only - which is exactly what parasol could afford, never culling. split = both terms on ONE face, divided along the median from apex to base midpoint, with a 4 mm slot cut between the halves so the division is geometry and survives a greyscale resize instead of living only in colour; which half carries which term IS the winding, so facing stops being a secret you have to walk around to learn. CONVENTION, four values, parasol's own list and order, each one a cull here rather than an annotation. none = no cull and no side marking beyond the paint: the honest plane, all four flags standing including the two whose order points away from you. A triangle with nothing enforced HAS no front, and this is the only cell in which the back colour is ever drawn at all - once you enforce a convention every survivor presents its declared front, so the object can no longer tell you it has two sides. normal = culled by the STORED NORMAL, a number written into the mesh; keeps poles 0 and 2. winding = culled by the VERTEX ORDER, by the same cross product frequency_shell needed; keeps poles 0 and 1. both = both tests applied; keeps only pole 0, because the two languages disagree on poles 1 and 2. THE WORKED CASE, and it is not hypothetical. frequency_shell derived twenty icosahedron faces from mutual edge distance, which fixes the vertices and says nothing about their order: roughly half came out wound inward and were culled, its v1 photographed as a handful of loose triangles and its v4 as a ball with a bite taken out of it, and the repair is one line, gd:186, `(b - a).cross(c - a).dot(a + b + c) < 0.0` - the edge cross product checked against the centroid, which on a sphere at the origin points outward by definition. Twenty correct triangles, half invisible, and the fault was an ordering nobody had written down. THE CONVENTION IS INVISIBLE UNTIL IT IS WRONG, and that is the tile pair this bench exists for: at (two_tone, none) poles 0 and 1 are pixel-identical to each other and poles 2 and 3 are pixel-identical to each other, and at (two_tone, normal) poles 1 and 3 are gone. THE THESIS SOMEONE COULD DISAGREE WITH: a plane in a polygon renderer has a side only because somebody chose an order, so the front is a convention and not a property. The disagreement available, and it is a fair one: the normal and the winding are both derivable from the geometry the moment you have a closed surface, so (the objection runs) the convention is not arbitrary at all, it is just underdetermined by three points in isolation. That is right, and it is why frequency_shell's fix works - the centroid supplied the missing information. The cost of holding it is pole 1 against pole 0: two flags that are geometrically identical, identically painted, and differ only in a number nobody can see, and half the sheet is built to make you look at them.",
+				"predicted_degeneracy": {
+					"pair": "split against two_tone, in the both convention",
+					"percent": 1.2,
+					"arithmetic": "Rasterised BEFORE ANY CAPTURE from the script constants, in the critic's own currency: subject box cropped, corner background neutralised, greyed, resized 160 x 160, mean of the hottest 5 percent. Camera is capture_config_sweep's - FOV 34, PAD 1.9, yaw 0.62, pitch -0.26, 760 x 760 - and framing 0.56 on the anchor AABB, which puts the frame 1.316 m across against a 1.030 m body and the subject at 32 percent of frame. Areas as a share of the CROP (1.030 x 0.5427 = 0.5589 sq m): one flag = TRI_W x TRI_H / 2 x cos 0.26 = 0.026153 sq m = 4.679 percent; one median slot = 0.004 x 0.2165 x cos 0.26 = 0.000837 sq m = 0.1497 percent; the rail and the four poles are 11.33 percent and are present in all sixteen cells. Magnitudes: a face colour lit against the dark ground is about 41 percent of range, the flat colour about 69, and flat against a face colour about 29. Focus is the mean of the hottest 5 percent of a 160 x 160 grid, so a change smaller than 5 percent of the crop is DILUTED by area / 5 and a change larger than it is not. WHY THIS PAIR: at convention=both exactly ONE flag stands, pole 0, in both values - split does not reverse the declaration, so the cull sets are identical - and the two frames therefore differ only in the 4 mm slot on the median of that single triangle. 0.1497 percent of crop at 41 percent magnitude, diluted by 0.1497/5, gives 1.23 percent focus and 0.061 percent frame. At 160 px the slot is 0.62 px wide, so it renders as a blended line and not a countable gap; that is expected and is not a fault. FULL PREDICTED SHEET, focus percent / frame percent. convention=none: two_tone-inverted 0.00/0.00 (the designed null), two_tone-split 4.91/0.246, inverted-split 4.91/0.246, two_tone-flat 28.6/5.35, inverted-flat 28.6/5.35, split-flat 28.6/5.35. convention=winding: two_tone-split 2.45/0.123, split-flat 28.6/2.68, two_tone-flat 28.6/2.68, two_tone-inverted 41/7.67, split-inverted 41/7.67, flat-inverted 45/8.5. convention=normal: the same six numbers, by construction - the two conventions keep the same COUNT of flags at different poles. convention=both: two_tone-split 1.23/0.061, two_tone-flat 26.8/1.34, split-flat 26.8/1.34, two_tone-inverted 41/3.84, split-inverted 41/3.84, flat-inverted 45/4.2. Convention pairs at fixed sidedness=two_tone: none-winding 41/3.84, none-normal 41/3.84, none-both 41/5.76, winding-normal 41/3.84, winding-both 38.4/1.92, normal-both 38.4/1.92. A SECOND PRE-REGISTRATION, and it is an equality rather than a number: winding-against-both and normal-against-both must MATCH, because the only difference in each is one flag removed, and flags 1 and 2 are the same triangle at mirrored positions painted in an equiluminant pair. Predicted 38.4 both, and they should agree to within about 2 points; if they differ by more than that the paint is not equiluminant in whatever grey the critic actually computes, and the designed null is in trouble too. READ THE PER-PAIR ROWS, NOT THE HEADLINE. The sidedness axis is a deliberate peak-hides-flat case: its top pair is 41-45 percent and its bottom pair is 0.00 by design, and a headline bite for `sidedness` would be reporting `inverted` under enforcement while saying nothing about the three cells where sidedness is pure paint. THE PREDICTION IS A FLOOR - this arithmetic has one light, flat shading, no shadows, AO or antialiasing, and every prior prediction in this corpus under-read by 1.5x to 6.7x. If the named pair comes back BELOW 1.2 percent, or if any two_tone-inverted pair at an enforcing convention reads under 20 percent, check the harness before the design: (a) tools/check_dna_declarations.py, in case a value the code cannot reach is falling back and printing identical tiles; (b) the sweep's _rejects.json - both axes are String enums and Object.set() on a typed property of the wrong type is refused in SILENCE; (c) that the sheet was captured with --max=16, because at the default cap of 9 build_dna_gallery trims the later axis from the tail and the `both` column, where the predicted pair lives, does not exist. And if a cell shows no flag at all, that is a fault and not a finding: the sparsest cell in this design still stands one flag of four, and the rail and four poles are in every frame.",
+					"registered": "2026-08-15, before the first capture"
+				},
+				"designed_nulls": [
+					{
+						"a": {
+							"sidedness": "two_tone",
+							"convention": "none"
+						},
+						"b": {
+							"sidedness": "inverted",
+							"convention": "none"
+						},
+						"under_percent": 0.5,
+						"why": "IDENTICAL BY CONSTRUCTION IN THE CURRENCY THE CRITIC MEASURES, and it is the artifact's thesis rather than a spare check. inverted reverses which side is CALLED the front. At convention=none nothing is culled, so that reversal has no geometric consequence at all: the same four sheets stand on the same four poles, at the same vertices, with the same stored normals, and the only difference is that the front and back colours have swapped places. The two colours are chosen to make that swap invisible to a greyscale instrument - FACE_FRONT (0.418, 0.559, 0.800) and FACE_BACK (0.682, 0.541, 0.200) both compute to 0.54430 under Rec.601 (0.299/0.587/0.114) and to 0.54639 under Rec.709 (0.2126/0.7152/0.0722), so whichever weighting the critic uses the greys are equal, and because the two frames put those greys on the SAME pixels under the SAME lighting the shading multiplier cancels exactly. Predicted 0.00 percent focus and 0.00 percent frame. Reversing a convention that nobody enforces changes NOTHING, which is the whole claim; the same two values at convention=winding, normal or both stand the exact complement of each other and predict 41 percent. WHAT IT IS ALSO A CHECK ON: the pair should surface on the critic's COLOUR-ONLY / focus_rgb list, not as a twin, because per channel this is an enormous change - red goes from 107 to 174 across every flag. If it reads above 0.5 percent in grey, the palette arithmetic is wrong or something is adding an unmatched emissive term; if it reads above 2 percent, the sweep is not sending what it says it is and _rejects.json is the first file to open. If it does NOT appear on the colour-only list at all, the flags did not build."
+					}
+				],
+				"designed_nulls_why": "ONE NULL, and the fact that there is only one is itself derived rather than a shortage of effort. The four flags carry the complete truth table of the two declarations, and a complete truth table admits NO cross-cell identity in the cull: the cull sets are {0,1,2,3}, {0,1}, {0,2}, {0} and their complements under inverted, and no two of those ten sets are equal. So the only identity available anywhere in the sixteen cells is the one the thesis predicts - the cell where nothing is enforced and the reversal is therefore a repaint. Two near-identities were considered and are registered as NUMBERS instead, because calling a 1-to-2 percent difference a null would have made the sheet agree with itself for free: (split, both) against (two_tone, both) is the pre-registered closest pair at 1.23 percent, one median slot on one surviving flag; and winding-against-both must equal normal-against-both at 38.4 percent, an equality of two MEASUREMENTS rather than of two pictures. There is also a within-frame identity worth cropping for, which no pair metric can see: in every convention=none cell of two_tone, flat and inverted, pole 1 is pixel-identical to pole 0 and pole 3 is pixel-identical to pole 2, because the paint follows the vertex order and the stored normal is invisible. That identity IS the artifact - it is the thing that breaks the moment `normal` is switched on - and it is checked by cropping two poles out of one tile, not by comparing two tiles.",
+				"fixture": {
+					"layout": "single"
+				},
+				"fixture_why": "The stand can show all four conventions in a row (layout=ladder, 1.15 m pitch, about 4.6 m wide) but the SWEEP must see one at a time: capture_config_sweep unions the AABB across a spec's variants, so a four-wide row in the same spec frames every single against four and a half metres and photographs it as a speck. layout is an export and not an axis, and it ships at single, so the fixture is a belt over braces. WHAT ELSE NEEDED PINNING AND HOW IT WAS PINNED INSTEAD OF FIXTURED: the visible extent SHRINKS when flags are culled - at convention=both three of four flags are gone and the drawn geometry is narrower and shorter - which would let a fit-by-diagonal camera creep in on exactly the sparse cells and score a zoom change as an axis. A dna.fixture cannot fix that. A layers=0 AnchorExtent box at the full 1.030 x 0.5615 x 0.075 does: it is a MeshInstance3D so the capture AABB counts it, layers=0 is per-instance and does not propagate, and it leaves mesh and material alone where visible=false would have hidden nothing anyway (it has no children) but would have removed it from the AABB. NOTHING ELSE NEEDS A PIN: there is no _process, no Timer, no randf, no randi and nothing that reads time in the file, the whole stand is built synchronously in _ready from constants, and _ready is ungated and builds standalone, so one frame is the whole account and two builds of one cell are the same mesh.",
+				"kin": "parasol_triangle is the parent and this bench borrows BOTH its axis words and BOTH its value lists unchanged, which is unusual for a synthesis and is deliberate: the words were already exactly right and inventing new ones would have hidden the lineage. What changed is what they DO - in parasol `convention` draws an arrow and a set of arrowheads on the rim, here it deletes geometry. `seam` (escher_staircase, florensky_sphere: none|hairline|gap|scaffold|field) and coincident_face's `separation` are the two nearest neighbouring words and both are about a JOINT between two surfaces rather than about a single surface's own facing; `handedness` (VectorCrossProduct: right|left|both) names the chirality of a coordinate frame, and a sheet has no frame, only two faces - parasol's registry declines it for that reason and the decline is inherited. `facets` (grab_trihedron, sphere_high, sphere_low: shown|hidden|only) asks whether a tessellation is legible, not which side of it you are on. ON THE MEMBER SIDE: frequency_shell is not a source and is the artifact this bench is ABOUT - its winding bug is the worked case in the note, and a room holding frequency_shell beside this stand at convention=winding is saying one thing twice. penrose_triangle's `exploded` and this bench's `convention=both` are the same move at different scales - take away enough and there is no longer any whole for the parts to be inconsistent about - and impossible_trident's `none` (the consistent sibling, three rods under three tines) is the same value as this bench's pole 0, the one flag whose two declarations agree.",
+				"declines": [
+					"USING THE GPU TO DO THE CULLING, which is the obvious build and is the one place this synthesis overrules its own subject. Godot's rasteriser is the only thing in the stack that can cull by winding, and it does so in ITS OWN handedness; a bench that leaned on cull_mode = CULL_BACK would be photographing my belief about Godot's front-face convention rather than the argument, and if that belief were backwards every tile would come back as its own complement with nothing anywhere to flag it - the sweep would be green, the declaration gate would be green, and the sheet would be a fact about a handedness. So both culls are performed in _keep() before FRONT_YAW turns the stand, using a rasteriser's own arithmetic (the edge cross product against the view direction, frequency_shell's line) and the artifact's own decision. The material stays CULL_DISABLED, which is also what BOTH sources ship (parasol gd:149; coincident_face's slabs), so this is the family's habit rather than a departure from it. The honest cost is stated here: `winding` in this bench is a cull the artifact performs, not one the GPU performed, and a reader who wants the GPU's answer should set the material to CULL_BACK and see whether the tiles invert.",
+					"Letting `inverted` be a repaint only, which is what parasol_triangle does. parasol's inverted swaps triangle_color_front and triangle_color_back through _front_color()/_back_color() and touches nothing else, and its own comment says `Nothing about the geometry moved; only the naming did, which is the point`. That is true and complete for an object that never culls. Here the convention is enforced, so a reversal that did not reverse what survives would be a reversal in name only and the value would be a lie. inverted therefore flips _front_sign(), which repaints at convention=none (the null) and stands the complement everywhere else. This is an extension of a source's value, and it is named as one.",
+					"parasol's arrows - the normal shaft and head, and the three rim arrowheads riding v0 -> v1 -> v2. They are the right object for a parasol, which has to make its claim visible somehow, and they are exactly wrong here: an arrow is a LABEL for the convention, and the whole finding is that the convention is invisible until it is enforced. Drawing the normal would have answered the question the sheet asks. The convention appears in this bench only as geometry or as what is missing.",
+					"A caption, a legend, a tally or a Label3D anywhere. The rank already spells its own arithmetic - count the flags - and a printed `winding` beside it would be a tile about typography, which is what rule_bench declined its members' plates for.",
+					"Giving the triangles thickness. A slab has an outside and would have quietly answered the question; a sheet with no thickness is the subject, and the 4 mm split slot shows the ground through it for the same reason.",
+					"A third axis for the disagreement pattern (which poles hold which of the four rows). The pattern is the truth table and there is only one complete one for two binary declarations; permuting the rows across the rail would sweep the same fact four times and move the closest pair around for no reason. The table is a const, not an export.",
+					"coincident_face's `separation`, penrose's `disclosure` and the trident's `fault` as further axes. Each is a real question about facing and each belongs to a DIFFERENT surface relation - a joint between two solids, a joint that cannot close, a count that does not survive the middle of the figure - and none of them is a property of one triangle's own three points. Mapping them onto this stand would have needed geometry the sources do not have, which is the science_screen fault of declaring values the code cannot reach. What is taken from them instead is the shape of the question, in the note.",
+					"Emission on the flags. parasol lights its triangle with emission (0.8, 0.3, 0.5) at 0.5, which is a PINK emissive term added to both faces; under it the equiluminant front/back pair stops being equiluminant and the designed null becomes a fact about the emission colour. No emission here, on either axis, and the pair is matched in albedo alone.",
+					"Any animation, rate, growth or randomness. There is no _process, no Timer, no randf and no unseeded anything in the file, and the axis values are all visible in one still - which is the requirement a rate or a duration could not have met."
+				],
+				"sweep_command": "python tools/build_dna_gallery.py --slug=face-convention --tokens=face_convention --max=16",
+				"sweep_note": "THE FULL SHEET NEEDS --max=16. `sidedness` is declared first and is never trimmed; `convention` is second and build_dna_gallery trims the LATER axis from the tail until the cross product fits its cap, so at the default --max=9 the 4 x 4 sheet renders as 4 x 2 = none and normal only. The designed null survives that trim (it is a convention=none cell) but the pre-registered closest pair lives at convention=both and would not exist at all, and neither would the winding-against-normal comparison that is the artifact's headline.",
+				"placements": 0
+			}
+		}
+	}
+}

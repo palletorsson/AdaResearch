@@ -1,0 +1,183 @@
+{
+	"artifacts": {
+		"motion_primitive": {
+			"name": "Motion Primitive",
+			"lookup_name": "motion_primitive",
+			"scene": "res://commons/artifacts/motion_primitive/motion_primitive.tscn",
+			"class_name": "MotionPrimitive",
+			"category": "primitives",
+			"artifact_type": "synthesis",
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "compact",
+			"description": "Klee's first page built as geometry: a point in motion makes a line, a line in motion makes a plane, a plane in motion makes a body. Not four kinds of thing - ONE operation, sweep the generator along a direction, applied 0, 1, 2 and 3 times. Every variant stands inside the same 0.96 x 1.00 x 0.96 m cage of a plate, four corner pins and four top rails, drawn identically twelve times so the camera cannot move between a bead and a body. The generator is never thrown away: the line carries the point that made it, the plane carries the line standing 10 mm proud of it, the body carries the plane inset on the face it generated - and an object CHANGES COLOUR when it stops being the mark and becomes the generator, cool for the swept set and warm for every ancestor still standing. Dim ribs at stations 3, 6, 9 and 12 show where the generator was on the way. Three sweeps: translate (segment, square, cube), rotate (arc, fan, horn - three axes about three centres, because three rotations about one centre gain no volume) and scale (a taper at every rung, shrinking toward three centres inside the box). Each moves the generator 0.56 m per application, so the three columns are the same amount of motion spent three ways. Nothing animates, nothing is printed, nothing is random.",
+			"tags": [
+				"klee",
+				"pedagogical_sketchbook",
+				"primitives",
+				"point",
+				"line",
+				"plane",
+				"body",
+				"sweep",
+				"extrusion",
+				"dimension",
+				"generator",
+				"synthesis"
+			],
+			"dev_themes": [
+				"primitives",
+				"geometry",
+				"synthesis",
+				"one operation counted, not four objects"
+			],
+			"interactions": [
+				"walk the rank axis at sweep=translate and watch the sequence's own ladder assemble: bead, bar, square, cube - and notice that nothing is ever added except one more application of the same move",
+				"stand at rank=plane and find the line: it is the amber tube along the bottom edge, the same tube that was cyan one tile earlier when it was the mark rather than the generator",
+				"put rank=body under all three sweeps side by side: one 0.56 m move applied three times makes a cube, a horn or a taper, and the amount of motion is identical in all three",
+				"put rank=point under all three sweeps side by side: three tiles, one picture, because a sweep applied zero times never asks which sweep it is",
+				"count the ribs: four dim stations plus the bright generator plus the mark is one operation photographed six times, which is what a still can show of a motion"
+			],
+			"capacity": "SEE that point, line, plane and body are not four kinds of thing but one operation counted - and that the count is readable off the object itself, because every rung keeps the rung that made it standing on it in the other colour",
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"point",
+					"line_builder_3d",
+					"parasol_triangle",
+					"invariants_demo",
+					"klee_walking_point",
+					"two_points_line",
+					"three_points_triangle"
+				],
+				"preferred_zone": "teaching",
+				"footprint_source": "computed_from_geometry",
+				"footprint_note": "Every single-layout variant is the SAME body, because the body is the STAGE: a 0.96 x 0.96 m plate, four 0.032 m corner pins 1.00 m tall and four top rails, axis-aligned and drawn before either axis is consulted. The figure inside never exceeds x,z +-0.403 or y 0.899, so the world box is 0.96 x 1.00 x 0.96 in all twelve cells and one grid cell holds it. Nothing is rotated to face the camera: a yawed cage would grow the footprint to 1.34 m and would show the translate body face-on, where a three-quarter view is what makes a solid read as a solid. layout=ladder stands all four ranks in a row at 1.15 m pitch (about 4.4 m wide) and is a design view, not a map placement."
+			},
+			"measurements": {
+				"aabb_size": [
+					0.96,
+					1.0,
+					0.96
+				],
+				"aabb_center": [
+					0.0,
+					0.5,
+					0.0
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 1.0,
+				"source": "computed_from_geometry in a Python replica built from the same constants; no Godot was run. The box is the STAGE and nothing else: the plate spans +-0.48 in x and z, the pins run y 0 to 1.00, and the drawn figure's own extent runs from 0.156 m across at rank=point to 0.650 m at rank=body/translate - a factor of four - which is exactly why the stage exists and why the AABB is identical in all twelve variants by construction."
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			],
+			"dna": {
+				"promoted": "2026-08-15",
+				"stage": "synthesis",
+				"framing": 0.52,
+				"sources": [
+					"point",
+					"line_builder_3d",
+					"parasol_triangle",
+					"invariants_demo"
+				],
+				"axes": {
+				 "rank": [
+				  "point",
+				  "line",
+				  "plane",
+				  "body"
+				 ],
+				 "sweep": [
+				  "translate",
+				  "rotate",
+				  "scale"
+				 ]
+				},
+				"default": "rank=point, sweep=translate. point is the default because it is the state every other rung is a history of and because it is the corpus's own first object - the primitives registry literally names it '1.0 A Point' and the sequence's truth line is 'a point is position without extension'. translate is the default because it is the sweep the sequence already performs without saying so (its cube is a translated square) and because its three rungs are the three shapes the sequence already has maps for. NOTE WHAT THIS DOES NOT COST: the default is the SMALLEST subject in the sheet, which would normally be a bad thing to solve framing on, but framing here is set by the stage and the stage is identical in every variant, so the camera distance is the same whichever cell is measured.",
+				"note": "WHAT THE VALUES MEAN, and where each word came from. THE FAMILY FIRST. Four artifacts hold the four rungs of Klee's opening sentence and not one of them holds the sentence. `point` (commons/primitives/point/point.gd) is a grabbable sphere printing its own (x,y,z); its @identity says 'a point is position without extension' and then, in a COMMENT, 'the seed of the whole primitives sequence - a line joins two points, a triangle closes three, a cube stacks eight'. The relation is stated in prose and performed by no code. `line_builder_3d` is a polyline of grabbable handles - and the script its .tscn actually carries is interactive_line.gd, not the LineBuilder3D.gd sitting beside it in the same folder - whose truth line is 'a line is a decision to connect points; the points are given, the connection is authored'. A line there is an INTERPOLATION over samples, the opposite of a trace. `parasol_triangle` is the first surface, and it arrives already closed and already sided: 'a triangle is three points IN AN ORDER, and that order is the only thing that gives a flat sheet a front and a back'. `invariants_demo` owns the other half of the sentence - TRANSLATE, ROTATE, SCALE, SHEAR, PROJECT as buttons - and asks what SURVIVES a move on a figure that leaves no trail. Nobody in the family has asked what a move LEAVES. So this bench does the one thing the four of them jointly imply and none of them does: it draws the generator, sweeps it, and leaves the swept set standing WITH the generator still on it. RANK, four values, and IT IS THIS SYNTHESIS'S OWN AXIS, NOT A MEMBER'S. No source declares an axis for dimension: point carries `frame` and `attach`, parasol_triangle `sidedness` and `convention`, line_builder_3d `slack`, invariants_demo `figure` and `pose`. Nothing in the corpus enumerates point | line | plane | body. `rank` is therefore SYNTHESIS-INTRODUCED - invented here to say something about the family - which is a weaker warrant than a derived axis and is recorded as such rather than dressed up. What IS derived is that the four rungs exist as four artifacts and that each one names the next in its own comments; that they are one operation counted is the argument, not the inheritance. point = the generator standing where it starts, the sweep not yet run; the whole artifact is one 0.156 m bead on a 0.96 m stage, and it has to look like almost nothing, because a sweep applied zero times IS almost nothing. line = the point swept once, with the bead still sitting on the mark it made and dim beads at stations 3, 6, 9 and 12 showing where it was on the way. plane = the line swept again, in a second direction - it has to be a second direction or the line would only get longer - with the line itself standing 10 mm proud of the sheet in generator colour. body = the plane swept a third time, drawn as the six boundary sheets of the (i,j,k) grid, with the generating plane inset two stations and standing proud of the face it made, the line on that plane's edge and the bead on that line's end. Read the four in order and the ancestry is a stack: the body carries the plane carries the line carries the point. SWEEP, three values, taken from invariants_demo's `pose` where they fit. TAKEN: translate, rotate, scale, in its spelling and its order. LEFT: none, shear, project (see `declines`). translate = straight, constant direction; the three applications are +X, +Y and -Z at 0.56 m each, so this column of the sheet is exactly the sequence's own ladder - bead, bar, square, cube. rotate = the generator turns about an axis; arc, then a fan of that arc, then a horn. The three axes are Z, Y and X about three DIFFERENT centres, and that is forced: three rotations about one centre keep every point at one distance from it, so the third sweep would gain no volume and `body` would photograph as another `plane`. scale = the generator moves toward a centre and shrinks as it goes, so every rung tapers - a ray-chunk, a wedge, a converging solid. Three different centres again, and forced again: scaling twice about one centre only slides the figure further along its own rays and stays one-dimensional. Every factor is below 1 and every centre is inside the stage, which is what guarantees the figure cannot leave the box - for s in (0,1] the image of a point is a convex combination of the centre and the point. THE ANGLES ARE DERIVED, NOT CHOSEN: each rotation angle is 0.56 divided by the radius the generator actually turns on, so a rotation moves the point the same distance a translation does. Measured on the built geometry the travel per rung is translate 0.560 / 0.560 / 0.560, scale 0.560 / 0.560 / 0.560, rotate 0.560 / 0.560 / 0.475 - the third rotation is 0.85 of a step because a full one carries the fan through the stage wall, and the shortfall is written down here rather than hidden. COLOUR CARRIES THE ARGUMENT: the swept set is COOL and every ancestor still standing is WARM, so the same tube is cyan at rank=line, where it is the mark, and amber at rank=plane, where it is the generator. Nothing about that tube's geometry changes between the two tiles. Its ROLE does, and that is the only thing the colour is reporting. THE THESIS SOMEONE COULD DISAGREE WITH: the four primitives are one operation applied a different number of times, and the count is legible from the object because each rung keeps the rung that made it. The disagreement available, and it is a fair one: a swept solid is not how anybody builds a cube, and this reduction is a story rather than a construction - the corpus's own cube stacks eight points and its own triangle closes three, neither by sweeping. The cell where holding the thesis costs something is rank=point, where the sweep has not happened and all three sweep values render THE SAME FRAME to the byte. If the rungs are four things, that cell is free. If they are one operation counted, that cell is the operation at count zero, and it is obliged to look like nothing.",
+				"predicted_degeneracy": {
+					"pair": "rank point against rank line, in the translate sweep",
+					"percent": 10.74,
+					"arithmetic": "Rasterised BEFORE ANY CAPTURE in the critic's own currency: the geometry rebuilt in Python from the same constants (same P0, same three transform families, same 13 stations, same tube radii and sheet thicknesses, same stage), projected through capture_config_sweep's camera (FOV 34, PAD 1.9, yaw 0.62, pitch -0.26, 760 x 760, framing 0.52 on the union AABB of all twelve variants, which IS the stage), z-buffered with one directional light and flat shading, then run through artifact_dna_critic's pipeline unchanged - crop to the union of the two frames' subject boxes, neutralise each frame's own corner background, grey, resize 160 x 160, mean of the hottest 5 percent. THE CONTEXT IS THE translate COLUMN and the ranking is computed inside it: within translate the six rank pairs are point-line 10.74, line-plane 35.08, point-plane 35.99, plane-body 36.47, line-body 40.76, point-body 41.22 (focus percent). Closest is point against line. It is also the closest non-null pair in the WHOLE sheet, so the claim survives a change of pool - the same pair in rotate is 11.78 and in scale 15.74 - and it is the closest on the frame denominator too (0.54 percent), so it survives a change of denominator. WHY THAT PAIR: the only thing that appears between the two frames is one tube, 0.56 m long and 0.080 m thick, on a stage that is 0.96 m wide and drawn identically in both. At framing 0.52 the frame is 1.725 m across, so the tube is 0.0448 m2 of a 2.976 m2 frame = 1.5 percent of the picture, about 385 of the 25,600 pixels the critic actually compares; the hottest 5 percent is 1,280 pixels, so at most 30 percent of the focus window can have changed at all, and the tube's contrast against the backdrop caps the rest. 0.30 x 0.36 = 10.7 percent. FULL PREDICTED SHEET, focus percent. rank pairs within translate: 10.74, 35.08, 35.99, 36.47, 40.76, 41.22. Within rotate: 11.78, 21.34, 31.26, 44.19, 46.01, 47.27. Within scale: 15.74, 35.34, 47.46, 47.80, 49.79, 50.74. sweep pairs at fixed rank: point 0.00 / 0.00 / 0.00 (the designed nulls), line 22.53 / 26.43 / 27.42, plane 36.01 / 37.27 / 42.31, body 38.33 / 39.91 / 46.44. Axis means excluding the nulls: rank 36.1 percent focus, sweep 35.2 percent focus. Subject share runs 24.62 percent of frame at every point tile to 38.84 percent at body/translate, so no tile is near the blank bar. THE PREDICTION IS A FLOOR. The replica has one light, flat shading, no shadows, no AO, no antialiasing and no emission, and every prior prediction in this corpus under-read by 1.5x to 6.7x. If the sweep comes back BELOW 10.74 percent on the named pair, check the harness before the design: (a) tools/check_dna_declarations.py - a value the code cannot reach falls back to the default and prints identical tiles; (b) _rejects.json - both axes are String enums and Object.set() on a typed property of the wrong type is refused in SILENCE; (c) whether the sheet was captured with --max=12, because at build_dna_gallery's default cap of 9 the 4 x 3 cross product is trimmed from the tail and `sweep` collapses to [translate] alone, which deletes all three designed nulls and two thirds of the sheet. If instead the point tiles show a stage and NO BEAD, the figure did not build - a point tile is legitimately an almost empty stage with one 0.156 m bead low and to the left, so check the bead before concluding NO RENDER.",
+					"registered": "2026-08-15, before the first capture"
+				},
+				"designed_nulls": [
+					{
+						"a": {
+							"rank": "point",
+							"sweep": "translate"
+						},
+						"b": {
+							"rank": "point",
+							"sweep": "rotate"
+						},
+						"under_percent": 0.5,
+						"why": "IDENTICAL BY CONSTRUCTION, and it is the thesis rather than a spare check. `rank` counts how many times the sweep has been applied, so at rank=point it has been applied ZERO times and `sweep` is never consulted: _build_figure returns after drawing one bead at P0, and P0 is a single shared constant, the same bead in the same place under every value. A sweep of zero length leaves the generator unchanged. Predicted 0.00 percent focus / 0.00 percent frame; anything above 0.5 percent is render noise, and anything above 2 percent means the sweep is setting something the artifact is reading that it should not be."
+					},
+					{
+						"a": {
+							"rank": "point",
+							"sweep": "translate"
+						},
+						"b": {
+							"rank": "point",
+							"sweep": "scale"
+						},
+						"under_percent": 0.5,
+						"why": "The same null, second pair. Registered separately because a null that held for one pair and broke for another would mean the sweep is reaching the artifact at rank=point, which it must not: the only way these two tiles can differ is if something outside the axis - the settle, the background tint, an unseeded value - is moving between frames."
+					},
+					{
+						"a": {
+							"rank": "point",
+							"sweep": "rotate"
+						},
+						"b": {
+							"rank": "point",
+							"sweep": "scale"
+						},
+						"under_percent": 0.5,
+						"why": "The third pair, and the one that closes the triangle. All three must be 0.00 together; two zeros and one non-zero is arithmetically impossible for identical images and would be a fact about the harness, not the artifact."
+					}
+				],
+				"designed_nulls_why": "All three nulls are the same fact seen three ways and they ARE the argument: rank counts applications of the sweep, so at count zero the sweep value cannot be visible. That is what makes `rank` a count rather than a list of four shapes. The tempting fourth - rank=line under translate against rank=line under scale - is deliberately NOT a null and is the nearest thing to one on the sweep axis: both draw a single straight tube from the same bead, and they still measure 26.43 percent focus apart because the direction and the taper differ. Three zeros at rank=point and a wide non-zero one rung later is the whole experiment. If any of the three zeros comes back above 2 percent, nothing else in this sheet can be believed.",
+				"fixture": {
+					"layout": "single"
+				},
+				"fixture_why": "The bench can stand all four ranks in a row (layout=ladder, 1.15 m pitch, about 4.4 m wide) but the SWEEP must see one rung at a time: capture_config_sweep unions the AABB across a spec's variants, so a four-wide row in the same spec frames every single against four and a half metres and photographs the bead as a speck. layout is an export and not an axis, and it ships at single, so the fixture is a belt over braces. WHAT IS NOT FIXTURED, and why nothing needs to be: there is no time knob and no random one here. The whole figure is built synchronously inside _ready from arithmetic on one constant point and three transform families; there is no _process, no Timer, no randf and no noise anywhere in the file, so the frame is complete at frame one and two builds of one value are the same mesh. That matters because two of the four sources are live: point runs a _process that rewrites a label every frame, and line_builder_3d rebuilds its mesh every frame from handles it jittered with an unseeded randf_range - which is why line_builder_3d needed a handle_seed fixture and this bench does not.",
+				"kin": "klee_walking_point is the nearest kin and the reason this artifact is not a duplicate of it. It is the SAME page of the Sketchbook - a luminous point that sets itself walking and leaves a trail that IS the line - and it carries `walk_style` (meander | straight | spiral | arc) and `line` (active | medial | passive), taken from the Sketchbook's own opening taxonomy. But it stops at the first rung: its `line=passive` raises a surface under the trail, which is the plane arriving as a change of KIND rather than as the same move applied again, and there is no third application anywhere in it. It is also a time artifact - its registry had to fixture walk_speed and loop so the shutter would catch a finished trail - where this one has no clock at all. A room holding klee_walking_point at line=active beside this bench at rank=line is saying the same sentence twice; a room holding it beside rank=body is saying the sentence and then finishing it. ON THE MAP SIDE the sequence already opens exactly here: the primitives sequence is titled 'Primitives: Points Build Worlds' with the truth 'A point is position without extension. Everything is built from nothing', and its demonstration line is 'Place a point in void. Connect two points to make a line. Three points define a plane. From nothing, everything.' Point_Zero is the map before the point ('the beginning of all the things that were already there, the infrastructure') and Point_One is the map of the first mark ('Before the point, infrastructure ... Point_One is the first mark: position without extension'). Those two maps and this bench are kin by subject, and the bench is the object Point_One's blurb describes and Point_One does not contain. Point_Line, Point_Triangle and Point_Animatedcube are the other three rungs as MAPS - the ladder already exists in the room list and has never existed in one object. On the value side: nothing here shares a vocabulary with a member, which is unusual for a synthesis and is stated rather than glossed over - see the note on `rank` being synthesis-introduced. The three `sweep` words are invariants_demo's and are the only inherited vocabulary in the file.",
+				"declines": [
+					"THE BRIEF'S FOURTH SOURCE, corrected from the code. The brief named line_builder_3d, and the registry entry every reader resolves (wavefunctions.json) points at res://algorithms/wavefunctions/line_builder_3d/line_builder_3d.tscn, whose root script is interactive_line.gd - NOT the LineBuilder3D.gd sitting in the same directory, which is an older unattached copy with no axis, no slack and an apply_grid_config that is a bare `pass`. Reading the file named after the token would have produced a synthesis quoting a script the scene does not carry. The declared axis and the truth line quoted in this artifact are interactive_line's.",
+					"`shear` and `project` from invariants_demo's pose, and `none`. project is declined on the member's own authority: invariants_demo gd:356 says in its own comment 'PROJECT is a READ, not a transform ... It leaves the vertices untouched'. It lowers dimension instead of raising it, so it runs this ladder backwards and is not a sweep at all. none is declined because a transform that does nothing is not a fourth kind of motion - it is rank=point, so putting it in `sweep` would hide one axis inside the other and make every cell of the sheet a null. shear is declined for measurement rather than principle: the swept set of a rigid generator under a one-parameter shear is the translate figure skewed, which at yaw 0.62 photographs as the translate figure seen from slightly further round, and a value that spends a tile confirming another value is decoration. It is the honest fourth candidate and it is the first thing to add if the axis ever needs a fifth.",
+					"Unifying the four members' vocabularies, which is what a synthesis is usually for. There is nothing to unify: `frame`, `sidedness`, `slack` and `pose` are four different questions about four different objects, and no two of them could be put on one scale without inventing a relation the code does not have - which is the science_screen fault of declaring values the code cannot reach. What is shared instead is the OPERATION, and the operation is a thing this bench performs rather than a word it borrows.",
+					"line_builder_3d's `slack` (chord | spline | catenary | festoon | truss) as a third axis. It is the closest live axis in the family and it is a different question: slack asks what shape a run takes between anchors that are already given, which presupposes the line and says nothing about where the line came from. A bench that swept both would be answering two questions in one sheet and could not attribute either.",
+					"Speed, duration, the position of the head, and any animation at all. klee_walking_point's registry already recorded the reason - a still cannot tell 0.32 from 0.9 - and it had to fixture walk_speed and loop just to make its own trail photographable. The same refusal holds here and is stronger, because `rank` is the count of a motion and would be trivially confusable with how far a single motion has got. Nothing in this file has a clock.",
+					"Grabbing. Two of the four sources are grabbable (point's sphere, line_builder_3d's handles) and the temptation is to let a hand drag the generator and watch the sweep follow. That is a good artifact and it is not this one: a live sweep cannot be photographed, and this bench exists to put the four rungs in one frame where they can be compared.",
+					"Station count, tube radius, sheet thickness, the stage's dimensions and every colour. Thirteen stations, 0.080 m tube and 0.020 m sheet are pinned so the four ranks differ in the number of sweeps and in nothing else; the stage is pinned because it IS the fixed AABB. None of these are exports.",
+					"A larger figure inside the stage. The figure could fill more of the box and every rank pair would read hotter, but the stage's margin is what keeps rotate and scale inside their bounds - the third rotation already had to be cut to 0.85 of a step to stay in the box, and that shortfall is declared rather than absorbed by quietly growing the cage."
+				],
+				"sweep_command": "python tools/build_dna_gallery.py --slug=motion-primitive --tokens=motion_primitive --max=12",
+				"sweep_note": "THE FULL SHEET NEEDS --max=12. `rank` is declared first and is never trimmed; `sweep` is second, and build_dna_gallery trims the LATER axis from the tail until the cross product fits its cap, so at the default --max=9 the 4 x 3 sheet renders as 4 x 1 = translate only. That cap would delete ALL THREE designed nulls (they are the three sweep values at rank=point) and would leave the pre-registered closest pair intact but unfalsifiable, since with one sweep value there is no sweep axis left to be wrong about.",
+				"placements": 0
+			}
+		}
+	}
+}

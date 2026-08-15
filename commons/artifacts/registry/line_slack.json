@@ -1,0 +1,204 @@
+{
+	"registry_info": {
+		"name": "line_slack",
+		"description": "A synthesis artifact for the LINE: one run between two fixed points, drawn five times by five laws and three times at three distances from the cause.",
+		"note": "Per-token registry file so parallel builders never share one JSON. `axes` is DERIVED by tools/apply_dna_block.py from line_slack.gd's own @export_enum lists; do not retype it here."
+	},
+	"artifacts": {
+		"line_slack": {
+			"name": "Line Slack",
+			"lookup_name": "line_slack",
+			"scene": "res://commons/artifacts/line_slack/line_slack.tscn",
+			"class_name": "LineSlack",
+			"category": "primitives",
+			"artifact_type": "synthesis",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "primitives",
+			"size_group": "compact",
+			"hazard": false,
+			"description": "Two masts 0.96 m apart, six fixed points between them - two anchored on the mast tops, four free - and the run threaded through all six by one of the LINE family's five laws. `slack` is line_builder_3d's own word and its own five values: chord (straight members, a kink at every handle, no physics at all), spline (a fair Catmull-Rom curve through the same points, curvature drawn rather than derived), catenary (each span bowed 0.45 of its own length), festoon (the same bow at 1.15, loops deeper than their spans are long) and truss (the chord again, with a bottom chord, six posts and a zigzag web underneath it). `reading` changes how much of the CAUSE is in the frame: `line` draws the run alone; `load` draws the force it is answering as real geometry - eleven equal weights at eleven equal horizontal intervals for the two hanging laws, the lattice for the truss, and nothing whatever for chord and spline, because a drawing has no load; `span` puts the straight anchor-to-anchor rod behind the run so the departure from pure geometry is visible. The five runs use 1.061, 1.097, 1.461, 2.720 and 1.061 m of line across a 0.960 m gap. Nothing animates, nothing is printed, nothing is random.",
+			"tags": [
+				"line",
+				"slack",
+				"catenary",
+				"parabola",
+				"truss",
+				"spline",
+				"chord",
+				"load",
+				"klee",
+				"primitives",
+				"synthesis"
+			],
+			"dev_themes": [
+				"line",
+				"primitives",
+				"synthesis",
+				"a point in motion, and the law it moves under"
+			],
+			"interactions": [
+				"put slack=chord and slack=truss side by side at reading=line: two names, one picture, because the source builds truss as chord plus a lattice and reading=line draws only the run",
+				"then move both to reading=load: the chord frame does not change at all and the truss grows a girder - the whole of `truss` lives in one of the three readings",
+				"stand at reading=load and count the weights: eleven, equal, at equal HORIZONTAL spacing, which is the load whose solution is the parabola the code actually writes; a chain's own weight would be equal along the arc and would bunch in the sags",
+				"compare catenary with festoon at reading=line: same function, same call, factor 0.45 against 1.15, so the second is not another law but the first with the dial turned 2.5556x",
+				"walk to reading=span and look at chord: even the law that obeys nothing spends 10.6% more line than the straight rod behind it, because it agreed to pass through six points instead of two"
+			],
+			"capacity": "SEE that a line between two fixed points is a law made visible - and that the law is not recoverable from the curve, because the code's `catenary` is a parabola and differs from a true catenary by 1.7 mm on a run 40 mm thick",
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"line_builder_3d",
+					"cable_builder",
+					"cube_lines",
+					"grid_lines",
+					"line",
+					"two_points_line",
+					"slack_yard"
+				],
+				"preferred_zone": "teaching",
+				"footprint_source": "computed_from_geometry",
+				"footprint_note": "Every one of the fifteen single-layout variants is the SAME box, because the two masts (0.05 x 0.93) and the sill (1.08 x 0.03 x 0.16) are built before the axis is consulted. Turned to face bearing 0.62 rad the world box is 0.972 x 1.032 x 0.758 for fourteen of them and 0.972 x 1.034 x 0.758 for `spline`, whose Catmull-Rom overshoots handle 1 by 2 mm. The run is at chest height (anchors 0.95) and everything the axis draws hangs inside that envelope: festoon's lowest tube point 0.670, its hung weights 0.569, the truss's bottom chord 0.799 - all above the sill, so no variant enlarges the union. layout=ladder stands all five laws in a row at 1.30 m pitch (about 5.4 m wide) and is a design view, not a map placement.",
+				"measured_footprint_cells": 1
+			},
+			"measurements": {
+				"aabb_size": [
+					0.972,
+					1.034,
+					0.758
+				],
+				"aabb_center": [
+					0.0,
+					0.517,
+					0.0
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 1.034,
+				"source": "computed_from_geometry in a Python replica built from the same constants; no Godot was run. The box is the SILL plus the mast height, rotated by FRONT_YAW 0.62: 1.08 cos 0.62 + 0.16 sin 0.62 = 0.972 in x, 1.08 sin 0.62 + 0.16 cos 0.62 = 0.758 in z. The centre is on the origin in x and z, which is what keeps the auto-framing camera pointed at the run rather than at an offset ghost."
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			],
+			"dna": {
+				"promoted": "2026-08-15",
+				"stage": "synthesis",
+				"framing": 0.48,
+				"sources": [
+					"line_builder_3d",
+					"cube_lines",
+					"edge_as_ground_capstone"
+				],
+				"axes": {
+				 "slack": [
+				  "chord",
+				  "spline",
+				  "catenary",
+				  "festoon",
+				  "truss"
+				 ],
+				 "reading": [
+				  "line",
+				  "load",
+				  "span"
+				 ]
+				},
+				"default": "slack=chord, reading=line. `chord` is interactive_line.gd:42's shipped @export default - the scene registered as line_builder_3d - and its own const declares the five in the order chord | spline | catenary | festoon | truss, which is default-first already, so the declaration order is the code's and has not been rearranged. `line` is the reading all three family scripts actually ship: none of interactive_line, cable_builder or big_pipe_system draws a datum, a gauge or a load, so `line` is the family as it stands rather than a new choice. AND AT THE DEFAULT THE SECOND AXIS HAS NO EFFECT AT ALL: chord has no load to draw, so reading=line and reading=load are the same picture to the byte at slack=chord. The default cell is the one place in the sheet where this artifact's claim is invisible, which is the correct place for a default whose job is to preserve a lineage. `span` is declared LAST on purpose - build_dna_gallery trims the later axis from the TAIL, so the reading that carries the argument is placed where a trimmed sweep still reaches it. That is rule_bench's recorded regret (its pre-registered pair lived in a cell the default cap deleted) acted on rather than repeated.",
+				"note": "WHAT THE VALUES MEAN, from the members' code, and the code corrected the brief four times. THE FAMILY FIRST: three scripts carry `slack` and all three carry the BYTE-IDENTICAL const [\"chord\", \"spline\", \"catenary\", \"festoon\", \"truss\"] - interactive_line.gd:43, cable_builder.gd:50, big_pipe_system.gd:82 - and twelve registry names resolve to those three files. What differs is only which value each SHIPS: line_builder_3d chord, big_pipe_system spline, cable_builder catenary. Every member stands in one of the five and forgoes the other four, which is why the word has never been swept. SLACK, five values, WHICH LAW THE LINE IS OBEYING. chord = the draughtsman's answer DENIED (interactive_line's own gloss): straight members point to point, a visible kink at every handle, weight not in the drawing at all. It is the only claim about SPACE with no matter in it - and it is still not free, because it agreed to pass through six points and so spends 1.0614 m of line on a 0.9600 m gap, 10.6% more than the shortest path. spline = the draughtsman's answer GRANTED: _fair_curve builds a Curve3D through the same six points with Catmull-Rom tangents (next - prev) * 0.28 and resamples it evenly. Fair, kinkless, and explicitly with NO DOWNWARD BIAS - the source says the curvature was DRAWN, not derived, 'a lofting batten, not gravity'. Arc 1.0971 m, and its greatest departure from the chord polygon is 21.0 mm, half the run's own 40 mm thickness. catenary = weight admitted: _swag(anchors, 0.45) bows every span downward, zero at each handle, deepest at mid-span, depth 0.45 x that span = 86.4 mm here; arc 1.4612 m, 152% of the straight span. festoon = the same call at 1.15: sag 220.8 mm on a 192 mm span, so each loop hangs deeper than its own span is long; arc 2.7203 m, 283% of the straight span. truss = weight REFUSED and the refusal shown: _emit_run(anchors) - which IS chord - plus a straight bottom chord, a post from every handle down to it and a zigzag web alternating between them; arc 1.0614 m, identical to chord's, because it is chord's. THE FOUR CORRECTIONS, each from the code and each against the brief. (1) `catenary` IS A PARABOLA. All three scripts sag with the identical line `p.y -= factor * span * 4.0 * t * (1.0 - t)`; 4t(1-t) is a quadratic and there is no cosh anywhere in the family. The only cosh in the whole `slack` corpus is slack_yard's, and that is a synthesis's added datum, not a member's behaviour. A parabola is the shape of a cable under a load uniform per HORIZONTAL metre - a suspension bridge carrying a level deck. A chain under its own weight is uniform along the ARC and hangs as cosh. So `catenary` obeys a real law and not the one it is named after; the brief's 'what a chain does under gravity' is wrong about this code. AND THE MISNAMING IS INVISIBLE: solving the true catenary of the same arc length over one span gives 84.7 mm against the parabola's 86.4 at `catenary` and 215.2 against 220.8 at `festoon` - gaps of 1.7 mm and 5.6 mm on a run 40 mm thick. That is the whole reason this artifact has a second axis. The difference between two laws is not in the curve; it is in the load. (2) CHORD IS NOT THE ONLY VALUE WITHOUT A PHYSICS. The source calls chord the draughtsman's answer denied and spline the same answer granted: two conventions, neither with weight in it. So the five are 2 drawings + 2 hangings + 1 structure, and the `load` reading is blank for TWO of them, not one. The brief's 'only one of the five obeys none' is half right and the half it misses is the interesting half, because spline is the value that LOOKS like it has a physics. (3) FESTOON IS NOT A LAW, IT IS A DIAL: catenary is _swag(a, 0.45) and festoon is _swag(a, 1.15), the same function, ratio 2.5556 exactly. Not a different physics chosen for looks - the SAME physics with the knob turned, which is a sharper version of the brief's 'decoration' than the brief asked for. They are still not a null: 86.4 mm against 220.8 mm of sag per span. (4) A TRUSS'S LINE IS A CHORD, verbatim, and that is registered below as a designed null. READING, three values, cube_lines' `disclosure` move imported - that axis holds twelve edge positions fixed and changes only which are DRAWN; this one holds one run fixed and changes what is drawn beside it. line = the run alone on its masts, threading its six handles. What all three family scripts actually ship. load = the run plus the force it is answering, as real geometry and nothing else. For catenary and festoon, eleven equal weights on 65 mm stems at eleven EQUAL HORIZONTAL intervals of 80 mm: equal-per-horizontal-metre is precisely the load whose solution is 4t(1-t), so the SPACING is the claim, and a chain's own weight would instead be equal along the arc and would visibly bunch in the sags. For truss, the source's own _emit_truss - the load path drawn as members. For chord and spline, nothing at all. span = the run plus the straight anchor-to-anchor rod, 10 mm, sitting 35 mm behind the run's plane, in cube_lines' own far-depth tint Color(0.08, 0.14, 0.24). It is NOT a gauge: no sticks, no stations, no numbers, no summary - slack_yard's `datum` axis already owns measurement and does it properly. This is only the shortest path between the two fixed points, present in the picture. THE SIX POINTS ARE FORCED, NOT CHOSEN: with only the two anchors, _fair_curve's tangents at both ends are collinear with the chord and the cubic degenerates, so `spline` would return the straight segment and the axis would ship a dead value no gate could see. The bench therefore gives the run six fixed points - two anchored, four free, the same literals under every law - and says so. THE THESIS SOMEBODY CAN DISAGREE WITH: a line between fixed points is a law made visible, and the law is not recoverable from the curve. The disagreement available is a good one - that these are five arbitrary drawing conventions and that calling a quadratic 'gravity' is a story told about a curve fit. The 1.7 mm is where that objection is strongest, and the `load` reading is the answer to it: the conventions are nearly indistinguishable and their causes are not.",
+				"predicted_degeneracy": {
+					"pair": "chord against spline, in the line reading",
+					"percent": 7.6,
+					"arithmetic": "PREDICTED BEFORE ANY CAPTURE, in the critic's own currency. The geometry was rebuilt in Python from these exact constants (interactive_line's _fair_curve as a real cubic with the same 0.28 tangents, its _swag verbatim, its _emit_truss verbatim), projected through capture_config_sweep's camera (FOV 34, PAD 1.9, yaw 0.62, pitch -0.26, 760 x 760, framing 0.48 on the union AABB of all fifteen variants, which is the masts and the sill), painter-sorted, flat-shaded, then pushed through artifact_dna_critic's pipeline unchanged - crop to the union of the two frames' subject boxes, neutralise each frame's own corner background, grey, resize 160 x 160, mean of the hottest 5%. WHY THIS PAIR: chord and spline are the two draughtsman's answers, and _fair_curve rounds the chord's kinks without ever leaving it by more than 21.0 mm - which is HALF the run's 40 mm diameter, so at its widest divergence the two tubes still overlap. The change is five crescents at five kinks, not a displaced line. Arc lengths 1.0614 against 1.0971 m, a 3.4% difference in drawn length. Ranked WITHIN reading=line and excluding the registered null, the full slack ladder is: chord-spline 7.62 / spline-truss 7.62 (the same pair, since truss's run IS chord's), then catenary-truss 17.58, chord-catenary 17.58, spline-catenary 17.61, catenary-festoon 17.65, chord-festoon 18.97, festoon-truss 18.97, spline-festoon 19.04 - all focus %, frame % running 0.38 to 1.96. The same pair at reading=span is 8.27 and at reading=load 7.62, so chord-against-spline is the closest non-null pair in ALL THREE readings and the ranking does not depend on which context is named. Reading pairs at fixed slack, excluding the two nulls: festoon 11.62, chord 12.42, truss 12.42, catenary 13.42, spline 15.00, catenary/span-load 24.42, festoon/span-load 26.53, truss/span-load 27.36. Axis means excluding designed nulls: slack 17.29% focus / 1.50% frame, reading 17.31% focus / 0.85% frame. Subject fraction runs 0.240 (chord/line) to 0.336 (festoon/load), an order of magnitude above BLANK_SUBJECT. THE PREDICTION IS A FLOOR: the replica has one light, flat shading, no shadows, AO or antialiasing, and every prior prediction in this corpus under-read by 1.5x to 6.7x. If the sweep comes back BELOW 7.6% on chord-against-spline, or if any designed null reads above 2%, check the harness before the design: (a) tools/check_dna_declarations.py, since a value the code cannot reach falls back to chord and prints identical tiles; (b) _rejects.json - both axes are String enums receiving strings, so there is no tier_terrarium numericising hazard here, but the check costs nothing; (c) whether the sheet was captured with --max=15, because at the default cap of 9 build_dna_gallery trims `reading` from the tail to [line] alone and two of the four nulls stop existing. If instead the LOAD reading shows no amber at all under catenary, the station sampler failed rather than the axis - _path_y_at_x assumes the run is monotone in x, which it is by construction.",
+					"registered": "2026-08-15, before the first capture"
+				},
+				"designed_nulls": [
+					{
+						"a": {
+							"slack": "chord",
+							"reading": "line"
+						},
+						"b": {
+							"slack": "truss",
+							"reading": "line"
+						},
+						"under_percent": 0.5,
+						"why": "IDENTICAL BY CONSTRUCTION, to the byte, and it is this artifact's argument rather than a spare check. interactive_line builds `truss` as two statements: _emit_run(st, anchors, line_thickness) and then _emit_truss(st, anchors). The first of those is exactly what `chord` builds - the same call on the same array - so the truss changes NOTHING about the line and everything about what is under it. reading=line draws only the run, so the two values emit the same tube along the same six points, verified by comparing the paths (both 1.0614 m, six vertices, identical). Predicted 0.00% focus / 0.00% frame; above 0.5% is render noise, above 2% means the sweep is not sending what it says it is."
+					},
+					{
+						"a": {
+							"slack": "chord",
+							"reading": "span"
+						},
+						"b": {
+							"slack": "truss",
+							"reading": "span"
+						},
+						"under_percent": 0.5,
+						"why": "The same null seen with the straight rod added. `span` adds one 10 mm ghost that is identical under every value of `slack`, so if the runs are identical the frames are identical. Registered separately because it is a different picture and a different tile, and because it is the check that the null is a fact about the SOURCE'S TRUSS and not about the run builder: a null that held at `line` and broke at `span` would mean the ghost is being drawn from the run rather than from the anchors."
+					},
+					{
+						"a": {
+							"slack": "chord",
+							"reading": "line"
+						},
+						"b": {
+							"slack": "chord",
+							"reading": "load"
+						},
+						"under_percent": 0.5,
+						"why": "A drawing has no load, so there is nothing for the `load` reading to add. This is the designed null the brief predicted and it is exact: _build_variant reaches the load branch, matches neither the hanging pair nor the truss, commits no mesh, and the frame is the `line` frame unchanged. It is also why the DEFAULT cell (chord, line) is the one place in the sheet where the second axis does nothing - see dna.default."
+					},
+					{
+						"a": {
+							"slack": "spline",
+							"reading": "line"
+						},
+						"b": {
+							"slack": "spline",
+							"reading": "load"
+						},
+						"under_percent": 0.5,
+						"why": "THE ONE THE BRIEF DID NOT EXPECT, and the reason it is registered. The brief held that chord is the only value that obeys no law; the source's own gloss makes spline the draughtsman's answer GRANTED, with the curvature 'DRAWN, not derived; a lofting batten, not gravity'. A batten's shape is a convention, not a force, so there is no load geometry that would be honest to draw, and drawing the lofting ducks would only re-mark the six handles that are already in every frame - an accidental near-null instead of a designed one. Two blank load frames out of five is the `load` reading's actual finding: it sorts the family into the two that are drawings and the three that answer to something."
+					}
+				],
+				"designed_nulls_why": "All four nulls are one claim seen from four sides: the `slack` axis and the `reading` axis are not independent, because two of the five laws have nothing for the second axis to show and one of them hides entirely inside it. There is a fifth, transitive and not separately registered - (chord, load) against (truss, line) reads 0.00% as well, because both are the bare chord - and it is the useful cross-axis check that the sweep is diffing what it thinks it is. The tempting SIXTH is deliberately NOT a null: (catenary) against (festoon) is the same function at 0.45 and 1.15, and one could reasonably expect two frames of one curve. They are not - 86.4 mm against 220.8 mm of sag per span, measured at 17.65% focus at reading=line - and if that pair ever comes back under 6% the factor is not being passed. Read the per-pair rows and never the headline: this sheet's peak is above 27% and its floor is 0.00%, so a live axis here would hide a dead one completely.",
+				"fixture": {
+					"layout": "single"
+				},
+				"fixture_why": "`layout` is an export and not an axis, and it ships at `single`, so the fixture is a belt over braces - but it is the belt wave 13 paid for: capture_config_sweep unions the AABB across a spec's variants, so a five-wide ladder in the same spec would frame every single against 5.4 m and photograph it as a speck. There is a second reason here. layout=ladder IS slack_yard's yard in miniature - five laws standing side by side across one problem - and slack_yard already publishes that frame properly, with a true catenary datum this bench does not carry. Pinning `single` keeps this artifact from shipping a worse version of a picture that exists. NOTE WHAT NEEDS NO FIXTURE: there is no time knob and no seed. interactive_line needed a handle_seed fixture because _spawn_points jitters every handle by randf_range and _create_line_material rolled a fresh glow_intensity every frame; this bench has no randf, no _process, no Timer and no shader, builds everything synchronously in _ready, and has six handles that are literals. Two builds of one value are the same mesh.",
+				"kin": "slack_yard IS THE KIN, and it explicitly declined to do what this bench does, so the disagreement is stated rather than left for someone to find. Its registry declines '`slack` AS THIS ARTIFACT'S AXIS ... an axis over it would have five values each of which demolishes four fifths of this exhibit', and it is right about its own body: the yard stands all five conventions side by side in five lanes and varies the PROBLEM (rig) and the MEASUREMENT (datum) instead. That reason is about a five-lane body, not about the word. This bench has the opposite body - one span, one law at a time - and its second axis is over what is DRAWN rather than over the problem, so the two are complements and not rivals: the yard answers 'which of the five is right', measured against a real cosh solve; this bench answers 'what is each of the five obeying', which is a question the yard's gauge cannot ask because a gauge reports a departure and not a cause. The yard's own five-lane frame is available here as layout=ladder and is fixtured OUT of the sweep for exactly that reason. On the other sources: cube_lines' `disclosure` (frame | visible | silhouette | plan | corner) holds twelve edge positions fixed and changes only which of them are drawn, and its `coding` (uniform | axes | depth | horizon) changes only their tint - so cube_lines varies WHICH LINES EXIST and never what shape one takes, which is the exact complement of `slack` and is where this bench's `reading` axis comes from, borrowed move for move. Its two palette citations are literal: RUN_COLOR is cube_lines' LEGACY_TINT and GHOST_COLOR is the far end of its `depth` ramp, so 'this is behind' is said in the family's own colour, and LOAD_COLOR is its `horizon` amber, the tint that file gives to verticals because 'gravity sorts the edges into two families'. edge_as_ground_capstone's `rim` (closed | gapped | arc | crowded) is the line closed into a circuit and asked whether it closes; its `assertion` (disc | void | cairn | shards) is what stands at the middle. Both are selection axes like cube_lines' - which of a fixed set of marks is present - which makes the family reading legible: of the four promoted LINE artifacts, three vary WHICH lines are drawn and only line_builder_3d varies WHAT SHAPE a drawn line takes. STRUCT_COLOR is the capstone's platform_color verbatim, so the two masts stand in the colour the spine's last artifact uses for the thing you stand on. cable_builder and big_pipe_system carry the same const and are kin by mechanism; they are not listed as sources because taking them would have added the same five words a third time.",
+				"declines": [
+					"THE BRIEF'S PHYSICS, in three places, and each is written into dna.note with the arithmetic. The brief said `catenary` is what a chain does under gravity: the code says 4t(1-t), a parabola, in all three family scripts, which is a cable under load uniform per horizontal metre and not a chain at all. The brief said chord is the only value that obeys no law: the source's own gloss makes spline the draughtsman's answer granted, so two of the five are drawings. The brief allowed that catenary and festoon might be one curve at two sags: they are one CALL at two factors, 0.45 and 1.15, which is stronger, and they are not a null. Following the brief here would have produced a note that was wrong about the code in a way no gate could catch, because every gate in this project reads the registry against the code's VALUE LIST and none of them reads the prose.",
+					"grid_lines AS A FOURTH SOURCE. It is in commons/artifacts/registry/primitives.json with a scene at res://commons/primitives/line/grid_lines.tscn and NO dna block at all - not promoted, no declared axis, nothing to synthesise from. It is left in spatial_needs.cluster_with, because it belongs in the room, and out of dna.sources, because a source has to have said something.",
+					"A TWO-POINT BENCH, which is what the brief asked for. With only the two anchors _fair_curve's end tangents are collinear with the chord, the cubic degenerates and `spline` returns the straight segment - so a two-point bench ships a five-value axis with a value that is silently identical to chord under a DIFFERENT function, which is the worst kind of dead value because the code path really did run. Six points, two of them anchored, and the degeneracy is stated instead of shipped.",
+					"RESCALING ANYTHING EXCEPT THE TRUSS DROP. line_thickness 0.020, tube_sides 8, the 0.28 spline tangent, the 0.45 and 1.15 sag factors, the 10-step swag and the truss's own maxf(line_thickness * 0.75, 0.012) are all interactive_line's, verbatim, because every one of them is either scale-free or is the argument. The single exception is the truss drop: 0.55 m absolute under a 3.50 m run is a depth of 0.15714 of the span, and a girder's depth is proportional to what it spans, so 0.15729 x 0.96 = 0.151 keeps the ratio. Stated here because slack_yard declined the mirror move for the right reason - there the constant IS the claim, since a drawn curve owes nothing to its span; here it is a girder depth and a girder depth owes everything to its span.",
+					"THE SHADER. interactive_line drives its run through line_shader.tres, which carries time_offset, flow_speed, glow_intensity, thickness_variation and pulse_frequency, and which was found rolling a fresh glow_intensity EVERY FRAME in all 72 placements - the brightest pixels in the frame, which are exactly the ones the bite critic measures, flickering across 1.5..2.0 independently of the axis. It was pinned by handle_seed on the measurement branch. This bench takes StandardMaterial3D instead, so there is nothing to pin and nothing to strobe. That is the one piece of the source's harness debt it does not inherit, and it is not a criticism of the fix: the fix is correct, it is simply not needed where there is no shader.",
+					"THE RANDOM HANDLES AND THE Z JITTER. _spawn_points offsets every handle by randf_range(-1.0, 1.0) in y and randf_range(-0.5, 0.5) in z, so two launches are two different polylines - fine in a map, fatal on a bench, and already fixtured in the source. Rather than seed it, this bench has six literals and no RNG anywhere in the file, and the run is planar at z = 0 so the departure from the straight span is seen as a departure rather than foreshortened. A seeded jitter would have been reproducible and still unreadable.",
+					"A GAUGE, A DATUM, STICKS, COLUMNS OR ANY NUMBER. `span` draws one straight rod and stops. slack_yard's `datum` axis (none | beside | gauged | scored) already measures every convention's departure against a true catenary at thirteen stations, in metres, 1:1, with a mean column and a peak collar, and it did the occlusion arithmetic to get there. Building a second, worse gauge here would be one thing said twice and the weaker version would be this one.",
+					"ANY ANIMATION, RATE, DURATION, SETTLING OR DECAY. A hanging line has obvious time-domain axes - a settling sag, a swinging span, a load ramp - and every one of them is invisible to a still PNG; info_board shipped five duration exports and produced six identical tiles. There is no _process, no _physics_process, no Timer, no Tween and no physics body in this file.",
+					"A CAPTION, A LABEL OR A LETTERED TAB. slack_yard letters its five lane names on kerb tabs and is right to, because five lanes in one frame need telling apart. One law per frame does not: a printed word beside a single run would be a tile about typography, which is what postulate_bench declined its members' Label3D plates for.",
+					"A SIXTH VALUE. The five are the family's const and the const is byte-identical in three scripts; adding one would break the only clean thing about this vocabulary. rule_bench added a fifth number to ca_bridge's four and said why - it existed to make a specific null. Here the null already exists in the shipped five, so there is nothing to add."
+				],
+				"sweep_command": "python tools/build_dna_gallery.py --slug=line-slack --tokens=line_slack --max=15",
+				"sweep_note": "THE FULL SHEET NEEDS --max=15. `slack` is declared first and is never trimmed; `reading` is second and build_dna_gallery trims the LATER axis from the tail until the cross product fits its cap, so at the default --max=9 the 5 x 3 sheet renders as 5 x 1 = reading=line only. That trim keeps the pre-registered closest pair (chord against spline, which is closest in all three readings) and the first designed null, and DELETES the two nulls that carry the argument - (chord, line) against (chord, load) and (spline, line) against (spline, load) - along with the entire load reading, which is the only place the truss exists. The value order was chosen so that a cap of 10 would still reach `load`; a cap of 9 will not.",
+				"placements": 0
+			}
+		}
+	}
+}

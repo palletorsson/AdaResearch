@@ -1,0 +1,169 @@
+{
+	"artifacts": {
+		"edge_ground": {
+			"name": "Edge Ground",
+			"lookup_name": "edge_ground",
+			"scene": "res://commons/artifacts/edge_ground/edge_ground.tscn",
+			"class_name": "EdgeGround",
+			"category": "primitives",
+			"artifact_type": "synthesis",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "compact",
+			"description": "An opaque 0.560 m cube floating 0.170 m over a 0.760 m plinth, with cube_lines' twelve-edge drawing laid over it as 16 mm bars that overshoot each edge by 90 mm. The drawing is the variable and the body is the constant: the plinth, the stem, the cube and the layers=0 anchor are byte-identical in all twenty cells and are built before either axis is consulted. `disclosure` picks which of the twelve edges are drawn, using cube_lines' own five sets index for index; `separation` picks how far the drawn bar's outer face stands from the solid's face plane, using coincident_face's own four words - 55 mm out, 6 mm out, exactly coplanar, 6 mm in. Coplanar means coplanar: at separation=coincident the bar's outer face and the cube's face claim the same depth along every drawn edge and the renderer awards each pixel by float rounding, which is the thing coincident_face exists to show, here happening along a line rather than across a plane. The point of putting a solid where cube_lines has only air is that a mark and a boundary stop being interchangeable: `frame` and `visible` come out as nearly the same photograph because the body performs by occlusion the hidden-line removal that `visible` performs by hand; `silhouette`'s six marks land exactly on the body's own outline, so mark and boundary coincide and only one of them will follow the camera; `corner` is three fully specified marks that the body deletes. Nothing animates, nothing is printed, nothing is random.",
+			"tags": [
+				"line",
+				"edge",
+				"boundary",
+				"silhouette",
+				"hidden_line",
+				"occlusion",
+				"z_fighting",
+				"standpoint",
+				"primitives",
+				"synthesis"
+			],
+			"dev_themes": [
+				"primitives",
+				"boolean_surfaces",
+				"postfoundations",
+				"synthesis",
+				"a mark can be rubbed out; a boundary is where a solid stops"
+			],
+			"interactions": [
+				"stand at disclosure=silhouette and separation=hairline and try to say which blue line is the drawing and which is the cube's own edge - they are the same six lines, and that is the whole point",
+				"then walk round to the other side: the drawing does not move and the boundary does, because the drawn set is a constant and the outline is a relation to where you are standing",
+				"put disclosure=frame beside disclosure=visible: two different claims about occlusion and almost one picture, because the body already hid the three edges the second one declines to draw",
+				"put disclosure=corner anywhere: three marks the body deletes, and the only trace is where the overshoot escapes the outline",
+				"run separation from clear to inverted at any disclosure and watch the drawing fall THROUGH the surface it describes - a cage in the air, a line standing on the skin, a contested tie, and then nothing but the ends"
+			],
+			"capacity": "SEE that a line drawn on a body and the line where that body stops are two different objects that share a word - and that only one of them changes when you move",
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"cube_lines",
+					"coincident_face",
+					"edge_as_ground_capstone",
+					"line_slack",
+					"cube_scene"
+				],
+				"preferred_zone": "teaching",
+				"footprint_source": "computed_from_geometry",
+				"footprint_note": "Every cell is the SAME body: a 0.760 x 0.020 x 0.760 plinth, a 0.560 m cube centred at y 0.470, and marks that at their widest (separation=clear) reach 0.335 m from the cube's centre in each face normal and 0.370 m along each edge. The envelope is therefore 0.760 x 0.840 x 0.760 and one grid cell holds it. THE ARTIFACT IS NOT YAW-ROTATED, unlike rule_bench and postulate_bench, and that is deliberate rather than an omission - see dna.note. layout=ladder stands all five disclosures in a row at 1.00 m pitch (about 4.8 m wide) and is a design view, not a map placement."
+			},
+			"measurements": {
+				"aabb_size": [
+					0.76,
+					0.84,
+					0.76
+				],
+				"aabb_center": [
+					0.0,
+					0.42,
+					0.0
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.84,
+				"source": "computed_from_geometry in a Python replica built from the same constants; no Godot was run. It is not an estimate of the box - it IS the box, because a layers=0 BoxMesh anchor of exactly 0.760 x 0.840 x 0.760 at (0, 0.420, 0) is added to every cell, and _subtree_aabb counts a MeshInstance3D whether or not its layers render it. The replica's own union over all twenty variants comes out at min (-0.380, 0.000, -0.380) and max (0.380, 0.840, 0.380), i.e. the anchor exactly, so the anchor neither pads nor clips."
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			],
+			"dna": {
+				"promoted": "2026-08-15",
+				"stage": "synthesis",
+				"framing": 0.6,
+				"sources": [
+					"cube_lines",
+					"edge_as_ground_capstone",
+					"coincident_face"
+				],
+				"axes": {
+				 "disclosure": [
+				  "frame",
+				  "visible",
+				  "silhouette",
+				  "plan",
+				  "corner"
+				 ],
+				 "separation": [
+				  "coincident",
+				  "clear",
+				  "hairline",
+				  "inverted"
+				 ]
+				},
+				"default": "disclosure=frame, separation=coincident. frame is cube_lines' shipped @export default (gd:27, `@export var disclosure: String = \"frame\"`), the `_:` fallthrough of its _drawn_edges, and the value all three of its placements render - its own registry calls it THE LEGACY LINEAGE, byte for byte. coincident is coincident_face's shipped @export default (gd:78) and its short-circuit rung, the one state that artifact had ever drawn before it was promoted. So the default cell of this sheet is both members' shipped picture: every edge asserted, and the assertion lying exactly in the surface it is about. It is also the honest opening image, because it is the one that fails - a drawing that is exactly on the thing it describes cannot be told from it, which is the whole subject.",
+				"note": "WHAT THE VALUES MEAN, from the members' code. THE FAMILY FIRST: three artifacts and one question - is the line a MARK (drawn, thick, rubbable) or a BOUNDARY (where the solid stops, undrawn, thickness zero, and not a property of the object but of the object AND where you stand). cube_lines is the mark's case: twelve thin lines and no solid at all, and its own registry says so - 'the volume was always an inference the eye supplies'. edge_as_ground_capstone is the boundary's case and says it in words on a glass plate: 'The edge is the ground', with `assertion:void` boring the platform through its full 0.4 m (_make_ring_mesh, gd:227-232) so the object becomes its own rim - the boundary with the ground taken out from under it - and `rim:closed|gapped|arc|crowded` deciding whether the ring of seven recalled stations closes at all. coincident_face is the case where the distinction breaks: two solids whose faces claim ONE depth, so the boundary is a coin toss per pixel. THE BRIEF'S READING SURVIVED THE CODE AND GOT SHARPER. cube_lines' `disclosure` really is two axes wearing one word - `frame` and `visible` are marks (drawn edge sets, `visible` a mark ABOUT a viewer), `silhouette` is a boundary, `plan` is a projection onto a surface that is not the object, `corner` is a mark at the vertex the viewer cannot see. AND `silhouette` IS NOT COMPUTED FROM ANY CAMERA. It is a hard-coded list: `return PackedInt32Array([2, 3, 5, 8, 10, 12])` with the comment 'edges touching neither the near nor the far vertex', resolved against `const NEAR_CORNER: Vector3 = Vector3(0.5, 0.5, 0.5)` and `const FAR_CORNER: Vector3 = Vector3(-0.5, -0.5, -0.5)` at gd:52-53. So it is a boundary that was worked out ONCE, at authoring time, for a viewer in the +++ octant, and then frozen as a mark - which is worse and better than 'computed then drawn', because this one cannot notice that the camera moved. DISCLOSURE, five values, cube_lines' five sets index for index and in its order. frame = all twelve edges at equal weight, occlusion denied; here that costs something it could not cost in cube_lines, because there IS a body and three of the twelve are behind it. visible = the nine a solid cube shows from the near corner, the three at the far vertex dropped; the draughtsman's hidden-line removal, which asserts a viewer and an opaque body - and against an actually opaque body it is nearly a no-op, which is the pre-registered closest pair below. silhouette = the six edges of the hexagonal outline, touching neither the near nor the far vertex; against a solid these six marks land exactly on the body's own edge, so the mark and the boundary are the same six lines in the picture and nothing in a single still can separate them. plan = the four bottom edges, the cube as a footprint; at this standpoint two of the four are behind the body and what you see is an L and eight overshoot stubs, which is honest - a plan is a drawing that declined to have a height, and from a camera 15 degrees above the horizon most of it is under the thing it measures. corner = the three edges meeting the far-back-left vertex, exactly the three `visible` hides; three fully specified marks that the boundary DELETES, and the tile is the bare body with three stubs escaping past its outline. SEPARATION, four values, coincident_face's four words, glossed for THIS build as the distance from the solid's face plane to the OUTER face of the drawn bar, along that face's normal. clear = +55 mm: the drawing lifts off the body entirely and stands as a cage in the air with a 39 mm gap, unmistakably a separate object that is ABOUT the solid rather than on it - no contest, which is the control this diagram has never had (coincident_face's own words for its own clear rung). hairline = +6 mm: one step of the grid outward. The mark wins the depth test cleanly and reads as a line lying on the skin - 'the two solids all but touching and the depth order still decided cleanly'. coincident = 0 mm, SHIPPED: the bar's outer face and the cube's face are the same plane, two surfaces claim one depth, and the renderer awards each pixel to whichever number rounded higher. This is coincident_face's z-fight moved from a plane to a line, and it is a real rendering problem rather than a stylisation. inverted = -6 mm: one step the other way, and the answer does not degrade, it flips - the SURFACE wins outright, every mark is swallowed by the body it describes, and the drawing survives only as the 90 mm overshoots that reach past the body's own extent. The ladder is deliberately NOT monotone in outcome: the failure sits in the middle with order on both sides, one step out and the mark wins everywhere, one step in and the surface wins everywhere. That sentence is coincident_face's, about itself, and it is true of this build for a different reason. THE STANDPOINT POINT, which is what this synthesis is for. capture_config_sweep stands at yaw 0.62, pitch -0.26, i.e. dir = (0.562, 0.257, 0.787) - all three components positive - so the near vertex of an unrotated cube IS cube_lines' NEAR_CORNER and its frozen list is CORRECT here. This bench is therefore NOT yaw-rotated, which is a break with rule_bench and postulate_bench and is the one place a reader should expect the discipline to look wrong: turning the body to face the sweep would falsify the very list it is quoting. Checked at all five of probe_anamorphic's standpoints, with the true outline computed from the face normals: canonical (0.562, 0.257, 0.787) near v6, outline {2,3,5,8,10,12}, frozen list CORRECT; from-above (0.289, 0.867, 0.405) near v6, same outline, CORRECT; opposite (-0.562, 0.257, -0.787) near v4, outline {1,4,6,7,10,12}, so the frozen list shares only {10,12} and is WRONG on four of six; from-below (0.555, -0.296, 0.778) near v2, outline {1,4,6,7,10,12}, WRONG on four of six; square-on (0.000, 0.100, 0.995) is degenerate - the two x faces are exactly edge-on, ten edges qualify and only edge 1 is hidden - so the frozen list is wrong there in a third way. `silhouette` is expected to be STANDPOINT-DEPENDENT BY CONSTRUCTION, and it is the one axis value in this corpus where an ANAMORPHIC verdict is the CORRECT ANSWER rather than a fault in the rig: a boundary that photographed the same from every standpoint would not be a boundary. `corner` carries the same property from the other side - the far triad {1,4,9} is fully occluded at canonical and from-above and VISIBLE at the other three - so if probe_anamorphic is run here it should find `disclosure` alive at every view and find the corner and silhouette CELLS moving most, which is the opposite of the usual reason to run it. THE THESIS SOMEONE COULD DISAGREE WITH: a mark and a boundary are different kinds of thing, and the corpus has been calling both of them lines. The disagreement available, and it is a good one: in a rendered still they are pixels either way, so (the objection runs) the distinction is metaphysics and the sheet is twenty pictures of a cube. Two places it costs something. First, `silhouette` at `hairline` is a photograph in which the mark and the boundary are the same six lines and no measurement taken from that standpoint can tell them apart - the objection's best evidence. Second, that is exactly the cell that stops being true when the camera moves, and the drawn set does not follow, which is the reply. The experiment is the pair.",
+				"predicted_degeneracy": {
+					"pair": "frame against visible, in the coincident separation",
+					"percent": 5.71,
+					"arithmetic": "Rasterised BEFORE ANY CAPTURE in the critic's own currency: the geometry rebuilt in Python from the same constants (same 0.560 cube, same 0.016 bars, same 0.090 overshoot, same four gap numbers, same edge sets), projected through capture_config_sweep's camera (FOV 34, PAD 1.9, yaw 0.62, pitch -0.26, 760 x 760, dist = radius / tan(FOV/2) * PAD * framing with framing 0.60 on the union AABB, which is the anchor), z-buffered with one directional key and flat shading, then run through artifact_dna_critic's pipeline unchanged - crop to the union of the two frames' subject boxes, neutralise each frame's corner background, grey, resize 160 x 160, mean of the hottest 5%. The coincident rung is modelled as the average of two renders, one with the mark winning the depth test and one with the surface winning, because a real z-fight awards each pixel by float rounding and the downsample averages the speckle either way. WHY THAT PAIR: `visible` is `frame` minus edges {1, 4, 9}, and at this standpoint those three are exactly the three the cube hides - the near vertex is (+,+,+) because dir = (0.562, 0.257, 0.787), so the two adjoining faces of each of {1,4,9} are (-y,-z), (-y,-x) and (-z,-x), all three back-facing. The body performs the hidden-line removal that the axis performs by hand, and the two tiles differ ONLY where the 90 mm overshoot escapes the outline: three stubs, one per hidden edge, each about 90 x 16 mm, at the ends that point toward the camera. Traced by hand for edge 1 (v0-v1, running in x at y=z=-0.280 plus the gap): from its -x end the ray to the camera enters the cube's x slab at t=0.062 with y=-0.291 and z=-0.258, both inside, so that stub is occluded; from its +x end x only increases past 0.280 and the ray never re-enters, so that stub is visible. Same for edge 4 in +z and edge 9 in +y - one stub each, three in the frame. Predicted 5.71% focus / 0.285% frame. Full predicted sheet, focus % / frame %. DISCLOSURE pairs at separation=coincident: frame-visible 5.71/0.29, plan-corner 17.04/0.85, silhouette-plan 25.86/1.30, visible-silhouette 30.18/1.54, frame-silhouette 34.48/1.79, silhouette-corner 39.02/2.08, frame-plan 43.56/2.68, visible-plan 44.98/2.83, frame-corner 47.95/3.30, visible-corner 50.33/3.57. At clear the same ordering runs 6.65 to 70.04; at hairline 5.14 to 67.06; at inverted 6.15 to 40.74, and inverted is the weakest column by construction because only the overshoots are in the picture there. SEPARATION pairs at disclosure=frame: coincident-inverted 36.71/2.68, coincident-hairline 47.16/3.76, hairline-inverted 65.45/5.69, coincident-clear 70.37/8.96, clear-inverted 70.95/7.91, clear-hairline 72.05/10.50. At disclosure=corner the same six pairs run 2.08 to 13.71 - see designed_nulls. Subject is 12-17% of frame, well clear of the ~6% dilution floor, and the subject bbox is about 44% of frame. THE PREDICTION IS A FLOOR: the replica has one light, flat shading, no shadows, no AO, no antialiasing and no glow, and every prior prediction in this corpus under-read by 1.5x to 6.7x. If the sweep comes back BELOW 5.71% on the named pair, check the harness before the design: (a) tools/check_dna_declarations.py - a value the code cannot reach falls back and prints identical tiles; (b) _rejects.json - both axes are plain words, not numbers, so the tier_terrarium trap does not apply here, but read it anyway; (c) whether the sheet was captured with --max=20, because at the default cap of 9 build_dna_gallery trims `separation` from the tail and the named pair still exists but every separation row except coincident does not. And if the coincident ROW comes back reading like hairline rather than like a contested tie, the z-fight did not happen - check that the bar's outer face really is coplanar, which is `_seat` returning s * (HALF + gap - BAR * 0.5) with gap 0.0.",
+					"registered": "2026-08-15, before the first capture"
+				},
+				"designed_nulls": [
+					{
+						"a": {
+							"disclosure": "corner",
+							"separation": "coincident"
+						},
+						"b": {
+							"disclosure": "corner",
+							"separation": "hairline"
+						},
+						"under_percent": 6.0,
+						"why": "SEPARATION HAS NOTHING TO BE A RELATION TO. It is the distance between a mark and the surface it describes; at disclosure=corner the three marks lie on edges {1, 4, 9}, which are the three the body hides from this standpoint, so no part of any of them is drawn against a surface. What is in the frame is three overshoot stubs standing clear of the body in open air, and moving them 6 mm perpendicular to faces nobody can see moves those stubs by 6 mm - about 2.4 px at this framing. Predicted 2.08% focus / 0.104% frame, which is under the critic's 3% INERT line. The bound is set at 6% rather than at the predicted number because the prediction is a floor and antialiasing on three small stubs is exactly the kind of thing the replica cannot see; if it comes back above 6% the stubs are not where this says they are, and the first thing to check is the occlusion trace in predicted_degeneracy."
+					},
+					{
+						"a": {
+							"disclosure": "corner",
+							"separation": "coincident"
+						},
+						"b": {
+							"disclosure": "corner",
+							"separation": "inverted"
+						},
+						"under_percent": 6.0,
+						"why": "The same null in the other direction, and it is registered separately because it is the one that carries the argument. `inverted` is the rung where the surface wins outright and the drawing survives only as its overshoots - so at every other disclosure it is a large change (36.7% at frame, 29.8% at silhouette, 15.3% at plan) and at `corner` it is nothing, because at `corner` the overshoots were already all there was. Predicted 2.14% focus / 0.107% frame. A null that broke HERE while holding at the hairline pair above would mean the gap number is being applied along the wrong normal for edges at the far vertex."
+					}
+				],
+				"designed_nulls_why": "BOTH OF THE NULLS THE BRIEF PROPOSED WERE CHECKED AND ARE FALSE, and saying so is worth more than the two that hold. (1) 'at separation=coincident a line lying exactly on the surface may be invisible or z-fight identically for several disclosures.' It does not: a z-fight is a 50/50 award, not an erasure, so a coincident mark is half its own colour and half the body's, which is dimmer but perfectly present. The coincident column's disclosure pairs run 5.71% to 50.33% focus - the widest spread of any column after clear - and the only near-equal pair in it is frame against visible, which is near-equal for a completely different reason (occlusion, not coincidence) and is therefore the pre-registered closest pair rather than a null. (2) 'for a cube seen from the sweep's standpoint, `visible` and `silhouette` may select the same edge set.' They cannot, and the arithmetic is exact: visible = {2,3,5,6,7,8,10,11,12} and silhouette = {2,3,5,8,10,12}, so visible = silhouette union {6,7,11} - the three edges meeting the NEAR vertex, which are the three edges both of whose faces are front-facing and which are therefore the most visible things in the entire frame. They coincide only in a degenerate view along a face normal, which the sweep's standpoint is not; the two measure 30.18% apart at coincident. The difference set {6,7,11} is itself the argument in one line: it is exactly the part of what you SEE that is not where the solid ENDS. The two nulls that do hold are both at `corner`, and they are the artifact's claim rather than spare checks: the disclosure axis is about marks, the separation axis is about the relation between a mark and a surface, and `corner` is the value that removes every surface from the picture, so the second axis has nothing left to say. The tempting third - corner at clear against corner at hairline - is deliberately NOT a null and is the pair that proves the other two are about occlusion and not about the artifact being broken: at clear the stubs move 55 mm instead of 6 mm and the pair measures 12.80%, six times the null. If any of those three moves the wrong way the reading is in trouble, which is what a pre-registration is for.",
+				"fixture": {
+					"layout": "single"
+				},
+				"fixture_why": "The bench can stand all five disclosures in a row (layout=ladder, 1.00 m pitch, about 4.8 m wide) but the SWEEP must see one body at a time: capture_config_sweep unions the AABB across a spec's variants, so a five-wide row in the same spec frames every single against nearly five metres and photographs it as a speck. layout is an export and not an axis, and it ships at single, so the fixture is a belt over braces. NOTHING ELSE NEEDS PINNING, and the absence is checkable rather than claimed: there is no randf, randi or randomize in the file, no _process, no Timer and nothing that reads time; every mesh is committed synchronously inside _ready from integer and constant arithmetic, so the frame is complete at frame one and two builds of one value are the same mesh. _ready is ungated and builds standalone, so no dna.fixture entry is needed to make it render either. The one thing that is NOT deterministic in the final image is which pixels the coincident rung awards to the mark and which to the body - that is decided by the GPU's depth arithmetic - but it is decided the same way every frame for a fixed camera and fixed geometry, because nothing here moves.",
+				"kin": "cube_lines is the parent and the one to compare against: this bench and that one draw the SAME five edge sets, and the difference between the two sheets is a solid. Its second axis `coding` (uniform | axes | depth | horizon) is declined here - see declines - so the two are directly comparable only at coding=uniform, which is its default and its legacy tint, and that is the tint used here. line_slack carries the corpus's other line vocabulary, the one about a line as a MARK with slack in it, and is the half of the family this synthesis is deliberately not about; a room holding line_slack and this bench is saying the two halves of the word in one breath, which is the placement to want. coincident_face is kin by mechanism rather than by subject: it puts two planes at one depth and this puts a bar and a plane at one depth, and the two should photograph their contested regions ALIKE, which is a check available for free. cube_scene and prism_block carry `grain` on the same primitive family and are the artifacts to compare the BODY against - they are the corpus's other opaque unit cubes. edge_as_ground_capstone contributes the thesis and not a value: its `rim` and `assertion` are about a seven-fold ring and a glass plate at architectural scale and have no counterpart here, and its sentence does. ONE DISAMBIGUATION, because the name will collide in a search and the two meanings are genuinely different. commons/artifacts/edge_ground_toy, edge_ground_bench, edge_ground_room and edge_ground_synthesis all carry `concept: The edge is the ground` from the same capstone, and their edge is the EPISTEMIC one - incompleteness, bias, contradiction, rhizome, the lambda-edge between order and the open - a limit you build on rather than a place a solid stops. None of the four is DNA-promoted and none declares an @export_enum, so nothing in the sweep confuses them with this. They are the same sentence read the other way, and a room holding one of them next to this bench is the sharpest available reading of how far one phrase stretches.",
+				"declines": [
+					"cube_lines' second axis, `coding` (uniform | axes | depth | horizon), which is the obvious thing for a synthesis to carry forward and is refused on subject. coding asks whether the twelve edges are one family or several and answers in COLOUR - red/green/blue by direction, a depth fade, amber verticals against blue horizontals. Every rung of it is a claim about the drawing and none of them touches the question this bench is asking, which is whether the line is a drawing at all. Worse, three of its four rungs would actively confound the measurement: a per-edge tint makes `frame` and `visible` differ by three coloured stubs instead of three neutral ones, and the critic's focus_rgb veto exists precisely because colour-only changes are read differently from geometric ones. The axis is real and it is cube_lines', and it stays cube_lines'.",
+					"edge_as_ground_capstone's `rim` and `assertion` in every form. They are the reason it is a source - a capstone that bores its own platform through at assertion=void so the object becomes its rim is the boundary argument stated at architectural scale - and neither word can be carried onto a 0.560 m cube without inventing a meaning for it. There is no rim on a cube and no seven stations to gap. What is carried is the sentence and the void's logic, which is why the solid here is opaque and present in all twenty cells rather than being one of the values: taking the body away is exactly what cube_lines already does, and a synthesis that offered `solid: yes | no` would just be re-running its sheet next to itself.",
+					"A computed silhouette. It would be one line - classify each edge by whether its two adjacent face normals disagree with the view vector - and it is refused because it would DESTROY THE FINDING. cube_lines' silhouette is a frozen list, correct for the +++ octant and wrong at three of probe_anamorphic's five standpoints, and a bench that quietly fixed that would be reporting on an artifact that does not exist. The frozen list is copied index for index and the standpoints where it fails are enumerated in the note, so the failure is pre-registered rather than discovered.",
+					"Yaw-rotating the body to face the sweep, which is what rule_bench (FRONT_YAW 0.62) and postulate_bench both do and which is the house style. It is declined for the same reason: cube_lines' near corner is (0.5, 0.5, 0.5) and the sweep's standpoint direction is (0.562, 0.257, 0.787), so the frozen silhouette is correct ONLY because the body is unrotated. Any yaw at all makes `silhouette` wrong at the canonical camera too, and the sheet would then be measuring a mistake this synthesis introduced instead of the one it found.",
+					"A transparent or glass body, which was the first design and would have made `corner` and the whole inverted rung visible for free. Refused because alpha sorting in Godot is per-object by distance to origin, not per pixel, so a mark 6 mm INSIDE a transparent cube would very likely draw in front of it and `inverted` would photograph identically to `hairline` - a harness fact wearing the costume of a null. The overshoot solves the same problem with geometry that can be predicted from constants.",
+					"Bar thickness, overshoot length, cube size, plinth size, the float height and every colour. A thicker mark or a longer overshoot is a bigger picture of the same claim. The four numbers that matter are pinned for reasons that are arithmetic rather than taste: BAR 0.016 so the coincident rung has a strip wide enough to fight over at 2.2 mm per pixel; OVER 0.090 because it is the only part of the drawing that survives separation=inverted and a shorter one makes that rung five photographs of one bare cube; HALF 0.280 and the 0.170 float so `plan` reads as a line at the bottom of a body rather than as a scratch on the plinth. None of these are exports.",
+					"Any caption, plaque, arrow or legend. coincident_face carries a verdict line and a three-line plate and is half text by ink; postulate_bench declined its members' Label3D plates for the same reason this does. A tile that told you which line was the boundary would be a tile about typography, and the entire question is whether you can tell.",
+					"Any animation, rate, growth or randomness. The whole assembly is built synchronously in _ready; there is no _process, no Timer, no randf and no unseeded anything in the file."
+				],
+				"sweep_command": "python tools/build_dna_gallery.py --slug=edge-ground --tokens=edge_ground --max=20",
+				"sweep_note": "THE FULL SHEET NEEDS --max=20. `disclosure` is declared first and is never trimmed; `separation` is second and build_dna_gallery trims the LATER axis from the tail until the cross product fits its cap, so at the default --max=9 the 5 x 4 sheet renders as 5 x 1 = coincident only. The pre-registered closest pair (frame against visible, at coincident) survives that trim; both designed nulls do NOT, because both live at corner across separations and there is only one separation left. The anamorphic follow-up is `python tools/probe_anamorphic.py --token=edge_ground --axis=disclosure`, and it should be run even though nothing here is expected to read INERT: this is the one artifact in the corpus whose axis is SUPPOSED to be standpoint-dependent, and the five-view sheet is the evidence for the note's claim that the frozen silhouette is right at two standpoints and wrong at three.",
+				"placements": 0
+			}
+		}
+	}
+}

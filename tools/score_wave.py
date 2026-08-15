@@ -14,6 +14,7 @@ from __future__ import annotations
 import json, pathlib, re, sys
 REPO = pathlib.Path(__file__).resolve().parents[1]
 REG = REPO / "commons" / "artifacts" / "registry"
+ENC = pathlib.Path(__file__).resolve().parents[2] / "ada_encyclopedia"
 
 def main() -> int:
     slug, toks = "", []
@@ -126,8 +127,43 @@ def main() -> int:
                 print(f"{'':18}  null {a} vs {b}: no such pair in the sweep — value not rendered or misnamed")
                 continue
             m = round(hitrow["changed_pct"], 2)
-            nulls.append(dict(a=a, b=b, under=cap, measured=m, held=(m <= cap)))
-            print(f"{'':18}  null {a} vs {b}: {m}% {'HELD' if m <= cap else 'BROKEN'} (< {cap}%)")
+            # A NULL INHERITS ITS METRIC. The sweep's changed_pct is PER-CHANNEL; a builder who
+            # solved two colours to equal LUMA has registered a greyscale identity and has to be
+            # scored in greyscale. face_convention did exactly that: its two_tone/inverted pair
+            # measures 0.00% in luma — max difference 2 of 255, the solve was right to the byte —
+            # and 6.45% per channel, because red and blue swap at constant brightness. Scored on
+            # the wrong metric, a held null was reported BROKEN. Same family as the context and
+            # denominator faults already fixed here: the arithmetic was fine, the question was not.
+            why = str(nd.get("why", "")).lower()
+            grey = any(w in why for w in ("luma", "luminance", "grey", "gray", "greyscale"))
+            lum = None
+            if grey:
+                try:
+                    from PIL import Image, ImageChops
+                    gd = ENC / "public" / slug
+
+                    def _png(side: dict):
+                        want = {f"{k}-{v}" for k, v in side.items()}
+                        for h in sorted(gd.glob(f"{tok}__*.png")):
+                            if want <= set(h.stem.split("__")[1:]):
+                                return h
+                        return None
+
+                    fa, fb = _png(a), _png(b)
+                    if fa and fb:
+                        da = list(ImageChops.difference(Image.open(fa).convert("L"),
+                                                        Image.open(fb).convert("L")).getdata())
+                        lum = round(100.0 * sum(1 for v in da if v > 12) / len(da), 2)
+                except Exception:
+                    lum = None
+            use = lum if lum is not None else m
+            held = use <= cap
+            tag = "luma" if lum is not None else "per-channel"
+            extra = f"  [luma {lum}% · per-channel {m}%]" if lum is not None else ""
+            nulls.append(dict(a=a, b=b, under=cap, measured=use, per_channel=m, luma=lum,
+                              metric=tag, held=held))
+            print(f"{'':18}  null {a} vs {b}: {use}% ({tag}) "
+                  f"{'HELD' if held else 'BROKEN'} (< {cap}%){extra}")
         if nulls:
             out[tok]["nulls"] = nulls
     (REPO/"ada_run"/f"{slug}_scores.json").write_text(json.dumps(out,indent=1),encoding="utf-8")

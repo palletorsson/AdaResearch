@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/proportion_bench/proportion_bench.gd" id="1_pb17"]
+
+[node name="ProportionBench" type="Node3D"]
+script = ExtResource("1_pb17")
