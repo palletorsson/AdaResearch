@@ -113,9 +113,15 @@ SECTIONS = [
    ({"handedness": "both", "figure": "cross"}, "both"),
    ({"handedness": "right", "figure": "helix"}, "right &middot; helix &mdash; dna_specimen calls this left")],
   "Predicted left against both, reasoning from the critic's colour-blindness on the member's own "
-  "lavender; the closest pair is right against both, #4 of 9. right and left measure 1.88% and "
-  "1.87% of frame &mdash; the mirror pair is as symmetric as it should be, and which side the union "
-  "sits nearer is a fact about occlusion from this one standpoint, not about the convention."),
+  "lavender; within the cross figure it ranked <b>#3 of 3</b>, the closest being right against both. "
+  "Then the probe was run from five standpoints, and it turned the miss into a confirmation. The "
+  "closest pair <em>alternates</em> &mdash; right/both from two viewpoints, left/both from three "
+  "&mdash; because which hand the union sits nearer is occlusion, not convention. But <b>right "
+  "against left, the mirror itself, is the WIDEST pair from all five standpoints</b>, 67% to 79% in "
+  "focus and last in every ranking. The thing the axis is actually about is stable from everywhere; "
+  "only the comparison involving the union is unstable, and it is unstable for a mechanical reason. "
+  "right and left measure 1.88% and 1.87% of frame &mdash; the mirror pair is as symmetric as a "
+  "mirror pair should be."),
 
  ("arrangement_yard", "arrangement &middot; 4 members &middot; 3 vocabularies &middot; scale_lines is kin, not member",
   "An arrangement of identical objects is a claim about the relation between them.",

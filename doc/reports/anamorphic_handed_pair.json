@@ -1,0 +1,178 @@
+{
+ "_note": "Does the verdict describe the artifact, or the standpoint? Every published DNA tile was shot from the canonical view. If another standpoint scores materially higher, the pipeline has been reporting its own position as a fact about the work.",
+ "token": "handed_pair",
+ "axis": "handedness",
+ "views": {
+  "canonical": [
+   0.62,
+   -0.26
+  ],
+  "opposite": [
+   3.7615926535897932,
+   -0.26
+  ],
+  "square-on": [
+   0.0,
+   -0.1
+  ],
+  "from-above": [
+   0.62,
+   -1.05
+  ],
+  "from-below": [
+   0.62,
+   0.3
+  ]
+ },
+ "canonical_mean_focus": 0.6711,
+ "best_other_view": "square-on",
+ "best_other_mean_focus": 0.72853,
+ "ratio": 1.09,
+ "results": {
+  "canonical": {
+   "mean_focus": 0.6711,
+   "best_pair": {
+    "a": "right",
+    "b": "left",
+    "focus": 0.74699,
+    "colour": 0.91512
+   },
+   "pairs": [
+    {
+     "a": "right",
+     "b": "left",
+     "focus": 0.74699,
+     "colour": 0.91512
+    },
+    {
+     "a": "right",
+     "b": "both",
+     "focus": 0.6307,
+     "colour": 0.75394
+    },
+    {
+     "a": "left",
+     "b": "both",
+     "focus": 0.6356,
+     "colour": 0.8175
+    }
+   ]
+  },
+  "opposite": {
+   "mean_focus": 0.56098,
+   "best_pair": {
+    "a": "right",
+    "b": "left",
+    "focus": 0.67358,
+    "colour": 0.886
+   },
+   "pairs": [
+    {
+     "a": "right",
+     "b": "left",
+     "focus": 0.67358,
+     "colour": 0.886
+    },
+    {
+     "a": "right",
+     "b": "both",
+     "focus": 0.46328,
+     "colour": 0.5618
+    },
+    {
+     "a": "left",
+     "b": "both",
+     "focus": 0.54609,
+     "colour": 0.76708
+    }
+   ]
+  },
+  "square-on": {
+   "mean_focus": 0.72853,
+   "best_pair": {
+    "a": "right",
+    "b": "left",
+    "focus": 0.79107,
+    "colour": 0.91876
+   },
+   "pairs": [
+    {
+     "a": "right",
+     "b": "left",
+     "focus": 0.79107,
+     "colour": 0.91876
+    },
+    {
+     "a": "right",
+     "b": "both",
+     "focus": 0.70288,
+     "colour": 0.83152
+    },
+    {
+     "a": "left",
+     "b": "both",
+     "focus": 0.69163,
+     "colour": 0.8464
+    }
+   ]
+  },
+  "from-above": {
+   "mean_focus": 0.57062,
+   "best_pair": {
+    "a": "right",
+    "b": "left",
+    "focus": 0.73481,
+    "colour": 0.90885
+   },
+   "pairs": [
+    {
+     "a": "right",
+     "b": "left",
+     "focus": 0.73481,
+     "colour": 0.90885
+    },
+    {
+     "a": "right",
+     "b": "both",
+     "focus": 0.50894,
+     "colour": 0.59913
+    },
+    {
+     "a": "left",
+     "b": "both",
+     "focus": 0.4681,
+     "colour": 0.67036
+    }
+   ]
+  },
+  "from-below": {
+   "mean_focus": 0.6577,
+   "best_pair": {
+    "a": "right",
+    "b": "left",
+    "focus": 0.7306,
+    "colour": 0.90892
+   },
+   "pairs": [
+    {
+     "a": "right",
+     "b": "left",
+     "focus": 0.7306,
+     "colour": 0.90892
+    },
+    {
+     "a": "right",
+     "b": "both",
+     "focus": 0.64552,
+     "colour": 0.77599
+    },
+    {
+     "a": "left",
+     "b": "both",
+     "focus": 0.59698,
+     "colour": 0.78929
+    }
+   ]
+  }
+ }
+}
