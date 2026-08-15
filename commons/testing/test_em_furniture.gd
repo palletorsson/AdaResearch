@@ -6,7 +6,7 @@ extends SceneTree
 ##
 ##   godot --headless --path . --xr-mode off --script res://commons/testing/test_em_furniture.gd
 
-const OUT := "res://ada_run/em_overrides.json"
+const OUT := "res://ada_run/_trial_em_overrides.json"   # PRIVATE — never the hand's file
 
 
 func _initialize() -> void:
@@ -120,6 +120,7 @@ func _museum() -> Node3D:
 	var ps: PackedScene = load("res://commons/scenes/endless_museum.tscn")
 	var inst: Node3D = ps.instantiate() as Node3D
 	inst.set("_edit_mode", true)
+	inst.set("_overrides_path", OUT)   # the trial writes ITS file, not the curator's
 	inst.set("_plan_path", "res://ada_run/em_plan.json")
 	inst.set("_first_key", "sainsbury-false-perspective-enfilade")
 	get_root().add_child(inst)

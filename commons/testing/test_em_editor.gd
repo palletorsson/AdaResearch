@@ -10,7 +10,7 @@ extends SceneTree
 ##
 ##   godot --headless --path . --xr-mode off --script res://commons/testing/test_em_editor.gd
 
-const OUT := "res://ada_run/em_overrides.json"
+const OUT := "res://ada_run/_trial_em_overrides.json"   # PRIVATE — never the hand's file
 
 
 func _initialize() -> void:
@@ -24,6 +24,7 @@ func _run() -> void:
 	var ps: PackedScene = load("res://commons/scenes/endless_museum.tscn")
 	var inst: Node3D = ps.instantiate() as Node3D
 	inst.set("_edit_mode", true)
+	inst.set("_overrides_path", OUT)   # the trial writes ITS file, not the curator's
 	inst.set("_plan_path", "res://ada_run/em_plan.json")
 	inst.set("_first_key", "sainsbury-false-perspective-enfilade")
 	get_root().add_child(inst)
@@ -173,6 +174,9 @@ func _run() -> void:
 
 
 func _verdict(fails: Array[String]) -> void:
+	# the trial's private file is evidence for this run only — leave nothing
+	if FileAccess.file_exists(OUT):
+		DirAccess.remove_absolute(ProjectSettings.globalize_path(OUT))
 	if fails.is_empty():
 		print("EDITOR TRIAL: PASS — E picked, arrows moved, SHIFT-arrows fine-nudged, + scaled, R turned, F5 wrote the ruling")
 	else:
