@@ -1,0 +1,268 @@
+{
+ "_note": "Does the verdict describe the artifact, or the standpoint? Every published DNA tile was shot from the canonical view. If another standpoint scores materially higher, the pipeline has been reporting its own position as a fact about the work.",
+ "token": "habit_grove",
+ "axis": "habit",
+ "views": {
+  "canonical": [
+   0.62,
+   -0.26
+  ],
+  "opposite": [
+   3.7615926535897932,
+   -0.26
+  ],
+  "square-on": [
+   0.0,
+   -0.1
+  ],
+  "from-above": [
+   0.62,
+   -1.05
+  ],
+  "from-below": [
+   0.62,
+   0.3
+  ]
+ },
+ "canonical_mean_focus": 0.42508,
+ "best_other_view": "from-above",
+ "best_other_mean_focus": 0.47979,
+ "ratio": 1.13,
+ "results": {
+  "canonical": {
+   "mean_focus": 0.42508,
+   "best_pair": {
+    "a": "planar",
+    "b": "spiral",
+    "focus": 0.46574,
+    "colour": 0.57739
+   },
+   "pairs": [
+    {
+     "a": "planar",
+     "b": "fanned",
+     "focus": 0.40286,
+     "colour": 0.50275
+    },
+    {
+     "a": "planar",
+     "b": "whorled",
+     "focus": 0.44655,
+     "colour": 0.5495
+    },
+    {
+     "a": "planar",
+     "b": "spiral",
+     "focus": 0.46574,
+     "colour": 0.57739
+    },
+    {
+     "a": "fanned",
+     "b": "whorled",
+     "focus": 0.41578,
+     "colour": 0.50374
+    },
+    {
+     "a": "fanned",
+     "b": "spiral",
+     "focus": 0.41043,
+     "colour": 0.50707
+    },
+    {
+     "a": "whorled",
+     "b": "spiral",
+     "focus": 0.40914,
+     "colour": 0.50259
+    }
+   ]
+  },
+  "opposite": {
+   "mean_focus": 0.33849,
+   "best_pair": {
+    "a": "planar",
+    "b": "spiral",
+    "focus": 0.36189,
+    "colour": 0.45663
+   },
+   "pairs": [
+    {
+     "a": "planar",
+     "b": "fanned",
+     "focus": 0.3144,
+     "colour": 0.40067
+    },
+    {
+     "a": "planar",
+     "b": "whorled",
+     "focus": 0.33629,
+     "colour": 0.42514
+    },
+    {
+     "a": "planar",
+     "b": "spiral",
+     "focus": 0.36189,
+     "colour": 0.45663
+    },
+    {
+     "a": "fanned",
+     "b": "whorled",
+     "focus": 0.33014,
+     "colour": 0.41134
+    },
+    {
+     "a": "fanned",
+     "b": "spiral",
+     "focus": 0.3446,
+     "colour": 0.42815
+    },
+    {
+     "a": "whorled",
+     "b": "spiral",
+     "focus": 0.34364,
+     "colour": 0.43051
+    }
+   ]
+  },
+  "square-on": {
+   "mean_focus": 0.44872,
+   "best_pair": {
+    "a": "planar",
+    "b": "whorled",
+    "focus": 0.48743,
+    "colour": 0.5969
+   },
+   "pairs": [
+    {
+     "a": "planar",
+     "b": "fanned",
+     "focus": 0.45067,
+     "colour": 0.56045
+    },
+    {
+     "a": "planar",
+     "b": "whorled",
+     "focus": 0.48743,
+     "colour": 0.5969
+    },
+    {
+     "a": "planar",
+     "b": "spiral",
+     "focus": 0.46749,
+     "colour": 0.57569
+    },
+    {
+     "a": "fanned",
+     "b": "whorled",
+     "focus": 0.44809,
+     "colour": 0.55045
+    },
+    {
+     "a": "fanned",
+     "b": "spiral",
+     "focus": 0.37579,
+     "colour": 0.46003
+    },
+    {
+     "a": "whorled",
+     "b": "spiral",
+     "focus": 0.46285,
+     "colour": 0.57036
+    }
+   ]
+  },
+  "from-above": {
+   "mean_focus": 0.47979,
+   "best_pair": {
+    "a": "planar",
+    "b": "whorled",
+    "focus": 0.50994,
+    "colour": 0.64681
+   },
+   "pairs": [
+    {
+     "a": "planar",
+     "b": "fanned",
+     "focus": 0.49367,
+     "colour": 0.62583
+    },
+    {
+     "a": "planar",
+     "b": "whorled",
+     "focus": 0.50994,
+     "colour": 0.64681
+    },
+    {
+     "a": "planar",
+     "b": "spiral",
+     "focus": 0.50315,
+     "colour": 0.63963
+    },
+    {
+     "a": "fanned",
+     "b": "whorled",
+     "focus": 0.45552,
+     "colour": 0.57117
+    },
+    {
+     "a": "fanned",
+     "b": "spiral",
+     "focus": 0.43412,
+     "colour": 0.54965
+    },
+    {
+     "a": "whorled",
+     "b": "spiral",
+     "focus": 0.48232,
+     "colour": 0.59939
+    }
+   ]
+  },
+  "from-below": {
+   "mean_focus": 0.42242,
+   "best_pair": {
+    "a": "planar",
+    "b": "spiral",
+    "focus": 0.47981,
+    "colour": 0.56827
+   },
+   "pairs": [
+    {
+     "a": "planar",
+     "b": "fanned",
+     "focus": 0.40006,
+     "colour": 0.48171
+    },
+    {
+     "a": "planar",
+     "b": "whorled",
+     "focus": 0.45865,
+     "colour": 0.55545
+    },
+    {
+     "a": "planar",
+     "b": "spiral",
+     "focus": 0.47981,
+     "colour": 0.56827
+    },
+    {
+     "a": "fanned",
+     "b": "whorled",
+     "focus": 0.39012,
+     "colour": 0.47369
+    },
+    {
+     "a": "fanned",
+     "b": "spiral",
+     "focus": 0.40241,
+     "colour": 0.48676
+    },
+    {
+     "a": "whorled",
+     "b": "spiral",
+     "focus": 0.40348,
+     "colour": 0.48991
+    }
+   ]
+  }
+ }
+}

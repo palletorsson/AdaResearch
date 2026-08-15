@@ -11,7 +11,7 @@ Usage: python tools/score_wave.py --slug=wave14 --tokens=a,b,c
 Writes ada_run/<slug>_scores.json for the gallery builder.
 """
 from __future__ import annotations
-import json, pathlib, sys
+import json, pathlib, re, sys
 REPO = pathlib.Path(__file__).resolve().parents[1]
 REG = REPO / "commons" / "artifacts" / "registry"
 
@@ -41,8 +41,27 @@ def main() -> int:
         d = json.loads(bite.read_text(encoding="utf-8"))
         # which axis holds both values?
         axis = next((a for a in axes if any(str(r["a"].get(a)) in (va,vb) for r in d["variants"])), axes[0] if axes else "")
+        # THE PREDICTION NAMES A CONTEXT, AND THE RANKING MUST HONOUR IT. "planar against
+        # fanned, in the PLANT reading" is a claim about one reading, and pooling every reading
+        # into one ranking compares it against pairs from another — habit_grove's `crown` shows
+        # 171 tips and almost no ink, so every crown pair reads frame-close and the six crown
+        # pairs took the whole top of the ladder. The published gallery then reported a
+        # crown-reading pair as the answer to a plant-reading prediction. Same fault the
+        # critic's CONDITIONAL check exists for: one axis diluted by the axis it is crossed with.
+        ctx = {}
+        m2 = re.search(r",\s*(?:in|on)\s+the\s+(\S+)\s+(\w+)\s*$", pair.strip())
+        if m2:
+            cval, ckey = m2.group(1), m2.group(2)
+            other = [a for a in axes if a != axis]
+            if ckey in axes:
+                ctx = {ckey: cval}
+            elif other and any(str(r["a"].get(other[0])) == cval for r in d["variants"]):
+                ctx = {other[0]: cval}
         same = [r for r in d["variants"]
-                if [q for q in r["a"] if str(r["a"][q]) != str(r["b"].get(q))] == [axis]]
+                if [q for q in r["a"] if str(r["a"][q]) != str(r["b"].get(q))] == [axis]
+                and all(str(r["a"].get(k)) == str(v) for k, v in ctx.items())]
+        if ctx:
+            print(f"{'':18}  (ranked within {ctx}, as the prediction names it)")
         # DESIGNED NULLS ARE NOT IN THE RACE. A builder who registers "row vs ramp in the
         # footprint reading is identical by construction" has said in advance that this pair
         # will be the closest, and that the prediction is for the closest pair that is NOT a

@@ -139,10 +139,12 @@ SECTIONS = [
    ({"intrusion": "drifting", "surface": "sphere"}, "drifting &middot; DC on the null"),
    ({"intrusion": "roughened", "surface": "torus"}, "roughened &middot; the word says grain")],
   "The prediction reasoned that a zero-frequency band changes a picture least per metre &mdash; "
-  "eroded against drifting. Measured, the closest pair is <b>formula against eroded</b> at 1.39%: the "
-  "HIGH band is what this camera cannot resolve. Sub-pixel grain reads as no grain, which is the "
-  "wave-13 rasteriser limit arriving from the other side &mdash; and it means the family's "
-  "<em>eroded</em>, from a museum distance, is <em>formula</em>."),
+  "eroded against drifting, on the sphere. Ranked <b>#3 of 15</b> within that surface. The closest "
+  "pair is <b>formula against roughened</b> at 1.45%, with formula against eroded next at 1.69% "
+  "&mdash; so the three tightest pairs on the sphere are all <em>formula against a band</em>, and the "
+  "two that beat the prediction are the HIGH band and the mid-stochastic one. Sub-pixel grain reads "
+  "as no grain: the wave-13 rasteriser limit arriving from the other side, and it means the family's "
+  "<em>eroded</em> and <em>roughened</em>, from a museum distance, are both <em>formula</em>. <span class=\"hint\">Corrected 15 Aug 2026: first published as “formula against eroded at 1.39%, #4 of 45”, which pooled all three surfaces into one ranking. The prediction named the sphere; score_wave now ranks within the context a prediction names.</span>"),
 
  ("readout_bench", "readout &middot; 8 members &middot; 7 share the vocabulary character for character",
   "How a value is shown is a claim about how well it is known.",

@@ -85,11 +85,14 @@ SECTIONS = [
    ({"habit": "fanned", "reading": "plant"}, "fanned"),
    ({"habit": "spiral", "reading": "plant"}, "spiral &middot; a fan in a mirror, edge-on"),
    ({"habit": "whorled", "reading": "roll"}, "whorled &middot; roll &middot; decussate")],
-  "Predicted planar against fanned; the closest pair is planar against <b>spiral</b>, #3 of 18. The "
-  "builder wrote before capture that spiral's first-fork planes are 22% wide from the sweep "
-  "standpoint &mdash; and its plant frame is half the width of planar's (121 px against 228). That "
-  "is the anamorphic trap on record since wave 11, and the closest-pair claim inherits it: run "
-  "probe_anamorphic before believing anything about spiral."),
+  "Predicted planar against fanned, in the plant reading; ranked <b>#4 of 6</b> there, with the "
+  "closest pair <b>whorled against spiral</b> at 5.42%. And then the probe was run, and the claim "
+  "did not survive it. From five standpoints the closest pair is planar/fanned twice, fanned/spiral "
+  "twice and fanned/whorled once &mdash; <b>five viewings, three different answers, and the six pairs "
+  "span only 5.4% to 7.2% of frame</b>. This axis has no stable closest pair, and any single number "
+  "for it is a fact about where the camera stood. The builder said so before capture: spiral's "
+  "first-fork planes are 22% wide from the sweep standpoint and its plant frame is half the width of "
+  "planar's, 121 px against 228. <span class=\"hint\">Corrected 15 Aug 2026: first published as “planar against spiral, #3 of 18”, which pooled all three readings &mdash; the six <em>crown</em> pairs, which draw 171 tips and almost no ink, held the whole top of that ladder.</span>"),
 
  ("handed_pair", "handedness &middot; 3 members &middot; 2 vocabularies &middot; and they disagree about right",
   "Handedness is a convention, and the family did not agree on which one.",
