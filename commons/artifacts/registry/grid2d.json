@@ -4,20 +4,21 @@
 		"grid2d": {
 			"dna": {
 				"axes": {
-					"algorithm": [
-						"GAME_OF_LIFE",
-						"SEEDS",
-						"BRIANS_BRAIN",
-						"RULE30",
-						"RULE110",
-						"RULE90",
-						"BFS_FLOOD",
-						"DFS_MAZE",
-						"WIRE_WORLD",
-						"LANGTONS_ANT",
-						"SLOW",
-						"RANDOM"
-					]
+				 "algorithm": [
+				  "GAME_OF_LIFE",
+				  "SEEDS",
+				  "BRIANS_BRAIN",
+				  "RULE30",
+				  "RULE110",
+				  "RULE90",
+				  "BFS_FLOOD",
+				  "DFS_MAZE",
+				  "WIRE_WORLD",
+				  "LANGTONS_ANT",
+				  "DISCO",
+				  "SLOW",
+				  "RANDOM"
+				 ]
 				}
 			},
 			"name": "Grid2D Substrate",

@@ -274,8 +274,19 @@ def code_values(src: str, axis: str) -> tuple[list[str] | None, str]:
         em = re.search(r"^\s*enum\s+" + re.escape(m.group(1)) + r"\s*\{([^}]*)\}",
                        src, re.M | re.S)
         if em:
+            # STRIP COMMENTS BEFORE SPLITTING ON COMMAS. A comment inside the enum body can
+            # contain a comma, and then the split runs through it and glues the next member
+            # onto the comment's tail — which the identifier filter below then throws away,
+            # silently. grid2d's Algorithm enum has thirteen members; the line above DISCO
+            # reads "# array_tutorial sequence cartridges - same array, three cadences", so
+            # DISCO arrived as "three cadences\n\tDISCO" and was dropped. The registry then
+            # declared the same twelve the deriver found and THE GATE WENT GREEN, because a
+            # gate can only catch a declaration that disagrees with its deriver. When both are
+            # wrong the same way it reports ok on a false declaration — the same shape of
+            # fault this programme keeps finding in its own instruments.
+            body = re.sub(r"#[^\n]*", "", em.group(1))
             names = [x.strip().split("=")[0].strip()
-                     for x in em.group(1).split(",") if x.strip()]
+                     for x in body.split(",") if x.strip()]
             names = [n for n in names if re.fullmatch(r"[A-Za-z_]\w*", n or "")]
             if names:
                 return names, "typed enum %s" % m.group(1)
