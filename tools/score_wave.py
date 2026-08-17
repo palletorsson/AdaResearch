@@ -104,7 +104,50 @@ def main() -> int:
             return False
         removed = [r for r in same if _is_null(r)]
         same = [r for r in same if not _is_null(r)]
-        same.sort(key=lambda r: r["changed_pct"])
+        # A RANK INHERITS ITS METRIC, the third thing after its denominator and its pool.
+        # `changed_pct` COUNTS pixels differing by more than a threshold; it does not measure HOW
+        # MUCH they differ. On an axis that changes only colour inside a fixed geometry, the set of
+        # pixels that move is the same set for every pair, so the count is CONSTANT and the ranking
+        # is not a ranking at all. ground_layer measured all six of its priming pairs at 12.994% —
+        # equal to three decimals — and the arbitrary sort order put its prediction 5th of 6, a
+        # MISS. Under the metric the prediction actually named (mean |luma delta| over the frame,
+        # written into dna.predicted_degeneracy.metric) the same six pairs spread 1.9% to 8.7% and
+        # the predicted pair is 1st, at 1.919% against a predicted 1.797%. So: honour a declared
+        # magnitude metric, and refuse to report a rank at all when the chosen metric ties.
+        want_mag = any(w in str(pd.get("metric", "")).lower()
+                       for w in ("luma", "luminance", "mean absolute", "mean |", "grey", "gray"))
+        metric_name = "changed_pct (count)"
+        if want_mag and same:
+            try:
+                from PIL import Image, ImageChops
+                gd = ENC / "public" / slug
+
+                def _png(side: dict):
+                    want = {f"{k}-{v}" for k, v in side.items()}
+                    for h in sorted(gd.glob(f"{tok}__*.png")):
+                        if want <= set(h.stem.split("__")[1:]):
+                            return h
+                    return None
+
+                for r in same:
+                    fa, fb = _png(r["a"]), _png(r["b"])
+                    if not (fa and fb):
+                        raise RuntimeError("frame missing")
+                    da = list(ImageChops.difference(Image.open(fa).convert("L"),
+                                                    Image.open(fb).convert("L")).getdata())
+                    r["_mag"] = 100.0 * (sum(da) / len(da)) / 255.0
+                metric_name = "mean |luma delta| (magnitude, as the prediction declared)"
+                print(f"{'':18}  (ranked on {metric_name})")
+            except Exception as ex:
+                print(f"{'':18}  (declared a magnitude metric but could not compute it: {ex};"
+                      f" falling back to changed_pct)")
+                for r in same:
+                    r.pop("_mag", None)
+        key = (lambda r: r.get("_mag", r["changed_pct"]))
+        same.sort(key=key)
+        if len(same) > 1 and (key(same[-1]) - key(same[0])) < 1e-6:
+            print(f"{'':18}  !! every pair measures {key(same[0]):.3f} on {metric_name} — this "
+                  f"metric CANNOT rank this axis; the reported rank would be sort order, not a result")
         if removed:
             print(f"{'':18}  ({len(removed)} designed-null pair(s) set aside before ranking)")
         idx = next((i for i,r in enumerate(same)
@@ -133,8 +176,10 @@ def main() -> int:
         if idx is not None:
             c = same[0]
             out[tok] = dict(pred=pd.get("percent"), pair=f"{va} vs {vb}", axis=axis,
-                rank=idx+1, n=len(same), hit=(idx==0), meas=round(same[idx]["changed_pct"],2),
-                closest=f'{c["a"][axis]} vs {c["b"][axis]}', closest_pct=round(c["changed_pct"],2))
+                rank=idx+1, n=len(same), hit=(idx==0),
+                meas=round(same[idx].get("_mag", same[idx]["changed_pct"]),2), metric=metric_name,
+                closest=f'{c["a"][axis]} vs {c["b"][axis]}',
+                closest_pct=round(c.get("_mag", c["changed_pct"]),2))
             print(f"{tok:<18}{va+' vs '+vb:<28}#{idx+1:>2}/{len(same):<3} "
                   f"{'HIT ' if idx==0 else 'MISS'}  "
                   f"{out[tok]['closest']:<22}{out[tok]['meas']:>6}")
@@ -146,6 +191,27 @@ def main() -> int:
         for nd in (pd.get("designed_nulls") or []) + ((e.get("dna") or {}).get("designed_nulls") or []):
             a, b, cap = nd.get("a") or {}, nd.get("b") or {}, float(nd.get("under_percent") or 0.3)
             fx = ((e.get("dna") or {}).get("fixture") or {})
+            # A NULL CONDITIONED ON A PINNED PARAMETER WAS NEVER TESTED, AND CALLING IT BROKEN IS
+            # A LIE ABOUT THE ARTIFACT. Fixture keys are dropped from the match below so a builder
+            # need not restate what the fixture already pins — but if the null asks for a
+            # DIFFERENT value of a pinned key, dropping it silently rewrites the claim into one
+            # about the pinned value instead, and then measures that. temperament_table registered
+            # three nulls on `comma_gain` (at 1.0, 0.0 and 40.0) while dna.fixture pins it at 5.0:
+            # at gain 1.0 the comma branch IS the just branch and at 0.0 it IS the tempered branch,
+            # both true, and neither frame was ever rendered. Two came back BROKEN at ~4.9% and the
+            # third as "no such pair", which read as the first null failures since wave 14. They are
+            # UNTESTED. Same family as every other fault this programme has found in its own
+            # instruments: a confident verdict that is a fact about the harness.
+            conflict = {k: (fx[k], v) for k, v in list(a.items()) + list(b.items())
+                        if k in fx and str(fx[k]) != str(v)}
+            if conflict:
+                nulls.append(dict(a=a, b=b, under=cap, measured=None, held=None,
+                                  untested=True, conflict={k: {"pinned": p, "asked": q}
+                                                           for k, (p, q) in conflict.items()}))
+                for k, (p, q) in conflict.items():
+                    print(f"{'':18}  null {a} vs {b}: UNTESTED — dna.fixture pins "
+                          f"{k}={p}, the null is about {k}={q}; the sweep never rendered it")
+                continue
             def _match(row_side, want):
                 return all(str(row_side.get(k)) == str(v) for k, v in want.items() if k not in fx)
             hitrow = next((r for r in d["variants"]
