@@ -143,6 +143,33 @@ def check_map(name: str, entries: dict, hang: bool = False) -> list[str]:
     if configured == 0:
         faults.append(f"{name}: {len(placed)} placements, NONE configured — "
                       f"this is a default-only room, not a hang")
+
+    # IS THE WORK BIG ENOUGH TO BE A WORK? Added after wave 23 was WALKED. All six rooms
+    # validated clean on every rule above and every one of them renders its works as specks:
+    # measured against the hall's longest side, mixing_jar is 1.5%, ground_layer 2.0%,
+    # posture_bench 3.3%, remainder_box and constant_dispute 3.6%, recession_hall 5.3% — and in
+    # the captures the 5.3% room is the only one where the variants read at a glance. Grid cells
+    # are 1 m (GridSystem.cube_size), so a 0.40 m jar in a 27 m hall is exactly as small as it
+    # sounds. The builders worked from cell coordinates and never compared the artifact's
+    # measured body to the room's extent; nothing in the pipeline asked them to. This is the
+    # project's own "bodies, not gauges" correction arriving in a new form — the architecture is
+    # at human scale and the works are tabletop objects.
+    dims = ((d.get("map_info") or {}).get("dimensions") or {})
+    span = max(float(dims.get("width") or 0), float(dims.get("depth") or 0))
+    if hang and span:
+        for tok in sorted({c.split("#")[0].split(":")[0] for _, _, c in placed}):
+            aabb = ((entries.get(tok) or {}).get("measurements") or {}).get("aabb_size")
+            if not aabb:
+                continue
+            longest = max(float(aabb[0]), float(aabb[2]))
+            frac = longest / span
+            if frac < 0.03:
+                faults.append(
+                    f"{name}: {tok} is {longest:.2f} m across in a {span:.0f} m hall "
+                    f"({frac:.1%}) — at that ratio the works photograph as specks and the axis "
+                    f"is not legible from anywhere a visitor stands. Shrink the room, scale the "
+                    f"work (the placement syntax's 4th positional field is uniform_scale), or "
+                    f"give it a plinth (synthesis_stand).")
     # A ROOM THAT SETS ONE VALUE IS NOT WRONG — it is just not a hang. Museum_AAA_Featured_Pass
     # showing lambda_slider at `dispute` alone is a curator's choice, not a defect, and flagging
     # it as one made this checker report seven faults against maps that never claimed to vary
