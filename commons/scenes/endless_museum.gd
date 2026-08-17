@@ -142,6 +142,8 @@ var _next_z: float = 0.0
 var _seg_index: int = 0
 var _prev_w: int = -1             # width of the previous segment's tile (lobby seals the jump)
 var _first_key: String = ""       # --em-first=<key> rotates the dealing order
+var _first_chapter: String = ""   # --em-chapter=<seq> (or ada_run/em_control.json first_chapter): deal this CHAPTER first
+const EM_CONTROL := "res://ada_run/em_control.json"   # menu launches have no flags; this file speaks for them
 # ── THE WHITE CUBE GATE (2026-08-12) ─────────────────────────────────────────
 # OFF by default and gated twice, so a museum that never opted in is untouched:
 #   --em-white-cube          forces every segment of THIS RUN into the mode
@@ -324,6 +326,7 @@ func _ready() -> void:
 	_load_crowns()
 	_load_relations()
 	_load_pool()
+	_start_at_chapter()
 	# after the pool, because a plan naming an artifact the pool never built is
 	# a stale plan and the museum should be able to say so by name.
 	_load_plan()
@@ -428,6 +431,8 @@ func _parse_args() -> void:
 			_force_vr = true
 		elif a.begins_with("--em-first="):
 			_first_key = a.substr(11)
+		elif a.begins_with("--em-chapter="):
+			_first_chapter = a.substr(13)
 		elif a == "--em-white-cube":
 			_white_cube = true
 		elif a == "--em-wall-runs":
@@ -815,6 +820,29 @@ func _load_policy_pool(live: Dictionary, policy: String) -> bool:
 	print("[endless_museum] pool: ORDER POLICY `%s`, %d of %d alive (%d not map_ready/on disk); opens with %s" % [
 		policy, _pool.size(), rows.size(), skipped, String(_pool[0]["lookup"])])
 	return true
+
+## Start the walk at a CHAPTER (2026-08-17). The pool is circular, so this
+## only moves the cursor: the named chapter deals into segment 0 and the spine
+## continues from it and wraps. Two voices: --em-chapter=<seq> on the command
+## line, or `first_chapter` in ada_run/em_control.json for a menu launch that
+## has no flags (VR from the StagingVR picker). Gated: no flag, no file, no
+## change — the walk opens with the first artifact of the spine as before.
+func _start_at_chapter() -> void:
+	if _first_chapter == "" and FileAccess.file_exists(EM_CONTROL):
+		var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(EM_CONTROL))
+		if parsed is Dictionary:
+			_first_chapter = String((parsed as Dictionary).get("first_chapter", ""))
+	if _first_chapter == "" or _pool.is_empty():
+		return
+	for i in range(_pool.size()):
+		if String((_pool[i] as Dictionary).get("sequence", "")) == _first_chapter:
+			_pool_i = i
+			print("[endless_museum] the walk opens at chapter %s (pool row %d of %d) — %s" % [
+				_first_chapter, i, _pool.size(),
+				"--em-chapter" if OS.get_cmdline_user_args().has("--em-chapter=" + _first_chapter) else EM_CONTROL])
+			return
+	push_warning("endless_museum: first chapter %s is not in the pool — opening as before" % _first_chapter)
+
 
 ## The curriculum as the dealing order. Reads the generated manifest and keeps
 ## only artifacts the registry says are alive, in manifest order — so the first
@@ -2274,6 +2302,24 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 	var scene_of: Dictionary = {}
 	for e in _pool:
 		scene_of[String((e as Dictionary).get("lookup", ""))] = 			String((e as Dictionary).get("scene", ""))
+
+	# HERO-WALK ROWS reach OUT of the chapter by definition (a branch is a
+	# token of ANOTHER node, or one the hand named), so the pool — this
+	# chapter's curriculum list — cannot carry them; every alive artifact is
+	# in _live. A row carrying relation.walk_kind resolves from _live when the
+	# pool is silent. Gated on walk_kind: a plan without a hero walk resolves
+	# exactly as before, and a stale plan is still caught by name.
+	var out_of_pool: int = 0
+	for row_v0 in rows:
+		var row0: Dictionary = row_v0 as Dictionary
+		var t0 := String(row0.get("token", ""))
+		if scene_of.has(t0) or t0 == "" or not _live.has(t0):
+			continue
+		if String(((row0.get("relation", {}) as Dictionary).get("walk_kind", ""))) != "":
+			scene_of[t0] = String((_live[t0] as Dictionary).get("scene", ""))
+			out_of_pool += 1
+	if out_of_pool > 0:
+		print("[em-plan] %s: %d hero-walk row(s) resolved from outside the chapter's pool" % [chapter, out_of_pool])
 
 	var placed: int = 0
 	var exterior: int = 0
