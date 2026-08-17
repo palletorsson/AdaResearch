@@ -1693,6 +1693,17 @@ func _build_segment() -> void:
 	# corridor breathes building - court - building instead of building followed
 	# by 278 m of court. A plan without court rows leaves the queue empty and
 	# adds zero depth and zero nodes: the gate.
+	# ── THE FORECOURT (2026-08-17). Porch/outside rows the negotiator placed
+	# on the apron: N-side ones go INTO the vestibule the walker just crossed
+	# (its 4 m already exist; x kept, depth folded to rows 1..2); S/E/W ones
+	# go onto an AFTER-PORCH — a 3 m strip laid right after the tile, before
+	# any court, walkable edge to edge, x kept. Small bodies (median 1.1 m,
+	# none over 8 m or 4 m tall on this corpus), stamped through _stamp so
+	# the seal, records and rulings all see them. Gated: no forecourt rows,
+	# no strip, no nodes, zero depth.
+	var fore_rows: Array = deal.get("forecourt", []) if deal is Dictionary else []
+	var porch_depth: int = _build_forecourt(seg, solid, w, tile.size(), zbase, fore_rows,
+		wall_col, m_wall, m_deck)
 	var court_rows: Array = deal.get("courts", []) if deal is Dictionary else []
 	for cr in court_rows:
 		_court_queue.append(cr)
@@ -1726,12 +1737,12 @@ func _build_segment() -> void:
 		print("[em-court] joint after seg %d: %d court(s), %d m deep, %s%s" % [
 			_seg_index, joint.size(), joint_depth, str(by_ch),
 			(", %d queued" % _court_queue.size()) if not _court_queue.is_empty() else ""])
-		court_depth = _build_courtyard(seg, solid, w, tile.size(), zbase,
+		court_depth = _build_courtyard(seg, solid, w, tile.size() + porch_depth, zbase,
 			joint, wall_col, m_wall)
 	_flush_boxes(seg)
 	_batch_open = false
-	_segments.append({"node": seg, "z0": _next_z, "z1": _next_z + float(h) + float(VESTIBULE_H) + float(court_depth), "index": _seg_index, "w": w})
-	_next_z += float(h) + float(VESTIBULE_H) + float(court_depth)
+	_segments.append({"node": seg, "z0": _next_z, "z1": _next_z + float(h) + float(VESTIBULE_H) + float(porch_depth) + float(court_depth), "index": _seg_index, "w": w})
+	_next_z += float(h) + float(VESTIBULE_H) + float(porch_depth) + float(court_depth)
 	_seg_index += 1
 	_prev_w = w
 	_auto_replan = true
@@ -1847,6 +1858,86 @@ func _load_plan() -> void:
 ## is clamped to the corridor's in v1 and the clamp is printed, per the
 ## no-silent-caps rule. The whole court walks; _seal_cells carves the resident
 ## out, so the apron ring is derived, not stored — one owner.
+## The walk lane through every forecourt ground, in columns, kept clear by
+## construction — wide enough for the 0.32 m capsule with a body either side.
+const FORE_LANE := 5
+
+## The forecourt builder. Returns the after-porch depth it added (0 if none).
+func _build_forecourt(seg: Node3D, solid: StaticBody3D, w: int, tile_h: int,
+		zbase: int, rows: Array, wall_col: Color, m_wall: Material, m_deck: Material) -> int:
+	if rows.is_empty():
+		return 0
+	var front: Array = []
+	var back: Array = []
+	for r_v in rows:
+		var r: Dictionary = r_v
+		if int(r.get("z", 0)) < 0:
+			front.append(r)
+		else:
+			back.append(r)
+	var stamped: int = 0
+	var lane_refused: int = 0
+	# THE WALK LANE IS RESERVED BY CONSTRUCTION. The first build stamped 57
+	# forecourt bodies and the autopilot found no route at z 35: the seal's
+	# severance test judged each body against ground whose far side did not
+	# exist yet, and a lane that survives on paper is not one a 0.32 m
+	# capsule can thread through seven bodies. So the centre FORE_LANE
+	# columns of both grounds are simply never offered — a forecourt is the
+	# apron BESIDE the door, not on the threshold. Rows that fall in the lane
+	# are refused with a count, never shifted (shifting would be a second
+	# placement author).
+	var lane_lo: int = int(w / 2.0) - FORE_LANE / 2
+	var lane_hi: int = lane_lo + FORE_LANE
+	# N-side rows -> the vestibule. Rows 1..2 of the lobby (row 0 is the seal
+	# strip against the previous building, row 3 the threshold). Depth is the
+	# row's distance outside the tile, folded into that band; x is clamped to
+	# the lobby's interior columns.
+	for r_v in front:
+		var r: Dictionary = r_v
+		var vx: int = clampi(int(r.get("x", 1)), 1, LOBBY_W - 2)
+		if vx >= lane_lo and vx < lane_hi:
+			lane_refused += 1
+			continue
+		var vz: int = 1 + (absi(int(r.get("z", -1))) - 1) % 2
+		var cell: Dictionary = {"x": vx, "y": vz, "rank": 2, "top": 0.0}
+		if _stamp(seg, String(r.get("scene", "")), String(r.get("token", "")),
+				cell, zbase, 1, {}, false, 0.0, float(r.get("rotation", 0.0))):
+			stamped += 1
+	# S/E/W rows -> the after-porch: a 3 m strip after the tile, floor edge to
+	# edge, low parapets on the sides so it reads as ground outside the room
+	# rather than a corridor. Only laid when there is something to stand on it.
+	var porch_d: int = 0
+	if not back.is_empty():
+		porch_d = 3
+		var z0: int = VESTIBULE_H + tile_h
+		_box(seg, Vector3(w / 2.0, -0.1, z0 + porch_d / 2.0),
+			Vector3(w, 0.2, porch_d), Color(0.15, 0.155, 0.15), m_deck)
+		if _vr:
+			_add_col(solid, Vector3(w / 2.0, -0.1, z0 + porch_d / 2.0), Vector3(w, 0.2, porch_d))
+		for zz in range(z0, z0 + porch_d):
+			for x in range(1, w - 1):
+				_walk_cells[Vector2i(x, zbase + zz)] = true
+			for sx in [0, w - 1]:
+				_box(seg, Vector3(sx + 0.5, 0.35, zz + 0.5), Vector3(1, 0.7, 1), wall_col, m_wall)
+				_add_col(solid, Vector3(sx + 0.5, 0.35, zz + 0.5), Vector3(1, 0.7, 1))
+		for r_v in back:
+			var r: Dictionary = r_v
+			var px: int = clampi(int(r.get("x", 1)), 1, w - 2)
+			if px >= lane_lo and px < lane_hi:
+				lane_refused += 1
+				continue
+			var pz: int = z0 + clampi(int(r.get("z", tile_h)) - tile_h, 0, porch_d - 1)
+			var cell: Dictionary = {"x": px, "y": pz, "rank": 2, "top": 0.0}
+			if _stamp(seg, String(r.get("scene", "")), String(r.get("token", "")),
+					cell, zbase, 1, {}, false, 0.0, float(r.get("rotation", 0.0))):
+				stamped += 1
+	_deal_stats["forecourt"] = int(_deal_stats.get("forecourt", 0)) + stamped
+	print("[em-forecourt] %d of %d porch/outside rows stamped (%d vestibule, %d after-porch%s; %d refused for the walk lane)"
+		% [stamped, rows.size(), front.size(), back.size(),
+		   (", %d m strip" % porch_d) if porch_d > 0 else "", lane_refused])
+	return porch_d
+
+
 func _build_courtyard(seg: Node3D, solid: StaticBody3D, w: int, tile_h: int,
 		zbase: int, courts: Array, wall_col: Color, m_wall: Material) -> int:
 	var m_deck: Material = _sm("deck")
@@ -2061,6 +2152,7 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 	var missing: Array = []
 	var off_tile: int = 0
 	var courts: Array = []
+	var forecourt: Array = []   # porch/outside rows, stamped on vestibule + joint ground
 	for row_v in rows:
 		var row: Dictionary = row_v as Dictionary
 		var venue := String(row.get("venue", ""))
@@ -2080,6 +2172,25 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 				"rotation": float(row.get("rotation", 0.0)),
 				"venue": venue,
 				"chapter": String(entry.get("sequence", ""))})
+			continue
+		if venue == "porch" or venue == "outside":
+			# A FORECOURT resident (2026-08-17, Palle: "build the porch/outside
+			# placements too"). The negotiator put it on the apron in front of
+			# (N) or behind/beside (S/E/W) the building. In the endless museum
+			# those grounds ARE the vestibule and the joint, so the row is
+			# collected like a court resident and stamped onto forecourt ground
+			# once _build_segment has laid it. Its negotiated x is kept; its
+			# depth from the seam is the row's distance outside the tile.
+			var ftok := String(row.get("token", ""))
+			var fscene := String(scene_of.get(ftok, ""))
+			if fscene == "":
+				missing.append(ftok)
+				continue
+			var ftc: Array = row.get("tile_cell", [0, 0])
+			forecourt.append({"token": ftok, "scene": fscene,
+				"x": int(ftc[0]), "z": int(ftc[1]),
+				"rotation": float(row.get("rotation", 0.0)),
+				"venue": venue, "chapter": String(entry.get("sequence", ""))})
 			continue
 		if venue != "interior":
 			exterior += 1
@@ -2203,7 +2314,7 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 		"max_objects": rows.size(), "class": "planned",
 		"budget": {}, "wall_features_max": -1, "fill_walls": true,
 		"from_plan": true, "exterior_unhosted": exterior,
-		"courts": courts}
+		"courts": courts, "forecourt": forecourt}
 
 
 ## Step the dealing cursor past every remaining entry of the chapter it is
