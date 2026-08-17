@@ -85,7 +85,8 @@ def hero_walk(chapter: str, trunk: dict[str, Any] | None = None) -> dict[str, An
                 n_derived += 1
             seen.add(tok)
             cast.append({"lookup": tok, "walk_kind": kind, "why": b.get("why", ""),
-                         "provenance": b.get("provenance", "derived"), "via": b.get("via", "")})
+                         "provenance": b.get("provenance", "derived"), "via": b.get("via", ""),
+                         "space": b.get("space", "wall")})
     # the negotiator places a token once; a second role is carried as the
     # row's `also` so the plan (and the room) can say the hero is ALSO the
     # antithesis, without dealing it twice

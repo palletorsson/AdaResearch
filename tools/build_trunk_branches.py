@@ -44,6 +44,12 @@ PLAN = REPO / "ada_run" / "em_plan.json"
 REGISTRY = REPO / "commons" / "artifacts" / "registry"
 
 KINDS = ["extends", "edge", "contradicts", "queers", "synthesizes", "varies"]
+#: how much SPACE a branch asks of the corridor. wall = a remark on the node
+#: (label / hung showing / mounted body on the corridor's own wall); alcove =
+#: floor but not distance (rung 1's bay, opened off the corridor); room = a
+#: side room off the enfilade, entered, threshold label = the reading. Derived
+#: branches default to wall; the hand raises it.
+SPACES = ["wall", "alcove", "room"]
 
 
 def load(p: Path):
@@ -102,7 +108,7 @@ def derive() -> dict:
             return
         seen.add(key)
         branches.append({"anchor": anchor, "token": token, "kind": kind, "why": why,
-                         "via": via, "provenance": "derived"})
+                         "via": via, "provenance": "derived", "space": "wall"})
 
     # extends: named / family relations from a node's tokens to tokens NOT of the node
     for n in trunk_names:
@@ -170,6 +176,7 @@ def main() -> int:
                     "NEVER derived — they are readings, authored on /trunk."),
         "generated": datetime.now().isoformat(timespec="seconds"),
         "kinds": KINDS,
+        "spaces": SPACES,
         "trunk": d["trunk"],
         "branches": derived + hand,
         "dropped": sorted([list(x) for x in hand_drops]),

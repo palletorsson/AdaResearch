@@ -161,6 +161,7 @@ def run_sequence(seq: str, museum: str, rows: int, relations: int = 2,
             walk_kind_of[tok] = r["walk_kind"]
             cast_context[tok]["walk_kind"] = r["walk_kind"]
             cast_context[tok]["walk_why"] = r.get("why", "")
+            cast_context[tok]["walk_space"] = r.get("space", "wall")   # wall | alcove | room
         print(f"  {seq:24s} HERO WALK — {walk['why']}")
     if cast_cap > 0:
         cast = cast[:cast_cap]
