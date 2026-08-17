@@ -173,9 +173,10 @@ add: %s  (%d/%d) — ENTER places it 2.5 m ahead" % [
 				kd.to_upper(), String(r.get("token", "?")), String(r.get("chapter", "?")),
 				" · Q/R turn" if kd == "furniture" else ""]
 		else:
-			line2 = "\nselected: %s  cell %s  rot %.0f  (%s)" % [
+			line2 = "\nselected: %s  cell %s  rot %.0f  (%s)%s" % [
 				String(r.get("token", "?")), str(r.get("tile_cell", [])),
-				float(r.get("rotation", 0.0)), String(r.get("chapter", "?"))]
+				float(r.get("rotation", 0.0)), String(r.get("chapter", "?")),
+				("  · walk: " + String(r.get("walk_kind"))) if r.has("walk_kind") else ""]
 	var pend := overrides.size()
 	return head + line2 + ("\noverrides: %d%s" % [pend, "  *unsaved*" if dirty else ""]
 		if pend > 0 or dirty else "")

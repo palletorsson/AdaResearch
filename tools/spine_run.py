@@ -52,7 +52,9 @@ sys.path.insert(0, str(REPO / "tools"))
 
 from emit_dressing_room import ROOMS_DIR, is_authored, staged
 from exhibition_brief import spine_order
-from export_museum_plan import APRON, brief_cast, plan_museum, spine_anchors
+from export_museum_plan import (APRON, brief_context, brief_stage, plan_museum,
+                                spine_anchors)
+from hero_walk import hero_walk
 from spatial_floorplan import PATTERNS, from_museum
 from spatial_negotiation import Occupancy, hang_run, run as negotiate_run
 
@@ -134,7 +136,32 @@ def _reason_key(why: str) -> str:
 def run_sequence(seq: str, museum: str, rows: int, relations: int = 2,
                  cast_cap: int = 0) -> dict[str, Any]:
     anchors = spine_anchors(0, seq)
-    cast = brief_cast(anchors, relations)
+    brief = brief_stage(anchors, relations)
+    cast = list(brief["cast"])
+    cast_context = brief_context(brief)
+    # THE HERO'S WALK (2026-08-17). If the trunk names a hero for this chapter
+    # AND the hand has authored at least one branch on it, the cast is the
+    # hero + its branches in kind order — thesis, field, context, edge,
+    # antithesis, the queer possibility, synthesis — each body carrying its
+    # walk_kind into the plan. No hand branch: the chapter builds from the
+    # spine list exactly as before. The reading is the switch, on purpose.
+    walk = hero_walk(seq)
+    walk_kind_of: dict[str, str] = {}
+    if walk:
+        cast = list(walk["cast"])
+        for r in walk["rows"]:
+            tok = r["lookup"]
+            cast_context.setdefault(tok, {})
+            if tok in walk_kind_of:
+                # a second role for the same body (the hero can be its own
+                # antithesis): the first kind stands, the rest ride as `also`
+                cast_context[tok].setdefault("walk_also", []).append(
+                    {"kind": r["walk_kind"], "why": r.get("why", "")})
+                continue
+            walk_kind_of[tok] = r["walk_kind"]
+            cast_context[tok]["walk_kind"] = r["walk_kind"]
+            cast_context[tok]["walk_why"] = r.get("why", "")
+        print(f"  {seq:24s} HERO WALK — {walk['why']}")
     if cast_cap > 0:
         cast = cast[:cast_cap]
 
@@ -183,8 +210,11 @@ def run_sequence(seq: str, museum: str, rows: int, relations: int = 2,
         "museum": museum,
         "rows": rows,
         "anchors": len(anchors),
+        "anchor_tokens": anchors,
         "no_brief": rows - len(anchors),
         "offered": len(cast),
+        "hero_walk": {"hero": walk["hero"], "hand_branches": walk["hand_branches"],
+                      "kinds": walk_kind_of} if walk else None,
         "placed": len(acc),
         "interior": len(interior),
         "rejected": len(rej),
@@ -199,6 +229,7 @@ def run_sequence(seq: str, museum: str, rows: int, relations: int = 2,
         "lineages": len(runs),
         "lineages_walled": sum(1 for r in runs if r["housed"]),
         "cast": cast,
+        "cast_context": cast_context,
         "interior_share": round(len(interior) / max(1, len(cast)), 4),
         # HOUSED means the building actually contains the chapter. A porch is
         # not a room: `endless_museum.gd` has no apron, so an exterior placement
@@ -291,7 +322,8 @@ def write_plan(result: dict[str, Any], out: Path) -> dict[str, Any]:
         # EVERY chapter is planned, displaced or not. The v1 loop `continue`d
         # here before plan_museum ever ran, so a displaced chapter's cast was
         # not merely unfindable — it was never negotiated into its building.
-        m = plan_museum(key, list(r["cast"]))
+        m = plan_museum(key, list(r["cast"]), list(r.get("anchor_tokens", [])),
+                        dict(r.get("cast_context", {})))
         m["sequence"] = r["sequence"]
         plans.append({"museum": key, **m})
         if key in owner:
@@ -453,8 +485,11 @@ DEAL_RE = re.compile(
 
 
 STAMP_RE = re.compile(
-    r"\[em-plan\] (\S+): stamped (\d+) interior, (\d+) exterior not hostable"
-    r"(?:, (\d+) off-tile)?(?:, (\d+) not in pool)?")
+    r"\[em-plan\] (\S+): stamped (\d+) interior"
+    r"(?: \+ (\d+) DNA wall variants in (\d+) runs)?"
+    r", (\d+) exterior not hostable"
+    r"(?:, (\d+) off-tile)?(?:, (\d+) not in pool)?"
+    r"(?:, \d+ to courtyard)?(?:, (\d+) wall refusals)?")
 
 
 def capture(museums: list[str], out: Path, root: Path | None = None) -> dict[str, Any]:
@@ -492,9 +527,12 @@ def capture(museums: list[str], out: Path, root: Path | None = None) -> dict[str
                "seconds": round((datetime.now() - t0).total_seconds(), 1),
                "bytes": shot.stat().st_size if shot.exists() else 0,
                "stamped": int(m.group(2)) if m else None,
-               "exterior": int(m.group(3)) if m else None,
-               "off_tile": int(m.group(4) or 0) if m else None,
-               "not_in_pool": int(m.group(5) or 0) if m else None,
+               "dna_variants": int(m.group(3) or 0) if m else None,
+               "dna_runs": int(m.group(4) or 0) if m else None,
+               "exterior": int(m.group(5)) if m else None,
+               "off_tile": int(m.group(6) or 0) if m else None,
+               "not_in_pool": int(m.group(7) or 0) if m else None,
+               "wall_refusals": int(m.group(8) or 0) if m else None,
                "standpoint": shotline}
         rows.append(row)
         print(f"  {key:38s} stamped {row['stamped']}  exterior {row['exterior']}"

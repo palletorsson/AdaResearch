@@ -1767,6 +1767,9 @@ func _build_segment() -> void:
 	# is a wall, a guest is whether the pool is wider than the spine.
 	seg.set_meta("em_chapter", seg_seq)
 	_apply_hand_adds(seg, zbase, seg_seq)
+	var wk_d: Dictionary = deal.get("walk_kinds", {}) if deal is Dictionary else {}
+	if not wk_d.is_empty():
+		print("[endless_museum]   HERO WALK in %s: %s" % [seg_seq, str(wk_d)])
 	print("[endless_museum] seg %d = %s (%s) chapter=%s placed %d/%d (%d leads, %d relatives, %d repeats, %d guests) + %d plinths + %d props, z %.0f..%.0f, lights %d" % [
 		_seg_index - 1, spec["key"], spec["museum"], seg_seq if seg_seq != "" else "-",
 		placed, int(deal.get("max_objects", 0)), int(deal.get("leads", 0)),
@@ -2163,6 +2166,7 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 	var off_tile: int = 0
 	var courts: Array = []
 	var forecourt: Array = []   # porch/outside rows, stamped on vestibule + joint ground
+	var walk_kinds: Dictionary = {}   # hero-walk roles stamped in this chapter
 	for row_v in rows:
 		var row: Dictionary = row_v as Dictionary
 		var venue := String(row.get("venue", ""))
@@ -2294,6 +2298,17 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 		if _stamp(seg, scene, tok, cell, zbase, 1, {}, false, 0.0,
 				yaw_override):
 			placed += 1
+			# THE HERO'S WALK: a row planned from the trunk carries its role
+			# (relation.walk_kind: hero / extends / varies / edge / contradicts /
+			# queers / synthesizes). The museum records it on the placement and
+			# counts it, so the banner can say what kind of walk this segment IS.
+			var wk := String(((row.get("relation", {}) as Dictionary).get("walk_kind", "")))
+			if wk != "":
+				walk_kinds[wk] = int(walk_kinds.get(wk, 0)) + 1
+				if not _edit_records.is_empty():
+					var last: Dictionary = _edit_records[_edit_records.size() - 1]
+					if String(last.get("token", "")) == tok:
+						last["walk_kind"] = wk
 
 	var idle: int = 0
 	for ov_v in _edit_overrides:
@@ -2324,7 +2339,7 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 		"max_objects": rows.size(), "class": "planned",
 		"budget": {}, "wall_features_max": -1, "fill_walls": true,
 		"from_plan": true, "exterior_unhosted": exterior,
-		"courts": courts, "forecourt": forecourt}
+		"courts": courts, "forecourt": forecourt, "walk_kinds": walk_kinds}
 
 
 ## Step the dealing cursor past every remaining entry of the chapter it is
