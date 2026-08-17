@@ -5,6 +5,37 @@
 
 Updated 2026-08-15.
 
+## 08-17 (afternoon) — the chain gets its interfaces
+
+Palle: "review what tools we have… what are the best interfaces to edit and
+have an overview?" then "can each part have a visualized editor?" Survey
+found ~20 encyclopedia routes each viewing ONE stage, none the chain, and
+the two real editors in Godot. Three pages closed the gap (encyclopedia
+`594c23cc`, `bdb0942c`, `d7236640`, `4dc5318e`; museum `081e21970`):
+
+- **/museum-pipeline** — seven stages, each with live count + file MTIME
+  (order · contract · plan · walk · rulings · gates · evidence), freshness
+  warnings, per-chapter yield, and a TOKEN TRACE (`?token=X` → order
+  position → placement or refusal with reason → rulings → world site →
+  iterations). Reads only what each stage already writes.
+- **/spine-order-editor** — the dealing order, draggable within chapters,
+  × drops from the deal; SAVE writes `commons/data/spine_artifact_order_hand
+  .json` (provenance hand, derived-from stamp; the generated file NEVER
+  touched; RESET deletes it). The museum reads the hand file FIRST
+  (`SPINE_ORDER_HAND`, `--em-order-file` still overrides both) and says so
+  in the log. Round-tripped live: swap+drop → museum dealt 798 → reset.
+- **/museum-plan-view** — one chapter drawn: tile ranks, vestibule,
+  after-porch with its lane, court joint with each court's dims/access,
+  every body at its cell (venue colour, rotation tick), bays, the hand's
+  rulings as arrows. Read-only; hover → row, click → trace.
+- **tools/run_em_gates.py** — runs the 12 gates (one Godot at a time),
+  records verdict/HEAD to `ada_run/gates.json`; the pipeline page reads it.
+  12/12 green on the combined tree in 2.5 min (`4491cf667`).
+
+Still true: the OTHER agent's Aug-16 DNA-wall diff (+400 assembler, +212
+exporter, +28 spine_run, +14 negotiator) remains uncommitted; my forecourt
+and hand-order edits were committed apart by re-applying onto HEAD.
+
 ## 08-17 — the forecourt: porch/outside placements are built (UNCOMMITTED, rides the DNA-wall commit)
 
 Palle: "build the porch/outside placements too." 333 negotiated bodies sat on
