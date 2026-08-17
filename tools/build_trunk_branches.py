@@ -174,9 +174,11 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--node", default="")
     ap.add_argument("--show", action="store_true")
+    ap.add_argument("--out", default=str(OUT), help="trunk file to reseed (tests point this at a copy)")
     a = ap.parse_args()
+    out = Path(a.out)
 
-    prev = load(OUT) if OUT.exists() else {"branches": []}
+    prev = load(out) if out.exists() else {"branches": []}
     hand = [b for b in prev.get("branches", []) if b.get("provenance") == "hand"]
     hand_keys = {(b["anchor"], b["token"], b["kind"]) for b in hand}
     hand_drops = set(tuple(x) for x in prev.get("dropped", []))   # derived branches the hand dropped
@@ -215,11 +217,18 @@ def main() -> int:
         "branches": derived + hand,
         "dropped": sorted([list(x) for x in hand_drops]),
         "hand_heroes": hand_heroes,
+        # the INTAKE's queue (tools/trunk_intake.py): spoken candidates waiting on
+        # /trunk to be kept or dropped. Carried verbatim — never derived, never read
+        # by hero_walk or the museum until kept.
+        "pending": prev.get("pending", []),
+        "pending_dropped": prev.get("pending_dropped", []),
         "counts": {"trunk": len(d["trunk"]), "derived": len(derived), "hand": len(hand),
+                   "pending": len(prev.get("pending", [])),
                    "by_kind": {k: sum(1 for b in derived + hand if b["kind"] == k) for k in KINDS}},
     }
-    OUT.write_text(json.dumps(doc, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
-    print(f"trunk {len(d['trunk'])} nodes · branches {len(derived)} derived + {len(hand)} hand -> {OUT.relative_to(REPO)}")
+    out.write_text(json.dumps(doc, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
+    print(f"trunk {len(d['trunk'])} nodes · branches {len(derived)} derived + {len(hand)} hand · "
+          f"{len(doc['pending'])} pending -> {out}")
     print("  by kind:", doc["counts"]["by_kind"])
     if a.node:
         node = next((t for t in d["trunk"] if t["node"] == a.node), None)

@@ -1,7 +1,7 @@
 {
  "schema": "adaresearch.trunk_branches.v1",
  "_readme": "The trunk (curriculum in taxonomy order, with heroes) and its typed branches. Derived branches are refreshed by tools/build_trunk_branches.py; hand branches (provenance hand) and hand drops are kept verbatim. contradicts / queers are NEVER derived — they are readings, authored on /trunk.",
- "generated": "2026-08-17T17:03:56",
+ "generated": "2026-08-17T18:41:49",
  "kinds": [
   "extends",
   "edge",
@@ -15831,15 +15831,65 @@
  ],
  "dropped": [],
  "hand_heroes": {},
+ "pending": [
+  {
+   "id": "61f1317b57",
+   "anchor": "primitives",
+   "token": "grabbable_line",
+   "token_options": [
+    "grabbable_line",
+    "horizon_line",
+    "line",
+    "line_builder_3d",
+    "line_chalkboard",
+    "line_slack"
+   ],
+   "kind": "queers",
+   "space": "room",
+   "space_by": "heuristic",
+   "why": "a line is also always measure, a line in the sand.",
+   "cues": {
+    "node": "cue:line",
+    "kind": "is also"
+   },
+   "provenance": "spoken",
+   "at": "2026-08-17T18:44:21"
+  },
+  {
+   "id": "e0c2b8ed35",
+   "anchor": "primitives",
+   "token": "",
+   "token_options": [
+    "digital_materiality_glitch",
+    "digital_display_array",
+    "archimedean_tunnel",
+    "becoming_catalyst",
+    "catalyst_target",
+    "coincident_face"
+   ],
+   "kind": "contradicts",
+   "space": "room",
+   "space_by": "heuristic",
+   "why": "the digital is always crooked, but there is no original.",
+   "cues": {
+    "node": "sticky",
+    "kind": "no original"
+   },
+   "provenance": "spoken",
+   "at": "2026-08-17T18:44:21"
+  }
+ ],
+ "pending_dropped": [],
  "counts": {
   "trunk": 24,
   "derived": 1544,
   "hand": 1,
+  "pending": 2,
   "by_kind": {
    "extends": 744,
    "edge": 149,
    "contradicts": 0,
-   "queers": 0,
+   "queers": 1,
    "synthesizes": 170,
    "varies": 481
   }

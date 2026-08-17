@@ -35,6 +35,18 @@ Not yet wired: alcove → rung 1's bay ask; a book UI for the overturn.
 Nothing is a room until a hand writes a reading — noise's contradicts /
 queers on `/trunk`, then `spine_run.py spine --write-plan`, then walk.
 
+**The intake** (`tools/trunk_intake.py`, `/trunk` paste box, API ops
+`intake` / `keep` / `pending_drop`): readings arrive as SENTENCES ahead of
+any token (Palle's point → line → triangle stream), so a paragraph is split
+into clauses and each becomes a CANDIDATE — node from a spoken lexicon
+(sticky across the stream), token only when a real registry name word
+matched (else options), kind only when a cue fired (else blank), space by
+`guess_space` — provenance "spoken", held in `pending`, which the seeder
+carries and hero_walk / the museum never read. Keep → hand branch (via
+intake) or hero; drop → gone and stays gone on re-paste. On the fixture:
+27 clauses, 5 kinds left blank, 17 tokens named; `test_trunk_intake.py`.
+Two of Palle's line sentences wait on `/trunk` (primitives) as candidates.
+
 Blog: encyclopedia `/blog/2026-08-17-the-trunk-and-the-side-room`
 (the site 500'd for an hour on a literal newline in a `/trunk` template
 string — `5d46b06c`; TSX has the same trap as heredoc GDScript).
