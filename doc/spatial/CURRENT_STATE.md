@@ -5,6 +5,40 @@
 
 Updated 2026-08-15.
 
+## 08-17 (evening) — the trunk, its branches, and the side room
+
+Palle: "the order of the artifacts is some kind of ontology… start with a
+taxonomy (the tutorial), push it through to the end and still keep
+iterating and create more branches… like looking inside your brain."
+Built as `commons/data/trunk_branches.json` (`tools/build_trunk_branches
+.py`): 24 trunk nodes with heroes from the dig, 1544 DERIVED branches of
+six kinds (extends / edge / synthesizes / varies derived; contradicts /
+queers NEVER derived — hand readings on `/trunk`). Graph form: a
+caterpillar — a path of 24 with typed pendant edges; syntheses cross-link,
+so a DAG on a path. `tools/hero_walk.py` casts a chapter as hero + branches
+in walk order and `spine_run.py` writes `relation.walk_kind/why/space` on
+each plan row; the museum stamps the role and banners "HERO WALK in X".
+
+Every branch asks a SPACE — wall | alcove | room — as a HEURISTIC
+(`space_by: heuristic`) any surface may overturn with a trail: `/trunk`
+(trunk), the W key in the 3D editor (walk), the book (book, API only).
+
+**The side room is built** (`013bc9c71`, gate `side_room`, 13 gates now):
+a plan row whose `walk_space` is "room" is not dealt into the corridor;
+`_side_room_doorways` leaves its east-skin cell open, `_build_side_rooms`
+puts a 5×7 room off the skin at x = w+1 (ROOM_Z0 4, gap 2, stacked down
+the segment), floor + VR collider, walk cells, three walls, ceiling slab,
+threshold Label3D "KIND token / why", body stamped at the centre with
+walk_space "room" on its record. Proven both ways: real plan 0 rooms;
+trial plan (primitives, second interior row) → one room, corridor 21→20.
+Not yet wired: alcove → rung 1's bay ask; a book UI for the overturn.
+Nothing is a room until a hand writes a reading — noise's contradicts /
+queers on `/trunk`, then `spine_run.py spine --write-plan`, then walk.
+
+Blog: encyclopedia `/blog/2026-08-17-the-trunk-and-the-side-room`
+(the site 500'd for an hour on a literal newline in a `/trunk` template
+string — `5d46b06c`; TSX has the same trap as heredoc GDScript).
+
 ## 08-17 (afternoon) — the chain gets its interfaces
 
 Palle: "review what tools we have… what are the best interfaces to edit and
