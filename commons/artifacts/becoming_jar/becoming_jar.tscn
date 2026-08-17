@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/becoming_jar/becoming_jar.gd" id="1_bj21"]
+
+[node name="BecomingJar" type="Node3D"]
+script = ExtResource("1_bj21")

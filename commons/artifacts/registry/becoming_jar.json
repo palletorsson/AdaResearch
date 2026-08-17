@@ -1,0 +1,110 @@
+{
+	"artifacts": {
+		"becoming_jar": {
+			"dna": {
+			 "promoted": "2026-08-17",
+			 "stage": "synthesis",
+			 "framing": 0.7,
+			 "sources": [
+			  "dna_specimen",
+			  "queer_morphology_specimen"
+			 ],
+			 "axes": {
+			 "becoming": [
+			 "jarred",
+			 "cracked",
+			 "escaped",
+			 "clouded"
+			 ],
+			 "reading": [
+			 "container",
+			 "occupant"
+			 ]
+			 },
+			 "default": "becoming=jarred, reading=container. jarred is the shipped look of both members and the leftmost value of both declarations (dna_specimen.gd:55, queer_morphology_specimen.gd:56); it is the only value at which nothing has happened yet, which is what a default should be. container is argued for rather than assumed: THREE of the four values change the container and only ONE changes the occupant alone, so the reading in which the word does most of its work is the container. It is also the reading handed_pair reached from the other side when it declined this exact axis - 'the jar is the specimen's argument, not the helix's' - a judgement made about a helix that the code here confirms about the word. The default cell is therefore one half of the designed null, which is deliberate: the leftmost tile and the fourth tile of the default row are the same photograph.",
+			 "note": "WHAT THE VALUES MEAN, from the members' code, and what reading the code found that the word does not say. becoming, four values in both members' order. jarred = the sealed vitrine, one body suspended at mid-height; dna_specimen restores the shipped lid transform, fluid mesh and helix transform and then touches nothing (gd:188, gd:206-208), queer_morphology_specimen builds full-height glass, a seated lid at jar_height+0.015 and a 0.85*jar_height fluid column (gd:272-314, gd:357). cracked = the seal is broken: BOTH members displace the lid by exactly 0.19 m (queer_morphology_specimen.gd:67, dna_specimen.gd:216) and drop the fluid so a line reads across the glass, and here the lid is tipped by dna_specimen's own 1.40 rad (gd:215). THIS IS THE ONE PLACE THE TWO MEMBERS DISAGREE: queer_morphology_specimen.gd:272-273 also shortens the glass by 0.06 m and builds an open rim, while dna_specimen's cracked never touches the jar at all - in one file the container is breached, in the other it is merely opened. This artifact builds the breach, because a value called cracked that leaves the glass whole is a word doing no work. escaped = no glass and no fluid, only the ring and the discarded lid, and a body at twice the size standing on the ring; both members write the same sentence about it, that the thing outside the vitrine is bigger than the thing inside it (dna_specimen.gd:50-51, queer_morphology_specimen.gd:42-43), and dna_specimen makes the ladder literal by having escaped call the same _lay_lid_down() that cracked calls (gd:191, gd:195). clouded = the container is sealed and full EXACTLY as at jarred, and the occupant is no longer one body. THE STARTING SUSPICION THIS PASS WAS ASKED TO TEST, AND WHERE IT WAS WRONG: the four values do read as a narrative of escape from a container, and jarred -> cracked -> escaped IS monotone in one variable - seal intact, seal broken, container gone. clouded is indeed the odd one out. But NOT because it is a change in the medium. The medium is untouched at clouded: dna_specimen restores the shipped fluid mesh (gd:182-183) and queer_morphology_specimen builds the fluid at its full 0.85*jar_height (gd:357). clouded changes the OCCUPANT and returns the container to stage zero. So becoming is not a ladder with an outlier, it is a PRODUCT - container state {sealed, breached, absent} crossed with occupant state {single, dispersed} - with four of six cells built and two, dispersed-and-breached and dispersed-and-free, that the word cannot name. reading, two values, WHICH FACTOR THE FRAME DRAWS IN FULL. container = the vitrine at full material (pale glass staves, a dark fluid band, metal lid and ring) with the occupant standing as a constant grey helix in its jarred arrangement; only the container moves across the four values. occupant = the 144 beads at their two strand colours and full emission against a constant grey sealed vitrine with no lid and no fluid; only the occupant moves. There is no value that draws both in full: a union value measures as the loudest tile on its own axis and answers nothing (wave 20's finding, and handed_pair's own `both` is exactly such a value, declared in this corpus and described by its author as the union of right and left). THE CONSTRUCTION RULE, and the one place this artifact refuses both members: the occupant is 144 beads at EVERY value - the same count, the same 0.0115 m radius, the same 72 blue and 72 pink - so nothing is created or destroyed on the axis. At escaped the same beads describe a helix twice as large and are therefore twice as far apart along it, bigger and necessarily sparser; at clouded they fill the jar. Neither member conserves its specimen: dna_specimen swaps a helix for 220 new grains (gd:264-291) and queer_morphology_specimen swaps a soft body for 160 (gd:482-513), so in both files becoming quietly imports a change in the AMOUNT of the thing. Here it cannot, and becoming is a change of arrangement and of extent rather than a loss. NO TRANSPARENCY ANYWHERE, which is a measurement decision with a receipt: queer_morphology_specimen.gd:71-77 records that clouded once photographed as a twin of jarred at 5.5% because transparent grains inside transparent fluid inside transparent glass blend to one haze. The vitrine here is SECTIONED - 22 opaque staves over 220 degrees with a 130-degree window facing the approach, the sweep camera at yaw 0.62 standing 35.5 degrees off that axis and looking through it - and the fluid is drawn as the coloured lower band of the back staves, a LEVEL rather than a volume, which is the only part of a fluid column a still can hold and is what both members say they are after ('so a meniscus reads across the glass', dna_specimen.gd:47).",
+			 "was": "TWO members, ONE argument, applied twice by the same hand. dna_specimen's own registry says its four rungs were taken character for character from queer_morphology_specimen, and dna_specimen.gd:26-27 says it again in the code; queer_morphology_specimen's fixed suspension seed is 20260729 and dna_specimen's promotion is dated 2026-08-03, five days apart. So the family's agreement is a TRANSCRIPTION and not a corroboration - which is the honest answer to what a two-member family can be asked. The hypothesis that these two artifacts are about the same thing holds, and holds for a reason that costs it most of its evidential value: they are not two witnesses. The single place the copy slipped, the glass at cracked, is the only place they diverge, and it diverges in the direction of the older member being the more literal one. What this artifact adds is the factorisation neither file states: that its four values are two questions, and that the two cells the word cannot name are exactly the ones where both questions are answered at once.",
+			 "kin": "handed_pair (2026-08-15) is the corpus's other synthesis over dna_specimen, and it DECLINED this axis in as many words: 'becoming (dna_specimen's jarred|cracked|escaped|clouded) - the jar is the specimen's argument, not the helix's'. That decline is independent corroboration of the factorisation found here from the other direction: handed_pair judged becoming to belong to the container while looking only at the occupant. handed_pair also records that dna_specimen's handedness labels are BACKWARDS against the discrete torsion of its own geometry - two of three members agree with the physics and 'the third has the word on backwards'. That contradiction is about the other axis and does not touch this one, but it is the same disease and the same file: dna_specimen's declarations were written as prose in a rescue batch and only later made to render, which its own registry admits about becoming ('the axis existed as prose'). exhibit_vitrine's enclosure and grasp_cabinet's housing are containers whose axis is about the CASE and never about what is in it; this artifact is the case where the two are crossed on purpose.",
+			 "predicted_degeneracy": {
+			  "pair": "jarred against clouded, in the occupant reading",
+			  "percent": 22,
+			  "why": "COMPUTED FROM THE GEOMETRY BEFORE ANY CAPTURE, not rastered - measured, counted and summed on paper. Union AABB across the eight variants is 0.454 x 0.717 x 0.440 m, diagonal 0.956, radius 0.478; at FOV 34, PAD 1.9 and framing 0.7 the camera stands 2.079 m off and the 760 px frame covers 1.271 m, so 598 px/m. The occupant is 144 beads of radius 0.0115 at EVERY value, total bead area 144*pi*0.0115^2 = 0.0598 m^2 - conserved by construction - so this pair cannot differ in how much violet is on screen, only in where it is. As a helix (r 0.075, 3 turns over 0.30 m, dna_specimen's measured geometry) the two strands project to about 1.89 m of 0.023 m band = 0.0435 m^2, less 0.003 for the six crossings, call it 0.0403 m^2 inside a 0.169 x 0.312 m footprint at 76% density. As a cloud they spread over 0.270 x 0.306 m at 56% density for a projected union of about 0.046 m^2. The two footprints overlap over 0.169 x 0.280 = 0.0473 m^2, and 0.0473 * 0.765 * 0.557 = 0.0202 m^2 of that is bead-on-bead, so the changed area is 0.0403 + 0.046 - 2*0.0202 = 0.046 m^2. The critic crops to the union subject box, here 0.614 x 0.647 m = 0.397 m^2, so 11.6% of the crop changes - twice the hottest-5% window, which means focus is set by the per-pixel step and not by the area. That step is a bead against the grey ghost jar: in the critic's L(|frame - background|) on the (158,166,184) backdrop, the blue bead reads about 51 and the pink about 53 against a ghost at about 109, so 56-58 grey levels, and 57/255 = 22%. THIS IS A LOWER BOUND: the estimate has one flat light, no specular, no shadow and no antialiasing, and the real render should land 30-45%. THE RIVAL, NAMED: jarred against cracked in the same reading changes MORE area (0.061 m^2, 14.3% of crop) but the same per-pixel step, because 0.09 m of rise (dna_specimen.gd:192) is 0.9 of this helix's own 0.10 m pitch, so the shifted strands land within 0.046 m of the originals rather than at a random phase and about a quarter of the band re-covers itself. Both pairs saturate the 5% window, so they should read within a point or two of each other and a swap between THEM is inside my error and is not the interesting failure. The interesting failure is either landing UNDER 22%, which would mean the ghost grey is not separating from the beads in luminance - read focus_rgb before believing it - or the container reading's jarred-against-cracked, which I put at about 38% on the strength of the displaced lid alone (0.034 m^2 of seated lid removed plus 0.054 m^2 of tipped disc added, most of it against background at 96 grey levels), coming in below either occupant pair.",
+			  "registered": "2026-08-17, before the first capture"
+			 },
+			 "designed_nulls": [
+			  {
+			   "a": {
+			    "becoming": "jarred",
+			    "reading": "container"
+			   },
+			   "b": {
+			    "becoming": "clouded",
+			    "reading": "container"
+			   },
+			   "under_percent": 0.3,
+			   "why": "IDENTICAL BY CONSTRUCTION, and it is the finding rather than a control bolted on afterwards. In the container reading the occupant is built at its constant jarred arrangement in grey, independent of becoming, and the container is built by _build_container(_seal_of(becoming), true). _seal_of returns 'sealed' for BOTH jarred and clouded (becoming_jar.gd:_seal_of, the match's `_:` arm), because both members leave the container sealed, lidded and full at clouded - dna_specimen restores the shipped lid transform and fluid mesh (gd:182-183) and hides only the helix (gd:202-204), queer_morphology_specimen takes neither the escaped branch nor the cracked branch in _create_jar or _create_fluid (gd:265-314, gd:357) and builds only its suspension instead. Same function, same argument, same meshes, same transforms, same materials: the two frames should differ only by capture noise. If this pair comes back ABOVE 0.3% the harness is not holding still, and no other number in this sweep should be believed until it is. If it comes back at 0.00% to the byte while the occupant reading of the SAME pair bites, that is the two-axes-in-one-word claim proved in two photographs."
+			  }
+			 ],
+			 "declines": "clouded as a change of MEDIUM - offered by the brief and refused, because the code says otherwise: neither member alters the fluid at clouded (dna_specimen.gd:182-183, queer_morphology_specimen.gd:357), so a medium reading would have been an axis over something that does not move. A `label` value on the reading axis, to sit beside container and occupant - real and tempting, since the classifying card is the third thing in every vitrine, but neither member's label is a function of becoming: dna_specimen's text arrives only through set_specimen_label() from the placement (gd:316-318) and queer_morphology_specimen's plate carries lambda, phi and a state name and nothing else (gd:706-733). A label reading would therefore be four identical frames in each of two columns, four designed nulls dressed as an axis, and the claim - that the taxonomic card does not move no matter how far the specimen has left the jar - is cheaper and clearer in this sentence than in eight photographs. The two UNBUILT CELLS of the product, dispersed-and-breached and dispersed-and-free - the honest completion of the axis and the strongest thing this artifact could have shown, declined because neither source builds them and inventing two values for a family of two would make this artifact the majority of its own vocabulary. They are recorded in the note as the finding instead. handedness (dna_specimen's right|left) - a second axis from the same file, but handed_pair already carries it and already recorded that dna_specimen has the word on backwards; repeating it here would be a second, worse witness to a settled question. A `fixture` seed - not declined, not needed: the suspension uses dna_specimen's golden angle with a fixed irrational stride through fmod (gd:281-291) and there is no RandomNumberGenerator, no randf and no _process anywhere in this file, so every value is meshes and transforms resolved in _ready() and one still is a complete account."
+			},
+			"name": "Becoming Jar",
+			"lookup_name": "becoming_jar",
+			"scene": "res://commons/artifacts/becoming_jar/becoming_jar.tscn",
+			"class_name": "BecomingJar",
+			"category": "emergence",
+			"artifact_type": "synthesis",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "compact",
+			"description": "A sectioned specimen jar on a plinth, and the same 144 beads at every value of the word it is named for. Two artifacts declare an axis called `becoming` with the same four values in the same order - jarred, cracked, escaped, clouded - and reading their code shows the word is carrying two questions at once. Three of the four values change the CONTAINER (sealed, then unsealed and part-drained, then gone). The fourth changes the OCCUPANT and puts the container back exactly as it was. So `becoming` is a container state crossed with an occupant state, four of six cells built, and two cells - dispersed AND breached, dispersed AND free - that the word cannot name. The second axis draws one factor in full and the other in flat grey, one at a time, so which half of the word each value is about can be photographed. The vitrine is opaque and cut open on the approach side; the fluid is drawn as the coloured band its level makes on the back staves, not as a transparent volume.",
+			"tags": [
+				"specimen",
+				"container",
+				"taxonomy",
+				"queer_theory",
+				"synthesis",
+				"dna",
+				"morphology"
+			],
+			"dev_themes": [
+				"emergence",
+				"biology",
+				"art",
+				"commons"
+			],
+			"interaction": "observe",
+			"interactions": [
+				"observe"
+			],
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"orientation": "face_approach",
+				"isolation": 0,
+				"preferred_zone": "teaching",
+				"footprint_source": "authored"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
+		}
+	}
+}

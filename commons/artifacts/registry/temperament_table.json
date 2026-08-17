@@ -1,0 +1,182 @@
+{
+	"artifacts": {
+		"temperament_table": {
+			"name": "Temperament Table",
+			"lookup_name": "temperament_table",
+			"scene": "res://commons/artifacts/temperament_table/temperament_table.tscn",
+			"class_name": "TemperamentTable",
+			"category": "waves",
+			"artifact_type": "synthesis",
+			"complexity": "advanced",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "compact",
+			"description": "Twelve springs standing on a ruler, and a comb of thirteen teeth behind them that never moves. Each spring is one interval above a fixed root; the comb marks equal temperament. Two artifacts in this corpus declare an axis called consonance_theory with the same four words - chord_tension_spring owns the four tables, harmonic_distance_table preloads them - and the family looks like one vocabulary. It is not quite. NEITHER artifact's theory touches a frequency: chord_tension_spring's _pitch_to_freq (gd:708-712) and harmonic_distance_table's _get_note_frequency (gd:556-562) are the same 12-TET expression at every value, so all four words are judgement tables at one unchanging tuning, and `ratio` does not mean just intonation. But `western` is two answers: harmonic_distance_table short-circuits on that one word to its own SHARED_OVERTONES (gd:326-328) and never reaches the shared tables at all. This bench keeps the family's word for the judgement and gives the tuning its own name, because putting the tuning inside consonance_theory would invent the false friend the family is being tested for. consonance_theory sets each spring's height, coil count and coil radius through chord_tension_spring's own two expressions (gd:633-634) and moves nothing sideways - judging an interval does not retune it. interval_space decides what a horizontal distance means: tempered (every spring on its tooth), just (eleven of twelve step off, by 0.98 to 7.82 mm), comma (the same displacement times 5, so the minor third and the major sixth cross their neighbours and the rail pinches toward its centre), lattice (off the rail entirely, onto the 5-limit lattice where nearness is factorisation). The two end teeth are twice as tall because 1:1 and 2:1 are the two intervals every temperament on earth agrees about.",
+			"tags": [
+				"tuning",
+				"temperament",
+				"just_intonation",
+				"equal_temperament",
+				"consonance",
+				"comma",
+				"interval",
+				"5_limit_lattice",
+				"two_axes",
+				"synthesis"
+			],
+			"dev_themes": [
+				"music",
+				"the word that means two things",
+				"a gap that does not close",
+				"measurement against a grid that does not move"
+			],
+			"interactions": [
+				"stand at interval_space=tempered and walk the consonance_theory axis. Twelve springs change height, girth and turn count and NOT ONE of them moves sideways. That is the family's word doing exactly what the family's code does: it judges intervals, it does not retune them",
+				"stand at consonance_theory=western and step from tempered to just. Eleven springs walk off their teeth and one does not. The one that does not is the unison, because 1/1 is 0 cents in both systems - and the tooth at the far end has no spring on it at all, because 2/1 is 2/1 everywhere and needs no entry",
+				"compare just against comma. Same eleven displacements, five times the size. At tempered the springs are 50 mm apart; at comma the minor third (6/5, +15.641 cents) and the major sixth (5/3, -15.641 cents) have each moved 39 mm toward the rail's centre and swapped places with a neighbour. The comma is not a small number, it is a small number MAGNIFIED - which is the only reason a photograph can hold it",
+				"count the springs that are bit-identical between western and blues: five, at the unison, the major third, the fourth, the fifth and the major seventh. Blues rewrites the minor third, the tritone and the minor seventh and leaves the structural intervals exactly where common practice put them. The two theories that disagree most in magnitude are the pair that photographs most alike",
+				"go to lattice and look for the fifth and the fourth. They are one step left and one step right of the unison, because 3/2 is 3^1 and 4/3 is 3^-1, and every other interval is somewhere on a five-by-three grid of powers of 3 and 5. Nearness there has nothing to do with pitch and the comb behind is visibly irrelevant, which is the point of drawing it anyway"
+			],
+			"capacity": "SEE that a temperament is a decision about where to put an error rather than a set of frequencies - that twelve intervals cannot all be pure at once, that equal temperament answers by spreading the error evenly and just intonation by dumping it in a few places, and that NONE of that is what the word consonance_theory means in the two artifacts that already use it",
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"chord_tension_spring",
+					"harmonic_distance_table",
+					"frequency_shell",
+					"octave_stack"
+				],
+				"preferred_zone": "teaching",
+				"footprint_source": "computed_from_geometry",
+				"footprint_note": "THE DECK AND THE COMB ARE THE FOOTPRINT AND THEY ARE DRAWN BEFORE EITHER AXIS IS CONSULTED. The deck is 0.680 x 0.012 x 0.180 with its top face at y = 0; the comb is thirteen teeth at exact hundred-cent marks from -0.300 to +0.300, and neither is touched by _relay_stations, which frees and rebuilds only the Stations node. That is what makes the bench a measuring instrument rather than a picture: the reference does not move when the reading does. The springs stay inside it at every value - the widest excursion is lattice at x = +-0.300 plus a 0.020 coil radius = 0.320 against a deck half-width of 0.340, and comma at gain 5.0 never exceeds the unison's own -0.300. In z only lattice leaves the centre line, at +-0.055 plus 0.020 = 0.075 against a deck half-depth of 0.090."
+			},
+			"measurements": {
+				"aabb_size": [
+					0.68,
+					0.257,
+					0.18
+				],
+				"aabb_center": [
+					0.0,
+					0.1165,
+					0.0
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.68,
+				"source": "computed_from_geometry from the file's own constants; no Godot was run. x is the deck, +-DECK.x/2 = 0.340, and it dominates every spring position at every value. y runs from the deck's underside at -0.012 to the tallest cap's top: h(1.0) = H_MIN + 1.0 * H_SPAN = 0.240 plus CAP.y = 0.005, so 0.245, and the span is 0.257. z is the deck at +-0.090. THE CAPS ARE MeshInstance3D ON PURPOSE - the capture AABB counts MeshInstance3D only and the 784-odd coil segments are one MultiMesh, so a bench without real caps would measure as a 1 m box and every frame would be shot from the wrong distance. Deck plus twelve caps give the box an honest height without a layers=0 anchor, and nothing overshoots."
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			],
+			"dna": {
+				"promoted": "2026-08-17",
+				"stage": "synthesis",
+				"sources": [
+					"chord_tension_spring",
+					"harmonic_distance_table"
+				],
+				"axes": {
+				 "consonance_theory": [
+				  "western",
+				  "blues",
+				  "ratio",
+				  "flat"
+				 ],
+				 "interval_space": [
+				  "tempered",
+				  "just",
+				  "comma",
+				  "lattice"
+				 ]
+				},
+				"framing": 0.55,
+				"framing_why": "COMPUTED AGAINST THE CLIPPING FLOOR, not chosen by eye. capture_config_sweep sets dist = radius / tan(FOV/2) * PAD * framing with FOV 34 and PAD 1.9, so the frame is a square of side 3.8 * radius * framing at the subject plane. radius = |aabb.size| * 0.5 = |(0.680, 0.257, 0.180)| * 0.5 = 0.374449, so the frame side is 1.42291 * framing. The subject is wide and flat and the diagonal fit wastes most of the frame: at the canonical standpoint (yaw 0.62, pitch -0.26, view direction 0.5615, 0.2571, 0.7866) the box projects to 0.6580 x 0.3876 m, so the clipping floor is 0.6580 / 1.42291 = 0.4625. 0.55 keeps 19 percent headroom over that floor and multiplies every measured area by (1/0.55)^2 = 3.3 against the default. At framing 1.0 the deck alone is 4.6 percent of frame and the twelve springs together are 1.7 percent, which is the shape of the problem harmonic_distance_table already measured on its own disc.",
+				"fixture": {
+					"comma_gain": 5.0
+				},
+				"fixture_why": "NOT AN AXIS: comma_gain is read by exactly one branch of interval_space and by nothing else, and the fixture pins it at the code's own default so the sweep photographs the shipped look. It is here because the number was argued rather than picked. The tuning error tops out at 15.641 cents (6/5 and 5/3), which is 7.82 mm on a rail where one tempered semitone is 50 mm - real, and the weakest possible picture, which is why harmonic_distance_table's registry declined this axis on very nearly the same arithmetic. Magnification fixes that and creates a new failure: at gain 8.0 the closest pair of stations is 19 mm apart against a widest spring of 42.5 mm and springs interpenetrate; at gain 20.0 the minor third and the major sixth land on top of each other at the rail's centre. At 5.0 the closest pair is 23.32 mm and the crowd just touches. The knob is also the bench's own control - see designed_nulls, where gain 0.0 makes comma bit-equal to tempered and gain 1.0 makes it bit-equal to just.",
+				"default": "consonance_theory=western, interval_space=tempered, comma_gain=5.0. western is chord_tension_spring's CONSONANCE (gd:57-70), the table BOTH sources treat as the unmarked case, and tempered is the twelve-equal-divisions layout that every reader of a Western score already assumes. Together they are the pre-existing world: twelve springs standing exactly on twelve teeth, judged by the common-practice table. Every other cell of the sheet is a departure from something already on the deck. NOTE WHICH `western` THIS IS: chord_tension_spring's, not harmonic_distance_table's - see declines.",
+				"was": "NOTHING - this artifact did not exist before wave 21. What existed was a two-member family and a declined axis. chord_tension_spring (promoted 2026-07-29) and harmonic_distance_table (promoted 2026-08-04) both declare consonance_theory = western | blues | ratio | flat, and the second preloads the first's four tables rather than copying them (hdt gd:50), which is the corpus's best example of a shared vocabulary held properly. The tuning question was raised in BOTH files and implemented in neither: chord_tension_spring's header calls consonance 'culturally mediated', harmonic_distance_table's QFEP audit names the number ('a 12-TET fifth is 700 cents vs. a pure 3:2 at ~702 cents', gd:14-20), and its registry then wrote an explicit decline - 'the deviation between 5-limit just and 12-TET tops out at 15.6 cents, which on this ring is 4.7 degrees of arc, 0.029 m at the shipped radius, about two thirds of one node diameter. That is a real displacement and a weak picture'. This bench is that declined axis built where it is not a weak picture: against a comb that does not move, with a magnification that is labelled, on a rail rather than a ring.",
+				"note": "THE HYPOTHESIS THE FAMILY IS, AND THE ANSWER. A two-member family is a claim that two artifacts are about the same thing, and here the claim mostly holds and fails in one exact place. WHAT HOLDS: the tables are literally shared, not duplicated (hdt gd:50 preloads _CTS; _consonance_table at gd:315-324 returns the sibling's constants), and both members use the theory for the same KIND of job - a per-interval weight that drives a visual quantity. WHAT FAILS: the word `western` denotes a different array in each. harmonic_distance_table's _shared_for short-circuits on it (gd:326-328) to its OWN SHARED_OVERTONES, integers 1..16 whose largest non-unison entry is the fifth at 5, and never reaches _CTS.CONSONANCE. The two disagree hugely once put on one scale - pushed through that file's own inversion rule, CONSONANCE would score the perfect fourth at 14 where SHARED_OVERTONES scores it 3, and would put a line on every one of the 66 pairs where SHARED_OVERTONES's `if shared < 2: continue` (gd:464-465) draws only 36. So `western` is the family's default AND the one value where the two members are not doing the same arithmetic. THE BRIEF'S SUSPICION, TESTED AND DESTROYED: the four values were suspected of being two questions - `ratio` and `flat` as TUNING SYSTEMS that change frequencies, `western` and `blues` as REPERTOIRES that change which intervals you use. The dispatch says no. chord_tension_spring's _pitch_to_freq (gd:708-712) is 440 * 2^((midi-69)/12) with no reference to consonance_theory, and harmonic_distance_table's _get_note_frequency (gd:556-562) is the same expression with the same silence. Every value of every member sounds in 12-TET. `ratio` is 'consonance ranked by ratio simplicity' with the ratios written in the comments beside it (cts gd:97-110) and never used as lengths; `flat` is the null theory, all twelve entries 0.5, not equal temperament. The word is ONE question honestly asked - and this bench takes those twelve ratios out of the comments and makes them lengths, which is the thing neither member does. A SECOND FINDING WORTH THE PASS: harmonic_distance_table's two axes are NOT orthogonal. pitch_space=consonance calls _shared_for at gd:298 to set each node's RADIUS, so under that one layout value the consonance_theory axis moves nodes, and under the other five it only re-weights sub-pixel lines. That is the conditional-axis pattern, undeclared.",
+				"kin": "THE NEAREST KIN IS harmonic_distance_table AND THE DIFFERENCE IS THE DENOMINATOR OF THE PICTURE. That table plots TWELVE PITCHES and asks which are near each other; this bench plots TWELVE INTERVALS above one root and asks how big each one is. The consequence is not stylistic. A pitch layout can place notes by ordinal position - circle_of_fifths, chromatic, keyboard and helix all do, which is exactly why that artifact's registry could write 'every layout here places notes by ordinal position and not by pitch height' and decline the tuning axis on it. An INTERVAL layout cannot: an interval is a number of cents, and once the horizontal axis is cents the tuning question is unavoidable and 15.641 cents is a length whether you magnify it or not. Its sixth layout, `consonance`, is the one that broke its own rule (radius from _shared_for, gd:293-302) and is the direct ancestor of this bench's interval_space. THE OTHER PARENT GAVE THE BODY. chord_tension_spring's spring is not decoration here: _coils reproduces its gd:633 expression int(lerpf(4.0, 12.0, 1.0 - consonance)) and the radius reproduces gd:634 lerpf(0.005, 0.02, consonance), so a fifth is a short fat four-turn spring and a tritone under western is a tall thin eleven-turn one, exactly as in the parent. What changed is what the spring connects: there it is a bond between two pitch nodes whose length the physics settles, here it is a post standing on a ruler whose length is the theory's own claim, frozen. THE SEGMENT TRANSFORM IS ALSO INHERITED, from the other parent (hdt gd:512-521), so both bodies are literally present in the code.",
+				"predicted_degeneracy": {
+					"pair": "western against blues, in the tempered interval_space",
+					"percent": 2.3,
+					"why": "THE POOL IS THE SIX consonance_theory PAIRS AND THE CONTEXT IS THE tempered COLUMN; the denominator is the whole frame. Ranking across the crossed axis would be the mistake this programme has already made once, so the interval_space column is ranked separately below and NOT mixed in.\n\nWHY THIS PAIR AND NOT THE OBVIOUS ONE. western and blues are the pair that DISAGREE MOST in magnitude - the tritone goes 0.08 to 0.55 and the minor seventh 0.15 to 0.85 - and they are still the closest pair, because they are bit-identical at FIVE of the twelve stations against three for western/ratio and two for western/flat. CONSONANCE and CONSONANCE_BLUES hold the same float at the unison (1.0), the major third (0.55), the fourth (0.75), the fifth (0.90) and the major seventh (0.10): blues rewrites the blue notes and leaves the structural intervals exactly where common practice put them. Five springs of twelve are the same object, in the same place, in the same colour.\n\nTHE NUMBER. Per station i the spring is a helix of coils(w) = int(lerpf(4,12,1-w)) turns, radius r(w) = lerpf(0.005,0.02,w) and height h(w) = 0.035 + 0.205w, drawn as 8 segments per turn of 0.0025 m wire, so its ink is arc * 0.0025 with arc = coils * sqrt((2*pi*r)^2 + (h/coils)^2). Seven stations differ (1,2,3,6,8,9,10) and their ink totals 0.011009 m2 under western and 0.013480 m2 under blues. Overlap: where the turn count changes the phase changes everywhere and only about 8 percent survives; where it does not, the surviving fraction is 0.0025/max(dh, 2dr). The overlapping part still counts wherever the colour ramp (cts gd:639-645) moves it, which for this pair is nearly everywhere - the tritone's colour distance is 0.696 and the minor seventh's is 1.015. Summed per station: 1700 + 2609 + 2904 + 2462 + 2381 + 3068 + 2521 mm2 = 0.017645 m2 of strand, times 0.88 for the helix crossing itself in projection = 0.015528 m2, plus 0.003078 m2 of cap movement (nine 18 x 9.5 mm caps clearing their own projected height), giving 0.014337 m2 after the 0.80 projection factor for the oblique standpoint. Frame area = (3.8 * 0.374449 * 0.55)^2 = 0.612461 m2. 0.014337 / 0.612461 = 2.34 percent.\n\nTHE WHOLE RANKING, so the ORDERING is falsifiable and not just the floor. consonance_theory in tempered: western|blues 2.34, western|ratio 2.87, blues|ratio 2.91, western|flat 3.57, ratio|flat 4.02, blues|flat 4.50. interval_space in western: tempered|just 2.41, just|comma 3.07, tempered|comma 3.08, anything|lattice 3.49.\n\nTHE HONEST WIDTH OF THE CLAIM. western|blues at 2.34 and tempered|just at 2.41 are 3 percent apart, which is inside the error of a paper rasteriser with one light, flat shading and no shadows or antialiasing. If the sweep ranks tempered|just below western|blues, the ORDERING is wrong and the floor still stands. The floor is the load-bearing half: every prediction in this programme has under-predicted by 1.5x to 6.7x, so 2.3 percent is a lower bound and a measured value BELOW it means something is broken - most likely the theory axis failing to reach the artifact at all, which for a String enum fed by a numericising coercer is the corpus's most-repeated silent failure. tempered|just is the OTHER number to watch: it is the pair harmonic_distance_table's registry declined to build, on the grounds that 15.6 cents is 'a real displacement and a weak picture'. Here it is 0.98 to 7.82 mm of horizontal walk against 2.5 mm wire, and if it lands under 2 percent that decline was right about this bench too."
+				},
+				"designed_nulls": [
+					{
+						"a": {
+							"consonance_theory": "ratio",
+							"interval_space": "just",
+							"comma_gain": 1.0
+						},
+						"b": {
+							"consonance_theory": "ratio",
+							"interval_space": "comma",
+							"comma_gain": 1.0
+						},
+						"under_percent": 0.3,
+						"why": "IDENTICAL BY CONSTRUCTION. _station_pos's comma branch is `tempered + comma_gain * (just - tempered)`; at comma_gain 1.0 that is the just branch's expression with one extra add and subtract, so the two frames differ by at most one ulp of 0.3 m, about 6e-17 m, which is 1e-13 of a pixel. Nothing else in the bench reads comma_gain. If this pair measures anything at all, the magnification is not a linear interpolation between the two tunings and the whole `comma` reading is mislabelled."
+					},
+					{
+						"a": {
+							"consonance_theory": "western",
+							"interval_space": "tempered",
+							"comma_gain": 5.0
+						},
+						"b": {
+							"consonance_theory": "western",
+							"interval_space": "comma",
+							"comma_gain": 0.0
+						},
+						"under_percent": 0.3,
+						"why": "THE OTHER END OF THE SAME DIAL, AND IT IS THE MUSICAL ONE. At comma_gain 0.0 the comma branch returns `tempered + 0.0 * (just - tempered)`, and 0.0 times a finite float is exactly 0.0, so the expression is bit-equal to the tempered branch - not approximately, exactly. Together with the null above this pins both ends: the comma reading is a dial whose 0 IS equal temperament and whose 1 IS just intonation, which is what a temperament is. It also proves the axis is a magnification of a real quantity rather than a separate drawing. THE GUARD HAD TO BE WRITTEN FOR IT: apply_grid_config accepts comma_gain >= 0.0, because a `> 0.0` guard would have refused this null from any map token while still letting Object.set() through, and the two paths disagreeing in silence is how this corpus loses passes."
+					},
+					{
+						"a": {
+							"consonance_theory": "blues",
+							"interval_space": "lattice",
+							"comma_gain": 5.0
+						},
+						"b": {
+							"consonance_theory": "blues",
+							"interval_space": "lattice",
+							"comma_gain": 40.0
+						},
+						"under_percent": 0.3,
+						"why": "SCOPE. The lattice branch places every station from _exponents(i), the 3-exponent and 5-exponent of its just ratio, and never touches cents or comma_gain. An eight-fold change in the magnification must therefore be invisible. This is the control on the fixture rather than on the design, and it is here because the corpus's most repeated silent failure is a knob that reaches further than its author thought - or, in the tier_terrarium case, not at all."
+					}
+				],
+				"designed_nulls_why": "THREE NULLS AND THEY ARE ONE STATEMENT: the comma reading is a linear dial between the two tunings, scoped to itself. Null 1 pins its top (gain 1 = just), null 2 pins its bottom (gain 0 = tempered), null 3 shows it does not leak into a reading that does not ask for it. The first two are also the bench's argument in miniature - equal temperament and just intonation are not two unrelated pictures, they are the same twelve intervals with the error scaled by 0 and by 1, and every frame in the comma column is a point on that line. A NULL THIS PROGRAMME COULD NOT REGISTER, because the schema compares whole frames and this is a region: station 0 is at exactly x = -0.300 in tempered, just AND comma, because 1/1 is 0 cents in every temperament, and the thirteenth comb tooth has no spring on it at all because 2/1 is 2/1 everywhere. The unison and the octave are drawn as the two things that cannot move, and they are the two teeth drawn at double height.",
+				"predicted_relationship": "THE COMB NEVER MOVES, and it is falsifiable without any percentage. _build_deck and _build_comb run once in _ready; _relay_stations frees and rebuilds only the Stations node and touches neither. So the deck (0.680 x 0.012 x 0.180) and the thirteen teeth at exact hundred-cent marks are byte-identical in all sixteen cells of the sheet, and every measured difference is springs and caps. If two frames differ in the comb, the bench is measuring against something that moved and no number on the sheet means anything. SECOND, AND THIS IS THE FAMILY'S ANSWER DRAWN: no value of consonance_theory changes any spring's x or z. _station_pos does not read consonance_theory at all - the theory reaches only height, coil count, coil radius and colour. Walk the theory axis in any column and the twelve springs must stay on the same twelve marks. That is the finding this bench exists to photograph: in both source artifacts the word judges intervals and does not retune them, and here you can watch it not retuning them.",
+				"declines": [
+					"harmonic_distance_table's `western`, AND IT IS THE PASS'S FINDING RATHER THAN AN OMISSION. That file's _shared_for short-circuits on the single word `western` (gd:326-328) to its own SHARED_OVERTONES dictionary (gd:85-90) and never reaches the shared tables; chord_tension_spring's `western` is CONSONANCE (gd:57-70). Two arrays, one word, one declared family. They are not near each other: pushed through harmonic_distance_table's own inversion rule the CONSONANCE table would score the perfect fourth at 14 where SHARED_OVERTONES scores it 3, the minor third at 8 against 2, the major third at 9 against 2, and would draw all 66 pairs where the `if shared < 2: continue` gate (gd:464-465) currently draws 36. This bench implements chord_tension_spring's, because that file OWNS the four tables and the other preloads them. A fifth value `overtones` for the other reading was refused: adding a word neither source declares would make this artifact's vocabulary differ from both, which is the disease rather than the diagnosis. The disagreement is reported instead, which is what a two-member family test is for.",
+					"SOUND, and it costs the most. Both parents are instruments - chord_tension_spring pushes frames every physics tick (gd:668-706), harmonic_distance_table runs two voices (gd:694-731) - and a temperament is a thing you HEAR. The audible difference between a 3:2 fifth and a tempered one on a 261.6 Hz root is about 1 Hz of beating, which is unmistakable in a headset and completely invisible to a still PNG. It is the info_board mistake and it was refused. What the bench does instead is take the twelve ratios chord_tension_spring wrote in its comments and never used (gd:97-110) and make them lengths, which is the only form a photograph can hold.",
+					"A FIFTH interval_space VALUE, `beats` - each interval's beat rate against the tempered reference, drawn as a bar. Refused for the same reason: a rate is a frequency and a still cannot show it. Any encoding that turns the rate back into a length is `comma` with a different constant, which would be a second name for one reading.",
+					"REDEFINING consonance_theory AS A TUNING SYSTEM, which was the brief's own starting suspicion and is the most tempting move available. It would have made `ratio` mean just intonation and `flat` mean equal temperament, and it is not what either source does - _pitch_to_freq (cts gd:708-712) and _get_note_frequency (hdt gd:556-562) are 12-TET at every value and neither consults the axis. Building it that way would have created exactly the false friend this wave is testing for, in the act of testing for it. The tuning question got its own axis and its own name instead.",
+					"TEXT. Neither a title nor twelve station labels, and the reason is measured on the sibling: capture_config_sweep runs LabelFramer over the subject, which converts billboarded Label3Ds into framed plates, and harmonic_distance_table's registry records the result - 'twelve 0.18 x 0.09 note plates' pushed its union box out to radius 0.64 m against a subject whose widest real feature is 0.43 m, and cost it three quarters of its frame. A bench whose whole argument is 8 mm of horizontal walk cannot afford that. The comb carries the scale instead, with the unison and octave teeth drawn at double height."
+				],
+				"sweep_command": "python tools/build_dna_gallery.py --slug=temperament-table --tokens=temperament_table --max=16",
+				"sweep_note": "THE FULL SHEET IS 4 x 4 AND NEEDS --max=16. build_dna_gallery's default cap is 9 and it trims the LATER axis from the tail until the cross product fits, so at the default this sheet would publish consonance_theory x (tempered, just) and drop `comma` and `lattice` - the two values that carry the reading axis - while looking complete. That is not hypothetical: harmonic_distance_table's own 6 x 4 sweep silently lost its entire second axis to the same cap, and its registry says so ('declared and unmeasured is not the same as verified'). READ THE PER-PAIR ROWS OF the bite report, never the headline: two axes are declared and the headline is a peak, so a live axis can hide a dead one. The rows to read first are western|blues and tempered|just, the two predicted floors.",
+				"placements": 0
+			}
+		}
+	}
+}

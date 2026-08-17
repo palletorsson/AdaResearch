@@ -1,0 +1,157 @@
+{
+	"artifacts": {
+		"macrostate_shelf": {
+			"name": "Macrostate Shelf",
+			"lookup_name": "macrostate_shelf",
+			"scene": "res://commons/artifacts/macrostate_shelf/macrostate_shelf.tscn",
+			"class_name": "MacrostateShelf",
+			"category": "qfep",
+			"artifact_type": "synthesis",
+			"complexity": "advanced",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "compact",
+			"description": "A macrostate is not an arrangement, it is the COUNT of the arrangements a description cannot tell apart - and the corpus's only two-member `macrostate` family is split down exactly that line. random_cubes fences four regions off a spawn volume and scatters twenty cubes in one of them (random_cubes.gd:217-269); there is no counter, no label and no arithmetic anywhere in the file, so its four values are four arrangements. microstate_counter does compute a multiplicity and print it - W = cells^N at microstate_counter.gd:461-469, rendered as 'W ~ 10^55 microstates' beside S = k log W at :472-495 - but `cells` comes from a four-entry table at :47-52 whose own comment states it by its OUTPUT ('24.0 -> 10^55, 3.35 -> 10^21, 6.8 -> 10^33'), and the table does not follow from the regions the same file draws: its 0.5208 m interior against its 0.20 m corner octant is a volume ratio of 17.66, which would put `corner` at 10^5, and its two 0.57 x 0.57 x 0.12 slabs are 0.552 of the interior, which would put `layered` at 10^45. The declared numbers miss in opposite directions on two values of one axis. This shelf is 1.30 x 1.545 x 0.40 m of open carcass that draws, for each macrostate, either one microstate, or nine of them side by side, or the SIZE of the class as a stack of blocks one per decade - counted from the same lo/hi the bodies are drawn in, divided by the same body volume the bodies are built at, with the multinomial term `layered` earns for not saying which bodies are in the upper slab. The fourth reading stacks the same count as microstate_counter's constants give for the same twenty bodies, in the source's own amber, against the same benchmark.",
+			"dna": {
+				"promoted": "2026-08-17",
+				"stage": "synthesis",
+				"wave": 21,
+				"framing": 0.64,
+				"sources": [
+					"microstate_counter",
+					"random_cubes"
+				],
+				"axes": {
+					"macrostate": [
+						"uniform",
+						"corner",
+						"layered",
+						"spilled"
+					],
+					"reading": [
+						"specimen",
+						"ensemble",
+						"ledger",
+						"asserted"
+					]
+				},
+				"default": "macrostate=uniform, reading=specimen. uniform because BOTH members ship it - random_cubes.gd:69 and microstate_counter.gd:37 both declare it as the export default - and because in both sources it is the fallthrough branch that returns the whole volume undivided (random_cubes.gd:261-267, microstate_counter.gd:314-320), i.e. the region every existing placement of either artifact already renders. reading=specimen because ONE ARRANGEMENT IS ALL EITHER SOURCE HAS EVER DRAWN: random_cubes has no readout anywhere in the file, and microstate_counter's ledger is a text panel bolted to the side of a box of gas rather than a picture of the count. So the default cell is the family exactly as it stands - a pile in a box, with the number of ways it could have been nowhere in the frame - and every other cell of the sheet is something neither member can currently show.",
+				"note": "THE FAMILY IS TWO, SO THERE IS ONE COMPARISON AND NO TRIANGULATION. The question is therefore whether the hypothesis holds: are microstate_counter and random_cubes about the same thing? ANSWER: THEY ARE ABOUT THE SAME SUBSTRATE AND THE SAME FOUR MOVES, AND ONLY ONE OF THEM IS ABOUT THE COUNT.\n\nFIRST, THE THINGS THAT ARE NOT WRONG, because three of the four standard failure modes were checked and none of them is what happened here. They are NOT one scene under two names: res://commons/interfaces/qfep/random_cubes.tscn runs a 391-line script that extends Node3D and builds 20 BoxMesh children, and res://commons/artifacts/microstate_counter/microstate_counter.tscn runs a 556-line script that extends commons/artifacts/_embodied/embodied_prop.gd and builds a plinth, a glass chamber and one MultiMesh per region. Different node counts, different bases, different geometry. Nor is the word a false friend: both macrostate axes ask literally the same question - which region of a box a fixed number of small bodies occupies - and the two _region_plan() functions (random_cubes.gd:217-269, microstate_counter.gd:266-322) are recognisably the same function written twice. Nor does either member declare the axis and do nothing: both branch four ways and both build different geometry per value. random_cubes' own header says where it got the word (random_cubes.gd:24-34), so the borrowing is declared rather than hidden.\n\nTHE SPLIT IS ELSEWHERE, AND IT IS THE WHOLE CONTENT OF THE WORD. A macrostate is an equivalence class of microstates and its entire meaning is the MULTIPLICITY W - how many arrangements the description does not distinguish. random_cubes contains no count of any kind: no counter, no readout, no label, no arithmetic beyond the randf_range calls that place the cubes. Its four values are four ARRANGEMENTS wearing the name of a class. microstate_counter DOES count and print - _refresh_count() at :461-469 sets _log10_w = N * log10(cells) and _update_readout() at :472-495 renders 'W ~ 10^55 microstates' beside S = k log W in J/K. So the standing suspicion that NEITHER member represents the count is HALF WRONG, and the half that is wrong is the more interesting half.\n\nBECAUSE THE NUMBER IT PRINTS IS NOT A FUNCTION OF THE GEOMETRY IT DRAWS. `cells` is a four-entry table, microstate_counter.gd:47-52 - uniform 24.0, corner 3.35, layered 6.8, spilled 24.0 - and the comment above it states the table by its OUTPUT: '24.0 -> 10^55, 3.35 -> 10^21, 6.8 -> 10^33'. The constants were chosen for their exponents. Check them against the same file's own regions. The interior half-extent is box_size * 0.42 (:439-440), so with box_size 0.62 the interior is 0.5208 m on a side and V = 0.141258 m3. CORNER_SIDE is 0.20 (:63), so the confined octant is 0.008 m3. That is a volume ratio of 17.657. If cells scaled with the drawn volume, corner would hold 24.0/17.657 = 1.359 cells and the plate would read 10^5; it reads 10^21, which implies a ratio of 7.16. And layered misses the OTHER WAY: two slabs of SLAB_SPAN 0.57 by SLAB_H 0.12 (:64-66) are 0.552 of the interior, so 13.25 cells and 10^45, against the table's 10^33. Sixteen decades out on one value and twelve on another, in opposite directions, in the artifact whose name is the count. Nothing in the chain could have caught it: the declaration gate compares the registry to the enum, not the arithmetic to the picture.\n\nAND THE TABLE CANNOT TELL uniform FROM spilled. microstate_counter.gd:51 gives spilled the uniform base 24.0 exactly, and the comment at :45-46 says why - it keeps the uniform base only so the internal number stays finite. The file is honest about it, branching at :481-484 to print 'W ~ unbounded' instead. But the float is the same float, and that identity is this shelf's designed null: quote the table and the two values are one photograph.\n\nA THIRD FINDING, UNASKED FOR, AND IT IS AN ALL-RUNGS VALUE INSIDE BOTH SOURCES. spilled is not a fourth region; it is uniform PLUS an addendum. random_cubes.gd:251-255 makes its first plan the shipped uniform region verbatim and appends a plume; microstate_counter.gd:302-306 does exactly the same, lo = -h and hi = h. In microstate_counter even the arithmetic agrees that spilled is uniform, because CELLS_BASE says so. Wave 20 found six values that were secretly the union of their own axis; this is a seventh and an eighth, in a family nobody was looking at for that.\n\nWHERE THE TWO MEMBERS ACTUALLY CONTRADICT EACH OTHER, which is the sharpest thing in the family and is a disagreement about physics rather than about style. On spilled, microstate_counter TAKES THE LID OFF: :182-195 builds five glass plates instead of one sealed box, and :202 passes skip_top so the four top frame edges are not built (:512). Its stated reason is that the seal is what made the count mean anything. random_cubes lifts six of twenty cubes over the rim (:245-260) and still draws a CLOSED wire box - _build_bounds_frame() at :287-296 rings both y = 0 and y = r and all four uprights. Cubes outside a box with no opening. One member thinks spilled requires breaking the boundary; the other thinks it is a position. This shelf follows microstate_counter, and goes further: under spilled it draws no bounded region at all and its ledger returns no number, because there is no denominator.\n\nMACROSTATE, four values, both members' list character for character, all four geometries taken from random_cubes' fractions because those are the ones stated as fractions rather than as metres.\n  uniform  the whole 1.10 x 0.90 x 0.30 m possibility box, 20 bodies. Ledger 70 decades.\n  corner   0.32 of the span on every axis (random_cubes.gd:229 is 0.64r of a 2r span in x and z and 0.32r of an r span in y, i.e. 0.32 throughout), one low corner, the rest of the box visibly empty. 3.28 percent of the volume; ledger 41. The 20 bodies fill 18.7 percent of that region, which is dense and does not interpenetrate - it is what caps BODY_EDGE at 0.045.\n  layered  two slabs of 0.22 of the y span with a 0.56 dead band between them (random_cubes.gd:237-243), ten bodies each. 44 percent of the volume, and the ledger only falls to 62 - because layered does not say WHICH ten bodies are upstairs and C(20,10) = 184756 pays 5.27 decades back. That multinomial term is the thing microstate_counter has no equivalent of.\n  spilled  fourteen inside, six over the rim (round(20 * 0.3), random_cubes.gd:250), the top four wire edges not built, no region solid, no number.\n\nREADING, four values, and it is the axis the family does not have. specimen is one member of the class - what both sources draw. ensemble is nine members of the same class side by side at 0.30 scale, each a different draw: nine of 10^70, which is the idea rendered as a shortfall you can see. ledger is the SIZE of the class, one block per decade, counted by _count_log10_for() from the same lo/hi that _regions_for() hands the body loop and the same BODY_EDGE the bodies are built at - change the box and the column changes, which is the property neither source has. asserted is the same stack built from microstate_counter's constants for the same twenty bodies, in the source's own amber, against the same benchmark, and carrying no macrostate name because the table it quotes cannot supply one.\n\nTHE THESIS SOMEONE COULD DISAGREE WITH: a shared word can be honest about the question and still carry no shared answer, and the way to find out is to make the two members' arithmetic stand in one frame. THE DISAGREEMENT AVAILABLE, and it is fair: microstate_counter's exponents are a PEDAGOGICAL magnitude, not a measurement - 10^55 for a box of gas is roughly right for Avogadro-scale intuition and 10^5 would teach the wrong lesson about how big W is. A reader can say the table is a legend, not a calculation. The answer is that the file does not present it as a legend: it prints 'W ~ 10^21 microstates' and an S in J/K to two significant figures beside a rendered chamber, and it jitters the exponent by plus or minus 6.25 percent (:466-468) so the number LOOKS measured. A legend does not wobble.",
+				"predicted_degeneracy": {
+					"pair": "corner against layered, in the asserted reading",
+					"percent": 1.6,
+					"denominator": "FRAME, i.e. percent of the 760 x 760 render. Stated because a closest-pair claim inherits its denominator, and a subject-denominated number for this shelf would be roughly 3x larger.",
+					"why": "THE CONTEXT IS THE asserted COLUMN AND THE RANKING IS COMPUTED INSIDE IT.\n\nWHY THAT PAIR. Every pair in this sheet is either a difference in BLOCK COUNT (inside one column reading) or whole bodies appearing and disappearing (everything else). The block deltas are the small ones and they are exactly enumerable. asserted stacks round(20*log10(cells)) blocks: uniform 28, corner 11, layered 17, spilled 28. Its deltas are 6, 11, 17 and 0 - the 0 being the designed null. ledger stacks the counted decades: uniform 70, layered 62, corner 41, spilled no stack at all. Its deltas are 8, 21 and 29, and every ledger pair ALSO differs in the macrostate name printed on the plate, which asserted does not print. So the 8-block ledger pair is strictly wider than the 6-block asserted pair, and the specimen and ensemble pairs move translucent region solids of 0.30 m2 and up. corner against layered in asserted is the floor of the live sheet, at 6 blocks.\n\nTHE ARITHMETIC, done on paper from the constants in macrostate_shelf.gd. Camera is capture_config_sweep's: RES 760, FOV 34, PAD 1.9, yaw 0.62, pitch -0.26 (capture_config_sweep.gd:67-71 and :442-443), framing 0.64 from dna.framing. The union AABB is the CARCASS in all sixteen cells - _build_carcass() reads no axis and nothing either axis draws leaves it - so it is 1.30 x 1.545 x 0.40, diagonal 2.0584 m. The frame is diag * PAD * framing = 2.0584 * 1.9 * 0.64 = 2.5030 m tall, so 760 / 2.5030 = 303.6 px per metre.\n\nThe differing band is 6 blocks at PITCH 0.019 = 0.114 m of column, foreshortened by cos(0.26) = 0.9664 to 0.1102 m = 33.5 px. The column silhouette at yaw 0.62 is COL_W * cos(0.62) + COL_D * sin(0.62) = 0.90 * 0.8139 + 0.28 * 0.5810 = 0.8952 m = 271.8 px. Band rectangle 33.5 * 271.8 = 9105 px2, of which BLOCK_H / PITCH = 0.842 is block and the rest is gap showing the same background in both frames: 7666 px2. The white cap block sits at the top of whatever stack there is, so it lands in two different places - one extra block face, 0.016 * 0.9664 * 303.6 = 4.7 px by 271.8 px = 1277 px2. The exponent line reads 10^11 against 10^17 at font_size 30, so one digit differs; taken conservatively at 400 px2. Total 7666 + 1277 + 400 = 9343 px2 of 577600 = 1.62 percent. Registered at 1.6.\n\nTHE PREDICTION IS A FLOOR, NOT A FORECAST. It is arithmetic on flat rectangles with no shadows, no AO, no antialiasing and no specular on the emissive blocks, and every prediction in this corpus so far has under-read by 1.5x to 6.7x. IF THE SWEEP COMES BACK BELOW 1.6 ON THIS PAIR, STOP AND CHECK THE HARNESS BEFORE THE DESIGN, in this order: (a) whether the sheet was captured at --max=16, because at build_dna_gallery's default cap of 9 the 4 x 4 trims the LATER axis and BOTH column readings vanish, taking this pair and the null with them; (b) _rejects.json, because both axes are String enums and Object.set() on a typed property of the wrong type is refused in SILENCE; (c) tools/check_dna_declarations.py, though it read 0 broken on 2026-08-17.",
+					"registered": "2026-08-17, before any capture"
+				},
+				"designed_nulls": [
+					{
+						"a": {
+							"macrostate": "uniform",
+							"reading": "asserted"
+						},
+						"b": {
+							"macrostate": "spilled",
+							"reading": "asserted"
+						},
+						"under_percent": 0.3,
+						"why": "IDENTICAL BY CONSTRUCTION, AND IT IS THE FINDING RATHER THAN A CHECK ON IT. microstate_counter.gd:51 gives spilled the uniform cell base 24.0 exactly, and its own comment at :45-46 says the base is kept only so the internal number stays finite. The asserted reading quotes that table and nothing else: _asserted_log10_for() is body_count * log10(SOURCE_CELLS[ms]), which for both values is 20 * log10(24.0) = 27.604, rounding to 28 blocks. Both cells therefore draw the same carcass, the same 70-decade wire benchmark, the same 28 amber blocks with the same white cap, and the same four caption lines - the asserted plate prints AS DECLARED rather than the macrostate name, because the table it quotes cannot supply one. NO BODIES ARE DRAWN IN THIS READING AT ALL, so _rng is never touched and there is no draw to diverge. Predicted 0.00 percent frame and 0.00 percent focus.\n\nANYTHING ABOVE 0.3 PERCENT IS A HARNESS FAULT, not a finding, and there are only three places it could be: the sweep never set macrostate (read _rejects.json first - both axes are String enums), a read of macrostate leaked into the column path, or the sheet was trimmed so the two cells are not the ones named.\n\nTHE CONTRAST THAT MUST HOLD ALONGSIDE IT: the SAME two values under reading=specimen must be among the widest pairs in the sheet, because uniform draws a 1.10 x 0.90 x 0.30 m translucent region solid and spilled draws none - the escaped group is unbounded, so there is no set to shade - and spilled additionally omits the top four wire edges. If uniform and spilled are close under specimen too, then macrostate is not reaching the geometry either and the null means nothing."
+					}
+				],
+				"designed_nulls_why": "ONE NULL, AND IT IS THE SENTENCE THE SHELF EXISTS TO SAY. In the reading that quotes the source's own count, a sealed box and an open one are one photograph - because the source's table gives them one number. In the reading that counts this shelf's own geometry, the same two values are as far apart as the sheet gets: one is a 70-block stack and the other has no stack at all. Same two values, same camera, two arithmetics, opposite verdicts.\n\nNO OTHER PAIR COLLAPSES, AND THAT WAS ENUMERATED RATHER THAN HOPED. Inside asserted the block counts are 28, 11, 17, 28 - one repeat and no others. Inside ledger they are 70, 41, 62 and an outline, all distinct. Across specimen the four values put the bodies in four different regions with four different region solids. Across ensemble the same four, nine times over. The only coincidence in the sheet is the one that was inherited.",
+				"fixture": {
+					"arrangement_seed": 20260817
+				},
+				"fixture_why": "BELT OVER BRACES, AND THE BRACES ARE THE POINT. There is no unseeded path in this file: _rng.seed is set from arrangement_seed before every arrangement (_draw_arrangement), the export ships pinned, and the ensemble's nine tiles are arrangement_seed + i * 7919 rather than nine draws off one stream, so a tile is the same tile whatever else changes. The fixture exists because the SOURCE does not have this property: random_cubes.gd:74-77 defaults chance_seed to 0, which is the global randf, and its own promotion note says in capitals that the pile was never the same twice. A synthesis of that source that inherited the habit would photograph five variants of five different objects.\n\nAND THERE IS NO CLOCK HERE, WHICH MATTERS BECAUSE BOTH SOURCES ARE ONE. No _process, no Timer, no tween, no await, no noise. random_cubes drifts and bounces every frame (random_cubes.gd:308-334) and microstate_counter lerps every particle toward a target it re-rolls on a 0.7/shuffle_speed cadence (microstate_counter.gd:369-425). What a still of either member shows is partly a fact about the shutter; what a still of this shelf shows is not.",
+				"framing_why": "0.64. The carcass is 1.30 x 1.545 x 0.40 and capture_config_sweep fits by the DIAGONAL with PAD 1.9 (capture_config_sweep.gd:442), so at framing 1.0 the 2.0584 m diagonal would be padded to a 3.911 m frame, the shelf would stand at 40 percent of the frame height and a column block would be 2.2 px tall. 0.64 puts the frame at 2.503 m, the shelf at 62 percent of its height and 52 percent of its width, with about 0.48 m of margin each side - enough for the caption stack, which hangs from 1.60 to 1.86 above a carcass that stops at 1.545 and is invisible to the AABB because Label3D is not a MeshInstance3D.",
+				"kin": "The two sources are the kin and the relation is asymmetric in exactly one place. Both are qfeplaboratory pieces about the E(S) term; both fence four regions off a box; both draw a wire constraint that the shipped value does not get. They are not siblings in the one-scene-many-names sense - different bases, different geometry, different node counts - and random_cubes declares the borrowing in its own header (random_cubes.gd:24-34), so this is a stated lineage rather than a hidden one. What separates them is that one has a ledger and the other does not, and this shelf is built so the ledger can stand where the pile is. A room holding it beside random_cubes says: here is what your four regions are worth. A room holding it beside microstate_counter says: here is your own number recomputed from your own box. Adjacent kin without the word: ordered_grid (the F term, the same substrate at zero entropy) and shannon_entropy_meter (a count of a different thing - symbol frequencies rather than spatial arrangements - which is why it is cluster_with and not a third member).",
+				"was": "Nothing. This is a new body, and what it was is a disagreement between two registry notes and one source comment. random_cubes' promotion note says microstate_counter's entire job is to print log10(W) for exactly these four arrangements, and treats that as settling the question; microstate_counter's own comment block states its cell table by the exponents the table produces. Reading the two together against the geometry is where the pass went: the count is printed, and it is not derived. The shelf is that reading turned into something a still can hold - the arrangement, a sample of the class, the count from the drawing, and the count as declared, on one carcass at one scale.",
+				"declines": [
+					"THE MOTION, both members'. random_cubes drifts every cube along a random velocity and bounces it off its own region (random_cubes.gd:308-334); microstate_counter interpolates all 40 particles toward a fresh target microstate on a 0.7/shuffle_speed cadence (:369-425), and its @identity calls that shuffle the whole point - the macrostate is fixed while the microstate never settles. That is the correct idea and it is invisible to one PNG. random_cubes declined its own drift_speed for exactly this reason (:56-60). The ensemble reading is the repair: the shuffle is drawn as PLACE instead of as time, nine microstates standing at once rather than one arriving after another. It is a translation and it is declared as one.",
+					"THE TEMPERATURE ON layered. microstate_counter colours its lower slab COOL_COLOR and plates it 'SORTED T=380/220K' (:69, :59, :288-293). Declined: this shelf counts POSITIONS ONLY - v_body is a volume and nothing here counts momenta - so painting one slab cold would assert a thermal macrostate the ledger does not count and cannot show. The two slabs are drawn in one colour and the ledger stays honest about what it is a count of.",
+					"S = k log W IN JOULES PER KELVIN (microstate_counter.gd:475-479). Declined as a caption: it is log W multiplied by a constant, so it is the same column with a different label, and a 6.65e-22 J/K string photographs as an exponent nobody can compare against the exponent above it. The stack IS S, up to k, and a stack can be compared across four frames by eye.",
+					"A FINITE NUMBER FOR spilled. microstate_counter holds 55.2 internally and prints unbounded; this shelf holds nothing - _count_log10_for() returns -1.0 the moment a region is marked unbounded, and the column becomes an outline with an open chevron. Carrying a finite number for an unbounded set would have reproduced the exact fault this pass is reporting.",
+					"RANDOM_CUBES' CLOSED WIRE BOX UNDER spilled (:287-296 rings both y = 0 and y = r whatever the value). Refused, and reported as a source finding instead: cubes outside a box with no opening is not a spill. microstate_counter's five-plate chamber and skipped top edges (:182-202, :512) are followed here.",
+					"A FIFTH READING SHOWING THE COUNTED AND THE ASSERTED COLUMNS SIDE BY SIDE. Refused as an ALL-RUNGS VALUE - it would be the union of ledger and asserted, which is the fault wave 20 found six times and which both sources commit with spilled. The comparison is made by walking the axis, not by a value that contains it.",
+					"RANDOM_CUBES' SECOND AXIS, chance (none|hue|size|all, :72). It is a real axis and it belongs to a different question - what a piece surrenders to the dice, rather than which class an arrangement belongs to. Putting it here would have given a reader a second explanation for every measured difference in the sheet.",
+					"AN EXCLUDED-VOLUME CORRECTION. The count treats each body as a point in a cell of its own volume and ignores that two bodies cannot share a cell, which at corner's 18.7 percent packing is a real overcount. Stated rather than fixed: a Mayer correction is invisible in a photograph and would put a number in the ledger that the drawing cannot justify, which is precisely the fault being reported in the source. What the shelf claims is that its number FOLLOWS FROM ITS DRAWING, not that it is the true W of a hard-sphere gas."
+				],
+				"sweep_command": "python tools/build_dna_gallery.py --slug=macrostate-shelf --tokens=macrostate_shelf --max=16",
+				"sweep_note": "THE SHEET NEEDS --max=16 AND THE DEFAULT DESTROYS THE EXPERIMENT SILENTLY. macrostate is declared first and is never trimmed; reading is second, and build_dna_gallery trims the LATER axis from the tail until the cross product fits its cap - which defaults to 9. At 9 a 4 x 4 renders as 4 x 2, specimen and ensemble only, and BOTH column readings vanish: no ledger, no asserted, therefore no designed null and no predicted closest pair, and nothing anywhere in the sheet showing a count. What survives is eight handsome tiles of piles in boxes, which is the family exactly as it already is.",
+				"placements": 0
+			},
+			"tags": [
+				"entropy",
+				"boltzmann",
+				"multiplicity",
+				"statistical_mechanics",
+				"macrostate",
+				"microstate",
+				"counting",
+				"qfep",
+				"two_axes",
+				"synthesis"
+			],
+			"dev_themes": [
+				"qfep",
+				"a word that names a count, shared by two artifacts that draw arrangements",
+				"a declared number that is not a function of the drawing",
+				"a null that is the source's own table failing to tell two values apart"
+			],
+			"capacity": "SEE that a macrostate is a COUNT and not a picture - and that a family can share the word across two members without either of them ever having to put the count beside the arrangement it counts",
+			"interactions": [
+				"walk `macrostate` at reading=ledger: the stack falls from 70 blocks at uniform to 62 at layered to 41 at corner, and at spilled there is no stack at all - an open chevron over the benchmark, because the escaped group has no wall and therefore no cell count",
+				"compare (layered, ledger) with (corner, ledger). Layered confines the bodies to 44% of the box and loses only 8 decades; corner confines them to 3.3% and loses 29. Part of that gap is the multinomial: `layered` does not say WHICH ten bodies are upstairs, and C(20,10) = 184756 pays 5.27 decades back",
+				"switch between ledger and asserted at any macrostate: the same benchmark, two different columns. microstate_counter's constants, applied to these same twenty bodies, put uniform at 28 where this shelf's own geometry puts it at 70",
+				"stand at (uniform, asserted) and at (spilled, asserted). They are one photograph. The source's cell table gives spilled the uniform base 24.0 exactly (microstate_counter.gd:51), so the number cannot tell a sealed box from an open one - which is why the source prints 'unbounded' instead of the number it is holding",
+				"compare (uniform, specimen) with (uniform, ensemble): one pile at full size, then nine piles that are nine different draws of the same description. Nine of 10^70, which is the whole idea rendered as a shortfall you can see"
+			],
+			"spatial_needs": {
+				"platform": "floor",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 0,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"microstate_counter",
+					"random_cubes",
+					"ordered_grid",
+					"shannon_entropy_meter"
+				],
+				"preferred_zone": "teaching",
+				"footprint_source": "computed_from_geometry",
+				"footprint_note": "THE CARCASS IS THE FOOTPRINT AND NEITHER AXIS TOUCHES IT. _build_carcass() reads no axis: a 1.30 x 0.08 x 0.40 m plinth, a 1.30 x 0.045 x 0.40 m top rail whose top face is at 1.545, two 0.04 x 1.42 x 0.40 m uprights at x = +-0.63 and a 1.30 x 1.42 x 0.02 m backboard at z = -0.19. Everything either axis can draw is inside it, checked value by value: the possibility box is 1.10 x 0.90 x 0.30 centred at y 0.75 (top 1.20), the spilled plume runs to y 1.42 and x +-0.578, the ensemble grid spans x +-0.575 and y 0.265..1.241, the tallest column is uniform's 70 blocks topping out at 1.43, and the unbounded chevron reaches 1.481. So the union AABB is exactly 1.30 x 1.545 x 0.40 in all sixteen cells and the fixed camera frames every one of them identically."
+			},
+			"measurements": {
+				"aabb_size": [
+					1.3,
+					1.545,
+					0.4
+				],
+				"aabb_center": [
+					0.0,
+					0.7725,
+					0.0
+				],
+				"grid_cells": [
+					2,
+					1
+				],
+				"max_dimension_m": 1.545,
+				"source": "computed_from_geometry from the carcass constants in macrostate_shelf.gd; no Godot was run. The box is the carcass and nothing else - see spatial_needs.footprint_note for the per-value check that nothing either axis draws leaves it."
+			},
+			"footprint_measured": [
+				2,
+				2,
+				1
+			]
+		}
+	}
+}

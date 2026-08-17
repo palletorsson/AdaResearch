@@ -1,0 +1,150 @@
+{
+	"artifacts": {
+		"ground_layer": {
+			"name": "Ground Layer",
+			"lookup_name": "ground_layer",
+			"scene": "res://commons/artifacts/ground_layer/ground_layer.tscn",
+			"class_name": "GroundLayer",
+			"category": "color",
+			"artifact_type": "synthesis",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "compact",
+			"description": "A gilder's panel that puts something on the ground, because the family it comes from never does. TWO tokens declare an axis called priming with identical values (white | ochre | bole | verdaccio) - ball_painting_demo and drawing_paper - and they cannot disagree about the word, because they are ONE SCRIPT: ball_painting_demo_v2.tscn:3 and drawing_paper.tscn:3 both ext_resource paper_draw_surface.gd, and drawing_paper.tscn:67 attaches it. The census is 2 tokens, 1 script, 1 vocabulary, ZERO independent evidence. And the axis that script implements is not priming. reset_canvas() (paper_draw_surface.gd:149-159) does one add_splat of one flat colour across the whole surface, and nothing is ever drawn on top at spawn - every draw call in the folder comes from a pen tip or a ball tip under player interaction (pentip_ray_cast.gd:55,57,76; ball_paint_tip.gd:94,96,118), none of it in _ready. In a still, four values are four swatches. That is background, not priming, and the source convicts itself in its own comments: :29-32 says bole is the ground that 'stays visible in every shadow it left' and verdaccio is 'laid in order to be cancelled by what goes over it' - two claims about a relation to a layer the code does not have. This bench keeps the four grounds, verbatim from paper_draw_surface.gd:48-53, and adds the missing layer. A 0.540 x 0.500 x 0.022 m panel on two feet, yawed 0.62 rad to meet capture_config_sweep's own standpoint, carrying a 0.460 x 0.420 ground, an incised nimbus circle that never varies, and one painted disc of radius 0.185. The second axis, handling, is one question - WHAT OF THE GROUND SURVIVES INTO THE MARK - answered four ways: bare (nothing on it, the source's only state, and the default), glaze (ground x tint multiplied in LINEAR light, so the ground survives whole as colour), body (the tint alone, the ground survives nowhere inside the mark), sgraffito (the covering scratched through in sixteen rays, so the ground survives in lines). The thesis the sheet is built to photograph: sgraffito is bole's instrument and glaze is verdaccio's, and the critic can see only the first of those.",
+			"tags": [
+				"colour",
+				"priming",
+				"ground",
+				"glaze",
+				"sgraffito",
+				"gilding",
+				"underpainting",
+				"art_history",
+				"two_axes",
+				"one_script_two_tokens",
+				"synthesis"
+			],
+			"dev_themes": [
+				"a ground is chosen for what goes on it",
+				"a two-member family that is one script",
+				"the axis the code implements is background",
+				"the instrument cannot see hue"
+			],
+			"interactions": [
+				"stand at handling=bare and walk the priming axis. This is the source family's entire behaviour reproduced exactly - four flat grounds and nothing on them - and it is the loudest column in the sheet (white against bole, 19.922 percent of frame). Loud and empty is the point: nothing there is about priming, because nothing is primed.",
+				"walk the handling axis on bole. body against sgraffito measures 29.104 percent focus - the rays cut through the covering and the red clay reads. Walk the same two values on ochre and it is 5.862 percent, a factor of 4.97 lower, because ochre's rendered luma (189.83) is close to the tint's (216.79) and a scratch through paint into a ground of the same value is not a drawing. That is the reason gilders' bole is a dark red and not a mid ochre, and it is measurable here.",
+				"compare glaze against body in the white column. They are the same picture to the byte, because a glaze multiplies in linear light and linear white is 1.0 exactly. Over a white ground a transparent paint and an opaque one are the same paint - the distinction the whole vocabulary rests on does not exist until the ground stops being white.",
+				"look at what the metric misses. Verdaccio's job is to neutralise the pink laid over it, and it does: the tint's linear red:green is 1.7577, over verdaccio it is 1.4013 and over ochre it is 3.1478, so verdaccio is the ONLY ground in the table that pulls it toward neutral. In luminance, verdaccio's bare-against-glaze is 2.776 percent and ochre's is 2.817 - the wrong way round. The axis's most art-historically important effect is invisible to a luminance critic.",
+				"count what is constant. The incised circle and the four ruled ticks are the same colour in all sixteen cells, so their contrast against each ground is free evidence: on white the drawing is 226.55 luma from its ground and on bole it is 54.49, which is why a bole ground gets its drawing incised rather than brushed."
+			],
+			"capacity": "SEE that a ground is a layer chosen for what will be put on it, and that an artifact which only tints a surface has implemented background and called it priming - and then see which technique each ground was actually for, because a sheet with a mark on it makes bole's sgraffito and verdaccio's glaze two different answers to the same word",
+			"dna": {
+				"promoted": "2026-08-17",
+				"stage": "synthesis",
+				"framing": 0.52,
+				"sources": [
+					"ball_painting_demo",
+					"drawing_paper"
+				],
+				"axes": {
+				 "priming": [
+				  "white",
+				  "ochre",
+				  "bole",
+				  "verdaccio"
+				 ],
+				 "handling": [
+				  "bare",
+				  "glaze",
+				  "body",
+				  "sgraffito"
+				 ]
+				},
+				"default": "priming=white, handling=bare. BOTH DEFAULTS ARE THE SOURCE'S, and that is the argument. paper_draw_surface.gd:42 ships white and the literal it resolves to, Color(1,1,1,1) at :49, is the exact value that was hard-coded into reset_canvas() before the axis existed - white handed over as though it were the absence of a decision. handling=bare is the other half of the same shipped state: the source draws NOTHING on the ground at spawn, so bare is not a neutral starting cell chosen for tidiness, it is the family's complete behaviour. The default cell of this bench is therefore a photograph of the thing being argued with, and every other cell is a step away from it.",
+				"was": "TWO REGISTRY TOKENS AND ONE IMPLEMENTATION. ball_painting_demo is a 4 x 2.5 m canvas in a dark frame with thirty grabbable pigment balls on a shelf; drawing_paper is the same surface as a sheet with a pen. Both run paper_draw_surface.gd and nothing else supplies their visible body. The registry already knew: commons_artifacts.json calls it 'ONE SCRIPT, TWO TOKENS - this corpus's most common hidden family, found again' and predicts the two 'should MEASURE ALIKE'. What it does not say is that a family which cannot disagree is not evidence about a vocabulary; it is one reading counted twice. The registry also contradicts itself on drawing_paper, which carries a dna.axes.priming block AND a dna_declined note saying the axis 'CANNOT BE DECLARED WITHOUT BREAKING THE GATE' because drawing_paper.tscn:4 and :8 instantiate gitignored godot-xr-tools scripts. This bench instantiates no addon, so the gate can see all of it.",
+				"note": "THE INSTRUMENT DECISIONS, EACH ONE COSTING SOMETHING. (1) THE PAINTED LAYERS ARE UNSHADED. The axis is a colour axis; under the rig's key light every measured difference between two grounds would be partly a fact about the light. Unshaded, the rendered pixel is filmic(srgb_to_linear(albedo)) and nothing else - which is why the prediction below is computed to the byte instead of estimated, and why it is NOT expected to under-shoot the way a Python rasteriser's geometry prediction does. The board and the feet stay lit so the object keeps a body. (2) THE GLAZE IS COMPUTED, NOT ALPHA-BLENDED. A transparent material would have made the result depend on transparency sort order, which is not a property of a ground. _glazed() converts both Colors with srgb_to_linear, multiplies, and converts back - Godot's implementation is the exact piecewise sRGB curve, so the arithmetic here and the arithmetic in the renderer are the same arithmetic. (3) THE BOARD IS YAWED 0.62 rad. capture_config_sweep.gd:69 puts the camera at YAW 0.62 and :443 builds its direction as Vector3(sin(yaw)cos(pitch), -sin(pitch), cos(yaw)cos(pitch)), whose horizontal bearing is atan2(sin 0.62, cos 0.62) = 0.62 exactly. Facing the board along it photographs the face square and costs only the 15 deg pitch, cos(0.26) = 0.9664 of the height. (4) NO NUMERIC VALUE ANYWHERE IN EITHER AXIS. Both are word enums typed String, so cabinet_sweep.coerce() has nothing to numericise and the tier_terrarium failure - Object.set() refusing a typed property in silence - cannot occur here. Checked, not assumed. (5) GEOMETRY IS CONSTANT ACROSS THREE OF THE FOUR HANDLINGS: bare, glaze and body build the identical mesh set and differ in one albedo; only sgraffito adds the sixteen rays. The world box is 0.4523 x 0.5500 x 0.3317 in all sixteen cells, so the camera never moves and no measured pair carries a framing difference it did not earn.",
+				"predicted_degeneracy": {
+					"pair": "ochre against verdaccio, in the body handling",
+					"percent": 1.797,
+					"metric": "critic frame percent - mean absolute luminance delta over the WHOLE 760x760 frame. The focus number for the same pair is 14.639 percent and the per-channel focus is 30.588 percent; all three are stated because a closest-pair claim inherits its denominator.",
+					"pool": "the SIX priming pairs inside the body column, ranked among themselves. Not the 120 pairs of the sheet - four cross-axis pairs are smaller, and the smallest non-null of all is a HANDLING pair (ochre body against ochre sgraffito, 0.293 percent), which answers a different question and is listed under predicted_relationship rather than here.",
+					"why": "THE BODY COLUMN IS WHERE PRIMING PAIRS ARE CLOSEST, BY CONSTRUCTION. The opaque mark hides the ground over the whole disc, so the only region that still varies with priming is the ground field - the face minus the mark, the incision and the ticks. AREA: face 0.460 x 0.420 x cos(0.26) = 0.186707 m2; mark pi x 0.185^2 x cos(0.26) = 0.103907; incision pi x (0.1925^2 - 0.185^2) x cos(0.26) = 0.008596; ticks 4 x 0.005 x 0.014 x cos(0.26) = 0.000271; field = 0.073933 m2. FRAME: the AABB is 0.452277 x 0.550000 x 0.331664 (board and feet, each rotated 0.62 about Y, unioned), diagonal 0.785529, radius 0.392765; capture_config_sweep.gd:442 sets dist = radius / tan(17 deg) x 1.9 x 0.52 = 1.2693 m, so the frame is a square of side 2 x radius x 1.9 x 0.52 = 0.776100 m, area 0.602331 m2. The field is 12.2744 percent of it. COLOUR: unshaded albedo -> srgb_to_linear -> Godot FILMIC (A = 0.88, B = 0.6, C = 0.10, D = 0.20, E = 0.01, F = 0.30, white 1.0) -> linear_to_srgb -> 8 bit gives ochre (225, 188, 107) and verdaccio (147, 162, 118). PIL's L is 0.299R + 0.587G + 0.114B, so 189.83 and 152.50, delta 37.33. FRAME PERCENT = 0.122744 x 37.33 / 255 = 0.017968 = 1.797 percent. FOCUS: the field alone is 12.27 percent of frame, more than the hottest-5-percent budget, so the whole focus band sits inside it and focus = 37.33 / 255 = 14.639 percent exactly. THIS PREDICTION IS NOT A LOWER BOUND IN THE USUAL SENSE and that is deliberate: the usual 1.5x-to-6.7x under-shoot comes from a flat rasteriser being blind to shadow, AO and antialiasing, none of which touch an unshaded coplanar face. A measured value more than about 15 percent either side of 1.797 means the harness changed something - the framing hint was dropped, the materials were not unshaded, or the tonemapper is not FILMIC - and should be investigated before the number is read as a fact about the axis.",
+					"peak_for_contrast": "The sheet's loudest pair is white/bare against bole/glaze at 21.366 percent frame and 75.847 percent focus, and the loudest PRIMING pair in any single column is white against bole at bare, 19.922 percent frame. The headline is a peak, so it is written down here next to the floor: the ratio between them within the priming axis is 11.1x, and any report quoting only the peak has said nothing about the body column."
+				},
+				"predicted_relationship": "TWO CLAIMS THAT DO NOT NEED A PERCENTAGE TO BE WRONG. FIRST: sgraffito is bole's instrument. body against sgraffito, measured as focus, should rank bole (29.104) far above verdaccio (13.979), white (8.309) and ochre (5.862) - bole at least 4x ochre. The mechanism is that the rays are the GROUND colour laid inside a mark of the tint, so the pair's delta is |L(ground) - L(tint)| over the ray area: bole 82.94 against 216.79 is 133.85, ochre 189.83 against 216.79 is 26.96, a ratio of 4.96. If bole does not top that ranking the rays are not rendering. SECOND, AND IT IS A PREDICTION ABOUT THE CRITIC RATHER THAN THE ARTIFACT: glaze is verdaccio's instrument and the luminance metric CANNOT SEE IT. Verdaccio is the only ground in the table that pulls the tint toward neutral - the tint's linear red:green is 0.78741 / 0.44799 = 1.7577, and the ratios multiply, so over white it stays 1.7577, over ochre it becomes 3.1478, over bole 7.8217, over verdaccio 1.4013. That is the entire reason green earth went under flesh. In the critic's luminance the bare-against-glaze pair reads verdaccio 2.776 percent and ochre 2.817 percent, ranking ochre HIGHER, which is the wrong way round; per channel it is verdaccio 22.745 and ochre 20.784, the right way round. A hue axis reported by a luminance instrument comes back as a fact about brightness, and this bench is built so that the disagreement between the two metrics is on the record before the capture.",
+				"designed_nulls": [
+					{
+						"a": {
+							"priming": "white",
+							"handling": "glaze"
+						},
+						"b": {
+							"priming": "white",
+							"handling": "body"
+						},
+						"under_percent": 0.3,
+						"why": "IDENTICAL BY CONSTRUCTION, TO THE BYTE, AND IT IS THE ARGUMENT RATHER THAN A CHECK ON IT. _glazed(ground, tint) converts both Colors to linear, multiplies channel by channel, and converts back. Godot's Color.srgb_to_linear uses the exact piecewise curve, and for r = 1.0 the branch taken is ((1.0 + 0.055) / 1.055)^2.4 = 1.0^2.4 = 1.0 in all three channels. So over white the multiply is the identity and _glazed returns MARK_TINT unchanged - Color(0.90, 0.70, 0.58) - which is exactly what the body branch returns. The geometry is identical as well: _rebuild builds the same panel, feet, ground quad, incision disc, four ticks and one mark disc at the same z for bare, glaze and body, and only sgraffito adds nodes. Same meshes, same transforms, same albedo, same unshaded materials, no randomness, no _process - the two PNGs are the same file. Predicted 0.00 percent frame and 0.00 percent focus, per channel and in luminance alike; this is an equal-RGB identity, not an equal-luma one. Anything above 0.3 percent is render nondeterminism. Anything above 2 percent means the glaze is not being computed in linear light, and the whole colour half of the sheet is then a fact about a gamma mistake. WHAT THIS NULL SAYS: over a white ground a transparent paint and an opaque paint are the same paint. The distinction the entire vocabulary rests on does not exist until the ground stops being white - which is the sentence a family that only ever ships white can never say. AND WHY THE OTHER OBVIOUS NULL IS NOT REGISTERED: an opaque mark across four grounds would be four identical frames only if the mark covered the whole ground, and here it deliberately does not. The ground survives as a 12.2744 percent margin in every cell, because a bench whose body row was four copies of one image would have thrown away the only evidence that the ground is still underneath. The body row is therefore the SMALLEST priming column, not a null, and its floor is the predicted degeneracy above."
+					}
+				],
+				"designed_nulls_why": "ONE NULL, AND IT IS CROSS-AXIS ON PURPOSE. The only exact identity this geometry admits is an arithmetic one - multiplication by linear white - and it is worth more than a geometric repeat would have been, because it fails loudly in a specific and diagnosable way. If the glaze were computed on gamma-encoded bytes instead of linear radiance, 0.90 x 1.0 would still be 0.90 and the null would STILL HOLD, so the null does not test the linearity; the four glaze cells over non-white grounds do (bole glazed is (0.3750, 0.1275, 0.0744) in linear-correct arithmetic and would be (0.3780, 0.1400, 0.0928) in the naive sRGB multiply, a visible 3-13 grey level difference in green and blue). The null tests that the two branches meet, which is the thing the sheet claims.",
+				"kin": "FLASHLIGHT_DEMO IS THE NEAR KIN AND THE WORD BETWEEN THEM IS A FALSE FRIEND, WHICH IS WHY THIS BENCH DOES NOT USE IT. flashlight_demo declares an axis called `ground` (white | swatch | relief | mirror | none) and it means THE SURFACE A BEAM IS DEMONSTRATED AGAINST - what light falls on. Two other artifacts, opening_pair and light_sphere, declare `ground` in senses of their own. Only `white` would have carried over, and taking a word without its answers is the dishonest half of a shared vocabulary; paper_draw_surface.gd's own registry entry says so and declined the word for the same reason one day earlier in the same colour sequence. So this bench keeps `priming`, the family's word, for the ground itself, and takes a NEW word - `handling` - for what goes on it. `handling` is declared by no other artifact in the corpus, checked across all 108 registry files. THE OTHER KIN IS THE CABINET GRAMMAR'S HOUSING FAMILY, and the difference is exact: housing asks what an object is MOUNTED IN, a question about furniture, and every value is a thing you could photograph on its own. Both values of this bench's second axis that matter - glaze and sgraffito - are unphotographable alone, because they are relations between two layers and neither layer means anything without the other. That is what a ground is, and it is why a swatch cannot be one.",
+				"declines": [
+					"SCUMBLE, the semi-opaque light drag that is glaze's exact art-historical complement, and it was the last value cut. It would have been mix(ground, tint, 0.65) in linear light, which is a fourth distinct arithmetic and would have photographed cleanly. It was refused because it makes the handling axis two questions in one word: bare, scumble and body are one parameter (how much of the ground is covered, at 0.0, 0.65 and 1.0) while glaze is a different operation entirely, and an axis that is a coverage ladder with one multiplicative outlier bolted on is wave 19's finding about axes that are two axes wearing one word. Four values that each answer WHAT OF THE GROUND SURVIVES INTO THE MARK is one question; five values where three of them are a slider is two.",
+					"THE UNION CHECK ON SGRAFFITO, which was run and nearly cost the value its place. Every pixel of a sgraffito frame is either a body pixel or a ground pixel at that position, so it can be read as body UNION bare - the exact shape of wave 20's finding. It survives because a union value in that sense is one that draws two other values' DRAWINGS at once, and bare draws no mark at all: the sixteen rays are geometry that exists in no other cell, the covering underneath them is body's and not bare's, and the pixel-colour coincidence follows from what a scratch physically is rather than from a vocabulary that named its own union. Recorded here rather than resolved silently, because the next reader will notice it too.",
+					"AN ALPHA-BLENDED GLAZE. A real glaze also lets the UNDERDRAWING show through it, and a conservator reads a panel by exactly that difference - infrared shows drawing through glazes and not through body colour. This bench cannot say it. The incised circle and the ticks are placed entirely OUTSIDE the mark, so no cell ever shows drawing under paint, and the reason is the null: if the underdrawing crossed the disc, glaze/white would show it multiplied through and body/white would hide it, the two frames would differ, and the sheet's only exact identity would be gone. The transparency claim is therefore made in colour only, and the drawing-through-glaze half of it is left undone and named here rather than faked.",
+					"A FIFTH GROUND. Gesso sottile, chalk grounds, oil grounds, the 19th-century lead white on canvas - all real, none of them in paper_draw_surface.gd:42. The four values here are the source's four, in the source's order, with the source's colours. Adding a fifth would have made the sheet a fact about this bench's taste in art history rather than about a family's declared vocabulary."
+				],
+				"sweep_command": "python tools/build_dna_gallery.py --slug=ground-layer --tokens=ground_layer --max=16",
+				"sweep_note": "--max=16 IS LOAD-BEARING AND THE DEFAULT WOULD HALVE THE SHEET. build_dna_gallery caps the cross product and trims the LATER axis from the tail; at the default --max=9 a 4 x 4 sheet renders as 4 x 2, which keeps priming whole and deletes body and sgraffito - the two columns that carry both the designed null and the sgraffito prediction. This is the same trap recorded against every previous 4 x 4 sweep in this programme. The declared order is priming first, handling second, so it is handling that gets cut.",
+				"placements": 0
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"ball_painting_demo",
+					"drawing_paper",
+					"flashlight_demo",
+					"pompeii_mosaic_floor"
+				],
+				"preferred_zone": "teaching",
+				"footprint_source": "computed_from_geometry",
+				"footprint_note": "THE WORLD BOX IS A CONSTANT AND THAT IS THE WHOLE POINT OF THE BOARD. The panel is 0.540 x 0.500 x 0.022 centred at y = 0.300, on two 0.060 x 0.050 x 0.060 feet at x = +-0.170, and the entire face assembly - ground quad 0.460 x 0.420 at z = 0.0120, incision disc r = 0.1925 at z = 0.0130, four ticks, mark disc r = 0.185 at z = 0.0142, and under sgraffito sixteen 0.008 x 0.135 rays at z = 0.0152 - lies inside the board's silhouette in x and y and inside the feet's depth in z. So the box does not move when either axis moves: bare and sgraffito frame identically. The board is rotated 0.62 rad about Y to face the sweep's standpoint, which is what makes the box 0.452 wide rather than 0.540; a map placing this artifact should expect its face to point 35.5 deg off the grid axis, or pass its own rotation in the token. The deepest thing on the panel is a foot at 0.030 m, not a paint layer at 0.0155 m."
+			},
+			"measurements": {
+				"aabb_size": [
+					0.452277,
+					0.55,
+					0.331664
+				],
+				"aabb_center": [
+					0.0,
+					0.275,
+					0.0
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.55,
+				"source": "computed_from_geometry from the file's own constants; no Godot was run. Board half-extents (0.270, 0.250, 0.011) and feet half-extents (0.200, 0.025, 0.030) each rotated 0.62 rad about Y give half-widths 0.226139 and 0.180207 in x and 0.165832 and 0.140623 in z; the union is 0.226139 and 0.165832. Height is FOOT_SIZE.y + BOARD_SIZE.y = 0.550 from the floor, so the centre sits at 0.275. Diagonal 0.785529, radius 0.392765, and at dna.framing 0.52 the sweep stands at 1.2693 m with a 0.7761 m frame: the board fills 58.3 percent of the half-frame across and 68.5 percent up, so nothing clips, and the painted face is 30.9971 percent of frame - five times the render-failure floor."
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			]
+		}
+	}
+}

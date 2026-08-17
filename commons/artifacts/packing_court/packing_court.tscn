@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ck7pq3xnv2mwa"]
+
+[ext_resource type="Script" path="res://commons/artifacts/packing_court/packing_court.gd" id="1_script"]
+
+[node name="PackingCourt" type="Node3D"]
+script = ExtResource("1_script")

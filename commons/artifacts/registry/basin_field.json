@@ -1,0 +1,130 @@
+{
+	"_note": "Wave 21 synthesis — the two-member `basin` family (gradient_descent_visualization, simulated_annealing).",
+	"artifacts": {
+		"basin_field": {
+			"dna": {
+				"axes": {
+					"basin": [
+						"bowl",
+						"valley",
+						"plural",
+						"plateau",
+						"scarp"
+					],
+					"reading": [
+						"relief",
+						"section",
+						"residue",
+						"census"
+					]
+				},
+				"promoted": "2026-08-17",
+				"stage": "2 - variation",
+				"sources": [
+					"gradient_descent_visualization",
+					"simulated_annealing"
+				],
+				"was": "A HYPOTHESIS RATHER THAN A VOCABULARY. `basin` is declared by exactly two artifacts, with the same five values spelled the same way: gradient_descent_visualization.gd:66 and simulated_annealing_visualization.gd:87 are the same line twice, and the annealing table's own dna.note says so, calling the taking of the word 'the point rather than a convenience'. Two members give ONE comparison and no triangulation, so the family cannot be audited the way a three-member family can - it can only be TESTED. This bench is the test, and it is built as a comparator and nothing else: the left plate is the descent table's formula for the named basin, the right plate is the annealing table's, and every reading is a way of putting the two side by side. Neither source can make this frame, because each has only its own landscape to draw.",
+				"note": "THE ANSWER, AND IT IS NOT UNIFORM ACROSS THE FIVE VALUES. Every claim here is traceable to a line, because the registry's description of each member is about its algorithm and the axis is not.\n\n1. NEITHER SOLVER BRANCHES ON `basin`, WHICH IS THE STARTING SUSPICION CONFIRMED. gradient_descent_visualization.gd:1122 `_step_optimizers()` runs SGD, Momentum, Nesterov and Adam and contains no reference to `function_preset` or `basin`; it reaches the landscape only through `_gradient()` (:926) and `_eval()` (:891). simulated_annealing_visualization.gd:1413 `_perform_annealing_step()` is the same - `_generate_neighbor()` (:1475) scales with temperature and search_space_size, `_perform_basin_hop()` (:1535) with hop_strength, and neither reads `basin` or `problem_type`. BOTH MEMBERS REDRAW THE TERRAIN UNDER AN UNCHANGED SOLVER. So the axis is a property of the objective and not of the policy - and the brief's suspicion that one member's own values indict it is only half right: no member's values indict its solver, because no member's solver is listening. What the values indict is the claim that the axis is about two algorithms at all.\n\n2. BUT THE MEMBERS ARE ASYMMETRIC IN WHAT ELSE THE WORD TOUCHES. The descent table hand-picks a start point per value (:967 `_start_pos()`, five explicit cases, with :975 saying scarp reuses the bowl's start deliberately 'so the still should differ from bowl by the cliff and nothing else') and a vertical exaggeration per value (:981 `_y_scale_for_fn()`, five cases from 0.0005 to 0.15). The annealing table picks NEITHER: the start is drawn at random inside +-0.8 * search_space_size regardless of basin (:1325) and the height is normalised over the relief's own measured min/max (:400, :482). ONE MEMBER COMPOSES EACH BASIN AS A PICTURE AND THE OTHER MEASURES IT. This bench takes the annealing treatment, because per-plate normalisation is the only treatment under which functions with ranges of 32 and 40025 can be compared as shapes.\n\n3. `basin` IS A FALSE FRIEND INSIDE ONE MEMBER'S OWN FILE. simulated_annealing_visualization.gd:47 opens an export category literally named 'Basin Hopping' and :1535 is `_perform_basin_hop()` - there a basin is one well you climb OUT of. The DNA axis calls the whole relief a basin. `basin = plural` therefore has to be read as 'a basin containing many basins', and the descent table, which has no local-basin concept anywhere in its 1900 lines, cannot see the collision.\n\n4. WHAT THE FIVE VALUES ARE WORTH, ONE BY ONE. This is the reason this artifact has a `residue` reading at all. bowl: THE SAME FUNCTION TWICE - descent :896 `x * x + y * y` against annealing :365 `p.x * p.x + p.y * p.y`. valley: THE SAME FUNCTION TWICE - descent :898 against annealing :368-371, the same Rosenbrock term for term. scarp: THE SAME CONSTRUCTION, CALIBRATED TO AGREE EXACTLY - descent :922 uses a literal rise of 3.0 against a bowl spanning 2 * 4^2 = 32, and annealing :389-393 uses SCARP_RATIO = 3/32 times 2 * s^2, which at s = 4 is 3.0 to the bit. plural: the same CLASS differently populated - Himmelblau (descent :900) has four minima on this bench's lattice and Rastrigin (annealing :350) has forty-nine. plateau: THE ONE OUTRIGHT DISAGREEMENT - the descent table's plateau (:901) is a flat disc with a rim outside it, flat in the MIDDLE and high at the EDGE, with exactly ONE minimum; the annealing table's plateau (:355) is Ackley, high and corrugated over the whole outer field with a needle at the CENTRE, and forty-nine minima. Same word, inverted topology, and ACKLEY IS MORE `plural` THAN HIMMELBLAU IS.\n\nSo: three of the five values are one function wearing two names, one is the same class differently populated, and one is two opposite landscapes under one word. The two artifacts ARE about the same thing at bowl, valley and scarp; about compatible things at plural; and about opposite things at plateau. The hypothesis survives in three fifths and fails in one. `residue` photographs that directly and `census` counts it.\n\nWHY THE PLATES ARE RAKED 55 DEGREES - computed before any geometry was written, not styled. The sweep camera sits at yaw 0.62, pitch -0.26, giving a view direction of (0.56151, 0.25708, 0.78652). A flat relief has normal (0,1,0) and projects at 0.257 of its area - the corpus's standing 'wide flat subject at shallow pitch' trap. Raked 55 degrees the normal is (0, 0.57358, 0.81915) and N.dir = 0.79178, so 3.08x more plate reaches the frame, at 96 percent of the theoretical best (0.8275 at 71.9 degrees). A drafting easel is also what a relief model is actually shown on.\n\nTHE READING AXIS IS NOT A LADDER. relief, section, residue and census each REPLACE the last rather than adding to it, so there is no all-rungs value here. That refusal is deliberate, and it is a refusal of something both SOURCES do - see dna.declines.\n\nDOMAIN 4.0 IS LOAD-BEARING AND IS EXPOSED SO IT CAN BE CHECKED. The descent field is +-4 (:196) and the annealing field is +-5 (:55). At 4.0 the annealing scarp rise is exactly the descent scarp rise and `scarp` becomes an exact zero in the residue reading; at 5.0 it is 4.6875 and the agreement becomes approximate. `domain` is an @export and NOT an axis: moving it invalidates one of the two designed nulls below.",
+				"default": "basin=bowl, reading=relief. The two members disagree about the default - the descent table ships `bowl` (:139) and the annealing table ships `plural` (:86) - so any choice picks a side, and the reason given here is deliberately not 'it is one of theirs'. bowl is the one value at which the two members are PROVABLY the same function, so the shipped frame is the pair AGREEING and every other value is a measured departure from it. reading=relief because it is the object; the other three are ways of interrogating it. There are no placements of this token anywhere, so no default is sacred yet and none is being protected.",
+				"kin": "The word and its five values are the family's, unaltered, and the family is exactly two artifacts wide. `reading` is this artifact's own: the object, its arithmetic, its disagreement, its count. It is deliberately not borrowed from another family, because the two members' only OTHER shared word - `evidence`, which both declare with the same four values - is declined below on the grounds that they do not agree about what it means.",
+				"declines": [
+					{
+						"what": "the `evidence` axis, which both members also declare with the same four values",
+						"why": "TWO REASONS AND THE SECOND IS A FINDING. First, every rung of it is about a RUNNING search - trails, markers, a P(accept) histogram, offered-and-rejected moves - and a still cannot hold a search; the annealing table says so about itself in its own still_note. Second, THE TWO MEMBERS DISAGREE ABOUT WHETHER THE AXIS ACCUMULATES. In simulated_annealing_visualization.gd the rungs strictly nest - `_apply_evidence` (:688-696) keeps hop marks above `result`, `_update_prob_bars` (:722) adds the histogram at `longhand`, `_update_offers` (:642) adds the offers at `axiom` - so its `axiom` is THE UNION OF ITS OWN AXIS, exactly the all-rungs value wave 20 taught this programme to refuse. In gradient_descent_visualization.gd `axiom` is EXCLUSIVE: `_draw_optimizer_trails` (:1308) returns early for both `result` and `axiom`, so the top rung DROPS the history. One member's top value is inclusive and the other's is exclusive. Carrying that word here would have meant inventing a third meaning for it."
+					},
+					{
+						"what": "temperature, cooling schedule and adaptive cooling - the annealing member's largest body of exports (:34-45)",
+						"why": "A rate and a decay are invisible to a still. This is the corpus's oldest rule and the annealing table's own dna.still_note already states it about itself: 'cooling is the one thing this artifact does that a still cannot hold.'"
+					},
+					{
+						"what": "a fifth reading, `cost` - steps-to-converge per plate, the natural way of looking that is missing",
+						"why": "It requires running two solvers, and a number produced by a run and photographed at a shutter is a fact about the shutter. The annealing member measured that cost directly: unpinned, its capture photographs about eighteen steps of a thousand (:142-149)."
+					},
+					{
+						"what": "the annealing member's basin-hop marks and the descent member's four named optimisers",
+						"why": "Both are the policy, and finding 1 in dna.note is that the policy does not listen to this axis. Drawing them would have put motion in a frame whose subject is a surface, and would have invited a reader to attribute a landscape difference to a solver difference."
+					}
+				],
+				"fixture_why": "THERE IS NO dna.fixture BECAUSE THERE IS NOTHING TO PIN, and that is a design consequence rather than an omission. basin_field.gd contains no `randf`, no `randi`, no `seed`, no `_process`, no timer and no tween; every vertex is a closed-form sample of a closed-form function on a fixed 49 x 49 lattice, and the whole artifact is built synchronously inside `_ready()`. The programme's no-unseeded-randomness rule exists because annealing is stochastic - simulated_annealing_visualization.gd needed `anneal_seed` and `prerun_steps` (:141, :149) for exactly that reason - and this bench answers it by not running the search at all. Two consecutive boots at the same two words are the same picture to the byte.",
+				"framing": 0.56,
+				"framing_note": "DERIVED, not guessed. Union AABB is 2.724 x 1.263 x 0.843 m - X from the plinth trim at +-1.362, Y from the gauge rail top at 1.263, Z from the plate skirt's upper back corner at -0.4209 to the plinth trim front at 0.422 - diagonal 3.1187 m, radius 1.5594. capture_config_sweep uses FOV 34 and PAD 1.9, so the frame spans 2 * radius * PAD * framing = 5.9258 * framing metres over 760 px. At framing 0.56 that is 3.318 m, i.e. 229.0 px per metre, and the silhouette is 2.724 * cos(35.5) + 0.843 * sin(35.5) = 2.708 m = 620 px of 760 - filled, with margin, not clipped. THE PLATES ARE THEN 20.71 PERCENT OF FRAME: 2 * 1.44 m2 * 0.79178 projection = 2.281 m2 at 52441 px per m2 = 119620 px of 577600. Below 1.0 because the subject is wide and flat and the sweep fits by DIAGONAL; at framing 1.0 the plates would be 6.5 percent of frame and every verdict below would be a fact about the framing.",
+				"still_note": "THE UNION AABB IS IDENTICAL AT ALL TWENTY VARIANTS AND THAT IS ENGINEERED, NOT LUCKY. The gauge rail stands 0.17 m proud of each plate at every basin and every reading - further than any relief (0.13), curtain (0.13) or stem (0.145 including its cap) can reach - so it, and not the content, sets the AABB in the plate-normal direction. Without it, `residue` at bowl (a dead-flat plate, by construction) would be framed measurably closer than `residue` at plateau, and part of the axis would have been a fact about the camera. That is the corpus's own trap caught by arithmetic instead of by a wasted sweep. MEASURED, NOT ONLY DERIVED: probe_aabb_hogs.gd reports pos (-1.362, 0.0, -0.420896) size (2.724, 1.263171, 0.842896) diagonal 3.12 m, IDENTICAL TO SIX DECIMALS at bowl/relief, valley/section, bowl/residue, valley/residue and scarp/residue. The three designed-null variants also report the same MESH COUNT (3: Body, Fields, Rails - no Contours, no Stems), so the null pairs are identical in scene graph as well as in geometry.\n\nTHE TWO RAILS OCCUPY THE SAME ENVELOPE AND ARE THE ONLY THING THAT TELLS THE PLATES APART. The descent rail is one continuous blade - a derivative is defined everywhere or it is not defined at all - and the annealing rail is TEN teeth, which is `_prob_bin_count` from simulated_annealing_visualization.gd:188, the ten bins of its acceptance histogram. Same bounding box, same quantity of material, fixed at every variant.\n\nTHERE IS NO TEXT ANYWHERE IN THIS ARTIFACT. No Label3D, no TextScreen, no BakedText, and nothing in any frame is a word naming an axis value. That is a requirement rather than a style: the two designed nulls below are claimed as EXACT, and a six-character basin label would have put roughly 0.9 percent of frame of difference into a pair registered under 0.3.\n\nWHAT THE CENSUS ACTUALLY COUNTS, said in advance so a surprising number is read correctly. It counts strict local minima OF THE 49 x 49 LATTICE under an 8-neighbour test with the border excluded, not minima of the function, and the two differ in one place: Rosenbrock's trench floor is so nearly level along its length that the test finds TWELVE minima strung along y = x^2 instead of the single true one at (1,1). That is not noise to be tuned away - it is the property the descent table itself names when it writes that on `valley` 'the gradient is true but useless' (:56), and a search with finite steps cannot tell those twelve apart either. Every other count is exact and was computed before the code was written: bowl 1|1, plural 4|49, plateau 1|49, scarp 1|1.",
+				"predicted_degeneracy": {
+					"pair": "bowl against scarp, in the census reading",
+					"percent": 7.5,
+					"why": "COMPUTED PIXEL BY PIXEL FROM THE SHIPPED RAMP AND THE SHIPPED CAMERA ARITHMETIC, BEFORE ANY CAPTURE.\n\nWHY THIS PAIR: scarp is the bowl plus a step and nothing else, at both members at once, and the descent table says so in its own source (:975 - 'scarp is the bowl plus a cliff and the still should differ from bowl by the cliff and nothing else'). WHY IN CENSUS: census lays the plates FLAT, so the pair's entire signal is repaint - no relief, no contour, no self-occlusion and no shading term. It is the one reading where a paper estimate can be honest. The stems do not contribute: both values have exactly one minimum per plate, at (0,0), at the same normalised depth, so all four stems are identical.\n\nTHE ARITHMETIC. Per-plate normalisation gives n_bowl = r^2 / 32 and n_scarp = (r^2 + 3 * [x > 0]) / 35, identically on the left and the right plate because both formulas agree at domain 4. The pointwise shift is -0.002679 * r^2 on the x < 0 half (mean -0.0286, worst -0.0857 at the corners) and +0.0857 - 0.002679 * r^2 on the x > 0 half (mean +0.0571, worst +0.0857 at the origin, zero at the corners). Pushing both fields through the shipped four-stop ramp on a 400 x 400 sample grid and applying cabinet_sweep's own test - the sum of the three per-channel absolute differences greater than 26 - 36.32 percent of plate pixels cross it. The plates are 20.71 percent of frame (dna.framing_note). 0.3632 * 20.71 = 7.52, called 7.5.\n\nTHIS IS A FLOOR AND NOT A FORECAST. The model has one flat colour per triangle, no light, no ambient occlusion, no shadow and no antialiasing, which is why every prediction in this programme has under-predicted by 1.5x to 6.7x. A sweep landing BELOW 7.5 means something is broken, and the first thing to check is whether `domain` was moved off 4.0, which changes n_scarp's denominator and the whole calculation with it.\n\nTHE NEXT-QUIETEST BASIN PAIR IS FAR AWAY, WHICH IS WHAT MAKES THE CALL WORTH MAKING. The same computation over all ten basin pairs, as a fraction of PLATE area: bowl-scarp 36.3 percent, then valley-plateau 84.2, bowl-valley 84.3, plural-scarp 86.4, bowl-plural 87.0, valley-scarp 88.8, valley-plural 92.5, bowl-plateau 93.8, plural-plateau 94.4, plateau-scarp 95.9. First to second is 2.3x. If the sweep reverses that ranking, the fault is in the render and not in the choice.\n\nA NAMED RISK I MAY WELL BE WRONG ABOUT, registered because aftermath_grove was caught by exactly this and said so. The quietest pair in the whole sheet may not be on the basin axis at all: `relief` against `census` AT basin=bowl shares the same paint and differs by the 0.13 m relief, seven contour rings per plate and one stem. Modelled the same way - a maximum screen shear of 0.13 * 0.6108 * 229 = 18.2 px where the paint gradient is about 3.7 sum-levels per pixel, crossing threshold over roughly a fifth of the plate, plus 50.8 m of 7 mm contour ribbon at 2.56 percent of frame - that lands near 6.7 percent, BELOW the primary prediction. I still name the basin pair, because the rival's entire residual signal is shading and silhouette, which is precisely what a flat rasteriser cannot see and always under-counts, whereas bowl-against-scarp-in-census has no shading component to under-count. If the rival wins, that is my model's blind spot measured rather than a design fault."
+				},
+				"designed_nulls": [
+					{
+						"a": {
+							"basin": "bowl",
+							"reading": "residue"
+						},
+						"b": {
+							"basin": "valley",
+							"reading": "residue"
+						},
+						"under_percent": 0.3,
+						"why": "IDENTICAL BY CONSTRUCTION, EXPECTED 0.000. The residue reading draws max(0, n_descent - n_annealing) on the left plate and max(0, n_annealing - n_descent) on the right. At `bowl` the two members' formulas are literally the same expression (gradient_descent_visualization.gd:896 `x * x + y * y`; simulated_annealing_visualization.gd:365 `p.x * p.x + p.y * p.y`) and at `valley` they are the same Rosenbrock term for term (:898 against :368-371). Identical functions on an identical lattice, each normalised over its own range, give n_descent(p) == n_annealing(p) pointwise, so both residues are zero EVERYWHERE and both plates render flat at _res_ramp(0), the artifact's darkest colour. Verified numerically at 300 x 300 samples: mean and max residue exactly 0.00000 on both plates at both values. Everything else in frame - plinth, trim, struts, skirts, both rails - is fixed geometry that neither axis touches, and there is no text anywhere. The two frames should be identical to the byte; 0.3 percent is an antialiasing allowance, not an expectation."
+					},
+					{
+						"a": {
+							"basin": "bowl",
+							"reading": "residue"
+						},
+						"b": {
+							"basin": "scarp",
+							"reading": "residue"
+						},
+						"under_percent": 0.3,
+						"why": "THE SAME NULL, AND THE MORE INTERESTING ONE, BECAUSE IT IS NOT OBVIOUS FROM THE SOURCE. `scarp` is the only value where the two members wrote DIFFERENT code: the descent table hard-codes a rise of 3.0 (:127, :922) and the annealing table computes SCARP_RATIO * 2 * s^2 with SCARP_RATIO = 3.0 / 32.0 (:389-393), a ratio chosen - its own comment says so - to reproduce the sibling's proportion at whatever search_space_size is set to. At this bench's domain of 4.0 that expression evaluates to (3/32) * 2 * 16 = 3.0 exactly, so the two files compute the same number by two different routes and the residue is again zero everywhere (verified, max 0.00000). THE NULL IS THEREFORE A TEST OF THE PORT and not only of the arithmetic: if this pair comes back non-zero, either `domain` has moved off 4.0 or the calibration at simulated_annealing_visualization.gd:389 does not do what its comment claims. NOTE THE THIRD MEMBER OF THE SET: valley against scarp in residue is the same null again, so THREE OF THE FIVE BASIN VALUES RENDER THIS READING IDENTICALLY. That is pre-registered as the finding rather than reported later as a twin - the residue reading is SUPPOSED to be blank three times out of five, because three of the five values are one function under two names."
+					}
+				],
+				"placements": 0
+			},
+			"name": "Basin Field",
+			"lookup_name": "basin_field",
+			"scene": "res://commons/artifacts/basin_field/basin_field.tscn",
+			"category": "synthesis",
+			"complexity": "intermediate",
+			"description": "A two-plate comparator for the word `basin`. Exactly two artifacts in the corpus declare that axis, with the same five values, so the family is a hypothesis rather than a vocabulary: are these two about the same thing? The left plate draws gradient_descent_visualization's own formula for the named basin and the right plate draws simulated_annealing's, both normalised over their own range so they can be compared as shapes. Four readings cross it — the reliefs, their sections, their disagreement, and a census of their minima. At bowl, valley and scarp the two members are the same function twice and the disagreement plate is dead black; at plateau they are opposite landscapes under one word.",
+			"dev_themes": [
+				"algorithms",
+				"synthesis",
+				"optimization"
+			],
+			"tags": [
+				"basin",
+				"optimization",
+				"loss_landscape",
+				"gradient_descent",
+				"simulated_annealing",
+				"comparator",
+				"synthesis"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"size_group": "large",
+			"footprint": [
+				3,
+				2,
+				1
+			],
+			"parameters": {
+				"configurable": [
+					"basin",
+					"reading",
+					"domain"
+				],
+				"footprint": [
+					3,
+					2,
+					1
+				],
+				"size_group": "large"
+			}
+		}
+	}
+}
