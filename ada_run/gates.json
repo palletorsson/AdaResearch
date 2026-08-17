@@ -64,6 +64,27 @@
    "seconds": 19.4,
    "at": "2026-08-17T13:30:45",
    "head": "37dbbabb4"
+  },
+  "bounds": {
+   "ok": true,
+   "verdict": "EM BOUNDS: PASS \u00e2\u20ac\u201d the grid wall is gone, the net remains (x \u00c2\u00b120, y \u00c2\u00b110, z open)",
+   "seconds": 19.1,
+   "at": "2026-08-17T13:31:05",
+   "head": "37dbbabb4"
+  },
+  "desktop_hand": {
+   "ok": true,
+   "verdict": "DESKTOP HAND: PASS \u00e2\u20ac\u201d wired on desktop, absent in VR",
+   "seconds": 18.8,
+   "at": "2026-08-17T13:31:23",
+   "head": "37dbbabb4"
+  },
+  "bridge_courts": {
+   "ok": true,
+   "verdict": "EM BRIDGE COURTS: PASS \u00e2\u20ac\u201d protected route, four-metre gate, three-metre apron, original court unchanged",
+   "seconds": 12.8,
+   "at": "2026-08-17T13:31:36",
+   "head": "37dbbabb4"
   }
  }
 }
