@@ -152,7 +152,7 @@ static func hud(root: Node) -> Label:
 
 static func hud_text(records: Array, sel: int, overrides: Array, dirty: bool,
 		pal: Array = [], pal_i: int = -1) -> String:
-	var head := "[EDIT]  E select · arrows move (SHIFT 0.2 m) · PGUP/PGDN 0.2 m · Q/R turn 15° (SHIFT 90°) · +/- scale · DEL · [ ] palette · ENTER add · F5 save"
+	var head := "[EDIT]  E select · arrows move (SHIFT 0.2 m) · PGUP/PGDN 0.2 m · Q/R turn 15° (SHIFT 90°) · +/- scale · W space (walk) · DEL · [ ] palette · ENTER add · F5 save"
 	if pal_i >= 0 and pal_i < pal.size():
 		head += "
 add: %s  (%d/%d) — ENTER places it 2.5 m ahead" % [
@@ -176,7 +176,7 @@ add: %s  (%d/%d) — ENTER places it 2.5 m ahead" % [
 			line2 = "\nselected: %s  cell %s  rot %.0f  (%s)%s" % [
 				String(r.get("token", "?")), str(r.get("tile_cell", [])),
 				float(r.get("rotation", 0.0)), String(r.get("chapter", "?")),
-				("  · walk: " + String(r.get("walk_kind"))) if r.has("walk_kind") else ""]
+				("  · walk: %s (%s)" % [String(r.get("walk_kind")), String(r.get("walk_space", "wall"))]) if r.has("walk_kind") else ""]
 	var pend := overrides.size()
 	return head + line2 + ("\noverrides: %d%s" % [pend, "  *unsaved*" if dirty else ""]
 		if pend > 0 or dirty else "")

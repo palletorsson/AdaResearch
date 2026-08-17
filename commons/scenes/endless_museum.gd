@@ -2309,6 +2309,7 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 					var last: Dictionary = _edit_records[_edit_records.size() - 1]
 					if String(last.get("token", "")) == tok:
 						last["walk_kind"] = wk
+						last["walk_space"] = String(((row.get("relation", {}) as Dictionary).get("walk_space", "wall")))
 
 	var idle: int = 0
 	for ov_v in _edit_overrides:
@@ -3773,6 +3774,13 @@ func _edit_handle_key(key: int) -> bool:
 					0, _edit_pal.size())
 		KEY_ENTER:
 			_edit_place_from_palette()
+		KEY_W:
+			# THE 3D SURFACE SPEAKS ABOUT SPACE. On a body that carries a walk
+			# role, W cycles wall -> alcove -> room and writes the verdict to
+			# trunk_branches.json with space_by = "walk" (trail kept). Space is
+			# a heuristic every surface may overturn — this is the walk's turn.
+			# It is not a placement ruling and does not touch em_overrides.
+			_edit_walk_space()
 		KEY_F5:
 			var ok := true
 			if _mod_editor.call("save", _edit_overrides, _overrides_path):
@@ -4006,6 +4014,56 @@ func _edit_fine(dx: float, dy: float, dz: float) -> void:
 
 ## Uniform scale ruling. Multiplicative steps so + then - is identity;
 ## snapped to 0.05 in the file; 1.0 drops the key (no ruling).
+const TRUNK_BRANCHES := "res://commons/data/trunk_branches.json"
+const WALK_SPACES := ["wall", "alcove", "room"]
+
+
+func _edit_walk_space() -> void:
+	if _edit_sel < 0 or _edit_sel >= _edit_records.size():
+		return
+	var r: Dictionary = _edit_records[_edit_sel]
+	if not r.has("walk_kind"):
+		print("[em-edit] %s carries no walk role — space is a branch's word, and this body is not a branch" % r.get("token"))
+		return
+	var cur := String(r.get("walk_space", "wall"))
+	var nxt := String(WALK_SPACES[(WALK_SPACES.find(cur) + 1) % WALK_SPACES.size()])
+	if not FileAccess.file_exists(TRUNK_BRANCHES):
+		print("[em-edit] no trunk_branches.json — nothing to overturn")
+		return
+	var doc: Variant = JSON.parse_string(FileAccess.get_file_as_string(TRUNK_BRANCHES))
+	if not (doc is Dictionary):
+		return
+	var tok := String(r.get("token", ""))
+	var kind := String(r.get("walk_kind", ""))
+	var ch := String(r.get("chapter", ""))
+	var hit := false
+	for b_v in (doc as Dictionary).get("branches", []):
+		var b: Dictionary = b_v
+		if String(b.get("token", "")) == tok and String(b.get("kind", "")) == kind 				and (ch == "" or String(b.get("anchor", "")) == ch):
+			var trail: Array = b.get("space_trail", [])
+			trail.append({"space": String(b.get("space", "wall")), "by": String(b.get("space_by", "heuristic")), "at": b.get("at", null)})
+			b["space_trail"] = trail
+			b["space"] = nxt
+			b["space_by"] = "walk"
+			b["at"] = Time.get_datetime_string_from_system()
+			hit = true
+			break
+	if not hit and kind == "hero":
+		print("[em-edit] the hero is the trunk itself — its space is the corridor")
+		return
+	if not hit:
+		print("[em-edit] no branch (%s, %s, %s) in the trunk file" % [ch, tok, kind])
+		return
+	var f := FileAccess.open(TRUNK_BRANCHES, FileAccess.WRITE)
+	if f == null:
+		print("[em-edit] CANNOT WRITE %s" % TRUNK_BRANCHES)
+		return
+	f.store_string(JSON.stringify(doc, " "))
+	f.close()
+	r["walk_space"] = nxt
+	print("[em-edit] the WALK says %s wants a %s (was %s) — space_by: walk; the next plan builds it so" % [tok, nxt, cur])
+
+
 func _edit_scale(factor: float) -> void:
 	if _edit_sel < 0 or _edit_sel >= _edit_records.size():
 		return

@@ -47,9 +47,31 @@ KINDS = ["extends", "edge", "contradicts", "queers", "synthesizes", "varies"]
 #: how much SPACE a branch asks of the corridor. wall = a remark on the node
 #: (label / hung showing / mounted body on the corridor's own wall); alcove =
 #: floor but not distance (rung 1's bay, opened off the corridor); room = a
-#: side room off the enfilade, entered, threshold label = the reading. Derived
-#: branches default to wall; the hand raises it.
+#: side room off the enfilade, entered, threshold label = the reading.
+#:
+#: SPACE IS A HEURISTIC, NOT A RULING (Palle, 2026-08-17: "sometimes one
+#: thing works, sometimes something else — in 3D we iterate it visually, in
+#: the book paragraph we iterate it there"). The seeder PROPOSES a space from
+#: the branch's kind and evidence (space_by: heuristic); any surface may
+#: overturn it — the trunk page (space_by: trunk), the 3D editor (walk), the
+#: book (book) — and the file keeps WHO spoke and the trail of earlier
+#: verdicts, so the same branch can read heuristic:alcove -> walk:room ->
+#: book:wall over a month. That trail is the ontology forming. The museum
+#: builds whatever the current value is; heuristic and hand build alike.
 SPACES = ["wall", "alcove", "room"]
+
+
+def guess_space(kind: str, why: str) -> str:
+    """The heuristic. Explained per kind, and expected to be wrong sometimes."""
+    if kind == "varies":
+        return "wall"        # a DNA series IS a wall series already
+    if kind == "synthesizes":
+        return "alcove"      # a made thing wants floor beside its sources
+    if kind == "edge":
+        return "room" if "world" in why or "precinct" in why else "wall"
+    if kind in ("contradicts", "queers"):
+        return "room"        # a reading that negates wants to be entered
+    return "wall"            # extends: the field hangs beside the thesis
 
 
 def load(p: Path):
@@ -108,7 +130,8 @@ def derive() -> dict:
             return
         seen.add(key)
         branches.append({"anchor": anchor, "token": token, "kind": kind, "why": why,
-                         "via": via, "provenance": "derived", "space": "wall"})
+                         "via": via, "provenance": "derived",
+                         "space": guess_space(kind, why), "space_by": "heuristic"})
 
     # extends: named / family relations from a node's tokens to tokens NOT of the node
     for n in trunk_names:
@@ -159,9 +182,20 @@ def main() -> int:
     hand_drops = set(tuple(x) for x in prev.get("dropped", []))   # derived branches the hand dropped
 
     d = derive()
-    derived = [b for b in d["branches"]
-               if (b["anchor"], b["token"], b["kind"]) not in hand_keys
-               and (b["anchor"], b["token"], b["kind"]) not in hand_drops]
+    # a space overturned on a DERIVED branch by any surface survives reseed:
+    # the branch is re-derived, its space verdict + trail carried over
+    prev_space = {(b["anchor"], b["token"], b["kind"]): b
+                  for b in prev.get("branches", []) if b.get("space_by") not in (None, "heuristic")}
+    derived = []
+    for b in d["branches"]:
+        key = (b["anchor"], b["token"], b["kind"])
+        if key in hand_keys or key in hand_drops:
+            continue
+        if key in prev_space:
+            pb = prev_space[key]
+            b["space"] = pb.get("space", b["space"]); b["space_by"] = pb.get("space_by")
+            if pb.get("space_trail"): b["space_trail"] = pb["space_trail"]
+        derived.append(b)
     # heroes: hand-set hero on a node wins over dig
     hand_heroes = prev.get("hand_heroes", {})
     for t in d["trunk"]:
