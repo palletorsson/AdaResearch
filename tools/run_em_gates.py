@@ -44,6 +44,7 @@ GATES: dict[str, tuple[str, str, str, int]] = {
     "bounds":        ("gd", "res://commons/testing/test_em_bounds.gd",  r"EM BOUNDS: (PASS|FAIL)", 300),
     "desktop_hand":  ("gd", "res://commons/testing/test_em_desktop_hand.gd", r"DESKTOP HAND: (PASS|FAIL)", 300),
     "bridge_courts": ("gd", "res://commons/testing/test_em_bridge_courts.gd", r"(PASS|FAIL)", 400),
+    "side_room":     ("gd", "res://commons/testing/test_em_side_room.gd", r"SIDE ROOM: (PASS|FAIL)", 500),
 }
 
 

@@ -1514,8 +1514,14 @@ func _build_segment() -> void:
 	# outer skin: an implicit wall just beyond both side columns of the tile, so
 	# free-plan templates with a walkable rim (Kanazawa, Neue Nationalgalerie)
 	# cannot leak the walker off the edge of the world
+	# side-room doorways in the EAST skin are decided from the PLAN here,
+	# before the skin is stamped (the deal runs later); _side_room_doorways
+	# and _build_side_rooms number rooms in the same plan order so they agree
+	var doorways: Dictionary = _side_room_doorways(spec, next_seq, tile.size())
 	for y_skin in range(tile.size()):
 		for sx2 in [-1, w]:
+			if sx2 == w and doorways.has(y_skin):
+				continue                    # the doorway: no skin; the room's walls take over
 			_wall_at(seg, solid, wcells, int(sx2), y_skin + VESTIBULE_H, wall_col, m_wall, wr)
 	# collect slots first so the artifact budget prefers hero > podium > floor
 	var slots: Array = []
@@ -1711,6 +1717,13 @@ func _build_segment() -> void:
 	# none over 8 m or 4 m tall on this corpus), stamped through _stamp so
 	# the seal, records and rulings all see them. Gated: no forecourt rows,
 	# no strip, no nodes, zero depth.
+	# SIDE ROOMS. Rooms off the east skin for the branches whose space is
+	# "room". Built before the joint so they hang off the BUILDING, not the
+	# court; the skin cell at each doorway was left open by the skin loop, the
+	# room's own walls close it, the walk map gains the room, and a threshold
+	# label carries the reading. Gated: no room rows, nothing built.
+	var room_rows: Array = deal.get("side_rooms", []) if deal is Dictionary else []
+	_build_side_rooms(seg, solid, w, tile.size(), zbase, room_rows, wall_col, m_wall, m_deck, seg_seq)
 	var fore_rows: Array = deal.get("forecourt", []) if deal is Dictionary else []
 	var porch_depth: int = _build_forecourt(seg, solid, w, tile.size(), zbase, fore_rows,
 		wall_col, m_wall, m_deck)
@@ -1874,6 +1887,108 @@ func _load_plan() -> void:
 ## The walk lane through every forecourt ground, in columns, kept clear by
 ## construction — wide enough for the 0.32 m capsule with a body either side.
 const FORE_LANE := 5
+
+## Side rooms - geometry. A room is ROOM_W wide (into +x, beyond the east
+## skin) and ROOM_D deep (along z), stacked down the segment with ROOM_GAP
+## between; the doorway is one cell wide in the skin at the room's mid-depth.
+## Sized for a reading and a body, not a gallery.
+const ROOM_W := 5
+const ROOM_D := 7
+const ROOM_GAP := 2
+const ROOM_Z0 := 4    # first room starts this many tile rows past the vestibule
+
+
+## The tile rows whose east-skin cell becomes a doorway - decided from the
+## PLAN before the skin is stamped. Same plan resolution as _deal_from_plan;
+## a chapter with no room rows returns {} and the skin is byte-identical.
+func _side_room_doorways(spec: Dictionary, chapter: String, tile_h: int) -> Dictionary:
+	var out: Dictionary = {}
+	var key := String(spec.get("key", ""))
+	var entry: Dictionary = {}
+	if chapter != "" and _plan_by_chapter.has("%s|%s" % [key, chapter]):
+		entry = _plan_by_chapter["%s|%s" % [key, chapter]]
+	elif _plan_db.has(key):
+		entry = _plan_db[key]
+	if entry.is_empty():
+		return out
+	var n: int = 0
+	for row_v in entry.get("artifacts", []):
+		var row: Dictionary = row_v
+		if String(((row.get("relation", {}) as Dictionary).get("walk_space", ""))) != "room" \
+				or String(row.get("venue", "")) != "interior":
+			continue
+		var z0: int = ROOM_Z0 + n * (ROOM_D + ROOM_GAP)
+		if z0 + ROOM_D > tile_h:
+			break                            # no more room along this segment
+		out[z0 + int(ROOM_D / 2)] = n
+		n += 1
+	return out
+
+
+## Build the side rooms off the east skin, numbered in plan order (the same
+## order _side_room_doorways used, so doorway and room agree).
+func _build_side_rooms(seg: Node3D, solid: StaticBody3D, w: int, tile_h: int,
+		zbase: int, rows: Array, wall_col: Color, m_wall: Material, m_deck: Material,
+		chapter: String) -> void:
+	if rows.is_empty():
+		return
+	var built: int = 0
+	for i in range(rows.size()):
+		var r: Dictionary = rows[i]
+		var z0: int = VESTIBULE_H + ROOM_Z0 + i * (ROOM_D + ROOM_GAP)
+		if z0 + ROOM_D > VESTIBULE_H + tile_h:
+			print("[em-room] %s: no room left along this segment (%d rooms fit) - stays in the corridor" % [r.get("token"), i])
+			break
+		var x0: int = w + 1                  # first room column, past the skin at x = w
+		var door_z: int = z0 + int(ROOM_D / 2)
+		# floor, and the doorway cell itself (the skin was skipped there)
+		_box(seg, Vector3(x0 + ROOM_W / 2.0, -0.1, z0 + ROOM_D / 2.0),
+			Vector3(ROOM_W, 0.2, ROOM_D), Color(0.17, 0.165, 0.18), m_deck)
+		_box(seg, Vector3(w + 0.5, -0.1, door_z + 0.5), Vector3(1, 0.2, 1), Color(0.17, 0.165, 0.18), m_deck)
+		if _vr:
+			_add_col(solid, Vector3(x0 + ROOM_W / 2.0, -0.1, z0 + ROOM_D / 2.0), Vector3(ROOM_W, 0.2, ROOM_D))
+			_add_col(solid, Vector3(w + 0.5, -0.1, door_z + 0.5), Vector3(1, 0.2, 1))
+		_walk_cells[Vector2i(w, zbase + door_z)] = true
+		for zz in range(z0, z0 + ROOM_D):
+			for xx in range(x0, x0 + ROOM_W):
+				_walk_cells[Vector2i(xx, zbase + zz)] = true
+		# walls: far east, north, south, at full height; the skin line stands
+		# above and below the doorway already
+		for zz in range(z0 - 1, z0 + ROOM_D + 1):
+			_wall_at(seg, solid, {}, x0 + ROOM_W, zz, wall_col, m_wall, false)
+		for xx in range(x0, x0 + ROOM_W):
+			_wall_at(seg, solid, {}, xx, z0 - 1, wall_col, m_wall, false)
+			_wall_at(seg, solid, {}, xx, z0 + ROOM_D, wall_col, m_wall, false)
+		# ceiling slab over the room at the corridor's soffit
+		_box(seg, Vector3(x0 + ROOM_W / 2.0, WALL_H + 0.2, z0 + ROOM_D / 2.0),
+			Vector3(ROOM_W + 1, 0.3, ROOM_D + 2), Color(0.9, 0.89, 0.87), m_wall)
+		# the threshold label: the reading, corridor side of the doorway
+		var lbl := Label3D.new()
+		lbl.text = "%s  %s" % [String(r.get("kind", "")).to_upper(), String(r.get("token", ""))] + String.chr(10) + String(r.get("why", "")).left(140)
+		lbl.font_size = 28
+		lbl.pixel_size = 0.004
+		lbl.modulate = Color(0.95, 0.9, 0.75)
+		lbl.position = Vector3(w - 0.05, 2.3, door_z + 0.5)
+		lbl.rotation_degrees.y = 90.0
+		lbl.autowrap_mode = TextServer.AUTOWRAP_WORD
+		lbl.width = 900.0
+		seg.add_child(lbl)
+		# the body at the room's centre, through _stamp so seals/records see it
+		var cell: Dictionary = {"x": x0 + int(ROOM_W / 2), "y": z0 + int(ROOM_D / 2), "rank": 2, "top": 0.0}
+		if _stamp(seg, String(r.get("scene", "")), String(r.get("token", "")),
+				cell, zbase, 1, {}, false, 0.0, float(r.get("rotation", 0.0))):
+			built += 1
+			if not _edit_records.is_empty():
+				var last: Dictionary = _edit_records[_edit_records.size() - 1]
+				if String(last.get("token", "")) == String(r.get("token", "")):
+					last["walk_kind"] = String(r.get("kind", ""))
+					last["walk_space"] = "room"
+			print("[em-room] %s ENTERED by its own room off %s (z %d..%d): %s" % [
+				r.get("token"), chapter, z0, z0 + ROOM_D, String(r.get("why", "")).left(60)])
+		else:
+			print("[em-room] side room for %s refused - %s" % [r.get("token"), _stamp_refusal])
+	_deal_stats["side_rooms"] = int(_deal_stats.get("side_rooms", 0)) + built
+
 
 ## The forecourt builder. Returns the after-porch depth it added (0 if none).
 func _build_forecourt(seg: Node3D, solid: StaticBody3D, w: int, tile_h: int,
@@ -2166,6 +2281,7 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 	var off_tile: int = 0
 	var courts: Array = []
 	var forecourt: Array = []   # porch/outside rows, stamped on vestibule + joint ground
+	var side_rooms: Array = []  # trunk branches whose space is "room" - rooms off the east skin
 	var walk_kinds: Dictionary = {}   # hero-walk roles stamped in this chapter
 	for row_v in rows:
 		var row: Dictionary = row_v as Dictionary
@@ -2185,6 +2301,24 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 				"access": String(row.get("court_access", "")),
 				"rotation": float(row.get("rotation", 0.0)),
 				"venue": venue,
+				"chapter": String(entry.get("sequence", ""))})
+			continue
+		if String(((row.get("relation", {}) as Dictionary).get("walk_space", ""))) == "room" \
+				and venue == "interior":
+			# A SIDE ROOM (2026-08-17). A trunk branch whose space says "room"
+			# - a reading that wants to be walked into - is not dealt into the
+			# corridor's slots; it gets its own room off the enfilade's east
+			# skin at this segment, threshold label = the reading. Collected
+			# like a court resident; built by _build_side_rooms after the tile.
+			var rtok := String(row.get("token", ""))
+			var rscene := String(scene_of.get(rtok, ""))
+			if rscene == "":
+				missing.append(rtok)
+				continue
+			side_rooms.append({"token": rtok, "scene": rscene,
+				"rotation": float(row.get("rotation", 0.0)),
+				"kind": String(((row.get("relation", {}) as Dictionary).get("walk_kind", ""))),
+				"why": String(((row.get("relation", {}) as Dictionary).get("walk_why", ""))),
 				"chapter": String(entry.get("sequence", ""))})
 			continue
 		if venue == "porch" or venue == "outside":
@@ -2340,7 +2474,7 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 		"max_objects": rows.size(), "class": "planned",
 		"budget": {}, "wall_features_max": -1, "fill_walls": true,
 		"from_plan": true, "exterior_unhosted": exterior,
-		"courts": courts, "forecourt": forecourt, "walk_kinds": walk_kinds}
+		"courts": courts, "forecourt": forecourt, "walk_kinds": walk_kinds, "side_rooms": side_rooms}
 
 
 ## Step the dealing cursor past every remaining entry of the chapter it is
