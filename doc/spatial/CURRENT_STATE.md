@@ -5,6 +5,33 @@
 
 Updated 2026-08-15.
 
+## 08-17 — the forecourt: porch/outside placements are built (UNCOMMITTED, rides the DNA-wall commit)
+
+Palle: "build the porch/outside placements too." 333 negotiated bodies sat on
+the apron the museum never stamped — small (median 1.1 m, none over 8 m or
+4 m tall), in front of (N: 82) or behind/beside (S/E/W: 251) the building. In
+the endless museum those grounds ARE the vestibule and the joint. So
+`_deal_from_plan` now collects porch/outside rows like court residents and
+`_build_forecourt` stamps them: N-side into the vestibule (rows 1–2, x kept),
+S/E/W onto a new 3 m AFTER-PORCH strip laid before the courts (walkable, low
+parapets). Through `_stamp`, so seals/records/rulings see them. Gated: no
+rows, no strip, zero depth.
+
+The first build proved the trap: 57 bodies stamped in seg 0, autopilot
+`no_route` at z 35 — the seal's severance test judged each body against
+ground whose far side did not exist yet. Fix by CONSTRUCTION, not a tighter
+check: the centre `FORE_LANE = 5` columns of both grounds are never offered;
+rows in the lane are refused with a count (never shifted — that would be a
+second placement author). Result: 113 forecourt bodies stamped across six
+segments, walker clean through all of them to z 596.5, then `unlearn_budget`
+inside a primitives court in seg 5's joint (the queue re-timed by the 3 m
+strips) — the pre-existing joint-crossability tail, surfaced not caused.
+
+Lives in `commons/scenes/endless_museum.gd` alongside the other agent's
+uncommitted DNA-wall-series work (+415); the two cannot be committed apart
+without a risky patch split, so the forecourt lands with that commit. A copy
+of the working file is in this session's scratchpad.
+
 ## What changed on 08-15 — rung three became the bridge-courtyard
 
 Palle's ruling is now explicit: a broad precinct up to 40 m may stay in the
