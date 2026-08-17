@@ -15,6 +15,7 @@ extends SceneTree
 
 const PLAN := "res://ada_run/em_plan.json"
 const TRIAL := "res://ada_run/_trial_em_plan_side_room.json"
+const BARE := "res://ada_run/_trial_em_plan_no_rooms.json"   # the real plan with every room ask removed
 
 func _initialize() -> void:
 	call_deferred("_run")
@@ -26,8 +27,28 @@ func _run() -> void:
 	var plans: Array = doc.get("plans", [])
 	if plans.is_empty():
 		print("SIDE ROOM: SKIP — no v2 plan rows"); quit(0); return
+	# the GATE plan: the real plan with every room ask stripped. The live plan
+	# may carry hand readings (it does since 08-17: noise), so "no room row"
+	# must be MADE, not assumed. Written first, before the doc is marked.
+	var stripped := 0
+	for pl in plans:
+		for a in (pl as Dictionary).get("artifacts", []):
+			var rel: Dictionary = (a as Dictionary).get("relation", {})
+			if String(rel.get("walk_space", "")) == "room":
+				rel["walk_space"] = "wall"; stripped += 1
+	var fb := FileAccess.open(BARE, FileAccess.WRITE)
+	fb.store_string(JSON.stringify(doc)); fb.close()
+	print("[test] gate plan: %d room ask(s) stripped from the live plan" % stripped)
 	# the trial: mark the first chapter's second interior row as a room
+	# mark the chapter the walk OPENS at (ada_run/em_control.json first_chapter,
+	# else the spine's first), so the trial room is dealt in segment 0
 	var first: Dictionary = plans[0]
+	if FileAccess.file_exists("res://ada_run/em_control.json"):
+		var ctl: Variant = JSON.parse_string(FileAccess.get_file_as_string("res://ada_run/em_control.json"))
+		var want := String((ctl as Dictionary).get("first_chapter", "")) if ctl is Dictionary else ""
+		for pl in plans:
+			if String((pl as Dictionary).get("sequence", "")) == want:
+				first = pl; break
 	var chapter := String(first.get("sequence", ""))
 	var museum := String(first.get("museum", ""))
 	var marked := ""
@@ -46,23 +67,23 @@ func _run() -> void:
 	var f := FileAccess.open(TRIAL, FileAccess.WRITE)
 	f.store_string(JSON.stringify(doc)); f.close()
 
-	# ── GATE: the real plan (no room rows) ───────────────────────────────────
+	# ── GATE: the live plan with no room rows ────────────────────────────────
 	var ps: PackedScene = load("res://commons/scenes/endless_museum.tscn")
 	var g: Node3D = ps.instantiate() as Node3D
 	g.set("_edit_mode", true)
 	g.set("_overrides_path", "res://ada_run/_trial_em_overrides_sr.json")
-	g.set("_plan_path", PLAN)
+	g.set("_plan_path", BARE)
 	get_root().add_child(g)
 	await create_timer(0.8).timeout
 	var stats0: Dictionary = g.get("_deal_stats")
 	if int(stats0.get("side_rooms", 0)) != 0:
-		fails.append("GATE: real plan built %d side rooms" % int(stats0.get("side_rooms", 0)))
+		fails.append("GATE: no-room plan built %d side rooms" % int(stats0.get("side_rooms", 0)))
 	var any_room := false
 	for r in (g.get("_edit_records") as Array):
 		if String((r as Dictionary).get("walk_space", "")) == "room":
 			any_room = true
 	if any_room:
-		fails.append("GATE: a record carries walk_space room under the real plan")
+		fails.append("GATE: a record carries walk_space room under the no-room plan")
 	get_root().remove_child(g); g.queue_free()
 	await create_timer(0.2).timeout
 
@@ -74,7 +95,10 @@ func _run() -> void:
 	get_root().add_child(b)
 	await create_timer(0.8).timeout
 	var stats1: Dictionary = b.get("_deal_stats")
-	var built_here: bool = int(stats1.get("side_rooms", 0)) >= 1
+	var built_here: bool = false
+	for r0 in (b.get("_edit_records") as Array):
+		if String((r0 as Dictionary).get("token", "")) == marked and String((r0 as Dictionary).get("walk_space", "")) == "room":
+			built_here = true
 	# the trial marks chapter 1 of the plan; the museum may not have dealt that
 	# chapter in its first segments — then the room is not expected yet, and the
 	# doorway helper is what we can prove
@@ -101,6 +125,7 @@ func _run() -> void:
 	get_root().remove_child(b); b.queue_free()
 
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(TRIAL))
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(BARE))
 	if FileAccess.file_exists("res://ada_run/_trial_em_overrides_sr.json"):
 		DirAccess.remove_absolute(ProjectSettings.globalize_path("res://ada_run/_trial_em_overrides_sr.json"))
 	if fails.is_empty():
