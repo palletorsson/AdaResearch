@@ -1,0 +1,175 @@
+{
+ "artifacts": {
+  "statute_fitting": {
+   "name": "Statute Fitting",
+   "lookup_name": "statute_fitting",
+   "scene": "res://commons/artifacts/statute_fitting/statute_fitting.tscn",
+   "class_name": "StatuteFitting",
+   "category": "lab_prop",
+   "artifact_type": "synthesis",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "size_group": "compact",
+   "description": "A fire point on a wall, built to separate the two questions its family asks with one word. TWO tokens declare an axis called statute with identical values (issue | notice | joinery | lapse): fire_extinguisher and fire_hose_box. They are not one script - 904 lines and 981 - but they are one author working from one note, and the note says so: fire_extinguisher.gd:28-29 instructs that a value added to one file must be added to the other in the same commit. Read side by side the agreement is mechanical: SUPPORTS (:182-183 / :183-184), DEGRADE (:189-195 / :190-196), SIGN_RED and BOARD_WHITE (:199-200 / :201-202), the STATUTES livery table (:206-218 / :208-220) and the four bodies of _lv/_lv_rough/_lv_metal/_ink (:586-616 / :659-689) are identical to the last digit, and both hang the same expired service tag with the same string literal, make_panel_mesh('2019') at :882 and :959. So the family agrees. It agrees about TWO THINGS. Three of the four values are decisions taken at install - issue (the building added nothing), notice (it amplified: backing board, mandatory sign, projecting flag, painted floor zone), joinery (it absorbed: the alarm red dragged 88 percent toward a dark taupe, the shout reduced to one engraved plate) - and the fourth, lapse, is not a decision at all. It is time passing. Putting them in one match statement (:763-772 / :830-839) makes neglect a fourth kind of intention, and makes the two questions mutually exclusive: the family cannot show a serviced extinguisher on a rotted wall, nor an absorbed one that has quietly gone out of date, which is the commonest failure in the built world because a thing is absorbed into the joinery precisely so that it can be forgotten. This bench keeps statute - the family's word, its four values, its exact colour arithmetic, copied and not retyped - and takes the DATE out of lapse, handing it to a second axis, currency, answered entirely in geometry and colour and not once in text: a gauge needle in the green sector or down in the red, a tamper seal intact or cut, a service card whose head band carries the inspection cycle's colour, and a bracket occupied or empty above the unfaded ghost of what stood there. A 0.600 x 0.760 m wall on two feet, yawed 0.62 rad to meet capture_config_sweep's own standpoint, and the wall is the world box in all sixteen cells so that deleting the entire cylinder does not move the camera.",
+   "tags": [
+    "safety",
+    "fire",
+    "regulation",
+    "compliance",
+    "signage",
+    "wall_mounted",
+    "inspection",
+    "two_axes",
+    "one_author_two_files",
+    "synthesis"
+   ],
+   "dev_themes": [
+    "a form dictated by law rather than by an algorithm",
+    "three decisions and one thing that merely happened",
+    "the legal state of an object is its faintest mark",
+    "absorption destroys auditability"
+   ],
+   "interactions": [
+    "walk the currency axis at statute=issue. This is the axis the sources cannot express at all, because their only certificate is an expired one and it is welded to the rust. certified against absent is the loudest pair on the sheet - the whole cylinder assembly, 5.45 percent of frame, replaced by an empty bracket and a wall ghost - and certified against overdue is the quietest at 0.60 percent, a single 0.210 x 0.100 m band of colour. Those two pairs are the same axis and differ by a factor of 9. The thing you can see from across the corridor is whether the extinguisher is there; the thing that determines whether it will work is a card.",
+    "compare certified against overdue down the whole statute column. issue and notice measure the SAME 0.6024 percent to the byte, because the sources' livery table carries no keys for either (:206-218, 'issue': {} and 'notice': {}) and _ink is an identity return for both. lapse measures 0.0875 percent, a seventh of it, because lapse's ink_amt is 0.85. And joinery measures ZERO, exactly, because its ink_amt is 1.0 and Color.lerp(ink, 1.0) returns ink whatever went in. The building's decorator has repainted the certificate and the difference between an extinguisher that is in date and one that is not has stopped existing. That arithmetic is the sources', not this bench's.",
+    "look at the gauge and the seal, which are deliberately NOT routed through _ink. discharged reads at every statute - the needle swings out of the green into the red and the tamper tie is cut into two stubs - because a decorator does not get to repaint a pressure gauge. Compare that with the record card, which it does get to repaint. The axis therefore has one question that survives absorption and one that does not, and the one that does not is the legal one.",
+    "look at the ghost under absent, along the statute axis. It is painted in FACE_COLOR['issue'], the wall's original colour, so at statute=issue it is the same colour as the wall it is drawn on and contributes exactly zero pixels; at lapse the wall has chalked around it and it is one of the brightest marks in the frame. An absence is only visible against a surface that has changed, which is why nobody notices a missing extinguisher in a building that is looked after.",
+    "count what never moves. The bracket, the strap, the punch row, the card frame, the gauge bezel and the two feet are in all sixteen cells, so their appearance is free evidence about the wall behind them - and the world box is a constant 0.502272 x 0.815000 x 0.368154 m in every cell, which is what lets the absent column be compared with the others at all."
+   ],
+   "capacity": "SEE that safety equipment is the one class of object in a building whose appearance is written down in law, that a building's answer to that law has a REGISTER (amplify, comply, absorb) and separately a CURRENCY (is the promise still in force), that these are orthogonal, and that a vocabulary which folds them into one word turns neglect into a kind of intention - then see, in numbers, that the legally decisive difference is the faintest mark on the sheet and that absorbing the equipment into the joinery erases it completely",
+   "dna": {
+    "promoted": "2026-08-17",
+    "stage": "synthesis",
+    "framing": 0.48,
+    "sources": [
+     "fire_extinguisher",
+     "fire_hose_box"
+    ],
+    "kin": [
+     "fire_extinguisher",
+     "fire_hose_box",
+     "exit_sign",
+     "safety_shower",
+     "emergency_button",
+     "electrical_panel",
+     "exhibit_furniture"
+    ],
+    "axes": {
+     "statute": [
+      "issue",
+      "notice",
+      "joinery",
+      "lapse"
+     ],
+     "currency": [
+      "certified",
+      "overdue",
+      "discharged",
+      "absent"
+     ]
+    },
+    "default": "statute=issue, currency=certified - AND THE TWO HALVES OF THAT DEFAULT ARE NOT THE SAME KIND OF CHOICE. statute=issue IS THE SOURCES' DEFAULT, verbatim (fire_extinguisher.gd:152, fire_hose_box.gd:156) and verbatim in behaviour: _build_statute() returns on its first line for issue, LIVERY['issue'] is the empty dictionary, _lv and _ink are identity returns, and the cell adds not one mark to the wall. currency=certified IS NOT THE SOURCES' STATE AND CANNOT BE. Search both files for a service tag and there is exactly one, in _statute_lapse(), reading '2019' (fire_extinguisher.gd:882, fire_hose_box.gd:959). The family can photograph an expired certificate and has no way at all to photograph a valid one - so the home cell of this sheet is the one picture the family could never take, and every step away from it is a step the family CAN take. That inversion is deliberate and it is the argument: a vocabulary built entirely out of failure states has no word for working.",
+    "was": "TWO FILES, ONE HAND, AND A SEAM ONE VALUE TO THE LEFT OF WHERE IT WAS LOOKED FOR. The brief that commissioned this bench suspected that issue/notice/lapse were a regulatory lifecycle and that joinery was a construction detail - how the thing is put together, which does not change when a certificate expires. That reading of the word is wrong, and the sources say so in prose and in code: joinery is not the FITTING's joinery but the BUILDING's, glossed at fire_extinguisher.gd:44-45 and fire_hose_box.gd:85-87 as 'absorption: the architect won', and built by _statute_joinery() (:833-846 / :908-924) as a flush matte panel, a shadow-gap reveal and one brushed plate while _lv() drags the alarm red 88 percent toward taupe. It is a stance toward the law, exactly like the other three. But the suspicion was right that the axis is two questions, and the seam falls between the first three and the fourth: issue, notice and joinery are decisions taken at install; lapse is not a decision, it is time. The tell is in _statute_lapse() itself, which does rust, chalked paint and a grime collar - all fabric - and THEN hangs the expired tag. Fabric and date are welded, and there is no way to ask for one without the other. TWO SMALLER THINGS FOUND WHILE READING, both worth a line. FIRST: statute is the only one of the two shared axes that is not defended. support is normalised and allow-listed once per config read (_resolve_support, :282-289 / :290-297, with a comment explaining that '#support: stand' with a human's space after the colon would otherwise silently take the default), while statute is matched RAW in _build_statute (:764 / :831) and RAW again in every LIVERY lookup (:587 / :660). The same author fixed the trap for one axis and left it open on the other, in the same function, and statute is the axis with four values to support's three natives. SECOND: under joinery, _ink's ink_amt is 1.0, so Color.lerp(ink, 1.0) returns ink regardless of input - which makes the label_color and accent_color exports DEAD at that value. Pass any colour you like with statute:joinery and you get Color(0.44, 0.46, 0.42). Nothing warns.",
+    "note": "THE INSTRUMENT DECISIONS, EACH ONE COSTING SOMETHING. (1) THE WALL IS THE WORLD BOX, IN ALL SIXTEEN CELLS, AND THIS WAS MEASURED RATHER THAN ASSERTED. currency=absent deletes the cylinder, accent band, neck, valve, handle, hose, gauge and seal - roughly 5.45 percent of frame of geometry - and if any of that had defined the AABB the camera would have moved and that whole column would have been measuring its own framing. So every part was first checked against the board's world box after the 0.62 yaw, part by part: the board's own world extents are x +-0.251136 and z +-0.184077 (half-extents 0.300*cos(0.62) + 0.012*sin(0.62) and 0.300*sin(0.62) + 0.012*cos(0.62)); the widest thing inside them is the accent band at x +0.248069, the deepest the strap bar at z +0.087222, and the feet at FOOT_X 0.185 with depth 0.120 reach x +-0.215950 and z +-0.178113. Then probe_aabb_hogs.gd was run three times against the scene and returned, to six decimals in all three, pos (-0.251136, 0, -0.184077) size (0.502272, 0.815, 0.368154) - at the default (46 meshes), at --set=currency=absent (18 meshes, twenty-eight deleted) and at --set=statute=notice (58 meshes, twelve added). The mesh counts are exactly the design: 18 is the constant set (board, two feet, face, bracket, strap bar, ghost, card frame, card face, cycle band, eight punches), 46 adds the body, accent, neck, valve, handle, three hose tubes, nozzle, nineteen gauge parts and the seal, and 58 adds the statutory panel, sign band, three pictogram bars and seven hatch bars. So the axes are reachable through a plain Object.set, the values are being applied, and the camera cannot move between cells. Diagonal 1.025689, radius 0.512845. (2) THE FLAT MARKS ARE UNSHADED. Every mark painted on the wall - the face, the statutory panel, the keep-clear hatch, the rust, the grime, the ghost, the card and its cycle band - is SHADING_MODE_UNSHADED, so its pixel is filmic(srgb_to_linear(albedo)) and nothing else. That is what makes the prediction below TWO-SIDED rather than a floor. The cylinder, bracket, gauge bezel, seal and feet stay lit so the object keeps a body. (3) THE WALL IS YAWED 0.62 rad. capture_config_sweep.gd:69 puts the camera at YAW 0.62 and :443 builds its direction as Vector3(sin(yaw)cos(pitch), -sin(pitch), cos(yaw)cos(pitch)), whose horizontal bearing is 0.62 exactly; facing the wall along it photographs the card and the dial square and costs only the 15 degree pitch, cos(0.26) = 0.966390. (4) framing 0.48 IS THE TIGHTEST SAFE VALUE AND IT WAS COMPUTED, NOT GUESSED. Projecting all eight board corners through the rig's own camera construction gives a worst normalised extent of 0.9041 at 0.48, 0.9468 at 0.46, 0.9938 at 0.44 and 1.0728 at 0.42, so 0.42 clips the wall and 0.48 keeps a 10 percent margin. (5) NO TEXT ANYWHERE, not one Label3D and not one baked-text panel. The sources put their whole notice sign and their whole lapse date into rendered glyphs, which at 760 x 760 in a frame 0.935 m wide are 4-6 px tall; where they write a word this bench draws a pictogram, a colour or a needle. (6) NO NUMERIC VALUE IN EITHER AXIS. Both are word enums typed String, so cabinet_sweep.coerce() has nothing to numericise and the tier_terrarium failure - Object.set() refusing a typed property in silence - cannot occur here. Checked, not assumed. (7) FULLY DETERMINISTIC: no RandomNumberGenerator, no randf, no noise, no _process, no Timer, no tween, so no dna.fixture is needed to pin a seed and two builds are the same bytes.",
+    "predicted_degeneracy": {
+     "pair": "certified against overdue, in the lapse statute",
+     "percent": 0.0875,
+     "metric": "luma - mean absolute luminance delta over the WHOLE 760x760 frame. THE WORD IS LOAD-BEARING AND changed_pct CANNOT RANK THIS AXIS AT ALL: certified and overdue differ in the albedo of one fixed quad, so the set of pixels that changes is IDENTICAL in the issue, notice and lapse rows and a threshold count returns the same number three times, which is ground_layer's finding repeated. The same pair measured inside the band region alone is 3.774 percent, and the critic's focus number (mean over the hottest 5 percent of pixels) is 1.750 percent because the band is only 2.319263 percent of frame and the focus band is therefore 54 percent filled with unchanged pixels. All three are stated because a closest-pair claim inherits its denominator.",
+     "pool": "the FOUR certified-against-overdue pairs, one per statute row, ranked among themselves. Not the 120 pairs of the sheet: several currency pairs involving absent are an order of magnitude larger, and the smallest number on the sheet is not this one but the registered null below, which is exactly 0.",
+     "floor_or_two_sided": "TWO-SIDED. The usual 1.5x-to-6.7x under-shoot comes from a Python rasteriser being blind to shadow, ambient occlusion and antialiasing; none of those touch an unshaded coplanar patch, and the whole difference here lives inside one such patch. The arithmetic below is exact to the byte. A measured value more than about 15 percent either side of 0.0875 means the harness changed something - the framing hint was dropped, the material is not unshaded, or the tonemapper is not FILMIC - and should be investigated before the number is read as a fact about the axis. The only expected shortfall is edge antialiasing: the band is about 177 x 84 px, so roughly 4 percent of its pixels are partial, which biases the measurement a little LOW.",
+     "why": "AREA. The cycle band is 0.210 x 0.100 m on the wall face; the wall is turned to face the camera in azimuth, so the only foreshortening is the rig's 15 degree pitch and the projected area is 0.210 x 0.100 x cos(0.26) = 0.020294 m2. FRAME. The world box is 0.502272 x 0.815000 x 0.368154 (board and feet, each rotated 0.62 about Y, unioned), diagonal 1.025689, radius 0.512845; capture_config_sweep.gd:442 sets dist = radius / tan(17 deg) x 1.9 x 0.48 = 1.529800 m, so the frame is a square of side 2 x radius x 1.9 x 0.48 = 0.935429 m, area 0.875028 m2. The band is 2.319263 percent of it. COLOUR. Under lapse the sources' table gives ink Color(0.56, 0.53, 0.48) at ink_amt 0.85, so the band albedo is 0.15 x cycle + 0.85 x ink: green Color(0.16, 0.52, 0.24) becomes (0.5000, 0.5285, 0.4440) and amber Color(0.86, 0.62, 0.10) becomes (0.6050, 0.5435, 0.4230). Unshaded albedo -> srgb_to_linear -> Godot FILMIC (A 0.88, B 0.60, C 0.10, D 0.20, E 0.01, F 0.30, white 1.0) -> linear_to_srgb -> 8 bit gives (162, 170, 145) and (189, 174, 138). PIL's L is 0.299R + 0.587G + 0.114B, so 164.758 and 174.381, delta 9.623. FRAME PERCENT = 0.02319263 x 9.623 / 255 = 0.000875 = 0.0875 percent. The same arithmetic with ink identity (issue and notice) gives (49, 167, 76) against (237, 193, 30), L 121.344 against 187.574, delta 66.230, and 0.6024 percent - so lapse is 6.88x quieter than issue and notice, which are equal to each other to the byte.",
+     "peak_for_contrast": "The sheet's loudest currency pair is certified against absent, which removes the entire cylinder assembly - approximately 0.047720 m2 of silhouette, 5.45 percent of frame, at a large luminance delta against the wall behind it - plus the strap swinging 1.35 rad and the ghost appearing. The headline number this sweep reports will come from there or from an issue-against-notice statute pair, where the whole 0.580 x 0.740 m wall face changes colour (49.3 percent of frame). The ratio between that peak and the registered floor is more than two orders of magnitude, so ANY report quoting only the headline has said nothing about the question this bench was built to ask."
+    },
+    "predicted_relationship": "THREE CLAIMS THAT DO NOT NEED A PERCENTAGE TO BE WRONG. FIRST: the certified-against-overdue delta must be EQUAL in the issue row and the notice row, to the byte, because LIVERY['issue'] and LIVERY['notice'] are both the empty dictionary (fire_extinguisher.gd:207-208) and _ink returns its argument unchanged for both. If those two numbers differ by more than render nondeterminism, something other than the axis is moving the band - a shadow falling on it, or the material not actually unshaded - and every other number on the sheet is suspect. SECOND: the ranking of that pair across the four statutes must be issue = notice > lapse > joinery, at 0.6024, 0.6024, 0.0875 and 0.0000. The ratio issue:lapse is fixed by the ink weights and nothing else, and it is not 0.15 as the linear weight suggests but 6.88x, because the tonemapper and the sRGB transfer function are both compressive and the two lapsed colours land on a flatter part of the curve. THIRD, AND IT IS A PREDICTION ABOUT THE INSTRUMENT: the currency axis will be reported as a strong bite and the report will be about absent. Every pair involving absent moves several percent of frame; every pair not involving absent moves under one. If the per-pair rows are not read, this sheet will be published as evidence that a compliance axis bites, when what bites is a missing object and what does not is the compliance.",
+    "designed_nulls": [
+     {
+      "a": {
+       "statute": "joinery",
+       "currency": "certified"
+      },
+      "b": {
+       "statute": "joinery",
+       "currency": "overdue"
+      },
+      "under_percent": 0.05,
+      "why": "IDENTICAL BY CONSTRUCTION, TO THE BYTE, AND THE ARITHMETIC IS THE SOURCES' OWN. certified and overdue differ in exactly one thing anywhere in the scene: the albedo of the CycleBand quad, Color(0.16, 0.52, 0.24) against Color(0.86, 0.62, 0.10). Every other mesh, transform, material and colour in the two cells is produced by the same code path - same wall, same face, same reveal, same plate, same bracket, same strap angle, same cylinder, same accent band, same gauge with the needle at rotation.z 0.0, same intact seal torus, same card frame, same card face, same eight punches. That one albedo is passed through _ink, which is fire_extinguisher.gd:611-616 and fire_hose_box.gd:684-689 copied body for body, and under joinery the table entry carries ink_amt 1.0. Color.lerp(to, 1.0) is self + (to - self) * 1.0 = to, exactly, in float. So _ink is a CONSTANT FUNCTION at that value and both cycle colours resolve to Color(0.44, 0.46, 0.42), which renders as (144, 150, 137) in both frames. Predicted 0.00 percent frame, 0.00 percent focus, per channel and in luminance alike; this is an equal-RGB identity, not an equal-luma one. Anything above 0.05 percent is render nondeterminism. Anything above 0.5 percent means _ink is not being applied to the band and the whole joinery row is then a fact about a wiring mistake rather than about absorption. IT IS CONDITIONED ONLY ON THE TWO SWEPT AXES - both cells are cells the sweep actually renders - which is the wave 21 trap it was written to avoid. WHAT THIS NULL SAYS: absorbing safety equipment into the building's cabinetwork does not merely quieten it, it destroys the only evidence a passer-by has that the promise is still in force. fire_hose_box's own identity block claims 'the window makes the promise auditable' as the whole point of the object; joinery is the value that closes the window, and here it can be measured doing it."
+     },
+     {
+      "a": {
+       "statute": "issue",
+       "currency": "certified"
+      },
+      "b": {
+       "statute": "issue",
+       "currency": "discharged"
+      },
+      "under_percent": 0.30,
+      "why": "NOT AN IDENTITY - A CEILING, REGISTERED BECAUSE IT IS THE ONE PAIR WHOSE SMALLNESS IS A PROPERTY OF THE WORLD RATHER THAN OF THIS BENCH. discharged changes two things and both are small by nature: the gauge needle rotates from 0.0 to 2.10 rad (a 0.005 x 0.050 m bar sweeping inside a 0.033 m dial, so the moved area is at most 2 x 0.005 x 0.050 x cos(0.26) = 0.000483 m2, 0.055 percent of frame) and the tamper seal changes from an intact torus of outer radius 0.022 to two 0.006 x 0.024 stubs (a silhouette change of order 0.0006 m2, 0.07 percent of frame). Even at a full 255-level delta across every moved pixel the pair cannot exceed about 0.13 percent of frame, and the real figure will be well under that because the needle is dark against a pale dial and the stubs are the same yellow as the ring they replace. PREDICTED UNDER 0.30 PERCENT, and unlike the null above this bound is a CEILING computed from area alone, so a measurement ABOVE it means something moved that should not have - most likely the strap or the ghost leaking into a cell where currency is not absent. WHAT IT SAYS: whether an extinguisher has been fired is legible to a hand at arm's length and almost invisible to a camera across a room, which is why the law puts a seal on it rather than a colour."
+     }
+    ],
+    "designed_nulls_why": "TWO ENTRIES OF DIFFERENT KINDS, ON PURPOSE. The first is an exact arithmetic identity and it fails loudly in one diagnosable way: if the cycle band is not routed through _ink, the two joinery cells differ by the full 0.6024 percent and the failure is unmistakable. The second is not an identity at all but an area ceiling, and it is registered because it is the pair a reader is most likely to expect to be loud - a discharged extinguisher sounds dramatic - and the arithmetic says it cannot be. Registering a bound that can only be violated from above is the other half of a pre-registration: the first null catches a wiring mistake, the second catches a leak.",
+    "declines": [
+     "THE PROJECTING FLAG. Both sources' _statute_notice() build a double-sided sign on a stub bracket cantilevered into the corridor (fire_extinguisher.gd:793-810, fire_hose_box.gd:867-884), and it is the one part of the whole apparatus aimed at somebody who is not yet standing here - which makes it the most interesting thing notice does. It is not built. Any flag with a useful throw pushes the world box outside the wall's own extents, and because the sweep frames by the union AABB that would have reframed the entire notice ROW relative to the other three, turning a statute comparison into a framing comparison. Named here rather than faked, and the cost is that this bench's notice is a wall you have to be in front of.",
+     "THE HOSE BOX'S BODY. This is a two-member synthesis and the object on the wall is an extinguisher, not a hose cabinet. The reason is that the two sources' bodies argue the same thing at different scales and only one of them can carry a gauge, a seal and a pin - fire_hose_box has none of the three, and its compliance is read from the window and the reel behind it. What survives from it here is the AUDITABLE APERTURE, its central claim ('the window makes the promise auditable'), reduced to the smallest glazed opening in the family: the gauge. If the currency axis reads at all, the hose box's argument is what is being read.",
+     "A FIFTH statute VALUE FOR THE STATE THE SOURCES ACTUALLY SHIP. Both files' issue is 'as delivered, nothing added', but a real building has a fifth answer - the equipment installed and then built AROUND, walled in behind a later partition. It was cut because it is a variant of joinery rather than a peer of it, and because four values that each answer WHAT DID THE BUILDING DO WITH THE LAW is one question while five where two of them are degrees of concealment is a ladder with an outlier bolted on.",
+     "AN unmarked VALUE ON currency, and this one was the last cut and the closest. The sources' actual shipped state is a fitting with NO service record at all - issue builds no tag, and the only tag in either file is lapse's expired one. unmarked (card present, cycle band blank) is therefore the most faithful default this bench could have taken, and it is also a real and serious compliance state: equipment with no record is non-compliant in every jurisdiction that regulates it. It was refused for one reason and it is a measurement reason, not a design one: five currency values against four statutes is a 20-cell sheet, and build_dna_gallery's --max cap trims the LATER axis from the tail, so a 5 x 4 sweep would have to run at --max=20 or silently lose a column - the trap recorded against every previous 4 x 4 sweep in this programme. Four by four at --max=16 is a sheet whose every cell is rendered. The value is written down here so the next pass can take it.",
+     "TEXT, EVERYWHERE IT WOULD HAVE BEEN NATURAL. No date on the card, no FIRE on the cylinder, no FIRE POINT on the notice sign, no punched month on the tag - the sources use baked-text panels for all four (BakedTextAlbedoScript.make_panel_mesh at fire_extinguisher.gd:712, :747, :787, :801, :841, :882 and the parallel sites in fire_hose_box). At this framing a 0.026 m text strip is about 21 px tall and its glyphs are 4-6 px; it photographs as a grey smear and contributes nothing a difference metric can attribute. Everywhere the sources write a word this bench draws a pictogram, a colour or a needle, and the cost is that the object is less specific than a real one - a real service card says WHEN, and this one only says WHICH CYCLE."
+    ],
+    "sweep_command": "python tools/build_dna_gallery.py --slug=statute-fitting --tokens=statute_fitting --max=16",
+    "sweep_note": "--max=16 IS LOAD-BEARING AND THE DEFAULT WOULD HALVE THE SHEET. build_dna_gallery caps the cross product and trims the LATER axis from the tail; at the default --max=9 a 4 x 4 sheet renders as 4 x 2, which keeps statute whole and deletes discharged and absent - the two currency values that carry the peak, and with them the only evidence that the axis bites at all. The declared order is statute first, currency second, so it is currency that gets cut. Read the per-pair rows in sweep_statute-fitting_bite.json and not the headline: this sheet is built so that its peak and its floor differ by two orders of magnitude, and the floor is the finding.",
+    "placements": 0
+   },
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 1,
+    "clearance": {
+     "front": 2,
+     "back": 0,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": true,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [
+     "fire_extinguisher",
+     "fire_hose_box",
+     "exit_sign",
+     "safety_shower",
+     "emergency_button"
+    ],
+    "preferred_zone": "corridor",
+    "footprint_source": "computed_from_geometry",
+    "footprint_note": "THE WORLD BOX IS A CONSTANT AND THAT IS THE WHOLE POINT OF THE WALL. The board is 0.600 x 0.760 x 0.024 centred at y = 0.435 on two 0.075 x 0.055 x 0.120 feet at x = +-0.185, and every other part of every cell - bracket, strap, cylinder r 0.062, accent band r 0.0645, neck, valve, handle, hose, gauge at z 0.153, seal torus, ghost, record card - lies inside the board's world extents after the 0.62 yaw. So the box does not move when either axis moves, and in particular currency=absent, which deletes the entire cylinder assembly, frames identically to certified. The wall is rotated 0.62 rad about Y to face the sweep's standpoint, which is what makes the box 0.502 wide rather than 0.600; a map placing this artifact should expect its face to point 35.5 degrees off the grid axis, or pass its own rotation in the token.",
+    "measured_footprint_cells": 1
+   },
+   "measurements": {
+    "aabb_size": [
+     0.502272,
+     0.815,
+     0.368154
+    ],
+    "aabb_center": [
+     0.0,
+     0.4075,
+     0.0
+    ],
+    "grid_cells": [
+     1,
+     1
+    ],
+    "max_dimension_m": 0.815,
+    "measured_at": "2026-08-17T00:00:00Z",
+    "measurement_source": "probe_aabb_hogs.gd, three runs (default, currency=absent, statute=notice), identical to six decimals",
+    "measurement_note": "COMPUTED FIRST, THEN MEASURED, AND THEY AGREE. Each mesh's world AABB is its local box rotated 0.62 about Y (x' = x cos + z sin, z' = -x sin + z cos), and the union is the board's: half-x 0.300 cos(0.62) + 0.012 sin(0.62) = 0.251136, half-z 0.300 sin(0.62) + 0.012 cos(0.62) = 0.184077, y from the feet at 0 to the board top at 0.815. probe_aabb_hogs.gd returns pos (-0.251136, 0, -0.184077) size (0.502272, 0.815, 0.368154) and names Board as the largest mesh at 0.98 m diagonal against the whole scene's 1.03. It returns the SAME box with the entire cylinder assembly deleted (currency=absent, 18 meshes instead of 46) and with the statutory apparatus added (statute=notice, 58 meshes), which is the framing invariance the predicted degeneracy below depends on. Note the probe needs a real rendering driver: under --headless the dummy mesh storage returns null for every get_aabb and the report is empty, so these were taken with --no-window."
+   },
+   "parameters": {
+    "statute": "What the building did with the law that specifies this object's appearance: issue | notice | joinery | lapse (default issue)",
+    "currency": "Is the promise still in force, and how would you know: certified | overdue | discharged | absent (default certified)"
+   },
+   "dev_category": "lab_prop"
+  }
+ }
+}

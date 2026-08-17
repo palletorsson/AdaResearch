@@ -1,0 +1,150 @@
+{
+	"artifacts": {
+		"recession_hall": {
+			"name": "Recession Hall",
+			"lookup_name": "recession_hall",
+			"scene": "res://commons/artifacts/recession_hall/recession_hall.tscn",
+			"class_name": "RecessionHall",
+			"category": "fractals",
+			"artifact_type": "synthesis",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "large",
+			"description": "A hall whose four levels can be arranged four ways, built because the axis both its sources declare is named after exactly one of its own values. TWO tokens declare `recession` with the identical list nested | collapsed | abreast | strata and nothing else in 108 registry files declares the word: folding_past (commons/primitives/temporal/animated_folding_past.gd) and fractal_recursion_2 (algorithms/fractals/example_8_2_recursion_vr.gd). Count the depths and only ONE of the eight cells has any: animated_folding_past.gd:185 spreads ten frames over 4.05 m of z at `nested`, while :194, :197 and :204 pin collapsed, abreast and strata each to a single z; and in fractal_recursion_2 _seat() returns z = 0.0 in EVERY branch (:160-175), the entire z ladder being the 0.003-per-level anti-z-fighting offset at :245 that sits OUTSIDE the recession switch and is labelled as such in the line above it. At the shipped depth 6 that is 15 mm across a 1.06 m frame - and the file's own @identity (:21) calls them 'concentric squares receding in Z'. So the one cell that recedes is folding_past's export DEFAULT (:55), and the other three values are definable only by not having the property the word names: a third species beside wave 20's and wave 21's all-rungs values - not a value that is the union of its axis, but an axis that is the name of its default. The two members also disagree about the sign (folding_past's innermost frame is furthest, fractal_recursion_2's is nearest) and, more consequentially, about what `abreast` and `strata` DO: animated_folding_past.gd:196 and :203 both set scale = 1.0, throwing away scale_ratio - the parameter its own @identity names one clause after `recession` - while fractal_recursion_2's _drawn_size (:181-187) overrides the size only for `collapsed`, so its halving survives the rearrangement. Same word, opposite answers about whether self-similarity survives being taken apart. This bench makes that the second axis. A 1.47 x 1.46 x 1.24 m hall - back wall, floor, soffit, two returns, proscenium - holds four ring levels; `recession` chooses which direction the run of the rule is laid along and `inheritance` chooses the ratio (0.5 is example_8_2's, 0.85 is folding_past's, 1.0 is the one folding_past imposes silently at half its own values). The hall never moves, so no measured pair carries a framing difference it did not earn, and the hall is yawed by capture_config_sweep's own 0.62 bearing - which turns the finding into three exact numbers: the abreast run projects at 1.000000, strata at 0.966390, and the recession the axis is NAMED after at 0.257081.",
+			"tags": [
+				"recursion",
+				"fractal",
+				"depth",
+				"perspective",
+				"nesting",
+				"self_similarity",
+				"time",
+				"two_axes",
+				"axis_named_after_its_default",
+				"synthesis"
+			],
+			"dev_themes": [
+				"an axis named after one of its four values",
+				"the direction the instrument can least see",
+				"a two-member family with no shared default",
+				"branching factor one is a loop"
+			],
+			"interactions": [
+				"walk the recession axis at inheritance=halved. This is the tightest column and the least legible: collapsed carries 0.000756 m2 of ring against the other three cells' 0.031707 m2, so its distance to each of them is simply that cell's ink and the three pairs tie within 1.6 percent. The metric cannot rank them, and that is the value doing its job - a collapse destroys the evidence for the rule as well as the arrangement.",
+				"compare nested against collapsed in the equal column. They are the same picture to the byte, and it is the argument rather than a check on it: a nest with no margin is a collapse. Containment needs a difference in size, so at ratio 1.0 the recession axis has lost a value - which is precisely the state folding_past ships at abreast and strata without saying so.",
+				"stand at recession=abreast and walk inheritance. halved shows four squares whose sides are 0.30, 0.15, 0.075, 0.0375 - example_8_2's row. equal shows four squares of 0.30 filling the hall edge to edge - folding_past's row. Both are `abreast`. That is the whole finding about the shared vocabulary, in two tiles.",
+				"look at what the frame cannot show you. nested is the only value with any depth, and at the sweep's standpoint the whole 0.2625 m recession contributes an 8.5 px upward drift of the innermost ring and a 7.6 percent perspective shrink in a 760 px frame - about one percent of the picture. The arrangement carries the value; the recession barely registers. An axis can sit three-quarters unimplemented for months when the property it names is the one the camera is worst at.",
+				"count the constants. Every cell has the same hall, the same four palette colours by index, the same bar fraction and the same world box. What moves between two tiles is where four rings sit and how big they are, and nothing else."
+			],
+			"capacity": "SEE that `recession` is the name of one value rather than the name of an axis - three of its four rungs put every level at one depth, and the one that does not is the shipped default - and then see the cost of that going unnoticed: at the standpoint every tile in this programme is shot from, depth projects at 0.257081 against 1.000000 for a row, so the property the word names is the one the instrument is nearly 4x worst at reading",
+			"dna": {
+				"promoted": "2026-08-17",
+				"stage": "synthesis",
+				"framing": 0.42,
+				"sources": [
+					"folding_past",
+					"fractal_recursion_2"
+				],
+				"axes": {
+				 "recession": [
+				  "nested",
+				  "collapsed",
+				  "abreast",
+				  "strata"
+				 ],
+				 "inheritance": [
+				  "halved",
+				  "eased",
+				  "equal"
+				 ]
+				},
+				"default": "recession=nested, inheritance=halved. THE FIRST IS BOTH SOURCES' AND THE SECOND CANNOT BE. `nested` is the export default of animated_folding_past.gd:55 and of example_8_2_recursion_vr.gd:77, and in both files it is a no-op by construction - the arrangement the file drew before the axis existed. `inheritance` has no such cell, because the two members ship different ratios: example_8_2_recursion_vr.gd:78 ships size_reduction 0.5 and animated_folding_past.gd:22 ships scale_ratio 0.85. This family therefore has NO SHARED DEFAULT, and the default here is example_8_2's picture, not folding_past's; folding_past's own shipped state is one cell to the right at nested + eased, and the two sit side by side in the sheet. Choosing halved is a choice and it is recorded as one: 0.5 is the ratio at which containment is legible at four terms, and it is the ratio the file's truth line ('a square inside a square') is about.",
+				"was": "TWO ARTIFACTS THAT ARE ABOUT THE SAME THING AND NOT ABOUT THE THING THE WORD SAYS. fractal_recursion_2 is six concentric squares in a 1.06 m frame with a six-colour palette; folding_past is ten wireframe rectangles in a MultiMesh marching inward on a 4-second clock across 6.0 x 4.8 x 4.05 m. Both were promoted in 2026-08 and both took `recession` for what shape the descent takes. NEITHER IS RECURSIVE. fractal_recursion_2's _draw_recursive_pattern (:226-237) makes exactly ONE recursive call at :236 - branching factor 1, a tail call, a loop in recursion's clothes, which its own registry found and which is confirmed here by counting. folding_past has no recursion at all: `for i in range(frame_count)` at :171. What the two actually share is a geometric sequence of similar rectangles laid out by a rule, which is what this bench builds - and it is why the second axis is the ratio rather than a depth count.",
+				"note": "THE INSTRUMENT DECISIONS, EACH ONE COSTING SOMETHING. (1) THE HALL IS THE CONSTANT. Both source registries warn that their extent moves with the value and that capture_config_sweep places ONE camera on the union, so the small values shrink in frame and every measured pair carries a framing difference it did not earn - folding_past's harness_note says so and example_8_2's still_note computes it ('the nested tile fills about a quarter'). Here the world box is 1.470064 x 1.46 x 1.243044 in all twelve cells: the levels always fit inside the opening and neither axis touches the AABB, so the camera never moves. (2) THE HALL IS YAWED 0.62 rad. capture_config_sweep.gd:69-70 stands the camera at YAW 0.62 / PITCH -0.26 and :443 builds its direction as Vector3(sin(yaw)cos(pitch), -sin(pitch), cos(yaw)cos(pitch)), whose horizontal bearing is atan2(sin 0.62, cos 0.62) = 0.62 exactly. Turning the hall to meet it makes the three run directions project to exactly (+1.000000, 0.000000), (0.000000, +0.966390) and (0.000000, +0.257081) for abreast, strata and nested - THE FINDING IN THE HARNESS'S OWN CONSTANTS, since the direction the axis is named after is 3.89x less visible than a row. The counterfactual was computed and rejected: unyawed, depth projects at 0.617564, but then nested photographs as a sheared row rather than a nest and abreast loses 17 percent to foreshortening. (3) BAR_FRAC 0.07 IS DERIVED, NOT CHOSEN. 1 - 2(0.07) = 0.86, the first hundredth above folding_past's own 0.85, so `eased` is the tightest nest in which every level's bar still clears its parent's aperture; a thicker bar would have hidden a level and made a value a fact about a line width. (4) FOUR LEVELS, NOT SIX. Six is example_8_2's shipped depth, but 0.5^5 puts the innermost term at 0.6 px here with a sub-quarter-pixel bar - the fault that file's own registry warns about at depth 7. 4 is a declared rung of its `depth` axis and the largest count at which every term of every ratio photographs. BAR_MIN 0.006 m = 2.6 px is the same argument one level down and is stated rather than discovered in the tiles. (5) THE LEVELS AND THE BACK WALL ARE UNSHADED, so every pixel that moves between two cells goes from one exactly-computable byte to another and the prediction below is arithmetic rather than an estimate; the frame, returns and floor stay lit so the object has a body. (6) THE PALETTE ALPHA IS DROPPED. example_8_2_recursion_vr.gd:85-90 carries per-colour alpha 0.9 down to 0.65 under TRANSPARENCY_ALPHA (:262); the RGB is verbatim and the alpha is forced to 1.0, because the designed null puts four rings in one place and an alpha composite there is a fact about transparency sort order. (7) RING DEPTH 0.002 IS UNDER THE 0.003 Z STEP. example_8_2 draws 5 mm boxes on a 3 mm step (:242, :245) so its squares interpenetrate; filled squares hide that, rings do not. (8) NO NUMERIC VALUE IN EITHER AXIS - both are word enums typed String, so cabinet_sweep.coerce() has nothing to numericise and the tier_terrarium failure (Object.set() refusing a typed property in silence) cannot occur here. Checked, not assumed. (9) NO FIXTURE NEEDED: no randf, no randi, no noise, no _process, no Timer, no tween, and _ready builds the whole object standalone.",
+				"predicted_degeneracy": {
+					"pair": "collapsed/halved against collapsed/eased - an inheritance pair inside the collapsed row",
+					"percent": 0.127,
+					"metric": "critic frame percent - mean absolute LUMA delta over the whole 760x760 frame, which is a magnitude rather than a count. Written with the word luma so score_wave ranks on mean |luma delta| instead of changed_pct: this sheet has three cells whose entire difference is the SIZE of one ring, and a pixel count would rank them by how many pixels moved rather than by how much. The focus number for the same pair is 2.61 percent, which is under the critic's 3 percent INERT bar for a single pair; the axis means are 15.30 (recession) and 15.23 (inheritance) and both clear the 12 percent WEAK bar.",
+					"pool": "all 66 pairs of the 4 x 3 sheet, excluding the designed null. This is deliberately NOT the family axis alone: inside `recession` at a fixed inheritance the three smallest pairs TIE (see predicted_relationship), so a recession-only ranking would be reporting sort order. Named in full because a closest-pair claim inherits both its denominator and its pool.",
+					"floor_or_two_sided": "TWO-SIDED, tolerance +-20 percent, and the reason is that nothing here is estimated. The usual 1.5x-to-6.7x under-shoot comes from a flat rasteriser being blind to shadow, AO and antialiasing. (a) Both surfaces in this pair are UNSHADED - the ring and the back wall - so no shadow or AO can touch either, and both bytes are computed through the exact chain. (b) The geometry is axis-aligned in SCREEN space by construction: the 0.62 yaw makes hall-local +X project to (+1.000000, 0.000000), so a ring is an exact screen rectangle and its area is not an approximation. (c) Antialiasing redistributes a thin bar's ink across more pixels at lower amplitude but conserves the integral, and the frame metric is the integral. A measurement BELOW about 0.10 percent means a ring did not render or dna.framing was dropped; ABOVE about 0.16 percent means the wall is not unshaded, the tonemapper is not FILMIC, or the palette alpha came back.",
+					"why": "AT `collapsed` THE INHERITANCE AXIS SURVIVES ONLY AS THE SIZE OF ONE RING, and that is the arithmetic. All four levels are drawn at sizes[N-1] at the origin, separated by the 0.003 z step, so the frontmost (level 3, green) occludes the other three and each cell is ONE ring. SIDES: halved gives 0.30 x 0.5^3 = 0.0375 with bar max(0.006, 0.07 x 0.0375) = 0.006, so its ink is 0.0375^2 - 0.0255^2 = 0.000756 m2. eased gives 0.30 x 0.85^3 = 0.1842375 with bar 0.012896625, ink 0.03394346 - 0.02510458 = 0.00883888 m2. The small ring lies inside the big one's aperture (half-aperture 0.079222 against half-side 0.01875), so the two are DISJOINT and the moved area is the sum, 0.00959488 m2. FRAME: the world AABB is 1.470064 x 1.46 x 1.243044, diagonal 2.416164, radius 1.208082; capture_config_sweep.gd:442 sets dist = radius / tan(17 deg) x 1.9 x 0.42 = 3.153262 m and the frame is a square of side 2 x radius x 1.9 x 0.42 = 1.928098 m. The level plane sits 0.161870 m nearer than the box centre, so it images at 415.51 px/m across and 401.55 px/m up (the plane is tilted by the 15 deg pitch, cos 0.26 = 0.966390). The moved area is therefore 0.00959488 x 415.51 x 401.55 = 1600.9 px2 of 577600, i.e. 0.27715 percent of frame. COLOUR: unshaded albedo -> srgb_to_linear -> Godot FILMIC (A = 0.88, B = 0.6, C = 0.10, D = 0.20, E = 0.01, F = 0.30, white 1.0, and capture_config_sweep.gd:630 sets TONE_MAPPER_FILMIC) -> linear_to_srgb -> 8 bit gives the green level (97, 236, 131) and the wall (62, 65, 76). PIL's L is 0.299R + 0.587G + 0.114B, so 182.43 and 65.65, delta 116.78. FRAME PERCENT = 0.0027715 x 116.78 / 255 = 0.0012692 = 0.1269 percent. An independent 960x960 z-buffered rasterisation of all twelve cells, box-downsampled to the critic's 160x160, returns 0.130 percent for this pair - a 2.4 percent agreement, which is a check on the arithmetic rather than a second opinion.",
+					"peak_for_contrast": "The sheet's loudest pair is abreast/equal against strata/equal at 2.188 percent frame and 38.77 percent focus - one run of four 0.30 m rings laid across the frame against the same run laid up it. Peak over floor is 17.2x within one sheet, which is why the headline number is written down here next to the floor: a report quoting 38.77 has said nothing about the collapsed row."
+				},
+				"predicted_relationship": "THREE CLAIMS THAT DO NOT NEED A PERCENTAGE TO BE WRONG. FIRST, A TIE THAT IS A RESULT RATHER THAN A FAILURE: at inheritance=halved the three pairs collapsed-vs-nested, collapsed-vs-abreast and collapsed-vs-strata should land within about 5 percent of one another (rasterised: 0.254, 0.253, 0.257 percent frame - a spread of 1.6 percent). The cause is arithmetic: collapsed/halved carries 0.000756 m2 of ring against the other three cells' 0.031707 m2, a factor of 42, so each pair value is essentially the OTHER cell's ink and the ranking is not about `collapsed` at all. If a report ranks those three, it is reporting sort order. SECOND, TWO EXACT COUPLES that follow from the designed null: because nested/equal and collapsed/equal are one picture, (nested, abreast)@equal must measure identically to (collapsed, abreast)@equal, and (nested, strata)@equal identically to (collapsed, strata)@equal. Rasterised they are 1.118/1.118 and 1.176/1.176. If those four numbers are not two equal pairs, the null did not hold and everything downstream of it is suspect. THIRD, AND IT IS A PREDICTION ABOUT THE STANDPOINT RATHER THAN THE ARTIFACT: `nested` is the only value with any depth, and at this standpoint the entire 0.2625 m recession of the default cell contributes an 8.5 px upward drift of the innermost ring plus a 7.6 percent perspective shrink - under 1.2 percent of a 760 px frame. So nested's distance from the other three values will be carried almost entirely by its ARRANGEMENT (concentric rather than row, column or point) and almost not at all by its recession. That is the claim this whole bench exists to photograph, and the way to test it is probe_anamorphic.py --token=recession_hall --axis=recession: a standpoint whose bearing is not the hall's own will raise the depth projection from 0.257081 toward 0.617564 and nested's numbers should rise with it while abreast's fall.",
+				"designed_nulls": [
+					{
+						"a": {
+							"recession": "nested",
+							"inheritance": "equal"
+						},
+						"b": {
+							"recession": "collapsed",
+							"inheritance": "equal"
+						},
+						"under_percent": 0.3,
+						"why": "IDENTICAL BY CONSTRUCTION, TO THE BYTE, AND IT IS THE ARGUMENT RATHER THAN A CHECK ON IT. _seat() gives `nested` the seat (0, 0, -(sizes[0] - sizes[k]) + k x Z_STEP) at the level's own size, and gives `collapsed` the seat (0, 0, k x Z_STEP) at sizes[N-1]. At inheritance=equal the ratio is 1.0, so sizes[k] = sizes[0] = sizes[N-1] = 0.30 for every k and the loss sizes[0] - sizes[k] is zero for every k. The two expressions therefore reduce to the same four positions and the same four sizes. _bar() reads the DRAWN size in both branches, so the four bar thicknesses are the same 0.021; LEVEL_COLOR is indexed by k, not by size, so the four colours are the same; the materials are opaque and unshaded in both; there is no randomness and no _process. Same meshes, same transforms, same albedo - the two PNGs are the same file. Predicted 0.00 percent frame and 0.00 percent focus, per channel and in luminance alike; this is an equal-RGB identity, not an equal-luma one. Anything above 0.3 percent is render nondeterminism. Anything above 2 percent means the loss term is not zero, i.e. the equal ratio is not reaching the size table, and the whole inheritance axis is then a fact about a coercion. WHAT THIS NULL SAYS: a nest with no margin is a collapse. Containment is not a place, it is a DIFFERENCE - when successive levels stop shrinking there is nothing for one to be inside, and `nested` and `collapsed` stop being two values. That is exactly the state animated_folding_past.gd:196 and :203 ship at `abreast` and `strata`, where scale is set to 1.0 and the ratio leaves the picture; there it is unmarked, and here it is a registered identity. AND WHY THE OTHER OBVIOUS NULL IS NOT REGISTERED: at inheritance=equal, `abreast` and `strata` are the same run laid along two axes and might look like a rotation null. They are not one, and not by construction either - the hall's yaw makes local +X project to (+1.000000, 0.000000) and local +Y to (0.000000, +0.966390), so the two runs differ by 3.36 percent in projected length before anything else, and they are nearly disjoint in the frame. That pair is the sheet's PEAK, not its floor."
+					}
+				],
+				"designed_nulls_why": "ONE NULL, AND IT IS THE ONLY EXACT IDENTITY THIS GEOMETRY ADMITS. It is conditioned on the two SWEPT axes and on nothing else - both cells are ordinary members of the 4 x 3 cross product, so the sweep renders them whether or not anyone reads this field. That is deliberate: wave 21 registered a null conditioned on a parameter its own dna.fixture pinned, which the sweep could never have rendered and which therefore could never have failed. The other coincidence in this sheet is NOT registered as a null because it is a fact about where the camera stands rather than about how the object is built: the three collapsed pairs at inheritance=halved tie within 1.6 percent, and that is a STANDPOINT-AND-METRIC artefact - a near-blank cell measured against three cells of equal ink - not a construction identity. It is recorded under predicted_relationship, labelled as such.",
+				"kin": "`recession` IS THE FAMILY'S WORD AND IT IS KEPT WHOLE - four values, the family's order, declared identically by both members and by nothing else in the corpus (checked across 108 registry files and 489 distinct axis names). Keeping it is not agreement with it: the finding is that the word names one of its four values, and an axis renamed to `arrangement` would have quietly repaired the fault instead of photographing it. The second word is NEW. `inheritance` is declared by no other artifact. Three near-misses were checked and rejected, because taking a word without its answers is the dishonest half of a shared vocabulary. `ratio` belongs to lissajous_curves and means a frequency relation between two oscillators, which is not a relation between a term and its predecessor. `descent` belongs to self_membership_set and means something about a chain of membership. `depth` is fractal_recursion_2's OWN second axis (1 | 2 | 4 | 6 | 7, and through it example_8_3's and the L-system family's) and it counts levels - it is a cardinality, where this is a relation, and declaring both would make the level count and the level ratio answer to one word. THE OTHER KIN IS THE `fold` AND `posture` PAIR that folding_past's registry already declined (polyhedron_nets_cube's animated|closed|hinged|flat; qfep_formula_3d's line|stack|arc|ring), and both refusals hold here for the same reasons: there is no hinge in this object and nothing closes into a solid, and `posture` asks how terms are laid out, which is only half of what this bench asks.",
+				"declines": [
+					"A `depth` AXIS OVER THE LEVEL COUNT, which is the most obvious third axis and is already declared by one of the two sources. Refused for two reasons and the second is the real one. Only two axes are swept, so a third would be trimmed by build_dna_gallery and would silently answer nothing. More importantly, N_LEVEL is not free here: at six levels and ratio 0.5 the innermost term is 0.6 px and its bar under a quarter of a pixel, so a `depth` axis would have had rungs that cannot be drawn - example_8_4's fault, and the one example_8_2's own registry caught at depth 7. The count is fixed at 4 and the reason is written into the code.",
+					"A `sense` AXIS - which end of the run is the present, receding against advancing - which would have photographed the SIGN disagreement found between the two sources (folding_past's innermost frame is furthest at :185; fractal_recursion_2's is nearest at :245, and its scene camera at example_8_2_recursion_vr.tscn:10 sits at +z). Real, cheap, and declined because at `collapsed` a reversal is unphotographable: a collapse has no order, so one whole cell of that axis would be a null conditioned on the other axis - half-evidence dressed as a rung. The sign disagreement is recorded in prose instead, which is where a finding that cannot be photographed belongs.",
+					"AN `equal`-NORMALISED RUN. Scaling every ratio's sizes so that all three runs fill the hall would have equalised the ink across the inheritance axis and made its three columns much more comparable - the halved column carries 0.031707 m2 against equal's 0.093744, a factor of 3. It was refused because normalising changes the OUTERMOST size with the ratio, so a pair on the inheritance axis would then differ in both the ratio and the scale, and the axis would be two axes wearing one word. The ink imbalance is real, it is stated in the numbers above, and it is itself a fact about the vocabulary: a row of halving terms needs a third of the space a row of equal terms does, and `abreast` hides that.",
+					"EVERYTHING TIME-DOMAIN. folding_past's cycle_duration (:21) and its whole _process loop (:109-111) are the artifact's most visible property and are invisible to a still - the info_board mistake. This bench never calls set_process and every value is finished before the first frame. What survived from the animation is the thing a still CAN hold: folding_past's own static branch already reads age off the instance index rather than the clock (:174-178) for exactly this reason, and the level index does the same job here.",
+					"THE FIFTH AND SIXTH PALETTE COLOURS. example_8_2_recursion_vr.gd:85-90 defines six and this hall shows four, because N_LEVEL is 4. Padding the ladder to use them would have been a decision about the palette dressed as a decision about the recursion. Noted rather than hidden: at seven terms that file's own colour index wraps and the innermost square comes back red, which is a separate finding about labelling generations and belongs to a `coding` axis its registry has already left for a later pass."
+				],
+				"sweep_command": "python tools/build_dna_gallery.py --slug=recession-hall --tokens=recession_hall --max=12",
+				"sweep_note": "--max=12 IS LOAD-BEARING AND THE DEFAULT WOULD DELETE THE FINDING. build_dna_gallery caps the cross product and trims the LATER axis from the tail. The declared order is recession first, inheritance second, so at the default --max=9 a 4 x 3 sheet renders as 4 x 2 and the column that disappears is `equal` - which carries BOTH the designed null (nested against collapsed) and the entire argument about folding_past's discarded ratio. The same trap is recorded against every previous 4 x 4 sweep in this programme; here it costs a column rather than a corner.",
+				"placements": 0
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 4,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"folding_past",
+					"fractal_recursion_2",
+					"example_8_1",
+					"cantor_set"
+				],
+				"preferred_zone": "teaching",
+				"footprint_source": "computed_from_geometry",
+				"footprint_note": "THE WORLD BOX IS A CONSTANT AND THAT IS THE WHOLE POINT OF THE HALL. The hall is an OUTER x OUTER = 1.46 x 1.46 front elevation standing on y = 0, with the back wall's rear face at z = -0.41 and the proscenium's front face at z = +0.075, all rotated 0.62 rad about Y to meet capture_config_sweep's bearing. The levels live entirely inside the 1.36 x 1.36 opening: the widest arrangement is `abreast` at inheritance=equal, whose run is exactly SPAN = 1.20, leaving 0.08 of clear air on each side; the deepest is `nested` at inheritance=halved, whose run is sizes[0] - sizes[3] = 0.2625 against 0.36 of interior depth. So neither axis can move the box, and bare and swept cells frame identically. A map placing this artifact should expect its opening to face 35.5 deg off the grid axis, or pass its own rotation in the token."
+			},
+			"measurements": {
+				"aabb_size": [
+					1.470064,
+					1.46,
+					1.243044
+				],
+				"aabb_center": [
+					-0.097323,
+					0.73,
+					-0.136325
+				],
+				"grid_cells": [
+					2,
+					2
+				],
+				"max_dimension_m": 1.470064,
+				"source": "computed_from_geometry from the file's own constants; no Godot was run. Local half-extents are (0.73, 0.73, 0.2425) about a local centre of (0, 0.73, -0.1675); rotating 0.62 rad about Y gives world half-widths 0.73 cos 0.62 + 0.2425 sin 0.62 = 0.735032 in x and 0.73 sin 0.62 + 0.2425 cos 0.62 = 0.621522 in z. Diagonal 2.416164, radius 1.208082, and at dna.framing 0.42 the sweep stands at 3.153262 m with a 1.928098 m frame: the proscenium images 616.6 px wide and 595.8 px tall of 760, so nothing clips and the frame corners stay on the background, which is what subject_fraction needs. The widest ring row images 498.6 px against the back wall's 539.6, so no level ever crosses the reveal."
+			},
+			"footprint_measured": [
+				2,
+				2,
+				2
+			]
+		}
+	}
+}

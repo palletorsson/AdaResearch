@@ -1,0 +1,195 @@
+{
+ "artifacts": {
+  "remainder_box": {
+   "name": "Remainder Box",
+   "lookup_name": "remainder_box",
+   "scene": "res://commons/artifacts/remainder_box/remainder_box.tscn",
+   "class_name": "RemainderBox",
+   "category": "foundations_crisis",
+   "artifact_type": "synthesis",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "size_group": "compact",
+   "description": "A bench that draws the leftover AND the thing that took it away. TWO tokens declare `remainder` (core | twin | seam | haze | witness) and `vantage`, identically, and nothing else in the corpus declares either: schrodinger_box and superposition_display. They are not one script under two tokens, but they are closer than any pair this programme has found - superposition_display.gd:224 PRELOADS schrodinger_box.gd as `RemainderAxis` and parses its own axis words through the box's static remainder_name() and vantage_name() (:272-273, :676, :679). The vocabulary has one implementation, in the kin's file. So the hypothesis holds: they are about the same thing. Three things reading them found anyway. (1) `core` means OPPOSITE things on the two members and is the shipped default on both. On the box it is a 0.4 x 0.3 x 0.3 opaque BoxMesh (schrodinger_box.gd:180-191) enclosing a 0.12 m glow sphere at the same origin (:238-253) - interior half-extents 0.20/0.15/0.15 against a sphere half-extent of 0.12, so the artifact's whole essence is invisible in its default and _process() (:299-303) animates alpha and emission on a mesh no camera can see. On the display the same word builds a transparent EMISSIVE purple sphere standing in the open (superposition_display.gd:324-337), the brightest thing in the frame with nothing in front of it. Both files gloss the word as 'sealed'. Only one of them seals. (2) `witness` is not on this axis, it is the OTHER axis: core/twin/seam/haze name four places in the world, `witness` names a place in the observer, and where the observer stands is what `vantage` is for value for value (schrodinger_box.gd:64-66). Wave 20 found six values that were the UNION of their own axis; this is the mirror fault, a value that belongs to the neighbouring one. Its geometry does not rescue it either - the 'polished plate returning the room' (:479-496, superposition_display.gd:549-574) is metallic 1.0 / roughness 0.04 under a rig that is BG_COLOR (0.055,0.055,0.070) with AMBIENT_SOURCE_COLOR, no sky and no reflection probe (capture_config_sweep.gd:624-630). There is no room in that environment to return. (3) The pair gets twin-versus-haze RIGHT as topology and wrong as material: twin walls two DEFINITE occupants inside two cells, haze scatters faint half-outcomes OUTSIDE the body, which is exactly the difference between a branch and a mixture - but it is drawn as FAINTNESS (alpha 0.42-0.55, superposition_display.gd:526-529), and a mixture's outcomes are as definite as a branch's. What a mixture lacks is COHERENCE. Neither file contains a phase anywhere; superposition_display normalises alpha + beta = 1 (:350-351, stated as the spec at :8), which at alpha 0.8 sums the squares to 0.68, and schrodinger_box claims collapse 'with P = |alpha|^2' (:10) while observe() rolls randf() > 0.5 (:314) with no amplitude in the file at all. So the family sorts out WHERE the leftover goes across five values and never says WHAT it is. This bench draws it: a 0.56 x 0.575 x 0.20 m board yawed 0.62 rad to meet the sweep's own standpoint, carrying a case whose contents are the family's four honest remainder values, an instrument bay below it, and above both a screen of nine columns that records whether the two branches interfered.",
+   "tags": [
+    "quantum",
+    "superposition",
+    "decoherence",
+    "measurement",
+    "which_path",
+    "coherence",
+    "interference",
+    "schrodinger",
+    "two_axes",
+    "conditional_axes",
+    "declined_value",
+    "synthesis"
+   ],
+   "dev_themes": [
+    "a record kills interference by existing, not by being read",
+    "one word, two contradictory geometries, both shipped as the default",
+    "a value that belongs to the neighbouring axis",
+    "the family never draws the thing it is arguing about"
+   ],
+   "capacity": "SEE that the question 'where does the leftover go' has an answer the family never gives - the leftover is the coherence - and then see that a which-path record destroys it by EXISTING: vault and dial photograph the same screen under two different instruments, and room photographs it with no instrument at all",
+   "interactions": [
+    "stand at the default cell, remainder=core with keeping=none, and read the two halves against each other. Below: one solid body, sealed, which is schrodinger_box's claim that a fact exists in there and you merely lack access. Above: fringes, which prove the two branches interfered, which proves there was no fact about which branch was taken. The sources' own default cell is a photograph of a contradiction, and both halves of it are theirs.",
+    "walk `keeping` at any remainder except twin and watch the screen go from nine half-pitch bars to nine abutting ones at half the radiance. The integrated linear radiance of the two states is EQUAL to seven decimals by construction (1.0000000), so nothing has been lost - the light has only stopped being sorted. That is what losing coherence is.",
+    "compare vault against dial on the SCREEN. They are the same picture. A record that nobody has read destroys interference exactly as thoroughly as one that is displayed, because it is the existence of the record and not the reading of it that does the work. This is the single most reliably misunderstood point in the subject and the sheet photographs it twice.",
+    "compare room against both of them. Same screen again, and now with no instrument in the bay at all - the record has leaked into the environment where nobody can read it back. Decoherence produces no readable record and destroys the fringes anyway, so `room` is the cell that separates 'a measurement happened' from 'the coherence is gone'.",
+    "walk `keeping` at remainder=twin and notice the screen never moves. An opaque wall runs down the spine of the case and the two branches never meet, so there is nothing to modulate and no record can change that. The twin row is quiet on keeping's loudest signal BY DESIGN; a critic reading per-pair rows without this sentence would read a conditional as a fault.",
+    "read the twin row's smallest pair. keeping=none against keeping=dial is exactly two lamps, 42.521 cm2, 0.745 percent of frame - the entire visible contribution of the apparatus that is supposed to be doing the collapsing, in the one column where it collapses nothing."
+   ],
+   "dna": {
+    "promoted": "2026-08-17",
+    "stage": "synthesis",
+    "wave": 22,
+    "framing": 0.42,
+    "sources": [
+     "schrodinger_box",
+     "superposition_display"
+    ],
+    "axes": {
+     "remainder": [
+      "core",
+      "twin",
+      "seam",
+      "haze"
+     ],
+     "keeping": [
+      "none",
+      "room",
+      "vault",
+      "dial"
+     ]
+    },
+    "default": "remainder=core, keeping=none. THE REMAINDER DEFAULT IS THE SOURCES', AND THAT IS THE POINT. schrodinger_box.gd:105 and superposition_display.gd:229 both ship `core`, and both files' comments gloss it as the sealed body - the most classical claim in the family, ignorance dressed as physics. keeping=none is the sources' actual condition rather than a tidy starting cell: neither file contains any record apparatus at all, and `none` is this codebase's spelling for an absence. So the default cell reproduces the family's own argument and, because the screen is above the sealed body rather than inside it, reproduces it together with the evidence against it. Every other cell is a step away from that frame.",
+    "was": "TWO TOKENS, TWO SCRIPTS, ONE VOCABULARY WITH ONE IMPLEMENTATION. This is not wave 21's one-script-two-tokens shape and it was checked for first: schrodinger_box.tscn:3 and superposition_display.tscn:3 name different scripts and different class_names. What binds them is stronger than a copied word list - superposition_display.gd:224 preloads the box's script as `RemainderAxis` and calls its static remainder_name()/vantage_name() rather than keeping a second alias table, so a map that writes `branch` or `mirror` or `room` reaches the same value on both. Both declare remainder x vantage identically in the registry (foundations.json, quantumalgorithms.json). Both were swept: doc/reports/sweep_schrodinger_box_bite.json crosses both axes and peaks at 15.762 percent; doc/reports/sweep_superposition_display_bite.json walks remainder alone at specimen and its ten pairs run 2.912 to 5.705 percent. superposition_display carries a long REPAIR header (:115-171) recording that at vantage=chamber the five remainder values differed by 0.71 to 1.57 percent while vantage moved 9 to 13 percent - the frame shouting over the thing inside it - and fixes it with a per-vantage `reach` scale. That repair is the reason this bench pins its own frame with a layers=0 anchor instead of letting any value change the AABB.",
+    "note": "THE INSTRUMENT DECISIONS, EACH ONE COSTING SOMETHING. (1) THE FRAME IS PINNED. One MeshInstance3D with a 0.560 x 0.575 x 0.200 BoxMesh and layers = 0 sits inside the faced rig in every cell, so the merged AABB the sweep frames by is identical across all sixteen and no measured pair carries a framing difference it did not earn. layers = 0 rather than visible = false, because visibility is hierarchical in Godot and would take any future child with it. Without this, `haze`'s ghosts and `room`'s flecks would each grow the box and buy a score by moving the camera - the fault superposition_display had to repair. (2) THE RIG IS YAWED 0.62 rad. capture_config_sweep.gd:69 puts the camera at YAW 0.62 and :443 builds its direction as Vector3(sin(yaw)cos(pitch), -sin(pitch), cos(yaw)cos(pitch)), whose horizontal bearing is atan2(sin 0.62, cos 0.62) = 0.62 exactly. Facing the board along it photographs every front surface square and costs only cos(0.26) = 0.966390 of the height. It also means the view direction in the rig's own frame is (0, sin 0.26, cos 0.26) - straight on, tilted down - so anything standing z proud of the board hides the board 0.26602 * z BELOW itself at the SAME x, with no sideways shift at all. Every ghost and fleck position is placed against that one number. (3) THE VERTICAL STACK IS AN OCCLUSION SOLUTION, NOT A COMPOSITION. The case stands 0.100 m proud, so its lower front edge hides everything within 0.0266 m below it. The first proportioning put the case at y 0.105 and the bay at y 0.038-0.098, which hid the top third of the bay and ALL of the vault seal - an axis half-photographed, which reads exactly like a weak axis. The case is now at 0.155-0.355 and the bay bezel tops out at 0.121, 0.011 m under the shadow line at 0.1316. The screen sits at 0.390-0.556, 0.050 m above the highest board point the core lid can reach (0.340). (4) EVERY SURFACE THE AXES ARGUE ABOUT IS UNSHADED - the screen well and its bars, the whole instrument bay, the leaked flecks, and seam's cut. The rendered pixel is therefore filmic(srgb_to_linear(albedo)) and nothing else, which is why the prediction below is computed to the byte and is TWO-SIDED rather than a floor. The bodies (board, plinth, case, occupants, wall, posts, cage) stay lit, because a bench with no shading is a chart and this one is supposed to have a body. The one term anywhere in the arithmetic that depends on a lit surface is the flecks against the board behind them, and every fleck pair is labelled a floor for that reason. (5) THE SCREEN'S TWO STATES CARRY EQUAL LIGHT, EXACTLY. Fringed bars are half a pitch wide at full radiance; flat bars are a whole pitch wide at half, and the halving is done in LINEAR light through Godot's own Color.srgb_to_linear / linear_to_srgb, which is the same piecewise curve the renderer uses. Summed over the nine columns the integrated linear radiance is 0.00586093 in both states, ratio 1.0000000. Losing coherence loses no photons. (6) NO NUMERIC VALUE ANYWHERE IN EITHER AXIS. Both are word enums typed String with String defaults, so cabinet_sweep.coerce() has nothing to numericise and the tier_terrarium failure - Object.set() refusing a typed property in silence - cannot occur here. Checked, not assumed. (7) NO RANDOMNESS AT ALL. Both sources seed an RNG for their haze clouds (schrodinger_box.gd:470-471, superposition_display.gd:530-531). This bench uses fixed tables - fourteen ghost positions, twelve fleck positions - so there is nothing for a dna.fixture to pin and the arithmetic below is exact rather than sampled. (8) THE .tscn ROOT CARRIES THE SCRIPT, so the axes are reachable from a map token.",
+    "predicted_degeneracy": {
+     "pair": "none against dial, in the twin remainder",
+     "percent": 0.2541,
+     "metric": "mean absolute LUMA delta over the whole 760 x 760 frame, which is the critic's `frame` number - write the word luma so score_wave ranks on magnitude. The count metric is stated too and it is a different quantity: changed_pct, the share of pixels whose sum|dRGB| exceeds 26, is predicted at 0.745 percent, and it CANNOT rank the three quiet pairs of this column against each other because the moving pixels are nearly the same set each time - (twin,none)|(twin,vault) and (twin,vault)|(twin,dial) both saturate the whole 2.1948 percent bay opening while differing by 1.34x in magnitude. That is ground_layer's finding, and this bench is the same shape. The critic's `focus` - mean over the hottest 5 percent - is predicted at 5.082 percent, which is simply the frame number divided by 0.05 because the changed area (0.745 percent) is far under the 5 percent budget and the rest of the band is zeros.",
+     "floor_or_two_sided": "TWO-SIDED, and the reason is specific rather than hopeful. The usual 1.5x-to-6.7x under-shoot comes from a Python rasteriser being blind to shadows, ambient occlusion and antialiasing. This pair contains NO lit surface and NO geometry change: the two frames are identical everywhere except two coplanar unshaded rectangles inside a bay that is drawn identically in both, at the same depth, under the same bezel. There is nothing for a shadow to fall on that is not already the same in both frames. A measured value more than about 15 percent either side of 0.2541 means the harness changed something - the framing hint was dropped, the materials were not unshaded, or the tonemapper is not FILMIC - and should be investigated before the number is read as a fact about the axis.",
+     "pool": "the SIX keeping pairs inside the twin remainder column, ranked among themselves. Not the sheet's 120 pairs: the ONE smaller number anywhere is the designed null at (core,vault)|(core,dial), which is 0.0000 percent and is registered separately. A rank inherits its context - at seam and haze this same pair also carries the fringed-to-flat screen swap and measures 2.2824 percent, 8.98x larger, and at core the bay is occluded so the pair is the screen swap alone at 2.0283 percent. The pair is only the floor inside twin, and it is the floor there for a reason worth photographing.",
+     "why": "AT twin THE TWO BRANCHES NEVER MEET, SO THE SCREEN IS FLAT IN ALL FOUR KEEPINGS AND THE ONLY REGION LEFT THAT CAN VARY IS THE BAY. And inside the bay, `dial` differs from `none` by EXACTLY TWO LAMPS: the dial's interior is not a separate colour, it IS the recess - taking the face off an instrument leaves you looking into the same dark box you were looking into when there was no instrument - so remainder_box.gd draws RECESS in every keeping and dial adds two rectangles on top of it. AREA. Each lamp is 0.055 x 0.040 m; two of them, foreshortened by the pitch alone (the yaw is cancelled by FACE_YAW) at cos(0.26) = 0.966390, give 2 x 0.0022 x 0.966390 = 0.0042521 m2 = 42.521 cm2. FRAME. The pinned anchor is 0.560 x 0.575 x 0.200 at (0, 0.2875, 0.070), rotated 0.62 rad about Y, so the world AABB is 0.571979 x 0.575000 x 0.488155, diagonal 0.946615, radius 0.473308. capture_config_sweep.gd:442 sets dist = radius / tan(17 deg) x 1.9 x 0.42 = 1.235399 m, so the frame is a square of side 2 x 0.473308 x 1.9 x 0.42 = 0.755399 m, area 0.570628 m2 (0.9939 mm per pixel). The two lamps are 0.7452 percent of it. COLOUR. Unshaded albedo -> srgb_to_linear -> Godot FILMIC (A = 0.88, B = 0.60, C = 0.10, D = 0.20, E = 0.01, F = 0.30, white 1.0) -> linear_to_srgb -> 8 bit gives RECESS (0.060,0.060,0.070) = (18,18,21), LAMP_LIT (0.40,0.62,0.98) = (131,193,253), LAMP_DARK (0.085,0.100,0.135) = (25,30,41). PIL's L is 0.299R + 0.587G + 0.114B, so 18.34, 181.30 and 29.76. SUM. (0.0021261 x |18.34 - 181.30| + 0.0021261 x |18.34 - 29.76|) / (255 x 0.570628) = (0.346466 + 0.024280) / 145.510 = 0.002548 -> 0.2541 percent measured on the 400 x 400 integration grid the geometry was checked on. MARGIN. The next pair up is (twin,none)|(twin,vault) at 0.3830 percent, 1.507x, and the one after is the three-way tie of vault-against-dial at 0.5145 percent. The margin is comfortable and it is not an accident of colour choice - it survives because the lit lamp is bright and small while the vault face covers the whole opening.",
+     "peak_for_contrast": "The loudest KEEPING pair in the sheet is none against room at seam or haze, 2.6005 percent frame - a factor of 10.2 above this floor, and a floor-to-peak ratio that any report quoting only the headline would have hidden. Louder still are the remainder pairs, where a sealed shroud is being compared against an open case; those are not computed here because they are all lit geometry and any number for them would be a floor."
+    },
+    "predicted_relationship": "THREE CLAIMS THAT DO NOT NEED A PERCENTAGE TO BE WRONG. FIRST, THE SCREEN IS IDENTICAL FOR room, vault AND dial AT EVERY REMAINDER. Not merely similar - byte-identical, because all three take the same `flat` branch in _build_screen(). Cropped to the screen well, the three pairs room|vault, room|dial and vault|dial must measure 0.000 at every one of the four remainders, twelve readings of zero. This is the artifact's thesis: a which-path record destroys interference by EXISTING, so reading it (dial) changes nothing that a sealed one (vault) had not already changed, and an unreadable one leaked into the environment (room) does the same job with no instrument at all. If any of those twelve is non-zero, the screen is being written by something other than the branch it claims. SECOND, VAULT-AGAINST-DIAL MEASURES THE SAME AT twin, seam AND haze AND ZERO AT core. The bay is not touched by the remainder axis except by being occluded, so the three non-core readings should be 0.5145 percent to three decimals, three times. Equal readings across contexts are the evidence that the two axes are independent everywhere the shroud is not in the way; the fourth reading being zero is the evidence that they are not independent where it is. Group by VALUE PAIR across contexts, not by context mean. THIRD, AND IT IS A PREDICTION ABOUT THE INSTRUMENT RATHER THAN THE ARTIFACT: the count metric cannot rank the twin column. changed_pct for (twin,none)|(twin,vault) and for (twin,vault)|(twin,dial) are both predicted at 2.1948 percent - the whole bay opening, to four decimals, because in both pairs every pixel of the opening clears the sum|dRGB| > 26 gate. In luma they are 0.3830 and 0.5145, a ratio of 1.34. Two pairs, identical under one metric and 34 percent apart under the other, is ground_layer's ground_layer moment repeated on purpose and pre-registered rather than discovered afterwards.",
+    "designed_nulls": [
+     {
+      "a": {
+       "remainder": "core",
+       "keeping": "vault"
+      },
+      "b": {
+       "remainder": "core",
+       "keeping": "dial"
+      },
+      "under_percent": 0.3,
+      "why": "IDENTICAL BY CONSTRUCTION, AND THE NULL IS THE ARGUMENT RATHER THAN A CHECK ON IT. At remainder=core the bench builds ONE solid opaque body over everything below the screen - _build_core() writes a BoxMesh spanning |x| <= 0.192, y 0.030 to 0.362, z -0.019 to 0.116, plus a lid. The whole instrument bay lives at |x| <= 0.096, y 0.039 to 0.121, z <= 0.014, entirely inside that volume. The occlusion is arithmetic, not eyeballed: the ray from the bay's most exposed point toward the camera travels (0, sin 0.26, cos 0.26) in this frame and reaches the shroud's front face at z = 0.116 after 0.1056 m, at y = 0.121 + 0.0272 = 0.1482, which is inside the shroud's y span - so it is stopped. Neither keeping draws anything anywhere else: the screen is flat for both (neither is `none`), and neither draws flecks (neither is `room`). Same meshes elsewhere, same transforms, same materials, no randomness, no _process - the two PNGs are the same file. Predicted 0.000 percent frame and 0.000 percent focus. Anything above 0.3 percent is render nondeterminism; anything above 2 percent means the shroud is not closed, or the bay is being drawn in front of it, and every core reading in the sheet is then suspect. WHAT THIS NULL SAYS: under the classical-ignorance reading of quantum mechanics - the one `core` is - an unread record and a read one are the same photograph, because that reading has sealed away the only place the difference could live. It is not that the difference is small. It is that the position has made itself unable to have one. AND WHY IT IS CONDITIONED ONLY ON THE TWO SWEPT AXES: both `remainder` and `keeping` are in the cross product, so the sweep renders these two cells. A null conditioned on anything a dna.fixture pins could never be tested, which is wave 21's warning; there is no fixture here to pin anything with."
+     }
+    ],
+    "designed_nulls_why": "ONE NULL, AND IT IS THE ONLY EXACT IDENTITY THIS GEOMETRY ADMITS. The obvious second candidate was rejected on inspection: room-against-vault and room-against-dial at core are EQUAL to each other (both are the flecks alone, 0.5723 percent) but neither is zero, so they are a designed relationship rather than a null and are recorded under predicted_relationship. The other near-miss is the screen, where room, vault and dial are byte-identical - but only inside the screen well, and a whole-frame null needs the whole frame. That is registered as the first predicted relationship, to be read on a crop.",
+    "kin": "THE WORD `remainder` IS TAKEN WHOLE FROM THE SOURCES AND PARSED BY THE SOURCES' OWN READER, which is the opposite of the usual decision in this programme and is the right one here. The corpus rule is that borrowing a word without its answers is the dishonest half of a shared vocabulary; this bench takes the word AND four of its five answers AND the code that expands its aliases (const RemainderAxis = preload(schrodinger_box.gd)), so `sealed`, `branch`, `cut` and `leak` reach the same values on all three artifacts and none of the three can drift. What it does not take is `witness`, and that is declared by absence: the enum has four entries, so check_dna_declarations reports four, and a map that writes the declined word keeps whatever value is held rather than silently matching nothing. THE SECOND AXIS TAKES A NEW WORD. `keeping` is declared by no other artifact in the corpus, checked across all 108 registry files. The near words were all taken or all wrong: `record` is declared by six artifacts in senses of their own, `trace` by four, `residue` by five, `custody` by pick_up_cube and `tally` by integral_area. `vantage` was deliberately NOT reused even though this bench could have carried it, because vantage is the register - object or room - and this bench has one register and one argument, and adding a second loudness axis to a sheet whose argument axis is quiet is exactly the fault superposition_display spent a whole repair header undoing.",
+    "declines": [
+     "WITNESS, THE FIFTH VALUE, AND THIS IS THE PASS'S RESULT RATHER THAN AN OMISSION. The axis asks where the object puts the part of the state it cannot show. core answers 'inside itself', twin 'nowhere, both are actual', seam 'in the boundary', haze 'in the environment'. Those are four places in the world and they are commensurable - you can ask of each one what it does to a photograph. `witness` answers 'in you', and where you stand is what the pair's SECOND axis is for, value for value: schrodinger_box.gd:64-66 defines specimen as an object you look down on and chamber as a room you are inside. So the fifth value is not a peer of the other four; it is the two axes touching, and treating it as a peer means the sheet's fifth column is answering a different question from the other four. The geometry does not rescue it. Both files build `witness` as a shell open on one face with a 'polished plate returning the room' behind it - metallic 1.0, roughness 0.04 (schrodinger_box.gd:489, superposition_display.gd:563) - under a capture rig that is BG_COLOR (0.055,0.055,0.070) with AMBIENT_SOURCE_COLOR, no sky, no reflection probe (capture_config_sweep.gd:624-630). There is no room in that environment to return; the plate reflects one uniform value and reads as a bright slab lifted by its own emission of 0.55. And it is the only value in the family whose meaning depends on where the camera is: from behind, `witness` is a closed slate box, which is `core` under another name. What the value was reaching for is not lost - the question of who holds what, and whether that changes the picture, is this bench's second axis, where it is one question with four answers of one type instead of a fifth answer of another type.",
+     "VANTAGE, THE SECOND SOURCE AXIS, entire. specimen/stele/chamber is the register - an object you look down on, a slab that addresses you, a room you stand inside - and it is a good axis, but it is a REGISTER axis, and superposition_display's own REPAIR header (:115-171) is the measured record of what happens when a register axis shares a sheet with an argument axis: held at chamber the five remainder values differed by 0.71 to 1.57 percent while vantage moved 9 to 13 percent, and the sheet was reporting the size of the room. That repair worked, and it worked by growing the argument to keep its share of the frame. This bench declines the fight instead. One register, fixed, at the scale where both axes are legible, and the second axis spent on a question the family never asked.",
+     "THE COLLAPSE ITSELF, and the lid, and the click. schrodinger_box's whole pull is that you can open it: observe() (:311-325) tweens the lid to -110 degrees, rolls randf(), and resets after auto_reset_time. This bench has no interaction and no clock, because every one of those claims is invisible in a still and because a BEFORE and an AFTER smuggles back the classical picture both source files say in their own headers they exist to unsettle. The cost is real and it is the largest thing given up here: this is a bench for comparing, not an apparatus you meet in a room, and nobody has ever wanted to open a bench.",
+     "AN UNEQUAL AMPLITUDE. The obvious third axis is the ratio alpha:beta, and it is refused because neither source implements a Born rule to be honest about. superposition_display oscillates alpha = 0.5 + 0.3 sin(t) with beta = 1 - alpha (:350-351), which is not the normalisation a state has; schrodinger_box rolls a flat randf() > 0.5 (:314) while its @identity claims P = |alpha|^2 (:10). Drawing an unequal amplitude here would be this bench inventing physics the family does not have, and the two occupants are therefore equal, opaque and permanent in every cell.",
+     "THE KET LABELS. Both sources carry Label3D text - the box's two labels (schrodinger_box.gd:255-267), the display's kets and formula (:296-345). They are dropped because capture_config_sweep now runs every Label3D through LabelFramer, which builds a bezel and a backing plate around it, and that furniture is not this bench's geometry to be photographed. The basis identity is carried in colour instead - the display's own blue |0> and orange |1>, superposition_display.gd:247-248 - on the occupants, on the leaked flecks and on the dial's two lamps, so the same two colours mean the same two things in all three places a reading can live.",
+     "THE BOX'S GREEN AND GREY. schrodinger_box paints its outcomes alive-green (0.30,0.80,0.30) and dead-grey (0.42,0.42,0.44) (:218, :234). Those are a verdict about a cat, and a bench whose whole subject is which record exists should not be scoring one of the two records as the good one. The display's blue and orange are labels rather than judgements and are used throughout instead. Recorded here because it is a real loss: the cat is the reason anybody remembers the thought experiment."
+    ],
+    "sweep_command": "python tools/build_dna_gallery.py --slug=remainder-box --tokens=remainder_box --max=16",
+    "sweep_note": "--max=16 IS LOAD-BEARING AND THE DEFAULT WOULD HALVE THE SHEET. build_dna_gallery caps the cross product and trims the LATER axis from the tail, so at the default --max=9 a 4 x 4 sheet renders as 4 x 2: `remainder` survives whole and `keeping` loses vault and dial - which deletes the designed null, the vault-against-dial relationship and the predicted degeneracy in one go. The declared order is remainder first, keeping second, so it is keeping that gets cut. This is the same trap recorded against every previous 4 x 4 sweep in this programme.",
+    "placements": 0
+   },
+   "spatial_needs": {
+    "platform": "floor",
+    "footprint_cells": 1,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [
+     "schrodinger_box",
+     "superposition_display",
+     "florensky_sphere",
+     "quantum_superposition"
+    ],
+    "preferred_zone": "teaching",
+    "footprint_source": "computed_from_geometry",
+    "footprint_note": "The body is 0.560 wide x 0.575 tall x 0.200 deep before the 0.62 rad face yaw and 0.571979 x 0.575000 x 0.488155 after it, so one cell holds it with room to stand at. The yaw is part of the artifact, not a placement hint: it exists so the front face squares to the capture standpoint, and a map that rotates the token rotates it away from that."
+   },
+   "measurements": {
+    "aabb_size": [
+     0.571979,
+     0.575,
+     0.488155
+    ],
+    "aabb_center": [
+     0.040672,
+     0.2875,
+     0.056972
+    ],
+    "grid_cells": [
+     1,
+     1
+    ],
+    "max_dimension_m": 0.575,
+    "source": "computed_from_geometry from the file's own constants; no Godot was run. The AABB is the layers=0 FrameAnchor, which is sized to the union of every variant's extent and is present in all sixteen cells, so this is the AABB in every one of them. Anchor half-extents (0.280, 0.2875, 0.100) at local (0, 0.2875, 0.070), rotated 0.62 rad about Y: half-x = 0.280 cos(0.62) + 0.100 sin(0.62) = 0.285990, half-z = 0.280 sin(0.62) + 0.100 cos(0.62) = 0.244078, centre (0.070 sin 0.62, 0.2875, 0.070 cos 0.62). Diagonal 0.946615, radius 0.473308.",
+    "measured_at": "2026-08-17"
+   },
+   "footprint_measured": [
+    1,
+    1,
+    1
+   ],
+   "geometry_spec": {
+    "mesh_type": "composed_primitives",
+    "topology": "manifold_closed",
+    "construction": {
+     "method": "primitive_assembly",
+     "primitives": [
+      "box",
+      "sphere"
+     ],
+     "operations": [
+      "create_primitives",
+      "position_children",
+      "yaw_to_standpoint"
+     ]
+    },
+    "material": {
+     "type": "standard",
+     "shading_model": "mixed_lit_and_unshaded",
+     "key_properties": [
+      "unshaded",
+      "emission",
+      "transparency"
+     ]
+    },
+    "animation": {
+     "type": "none",
+     "driven_by": "none",
+     "affects": []
+    },
+    "instance_strategy": "few",
+    "vertex_estimate": "low"
+   },
+   "qfep_connection": "The third sieve question made into a pair of axes. `remainder` is where the irreducible is put and `keeping` is who holds the record of it - and the bench's finding is that the family argued for five values about the first while never naming what was being moved. CONSERVATION_OF_THE_IRREDUCIBLE says you can move the pile and never remove it; this says the pile in this particular argument is the coherence, and that a record of which way things went destroys it by existing rather than by being read.",
+   "dev_category": "foundations_crisis",
+   "map_sequences": [
+    "foundationscrisis"
+   ],
+   "sequence": "foundationscrisis"
+  }
+ }
+}

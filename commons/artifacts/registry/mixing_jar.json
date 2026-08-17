@@ -1,0 +1,183 @@
+{
+ "artifacts": {
+  "mixing_jar": {
+   "name": "Mixing Jar",
+   "lookup_name": "mixing_jar",
+   "scene": "res://commons/artifacts/mixing_jar/mixing_jar.tscn",
+   "class_name": "MixingJar",
+   "category": "randomness",
+   "artifact_type": "synthesis",
+   "complexity": "advanced",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "size_group": "compact",
+   "description": "Seventy-two bodies in a glass jar, shown at four steps of one reduction: the bodies where they lie, the six cell counts an instrument keeps, the number those counts produce, and the form entropy_morphogenesis' own mapping grows from that number. The instrument is entropy_jar's, unchanged - six horizontal cells, entropy_jar.gd:427 and :439 - so three of the four steps cannot tell a uniformly mixed jar from one sorted into a red core inside a blue shell, and one can.",
+   "dna": {
+    "promoted": "2026-08-17",
+    "stage": "synthesis",
+    "wave": 22,
+    "framing": 0.62,
+    "sources": [
+     "entropy_jar",
+     "entropy_morphogenesis"
+    ],
+    "axes": {
+     "found_state": [
+      "sorted",
+      "stirred",
+      "mixed",
+      "shelled"
+     ],
+     "reduction": [
+      "bodies",
+      "cells",
+      "figure",
+      "form"
+     ]
+    },
+    "default": "found_state=sorted, reduction=bodies. sorted because it is entropy_jar's shipped export default (entropy_jar.gd:68) and the `_:` fallthrough of its own _place_particles() (:625-629), i.e. the state all eighteen of its placements are found in; it is also entropy_morphogenesis' S floor. bodies because a jar of bodies is the only thing EITHER source has ever drawn - entropy_jar shows its eighty particles, entropy_morphogenesis shows a surface and no count anywhere. So the default cell is the family exactly as it stands, and every other cell of the sheet is something neither member can currently show.",
+    "note": "THE FAMILY IS TWO, SO THERE IS ONE COMPARISON AND NO TRIANGULATION, and the question is whether the hypothesis holds: are entropy_jar and entropy_morphogenesis about the same thing? ANSWER: THEY SHARE A WORD AND THEY RUN IT IN OPPOSITE DIRECTIONS.\n\nentropy_jar MEASURES. Eighty bodies lie somewhere; _measure_entropy() (entropy_jar.gd:422-465) drops them into six vertical bins and computes a population-weighted binary Shannon entropy from the counts. Arrangement, then instrument, then number. Its found_state is a state you can be WRONG about.\n\nentropy_morphogenesis DECLARES. There is no measurement in the file at all - no counter, no histogram, no readout, nothing that consumes the geometry. S is an @export (entropy_morphogenesis_vr.gd:88) and _apply_found_state() (:138-145) simply writes 0.0 or 1.0 into it, after which _update_from_entropy() (:175-177) fans it out into frequency, noise amplitude and cut threshold and a gyroid is marched from those. Number, then parameters, then form. Its found_state is a state you TYPED IN.\n\nSo the shared word is honest about the question and carries no shared answer, and the sharper way to say it is that one artifact's found_state is an OUTPUT and the other's is an INPUT.\n\nTHE STANDING SUSPICION - that `mixed` is an all-rungs value, the union of `sorted` and `stirred` - IS WRONG IN BOTH MEMBERS, and the arithmetic says why. entropy_jar's three shared values are three samples of ONE SCALAR, the reach of each colour into the other's half: `sorted` gives group A [-h, 0] and B [0, h] (:628-629), `stirred` gives A [-h, 0.35h] and B [-0.35h, h] (:611-612), `mixed` gives both the whole span (:615-616). Reach 0, 0.35, 1.0. entropy_morphogenesis' three are three samples of one scalar too, S itself at 0.0, 0.3 and 1.0. `mixed` is the TOP RUNG of a monotone ladder, not a superset of the rungs below it. It resembles a union in the jar only because the top of an interval-reach ladder happens to coincide with the union of the two halves the ladder started from - which is what a limit is, not what an all-rungs value is. Wave 20 found six unions and wave 21 three more; this is not a tenth. No all-rungs value has been added here and none was inherited.\n\nAND `shelled` IS NOT A CONTAINER DETAIL. entropy_morphogenesis declined the word, and its registry note calls it \"a joke about the jar's vertical binning\". It is not a joke. entropy_jar.gd:617-624 puts group A inside r < 0.46 R and group B outside r > 0.74 R, both spanning the full height, so the jar is as visibly sorted as `sorted` is - and every vertical bin reads fifty-fifty, so the instrument reports MAXIMUM ENTROPY. That is not a gag about a container; it is the one place in the family where the number is shown to be a fact about the COARSE-GRAINING rather than about the stuff, which is the entire content of statistical entropy. The refusal to borrow it was the wrong call, and this jar keeps all four values.\n\nWHAT THIS ADDS THAT macrostate_shelf DOES NOT. That shelf (wave 21) asks whether a shared word carries a shared COUNT, and its finding is a bug: microstate_counter's cell table is a set of constants that do not follow from the geometry the same file draws. This jar asks a different question and its finding is not a bug. entropy_jar's instrument is CORRECT - the six-bin vertical Shannon entropy of a radially sorted jar really is 1.00 - and it is still blind, because a coarse-graining is a choice and every choice is blind to something. macrostate_shelf's uniform-against-spilled null is a table failing; this jar's mixed-against-shelled null is an instrument succeeding at exactly what it was asked and missing everything else. One is an error to fix, the other is a fact to stand in front of.\n\nA THIRD FINDING, UNASKED FOR, IN THE OTHER MEMBER, AND IT IS THE WAVE-21 SHAPE AGAIN. entropy_morphogenesis' `level` axis names its top value `broken` at threshold_center = +0.95 and its own header (entropy_morphogenesis_vr.gd:61-64) says: \"Past the percolation point. The labyrinth is no longer a labyrinth - it is isolated pockets. The topology breaks without the entropy changing at all, which is the whole argument.\" IT DOES NOT BREAK. Flood-filled on a 52-cubed periodic lattice over one full gyroid period, the level set G > 0.95 is ONE connected component holding 100% of the solid at a volume fraction of 0.188, and it percolates. So is its complement. At the extreme cell the axis can reach - `broken` crossed with found_state=mixed, which adds threshold_wobble*(S-0.5)*2 = +0.15 at :177 and puts the cut at 1.10 - it is still one connected percolating component at 0.136. The gyroid actually falls apart near 1.42, into eight isolated pockets at 1.5% volume, just short of its own extremum. The value named for a topological transition sits 0.47 below the transition, and NO CELL of that artifact's twelve has ever been broken.\n\nAND THE LIKELY CAUSE IS ONE WRONG COMMENT. GyroidFieldGenerator.gd:72 says the gyroid field has \"range roughly [-3, 3]\". Sampled over one full period it is [-1.4991, 1.4991] - the well-known 3/2 - so the only statement of the field's range anywhere in the codebase is out by a factor of two, and the divisor on the next line (:74, `/ 6.0`) is sized to it. The divisor is harmless, because the map to density is affine and monotone and marching cubes finds the same level set either way; the comment is not, because it is what a person choosing a threshold reads. Two smaller things in the same function: the noise is scaled by noise_freq TWICE - :43 sets it on the FastNoiseLite object and :64-68 also multiplies the sample coordinates by it, so the perturbation actually runs at 0.49 - and the solid fractions the level axis claims are 5 to 6 points off (thickened -0.60 is 69.4% not \"roughly three quarters\", pinched +0.60 is 30.6% not \"about a quarter\"). Those two are venial. `broken` is not.\n\nTHE THESIS SOMEONE COULD DISAGREE WITH: a number computed from a state is a fact about the grid you counted on, and the way to show it is to put the state, the grid, the number and what the number grows into on one body at one scale, so that the reader watches which step lost the thing that mattered. THE DISAGREEMENT AVAILABLE, and it is fair: `shelled` is a contrived arrangement nobody would stumble into, so the blindness it exposes is manufactured rather than found. The answer is that entropy_jar contains it already, ships it as a declared value of a live axis, and its instrument is the one every one of those placements uses - so the blindness is in the corpus whether or not anyone poses for it.",
+    "predicted_degeneracy": {
+     "pair": "sorted against stirred, in the figure reduction",
+     "percent": 0.054,
+     "metric": "changed_pct. NOT luma: this is an AREA prediction, not a magnitude one. The differing region is unshaded amber segment faces against the jar's interior, a contrast of roughly 140 grey levels, so every differing pixel clears any threshold and a COUNT of them is exactly what the arithmetic below computes. A luma-ranked score would answer a different question.",
+     "floor_or_two_sided": "FLOOR, and unusually close to two-sided - but not two-sided, and the reason is worth writing down. The geometry term is exact: the figure reduction draws seven-segment glyphs out of BoxMesh with SHADING_MODE_UNSHADED, so there are no shadows, no ambient occlusion and no specular to under-model, and the differing area is three rectangles whose dimensions are constants in mixing_jar.gd. What is NOT modelled is antialiasing, and here it is a large fraction rather than a rounding error, because the whole differing region is only about 312 pixels while its outline is about 126 pixels long. So the honest statement is a BAND: expect 0.054% to about 0.076%. BELOW 0.054% AND SOMETHING IS BROKEN - check, in this order, (a) that the sweep set `reduction` at all, because both axes are String enums and Object.set() on a typed property of the wrong type is refused in SILENCE (read _rejects.json); (b) that the sheet was captured at --max=16, since a 4 x 4 at build_dna_gallery's default cap of 9 trims the LATER axis and the figure column vanishes entirely, taking this pair and two of the three nulls with it; (c) tools/check_dna_declarations.py. ABOVE about 0.10% and something OTHER than the three segments is moving - most likely jar_seed is not pinned, or bodies are being drawn under a reduction that should have none.",
+     "why": "THE CONTEXT IS THE figure COLUMN AND THE RANKING IS COMPUTED INSIDE IT. Every pair outside that column moves whole populations of bodies, whole split bars or a whole field slice; the four live pairs inside it move a digit. Under `figure` the jar stands empty and the only thing that changes between two cells is the seven-segment number, so those four pairs are the floor of the sheet by construction and they are exactly enumerable.\n\nTHE STRINGS. S is exact by construction, not sampled: the bodies' heights are stratified rather than drawn, 36 per colour across 3, 4 or 6 cells, so every cell count is an integer and the population-weighted binary Shannon sum returns 0.00, 0.50, 1.00, 1.00 to the bit. Measured in Godot across all sixteen cells and it does. So the figure column reads 0.00, 0.50, 1.00, 1.00 and only the leading two glyphs ever move.\n\nWHICH PAIR IS SMALLEST. A seven-segment 0 is a b c d e f; a 5 is a f g c d; a 1 is b c. sorted against stirred changes only the tenths digit, 0 to 5, and the symmetric difference is exactly three segments: b and e (in the 0, not in the 5) and g (in the 5, not in the 0). sorted against mixed changes only the units digit, 0 to 1, whose difference is four segments: a, d, e, f. stirred against mixed changes both digits, seven segments. So 3 < 4 < 7 and the closest live pair is sorted against stirred.\n\nTHE ARITHMETIC, done on paper from the constants in mixing_jar.gd and the camera in capture_config_sweep.gd. Cell SEG_W 0.066, SEG_H 0.115, SEG_T 0.0128. A horizontal segment is (W - 2T) x T = 0.0404 x 0.0128 = 0.00051712 m2. A vertical segment is T x (H - 3T)/2 = 0.0128 x 0.0383 = 0.00049024 m2. The moving three are two vertical and one horizontal: 2(0.00049024) + 0.00051712 = 0.0014976 m2.\n\nThe glyph plane faces +Z. The canonical standpoint is yaw 0.62, pitch -0.26 (capture_config_sweep.gd:67-71), whose direction vector is (0.5615, 0.2571, 0.7865), so a +Z face is foreshortened by 0.78654: 0.0014976 x 0.78654 = 0.00117791 m2 of moving picture.\n\nThe union AABB is the CARCASS in all sixteen cells - foot, plinth, collar, glass, jar floor, lid, and the fixed seven-segment S on the plinth; nothing either axis draws leaves the glass. Measured in Godot: 0.40 x 1.118 x 0.40 in every one of the sixteen, diagonal 1.2530 m. capture_config_sweep fits by the diagonal with PAD 1.9 (:442), so at framing 0.62 the frame is 1.2530 x 1.9 x 0.62 = 1.4760 m tall and 760 / 1.4760 = 514.9 px per metre. 0.00117791 m2 x 514.9^2 = 312 px2 of 577600 = 0.0541%. Registered at 0.054.\n\nFOR CONTEXT, the same arithmetic on the other three live figure pairs: sorted against mixed is 4 segments = 0.00201472 m2 = 0.073%; stirred against mixed is 7 segments = 0.00351232 m2 = 0.127%. And mixed against shelled is 0.000%, which is the designed null and not a pair.\n\nAND THE FLOOR OF EVERY OTHER COLUMN, RASTERISED AT 200 x 200 OVER THE FORM DISC AND ESTIMATED FOR THE REST, so that the ranking claim is a computation and not an impression. The form column's tightest live pair is stirred against mixed at 0.344% - its slices disagree over 20.4% of a 0.122 m disc, because frequency runs 0.90, 1.25, 1.60 and puts 1.15, 1.59 and 2.04 periods across the same width - with sorted against stirred at 0.394% and sorted against mixed at 0.712%. The cells column moves split bars of about 0.16 x 0.052 m and lands above 1%. The bodies column moves 72 spheres. So the four figure pairs are the floor of the sheet by roughly 6x, exactly as designed, and the four of them are the only pairs in it under 0.3%.\n\nWHAT THIS PREDICTION ADMITS. The number that both source artifacts treat as the payload - the one entropy_jar prints on its dock and the one entropy_morphogenesis takes as its only input - occupies about five hundredths of one percent of the picture, and two entirely different jars differ in it by three little bars. That is not a defect in the framing. It is the reason the other three columns exist.",
+     "registered": "2026-08-17, before any capture"
+    },
+    "designed_nulls": [
+     {
+      "a": {
+       "found_state": "mixed",
+       "reduction": "cells"
+      },
+      "b": {
+       "found_state": "shelled",
+       "reduction": "cells"
+      },
+      "under_percent": 0.3,
+      "why": "IDENTICAL BY CONSTRUCTION, AND IT IS THE FINDING RATHER THAN A CHECK ON IT. entropy_jar's instrument coarse-grains along Y and only along Y (entropy_jar.gd:436-446), and `shelled` differs from `mixed` only in RADIUS (:623-624 against :615-616). Here the y of every body is stratified rather than drawn - body m of a colour in cell j sits at (m + 0.5)/count of that cell's height - and _bin_plan() returns the same six-cell list for both values, so the two arrangements share their heights body for body and the six counts are the same six integers: 6 red and 6 blue in every cell, verified in Godot. The cells reduction draws NOTHING BUT THOSE COUNTS - six bars whose width is the cell population over a fixed scale of 18 and whose split is the red fraction - so the two frames are the same twelve boxes at the same twelve positions in the same two colours. No body is drawn in this reduction at all, so the RNG is never touched and there is nothing to diverge. Predicted 0.000%.\n\nANYTHING ABOVE 0.3% IS A HARNESS FAULT, not a finding, and there are only three places it can be: the sweep never set found_state (read _rejects.json first - both axes are String enums), a read of found_state leaked into the bar path, or the sheet was trimmed and the two named cells are not the ones compared.\n\nTHE CONTRAST THAT MUST HOLD ALONGSIDE IT: the SAME two values under reduction=bodies must be among the widest pairs in the sheet, because every one of the 72 bodies changes radius - reds collapse inside 0.46 R and blues retreat outside 0.74 R - so a uniform red-and-blue haze becomes a red core inside a blue shell. Expect above 1.5%. If mixed and shelled are close under `bodies` too, then found_state is not reaching the geometry and this null means nothing."
+     },
+     {
+      "a": {
+       "found_state": "mixed",
+       "reduction": "figure"
+      },
+      "b": {
+       "found_state": "shelled",
+       "reduction": "figure"
+      },
+      "under_percent": 0.3,
+      "why": "The same blindness one step further down the chain. S is computed from the six cell counts by the same weighted binary Shannon sum entropy_jar uses (:449-465), and the counts are identical, so S is 1.0000 for both to the bit and both frames print the same three glyphs from the same seven-segment table. Godot reports 26 MeshInstance3D in both cells, the same number. Predicted 0.000%. This null is cheaper than the cells one and says less on its own; it is registered because it is the step at which the loss becomes irreversible - two different jars are now one number, and no reader downstream can ever get back."
+     },
+     {
+      "a": {
+       "found_state": "mixed",
+       "reduction": "form"
+      },
+      "b": {
+       "found_state": "shelled",
+       "reduction": "form"
+      },
+      "under_percent": 0.3,
+      "why": "AND THE OTHER MEMBER INHERITS THE BLINDNESS WITHOUT EVER HAVING OWNED THE INSTRUMENT. The form reduction takes S and hands it to entropy_morphogenesis' own mapping - frequency lerp(0.9, 1.6, S), noise amplitude lerp(0.05, 0.20, S), cut threshold 0.15*(S-0.5)*2, all three from entropy_morphogenesis_vr.gd:175-177 - then draws one z = 0 slice of the field GyroidFieldGenerator fills (:58-70). S is 1.0000 for both values, the noise is seeded from jar_seed which is pinned, and nothing else in that path reads found_state, so the two slices are the same slice: 12 MeshInstance3D in both cells, one of them the identical marched surface. Predicted 0.000%.\n\nTHIS IS THE ONE WORTH ARGUING WITH. entropy_morphogenesis has no instrument and never claimed one, so it cannot be accused of a blind spot. But it takes its S from somewhere, and wherever that somewhere is, the shape it grows carries that instrument's blindness with it and shows no sign of having done so. A form is not more honest than a number; it is a number with the receipts thrown away."
+    }
+    ],
+    "designed_nulls_why": "THREE NULLS AND THEY ARE ALL THE SAME SENTENCE, WHICH IS THE POINT. `mixed` and `shelled` are two visibly different jars - one a uniform haze, one a red core inside a blue shell - and they are ONE PICTURE at every step of the reduction except the first. Same six counts, same number, same grown form. Only the bodies can tell them apart, and the bodies are the thing every instrument in the family throws away first.\n\nNO OTHER PAIR COLLAPSES, AND THAT WAS ENUMERATED RATHER THAN HOPED. The four states give three distinct S values (0.00, 0.50, 1.00, 1.00), so the figure and form columns hold exactly one repeat each. The cell counts are [12,12,12|12,12,12], [9,9,18,18,9,9] with two split cells, and [12 x 6] all split - three distinct bar pictures, with sorted and mixed sharing bar WIDTHS while differing in every split, which is a live pair and a deliberately narrow one. Under bodies all four differ, since shelled moves every body's radius. Sixteen cells, three exact repeats, all of them the same inherited blindness.",
+    "fixture": {
+     "jar_seed": 20260817
+    },
+    "fixture_why": "BELT OVER BRACES, AND THE BRACES ARE THE POINT. jar_seed ships PINNED at 20260817, seeds a RandomNumberGenerator before every rebuild, and is the only source of randomness in the file - and it decides azimuth and radius only, because every body's HEIGHT is stratified arithmetic. So the six cell counts, S, the bar widths and the grown form are seed-independent, and only the scatter of the bodies inside their cells depends on it at all.\n\nThe fixture exists because NEITHER SOURCE HAS THIS PROPERTY. entropy_jar ships particle_seed = 0 (entropy_jar.gd:82), which routes every draw through the global randf (:108-118), and its registry dna block contains axes and nothing else - no fixture, no default, no was - so every sweep of it has photographed four different jars and the axis was never measurable. Its own comment at :79-82 says exactly this and the declaration was never written. entropy_morphogenesis is worse and knew it: GyroidFieldGenerator.gd:44 does noise.seed = randi(), so every gyroid in the corpus is a different gyroid; that artifact DID declare fixture.field_seed and is the reason the asymmetry is visible at all.\n\nAND THERE IS NO CLOCK HERE, WHICH MATTERS BECAUSE ONE SOURCE IS ALL CLOCK. entropy_jar is a physics artifact - eighty RigidBody3D in a grabbable jar, shaken by an accelerometer threshold (:151-169), agitated by impulses (:407-416) - so what a still of it shows is partly a fact about the shutter and about how long the solver has been running. This jar has no RigidBody, no _process, no _physics_process, no tween and no timer. Nothing settles, so nothing can be photographed half-settled.",
+    "framing_why": "0.62. The carcass is 0.40 x 1.118 x 0.40 - measured in Godot, identical in all sixteen cells - and capture_config_sweep fits by the DIAGONAL with PAD 1.9 (:442). At framing 1.0 the 1.2530 m diagonal would be padded to a 2.381 m frame and this 1.118 m jar would stand at 47% of the frame height in a mostly empty square, with a seven-segment glyph 60 px tall. 0.62 puts the frame at 1.4760 m, the jar at 76% of its height and the foot at 36% of its width, with roughly 0.47 m of margin each side. It is a TALL, NARROW subject, which is the case fit-by-diagonal handles worst.",
+    "kin": "The two sources are the kin and the relation is asymmetric in exactly one place, which is the whole reason to build. Both are `found_state` artifacts in the same curriculum; entropy_morphogenesis borrows the word openly and says so in its own header (entropy_morphogenesis_vr.gd:29-46), so this is a stated lineage rather than a hidden one; and three of the four values mean the same thing in both. What separates them is that one MEASURES its state and the other DECLARES it, and this jar is built so the measurement and the declaration can stand in one frame. A room holding it beside entropy_jar says: here is what your one instrument cannot see. A room holding it beside entropy_morphogenesis says: here is where your S came from. Adjacent kin without the word: macrostate_shelf (wave 21, the same substrate asking whether the shared word carries a shared COUNT), shannon_entropy_meter (the same arithmetic over symbol frequencies rather than spatial cells) and microstate_counter - which is why those three are cluster_with and not sources.",
+    "was": "Nothing. This is a new body, and what it was is a disagreement between one source's fourth value and the other source's refusal of it. entropy_jar declares `shelled` and explains it correctly in its own comment (entropy_jar.gd:617-624); entropy_morphogenesis reads that comment, calls it a joke about a container, and declines. Reading the two against the arithmetic is where the pass went: the value is not a joke, it is the family's only demonstration that a coarse-graining is a choice, and the artifact that refused it is the one that never had an instrument to be honest about. The jar is that reading turned into something a still can hold - the arrangement, the counts, the number and the form, at one scale, on one body.",
+    "declines": [
+     "A `grain` AXIS - binning by height, by radius, by angle - which was the first design and is the obvious one. Refused, and this is the largest decision in the pass. entropy_jar HAS ONLY ONE GRAIN, hard-coded at :427 (bin_count := 6) and :439 (the index is a function of local_y alone), and the entire force of `shelled` is that this one grain is the one all eighteen of its placements use. Offering a radial grain would let a reader repair the blindness by turning a knob, which teaches that the instrument was badly chosen rather than that every instrument is a choice. The grain here is the source's, fixed, and it stays wrong about `shelled` in every frame of the sheet.",
+     "THE SHAKE, AND THE WHOLE PHYSICS BODY UNDER IT. entropy_jar is an XRToolsPickable holding eighty RigidBody3D; grabbing it wakes them (:646-654) and hand velocity past shake_threshold applies impulses (:162-165, :407-416). That is the artifact's best idea and it is invisible to one PNG - a shake is a rate, and a frozen physics body is just a mesh with a settling risk attached. Declined outright rather than frozen: this jar has no RigidBody at all. The irreversibility it demonstrates is demonstrated by the arrangement of the sheet, where you may walk from sorted to mixed and read the number climb, and no cell will hand you the walk back.",
+     "entropy_jar's SECOND AXIS, `readout` (figures | number | verdict | none, :76). It is a real axis, readout_bench already built it as a family, and it asks how a value is PRESENTED. This artifact's second axis asks what SURVIVES a step of counting, which is a different question with one overlapping cell. Carrying both would have given a reader two explanations for every measured difference in the figure column.",
+     "entropy_morphogenesis' SECOND AXIS, `level` (minimal | thickened | pinched | broken, :83). Declined as an axis and reported as a source finding instead - see dna.note. Two reasons: it belongs to the gyroid and not to the jar, and its top value does not do what it is named for. Carrying it here would have propagated a claim this pass disproved.",
+     "A FIFTH REDUCTION SHOWING THE BODIES WITH THE CELL WALLS DRAWN THROUGH THEM. Refused as an ALL-RUNGS VALUE: it is the union of `bodies` and `cells`, which is the fault wave 20 found six times and wave 21 three more. The relation between an arrangement and its coarse-graining is made by walking the axis, not by a value that contains both ends of it.",
+     "A REDUCTION SHOWING THE GRAIN ALONE - six empty cells, the instrument with nothing in it. It is a legitimate peer and it was still refused, because found_state does not reach it: all four values would render one identical picture and a quarter of the sheet would be six designed nulls saying nothing that the three registered ones do not say better.",
+     "A THREE-DIMENSIONAL MARCHED SURFACE for the form reduction. entropy_morphogenesis runs marching cubes over a 40-cubed volume; this draws one z = 0 slice of the same field instead. Declined for two reasons and only one of them is cost: a marched gyroid inside a 0.26 m jar photographs as a pale knot in which frequency, amplitude and threshold are mutually indistinguishable, whereas a slice shows the period count and the solid fraction as flat facts. The slice is the honest translation and it is declared as one - it is also literally what fill_gyroid_chunk (:129-148) computes before the surface exists.",
+     "CORRECTING GyroidFieldGenerator'S DOUBLE APPLICATION OF noise_freq (:43 against :64-68, so the perturbation runs at 0.49 rather than 0.7). The form reduction reproduces it faithfully. This is meant to be the source's arithmetic, warts included; a corrected version would be a picture of a gyroid nobody in this corpus has ever rendered.",
+     "A LIVE ENTROPY READOUT UPDATING AS ANYTHING MOVES. entropy_jar measures every physics frame (:168). Nothing here moves, so there is nothing to update, and a number that never changes is better drawn as geometry than as a Label3D - which is also why the figure reduction is seven-segment BoxMesh rather than text: capture_config_sweep reframes Label3D through LabelFramer, and a prediction computed on glyph metrics it does not control would be arithmetic about the framer."
+    ],
+    "sweep_command": "python tools/build_dna_gallery.py --slug=mixing-jar --tokens=mixing_jar --max=16",
+    "sweep_note": "THE SHEET NEEDS --max=16 AND THE DEFAULT DESTROYS THE EXPERIMENT SILENTLY. found_state is declared first and is never trimmed; reduction is second, and build_dna_gallery trims the LATER axis from the tail until the cross product fits its cap, which defaults to 9. At 9 a 4 x 4 renders as 4 x 2 - bodies and cells only - so the figure and form columns vanish, taking the predicted closest pair and two of the three designed nulls with them. What survives is eight handsome tiles of a jar with balls in it, which is the family exactly as it already is.",
+    "placements": 0
+   },
+   "tags": [
+    "entropy",
+    "coarse_graining",
+    "shannon",
+    "second_law",
+    "irreversibility",
+    "statistical_mechanics",
+    "gyroid",
+    "two_axes",
+    "synthesis"
+   ],
+   "dev_themes": [
+    "randomness",
+    "probability",
+    "a word two artifacts run in opposite directions",
+    "an instrument that is correct and still blind",
+    "a value named for a topological transition that never happens"
+   ],
+   "capacity": "SEE that an entropy is a fact about the GRID you counted on - and that two artifacts can share the word `found_state` while one of them measures it and the other types it in",
+   "interactions": [
+    "stand at (shelled, bodies) and at (mixed, bodies). One is a red core inside a blue shell, as ordered as anything in the sheet; the other is a uniform haze. Then step both to reduction=cells, or figure, or form. They are one picture in all three",
+    "walk `found_state` at reduction=cells: the six bars go from three solid red over three solid blue, to a four-and-four overlap with two doubled cells in the middle, to six identical half-and-half bars. The instrument's whole vocabulary, in three pictures",
+    "walk `reduction` at any one state and watch what each step drops: the bodies lose their positions inside a cell, the cells lose their populations to a single number, the number keeps nothing and grows a shape anyway",
+    "compare (sorted, cells) with (mixed, cells). The bar WIDTHS are identical - both states put twelve bodies in every cell - and every split flips from solid to half. Same populations, opposite arrangement: this is the pair that shows a macrostate is not a headcount",
+    "read the figure column across all four states: 0.00, 0.50, 1.00, 1.00. Three numbers for four jars, and the two that share a number are the two that look least alike"
+   ],
+   "spatial_needs": {
+    "platform": "floor",
+    "footprint_cells": 1,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [
+     "entropy_jar",
+     "entropy_morphogenesis",
+     "macrostate_shelf",
+     "shannon_entropy_meter"
+    ],
+    "preferred_zone": "teaching",
+    "footprint_source": "measured",
+    "footprint_note": "THE CARCASS IS THE FOOTPRINT AND NEITHER AXIS TOUCHES IT. _build_carcass() reads no axis: a 0.40 x 0.028 foot, a 0.34 x 0.60 plinth, a 0.155 m collar, a 0.135 m glass cylinder 0.44 tall, a jar floor, a 0.146 m lid topping out at 1.118, and a fixed seven-segment S on the plinth face at z = 0.174. Everything either axis draws is inside the glass - the bodies within r = 0.112 and y 0.678..1.078, the cell bars 0.216 wide, the numeral 0.255 wide at z +-0.006, the form slice a disc of radius 0.122 - so the merged MeshInstance3D AABB is 0.40 x 1.118 x 0.40 in all sixteen cells and the fixed camera frames every one of them identically. Verified in Godot, cell by cell."
+   },
+   "measurements": {
+    "aabb_size": [
+     0.4,
+     1.118,
+     0.4
+    ],
+    "aabb_center": [
+     0.0,
+     0.559,
+     0.0
+    ],
+    "grid_cells": [
+     1,
+     1
+    ],
+    "max_dimension_m": 1.118,
+    "source": "measured in Godot across all sixteen cells of the sheet, one boot, 0.20 s settle per cell. Identical in every one, to the millimetre. The settle is not optional: at two process frames the same probe reported zero meshes and a zero-size AABB for every cell, which reads exactly like an artifact that builds nothing."
+   },
+   "footprint_measured": [
+    1,
+    1,
+    1
+   ]
+  }
+ }
+}

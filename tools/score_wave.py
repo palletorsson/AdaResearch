@@ -30,11 +30,34 @@ def main() -> int:
         e = json.loads((REG / f"{tok}.json").read_text(encoding="utf-8"))["artifacts"][tok]
         pd = (e.get("dna") or {}).get("predicted_degeneracy") or {}
         pair = str(pd.get("pair",""))
+        compound_ctx = ""
         # "<A> against <B>, in the <ctx> ..." — the two values are the words around "against"
         head = pair.split(",")[0]
         if " against " not in head:
             print(f"{tok:<18} prediction not parseable: {pair!r}"); continue
         va, vb = [s.strip() for s in head.split(" against ",1)]
+        # A trailing gloss set off by a dash is prose, not part of the value. recession_hall
+        # registered "collapsed/halved against collapsed/eased - an inheritance pair inside the
+        # collapsed row", and the whole clause went into vb.
+        vb = re.split(r"\s+[-–—]\s+", vb)[0].strip()
+        # COMPOUND "<ctx>/<value>" NOTATION. A builder naming a pair on the SECOND axis has to
+        # say which row it is in, and the natural way to write that is "collapsed/halved against
+        # collapsed/eased" — both axes in each side, slash-separated. Read literally that names
+        # two `recession` values that are equal, so the axis sniffer below picked `recession`,
+        # looked for a recession pair, and reported "pair not measured" on a correctly registered
+        # prediction. Split the compound, keep the component that DIFFERS as the pair, and hand
+        # the component that MATCHES to the context logic as the row it names. Seventh time this
+        # parser has been too literal about how a human writes a pair.
+        if "/" in va and "/" in vb:
+            pa, pb = [x.strip() for x in va.split("/")], [x.strip() for x in vb.split("/")]
+            if len(pa) == len(pb):
+                diff = [i for i in range(len(pa)) if pa[i] != pb[i]]
+                if len(diff) == 1:
+                    i = diff[0]
+                    for j in range(len(pa)):
+                        if j != i and pa[j]:
+                            compound_ctx = pa[j]        # the row the prediction names
+                    va, vb = pa[i], pb[i]
         # A builder writing "rule 90 against rule 250" is writing English, not a lookup key.
         # Strip a leading axis-name word so the value matches the enum ("90"), and strip
         # surrounding quotes/backticks while we are here. Being brittle about this made a
@@ -74,6 +97,10 @@ def main() -> int:
         # crown-reading pair as the answer to a plant-reading prediction. Same fault the
         # critic's CONDITIONAL check exists for: one axis diluted by the axis it is crossed with.
         ctx = {}
+        if compound_ctx:
+            for a2 in axes:
+                if a2 != axis and any(str(r["a"].get(a2)) == compound_ctx for r in d["variants"]):
+                    ctx = {a2: compound_ctx}; break
         m2 = re.search(r",\s*(?:in|on)\s+the\s+(\S+)\s+(\w+)\s*$", pair.strip())
         if m2:
             cval, ckey = m2.group(1), m2.group(2)

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/mixing_jar/mixing_jar.gd" id="1_main"]
+
+[node name="MixingJar" type="Node3D"]
+script = ExtResource("1_main")
+
+[node name="SceneLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 1.7, 0.45)
+light_energy = 1.6
+omni_range = 4.0

@@ -1,0 +1,178 @@
+{
+	"artifacts": {
+		"constant_dispute": {
+			"name": "Constant Dispute",
+			"lookup_name": "constant_dispute",
+			"scene": "res://commons/artifacts/constant_dispute/constant_dispute.tscn",
+			"class_name": "ConstantDispute",
+			"category": "qfep",
+			"artifact_type": "synthesis",
+			"complexity": "advanced",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "compact",
+			"description": "A calibration board for a pair of instruments that show a recommendation and never show a measurement. THE BRIEF'S SUSPICION WAS WRONG AT THE PREMISE AND RIGHT IN ITS SHAPE. It expected phi_slider to be the golden ratio - a theorem, exact, with no error band, no dispute and no gap - so that three of the five shared words would be undefined on one member. phi_slider.gd:1-6 is not the golden ratio; it is QFEP's phi, the rate-of-entropy-change sensitivity, phi<0 resists change and phi>0 embraces it. Both members are free parameters of ONE invented formula, neither derived nor measured, with no error bar anywhere in the repository, so on the epistemic question the two are the SAME KIND of object and the vocabulary is coherent. THE INCOMPATIBILITY IS REAL ANYWAY, AND IT IS GEOMETRIC. lambda's recommendation is a BOUNDED INTERVAL with both ends interior to its scale (is_at_edge(), lambda_slider.gd:887-888, 0.3 to 0.5). phi's is a HALF-LINE whose far end IS the end of the scale (has_queer_signature(), phi_slider.gd:588-589, phi > 0.2, converted to t = 0.60 at :82 with 1.0 supplied by the rail). That changes three of the five words: `band` draws a bracket at hi unconditionally (lambda_slider.gd:817-820) so phi's second bracket marks the end of the instrument and is drawn exactly like a threshold; `gap` builds the plate from the spans either side under `if hi < 0.998` (:781), which is FALSE for phi, so lambda's gap plate has a HOLE and phi's is merely TRUNCATED; and `dispute` on lambda flags 0.30/0.40/0.50 (:506), which are band's own two brackets (:501-502) plus the shipped default (:83), all three inside lambda's own band, so lambda's dispute cannot disagree with lambda's band, while phi's three come from three different functions and one of them denies its band outright. Three of five, by the opposite mechanism. THE BOARD keeps both sources' regions verbatim and asks the two questions the family never asks: `claim` is the TOPOLOGY of the recommended set on a twenty-cell scale (interval, threshold, point, rival, absent - classified by component count and by how many boundaries are interior), and `record` is what the instrument shows of the 270 measurements behind it (bare, count, spread, drift), which in both sources is nothing at all.",
+			"tags": [
+				"qfep",
+				"calibration",
+				"scale",
+				"threshold",
+				"epistemology",
+				"evidence",
+				"histogram",
+				"measurement",
+				"two_axes",
+				"synthesis"
+			],
+			"dev_themes": [
+				"one vocabulary for two shapes of claim",
+				"a bracket at the end of the rail marks the rail",
+				"a dispute made out of its own band",
+				"an instrument that records nothing cannot be contradicted"
+			],
+			"interactions": [
+				"stand at record=bare and walk the claim axis. This is the source family's entire behaviour - a recommendation drawn on a scale, with no evidence anywhere - and it is where the axis is quietest, because a claim's shape is only a few cells wide.",
+				"compare absent against point at bare. One cell and one post: 0.404 percent of frame. An instrument that recommends nothing and an instrument that recommends an exact value are one resolution cell apart, and that cell is the scale's, not the claim's. A point claim is not thin; it is as thin as the instrument can draw.",
+				"compare interval against threshold. Four lit cells against eight, two posts against two - but only lambda's two posts both mark something. threshold's second post stands at t = 1.0, on the end of the rail, and is the same gold box as the one at 0.60. That is lambda_slider.gd:817 photographed.",
+				"walk the record axis at claim=point. count, spread and drift are ONE image, to the byte. The three ways of drawing evidence differ only because there is disagreement to draw, which is the sentence the whole calibration vocabulary presupposes and neither source can say.",
+				"walk the record axis at claim=absent. The trials are uniform across all twenty bins, and the three drawings separate as far as they ever do. An instrument with no recommendation still has measurements; what it does not have is a shape to summarise them with."
+			],
+			"capacity": "SEE that a shared calibration vocabulary is a claim about the SHAPE of a recommendation, and that a bounded interval and a half-line cannot mean the same thing by the same five words - then see the thing both sources leave out, which is any measurement at all, and watch the three ways of drawing measurements collapse into one the moment the measurements agree",
+			"dna": {
+				"promoted": "2026-08-17",
+				"stage": "synthesis",
+				"framing": 0.55,
+				"sources": [
+					"lambda_slider",
+					"phi_slider"
+				],
+				"axes": {
+				 "claim": [
+				  "interval",
+				  "threshold",
+				  "point",
+				  "rival",
+				  "absent"
+				 ],
+				 "record": [
+				  "bare",
+				  "count",
+				  "spread",
+				  "drift"
+				 ]
+				},
+				"default": "claim=interval, record=bare. BOTH DEFAULTS ARE THE SOURCE PAIR'S, and that is the argument. lambda_slider is the primary member - phi_slider.gd:76 preloads it and reads its allow-list, its normaliser and its plate builder out of it, so the vocabulary is lambda's - and lambda's recommendation is the bounded interior interval is_at_edge() tests for, 0.30 to 0.50 (lambda_slider.gd:110-111, :887-888). record=bare is the other half of the shipped state, and it is not a tidy neutral starting cell: NEITHER SOURCE DRAWS A SINGLE MEASUREMENT. Between them the two files build a rail, ten gradient boxes, a scale plate, three word-marks, a particle field and a numeral, and not one of those is evidence for the number they recommend. The default cell of this board is therefore a photograph of the family's complete behaviour on the question it never asks.",
+				"was": "TWO SLIDERS, ONE AXIS, TWO FILES - the pair say so themselves (lambda_slider.gd:23-27, phi_slider.gd:13-15) and they are honest about it: phi_slider.gd:76 preloads lambda_slider.gd and calls its normalise_calibration(), calib_mat(), calib_box() and inscribe_scale_plate(), so only the @export_enum literal is written twice. `calibration` (optimum, band, dispute, gap, none) asks what the scale claims about where the right value lies. optimum is the legacy lineage on both - ten gradient boxes with the answer painted on, no scale plate - and the other four withhold the paint and inscribe a plate on lambda's lectern fascia (lambda_slider.gd:542) or, on phi, standing behind a bare rail at y=0 because phi has no body at all (phi_slider.gd:384-385, and lambda_slider.gd:126-129 complains about exactly that rail). The shared builder is genuinely shared; what is not shared is the shape of the thing it is asked to draw.",
+				"note": "WHAT THE READING TURNED UP THAT NOBODY WAS LOOKING FOR, and it is on the value next to the default. inscribe_scale_plate's dispute branch (lambda_slider.gd:826-841) divides the plate between the schools at the MIDPOINTS between adjacent marks, with the outer territories running to the plate's ends, under a comment at :823-825 that says 'three territories at equal strength, so the plate shows the disagreement rather than resolving it'. The arithmetic does not do that. lambda's marks 0.30 / 0.40 / 0.50 give edges 0, 0.35, 0.45, 1.0 and territories of 35, 10 and 55 percent: the SHIPPED DEFAULT gets the smallest territory on the board, one fifth of the school at 0.5. phi's marks 0.50 / 0.65 / 0.875 give edges 0, 0.575, 0.7625, 1.0 and territories of 57.5, 18.75 and 23.75 percent: the NEUTRAL school takes the majority of the plate - the position phi_slider.gd:46's truth line exists to argue against. A plate built to show that no school dominates hands the largest territory to whichever school sits nearest an end, because an unbounded scale has no natural outer edge for a claim to stop at. That is the interval-versus-half-line problem again, one level down, and it is why this bench's family axis is about the SHAPE of the claim rather than about the style of the mark. INSTRUMENT DECISIONS, EACH COSTING SOMETHING. (1) EVERY FACE MARK IS UNSHADED AND CASTS NO SHADOW (constant_dispute.gd _flat and _mark). The axis is geometric; under the rig's key light a difference between two claim shapes would be partly a fact about the light, and a 3 mm plate's contact shadow carries no information about a recommendation. The board and feet stay lit so the object keeps a body. This is what makes the prediction below computed rather than estimated. (2) EVERY RECORD DRAWING IS BUILT FROM THE SAME UNIT CELL BY THE SAME HELPER. Drawing count's column as one tall box would have given it N-1 fewer coplanar seams than spread's stack and destroyed the designed null, which is an identity between three DRAWINGS and not merely between three areas. (3) THE WORLD BOX IS A CONSTANT: 0.940596 x 0.750000 x 0.692671 in all twenty cells. Board and feet set it, and every mark lies inside their silhouette - the outermost post, at t = 1.0 and z = 0.031, rotates to |x| = 0.4341 and |z| = 0.2742 against the board's 0.4703 and the feet's 0.3463. So the camera never moves and no measured pair carries a framing difference it did not earn. (4) NO NUMERIC VALUE IN EITHER AXIS. Both are word enums typed String, so cabinet_sweep.coerce() has nothing to numericise and the tier_terrarium failure - Object.set() refusing a typed property in silence - cannot occur. Checked against the file, not assumed. (5) THE BOARD IS YAWED 0.62 rad. capture_config_sweep.gd:69 puts the camera at YAW 0.62 and :443 builds its direction as Vector3(sin yaw cos pitch, -sin pitch, cos yaw cos pitch), whose horizontal bearing is atan2(sin 0.62, cos 0.62) = 0.62 exactly, so facing the board along it photographs the face square and costs only cos(0.26) = 0.966390 of the height. (6) THE ONE RANDOM DRAW IS SEEDED and pinned by dna.fixture, and at claim=point no draw is taken at all, so the null does not depend on it.",
+				"fixture": {
+					"trial_seed": 4021
+				},
+				"predicted_degeneracy": {
+					"pair": "absent against point, in the bare record",
+					"percent": 0.404,
+					"metric": "changed_pct (count). cabinet_sweep.py:393 counts pixels where |dR| + |dG| + |dB| > 26, and :364 sets the denominator to total = w * h, the WHOLE 760 x 760 frame - not the subject. This is deliberately NOT a luma prediction: the change is geometric, a dead cell replaced by a lit one plus a post that appears, so the moving pixel set is different in every pair and a count ranks them correctly. The 26 threshold is not close: dead is CALIB_PLATE lightened 0.06 = (0.1916, 0.2010, 0.2198) and lit is COLOR_EDGE = (0.2000, 0.9000, 0.4000), an albedo channel-sum difference of 0.8876 of full scale against a threshold of 26/765 = 0.0340, better than 25x clear before any tonemapping.",
+					"floor_or_two_sided": "FLOOR, and a tight one. The arithmetic counts only the flat projected area of geometry that appears or changes material. Three things it omits, all of which ADD pixels and none of which subtract: antialiasing on the post's eight new silhouette edges; the Label3D readout, which changes from '--' to '0.40' and is deliberately excluded because it is not load-bearing; and the small extra contrast the tonemapper puts on an emissive-free unshaded green against a near-black cell. It is a TIGHT floor rather than the usual 1.5x-to-6.7x rasteriser under-shoot, because the marks are unshaded and cast no shadow, so the three biggest sources of that under-shoot - shadow, ambient occlusion and specular - are switched off by construction. Expect roughly 0.40 to 0.65 percent. A MEASUREMENT BELOW 0.404 MEANS SOMETHING IS BROKEN: either the claim strip is not switching cells at all, or the framing hint was dropped and the frame is 3.3x larger in area.",
+					"pool": "the TEN claim pairs at record=bare, ranked among themselves. Not the 190 pairs of the sheet: the record axis is much louder (an absent/bare against absent/count pair puts roughly 347 evidence cells on the board, about 7 percent of frame), so a rank taken over everything would answer a question about the lower strip. A closest-pair claim inherits its pool as well as its denominator.",
+					"why": "GEOMETRY, AND THE SUMS ARE EXACT. The scale is 1.000 m of board face divided into 20 cells at 0.050 pitch, each cell drawn 0.046 x 0.170 = 0.0078200 m2; a claim boundary is a post 0.014 x 0.070 = 0.0009800 m2. absent lights no cells and raises no posts. point lights exactly ONE cell - int(floor(0.40 x 20 + 1e-6)) = 8 - and raises ONE post, because a point claim's two boundaries coincide. So the difference is 1 cell + 1 post = 0.0088000 m2 of board face. FRAMING: the world box is 0.940596 x 0.750000 x 0.692671 (board half-extents 0.560/0.330/0.025 and two feet at x = +-0.400 with half-extents 0.070/0.045/0.090, each rotated 0.62 rad about Y), diagonal 1.388169, radius 0.694085. capture_config_sweep.gd:442 sets dist = radius / tan(17 deg) x 1.9 x 0.55, so the frame is a square of side 2 x 0.694085 x 1.9 x 0.55 = 1.450637 m, area 2.104347 m2. The face is yawed to meet the camera's bearing, so the only foreshortening is the 15 degree pitch, cos(0.26) = 0.966390. FRAME PERCENT = 0.0088000 x 0.966390 / 2.104347 = 0.0040412 = 0.404 percent. SEPARATION: the next-closest pair in the pool is interval against point at 1.212 percent, a clean factor of 3.00, so this is a rank and not a coin toss - and it sits 4.0x above the 0.10 percent cap on the designed nulls, so it cannot be mistaken for one. WHAT THE NUMBER MEANS: an instrument that recommends nothing and an instrument that recommends an exact value differ by one cell, and that cell belongs to the scale rather than to the claim. A point recommendation is not infinitely thin on any real instrument; it is exactly as thin as the instrument can draw, which is the fact neither slider can state because neither has a resolution.",
+					"peak_for_contrast": "The loudest claim pair at bare is interval against threshold, 12 cells and 4 posts = 4.489 percent, 11.1x the floor. The headline of the whole sheet will be larger still and will belong to the RECORD axis, which puts hundreds of cells on the lower strip. Written down here before the capture because the bite headline is a peak: a live record axis would otherwise hide every claim pair in this pool."
+				},
+				"designed_nulls": [
+					{
+						"a": {
+							"claim": "point",
+							"record": "count"
+						},
+						"b": {
+							"claim": "point",
+							"record": "spread"
+						},
+						"under_percent": 0.1,
+						"why": "IDENTICAL BY CONSTRUCTION, TO THE BYTE, AND IT IS THE ARGUMENT RATHER THAN A CHECK ON IT. At claim=point the trial generator takes NO random draw at all: every one of the 270 trials is assigned x = LAMBDA_APEX = 0.40, so all 270 land in bin int(0.40 x 20) = 8 and the other nineteen bins are empty. count fills bin b from the baseline to a height of round(LEVELS x n_b / n_max) levels; with n_b = n_max = 270 that is round(27 x 1) = 27, i.e. levels 0..26, the whole strip. spread fills the same height CENTRED on the mid-line, base = floori((27 - 27) x 0.5) = 0, i.e. levels 0..26. Same 27 slots. And the slots are not merely equal in area: both drawings go through the SAME _mark() helper with the same shared unit BoxMesh, the same 0.046 x 0.010 x 0.008 scale, the same unshaded material and the same shadow setting, so the 26 coplanar seams between stacked cells are in the same 26 places. Replicated in Python before the capture: count == spread, 27 slots each. Predicted 0.00 percent. Anything above 0.1 percent is render nondeterminism; anything above 1 percent means the two branches are not meeting and the record axis is measuring something other than the drawing. WHAT IT SAYS: a histogram and a centred silhouette are the same picture when the data has no spread. NOTE ALSO THAT THE NULL IS SEED-INDEPENDENT, which is what keeps it testable - wave 21's warning was that a null conditioned on a value dna.fixture pins can never be exercised, and this one is conditioned only on the two swept axes and holds for every seed, because at point the seed is never consulted."
+					},
+					{
+						"a": {
+							"claim": "point",
+							"record": "count"
+						},
+						"b": {
+							"claim": "point",
+							"record": "drift"
+						},
+						"under_percent": 0.1,
+						"why": "THE SAME IDENTITY BY A DIFFERENT ROUTE, AND IT IS THE ONE THAT COST A DESIGN DECISION. drift does not bin at all: it places one cell per trial at (that trial's bin, that trial's epoch), epoch = floori(k x LEVELS / TRIALS). TRIALS = 270 and LEVELS = 27 exactly, so k = 0..269 maps ten trials onto each of levels 0..26 with no level missed and none overrun - the tiling is exact integer arithmetic, not an approximation. At claim=point every trial's bin is 8, so the 270 placements resolve, through a Dictionary keyed by Vector2i(bin, level), to exactly the 27 slots count builds. Replicated in Python: count == drift, 27 slots each. THE DESIGN DECISION: count's column is built as 27 stacked unit cells rather than one tall box, precisely so this identity survives at the level of geometry. One box has no internal seams and 27 stacked boxes have 26, each about one pixel of top face at this framing, and a null between an area and a drawing is not a null. Predicted 0.00 percent. WHAT IT SAYS: a scatter against time and a histogram are the same picture when nothing moved."
+					},
+					{
+						"a": {
+							"claim": "point",
+							"record": "spread"
+						},
+						"b": {
+							"claim": "point",
+							"record": "drift"
+						},
+						"under_percent": 0.1,
+						"why": "THE CLOSING EDGE OF THE TRIANGLE, registered separately because two of three identities holding while the third fails would mean the sweep is not setting `record` at all rather than that the drawings agree. spread's centring arithmetic and drift's epoch tiling have nothing in common - one is base = floori((LEVELS - height) x 0.5) over a binned height, the other is a per-trial integer map - and they arrive at the same 27 slots only because the degenerate case collapses both. Replicated in Python: spread == drift. Predicted 0.00 percent. TAKEN TOGETHER the three nulls are one fact and it is the thesis of the board: the three ways of showing evidence differ ONLY because there is disagreement to show. A calibration vocabulary - optimum, band, dispute, gap, none - has content exactly where the measurements have width, and a family whose instruments record no measurements at all can never find that out."
+					}
+				],
+				"designed_nulls_why": "THREE NULLS AND ONE FACT, at a cap of 0.1 percent rather than the customary 0.3, because these are byte identities and not near-misses: the same helper, the same shared mesh, the same scale, the same material, the same slot set, verified in a Python replica of the build before any capture. The cap is set tight on purpose, at exactly a quarter of the predicted closest real pair (0.404 percent), so that a null and the floor cannot be confused for one another in a report. THE OBVIOUS FOURTH NULL IS NOT REGISTERED AND ITS ABSENCE IS THE POINT: claim=absent against claim=absent at different records is not a null, because absent still HAS trials - 270 of them, uniform across the twenty bins - and the three drawings separate there as far as they ever do. It would have been easy and tidy to make `absent` mean 'no claim and therefore no data', collapsing a whole row to one image and buying three more nulls. That would have been a lie about what an absent recommendation is: an instrument that declines to recommend has not stopped measuring, it has failed to summarise. The absent row is the LOUDEST record column in the sheet, not a null.",
+				"kin": "THE TWO SOURCES ARE THE KIN AND THIS BENCH DOES NOT TAKE THEIR WORD. `calibration` (optimum, band, dispute, gap, none) is lambda_slider's and phi_slider's, it asks HOW A RAIL MARKS THE RIGHT ANSWER, and it is already refused once elsewhere in the corpus for a stated reason: qfep_reactor's promotion note (qfep.json) declines it on the grounds that its own axis is about which rung a placard is at rather than about the marking. Taking the word here would have claimed this board answers the same question, and it does not - `claim` is about the SHAPE of the recommended set, a property of the claim, where `calibration` is a property of the drawing. A synthesis renames its axis when the question moves, and the question moved. `record` is a new word: checked across all 108 registry files, no artifact declares an axis by that name. THE NEAR MISS WAS `readout` (none, numeral, gradation, lattice), which qfep_reactor takes from commons/primitives/line/line.gd and its twin xyz_slider_plate.gd for how much of a scale a placard draws. It was refused because it is a RANK LADDER - each rung strictly additive over the one below - and this board's second axis is deliberately not one: count, spread and drift are three mutually exclusive PROJECTIONS of one data set, no one of them containing another, which is what wave 20's finding about all-rungs values requires. THE OTHER FAMILY IN THE ROOM is edge_core and qfep_reactor's `station` (edge, order, chaos), a position on the lambda line. It does not apply: this board has no lambda value and takes no position on the line; it draws the line and asks what the line is claiming.",
+				"declines": [
+					"`gap`, THE ONE SOURCE VALUE NOT CARRIED, and it is the honest cut. gap is a claim about the INSTRUMENT rather than about the recommendation: the rail is severed where the right answer is supposed to be (lambda_slider.gd:519-531, phi_slider.gd:363-374) and the word EDGE or EMBRACE ends up labelling rail that is not there. That is a superb idea and it is not a topology of the recommended SET, which is what `claim` classifies. Carrying it would have made the axis two questions in one word - four values about what is recommended plus one about what the scale is made of - which is wave 18's and wave 19's finding. It is also the value where the two sources diverge most sharply (lambda's plate gets a hole, phi's merely gets shorter, because lambda_slider.gd:781's `if hi < 0.998` is false for phi), so it is written up in the description and the note rather than smuggled into the axis where the sheet could not attribute it.",
+					"`optimum` AND `none` AS SEPARATE VALUES. optimum - the painted gradient with the answer in green - is a claim that there is one right value, which is `point`; none - the even ruler, every position equally warranted - is `absent`. Both are absorbed rather than declined, and this entry records the mapping so a later reader does not conclude the words were lost. What IS declined is optimum's mechanism: the painted colour gradient is not carried at all, because a hue ramp along the scale would have put a second, uncontrolled signal into every frame of a geometric axis.",
+					"A WARRANT AXIS - derived, measured, stipulated, fitted - which was the first candidate for the second question and is the one the brief's suspicion actually points at. It was cut because it is not photographable. There is no geometry that distinguishes a stipulated number from a fitted one; drawing it would have required inventing an icon vocabulary that exists in neither source, and an axis whose values are legible only from a legend is an axis the still cannot judge. `record` is what survives of it: not where the number came from, but whether the instrument will show you.",
+					"PER-TRIAL ERROR WHISKERS. The obvious way to make the evidence strip richer is to give each measurement an uncertainty. Neither source has one - there is no error model, no variance, no confidence anywhere in lambda_slider.gd or phi_slider.gd, and the closest thing to an uncertainty in the pair is is_at_edge()'s interval, which is a recommendation and not a spread. Inventing whiskers would have made the lower strip a fact about this bench's statistics rather than about the family's silence.",
+					"A THIRD AXIS ON THE SCALE'S RESOLUTION - 10, 20, 40, 100 cells - which is genuinely the deepest thing here, since the whole `point` argument is that a claim is drawn at the instrument's resolution and the predicted closest pair IS one cell. It is declined for one reason: an axis that changes the cell count changes the denominator of every other measurement in the sheet, so a resolution pair and a claim pair could not be compared. It is the honest third axis and the first thing to add if this board ever needs one."
+				],
+				"sweep_command": "python tools/build_dna_gallery.py --slug=constant-dispute --tokens=constant_dispute --max=20",
+				"sweep_note": "--max=20 IS LOAD-BEARING AND THE DEFAULT WOULD GUT THE SHEET. build_dna_gallery caps the cross product and trims the LATER axis from the tail; at the default --max=9 a 5 x 4 sheet renders as 5 x 1, which keeps `claim` whole and deletes count, spread and drift - every frame of the second axis and all three designed nulls. The declared order is claim first, record second, so it is record that gets cut. This is the same trap recorded against every previous multi-axis sweep in this programme.",
+				"placements": 0
+			},
+			"spatial_needs": {
+				"platform": "floor",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"lambda_slider",
+					"phi_slider",
+					"qfep_reactor",
+					"edge_core"
+				],
+				"preferred_zone": "teaching",
+				"footprint_source": "computed_from_geometry",
+				"footprint_note": "THE WORLD BOX IS A CONSTANT AND THAT IS THE WHOLE POINT OF THE BOARD. The panel is 1.120 x 0.660 x 0.050 centred at y = 0.420, on two 0.140 x 0.090 x 0.180 feet at x = +-0.400, and the entire face assembly - twenty claim cells 0.046 x 0.170 at z = 0.029, up to four posts 0.014 x 0.070 at z = 0.031, one datum rule, and up to 540 evidence cells 0.046 x 0.010 at z = 0.029 - lies inside the board's silhouette in x and y and inside the feet's depth in z. Checked at the extreme: the post at t = 1.0 rotates to |x| = 0.4341 and |z| = 0.2742 against the board's 0.4703 and the feet's 0.3463. So the box does not move when either axis moves and all twenty cells of the sheet frame identically. The board is rotated 0.62 rad about Y to face capture_config_sweep's standpoint, which is what makes the box 0.9406 wide rather than 1.120; a map placing this artifact should expect its face to point 35.5 degrees off the grid axis, or pass its own rotation in the token. The Label3D readout is not a MeshInstance3D and so contributes nothing to the capture AABB, which is why the numeral can change without moving the camera."
+			},
+			"measurements": {
+				"aabb_size": [
+					0.940596,
+					0.75,
+					0.692671
+				],
+				"aabb_center": [
+					0.0,
+					0.375,
+					0.0
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.940596,
+				"source": "computed_from_geometry from the file's own constants; no Godot was run for this figure. Board half-extents (0.560, 0.330, 0.025) rotated 0.62 rad about Y give half-widths 0.470298 in x and 0.345727 in z; each foot, half-extents (0.070, 0.045, 0.090) at centre x = +-0.400, rotates to a centre at (+-0.325551, -+0.232414) with half-widths 0.109264 and 0.113921, so the feet reach 0.434815 in x and 0.346335 in z. The union is 0.470298 and 0.346335. Height is FOOT_SIZE.y + BOARD_SIZE.y = 0.750 from the floor, so the centre sits at 0.375. Diagonal 1.388169, radius 0.694085, and at dna.framing 0.55 the sweep stands at 2.2647 m with a 1.450637 m frame: the board fills 77.2 percent of the frame across and 62.2 percent up, so nothing clips, and the painted face is 33.95 percent of frame - more than five times the render-failure floor."
+			},
+			"footprint_measured": [
+				2,
+				1,
+				1
+			]
+		}
+	}
+}
