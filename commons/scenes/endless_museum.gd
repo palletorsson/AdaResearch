@@ -47,6 +47,11 @@ const TEMPLATES := "res://commons/data/template_patterns.json"
 const EM_PLAN := "res://ada_run/em_plan.json"
 const REGISTRY_DIR := "res://commons/artifacts/registry"
 const SPINE_ORDER := "res://commons/data/spine_artifact_order.json"
+# the HAND's dealing order — written by /spine-order-editor, read FIRST when
+# present, like every rulings file (2026-08-17). The generated file is never
+# overwritten by the hand; delete the hand file and the generated order
+# returns. --em-order-file still overrides both.
+const SPINE_ORDER_HAND := "res://commons/data/spine_artifact_order_hand.json"
 # DECLARED ORDER POLICIES (unification step 4): who decides the order of the
 # walk. Same row shape as the spine manifest, so --em-order=dig|size|text reads
 # them through one loader. `text` is the book's own order — the order the
@@ -815,12 +820,17 @@ func _load_policy_pool(live: Dictionary, policy: String) -> bool:
 ## only artifacts the registry says are alive, in manifest order — so the first
 ## hero slot of the first museum receives the first artifact of the spine.
 func _load_spine_pool(live: Dictionary) -> bool:
-	var f := FileAccess.open(_order_file if _order_file != "" else SPINE_ORDER, FileAccess.READ)
+	var order_path: String = _order_file
+	if order_path == "":
+		order_path = SPINE_ORDER_HAND if FileAccess.file_exists(SPINE_ORDER_HAND) else SPINE_ORDER
+		if order_path == SPINE_ORDER_HAND:
+			print("[endless_museum] dealing order: the HAND's (%s)" % SPINE_ORDER_HAND)
+	var f := FileAccess.open(order_path, FileAccess.READ)
 	if f == null:
 		# name WHICH file refused — an --em-order-file typo used to be
 		# indistinguishable from a missing spine manifest
 		push_warning("endless_museum: order file %s unreadable (run tools/build_spine_artifact_order.py); falling back to shuffle"
-			% (_order_file if _order_file != "" else SPINE_ORDER))
+			% order_path)
 		return false
 	var data: Variant = JSON.parse_string(f.get_as_text())
 	if not (data is Dictionary):
