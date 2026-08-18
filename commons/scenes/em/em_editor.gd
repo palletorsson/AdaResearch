@@ -20,7 +20,8 @@ extends RefCounted
 ##   arrows       nudge the selection one cell (world x / z)
 ##   Q / R        rotate 90° CCW / CW (the GRID's sign: rotation_degrees.y)
 ##   DELETE       remove (soft-hides the node; the override records it)
-##   F5           save overrides · F6 discard selection
+##   C / SHIFT+C  cycle the body's DNA axis value (its own config) · X next axis
+##   F5           save now — rulings autosave anyway · F6 discard selection
 ##
 ## The museum owns the state (records, selection, overrides); this module is
 ## arithmetic and IO, stateless, like every other em/ module.
