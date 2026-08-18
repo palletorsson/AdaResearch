@@ -5,6 +5,28 @@
 
 Updated 2026-08-15.
 
+## 08-18 (headset log) — the Quest never had the plan; no VR scene could grab since 08-14
+
+Palle deployed to a Quest 3 and pasted the log. Two facts that no headless
+run could show:
+
+- **The VR museum is an Android EXPORT**, and `export_presets.cfg` excluded
+  `ada_run/**`, so the pak carried no `em_plan.json` / `em_bake.json` /
+  `em_control.json`. The headset dealt from the pool as v1 (log: `placed
+  14/14 (6 leads, 5 relatives, 3 repeats)`, no `[em-pearl]`, no `[em-bake]
+  REPLAY`), the desktop read the plan. "Less and other, an old setup" — that.
+  The exclude is now narrow; a probe export ships the museum's JSON (15.5 MB
+  of ada_run). Check any export with `python tools/pck_ls.py <pck> ada_run/em_`.
+  On the device `res://` is read-only, so the museum's own writes (as-built,
+  rulings autosave, ledger) go nowhere there — desktop only, for now.
+- **`[bare-hands] removed FunctionPickup … FunctionPointer`** — vr_staging's
+  `movement_only_hands` has been DEFAULT ON since 08-14 (47c30954f, a
+  joystick experiment) and stripped the pickups and pointers from every
+  loaded scene. Grab was dead everywhere in VR, not only in the museum.
+  `bare_hands.gd` now strips only the wrist furniture; the VR hands stay.
+- `StuckDetector` teleported a rig to (2, 3, 2) at museum start: the museum
+  registers a `spawn_point` and stands the detector down while it is up.
+
 ## 08-18 (night) — THE BAKE: no real-time generation of placement
 
 Palle: "VR still shows less and other artifacts. How can we rebuild the
