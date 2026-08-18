@@ -46,7 +46,9 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import sys
+from dataclasses import replace
 from pathlib import Path
 from typing import Any
 
@@ -56,13 +58,73 @@ sys.path.insert(0, str(REPO / "tools"))
 from emit_dressing_room import staged_contract
 from exhibition_brief import spine_order
 from spatial_floorplan import PATTERNS, from_museum
-from spatial_negotiation import run
+from spatial_negotiation import hang_run, run
 
 OUT = REPO / "ada_run" / "em_plan.json"
 RELATIONS = REPO / "commons" / "data" / "artifact_relations.json"
+GRAPH = REPO / "commons" / "data" / "museum_relational_graph.json"
+DNA_ENVELOPES = REPO / "commons" / "data" / "museum_dna_wall_envelopes.json"
 
 
 APRON = 14
+
+
+def _graph_nodes() -> dict[str, Any]:
+    try:
+        return json.loads(GRAPH.read_text(encoding="utf-8")).get("nodes", {})
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+
+def _graph_artifacts() -> dict[str, Any]:
+    try:
+        return json.loads(GRAPH.read_text(encoding="utf-8")).get("artifacts", {})
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+
+def _dna_envelopes() -> dict[str, Any]:
+    """Configured Godot bodies, keyed by ``anchor|axis``.
+
+    Absence means the family has not been preflighted and preserves the former
+    spatial-contract path.  Presence plus ``complete=false`` is different: the
+    preflight found a scene fault, so falling back would knowingly recreate a
+    wall run the assembler cannot seat.
+    """
+    try:
+        return json.loads(DNA_ENVELOPES.read_text(encoding="utf-8")).get(
+            "families", {})
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+
+def _dna_space_demand(anchor: str, axis: str, values: list[str],
+                      sizes: dict[str, list[float]], envelope: list[float],
+                      why: str) -> dict[str, Any]:
+    """Name the architecture a measured family asks for after a wall refusal."""
+    width, depth, height = (list(envelope) + [0.0, 0.0, 0.0])[:3]
+    run_width = sum(float((sizes.get(v) or [width])[0]) for v in values)
+    run_width += max(0, len(values) - 1) * 0.4
+    largest = max(width, depth, height, run_width)
+    if largest > 12.0 or height > 6.0:
+        space = "dedicated_room"
+        footprint = [math.ceil(max(width + 4.0, 8.0)),
+                     math.ceil(max(depth + 4.0, 8.0))]
+    elif depth > 2.5 or run_width > 8.0:
+        space = "courtyard"
+        footprint = [math.ceil(max(run_width + 3.0, width + 4.0)),
+                     math.ceil(max(depth + 4.0, 6.0))]
+    else:
+        space = "side_gallery"
+        footprint = [math.ceil(max(run_width + 2.0, 5.0)),
+                     math.ceil(max(depth + 2.5, 4.0))]
+    return {
+        "id": f"dna:{anchor}:{axis}", "anchor": anchor, "axis": axis,
+        "values": list(values), "space": space,
+        "footprint_xz": footprint,
+        "envelope_wdh": [round(float(v), 3) for v in [width, depth, height]],
+        "why": why, "auto_place": False,
+    }
 
 
 def spine_anchors(limit: int, sequence: str = "") -> list[str]:
@@ -99,18 +161,48 @@ def brief_cast(anchors: list[str], relations: int = 2) -> list[str]:
     which kinds earn a place. The import is late because the wizard reaches back
     into this module for `plan_museum`.
     """
+    return list(brief_stage(anchors, relations)["cast"])
+
+
+def brief_stage(anchors: list[str], relations: int = 2) -> dict[str, Any]:
+    """The shared meaning-stage result, including contextual edge metadata."""
     from museum_wizard import stage_brief
-    return list(stage_brief({"anchors": list(anchors), "count": len(anchors),
-                             "relations": relations})["cast"])
+    return stage_brief({"anchors": list(anchors), "count": len(anchors),
+                        "relations": relations})
 
 
-def plan_museum(key: str, tokens: list[str]) -> dict[str, Any]:
+def brief_context(brief: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    """One contextual edge per body that actually entered this floor cast."""
+    out: dict[str, dict[str, Any]] = {}
+    for row in brief.get("entries", []):
+        token = str(row.get("lookup", ""))
+        if not token or not row.get("on_floor") or token in out:
+            continue
+        out[token] = {
+            "anchor": str(row.get("anchor", "")),
+            "role": str(row.get("role", "")),
+            "kind": str(row.get("kind") or ""),
+            "rule": str(row.get("rule", "")),
+            "why": str(row.get("why", "")),
+        }
+    return out
+
+
+def plan_museum(key: str, tokens: list[str],
+                branch_anchors: list[str] | None = None,
+                placement_context: dict[str, dict[str, Any]] | None = None) -> dict[str, Any]:
     """Negotiate `tokens` into museum `key`. Reports what did NOT fit, too."""
     plan = from_museum(key, apron=APRON)
-    _, placements, _ = run(tokens, plan=plan)
+    # balconies-by-ask: a plan row whose walk_space is "balcony" asks the
+    # negotiator for a hanging balcony body (see spatial_negotiation.run)
+    venue_asks = {t: "balcony" for t, c in (placement_context or {}).items()
+                  if str((c or {}).get("walk_space", "")) == "balcony"}
+    _, placements, occupancy = run(tokens, plan=plan, venue_asks=venue_asks or None)
 
     placed: list[dict[str, Any]] = []
     rejected: list[dict[str, Any]] = []
+    graph_nodes = _graph_nodes()
+    graph_artifacts = _graph_artifacts()
     for p in placements:
         if p.result != "ACCEPT":
             rejected.append({
@@ -122,6 +214,8 @@ def plan_museum(key: str, tokens: list[str]) -> dict[str, Any]:
                             (p.traces[-1].rule if p.traces else "no trace")),
             })
             continue
+        node_meta = graph_nodes.get(p.artifact) or {}
+        edge_meta = (placement_context or {}).get(p.artifact) or {}
         placed.append({
             "token": p.artifact,
             "cell": [int(p.anchor[0]), int(p.anchor[1])],
@@ -150,10 +244,115 @@ def plan_museum(key: str, tokens: list[str]) -> dict[str, Any]:
             # on every row the bay rung did not touch — v1 rows byte-identical.
             **({"bay": [[int(c[0]) - APRON, int(c[1]) - APRON] for c in p.bay_cells]}
                if getattr(p, "bay_cells", None) else {}),
+            **({"relational_kind": str(node_meta.get("kind", ""))}
+               if node_meta.get("kind") else {}),
+            **({"config": dict(node_meta.get("config") or {})}
+               if node_meta.get("config") else {}),
+            **({"relation": dict(edge_meta)} if edge_meta else {}),
         })
+    # DNA is not another set of floor objects. Reserve a measured wall run in
+    # the same occupancy model after the bodies have negotiated, so a plan can
+    # say both where the lineage belongs and when the received building cannot
+    # house it. Accepted rows are compact assembly instructions consumed by
+    # endless_museum.gd; rejected rows stay in the file as visible demand.
+    wall_runs: list[dict[str, Any]] = []
+    dna_spatial_demand: list[dict[str, Any]] = []
+    pending_synthesis: list[dict[str, Any]] = []
+    measured_families = _dna_envelopes()
+    seen_anchors: set[str] = set()
+    # A related artifact may itself occur later on the canonical spine. It is a
+    # guest HERE, not a second branch root: expanding it now creates branches of
+    # branches and duplicates its DNA/synthesis demand in several chapters.
+    # Callers that know the brief therefore pass its actual anchors.
+    for token in (branch_anchors if branch_anchors is not None else tokens):
+        if token in seen_anchors or token not in graph_artifacts:
+            continue
+        seen_anchors.add(token)
+        branch = graph_artifacts[token]
+        for demand in branch.get("dna_runs", []):
+            values = list(demand.get("values") or [])
+            if len(values) < 2:
+                continue
+            axis = str(demand.get("axis", ""))
+            measured = measured_families.get(f"{token}|{axis}")
+            contract = staged_contract(token)
+            if measured is not None and not measured.get("complete"):
+                invalid = list(measured.get("invalid") or [])
+                missing = list(measured.get("missing") or [])
+                why = ("configured geometry does not travel with its artifact root"
+                       if invalid else "configured measurement is incomplete")
+                wall_runs.append({
+                    "anchor": token, "axis": axis, "values": values,
+                    "wall": None, "wall_side": "", "wall_normal": [],
+                    "rects_uv": [], "world": [],
+                    "body_m": [round(float(v), 3) for v in contract.body_m],
+                    "body_source": "godot_preflight_refusal",
+                    "housed": False, "reserved": False, "assemble": False,
+                    "why": why,
+                    "contract_repair": {"invalid": invalid, "missing": missing},
+                })
+                continue
+            if measured is not None:
+                envelope = [float(v) for v in measured.get("envelope_wdh", [])]
+                if len(envelope) == 3:
+                    contract = replace(contract, body_m=envelope,
+                                       footprint_cells=[max(1, math.ceil(envelope[0])),
+                                                        max(1, math.ceil(envelope[1]))])
+            result = hang_run(plan, token, axis, values, occupancy, contract)
+            wall = next((w for w in plan.walls if w.id == result.wall), None)
+            why = next((t.detail for t in reversed(result.traces)
+                        if t.status == "fail"),
+                       (result.traces[-1].detail if result.traces else ""))
+            if measured is not None and result.result != "ACCEPT":
+                dna_spatial_demand.append(_dna_space_demand(
+                    token, axis, values,
+                    dict(measured.get("values") or {}),
+                    list(measured.get("envelope_wdh") or contract.body_m), why))
+            wall_runs.append({
+                "anchor": token,
+                "axis": axis,
+                "values": values,
+                "wall": result.wall,
+                "wall_side": wall.side if wall else "",
+                "wall_normal": list(wall.normal) if wall else [],
+                "rects_uv": result.rects,
+                "world": result.world,
+                "body_m": [round(float(v), 3) for v in contract.body_m],
+                "body_source": ("godot_configured_variants"
+                                if measured is not None else "spatial_contract"),
+                "housed": result.result == "ACCEPT",
+                "reserved": result.result == "ACCEPT",
+                "assemble": result.result == "ACCEPT",
+                "why": why,
+            })
+        for demand in branch.get("synthesis", []):
+            if demand.get("type") != "measured_synthesis":
+                continue
+            node = graph_nodes.get(str(demand.get("to", ""))) or {}
+            pending_synthesis.append({
+                "anchor": token,
+                "node": str(demand.get("to", "")),
+                "verdict": str(demand.get("verdict", "")),
+                "footprint_xz": node.get("footprint_xz", [6.0, 2.0]),
+                "space": str(demand.get("space", "culmination_bay")),
+                "auto_place": False,
+            })
+
     return {
         "artifacts": placed,
         "rejected": rejected,
+        "wall_runs": wall_runs,
+        "dna_spatial_demand": dna_spatial_demand,
+        "pending_synthesis": pending_synthesis,
+        "relational": {
+            "anchors": len(seen_anchors),
+            "wall_runs_requested": len(wall_runs),
+            "wall_runs_housed": sum(1 for r in wall_runs if r["housed"]),
+            "dna_spatial_demand": len(dna_spatial_demand),
+            "dna_contract_repairs": sum(1 for r in wall_runs
+                                        if r.get("contract_repair")),
+            "measured_synthesis_pending": len(pending_synthesis),
+        },
         "room": {"w": plan.width, "h": plan.depth},
         "apron": APRON,
         # What the museum can actually stamp today: it has no apron, so a
@@ -209,9 +408,12 @@ def main() -> int:
         if args.limit > 0:
             order = order[:args.limit]
         anchors = list(order)
+        context: dict[str, dict[str, Any]] = {}
     else:
         anchors = spine_anchors(args.limit, args.sequence)
-        order = brief_cast(anchors, args.relations)
+        brief = brief_stage(anchors, args.relations)
+        order = list(brief["cast"])
+        context = brief_context(brief)
     if not order:
         print("no spine order available — nothing to place", file=sys.stderr)
         return 2
@@ -222,7 +424,7 @@ def main() -> int:
     museums: dict[str, Any] = {}
     for key in keys:
         try:
-            museums[key] = plan_museum(key, list(order))
+            museums[key] = plan_museum(key, list(order), list(anchors), context)
         except Exception as exc:                      # one bad template must not
             museums[key] = {"artifacts": [], "rejected": [],  # sink the batch
                             "error": f"{type(exc).__name__}: {exc}"}

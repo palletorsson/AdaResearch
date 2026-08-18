@@ -205,6 +205,37 @@ var _auto_idle_stalls: int = 0    # consecutive stalls that erased nothing
 var _auto_frontier: int = -1      # deepest z cell the plan could still reach
 var _auto_reason: String = ""
 const AUTO_IDLE_LIMIT: int = 8
+# WHO CLOSED THE DOOR. frontier_z tells the joining fault from the obstruction;
+# it does not name the obstruction, and three breaths in a row have ended with a
+# hypothesis about the prop dealer that nobody could test, because the walk map
+# lives for 33 seconds inside a headless process and dies with it. So: every
+# erasure records who made it, and a no_route verdict carries the CUT — the cells
+# on the far side of the frontier that the walker could not step into, each with
+# its provenance. A cell nobody erased was never stamped, which is a different
+# fault from a cell some fixture took away, and the two want opposite repairs.
+var _walk_erased: Dictionary = {}  # Vector2i -> String provenance
+var _auto_reach: Dictionary = {}   # last BFS's reachable set, for the cut
+var _seal_overflow: Array = []     # bodies too wide for MAX_SEAL_RADIUS to seal
+# THE LIVE FOOTPRINT LEDGER (2026-08-18). The registry's measurement is a
+# STILL — a body that grows at runtime (a builder, a sim, a field) can stand
+# forty metres wide in a corridor the negotiator planned for four. When a
+# stamped body's live extent exceeds its planned footprint by more than
+# LIVE_OVERSHOOT_CELLS on x or z, the museum records the body it actually
+# got — token, planned, live, has_collider, where — in
+# ada_run/em_live_footprints.json (max per token, provenance "walked"), and
+# spatial_contract.resolve reads that ledger and negotiates from the LARGER
+# of still and live next time, so the body climbs the venue ladder (court,
+# bridge, balcony) instead of standing in the walk. Nothing is refused here.
+#
+# WALK-INSIDE: an overgrown body with NO collider is a venue, not an
+# obstacle — a particle field, a light volume, a drawing in air. The seal
+# takes NO cells from it (the walker walks in) and the ledger says so.
+const LIVE_LEDGER := "res://ada_run/em_live_footprints.json"
+const LIVE_OVERSHOOT_CELLS := 2
+var _live_ledger: Dictionary = {}     # token -> entry, loaded once, saved when it grows
+var _live_ledger_loaded: bool = false
+var _live_dirty: bool = false
+var _walk_inside: Dictionary = {}     # token -> true, this run
 var _segments: Array = []         # [{node, z0, z1, index}]
 var _next_z: float = 0.0
 var _seg_index: int = 0
@@ -242,27 +273,14 @@ var _white_cube: bool = false
 # the merge cannot stretch a texture, because there is no mesh UV to stretch.
 # Solid volume is unchanged, so collision is unchanged.
 var _wall_runs: bool = false
+## DNA wall-series use the same 0.70 m projection limit as the spatial
+## negotiator. The extra 10 cm is only a runtime tolerance for authored bevels
+## and labels outside the measured contract; anything deeper is a floor object
+## and is refused rather than pushed into the visitor's standing zone.
+const DNA_WALL_MAX_DEPTH_M := 0.80
+const DNA_WALL_STANDOFF_M := 0.025
+const DNA_WALL_ENVELOPE_TOLERANCE_M := 0.05
 var _plan_path: String = ""       # --em-plan[=res://...]; empty = deal as before
-# THE LIVE FOOTPRINT LEDGER (2026-08-18). The registry's measurement is a
-# STILL — a body that grows at runtime (a builder, a sim, a field) can stand
-# forty metres wide in a corridor the negotiator planned for four. When a
-# stamped body's live extent exceeds its planned footprint by more than
-# LIVE_OVERSHOOT_CELLS on x or z, the museum records the body it actually
-# got — token, planned, live, has_collider, where — in
-# ada_run/em_live_footprints.json (max per token, provenance "walked"), and
-# spatial_contract.resolve reads that ledger and negotiates from the LARGER
-# of still and live next time, so the body climbs the venue ladder (court,
-# bridge, balcony) instead of standing in the walk. Nothing is refused here.
-#
-# WALK-INSIDE: an overgrown body with NO collider is a venue, not an
-# obstacle — a particle field, a light volume, a drawing in air. The seal
-# takes NO cells from it (the walker walks in) and the ledger says so.
-const LIVE_LEDGER := "res://ada_run/em_live_footprints.json"
-const LIVE_OVERSHOOT_CELLS := 2
-var _live_ledger: Dictionary = {}     # token -> entry, loaded once, saved when it grows
-var _live_ledger_loaded: bool = false
-var _live_dirty: bool = false
-var _walk_inside: Dictionary = {}     # token -> true, this run
 # THE PEARLS (2026-08-18). A chapter may arrive as a STRING of plan rows —
 # one per pearl (`pearl`, `pearl_index`) — and then builds ONE SEGMENT PER
 # PEARL: the cursor holds the chapter until its string is walked. Keyed
@@ -2320,7 +2338,15 @@ func _build_courtyard(seg: Node3D, solid: StaticBody3D, w: int, tile_h: int,
 						or lx >= cw - BRIDGE_COURT_APRON \
 						or lz < BRIDGE_COURT_APRON \
 						or lz >= cd - BRIDGE_COURT_APRON
-					if on_apron:
+					# THE END RAILS ARE WALLS THE MAP MUST RESPECT (2026-08-18).
+					# A 1.1 m rail closes both z-ends of the court (built below);
+					# advertising the apron's first and last rows as floor let the
+					# planner route straight across that rail into the next
+					# segment's vestibule — the autopilot stalled 24 times at one
+					# seam (z 120, x 5..13) and unlearned a whole row to find the
+					# bridge. Those two rows are not offered; the court is entered
+					# from the bridge through the gate, exactly as built.
+					if on_apron and lz != 0 and lz != cd - 1:
 						_walk_cells[Vector2i(BRIDGE_COURT_PATH_W + lx, zbase + zz)] = true
 			# Outer rails frame the precinct. A four-metre opening at midspan
 			# interrupts the divider rail: the bridge is not merely an overlook;
@@ -2462,7 +2488,8 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 		print("[em-pearl] %s · %s (%d/%d) — hero %s" % [chapter, String(entry.get("pearl", "")),
 			int(entry.get("pearl_index", 0)) + 1, int(entry.get("pearls_total", 0)), String(entry.get("hero", ""))])
 	var rows: Array = entry.get("artifacts", [])
-	if rows.is_empty():
+	var wall_rows: Array = entry.get("wall_runs", [])
+	if rows.is_empty() and wall_rows.is_empty():
 		return {}
 
 	# token -> scene, from the pool this museum already built. A plan naming an
@@ -2643,8 +2670,12 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 		# It was read out of the plan and then dropped on the floor here — 61 of
 		# the plan's 507 rows carry a non-zero turn (270:27, 90:20, 180:14) and
 		# all of them were stamped facing 0.
+		var plan_config: Dictionary = {}
+		var config_v: Variant = row.get("config", {})
+		if config_v is Dictionary:
+			plan_config = config_v as Dictionary
 		if _stamp(seg, scene, tok, cell, zbase, 1, {}, false, 0.0,
-				yaw_override):
+				yaw_override, plan_config):
 			placed += 1
 			# THE HERO'S WALK: a row planned from the trunk carries its role
 			# (relation.walk_kind: hero / extends / varies / edge / contradicts /
@@ -2659,6 +2690,12 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 						last["walk_kind"] = wk
 						last["walk_space"] = String(((row.get("relation", {}) as Dictionary).get("walk_space", "wall")))
 
+	# DNA variants are not duplicate floor objects. The negotiator gives each
+	# accepted family an exact wall face, centre height and ordered axis values;
+	# this assembler only instantiates that decision. Rejected/deep runs stay in
+	# the plan as demand and never enter the scene or the walk map.
+	var wall_report: Dictionary = _deal_plan_wall_runs(seg, entry, scene_of)
+
 	var idle: int = 0
 	for ov_v in _edit_overrides:
 		if bool((ov_v as Dictionary).get("add", false)) or (ov_v as Dictionary).has("kind"):
@@ -2668,11 +2705,14 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 	if idle > 0:
 		print("[em-edit] %d override(s) idle for %s — their rows are no longer in the plan"
 			% [idle, String(entry.get("sequence", ""))])
-	print("[em-plan] %s: stamped %d interior, %d exterior not hostable%s%s%s"
-		% [key, placed, exterior,
+	print("[em-plan] %s: stamped %d interior + %d DNA wall variants in %d runs, %d exterior not hostable%s%s%s%s"
+		% [key, placed, int(wall_report.get("variants", 0)),
+		   int(wall_report.get("runs", 0)), exterior,
 		   (", %d off-tile" % off_tile) if off_tile > 0 else "",
 		   (", %d not in pool" % missing.size()) if not missing.is_empty() else "",
-		   (", %d to courtyard" % courts.size()) if not courts.is_empty() else ""])
+		   (", %d to courtyard" % courts.size()) if not courts.is_empty() else "",
+		   (", %d wall refusals" % int(wall_report.get("refused", 0)))
+			if int(wall_report.get("refused", 0)) > 0 else ""])
 	# THE CHAPTER THE PLAN NAMES. `entry.sequence` is present on all 17 planned
 	# museums and was thrown away here, so every segment banner and every capture
 	# caption read `chapter=-` — a corridor that could not say what it was
@@ -2684,13 +2724,216 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 	# See doc/spatial/spikes/04_one_building_two_chapters.md.
 	return {"placed": placed, "sequence": String(entry.get("sequence", "")),
 		"leads": placed, "relatives": 0,
-		"repeats": 0, "guests": 0, "plinths": 0,
+		"repeats": int(wall_report.get("variants", 0)), "guests": 0, "plinths": 0,
 		"max_objects": rows.size(), "class": "planned",
 		"budget": {}, "wall_features_max": -1, "fill_walls": true,
 		"from_plan": true, "exterior_unhosted": exterior,
-		"courts": courts, "forecourt": forecourt, "walk_kinds": walk_kinds, "side_rooms": side_rooms,
+		"courts": courts, "forecourt": forecourt, "wall_runs": wall_report,
+		"walk_kinds": walk_kinds, "side_rooms": side_rooms,
 		"pearl": String(entry.get("pearl", "")), "pearl_index": int(entry.get("pearl_index", -1)),
 		"pearls_total": int(entry.get("pearls_total", 0)), "pearl_hero": String(entry.get("hero", ""))}
+
+
+## Instantiate only the wall-series rows the negotiator accepted. Plan-space
+## includes the export apron; segment-space does not and begins after the 4 m
+## vestibule. Keeping that conversion here makes it the wall equivalent of the
+## tile_cell conversion above rather than a second placement algorithm.
+func _deal_plan_wall_runs(seg: Node3D, entry: Dictionary,
+		scene_of: Dictionary) -> Dictionary:
+	var assembled_runs: int = 0
+	var variants: int = 0
+	var planned_refused: int = 0
+	var assembly_refused: int = 0
+	var value_refused: int = 0
+	var apron: float = float(entry.get("apron", 0.0))
+	for run_v in (entry.get("wall_runs", []) as Array):
+		if not (run_v is Dictionary):
+			continue
+		var run: Dictionary = run_v as Dictionary
+		if not bool(run.get("housed", false)) or not bool(run.get("reserved", false)):
+			planned_refused += 1
+			continue
+		# `assemble` is absent in the first plan schema. Housed+reserved was its
+		# exact predecessor, so old accepted plans remain readable.
+		if run.has("assemble") and not bool(run.get("assemble", false)):
+			planned_refused += 1
+			continue
+		var body: Array = run.get("body_m", [])
+		if body.size() >= 2 and float(body[1]) > DNA_WALL_MAX_DEPTH_M:
+			assembly_refused += 1
+			continue
+		var lookup := String(run.get("anchor", ""))
+		var scene_path := String(scene_of.get(lookup, ""))
+		var axis := String(run.get("axis", ""))
+		var values: Array = run.get("values", [])
+		var world: Array = run.get("world", [])
+		var rects: Array = run.get("rects_uv", [])
+		var normal := _plan_wall_normal(run)
+		if scene_path == "" or axis == "" or values.size() != world.size() \
+				or values.size() != rects.size() \
+				or values.size() < 2 or normal == Vector3.ZERO:
+			assembly_refused += 1
+			continue
+		var built: Array = []
+		var failure_counts: Dictionary = {}
+		for i in range(values.size()):
+			var xyz: Variant = world[i]
+			if not (xyz is Array) or (xyz as Array).size() < 3:
+				failure_counts["invalid world coordinate"] = int(failure_counts.get("invalid world coordinate", 0)) + 1
+				continue
+			var p: Array = xyz as Array
+			var uv_v: Variant = rects[i]
+			if not (uv_v is Array) or (uv_v as Array).size() < 4:
+				failure_counts["invalid wall rectangle"] = int(failure_counts.get("invalid wall rectangle", 0)) + 1
+				continue
+			var uv: Array = uv_v as Array
+			var max_width := float(uv[2]) - float(uv[0])
+			var max_height := float(uv[3]) - float(uv[1])
+			var target := Vector3(float(p[0]) - apron, float(p[1]),
+				float(p[2]) - apron + VESTIBULE_H)
+			var result: Dictionary = _stamp_plan_wall_variant(seg, scene_path, lookup, axis,
+					str(values[i]), String(run.get("wall", "")),
+					String(run.get("wall_side", "")), target, normal,
+					max_width, max_height)
+			if bool(result.get("ok", false)):
+				built.append(result.get("node"))
+			else:
+				var why := String(result.get("why", "unknown"))
+				failure_counts[why] = int(failure_counts.get(why, 0)) + 1
+		if built.size() == values.size():
+			assembled_runs += 1
+			variants += built.size()
+			for built_v in built:
+				var committed_node: Node3D = built_v as Node3D
+				_vis_records.append({"node": committed_node, "p": committed_node.global_position})
+				# Wall variants are evidence too. Without targets the proof camera
+				# composes only against floor objects and can stand directly beside a
+				# lineage it never turns to see. Aim through the already-negotiated
+				# standing cell one metre inward from the wall face.
+				var committed_box := _extent_of(committed_node)
+				var target_p := committed_box.get_center()
+				var inward_global := (seg.global_transform.basis * normal).normalized()
+				var stand_p := target_p + inward_global
+				_shot_targets.append({
+					"p": target_p,
+					"cell": Vector2i(int(floor(stand_p.x)), int(floor(stand_p.z))),
+					"token": "%s.%s=%s" % [lookup, axis,
+						str(committed_node.get_meta("em_dna_value", ""))],
+				})
+		else:
+			assembly_refused += 1
+			value_refused += values.size() - built.size()
+			for built_v in built:
+				var rollback_node: Node3D = built_v as Node3D
+				if is_instance_valid(rollback_node) and rollback_node.get_parent() == seg:
+					seg.remove_child(rollback_node)
+					rollback_node.queue_free()
+			print("[em-dna-wall] %s.%s rolled back (%d/%d built): %s" % [
+				lookup, axis, built.size(), values.size(), str(failure_counts)])
+	var refused := planned_refused + assembly_refused
+	print("[em-dna-wall] assembled %d run(s) / %d variants; %d plan refusals, %d assembly refusals (%d values)" % [
+		assembled_runs, variants, planned_refused, assembly_refused, value_refused])
+	return {"runs": assembled_runs, "variants": variants, "refused": refused,
+		"planned_refused": planned_refused, "assembly_refused": assembly_refused,
+		"value_refused": value_refused}
+
+
+## Build one configured copy and seat its BACK face on the negotiated wall
+## plane. Width/height are centred on the plan's rectangle; depth projects only
+## along the inward normal. No plinth and no floor seal are created here: this
+## is a wall object whose two standing cells were already reserved by the plan.
+func _stamp_plan_wall_variant(seg: Node3D, scene_path: String, lookup: String,
+		axis: String, value: String, wall_id: String, wall_side: String,
+		target: Vector3, normal: Vector3, max_width: float,
+		max_height: float) -> Dictionary:
+	var ps: PackedScene = load(scene_path) as PackedScene
+	if ps == null:
+		return {"ok": false, "why": "scene failed to load"}
+	var node: Node3D = ps.instantiate() as Node3D
+	if node == null:
+		return {"ok": false, "why": "scene root is not Node3D"}
+	node.set_meta("artifact_lookup_name", lookup)
+	node.set_meta("em_relation_role", "dna_variant")
+	node.set_meta("em_wall_run", wall_id)
+	node.set_meta("em_wall_side", wall_side)
+	node.set_meta("em_dna_axis", axis)
+	node.set_meta("em_dna_value", value)
+	# em_multiples.stage normally refuses the shipped value because its floor
+	# caller already has one bare lead. A wall lineage is different: the shipped
+	# state is its first rung and must appear once. Detect it from the live export
+	# rather than teaching the plan a second copy of every artifact's default.
+	var is_shipped := false
+	for prop_v in node.get_property_list():
+		var prop: Dictionary = prop_v as Dictionary
+		if String(prop.get("name", "")) == axis:
+			is_shipped = str(node.get(axis)) == value
+			break
+	var axis_entry := {"axis": axis, "value": value, "is_default": is_shipped}
+	if not _apply_axis(node, axis_entry):
+		node.free()
+		return {"ok": false, "why": "axis value refused"}
+	# Artifact fronts are +Z throughout the registry contract. atan2 maps that
+	# vector to the wall's inward normal: north=0, west=90, south=180, east=-90.
+	node.rotation.y = atan2(normal.x, normal.z)
+	node.position = target
+	seg.add_child(node)
+	var box: AABB = _extent_of(node)
+	if box.size.length_squared() < 0.000001:
+		seg.remove_child(node)
+		node.queue_free()
+		return {"ok": false, "why": "built no measurable body"}
+	var seg_basis := seg.global_transform.basis
+	var n_global := (seg_basis * normal).normalized()
+	var target_global: Vector3 = seg.global_transform * target
+	var built_width := box.size.z if absf(normal.x) > 0.5 else box.size.x
+	if built_width > max_width + DNA_WALL_ENVELOPE_TOLERANCE_M:
+		seg.remove_child(node)
+		node.queue_free()
+		return {"ok": false, "why": "built width %.2f m exceeds %.2f m wall rectangle" % [built_width, max_width]}
+	if box.size.y > max_height + DNA_WALL_ENVELOPE_TOLERANCE_M:
+		seg.remove_child(node)
+		node.queue_free()
+		return {"ok": false, "why": "built height %.2f m exceeds %.2f m wall rectangle" % [box.size.y, max_height]}
+	var delta := Vector3(0.0, target_global.y - box.get_center().y, 0.0)
+	if absf(normal.x) > 0.5:
+		delta.z = target_global.z - box.get_center().z
+	else:
+		delta.x = target_global.x - box.get_center().x
+	var plane_global: Vector3 = seg.global_transform * (target + normal * 0.5)
+	var span := _aabb_projection(box, n_global)
+	var depth := float(span.y - span.x)
+	if depth > DNA_WALL_MAX_DEPTH_M:
+		seg.remove_child(node)
+		node.queue_free()
+		return {"ok": false, "why": "built depth %.2f m exceeds wall limit" % depth}
+	delta += n_global * (plane_global.dot(n_global) + DNA_WALL_STANDOFF_M - span.x)
+	node.global_position += delta
+	return {"ok": true, "node": node, "depth": depth}
+
+
+func _plan_wall_normal(run: Dictionary) -> Vector3:
+	var raw: Array = run.get("wall_normal", [])
+	if raw.size() >= 2:
+		var n := Vector3(float(raw[0]), 0.0, float(raw[1]))
+		if n.length_squared() > 0.5:
+			return n.normalized()
+	match String(run.get("wall_side", "")):
+		"west": return Vector3.RIGHT
+		"east": return Vector3.LEFT
+		"north": return Vector3.BACK
+		"south": return Vector3.FORWARD
+	return Vector3.ZERO
+
+
+## Min/max projection of an axis-aligned world AABB onto a cardinal wall normal.
+func _aabb_projection(box: AABB, axis: Vector3) -> Vector2:
+	var lo := INF
+	var hi := -INF
+	for i in range(8):
+		var d := box.get_endpoint(i).dot(axis)
+		lo = minf(lo, d)
+		hi = maxf(hi, d)
+	return Vector2(lo, hi)
 
 
 ## Step the dealing cursor past every remaining entry of the chapter it is
@@ -3173,7 +3416,8 @@ func _walk_order(cells: Array) -> Array:
 ## they must agree about what 90 means.
 func _stamp(seg: Node3D, scene_path: String, lookup: String, cell: Dictionary,
 		zbase: int, fp: int, axis_entry: Dictionary, drop_if_unvaried: bool,
-		span_cap: float = 0.0, yaw_deg: float = 0.0) -> bool:
+		span_cap: float = 0.0, yaw_deg: float = 0.0,
+		plan_config: Dictionary = {}) -> bool:
 	if scene_path == "" or cell.is_empty():
 		_stamp_refusal = "no scene path or cell"
 		return false
@@ -3186,6 +3430,16 @@ func _stamp(seg: Node3D, scene_path: String, lookup: String, cell: Dictionary,
 		_stamp_refusal = "instantiate returned non-Node3D"
 		return false
 	node.set_meta("artifact_lookup_name", lookup)
+	# A graph branch can be a configured artifact (the five curated synthesis
+	# works are the first users). Match GridInteractablesComponent's handoff:
+	# metadata is present before _ready, and apply_grid_config is called while the
+	# root is still outside the tree. A plan without config follows the old path.
+	if not plan_config.is_empty():
+		for key_v in plan_config:
+			var config_key: String = String(key_v)
+			node.set_meta("config_" + config_key, plan_config[key_v])
+		if node.has_method("apply_grid_config"):
+			node.call("apply_grid_config", plan_config)
 	if not axis_entry.is_empty():
 		var ok: bool = _apply_axis(node, axis_entry)
 		if not ok and drop_if_unvaried:
@@ -3522,7 +3776,11 @@ func _apply_axis(node: Node, e: Dictionary) -> bool:
 ## their surviving neighbours must still reach each other inside a bounded flood.
 ## If they cannot, the artifact is taken back out — a museum with an unreachable
 ## room is worse than a museum with an empty plinth.
-const SEAL_PROBE_CELLS := 400
+## The severance probe's budget, in cells. It must exceed the walkable area of a
+## whole museum or it answers "no severance" by running out rather than by
+## looking: a segment is up to 15 x 34 = 510 cells and a building is three of
+## them, so the old 400 could not flood one room, let alone one museum.
+const SEAL_PROBE_CELLS := 4000
 const MAX_SEAL_RADIUS := 2
 # The widest object the seal can tell the truth about: the clamp is a radius, so
 # the honest span is (2 * radius + 1) cells of one metre. A GUEST wider than this
@@ -3531,6 +3789,12 @@ const MAX_SEAL_RADIUS := 2
 # corridor since v1, the autopilot passes on them, and a size gate switched on for
 # all 799 in the same pass that adds guests would make any regression unreadable.
 const GUEST_SPAN_CAP := float(MAX_SEAL_RADIUS * 2 + 1)
+# How far a COLLIDER may reach and still be sealed truthfully. Wider than the
+# mesh clamp because a collider has no decorative case, and bounded anyway
+# because a runaway shape should refuse a placement rather than eat a chapter:
+# 13 cells is the widest corridor the templates build, so a body that fills one
+# is sealed whole and then judged by _reaches_all like everything else.
+const MAX_BODY_RADIUS := 6
 
 func _seal_cells(node: Node3D, cell: Dictionary, zbase: int, fp: int,
 		also: Node3D = null) -> bool:
@@ -3555,8 +3819,11 @@ func _seal_cells(node: Node3D, cell: Dictionary, zbase: int, fp: int,
 					cells.append(hk)
 	if cells.is_empty():
 		return true
+	var tok_seal: String = String(node.get_meta("artifact_lookup_name")) \
+		if node.has_meta("artifact_lookup_name") else node.name
 	for k in cells:
 		_walk_cells.erase(k)
+		_walk_erased[k] = "seal:%s" % tok_seal
 	var nb: Dictionary = {}
 	for k in cells:
 		for d in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
@@ -3570,6 +3837,7 @@ func _seal_cells(node: Node3D, cell: Dictionary, zbase: int, fp: int,
 		return true
 	for k in cells:
 		_walk_cells[k] = true
+		_walk_erased.erase(k)
 	return false
 
 
@@ -3590,11 +3858,27 @@ func _occupied_cells(node: Node3D, cell: Dictionary, zbase: int) -> Array:
 		var x1: int = mini(rx1, cx + MAX_SEAL_RADIUS)
 		var z0: int = maxi(rz0, cz - MAX_SEAL_RADIUS)
 		var z1: int = mini(rz1, cz + MAX_SEAL_RADIUS)
-		# THE LIVE FOOTPRINT LEDGER: the body the museum actually got, and
-		# whether a walker can enter it. Overshoot beyond the seal's honest span
-		# by more than LIVE_OVERSHOOT_CELLS makes it a ledger entry.
+		# THE CAP THAT SAYS NOTHING. Four clamps, no voice — and the difference
+		# between the raw span and the clamped one is a ring of cells that the
+		# body stands in and the walk map still calls floor. That is not an
+		# over-seal risk being managed, it is an UNDER-seal being manufactured,
+		# and it is the one shape a walker cannot route around: the plan sends it
+		# into a cell the collider owns, physics refuses, and the stall handler
+		# unlearns the cell one at a time until its budget runs out. Record it, so
+		# a failed walk can be read against the objects that were too big to seal
+		# honestly. (Recording only — widening the clamp is a separate change with
+		# its own negative test; the trap it guards against is real.)
 		if rx0 < x0 or rx1 > x1 or rz0 < z0 or rz1 > z1:
-			var tok: String = String(node.get_meta("artifact_lookup_name")) if node.has_meta("artifact_lookup_name") else String(node.name)
+			var tok: String = String(node.get_meta("artifact_lookup_name")) 					if node.has_meta("artifact_lookup_name") else String(node.name)
+			_seal_overflow.append({
+				"token": tok,
+				"cell": [cx, cz],
+				"raw": [rx0, rx1, rz0, rz1],
+				"sealed": [x0, x1, z0, z1],
+			})
+			# the ledger: the body the museum actually got, and whether a walker
+			# can enter it. Overshoot beyond the planned footprint by more than
+			# LIVE_OVERSHOOT_CELLS is what makes it a ledger entry.
 			var span_x: int = rx1 - rx0 + 1
 			var span_z: int = rz1 - rz0 + 1
 			var planned: int = 2 * MAX_SEAL_RADIUS + 1
@@ -3611,6 +3895,39 @@ func _occupied_cells(node: Node3D, cell: Dictionary, zbase: int) -> Array:
 				var k := Vector2i(xx, zz)
 				if _walk_cells.has(k):
 					out.append(k)
+	# ── AND THE BODY THAT STOPS A WALKER GOES WHOLE ──────────────────────────
+	# The clamp above is right about MESHES and wrong about COLLIDERS. Its case
+	# is that one far-flung mesh inflates an AABB and an over-seal closes a
+	# corridor — measured, live, and still true: laser_measure reads 51 cells
+	# deep in this very corridor off a mesh nothing can walk into. But there is
+	# no such thing as a decorative collider. A cell inside a collision shape is
+	# a cell the walker cannot enter, whatever the map says, and leaving it in
+	# _walk_cells does not keep the corridor open — it manufactures the one
+	# failure the plan cannot route around, because the route it plans goes
+	# straight through the object.
+	#
+	# Measured: two lab_room bodies, 9 cells across each, dealt at (13,46) and
+	# (5,48), sealed to 5x5. Their colliders met across the whole 15-cell
+	# corridor at z=45; ten of those cells stayed walkable. The walker reached
+	# z=44.65, unlearned six of them one stall at a time, ran out of budget and
+	# reported no_route — the same verdict, to ten decimal places, for four days.
+	#
+	# So collision extent seals UNCLAMPED, out to MAX_BODY_RADIUS. That is not a
+	# licence to over-seal: everything sealed here still faces _reaches_all
+	# below, and a seal that would sever the corridor takes the artifact back
+	# out. Refusing to place a 9 m room in a 15 m corridor is the honest answer.
+	# An artifact too big for its slot should leave; it should not stay and lie.
+	var cbox: AABB = _extent_of(node, true)
+	if cbox.size.x > 0.0 or cbox.size.z > 0.0:
+		var bx0: int = maxi(int(floor(cbox.position.x)), cx - MAX_BODY_RADIUS)
+		var bx1: int = mini(int(floor(cbox.position.x + cbox.size.x - 0.01)), cx + MAX_BODY_RADIUS)
+		var bz0: int = maxi(int(floor(cbox.position.z)), cz - MAX_BODY_RADIUS)
+		var bz1: int = mini(int(floor(cbox.position.z + cbox.size.z - 0.01)), cz + MAX_BODY_RADIUS)
+		for zz in range(bz0, bz1 + 1):
+			for xx in range(bx0, bx1 + 1):
+				var bk := Vector2i(xx, zz)
+				if _walk_cells.has(bk) and not out.has(bk):
+					out.append(bk)
 	# the slot's own cell always goes, even when nothing measurable was built:
 	# an artifact that renders nothing still occupies the pocket it was dealt to.
 	var own := Vector2i(cx, cz)
@@ -3696,7 +4013,7 @@ func _seg_chapter_now() -> String:
 ## CollisionShape3D under it, merged. Collision is what actually stops a walker;
 ## mesh is what a player reads as "there is a thing there" and is included so a
 ## decorative overhang does not become an invisible plan trap.
-func _extent_of(root: Node3D) -> AABB:
+func _extent_of(root: Node3D, collision_only: bool = false) -> AABB:
 	var acc: AABB = AABB()
 	var got: bool = false
 	var stack: Array = [root]
@@ -3706,7 +4023,7 @@ func _extent_of(root: Node3D) -> AABB:
 			stack.append(c)
 		var b: AABB = AABB()
 		var have: bool = false
-		if n is MeshInstance3D:
+		if n is MeshInstance3D and not collision_only:
 			var mi: MeshInstance3D = n as MeshInstance3D
 			if mi.mesh != null:
 				b = mi.global_transform * mi.get_aabb()
@@ -3740,6 +4057,16 @@ func _reaches_all(from: Vector2i, targets: Array, limit: int) -> bool:
 		if want.is_empty():
 			return true
 		if seen.size() > limit:
+			# THE VALVE THAT ANSWERED FOR THE PROBE. "Outran the pinch" is only
+			# true when the flood is big RELATIVE TO THE ROOM; at 400 cells it was
+			# smaller than a single 15x34 segment, so a flood that filled the near
+			# side and never touched the far one exhausted its budget and reported
+			# no severance — an optimistic answer to a question it had not asked.
+			# Measured: two lab_rooms met across the corridor at z=45, this returned
+			# true, both were kept, and the walk died at z=43 with the far side of
+			# its own museum unreachable. The budget now exceeds a whole museum, so
+			# running out means something genuinely pathological rather than
+			# something merely large — and THAT is worth calling not-a-hinge.
 			return true                    # the flood outran the pinch; not a hinge
 		var c: Vector2i = q[qi]
 		qi += 1
@@ -3814,6 +4141,7 @@ func _dress_fixtures(seg: Node3D, solid: StaticBody3D, tile: Array, w: int, zbas
 			_add_col(solid, Vector3(cx, BENCH_H * 0.5, float(z) + 0.5),
 				Vector3(BENCH_D, BENCH_H, BENCH_L))
 			_walk_cells.erase(Vector2i(x, zbase + z))
+			_walk_erased[Vector2i(x, zbase + z)] = "bench"
 			placed += 1
 			last_z = y
 			break
@@ -3928,6 +4256,7 @@ func _dress_props(seg: Node3D, tile: Array, w: int, h: int, zbase: int,
 			if c is Vector2i:
 				var cv: Vector2i = c as Vector2i
 				_walk_cells.erase(Vector2i(cv.x, zbase + cv.y))
+				_walk_erased[Vector2i(cv.x, zbase + cv.y)] = "prop:%s" % tok
 				n_floor += 1
 	if n_ok > 0:
 		_deal_stats["props"] = int(_deal_stats.get("props", 0)) + n_ok
@@ -4486,7 +4815,7 @@ func _edit_fine(dx: float, dy: float, dz: float) -> void:
 ## Uniform scale ruling. Multiplicative steps so + then - is identity;
 ## snapped to 0.05 in the file; 1.0 drops the key (no ruling).
 const TRUNK_BRANCHES := "res://commons/data/trunk_branches.json"
-const WALK_SPACES := ["wall", "alcove", "room"]
+const WALK_SPACES := ["wall", "alcove", "room", "balcony"]   # balcony: the hallway extends into the body (hand ask)
 
 
 func _edit_walk_space() -> void:
@@ -4676,6 +5005,8 @@ func _run_autopilot(delta: float) -> void:
 			if not _auto_path.is_empty():
 				var blocked := Vector2i(int(floor(_auto_path[0].x)), int(floor(_auto_path[0].z)))
 				erased = _walk_cells.erase(blocked)
+				if erased:
+					_walk_erased[blocked] = "stall"
 			# Spend the budget on information. A stall that removed nothing is
 			# not a lesson learned, it is the same lesson refused, and a run of
 			# them means the plan is dead rather than the corridor expensive.
@@ -4760,6 +5091,7 @@ func _auto_plan() -> void:
 				prev[n] = c
 				q.append(n)
 	_auto_frontier = best.y
+	_auto_reach = prev
 	if best == start:
 		# Nothing deeper is reachable on the stamped map. That is a finding, not
 		# a hiccup: report the frontier and drop the plan instead of walking the
@@ -4792,7 +5124,102 @@ func _auto_write(done: bool, ok: bool) -> void:
 			# the two apart, and the scene's stdout is not capturable from the
 			# non-console exe, so the table has to travel in the file.
 			"seams": _auto_seams(),
+			# only on a failed verdict — the cut is 40 rows at worst and there is
+			# nothing to say about it while the walk is still going well.
+			"cut": _auto_cut() if (done and not ok) else [],
+			# THE STALL REPORT (2026-08-18): every cell the walker had to unlearn,
+			# with the body standing on it — on a PASS as well, because a walk
+			# that recovers 24 times is passable, not clean, and the bodies to
+			# rule on (a balcony ask, a court, a footprint) are the ones named here
+			"stalled_on": _auto_stall_report(),
+			# every body the seal could not honestly claim, and how many of them
+			# stand within reach of the cut. A walk that dies next to one of these
+			# is not a mystery.
+			"seal_overflow": _seal_overflow.size(),
+			"seal_overflow_near": _overflow_near() if (done and not ok) else [],
 		}, " "))
+
+## The over-wide bodies standing within four cells of the frontier, which is the
+## only place they could be responsible for this stall.
+func _overflow_near() -> Array:
+	var out: Array = []
+	if _auto_frontier < 0:
+		return out
+	for o0 in _seal_overflow:
+		var o: Dictionary = o0
+		var raw: Array = o.get("raw", [])
+		if raw.size() < 4:
+			continue
+		if int(raw[2]) - 4 <= _auto_frontier and _auto_frontier <= int(raw[3]) + 4:
+			out.append(o)
+	return out
+
+## THE CUT: the doorway that is not there. Reading north from every cell the BFS
+## could reach, list the neighbours it could not step into, and say who took each
+## one away. Three provenances and three different repairs:
+##   "bench"        the fixture placer plugged a passage despite its guard;
+##   "prop:<token>" the prop dealer did, and it HAS no such guard;
+##   "stall"        physics unlearned it — a collider the data never knew about;
+##   "never"        the builder never stamped it, so the fault is upstream of
+##                  every erasure and belongs to the template or the joiner.
+## Restricted to the two rows straddling the frontier, which is where a sever
+## has to be, and capped so a verdict file stays a thing you can read.
+func _auto_cut() -> Array:
+	var out: Array = []
+	if _auto_reach.is_empty():
+		return out
+	var seen: Dictionary = {}
+	for k in _auto_reach:
+		var c: Vector2i = k
+		if c.y < _auto_frontier - 1:
+			continue
+		for d in [Vector2i(0, 1), Vector2i(1, 0), Vector2i(-1, 0)]:
+			var n: Vector2i = c + d
+			if _auto_reach.has(n) or seen.has(n):
+				continue
+			if n.y < _auto_frontier or n.y > _auto_frontier + 2:
+				continue
+			seen[n] = true
+			out.append({"x": n.x, "z": n.y,
+				"by": String(_walk_erased.get(n, "never")),
+				"from_z": c.y})
+			if out.size() >= 40:
+				return out
+	return out
+
+## Which stamped body owns each cell the walker unlearned by stalling — the
+## seal report a hand can act on. Attributed by the body's live extent (mesh
+## or collider) containing the cell's centre; "?" when nothing stamped does.
+func _auto_stall_report() -> Array:
+	var out: Array = []
+	var by_body: Dictionary = {}
+	for k in _walk_erased.keys():
+		if String(_walk_erased[k]) != "stall":
+			continue
+		var c: Vector2i = k
+		var centre := Vector3(c.x + 0.5, 0.5, c.y + 0.5)
+		var owner := "?"
+		var kind := ""
+		for r in _edit_records:
+			var node: Node3D = (r as Dictionary).get("node") as Node3D
+			if node == null or not is_instance_valid(node):
+				continue
+			var box: AABB = _extent_of(node)
+			if box.size.x <= 0.0:
+				continue
+			var flat := AABB(Vector3(box.position.x, -1.0, box.position.z), Vector3(box.size.x, 3.0, box.size.z))
+			if flat.has_point(centre):
+				owner = String((r as Dictionary).get("token", "?"))
+				kind = String((r as Dictionary).get("kind", ""))
+				break
+		if not by_body.has(owner):
+			by_body[owner] = {"body": owner, "kind": kind, "cells": [], "walk_inside": _walk_inside.has(owner)}
+		(by_body[owner]["cells"] as Array).append([c.x, c.y])
+	for k in by_body.keys():
+		out.append(by_body[k])
+	out.sort_custom(func(a, b): return (a["cells"] as Array).size() > (b["cells"] as Array).size())
+	return out
+
 
 ## The z-extent of every segment built so far, for reading frontier_z against.
 func _auto_seams() -> Array:

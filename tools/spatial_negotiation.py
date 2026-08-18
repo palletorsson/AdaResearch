@@ -37,7 +37,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
-from dataclasses import dataclass, field
+from dataclasses import replace, dataclass, field
 from pathlib import Path
 from typing import Any
 
@@ -1076,14 +1076,27 @@ def negotiate(contract: SpatialContract, plan: FloorPlan, occ: Occupancy,
 
 
 def run(artifacts: list[str], plan: FloorPlan | None = None,
-        bays: int = 3) -> tuple[FloorPlan, list[Placement], Occupancy]:
-    """Negotiate a whole exhibition brief in order."""
+        bays: int = 3, venue_asks: dict[str, str] | None = None) -> tuple[FloorPlan, list[Placement], Occupancy]:
+    """Negotiate a whole exhibition brief in order.
+
+    venue_asks: BALCONIES-BY-ASK (2026-08-18). A hand may say, on the trunk,
+    that a branch's space is "balcony" — extend the hallway INTO this body
+    rather than stand it on the floor. The ask rides the plan row's
+    walk_space and arrives here as {token: "balcony"}; the contract is
+    negotiated as a hanging balcony body (preferred_venue balcony, routed to
+    the court/balcony rung), and the trace says the hand asked. No ask, no
+    change: the contract negotiates exactly as its own sources say."""
     plan = plan or build_enfilade(bays=max(bays, len(artifacts)))
     occ = Occupancy()
     out: list[Placement] = []
     bay_cursor = 0
     for lookup in artifacts:
         contract = staged_contract(lookup)
+        ask = (venue_asks or {}).get(lookup, "")
+        if ask == "balcony":
+            contract = replace(contract, preferred_venue="balcony", containment="precinct",
+                               provenance={**dict(getattr(contract, "provenance", {}) or {}),
+                                           "presentation.preferred_venue": "hand ask on the trunk: balcony (walk_space) — the hallway extends into this body"})
         # The brief's order picks the bay; the negotiator picks the slot.
         bay = f"bay{bay_cursor % max(1, len({s.bay for s in plan.slots}))}"
         preferred = next((s for s in plan.slots
@@ -1094,7 +1107,7 @@ def run(artifacts: list[str], plan: FloorPlan | None = None,
             if p.mode == "against_wall" and p.wall:
                 wall = next((w for w in plan.walls
                              if w.side == p.wall and w.bay == _bay_of(plan, p.slot)), None)
-                if wall is not None and contract.body_m[1] <= 0.7:
+                if wall is not None and contract.body_m[1] <= WALL_BODY_MAX_DEPTH_M:
                     rect, trace = hang_on_wall(contract, wall, p.anchor)
                     p.traces.append(trace)
                     if rect:
@@ -1140,6 +1153,10 @@ class RunPlacement:
 #: Breathing space between two works in a row, metres. Below this a lineage
 #: reads as one wide object rather than as a series of related ones.
 RUN_GAP_M = 0.4
+#: A wall-mounted body may project this far into the room. This is the same
+#: limit used by the ordinary against-wall placement path above: two clear
+#: standing cells are only honest if the work does not consume the first one.
+WALL_BODY_MAX_DEPTH_M = 0.7
 
 
 def _front_is_clear(plan: FloorPlan, wall: WallSurface, u0: float, u1: float,
@@ -1187,7 +1204,15 @@ def hang_run(plan: FloorPlan, anchor: str, axis: str, values: list[str],
                             f"ground of its own and a threshold into it"))
         return RunPlacement(anchor, axis, values, None, [], [], "PRECINCT", traces)
     body_w = max(0.15, float(contract.body_m[0]))
+    body_d = max(0.01, float(contract.body_m[1]))
     body_h = max(0.10, float(contract.body_m[2]))
+    if body_d > WALL_BODY_MAX_DEPTH_M:
+        traces.append(Trace(
+            "wall_depth", "fail",
+            f"body projects {body_d:.2f} m; wall series permit at most "
+            f"{WALL_BODY_MAX_DEPTH_M:.2f} m so the two-cell standing zone remains clear",
+        ))
+        return RunPlacement(anchor, axis, values, None, [], [], "REJECT", traces)
     band_h = float(v_m[1]) - float(v_m[0])
     need = n * body_w + max(0, n - 1) * RUN_GAP_M
     traces.append(Trace("run_measure", "pass",

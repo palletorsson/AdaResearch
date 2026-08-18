@@ -58,7 +58,7 @@ KINDS = ["extends", "edge", "contradicts", "queers", "synthesizes", "varies"]
 #: verdicts, so the same branch can read heuristic:alcove -> walk:room ->
 #: book:wall over a month. That trail is the ontology forming. The museum
 #: builds whatever the current value is; heuristic and hand build alike.
-SPACES = ["wall", "alcove", "room"]
+SPACES = ["wall", "alcove", "room", "balcony"]   # balcony: hand only — never proposed by guess_space
 
 
 def guess_space(kind: str, why: str) -> str:
