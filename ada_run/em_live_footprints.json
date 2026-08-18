@@ -1,0 +1,248 @@
+{
+	"_readme": "Bodies whose LIVE extent, measured by the museum at stamp, exceeded their planned footprint by more than 2 cells. Provenance walked. Read by tools/spatial_contract.py: the next negotiation uses the larger of measurements.aabb_size and live_aabb. walk_inside = no collider: the seal takes no cells.",
+	"bodies": {
+		"art_history_gallery": {
+			"at": "2026-08-18 10:00:15",
+			"cell": [
+				23,
+				306
+			],
+			"chapter": "primitives",
+			"has_collider": false,
+			"live_aabb": [
+				31.7,
+				0.0,
+				18.8
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1,
+			"walk_inside": true
+		},
+		"blockbuilderentity": {
+			"at": "2026-08-18 10:01:17",
+			"cell": [
+				2,
+				394
+			],
+			"chapter": "primitives",
+			"has_collider": true,
+			"live_aabb": [
+				40.0,
+				40.0,
+				40.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1,
+			"walk_inside": false
+		},
+		"carpet_cove_gallery": {
+			"at": "2026-08-18 10:00:33",
+			"cell": [
+				13,
+				374
+			],
+			"chapter": "primitives",
+			"has_collider": false,
+			"live_aabb": [
+				12.1,
+				4.0,
+				30.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1,
+			"walk_inside": true
+		},
+		"draw_dot": {
+			"at": "2026-08-18 09:59:13",
+			"cell": [
+				2,
+				134
+			],
+			"chapter": "primitives",
+			"has_collider": true,
+			"live_aabb": [
+				2.8,
+				1.2,
+				134.7
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1,
+			"walk_inside": false
+		},
+		"draw_dot_time_domain": {
+			"at": "2026-08-18 09:59:13",
+			"cell": [
+				3,
+				128
+			],
+			"chapter": "primitives",
+			"has_collider": true,
+			"live_aabb": [
+				3.8,
+				1.2,
+				128.7
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1,
+			"walk_inside": false
+		},
+		"draw_triangle_faces": {
+			"at": "2026-08-18 10:00:33",
+			"cell": [
+				3,
+				332
+			],
+			"chapter": "primitives",
+			"has_collider": true,
+			"live_aabb": [
+				3.6,
+				1.1,
+				332.6
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1,
+			"walk_inside": false
+		},
+		"grab_sphere_point_snap": {
+			"at": "2026-08-18 10:00:14",
+			"cell": [
+				2,
+				272
+			],
+			"chapter": "primitives",
+			"has_collider": true,
+			"live_aabb": [
+				2.5,
+				1.0,
+				272.5
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1,
+			"walk_inside": false
+		},
+		"lab_room": {
+			"at": "2026-08-18 09:58:35",
+			"cell": [
+				7,
+				52
+			],
+			"chapter": "primitives",
+			"has_collider": true,
+			"live_aabb": [
+				8.1,
+				4.4,
+				8.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1,
+			"walk_inside": false
+		},
+		"laser_measure": {
+			"at": "2026-08-18 10:01:17",
+			"cell": [
+				7,
+				454
+			],
+			"chapter": "primitives",
+			"has_collider": true,
+			"live_aabb": [
+				0.2,
+				0.1,
+				50.1
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1,
+			"walk_inside": false
+		},
+		"scale_lines": {
+			"at": "2026-08-18 09:59:14",
+			"cell": [
+				7,
+				207
+			],
+			"chapter": "primitives",
+			"has_collider": false,
+			"live_aabb": [
+				0.0,
+				3.5,
+				100.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1,
+			"walk_inside": true
+		},
+		"xyz_slider_plate": {
+			"at": "2026-08-18 09:58:36",
+			"cell": [
+				16,
+				108
+			],
+			"chapter": "primitives",
+			"has_collider": true,
+			"live_aabb": [
+				19.1,
+				13.4,
+				17.5
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1,
+			"walk_inside": false
+		}
+	},
+	"schema": "adaresearch.em_live_footprints.v1"
+}

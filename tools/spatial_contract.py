@@ -452,6 +452,8 @@ def _num(value: Any, default: float = 0.0) -> float:
 
 
 LIVE_LEDGER = REPO / "ada_run" / "em_live_footprints.json"
+LIVE_LINE_ASPECT = 8.0     # longer than this many times its width: a line, not a body
+LIVE_ADOPT_MAX_M = 40.0    # the bridge court's ceiling — wider than this no venue holds
 _live_cache: dict | None = None
 
 
@@ -497,6 +499,21 @@ def resolve(lookup: str) -> SpatialContract:
     # standing in the walk. walk_inside bodies (no collider) keep the still
     # size — the seal takes no cells from them, so the plan need not.
     live = live_footprint(lookup)
+    if live and not live.get("walk_inside") and isinstance(live.get("live_aabb"), list):
+        la = [_num(v) for v in live["live_aabb"]]
+        # two live shapes the ledger records but the plan must NOT adopt whole:
+        # a LINE (one horizontal side many times the other — a ray, a drawn
+        # trace, a rail: draw_triangle_faces read 3.6 x 332 m) and a body wider
+        # than any venue the museum builds (LIVE_ADOPT_MAX_M, the bridge court's
+        # 40 m). Both are said in provenance and left to the hand; adopting them
+        # would refuse a drawing as a world.
+        long_side = max(la[0], la[2]); short_side = max(0.05, min(la[0], la[2]))
+        if long_side / short_side > LIVE_LINE_ASPECT:
+            prov["body.live_note"] = f"live ledger {la[0]:.1f}x{la[2]:.1f} m is a LINE (aspect {long_side / short_side:.0f}); still kept"
+            live = {}
+        elif long_side > LIVE_ADOPT_MAX_M:
+            prov["body.live_note"] = f"live ledger {la[0]:.1f}x{la[2]:.1f} m exceeds any venue ({LIVE_ADOPT_MAX_M:.0f} m); still kept — a hand call"
+            live = {}
     if live and not live.get("walk_inside") and isinstance(live.get("live_aabb"), list):
         la = [_num(v) for v in live["live_aabb"]]
         if not (isinstance(aabb, list) and len(aabb) == 3):
