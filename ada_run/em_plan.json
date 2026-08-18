@@ -2,7 +2,7 @@
   "schema": "adaresearch.em_plan.v2",
   "_readme": "Placements resolved by tools/spatial_negotiation.py. Read by commons/scenes/endless_museum.gd under --em-plan. A museum key absent here deals exactly as it did before.",
   "_spine_run": {
-    "at": "2026-08-18T10:08:53",
+    "at": "2026-08-18T11:23:18",
     "owner": {
       "sainsbury-false-perspective-enfilade": "primitives",
       "uffizi-spine-enfilade": "transformation",
@@ -223212,9 +223212,10 @@
           "slot": "courtyard",
           "wall": null,
           "court": [
-            15,
-            15
+            22,
+            23
           ],
+          "court_access": "bridge",
           "relational_kind": "related_artifact",
           "relation": {
             "anchor": "randompoint",
@@ -228006,19 +228007,23 @@
         {
           "token": "crossway_ca",
           "cell": [
-            28,
-            36
+            0,
+            0
           ],
           "tile_cell": [
-            14,
-            22
+            -14,
+            -14
           ],
           "rotation": 0,
           "mode": "freestanding",
-          "venue": "interior",
-          "support_height_m": 0.95,
-          "slot": "neue-nationalgalerie-free-plan/9,22",
+          "venue": "courtyard",
+          "support_height_m": 0.0,
+          "slot": "courtyard",
           "wall": null,
+          "court": [
+            16,
+            22
+          ],
           "relational_kind": "spine_artifact",
           "relation": {
             "anchor": "ca_chair_test",
@@ -228293,7 +228298,7 @@
         "h": 55
       },
       "apron": 14,
-      "interior_count": 3,
+      "interior_count": 2,
       "sequence": "cellularautomata",
       "pearl": "ca expandingspace",
       "pearl_index": 4,
@@ -310816,9 +310821,10 @@
           "slot": "courtyard",
           "wall": null,
           "court": [
-            15,
-            15
+            22,
+            23
           ],
+          "court_access": "bridge",
           "relational_kind": "related_artifact",
           "relation": {
             "anchor": "randompoint",
