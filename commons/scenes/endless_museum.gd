@@ -1810,14 +1810,14 @@ func _build_segment() -> void:
 			_box(seg, Vector3(x + 0.5, -0.1, zr + 0.5), Vector3(1, 0.2, 1), Color(0.13, 0.13, 0.16), m_deck)
 			if x > 0 and x < LOBBY_W - 1 and not (zr == 0 and x >= pw - 1) and not (zr == VESTIBULE_H - 1 and x >= w - 1):
 				_walk_cells[Vector2i(x, zbase + zr)] = true
-	if _vr:
-		# VR floor body. The desktop walker CLAMPS y and needs no deck
-		# collision, but the XR rig's PlayerBody simulates gravity — without
-		# a collider under the deck the headset falls through on frame one.
-		# One merged slab for the rectangular vestibule; per-cell below where
-		# the tile is sparse. Gated on _vr: the desktop segment is untouched.
-		_add_col(solid, Vector3(LOBBY_W / 2.0, -0.1, VESTIBULE_H / 2.0),
-			Vector3(LOBBY_W, 0.2, VESTIBULE_H))
+	# floor/deck collider — ALWAYS (2026-08-18): one museum in both modes; the desktop walker clamps y and never meets it
+	# VR floor body. The desktop walker CLAMPS y and needs no deck
+	# collision, but the XR rig's PlayerBody simulates gravity — without
+	# a collider under the deck the headset falls through on frame one.
+	# One merged slab for the rectangular vestibule; per-cell below where
+	# the tile is sparse. Gated on _vr: the desktop segment is untouched.
+	_add_col(solid, Vector3(LOBBY_W / 2.0, -0.1, VESTIBULE_H / 2.0),
+		Vector3(LOBBY_W, 0.2, VESTIBULE_H))
 	_stamp_scale_figure(seg, Vector3(2.0, 0.0, VESTIBULE_H * 0.5), zbase)
 	for zr in range(VESTIBULE_H):
 		for sx in [0, LOBBY_W - 1]:
@@ -1848,8 +1848,8 @@ func _build_segment() -> void:
 			match c:
 				"1", "1s":
 					_box(seg, Vector3(x + 0.5, -0.1, z + 0.5), Vector3(1, 0.2, 1), Color(0.16, 0.16, 0.19), m_floor)
-					if _vr:
-						_add_col(solid, Vector3(x + 0.5, -0.1, z + 0.5), Vector3(1, 0.2, 1))
+					# floor/deck collider — ALWAYS (2026-08-18): one museum in both modes; the desktop walker clamps y and never meets it
+					_add_col(solid, Vector3(x + 0.5, -0.1, z + 0.5), Vector3(1, 0.2, 1))
 					_walk_cells[Vector2i(x, zbase + z)] = true
 				"2", "2s":
 					_box(seg, Vector3(x + 0.5, 0.1, z + 0.5), Vector3(1, 0.6, 1), Color(0.23, 0.23, 0.28), m_podium)
@@ -1995,7 +1995,7 @@ func _build_segment() -> void:
 					# the hand's rulings on this chapter's showings, and the
 					# selectable proxies the editor picks (desktop only)
 					"showing_rules": _furniture_rules(next_seq, "showing"),
-					"showing_proxies": not _vr,
+					"showing_proxies": true,     # ALWAYS: the same records in both modes
 					# the CARDS name their place: chapter · pearl · number
 					"chapter": next_seq,
 					"pearl": String(deal.get("pearl", "")) if deal is Dictionary else ""})
@@ -2010,7 +2010,7 @@ func _build_segment() -> void:
 						"world": [snappedf((ch_node as Node3D).global_position.x, 0.1), snappedf((ch_node as Node3D).global_position.y, 0.1), snappedf((ch_node as Node3D).global_position.z, 0.1)]})
 			_save_showing_cards()
 			# every showing proxy becomes an editor record of kind "showing"
-			if not _vr:
+			if true:   # ALWAYS: showing records in both modes (the editor KEYS stay desktop-only)
 				for ch_node in seg.get_children():
 					if ch_node.has_meta("em_showing"):
 						_edit_records.append({"node": ch_node, "kind": "showing",
@@ -2356,9 +2356,9 @@ func _build_side_rooms(seg: Node3D, solid: StaticBody3D, w: int, tile_h: int,
 		_box(seg, Vector3(x0 + ROOM_W / 2.0, -0.1, z0 + ROOM_D / 2.0),
 			Vector3(ROOM_W, 0.2, ROOM_D), Color(0.17, 0.165, 0.18), m_deck)
 		_box(seg, Vector3(w + 0.5, -0.1, door_z + 0.5), Vector3(1, 0.2, 1), Color(0.17, 0.165, 0.18), m_deck)
-		if _vr:
-			_add_col(solid, Vector3(x0 + ROOM_W / 2.0, -0.1, z0 + ROOM_D / 2.0), Vector3(ROOM_W, 0.2, ROOM_D))
-			_add_col(solid, Vector3(w + 0.5, -0.1, door_z + 0.5), Vector3(1, 0.2, 1))
+		# floor/deck collider — ALWAYS (2026-08-18): one museum in both modes; the desktop walker clamps y and never meets it
+		_add_col(solid, Vector3(x0 + ROOM_W / 2.0, -0.1, z0 + ROOM_D / 2.0), Vector3(ROOM_W, 0.2, ROOM_D))
+		_add_col(solid, Vector3(w + 0.5, -0.1, door_z + 0.5), Vector3(1, 0.2, 1))
 		_walk_cells[Vector2i(w, zbase + door_z)] = true
 		for zz in range(z0, z0 + ROOM_D):
 			for xx in range(x0, x0 + ROOM_W):
@@ -2422,8 +2422,8 @@ func _number_places(seg: Node3D, chapter: String, pearl: String) -> void:
 			continue                       # service and seating are not places
 		if kind == "showing":
 			continue                       # a showing is numbered by its CARD below (the proxy record is
-			                               # desktop-only, and counting both gave the desktop 130 showings
-			                               # to VR's 65 and a different number on every body)
+										   # desktop-only, and counting both gave the desktop 130 showings
+										   # to VR's 65 and a different number on every body)
 		places.append({"rec": rd, "node": node, "kind": kind})
 	for ch_node in seg.get_children():
 		if ch_node.has_meta("em_showing_card"):
@@ -2662,8 +2662,8 @@ func _build_forecourt(seg: Node3D, solid: StaticBody3D, w: int, tile_h: int,
 		var z0: int = VESTIBULE_H + tile_h
 		_box(seg, Vector3(w / 2.0, -0.1, z0 + porch_d / 2.0),
 			Vector3(w, 0.2, porch_d), Color(0.15, 0.155, 0.15), m_deck)
-		if _vr:
-			_add_col(solid, Vector3(w / 2.0, -0.1, z0 + porch_d / 2.0), Vector3(w, 0.2, porch_d))
+		# floor/deck collider — ALWAYS (2026-08-18): one museum in both modes; the desktop walker clamps y and never meets it
+		_add_col(solid, Vector3(w / 2.0, -0.1, z0 + porch_d / 2.0), Vector3(w, 0.2, porch_d))
 		for zz in range(z0, z0 + porch_d):
 			for x in range(1, w - 1):
 				_walk_cells[Vector2i(x, zbase + zz)] = true
@@ -2745,10 +2745,10 @@ func _build_hall(seg: Node3D, solid: StaticBody3D, w: int, zbase: int, zcur: int
 	_box(seg, Vector3(g / 2.0, -0.05, zcur + total_d / 2.0), Vector3(g, 0.3, total_d), Color(0.31, 0.29, 0.25), _sm("plinth"))
 	_box(seg, Vector3(g + cw / 2.0, -0.05, zcur + g / 2.0), Vector3(cw, 0.3, g), Color(0.31, 0.29, 0.25), _sm("plinth"))
 	_box(seg, Vector3(g + cw / 2.0, -0.05, zcur + g + cd + g / 2.0), Vector3(cw, 0.3, g), Color(0.31, 0.29, 0.25), _sm("plinth"))
-	if _vr:
-		_add_col(solid, Vector3(g / 2.0, -0.05, zcur + total_d / 2.0), Vector3(g, 0.3, total_d))
-		_add_col(solid, Vector3(g + cw / 2.0, -0.05, zcur + g / 2.0), Vector3(cw, 0.3, g))
-		_add_col(solid, Vector3(g + cw / 2.0, -0.05, zcur + g + cd + g / 2.0), Vector3(cw, 0.3, g))
+	# floor/deck collider — ALWAYS (2026-08-18): one museum in both modes; the desktop walker clamps y and never meets it
+	_add_col(solid, Vector3(g / 2.0, -0.05, zcur + total_d / 2.0), Vector3(g, 0.3, total_d))
+	_add_col(solid, Vector3(g + cw / 2.0, -0.05, zcur + g / 2.0), Vector3(cw, 0.3, g))
+	_add_col(solid, Vector3(g + cw / 2.0, -0.05, zcur + g + cd + g / 2.0), Vector3(cw, 0.3, g))
 	# the ring joins the walk map; the hall floor does NOT
 	for zz in range(zcur, zcur + total_d):
 		for x in range(1, g):
@@ -2831,13 +2831,13 @@ func _build_courtyard(seg: Node3D, solid: StaticBody3D, w: int, tile_h: int,
 				Color(0.31, 0.29, 0.25), m_bridge)
 			_box(seg, Vector3(BRIDGE_COURT_PATH_W + cw / 2.0, -0.1, zcur + cd / 2.0),
 				Vector3(cw, 0.2, cd), Color(0.145, 0.155, 0.145), m_deck)
-			if _vr:
-				_add_col(solid,
-					Vector3(BRIDGE_COURT_PATH_W / 2.0, -0.05, zcur + cd / 2.0),
-					Vector3(BRIDGE_COURT_PATH_W, 0.30, cd))
-				_add_col(solid,
-					Vector3(BRIDGE_COURT_PATH_W + cw / 2.0, -0.1, zcur + cd / 2.0),
-					Vector3(cw, 0.2, cd))
+			# floor/deck collider — ALWAYS (2026-08-18): one museum in both modes; the desktop walker clamps y and never meets it
+			_add_col(solid,
+				Vector3(BRIDGE_COURT_PATH_W / 2.0, -0.05, zcur + cd / 2.0),
+				Vector3(BRIDGE_COURT_PATH_W, 0.30, cd))
+			_add_col(solid,
+				Vector3(BRIDGE_COURT_PATH_W + cw / 2.0, -0.1, zcur + cd / 2.0),
+				Vector3(cw, 0.2, cd))
 			var gate0: int = zcur + maxi(1, int(cd / 2.0) - 2)
 			var gate1: int = mini(zcur + cd - 1, gate0 + 4)
 			for zz in range(zcur, zcur + cd):
@@ -2919,9 +2919,9 @@ func _build_courtyard(seg: Node3D, solid: StaticBody3D, w: int, tile_h: int,
 			var deck_w: int = 4
 			_box(seg, Vector3(deck_w / 2.0, -0.1, zcur + cd / 2.0),
 				Vector3(deck_w, 0.2, cd), Color(0.145, 0.155, 0.145), m_deck)
-			if _vr:
-				_add_col(solid, Vector3(deck_w / 2.0, -0.1, zcur + cd / 2.0),
-					Vector3(deck_w, 0.2, cd))
+			# floor/deck collider — ALWAYS (2026-08-18): one museum in both modes; the desktop walker clamps y and never meets it
+			_add_col(solid, Vector3(deck_w / 2.0, -0.1, zcur + cd / 2.0),
+				Vector3(deck_w, 0.2, cd))
 			for zz in range(zcur, zcur + cd):
 				for x in range(1, deck_w):
 					_walk_cells[Vector2i(x, zbase + zz)] = true
@@ -2935,9 +2935,9 @@ func _build_courtyard(seg: Node3D, solid: StaticBody3D, w: int, tile_h: int,
 			# was a mesh with no collider until the staging pass met gravity.
 			_box(seg, Vector3((deck_w + w) / 2.0, -4.1, zcur + cd / 2.0),
 				Vector3(w - deck_w, 0.2, cd), Color(0.05, 0.05, 0.06), m_deck)
-			if _vr:
-				_add_col(solid, Vector3((deck_w + w) / 2.0, -4.1, zcur + cd / 2.0),
-					Vector3(w - deck_w, 0.2, cd))
+			# floor/deck collider — ALWAYS (2026-08-18): one museum in both modes; the desktop walker clamps y and never meets it
+			_add_col(solid, Vector3((deck_w + w) / 2.0, -4.1, zcur + cd / 2.0),
+				Vector3(w - deck_w, 0.2, cd))
 			# outer parapets frame the joint on both edges, open sky above
 			for zz in range(zcur, zcur + cd):
 				for sx in [0, w - 1]:
@@ -2965,9 +2965,9 @@ func _build_courtyard(seg: Node3D, solid: StaticBody3D, w: int, tile_h: int,
 		# exterior tone; no ceiling is BUILT, which is the whole venue
 		_box(seg, Vector3(w / 2.0, -0.1, zcur + cd / 2.0),
 			Vector3(w, 0.2, cd), Color(0.145, 0.155, 0.145), m_deck)
-		if _vr:
-			_add_col(solid, Vector3(w / 2.0, -0.1, zcur + cd / 2.0),
-				Vector3(w, 0.2, cd))
+		# floor/deck collider — ALWAYS (2026-08-18): one museum in both modes; the desktop walker clamps y and never meets it
+		_add_col(solid, Vector3(w / 2.0, -0.1, zcur + cd / 2.0),
+			Vector3(w, 0.2, cd))
 		for zz in range(zcur, zcur + cd):
 			for x in range(1, w - 1):
 				_walk_cells[Vector2i(x, zbase + zz)] = true
@@ -4759,7 +4759,7 @@ func _dress_props(seg: Node3D, tile: Array, w: int, h: int, zbase: int,
 		# of that token in the museum moves on the next build, which is what
 		# a convention means. Only wall-class tokens in mount_defaults qualify;
 		# floor/ceiling/edge props have no height knob (v1, as in the corridor).
-		if not _vr:
+		if true:   # ALWAYS: prop/furniture records in both modes
 			var seg_ch: String = String(seg.get_meta("em_chapter")) if seg.has_meta("em_chapter") else ""
 			var rulable_h: bool = String(r.get("surface", "")) == "wall" \
 				and _mod_has(_mod_props, "mount_defaults") \
