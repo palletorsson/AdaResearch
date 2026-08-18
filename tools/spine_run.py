@@ -54,7 +54,7 @@ from emit_dressing_room import ROOMS_DIR, is_authored, staged
 from exhibition_brief import spine_order
 from export_museum_plan import (APRON, brief_context, brief_stage, plan_museum,
                                 spine_anchors)
-from hero_walk import hero_walk
+from hero_walk import hero_walk, pearl_walks
 from spatial_floorplan import PATTERNS, from_museum
 from spatial_negotiation import Occupancy, hang_run, run as negotiate_run
 
@@ -145,26 +145,81 @@ def run_sequence(seq: str, museum: str, rows: int, relations: int = 2,
     # antithesis, the queer possibility, synthesis — each body carrying its
     # walk_kind into the plan. No hand branch: the chapter builds from the
     # spine list exactly as before. The reading is the switch, on purpose.
+    # THE PEARLS (2026-08-18). A node is a STRING of heroes — its maps in book
+    # order, each with a hero and siblings (build_trunk_pearls.py). When the
+    # trunk carries pearls for this chapter, the chapter is negotiated ONE
+    # PEARL AT A TIME into the same building, and write_plan emits one plan
+    # row per pearl (`pearl`, `pearl_index`) so the museum builds one segment
+    # per pearl. No pearls: the chapter runs as before (hero walk or spine).
+    pearls = pearl_walks(seq)
+    if pearls:
+        parts: list[dict[str, Any]] = []
+        for pw in pearls:
+            ctx: dict[str, Any] = {k: dict(v) for k, v in cast_context.items()}
+            pcast = _apply_walk(pw, ctx)
+            if cast_cap > 0:
+                pcast = pcast[:cast_cap]
+            r = _run_cast(seq, museum, rows, anchors, pcast, ctx, walk=pw)
+            r["pearl"] = pw["pearl"]; r["pearl_index"] = pw["pearl_index"]; r["map"] = pw["map"]
+            r["hero_walk"] = {"hero": pw["hero"], "hand_branches": pw["hand_branches"], "pearl": pw["pearl"]}
+            parts.append(r)
+            print(f"  {seq:24s} PEARL {pw['pearl_index'] + 1:2d}/{len(pearls)} {pw['pearl']:16s} offered {r['offered']:3d} placed {r['placed']:3d} interior {r['interior']:3d}")
+        agg = _run_cast(seq, museum, rows, anchors, [], cast_context, walk=None, skip=True)
+        for k in ("offered", "placed", "interior", "rejected", "lineages", "lineages_walled", "rooms_on_disk", "rooms_authored"):
+            agg[k] = sum(int(x.get(k, 0)) for x in parts)
+        agg["venues"] = {}
+        for x in parts:
+            for v, n in x["venues"].items():
+                agg["venues"][v] = agg["venues"].get(v, 0) + n
+        agg["reasons"] = {}
+        for x in parts:
+            for k, n in x["reasons"].items():
+                agg["reasons"][k] = agg["reasons"].get(k, 0) + n
+        agg["cast"] = [t for x in parts for t in x["cast"]]
+        agg["cast_context"] = {}
+        for x in parts:
+            agg["cast_context"].update(x["cast_context"])
+        agg["pearls"] = parts
+        agg["hero_walk"] = {"pearls": len(parts), "heroes": [x["hero_walk"]["hero"] for x in parts]}
+        agg["interior_share"] = round(agg["interior"] / max(1, agg["offered"]), 4)
+        agg["housed"] = agg["interior"] == agg["offered"]
+        agg["shortfall"] = agg["offered"] - agg["interior"]
+        return agg
+
     walk = hero_walk(seq)
-    walk_kind_of: dict[str, str] = {}
     if walk:
-        cast = list(walk["cast"])
-        for r in walk["rows"]:
-            tok = r["lookup"]
-            cast_context.setdefault(tok, {})
-            if tok in walk_kind_of:
-                # a second role for the same body (the hero can be its own
-                # antithesis): the first kind stands, the rest ride as `also`
-                cast_context[tok].setdefault("walk_also", []).append(
-                    {"kind": r["walk_kind"], "why": r.get("why", "")})
-                continue
-            walk_kind_of[tok] = r["walk_kind"]
-            cast_context[tok]["walk_kind"] = r["walk_kind"]
-            cast_context[tok]["walk_why"] = r.get("why", "")
-            cast_context[tok]["walk_space"] = r.get("space", "wall")   # wall | alcove | room
+        cast = _apply_walk(walk, cast_context)
         print(f"  {seq:24s} HERO WALK — {walk['why']}")
     if cast_cap > 0:
         cast = cast[:cast_cap]
+    return _run_cast(seq, museum, rows, anchors, cast, cast_context, walk=walk)
+
+
+def _apply_walk(walk: dict[str, Any], cast_context: dict[str, Any]) -> list[str]:
+    """Write a walk's roles into cast_context; return its cast."""
+    walk_kind_of: dict[str, str] = {}
+    for r in walk["rows"]:
+        tok = r["lookup"]
+        cast_context.setdefault(tok, {})
+        if tok in walk_kind_of:
+            # a second role for the same body (the hero can be its own
+            # antithesis): the first kind stands, the rest ride as `also`
+            cast_context[tok].setdefault("walk_also", []).append(
+                {"kind": r["walk_kind"], "why": r.get("why", "")})
+            continue
+        walk_kind_of[tok] = r["walk_kind"]
+        cast_context[tok]["walk_kind"] = r["walk_kind"]
+        cast_context[tok]["walk_why"] = r.get("why", "")
+        cast_context[tok]["walk_space"] = r.get("space", "wall")   # wall | alcove | room
+        if walk.get("pearl"):
+            cast_context[tok]["pearl"] = walk["pearl"]
+    return list(walk["cast"])
+
+
+def _run_cast(seq: str, museum: str, rows: int, anchors: list[str], cast: list[str],
+              cast_context: dict[str, Any], walk: dict[str, Any] | None, skip: bool = False) -> dict[str, Any]:
+    """Negotiate one cast into `museum` and report — the body of run_sequence."""
+    walk_kind_of: dict[str, str] = {t: str(c.get("walk_kind")) for t, c in cast_context.items() if c.get("walk_kind")}
 
     # dressing rooms — read-only. A body with no file still negotiates (the
     # contract falls back to the measured AABB), but it negotiates from a guess,
@@ -178,7 +233,10 @@ def run_sequence(seq: str, museum: str, rows: int, relations: int = 2,
             authored += 1
 
     plan = from_museum(museum, apron=APRON)
-    _, placements, occ = negotiate_run(list(cast), plan=plan)
+    if skip:
+        placements, occ = [], None
+    else:
+        _, placements, occ = negotiate_run(list(cast), plan=plan)
 
     acc = [p for p in placements if p.result == "ACCEPT"]
     interior = [p for p in acc if p.venue == "interior"]
@@ -194,7 +252,7 @@ def run_sequence(seq: str, museum: str, rows: int, relations: int = 2,
     rel = json.loads(RELATIONS.read_text(encoding="utf-8")).get("artifacts", {}) \
         if RELATIONS.exists() else {}
     runs: list[dict[str, Any]] = []
-    for a in anchors:
+    for a in (anchors if not skip else []):
         axes = (rel.get(a) or {}).get("axes") or {}
         if not axes:
             continue
@@ -323,10 +381,29 @@ def write_plan(result: dict[str, Any], out: Path) -> dict[str, Any]:
         # EVERY chapter is planned, displaced or not. The v1 loop `continue`d
         # here before plan_museum ever ran, so a displaced chapter's cast was
         # not merely unfindable — it was never negotiated into its building.
-        m = plan_museum(key, list(r["cast"]), list(r.get("anchor_tokens", [])),
-                        dict(r.get("cast_context", {})))
-        m["sequence"] = r["sequence"]
-        plans.append({"museum": key, **m})
+        #
+        # THE PEARLS: a chapter that ran as a string of pearls gets ONE ROW PER
+        # PEARL (`pearl`, `pearl_index`, `map`), each its own negotiation into
+        # the same building — the museum builds one segment per row, in order.
+        # The first pearl also stands as the chapter's whole-row for readers
+        # that key by (museum, sequence) alone, so nothing older goes blank.
+        if r.get("pearls"):
+            first: dict[str, Any] | None = None
+            for pr in r["pearls"]:
+                m = plan_museum(key, list(pr["cast"]), list(r.get("anchor_tokens", [])),
+                                dict(pr.get("cast_context", {})))
+                m["sequence"] = r["sequence"]
+                m["pearl"] = pr["pearl"]; m["pearl_index"] = pr["pearl_index"]; m["map"] = pr.get("map", "")
+                m["pearls_total"] = len(r["pearls"]); m["hero"] = pr.get("hero_walk", {}).get("hero", "")
+                plans.append({"museum": key, **m})
+                if first is None:
+                    first = m
+            m = first or {"sequence": r["sequence"]}
+        else:
+            m = plan_museum(key, list(r["cast"]), list(r.get("anchor_tokens", [])),
+                            dict(r.get("cast_context", {})))
+            m["sequence"] = r["sequence"]
+            plans.append({"museum": key, **m})
         if key in owner:
             displaced.append({"sequence": r["sequence"], "museum": key,
                               "held_by": owner[key]})

@@ -100,8 +100,83 @@ def hero_walk(chapter: str, trunk: dict[str, Any] | None = None) -> dict[str, An
                     f"({len(hand)} hand-authored) instead of the {node.get('tokens', '?')}-token spine list")}
 
 
+# ── the pearls' walks (2026-08-18) ────────────────────────────────────
+#
+# A node is a STRING of heroes (build_trunk_pearls.py): its maps in book
+# order, each with a hero and sibling tokens. The museum builds ONE SEGMENT
+# PER PEARL, so each pearl casts its own walk: hero first, then its own
+# siblings (walk_kind "sibling" — the map's bodies, spine order), then the
+# branches anchored on that pearl in the same kind order as hero_walk. NO
+# HAND GATE here: the string IS the maps, which the book already walks, so
+# a pearl walks whether or not anyone has read it yet; a hand branch on the
+# pearl enriches the walk instead of switching it on.
+SIBLING_CAP = 12       # a 20-token map (primitives/ignorance) still fits its segment
+
+
+def pearl_walks(chapter: str, trunk: dict[str, Any] | None = None) -> list[dict[str, Any]]:
+    """One walk per pearl of `chapter`, in string order; [] when the node has no pearls."""
+    trunk = trunk if trunk is not None else load_trunk()
+    if not trunk:
+        return []
+    node = next((t for t in trunk.get("trunk", []) if t.get("node") == chapter), None)
+    if not node or not node.get("pearls"):
+        return []
+    branches = [b for b in trunk.get("branches", []) if b.get("anchor") == chapter]
+    walks: list[dict[str, Any]] = []
+    for p in node["pearls"]:
+        name = p.get("pearl", "")
+        hero = p.get("hero") or (p.get("tokens") or [""])[0]
+        if not hero:
+            continue
+        rows: list[dict[str, Any]] = [{"lookup": hero, "walk_kind": "hero", "why": f"the hero of {name} ({p.get('hero_by', '')})", "provenance": "trunk", "space": "wall"}]
+        seen = {hero}
+        sib = 0
+        for tok in p.get("tokens", []):
+            if tok in seen or sib >= SIBLING_CAP:
+                continue
+            seen.add(tok); sib += 1
+            rows.append({"lookup": tok, "walk_kind": "sibling", "why": f"a body of the {name} pearl ({p.get('map', '')})", "provenance": "map", "space": "wall"})
+        mine = [b for b in branches if b.get("pearl") == name]
+        hand = [b for b in mine if b.get("provenance") == "hand"]
+        for kind in WALK_ORDER[1:]:
+            ks = [b for b in mine if b.get("kind") == kind]
+            ks.sort(key=lambda b: (0 if b.get("provenance") == "hand" else 1))
+            cap = DERIVED_CAP.get(kind, 4)
+            n_der = 0
+            for b in ks:
+                tok = b.get("token")
+                if not tok:
+                    continue
+                if tok in seen and b.get("provenance") != "hand":
+                    continue
+                if b.get("provenance") != "hand":
+                    if n_der >= cap:
+                        continue
+                    n_der += 1
+                seen.add(tok)
+                rows.append({"lookup": tok, "walk_kind": kind, "why": b.get("why", ""), "provenance": b.get("provenance", "derived"),
+                             "via": b.get("via", ""), "space": b.get("space", "wall")})
+        uniq: list[str] = []
+        for r in rows:
+            if r["lookup"] not in uniq:
+                uniq.append(r["lookup"])
+        walks.append({"chapter": chapter, "pearl": name, "pearl_index": int(p.get("index", len(walks))), "map": p.get("map", ""),
+                      "hero": hero, "hand_branches": len(hand), "cast": uniq, "rows": rows,
+                      "why": f"pearl {name}: {hero} + {sib} siblings + {len(rows) - 1 - sib} branches ({len(hand)} hand)"})
+    return walks
+
+
 def main() -> int:
     ch = sys.argv[1] if len(sys.argv) > 1 else "noise"
+    if len(sys.argv) > 2 and sys.argv[2] == "--pearls":
+        ws = pearl_walks(ch)
+        if not ws:
+            print(f"{ch}: no pearls (run tools/build_trunk_pearls.py)"); return 1
+        for w in ws:
+            print(f"{w['pearl_index'] + 1:2d}. {w['why']}")
+            for r in w["rows"]:
+                print(f"      {r['walk_kind']:12s} {r['lookup']:34s} {r['provenance']:8s} {r['why'][:60]}")
+        return 0
     w = hero_walk(ch)
     if not w:
         t = load_trunk()

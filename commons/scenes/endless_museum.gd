@@ -175,6 +175,12 @@ var _white_cube: bool = false
 # Solid volume is unchanged, so collision is unchanged.
 var _wall_runs: bool = false
 var _plan_path: String = ""       # --em-plan[=res://...]; empty = deal as before
+# THE PEARLS (2026-08-18). A chapter may arrive as a STRING of plan rows —
+# one per pearl (`pearl`, `pearl_index`) — and then builds ONE SEGMENT PER
+# PEARL: the cursor holds the chapter until its string is walked. Keyed
+# "building|sequence" -> rows in pearl order; _pearl_cursor[chapter] = next.
+var _plan_pearls: Dictionary = {}
+var _pearl_cursor: Dictionary = {}
 var _plan_db: Dictionary = {}     # museum key -> {artifacts:[...]} (v1, first-wins)
 var _plan_by_chapter: Dictionary = {}  # "museum|sequence" -> row (v2; a shared building carries one row PER chapter)
 # ── the court queue ──────────────────────────────────────────────────────────
@@ -1648,8 +1654,13 @@ func _build_segment() -> void:
 	var banner: Node3D = TextScreenRes.new()
 	banner.mode = TextScreenRes.Mode.SCREEN
 	banner.title = String(spec["label"])
-	# the banner names the building AND the chapter it houses
-	banner.body = ("%s\n\n%s" % [spec["museum"], seg_seq]) if seg_seq != "" else String(spec["museum"])
+	# the banner names the building AND the chapter it houses — and the PEARL,
+	# when the chapter arrived as a string: "primitives · lines (2/11)"
+	var seg_label := seg_seq
+	if deal is Dictionary and String(deal.get("pearl", "")) != "":
+		seg_label = "%s · %s (%d/%d)" % [seg_seq, String(deal.get("pearl", "")),
+			int(deal.get("pearl_index", 0)) + 1, int(deal.get("pearls_total", 0))]
+	banner.body = ("%s\n\n%s" % [spec["museum"], seg_label]) if seg_seq != "" else String(spec["museum"])
 	banner.title_color = legend.lightened(0.35)   # ink on a panel, not light on a wall
 	banner.width_m = BANNER_W
 	banner.position = Vector3(BANNER_X, BANNER_Y, BANNER_Z)
@@ -1875,9 +1886,24 @@ func _load_plan() -> void:
 				var mk := String((r as Dictionary).get("museum", ""))
 				var sq := String((r as Dictionary).get("sequence", ""))
 				if mk != "" and sq != "":
-					_plan_by_chapter["%s|%s" % [mk, sq]] = r
+					if (r as Dictionary).has("pearl"):
+						var pk := "%s|%s" % [mk, sq]
+						if not _plan_pearls.has(pk):
+							_plan_pearls[pk] = []
+						(_plan_pearls[pk] as Array).append(r)
+						if not _plan_by_chapter.has(pk):
+							_plan_by_chapter[pk] = r      # the first pearl stands as the chapter's row for older readers
+					else:
+						_plan_by_chapter["%s|%s" % [mk, sq]] = r
 					if not _plan_owner.has(sq):
 						_plan_owner[sq] = mk
+	for pk in _plan_pearls.keys():
+		(_plan_pearls[pk] as Array).sort_custom(func(a, b): return int(a.get("pearl_index", 0)) < int(b.get("pearl_index", 0)))
+	if not _plan_pearls.is_empty():
+		var n_pearls: int = 0
+		for pk in _plan_pearls.keys():
+			n_pearls += (_plan_pearls[pk] as Array).size()
+		print("[em-plan] %d chapter(s) arrive as a STRING of pearls — %d pearl row(s), one segment each" % [_plan_pearls.size(), n_pearls])
 	print("[em-plan] %d museum(s), %d chapter row(s) planned from %s"
 		% [_plan_db.size(), _plan_by_chapter.size(), _plan_path])
 	if _mod_has(_mod_editor, "load_file"):
@@ -1926,17 +1952,45 @@ const ROOM_GAP := 2
 const ROOM_Z0 := 4    # first room starts this many tile rows past the vestibule
 
 
+## The plan row for THIS segment: the chapter's current PEARL when the chapter
+## arrived as a string, else the chapter's row, else the v1 building dict.
+## Both the deal and the side-room doorways read through here, so they can
+## never disagree about which pearl the segment is for. Does not advance.
+func _plan_entry(key: String, chapter: String) -> Dictionary:
+	var pk := "%s|%s" % [key, chapter]
+	if chapter != "" and _plan_pearls.has(pk):
+		var rows: Array = _plan_pearls[pk]
+		var i: int = int(_pearl_cursor.get(chapter, 0)) % maxi(1, rows.size())
+		return rows[i]
+	if chapter != "" and _plan_by_chapter.has(pk):
+		return _plan_by_chapter[pk]
+	if _plan_db.has(key):
+		return _plan_db[key]
+	return {}
+
+
+## After a segment: advance the pearl cursor; true when the chapter still has
+## pearls left (so the pool cursor must HOLD), false when the string is walked
+## (cursor reset for the next time the spine wraps to this chapter).
+func _advance_pearl(key: String, chapter: String) -> bool:
+	var pk := "%s|%s" % [key, chapter]
+	if not _plan_pearls.has(pk):
+		return false
+	var rows: Array = _plan_pearls[pk]
+	var i: int = int(_pearl_cursor.get(chapter, 0)) + 1
+	if i < rows.size():
+		_pearl_cursor[chapter] = i
+		return true
+	_pearl_cursor[chapter] = 0
+	return false
+
+
 ## The tile rows whose east-skin cell becomes a doorway - decided from the
 ## PLAN before the skin is stamped. Same plan resolution as _deal_from_plan;
 ## a chapter with no room rows returns {} and the skin is byte-identical.
 func _side_room_doorways(spec: Dictionary, chapter: String, tile_h: int) -> Dictionary:
 	var out: Dictionary = {}
-	var key := String(spec.get("key", ""))
-	var entry: Dictionary = {}
-	if chapter != "" and _plan_by_chapter.has("%s|%s" % [key, chapter]):
-		entry = _plan_by_chapter["%s|%s" % [key, chapter]]
-	elif _plan_db.has(key):
-		entry = _plan_db[key]
+	var entry: Dictionary = _plan_entry(String(spec.get("key", "")), chapter)
 	if entry.is_empty():
 		return out
 	var n: int = 0
@@ -2286,13 +2340,12 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 	# did. A v2 file with no row for THIS chapter falls through to the v1 view
 	# rather than to silence, which keeps generic plans (export_museum_plan
 	# --all, no chapter to key by) working unchanged.
-	var entry: Dictionary = {}
-	if chapter != "" and _plan_by_chapter.has("%s|%s" % [key, chapter]):
-		entry = _plan_by_chapter["%s|%s" % [key, chapter]]
-	elif _plan_db.has(key):
-		entry = _plan_db[key]
+	var entry: Dictionary = _plan_entry(key, chapter)
 	if entry.is_empty():
 		return {}
+	if entry.has("pearl"):
+		print("[em-pearl] %s · %s (%d/%d) — hero %s" % [chapter, String(entry.get("pearl", "")),
+			int(entry.get("pearl_index", 0)) + 1, int(entry.get("pearls_total", 0)), String(entry.get("hero", ""))])
 	var rows: Array = entry.get("artifacts", [])
 	if rows.is_empty():
 		return {}
@@ -2520,7 +2573,9 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 		"max_objects": rows.size(), "class": "planned",
 		"budget": {}, "wall_features_max": -1, "fill_walls": true,
 		"from_plan": true, "exterior_unhosted": exterior,
-		"courts": courts, "forecourt": forecourt, "walk_kinds": walk_kinds, "side_rooms": side_rooms}
+		"courts": courts, "forecourt": forecourt, "walk_kinds": walk_kinds, "side_rooms": side_rooms,
+		"pearl": String(entry.get("pearl", "")), "pearl_index": int(entry.get("pearl_index", -1)),
+		"pearls_total": int(entry.get("pearls_total", 0)), "pearl_hero": String(entry.get("hero", ""))}
 
 
 ## Step the dealing cursor past every remaining entry of the chapter it is
@@ -2568,7 +2623,10 @@ func _deal_segment(seg: Node3D, slots: Array, zbase: int, spec: Dictionary,
 			# chapter forever. Invisible until now because every `--em-plan`
 			# run used `--em-segments=1` and every multi-segment run omitted
 			# `--em-plan`. See doc/spatial/spikes/04_one_building_two_chapters.md.
-			_advance_pool_past_chapter()
+			# THE PEARLS hold the chapter: one segment per pearl, the pool
+			# cursor moves on only when the string is walked
+			if not _advance_pearl(mkey, chapter):
+				_advance_pool_past_chapter()
 			return planned
 
 	var budget: Dictionary = _segment_budget(w, h, slots, mkey, tile,
