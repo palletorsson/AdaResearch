@@ -90,6 +90,7 @@ def main() -> int:
     shutil.copy(OUT, tmp)
     before = json.loads(tmp.read_text(encoding="utf-8"))
     hand0 = int(before["counts"].get("hand", 0))
+    pend0 = len(before.get("pending", []))          # the live file may already hold candidates
     info = write_pending(rows, tmp)
     if info["added"] != len(rows):
         fails.append(f"write_pending added {info['added']} of {len(rows)}")
@@ -100,8 +101,8 @@ def main() -> int:
     subprocess.run([sys.executable, str(REPO / "tools" / "build_trunk_branches.py"), "--out", str(tmp)],
                    check=True, capture_output=True, cwd=REPO)
     d = json.loads(tmp.read_text(encoding="utf-8"))
-    if len(d.get("pending", [])) != len(rows):
-        fails.append(f"the seeder lost pending on reseed ({len(d.get('pending', []))} of {len(rows)})")
+    if len(d.get("pending", [])) != pend0 + len(rows):
+        fails.append(f"the seeder lost pending on reseed ({len(d.get('pending', []))} of {pend0 + len(rows)})")
     # keep: the queers reading becomes a hand branch on primitives (python twin of the API's op:keep)
     pick = next(p for p in d["pending"] if "also always measure" in p["why"])
     pick_kind = pick["kind"] or "queers"

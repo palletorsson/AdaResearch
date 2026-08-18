@@ -222,10 +222,15 @@ def main() -> int:
         # by hero_walk or the museum until kept.
         "pending": prev.get("pending", []),
         "pending_dropped": prev.get("pending_dropped", []),
+        "hand_pearls": prev.get("hand_pearls", {}),      # pearl renames / heroes / drops / order — hand, kept
         "counts": {"trunk": len(d["trunk"]), "derived": len(derived), "hand": len(hand),
                    "pending": len(prev.get("pending", [])),
                    "by_kind": {k: sum(1 for b in derived + hand if b["kind"] == k) for k in KINDS}},
     }
+    # the PEARLS — a node is a string of heroes (its maps), see build_trunk_pearls.py;
+    # seeded here too so a reseed never leaves the trunk pearl-less
+    from build_trunk_pearls import seed as seed_pearls   # noqa: E402  (no cycle: pearls imports nothing from here)
+    doc = seed_pearls(doc)
     out.write_text(json.dumps(doc, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
     print(f"trunk {len(d['trunk'])} nodes · branches {len(derived)} derived + {len(hand)} hand · "
           f"{len(doc['pending'])} pending -> {out}")
