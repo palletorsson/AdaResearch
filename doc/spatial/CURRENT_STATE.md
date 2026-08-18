@@ -5,6 +5,46 @@
 
 Updated 2026-08-15.
 
+## 08-18 — the pearls: a chapter is a STRING of heroes, one segment each
+
+Palle: "the primitive endless museum does not show all the primitive
+sequences… what we want is a pearl of heroes like the point, line, the
+trace, the grid, triangle… then their siblings… this should be reflected in
+the museum." The trunk had one node per sequence, one hero, one building
+per chapter: primitives' 82 tokens became 28 interior bodies in first-come
+order. But the sequence's MAPS are the string already.
+
+- `tools/build_trunk_pearls.py` seeds `pearls` under every node from its
+  maps (pearl · map · hero from the dig else the map's first token · tokens
+  · blurb) and re-anchors branches to their pearl (1504/1544); the seeder
+  seeds them too. 269 pearls / 24 nodes; primitives = 11. Hand rulings in
+  `hand_pearls[node]`: rename / hero / drop / order / tokens_add /
+  tokens_remove / new — kept on reseed.
+- **`/pearls?node=X`** — CRUD + sort: drag rows, drag token chips between
+  pearls (split/merge), click-to-hero, rename inline, + pearl, × drop,
+  reset. Each action = ruling + reseed. API `op: pearls`.
+- `hero_walk.pearl_walks`: one walk per pearl — hero, siblings (walk_kind
+  "sibling"), then the pearl's branches in kind order; NO hand gate (the
+  string is the maps). Un-pearled branches ride with the pearl holding
+  their via / the node's hero / the first.
+- `spine_run`: a chapter with pearls negotiates one pearl at a time; the
+  plan carries ONE ROW PER PEARL (`pearl`, `pearl_index`, `map`,
+  `pearls_total`, `hero`) — regenerated: 219 pearl rows; primitives is now
+  11 segments (point 17 · lines 26 · trace 6 · line grid 5 · triangle 19 ·
+  polythedra 13 · animatedcube 3 · primitives 2 · ignorance 25 · portals 3
+  · melencolia 11 placed) instead of one of 28; refusals 91 → 29.
+- Museum (`1dc6a2a9f`, `ac78d0ef2`): `_plan_pearls`, `_plan_entry()` for
+  the deal AND the side-room doorways, `_advance_pearl` holds the pool
+  cursor through the string, banner "primitives · lines (2/11)"; gate
+  `pearls` (14 gates). Inspector `start_chapter` / `start_map` on the scene
+  root (flag > Inspector > em_control.json). Plan view + web editor have a
+  pearl select.
+
+Known: tiny map pearls (1–2 tokens) make near-empty segments (noise ·
+columns placed 0/1) — merge them on `/pearls`; the map string is honest,
+not yet curated. Un-pearled hand reading needs one more regen to land in
+its pearl's plan row.
+
 ## 08-17 (evening) — the trunk, its branches, and the side room
 
 Palle: "the order of the artifacts is some kind of ontology… start with a
