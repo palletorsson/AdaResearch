@@ -46,7 +46,15 @@ func _build(vr: bool) -> Dictionary:
 	m.set("_plan_path", "res://ada_run/em_plan.json")
 	m.set("_force_vr", vr)
 	get_root().add_child(m)
-	await create_timer(4.0).timeout
+	# wait for two segments (the museum opens the second on its own at boot),
+	# up to 12 s — a fixed 4 s wait once caught VR at one segment and desktop at two
+	var waited: float = 0.0
+	while waited < 12.0:
+		await create_timer(0.5).timeout
+		waited += 0.5
+		if (m.get("_built") as Array).size() >= 2:
+			break
+	await create_timer(0.5).timeout
 	m.queue_free()
 	await create_timer(0.5).timeout
 	if not FileAccess.file_exists(BUILT): return {}

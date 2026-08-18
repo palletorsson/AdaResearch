@@ -37,6 +37,12 @@
 		"autosave_seconds": 0.6,
 		"snap_m": 0.2
 	},
+	"rig": {
+		"plain_hands": true,
+		"_plain_hands": "in VR the hand is a visitor's hand: collision hand + pickup + pointer + mesh. On, the wrist tools below come off every rig in the tree, an activated catalyst bracelet is ended, and every token in no_pickup is shown but cannot be grabbed (grabbing one would put the bracelet on the hand). Palle, 2026-08-18: 'No bracelet, no editing tool, just the VR hands.'",
+		"wrist_tools": ["HandWorkstationVR", "messageconsole", "WristStatsDisplay", "GravityGun"],
+		"no_pickup": ["catalyst_pedestal", "catalyst_pickup", "becoming_catalyst", "catalyst_prompter_box", "catalyst_vent", "catalyst_target", "wedge_skill_pickup", "catalyst_sustain_demo"]
+	},
 	"stream": {
 		"build_ahead_m": 24.0,
 		"_build_ahead_m": "open the next segment when the eye is this close to the built edge",

@@ -61,6 +61,7 @@ GATES: dict[str, tuple[str, str, str, int]] = {
     "vr_eye":        ("gd", "res://commons/testing/test_em_vr_eye.gd", r"EM VR EYE: (PASS|FAIL)", 400),
     "mode_forks":    ("py", "tools/test_em_mode_forks.py", r"MODE FORKS: (PASS|FAIL)", 30),
     "built":         ("gd", "res://commons/testing/test_em_built.gd", r"EM BUILT: (PASS|FAIL)", 400),
+    "plain_hands":   ("gd", "res://commons/testing/test_em_plain_hands.gd", r"EM PLAIN HANDS: (PASS|FAIL)", 400),
 }
 
 

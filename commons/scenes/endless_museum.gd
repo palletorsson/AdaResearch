@@ -1257,6 +1257,64 @@ func _eye_pos() -> Vector3:
 		return e.global_position if e != null else Vector3(7.5, EYE, 0.0)
 	return _cam.global_position if _cam != null else Vector3.ZERO
 
+## PLAIN HANDS (2026-08-18). Palle: "Can I have just the hands we've been
+## working with for most of the project. No bracelet, no editing tool, just
+## the VR hands." The rig (base.tscn) grew a wrist workstation, a message
+## console, a wrist stats label and a gravity gun over the spring; the plan
+## deals catalyst pedestals and pickups into the rooms, and grabbing one puts
+## the capacity bracelet on the hand for the rest of the session. In the
+## museum the hand is a visitor's hand: XRToolsCollisionHand + FunctionPickup
+## + FunctionPointer + the hand mesh, nothing else. So: the wrist tools come
+## off every rig in the tree, an activated bracelet is ended, and every
+## catalyst body the plan deals is shown but not pickable. Config:
+## em_layout.rig.plain_hands (default on), rig.wrist_tools, rig.no_pickup.
+const RIG_WRIST_TOOLS := ["HandWorkstationVR", "messageconsole", "WristStatsDisplay", "GravityGun"]
+const RIG_NO_PICKUP := ["catalyst_pedestal", "catalyst_pickup", "becoming_catalyst", "catalyst_prompter_box",
+	"catalyst_vent", "catalyst_target", "wedge_skill_pickup", "catalyst_sustain_demo"]
+var _plain: bool = true
+func _plain_hands() -> void:
+	_plain = _L("rig", "plain_hands", 1.0) > 0.5
+	if not _plain:
+		return
+	var tools: Array = _layout_list("rig", "wrist_tools", RIG_WRIST_TOOLS)
+	var removed: int = 0
+	var origins: Array = []
+	_collect_of_type(get_tree().get_root(), "XROrigin3D", origins)
+	for o in origins:
+		for nm in tools:
+			for n in (o as Node).find_children(String(nm), "", true, false):
+				(n as Node).queue_free()
+				removed += 1
+	var mgr: Node = get_node_or_null("/root/CatalystCapabilityManager")
+	if mgr != null and mgr.has_method("is_bracelet_activated") and bool(mgr.call("is_bracelet_activated")) 			and mgr.has_method("end_lease_now"):
+		mgr.call("end_lease_now")
+		print("[endless_museum] plain hands: an activated bracelet was ended")
+	print("[endless_museum] plain hands: %d wrist tool(s) removed from %d rig(s)" % [removed, origins.size()])
+
+## A body the plan dealt that would put a tool on the hand: shown, not grabbed.
+func _plain_hands_disarm(node: Node3D, lookup: String) -> int:
+	if not _plain:
+		return 0
+	if not _layout_list("rig", "no_pickup", RIG_NO_PICKUP).has(lookup):
+		return 0
+	var n_off: int = 0
+	var stack: Array = [node]
+	while not stack.is_empty():
+		var n: Node = stack.pop_back()
+		for c in n.get_children():
+			stack.append(c)
+		if n.has_method("pick_up") and n.has_method("let_go") and "enabled" in n:
+			n.set("enabled", false)
+			n_off += 1
+	return n_off
+
+func _layout_list(section: String, key: String, fallback: Array) -> Array:
+	_L("_", "_", 0.0)   # loads _layout (a key that is never a list)
+	var sec: Variant = _layout.get(section)
+	if sec is Dictionary and (sec as Dictionary).get(key) is Array:
+		return (sec as Dictionary)[key]
+	return fallback
+
 func _setup_world() -> void:
 	if _vr:
 		_mode_label = "vr"
@@ -1276,6 +1334,7 @@ func _setup_world() -> void:
 			bounds.set("box_bounds", Vector3(20.0, 10.0, 1.0e12))
 			print("[endless_museum] PlayerBoundsCheck reshaped for the museum: x ±20, y ±10, z unbounded")
 		print("[endless_museum] VR: building only — the XR rig owns the walker")
+		_plain_hands()
 		return
 	# the walker is a body, not a gliding camera: a capsule the walls and
 	# podiums can push back on. No gravity — the deck is flat by construction,
@@ -2654,17 +2713,22 @@ func _write_built(seg: Node3D, chapter: String, deal: Variant, zbase: int, w: in
 		"gate": {"sealed": not _gate.is_empty()} if seg_no == 0 else {},
 		"mode": _mode_label,   # a LABEL for the diff, decided in _setup_world; not a fork in what is built
 	})
-	var f: FileAccess = FileAccess.open(BUILT_PATH, FileAccess.WRITE)
-	if f == null:
-		return
-	f.store_string(JSON.stringify({"schema": "adaresearch.em_built.v1",
+	var txt: String = JSON.stringify({"schema": "adaresearch.em_built.v1",
 		"_readme": ("The AS-BUILT plan: what the assembler actually made of each segment this run — every "
 			+ "cell's role, every body's final world pose and inventory number, every card, courts, rooms, "
 			+ "the gate, the mode. Written as each segment finishes. Read this instead of re-deriving the "
 			+ "floor plan; diff two runs (vr vs desktop) to prove parity."),
 		"plan": String(_plan_path), "at": Time.get_datetime_string_from_system(false, true),
-		"segments": _built}, "	"))
-	f.close()
+		"segments": _built}, "	")
+	# the latest run, AND one file per mode that survives the other mode's run —
+	# so after a headset walk and a desktop walk,
+	#   python tools/em_built.py --diff ada_run/em_built_desktop.json ada_run/em_built_vr.json
+	# answers "did VR build the same museum?" from the two files alone.
+	for path in [BUILT_PATH, BUILT_PATH.replace(".json", "_%s.json" % _mode_label)]:
+		var f: FileAccess = FileAccess.open(path, FileAccess.WRITE)
+		if f != null:
+			f.store_string(txt)
+			f.close()
 
 
 ## The forecourt builder. Returns the after-porch depth it added (0 if none).
@@ -3493,6 +3557,9 @@ func _stamp_plan_wall_variant(seg: Node3D, scene_path: String, lookup: String,
 	node.rotation.y = atan2(normal.x, normal.z)
 	node.position = target
 	seg.add_child(node)
+	# a catalyst body builds its pickables in _ready: disarm them a frame later
+	if _plain and _layout_list("rig", "no_pickup", RIG_NO_PICKUP).has(lookup):
+		get_tree().create_timer(0.3).timeout.connect(_plain_hands_disarm.bind(node, lookup))
 	var box: AABB = _extent_of(node)
 	if box.size.length_squared() < 0.000001:
 		seg.remove_child(node)
@@ -4137,6 +4204,9 @@ func _stamp(seg: Node3D, scene_path: String, lookup: String, cell: Dictionary,
 	if not is_zero_approx(yaw_deg):
 		node.rotation_degrees.y = yaw_deg
 	seg.add_child(node)
+	# a catalyst body builds its pickables in _ready: disarm them a frame later
+	if _plain and _layout_list("rig", "no_pickup", RIG_NO_PICKUP).has(lookup):
+		get_tree().create_timer(0.3).timeout.connect(_plain_hands_disarm.bind(node, lookup))
 	# ── DOES IT FIT THE SLOT IT WAS DEALT? ──────────────────────────────────
 	# `_seal_cells` clamps to MAX_SEAL_RADIUS, so it can only take 5x5 cells out
 	# of the walk map however big the thing actually is. For a curriculum artifact
