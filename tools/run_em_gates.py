@@ -49,6 +49,8 @@ GATES: dict[str, tuple[str, str, str, int]] = {
     "jump":          ("gd", "res://commons/testing/test_em_jump.gd", r"EM JUMP: (PASS|FAIL|SKIP)", 300),
     "live_footprint":("gd", "res://commons/testing/test_em_live_footprint.gd", r"LIVE FOOTPRINT \(museum\): (PASS|FAIL)", 300),
     "live_contract": ("py", "tools/test_live_footprint.py", r"LIVE FOOTPRINT: (PASS|FAIL)", 60),
+    "balcony_ask":   ("py", "tools/test_balcony_ask.py", r"BALCONY ASK: (PASS|FAIL)", 120),
+    "hall":          ("gd", "res://commons/testing/test_em_hall.gd", r"EM HALL: (PASS|FAIL)", 500),
 }
 
 
