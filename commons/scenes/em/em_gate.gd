@@ -34,7 +34,7 @@ const SCAN_CONE := 0.55            # desktop: radians off the crosshair
 ## {door, scanner, colliders: [CollisionShape3D], open: false} or {} when the
 ## scenes are missing (the museum then behaves exactly as before).
 static func build(seg: Node3D, solid: StaticBody3D, w: int, wall_col: Color,
-		mat_wall: Material) -> Dictionary:
+		mat_wall: Material, layout: Dictionary = {}) -> Dictionary:
 	if not ResourceLoader.exists(DOOR_SCENE) or not ResourceLoader.exists(SCANNER_SCENE):
 		push_warning("[em-gate] door or scanner scene missing — no gate built")
 		return {}
