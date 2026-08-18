@@ -71,7 +71,13 @@ var _generated := false
 func _ready() -> void:
 	# Wait multiple frames for apply_grid_config to potentially be called (it uses call_deferred)
 	await get_tree().process_frame
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 	if not _config_applied and not _generated:
 		# No config was applied, generate with defaults

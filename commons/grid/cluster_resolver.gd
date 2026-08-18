@@ -83,6 +83,9 @@ func _settle() -> void:
 	# Let the deferred-built station geometry settle, then re-seat each CONTENT artifact onto the
 	# base beneath it at its real measured height + hide its floating chrome (Label3D / UI / camera).
 	for _i in range(40):
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().process_frame
 	for n in _placed:
 		if not is_instance_valid(n):

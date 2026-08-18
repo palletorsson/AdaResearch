@@ -91,6 +91,9 @@ func _connect_to_grid_system():
 				print("MapInfoLabel: Connected to GridSystem")
 	else:
 		# Retry after a delay
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().create_timer(1.0).timeout
 		_connect_to_grid_system()
 

@@ -298,6 +298,9 @@ func update_all_chunks() -> void:
 		
 		# Yield periodically to prevent blocking
 		if processed % chunks_per_frame == 0:
+			# out-of-tree guard: get_tree() is null once a map is torn down
+			if not is_inside_tree():
+				await tree_entered
 			await get_tree().process_frame
 
 func update_chunk_mesh(chunk: TerrainChunk) -> void:

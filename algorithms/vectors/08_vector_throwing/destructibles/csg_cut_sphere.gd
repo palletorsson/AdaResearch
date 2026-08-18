@@ -154,6 +154,9 @@ func _on_piece_hit(body: Node, piece: RigidBody3D) -> void:
 		# First cut once if it's the whole sphere
 		if data.split_level == 0:
 			await _cut_piece_with_csg(piece, data, impact_point, impact_velocity)
+			# out-of-tree guard: get_tree() is null once a map is torn down
+			if not is_inside_tree():
+				await tree_entered
 			await get_tree().create_timer(0.1).timeout
 		# Then shatter all pieces
 		_shatter_all_pieces(impact_velocity, impact_point)
@@ -315,6 +318,9 @@ func _shatter_all_pieces(impact_velocity: Vector3, impact_point: Vector3) -> voi
 	piece_data.clear()
 
 	fully_fragmented.emit(self)
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(4.0).timeout
 	queue_free()
 

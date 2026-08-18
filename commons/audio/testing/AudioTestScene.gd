@@ -21,12 +21,21 @@ func _ready():
 	
 	# Test each sound with delays
 	test_sound(TrackSound.DARK_808_KICK, "808 Kick")
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(2.0).timeout
 	
 	test_sound(TrackSound.ACID_606_HIHAT, "606 Hi-Hat")
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(1.5).timeout
 	
 	test_sound(TrackSound.DARK_808_SUB_BASS, "808 Sub Bass")
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(3.0).timeout
 	
 	test_sound(TrackSound.AMBIENT_DRONE, "Ambient Drone")

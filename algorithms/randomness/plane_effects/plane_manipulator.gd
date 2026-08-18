@@ -16,6 +16,9 @@ func _ready() -> void:
 	set_process(false)
 	# Wait a bit longer for the plane to be fully instantiated
 	await get_tree().process_frame
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 	
 	

@@ -130,6 +130,9 @@ func activate() -> void:
 	visible = false
 	
 	# Respawn after the respawn time
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(respawn_time).timeout
 	_respawn()
 

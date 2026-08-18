@@ -295,6 +295,9 @@ func _build_real_grid() -> void:
 	var old := get_node_or_null("GridSystem")
 	if old:
 		old.queue_free()
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().process_frame
 
 	_grid_system = GridSystemScene.instantiate()
@@ -308,6 +311,9 @@ func _build_real_grid() -> void:
 		await _grid_system.map_generation_complete
 	else:
 		for _i in range(12):
+			# out-of-tree guard: get_tree() is null once a map is torn down
+			if not is_inside_tree():
+				await tree_entered
 			await get_tree().process_frame
 
 	# Find the structure component.

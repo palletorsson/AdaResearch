@@ -248,6 +248,9 @@ func bubble_sort(algo_idx) -> void:
 			
 			if bar_data[algo_idx][j] > bar_data[algo_idx][j + 1]:
 				swap_bars(algo_idx, j, j + 1)
+				# out-of-tree guard: get_tree() is null once a map is torn down
+				if not is_inside_tree():
+					await tree_entered
 				await get_tree().create_timer(sort_delay).timeout
 	
 	# Reset highlighting when done
@@ -269,6 +272,9 @@ func selection_sort(algo_idx) -> void:
 		for j in range(i + 1, n):
 			# Highlight comparison
 			highlight_bars(algo_idx, [min_idx, j], Color(0.8, 1, 0.8))
+			# out-of-tree guard: get_tree() is null once a map is torn down
+			if not is_inside_tree():
+				await tree_entered
 			await get_tree().create_timer(sort_delay).timeout
 			
 			if bar_data[algo_idx][j] < bar_data[algo_idx][min_idx]:
@@ -276,6 +282,9 @@ func selection_sort(algo_idx) -> void:
 		
 		if min_idx != i:
 			swap_bars(algo_idx, i, min_idx)
+			# out-of-tree guard: get_tree() is null once a map is torn down
+			if not is_inside_tree():
+				await tree_entered
 			await get_tree().create_timer(sort_delay).timeout
 	
 	# Reset highlighting when done
@@ -299,12 +308,18 @@ func insertion_sort(algo_idx) -> void:
 			# Update visuals
 			update_bar_positions(algo_idx)
 			highlight_bars(algo_idx, [j, j+1], Color(0.8, 0.8, 1))
+			# out-of-tree guard: get_tree() is null once a map is torn down
+			if not is_inside_tree():
+				await tree_entered
 			await get_tree().create_timer(sort_delay).timeout
 			
 			j -= 1
 		
 		bar_data[algo_idx][j + 1] = key
 		update_bar_positions(algo_idx)
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().create_timer(sort_delay).timeout
 	
 	# Reset highlighting when done
@@ -339,14 +354,23 @@ func partition(algo_idx, low, high):
 	for j in range(low, high):
 		# Highlight comparison
 		highlight_bars(algo_idx, [j, high], Color(1, 0.9, 0.5))
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().create_timer(sort_delay).timeout
 		
 		if bar_data[algo_idx][j] <= pivot:
 			i += 1
 			swap_bars(algo_idx, i, j)
+			# out-of-tree guard: get_tree() is null once a map is torn down
+			if not is_inside_tree():
+				await tree_entered
 			await get_tree().create_timer(sort_delay).timeout
 	
 	swap_bars(algo_idx, i + 1, high)
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(sort_delay).timeout
 	
 	return i + 1

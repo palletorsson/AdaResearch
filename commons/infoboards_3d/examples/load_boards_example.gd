@@ -43,6 +43,9 @@ func example_3_runtime_switching():
 	print("Switched to Triangle!")
 
 	# Wait 3 more seconds, switch to Point
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(3.0).timeout
 	ui.switch_to_board("point")
 	print("Switched to Point!")

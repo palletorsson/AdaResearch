@@ -97,6 +97,9 @@ func run_ga_loop() -> void:
 			break
 		select_new_population()
 		current_generation += 1
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().process_frame
 	set_process(false)
 

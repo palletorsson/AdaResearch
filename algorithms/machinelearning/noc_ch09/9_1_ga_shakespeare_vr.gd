@@ -201,7 +201,13 @@ class DNA:
 				genes[i] = DNA._random_character()
 
 func _apply_standard_presentation() -> void:
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 	ARTIFACT_SCENE_PRESENTER.present(self, _sim_root)
 

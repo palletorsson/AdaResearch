@@ -151,6 +151,9 @@ func _setup_lines() -> void:
 		snap_line.locked_color = line_locked_color
 		
 		add_child(snap_line)
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().process_frame
 
 		if snap_line.endpoint_a and snap_line.endpoint_b:

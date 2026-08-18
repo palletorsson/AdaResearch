@@ -60,6 +60,9 @@ func _ready() -> void:
 func connect_ui_signals() -> void:
 	# Wait for the Viewport2Din3D to create the scene
 	await get_tree().process_frame
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 	
 	# Find the control panel in the viewport

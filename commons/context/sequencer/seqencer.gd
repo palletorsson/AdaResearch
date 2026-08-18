@@ -143,6 +143,9 @@ func play_rows_and_columns() -> void:
 				var material = tile.material_override as StandardMaterial3D
 				if material:
 					material.albedo_color = Color(0, 1, 1)  # Cyan/on color
+			# out-of-tree guard: get_tree() is null once a map is torn down
+			if not is_inside_tree():
+				await tree_entered
 			await get_tree().create_timer(speed).timeout
 			
 func play_checkerboard() -> void:

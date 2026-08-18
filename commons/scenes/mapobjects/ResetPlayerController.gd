@@ -233,6 +233,9 @@ func _perform_level_reset():
 	
 	# Brief delay for effect
 	if reset_delay > 0:
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().create_timer(reset_delay).timeout
 	
 	# Perform the actual reset

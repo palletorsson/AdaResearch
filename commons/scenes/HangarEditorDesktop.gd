@@ -117,6 +117,9 @@ func _load_map(map_name: String) -> void:
 	if _title:
 		_title.text = "  %s" % map_name
 	await get_tree().process_frame
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 	var dims := Vector3i(12, 1, 12)
 	if _grid.has_method("get_grid_dimensions"):
@@ -428,6 +431,9 @@ func _settle_on_floor(gx: int, gz: int, lookup: String, target_y: float) -> void
 	var n: Node3D = null
 	var final_base := 999.0
 	for _i in range(48):
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().process_frame
 		n = _artifact_at_cell(gx, gz)
 		if not (n and is_instance_valid(n)):

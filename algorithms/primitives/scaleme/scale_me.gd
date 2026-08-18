@@ -138,6 +138,9 @@ func _scale_world() -> void:
 	
 	# Check if player is stuck inside geometry after scaling up
 	if _xr_origin:
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().physics_frame  # Wait for physics to update
 		_ensure_player_not_stuck()
 
@@ -192,6 +195,9 @@ func _on_scale_timer_timeout() -> void:
 
 	# Check if player is stuck inside geometry and move to safe position
 	if _xr_origin:
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().physics_frame  # Wait for physics to update
 		_ensure_player_not_stuck()
 

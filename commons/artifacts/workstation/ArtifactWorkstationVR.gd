@@ -74,6 +74,9 @@ func _build_kiosk() -> void:
 func _connect_ui(viewport: Node) -> void:
 	# Wait for viewport to create the scene instance
 	for i in range(10):
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().process_frame
 		_ui_instance = viewport.get_scene_instance() if viewport.has_method("get_scene_instance") else null
 		if _ui_instance:

@@ -76,7 +76,13 @@ func _auto_connect_scene_manager():
 		return
 	
 	# Wait for scene to fully load
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame  # Extra frame for safety
 	
 	print("BaseSceneAddon: Auto-connecting SceneManager to scene systems")

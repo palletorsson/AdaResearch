@@ -1157,6 +1157,9 @@ func _ensure_editor_panel() -> void:
 ## and is_connected first, so a re-connect is a no-op.
 func _connect_editor_panel(vp: Node) -> void:
 	for i in range(15):
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().process_frame
 		_editor_panel_ui = vp.get_scene_instance() if vp.has_method("get_scene_instance") else null
 		if _editor_panel_ui:

@@ -227,9 +227,15 @@ func _load_lab_with_loading_screen():
 				print("AdaVRStaging: ERROR - Lab scene failed to load!")
 				break
 			else:
+				# out-of-tree guard: get_tree() is null once a map is torn down
+				if not is_inside_tree():
+					await tree_entered
 				await get_tree().create_timer(0.05).timeout
 
 		# Brief pause at 100%
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().create_timer(0.3).timeout
 		loading_screen.visible = false
 
@@ -272,6 +278,9 @@ func _monitor_preload():
 			break
 		else:
 			# THREAD_LOAD_INVALID_RESOURCE
+			# out-of-tree guard: get_tree() is null once a map is torn down
+			if not is_inside_tree():
+				await tree_entered
 			await get_tree().create_timer(0.1).timeout
 
 func _show_loading_progress():
@@ -302,6 +311,9 @@ func _show_loading_progress():
 			break
 
 	# Brief pause at 100% for visual feedback
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.2).timeout
 
 	# Hide loading screen (load_scene will handle actual scene transition)
@@ -590,6 +602,9 @@ func load_scene(p_scene_path: String, user_data = null) -> void:
 			if res != ResourceLoader.THREAD_LOAD_IN_PROGRESS:
 				break
 			$LoadingScreen.progress = progress[0]
+			# out-of-tree guard: get_tree() is null once a map is torn down
+			if not is_inside_tree():
+				await tree_entered
 			await get_tree().create_timer(0.05).timeout  # Faster polling
 
 		if res == ResourceLoader.THREAD_LOAD_LOADED:
@@ -613,6 +628,9 @@ func load_scene(p_scene_path: String, user_data = null) -> void:
 	_safe_add_signals(current_scene)
 	
 	# Small delay for VR tracking (shorter for quick transitions)
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(tracking_delay).timeout
 	if is_instance_valid(current_scene) and current_scene.has_method("scene_loaded"):
 		current_scene.scene_loaded(user_data)

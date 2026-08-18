@@ -72,6 +72,9 @@ func _connect_scene_signals():
 		print("AmbientSoundController: Connected to SceneManager signals")
 	else:
 		print("AmbientSoundController: SceneManager not found, retrying...")
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().create_timer(0.5).timeout
 		if is_inside_tree():
 			call_deferred("_connect_scene_signals")

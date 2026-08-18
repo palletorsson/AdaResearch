@@ -106,7 +106,13 @@ func _ready():
 func _initialize_info_board():
 	"""Initialize info board after grid system is ready"""
 	# Wait a few frames to ensure grid system is fully loaded
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 	
 	# Load map data from the current map
@@ -403,6 +409,9 @@ func _show_current_section():
 		var display_time = _calculate_display_time(section_text)
 		
 		# Wait for display time, then show next section
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().create_timer(display_time).timeout
 		
 		# Move to next section or loop back to beginning

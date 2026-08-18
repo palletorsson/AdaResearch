@@ -72,6 +72,9 @@ func _on_body_entered(body: Node3D):
 	_reset_velocity(body)
 	
 	# Wait for physics frame to process velocity reset
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().physics_frame
 	
 	# THEN teleport
@@ -81,6 +84,9 @@ func _on_body_entered(body: Node3D):
 	_reset_velocity(body)
 	
 	# Wait for physics frame to ensure position sticks
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().physics_frame
 	
 	is_resetting = false

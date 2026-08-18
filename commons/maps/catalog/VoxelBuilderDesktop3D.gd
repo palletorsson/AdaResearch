@@ -114,6 +114,9 @@ func _load_map(map_name: String) -> void:
 	var old_grid := get_node_or_null("GridSystem")
 	if old_grid:
 		old_grid.queue_free()
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().process_frame
 
 	var grid_system: Node = grid_system_scene.instantiate()
@@ -129,6 +132,9 @@ func _load_map(map_name: String) -> void:
 	else:
 		# Fallback wait
 		for _i in 10:
+			# out-of-tree guard: get_tree() is null once a map is torn down
+			if not is_inside_tree():
+				await tree_entered
 			await get_tree().process_frame
 
 	# Find the structure component

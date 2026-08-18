@@ -136,6 +136,9 @@ func _find_ui_nodes_and_setup() -> void:
 	
 	# Wait for content
 	if viewport_2d.get_viewport().get_child_count() == 0:
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().process_frame
 		
 	_find_ui_nodes()

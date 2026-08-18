@@ -796,6 +796,9 @@ func _on_staging_scene_loaded(scene: Node, user_data: Dictionary):
 		
 		# Wait for lab scene to initialize
 		await get_tree().process_frame
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().process_frame
 		
 		# Find and notify lab manager directly

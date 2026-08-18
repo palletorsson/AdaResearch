@@ -217,6 +217,9 @@ func _walk_setup(map_name: String) -> void:
 		return
 	_mapsim_lift_grid()
 	# Let the interactables place, then frame the row.
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(1.4).timeout
 	set_camera_mode(CameraMode.PLAYER)
 	fly_mode_enabled = true

@@ -144,6 +144,9 @@ func _load_map() -> void:
 		await grid_system.map_generation_complete
 	else:
 		for _i in 10:
+			# out-of-tree guard: get_tree() is null once a map is torn down
+			if not is_inside_tree():
+				await tree_entered
 			await get_tree().process_frame
 
 	_structure_component = grid_system.find_child("GridStructureComponent", true, false) as GridStructureComponent

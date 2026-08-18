@@ -15,6 +15,9 @@ var structure_count := 0
 func _ready() -> void:
 	# Wait for environment to initialize
 	await get_tree().process_frame
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 
 	print("\n=== BuildEnv Visual Test ===")
@@ -121,12 +124,18 @@ func _place_initial_demo_pieces() -> void:
 	env.step({"primitive_id": 3, "x": 0.0, "z": 0.0, "yaw_bin": 0})
 	env.step({"primitive_id": 3, "x": 2.0, "z": 0.0, "yaw_bin": 0})
 
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.3).timeout
 
 	# Beams connecting pillars
 	env.step({"primitive_id": 1, "x": -1.0, "z": 0.0, "yaw_bin": 0})
 	env.step({"primitive_id": 1, "x": 1.0, "z": 0.0, "yaw_bin": 0})
 
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.3).timeout
 
 	# Pyramid on top
@@ -183,11 +192,17 @@ func _build_tower_structure() -> void:
 		for z in [-1, 1]:
 			env.step({"primitive_id": 3, "x": float(x) * 0.6, "z": float(z) * 0.6, "yaw_bin": 0})
 
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.3).timeout
 
 	# Platform level
 	env.step({"primitive_id": 6, "x": 0.0, "z": 0.0, "yaw_bin": 0})
 
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.3).timeout
 
 	# Top pyramid
@@ -208,6 +223,9 @@ func _build_bridge_structure() -> void:
 	env.step({"primitive_id": 1, "x": -1.5, "z": 0.0, "yaw_bin": 0})
 	env.step({"primitive_id": 1, "x": 1.5, "z": 0.0, "yaw_bin": 0})
 
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.3).timeout
 
 	# Deck plates
@@ -230,6 +248,9 @@ func _build_pyramid_structure() -> void:
 		for z in range(-1, 1):
 			env.step({"primitive_id": 6, "x": float(x) * 0.7 + 0.35, "z": float(z) * 0.7 + 0.35, "yaw_bin": 0})
 
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.3).timeout
 
 	# Top pyramid

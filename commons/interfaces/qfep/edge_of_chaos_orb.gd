@@ -189,6 +189,9 @@ func _build_labels() -> void:
 # ---------------------------------------------------------------------------
 
 func _connect_to_controllers() -> void:
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 
 	for slider in get_tree().get_nodes_in_group("qfep_lambda_controllers"):

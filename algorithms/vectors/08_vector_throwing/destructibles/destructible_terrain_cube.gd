@@ -26,6 +26,9 @@ func _ready() -> void:
 
 func _setup_after_generation() -> void:
 	# Wait a few frames for terrain to generate
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(2.0).timeout
 
 	if _terrain_mesh_instance and _terrain_mesh_instance.mesh:

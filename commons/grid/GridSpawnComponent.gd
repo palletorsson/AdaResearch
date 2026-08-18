@@ -65,7 +65,13 @@ func handle_player_spawn():
 
 	# Wait for VR system to be ready
 	await get_tree().process_frame
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.5).timeout
 
 	# Resolve spawn through the priority chain documented at top of file.

@@ -122,6 +122,9 @@ func _mount_mutators() -> void:
 		paint_timer.timeout.connect(_paint_by_role)
 		add_child(paint_timer)
 		# First paint immediately after the part mutator has had a chance to apply.
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().create_timer(2.0).timeout
 		_paint_by_role()
 
@@ -406,7 +409,13 @@ func _force_static_mode() -> void:
 	# (mount itself is call_deferred from _ready).
 	# We need a couple of frames so the mount + first-apply finishes,
 	# then we kill the cycle and re-apply to lock the static frame.
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 	if _vis_mutator:
 		_vis_mutator.auto_cycle_enabled = false

@@ -39,6 +39,9 @@ func _ready() -> void:
 
 	# Wait for physics world to register collision shapes
 	await get_tree().process_frame
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 
 	_generate_tree()

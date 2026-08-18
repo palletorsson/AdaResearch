@@ -33,6 +33,9 @@ func _ready():
 
 	# Defer audio setup
 	await get_tree().process_frame
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 	if not _audio_setup_done:
 		_setup_audio()

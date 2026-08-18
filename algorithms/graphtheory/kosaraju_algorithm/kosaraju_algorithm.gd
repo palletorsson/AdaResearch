@@ -556,6 +556,9 @@ func first_dfs_pass() -> void:
 			call_deferred("dfs_first_pass", vertex)
 
 	# After first pass, start second pass
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(animation_delay * 2).timeout
 	call_deferred("second_dfs_pass")
 
@@ -571,12 +574,18 @@ func dfs_first_pass(vertex: String) -> void:
 	update_info_text("Processing vertex: " + vertex + " (First pass)")
 
 	if step_by_step:
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().create_timer(animation_delay).timeout
 
 	# Process neighbors in original graph
 	for neighbor in adjacency_list[vertex]:
 		if not visited[neighbor]:
 			update_edge_color(vertex, neighbor, Color.WHITE)
+			# out-of-tree guard: get_tree() is null once a map is torn down
+			if not is_inside_tree():
+				await tree_entered
 			await get_tree().create_timer(animation_delay * 0.5).timeout
 			dfs_first_pass(neighbor)
 
@@ -618,12 +627,18 @@ func dfs_second_pass(vertex: String) -> void:
 	update_info_text("Processing vertex: " + vertex + " (Second pass - SCC " + str(scc_count) + ")")
 
 	if step_by_step:
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().create_timer(animation_delay).timeout
 
 	# Process neighbors in transpose graph
 	for neighbor in transpose_adjacency_list[vertex]:
 		if not visited[neighbor]:
 			update_transpose_edge_color(vertex, neighbor, Color.WHITE)
+			# out-of-tree guard: get_tree() is null once a map is torn down
+			if not is_inside_tree():
+				await tree_entered
 			await get_tree().create_timer(animation_delay * 0.5).timeout
 			dfs_second_pass(neighbor)
 

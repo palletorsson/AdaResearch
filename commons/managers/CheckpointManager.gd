@@ -112,7 +112,13 @@ func respawn_at_checkpoint() -> void:
 		print("[CheckpointManager] Loading map: %s" % target_map)
 		await _load_map(target_map)
 		# Wait for scene to settle
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().process_frame
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().process_frame
 	
 	# Restore player state

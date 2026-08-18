@@ -706,6 +706,9 @@ func process_queue() -> void:
 	update_info_text("Processing vertex: " + current_vertex)
 	
 	if step_by_step:
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().create_timer(animation_delay).timeout
 		if gen != _run_generation:
 			return
@@ -721,6 +724,9 @@ func process_queue() -> void:
 		
 		# Highlight dependency edge
 		update_edge_color(current_vertex, neighbor, dependency_edge_color)
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().create_timer(animation_delay * 0.5).timeout
 		if gen != _run_generation:
 			return
@@ -735,6 +741,9 @@ func process_queue() -> void:
 	update_queue_display()
 	
 	# Continue processing
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(animation_delay * 0.5).timeout
 	if gen != _run_generation:
 		return

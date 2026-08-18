@@ -273,6 +273,9 @@ func _wait_for_lab_ready():
 		await get_tree().process_frame
 	
 	# Wait one more frame for safety
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 
 func _on_lab_generation_complete():

@@ -1258,6 +1258,9 @@ func _reload_current_map():
 	_clear_all_components()
 	
 	# Wait one frame for queue_free() to complete
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 	
 	# Try to re-validate base_cube reference (it might have become invalid)

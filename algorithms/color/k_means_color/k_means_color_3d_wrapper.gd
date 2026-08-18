@@ -25,6 +25,9 @@ func _ready() -> void:
 		sub_viewport.size = _minimum_viewport_size
 	_rescale_sprite(sub_viewport.size)
 	await get_tree().process_frame
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 	_fit_view_to_contents()
 

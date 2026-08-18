@@ -58,8 +58,14 @@ func _ready():
 
 func setup_complete_cube():
 	create_vr_cube()
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 	create_grab_spheres()
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 	is_ready_complete = true
 	print("Cube setup complete - should see cube and spheres now")

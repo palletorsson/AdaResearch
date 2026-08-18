@@ -165,6 +165,9 @@ func _setup_ui() -> void:
 func _add_initial_seeds() -> void:
 	# Add seed pattern after setup
 	await get_tree().process_frame
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 
 	# Add multiple seed points
@@ -183,6 +186,9 @@ func _add_initial_seeds() -> void:
 	for pos in seed_positions:
 		sim_material.set_shader_parameter("mouse_pos", pos)
 		next_viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().process_frame
 
 	# Add some random seeds
@@ -190,6 +196,9 @@ func _add_initial_seeds() -> void:
 		var random_pos = Vector2(randf() * 0.6 + 0.2, randf() * 0.6 + 0.2)
 		sim_material.set_shader_parameter("mouse_pos", random_pos)
 		next_viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().process_frame
 
 	sim_material.set_shader_parameter("mouse_pos", Vector2(-1, -1))

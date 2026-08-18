@@ -129,6 +129,9 @@ func _reveal_cosmos() -> void:
 	# Add star particles
 	_spawn_stars()
 
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(1.5).timeout
 
 
@@ -241,9 +244,15 @@ func _show_title_sequence() -> void:
 		await tween.finished
 
 		# Hold
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().create_timer(TEXT_HOLD_DURATION).timeout
 
 	# Final pause with everything visible
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(2.0).timeout
 
 
@@ -268,6 +277,9 @@ func _fade_to_black() -> void:
 				tween.parallel().tween_property(star.material_override, "emission_energy_multiplier", 0.0, BLACKOUT_DURATION)
 
 	await tween.finished
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(1.0).timeout
 
 

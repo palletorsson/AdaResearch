@@ -126,8 +126,17 @@ func _spawn_panel(panel_data: Dictionary, position: Vector3, theme: String, leve
 func _set_panel_content_delayed(panel: Node, content: String) -> void:
 	# Wait for multiple frames to ensure full initialization
 	await get_tree().process_frame
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 
 	if not is_instance_valid(panel):

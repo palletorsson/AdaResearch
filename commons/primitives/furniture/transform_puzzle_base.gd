@@ -118,7 +118,13 @@ func _ready() -> void:
 
 	# Auto-hide tagged objects if using reveal action
 	if (auto_hide_tagged or trigger_action == "reveal") and trigger_tag != "":
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().process_frame
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().process_frame
 		TagSystem.trigger_tag_action(trigger_tag, "hide")
 		print("%s: Auto-hid objects with tag '%s'" % [name, trigger_tag])

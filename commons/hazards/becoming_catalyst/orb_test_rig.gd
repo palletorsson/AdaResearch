@@ -49,6 +49,9 @@ func _bootstrap() -> void:
 	if _xr_origin == null:
 		if verbose:
 			print("[OrbTestRig] no XROrigin3D found yet — retrying in 0.5 s")
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().create_timer(0.5).timeout
 		_xr_origin = _find_xr_origin()
 		if _xr_origin == null:

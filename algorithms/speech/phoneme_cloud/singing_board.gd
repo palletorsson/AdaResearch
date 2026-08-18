@@ -202,6 +202,9 @@ func sing_melody(melody: Array) -> void:
 	
 	# End
 	_tween_mapper(ANCHORS["a"], 0.0, 0.1)
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.2).timeout
 	synth.stop()
 	is_singing = false
@@ -221,32 +224,59 @@ func _sing_note(freq: float, vowel: String, consonant: String, duration: float, 
 				await get_tree().create_timer(0.03).timeout
 			"m":
 				synth.trigger_nasal("m", 80)
+				# out-of-tree guard: get_tree() is null once a map is torn down
+				if not is_inside_tree():
+					await tree_entered
 				await get_tree().create_timer(0.05).timeout
 			"n":
 				synth.trigger_nasal("n", 60)
+				# out-of-tree guard: get_tree() is null once a map is torn down
+				if not is_inside_tree():
+					await tree_entered
 				await get_tree().create_timer(0.04).timeout
 			"d":
 				synth.trigger_plosive("d")
+				# out-of-tree guard: get_tree() is null once a map is torn down
+				if not is_inside_tree():
+					await tree_entered
 				await get_tree().create_timer(0.05).timeout
 			"b":
 				synth.trigger_plosive("b")
+				# out-of-tree guard: get_tree() is null once a map is torn down
+				if not is_inside_tree():
+					await tree_entered
 				await get_tree().create_timer(0.05).timeout
 			"r":
 				# R is a vowel-like approximant
 				_tween_mapper(ANCHORS["r"], intensity * 0.5, 0.03)
+				# out-of-tree guard: get_tree() is null once a map is torn down
+				if not is_inside_tree():
+					await tree_entered
 				await get_tree().create_timer(0.03).timeout
 			"s":
 				synth.trigger_fricative("s", 80)
+				# out-of-tree guard: get_tree() is null once a map is torn down
+				if not is_inside_tree():
+					await tree_entered
 				await get_tree().create_timer(0.05).timeout
 			"f":
 				synth.trigger_fricative("f", 60)
+				# out-of-tree guard: get_tree() is null once a map is torn down
+				if not is_inside_tree():
+					await tree_entered
 				await get_tree().create_timer(0.04).timeout
 			"h":
 				synth.trigger_fricative("h", 40)
+				# out-of-tree guard: get_tree() is null once a map is torn down
+				if not is_inside_tree():
+					await tree_entered
 				await get_tree().create_timer(0.03).timeout
 	
 	# Skip if rest
 	if intensity <= 0:
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().create_timer(duration).timeout
 		return
 	
@@ -262,6 +292,9 @@ func _sing_note(freq: float, vowel: String, consonant: String, duration: float, 
 		if vibrato_enabled:
 			await _sustain_with_vibrato(freq, sustain_time)
 		else:
+			# out-of-tree guard: get_tree() is null once a map is torn down
+			if not is_inside_tree():
+				await tree_entered
 			await get_tree().create_timer(sustain_time).timeout
 	
 	# Quick release for legato

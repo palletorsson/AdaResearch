@@ -66,7 +66,13 @@ func _take_shot() -> void:
 	# signal never fires under --no-window and the run hangs until something
 	# kills it.
 	await get_tree().process_frame
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(1.4).timeout
 	var img := get_viewport().get_texture().get_image()
 	DirAccess.make_dir_recursive_absolute(

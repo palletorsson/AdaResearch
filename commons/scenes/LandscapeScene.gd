@@ -128,6 +128,9 @@ func _setup_terrain() -> void:
 
 	# Force self_generating mode after deferred init completes
 	await get_tree().process_frame
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 	_terrain._current_mode = "self_generating"
 	_terrain._generate_terrain()

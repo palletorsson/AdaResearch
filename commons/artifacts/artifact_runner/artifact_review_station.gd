@@ -522,6 +522,9 @@ func _show(i: int) -> void:
 
 	# Let procedural artifacts build, then frame + ground them.
 	await get_tree().process_frame
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 
 	var size := Vector3.ONE

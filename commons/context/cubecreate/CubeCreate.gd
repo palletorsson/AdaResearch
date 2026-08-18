@@ -313,32 +313,50 @@ func advance_tutorial():
 			
 		TutorialStep.CREATE_PYRAMID:
 			print("\nChapter 3: The Pyramid - First 3D Shape")
+			# out-of-tree guard: get_tree() is null once a map is torn down
+			if not is_inside_tree():
+				await tree_entered
 			await get_tree().create_timer(1.0).timeout
 			create_pyramid()
 			
 		TutorialStep.CREATE_CUBE:
 			print("\nChapter 4: The Cube - Complex 3D Shape")
+			# out-of-tree guard: get_tree() is null once a map is torn down
+			if not is_inside_tree():
+				await tree_entered
 			await get_tree().create_timer(1.0).timeout
 			create_cube()
 			
 		# Row 2: Advanced shapes
 		TutorialStep.CREATE_STAR:
 			print("\nChapter 5: The Star - Complex 2D Shape")
+			# out-of-tree guard: get_tree() is null once a map is torn down
+			if not is_inside_tree():
+				await tree_entered
 			await get_tree().create_timer(1.0).timeout
 			create_star()
 			
 		TutorialStep.CREATE_CYLINDER:
 			print("\nChapter 6: The Cylinder - Circular Cross-Section")
+			# out-of-tree guard: get_tree() is null once a map is torn down
+			if not is_inside_tree():
+				await tree_entered
 			await get_tree().create_timer(1.0).timeout
 			create_cylinder()
 			
 		TutorialStep.CREATE_SPHERE:
 			print("\nChapter 7: The Sphere - Curved Surface Approximation")
+			# out-of-tree guard: get_tree() is null once a map is torn down
+			if not is_inside_tree():
+				await tree_entered
 			await get_tree().create_timer(1.0).timeout
 			create_sphere()
 			
 		TutorialStep.CREATE_FISH:
 			print("\nChapter 8: The Fish - Organic Shape for Vector Tutorial")
+			# out-of-tree guard: get_tree() is null once a map is torn down
+			if not is_inside_tree():
+				await tree_entered
 			await get_tree().create_timer(1.0).timeout
 			create_fish()
 			

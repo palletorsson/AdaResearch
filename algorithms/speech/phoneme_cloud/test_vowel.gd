@@ -8,8 +8,14 @@ func _ready() -> void:
 	await get_tree().create_timer(1.0).timeout
 	
 	say_ada()
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.4).timeout
 	say_research()
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.4).timeout
 	say_lab_one()
 
@@ -31,9 +37,15 @@ func say_lab_one() -> void:
 	
 	# /b/ (Plosive)
 	synth.target_intensity = 0.0
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.04).timeout
 	synth.trigger_plosive()
 	
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.2).timeout # Gap
 	
 	# "One"
@@ -46,6 +58,9 @@ func say_lab_one() -> void:
 	# Glide to /uh/ (One)
 	# /uh/ -> F1=600, Delta=600
 	move_field(600.0, 600.0, 0.4)
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.5).timeout
 	
 	# /n/ (Nasal fade)
@@ -55,6 +70,9 @@ func say_lab_one() -> void:
 	tween.tween_property(synth, "f1", 400.0, 0.4)
 	tween.tween_property(synth, "target_intensity", 0.0, 0.4)
 	
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.5).timeout
 	synth.stop()
 	print("Finished 'Lab One'.")
@@ -71,8 +89,14 @@ func say_alphabet() -> void:
 		print(" - ", v)
 		label.text = "/ " + v + " /"
 		synth.speak_vowel(v, 1.0)
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().create_timer(0.5).timeout
 		synth.stop()
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().create_timer(0.1).timeout
 	
 	print("Alphabet complete.")
@@ -99,6 +123,9 @@ func say_ada() -> void:
 	tween.tween_property(synth, "target_intensity", 0.0, 0.05) 
 	
 	await tween.finished
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.05).timeout 
 	
 	# 3. Burst into "A" again
@@ -109,6 +136,9 @@ func say_ada() -> void:
 	tween2.tween_property(synth, "f1", 850.0, 0.1)
 	tween2.tween_property(synth, "delta", 760.0, 0.1)
 	
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.5).timeout
 	synth.stop()
 
@@ -132,6 +162,9 @@ func say_research() -> void:
 	# Crossfade to Noise (High Band)
 	synth.trigger_fricative("s")
 	
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.15).timeout # S duration
 	
 	# Release S -> Glide to "er"
@@ -142,16 +175,25 @@ func say_research() -> void:
 	synth.f1 = 500.0
 	synth.delta = 1000.0
 	
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.2).timeout
 	
 	# Glide to /r/ ("Seerrr")
 	move_field(450.0, 750.0, 0.25)
 	
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.25).timeout
 	
 	# "Ch" (Fricative Burst)
 	synth.trigger_fricative("ch")
 	
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.15).timeout # Ch duration
 	
 	synth.stop()

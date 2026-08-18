@@ -439,7 +439,13 @@ func _build_body() -> void:
 	if _built:
 		return
 	_built = true
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame   # let the plate build + cell-fit settle
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 
 	# Measure the plate, then scale it DOWN to the (smaller) board that sits on

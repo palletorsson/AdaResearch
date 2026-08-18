@@ -950,6 +950,9 @@ func push_relabel_loop(gen: int = -1) -> void:
 	algorithm_step += 1
 
 	if step_by_step:
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().create_timer(animation_delay).timeout
 		if my_gen != _run_gen:
 			return

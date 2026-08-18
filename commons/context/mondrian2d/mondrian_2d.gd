@@ -292,11 +292,17 @@ func animate_construction():
 	# Step 1: Draw horizontal lines
 	horizontal_lines = original_horizontals.duplicate(true)
 	queue_redraw()
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.5).timeout
 	
 	# Step 2: Draw vertical lines
 	vertical_lines = original_verticals.duplicate(true)
 	queue_redraw()
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.5).timeout
 	
 	# Step 3: Add red sections
@@ -304,6 +310,9 @@ func animate_construction():
 		if section["color"] == COLOR_RED:
 			colored_sections.append(section)
 	queue_redraw()
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.5).timeout
 	
 	# Step 4: Add blue sections
@@ -311,6 +320,9 @@ func animate_construction():
 		if section["color"] == COLOR_BLUE:
 			colored_sections.append(section)
 	queue_redraw()
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.5).timeout
 	
 	# Step 5: Add yellow section
@@ -369,6 +381,9 @@ func _force_viewport_update():
 		# Force immediate update
 		var current_size = subviewport.size
 		subviewport.size = Vector2(current_size.x + 1, current_size.y + 1)
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().process_frame
 		subviewport.size = current_size
 		

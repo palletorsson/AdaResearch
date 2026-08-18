@@ -50,6 +50,9 @@ func generate_gallery() -> void:
 		print("Creating item ", i, " at ", pos)
 		await create_sculpture(config, pos, i)
 		# Wait a bit more to let physics settling and memory cleanup happen
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().create_timer(1.0).timeout
 	
 	print("✅ Gallery complete with ", sculptures.size(), " sculptures!")

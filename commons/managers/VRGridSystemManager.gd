@@ -339,6 +339,9 @@ func _handle_spawn_points(scene: Node):
 	print("VRGridSystemManager: Setting up player spawn positioning")
 
 	# Wait a frame for grid to be fully initialized
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 
 	# Let the GridSystem's spawn component handle the positioning

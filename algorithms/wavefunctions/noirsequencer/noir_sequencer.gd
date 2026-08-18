@@ -232,6 +232,9 @@ func initialize_audio() -> void:
 	set_status("Audio initialized! Now click 'Play'")
 	
 	# Wait a moment before testing sound
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.5).timeout
 	
 	# Test sound
@@ -487,6 +490,9 @@ func test_basic_audio() -> void:
 		set_status("Testing basic audio...")
 	
 	# Clean up after 2 seconds
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(2.0).timeout
 	test_player.queue_free()
 

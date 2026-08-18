@@ -434,6 +434,9 @@ func generate_cave_async() -> void:
 
 	generation_progress.emit(40.0)
 	if not synchronous:
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().process_frame
 
 	# Carve tunnels along connections
@@ -443,6 +446,9 @@ func generate_cave_async() -> void:
 
 	generation_progress.emit(60.0)
 	if not synchronous:
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().process_frame
 
 	# Carve chambers at nodes
@@ -453,6 +459,9 @@ func generate_cave_async() -> void:
 
 	generation_progress.emit(80.0)
 	if not synchronous:
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().process_frame
 	
 	# Generate mesh from chunk

@@ -1039,6 +1039,9 @@ func _settle_loaded() -> void:
 	# the plinth beneath it at its REAL measured height (the generator used a fixed
 	# 1.0 m plinth-top guess, so tall/short small items sat a touch off).
 	for _i in range(40):
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().process_frame
 	for n in _placed:
 		if not is_instance_valid(n):
@@ -1178,6 +1181,9 @@ func _run_capture(targets: Array) -> void:
 		_camera.size = ww
 		_camera.position = Vector3(cx, 2.3, 14.0)
 		for _i in range(3):
+			# out-of-tree guard: get_tree() is null once a map is torn down
+			if not is_inside_tree():
+				await tree_entered
 			await get_tree().process_frame
 		await RenderingServer.frame_post_draw
 		var img := get_viewport().get_texture().get_image()
@@ -1234,11 +1240,17 @@ func _run_validate_props() -> void:
 			cap_top = _stack_top(0.0, 0.0, art_node)
 		_camera.position = Vector3(0.0, cap_top + 0.4, 6.0)
 		for _i in range(3):
+			# out-of-tree guard: get_tree() is null once a map is torn down
+			if not is_inside_tree():
+				await tree_entered
 			await get_tree().process_frame
 		await RenderingServer.frame_post_draw
 		var img := get_viewport().get_texture().get_image()
 		img.save_png("%s/%s.png" % [outdir, art])
 		for _i in range(40):   # measure AGAIN later: an animating artifact (grows over time) can't seat on a static cap
+			# out-of-tree guard: get_tree() is null once a map is torn down
+			if not is_inside_tree():
+				await tree_entered
 			await get_tree().process_frame
 		var box2: AABB = _world_aabb(art_node) if art_node != null else AABB()
 		var stable := absf(maxf(box2.size.x, box2.size.z) - maxf(box1.size.x, box1.size.z)) < 0.25 and absf(box2.size.y - box1.size.y) < 0.5

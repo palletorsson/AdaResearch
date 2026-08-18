@@ -1261,6 +1261,9 @@ func _render_info_viewport(viewport: Node, title: String, body: String, phos_tex
 	# _ready / set_scene). Poll a few frames for get_scene_instance(), like dna_workstation.
 	var ui: Node = null
 	for _i in range(20):
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().process_frame
 		if not is_instance_valid(viewport):
 			return

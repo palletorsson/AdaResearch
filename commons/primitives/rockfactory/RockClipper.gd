@@ -77,7 +77,13 @@ func _ready():
 	clipping_plane_position.y = scan_height
 	# Wait multiple frames for rocks to fully generate their meshes
 	await get_tree().process_frame
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 	find_and_clip_rocks()
 

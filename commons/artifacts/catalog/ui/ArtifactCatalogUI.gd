@@ -79,6 +79,9 @@ func _initial_refresh():
 				print("ArtifactCatalogUI: Still waiting for GridSystem... (attempt %d/%d)" % [attempt, max_attempts])
 
 		attempt += 1
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().create_timer(0.1).timeout
 
 	# If we get here, something is wrong but show empty catalog gracefully

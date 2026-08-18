@@ -92,6 +92,9 @@ func _ready() -> void:
 	# Auto-start demo after a short delay
 	await get_tree().create_timer(2.0).timeout
 	print("Auto-starting demo in 2 seconds...")
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(2.0).timeout
 	start_demo()
 

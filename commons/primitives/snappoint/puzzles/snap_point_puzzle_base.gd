@@ -74,6 +74,9 @@ func _ready() -> void:
 	if should_auto_hide and trigger_tag != "":
 		# Wait a frame to ensure tagged objects are registered
 		await get_tree().process_frame
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().process_frame
 		TagSystem.trigger_tag_action(trigger_tag, "hide")
 		print("%s: Auto-hid objects with tag '%s' (action=%s)" % [get_class(), trigger_tag, trigger_action])
@@ -268,6 +271,9 @@ func _complete_puzzle() -> void:
 	if success_label:
 		success_label.visible = true
 		success_label.global_position = global_position + Vector3(0, 0.3, 0)
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().create_timer(success_display_duration).timeout
 		if success_label:
 			success_label.visible = false
@@ -280,6 +286,9 @@ func _complete_puzzle() -> void:
 	current_state = PuzzleState.COMPLETED
 	
 	# Hide puzzle after delay
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(1.0).timeout
 	_hide_puzzle()
 	

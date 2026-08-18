@@ -145,6 +145,9 @@ func _execute_move():
 	_reset_velocity(player_node)
 	
 	# Wait one more physics frame to ensure the position sticks
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().physics_frame
 
 	is_moving = false

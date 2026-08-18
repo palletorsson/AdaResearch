@@ -45,6 +45,9 @@ func _ready() -> void:
 
 	# Wait a moment for other audio systems to initialize first
 	await get_tree().process_frame
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 	# Only run default setup if set_source_bus() wasn't already called
 	if not _audio_setup_done:

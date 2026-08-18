@@ -24,12 +24,18 @@ func _loop() -> void:
 		print("HeadlessSynthesizer: Ada")
 		await _play_ada()
 		print("HeadlessSynthesizer: Waiting...")
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().create_timer(1.0).timeout
 		
 		print("HeadlessSynthesizer: Research")
 		await _play_research()
 		
 		print("HeadlessSynthesizer: Loop Pause 4s")
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().create_timer(4.0).timeout
 
 func _play_ada() -> void:
@@ -40,24 +46,39 @@ func _play_ada() -> void:
 	
 	# Fade In A
 	synth.target_intensity = 1.0
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(1.5).timeout
 	
 	# D (Plosive)
 	synth.target_intensity = 0.0 # Fade out
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.04).timeout
 	synth.trigger_plosive()
 	
 	# Shift to Locus while closed
 	_set_params(anchors["d_locus"])
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.05).timeout
 	
 	# Burst A
 	_set_params(anchors["a"])
 	synth.target_intensity = 1.0
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(1.5).timeout
 	
 	# Fade Out
 	synth.target_intensity = 0.0
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.5).timeout
 
 func _play_research() -> void:
@@ -68,27 +89,45 @@ func _play_research() -> void:
 	
 	# Fade In R
 	synth.target_intensity = 0.9
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.3).timeout # 0.1 + 0.2
 	
 	# Glide i
 	_tween_params(anchors["i"], 0.2)
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.3).timeout # 0.2 + gap
 	
 	# Silence (S)
 	synth.target_intensity = 0.0
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.15).timeout
 	
 	# er
 	_set_params(anchors["e"])
 	synth.target_intensity = 1.0
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.2).timeout
 	
 	# Glide R
 	_tween_params(anchors["r"], 0.2)
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.2).timeout
 	
 	# Ch (Plosive)
 	synth.target_intensity = 0.0
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.04).timeout
 	synth.trigger_plosive()
 

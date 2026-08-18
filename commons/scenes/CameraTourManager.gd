@@ -195,7 +195,13 @@ func _wait_for_initial_map() -> void:
 	if not signal_received and lab_grid_system.map_generation_complete.is_connected(_on_complete):
 		lab_grid_system.map_generation_complete.disconnect(_on_complete)
 
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 
 	# Stop audio that auto-started during generation — start after fade-in
@@ -318,6 +324,9 @@ func _load_map(map_name: String) -> void:
 
 	# Nuke all non-essential content from previous map
 	_nuke_map_content()
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame  # let queue_free process
 
 	# Connect signal BEFORE triggering reload — this way we can't miss it,
@@ -333,6 +342,9 @@ func _load_map(map_name: String) -> void:
 	# Wait for signal (no frame-count guessing needed)
 	var wait_time: float = 0.0
 	while not map_ready and wait_time < 15.0:
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().create_timer(0.05).timeout
 		wait_time += 0.05
 
@@ -340,7 +352,13 @@ func _load_map(map_name: String) -> void:
 		lab_grid_system.map_generation_complete.disconnect(_on_done)
 
 	# Two frames for interactables to finish their _ready()
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 
 	# Stop audio that GridSystem auto-started during generation —

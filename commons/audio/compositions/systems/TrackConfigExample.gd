@@ -23,12 +23,18 @@ func _ready():
 	demonstrate_realtime_modifications()
 	
 	# Wait, then demonstrate saving current config
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(5.0).timeout
 	
 	print("\n💾 Example 3: Saving Current Configuration")
 	save_current_config()
 	
 	# Demonstrate real-time config modifications
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(2.0).timeout
 	
 	print("\n🎚️ Example 4: Real-time Configuration Modifications")

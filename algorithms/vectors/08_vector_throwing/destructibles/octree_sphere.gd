@@ -258,6 +258,9 @@ func _shatter_all_octants(impact_velocity: Vector3, impact_point: Vector3) -> vo
 	piece_data.clear()
 
 	fully_subdivided.emit(self)
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(4.0).timeout
 	queue_free()
 

@@ -298,6 +298,9 @@ func _build_rounded_cube_mesh() -> void:
 func _capture_rest_state() -> void:
 	# Need to wait one frame for physics to initialize
 	await get_tree().process_frame
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 
 	var rid := _soft_body.get_physics_rid()

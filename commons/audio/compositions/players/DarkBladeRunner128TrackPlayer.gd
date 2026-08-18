@@ -344,6 +344,9 @@ func _start_cyberpunk_atmosphere():
 	cityscape_player.play()
 	
 	# Sub bass foundation
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(2.0).timeout
 	bass_player.stream = sound_cache[TrackSound.DARK_808_SUB_BASS]
 	bass_player.play()

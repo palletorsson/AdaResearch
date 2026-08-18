@@ -148,7 +148,13 @@ func _setup_simulation() -> void:
 func add_initial_seed() -> void:
 	print("Adding initial seed points...")
 
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 
 	# Random seed points
@@ -156,6 +162,9 @@ func add_initial_seed() -> void:
 		var random_pos := Vector2(randf(), randf())
 		sim_material.set_shader_parameter("mouse_pos", random_pos)
 		next_buffer.render_target_update_mode = SubViewport.UPDATE_ONCE
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().process_frame
 
 	# Central cluster
@@ -170,6 +179,9 @@ func add_initial_seed() -> void:
 	for pos in center_positions:
 		sim_material.set_shader_parameter("mouse_pos", pos)
 		next_buffer.render_target_update_mode = SubViewport.UPDATE_ONCE
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().process_frame
 
 	sim_material.set_shader_parameter("mouse_pos", Vector2(-1, -1))
@@ -263,6 +275,9 @@ func big_seed_blast() -> void:
 		for corner in corners:
 			sim_material.set_shader_parameter("mouse_pos", corner)
 			next_buffer.render_target_update_mode = SubViewport.UPDATE_ONCE
+			# out-of-tree guard: get_tree() is null once a map is torn down
+			if not is_inside_tree():
+				await tree_entered
 			await get_tree().process_frame
 
 		sim_material.set_shader_parameter("mouse_pos", Vector2(-1, -1))

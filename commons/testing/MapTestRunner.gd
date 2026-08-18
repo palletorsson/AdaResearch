@@ -229,6 +229,9 @@ func _deferred_start() -> void:
 		if wait_for_initial_load:
 			await _wait_for_initial_load()
 		else:
+			# out-of-tree guard: get_tree() is null once a map is torn down
+			if not is_inside_tree():
+				await tree_entered
 			await get_tree().process_frame
 		_start_tests()
 
@@ -257,6 +260,9 @@ func _wait_for_initial_load() -> void:
 
 	# Stop any audio that auto-started
 	_stop_audio()
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 	print("MapTestRunner: Initial load complete (%.2fs)" % wait_time)
 
@@ -445,6 +451,9 @@ func _test_next_map() -> void:
 	# Wait for signal or timeout
 	var wait_time: float = 0.0
 	while not _map_ready and not _map_timed_out and wait_time < timeout_seconds + 1.0:
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().create_timer(0.05).timeout
 		wait_time += 0.05
 
@@ -457,7 +466,13 @@ func _test_next_map() -> void:
 		lab_grid_system.map_generation_complete.disconnect(_on_done)
 
 	# Let interactables finish _ready()
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 
 	# Stop auto-started audio
@@ -471,6 +486,9 @@ func _test_next_map() -> void:
 
 	# Optional screenshot
 	if take_screenshots:
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().process_frame
 		await _capture_screenshot(map_name)
 
@@ -478,6 +496,9 @@ func _test_next_map() -> void:
 	_maps_tested += 1
 	current_test_index += 1
 	# Small delay between maps to let GC settle
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.1).timeout
 	_test_next_map()
 
@@ -721,6 +742,9 @@ func _capture_screenshot(map_name: String) -> void:
 
 	_position_capture_camera(map_name)
 	await get_tree().process_frame
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 
 	var image: Image = get_viewport().get_texture().get_image()

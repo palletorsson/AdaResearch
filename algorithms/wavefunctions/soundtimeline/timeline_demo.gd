@@ -153,6 +153,9 @@ func generate_drum_pattern(config: Dictionary) -> void:
 			call_deferred("_play_drum_hit", delay)
 
 func _play_drum_hit(delay: float) -> void:
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(delay).timeout
 
 	var player = AudioStreamPlayer.new()
@@ -194,6 +197,9 @@ func generate_chord_progression(config: Dictionary) -> void:
 		call_deferred("_play_chord", frequencies[i], duration, chord_delay)
 
 func _play_chord(freqs: Array, duration: float, delay: float) -> void:
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(delay).timeout
 
 	var players = []

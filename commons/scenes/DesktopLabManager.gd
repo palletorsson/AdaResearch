@@ -43,6 +43,9 @@ func _ready():
 		var pending: String = scene_manager.take_pending_sequence_request() if scene_manager.has_method("take_pending_sequence_request") else String(scene_manager.pending_sequence_request)
 		if pending != "":
 			# Wait an extra frame so the lab finishes wiring before we start the sequence
+			# out-of-tree guard: get_tree() is null once a map is torn down
+			if not is_inside_tree():
+				await tree_entered
 			await get_tree().process_frame
 			print("DesktopLabManager: 🎯 Picker-pending sequence detected: %s — starting via the lab path" % pending)
 			_start_sequence(pending)
@@ -335,7 +338,13 @@ func _on_map_loaded():
 
 	# Wait for spawn component and physics to be ready
 	await get_tree().process_frame
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.3).timeout
 
 	if not lab_grid_system or not desktop_player:

@@ -217,6 +217,9 @@ func _setup_panel() -> void:
 
 	var left_hand := _find_left_hand()
 	if left_hand == null:
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().create_timer(2.0).timeout
 		_setup_panel()
 		return
@@ -429,6 +432,9 @@ func _connect_confirm_button() -> void:
 		return
 	var left := _find_left_hand()
 	if left == null or not (left is XRController3D):
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().create_timer(2.0).timeout
 		_connect_confirm_button()
 		return
@@ -557,6 +563,9 @@ func _connect_voice_button() -> void:
 	var candidates: Array[Node3D] = []
 	_collect_controllers(root, ["RightHandController", "RightController", "RightHand"], candidates)
 	if candidates.is_empty():
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().create_timer(2.0).timeout
 		_connect_voice_button()
 		return

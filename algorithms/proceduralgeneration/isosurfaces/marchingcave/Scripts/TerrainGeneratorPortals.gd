@@ -35,6 +35,9 @@ func _ready() -> void:
 	await get_tree().create_timer(0.5).timeout  # Give terrain time to initialize
 	
 	_create_portals()
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.5).timeout  # Give portals time to initialize
 	
 	print("✅ TerrainGeneratorPortals: Complete!")

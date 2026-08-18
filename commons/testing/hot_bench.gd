@@ -159,10 +159,16 @@ func _reload_current() -> void:
 	add_child(_inst)
 
 	# procedural _ready + physics settle
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(1.1).timeout
 	_frame()
 	# let the framed view render, then grab the window
 	await RenderingServer.frame_post_draw
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 	var img := get_viewport().get_texture().get_image()
 	img.save_png(SHOT)

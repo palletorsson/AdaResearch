@@ -4220,6 +4220,9 @@ func _on_layer_preview(layer: String, params: Dictionary):
 		_player.stream = preview
 		_player.play()
 		var hold_duration_sec: float = STEP_LAYER_PREVIEW_DURATION_SEC if is_step_preview else LAYER_PREVIEW_DURATION_SEC
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().create_timer(hold_duration_sec).timeout
 		if restore_stream:
 			_player.stream = restore_stream

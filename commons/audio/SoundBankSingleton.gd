@@ -72,6 +72,9 @@ func _connect_scene_manager_signals():
 	else:
 		print("SoundBank: SceneManager not found, will retry...")
 		# Retry after a short delay
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().create_timer(1.0).timeout
 		_connect_scene_manager_signals()
 
