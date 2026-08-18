@@ -58,6 +58,7 @@ GATES: dict[str, tuple[str, str, str, int]] = {
     "plan_default":  ("gd", "res://commons/testing/test_em_plan_default.gd", r"EM PLAN DEFAULT: (PASS|FAIL)", 300),
     "suspend":       ("gd", "res://commons/testing/test_em_suspend.gd", r"EM SUSPEND: (PASS|FAIL|SKIP)", 300),
     "vr_parity":     ("gd", "res://commons/testing/test_em_vr_parity.gd", r"EM VR PARITY: (PASS|FAIL)", 400),
+    "vr_eye":        ("gd", "res://commons/testing/test_em_vr_eye.gd", r"EM VR EYE: (PASS|FAIL)", 400),
 }
 
 

@@ -1188,19 +1188,57 @@ func _is_vr() -> bool:
 ## The headset's eye, found once and cached. Returns null until the rig exists,
 ## and every caller must cope with that — during staging the museum can be in
 ## the tree a frame or two before the XR origin is.
+## THE EYE IS THE CURRENT ORIGIN'S CAMERA (2026-08-18). Under the shipped
+## game loop there are TWO XROrigin3D in the tree: the staging's own (the
+## menu and loading-screen rig, which stays where the menu was) and the loaded
+## scene's (base.tscn's, which the visitor actually drives). The old lookup
+## took the first XROrigin3D it met and cached it forever — the staging rig —
+## so the eye NEVER MOVED: nothing streamed past the first segment, and every
+## body more than 38 m from that dead eye was hidden and suspended as the
+## visitor walked among them. Palle: "the VR only loads one map, no endless
+## museum, also it loads less artifacts." Both symptoms, one wrong eye.
+##
+## Now: the camera under the origin that is CURRENT (XR Tools flips `current`
+## to the loaded scene's rig), searched to any depth, re-checked when the
+## cached one stops being current, and printed once when it changes.
+var _vr_eye_name: String = ""
 func _vr_eye() -> Camera3D:
 	if _vr_cam != null and is_instance_valid(_vr_cam):
-		return _vr_cam
-	var origin := get_tree().get_first_node_in_group("xr_origin")
-	if origin == null:
-		origin = _find_node_of_type(get_tree().get_root(), "XROrigin3D")
-	if origin == null:
-		return null
-	for c in origin.get_children():
-		if c is XRCamera3D:
-			_vr_cam = c
+		var o: Node = _vr_cam.get_parent()
+		while o != null and not (o is XROrigin3D):
+			o = o.get_parent()
+		if o != null and bool(o.get("current")):
 			return _vr_cam
-	return null
+		_vr_cam = null          # the origin lost `current` — resolve again
+	var origins: Array = []
+	_collect_of_type(get_tree().get_root(), "XROrigin3D", origins)
+	var pick: Node = null
+	for og in origins:
+		if bool(og.get("current")):
+			pick = og
+			break
+	if pick == null and not origins.is_empty():
+		pick = origins[origins.size() - 1]     # the most recently added rig — the loaded scene's
+	if pick == null:
+		return null
+	var cams: Array = []
+	_collect_of_type(pick, "XRCamera3D", cams)
+	if cams.is_empty():
+		return null
+	_vr_cam = cams[0]
+	var nm: String = str(pick.get_path())
+	if nm != _vr_eye_name:
+		_vr_eye_name = nm
+		print("[endless_museum] VR eye: %s (current=%s, %d origin(s) in the tree)" % [
+			nm, str(bool(pick.get("current"))), origins.size()])
+	return _vr_cam
+
+
+func _collect_of_type(n: Node, type_name: String, out: Array) -> void:
+	if n.is_class(type_name):
+		out.append(n)
+	for c in n.get_children():
+		_collect_of_type(c, type_name, out)
 
 func _find_node_of_type(n: Node, type_name: String) -> Node:
 	if n.is_class(type_name):
@@ -2382,6 +2420,10 @@ func _number_places(seg: Node3D, chapter: String, pearl: String) -> void:
 		var kind := String(rd.get("kind", "artifact"))
 		if kind == "prop" or kind == "furniture":
 			continue                       # service and seating are not places
+		if kind == "showing":
+			continue                       # a showing is numbered by its CARD below (the proxy record is
+			                               # desktop-only, and counting both gave the desktop 130 showings
+			                               # to VR's 65 and a different number on every body)
 		places.append({"rec": rd, "node": node, "kind": kind})
 	for ch_node in seg.get_children():
 		if ch_node.has_meta("em_showing_card"):
