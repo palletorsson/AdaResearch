@@ -216,6 +216,20 @@ const AUTO_IDLE_LIMIT: int = 8
 var _walk_erased: Dictionary = {}  # Vector2i -> String provenance
 var _auto_reach: Dictionary = {}   # last BFS's reachable set, for the cut
 var _seal_overflow: Array = []     # bodies too wide for MAX_SEAL_RADIUS to seal
+# THE THRESHOLD GATE (2026-08-18). The vestibule stands alone: a sealed
+# bi-parting door across the way into the first hall, a palm scanner on the
+# jamb. VR: a hand in the scanner's box. Desktop: click it. The walk map is
+# untouched — the door is a COLLIDER, removed when it opens — so the planner
+# and the autopilot route exactly as before, and the autopilot opens it at
+# once (a gate that made the walkthrough fail would be measuring the door).
+# The SECOND segment is not built at _ready any more; it builds while the
+# visitor crosses the vestibule, so the museum appears in one segment's time
+# instead of two.
+var _mod_gate = null
+var _gate: Dictionary = {}
+var _gate_t: float = -1.0          # seconds since the grant; < 0 = still sealed
+var _lazy_pending: int = 0         # segments still owed from the opening build
+var _lazy_delay: float = 0.0
 var _showing_cards: Array = []     # every wall card built this run: chapter · pearl · number, world pos
 const SHOWING_CARDS := "res://ada_run/em_showing_cards.json"
 
@@ -472,9 +486,13 @@ func _ready() -> void:
 		push_error("endless_museum: no museum-tagged templates in %s" % TEMPLATES)
 		return
 	_setup_world()
-	var preload_n: int = _shot_segments if _shot_path != "" else 2
+	# LAZY: one segment now, the rest owed. A shot run still builds all it
+	# needs synchronously — a frame of a museum half-built is not a proof.
+	var preload_n: int = _shot_segments if _shot_path != "" else 1
 	for i in range(preload_n):
 		_build_segment()
+	if _shot_path == "":
+		_lazy_pending = 1
 	if _edit_mode:
 		_arm_editor()
 	# the number the whole set-deal pass exists to move: v1 stamped at most 8
@@ -591,6 +609,7 @@ func _load_modules() -> void:
 	_mod_plinths = _load_module("em_plinths.gd")
 	_mod_editor = _load_module("em_editor.gd")
 	_mod_props = _load_module("em_props.gd")
+	_mod_gate = _load_module("em_gate.gd")
 	_mod_pool = _load_module("em_pool.gd")
 	print("[endless_museum] modules: mats=%s light=%s env=%s detail=%s feel=%s audio=%s" % [
 		_mod_mats != null, _mod_light != null, _mod_env != null,
@@ -1968,6 +1987,16 @@ func _build_segment() -> void:
 	# curriculum, a plinth is whether you can SEE it, a prop is whether the wall
 	# is a wall, a guest is whether the pool is wider than the spine.
 	seg.set_meta("em_chapter", seg_seq)
+	# THE GATE, on the opening segment only: the vestibule becomes its own room
+	if _seg_index == 1 and _mod_gate != null and _shot_path == "" and _autopilot == 0:
+		_gate = _mod_gate.call("build", seg, solid, w, wall_col, m_wall)
+		if not _gate.is_empty():
+			var sc: Node3D = _gate.get("scanner") as Node3D
+			if sc != null and sc.has_signal("palm_scanned"):
+				sc.connect("palm_scanned", Callable(self, "_open_gate"))
+			var moved: int = int(_mod_gate.call("clear_props", seg, sc))
+			print("[em-gate] the first passage stands alone: sealed door + palm scanner on the jamb%s — the next hall loads behind it" % [
+				(", %d prop(s) moved aside" % moved) if moved > 0 else ""])
 	_apply_hand_adds(seg, zbase, seg_seq)
 	var wk_d: Dictionary = deal.get("walk_kinds", {}) if deal is Dictionary else {}
 	if not wk_d.is_empty():
@@ -4391,9 +4420,32 @@ func _tile_at(tile: Array, x: int, y: int) -> String:
 	return String(row[x])
 
 
+## The scanner said yes (VR hand, desktop click, or a walk that must not be
+## measuring a door). Opens once; further grants are ignored.
+func _open_gate() -> void:
+	if _gate.is_empty() or _gate_t >= 0.0:
+		return
+	_gate_t = 0.0
+	print("[em-gate] ACCESS GRANTED — the door parts, the first hall is open")
+
+
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
+	# the owed segment: built one frame after the first, so the visitor sees
+	# the vestibule immediately and the hall fills while they cross it
+	if _lazy_pending > 0:
+		# a beat first: the vestibule renders, the visitor starts walking, and
+		# only then does the hall behind the door cost its frame
+		_lazy_delay += _delta
+		if _lazy_delay > 1.2:
+			_lazy_pending -= 1
+			_lazy_delay = 0.0
+			_build_segment()
+	if _gate_t >= 0.0 and _mod_gate != null and not _gate.is_empty():
+		_gate_t += _delta
+		if not bool(_mod_gate.call("step_open", _gate, _gate_t)):
+			_gate = {}          # fully open: nothing left to step
 	if _shot_path != "":
 		return
 	# desktop needs its own camera; VR waits for the headset rig to appear,
@@ -4530,6 +4582,12 @@ func _physics_process(_delta: float) -> void:
 var _jump_pressed: bool = false
 
 func _input(event: InputEvent) -> void:
+	# desktop: click the scanner to open the threshold door
+	if event is InputEventMouseButton and (event as InputEventMouseButton).pressed \
+			and (event as InputEventMouseButton).button_index == MOUSE_BUTTON_LEFT \
+			and not _gate.is_empty() and _gate_t < 0.0 and _mod_gate != null:
+		if bool(_mod_gate.call("clicked", _cam, _gate.get("scanner"))):
+			_open_gate()
 	if Engine.is_editor_hint():
 		return
 	if event is InputEventKey and (event as InputEventKey).pressed and not (event as InputEventKey).echo \
