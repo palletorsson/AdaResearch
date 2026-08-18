@@ -231,6 +231,16 @@ var _gate_t: float = -1.0          # seconds since the grant; < 0 = still sealed
 var _lazy_pending: int = 0         # segments still owed from the opening build
 var _lazy_delay: float = 0.0
 var _showing_cards: Array = []     # every wall card built this run: chapter · pearl · number, world pos
+# THE INVENTORY (2026-08-18, Palle: "it should say primitives:0001, like in a
+# museum; the artifact should also be part of the numbering system"). Every
+# PLACE in a chapter — a stamped body as much as a wall showing — is numbered
+# `chapter:NNNN` in WALKING order (z, then x) as the segment is built, the
+# number is printed on its card or on a small floor plaque, and the whole list
+# is written to ada_run/em_inventory.json. The number is the handle: a ruling
+# can swap what stands at 0007 or move it, and the number stays.
+var _inventory: Array = []
+var _inv_counter: Dictionary = {}   # chapter -> next number
+const INVENTORY := "res://ada_run/em_inventory.json"
 const SHOWING_CARDS := "res://ada_run/em_showing_cards.json"
 
 func _save_showing_cards() -> void:
@@ -462,8 +472,8 @@ var _seg_plinths: int = 0          # plinths stamped in the segment being dealt
 var _seat_rows: Array = []         # [{token, gap}] — measured seat error per lifted artifact
 var _rel_db: Dictionary = {}       # parsed artifact_relations.json
 var _live: Dictionary = {}         # lookup -> {scene, fp} for EVERY alive artifact,
-                                   # not only the pool: a relative is dealt by name,
-                                   # and most names are not in the curriculum order
+								   # not only the pool: a relative is dealt by name,
+								   # and most names are not in the curriculum order
 var _deal_stats: Dictionary = {}   # running totals for the end-of-run print
 
 func _ready() -> void:
@@ -1998,6 +2008,7 @@ func _build_segment() -> void:
 			print("[em-gate] the first passage stands alone: sealed door + palm scanner on the jamb%s — the next hall loads behind it" % [
 				(", %d prop(s) moved aside" % moved) if moved > 0 else ""])
 	_apply_hand_adds(seg, zbase, seg_seq)
+	_number_places(seg, seg_seq, String(deal.get("pearl", "")) if deal is Dictionary else "")
 	var wk_d: Dictionary = deal.get("walk_kinds", {}) if deal is Dictionary else {}
 	if not wk_d.is_empty():
 		print("[endless_museum]   HERO WALK in %s: %s" % [seg_seq, str(wk_d)])
@@ -2269,6 +2280,84 @@ func _build_side_rooms(seg: Node3D, solid: StaticBody3D, w: int, tile_h: int,
 		else:
 			print("[em-room] side room for %s refused - %s" % [r.get("token"), _stamp_refusal])
 	_deal_stats["side_rooms"] = int(_deal_stats.get("side_rooms", 0)) + built
+
+
+## Number every place in this segment, in WALKING order, and label it.
+## A place is a stamped BODY (any venue) or a wall SHOWING. The number reads
+## `primitives:0007` — chapter and a four-digit place — and is printed on the
+## showing's card or on a small plaque at the body's foot. Ledger:
+## ada_run/em_inventory.json.
+func _number_places(seg: Node3D, chapter: String, pearl: String) -> void:
+	if chapter == "":
+		return
+	var places: Array = []
+	for r in _edit_records:
+		var rd: Dictionary = r
+		var node: Node3D = rd.get("node") as Node3D
+		if node == null or not is_instance_valid(node) or not seg.is_ancestor_of(node):
+			continue
+		if rd.has("inv"):
+			continue                       # already numbered in an earlier pass
+		var kind := String(rd.get("kind", "artifact"))
+		if kind == "prop" or kind == "furniture":
+			continue                       # service and seating are not places
+		places.append({"rec": rd, "node": node, "kind": kind})
+	for ch_node in seg.get_children():
+		if ch_node.has_meta("em_showing_card"):
+			places.append({"rec": {}, "node": ch_node as Node3D, "kind": "showing"})
+	places.sort_custom(func(a, b):
+		var pa: Vector3 = (a["node"] as Node3D).global_position
+		var pb: Vector3 = (b["node"] as Node3D).global_position
+		if absf(pa.z - pb.z) > 0.5:
+			return pa.z < pb.z
+		return pa.x < pb.x)
+	var n: int = int(_inv_counter.get(chapter, 1))
+	for pl in places:
+		var node: Node3D = pl["node"]
+		var kind := String(pl["kind"])
+		var id := "%s:%04d" % [chapter, n]
+		var tok := String((pl["rec"] as Dictionary).get("token", "")) if not (pl["rec"] as Dictionary).is_empty() else "showing"
+		if kind == "showing":
+			# the card already carries a label: its first line becomes the number
+			for c in node.get_children():
+				if c is Label3D:
+					var was := String((c as Label3D).text)
+					var tail := was.substr(was.find("\n") + 1) if was.contains("\n") else ""
+					(c as Label3D).text = id + "\n" + tail
+		else:
+			var plate := Label3D.new()
+			plate.text = id
+			plate.font_size = 34
+			plate.pixel_size = 0.0016
+			plate.modulate = Color(0.88, 0.87, 0.84)
+			plate.outline_size = 6
+			plate.outline_modulate = Color(0.08, 0.08, 0.09, 0.9)
+			plate.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+			plate.rotation_degrees.x = -90.0            # lies on the floor, read from above
+			plate.position = Vector3(0.0, 0.02, 0.55)   # a step in front of the body's foot
+			node.add_child(plate)
+			(pl["rec"] as Dictionary)["inv"] = id
+		_inventory.append({"id": id, "chapter": chapter, "pearl": pearl, "kind": kind,
+			"token": tok, "segment": _seg_index - 1,
+			"world": [snappedf(node.global_position.x, 0.1), snappedf(node.global_position.y, 0.1),
+				snappedf(node.global_position.z, 0.1)],
+			"cell": (pl["rec"] as Dictionary).get("tile_cell", [])})
+		n += 1
+	_inv_counter[chapter] = n
+	_save_inventory()
+
+
+func _save_inventory() -> void:
+	var f: FileAccess = FileAccess.open(INVENTORY, FileAccess.WRITE)
+	if f == null:
+		return
+	f.store_string(JSON.stringify({"schema": "adaresearch.em_inventory.v1",
+		"_readme": ("Every PLACE in the museum, numbered chapter:NNNN in walking order (z, then x) "
+			+ "as each segment is built — a stamped body as much as a wall showing. The number is the "
+			+ "handle a ruling uses: em_overrides may `swap_to` another token at a place, move it, or "
+			+ "give a showing `text`. Rebuilt every run; the numbering is a function of the plan."),
+		"places": _inventory}, "\t"))
+	f.close()
 
 
 ## The forecourt builder. Returns the after-porch depth it added (0 if none).
@@ -2759,6 +2848,19 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 					% [tok, tx, tz, int(to[0]), int(to[1])])
 				tx = int(to[0])
 				tz = int(to[1])
+			# THE SWAP: a ruling may put ANOTHER body in this place. The place
+			# (its cell, its plinth, its number) stays; what stands there changes.
+			if String(ov.get("swap_to", "")) != "":
+				var swap_tok := String(ov["swap_to"])
+				var swap_scene := String(scene_of.get(swap_tok, ""))
+				if swap_scene == "" and _live.has(swap_tok):
+					swap_scene = String((_live[swap_tok] as Dictionary).get("scene", ""))
+				if swap_scene != "":
+					print("[em-swap] %s stands where %s did (hand ruling)" % [swap_tok, tok])
+					tok = swap_tok
+					scene = swap_scene
+				else:
+					print("[em-swap] refused: %s is not a live artifact" % swap_tok)
 			if ov.has("rotation") and absf(float(ov["rotation"]) - yaw_override) > 0.5:
 				print("[em-edit] %s turned by hand %.0f -> %.0f"
 					% [tok, yaw_override, float(ov["rotation"])])
