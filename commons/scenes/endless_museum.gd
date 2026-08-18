@@ -1885,6 +1885,7 @@ func _build_segment() -> void:
 	# inside it key their rulings by chapter, and the later set_meta (kept for
 	# the add pass) is now a no-op re-assert
 	seg.set_meta("em_chapter", next_seq)
+	seg.set_meta("em_key", String(spec.get("key", "")))
 	var deal: Dictionary = _deal_segment(seg, slots, zbase, spec, tile, w, h, next_seq)
 	var placed: int = int(deal.get("placed", 0))
 	var seg_seq: String = String(deal.get("sequence", ""))
@@ -2003,7 +2004,7 @@ func _build_segment() -> void:
 			# hand can refer to "primitives · lines · 07" and rule on it later
 			for ch_node in seg.get_children():
 				if ch_node.has_meta("em_showing_card"):
-					_showing_cards.append({"segment": _seg_index - 1, "chapter": next_seq,
+					_showing_cards.append({"segment": _seg_index, "chapter": next_seq,   # the segment being built (advanced later)
 						"pearl": String(deal.get("pearl", "")) if deal is Dictionary else "",
 						"index": int(ch_node.get_meta("em_showing_card")) + 1,
 						"id": "%s · %s · %02d" % [next_seq, String(deal.get("pearl", "")) if deal is Dictionary else "-", int(ch_node.get_meta("em_showing_card")) + 1],
@@ -2128,6 +2129,15 @@ func _build_segment() -> void:
 				(", %d prop(s) moved aside" % moved) if moved > 0 else ""])
 	_apply_hand_adds(seg, zbase, seg_seq)
 	_number_places(seg, seg_seq, String(deal.get("pearl", "")) if deal is Dictionary else "")
+	# THE AS-BUILT PLAN (2026-08-18). Everything the assembler just decided —
+	# which cells are floor, wall or a body's seal, where every body finally
+	# stands and what it is numbered, every card, the gate, the courts, rooms
+	# and halls — used to exist only in the scene tree, so "what is the floor
+	# plan?" meant running Godot or re-deriving the arithmetic elsewhere. Now
+	# each segment writes itself to ada_run/em_built.json as it finishes,
+	# AFTER the gate and the numbering: one file the plan view, the plan
+	# editor, the inventory and a VR-vs-desktop diff can all READ.
+	_write_built(seg, seg_seq, deal, zbase, w, h, porch_depth, court_depth)
 	var wk_d: Dictionary = deal.get("walk_kinds", {}) if deal is Dictionary else {}
 	if not wk_d.is_empty():
 		print("[endless_museum]   HERO WALK in %s: %s" % [seg_seq, str(wk_d)])
@@ -2581,6 +2591,78 @@ func _ruling_for(tok: String, chapter: String, tx: int, tz: int, hand_row: bool 
 			% [tok, tx, tz, str(best.get("from", [])), best_d])
 		return best
 	return {}
+
+
+const BUILT_PATH := "res://ada_run/em_built.json"
+var _built: Array = []          # one entry per segment built this run
+
+## Write what THIS segment turned out to be. Cells come from the walk map
+## (floor the walker may use) and the erased map (what took a cell and why);
+## bodies from the records with their final world pose and inventory number;
+## cards from the showing ledger; rooms/courts/halls/gate from the deal.
+func _write_built(seg: Node3D, chapter: String, deal: Variant, zbase: int, w: int, h: int,
+		porch_depth: int, court_depth: int) -> void:
+	var z1: int = zbase + VESTIBULE_H + h + porch_depth + court_depth
+	# cells: a compact run-length row per z: "." floor, "#" not floor, "r" route lane
+	var rows: Array = []
+	for z in range(zbase, z1):
+		var line := ""
+		for x in range(-1, w + HALL_GALLERY_W + 8):
+			var k := Vector2i(x, z)
+			if _walk_cells.has(k):
+				line += "."
+			elif _walk_erased.has(k):
+				var why := String(_walk_erased[k])
+				line += "s" if why.begins_with("seal") else ("b" if why == "bench" else ("p" if why.begins_with("prop") else "x"))
+			else:
+				line += "#"
+		rows.append(line)
+	var bodies: Array = []
+	for r in _edit_records:
+		var rd: Dictionary = r
+		var nv: Variant = rd.get("node")
+		if nv == null or not is_instance_valid(nv):
+			continue
+		var n: Node3D = nv as Node3D
+		if not seg.is_ancestor_of(n):
+			continue
+		var kind := String(rd.get("kind", "artifact"))
+		bodies.append({"token": rd.get("token", ""), "kind": kind, "inv": rd.get("inv", ""),
+			"tile_cell": rd.get("tile_cell", []), "world": [snappedf(n.global_position.x, 0.01),
+			snappedf(n.global_position.y, 0.01), snappedf(n.global_position.z, 0.01)],
+			"rot": snappedf(n.rotation_degrees.y, 0.1), "walk_kind": rd.get("walk_kind", ""),
+			"walk_space": rd.get("walk_space", "")})
+	var seg_no: int = _seg_index - 1          # already advanced by the time the segment finishes
+	var cards: Array = []
+	for c in _showing_cards:
+		if int((c as Dictionary).get("segment", -1)) == seg_no:
+			cards.append(c)
+	var d: Dictionary = deal if deal is Dictionary else {}
+	_built.append({
+		"segment": seg_no, "chapter": chapter,
+		"pearl": String(d.get("pearl", "")), "pearl_index": int(d.get("pearl_index", -1)),
+		"museum": String(seg.get_meta("em_key")) if seg.has_meta("em_key") else "",
+		"z0": zbase, "z1": z1, "w": w, "h": h, "vestibule": VESTIBULE_H,
+		"porch_depth": porch_depth, "court_depth": court_depth,
+		"cells": rows, "cell_x0": -1,
+		"legend": {".": "floor", "#": "not floor", "s": "sealed by a body", "b": "bench", "p": "prop", "x": "erased"},
+		"bodies": bodies, "cards": cards,
+		"courts": d.get("courts", []), "side_rooms": d.get("side_rooms", []),
+		"forecourt": (d.get("forecourt", []) as Array).size(),
+		"gate": {"sealed": not _gate.is_empty()} if seg_no == 0 else {},
+		"mode": "vr" if _vr else "desktop",
+	})
+	var f: FileAccess = FileAccess.open(BUILT_PATH, FileAccess.WRITE)
+	if f == null:
+		return
+	f.store_string(JSON.stringify({"schema": "adaresearch.em_built.v1",
+		"_readme": ("The AS-BUILT plan: what the assembler actually made of each segment this run — every "
+			+ "cell's role, every body's final world pose and inventory number, every card, courts, rooms, "
+			+ "the gate, the mode. Written as each segment finishes. Read this instead of re-deriving the "
+			+ "floor plan; diff two runs (vr vs desktop) to prove parity."),
+		"plan": String(_plan_path), "at": Time.get_datetime_string_from_system(false, true),
+		"segments": _built}, "	"))
+	f.close()
 
 
 ## The forecourt builder. Returns the after-porch depth it added (0 if none).
@@ -4210,6 +4292,8 @@ const CHROME_NAMES := ["grabsphere", "grabhandle", "grab_sphere", "grab_handle",
 	"debuglabel", "debugaxes"]
 const CHROME_SCAN_MAX := 400
 
+## NOT CALLED (measured 2026-08-18: zero call sites since it landed on 08-09) —
+## the handles are visible in every mode; kept as the vocabulary for a shot-path strip.
 func _suppress_chrome(root: Node3D, lookup: String = "") -> int:
 	var n_hit: int = 0
 	# A grab sphere IS the exhibit for the grab_sphere_* family, and a laser
