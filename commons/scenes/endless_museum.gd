@@ -2337,38 +2337,52 @@ func _number_places(seg: Node3D, chapter: String, pearl: String) -> void:
 					var tail := was.substr(was.find("\n") + 1) if was.contains("\n") else ""
 					(c as Label3D).text = id + "\n" + tail
 		else:
-			# A STANDING CAPTION, not a mark on the floor (2026-08-18: the first
-			# version lay flat at 5 cm and was invisible in both modes). An
-			# off-white plaque on a thin post at reading height, a step in front
-			# of the body, facing the way the visitor walks in: the number, and
-			# the token under it — the same card the wall showings carry.
+			# A STANDING CAPTION, not a mark on the floor (2026-08-18). Two
+			# corrections from the first build: it lay flat at 5 cm and was
+			# invisible, and as a CHILD of the body it inherited the body's
+			# scale — some artifacts are scaled, and the plaque stretched with
+			# them. So it is a child of the SEGMENT, placed at the body's world
+			# position, at identity scale, facing the way the visitor walks in.
+			var cap := Node3D.new()
+			cap.name = "Caption_%s" % id.replace(":", "_")
+			seg.add_child(cap)
+			cap.global_position = node.global_position + Vector3(0.0, 0.0, -0.8)
+			cap.global_rotation = Vector3.ZERO
 			var post := MeshInstance3D.new()
-			post.name = "Caption%s" % id.replace(":", "_")
-			var pm := BoxMesh.new(); pm.size = Vector3(0.035, 0.62, 0.035)
+			var pm := BoxMesh.new(); pm.size = Vector3(0.035, 0.72, 0.035)
 			post.mesh = pm
 			post.material_override = _sm("plinth")
-			post.position = Vector3(0.0, 0.31, -0.75)
-			node.add_child(post)
+			post.position = Vector3(0.0, 0.36, 0.0)
+			cap.add_child(post)
 			var plaque := MeshInstance3D.new()
-			var qm := BoxMesh.new(); qm.size = Vector3(0.30, 0.13, 0.012)
+			var qm := BoxMesh.new(); qm.size = Vector3(0.46, 0.17, 0.012)
 			plaque.mesh = qm
 			var qmat := StandardMaterial3D.new()
 			qmat.albedo_color = Color(0.955, 0.95, 0.93)
 			qmat.roughness = 0.6
+			# a caption is lit in a museum; here the light is a whisper of its own
+			# so the number reads on the dark side of a body too
+			qmat.emission_enabled = true
+			qmat.emission = Color(0.9, 0.89, 0.85)
+			qmat.emission_energy_multiplier = 0.35
 			plaque.material_override = qmat
-			plaque.position = Vector3(0.0, 0.66, -0.75)
-			plaque.rotation_degrees = Vector3(-18.0, 180.0, 0.0)   # tilted up to the eye, facing the walk
-			node.add_child(plaque)
+			plaque.position = Vector3(0.0, 0.78, 0.0)
+			plaque.rotation_degrees = Vector3(-16.0, 0.0, 0.0)   # tilted up to the eye
+			cap.add_child(plaque)
 			var plate := Label3D.new()
 			plate.text = id + "
-" + tok.left(22)
+" + tok.left(18)
 			plate.font_size = 44
-			plate.pixel_size = 0.0022                  # ~10 cm of number, read at 2 m
+			# 44 x 0.0010 = 44 mm a line; "primitives:0055" is 15 characters, so
+			# about 330 mm across a 460 mm plaque — it fits, which the first
+			# version did not (the text was four times the card)
+			plate.pixel_size = 0.0010
 			plate.modulate = Color(0.11, 0.10, 0.09)
 			plate.outline_size = 0
 			plate.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 			plate.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 			plate.position = Vector3(0.0, 0.0, -0.008)
+			plate.rotation_degrees.y = 180.0            # the face that looks back down the walk
 			plaque.add_child(plate)
 			(pl["rec"] as Dictionary)["inv"] = id
 		_inventory.append({"id": id, "chapter": chapter, "pearl": pearl, "kind": kind,
