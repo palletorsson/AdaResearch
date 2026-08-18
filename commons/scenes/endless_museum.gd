@@ -18,6 +18,14 @@ extends Node3D
 			notify_property_list_changed()     # the map dropdown follows the chapter
 @export var start_map: String = ""
 
+## THE PLAN IS THE DEFAULT (2026-08-18). Pressing Play on this scene passed no
+## command line, so `--em-plan` was absent, `_plan_path` stayed empty and the
+## museum dealt from the POOL as v1 — every plan edit invisible, with nothing
+## in the log to say why. Palle lost an afternoon to it: "still no change when
+## I run endless_museum.tscn". Now the scene carries the plan itself; the flag
+## still wins, and clearing this field in the Inspector gives back v1 dealing.
+@export_file("*.json") var plan_file: String = "res://ada_run/em_plan.json"
+
 const _SPINE_JSON := "res://commons/maps/curriculum_spine.json"
 const _SEQ_DIR := "res://commons/maps/sequences/"
 
@@ -521,6 +529,12 @@ func _ready() -> void:
 	_load_crowns()
 	_load_relations()
 	_load_pool()
+	# the flag wins; the scene's own field speaks when there was no flag
+	if _plan_path == "" and plan_file != "" and FileAccess.file_exists(plan_file):
+		_plan_path = plan_file
+		print("[em-plan] no --em-plan flag; using the scene's plan_file: %s" % plan_file)
+	elif _plan_path == "":
+		print("[em-plan] NO PLAN — dealing from the pool as v1 (plan_file is empty or missing); nothing in ada_run/em_plan.json will show")
 	_start_at_chapter()
 	# after the pool, because a plan naming an artifact the pool never built is
 	# a stale plan and the museum should be able to say so by name.

@@ -55,6 +55,7 @@ GATES: dict[str, tuple[str, str, str, int]] = {
     "autosave":      ("gd", "res://commons/testing/test_em_autosave.gd", r"EM AUTOSAVE: (PASS|FAIL|SKIP)", 400),
     "stream":        ("gd", "res://commons/testing/test_em_stream.gd", r"EM STREAM: (PASS|FAIL|SKIP)", 500),
     "config_edit":   ("gd", "res://commons/testing/test_em_config_edit.gd", r"EM CONFIG: (PASS|FAIL|SKIP)", 400),
+    "plan_default":  ("gd", "res://commons/testing/test_em_plan_default.gd", r"EM PLAN DEFAULT: (PASS|FAIL)", 300),
 }
 
 
