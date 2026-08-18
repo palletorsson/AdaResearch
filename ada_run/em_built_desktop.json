@@ -1,6 +1,6 @@
 {
 	"_readme": "The AS-BUILT plan: what the assembler actually made of each segment this run — every cell's role, every body's final world pose and inventory number, every card, courts, rooms, the gate, the mode. Written as each segment finishes. Read this instead of re-deriving the floor plan; diff two runs (vr vs desktop) to prove parity.",
-	"at": "2026-08-18 22:15:31",
+	"at": "2026-08-18 22:40:39",
 	"plan": "res://ada_run/em_plan.json",
 	"schema": "adaresearch.em_built.v1",
 	"segments": [
@@ -25,7 +25,7 @@
 					]
 				},
 				{
-					"inv": "primitives:0022",
+					"inv": "primitives:0025",
 					"kind": "artifact",
 					"rot": 105.0,
 					"tile_cell": [
@@ -37,12 +37,26 @@
 					"walk_space": "wall",
 					"world": [
 						2.5,
-						0.2,
+						0.6,
 						13.5
 					]
 				},
 				{
 					"inv": "primitives:0009",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "origin",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						12.5,
+						0.0,
+						8.5
+					]
+				},
+				{
+					"inv": "primitives:0010",
 					"kind": "artifact",
 					"rot": 90.0,
 					"tile_cell": [
@@ -54,12 +68,26 @@
 					"walk_space": "wall",
 					"world": [
 						12.5,
-						0.95,
+						1.45,
 						8.5
 					]
 				},
 				{
-					"inv": "primitives:0011",
+					"inv": "primitives:0012",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "you_are_here",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						0.0,
+						9.5
+					]
+				},
+				{
+					"inv": "primitives:0013",
 					"kind": "artifact",
 					"rot": 180.0,
 					"tile_cell": [
@@ -71,12 +99,26 @@
 					"walk_space": "wall",
 					"world": [
 						7.5,
-						0.95,
+						0.96,
 						9.5
 					]
 				},
 				{
-					"inv": "primitives:0020",
+					"inv": "primitives:0022",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "floating_sphere_field",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						2.5,
+						0.0,
+						12.5
+					]
+				},
+				{
+					"inv": "primitives:0023",
 					"kind": "artifact",
 					"rot": 0.0,
 					"tile_cell": [
@@ -93,7 +135,21 @@
 					]
 				},
 				{
-					"inv": "primitives:0024",
+					"inv": "primitives:0028",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "interactive_point_origin_force",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						2.5,
+						0.0,
+						14.5
+					]
+				},
+				{
+					"inv": "primitives:0029",
 					"kind": "artifact",
 					"rot": 0.0,
 					"tile_cell": [
@@ -105,12 +161,12 @@
 					"walk_space": "wall",
 					"world": [
 						2.5,
-						0.95,
+						1.0,
 						14.5
 					]
 				},
 				{
-					"inv": "primitives:0014",
+					"inv": "primitives:0016",
 					"kind": "artifact",
 					"rot": 180.0,
 					"tile_cell": [
@@ -127,7 +183,21 @@
 					]
 				},
 				{
-					"inv": "primitives:0023",
+					"inv": "primitives:0026",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "example_2_6_single_attractor_vr",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						8.5,
+						0.0,
+						13.5
+					]
+				},
+				{
+					"inv": "primitives:0027",
 					"kind": "artifact",
 					"rot": 0.0,
 					"tile_cell": [
@@ -139,12 +209,12 @@
 					"walk_space": "wall",
 					"world": [
 						8.5,
-						0.95,
+						1.15,
 						13.5
 					]
 				},
 				{
-					"inv": "primitives:0041",
+					"inv": "primitives:0047",
 					"kind": "artifact",
 					"rot": 180.0,
 					"tile_cell": [
@@ -161,7 +231,21 @@
 					]
 				},
 				{
-					"inv": "primitives:0031",
+					"inv": "primitives:0036",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "two_points_line",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						9.5,
+						0.0,
+						18.5
+					]
+				},
+				{
+					"inv": "primitives:0037",
 					"kind": "artifact",
 					"rot": 0.0,
 					"tile_cell": [
@@ -173,7 +257,7 @@
 					"walk_space": "wall",
 					"world": [
 						9.5,
-						0.95,
+						1.0,
 						18.5
 					]
 				},
@@ -797,7 +881,7 @@
 					]
 				},
 				{
-					"inv": "primitives:0044",
+					"inv": "primitives:0050",
 					"kind": "artifact",
 					"rot": 0.0,
 					"tile_cell": [
@@ -814,7 +898,7 @@
 					]
 				},
 				{
-					"inv": "primitives:0045",
+					"inv": "primitives:0051",
 					"kind": "artifact",
 					"rot": 0.0,
 					"tile_cell": [
@@ -1231,9 +1315,9 @@
 				"##.....sss..sss#############",
 				"###b.#.sss.#################",
 				"##...#.....#...#############",
-				"##.s.......#...#############",
-				"##.#....ss.....#############",
-				"##.s.#.........#############",
+				"##.s....sss#...#############",
+				"##.#....sss....#############",
+				"##.s.#..sss....#############",
 				"##...#....b#...#############",
 				"######.....##..#############",
 				"##...#.........#############",
@@ -1437,7 +1521,9 @@
 				"6,8": "you_are_here",
 				"6,9": "you_are_here",
 				"7,10": "you_are_here",
+				"7,12": "example_2_6_single_attractor_vr",
 				"7,13": "example_2_6_single_attractor_vr",
+				"7,14": "example_2_6_single_attractor_vr",
 				"7,39": "folding_past",
 				"7,48": "lab_room",
 				"7,49": "lab_room",
@@ -1451,7 +1537,9 @@
 				"7,8": "you_are_here",
 				"7,9": "you_are_here",
 				"8,10": "you_are_here",
+				"8,12": "example_2_6_single_attractor_vr",
 				"8,13": "example_2_6_single_attractor_vr",
+				"8,14": "example_2_6_single_attractor_vr",
 				"8,18": "two_points_line",
 				"8,48": "lab_room",
 				"8,49": "lab_room",
@@ -1464,6 +1552,9 @@
 				"8,56": "lab_room",
 				"8,8": "you_are_here",
 				"8,9": "you_are_here",
+				"9,12": "example_2_6_single_attractor_vr",
+				"9,13": "example_2_6_single_attractor_vr",
+				"9,14": "example_2_6_single_attractor_vr",
 				"9,18": "two_points_line",
 				"9,48": "lab_room",
 				"9,49": "lab_room",
@@ -1487,7 +1578,21 @@
 			"bake_stale": false,
 			"bodies": [
 				{
-					"inv": "primitives:0062",
+					"inv": "primitives:0070",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "klee_walking_point",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						2.5,
+						0.0,
+						68.5
+					]
+				},
+				{
+					"inv": "primitives:0069",
 					"kind": "artifact",
 					"rot": 0.0,
 					"tile_cell": [
@@ -1499,12 +1604,12 @@
 					"walk_space": "wall",
 					"world": [
 						2.5,
-						0.95,
+						0.9,
 						68.5
 					]
 				},
 				{
-					"inv": "primitives:0083",
+					"inv": "primitives:0098",
 					"kind": "artifact",
 					"rot": 90.0,
 					"tile_cell": [
@@ -1521,7 +1626,7 @@
 					]
 				},
 				{
-					"inv": "primitives:0092",
+					"inv": "primitives:0106",
 					"kind": "artifact",
 					"rot": 180.0,
 					"tile_cell": [
@@ -1538,7 +1643,21 @@
 					]
 				},
 				{
-					"inv": "primitives:0074",
+					"inv": "primitives:0086",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "laser_sword",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						2.5,
+						0.0,
+						73.5
+					]
+				},
+				{
+					"inv": "primitives:0087",
 					"kind": "artifact",
 					"rot": 0.0,
 					"tile_cell": [
@@ -1550,12 +1669,12 @@
 					"walk_space": "wall",
 					"world": [
 						2.5,
-						0.95,
+						0.76,
 						73.5
 					]
 				},
 				{
-					"inv": "primitives:0060",
+					"inv": "primitives:0067",
 					"kind": "artifact",
 					"rot": 0.0,
 					"tile_cell": [
@@ -1567,12 +1686,26 @@
 					"walk_space": "wall",
 					"world": [
 						3.5,
-						0.95,
+						0.0,
 						67.5
 					]
 				},
 				{
-					"inv": "primitives:0071",
+					"inv": "primitives:0080",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "cube_scene",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						3.5,
+						0.0,
+						72.5
+					]
+				},
+				{
+					"inv": "primitives:0081",
 					"kind": "artifact",
 					"rot": 0.0,
 					"tile_cell": [
@@ -1584,12 +1717,26 @@
 					"walk_space": "wall",
 					"world": [
 						3.5,
-						0.95,
+						1.15,
 						72.5
 					]
 				},
 				{
-					"inv": "primitives:0059",
+					"inv": "primitives:0065",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "parallel_line_puzzle",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						2.5,
+						0.0,
+						66.5
+					]
+				},
+				{
+					"inv": "primitives:0066",
 					"kind": "artifact",
 					"rot": 90.0,
 					"tile_cell": [
@@ -1601,12 +1748,26 @@
 					"walk_space": "wall",
 					"world": [
 						2.5,
-						0.95,
+						0.19,
 						66.5
 					]
 				},
 				{
-					"inv": "primitives:0072",
+					"inv": "primitives:0082",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "line",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						8.5,
+						0.0,
+						72.5
+					]
+				},
+				{
+					"inv": "primitives:0083",
 					"kind": "artifact",
 					"rot": 0.0,
 					"tile_cell": [
@@ -1618,12 +1779,26 @@
 					"walk_space": "wall",
 					"world": [
 						8.5,
-						0.95,
+						1.18,
 						72.5
 					]
 				},
 				{
-					"inv": "primitives:0069",
+					"inv": "primitives:0077",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "dark_sphere",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						2.5,
+						0.0,
+						71.5
+					]
+				},
+				{
+					"inv": "primitives:0078",
 					"kind": "artifact",
 					"rot": 0.0,
 					"tile_cell": [
@@ -1635,29 +1810,26 @@
 					"walk_space": "wall",
 					"world": [
 						2.5,
-						0.95,
+						0.67,
 						71.5
 					]
 				},
 				{
 					"inv": "primitives:0084",
-					"kind": "artifact",
+					"kind": "plinth",
 					"rot": 0.0,
-					"tile_cell": [
-						12,
-						15
-					],
-					"token": "color_space_navigator",
-					"walk_kind": "extends",
-					"walk_space": "wall",
+					"tile_cell": [],
+					"token": "wall_pattern_gallery",
+					"walk_kind": "",
+					"walk_space": "",
 					"world": [
 						12.5,
-						0.95,
-						78.5
+						0.0,
+						72.5
 					]
 				},
 				{
-					"inv": "primitives:0073",
+					"inv": "primitives:0085",
 					"kind": "artifact",
 					"rot": 0.0,
 					"tile_cell": [
@@ -1674,7 +1846,21 @@
 					]
 				},
 				{
-					"inv": "primitives:0078",
+					"inv": "primitives:0091",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "plus_line_puzzle",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						12.5,
+						0.0,
+						74.5
+					]
+				},
+				{
+					"inv": "primitives:0092",
 					"kind": "artifact",
 					"rot": 90.0,
 					"tile_cell": [
@@ -1686,12 +1872,12 @@
 					"walk_space": "wall",
 					"world": [
 						12.5,
-						0.95,
+						0.19,
 						74.5
 					]
 				},
 				{
-					"inv": "primitives:0093",
+					"inv": "primitives:0107",
 					"kind": "artifact",
 					"rot": 180.0,
 					"tile_cell": [
@@ -1708,7 +1894,21 @@
 					]
 				},
 				{
-					"inv": "primitives:0082",
+					"inv": "primitives:0096",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "line_slack",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						12.5,
+						0.0,
+						76.5
+					]
+				},
+				{
+					"inv": "primitives:0097",
 					"kind": "artifact",
 					"rot": 90.0,
 					"tile_cell": [
@@ -2233,20 +2433,6 @@
 					"kind": "prop",
 					"rot": 90.0,
 					"tile_cell": [],
-					"token": "fire_extinguisher",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						6.1,
-						0.3,
-						63.5
-					]
-				},
-				{
-					"inv": "",
-					"kind": "prop",
-					"rot": 90.0,
-					"tile_cell": [],
 					"token": "wall_clock",
 					"walk_kind": "",
 					"walk_space": "",
@@ -2282,20 +2468,6 @@
 						1.0,
 						1.3,
 						72.5
-					]
-				},
-				{
-					"inv": "",
-					"kind": "prop",
-					"rot": 90.0,
-					"tile_cell": [],
-					"token": "large_window",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						1.0,
-						1.7,
-						78.5
 					]
 				},
 				{
@@ -2383,7 +2555,21 @@
 					]
 				},
 				{
-					"inv": "primitives:0050",
+					"inv": "",
+					"kind": "furniture",
+					"rot": 90.0,
+					"tile_cell": [],
+					"token": "fire_hose_box",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						1.28,
+						0.85,
+						77.5
+					]
+				},
+				{
+					"inv": "primitives:0055",
 					"kind": "artifact",
 					"rot": 0.0,
 					"tile_cell": [
@@ -2400,7 +2586,7 @@
 					]
 				},
 				{
-					"inv": "primitives:0049",
+					"inv": "primitives:0054",
 					"kind": "plinth",
 					"rot": 0.0,
 					"tile_cell": [],
@@ -2414,7 +2600,7 @@
 					]
 				},
 				{
-					"inv": "primitives:0046",
+					"inv": "primitives:0053",
 					"kind": "artifact",
 					"rot": 0.0,
 					"tile_cell": [
@@ -2431,7 +2617,7 @@
 					]
 				},
 				{
-					"inv": "primitives:0096",
+					"inv": "primitives:0110",
 					"kind": "artifact",
 					"rot": 0.0,
 					"tile_cell": [
@@ -2448,7 +2634,7 @@
 					]
 				},
 				{
-					"inv": "primitives:0097",
+					"inv": "primitives:0111",
 					"kind": "artifact",
 					"rot": 0.0,
 					"tile_cell": [
@@ -2465,7 +2651,7 @@
 					]
 				},
 				{
-					"inv": "primitives:0098",
+					"inv": "primitives:0112",
 					"kind": "plinth",
 					"rot": 0.0,
 					"tile_cell": [],
@@ -2479,7 +2665,7 @@
 					]
 				},
 				{
-					"inv": "primitives:0099",
+					"inv": "primitives:0113",
 					"kind": "artifact",
 					"rot": 0.0,
 					"tile_cell": [
@@ -2914,8 +3100,8 @@
 				"##...#....b#.s.#############",
 				"######....s##..#############",
 				"##...#....s..s.#############",
-				"##...#....s....#############",
-				"##........s#.#s#############",
+				"##p..#....s....#############",
+				"##........s#.#.#############",
 				"##b.......s#...#############",
 				"##...#.....#...#############",
 				"###..##...##################",
@@ -3031,6 +3217,14 @@
 			"refused": [
 				{
 					"tile_cell": [
+						12,
+						19
+					],
+					"token": "color_space_navigator",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
 						11,
 						14
 					],
@@ -3049,7 +3243,6 @@
 				"12,76": "line_slack",
 				"12,95": "adjacency_shelf",
 				"13,60": "line_builder_3d",
-				"13,78": "color_space_navigator",
 				"13,95": "adjacency_shelf",
 				"14,60": "line_builder_3d",
 				"15,60": "line_builder_3d",

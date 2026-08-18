@@ -3707,10 +3707,31 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 		# value. tools/em_white_cube_measure.py:165 and em_module_measure.py:42
 		# both add the vestibule; the one consumer that actually places objects
 		# did not. See doc/spatial/spikes/03_where_the_fifteen_go.md.
+		# THE PHANTOM SUPPORT (2026-08-18, Palle: "point zero should have
+		# plinth"). The negotiator writes support_height_m = 0.95 on 660
+		# freestanding rows and 1.4 on 68 wall rows: the height it assumes a
+		# SUPPORT under the body. The museum took that as the deck the body
+		# stands on and built nothing under it — em_plinths, handed top = 0.95,
+		# said "already in band" and declined the plinth — so Point Zero and
+		# hundreds of small bodies floated a metre over bare floor. Now the
+		# tile decides the DECK (a podium cell is 0.4 or 0.8, floor is 0) and
+		# a support the tile does not have becomes a plinth REQUEST
+		# (`support_m`) that _stamp honours: em_plinths' own plinth when it
+		# has a view, a plain station plinth of the asked height when the
+		# token is unmeasured, and the deck when em_plinths refuses for cause
+		# (a rug, a drawing, a room, a wall piece) — never a float.
+		var tile_ch: String = String((tile[tz] as Array)[tx])
+		var deck_top: float = 0.4 if tile_ch.begins_with("2") else (0.8 if tile_ch.begins_with("3") else 0.0)
+		var asked_top: float = float(row.get("support_height_m", 0.0))
 		var cell: Dictionary = {
 			"x": tx, "y": tz + VESTIBULE_H, "rank": 2,
-			"top": float(row.get("support_height_m", 0.0)),
+			"top": deck_top,
 		}
+		if asked_top > deck_top + 0.05:
+			if String(row.get("mode", "")) == "against_wall":
+				cell["top"] = asked_top          # a wall piece hangs at its height; the wall is its support
+			else:
+				cell["support_m"] = asked_top    # a freestanding body wants a plinth, not a hover
 		if not fine_override.is_empty():
 			cell["offset"] = fine_override
 		if not is_equal_approx(scale_override, 1.0):
@@ -4566,6 +4587,20 @@ func _stamp_inner(seg: Node3D, scene_path: String, lookup: String, cell: Diction
 		var pv: Variant = _mod_plinths.call("plan", lookup, cell)
 		if pv is Dictionary:
 			plan_d = pv as Dictionary
+	# the plan's plinth REQUEST (see _deal_from_plan): em_plinths refused only
+	# because it has no measurement of this token -> a plain station plinth
+	# of the asked height. A refusal for cause stands.
+	var support_m: float = float(cell.get("support_m", 0.0))
+	if support_m > 0.05 and not bool(plan_d.get("needs", false)) \
+			and String(plan_d.get("why", "")).begins_with("unmeasured"):
+		var cap_m: float = 0.9
+		plan_d = {"needs": true, "plinth": "station_plinth", "plinth_height": support_m,
+			"artifact_y": support_m, "why": "the plan asked for a %.2f m support and the token is unmeasured — a plain plinth of that height" % support_m,
+			"scene": "res://commons/artifacts/station/station_plinth.tscn",
+			"config": {"top_height": support_m, "cap_meters": cap_m, "width_cells": 1, "depth_cells": 1,
+				"top_style": "flat", "glow_light": false},
+			"footprint_cells": 1, "foot_m": cap_m + 0.06, "centre": support_m, "height_m": 0.0,
+			"base_m": 0.0, "source": "plan", "band": "asked", "token": lookup}
 	var pscene: String = String(plan_d.get("scene", ""))
 	if bool(plan_d.get("needs", false)) and pscene != "" and ResourceLoader.exists(pscene):
 		var pps: PackedScene = load(pscene) as PackedScene

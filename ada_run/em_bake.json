@@ -1,6 +1,6 @@
 {
 	"_readme": "The BAKE: every placement decision the museum makes from a measurement, decided ONCE by a headless --em-bake run and replayed by every later run, desktop or headset. Per chapter|pearl: placed = token, tile cell, the exact cells sealed (x, z-from-segment-base); refused = token, cell, why. Regenerate after editing the plan: python tools/em_bake.py",
-	"at": "2026-08-18 22:13:33",
+	"at": "2026-08-18 22:40:20",
 	"plan": "res://ada_run/em_plan.json",
 	"plan_at": "2026-08-18T11:49:59",
 	"schema": "adaresearch.em_bake.v1",
@@ -1799,6 +1799,38 @@
 						[
 							4,
 							4
+						],
+						[
+							3,
+							3
+						],
+						[
+							4,
+							3
+						],
+						[
+							5,
+							3
+						],
+						[
+							3,
+							4
+						],
+						[
+							5,
+							4
+						],
+						[
+							3,
+							5
+						],
+						[
+							4,
+							5
+						],
+						[
+							5,
+							5
 						]
 					],
 					"token": "ca_growth_network"
@@ -1812,6 +1844,38 @@
 						[
 							2,
 							7
+						],
+						[
+							1,
+							6
+						],
+						[
+							2,
+							6
+						],
+						[
+							3,
+							6
+						],
+						[
+							1,
+							7
+						],
+						[
+							3,
+							7
+						],
+						[
+							1,
+							8
+						],
+						[
+							2,
+							8
+						],
+						[
+							3,
+							8
 						]
 					],
 					"token": "mold_network"
@@ -1828,6 +1892,34 @@
 						],
 						[
 							10,
+							9
+						],
+						[
+							9,
+							7
+						],
+						[
+							10,
+							7
+						],
+						[
+							11,
+							7
+						],
+						[
+							9,
+							8
+						],
+						[
+							11,
+							8
+						],
+						[
+							9,
+							9
+						],
+						[
+							11,
 							9
 						]
 					],
@@ -3465,6 +3557,30 @@
 						[
 							5,
 							28
+						],
+						[
+							3,
+							27
+						],
+						[
+							4,
+							27
+						],
+						[
+							5,
+							27
+						],
+						[
+							3,
+							29
+						],
+						[
+							4,
+							29
+						],
+						[
+							5,
+							29
 						]
 					],
 					"token": "riemann_sum_workbench"
@@ -3474,12 +3590,7 @@
 						5,
 						29
 					],
-					"seal": [
-						[
-							5,
-							29
-						]
-					],
+					"seal": [],
 					"token": "zeno_staircase"
 				},
 				{
@@ -3487,12 +3598,7 @@
 						3,
 						29
 					],
-					"seal": [
-						[
-							3,
-							29
-						]
-					],
+					"seal": [],
 					"token": "curve_pair"
 				},
 				{
@@ -4483,6 +4589,30 @@
 						[
 							7,
 							22
+						],
+						[
+							6,
+							21
+						],
+						[
+							7,
+							21
+						],
+						[
+							5,
+							22
+						],
+						[
+							5,
+							23
+						],
+						[
+							6,
+							23
+						],
+						[
+							7,
+							23
 						]
 					],
 					"token": "nail_color_controller"
@@ -4500,6 +4630,30 @@
 						[
 							3,
 							22
+						],
+						[
+							3,
+							21
+						],
+						[
+							4,
+							21
+						],
+						[
+							4,
+							22
+						],
+						[
+							2,
+							23
+						],
+						[
+							3,
+							23
+						],
+						[
+							4,
+							23
 						]
 					],
 					"token": "hand_color_controller"
@@ -4519,8 +4673,8 @@
 					],
 					"seal": [
 						[
-							10,
-							54
+							7,
+							47
 						],
 						[
 							7,
@@ -5337,6 +5491,34 @@
 						[
 							3,
 							21
+						],
+						[
+							1,
+							20
+						],
+						[
+							2,
+							20
+						],
+						[
+							3,
+							20
+						],
+						[
+							1,
+							21
+						],
+						[
+							1,
+							22
+						],
+						[
+							2,
+							22
+						],
+						[
+							3,
+							22
 						]
 					],
 					"token": "color_space_navigator"
@@ -5454,6 +5636,30 @@
 						[
 							4,
 							8
+						],
+						[
+							2,
+							7
+						],
+						[
+							3,
+							7
+						],
+						[
+							4,
+							7
+						],
+						[
+							2,
+							9
+						],
+						[
+							3,
+							9
+						],
+						[
+							4,
+							9
 						]
 					],
 					"token": "gravity_gun_test_scene"
@@ -5486,19 +5692,6 @@
 				},
 				{
 					"cell": [
-						2,
-						11
-					],
-					"seal": [
-						[
-							2,
-							11
-						]
-					],
-					"token": "VectorAddition"
-				},
-				{
-					"cell": [
 						8,
 						13
 					],
@@ -5506,6 +5699,38 @@
 						[
 							8,
 							13
+						],
+						[
+							7,
+							12
+						],
+						[
+							8,
+							12
+						],
+						[
+							9,
+							12
+						],
+						[
+							7,
+							13
+						],
+						[
+							9,
+							13
+						],
+						[
+							7,
+							14
+						],
+						[
+							8,
+							14
+						],
+						[
+							9,
+							14
 						]
 					],
 					"token": "VectorSubtraction"
@@ -5725,6 +5950,14 @@
 				},
 				{
 					"tile_cell": [
+						2,
+						11
+					],
+					"token": "VectorAddition",
+					"why": "sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
 						3,
 						1
 					],
@@ -5774,6 +6007,26 @@
 						[
 							3,
 							9
+						],
+						[
+							2,
+							7
+						],
+						[
+							3,
+							7
+						],
+						[
+							4,
+							7
+						],
+						[
+							4,
+							8
+						],
+						[
+							4,
+							9
 						]
 					],
 					"token": "example_2_9_n_body_attraction_vr"
@@ -5799,9 +6052,33 @@
 						[
 							2,
 							15
+						],
+						[
+							1,
+							13
+						],
+						[
+							3,
+							13
+						],
+						[
+							3,
+							14
+						],
+						[
+							3,
+							15
 						]
 					],
 					"token": "example_2_8_two_body_attraction_vr"
+				},
+				{
+					"cell": [
+						3,
+						13
+					],
+					"seal": [],
+					"token": "configuration_yard"
 				},
 				{
 					"cell": [
@@ -5910,16 +6187,7 @@
 					"token": "ChainSwing"
 				}
 			],
-			"refused": [
-				{
-					"tile_cell": [
-						3,
-						13
-					],
-					"token": "configuration_yard",
-					"why": "sealing would sever the walk route"
-				}
-			]
+			"refused": []
 		},
 		"forces|composition": {
 			"museum": "sainsbury-false-perspective-enfilade",
@@ -5936,6 +6204,34 @@
 						],
 						[
 							2,
+							8
+						],
+						[
+							1,
+							6
+						],
+						[
+							2,
+							6
+						],
+						[
+							3,
+							6
+						],
+						[
+							1,
+							7
+						],
+						[
+							3,
+							7
+						],
+						[
+							1,
+							8
+						],
+						[
+							3,
 							8
 						]
 					],
@@ -6370,23 +6666,6 @@
 			"placed": [
 				{
 					"cell": [
-						3,
-						12
-					],
-					"seal": [
-						[
-							3,
-							11
-						],
-						[
-							3,
-							12
-						]
-					],
-					"token": "triangle_curvature_workbench"
-				},
-				{
-					"cell": [
 						2,
 						7
 					],
@@ -6398,6 +6677,34 @@
 						[
 							2,
 							7
+						],
+						[
+							1,
+							6
+						],
+						[
+							3,
+							6
+						],
+						[
+							1,
+							7
+						],
+						[
+							3,
+							7
+						],
+						[
+							1,
+							8
+						],
+						[
+							2,
+							8
+						],
+						[
+							3,
+							8
 						]
 					],
 					"token": "cantor_diagonal_workbench"
@@ -6419,38 +6726,46 @@
 						[
 							9,
 							13
+						],
+						[
+							7,
+							12
+						],
+						[
+							8,
+							12
+						],
+						[
+							9,
+							12
+						],
+						[
+							7,
+							14
+						],
+						[
+							8,
+							14
+						],
+						[
+							9,
+							14
 						]
 					],
 					"token": "tangent_slope_workbench"
 				},
 				{
 					"cell": [
-						3,
-						8
+						2,
+						11
 					],
 					"seal": [
 						[
-							3,
-							7
-						],
-						[
 							2,
-							8
-						],
-						[
-							3,
-							8
-						],
-						[
-							2,
-							9
-						],
-						[
-							3,
-							9
+							11
 						]
 					],
-					"token": "shannon_workbench"
+					"token": "control_console"
 				},
 				{
 					"cell": [
@@ -6585,6 +6900,14 @@
 			"refused": [
 				{
 					"tile_cell": [
+						3,
+						12
+					],
+					"token": "triangle_curvature_workbench",
+					"why": "sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
 						2,
 						13
 					],
@@ -6593,10 +6916,10 @@
 				},
 				{
 					"tile_cell": [
-						2,
-						11
+						3,
+						8
 					],
-					"token": "control_console",
+					"token": "shannon_workbench",
 					"why": "sealing would sever the walk route"
 				}
 			]
@@ -6946,6 +7269,26 @@
 						[
 							3,
 							9
+						],
+						[
+							1,
+							8
+						],
+						[
+							2,
+							8
+						],
+						[
+							3,
+							8
+						],
+						[
+							2,
+							10
+						],
+						[
+							3,
+							10
 						]
 					],
 					"token": "ca_rules_workbench"
@@ -6992,6 +7335,18 @@
 						[
 							9,
 							13
+						],
+						[
+							7,
+							14
+						],
+						[
+							8,
+							14
+						],
+						[
+							9,
+							14
 						]
 					],
 					"token": "complexity_dial_workbench"
@@ -7003,16 +7358,24 @@
 					],
 					"seal": [
 						[
-							2,
+							4,
 							8
+						],
+						[
+							2,
+							7
 						],
 						[
 							3,
-							8
+							7
 						],
 						[
 							4,
-							8
+							7
+						],
+						[
+							4,
+							9
 						]
 					],
 					"token": "halting_workbench"
@@ -7022,12 +7385,7 @@
 						2,
 						7
 					],
-					"seal": [
-						[
-							2,
-							7
-						]
-					],
+					"seal": [],
 					"token": "hilbert_hotel"
 				},
 				{
@@ -8107,6 +8465,38 @@
 						[
 							2,
 							7
+						],
+						[
+							1,
+							6
+						],
+						[
+							2,
+							6
+						],
+						[
+							3,
+							6
+						],
+						[
+							1,
+							7
+						],
+						[
+							3,
+							7
+						],
+						[
+							1,
+							8
+						],
+						[
+							2,
+							8
+						],
+						[
+							3,
+							8
 						]
 					],
 					"token": "VectorCrossProduct"
@@ -8213,6 +8603,22 @@
 						[
 							3,
 							13
+						],
+						[
+							2,
+							12
+						],
+						[
+							3,
+							12
+						],
+						[
+							4,
+							12
+						],
+						[
+							4,
+							13
 						]
 					],
 					"token": "VectorDotProduct"
@@ -8222,12 +8628,7 @@
 						3,
 						8
 					],
-					"seal": [
-						[
-							3,
-							8
-						]
-					],
+					"seal": [],
 					"token": "curl_noise_particles"
 				},
 				{
@@ -8308,19 +8709,6 @@
 				},
 				{
 					"cell": [
-						2,
-						12
-					],
-					"seal": [
-						[
-							2,
-							12
-						]
-					],
-					"token": "VectorBasics"
-				},
-				{
-					"cell": [
 						3,
 						8
 					],
@@ -8341,7 +8729,16 @@
 					"token": "point"
 				}
 			],
-			"refused": []
+			"refused": [
+				{
+					"tile_cell": [
+						2,
+						12
+					],
+					"token": "VectorBasics",
+					"why": "sealing would sever the walk route"
+				}
+			]
 		},
 		"forces|vectors act2 vectorarithmetic": {
 			"museum": "sainsbury-false-perspective-enfilade",
@@ -8367,6 +8764,26 @@
 						[
 							2,
 							7
+						],
+						[
+							3,
+							6
+						],
+						[
+							3,
+							7
+						],
+						[
+							1,
+							8
+						],
+						[
+							2,
+							8
+						],
+						[
+							3,
+							8
 						]
 					],
 					"token": "example_2_3_gravity_scaled_by_mass_vr"
@@ -8398,14 +8815,6 @@
 						8
 					],
 					"seal": [
-						[
-							2,
-							8
-						],
-						[
-							3,
-							8
-						],
 						[
 							4,
 							8
@@ -8867,6 +9276,34 @@
 						[
 							2,
 							7
+						],
+						[
+							1,
+							6
+						],
+						[
+							2,
+							6
+						],
+						[
+							3,
+							6
+						],
+						[
+							3,
+							7
+						],
+						[
+							1,
+							8
+						],
+						[
+							2,
+							8
+						],
+						[
+							3,
+							8
 						]
 					],
 					"token": "example_2_1_forces_vr"
@@ -8942,12 +9379,7 @@
 						3,
 						8
 					],
-					"seal": [
-						[
-							3,
-							8
-						]
-					],
+					"seal": [],
 					"token": "coordinate_system_switcher"
 				},
 				{
@@ -9412,6 +9844,18 @@
 						[
 							9,
 							13
+						],
+						[
+							7,
+							14
+						],
+						[
+							8,
+							14
+						],
+						[
+							9,
+							14
 						]
 					],
 					"token": "example_3_2_forces_with_arbitrary_angular_motion_vr"
@@ -9639,10 +10083,6 @@
 						[
 							6,
 							14
-						],
-						[
-							7,
-							14
 						]
 					],
 					"token": "combined_forces_demo"
@@ -9738,6 +10178,14 @@
 				},
 				{
 					"cell": [
+						9,
+						14
+					],
+					"seal": [],
+					"token": "measure_bench"
+				},
+				{
+					"cell": [
 						16,
 						45
 					],
@@ -9752,14 +10200,6 @@
 						14
 					],
 					"token": "example_2_5_fluid_resistance_vr",
-					"why": "sealing would sever the walk route"
-				},
-				{
-					"tile_cell": [
-						9,
-						14
-					],
-					"token": "measure_bench",
 					"why": "sealing would sever the walk route"
 				}
 			]
@@ -10965,23 +11405,6 @@
 				},
 				{
 					"cell": [
-						2,
-						7
-					],
-					"seal": [
-						[
-							2,
-							7
-						],
-						[
-							2,
-							8
-						]
-					],
-					"token": "gravity_well"
-				},
-				{
-					"cell": [
 						3,
 						13
 					],
@@ -11022,6 +11445,14 @@
 						14
 					],
 					"token": "orbit_pair",
+					"why": "sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						2,
+						7
+					],
+					"token": "gravity_well",
 					"why": "sealing would sever the walk route"
 				}
 			]
@@ -11261,7 +11692,12 @@
 						4,
 						27
 					],
-					"seal": [],
+					"seal": [
+						[
+							4,
+							27
+						]
+					],
 					"token": "max_q_basin_room"
 				},
 				{
@@ -12208,22 +12644,33 @@
 						[
 							6,
 							6
+						],
+						[
+							4,
+							5
+						],
+						[
+							5,
+							5
+						],
+						[
+							6,
+							5
+						],
+						[
+							4,
+							7
+						],
+						[
+							5,
+							7
+						],
+						[
+							6,
+							7
 						]
 					],
 					"token": "verlet_workbench"
-				},
-				{
-					"cell": [
-						6,
-						8
-					],
-					"seal": [
-						[
-							6,
-							8
-						]
-					],
-					"token": "frozen_glass_vessel"
 				},
 				{
 					"cell": [
@@ -12235,28 +12682,10 @@
 				},
 				{
 					"cell": [
-						3,
-						6
-					],
-					"seal": [
-						[
-							3,
-							6
-						]
-					],
-					"token": "gallery_marker_soft-body"
-				},
-				{
-					"cell": [
 						4,
 						7
 					],
-					"seal": [
-						[
-							4,
-							7
-						]
-					],
+					"seal": [],
 					"token": "spring_lattice"
 				},
 				{
@@ -12285,7 +12714,24 @@
 					"token": "assay_wing"
 				}
 			],
-			"refused": []
+			"refused": [
+				{
+					"tile_cell": [
+						6,
+						8
+					],
+					"token": "frozen_glass_vessel",
+					"why": "sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						3,
+						6
+					],
+					"token": "gallery_marker_soft-body",
+					"why": "sealing would sever the walk route"
+				}
+			]
 		},
 		"foundationscrisis|brouwer intuitionism": {
 			"museum": "grande-galerie-axial",
@@ -12607,6 +13053,34 @@
 						[
 							4,
 							22
+						],
+						[
+							3,
+							20
+						],
+						[
+							4,
+							20
+						],
+						[
+							5,
+							20
+						],
+						[
+							3,
+							21
+						],
+						[
+							5,
+							21
+						],
+						[
+							3,
+							22
+						],
+						[
+							5,
+							22
 						]
 					],
 					"token": "penrose_triangle"
@@ -12661,12 +13135,7 @@
 						5,
 						22
 					],
-					"seal": [
-						[
-							5,
-							22
-						]
-					],
+					"seal": [],
 					"token": "face_convention"
 				},
 				{
@@ -14491,6 +14960,30 @@
 						[
 							2,
 							7
+						],
+						[
+							1,
+							5
+						],
+						[
+							2,
+							5
+						],
+						[
+							3,
+							5
+						],
+						[
+							1,
+							6
+						],
+						[
+							3,
+							6
+						],
+						[
+							3,
+							7
 						]
 					],
 					"token": "noise_mixer"
@@ -14500,12 +14993,7 @@
 						3,
 						7
 					],
-					"seal": [
-						[
-							3,
-							7
-						]
-					],
+					"seal": [],
 					"token": "worley_noise"
 				},
 				{
@@ -15261,6 +15749,10 @@
 					],
 					"seal": [
 						[
+							4,
+							76
+						],
+						[
 							5,
 							76
 						],
@@ -15270,6 +15762,10 @@
 						],
 						[
 							7,
+							76
+						],
+						[
+							8,
 							76
 						]
 					],
@@ -19071,6 +19567,10 @@
 					],
 					"seal": [
 						[
+							2,
+							16
+						],
+						[
 							4,
 							16
 						]
@@ -20186,35 +20686,35 @@
 					],
 					"seal": [
 						[
-							1,
-							12
+							2,
+							11
 						],
 						[
 							2,
 							12
 						],
 						[
-							1,
-							11
-						],
-						[
 							2,
-							11
-						],
-						[
-							3,
-							11
-						],
-						[
-							3,
-							12
-						],
-						[
-							1,
 							13
 						],
 						[
-							2,
+							1,
+							11
+						],
+						[
+							3,
+							11
+						],
+						[
+							1,
+							12
+						],
+						[
+							3,
+							12
+						],
+						[
+							1,
 							13
 						]
 					],
@@ -22326,19 +22826,6 @@
 				{
 					"cell": [
 						12,
-						19
-					],
-					"seal": [
-						[
-							13,
-							19
-						]
-					],
-					"token": "color_space_navigator"
-				},
-				{
-					"cell": [
-						12,
 						13
 					],
 					"seal": [
@@ -22470,6 +22957,14 @@
 				}
 			],
 			"refused": [
+				{
+					"tile_cell": [
+						12,
+						19
+					],
+					"token": "color_space_navigator",
+					"why": "sealing would sever the walk route"
+				},
 				{
 					"tile_cell": [
 						11,
@@ -22840,6 +23335,34 @@
 						[
 							8,
 							13
+						],
+						[
+							7,
+							12
+						],
+						[
+							8,
+							12
+						],
+						[
+							9,
+							12
+						],
+						[
+							9,
+							13
+						],
+						[
+							7,
+							14
+						],
+						[
+							8,
+							14
+						],
+						[
+							9,
+							14
 						]
 					],
 					"token": "example_2_6_single_attractor_vr"
@@ -25416,6 +25939,30 @@
 						[
 							12,
 							25
+						],
+						[
+							10,
+							24
+						],
+						[
+							11,
+							24
+						],
+						[
+							12,
+							24
+						],
+						[
+							10,
+							26
+						],
+						[
+							11,
+							26
+						],
+						[
+							12,
+							26
 						]
 					],
 					"token": "edge_of_chaos_unlocked"
@@ -26505,39 +27052,6 @@
 				{
 					"cell": [
 						7,
-						13
-					],
-					"seal": [
-						[
-							6,
-							13
-						],
-						[
-							7,
-							13
-						],
-						[
-							6,
-							14
-						],
-						[
-							7,
-							14
-						],
-						[
-							6,
-							15
-						],
-						[
-							7,
-							15
-						]
-					],
-					"token": "random_butterflies"
-				},
-				{
-					"cell": [
-						7,
 						8
 					],
 					"seal": [
@@ -26666,6 +27180,14 @@
 						27
 					],
 					"token": "2d_in_3d_randomness_vis",
+					"why": "sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						7,
+						13
+					],
+					"token": "random_butterflies",
 					"why": "sealing would sever the walk route"
 				},
 				{
@@ -27069,12 +27591,28 @@
 					],
 					"seal": [
 						[
+							4,
+							57
+						],
+						[
+							5,
+							57
+						],
+						[
 							6,
 							57
 						],
 						[
 							7,
 							57
+						],
+						[
+							4,
+							58
+						],
+						[
+							5,
+							58
 						],
 						[
 							6,
@@ -27085,6 +27623,14 @@
 							58
 						],
 						[
+							4,
+							59
+						],
+						[
+							5,
+							59
+						],
+						[
 							6,
 							59
 						],
@@ -27093,20 +27639,20 @@
 							59
 						],
 						[
+							4,
+							60
+						],
+						[
+							5,
+							60
+						],
+						[
 							6,
-							55
+							60
 						],
 						[
 							7,
-							55
-						],
-						[
-							6,
-							56
-						],
-						[
-							7,
-							56
+							60
 						]
 					],
 					"token": "pixel_cloud"
@@ -27746,19 +28292,6 @@
 				},
 				{
 					"cell": [
-						7,
-						23
-					],
-					"seal": [
-						[
-							7,
-							23
-						]
-					],
-					"token": "VectorCrossProduct"
-				},
-				{
-					"cell": [
 						11,
 						34
 					],
@@ -27812,6 +28345,14 @@
 				}
 			],
 			"refused": [
+				{
+					"tile_cell": [
+						7,
+						23
+					],
+					"token": "VectorCrossProduct",
+					"why": "sealing would sever the walk route"
+				},
 				{
 					"tile_cell": [
 						10,
@@ -28210,6 +28751,10 @@
 						[
 							13,
 							2
+						],
+						[
+							13,
+							3
 						]
 					],
 					"token": "growslimbs"
@@ -29745,10 +30290,6 @@
 							58
 						],
 						[
-							12,
-							58
-						],
-						[
 							4,
 							59
 						],
@@ -29781,10 +30322,6 @@
 							59
 						],
 						[
-							12,
-							59
-						],
-						[
 							4,
 							60
 						],
@@ -29794,10 +30331,6 @@
 						],
 						[
 							11,
-							60
-						],
-						[
-							12,
 							60
 						],
 						[
@@ -29813,10 +30346,6 @@
 							61
 						],
 						[
-							12,
-							61
-						],
-						[
 							4,
 							62
 						],
@@ -29826,10 +30355,6 @@
 						],
 						[
 							11,
-							62
-						],
-						[
-							12,
 							62
 						],
 						[
@@ -29842,10 +30367,6 @@
 						],
 						[
 							11,
-							63
-						],
-						[
-							12,
 							63
 						],
 						[
@@ -29858,10 +30379,6 @@
 						],
 						[
 							11,
-							64
-						],
-						[
-							12,
 							64
 						],
 						[
@@ -29897,8 +30414,36 @@
 							65
 						],
 						[
-							12,
-							65
+							4,
+							66
+						],
+						[
+							5,
+							66
+						],
+						[
+							6,
+							66
+						],
+						[
+							7,
+							66
+						],
+						[
+							8,
+							66
+						],
+						[
+							9,
+							66
+						],
+						[
+							10,
+							66
+						],
+						[
+							11,
+							66
 						]
 					],
 					"token": "cube_mound_scene"
@@ -31843,6 +32388,22 @@
 						[
 							8,
 							17
+						],
+						[
+							7,
+							16
+						],
+						[
+							6,
+							18
+						],
+						[
+							7,
+							18
+						],
+						[
+							8,
+							18
 						]
 					],
 					"token": "transformation_workbench"
@@ -31967,6 +32528,34 @@
 						[
 							8,
 							14
+						],
+						[
+							6,
+							13
+						],
+						[
+							7,
+							13
+						],
+						[
+							8,
+							13
+						],
+						[
+							6,
+							14
+						],
+						[
+							6,
+							15
+						],
+						[
+							7,
+							15
+						],
+						[
+							8,
+							15
 						]
 					],
 					"token": "pusher_block"
@@ -32090,6 +32679,38 @@
 						[
 							7,
 							14
+						],
+						[
+							6,
+							13
+						],
+						[
+							7,
+							13
+						],
+						[
+							8,
+							13
+						],
+						[
+							6,
+							14
+						],
+						[
+							8,
+							14
+						],
+						[
+							6,
+							15
+						],
+						[
+							7,
+							15
+						],
+						[
+							8,
+							15
 						]
 					],
 					"token": "chair_assembly_puzzle"
@@ -32205,6 +32826,18 @@
 						[
 							7,
 							15
+						],
+						[
+							5,
+							16
+						],
+						[
+							6,
+							16
+						],
+						[
+							7,
+							16
 						]
 					],
 					"token": "transform_composition_workbench"
@@ -32245,10 +32878,6 @@
 						16
 					],
 					"seal": [
-						[
-							7,
-							16
-						],
 						[
 							7,
 							17
@@ -32773,6 +33402,10 @@
 						[
 							4,
 							8
+						],
+						[
+							2,
+							6
 						]
 					],
 					"token": "DualBallFMController"
@@ -32900,12 +33533,7 @@
 						2,
 						6
 					],
-					"seal": [
-						[
-							2,
-							6
-						]
-					],
+					"seal": [],
 					"token": "Rack303Acid"
 				},
 				{
@@ -33841,6 +34469,35 @@
 				},
 				{
 					"cell": [
+						2,
+						6
+					],
+					"seal": [
+						[
+							1,
+							6
+						],
+						[
+							1,
+							5
+						],
+						[
+							1,
+							7
+						],
+						[
+							2,
+							7
+						],
+						[
+							3,
+							7
+						]
+					],
+					"token": "lab_table"
+				},
+				{
+					"cell": [
 						9,
 						6
 					],
@@ -34079,14 +34736,6 @@
 			"refused": [
 				{
 					"tile_cell": [
-						2,
-						6
-					],
-					"token": "lab_table",
-					"why": "sealing would sever the walk route"
-				},
-				{
-					"tile_cell": [
 						3,
 						8
 					],
@@ -34159,6 +34808,34 @@
 						],
 						[
 							3,
+							36
+						],
+						[
+							2,
+							34
+						],
+						[
+							3,
+							34
+						],
+						[
+							4,
+							34
+						],
+						[
+							2,
+							35
+						],
+						[
+							4,
+							35
+						],
+						[
+							2,
+							36
+						],
+						[
+							4,
 							36
 						]
 					],

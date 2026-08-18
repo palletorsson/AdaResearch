@@ -13,6 +13,7 @@ func _run() -> void:
 	var shots: Array = [
 		["door", Vector3(7.5, 1.6, 1.3), Vector3(7.5, 1.6, 4.5)],
 		["enter", Vector3(7.5, 1.6, 5.2), Vector3(7.5, 1.3, 12.0)],
+		["origin", Vector3(10.0, 1.5, 6.3), Vector3(12.5, 0.7, 8.5)],
 		["enter_right", Vector3(7.5, 1.6, 5.4), Vector3(3.0, 1.0, 8.5)],
 		["enter_left", Vector3(7.5, 1.6, 5.4), Vector3(12.5, 1.0, 8.5)],
 		["door_up", Vector3(7.5, 1.2, 1.2), Vector3(7.5, 3.4, 4.5)],
