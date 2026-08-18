@@ -111,10 +111,24 @@ def seed(trunk_doc: dict) -> dict:
                 hero, hero_by = toks[0], "first in spine order"
             pearls.append({"pearl": short_name(node, m), "map": m, "index": i, "hero": hero, "hero_by": hero_by,
                            "tokens": toks, "blurb": blurb_first(m)})
-        # hand edits on pearls (by map): rename / hero / drop / order
-        for e in hand_pearls.get(node, []):
+        # HAND EDITS on pearls — the ruling grammar of /pearls (all optional, by `map`,
+        # or `new: true` for a pearl the maps never had):
+        #   pearl        rename          hero        re-hero (hero_by "hand")
+        #   drop         the pearl goes; its tokens are ORPHANS unless moved first
+        #   order        position in the string
+        #   tokens_add   tokens moved IN (from another pearl of this node)
+        #   tokens_remove tokens moved OUT
+        #   new + tokens a pearl made by hand: {"new": true, "pearl": "quad", "tokens": [...]}
+        edits = hand_pearls.get(node, [])
+        for e in edits:
+            if e.get("new"):
+                pearls.append({"pearl": str(e.get("pearl", "new")), "map": str(e.get("map", "")) or ("hand:" + str(e.get("pearl", "new"))),
+                               "index": int(e.get("order", len(pearls))), "hero": str(e.get("hero", "")) or (list(e.get("tokens", [])) or [""])[0],
+                               "hero_by": "hand" if e.get("hero") else "first in the pearl", "tokens": list(e.get("tokens", [])), "blurb": str(e.get("blurb", "")),
+                               "hand": True})
+        for e in edits:
             for p in pearls:
-                if p["map"] == e.get("map"):
+                if p["map"] == e.get("map") and not e.get("new"):
                     if e.get("pearl"):
                         p["pearl"] = e["pearl"]
                     if e.get("hero"):
@@ -123,7 +137,26 @@ def seed(trunk_doc: dict) -> dict:
                         p["dropped"] = True
                     if "order" in e:
                         p["index"] = int(e["order"])
-        pearls = sorted([p for p in pearls if not p.get("dropped")], key=lambda p: p["index"])
+                    if e.get("blurb"):
+                        p["blurb"] = str(e["blurb"])
+                    p["tokens"] = [t for t in p["tokens"] if t not in set(e.get("tokens_remove", []))]
+                    for t in e.get("tokens_add", []):
+                        if t not in p["tokens"]:
+                            p["tokens"].append(t)
+        # a token moved IN somewhere is moved OUT of wherever else it sat
+        moved: set[str] = set()
+        for e in edits:
+            moved.update(e.get("tokens_add", []))
+            if e.get("new"):
+                moved.update(e.get("tokens", []))
+        for p in pearls:
+            owner = next((e for e in edits if (e.get("new") and p["map"] == (str(e.get("map", "")) or "hand:" + str(e.get("pearl", "new"))) and True)
+                          or (not e.get("new") and e.get("map") == p["map"] and e.get("tokens_add"))), None)
+            keep = set(owner.get("tokens", []) if owner and owner.get("new") else (owner.get("tokens_add", []) if owner else []))
+            p["tokens"] = [t for t in p["tokens"] if t not in moved or t in keep]
+            if p["hero"] and p["hero"] not in p["tokens"] and p["tokens"] and p["hero_by"] != "hand":
+                p["hero"], p["hero_by"] = p["tokens"][0], "first in spine order"
+        pearls = sorted([p for p in pearls if not p.get("dropped")], key=lambda p: (p["index"], p["pearl"]))
         for i, p in enumerate(pearls):
             p["index"] = i
         t = dict(t)
