@@ -60,10 +60,11 @@ func _build(vr: bool) -> Dictionary:
 		if (m.get("_built") as Array).size() >= 2:
 			break
 	await create_timer(0.5).timeout
+	var txt: String = FileAccess.get_file_as_string(BUILT) if FileAccess.file_exists(BUILT) else ""
+	print("EM BUILT: %s run — waited %.1f s, _built %d, file %d bytes" % ["vr" if vr else "desktop", waited, (m.get("_built") as Array).size(), txt.length()])
 	m.queue_free()
 	await create_timer(0.5).timeout
-	if not FileAccess.file_exists(BUILT): return {}
-	var txt: String = FileAccess.get_file_as_string(BUILT)
+	if txt == "": return {}
 	var f := FileAccess.open("user://em_built_%s.json" % ("vr" if vr else "desktop"), FileAccess.WRITE)
 	if f: f.store_string(txt)
 	var d: Variant = JSON.parse_string(txt)

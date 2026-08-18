@@ -72,6 +72,8 @@ static func build(seg: Node3D, solid: StaticBody3D, w: int, wall_col: Color,
 	door.set("leaf_mode", "bi_parting")
 	door.set("open_amount", 0.0)
 	door.set("with_header", true)
+	if layout.has("header_depth"):
+		door.set("header_depth", float(layout["header_depth"]))   # a deep header carries the museum's name
 	door.set("with_window", true)
 	door.set("with_threshold_light", true)
 	door.position = Vector3(cx, 0.0, z)
@@ -114,7 +116,7 @@ static func build(seg: Node3D, solid: StaticBody3D, w: int, wall_col: Color,
 	scanner.rotation_degrees.y = 180.0            # face back into the vestibule
 	seg.add_child(scanner)
 	return {"door": door, "scanner": scanner, "colliders": cols, "open": false,
-		"z": z, "clear": clear,
+		"z": z, "clear": clear, "in_doorway": in_doorway,
 		"open_seconds": layout.get("open_seconds", OPEN_SECONDS),
 		"click_reach_m": layout.get("click_reach_m", SCAN_REACH_M),
 		"click_cone_rad": layout.get("click_cone_rad", SCAN_CONE)}

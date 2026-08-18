@@ -388,7 +388,15 @@ static func dress_segment(seg: Node3D, tile: Array, w: int, h: int, mats, prev_w
 	var hang_min: int = maxi(int(opts.get("hang_min_stretch", HANG_PITCH_FACES)),
 		HANG_PITCH_FACES)
 	if hang_on and hang_cap > 0:
-		_add_wall_showings(faces, hang_cap, hang_frame_x, hang_mount_x, hang_field_x,
+		# the lobby keeps its walls bare (opts.bare_below_z, segment-local z)
+		var bare_z: float = float(opts.get("bare_below_z", -1.0))
+		var hang_faces: Array = faces
+		if bare_z > 0.0:
+			hang_faces = []
+			for f0 in faces:
+				if float((f0 as Dictionary).get("z", 99.0)) >= bare_z:
+					hang_faces.append(f0)
+		_add_wall_showings(hang_faces, hang_cap, hang_frame_x, hang_mount_x, hang_field_x,
 			hang_min)
 	print("[em_detail] walls: %d dressed faces, licence %d, %d showings hung (min wall %d m)%s" % [
 		faces.size(), hang_cap, hang_mount_x.size(), hang_min,

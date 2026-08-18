@@ -1460,6 +1460,155 @@ func _layout_list(section: String, key: String, fallback: Array) -> Array:
 		return (sec as Dictionary)[key]
 	return fallback
 
+## THE LOBBY (2026-08-18). Palle: "The first space is the lobby. It should
+## have no wall works, but a fire extinguisher and a large window looking
+## backward with Folding Past and a frame counter on the wall.
+## wooden_pallet pyramid in one corner blocking an elevator door.
+## station_door … should have a text in the upper frame, 2D in 3D: MOA
+## (Museum of Algorithms)." Every position is a number in
+## commons/data/em_layout.json → lobby; the pieces are the corpus's own
+## artifacts, instanced directly (the lobby is not a dealt room: nothing here
+## is in the plan, the bake or the inventory, and no showing hangs on its
+## walls — em_detail is told to leave the vestibule bare).
+const LOBBY_PIECES := {
+	"window": "res://commons/artifacts/large_window/large_window.tscn",
+	"view": "res://commons/primitives/temporal/animated_folding_past.tscn",
+	"counter": "res://commons/visualaid/frame_counter/frame_counter_display.tscn",
+	"extinguisher": "res://commons/artifacts/fire_extinguisher/fire_extinguisher.tscn",
+	"pallet": "res://commons/artifacts/wooden_pallet/wooden_pallet.tscn",
+	"elevator": "res://commons/artifacts/station/station_door.tscn",
+}
+func _lobby_piece(seg: Node3D, key: String, pos: Vector3, yaw_deg: float, config: Dictionary = {}) -> Node3D:
+	var path: String = String(LOBBY_PIECES.get(key, ""))
+	if path == "" or not ResourceLoader.exists(path):
+		push_warning("[em-lobby] no scene for %s (%s)" % [key, path])
+		return null
+	var ps: PackedScene = load(path)
+	var n: Node3D = ps.instantiate() as Node3D
+	if n == null:
+		return null
+	n.name = "Lobby_" + key
+	n.set_meta("artifact_lookup_name", key)
+	for k in config:
+		n.set_meta("config_" + String(k), config[k])
+		if String(k) in n:
+			n.set(String(k), config[k])
+	if n.has_method("apply_grid_config") and not config.is_empty():
+		n.call("apply_grid_config", config)
+	n.position = pos
+	n.rotation_degrees.y = yaw_deg
+	seg.add_child(n)
+	if key in ["pallet", "extinguisher"]:
+		_plain_hands_disarm(n, key)          # furniture, not a pickup
+	return n
+
+func _dress_lobby(seg: Node3D, solid: StaticBody3D, w: int, zbase: int, wall_col: Color,
+		m_wall: Material, win_x0: int, win_x1: int) -> void:
+	var cx: float = (win_x0 + win_x1 + 1) * 0.5
+	var sill_h: float = _L("lobby", "window_sill_m", 0.9)
+	var head_y: float = _L("lobby", "window_head_m", 2.5)
+	# the window: in the aperture, glass on the wall's midplane, facing the lobby
+	var win: Node3D = _lobby_piece(seg, "window", Vector3(cx, (sill_h + head_y) * 0.5, 0.5), 0.0,
+		{"window_width": float(win_x1 - win_x0 + 1) - 0.1, "window_height": head_y - sill_h - 0.06})
+	# the view: Folding Past standing outside, behind the building, on its own
+	# dark ground with a wash of light so the pane has something to look at
+	# Folding Past's own geometry stands 8..12.5 m behind its origin (its
+	# z_base_offset), so the origin sits just inside the lobby (z 2) and the
+	# nest of frames hangs 6..10.5 m behind the back wall — through the pane, a
+	# receding room of light frames. (Turned 180 it came forward through the
+	# door: the first shots' stray cyan lines were its frames.)
+	var back_m: float = _L("lobby", "view_behind_m", 12.0)
+	var yard_w: float = float(win_x1 - win_x0 + 1) + 8.0
+	_box(seg, Vector3(cx, -0.1, -back_m * 0.5), Vector3(yard_w, 0.2, back_m + 2.0), Color(0.06, 0.06, 0.07), null)
+	var view: Node3D = _lobby_piece(seg, "view", Vector3(cx, _L("lobby", "view_y", 1.7), 2.0), 0.0)
+	var wash := OmniLight3D.new()
+	wash.light_color = Color(0.85, 0.9, 1.0)
+	wash.light_energy = _L("lobby", "view_light", 2.0)
+	wash.omni_range = back_m
+	wash.position = Vector3(cx, 3.5, -back_m * 0.5)
+	seg.add_child(wash)
+	# the frame counter: on the back wall, right of the window, eye height
+	_lobby_piece(seg, "counter", Vector3(_L("lobby", "counter_x", 11.0), _L("lobby", "counter_y", 1.6), 1.0 + 0.06), 0.0)
+	# the fire extinguisher: on the west wall, bracket height
+	_lobby_piece(seg, "extinguisher", Vector3(1.0 + 0.14, _L("lobby", "extinguisher_y", 0.0), _L("lobby", "extinguisher_z", 2.6)), 90.0)
+	# the elevator: a sealed single-leaf station door in the east wall's plane,
+	# and the pallet of boxes parked in front of it, blocking it
+	var ez: float = _L("lobby", "elevator_z", 2.2)
+	var ex: float = float(LOBBY_W - 1)     # the east wall's inner plane
+	var lift: Node3D = _lobby_piece(seg, "elevator", Vector3(ex - 0.06, 0.0, ez), -90.0,
+		{"leaf_mode": "single", "open_amount": 0.0, "width": 1.6, "height": 2.2, "with_window": false,
+			"stencil_text": "LIFT"})
+	if lift != null:
+		var cs := CollisionShape3D.new()
+		var bs := BoxShape3D.new(); bs.size = Vector3(0.12, 2.2, 1.6); cs.shape = bs
+		cs.position = Vector3(ex - 0.06, 1.1, ez)
+		solid.add_child(cs)
+	_lobby_piece(seg, "pallet", Vector3(ex - _L("lobby", "pallet_off_m", 0.9), 0.0, ez), _L("lobby", "pallet_yaw", 20.0),
+		{"box_arrangement": "pyramid"})
+	# the pallet is an obstacle: take its cells out of the walk map
+	for dz in [-1, 0]:
+		var k := Vector2i(LOBBY_W - 2, zbase + int(floor(ez)) + dz)
+		if _walk_cells.has(k):
+			_walk_cells.erase(k)
+			_walk_erased[k] = "prop:pallet"
+	print("[em-lobby] window %s (x %d..%d) · view %s · counter · extinguisher · lift + pallet" % [
+		"ok" if win != null else "MISSING", win_x0, win_x1, "ok" if view != null else "MISSING"])
+
+## The museum's name on the threshold door's header — 2D text in 3D.
+func _sign_door(door: Node3D) -> void:
+	if door == null:
+		return
+	# WHERE THE NAME GOES. In the doorway the door stands in a 1 m wall row and
+	# em_detail dresses that wall with a door head at 2.80, a lining to 2.92
+	# and an OVERPANEL of plaster from 2.92 to WALL_H 4.5 on both faces — the
+	# door's own header is inside the wall, invisible. So the name is written
+	# on the overpanel, on both faces of the wall (lobby side and hall side),
+	# just proud of the plaster. A free-standing door (depth_rows > 0) has no
+	# wall: the name goes on its own header instead.
+	var h: float = float(door.get("height")) if "height" in door else 3.0
+	var ld: float = float(door.get("leaf_depth")) if "leaf_depth" in door else 0.07
+	var hd: float = clampf(float(door.get("header_depth")) if "header_depth" in door else 0.18, 0.06, 0.4)
+	var in_wall: bool = bool(_gate.get("in_doorway", false))
+	# 10 cm proud of the wall row's faces: the dressed plaster panels and the
+	# raw band above them (measured — 2 cm was behind the band)
+	var zoff: float = (0.5 + _L("lobby", "door_sign_proud_m", 0.10)) if in_wall else (ld * 0.5 + 0.09 + 0.012)
+	var y_name: float = _L("lobby", "door_sign_y", 3.62) if in_wall else h + hd * 0.62
+	var y_sub: float = _L("lobby", "door_sign_sub_y", 3.18) if in_wall else h + hd * 0.22
+	var m_name: float = _L("lobby", "door_sign_m", 0.42 if in_wall else 0.22)
+	var m_sub: float = _L("lobby", "door_sign_sub_m", 0.13 if in_wall else 0.075)
+	for side in [1.0, -1.0]:
+		var lbl := Label3D.new()
+		lbl.text = _layout_str("lobby", "door_sign", "MOA")
+		lbl.font_size = 128
+		lbl.pixel_size = m_name / 128.0     # cap height in metres
+		lbl.outline_size = 10
+		lbl.modulate = Color(0.14, 0.14, 0.16)      # dark on the plaster over the lintel
+		lbl.outline_modulate = Color(0.96, 0.95, 0.9)
+		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		lbl.position = Vector3(0.0, y_name, side * zoff)
+		lbl.rotation_degrees.y = 0.0 if side > 0 else 180.0
+		door.add_child(lbl)
+		var sub := Label3D.new()
+		sub.text = _layout_str("lobby", "door_sign_sub", "Museum of Algorithms")
+		sub.font_size = 64
+		sub.pixel_size = m_sub / 64.0
+		sub.outline_size = 5
+		sub.modulate = Color(0.2, 0.2, 0.22)
+		sub.outline_modulate = Color(0.95, 0.94, 0.9)
+		sub.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		sub.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		sub.position = Vector3(0.0, y_sub, side * zoff)
+		sub.rotation_degrees.y = 0.0 if side > 0 else 180.0
+		door.add_child(sub)
+
+func _layout_str(section: String, key: String, fallback: String) -> String:
+	_L("_", "_", 0.0)
+	var sec: Variant = _layout.get(section)
+	if sec is Dictionary and (sec as Dictionary).has(key):
+		return String((sec as Dictionary)[key])
+	return fallback
+
 func _setup_world() -> void:
 	if _vr:
 		_mode_label = "vr"
@@ -2033,8 +2182,26 @@ func _build_segment() -> void:
 	for zr in range(VESTIBULE_H):
 		for sx in [0, LOBBY_W - 1]:
 			_wall_at(seg, solid, wcells, int(sx), zr, wall_col, m_wall, wr)
+	var lobby_on: bool = _seg_index == 0 and _L("lobby", "enabled", 1.0) > 0.5
+	var win_x0: int = int(_L("lobby", "window_x0", 6.0))
+	var win_x1: int = int(_L("lobby", "window_x1", 8.0))
 	for x in range(pw - 1, LOBBY_W):        # seal beyond the previous tile's width
+		if lobby_on and x >= win_x0 and x <= win_x1:
+			# THE LOBBY WINDOW (2026-08-18): the back wall keeps a sill and a
+			# header here and the pane between them looks BACKWARD, out of the
+			# museum, at Folding Past standing in the dark behind the building
+			var sill_h: float = _L("lobby", "window_sill_m", 0.9)
+			var head_y: float = _L("lobby", "window_head_m", 2.5)
+			_box(seg, Vector3(x + 0.5, sill_h / 2.0, 0.5), Vector3(1, sill_h, 1), wall_col, m_wall)
+			_add_col(solid, Vector3(x + 0.5, sill_h / 2.0, 0.5), Vector3(1, sill_h, 1))
+			_box(seg, Vector3(x + 0.5, (WALL_H + head_y) / 2.0, 0.5), Vector3(1, WALL_H - head_y, 1), wall_col, m_wall)
+			_add_col(solid, Vector3(x + 0.5, (WALL_H + head_y) / 2.0, 0.5), Vector3(1, WALL_H - head_y, 1))
+			# the pane's own collider so a hand does not pass through the glass
+			_add_col(solid, Vector3(x + 0.5, (sill_h + head_y) / 2.0, 0.5), Vector3(1, head_y - sill_h, 0.1))
+			continue
 		_wall_at(seg, solid, wcells, x, 0, wall_col, m_wall, wr)
+	if lobby_on:
+		_dress_lobby(seg, solid, w, zbase, wall_col, m_wall, win_x0, win_x1)
 	for x in range(w - 1, LOBBY_W):         # seal beyond this tile's width
 		_wall_at(seg, solid, wcells, x, VESTIBULE_H - 1, wall_col, m_wall, wr)
 	# outer skin: an implicit wall just beyond both side columns of the tile, so
@@ -2208,6 +2375,9 @@ func _build_segment() -> void:
 					# selectable proxies the editor picks (desktop only)
 					"showing_rules": _furniture_rules(next_seq, "showing"),
 					"showing_proxies": true,     # ALWAYS: the same records in both modes
+					# the LOBBY (first vestibule) hangs no showings: its walls carry the
+					# window, the counter, the extinguisher and the lift instead
+					"bare_below_z": (VESTIBULE_H + 0.6) if (_seg_index == 0 and _L("lobby", "enabled", 1.0) > 0.5) else -1.0,
 					# the CARDS name their place: chapter · pearl · number
 					"chapter": next_seq,
 					"pearl": String(deal.get("pearl", "")) if deal is Dictionary else ""})
@@ -2350,8 +2520,12 @@ func _build_segment() -> void:
 		if dx0 >= 0:
 			gate_layout["door_x0"] = dx0
 			gate_layout["door_x1"] = dx1
+		if _L("lobby", "enabled", 1.0) > 0.5:
+			gate_layout["header_depth"] = _L("lobby", "door_header_m", 0.4)   # room for the name
 		_gate = _mod_gate.call("build", seg, solid, w, wall_col, m_wall, gate_layout)
 		if not _gate.is_empty():
+			if _L("lobby", "enabled", 1.0) > 0.5:
+				_sign_door(_gate.get("door") as Node3D)
 			var sc: Node3D = _gate.get("scanner") as Node3D
 			if sc != null and sc.has_signal("palm_scanned"):
 				sc.connect("palm_scanned", Callable(self, "_open_gate"))
@@ -2911,11 +3085,24 @@ func _write_built(seg: Node3D, chapter: String, deal: Variant, zbase: int, w: in
 	# so after a headset walk and a desktop walk,
 	#   python tools/em_built.py --diff ada_run/em_built_desktop.json ada_run/em_built_vr.json
 	# answers "did VR build the same museum?" from the two files alone.
+	var wrote: int = 0
 	for path in [BUILT_PATH, BUILT_PATH.replace(".json", "_%s.json" % _mode_label)]:
-		var f: FileAccess = FileAccess.open(path, FileAccess.WRITE)
+		# another museum (a second agent's gate, a desktop walk beside a headset
+		# run) can hold the same file for the millisecond we want it: error 12,
+		# a sharing violation. Three tries, 30 ms apart, before giving up loudly.
+		var f: FileAccess = null
+		for attempt in range(3):
+			f = FileAccess.open(path, FileAccess.WRITE)
+			if f != null:
+				break
+			OS.delay_msec(30)
 		if f != null:
 			f.store_string(txt)
 			f.close()
+			wrote += 1
+		else:
+			print("[em-built] cannot open %s for write: error %d (another writer holds it)" % [path, FileAccess.get_open_error()])
+	print("[em-built] seg %d (%s) written: %d segment(s), %d bytes, %d file(s)" % [seg_no, _mode_label, _built.size(), txt.length(), wrote])
 
 
 ## The forecourt builder. Returns the after-porch depth it added (0 if none).
@@ -3660,6 +3847,12 @@ func _deal_plan_wall_runs(seg: Node3D, entry: Dictionary,
 			var max_height := float(uv[3]) - float(uv[1])
 			var target := Vector3(float(p[0]) - apron, float(p[1]),
 				float(p[2]) - apron + VESTIBULE_H)
+			# the LOBBY keeps its walls bare: a variant the plan hangs on the entry
+			# wall's lobby face (or anywhere in the vestibule) of the first segment
+			# is not assembled — the lobby's own pieces are its wall works
+			if _seg_index == 0 and _L("lobby", "enabled", 1.0) > 0.5 and target.z < VESTIBULE_H + 0.6:
+				failure_counts["lobby: bare wall"] = int(failure_counts.get("lobby: bare wall", 0)) + 1
+				continue
 			var result: Dictionary = _stamp_plan_wall_variant(seg, scene_path, lookup, axis,
 					str(values[i]), String(run.get("wall", "")),
 					String(run.get("wall_side", "")), target, normal,
