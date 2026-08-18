@@ -52,6 +52,20 @@ on the porch); after ledger + regen it negotiates as 40 m → bridge court
 (46×46) and the autopilot PASSES z 483 (24 stalls recovered, not clean).
 Gates live_footprint + live_contract; jump; dropdowns — 17 gates.
 
+**Balconies-by-ask + the stall report + the end rail** (`34002841c`):
+branch space `balcony` (hand only) → plan row walk_space → negotiator
+`venue_asks` → hanging balcony body; `test_balcony_ask`. The autopilot's
+`stalled_on` (on PASS too) attributed all 24 primitives stalls to NO body:
+the bridge court's 1.1 m END RAIL at the seam, with the apron's first/last
+rows advertised as floor. Those rows are no longer offered → autopilot
+0 stalls, 137 s. **NOTE ON THAT COMMIT:** its `git add` ran after the
+HEAD-reapply chain had failed, so `34002841c` also carried the OTHER
+agent's until-then-uncommitted DNA-wall diff (assembler ~+400,
+export_museum_plan +212, negotiation +14) under my message. The content is
+what both agents were building on and had passed 17/17 gates; only the
+attribution is wrong. Recorded here rather than rewritten on a shared
+branch.
+
 Known: tiny map pearls (1–2 tokens) make near-empty segments (noise ·
 columns placed 0/1) — merge them on `/pearls`; the map string is honest,
 not yet curated. Un-pearled hand reading needs one more regen to land in
