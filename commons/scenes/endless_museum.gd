@@ -3968,7 +3968,7 @@ func _stamp(seg: Node3D, scene_path: String, lookup: String, cell: Dictionary,
 					float(cell.get("top", 0.0)), float(cell.get("y", 0)) + 0.5)
 				seg.add_child(pn)
 				plinth_node = pn
-				if not _vr:
+				if true:   # VR too — same records, same museum in both modes
 					var pl_ch: String = String(seg.get_meta("em_chapter")) if seg.has_meta("em_chapter") else ""
 					var pl_from: Array = [int(cell.get("x", 0)), int(cell.get("y", 0)) - VESTIBULE_H]
 					_edit_records.append({"node": pn, "kind": "plinth", "token": lookup,
@@ -4099,7 +4099,11 @@ func _stamp(seg: Node3D, scene_path: String, lookup: String, cell: Dictionary,
 	_vis_records.append({"node": node,
 		"p": Vector3(float(cell.get("x", 0)) + 0.5, 0.0,
 			float(zbase + int(cell.get("y", 0))) + 0.5)})
-	if not _vr:
+	if true:   # VR TOO (2026-08-18): the records also drive the INVENTORY — the
+		# numbers and captions — which were VR-blind because they lived here.
+		# The editor keys stay desktop-only (no HUD, no crosshair in VR); the
+		# record itself costs a dict. Collected ALWAYS, so the same museum
+		# stands in both modes: same plan, same rulings, same numbers.
 		# Collected ALWAYS on desktop (not just under --em-edit), so the TAB
 		# toggle can arm an editor that sees every placement since boot. A
 		# record is a small dict; the cost of always-on is nothing, the cost
