@@ -951,6 +951,8 @@ func _start_at_chapter() -> void:
 		var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(EM_CONTROL))
 		if parsed is Dictionary:
 			_first_chapter = String((parsed as Dictionary).get("first_chapter", ""))
+			if start_map == "":
+				start_map = String((parsed as Dictionary).get("first_map", ""))   # the menu's voice for the pearl
 	if _first_chapter == "" or _pool.is_empty():
 		return
 	for i in range(_pool.size()):

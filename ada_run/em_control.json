@@ -1,4 +1,5 @@
 {
-	"_readme": "Menu launches carry no flags; this file speaks for them. first_chapter: the chapter dealt into segment 0 (the pool is circular, the spine continues from it). Delete the key or the file to open at the spine start.",
-	"first_chapter": "noise"
+ "_readme": "Menu launches carry no flags; this file speaks for them. first_chapter: the chapter dealt into segment 0 (the pool is circular, the spine continues from it); first_map: the map (pearl) of that chapter to open at. Delete the keys or the file to open at the spine start. Precedence: --em-chapter flag > Inspector start_chapter/start_map > this file.",
+ "first_chapter": "primitives",
+ "first_map": "Point_One"
 }
