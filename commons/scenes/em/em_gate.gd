@@ -25,6 +25,7 @@ extends RefCounted
 const DOOR_SCENE := "res://commons/artifacts/station/station_door.tscn"
 const SCANNER_SCENE := "res://commons/artifacts/palm_scanner/palm_scanner.tscn"
 const OPEN_SECONDS := 1.6          # leaves part over this long
+const GATE_DEPTH := 4              # rows into the hall: how much run-up the first passage gets
 const SCAN_REACH_M := 3.2          # desktop: how close the click must be
 const SCAN_CONE := 0.55            # desktop: radians off the crosshair
 
@@ -37,7 +38,16 @@ static func build(seg: Node3D, solid: StaticBody3D, w: int, wall_col: Color,
 	if not ResourceLoader.exists(DOOR_SCENE) or not ResourceLoader.exists(SCANNER_SCENE):
 		push_warning("[em-gate] door or scanner scene missing — no gate built")
 		return {}
-	var z: float = 4.0 - 0.5                      # the vestibule's last row, at the tile's face
+	# THE FIRST PASSAGE NEEDS ROOM (2026-08-18). The door stood at the
+	# vestibule's mouth, 2 m from the spawn: the walker opened the museum
+	# looking at a wall of door, with the scanner outside the field of view and
+	# nothing else in sight. So it stands GATE_DEPTH into the hall instead —
+	# the vestibule plus the hall's first rows are the passage, the door is a
+	# threshold you walk toward, and the scanner is beside it in plain sight.
+	# how deep the door stands is a NUMBER, not an eye's call:
+	# commons/data/em_layout.json gate.depth_rows (fallback GATE_DEPTH)
+	var depth: float = float(layout.get("depth_rows", GATE_DEPTH))
+	var z: float = 4.0 + depth - 0.5
 	var cols: Array = []
 	# the door: bi-parting, sealed, sized to the corridor's clear width
 	var door_ps: PackedScene = load(DOOR_SCENE)
@@ -84,17 +94,21 @@ static func build(seg: Node3D, solid: StaticBody3D, w: int, wall_col: Color,
 	scanner.rotation_degrees.y = 180.0            # face back into the vestibule
 	seg.add_child(scanner)
 	return {"door": door, "scanner": scanner, "colliders": cols, "open": false,
-		"z": z, "clear": clear}
+		"z": z, "clear": clear,
+		"open_seconds": layout.get("open_seconds", OPEN_SECONDS),
+		"click_reach_m": layout.get("click_reach_m", SCAN_REACH_M),
+		"click_cone_rad": layout.get("click_cone_rad", SCAN_CONE)}
 
 
 ## Is this desktop click on the scanner? Camera within reach and inside the cone.
-static func clicked(cam: Camera3D, scanner: Node3D) -> bool:
+static func clicked(cam: Camera3D, scanner: Node3D, reach: float = SCAN_REACH_M,
+		cone: float = SCAN_CONE) -> bool:
 	if cam == null or scanner == null or not is_instance_valid(scanner):
 		return false
 	var to: Vector3 = scanner.global_position - cam.global_position
-	if to.length() > SCAN_REACH_M:
+	if to.length() > reach:
 		return false
-	return (-cam.global_transform.basis.z).angle_to(to.normalized()) < SCAN_CONE
+	return (-cam.global_transform.basis.z).angle_to(to.normalized()) < cone
 
 
 ## Step an opening gate. `t` is seconds since the grant; returns true while it
@@ -112,7 +126,7 @@ static func step_open(gate: Dictionary, t: float) -> bool:
 			if is_instance_valid(c):
 				(c as Node).queue_free()
 		gate["cleared"] = true
-	var u: float = clampf(t / OPEN_SECONDS, 0.0, 1.0)
+	var u: float = clampf(t / float(gate.get("open_seconds", OPEN_SECONDS)), 0.0, 1.0)
 	door.set("open_amount", u)
 	if door.has_method("apply_grid_config"):
 		door.call("apply_grid_config", {"open_amount": u})

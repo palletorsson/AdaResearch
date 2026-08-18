@@ -230,13 +230,21 @@ var _gate: Dictionary = {}
 var _gate_t: float = -1.0          # seconds since the grant; < 0 = still sealed
 var _lazy_pending: int = 0         # segments still owed from the opening build
 var _lazy_delay: float = 0.0
-const GATE_REACH_M := 1.2          # eye or controller this close to the glass = a hand
-const GATE_PATIENCE := 20.0        # seconds at a sealed door before it opens itself
+# THE LAYOUT NUMBERS LIVE IN A FILE (2026-08-18, Palle: "this is not a visual
+# ruling; this could be settled in a config json"). commons/data/em_layout.json
+# carries every number an eye would otherwise tune in code — the gate's depth
+# and reach, the caption's size, the hall's proportions, the side room's box.
+# Read at boot; a missing key keeps the constant below, a missing file changes
+# nothing. `_L(section, key, fallback)` is the only reader.
+const LAYOUT_PATH := "res://commons/data/em_layout.json"
+var _layout: Dictionary = {}
+var GATE_REACH_M := 1.2            # eye or controller this close to the glass = a hand
+var GATE_PATIENCE := 20.0          # seconds at a sealed door before it opens itself
 var _gate_wait: float = 0.0
 var _vr_wait: float = 0.0
 var _diag_t: float = 0.0
 var _vr_wait_said: bool = false
-const AUTOSAVE_S := 0.6            # a ruling writes itself this long after the last keystroke
+var AUTOSAVE_S := 0.6              # a ruling writes itself this long after the last keystroke (em_layout.json)
 var _autosave_t: float = 0.0
 # THE ARTIFACT'S OWN CONFIG, ruled by hand (2026-08-18). dna.axes per token as
 # the pool read them; the editor's C key cycles the selected body's current
@@ -633,6 +641,21 @@ func _parse_args() -> void:
 ## ── MODULE LOADING ───────────────────────────────────────────────────────────
 ## Six render modules, six independent failure domains. Anything that does not
 ## load is simply absent for the rest of the run.
+## One number from commons/data/em_layout.json, or the fallback.
+func _L(section: String, key: String, fallback: float) -> float:
+	if _layout.is_empty():
+		if FileAccess.file_exists(LAYOUT_PATH):
+			var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(LAYOUT_PATH))
+			if parsed is Dictionary:
+				_layout = parsed
+		if _layout.is_empty():
+			_layout = {"_absent": true}
+	var sec: Variant = _layout.get(section)
+	if sec is Dictionary and (sec as Dictionary).has(key):
+		return float((sec as Dictionary)[key])
+	return fallback
+
+
 func _load_modules() -> void:
 	_mod_mats = _load_module("em_materials.gd")
 	_mod_light = _load_module("em_lighting.gd")
@@ -647,6 +670,9 @@ func _load_modules() -> void:
 	_mod_editor = _load_module("em_editor.gd")
 	_mod_props = _load_module("em_props.gd")
 	_mod_gate = _load_module("em_gate.gd")
+	GATE_REACH_M = _L("gate", "reach_m", GATE_REACH_M)
+	GATE_PATIENCE = _L("gate", "patience_s", GATE_PATIENCE)
+	AUTOSAVE_S = _L("editor", "autosave_seconds", AUTOSAVE_S)
 	_mod_pool = _load_module("em_pool.gd")
 	print("[endless_museum] modules: mats=%s light=%s env=%s detail=%s feel=%s audio=%s" % [
 		_mod_mats != null, _mod_light != null, _mod_env != null,
@@ -2027,7 +2053,11 @@ func _build_segment() -> void:
 	seg.set_meta("em_chapter", seg_seq)
 	# THE GATE, on the opening segment only: the vestibule becomes its own room
 	if _seg_index == 1 and _mod_gate != null and _shot_path == "" and _autopilot == 0:
-		_gate = _mod_gate.call("build", seg, solid, w, wall_col, m_wall)
+		_gate = _mod_gate.call("build", seg, solid, w, wall_col, m_wall, {
+			"depth_rows": int(_L("gate", "depth_rows", 4.0)),
+			"open_seconds": _L("gate", "open_seconds", 1.6),
+			"click_reach_m": _L("gate", "click_reach_m", 3.2),
+			"click_cone_rad": _L("gate", "click_cone_rad", 0.55)})
 		if not _gate.is_empty():
 			var sc: Node3D = _gate.get("scanner") as Node3D
 			if sc != null and sc.has_signal("palm_scanned"):
@@ -4954,7 +4984,8 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and (event as InputEventMouseButton).pressed \
 			and (event as InputEventMouseButton).button_index == MOUSE_BUTTON_LEFT \
 			and not _gate.is_empty() and _gate_t < 0.0 and _mod_gate != null:
-		if bool(_mod_gate.call("clicked", _cam, _gate.get("scanner"))):
+		if bool(_mod_gate.call("clicked", _cam, _gate.get("scanner"),
+				float(_gate.get("click_reach_m", 3.2)), float(_gate.get("click_cone_rad", 0.55)))):
 			_open_gate()
 	if Engine.is_editor_hint():
 		return
