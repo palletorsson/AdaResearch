@@ -740,6 +740,11 @@ func apply_grid_config(config: Dictionary) -> void:
 		_hinge_joint = null
 		_blades = null
 		_pole = null
+		# The config can arrive while this node is OUT of the tree: the grid defers
+		# apply_grid_config, and composers (curation_station) configure what they build.
+		# get_tree() is null there. Wait for a tree; a node never added never resumes.
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().process_frame
 		_create_pole()
 		_create_blades()

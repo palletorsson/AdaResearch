@@ -382,6 +382,12 @@ func _assemble() -> void:
 				inst.apply_grid_config({"emissive": false})
 		items.append({"inst": inst, "name": nm})
 	# 2. Let each artifact's _ready (and any deferred build) settle, then measure its footprint in cells.
+	# The station can be assembling while OUT of the tree: a map torn down or reloaded mid-build
+	# leaves the artifact detached but still valid, and get_tree() is null there. Wait for a tree
+	# instead of crashing; a station that is never added never resumes, which is the right
+	# answer for a dead map.
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 	await get_tree().process_frame
 	for item in items:

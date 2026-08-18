@@ -133,6 +133,11 @@ func apply_grid_config(config: Dictionary) -> void:
 			child.queue_free()
 	_cube_refs.clear()
 	_binary_table = null
+	# The config can arrive while this node is OUT of the tree: the grid defers
+	# apply_grid_config, and composers (curation_station) configure what they build.
+	# get_tree() is null there. Wait for a tree; a node never added never resumes.
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 
 	var pickup_cube_scene = preload("res://commons/scenes/mapobjects/pick_up_cube.tscn")

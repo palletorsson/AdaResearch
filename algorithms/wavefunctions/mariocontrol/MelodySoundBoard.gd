@@ -88,6 +88,11 @@ func apply_grid_config(data: Dictionary) -> void:
 		var melody = str(data["melody"]).to_lower().replace(" ", "")
 		var should_repeat = str(data.get("repeat", "false")).to_lower() == "true"
 
+		# The config can arrive while this node is OUT of the tree: the grid defers
+		# apply_grid_config, and composers (curation_station) configure what they build.
+		# get_tree() is null there. Wait for a tree; a node never added never resumes.
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().create_timer(0.5).timeout
 
 		if should_repeat:

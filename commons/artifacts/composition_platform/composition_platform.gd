@@ -188,7 +188,7 @@ func capture() -> Dictionary:
 	var saved_paths: Array = []
 	for dir in [save_dir_user, save_dir_repo]:
 		DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(dir))
-		var fp := dir + fname
+		var fp: String = dir + fname   # NOT := — `dir` is an untyped loop var, so the sum has no inferred type and the file does not parse
 		var f := FileAccess.open(fp, FileAccess.WRITE)
 		if f == null:
 			push_warning("composition_platform: could not write %s" % fp)
@@ -229,6 +229,11 @@ func apply_grid_config(cfg: Dictionary) -> void:
 			c.queue_free()
 		_capture_count = 0
 		_last_path = ""
+		# The config can arrive while this node is OUT of the tree: the grid defers
+		# apply_grid_config, and composers (curation_station) configure what they build.
+		# get_tree() is null there. Wait for a tree; a node never added never resumes.
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().process_frame
 		_build_pedestal()
 		_build_detector()

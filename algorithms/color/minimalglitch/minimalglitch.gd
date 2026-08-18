@@ -200,6 +200,11 @@ func apply_grid_config(config: Dictionary) -> void:
 			cube.queue_free()
 	demo_cubes.clear()
 	materials.clear()
+	# The config can arrive while this node is OUT of the tree: the grid defers
+	# apply_grid_config, and composers (curation_station) configure what they build.
+	# get_tree() is null there. Wait for a tree; a node never added never resumes.
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 	for i in range(cols):
 		for j in range(rows):
