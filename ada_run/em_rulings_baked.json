@@ -1,0 +1,56 @@
+{
+ "rulings": [
+  {
+   "chapter": "primitives",
+   "from": [
+    2,
+    9
+   ],
+   "provenance": "hand",
+   "remove": false,
+   "rotation": 120.0,
+   "to": [
+    2,
+    9
+   ],
+   "token": "frame_counter_display"
+  },
+  {
+   "chapter": "primitives",
+   "token": "interactive_point_origin",
+   "from": [
+    7,
+    28
+   ],
+   "to": [
+    7,
+    15
+   ],
+   "swap_to": "fontana_puncture",
+   "rotation": 180,
+   "remove": false,
+   "provenance": "hand",
+   "by": "palle",
+   "why": "primitives:0070 \u2014 the second point zero becomes the Fontana puncture, in the middle of the room"
+  },
+  {
+   "chapter": "primitives",
+   "token": "fontana_puncture",
+   "from": [
+    3,
+    9
+   ],
+   "to": [
+    3,
+    9
+   ],
+   "rotation": 0,
+   "remove": true,
+   "provenance": "hand",
+   "by": "palle",
+   "why": "the puncture moved to primitives:0070 in the middle of the room"
+  }
+ ],
+ "schema": "adaresearch.em_rulings_baked.v1",
+ "_readme": "Rulings written INTO ada_run/em_plan.json by tools/bake_rulings.py. A regeneration (spine_run --write-plan) returns the plan to the negotiator; replay these with `python tools/bake_rulings.py --replay --apply`."
+}

@@ -2428,7 +2428,7 @@ func _save_inventory() -> void:
 ## row's new cell and says so. One ruling, one body, no guess — a chapter
 ## with two rulings for the same token keeps the old behaviour (idle), which
 ## is the case where a rebind would have to guess which body was meant.
-func _ruling_for(tok: String, chapter: String, tx: int, tz: int) -> Dictionary:
+func _ruling_for(tok: String, chapter: String, tx: int, tz: int, hand_row: bool = false) -> Dictionary:
 	var loose: Array = []
 	for ov_v in _edit_overrides:
 		var ov: Dictionary = ov_v as Dictionary
@@ -2443,13 +2443,40 @@ func _ruling_for(tok: String, chapter: String, tx: int, tz: int) -> Dictionary:
 			ov["_matched"] = true
 			return ov
 		loose.append(ov)
-	if loose.size() == 1 and not bool((loose[0] as Dictionary).get("_matched", false)):
-		var ov0: Dictionary = loose[0]
-		ov0["_matched"] = true
-		ov0["_rebound"] = [tx, tz]
-		print("[em-edit] %s: the plan moved this row to [%d,%d]; its ruling (from %s) REBOUND to it"
-			% [tok, tx, tz, str(ov0.get("from", []))])
-		return ov0
+	# A BAKED ROW IS ALREADY THE HAND'S WORD. tools/bake_rulings.py writes a
+	# ruling INTO the plan and marks the row `hand`; a stale ruling must not
+	# then rebind onto it and move it somewhere else — the two would fight
+	# over the same body every build, which is what happened the first time.
+	# An exact key still applies: ruling the same body again is allowed.
+	if hand_row:
+		return {}
+	# SEVERAL RULINGS, SEVERAL ROWS. The first version rebound only when a
+	# token had exactly one unmatched ruling, so a body ruled twice (Palle has
+	# three on fontana_puncture) bound to nothing and every ruling on it went
+	# idle — "I saved and I don't see the change". Now each row takes the
+	# NEAREST unmatched ruling for its token, which is the only pairing that
+	# does not need to guess: rulings and rows are both cells, and a hand that
+	# ruled two bodies of the same token ruled the nearer one about the nearer
+	# one. Every rebind is printed with its distance.
+	var best: Dictionary = {}
+	var best_d: int = 1 << 30
+	for ov_v2 in loose:
+		var ov2: Dictionary = ov_v2 as Dictionary
+		if bool(ov2.get("_matched", false)):
+			continue
+		var f2: Array = ov2.get("from", [])
+		var d2: int = 1 << 20
+		if f2.size() >= 2:
+			d2 = absi(int(f2[0]) - tx) + absi(int(f2[1]) - tz)
+		if d2 < best_d:
+			best_d = d2
+			best = ov2
+	if not best.is_empty():
+		best["_matched"] = true
+		best["_rebound"] = [tx, tz]
+		print("[em-edit] %s: the plan moved this row to [%d,%d]; its ruling (from %s, %d cells away) REBOUND to it"
+			% [tok, tx, tz, str(best.get("from", [])), best_d])
+		return best
 	return {}
 
 
@@ -2985,10 +3012,12 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 		# SAID. An override whose row the plan no longer places is counted idle
 		# at the end — reported, never guessed at.
 		var yaw_override: float = float(row.get("rotation", 0.0))
-		var fine_override: Array = []          # the hand's 0.2 m offset, if any
-		var scale_override: float = 1.0        # the hand's uniform scale, if any
+		# a BAKED row carries the hand's fine offset and scale itself
+		var fine_override: Array = (row.get("offset", []) as Array).duplicate() if row.get("offset") is Array else []
+		var scale_override: float = float(row.get("scale", 1.0))
 		var removed_by_hand := false
-		var found: Dictionary = _ruling_for(tok, String(entry.get("sequence", "")), tx, tz)
+		var found: Dictionary = _ruling_for(tok, String(entry.get("sequence", "")), tx, tz,
+			bool(row.get("hand", false)))
 		for ov_v in ([found] if not found.is_empty() else []):
 			var ov: Dictionary = ov_v as Dictionary
 			if bool(ov.get("remove", false)):

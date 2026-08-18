@@ -288,26 +288,9 @@
 			]
 		},
 		{
-			"cell": [
-				3,
-				4
-			],
-			"chapter": "primitives",
-			"id": "primitives:0021",
-			"kind": "artifact",
-			"pearl": "point",
-			"segment": 0,
-			"token": "you_are_here",
-			"world": [
-				3.5,
-				0.9,
-				8.5
-			]
-		},
-		{
 			"cell": [],
 			"chapter": "primitives",
-			"id": "primitives:0022",
+			"id": "primitives:0021",
 			"kind": "showing",
 			"pearl": "point",
 			"segment": 0,
@@ -321,7 +304,7 @@
 		{
 			"cell": [],
 			"chapter": "primitives",
-			"id": "primitives:0023",
+			"id": "primitives:0022",
 			"kind": "showing",
 			"pearl": "point",
 			"segment": 0,
@@ -335,7 +318,7 @@
 		{
 			"cell": [],
 			"chapter": "primitives",
-			"id": "primitives:0024",
+			"id": "primitives:0023",
 			"kind": "showing",
 			"pearl": "point",
 			"segment": 0,
@@ -349,7 +332,7 @@
 		{
 			"cell": [],
 			"chapter": "primitives",
-			"id": "primitives:0025",
+			"id": "primitives:0024",
 			"kind": "showing",
 			"pearl": "point",
 			"segment": 0,
@@ -363,7 +346,7 @@
 		{
 			"cell": [],
 			"chapter": "primitives",
-			"id": "primitives:0026",
+			"id": "primitives:0025",
 			"kind": "showing",
 			"pearl": "point",
 			"segment": 0,
@@ -377,7 +360,7 @@
 		{
 			"cell": [],
 			"chapter": "primitives",
-			"id": "primitives:0027",
+			"id": "primitives:0026",
 			"kind": "showing",
 			"pearl": "point",
 			"segment": 0,
@@ -391,7 +374,7 @@
 		{
 			"cell": [],
 			"chapter": "primitives",
-			"id": "primitives:0028",
+			"id": "primitives:0027",
 			"kind": "showing",
 			"pearl": "point",
 			"segment": 0,
@@ -405,7 +388,7 @@
 		{
 			"cell": [],
 			"chapter": "primitives",
-			"id": "primitives:0029",
+			"id": "primitives:0028",
 			"kind": "showing",
 			"pearl": "point",
 			"segment": 0,
@@ -419,7 +402,7 @@
 		{
 			"cell": [],
 			"chapter": "primitives",
-			"id": "primitives:0030",
+			"id": "primitives:0029",
 			"kind": "showing",
 			"pearl": "point",
 			"segment": 0,
@@ -433,13 +416,27 @@
 		{
 			"cell": [],
 			"chapter": "primitives",
-			"id": "primitives:0031",
+			"id": "primitives:0030",
 			"kind": "showing",
 			"pearl": "point",
 			"segment": 0,
 			"token": "showing",
 			"world": [
 				5.0,
+				1.6,
+				11.0
+			]
+		},
+		{
+			"cell": [],
+			"chapter": "primitives",
+			"id": "primitives:0031",
+			"kind": "showing",
+			"pearl": "point",
+			"segment": 0,
+			"token": "showing",
+			"world": [
+				10.0,
 				1.6,
 				11.0
 			]
@@ -454,20 +451,6 @@
 			"token": "showing",
 			"world": [
 				10.0,
-				1.6,
-				11.0
-			]
-		},
-		{
-			"cell": [],
-			"chapter": "primitives",
-			"id": "primitives:0033",
-			"kind": "showing",
-			"pearl": "point",
-			"segment": 0,
-			"token": "showing",
-			"world": [
-				10.0,
 				1.0,
 				11.3
 			]
@@ -475,7 +458,7 @@
 		{
 			"cell": [],
 			"chapter": "primitives",
-			"id": "primitives:0034",
+			"id": "primitives:0033",
 			"kind": "showing",
 			"pearl": "point",
 			"segment": 0,
@@ -489,7 +472,7 @@
 		{
 			"cell": [],
 			"chapter": "primitives",
-			"id": "primitives:0035",
+			"id": "primitives:0034",
 			"kind": "showing",
 			"pearl": "point",
 			"segment": 0,
@@ -506,7 +489,7 @@
 				8
 			],
 			"chapter": "primitives",
-			"id": "primitives:0036",
+			"id": "primitives:0035",
 			"kind": "artifact",
 			"pearl": "point",
 			"segment": 0,
@@ -520,7 +503,7 @@
 		{
 			"cell": [],
 			"chapter": "primitives",
-			"id": "primitives:0037",
+			"id": "primitives:0036",
 			"kind": "showing",
 			"pearl": "point",
 			"segment": 0,
@@ -534,7 +517,7 @@
 		{
 			"cell": [],
 			"chapter": "primitives",
-			"id": "primitives:0038",
+			"id": "primitives:0037",
 			"kind": "showing",
 			"pearl": "point",
 			"segment": 0,
@@ -543,6 +526,23 @@
 				11.0,
 				1.1,
 				12.6
+			]
+		},
+		{
+			"cell": [
+				2,
+				9
+			],
+			"chapter": "primitives",
+			"id": "primitives:0038",
+			"kind": "artifact",
+			"pearl": "point",
+			"segment": 0,
+			"token": "frame_counter_display",
+			"world": [
+				2.5,
+				0.0,
+				13.5
 			]
 		},
 		{
@@ -749,11 +749,28 @@
 		},
 		{
 			"cell": [
-				9,
+				2,
 				14
 			],
 			"chapter": "primitives",
 			"id": "primitives:0053",
+			"kind": "artifact",
+			"pearl": "point",
+			"segment": 0,
+			"token": "you_are_here",
+			"world": [
+				2.5,
+				0.9,
+				18.5
+			]
+		},
+		{
+			"cell": [
+				9,
+				14
+			],
+			"chapter": "primitives",
+			"id": "primitives:0054",
 			"kind": "artifact",
 			"pearl": "point",
 			"segment": 0,
@@ -770,7 +787,7 @@
 				15
 			],
 			"chapter": "primitives",
-			"id": "primitives:0054",
+			"id": "primitives:0055",
 			"kind": "artifact",
 			"pearl": "point",
 			"segment": 0,
@@ -779,23 +796,6 @@
 				7.5,
 				1.4,
 				19.5
-			]
-		},
-		{
-			"cell": [
-				1,
-				16
-			],
-			"chapter": "primitives",
-			"id": "primitives:0055",
-			"kind": "artifact",
-			"pearl": "point",
-			"segment": 0,
-			"token": "frame_counter_display",
-			"world": [
-				1.5,
-				0.0,
-				20.5
 			]
 		},
 		{
