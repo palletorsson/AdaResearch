@@ -1,27 +1,27 @@
 {
  "schema": "adaresearch.spine_run.v1",
- "at": "2026-08-18T08:54:51",
+ "at": "2026-08-18T10:08:53",
  "totals": {
   "sequences": 24,
   "rows": 799,
   "anchors": 799,
-  "offered": 1389,
-  "placed": 1357,
-  "interior": 960,
-  "rejected": 32,
+  "offered": 1407,
+  "placed": 1367,
+  "interior": 965,
+  "rejected": 40,
   "housed_sequences": 0,
   "lineages": 5982,
-  "lineages_walled": 1566,
-  "interior_share": 0.6911,
+  "lineages_walled": 1565,
+  "interior_share": 0.6859,
   "exterior_venues": {
-   "courtyard": 250,
-   "porch": 114,
-   "outside": 23,
+   "courtyard": 251,
+   "porch": 115,
+   "outside": 26,
    "balcony": 10
   },
   "reasons": {
-   "escalation": 29,
-   "support_matches_contract": 3
+   "escalation": 34,
+   "support_matches_contract": 6
   }
  },
  "sequences": [
@@ -115,7 +115,7 @@
     "pyramidlong"
    ],
    "no_brief": 0,
-   "offered": 131,
+   "offered": 133,
    "hero_walk": {
     "pearls": 11,
     "heroes": [
@@ -132,14 +132,14 @@
      "durer_scene"
     ]
    },
-   "placed": 130,
+   "placed": 132,
    "interior": 99,
    "rejected": 1,
    "venues": {
-    "porch": 12,
+    "porch": 11,
     "interior": 99,
-    "courtyard": 15,
-    "outside": 4
+    "courtyard": 16,
+    "outside": 6
    },
    "reasons": {
     "escalation": 1
@@ -147,8 +147,8 @@
    "reason_examples": [],
    "slots": 16,
    "walls": 47,
-   "rooms_on_disk": 118,
-   "rooms_authored": 114,
+   "rooms_on_disk": 120,
+   "rooms_authored": 115,
    "lineages": 726,
    "lineages_walled": 250,
    "cast": [
@@ -192,6 +192,8 @@
     "modulor_man_demo",
     "laser_measure",
     "laser_exploding_sphere",
+    "artifact_workstation",
+    "adjacency_shelf",
     "arrangement_yard",
     "grain_block",
     "line_slack",
@@ -1385,9 +1387,9 @@
      "pearl": "melencolia"
     }
    },
-   "interior_share": 0.7557,
+   "interior_share": 0.7444,
    "housed": false,
-   "shortfall": 32,
+   "shortfall": 34,
    "pearls": [
     {
      "sequence": "primitives",
@@ -2504,27 +2506,27 @@
       "pyramidlong"
      ],
      "no_brief": 0,
-     "offered": 26,
+     "offered": 28,
      "hero_walk": {
       "hero": "klee_walking_point",
       "hand_branches": 0,
       "pearl": "lines"
      },
-     "placed": 26,
+     "placed": 28,
      "interior": 17,
      "rejected": 0,
      "venues": {
       "interior": 17,
       "porch": 3,
       "courtyard": 4,
-      "outside": 2
+      "outside": 4
      },
      "reasons": {},
      "reason_examples": [],
      "slots": 16,
      "walls": 47,
-     "rooms_on_disk": 23,
-     "rooms_authored": 23,
+     "rooms_on_disk": 25,
+     "rooms_authored": 24,
      "lineages": 66,
      "lineages_walled": 21,
      "cast": [
@@ -2551,6 +2553,8 @@
       "modulor_man_demo",
       "laser_measure",
       "laser_exploding_sphere",
+      "artifact_workstation",
+      "adjacency_shelf",
       "arrangement_yard",
       "grain_block",
       "line_slack"
@@ -3105,7 +3109,11 @@
        "role": "related",
        "kind": "family",
        "rule": "same neighbourhood, held apart by padding",
-       "why": "same category and sequence"
+       "why": "same category and sequence",
+       "walk_kind": "edge",
+       "walk_why": "the museum could not hold it: body_inside_room: body cell (19, 38) is wall or void",
+       "walk_space": "wall",
+       "pearl": "lines"
       },
       "pyramid_edit": {
        "anchor": "pyramid_edit",
@@ -3196,7 +3204,11 @@
        "role": "related",
        "kind": "family",
        "rule": "same neighbourhood, held apart by padding",
-       "why": "same category and sequence"
+       "why": "same category and sequence",
+       "walk_kind": "edge",
+       "walk_why": "the museum could not hold it: circulation_on_floor: 3 clearance cells fall outside the floor",
+       "walk_space": "wall",
+       "pearl": "lines"
       },
       "diamonds": {
        "anchor": "diamonds",
@@ -3482,9 +3494,9 @@
        "pearl": "lines"
       }
      },
-     "interior_share": 0.6538,
+     "interior_share": 0.6071,
      "housed": false,
-     "shortfall": 9,
+     "shortfall": 11,
      "pearl": "lines",
      "pearl_index": 1,
      "map": "Point_Lines"
@@ -6544,8 +6556,8 @@
      "rejected": 0,
      "venues": {
       "interior": 10,
-      "courtyard": 1,
-      "porch": 2
+      "courtyard": 2,
+      "porch": 1
      },
      "reasons": {},
      "reason_examples": [],
@@ -12342,7 +12354,7 @@
     }
    ],
    "why_museum": "crowned",
-   "seconds": 7.3
+   "seconds": 9.8
   },
   {
    "sequence": "transformation",
@@ -16046,7 +16058,7 @@
     }
    ],
    "why_museum": "em_order rotation",
-   "seconds": 2.7
+   "seconds": 3.2
   },
   {
    "sequence": "symmetry",
@@ -18415,7 +18427,7 @@
     }
    ],
    "why_museum": "em_order rotation",
-   "seconds": 1.6
+   "seconds": 1.9
   },
   {
    "sequence": "array_tutorial",
@@ -21635,7 +21647,7 @@
     }
    ],
    "why_museum": "em_order rotation",
-   "seconds": 7.6
+   "seconds": 8.3
   },
   {
    "sequence": "color",
@@ -21695,7 +21707,7 @@
     "gradient_interpolator"
    ],
    "no_brief": 0,
-   "offered": 64,
+   "offered": 65,
    "hero_walk": {
     "pearls": 8,
     "heroes": [
@@ -21711,7 +21723,7 @@
    },
    "placed": 63,
    "interior": 38,
-   "rejected": 1,
+   "rejected": 2,
    "venues": {
     "interior": 38,
     "porch": 6,
@@ -21720,13 +21732,13 @@
     "balcony": 1
    },
    "reasons": {
-    "support_matches_contract": 1
+    "support_matches_contract": 2
    },
    "reason_examples": [],
    "slots": 11,
    "walls": 35,
-   "rooms_on_disk": 60,
-   "rooms_authored": 60,
+   "rooms_on_disk": 61,
+   "rooms_authored": 61,
    "lineages": 72,
    "lineages_walled": 8,
    "cast": [
@@ -21755,6 +21767,7 @@
     "csg_compose_workbench",
     "csg_difference_demo",
     "coincident_face",
+    "science_screen",
     "interior_block",
     "brick_wall_factory",
     "colorballs",
@@ -22386,9 +22399,9 @@
      "pearl": "walls"
     }
    },
-   "interior_share": 0.5938,
+   "interior_share": 0.5846,
    "housed": false,
-   "shortfall": 26,
+   "shortfall": 27,
    "pearls": [
     {
      "sequence": "color",
@@ -23054,7 +23067,7 @@
       "gradient_interpolator"
      ],
      "no_brief": 0,
-     "offered": 20,
+     "offered": 21,
      "hero_walk": {
       "hero": "csg_architecture_cavity",
       "hand_branches": 0,
@@ -23062,18 +23075,25 @@
      },
      "placed": 20,
      "interior": 16,
-     "rejected": 0,
+     "rejected": 1,
      "venues": {
       "porch": 2,
       "interior": 16,
       "courtyard": 2
      },
-     "reasons": {},
-     "reason_examples": [],
+     "reasons": {
+      "support_matches_contract": 1
+     },
+     "reason_examples": [
+      {
+       "token": "science_screen",
+       "why": "support_matches_contract: slot offers 'floor', artifact needs 'wall'"
+      }
+     ],
      "slots": 11,
      "walls": 35,
-     "rooms_on_disk": 19,
-     "rooms_authored": 19,
+     "rooms_on_disk": 20,
+     "rooms_authored": 20,
      "lineages": 9,
      "lineages_walled": 1,
      "cast": [
@@ -23096,6 +23116,7 @@
       "csg_compose_workbench",
       "csg_difference_demo",
       "coincident_face",
+      "science_screen",
       "interior_block"
      ],
      "cast_context": {
@@ -23476,7 +23497,11 @@
        "role": "related",
        "kind": "co_placed",
        "rule": "fill \u2014 they already stand together in real maps",
-       "why": "already stand together in 1 map(s)"
+       "why": "already stand together in 1 map(s)",
+       "walk_kind": "edge",
+       "walk_why": "the museum could not hold it: support_matches_contract: slot offers 'floor', artifact needs 'wall'",
+       "walk_space": "wall",
+       "pearl": "context placed"
       },
       "spectrum_forest": {
        "anchor": "spectrum_forest",
@@ -23671,9 +23696,9 @@
        "pearl": "context placed"
       }
      },
-     "interior_share": 0.8,
+     "interior_share": 0.7619,
      "housed": false,
-     "shortfall": 4,
+     "shortfall": 5,
      "pearl": "context placed",
      "pearl_index": 1,
      "map": "Color_Context_Placed"
@@ -27333,7 +27358,7 @@
     }
    ],
    "why_museum": "em_order rotation",
-   "seconds": 5.0
+   "seconds": 5.4
   },
   {
    "sequence": "change",
@@ -29025,7 +29050,7 @@
     "VectorSubtraction"
    ],
    "no_brief": 0,
-   "offered": 227,
+   "offered": 230,
    "hero_walk": {
     "pearls": 26,
     "heroes": [
@@ -29057,12 +29082,12 @@
      "hits_reset_display"
     ]
    },
-   "placed": 224,
-   "interior": 150,
+   "placed": 227,
+   "interior": 152,
    "rejected": 3,
    "venues": {
-    "porch": 30,
-    "interior": 150,
+    "porch": 31,
+    "interior": 152,
     "courtyard": 31,
     "outside": 8,
     "balcony": 5
@@ -29073,8 +29098,8 @@
    "reason_examples": [],
    "slots": 16,
    "walls": 47,
-   "rooms_on_disk": 213,
-   "rooms_authored": 208,
+   "rooms_on_disk": 216,
+   "rooms_authored": 211,
    "lineages": 2028,
    "lineages_walled": 449,
    "cast": [
@@ -29101,6 +29126,9 @@
     "ca_rule_comparison",
     "rule30_random",
     "lenia_continuous",
+    "vector_addition_demo",
+    "magnifying_glass",
+    "ball_dropper",
     "reflection_hall",
     "vector_addition_xl_laser",
     "vector_subtraction_xl_laser",
@@ -31108,9 +31136,9 @@
      "pearl": "arena"
     }
    },
-   "interior_share": 0.6608,
+   "interior_share": 0.6609,
    "housed": false,
-   "shortfall": 77,
+   "shortfall": 78,
    "pearls": [
     {
      "sequence": "forces",
@@ -34526,18 +34554,18 @@
       "VectorSubtraction"
      ],
      "no_brief": 0,
-     "offered": 10,
+     "offered": 13,
      "hero_walk": {
       "hero": "ca_rules_workbench",
       "hand_branches": 0,
       "pearl": "reformed instruments"
      },
-     "placed": 10,
-     "interior": 7,
+     "placed": 13,
+     "interior": 9,
      "rejected": 0,
      "venues": {
-      "interior": 7,
-      "porch": 1,
+      "interior": 9,
+      "porch": 2,
       "outside": 1,
       "courtyard": 1
      },
@@ -34545,8 +34573,8 @@
      "reason_examples": [],
      "slots": 16,
      "walls": 47,
-     "rooms_on_disk": 10,
-     "rooms_authored": 10,
+     "rooms_on_disk": 13,
+     "rooms_authored": 13,
      "lineages": 78,
      "lineages_walled": 18,
      "cast": [
@@ -34559,7 +34587,10 @@
       "ca_conway_city",
       "ca_rule_comparison",
       "rule30_random",
-      "lenia_continuous"
+      "lenia_continuous",
+      "vector_addition_demo",
+      "magnifying_glass",
+      "ball_dropper"
      ],
      "cast_context": {
       "calder_object_mobile": {
@@ -35095,7 +35126,11 @@
        "role": "related",
        "kind": "named",
        "rule": "sightline \u2014 the relative stands where the lead can be seen with it",
-       "why": "an @identity relationships field names it"
+       "why": "an @identity relationships field names it",
+       "walk_kind": "edge",
+       "walk_why": "the museum could not hold it: circulation_on_floor: 6 clearance cells fall outside the floor",
+       "walk_space": "wall",
+       "pearl": "reformed instruments"
       },
       "VectorSubtraction": {
        "anchor": "vector_subtraction_demo",
@@ -35137,7 +35172,11 @@
        "role": "related",
        "kind": "co_placed",
        "rule": "fill \u2014 they already stand together in real maps",
-       "why": "already stand together in 1 map(s)"
+       "why": "already stand together in 1 map(s)",
+       "walk_kind": "edge",
+       "walk_why": "the museum could not hold it: physical_overlap: 1 body cells collide with launch_arc",
+       "walk_space": "wall",
+       "pearl": "reformed instruments"
       },
       "vector_dot_product_xl": {
        "anchor": "vector_dot_product_xl",
@@ -35193,7 +35232,11 @@
        "role": "related",
        "kind": "family",
        "rule": "same neighbourhood, held apart by padding",
-       "why": "same category and sequence"
+       "why": "same category and sequence",
+       "walk_kind": "edge",
+       "walk_why": "the museum could not hold it: physical_overlap: 1 body cells collide with launch_arc",
+       "walk_space": "wall",
+       "pearl": "reformed instruments"
       },
       "example_2_3_gravity_scaled_by_mass_vr": {
        "anchor": "example_2_3_gravity_scaled_by_mass_vr",
@@ -36011,9 +36054,9 @@
        "pearl": "reformed instruments"
       }
      },
-     "interior_share": 0.7,
+     "interior_share": 0.6923,
      "housed": false,
-     "shortfall": 3,
+     "shortfall": 4,
      "pearl": "reformed instruments",
      "pearl_index": 2,
      "map": "Reformed_Instruments"
@@ -73771,7 +73814,7 @@
     }
    ],
    "why_museum": "crowned",
-   "seconds": 34.8
+   "seconds": 35.7
   },
   {
    "sequence": "formfinding",
@@ -73797,7 +73840,7 @@
     "gradient_descent_optimizer"
    ],
    "no_brief": 0,
-   "offered": 44,
+   "offered": 45,
    "hero_walk": {
     "pearls": 6,
     "heroes": [
@@ -73809,11 +73852,11 @@
      "self_shaping_forge"
     ]
    },
-   "placed": 44,
-   "interior": 35,
+   "placed": 45,
+   "interior": 36,
    "rejected": 0,
    "venues": {
-    "interior": 35,
+    "interior": 36,
     "courtyard": 8,
     "porch": 1
    },
@@ -73821,8 +73864,8 @@
    "reason_examples": [],
    "slots": 35,
    "walls": 39,
-   "rooms_on_disk": 43,
-   "rooms_authored": 41,
+   "rooms_on_disk": 44,
+   "rooms_authored": 42,
    "lineages": 24,
    "lineages_walled": 12,
    "cast": [
@@ -73834,6 +73877,7 @@
     "gradient_descent_landscape",
     "attention_loom",
     "token_stream",
+    "science_screen",
     "cable_builder",
     "catenoid",
     "helicoid",
@@ -74210,7 +74254,7 @@
      "pearl": "annealing"
     }
    },
-   "interior_share": 0.7955,
+   "interior_share": 0.8,
    "housed": false,
    "shortfall": 9,
    "pearls": [
@@ -74238,25 +74282,25 @@
       "gradient_descent_optimizer"
      ],
      "no_brief": 0,
-     "offered": 8,
+     "offered": 9,
      "hero_walk": {
       "hero": "gradient_descent_well",
       "hand_branches": 0,
       "pearl": "descent"
      },
-     "placed": 8,
-     "interior": 7,
+     "placed": 9,
+     "interior": 8,
      "rejected": 0,
      "venues": {
-      "interior": 7,
+      "interior": 8,
       "courtyard": 1
      },
      "reasons": {},
      "reason_examples": [],
      "slots": 35,
      "walls": 39,
-     "rooms_on_disk": 8,
-     "rooms_authored": 8,
+     "rooms_on_disk": 9,
+     "rooms_authored": 9,
      "lineages": 4,
      "lineages_walled": 2,
      "cast": [
@@ -74267,7 +74311,8 @@
       "particle_flow_swarm",
       "gradient_descent_landscape",
       "attention_loom",
-      "token_stream"
+      "token_stream",
+      "science_screen"
      ],
      "cast_context": {
       "gradient_descent": {
@@ -74488,7 +74533,11 @@
        "role": "related",
        "kind": "co_placed",
        "rule": "fill \u2014 they already stand together in real maps",
-       "why": "already stand together in 1 map(s)"
+       "why": "already stand together in 1 map(s)",
+       "walk_kind": "edge",
+       "walk_why": "the museum could not hold it: physical_overlap: 2 body cells collide with descent_marble_toy",
+       "walk_space": "wall",
+       "pearl": "descent"
       },
       "gradient_descent_optimizer": {
        "anchor": "gradient_descent_optimizer",
@@ -74510,7 +74559,7 @@
        "pearl": "descent"
       }
      },
-     "interior_share": 0.875,
+     "interior_share": 0.8889,
      "housed": false,
      "shortfall": 1,
      "pearl": "descent",
@@ -76122,7 +76171,7 @@
     "multimeter"
    ],
    "no_brief": 0,
-   "offered": 113,
+   "offered": 116,
    "hero_walk": {
     "pearls": 12,
     "heroes": [
@@ -76140,22 +76189,24 @@
      "oscilloscope"
     ]
    },
-   "placed": 113,
-   "interior": 84,
-   "rejected": 0,
+   "placed": 115,
+   "interior": 85,
+   "rejected": 1,
    "venues": {
-    "interior": 84,
+    "interior": 85,
     "courtyard": 22,
-    "porch": 7
+    "porch": 8
    },
-   "reasons": {},
+   "reasons": {
+    "support_matches_contract": 1
+   },
    "reason_examples": [],
    "slots": 16,
    "walls": 42,
-   "rooms_on_disk": 106,
-   "rooms_authored": 99,
+   "rooms_on_disk": 109,
+   "rooms_authored": 102,
    "lineages": 756,
-   "lineages_walled": 316,
+   "lineages_walled": 315,
    "cast": [
     "control_pendulum",
     "rotatescalecubes",
@@ -76220,6 +76271,9 @@
     "Rack303Acid",
     "mario_test_sound_ui",
     "MarioSoundController",
+    "science_screen",
+    "CircleSpiral",
+    "queer_cylinder_target",
     "boundary_tank",
     "evidence_ladder",
     "rack_room",
@@ -77262,9 +77316,9 @@
      "pearl": "synthesis lab"
     }
    },
-   "interior_share": 0.7434,
+   "interior_share": 0.7328,
    "housed": false,
-   "shortfall": 29,
+   "shortfall": 31,
    "pearls": [
     {
      "sequence": "wavefunctions",
@@ -82050,26 +82104,34 @@
       "multimeter"
      ],
      "no_brief": 0,
-     "offered": 17,
+     "offered": 20,
      "hero_walk": {
       "hero": "timbre_sculptor",
       "hand_branches": 0,
       "pearl": "effect sound"
      },
-     "placed": 17,
-     "interior": 17,
-     "rejected": 0,
+     "placed": 19,
+     "interior": 18,
+     "rejected": 1,
      "venues": {
-      "interior": 17
+      "interior": 18,
+      "porch": 1
      },
-     "reasons": {},
-     "reason_examples": [],
+     "reasons": {
+      "support_matches_contract": 1
+     },
+     "reason_examples": [
+      {
+       "token": "science_screen",
+       "why": "support_matches_contract: slot offers 'podium', artifact needs 'wall'"
+      }
+     ],
      "slots": 16,
      "walls": 42,
-     "rooms_on_disk": 16,
-     "rooms_authored": 14,
+     "rooms_on_disk": 19,
+     "rooms_authored": 17,
      "lineages": 63,
-     "lineages_walled": 21,
+     "lineages_walled": 20,
      "cast": [
       "timbre_sculptor",
       "RackMoogBass",
@@ -82085,6 +82147,9 @@
       "Rack303Acid",
       "mario_test_sound_ui",
       "MarioSoundController",
+      "science_screen",
+      "CircleSpiral",
+      "queer_cylinder_target",
       "boundary_tank",
       "evidence_ladder",
       "rack_room"
@@ -82218,7 +82283,11 @@
        "role": "related",
        "kind": "axis_kin",
        "rule": "adjacent, at a DIFFERENT value of the shared axis",
-       "why": "can argue the same axis: surface"
+       "why": "can argue the same axis: surface",
+       "walk_kind": "edge",
+       "walk_why": "the museum could not hold it: support_matches_contract: slot offers 'podium', artifact needs 'wall'",
+       "walk_space": "wall",
+       "pearl": "effect sound"
       },
       "foucault_pendulum": {
        "anchor": "foucault_pendulum",
@@ -82852,7 +82921,11 @@
        "role": "related",
        "kind": "named",
        "rule": "sightline \u2014 the relative stands where the lead can be seen with it",
-       "why": "an @identity relationships field names it"
+       "why": "an @identity relationships field names it",
+       "walk_kind": "edge",
+       "walk_why": "the museum could not hold it: body_inside_room: body cell (17, 29) is wall or void",
+       "walk_space": "wall",
+       "pearl": "effect sound"
       },
       "coloredlines": {
        "anchor": "coloredlines",
@@ -82901,7 +82974,11 @@
        "role": "related",
        "kind": "axis_kin",
        "rule": "adjacent, at a DIFFERENT value of the shared axis",
-       "why": "can argue the same axis: face"
+       "why": "can argue the same axis: face",
+       "walk_kind": "edge",
+       "walk_why": "the museum could not hold it: physical_overlap: 2 body cells collide with cable_builder",
+       "walk_space": "wall",
+       "pearl": "effect sound"
       },
       "petri_dish_worms": {
        "anchor": "petri_dish_worms",
@@ -82924,9 +83001,9 @@
        "pearl": "effect sound"
       }
      },
-     "interior_share": 1.0,
-     "housed": true,
-     "shortfall": 0,
+     "interior_share": 0.9,
+     "housed": false,
+     "shortfall": 2,
      "pearl": "effect sound",
      "pearl_index": 5,
      "map": "WaveFunctions_Effect_Sound"
@@ -88493,7 +88570,7 @@
     }
    ],
    "why_museum": "em_order rotation",
-   "seconds": 6.6
+   "seconds": 7.8
   },
   {
    "sequence": "randomness",
@@ -88567,7 +88644,7 @@
     "r_c"
    ],
    "no_brief": 0,
-   "offered": 105,
+   "offered": 106,
    "hero_walk": {
     "pearls": 14,
     "heroes": [
@@ -88587,14 +88664,14 @@
      "miura_crawler"
     ]
    },
-   "placed": 102,
+   "placed": 103,
    "interior": 65,
    "rejected": 3,
    "venues": {
     "porch": 16,
     "interior": 65,
     "courtyard": 18,
-    "outside": 3
+    "outside": 4
    },
    "reasons": {
     "escalation": 3
@@ -88602,8 +88679,8 @@
    "reason_examples": [],
    "slots": 53,
    "walls": 55,
-   "rooms_on_disk": 95,
-   "rooms_authored": 90,
+   "rooms_on_disk": 96,
+   "rooms_authored": 91,
    "lineages": 644,
    "lineages_walled": 149,
    "cast": [
@@ -88631,6 +88708,7 @@
     "shannon_entropy_meter",
     "quantum_dice",
     "shannon_workbench",
+    "ca_bridge",
     "remove_random",
     "hazards_demo",
     "edible_mushroom",
@@ -89557,9 +89635,9 @@
      "pearl": "random game"
     }
    },
-   "interior_share": 0.619,
+   "interior_share": 0.6132,
    "housed": false,
-   "shortfall": 40,
+   "shortfall": 41,
    "pearls": [
     {
      "sequence": "randomness",
@@ -90449,32 +90527,34 @@
       "r_c"
      ],
      "no_brief": 0,
-     "offered": 4,
+     "offered": 5,
      "hero_walk": {
       "hero": "hardware_entropy_decay",
       "hand_branches": 0,
       "pearl": "random entropy"
      },
-     "placed": 4,
+     "placed": 5,
      "interior": 3,
      "rejected": 0,
      "venues": {
       "porch": 1,
-      "interior": 3
+      "interior": 3,
+      "outside": 1
      },
      "reasons": {},
      "reason_examples": [],
      "slots": 53,
      "walls": 55,
-     "rooms_on_disk": 4,
-     "rooms_authored": 4,
+     "rooms_on_disk": 5,
+     "rooms_authored": 5,
      "lineages": 46,
      "lineages_walled": 10,
      "cast": [
       "hardware_entropy_decay",
       "shannon_entropy_meter",
       "quantum_dice",
-      "shannon_workbench"
+      "shannon_workbench",
+      "ca_bridge"
      ],
      "cast_context": {
       "slot_machine": {
@@ -90994,7 +91074,11 @@
        "role": "related",
        "kind": "axis_kin",
        "rule": "adjacent, at a DIFFERENT value of the shared axis",
-       "why": "can argue the same axis: rule"
+       "why": "can argue the same axis: rule",
+       "walk_kind": "edge",
+       "walk_why": "the museum could not hold it: body_inside_room: body cell (22, 14) is wall or void",
+       "walk_space": "wall",
+       "pearl": "random entropy"
       },
       "random_space": {
        "anchor": "random_space",
@@ -91086,9 +91170,9 @@
        "pearl": "random entropy"
       }
      },
-     "interior_share": 0.75,
+     "interior_share": 0.6,
      "housed": false,
-     "shortfall": 1,
+     "shortfall": 2,
      "pearl": "random entropy",
      "pearl_index": 1,
      "map": "Random_Entropy"
@@ -99880,7 +99964,7 @@
     }
    ],
    "why_museum": "em_order rotation",
-   "seconds": 29.4
+   "seconds": 29.0
   },
   {
    "sequence": "noise",
@@ -99906,7 +99990,7 @@
     "configurable_portal"
    ],
    "no_brief": 0,
-   "offered": 34,
+   "offered": 35,
    "hero_walk": {
     "pearls": 8,
     "heroes": [
@@ -99920,12 +100004,12 @@
      "simplex_noise"
     ]
    },
-   "placed": 32,
-   "interior": 16,
+   "placed": 33,
+   "interior": 17,
    "rejected": 2,
    "venues": {
     "courtyard": 14,
-    "interior": 16,
+    "interior": 17,
     "balcony": 1,
     "porch": 1
    },
@@ -99935,8 +100019,8 @@
    "reason_examples": [],
    "slots": 11,
    "walls": 42,
-   "rooms_on_disk": 31,
-   "rooms_authored": 30,
+   "rooms_on_disk": 32,
+   "rooms_authored": 31,
    "lineages": 80,
    "lineages_walled": 0,
    "cast": [
@@ -99949,6 +100033,7 @@
     "particle_randomness_pure",
     "random_transformations",
     "random_transformations_geometric",
+    "noise_terrain_with_blobs",
     "MeltingBerniniScene",
     "noisetorus",
     "noiselayers",
@@ -100191,6 +100276,12 @@
      "walk_space": "wall",
      "pearl": "random noise types"
     },
+    "noise_terrain_with_blobs": {
+     "walk_kind": "queers",
+     "walk_why": "Palle, 2026-08-17: noise blob culture as kind of the end of algorithmic thinking. PROVISIONAL TOKEN - the agent chose noise_terrain_with_blobs for the first side-room walk; replace the token or the reading on /trunk.",
+     "walk_space": "room",
+     "pearl": "random noise types"
+    },
     "fractal_clouds": {
      "walk_kind": "extends",
      "walk_why": "named relation of perlin_terrain_sculptor: an @identity relationships field names it",
@@ -100252,7 +100343,7 @@
      "pearl": "perlin simplex"
     }
    },
-   "interior_share": 0.4706,
+   "interior_share": 0.4857,
    "housed": false,
    "shortfall": 18,
    "pearls": [
@@ -100280,26 +100371,26 @@
       "configurable_portal"
      ],
      "no_brief": 0,
-     "offered": 9,
+     "offered": 10,
      "hero_walk": {
       "hero": "WhiteNoiseGallery",
-      "hand_branches": 0,
+      "hand_branches": 1,
       "pearl": "random noise types"
      },
-     "placed": 9,
-     "interior": 4,
+     "placed": 10,
+     "interior": 5,
      "rejected": 0,
      "venues": {
       "courtyard": 4,
-      "interior": 4,
+      "interior": 5,
       "balcony": 1
      },
      "reasons": {},
      "reason_examples": [],
      "slots": 11,
      "walls": 42,
-     "rooms_on_disk": 9,
-     "rooms_authored": 9,
+     "rooms_on_disk": 10,
+     "rooms_authored": 10,
      "lineages": 10,
      "lineages_walled": 0,
      "cast": [
@@ -100311,7 +100402,8 @@
       "Random_Rotate_Random_XYZ",
       "particle_randomness_pure",
       "random_transformations",
-      "random_transformations_geometric"
+      "random_transformations_geometric",
+      "noise_terrain_with_blobs"
      ],
      "cast_context": {
       "randompoint": {
@@ -100520,9 +100612,15 @@
        "walk_why": "family relation of randompoint: same category and sequence",
        "walk_space": "wall",
        "pearl": "random noise types"
+      },
+      "noise_terrain_with_blobs": {
+       "walk_kind": "queers",
+       "walk_why": "Palle, 2026-08-17: noise blob culture as kind of the end of algorithmic thinking. PROVISIONAL TOKEN - the agent chose noise_terrain_with_blobs for the first side-room walk; replace the token or the reading on /trunk.",
+       "walk_space": "room",
+       "pearl": "random noise types"
       }
      },
-     "interior_share": 0.4444,
+     "interior_share": 0.5,
      "housed": false,
      "shortfall": 5,
      "pearl": "random noise types",
@@ -102207,7 +102305,7 @@
     }
    ],
    "why_museum": "em_order rotation",
-   "seconds": 24.9
+   "seconds": 22.2
   },
   {
    "sequence": "cellularautomata",
@@ -111964,7 +112062,7 @@
     }
    ],
    "why_museum": "em_order rotation",
-   "seconds": 8.6
+   "seconds": 9.0
   },
   {
    "sequence": "lsystems",
@@ -114373,7 +114471,7 @@
     }
    ],
    "why_museum": "crowned",
-   "seconds": 1.0
+   "seconds": 1.1
   },
   {
    "sequence": "proceduralgeneration",
@@ -116349,7 +116447,7 @@
     }
    ],
    "why_museum": "em_order rotation",
-   "seconds": 3.5
+   "seconds": 3.7
   },
   {
    "sequence": "softbodies",
@@ -119751,7 +119849,7 @@
     }
    ],
    "why_museum": "em_order rotation",
-   "seconds": 5.6
+   "seconds": 5.7
   },
   {
    "sequence": "isosurfaces",
@@ -119786,7 +119884,7 @@
     "implicit_surface_modeling"
    ],
    "no_brief": 0,
-   "offered": 33,
+   "offered": 36,
    "hero_walk": {
     "pearls": 12,
     "heroes": [
@@ -119806,19 +119904,19 @@
    },
    "placed": 25,
    "interior": 13,
-   "rejected": 8,
+   "rejected": 11,
    "venues": {
     "courtyard": 12,
     "interior": 13
    },
    "reasons": {
-    "escalation": 8
+    "escalation": 11
    },
    "reason_examples": [],
    "slots": 35,
    "walls": 39,
-   "rooms_on_disk": 25,
-   "rooms_authored": 25,
+   "rooms_on_disk": 28,
+   "rooms_authored": 28,
    "lineages": 36,
    "lineages_walled": 0,
    "cast": [
@@ -119826,6 +119924,9 @@
     "generator_bench",
     "mc_cave",
     "fifteen_cases_demo",
+    "marchingcubes_torus_sculpture",
+    "marchingcubes_flat_landscape",
+    "marching_cubes",
     "octave_stack",
     "mc_torus_sculpture",
     "gyroid_demo",
@@ -120134,9 +120235,9 @@
      "pearl": "iso metaballs"
     }
    },
-   "interior_share": 0.3939,
+   "interior_share": 0.3611,
    "housed": false,
-   "shortfall": 20,
+   "shortfall": 23,
    "pearls": [
     {
      "sequence": "isosurfaces",
@@ -120472,7 +120573,7 @@
       "implicit_surface_modeling"
      ],
      "no_brief": 0,
-     "offered": 3,
+     "offered": 6,
      "hero_walk": {
       "hero": "mc_cave",
       "hand_branches": 0,
@@ -120480,29 +120581,44 @@
      },
      "placed": 2,
      "interior": 1,
-     "rejected": 1,
+     "rejected": 4,
      "venues": {
       "courtyard": 1,
       "interior": 1
      },
      "reasons": {
-      "escalation": 1
+      "escalation": 4
      },
      "reason_examples": [
       {
        "token": "mc_cave",
        "why": "escalation: precinct: no exterior venue is large enough either"
+      },
+      {
+       "token": "marchingcubes_torus_sculpture",
+       "why": "escalation: precinct: no exterior venue is large enough either"
+      },
+      {
+       "token": "marchingcubes_flat_landscape",
+       "why": "escalation: precinct: no exterior venue is large enough either"
+      },
+      {
+       "token": "marching_cubes",
+       "why": "escalation: precinct: no exterior venue is large enough either"
       }
      ],
      "slots": 35,
      "walls": 39,
-     "rooms_on_disk": 2,
-     "rooms_authored": 2,
+     "rooms_on_disk": 5,
+     "rooms_authored": 5,
      "lineages": 3,
      "lineages_walled": 0,
      "cast": [
       "mc_cave",
       "fifteen_cases_demo",
+      "marchingcubes_torus_sculpture",
+      "marchingcubes_flat_landscape",
+      "marching_cubes",
       "octave_stack"
      ],
      "cast_context": {
@@ -120575,7 +120691,11 @@
        "role": "related",
        "kind": "sibling",
        "rule": "row \u2014 one scene under several names, dealt at even spacing",
-       "why": "same scene file, different registry name"
+       "why": "same scene file, different registry name",
+       "walk_kind": "edge",
+       "walk_why": "the museum could not hold it: escalation: precinct: no exterior venue is large enough either",
+       "walk_space": "room",
+       "pearl": "iso lookuptable"
       },
       "gyroid_demo": {
        "anchor": "gyroid_demo",
@@ -120631,7 +120751,11 @@
        "role": "related",
        "kind": "sibling",
        "rule": "row \u2014 one scene under several names, dealt at even spacing",
-       "why": "same scene file, different registry name"
+       "why": "same scene file, different registry name",
+       "walk_kind": "edge",
+       "walk_why": "the museum could not hold it: escalation: precinct: no exterior venue is large enough either",
+       "walk_space": "room",
+       "pearl": "iso lookuptable"
       },
       "mc_overhang_landscape": {
        "anchor": "mc_overhang_landscape",
@@ -120659,7 +120783,11 @@
        "role": "related",
        "kind": "sibling",
        "rule": "row \u2014 one scene under several names, dealt at even spacing",
-       "why": "same scene file, different registry name"
+       "why": "same scene file, different registry name",
+       "walk_kind": "edge",
+       "walk_why": "the museum could not hold it: escalation: precinct: no exterior venue is large enough either",
+       "walk_space": "room",
+       "pearl": "iso lookuptable"
       },
       "mc_portal_landscape": {
        "anchor": "mc_portal_landscape",
@@ -120745,9 +120873,9 @@
        "pearl": "iso lookuptable"
       }
      },
-     "interior_share": 0.3333,
+     "interior_share": 0.1667,
      "housed": false,
-     "shortfall": 2,
+     "shortfall": 5,
      "pearl": "iso lookuptable",
      "pearl_index": 1,
      "map": "ISO_LookupTable"
@@ -123833,7 +123961,7 @@
     }
    ],
    "why_museum": "crowned",
-   "seconds": 178.9
+   "seconds": 221.1
   },
   {
    "sequence": "boolean_surfaces",
@@ -124438,7 +124566,7 @@
     "ecosystem_simulation"
    ],
    "no_brief": 0,
-   "offered": 28,
+   "offered": 29,
    "hero_walk": {
     "pearls": 7,
     "heroes": [
@@ -124453,24 +124581,25 @@
    },
    "placed": 22,
    "interior": 17,
-   "rejected": 6,
+   "rejected": 7,
    "venues": {
     "interior": 17,
     "courtyard": 3,
     "balcony": 2
    },
    "reasons": {
-    "escalation": 6
+    "escalation": 7
    },
    "reason_examples": [],
    "slots": 21,
    "walls": 12,
-   "rooms_on_disk": 26,
-   "rooms_authored": 26,
+   "rooms_on_disk": 27,
+   "rooms_authored": 27,
    "lineages": 56,
    "lineages_walled": 0,
    "cast": [
     "PhysarumColony",
+    "physarum_colony",
     "FlowFieldMain",
     "physarum_colony",
     "boids_aquarium",
@@ -124722,9 +124851,9 @@
      "pearl": "particle swarm optimization"
     }
    },
-   "interior_share": 0.6071,
+   "interior_share": 0.5862,
    "housed": false,
-   "shortfall": 11,
+   "shortfall": 12,
    "pearls": [
     {
      "sequence": "swarmintelligence",
@@ -124745,7 +124874,7 @@
       "ecosystem_simulation"
      ],
      "no_brief": 0,
-     "offered": 1,
+     "offered": 2,
      "hero_walk": {
       "hero": "PhysarumColony",
       "hand_branches": 0,
@@ -124753,25 +124882,30 @@
      },
      "placed": 0,
      "interior": 0,
-     "rejected": 1,
+     "rejected": 2,
      "venues": {},
      "reasons": {
-      "escalation": 1
+      "escalation": 2
      },
      "reason_examples": [
       {
        "token": "PhysarumColony",
        "why": "escalation: precinct: no exterior venue is large enough either"
+      },
+      {
+       "token": "physarum_colony",
+       "why": "escalation: precinct: no exterior venue is large enough either"
       }
      ],
      "slots": 21,
      "walls": 12,
-     "rooms_on_disk": 1,
-     "rooms_authored": 1,
+     "rooms_on_disk": 2,
+     "rooms_authored": 2,
      "lineages": 8,
      "lineages_walled": 0,
      "cast": [
-      "PhysarumColony"
+      "PhysarumColony",
+      "physarum_colony"
      ],
      "cast_context": {
       "PhysarumColony": {
@@ -124797,7 +124931,11 @@
        "role": "related",
        "kind": "sibling",
        "rule": "row \u2014 one scene under several names, dealt at even spacing",
-       "why": "same scene file, different registry name"
+       "why": "same scene file, different registry name",
+       "walk_kind": "edge",
+       "walk_why": "the museum could not hold it: escalation: precinct: no exterior venue is large enough either",
+       "walk_space": "room",
+       "pearl": "physarumcolony"
       },
       "FlowFieldMain": {
        "anchor": "FlowFieldMain",
@@ -124914,7 +125052,7 @@
      },
      "interior_share": 0.0,
      "housed": false,
-     "shortfall": 1,
+     "shortfall": 2,
      "pearl": "physarumcolony",
      "pearl_index": 0,
      "map": "SwarmIntelligence_PhysarumColony"
@@ -126213,7 +126351,7 @@
     }
    ],
    "why_museum": "em_order rotation",
-   "seconds": 5.3
+   "seconds": 5.9
   },
   {
    "sequence": "machinelearning",
@@ -134320,7 +134458,7 @@
     }
    ],
    "why_museum": "crowned",
-   "seconds": 1.2
+   "seconds": 1.1
   },
   {
    "sequence": "qfeplaboratory",
@@ -134361,7 +134499,7 @@
     "grab_sphere_phi"
    ],
    "no_brief": 0,
-   "offered": 62,
+   "offered": 63,
    "hero_walk": {
     "pearls": 8,
     "heroes": [
@@ -134377,20 +134515,20 @@
    },
    "placed": 60,
    "interior": 58,
-   "rejected": 2,
+   "rejected": 3,
    "venues": {
     "interior": 58,
     "courtyard": 1,
     "porch": 1
    },
    "reasons": {
-    "support_matches_contract": 2
+    "support_matches_contract": 3
    },
    "reason_examples": [],
    "slots": 5,
    "walls": 28,
-   "rooms_on_disk": 56,
-   "rooms_authored": 53,
+   "rooms_on_disk": 57,
+   "rooms_authored": 54,
    "lineages": 208,
    "lineages_walled": 112,
    "cast": [
@@ -134434,6 +134572,7 @@
     "crystal_formation",
     "bias_visualizer",
     "reaction_diffusion",
+    "lambda_slider",
     "noise_quarry",
     "rigid_sculpture",
     "fluid_form",
@@ -134954,9 +135093,9 @@
      "pearl": "qfep synthesis"
     }
    },
-   "interior_share": 0.9355,
+   "interior_share": 0.9206,
    "housed": false,
-   "shortfall": 4,
+   "shortfall": 5,
    "pearls": [
     {
      "sequence": "qfeplaboratory",
@@ -136466,7 +136605,7 @@
       "grab_sphere_phi"
      ],
      "no_brief": 0,
-     "offered": 10,
+     "offered": 11,
      "hero_walk": {
       "hero": "bifurcation_walkway",
       "hand_branches": 0,
@@ -136474,18 +136613,25 @@
      },
      "placed": 10,
      "interior": 8,
-     "rejected": 0,
+     "rejected": 1,
      "venues": {
       "courtyard": 1,
       "interior": 8,
       "porch": 1
      },
-     "reasons": {},
-     "reason_examples": [],
+     "reasons": {
+      "support_matches_contract": 1
+     },
+     "reason_examples": [
+      {
+       "token": "lambda_slider",
+       "why": "support_matches_contract: slot offers 'podium', artifact needs 'wall'"
+      }
+     ],
      "slots": 5,
      "walls": 28,
-     "rooms_on_disk": 10,
-     "rooms_authored": 9,
+     "rooms_on_disk": 11,
+     "rooms_authored": 10,
      "lineages": 26,
      "lineages_walled": 14,
      "cast": [
@@ -136498,6 +136644,7 @@
       "crystal_formation",
       "bias_visualizer",
       "reaction_diffusion",
+      "lambda_slider",
       "noise_quarry"
      ],
      "cast_context": {
@@ -136839,7 +136986,11 @@
        "role": "related",
        "kind": "named",
        "rule": "sightline \u2014 the relative stands where the lead can be seen with it",
-       "why": "an @identity relationships field names it"
+       "why": "an @identity relationships field names it",
+       "walk_kind": "edge",
+       "walk_why": "the museum could not hold it: support_matches_contract: slot offers 'podium', artifact needs 'wall'",
+       "walk_space": "wall",
+       "pearl": "qfep lambda spectrum"
       },
       "qfep_reactor": {
        "anchor": "edge_core",
@@ -136903,9 +137054,9 @@
        "pearl": "qfep lambda spectrum"
       }
      },
-     "interior_share": 0.8,
+     "interior_share": 0.7273,
      "housed": false,
-     "shortfall": 2,
+     "shortfall": 3,
      "pearl": "qfep lambda spectrum",
      "pearl_index": 3,
      "map": "QFEP_Lambda_Spectrum"
@@ -138744,7 +138895,7 @@
     }
    ],
    "why_museum": "em_order rotation",
-   "seconds": 1.3
+   "seconds": 1.5
   },
   {
    "sequence": "postfoundationscrisis",
@@ -138768,7 +138919,7 @@
     "edge_ground_synthesis"
    ],
    "no_brief": 0,
-   "offered": 43,
+   "offered": 44,
    "hero_walk": {
     "pearls": 8,
     "heroes": [
@@ -138784,19 +138935,21 @@
    },
    "placed": 43,
    "interior": 37,
-   "rejected": 0,
+   "rejected": 1,
    "venues": {
     "interior": 37,
     "outside": 1,
     "courtyard": 3,
     "porch": 2
    },
-   "reasons": {},
+   "reasons": {
+    "escalation": 1
+   },
    "reason_examples": [],
    "slots": 20,
    "walls": 27,
-   "rooms_on_disk": 43,
-   "rooms_authored": 40,
+   "rooms_on_disk": 44,
+   "rooms_authored": 41,
    "lineages": 56,
    "lineages_walled": 16,
    "cast": [
@@ -138807,6 +138960,7 @@
     "ordered_grid",
     "algorithmic_bias",
     "algorithmic_bias_visualization",
+    "marching_cubes",
     "disclosure_cabinet",
     "room_shape_demonstrator",
     "excluded_class_visualizer",
@@ -139177,9 +139331,9 @@
      "pearl": "postcrisis synthesis"
     }
    },
-   "interior_share": 0.8605,
+   "interior_share": 0.8409,
    "housed": false,
-   "shortfall": 6,
+   "shortfall": 7,
    "pearls": [
     {
      "sequence": "postfoundationscrisis",
@@ -139203,7 +139357,7 @@
       "edge_ground_synthesis"
      ],
      "no_brief": 0,
-     "offered": 8,
+     "offered": 9,
      "hero_walk": {
       "hero": "bias_visualizer",
       "hand_branches": 0,
@@ -139211,18 +139365,25 @@
      },
      "placed": 8,
      "interior": 5,
-     "rejected": 0,
+     "rejected": 1,
      "venues": {
       "interior": 5,
       "outside": 1,
       "courtyard": 2
      },
-     "reasons": {},
-     "reason_examples": [],
+     "reasons": {
+      "escalation": 1
+     },
+     "reason_examples": [
+      {
+       "token": "marching_cubes",
+       "why": "escalation: precinct: no exterior venue is large enough either"
+      }
+     ],
      "slots": 20,
      "walls": 27,
-     "rooms_on_disk": 8,
-     "rooms_authored": 5,
+     "rooms_on_disk": 9,
+     "rooms_authored": 6,
      "lineages": 7,
      "lineages_walled": 2,
      "cast": [
@@ -139233,6 +139394,7 @@
       "ordered_grid",
       "algorithmic_bias",
       "algorithmic_bias_visualization",
+      "marching_cubes",
       "disclosure_cabinet"
      ],
      "cast_context": {
@@ -139404,7 +139566,11 @@
        "role": "related",
        "kind": "co_placed",
        "rule": "fill \u2014 they already stand together in real maps",
-       "why": "already stand together in 1 map(s)"
+       "why": "already stand together in 1 map(s)",
+       "walk_kind": "edge",
+       "walk_why": "the museum could not hold it: escalation: precinct: no exterior venue is large enough either",
+       "walk_space": "room",
+       "pearl": "criticalalgorithms algorithmic bias visualization"
       },
       "rhizome_grower": {
        "anchor": "rhizome_grower",
@@ -139480,9 +139646,9 @@
        "pearl": "criticalalgorithms algorithmic bias visualization"
       }
      },
-     "interior_share": 0.625,
+     "interior_share": 0.5556,
      "housed": false,
-     "shortfall": 3,
+     "shortfall": 4,
      "pearl": "criticalalgorithms algorithmic bias visualization",
      "pearl_index": 0,
      "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization"
@@ -141490,7 +141656,7 @@
     }
    ],
    "why_museum": "crowned",
-   "seconds": 2.1
+   "seconds": 3.9
   }
  ],
  "plan": {

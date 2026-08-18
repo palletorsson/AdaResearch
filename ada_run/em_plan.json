@@ -2,7 +2,7 @@
   "schema": "adaresearch.em_plan.v2",
   "_readme": "Placements resolved by tools/spatial_negotiation.py. Read by commons/scenes/endless_museum.gd under --em-plan. A museum key absent here deals exactly as it did before.",
   "_spine_run": {
-    "at": "2026-08-18T08:54:51",
+    "at": "2026-08-18T10:08:53",
     "owner": {
       "sainsbury-false-perspective-enfilade": "primitives",
       "uffizi-spine-enfilade": "transformation",
@@ -4123,6 +4123,64 @@
           }
         },
         {
+          "token": "artifact_workstation",
+          "cell": [
+            21,
+            48
+          ],
+          "tile_cell": [
+            7,
+            34
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "sainsbury-false-perspective-enfilade/outside",
+          "wall": null,
+          "relational_kind": "related_artifact",
+          "relation": {
+            "anchor": "becoming_catalyst",
+            "role": "related",
+            "kind": "family",
+            "rule": "same neighbourhood, held apart by padding",
+            "why": "same category and sequence",
+            "walk_kind": "edge",
+            "walk_why": "the museum could not hold it: body_inside_room: body cell (19, 38) is wall or void",
+            "walk_space": "wall",
+            "pearl": "lines"
+          }
+        },
+        {
+          "token": "adjacency_shelf",
+          "cell": [
+            29,
+            48
+          ],
+          "tile_cell": [
+            15,
+            34
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "sainsbury-false-perspective-enfilade/outside",
+          "wall": null,
+          "relational_kind": "dna_artifact",
+          "relation": {
+            "anchor": "library_rack",
+            "role": "related",
+            "kind": "family",
+            "rule": "same neighbourhood, held apart by padding",
+            "why": "same category and sequence",
+            "walk_kind": "edge",
+            "walk_why": "the museum could not hold it: circulation_on_floor: 3 clearance cells fall outside the floor",
+            "walk_space": "wall",
+            "pearl": "lines"
+          }
+        },
+        {
           "token": "arrangement_yard",
           "cell": [
             25,
@@ -4150,11 +4208,11 @@
           "token": "grain_block",
           "cell": [
             21,
-            47
+            54
           ],
           "tile_cell": [
             7,
-            33
+            40
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -16687,19 +16745,24 @@
         {
           "token": "blockbuilderentity",
           "cell": [
-            16,
-            8
+            0,
+            0
           ],
           "tile_cell": [
-            2,
-            -6
+            -14,
+            -14
           ],
           "rotation": 0,
           "mode": "freestanding",
-          "venue": "porch",
+          "venue": "courtyard",
           "support_height_m": 0.0,
-          "slot": "sainsbury-false-perspective-enfilade/porch",
+          "slot": "courtyard",
           "wall": null,
+          "court": [
+            46,
+            46
+          ],
+          "court_access": "bridge",
           "relational_kind": "related_artifact",
           "relation": {
             "walk_kind": "extends",
@@ -55362,7 +55425,12 @@
           }
         }
       ],
-      "rejected": [],
+      "rejected": [
+        {
+          "token": "science_screen",
+          "why": "support_matches_contract: slot offers 'floor', artifact needs 'wall'"
+        }
+      ],
       "wall_runs": [
         {
           "anchor": "pattern_machine_c",
@@ -69446,6 +69514,93 @@
             "walk_space": "wall",
             "pearl": "reformed instruments"
           }
+        },
+        {
+          "token": "vector_addition_demo",
+          "cell": [
+            16,
+            10
+          ],
+          "tile_cell": [
+            2,
+            -4
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "porch",
+          "support_height_m": 0.0,
+          "slot": "sainsbury-false-perspective-enfilade/porch",
+          "wall": null,
+          "relational_kind": "dna_artifact",
+          "relation": {
+            "anchor": "vector_subtraction_demo",
+            "role": "related",
+            "kind": "named",
+            "rule": "sightline \u2014 the relative stands where the lead can be seen with it",
+            "why": "an @identity relationships field names it",
+            "walk_kind": "edge",
+            "walk_why": "the museum could not hold it: circulation_on_floor: 6 clearance cells fall outside the floor",
+            "walk_space": "wall",
+            "pearl": "reformed instruments"
+          }
+        },
+        {
+          "token": "magnifying_glass",
+          "cell": [
+            23,
+            28
+          ],
+          "tile_cell": [
+            9,
+            14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "interior",
+          "support_height_m": 0.95,
+          "slot": "sainsbury-false-perspective-enfilade/12,15",
+          "wall": null,
+          "relational_kind": "related_artifact",
+          "relation": {
+            "anchor": "graphics_monitor",
+            "role": "related",
+            "kind": "co_placed",
+            "rule": "fill \u2014 they already stand together in real maps",
+            "why": "already stand together in 1 map(s)",
+            "walk_kind": "edge",
+            "walk_why": "the museum could not hold it: physical_overlap: 1 body cells collide with launch_arc",
+            "walk_space": "wall",
+            "pearl": "reformed instruments"
+          }
+        },
+        {
+          "token": "ball_dropper",
+          "cell": [
+            26,
+            23
+          ],
+          "tile_cell": [
+            12,
+            9
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "interior",
+          "support_height_m": 0.95,
+          "slot": "sainsbury-false-perspective-enfilade/12,15",
+          "wall": null,
+          "relational_kind": "related_artifact",
+          "relation": {
+            "anchor": "vector_addition_walk",
+            "role": "related",
+            "kind": "family",
+            "rule": "same neighbourhood, held apart by padding",
+            "why": "same category and sequence",
+            "walk_kind": "edge",
+            "walk_why": "the museum could not hold it: physical_overlap: 1 body cells collide with launch_arc",
+            "walk_space": "wall",
+            "pearl": "reformed instruments"
+          }
         }
       ],
       "rejected": [],
@@ -71163,7 +71318,7 @@
             "heavy",
             "immovable"
           ],
-          "wall": "sainsbury-false-perspective-enfilade/east_28_21",
+          "wall": "sainsbury-false-perspective-enfilade/east_28_27",
           "wall_side": "east",
           "wall_normal": [
             -1,
@@ -71199,22 +71354,22 @@
             [
               28.5,
               1.7,
-              21.561
+              27.561
             ],
             [
               28.5,
               1.7,
-              22.854
+              28.854
             ],
             [
               28.5,
               1.7,
-              24.146
+              30.146
             ],
             [
               28.5,
               1.7,
-              25.439
+              31.439
             ]
           ],
           "body_m": [
@@ -71236,7 +71391,7 @@
             "compounding",
             "opposing"
           ],
-          "wall": "sainsbury-false-perspective-enfilade/east_28_27",
+          "wall": "sainsbury-false-perspective-enfilade/east_28_33",
           "wall_side": "east",
           "wall_normal": [
             -1,
@@ -71266,17 +71421,17 @@
             [
               28.5,
               1.7,
-              27.99
+              33.99
             ],
             [
               28.5,
               1.7,
-              29.5
+              35.5
             ],
             [
               28.5,
               1.7,
-              31.01
+              37.01
             ]
           ],
           "body_m": [
@@ -71701,11 +71856,11 @@
             "critical",
             "overdamped"
           ],
-          "wall": "sainsbury-false-perspective-enfilade/east_28_33",
-          "wall_side": "east",
+          "wall": "sainsbury-false-perspective-enfilade/north_14_15",
+          "wall_side": "north",
           "wall_normal": [
-            -1,
-            0
+            0,
+            1
           ],
           "rects_uv": [
             [
@@ -71735,24 +71890,24 @@
           ],
           "world": [
             [
-              28.5,
+              15.64,
               1.7,
-              33.64
+              14.5
             ],
             [
-              28.5,
+              16.88,
               1.7,
-              34.88
+              14.5
             ],
             [
-              28.5,
+              18.12,
               1.7,
-              36.12
+              14.5
             ],
             [
-              28.5,
+              19.36,
               1.7,
-              37.36
+              14.5
             ]
           ],
           "body_m": [
@@ -72371,7 +72526,7 @@
         "h": 58
       },
       "apron": 14,
-      "interior_count": 7,
+      "interior_count": 9,
       "sequence": "forces",
       "pearl": "reformed instruments",
       "pearl_index": 2,
@@ -144804,6 +144959,35 @@
             "walk_space": "wall",
             "pearl": "descent"
           }
+        },
+        {
+          "token": "science_screen",
+          "cell": [
+            18,
+            25
+          ],
+          "tile_cell": [
+            4,
+            11
+          ],
+          "rotation": 0,
+          "mode": "against_wall",
+          "venue": "interior",
+          "support_height_m": 0.0,
+          "slot": "castelvecchio-pinch-v2/4,11",
+          "wall": "north",
+          "relational_kind": "spine_artifact",
+          "relation": {
+            "anchor": "self_shaping_forge",
+            "role": "related",
+            "kind": "co_placed",
+            "rule": "fill \u2014 they already stand together in real maps",
+            "why": "already stand together in 1 map(s)",
+            "walk_kind": "edge",
+            "walk_why": "the museum could not hold it: physical_overlap: 2 body cells collide with descent_marble_toy",
+            "walk_space": "wall",
+            "pearl": "descent"
+          }
         }
       ],
       "rejected": [],
@@ -145047,7 +145231,7 @@
         "h": 60
       },
       "apron": 14,
-      "interior_count": 7,
+      "interior_count": 8,
       "sequence": "formfinding",
       "pearl": "descent",
       "pearl_index": 0,
@@ -166880,6 +167064,64 @@
           }
         },
         {
+          "token": "CircleSpiral",
+          "cell": [
+            19,
+            8
+          ],
+          "tile_cell": [
+            5,
+            -6
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "porch",
+          "support_height_m": 0.0,
+          "slot": "louisiana-pavilion-chain/porch",
+          "wall": null,
+          "relational_kind": "related_artifact",
+          "relation": {
+            "anchor": "UnitCircleTrig",
+            "role": "related",
+            "kind": "named",
+            "rule": "sightline \u2014 the relative stands where the lead can be seen with it",
+            "why": "an @identity relationships field names it",
+            "walk_kind": "edge",
+            "walk_why": "the museum could not hold it: body_inside_room: body cell (17, 29) is wall or void",
+            "walk_space": "wall",
+            "pearl": "effect sound"
+          }
+        },
+        {
+          "token": "queer_cylinder_target",
+          "cell": [
+            22,
+            43
+          ],
+          "tile_cell": [
+            8,
+            29
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "interior",
+          "support_height_m": 1.4,
+          "slot": "louisiana-pavilion-chain/7,30",
+          "wall": null,
+          "relational_kind": "spine_artifact",
+          "relation": {
+            "anchor": "SoundscapeRadioRack",
+            "role": "related",
+            "kind": "axis_kin",
+            "rule": "adjacent, at a DIFFERENT value of the shared axis",
+            "why": "can argue the same axis: face",
+            "walk_kind": "edge",
+            "walk_why": "the museum could not hold it: physical_overlap: 2 body cells collide with cable_builder",
+            "walk_space": "wall",
+            "pearl": "effect sound"
+          }
+        },
+        {
           "token": "boundary_tank",
           "cell": [
             18,
@@ -166915,11 +167157,11 @@
         {
           "token": "evidence_ladder",
           "cell": [
-            18,
+            17,
             43
           ],
           "tile_cell": [
-            4,
+            3,
             29
           ],
           "rotation": 0,
@@ -166969,7 +167211,12 @@
           }
         }
       ],
-      "rejected": [],
+      "rejected": [
+        {
+          "token": "science_screen",
+          "why": "support_matches_contract: slot offers 'podium', artifact needs 'wall'"
+        }
+      ],
       "wall_runs": [
         {
           "anchor": "pickup_cube_static",
@@ -169342,70 +169589,21 @@
             "escaped",
             "clouded"
           ],
-          "wall": "louisiana-pavilion-chain/west_14_42",
-          "wall_side": "west",
-          "wall_normal": [
-            1,
-            0
-          ],
-          "rects_uv": [
-            [
-              1.3,
-              1.435,
-              1.6,
-              1.965
-            ],
-            [
-              2.0,
-              1.435,
-              2.3,
-              1.965
-            ],
-            [
-              2.7,
-              1.435,
-              3.0,
-              1.965
-            ],
-            [
-              3.4,
-              1.435,
-              3.7,
-              1.965
-            ]
-          ],
-          "world": [
-            [
-              14.5,
-              1.7,
-              43.45
-            ],
-            [
-              14.5,
-              1.7,
-              44.15
-            ],
-            [
-              14.5,
-              1.7,
-              44.85
-            ],
-            [
-              14.5,
-              1.7,
-              45.55
-            ]
-          ],
+          "wall": null,
+          "wall_side": "",
+          "wall_normal": [],
+          "rects_uv": [],
+          "world": [],
           "body_m": [
             0.3,
             0.3,
             0.53
           ],
           "body_source": "spatial_contract",
-          "housed": true,
-          "reserved": true,
-          "assemble": true,
-          "why": "two cells of standing room in front, walkable and unclaimed"
+          "housed": false,
+          "reserved": false,
+          "assemble": false,
+          "why": "9 wall(s) had 2.40 m free but every one was already hung across: louisiana-pavilion-chain/north_47_23: overlaps oscillation_controlled_cube.retention=trace"
         },
         {
           "anchor": "holographicdisplay",
@@ -169430,7 +169628,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "10 wall(s) had 2.32 m free but every one was already hung across: louisiana-pavilion-chain/north_47_23: overlaps oscillation_controlled_cube.retention=trace"
+          "why": "9 wall(s) had 2.32 m free but every one was already hung across: louisiana-pavilion-chain/north_47_23: overlaps oscillation_controlled_cube.retention=trace"
         },
         {
           "anchor": "biomagneticresonator",
@@ -169455,7 +169653,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "10 wall(s) had 2.32 m free but every one was already hung across: louisiana-pavilion-chain/north_47_23: overlaps oscillation_controlled_cube.retention=trace"
+          "why": "9 wall(s) had 2.32 m free but every one was already hung across: louisiana-pavilion-chain/north_47_23: overlaps oscillation_controlled_cube.retention=trace"
         },
         {
           "anchor": "hallway_scene",
@@ -169630,7 +169828,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "6 wall(s) had 3.20 m free but every one was already hung across: louisiana-pavilion-chain/north_41_23: overlaps GlassRack.admission=none"
+          "why": "5 wall(s) had 3.20 m free but every one was already hung across: louisiana-pavilion-chain/north_41_23: overlaps GlassRack.admission=none"
         },
         {
           "anchor": "petri_dish_worms",
@@ -169681,7 +169879,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "7 wall(s) had 2.60 m free but every one was already hung across: louisiana-pavilion-chain/south_29_15: overlaps DualBallFMController.regime=bell"
+          "why": "6 wall(s) had 2.60 m free but every one was already hung across: louisiana-pavilion-chain/south_29_15: overlaps DualBallFMController.regime=bell"
         },
         {
           "anchor": "chladni_plate",
@@ -169706,7 +169904,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "10 wall(s) had 2.40 m free but every one was already hung across: louisiana-pavilion-chain/north_47_23: overlaps oscillation_controlled_cube.retention=trace"
+          "why": "9 wall(s) had 2.40 m free but every one was already hung across: louisiana-pavilion-chain/north_47_23: overlaps oscillation_controlled_cube.retention=trace"
         },
         {
           "anchor": "chemicalapparatus",
@@ -170272,7 +170470,7 @@
       "relational": {
         "anchors": 81,
         "wall_runs_requested": 63,
-        "wall_runs_housed": 22,
+        "wall_runs_housed": 21,
         "dna_spatial_demand": 2,
         "dna_contract_repairs": 0,
         "measured_synthesis_pending": 37
@@ -170282,7 +170480,7 @@
         "h": 62
       },
       "apron": 14,
-      "interior_count": 17,
+      "interior_count": 18,
       "sequence": "wavefunctions",
       "pearl": "effect sound",
       "pearl_index": 5,
@@ -195940,6 +196138,35 @@
           "relation": {
             "walk_kind": "extends",
             "walk_why": "named relation of shannon_entropy_meter: an @identity relationships field names it",
+            "walk_space": "wall",
+            "pearl": "random entropy"
+          }
+        },
+        {
+          "token": "ca_bridge",
+          "cell": [
+            20,
+            46
+          ],
+          "tile_cell": [
+            6,
+            32
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "soane-cabinet-vista/outside",
+          "wall": null,
+          "relational_kind": "spine_artifact",
+          "relation": {
+            "anchor": "pheromone_terrain",
+            "role": "related",
+            "kind": "axis_kin",
+            "rule": "adjacent, at a DIFFERENT value of the shared axis",
+            "why": "can argue the same axis: rule",
+            "walk_kind": "edge",
+            "walk_why": "the museum could not hold it: body_inside_room: body cell (22, 14) is wall or void",
             "walk_space": "wall",
             "pearl": "random entropy"
           }
@@ -223132,6 +223359,29 @@
             "walk_space": "wall",
             "pearl": "random noise types"
           }
+        },
+        {
+          "token": "noise_terrain_with_blobs",
+          "cell": [
+            21,
+            21
+          ],
+          "tile_cell": [
+            7,
+            7
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "interior",
+          "support_height_m": 0.0,
+          "slot": "kanazawa-room-matrix/4,10@free",
+          "wall": null,
+          "relation": {
+            "walk_kind": "queers",
+            "walk_why": "Palle, 2026-08-17: noise blob culture as kind of the end of algorithmic thinking. PROVISIONAL TOKEN - the agent chose noise_terrain_with_blobs for the first side-room walk; replace the token or the reading on /trunk.",
+            "walk_space": "room",
+            "pearl": "random noise types"
+          }
         }
       ],
       "rejected": [],
@@ -223433,7 +223683,7 @@
         "h": 55
       },
       "apron": 14,
-      "interior_count": 4,
+      "interior_count": 5,
       "sequence": "noise",
       "pearl": "random noise types",
       "pearl_index": 0,
@@ -251662,6 +251912,18 @@
         {
           "token": "mc_cave",
           "why": "escalation: precinct: no exterior venue is large enough either"
+        },
+        {
+          "token": "marchingcubes_torus_sculpture",
+          "why": "escalation: precinct: no exterior venue is large enough either"
+        },
+        {
+          "token": "marchingcubes_flat_landscape",
+          "why": "escalation: precinct: no exterior venue is large enough either"
+        },
+        {
+          "token": "marching_cubes",
+          "why": "escalation: precinct: no exterior venue is large enough either"
         }
       ],
       "wall_runs": [
@@ -254044,6 +254306,10 @@
       "rejected": [
         {
           "token": "PhysarumColony",
+          "why": "escalation: precinct: no exterior venue is large enough either"
+        },
+        {
+          "token": "physarum_colony",
           "why": "escalation: precinct: no exterior venue is large enough either"
         }
       ],
@@ -283154,7 +283420,12 @@
           }
         }
       ],
-      "rejected": [],
+      "rejected": [
+        {
+          "token": "lambda_slider",
+          "why": "support_matches_contract: slot offers 'podium', artifact needs 'wall'"
+        }
+      ],
       "wall_runs": [
         {
           "anchor": "tt",
@@ -291852,7 +292123,12 @@
           }
         }
       ],
-      "rejected": [],
+      "rejected": [
+        {
+          "token": "marching_cubes",
+          "why": "escalation: precinct: no exterior venue is large enough either"
+        }
+      ],
       "wall_runs": [
         {
           "anchor": "bias_visualizer",
@@ -295851,6 +296127,7 @@
     "achilles_tortoise",
     "adder_board",
     "additive_wave_demo",
+    "adjacency_shelf",
     "admission_rack",
     "aftermath_grove",
     "agreement_gauge",
@@ -296400,13 +296677,17 @@
     "lyapunov_fractal",
     "macrostate_shelf",
     "magnetic_simulation",
+    "magnifying_glass",
     "magritte_pipe",
     "mamma_monster_gallery",
     "mandelbrot_dive",
     "mandelbrot_set",
+    "marching_cubes",
     "marchingcave",
     "marchingcubes_cave",
+    "marchingcubes_flat_landscape",
     "marchingcubes_portal_landscape",
+    "marchingcubes_torus_sculpture",
     "mario_cube",
     "mario_cube_time_trace",
     "mario_test_sound_ui",
@@ -296484,6 +296765,7 @@
     "noise_quarry",
     "noise_space",
     "noise_terrain",
+    "noise_terrain_with_blobs",
     "noiselayers",
     "noisesphere",
     "noisetorus",
@@ -303749,6 +304031,35 @@
             "walk_space": "wall",
             "pearl": "descent"
           }
+        },
+        {
+          "token": "science_screen",
+          "cell": [
+            18,
+            25
+          ],
+          "tile_cell": [
+            4,
+            11
+          ],
+          "rotation": 0,
+          "mode": "against_wall",
+          "venue": "interior",
+          "support_height_m": 0.0,
+          "slot": "castelvecchio-pinch-v2/4,11",
+          "wall": "north",
+          "relational_kind": "spine_artifact",
+          "relation": {
+            "anchor": "self_shaping_forge",
+            "role": "related",
+            "kind": "co_placed",
+            "rule": "fill \u2014 they already stand together in real maps",
+            "why": "already stand together in 1 map(s)",
+            "walk_kind": "edge",
+            "walk_why": "the museum could not hold it: physical_overlap: 2 body cells collide with descent_marble_toy",
+            "walk_space": "wall",
+            "pearl": "descent"
+          }
         }
       ],
       "rejected": [],
@@ -303992,7 +304303,7 @@
         "h": 60
       },
       "apron": 14,
-      "interior_count": 7,
+      "interior_count": 8,
       "sequence": "formfinding",
       "pearl": "descent",
       "pearl_index": 0,
@@ -310652,6 +310963,29 @@
             "walk_space": "wall",
             "pearl": "random noise types"
           }
+        },
+        {
+          "token": "noise_terrain_with_blobs",
+          "cell": [
+            21,
+            21
+          ],
+          "tile_cell": [
+            7,
+            7
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "interior",
+          "support_height_m": 0.0,
+          "slot": "kanazawa-room-matrix/4,10@free",
+          "wall": null,
+          "relation": {
+            "walk_kind": "queers",
+            "walk_why": "Palle, 2026-08-17: noise blob culture as kind of the end of algorithmic thinking. PROVISIONAL TOKEN - the agent chose noise_terrain_with_blobs for the first side-room walk; replace the token or the reading on /trunk.",
+            "walk_space": "room",
+            "pearl": "random noise types"
+          }
         }
       ],
       "rejected": [],
@@ -310953,7 +311287,7 @@
         "h": 55
       },
       "apron": 14,
-      "interior_count": 4,
+      "interior_count": 5,
       "sequence": "noise",
       "pearl": "random noise types",
       "pearl_index": 0,
@@ -313744,6 +314078,10 @@
       "rejected": [
         {
           "token": "PhysarumColony",
+          "why": "escalation: precinct: no exterior venue is large enough either"
+        },
+        {
+          "token": "physarum_colony",
           "why": "escalation: precinct: no exterior venue is large enough either"
         }
       ],

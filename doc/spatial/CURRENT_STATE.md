@@ -40,6 +40,18 @@ order. But the sequence's MAPS are the string already.
   root (flag > Inspector > em_control.json). Plan view + web editor have a
   pearl select.
 
+**The live footprint ledger + walk-inside** (`1ed0fb1c7`, `f9ba88e65`):
+the museum measures the body it actually GOT at stamp; overshoot beyond
+the seal's span by > 2 cells → `ada_run/em_live_footprints.json` (live
+AABB, has_collider, provenance walked); `spatial_contract.resolve` takes
+the larger of still and live (not LINES aspect > 8, not > 40 m — said in
+`body.live_note`); a collider-less overgrown body is WALK-INSIDE (seal
+takes no cells). PROOF: autopilot through primitives' first 6 pearl
+segments stalled at z 355 on blockbuilderentity (4.2 m still, 40 m live,
+on the porch); after ledger + regen it negotiates as 40 m → bridge court
+(46×46) and the autopilot PASSES z 483 (24 stalls recovered, not clean).
+Gates live_footprint + live_contract; jump; dropdowns — 17 gates.
+
 Known: tiny map pearls (1–2 tokens) make near-empty segments (noise ·
 columns placed 0/1) — merge them on `/pearls`; the map string is honest,
 not yet curated. Un-pearled hand reading needs one more regen to land in
