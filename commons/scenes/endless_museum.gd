@@ -89,6 +89,16 @@ const EYE := 1.65
 const _DetailLib := preload("res://commons/scenes/em/em_detail.gd")
 const WALL_H: float = _DetailLib.WALL_H
 const WALK_SPEED := 4.0
+# JUMP + DOUBLE JUMP (2026-08-18, desktop walker). SPACE on the deck jumps;
+# SPACE once more in the air jumps again. Gravity is simulated only while
+# airborne — the deck stays flat by construction and the walker still lands
+# on y = 0 exactly, so nothing that reads the walker's height (streaming,
+# seals, captures) sees anything but 0 when it is standing.
+const JUMP_V := 4.2            # m/s up: ~0.9 m apex, over a plinth, not a wall
+const DOUBLE_JUMP_V := 3.6
+const JUMP_GRAVITY := 11.0     # snappier than 9.81 — a game walk, not a sim
+var _vy: float = 0.0
+var _jumps_left: int = 2       # 2 on the deck, 1 after the first, 0 after the second
 const BUILD_AHEAD_M := 24.0
 const KEEP_BEHIND_M := 70.0
 # THE V1 CONSTANT, now only a FALLBACK. Eight objects for twenty-six buildings
@@ -3895,11 +3905,30 @@ func _physics_process(_delta: float) -> void:
 		_player.velocity = dir.normalized() * speed
 	else:
 		_player.velocity = Vector3.ZERO
+	# jump: SPACE on the deck, and once more in the air (double jump)
+	if _jump_pressed and _jumps_left > 0:
+		_vy = JUMP_V if _jumps_left == 2 else DOUBLE_JUMP_V
+		_jumps_left -= 1
+	_jump_pressed = false
+	if _vy != 0.0 or _player.position.y > 0.0:
+		_vy -= JUMP_GRAVITY * _delta
+		_player.velocity.y = _vy
+	else:
+		_player.velocity.y = 0.0
 	_player.move_and_slide()
-	# the deck is flat by construction — clamp rather than simulate gravity
-	_player.position.y = 0.0
+	# the deck is flat by construction — land on it exactly, never below it
+	if _player.position.y <= 0.0:
+		_player.position.y = 0.0
+		if _vy < 0.0:
+			_vy = 0.0
+			_jumps_left = 2
+
+var _jump_pressed: bool = false
 
 func _input(event: InputEvent) -> void:
+	if event is InputEventKey and (event as InputEventKey).pressed and not (event as InputEventKey).echo \
+			and (event as InputEventKey).keycode == KEY_SPACE and _player != null and not _vr:
+		_jump_pressed = true
 	if _shot_path != "":
 		return
 	# TAB toggles the curator editor at runtime (desktop only — in VR the XR

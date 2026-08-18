@@ -46,6 +46,7 @@ GATES: dict[str, tuple[str, str, str, int]] = {
     "bridge_courts": ("gd", "res://commons/testing/test_em_bridge_courts.gd", r"(PASS|FAIL)", 400),
     "side_room":     ("gd", "res://commons/testing/test_em_side_room.gd", r"SIDE ROOM: (PASS|FAIL)", 500),
     "pearls":        ("gd", "res://commons/testing/test_em_pearls.gd", r"EM PEARLS: (PASS|FAIL|SKIP)", 500),
+    "jump":          ("gd", "res://commons/testing/test_em_jump.gd", r"EM JUMP: (PASS|FAIL|SKIP)", 300),
 }
 
 
