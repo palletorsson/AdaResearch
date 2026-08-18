@@ -136,7 +136,28 @@ def pearl_walks(chapter: str, trunk: dict[str, Any] | None = None) -> list[dict[
                 continue
             seen.add(tok); sib += 1
             rows.append({"lookup": tok, "walk_kind": "sibling", "why": f"a body of the {name} pearl ({p.get('map', '')})", "provenance": "map", "space": "wall"})
+        # branches on THIS pearl — plus the un-pearled ones (a hand reading
+        # written on the node before pearls existed, or a derived branch whose
+        # via-token is not in any map): they ride with the pearl that holds
+        # their via, else the pearl that holds the node's hero, else the first
         mine = [b for b in branches if b.get("pearl") == name]
+        for b in branches:
+            if b.get("pearl"):
+                continue
+            via = b.get("via") or ""
+            home = None
+            for q in node["pearls"]:
+                if via and via in (q.get("tokens") or []):
+                    home = q.get("pearl"); break
+            if home is None:
+                node_hero = node.get("hero_hand") or (node.get("heroes") or [""])[0]
+                for q in node["pearls"]:
+                    if node_hero and node_hero in (q.get("tokens") or []):
+                        home = q.get("pearl"); break
+            if home is None:
+                home = node["pearls"][0].get("pearl")
+            if home == name:
+                mine.append(b)
         hand = [b for b in mine if b.get("provenance") == "hand"]
         for kind in WALK_ORDER[1:]:
             ks = [b for b in mine if b.get("kind") == kind]

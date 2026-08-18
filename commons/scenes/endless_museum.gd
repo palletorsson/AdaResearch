@@ -1,4 +1,14 @@
 extends Node3D
+
+## WHERE THE WALK OPENS — set in the Inspector on the scene root (2026-08-18).
+## `start_chapter` is a sequence name (primitives, noise, ...); `start_map`
+## is a MAP name (Point_Lines, Point_Trace, ...) — the pearl that map became,
+## when the chapter arrived as a string. Empty = the spine's start. Command-
+## line --em-chapter= and ada_run/em_control.json still win when present, so
+## a launch from a test or the menu behaves as it did; the Inspector is the
+## editor's voice.
+@export var start_chapter: String = ""
+@export var start_map: String = ""
 # endless_museum.gd — the endless museum corridor (fast loop, v1).
 #
 # Streams museum-template segments ahead of the walker: each segment stamps one
@@ -336,6 +346,7 @@ func _ready() -> void:
 	# after the pool, because a plan naming an artifact the pool never built is
 	# a stale plan and the museum should be able to say so by name.
 	_load_plan()
+	_start_at_map()
 	_load_guests()
 	if _museums.is_empty():
 		push_error("endless_museum: no museum-tagged templates in %s" % TEMPLATES)
@@ -834,6 +845,10 @@ func _load_policy_pool(live: Dictionary, policy: String) -> bool:
 ## has no flags (VR from the StagingVR picker). Gated: no flag, no file, no
 ## change — the walk opens with the first artifact of the spine as before.
 func _start_at_chapter() -> void:
+	# precedence: the flag, then the Inspector, then ada_run/em_control.json
+	# (the control file only speaks for a launch that has neither)
+	if _first_chapter == "" and start_chapter != "":
+		_first_chapter = start_chapter            # the Inspector's voice
 	if _first_chapter == "" and FileAccess.file_exists(EM_CONTROL):
 		var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(EM_CONTROL))
 		if parsed is Dictionary:
@@ -845,7 +860,7 @@ func _start_at_chapter() -> void:
 			_pool_i = i
 			print("[endless_museum] the walk opens at chapter %s (pool row %d of %d) — %s" % [
 				_first_chapter, i, _pool.size(),
-				"--em-chapter" if OS.get_cmdline_user_args().has("--em-chapter=" + _first_chapter) else EM_CONTROL])
+				"--em-chapter" if OS.get_cmdline_user_args().has("--em-chapter=" + _first_chapter) else ("Inspector start_chapter" if start_chapter == _first_chapter else EM_CONTROL)])
 			return
 	push_warning("endless_museum: first chapter %s is not in the pool — opening as before" % _first_chapter)
 
@@ -1950,6 +1965,26 @@ const ROOM_W := 5
 const ROOM_D := 7
 const ROOM_GAP := 2
 const ROOM_Z0 := 4    # first room starts this many tile rows past the vestibule
+
+
+## The Inspector's `start_map`: open the chapter at the PEARL that map became.
+## Needs the plan (pearl rows carry `map`), so it runs after _load_plan. A map
+## that is not a pearl of the opening chapter is said, and the walk opens at
+## the chapter's first pearl as before.
+func _start_at_map() -> void:
+	if start_map == "" or _first_chapter == "":
+		return
+	for pk in _plan_pearls.keys():
+		if not String(pk).ends_with("|" + _first_chapter):
+			continue
+		var rows: Array = _plan_pearls[pk]
+		for i in range(rows.size()):
+			if String((rows[i] as Dictionary).get("map", "")) == start_map:
+				_pearl_cursor[_first_chapter] = i
+				print("[endless_museum] the walk opens at %s · %s (pearl %d/%d, map %s) — Inspector start_map" % [
+					_first_chapter, String((rows[i] as Dictionary).get("pearl", "")), i + 1, rows.size(), start_map])
+				return
+	push_warning("endless_museum: start_map %s is not a pearl of %s — opening at its first pearl" % [start_map, _first_chapter])
 
 
 ## The plan row for THIS segment: the chapter's current PEARL when the chapter
