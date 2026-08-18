@@ -5,6 +5,39 @@
 
 Updated 2026-08-15.
 
+## 08-18 (late) — the AS-BUILT plan, and VR = desktop as a diff of two files
+
+Palle: "why is VR and desktop not the same source of truth?" and "goal today
+is to get the same load of artifacts and maps in VR as in desktop." Two moves,
+both landed:
+
+- **The mode decides only the eye and the desktop keys.** Fifteen `_vr`
+  forks in `endless_museum.gd` came down to five (`_eye_pos`, `_setup_world`,
+  `_process`, `_input`); records, proxies, floor colliders, numbering and
+  captions run in both modes. `tools/test_em_mode_forks.py` gates it at five.
+  The VR eye is the CURRENT `XROrigin3D`'s camera, not the first one found
+  (the staging rig, parked at the menu — that dead eye is why VR "loaded one
+  map and fewer artifacts": nothing streamed past segment 0 and everything
+  more than 38 m from the menu was hidden AND process-suspended).
+- **The assembler writes what it made.** `ada_run/em_built.json`
+  (`adaresearch.em_built.v1`), one entry per finished segment: cell rows as
+  text (`.` floor `#` not floor `s` sealed `b` bench `p` prop), every body's
+  final world pose, rotation and inventory number, every showing card,
+  courts, side rooms, the gate, the mode label. `python tools/em_built.py`
+  prints the floor plan without Godot; `--diff a b` compares two runs.
+  Gate `built` builds two segments desktop and forced-VR and diffs: SAME
+  (52 bodies, 32 cards in seg 0). The plan view / plan editor still
+  re-derive from `em_plan.json`; making them read `em_built.json` is the
+  next step, and the inventory (`em_inventory.json`) is now redundant with it.
+
+Measured while chasing "grab does not work in VR": `_suppress_chrome` (the
+grab-handle strip) has had ZERO call sites since it landed on 08-09, so no
+handle is hidden in any mode; `commons/testing/probe_em_pickables.gd` counts
+141 `XRToolsPickable` in seg 0, all enabled, on the grab mask, unscaled. The
+one museum-side thing that ever disabled a pickable is the dead-eye suspend
+above (a `PROCESS_MODE_DISABLED` body has no physics, so no grab) — fixed
+in e7abbfbd9; a headset run from before that commit would show exactly this.
+
 ## 08-18 — the pearls: a chapter is a STRING of heroes, one segment each
 
 Palle: "the primitive endless museum does not show all the primitive
