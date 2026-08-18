@@ -218,5 +218,5 @@ add: %s  (%d/%d) — ENTER places it 2.5 m ahead" % [
 				float(r.get("rotation", 0.0)), str(r.get("chapter", "?")),
 				("  · walk: %s (%s)" % [str(r.get("walk_kind")), str(r.get("walk_space", "wall"))]) if r.has("walk_kind") else ""]
 	var pend := overrides.size()
-	return head + line2 + ("\noverrides: %d%s" % [pend, "  *unsaved*" if dirty else ""]
+	return head + line2 + ("\nrulings: %d%s" % [pend, "  · saving…" if dirty else "  · saved"]
 		if pend > 0 or dirty else "")
