@@ -47,50 +47,70 @@ static func build(seg: Node3D, solid: StaticBody3D, w: int, wall_col: Color,
 	# how deep the door stands is a NUMBER, not an eye's call:
 	# commons/data/em_layout.json gate.depth_rows (fallback GATE_DEPTH)
 	var depth: float = float(layout.get("depth_rows", GATE_DEPTH))
-	var z: float = 4.0 + depth - 0.5
+	# IN THE DOORWAY (2026-08-18, Palle: "the hand scan door is not in the
+	# doorway but a bit further out. It should be in the doorway"). depth_rows
+	# 0 puts the door IN the entry wall's opening: centred on the gap the tile
+	# actually cuts (layout.door_x0/door_x1, cells), sized to that gap, the
+	# wall itself the jamb — no piers — and the scanner on the wall's vestibule
+	# face beside the opening. Any depth > 0 is the old free-standing door,
+	# GATE_DEPTH rows into the hall with its own piers.
+	var in_doorway: bool = depth <= 0.0 and layout.has("door_x0") and layout.has("door_x1")
+	var z: float = 4.5 if in_doorway else 4.0 + depth - 0.5
+	var clear: float = minf(float(w) - 2.0, 6.0)
+	var cx: float = w / 2.0
+	if in_doorway:
+		var x0: float = float(layout["door_x0"])
+		var x1: float = float(layout["door_x1"]) + 1.0     # inclusive cell -> far edge
+		clear = maxf(x1 - x0, 1.0)
+		cx = (x0 + x1) * 0.5
 	var cols: Array = []
-	# the door: bi-parting, sealed, sized to the corridor's clear width
+	# the door: bi-parting, sealed, sized to the opening
 	var door_ps: PackedScene = load(DOOR_SCENE)
 	var door: Node3D = door_ps.instantiate() as Node3D
-	door.set("width", minf(float(w) - 2.0, 6.0))
+	door.set("width", clear)
 	door.set("height", 3.0)
 	door.set("leaf_mode", "bi_parting")
 	door.set("open_amount", 0.0)
 	door.set("with_header", true)
 	door.set("with_window", true)
 	door.set("with_threshold_light", true)
-	door.position = Vector3(w / 2.0, 0.0, z)
+	door.position = Vector3(cx, 0.0, z)
 	door.name = "ThresholdDoor"
 	seg.add_child(door)
 	# the door's own collider: one slab across the opening while it is sealed.
 	# It is on the segment's StaticBody so the walker meets it; removed on open.
 	var cs := CollisionShape3D.new()
 	var bs := BoxShape3D.new()
-	bs.size = Vector3(minf(float(w) - 2.0, 6.0), 3.0, 0.12)
+	bs.size = Vector3(clear, 3.0, 0.12)
 	cs.shape = bs
-	cs.position = Vector3(w / 2.0, 1.5, z)
+	cs.position = Vector3(cx, 1.5, z)
 	solid.add_child(cs)
 	cols.append(cs)
-	# the jamb piers, so the door reads as an aperture in a wall and not a slab
-	# standing in a hall. They leave the walk cells alone (0.5 m deep, at the edges).
-	var clear: float = minf(float(w) - 2.0, 6.0)
-	for side in [-1.0, 1.0]:
-		var px: float = w / 2.0 + side * (clear * 0.5 + (w - clear) * 0.25)
-		var pw: float = maxf((float(w) - clear) * 0.5, 0.4)
-		var mi := MeshInstance3D.new()
-		var bm := BoxMesh.new(); bm.size = Vector3(pw, 3.2, 0.5)
-		mi.mesh = bm; mi.material_override = mat_wall
-		mi.position = Vector3(px, 1.6, z)
-		seg.add_child(mi)
-		var pc := CollisionShape3D.new()
-		var pbs := BoxShape3D.new(); pbs.size = bm.size; pc.shape = pbs
-		pc.position = mi.position
-		solid.add_child(pc)
-	# the scanner, on the right-hand jamb, at hand height, facing the visitor
+	if not in_doorway:
+		# the jamb piers, so a free-standing door reads as an aperture in a wall
+		# and not a slab in a hall. 0.5 m deep, at the edges, off the walk cells.
+		for side in [-1.0, 1.0]:
+			var px: float = w / 2.0 + side * (clear * 0.5 + (w - clear) * 0.25)
+			var pw: float = maxf((float(w) - clear) * 0.5, 0.4)
+			var mi := MeshInstance3D.new()
+			var bm := BoxMesh.new(); bm.size = Vector3(pw, 3.2, 0.5)
+			mi.mesh = bm; mi.material_override = mat_wall
+			mi.position = Vector3(px, 1.6, z)
+			seg.add_child(mi)
+			var pc := CollisionShape3D.new()
+			var pbs := BoxShape3D.new(); pbs.size = bm.size; pc.shape = pbs
+			pc.position = mi.position
+			solid.add_child(pc)
+	# the scanner, right of the opening at hand height, facing the visitor: on
+	# the wall's vestibule face when the door is in the doorway, on the jamb
+	# pier otherwise
 	var sc_ps: PackedScene = load(SCANNER_SCENE)
 	var scanner: Node3D = sc_ps.instantiate() as Node3D
 	scanner.name = "ThresholdScanner"
-	scanner.position = Vector3(w / 2.0 + clear * 0.5 + 0.35, 1.25, z - 0.35)
+	if in_doorway:
+		scanner.position = Vector3(cx + clear * 0.5 + 0.45, 1.25, 4.0 - 0.06)   # proud of the vestibule face
+	else:
+		scanner.position = Vector3(cx + clear * 0.5 + 0.35, 1.25, z - 0.35)
 	scanner.rotation_degrees.y = 180.0            # face back into the vestibule
 	seg.add_child(scanner)
 	return {"door": door, "scanner": scanner, "colliders": cols, "open": false,

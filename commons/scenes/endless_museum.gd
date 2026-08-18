@@ -2326,11 +2326,31 @@ func _build_segment() -> void:
 	seg.set_meta("em_chapter", seg_seq)
 	# THE GATE, on the opening segment only: the vestibule becomes its own room
 	if _seg_index == 1 and _mod_gate != null and _shot_path == "" and _autopilot == 0:
-		_gate = _mod_gate.call("build", seg, solid, w, wall_col, m_wall, {
+		# the entry wall's opening: the widest run of floor cells in the tile's
+		# first row (the gate module centres its door on it when depth_rows is 0)
+		var dx0: int = -1
+		var dx1: int = -1
+		if not tile.is_empty():
+			var row0: Array = tile[0]
+			var run0: int = -1
+			for xi in range(row0.size() + 1):
+				var open_c: bool = xi < row0.size() and String(row0[xi]) != "4"
+				if open_c and run0 < 0:
+					run0 = xi
+				elif not open_c and run0 >= 0:
+					if xi - run0 > dx1 - dx0:
+						dx0 = run0
+						dx1 = xi - 1
+					run0 = -1
+		var gate_layout: Dictionary = {
 			"depth_rows": int(_L("gate", "depth_rows", 4.0)),
 			"open_seconds": _L("gate", "open_seconds", 1.6),
 			"click_reach_m": _L("gate", "click_reach_m", 3.2),
-			"click_cone_rad": _L("gate", "click_cone_rad", 0.55)})
+			"click_cone_rad": _L("gate", "click_cone_rad", 0.55)}
+		if dx0 >= 0:
+			gate_layout["door_x0"] = dx0
+			gate_layout["door_x1"] = dx1
+		_gate = _mod_gate.call("build", seg, solid, w, wall_col, m_wall, gate_layout)
 		if not _gate.is_empty():
 			var sc: Node3D = _gate.get("scanner") as Node3D
 			if sc != null and sc.has_signal("palm_scanned"):
