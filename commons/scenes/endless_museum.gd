@@ -251,6 +251,7 @@ var _lazy_delay: float = 0.0
 # nothing. `_L(section, key, fallback)` is the only reader.
 const LAYOUT_PATH := "res://commons/data/em_layout.json"
 var _layout: Dictionary = {}
+var _mode_label: String = "desktop"   # what the as-built plan says it was built as
 var GATE_REACH_M := 1.2            # eye or controller this close to the glass = a hand
 var GATE_PATIENCE := 20.0          # seconds at a sealed door before it opens itself
 var _gate_wait: float = 0.0
@@ -1258,6 +1259,7 @@ func _eye_pos() -> Vector3:
 
 func _setup_world() -> void:
 	if _vr:
+		_mode_label = "vr"
 		# building only. The XR rig walks it; the environment still installs,
 		# because tonemapping and GI belong to the world, not to the camera.
 		_setup_environment()
@@ -2650,7 +2652,7 @@ func _write_built(seg: Node3D, chapter: String, deal: Variant, zbase: int, w: in
 		"courts": d.get("courts", []), "side_rooms": d.get("side_rooms", []),
 		"forecourt": (d.get("forecourt", []) as Array).size(),
 		"gate": {"sealed": not _gate.is_empty()} if seg_no == 0 else {},
-		"mode": "vr" if _vr else "desktop",
+		"mode": _mode_label,   # a LABEL for the diff, decided in _setup_world; not a fork in what is built
 	})
 	var f: FileAccess = FileAccess.open(BUILT_PATH, FileAccess.WRITE)
 	if f == null:
