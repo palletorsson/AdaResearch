@@ -1465,6 +1465,9 @@ func _run_contact_sheet() -> void:
 			await get_tree().process_frame
 		_take_screenshot("%s_%02d.png" % [_contact_base, s])
 	print("[scrubber] contact sheet complete")
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		return
 	get_tree().quit()
 
 
@@ -1479,4 +1482,7 @@ func _run_solo_sheet() -> void:
 			await get_tree().process_frame
 		_take_screenshot("%s_%02d_%s.png" % [_solo_base, _order_of_kind.get(k, 0), k])
 	print("[scrubber] solo sheet complete (%d layers)" % kinds.size())
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		return
 	get_tree().quit()

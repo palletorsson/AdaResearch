@@ -47,6 +47,9 @@ func _setup_signals():
 
 func _connect_to_grid_system():
 	# Find GridSystem and connect to map_generation_complete signal
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		return
 	var scene_tree = get_tree()
 	if not scene_tree:
 		return
@@ -67,6 +70,9 @@ func _initial_refresh():
 	var attempt = 0
 
 	while attempt < max_attempts:
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			return
 		var scene_tree = get_tree()
 		if scene_tree:
 			var grid_systems = scene_tree.get_nodes_in_group("grid_system")

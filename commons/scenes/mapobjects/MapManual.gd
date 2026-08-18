@@ -317,6 +317,9 @@ func _load_map_data() -> void:
 	print("MapManual: Loading map data...")
 	
 	# Find GridSystem
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		return
 	var grid_system = get_tree().get_first_node_in_group("grid_system")
 	if not grid_system:
 		grid_system = _find_node_by_class(get_tree().current_scene, "GridSystem")

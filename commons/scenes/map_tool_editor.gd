@@ -282,6 +282,9 @@ func _load() -> void:
 	_structure = layers.get("structure", [])
 	_depth = _structure.size()
 	_width = (int(_structure[0].size()) if _depth > 0 and _structure[0] is Array else 0)
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		return
 	var root: Node = get_tree().edited_scene_root
 	# Structure as real center-origin 1m cubes (x/z inset so cell edges read). Selectable when edit_grid.
 	for z in range(_structure.size()):

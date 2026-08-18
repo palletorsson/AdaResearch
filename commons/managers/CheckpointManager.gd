@@ -287,6 +287,9 @@ func _load_map(map_name: String) -> void:
 			return
 	
 	# Fallback: just reload
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		return
 	get_tree().reload_current_scene()
 
 func _vector_to_dict(v: Vector3) -> Dictionary:

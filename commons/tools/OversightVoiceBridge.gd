@@ -204,6 +204,9 @@ func _has_input_action(action_name: StringName) -> bool:
 	return false
 
 func _connect_controller_signals() -> void:
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		return
 	var scene := get_tree().current_scene
 	if scene == null:
 		return
@@ -308,6 +311,9 @@ func _controller_button_matches(button: String, controller: XRController3D) -> b
 
 func _setup_status_label() -> void:
 	if not show_status_label:
+		return
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
 		return
 	var scene := get_tree().current_scene
 	if scene == null:

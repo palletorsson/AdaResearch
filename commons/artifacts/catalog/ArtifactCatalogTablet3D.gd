@@ -68,6 +68,9 @@ func _ensure_viewport_updates():
 
 func _find_spawn_manager():
 	# Try to find spawn manager in the scene
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		return
 	var scene_tree = get_tree()
 	if not scene_tree:
 		return

@@ -451,6 +451,9 @@ func _position_player() -> void:
 
 	if not xr_origin:
 		# Search from scene root
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			return
 		var scene = get_tree().current_scene
 		if scene:
 			var origins = scene.find_children("*", "XROrigin3D", true, false)

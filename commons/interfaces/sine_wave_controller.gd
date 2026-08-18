@@ -137,6 +137,9 @@ func _ready() -> void:
 func _find_mario_slider() -> void:
 	# Wait for scene to load
 	await get_tree().process_frame
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		return
 	mario_slider = get_tree().get_first_node_in_group("mario_slider_control")
 	if mario_slider:
 		print("SineWaveController: Connected to SimpleMarioSlider")

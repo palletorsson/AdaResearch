@@ -1354,6 +1354,9 @@ func _try_connect_grid_system() -> void:
 			_grid_system.interactable_activated.disconnect(_on_interactable_activated)
 
 	_grid_system = null
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		return
 	var nodes = get_tree().get_nodes_in_group("grid_system")
 	if nodes.size() > 0:
 		_grid_system = nodes[0] as GridSystem

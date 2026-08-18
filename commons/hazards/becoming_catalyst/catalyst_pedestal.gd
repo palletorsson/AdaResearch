@@ -835,6 +835,9 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	# our pedestal's crystal in the scene, so this is a no-op there.
 	if _is_truthy(config_data.get("clear_modes", false)):
 		var freed: int = 0
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			return
 		for cat in get_tree().get_nodes_in_group("catalyst"):
 			# Skip our pedestal's own crystal (and any descendant of it).
 			if cat == _crystal or self.is_ancestor_of(cat):

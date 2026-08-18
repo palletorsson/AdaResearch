@@ -520,6 +520,9 @@ func _connect_progression_signals() -> void:
 
 func _connect_catalyst_signals() -> void:
 	# BecomingCatalyst is a scene node, not an autoload. Find via group.
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		return
 	var catalysts = get_tree().get_nodes_in_group("catalyst")
 	for catalyst in catalysts:
 		if catalyst.has_signal("mode_unlocked"):

@@ -893,6 +893,9 @@ func _pulse_haptic() -> void:
 # close methods. The group registration is done by lab_door_sensor.gd's
 # _ready(), so this call_deferred sequence reliably finds the handler.
 func _auto_connect_to_door() -> void:
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		return
 	var tree := get_tree()
 	if tree == null:
 		return

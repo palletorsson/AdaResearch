@@ -472,6 +472,9 @@ func _find_controllers() -> void:
 	await get_tree().process_frame
 
 	# Search for controllers by common names
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		return
 	var root = get_tree().root
 	left_controller = _find_node_recursive(root, "LeftController")
 	if not left_controller:

@@ -193,6 +193,9 @@ func _get_health_bar(pct: float) -> String:
 
 
 func _hide_right_wrist_display() -> void:
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		return
 	var scene := get_tree().current_scene
 	if scene == null:
 		return
@@ -559,6 +562,9 @@ func _connect_voice_button() -> void:
 	if _voice_connected:
 		return
 	# Find the right hand controller for B button
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		return
 	var root := get_tree().root
 	var candidates: Array[Node3D] = []
 	_collect_controllers(root, ["RightHandController", "RightController", "RightHand"], candidates)

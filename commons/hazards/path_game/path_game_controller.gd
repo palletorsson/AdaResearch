@@ -62,6 +62,9 @@ func _read_metadata_overrides() -> void:
 # ── Wiring ────────────────────────────────────────────────────────────
 
 func _wire() -> void:
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		return
 	_watchdog = get_tree().get_first_node_in_group("path_watchdog")
 	if _watchdog:
 		if _watchdog.has_signal("level_cleared") and not _watchdog.level_cleared.is_connected(_on_reached_exit):

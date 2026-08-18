@@ -38,6 +38,9 @@ func _create_loading_label():
 
 func _connect_to_generators():
 	# Find any SciFiLoFiSoundscape in the scene tree
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		return
 	var soundscapes = _find_all_soundscapes(get_tree().root)
 	
 	for soundscape in soundscapes:

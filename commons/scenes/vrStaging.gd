@@ -588,6 +588,9 @@ func load_scene(p_scene_path: String, user_data = null) -> void:
 		
 		if _tween:
 			_tween.kill()
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			return
 		_tween = get_tree().create_tween()
 		_tween.tween_method(set_fade, 1.0, 0.0, fade_duration)
 		await _tween.finished

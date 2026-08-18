@@ -254,6 +254,9 @@ func _update_mode_label() -> void:
 
 func _find_controllers() -> void:
 	await get_tree().process_frame
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		return
 	var root: Node = get_tree().root
 
 	_left_controller = _find_node_recursive(root, "LeftController")

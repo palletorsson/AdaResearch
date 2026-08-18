@@ -44,6 +44,9 @@ func _ready() -> void:
 	call_deferred("_scan_existing")
 
 func _scan_existing() -> void:
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		return
 	_walk(get_tree().root)
 
 func _walk(n: Node) -> void:

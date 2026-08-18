@@ -2333,6 +2333,9 @@ func _activate_voxel_mode() -> void:
 	if _voxel_active:
 		return
 	# Find GridStructureComponent in scene
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		return
 	var structure := _find_node_by_name(get_tree().root, "GridStructureComponent")
 	if not structure or not (structure is GridStructureComponent):
 		# Grid not ready yet (common after map transitions — grid needs ~3 frames)
@@ -3467,6 +3470,9 @@ func configure(config_data: Dictionary) -> void:
 func _resolve_home_sequence_passive() -> void:
 	if not home_sequence.is_empty():
 		return  # explicit config already bound us
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		return
 	home_sequence = SequenceBinding.current_sequence(get_tree())
 	if not home_sequence.is_empty():
 		print("[Catalyst] home sequence (passive): '%s'" % home_sequence)

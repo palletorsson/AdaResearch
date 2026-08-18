@@ -960,6 +960,9 @@ func _finish_tests() -> void:
 		call_deferred("_quit_with_code", exit_code)
 
 func _quit_with_code(code: int) -> void:
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		return
 	get_tree().quit(code)
 
 func _save_json_report(total_time: float) -> void:

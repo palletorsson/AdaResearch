@@ -124,6 +124,9 @@ func generate_csg_grid() -> void:
 				if csg_object:
 					csg_object.position = position
 					add_child(csg_object)
+					# out-of-tree guard: get_tree() is null once a map is torn down
+					if not is_inside_tree():
+						return
 					csg_object.owner = get_tree().edited_scene_root
 					
 					# Set all children as owned by scene root for editor

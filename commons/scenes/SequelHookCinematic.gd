@@ -235,6 +235,9 @@ func _show_title_sequence() -> void:
 		label.position = text_base + Vector3(0, -i * 0.6, 0)
 		label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			return
 		get_tree().current_scene.add_child(label)
 		_title_labels.append(label)
 

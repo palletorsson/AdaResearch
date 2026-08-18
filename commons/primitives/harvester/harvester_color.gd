@@ -69,6 +69,9 @@ func _attach_trail_root() -> void:
 		parent.add_child(_trail_cells_root)
 	else:
 		# Fall back to scene root
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			return
 		get_tree().current_scene.add_child(_trail_cells_root)
 
 

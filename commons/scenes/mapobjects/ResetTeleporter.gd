@@ -23,6 +23,9 @@ func _ready():
 	print("ResetTeleporter: Now active and ready to detect player falls")
 
 func _find_spawn():
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		return
 	teleport_target = get_tree().current_scene.find_child("SpawnPoint", true, false)
 
 	if not teleport_target:

@@ -48,6 +48,9 @@ func _ready() -> void:
 func _initialize_teleport_target() -> void:
 	if teleport_target:
 		return
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		return
 	var current_scene := get_tree().current_scene
 	if current_scene == null:
 			return

@@ -425,6 +425,9 @@ func _connect_to_sliders():
 	# Find lambda and phi sliders in scene and connect
 	await get_tree().process_frame
 
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		return
 	var sliders = get_tree().get_nodes_in_group("qfep_slider")
 	for slider in sliders:
 		if slider.has_signal("lambda_changed"):

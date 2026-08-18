@@ -80,6 +80,9 @@ func _configure_grid_system_for_map(map_name: String):
 		grid_system.reload_map_with_name(map_name)
 	else:
 		# Fallback: reload the scene
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			return
 		get_tree().reload_current_scene()
 
 func _spawn_entry_by_type():

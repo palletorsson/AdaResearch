@@ -82,6 +82,9 @@ func set_text_with_background(new_text: String):
 	call_deferred("_update_background_size")
 
 func _connect_to_grid_system():
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		return
 	var grid_system = _find_grid_system(get_tree().root)
 
 	if grid_system:

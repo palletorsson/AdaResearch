@@ -46,6 +46,9 @@ func _start_automatic_move():
 		node = node.get_parent()
 		if node is Node3D:
 			print("MovePlayerController:   ancestor '%s' pos=%s global=%s" % [node.name, node.position, node.global_position])
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			return
 		if node == get_tree().root:
 			break
 	

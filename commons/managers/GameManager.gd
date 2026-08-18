@@ -228,6 +228,9 @@ func _reload_scene() -> void:
 		return
 	
 	# Fallback: reload scene
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		return
 	var tree = get_tree()
 	if tree:
 		tree.reload_current_scene()
@@ -402,6 +405,9 @@ func _on_death_effect_done() -> void:
 		_reload_scene()
 
 func _run_death_sequence(death_position: Vector3) -> void:
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		return
 	var tree: SceneTree = get_tree()
 	if tree == null or tree.current_scene == null:
 		_death_sequence_running = false

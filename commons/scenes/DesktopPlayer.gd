@@ -45,6 +45,9 @@ func _ready():
 		call_deferred("_redirect_to_lab")
 
 func _redirect_to_lab():
+	# out-of-tree guard: get_tree() is null once a map is torn down
+	if not is_inside_tree():
+		return
 	get_tree().change_scene_to_file("res://commons/scenes/lab_desktop.tscn")
 
 func _input(event):

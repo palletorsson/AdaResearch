@@ -49,6 +49,9 @@ func _connect_ui_signals():
 			_world_map_ui.sequence_selected.connect(_on_sequence_selected)
 	else:
 		if _connect_attempts < MAX_UI_CONNECT_ATTEMPTS:
+			# out-of-tree guard: get_tree() is null once a map is torn down
+			if not is_inside_tree():
+				return
 			var tree: SceneTree = get_tree()
 			if tree:
 				tree.process_frame.connect(_connect_ui_signals, CONNECT_ONE_SHOT)
