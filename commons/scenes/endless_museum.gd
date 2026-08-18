@@ -243,6 +243,26 @@ var _white_cube: bool = false
 # Solid volume is unchanged, so collision is unchanged.
 var _wall_runs: bool = false
 var _plan_path: String = ""       # --em-plan[=res://...]; empty = deal as before
+# THE LIVE FOOTPRINT LEDGER (2026-08-18). The registry's measurement is a
+# STILL — a body that grows at runtime (a builder, a sim, a field) can stand
+# forty metres wide in a corridor the negotiator planned for four. When a
+# stamped body's live extent exceeds its planned footprint by more than
+# LIVE_OVERSHOOT_CELLS on x or z, the museum records the body it actually
+# got — token, planned, live, has_collider, where — in
+# ada_run/em_live_footprints.json (max per token, provenance "walked"), and
+# spatial_contract.resolve reads that ledger and negotiates from the LARGER
+# of still and live next time, so the body climbs the venue ladder (court,
+# bridge, balcony) instead of standing in the walk. Nothing is refused here.
+#
+# WALK-INSIDE: an overgrown body with NO collider is a venue, not an
+# obstacle — a particle field, a light volume, a drawing in air. The seal
+# takes NO cells from it (the walker walks in) and the ledger says so.
+const LIVE_LEDGER := "res://ada_run/em_live_footprints.json"
+const LIVE_OVERSHOOT_CELLS := 2
+var _live_ledger: Dictionary = {}     # token -> entry, loaded once, saved when it grows
+var _live_ledger_loaded: bool = false
+var _live_dirty: bool = false
+var _walk_inside: Dictionary = {}     # token -> true, this run
 # THE PEARLS (2026-08-18). A chapter may arrive as a STRING of plan rows —
 # one per pearl (`pearl`, `pearl_index`) — and then builds ONE SEGMENT PER
 # PEARL: the cursor holds the chapter until its string is walked. Keyed
@@ -3562,10 +3582,30 @@ func _occupied_cells(node: Node3D, cell: Dictionary, zbase: int) -> Array:
 	var out: Array = []
 	var box: AABB = _extent_of(node)
 	if box.size.x > 0.0 or box.size.z > 0.0:
-		var x0: int = maxi(int(floor(box.position.x)), cx - MAX_SEAL_RADIUS)
-		var x1: int = mini(int(floor(box.position.x + box.size.x - 0.01)), cx + MAX_SEAL_RADIUS)
-		var z0: int = maxi(int(floor(box.position.z)), cz - MAX_SEAL_RADIUS)
-		var z1: int = mini(int(floor(box.position.z + box.size.z - 0.01)), cz + MAX_SEAL_RADIUS)
+		var rx0: int = int(floor(box.position.x))
+		var rx1: int = int(floor(box.position.x + box.size.x - 0.01))
+		var rz0: int = int(floor(box.position.z))
+		var rz1: int = int(floor(box.position.z + box.size.z - 0.01))
+		var x0: int = maxi(rx0, cx - MAX_SEAL_RADIUS)
+		var x1: int = mini(rx1, cx + MAX_SEAL_RADIUS)
+		var z0: int = maxi(rz0, cz - MAX_SEAL_RADIUS)
+		var z1: int = mini(rz1, cz + MAX_SEAL_RADIUS)
+		# THE LIVE FOOTPRINT LEDGER: the body the museum actually got, and
+		# whether a walker can enter it. Overshoot beyond the seal's honest span
+		# by more than LIVE_OVERSHOOT_CELLS makes it a ledger entry.
+		if rx0 < x0 or rx1 > x1 or rz0 < z0 or rz1 > z1:
+			var tok: String = String(node.get_meta("artifact_lookup_name")) if node.has_meta("artifact_lookup_name") else String(node.name)
+			var span_x: int = rx1 - rx0 + 1
+			var span_z: int = rz1 - rz0 + 1
+			var planned: int = 2 * MAX_SEAL_RADIUS + 1
+			var has_col: bool = _has_collider(node)
+			if span_x > planned + LIVE_OVERSHOOT_CELLS or span_z > planned + LIVE_OVERSHOOT_CELLS:
+				_ledger_note(tok, node, box, has_col, cx, cz)
+				if not has_col:
+					_walk_inside[tok] = true
+					print("[em-footprint] %s WALK-INSIDE: live %.1f x %.1f m, no collider — the seal takes no cells, the walker walks in" % [
+						tok, box.size.x, box.size.z])
+					return out              # nothing sealed: the body is a venue
 		for zz in range(z0, z1 + 1):
 			for xx in range(x0, x1 + 1):
 				var k := Vector2i(xx, zz)
@@ -3577,6 +3617,79 @@ func _occupied_cells(node: Node3D, cell: Dictionary, zbase: int) -> Array:
 	if int(cell.get("rank", 2)) == 2 and _walk_cells.has(own) and not out.has(own):
 		out.append(own)
 	return out
+
+
+## Any CollisionShape3D under the node? (a walker is stopped by colliders,
+## never by meshes — the seal's own distinction)
+func _has_collider(root: Node3D) -> bool:
+	var stack: Array = [root]
+	while not stack.is_empty():
+		var n: Node = stack.pop_back()
+		if n is CollisionShape3D and (n as CollisionShape3D).shape != null:
+			return true
+		for c in n.get_children():
+			stack.append(c)
+	return false
+
+
+## Record an overgrown body in the live footprint ledger (max per token) and
+## save. The ledger is read by tools/spatial_contract.py: the next
+## negotiation uses the larger of the still measurement and the live one.
+func _ledger_note(tok: String, node: Node3D, box: AABB, has_col: bool, cx: int, cz: int) -> void:
+	if not _live_ledger_loaded:
+		_live_ledger_loaded = true
+		if FileAccess.file_exists(LIVE_LEDGER):
+			var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(LIVE_LEDGER))
+			if parsed is Dictionary and (parsed as Dictionary).get("bodies") is Dictionary:
+				_live_ledger = (parsed as Dictionary)["bodies"]
+	var live: Array = [snappedf(box.size.x, 0.1), snappedf(box.size.y, 0.1), snappedf(box.size.z, 0.1)]
+	var prev: Dictionary = _live_ledger.get(tok, {})
+	var prev_live: Array = prev.get("live_aabb", [0.0, 0.0, 0.0])
+	var grew: bool = prev.is_empty() or float(live[0]) > float(prev_live[0]) + 0.05 \
+			or float(live[2]) > float(prev_live[2]) + 0.05
+	var planned_m: Array = [0.0, 0.0, 0.0]
+	if node.has_meta("em_planned_aabb"):
+		planned_m = node.get_meta("em_planned_aabb")
+	if grew:
+		_live_ledger[tok] = {
+			"live_aabb": live,
+			"planned_aabb": prev.get("planned_aabb", planned_m),
+			"has_collider": has_col,
+			"walk_inside": not has_col,
+			"cell": [cx, cz],
+			"chapter": _seg_chapter_now(),
+			"seen": int(prev.get("seen", 0)) + 1,
+			"provenance": "walked",
+			"at": Time.get_datetime_string_from_system(false, true),
+		}
+		_live_dirty = true
+		print("[em-footprint] %s LIVE %.1f x %.1f m (planned %s) — %s; ledgered" % [
+			tok, box.size.x, box.size.z, str(planned_m), "collider" if has_col else "no collider"])
+		_ledger_save()
+	else:
+		_live_ledger[tok]["seen"] = int(prev.get("seen", 0)) + 1
+
+
+func _ledger_save() -> void:
+	if not _live_dirty:
+		return
+	var f: FileAccess = FileAccess.open(LIVE_LEDGER, FileAccess.WRITE)
+	if f == null:
+		return
+	f.store_string(JSON.stringify({
+		"schema": "adaresearch.em_live_footprints.v1",
+		"_readme": ("Bodies whose LIVE extent, measured by the museum at stamp, exceeded their "
+			+ "planned footprint by more than " + str(LIVE_OVERSHOOT_CELLS) + " cells. Provenance walked. "
+			+ "Read by tools/spatial_contract.py: the next negotiation uses the larger of "
+			+ "measurements.aabb_size and live_aabb. walk_inside = no collider: the seal takes no cells."),
+		"bodies": _live_ledger,
+	}, "\t"))
+	f.close()
+	_live_dirty = false
+
+
+func _seg_chapter_now() -> String:
+	return String(_pool[_pool_i % _pool.size()].get("sequence", "")) if not _pool.is_empty() else ""
 
 
 ## The instance's own world extent: every MeshInstance3D and every

@@ -451,6 +451,24 @@ def _num(value: Any, default: float = 0.0) -> float:
         return default
 
 
+LIVE_LEDGER = REPO / "ada_run" / "em_live_footprints.json"
+_live_cache: dict | None = None
+
+
+def live_footprint(lookup: str) -> dict:
+    """The museum's live measurement of a body, if it ever overgrew (see
+    endless_museum.gd LIVE_LEDGER). {} when the ledger has nothing on it."""
+    global _live_cache
+    if _live_cache is None:
+        _live_cache = {}
+        if LIVE_LEDGER.exists():
+            try:
+                _live_cache = json.loads(LIVE_LEDGER.read_text(encoding="utf-8")).get("bodies", {}) or {}
+            except Exception:
+                _live_cache = {}
+    return _live_cache.get(lookup, {}) or {}
+
+
 def resolve(lookup: str) -> SpatialContract:
     """Merge every source into one contract. Never raises for a missing
     source — an artifact with nothing but a name still gets a valid contract
@@ -471,10 +489,26 @@ def resolve(lookup: str) -> SpatialContract:
 
     # ── body: a measurement question. Godot wins. ───────────────────
     aabb = measured.get("aabb_size")
+    # THE LIVE FOOTPRINT LEDGER (2026-08-18): the still measurement is what
+    # the artifact was when photographed; the museum measures the body it
+    # actually GOT at stamp (ada_run/em_live_footprints.json, provenance
+    # walked). A body that grows at runtime negotiates from the LARGER of the
+    # two, so it climbs the venue ladder (court, bridge, balcony) instead of
+    # standing in the walk. walk_inside bodies (no collider) keep the still
+    # size — the seal takes no cells from them, so the plan need not.
+    live = live_footprint(lookup)
+    if live and not live.get("walk_inside") and isinstance(live.get("live_aabb"), list):
+        la = [_num(v) for v in live["live_aabb"]]
+        if not (isinstance(aabb, list) and len(aabb) == 3):
+            aabb = la
+            prov["body.size_m"] = "live ledger (no still measurement)"
+        elif la[0] > _num(aabb[0]) + 0.5 or la[2] > _num(aabb[2]) + 0.5:
+            aabb = [max(la[0], _num(aabb[0])), max(la[1], _num(aabb[1])), max(la[2], _num(aabb[2]))]
+            prov["body.size_m"] = f"live ledger over measurements.aabb_size (walked {la[0]:.1f}x{la[2]:.1f} m)"
     if isinstance(aabb, list) and len(aabb) == 3 and any(_num(v) > 0 for v in aabb):
         # Godot reports [w, h, d]; the contract speaks [w, d, h].
         body = [_num(aabb[0]), _num(aabb[2]), _num(aabb[1])]
-        prov["body.size_m"] = "measurements.aabb_size"
+        prov.setdefault("body.size_m", "measurements.aabb_size")
     elif isinstance(pilot.get("body_envelope_m"), list):
         body = [_num(v) for v in pilot["body_envelope_m"]]
         prov["body.size_m"] = "museum_contract_pilot.body_envelope_m"
