@@ -1793,6 +1793,7 @@ func _stamp_wall_runs(seg: Node3D, solid: StaticBody3D, cells: Dictionary,
 		cells.size(), emitted, float(cells.size()) / float(maxi(emitted, 1)), longest])
 
 func _build_segment() -> void:
+	_seg_refused = []
 	# THE PLAN OWNS THE BUILDING when one is loaded: the chapter's museum is
 	# read off its own plan row, so the stamped cast and the built walls can
 	# never disagree about where a chapter lives. A crowned chapter without a
@@ -2666,6 +2667,7 @@ func _write_built(seg: Node3D, chapter: String, deal: Variant, zbase: int, w: in
 	var z1: int = zbase + VESTIBULE_H + h + porch_depth + court_depth
 	# cells: a compact run-length row per z: "." floor, "#" not floor, "r" route lane
 	var rows: Array = []
+	var seals: Dictionary = {}   # "x,z" -> the token that sealed it (names the body a diff blames)
 	for z in range(zbase, z1):
 		var line := ""
 		for x in range(-1, w + HALL_GALLERY_W + 8):
@@ -2675,6 +2677,8 @@ func _write_built(seg: Node3D, chapter: String, deal: Variant, zbase: int, w: in
 			elif _walk_erased.has(k):
 				var why := String(_walk_erased[k])
 				line += "s" if why.begins_with("seal") else ("b" if why == "bench" else ("p" if why.begins_with("prop") else "x"))
+				if why.begins_with("seal:"):
+					seals["%d,%d" % [x, z]] = why.substr(5)
 			else:
 				line += "#"
 		rows.append(line)
@@ -2712,6 +2716,8 @@ func _write_built(seg: Node3D, chapter: String, deal: Variant, zbase: int, w: in
 		"forecourt": (d.get("forecourt", []) as Array).size(),
 		"gate": {"sealed": not _gate.is_empty()} if seg_no == 0 else {},
 		"mode": _mode_label,   # a LABEL for the diff, decided in _setup_world; not a fork in what is built
+		"refused": _seg_refused.duplicate(true),
+		"seals": seals,
 	})
 	var txt: String = JSON.stringify({"schema": "adaresearch.em_built.v1",
 		"_readme": ("The AS-BUILT plan: what the assembler actually made of each segment this run — every "
@@ -4097,7 +4103,27 @@ func _walk_order(cells: Array) -> Array:
 ## turns and the artifact turns back inside it — which is a different frame and
 ## would mirror every placement if copied here. One negotiator, two renderers:
 ## they must agree about what 90 means.
+## Every refusal this segment made, for the as-built plan: a body the plan
+## dealt that the runtime did NOT place, and why. Two of the six reasons
+## ("body wider than the slot span", "sealing would sever the walk route") are
+## decided from the AABB MEASURED the instant the body enters the tree — a
+## real-time judgement that a headset, a slower GPU or a deferred builder can
+## answer differently from a desktop run. This list is how a VR/desktop diff
+## says WHICH bodies went missing and for what reason.
+var _seg_refused: Array = []
 func _stamp(seg: Node3D, scene_path: String, lookup: String, cell: Dictionary,
+		zbase: int, fp: int, axis_entry: Dictionary, drop_if_unvaried: bool,
+		span_cap: float = 0.0, yaw_deg: float = 0.0,
+		plan_config: Dictionary = {}) -> bool:
+	_stamp_refusal = ""
+	var ok: bool = _stamp_inner(seg, scene_path, lookup, cell, zbase, fp, axis_entry, drop_if_unvaried,
+		span_cap, yaw_deg, plan_config)
+	if not ok:
+		_seg_refused.append({"token": lookup, "tile_cell": [int(cell.get("x", 0)), int(cell.get("y", 0))],
+			"why": _stamp_refusal})
+	return ok
+
+func _stamp_inner(seg: Node3D, scene_path: String, lookup: String, cell: Dictionary,
 		zbase: int, fp: int, axis_entry: Dictionary, drop_if_unvaried: bool,
 		span_cap: float = 0.0, yaw_deg: float = 0.0,
 		plan_config: Dictionary = {}) -> bool:

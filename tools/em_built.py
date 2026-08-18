@@ -45,7 +45,9 @@ def show(seg: dict, bodies: bool = True) -> None:
     print(f"  legend: . floor  # not floor  s sealed  b bench  p prop  A artifact  P plinth")
     if bodies:
         arts = [b for b in seg.get("bodies", []) if b.get("kind") in ("artifact", "")]
-        print(f"  {len(arts)} bodies, {len(seg.get('cards', []))} cards, {len(seg.get('courts', []))} courts, {len(seg.get('side_rooms', []))} side rooms")
+        print(f"  {len(arts)} bodies, {len(seg.get('cards', []))} cards, {len(seg.get('courts', []))} courts, {len(seg.get('side_rooms', []))} side rooms, {len(seg.get('refused', []))} refused")
+        for r in seg.get("refused", []):
+            print(f"    REFUSED {r.get('token'):30s} cell {str(r.get('tile_cell')):10s} — {r.get('why')}")
         for b in sorted(arts, key=lambda b: str(b.get("inv", ""))):
             print(f"    {b.get('inv', ''):18s} {b['token']:30s} cell {str(b.get('tile_cell')):10s} world ({b['world'][0]:.1f}, {b['world'][1]:.1f}, {b['world'][2]:.1f}) rot {b['rot']:.0f}"
                   + (f"  {b['walk_kind']}/{b['walk_space']}" if b.get("walk_kind") else ""))
@@ -61,6 +63,13 @@ def diff(a: dict, b: dict) -> int:
         A, B = sa[k], sb[k]
         if A["cells"] != B["cells"]:
             print(f"segment {k}: cells differ ({sum(1 for x, y in zip(A['cells'], B['cells']) if x != y)} rows)"); bad += 1
+            sa_, sb_ = A.get("seals", {}), B.get("seals", {})
+            for cell in sorted(set(sa_) ^ set(sb_)):
+                print(f"    cell {cell}: sealed by {sa_.get(cell) or sb_.get(cell)} only in {'A' if cell in sa_ else 'B'} — its measured extent differed between the runs")
+        ra = {(r["token"], tuple(r.get("tile_cell") or [])): r.get("why") for r in A.get("refused", [])}
+        rb = {(r["token"], tuple(r.get("tile_cell") or [])): r.get("why") for r in B.get("refused", [])}
+        for key in sorted(set(ra) ^ set(rb)):
+            print(f"segment {k}: {key[0]} refused only in {'A' if key in ra else 'B'} — {ra.get(key) or rb.get(key)}"); bad += 1
         ba = {(x["token"], tuple(x.get("tile_cell") or [])): x for x in A["bodies"]}
         bb = {(x["token"], tuple(x.get("tile_cell") or [])): x for x in B["bodies"]}
         for key in sorted(set(ba) | set(bb)):
