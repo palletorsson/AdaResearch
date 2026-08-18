@@ -82,6 +82,52 @@ def gallery_homes(synth: list[str]) -> dict:
     return home
 
 
+def pick_frame(tok: str, gal: str, axes: dict, blocked: list) -> str | None:
+    """The thumbnail should be the frame the row's own placement string produces.
+
+    Every published variant is on disk as <dir>/<token>__<axis>-<value>__<axis>-<value>.png, so
+    the catalogue can show the exact object a curator gets rather than a representative one —
+    which matters here more than it would elsewhere, because the whole point of the corpus is
+    that one token is many objects and the default is usually the least interesting of them.
+    Preference: the work's own gallery directory, then the frame matching the placement values,
+    then anything named for the token. The experiment directories (aaa-ab, aaa-baseline …) hold
+    frames from rig comparisons and are the last resort, not the first.
+    """
+    want = [f"{a}-{axes[a][0]}" for a in list(axes)[:2] if a not in blocked]
+    prefer = gal.replace("-", "")                      # wave-22 -> wave22
+    cands = frame_index().get(tok) or []
+    if not cands:
+        return None
+
+    def score(rel: str):
+        d, stem = rel.split("/")[0], rel.rsplit("/", 1)[-1][:-4]
+        return (0 if d == prefer else (1 if d.startswith("wave") else 2),
+                0 if all(w in stem for w in want) else 1,
+                len(rel))
+
+    return sorted(cands, key=score)[0]
+
+
+_FRAMES: dict = {}
+
+
+def frame_index() -> dict:
+    """token -> [relative png paths], built from ONE walk of public/.
+
+    The first version called rglob per work. public/ holds tens of thousands of frames from
+    every sweep this programme has run, so that was 103 full tree walks and the build did not
+    finish inside two minutes. One walk, one dict.
+    """
+    global _FRAMES
+    if not _FRAMES:
+        pub = ENC / "public"
+        idx = collections.defaultdict(list)
+        for p in pub.rglob("*.png"):
+            idx[p.stem.split("__")[0]].append(p.relative_to(pub).as_posix())
+        _FRAMES = dict(idx)
+    return _FRAMES
+
+
 def hung_in() -> dict:
     """token -> {map name: count of configured placements}"""
     out = collections.defaultdict(collections.Counter)
@@ -145,11 +191,12 @@ def main() -> int:
                 a, b = nd.get("a") or {}, nd.get("b") or {}
                 if a and b:
                     nulls.append((a, b))
-            cat[tok] = dict(label=f"{code}·{i}", gallery=gal, axes=axes,
+            frame = pick_frame(tok, gal, axes, sorted(blocked))
+            cat[tok] = dict(label=f"{code}·{i}", gallery=gal, frame=frame, axes=axes,
                             blocked=sorted(blocked), aabb=aabb, max_span=max_span,
                             placement=tmpl, nulls=nulls, hung=dict(hung.get(tok, {})))
             rows.append((code, f"{code}·{i}", gal, tok, axes, blocked, longest,
-                         max_span, tmpl, nulls, dict(hung.get(tok, {}))))
+                         max_span, tmpl, nulls, dict(hung.get(tok, {})), frame))
 
     (REPO / "ada_run" / "catalogue.json").write_text(json.dumps(cat, indent=1), encoding="utf-8")
 
@@ -182,6 +229,9 @@ code:hover{border-color:var(--brass)}
 a{color:inherit}
 footer{margin-top:56px;border-top:1px solid var(--rule);padding-top:16px;color:var(--dim);font:12px/1.6 var(--mono);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 .mwrap{overflow-x:auto}
+img.th{width:104px;height:104px;object-fit:contain;border:1px solid var(--rule);border-radius:4px;background:#0a0c10;display:block;transition:border-color .15s}
+img.th:hover{border-color:var(--brass)}
+td:first-child{width:104px}
 </style>
 <div class="wrap">
 <p class="eyebrow">Ada Research &middot; placement catalogue</p>
@@ -206,9 +256,9 @@ Click any placement string to copy it.</p>
         out.append(f'<h2><span class="code">{esc(code)}</span>'
                    f'<a href="{href}">{t}</a></h2>')
         out.append(f'<p class="gsub">{len(grp)} work{"s" if len(grp)!=1 else ""}</p>')
-        out.append('<div class="mwrap"><table><tr><th>label</th><th>token</th><th>axes &amp; values</th>'
+        out.append('<div class="mwrap"><table><tr><th></th><th>label</th><th>token</th><th>axes &amp; values</th>'
                    '<th>placement</th><th>room max</th><th>notes</th></tr>')
-        for _, lab, _, tok, axes, blocked, longest, max_span, tmpl, nulls, hg in grp:
+        for _, lab, _, tok, axes, blocked, longest, max_span, tmpl, nulls, hg, frame in grp:
             ax_html = "<br>".join(
                 f'<b>{esc(a)}</b> {esc(" &middot; ".join(v)) if False else " &middot; ".join(esc(x) for x in v)}'
                 + (' <span class="warn">&#9888; cannot hang</span>' if a in blocked else '')
@@ -224,7 +274,10 @@ Click any placement string to copy it.</p>
                 pb = " ".join(f"{k}:{v}" for k, v in b.items())
                 notes.append(f'<span class="null">walkable null &mdash; {esc(pa)} &equiv; {esc(pb)}'
                              + (f' (+{len(nulls)-1} more)' if len(nulls) > 1 else '') + '</span>')
-            out.append(f'<tr><td class="lab">{esc(lab)}</td><td class="tok">{esc(tok)}</td>'
+            thumb = (f'<a href="/{frame}" title="{esc(tok)} — the frame this placement produces">'
+                     f'<img class="th" loading="lazy" src="/{frame}" alt="{esc(tok)}"></a>'
+                     if frame else '<span class="null">no frame</span>')
+            out.append(f'<tr><td>{thumb}</td><td class="lab">{esc(lab)}</td><td class="tok">{esc(tok)}</td>'
                        f'<td class="ax">{ax_html}</td>'
                        f'<td><code onclick="navigator.clipboard&amp;&amp;navigator.clipboard.writeText(this.textContent)">{esc(tmpl)}</code></td>'
                        f'<td class="ax">{span_html}</td><td>{"<br>".join(notes)}</td></tr>')
