@@ -323,6 +323,11 @@ func _ready() -> void:
 
 ## Load blurb.md and intent.md from the current map directory for the info bar
 func _load_map_text() -> void:
+	# call_deferred from _ready, and then a THREE SECOND wait — the widest window in
+	# this artifact for the map to be torn down underneath it. A detached node still
+	# runs its deferred callback, and get_tree() is null there.
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(3.0).timeout  # Wait for map name to be set
 	var map_name: String = ""
 	var gs := _find_grid_system()
@@ -459,6 +464,8 @@ func _get_active_mode() -> String:
 
 
 func _deferred_first_scan() -> void:
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(2.0).timeout  # Wait for all artifacts to be placed
 	# If mode was already set explicitly via config, just connect tracking nodes
 	if _mode_locked:
