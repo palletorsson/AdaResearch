@@ -504,6 +504,30 @@
       "topic": "endless museum autopilot",
       "insight": "Godot's stdout is NOT capturable from the v4.6 Desktop exe (non-console build) — redirecting gives an empty file. file_logging is on in project.godot, so the real log is %APPDATA%/Roaming/Godot/app_userdata/Ada Research Zero One/logs/godot.log. That log is how the courtyard prints (court width 16 clamped to corridor 15) become readable.",
       "lod": 3
+    },
+    {
+      "timestamp": "2026-08-15T07:32:21.844404+00:00",
+      "topic": "gate_f_autopilot",
+      "insight": "cells_unlearned counted stall events, not cells: _auto_path is never cleared, so both early returns in _auto_plan leave a dead plan standing and the walker grinds one wall. 26 was 6 cells and 18 no-ops. Frontier z=44 sits inside segment 2, seams [0,34][34,68][68,102].",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-08-16T07:21:14.481625+00:00",
+      "topic": "endless_museum seal",
+      "insight": "Colliders were clamped to a 5-cell seal like meshes; a 9m lab_room left 10 corridor cells walkable and blocked. Collision extent now seals unclamped to MAX_BODY_RADIUS, and _reaches_all's probe budget was 400 cells - below one segment - so it reported 'no severance' by running out. Gate F: red 4 days -> green, 0 stalls.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-08-16T20:35:02.023464+00:00",
+      "topic": "breath harvest",
+      "insight": "A green gate is a fact about a TREE: Gate F passed 6/6 live on 08-16 while HEAD still held SEAL_PROBE_CELLS=400 and zero commits had landed. The breath log asserted two commits that git says never happened.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-08-18T07:20:32.916633+00:00",
+      "topic": "gate_f_seal_overflow",
+      "insight": "seal_overflow records only the MESH clamp (MAX_SEAL_RADIUS=2); the COLLIDER clamp (MAX_BODY_RADIUS=6) is the one that can strand a walker and it records nothing. A mesh overflow cannot cause a stall - colliders seal unclamped 45 lines below the comment that says otherwise.",
+      "lod": 3
     }
   ]
 }

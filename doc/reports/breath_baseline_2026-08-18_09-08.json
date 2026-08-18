@@ -1,0 +1,60 @@
+{
+  "timestamp": "2026-08-18T09:08:00",
+  "phase": "baseline",
+  "head_at_baseline": "f490260a5",
+  "head_at_harvest": "590c84eb6",
+  "note": "HEAD moved four times during this breath. See contention block below.",
+  "pipeline_summary": {
+    "global_avg": 6.083,
+    "sequences_scored": 24,
+    "complete": 1,
+    "at_stage_6_vr_testing": 23,
+    "at_stage_8_complete": 1,
+    "reading": "Unchanged since 2026-08-14. The whole spine is parked at stage 6 (vr_testing), which no autonomous breath can advance -- it needs a human in a headset. The pipeline lever is not available to this agent."
+  },
+  "heat_map_top_5": [
+    { "temp": 80, "item": "museum", "why": "active (6 recent commits)" },
+    { "temp": 60, "item": "gate_f_autopilot", "why": "deep discovery: cells_unlearned" },
+    { "temp": 60, "item": "endless_museum seal", "why": "deep discovery: colliders" },
+    { "temp": 60, "item": "breath harvest", "why": "deep discovery: a green gate is not a committed gate" }
+  ],
+  "garden_health": {
+    "total_artifacts": 2586,
+    "voiced": 1854,
+    "embodied": 564,
+    "voice_coverage_pct": 71,
+    "embodiment_rate_pct": 30,
+    "phantom_limbs": 1065
+  },
+  "release_gates": {
+    "A_sequence_contract": "PASS",
+    "B_artifact_registry": "PASS",
+    "C_map_validation": "PASS (gradeA 1886 / B 355 / C 186 / F 0)",
+    "D_lab_progression": "PASS",
+    "E_museum_template": "PASS (900/900 chain pairs)",
+    "F_museum_walkthrough": "FAIL",
+    "F_detail": {
+      "museums": 3,
+      "z_reached": 62.0,
+      "goal_z": 107.0,
+      "walked_s": 51.5,
+      "cells_unlearned": 15,
+      "stall_events": 23,
+      "frontier_z": 61,
+      "seal_overflow": 9,
+      "reason": "no_route"
+    }
+  },
+  "em_gates_observed": {
+    "source": "ada_run/gates.json, written by the CONCURRENT session, head ac78d0ef2",
+    "note": "Not this breath's measurement. Recorded because it is evidence of the concurrent writer.",
+    "red": ["side_room"],
+    "green": ["contract", "plan_chapters", "world_register", "editor", "furniture", "prop_insitu", "prop_wall", "bays", "vr_floor", "bounds", "desktop_hand", "bridge_courts", "pearls"]
+  },
+  "contention": {
+    "detected": true,
+    "how": "Three Godot processes live (pids 31904 / 33628 / 37880, one of them started at 09:08:27 mid-sample). HEAD advanced f490260a5 -> b9668aa60 -> 590c84eb6 while this breath ran. ada_run/gates.json and ada_run/em_autopilot.json rewritten at 09:07. Dirty count 892-894, fluctuating.",
+    "writer_scope": "museum / em / trunk -- commons/scenes/endless_museum.gd, commons/scenes/em/*, commons/testing/test_em_*, tools/run_em_gates.py, commons/artifacts/museum (18 dirty), commons/artifacts/dressing_rooms (35 dirty)",
+    "consequence": "The hottest item and the only red release gate are the same system the concurrent writer is holding. This breath did not edit it."
+  }
+}
