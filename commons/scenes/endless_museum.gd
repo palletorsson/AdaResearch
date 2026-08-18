@@ -230,6 +230,8 @@ var _gate: Dictionary = {}
 var _gate_t: float = -1.0          # seconds since the grant; < 0 = still sealed
 var _lazy_pending: int = 0         # segments still owed from the opening build
 var _lazy_delay: float = 0.0
+const AUTOSAVE_S := 0.6            # a ruling writes itself this long after the last keystroke
+var _autosave_t: float = 0.0
 var _showing_cards: Array = []     # every wall card built this run: chapter · pearl · number, world pos
 # THE INVENTORY (2026-08-18, Palle: "it should say primitives:0001, like in a
 # museum; the artifact should also be part of the numbering system"). Every
@@ -4689,6 +4691,23 @@ func _process(_delta: float) -> void:
 			_lazy_pending -= 1
 			_lazy_delay = 0.0
 			_build_segment()
+	# AUTOSAVE (2026-08-18, Palle: "why can we use the desktop as an editor and
+	# save the changes directly into the json?"). Every ruling writes itself
+	# within AUTOSAVE_S — F5 stays, as the way to say "now", but nothing waits
+	# on it. The write is a MERGE (em_editor.save), so a ruling made elsewhere
+	# since this session loaded is kept rather than clobbered.
+	if _edit_dirty and _mod_editor != null:
+		_autosave_t += _delta
+		if _autosave_t >= AUTOSAVE_S:
+			_autosave_t = 0.0
+			if _mod_editor.call("save", _edit_overrides, _overrides_path):
+				print("[em-edit] autosaved %d ruling(s) -> %s" % [_edit_overrides.size(), _overrides_path])
+				if not _edit_prop_rules.is_empty() and _save_prop_rules():
+					_edit_prop_rules.clear()
+				_edit_dirty = false
+				if _edit_hud != null and _mod_editor != null:
+					_edit_hud.text = _mod_editor.call("hud_text", _edit_records, _edit_sel,
+						_edit_overrides, false, _edit_pal, _edit_pal_i)
 	if _gate_t >= 0.0 and _mod_gate != null and not _gate.is_empty():
 		_gate_t += _delta
 		if not bool(_mod_gate.call("step_open", _gate, _gate_t)):

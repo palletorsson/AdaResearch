@@ -52,6 +52,7 @@ GATES: dict[str, tuple[str, str, str, int]] = {
     "balcony_ask":   ("py", "tools/test_balcony_ask.py", r"BALCONY ASK: (PASS|FAIL)", 120),
     "hall":          ("gd", "res://commons/testing/test_em_hall.gd", r"EM HALL: (PASS|FAIL)", 500),
     "threshold_gate":("gd", "res://commons/testing/test_em_gate.gd", r"EM GATE: (PASS|FAIL)", 400),
+    "autosave":      ("gd", "res://commons/testing/test_em_autosave.gd", r"EM AUTOSAVE: (PASS|FAIL|SKIP)", 400),
 }
 
 

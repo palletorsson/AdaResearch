@@ -79,7 +79,47 @@ static func override_for(records: Array, idx: int, overrides: Array) -> Dictiona
 	return ov
 
 
+## The key a ruling is known by: chapter, token, its plan cell, and the kind
+## (artifact / furniture / plinth / showing) — the same tuple the dealer
+## matches on. Two rulings with this key are the same ruling.
+static func _key(o: Dictionary) -> String:
+	# THE CELL IS TWO INTS, WHATEVER JSON SAYS. A round trip through the file
+	# turns [12, 10] into [12.0, 10.0], so a key built by str() never matched
+	# its own earlier row and every autosave appended a duplicate.
+	var fr: Array = o.get("from", []) as Array
+	var cell := ""
+	for v in fr:
+		cell += "%d," % int(v)
+	return "%s|%s|%s|%s|%d" % [String(o.get("chapter", "")), String(o.get("token", "")),
+		cell, String(o.get("kind", "")), int(o.get("index", -1))]
+
+
+## SAVE IS A MERGE, NOT A REPLACEMENT (2026-08-18). A save used to write the
+## session's list over the file, so every ruling written since this session
+## loaded — by the other agent, by a second museum, by a tool — was silently
+## dropped. Palle lost nine that way in one afternoon. Now: re-read the file,
+## replace the rows this session actually touched, keep every other row, and
+## report what came in from elsewhere.
 static func save(overrides: Array, path: String = OVERRIDES_PATH) -> bool:
+	var mine: Dictionary = {}
+	for o in overrides:
+		mine[_key(o as Dictionary)] = o
+	var merged: Array = []
+	var kept: int = 0
+	if FileAccess.file_exists(path):
+		var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+		if parsed is Dictionary:
+			for row_v in ((parsed as Dictionary).get("overrides", []) as Array):
+				var row: Dictionary = row_v as Dictionary
+				if mine.has(_key(row)):
+					continue                 # this session has a newer word on it
+				merged.append(row)
+				kept += 1
+	for o in overrides:
+		merged.append(o)
+	if kept > 0:
+		print("[em-edit] merged: %d ruling(s) of mine, %d kept from the file" % [overrides.size(), kept])
+	overrides = merged
 	var doc: Dictionary = {
 		"schema": "adaresearch.em_overrides.v1",
 		"_readme": ("Hand placement rulings over em_plan.json, written by the "

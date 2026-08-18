@@ -7,6 +7,11 @@
 				1,
 				3
 			],
+			"offset": [
+				0.0,
+				0.2,
+				0.0
+			],
 			"provenance": "hand",
 			"remove": false,
 			"rotation": 0.0,
@@ -16,6 +21,119 @@
 				4
 			],
 			"token": "CoordinateSystem3M"
+		},
+		{
+			"chapter": "primitives",
+			"from": [
+				9,
+				15
+			],
+			"offset": [
+				0.0,
+				0.2,
+				0.0
+			],
+			"provenance": "hand",
+			"remove": false,
+			"rotation": 0.0,
+			"to": [
+				7,
+				15
+			],
+			"token": "you_are_here"
+		},
+		{
+			"chapter": "primitives",
+			"from": [
+				13,
+				3
+			],
+			"kind": "plinth",
+			"offset": [
+				-1.0,
+				0.0,
+				0.0
+			],
+			"provenance": "hand",
+			"to": [
+				-1,
+				0
+			],
+			"token": "origin"
+		},
+		{
+			"chapter": "primitives",
+			"from": [
+				5,
+				22
+			],
+			"offset": [
+				0.0,
+				0.8,
+				0.0
+			],
+			"provenance": "hand",
+			"remove": false,
+			"rotation": 0.0,
+			"to": [
+				5,
+				22
+			],
+			"token": "fontana_puncture"
+		},
+		{
+			"chapter": "primitives",
+			"from": [
+				1,
+				21
+			],
+			"offset": [
+				0.0,
+				1.0,
+				0.0
+			],
+			"provenance": "hand",
+			"remove": false,
+			"rotation": 0.0,
+			"to": [
+				1,
+				21
+			],
+			"token": "fontana_puncture"
+		},
+		{
+			"chapter": "primitives",
+			"from": [
+				1,
+				14
+			],
+			"provenance": "hand",
+			"remove": false,
+			"rotation": 0.0,
+			"to": [
+				2,
+				14
+			],
+			"token": "you_are_here"
+		},
+		{
+			"chapter": "primitives",
+			"from": [
+				5,
+				10
+			],
+			"kind": "plinth",
+			"offset": [
+				2.0,
+				0.0,
+				-1.0
+			],
+			"provenance": "hand",
+			"to": [
+				2,
+				-1
+			],
+			"token": "origin"
 		}
 	],
 	"schema": "adaresearch.em_overrides.v1"
