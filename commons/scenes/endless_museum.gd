@@ -216,6 +216,17 @@ const AUTO_IDLE_LIMIT: int = 8
 var _walk_erased: Dictionary = {}  # Vector2i -> String provenance
 var _auto_reach: Dictionary = {}   # last BFS's reachable set, for the cut
 var _seal_overflow: Array = []     # bodies too wide for MAX_SEAL_RADIUS to seal
+var _showing_cards: Array = []     # every wall card built this run: chapter · pearl · number, world pos
+const SHOWING_CARDS := "res://ada_run/em_showing_cards.json"
+
+func _save_showing_cards() -> void:
+	var f: FileAccess = FileAccess.open(SHOWING_CARDS, FileAccess.WRITE)
+	if f == null:
+		return
+	f.store_string(JSON.stringify({"schema": "adaresearch.em_showing_cards.v1",
+		"_readme": "Every wall showing's card, this run: id = chapter · pearl · number (the number is the showing's index in its segment). Rule on one via em_overrides kind showing (offset) or a `text` field on that rule; a swap for another wall-hanging body is the next rule.",
+		"cards": _showing_cards}, "\t"))
+	f.close()
 # THE LIVE FOOTPRINT LEDGER (2026-08-18). The registry's measurement is a
 # STILL — a body that grows at runtime (a builder, a sim, a field) can stand
 # forty metres wide in a corridor the negotiator planned for four. When a
@@ -1840,7 +1851,20 @@ func _build_segment() -> void:
 					# the hand's rulings on this chapter's showings, and the
 					# selectable proxies the editor picks (desktop only)
 					"showing_rules": _furniture_rules(next_seq, "showing"),
-					"showing_proxies": not _vr})
+					"showing_proxies": not _vr,
+					# the CARDS name their place: chapter · pearl · number
+					"chapter": next_seq,
+					"pearl": String(deal.get("pearl", "")) if deal is Dictionary else ""})
+			# the card ledger: every showing's place id and world position, so a
+			# hand can refer to "primitives · lines · 07" and rule on it later
+			for ch_node in seg.get_children():
+				if ch_node.has_meta("em_showing_card"):
+					_showing_cards.append({"segment": _seg_index - 1, "chapter": next_seq,
+						"pearl": String(deal.get("pearl", "")) if deal is Dictionary else "",
+						"index": int(ch_node.get_meta("em_showing_card")) + 1,
+						"id": "%s · %s · %02d" % [next_seq, String(deal.get("pearl", "")) if deal is Dictionary else "-", int(ch_node.get_meta("em_showing_card")) + 1],
+						"world": [snappedf((ch_node as Node3D).global_position.x, 0.1), snappedf((ch_node as Node3D).global_position.y, 0.1), snappedf((ch_node as Node3D).global_position.z, 0.1)]})
+			_save_showing_cards()
 			# every showing proxy becomes an editor record of kind "showing"
 			if not _vr:
 				for ch_node in seg.get_children():

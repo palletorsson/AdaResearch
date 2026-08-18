@@ -449,9 +449,19 @@ static func dress_segment(seg: Node3D, tile: Array, w: int, h: int, mats, prev_w
 			var fi: int = si * 4 + k
 			if fi < hang_frame_x.size():
 				hang_frame_x[fi] = (hang_frame_x[fi] as Transform3D).translated(off)
-	_emit(seg, "WallFrames", hang_frame_x, lib.get("plinth"), true)
+	# FRAMES ARE OFF-WHITE (Palle, 2026-08-18, walking primitives): the dark
+	# oak read as furniture; a museum frame around a field is pale, and the
+	# off-white sits between the 0.78 mount and the wall without competing.
+	_emit(seg, "WallFrames", hang_frame_x, _hang_frame_mat(), true)
 	_emit(seg, "WallMounts", hang_mount_x, _hang_mount_mat(), false)
 	_emit(seg, "WallFields", hang_field_x, _hang_field_mat(), false)
+	# THE CARD. Every showing gets a small 2D-in-3D museum card under its
+	# lower-right corner: a NUMBER first (the place — "07"), the chapter ·
+	# pearl under it, and any TEXT the hand ruled for that index (showing_rules
+	# `text`). The number is the showing's index in this segment, so
+	# "primitives · lines · 07" names one wall place across builds of the same
+	# plan; later a rule may swap the field for another wall-hanging body.
+	_add_showing_cards(seg, hang_mount_x, opts)
 	# one SELECTABLE proxy per showing: an empty Node3D at the mount's centre
 	# carrying its index, so the editor can pick a picture the way it picks an
 	# artifact. Invisible, no mesh, no collider — a handle, not a body.
@@ -802,6 +812,67 @@ static func _hang_box(u: float, y: float, fixed: float, along_x: bool, nrm: floa
 ## one 50-level band, no highlight and no committed dark). A mount at 0.78 and a
 ## field at 0.12 are the two ends the picture is missing, and asking the library
 ## for them would just return another mid-grey.
+static func _hang_frame_mat() -> Material:
+	return _fallback(Color(0.925, 0.915, 0.885), 0.55, 0.0)   # off-white, a shade warmer than the mount
+
+
+const CARD_W := 0.14
+const CARD_H := 0.09
+const CARD_DROP := 0.10          # below the mount's bottom edge
+static func _add_showing_cards(seg: Node3D, mounts: Array, opts: Dictionary) -> void:
+	var chapter := String(opts.get("chapter", ""))
+	var pearl := String(opts.get("pearl", ""))
+	var texts: Dictionary = {}
+	for rule_v in opts.get("showing_rules", []):
+		var rule: Dictionary = rule_v
+		if rule.has("text") and String(rule.get("text", "")) != "":
+			texts[int(rule.get("index", -1))] = String(rule["text"])
+	var card_mat: StandardMaterial3D = _fallback(Color(0.97, 0.965, 0.95), 0.6, 0.0)
+	for si in range(mounts.size()):
+		var t: Transform3D = mounts[si]
+		var wm: float = t.basis.get_scale().x if absf(t.basis.get_scale().x) > absf(t.basis.get_scale().z) else t.basis.get_scale().z
+		var hm: float = t.basis.get_scale().y
+		var along_x: bool = absf(t.basis.get_scale().x) > absf(t.basis.get_scale().z)
+		var depth: float = t.basis.get_scale().z if along_x else t.basis.get_scale().x
+		# outward normal: the mount is proud of the wall along its thin axis, in the sign of its offset from the wall plane —
+		# recovered from the transform: the thin axis' direction from the wall (fixed) to the mount centre
+		var nrm := 1.0
+		var origin: Vector3 = t.origin
+		var fixed_guess: float = (origin.z if along_x else origin.x)
+		var frac: float = fixed_guess - floor(fixed_guess)          # the mount is proud of an integer wall plane by half its depth
+		nrm = 1.0 if frac < 0.5 else -1.0                             # a small positive fraction means it sits on the +normal side
+		var card := MeshInstance3D.new()
+		var bm := BoxMesh.new()
+		bm.size = Vector3(CARD_W, CARD_H, 0.006) if along_x else Vector3(0.006, CARD_H, CARD_W)
+		card.mesh = bm
+		card.material_override = card_mat
+		var u_off: float = wm * 0.5 - CARD_W * 0.5
+		var pos: Vector3 = origin
+		if along_x:
+			pos.x += u_off; pos.y -= hm * 0.5 + CARD_DROP; pos.z = origin.z + nrm * (0.003 - depth * 0.5)
+		else:
+			pos.z += u_off; pos.y -= hm * 0.5 + CARD_DROP; pos.x = origin.x + nrm * (0.003 - depth * 0.5)
+		card.position = pos
+		card.name = "ShowingCard%d" % si
+		card.set_meta("em_showing_card", si)
+		seg.add_child(card)
+		var lbl := Label3D.new()
+		lbl.text = "%02d" % (si + 1) + "\n" + (texts.get(si, "") if texts.has(si) else ("%s · %s" % [chapter, pearl] if pearl != "" else chapter)).left(28)
+		lbl.font_size = 40
+		lbl.pixel_size = 0.0009
+		lbl.modulate = Color(0.12, 0.11, 0.1)
+		lbl.outline_size = 0
+		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		lbl.no_depth_test = false
+		lbl.position = Vector3(0, 0, 0.004 * nrm) if along_x else Vector3(0.004 * nrm, 0, 0)
+		if along_x:
+			lbl.rotation_degrees.y = 0.0 if nrm > 0.0 else 180.0
+		else:
+			lbl.rotation_degrees.y = 90.0 if nrm > 0.0 else -90.0
+		card.add_child(lbl)
+
+
 static func _hang_mount_mat() -> Material:
 	return _fallback(Color(0.78, 0.765, 0.735), 0.72, 0.0)
 
