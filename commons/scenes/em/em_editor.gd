@@ -140,6 +140,9 @@ static func save(overrides: Array, path: String = OVERRIDES_PATH) -> bool:
 
 
 static func load_file(path: String = OVERRIDES_PATH) -> Array:
+	# an export carries commons/data/museum/em_overrides.json, not ada_run/ (see endless_museum._shipped)
+	if not FileAccess.file_exists(path) and FileAccess.file_exists("res://commons/data/museum/" + path.get_file()):
+		path = "res://commons/data/museum/" + path.get_file()
 	if not FileAccess.file_exists(path):
 		return []
 	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))

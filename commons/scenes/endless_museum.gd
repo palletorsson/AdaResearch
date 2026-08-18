@@ -375,6 +375,18 @@ var _pearl_cursor: Dictionary = {}
 ## bake never saw (a plan row newer than the bake) goes the live way and is
 ## counted as `unbaked`, which is how a stale bake shows itself.
 const BAKE_PATH := "res://ada_run/em_bake.json"
+## SHIPPED COPIES (2026-08-18). The museum's generated files are authored in
+## ada_run/, which exports have excluded (the Quest 3 walked a plan-less v1
+## museum for a day because of it). `python tools/em_ship.py` copies the four
+## runtime files — plan, bake, control, overrides — into
+## commons/data/museum/, a folder every export carries. A read tries the
+## authoring path first (desktop, editor) and falls back to the shipped copy.
+const SHIPPED_DIR := "res://commons/data/museum/"
+static func _shipped(path: String) -> String:
+	if path == "" or FileAccess.file_exists(path):
+		return path
+	var alt: String = SHIPPED_DIR + path.get_file()
+	return alt if FileAccess.file_exists(alt) else path
 var _bake_mode: bool = false            # --em-bake: build every pearl, write the bake, quit
 var _bake_out: Dictionary = {}          # "chapter|pearl" -> {museum, placed, refused}
 var _bake_in: Dictionary = {}           # the same, read back for replay
@@ -413,12 +425,15 @@ func _bake_lookup(lookup: String, cell: Dictionary) -> Dictionary:
 
 func _load_bake() -> void:
 	_replay = false
-	if _bake_mode or not FileAccess.file_exists(BAKE_PATH):
+	var bake_path: String = _shipped(BAKE_PATH)
+	if _bake_mode or not FileAccess.file_exists(bake_path):
+		if not _bake_mode:
+			print("[em-bake] NO BAKE at %s (nor %s) — the runtime measures every seal, as before" % [BAKE_PATH, SHIPPED_DIR])
 		return
 	if _L("bake", "replay", 1.0) < 0.5:
 		print("[em-bake] replay OFF by em_layout.bake.replay — the runtime measures, as before")
 		return
-	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(BAKE_PATH))
+	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(bake_path))
 	if not (parsed is Dictionary) or not (parsed as Dictionary).has("segments"):
 		return
 	_bake_in = (parsed as Dictionary)["segments"]
@@ -427,7 +442,9 @@ func _load_bake() -> void:
 	var plan_at: String = String((parsed as Dictionary).get("plan_at", ""))
 	print("[em-bake] REPLAY — %d pearl(s) baked %s from plan %s; no body is measured for its seal" % [
 		_bake_in.size(), _bake_at, plan_at])
-	if _plan_path != "" and FileAccess.file_exists(_plan_path) 			and FileAccess.get_modified_time(_plan_path) > FileAccess.get_modified_time(BAKE_PATH) + 1:
+	# staleness by mtime is an AUTHORING-tree question (ada_run/); shipped
+	# copies are written together and a pak has no mtimes at all
+	if _plan_path.begins_with("res://ada_run/") and bake_path.begins_with("res://ada_run/") 			and FileAccess.file_exists(_plan_path) 			and FileAccess.get_modified_time(_plan_path) > FileAccess.get_modified_time(bake_path) + 1:
 		_bake_stale = true
 		print("[em-bake] STALE — the plan was edited after the bake; rows the bake never saw go the live way (see `unbaked` in em_built.json). Re-bake: python tools/em_bake.py")
 
@@ -637,6 +654,11 @@ func _ready() -> void:
 	_start_at_chapter()
 	# after the pool, because a plan naming an artifact the pool never built is
 	# a stale plan and the museum should be able to say so by name.
+	_plan_path = _shipped(_plan_path)
+	if _plan_path != "" and not FileAccess.file_exists(_plan_path):
+		push_warning("[em-plan] PLAN MISSING: %s is not in this build (nor %s) — dealing from the pool as v1; run python tools/em_ship.py and re-export" % [_plan_path, SHIPPED_DIR])
+	else:
+		print("[em-plan] plan: %s" % _plan_path)
 	_load_plan()
 	_load_bake()
 	if _bake_mode:
@@ -1194,8 +1216,9 @@ func _start_at_chapter() -> void:
 	# (the control file only speaks for a launch that has neither)
 	if _first_chapter == "" and start_chapter != "":
 		_first_chapter = start_chapter            # the Inspector's voice
-	if _first_chapter == "" and FileAccess.file_exists(EM_CONTROL):
-		var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(EM_CONTROL))
+	var control_path: String = _shipped(EM_CONTROL)
+	if _first_chapter == "" and FileAccess.file_exists(control_path):
+		var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(control_path))
 		if parsed is Dictionary:
 			_first_chapter = String((parsed as Dictionary).get("first_chapter", ""))
 			if start_map == "":

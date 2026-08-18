@@ -65,6 +65,7 @@ def main() -> int:
     placed = sum(len(v.get("placed", [])) for v in segs.values())
     refused = sum(len(v.get("refused", [])) for v in segs.values())
     print(f"EM BAKE: {len(segs)} pearl(s), {placed} placed, {refused} refused, {dt:.0f}s → {BAKE}")
+    subprocess.run([sys.executable, str(REPO / "tools" / "em_ship.py")], cwd=REPO)   # into the export
     return 0
 
 
