@@ -2337,17 +2337,39 @@ func _number_places(seg: Node3D, chapter: String, pearl: String) -> void:
 					var tail := was.substr(was.find("\n") + 1) if was.contains("\n") else ""
 					(c as Label3D).text = id + "\n" + tail
 		else:
+			# A STANDING CAPTION, not a mark on the floor (2026-08-18: the first
+			# version lay flat at 5 cm and was invisible in both modes). An
+			# off-white plaque on a thin post at reading height, a step in front
+			# of the body, facing the way the visitor walks in: the number, and
+			# the token under it — the same card the wall showings carry.
+			var post := MeshInstance3D.new()
+			post.name = "Caption%s" % id.replace(":", "_")
+			var pm := BoxMesh.new(); pm.size = Vector3(0.035, 0.62, 0.035)
+			post.mesh = pm
+			post.material_override = _sm("plinth")
+			post.position = Vector3(0.0, 0.31, -0.75)
+			node.add_child(post)
+			var plaque := MeshInstance3D.new()
+			var qm := BoxMesh.new(); qm.size = Vector3(0.30, 0.13, 0.012)
+			plaque.mesh = qm
+			var qmat := StandardMaterial3D.new()
+			qmat.albedo_color = Color(0.955, 0.95, 0.93)
+			qmat.roughness = 0.6
+			plaque.material_override = qmat
+			plaque.position = Vector3(0.0, 0.66, -0.75)
+			plaque.rotation_degrees = Vector3(-18.0, 180.0, 0.0)   # tilted up to the eye, facing the walk
+			node.add_child(plaque)
 			var plate := Label3D.new()
-			plate.text = id
-			plate.font_size = 34
-			plate.pixel_size = 0.0016
-			plate.modulate = Color(0.88, 0.87, 0.84)
-			plate.outline_size = 6
-			plate.outline_modulate = Color(0.08, 0.08, 0.09, 0.9)
-			plate.billboard = BaseMaterial3D.BILLBOARD_DISABLED
-			plate.rotation_degrees.x = -90.0            # lies on the floor, read from above
-			plate.position = Vector3(0.0, 0.02, 0.55)   # a step in front of the body's foot
-			node.add_child(plate)
+			plate.text = id + "
+" + tok.left(22)
+			plate.font_size = 44
+			plate.pixel_size = 0.0022                  # ~10 cm of number, read at 2 m
+			plate.modulate = Color(0.11, 0.10, 0.09)
+			plate.outline_size = 0
+			plate.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			plate.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+			plate.position = Vector3(0.0, 0.0, -0.008)
+			plaque.add_child(plate)
 			(pl["rec"] as Dictionary)["inv"] = id
 		_inventory.append({"id": id, "chapter": chapter, "pearl": pearl, "kind": kind,
 			"token": tok, "segment": _seg_index - 1,
