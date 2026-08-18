@@ -62,6 +62,7 @@ GATES: dict[str, tuple[str, str, str, int]] = {
     "mode_forks":    ("py", "tools/test_em_mode_forks.py", r"MODE FORKS: (PASS|FAIL)", 30),
     "built":         ("gd", "res://commons/testing/test_em_built.gd", r"EM BUILT: (PASS|FAIL)", 400),
     "plain_hands":   ("gd", "res://commons/testing/test_em_plain_hands.gd", r"EM PLAIN HANDS: (PASS|FAIL)", 400),
+    "bake_fresh":    ("py", "tools/em_bake.py --check", r"EM BAKE: .*(fresh|STALE|MISSING)", 30),
 }
 
 
@@ -75,7 +76,8 @@ def head() -> str:
 
 def run_gate(name: str, kind: str, target: str, pat: str, timeout: int) -> dict:
     if kind == "py":
-        argv = [sys.executable, str(REPO / target)]
+        parts = target.split()
+        argv = [sys.executable, str(REPO / parts[0])] + parts[1:]
     else:
         argv = [GODOT, "--headless", "--path", str(REPO), "--xr-mode", "off", "--script", target]
     t0 = time.time()

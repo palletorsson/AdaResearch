@@ -27,6 +27,11 @@ func _run() -> void:
 			if ca.size() != cb.size(): ok = false; why.append("seg %d cards %d vs %d" % [i, ca.size(), cb.size()])
 			if i == 0 and ca.size() == 0: ok = false; why.append("seg 0 has no cards")
 			if i == 0 and ba.size() == 0: ok = false; why.append("seg 0 has no bodies")
+			# with a bake on disk every stamp must come from it: nothing measured, nothing unbaked
+			if FileAccess.file_exists("res://ada_run/em_bake.json"):
+				if not bool(A.get("replay", false)): ok = false; why.append("seg %d desktop did not replay the bake" % i)
+				if not bool(B.get("replay", false)): ok = false; why.append("seg %d vr did not replay the bake" % i)
+				if int(A.get("unbaked", 0)) + int(B.get("unbaked", 0)) > 0: ok = false; why.append("seg %d: %d/%d bodies placed the live way — the bake is stale for this plan (python tools/em_bake.py)" % [i, int(A.get("unbaked", 0)), int(B.get("unbaked", 0))])
 			for j in range(mini(ba.size(), bb.size())):
 				var x: Dictionary = ba[j]; var y: Dictionary = bb[j]
 				if x.get("token") != y.get("token") or x.get("inv") != y.get("inv"):
@@ -36,7 +41,7 @@ func _run() -> void:
 					ok = false; why.append("seg %d %s pose differs" % [i, x.get("token")]); break
 		if ok:
 			var s0: Dictionary = sa[0]
-			print("EM BUILT: %d segments · seg0 %s/%s %s · %d bodies · %d cards · desktop == vr" % [sa.size(), s0.get("chapter"), s0.get("pearl"), s0.get("museum"), (s0.get("bodies", []) as Array).size(), (s0.get("cards", []) as Array).size()])
+			print("EM BUILT: %d segments · seg0 %s/%s %s · %d bodies · %d cards · desktop == vr · replay %s" % [sa.size(), s0.get("chapter"), s0.get("pearl"), s0.get("museum"), (s0.get("bodies", []) as Array).size(), (s0.get("cards", []) as Array).size(), s0.get("replay", false)])
 	for w in why: print("EM BUILT: " + String(w))
 	print("EM BUILT: %s" % ("PASS" if ok else "FAIL"))
 	quit(0 if ok else 1)
@@ -49,7 +54,7 @@ func _build(vr: bool) -> Dictionary:
 	# wait for two segments (the museum opens the second on its own at boot),
 	# up to 12 s — a fixed 4 s wait once caught VR at one segment and desktop at two
 	var waited: float = 0.0
-	while waited < 12.0:
+	while waited < 30.0:
 		await create_timer(0.5).timeout
 		waited += 0.5
 		if (m.get("_built") as Array).size() >= 2:

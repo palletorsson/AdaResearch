@@ -359,6 +359,98 @@ var _plan_path: String = ""       # --em-plan[=res://...]; empty = deal as befor
 # "building|sequence" -> rows in pearl order; _pearl_cursor[chapter] = next.
 var _plan_pearls: Dictionary = {}
 var _pearl_cursor: Dictionary = {}
+
+## THE BAKE (2026-08-18). Palle: "VR still shows less and other artifacts.
+## How can we rebuild the system so we know we read from the same generated
+## files, no real time generation." The runtime used to MEASURE each body's
+## AABB the instant it entered the tree and decide its seal and two of its
+## refusals from that — and a physics artifact (line_builder_3d) measured
+## differently every run, so the same plan built different rooms. The bake
+## decides once: a headless run (--em-bake) walks every pearl and writes, per
+## "chapter|pearl", the bodies it PLACED (token, cell, the exact cells sealed)
+## and the bodies it REFUSED (token, cell, why) to ada_run/em_bake.json.
+## With the file present, every later run — desktop or headset — REPLAYS it:
+## a baked body seals its baked cells with no measurement and no reach probe,
+## a refused body is refused before it is even instantiated, and a body the
+## bake never saw (a plan row newer than the bake) goes the live way and is
+## counted as `unbaked`, which is how a stale bake shows itself.
+const BAKE_PATH := "res://ada_run/em_bake.json"
+var _bake_mode: bool = false            # --em-bake: build every pearl, write the bake, quit
+var _bake_out: Dictionary = {}          # "chapter|pearl" -> {museum, placed, refused}
+var _bake_in: Dictionary = {}           # the same, read back for replay
+var _bake_at: String = ""
+var _replay: bool = false
+var _bake_stale: bool = false
+var _bake_key: String = ""              # "chapter|pearl" of the segment being built
+var _bake_used: Dictionary = {}         # per key: "tok|x|y" -> how many times looked up
+var _seg_placed: Array = []             # this segment's placed rows (for the bake)
+var _seg_unbaked: int = 0               # bodies this segment placed the live way while replaying
+var _last_seal_cells: Array = []        # absolute cells the last _seal_cells took
+var _bake_total: int = 0                # pearls to bake
+
+func _bake_lookup(lookup: String, cell: Dictionary) -> Dictionary:
+	if not _replay or _bake_key == "" or not _bake_in.has(_bake_key):
+		return {}
+	var e: Dictionary = _bake_in[_bake_key]
+	var k := "%s|%d|%d" % [lookup, int(cell.get("x", 0)), int(cell.get("y", 0))]
+	var nth: int = int(_bake_used.get(k, 0))
+	_bake_used[k] = nth + 1
+	var seen: int = 0
+	for r in e.get("placed", []):
+		var rd: Dictionary = r
+		if String(rd.get("token", "")) == lookup and int((rd.get("cell", [0, 0]) as Array)[0]) == int(cell.get("x", 0)) 				and int((rd.get("cell", [0, 0]) as Array)[1]) == int(cell.get("y", 0)):
+			if seen == nth:
+				return {"seal": rd.get("seal", [])}
+			seen += 1
+	for r in e.get("refused", []):
+		var rd: Dictionary = r
+		var rc: Array = rd.get("tile_cell", rd.get("cell", [0, 0]))   # refusals are written as tile_cell
+		if String(rd.get("token", "")) == lookup and int(rc[0]) == int(cell.get("x", 0)) 				and int(rc[1]) == int(cell.get("y", 0)):
+			if seen == nth:
+				return {"refused": String(rd.get("why", ""))}
+			seen += 1
+	return {}
+
+func _load_bake() -> void:
+	_replay = false
+	if _bake_mode or not FileAccess.file_exists(BAKE_PATH):
+		return
+	if _L("bake", "replay", 1.0) < 0.5:
+		print("[em-bake] replay OFF by em_layout.bake.replay — the runtime measures, as before")
+		return
+	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(BAKE_PATH))
+	if not (parsed is Dictionary) or not (parsed as Dictionary).has("segments"):
+		return
+	_bake_in = (parsed as Dictionary)["segments"]
+	_bake_at = String((parsed as Dictionary).get("at", ""))
+	_replay = true
+	var plan_at: String = String((parsed as Dictionary).get("plan_at", ""))
+	print("[em-bake] REPLAY — %d pearl(s) baked %s from plan %s; no body is measured for its seal" % [
+		_bake_in.size(), _bake_at, plan_at])
+	if _plan_path != "" and FileAccess.file_exists(_plan_path) 			and FileAccess.get_modified_time(_plan_path) > FileAccess.get_modified_time(BAKE_PATH) + 1:
+		_bake_stale = true
+		print("[em-bake] STALE — the plan was edited after the bake; rows the bake never saw go the live way (see `unbaked` in em_built.json). Re-bake: python tools/em_bake.py")
+
+func _write_bake() -> void:
+	var f: FileAccess = FileAccess.open(BAKE_PATH, FileAccess.WRITE)
+	if f == null:
+		return
+	f.store_string(JSON.stringify({"schema": "adaresearch.em_bake.v1",
+		"_readme": ("The BAKE: every placement decision the museum makes from a measurement, decided ONCE by a "
+			+ "headless --em-bake run and replayed by every later run, desktop or headset. Per chapter|pearl: "
+			+ "placed = token, tile cell, the exact cells sealed (x, z-from-segment-base); refused = token, cell, why. "
+			+ "Regenerate after editing the plan: python tools/em_bake.py"),
+		"plan": String(_plan_path), "plan_at": _plan_stamp(), "at": Time.get_datetime_string_from_system(false, true),
+		"segments": _bake_out}, "	"))
+	f.close()
+
+func _plan_stamp() -> String:
+	if _plan_path == "" or not FileAccess.file_exists(_plan_path):
+		return ""
+	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(_plan_path))
+	if parsed is Dictionary and (parsed as Dictionary).get("_spine_run") is Dictionary:
+		return String(((parsed as Dictionary)["_spine_run"] as Dictionary).get("at", ""))
+	return ""
 var _plan_db: Dictionary = {}     # museum key -> {artifacts:[...]} (v1, first-wins)
 var _plan_by_chapter: Dictionary = {}  # "museum|sequence" -> row (v2; a shared building carries one row PER chapter)
 # ── the court queue ──────────────────────────────────────────────────────────
@@ -546,6 +638,14 @@ func _ready() -> void:
 	# after the pool, because a plan naming an artifact the pool never built is
 	# a stale plan and the museum should be able to say so by name.
 	_load_plan()
+	_load_bake()
+	if _bake_mode:
+		_bake_total = 0
+		for pk in _plan_pearls:
+			_bake_total += (_plan_pearls[pk] as Array).size()
+		if _bake_total == 0:
+			_bake_total = _plan_by_chapter.size()
+		print("[em-bake] BAKING %d pearl(s) — every placement decided once, then written to %s" % [_bake_total, BAKE_PATH])
 	_start_at_map()
 	_load_guests()
 	if _museums.is_empty():
@@ -639,6 +739,8 @@ func _parse_args() -> void:
 			_order_mode = a.substr(11)
 		elif a.begins_with("--em-shot="):
 			_shot_path = a.substr(10)
+		elif a == "--em-bake":
+			_bake_mode = true
 		elif a.begins_with("--em-shot-at="):
 			_shot_z = float(a.substr(13))
 			_shot_z_set = true
@@ -1252,6 +1354,10 @@ func _find_node_of_type(n: Node, type_name: String) -> Node:
 
 ## Where the walker's eye is, whichever body owns it.
 func _eye_pos() -> Vector3:
+	if _bake_mode:
+		# the bake has no walker: the eye stands just short of the built edge, so
+		# the stream builds one segment per frame and frees the rooms behind
+		return Vector3(7.5, EYE, _next_z - BUILD_AHEAD_M + 0.5)
 	if _vr:
 		var e := _vr_eye()
 		return e.global_position if e != null else Vector3(7.5, EYE, 0.0)
@@ -1794,6 +1900,10 @@ func _stamp_wall_runs(seg: Node3D, solid: StaticBody3D, cells: Dictionary,
 
 func _build_segment() -> void:
 	_seg_refused = []
+	_seg_placed = []
+	_seg_unbaked = 0
+	_bake_key = ""
+	_bake_used = {}
 	# THE PLAN OWNS THE BUILDING when one is loaded: the chapter's museum is
 	# read off its own plan row, so the stamped cast and the built walls can
 	# never disagree about where a chapter lives. A crowned chapter without a
@@ -2718,7 +2828,19 @@ func _write_built(seg: Node3D, chapter: String, deal: Variant, zbase: int, w: in
 		"mode": _mode_label,   # a LABEL for the diff, decided in _setup_world; not a fork in what is built
 		"refused": _seg_refused.duplicate(true),
 		"seals": seals,
+		"unbaked": _seg_unbaked,       # bodies placed the live way while replaying (a stale bake shows here)
+		"replay": _replay,
+		"bake_stale": _bake_stale,
 	})
+	if _bake_key != "":
+		_bake_out[_bake_key] = {"museum": String(seg.get_meta("em_key")) if seg.has_meta("em_key") else "",
+			"placed": _seg_placed.duplicate(true), "refused": _seg_refused.duplicate(true)}
+	if _bake_mode:
+		if _built.size() > 2:
+			_built.pop_front()          # the bake keeps the bake, not the as-built
+		if _seg_index % 20 == 0:
+			_write_bake()               # a partial bake survives a hang
+		return
 	var txt: String = JSON.stringify({"schema": "adaresearch.em_built.v1",
 		"_readme": ("The AS-BUILT plan: what the assembler actually made of each segment this run — every "
 			+ "cell's role, every body's final world pose and inventory number, every card, courts, rooms, "
@@ -3154,6 +3276,8 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 	var entry: Dictionary = _plan_entry(key, chapter)
 	if entry.is_empty():
 		return {}
+	_bake_key = "%s|%s" % [chapter, String(entry.get("pearl", ""))]
+	_bake_used = {}
 	if entry.has("pearl"):
 		print("[em-pearl] %s · %s (%d/%d) — hero %s" % [chapter, String(entry.get("pearl", "")),
 			int(entry.get("pearl_index", 0)) + 1, int(entry.get("pearls_total", 0)), String(entry.get("hero", ""))])
@@ -4116,17 +4240,32 @@ func _stamp(seg: Node3D, scene_path: String, lookup: String, cell: Dictionary,
 		span_cap: float = 0.0, yaw_deg: float = 0.0,
 		plan_config: Dictionary = {}) -> bool:
 	_stamp_refusal = ""
+	_last_seal_cells = []
 	var ok: bool = _stamp_inner(seg, scene_path, lookup, cell, zbase, fp, axis_entry, drop_if_unvaried,
 		span_cap, yaw_deg, plan_config)
 	if not ok:
 		_seg_refused.append({"token": lookup, "tile_cell": [int(cell.get("x", 0)), int(cell.get("y", 0))],
 			"why": _stamp_refusal})
+	else:
+		var rel: Array = []
+		for k in _last_seal_cells:
+			rel.append([(k as Vector2i).x, (k as Vector2i).y - zbase])
+		_seg_placed.append({"token": lookup, "cell": [int(cell.get("x", 0)), int(cell.get("y", 0))], "seal": rel})
 	return ok
 
 func _stamp_inner(seg: Node3D, scene_path: String, lookup: String, cell: Dictionary,
 		zbase: int, fp: int, axis_entry: Dictionary, drop_if_unvaried: bool,
 		span_cap: float = 0.0, yaw_deg: float = 0.0,
 		plan_config: Dictionary = {}) -> bool:
+	# THE BAKE decides first: a body the bake refused is refused here without
+	# being instantiated; a body the bake placed carries its sealed cells and is
+	# never measured; a body the bake never saw goes the live way (and counts).
+	var bk: Dictionary = _bake_lookup(lookup, cell)
+	if bk.has("refused"):
+		_stamp_refusal = "baked: " + String(bk["refused"])
+		return false
+	if _replay and _bake_key != "" and _bake_in.has(_bake_key) and bk.is_empty():
+		_seg_unbaked += 1
 	if scene_path == "" or cell.is_empty():
 		_stamp_refusal = "no scene path or cell"
 		return false
@@ -4248,7 +4387,7 @@ func _stamp_inner(seg: Node3D, scene_path: String, lookup: String, cell: Diction
 	# wide, and the instance goes straight back out. Measured here rather than
 	# after the chrome strip, which can only shrink the box by a grab handle's
 	# 0.1 m and cannot make a 5 m object pass.
-	if span_cap > 0.0:
+	if span_cap > 0.0 and not bk.has("seal"):
 		var sbox: AABB = _extent_of(node)
 		if sbox.size.x > span_cap or sbox.size.z > span_cap:
 			print("[endless_museum]   refused %s — %.1f x %.1f m will not fit a %.0f m slot" % [
@@ -4270,7 +4409,17 @@ func _stamp_inner(seg: Node3D, scene_path: String, lookup: String, cell: Diction
 	# cap to `min(base + 0.10, cells - 0.06)` so the pedestal claims no cell the
 	# artifact's own AABB did not already claim — but that is the module's own
 	# arithmetic, and this line is the museum checking rather than believing it.
-	if not _seal_cells(node, cell, zbase, fp, plinth_node):
+	if bk.has("seal"):
+		# the baked seal: exactly these cells, no measurement, no reach probe
+		_last_seal_cells = []
+		for c in bk["seal"]:
+			var ca: Array = c
+			var k := Vector2i(int(ca[0]), zbase + int(ca[1]))
+			if _walk_cells.has(k):
+				_walk_cells.erase(k)
+				_walk_erased[k] = "seal:%s" % lookup
+			_last_seal_cells.append(k)
+	elif not _seal_cells(node, cell, zbase, fp, plinth_node):
 		# it would have cut the corridor in two. Take it back out rather than ship
 		# a museum with a room nobody can reach.
 		seg.remove_child(node)
@@ -4537,6 +4686,7 @@ func _seal_cells(node: Node3D, cell: Dictionary, zbase: int, fp: int,
 					cells.append(hk)
 	if cells.is_empty():
 		return true
+	_last_seal_cells = cells.duplicate()
 	var tok_seal: String = String(node.get_meta("artifact_lookup_name")) \
 		if node.has_meta("artifact_lookup_name") else node.name
 	for k in cells:
@@ -5107,6 +5257,11 @@ func _process(_delta: float) -> void:
 	# stream: open the next museum as the walker nears the built edge
 	if _eye_pos().z > _next_z - BUILD_AHEAD_M:
 		_build_segment()
+		if _bake_mode and _seg_index >= _bake_total:
+			_write_bake()
+			print("[em-bake] DONE — %d pearl(s) baked to %s" % [_bake_out.size(), BAKE_PATH])
+			get_tree().quit()
+			return
 	# free far-behind segments (keep the museum endless, not the node tree)
 	while _segments.size() > MIN_SEGMENTS and float(_segments[0]["z1"]) < _eye_pos().z - KEEP_BEHIND_M:
 		var old: Dictionary = _segments.pop_front()
