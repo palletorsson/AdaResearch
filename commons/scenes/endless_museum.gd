@@ -349,6 +349,18 @@ var _plan_owner: Dictionary = {}
 var _edit_mode: bool = false
 var _edit_records: Array = []      # [{node, token, tile_cell, rotation, chapter}]
 
+
+## A stored node reference that may have been FREED, returned as null instead of
+## exploding. `x as Node3D` on a freed object aborts the function with "Trying to
+## cast a freed object" — so `is_instance_valid()` AFTER the cast, which is how all
+## twelve of this file's record reads were written, never runs. Neither _edit_records
+## nor _segments is ever pruned, so their nodes outlive the map that made them and
+## the third map load walks a list of ghosts.
+func _node_or_null(v: Variant) -> Node3D:
+	if v == null or not is_instance_valid(v):
+		return null
+	return v as Node3D
+
 # ── near-artifact rendering ──────────────────────────────────────────────────
 # Artifacts render only near the eye. A segment is 60-90 m long and 3-4 are
 # alive at once, so without this every procedural body in ~200 m of museum is
@@ -2293,7 +2305,7 @@ func _number_places(seg: Node3D, chapter: String, pearl: String) -> void:
 	var places: Array = []
 	for r in _edit_records:
 		var rd: Dictionary = r
-		var node: Node3D = rd.get("node") as Node3D
+		var node: Node3D = _node_or_null(rd.get("node"))
 		if node == null or not is_instance_valid(node) or not seg.is_ancestor_of(node):
 			continue
 		if rd.has("inv"):
@@ -2360,6 +2372,43 @@ func _save_inventory() -> void:
 	f.close()
 
 
+## THE RULING THAT SURVIVES A REGENERATION (2026-08-18). A ruling is keyed
+## (chapter, token, from-cell) so it survives a plan regeneration — but when
+## the plan MOVES that row, the key no longer matches and the ruling goes
+## idle: Palle moved CoordinateSystem3M, the negotiator later moved it from
+## the tile to the porch, and the ruling stopped applying with no voice
+## except a count at the end of the deal.
+##
+## So: exact key first. Failing that, if the chapter has exactly ONE ruling
+## for this token and it has not matched anything else, it REBINDS to the
+## row's new cell and says so. One ruling, one body, no guess — a chapter
+## with two rulings for the same token keeps the old behaviour (idle), which
+## is the case where a rebind would have to guess which body was meant.
+func _ruling_for(tok: String, chapter: String, tx: int, tz: int) -> Dictionary:
+	var loose: Array = []
+	for ov_v in _edit_overrides:
+		var ov: Dictionary = ov_v as Dictionary
+		if ov.has("kind") or bool(ov.get("add", false)):
+			continue
+		if String(ov.get("token", "")) != tok:
+			continue
+		if chapter != "" and String(ov.get("chapter", "")) != "" and String(ov.get("chapter", "")) != chapter:
+			continue
+		var fr: Array = ov.get("from", [])
+		if fr.size() >= 2 and int(fr[0]) == tx and int(fr[1]) == tz:
+			ov["_matched"] = true
+			return ov
+		loose.append(ov)
+	if loose.size() == 1 and not bool((loose[0] as Dictionary).get("_matched", false)):
+		var ov0: Dictionary = loose[0]
+		ov0["_matched"] = true
+		ov0["_rebound"] = [tx, tz]
+		print("[em-edit] %s: the plan moved this row to [%d,%d]; its ruling (from %s) REBOUND to it"
+			% [tok, tx, tz, str(ov0.get("from", []))])
+		return ov0
+	return {}
+
+
 ## The forecourt builder. Returns the after-porch depth it added (0 if none).
 func _build_forecourt(seg: Node3D, solid: StaticBody3D, w: int, tile_h: int,
 		zbase: int, rows: Array, wall_col: Color, m_wall: Material, m_deck: Material) -> int:
@@ -2392,14 +2441,43 @@ func _build_forecourt(seg: Node3D, solid: StaticBody3D, w: int, tile_h: int,
 	# the lobby's interior columns.
 	for r_v in front:
 		var r: Dictionary = r_v
+		# THE HAND DECIDES, THEN THE LANE JUDGES (2026-08-18). The lane test ran
+		# first, so a ruling that moves a body OUT of the walk lane could never
+		# be read: CoordinateSystem3M stands at x=7, dead in the lane, and
+		# Palle's F5 ruling moves it to x=2. Rulings never reached the forecourt
+		# at all before this — they were saved and silently never applied.
+		var vtok := String(r.get("token", ""))
+		var vscene := String(r.get("scene", ""))
+		var vyaw := float(r.get("rotation", 0.0))
 		var vx: int = clampi(int(r.get("x", 1)), 1, LOBBY_W - 2)
+		var vz: int = 1 + (absi(int(r.get("z", -1))) - 1) % 2
+		var vov: Dictionary = _ruling_for(vtok,
+			String(seg.get_meta("em_chapter")) if seg.has_meta("em_chapter") else "",
+			vx, vz - VESTIBULE_H)
+		if not vov.is_empty():
+			if bool(vov.get("remove", false)):
+				print("[em-edit] %s removed by hand (vestibule)" % vtok)
+				continue
+			var vto: Array = vov.get("to", [])
+			if vto.size() >= 2:
+				vx = clampi(int(vto[0]), 1, LOBBY_W - 2)
+				vz = clampi(int(vto[1]) if int(vto[1]) > 0 else vz, 1, VESTIBULE_H - 1)
+				print("[em-edit] %s moved by hand in the vestibule -> [%d,%d]" % [vtok, vx, vz])
+			if vov.has("rotation"):
+				vyaw = float(vov["rotation"])
+			if String(vov.get("swap_to", "")) != "" and _live.has(String(vov["swap_to"])):
+				print("[em-swap] %s stands where %s did (vestibule ruling)" % [String(vov["swap_to"]), vtok])
+				vtok = String(vov["swap_to"])
+				vscene = String((_live[vtok] as Dictionary).get("scene", ""))
 		if vx >= lane_lo and vx < lane_hi:
 			lane_refused += 1
 			continue
-		var vz: int = 1 + (absi(int(r.get("z", -1))) - 1) % 2
 		var cell: Dictionary = {"x": vx, "y": vz, "rank": 2, "top": 0.0}
-		if _stamp(seg, String(r.get("scene", "")), String(r.get("token", "")),
-				cell, zbase, 1, {}, false, 0.0, float(r.get("rotation", 0.0))):
+		if vov.get("offset") is Array and (vov["offset"] as Array).size() >= 3:
+			cell["offset"] = (vov["offset"] as Array).duplicate()
+		if vov.has("scale"):
+			cell["scale"] = float(vov["scale"])
+		if _stamp(seg, vscene, vtok, cell, zbase, 1, {}, false, 0.0, vyaw):
 			stamped += 1
 	# S/E/W rows -> the after-porch: a 3 m strip after the tile, floor edge to
 	# edge, low parapets on the sides so it reads as ground outside the room
@@ -2420,14 +2498,52 @@ func _build_forecourt(seg: Node3D, solid: StaticBody3D, w: int, tile_h: int,
 				_add_col(solid, Vector3(sx + 0.5, 0.35, zz + 0.5), Vector3(1, 0.7, 1))
 		for r_v in back:
 			var r: Dictionary = r_v
+			# THE HAND DECIDES, THEN THE LANE JUDGES. The lane test used to run
+			# first, so a ruling that moved a body OUT of the walk lane could
+			# never be read — the body was refused before anyone asked the hand.
+			# CoordinateSystem3M stands at x=7, dead in the lane, and Palle's
+			# ruling moves it to x=2; that ruling now applies and the body stands.
 			var px: int = clampi(int(r.get("x", 1)), 1, w - 2)
+			var pz: int = z0 + clampi(int(r.get("z", tile_h)) - tile_h, 0, porch_d - 1)
+			var pre_ov: Dictionary = _ruling_for(String(r.get("token", "")),
+				String(seg.get_meta("em_chapter")) if seg.has_meta("em_chapter") else "",
+				px, pz - VESTIBULE_H)
+			if not pre_ov.is_empty() and (pre_ov.get("to", []) as Array).size() >= 2:
+				px = clampi(int((pre_ov["to"] as Array)[0]), 1, w - 2)
 			if px >= lane_lo and px < lane_hi:
 				lane_refused += 1
 				continue
-			var pz: int = z0 + clampi(int(r.get("z", tile_h)) - tile_h, 0, porch_d - 1)
 			var cell: Dictionary = {"x": px, "y": pz, "rank": 2, "top": 0.0}
-			if _stamp(seg, String(r.get("scene", "")), String(r.get("token", "")),
-					cell, zbase, 1, {}, false, 0.0, float(r.get("rotation", 0.0))):
+			# THE HAND, on the forecourt too. Until now only interior rows read
+			# em_overrides, so a ruling on a porch body (CoordinateSystem3M
+			# stands on the porch) was written by F5 and never applied — the
+			# one thing a ruling must never do.
+			var ftok := String(r.get("token", ""))
+			var fscene := String(r.get("scene", ""))
+			var fyaw := float(r.get("rotation", 0.0))
+			var fov: Dictionary = pre_ov
+			if not fov.is_empty():
+				if bool(fov.get("remove", false)):
+					print("[em-edit] %s removed by hand (forecourt)" % ftok)
+					continue
+				var fto: Array = fov.get("to", [])
+				if fto.size() >= 2:
+					cell["x"] = px                      # already the ruled x, tested against the lane
+					cell["y"] = maxi(z0, pz + (int(fto[1]) - (pz - VESTIBULE_H)))
+					print("[em-edit] %s moved by hand on the forecourt -> [%d,%d]" % [ftok, int(cell["x"]), int(cell["y"])])
+				if fov.has("rotation"):
+					fyaw = float(fov["rotation"])
+				if fov.get("offset") is Array and (fov["offset"] as Array).size() >= 3:
+					cell["offset"] = (fov["offset"] as Array).duplicate()
+				if fov.has("scale"):
+					cell["scale"] = float(fov["scale"])
+				if String(fov.get("swap_to", "")) != "":
+					var stok := String(fov["swap_to"])
+					if _live.has(stok):
+						print("[em-swap] %s stands where %s did (forecourt ruling)" % [stok, ftok])
+						ftok = stok
+						fscene = String((_live[stok] as Dictionary).get("scene", ""))
+			if _stamp(seg, fscene, ftok, cell, zbase, 1, {}, false, 0.0, fyaw):
 				stamped += 1
 	_deal_stats["forecourt"] = int(_deal_stats.get("forecourt", 0)) + stamped
 	print("[em-forecourt] %d of %d porch/outside rows stamped (%d vestibule, %d after-porch%s; %d refused for the walk lane)"
@@ -2828,16 +2944,9 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 		var fine_override: Array = []          # the hand's 0.2 m offset, if any
 		var scale_override: float = 1.0        # the hand's uniform scale, if any
 		var removed_by_hand := false
-		for ov_v in _edit_overrides:
+		var found: Dictionary = _ruling_for(tok, String(entry.get("sequence", "")), tx, tz)
+		for ov_v in ([found] if not found.is_empty() else []):
 			var ov: Dictionary = ov_v as Dictionary
-			if ov.has("kind"):
-				continue            # furniture rulings apply where furniture is built
-			if String(ov.get("token", "")) != tok:
-				continue
-			var fr: Array = ov.get("from", [])
-			if fr.size() < 2 or int(fr[0]) != tx or int(fr[1]) != tz:
-				continue
-			ov["_matched"] = true
 			if bool(ov.get("remove", false)):
 				removed_by_hand = true
 				print("[em-edit] %s removed by hand at [%d,%d]" % [tok, tx, tz])
@@ -4582,7 +4691,7 @@ func _cull_artifacts() -> void:
 	_vis_hidden = 0
 	while i < _vis_records.size():
 		var r: Dictionary = _vis_records[i]
-		var node: Node3D = r.get("node") as Node3D
+		var node: Node3D = _node_or_null(r.get("node"))
 		if node == null or not is_instance_valid(node):
 			_vis_records.remove_at(i)
 			continue
@@ -4825,9 +4934,10 @@ func _edit_handle_key(key: int) -> bool:
 				# the meta stops _cull_artifacts resurrecting the preview:
 				# culling owns visible for DISTANCE reasons only, and a node
 				# the hand removed must stay gone at any range
-				var rn: Node3D = r2.get("node") as Node3D
-				rn.set_meta("em_hand_removed", true)
-				rn.visible = false
+				var rn: Node3D = _node_or_null(r2.get("node"))
+				if rn != null:
+					rn.set_meta("em_hand_removed", true)
+					rn.visible = false
 				_edit_dirty = true
 		KEY_BRACKETLEFT, KEY_BRACKETRIGHT:
 			# palette scoped to the chapter the CAMERA stands in — walk into a
@@ -4899,7 +5009,9 @@ func _edit_place_from_palette() -> void:
 	for srec in _segments:
 		if wz < int(srec.get("z0", 0)) or wz >= int(srec.get("z1", 0)):
 			continue
-		var seg: Node3D = srec.get("node") as Node3D
+		var seg: Node3D = _node_or_null(srec.get("node"))
+		if seg == null:
+			continue
 		var zbase: int = int(srec.get("z0", 0))
 		var ch := ""
 		if seg.has_meta("em_chapter"):
@@ -4973,7 +5085,7 @@ func _edit_prop_nudge(dy: float) -> void:
 	# head), and the first trial found that out: nudging from the default
 	# yanked a 3.52 m portal sign to 3.10. The curator rules from what they
 	# are looking at; the convention becomes that height for the token.
-	var sel_node: Node3D = r.get("node") as Node3D
+	var sel_node: Node3D = _node_or_null(r.get("node"))
 	var cur: float = float(_edit_prop_rules.get(tok,
 		sel_node.position.y if (sel_node != null and is_instance_valid(sel_node)) else float(r.get("code_h", 0.0))))
 	var h: float = clampf(cur + dy, 0.1, WALL_H - 0.1)
@@ -4983,7 +5095,7 @@ func _edit_prop_nudge(dy: float) -> void:
 		var r2: Dictionary = r2_v
 		if String(r2.get("kind", "")) != "prop" or String(r2.get("token", "")) != tok:
 			continue
-		var n2: Node3D = r2.get("node") as Node3D
+		var n2: Node3D = _node_or_null(r2.get("node"))
 		if n2 != null and is_instance_valid(n2):
 			n2.position.y = h
 			moved += 1
@@ -5054,7 +5166,7 @@ func _edit_fine(dx: float, dy: float, dz: float) -> void:
 		else:
 			print("[em-edit] %s is a wall prop — no fine offset (v1)" % r.get("token"))
 		return
-	var node: Node3D = r.get("node") as Node3D
+	var node: Node3D = _node_or_null(r.get("node"))
 	if node == null or not is_instance_valid(node):
 		return
 	var ov: Dictionary
@@ -5139,7 +5251,7 @@ func _edit_scale(factor: float) -> void:
 	if String(r.get("kind", "")) in ["prop", "furniture", "showing", "plinth"]:
 		print("[em-edit] %s is %s — not scaled (bodies are measured; showings are batched)" % [r.get("token"), r.get("kind")])
 		return
-	var node: Node3D = r.get("node") as Node3D
+	var node: Node3D = _node_or_null(r.get("node"))
 	if node == null or not is_instance_valid(node):
 		return
 	var ov: Dictionary = _mod_editor.call(
@@ -5171,7 +5283,7 @@ func _edit_nudge(dx: int, dz: int) -> void:
 		else:
 			print("[em-edit] %s is a wall prop — its convention is height (UP/DOWN); walk to the corridor for the rest" % r.get("token"))
 		return
-	var node: Node3D = r.get("node") as Node3D
+	var node: Node3D = _node_or_null(r.get("node"))
 	if node == null or not is_instance_valid(node):
 		return
 	var ov: Dictionary = _mod_editor.call(
@@ -5195,14 +5307,14 @@ func _edit_rotate(deg: float) -> void:
 		print("[em-edit] a %s faces its wall / its artifact — no rotation ruling" % r.get("kind"))
 		return
 	if String(r.get("kind", "")) == "furniture":
-		var fnode: Node3D = r.get("node") as Node3D
+		var fnode: Node3D = _node_or_null(r.get("node"))
 		var fov: Dictionary = _furniture_override(r)
 		fov["rotation"] = fposmod(float(fov.get("rotation", float(r.get("rotation", 0.0)))) + deg, 360.0)
 		if fnode != null and is_instance_valid(fnode):
 			fnode.rotation_degrees.y = float(fov["rotation"])
 		_edit_dirty = true
 		return
-	var node: Node3D = r.get("node") as Node3D
+	var node: Node3D = _node_or_null(r.get("node"))
 	if node == null or not is_instance_valid(node):
 		return
 	var ov: Dictionary = _mod_editor.call(
@@ -5469,7 +5581,7 @@ func _auto_stall_report() -> Array:
 		var owner := "?"
 		var kind := ""
 		for r in _edit_records:
-			var node: Node3D = (r as Dictionary).get("node") as Node3D
+			var node: Node3D = _node_or_null((r as Dictionary).get("node"))
 			if node == null or not is_instance_valid(node):
 				continue
 			var box: AABB = _extent_of(node)
