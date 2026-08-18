@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://refusal_booth"]
+
+[ext_resource type="Script" path="res://commons/artifacts/refusal_booth/refusal_booth.gd" id="1_script"]
+
+[node name="RefusalBooth" type="Node3D"]
+script = ExtResource("1_script")

@@ -19,7 +19,7 @@
 		"plaque_w_m": 0.46,
 		"plaque_h_m": 0.17,
 		"font_px": 44,
-		"pixel_size": 0.0010
+		"pixel_size": 0.001
 	},
 	"hall": {
 		"depth_m": 4.5,
@@ -36,5 +36,16 @@
 	"editor": {
 		"autosave_seconds": 0.6,
 		"snap_m": 0.2
+	},
+	"stream": {
+		"build_ahead_m": 24.0,
+		"_build_ahead_m": "open the next segment when the eye is this close to the built edge",
+		"keep_behind_m": 70.0,
+		"_keep_behind_m": "free a segment once its far end is this far behind the eye. Lower = less in the tree, but a turn-around walks into nothing until it rebuilds; 70 is about two rooms.",
+		"min_segments": 2,
+		"_min_segments": "never free below this many, however far behind they are",
+		"cull_near_m": 32.0,
+		"_cull_near_m": "artifacts closer than this render; between near and far they stay hidden but built (em_detail's own culling)",
+		"cull_far_m": 38.0
 	}
 }

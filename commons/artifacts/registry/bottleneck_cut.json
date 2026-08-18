@@ -1,0 +1,215 @@
+{
+ "artifacts": {
+  "bottleneck_cut": {
+   "name": "Bottleneck Cut",
+   "lookup_name": "bottleneck_cut",
+   "scene": "res://commons/artifacts/bottleneck_cut/bottleneck_cut.tscn",
+   "class_name": "BottleneckCut",
+   "category": "graph_theory",
+   "artifact_type": "synthesis",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "size_group": "compact",
+   "description": "A reading board that draws one s-t network together with BOTH answers to it: the minimum cut proved by saturating the flow, and the cut a seeded Karger contraction actually returned. TWO tokens declare `bottleneck` = mixed | throat | braid | severed, identically, and nothing else in the corpus declares it: karger_algorithm and networkflow3d, both in sequence 21, graphtheory. The hypothesis was that they are max-flow min-cut from opposite ends - one pushes flow until nothing more fits, the other contracts edges at random until two vertices remain, and the theorem is that they arrive at the same number. Reading both files in full, that holds at `severed` and nowhere else, for a reason the shared word hides: the axis is a CAPACITY axis in one file and a TOPOLOGY axis in the other. networkflow3d.gd:282-301 says so in its own comment - `braid` sets every capacity to max_capacity and keeps THE SAME EDGE SET, so nothing about the graph moves; karger_algorithm.gd:291-297 builds `braid` as a near-complete graph of 24 edges where every vertex has degree 6, and that file contains no capacity anywhere. Karger's cut is a COUNT. So the two artifacts agree on four words and on one of them, `severed`, they agree on the object. This bench keeps both halves - the four values change the edge set AND the capacities - and spends its second axis, `against`, on the question the family never asks: what is the cut being priced against. At `edges` a cut costs its number of edges, which is Karger's world; at `capacity`, `flow` and `residual` it costs what it can carry, which is the theorem's. The default cell is where they come apart: bottleneck=mixed, against=capacity, the pale found-blade at x=-0.1575 and the solid min-blade at x=+0.1575, a third of the field apart, and a ledger reading found 18 against a true minimum of 9. Exactly twice, and not once unlucky.",
+   "tags": [
+    "graph_theory",
+    "min_cut",
+    "max_flow",
+    "edmonds_karp",
+    "karger",
+    "randomized_algorithm",
+    "residual_graph",
+    "duality",
+    "two_axes",
+    "conditional_axes",
+    "designed_null",
+    "synthesis"
+   ],
+   "dev_themes": [
+    "one word, two kinds of object, declared identically by both members",
+    "a randomised algorithm that is wrong about capacity because it was asked about cardinality",
+    "the source counts its successes against the best it has found so far",
+    "counting and summing are the same question only when the capacities are equal"
+   ],
+   "capacity": "SEE that max flow equals min cut in every cell, and then see the harder thing next to it: that an algorithm can return a perfectly correct cut that is not the minimum, because the question it minimises is not the question you asked",
+   "interactions": [
+    "stand at the default cell, bottleneck=mixed with against=capacity, and read the two blades. The solid one is the true minimum, 9, at the sink's three cheap edges on the right. The pale outline is what Karger returned: the source's two expensive edges on the left, 18. Both are cuts. One is the minimum. The distance between them is the entire content of the algorithm.",
+    "hold bottleneck=mixed and walk `against` from capacity to edges. The two blades snap together. Karger was never wrong - at `edges` the cheapest cut IS the smallest cut, and the contraction answers it exactly. The axis is not a lighting change; it is which optimisation problem the board is solving.",
+    "read the three bars in any cell. PUSHED and CUT are the same height in all sixteen, because that is the theorem. FOUND is never shorter than CUT, because a cut cannot be cheaper than the cheapest cut. At mixed under any capacity reading it is exactly twice as tall.",
+    "compare edges against capacity at bottleneck=braid. They are the same picture, to the byte. Every capacity is equal there, so 'fewest edges' and 'least capacity' are the same optimisation and the weight vector this board hands to every computation is literally the same numbers. That identity is why Karger's unweighted algorithm has anything to say about a flow problem at all.",
+    "compare capacity against flow at bottleneck=severed. The same picture again, and for the opposite reason: the network is in two pieces, so max flow is zero, so no edge carries anything and the flow reading has nothing to add. When nothing moves, a photograph of the flow is a photograph of the capacity.",
+    "walk to bottleneck=throat and notice how little is happening. Two units get through a network of fifteen pipes with a total capacity of 128; the flow ribbon is 2 mm of thread on a 0.62 m board, and the smallest measured pair anywhere on the sheet is exactly that thread. A bottleneck does not merely limit the flow. It makes the flow almost invisible."
+   ],
+   "dna": {
+    "promoted": "2026-08-18",
+    "stage": "synthesis",
+    "wave": 24,
+    "framing": 0.42,
+    "sources": [
+     "karger_algorithm",
+     "networkflow3d"
+    ],
+    "axes": {
+     "bottleneck": [
+      "mixed",
+      "throat",
+      "braid",
+      "severed"
+     ],
+     "against": [
+      "capacity",
+      "edges",
+      "flow",
+      "residual"
+     ]
+    },
+    "default": "bottleneck=mixed, against=capacity. THE BOTTLENECK DEFAULT IS THE SOURCES' OWN. karger_algorithm.gd:59 and networkflow3d.gd:71 both ship `mixed`, and both gloss it negatively - 'no particular narrow place' (networkflow3d.gd:61), 'the shipped graph' (karger_algorithm.gd:32). The second default had to be chosen, because the sources DISAGREE about it: karger_algorithm is unweighted and has no capacities at all, so it lives at `edges`; networkflow3d draws capacity as pipe radius (:585) and lives at `capacity`. `capacity` wins for two reasons. The family's shared word is `bottleneck`, and a bottleneck is a capacity claim - a count of edges has no throat. And the default cell is then the one cell where the two parents' answers visibly come apart, which is this pass's finding rather than a tidy starting position.",
+    "was": "TWO TOKENS, TWO SCRIPTS, ONE WORD, TWO KINDS OF OBJECT. Checked for wave 21's one-script-two-tokens shape first and it is not that: karger_algorithm.tscn:3 and networkflow3d.tscn:3 name different scripts and different class_names, and neither file preloads or references the other. What binds them is a four-value list, declared identically in algorithms_misc.json for both. Reading both scripts in full, the list is the only thing they share. networkflow3d's `bottleneck` is a capacity edit over a fixed generator (_build_edges_scattered's `uniform` branch, :282-301, whose own comment says the edge set is unchanged); karger_algorithm's is a graph edit with no capacities in the file (_build_two_cliques :274-283, _build_braid :291-297). `throat` means one min-capacity edge in one and two bridges in the other - one is a width, the other is a count. `braid` means all capacities equal in one and 24 edges at degree 6 in the other. Only `severed` names the same object in both: two components, nothing crossing, and both files move the pieces APART so the hole is the subject rather than an absence you have to count edges to notice (karger_algorithm.gd:40-48, networkflow3d.gd:462-494). Both were already repaired against the pixel critic and both carry the record: karger_algorithm.gd:50-55 records that `severed` used to be `throat` with two hairline bridges deleted, that at 160x160 those bridges are 0.3 px wide, and that two opposite claims therefore measured 4.48 percent apart and were one picture. networkflow3d.gd:465-473 records that over 400 draws of its own generator the source has no route to the sink in 99 percent of them, so its `severed` branch has to fall back to cutting on spatial halves or it would render an untouched copy of `mixed`. Both are seeded from the same constant, 20260729 (karger_algorithm.gd:92, networkflow3d.gd:83).",
+    "note": "THE INSTRUMENT DECISIONS, EACH ONE COSTING SOMETHING. (1) THE EXACT ANSWER IS COMPUTED, NOT APPROXIMATED. n = 10, so the true minimum cut is a loop over all 256 s-t bipartitions and there is no reason to estimate it. That is what lets the board put a correct answer next to Karger's and call the difference by its name. Every cell's minimum is UNIQUE, so no tie-break can drift: the second-cheapest cut is 18 against 9 at mixed, 18 against 2 at throat, 36 against 27 at braid, 9 against 0 at severed. (2) KARGER RUNS ON AN EXPLICIT LCG, not RandomNumberGenerator. state = (state * 1664525 + 1013904223) mod 2^32, Fisher-Yates from that stream, eight runs on one stream with no reseed between them. The reason is not distrust of Godot's PCG32 but reproducibility OUTSIDE Godot: the whole prediction below was computed in a Python model of this file, and it could not have been if the contraction lived behind an engine class. (3) THE SECOND AXIS IS THE WEIGHT VECTOR, and `edges` hands every edge MAXCAP rather than 1.0. Scaling all unit weights by one constant leaves the argmin untouched, but it makes the vector at `edges` LITERALLY EQUAL to the vector at `capacity` whenever every capacity is MAXCAP - which is `braid`. At 1.0 the designed null would have been an approximate identity resting on (9k)/(9n) equalling k/n in float; at MAXCAP the two frames are computed from the same numbers and are the same file. (4) THE INNER RIBBONS ARE ADDITIVE. The first draft recoloured the whole pipe at `flow` and `residual`; that made all six pairs of the second axis loud and buried both nulls in a wash. Drawing the reading on TOP of the capacity reading is what makes severed's capacity-against-flow a byte identity rather than a small number. (5) THE LAYOUT DOES NOT MOVE WITH THE SECOND AXIS. `severed`'s displacement is keyed to a hard-coded component test (nodes 0-5 against 6-9) rather than to the solved partition, because a network that shifted when you changed how you were looking at it would make every pair of the second axis carry a geometry difference it did not earn. (6) THE FRAME IS PINNED. A 0.620 x 0.560 x 0.050 BoxMesh with layers = 0 sits inside the yaw in all sixteen cells, so the merged AABB the sweep frames by is identical everywhere. layers = 0 and not visible = false, because visibility is hierarchical in Godot and would take any future child with it. The bezel lip was 0.052 deep in the first draft and poked 1 mm past that anchor, which would have made the camera distance a fact about the bezel; it is 0.048 now. (7) EVERY MARK THE AXES ARGUE ABOUT IS UNSHADED - wells, territory, blade, found-blade, pipes, ribbons, nodes, bars - so the rendered pixel is filmic(srgb_to_linear(albedo)) and nothing else, and the prediction is two-sided rather than a floor. The board and its lip stay LIT, because a bench with no shading is a chart and this one is supposed to have a body. Colours are per-mesh albedo rather than vertex colours, because whether a vertex colour is read as sRGB or linear is a material flag and the whole arithmetic depends on there being no such ambiguity. (8) THE BOARD IS YAWED 0.62 rad. capture_config_sweep.gd:69 puts the camera at YAW 0.62 and :443 builds its direction as Vector3(sin(yaw)cos(pitch), -sin(pitch), cos(yaw)cos(pitch)); facing the board along it photographs every front surface square and costs only cos(0.26) = 0.966390 of the height, which is the single foreshortening factor in every area below. (9) NO NUMERIC AXIS VALUE ANYWHERE. Both axes are word enums typed String with String defaults, so cabinet_sweep.coerce() has nothing to numericise and the tier_terrarium failure - Object.set() refusing a typed property in silence - cannot occur. The two numeric exports, karger_seed and karger_runs, are NOT axes; they are pinned by dna.fixture. (10) NO _process AND NO CLOCK. A contraction sequence and a flow-pushing loop are both RATES and a still cannot photograph either. What a still can photograph is a cut, a capacity, a residual and a number, so those are what this board draws.",
+    "predicted_degeneracy": {
+     "pair": "capacity against flow, in the throat bottleneck",
+     "percent": 0.0247,
+     "metric": "mean absolute LUMA delta over the whole 760 x 760 frame, which is the critic's `frame` number - the word luma is here so score_wave ranks on magnitude rather than on a pixel count. The count metric is stated too and it is a different quantity: changed_pct, the share of pixels whose sum|dRGB| exceeds 26, is predicted at 0.1895 percent, and it is exactly the area share because every ribbon pixel clears the gate by a mile (fill_flow 90,214,243 against pipe 137,150,178 is a sum of 176; against cutpipe 251,90,97 it is 431). The critic's `focus` - the mean over the hottest 5 percent - is predicted at 0.4938 percent, which is simply the frame number divided by 0.05 because the changed area is far under the 5 percent budget and the rest of the band is zeros.",
+     "floor_or_two_sided": "TWO-SIDED, with one stated caveat. The usual 1.5x-to-6.7x under-shoot of a paper rasteriser comes from its blindness to shadows, ambient occlusion and antialiasing; this pair contains NO lit surface and NO geometry change beyond four unshaded ribbons laid on four unshaded pipes at the same depth, so there is nothing for a shadow to fall on that is not already identical in both frames. The caveat is thickness: the ribbon is 0.002 m, which is 2.19 px across before the pitch and 2.11 px after it, so edge coverage is a real fraction of the signal. The closed-form number above assumes exact coverage. A centre-sampled rasteriser with no antialiasing returns 0.0181 percent for the same pair, 0.73x, purely from losing partial pixels at the band edges, and the sweep's supersample-then-Lanczos path should land between the two and nearer the top. Investigate below 0.015 percent or above 0.04 percent: that would mean the framing hint was dropped, the marks are not unshaded, or the tonemapper is not FILMIC.",
+     "pool": "the SIX pairs of the `against` axis inside the throat column, ranked among themselves - and, checked separately, the smallest non-null pair among all 120 pairs of the 4 x 4 sheet. It is both. The two smaller numbers anywhere are the designed nulls, at 0.0000, and they are registered separately. A rank inherits its context and this one is worth naming: the SAME pair of readings measures 0.0856 percent at mixed (3.5x larger, because 9 units flow there instead of 2) and 0.2689 percent at braid (10.9x, because 27 units flow), so capacity-against-flow is only the floor where the throat is, and it is the floor there because that is what a throat does.",
+     "why": "AT throat THE MIN CUT IS ONE PIPE OF CAPACITY 2 IN A NETWORK OF FIFTEEN PIPES TOTALLING 128, SO EDMONDS-KARP SATURATES AFTER TWO UNITS AND STOPS. `capacity` and `flow` share a weight vector, a cut set, a blade, a found-blade, a node colouring and all three bar heights; the ONLY difference between the two frames is the inner flow ribbon on the four edges of the single augmenting path, 0-1, 1-4, 4-7 and 7-9. GEOMETRY. Ribbon width is EDGE_W * flow / MAXCAP = 0.0090 * 2 / 9 = 0.002000 m exactly. Lengths follow from the fixed node table: 0-1 and 1-4 are each hypot(0.105, 0.080) = 0.132004 m, 4-7 and 7-9 are each 0.105000 m horizontal, total 0.474008 m. Face area 0.474008 * 0.002 = 0.00094802 m2. The board's front face is square to the camera by construction, so the whole figure is foreshortened by exactly cos(0.26) = 0.966390 whatever its orientation: projected 0.00091616 m2. FRAME. The pinned anchor is 0.620 x 0.560 x 0.050 at (0, 0.280, 0.005) rotated 0.62 rad about Y, giving a world AABB of 0.533656 x 0.560000 x 0.400936, diagonal 0.871285, radius 0.435643. capture_config_sweep.gd:442 sets dist = radius / tan(17 deg) * 1.9 * 0.42, so the frame is a square of side 2 * 0.435643 * 1.9 * 0.42 = 0.695289 m, area 0.483427 m2, one pixel 0.9148 mm. The ribbons are 0.1895 percent of it. COLOUR. Unshaded albedo -> srgb_to_linear -> Godot FILMIC (A = 0.88, B = 0.60, C = 0.10, D = 0.20, E = 0.01, F = 0.30, white 1.0) -> linear_to_srgb -> 8 bit gives fill_flow (0.28,0.72,0.90) = (90,214,243), pipe (0.42,0.46,0.56) = (137,150,178) and cutpipe (0.96,0.28,0.30) = (251,90,97). PIL's L = 0.299R + 0.587G + 0.114B gives 180.230, 149.305 and 138.937, so the ribbon lifts three of the four edges by 30.925 and the fourth - the throat pipe itself, which is a cut edge and therefore red - by 41.293. SUM. Three ribbons over pipe cover 0.369008 * 0.002 * 0.966390 = 0.00071321 m2 and the fourth over cutpipe covers 0.105 * 0.002 * 0.966390 = 0.00020294 m2, so the frame mean is (0.00071321 * 30.925 + 0.00020294 * 41.293) / 0.483427 / 255 = 0.000247 -> 0.0247 percent. MARGIN. The next pair up in the same column is edges-against-capacity at 0.1751 percent, 7.1x, and the next after that is edges-against-flow at 0.1932 percent. The margin is wide and it is not an accident of colour choice: it survives because the throat admits two units out of nine and there is simply very little flow to draw.",
+     "peak_for_contrast": "The loudest pair on the sheet is braid against severed at `residual`, 5.0426 percent frame - 204x this floor. Inside the `against` axis alone the peak is mixed edges-against-residual at 4.0805 percent, 165x. Any report quoting only the headline would have hidden a floor-to-peak ratio of two orders of magnitude, which is exactly the tier_terrarium failure; the per-pair rows are what this entry is for."
+    },
+    "predicted_relationship": "FOUR CLAIMS THAT DO NOT NEED A PERCENTAGE TO BE WRONG. FIRST, THE LEDGER'S FIRST TWO BARS ARE THE SAME HEIGHT IN ALL SIXTEEN CELLS. PUSHED is the max flow, CUT is the exhaustively-found minimum cut, and they are equal because that is the theorem - not because anything in this file arranges it. They are computed by two entirely separate routines that share no state (_solve_flow is Edmonds-Karp on a capacity matrix, _solve_min_cut is a loop over 256 bipartitions), so if any cell shows two bars of different heights the artifact has a bug and the whole sheet is void. This is the cheapest and most important check on the board. SECOND, THE THIRD BAR IS NEVER SHORTER THAN THE SECOND, in any cell, because a cut cannot cost less than the cheapest cut; and at bottleneck=mixed under capacity, flow and residual it is EXACTLY TWICE the second, 18 against 9. Karger returns the source star there - two edges at capacity 9 - which is the correct answer to the cardinality question and the wrong answer to the capacity one, and the factor of two is a fact about the capacity table, not about luck. THIRD, THE TWO BLADES COINCIDE IN TWELVE CELLS AND SEPARATE IN FOUR. They separate exactly at bottleneck=mixed with against in {capacity, flow, residual}, where the solid blade stands at x = +0.1575 and the pale one at x = -0.1575, 0.315 m apart on a 0.560 m field. In the fourth mixed cell, against=edges, they land on the same x to the millimetre. FOURTH, AND IT IS A PREDICTION ABOUT THE INSTRUMENT: two pairs on this sheet must be EQUAL to each other rather than merely similar. Because `edges` and `capacity` are byte-identical at braid, the pairs braid-edges-vs-flow and braid-capacity-vs-flow must return the same number to every decimal (predicted 0.2689 percent); because `capacity` and `flow` are byte-identical at severed, severed-edges-vs-capacity and severed-edges-vs-flow must likewise agree (predicted 0.3242 percent). Two forced equalities that fall straight out of the two nulls, and if either fails the nulls are not what they claim to be.",
+    "designed_nulls": [
+     {
+      "a": {
+       "bottleneck": "braid",
+       "against": "edges"
+      },
+      "b": {
+       "bottleneck": "braid",
+       "against": "capacity"
+      },
+      "under_percent": 0.3,
+      "why": "AN IDENTITY BY THEOREM, NOT BY CONSTRUCTION, WHICH IS WHY IT WAS WORTH BUILDING. The `against` axis IS the weight vector: at `edges` every edge weighs MAXCAP, at `capacity` every edge weighs its own capacity. At bottleneck=braid every capacity IS MAXCAP. So the two cells hand the same numbers to the min-cut solver, the flow solver, the Karger scorer, the pipe widths and the bar normalisation, and every mark on the board is a function of those numbers - the two PNGs are the same file. Predicted 0.000 percent frame and 0.000 percent focus. WHAT IT SAYS. Minimising the NUMBER of edges cut and minimising the CAPACITY cut are the same optimisation exactly when the capacities are equal, and that reduction is the entire reason an unweighted contraction algorithm has anything to say about a flow problem. Karger's guarantee is a guarantee about unit-capacity networks; `braid` is the cell where this board's network is one, and it is the only cell where the two members of this family are provably answering the same question. Anything above 0.3 percent here is render nondeterminism. Anything above 2 percent means the weight vector is not what _build_weights says it is - most likely that `edges` was written as 1.0 instead of MAXCAP, which would leave the bars agreeing only to float precision and the pipe widths not agreeing at all - and every braid reading on the sheet is then suspect. CONDITIONED ONLY ON THE SWEPT AXES: both `bottleneck` and `against` are in the cross product, so the sweep renders these two cells. It is NOT conditioned on karger_seed or karger_runs, which dna.fixture pins: whatever those are, both frames use the same ones and the contraction returns the same partition in both, so the null holds for every seed."
+     },
+     {
+      "a": {
+       "bottleneck": "severed",
+       "against": "capacity"
+      },
+      "b": {
+       "bottleneck": "severed",
+       "against": "flow"
+      },
+      "under_percent": 0.3,
+      "why": "THE SAME THEOREM AT ITS OTHER END, AND THE SECOND HALF OF THE FAMILY'S ONE HONEST AGREEMENT. At bottleneck=severed the network is in two components and the sink is not in the source's, so max flow is ZERO - by max-flow min-cut, since the minimum cut is the empty set and costs nothing. `flow` draws exactly what `capacity` draws plus an inner ribbon on every edge whose width is that edge's flow, and every edge's flow is zero, so no ribbon is drawn anywhere and the two cells are the same file. Predicted 0.000 percent frame and 0.000 percent focus. WHAT IT SAYS. When nothing moves, a photograph of the flow is a photograph of the capacity: the difference between what a channel COULD carry and what it DOES carry vanishes precisely when it carries nothing, which is the degenerate case both source artifacts spend their loudest value on. Anything above 0.3 percent is nondeterminism; anything above 2 percent means flow is being computed on a network that is not actually severed - most likely that the bridge edge survived the drop - and severed is then not the value it claims to be. This null is the reason `severed` here carries the SCATTERED capacity table rather than uniform mains: with uniform capacities, severed would have produced THREE zeros in one column (edges-vs-capacity and edges-vs-flow as well), and three zeros in a column is indistinguishable in a report from a broken axis. One null per column, both earned, is the design. Conditioned only on the two swept axes; the fixture pins nothing this depends on."
+     }
+    ],
+    "designed_nulls_why": "TWO NULLS, ONE PER DEGENERATE COLUMN, AND THEY ARE THE TWO ENDS OF THE SAME THEOREM. braid is where counting and summing coincide because every capacity is equal; severed is where flowing and not-flowing coincide because nothing flows. Between them they say what the family agrees about, and the twelve cells that are not null say what it does not. A third candidate was rejected on inspection: at severed the pair edges-against-flow equals the pair edges-against-capacity, but neither is zero (0.3242 percent, the scattered pipe widths), so it is a designed RELATIONSHIP and is filed above rather than here.",
+    "kin": "THE WORD `bottleneck` IS TAKEN WHOLE FROM BOTH SOURCES, INCLUDING ALL FOUR OF ITS ANSWERS, and that is the right call here even though the corpus rule is that borrowing a word without its answers is the dishonest half of a shared vocabulary. This bench takes the word and every value and then does the thing neither source can: it builds the topology edit AND the capacity edit into the same four values, so `throat` is at once a single crossing (karger's claim) and a single narrow capacity (networkflow3d's), and the two readings of the word can be photographed against each other instead of living in separate files that never meet. THE SECOND AXIS TAKES A NEW WORD, and it had to be looked for. `evidence` is declared by 51 artifacts in this corpus and `reading` by 38, so both were out; `assay` is on 19, `measure` on 6, `reckoning` on 2, `tally`, `currency` and `valuation` on 1 each. `against` is declared by none of the 494 axis names in the 108 registry files, and it is the exact phrase the question wants - what is the cut read against - so it is the one used. Its four values are the four states of a network anyone who has worked this theorem already names: the bare graph, the capacities, the flow that went, the residual that is left.",
+    "declines": [
+     "THE CONTRACTION SEQUENCE, AND THE FLOW-PUSHING LOOP, AND EVERY OTHER RATE. karger_algorithm animates its four parallel runs one contraction at a time on a 0.5 s timer (:655-679) and its whole subject is a process; networkflow3d streams particles along saturated pipes (:757-772) and so does its. Both are invisible to a still, and this programme has already published a finished-looking experiment that answered nothing by sweeping an artifact across five duration exports. So this board has no _process, no clock and no interaction at all: every mark is a function of the two axes computed once in _ready. The cost is the largest thing given up here. A contraction that you watch merge two vertices at a time TEACHES the algorithm in a way a still cannot, and the pale blade only tells you where Karger ended up, never how it got there.",
+     "THE PROBABILITY AMPLIFICATION CHART, karger_algorithm.gd:829-869, which plots the observed success rate against the theoretical 1 - (1 - 2/(n(n-1)))^k. It is the most attractive thing in either source and it is dropped because the quantity it plots is not what it says. `_success_count` is documented at :118 as 'runs that found the actual min cut' and is incremented at :467-469 whenever a run matches `_best_global_cut`, which is the best found SO FAR - initialised to 999 at :229 and lowered at :460. The first round therefore always scores at least one success against a bar it set itself, and the curve is then compared on :887-895 against a theorem about the TRUE minimum. Fixing that inside karger_algorithm would mean computing the true minimum there, which is a different artifact; here the true minimum is computed independently and the comparison is put on the ledger as a single honest bar instead of a converging curve. What is lost is the argument for REPETITION - that a 2.2 percent chance repeated enough becomes a near-certainty - which is genuinely the point of Karger's algorithm and which this board does not make.",
+     "A SECOND AXIS ON THE NUMBER OF RUNS. The obvious third knob is karger_runs, and it is refused twice over. It is a NUMBER, and a numeric value whose key sits outside CONFIG_PARAM_NAMES is silently coerced to true-plus-a-rotation when a map hangs it - 46 axes in this corpus are already unhangable that way and this pass will not add a 47th. And it would be an axis whose whole content is a probability: more runs means a better chance, and a chance is not a thing one photograph can show. It is pinned by dna.fixture at 8 instead, and the fact that eight runs suffice to find the minimum in every cell here - on graphs whose minimum cut is a low-degree vertex's own star - is itself worth saying out loud, because the 2/(n(n-1)) bound is a worst case attained on a cycle and not a description of typical behaviour.",
+     "THE RESIDUAL'S BACKWARD SLEEVE. `residual` draws the forward remainder as an inner ribbon and the source-side reachable territory as a filled region, and it deliberately does NOT draw the spent capacity as a returned sleeve on the reverse of each pipe, which is what a full residual graph has. The reason is structural rather than aesthetic: residual = capacity - flow, so a value that drew BOTH the remainder and the spent part would be a superposition of `capacity` and `flow` - the union of its own neighbours, which is the all-rungs fault waves 20-21 found nine times in this corpus. `residual` earns its rung on the territory, which no other value draws and which is the object a minimum cut is actually read off. The cost is that the board never shows the reverse arcs, and the reverse arcs are what make Ford-Fulkerson correct.",
+     "DIRECTION. Every pipe here is undirected and usable both ways at full capacity. networkflow3d needed a whole orientation pass to make its directed edge list carry flow at all (_orient_side, :409-421, with a measurement at :335-338 that without it the throat carries flow in fewer than half of 400 draws) and its own comment concedes the reason this is worth doing anyway: 'direction is invisible in a still - a pipe is a symmetric cylinder'. Rather than solve that, this board removes it: an undirected network has the same theorem, the same duality and the same min cut, and nothing on the sheet is then claiming something a photograph cannot support. The cost is real. Max-flow min-cut on a directed network is the version everyone is taught, and the asymmetry between a forward and a backward capacity is where residual graphs get interesting.",
+     "networkflow3d's THIRD DIMENSION, its elevation penalty and its pressure colouring. That artifact is a 30 x 15 x 30 m volume where uphill edges lose 30 percent of their capacity (:297-298) and nodes are tinted by accumulated pressure (:774-796). All of it is dropped for a flat 0.62 m board. The elevation penalty is a capacity edit that a flat drawing can carry in the capacity number itself, and does; the pressure colouring is a per-frame readout of a quantity that is zero before the flow runs and constant after it, so on a still it is a second, quieter drawing of the flow ribbon. The cost is the room: a network you can walk into is a different and better experience than a board you read, and this is a board."
+    ],
+    "fixture": {
+     "karger_seed": 20260818,
+     "karger_runs": 8
+    },
+    "fixture_why": "Karger IS randomness, so an unpinned seed means every variant photographs a different contraction and the sweep measures the seed rather than the axis. Both values already equal the @export defaults and the .tscn's, so this fixture changes nothing at capture time - it is here so that a future edit to the defaults cannot silently invalidate the arithmetic above, and so the numbers can be reproduced from the registry alone. Neither designed null depends on either value.",
+    "sweep_command": "python tools/build_dna_gallery.py --slug=bottleneck-cut --tokens=bottleneck_cut --max=16",
+    "sweep_note": "--max=16 IS LOAD-BEARING. build_dna_gallery caps the cross product and trims the LATER axis from the tail, so at the default --max=9 this 4 x 4 sheet renders as 4 x 2: `bottleneck` survives whole and `against` loses flow and residual - which deletes the severed capacity-against-flow null, the predicted degeneracy and every residual reading in one go. The declared order is bottleneck first, against second, so it is `against` that gets cut. Same trap as every previous 4 x 4 sweep in this programme.",
+    "placements": 0
+   },
+   "spatial_needs": {
+    "platform": "floor",
+    "footprint_cells": 1,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [
+     "karger_algorithm",
+     "networkflow3d",
+     "push_relabel",
+     "network_analysis"
+    ],
+    "preferred_zone": "teaching",
+    "footprint_source": "computed_from_geometry",
+    "footprint_note": "The body is 0.620 wide x 0.560 tall x 0.040 deep before the 0.62 rad face yaw and 0.533656 x 0.560000 x 0.400936 after it, so one cell holds it with room to stand at. The yaw is part of the artifact rather than a placement hint: it exists so the front face squares to the capture standpoint, and a map that rotates the token rotates it away from that."
+   },
+   "measurements": {
+    "aabb_size": [
+     0.533656,
+     0.56,
+     0.400936
+    ],
+    "aabb_center": [
+     0.002905,
+     0.28,
+     0.004069
+    ],
+    "grid_cells": [
+     1,
+     1
+    ],
+    "max_dimension_m": 0.56,
+    "source": "computed_from_geometry from the file's own constants; no Godot was run. The AABB is the layers = 0 FrameAnchor, which strictly encloses every other mesh in every cell (board slab z +/-0.020, bezel lip z +/-0.024, all flat marks at z <= 0.0235, against the anchor's z -0.020 to +0.030), so this is the AABB in all sixteen. Anchor half-extents (0.310, 0.280, 0.025) at local (0, 0.280, 0.005) rotated 0.62 rad about Y: half-x = 0.310 cos(0.62) + 0.025 sin(0.62) = 0.266828, half-z = 0.310 sin(0.62) + 0.025 cos(0.62) = 0.200468, centre (0.005 sin 0.62, 0.280, 0.005 cos 0.62). Diagonal 0.871285, radius 0.435643.",
+    "measured_at": "2026-08-18"
+   },
+   "footprint_measured": [
+    1,
+    1,
+    1
+   ],
+   "geometry_spec": {
+    "mesh_type": "composed_primitives",
+    "topology": "manifold_open",
+    "construction": {
+     "method": "primitive_assembly",
+     "primitives": [
+      "box",
+      "quad",
+      "ribbon"
+     ],
+     "operations": [
+      "solve_min_cut",
+      "solve_max_flow",
+      "contract_edges",
+      "emit_flat_marks",
+      "yaw_to_standpoint"
+     ]
+    },
+    "material": {
+     "type": "standard",
+     "shading_model": "mixed_lit_and_unshaded",
+     "key_properties": [
+      "unshaded",
+      "emission",
+      "cull_disabled"
+     ]
+    },
+    "animation": {
+     "type": "none",
+     "driven_by": "none",
+     "affects": []
+    },
+    "instance_strategy": "few",
+    "vertex_estimate": "low"
+   },
+   "qfep_connection": "Max-flow min-cut is duality staged as capacity politics: what a system delivers is exactly measured by where it can be strangled, and both source artifacts say so in their own headers. The second axis is the third sieve question made operational. A cut has no cost until you name the unit it is priced in, and the unit is not discovered - it is chosen, before the algorithm runs, by whoever set the problem up. Karger's contraction is not wrong at bottleneck=mixed; it is answering the question of how FEW connections must go, faultlessly, while the question on the table was how LITTLE capacity must go. The board's finding is that a method can be correct and irrelevant at the same time, and that nothing inside the method can tell you which it is being.",
+   "dev_category": "graph_theory",
+   "map_sequences": [
+    "graphtheory"
+   ],
+   "sequence": "graphtheory"
+  }
+ }
+}

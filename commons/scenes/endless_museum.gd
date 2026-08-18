@@ -155,8 +155,13 @@ const DOUBLE_JUMP_V := 3.6
 const JUMP_GRAVITY := 11.0     # snappier than 9.81 — a game walk, not a sim
 var _vy: float = 0.0
 var _jumps_left: int = 2       # 2 on the deck, 1 after the first, 0 after the second
-const BUILD_AHEAD_M := 24.0
-const KEEP_BEHIND_M := 70.0
+# STREAMING (em_layout.json `stream`): how far ahead a segment opens, how far
+# behind one is freed, and the floor under that. Palle: "when we walk can we
+# unload the map we are leaving behind?" — the museum always has; these are
+# the numbers it does it by, and they now live in the config with the rest.
+var BUILD_AHEAD_M := 24.0
+var KEEP_BEHIND_M := 70.0
+var MIN_SEGMENTS := 2
 # THE V1 CONSTANT, now only a FALLBACK. Eight objects for twenty-six buildings
 # was simultaneously far too few for the Soane (51 declared slots in 13 cells of
 # width, a building whose whole argument is that every wall of the path is the
@@ -684,6 +689,9 @@ func _load_modules() -> void:
 	_mod_editor = _load_module("em_editor.gd")
 	_mod_props = _load_module("em_props.gd")
 	_mod_gate = _load_module("em_gate.gd")
+	BUILD_AHEAD_M = _L("stream", "build_ahead_m", BUILD_AHEAD_M)
+	KEEP_BEHIND_M = _L("stream", "keep_behind_m", KEEP_BEHIND_M)
+	MIN_SEGMENTS = int(_L("stream", "min_segments", float(MIN_SEGMENTS)))
 	GATE_REACH_M = _L("gate", "reach_m", GATE_REACH_M)
 	GATE_PATIENCE = _L("gate", "patience_s", GATE_PATIENCE)
 	AUTOSAVE_S = _L("editor", "autosave_seconds", AUTOSAVE_S)
@@ -4871,9 +4879,11 @@ func _process(_delta: float) -> void:
 	if _eye_pos().z > _next_z - BUILD_AHEAD_M:
 		_build_segment()
 	# free far-behind segments (keep the museum endless, not the node tree)
-	while _segments.size() > 2 and float(_segments[0]["z1"]) < _eye_pos().z - KEEP_BEHIND_M:
+	while _segments.size() > MIN_SEGMENTS and float(_segments[0]["z1"]) < _eye_pos().z - KEEP_BEHIND_M:
 		var old: Dictionary = _segments.pop_front()
 		var n: Node3D = old["node"]
+		print("[em-stream] freeing the room behind: z %.0f..%.0f (%d left in the tree)" % [
+			float(old["z0"]), float(old["z1"]), _segments.size()])
 		n.queue_free()
 	_vis_timer += _delta
 	if _vis_timer >= 0.3:

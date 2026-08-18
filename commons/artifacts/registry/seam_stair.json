@@ -1,0 +1,234 @@
+{
+ "artifacts": {
+  "seam_stair": {
+   "name": "Seam Stair",
+   "lookup_name": "seam_stair",
+   "scene": "res://commons/artifacts/seam_stair/seam_stair.tscn",
+   "class_name": "SeamStair",
+   "category": "philosophy",
+   "artifact_type": "synthesis",
+   "complexity": "advanced",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "size_group": "standard",
+   "description": "A ring of sixteen treads that owes one circuit of risers it cannot deliver, mounted so that the place where it fails to deliver can be turned toward the one standpoint, a quarter off it, or behind the hub. TWO tokens declare `seam` (none | hairline | gap | scaffold | field) and nothing else in the corpus declares it: escher_staircase and florensky_sphere. They share more than a word - escher_staircase.gd:165 PRELOADS florensky_sphere.gd as `SeamAxis` and parses its own axis values through the sphere's static normalise_seam() (:532), so the vocabulary has one implementation, in the kin's file, and the two cannot drift. On that test the hypothesis holds: they are about the same thing, deliberately, at the level of code. On the test the brief actually proposed - that both are objects which cohere from one standpoint and the seam is where the illusion is stitched - it holds for exactly one of them, and reading the sources says which. FLORENSKY IS STANDPOINT-PINNED IN A CONSTANT. florensky_sphere.gd:198-199 sets SEAM_OPEN_MID_DEG = 58.0, and :150-156 shows the working: the sweep camera's direction from the AABB centre is (0.5615, 0.2571, 0.7865), azimuth 54.5 deg in that file's own atan2(z, x) frame, 'three and a half degrees off SEAM_OPEN_MID_DEG'. The opening is aimed at the lens on purpose. That file also records the reason it had to be: `gap` first measured 0.511 percent because the skin is TRANSPARENT and CULL_DISABLED, so every ray through the hole crossed the far half of the same skin and a hole in a wall you can see through is not a hole (:157-163). Florensky's seam lives in the line of sight. ESCHER IS STANDPOINT-BLIND, AND WORSE - IT SPINS. escher_staircase.gd:40 ships `rotate_view: bool = true` and :414-415 turns the figure every frame. An impossible object is a claim about ONE viewpoint; a figure that rotates has none, and the one artifact in this corpus whose entire genre depends on a privileged standpoint is the one that refuses to hold still. Nor is there any projection trick under the rotation to protect. :276 closes the loop with lerp(target_height, 0.0, wrap_factor * wrap_factor) - a smooth downward ramp - and after the 2026-07-31 repair all five values route through _seam_step_y (:604-607) to either a monotone run or a level ring. Every one of them is constructible in three-space with a tape measure. The impossibility is ARITHMETIC: the distance between a rule that says the ring closes and geometry that shows it does not, and it reads the same from every angle. So the two seams are not the same kind of thing. One is a fact about where you are; the other is a fact about a sum. That is the disagreement this bench makes settable, and the reason its second axis is a standpoint axis that moves the OBJECT.",
+   "tags": [
+    "impossible_object",
+    "inverse_perspective",
+    "standpoint",
+    "paraconsistency",
+    "godel",
+    "escher",
+    "florensky",
+    "two_axes",
+    "designed_null",
+    "declined_value",
+    "foundations_crisis",
+    "synthesis"
+   ],
+   "dev_themes": [
+    "an impossible object that rotates has no impossibility left to be impossible from",
+    "one artifact writes the measuring camera into its own geometry; its twin turns past that camera once a second",
+    "only a LOCATED contradiction has a standpoint - denial and saturation cannot be aimed at anybody",
+    "in both sources scaffold strictly contains gap, so their measured distance is partly a fact about the nesting"
+   ],
+   "capacity": "SEE that a per-pixel verdict is a fact about a pose. The same two builds - gap's lit cut ends against scaffold's rig - are photographed twice in this sheet without a single vertex moving relative to any other, once turned toward the standpoint and once away from it, and the second reading is about a third of the first. Then see the six tiles that refuse to differ at all, and why: none puts the debt nowhere and field puts it everywhere, and neither of those has a place that can face anything.",
+   "interactions": [
+    "stand at the default cell, seam=none with facing=lens, and count risers. There are none: sixteen treads at one height, a ring that looks finished, and a rule on the board saying every build pays one circuit of risers somewhere. Nothing on the object records where this one paid. That is the value, and it is the sources' shipped default in both files.",
+    "walk `facing` at seam=gap and watch the two lit datum rails - the ones that say the ends stand eleven risers apart and cannot be joined - go from the width of the frame to a pair of marks behind a translucent hub. The claim did not get weaker. The object did not change. You moved.",
+    "walk `facing` at seam=none or seam=field and watch nothing happen, three times. _phase() is the only function that reads the axis and it only reads it when the seam has a place."
+   ],
+   "signals": [
+    "seam_placed"
+   ],
+   "parameters": {
+    "seam": "where the one-circuit debt is paid: none | hairline | gap | scaffold | field",
+    "facing": "which way that place is turned relative to the declared standpoint: lens | edge | away",
+    "treads": "risers in a full circuit; the debt is treads * riser",
+    "riser": "height of one honest riser",
+    "ring_radius": "radius to a tread centre",
+    "footprint": [
+     2,
+     2,
+     2
+    ],
+    "size_group": "standard"
+   },
+   "dna": {
+    "promoted": "2026-08-18",
+    "stage": "synthesis",
+    "wave": 24,
+    "framing": 0.5,
+    "sources": [
+     "escher_staircase",
+     "florensky_sphere"
+    ],
+    "axes": {
+     "seam": [
+      "none",
+      "hairline",
+      "gap",
+      "scaffold",
+      "field"
+     ],
+     "facing": [
+      "lens",
+      "edge",
+      "away"
+     ]
+    },
+    "default": "seam=none, facing=lens. THE SEAM DEFAULT IS THE SOURCES', AND THE FACING DEFAULT IS THE SOURCES' TOO, ONE OF THEM UNKNOWINGLY. escher_staircase.gd:169 and florensky_sphere.gd:168 both ship `none`, and both files gloss it the same way: the value that HIDES the contradiction, the legacy lineage, the one that looks finished. facing=lens is florensky's shipped condition stated out loud - SEAM_OPEN_MID_DEG = 58.0 against a camera bearing of 54.5 deg (:150-156, :198-199) is a seam aimed at the lens, chosen deliberately, and nothing in the registry said so. So the default cell is the family's own habit twice over: the debt put nowhere, presented square on to the only place anyone is standing. Every other cell is a step away from that frame. What the default cell does NOT reproduce is escher's `none`, which smears the debt into a quadratic sag on one named side (:274-276) - a place, however unmarked. Denial here has no place at all, which is what makes it the value `facing` cannot touch.",
+    "was": "TWO BODIES, ONE WORD LIST, AND AN ARGUMENT ABOUT WHETHER THE WORD HAS ANYTHING TO DO WITH YOU. escher_staircase is a square of sixteen box treads climbing three sides and easing back down the fourth, four billboarded Label3Ds, a pulsing highlight sphere, and a climb ledger that once wrapped through four positions that did not exist and congratulated you on a loop. florensky_sphere is a transparent double-faced SphereMesh over an emissive core, three baked text boards, a pick area, and four logical states oscillating in albedo. Both were promoted on 2026-07-31 with the same five-value `seam` axis, the same day, by the same hand; both carry a REPAIR header written the same day admitting the first promotion had staged the argument wrongly (escher's had made the figure possible on four values out of five; florensky's had built bivalence - a blue hemisphere over a red one - for a value whose whole job was to locate a contradiction rather than resolve it). What neither of them has is a body for the standpoint. This bench keeps escher's arithmetic (one circuit of risers, spent somewhere, never invented), keeps florensky's hub (a translucent double-faced skin over an emissive core, kept because it is what stands in the way when the seam is turned away, which is the exact condition his own repair note blames for 0.511 percent), and adds the thing both of them assume and neither draws: a blade and a lit mark pointing at the camera, in every cell, so a single tile can be read without a caption saying which way the object is turned.",
+    "note": "THE INSTRUMENT DECISIONS, EACH ONE COSTING SOMETHING. (1) THE FRAME IS PINNED. One MeshInstance3D with a 1.40 x 1.02 x 1.40 BoxMesh at (0, 0.51, 0) and layers = 0 sits inside all fifteen cells. Without it the five seam values would frame at five different distances - hairline's closing riser tops out at 1.005 m, gap stops at 0.705, field is a flat band at 0.47 - and every pair would carry a scale difference it did not earn. layers = 0 rather than visible = false, because visibility is hierarchical in Godot and would take any future child with it. The half-extents are the measured union and not a round number: 0.6986 is the furthest corner any gap end cap reaches (tread centre radius 0.55, radial half 0.13, tangential offset 0.135 + 0.025), 0.6888 the furthest tread corner, 1.005 the top of hairline's closing riser. 0.70 and 0.51 clear those by 0.2 and 1.5 percent. An oversized anchor is the same fault in the other direction and buys a smaller subject. (2) THE SECOND AXIS MOVES THE OBJECT, NEVER THE CAMERA. capture_config_sweep.gd shoots every tile from YAW 0.62 / PITCH -0.26 (:68-69) with the direction built at :443 as Vector3(sin(yaw)cos(pitch), -sin(pitch), cos(yaw)cos(pitch)). A camera axis would render three identical frames. LENS_AZIMUTH is that camera's horizontal bearing, DERIVED rather than measured: cos(pitch) is a common factor inside atan2(cos(yaw)cos(pitch), sin(yaw)cos(pitch)) and cancels, leaving exactly PI/2 - YAW = 0.950796 rad = 54.4759 deg. That is where florensky's hand-computed 54.5 comes from, and it is exact rather than rounded. (3) THE DEPTH WARNING IS THE SUBJECT, NOT AN EXCUSE. A pure depth axis projects at sin(0.26) = 0.257 under this rig and is 3.89x weaker than a sideways one, so a seam that lives in depth is structurally hard for the sweep to see. `away` is exactly that case, on purpose: it moves the seam 0.55 m along the sight line rather than across the frame. The predicted 3.0x collapse in measured bite between the lens column and the away column is therefore a prediction about the instrument, and the artifact exists so that it can be read as one rather than mistaken for a fact about the design. (4) NEITHER BOARD NAMES A VALUE. escher builds a SeamNote whose text changes with the axis (escher_staircase.gd:360-370), which puts typography inside its own measured bite. Both Label3Ds here are constant across all fifteen cells, so every measured difference is geometry. The cost is that a tile no longer tells you what it is; the standpoint blade is what replaces the caption, and it only tells you where the camera is, which is a fact you can check. (5) NO NUMERIC VALUE ON EITHER AXIS. Both are @export_enum String with String defaults. Neither `seam` nor `facing` is in GridInteractablesComponent's CONFIG_PARAM_NAMES (:16-46), so a numeric value would be parsed as positional rotation shorthand at :1549-1560 and the axis would silently become `true` while the number became a yaw. There are no numbers here, so both axes are hangable from a map token. Checked against the list, not assumed. (6) NO RANDOMNESS AND NO ANIMATION AT ALL, so no dna.fixture is declared and the omission is deliberate rather than an oversight. escher_staircase rotates by default and pulses its current step in _process (:411-424); florensky_sphere oscillates albedo, flickers its state board on fmod(_animation_time, 0.5) and calls randf() in observe() (:476). Any of those makes a still a fact about the frame count. This file has no _process. (7) THE ONE PLACE THIS BENCH REFUSES BOTH SOURCES. In escher_staircase.gd:620-622 and florensky_sphere.gd:561-563, `scaffold` calls the cut-edge builder and THEN the rig builder, so scaffold's image strictly contains gap's and their measured distance can only ever be the rig. Here the two cut ends are a STATEMENT under gap (lit, emissive, 3.1 tread-thicknesses tall, with two datum rails carried across the missing quarter at the two end heights) and a BEARING under scaffold (structural brass, unlit, 1.1 thicknesses, with the rig standing on them). Neither value's picture is a superset of the other's, which is what makes the predicted pair below a measurement of two arguments rather than of one argument plus scaffolding.",
+    "predicted_degeneracy": {
+     "pair": "gap against scaffold, in the away facing",
+     "percent": 1.16,
+     "metric": "mean absolute LUMA delta over the whole 760 x 760 frame - the critic's `frame` number - so score_wave ranks this on magnitude rather than on a pixel count. The count metric is stated too and it is a DIFFERENT quantity: changed_pct, the share of pixels whose sum|dRGB| clears the threshold, is predicted at 4.86 percent for this pair. The two cannot be substituted, and this sheet is a case where it matters: gap swaps an emissive cyan rail for an unlit brass strut, so roughly the same pixel SET moves in both the lens column and the away column while the magnitude falls by 3.0x and the count by only 2.43x. Reading the count would understate the collapse this artifact exists to show. DENOMINATOR: the whole frame, not the subject - the subject share is itself a function of `facing` here, so a subject-normalised number would silently divide out the effect being measured. POOL: ranked among the twelve pairs that share a facing column and differ in seam. It is NOT ranked against the six designed-null pairs, which are 0.000 by construction and would otherwise take the closest-pair title on a technicality.",
+     "floor_or_two_sided": "FLOOR. Both members of this pair are LIT surfaces - brass at metallic 0.55 / roughness 0.45, a cyan emissive at energy 2.2, and twelve grey treads behind them - under a rig with shadows, ambient occlusion and antialiasing that a paper silhouette rasteriser cannot see. The corpus record for geometry predictions of this shape is an under-shoot of 1.5x (grasp_cabinet), 1.7x (operations_gallery), 3.5x (noise_quarry) and 6.7x (removal_room), and this one has more lit surface than any of them. So 1.16 is a floor and a measured 2 to 5 percent would be ordinary. WHAT WOULD MEAN SOMETHING IS WRONG: a measured value BELOW 1.16. The only pass in this programme's history to land under its own prediction was operations_gallery at 0.02x, and it was the only one that was broken. Below the floor here, look first at whether the anchor is being counted (a moved camera), then at whether `facing` reached the artifact at all - a seam that did not turn puts gap and scaffold in the same place under both readings and the away column becomes the lens column.",
+     "why": "THE ARITHMETIC, IN THE ORDER IT WAS DONE. FRAMING: the pinned anchor is 1.40 x 1.02 x 1.40, diagonal 2.227195, radius 1.113598. capture_config_sweep.gd:442 puts the camera at radius / tan(FOV/2) * PAD * framing = 1.113598 / 0.3057307 * 1.9 * 0.50 = 3.460303 m from the AABB centre, along (0.5615118, 0.2570806, 0.7865266). Frame half-width at the centre plane is 3.460303 * tan(17 deg) = 1.057943 m, so the frame spans 2.115886 m there and 760 px gives 129014 px per square metre. DEPTH. The away seam sits at ring_radius 0.55 on the far side of the bearing, at (-0.319569, 0.48, -0.447633); the camera is at (1.942872, 1.399583, 2.721595); the distance is 4.000910 m against 3.460303 to the centre, a linear scale of 0.864878 and 96503 px per square metre. The same furniture at the lens facing sits 2.941368 m away, scale 1.176426, 178548 px per square metre - an area ratio of 1.85 before a single pixel is occluded. THE TWO FURNITURE SETS. gap draws two lit end caps (0.05 x 0.1395 x 0.26, silhouette 0.025 each at an average obliquity factor of 0.55), two datum rails across a chord of 0.7924 m at 0.045 section (0.0339 each), and four ticks at 0.045 x 0.108 (0.00486 each): 0.1372 raw, 0.1291 after its own overlaps. scaffold draws two bearing caps (0.0091 each), three posts 0.044 x 0.96 (0.04224 each), four ledgers 0.729 x 0.030 (0.02187 each), two braces 1.18234 x 0.028 (0.03311 each) and a landing (0.0301): 0.32872 raw, 0.29052 after 0.0382 of self-overlap where posts cross ledgers and braces. The two sets share 0.0378 - the cap positions, three posts crossing two rails, two braces crossing two rails, one ledger crossing two ticks - and those pixels still CHANGE, cyan against brass, so the changed area is the UNION and not the symmetric difference: 0.1291 + 0.29052 - 0.0378 = 0.38182 square metres. OCCLUSION, WHICH IS WHY THIS PAIR AND NOT ANOTHER. The hub core is an opaque sphere of radius 0.17 at 3.470059 m; it casts a disc of radius 0.17 * 4.000910 / 3.470059 = 0.196 m at the far plane, area 0.12070, over a furniture region 0.7924 wide by 0.96 tall whose fill fraction is 0.38182 / 0.7607 = 0.502, hiding 0.06059. The near half of the ring takes an estimated 8 percent more, 0.03055 - that term is the one eyeball in this arithmetic and is called out as such. The hub SKIN, radius 0.30 and alpha 0.30, casts an annulus of 0.25547; about 85 percent of it falls over the region, so 0.10902 of changed area sits behind a double-faced alpha skin and is attenuated to 0.7 * 0.7 = 0.49 of full magnitude, the skin's own constant contribution cancelling in a difference. Clear changed area: 0.38182 - 0.06059 - 0.03055 - 0.10902 = 0.18166. LUMA. The union splits 24 percent gap-only, 66 percent scaffold-only, 10 percent both. Per-pixel deltas against a backdrop averaging 0.256 luma (60 percent background at 0.057, 40 percent tread at 0.55): emissive cyan at 0.88 gives 0.62, lit brass at 0.40 gives 0.15, and cyan against brass gives 0.48. Clear: 0.0436*0.62 + 0.1199*0.15 + 0.0182*0.48 = 0.05376. Behind glass: 0.49 * (0.0262*0.62 + 0.0720*0.15 + 0.0109*0.48) = 0.015815. Total 0.069575 square-metre luma over a frame of 577600 / 96503 = 5.9853 square metres: 0.011624, or 1.16 percent. The count metric takes the same area without the magnitude weighting: (0.18166 + 0.10902) * 96503 = 28053 px of 577600 = 4.86 percent. WHY THIS PAIR IS THE CLOSEST. Every other non-null pair moves the ring's whole height profile. hairline against gap changes four treads' existence and every remaining tread's height; none against field is a flat band against sixteen tilted plates with sixteen dark blades; and any pair that crosses `facing` at a located seam rotates the entire figure, which at hairline moves all sixteen treads by 0.24 m against a tread depth in frame of 0.112 m, so nothing lands where anything was. gap against scaffold is the only pair in the sheet that keeps the ring, the missing quarter and the two end heights identical and changes only what stands in the hole - and the away column is the depth-suppressed reading of it.",
+     "pool": "the twelve pairs sharing a facing column and differing in seam; the six designed-null pairs are excluded by construction"
+    },
+    "predicted_relationship": "THREE CLAIMS THAT DO NOT NEED A PERCENTAGE TO BE WRONG. FIRST, AND IT IS THE ARTIFACT'S WHOLE POINT: POSE BEATS VALUE. gap against scaffold at facing=lens should measure 3.49 percent luma / 11.80 percent changed_pct, and the SAME pair at facing=away 1.16 / 4.86 - a 3.00x swing in magnitude and 2.43x in count, produced by turning one object with no vertex moving relative to any other. Meanwhile hairline against hairline across lens and edge - the same object twice, no design difference whatsoever - is predicted at about 7.4 percent luma, roughly twice the loudest genuine design difference in the sheet. If both hold, the sheet is a direct measurement of the claim this programme has been making since wave 11: a per-pixel verdict is a fact about a standpoint, and it will happily outshout the thing the axis was supposed to be about. SECOND, THE AWAY COLUMN IS SYSTEMATICALLY QUIETER THAN THE LENS COLUMN BY A FACTOR NEAR 3, FOR EVERY LOCATED PAIR AND NOT JUST FOR THE PREDICTED ONE. Group by VALUE PAIR across facings, never by column mean: 1.85x of it is the depth ratio (the area scale between 2.941368 m and 4.000910 m), and the rest is the hub. If some pairs collapse and others do not, the cause is not depth and should be found before the numbers are read. THIRD, AND IT IS A PREDICTION ABOUT THE INSTRUMENT. The bite headline is a PEAK, so this sheet's top line will be a `facing` number at a located seam - around 7 to 8 percent - and reading it alone would report a healthy two-axis artifact while six of its fifteen tiles are pairwise identical and the seam axis's own quietest reading is 1.16. Read the per-pair rows, as tier_terrarium's 8.02 percent headline over a column of exact zeros already taught this corpus.",
+    "designed_nulls": [
+     {
+      "a": {
+       "seam": "none",
+       "facing": "lens"
+      },
+      "b": {
+       "seam": "none",
+       "facing": "edge"
+      },
+      "also": [
+       {
+        "seam": "none",
+        "facing": "away"
+       }
+      ],
+      "under_percent": 0.0,
+      "why": "IDENTICAL BY CONSTRUCTION, AND THE NULL IS THE ARGUMENT RATHER THAN A CHECK ON IT. _phase() is the only function in seam_stair.gd that reads `facing`, and it reads it only when _is_located() is true - that is, only for hairline, gap and scaffold. Under seam=none it returns LENS_AZIMUTH for all three facings, so every tread azimuth, every tread height (_tread_y returns _ring_mid() unconditionally for none), the hub, the standpoint datum, the anchor and both labels are built at byte-identical transforms. There is no randomness, no _process and no timer. The three PNGs are the same file. Predicted 0.000 frame and 0.000 focus; anything above 0.3 percent is render nondeterminism and anything above 2 percent means `facing` has reached geometry it must not reach, at which point every reading in the sheet is suspect. AND IT IS A DESIGNED NULL, NOT A STANDPOINT ARTEFACT, WHICH FOR THIS ARTIFACT IS THE ENTIRE DISTINCTION. A standpoint artefact is two DIFFERENT objects that happen to coincide in one camera - flat here, alive from somewhere else, which is what probe_anamorphic.py exists to catch. These are ONE object photographed three times: the scene graph is the same node list with the same transforms, so the pair would measure 0.000 from every standpoint in the five-standpoint battery and from any other. No probe is needed and none would find anything. WHAT THE NULL SAYS: a contradiction put NOWHERE cannot be turned toward anybody. `none` denies the debt - sixteen treads, every riser zero, a ring that looks finished and records nothing - and having refused it a location it has also refused it a standpoint. It is not that the difference is small. It is that the position has made itself unable to have one. CONDITIONED ONLY ON SWEPT AXES: both `seam` and `facing` are in the cross product, and no dna.fixture is declared, so nothing pinned by the harness is holding this null up."
+     },
+     {
+      "a": {
+       "seam": "field",
+       "facing": "lens"
+      },
+      "b": {
+       "seam": "field",
+       "facing": "edge"
+      },
+      "also": [
+       {
+        "seam": "field",
+        "facing": "away"
+       }
+      ],
+      "under_percent": 0.0,
+      "why": "THE SAME MECHANISM AT THE OTHER END OF THE AXIS, AND THAT SYMMETRY IS THE FINDING. field is also outside LOCATED, so _phase() ignores `facing` for it too: sixteen level treads at _ring_mid(), each tilted by asin(0.06/0.22) = 0.2762779 rad about its own run axis, and sixteen blades in the sixteen joints, all at identical transforms across the three facings. Predicted 0.000, on the same terms and with the same failure thresholds as the none null. WHAT IT SAYS, AND WHY IT IS WORTH THREE MORE TILES: a contradiction put EVERYWHERE cannot be turned toward anybody either. Denial and saturation are opposite answers - nothing rises versus every joint drops a riser - and they arrive at the same disability, because `facing` needs a PLACE and neither of them has one. Six of the fifteen tiles refuse to differ, and the two values that produce them are exactly the two the sources describe as putting the contradiction 'nowhere' and 'everywhere' (escher_staircase.gd:70-93, florensky_sphere.gd:83-110). The axis did not choose those two; the vocabulary did, before this bench existed."
+     }
+    ],
+    "designed_nulls_why": "TWO NULLS, SIX TILES, AND THEY ARE THE SAME CLAIM STATED AT BOTH ENDS OF THE FIRST AXIS: only a LOCATED seam has a standpoint. They were not chosen for convenience - the brief warns that `none` against a hidden seam is the obvious candidate and is usually a standpoint artefact, and that warning is exactly right about the pair it describes. The pair it describes is NOT this one. A hidden-seam null would be `hairline` at facing=away against `none` at any facing: two different objects that might coincide because the hub is in the way. That candidate was considered and REJECTED, because its coincidence would be a fact about where the camera stands and would evaporate from any other angle - and on this artifact, of all artifacts, publishing that as a designed null would be the exact error the sheet is built to expose. It is not predicted to be near zero either: hairline's ring climbs 0.9225 m while none's is flat at 0.4725, so the two differ across the whole silhouette and not only at the seam.",
+    "kin": "THE WORD `seam` IS TAKEN WHOLE FROM THE SOURCES AND PARSED BY THE SOURCES' OWN READER. florensky_sphere.gd:178 holds SEAMS once; :513-515 holds normalise_seam(); escher_staircase.gd:165 preloads that script rather than restating the list, with a comment saying why - so that the two cannot drift on what the five words are. This file is the third to read it, on the same terms and for the same reason: apply_grid_config calls SeamAxis.normalise_seam(), so a typo in a map token falls back to the value already held on all three artifacts identically. Borrowing a word without its reader is the dishonest half of a shared vocabulary; all five values are taken, and none is declined. THE SECOND AXIS TAKES A NEW WORD, CHECKED ACROSS ALL 108 REGISTRY FILES AND 493 DECLARED AXES. `facing` is declared by nothing. The near words were taken and each meant something else: `standpoint` by situated_sensor, `vantage` by schrodinger_box and superposition_display (where it is the REGISTER - object or room - not a bearing), `address` by situated_readout and situated_bench, `bearing` by pca_visualization, `pose` by three, `turn` by circle_train. `facing` is also the honest word for what the axis does, which is turn a face toward something; `standpoint` would have claimed the camera moves, and it does not.",
+    "declines": [
+     "A STANDPOINT AXIS THAT MOVES THE CAMERA, which is what this family's subject asks for and what the rig cannot photograph. capture_config_sweep.gd shoots every tile from one place, so an axis whose only effect is on camera yaw renders N identical frames - a finished-looking experiment answering nothing, the shape of the info_board failure this corpus already paid for. `facing` moves the object instead. The cost is real and is not hidden: for hairline, gap and scaffold the three facing tiles are three PHOTOGRAPHS OF ONE OBJECT, so any number measured across that axis is a fact about pose and nothing else. That is stated in predicted_relationship as the sheet's loudest reading rather than buried, because a reader who mistakes it for a design difference has made precisely the error the artifact is about.",
+     "THE NESTING OF gap INSIDE scaffold, which both sources build (escher_staircase.gd:620-622, florensky_sphere.gd:561-563) and which this bench refuses. Keeping it would have been the faithful choice and would have guaranteed the predicted pair a shared-pixel floor that has nothing to do with the argument: a value whose image contains its neighbour's can only ever measure the difference as 'the extra stuff'. Declining it costs the family a real piece of meaning - in the sources, scaffold moving INTO gap's hole without repairing it is the point, and the shared cut edges say so. Here that continuity is carried by the missing quarter, the two end heights and the eleven-riser separation, which are identical between the two values, while the ends themselves are a statement under one and a bearing under the other.",
+     "A CAPTION THAT NAMES THE VALUE. escher_staircase.gd:360-385 builds a SeamNote whose text is chosen by the axis, so part of that artifact's measured bite is text pixels. Both boards here are constant. The cost is that a tile no longer explains itself, and the standpoint blade is the compensation - it says where the camera is, which is checkable, rather than what the value is, which would be the answer handed over.",
+     "ROTATION, AND EVERY OTHER ANIMATION. escher_staircase.gd:40 ships rotate_view = true and :414 turns the figure in _process; florensky_sphere oscillates albedo, flickers its state board on a 0.5 s fmod, and calls randf() in observe() (:476). Any of them makes a still a fact about the frame count. Nothing here animates, which also means the object cannot demonstrate its own argument by moving - a viewer in VR has to walk, which is the correct cost for this subject.",
+     "A FOURTH `facing` VALUE THAT UNIONS THE OTHERS. `both`, or a seam split between lens and away, would have made a fourth column and it would have been an all-rungs value: the union of two siblings, which waves 20-21 found nine of in this corpus. Three columns, each a distinct relation to the one standpoint - square on, a quarter off, behind - and no column that is the others added together.",
+     "A COLOUR TREATMENT OF THE SEAM. florensky's `none` is glossed as pushing the contradiction 'into colour, where power operates unexamined' (:83-87), and a colour axis was the easy way to make all five values loud. It was declined because changed_pct COUNTS pixels past a threshold and cannot rank a colour-only axis - wave 22 tied six pairs at 12.994 percent on exactly that - so the axis would have been unrankable by half the instrument. Every value here is geometry."
+    ],
+    "sweep_command": "python tools/build_dna_gallery.py --slug=seam-stair --tokens=seam_stair --max=15",
+    "sweep_note": "--max=15 IS LOAD-BEARING AND THE DEFAULT WOULD GUT THE SHEET. build_dna_gallery caps the cross product and trims the LATER axis from the tail; at the default --max=9 a 5 x 3 sheet renders as 5 x 1, `seam` survives whole and `facing` loses edge and away - which deletes both designed nulls, the predicted degeneracy and every one of the three predicted relationships in one go, leaving a sheet that looks like a clean single-axis promotion. The declared order is seam first, facing second, so it is facing that gets cut. Same trap as every previous multi-axis sweep here.",
+    "placements": 0
+   },
+   "spatial_needs": {
+    "platform": "floor",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [
+     "escher_staircase",
+     "florensky_sphere",
+     "godel_statement_plaque",
+     "russell_set_box"
+    ],
+    "preferred_zone": "teaching",
+    "footprint_source": "computed_from_geometry",
+    "footprint_note": "The body is 1.40 x 1.02 x 1.40, which is 2 x 2 cells in plan, and the orientation is NOT a placement hint: the standpoint blade points along LENS_AZIMUTH = PI/2 - 0.62 in the artifact's own frame, so a map that yaws this token also yaws the declared standpoint away from the approach. Place it at rotation 0 unless the map's approach is deliberately being put somewhere other than where the object says the viewer is."
+   },
+   "measurements": {
+    "aabb_size": [
+     1.4,
+     1.02,
+     1.4
+    ],
+    "aabb_center": [
+     0.0,
+     0.51,
+     0.0
+    ],
+    "grid_cells": [
+     2,
+     2
+    ],
+    "max_dimension_m": 1.4,
+    "source": "computed_from_geometry from the file's own constants; no Godot was run. The AABB is the layers = 0 FrameAnchor, sized to the union of every variant's extent and present in all fifteen cells, so this is the AABB in every one of them. Half-extents (0.70, 0.51, 0.70) at local (0, 0.51, 0). Binding terms: furthest gap end-cap corner sqrt(0.68^2 + 0.16^2) = 0.6986 in plan, furthest tread corner sqrt(0.68^2 + 0.11^2) = 0.6888, top of hairline's closing riser 0.0225 + 0.0225 + 0.96 = 1.005. Diagonal 2.227195, radius 1.113598.",
+    "measured_at": "2026-08-18"
+   },
+   "footprint_measured": [
+    2,
+    2,
+    2
+   ],
+   "geometry_spec": {
+    "mesh_type": "composed_primitives",
+    "topology": "manifold_closed",
+    "construction": {
+     "method": "primitive_assembly",
+     "primitives": [
+      "box",
+      "sphere",
+      "cylinder"
+     ],
+     "operations": [
+      "create_primitives",
+      "position_children",
+      "tilt_to_riser",
+      "phase_to_standpoint"
+     ]
+    },
+    "material": {
+     "type": "standard",
+     "shading_model": "lit_with_emissive_marks",
+     "key_properties": [
+      "emission",
+      "transparency",
+      "cull_disabled",
+      "backlight"
+     ]
+    },
+    "animation": {
+     "type": "none",
+     "driven_by": "none",
+     "affects": []
+    },
+    "instance_strategy": "few",
+    "vertex_estimate": "low"
+   },
+   "qfep_connection": "The programme's own standing claim - that a verdict is a fact about a standpoint - built as an object rather than asserted about one. CONSERVATION_OF_THE_IRREDUCIBLE says the pile can be moved and never removed; `seam` is where this object moves it, and `facing` is the discovery that the moving is only half the question, because the same pile photographs three ways depending on which side of the body it was put on. The sieve's second question - what is foreclosed - answers itself in the six null tiles: denial and saturation buy their comfort by giving up the ability to be aimed at anybody, which is also the ability to be checked.",
+   "dev_category": "foundations_crisis",
+   "map_sequences": [
+    "postfoundationscrisis"
+   ],
+   "sequence": "postfoundationscrisis"
+  }
+ }
+}

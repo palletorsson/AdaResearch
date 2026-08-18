@@ -1,0 +1,222 @@
+{
+ "artifacts": {
+  "refusal_booth": {
+   "name": "Refusal Booth",
+   "lookup_name": "refusal_booth",
+   "scene": "res://commons/artifacts/refusal_booth/refusal_booth.tscn",
+   "class_name": "RefusalBooth",
+   "category": "foundations_crisis",
+   "artifact_type": "synthesis",
+   "complexity": "advanced",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "size_group": "large",
+   "description": "A booth that has already decided it will not accept, standing next to the record of what it would not accept. TWO tokens declare an axis called `refusal` and share NOT ONE VALUE: GaussianPaintSplatter (void | rim | echo | ghost | none) and rice_verifier_booth (blank | regress | oracle | spin | honest). Zero overlap is the strongest available case that a shared word is a coincidence, and it is wrong here. Read what each file says its axis IS. GaussianPaintSplatter.gd:83-85 - 'THE LADDER RUNS none / void < rim < echo < ghost, ordered by how much the picture concedes about its own censorship: nothing, then the count, then the shape displaced, then everything.' rice_verifier_booth.gd:30-34 - 'The booth's body, slot, syntactic rack and lamp are identical under every value ... The failure is not damage. The booth is in perfect working order under all five.' Both are DISCLOSURE LADDERS and both are explicitly downstream of a test whose answer never moves (GaussianPaintSplatter.gd:95-97 says so in those words). The rungs then line up four for four: void and blank are the same claim in two trades (both files say the refusal cannot be told from a crash / from a fact); rim and regress both displace the problem one step and close nothing; echo and oracle both return the refused thing wearing the ACCEPTING ink with nothing marking which is which; ghost and honest both use the word 'only' for the same claim, that theirs is the one value at which the limit is legible from outside. SO IT IS A FAMILY, and the two leftovers are the finding: `none` is off the ladder because no refusal happened and the splatter says so itself (:84-85), `spin` is off it because no answer is ever reached. Neither member carries an all-rungs value; each carries exactly one off-ladder value, for opposite reasons. This bench is a booth whose readout is a rejection sampler's plate: a white plate carrying the accepted painting and its boundary, a dark ledger carrying the record of the refused, and a witness stand behind and above both.",
+   "tags": [
+    "refusal",
+    "rejection_sampling",
+    "rice_theorem",
+    "undecidability",
+    "disclosure",
+    "gaussian",
+    "record",
+    "two_axes",
+    "declined_value",
+    "designed_null",
+    "synthesis"
+   ],
+   "dev_themes": [
+    "two members ship opposite ends of the same ladder as their defaults",
+    "a refusal that leaves no trace cannot be told from a fact about the world",
+    "an empty record has no venue",
+    "a rate is not photographable, and one member spent a fixture admitting it"
+   ],
+   "capacity": "SEE that 'the mark is absent' and 'the panel is dark' are one claim in two vocabularies, and then see that where the record is kept is a second question the family never asked: the same five records read three ways, in the institution's own account of itself, in the artefact at true scale, and on a stand outside the booth's body that is standing empty in ten of the fifteen cells.",
+   "interactions": [
+    "stand at the default cell, refusal=erased with venue=counter, and read the two panels against each other. Left: an accepted painting with a clean hole in it, which is exactly what GaussianPaintSplatter ships today at `void` and what all eight of its rooms show. Right: a dark ledger with a boundary ring on it and nothing else. The hole is 16.69 percent of the plate and 53.02 percent of every draw the sampler ever made, and neither panel says a decision was taken.",
+    "walk `refusal` at venue=counter and watch the ledger fill in four different currencies: a ring of 72 bars whose lengths are the counts thrown away along each bearing (rim's arithmetic), the same draws reflected through the boundary and stamped in the ACCEPTING ink under an empty seal socket (echo's arithmetic under oracle's socket), four receding frames each with its own copy of the same boundary and its own lamp dimmer than the last (regress), and the refused draws recorded where they actually fell in an ink that is not the accepting ink (ghost, under honest's red rule).",
+    "compare venue=counter against venue=plate at any refusal except erased. The record is the same record and it is not the same picture: on the counter it is drawn at the scale of the region the boundary governs, out to 2R, and on the artefact it is drawn at TRUE scale, where the refused region is 16.69 percent of the plate and nothing zooms for you. The institution's account of itself is legible; the artefact's is not; and the arithmetic underneath them is identical.",
+    "compare venue=witness against the other two. Smallest surface in the frame, a third palette that is neither party's, and a stand that is present in all fifteen cells - which means it is standing EMPTY in the ten where the booth keeps its own record. That empty stand is the picture of the thesis both members share: rice_verifier_booth.gd:18, 'a system cannot audit its own meaning from inside its own description'.",
+    "walk `venue` at refusal=erased and notice that nothing moves at all. Three frames, one image, byte for byte - the record is empty, so where it is kept has no content. The bottom rung of the ladder does not merely conceal what was refused; it conceals the fact that there is a place where such things are kept.",
+    "read the witness column's smallest pair. erased against tallied is 0.947 percent of frame, the quietest non-null cell in the sheet: the smallest, most external, least articulate record there is, saying only how many."
+   ],
+   "dna": {
+    "promoted": "2026-08-18",
+    "stage": "synthesis",
+    "wave": 24,
+    "framing": 0.42,
+    "axes": {
+     "refusal": [
+      "erased",
+      "tallied",
+      "displaced",
+      "deferred",
+      "marked"
+     ],
+     "venue": [
+      "counter",
+      "plate",
+      "witness"
+     ]
+    },
+    "sources": [
+     "GaussianPaintSplatter",
+     "rice_verifier_booth"
+    ],
+    "fixture": {
+     "generation_seed": 20260818
+    },
+    "default": "refusal=erased, venue=counter. THE REFUSAL DEFAULT IS ONE MEMBER'S AND NOT THE OTHER'S, BECAUSE THE MEMBERS DISAGREE. GaussianPaintSplatter.gd:102 ships `void`, the bottom rung, and its own header calls it 'THE LEGACY LINEAGE, byte for byte ... what all eight rooms ship today'. rice_verifier_booth.gd:59 ships `honest`, the TOP rung. One family, and every placement of one member conceals while every placement of the other discloses. A bench cannot inherit both, and inheriting the disclosing end would mean starting at its own conclusion, so it starts where the corpus's live placements actually are: at the value where a refusal is indistinguishable from a fact about the world. venue=counter because the institution's own account of itself is the record everyone actually meets, and because it is the only venue at which every value of the first axis is legible - which is a property of the default worth having and not a property of the axis.",
+    "was": "THE BENCH'S VOCABULARY IS NEITHER MEMBER'S, AND THAT IS FORCED BY THE FAMILY'S SHAPE. `void` and `blank` are the same rung expressed as ANSWERS - one is a sampler's answer, one is a verifier's - and taking either would have made this bench a third placement of one member rather than a reading of both. So the axis is named for the thing both members are actually arguing about, which is THE RECORD: erased (nothing - no mark, no count, no place), tallied (the count, not the place), displaced (the refused draw returned in the accepting ink, unsigned), deferred (the record points at another record), marked (recorded where it fell, in an ink that is not the accepting ink). Each word names the QUESTION 'what does the record contain' rather than either trade's answer to it, and each is traceable: tallied is rim's arithmetic (GaussianPaintSplatter.gd:545-552) carrying regress's displacement, displaced is echo's arithmetic (:559-563) under oracle's empty seal socket (rice_verifier_booth.gd:245-248), deferred is regress's receding file with its 0.2-per-step lamp dimming (:230-233), marked is ghost's own-ink stamp (:566-571) under honest's lit rule (:273-284).\n\nTHE SECOND AXIS IS THE FAMILY'S OWN THESIS MADE INTO A DIMENSION. rice_verifier_booth.gd:18: 'the floor under all self-checking - a system cannot audit its own meaning from inside its own description.' GaussianPaintSplatter.gd:9: 'the hole in the middle is a decision, not a fact' - a sentence that is only true for a reader standing outside the plate. `venue` asks where the record is kept and in whose vocabulary: counter (the booth's own service face, the booth's palette, drawn at the scale of the governed region), plate (the artefact, the artefact's palette, TRUE scale), witness (a stand outside the booth's body, in a third palette that is neither party's). The word `venue` is declared by no other artifact in the corpus, checked across all 108 registry files; `record` was rejected because seven artifacts already declare it in senses of their own, `disclosure` because fifteen do, and `standing` because it reads as a posture rather than a place. `witness` appears here as a VALUE and not as an axis name, which is where remainder_box's wave-22 finding said such a word belongs - a word that names a place in the observer belongs on the observer axis.\n\nBOTH SOURCES WERE READ IN FULL BEFORE ANY OF THIS. GaussianPaintSplatter.gd is 625 lines and rice_verifier_booth.gd is 386.",
+    "note": "THE INSTRUMENT DECISIONS, AND WHAT EACH ONE COST.\n\n(1) THE HUE IS DRAWN BEFORE THE REFUSAL TEST. This is inherited, and it is the single hardest-won line in either source. GaussianPaintSplatter.gd:232-244 records that the palette pick used to sit BELOW the branch, so values that returned early consumed no hue draw while values that fell through consumed one per refusal; at a rejected fraction in the tens of percent the stream ended up offset by hundreds of draws and every accepted dot was a DIFFERENT COLOUR between the two groups. Same positions, different paint, and a critic comparing colour per pixel would have reported a confident bite for a recolour. Here every sample consumes exactly one hue draw at every value of both axes.\n\n(2) TWO GENERATORS, POSITIONS AND HUES KEPT APART, seeded generation_seed and generation_seed * 7919 + 104729, exactly as GaussianPaintSplatter.gd:581-592. `displaced` KEEPS a draw the other values discard; on one stream that would shift every subsequent position and the fifteen tiles would be fifteen different paintings.\n\n(3) THE SEED DEFAULTS TO A REAL VALUE, WHICH THE SOURCE'S DOES NOT. GaussianPaintSplatter.gd:131 defaults splatter_seed to -1, the global stream, and that is correct in a room and useless on a bench. This object exists to be photographed fifteen times and compared. The export is named `generation_seed` because that name is in GridInteractablesComponent.CONFIG_PARAM_NAMES:22 - any other name with a numeric value is parsed as tutorial shorthand at :1549 and :1571, the key becomes `true` and the number becomes a Y ROTATION, silently. Both axes are word enums typed String with String defaults, so cabinet_sweep.coerce() has nothing to numericise and the tier_terrarium failure - Object.set() refusing a typed property in silence - cannot occur. Checked, not assumed.\n\n(4) NO Label3D ANYWHERE. capture_config_sweep.gd:55-64 records that the capturer now runs every Label3D through LabelFramer, which builds a bezel and a backing plate around it, and that furniture is not this bench's geometry to be photographed. Everything legible on this bench is rasterised into a texture. The cost is real and it is stated: the plate and the ledger carry no headers, so a first-time reader has to work out which panel is which from its ground colour.\n\n(5) THE RECORD SURFACES ARE UNSHADED AND THE BODIES ARE NOT. The rendered pixel on a record quad is filmic(srgb_to_linear(albedo)) and nothing else, which is what lets the prediction below be computed rather than guessed. The plinth, console, mast and slab stay lit, because a bench with no shading is a chart and this one is supposed to have a body. TEXTURE_FILTER_LINEAR and mipmaps = false, matching GaussianPaintSplatter.gd:360: a 512 image displayed at roughly 170 frame pixels on the stele is a 3x downsample and mipmapping would soften a 15-pixel tally bar into its ground. That is the ONE term in this bench's arithmetic that can move the measurement the wrong way, and it is a fact about the harness rather than about the axis.\n\n(6) THE PROPORTIONS ARE NOT THE SOURCE'S, and the departure is declared rather than hidden. The splatter runs stddev 80 and safe_zone_radius 80 on a 640 plate - both 0.125 of the width - so the refused region is 4.9 percent of the plate's AREA even though it swallows 39.35 percent of the DRAWS. At this bench's frame share that is under 0.5 percent of frame for every value: the axis would be photographing a postage stamp. Here sigma is 0.1875 and the boundary 0.2305 of the width, so the refused region is 16.69 percent of the plate and 53.02 percent of the draws. The Box-Muller transform, the mean, the distance test and the blend-on-existing compositing are byte for byte the source's; only the magnitudes moved, and magnitudes are exactly what the splatter's own header (:86-92) says are NOT the axis.\n\n(7) THE BOUNDARY IS INVARIANT AND IS DRAWN AT EVERY VALUE. Both members hold their test fixed across their whole axis and say so; so does this. The ring is on the plate and on both record surfaces in all fifteen cells.\n\n(8) THE WITNESS STAND IS PRESENT AT EVERY VENUE. An empty stand is what an outside record looks like when the institution is keeping its own, and it is also what makes the designed null a THREE-WAY identity instead of a two-way one. It stands BEHIND AND ABOVE the panels rather than beside them, and that is a measurement: the capture standpoint is 14.9 degrees of elevation, the panels top out at y 1.335 with their faces at z -0.025, and the stele face sits at z -0.1735, so the panels hide everything below 1.335 - 0.1485 * tan(14.9) = 1.2955 up there. The face bottom is 1.44, clear by 0.145 m. Beside them it would have cost 0.66 m of width in a square frame and diluted every measurement on the sheet by about 18 percent.\n\n(9) THE FRAME IS PINNED. A 1.70 x 2.07 x 0.455 BoxMesh with layers = 0 at (0, 1.035, -0.0375) inside the yawed body, present in all fifteen cells. Nothing here actually changes the AABB, so the anchor is insurance rather than a repair; it is here because the alternative is discovering the need for it from a sheet. layers = 0 and not visible = false, because Godot visibility is hierarchical.\n\n(10) THE BODY IS YAWED 0.62 rad. capture_config_sweep.gd:68-69 puts the camera at YAW 0.62 / PITCH -0.26 and :442 builds its direction as Vector3(sin(yaw)cos(pitch), -sin(pitch), cos(yaw)cos(pitch)), whose horizontal bearing is atan2(sin 0.62, cos 0.62) = 0.62 exactly. Facing the body along it photographs every front surface square and costs only cos(0.26) = 0.966390 of the height.\n\n(11) THE STONE IS NEITHER PALETTE, AND IT SEPARATES IN LUMINANCE. rice_verifier_booth's own registry records the trap: its blank-against-oracle pair measured focus 4.43 percent and COLOUR 81.94 percent, unlit near-black cards against emissive gold at similar luminance, an axis a greyscale critic called twins. STONE (0.30,0.31,0.34) has luma 0.310 against the border ink's 0.776 and every mark ink on this bench clears 0.34 of luma separation from its ground, so the greyscale reading and the colour reading agree rather than compete.",
+    "predicted_degeneracy": {
+     "pair": "erased against tallied, in the witness venue",
+     "percent": 0.457,
+     "metric": "mean absolute LUMA delta over the 760 x 760 frame - the critic's `frame` number, and the word luma is written so score_wave ranks on MAGNITUDE. The count metric is stated too and it is a different quantity: changed_pct, the share of pixels whose sum|dRGB| exceeds 26, is predicted at 0.947 percent. The count cannot rank this column against itself, because all four non-null witness pairs paint the same ink at the same contrast on the same ground and differ only in AREA - the moving pixels clear the gate by a factor of 14 in every one of them (sum|dRGB| = 374 against a threshold of 26), so the count is simply the area and carries no information the luma number does not already carry. Where the two metrics come apart on this sheet is between VENUES, not within one: at venue=plate the marks are drawn on WHITE in a dark ink and at venue=counter on near-black in a light one, so a pair of equal luma magnitude has a different pixel count in each.",
+     "floor_or_two_sided": "TWO-SIDED, plus or minus about 20 percent, and the reason is specific. The changed region is entirely on an UNSHADED quad, so its rendered colour is filmic(srgb_to_linear(albedo)) exactly and the two endpoint lumas were computed through that curve rather than estimated: STONE (0.30,0.31,0.34) renders to 8-bit (96.9, 100.4, 110.7), PIL L = 100.52; BORDER_COL (0.72,0.78,0.90) renders to (214.1, 224.9, 243.0), L = 223.74; dL = 123.22 of 255 = 0.48322. There is no lit surface in the delta and no shadow can fall on it, so the usual 1.5x-to-6.7x paper-rasteriser under-shoot does not apply. THE TWO TERMS THAT CAN MOVE IT, both named in advance: (a) DOWNWARD, the tally bars are modelled as a SOLID annulus of mean reach and the real outer edge is ragged, because bar length is a per-bearing count with a standard deviation of about 4.2 draws - coverage in the outer third is patchy and this could cost up to 15 percent; (b) DOWNWARD, texture filtering at a 3x downsample. IF MEASURED LANDS BELOW 0.37 PERCENT, CHECK THE TEXTURE FILTER AND MIPMAPS FIRST - that is the one term here that is a fact about the harness and not about the axis, and it is why the material sets TEXTURE_FILTER_LINEAR and the image is created with mipmaps = false. If it lands above 0.55 percent, check whether the bars are being rasterised wider than 15 pixels: _bar stamps discs of radius int(width * 0.5) and an off-by-one there is a 13 percent area error.",
+     "pool": "the FOUR non-null refusal pairs inside the witness venue, ranked among themselves: erased-against-tallied 0.457, erased-against-marked 0.472, erased-against-deferred 0.527, erased-against-displaced 0.880 (all luma). Not the sheet's 105 pairs. A rank inherits its context and this one inverts across the sheet: at venue=plate the quietest value is not tallied but MARKED, because the plate draws at zoom 1.0 where the ghost disc is 43,744 px2 of a 262,144 px2 image while the tally annulus is 42,146, and the zoom to 2R on the counter and the witness reverses which of the two is smaller. That inversion is a fact about presentation scale rather than about the axis and it is registered here so that nobody reads it as instability.",
+     "why": "THE ARITHMETIC, IN FOUR STEPS.\n\nDRAWS. x and y are drawn independently from N(256, 96) on a 512 plate, so the distance from centre over 96 is Rayleigh(1) and P(d < 118) = 1 - exp(-(118/96)^2 / 2) = 1 - exp(-0.7554253) = 0.5301895. Of 2400 samples, 1272.5 are refused and 1127.5 accepted.\n\nINK. The witness record is drawn at REC_ZOOM = 256 / (2 * 118) = 1.084746, so the boundary sits at radius 128.0 in a 512 image. `tallied` lays 72 bars outward from it, one per bearing, of length (12 + 2 * count) * zoom; the mean count is 1272.5 / 72 = 17.673, so the mean reach is 47.346 * 1.084746 = 51.358 px. Bar width is 14 * zoom = 15.186, rasterised by _bar as discs of radius int(7.593) = 7, i.e. 15 px. At the inner radius the bearing spacing is 2 * pi * 128 / 72 = 11.17 px and at the outer radius 15.65 px, both at or under the 15 px width, so the bars form a near-solid annulus rather than 72 separate marks: area = pi * (179.36^2 - 128^2) = pi * 15786 = 49,594 px2, which is 18.92 percent of the 262,144-pixel record image. `erased` draws nothing at all, so this is the whole difference.\n\nFRAME. The pinned anchor is 1.70 x 2.07 x 0.455 at (0, 1.035, -0.0375), rotated 0.62 rad about Y, so the world AABB is 1.647964 x 2.070000 x 1.358074, diagonal 2.974063, radius 1.487032 - and this is MEASURED, not only computed: probe_aabb_hogs on the built scene returns size (1.647964, 2.070000, 1.358074) at centre (-0.021789, 1.035, -0.030521) across 15 meshes, agreeing with the hand arithmetic to six decimals. capture_config_sweep.gd:442 sets dist = radius / tan(17 deg) * 1.9 * 0.42 = 3.88139 m, so the frame is a square of side 2 * 1.487032 * 1.9 * 0.42 = 2.373303 m, area 5.632565 m2 (3.123 mm per pixel). The stele's record face is 0.54 x 0.54 m foreshortened by the pitch alone at cos(0.26) = 0.966390, giving 0.281800 m2 = 5.0031 percent of frame.\n\nSUM. 18.92 percent of 5.0031 percent = 0.9466 percent of frame changed, and each changed pixel moves 0.48322 of full scale, so the mean absolute luma delta is 0.009466 * 0.48322 = 0.004574 -> 0.457 percent. The count metric is the area alone, 0.947 percent, because sum|dRGB| across the change is 117.2 + 124.5 + 132.3 = 374 and the gate is 26.\n\nMARGIN. The next pair up is erased-against-marked at 0.472 percent, 1.03x - which is TIGHT, and deliberately so: the tally annulus (18.92 percent of the record) and the ghost disc plus its rule (19.52 percent) are nearly the same area in nearly the same place, and the two values are the two ends of the ladder that the family disagrees about. If those two come back inverted the prediction is not thereby wrong; if they come back more than about 30 percent apart, one of the two is not drawing what this file says it draws.",
+     "peak_for_contrast": "The loudest pair in the sheet is erased against displaced at venue=counter, predicted 1.653 percent luma (36.41 percent of the record image, on the largest record surface) - 3.6x this floor. Quoting that headline alone would hide the fact that the same axis at the same values measures 0.457 percent two columns over, on the same 1272 draws, differing only in which surface is carrying them."
+    },
+    "predicted_relationship": "THREE CLAIMS THAT DO NOT NEED A PERCENTAGE TO BE WRONG.\n\nFIRST, COUNTER AND WITNESS CARRY THE SAME IMAGE AT DIFFERENT SIZES, SO EVERY WITNESS PAIR MUST BE ITS COUNTER TWIN TIMES A SINGLE CONSTANT. Both surfaces are built by the same _record_image call at the same REC_ZOOM and differ only in ground colour and in area: 0.281800 m2 against 0.529197 m2, a ratio of 0.53250. So witness(tallied)/counter(tallied), witness(marked)/counter(marked), witness(deferred)/counter(deferred) and witness(displaced)/counter(displaced) must all equal 0.5325 to three decimals - four readings of one number, on the count metric. They will NOT match on luma, because the two grounds differ (STONE luma 0.310, LEDGER_GROUND luma 0.099) and the same ink therefore travels a different distance on each; that mismatch is the measurement of the ground and not a fault. If the four COUNT ratios disagree with each other, the two surfaces are not carrying the same image and nothing else on the sheet can be believed.\n\nSECOND, PLATE IS NOT THAT RATIO, AND MUST NOT BE. The plate draws at zoom 1.0, so its marks are not a scaled copy - they are the same 1272 physical draws over a disc 1.0847x smaller in radius, at a dot radius of 4 instead of 6. `marked` covers 76.82 percent of the plate's hole and 93.88 percent of the record's zoomed disc, so plate/counter for `marked` is predicted at 0.708 and not at 0.5325 and not at 1.0. A plate column that came back at 0.5325 would mean the zoom is not being applied and the two panels are showing one picture at two sizes, which is the opposite of this bench's second claim.\n\nTHIRD, AND IT IS A PREDICTION ABOUT THE INSTRUMENT. The quietest value inverts between venues: tallied is the floor at counter and witness, marked is the floor at plate. Ranked by count metric, tallied/marked is 18.92/19.52 = 0.969 at counter and witness, and 16.08/13.82 = 1.164 at plate. Two orderings of the same two values from the same 1272 draws, produced by nothing but the scale the record is drawn at. This is pre-registered rather than discovered afterwards because a critic reading only the ranked pair list would report it as an unstable axis.",
+    "designed_nulls": [
+     {
+      "a": {
+       "refusal": "erased",
+       "venue": "counter"
+      },
+      "b": {
+       "refusal": "erased",
+       "venue": "plate"
+      },
+      "under_percent": 0.3,
+      "why": "IDENTICAL BY CONSTRUCTION, AND THE NULL IS THE ARGUMENT RATHER THAN A CHECK ON IT. `venue` does exactly one thing: it decides which of three surfaces receives the marks. At refusal=erased there are no marks - _marks() falls to its `_:` arm and draws nothing - so no surface receives anything and the two scene graphs are the same meshes, the same transforms, the same three textures, vertex for vertex. Predicted 0.000 percent frame and 0.000 percent focus. Anything above 0.3 percent is render nondeterminism; anything above 2 percent means `venue` is reaching something other than the mark routing, and every reading on the sheet is then suspect.\n\nWHAT IT SAYS: the bottom rung of this ladder does not merely conceal what was refused. It conceals the fact that there is a place where such things are kept. An empty record has no venue, and both members' bottom values - void and blank - are exactly this state.\n\nAND WHY IT IS CONDITIONED ONLY ON THE TWO SWEPT AXES: `refusal` and `venue` are both in the cross product, so the sweep renders both of these cells. The one fixture on this artifact, generation_seed, is held at 20260818 in every cell and is not part of either condition - a null conditioned on a pinned parameter can never be tested, which is wave 21's warning."
+     },
+     {
+      "a": {
+       "refusal": "erased",
+       "venue": "counter"
+      },
+      "b": {
+       "refusal": "erased",
+       "venue": "witness"
+      },
+      "under_percent": 0.3,
+      "why": "THE THIRD LEG OF THE SAME IDENTITY, and it is registered separately because it is the one that had to be BUILT rather than merely allowed. The witness stand could have existed only at venue=witness, and then this pair would have differed by a 0.62 x 0.72 slab and a mast - a furniture difference dressed as a finding. It stands in all fifteen cells instead, with a blank face wherever the booth is keeping its own record, so the three venues at refusal=erased are one image. Predicted 0.000 percent.\n\nThe cost is stated: ten of the fifteen frames contain an empty witness stand, which a reader could take for decoration. It is not. It is the only object in the frame that can record that nothing was recorded, and its blankness in those ten cells is the same claim the null makes."
+    }
+    ],
+    "designed_nulls_why": "ONE IDENTITY, REGISTERED AS TWO PAIRS BECAUSE IT IS A THREE-WAY. No other exact null exists in this geometry and the near-misses were checked and rejected: erased-against-tallied at witness is the smallest non-zero pair in the sheet at 0.457 percent and is registered as the predicted degeneracy instead; and the boundary ring, which is byte-identical on the ledger and the stele in all fifteen cells, is a null only on a crop and a whole-frame null needs the whole frame.",
+    "kin": "THE WORD `refusal` IS TAKEN WHOLE FROM BOTH SOURCES AND NONE OF THE VALUES ARE. That is the opposite of remainder_box's decision in wave 22, and it is forced by this family rather than chosen: remainder_box could inherit four of five values because its two members shared a vocabulary with ONE implementation, and these two members share nothing but the word. Ten values, zero intersection, and each member's five are answers phrased in its own trade - a sampler's `void` and a verifier's `blank` are one claim that cannot be said in one word without picking a trade. So the axis keeps the word, which is what the family agrees on, and coins five values that name the question. A map token writing `void` or `blank` or `ghost` or `honest` does NOT match here and keeps whatever value is held, with a push_warning - deliberately, because silently mapping a member's word onto this bench's rung would assert an equivalence this bench exists to argue for rather than to assume.\n\nTHE SECOND AXIS TAKES A NEW WORD. `venue` is declared by no other artifact in the corpus, checked across all 108 registry files. The near words were all taken: `record` by seven artifacts (harmonic_motion_demo, constant_dispute, atmosphericmonitoring, dual_display_test, holographicdisplay, multimeter, seismograph), `disclosure` by fifteen, `trace` by four. `witness` is an axis NAME on curvature_slider and lab_room and appears here only as a VALUE, which is where wave 22's finding put it: a word that names a place in the observer belongs on the observer axis, not on the object's.",
+    "declines": [
+     "SPIN, AND THIS IS THE PASS'S HARDEST RESULT RATHER THAN AN OMISSION. rice_verifier_booth's fourth value is a machine that never halts - a rotor caught mid-turn over the slot, an ellipsis for a readout (:251-263). A still cannot distinguish a rotor that is turning from one that has stopped, and the source KNOWS this: _process advances the hub at 2.2 rad/s from _ready (:132-140), and the file carries an export called rotor_frozen (:61-67) whose whole purpose is to stop it so that two captures are comparable. Its registry says so outright - 'the blade angle at the shutter is a function of how many frames the headless boot managed, and two captures of `spin` were not comparable to each other'. So every published photograph of `spin` is a photograph of a STOPPED rotor, which is precisely the thing spin is not; the value is not photographable, only stageable. It is declined here rather than staged. WHAT SURVIVES OF IT: the still-photographable residue of non-halting is 'the answer is always one more step away', and that is `deferred`, which this bench does carry - four receding frames, each with its own copy of the same boundary and a lamp dimmer than the last. A regress is what a non-halting computation looks like when you draw it in space instead of in time. That is a claim, and a reader is free to say it loses the thing that mattered.",
+     "NONE, THE SPLATTER'S CONTROL, and it is declined on a stronger ground than redundancy. At `none` the safe zone stops legislating and every draw is kept (GaussianPaintSplatter.gd:78-80). That does not change what the record says about the refused; it turns off the TEST, and the test is the one thing both members hold invariant across their entire axis - :95-97 in one file, :30-34 in the other. A value that changes the mechanism is not on the axis, it is a different experiment. The splatter is right to carry it as a control frame on its own sheet; borrowing it here would put a picture of an ungoverned gaussian in a row about what a record contains. Its own header already places it outside the ladder (:84-85).",
+     "ORACLE AS A VALUE OF ITS OWN. rice_verifier_booth's third value is a bright confident plate over an EMPTY seal socket (:236-249) - an answer produced by the process that could not decide it, unmarked. It is folded into `displaced` rather than given its own rung, because on the record they are one claim: the refused thing comes back wearing the accepting ink with nothing marking which is which. The socket is quoted literally - six bars in ORACLE_COL (1.0,0.86,0.42), bracketed, ruled and never filled, under the reflected annulus. THE FOLD IS ARGUABLE AND THE ARGUMENT AGAINST IT IS FAIR: echo is a bijection that loses nothing while an oracle invents an answer outright, and folding them says that from the record's side those are the same failure. That is the claim; a reader can reject it.",
+     "A FOURTH VENUE, `sealed` - the record kept in a drawer in the console under a filled seal, attested but withheld. It was designed, costed and dropped. The seal's imprint is the only thing that could carry the first axis under it, at roughly 22 cm2 of face, which is 0.39 percent of frame at this framing; five values across it would have measured under 0.15 percent apart and the whole column would have been five near-identical frames. Wave 20 and 21 found nine all-rungs values in the corpus by looking for values that are every other value; this is the neighbouring fault - a column that is one picture five times - and adding one deliberately, with the arithmetic already done, would have been worse than finding one by accident.",
+     "THE RATE, THE SPREAD AND THE RADIUS, all three, and the source says why before this bench did. GaussianPaintSplatter.gd:86-92: splatter_update_interval is a RATE and invisible to a still ('info_board already burned a whole sweep proving that'); stddev and safe_zone_radius are MAGNITUDES, and 'sweeping stddev would publish five bells of five widths, which is a picture of a number, not of a claim'. All three are plain constants here. The one magnitude that DID move is stated in the note above rather than hidden: the boundary was enlarged from 0.125 to 0.2305 of the plate width so the refused region is 16.69 percent of the plate instead of 4.9 percent, because at the source's proportions every value on this sheet would have measured under 0.5 percent of frame.",
+     "THE INTERACTION. rice_verifier_booth has a clickable slot and two signals (:289-310); this bench has no Area3D, no input and no clock. A submission is a BEFORE and an AFTER, and a still has only one of them; worse, staging the before/after would smuggle back the idea that the refusal is an event that happens to you, when both members' claim is that it was decided before you arrived. The cost is real and it is the largest thing given up here: this is a bench for comparing, not an apparatus you meet in a room.",
+     "A `warrant` AXIS - theorem against policy, the thing that actually separates the two members. rice's booth refuses because Rice 1953 proves it must; the splatter refuses because someone set a radius. That is a genuine and important difference and it is NOT declined because it is uninteresting - it is declined because it is not visible in a photograph of a refusal, which is the whole reason the two members' refusals could be mistaken for each other in the first place. Any geometry that made it visible would be a plaque saying which one it was, and a plaque is a caption, not an axis. It is written into the file's dark-spot paragraph instead, where it belongs."
+    ],
+    "sweep_command": "python tools/build_dna_gallery.py --slug=refusal-booth --tokens=refusal_booth --max=15",
+    "sweep_note": "--max=15 IS LOAD-BEARING AND THE DEFAULT WOULD GUT THE SHEET. build_dna_gallery caps the cross product at 9 by default and trims the LATER axis from the tail, and 5 x 2 = 10 is still over the cap, so at the default this 5 x 3 renders as 5 x 1: `refusal` survives whole and `venue` loses BOTH plate and witness. That deletes both designed nulls, the predicted degeneracy, all three predicted relationships and the entire second axis in one go. NOT SWEPT YET - this entry is pre-registration, written before any capture.",
+    "placements": 0
+   },
+   "spatial_needs": {
+    "platform": "floor",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [
+     "rice_verifier_booth",
+     "GaussianPaintSplatter",
+     "critic_regress_stack",
+     "negative_control_fixture",
+     "godel_statement_plaque"
+    ],
+    "preferred_zone": "teaching",
+    "footprint_source": "computed_from_geometry",
+    "footprint_note": "The body is 1.70 wide x 2.07 tall x 0.455 deep before the 0.62 rad face yaw and 1.647964 x 2.070000 x 1.358074 after it, so two cells by two hold it with room to stand in front. The yaw is part of the artifact and not a placement hint: it exists so the front faces square to the capture standpoint, and a map that rotates the token rotates it away from that."
+   },
+   "measurements": {
+    "aabb_size": [
+     1.647964,
+     2.07,
+     1.358074
+    ],
+    "aabb_center": [
+     -0.021789,
+     1.035,
+     -0.03052
+    ],
+    "grid_cells": [
+     2,
+     2
+    ],
+    "max_dimension_m": 2.07,
+    "source": "computed_from_geometry from the file's own constants; no Godot was run for the measurement. The AABB is the layers=0 FrameAnchor, which is sized to the union of every variant's extent and is present in all fifteen cells, so this is the AABB in every one of them. Anchor half-extents (0.850, 1.035, 0.2275) at local (0, 1.035, -0.0375), rotated 0.62 rad about Y: half-x = 0.850 cos(0.62) + 0.2275 sin(0.62) = 0.823982, half-z = 0.850 sin(0.62) + 0.2275 cos(0.62) = 0.679037. Diagonal 2.974063, radius 1.487032.",
+    "measured_at": "2026-08-18"
+   },
+   "footprint_measured": [
+    2,
+    3,
+    2
+   ],
+   "parameters": {
+    "refusal": "What the record contains about the draws the boundary would not accept",
+    "venue": "Where that record is kept, and in whose vocabulary",
+    "footprint": [
+     2,
+     3,
+     2
+    ],
+    "size_group": "large"
+   },
+   "geometry_spec": {
+    "mesh_type": "composed_primitives",
+    "topology": "manifold_closed",
+    "construction": {
+     "method": "primitive_assembly",
+     "primitives": [
+      "box",
+      "quad"
+     ],
+     "operations": [
+      "create_primitives",
+      "rasterise_textures",
+      "position_children",
+      "yaw_to_standpoint"
+     ]
+    },
+    "material": {
+     "type": "standard",
+     "shading_model": "mixed_lit_and_unshaded",
+     "key_properties": [
+      "unshaded",
+      "emission",
+      "generated_texture"
+     ]
+    },
+    "animation": {
+     "type": "none",
+     "driven_by": "none",
+     "affects": []
+    },
+    "instance_strategy": "few",
+    "vertex_estimate": "low"
+   },
+   "qfep_connection": "The second sieve question with a number attached. `refusal` asks what a procedure puts on the record about what it would not accept, and `venue` asks who holds that record - and the finding is that the family's own two members ship OPPOSITE ends of the ladder as their defaults, so every live placement of one conceals a decision while every live placement of the other displays one, and nothing in the corpus noticed because the two never shared a value to disagree about. The bottom rung is the interesting one: a refusal that leaves no trace is not a quiet refusal, it is a fact about the world, and the only instrument that can say otherwise is one standing outside the thing that refused.",
+   "dev_category": "foundations_crisis",
+   "map_sequences": [
+    "foundationscrisis"
+   ],
+   "sequence": "foundationscrisis"
+  }
+ }
+}

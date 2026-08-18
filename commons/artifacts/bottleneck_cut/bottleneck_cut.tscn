@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bottleneck_cut1"]
+
+[ext_resource type="Script" path="res://commons/artifacts/bottleneck_cut/bottleneck_cut.gd" id="1_script"]
+
+[node name="BottleneckCut" type="Node3D"]
+script = ExtResource("1_script")
+bottleneck = "mixed"
+against = "capacity"
+karger_seed = 20260818
+karger_runs = 8

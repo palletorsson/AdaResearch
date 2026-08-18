@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://outside_hall1"]
+
+[ext_resource type="Script" path="res://commons/artifacts/outside_hall/outside_hall.gd" id="1_script"]
+
+[node name="OutsideHall" type="Node3D"]
+script = ExtResource("1_script")

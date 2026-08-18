@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://seam_stair1"]
+
+[ext_resource type="Script" path="res://commons/artifacts/seam_stair/seam_stair.gd" id="1_script"]
+
+[node name="SeamStair" type="Node3D"]
+script = ExtResource("1_script")
