@@ -1,6 +1,6 @@
 {
 	"_readme": "The AS-BUILT plan: what the assembler actually made of each segment this run — every cell's role, every body's final world pose and inventory number, every card, courts, rooms, the gate, the mode. Written as each segment finishes. Read this instead of re-deriving the floor plan; diff two runs (vr vs desktop) to prove parity.",
-	"at": "2026-08-18 18:17:04",
+	"at": "2026-08-18 22:15:31",
 	"plan": "res://ada_run/em_plan.json",
 	"schema": "adaresearch.em_built.v1",
 	"segments": [
@@ -8,9 +8,26 @@
 			"bake_stale": false,
 			"bodies": [
 				{
+					"inv": "primitives:0006",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						3,
+						3
+					],
+					"token": "CoordinateSystem3M",
+					"walk_kind": "hero",
+					"walk_space": "wall",
+					"world": [
+						3.5,
+						0.0,
+						7.5
+					]
+				},
+				{
 					"inv": "primitives:0022",
 					"kind": "artifact",
-					"rot": 120.0,
+					"rot": 105.0,
 					"tile_cell": [
 						2,
 						9
@@ -20,12 +37,29 @@
 					"walk_space": "wall",
 					"world": [
 						2.5,
-						0.0,
+						0.2,
 						13.5
 					]
 				},
 				{
-					"inv": "primitives:0012",
+					"inv": "primitives:0009",
+					"kind": "artifact",
+					"rot": 90.0,
+					"tile_cell": [
+						12,
+						4
+					],
+					"token": "origin",
+					"walk_kind": "sibling",
+					"walk_space": "wall",
+					"world": [
+						12.5,
+						0.95,
+						8.5
+					]
+				},
+				{
+					"inv": "primitives:0011",
 					"kind": "artifact",
 					"rot": 180.0,
 					"tile_cell": [
@@ -76,7 +110,7 @@
 					]
 				},
 				{
-					"inv": "primitives:0015",
+					"inv": "primitives:0014",
 					"kind": "artifact",
 					"rot": 180.0,
 					"tile_cell": [
@@ -110,7 +144,7 @@
 					]
 				},
 				{
-					"inv": "primitives:0039",
+					"inv": "primitives:0041",
 					"kind": "artifact",
 					"rot": 180.0,
 					"tile_cell": [
@@ -144,7 +178,7 @@
 					]
 				},
 				{
-					"inv": "primitives:0010",
+					"inv": "primitives:0007",
 					"kind": "artifact",
 					"rot": 90.0,
 					"tile_cell": [
@@ -281,37 +315,9 @@
 					"walk_kind": "",
 					"walk_space": "",
 					"world": [
-						15.0,
-						1.58,
-						2.99
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
 						11.0,
 						1.58,
 						32.99
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						2.0,
-						1.58,
-						3.99
 					]
 				},
 				{
@@ -339,7 +345,7 @@
 					"world": [
 						1.01,
 						1.58,
-						1.0
+						6.0
 					]
 				},
 				{
@@ -382,20 +388,6 @@
 						13.99,
 						1.58,
 						6.0
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						15.99,
-						1.58,
-						1.0
 					]
 				},
 				{
@@ -507,20 +499,6 @@
 					"world": [
 						4.0,
 						1.58,
-						3.99
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						4.0,
-						1.58,
 						5.01
 					]
 				},
@@ -535,7 +513,7 @@
 					"world": [
 						1.01,
 						1.58,
-						3.0
+						8.0
 					]
 				},
 				{
@@ -610,6 +588,62 @@
 				},
 				{
 					"inv": "",
+					"kind": "showing",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "showing",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						12.0,
+						1.58,
+						27.99
+					]
+				},
+				{
+					"inv": "",
+					"kind": "showing",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "showing",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						10.0,
+						1.58,
+						29.01
+					]
+				},
+				{
+					"inv": "",
+					"kind": "showing",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "showing",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						10.0,
+						1.58,
+						5.01
+					]
+				},
+				{
+					"inv": "",
+					"kind": "showing",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "showing",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						1.01,
+						1.58,
+						12.0
+					]
+				},
+				{
+					"inv": "",
 					"kind": "prop",
 					"rot": 180.0,
 					"tile_cell": [],
@@ -639,6 +673,20 @@
 				{
 					"inv": "",
 					"kind": "prop",
+					"rot": -90.0,
+					"tile_cell": [],
+					"token": "emergency_button",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						9.0,
+						1.05,
+						6.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "prop",
 					"rot": 90.0,
 					"tile_cell": [],
 					"token": "wall_clock",
@@ -662,6 +710,20 @@
 						1.0,
 						1.7,
 						9.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "prop",
+					"rot": 90.0,
+					"tile_cell": [],
+					"token": "whiteboard",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						1.0,
+						1.3,
+						13.5
 					]
 				},
 				{
@@ -735,7 +797,7 @@
 					]
 				},
 				{
-					"inv": "primitives:0042",
+					"inv": "primitives:0044",
 					"kind": "artifact",
 					"rot": 0.0,
 					"tile_cell": [
@@ -752,7 +814,7 @@
 					]
 				},
 				{
-					"inv": "primitives:0043",
+					"inv": "primitives:0045",
 					"kind": "artifact",
 					"rot": 0.0,
 					"tile_cell": [
@@ -873,18 +935,6 @@
 					"pearl": "point",
 					"segment": 0,
 					"world": [
-						15.3,
-						1.0,
-						3.0
-					]
-				},
-				{
-					"chapter": "primitives",
-					"id": "primitives · point · 10",
-					"index": 10,
-					"pearl": "point",
-					"segment": 0,
-					"world": [
 						11.6,
 						1.1,
 						33.0
@@ -892,20 +942,8 @@
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · point · 11",
-					"index": 11,
-					"pearl": "point",
-					"segment": 0,
-					"world": [
-						2.3,
-						1.0,
-						4.0
-					]
-				},
-				{
-					"chapter": "primitives",
-					"id": "primitives · point · 12",
-					"index": 12,
+					"id": "primitives · point · 10",
+					"index": 10,
 					"pearl": "point",
 					"segment": 0,
 					"world": [
@@ -916,20 +954,20 @@
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · point · 13",
-					"index": 13,
+					"id": "primitives · point · 11",
+					"index": 11,
 					"pearl": "point",
 					"segment": 0,
 					"world": [
 						1.0,
-						1.1,
-						1.6
+						1.2,
+						6.2
 					]
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · point · 14",
-					"index": 14,
+					"id": "primitives · point · 12",
+					"index": 12,
 					"pearl": "point",
 					"segment": 0,
 					"world": [
@@ -940,8 +978,8 @@
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · point · 15",
-					"index": 15,
+					"id": "primitives · point · 13",
+					"index": 13,
 					"pearl": "point",
 					"segment": 0,
 					"world": [
@@ -952,8 +990,8 @@
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · point · 16",
-					"index": 16,
+					"id": "primitives · point · 14",
+					"index": 14,
 					"pearl": "point",
 					"segment": 0,
 					"world": [
@@ -964,20 +1002,8 @@
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · point · 17",
-					"index": 17,
-					"pearl": "point",
-					"segment": 0,
-					"world": [
-						16.0,
-						1.1,
-						1.6
-					]
-				},
-				{
-					"chapter": "primitives",
-					"id": "primitives · point · 18",
-					"index": 18,
+					"id": "primitives · point · 15",
+					"index": 15,
 					"pearl": "point",
 					"segment": 0,
 					"world": [
@@ -988,8 +1014,8 @@
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · point · 19",
-					"index": 19,
+					"id": "primitives · point · 16",
+					"index": 16,
 					"pearl": "point",
 					"segment": 0,
 					"world": [
@@ -1000,8 +1026,8 @@
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · point · 20",
-					"index": 20,
+					"id": "primitives · point · 17",
+					"index": 17,
 					"pearl": "point",
 					"segment": 0,
 					"world": [
@@ -1012,8 +1038,8 @@
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · point · 21",
-					"index": 21,
+					"id": "primitives · point · 18",
+					"index": 18,
 					"pearl": "point",
 					"segment": 0,
 					"world": [
@@ -1024,8 +1050,8 @@
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · point · 22",
-					"index": 22,
+					"id": "primitives · point · 19",
+					"index": 19,
 					"pearl": "point",
 					"segment": 0,
 					"world": [
@@ -1036,8 +1062,8 @@
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · point · 23",
-					"index": 23,
+					"id": "primitives · point · 20",
+					"index": 20,
 					"pearl": "point",
 					"segment": 0,
 					"world": [
@@ -1048,8 +1074,8 @@
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · point · 24",
-					"index": 24,
+					"id": "primitives · point · 21",
+					"index": 21,
 					"pearl": "point",
 					"segment": 0,
 					"world": [
@@ -1060,20 +1086,8 @@
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · point · 25",
-					"index": 25,
-					"pearl": "point",
-					"segment": 0,
-					"world": [
-						4.6,
-						1.1,
-						4.0
-					]
-				},
-				{
-					"chapter": "primitives",
-					"id": "primitives · point · 26",
-					"index": 26,
+					"id": "primitives · point · 22",
+					"index": 22,
 					"pearl": "point",
 					"segment": 0,
 					"world": [
@@ -1084,20 +1098,20 @@
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · point · 27",
-					"index": 27,
+					"id": "primitives · point · 23",
+					"index": 23,
 					"pearl": "point",
 					"segment": 0,
 					"world": [
 						1.0,
-						1.2,
-						3.2
+						1.0,
+						8.3
 					]
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · point · 28",
-					"index": 28,
+					"id": "primitives · point · 24",
+					"index": 24,
 					"pearl": "point",
 					"segment": 0,
 					"world": [
@@ -1108,8 +1122,8 @@
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · point · 29",
-					"index": 29,
+					"id": "primitives · point · 25",
+					"index": 25,
 					"pearl": "point",
 					"segment": 0,
 					"world": [
@@ -1120,8 +1134,8 @@
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · point · 30",
-					"index": 30,
+					"id": "primitives · point · 26",
+					"index": 26,
 					"pearl": "point",
 					"segment": 0,
 					"world": [
@@ -1132,8 +1146,8 @@
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · point · 31",
-					"index": 31,
+					"id": "primitives · point · 27",
+					"index": 27,
 					"pearl": "point",
 					"segment": 0,
 					"world": [
@@ -1144,8 +1158,8 @@
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · point · 32",
-					"index": 32,
+					"id": "primitives · point · 28",
+					"index": 28,
 					"pearl": "point",
 					"segment": 0,
 					"world": [
@@ -1153,20 +1167,68 @@
 						1.1,
 						15.6
 					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · point · 29",
+					"index": 29,
+					"pearl": "point",
+					"segment": 0,
+					"world": [
+						12.2,
+						1.2,
+						28.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · point · 30",
+					"index": 30,
+					"pearl": "point",
+					"segment": 0,
+					"world": [
+						10.3,
+						1.0,
+						29.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · point · 31",
+					"index": 31,
+					"pearl": "point",
+					"segment": 0,
+					"world": [
+						10.3,
+						1.0,
+						5.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · point · 32",
+					"index": 32,
+					"pearl": "point",
+					"segment": 0,
+					"world": [
+						1.0,
+						1.2,
+						12.2
+					]
 				}
 			],
 			"cell_x0": -1,
 			"cells": [
 				"############################",
-				"##...............###########",
-				"##...............###########",
+				"##..............p###########",
+				"##..............p###########",
 				"##.............#############",
 				"#######...##################",
-				"##.............#############",
-				"##..........ss.#############",
-				"##..........ss.#############",
-				"##.....sss..ss.#############",
-				"##.....sss.....#############",
+				"##sssss........#############",
+				"##sssss.....ss.#############",
+				"##sssss.....sss#############",
+				"##.....sss..sss#############",
+				"##.....sss..sss#############",
 				"###b.#.sss.#################",
 				"##...#.....#...#############",
 				"##.s.......#...#############",
@@ -1257,7 +1319,7 @@
 					"venue": "courtyard"
 				}
 			],
-			"forecourt": 1,
+			"forecourt": 0,
 			"gate": {
 				"sealed": true
 			},
@@ -1279,14 +1341,6 @@
 				{
 					"tile_cell": [
 						12,
-						14
-					],
-					"token": "origin",
-					"why": "baked: sealing would sever the walk route"
-				},
-				{
-					"tile_cell": [
-						12,
 						26
 					],
 					"token": "subtraction_suite",
@@ -1295,6 +1349,9 @@
 			],
 			"replay": true,
 			"seals": {
+				"1,5": "CoordinateSystem3M",
+				"1,6": "CoordinateSystem3M",
+				"1,7": "CoordinateSystem3M",
 				"10,18": "two_points_line",
 				"10,48": "lab_room",
 				"10,49": "lab_room",
@@ -1316,15 +1373,24 @@
 				"11,55": "lab_room",
 				"11,56": "lab_room",
 				"11,6": "recession_hall",
-				"11,7": "recession_hall",
-				"11,8": "recession_hall",
+				"11,7": "origin",
+				"11,8": "origin",
+				"11,9": "origin",
 				"12,6": "recession_hall",
-				"12,7": "recession_hall",
-				"12,8": "recession_hall",
+				"12,7": "origin",
+				"12,8": "origin",
+				"12,9": "origin",
+				"13,7": "origin",
+				"13,8": "origin",
+				"13,9": "origin",
 				"2,12": "floating_sphere_field",
 				"2,14": "interactive_point_origin_force",
+				"2,5": "CoordinateSystem3M",
+				"2,6": "CoordinateSystem3M",
+				"2,7": "CoordinateSystem3M",
 				"3,48": "lab_room",
 				"3,49": "lab_room",
+				"3,5": "CoordinateSystem3M",
 				"3,50": "lab_room",
 				"3,51": "lab_room",
 				"3,52": "lab_room",
@@ -1332,8 +1398,11 @@
 				"3,54": "lab_room",
 				"3,55": "lab_room",
 				"3,56": "lab_room",
+				"3,6": "CoordinateSystem3M",
+				"3,7": "CoordinateSystem3M",
 				"4,48": "lab_room",
 				"4,49": "lab_room",
+				"4,5": "CoordinateSystem3M",
 				"4,50": "lab_room",
 				"4,51": "lab_room",
 				"4,52": "lab_room",
@@ -1341,8 +1410,11 @@
 				"4,54": "lab_room",
 				"4,55": "lab_room",
 				"4,56": "lab_room",
+				"4,6": "CoordinateSystem3M",
+				"4,7": "CoordinateSystem3M",
 				"5,48": "lab_room",
 				"5,49": "lab_room",
+				"5,5": "CoordinateSystem3M",
 				"5,50": "lab_room",
 				"5,51": "lab_room",
 				"5,52": "lab_room",
@@ -1350,6 +1422,8 @@
 				"5,54": "lab_room",
 				"5,55": "lab_room",
 				"5,56": "lab_room",
+				"5,6": "CoordinateSystem3M",
+				"5,7": "CoordinateSystem3M",
 				"6,10": "you_are_here",
 				"6,48": "lab_room",
 				"6,49": "lab_room",
@@ -1413,7 +1487,7 @@
 			"bake_stale": false,
 			"bodies": [
 				{
-					"inv": "primitives:0060",
+					"inv": "primitives:0062",
 					"kind": "artifact",
 					"rot": 0.0,
 					"tile_cell": [
@@ -1430,7 +1504,7 @@
 					]
 				},
 				{
-					"inv": "primitives:0081",
+					"inv": "primitives:0083",
 					"kind": "artifact",
 					"rot": 90.0,
 					"tile_cell": [
@@ -1447,7 +1521,7 @@
 					]
 				},
 				{
-					"inv": "primitives:0090",
+					"inv": "primitives:0092",
 					"kind": "artifact",
 					"rot": 180.0,
 					"tile_cell": [
@@ -1464,7 +1538,7 @@
 					]
 				},
 				{
-					"inv": "primitives:0072",
+					"inv": "primitives:0074",
 					"kind": "artifact",
 					"rot": 0.0,
 					"tile_cell": [
@@ -1481,7 +1555,7 @@
 					]
 				},
 				{
-					"inv": "primitives:0058",
+					"inv": "primitives:0060",
 					"kind": "artifact",
 					"rot": 0.0,
 					"tile_cell": [
@@ -1498,7 +1572,7 @@
 					]
 				},
 				{
-					"inv": "primitives:0069",
+					"inv": "primitives:0071",
 					"kind": "artifact",
 					"rot": 0.0,
 					"tile_cell": [
@@ -1515,7 +1589,7 @@
 					]
 				},
 				{
-					"inv": "primitives:0057",
+					"inv": "primitives:0059",
 					"kind": "artifact",
 					"rot": 90.0,
 					"tile_cell": [
@@ -1532,7 +1606,7 @@
 					]
 				},
 				{
-					"inv": "primitives:0070",
+					"inv": "primitives:0072",
 					"kind": "artifact",
 					"rot": 0.0,
 					"tile_cell": [
@@ -1549,7 +1623,7 @@
 					]
 				},
 				{
-					"inv": "primitives:0067",
+					"inv": "primitives:0069",
 					"kind": "artifact",
 					"rot": 0.0,
 					"tile_cell": [
@@ -1566,7 +1640,7 @@
 					]
 				},
 				{
-					"inv": "primitives:0082",
+					"inv": "primitives:0084",
 					"kind": "artifact",
 					"rot": 0.0,
 					"tile_cell": [
@@ -1583,7 +1657,7 @@
 					]
 				},
 				{
-					"inv": "primitives:0071",
+					"inv": "primitives:0073",
 					"kind": "artifact",
 					"rot": 0.0,
 					"tile_cell": [
@@ -1600,7 +1674,7 @@
 					]
 				},
 				{
-					"inv": "primitives:0076",
+					"inv": "primitives:0078",
 					"kind": "artifact",
 					"rot": 90.0,
 					"tile_cell": [
@@ -1617,7 +1691,7 @@
 					]
 				},
 				{
-					"inv": "primitives:0091",
+					"inv": "primitives:0093",
 					"kind": "artifact",
 					"rot": 180.0,
 					"tile_cell": [
@@ -1634,7 +1708,7 @@
 					]
 				},
 				{
-					"inv": "primitives:0080",
+					"inv": "primitives:0082",
 					"kind": "artifact",
 					"rot": 90.0,
 					"tile_cell": [
@@ -2309,7 +2383,7 @@
 					]
 				},
 				{
-					"inv": "primitives:0048",
+					"inv": "primitives:0050",
 					"kind": "artifact",
 					"rot": 0.0,
 					"tile_cell": [
@@ -2326,7 +2400,7 @@
 					]
 				},
 				{
-					"inv": "primitives:0047",
+					"inv": "primitives:0049",
 					"kind": "plinth",
 					"rot": 0.0,
 					"tile_cell": [],
@@ -2340,7 +2414,7 @@
 					]
 				},
 				{
-					"inv": "primitives:0044",
+					"inv": "primitives:0046",
 					"kind": "artifact",
 					"rot": 0.0,
 					"tile_cell": [
@@ -2357,7 +2431,7 @@
 					]
 				},
 				{
-					"inv": "primitives:0094",
+					"inv": "primitives:0096",
 					"kind": "artifact",
 					"rot": 0.0,
 					"tile_cell": [
@@ -2374,7 +2448,7 @@
 					]
 				},
 				{
-					"inv": "primitives:0095",
+					"inv": "primitives:0097",
 					"kind": "artifact",
 					"rot": 0.0,
 					"tile_cell": [
@@ -2391,7 +2465,7 @@
 					]
 				},
 				{
-					"inv": "primitives:0096",
+					"inv": "primitives:0098",
 					"kind": "plinth",
 					"rot": 0.0,
 					"tile_cell": [],
@@ -2405,7 +2479,7 @@
 					]
 				},
 				{
-					"inv": "primitives:0097",
+					"inv": "primitives:0099",
 					"kind": "artifact",
 					"rot": 0.0,
 					"tile_cell": [
@@ -2822,7 +2896,7 @@
 			],
 			"cell_x0": -1,
 			"cells": [
-				"##...........ss#############",
+				"##.............#############",
 				"##.s.........ssss###########",
 				"##...............###########",
 				"##.............#############",
@@ -2969,13 +3043,11 @@
 				"1,68": "klee_walking_point",
 				"1,95": "cove_display",
 				"10,91": "modulor_man_demo",
-				"12,59": "line_builder_3d",
 				"12,60": "line_builder_3d",
 				"12,72": "wall_pattern_gallery",
 				"12,74": "plus_line_puzzle",
 				"12,76": "line_slack",
 				"12,95": "adjacency_shelf",
-				"13,59": "line_builder_3d",
 				"13,60": "line_builder_3d",
 				"13,78": "color_space_navigator",
 				"13,95": "adjacency_shelf",

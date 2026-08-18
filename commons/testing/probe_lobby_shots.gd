@@ -12,6 +12,9 @@ func _run() -> void:
 	cam.current = true
 	var shots: Array = [
 		["door", Vector3(7.5, 1.6, 1.3), Vector3(7.5, 1.6, 4.5)],
+		["enter", Vector3(7.5, 1.6, 5.2), Vector3(7.5, 1.3, 12.0)],
+		["enter_right", Vector3(7.5, 1.6, 5.4), Vector3(3.0, 1.0, 8.5)],
+		["enter_left", Vector3(7.5, 1.6, 5.4), Vector3(12.5, 1.0, 8.5)],
 		["door_up", Vector3(7.5, 1.2, 1.2), Vector3(7.5, 3.4, 4.5)],
 		["window", Vector3(7.5, 1.6, 3.8), Vector3(7.5, 1.4, 0.5)],
 		["lift", Vector3(9.0, 1.6, 3.6), Vector3(15.5, 1.0, 2.2)],
