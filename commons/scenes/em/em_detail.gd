@@ -498,7 +498,7 @@ static func _map_tile(walls: Dictionary, floors: Dictionary, tile: Array, w: int
 		walls[Vector2i(-1, z)] = true
 		walls[Vector2i(w, z)] = true
 		for x in range(row.size()):
-			var c: String = String(row[x])
+			var c: String = str(row[x])
 			if c == "4":
 				walls[Vector2i(x, z)] = true
 			elif c == "1" or c == "1s":
@@ -911,7 +911,7 @@ static func _add_block_chamfers(tile: Array, pod_out: Array, pli_out: Array, tal
 		var row: Array = tile[y]
 		var z: int = y + VESTIBULE_H
 		for x in range(row.size()):
-			var c: String = String(row[x])
+			var c: String = str(row[x])
 			if c == "2" or c == "2s":
 				pods[Vector2i(x, z)] = true
 			elif c == "3s":
@@ -1351,7 +1351,7 @@ static func architectural_accent_name(legend: Color) -> String:
 		return "warm grey stone"
 	var idx: int = int(floor(legend.h * 12.0)) % ACCENT_ANCHORS.size()
 	var anchor: Array = ACCENT_ANCHORS[idx]
-	return String(anchor[3])
+	return str(anchor[3])
 
 
 ## Launder one material on its way into a MultiMesh. A material whose albedo (or
@@ -1454,10 +1454,10 @@ static func _member_names(mats) -> Dictionary:
 		elif defaults is int:
 			required -= int(defaults)
 		if required <= 0:
-			out[String(md.get("name", ""))] = "method"
+			out[str(md.get("name", ""))] = "method"
 	for p in obj.get_property_list():
 		var pd: Dictionary = p
-		var pname: String = String(pd.get("name", ""))
+		var pname: String = str(pd.get("name", ""))
 		if not out.has(pname):
 			out[pname] = "property"
 	return out
@@ -1469,16 +1469,16 @@ static func _role(mats, names: Dictionary, keys: Array, fallback: Variant) -> Va
 	if mats is Dictionary:
 		var d: Dictionary = mats as Dictionary
 		for k in keys:
-			var key: String = String(k)
+			var key: String = str(k)
 			if d.has(key) and d[key] is Material:
 				return d[key]
 		return fallback
 	if mats is Object:
 		var obj: Object = mats as Object
 		for k2 in keys:
-			var key2: String = String(k2)
+			var key2: String = str(k2)
 			var got: Variant = null
-			if names.has(key2) and String(names[key2]) == "method":
+			if names.has(key2) and str(names[key2]) == "method":
 				got = obj.call(key2)
 			elif names.has(key2):
 				got = obj.get(key2)

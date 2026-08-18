@@ -412,9 +412,9 @@ static func for_segment(w: int, h: int, slots: Array, template_key: String,
 
 	var out: Dictionary = {
 		"template": template_key,
-		"class": String(row.get("class", "derived")),
-		"mechanism": String(row.get("mech", "")),
-		"pace": String(row.get("pace", "even")),
+		"class": str(row.get("class", "derived")),
+		"mechanism": str(row.get("mech", "")),
+		"pace": str(row.get("pace", "even")),
 
 		"max_objects": max_objects,
 		"lead_count": lead_count,
@@ -478,11 +478,11 @@ static func table() -> Dictionary:
 static func describe(template_key: String) -> String:
 	var row: Dictionary = _row(template_key)
 	return "%-38s %-20s rate %5.1f/100  leads %2d x(1+%d)  mult %2d  walls %-5s  wf %.1f/10m  -- %s" % [
-		template_key, String(row.get("class", "derived")),
+		template_key, str(row.get("class", "derived")),
 		float(row.get("rate", CORPUS_RATE)), int(row.get("lead", 6)),
 		int(row.get("rel", 1)), int(row.get("mult", 1)),
 		str(bool(row.get("walls", true))), float(row.get("wf", CORPUS_WALL_FEATURES)),
-		String(row.get("mech", "")),
+		str(row.get("mech", "")),
 	]
 
 
@@ -505,7 +505,7 @@ static func _row(template_key: String) -> Dictionary:
 	if lineage.length() < 4:
 		return DERIVED
 	for k in TEMPLATES.keys():
-		var key: String = String(k)
+		var key: String = str(k)
 		if key.begins_with(lineage + "-"):
 			return TEMPLATES[key]
 	return DERIVED
@@ -519,7 +519,7 @@ static func _is_walk(tile: Array, x: int, y: int) -> bool:
 	var row: Array = tile[y]
 	if x < 0 or x >= row.size():
 		return false
-	var c: String = String(row[x])
+	var c: String = str(row[x])
 	return c == "1" or c == "1s"
 
 

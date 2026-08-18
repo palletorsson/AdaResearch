@@ -737,7 +737,7 @@ static func _cell(tile: Array, x: int, y: int) -> String:
 	var row: Array = tile[y]
 	if x < 0 or x >= row.size():
 		return ""
-	return String(row[x])
+	return str(row[x])
 
 
 static func _open_side(tile: Array, x: int, y: int, w: int, rows: int) -> int:

@@ -283,11 +283,11 @@ static func emissive_accent(color: Color, energy: float = 1.8) -> StandardMateri
 static func get_material(kind: StringName, tint: Color = Color.WHITE, soil: float = 0.0, variant: StringName = &"") -> StandardMaterial3D:
 	var q: Color = _quantize(tint)
 	var s: float = clampf(snappedf(soil, 0.125), 0.0, 1.0)
-	var key: String = "%s|%s|%s|%.3f" % [String(kind), String(variant), _color_key(q), s]
+	var key: String = "%s|%s|%s|%.3f" % [str(kind), str(variant), _color_key(q), s]
 	if _mat_cache.has(key):
 		var cached: StandardMaterial3D = _mat_cache[key]
 		return cached
-	var m: StandardMaterial3D = _build(String(kind), q, s, String(variant))
+	var m: StandardMaterial3D = _build(str(kind), q, s, str(variant))
 	_mat_cache[key] = m
 	return m
 

@@ -526,7 +526,7 @@ static func dress(seg: Node3D, tile: Array, w: int, h: int,
 	var quota: Dictionary = {}
 	for fam in Q:
 		var spec: Array = Q[fam]
-		quota[String(fam)] = clampi(int(round(float(cap) * float(spec[0]))),
+		quota[str(fam)] = clampi(int(round(float(cap) * float(spec[0]))),
 			mini(int(spec[1]), cap), int(spec[2]))
 	var state: Dictionary = {"cap": cap, "floor_taken": 0, "used_cells": {},
 		"live": live, "counts": {}, "quota": quota, "spent": {}}
@@ -563,7 +563,7 @@ static func catalogue() -> Dictionary:
 	var out: Dictionary = {}
 	for k in CATALOGUE:
 		var row: Dictionary = CATALOGUE[k]
-		out[String(k)] = row.duplicate()
+		out[str(k)] = row.duplicate()
 	return out
 
 
@@ -577,17 +577,17 @@ static func resolve_report(live: Dictionary) -> Dictionary:
 	var keys: Array = CATALOGUE.keys()
 	keys.sort()
 	for k in keys:
-		if live.has(String(k)):
+		if live.has(str(k)):
 			resolved += 1
 		else:
-			missing.append(String(k))
+			missing.append(str(k))
 	var p_res: int = 0
 	var p_missing: Array = []
 	for t in PLACEABLE:
-		if live.has(String(t)):
+		if live.has(str(t)):
 			p_res += 1
 		else:
-			p_missing.append(String(t))
+			p_missing.append(str(t))
 	return {"total": keys.size(), "resolved": resolved, "missing": missing,
 		"placeable": PLACEABLE.size(), "placeable_resolved": p_res,
 		"placeable_missing": p_missing}
@@ -626,7 +626,7 @@ static func _geometry(tile: Array, w: int, h: int, prev_w: int) -> Dictionary:
 		walls[Vector2i(-1, z)] = true
 		walls[Vector2i(w, z)] = true
 		for x in range(row.size()):
-			var c: String = String(row[x])
+			var c: String = str(row[x])
 			if c == "4":
 				walls[Vector2i(x, z)] = true
 			elif c == "1" or c == "1s":
@@ -880,7 +880,7 @@ static func _is_walk(tile: Array, x: int, y: int) -> bool:
 	var row: Array = tile[y]
 	if x < 0 or x >= row.size():
 		return false
-	var c: String = String(row[x])
+	var c: String = str(row[x])
 	return c == "1" or c == "1s"
 
 
@@ -1279,7 +1279,7 @@ static func _rule_floor_pockets(out: Array, state: Dictionary, geo: Dictionary) 
 		if i >= order.size():
 			return
 		var fd: Dictionary = f
-		var token: String = String(order[i])
+		var token: String = str(order[i])
 		if _emit_floor_against_wall(out, state, geo, token, fd, FLOOR_TOP, {},
 				"a dead pocket against a wall face, off the walker's route, both flanks and the squeeze-past cell open",
 				"R11-floor-pocket", "pocket"):

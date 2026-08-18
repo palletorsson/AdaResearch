@@ -216,10 +216,10 @@ static func build(live: Dictionary = {}, roots: PackedStringArray = PackedString
 	var n_gal: int = 0
 	var n_ent: int = 0
 	for r in found_roots:
-		var root: String = String(r)
+		var root: String = str(r)
 		var names: PackedStringArray = _sorted_dirs(root)
 		for nm in names:
-			var gname: String = String(nm)
+			var gname: String = str(nm)
 			if not gname.to_lower().contains("dna"):
 				continue
 			var mpath: String = root.path_join(gname).path_join("manifest.json")
@@ -240,9 +240,9 @@ static func build(live: Dictionary = {}, roots: PackedStringArray = PackedString
 				var e: Dictionary = e0
 				var tok: String = ""
 				for k in TOKEN_KEYS:
-					var kv: Variant = e.get(String(k), null)
-					if kv is String and String(kv) != "":
-						tok = String(kv)
+					var kv: Variant = e.get(str(k), null)
+					if kv is String and str(kv) != "":
+						tok = str(kv)
 						break
 				if tok == "":
 					continue
@@ -270,7 +270,7 @@ static func build(live: Dictionary = {}, roots: PackedStringArray = PackedString
 	var n_axis: int = 0
 	var n_fabric: int = 0
 	for t in _sorted_keys(union):
-		var tok2: String = String(t)
+		var tok2: String = str(t)
 		var entry: Variant = reg.get(tok2, null)
 		if not (entry is Dictionary):
 			n_unknown += 1
@@ -288,19 +288,19 @@ static func build(live: Dictionary = {}, roots: PackedStringArray = PackedString
 		var gal_list: Array = rec2["gals"]
 		var fabric: bool = false
 		for g2 in gal_list:
-			if FABRIC_GALLERIES.has(String(g2)):
+			if FABRIC_GALLERIES.has(str(g2)):
 				fabric = true
 				break
 		if fabric:
 			n_fabric += 1
-		var axis: String = String(pair.get("axis", ""))
+		var axis: String = str(pair.get("axis", ""))
 		if axis != "":
 			n_axis += 1
 		guests[tok2] = {
 			"galleries": gal_list,
-			"gallery": String(pair.get("gallery", "")) if axis != "" else (String(gal_list[0]) if not gal_list.is_empty() else ""),
+			"gallery": str(pair.get("gallery", "")) if axis != "" else (str(gal_list[0]) if not gal_list.is_empty() else ""),
 			"axis": axis,
-			"value": String(pair.get("value", "")),
+			"value": str(pair.get("value", "")),
 			"fabric": fabric,
 			"entries": int(rec2["n"]),
 			"sequences": re.get("sequences", []),
@@ -327,7 +327,7 @@ static func build(live: Dictionary = {}, roots: PackedStringArray = PackedString
 ## waiting to be made, not a fact about this module.
 static func report() -> String:
 	var p: Dictionary = build()
-	var s: String = String(p.get("report", ""))
+	var s: String = str(p.get("report", ""))
 	var dead: Array = p.get("dead_tokens", [])
 	if not dead.is_empty():
 		s += "\n[em_pool]   in a registry but not dealable (no map_ready key, or scene gone): %s" % str(dead)
@@ -364,16 +364,16 @@ static func guests_for(chapter: String, n: int, rel_db: Dictionary = {}) -> Arra
 
 	# ── tier 1: the gallery IS the chapter ───────────────────────────────────
 	var cn: PackedStringArray = PackedStringArray([_norm(chapter)])
-	var alias: String = String(CHAPTER_ALIAS.get(chapter, ""))
+	var alias: String = str(CHAPTER_ALIAS.get(chapter, ""))
 	if alias != "":
 		cn.append(_norm(alias))
 	for t in tokens:
-		var tok: String = String(t)
+		var tok: String = str(t)
 		if seen.has(tok):
 			continue
 		var g: Dictionary = guests[tok]
 		for gv in (g["galleries"] as Array):
-			var gname: String = String(gv)
+			var gname: String = str(gv)
 			var stem: String = _stem(gname)
 			if stem.length() < MIN_STEM:
 				continue
@@ -385,7 +385,7 @@ static func guests_for(chapter: String, n: int, rel_db: Dictionary = {}) -> Arra
 
 	# ── tier 2: the registry already stands it in this chapter's maps ────────
 	for t in tokens:
-		var tok2: String = String(t)
+		var tok2: String = str(t)
 		if seen.has(tok2):
 			continue
 		var g2: Dictionary = guests[tok2]
@@ -399,7 +399,7 @@ static func guests_for(chapter: String, n: int, rel_db: Dictionary = {}) -> Arra
 	if arts is Dictionary and not (arts as Dictionary).is_empty():
 		var by_token: Dictionary = {}   # token -> {rank, pt, lead, kind}
 		for lead in _chapter_leads(chapter):
-			var lv: Variant = (arts as Dictionary).get(String(lead), null)
+			var lv: Variant = (arts as Dictionary).get(str(lead), null)
 			if not (lv is Dictionary):
 				continue
 			var rels: Variant = (lv as Dictionary).get("relations", [])
@@ -409,10 +409,10 @@ static func guests_for(chapter: String, n: int, rel_db: Dictionary = {}) -> Arra
 				if not (r0 is Dictionary):
 					continue
 				var r: Dictionary = r0
-				var rt: String = String(r.get("token", ""))
+				var rt: String = str(r.get("token", ""))
 				if rt == "" or seen.has(rt) or not guests.has(rt):
 					continue
-				var kind: String = String(r.get("kind", ""))
+				var kind: String = str(r.get("kind", ""))
 				var rank: int = int(KIND_RANK.get(kind, 5))
 				var pt: int = int(r.get("placements_together", 0))
 				var prev: Variant = by_token.get(rt, null)
@@ -422,22 +422,22 @@ static func guests_for(chapter: String, n: int, rel_db: Dictionary = {}) -> Arra
 						continue
 					if int(pr["rank"]) == rank and int(pr["pt"]) >= pt:
 						continue
-				by_token[rt] = {"rank": rank, "pt": pt, "lead": String(lead), "kind": kind}
+				by_token[rt] = {"rank": rank, "pt": pt, "lead": str(lead), "kind": kind}
 		for t3 in _sorted_keys(by_token):
-			var tok3: String = String(t3)
+			var tok3: String = str(t3)
 			var m: Dictionary = by_token[tok3]
 			# sub-key: kind first, then most-proven first. 999 caps the
 			# placement count so a wildly co-placed `family` edge can never
 			# outrank a `named` one.
 			var sub: int = int(m["rank"]) * 1000 - mini(int(m["pt"]), 999)
 			_add(rows, seen, tok3, guests[tok3], 3, sub,
-				"%s of %s, a lead of this chapter" % [String(m["kind"]), String(m["lead"])])
+				"%s of %s, a lead of this chapter" % [str(m["kind"]), str(m["lead"])])
 
 	# ── tier 4: building fabric, only to fill ────────────────────────────────
 	if rows.size() < n:
 		var fab: Array = []
 		for t4 in tokens:
-			var tok4: String = String(t4)
+			var tok4: String = str(t4)
 			if bool((guests[tok4] as Dictionary)["fabric"]):
 				fab.append(tok4)
 		if not fab.is_empty():
@@ -445,7 +445,7 @@ static func guests_for(chapter: String, n: int, rel_db: Dictionary = {}) -> Arra
 			for i in range(fab.size()):
 				if rows.size() >= n:
 					break
-				var tok5: String = String(fab[(off + i) % fab.size()])
+				var tok5: String = str(fab[(off + i) % fab.size()])
 				if seen.has(tok5):
 					continue
 				_add(rows, seen, tok5, guests[tok5], 4, i,
@@ -456,11 +456,11 @@ static func guests_for(chapter: String, n: int, rel_db: Dictionary = {}) -> Arra
 	for i in range(take):
 		var row: Dictionary = rows[i]
 		out.append({
-			"token": String(row["token"]),
-			"axis": String(row["axis"]),
-			"value": String(row["value"]),
-			"gallery": String(row["gallery"]),
-			"why": String(row["why"]),
+			"token": str(row["token"]),
+			"axis": str(row["axis"]),
+			"value": str(row["value"]),
+			"gallery": str(row["gallery"]),
+			"why": str(row["why"]),
 		})
 	return out
 
@@ -472,10 +472,10 @@ static func summary(rows: Array) -> String:
 		if not (r0 is Dictionary):
 			continue
 		var r: Dictionary = r0
-		var s: String = String(r.get("token", "?"))
-		var axis: String = String(r.get("axis", ""))
+		var s: String = str(r.get("token", "?"))
+		var axis: String = str(r.get("axis", ""))
 		if axis != "":
-			s += "#%s=%s" % [axis, String(r.get("value", ""))]
+			s += "#%s=%s" % [axis, str(r.get("value", ""))]
 		parts.append(s)
 	return ", ".join(parts)
 
@@ -500,12 +500,12 @@ static func _scan_registry(live: Dictionary) -> Dictionary:
 		return out
 	var files: Array = []
 	for f in dir.get_files():
-		var fname: String = String(f)
+		var fname: String = str(f)
 		if fname.ends_with(".json"):
 			files.append(fname)
 	files.sort()
 	for f2 in files:
-		var text: String = _read_text(REGISTRY_DIR + "/" + String(f2))
+		var text: String = _read_text(REGISTRY_DIR + "/" + str(f2))
 		if text.is_empty():
 			continue
 		var parsed: Variant = JSON.parse_string(text)
@@ -515,7 +515,7 @@ static func _scan_registry(live: Dictionary) -> Dictionary:
 		if not (arts is Dictionary):
 			continue
 		for lookup in (arts as Dictionary):
-			var tok: String = String(lookup)
+			var tok: String = str(lookup)
 			# One token can appear in two registry files. The museum's own scan
 			# lets the later file win; here ANY alive entry wins, which can only
 			# ever be at least as permissive — a guest is never dropped because
@@ -531,7 +531,7 @@ static func _scan_registry(live: Dictionary) -> Dictionary:
 			if not live.is_empty():
 				alive = live.has(tok)
 			else:
-				var scene: String = String(a.get("scene", ""))
+				var scene: String = str(a.get("scene", ""))
 				# the museum's own gate, character for character: a missing
 				# map_ready key reads as false, which is why exhibit_furniture
 				# is not dealable. Copied rather than softened, so this module
@@ -558,7 +558,7 @@ static func _seq_list(entry: Dictionary) -> Array:
 		v = entry.get("map_sequences", null)
 	if v is Array:
 		for s in (v as Array):
-			var t: String = String(s)
+			var t: String = str(s)
 			if t != "" and not out.has(t):
 				out.append(t)
 	return out
@@ -579,7 +579,7 @@ static func _axis_value(rec: Dictionary, reg_entry: Dictionary) -> Dictionary:
 	for i in range(dnas.size()):
 		var dna: Dictionary = dnas[i]
 		for k in _sorted_keys(dna):
-			var axis: String = String(k)
+			var axis: String = str(k)
 			if not axes.has(axis):
 				continue
 			var declared: Variant = axes[axis]
@@ -604,7 +604,7 @@ static func _spine_tokens() -> Dictionary:
 	var rows: Array = _spine_rows()
 	for r0 in rows:
 		if r0 is Dictionary:
-			var t: String = String((r0 as Dictionary).get("lookup", ""))
+			var t: String = str((r0 as Dictionary).get("lookup", ""))
 			if t != "":
 				out[t] = true
 	return out
@@ -616,9 +616,9 @@ static func _chapter_leads(chapter: String) -> Array:
 		if not (r0 is Dictionary):
 			continue
 		var r: Dictionary = r0
-		if String(r.get("sequence", "")) != chapter:
+		if str(r.get("sequence", "")) != chapter:
 			continue
-		var t: String = String(r.get("lookup", ""))
+		var t: String = str(r.get("lookup", ""))
 		if t != "" and not out.has(t):
 			out.append(t)
 	return out
@@ -663,7 +663,7 @@ static func _relations() -> Dictionary:
 static func _gallery_roots(extra: PackedStringArray) -> PackedStringArray:
 	var want: PackedStringArray = PackedStringArray()
 	for e in extra:
-		want.append(String(e))
+		want.append(str(e))
 	want.append("res://" + GALLERY_SUBDIR)
 	# The encyclopedia is a SIBLING checkout, not a subdirectory: res:// globalises
 	# to .../GitHub/AdaResearch_46/, and the galleries are at
@@ -675,7 +675,7 @@ static func _gallery_roots(extra: PackedStringArray) -> PackedStringArray:
 		want.append(here.get_base_dir().path_join(GALLERY_SUBDIR))
 	var out: PackedStringArray = PackedStringArray()
 	for w in want:
-		var p: String = String(w)
+		var p: String = str(w)
 		if p == "" or out.has(p):
 			continue
 		if DirAccess.open(p) != null:
@@ -689,11 +689,11 @@ static func _sorted_dirs(root: String) -> PackedStringArray:
 		return PackedStringArray()
 	var names: Array = []
 	for n in d.get_directories():
-		names.append(String(n))
+		names.append(str(n))
 	names.sort()
 	var out: PackedStringArray = PackedStringArray()
 	for n2 in names:
-		out.append(String(n2))
+		out.append(str(n2))
 	return out
 
 
@@ -728,7 +728,7 @@ static func _stem(gallery: String) -> String:
 	while changed:
 		changed = false
 		for suf in ["gallery", "renders", "dna"]:
-			var s: String = String(suf)
+			var s: String = str(suf)
 			if n.length() > s.length() and n.ends_with(s):
 				n = n.substr(0, n.length() - s.length())
 				changed = true
@@ -737,7 +737,7 @@ static func _stem(gallery: String) -> String:
 
 static func _touches(stem: String, chapters: PackedStringArray) -> bool:
 	for c in chapters:
-		var cn: String = String(c)
+		var cn: String = str(c)
 		if cn == "":
 			continue
 		if cn.contains(stem) or stem.contains(cn):
@@ -762,12 +762,12 @@ static func _add(rows: Array, seen: Dictionary, token: String, g: Dictionary,
 	if token == "" or seen.has(token):
 		return
 	seen[token] = true
-	var axis: String = String(g.get("axis", ""))
+	var axis: String = str(g.get("axis", ""))
 	rows.append({
 		"token": token,
 		"axis": axis,
-		"value": String(g.get("value", "")),
-		"gallery": String(g.get("gallery", "")),
+		"value": str(g.get("value", "")),
+		"gallery": str(g.get("gallery", "")),
 		"tier": tier,
 		# 0 sorts first: a guest that can be dealt at a rendered value outranks
 		# one that can only be dealt at its default.
@@ -806,7 +806,7 @@ static func _row_before(a: Dictionary, b: Dictionary) -> bool:
 	var bsu: int = int(b["sub"])
 	if asu != bsu:
 		return asu < bsu
-	return String(a["token"]) < String(b["token"])
+	return str(a["token"]) < str(b["token"])
 
 
 ## Dictionary keys as a sorted Array of String. Insertion order is deterministic
@@ -816,6 +816,6 @@ static func _row_before(a: Dictionary, b: Dictionary) -> bool:
 static func _sorted_keys(d: Dictionary) -> Array:
 	var out: Array = []
 	for k in d:
-		out.append(String(k))
+		out.append(str(k))
 	out.sort()
 	return out

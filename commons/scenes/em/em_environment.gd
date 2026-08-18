@@ -340,7 +340,7 @@ static func tier() -> String:
 	args.append_array(OS.get_cmdline_user_args())
 	args.append_array(OS.get_cmdline_args())
 	for a in args:
-		var s: String = String(a)
+		var s: String = str(a)
 		if s.begins_with("--em-quality="):
 			t = s.substr(13).strip_edges().to_lower()
 	if t != TIER_PERF and t != TIER_HIGH:
@@ -904,14 +904,14 @@ static func check_contract(env: Environment, contract: Dictionary) -> Array:
 		if absf(env.glow_hdr_threshold - g) > 0.01:
 			out.append("glow_hdr_threshold %.2f != contract %.2f" % [
 				env.glow_hdr_threshold, g])
-	# Explicit String(k): the loop variable off an untyped array literal is a
+	# Explicit str(k): the loop variable off an untyped array literal is a
 	# Variant, and Object.get() wants a StringName.
 	for kv in ["ssao_enabled", "ssil_enabled", "glow_enabled"]:
-		var k: String = String(kv)
+		var k: String = str(kv)
 		if contract.has(k) and bool(contract[k]) and not bool(env.get(k)):
 			out.append("%s is false, contract requires true" % k)
 	if contract.has("tonemap"):
-		var want: String = String(contract["tonemap"]).to_upper()
+		var want: String = str(contract["tonemap"]).to_upper()
 		var got: String = "AGX" if env.tonemap_mode == Environment.TONE_MAPPER_AGX else (
 			"ACES" if env.tonemap_mode == Environment.TONE_MAPPER_ACES else "OTHER")
 		if want != got:
@@ -1031,7 +1031,7 @@ static func _is_shot_run() -> bool:
 	args.append_array(OS.get_cmdline_user_args())
 	args.append_array(OS.get_cmdline_args())
 	for a in args:
-		if String(a).begins_with("--em-shot="):
+		if str(a).begins_with("--em-shot="):
 			return true
 	return false
 

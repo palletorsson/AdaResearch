@@ -418,7 +418,7 @@ class Rig extends Node:
 		var argc: int = -1
 		for s in emitter.get_signal_list():
 			var sd: Dictionary = s
-			if String(sd.get("name", "")) == signal_name:
+			if str(sd.get("name", "")) == signal_name:
 				var sargs: Array = sd.get("args", [])
 				argc = sargs.size()
 				break
@@ -450,15 +450,15 @@ class Rig extends Node:
 
 	func _fs1(a: Variant) -> void:
 		if a is String or a is StringName:
-			step(String(a))
+			step(str(a))
 		else:
 			step("stone")
 
 	func _fs2(a: Variant, b: Variant) -> void:
 		if a is String or a is StringName:
-			step(String(a))
+			step(str(a))
 		elif b is String or b is StringName:
-			step(String(b))
+			step(str(b))
 		else:
 			step("stone")
 
@@ -816,14 +816,14 @@ static func _audio_available() -> bool:
 	var devices: PackedStringArray = AudioServer.get_output_device_list()
 	if devices.is_empty():
 		return false
-	if devices.size() == 1 and String(devices[0]) == "Disabled":
+	if devices.size() == 1 and str(devices[0]) == "Disabled":
 		return false
 	_available = true
 	return true
 
 static func _flagged(args: PackedStringArray) -> bool:
 	for a in args:
-		var s: String = String(a)
+		var s: String = str(a)
 		if s == "--em-no-audio" or s.begins_with("--em-shot"):
 			return true
 	return false

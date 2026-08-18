@@ -60,14 +60,14 @@ static func pick(cam: Camera3D, records: Array, max_dist: float = 24.0) -> int:
 ## reports itself idle if the negotiator stops placing that row.
 static func override_for(records: Array, idx: int, overrides: Array) -> Dictionary:
 	var r: Dictionary = records[idx]
-	var key_tok := String(r.get("token", ""))
+	var key_tok := str(r.get("token", ""))
 	var key_from: Array = r.get("from", r.get("tile_cell", []))
 	for ov in overrides:
-		if String((ov as Dictionary).get("token", "")) == key_tok \
+		if str((ov as Dictionary).get("token", "")) == key_tok \
 				and (ov as Dictionary).get("from", []) == key_from:
 			return ov
 	var ov: Dictionary = {
-		"chapter": String(r.get("chapter", "")),
+		"chapter": str(r.get("chapter", "")),
 		"token": key_tok,
 		"from": key_from.duplicate(),
 		"to": key_from.duplicate(),
@@ -114,9 +114,9 @@ static func load_file(path: String = OVERRIDES_PATH) -> Array:
 static func palette(pool: Array, chapter: String) -> Array:
 	var out: Array = []
 	for e in pool:
-		if String((e as Dictionary).get("sequence", "")) == chapter:
-			out.append({"token": String((e as Dictionary).get("lookup", "")),
-				"scene": String((e as Dictionary).get("scene", ""))})
+		if str((e as Dictionary).get("sequence", "")) == chapter:
+			out.append({"token": str((e as Dictionary).get("lookup", "")),
+				"scene": str((e as Dictionary).get("scene", ""))})
 	return out
 
 
@@ -124,11 +124,11 @@ static func palette(pool: Array, chapter: String) -> Array:
 ## row the plan never held. True = an add was erased; false = not an add.
 static func remove_add(records: Array, idx: int, overrides: Array) -> bool:
 	var r: Dictionary = records[idx]
-	var tok := String(r.get("token", ""))
+	var tok := str(r.get("token", ""))
 	var at: Array = r.get("from", [])
 	for i in range(overrides.size()):
 		var ov: Dictionary = overrides[i]
-		if bool(ov.get("add", false)) and String(ov.get("token", "")) == tok 				and ov.get("to", []) == at:
+		if bool(ov.get("add", false)) and str(ov.get("token", "")) == tok 				and ov.get("to", []) == at:
 			overrides.remove_at(i)
 			return true
 	return false
@@ -156,27 +156,27 @@ static func hud_text(records: Array, sel: int, overrides: Array, dirty: bool,
 	if pal_i >= 0 and pal_i < pal.size():
 		head += "
 add: %s  (%d/%d) — ENTER places it 2.5 m ahead" % [
-			String((pal[pal_i] as Dictionary).get("token", "?")), pal_i + 1, pal.size()]
+			str((pal[pal_i] as Dictionary).get("token", "?")), pal_i + 1, pal.size()]
 	var line2 := ""
 	if sel >= 0 and sel < records.size():
 		var r: Dictionary = records[sel]
-		if String(r.get("kind", "")) == "prop":
+		if str(r.get("kind", "")) == "prop":
 			# a wall prop: the ruling is its HEIGHT convention, token-wide
 			var n: Node3D = r.get("node") as Node3D
 			var h: float = n.position.y if (n != null and is_instance_valid(n)) else 0.0
 			line2 = "\nselected PROP: %s  h %.2f (code %.2f) — UP/DOWN rules every %s in the museum" % [
-				String(r.get("token", "?")), h, float(r.get("code_h", 0.0)),
-				String(r.get("token", "?"))]
-		elif String(r.get("kind", "")) in ["furniture", "plinth", "showing"]:
-			var kd := String(r.get("kind", ""))
+				str(r.get("token", "?")), h, float(r.get("code_h", 0.0)),
+				str(r.get("token", "?"))]
+		elif str(r.get("kind", "")) in ["furniture", "plinth", "showing"]:
+			var kd := str(r.get("kind", ""))
 			line2 = "\nselected %s: %s  (%s) — arrows 1 m · SHIFT 0.2 m · PGUP/PGDN%s; the ruling is per copy" % [
-				kd.to_upper(), String(r.get("token", "?")), String(r.get("chapter", "?")),
+				kd.to_upper(), str(r.get("token", "?")), str(r.get("chapter", "?")),
 				" · Q/R turn" if kd == "furniture" else ""]
 		else:
 			line2 = "\nselected: %s  cell %s  rot %.0f  (%s)%s" % [
-				String(r.get("token", "?")), str(r.get("tile_cell", [])),
-				float(r.get("rotation", 0.0)), String(r.get("chapter", "?")),
-				("  · walk: %s (%s)" % [String(r.get("walk_kind")), String(r.get("walk_space", "wall"))]) if r.has("walk_kind") else ""]
+				str(r.get("token", "?")), str(r.get("tile_cell", [])),
+				float(r.get("rotation", 0.0)), str(r.get("chapter", "?")),
+				("  · walk: %s (%s)" % [str(r.get("walk_kind")), str(r.get("walk_space", "wall"))]) if r.has("walk_kind") else ""]
 	var pend := overrides.size()
 	return head + line2 + ("\noverrides: %d%s" % [pend, "  *unsaved*" if dirty else ""]
 		if pend > 0 or dirty else "")

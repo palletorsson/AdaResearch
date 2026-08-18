@@ -162,11 +162,11 @@ static func plan(lead: String, rel_db: Dictionary, slots_available: int, dna_in:
 		return [_solo("", "", "no declared axis — a single showing is the whole family")]
 
 	var pick: Dictionary = _choose_axis(axes, dna)
-	var axis: String = String(pick["axis"])
+	var axis: String = str(pick["axis"])
 	var values: Array = pick["values"]
 	var order: Array = pick["order"]
 	var is_ladder: bool = bool(pick["ladder"])
-	var default_value: String = String(pick["default"])
+	var default_value: String = str(pick["default"])
 	var known: bool = default_value != ""
 
 	# THE CAP. Four independent ceilings, and the lowest wins:
@@ -196,7 +196,7 @@ static func plan(lead: String, rel_db: Dictionary, slots_available: int, dna_in:
 	var shown: Array = []
 	var defaulted: int = -1
 	for i in range(seq.size()):
-		var value: String = String(seq[i])
+		var value: String = str(seq[i])
 		if known and value == default_value:
 			defaulted = i
 		shown.append(value)
@@ -211,13 +211,13 @@ static func plan(lead: String, rel_db: Dictionary, slots_available: int, dna_in:
 
 	var spare: Array = []
 	for v in order:
-		var s: String = String(v)
+		var s: String = str(v)
 		if not shown.has(s) and s != default_value:
 			spare.append(s)
 
 	var out: Array = []
 	for i in range(shown.size()):
-		var val: String = String(shown[i])
+		var val: String = str(shown[i])
 		var is_def: bool = i == defaulted
 		var why: String = ""
 		if is_def and known:
@@ -247,8 +247,8 @@ static func plan(lead: String, rel_db: Dictionary, slots_available: int, dna_in:
 static func stage(node: Object, entry: Dictionary) -> Dictionary:
 	if node == null:
 		return {"ok": false, "value": "", "why": "no node"}
-	var axis: String = String(entry.get("axis", ""))
-	var want: String = String(entry.get("value", ""))
+	var axis: String = str(entry.get("axis", ""))
+	var want: String = str(entry.get("value", ""))
 	if bool(entry.get("is_default", false)) or axis == "" or want == "":
 		return {"ok": true, "value": "", "why": "bare — untouched, so it ships as it ships"}
 
@@ -263,11 +263,11 @@ static func stage(node: Object, entry: Dictionary) -> Dictionary:
 
 	var candidates: Array = [want]
 	for a in entry.get("alt", []):
-		candidates.append(String(a))
+		candidates.append(str(a))
 	var chosen: String = ""
 	var refused: String = ""
 	for c in candidates:
-		var cand: String = String(c)
+		var cand: String = str(c)
 		if code_values.size() > 0 and not code_values.has(cand):
 			if refused == "":
 				refused = cand
@@ -303,7 +303,7 @@ static func stage(node: Object, entry: Dictionary) -> Dictionary:
 ## comes back BARE, which is the point.
 static func token(lookup: String, rotation: int, y_offset: float, entry: Dictionary) -> String:
 	var head: String = "%s:%d:%s" % [lookup, rotation, _num_str(y_offset)]
-	return head + String(entry.get("config", ""))
+	return head + str(entry.get("config", ""))
 
 
 ## Slots in the order a body meets them: along +z first, then across. The host's
@@ -322,14 +322,14 @@ static func describe(lead: String, entries: Array) -> String:
 	if entries.is_empty():
 		return "%s: no plan" % lead
 	if entries.size() == 1:
-		return "%s x1 (%s)" % [lead, String((entries[0] as Dictionary).get("why", ""))]
+		return "%s x1 (%s)" % [lead, str((entries[0] as Dictionary).get("why", ""))]
 	var first: Dictionary = entries[0]
 	var parts: PackedStringArray = PackedStringArray()
 	for e in entries:
 		var d: Dictionary = e
-		var v: String = String(d.get("value", ""))
+		var v: String = str(d.get("value", ""))
 		parts.append("default" if bool(d.get("is_default", false)) else v)
-	return "%s x%d on `%s` %s: %s" % [lead, entries.size(), String(first.get("axis", "")),
+	return "%s x%d on `%s` %s: %s" % [lead, entries.size(), str(first.get("axis", "")),
 		"ladder" if bool(first.get("ladder", false)) else "default-first",
 		" -> ".join(parts)]
 
@@ -339,7 +339,7 @@ static func describe(lead: String, entries: Array) -> String:
 ## in one boot is pure waste.
 static func prime(dna_by_token: Dictionary) -> void:
 	for k in dna_by_token:
-		var key: String = String(k)
+		var key: String = str(k)
 		if dna_by_token[key] is Dictionary:
 			_dna_cache[key] = dna_by_token[key]
 	_registry_scanned = true
@@ -373,7 +373,7 @@ static func _choose_axis(axes: Dictionary, dna: Dictionary) -> Dictionary:
 	var best_score: float = -1.0
 	var i: int = 0
 	for k in axes:
-		var axis: String = String(k)
+		var axis: String = str(k)
 		var raw: Variant = axes[axis]
 		if not (raw is Array) or (raw as Array).size() < 2:
 			i += 1
@@ -418,30 +418,30 @@ static func _choose_axis(axes: Dictionary, dna: Dictionary) -> Dictionary:
 static func _ladder(values: Array, dna: Dictionary) -> Dictionary:
 	var numeric: bool = true
 	for v in values:
-		if not String(v).is_valid_float():
+		if not str(v).is_valid_float():
 			numeric = false
 			break
 	if numeric:
 		var nums: Array = values.duplicate()
-		nums.sort_custom(func(a, b): return String(a).to_float() < String(b).to_float())
+		nums.sort_custom(func(a, b): return str(a).to_float() < str(b).to_float())
 		return {"ladder": true, "order": nums, "source": "numeric"}
 
 	var index: Dictionary = {}
 	for i in range(values.size()):
-		index[String(values[i])] = i
+		index[str(values[i])] = i
 
 	var edges: Dictionary = {}          # "a>b" -> [a, b]
 	var strong: int = 0
 	var weak: int = 0
 	for text in _dna_texts(dna):
-		for m in _chain_re().search_all(String(text)):
+		for m in _chain_re().search_all(str(text)):
 			var mm: RegExMatch = m
 			var rawtext: String = mm.get_string()
 			var flat: String = rawtext.replace("->", "<").replace("→", "<")
 			var terms: Array = []
 			var bad: bool = false
 			for piece in flat.split("<", false):
-				var t: String = String(piece).strip_edges()
+				var t: String = str(piece).strip_edges()
 				if t == "" or not index.has(t) or terms.has(t):
 					bad = true
 					break
@@ -474,25 +474,25 @@ static func _topo(values: Array, index: Dictionary, edges: Dictionary) -> Array:
 	var indeg: Dictionary = {}
 	var adj: Dictionary = {}
 	for v in values:
-		indeg[String(v)] = 0
-		adj[String(v)] = []
+		indeg[str(v)] = 0
+		adj[str(v)] = []
 	for key in edges:
 		var pair: Array = edges[key]
-		var a: String = String(pair[0])
-		var b: String = String(pair[1])
+		var a: String = str(pair[0])
+		var b: String = str(pair[1])
 		(adj[a] as Array).append(b)
 		indeg[b] = int(indeg[b]) + 1
 	var ready: Array = []
 	for v in values:
-		if int(indeg[String(v)]) == 0:
-			ready.append(String(v))
+		if int(indeg[str(v)]) == 0:
+			ready.append(str(v))
 	var out: Array = []
 	while not ready.is_empty():
-		ready.sort_custom(func(a, b): return int(index[String(a)]) < int(index[String(b)]))
-		var n: String = String(ready.pop_front())
+		ready.sort_custom(func(a, b): return int(index[str(a)]) < int(index[str(b)]))
+		var n: String = str(ready.pop_front())
 		out.append(n)
 		for m in (adj[n] as Array):
-			var t: String = String(m)
+			var t: String = str(m)
 			indeg[t] = int(indeg[t]) - 1
 			if int(indeg[t]) == 0:
 				ready.append(t)
@@ -508,13 +508,13 @@ static func _ordinal_order(values: Array) -> Array:
 		var s: Array = scale
 		var all_in: bool = true
 		for v in values:
-			if not s.has(String(v).to_lower()):
+			if not s.has(str(v).to_lower()):
 				all_in = false
 				break
 		if not all_in:
 			continue
 		var out: Array = values.duplicate()
-		out.sort_custom(func(a, b): return s.find(String(a).to_lower()) < s.find(String(b).to_lower()))
+		out.sort_custom(func(a, b): return s.find(str(a).to_lower()) < s.find(str(b).to_lower()))
 		return out
 	return []
 
@@ -542,14 +542,14 @@ static func _sequence(order: Array, default_value: String, known: bool, is_ladde
 		for i in range(n):
 			var idx: int = start + i
 			if idx < order.size():
-				out.append(String(order[idx]))
+				out.append(str(order[idx]))
 		return out
 	if known:
 		out.append(default_value)
 	for v in order:
 		if out.size() >= n:
 			break
-		var s: String = String(v)
+		var s: String = str(v)
 		if not out.has(s):
 			out.append(s)
 	return out
@@ -561,17 +561,17 @@ static func _sequence(order: Array, default_value: String, known: bool, is_ladde
 ## field is absent, names another axis, or names a value this axis does not
 ## declare — all three are "we do not know", and a guess here is a corpus edit.
 static func _default_for(dna: Dictionary, axis: String, values: Array) -> String:
-	var s: String = String(dna.get("default", ""))
+	var s: String = str(dna.get("default", ""))
 	if s.strip_edges() == "":
 		return ""
 	var head: String = s
 	for sep in [" - ", " — ", " – "]:
-		var i: int = s.find(String(sep))
+		var i: int = s.find(str(sep))
 		if i > 0:
 			head = s.substr(0, i)
 			break
 	for scope in [head, s]:
-		for m in _pair_re().search_all(String(scope)):
+		for m in _pair_re().search_all(str(scope)):
 			var mm: RegExMatch = m
 			if mm.get_string(1) != axis:
 				continue
@@ -579,8 +579,8 @@ static func _default_for(dna: Dictionary, axis: String, values: Array) -> String
 			if values.has(v):
 				return v
 			for cand in values:
-				if String(cand).to_lower() == v.to_lower():
-					return String(cand)
+				if str(cand).to_lower() == v.to_lower():
+					return str(cand)
 			return ""
 	return ""
 
@@ -594,7 +594,7 @@ static func _entry(axis: String, value: String, is_default: bool, i: int, is_lad
 	return {
 		"value": value,
 		"axis": axis,
-		"emphasis": String(EMPHASIS[mini(i, EMPHASIS.size() - 1)]),
+		"emphasis": str(EMPHASIS[mini(i, EMPHASIS.size() - 1)]),
 		"is_default": is_default,
 		"config": cfg,
 		"alt": alts,
@@ -631,7 +631,7 @@ static func _ensure_registry() -> void:
 		return
 	var files: int = 0
 	for fname in dir.get_files():
-		var fn: String = String(fname)
+		var fn: String = str(fname)
 		if not fn.ends_with(".json"):
 			continue
 		var f: FileAccess = FileAccess.open(REGISTRY_DIR + "/" + fn, FileAccess.READ)
@@ -650,7 +650,7 @@ static func _ensure_registry() -> void:
 				continue
 			var dna: Variant = (entry as Dictionary).get("dna", null)
 			if dna is Dictionary:
-				_dna_cache[String(lookup)] = dna
+				_dna_cache[str(lookup)] = dna
 	print("[em_multiples] dna: %d promoted tokens from %d registry files (%d ms)" % [
 		_dna_cache.size(), files, Time.get_ticks_msec() - t0])
 
@@ -678,18 +678,18 @@ static func _dna_texts(dna: Dictionary) -> Array:
 	for k in dna:
 		var v: Variant = dna[k]
 		if v is String:
-			out.append(String(v))
+			out.append(str(v))
 		elif v is Array:
 			for item in (v as Array):
 				if item is String:
-					out.append(String(item))
+					out.append(str(item))
 	return out
 
 
 static func _prop_info(node: Object, prop: String) -> Dictionary:
 	for p in node.get_property_list():
 		var d: Dictionary = p
-		if String(d.get("name", "")) == prop:
+		if str(d.get("name", "")) == prop:
 			return d
 	return {}
 
@@ -702,8 +702,8 @@ static func _enum_values(info: Dictionary) -> Array:
 	if int(info.get("hint", 0)) != PROPERTY_HINT_ENUM:
 		return []
 	var out: Array = []
-	for piece in String(info.get("hint_string", "")).split(",", false):
-		var s: String = String(piece).strip_edges()
+	for piece in str(info.get("hint_string", "")).split(",", false):
+		var s: String = str(piece).strip_edges()
 		if s == "":
 			continue
 		var colon: int = s.rfind(":")

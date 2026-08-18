@@ -491,7 +491,7 @@ static func stage(node: Node3D, plan_dict: Dictionary, extra: Dictionary = {}) -
 		node.set_meta("config_%s" % str(k), cfg[k])
 	for k2 in extra:
 		node.set_meta("config_%s" % str(k2), extra[k2])
-	node.set_meta("artifact_lookup_name", String(plan_dict.get("plinth", "")))
+	node.set_meta("artifact_lookup_name", str(plan_dict.get("plinth", "")))
 
 
 ## Tokens plan() was asked about and had no measurement for. A caller that wants
@@ -534,7 +534,7 @@ static func _decide(token: String, cell: Dictionary, h: float, b: float,
 	if b > BROAD_MAX:
 		var pad: Array = _pad_for(b)
 		if h < 0.90 and not pad.is_empty():
-			var pad_class: String = String(pad[0])
+			var pad_class: String = str(pad[0])
 			var pad_m: float = float(pad[1])
 			return {
 				"needs": true,
@@ -649,7 +649,7 @@ static func _no(token: String, why: String, source: String) -> Dictionary:
 
 static func _has_word(parts: PackedStringArray, words: Array) -> bool:
 	for p in parts:
-		if words.has(String(p)):
+		if words.has(str(p)):
 			return true
 	return false
 

@@ -182,17 +182,17 @@ static func build_set(lead: String, slots: Array, rel_db: Dictionary, budget: in
 		if not (r0 is Dictionary):
 			continue
 		var r: Dictionary = r0
-		var tok: String = String(r.get("token", ""))
+		var tok: String = str(r.get("token", ""))
 		if tok == "" or seen.has(tok):
 			continue
 		seen[tok] = true
 		var row: Dictionary = {
 			"token": tok,
-			"kind": String(r.get("kind", "")),
-			"why": String(r.get("why", "")),
+			"kind": str(r.get("kind", "")),
+			"why": str(r.get("why", "")),
 			"pt": int(r.get("placements_together", 0))
 		}
-		var kind: String = String(row["kind"])
+		var kind: String = str(row["kind"])
 		if kind == "axis_kin":
 			kin.append(row)
 		elif kind == "named":
@@ -234,7 +234,7 @@ static func build_set(lead: String, slots: Array, rel_db: Dictionary, budget: in
 		# value-less fill — it still got placed, just stripped of the one thing
 		# that made it worth placing. A comparison staged across a room is weaker
 		# than one staged shoulder to shoulder, and far stronger than none.
-		var why_kin: String = String(c["why"])
+		var why_kin: String = str(c["why"])
 		var slot: Dictionary = _adjacent_slot(cells, taken, lead_slot)
 		if slot.is_empty():
 			slot = _nearest_slot(cells, taken, lead_slot, true)
@@ -243,15 +243,15 @@ static func build_set(lead: String, slots: Array, rel_db: Dictionary, budget: in
 			kin_left.append(c)
 			continue
 		if lead_axis == "":
-			lead_axis = String(pair["axis"])
+			lead_axis = str(pair["axis"])
 			var l0: Dictionary = out[0]
 			l0["axis"] = lead_axis
-			l0["value"] = String(pair["lead_value"])
+			l0["value"] = str(pair["lead_value"])
 			l0["why"] = "%s — pinned to %s:%s so the comparison has two fixed ends" % [
-				String(l0["why"]), lead_axis, String(pair["lead_value"])]
-			used_vals[String(pair["lead_value"])] = true
-		used_vals[String(pair["rel_value"])] = true
-		_place(out, taken, String(c["token"]), slot, lead_axis, String(pair["rel_value"]),
+				str(l0["why"]), lead_axis, str(pair["lead_value"])]
+			used_vals[str(pair["lead_value"])] = true
+		used_vals[str(pair["rel_value"])] = true
+		_place(out, taken, str(c["token"]), slot, lead_axis, str(pair["rel_value"]),
 			"axis_kin", "axis_kin", why_kin)
 		n_kin += 1
 
@@ -261,7 +261,7 @@ static func build_set(lead: String, slots: Array, rel_db: Dictionary, budget: in
 		if out.size() >= budget or n_named >= MAX_NAMED:
 			break
 		var c: Dictionary = c0
-		var why: String = String(c["why"])
+		var why: String = str(c["why"])
 		var slot: Dictionary = _sightline_slot(cells, taken, lead_slot)
 		if slot.is_empty():
 			# a compact tile, or a tile whose slots share no row or column, simply
@@ -273,7 +273,7 @@ static func build_set(lead: String, slots: Array, rel_db: Dictionary, budget: in
 			why += " — no clear sightline in this room, placed as near the lead as the tile allows"
 		if slot.is_empty():
 			break
-		_place(out, taken, String(c["token"]), slot, "", "", "named", "named", why)
+		_place(out, taken, str(c["token"]), slot, "", "", "named", "named", why)
 		n_named += 1
 
 	# ── PHASE C — sibling: an evenly spaced row ──────────────────────────────
@@ -284,9 +284,9 @@ static func build_set(lead: String, slots: Array, rel_db: Dictionary, budget: in
 			var n: int = mini(want, row_slots.size())
 			for i in range(n):
 				var c: Dictionary = sibs[i]
-				_place(out, taken, String(c["token"]), row_slots[i], "", "",
+				_place(out, taken, str(c["token"]), row_slots[i], "", "",
 					"sibling", "sibling",
-					"%s — dealt as a row so the family reads as a vocabulary" % String(c["why"]))
+					"%s — dealt as a row so the family reads as a vocabulary" % str(c["why"]))
 		else:
 			# a row of one is not a row: keep the sibling, drop the claim. Nearest
 			# rather than adjacent — 41 of the 67 leads that have siblings have
@@ -295,8 +295,8 @@ static func build_set(lead: String, slots: Array, rel_db: Dictionary, budget: in
 			var c1: Dictionary = sibs[0]
 			var slot1: Dictionary = _nearest_slot(cells, taken, lead_slot, true)
 			if not slot1.is_empty():
-				_place(out, taken, String(c1["token"]), slot1, "", "", "sibling", "sibling",
-					"%s — only one sibling placeable here, so no row" % String(c1["why"]))
+				_place(out, taken, str(c1["token"]), slot1, "", "", "sibling", "sibling",
+					"%s — only one sibling placeable here, so no row" % str(c1["why"]))
 
 	# ── PHASE D — multiples: the lead meets itself at another value ──────────
 	var mult: int = int(entry.get("multiples", 1))
@@ -304,19 +304,19 @@ static func build_set(lead: String, slots: Array, rel_db: Dictionary, budget: in
 		var lead_axes: Dictionary = _axes_of_entry(entry)
 		var axis: String = lead_axis
 		if axis == "" and not lead_axes.is_empty():
-			axis = String(lead_axes.keys()[0])
+			axis = str(lead_axes.keys()[0])
 		if axis != "" and lead_axes.has(axis):
 			var vals: Array = _str_list(lead_axes[axis])
 			var l0: Dictionary = out[0]
-			if String(l0.get("value", "")) == "" and not vals.is_empty():
+			if str(l0.get("value", "")) == "" and not vals.is_empty():
 				l0["axis"] = axis
-				l0["value"] = String(vals[0])
-				used_vals[String(vals[0])] = true
+				l0["value"] = str(vals[0])
+				used_vals[str(vals[0])] = true
 			var extra: int = 0
 			for v in vals:
 				if out.size() >= budget or extra >= MAX_MULTIPLES or extra >= mult - 1:
 					break
-				var s: String = String(v)
+				var s: String = str(v)
 				if used_vals.has(s):
 					continue
 				var slot: Dictionary = _nearest_slot(cells, taken, lead_slot, true)
@@ -340,11 +340,11 @@ static func build_set(lead: String, slots: Array, rel_db: Dictionary, budget: in
 		var slot: Dictionary = _nearest_slot(cells, taken, lead_slot, true)
 		if slot.is_empty():
 			break
-		var kind: String = String(c["kind"])
-		var why: String = String(c["why"])
+		var kind: String = str(c["kind"])
+		var why: String = str(c["why"])
 		if kind == "axis_kin":
 			why += " — but its values are not declared, so no comparison is staged"
-		_place(out, taken, String(c["token"]), slot, "", "", kind, kind, why)
+		_place(out, taken, str(c["token"]), slot, "", "", kind, kind, why)
 
 	# ── PHASE F — family: padding, and only into a room that would look empty ─
 	var target: int = mini(budget, cells.size())
@@ -358,8 +358,8 @@ static func build_set(lead: String, slots: Array, rel_db: Dictionary, budget: in
 			var slot: Dictionary = _nearest_slot(cells, taken, lead_slot, false)
 			if slot.is_empty():
 				break
-			_place(out, taken, String(c["token"]), slot, "", "", "family", "family",
-				"%s — padding an otherwise sparse room" % String(c["why"]))
+			_place(out, taken, str(c["token"]), slot, "", "", "family", "family",
+				"%s — padding an otherwise sparse room" % str(c["why"]))
 	return out
 
 
@@ -368,12 +368,12 @@ static func build_set(lead: String, slots: Array, rel_db: Dictionary, budget: in
 ## Handy for logging and for any caller that wants to go through the normal
 ## interactables path instead of instancing the scene itself.
 static func config_token(p: Dictionary, rotation: int = 0, y_offset: float = 0.0) -> String:
-	var t: String = String(p.get("token", ""))
+	var t: String = str(p.get("token", ""))
 	if t == "":
 		return ""
 	var s: String = "%s:%d:%s" % [t, rotation, str(y_offset)]
-	var axis: String = String(p.get("axis", ""))
-	var value: String = String(p.get("value", ""))
+	var axis: String = str(p.get("axis", ""))
+	var value: String = str(p.get("value", ""))
 	if axis != "" and value != "":
 		s += "#%s:%s" % [axis, value]
 	return s
@@ -401,7 +401,7 @@ static func apply_axis(node: Node, axis: String, value: String) -> bool:
 	var typed: Variant = value
 	for p0 in node.get_property_list():
 		var p: Dictionary = p0
-		if String(p.get("name", "")) != axis:
+		if str(p.get("name", "")) != axis:
 			continue
 		var t: int = int(p.get("type", TYPE_NIL))
 		var ok: bool = true
@@ -440,10 +440,10 @@ static func summary(placements: Array) -> String:
 	var parts: PackedStringArray = PackedStringArray()
 	for p0 in placements:
 		var p: Dictionary = p0
-		var s: String = "%s(%s" % [String(p.get("token", "?")), String(p.get("role", "?"))]
-		var axis: String = String(p.get("axis", ""))
+		var s: String = "%s(%s" % [str(p.get("token", "?")), str(p.get("role", "?"))]
+		var axis: String = str(p.get("axis", ""))
 		if axis != "":
-			s += " %s=%s" % [axis, String(p.get("value", ""))]
+			s += " %s=%s" % [axis, str(p.get("value", ""))]
 		parts.append(s + ")")
 	return ", ".join(parts)
 
@@ -475,7 +475,7 @@ static func _str_list(v: Variant) -> Array:
 	var out: Array = []
 	if v is Array:
 		for x in (v as Array):
-			var s: String = String(x)
+			var s: String = str(x)
 			if s != "":
 				out.append(s)
 	return out
@@ -486,7 +486,7 @@ static func _str_list(v: Variant) -> Array:
 ## but a name in a note is a transcription; the check is that both `axes` blocks
 ## carry it. Falls back to intersecting the two declarations directly.
 static func _shared_axis(lead_axes: Dictionary, cand_axes: Dictionary, cand: Dictionary) -> String:
-	var why: String = String(cand.get("why", ""))
+	var why: String = str(cand.get("why", ""))
 	var mark: String = "same axis: "
 	var i: int = why.find(mark)
 	if i >= 0:
@@ -494,7 +494,7 @@ static func _shared_axis(lead_axes: Dictionary, cand_axes: Dictionary, cand: Dic
 		if name != "" and lead_axes.has(name) and cand_axes.has(name):
 			return name
 	for k in lead_axes.keys():
-		var a: String = String(k)
+		var a: String = str(k)
 		if cand_axes.has(a):
 			return a
 	return ""
@@ -507,7 +507,7 @@ static func _shared_axis(lead_axes: Dictionary, cand_axes: Dictionary, cand: Dic
 static func _axis_pair(db: Dictionary, lead_entry: Dictionary, cand: Dictionary,
 		fixed_axis: String, used: Dictionary) -> Dictionary:
 	var lead_axes: Dictionary = _axes_of_entry(lead_entry)
-	var cand_axes: Dictionary = _axes_of_entry(_entry_of(db, String(cand.get("token", ""))))
+	var cand_axes: Dictionary = _axes_of_entry(_entry_of(db, str(cand.get("token", ""))))
 	if lead_axes.is_empty() or cand_axes.is_empty():
 		return {}
 	var axis: String = fixed_axis
@@ -521,18 +521,18 @@ static func _axis_pair(db: Dictionary, lead_entry: Dictionary, cand: Dictionary,
 		return {}
 	var lead_value: String = ""
 	if fixed_axis == "":
-		lead_value = String(lv[0])
+		lead_value = str(lv[0])
 	else:
 		# the lead already stands somewhere on this axis — find where
 		for v in lv:
-			if used.has(String(v)):
-				lead_value = String(v)
+			if used.has(str(v)):
+				lead_value = str(v)
 				break
 		if lead_value == "":
-			lead_value = String(lv[0])
+			lead_value = str(lv[0])
 	var rel_value: String = ""
 	for v in cv:
-		var s: String = String(v)
+		var s: String = str(v)
 		if s == lead_value or used.has(s):
 			continue
 		rel_value = s
@@ -849,4 +849,4 @@ static func _cand_before(a: Dictionary, b: Dictionary) -> bool:
 	var bp: int = int(b.get("pt", 0))
 	if ap != bp:
 		return ap > bp
-	return String(a.get("token", "")) < String(b.get("token", ""))
+	return str(a.get("token", "")) < str(b.get("token", ""))
