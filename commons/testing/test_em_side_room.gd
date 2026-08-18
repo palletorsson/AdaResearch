@@ -102,6 +102,10 @@ func _run() -> void:
 	# the trial marks chapter 1 of the plan; the museum may not have dealt that
 	# chapter in its first segments — then the room is not expected yet, and the
 	# doorway helper is what we can prove
+	# the museum has already walked into the chapter's pearl string (two
+	# segments on ready); ask the doorway helper about the FIRST pearl, where
+	# the trial row was marked, by rewinding the pearl cursor for the question
+	b.set("_pearl_cursor", {})
 	var doorways: Dictionary = b.call("_side_room_doorways", {"key": museum}, chapter, 40)
 	if doorways.is_empty():
 		fails.append("BITE: _side_room_doorways found no doorway for %s/%s (marked %s)" % [museum, chapter, marked])
