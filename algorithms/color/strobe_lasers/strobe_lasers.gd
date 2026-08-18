@@ -194,7 +194,11 @@ func apply_grid_config(config: Dictionary) -> void:
 	if config.has("color"):
 		laser_color = Color.from_string(str(config["color"]), laser_color)
 	if config.has("rainbow_mode"):
-		rainbow_mode = config["rainbow_mode"] == true or str(config["rainbow_mode"]) == "true"
+		# the bool test must be GUARDED, not first: `"true" == true` is a runtime
+		# error in GDScript, so this line died on the very string its own second
+		# clause was written to accept — the fallback never got a turn.
+		var rm: Variant = config["rainbow_mode"]
+		rainbow_mode = (rm is bool and rm) or str(rm).to_lower() == "true"
 	if config.has("rainbow_speed"):
 		rainbow_speed = float(config["rainbow_speed"])
 	_setup_multimesh()

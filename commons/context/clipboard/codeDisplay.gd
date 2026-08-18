@@ -818,7 +818,12 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		print("CodeDisplay: Checking for shorthand syntax...")
 		for key in config_data.keys():
 			print("CodeDisplay: Key '%s' = %s" % [key, config_data[key]])
-			if config_data[key] == true:
+			# `is bool` FIRST, never a bare `== true`. The parser stores a bare
+			# `#flag` as boolean true (GridInteractablesComponent:1565/1586) but a
+			# `#key:value` pair as a STRING (:1583), and `"wall" == true` is not
+			# false in GDScript — it is a runtime error, "Invalid operands 'String'
+			# and 'bool'". One valued key anywhere on the token killed the scan.
+			if config_data[key] is bool and config_data[key]:
 				var tutorial_key = key.strip_edges()
 				print("CodeDisplay: Using shorthand tutorial key: '%s'" % tutorial_key)
 				set_tutorial(tutorial_key)
