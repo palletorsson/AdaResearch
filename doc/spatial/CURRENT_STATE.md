@@ -5,6 +5,33 @@
 
 Updated 2026-08-15.
 
+## 08-18 (night) — THE BAKE: no real-time generation of placement
+
+Palle: "VR still shows less and other artifacts. How can we rebuild the
+system so we know we read from the same generated files, no real time
+generation." The as-built diff, once it recorded refusals and which body
+sealed each cell, caught the mechanism in three runs: `line_builder_3d`
+(physics handles) measured a different AABB every run, so its seal took
+cells 12..15 at z 59, or z 61, or neither — desktop or VR, either way. Two
+of the six `_stamp` refusals and every seal were decided from that
+measurement, so a headset (different clock, GPU, build order) legitimately
+placed fewer and other bodies from the same plan.
+
+- **Bake**: `python tools/em_bake.py` → `ada_run/em_bake.json` (7 min, 219
+  pearls, 1110 placed / 84 refused). Per chapter|pearl: placed rows with
+  their exact sealed cells; refused rows with why.
+- **Replay**: with the file present, `_stamp` refuses a baked refusal before
+  instantiating, seals a baked body's baked cells with no measurement, and
+  counts anything the bake never saw as `unbaked` (a stale bake shows itself;
+  boot prints REPLAY / STALE). `em_layout.bake.replay = 0` turns it off.
+- **Gates**: `built` — both modes replay, nothing unbaked, desktop == VR
+  (SAME 4/4 after; never twice before). `bake_fresh` — plan younger than bake
+  fails. The plan editor shows bake status and has a re-bake button.
+- **Edit loop**: plan editor → `em_plan.json` → re-bake → both modes.
+
+Not baked (deterministic, unmeasured): rooms, walls, cards, furniture,
+numbering. Still measured but harmless to XZ parity: the seat height.
+
 ## 08-18 (late) — the AS-BUILT plan, and VR = desktop as a diff of two files
 
 Palle: "why is VR and desktop not the same source of truth?" and "goal today
