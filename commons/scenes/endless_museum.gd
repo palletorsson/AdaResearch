@@ -238,6 +238,13 @@ var _diag_t: float = 0.0
 var _vr_wait_said: bool = false
 const AUTOSAVE_S := 0.6            # a ruling writes itself this long after the last keystroke
 var _autosave_t: float = 0.0
+# THE ARTIFACT'S OWN CONFIG, ruled by hand (2026-08-18). dna.axes per token as
+# the pool read them; the editor's C key cycles the selected body's current
+# axis and writes `config` on the ruling — the same dict the plan row carries
+# and _stamp hands to apply_grid_config, so hand and negotiator speak one
+# sentence about what a body IS at a place.
+var _dna_axes: Dictionary = {}
+var _axes_cache: Dictionary = {}
 var _showing_cards: Array = []     # every wall card built this run: chapter · pearl · number, world pos
 # THE INVENTORY (2026-08-18, Palle: "it should say primitives:0001, like in a
 # museum; the artifact should also be part of the numbering system"). Every
@@ -927,7 +934,7 @@ func _load_pool() -> void:
 	# the dna blocks, harvested on the SAME pass. em_multiples would otherwise
 	# scan the whole registry again for them — one pass over ~7 MB of JSON is
 	# cheap, two in one boot is pure waste on the streaming frame.
-	var dna_by_token: Dictionary = {}
+	var dna_by_token: Dictionary = {}   # also kept as _dna_axes, for the editor's C key
 	var dir := DirAccess.open(REGISTRY_DIR)
 	if dir == null:
 		return
@@ -955,6 +962,7 @@ func _load_pool() -> void:
 	_live = live
 	if _mod_has(_mod_mult, "prime"):
 		_mod_mult.call("prime", dna_by_token)
+		_dna_axes = dna_by_token
 		print("[endless_museum] dna: %d promoted tokens handed to em_multiples" % dna_by_token.size())
 	if _order_mode == "spine" and _load_spine_pool(live):
 		return
@@ -3013,6 +3021,7 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 		# at the end — reported, never guessed at.
 		var yaw_override: float = float(row.get("rotation", 0.0))
 		# a BAKED row carries the hand's fine offset and scale itself
+		var cfg_override: Dictionary = {}      # the hand's config for this body
 		var fine_override: Array = (row.get("offset", []) as Array).duplicate() if row.get("offset") is Array else []
 		var scale_override: float = float(row.get("scale", 1.0))
 		var removed_by_hand := false
@@ -3051,6 +3060,8 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 				fine_override = (ov["offset"] as Array).duplicate()
 			if ov.has("scale"):
 				scale_override = float(ov["scale"])
+			if ov.get("config") is Dictionary:
+				cfg_override = (ov["config"] as Dictionary).duplicate()
 			break
 		if removed_by_hand:
 			continue
@@ -3094,7 +3105,12 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 		var plan_config: Dictionary = {}
 		var config_v: Variant = row.get("config", {})
 		if config_v is Dictionary:
-			plan_config = config_v as Dictionary
+			plan_config = (config_v as Dictionary).duplicate()
+		# the hand's word about WHAT the body is, merged over the plan's
+		if not cfg_override.is_empty():
+			for ck in cfg_override:
+				plan_config[ck] = cfg_override[ck]
+			print("[em-config] %s at [%d,%d]: %s (hand ruling)" % [tok, tx, tz, str(cfg_override)])
 		if _stamp(seg, scene, tok, cell, zbase, 1, {}, false, 0.0,
 				yaw_override, plan_config):
 			placed += 1
@@ -5100,6 +5116,10 @@ func _edit_handle_key(key: int) -> bool:
 			# a heuristic every surface may overturn — this is the walk's turn.
 			# It is not a placement ruling and does not touch em_overrides.
 			_edit_walk_space()
+		KEY_C:
+			_edit_config_cycle(-1 if _edit_shift else 1)
+		KEY_X:
+			_edit_config_axis()
 		KEY_F5:
 			var ok := true
 			if _mod_editor.call("save", _edit_overrides, _overrides_path):
@@ -5121,6 +5141,69 @@ func _edit_handle_key(key: int) -> bool:
 			"hud_text", _edit_records, _edit_sel, _edit_overrides, _edit_dirty,
 			_edit_pal, _edit_pal_i)
 	return true
+
+
+## dna.axes for a token: {axis: [values]}, only axes with two values or more.
+## {} for a singleton — 94 of the 132 bodies primitives places declare one.
+func _axes_for(tok: String) -> Dictionary:
+	if _axes_cache.has(tok):
+		return _axes_cache[tok]
+	var out: Dictionary = {}
+	var dna: Variant = _dna_axes.get(tok)
+	if dna is Dictionary and (dna as Dictionary).get("axes") is Dictionary:
+		var axes: Dictionary = (dna as Dictionary)["axes"]
+		for k in axes:
+			var vals: Variant = axes[k]
+			if vals is Array and (vals as Array).size() >= 2:
+				out[String(k)] = (vals as Array).duplicate()
+	_axes_cache[tok] = out
+	return out
+
+
+## Cycle the selected body's current axis to its next value: a RULING carrying
+## a `config` dict, previewed at once by calling apply_grid_config on the node.
+func _edit_config_cycle(dir: int) -> void:
+	if _edit_sel < 0 or _edit_sel >= _edit_records.size():
+		return
+	var r: Dictionary = _edit_records[_edit_sel]
+	var tok := String(r.get("token", ""))
+	var axes: Dictionary = _axes_for(tok)
+	if axes.is_empty():
+		print("[em-config] %s declares no DNA axis — nothing to cycle" % tok)
+		return
+	var names: Array = axes.keys()
+	var ai: int = clampi(int(r.get("axis_i", 0)), 0, names.size() - 1)
+	var axis := String(names[ai])
+	var values: Array = axes[axis]
+	var ov: Dictionary = _mod_editor.call("override_for", _edit_records, _edit_sel, _edit_overrides)
+	var cfg: Dictionary = (ov["config"] as Dictionary) if ov.get("config") is Dictionary else {}
+	var cur := String(cfg.get(axis, ""))
+	var vi: int = values.find(cur)
+	vi = 0 if vi < 0 else (vi + dir + values.size()) % values.size()
+	var val := String(values[vi])
+	cfg[axis] = val
+	ov["config"] = cfg
+	r["axis_i"] = ai
+	_edit_dirty = true
+	var node: Node3D = r.get("node") as Node3D
+	if node != null and is_instance_valid(node):
+		node.set_meta("config_" + axis, val)
+		if node.has_method("apply_grid_config"):
+			node.call("apply_grid_config", cfg)   # the preview: the body becomes it now
+	print("[em-config] %s · %s = %s (%d of %d)" % [tok, axis, val, vi + 1, values.size()])
+
+
+## Move to the body's next declared axis (most have one, some two).
+func _edit_config_axis() -> void:
+	if _edit_sel < 0 or _edit_sel >= _edit_records.size():
+		return
+	var r: Dictionary = _edit_records[_edit_sel]
+	var axes: Dictionary = _axes_for(String(r.get("token", "")))
+	if axes.size() < 2:
+		print("[em-config] %s declares %d axis — nothing to switch to" % [String(r.get("token", "")), axes.size()])
+		return
+	r["axis_i"] = (int(r.get("axis_i", 0)) + 1) % axes.size()
+	print("[em-config] axis: %s" % String(axes.keys()[int(r["axis_i"])]))
 
 
 ## The chapter whose segment the camera stands in — [ ] browses that cast.
