@@ -46,6 +46,17 @@ func _run() -> void:
 				if bool(n.get("enabled")): cat_on += 1
 				else: cat_off += 1
 			elif bool(n.get("enabled")): other_on += 1
+	# the staging strip (bare_hands.gd) runs on every menu-loaded scene: after it,
+	# the pickups and pointers must still be there — that strip is what took
+	# grab away from every VR scene between 08-14 and 08-18
+	var bare = load("res://commons/scenes/bare_hands.gd")
+	var origin: Node = root.find_child("XROrigin3D", true, false)
+	bare.apply(origin)
+	for hand in ["LeftHand", "RightHand"]:
+		var h2: Node = origin.find_child(hand, true, false)
+		for keep in ["FunctionPickup", "FunctionPointer"]:
+			var kn: Node = h2.find_child(keep, true, false) if h2 != null else null
+			if kn == null or kn.is_queued_for_deletion(): why.append("bare_hands strip removed %s from %s" % [keep, hand])
 	if cat_on > 0: why.append("%d catalyst pickable(s) still enabled" % cat_on)
 	if cat_off == 0: why.append("no catalyst pickable found — the disarm was not measured (start map wrong?)")
 	if other_on == 0: why.append("no ordinary pickable enabled — the visitor cannot grab anything")

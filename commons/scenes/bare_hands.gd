@@ -16,27 +16,32 @@ extends RefCounted
 ##     (desktop: %APPDATA%/Godot/app_userdata/<app>/ · Quest: the app's
 ##      files dir via adb — push an empty file, delete it to restore)
 ##
-## What stays: both hands' Movement* providers (direct, turn, jump, flight),
-## XRToolsCollisionHand (the providers are its children), the visible hand
-## meshes, PlayerBody, wall-walk, the deadzone calibrator, customization.
-## What goes is exactly INTERACTION, never locomotion. The catalyst needs no
-## entry here: with FunctionPickup gone the bracelet can never be picked up.
+## What stays (2026-08-18): both hands' Movement* providers (direct, turn,
+## jump, flight), XRToolsCollisionHand, FunctionPickup, FunctionPointer,
+## GhostHand, the hand areas, the visible hand meshes, PlayerBody, wall-walk,
+## the deadzone calibrator, customization — i.e. THE VR HANDS. What goes is
+## the wrist furniture. (Until 08-18 this list also removed the pickups and
+## pointers, which is why nothing could be grabbed in any loaded scene.) The
+## museum keeps the catalyst bracelet off by disarming catalyst pickables
+## itself (endless_museum.gd _plain_hands).
 ##
 ## Applied to LOADED scenes' rigs only — the staging menu keeps its pointers,
 ## because a menu you cannot click is not a diagnosis, it is a lockout.
 
 const STRIP: Array[String] = [
-	"FunctionPickup",       # both hands — grab/ranged grab
-	"FunctionPointer",      # both hands — laser UI pointer
-	"FunctionGazePointer",  # camera gaze pointer
-	"GhostHand",            # both hands
-	"LeftHandArea3D",       # per-hand interaction areas
-	"RightHandArea3D",
+	# THE VR HANDS STAY (2026-08-18). Palle: "Can I have just the hands we've
+	# been working with for most of the project. No bracelet, no editing tool,
+	# just the VR hands." and, on the museum: "the grab function of the object
+	# in the VR endless museum does not work. They did in the grid." It did not
+	# work because THIS list took FunctionPickup and FunctionPointer off every
+	# loaded scene since 08-14 — the joystick experiment shipped as the default
+	# rig. The hands we worked with all year are XRToolsCollisionHand +
+	# FunctionPickup + FunctionPointer + GhostHand + the hand areas; those are
+	# no longer gadgets here. What goes is the wrist furniture.
 	"messageconsole",       # left-hand console
 	"HandWorkstationVR",    # left-hand wrist workstation
 	"GravityGun",           # right hand
 	"WristStatsDisplay",    # right wrist
-	"PickupXPListener",     # meaningless without pickups
 ]
 
 

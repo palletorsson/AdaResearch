@@ -652,6 +652,22 @@ func _ready() -> void:
 		push_error("endless_museum: no museum-tagged templates in %s" % TEMPLATES)
 		return
 	_setup_world()
+	# THE RESCUE POINT (2026-08-18). The StuckDetector autoload rays from the
+	# rig it found first (the staging rig, parked in a wall of the museum), calls
+	# that stuck and teleported it to a fallback (2, 3, 2) — measured on the
+	# Quest 3 log. Give it a spawn_point at the walker's own spawn cell so any
+	# rescue lands in the vestibule, and stand it down while the museum is up:
+	# a room with sealed footprints reads as "5 of 6 rays blocked" from many
+	# honest places, and the museum has its own catch slabs.
+	var sp := Marker3D.new()
+	sp.name = "SpawnPoint"
+	sp.position = Vector3(7.5, 0.1, 1.5)
+	sp.add_to_group("spawn_point")
+	add_child(sp)
+	var stuck: Node = get_node_or_null("/root/StuckDetector")
+	if stuck != null and "enabled" in stuck:
+		stuck.set("enabled", false)
+		print("[endless_museum] StuckDetector stood down for the museum (spawn_point at 7.5, 0.1, 1.5)")
 	# LAZY: one segment now, the rest owed. A shot run still builds all it
 	# needs synchronously — a frame of a museum half-built is not a proof.
 	var preload_n: int = _shot_segments if _shot_path != "" else 1
@@ -6549,3 +6565,9 @@ func _shoot_deferred() -> void:
 			print("[endless_museum] proof shot -> %s" % _shot_path)
 			t.quit()
 	t.process_frame.connect(cb)
+
+
+func _exit_tree() -> void:
+	var stuck_x: Node = get_node_or_null("/root/StuckDetector")
+	if stuck_x != null and "enabled" in stuck_x:
+		stuck_x.set("enabled", true)
