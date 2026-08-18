@@ -1,14 +1,62 @@
+@tool
 extends Node3D
 
-## WHERE THE WALK OPENS — set in the Inspector on the scene root (2026-08-18).
-## `start_chapter` is a sequence name (primitives, noise, ...); `start_map`
-## is a MAP name (Point_Lines, Point_Trace, ...) — the pearl that map became,
-## when the chapter arrived as a string. Empty = the spine's start. Command-
-## line --em-chapter= and ada_run/em_control.json still win when present, so
-## a launch from a test or the menu behaves as it did; the Inspector is the
-## editor's voice.
-@export var start_chapter: String = ""
+## WHERE THE WALK OPENS — two DROPDOWNS in the Inspector on the scene root
+## (2026-08-18). `start_chapter` lists the spine's sequences (curriculum_spine
+## .json); `start_map` lists the maps of the chosen chapter (its sequence
+## file) — the pearl that map became. Empty = the spine's start. Precedence:
+## --em-chapter=, then these, then ada_run/em_control.json.
+##
+## @tool ONLY for the dropdowns: _validate_property fills the enum hints from
+## the files at inspect time. Every runtime entry point (_ready, _process,
+## _physics_process, _input) returns at once under Engine.is_editor_hint(),
+## so opening the scene in the editor builds nothing.
+@export var start_chapter: String = "":
+	set(v):
+		start_chapter = v
+		if Engine.is_editor_hint():
+			notify_property_list_changed()     # the map dropdown follows the chapter
 @export var start_map: String = ""
+
+const _SPINE_JSON := "res://commons/maps/curriculum_spine.json"
+const _SEQ_DIR := "res://commons/maps/sequences/"
+
+
+static func _spine_names() -> PackedStringArray:
+	var out := PackedStringArray()
+	if not FileAccess.file_exists(_SPINE_JSON):
+		return out
+	var d: Variant = JSON.parse_string(FileAccess.get_file_as_string(_SPINE_JSON))
+	if d is Dictionary:
+		for s_v in ((d as Dictionary).get("spine", {}) as Dictionary).get("sequences", []):
+			if s_v is Dictionary and (s_v as Dictionary).has("name"):
+				out.append(String((s_v as Dictionary)["name"]))
+	return out
+
+
+static func _maps_of(chapter: String) -> PackedStringArray:
+	var out := PackedStringArray()
+	if chapter == "" or not FileAccess.file_exists(_SEQ_DIR + chapter + ".json"):
+		return out
+	var d: Variant = JSON.parse_string(FileAccess.get_file_as_string(_SEQ_DIR + chapter + ".json"))
+	if not (d is Dictionary):
+		return out
+	var s_d: Variant = ((d as Dictionary).get("sequences", {}) as Dictionary).get(chapter, d)
+	if s_d is Dictionary:
+		for m in ((s_d as Dictionary).get("maps", []) as Array):
+			out.append(String(m) if m is String else String((m as Dictionary).get("name", "")))
+	return out
+
+
+func _validate_property(property: Dictionary) -> void:
+	# the dropdowns: an ENUM hint whose values come from the files, "" first so
+	# "the spine's start" / "the chapter's first pearl" stay choosable
+	if property.name == "start_chapter":
+		property.hint = PROPERTY_HINT_ENUM
+		property.hint_string = ",".join(PackedStringArray([""]) + _spine_names())
+	elif property.name == "start_map":
+		property.hint = PROPERTY_HINT_ENUM
+		property.hint_string = ",".join(PackedStringArray([""]) + _maps_of(start_chapter))
 # endless_museum.gd — the endless museum corridor (fast loop, v1).
 #
 # Streams museum-template segments ahead of the walker: each segment stamps one
@@ -345,6 +393,8 @@ var _live: Dictionary = {}         # lookup -> {scene, fp} for EVERY alive artif
 var _deal_stats: Dictionary = {}   # running totals for the end-of-run print
 
 func _ready() -> void:
+	if Engine.is_editor_hint():
+		return                        # @tool is for the Inspector dropdowns only
 	_parse_args()
 	_vr = _is_vr()
 	_load_modules()
@@ -3792,6 +3842,8 @@ func _tile_at(tile: Array, x: int, y: int) -> String:
 
 
 func _process(_delta: float) -> void:
+	if Engine.is_editor_hint():
+		return
 	if _shot_path != "":
 		return
 	# desktop needs its own camera; VR waits for the headset rig to appear,
@@ -3872,6 +3924,8 @@ func _track_acoustic() -> void:
 		return
 
 func _physics_process(_delta: float) -> void:
+	if Engine.is_editor_hint():
+		return
 	if _player == null or _shot_path != "":
 		return
 	if _test_collision:
@@ -3926,6 +3980,8 @@ func _physics_process(_delta: float) -> void:
 var _jump_pressed: bool = false
 
 func _input(event: InputEvent) -> void:
+	if Engine.is_editor_hint():
+		return
 	if event is InputEventKey and (event as InputEventKey).pressed and not (event as InputEventKey).echo \
 			and (event as InputEventKey).keycode == KEY_SPACE and _player != null and not _vr:
 		_jump_pressed = true
