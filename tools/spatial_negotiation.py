@@ -693,6 +693,13 @@ BAY_MAX_CELLS = 24
 #: so those remain explicit dedicated-map work rather than silently scaling
 #: down or monopolising the spine.
 BRIDGE_COURT_MAX_M = 40.0
+# THE TURBINE HALL (2026-08-18, Palle: "a large open space like at Tate
+# Modern"). Rung after the bridge court: a body too wide for any court is
+# not a WORLD until it is wider than a hall — a double-height sunken floor
+# the corridor rings at its own level (gallery ring, ramps at both ends).
+# The 28 works between 40 and 90 m stop being "dedicated map" refusals.
+HALL_MAX_M = 90.0
+HALL_MARGIN_M = 4          # floor beyond the body each side, for the ramps and the ring's shadow
 
 
 def requires_dedicated_map(contract: SpatialContract, plan: FloorPlan) -> bool:
@@ -881,13 +888,34 @@ def negotiate(contract: SpatialContract, plan: FloorPlan, occ: Occupancy,
             if (contract.preferred_venue == "courtyard" and tile_w >= 6
                     and int(_m.ceil(min(body_x, body_z))) > tile_w - 3):
                 if requires_dedicated_map(contract, plan):
+                    if max(body_x, body_z) <= HALL_MAX_M:
+                        # THE TURBINE HALL RUNG: not a court, a hall the corridor
+                        # rings at its own level; the body stands on a sunken
+                        # floor and is seen from above and walked down to.
+                        hall = [int(_m.ceil(body_x)) + 2 * HALL_MARGIN_M,
+                                int(_m.ceil(body_z)) + 2 * HALL_MARGIN_M]
+                        ladder.append(Trace(
+                            "escalation", "compromised",
+                            f"turbine hall granted: {body_x:.1f} x {body_z:.1f} m is over "
+                            f"the {BRIDGE_COURT_MAX_M:.0f} m bridge court and under the "
+                            f"{HALL_MAX_M:.0f} m hall — a {hall[0]} x {hall[1]} cell sunken "
+                            f"floor the corridor rings at its own level, ramps at both ends"))
+                        return Placement(
+                            artifact=contract.lookup, slot="hall",
+                            anchor=(0, 0), rotation=court_rot,
+                            mode="freestanding", wall=None, wall_rect=None,
+                            venue="hall", support_height_m=0.0, score=1.0, result="ACCEPT",
+                            traces=ladder,
+                            exceptions=["a hall work: the corridor becomes a gallery ring around it"],
+                            masks=masks(contract, court_rot, "freestanding"),
+                            contract=contract, court_m=hall, court_access="ring")
                     ladder.append(Trace(
                         "escalation", "fail",
                         f"courtyard refused: {body_x:.1f} x {body_z:.1f} m body - "
                         f"even its narrow side leaves no walkable column in a "
                         f"{tile_w}-cell corridor (widest crossable is {tile_w - 3}); "
-                        f"over {BRIDGE_COURT_MAX_M:.0f} m is a WORLD, not a bridge "
-                        f"court - dedicated map required (Palle's rung 3 ruling)"))
+                        f"over {HALL_MAX_M:.0f} m is a WORLD, not a hall "
+                        f"- dedicated map required (Palle's rung 3 ruling)"))
                     court = []
                 else:
                     court_access = "bridge"

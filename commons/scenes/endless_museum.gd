@@ -358,6 +358,17 @@ var _mod_editor = null
 const COURT_JOINT_MAX_DEPTH := 40  # metres of court per joint before the next building
 const BRIDGE_COURT_PATH_W := 4     # protected through-route beside a broad court
 const BRIDGE_COURT_APRON := 3      # negotiated body+3m each side; walk this ring
+# THE TURBINE HALL (2026-08-18). A hall row (venue "hall", court_access
+# "ring") is a double-height sunken floor the corridor RINGS at its own
+# level: a west gallery the width of the bridge (the through-route), north
+# and south galleries across the hall's ends, all at y = 0 with 1.1 m rails;
+# the hall floor HALL_DEPTH below with the body on it; a ramp down along
+# the hall's west wall at each end so the body is walked to, not only seen.
+# Only the galleries join the walk map — the sunken floor is reached by
+# ramp in physics and never advertised as corridor floor.
+const HALL_DEPTH := 4.5
+const HALL_RAMP_LEN := 14         # 4.5 m drop over 14 m: 1:3, a museum ramp
+const HALL_GALLERY_W := 4
 var _force_vr: bool = false       # --em-vr forces the headset path
 var _vr: bool = false             # resolved once in _ready
 var _vr_cam: Camera3D = null      # the XR eye, cached
@@ -2283,6 +2294,74 @@ func _build_forecourt(seg: Node3D, solid: StaticBody3D, w: int, tile_h: int,
 	return porch_d
 
 
+## The turbine hall. Returns the depth it added (the hall + its two gallery ends).
+func _build_hall(seg: Node3D, solid: StaticBody3D, w: int, zbase: int, zcur: int,
+		cw: int, cd: int, c: Dictionary, wall_col: Color, m_wall: Material, m_deck: Material) -> int:
+	var g: int = HALL_GALLERY_W
+	var total_w: int = g + cw                # west gallery + hall
+	var total_d: int = g + cd + g            # north gallery + hall + south gallery
+	var floor_y: float = -HALL_DEPTH
+	# the sunken floor, and its collider (VR walks down to it by ramp)
+	_box(seg, Vector3(g + cw / 2.0, floor_y - 0.1, zcur + g + cd / 2.0),
+		Vector3(cw, 0.2, cd), Color(0.16, 0.165, 0.16), m_deck)
+	_add_col(solid, Vector3(g + cw / 2.0, floor_y - 0.1, zcur + g + cd / 2.0), Vector3(cw, 0.2, cd))
+	# hall walls: from the floor up to the gallery level, on the east side and
+	# under the north/south galleries — the ring stands on them
+	_box(seg, Vector3(g + cw + 0.5, floor_y / 2.0, zcur + total_d / 2.0), Vector3(1, HALL_DEPTH, total_d), wall_col, m_wall)
+	_add_col(solid, Vector3(g + cw + 0.5, floor_y / 2.0, zcur + total_d / 2.0), Vector3(1, HALL_DEPTH, total_d))
+	# the galleries at y = 0: west (the through-route), north and south (across)
+	_box(seg, Vector3(g / 2.0, -0.05, zcur + total_d / 2.0), Vector3(g, 0.3, total_d), Color(0.31, 0.29, 0.25), _sm("plinth"))
+	_box(seg, Vector3(g + cw / 2.0, -0.05, zcur + g / 2.0), Vector3(cw, 0.3, g), Color(0.31, 0.29, 0.25), _sm("plinth"))
+	_box(seg, Vector3(g + cw / 2.0, -0.05, zcur + g + cd + g / 2.0), Vector3(cw, 0.3, g), Color(0.31, 0.29, 0.25), _sm("plinth"))
+	if _vr:
+		_add_col(solid, Vector3(g / 2.0, -0.05, zcur + total_d / 2.0), Vector3(g, 0.3, total_d))
+		_add_col(solid, Vector3(g + cw / 2.0, -0.05, zcur + g / 2.0), Vector3(cw, 0.3, g))
+		_add_col(solid, Vector3(g + cw / 2.0, -0.05, zcur + g + cd + g / 2.0), Vector3(cw, 0.3, g))
+	# the ring joins the walk map; the hall floor does NOT
+	for zz in range(zcur, zcur + total_d):
+		for x in range(1, g):
+			_walk_cells[Vector2i(x, zbase + zz)] = true
+	for zz in [range(zcur, zcur + g), range(zcur + g + cd, zcur + total_d)]:
+		for z2 in zz:
+			for x in range(g, g + cw):
+				_walk_cells[Vector2i(x, zbase + z2)] = true
+	# rails: the outer frame, and the inner rail where the ring meets the drop
+	for rail_x in [-0.125, total_w + 0.125]:
+		_box(seg, Vector3(rail_x, 0.55, zcur + total_d / 2.0), Vector3(0.25, 1.1, total_d), wall_col, m_wall)
+		_add_col(solid, Vector3(rail_x, 0.55, zcur + total_d / 2.0), Vector3(0.25, 1.1, total_d))
+	# inner rail: west edge of the hall (leaving the ramp mouths open), north and south inner edges
+	for span in [[zcur + g + HALL_RAMP_LEN, zcur + g + cd - HALL_RAMP_LEN]]:
+		if int(span[1]) > int(span[0]):
+			_box(seg, Vector3(g + 0.08, 0.55, (span[0] + span[1]) / 2.0), Vector3(0.16, 1.1, span[1] - span[0]), Color(0.24, 0.23, 0.21), _sm("plinth"))
+			_add_col(solid, Vector3(g + 0.08, 0.55, (span[0] + span[1]) / 2.0), Vector3(0.16, 1.1, span[1] - span[0]))
+	for edge_z in [zcur + g - 0.125, zcur + g + cd + 0.125]:
+		_box(seg, Vector3(g + cw / 2.0, 0.55, edge_z), Vector3(cw, 1.1, 0.25), Color(0.24, 0.23, 0.21), _sm("plinth"))
+		_add_col(solid, Vector3(g + cw / 2.0, 0.55, edge_z), Vector3(cw, 1.1, 0.25))
+	# the two ramps: from the west gallery down along the hall's west wall,
+	# north end descending south, south end descending north; 3 m wide
+	var ramp_len: int = mini(HALL_RAMP_LEN, int(cd / 2))
+	var slope := atan2(HALL_DEPTH, float(ramp_len))
+	for end in [0, 1]:
+		var zc: float = (zcur + g + ramp_len / 2.0) if end == 0 else (zcur + g + cd - ramp_len / 2.0)
+		var ramp := MeshInstance3D.new()
+		var bm := BoxMesh.new(); bm.size = Vector3(3.0, 0.3, sqrt(ramp_len * ramp_len + HALL_DEPTH * HALL_DEPTH))
+		ramp.mesh = bm; ramp.material_override = _sm("plinth")
+		ramp.position = Vector3(g + 1.5, floor_y / 2.0 - 0.15, zc)
+		ramp.rotation.x = -slope if end == 0 else slope
+		seg.add_child(ramp)
+		var cs := CollisionShape3D.new(); var bs := BoxShape3D.new(); bs.size = bm.size; cs.shape = bs
+		cs.position = ramp.position; cs.rotation = ramp.rotation; solid.add_child(cs)
+	# the body on the hall floor, through _stamp
+	var cell: Dictionary = {"x": g + int(cw / 2.0), "y": zcur + g + int(cd / 2.0), "rank": 2, "top": floor_y}
+	if _stamp(seg, String(c.get("scene", "")), String(c.get("token", "")), cell, zbase, 1, {}, false, 0.0, float(c.get("rotation", 0.0))):
+		_deal_stats["halls"] = int(_deal_stats.get("halls", 0)) + 1
+		print("[em-hall] %s stands in a %d x %d m TURBINE HALL, floor %.1f m down, ringed at z %d..%d" % [
+			String(c.get("token", "?")), cw, cd, HALL_DEPTH, zcur, zcur + total_d])
+	else:
+		print("[em-hall] hall %s refused — %s" % [String(c.get("token", "?")), _stamp_refusal])
+	return total_d
+
+
 func _build_courtyard(seg: Node3D, solid: StaticBody3D, w: int, tile_h: int,
 		zbase: int, courts: Array, wall_col: Color, m_wall: Material) -> int:
 	var m_deck: Material = _sm("deck")
@@ -2297,8 +2376,11 @@ func _build_courtyard(seg: Node3D, solid: StaticBody3D, w: int, tile_h: int,
 		# A bridge court is allowed to grow BESIDE the spine. A centred court is
 		# still clamped to it. This distinction comes from the plan row; the
 		# builder never guesses topology from dimensions.
-		var cw: int = maxi(int(dims[0]), 3) if access == "bridge" else clampi(int(dims[0]), 3, w)
+		var cw: int = maxi(int(dims[0]), 3) if (access == "bridge" or access == "ring") else clampi(int(dims[0]), 3, w)
 		var cd: int = maxi(int(dims[1]), 3)
+		if String(c.get("venue", "")) == "hall" or access == "ring":
+			zcur += _build_hall(seg, solid, w, zbase, zcur, cw, cd, c, wall_col, m_wall, m_deck)
+			continue
 		if access == "bridge":
 			# ── RUNG 3: BRIDGE + COURTYARD ───────────────────────────────
 			# The main route is a four-metre strip. The made-to-measure court
@@ -2529,7 +2611,7 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 	for row_v in rows:
 		var row: Dictionary = row_v as Dictionary
 		var venue := String(row.get("venue", ""))
-		if (venue == "courtyard" or venue == "balcony") 				and (row.get("court", []) as Array).size() >= 2:
+		if (venue == "courtyard" or venue == "balcony" or venue == "hall") 				and (row.get("court", []) as Array).size() >= 2:
 			# A court resident. Not stamped here — the court's ground does not
 			# exist yet; _build_segment builds the joint after the tile and
 			# stamps the resident onto it. Collected with its scene resolved by
