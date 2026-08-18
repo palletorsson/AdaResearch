@@ -411,6 +411,7 @@ const ART_HIDE_M := 38.0
 var _vis_records: Array = []       # [{node, p}] every stamped artifact, always
 var _vis_timer: float = 0.0
 var _vis_hidden: int = 0
+var _vis_suspended: int = 0        # bodies whose process_mode is DISABLED because they are out of sight
 var _flat_mats: Dictionary = {}    # Color -> StandardMaterial3D, see _mat
 var _box_meshes: Dictionary = {}   # Vector3 size -> BoxMesh, see _box
 
@@ -4916,6 +4917,19 @@ func _cull_artifacts() -> void:
 				node.visible = false
 		elif d < ART_SHOW_M:
 			node.visible = true
+		# SUSPEND WHAT YOU CANNOT SEE (2026-08-18). Hiding a body stops its
+		# draw, not its life: measured on primitives, one segment brings
+		# 47-97 RigidBody3D, 58-103 AudioStreamPlayer3D, 21 Camera3D and
+		# 2 SubViewports, all simulating whether the visitor is beside them or
+		# fifty metres away — that, not the museum's own geometry, is the
+		# hitch. So a hidden body is also DISABLED: no _process, no physics,
+		# no audio, its subtree frozen where it stands; back to INHERIT the
+		# frame it is shown again. Nothing is unloaded and nothing moves.
+		var want_mode: int = Node.PROCESS_MODE_INHERIT if node.visible else Node.PROCESS_MODE_DISABLED
+		if node.process_mode != want_mode:
+			node.process_mode = want_mode
+			if not node.visible:
+				_vis_suspended += 1
 		if not node.visible:
 			_vis_hidden += 1
 		i += 1
