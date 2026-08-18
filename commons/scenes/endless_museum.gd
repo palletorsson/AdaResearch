@@ -230,6 +230,12 @@ var _gate: Dictionary = {}
 var _gate_t: float = -1.0          # seconds since the grant; < 0 = still sealed
 var _lazy_pending: int = 0         # segments still owed from the opening build
 var _lazy_delay: float = 0.0
+const GATE_REACH_M := 1.2          # eye or controller this close to the glass = a hand
+const GATE_PATIENCE := 20.0        # seconds at a sealed door before it opens itself
+var _gate_wait: float = 0.0
+var _vr_wait: float = 0.0
+var _diag_t: float = 0.0
+var _vr_wait_said: bool = false
 const AUTOSAVE_S := 0.6            # a ruling writes itself this long after the last keystroke
 var _autosave_t: float = 0.0
 var _showing_cards: Array = []     # every wall card built this run: chapter · pearl · number, world pos
@@ -4712,13 +4718,64 @@ func _process(_delta: float) -> void:
 		_gate_t += _delta
 		if not bool(_mod_gate.call("step_open", _gate, _gate_t)):
 			_gate = {}          # fully open: nothing left to step
+	elif _gate_t < 0.0 and not _gate.is_empty():
+		# THE GATE MUST NEVER BE A LOCKED ROOM (2026-08-18). In VR the scanner
+		# reads its own hand layers, and the bare-hands rig may not put anything
+		# on them — so the museum ALSO grants on reach: the eye (headset or
+		# desktop camera) or any XR controller close to the glass. And if a
+		# visitor has stood at the door for GATE_PATIENCE seconds and it is
+		# still sealed, it opens itself and says so: a museum that cannot be
+		# entered is a worse failure than a ritual that was skipped.
+		# NEVER CAST A FREED OBJECT. `x as Node3D` on a freed instance THROWS,
+		# and a throw in _process aborts the whole frame — including the
+		# streaming check below it, so the museum silently stopped opening
+		# segments the moment the gate's own segment was freed. Check validity
+		# on the Variant first; a gate whose nodes are gone is simply forgotten.
+		# is_instance_valid FIRST and nothing else: on a freed instance both
+		# `as Node3D` and `is Object` throw, and a throw in _process aborts the
+		# frame before the streaming check — which is exactly how the museum
+		# stopped opening segments after the first one was freed.
+		var sc_v: Variant = _gate.get("scanner")
+		if sc_v == null or not is_instance_valid(sc_v):
+			_gate = {}
+			sc_v = null
+		var sc: Node3D = sc_v as Node3D if sc_v != null else null
+		if sc != null:
+			var eye: Vector3 = _eye_pos()
+			var d_eye: float = eye.distance_to(sc.global_position)
+			if d_eye < GATE_REACH_M:
+				print("[em-gate] a hand at the glass (%.1f m) — granted" % d_eye)
+				_open_gate()
+			else:
+				for ctrl in get_tree().get_nodes_in_group("xr_controllers"):
+					if ctrl is Node3D and (ctrl as Node3D).global_position.distance_to(sc.global_position) < GATE_REACH_M:
+						print("[em-gate] a controller at the glass — granted")
+						_open_gate()
+						break
+				var door_v: Variant = _gate.get("door")
+				var door: Node3D = door_v as Node3D if (door_v != null and is_instance_valid(door_v)) else null
+				if door != null and eye.distance_to(door.global_position) < 3.5:
+					_gate_wait += _delta
+					if _gate_wait > GATE_PATIENCE:
+						print("[em-gate] the visitor waited %.0f s at a sealed door — it opens itself; the scanner did not read a hand" % _gate_wait)
+						_open_gate()
+				else:
+					_gate_wait = 0.0
 	if _shot_path != "":
 		return
 	# desktop needs its own camera; VR waits for the headset rig to appear,
 	# which can be a frame or two after this scene enters the tree.
 	if _vr:
 		if _vr_eye() == null:
+			# a silent early return used to mean "nothing ever streams" with no
+			# way to tell from the log; say it once
+			_vr_wait += _delta
+			if _vr_wait > 3.0 and not _vr_wait_said:
+				_vr_wait_said = true
+				push_warning("[endless_museum] no XRCamera3D under any XROrigin3D — nothing will stream until the rig appears")
+				print("[endless_museum] waiting for the XR camera; the museum cannot stream without an eye")
 			return
+		_vr_wait = 0.0
 	elif _cam == null:
 		return
 	# stream: open the next museum as the walker nears the built edge

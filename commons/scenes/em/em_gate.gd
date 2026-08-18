@@ -101,9 +101,12 @@ static func clicked(cam: Camera3D, scanner: Node3D) -> bool:
 ## is still moving. Removes the colliders on the first step, so the visitor may
 ## walk through as the leaves part rather than waiting for the animation.
 static func step_open(gate: Dictionary, t: float) -> bool:
-	var door: Node3D = gate.get("door") as Node3D
-	if door == null or not is_instance_valid(door):
+	# the same trap: a freed door cast to Node3D throws, and the throw lands in
+	# the museum's _process, where it stops the streaming check below it
+	var door_v: Variant = gate.get("door")
+	if door_v == null or not is_instance_valid(door_v):
 		return false
+	var door: Node3D = door_v as Node3D
 	if not bool(gate.get("cleared", false)):
 		for c in gate.get("colliders", []):
 			if is_instance_valid(c):
