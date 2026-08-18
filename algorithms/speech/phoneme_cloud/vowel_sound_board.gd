@@ -209,6 +209,9 @@ func play_word(word: String, pitch: float = 130.0) -> void:
 
 func _play_ada() -> void:
 	_set_mapper_pos(ANCHORS["a"], 0.0)
+	# out-of-tree guard: get_tree() is null once a map is torn down mid-build
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.1).timeout
 	_tween_mapper(ANCHORS["a"], 1.0, 0.1)
 	await get_tree().create_timer(0.4).timeout
@@ -223,6 +226,9 @@ func _play_ada() -> void:
 func _play_research() -> void:
 	_set_mapper_pos(ANCHORS["r"], 0.0)
 	_tween_mapper(ANCHORS["r"], 0.9, 0.1)
+	# out-of-tree guard: get_tree() is null once a map is torn down mid-build
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.2).timeout
 	_tween_mapper(ANCHORS["i"], 1.0, 0.2)
 	await get_tree().create_timer(0.3).timeout
@@ -241,6 +247,9 @@ func _play_iloveyou() -> void:
 	_set_mapper_pos(ANCHORS["a"], 0.0)
 	label_word.text = "I"
 	_tween_mapper(ANCHORS["a"], 1.0, 0.1)
+	# out-of-tree guard: get_tree() is null once a map is torn down mid-build
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.3).timeout
 	_tween_mapper(ANCHORS["i"], 1.0, 0.2)
 	await get_tree().create_timer(0.3).timeout
@@ -267,6 +276,9 @@ func _play_iloveyou() -> void:
 
 func _play_right_here_right_now() -> void:
 	await _play_right()
+	# out-of-tree guard: get_tree() is null once a map is torn down mid-build
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.2).timeout
 	await _play_here()
 	await get_tree().create_timer(0.3).timeout
@@ -278,6 +290,9 @@ func _play_right_here_right_now() -> void:
 func _play_right() -> void:
 	_set_mapper_pos(ANCHORS["r"], 0.0)
 	_tween_mapper(ANCHORS["r"], 0.8, 0.1)
+	# out-of-tree guard: get_tree() is null once a map is torn down mid-build
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.15).timeout
 	_tween_mapper(ANCHORS["a"], 1.0, 0.1)
 	await get_tree().create_timer(0.1).timeout
@@ -289,6 +304,9 @@ func _play_right() -> void:
 
 func _play_here() -> void:
 	synth.trigger_fricative("h", 100)
+	# out-of-tree guard: get_tree() is null once a map is torn down mid-build
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.05).timeout
 	_set_mapper_pos(ANCHORS["i"], 0.0)
 	_tween_mapper(ANCHORS["i"], 0.9, 0.1)
@@ -301,6 +319,9 @@ func _play_here() -> void:
 
 func _play_now() -> void:
 	synth.trigger_nasal("n", 150)
+	# out-of-tree guard: get_tree() is null once a map is torn down mid-build
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.1).timeout
 	_set_mapper_pos(ANCHORS["a"], 0.0)
 	_tween_mapper(ANCHORS["a"], 1.0, 0.1)
@@ -313,6 +334,9 @@ func _play_now() -> void:
 
 func _play_funk() -> void:
 	synth.trigger_fricative("f", 120)
+	# out-of-tree guard: get_tree() is null once a map is torn down mid-build
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.08).timeout
 	_set_mapper_pos(ANCHORS["a"], 0.0)
 	_tween_mapper(ANCHORS["a"], 1.0, 0.1)
@@ -326,6 +350,9 @@ func _play_funk() -> void:
 
 func _play_hello_world() -> void:
 	synth.trigger_fricative("h", 100)
+	# out-of-tree guard: get_tree() is null once a map is torn down mid-build
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.05).timeout
 	_tween_mapper(ANCHORS["e"], 1.0, 0.2)
 	await get_tree().create_timer(0.3).timeout
@@ -347,6 +374,9 @@ func _play_hello_world() -> void:
 
 func _play_right_about_now() -> void:
 	await _play_right()
+	# out-of-tree guard: get_tree() is null once a map is torn down mid-build
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.1).timeout
 	await _play_about()
 	await get_tree().create_timer(0.1).timeout
@@ -355,6 +385,9 @@ func _play_right_about_now() -> void:
 
 func _play_about() -> void:
 	_tween_mapper(ANCHORS["a"], 0.7, 0.1)
+	# out-of-tree guard: get_tree() is null once a map is torn down mid-build
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.1).timeout
 	synth.trigger_plosive("b")
 	await get_tree().create_timer(0.05).timeout
@@ -366,6 +399,9 @@ func _play_about() -> void:
 
 func _play_soul_brother() -> void:
 	synth.trigger_fricative("s", 120)
+	# out-of-tree guard: get_tree() is null once a map is torn down mid-build
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.08).timeout
 	_tween_mapper(ANCHORS["o"], 1.0, 0.25)
 	await get_tree().create_timer(0.25).timeout
@@ -390,6 +426,9 @@ func _play_soul_brother() -> void:
 
 func _play_check_it_out() -> void:
 	synth.trigger_affricate("ch")
+	# out-of-tree guard: get_tree() is null once a map is torn down mid-build
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.15).timeout
 	_set_mapper_pos(ANCHORS["e"], 1.0); await get_tree().create_timer(0.2).timeout
 	synth.trigger_plosive("k");
@@ -405,6 +444,9 @@ func _play_check_it_out() -> void:
 
 func _play_rockafeller() -> void:
 	await _play_right_about_now()
+	# out-of-tree guard: get_tree() is null once a map is torn down mid-build
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.2).timeout
 	var old_pitch = synth.pulse_hz
 	synth.pulse_hz = 160.0
@@ -425,6 +467,9 @@ func _play_alphabet() -> void:
 		_set_mapper_pos(ANCHORS[v], 0.0)
 		label_word.text = "/ " + v + " /"
 		_tween_mapper(ANCHORS[v], 1.0, 0.1)
+		# out-of-tree guard: get_tree() is null once a map is torn down mid-build
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().create_timer(0.4).timeout
 		_tween_mapper(ANCHORS[v], 0.0, 0.1)
 		await get_tree().create_timer(0.1).timeout

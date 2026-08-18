@@ -192,6 +192,9 @@ func _load_example(idx: int) -> void:
 	panel_bridge.load_panels()
 
 	# Wait for panels to build, then apply the DNA axes and print diagnostics
+	# out-of-tree guard: get_tree() is null once a map is torn down mid-build
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 	await get_tree().process_frame
 	_apply_draw_axes()
@@ -225,6 +228,9 @@ func _print_diagnostics(name: String) -> void:
 ## Wait for the panels to finish building, then reweave. Used by the config path,
 ## which is not a coroutine.
 func _apply_draw_axes_deferred() -> void:
+	# out-of-tree guard: get_tree() is null once a map is torn down mid-build
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 	await get_tree().process_frame
 	_apply_draw_axes()

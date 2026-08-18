@@ -97,6 +97,9 @@ func _build_portal():
 	# Clear existing children (for rebuild)
 	for child in get_children():
 		child.queue_free()
+	# out-of-tree guard: get_tree() is null once a map is torn down mid-build
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 	
 	# Apply position offset

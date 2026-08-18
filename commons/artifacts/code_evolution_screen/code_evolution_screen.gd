@@ -634,6 +634,9 @@ func _update_code_display(code: String) -> void:
 	var highlighted := _syntax_highlight_full(code)
 	_code_label.text = highlighted
 	# Scroll to bottom so new code is visible
+	# out-of-tree guard: get_tree() is null once a map is torn down mid-build
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 	_code_label.scroll_to_line(_code_label.get_line_count())
 

@@ -589,6 +589,9 @@ func _find_rich_text_label() -> void:
 
 	print("CodeDisplay: Waiting for scene to load...")
 	# Wait for scene to load
+	# out-of-tree guard: get_tree() is null once a map is torn down mid-build
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 	await get_tree().process_frame
 	print("CodeDisplay: Scene load wait complete")

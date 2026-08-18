@@ -224,6 +224,9 @@ func _play_note(note_name: String, octave_offset: int = 0, beat_count: float = 1
 
 	# Move mapper to note position
 	_tween_mapper(target_pos, 0.05)
+	# out-of-tree guard: get_tree() is null once a map is torn down mid-build
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().create_timer(0.05).timeout
 
 	# Play the tone

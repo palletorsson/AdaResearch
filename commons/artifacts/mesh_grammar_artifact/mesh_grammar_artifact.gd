@@ -110,6 +110,9 @@ func _build() -> void:
 	_current = mg_node
 
 	# MeshGrammarNode generates after entering the tree.
+	# out-of-tree guard: get_tree() is null once a map is torn down mid-build
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 	if mg_node.has_method("generate_all"):
 		mg_node.generate_all()

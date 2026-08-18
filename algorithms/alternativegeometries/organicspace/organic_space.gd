@@ -438,6 +438,9 @@ func regenerate_space() -> void:
 		environment_container.queue_free()
 
 	# Regenerate with new seed
+	# out-of-tree guard: get_tree() is null once a map is torn down mid-build
+	if not is_inside_tree():
+		await tree_entered
 	await get_tree().process_frame
 	environment_container = Node3D.new()
 	environment_container.name = "OrganicEnvironment"
