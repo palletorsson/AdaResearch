@@ -168,6 +168,10 @@ def seed(trunk_doc: dict) -> dict:
                         want = [t for t in e["tokens_order"] if t in p["tokens"] or t in (e.get("tokens_add") or [])]
                         rest = [t for t in p["tokens"] if t not in want]
                         p["tokens"] = want + rest
+                        # READING ORDER (2026-08-19): a pearl the hand has ordered is a POEM —
+                        # its tokens ARE its cast, in this order; the negotiator deals them
+                        # down the hall in this order (z-monotone), nothing else enters
+                        p["ordered"] = True
                     for tk in e.get("tokens_add", []):       # not `t`: that is the NODE record below
                         if tk not in p["tokens"]:
                             p["tokens"].append(tk)

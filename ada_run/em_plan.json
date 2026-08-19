@@ -2,7 +2,7 @@
   "schema": "adaresearch.em_plan.v2",
   "_readme": "Placements resolved by tools/spatial_negotiation.py. Read by commons/scenes/endless_museum.gd under --em-plan. A museum key absent here deals exactly as it did before.",
   "_spine_run": {
-    "at": "2026-08-19T12:54:28",
+    "at": "2026-08-19T13:31:39",
     "owner": {
       "sainsbury-false-perspective-enfilade": "primitives"
     },
@@ -260809,18 +260809,18 @@
         {
           "token": "frame_counter_display",
           "cell": [
-            16,
-            23
+            15,
+            16
           ],
           "tile_cell": [
-            2,
-            9
+            1,
+            2
           ],
-          "rotation": 120,
+          "rotation": 270,
           "mode": "against_wall",
           "venue": "interior",
-          "support_height_m": 0,
-          "slot": "sainsbury-false-perspective-enfilade/1,14",
+          "support_height_m": 0.0,
+          "slot": "sainsbury-false-perspective-enfilade/1,3",
           "wall": "west",
           "relational_kind": "spine_artifact",
           "relation": {
@@ -260830,31 +260830,22 @@
             "rule": "fill \u2014 they already stand together in real maps",
             "why": "already stand together in 34 map(s)",
             "walk_kind": "hero",
-            "walk_why": "the hero of point (first in spine order)",
+            "walk_why": "a line of the point poem",
             "walk_space": "wall",
             "pearl": "point"
-          },
-          "hand": true,
-          "ruled": {
-            "at": "2026-08-18T13:28:24",
-            "by": "hand",
-            "from": [
-              2,
-              9
-            ]
           }
         },
         {
           "token": "you_are_here",
           "cell": [
-            21,
-            22
+            17,
+            18
           ],
           "tile_cell": [
-            7,
-            8
+            3,
+            4
           ],
-          "rotation": 180,
+          "rotation": 0,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.95,
@@ -260868,30 +260859,25 @@
             "rule": "",
             "why": "the lead this bay is about",
             "walk_kind": "sibling",
-            "walk_why": "a body of the point pearl (Point_One)",
+            "walk_why": "a line of the point poem",
             "walk_space": "wall",
             "pearl": "point"
-          },
-          "hand": true,
-          "ruled": {
-            "at": "2026-08-18T12:15:25",
-            "by": "plan-editor"
           }
         },
         {
           "token": "fontana_puncture",
           "cell": [
-            21,
-            21
+            17,
+            23
           ],
           "tile_cell": [
-            7,
-            7
+            3,
+            9
           ],
-          "rotation": 180,
-          "mode": "against_wall",
+          "rotation": 0,
+          "mode": "freestanding",
           "venue": "interior",
-          "support_height_m": 1.4,
+          "support_height_m": 0.95,
           "slot": "sainsbury-false-perspective-enfilade/2,9",
           "wall": null,
           "relational_kind": "spine_artifact",
@@ -260902,14 +260888,9 @@
             "rule": "sightline \u2014 the relative stands where the lead can be seen with it",
             "why": "an @identity relationships field names it",
             "walk_kind": "sibling",
-            "walk_why": "a body of the point pearl (Point_One)",
+            "walk_why": "a line of the point poem",
             "walk_space": "wall",
             "pearl": "point"
-          },
-          "hand": true,
-          "ruled": {
-            "at": "2026-08-19T08:42:05",
-            "by": "studio"
           }
         },
         {
@@ -260936,7 +260917,7 @@
             "rule": "",
             "why": "the lead this bay is about",
             "walk_kind": "sibling",
-            "walk_why": "a body of the point pearl (Point_One)",
+            "walk_why": "a line of the point poem",
             "walk_space": "wall",
             "pearl": "point"
           }
@@ -260959,7 +260940,7 @@
           "wall": null,
           "relation": {
             "walk_kind": "sibling",
-            "walk_why": "a body of the point pearl (Point_One)",
+            "walk_why": "a line of the point poem",
             "walk_space": "wall",
             "pearl": "point"
           }
@@ -260967,18 +260948,18 @@
         {
           "token": "klee_walking_point",
           "cell": [
-            16,
-            24
+            26,
+            30
           ],
           "tile_cell": [
-            2,
-            10
+            12,
+            16
           ],
           "rotation": 0,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.95,
-          "slot": "sainsbury-false-perspective-enfilade/2,9",
+          "slot": "sainsbury-false-perspective-enfilade/12,15",
           "wall": null,
           "relational_kind": "spine_artifact",
           "relation": {
@@ -260988,7 +260969,7 @@
             "rule": "",
             "why": "the lead this bay is about",
             "walk_kind": "sibling",
-            "walk_why": "a body of the point pearl (Point_One)",
+            "walk_why": "a line of the point poem",
             "walk_space": "wall",
             "pearl": "point"
           }
@@ -260996,23 +260977,19 @@
         {
           "token": "grab_sphere_point_snap",
           "cell": [
-            0,
-            0
+            19,
+            35
           ],
           "tile_cell": [
-            -14,
-            -14
+            5,
+            21
           ],
           "rotation": 0,
           "mode": "freestanding",
-          "venue": "courtyard",
+          "venue": "interior",
           "support_height_m": 0.0,
-          "slot": "courtyard",
+          "slot": "sainsbury-false-perspective-enfilade/5,22",
           "wall": null,
-          "court": [
-            12,
-            20
-          ],
           "relational_kind": "spine_artifact",
           "relation": {
             "anchor": "grab_sphere_point_snap",
@@ -261021,7 +260998,65 @@
             "rule": "",
             "why": "the lead this bay is about",
             "walk_kind": "sibling",
-            "walk_why": "a body of the point pearl (Point_One)",
+            "walk_why": "a line of the point poem",
+            "walk_space": "wall",
+            "pearl": "point"
+          }
+        },
+        {
+          "token": "dgrid",
+          "cell": [
+            15,
+            29
+          ],
+          "tile_cell": [
+            1,
+            15
+          ],
+          "rotation": 270,
+          "mode": "against_wall",
+          "venue": "interior",
+          "support_height_m": 0.0,
+          "slot": "sainsbury-false-perspective-enfilade/1,14",
+          "wall": "west",
+          "relational_kind": "spine_artifact",
+          "relation": {
+            "anchor": "dgrid",
+            "role": "feature",
+            "kind": "",
+            "rule": "",
+            "why": "the lead this bay is about",
+            "walk_kind": "sibling",
+            "walk_why": "a line of the point poem",
+            "walk_space": "wall",
+            "pearl": "point"
+          }
+        },
+        {
+          "token": "draw_dot",
+          "cell": [
+            26,
+            28
+          ],
+          "tile_cell": [
+            12,
+            14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "interior",
+          "support_height_m": 0.95,
+          "slot": "sainsbury-false-perspective-enfilade/12,15",
+          "wall": null,
+          "relational_kind": "spine_artifact",
+          "relation": {
+            "anchor": "mystic_writing_pad",
+            "role": "related",
+            "kind": "named",
+            "rule": "sightline \u2014 the relative stands where the lead can be seen with it",
+            "why": "an @identity relationships field names it",
+            "walk_kind": "sibling",
+            "walk_why": "a line of the point poem",
             "walk_space": "wall",
             "pearl": "point"
           }
@@ -261029,22 +261064,22 @@
         {
           "token": "walk_this_line_marking",
           "cell": [
-            26,
-            29
+            21,
+            9
           ],
           "tile_cell": [
-            12,
-            15
+            7,
+            -5
           ],
-          "rotation": 90,
+          "rotation": 0,
           "mode": "freestanding",
-          "venue": "interior",
-          "support_height_m": 0.95,
-          "slot": "sainsbury-false-perspective-enfilade/12,15",
+          "venue": "porch",
+          "support_height_m": 0.0,
+          "slot": "sainsbury-false-perspective-enfilade/porch",
           "wall": null,
           "relation": {
             "walk_kind": "sibling",
-            "walk_why": "a body of the point pearl (Point_One)",
+            "walk_why": "a line of the point poem",
             "walk_space": "wall",
             "pearl": "point"
           }
@@ -261077,321 +261112,9 @@
             "rule": "fill \u2014 they already stand together in real maps",
             "why": "already stand together in 50 map(s)",
             "walk_kind": "sibling",
-            "walk_why": "a body of the point pearl (Point_One)",
+            "walk_why": "a line of the point poem",
             "walk_space": "wall",
             "pearl": "point"
-          }
-        },
-        {
-          "token": "draw_dot",
-          "cell": [
-            0,
-            0
-          ],
-          "tile_cell": [
-            -14,
-            -14
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "courtyard",
-          "support_height_m": 0.0,
-          "slot": "courtyard",
-          "wall": null,
-          "court": [
-            16,
-            25
-          ],
-          "relational_kind": "spine_artifact",
-          "relation": {
-            "anchor": "mystic_writing_pad",
-            "role": "related",
-            "kind": "named",
-            "rule": "sightline \u2014 the relative stands where the lead can be seen with it",
-            "why": "an @identity relationships field names it",
-            "walk_kind": "sibling",
-            "walk_why": "a body of the point pearl (Point_One)",
-            "walk_space": "wall",
-            "pearl": "point"
-          }
-        },
-        {
-          "token": "xyz_slider_plate",
-          "cell": [
-            30,
-            51
-          ],
-          "tile_cell": [
-            16,
-            37
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "courtyard",
-          "support_height_m": 0,
-          "slot": "courtyard",
-          "wall": null,
-          "court": [
-            25,
-            24
-          ],
-          "court_access": "bridge",
-          "relational_kind": "dna_artifact",
-          "relation": {
-            "walk_kind": "extends",
-            "walk_why": "named relation of CoordinateSystem3M: an @identity relationships field names it",
-            "walk_space": "wall",
-            "pearl": "point"
-          },
-          "scale": 1.464,
-          "hand": true,
-          "ruled": {
-            "at": "2026-08-19T08:43:56",
-            "by": "studio"
-          }
-        },
-        {
-          "token": "interactive_point_origin",
-          "cell": [
-            15,
-            28
-          ],
-          "tile_cell": [
-            1,
-            14
-          ],
-          "rotation": 270,
-          "mode": "against_wall",
-          "venue": "interior",
-          "support_height_m": 0,
-          "slot": "sainsbury-false-perspective-enfilade/1,14",
-          "wall": "west",
-          "relational_kind": "dna_artifact",
-          "relation": {
-            "anchor": "interactive_point_origin_force",
-            "role": "related",
-            "kind": "named",
-            "rule": "sightline \u2014 the relative stands where the lead can be seen with it",
-            "why": "an @identity relationships field names it",
-            "walk_kind": "extends",
-            "walk_why": "named relation of origin: an @identity relationships field names it",
-            "walk_space": "wall",
-            "pearl": "point"
-          },
-          "hand": true,
-          "ruled": {
-            "at": "2026-08-19T08:29:53",
-            "by": "studio"
-          }
-        },
-        {
-          "token": "example_2_6_single_attractor_vr",
-          "cell": [
-            19,
-            23
-          ],
-          "tile_cell": [
-            5,
-            9
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "interior",
-          "support_height_m": 0.95,
-          "slot": "sainsbury-false-perspective-enfilade/2,9",
-          "wall": null,
-          "relational_kind": "related_artifact",
-          "relation": {
-            "walk_kind": "extends",
-            "walk_why": "named relation of origin: an @identity relationships field names it",
-            "walk_space": "room",
-            "pearl": "point"
-          }
-        },
-        {
-          "token": "mamma_monster_gallery",
-          "cell": [
-            0,
-            0
-          ],
-          "tile_cell": [
-            -14,
-            -14
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "courtyard",
-          "support_height_m": 0.0,
-          "slot": "courtyard",
-          "wall": null,
-          "court": [
-            16,
-            7
-          ],
-          "relational_kind": "spine_artifact",
-          "relation": {
-            "walk_kind": "extends",
-            "walk_why": "named relation of origin: an @identity relationships field names it",
-            "walk_space": "wall",
-            "pearl": "point"
-          }
-        },
-        {
-          "token": "two_points_line",
-          "cell": [
-            23,
-            28
-          ],
-          "tile_cell": [
-            9,
-            14
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "interior",
-          "support_height_m": 0.95,
-          "slot": "sainsbury-false-perspective-enfilade/12,15",
-          "wall": null,
-          "relational_kind": "related_artifact",
-          "relation": {
-            "walk_kind": "extends",
-            "walk_why": "named relation of origin: an @identity relationships field names it",
-            "walk_space": "wall",
-            "pearl": "point"
-          }
-        },
-        {
-          "token": "artifact_workstation",
-          "cell": [
-            21,
-            8
-          ],
-          "tile_cell": [
-            7,
-            -6
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "porch",
-          "support_height_m": 0.0,
-          "slot": "sainsbury-false-perspective-enfilade/porch",
-          "wall": null,
-          "relational_kind": "related_artifact",
-          "relation": {
-            "anchor": "becoming_catalyst",
-            "role": "related",
-            "kind": "family",
-            "rule": "same neighbourhood, held apart by padding",
-            "why": "same category and sequence",
-            "walk_kind": "edge",
-            "walk_why": "the museum could not hold it: body_inside_room: body cell (19, 38) is wall or void",
-            "walk_space": "wall",
-            "pearl": "point"
-          }
-        },
-        {
-          "token": "adjacency_shelf",
-          "cell": [
-            21,
-            41
-          ],
-          "tile_cell": [
-            7,
-            27
-          ],
-          "rotation": 270,
-          "mode": "freestanding",
-          "venue": "interior",
-          "support_height_m": 0.0,
-          "slot": "sainsbury-false-perspective-enfilade/5,22",
-          "wall": null,
-          "relational_kind": "dna_artifact",
-          "relation": {
-            "anchor": "library_rack",
-            "role": "related",
-            "kind": "family",
-            "rule": "same neighbourhood, held apart by padding",
-            "why": "same category and sequence",
-            "walk_kind": "edge",
-            "walk_why": "the museum could not hold it: circulation_on_floor: 3 clearance cells fall outside the floor",
-            "walk_space": "wall",
-            "pearl": "point"
-          }
-        },
-        {
-          "token": "pedagogical_sketchbook",
-          "cell": [
-            19,
-            35
-          ],
-          "tile_cell": [
-            5,
-            21
-          ],
-          "rotation": 270,
-          "mode": "against_wall",
-          "venue": "interior",
-          "support_height_m": 0.0,
-          "slot": "sainsbury-false-perspective-enfilade/5,22",
-          "wall": "west",
-          "relational_kind": "dna_artifact",
-          "relation": {
-            "walk_kind": "synthesizes",
-            "walk_why": "synthesis of 1 sources, 1 from this node: klee_walking_point",
-            "walk_space": "alcove",
-            "pearl": "point"
-          }
-        },
-        {
-          "token": "recession_hall",
-          "cell": [
-            26,
-            17
-          ],
-          "tile_cell": [
-            12,
-            3
-          ],
-          "rotation": 90,
-          "mode": "against_wall",
-          "venue": "interior",
-          "support_height_m": 0.0,
-          "slot": "sainsbury-false-perspective-enfilade/13,3",
-          "wall": "east",
-          "relation": {
-            "walk_kind": "synthesizes",
-            "walk_why": "synthesis of 2 sources, 1 from this node: folding_past",
-            "walk_space": "alcove",
-            "pearl": "point"
-          }
-        },
-        {
-          "token": "subtraction_suite",
-          "cell": [
-            26,
-            36
-          ],
-          "tile_cell": [
-            12,
-            22
-          ],
-          "rotation": 0,
-          "mode": "against_wall",
-          "venue": "interior",
-          "support_height_m": 0,
-          "slot": "sainsbury-false-perspective-enfilade/13,20",
-          "wall": "east",
-          "relational_kind": "dna_artifact",
-          "relation": {
-            "walk_kind": "synthesizes",
-            "walk_why": "synthesis of 4 sources, 1 from this node: fontana_puncture",
-            "walk_space": "alcove",
-            "pearl": "point"
-          },
-          "hand": true,
-          "ruled": {
-            "at": "2026-08-18T12:11:58",
-            "by": "plan-editor"
           }
         }
       ],
@@ -261506,7 +261229,7 @@
             "severed",
             "husk"
           ],
-          "wall": "sainsbury-false-perspective-enfilade/east_18_27",
+          "wall": "sainsbury-false-perspective-enfilade/east_18_24",
           "wall_side": "east",
           "wall_normal": [
             -1,
@@ -261542,22 +261265,22 @@
             [
               18.5,
               1.7,
-              27.175
+              24.175
             ],
             [
               18.5,
               1.7,
-              27.725
+              24.725
             ],
             [
               18.5,
               1.7,
-              28.275
+              25.275
             ],
             [
               18.5,
               1.7,
-              28.825
+              25.825
             ]
           ],
           "body_m": [
@@ -261925,7 +261648,7 @@
             "ghost",
             "lit"
           ],
-          "wall": "sainsbury-false-perspective-enfilade/east_18_36",
+          "wall": "sainsbury-false-perspective-enfilade/east_18_27",
           "wall_side": "east",
           "wall_normal": [
             -1,
@@ -261961,22 +261684,22 @@
             [
               18.5,
               1.7,
-              36.175
+              27.175
             ],
             [
               18.5,
               1.7,
-              36.725
+              27.725
             ],
             [
               18.5,
               1.7,
-              37.275
+              28.275
             ],
             [
               18.5,
               1.7,
-              37.825
+              28.825
             ]
           ],
           "body_m": [
@@ -262025,11 +261748,11 @@
             "lattice",
             "shell"
           ],
-          "wall": "sainsbury-false-perspective-enfilade/north_14_15",
-          "wall_side": "north",
+          "wall": "sainsbury-false-perspective-enfilade/east_28_15",
+          "wall_side": "east",
           "wall_normal": [
-            0,
-            1
+            -1,
+            0
           ],
           "rects_uv": [
             [
@@ -262065,29 +261788,29 @@
           ],
           "world": [
             [
-              16.12,
+              28.5,
               1.7,
-              14.5
+              16.12
             ],
             [
-              16.81,
+              28.5,
               1.7,
-              14.5
+              16.81
             ],
             [
-              17.5,
+              28.5,
               1.7,
-              14.5
+              17.5
             ],
             [
-              18.19,
+              28.5,
               1.7,
-              14.5
+              18.19
             ],
             [
-              18.88,
+              28.5,
               1.7,
-              14.5
+              18.88
             ]
           ],
           "body_m": [
@@ -262418,9 +262141,9 @@
           "rects_uv": [],
           "world": [],
           "body_m": [
-            9.9,
-            18.7,
-            1.2
+            0.5,
+            0.34,
+            0.5
           ],
           "body_source": "godot_preflight_refusal",
           "housed": false,
@@ -262480,9 +262203,9 @@
           "rects_uv": [],
           "world": [],
           "body_m": [
-            5.5,
-            13.5,
-            1.2
+            0.04,
+            0.15,
+            0.04
           ],
           "body_source": "godot_preflight_refusal",
           "housed": false,
@@ -262820,11 +262543,11 @@
             "apex_only",
             "base_only"
           ],
-          "wall": "sainsbury-false-perspective-enfilade/south_38_23",
-          "wall_side": "south",
+          "wall": "sainsbury-false-perspective-enfilade/east_28_33",
+          "wall_side": "east",
           "wall_normal": [
-            0,
-            -1
+            -1,
+            0
           ],
           "rects_uv": [
             [
@@ -262854,24 +262577,24 @@
           ],
           "world": [
             [
-              23.863,
+              28.5,
               1.7,
-              38.5
+              33.864
             ],
             [
-              24.954,
+              28.5,
               1.7,
-              38.5
+              34.955
             ],
             [
-              26.046,
+              28.5,
               1.7,
-              38.5
+              36.045
             ],
             [
-              27.136,
+              28.5,
               1.7,
-              38.5
+              37.136
             ]
           ],
           "body_m": [
@@ -263069,11 +262792,11 @@
             "latin",
             "tau"
           ],
-          "wall": "sainsbury-false-perspective-enfilade/west_14_33",
-          "wall_side": "west",
+          "wall": "sainsbury-false-perspective-enfilade/north_14_23",
+          "wall_side": "north",
           "wall_normal": [
-            1,
-            0
+            0,
+            1
           ],
           "rects_uv": [
             [
@@ -263103,24 +262826,24 @@
           ],
           "world": [
             [
-              14.5,
+              23.55,
               1.7,
-              33.55
+              14.5
             ],
             [
-              14.5,
+              24.85,
               1.7,
-              34.85
+              14.5
             ],
             [
-              14.5,
+              26.15,
               1.7,
-              36.15
+              14.5
             ],
             [
-              14.5,
+              27.45,
               1.7,
-              37.45
+              14.5
             ]
           ],
           "body_m": [
@@ -263320,11 +263043,11 @@
             0.75,
             1.0
           ],
-          "wall": "sainsbury-false-perspective-enfilade/west_18_24",
-          "wall_side": "west",
+          "wall": "sainsbury-false-perspective-enfilade/south_38_23",
+          "wall_side": "south",
           "wall_normal": [
-            1,
-            0
+            0,
+            -1
           ],
           "rects_uv": [
             [
@@ -263360,29 +263083,29 @@
           ],
           "world": [
             [
-              18.5,
+              23.9,
               1.7,
-              24.9
+              38.5
             ],
             [
-              18.5,
+              24.7,
               1.7,
-              25.7
+              38.5
             ],
             [
-              18.5,
+              25.5,
               1.7,
-              26.5
+              38.5
             ],
             [
-              18.5,
+              26.3,
               1.7,
-              27.3
+              38.5
             ],
             [
-              18.5,
+              27.1,
               1.7,
-              28.1
+              38.5
             ]
           ],
           "body_m": [
@@ -263529,21 +263252,81 @@
             "section",
             "wear"
           ],
-          "wall": null,
-          "wall_side": "",
-          "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
+          "wall": "sainsbury-false-perspective-enfilade/west_14_33",
+          "wall_side": "west",
+          "wall_normal": [
+            1,
+            0
+          ],
+          "rects_uv": [
+            [
+              0.45,
+              1.193,
+              0.95,
+              2.207
+            ],
+            [
+              1.35,
+              1.193,
+              1.85,
+              2.207
+            ],
+            [
+              2.25,
+              1.193,
+              2.75,
+              2.207
+            ],
+            [
+              3.15,
+              1.193,
+              3.65,
+              2.207
+            ],
+            [
+              4.05,
+              1.193,
+              4.55,
+              2.207
+            ]
+          ],
+          "world": [
+            [
+              14.5,
+              1.7,
+              33.7
+            ],
+            [
+              14.5,
+              1.7,
+              34.6
+            ],
+            [
+              14.5,
+              1.7,
+              35.5
+            ],
+            [
+              14.5,
+              1.7,
+              36.4
+            ],
+            [
+              14.5,
+              1.7,
+              37.3
+            ]
+          ],
           "body_m": [
             0.5,
             0.5,
             1.014
           ],
           "body_source": "godot_configured_variants",
-          "housed": false,
-          "reserved": false,
-          "assemble": false,
-          "why": "2 wall(s) had 4.10 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps line_builder_3d.slack=catenary"
+          "housed": true,
+          "reserved": true,
+          "assemble": true,
+          "why": "two cells of standing room in front, walkable and unclaimed"
         },
         {
           "anchor": "torus_radials_rings",
@@ -263581,21 +263364,81 @@
             3,
             7
           ],
-          "wall": null,
-          "wall_side": "",
-          "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
+          "wall": "sainsbury-false-perspective-enfilade/west_18_24",
+          "wall_side": "west",
+          "wall_normal": [
+            1,
+            0
+          ],
+          "rects_uv": [
+            [
+              0.175,
+              1.35,
+              0.785,
+              2.05
+            ],
+            [
+              1.185,
+              1.35,
+              1.795,
+              2.05
+            ],
+            [
+              2.195,
+              1.35,
+              2.805,
+              2.05
+            ],
+            [
+              3.205,
+              1.35,
+              3.815,
+              2.05
+            ],
+            [
+              4.215,
+              1.35,
+              4.825,
+              2.05
+            ]
+          ],
+          "world": [
+            [
+              18.5,
+              1.7,
+              24.48
+            ],
+            [
+              18.5,
+              1.7,
+              25.49
+            ],
+            [
+              18.5,
+              1.7,
+              26.5
+            ],
+            [
+              18.5,
+              1.7,
+              27.51
+            ],
+            [
+              18.5,
+              1.7,
+              28.52
+            ]
+          ],
           "body_m": [
             0.61,
             0.53,
             0.7
           ],
           "body_source": "spatial_contract",
-          "housed": false,
-          "reserved": false,
-          "assemble": false,
-          "why": "2 wall(s) had 4.65 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps line_builder_3d.slack=spline"
+          "housed": true,
+          "reserved": true,
+          "assemble": true,
+          "why": "two cells of standing room in front, walkable and unclaimed"
         },
         {
           "anchor": "snap_octahedron_puzzle",
@@ -263873,30 +263716,6 @@
           ],
           "why": "body projects 1.61 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear",
           "auto_place": false
-        },
-        {
-          "id": "dna:capsule:facture",
-          "anchor": "capsule",
-          "axis": "facture",
-          "values": [
-            "cast",
-            "facet",
-            "armature",
-            "section",
-            "wear"
-          ],
-          "space": "side_gallery",
-          "footprint_xz": [
-            7,
-            4
-          ],
-          "envelope_wdh": [
-            0.5,
-            0.5,
-            1.014
-          ],
-          "why": "2 wall(s) had 4.10 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps line_builder_3d.slack=catenary",
-          "auto_place": false
         }
       ],
       "pending_synthesis": [
@@ -264124,8 +263943,8 @@
       "relational": {
         "anchors": 82,
         "wall_runs_requested": 66,
-        "wall_runs_housed": 14,
-        "dna_spatial_demand": 3,
+        "wall_runs_housed": 16,
+        "dna_spatial_demand": 2,
         "dna_contract_repairs": 3,
         "measured_synthesis_pending": 20
       },
@@ -264134,7 +263953,8 @@
         "h": 53
       },
       "apron": 14,
-      "interior_count": 14,
+      "interior_count": 9,
+      "ordered": true,
       "sequence": "primitives",
       "pearl": "point",
       "pearl_index": 0,
@@ -264689,35 +264509,6 @@
           }
         },
         {
-          "token": "dgrid",
-          "cell": [
-            21,
-            42
-          ],
-          "tile_cell": [
-            7,
-            28
-          ],
-          "rotation": 180,
-          "mode": "against_wall",
-          "venue": "interior",
-          "support_height_m": 1.4,
-          "slot": "sainsbury-false-perspective-enfilade/7,28",
-          "wall": "south",
-          "relational_kind": "spine_artifact",
-          "relation": {
-            "anchor": "dgrid",
-            "role": "feature",
-            "kind": "",
-            "rule": "",
-            "why": "the lead this bay is about",
-            "walk_kind": "sibling",
-            "walk_why": "a body of the lines pearl (Point_Lines)",
-            "walk_space": "wall",
-            "pearl": "lines"
-          }
-        },
-        {
           "token": "perspective_lines",
           "cell": [
             21,
@@ -265041,13 +264832,42 @@
           }
         },
         {
-          "token": "tt",
+          "token": "modulor_man_demo",
           "cell": [
             26,
             42
           ],
           "tile_cell": [
             12,
+            28
+          ],
+          "rotation": 180,
+          "mode": "against_wall",
+          "venue": "interior",
+          "support_height_m": 1.4,
+          "slot": "sainsbury-false-perspective-enfilade/7,28",
+          "wall": "south",
+          "relational_kind": "spine_artifact",
+          "relation": {
+            "anchor": "line_builder_3d",
+            "role": "related",
+            "kind": "named",
+            "rule": "sightline \u2014 the relative stands where the lead can be seen with it",
+            "why": "an @identity relationships field names it",
+            "walk_kind": "sibling",
+            "walk_why": "a body of the lines pearl (Point_Lines)",
+            "walk_space": "wall",
+            "pearl": "lines"
+          }
+        },
+        {
+          "token": "tt",
+          "cell": [
+            20,
+            42
+          ],
+          "tile_cell": [
+            6,
             28
           ],
           "rotation": 180,
@@ -265200,35 +265020,6 @@
           }
         },
         {
-          "token": "modulor_man_demo",
-          "cell": [
-            24,
-            42
-          ],
-          "tile_cell": [
-            10,
-            28
-          ],
-          "rotation": 180,
-          "mode": "against_wall",
-          "venue": "interior",
-          "support_height_m": 1.4,
-          "slot": "sainsbury-false-perspective-enfilade/7,28",
-          "wall": "south",
-          "relational_kind": "spine_artifact",
-          "relation": {
-            "anchor": "line_builder_3d",
-            "role": "related",
-            "kind": "named",
-            "rule": "sightline \u2014 the relative stands where the lead can be seen with it",
-            "why": "an @identity relationships field names it",
-            "walk_kind": "varies",
-            "walk_why": "measure: body / scale / canon / module / crowd",
-            "walk_space": "wall",
-            "pearl": "lines"
-          }
-        },
-        {
           "token": "laser_measure",
           "cell": [
             0,
@@ -265317,11 +265108,11 @@
         {
           "token": "grain_block",
           "cell": [
-            21,
+            30,
             47
           ],
           "tile_cell": [
-            7,
+            16,
             33
           ],
           "rotation": 0,
@@ -266326,9 +266117,9 @@
           "rects_uv": [],
           "world": [],
           "body_m": [
-            9.9,
-            18.7,
-            1.2
+            0.5,
+            0.34,
+            0.5
           ],
           "body_source": "godot_preflight_refusal",
           "housed": false,
@@ -266388,9 +266179,9 @@
           "rects_uv": [],
           "world": [],
           "body_m": [
-            5.5,
-            13.5,
-            1.2
+            0.04,
+            0.15,
+            0.04
           ],
           "body_source": "godot_preflight_refusal",
           "housed": false,
@@ -268183,7 +267974,8 @@
         "h": 58
       },
       "apron": 14,
-      "interior_count": 16,
+      "interior_count": 15,
+      "ordered": false,
       "sequence": "primitives",
       "pearl": "lines",
       "pearl_index": 1,
@@ -269368,9 +269160,9 @@
           "rects_uv": [],
           "world": [],
           "body_m": [
-            9.9,
-            18.7,
-            1.2
+            0.5,
+            0.34,
+            0.5
           ],
           "body_source": "godot_preflight_refusal",
           "housed": false,
@@ -269430,9 +269222,9 @@
           "rects_uv": [],
           "world": [],
           "body_m": [
-            5.5,
-            13.5,
-            1.2
+            0.04,
+            0.15,
+            0.04
           ],
           "body_source": "godot_preflight_refusal",
           "housed": false,
@@ -271203,6 +270995,7 @@
       },
       "apron": 14,
       "interior_count": 4,
+      "ordered": false,
       "sequence": "primitives",
       "pearl": "trace",
       "pearl_index": 2,
@@ -272457,9 +272250,9 @@
           "rects_uv": [],
           "world": [],
           "body_m": [
-            9.9,
-            18.7,
-            1.2
+            0.5,
+            0.34,
+            0.5
           ],
           "body_source": "godot_preflight_refusal",
           "housed": false,
@@ -272519,9 +272312,9 @@
           "rects_uv": [],
           "world": [],
           "body_m": [
-            5.5,
-            13.5,
-            1.2
+            0.04,
+            0.15,
+            0.04
           ],
           "body_source": "godot_preflight_refusal",
           "housed": false,
@@ -274292,6 +274085,7 @@
       },
       "apron": 14,
       "interior_count": 3,
+      "ordered": false,
       "sequence": "primitives",
       "pearl": "line grid",
       "pearl_index": 3,
@@ -276305,9 +276099,9 @@
           "rects_uv": [],
           "world": [],
           "body_m": [
-            9.9,
-            18.7,
-            1.2
+            0.5,
+            0.34,
+            0.5
           ],
           "body_source": "godot_preflight_refusal",
           "housed": false,
@@ -276367,9 +276161,9 @@
           "rects_uv": [],
           "world": [],
           "body_m": [
-            5.5,
-            13.5,
-            1.2
+            0.04,
+            0.15,
+            0.04
           ],
           "body_source": "godot_preflight_refusal",
           "housed": false,
@@ -278043,6 +277837,7 @@
       },
       "apron": 14,
       "interior_count": 16,
+      "ordered": false,
       "sequence": "primitives",
       "pearl": "triangle context",
       "pearl_index": 4,
@@ -279546,9 +279341,9 @@
           "rects_uv": [],
           "world": [],
           "body_m": [
-            9.9,
-            18.7,
-            1.2
+            0.5,
+            0.34,
+            0.5
           ],
           "body_source": "godot_preflight_refusal",
           "housed": false,
@@ -279608,9 +279403,9 @@
           "rects_uv": [],
           "world": [],
           "body_m": [
-            5.5,
-            13.5,
-            1.2
+            0.04,
+            0.15,
+            0.04
           ],
           "body_source": "godot_preflight_refusal",
           "housed": false,
@@ -281381,6 +281176,7 @@
       },
       "apron": 14,
       "interior_count": 10,
+      "ordered": false,
       "sequence": "primitives",
       "pearl": "polythedra",
       "pearl_index": 5,
@@ -282605,9 +282401,9 @@
           "rects_uv": [],
           "world": [],
           "body_m": [
-            9.9,
-            18.7,
-            1.2
+            0.5,
+            0.34,
+            0.5
           ],
           "body_source": "godot_preflight_refusal",
           "housed": false,
@@ -282667,9 +282463,9 @@
           "rects_uv": [],
           "world": [],
           "body_m": [
-            5.5,
-            13.5,
-            1.2
+            0.04,
+            0.15,
+            0.04
           ],
           "body_source": "godot_preflight_refusal",
           "housed": false,
@@ -284440,6 +284236,7 @@
       },
       "apron": 14,
       "interior_count": 3,
+      "ordered": false,
       "sequence": "primitives",
       "pearl": "animatedcube",
       "pearl_index": 6,
@@ -285636,9 +285433,9 @@
           "rects_uv": [],
           "world": [],
           "body_m": [
-            9.9,
-            18.7,
-            1.2
+            0.5,
+            0.34,
+            0.5
           ],
           "body_source": "godot_preflight_refusal",
           "housed": false,
@@ -285698,9 +285495,9 @@
           "rects_uv": [],
           "world": [],
           "body_m": [
-            5.5,
-            13.5,
-            1.2
+            0.04,
+            0.15,
+            0.04
           ],
           "body_source": "godot_preflight_refusal",
           "housed": false,
@@ -287471,6 +287268,7 @@
       },
       "apron": 14,
       "interior_count": 2,
+      "ordered": false,
       "sequence": "primitives",
       "pearl": "primitives",
       "pearl_index": 7,
@@ -288959,9 +288757,9 @@
           "rects_uv": [],
           "world": [],
           "body_m": [
-            9.9,
-            18.7,
-            1.2
+            0.5,
+            0.34,
+            0.5
           ],
           "body_source": "godot_preflight_refusal",
           "housed": false,
@@ -289021,9 +288819,9 @@
           "rects_uv": [],
           "world": [],
           "body_m": [
-            5.5,
-            13.5,
-            1.2
+            0.04,
+            0.15,
+            0.04
           ],
           "body_source": "godot_preflight_refusal",
           "housed": false,
@@ -290535,6 +290333,7 @@
       },
       "apron": 14,
       "interior_count": 12,
+      "ordered": false,
       "sequence": "primitives",
       "pearl": "ignorance",
       "pearl_index": 8,
@@ -291764,9 +291563,9 @@
           "rects_uv": [],
           "world": [],
           "body_m": [
-            9.9,
-            18.7,
-            1.2
+            0.5,
+            0.34,
+            0.5
           ],
           "body_source": "godot_preflight_refusal",
           "housed": false,
@@ -291826,9 +291625,9 @@
           "rects_uv": [],
           "world": [],
           "body_m": [
-            5.5,
-            13.5,
-            1.2
+            0.04,
+            0.15,
+            0.04
           ],
           "body_source": "godot_preflight_refusal",
           "housed": false,
@@ -293599,6 +293398,7 @@
       },
       "apron": 14,
       "interior_count": 2,
+      "ordered": false,
       "sequence": "primitives",
       "pearl": "portals",
       "pearl_index": 9,
@@ -294995,9 +294795,9 @@
           "rects_uv": [],
           "world": [],
           "body_m": [
-            9.9,
-            18.7,
-            1.2
+            0.5,
+            0.34,
+            0.5
           ],
           "body_source": "godot_preflight_refusal",
           "housed": false,
@@ -295057,9 +294857,9 @@
           "rects_uv": [],
           "world": [],
           "body_m": [
-            5.5,
-            13.5,
-            1.2
+            0.04,
+            0.15,
+            0.04
           ],
           "body_source": "godot_preflight_refusal",
           "housed": false,
@@ -296830,6 +296630,7 @@
       },
       "apron": 14,
       "interior_count": 9,
+      "ordered": false,
       "sequence": "primitives",
       "pearl": "melencolia",
       "pearl_index": 10,
@@ -296842,7 +296643,6 @@
     "SphericalHarmonics",
     "aalto_vase",
     "achilles_tortoise",
-    "adjacency_shelf",
     "animatedcubebuilder",
     "arrangement_yard",
     "art_history_gallery",
@@ -296878,7 +296678,6 @@
     "draw_triangle_faces",
     "durer_scene",
     "edible_mushroom",
-    "example_2_6_single_attractor_vr",
     "face_convention",
     "facets_sphere",
     "facture_bench",
@@ -296896,7 +296695,6 @@
     "grid_lines",
     "hand_telemetry_diptych",
     "hole_with_cones",
-    "interactive_point_origin",
     "interactivetriangle",
     "klee_walking_point",
     "lab_room",
@@ -296910,7 +296708,6 @@
     "line_builder_3d",
     "line_slack",
     "lshape",
-    "mamma_monster_gallery",
     "modulor_man_demo",
     "mounting_yard",
     "mystic_writing_pad",
@@ -296921,7 +296718,6 @@
     "parasol_triangle",
     "path_game_controller",
     "path_watchdog",
-    "pedagogical_sketchbook",
     "perspective_lines",
     "platonic_grabbables",
     "player_trace",
@@ -296936,7 +296732,6 @@
     "pythagorean_triangle_angles",
     "quad",
     "quad_line_puzzle",
-    "recession_hall",
     "request_note",
     "retention_corridor",
     "righttriangle",
@@ -296952,7 +296747,6 @@
     "sphere_low",
     "sphere_mid",
     "star_primitive",
-    "subtraction_suite",
     "taxonomy_hall",
     "tentacle_placer",
     "torus",
@@ -296962,11 +296756,9 @@
     "triangleprofiles",
     "truncatedtetrahedron",
     "tt",
-    "two_points_line",
     "walk_this_line_marking",
     "wall_pattern_gallery",
     "wedge_skill_pickup",
-    "xyz_slider_plate",
     "you_are_here"
   ],
   "museums": {
@@ -297404,18 +297196,18 @@
         {
           "token": "frame_counter_display",
           "cell": [
-            16,
-            23
+            15,
+            16
           ],
           "tile_cell": [
-            2,
-            9
+            1,
+            2
           ],
-          "rotation": 120,
+          "rotation": 270,
           "mode": "against_wall",
           "venue": "interior",
-          "support_height_m": 0,
-          "slot": "sainsbury-false-perspective-enfilade/1,14",
+          "support_height_m": 0.0,
+          "slot": "sainsbury-false-perspective-enfilade/1,3",
           "wall": "west",
           "relational_kind": "spine_artifact",
           "relation": {
@@ -297425,31 +297217,22 @@
             "rule": "fill \u2014 they already stand together in real maps",
             "why": "already stand together in 34 map(s)",
             "walk_kind": "hero",
-            "walk_why": "the hero of point (first in spine order)",
+            "walk_why": "a line of the point poem",
             "walk_space": "wall",
             "pearl": "point"
-          },
-          "hand": true,
-          "ruled": {
-            "at": "2026-08-18T13:28:24",
-            "by": "hand",
-            "from": [
-              2,
-              9
-            ]
           }
         },
         {
           "token": "you_are_here",
           "cell": [
-            21,
-            22
+            17,
+            18
           ],
           "tile_cell": [
-            7,
-            8
+            3,
+            4
           ],
-          "rotation": 180,
+          "rotation": 0,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.95,
@@ -297463,30 +297246,25 @@
             "rule": "",
             "why": "the lead this bay is about",
             "walk_kind": "sibling",
-            "walk_why": "a body of the point pearl (Point_One)",
+            "walk_why": "a line of the point poem",
             "walk_space": "wall",
             "pearl": "point"
-          },
-          "hand": true,
-          "ruled": {
-            "at": "2026-08-18T12:15:25",
-            "by": "plan-editor"
           }
         },
         {
           "token": "fontana_puncture",
           "cell": [
-            21,
-            21
+            17,
+            23
           ],
           "tile_cell": [
-            7,
-            7
+            3,
+            9
           ],
-          "rotation": 180,
-          "mode": "against_wall",
+          "rotation": 0,
+          "mode": "freestanding",
           "venue": "interior",
-          "support_height_m": 1.4,
+          "support_height_m": 0.95,
           "slot": "sainsbury-false-perspective-enfilade/2,9",
           "wall": null,
           "relational_kind": "spine_artifact",
@@ -297497,14 +297275,9 @@
             "rule": "sightline \u2014 the relative stands where the lead can be seen with it",
             "why": "an @identity relationships field names it",
             "walk_kind": "sibling",
-            "walk_why": "a body of the point pearl (Point_One)",
+            "walk_why": "a line of the point poem",
             "walk_space": "wall",
             "pearl": "point"
-          },
-          "hand": true,
-          "ruled": {
-            "at": "2026-08-19T08:42:05",
-            "by": "studio"
           }
         },
         {
@@ -297531,7 +297304,7 @@
             "rule": "",
             "why": "the lead this bay is about",
             "walk_kind": "sibling",
-            "walk_why": "a body of the point pearl (Point_One)",
+            "walk_why": "a line of the point poem",
             "walk_space": "wall",
             "pearl": "point"
           }
@@ -297554,7 +297327,7 @@
           "wall": null,
           "relation": {
             "walk_kind": "sibling",
-            "walk_why": "a body of the point pearl (Point_One)",
+            "walk_why": "a line of the point poem",
             "walk_space": "wall",
             "pearl": "point"
           }
@@ -297562,18 +297335,18 @@
         {
           "token": "klee_walking_point",
           "cell": [
-            16,
-            24
+            26,
+            30
           ],
           "tile_cell": [
-            2,
-            10
+            12,
+            16
           ],
           "rotation": 0,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.95,
-          "slot": "sainsbury-false-perspective-enfilade/2,9",
+          "slot": "sainsbury-false-perspective-enfilade/12,15",
           "wall": null,
           "relational_kind": "spine_artifact",
           "relation": {
@@ -297583,7 +297356,7 @@
             "rule": "",
             "why": "the lead this bay is about",
             "walk_kind": "sibling",
-            "walk_why": "a body of the point pearl (Point_One)",
+            "walk_why": "a line of the point poem",
             "walk_space": "wall",
             "pearl": "point"
           }
@@ -297591,23 +297364,19 @@
         {
           "token": "grab_sphere_point_snap",
           "cell": [
-            0,
-            0
+            19,
+            35
           ],
           "tile_cell": [
-            -14,
-            -14
+            5,
+            21
           ],
           "rotation": 0,
           "mode": "freestanding",
-          "venue": "courtyard",
+          "venue": "interior",
           "support_height_m": 0.0,
-          "slot": "courtyard",
+          "slot": "sainsbury-false-perspective-enfilade/5,22",
           "wall": null,
-          "court": [
-            12,
-            20
-          ],
           "relational_kind": "spine_artifact",
           "relation": {
             "anchor": "grab_sphere_point_snap",
@@ -297616,7 +297385,65 @@
             "rule": "",
             "why": "the lead this bay is about",
             "walk_kind": "sibling",
-            "walk_why": "a body of the point pearl (Point_One)",
+            "walk_why": "a line of the point poem",
+            "walk_space": "wall",
+            "pearl": "point"
+          }
+        },
+        {
+          "token": "dgrid",
+          "cell": [
+            15,
+            29
+          ],
+          "tile_cell": [
+            1,
+            15
+          ],
+          "rotation": 270,
+          "mode": "against_wall",
+          "venue": "interior",
+          "support_height_m": 0.0,
+          "slot": "sainsbury-false-perspective-enfilade/1,14",
+          "wall": "west",
+          "relational_kind": "spine_artifact",
+          "relation": {
+            "anchor": "dgrid",
+            "role": "feature",
+            "kind": "",
+            "rule": "",
+            "why": "the lead this bay is about",
+            "walk_kind": "sibling",
+            "walk_why": "a line of the point poem",
+            "walk_space": "wall",
+            "pearl": "point"
+          }
+        },
+        {
+          "token": "draw_dot",
+          "cell": [
+            26,
+            28
+          ],
+          "tile_cell": [
+            12,
+            14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "interior",
+          "support_height_m": 0.95,
+          "slot": "sainsbury-false-perspective-enfilade/12,15",
+          "wall": null,
+          "relational_kind": "spine_artifact",
+          "relation": {
+            "anchor": "mystic_writing_pad",
+            "role": "related",
+            "kind": "named",
+            "rule": "sightline \u2014 the relative stands where the lead can be seen with it",
+            "why": "an @identity relationships field names it",
+            "walk_kind": "sibling",
+            "walk_why": "a line of the point poem",
             "walk_space": "wall",
             "pearl": "point"
           }
@@ -297624,22 +297451,22 @@
         {
           "token": "walk_this_line_marking",
           "cell": [
-            26,
-            29
+            21,
+            9
           ],
           "tile_cell": [
-            12,
-            15
+            7,
+            -5
           ],
-          "rotation": 90,
+          "rotation": 0,
           "mode": "freestanding",
-          "venue": "interior",
-          "support_height_m": 0.95,
-          "slot": "sainsbury-false-perspective-enfilade/12,15",
+          "venue": "porch",
+          "support_height_m": 0.0,
+          "slot": "sainsbury-false-perspective-enfilade/porch",
           "wall": null,
           "relation": {
             "walk_kind": "sibling",
-            "walk_why": "a body of the point pearl (Point_One)",
+            "walk_why": "a line of the point poem",
             "walk_space": "wall",
             "pearl": "point"
           }
@@ -297672,321 +297499,9 @@
             "rule": "fill \u2014 they already stand together in real maps",
             "why": "already stand together in 50 map(s)",
             "walk_kind": "sibling",
-            "walk_why": "a body of the point pearl (Point_One)",
+            "walk_why": "a line of the point poem",
             "walk_space": "wall",
             "pearl": "point"
-          }
-        },
-        {
-          "token": "draw_dot",
-          "cell": [
-            0,
-            0
-          ],
-          "tile_cell": [
-            -14,
-            -14
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "courtyard",
-          "support_height_m": 0.0,
-          "slot": "courtyard",
-          "wall": null,
-          "court": [
-            16,
-            25
-          ],
-          "relational_kind": "spine_artifact",
-          "relation": {
-            "anchor": "mystic_writing_pad",
-            "role": "related",
-            "kind": "named",
-            "rule": "sightline \u2014 the relative stands where the lead can be seen with it",
-            "why": "an @identity relationships field names it",
-            "walk_kind": "sibling",
-            "walk_why": "a body of the point pearl (Point_One)",
-            "walk_space": "wall",
-            "pearl": "point"
-          }
-        },
-        {
-          "token": "xyz_slider_plate",
-          "cell": [
-            30,
-            51
-          ],
-          "tile_cell": [
-            16,
-            37
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "courtyard",
-          "support_height_m": 0,
-          "slot": "courtyard",
-          "wall": null,
-          "court": [
-            25,
-            24
-          ],
-          "court_access": "bridge",
-          "relational_kind": "dna_artifact",
-          "relation": {
-            "walk_kind": "extends",
-            "walk_why": "named relation of CoordinateSystem3M: an @identity relationships field names it",
-            "walk_space": "wall",
-            "pearl": "point"
-          },
-          "scale": 1.464,
-          "hand": true,
-          "ruled": {
-            "at": "2026-08-19T08:43:56",
-            "by": "studio"
-          }
-        },
-        {
-          "token": "interactive_point_origin",
-          "cell": [
-            15,
-            28
-          ],
-          "tile_cell": [
-            1,
-            14
-          ],
-          "rotation": 270,
-          "mode": "against_wall",
-          "venue": "interior",
-          "support_height_m": 0,
-          "slot": "sainsbury-false-perspective-enfilade/1,14",
-          "wall": "west",
-          "relational_kind": "dna_artifact",
-          "relation": {
-            "anchor": "interactive_point_origin_force",
-            "role": "related",
-            "kind": "named",
-            "rule": "sightline \u2014 the relative stands where the lead can be seen with it",
-            "why": "an @identity relationships field names it",
-            "walk_kind": "extends",
-            "walk_why": "named relation of origin: an @identity relationships field names it",
-            "walk_space": "wall",
-            "pearl": "point"
-          },
-          "hand": true,
-          "ruled": {
-            "at": "2026-08-19T08:29:53",
-            "by": "studio"
-          }
-        },
-        {
-          "token": "example_2_6_single_attractor_vr",
-          "cell": [
-            19,
-            23
-          ],
-          "tile_cell": [
-            5,
-            9
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "interior",
-          "support_height_m": 0.95,
-          "slot": "sainsbury-false-perspective-enfilade/2,9",
-          "wall": null,
-          "relational_kind": "related_artifact",
-          "relation": {
-            "walk_kind": "extends",
-            "walk_why": "named relation of origin: an @identity relationships field names it",
-            "walk_space": "room",
-            "pearl": "point"
-          }
-        },
-        {
-          "token": "mamma_monster_gallery",
-          "cell": [
-            0,
-            0
-          ],
-          "tile_cell": [
-            -14,
-            -14
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "courtyard",
-          "support_height_m": 0.0,
-          "slot": "courtyard",
-          "wall": null,
-          "court": [
-            16,
-            7
-          ],
-          "relational_kind": "spine_artifact",
-          "relation": {
-            "walk_kind": "extends",
-            "walk_why": "named relation of origin: an @identity relationships field names it",
-            "walk_space": "wall",
-            "pearl": "point"
-          }
-        },
-        {
-          "token": "two_points_line",
-          "cell": [
-            23,
-            28
-          ],
-          "tile_cell": [
-            9,
-            14
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "interior",
-          "support_height_m": 0.95,
-          "slot": "sainsbury-false-perspective-enfilade/12,15",
-          "wall": null,
-          "relational_kind": "related_artifact",
-          "relation": {
-            "walk_kind": "extends",
-            "walk_why": "named relation of origin: an @identity relationships field names it",
-            "walk_space": "wall",
-            "pearl": "point"
-          }
-        },
-        {
-          "token": "artifact_workstation",
-          "cell": [
-            21,
-            8
-          ],
-          "tile_cell": [
-            7,
-            -6
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "porch",
-          "support_height_m": 0.0,
-          "slot": "sainsbury-false-perspective-enfilade/porch",
-          "wall": null,
-          "relational_kind": "related_artifact",
-          "relation": {
-            "anchor": "becoming_catalyst",
-            "role": "related",
-            "kind": "family",
-            "rule": "same neighbourhood, held apart by padding",
-            "why": "same category and sequence",
-            "walk_kind": "edge",
-            "walk_why": "the museum could not hold it: body_inside_room: body cell (19, 38) is wall or void",
-            "walk_space": "wall",
-            "pearl": "point"
-          }
-        },
-        {
-          "token": "adjacency_shelf",
-          "cell": [
-            21,
-            41
-          ],
-          "tile_cell": [
-            7,
-            27
-          ],
-          "rotation": 270,
-          "mode": "freestanding",
-          "venue": "interior",
-          "support_height_m": 0.0,
-          "slot": "sainsbury-false-perspective-enfilade/5,22",
-          "wall": null,
-          "relational_kind": "dna_artifact",
-          "relation": {
-            "anchor": "library_rack",
-            "role": "related",
-            "kind": "family",
-            "rule": "same neighbourhood, held apart by padding",
-            "why": "same category and sequence",
-            "walk_kind": "edge",
-            "walk_why": "the museum could not hold it: circulation_on_floor: 3 clearance cells fall outside the floor",
-            "walk_space": "wall",
-            "pearl": "point"
-          }
-        },
-        {
-          "token": "pedagogical_sketchbook",
-          "cell": [
-            19,
-            35
-          ],
-          "tile_cell": [
-            5,
-            21
-          ],
-          "rotation": 270,
-          "mode": "against_wall",
-          "venue": "interior",
-          "support_height_m": 0.0,
-          "slot": "sainsbury-false-perspective-enfilade/5,22",
-          "wall": "west",
-          "relational_kind": "dna_artifact",
-          "relation": {
-            "walk_kind": "synthesizes",
-            "walk_why": "synthesis of 1 sources, 1 from this node: klee_walking_point",
-            "walk_space": "alcove",
-            "pearl": "point"
-          }
-        },
-        {
-          "token": "recession_hall",
-          "cell": [
-            26,
-            17
-          ],
-          "tile_cell": [
-            12,
-            3
-          ],
-          "rotation": 90,
-          "mode": "against_wall",
-          "venue": "interior",
-          "support_height_m": 0.0,
-          "slot": "sainsbury-false-perspective-enfilade/13,3",
-          "wall": "east",
-          "relation": {
-            "walk_kind": "synthesizes",
-            "walk_why": "synthesis of 2 sources, 1 from this node: folding_past",
-            "walk_space": "alcove",
-            "pearl": "point"
-          }
-        },
-        {
-          "token": "subtraction_suite",
-          "cell": [
-            26,
-            36
-          ],
-          "tile_cell": [
-            12,
-            22
-          ],
-          "rotation": 0,
-          "mode": "against_wall",
-          "venue": "interior",
-          "support_height_m": 0,
-          "slot": "sainsbury-false-perspective-enfilade/13,20",
-          "wall": "east",
-          "relational_kind": "dna_artifact",
-          "relation": {
-            "walk_kind": "synthesizes",
-            "walk_why": "synthesis of 4 sources, 1 from this node: fontana_puncture",
-            "walk_space": "alcove",
-            "pearl": "point"
-          },
-          "hand": true,
-          "ruled": {
-            "at": "2026-08-18T12:11:58",
-            "by": "plan-editor"
           }
         }
       ],
@@ -298101,7 +297616,7 @@
             "severed",
             "husk"
           ],
-          "wall": "sainsbury-false-perspective-enfilade/east_18_27",
+          "wall": "sainsbury-false-perspective-enfilade/east_18_24",
           "wall_side": "east",
           "wall_normal": [
             -1,
@@ -298137,22 +297652,22 @@
             [
               18.5,
               1.7,
-              27.175
+              24.175
             ],
             [
               18.5,
               1.7,
-              27.725
+              24.725
             ],
             [
               18.5,
               1.7,
-              28.275
+              25.275
             ],
             [
               18.5,
               1.7,
-              28.825
+              25.825
             ]
           ],
           "body_m": [
@@ -298520,7 +298035,7 @@
             "ghost",
             "lit"
           ],
-          "wall": "sainsbury-false-perspective-enfilade/east_18_36",
+          "wall": "sainsbury-false-perspective-enfilade/east_18_27",
           "wall_side": "east",
           "wall_normal": [
             -1,
@@ -298556,22 +298071,22 @@
             [
               18.5,
               1.7,
-              36.175
+              27.175
             ],
             [
               18.5,
               1.7,
-              36.725
+              27.725
             ],
             [
               18.5,
               1.7,
-              37.275
+              28.275
             ],
             [
               18.5,
               1.7,
-              37.825
+              28.825
             ]
           ],
           "body_m": [
@@ -298620,11 +298135,11 @@
             "lattice",
             "shell"
           ],
-          "wall": "sainsbury-false-perspective-enfilade/north_14_15",
-          "wall_side": "north",
+          "wall": "sainsbury-false-perspective-enfilade/east_28_15",
+          "wall_side": "east",
           "wall_normal": [
-            0,
-            1
+            -1,
+            0
           ],
           "rects_uv": [
             [
@@ -298660,29 +298175,29 @@
           ],
           "world": [
             [
-              16.12,
+              28.5,
               1.7,
-              14.5
+              16.12
             ],
             [
-              16.81,
+              28.5,
               1.7,
-              14.5
+              16.81
             ],
             [
-              17.5,
+              28.5,
               1.7,
-              14.5
+              17.5
             ],
             [
-              18.19,
+              28.5,
               1.7,
-              14.5
+              18.19
             ],
             [
-              18.88,
+              28.5,
               1.7,
-              14.5
+              18.88
             ]
           ],
           "body_m": [
@@ -299013,9 +298528,9 @@
           "rects_uv": [],
           "world": [],
           "body_m": [
-            9.9,
-            18.7,
-            1.2
+            0.5,
+            0.34,
+            0.5
           ],
           "body_source": "godot_preflight_refusal",
           "housed": false,
@@ -299075,9 +298590,9 @@
           "rects_uv": [],
           "world": [],
           "body_m": [
-            5.5,
-            13.5,
-            1.2
+            0.04,
+            0.15,
+            0.04
           ],
           "body_source": "godot_preflight_refusal",
           "housed": false,
@@ -299415,11 +298930,11 @@
             "apex_only",
             "base_only"
           ],
-          "wall": "sainsbury-false-perspective-enfilade/south_38_23",
-          "wall_side": "south",
+          "wall": "sainsbury-false-perspective-enfilade/east_28_33",
+          "wall_side": "east",
           "wall_normal": [
-            0,
-            -1
+            -1,
+            0
           ],
           "rects_uv": [
             [
@@ -299449,24 +298964,24 @@
           ],
           "world": [
             [
-              23.863,
+              28.5,
               1.7,
-              38.5
+              33.864
             ],
             [
-              24.954,
+              28.5,
               1.7,
-              38.5
+              34.955
             ],
             [
-              26.046,
+              28.5,
               1.7,
-              38.5
+              36.045
             ],
             [
-              27.136,
+              28.5,
               1.7,
-              38.5
+              37.136
             ]
           ],
           "body_m": [
@@ -299664,11 +299179,11 @@
             "latin",
             "tau"
           ],
-          "wall": "sainsbury-false-perspective-enfilade/west_14_33",
-          "wall_side": "west",
+          "wall": "sainsbury-false-perspective-enfilade/north_14_23",
+          "wall_side": "north",
           "wall_normal": [
-            1,
-            0
+            0,
+            1
           ],
           "rects_uv": [
             [
@@ -299698,24 +299213,24 @@
           ],
           "world": [
             [
-              14.5,
+              23.55,
               1.7,
-              33.55
+              14.5
             ],
             [
-              14.5,
+              24.85,
               1.7,
-              34.85
+              14.5
             ],
             [
-              14.5,
+              26.15,
               1.7,
-              36.15
+              14.5
             ],
             [
-              14.5,
+              27.45,
               1.7,
-              37.45
+              14.5
             ]
           ],
           "body_m": [
@@ -299915,11 +299430,11 @@
             0.75,
             1.0
           ],
-          "wall": "sainsbury-false-perspective-enfilade/west_18_24",
-          "wall_side": "west",
+          "wall": "sainsbury-false-perspective-enfilade/south_38_23",
+          "wall_side": "south",
           "wall_normal": [
-            1,
-            0
+            0,
+            -1
           ],
           "rects_uv": [
             [
@@ -299955,29 +299470,29 @@
           ],
           "world": [
             [
-              18.5,
+              23.9,
               1.7,
-              24.9
+              38.5
             ],
             [
-              18.5,
+              24.7,
               1.7,
-              25.7
+              38.5
             ],
             [
-              18.5,
+              25.5,
               1.7,
-              26.5
+              38.5
             ],
             [
-              18.5,
+              26.3,
               1.7,
-              27.3
+              38.5
             ],
             [
-              18.5,
+              27.1,
               1.7,
-              28.1
+              38.5
             ]
           ],
           "body_m": [
@@ -300124,21 +299639,81 @@
             "section",
             "wear"
           ],
-          "wall": null,
-          "wall_side": "",
-          "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
+          "wall": "sainsbury-false-perspective-enfilade/west_14_33",
+          "wall_side": "west",
+          "wall_normal": [
+            1,
+            0
+          ],
+          "rects_uv": [
+            [
+              0.45,
+              1.193,
+              0.95,
+              2.207
+            ],
+            [
+              1.35,
+              1.193,
+              1.85,
+              2.207
+            ],
+            [
+              2.25,
+              1.193,
+              2.75,
+              2.207
+            ],
+            [
+              3.15,
+              1.193,
+              3.65,
+              2.207
+            ],
+            [
+              4.05,
+              1.193,
+              4.55,
+              2.207
+            ]
+          ],
+          "world": [
+            [
+              14.5,
+              1.7,
+              33.7
+            ],
+            [
+              14.5,
+              1.7,
+              34.6
+            ],
+            [
+              14.5,
+              1.7,
+              35.5
+            ],
+            [
+              14.5,
+              1.7,
+              36.4
+            ],
+            [
+              14.5,
+              1.7,
+              37.3
+            ]
+          ],
           "body_m": [
             0.5,
             0.5,
             1.014
           ],
           "body_source": "godot_configured_variants",
-          "housed": false,
-          "reserved": false,
-          "assemble": false,
-          "why": "2 wall(s) had 4.10 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps line_builder_3d.slack=catenary"
+          "housed": true,
+          "reserved": true,
+          "assemble": true,
+          "why": "two cells of standing room in front, walkable and unclaimed"
         },
         {
           "anchor": "torus_radials_rings",
@@ -300176,21 +299751,81 @@
             3,
             7
           ],
-          "wall": null,
-          "wall_side": "",
-          "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
+          "wall": "sainsbury-false-perspective-enfilade/west_18_24",
+          "wall_side": "west",
+          "wall_normal": [
+            1,
+            0
+          ],
+          "rects_uv": [
+            [
+              0.175,
+              1.35,
+              0.785,
+              2.05
+            ],
+            [
+              1.185,
+              1.35,
+              1.795,
+              2.05
+            ],
+            [
+              2.195,
+              1.35,
+              2.805,
+              2.05
+            ],
+            [
+              3.205,
+              1.35,
+              3.815,
+              2.05
+            ],
+            [
+              4.215,
+              1.35,
+              4.825,
+              2.05
+            ]
+          ],
+          "world": [
+            [
+              18.5,
+              1.7,
+              24.48
+            ],
+            [
+              18.5,
+              1.7,
+              25.49
+            ],
+            [
+              18.5,
+              1.7,
+              26.5
+            ],
+            [
+              18.5,
+              1.7,
+              27.51
+            ],
+            [
+              18.5,
+              1.7,
+              28.52
+            ]
+          ],
           "body_m": [
             0.61,
             0.53,
             0.7
           ],
           "body_source": "spatial_contract",
-          "housed": false,
-          "reserved": false,
-          "assemble": false,
-          "why": "2 wall(s) had 4.65 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps line_builder_3d.slack=spline"
+          "housed": true,
+          "reserved": true,
+          "assemble": true,
+          "why": "two cells of standing room in front, walkable and unclaimed"
         },
         {
           "anchor": "snap_octahedron_puzzle",
@@ -300468,30 +300103,6 @@
           ],
           "why": "body projects 1.61 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear",
           "auto_place": false
-        },
-        {
-          "id": "dna:capsule:facture",
-          "anchor": "capsule",
-          "axis": "facture",
-          "values": [
-            "cast",
-            "facet",
-            "armature",
-            "section",
-            "wear"
-          ],
-          "space": "side_gallery",
-          "footprint_xz": [
-            7,
-            4
-          ],
-          "envelope_wdh": [
-            0.5,
-            0.5,
-            1.014
-          ],
-          "why": "2 wall(s) had 4.10 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps line_builder_3d.slack=catenary",
-          "auto_place": false
         }
       ],
       "pending_synthesis": [
@@ -300719,8 +300330,8 @@
       "relational": {
         "anchors": 82,
         "wall_runs_requested": 66,
-        "wall_runs_housed": 14,
-        "dna_spatial_demand": 3,
+        "wall_runs_housed": 16,
+        "dna_spatial_demand": 2,
         "dna_contract_repairs": 3,
         "measured_synthesis_pending": 20
       },
@@ -300729,7 +300340,8 @@
         "h": 53
       },
       "apron": 14,
-      "interior_count": 14,
+      "interior_count": 9,
+      "ordered": true,
       "sequence": "primitives",
       "pearl": "point",
       "pearl_index": 0,

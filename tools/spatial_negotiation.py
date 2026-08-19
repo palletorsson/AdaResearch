@@ -1104,7 +1104,8 @@ def negotiate(contract: SpatialContract, plan: FloorPlan, occ: Occupancy,
 
 
 def run(artifacts: list[str], plan: FloorPlan | None = None,
-        bays: int = 3, venue_asks: dict[str, str] | None = None) -> tuple[FloorPlan, list[Placement], Occupancy]:
+        bays: int = 3, venue_asks: dict[str, str] | None = None,
+        reading: bool = False, fixed: dict[str, tuple[int, int]] | None = None) -> tuple[FloorPlan, list[Placement], Occupancy]:
     """Negotiate a whole exhibition brief in order.
 
     venue_asks: BALCONIES-BY-ASK (2026-08-18). A hand may say, on the trunk,
@@ -1118,7 +1119,29 @@ def run(artifacts: list[str], plan: FloorPlan | None = None,
     occ = Occupancy()
     out: list[Placement] = []
     bay_cursor = 0
+    # READING ORDER (2026-08-19, Palle: "the book and the plan and the 3d space
+    # should have the same artifact and artifact order … from the right to the
+    # left and along z, down the page"). With reading=True the brief IS the
+    # poem: each body stands no nearer the entrance than the one before it —
+    # interior slots behind the last placement are withheld — so walking the
+    # hall reads the pearl's lines in order. Courts and walls are unchanged.
+    # fixed: {token: (x, z) plan cell} — the hand's rows (the plan editor, the studio,
+    # /speak paper). A fixed body negotiates inside the slot that holds its cell,
+    # so occupancy and the reading order know where the hand put it.
+    min_z = -1
+    last_x = -1            # within a row the reading runs right to left: x ascending
+    all_slots = list(plan.slots)
+    fixed = fixed or {}
     for lookup in artifacts:
+        if lookup in fixed:
+            fx, fz = fixed[lookup]
+            holder = [s for s in all_slots if s.venue == "interior" and (fx, fz) in getattr(s, "free_cells", set())]
+            if not holder:
+                holder = sorted([s for s in all_slots if s.venue == "interior"],
+                                key=lambda s: abs(s.cell[0] - fx) + abs(s.cell[1] - fz))[:1]
+            plan.slots = holder + [s for s in all_slots if s.venue != "interior"]
+        elif reading:
+            plan.slots = [s for s in all_slots if s.venue != "interior" or s.cell[1] >= min_z]
         contract = staged_contract(lookup)
         ask = (venue_asks or {}).get(lookup, "")
         if ask == "balcony":
@@ -1129,7 +1152,41 @@ def run(artifacts: list[str], plan: FloorPlan | None = None,
         bay = f"bay{bay_cursor % max(1, len({s.bay for s in plan.slots}))}"
         preferred = next((s for s in plan.slots
                           if s.bay == bay and _slot_suits(contract, s)), None)
-        p = negotiate(contract, plan, occ, preferred)
+        if reading and lookup not in fixed:
+            # reading order: the NEAREST suitable slot behind the last line — the
+            # body stands as close to the one before it as the room allows
+            near = sorted([s for s in plan.slots if s.venue == "interior" and s.cell[1] >= min_z and _slot_suits(contract, s)],
+                          key=lambda s: (s.cell[1], s.cell[0]))
+            if near:
+                preferred = near[0]
+        if reading and lookup not in fixed:
+            # reading order, binding as far as the room allows: try the rows just
+            # behind the last line first, then widen, then anywhere behind, then
+            # anywhere at all — the order bends only when nothing else holds it
+            p = None
+            for span in (2, 5, 10 ** 6, None):
+                if span is None:
+                    plan.slots = all_slots
+                else:
+                    plan.slots = [s for s in all_slots if s.venue != "interior" or (min_z < s.cell[1] <= min_z + span) or (s.cell[1] == min_z and s.cell[0] > last_x)]
+                    if not any(s.venue == "interior" for s in plan.slots):
+                        continue
+                cand = sorted([s for s in plan.slots if s.venue == "interior" and _slot_suits(contract, s)],
+                              key=(lambda s: (s.cell[1], s.cell[0])) if span is not None else (lambda s: (-s.cell[1], s.cell[0])))
+                # (the last resort reads from the BACK: a body that cannot follow stands as late as it can)
+                p = negotiate(contract, plan, occ, cand[0] if cand else preferred)
+                if p.result == "ACCEPT" and p.venue == "interior":
+                    break
+        else:
+            p = negotiate(contract, plan, occ, preferred)
+        if reading or lookup in fixed:
+            plan.slots = all_slots
+            if p.result == "ACCEPT" and p.venue == "interior" and p.anchor is not None:
+                az_, ax_ = int(p.anchor[1]), int(p.anchor[0])
+                if az_ > min_z:
+                    min_z, last_x = az_, ax_
+                elif az_ == min_z:
+                    last_x = max(last_x, ax_)
         if p.result == "ACCEPT" and p.masks:
             occ.commit(lookup, p.masks, p.anchor)
             if p.mode == "against_wall" and p.wall:

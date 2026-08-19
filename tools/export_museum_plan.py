@@ -191,7 +191,8 @@ def brief_context(brief: dict[str, Any]) -> dict[str, dict[str, Any]]:
 def plan_museum(key: str, tokens: list[str],
                 branch_anchors: list[str] | None = None,
                 placement_context: dict[str, dict[str, Any]] | None = None,
-                rooms: int | None = None) -> dict[str, Any]:
+                rooms: int | None = None, reading: bool = False,
+                fixed: dict[str, tuple[int, int]] | None = None) -> dict[str, Any]:
     """Negotiate `tokens` into museum `key`. Reports what did NOT fit, too.
     `rooms` crops the tile to that many rooms (tools/em_rooms.py); the cropped
     tile is written into the row so the runtime builds exactly this hall."""
@@ -200,7 +201,7 @@ def plan_museum(key: str, tokens: list[str],
     # negotiator for a hanging balcony body (see spatial_negotiation.run)
     venue_asks = {t: "balcony" for t, c in (placement_context or {}).items()
                   if str((c or {}).get("walk_space", "")) == "balcony"}
-    _, placements, occupancy = run(tokens, plan=plan, venue_asks=venue_asks or None)
+    _, placements, occupancy = run(tokens, plan=plan, venue_asks=venue_asks or None, reading=reading, fixed=fixed)
 
     placed: list[dict[str, Any]] = []
     rejected: list[dict[str, Any]] = []

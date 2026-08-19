@@ -17023,10 +17023,12 @@
      "CoordinateSystem3M": "no points without a coordinate system",
      "you_are_here": "you are here — the one point",
      "fontana_puncture": "the one point, pierced",
+     "interactive_point_origin_force": "a point that becomes a force",
      "floating_sphere_field": "points, drifting, there is always the drift. ",
      "two_points_line": "two points is a line. it measures. it is a point, it is a laser — here it forms a vector in 3d space",
      "point": "the one point",
      "draw_dot": "all life is encoded — that is enough",
+     "dgrid": "grid lines",
      "do_not_cross_barrier": "do not cross — the first line is a rule",
      "klee_walking_point": "a line is a point that went for a walk",
      "grab_sphere_point_snap": "a point you can take; it snaps",
@@ -17035,9 +17037,11 @@
     "says_by": {
      "you_are_here": "claude",
      "fontana_puncture": "claude",
+     "interactive_point_origin_force": "claude",
      "floating_sphere_field": "hand",
      "point": "claude",
      "draw_dot": "hand",
+     "dgrid": "hand",
      "do_not_cross_barrier": "claude",
      "klee_walking_point": "claude",
      "grab_sphere_point_snap": "claude",
@@ -17045,10 +17049,11 @@
     },
     "speak_by": "hand",
     "tokens_add": [
-     "draw_dot",
+     "dgrid",
      "do_not_cross_barrier",
-     "klee_walking_point",
+     "draw_dot",
      "grab_sphere_point_snap",
+     "klee_walking_point",
      "walk_this_line_marking"
     ],
     "tokens_remove": [
@@ -17067,6 +17072,8 @@
      "do_not_cross_barrier",
      "klee_walking_point",
      "grab_sphere_point_snap",
+     "dgrid",
+     "draw_dot",
      "walk_this_line_marking"
     ],
     "verse": {
@@ -17458,9 +17465,10 @@
       "do_not_cross_barrier",
       "klee_walking_point",
       "grab_sphere_point_snap",
+      "dgrid",
+      "draw_dot",
       "walk_this_line_marking",
-      "lab_room",
-      "draw_dot"
+      "lab_room"
      ],
      "blurb": "Before the point, infrastructure.",
      "rooms": 4,
@@ -17483,10 +17491,12 @@
       "CoordinateSystem3M": "no points without a coordinate system",
       "you_are_here": "you are here — the one point",
       "fontana_puncture": "the one point, pierced",
+      "interactive_point_origin_force": "a point that becomes a force",
       "floating_sphere_field": "points, drifting, there is always the drift. ",
       "two_points_line": "two points is a line. it measures. it is a point, it is a laser — here it forms a vector in 3d space",
       "point": "the one point",
       "draw_dot": "all life is encoded — that is enough",
+      "dgrid": "grid lines",
       "do_not_cross_barrier": "do not cross — the first line is a rule",
       "klee_walking_point": "a line is a point that went for a walk",
       "grab_sphere_point_snap": "a point you can take; it snaps",
@@ -17499,10 +17509,12 @@
       "CoordinateSystem3M": "hand",
       "you_are_here": "claude",
       "fontana_puncture": "claude",
+      "interactive_point_origin_force": "claude",
       "floating_sphere_field": "hand",
       "two_points_line": "hand",
       "point": "claude",
       "draw_dot": "hand",
+      "dgrid": "hand",
       "do_not_cross_barrier": "claude",
       "klee_walking_point": "claude",
       "grab_sphere_point_snap": "claude",
@@ -17514,7 +17526,8 @@
       "interactive_point_origin_force",
       "origin",
       "point"
-     ]
+     ],
+     "ordered": true
     },
     {
      "pearl": "lines",
@@ -17524,7 +17537,6 @@
      "hero_by": "first in spine order",
      "tokens": [
       "science_screen",
-      "dgrid",
       "perspective_lines",
       "line_builder_3d",
       "laser_sword",

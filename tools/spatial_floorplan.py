@@ -516,6 +516,12 @@ def from_museum(key: str, apron: int = 14, rooms: int | None = None) -> FloorPla
     plan.slots.extend(_exterior_slots(plan, courtyards, off, tw, th, key))
     plan.walls.extend(_wall_surfaces(plan, off, tw, th, key))
     plan._recompute_pockets_from_grid()
+    # an INTERIOR slot's pocket stays inside the tile: the flood fill walks out
+    # of the exit gap onto the grounds, and on a CROPPED tile (rooms) that put
+    # bodies past the last row — rows the assembler never builds
+    for s in plan.slots:
+        if s.venue == "interior" and s.free_cells:
+            s.free_cells = {c for c in s.free_cells if off <= c[0] < off + tw and off <= c[1] < off + th}
     return plan
 
 

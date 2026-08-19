@@ -128,6 +128,24 @@ def pearl_walks(chapter: str, trunk: dict[str, Any] | None = None) -> list[dict[
         hero = p.get("hero") or (p.get("tokens") or [""])[0]
         if not hero:
             continue
+        if p.get("ordered"):
+            # THE POEM IS THE CAST: the hand's order, every token, no derived
+            # branch or relation added — what is a line is in the hall, in that
+            # order (tools/em_speak.py, /speak). Hand branches still ride.
+            rows_o: list[dict[str, Any]] = []
+            for tok in p.get("tokens", []):
+                rows_o.append({"lookup": tok, "walk_kind": "hero" if tok == hero else "sibling",
+                               "why": f"a line of the {name} poem", "provenance": "hand", "space": "wall"})
+            for b in branches:
+                if b.get("pearl") == name and b.get("provenance") == "hand" and b.get("token") and b["token"] not in p.get("tokens", []):
+                    rows_o.append({"lookup": b["token"], "walk_kind": b.get("kind", "extends"), "why": b.get("why", ""), "provenance": "hand",
+                                   "via": b.get("via", ""), "space": b.get("space", "wall")})
+            walks.append({"chapter": chapter, "pearl": name, "pearl_index": int(p.get("index", len(walks))), "map": p.get("map", ""),
+                          "rooms": p.get("rooms"), "exclude": list(p.get("excluded", [])), "ordered": True,
+                          "hero": hero, "hand_branches": sum(1 for r in rows_o if r["walk_kind"] not in ("hero", "sibling")),
+                          "cast": [r["lookup"] for r in rows_o], "rows": rows_o,
+                          "why": f"pearl {name}: the poem's order, {len(rows_o)} lines"})
+            continue
         rows: list[dict[str, Any]] = [{"lookup": hero, "walk_kind": "hero", "why": f"the hero of {name} ({p.get('hero_by', '')})", "provenance": "trunk", "space": "wall"}]
         seen = {hero}
         sib = 0

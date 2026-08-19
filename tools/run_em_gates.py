@@ -63,6 +63,7 @@ GATES: dict[str, tuple[str, str, str, int]] = {
     "built":         ("gd", "res://commons/testing/test_em_built.gd", r"EM BUILT: (PASS|FAIL)", 400),
     "plain_hands":   ("gd", "res://commons/testing/test_em_plain_hands.gd", r"EM PLAIN HANDS: (PASS|FAIL)", 400),
     "bake_fresh":    ("py", "tools/em_bake.py --check", r"EM BAKE: .*(fresh|STALE|MISSING)", 30),
+    "reading":       ("py", "tools/em_reading.py primitives/point", r"READS|out of order", 60),
     "shipped":       ("gd", "res://commons/testing/test_em_shipped.gd", r"EM SHIPPED: (PASS|FAIL)", 300),
 }
 
