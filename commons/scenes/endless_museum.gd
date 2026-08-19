@@ -186,6 +186,7 @@ var _pool_i: int = 0
 var _seed: int = 46
 var _order_mode: String = "spine"  # spine | shuffle
 var _shot_path: String = ""
+var _look_token: String = ""          # --em-look=<token>: the shot looks at this body
 var _shot_segments: int = 3
 # 1.0 is the LOBBY, and it was the default: three of four proof frames were shot
 # one room short of the museum. It survives only as the value an explicit
@@ -807,6 +808,11 @@ func _parse_args() -> void:
 		elif a.begins_with("--em-shot-at="):
 			_shot_z = float(a.substr(13))
 			_shot_z_set = true
+		elif a.begins_with("--em-look="):
+			# LOOK AT ONE BODY (Palle, 2026-08-19: "can I look at certain artifacts in
+			# position?"): the shot stands on a walkable cell about 3 m from the named
+			# body and looks at it — /lines' "look" button; a token or a book number
+			_look_token = a.substr(10)
 		elif a.begins_with("--em-segments="):
 			_shot_segments = int(a.substr(14))
 		elif a == "--em-test-collision":
@@ -6918,6 +6924,16 @@ func _take_proof_shot() -> void:
 	# object 10 m down the room is 20 px or 60.
 	_cam.keep_aspect = Camera3D.KEEP_WIDTH
 	_cam.fov = 70.0
+	if _look_token != "":
+		var look: Dictionary = _compose_look(_look_token)
+		if not look.is_empty():
+			_player.position = look["stand"]
+			_player.rotation = Vector3(0.0, float(look["yaw"]), 0.0)
+			_cam.rotation = Vector3(float(look["pitch"]), 0.0, 0.0)
+			print("[endless_museum] LOOK at %s: body %s, standing %s" % [_look_token, str(look["at"]), str(look["stand"])])
+			_shoot_deferred()
+			return
+		push_warning("endless_museum: --em-look=%s — no such body built; composing the usual shot" % _look_token)
 	if _shot_z >= 0.0 or not _shot_z_set:
 		# COMPOSE ON THE EVIDENCE. A frame containing 100% architecture cannot
 		# corroborate a claim of "3 works dealt" — it cannot even distinguish a
@@ -7138,6 +7154,45 @@ func _stand_near(x: float, z: float) -> Vector3:
 		return Vector3(x, 0.0, z)
 	return Vector3(float(best.x) + 0.5, 0.0, float(best.y) + 0.5)
 
+
+## The standpoint for one body: the walkable cell nearest to 3 m from it, on the
+## side toward the hall's axis (x 7.5) — then the eye turns to the body.
+func _compose_look(token: String) -> Dictionary:
+	var at: Vector3 = Vector3.ZERO
+	var found: bool = false
+	for rec in _inventory:
+		var rd: Dictionary = rec
+		if String(rd.get("token", "")) == token or String(rd.get("id", "")) == token:
+			var w: Array = rd.get("world", [])
+			if w.size() >= 3 and (not found or String(rd.get("kind", "")) == "artifact"):
+				at = Vector3(float(w[0]), float(w[1]), float(w[2])); found = true   # the body, not its plinth
+	if not found:
+		return {}
+	var best: Vector3 = Vector3.ZERO
+	var best_score: float = 1e9
+	for k in _walk_cells.keys():
+		var c: Vector2i = k
+		var sp: Vector3 = Vector3(float(c.x) + 0.5, 0.0, float(c.y) + 0.5)
+		var d: float = Vector2(sp.x - at.x, sp.z - at.z).length()
+		if d < 1.2:
+			continue
+		# a clear line over walkable cells from the stand to the body's cell — a
+		# wall between them is the picture nobody wants
+		var bc: Vector2i = Vector2i(int(floor(at.x)), int(floor(at.z)))
+		if not _clear_line(c, bc) and not _clear_line(c, bc + Vector2i(sign(c.x - bc.x), 0)) and not _clear_line(c, bc + Vector2i(0, sign(c.y - bc.y))):
+			continue
+		# 3 m is the wish; standing toward the axis keeps the wall out of the frame
+		# the visitor's view: from the hall's axis side, a step before the body (smaller z)
+		var score: float = absf(d - (3.0 + maxf(0.0, at.y - 1.2))) + absf(sp.x - 7.5) * 0.15 + maxf(0.0, sp.z - at.z) * 0.6
+		if score < best_score:
+			best_score = score; best = sp
+	if best_score >= 1e9:
+		return {}
+	var eye: Vector3 = best + Vector3(0.0, EYE, 0.0)
+	var to: Vector3 = Vector3(at.x, maxf(0.6, at.y), at.z) - eye       # aim at the body itself (a floor mark: its floor)
+	var yaw: float = atan2(-to.x, -to.z)
+	var pitch: float = atan2(to.y, Vector2(to.x, to.z).length())
+	return {"stand": best, "yaw": yaw, "pitch": pitch, "at": at}
 
 func _shoot_deferred() -> void:
 	var frames := 90
