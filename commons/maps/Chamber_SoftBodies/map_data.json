@@ -2,13 +2,12 @@
   "map_info": {
     "name": "Chamber SoftBodies",
     "lookup_name": "Chamber_SoftBodies",
-    "description": "The hopper bounces softly. Spring physics. Deformable matter in deformable space. Everything gives when you push it — including the floor: fungus:softbody cells wake to TOUCH where you step (pressed flat, shoved sideways) and to DWELL where you stand (drooping, collapsing), and the last one claims its neighbours, so the deformation travels the way force does through a soft body.",
+    "description": "The hopper bounces softly. Spring physics. Deformable matter in deformable space. Everything gives when you push it.",
     "dimensions": {
       "width": 11,
       "depth": 7,
       "max_height": 2
-    },
-    "version": "placed-hybrid"
+    }
   },
   "settings": {
     "cube_size": 1.0,
@@ -47,22 +46,13 @@
       [" "," "," "," "," "," "," "," "," "," ","t"]
     ],
     "interactables": [
-      [" "," "," "," "," "," ","science_screen:180:1.5#mode:field"," "," "," "," "],
+      [" "," "," "," "," "," "," "," ","science_screen:180:1.5#mode:field"," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," ","catalyst_target"," "," "," "," "," "," "," "," "],
+      [" ","catalyst_target"," ","catalyst_target"," "," "," ","catalyst_target"," ","catalyst_target"," "],
+      [" "," "," "," "," ","proximity_spawner#type:spring_hopper"," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," ","proximity_spawner#type:spring_hopper"," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "]
-    ],
-    "biome": [
-      ["","","","","","","","","","",""],
-      ["","fungus:softbody:field:sf=squash_settle:t=3:on=touch:seed","","","fungus:softbody:field:sf=wind_lean:t=3:on=touch:seed","","","","","",""],
-      ["","","","fungus:softbody:field:sf=wind_lean:t=2:on=touch:seed","","","","","","",""],
-      ["","","fungus:softbody:field:sf=gravity_droop:t=4:on=dwell:seed","","","fungus:softbody:field:sf=squash_settle:t=3:on=touch:seed","","","","",""],
-      ["","","","","fungus:softbody:field:sf=wind_lean:t=3:on=touch:seed","","fungus:softbody:field:sf=wilt_collapse:t=4:on=dwell:seed","","","",""],
-      ["","","","","","fungus:softbody:field:sf=squash_settle:t=3:on=touch:seed","","fungus:softbody:field:sf=wind_lean:t=3:on=touch:seed/claim","fungus:softbody:field:sf=gravity_droop:t=3","",""],
-      ["","","","","","","","","fungus:softbody:field:sf=squash_settle:t=3","fungus:softbody:field:sf=wind_lean:t=3",""]
     ]
   }
 }

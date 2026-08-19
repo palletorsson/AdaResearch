@@ -12,8 +12,7 @@
       "source": "ada-breather"
     },
     "name": "Accumulation_Riemann",
-    "version": "placed-humanoid_walker",
-    "description": "[Placement applied humanoid_walker engine — constraint 0.914→0.969, walkability 0.714→0.963]"
+    "version": "1.0"
   },
   "layers": {
     "structure": [
@@ -48,9 +47,9 @@
       [" "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," ","riemann_sum_workbench:270"," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," ","riemann_pump:90"," "," "," "," "],
-      [" "," "," "," "," ","integral_area"," "," "," "," "],
-      [" "," "," "," "," ","riemann_pi:90"," "," "," "," "],
+      [" "," ","riemann_pi"," "," "," ","integral_area"," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," ","riemann_pump"," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "]

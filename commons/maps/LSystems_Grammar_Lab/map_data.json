@@ -2,8 +2,8 @@
   "map_info": {
     "name": "01 Grammar Lab",
     "lookup_name": "LSystems_Grammar_Lab",
-    "description": "The entire L-Systems concept in miniature. Axiom becomes rules, rules become string, string becomes tree. A small lab previewing everything that follows: growth, grammar, architecture, competition, and the living world.\n\n[Placement applied humanoid_walker engine — constraint 0.833→0.939, walkability 0.439→0.360]",
-    "version": "placed-humanoid_walker",
+    "description": "The entire L-Systems concept in miniature. Axiom becomes rules, rules become string, string becomes tree. A small lab previewing everything that follows: growth, grammar, architecture, competition, and the living world.",
+    "version": "1.0",
     "format": "json",
     "dimensions": {
       "width": 8,
@@ -88,13 +88,13 @@
     ],
     "interactables": [
       [" "," "," "," "," "," "," "," "],
-      [" ","dark_sphere","grammar_provenance"," "," "," ","science_screen:180:1.5#mode:trace"," "],
       [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," ","science_screen:180:1.5#mode:trace"],
+      [" "," "," "," ","lsystem_editor:0:0.5#grammar:koch"," "," "," "],
+      [" ","grammar_provenance"," "," "," "," "," "," "],
+      [" "," ","lsystem_tree"," "," "," ","fractal_lsystem_string"," "],
       [" "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," ","lsystem_editor:0:0.5#grammar:koch"," "],
-      [" ","lsystem_tree:270"," "," ","fractal_lsystem_string:270"," "," "," "],
-      [" "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," ","dark_sphere"," "," "," "],
       [" "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "]
     ]

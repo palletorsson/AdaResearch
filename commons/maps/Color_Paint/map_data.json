@@ -8,20 +8,20 @@
   "layers": {
     "interactables": [
       [" "," "," "," "," "," "," "," "," "," "," "],
-      [" ","dark_sphere","pattern_mill:90"," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," ","dark_sphere"," "," "," "," "," "],
+      [" "," "," "," "," ","ball_painting_demo:180:0.5"," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," ","pattern_mill"," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" ","albers_wall_gallery:180:0.5"," "," "," "," "," "," ","ball_painting_demo:180:0.5"," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," ","albers_wall_gallery:180:0.5"," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "]
     ],
@@ -75,7 +75,7 @@
     }
   },
   "map_info": {
-    "description": "Paint meets physics. The ball painting demo turns spheres into canvases - throw paint, watch it splash, see color as action applied through motion.\n\n[Placement applied humanoid_walker engine — constraint 0.789→0.980, walkability 0.454→0.567]",
+    "description": "Paint meets physics. The ball painting demo turns spheres into canvases - throw paint, watch it splash, see color as action applied through motion.",
     "dimensions": {
       "depth": 17.0,
       "max_height": 6.0,
@@ -91,7 +91,7 @@
     },
     "name": "Color Paint",
     "title": "Gestural Action Painting",
-    "version": "placed-humanoid_walker"
+    "version": "1.0"
   },
   "modifiers": [
     {

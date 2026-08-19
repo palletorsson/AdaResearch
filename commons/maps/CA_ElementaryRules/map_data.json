@@ -3,8 +3,8 @@
     "title": "Elementary Rules",
     "name": "CA_ElementaryRules",
     "lookup_name": "CA_ElementaryRules",
-    "description": "Elementary CA rules â€” recrystallization, self-organization, and structure growth patterns\n\n[Placement applied hybrid engine — constraint 0.685→0.987, walkability 0.683→0.574]",
-    "version": "placed-hybrid",
+    "description": "Elementary CA rules â€” recrystallization, self-organization, and structure growth patterns",
+    "version": "1.0",
     "format": "json",
     "dimensions": {
       "width": 7,
@@ -76,13 +76,13 @@
       [" "," "," "," "," "," "," "]
     ],
     "interactables": [
+      ["structure_growth"," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "],
+      [" "," ",""," "," "," "," "],
+      [" "," ","dark_sphere"," "," "," "," "],
       [" "," "," "," "," "," "," "],
-      [" "," "," ","dark_sphere"," "," "," "],
       [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" ","structure_growth:90"," "," "," "," "," "],
       [" "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "]

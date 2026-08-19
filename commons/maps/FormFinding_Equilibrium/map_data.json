@@ -3,8 +3,8 @@
     "name": "Form-Finding: The Balance",
     "title": "Form-Finding: The Balance",
     "lookup_name": "FormFinding_Equilibrium",
-    "description": "Where forces cancel, form holds. A Calder mobile balances every arm by the lever law; a fractal truss spans the most with the least; a tensegrity triangle stands on tension you cannot see. Gaudi hung the chain and turned it upside down to find the arch.\n\n[Placement applied humanoid_walker engine — constraint 0.838→0.931, walkability 0.671→0.694]",
-    "version": "placed-humanoid_walker",
+    "description": "Where forces cancel, form holds. A Calder mobile balances every arm by the lever law; a fractal truss spans the most with the least; a tensegrity triangle stands on tension you cannot see. Gaudi hung the chain and turned it upside down to find the arch.",
+    "version": "0.1",
     "format": "json",
     "dimensions": {
       "width": 12,
@@ -74,14 +74,14 @@
     ],
     "interactables": [
       [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" ","fractal_truss_tower:270"," "," "," ","tensegrity_triangle"," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," ","calder_mobile"," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," ","fractal_truss_tower"," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," ","tensegrity_triangle"," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," ","science_screen"," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" ","calder_mobile:0"," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," ","science_screen:90"," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "]
     ]
   }

@@ -1,6 +1,6 @@
 {
   "map_info": {
-    "description": "Explore audio reactivity and simple waveform visualization\n\n[Placement applied humanoid_walker engine — constraint 0.803→0.933, walkability 0.464→0.538]",
+    "description": "Explore audio reactivity and simple waveform visualization",
     "dimensions": {
       "depth": 14.0,
       "max_height": 4.0,
@@ -16,7 +16,7 @@
     },
     "name": "Audio Reactive Mario",
     "title": "Sound as Waveform",
-    "version": "placed-humanoid_walker"
+    "version": "1.0"
   },
   "utility_definitions": {
     "s": {
@@ -57,18 +57,18 @@
   },
   "layers": {
     "interactables": [
-      [" ","lab_table:90","timbre_sculptor:90#waveform:square"," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," ","BigPipeSystem:0:-0.5","pick_up_cube:90","GlassRack#config:simple_tube","dark_sphere","RackMoogBass:0:1","RackDX7Piano:0:1","cable_builder"," "],
-      [" ","DualBallFMController:90","chord_tension_spring"," "," "," "," "," "," "," "," "," "],
-      ["catalyst_prompter_box:0:0#emergence:vent#sequence:auto#lease_s:45"," "," "," ","wave_interference_3d:0:-0.5","harmonic_distance_table:90","MelodyChaser3D:90:0.4#scale:fifths_circle#tempo:60"," "," "," "," "," "],
-      [" "," "," "," "," "," "," ","catalyst_vent:0:0#emit_interval_s:2.5#wave_size:3#start_delay_s:5.0#sequence:auto"," "," "," "," "],
-      [" "," "," "," "," ","rack_room:0:0"," "," "," "," "," "," "],
+      ["BigPipeSystem:0:-0.5"," "," "," "," "," "," "," "," "," "," "," "],
+      [" ","pick_up_cube","AudioContr:-90#preset:basic_mono"," ","pick_up_cube"," "," "," "," ","pick_up_cube","GlassRack#config:simple_tube"," "],
+      [" ","pick_up_cube","AudioContr:-90#config:mario_rack"," ","RackSineBasic:0:1"," "," "," "," ","cable_builder","VRAudioMonitor"," "],
+      ["catalyst_prompter_box:0:0#emergence:vent#sequence:auto#lease_s:45"," "," "," "," "," ","pick_up_cube","pick_up_cube","pick_up_cube","dark_sphere"," "," "],
+      [" "," "," ","DualBallFMController","Rack303Acid:0:1","rack_room:0:0","RackMoogBass:0:1","RackDX7Piano:0:1","AudioContr:-90#config:heartbeat_rack","audio_catalog_tablet:90","AudioContr#config:slider_rack"," "],
+      [" "," "," "," "," ","wave_interference_3d:0:-0.5"," ","catalyst_vent:0:0#emit_interval_s:2.5#wave_size:3#start_delay_s:5.0#sequence:auto"," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      ["RackSineBasic:0:1","interactable_demo:0"," "," ","AudioContr:-90#preset:basic_mono","Rack303Acid:0:1","mario_test_sound_ui:90","audio_catalog_tablet:90","MarioSoundController#mode:techno_kick"," "," ","VRAudioMonitor:90"],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," ","harmonic_distance_table"," ","chord_tension_spring"," "," "," ","timbre_sculptor#waveform:square"," "," "," "],
+      [" "," ","GlassRack:0:0.7#config:distillation_rack"," "," "," "," "," "," "," "," "," "],
+      [" ","MarioSoundController#mode:techno_kick"," "," "," "," "," "," ","mario_test_sound_ui"," "," "," "],
+      [" ","MarioSoundController#mode:laser_zap"," "," ","MelodyChaser3D:90:0.4#scale:fifths_circle#tempo:60"," "," "," "," "," ","interactable_demo"," "],
+      [" ","MarioSoundController#mode:sine_bell"," ","lab_table"," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "]
     ],

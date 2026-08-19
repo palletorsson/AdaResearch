@@ -3,9 +3,9 @@
     "name": "Fractal_MandelbrotSet",
     "lookup_name": "Fractal_MandelbrotSet",
     "title": "The Master Fractal",
-    "description": "Mandelbrot Set - the master fractal, infinite boundary\n\n[Placement applied humanoid_walker engine — constraint 0.884→0.935, walkability 0.950→0.957]",
+    "description": "Mandelbrot Set - the master fractal, infinite boundary",
     "manual_file": "res://commons/context/clipboard/tutorial_text/fractals_axioms.md",
-    "version": "placed-humanoid_walker",
+    "version": "1.0",
     "format": "json",
     "dimensions": {
       "width": 9,
@@ -76,11 +76,11 @@
     ],
     "interactables": [
       [" "," "," "," "," "," "," "," "," "],
-      [" ","mandelbrot_set:90"," "," "," ","dark_sphere","mandelbrot_dive:0:0.5:1"," "," "],
       [" "," "," "," "," "," "," "," "," "],
+      [" "," ","mandelbrot_set"," "," "," "," "," "," "],
+      [" "," "," "," ","dark_sphere"," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," ","mandelbrot_dive:0:0.5:1"," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "]

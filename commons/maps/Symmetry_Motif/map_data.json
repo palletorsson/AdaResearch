@@ -3,8 +3,8 @@
     "name": "Symmetry: The Motif",
     "title": "Symmetry: The Motif",
     "lookup_name": "Symmetry_Motif",
-    "description": "One painted cell. Everything a pattern will ever be is already in its domain — and on the floor, a two-thousand-year-old meander made of three tiles.\n\n[Placement applied humanoid_walker engine — constraint 0.889→0.918, walkability 0.463→0.931]",
-    "version": "placed-humanoid_walker",
+    "description": "One painted cell. Everything a pattern will ever be is already in its domain — and on the floor, a two-thousand-year-old meander made of three tiles.",
+    "version": "0.1",
     "format": "json",
     "dimensions": {
       "width": 12,
@@ -75,13 +75,13 @@
     "interactables": [
       [" "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," ","pattern_tile_4x4"," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," ","pattern_tile_cube"," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," ","science_screen"," "," "],
+      [" "," "," ","tile_meander_floor"," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," ","pattern_tile_4x4:90","pattern_tile_cube:90","tile_meander_floor"," "," "],
-      [" "," "," "," "," "," "," ","science_screen:90"," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "]
     ]
   }

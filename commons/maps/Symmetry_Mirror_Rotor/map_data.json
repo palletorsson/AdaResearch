@@ -3,8 +3,8 @@
     "name": "Symmetry: Mirror and Rotor",
     "title": "Symmetry: Mirror and Rotor",
     "lookup_name": "Symmetry_Mirror_Rotor",
-    "description": "Reflection and rotation. A kaleidoscope mill turns one wedge into a rosette; the mirror tile doubles whatever you paint.\n\n[Placement applied humanoid_walker engine — constraint 0.929→0.908, walkability 0.595→0.931]",
-    "version": "placed-humanoid_walker",
+    "description": "Reflection and rotation. A kaleidoscope mill turns one wedge into a rosette; the mirror tile doubles whatever you paint.",
+    "version": "0.1",
     "format": "json",
     "dimensions": {
       "width": 12,
@@ -75,13 +75,13 @@
     "interactables": [
       [" "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," ","pattern_tile_mirror"," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," ","mill_persian_p4"," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," ","kaleidoscope"," "," "," "," "," ","science_screen"," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," ","mill_persian_p4","pattern_tile_mirror:90","kaleidoscope:90"," "," "],
-      [" "," "," "," "," "," "," ","science_screen:90"," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "]
     ]
   }

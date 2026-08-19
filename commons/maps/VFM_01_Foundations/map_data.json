@@ -2,8 +2,8 @@
   "map_info": {
     "name": "VFM_01_Foundations",
     "lookup_name": "VFM_01_Foundations",
-    "description": "Vector & Forces Museum, hall 1 — Foundations. Entry hall with CoordinateSystem3M as the opening exhibit, XL vector addition and subtraction demos on open floor, and two gallery rows of height-2 plinths carrying the small vector-basics interactables. Wall dressing along the edges. Teleporter at the far end leads to the Operations hall.\n\n[Placement applied pacing_arc engine — constraint 0.739→0.731, walkability 0.466→0.700]",
-    "version": "placed-pacing_arc",
+    "description": "Vector & Forces Museum, hall 1 — Foundations. Entry hall with CoordinateSystem3M as the opening exhibit, XL vector addition and subtraction demos on open floor, and two gallery rows of height-2 plinths carrying the small vector-basics interactables. Wall dressing along the edges. Teleporter at the far end leads to the Operations hall.",
+    "version": "vfm-museum-1",
     "format": "json",
     "dimensions": {
       "width": 22,
@@ -78,22 +78,22 @@
       ["","","","","","","","","","","","","","","","","","","","","",""]
     ],
     "interactables": [
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," ","newtons_laws:270"," "," "," "," ","example_2_1_forces_vr"," "," "," "," ","vector_translation_demo"," "," "," "," "," "," "," "," "],
-      [" "," "," "," ","coordinate_system_switcher","basis_vectors_rig:270"," ","vector_addition_xl:0"," "," ","vector_subtraction_demo:90"," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," ","length_lantern:270"," "," "," "," "," "," "," "," ","adder_board:90"," "," "," "," "," "," "," "," "],
-      [" "," "," "," ","CoordinateSystem3M"," "," "," "," "," "," "," "," ","stretch_bench:90"," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," ","vector_magnitude_demo:0","vector_sub:90"," "," ","vector_normalize_demo","vector_add:90"," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," ","example_1_4_vector_multiplication_vr:0"," "," ","VectorBasics"," "," "," ","graphics_monitor:90","script_runner:90"," "," "," "," "," "," "]
+      ["","","","","","","","","","","","","","","","","","","","","",""],
+      ["","","","","","","","","","","","","","","","","","","","","",""],
+      ["","","","","","","","","","","","","","","","","","","","","",""],
+      ["","","","CoordinateSystem3M","","","","","","","vector_subtraction_demo","","","","","","","vector_addition_xl","","","",""],
+      ["","","","","","","","","","","","","","","","","","","","","",""],
+      ["","","","","","","","","","","vector_sub","","","","","","","vector_add","","","",""],
+      ["","","","","","","","","","","","","","","","","","","","","",""],
+      ["","","","VectorBasics","","","basis_vectors_rig","","","vector_magnitude_demo","","","vector_normalize_demo","","","vector_translation_demo","","","example_1_4_vector_multiplication_vr","","",""],
+      ["2d_in_3d_vectors_vis","","","","","","","","","","","","","","","","","","","","","script_runner"],
+      ["","","","","","","","","","","","","","","","","","","","","",""],
+      ["","","","coordinate_system_switcher","","","adder_board","","","length_lantern","","","stretch_bench","","","newtons_laws","","","example_2_1_forces_vr","","",""],
+      ["","","","","","","","","","","","","","","","","","","","","",""],
+      ["","","","","","","","","","","","","","","","","","","","","",""],
+      ["graphics_monitor","","","","","","","","","","","","","","","","","","","","",""],
+      ["","","","","","","","","","","","","","","","","","","","","",""],
+      ["","","","","","","","","","","","","","","","","","","","","",""]
     ]
   }
 }

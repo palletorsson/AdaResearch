@@ -12,8 +12,7 @@
       "source": "ada-breather"
     },
     "name": "Change_Slope_Surface",
-    "version": "placed-hybrid",
-    "description": "[Placement applied hybrid engine — constraint 0.922→0.973, walkability 0.524→0.910]"
+    "version": "1.0"
   },
   "layers": {
     "structure": [
@@ -48,11 +47,11 @@
       [" "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," ","tangent_slope_workbench:270"," "," "," "," "],
-      [" "," "," "," ","partial_derivative_terrain:180"," "," "," "," "," "],
+      [" "," ","science_screen"," "," ","tangent_slope_workbench:270"," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," ","partial_derivative_terrain"," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "],
-      ["science_screen:270"," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "]
     ]
   },

@@ -3,9 +3,9 @@
     "name": "Noise Layers: The Symphony of Frequencies",
     "title": "Coherent Noise Fundamentals",
     "lookup_name": "Noise_One",
-    "description": "Explore noise octaves through interactive torus and layered visualization. Demonstrates fractal summation - how multiple frequencies combine to create natural complexity. Includes VR brush for experimentation.\n\n[Placement applied humanoid_walker engine — constraint 0.868→0.929, walkability 0.754→0.949]",
+    "description": "Explore noise octaves through interactive torus and layered visualization. Demonstrates fractal summation - how multiple frequencies combine to create natural complexity. Includes VR brush for experimentation.",
     "manual_file": "res://commons/context/clipboard/tutorial_text/noise_layers_axioms.md",
-    "version": "placed-humanoid_walker",
+    "version": "1.0",
     "format": "json",
     "dimensions": {
       "width": 13,
@@ -84,20 +84,17 @@
       [" "," "," "," "," "," "," "," "," "," "," "]
     ],
     "interactables": [
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" ","noisetorus:90"," "," "," ","dark_sphere"," "," "," "," "," "," "," "],
-      [" "," "," "," "," ","noiselayers:0:20"," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "]
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," ","noisetorus"," "," "," "," "," "],
+      [" "," "," "," "," ","noiselayers:0:20"," "," "," "," "," "],
+      [" "," "," "," "," ","dark_sphere"," "," "," "," "," "],
+      [" "," "," "," "," "," "," ",""," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "]
     ]
   }
 }

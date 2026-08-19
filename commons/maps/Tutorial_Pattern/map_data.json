@@ -1,569 +1,112 @@
 {
-	"map_info": {
-		"description": "Pattern Recognition - learn to see shapes and sequences in array structures\n\n[Placement applied humanoid_walker engine \u2014 constraint 0.824\u21920.926, walkability 0.410\u21920.413]",
-		"dimensions": {
-			"depth": 13.0,
-			"max_height": 3.0,
-			"width": 10.0
-		},
-		"format": "json",
-		"lookup_name": "Tutorial_Pattern",
-		"metadata": {
-			"category": "tutorial",
-			"difficulty": "beginner",
-			"estimated_time": "3-4 minutes",
-			"learning_objectives": [
-				"Pattern recognition in arrays",
-				"Checkerboard indexing",
-				"Wave patterns",
-				"Visual array relationships"
-			]
-		},
-		"name": "Tutorial_Pattern",
-		"title": "Patterns as Array Equations",
-		"version": "placed-humanoid_walker"
-	},
-	"utility_definitions": {
-		"s": {
-			"properties": {
-				"height": 5.5
-			}
-		},
-		"t": {
-			"description": "Continue to the disco floor",
-			"name": "Next Lesson",
-			"properties": {
-				"action": "next_in_sequence"
-			},
-			"type": "teleporter"
-		}
-	},
-	"documentation": {
-		"key_elements": [
-			"Spawn at north edge with overview of pattern displays",
-			"`pattern_tile_puzzle#cursor` - create patterns with live index math visualization",
-			"`pattern_tile_mirror` - kaleidoscope symmetry from array reflections",
-			"`index_visualizer` - shows position as [row, col] indices",
-			"`pattern_tile_puzzle#p4m#cursor` - square lattice wallpaper group with cursor",
-			"`pulsar_compact` - Joy Division's Unknown Pleasures - arrays as art"
-		],
-		"layout": "10x10 observation platform with pattern visualization grids",
-		"objective": "Teach players to recognize patterns in array data before encountering the reactive disco floor",
-		"summary": "Tutorial_Pattern - Array Patterns"
-	},
-	"lighting": {
-		"ambient_color": [
-			0.35,
-			0.35,
-			0.45
-		],
-		"ambient_energy": 0.7,
-		"directional_light": {
-			"color": [
-				1.0,
-				0.95,
-				0.9
-			],
-			"direction": [
-				-0.3,
-				-0.7,
-				-0.3
-			],
-			"enabled": true,
-			"energy": 1.0
-		}
-	},
-	"settings": {
-		"auto_reveal_on_entry": false,
-		"background": {
-			"color": [
-				0.25,
-				0.3,
-				0.5
-			],
-			"type": "sky"
-		},
-		"cube_size": 1.0,
-		"enable_physics": true,
-		"gutter": 0.0,
-		"initial_tile_visibility": "all_visible",
-		"show_grid": true,
-		"special_instructions": "Watch the cursor reveal WHY patterns repeat: position % size = source. Drag color cubes to paint tiles. Arrays as function: index \u2192 value."
-	},
-	"layers": {
-		"structure": [
-			[
-				"1",
-				"1",
-				"2",
-				"2",
-				"2",
-				"2",
-				"2",
-				"2",
-				"2",
-				"2"
-			],
-			[
-				"2",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"2"
-			],
-			[
-				"2",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"2"
-			],
-			[
-				"2",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"2"
-			],
-			[
-				"2",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"2"
-			],
-			[
-				"2",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"2"
-			],
-			[
-				"2",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"2"
-			],
-			[
-				"2",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"2"
-			],
-			[
-				"2",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"2"
-			],
-			[
-				"2",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"7_1_elementary_ca_vr",
-				"1",
-				"2"
-			],
-			[
-				"2",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"2"
-			],
-			[
-				"3",
-				"3",
-				"3",
-				"3",
-				"3",
-				"0",
-				"3",
-				"3",
-				"3",
-				"3"
-			],
-			[
-				"2",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"2"
-			]
-		],
-		"utilities": [
-			[
-				"s",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				"t",
-				" ",
-				" ",
-				" ",
-				"sp"
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			]
-		],
-		"interactables": [
-			[
-				" ",
-				"panel_bridge_loom:0:-0-49#shafts:8",
-				"script_runner:0:-0.5",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				"pattern_studio_plate:0:-0.45",
-				" ",
-				" ",
-				"pattern_maker_station:0:-0.49",
-				" ",
-				" "
-			],
-			[
-				" ",
-				"pattern_tile_plate:180:-0.49#p4m",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				"dark_sphere",
-				"pattern_tile_mirror:0:-0.5",
-				"pattern_tile_puzzle:0:-0.5",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				"grid_model:180:-0.8",
-				"pulsar_compact:0:-0.5",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			]
-		]
-	}
+  "map_info": {
+    "description": "Pattern Recognition - learn to see shapes and sequences in array structures",
+    "dimensions": {
+      "depth": 13.0,
+      "max_height": 3.0,
+      "width": 10.0
+    },
+    "format": "json",
+    "lookup_name": "Tutorial_Pattern",
+    "metadata": {
+      "category": "tutorial",
+      "difficulty": "beginner",
+      "estimated_time": "3-4 minutes",
+      "learning_objectives": ["Pattern recognition in arrays","Checkerboard indexing","Wave patterns","Visual array relationships"]
+    },
+    "name": "Tutorial_Pattern",
+    "title": "Patterns as Array Equations",
+    "version": "1.0"
+  },
+  "utility_definitions": {
+    "s": {
+      "properties": {
+        "height": 5.5
+      }
+    },
+    "t": {
+      "description": "Continue to the disco floor",
+      "name": "Next Lesson",
+      "properties": {
+        "action": "next_in_sequence"
+      },
+      "type": "teleporter"
+    }
+  },
+  "documentation": {
+    "key_elements": ["Spawn at north edge with overview of pattern displays","`pattern_tile_puzzle#cursor` - create patterns with live index math visualization","`pattern_tile_mirror` - kaleidoscope symmetry from array reflections","`index_visualizer` - shows position as [row, col] indices","`pattern_tile_puzzle#p4m#cursor` - square lattice wallpaper group with cursor","`pulsar_compact` - Joy Division's Unknown Pleasures - arrays as art"],
+    "layout": "10x10 observation platform with pattern visualization grids",
+    "objective": "Teach players to recognize patterns in array data before encountering the reactive disco floor",
+    "summary": "Tutorial_Pattern - Array Patterns"
+  },
+  "lighting": {
+    "ambient_color": [0.35,0.35,0.45],
+    "ambient_energy": 0.7,
+    "directional_light": {
+      "color": [1.0,0.95,0.9],
+      "direction": [-0.3,-0.7,-0.3],
+      "enabled": true,
+      "energy": 1.0
+    }
+  },
+  "settings": {
+    "auto_reveal_on_entry": false,
+    "background": {
+      "color": [0.25,0.3,0.5],
+      "type": "sky"
+    },
+    "cube_size": 1.0,
+    "enable_physics": true,
+    "gutter": 0.0,
+    "initial_tile_visibility": "all_visible",
+    "show_grid": true,
+    "special_instructions": "Watch the cursor reveal WHY patterns repeat: position % size = source. Drag color cubes to paint tiles. Arrays as function: index → value."
+  },
+  "layers": {
+    "structure": [
+      ["1","1","2","2","2","2","2","2","2","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","7_1_elementary_ca_vr","1","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["3","3","3","3","3","0","3","3","3","3"],
+      ["2","1","1","1","1","1","1","1","1","2"]
+    ],
+    "utilities": [
+      ["s"," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," ","t"," "," "," ","sp"],
+      [" "," "," "," "," "," "," "," "," "," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" ",""," "," "," ",""," "," "," "," "],
+      [" "," "," "," ","grid_model:180:-0.8"," "," "," "," "," "],
+      [" "," "," "," ",""," "," ","pattern_studio_plate:0:-0.45"," "," "],
+      [" "," ","pattern_tile_plate:180:-0.49#p4m"," ","pattern_tile_plate:180:-0.49#p4m"," ","pattern_tile_plate:180:-0.49#p4m"," "," "," "],
+      [" "," "," "," ","dark_sphere"," "," "," "," "," "],
+      [" ",""," "," ","pattern_tile_mirror:0:-0.5"," "," "," "," "," "],
+      [" "," "," "," "," ","pattern_tile_puzzle:0:-0.5"," "," "," "," "],
+      [" "," ","pattern_maker_station:0:-0.49"," "," "," "," ","panel_bridge_loom:0:-0-49#shafts:8"," "," "],
+      [" "," "," ","script_runner:0:-0.5"," "," "," "," "," "," "],
+      [" "," "," "," "," "," ","pulsar_compact:0:-0.5"," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "]
+    ]
+  }
 }

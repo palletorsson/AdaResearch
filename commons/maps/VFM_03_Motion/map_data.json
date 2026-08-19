@@ -2,8 +2,8 @@
   "map_info": {
     "name": "VFM_03_Motion",
     "lookup_name": "VFM_03_Motion",
-    "description": "Vector & Forces Museum, hall 3 — Motion. The 8m bouncing-ball chamber and the trajectory station hold the open floor up front; the collision crasher prowls the far corner. Two gallery rows of plinths carry the motion, friction, and fluid-resistance interactables. Teleporter at the far end leads to the Fields hall.\n\n[Placement applied pacing_arc engine — constraint 0.846→0.839, walkability 0.549→0.589]",
-    "version": "placed-pacing_arc",
+    "description": "Vector & Forces Museum, hall 3 — Motion. The 8m bouncing-ball chamber and the trajectory station hold the open floor up front; the collision crasher prowls the far corner. Two gallery rows of plinths carry the motion, friction, and fluid-resistance interactables. Teleporter at the far end leads to the Fields hall.",
+    "version": "vfm-museum-1",
     "format": "json",
     "dimensions": {
       "width": 24,
@@ -82,24 +82,24 @@
       ["","","","","","","","","","","","","","","","","","","","","","","",""]
     ],
     "interactables": [
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," ","bouncing_ball:270"," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," ","example_3_3_pointing_in_the_direction_of_motion_vr:0","example_3_2_forces_with_arbitrary_angular_motion_vr:90","flocking_controls"," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," ","exercise_1_5_solution_accelerate_and_decelerate_vr"," "," "," ","VectorForces","ForceMagnitudeDemo:90","VectorMotion"," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," ","combined_forces_demo:270","trajectory_artifact","example_2_5_fluid_resistance_vr:270"," "," ","friction_ramp:0","collision_crasher:90"," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," ","newton_cradle:270"," "," ","exercise_1_3_solution_3_d_bouncing_ball_vr:270"," "," "," "," "," "," "," "," "," "," "," "," "]
+      ["","","","","","","","","","","","","","","","","","","","","","","",""],
+      ["","","","","","","","","","","","","","","","","","","","","","","",""],
+      ["","","","","","","","","","","","","","","","","","","","","","","",""],
+      ["","","","","","","","","","","","","","","","","","","","","","","",""],
+      ["","","","","bouncing_ball","","","","","","","","","","","","","trajectory_artifact","","","","","",""],
+      ["","","","","","","","","","","","","","","","","","","","","","","",""],
+      ["","","","","","","","","","","","","","","","","","","","","","","",""],
+      ["","","","","","","","","","","","","","","","","","","","","","","",""],
+      ["","","","","","","","","","","","","","","","","","","","","","","",""],
+      ["","","","","","","","","","","","","","","","","","","","","","","",""],
+      ["","","","VectorMotion","","","ForceMagnitudeDemo","","","VectorForces","","","exercise_1_3_solution_3_d_bouncing_ball_vr","","","exercise_1_5_solution_accelerate_and_decelerate_vr","","","example_2_5_fluid_resistance_vr","","","","",""],
+      ["","","","","","","","","","","","","","","","","","","","","","","",""],
+      ["","","","","","","","","","","","","","","","","","","","","","","",""],
+      ["","","","example_3_2_forces_with_arbitrary_angular_motion_vr","","","example_3_3_pointing_in_the_direction_of_motion_vr","","","friction_ramp","","","newton_cradle","","","combined_forces_demo","","","flocking_controls","","","","",""],
+      ["","","","","","","","","","","","","","","","","","","","","","","",""],
+      ["","","","","","","","","","","","","","","","","","","","","","","",""],
+      ["","","","","","","","","","","","","","","","","","","","","","collision_crasher","",""],
+      ["","","","","","","","","","","","","","","","","","","","","","","",""]
     ]
   }
 }

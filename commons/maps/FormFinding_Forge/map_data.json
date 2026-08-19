@@ -3,8 +3,8 @@
     "name": "Form-Finding: The Forge",
     "title": "Form-Finding: The Forge",
     "lookup_name": "FormFinding_Forge",
-    "description": "Shape your own. Feed raw matter into the forge and it descends toward its liveliest form and emerges; then prove it — stack the pieces until the whole system stops moving, the minimum reached by your own hand.\n\n[Placement applied humanoid_walker engine — constraint 0.925→0.969, walkability 0.407→0.586]",
-    "version": "placed-humanoid_walker",
+    "description": "Shape your own. Feed raw matter into the forge and it descends toward its liveliest form and emerges; then prove it — stack the pieces until the whole system stops moving, the minimum reached by your own hand.",
+    "version": "0.1",
     "format": "json",
     "dimensions": {
       "width": 12,
@@ -73,15 +73,15 @@
       [" "," "," "," "," "," "," "," "," "," "," "," "]
     ],
     "interactables": [
-      [" ","balance_puzzle:180"," "," "," "," "," "," "," "," "," "," "],
-      [" ","self_shaping_forge:270"," "," ","gradient_descent_optimizer:90"," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," ","self_shaping_forge"," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," ","balance_puzzle"," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," ","gradient_descent_optimizer"," "," "," "," "," ","science_screen"," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," ","science_screen:90"," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "]
     ]
   }

@@ -2,8 +2,8 @@
   "map_info": {
     "name": "04 Architecture",
     "lookup_name": "LSystems_Architecture",
-    "description": "Replace 'branch' with 'corridor' and a tree becomes a dungeon. Replace 'leaf' with 'room' and a forest becomes a city. The same grammar that grows plants can generate buildings, streets, and underground networks. Walk through the proof.\n\n[Placement applied humanoid_walker engine — constraint 0.960→0.946, walkability 0.336→0.390]",
-    "version": "placed-humanoid_walker",
+    "description": "Replace 'branch' with 'corridor' and a tree becomes a dungeon. Replace 'leaf' with 'room' and a forest becomes a city. The same grammar that grows plants can generate buildings, streets, and underground networks. Walk through the proof.",
+    "version": "1.0",
     "format": "json",
     "dimensions": {
       "width": 8,
@@ -88,12 +88,12 @@
     ],
     "interactables": [
       ["catalyst_vent:0:0#emit_interval_s:2.5#wave_size:3#start_delay_s:5.0#sequence:auto"," "," "," "," "," "," "," "],
-      [" ","dark_sphere","CityGenerator:270"," "," "," ","lsystem_dungeon:90"," "],
+      [" "," "," "," ","dark_sphere"," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," ","CityGenerator"," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," ","lsystem_dungeon"," "," "],
       [" "," "," ","catalyst_prompter_box:0:0#emergence:vent#sequence:auto#lease_s:45"," "," "," "," "],
       [" "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "]

@@ -3,8 +3,8 @@
     "name": "WaveFunctions_OscillationDriver",
     "title": "Spatial Sound Laboratory",
     "lookup_name": "WaveFunctions_AirMusic",
-    "description": "Basic Oscillation\n\n[Placement applied humanoid_walker engine — constraint 0.864→0.832, walkability 0.562→0.721]",
-    "version": "placed-humanoid_walker",
+    "description": "Basic Oscillation",
+    "version": "1.0",
     "format": "json",
     "dimensions": {
       "width": 14,
@@ -91,20 +91,18 @@
       [" "," "," "," "," "," "," "," "," "," "," "]
     ],
     "interactables": [
-      [" ","RackAmbientDrone:0:1","lab_table:90"," "," "," "," "," "," "," "," "," "," "," "],
-      ["air_music_display_case:0:1"," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," ","resonating_metallophone:90"," ","GlassRack:0:0.7#config:spiral_tube","dark_sphere"," "," "," "," "," "," "," "],
-      [" "," "," ","SystemsMusicTest:0:0.5:0.9"," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," ","BigPipeSystem:90:1#path:straight,straight,up,straight,down,straight,straight"," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "]
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" ","GlassRack:0:0.7#config:spiral_tube"," "," "," "," "," "," "," ","GlassRack:-90:0.7#config:fractional_distillation"," "],
+      [" ","lab_table"," "," "," "," "," "," "," ","lab_table"," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," ","dark_sphere"," "," "," "," "," "," "],
+      [" "," "," "," "," ","SystemsMusicTest:0:0.5:0.9"," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" ","RackAmbientDrone:0:1"," "," "," "," "," ","BigPipeSystem:90:1#path:straight,straight,up,straight,down,straight,straight"," "," "," "],
+      [" "," "," ","air_music_display_case:0:1"," ","resonating_metallophone"," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "]
     ]
   }
 }

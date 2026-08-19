@@ -3,8 +3,8 @@
     "title": "Beyond Binary",
     "name": "CA_BeyondBinary",
     "lookup_name": "CA_BeyondBinary",
-    "description": "Beyond binary states â€” hexagonal CA, growth networks, petri dish life simulation, and mold networks\n\n[Placement applied promenade engine — constraint 0.594→0.797, walkability 0.635→0.439]",
-    "version": "placed-promenade",
+    "description": "Beyond binary states â€” hexagonal CA, growth networks, petri dish life simulation, and mold networks",
+    "version": "1.0",
     "format": "json",
     "dimensions": {
       "width": 7,
@@ -62,7 +62,7 @@
       ["0","0","0","0","0","0","0"]
     ],
     "utilities": [
-      ["sp","s"," "," "," "," ","t"],
+      ["sp"," "," "," "," "," ","t"],
       [" "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "],
@@ -72,15 +72,12 @@
       [" "," "," "," "," "," "," "]
     ],
     "interactables": [
+      ["mold_network"," "," "," "," "," "," "],
+      [" "," "," ","game_of_life_petri:0:0.5:1"," ","science_screen:180:1.5#mode:grid"," "],
+      [" "," "," ","dark_sphere"," "," "," "],
+      [" "," "," ","hexagon_ca_vr"," "," "," "],
+      [" "," ","ca_growth_network"," "," "," "," "],
       [" "," "," "," "," "," "," "],
-      [" ","science_screen:180:1.5#mode:grid"," ","ca_growth_network:90"," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," ","mold_network:270"," "," "," "," "],
-      [" "," "," "," ","game_of_life_petri:0:0.5:1"," "," "],
-      [" "," ","hexagon_ca_vr"," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," ","dark_sphere"," "," "],
       [" "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "]
     ]

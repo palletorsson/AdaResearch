@@ -1,6 +1,6 @@
 {
   "map_info": {
-    "description": "Forces compose as vectors. Walk inside a room-scale vector grid to feel how A + B = C. Then see force composition, work-energy, and momentum conservation in action.\n\n[Placement applied pacing_arc engine — constraint 0.820→0.914, walkability 0.620→0.730]",
+    "description": "Forces compose as vectors. Walk inside a room-scale vector grid to feel how A + B = C. Then see force composition, work-energy, and momentum conservation in action.",
     "dimensions": {
       "depth": 16,
       "max_height": 3,
@@ -17,7 +17,7 @@
     },
     "name": "Forces Composition: Superposition and Energy",
     "title": "Superposition and Energy",
-    "version": "placed-pacing_arc"
+    "version": "2.0"
   },
   "utility_definitions": {
     "s": {
@@ -97,17 +97,17 @@
       [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," ","vector_addition_walk:90"," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," ","VectorBasics"," "," "," "," ","3t:Superposition"," "," "," "," "," ","basis_vectors_rig:180:-0.5"," "," "," "," "],
+      [" "," "," ","combined_forces_demo"," "," "," "," "," "," "," "," "," "," "," "," ","work_energy_demo"," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," ","dark_sphere"," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," ","combined_forces_demo:90"," ","momentum_collision"," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," ","catalyst_target#shape:cube"," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," ","VectorBasics"," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," ","force_field_visualizer:90"," ","work_energy_demo"," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," ","basis_vectors_rig:180:-0.5"," ","proximity_spawner#type:kaleidocycle_enemy"," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," ","vector_addition_walk"," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," ","momentum_collision"," "," "," "," "," "," "," "," "," "," "," ","force_field_visualizer"," "," "," "," "],
+      [" ","catalyst_target#shape:cube"," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," ","catalyst_target#shape:cube"," "],
+      [" "," "," "," "," "," "," "," "," ","dark_sphere"," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," ","proximity_spawner#type:kaleidocycle_enemy"," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "]
     ]

@@ -2,8 +2,8 @@
   "map_info": {
     "name": "Tutorial_Row",
     "lookup_name": "Tutorial_Row",
-    "description": "Y-axis column navigation - learn forward/backward movement in 3D space\n\n[Placement applied promenade engine — constraint 0.934→0.943, walkability 0.416→0.450]",
-    "version": "placed-promenade",
+    "description": "Y-axis column navigation - learn forward/backward movement in 3D space",
+    "version": "1.0",
     "format": "json",
     "dimensions": {
       "width": 7,
@@ -86,13 +86,13 @@
     ],
     "interactables": [
       [" "," "," "," "," "," "," "],
-      [" "," ","xyz_coordinates:90"," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" ","column_3_z"," "," "," "," "," "],
       [" "," "," "," "," "," "," "],
       [" "," ","dark_sphere"," "," "," "," "],
-      [" "," ","column_3_z:90"," "," "," "," "],
       [" "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
+      [" "," ","xyz_coordinates"," "," "," "," "],
       [" "," "," "," "," "," "," "]
     ]
   }

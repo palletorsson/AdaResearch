@@ -3,9 +3,9 @@
     "name": "Fractal_KochSierpinski",
     "lookup_name": "Fractal_KochSierpinski",
     "title": "Infinite Perimeter, Fractal Dimension",
-    "description": "Koch curve and Sierpinski triangle - infinite perimeter, fractal dimension D between integers\n\n[Placement applied humanoid_walker engine — constraint 0.707→0.918, walkability 0.272→0.652]",
+    "description": "Koch curve and Sierpinski triangle - infinite perimeter, fractal dimension D between integers",
     "manual_file": "res://commons/context/clipboard/tutorial_text/fractals_axioms.md",
-    "version": "placed-humanoid_walker",
+    "version": "1.0",
     "format": "json",
     "dimensions": {
       "width": 11,
@@ -76,14 +76,14 @@
     ],
     "interactables": [
       [" "," "," "," "," "," "," "," "," "," "," "],
-      ["cube_bookshelf"," "," ","dark_sphere","box_counting_dimension","sierpinski_pyramid:90"," "," "," "," "," "],
-      ["science_screen:180:1.5#mode:trace"," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," ",""," "," "],
+      ["cube_cabin"," "," "," "," ","dark_sphere"," "," "," "," "," "],
+      [" "," "," "," "," ","fractal_koch_curve"," "," "," ","science_screen:180:1.5#mode:trace"," "],
+      [" ","recursion_observatory:0:0"," "," "," ","koch_curve_3d:0:-0.5"," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," ","sierpinski_triangle:180:2"," "],
+      [" "," "," ","cube_bookshelf"," "," "," "," ","box_counting_dimension"," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "],
-      [" ","recursion_observatory:0:0"," "," "," "," "," ","fractal_koch_curve"," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" ","sierpinski_triangle:180:2"," "," "," ","cube_cabin","koch_curve_3d:0:-0.5"," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "]
+      [" "," "," "," "," ","sierpinski_pyramid"," "," "," "," "," "]
     ]
   }
 }

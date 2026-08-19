@@ -3,8 +3,8 @@
     "name": "Symmetry: The Group",
     "title": "Symmetry: The Group",
     "lookup_name": "Symmetry_Group",
-    "description": "Closure. The complete set of moves that leave a pattern unchanged is a GROUP — and the same group wears opposed ideologies: Bauhaus discipline, Memphis refusal.\n\n[Placement applied humanoid_walker engine — constraint 0.929→0.973, walkability 0.505→0.623]",
-    "version": "placed-humanoid_walker",
+    "description": "Closure. The complete set of moves that leave a pattern unchanged is a GROUP — and the same group wears opposed ideologies: Bauhaus discipline, Memphis refusal.",
+    "version": "0.1",
     "format": "json",
     "dimensions": {
       "width": 12,
@@ -74,14 +74,14 @@
     ],
     "interactables": [
       [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" ","loom_bolt_memphis_p4g","pattern_artifact:90"," "," "," "," "," "," ","pattern_maker_station:90"," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," ","pattern_maker_station"," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," ","loom_bolt_memphis_p4g"," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," ","pattern_artifact"," "," "," "," "," ","science_screen"," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," ","science_screen:90"," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "]
     ]
   }

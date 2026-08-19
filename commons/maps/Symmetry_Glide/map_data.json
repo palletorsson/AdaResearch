@@ -3,8 +3,8 @@
     "name": "Symmetry: The Glide",
     "title": "Symmetry: The Glide",
     "lookup_name": "Symmetry_Glide",
-    "description": "The sneaky symmetry: reflect, then slide. Footprints in snow obey it; so does the Escher mill with its off-center mirrors.\n\n[Placement applied humanoid_walker engine — constraint 1.000→0.950, walkability 0.473→0.990]",
-    "version": "placed-humanoid_walker",
+    "description": "The sneaky symmetry: reflect, then slide. Footprints in snow obey it; so does the Escher mill with its off-center mirrors.",
+    "version": "0.1",
     "format": "json",
     "dimensions": {
       "width": 12,
@@ -75,13 +75,13 @@
     "interactables": [
       [" "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," ","mill_escher_p4g"," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," ","loom_escher_mirror"," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," ","pattern_tile_brick"," "," "," ","pattern_tile_herringbone"," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," ","mill_escher_p4g","loom_escher_mirror","pattern_tile_brick:90","pattern_tile_herringbone:90"," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "]
     ]
   }

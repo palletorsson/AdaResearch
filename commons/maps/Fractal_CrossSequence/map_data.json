@@ -3,7 +3,7 @@
     "name": "Fractal_CrossSequence",
     "lookup_name": "Fractal_CrossSequence",
     "title": "Fractal_CrossSequence",
-    "description": "Cross-sequence synthesis - stochastic trees, evolutionary algorithms, cellular automata, and space-filling curves (Hilbert/Peano)\n\n[Placement applied promenade engine — constraint 0.682→0.757, walkability 0.501→0.617]\n\n[Placement applied promenade engine — constraint 0.757→0.757, walkability 0.617→0.635]",
+    "description": "Cross-sequence synthesis - stochastic trees, evolutionary algorithms, cellular automata, and space-filling curves (Hilbert/Peano)\n\n[Placement applied promenade engine — constraint 0.682→0.757, walkability 0.501→0.617]",
     "version": "placed-promenade",
     "format": "json",
     "dimensions": {
@@ -78,12 +78,12 @@
       [" "," "," "," "," "," "," "]
     ],
     "interactables": [
-      [" ","cellular_automata_3d_stacked:90"," "," "," "," "," "],
-      [" "," "," ","Hilbert3D:90"," "," "," "],
-      [" "," ","space_filling_curve_gallery:90"," "," "," "," "],
+      [" ","cellular_automata_3d_stacked"," "," "," "," "," "],
+      [" "," "," ","Hilbert3D"," "," "," "],
+      [" "," ","space_filling_curve_gallery"," "," "," "," "],
       [" "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "],
-      [" "," ","dark_sphere","fractal_stochastic_tree"," "," "," "],
+      [" "," "," ","dark_sphere","fractal_stochastic_tree"," "," "],
       [" "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "]

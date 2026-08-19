@@ -3,8 +3,8 @@
     "name": "Form-Finding: The Descent",
     "title": "Form-Finding: The Descent",
     "lookup_name": "FormFinding_Descent",
-    "description": "Why does the marble come to rest at the bottom of the bowl and nowhere else? Form is the answer to a minimization — and the gradient is the arrow that always points downhill.\n\n[Placement applied humanoid_walker engine — constraint 0.834→0.971, walkability 0.474→0.554]",
-    "version": "placed-humanoid_walker",
+    "description": "Why does the marble come to rest at the bottom of the bowl and nowhere else? Form is the answer to a minimization — and the gradient is the arrow that always points downhill.",
+    "version": "0.1",
     "format": "json",
     "dimensions": {
       "width": 12,
@@ -74,14 +74,14 @@
     ],
     "interactables": [
       [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" ","gradient_descent"," "," "," ","descent_marble_toy:90","gradient_descent_well"," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," ","descent_marble_toy"," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," ","gradient_descent"," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," ","gradient_descent_well"," "," "," "," "," ","science_screen"," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," ","science_screen:90"," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "]
     ]
   }

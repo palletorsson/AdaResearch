@@ -3,8 +3,8 @@
     "name": "Random: Entropy",
     "title": "Random_Entropy",
     "lookup_name": "Random_Entropy",
-    "description": "The entropy pocket gets its own room. Surprise, measured: the Shannon meter reads disorder in bits at the center; a jar of order decays in your hand; hardware entropy leaks; true and pseudo randomness stand side by side for comparison. At the dark end, a sphere you cannot predict and butterflies that will not repeat. Entropy is not mess - it is how much you do not know yet.\n\n[Placement applied humanoid_walker engine — constraint 0.576→0.902, walkability 0.650→0.534]",
-    "version": "placed-humanoid_walker",
+    "description": "The entropy pocket gets its own room. Surprise, measured: the Shannon meter reads disorder in bits at the center; a jar of order decays in your hand; hardware entropy leaks; true and pseudo randomness stand side by side for comparison. At the dark end, a sphere you cannot predict and butterflies that will not repeat. Entropy is not mess - it is how much you do not know yet.",
+    "version": "0.1",
     "format": "json",
     "dimensions": {
       "width": 16,
@@ -74,15 +74,15 @@
     ],
     "interactables": [
       [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" ","trng_vs_prng:180"," "," "," ","random_butterflies:90","dark_sphere"," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," ","entropy_axiom:90"," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," ","entropy_jar"," "," ","hardware_entropy_decay"," "," ","trng_vs_prng"," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," ","entropy_jar:90"," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," ","hardware_entropy_decay:90"," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," ","science_screen:180"," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," ","shannon_entropy_meter:90"," "," "," "," "," "," "," "," "]
+      [" "," "," "," ","shannon_entropy_meter"," "," "," "," "," "," "," ","dark_sphere"," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," ","random_butterflies"," "," "," "],
+      [" "," "," "," "," "," ","entropy_axiom"," "," ","science_screen:180"," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "]
     ]
   }
 }

@@ -3,7 +3,7 @@
     "name": "Random_Rotate_Random_XYZ",
     "title": "Random_Rotate_Random_XYZ",
     "lookup_name": "Random_Rotate_Random_XYZ",
-    "description": "12x12 grid with 8x8 middle area for algorithm demonstrations\n\n[Placement applied humanoid_walker engine — constraint 0.708→0.891, walkability 0.583→0.893]\n\n[Placement applied humanoid_walker engine — constraint 0.891→0.891, walkability 0.747→0.893]",
+    "description": "12x12 grid with 8x8 middle area for algorithm demonstrations\n\n[Placement applied humanoid_walker engine — constraint 0.708→0.891, walkability 0.583→0.893]",
     "version": "placed-humanoid_walker",
     "format": "json",
     "dimensions": {
@@ -95,7 +95,7 @@
     ],
     "interactables": [
       [" "," "," "," "," "," "," "," "," "," "," "," "],
-      ["hardware_entropy_decay:0"," "," "," "," "," "," "," "," "," "," "," "],
+      ["hardware_entropy_decay"," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
@@ -104,7 +104,7 @@
       [" "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," ","Random_Rotate_Random_XYZ:90"," ","dark_sphere","random_decay_multimesh"," "," "," "," "," "],
+      [" "," "," ","Random_Rotate_Random_XYZ"," ","dark_sphere","random_decay_multimesh"," "," "," "," "," "],
       [" "," "," ","RotateGridCubes:0:-0.5"," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],

@@ -3,8 +3,8 @@
     "name": "Symmetry: Translation",
     "title": "Symmetry: Translation",
     "lookup_name": "Symmetry_Translation",
-    "description": "The tile repeats. A loom pulls one motif across the floor into a carpet; a 10 PRINT textile weaves an endless bolt from one coin-flip inside a symmetry machine.\n\n[Placement applied humanoid_walker engine — constraint 0.929→0.978, walkability 0.581→0.617]",
-    "version": "placed-humanoid_walker",
+    "description": "The tile repeats. A loom pulls one motif across the floor into a carpet; a 10 PRINT textile weaves an endless bolt from one coin-flip inside a symmetry machine.",
+    "version": "0.1",
     "format": "json",
     "dimensions": {
       "width": 12,
@@ -74,14 +74,14 @@
     ],
     "interactables": [
       [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" ","ten_print_textile:270"," "," ","pattern_loom:90","pattern_tile_puzzle:90"," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," ","pattern_tile_puzzle"," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," ","pattern_loom"," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," ","ten_print_textile"," "," "," "," "," ","science_screen"," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," ","science_screen:90"," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "]
     ]
   }

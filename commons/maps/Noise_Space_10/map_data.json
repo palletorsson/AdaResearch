@@ -3,8 +3,8 @@
     "name": "Noise Space: Interactive Noise Exploration",
     "title": "Noise Parameter Space",
     "lookup_name": "Noise_Space_10",
-    "description": "An interactive space for exploring noise parameters, frequencies, and amplitudes. Experiment with different noise types and see how parameter changes affect the resulting patterns.\n\n[Placement applied hybrid engine — constraint 0.987→1.000, walkability 0.628→0.890]",
-    "version": "placed-hybrid",
+    "description": "An interactive space for exploring noise parameters, frequencies, and amplitudes. Experiment with different noise types and see how parameter changes affect the resulting patterns.",
+    "version": "1.0",
     "format": "json",
     "dimensions": {
       "width": 13,
@@ -74,7 +74,7 @@
       ["2","2","1","1","1","1","1","1","1","1","1","2","2"]
     ],
     "utilities": [
-      ["sp","s"," "," "," "," "," "," "," "," "," "," ","an:-90"],
+      ["sp"," "," "," "," "," "," "," "," "," "," "," ","an:-90"],
       [" "," "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "," "],
@@ -96,12 +96,13 @@
       [" "," "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," ","noise_space:90"," "," "," "," "," "," "," "],
+      [" "," "," "," "," ","dark_sphere"," "," "," "," "," "," "," "],
+      [" "," "," "," "," ","noise_space"," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," ",""," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," ","dark_sphere"," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "," "]

@@ -2,8 +2,8 @@
   "map_info": {
     "name": "Patterns",
     "lookup_name": "Array_Patterns",
-    "description": "Pattern making through arrays. Small tiles become carpets. Handmade meets computational - the mathematics of textiles, tiles, and wallpaper.\n\n[Placement applied humanoid_walker engine — constraint 0.705→0.820, walkability 0.599→0.693]",
-    "version": "placed-humanoid_walker",
+    "description": "Pattern making through arrays. Small tiles become carpets. Handmade meets computational - the mathematics of textiles, tiles, and wallpaper.",
+    "version": "1.0",
     "format": "json",
     "dimensions": {
       "width": 11,
@@ -89,16 +89,16 @@
       [" "," "," "," "," "," "," "," "," "," "," "]
     ],
     "interactables": [
-      [" ","panel_bridge_loom:90","tiling_demo:180:-1.6"," "," "," "," "," "," "," "," "],
-      ["science_screen:180:1.5#mode:grid"," "," "," "," "," ","pattern_tunnel_machine:0:0#tunnel_length:6"," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," ","pattern_tile_4x4:0:-0.5"," ","vr_tile_editor_mirror:0:-0.5"," ","pattern_tile_mirror:0:-0.5"," ","science_screen:180:1.5#mode:grid"," "],
       [" "," "," "," "," "," "," "," "," "," "," "],
-      [" ","pattern_tile_plate:0:-0.49#p4m"," "," ","dark_sphere"," "," "," "," "," "," "],
-      [" "," "," "," ","pattern_tile_mirror:0:-0.5"," "," ","vr_tile_editor_mirror:0:-0.5"," "," "," "],
+      [" "," "," ","tiling_demo:180:-1.6"," "," "," "," "," "," "," "],
+      [" "," "," "," "," ","dark_sphere"," ","pattern_tile_plate:0:-0.49#p4m"," "," "," "],
+      [" "," ","pattern_tunnel_machine:0:0#tunnel_length:6"," "," "," "," "," "," "," "," "],
+      [" "," "," ","panel_bridge_loom"," ","grid_model"," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "],
-      [" ","facade_grammar_demo:0:-0.6"," "," "," ","pattern_tile_4x4:0:-0.5","grid_model:90"," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," ","pattern_tile_brick:0:-0.5","pattern_tile_herringbone:0:-0.5"," "," "," "," "],
+      [" ",""," "," "," "," "," "," "," ","facade_grammar_demo:0:-0.6"," "],
+      [" "," "," ","pattern_tile_brick:0:-0.5"," "," "," ","pattern_tile_herringbone:0:-0.5"," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "]
     ]
   }
