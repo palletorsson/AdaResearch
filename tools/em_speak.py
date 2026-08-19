@@ -125,6 +125,57 @@ def draft(d: dict, node_filter: str = "") -> dict:
     return {"pearls": n_pearls, "says": n_says}
 
 
+def lines_for(d: dict, node: str) -> dict:
+    """A sentence per artifact for the side menu of /speak: the pearl's own line if
+    spoken (hand/claude), else the line this token has in any other pearl, else a
+    draft from its @identity truth or registry description. Covers every token of
+    the chapter's pearls AND every token of the chapter's maps/branches."""
+    seeded = next((t for t in d.get("trunk", []) if t.get("node") == node), {}) or {}
+    out: dict = {}
+    for p in seeded.get("pearls", []):
+        by = p.get("says_by") or {}
+        for tok, line in (p.get("says") or {}).items():
+            out.setdefault(tok, {"line": line, "by": by.get(tok, "hand"), "pearl": p.get("pearl")})
+        for tok in p.get("tokens", []):
+            out.setdefault(tok, {"line": "", "by": "", "pearl": p.get("pearl")})
+    for b in d.get("branches", []):
+        if b.get("anchor") == node and b.get("token"):
+            out.setdefault(b["token"], {"line": "", "by": "", "pearl": b.get("pearl", "")})
+    # drafts for the blanks, from the corpus
+    blanks = [t for t, v in out.items() if not v["line"]]
+    if blanks:
+        truths: dict = {}
+        try:
+            txt = subprocess.run([sys.executable, str(REPO / "tools" / "query_identities.py"), "truths"], capture_output=True, text=True, encoding="utf-8", errors="replace").stdout
+            for line in txt.splitlines():
+                m = re.match(r"^\s+([A-Za-z0-9_]+):\s+(.*)$", line)
+                if m:
+                    truths[m.group(1)] = m.group(2).strip()
+        except Exception:
+            pass
+        desc: dict = {}
+        for f in (REPO / "commons" / "artifacts" / "registry").glob("*.json"):
+            try:
+                doc = json.loads(f.read_text(encoding="utf-8"))
+            except Exception:
+                continue
+            def walk(o):
+                if isinstance(o, dict):
+                    for k, v in o.items():
+                        if isinstance(v, dict) and ("scene" in v or "lookup_name" in v):
+                            if v.get("description") and k not in desc:
+                                desc[k] = str(v["description"])
+                        else:
+                            walk(v)
+            walk(doc)
+        for t in blanks:
+            src = truths.get(t) or desc.get(t) or ""
+            line = _first_clause(src, 110)
+            if line:
+                out[t]["line"] = line; out[t]["by"] = "draft"
+    return out
+
+
 def export_md(d: dict) -> str:
     """The speak as a book: chapter line, then each pearl's line and its bodies' lines, in string order.
     Provenance in the margin so the book knows whose sentence it sets."""
@@ -168,10 +219,14 @@ def main() -> int:
     ap.add_argument("--by", default="hand", help="provenance of the lines written: hand (Palle) | claude")
     ap.add_argument("--chapter-speak", help="the CHAPTER's own line (hung first, on its first pearl's walls)")
     ap.add_argument("--export", help="write every chapter's speak as one markdown (the book's textD)")
+    ap.add_argument("--lines", metavar="NODE", help="JSON: every artifact the chapter knows -> {line, by, pearl} (hand/claude lines, else a draft from its truth/description)")
     ap.add_argument("--export-copy", help="a second path for the same markdown (the encyclopedia's public/)")
     a = ap.parse_args()
     d = json.loads(TRUNK.read_text(encoding="utf-8"))
     changed = False
+    if a.lines:
+        print(json.dumps(lines_for(d, a.lines), ensure_ascii=False))
+        return 0
     if a.export:
         md = export_md(d)
         for pth in [a.export, a.export_copy]:

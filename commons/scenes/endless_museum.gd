@@ -1581,54 +1581,79 @@ func _dress_lobby(seg: Node3D, solid: StaticBody3D, w: int, zbase: int, wall_col
 			_walk_erased[k] = "prop:pallet"
 	# THE ORIGIN WELL (Palle, 2026-08-19): "the foyer where we land is really the
 	# first capture … at 0,0,0 add a hole in the ground or whatever you need to
-	# place the point_zero artifact visibly in that space." The lobby's NW
-	# corner opens: the floor and the two walls step back a metre around the
-	# WORLD ORIGIN, a 3 x 3 m well a metre deep, Point Zero (origin) standing
-	# at exactly (0, 0, 0) — half below the floor line, the cube's centre on
-	# the floor plane — a rail at the edge, a light in the well. The walk map
-	# never had these cells; the deck collider still spans them, so nobody
-	# falls in (VR).
+	# place the point_zero artifact visibly in that space." and then: "make it
+	# possible to walk AROUND the foyer, the point zero." So the lobby's NW
+	# corner grows an ANNEX around the WORLD ORIGIN: a 2 x 2 m well a metre
+	# deep centred on (0,0,0) with a walkway a metre wide on all four sides,
+	# walls pushed out to x = -3 and z = -3, a rail round the well, a light in
+	# it, and Point Zero (origin) standing at exactly (0, 0, 0) — the cube's
+	# centre on the floor plane, half below. The deck collider spans the well
+	# too (nobody falls in, VR); the walk map gets the ring so the walker can
+	# circle it.
 	if _L("lobby", "origin_well", 1.0) > 0.5:
 		var well_mat := StandardMaterial3D.new()
 		well_mat.albedo_color = Color(0.09, 0.09, 0.11)
 		well_mat.roughness = 0.9
 		var wall_mat: Material = m_wall
-		# floor of the well, x -1..2, z -1..2, at y -1.0
-		_box(seg, Vector3(0.5, -1.1, 0.5), Vector3(3.0, 0.2, 3.0), Color(0.09, 0.09, 0.11), well_mat)
-		# the well's four faces below grade, and the two outer faces up to the wall head
-		_box(seg, Vector3(-1.0, -0.5, 0.5), Vector3(0.2, 1.0, 3.2), Color(0.12, 0.12, 0.14), well_mat)   # west, below
-		_box(seg, Vector3(0.5, -0.5, -1.0), Vector3(3.2, 1.0, 0.2), Color(0.12, 0.12, 0.14), well_mat)   # north, below
-		_box(seg, Vector3(2.0, -0.5, 0.5), Vector3(0.2, 1.0, 3.0), Color(0.12, 0.12, 0.14), well_mat)    # east face (under the lobby floor)
-		_box(seg, Vector3(0.5, -0.5, 2.0), Vector3(3.0, 1.0, 0.2), Color(0.12, 0.12, 0.14), well_mat)    # south face
-		_box(seg, Vector3(-1.0, WALL_H / 2.0, 0.5), Vector3(0.2, WALL_H, 3.2), wall_col, wall_mat)      # west wall, stepped out
-		_add_col(solid, Vector3(-1.0, WALL_H / 2.0, 0.5), Vector3(0.2, WALL_H, 3.2))
-		_box(seg, Vector3(0.5, WALL_H / 2.0, -1.0), Vector3(3.2, WALL_H, 0.2), wall_col, wall_mat)      # back wall, stepped out
-		_add_col(solid, Vector3(0.5, WALL_H / 2.0, -1.0), Vector3(3.2, WALL_H, 0.2))
-		# the rail at the edge of the lobby floor (two sides), with a collider
+		# the annex floor: cells x -3..1, z -3..1 (a 2 m walkway west and north, 1 m east
+		# and south), minus the well cells (-1..0, -1..0)
+		for ax in range(-3, 2):
+			for az in range(-3, 2):
+				if ax >= -1 and ax <= 0 and az >= -1 and az <= 0:
+					continue
+				_box(seg, Vector3(ax + 0.5, -0.1, az + 0.5), Vector3(1, 0.2, 1), Color(0.13, 0.13, 0.16), _sm("deck"))
+				_walk_cells[Vector2i(ax, zbase + az)] = true
+		_add_col(solid, Vector3(-0.5, -0.1, -0.5), Vector3(5.0, 0.2, 5.0))   # one slab under annex AND well
+		# a ceiling over the annex (em_detail's stops at x -1 / z 0): plaster slab at the soffit
+		_box(seg, Vector3(-0.5, WALL_H + 0.14 + 0.13, -0.5), Vector3(5.4, 0.26, 5.4), Color(0.9, 0.89, 0.86), _sm("ceiling"))
+		# the well: floor at -1.0, four faces below grade (x -1..1, z -1..1)
+		_box(seg, Vector3(0.0, -1.1, 0.0), Vector3(2.0, 0.2, 2.0), Color(0.09, 0.09, 0.11), well_mat)
+		for face in [[Vector3(-1.0, -0.5, 0.0), Vector3(0.2, 1.0, 2.2)], [Vector3(1.0, -0.5, 0.0), Vector3(0.2, 1.0, 2.2)],
+				[Vector3(0.0, -0.5, -1.0), Vector3(2.2, 1.0, 0.2)], [Vector3(0.0, -0.5, 1.0), Vector3(2.2, 1.0, 0.2)]]:
+			_box(seg, face[0], face[1], Color(0.12, 0.12, 0.14), well_mat)
+		# the annex walls: west x = -4 (z -4..2), north z = -4 (x -4..2), east x = 2 (z -4..-1), south z = 2 (x -4..-1)
+		var acells: Dictionary = {}
+		for wz in range(-4, 3):
+			_wall_at(seg, solid, acells, -4, wz, wall_col, m_wall, false)
+		for wx in range(-3, 3):
+			_wall_at(seg, solid, acells, wx, -4, wall_col, m_wall, false)
+		for wz2 in range(-3, 0):
+			_wall_at(seg, solid, acells, 2, wz2, wall_col, m_wall, false)
+		for wx2 in range(-3, 0):
+			_wall_at(seg, solid, acells, wx2, 2, wall_col, m_wall, false)
+		# the rail round the well (all four sides), with colliders
 		var rail_mat := StandardMaterial3D.new()
 		rail_mat.albedo_color = Color(0.2, 0.2, 0.22)
 		rail_mat.metallic = 0.6
 		rail_mat.roughness = 0.35
-		for r_box in [[Vector3(2.0, 0.55, 0.5), Vector3(0.04, 0.04, 3.0)], [Vector3(0.5, 0.55, 2.0), Vector3(3.0, 0.04, 0.04)],
-				[Vector3(2.0, 0.275, -0.95), Vector3(0.04, 0.55, 0.04)], [Vector3(2.0, 0.275, 1.95), Vector3(0.04, 0.55, 0.04)],
-				[Vector3(-0.95, 0.275, 2.0), Vector3(0.04, 0.55, 0.04)], [Vector3(0.5, 0.275, 2.0), Vector3(0.04, 0.55, 0.04)],
-				[Vector3(2.0, 0.275, 0.5), Vector3(0.04, 0.55, 0.04)]]:
+		for r_box in [[Vector3(-1.0, 0.55, 0.0), Vector3(0.04, 0.04, 2.1)], [Vector3(1.0, 0.55, 0.0), Vector3(0.04, 0.04, 2.1)],
+				[Vector3(0.0, 0.55, -1.0), Vector3(2.1, 0.04, 0.04)], [Vector3(0.0, 0.55, 1.0), Vector3(2.1, 0.04, 0.04)],
+				[Vector3(-1.0, 0.275, -1.0), Vector3(0.04, 0.55, 0.04)], [Vector3(1.0, 0.275, -1.0), Vector3(0.04, 0.55, 0.04)],
+				[Vector3(-1.0, 0.275, 1.0), Vector3(0.04, 0.55, 0.04)], [Vector3(1.0, 0.275, 1.0), Vector3(0.04, 0.55, 0.04)]]:
 			_box(seg, r_box[0], r_box[1], Color(0.2, 0.2, 0.22), rail_mat)
-		_add_col(solid, Vector3(2.0, 0.5, 0.5), Vector3(0.06, 1.0, 3.0))
-		_add_col(solid, Vector3(0.5, 0.5, 2.0), Vector3(3.0, 1.0, 0.06))
-		# a light in the well
+		_add_col(solid, Vector3(-1.0, 0.5, 0.0), Vector3(0.06, 1.0, 2.1))
+		_add_col(solid, Vector3(1.0, 0.5, 0.0), Vector3(0.06, 1.0, 2.1))
+		_add_col(solid, Vector3(0.0, 0.5, -1.0), Vector3(2.1, 1.0, 0.06))
+		_add_col(solid, Vector3(0.0, 0.5, 1.0), Vector3(2.1, 1.0, 0.06))
+		# a light in the well, a light over the annex
 		var wl := OmniLight3D.new()
 		wl.light_color = Color(0.95, 0.93, 0.85)
 		wl.light_energy = 1.6
 		wl.omni_range = 4.0
 		wl.position = Vector3(0.0, 0.6, 0.0)
 		seg.add_child(wl)
+		var al := OmniLight3D.new()
+		al.light_color = Color(0.95, 0.93, 0.88)
+		al.light_energy = 1.2
+		al.omni_range = 6.0
+		al.position = Vector3(0.0, 3.4, 0.0)
+		seg.add_child(al)
 		# POINT ZERO at the world origin — the body itself, exactly at (0, 0, 0)
 		var pz: Node3D = _lobby_piece(seg, "point_zero", Vector3(0.0, 0.0, 0.0), 0.0)
 		if pz != null:
 			pz.set_meta("em_point_zero", true)
-		# the walk map: the corner cells are not floor
-		for k in [Vector2i(0, zbase), Vector2i(1, zbase), Vector2i(0, zbase + 1), Vector2i(1, zbase + 1)]:
+		# the walk map: the well cells are not floor
+		for k in [Vector2i(-1, zbase - 1), Vector2i(0, zbase - 1), Vector2i(-1, zbase), Vector2i(0, zbase)]:
 			_walk_cells.erase(k)
 			_walk_erased[k] = "prop:origin_well"
 	# THE FOYER SPEAKS (Palle: "the space should map to the book"): the first
