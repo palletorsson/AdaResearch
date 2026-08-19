@@ -123,8 +123,11 @@ def pearl_walks(chapter: str, trunk: dict[str, Any] | None = None) -> list[dict[
         return []
     branches = [b for b in trunk.get("branches", []) if b.get("anchor") == chapter]
     walks: list[dict[str, Any]] = []
-    for p in node["pearls"]:
+    pearls_all = list(node["pearls"])
+    for pi, p in enumerate(pearls_all):
         name = p.get("pearl", "")
+        if p.get("join") and pi > 0:
+            continue                       # a page of the pearl before: dealt there (see below)
         hero = p.get("hero") or (p.get("tokens") or [""])[0]
         if not hero:
             continue
@@ -133,18 +136,39 @@ def pearl_walks(chapter: str, trunk: dict[str, Any] | None = None) -> list[dict[
             # branch or relation added — what is a line is in the hall, in that
             # order (tools/em_speak.py, /speak). Hand branches still ride.
             rows_o: list[dict[str, Any]] = []
+            foyer = set(p.get("foyer", []))
             for tok in p.get("tokens", []):
+                if tok in foyer:
+                    continue                       # the foyer's lines: placed by the lobby builder
                 rows_o.append({"lookup": tok, "walk_kind": "hero" if tok == hero else "sibling",
                                "why": f"a line of the {name} poem", "provenance": "hand", "space": "wall"})
             for b in branches:
                 if b.get("pearl") == name and b.get("provenance") == "hand" and b.get("token") and b["token"] not in p.get("tokens", []):
                     rows_o.append({"lookup": b["token"], "walk_kind": b.get("kind", "extends"), "why": b.get("why", ""), "provenance": "hand",
                                    "via": b.get("via", ""), "space": b.get("space", "wall")})
+            # the pages that join this pearl's hall: their lines follow, in order
+            pages = [{"pearl": name, "tokens": [r["lookup"] for r in rows_o]}]
+            rooms_total = int(p.get("rooms") or 0)
+            excl = set(p.get("excluded", []))
+            q_i = pi + 1
+            while q_i < len(pearls_all) and pearls_all[q_i].get("join"):
+                q = pearls_all[q_i]
+                q_foyer = set(q.get("foyer", []))
+                q_toks = [t for t in q.get("tokens", []) if t not in q_foyer]
+                for tok in q_toks:
+                    if tok in [r["lookup"] for r in rows_o]:
+                        continue
+                    rows_o.append({"lookup": tok, "walk_kind": "sibling", "why": f"a line of the {q.get('pearl')} page", "provenance": "hand", "space": "wall", "page": q.get("pearl")})
+                pages.append({"pearl": q.get("pearl"), "tokens": q_toks, "map": q.get("map", "")})
+                rooms_total += int(q.get("rooms") or 0)
+                excl |= set(q.get("excluded", []))
+                q_i += 1
+            excl -= {r["lookup"] for r in rows_o}     # a line of any page in this hall is never excluded by another page
             walks.append({"chapter": chapter, "pearl": name, "pearl_index": int(p.get("index", len(walks))), "map": p.get("map", ""),
-                          "rooms": p.get("rooms"), "exclude": list(p.get("excluded", [])), "ordered": True,
+                          "rooms": (rooms_total or p.get("rooms")), "exclude": sorted(excl), "ordered": True, "pages": pages,
                           "hero": hero, "hand_branches": sum(1 for r in rows_o if r["walk_kind"] not in ("hero", "sibling")),
                           "cast": [r["lookup"] for r in rows_o], "rows": rows_o,
-                          "why": f"pearl {name}: the poem's order, {len(rows_o)} lines"})
+                          "why": f"pearl {name}: the poem's order, {len(rows_o)} lines" + (f", {len(pages)} pages" if len(pages) > 1 else "")})
             continue
         rows: list[dict[str, Any]] = [{"lookup": hero, "walk_kind": "hero", "why": f"the hero of {name} ({p.get('hero_by', '')})", "provenance": "trunk", "space": "wall"}]
         seen = {hero}

@@ -1671,13 +1671,15 @@ func _dress_lobby(seg: Node3D, solid: StaticBody3D, w: int, zbase: int, wall_col
 	var intro: String = String(sp0.get("speak", ""))
 	if intro != "" and _L("lobby", "intro_text", 1.0) > 0.5:
 		var it := Label3D.new()
-		it.text = intro
+		# a stanza break: autowrap drops an empty line, so the break is a line of one
+		# no-break space — and the page is set without autowrap (the poem's own breaks)
+		it.text = intro.replace("\n\n", "\n\u00a0\n")
 		if ResourceLoader.exists("res://commons/font/Roboto-VariableFont_wdth,wght.ttf"):
 			it.font = load("res://commons/font/Roboto-VariableFont_wdth,wght.ttf")
 		it.font_size = 64
 		it.pixel_size = 0.0016
 		it.width = 2.6 / 0.0016
-		it.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		it.autowrap_mode = TextServer.AUTOWRAP_OFF if intro.contains("\n") else TextServer.AUTOWRAP_WORD_SMART
 		it.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 		it.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		it.modulate = Color(0.14, 0.13, 0.12)
@@ -2340,7 +2342,7 @@ func _build_segment() -> void:
 	_add_col(solid, Vector3(LOBBY_W / 2.0, -0.1, VESTIBULE_H / 2.0),
 		Vector3(LOBBY_W, 0.2, VESTIBULE_H))
 	# the scale figure stands clear of the origin well in the foyer (it stood on its rail)
-	_stamp_scale_figure(seg, Vector3(2.0 if not foyer_well else 4.6, 0.0, VESTIBULE_H * 0.5 + (1.4 if foyer_well else 0.0)), zbase)
+	_stamp_scale_figure(seg, Vector3(2.0 if not foyer_well else 13.2, 0.0, VESTIBULE_H * 0.5 + (1.3 if foyer_well else 0.0)), zbase)
 	for zr in range(VESTIBULE_H):
 		for sx in [0, LOBBY_W - 1]:
 			if foyer_well and sx == 0 and zr <= 1:
@@ -3009,10 +3011,19 @@ func _speak_lines(chapter: String, pearl: String) -> Array:
 	var text: String = String(sp.get("speak", ""))
 	if not show_drafts and String(sp.get("speak_by", "hand")) != "hand":
 		text = ""
+	# a pearl whose poem starts in the FOYER (Palle's page 1): the page stands on
+	# the foyer wall; the hall's paintings carry the hall's lines, not the page
+	var foyer: Array = sp.get("foyer", [])
+	if not foyer.is_empty():
+		text = String(sp.get("page2", ""))      # page 1 is on the foyer wall; the hall opens with page 2
 	# the CHAPTER's line hangs first, on its first pearl's walls
 	if bool(sp.get("first", false)) and String(sp.get("chapter_speak", "")) != "" 			and (show_drafts or String(sp.get("chapter_speak_by", "hand")) == "hand"):
 		text = String(sp["chapter_speak"]) + ". " + text
-	for piece in text.replace(";", ".").replace(": ", ". ").split("."):
+	# a poem written in LINES keeps its lines; prose splits on its stops
+	var pieces: PackedStringArray = text.split("
+") if text.contains("
+") else text.replace(";", ".").replace(": ", ". ").split(".")
+	for piece in pieces:
 		var p: String = String(piece).strip_edges()
 		if p.length() >= 3 and not seen.has(p.to_lower()):
 			seen[p.to_lower()] = true
@@ -3020,12 +3031,30 @@ func _speak_lines(chapter: String, pearl: String) -> Array:
 	var says: Dictionary = sp.get("says", {})
 	var says_by: Dictionary = sp.get("says_by", {})
 	for tok in says:
+		if foyer.has(tok):
+			continue                        # the foyer's lines are on the page, not the paintings
 		if not show_drafts and String(says_by.get(tok, "hand")) != "hand":
 			continue
 		var line: String = String(says[tok]).strip_edges()
 		if line != "" and not seen.has(line.to_lower()):
 			seen[line.to_lower()] = true
 			out.append(line)
+	# the next pages in this hall: the page's line, then its bodies' lines
+	for pg in sp.get("pages", []):
+		var pgd: Dictionary = pg
+		var ptext: String = String(pgd.get("speak", ""))
+		var ppieces: PackedStringArray = ptext.split("\n") if ptext.contains("\n") else ptext.replace(";", ".").split(".")
+		for piece in ppieces:
+			var pp: String = String(piece).strip_edges()
+			if pp.length() >= 3 and not seen.has(pp.to_lower()):
+				seen[pp.to_lower()] = true
+				out.append(pp)
+		var psays: Dictionary = pgd.get("says", {})
+		for tok in pgd.get("tokens", []):
+			var l2: String = String(psays.get(tok, "")).strip_edges()
+			if l2 != "" and not seen.has(l2.to_lower()):
+				seen[l2.to_lower()] = true
+				out.append(l2)
 	return out
 
 func _number_places(seg: Node3D, chapter: String, pearl: String) -> void:
@@ -6396,8 +6425,24 @@ func _speak_for(chapter: String, pearl: String) -> Dictionary:
 					if String((p as Dictionary).get("pearl", "")) == pearl:
 						out["speak"] = String((p as Dictionary).get("speak", ""))
 						out["speak_by"] = String((p as Dictionary).get("speak_by", "hand"))
+						out["foyer"] = (p as Dictionary).get("foyer", []) if (p as Dictionary).get("foyer") is Array else []
+						out["page2"] = String((p as Dictionary).get("page2", ""))
 						out["says"] = (p as Dictionary).get("says", {}) if (p as Dictionary).get("says") is Dictionary else {}
 						out["says_by"] = (p as Dictionary).get("says_by", {}) if (p as Dictionary).get("says_by") is Dictionary else {}
+				# the pages that share this pearl's hall (join): their lines follow
+				var after: bool = false
+				for p2 in (t as Dictionary).get("pearls", []):
+					if String((p2 as Dictionary).get("pearl", "")) == pearl:
+						after = true
+						continue
+					if after and bool((p2 as Dictionary).get("join", false)):
+						var pg: Dictionary = p2
+						var pages: Array = out.get("pages", [])
+						pages.append({"pearl": String(pg.get("pearl", "")), "speak": String(pg.get("speak", "")),
+							"says": pg.get("says", {}) if pg.get("says") is Dictionary else {}, "tokens": pg.get("tokens", [])})
+						out["pages"] = pages
+					elif after:
+						break
 	_speak_cache[key] = out
 	return out
 const WALK_SPACES := ["wall", "alcove", "room", "balcony"]   # balcony: the hallway extends into the body (hand ask)

@@ -543,7 +543,7 @@
   {
    "anchor": "primitives",
    "kind": "extends",
-   "pearl": "point",
+   "pearl": "lines",
    "provenance": "derived",
    "space": "wall",
    "space_by": "heuristic",
@@ -9420,7 +9420,7 @@
   {
    "anchor": "primitives",
    "kind": "synthesizes",
-   "pearl": "point",
+   "pearl": "lines",
    "provenance": "derived",
    "space": "alcove",
    "space_by": "heuristic",
@@ -11811,7 +11811,7 @@
   {
    "anchor": "primitives",
    "kind": "varies",
-   "pearl": "point",
+   "pearl": "lines",
    "provenance": "derived",
    "space": "wall",
    "space_by": "heuristic",
@@ -11965,7 +11965,7 @@
   {
    "anchor": "primitives",
    "kind": "varies",
-   "pearl": "point",
+   "pearl": "lines",
    "provenance": "derived",
    "space": "wall",
    "space_by": "heuristic",
@@ -16991,7 +16991,7 @@
   }
  ],
  "counts": {
-  "branches_on_pearls": 1495,
+  "branches_on_pearls": 1481,
   "by_kind": {
    "contradicts": 0,
    "edge": 149,
@@ -17014,18 +17014,18 @@
    {
     "map": "Point_One",
     "pearl": "point",
-    "rooms": 4,
-    "speak": "you arrive late. the clock is already running. the folding past keeps running. the frame counter. point zero; origin, (0,0,0), the root of all vectors, Vector.ZERO. the one point. no point without a coordinate system.",
+    "rooms": 5,
+    "speak": "You arrive late. No reboot.\nThe folding past keeps running.\n\nThe internal clock is running,\nthe frame counter update cycle.\n\nStanding at Vector.ZERO,\n\nPoint zero, * ,\nVector(0,0,0)\nThe root of all vectors.\n\nThe origin, No turning back.",
     "says": {
-     "folding_past": "the clock is already running — the folding past keeps running",
-     "frame_counter_display": "the frame counter: the clock is already running",
-     "origin": "point zero. origin, (0,0,0), the root of all vectors, Vector.ZERO — the one point",
-     "CoordinateSystem3M": "no points without a coordinate system",
-     "you_are_here": "you are here — the one point",
+     "folding_past": "The folding past keeps running.",
+     "frame_counter_display": "The internal clock is running, the frame counter update cycle.",
+     "origin": "Standing at Vector.ZERO, Point zero, * , Vector(0,0,0) The root of all vectors. The origin, No turning back.",
+     "CoordinateSystem3M": "Point one, position, no point without the coordinate system. 3D Space.",
+     "you_are_here": "You are here",
      "fontana_puncture": "the one point, pierced",
      "interactive_point_origin_force": "a point that becomes a force",
-     "floating_sphere_field": "points, drifting, there is always the drift. ",
-     "two_points_line": "two points is a line. it measures. it is a point, it is a laser — here it forms a vector in 3d space",
+     "floating_sphere_field": "Grab the ball.",
+     "two_points_line": "“Show me what you can do with those hands”",
      "point": "the one point",
      "draw_dot": "all life is encoded — that is enough",
      "dgrid": "grid lines",
@@ -17035,7 +17035,7 @@
      "walk_this_line_marking": "walk this line"
     },
     "says_by": {
-     "you_are_here": "claude",
+     "you_are_here": "hand",
      "fontana_puncture": "claude",
      "interactive_point_origin_force": "claude",
      "floating_sphere_field": "hand",
@@ -17045,67 +17045,118 @@
      "do_not_cross_barrier": "claude",
      "klee_walking_point": "claude",
      "grab_sphere_point_snap": "claude",
-     "walk_this_line_marking": "claude"
+     "walk_this_line_marking": "claude",
+     "folding_past": "hand",
+     "frame_counter_display": "hand",
+     "origin": "hand",
+     "CoordinateSystem3M": "hand",
+     "two_points_line": "hand"
     },
     "speak_by": "hand",
     "tokens_add": [
-     "dgrid",
-     "do_not_cross_barrier",
-     "draw_dot",
-     "grab_sphere_point_snap",
-     "klee_walking_point",
-     "walk_this_line_marking"
+     "CoordinateSystem3M",
+     "draw_dot"
     ],
     "tokens_remove": [
-     "CoordinateSystem3M",
-     "folding_past",
+     "dgrid",
+     "do_not_cross_barrier",
+     "grab_sphere_point_snap",
      "interactive_point_origin_force",
-     "origin",
-     "point"
+     "klee_walking_point",
+     "lab_room",
+     "point",
+     "walk_this_line_marking"
     ],
     "tokens_order": [
+     "folding_past",
+     "origin",
      "frame_counter_display",
      "you_are_here",
+     "CoordinateSystem3M",
      "fontana_puncture",
      "floating_sphere_field",
      "two_points_line",
-     "do_not_cross_barrier",
-     "klee_walking_point",
-     "grab_sphere_point_snap",
-     "dgrid",
-     "draw_dot",
-     "walk_this_line_marking"
+     "draw_dot"
     ],
     "verse": {
-     "do_not_cross_barrier": {
+     "you_are_here": {
       "indent": 0,
       "gap": 1
      },
-     "walk_this_line_marking": {
-      "indent": 1,
+     "two_points_line": {
+      "indent": 0,
+      "gap": 1
+     },
+     "floating_sphere_field": {
+      "indent": 0,
       "gap": 1
      }
-    }
+    },
+    "foyer": [
+     "folding_past",
+     "origin",
+     "frame_counter_display"
+    ],
+    "page2": "Point Zero now as an object in the exhibition\n\nPoint one, position,\nno point without the coordinate system.\n\n3D Space.\n\nYou are here\n\n“Show me what you can do with those hands”\n\nGrab the ball."
    },
    {
     "map": "Point_Lines",
     "pearl": "lines",
     "rooms": 6,
-    "speak": "two points is a line. it measures; it is a laser; it forms a vector in 3d space. parallel, perspective, horizontal, vertical, grid lines. VR hands.",
+    "speak": "Do not cross this line ...",
     "says": {
      "perspective_lines": "perspective line",
      "parallel_line_puzzle": "parallel line",
      "dgrid": "grid lines",
      "line": "two points is a line — it measures",
-     "laser_sword": "a line is a laser",
+     "laser_sword": "laser,",
      "grabbable_line": "VR hands — the line in the hand",
      "line_builder_3d": "here it forms a vector in 3d space",
-     "grid_lines": "grid lines"
+     "grid_lines": "grid lines",
+     "do_not_cross_barrier": "Do not cross this line ...",
+     "walk_this_line_marking": "Walk this line.",
+     "klee_walking_point": "A line is a point that went for a walk.",
+     "grab_sphere_point_snap": "A point you can take; it snaps.",
+     "laser_measure": "laser,",
+     "laser_exploding_sphere": "laser."
     },
     "says_by": {
      "grabbable_line": "claude",
-     "line_builder_3d": "claude"
-    }
+     "line_builder_3d": "claude",
+     "do_not_cross_barrier": "hand",
+     "walk_this_line_marking": "claude",
+     "klee_walking_point": "claude",
+     "grab_sphere_point_snap": "claude",
+     "laser_sword": "hand",
+     "laser_measure": "hand",
+     "laser_exploding_sphere": "hand"
+    },
+    "join": true,
+    "speak_by": "hand",
+    "tokens_add": [
+     "dgrid",
+     "do_not_cross_barrier",
+     "grab_sphere_point_snap",
+     "klee_walking_point",
+     "walk_this_line_marking"
+    ],
+    "tokens_order": [
+     "do_not_cross_barrier",
+     "klee_walking_point",
+     "grab_sphere_point_snap",
+     "dgrid",
+     "walk_this_line_marking",
+     "line",
+     "perspective_lines",
+     "parallel_line_puzzle",
+     "laser_sword",
+     "laser_measure",
+     "laser_exploding_sphere",
+     "grabbable_line",
+     "line_builder_3d",
+     "lightrod",
+     "scale_lines"
+    ]
    },
    {
     "map": "Point_Triangle_Context",
@@ -17455,45 +17506,52 @@
      "pearl": "point",
      "map": "Point_One",
      "index": 0,
-     "hero": "frame_counter_display",
+     "hero": "CoordinateSystem3M",
      "hero_by": "first in spine order",
      "tokens": [
+      "folding_past",
+      "origin",
       "frame_counter_display",
       "you_are_here",
+      "CoordinateSystem3M",
       "fontana_puncture",
       "floating_sphere_field",
-      "do_not_cross_barrier",
-      "klee_walking_point",
-      "grab_sphere_point_snap",
-      "dgrid",
-      "draw_dot",
-      "walk_this_line_marking",
-      "lab_room"
+      "draw_dot"
      ],
      "blurb": "Before the point, infrastructure.",
-     "rooms": 4,
+     "rooms": 5,
+     "page2": "Point Zero now as an object in the exhibition\n\nPoint one, position,\nno point without the coordinate system.\n\n3D Space.\n\nYou are here\n\n“Show me what you can do with those hands”\n\nGrab the ball.",
+     "foyer": [
+      "folding_past",
+      "origin",
+      "frame_counter_display"
+     ],
      "verse": {
-      "do_not_cross_barrier": {
+      "you_are_here": {
        "indent": 0,
        "gap": 1
       },
-      "walk_this_line_marking": {
-       "indent": 1,
+      "two_points_line": {
+       "indent": 0,
+       "gap": 1
+      },
+      "floating_sphere_field": {
+       "indent": 0,
        "gap": 1
       }
      },
-     "speak": "you arrive late. the clock is already running. the folding past keeps running. the frame counter. point zero; origin, (0,0,0), the root of all vectors, Vector.ZERO. the one point. no point without a coordinate system.",
+     "speak": "You arrive late. No reboot.\nThe folding past keeps running.\n\nThe internal clock is running,\nthe frame counter update cycle.\n\nStanding at Vector.ZERO,\n\nPoint zero, * ,\nVector(0,0,0)\nThe root of all vectors.\n\nThe origin, No turning back.",
      "speak_by": "hand",
      "says": {
-      "folding_past": "the clock is already running — the folding past keeps running",
-      "frame_counter_display": "the frame counter: the clock is already running",
-      "origin": "point zero. origin, (0,0,0), the root of all vectors, Vector.ZERO — the one point",
-      "CoordinateSystem3M": "no points without a coordinate system",
-      "you_are_here": "you are here — the one point",
+      "folding_past": "The folding past keeps running.",
+      "frame_counter_display": "The internal clock is running, the frame counter update cycle.",
+      "origin": "Standing at Vector.ZERO, Point zero, * , Vector(0,0,0) The root of all vectors. The origin, No turning back.",
+      "CoordinateSystem3M": "Point one, position, no point without the coordinate system. 3D Space.",
+      "you_are_here": "You are here",
       "fontana_puncture": "the one point, pierced",
       "interactive_point_origin_force": "a point that becomes a force",
-      "floating_sphere_field": "points, drifting, there is always the drift. ",
-      "two_points_line": "two points is a line. it measures. it is a point, it is a laser — here it forms a vector in 3d space",
+      "floating_sphere_field": "Grab the ball.",
+      "two_points_line": "“Show me what you can do with those hands”",
       "point": "the one point",
       "draw_dot": "all life is encoded — that is enough",
       "dgrid": "grid lines",
@@ -17507,7 +17565,7 @@
       "frame_counter_display": "hand",
       "origin": "hand",
       "CoordinateSystem3M": "hand",
-      "you_are_here": "claude",
+      "you_are_here": "hand",
       "fontana_puncture": "claude",
       "interactive_point_origin_force": "claude",
       "floating_sphere_field": "hand",
@@ -17521,11 +17579,14 @@
       "walk_this_line_marking": "claude"
      },
      "excluded": [
-      "CoordinateSystem3M",
-      "folding_past",
+      "dgrid",
+      "do_not_cross_barrier",
+      "grab_sphere_point_snap",
       "interactive_point_origin_force",
-      "origin",
-      "point"
+      "klee_walking_point",
+      "lab_room",
+      "point",
+      "walk_this_line_marking"
      ],
      "ordered": true
     },
@@ -17533,38 +17594,50 @@
      "pearl": "lines",
      "map": "Point_Lines",
      "index": 1,
-     "hero": "science_screen",
-     "hero_by": "first in spine order",
+     "hero": "klee_walking_point",
+     "hero_by": "dig:load-bearing",
      "tokens": [
-      "science_screen",
-      "perspective_lines",
-      "line_builder_3d",
-      "laser_sword",
-      "grabbable_line",
-      "lightrod",
-      "cube_scene",
-      "parallel_line_puzzle",
+      "do_not_cross_barrier",
+      "klee_walking_point",
+      "grab_sphere_point_snap",
+      "dgrid",
+      "walk_this_line_marking",
       "line",
-      "dark_sphere",
-      "scale_lines",
-      "plus_line_puzzle",
-      "modulor_man_demo",
+      "perspective_lines",
+      "parallel_line_puzzle",
+      "laser_sword",
       "laser_measure",
-      "laser_exploding_sphere"
+      "laser_exploding_sphere",
+      "grabbable_line",
+      "line_builder_3d",
+      "lightrod",
+      "scale_lines",
+      "science_screen",
+      "cube_scene",
+      "dark_sphere",
+      "plus_line_puzzle",
+      "modulor_man_demo"
      ],
      "blurb": "A line connects two points.",
      "rooms": 6,
-     "speak": "two points is a line. it measures; it is a laser; it forms a vector in 3d space. parallel, perspective, horizontal, vertical, grid lines. VR hands.",
+     "join": true,
+     "speak": "Do not cross this line ...",
      "speak_by": "hand",
      "says": {
       "perspective_lines": "perspective line",
       "parallel_line_puzzle": "parallel line",
       "dgrid": "grid lines",
       "line": "two points is a line — it measures",
-      "laser_sword": "a line is a laser",
+      "laser_sword": "laser,",
       "grabbable_line": "VR hands — the line in the hand",
       "line_builder_3d": "here it forms a vector in 3d space",
-      "grid_lines": "grid lines"
+      "grid_lines": "grid lines",
+      "do_not_cross_barrier": "Do not cross this line ...",
+      "walk_this_line_marking": "Walk this line.",
+      "klee_walking_point": "A line is a point that went for a walk.",
+      "grab_sphere_point_snap": "A point you can take; it snaps.",
+      "laser_measure": "laser,",
+      "laser_exploding_sphere": "laser."
      },
      "says_by": {
       "perspective_lines": "hand",
@@ -17574,8 +17647,15 @@
       "laser_sword": "hand",
       "grabbable_line": "claude",
       "line_builder_3d": "claude",
-      "grid_lines": "hand"
-     }
+      "grid_lines": "hand",
+      "do_not_cross_barrier": "hand",
+      "walk_this_line_marking": "claude",
+      "klee_walking_point": "claude",
+      "grab_sphere_point_snap": "claude",
+      "laser_measure": "hand",
+      "laser_exploding_sphere": "hand"
+     },
+     "ordered": true
     },
     {
      "pearl": "trace",

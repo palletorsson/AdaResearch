@@ -43,7 +43,7 @@ from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from spatial_contract import (ROTATION_FACING, SpatialContract, Masks, lift_for,
+from spatial_contract import (ROTATION_FACING, SpatialContract, Masks, lift_for, masks as contract_masks,
                               masks, side_dir)
 # The negotiator consumes DRESSING ROOMS (SPATIAL_PIPELINE.md §5), not the
 # resolver's dataclass. `staged_contract` returns the authored room's contract
@@ -1103,6 +1103,29 @@ def negotiate(contract: SpatialContract, plan: FloorPlan, occ: Occupancy,
         exceptions=[], masks=None, contract=contract)
 
 
+def _reading_slots(all_slots: list, min_z: int, last_x: int, span: int) -> list:
+    """The plan's slots as the reading order sees them: every interior pocket cut to
+    the cells no nearer the entrance than the last line (same row: further left,
+    x ascending), anchored at its nearest such cell; exterior slots untouched."""
+    out = []
+    for s in all_slots:
+        if s.venue != "interior":
+            out.append(s); continue
+        cells = {c for c in (s.free_cells or set())
+                 if (min_z < c[1] <= min_z + span) or (c[1] == min_z and c[0] > last_x)}
+        if not cells:
+            continue
+        anchor = min(cells, key=lambda c: (c[1], c[0]))
+        out.append(replace(s, cell=anchor, free_cells=cells))
+        if s.wall_side is not None:
+            # a wall slot slides only ALONG its wall; in a 3-wide corridor that is
+            # a 10-cell slide to the next room. The reading wants the nearest cell
+            # that reads on, wall or floor — so the pocket is offered once more as
+            # an island (free-standing, anywhere in the trimmed pocket)
+            out.append(replace(s, id=s.id + "~r", cell=anchor, free_cells=cells, wall_side=None, wall_sides=[]))
+    return out
+
+
 def run(artifacts: list[str], plan: FloorPlan | None = None,
         bays: int = 3, venue_asks: dict[str, str] | None = None,
         reading: bool = False, fixed: dict[str, tuple[int, int]] | None = None) -> tuple[FloorPlan, list[Placement], Occupancy]:
@@ -1143,6 +1166,13 @@ def run(artifacts: list[str], plan: FloorPlan | None = None,
         elif reading:
             plan.slots = [s for s in all_slots if s.venue != "interior" or s.cell[1] >= min_z]
         contract = staged_contract(lookup)
+        if lookup in fixed and contract.preferred_venue != "interior":
+            # the hand put this body IN the hall (a ruled cell): a precinct to the
+            # negotiator is an exhibit to the hand — it negotiates its footprint
+            # inside the slot that holds the cell, so occupancy knows it is there
+            contract = replace(contract, preferred_venue="interior", containment="exhibited",
+                               provenance={**dict(getattr(contract, "provenance", {}) or {}),
+                                           "presentation.preferred_venue": "hand rule: a ruled cell in the hall"})
         ask = (venue_asks or {}).get(lookup, "")
         if ask == "balcony":
             contract = replace(contract, preferred_venue="balcony", containment="precinct",
@@ -1168,7 +1198,13 @@ def run(artifacts: list[str], plan: FloorPlan | None = None,
                 if span is None:
                     plan.slots = all_slots
                 else:
-                    plan.slots = [s for s in all_slots if s.venue != "interior" or (min_z < s.cell[1] <= min_z + span) or (s.cell[1] == min_z and s.cell[0] > last_x)]
+                    # a slot is a ZONE: trim each pocket to the cells that read on —
+                    # behind the last line, or on its row further left — and anchor
+                    # the slot at the nearest of them, so a room the last line stood
+                    # in the front of still offers its back (whole-slot filtering
+                    # threw away every room the reading had entered, and 10 of 18
+                    # lines fell to the last resort)
+                    plan.slots = _reading_slots(all_slots, min_z, last_x, span)
                     if not any(s.venue == "interior" for s in plan.slots):
                         continue
                 cand = sorted([s for s in plan.slots if s.venue == "interior" and _slot_suits(contract, s)],
@@ -1179,6 +1215,18 @@ def run(artifacts: list[str], plan: FloorPlan | None = None,
                     break
         else:
             p = negotiate(contract, plan, occ, preferred)
+        if lookup in fixed and not (p.result == "ACCEPT" and p.venue == "interior"):
+            # THE HAND WINS: the ruled cell holds even where the negotiator found no
+            # room for the body there — it is committed to occupancy at that cell
+            # (physical mask only) so the lines after it deal AROUND it, and the
+            # placement says so. The plan writer carries the hand row itself.
+            fx, fz = fixed[lookup]
+            m_fixed = contract_masks(contract, int(getattr(p, "rotation", 0) or 0))
+            occ.commit(lookup, Masks(physical=set(m_fixed.physical), circulation=set(), presentation=set()), (fx, fz))
+            p.traces.append(Trace(rule="hand", status="compromised",
+                                  detail=f"a ruled cell ({fx - plan.apron}, {fz - plan.apron} in the tile): the hand put this body in the hall; "
+                                         f"its footprint is held there for the bodies after it, whatever venue the negotiation reached"))
+            p = replace(p, venue="interior", anchor=(fx, fz), slot="hand", mode="freestanding") if hasattr(p, "__dataclass_fields__") else p
         if reading or lookup in fixed:
             plan.slots = all_slots
             if p.result == "ACCEPT" and p.venue == "interior" and p.anchor is not None:

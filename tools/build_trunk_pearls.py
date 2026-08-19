@@ -142,6 +142,22 @@ def seed(trunk_doc: dict) -> dict:
                         p["rooms"] = int(e["rooms"])       # how much of the tile this pearl gets (tools/em_rooms.py)
                     # textD (tools/em_speak.py): the hand's line wins, a draft from the
                     # corpus fills the rest; provenance travels (speak_by / says_by)
+                    if e.get("page2"):
+                        p["page2"] = str(e["page2"])       # the hall's stanza when page 1 stands in the foyer
+                    if e.get("join") is not None:
+                        # SHARED HALL (Palle, 2026-08-19: "point and line, lines should share the
+                        # first exhibition space"): this pearl is a PAGE of the pearl before it —
+                        # its own node in the string and its own poem, but the negotiator deals
+                        # it into the previous pearl's hall, after the previous pearl's lines
+                        p["join"] = bool(e["join"])
+                    if e.get("foyer"):
+                        # THE POEM STARTS IN THE FOYER (Palle, 2026-08-19): these tokens are lines
+                        # of the pearl but the lobby builder places them (window, well, wall) —
+                        # they stay in the poem's order and leave the hall's cast
+                        p["foyer"] = list(e["foyer"])
+                        for tk in p["foyer"]:
+                            if tk not in p["tokens"]:
+                                p["tokens"].append(tk)
                     if e.get("verse"):
                         p["verse"] = dict(e["verse"])        # textD as POETRY: {token: {indent, gap}} — the white space (tools/em_speak.py)
                     if e.get("speak") or e.get("speak_draft"):

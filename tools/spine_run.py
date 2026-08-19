@@ -172,6 +172,7 @@ def run_sequence(seq: str, museum: str, rows: int, relations: int = 2,
             r["rooms"] = pw.get("rooms")
             r["ordered"] = bool(pw.get("ordered"))
             r["exclude"] = list(pw.get("exclude") or [])
+            r["pages"] = list(pw.get("pages") or [])
             r["hero_walk"] = {"hero": pw["hero"], "hand_branches": pw["hand_branches"], "pearl": pw["pearl"]}
             parts.append(r)
             print(f"  {seq:24s} PEARL {pw['pearl_index'] + 1:2d}/{len(pearls)} {pw['pearl']:16s} offered {r['offered']:3d} placed {r['placed']:3d} interior {r['interior']:3d}")
@@ -248,7 +249,7 @@ def _run_cast(seq: str, museum: str, rows: int, anchors: list[str], cast: list[s
         placements, occ = [], None
     else:
         _, placements, occ = negotiate_run(list(cast), plan=plan, reading=bool((walk or {}).get("ordered")),
-                                           fixed={} if (walk or {}).get("ordered") else _fixed_cells(seq, museum, (walk or {}).get("pearl", ""), plan.apron))
+                                           fixed=_fixed_cells(seq, museum, (walk or {}).get("pearl", ""), plan.apron, only=set(cast) if (walk or {}).get("ordered") else None))
 
     acc = [p for p in placements if p.result == "ACCEPT"]
     interior = [p for p in acc if p.venue == "interior"]
@@ -358,9 +359,11 @@ def spine_run(only: str = "", relations: int = 2,
             "totals": tot, "sequences": rows}
 
 
-def _fixed_cells(seq: str, museum: str, pearl: str, apron: int) -> dict[str, tuple[int, int]]:
+def _fixed_cells(seq: str, museum: str, pearl: str, apron: int, only: set | None = None) -> dict[str, tuple[int, int]]:
     """The hand's rows of this pearl in the CURRENT plan, as plan cells — handed to
-    the negotiator so its occupancy and reading order know where the hand put them."""
+    the negotiator so its occupancy and reading order know where the hand put them.
+    only: for an ORDERED pearl (the poem is the cast) a hand row bites only when its
+    token is a line of the poem — the studio moves a line, it does not add one."""
     try:
         prev = json.loads((REPO / "ada_run" / "em_plan.json").read_text(encoding="utf-8"))
     except Exception:
@@ -371,11 +374,13 @@ def _fixed_cells(seq: str, museum: str, pearl: str, apron: int) -> dict[str, tup
     out: dict[str, tuple[int, int]] = {}
     for a in row.get("artifacts", []):
         if a.get("hand") and a.get("venue") == "interior" and a.get("tile_cell"):
+            if only is not None and a["token"] not in only:
+                continue
             out[a["token"]] = (int(a["tile_cell"][0]) + apron, int(a["tile_cell"][1]) + apron)
     return out
 
 
-def _carry_hand_rows(m: dict[str, Any], prev: dict[str, Any], key: str, seq: str, pearl: str, exclude: set | None = None) -> None:
+def _carry_hand_rows(m: dict[str, Any], prev: dict[str, Any], key: str, seq: str, pearl: str, exclude: set | None = None, only: set | None = None) -> None:
     """THE HAND WINS A REGENERATION. A row the hand ruled (hand: true — the plan
     editor, or a ruling written into the plan) keeps its cell, rotation, offset,
     scale and config when the negotiator writes the pearl again; a hand row whose
@@ -387,7 +392,8 @@ def _carry_hand_rows(m: dict[str, Any], prev: dict[str, Any], key: str, seq: str
         return
     # a hand row for a token the hand has since taken OUT of the pearl is not carried:
     # the newer ruling is the exclusion (Palle: "in point remove the large point artifact…")
-    hand = [a for a in prev_row.get("artifacts", []) if a.get("hand") and a.get("token") not in (exclude or set())]
+    hand = [a for a in prev_row.get("artifacts", []) if a.get("hand") and a.get("token") not in (exclude or set())
+            and (only is None or a.get("token") in only)]
     if not hand:
         return
     apron = int(m.get("apron", 14))
@@ -450,16 +456,21 @@ def write_plan(result: dict[str, Any], out: Path) -> dict[str, Any]:
             for pr in r["pearls"]:
                 m = plan_museum(key, list(pr["cast"]), list(r.get("anchor_tokens", [])),
                                 dict(pr.get("cast_context", {})), rooms=pr.get("rooms"), reading=bool(pr.get("ordered")),
-                                fixed={} if pr.get("ordered") else _fixed_cells(r["sequence"], key, pr["pearl"], APRON))
+                                fixed=_fixed_cells(r["sequence"], key, pr["pearl"], APRON, only=set(pr["cast"]) if pr.get("ordered") else None))
                 m["ordered"] = bool(pr.get("ordered"))
+                if pr.get("pages"):
+                    m["pages"] = list(pr["pages"])     # the pearls sharing this hall, in reading order
                 m["sequence"] = r["sequence"]
                 m["pearl"] = pr["pearl"]; m["pearl_index"] = pr["pearl_index"]; m["map"] = pr.get("map", "")
                 if not pr.get("ordered"):
                     _carry_hand_rows(m, prev, key, r["sequence"], pr["pearl"], set(pr.get("exclude") or []))
                 else:
-                    # an ORDERED pearl: the poem is the hand's ruling — cells ruled before
-                    # the order existed are not carried; the reading order deals afresh
-                    print(f"  {r['sequence']:24s} PEARL {pr['pearl']:16s} ordered — hand cells not carried; the poem's order deals the hall")
+                    # an ORDERED pearl: the poem is the cast, so a hand row is carried only
+                    # for a LINE of the poem — the studio moves a line (and its cell wins,
+                    # even where the negotiator sent that body to a court: CoordinateSystem3M
+                    # is a precinct to the negotiator and "to the right when we enter" to the
+                    # hand); a row for a token the poem dropped is not carried
+                    _carry_hand_rows(m, prev, key, r["sequence"], pr["pearl"], set(pr.get("exclude") or []), only=set(pr["cast"]))
                 m["pearls_total"] = len(r["pearls"]); m["hero"] = pr.get("hero_walk", {}).get("hero", "")
                 plans.append({"museum": key, **m})
                 if first is None:

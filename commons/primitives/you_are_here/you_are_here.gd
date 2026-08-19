@@ -21,6 +21,7 @@ class_name YouAreHere
 
 @export_group("Text")
 @export var text: String = "YOU ARE HERE"
+@export var strike_first_word: bool = true     # YOU, crossed out (Palle, 2026-08-19)
 @export var text_color: Color = Color(0.18, 0.52, 1.0)   # civic blue
 @export var font_size: int = 96
 ## World height of the text (TextMesh pixel_size scaler).
@@ -111,6 +112,8 @@ func apply_grid_config(config_data: Dictionary) -> void:
 func _read_metadata_overrides() -> void:
 	if has_meta("config_text"):
 		text = str(get_meta("config_text"))
+	if has_meta("config_strike_first_word"):
+		strike_first_word = str(get_meta("config_strike_first_word")).to_lower() in ["true", "1", "yes"]
 	if has_meta("config_text_color"):
 		text_color = _parse_color(str(get_meta("config_text_color")), text_color)
 	if has_meta("config_font_size"):
@@ -184,6 +187,23 @@ func _build_words() -> void:
 	label.rotation = Vector3(-PI * 0.5, 0, 0)
 	label.position = Vector3(0, 0.012, 0)
 	add_child(label)
+	# THE STRIKE (Palle, 2026-08-19: "in you are here make the word you strike over").
+	# The first word is crossed out — the located self, named and struck: a thin bar
+	# laid over YOU, the rest of the sentence standing. strike_first_word off = the
+	# civic decal as printed.
+	if strike_first_word and " " in text:
+		var font: Font = tm.font if tm.font != null else ThemeDB.fallback_font
+		var first: String = text.split(" ")[0]
+		var w_all: float = font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x * text_scale
+		var w_first: float = font.get_string_size(first, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x * text_scale
+		var bar := MeshInstance3D.new()
+		bar.name = "Strike"
+		var bm := BoxMesh.new()
+		bm.size = Vector3(w_first, 0.004, maxf(font_size * text_scale * 0.11, 0.01))
+		bar.mesh = bm
+		bar.material_override = _text_mat
+		bar.position = Vector3(-w_all * 0.5 + w_first * 0.5, 0.016, 0.0)
+		add_child(bar)
 
 
 ## The mark's material — one instance shared by the ring and the floorplan bars
