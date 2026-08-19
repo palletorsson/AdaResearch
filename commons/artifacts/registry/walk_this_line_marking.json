@@ -1,0 +1,48 @@
+{
+	"artifacts": {
+		"walk_this_line_marking": {
+			"lookup_name": "walk_this_line_marking",
+			"name": "Walk This Line — Floor Marking",
+			"class_name": "WalkThisLineMarking",
+			"description": "A legend lying flat on the floor reading WALK THIS LINE, with a guide stripe ahead of it. The line as INSTRUCTION: nothing about paint prevents anything, it works by being read and obeyed. Pairs with do_not_cross_barrier, the airborne half of the same asset — which does not agree with it but stands at right angles to it.",
+			"scene": "res://commons/artifacts/walk_this_line_marking/walk_this_line_marking.tscn",
+			"category": "environment",
+			"artifact_type": "prop",
+			"complexity": "simple",
+			"sequence": "primitives",
+			"tags": [
+				"line",
+				"boundary",
+				"instruction",
+				"signage",
+				"floor"
+			],
+			"map_ready": true,
+			"include_in_map_data": true,
+			"size_group": "medium",
+			"spatial_needs": {
+				"footprint_cells": 3,
+				"clearance": "none"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.9,
+					0.01,
+					0.9
+				],
+				"source": "authored glTF, read from accessor bounds"
+			},
+			"relationships": {
+				"pairs_with": [
+					"do_not_cross_barrier"
+				]
+			},
+			"dev_themes": [
+				"the line as instrument of exclusion",
+				"the line as instruction"
+			],
+			"qfep_connection": "Point_Lines argues that measure is also violence. The pair stands in PERPENDICULAR relations to one line: the tape forbids crossing it, this commands following it. A body meeting both has been told the line is impassable in one direction and obligatory in the other.",
+			"note": "Instantiates res://commons/models/do_not_cross_line.glb and keeps floor_marking with its floor_legend and guide_stripe children; the posts and tape belong to do_not_cross_barrier. NAMED FOR WHAT IT SAYS, NOT FOR THE FILE IT CAME FROM: the asset is do_not_cross_line.glb and the first draft of this entry called it 'the same prohibition painted on the floor', which the node hierarchy alone cannot refute. The capture showed the legend reads WALK THIS LINE. The mesh was always right; the description was not."
+		}
+	}
+}

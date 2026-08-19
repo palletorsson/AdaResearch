@@ -1,0 +1,47 @@
+{
+	"artifacts": {
+		"do_not_cross_barrier": {
+			"lookup_name": "do_not_cross_barrier",
+			"name": "Do Not Cross — Barrier",
+			"class_name": "DoNotCrossBarrier",
+			"description": "Two weighted posts with a tape strung between them at hip height, reading DO NOT CROSS. The line as OBSTACLE: a body would have to duck under it. Pairs with walk_this_line_marking, the floor half of the same asset — which does not repeat the prohibition but reverses it, reading WALK THIS LINE.",
+			"scene": "res://commons/artifacts/do_not_cross_barrier/do_not_cross_barrier.tscn",
+			"category": "environment",
+			"artifact_type": "prop",
+			"complexity": "simple",
+			"sequence": "primitives",
+			"tags": [
+				"line",
+				"boundary",
+				"prohibition",
+				"barrier",
+				"signage"
+			],
+			"map_ready": true,
+			"include_in_map_data": true,
+			"size_group": "medium",
+			"spatial_needs": {
+				"footprint_cells": 3,
+				"clearance": "front"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.2,
+					1.0,
+					0.43
+				],
+				"source": "authored glTF, read from accessor bounds"
+			},
+			"relationships": {
+				"pairs_with": [
+					"walk_this_line_marking"
+				]
+			},
+			"dev_themes": [
+				"the line as instrument of exclusion"
+			],
+			"qfep_connection": "Point_Lines argues that measure is also violence — what does not fit the grid is remainder, error, erased. This and its companion are that argument as furniture, standing in PERPENDICULAR relations to one line: the tape forbids crossing it, the paint commands following it.",
+			"note": "Instantiates res://commons/models/do_not_cross_line.glb and keeps post_left, post_right, barrier_tape and printed_legend; the floor assembly belongs to its companion. The two artifacts share ONE asset and draw DISJOINT subtrees — this is not the one-scene-many-names pattern, which is two tokens running one identical script. The asset is authored as one file because the barrier and the marking are dimensioned against each other: the posts stand at x = +/-1.6 and the floor legend lies 1.18 m in front of them."
+		}
+	}
+}
