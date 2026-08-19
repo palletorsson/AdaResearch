@@ -227,6 +227,8 @@ def _apply_walk(walk: dict[str, Any], cast_context: dict[str, Any]) -> list[str]
             cast_context[tok]["support_m"] = float(r["support_m"])  # the book asked for a plinth under this body
         if r.get("lock"):
             cast_context[tok]["lock"] = [int(r["lock"][0]), int(r["lock"][1])]   # the book locks this body to a tile cell
+        if r.get("config"):
+            cast_context[tok]["config"] = dict(r["config"])     # the book's apply_grid_config for this body
         if walk.get("pearl"):
             cast_context[tok]["pearl"] = walk["pearl"]
     return list(walk["cast"])

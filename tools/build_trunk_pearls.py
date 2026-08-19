@@ -158,6 +158,8 @@ def seed(trunk_doc: dict) -> dict:
                         for tk in p["foyer"]:
                             if tk not in p["tokens"]:
                                 p["tokens"].append(tk)
+                    if e.get("configs"):
+                        p["configs"] = dict(e["configs"])      # {token: {key: value}} — the body's apply_grid_config (tools/book.py)
                     if e.get("locks"):
                         p["locks"] = dict(e["locks"])          # {token: [x, z]} — the body stands HERE through every regeneration (tools/book.py)
                     if e.get("supports"):

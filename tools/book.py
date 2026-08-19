@@ -86,6 +86,8 @@ def migrate(chapter: str) -> dict:
                 ln["support_m"] = float(p["supports"][tok])
             if (p.get("locks") or {}).get(tok):
                 ln["lock"] = list(p["locks"][tok])
+            if (p.get("configs") or {}).get(tok):
+                ln["config"] = dict(p["configs"][tok])
             v = verse.get(tok)
             if isinstance(v, dict):
                 if v.get("indent"): ln["indent"] = int(v["indent"])
@@ -166,6 +168,10 @@ def compile_book(chapter: str, reseed: bool = True) -> dict:
         locks = {ln["token"]: [int(ln["lock"][0]), int(ln["lock"][1])] for ln in bp.get("lines", []) if ln.get("token") and isinstance(ln.get("lock"), list) and len(ln["lock"]) >= 2}
         if locks: e["locks"] = locks
         else: e.pop("locks", None)
+        # a line's CONFIG (the artifact's apply_grid_config dictionary): e.g. CoordinateSystem3M {"floating_point": 1}
+        configs = {ln["token"]: dict(ln["config"]) for ln in bp.get("lines", []) if ln.get("token") and isinstance(ln.get("config"), dict) and ln["config"]}
+        if configs: e["configs"] = configs
+        else: e.pop("configs", None)
         supports = {ln["token"]: float(ln["support_m"]) for ln in bp.get("lines", []) if ln.get("token") and ln.get("support_m")}
         if supports: e["supports"] = supports
         else: e.pop("supports", None)

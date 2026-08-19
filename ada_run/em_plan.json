@@ -2,7 +2,7 @@
   "schema": "adaresearch.em_plan.v2",
   "_readme": "Placements resolved by tools/spatial_negotiation.py. Read by commons/scenes/endless_museum.gd under --em-plan. A museum key absent here deals exactly as it did before.",
   "_spine_run": {
-    "at": "2026-08-19T16:25:47",
+    "at": "2026-08-19T16:30:43",
     "owner": {
       "sainsbury-false-perspective-enfilade": "primitives"
     },
@@ -260976,6 +260976,9 @@
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.0,
+          "config": {
+            "floating_point": 1
+          },
           "slot": "hand",
           "wall": null,
           "relational_kind": "spine_artifact",
@@ -260988,6 +260991,9 @@
             "walk_kind": "hero",
             "walk_why": "a line of the point poem",
             "walk_space": "wall",
+            "config": {
+              "floating_point": 1
+            },
             "pearl": "point"
           },
           "hand": true,
@@ -293748,6 +293754,9 @@
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.0,
+          "config": {
+            "floating_point": 1
+          },
           "slot": "hand",
           "wall": null,
           "relational_kind": "spine_artifact",
@@ -293760,6 +293769,9 @@
             "walk_kind": "hero",
             "walk_why": "a line of the point poem",
             "walk_space": "wall",
+            "config": {
+              "floating_point": 1
+            },
             "pearl": "point"
           },
           "hand": true,

@@ -28,6 +28,14 @@ const CoordinateLineScript = preload("res://commons/primitives/line/coordinate_l
 ## taller rooms where the coordinate frame should fill the space.
 ## Driveable from map_data via `CoordinateSystem3M:0:0#display_scale:1.5`.
 @export var display_scale: float = 1.5
+## A FLOATING POINT inside the frame (Palle, 2026-08-19: "add a floating point to
+## the coordinate system we can move"): interactive_point_origin — pickable,
+## shows its coordinates IN THIS FRAME while held, draws its line to this origin.
+## Map/plan: `CoordinateSystem3M:0:0#floating_point:1`; the book: config.
+@export var floating_point: bool = false
+## Where the floating point starts, in axis units (the frame's own metres).
+@export var floating_point_at: Vector3 = Vector3(1.0, 1.0, 1.0)
+const FloatingPointScene := "res://commons/primitives/point/interactive_point_origin.tscn"
 
 var gyroscope: Node3D
 
@@ -48,6 +56,24 @@ func _ready() -> void:
 	if not Engine.is_editor_hint():
 		_add_info_frame()
 		_add_gyroscope()
+		if floating_point:
+			_add_floating_point()
+
+
+func _add_floating_point() -> void:
+	if get_node_or_null("FloatingPoint") != null or not ResourceLoader.exists(FloatingPointScene):
+		return
+	var ps: PackedScene = load(FloatingPointScene)
+	var pt: Node3D = ps.instantiate() as Node3D
+	pt.name = "FloatingPoint"
+	# the point is a body: it does not inherit this frame's display scale
+	pt.top_level = false
+	add_child(pt)
+	pt.position = floating_point_at
+	pt.scale = Vector3.ONE / maxf(0.01, display_scale)
+	# its origin is THIS frame's origin, and it reads its coordinates in this frame
+	pt.set("origin_point", global_position if is_inside_tree() else Vector3.ZERO)
+	pt.set("frame_path", pt.get_path_to(self))
 
 func _add_info_frame() -> void:
 	var sc := 0.33  # Match SCENE_SCALE from VectorSceneBase
@@ -209,6 +235,19 @@ func apply_grid_config(config: Dictionary) -> void:
 	if config.has("display_scale"):
 		display_scale = float(config["display_scale"])
 		scale = Vector3(display_scale, display_scale, display_scale)
+	if config.has("floating_point_at"):
+		var v: Variant = config["floating_point_at"]
+		if v is Array and (v as Array).size() >= 3:
+			floating_point_at = Vector3(float(v[0]), float(v[1]), float(v[2]))
+	if config.has("floating_point"):
+		var fv: String = str(config["floating_point"])
+		floating_point = (float(fv) != 0.0) if fv.is_valid_float() else (fv.to_lower() in ["true", "yes", "on"])
+		# apply_grid_config may arrive BEFORE _ready (the museum's handoff): then
+		# _ready builds it; after _ready it is added here
+		if floating_point and not Engine.is_editor_hint() and is_node_ready() and is_inside_tree():
+			_add_floating_point()
+		elif not floating_point and get_node_or_null("FloatingPoint") != null:
+			get_node("FloatingPoint").queue_free()
 	# axis_length / axis_thickness / tick_step only affect the AXES, which
 	# were already built in _ready() — so changing the vars alone does
 	# nothing (the old bug: tick_step:0.0 was ignored, ticks stayed). Track

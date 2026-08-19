@@ -36,6 +36,10 @@ func spine_hints() -> Dictionary:
 @export var line_color: Color = Color(0.3, 0.8, 1.0, 0.7)
 @export var line_width: float = 0.003  # Very thin line
 @export var origin_point: Vector3 = Vector3.ZERO
+## A frame to read the coordinates IN (CoordinateSystem3M's floating point): the
+## label shows the position in that node's local axes — metres of the frame, not
+## of the world. Empty: world coordinates, as before.
+@export var frame_path: NodePath = NodePath("")
 
 # Haptic feedback
 @export var haptic_pickup_intensity: float = 0.5
@@ -366,6 +370,10 @@ func _update_position_label() -> void:
 		return
 	
 	var pos = global_position
+	if frame_path != NodePath("") and has_node(frame_path):
+		var fr: Node3D = get_node(frame_path) as Node3D
+		if fr != null:
+			pos = fr.to_local(global_position)      # in the frame's own axes (its display scale divided out)
 	match _display_format_index:
 		0:
 			_position_label.visible = true
