@@ -17027,6 +17027,13 @@
      "floating_sphere_field": "points, drifting",
      "two_points_line": "two points is a line. it measures. it is a point, it is a laser — here it forms a vector in 3d space",
      "point": "the one point"
+    },
+    "says_by": {
+     "you_are_here": "claude",
+     "fontana_puncture": "claude",
+     "interactive_point_origin_force": "claude",
+     "floating_sphere_field": "claude",
+     "point": "claude"
     }
    },
    {
@@ -17043,6 +17050,10 @@
      "grabbable_line": "VR hands — the line in the hand",
      "line_builder_3d": "here it forms a vector in 3d space",
      "grid_lines": "grid lines"
+    },
+    "says_by": {
+     "grabbable_line": "claude",
+     "line_builder_3d": "claude"
     }
    },
    {
@@ -17061,6 +17072,15 @@
      "folded_strip": "the fold",
      "triangle_line_puzzle": "three lines, one triangle",
      "quad_line_puzzle": "four lines, one quad"
+    },
+    "says_by": {
+     "parasol_triangle": "claude",
+     "interactivetriangle": "claude",
+     "pythagorean_triangle_angles": "claude",
+     "triangleprofiles": "claude",
+     "draw_triangle_faces": "claude",
+     "triangle_line_puzzle": "claude",
+     "quad_line_puzzle": "claude"
     }
    },
    {
@@ -17081,6 +17101,10 @@
      "room_grammar": "space filling",
      "player_trace": "the trace, gridded",
      "grab_sphere_point_snap": "snap to the grid: resolution keeps us sane"
+    },
+    "says_by": {
+     "player_trace": "claude",
+     "grab_sphere_point_snap": "claude"
     }
    },
    {
@@ -17091,6 +17115,10 @@
      "pyramid_edit": "the pyramid mesh",
      "grab_trihedron": "three faces in the hand",
      "becoming_catalyst": "interactive cubes — becoming"
+    },
+    "says_by": {
+     "grab_trihedron": "claude",
+     "becoming_catalyst": "claude"
     }
    },
    {
@@ -17100,6 +17128,10 @@
     "says": {
      "animatedcubebuilder": "the cube world, built",
      "polyhedron_nets_cube": "the fold — a cube is a net"
+    },
+    "says_by": {
+     "animatedcubebuilder": "claude",
+     "polyhedron_nets_cube": "claude"
     }
    },
    {
@@ -17108,37 +17140,59 @@
     "speak": "primitives, and so on.",
     "says": {
      "catalyst_target": "primitives — and so on"
+    },
+    "says_by": {
+     "catalyst_target": "claude"
     }
    },
    {
     "map": "Primitives_Ignorance",
     "pearl": "ignorance",
-    "speak": "primitives, and so on: sphere, plus, star, L, the platonic solids.",
+    "speak": "ignorance: the taxonomy that cannot hold. underfitting. sphere, plus, star, L, the platonic solids — and so on.",
     "says": {
-     "sphere": "the sphere",
-     "platonic_grabbables": "the platonic solids, in the hand",
-     "truncatedtetrahedron": "a tetrahedron, truncated",
-     "hole_with_cones": "a hole, cones"
+     "sphere": "the point, grown in every direction — and still not pi",
+     "platonic_grabbables": "five solids, and the taxonomy ends. the rest is ignorance",
+     "truncatedtetrahedron": "a solid cut: what the taxonomy does to what it cannot hold",
+     "hole_with_cones": "a hole is not a thing — it is held by what is around it"
+    },
+    "speak_by": "hand",
+    "says_by": {
+     "sphere": "claude",
+     "platonic_grabbables": "claude",
+     "truncatedtetrahedron": "claude",
+     "hole_with_cones": "claude"
     }
    },
    {
     "map": "Primitives_Portals",
     "pearl": "portals",
-    "speak": "portals — and so on.",
+    "speak": "portals: the edge drift. entropy forbids endless mutation; what is left is a drift along the edge — from one primitive to the next.",
     "says": {
-     "achilles_tortoise": "Achilles and the tortoise: resolution, and the debt on either side",
-     "combine_portals": "portals"
+     "achilles_tortoise": "Achilles and the tortoise: the endlessness of pi in a footrace",
+     "combine_portals": "a portal: the edge, walked through"
+    },
+    "speak_by": "hand",
+    "says_by": {
+     "achilles_tortoise": "claude",
+     "combine_portals": "claude"
     }
    },
    {
     "map": "Primitives_Melencolia",
     "pearl": "melencolia",
-    "speak": "Melencolia: the pyramid, the polyhedron, the frame.",
+    "speak": "melencolia: the taxonomy that holds on. overfitting. Dürer's polyhedron, the pyramid, the frame.",
     "says": {
-     "durer_scene": "Dürer's polyhedron",
-     "pyramid": "the pyramid",
-     "bigframe": "the frame",
-     "snap_pyramid_puzzle": "the pyramid, snapped"
+     "durer_scene": "Dürer's polyhedron — the solid no taxonomy names, and the angel who keeps it",
+     "pyramid": "the pyramid: the triangle stood up, the first solid held",
+     "bigframe": "the frame: where the picture stops, and the trace does not",
+     "snap_pyramid_puzzle": "the pyramid, snapped — held by the grid"
+    },
+    "speak_by": "hand",
+    "says_by": {
+     "durer_scene": "claude",
+     "pyramid": "claude",
+     "bigframe": "claude",
+     "snap_pyramid_puzzle": "claude"
     }
    }
   ],
@@ -17384,12 +17438,12 @@
       "frame_counter_display": "hand",
       "origin": "hand",
       "CoordinateSystem3M": "hand",
-      "you_are_here": "hand",
-      "fontana_puncture": "hand",
-      "interactive_point_origin_force": "hand",
-      "floating_sphere_field": "hand",
+      "you_are_here": "claude",
+      "fontana_puncture": "claude",
+      "interactive_point_origin_force": "claude",
+      "floating_sphere_field": "claude",
       "two_points_line": "hand",
-      "point": "hand"
+      "point": "claude"
      }
     },
     {
@@ -17437,8 +17491,8 @@
       "dgrid": "hand",
       "line": "hand",
       "laser_sword": "hand",
-      "grabbable_line": "hand",
-      "line_builder_3d": "hand",
+      "grabbable_line": "claude",
+      "line_builder_3d": "claude",
       "grid_lines": "hand"
      }
     },
@@ -17488,8 +17542,8 @@
      "says_by": {
       "grid_lines": "hand",
       "room_grammar": "hand",
-      "player_trace": "hand",
-      "grab_sphere_point_snap": "hand"
+      "player_trace": "claude",
+      "grab_sphere_point_snap": "claude"
      }
     },
     {
@@ -17531,14 +17585,14 @@
      "says_by": {
       "triangle": "hand",
       "quad": "hand",
-      "parasol_triangle": "hand",
-      "interactivetriangle": "hand",
-      "pythagorean_triangle_angles": "hand",
-      "triangleprofiles": "hand",
-      "draw_triangle_faces": "hand",
+      "parasol_triangle": "claude",
+      "interactivetriangle": "claude",
+      "pythagorean_triangle_angles": "claude",
+      "triangleprofiles": "claude",
+      "draw_triangle_faces": "claude",
       "folded_strip": "hand",
-      "triangle_line_puzzle": "hand",
-      "quad_line_puzzle": "hand"
+      "triangle_line_puzzle": "claude",
+      "quad_line_puzzle": "claude"
      }
     },
     {
@@ -17565,8 +17619,8 @@
      },
      "says_by": {
       "pyramid_edit": "hand",
-      "grab_trihedron": "hand",
-      "becoming_catalyst": "hand"
+      "grab_trihedron": "claude",
+      "becoming_catalyst": "claude"
      }
     },
     {
@@ -17587,8 +17641,8 @@
       "polyhedron_nets_cube": "the fold — a cube is a net"
      },
      "says_by": {
-      "animatedcubebuilder": "hand",
-      "polyhedron_nets_cube": "hand"
+      "animatedcubebuilder": "claude",
+      "polyhedron_nets_cube": "claude"
      }
     },
     {
@@ -17607,7 +17661,7 @@
       "catalyst_target": "primitives — and so on"
      },
      "says_by": {
-      "catalyst_target": "hand"
+      "catalyst_target": "claude"
      }
     },
     {
@@ -17639,19 +17693,19 @@
       "prism_block"
      ],
      "blurb": "Ignorance is not the absence of knowledge but a structural limit.",
-     "speak": "primitives, and so on: sphere, plus, star, L, the platonic solids.",
+     "speak": "ignorance: the taxonomy that cannot hold. underfitting. sphere, plus, star, L, the platonic solids — and so on.",
      "speak_by": "hand",
      "says": {
-      "sphere": "the sphere",
-      "platonic_grabbables": "the platonic solids, in the hand",
-      "truncatedtetrahedron": "a tetrahedron, truncated",
-      "hole_with_cones": "a hole, cones"
+      "sphere": "the point, grown in every direction — and still not pi",
+      "platonic_grabbables": "five solids, and the taxonomy ends. the rest is ignorance",
+      "truncatedtetrahedron": "a solid cut: what the taxonomy does to what it cannot hold",
+      "hole_with_cones": "a hole is not a thing — it is held by what is around it"
      },
      "says_by": {
-      "sphere": "hand",
-      "platonic_grabbables": "hand",
-      "truncatedtetrahedron": "hand",
-      "hole_with_cones": "hand"
+      "sphere": "claude",
+      "platonic_grabbables": "claude",
+      "truncatedtetrahedron": "claude",
+      "hole_with_cones": "claude"
      }
     },
     {
@@ -17665,15 +17719,15 @@
       "combine_portals"
      ],
      "blurb": "A toroidal portal sequence guided by increasing rings approaching π, staging continuity as asymptotic relation rather than arrival.",
-     "speak": "portals — and so on.",
+     "speak": "portals: the edge drift. entropy forbids endless mutation; what is left is a drift along the edge — from one primitive to the next.",
      "speak_by": "hand",
      "says": {
-      "achilles_tortoise": "Achilles and the tortoise: resolution, and the debt on either side",
-      "combine_portals": "portals"
+      "achilles_tortoise": "Achilles and the tortoise: the endlessness of pi in a footrace",
+      "combine_portals": "a portal: the edge, walked through"
      },
      "says_by": {
-      "achilles_tortoise": "hand",
-      "combine_portals": "hand"
+      "achilles_tortoise": "claude",
+      "combine_portals": "claude"
      }
     },
     {
@@ -17692,19 +17746,19 @@
       "pyramidlong"
      ],
      "blurb": "Inspired by the Herzog August Bibliothek and Melencolia I, this scene embodies the limit point of geometric aspiration and existential constraint.",
-     "speak": "Melencolia: the pyramid, the polyhedron, the frame.",
+     "speak": "melencolia: the taxonomy that holds on. overfitting. Dürer's polyhedron, the pyramid, the frame.",
      "speak_by": "hand",
      "says": {
-      "durer_scene": "Dürer's polyhedron",
-      "pyramid": "the pyramid",
-      "bigframe": "the frame",
-      "snap_pyramid_puzzle": "the pyramid, snapped"
+      "durer_scene": "Dürer's polyhedron — the solid no taxonomy names, and the angel who keeps it",
+      "pyramid": "the pyramid: the triangle stood up, the first solid held",
+      "bigframe": "the frame: where the picture stops, and the trace does not",
+      "snap_pyramid_puzzle": "the pyramid, snapped — held by the grid"
      },
      "says_by": {
-      "durer_scene": "hand",
-      "pyramid": "hand",
-      "bigframe": "hand",
-      "snap_pyramid_puzzle": "hand"
+      "durer_scene": "claude",
+      "pyramid": "claude",
+      "bigframe": "claude",
+      "snap_pyramid_puzzle": "claude"
      }
     }
    ],
@@ -17713,7 +17767,9 @@
     "righttriangle"
    ],
    "qfep_role": "Foundation - points, lines, planes, and basic vectors",
-   "tokens": 82.0
+   "tokens": 82.0,
+   "speak": "a taxonomy that opens what it cannot hold: the trace, the endlessness of pi. on one side ignorance, on the other melancholia — underfitting, overfitting. queer melancholia: not an endless mutation, entropy forbids it; a drift, an edge drift. this is the endless museum.",
+   "speak_by": "hand"
   },
   {
    "heroes": [
@@ -21448,5 +21504,11 @@
    "qfep_role": "Applied limits — bias, rhizomes, molecular design as post-crisis practice",
    "tokens": 14.0
   }
- ]
+ ],
+ "hand_nodes": {
+  "primitives": {
+   "speak": "a taxonomy that opens what it cannot hold: the trace, the endlessness of pi. on one side ignorance, on the other melancholia — underfitting, overfitting. queer melancholia: not an endless mutation, entropy forbids it; a drift, an edge drift. this is the endless museum.",
+   "speak_by": "hand"
+  }
+ }
 }

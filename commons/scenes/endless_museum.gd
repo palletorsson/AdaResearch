@@ -2893,6 +2893,9 @@ func _speak_lines(chapter: String, pearl: String) -> Array:
 	var text: String = String(sp.get("speak", ""))
 	if not show_drafts and String(sp.get("speak_by", "hand")) != "hand":
 		text = ""
+	# the CHAPTER's line hangs first, on its first pearl's walls
+	if bool(sp.get("first", false)) and String(sp.get("chapter_speak", "")) != "" 			and (show_drafts or String(sp.get("chapter_speak_by", "hand")) == "hand"):
+		text = String(sp["chapter_speak"]) + ". " + text
 	for piece in text.replace(";", ".").replace(": ", ". ").split("."):
 		var p: String = String(piece).strip_edges()
 		if p.length() >= 3 and not seen.has(p.to_lower()):
@@ -6269,7 +6272,11 @@ func _speak_for(chapter: String, pearl: String) -> Dictionary:
 			for t in (doc as Dictionary).get("trunk", []):
 				if String((t as Dictionary).get("node", "")) != chapter:
 					continue
+				out["chapter_speak"] = String((t as Dictionary).get("speak", ""))
+				out["chapter_speak_by"] = String((t as Dictionary).get("speak_by", "hand"))
 				for p in (t as Dictionary).get("pearls", []):
+					if String((p as Dictionary).get("pearl", "")) == pearl:
+						out["first"] = int((p as Dictionary).get("index", 0)) == 0
 					if String((p as Dictionary).get("pearl", "")) == pearl:
 						out["speak"] = String((p as Dictionary).get("speak", ""))
 						out["speak_by"] = String((p as Dictionary).get("speak_by", "hand"))

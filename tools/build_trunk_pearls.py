@@ -79,6 +79,7 @@ def seed(trunk_doc: dict) -> dict:
     order = load(ORDER)["order"]
     dig = load(POLICIES)["policies"]["dig"]
     hand_pearls: dict = trunk_doc.get("hand_pearls", {})      # node -> [{map|pearl, ...}] hand edits
+    hand_nodes: dict = trunk_doc.get("hand_nodes", {})        # node -> {speak, speak_by}: the CHAPTER's line (tools/em_speak.py)
     out_nodes = []
     for t in trunk_doc.get("trunk", []):
         node = t["node"]
@@ -176,6 +177,8 @@ def seed(trunk_doc: dict) -> dict:
             p["index"] = i
         t = dict(t)
         t["pearls"] = pearls
+        if hand_nodes.get(node, {}).get("speak"):
+            t["speak"] = str(hand_nodes[node]["speak"]); t["speak_by"] = str(hand_nodes[node].get("speak_by", "hand"))
         out_nodes.append(t)
     trunk_doc["trunk"] = out_nodes
     # re-anchor branches to pearls by their `via` token (derived) or hand-set `pearl`

@@ -51,6 +51,9 @@ def set_speak(d: dict, node: str, pearl: str, speak: str | None, says: dict | No
 
 def show(d: dict, node: str) -> None:
     seeded = next((t for t in d.get("trunk", []) if t.get("node") == node), {}) or {}
+    if seeded.get("speak"):
+        print(f"{node.upper():18s} [{seeded.get('speak_by', '-')}] {seeded['speak']}")
+        print()
     for p in seeded.get("pearls", []):
         print(f"{p.get('pearl'):18s} [{p.get('speak_by', '-')}] {p.get('speak', '') or '—'}")
         by = p.get("says_by") or {}
@@ -132,9 +135,13 @@ def main() -> int:
     ap.add_argument("--draft", nargs="?", const="", default=None, metavar="NODE", help="draft every pearl/body line from the corpus (truths, blurbs, descriptions); stamped draft")
     ap.add_argument("--no-reseed", action="store_true")
     ap.add_argument("--by", default="hand", help="provenance of the lines written: hand (Palle) | claude")
+    ap.add_argument("--chapter-speak", help="the CHAPTER's own line (hung first, on its first pearl's walls)")
     a = ap.parse_args()
     d = json.loads(TRUNK.read_text(encoding="utf-8"))
     changed = False
+    if a.node and a.chapter_speak is not None:
+        d.setdefault("hand_nodes", {})[a.node] = {"speak": a.chapter_speak, "speak_by": a.by}
+        changed = True
     if a.draft is not None:
         res = draft(d, a.draft or (a.node or ""))
         print(f"drafted {res['pearls']} pearl line(s) and {res['says']} body line(s) from the corpus — stamped draft; hand lines untouched")
