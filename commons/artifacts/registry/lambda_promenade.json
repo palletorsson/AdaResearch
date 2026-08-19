@@ -86,7 +86,7 @@
 				"measurement_risk": "A 7:1 STRIP, and the framing hint is derived rather than guessed. capture_config_sweep frames radius = half the AABB DIAGONAL at PAD 1.9 and FOV 34, from YAW 0.62 / PITCH -0.26. The default box gives a diagonal of about 4.52, so the unframed view is roughly 8.6 world units square and the subject \u2014 about 4.2 x 0.86 after foreshortening \u2014 lands near 5% of frame, which is inside the too-small-to-measure band. framing 0.62 brings the view to about 5.3, putting the subject at roughly 79% of width and 16% of height, near 13% of frame, with about a tenth of the frame as margin at each end. IF THE SWEEP CLIPS THE END STATIONS, RAISE IT TOWARD 0.75 AND NEVER LOWER IT BELOW 0.55: the ends of this line are its argument, and an exhibit about what is missing from the room must not have its ends cropped by the camera. Second risk: extent=edge is DELIBERATELY the emptiest frame \u2014 two emblems, no poles \u2014 so a large drop in subject percentage there is the finding, not a fault. Read it against the rail, which is present at full length in every value and is the fixed high-contrast reference the crop is legible against."
 			},
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "platform",
 				"footprint_cells": 10,
 				"clearance": {
 					"front": 2,
@@ -108,8 +108,8 @@
 					"random_cubes",
 					"particle_chaos"
 				],
-				"preferred_zone": "any"
-			},
+				"preferred_zone": "any",
+				"shelf_rule": "stage (base 4.66 m, h 0.59 m, registry.measurements)"},
 			"geometry_spec": {
 				"mesh_type": "composed_primitives",
 				"topology": "manifold_closed",

@@ -38,7 +38,7 @@
 			],
 			"capacity": "SEE that a triangle's front is not in its three points - that it is a convention laid over them, stated twice in two languages that nothing forces to agree, and invisible until one of them is enforced",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "pedestal",
 				"footprint_cells": 1,
 				"clearance": {
 					"front": 2,
@@ -60,8 +60,8 @@
 				],
 				"preferred_zone": "teaching",
 				"footprint_source": "computed_from_geometry",
-				"footprint_note": "Every single-layout variant is THE SAME BODY: a 1.030 x 0.5615 x 0.075 m extent turned to face bearing 0.62 rad, so the world box is 0.882 x 0.562 x 0.660 and one grid cell holds it. It is identical for all sixteen cells by construction - the rail, the four poles and a layers=0 anchor at the full extent are built before the axes are consulted, and the flags never reach outside the anchor. layout=ladder stands all four conventions in a row at 1.15 m pitch (about 4.6 m wide) and is a design view, not a map placement."
-			},
+				"footprint_note": "Every single-layout variant is THE SAME BODY: a 1.030 x 0.5615 x 0.075 m extent turned to face bearing 0.62 rad, so the world box is 0.882 x 0.562 x 0.660 and one grid cell holds it. It is identical for all sixteen cells by construction - the rail, the four poles and a layers=0 anchor at the full extent are built before the axes are consulted, and the flags never reach outside the anchor. layout=ladder stands all four conventions in a row at 1.15 m pitch (about 4.6 m wide) and is a design view, not a map placement.",
+				"shelf_rule": "specimen (base 0.88 m, h 0.56 m, registry.measurements)"},
 			"measurements": {
 				"aabb_size": [
 					0.882,

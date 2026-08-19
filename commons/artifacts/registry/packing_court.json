@@ -39,7 +39,7 @@
 			],
 			"capacity": "SEE that two artifacts can declare one axis, one value list and one order, and still be asking different questions - and learn to find out which by asking WHERE IN THE CONSTRUCTION the value is consumed, rather than what the registry says it means",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "table",
 				"footprint_cells": 6,
 				"clearance": {
 					"front": 2,
@@ -61,7 +61,8 @@
 				],
 				"preferred_zone": "teaching",
 				"footprint_source": "computed_from_geometry",
-				"footprint_note": "THE FLOOR IS THE FOOTPRINT AND IT IS DRAWN BEFORE EITHER AXIS IS CONSULTED: a 2.40 x 0.05 x 1.15 slab, two 1.10 x 0.012 x 1.02 pads at x = -0.60 and +0.60, and a 0.026 x 0.014 x 1.02 divider strip on the centre line. Four meshes, identical in all twelve cells. They are the reason the AABB is a constant and the reason the two designed-null frames are a picture of an empty court rather than a blank plate. Everything the axes draw is furniture-free above them: the pads are 12 mm proud and the divider 14 mm, so nothing in the court can stand in front of a mark. The content clears the floor edge at every value - the fill bench is widest at fused, spanning x from 0.078 to 1.122 against a floor half-width of 1.200, and z to +-0.522 against a half-depth of 0.575."
+				"footprint_note": "THE FLOOR IS THE FOOTPRINT AND IT IS DRAWN BEFORE EITHER AXIS IS CONSULTED: a 2.40 x 0.05 x 1.15 slab, two 1.10 x 0.012 x 1.02 pads at x = -0.60 and +0.60, and a 0.026 x 0.014 x 1.02 divider strip on the centre line. Four meshes, identical in all twelve cells. They are the reason the AABB is a constant and the reason the two designed-null frames are a picture of an empty court rather than a blank plate. Everything the axes draw is furniture-free above them: the pads are 12 mm proud and the divider 14 mm, so nothing in the court can stand in front of a mark. The content clears the floor edge at every value - the fill bench is widest at fused, spanning x from 0.078 to 1.122 against a floor half-width of 1.200, and z to +-0.522 against a half-depth of 0.575.",
+				"shelf_rule": "bench (base 2.40 m, h 1.15 m, registry.measurements)"
 			},
 			"dna": {
 				"promoted": "2026-08-17",

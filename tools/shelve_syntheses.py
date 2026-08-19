@@ -96,6 +96,7 @@ def main() -> int:
         return 0
 
     status = collections.Counter()
+    from registry_surgeon import set_entry_key
     for t, p, why, b, h, src, has, auth in rows:
         existing = cp.load_room(t)
         if auth:
@@ -103,23 +104,30 @@ def main() -> int:
             continue
         st = cp.write_room(t, p, existing, True)
         status[st] += 1
+        # Stamp provenance so a re-run recognises its own output. cp.write_room does not
+        # mark what it writes, so on the second pass every room this tool had just made
+        # looked AUTHORED to the guard above and was skipped — 61 of them — while the
+        # summary line read like a clean run.
+        rp_room = ROOMS / f"{t}.json"
+        if rp_room.exists():
+            room = json.loads(rp_room.read_text(encoding="utf-8"))
+            room["_generated"] = {"by": "tools/shelve_syntheses.py",
+                                  "rule": f"{why} (base {b:.2f} m, h {h:.2f} m, {src})"}
+            rp_room.write_text(json.dumps(room, indent=2) + "\n", encoding="utf-8")
         # The registry hint, so a future regeneration from the contract agrees with the
-        # room. Each synthesis has its OWN registry file (<token>.json), so the round-trip
-        # touches one small token-keyed dict — the 15,121-line reformat risk is a
-        # multi-token file's, and we refuse if this turns out not to be one.
+        # room — written by the surgeon (tools/registry_surgeon.py), which preserves the
+        # file's own formatting: a round-trip when that is byte-clean, a string-aware
+        # textual edit when it is not. The first writer here guessed the indent, got it
+        # wrong, and rewrote every line of 109 files to change two.
         rp = REG / f"{t}.json"
         if rp.exists():
-            raw = rp.read_text(encoding="utf-8")
-            d = json.loads(raw)
-            if len((d.get("artifacts") or {})) != 1:
-                status["registry-skipped(multi-token file)"] += 1
-                continue
-            sn = d["artifacts"][t].setdefault("spatial_needs", {})
-            sn["platform"] = p
-            sn["shelf_rule"] = f"{why} (base {b:.2f} m, h {h:.2f} m, {src})"
-            indent = "\t" if re.search(r"^\t", raw, re.M) else 2
-            rp.write_text(json.dumps(d, indent=indent, ensure_ascii=False) + "\n", encoding="utf-8")
-            status["registry-hinted"] += 1
+            n = 0
+            for k, v in (("platform", p), ("shelf_rule", f"{why} (base {b:.2f} m, h {h:.2f} m, {src})")):
+                r = set_entry_key(rp, t, ["spatial_needs"], k, v)
+                n += int(r.get("changed_lines") or 0)
+                status[f"registry-{r['mode']}"] += 1
+            if n > 6:
+                status[f"registry-WARN({t} moved {n} lines)"] += 1
     print("\nwrite results:", dict(status))
     return 0
 

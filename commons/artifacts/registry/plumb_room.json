@@ -43,7 +43,7 @@
 			"category": "proceduralgeneration",
 			"description": "One small marching-tetrahedra cave chunk read under the four plumbs its family declares - bedded, overturned, weightless, steep - the field's own gravity term at +1, -1, 0 and 3. The rock is one field; what changes is where a walker could stand, shown as standing patches on the rock and as the plumb line itself hung beside it.",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "platform",
 				"footprint_cells": 4,
 				"clearance": {
 					"front": 3,
@@ -54,8 +54,10 @@
 				"player_position": "front",
 				"orientation": "face_approach",
 				"preferred_zone": "teaching",
-				"footprint_source": "authored"
-			}
+				"footprint_source": "authored",
+				"shelf_rule": "stage (base 4.04 m, h 0.75 m, registry.measurements)"
+			},
+			"measurements": {"aabb_size": [4.04, 0.75, 0.75], "aabb_center": [0.0, 0.42, 0.0], "grid_cells": [5, 1], "max_dimension_m": 4.04, "measured_at": null}
 		}
 	}
 }

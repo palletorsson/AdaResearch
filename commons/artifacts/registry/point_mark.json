@@ -39,7 +39,7 @@
 			],
 			"capacity": "SEE that a point has no extension, so every drawing of one is notation with a property smuggled into it - and that the frame is notation too, measurable as the twenty-fold difference it makes to the same pair of marks",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "pedestal",
 				"footprint_cells": 1,
 				"clearance": {
 					"front": 2,
@@ -59,8 +59,8 @@
 				],
 				"preferred_zone": "teaching",
 				"footprint_source": "computed_from_geometry",
-				"footprint_note": "Every single-layout variant is the SAME box, because the box is the INVISIBLE anchor: a 0.50 m cube of BoxMesh at layers = 0, centred on the point at y 0.95, built before the axes are consulted. Nothing drawn ever leaves it - the lattice patch is 0.30, the world legs reach the 0.25 corner, the widest mark is the crosshair at 0.12 - so the union AABB is 0.50 x 0.50 x 0.50 in all sixteen cells and one grid cell holds it. auto_ground is FALSE: a point has no base, and grounding a stage that is symmetric about its subject would put the mark at 0.25 m. layout=ladder stands all four marks in a row at 0.62 m pitch (about 2.1 m wide) and is a design view, not a map placement."
-			},
+				"footprint_note": "Every single-layout variant is the SAME box, because the box is the INVISIBLE anchor: a 0.50 m cube of BoxMesh at layers = 0, centred on the point at y 0.95, built before the axes are consulted. Nothing drawn ever leaves it - the lattice patch is 0.30, the world legs reach the 0.25 corner, the widest mark is the crosshair at 0.12 - so the union AABB is 0.50 x 0.50 x 0.50 in all sixteen cells and one grid cell holds it. auto_ground is FALSE: a point has no base, and grounding a stage that is symmetric about its subject would put the mark at 0.25 m. layout=ladder stands all four marks in a row at 0.62 m pitch (about 2.1 m wide) and is a design view, not a map placement.",
+				"shelf_rule": "specimen (base 0.50 m, h 0.50 m, registry.measurements)"},
 			"measurements": {
 				"aabb_size": [
 					0.5,

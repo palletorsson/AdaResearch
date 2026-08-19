@@ -44,7 +44,7 @@
 			"category": "geometry",
 			"description": "Two implicit blobs at the four separations the family names - distinct, necked, lobed, single - built as real isosurfaces of the members' own smin field. Four names on one dial, and only two of the three gaps between them hide an event: the surface connects between distinct and necked, the waist vanishes between lobed and single, and between necked and lobed nothing happens but widening.",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "table",
 				"footprint_cells": 4,
 				"clearance": {
 					"front": 3,
@@ -55,7 +55,26 @@
 				"player_position": "front",
 				"orientation": "face_approach",
 				"preferred_zone": "teaching",
-				"footprint_source": "authored"
+				"footprint_source": "authored",
+				"shelf_rule": "bench (base 0.98 m, h 2.06 m, registry.measurements)"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.98,
+					2.06,
+					0.41
+				],
+				"aabb_center": [
+					0.0,
+					0.01,
+					0.0
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 2.06,
+				"measured_at": null
 			}
 		}
 	}

@@ -128,7 +128,7 @@
 				"placements": 0
 			},
 			"spatial_needs": {
-				"platform": "floor",
+				"platform": "table",
 				"footprint_cells": 4,
 				"clearance": {
 					"front": 2,
@@ -148,7 +148,8 @@
 				],
 				"preferred_zone": "teaching",
 				"footprint_source": "computed_from_geometry",
-				"footprint_note": "THE WORLD BOX IS A CONSTANT IN ALL FIFTEEN CELLS AND THAT IS THE POINT OF THE ANCHOR. A 1.680 x 0.560 x 0.460 BoxMesh with layers = 0 sits at local (0, 0.280, 0); it renders nothing and is merged into the capture AABB anyway, because capture_config_sweep.gd:1488 takes every MeshInstance3D without asking about layer or visibility. Everything built stays inside it: the grip ends at x = -0.810 and the reach shelf at x = +0.800 against an anchor half-width of 0.840; the tallest thing in any cell is the reach shelf's object at y = 0.548 against an anchor height of 0.560; the deepest are the scale board at z = -0.176 and the case lid at z = -0.077 against an anchor half-depth of 0.230. The whole rig is yawed 0.62 rad about Y to meet the sweep's standpoint, which is what makes the world box 1.635 wide rather than 1.680; a map placing this artifact should expect the bench to stand 35.5 degrees off the grid axis, or pass its own rotation in the token."
+				"footprint_note": "THE WORLD BOX IS A CONSTANT IN ALL FIFTEEN CELLS AND THAT IS THE POINT OF THE ANCHOR. A 1.680 x 0.560 x 0.460 BoxMesh with layers = 0 sits at local (0, 0.280, 0); it renders nothing and is merged into the capture AABB anyway, because capture_config_sweep.gd:1488 takes every MeshInstance3D without asking about layer or visibility. Everything built stays inside it: the grip ends at x = -0.810 and the reach shelf at x = +0.800 against an anchor half-width of 0.840; the tallest thing in any cell is the reach shelf's object at y = 0.548 against an anchor height of 0.560; the deepest are the scale board at z = -0.176 and the case lid at z = -0.077 against an anchor half-depth of 0.230. The whole rig is yawed 0.62 rad about Y to meet the sweep's standpoint, which is what makes the world box 1.635 wide rather than 1.680; a map placing this artifact should expect the bench to stand 35.5 degrees off the grid axis, or pass its own rotation in the token.",
+				"shelf_rule": "bench (base 1.63 m, h 0.56 m, registry.measurements)"
 			},
 			"measurements": {
 				"aabb_size": [

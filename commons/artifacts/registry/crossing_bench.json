@@ -41,7 +41,7 @@
 			],
 			"capacity": "SEE that `crossing` names two different questions in this corpus - what you did to two waves, and how much of the answer has been put on the table - and that the nodal set is the instrument that tells them apart, because a product's zeros and a sum's zeros are both straight rulings at different angles, a radial field's are circles that never meet, and a compressed field's are not curves at all",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "table",
 				"footprint_cells": 1,
 				"clearance": {
 					"front": 2,
@@ -64,7 +64,8 @@
 				"preferred_zone": "teaching",
 				"footprint_source": "computed_from_geometry",
 				"footprint_note": "Every one-layout variant is the SAME body, because the body is the CAGE: a 0.96 x 0.96 m plate, four 0.032 m corner pins 1.00 m tall, four top rails and a 0.024 m apron square at y = 0.56, all axis-aligned and all drawn before either axis is consulted. The field inside spans x,z +-0.45 and y 0.43 to 0.69; the `parts` shelf reaches y 0.92 at the fabricated hump and the `zero` fins reach 0.67. Nothing ever leaves the cage, so the world box is 0.96 x 1.00 x 0.96 in all twenty-one cells and one grid cell holds it. Nothing is rotated to face the camera. layout=row stands all seven crossings in a line at 1.15 m pitch (about 8.0 m wide) and is a design view, not a map placement.",
-				"grid_cells_note": "1 x 1 with two cells of approach in front; the reading is downward onto a 0.90 m field at 0.56 m, so a player wants to stand over it rather than beside it."
+				"grid_cells_note": "1 x 1 with two cells of approach in front; the reading is downward onto a 0.90 m field at 0.56 m, so a player wants to stand over it rather than beside it.",
+				"shelf_rule": "bench (base 0.96 m, h 1.00 m, registry.measurements)"
 			},
 			"measurements": {
 				"aabb_size": [

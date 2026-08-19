@@ -46,7 +46,7 @@
 			"category": "instruments",
 			"description": "One number, 0.62, held by three real bodies - a fluid in a glass tank, a knob on a rail, five pucks on a spindle of eight - and presented under the four readouts the family shares: nothing, a nameplate numeral, a ruled blade beside the span, a grid over the face. Each readout is mounted alone, so what it claims about the value can be seen without the others' claims stacked on top.",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "table",
 				"footprint_cells": 2,
 				"clearance": {
 					"front": 2,
@@ -57,8 +57,10 @@
 				"player_position": "front",
 				"orientation": "face_approach",
 				"preferred_zone": "teaching",
-				"footprint_source": "authored"
-			}
+				"footprint_source": "authored",
+				"shelf_rule": "bench (base 1.21 m, h 0.31 m, registry.measurements)"
+			},
+			"measurements": {"aabb_size": [1.21, 0.31, 0.16], "aabb_center": [0.0, 0.16, 0.0], "grid_cells": [2, 1], "max_dimension_m": 1.21, "measured_at": null}
 		}
 	}
 }

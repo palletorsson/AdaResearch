@@ -124,6 +124,28 @@
 					1
 				],
 				"size_group": "large"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.72,
+					1.26,
+					0.84
+				],
+				"aabb_center": [
+					0.0,
+					0.63,
+					0.0
+				],
+				"grid_cells": [
+					3,
+					1
+				],
+				"max_dimension_m": 2.72,
+				"measured_at": null
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"shelf_rule": "bench (base 2.72 m, h 1.26 m, registry.measurements)"
 			}
 		}
 	}

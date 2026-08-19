@@ -56,7 +56,25 @@
 				"orientation": "face_approach",
 				"preferred_zone": "teaching",
 				"footprint_source": "authored",
-				"shelf_rule": "UNMEASURED — default museum pose, measure it (base 0.00 m, h 0.00 m, UNMEASURED)"
+				"shelf_rule": "specimen (base 0.32 m, h 0.80 m, registry.measurements)"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.31,
+					0.8,
+					0.32
+				],
+				"aabb_center": [
+					0.0,
+					0.4,
+					0.0
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.8,
+				"measured_at": null
 			}
 		}
 	}

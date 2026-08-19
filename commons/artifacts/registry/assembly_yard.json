@@ -45,7 +45,7 @@
 			"category": "puzzles",
 			"description": "One solid of the snap family's own parts - amber points, cyan struts, edge 0.28 - at each of the four states the seven puzzles name under two axis words. closed, loose and scattered are one distance from being itself; short is a different kind of distance, near and incomplete, and stands off the row.",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "platform",
 				"footprint_cells": 5,
 				"clearance": {
 					"front": 3,
@@ -56,7 +56,26 @@
 				"player_position": "front",
 				"orientation": "face_approach",
 				"preferred_zone": "teaching",
-				"footprint_source": "authored"
+				"footprint_source": "authored",
+				"shelf_rule": "stage (base 3.82 m, h 0.68 m, registry.measurements)"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.82,
+					0.68,
+					0.88
+				],
+				"aabb_center": [
+					0.25,
+					0.6,
+					-0.16
+				],
+				"grid_cells": [
+					4,
+					1
+				],
+				"max_dimension_m": 3.82,
+				"measured_at": null
 			}
 		}
 	}

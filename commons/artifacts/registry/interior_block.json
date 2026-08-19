@@ -5,7 +5,7 @@
 			"category": "geometry",
 			"description": "One 1 m block, a 20 x 20 x 20 census of solid and air meshed as its watertight face-culled shell, with the family's seven interiors carved into it - the wall's corner, court and room (closed in plan, open to the sky, the room entered by a door) and the landscape's undercut, caverned and warren (closed by a roof, entered by a mouth) - read three ways: the solid from outside, which shows only its openings; a section through the middle with the cut filled dark; and the hollow cast as its own glowing body, dark wherever a flood fill from outside cannot reach it, which on all seven words is nowhere.",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "table",
 				"footprint_cells": 1,
 				"clearance": {
 					"front": 2,
@@ -16,7 +16,8 @@
 				"player_position": "front",
 				"orientation": "face_approach",
 				"preferred_zone": "teaching",
-				"footprint_source": "authored"
+				"footprint_source": "authored",
+				"shelf_rule": "bench (base 1.01 m, h 1.01 m, registry.measurements)"
 			},
 			"dna": {
 				"promoted": "2026-08-15",
@@ -96,7 +97,8 @@
 				"fixture_why": "The artifact can stand as all seven interiors in a row (layout = ladder, 1.30 m pitch, about 8.8 m wide) but the SWEEP must see one block at a time: capture_config_sweep unions the AABB across a spec's variants, so a seven-wide row in the same spec frames every single block against nine metres and photographs it as a speck. layout is an export and not an axis, and it ships at single, so the fixture is a belt over braces. Nothing else needs pinning: no RNG, no _process, no deferred build - every variant is a fixed set of boxes carved from a fixed grid and resolved synchronously in _ready, so one frame is a complete account, and the same word gives the same mesh every run.",
 				"framing": 0.6,
 				"framing_why": "DERIVED, not solved by tools/solve_framing.py, because no Godot run was allowed to this builder; to be corrected from the first sheet if it disagrees. The union AABB across all 21 variants is the 1 m hull (solid is the block; section and void carry the hull's twelve edges as MeshInstance3D boxes so their box is the same 1 x 1 x 1), radius 0.866, so at framing 1.0 the camera stands 5.38 m out and the cube's projected width is about 1.35 m in a 3.29 m frame, 14.9% of frame area by the raster. At 0.60 the raster puts the solid block's silhouette between 0.12 and 0.85 of frame width and 0.21 and 0.90 of frame height, 41.8% of frame area, with the top face still in view - a margin on every side and about 8% below, where a staged station would sit. If the first sheet shows the bottom edge cropped, go to 0.65, not the geometry."
-			}
+			},
+			"measurements": {"aabb_size": [1.01, 1.01, 1.01], "aabb_center": [0.0, 0.5, 0.0], "grid_cells": [2, 2], "max_dimension_m": 1.01, "measured_at": null}
 		}
 	}
 }

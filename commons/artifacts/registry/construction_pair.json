@@ -39,7 +39,7 @@
 			],
 			"capacity": "SEE that a construction is an ARGUMENT and not a style - that a chain claims addition is a journey, a parallelogram claims it is a symmetric fact, and commute and flip are not drawings at all but two different UNIONS of those claims, each named by only one half of a family that teaches one operation twice",
 			"spatial_needs": {
-				"platform": "table",
+				"platform": "pedestal",
 				"footprint_cells": 1,
 				"clearance": {
 					"front": 2,
@@ -62,8 +62,8 @@
 				],
 				"preferred_zone": "teaching",
 				"footprint_source": "computed_from_geometry",
-				"footprint_note": "THE FRAME IS THE FOOTPRINT AND IT IS DRAWN BEFORE EITHER AXIS IS CONSULTED: four 0.018 m square rods on outer half-extents 0.404 x 0.348, plus two 0.048 x 0.018 x 0.128 feet at x = +-0.300 that give the piece its only depth. The frame is the reason the AABB is a constant. Without it the box would be a fact about which construction was picked - `bare` draws three arrows and `flip` draws seven objects - the camera would move between cells, and every measured pair would carry a framing difference it did not earn. THE FIGURE INSIDE MOVES A GREAT DEAL AND IS ALLOWED TO: the drawn point set spans 0.489 x 0.378 m in the add column, 0.260 x 0.606 m at bare and chain under subtract, and 0.489 x 0.606 m at the three subtract readings that stand -b at the origin. The world box is 0.808 x 0.696 x 0.128 in every one of the ten cells regardless, and the figure clears the frame's inner opening by at least 0.027 m at every arrowhead - checked at all four extreme heads, including the resultant cone at a+b whose base circle reaches x = 0.3126 against an opening at 0.386. layout=ladder stands all five constructions in a row at 0.90 m pitch, about 4.4 m wide, and is a design view rather than a map placement."
-			},
+				"footprint_note": "THE FRAME IS THE FOOTPRINT AND IT IS DRAWN BEFORE EITHER AXIS IS CONSULTED: four 0.018 m square rods on outer half-extents 0.404 x 0.348, plus two 0.048 x 0.018 x 0.128 feet at x = +-0.300 that give the piece its only depth. The frame is the reason the AABB is a constant. Without it the box would be a fact about which construction was picked - `bare` draws three arrows and `flip` draws seven objects - the camera would move between cells, and every measured pair would carry a framing difference it did not earn. THE FIGURE INSIDE MOVES A GREAT DEAL AND IS ALLOWED TO: the drawn point set spans 0.489 x 0.378 m in the add column, 0.260 x 0.606 m at bare and chain under subtract, and 0.489 x 0.606 m at the three subtract readings that stand -b at the origin. The world box is 0.808 x 0.696 x 0.128 in every one of the ten cells regardless, and the figure clears the frame's inner opening by at least 0.027 m at every arrowhead - checked at all four extreme heads, including the resultant cone at a+b whose base circle reaches x = 0.3126 against an opening at 0.386. layout=ladder stands all five constructions in a row at 0.90 m pitch, about 4.4 m wide, and is a design view rather than a map placement.",
+				"shelf_rule": "specimen (base 0.81 m, h 0.70 m, registry.measurements)"},
 			"measurements": {
 				"aabb_size": [
 					0.808,

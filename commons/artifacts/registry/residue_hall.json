@@ -5,7 +5,7 @@
 			"category": "randomness",
 			"description": "Three walks and the one vocabulary they share for what remains of a walk - a lattice field that raises the ground it lands on, a pipe whose record is its body, and a walk pulled back inside a sphere. The rungs nest, so the sheet accumulates rather than substituting.",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "table",
 				"footprint_cells": 4,
 				"clearance": {
 					"front": 3,
@@ -16,7 +16,8 @@
 				"player_position": "front",
 				"orientation": "face_approach",
 				"preferred_zone": "teaching",
-				"footprint_source": "authored"
+				"footprint_source": "authored",
+				"shelf_rule": "bench (base 2.46 m, h 0.70 m, registry.measurements)"
 			},
 			"dna": {
 				"promoted": "2026-08-14",

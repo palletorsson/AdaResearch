@@ -106,24 +106,8 @@
     "base_y_m": -0.005
   },
   "_generated": {
-    "by": "tools/emit_dressing_room.py",
-    "at": "2026-08-12T14:49:25Z",
-    "from": {
-      "body.size_m": "measurements.aabb_size",
-      "body.footprint_cells": "measurements.grid_cells",
-      "placement.modes": "placement_contract.allowed_modes",
-      "placement.preferred_mode": "placement_contract.preferred_mode",
-      "clearance": "spatial_needs.clearance",
-      "clearance.front": "placement_contract.front_clearance_m",
-      "clearance.back": "placement_contract.rear_clearance_m",
-      "access.required_sides": "placement_contract.interaction_faces",
-      "presentation.importance": "default",
-      "presentation.visual_radius": "placement_contract preferred-minus-hard zone",
-      "containment": "placement_contract.containment (hand-authored)",
-      "presentation.preferred_venue": "placement_contract.preferred_venue"
-    },
-    "conflicts": [],
-    "note": "A DEFAULT, bootstrapped per SPATIAL_PIPELINE.md 4. Author over it freely \u2014 remove this block when you do, and the generator will leave the file alone."
+    "by": "tools/shelve_syntheses.py",
+    "rule": "bench (base 1.66 m, h 2.09 m, registry.measurements)"
   },
   "display_name": "Herbarium Cabinet",
   "posture": "table"

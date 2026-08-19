@@ -38,7 +38,7 @@
 			],
 			"capacity": "SEE that a self-organising system does not choose its own shape - the layout of its fixed points does, and that layout is an input the family had been treating as decoration",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "table",
 				"footprint_cells": 1,
 				"clearance": {
 					"front": 2,
@@ -59,7 +59,8 @@
 				],
 				"preferred_zone": "teaching",
 				"footprint_source": "computed_from_geometry",
-				"footprint_note": "Every single-layout variant sits inside 1.0 x 0.178 x 1.0 m: the ground disc is radius 0.50 at y 0 to 0.012, the anchors stand at radius 0.44 with a 0.055 pad (outer edge 0.495) and a 0.16 m post, and nothing else is taller. layout=ladder stands the four anchorages in a row at 1.20 m pitch (about 4.2 m wide) and is a design view, not a map placement."
+				"footprint_note": "Every single-layout variant sits inside 1.0 x 0.178 x 1.0 m: the ground disc is radius 0.50 at y 0 to 0.012, the anchors stand at radius 0.44 with a 0.055 pad (outer edge 0.495) and a 0.16 m post, and nothing else is taller. layout=ladder stands the four anchorages in a row at 1.20 m pitch (about 4.2 m wide) and is a design view, not a map placement.",
+				"shelf_rule": "bench (base 1.00 m, h 0.18 m, registry.measurements)"
 			},
 			"measurements": {
 				"aabb_size": [

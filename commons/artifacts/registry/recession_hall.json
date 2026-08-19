@@ -100,7 +100,7 @@
 				"placements": 0
 			},
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "table",
 				"footprint_cells": 4,
 				"clearance": {
 					"front": 2,
@@ -120,7 +120,8 @@
 				],
 				"preferred_zone": "teaching",
 				"footprint_source": "computed_from_geometry",
-				"footprint_note": "THE WORLD BOX IS A CONSTANT AND THAT IS THE WHOLE POINT OF THE HALL. The hall is an OUTER x OUTER = 1.46 x 1.46 front elevation standing on y = 0, with the back wall's rear face at z = -0.41 and the proscenium's front face at z = +0.075, all rotated 0.62 rad about Y to meet capture_config_sweep's bearing. The levels live entirely inside the 1.36 x 1.36 opening: the widest arrangement is `abreast` at inheritance=equal, whose run is exactly SPAN = 1.20, leaving 0.08 of clear air on each side; the deepest is `nested` at inheritance=halved, whose run is sizes[0] - sizes[3] = 0.2625 against 0.36 of interior depth. So neither axis can move the box, and bare and swept cells frame identically. A map placing this artifact should expect its opening to face 35.5 deg off the grid axis, or pass its own rotation in the token."
+				"footprint_note": "THE WORLD BOX IS A CONSTANT AND THAT IS THE WHOLE POINT OF THE HALL. The hall is an OUTER x OUTER = 1.46 x 1.46 front elevation standing on y = 0, with the back wall's rear face at z = -0.41 and the proscenium's front face at z = +0.075, all rotated 0.62 rad about Y to meet capture_config_sweep's bearing. The levels live entirely inside the 1.36 x 1.36 opening: the widest arrangement is `abreast` at inheritance=equal, whose run is exactly SPAN = 1.20, leaving 0.08 of clear air on each side; the deepest is `nested` at inheritance=halved, whose run is sizes[0] - sizes[3] = 0.2625 against 0.36 of interior depth. So neither axis can move the box, and bare and swept cells frame identically. A map placing this artifact should expect its opening to face 35.5 deg off the grid axis, or pass its own rotation in the token.",
+				"shelf_rule": "bench (base 1.47 m, h 1.46 m, registry.measurements)"
 			},
 			"measurements": {
 				"aabb_size": [

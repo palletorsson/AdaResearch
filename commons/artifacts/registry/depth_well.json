@@ -43,7 +43,7 @@
 			"category": "proceduralgeneration",
 			"description": "One recursion at depths one to five, the same small integer the octave family offers and the opposite curve: each level acts on everything the last one made, so the parts multiply where octaves halve. Same control, same word, no limit object.",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "platform",
 				"footprint_cells": 4,
 				"clearance": {
 					"front": 3,
@@ -54,7 +54,26 @@
 				"player_position": "front",
 				"orientation": "face_approach",
 				"preferred_zone": "teaching",
-				"footprint_source": "authored"
+				"footprint_source": "authored",
+				"shelf_rule": "stage (base 4.54 m, h 0.68 m, registry.measurements)"
+			},
+			"measurements": {
+				"aabb_size": [
+					4.54,
+					0.68,
+					0.55
+				],
+				"aabb_center": [
+					0.14,
+					-0.1,
+					0.0
+				],
+				"grid_cells": [
+					5,
+					1
+				],
+				"max_dimension_m": 4.54,
+				"measured_at": null
 			}
 		}
 	}

@@ -49,7 +49,7 @@
 			"qfep_connection": "Four accounts of an outside, none of them observable from within. The lanes are bit-identical for eighty of the run's hundred and sixty steps and they are four different worlds the whole time - the difference is real before it is visible, which is the condition of every structure that decides what a system may do at its edge. The artifact's own dark spot is `absorbing`: the lane that draws no wall, keeps no record and ends empty is the one whose claim is largest, because it asserts that the domain continues forever in a direction the exhibit cannot show. It is also the only lane whose energy bar reaches zero, and the only place in the piece where nothing is the correct picture.",
 			"relationships": "Synthesised from [[wave_equation_solver]], which owns the four-value `boundary` vocabulary this tank exhibits, and which can only ever stand in ONE of them at a time because a membrane can only have one rim.\n\nTHE WORD IS THREE QUESTIONS AND THE REGISTRY HAS TO SAY SO. Five artifacts declare `boundary` and they carry three unrelated value lists - see dna.kin. This tank takes the wave solver's and names the other two rather than leaving the next agent to discover the split.\n\n[[sorting_hall]] OWNS `moment`. Its const MOMENTS := {start: 0.0, quarter: 0.25, half: 0.5, done: 1.0} is preloaded and read, not copied, so the two synthesis shells cannot drift into two ladders. Its PANEL_COLOR is reused for the same reason: the two shells should photograph as siblings.\n\n[[wave_interference_tank]] and [[wave_interference_3d]] own `evidence` in this corner of the corpus. Their static evidence_name() is the reader an evidence token is routed through here, exactly as the 3D twin routes its own, so `pattern`, `field`, `section` and `terms` cannot mean different rungs in three artifacts.\n\n[[noise_quarry]] is the construction precedent: one field, evaluated once, cut N ways, with the family word exhibited rather than swept. [[removal_room]] is the same move for `removal`. This tank is that pattern applied to a family whose values are not three drawings of one object but four different simulations.",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "table",
 				"footprint_cells": 3,
 				"clearance": {
 					"front": 3,
@@ -70,7 +70,8 @@
 				],
 				"preferred_zone": "teaching",
 				"footprint_source": "computed_from_geometry",
-				"footprint_note": "A flat panel 2.70 m wide, 2.206 m tall and 0.096 m deep, standing with its base at y = 0, so the grid's base-to-floor grounding is a no-op and no auto_ground opt-out is needed. It is read from the front (+Z); `wall_backing` is true because the artifact BRINGS its own panel and should not be given a second wall 0.4 m behind it. There is no collider anywhere in the file, so the pathfinder will route straight through it - correct, because it is a picture."
+				"footprint_note": "A flat panel 2.70 m wide, 2.206 m tall and 0.096 m deep, standing with its base at y = 0, so the grid's base-to-floor grounding is a no-op and no auto_ground opt-out is needed. It is read from the front (+Z); `wall_backing` is true because the artifact BRINGS its own panel and should not be given a second wall 0.4 m behind it. There is no collider anywhere in the file, so the pathfinder will route straight through it - correct, because it is a picture.",
+				"shelf_rule": "bench (base 2.70 m, h 2.21 m, registry.measurements)"
 			},
 			"measurements": {
 				"aabb_size": [

@@ -54,7 +54,7 @@
       "qfep_connection": "A curriculum is an order imposed on things that do not carry it, and the only way to find out whether the order is real is to put the things side by side on one draw and measure. Done here, the ladder that the randomness sequence teaches turns out not to be a ladder of constraint at all for its first three rungs: chaos, noise and pattern leave the spread of the draw exactly where they found it and change only its texture. The progression is still true — each rule reads more than the last — but the thing it progresses in is not the thing the word 'constraint' promises. The arc is built so that this can be seen rather than argued, and so that it could have come out the other way.",
       "relationships": "Synthesised from the six registry names that declare `chapter` over two scenes: extreme_randomness and its four .tscn wrappers particle_randomness_pure / _perlin / _patterns / _emergent, which are one script under five names, plus facade_grammar_demo, which carries the word against an architectural value list. Replaces none of them and re-runs none of their axes from the outside: those five can each show ONE chapter and this shows all five at once, which is the value of the word they all declare and cannot photograph. Reads the five station names and ELITE_FRACTION out of extrem_randomness.gd's own consts and the evidence ladder out of noise_quarry.gd's, so three synthesis artifacts share one vocabulary. Sibling in form to noise_quarry (one field cut three ways) and generator_bench (one cut filled four ways); this is one DRAW read five ways.",
       "spatial_needs": {
-        "platform": "none",
+        "platform": "monument",
         "footprint_cells": 8,
         "clearance": {
           "front": 2,
@@ -73,7 +73,8 @@
         ],
         "preferred_zone": "teaching",
         "footprint_source": "computed_from_geometry",
-        "footprint_note": "The apron is 7.70 m across the five bays by 1.16 m deep, with the board standing 0.62 m behind it and 1.72 m up. It wants to be walked ALONG rather than approached: the whole argument is the left-to-right reading, so a placement that puts a wall or another artifact at either end costs the exhibit its first or last chapter."
+        "footprint_note": "The apron is 7.70 m across the five bays by 1.16 m deep, with the board standing 0.62 m behind it and 1.72 m up. It wants to be walked ALONG rather than approached: the whole argument is the left-to-right reading, so a placement that puts a wall or another artifact at either end costs the exhibit its first or last chapter.",
+        "shelf_rule": "a space, not an object (base 7.70 m, h 1.72 m, registry.measurements)"
       },
       "measurements": {
         "aabb_size": [

@@ -5,7 +5,7 @@
 			"category": "proceduralgeneration",
 			"description": "Four growths and the one word they share for what remains of one - and the word splits two and two. A 2x2 where the top row's envelope is permission decided before anything grew and the bottom row's is a hull fitted after the fact.",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "platform",
 				"footprint_cells": 6,
 				"clearance": {
 					"front": 3,
@@ -16,7 +16,8 @@
 				"player_position": "front",
 				"orientation": "face_approach",
 				"preferred_zone": "teaching",
-				"footprint_source": "authored"
+				"footprint_source": "authored",
+				"shelf_rule": "stage (base 4.63 m, h 1.50 m, registry.measurements)"
 			},
 			"dna": {
 				"promoted": "2026-08-14",

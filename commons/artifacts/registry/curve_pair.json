@@ -38,7 +38,7 @@
 			],
 			"capacity": "SEE that a rate, a quantity and an accumulation are three readings of one drawn line, and that the five words a family shares are a chain only where the family agrees what the words mean",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "pedestal",
 				"footprint_cells": 1,
 				"clearance": {
 					"front": 2,
@@ -59,8 +59,8 @@
 				],
 				"preferred_zone": "teaching",
 				"footprint_source": "computed_from_geometry",
-				"footprint_note": "Every single-layout variant is one flat panel 1.05 m wide, at most 0.86 m tall and 0.06 m deep, standing vertically and turned to face the approach. Its world footprint is 0.85 x 0.62 m because the panel is rotated 0.62 rad about Y. layout=ladder stands all five curves in a row at 1.20 m pitch (about 5.8 m wide) and is a design view, not a map placement."
-			},
+				"footprint_note": "Every single-layout variant is one flat panel 1.05 m wide, at most 0.86 m tall and 0.06 m deep, standing vertically and turned to face the approach. Its world footprint is 0.85 x 0.62 m because the panel is rotated 0.62 rad about Y. layout=ladder stands all five curves in a row at 1.20 m pitch (about 5.8 m wide) and is a design view, not a map placement.",
+				"shelf_rule": "specimen (base 0.85 m, h 0.84 m, registry.measurements)"},
 			"measurements": {
 				"aabb_size": [
 					0.8522,

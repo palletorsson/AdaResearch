@@ -45,7 +45,7 @@
       "qfep_connection": "Four theories of how a person comes to know how to make something, standing at once so that none of them can pass as the natural one. The bench cannot exempt itself: presenting four tellings in a row on a common deck with nothing to say which is which is itself the `none` claim, the one that says the work should speak for itself, and the artifact states that rather than pretending to a view from nowhere. What the axes then show is that instruction is not a quantity to be dosed. Three of the four tellings are about YOUR chair and shrink as you build it; the fourth is a finished chair that has never heard of you and is exactly the same size whether you have done one piece or five. And when the work is wrong, the silent bay is silent in a second way, because there is nothing beside it for the error to be an error against.",
       "relationships": "synthesis over the `tell` family (assembly_line_puzzle, chair_/shelf_/stool_/table_assembly_puzzle, balance_puzzle, configurable_portal); adopts its word by exhibiting it rather than sweeping it, as taxonomy_hall does with `taxonomy`; reads both its four words and its chair plan live out of furniture_assembly_puzzle.gd",
       "spatial_needs": {
-        "platform": "none",
+        "platform": "table",
         "footprint_cells": 4,
         "clearance": {
           "front": 2,
@@ -64,7 +64,8 @@
         ],
         "preferred_zone": "teaching",
         "footprint_source": "computed_from_geometry",
-        "footprint_note": "The deck is 3.12 m across the four bays by 0.56 m deep, so a 4 x 1 clear strip with room to stand in front of it. Every bay reads from +Z and the exemplar's extra chair extends the row to the +X end, so the artifact wants approaching from +Z with the ghost bay on the left; `orientation: face_approach` plus a rotation in the map token is how you get that. There is no collider anywhere in the file - the pathfinder will route straight through the chairs, which is correct, because there are no chairs, there are four pictures of one."
+        "footprint_note": "The deck is 3.12 m across the four bays by 0.56 m deep, so a 4 x 1 clear strip with room to stand in front of it. Every bay reads from +Z and the exemplar's extra chair extends the row to the +X end, so the artifact wants approaching from +Z with the ghost bay on the left; `orientation: face_approach` plus a rotation in the map token is how you get that. There is no collider anywhere in the file - the pathfinder will route straight through the chairs, which is correct, because there are no chairs, there are four pictures of one.",
+        "shelf_rule": "bench (base 3.12 m, h 0.93 m, registry.measurements)"
       },
       "measurements": {
         "aabb_size": [

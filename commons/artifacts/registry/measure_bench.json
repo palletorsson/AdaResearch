@@ -42,7 +42,7 @@
 			],
 			"capacity": "SEE that `measure` is not one question but a bundle of unstated divisions - that before any quantity can be drawn as geometry something must be chosen as its metres-per-unit, that ForceMagnitudeDemo makes that choice once and spends it on three different dimensions without saying so, and that the two words in the family which sound like derivatives take no limit while the one that sounds like a state takes the only one",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "table",
 				"footprint_cells": 1,
 				"clearance": {
 					"front": 2,
@@ -64,7 +64,8 @@
 				],
 				"preferred_zone": "teaching",
 				"footprint_source": "computed_from_geometry",
-				"footprint_note": "The STAGE is the footprint and it is drawn before either axis is consulted: a 1.00 x 0.68 m plate and, at x = -0.44, a post running from the plate top to y = 1.154. The drawn figure moves a long way inside that box - the acceleration rod reaches x = +0.500, the volume cage reaches z = +0.190, the canon circle reaches y = 1.154, and in the window reading six of eight cells contain nothing but the body and the post - while the world box stays 1.000 x 1.154 x 0.680 in all twenty-four cells. That is why the stage exists, and why the post is in every cell rather than only in the ones that need a reference. layout=ladder stands all eight measures in a row at 1.20 m pitch, about 8.4 m wide, and is a design view rather than a map placement."
+				"footprint_note": "The STAGE is the footprint and it is drawn before either axis is consulted: a 1.00 x 0.68 m plate and, at x = -0.44, a post running from the plate top to y = 1.154. The drawn figure moves a long way inside that box - the acceleration rod reaches x = +0.500, the volume cage reaches z = +0.190, the canon circle reaches y = 1.154, and in the window reading six of eight cells contain nothing but the body and the post - while the world box stays 1.000 x 1.154 x 0.680 in all twenty-four cells. That is why the stage exists, and why the post is in every cell rather than only in the ones that need a reference. layout=ladder stands all eight measures in a row at 1.20 m pitch, about 8.4 m wide, and is a design view rather than a map placement.",
+				"shelf_rule": "bench (base 1.00 m, h 1.15 m, registry.measurements)"
 			},
 			"measurements": {
 				"aabb_size": [

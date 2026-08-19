@@ -40,7 +40,7 @@
 			],
 			"capacity": "SEE that an alphabet's SIZE is a fact about its declaration and its REACH is a fact about what renders, and that the two can point in opposite directions - nine symbols reaching one configuration while two symbols reach sixteen",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "table",
 				"footprint_cells": 1,
 				"clearance": {
 					"front": 2,
@@ -62,7 +62,8 @@
 				],
 				"preferred_zone": "teaching",
 				"footprint_source": "computed_from_geometry",
-				"footprint_note": "THE LOOM FRAME IS THE FOOTPRINT AND IT IS DRAWN BEFORE EITHER AXIS IS CONSULTED: two uprights 0.045 x 0.96 x 0.16 at x = +-0.4575, two beams 0.96 x 0.045 x 0.16 at y = 0.0225 and 0.9375, and a solid back 0.90 x 0.90 x 0.08 behind them. The world box is 0.96 x 0.96 x 0.16 in all twenty-one cells before a single mark exists. Without the frame the box would be a fact about which alphabet was picked - primitives reach 0.064 m forward and the textile bars only 0.017, csg_tree's triangle is a plane with no thickness at all, and the reach shelf at csg_tree is ONE plaque 0.070 m square against parametric's 121. The camera would move between cells and every measured pair would carry a framing difference it did not earn. The FIGURE inside the frame moves enormously: 144 marks under field, two plaques under glyphs at any two-symbol alphabet, nine under glyphs at csg_tree, one under reach at csg_tree and 121 under reach at parametric. THE PANEL IS VERTICAL, which is not a style choice: at capture_config_sweep's standpoint a horizontal plane projects at 0.084 of its area and a vertical one in the xy plane at 0.787, nine times better, and ten_print_textile's cloth is already a hanging bolt. layout=ladder stands all seven alphabets in a row at 1.10 m pitch, about 7.6 m wide, and is a design view rather than a map placement."
+				"footprint_note": "THE LOOM FRAME IS THE FOOTPRINT AND IT IS DRAWN BEFORE EITHER AXIS IS CONSULTED: two uprights 0.045 x 0.96 x 0.16 at x = +-0.4575, two beams 0.96 x 0.045 x 0.16 at y = 0.0225 and 0.9375, and a solid back 0.90 x 0.90 x 0.08 behind them. The world box is 0.96 x 0.96 x 0.16 in all twenty-one cells before a single mark exists. Without the frame the box would be a fact about which alphabet was picked - primitives reach 0.064 m forward and the textile bars only 0.017, csg_tree's triangle is a plane with no thickness at all, and the reach shelf at csg_tree is ONE plaque 0.070 m square against parametric's 121. The camera would move between cells and every measured pair would carry a framing difference it did not earn. The FIGURE inside the frame moves enormously: 144 marks under field, two plaques under glyphs at any two-symbol alphabet, nine under glyphs at csg_tree, one under reach at csg_tree and 121 under reach at parametric. THE PANEL IS VERTICAL, which is not a style choice: at capture_config_sweep's standpoint a horizontal plane projects at 0.084 of its area and a vertical one in the xy plane at 0.787, nine times better, and ten_print_textile's cloth is already a hanging bolt. layout=ladder stands all seven alphabets in a row at 1.10 m pitch, about 7.6 m wide, and is a design view rather than a map placement.",
+				"shelf_rule": "bench (base 0.96 m, h 0.96 m, registry.measurements)"
 			},
 			"measurements": {
 				"aabb_size": [

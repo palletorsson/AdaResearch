@@ -47,7 +47,7 @@
 			],
 			"capacity": "SEE that a line between two fixed points is a law made visible - and that the law is not recoverable from the curve, because the code's `catenary` is a parabola and differs from a true catenary by 1.7 mm on a run 40 mm thick",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "table",
 				"footprint_cells": 1,
 				"clearance": {
 					"front": 2,
@@ -71,7 +71,8 @@
 				"preferred_zone": "teaching",
 				"footprint_source": "computed_from_geometry",
 				"footprint_note": "Every one of the fifteen single-layout variants is the SAME box, because the two masts (0.05 x 0.93) and the sill (1.08 x 0.03 x 0.16) are built before the axis is consulted. Turned to face bearing 0.62 rad the world box is 0.972 x 1.032 x 0.758 for fourteen of them and 0.972 x 1.034 x 0.758 for `spline`, whose Catmull-Rom overshoots handle 1 by 2 mm. The run is at chest height (anchors 0.95) and everything the axis draws hangs inside that envelope: festoon's lowest tube point 0.670, its hung weights 0.569, the truss's bottom chord 0.799 - all above the sill, so no variant enlarges the union. layout=ladder stands all five laws in a row at 1.30 m pitch (about 5.4 m wide) and is a design view, not a map placement.",
-				"measured_footprint_cells": 1
+				"measured_footprint_cells": 1,
+				"shelf_rule": "bench (base 0.97 m, h 1.03 m, registry.measurements)"
 			},
 			"measurements": {
 				"aabb_size": [

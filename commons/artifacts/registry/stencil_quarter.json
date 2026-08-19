@@ -37,7 +37,7 @@
 			"category": "patterns",
 			"description": "One seeded field folded under each symmetry the family declares, with only the stored tile standing and the generated remainder left flat. A symmetry is a compression ratio. Also the artifact that found the axis name is a homonym: gradient_hunter's stencil is not this one.",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "table",
 				"footprint_cells": 4,
 				"clearance": {
 					"front": 3,
@@ -48,7 +48,26 @@
 				"player_position": "front",
 				"orientation": "face_approach",
 				"preferred_zone": "teaching",
-				"footprint_source": "authored"
+				"footprint_source": "authored",
+				"shelf_rule": "bench (base 0.91 m, h 0.11 m, registry.measurements)"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.91,
+					0.11,
+					0.91
+				],
+				"aabb_center": [
+					0.0,
+					0.05,
+					0.0
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.91,
+				"measured_at": null
 			}
 		}
 	}

@@ -40,7 +40,7 @@
 			],
 			"capacity": "SEE that a line drawn on a body and the line where that body stops are two different objects that share a word - and that only one of them changes when you move",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "pedestal",
 				"footprint_cells": 1,
 				"clearance": {
 					"front": 2,
@@ -61,8 +61,8 @@
 				],
 				"preferred_zone": "teaching",
 				"footprint_source": "computed_from_geometry",
-				"footprint_note": "Every cell is the SAME body: a 0.760 x 0.020 x 0.760 plinth, a 0.560 m cube centred at y 0.470, and marks that at their widest (separation=clear) reach 0.335 m from the cube's centre in each face normal and 0.370 m along each edge. The envelope is therefore 0.760 x 0.840 x 0.760 and one grid cell holds it. THE ARTIFACT IS NOT YAW-ROTATED, unlike rule_bench and postulate_bench, and that is deliberate rather than an omission - see dna.note. layout=ladder stands all five disclosures in a row at 1.00 m pitch (about 4.8 m wide) and is a design view, not a map placement."
-			},
+				"footprint_note": "Every cell is the SAME body: a 0.760 x 0.020 x 0.760 plinth, a 0.560 m cube centred at y 0.470, and marks that at their widest (separation=clear) reach 0.335 m from the cube's centre in each face normal and 0.370 m along each edge. The envelope is therefore 0.760 x 0.840 x 0.760 and one grid cell holds it. THE ARTIFACT IS NOT YAW-ROTATED, unlike rule_bench and postulate_bench, and that is deliberate rather than an omission - see dna.note. layout=ladder stands all five disclosures in a row at 1.00 m pitch (about 4.8 m wide) and is a design view, not a map placement.",
+				"shelf_rule": "specimen (base 0.76 m, h 0.84 m, registry.measurements)"},
 			"measurements": {
 				"aabb_size": [
 					0.76,

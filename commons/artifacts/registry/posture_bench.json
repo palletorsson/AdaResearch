@@ -39,7 +39,7 @@
 			],
 			"capacity": "SEE that four artifacts can share a word and mean four different constructions by it, that two of those four constructions are the same scalar under two nouns, and that two words from two unrelated vocabularies can name the same body to the byte - and that none of this is visible from any one member, because a family's disagreement only shows up when its words are built on one object",
 			"spatial_needs": {
-				"platform": "table",
+				"platform": "pedestal",
 				"footprint_cells": 1,
 				"clearance": {
 					"front": 2,
@@ -61,8 +61,8 @@
 				],
 				"preferred_zone": "teaching",
 				"footprint_source": "computed_from_geometry",
-				"footprint_note": "THE CAGE IS THE FOOTPRINT AND IT IS DRAWN BEFORE EITHER AXIS IS CONSULTED: a 0.80 x 0.36 m plate 0.024 m thick, four 0.024 m posts standing 0.660 m above it at x, z = +-0.385, +-0.165, and a 0.052 m mount 0.200 m tall at the centre. The posts are the reason the AABB is a constant, and they carry more here than they did on cohort_bench because THIS FIGURE CHANGES SIZE BY A FACTOR OF THREE: the drawn body spans 0.145 x 0.169 m at ball, 0.121 x 0.140 m at ring, 0.167 x 0.188 m at coil, 0.275 x 0.277 m at laden, 0.197 x 0.356 m at walker, 0.324 x 0.183 m at arc, 0.328 x 0.157 m at solid, 0.364 x 0.169 m at cast, and 0.000 x 0.420 m at line and sentry. Measured clearances across all ten poses and all three readings: the tallest limb tops out 0.040 m below the posts, the tallest grown hull 0.025 m below them, the longest reach stops 0.021 m short of a post in x and its hull 0.006 m short, and the lowest thing any pose draws - ring, which hangs below its own hinge - sits 0.080 m above the plate. The world box is 0.80 x 0.684 x 0.36 in every one of the thirty cells. layout=ladder stands all ten postures in a row at 0.86 m pitch, about 8.5 m wide, and is a design view rather than a map placement."
-			},
+				"footprint_note": "THE CAGE IS THE FOOTPRINT AND IT IS DRAWN BEFORE EITHER AXIS IS CONSULTED: a 0.80 x 0.36 m plate 0.024 m thick, four 0.024 m posts standing 0.660 m above it at x, z = +-0.385, +-0.165, and a 0.052 m mount 0.200 m tall at the centre. The posts are the reason the AABB is a constant, and they carry more here than they did on cohort_bench because THIS FIGURE CHANGES SIZE BY A FACTOR OF THREE: the drawn body spans 0.145 x 0.169 m at ball, 0.121 x 0.140 m at ring, 0.167 x 0.188 m at coil, 0.275 x 0.277 m at laden, 0.197 x 0.356 m at walker, 0.324 x 0.183 m at arc, 0.328 x 0.157 m at solid, 0.364 x 0.169 m at cast, and 0.000 x 0.420 m at line and sentry. Measured clearances across all ten poses and all three readings: the tallest limb tops out 0.040 m below the posts, the tallest grown hull 0.025 m below them, the longest reach stops 0.021 m short of a post in x and its hull 0.006 m short, and the lowest thing any pose draws - ring, which hangs below its own hinge - sits 0.080 m above the plate. The world box is 0.80 x 0.684 x 0.36 in every one of the thirty cells. layout=ladder stands all ten postures in a row at 0.86 m pitch, about 8.5 m wide, and is a design view rather than a map placement.",
+				"shelf_rule": "specimen (base 0.80 m, h 0.68 m, registry.measurements)"},
 			"measurements": {
 				"aabb_size": [
 					0.8,

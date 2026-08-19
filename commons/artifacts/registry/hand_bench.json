@@ -119,7 +119,7 @@
 				"placements": 0
 			},
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "pedestal",
 				"footprint_cells": 1,
 				"clearance": {
 					"front": 2,
@@ -141,8 +141,8 @@
 				"preferred_zone": "teaching",
 				"footprint_source": "computed_from_geometry",
 				"footprint_note": "Every single-layout variant is the SAME body, because the body is the BED: a 0.90 x 0.90 m slab 0.024 thick, four 0.030 m corner posts 0.460 m tall and four top rails, axis-aligned and drawn before either axis is consulted. The drawn figure never exceeds x,z +-0.384 or y 0.408, so the world box is 0.900 x 0.460 x 0.900 in all eighteen cells and one grid cell holds it. Nothing is rotated to face the camera: a yawed bed would grow the footprint to 1.26 m and would show the sweep arc end-on, which is the exact framing mistake mc_sculpt_vr measured and corrected in its own sweep table. layout=ladder stands all six hands in a row at 1.10 m pitch (about 6.6 m wide) and is a design view, not a map placement.",
-				"measured_footprint_cells": 1
-			},
+				"measured_footprint_cells": 1,
+				"shelf_rule": "specimen (base 0.90 m, h 0.46 m, registry.measurements)"},
 			"measurements": {
 				"aabb_size": [
 					0.9,

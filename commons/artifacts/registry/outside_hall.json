@@ -94,7 +94,7 @@
     "sweep_note": "READ THE PER-PAIR ROWS, NOT THE HEADLINE. Two axes cross here and the headline is a PEAK: remedy moves the whole exterior ground and will dominate any summary, which is exactly how tier_terrarium's live channel axis hid a dead tier axis. The rows that matter are the fence column - where outside is reduced to whatever the patch had to supply - and the quotation/margin pair inside it."
    },
    "spatial_needs": {
-    "platform": "floor",
+    "platform": "table",
     "footprint_cells": 9,
     "clearance": {
      "front": 2,
@@ -115,7 +115,8 @@
     ],
     "preferred_zone": "teaching",
     "footprint_source": "computed_from_geometry",
-    "footprint_note": "The ground plate is 2.40 x 2.40 and the built body reaches 0.60 high, so the piece wants a 2x2 cell block on its own axes - but it is measured at 3.348 x 0.660 x 3.348 because the 0.62 rad face yaw is INSIDE the artifact: 2.40 * (cos 0.62 + sin 0.62) = 3.347806, confirmed by a headless instantiation of all fifteen cells. Reserve 4 x 4. The yaw is part of the artifact, not a placement hint: it exists so the front face squares to the capture standpoint, and a map that rotates the token rotates it away from that."
+    "footprint_note": "The ground plate is 2.40 x 2.40 and the built body reaches 0.60 high, so the piece wants a 2x2 cell block on its own axes - but it is measured at 3.348 x 0.660 x 3.348 because the 0.62 rad face yaw is INSIDE the artifact: 2.40 * (cos 0.62 + sin 0.62) = 3.347806, confirmed by a headless instantiation of all fifteen cells. Reserve 4 x 4. The yaw is part of the artifact, not a placement hint: it exists so the front face squares to the capture standpoint, and a map that rotates the token rotates it away from that.",
+    "shelf_rule": "bench (base 3.35 m, h 0.66 m, registry.measurements)"
    },
    "footprint_measured": [
     4,
@@ -128,7 +129,25 @@
     "postfoundationscrisis",
     "foundationscrisis"
    ],
-   "sequence": "postfoundationscrisis"
+   "sequence": "postfoundationscrisis",
+   "measurements": {
+    "aabb_size": [
+     3.35,
+     0.66,
+     3.35
+    ],
+    "aabb_center": [
+     0.0,
+     0.27,
+     0.0
+    ],
+    "grid_cells": [
+     4,
+     4
+    ],
+    "max_dimension_m": 3.35,
+    "measured_at": null
+   }
   }
  }
 }

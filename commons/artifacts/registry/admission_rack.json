@@ -37,7 +37,7 @@
 				"size_group": "xlarge"
 			},
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "table",
 				"footprint_cells": 3,
 				"clearance": {
 					"front": 3,
@@ -57,8 +57,8 @@
 					"exhibit"
 				],
 				"preferred_zone": "teaching",
-				"footprint_source": "computed_from_geometry"
-			},
+				"footprint_source": "computed_from_geometry",
+				"shelf_rule": "bench (base 2.94 m, h 1.30 m, registry.measurements)"},
 			"measurements": {
 				"aabb_size": [
 					2.94,

@@ -39,7 +39,7 @@
 			],
 			"capacity": "SEE that `assembly` is one word carrying three different ladders - a decomposition that grows by subsets, a derivation that replaces its parts, and a degree that never shows fewer than all of them - and that the part count is the only thing in a still that tells them apart",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "pedestal",
 				"footprint_cells": 1,
 				"clearance": {
 					"front": 2,
@@ -61,8 +61,8 @@
 				],
 				"preferred_zone": "teaching",
 				"footprint_source": "computed_from_geometry",
-				"footprint_note": "THE STAGE IS THE FOOTPRINT and it is drawn before either axis is consulted: a 0.68 x 0.68 m plate and an invisible layers = 0 anchor of 0.68 x 0.58 x 0.68 centred at y 0.29. The drawn object runs 0.412 x 0.545 x 0.520 m at full/stair, 0.530 x 0.290 x 0.290 at full/table, 0.380 x 0.458 x 0.260 at full/figure, down to 0.530 x 0.030 x 0.270 at treads/table, and the heap spreads widest and flattest at 0.613 x 0.188 x 0.546 - a 4.5x spread in the diagonal - while the world box stays 0.68 x 0.58 x 0.68 in all twenty-one cells. That is why the anchor exists: without it every cell would be photographed at its own focal length and every measured pair would be reporting zoom. layout=ladder stands all three objects in a row at 0.90 m pitch, about 2.3 m wide, and is a design view rather than a map placement."
-			},
+				"footprint_note": "THE STAGE IS THE FOOTPRINT and it is drawn before either axis is consulted: a 0.68 x 0.68 m plate and an invisible layers = 0 anchor of 0.68 x 0.58 x 0.68 centred at y 0.29. The drawn object runs 0.412 x 0.545 x 0.520 m at full/stair, 0.530 x 0.290 x 0.290 at full/table, 0.380 x 0.458 x 0.260 at full/figure, down to 0.530 x 0.030 x 0.270 at treads/table, and the heap spreads widest and flattest at 0.613 x 0.188 x 0.546 - a 4.5x spread in the diagonal - while the world box stays 0.68 x 0.58 x 0.68 in all twenty-one cells. That is why the anchor exists: without it every cell would be photographed at its own focal length and every measured pair would be reporting zoom. layout=ladder stands all three objects in a row at 0.90 m pitch, about 2.3 m wide, and is a design view rather than a map placement.",
+				"shelf_rule": "specimen (base 0.68 m, h 0.58 m, registry.measurements)"},
 			"measurements": {
 				"aabb_size": [
 					0.68,

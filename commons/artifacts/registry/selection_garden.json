@@ -34,7 +34,7 @@
 			"qfep_connection": "A fitness function is somebody's decision about what a good body is, and the five plots are five different somebodies. Standing them on ONE founding population makes the authorship visible: the material is identical, so everything that differs is the taste. The plot that matters most is `drift`, which has no taste at all - and which, on this seed, carried the population further than three of the four tastes did. The ladder of progress is not readable off the outcome.",
 			"relationships": "Synthesis of the `selection` family - evolved_creatures, evolving_flowers, evolvingflowers, non_teleological_evolution, evolutionary_algorithms, particle_randomness_evolutionary - whose word and value list it reads out of non_teleological_evolution.gd at runtime rather than retyping. Sibling in argument to noise_quarry, which does the same thing for the `readout` family's B dialect: one subject, the family word exhibited rather than swept, and the axes varying what the word is applied to.",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "monument",
 				"footprint_cells": 7,
 				"clearance": {
 					"front": 2,
@@ -53,7 +53,8 @@
 				],
 				"preferred_zone": "teaching",
 				"footprint_source": "computed_from_geometry",
-				"footprint_note": "The apron is 6.47 m across five 1.15 m plots with four 0.13 m gaps and two 0.10 m margins, and 0.46 m deep. Seven cells of run, one of depth. The clearance is asked at the front because everything the artifact draws faces the approach and the five plots are meant to be read in one sweep of the eye, left to right, in the family's declared order."
+				"footprint_note": "The apron is 6.47 m across five 1.15 m plots with four 0.13 m gaps and two 0.10 m margins, and 0.46 m deep. Seven cells of run, one of depth. The clearance is asked at the front because everything the artifact draws faces the approach and the five plots are meant to be read in one sweep of the eye, left to right, in the family's declared order.",
+				"shelf_rule": "a space, not an object (base 6.47 m, h 0.93 m, registry.measurements)"
 			},
 			"dna": {
 				"promoted": "2026-08-13",

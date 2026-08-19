@@ -41,7 +41,7 @@
 			],
 			"capacity": "SEE that `law` in this corpus names three different relations between a claim and the world - refutable by one instance, refutable only by a statistic over a threshold, and not refutable but bounded - and that the difference is legible in the shape of the residual and nowhere else",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "table",
 				"footprint_cells": 1,
 				"clearance": {
 					"front": 2,
@@ -63,7 +63,8 @@
 				],
 				"preferred_zone": "teaching",
 				"footprint_source": "computed_from_geometry",
-				"footprint_note": "Every single-layout variant is the SAME body, because the body is the STAGE: a 0.96 x 0.96 m plate, four 0.032 m corner pins 1.00 m tall and four top rails, axis-aligned and drawn before either axis is consulted. Inside it a board spans x -0.40..0.40 and y 0.14..0.90 and is also drawn in all 27 cells. Measured on the replica, everything drawn inside the cage lies within x -0.416..+0.407 (the left bound is a start bead of radius 0.0163 sitting on the board's left edge), y 0.133..0.907 (both bounds are the frame, not the figure - the tallest figure is logint's curve at 0.852), and z -0.149..+0.121 (the board at the back, a Newton step bead in the front lane at the front). So the world box is 0.96 x 1.00 x 0.96 in every cell, set by the stage alone, and one grid cell holds it. The stage exists precisely because the figures do not agree about extent: none/claim draws NOTHING and logint/world draws two 500-sample curves. Nothing is yawed to face the camera; a rotated cage would grow the footprint to 1.34 m. layout=ladder stands the three readings in a row at 1.15 m pitch (about 3.5 m wide) and is a design view, not a map placement."
+				"footprint_note": "Every single-layout variant is the SAME body, because the body is the STAGE: a 0.96 x 0.96 m plate, four 0.032 m corner pins 1.00 m tall and four top rails, axis-aligned and drawn before either axis is consulted. Inside it a board spans x -0.40..0.40 and y 0.14..0.90 and is also drawn in all 27 cells. Measured on the replica, everything drawn inside the cage lies within x -0.416..+0.407 (the left bound is a start bead of radius 0.0163 sitting on the board's left edge), y 0.133..0.907 (both bounds are the frame, not the figure - the tallest figure is logint's curve at 0.852), and z -0.149..+0.121 (the board at the back, a Newton step bead in the front lane at the front). So the world box is 0.96 x 1.00 x 0.96 in every cell, set by the stage alone, and one grid cell holds it. The stage exists precisely because the figures do not agree about extent: none/claim draws NOTHING and logint/world draws two 500-sample curves. Nothing is yawed to face the camera; a rotated cage would grow the footprint to 1.34 m. layout=ladder stands the three readings in a row at 1.15 m pitch (about 3.5 m wide) and is a design view, not a map placement.",
+				"shelf_rule": "bench (base 0.96 m, h 1.00 m, registry.measurements)"
 			},
 			"measurements": {
 				"aabb_size": [

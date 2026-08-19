@@ -45,7 +45,7 @@
       "qfep_connection": "The family's word says a solid can be divided more or less finely, and the arithmetic says that is not what its five values do. Two of them nest, one does not, and the last is a different operation carrying the same name - so the ladder is a category held together by a word rather than by an order. What `kerf` then exposes is that the difference between the values is not a property of the division at all: at kerf=shut the four cut bays are the same photograph, and every one of them becomes visible only because a constant nobody in this family states has been spent on opening the seams. The vocabulary is legible because of a decision it does not admit to making, and the decision has a cost that has to come out of either the material or the room.",
       "relationships": "synthesis over the `grain` family's (a) dialect (cube_scene, prism_block, grabbable_line); refuses the (b), (c) and (d) dialects on the record in dna.declines; adopts its word by exhibiting rather than sweeping it, as taxonomy_hall does with `taxonomy` and instruction_bench with `tell`; reads both the word list and the gauge live out of cube_scene.gd",
       "spatial_needs": {
-        "platform": "none",
+        "platform": "monument",
         "footprint_cells": 8,
         "clearance": {
           "front": 2,
@@ -64,7 +64,8 @@
         ],
         "preferred_zone": "teaching",
         "footprint_source": "computed_from_geometry",
-        "footprint_note": "The row is 7.80 m across five bays on a 1.70 m pitch and 1.22 m deep at its widest value, so an 8 x 2 clear strip with room to stand in front of it. Every bay reads from +Z and the row runs along X with the solid end at -X; `orientation: face_approach` plus a rotation in the map token is how you get that. There is no collider anywhere in the file, so the pathfinder routes straight through the blocks - which is correct, because there are no blocks, there are five pictures of one."
+        "footprint_note": "The row is 7.80 m across five bays on a 1.70 m pitch and 1.22 m deep at its widest value, so an 8 x 2 clear strip with room to stand in front of it. Every bay reads from +Z and the row runs along X with the solid end at -X; `orientation: face_approach` plus a rotation in the map token is how you get that. There is no collider anywhere in the file, so the pathfinder routes straight through the blocks - which is correct, because there are no blocks, there are five pictures of one.",
+        "shelf_rule": "a space, not an object (base 7.80 m, h 2.12 m, registry.measurements)"
       },
       "measurements": {
         "aabb_size": [

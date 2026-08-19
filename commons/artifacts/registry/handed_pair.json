@@ -5,7 +5,7 @@
 			"category": "vectors",
 			"description": "One construction under one convention: two vectors a and b in the floor plane, the turning arc from a toward b, and the perpendicular the hand chooses - as VectorCrossProduct's arrow over its ruled parallelogram, as torque_demo's tau standing on a pivot with the force slid to the tip of the lever, or as dna_specimen's double helix wound around the arrow. right is a x b, up; left is the exact reflection of right through the a-b plane, b x a, down; both is the two halves tail to tail, an achiral figure. Deterministic geometry, no readout, no chart.",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "pedestal",
 				"footprint_cells": 2,
 				"clearance": {
 					"front": 2,
@@ -16,8 +16,8 @@
 				"player_position": "front",
 				"orientation": "face_approach",
 				"preferred_zone": "teaching",
-				"footprint_source": "authored"
-			},
+				"footprint_source": "authored",
+				"shelf_rule": "specimen (base 0.51 m, h 0.48 m, registry.measurements)"},
 			"dna": {
 				"promoted": "2026-08-15",
 				"stage": "synthesis",
@@ -55,7 +55,8 @@
 				"framing": 0.7,
 				"framing_why": "DERIVED FROM THE PRE-CAPTURE RASTER, NOT MEASURED. At framing 1.0 the union subject (0.455 x 0.907 x 0.566 m) projects to about 41% of the frame height and 1.5% of the frame by area, because the union spans both directions of the perpendicular while any single variant fills one; at 0.7 the projected subject box is 283-507 x 163-620 of 760, 60% of the height with margin on every side, and about 3.1% of the frame by area. The critic crops to the subject box, so the bite numbers above do not move with framing; only the tile does. If a spec sweeps figure alone at handedness=right the union is the upper half and 0.7 still fits with room.",
 				"declines": "`span` (VectorCrossProduct's grid|solid|outline|none, what an area is claimed to be) - real, but it lives IN the mirror plane and is identical at every hand, so it would be a second axis over the one part of the picture handedness cannot move; the cross figure takes the member's default, grid. `becoming` (dna_specimen's jarred|cracked|escaped|clouded) - the jar is the specimen's argument, not the helix's; declined for the same reason regime_threshold declined the pendulum's furniture. A `magnitude` or `angle` axis over |a x b| = |a||b| sin(theta) - VectorCrossProduct's slider changes it live, but the perpendicular here is drawn at a fixed display length as torque_demo draws tau*0.5, and an axis over a display scale photographs the exhibit's units as physics (torque_demo's own note, circle_train's refusal). A `mirror` pane in the a-b plane at `both` - no member draws one; the lattice already lies in that plane in the cross figure and the arc marks it in the others."
-			}
+			},
+			"measurements": {"aabb_size": [0.48, 0.48, 0.51], "aabb_center": [-0.03, 0.21, -0.21], "grid_cells": [1, 1], "max_dimension_m": 0.51, "measured_at": null}
 		}
 	}
 }

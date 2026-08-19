@@ -40,7 +40,7 @@
 			],
 			"capacity": "SEE that crest, trough, steepest, agree, oppose, single, bend and mirror are all names for the same kind of thing - places where the derivative says something the function alone does not - and that traverse, the word all three members share, is the name for everywhere else",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "pedestal",
 				"footprint_cells": 1,
 				"clearance": {
 					"front": 2,
@@ -62,8 +62,8 @@
 				],
 				"preferred_zone": "teaching",
 				"footprint_source": "computed_from_geometry",
-				"footprint_note": "Every single-layout variant is the SAME body, because the body is the FRAME: a 0.90 x 0.90 m base plate, four 0.020 m posts running from y -0.20 to +0.34 and four top rails, axis-aligned and drawn before either axis is consulted. What the axes move is inside it - the bead runs from y -0.059 in the trough to +0.269 on the crest and the gradient rod reaches y +0.302 at steepest - so the world box is 0.90 x 0.56 x 0.90 in all eighteen cells and one grid cell holds it. Nothing is rotated to face the camera: a yawed frame would grow the footprint to 1.27 m and would show the terrain slab edge-on, where a three-quarter view is what makes a height field read as a height field. layout=ladder stands all six stations in a row at 1.05 m pitch (about 5.25 m wide) and is a design view, not a map placement."
-			},
+				"footprint_note": "Every single-layout variant is the SAME body, because the body is the FRAME: a 0.90 x 0.90 m base plate, four 0.020 m posts running from y -0.20 to +0.34 and four top rails, axis-aligned and drawn before either axis is consulted. What the axes move is inside it - the bead runs from y -0.059 in the trough to +0.269 on the crest and the gradient rod reaches y +0.302 at steepest - so the world box is 0.90 x 0.56 x 0.90 in all eighteen cells and one grid cell holds it. Nothing is rotated to face the camera: a yawed frame would grow the footprint to 1.27 m and would show the terrain slab edge-on, where a three-quarter view is what makes a height field read as a height field. layout=ladder stands all six stations in a row at 1.05 m pitch (about 5.25 m wide) and is a design view, not a map placement.",
+				"shelf_rule": "specimen (base 0.90 m, h 0.56 m, registry.measurements)"},
 			"measurements": {
 				"aabb_size": [
 					0.9,

@@ -38,7 +38,7 @@
 			],
 			"capacity": "SEE that layer width and connectivity are two vocabularies for one question - how can information travel through this - and that they do not line up the way either tradition assumes",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "table",
 				"footprint_cells": 1,
 				"clearance": {
 					"front": 2,
@@ -60,7 +60,8 @@
 				],
 				"preferred_zone": "teaching",
 				"footprint_source": "computed_from_geometry",
-				"footprint_note": "Every single-layout variant sits inside 0.916 x 0.936 x 0.735 m. The envelope is a design constraint and not a coincidence: columns are pitched so the station count never changes the span, a column of 2 is spread over the same height as a column of 16, and severed's fragments are compressed toward the cut by exactly the drift they are then given, so the gap is a gap and not extra width. layout=ladder stands all eight topologies in a row at 1.15 m pitch (about 8.1 m wide) and is a design view, not a map placement."
+				"footprint_note": "Every single-layout variant sits inside 0.916 x 0.936 x 0.735 m. The envelope is a design constraint and not a coincidence: columns are pitched so the station count never changes the span, a column of 2 is spread over the same height as a column of 16, and severed's fragments are compressed toward the cut by exactly the drift they are then given, so the gap is a gap and not extra width. layout=ladder stands all eight topologies in a row at 1.15 m pitch (about 8.1 m wide) and is a design view, not a map placement.",
+				"shelf_rule": "bench (base 0.90 m, h 0.81 m, registry.measurements)"
 			},
 			"measurements": {
 				"aabb_size": [

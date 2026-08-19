@@ -39,7 +39,7 @@
 			"qfep_connection": "F is the vertex set and its positions: one lattice, fixed, never redrawn, which is what makes the four registers a comparison instead of four drawings. E is the arrows that get added, and they are the smallest possible edit - a second arrow beside one already there, which is what a pocket of mutuality is at its minimum, a two-way street. lambda is how much of the return journey the structure is willing to grant. The dark spot is `implicit`: it is what every one of the five members ships, it looks like no decision at all, and it is the value at which the entire series collapses into four almost identical lattices. The partition was always there; drawing only the arrows is a choice to leave it uncomputed.",
 			"relationships": "Synthesised out of the five artifacts that declare a `mutuality` axis - [[tarjan_algorithm]], [[kosaraju_algorithm]], [[rhizomatic_structure]], [[network_analysis]], [[forcedirected3d]] - all five carrying the identical value list [pockets, none, split, total].\n\n[[tarjan_algorithm]] OWNS THE VOCABULARY in practice: it is the file both later promotions name first as their source, and its MUTUALITIES const is PRELOADED by this plate rather than retyped, so the two cannot drift. If that const changes or disappears this file fails at parse time.\n\n[[kosaraju_algorithm]] contributes the second route and the reason the plate can check itself. Its own truth line - that strongly connected components are the same in a graph and its transpose - is the theorem that makes `route` undrawable here, and it is tested in _run() rather than quoted: _scc_tarjan and _scc_kosaraju are both run on all four edge sets and compared.\n\n[[rhizomatic_structure]] is the member that contests the question from outside graph theory, and it contributed the ruling on captions: it carries no Label3D at all, on the argument that a nameplate over a centreless structure immediately becomes the privileged point. This plate is not centreless - it is a plate - so it takes the opposite decision and prints its captions as INK ON THE BODY, billboard disabled, which LabelFramer skips.\n\n[[forcedirected3d]] and [[network_analysis]] both answer the word with an UNDIRECTED structure (springs and repulsion in one, centrality in the other), which is why `linked` is a value here at all: their reading of `mutuality` is the weak one, and on this plate the weak reading returns 1, 1, 1, 1.\n\n[[removal_room]] is not a source and is quoted anyway, for its construction rule: one copy of the arithmetic, evaluated once, read N ways. _run() fills four tables and every register reads them; nothing on this plate re-derives an edge set or a partition.",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "platform",
 				"footprint_cells": 5,
 				"clearance": {
 					"front": 3,
@@ -59,7 +59,8 @@
 					"kosaraju_algorithm"
 				],
 				"preferred_zone": "teaching",
-				"footprint_source": "computed_from_geometry"
+				"footprint_source": "computed_from_geometry",
+				"shelf_rule": "stage (base 4.52 m, h 1.70 m, registry.measurements)"
 			},
 			"measurements": {
 				"aabb_size": [

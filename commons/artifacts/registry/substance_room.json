@@ -40,7 +40,7 @@
 			],
 			"capacity": "SEE that `substance` is one word carrying two independent questions - does light get through, and does the body hold its shape - and that the corpus's three vocabularies answer only the first, in words borrowed from the second",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "table",
 				"footprint_cells": 1,
 				"clearance": {
 					"front": 2,
@@ -62,7 +62,8 @@
 				],
 				"preferred_zone": "teaching",
 				"footprint_source": "computed_from_geometry",
-				"footprint_note": "The STAGE is the footprint and it is drawn before either axis is consulted: a 1.00 x 0.80 m plate, two piers, and an L of stripes at z = -0.34 and x = -0.44. The drawn body runs 0.720 m across at five of its six values and 0.878 m at granular, and the load can rest anywhere from y 0.500 to y 0.024, so the FIGURE's extent moves by 22 percent and 0.476 m while the world box stays 1.00 x 0.545 x 0.80 in all eighteen cells. That is why the stage exists. Nothing is yawed to face the camera: the stripe screen is an L precisely so that it does not have to be. layout=ladder stands all six substances in a row at 1.30 m pitch, about 7.5 m wide, and is a design view rather than a map placement."
+				"footprint_note": "The STAGE is the footprint and it is drawn before either axis is consulted: a 1.00 x 0.80 m plate, two piers, and an L of stripes at z = -0.34 and x = -0.44. The drawn body runs 0.720 m across at five of its six values and 0.878 m at granular, and the load can rest anywhere from y 0.500 to y 0.024, so the FIGURE's extent moves by 22 percent and 0.476 m while the world box stays 1.00 x 0.545 x 0.80 in all eighteen cells. That is why the stage exists. Nothing is yawed to face the camera: the stripe screen is an L precisely so that it does not have to be. layout=ladder stands all six substances in a row at 1.30 m pitch, about 7.5 m wide, and is a design view rather than a map placement.",
+				"shelf_rule": "bench (base 1.00 m, h 0.55 m, registry.measurements)"
 			},
 			"measurements": {
 				"aabb_size": [

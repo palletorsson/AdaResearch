@@ -107,7 +107,7 @@
 				"compare (uniform, specimen) with (uniform, ensemble): one pile at full size, then nine piles that are nine different draws of the same description. Nine of 10^70, which is the whole idea rendered as a shortfall you can see"
 			],
 			"spatial_needs": {
-				"platform": "floor",
+				"platform": "table",
 				"footprint_cells": 2,
 				"clearance": {
 					"front": 2,
@@ -127,7 +127,8 @@
 				],
 				"preferred_zone": "teaching",
 				"footprint_source": "computed_from_geometry",
-				"footprint_note": "THE CARCASS IS THE FOOTPRINT AND NEITHER AXIS TOUCHES IT. _build_carcass() reads no axis: a 1.30 x 0.08 x 0.40 m plinth, a 1.30 x 0.045 x 0.40 m top rail whose top face is at 1.545, two 0.04 x 1.42 x 0.40 m uprights at x = +-0.63 and a 1.30 x 1.42 x 0.02 m backboard at z = -0.19. Everything either axis can draw is inside it, checked value by value: the possibility box is 1.10 x 0.90 x 0.30 centred at y 0.75 (top 1.20), the spilled plume runs to y 1.42 and x +-0.578, the ensemble grid spans x +-0.575 and y 0.265..1.241, the tallest column is uniform's 70 blocks topping out at 1.43, and the unbounded chevron reaches 1.481. So the union AABB is exactly 1.30 x 1.545 x 0.40 in all sixteen cells and the fixed camera frames every one of them identically."
+				"footprint_note": "THE CARCASS IS THE FOOTPRINT AND NEITHER AXIS TOUCHES IT. _build_carcass() reads no axis: a 1.30 x 0.08 x 0.40 m plinth, a 1.30 x 0.045 x 0.40 m top rail whose top face is at 1.545, two 0.04 x 1.42 x 0.40 m uprights at x = +-0.63 and a 1.30 x 1.42 x 0.02 m backboard at z = -0.19. Everything either axis can draw is inside it, checked value by value: the possibility box is 1.10 x 0.90 x 0.30 centred at y 0.75 (top 1.20), the spilled plume runs to y 1.42 and x +-0.578, the ensemble grid spans x +-0.575 and y 0.265..1.241, the tallest column is uniform's 70 blocks topping out at 1.43, and the unbounded chevron reaches 1.481. So the union AABB is exactly 1.30 x 1.545 x 0.40 in all sixteen cells and the fixed camera frames every one of them identically.",
+				"shelf_rule": "bench (base 1.30 m, h 1.54 m, registry.measurements)"
 			},
 			"measurements": {
 				"aabb_size": [

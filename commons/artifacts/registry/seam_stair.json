@@ -142,7 +142,7 @@
     "placements": 0
    },
    "spatial_needs": {
-    "platform": "floor",
+    "platform": "table",
     "footprint_cells": 4,
     "clearance": {
      "front": 2,
@@ -162,7 +162,8 @@
     ],
     "preferred_zone": "teaching",
     "footprint_source": "computed_from_geometry",
-    "footprint_note": "The body is 1.40 x 1.02 x 1.40, which is 2 x 2 cells in plan, and the orientation is NOT a placement hint: the standpoint blade points along LENS_AZIMUTH = PI/2 - 0.62 in the artifact's own frame, so a map that yaws this token also yaws the declared standpoint away from the approach. Place it at rotation 0 unless the map's approach is deliberately being put somewhere other than where the object says the viewer is."
+    "footprint_note": "The body is 1.40 x 1.02 x 1.40, which is 2 x 2 cells in plan, and the orientation is NOT a placement hint: the standpoint blade points along LENS_AZIMUTH = PI/2 - 0.62 in the artifact's own frame, so a map that yaws this token also yaws the declared standpoint away from the approach. Place it at rotation 0 unless the map's approach is deliberately being put somewhere other than where the object says the viewer is.",
+    "shelf_rule": "bench (base 1.40 m, h 1.02 m, registry.measurements)"
    },
    "measurements": {
     "aabb_size": [

@@ -39,7 +39,7 @@
 			],
 			"capacity": "SEE that two artifacts can share an axis name, share no value at all, and still be asking one question - and that the disagreement between them is not about vocabulary but about what KIND of quantity presence is: a degree with no zero, or a membership with no degree. Neither member can show this, because each has only its own five words on its own body, and one of them cannot build absence while the other cannot build a half.",
 			"spatial_needs": {
-				"platform": "floor",
+				"platform": "pedestal",
 				"footprint_cells": 1,
 				"clearance": {
 					"front": 2,
@@ -60,8 +60,8 @@
 				],
 				"preferred_zone": "teaching",
 				"footprint_source": "computed_from_geometry",
-				"footprint_note": "THE STAGE IS THE FOOTPRINT AND IT IS DRAWN BEFORE EITHER AXIS IS CONSULTED: a 0.90 x 0.05 x 0.54 m plinth, magritte's own 0.80 x 0.60 x 0.05 frame and 0.70 x 0.50 x 0.01 canvas standing at y 0.41 on two 0.014 m posts, a blank 0.34 x 0.012 x 0.07 caption plate on the plinth's front, and dark_sphere's floor pool at its witness radius of 0.204. THE PLINTH DEPTH IS NOT A ROUND NUMBER AND WAS NOT CHOSEN: quorum inherits dark_sphere's swarm ring at radius * 0.95 plus a small orb at radius * 0.40, so it reaches 0.2295 m from its site, and at the frame warrant that lands at z = 0.2645 against a plinth edge at 0.27. The plinth was widened to hold it rather than the swarm capped to fit - capping would have made the closest pair a fact about this rig instead of a fact about two vocabularies. Measured clearances across all fifteen cells: the apparatus foot ring is the deepest thing in the sheet at z = 0.2666, the denial bar reaches 0.221, the pool 0.219, the apparatus hoops top out at y = 0.5832 against a frame top edge at 0.71, and the lowest hoop bottoms at 0.0996, 0.0496 above the plinth top. The world box is 0.90 x 0.71 x 0.54 in every one of the fifteen cells."
-			},
+				"footprint_note": "THE STAGE IS THE FOOTPRINT AND IT IS DRAWN BEFORE EITHER AXIS IS CONSULTED: a 0.90 x 0.05 x 0.54 m plinth, magritte's own 0.80 x 0.60 x 0.05 frame and 0.70 x 0.50 x 0.01 canvas standing at y 0.41 on two 0.014 m posts, a blank 0.34 x 0.012 x 0.07 caption plate on the plinth's front, and dark_sphere's floor pool at its witness radius of 0.204. THE PLINTH DEPTH IS NOT A ROUND NUMBER AND WAS NOT CHOSEN: quorum inherits dark_sphere's swarm ring at radius * 0.95 plus a small orb at radius * 0.40, so it reaches 0.2295 m from its site, and at the frame warrant that lands at z = 0.2645 against a plinth edge at 0.27. The plinth was widened to hold it rather than the swarm capped to fit - capping would have made the closest pair a fact about this rig instead of a fact about two vocabularies. Measured clearances across all fifteen cells: the apparatus foot ring is the deepest thing in the sheet at z = 0.2666, the denial bar reaches 0.221, the pool 0.219, the apparatus hoops top out at y = 0.5832 against a frame top edge at 0.71, and the lowest hoop bottoms at 0.0996, 0.0496 above the plinth top. The world box is 0.90 x 0.71 x 0.54 in every one of the fifteen cells.",
+				"shelf_rule": "specimen (base 0.90 m, h 0.71 m, registry.measurements)"},
 			"measurements": {
 				"aabb_size": [
 					0.9,

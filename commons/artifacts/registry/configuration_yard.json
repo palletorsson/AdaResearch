@@ -40,7 +40,7 @@
 			],
 			"capacity": "SEE that `configuration` names three different kinds of thing - a distribution you can sketch, an arrangement you can place, and a solution you must derive - and that a photograph of the starting positions cannot tell them apart, because the difference is not in where the bodies are but in what happens next",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "table",
 				"footprint_cells": 1,
 				"clearance": {
 					"front": 2,
@@ -63,7 +63,8 @@
 				"preferred_zone": "teaching",
 				"footprint_source": "computed_from_geometry",
 				"footprint_note": "Every single-layout variant is the SAME body, because the body is the YARD: a round plate of radius 0.50 m, a rim ring, four 0.030 m posts 1.00 m tall at radius 0.46 and a top ring, all axis-aligned and drawn before either axis is consulted. The figure inside is held under the plate's radius by construction - the widest start is hierarchical's third body at 0.360 m, the widest UNPERTURBED track is lattice at 0.4249 m, and drawing stops at CLIP_R = 0.44 m, which plus the widest tube (0.0120) is 0.4520 - so the world box is 1.00 x 1.00 x 1.00 in all twenty-one cells and one grid cell holds it. layout=ladder stands all seven configurations in a row at 1.15 m pitch (about 7.9 m wide) and is a design view, not a map placement.",
-				"measured_footprint_cells": 1
+				"measured_footprint_cells": 1,
+				"shelf_rule": "bench (base 1.00 m, h 1.00 m, registry.measurements)"
 			},
 			"measurements": {
 				"aabb_size": [

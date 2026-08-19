@@ -38,7 +38,7 @@
 			],
 			"capacity": "SEE that a rule is a local law and its form is not written anywhere in it - and that the distance between mechanism and form is not a metaphor but a number you can read off two walls one bit apart",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "table",
 				"footprint_cells": 1,
 				"clearance": {
 					"front": 2,
@@ -61,7 +61,8 @@
 				],
 				"preferred_zone": "teaching",
 				"footprint_source": "computed_from_geometry",
-				"footprint_note": "Every single-layout variant is the SAME body: a 1.192 x 1.000 x 0.020 m backplate turned to face bearing 0.62 rad, with cells standing at most 0.018 m proud of it, so the world box is 0.982 x 1.000 x 0.711 and one grid cell holds it. The pitch was cut from 25 mm to 24 mm for exactly that reason - at 25 mm the world width is 1.021 and the footprint doubles. layout=ladder stands all five rules in a row at 1.35 m pitch (about 6.5 m wide) and is a design view, not a map placement."
+				"footprint_note": "Every single-layout variant is the SAME body: a 1.192 x 1.000 x 0.020 m backplate turned to face bearing 0.62 rad, with cells standing at most 0.018 m proud of it, so the world box is 0.982 x 1.000 x 0.711 and one grid cell holds it. The pitch was cut from 25 mm to 24 mm for exactly that reason - at 25 mm the world width is 1.021 and the footprint doubles. layout=ladder stands all five rules in a row at 1.35 m pitch (about 6.5 m wide) and is a design view, not a map placement.",
+				"shelf_rule": "bench (base 0.98 m, h 1.00 m, registry.measurements)"
 			},
 			"measurements": {
 				"aabb_size": [

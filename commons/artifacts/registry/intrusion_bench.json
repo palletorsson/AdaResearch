@@ -45,7 +45,7 @@
 			"category": "geometry",
 			"description": "One implicit surface - the family's gyroid or torus, or a sphere as the null - sampled, marched to real triangles, and damaged by each of the six intrusions the two member scenes name between them: the level set alone, one high band of grain, that plus a zero-frequency drift, the torus's two analytic ripples, five octaves of lump, and everything at once with the coordinates warped. Six words, four bands, one null, one union.",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "platform",
 				"footprint_cells": 5,
 				"clearance": {
 					"front": 3,
@@ -56,8 +56,10 @@
 				"player_position": "front",
 				"orientation": "face_approach",
 				"preferred_zone": "teaching",
-				"footprint_source": "authored"
-			}
+				"footprint_source": "authored",
+				"shelf_rule": "stage (base 4.58 m, h 0.67 m, registry.measurements)"
+			},
+			"measurements": {"aabb_size": [4.58, 0.67, 0.68], "aabb_center": [0.02, -0.02, 0.01], "grid_cells": [5, 1], "max_dimension_m": 4.58, "measured_at": null}
 		}
 	}
 }

@@ -86,7 +86,7 @@
 				"size_group": "compact"
 			},
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "pedestal",
 				"footprint_cells": 1,
 				"clearance": {
 					"front": 2,
@@ -98,13 +98,14 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"preferred_zone": "teaching",
-				"footprint_source": "authored"
-			},
+				"footprint_source": "authored",
+				"shelf_rule": "specimen (base 0.44 m, h 0.53 m, registry.measurements)"},
 			"footprint_measured": [
 				1.0,
 				1,
 				1.0
-			]
+			],
+			"measurements": {"aabb_size": [0.44, 0.53, 0.44], "aabb_center": [0.0, 0.27, 0.0], "grid_cells": [1, 1], "max_dimension_m": 0.53, "measured_at": null}
 		}
 	}
 }

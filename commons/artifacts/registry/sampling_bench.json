@@ -41,7 +41,7 @@
 			"category": "geometry",
 			"description": "One analytic surface sampled at the four densities the family names - coarse, mid, fine, ultra - with the gap between sample and surface drawn as struts standing where the error occurs. The only ladder in the wave with a limit object underneath it.",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "platform",
 				"footprint_cells": 4,
 				"clearance": {
 					"front": 3,
@@ -52,7 +52,26 @@
 				"player_position": "front",
 				"orientation": "face_approach",
 				"preferred_zone": "teaching",
-				"footprint_source": "authored"
+				"footprint_source": "authored",
+				"shelf_rule": "stage (base 3.74 m, h 0.28 m, registry.measurements)"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.74,
+					0.28,
+					0.8
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					4,
+					1
+				],
+				"max_dimension_m": 3.74,
+				"measured_at": null
 			}
 		}
 	}

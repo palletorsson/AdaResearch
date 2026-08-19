@@ -40,7 +40,7 @@
 			],
 			"capacity": "SEE that a tiling's boundary marks are drawn from the tile grid, that the tile grid is only the pattern's unit when the symmetry says so, and that a family sharing one vocabulary across two scripts with opposite default symmetries is asserting two different things with the same four words",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "table",
 				"footprint_cells": 1,
 				"clearance": {
 					"front": 2,
@@ -62,7 +62,8 @@
 				],
 				"preferred_zone": "teaching",
 				"footprint_source": "computed_from_geometry",
-				"footprint_note": "THE FIELD IS THE FOOTPRINT AND IT IS DRAWN BEFORE EITHER AXIS IS CONSULTED: a 1.00 x 1.00 m bed with 400 tesserae on it, five tiles across. Nothing either axis does reaches past it. `symmetry` moves colours and heights inside a fixed grid and cannot move the grid; `boundary` adds marks whose outer faces land exactly on +-0.500 by the members' own e = side/2 - k/2. Only the HEIGHT moves, and only with `boundary`: none 0.064, lattice 0.089, edge 0.109, cell 0.175 - the four posts at 0.55 cell are the tallest thing here. So the world box is 1.000 x 0.175 x 1.000 in all twelve cells and the camera never moves. Orientation is `any` because the field is square and reads from every side; it is a floor piece and wants to be walked around rather than faced. layout=ladder stands all four boundaries in a row at 1.30 m pitch, about 4.9 m wide, and is a design view rather than a map placement."
+				"footprint_note": "THE FIELD IS THE FOOTPRINT AND IT IS DRAWN BEFORE EITHER AXIS IS CONSULTED: a 1.00 x 1.00 m bed with 400 tesserae on it, five tiles across. Nothing either axis does reaches past it. `symmetry` moves colours and heights inside a fixed grid and cannot move the grid; `boundary` adds marks whose outer faces land exactly on +-0.500 by the members' own e = side/2 - k/2. Only the HEIGHT moves, and only with `boundary`: none 0.064, lattice 0.089, edge 0.109, cell 0.175 - the four posts at 0.55 cell are the tallest thing here. So the world box is 1.000 x 0.175 x 1.000 in all twelve cells and the camera never moves. Orientation is `any` because the field is square and reads from every side; it is a floor piece and wants to be walked around rather than faced. layout=ladder stands all four boundaries in a row at 1.30 m pitch, about 4.9 m wide, and is a design view rather than a map placement.",
+				"shelf_rule": "bench (base 1.00 m, h 0.17 m, registry.measurements)"
 			},
 			"measurements": {
 				"aabb_size": [

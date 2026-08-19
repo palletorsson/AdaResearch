@@ -128,7 +128,7 @@
 				"placements": 0
 			},
 			"spatial_needs": {
-				"platform": "floor",
+				"platform": "table",
 				"footprint_cells": 2,
 				"clearance": {
 					"front": 2,
@@ -148,7 +148,8 @@
 				],
 				"preferred_zone": "teaching",
 				"footprint_source": "computed_from_geometry",
-				"footprint_note": "THE WORLD BOX IS A CONSTANT AND THAT IS THE WHOLE POINT OF THE BOARD. The panel is 1.120 x 0.660 x 0.050 centred at y = 0.420, on two 0.140 x 0.090 x 0.180 feet at x = +-0.400, and the entire face assembly - twenty claim cells 0.046 x 0.170 at z = 0.029, up to four posts 0.014 x 0.070 at z = 0.031, one datum rule, and up to 540 evidence cells 0.046 x 0.010 at z = 0.029 - lies inside the board's silhouette in x and y and inside the feet's depth in z. Checked at the extreme: the post at t = 1.0 rotates to |x| = 0.4341 and |z| = 0.2742 against the board's 0.4703 and the feet's 0.3463. So the box does not move when either axis moves and all twenty cells of the sheet frame identically. The board is rotated 0.62 rad about Y to face capture_config_sweep's standpoint, which is what makes the box 0.9406 wide rather than 1.120; a map placing this artifact should expect its face to point 35.5 degrees off the grid axis, or pass its own rotation in the token. The Label3D readout is not a MeshInstance3D and so contributes nothing to the capture AABB, which is why the numeral can change without moving the camera."
+				"footprint_note": "THE WORLD BOX IS A CONSTANT AND THAT IS THE WHOLE POINT OF THE BOARD. The panel is 1.120 x 0.660 x 0.050 centred at y = 0.420, on two 0.140 x 0.090 x 0.180 feet at x = +-0.400, and the entire face assembly - twenty claim cells 0.046 x 0.170 at z = 0.029, up to four posts 0.014 x 0.070 at z = 0.031, one datum rule, and up to 540 evidence cells 0.046 x 0.010 at z = 0.029 - lies inside the board's silhouette in x and y and inside the feet's depth in z. Checked at the extreme: the post at t = 1.0 rotates to |x| = 0.4341 and |z| = 0.2742 against the board's 0.4703 and the feet's 0.3463. So the box does not move when either axis moves and all twenty cells of the sheet frame identically. The board is rotated 0.62 rad about Y to face capture_config_sweep's standpoint, which is what makes the box 0.9406 wide rather than 1.120; a map placing this artifact should expect its face to point 35.5 degrees off the grid axis, or pass its own rotation in the token. The Label3D readout is not a MeshInstance3D and so contributes nothing to the capture AABB, which is why the numeral can change without moving the camera.",
+				"shelf_rule": "bench (base 0.94 m, h 0.75 m, registry.measurements)"
 			},
 			"measurements": {
 				"aabb_size": [

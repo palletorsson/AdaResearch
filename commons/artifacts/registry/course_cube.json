@@ -37,7 +37,7 @@
 			],
 			"capacity": "SEE that two translations in the opposite order are the same translation - and that an axis distinguishing them is distinguishing the road, not the result",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "pedestal",
 				"footprint_cells": 1,
 				"clearance": {
 					"front": 2,
@@ -59,8 +59,8 @@
 				],
 				"preferred_zone": "teaching",
 				"footprint_source": "computed_from_geometry",
-				"footprint_note": "Every variant occupies the same 0.69 x 0.69 x 0.69 m box by construction - the extent anchor is the union over both axes and all five courses, and the visible geometry reaches every face of it (the start cube the three low faces, the lift_lateral end cube and the end triads the three high ones). layout=ladder stands the five courses in a row at 0.80 m pitch (about 3.9 m wide) and is a design view, not a map placement."
-			},
+				"footprint_note": "Every variant occupies the same 0.69 x 0.69 x 0.69 m box by construction - the extent anchor is the union over both axes and all five courses, and the visible geometry reaches every face of it (the start cube the three low faces, the lift_lateral end cube and the end triads the three high ones). layout=ladder stands the five courses in a row at 0.80 m pitch (about 3.9 m wide) and is a design view, not a map placement.",
+				"shelf_rule": "specimen (base 0.69 m, h 0.69 m, registry.measurements)"},
 			"measurements": {
 				"aabb_size": [
 					0.69,

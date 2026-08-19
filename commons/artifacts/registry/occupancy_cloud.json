@@ -122,7 +122,7 @@
 				"compare the readout at (frayed, bedded) with the drawing beneath it. The comb has gaps; the number counts bins one drawn point across, so it reports the picture at the resolution the picture actually has, not the ideal set behind it"
 			],
 			"spatial_needs": {
-				"platform": "floor",
+				"platform": "pedestal",
 				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
@@ -143,8 +143,8 @@
 				],
 				"preferred_zone": "teaching",
 				"footprint_source": "computed_from_geometry",
-				"footprint_note": "THE INSTRUMENT IS THE FOOTPRINT AND NEITHER AXIS TOUCHES IT, checked value by value. The pedestal is a 0.24 m radius cylinder 0.08 tall, the post is 0.045 x 0.42 on top of it, the phase box is 0.80 x 0.56 x 0.38 centred at y 0.78 (floor 0.50, top 1.06) with 0.011 m frame cylinders, and the readout board is 0.496 x 0.3572 centred at y 1.4406 (top 1.6012). Everything either axis can draw is inside that: the state set spans x +-0.376 at every site, y 0.5392..1.0208 at suspended and pressed, y 0.514 at bedded, and y 1.22 at lofted - which is 0.06 m below the readout board's lower edge and therefore inside the AABB the board already sets. So NO layers = 0 anchor is needed, which is the one place bifurcation_walkway had to add one (:336-348), and the union AABB is 0.822 x 1.6012 x 0.48 in all sixteen cells."
-			},
+				"footprint_note": "THE INSTRUMENT IS THE FOOTPRINT AND NEITHER AXIS TOUCHES IT, checked value by value. The pedestal is a 0.24 m radius cylinder 0.08 tall, the post is 0.045 x 0.42 on top of it, the phase box is 0.80 x 0.56 x 0.38 centred at y 0.78 (floor 0.50, top 1.06) with 0.011 m frame cylinders, and the readout board is 0.496 x 0.3572 centred at y 1.4406 (top 1.6012). Everything either axis can draw is inside that: the state set spans x +-0.376 at every site, y 0.5392..1.0208 at suspended and pressed, y 0.514 at bedded, and y 1.22 at lofted - which is 0.06 m below the readout board's lower edge and therefore inside the AABB the board already sets. So NO layers = 0 anchor is needed, which is the one place bifurcation_walkway had to add one (:336-348), and the union AABB is 0.822 x 1.6012 x 0.48 in all sixteen cells.",
+				"shelf_rule": "specimen (base 0.82 m, h 1.60 m, registry.measurements)"},
 			"measurements": {
 				"aabb_size": [
 					0.822,

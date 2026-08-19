@@ -38,7 +38,7 @@
 			"qfep_connection": "F is the number: one integer 1..5, parsed once by BiomeGridTokens.tier_of, identical in every cell of every map. E is what six dispatcher branches each decide it meant, and the six are irreducible to one another - a species index cannot be recovered from a voxel count and neither can be recovered from an L-system depth. lambda is how much of the organism the number is allowed to touch. The dark spot is the DEFAULT: 257 of the corpus's 344 declared biome cells carry no `t=` at all and silently take 2, so three quarters of the living world was authored by a fallback nobody typed, and the disagreement between the six readings has never had to show itself because almost nothing has ever been placed at any other rung.",
 			"relationships": "Synthesised out of the six artifacts that declare a `tier` axis, all of them living_* grammar tokens in commons/artifacts/registry/living.json - [[living_flora_bloom]], [[living_flora_tree]], [[living_fungus_fruit]], [[living_fungus_pose]], [[living_fungus_colony]], [[living_fauna_body]] - and out of the one file that turns their number into geometry, commons/biome_layers/biome_paint_dispatcher.gd.\n\nUNLIKE EVERY OTHER FAMILY IN THIS CORPUS, THERE WAS NO WORD TO AGREE OR DISAGREE WITH. `removal` had gone|ghost|scar, `regime` had under|critical|over - words carry claims, and an artifact can refuse one on the record. `tier` is 1|2|3|4|5. A bare ordinal makes no claim at all, so it cannot be refused and it cannot be checked; the six members could not have discovered they disagreed, because none of them ever said anything a sibling could contradict. That is the condition this artifact exists to end, and it is why the finding is about the CODE rather than about the vocabulary.\n\n[[living_flora_bloom]] is the member that breaks the ladder, and its own registry note half-knew: 'the tier ladder is really a SPECIES ladder here (bluebell -> orchid -> daisy); the gallery's flower strip found that. Whether tier should mean bigger or other is a ruling, not a default.' The ruling was never made. Measured, the answer is that tier already means `other` and it costs the plant more than half its height at rung 4.\n\n[[living_fungus_fruit]] and [[living_fungus_pose]] are ONE dispatcher function, _spawn_fungus_preset (biome_paint_dispatcher.gd:472-502), reached by two three-line wrappers that differ only in which preset directory they read. Their tier ladders are therefore identical by construction, and this is the corpus's shared-vocabulary check working correctly for once: when a family word is honest the siblings measure alike. The artifact asserts it at run time rather than assuming it.\n\n[[living_fungus_colony]] is the only member whose tier drives two extents at DIFFERENT rates: grid dim goes 9,12,15,18,21 while flat_y goes 4,4,5,6,7, so the mat spreads faster than it rises and tiers 1 and 2 are the same height.\n\n[[living_ground_role]] is the seventh entry in living.json and is NOT a member - it declares `role`, not `tier` - so it has no bay here.",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "table",
 				"footprint_cells": 4,
 				"clearance": {
 					"front": 3,
@@ -57,7 +57,8 @@
 					"kingdoms"
 				],
 				"preferred_zone": "teaching",
-				"footprint_source": "computed_from_geometry"
+				"footprint_source": "computed_from_geometry",
+				"shelf_rule": "bench (base 3.30 m, h 0.93 m, registry.measurements)"
 			},
 			"measurements": {
 				"aabb_size": [

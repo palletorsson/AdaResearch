@@ -46,7 +46,7 @@
       "qfep_connection": "A condition is a decision, not a property. The same machine is `service` or `scrap` according to a rule written somewhere else, and the four rules in this yard never touch the equipment — they only change what the yard does about it. The `traffic` rung is the artifact's own dark spot: the moment it stops showing four bays and starts showing two numbers about them, built so the two summaries of one solve visibly disagree. And the loop the brief asked for turns out to belong to the FLEET, not to the object: scrap is absorbing, the return leg is a purchase order, and the yard says so with a bar rather than a caption.",
       "relationships": "Synthesised from the seven registry names that declare `upkeep` — station_wall, station_plinth, station_plinth_wide, station_pillar, station_micropod, station_floorline, station_crates — which resolve to five scripts. Replaces none of them and re-runs none of their axes from the outside.",
       "spatial_needs": {
-        "platform": "none",
+        "platform": "monument",
         "footprint_cells": 28,
         "clearance": {
           "front": 2,
@@ -65,7 +65,8 @@
         ],
         "preferred_zone": "teaching",
         "footprint_source": "computed_from_geometry",
-        "footprint_note": "The apron is 6.50 m along X by 4.00 m along Z, so a 7 x 4 clear patch. The two near bays' name tabs stand on the +Z edge and the two far bays' on the -Z edge, facing outward, so the yard reads from either long side; `orientation: face_approach` plus a rotation in the map token is how you pick one. There is no collider anywhere in the file, so the pathfinder will route straight through the bays — correct, because there are no bays, there is a picture of a yard."
+        "footprint_note": "The apron is 6.50 m along X by 4.00 m along Z, so a 7 x 4 clear patch. The two near bays' name tabs stand on the +Z edge and the two far bays' on the -Z edge, facing outward, so the yard reads from either long side; `orientation: face_approach` plus a rotation in the map token is how you pick one. There is no collider anywhere in the file, so the pathfinder will route straight through the bays — correct, because there are no bays, there is a picture of a yard.",
+        "shelf_rule": "a space, not an object (base 6.86 m, h 1.00 m, registry.measurements)"
       },
       "measurements": {
         "aabb_size": [

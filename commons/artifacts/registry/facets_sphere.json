@@ -37,7 +37,7 @@
 			],
 			"capacity": "SEE that `smooth` is not a property an object has but a claim a material makes on its behalf - and that turning the claim off changes the picture without changing a single vertex",
 			"spatial_needs": {
-				"platform": "pedestal",
+				"platform": "table",
 				"footprint_cells": 1,
 				"clearance": {
 					"front": 2,
@@ -58,7 +58,8 @@
 				],
 				"preferred_zone": "entry",
 				"footprint_source": "computed_from_geometry",
-				"footprint_note": "Every single-layout variant sits inside the SAME 1.0 x 1.0 x 1.0 m box: the spheres are radius 0.50 centred at y 0.50, and the trihedron's four vertices are normalised to half-extent 0.50 about the same centre (grab_trihedron ships 0.6; this is its own _fit_to_box argument applied to the body instead of the figure). layout=ladder stands the three bodies in a row at 1.30 m pitch (about 3.6 m wide) and is a design view, not a map placement."
+				"footprint_note": "Every single-layout variant sits inside the SAME 1.0 x 1.0 x 1.0 m box: the spheres are radius 0.50 centred at y 0.50, and the trihedron's four vertices are normalised to half-extent 0.50 about the same centre (grab_trihedron ships 0.6; this is its own _fit_to_box argument applied to the body instead of the figure). layout=ladder stands the three bodies in a row at 1.30 m pitch (about 3.6 m wide) and is a design view, not a map placement.",
+				"shelf_rule": "bench (base 1.00 m, h 1.00 m, registry.measurements)"
 			},
 			"measurements": {
 				"aabb_size": [

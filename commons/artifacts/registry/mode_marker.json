@@ -40,7 +40,7 @@
 			],
 			"capacity": "SEE that the family's four-word vocabulary is a ladder of commitment to a PLACE, not to a work - and that the top rung, the one whose name promises a mark printed on the thing itself, is implemented in both members as a mark on the floor",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "table",
 				"footprint_cells": 1,
 				"clearance": {
 					"front": 2,
@@ -62,7 +62,8 @@
 				],
 				"preferred_zone": "teaching",
 				"footprint_source": "computed_from_geometry",
-				"footprint_note": "The STAGE is the footprint and it is drawn before either axis is consulted: a 1.00 x 0.80 m deck and a 0.026 m datum mast at the back-left corner topping out at 0.62 m. The three works run 0.66 x 0.528 x 0.15 (facade), 1.00 x 0.220 x 0.80 (pattern, which covers the whole deck by construction) and 0.66 x 0.420 x 0.33 (soft_body), and the marker's own reach runs from y 0.024 at the stake's foot to y 0.485 at the plate's emissive edge - so the FIGURE changes shape completely across the sheet while the world box stays 1.00 x 0.62 x 0.80 in all twelve cells. That is why the mast exists. Nothing is yawed to face the camera. layout=ladder stands all four modes in a row at 1.30 m pitch, about 5.0 m wide, and is a design view rather than a map placement."
+				"footprint_note": "The STAGE is the footprint and it is drawn before either axis is consulted: a 1.00 x 0.80 m deck and a 0.026 m datum mast at the back-left corner topping out at 0.62 m. The three works run 0.66 x 0.528 x 0.15 (facade), 1.00 x 0.220 x 0.80 (pattern, which covers the whole deck by construction) and 0.66 x 0.420 x 0.33 (soft_body), and the marker's own reach runs from y 0.024 at the stake's foot to y 0.485 at the plate's emissive edge - so the FIGURE changes shape completely across the sheet while the world box stays 1.00 x 0.62 x 0.80 in all twelve cells. That is why the mast exists. Nothing is yawed to face the camera. layout=ladder stands all four modes in a row at 1.30 m pitch, about 5.0 m wide, and is a design view rather than a map placement.",
+				"shelf_rule": "bench (base 1.00 m, h 0.62 m, registry.measurements)"
 			},
 			"measurements": {
 				"aabb_size": [

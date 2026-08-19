@@ -41,7 +41,7 @@
 			"category": "geometry",
 			"description": "Four geodesic domes at the frequencies the family's five members all declare - v1 to v4 - with each dome's distinct strut lengths laid out beneath it as real struts of those real lengths. The shape converges and the parts list diverges, which is the cost nobody in the family shows.",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "platform",
 				"footprint_cells": 4,
 				"clearance": {
 					"front": 3,
@@ -52,7 +52,26 @@
 				"player_position": "front",
 				"orientation": "face_approach",
 				"preferred_zone": "teaching",
-				"footprint_source": "authored"
+				"footprint_source": "authored",
+				"shelf_rule": "stage (base 4.23 m, h 0.84 m, registry.measurements)"
+			},
+			"measurements": {
+				"aabb_size": [
+					4.23,
+					0.84,
+					0.84
+				],
+				"aabb_center": [
+					0.03,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					5,
+					1
+				],
+				"max_dimension_m": 4.23,
+				"measured_at": null
 			}
 		}
 	}

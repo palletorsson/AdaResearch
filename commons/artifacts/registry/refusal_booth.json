@@ -121,7 +121,7 @@
     "placements": 0
    },
    "spatial_needs": {
-    "platform": "floor",
+    "platform": "table",
     "footprint_cells": 4,
     "clearance": {
      "front": 2,
@@ -142,7 +142,8 @@
     ],
     "preferred_zone": "teaching",
     "footprint_source": "computed_from_geometry",
-    "footprint_note": "The body is 1.70 wide x 2.07 tall x 0.455 deep before the 0.62 rad face yaw and 1.647964 x 2.070000 x 1.358074 after it, so two cells by two hold it with room to stand in front. The yaw is part of the artifact and not a placement hint: it exists so the front faces square to the capture standpoint, and a map that rotates the token rotates it away from that."
+    "footprint_note": "The body is 1.70 wide x 2.07 tall x 0.455 deep before the 0.62 rad face yaw and 1.647964 x 2.070000 x 1.358074 after it, so two cells by two hold it with room to stand in front. The yaw is part of the artifact and not a placement hint: it exists so the front faces square to the capture standpoint, and a map that rotates the token rotates it away from that.",
+    "shelf_rule": "bench (base 1.65 m, h 2.07 m, registry.measurements)"
    },
    "measurements": {
     "aabb_size": [

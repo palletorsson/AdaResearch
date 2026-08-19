@@ -29,7 +29,7 @@
 			"qfep_connection": "F-compression at its limit. Each of these four rules is a complete description of an endless object in one line, which is the highest compression ratio anything in this corpus reaches. What the row exhibits is the part the compression cannot carry: a rule is scale-free and a drawing is not, so every one of them stops, and the rung it stops on is set by the width of the pen or by the instance budget rather than by the mathematics. The residue that will not compress is the apparatus.",
 			"relationships": "Synthesis of [[cantor_set]], [[koch_curve_3d]], [[sierpinski_pyramid]] and [[menger_sponge]] \u2014 the four artifacts that share the `tick` word. WHAT THEY LEARNED SEPARATELY: [[cantor_set]] reaches 5 rungs and 32 bars, and stops because a sixth row is 12 mm of segment against its own bar's 300 mm depth. [[koch_curve_3d]] declares 3 rungs and SKIPS n=3, because the bump added at generation n has amplitude 0.076 m against a drawing tube of radius 0.2 m, and iterations 3, 4, 5 and 6 measured as one photograph. [[sierpinski_pyramid]] declares 5 rungs and stops on instance count at the 3125 its @identity names \u2014 and it also refused [[cantor_set]]'s `removal` word, because its children's volumes interpenetrate and there is no complement to draw. [[menger_sponge]] declares 3, because each tick multiplies the cube count by 20 and a fourth rung would be 160,000. WHAT ONLY THE ROW CAN SAY: held side by side the ladders run 5, 3, 5, 3 against branching factors 2, 4, 5, 20, and they are NOT ordered by the branching factor. Sierpinski branches faster than Koch and reaches two more rungs. What ends a ladder is whichever wall arrives first \u2014 COUNT, where N^n exceeds what can be instanced, or THICKNESS, where extent/s^n falls under the pen that draws it \u2014 and which wall that is depends on how the artifact is drawn, not on the rule. None of the four is replaced or moved: each keeps its own drawing here (Cantor its hue-per-level law, Koch its emissive line and its arch head), and all four stay placed in their own maps.",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "monument",
 				"footprint_cells": 12,
 				"clearance": {
 					"front": 3,
@@ -48,8 +48,8 @@
 					"dimension"
 				],
 				"preferred_zone": "end",
-				"footprint_source": "derived_from_constants"
-			},
+				"footprint_source": "derived_from_constants",
+				"shelf_rule": "a space, not an object (base 5.90 m, h 1.96 m, registry.measurements)"},
 			"dna": {
 				"promoted": "2026-08-06",
 				"stage": "synthesis",
