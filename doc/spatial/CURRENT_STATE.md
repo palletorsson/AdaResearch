@@ -5,6 +5,43 @@
 
 Updated 2026-08-19.
 
+## 08-19 (evening) — THE BOOK, and the museum learns the maps' vocabulary
+
+`commons/data/book/<chapter>.json` is the author now: a pearl is a LIST OF LINES
+(`tools/book.py`, editor `/lines`). All 24 chapters migrated — 801 lines, 623
+drafted from each script's `@identity` truth (`tools/em_thread.py`, which also
+reads a chapter as one page and marks where the thread breaks). 55+1 pearls
+dropped (test maps, sandboxes, empty maps) — 269 -> 213.
+
+A line carries: text, `place: foyer`, `support_m` (a plinth), `lock` (a cell that
+holds through every regeneration), `config` (the artifact's apply_grid_config),
+`rotation`/`offset`/`scale`, and now:
+
+- **`footprint` + `reach`** — THE BODY IS NOT THE REACH. `laser_measure` measures
+  0.17 x 50.07 m because the beam is in its AABB, so the negotiator read a 1 x 51
+  precinct and put it on the grass; `scale_lines` (100 m) likewise. `footprint`
+  declares the body, `reach: {axis, length, towards}` claims the beam SOFTLY
+  (presentation, never a refusal). All four line-hall lasers now stand indoors.
+- **`count` + `spread`** — A GROUP IS A BODY. Point_Animatedcube stands FOUR cube
+  builders; the pool takes first appearance, so the museum had one. The
+  negotiator now reserves and emits the others (nudging up to 2 cells around a
+  pier), on the hall's FLOOR rather than the union of bay pockets.
+
+And a pearl carries architecture:
+
+- **`stages: [{rect, height, ramp}]`** — part of the hall raised, walkable, with
+  the WEDGE (`walkableprism`, the `wp` utility) at the ramp side; `_stage_top_at`
+  raises `deck_top` so a body on the stage stands on it. Measured: 22 cells,
+  6 wedges, `quad_line_puzzle` at y 0.40.
+- **`gaps: [{rect, crossing}]`** — hollow space. `spatial_floorplan._apply_gaps`
+  removes the cells from the grid, the slots and the route BEFORE negotiation, so
+  no body is ever placed over the void; the museum cuts the same cells out of the
+  tile and instantiates the map's own scene (`tc` transport_cube, `br`
+  bridge_path, `jp` jump_pad), whose cells enter the walk map so the route
+  survives. Measured: `Crossing_tc_3_8` at (6, 0, 11.5), auto.
+
+A pearl that asks for none of this builds exactly as before.
+
 ## 08-19 — PAGES: the book, the plan and the room read the same
 
 Palle: "the book and the plan and the 3d space should have the same artifact and
