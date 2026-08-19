@@ -29,6 +29,20 @@ extends RefCounted
 const OVERRIDES_PATH := "res://ada_run/em_overrides.json"
 
 
+## A record's node, or null once it has been FREED.
+##
+## `x as Node3D` on a freed object does not evaluate to null — it ABORTS the
+## function with "Trying to cast a freed object". So the is_instance_valid() that
+## used to sit on the line AFTER each cast could never run: it was written to
+## catch null, which was never what happened. _edit_records is not pruned when a
+## map is torn down, so a single ghost from an earlier map made pick() die and
+## nothing in the museum could be selected for editing.
+static func _node_or_null(v: Variant) -> Node3D:
+	if v == null or not is_instance_valid(v):
+		return null
+	return v as Node3D
+
+
 ## Nearest editable record to the camera's crosshair. Scored by angle off the
 ## view axis with a distance tiebreak — no physics ray, so artifacts without
 ## colliders (plenty of the diagram class) are still selectable.
@@ -41,8 +55,8 @@ static func pick(cam: Camera3D, records: Array, max_dist: float = 24.0) -> int:
 	var best_score: float = 0.25          # ~14° cone; outside it, nothing selects
 	for i in range(records.size()):
 		var r: Dictionary = records[i]
-		var node: Node3D = r.get("node") as Node3D
-		if node == null or not is_instance_valid(node):
+		var node: Node3D = _node_or_null(r.get("node"))
+		if node == null:
 			continue
 		var to: Vector3 = node.global_position - origin
 		var d: float = to.length()
@@ -206,8 +220,8 @@ add: %s  (%d/%d) — ENTER places it 2.5 m ahead" % [
 		var r: Dictionary = records[sel]
 		if str(r.get("kind", "")) == "prop":
 			# a wall prop: the ruling is its HEIGHT convention, token-wide
-			var n: Node3D = r.get("node") as Node3D
-			var h: float = n.position.y if (n != null and is_instance_valid(n)) else 0.0
+			var n: Node3D = _node_or_null(r.get("node"))
+			var h: float = n.position.y if n != null else 0.0
 			line2 = "\nselected PROP: %s  h %.2f (code %.2f) — UP/DOWN rules every %s in the museum" % [
 				str(r.get("token", "?")), h, float(r.get("code_h", 0.0)),
 				str(r.get("token", "?"))]

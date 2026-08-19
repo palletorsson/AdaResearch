@@ -6175,8 +6175,8 @@ func _edit_config_cycle(dir: int) -> void:
 	ov["config"] = cfg
 	r["axis_i"] = ai
 	_edit_dirty = true
-	var node: Node3D = r.get("node") as Node3D
-	if node != null and is_instance_valid(node):
+	var node: Node3D = _node_or_null(r.get("node"))
+	if node != null:
 		node.set_meta("config_" + axis, val)
 		if node.has_method("apply_grid_config"):
 			node.call("apply_grid_config", cfg)   # the preview: the body becomes it now
