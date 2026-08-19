@@ -38,7 +38,13 @@ func _run() -> void:
 	print("[test] eye=%s · segments %d -> %d after walking the CURRENT rig 400 m" % [str(eye.get_path()) if eye else "null", seg0, built])
 	if built - seg0 < 4:
 		fails.append("VR did not stream: %d -> %d segments" % [seg0, built])
-	# and the culling follows the live eye, not the parked one: bodies near the rig must be running
+	# and the culling follows the live eye, not the parked one: bodies near the rig must be running.
+	# THE CULL RUNS ON A 0.3 s TIMER, and this walk is 68 process frames — headless they
+	# pass in far less than the ten seconds of ticks the walk would take in the world, so
+	# reading straight after the last step measured the timer, not the eye (14 bodies
+	# beside the rig, 2 running, twice in a row). Give it one real tick, then ask.
+	await create_timer(0.4).timeout
+	m.call("_cull_artifacts")
 	var near_running := 0; var near_total := 0
 	for r in (m.get("_vis_records") as Array):
 		var nv: Variant = (r as Dictionary).get("node")
