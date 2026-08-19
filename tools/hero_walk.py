@@ -181,7 +181,7 @@ def pearl_walks(chapter: str, trunk: dict[str, Any] | None = None) -> list[dict[
         for r in rows:
             if r["lookup"] not in uniq:
                 uniq.append(r["lookup"])
-        walks.append({"chapter": chapter, "pearl": name, "pearl_index": int(p.get("index", len(walks))), "map": p.get("map", ""), "rooms": p.get("rooms"),
+        walks.append({"chapter": chapter, "pearl": name, "pearl_index": int(p.get("index", len(walks))), "map": p.get("map", ""), "rooms": p.get("rooms"), "exclude": list(p.get("excluded", [])),
                       "hero": hero, "hand_branches": len(hand), "cast": uniq, "rows": rows,
                       "why": f"pearl {name}: {hero} + {sib} siblings + {len(rows) - 1 - sib} branches ({len(hand)} hand)"})
     return walks

@@ -158,15 +158,19 @@ def seed(trunk_doc: dict) -> dict:
                     if e.get("blurb"):
                         p["blurb"] = str(e["blurb"])
                     p["tokens"] = [t for t in p["tokens"] if t not in set(e.get("tokens_remove", []))]
+                    if e.get("tokens_remove"):
+                        # a body the hand took OUT stays out — also of the negotiator's cast,
+                        # which would otherwise bring it back as a relative or a branch
+                        p["excluded"] = sorted(set(p.get("excluded", [])) | set(e["tokens_remove"]))
                     # tokens_order: the hand's reading order of the bodies (/speak paragraph) —
                     # the order the walk meets them; unknown tokens keep their place after
                     if e.get("tokens_order"):
                         want = [t for t in e["tokens_order"] if t in p["tokens"] or t in (e.get("tokens_add") or [])]
                         rest = [t for t in p["tokens"] if t not in want]
                         p["tokens"] = want + rest
-                    for t in e.get("tokens_add", []):
-                        if t not in p["tokens"]:
-                            p["tokens"].append(t)
+                    for tk in e.get("tokens_add", []):       # not `t`: that is the NODE record below
+                        if tk not in p["tokens"]:
+                            p["tokens"].append(tk)
         # a token moved IN somewhere is moved OUT of wherever else it sat
         moved: set[str] = set()
         for e in edits:

@@ -1027,7 +1027,7 @@
   {
    "anchor": "primitives",
    "kind": "extends",
-   "pearl": "trace",
+   "pearl": "point",
    "provenance": "derived",
    "space": "wall",
    "space_by": "heuristic",
@@ -11943,7 +11943,7 @@
   {
    "anchor": "primitives",
    "kind": "varies",
-   "pearl": "trace",
+   "pearl": "point",
    "provenance": "derived",
    "space": "wall",
    "space_by": "heuristic",
@@ -16991,7 +16991,7 @@
   }
  ],
  "counts": {
-  "branches_on_pearls": 1504,
+  "branches_on_pearls": 1498,
   "by_kind": {
    "contradicts": 0,
    "edge": 149,
@@ -17023,19 +17023,26 @@
      "CoordinateSystem3M": "no points without a coordinate system",
      "you_are_here": "you are here — the one point",
      "fontana_puncture": "the one point, pierced",
-     "interactive_point_origin_force": "a point that becomes a force",
      "floating_sphere_field": "points, drifting, there is always the drift. ",
      "two_points_line": "two points is a line. it measures. it is a point, it is a laser — here it forms a vector in 3d space",
-     "point": "the one point"
+     "point": "the one point",
+     "draw_dot": "all life is encoded — that is enough"
     },
     "says_by": {
      "you_are_here": "claude",
      "fontana_puncture": "claude",
-     "interactive_point_origin_force": "claude",
      "floating_sphere_field": "hand",
-     "point": "claude"
+     "point": "claude",
+     "draw_dot": "hand"
     },
-    "speak_by": "hand"
+    "speak_by": "hand",
+    "tokens_add": [
+     "draw_dot"
+    ],
+    "tokens_remove": [
+     "interactive_point_origin_force",
+     "origin"
+    ]
    },
    {
     "map": "Point_Lines",
@@ -17410,13 +17417,12 @@
      "tokens": [
       "CoordinateSystem3M",
       "frame_counter_display",
-      "origin",
       "you_are_here",
       "fontana_puncture",
       "floating_sphere_field",
-      "interactive_point_origin_force",
       "folding_past",
-      "lab_room"
+      "lab_room",
+      "draw_dot"
      ],
      "blurb": "Before the point, infrastructure.",
      "rooms": 4,
@@ -17429,10 +17435,10 @@
       "CoordinateSystem3M": "no points without a coordinate system",
       "you_are_here": "you are here — the one point",
       "fontana_puncture": "the one point, pierced",
-      "interactive_point_origin_force": "a point that becomes a force",
       "floating_sphere_field": "points, drifting, there is always the drift. ",
       "two_points_line": "two points is a line. it measures. it is a point, it is a laser — here it forms a vector in 3d space",
-      "point": "the one point"
+      "point": "the one point",
+      "draw_dot": "all life is encoded — that is enough"
      },
      "says_by": {
       "folding_past": "hand",
@@ -17441,11 +17447,15 @@
       "CoordinateSystem3M": "hand",
       "you_are_here": "claude",
       "fontana_puncture": "claude",
-      "interactive_point_origin_force": "claude",
       "floating_sphere_field": "hand",
       "two_points_line": "hand",
-      "point": "claude"
-     }
+      "point": "claude",
+      "draw_dot": "hand"
+     },
+     "excluded": [
+      "interactive_point_origin_force",
+      "origin"
+     ]
     },
     {
      "pearl": "lines",
@@ -17504,8 +17514,7 @@
      "hero": "mystic_writing_pad",
      "hero_by": "first in spine order",
      "tokens": [
-      "mystic_writing_pad",
-      "draw_dot"
+      "mystic_writing_pad"
      ],
      "blurb": "Now: duration.",
      "speak": "the line is not trace. there is no origin of a trace. all life is encoded — that is enough.",

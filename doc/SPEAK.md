@@ -11,12 +11,11 @@ you arrive late. the clock is already running. the folding past keeps running. t
 
 no points without a coordinate system  `[hand]`  
 the frame counter: the clock is already running  `[hand]`  
-point zero. origin, (0,0,0), the root of all vectors, Vector.ZERO — the one point  `[hand]`  
 you are here — the one point  `[claude]`  
 the one point, pierced  `[claude]`  
 points, drifting, there is always the drift.   `[hand]`  
-a point that becomes a force  `[claude]`  
 the clock is already running — the folding past keeps running  `[hand]`  
+all life is encoded — that is enough  `[hand]`  
 
 ### lines
 two points is a line. it measures; it is a laser; it forms a vector in 3d space. parallel, perspective, horizontal, vertical, grid lines. VR hands.  `[hand]`
@@ -33,7 +32,6 @@ two points is a line — it measures  `[hand]`
 the line is not trace. there is no origin of a trace. all life is encoded — that is enough.  `[hand]`
 
 there is no origin of a trace  `[hand]`  
-all life is encoded — that is enough  `[hand]`  
 
 ### line grid
 resolution keeps us sane but introduces a debt on either side of the curve: underfitting, overfitting. grid beauty. slave to the rhythm. space filling.  `[hand]`

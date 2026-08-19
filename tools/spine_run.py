@@ -157,6 +157,11 @@ def run_sequence(seq: str, museum: str, rows: int, relations: int = 2,
         for pw in pearls:
             ctx: dict[str, Any] = {k: dict(v) for k, v in cast_context.items()}
             pcast = _apply_walk(pw, ctx)
+            if pw.get("exclude"):
+                # the hand took these out of the pearl (/speak, /pearls): not offered,
+                # however the relations or branches would have brought them back
+                ex = set(pw["exclude"])
+                pcast = [t for t in pcast if t not in ex]
             if cast_cap > 0:
                 pcast = pcast[:cast_cap]
             r = _run_cast(seq, museum, rows, anchors, pcast, ctx, walk=pw)
