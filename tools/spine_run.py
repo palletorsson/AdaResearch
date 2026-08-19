@@ -173,6 +173,7 @@ def run_sequence(seq: str, museum: str, rows: int, relations: int = 2,
             r["ordered"] = bool(pw.get("ordered"))
             r["exclude"] = list(pw.get("exclude") or [])
             r["pages"] = list(pw.get("pages") or [])
+            r["stages"] = list(pw.get("stages") or [])
             r["hero_walk"] = {"hero": pw["hero"], "hand_branches": pw["hand_branches"], "pearl": pw["pearl"]}
             parts.append(r)
             print(f"  {seq:24s} PEARL {pw['pearl_index'] + 1:2d}/{len(pearls)} {pw['pearl']:16s} offered {r['offered']:3d} placed {r['placed']:3d} interior {r['interior']:3d}")
@@ -483,6 +484,8 @@ def write_plan(result: dict[str, Any], out: Path) -> dict[str, Any]:
                 m["ordered"] = bool(pr.get("ordered"))
                 if pr.get("pages"):
                     m["pages"] = list(pr["pages"])     # the pearls sharing this hall, in reading order
+                if pr.get("stages"):
+                    m["stages"] = list(pr["stages"])   # raised platforms the museum builds, with their ramps
                 m["sequence"] = r["sequence"]
                 m["pearl"] = pr["pearl"]; m["pearl_index"] = pr["pearl_index"]; m["map"] = pr.get("map", "")
                 if not pr.get("ordered"):

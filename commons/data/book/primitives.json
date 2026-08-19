@@ -338,7 +338,20 @@
     }
    ],
    "rooms": 8,
-   "hero": "catalyst_pedestal"
+   "hero": "catalyst_pedestal",
+   "stages": [
+    {
+     "rect": [
+      2,
+      6,
+      6,
+      4
+     ],
+     "height": 0.4,
+     "ramp": "north"
+    }
+   ],
+   "ordered": true
   },
   {
    "pearl": "polythedra",

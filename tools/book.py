@@ -110,6 +110,7 @@ def migrate(chapter: str) -> dict:
         if not page2_done:
             lines.insert(1 if lines and "token" not in lines[0] else 0, {"text": str(p["page2"]), "by": "hand"})
         bp = {"pearl": p.get("pearl", ""), "map": p.get("map", ""), "lines": lines}
+        if p.get("stages"): bp["stages"] = list(p["stages"])
         if p.get("rooms") is not None: bp["rooms"] = int(p["rooms"])
         if p.get("join"): bp["join"] = True
         if p.get("ordered"): bp["ordered"] = True     # composed: the list IS the cast (else the dealer adds relatives)
@@ -223,6 +224,11 @@ def compile_book(chapter: str, reseed: bool = True) -> dict:
         else: e.pop("foyer", None)
         # DROPPED: a test map, a sandbox, an empty pearl — it leaves the string (the
         # seeder's `drop`); the book keeps the pearl so it can come back with one click
+        # A STAGE (2026-08-19, Palle: "after the wedge is introduced we give rise to a
+        # platform that we can step up on"): a rect of the hall raised, with the wedge
+        # (walkableprism, the `wp` utility) as the way up. Architecture, not a body.
+        if bp.get("stages"): e["stages"] = list(bp["stages"])
+        else: e.pop("stages", None)
         if bp.get("drop"): e["drop"] = True
         else: e.pop("drop", None)
         if bp.get("rooms") is not None: e["rooms"] = int(bp["rooms"])

@@ -408,6 +408,15 @@ var _bake_key: String = ""              # "chapter|pearl" of the segment being b
 ## the same schema ({kind, token, index|from, offset, rotation, remove, text})
 ## — the studio writes there — and _furniture_rules reads both, plan first.
 var _cur_dressing: Array = []
+## THE STAGE (2026-08-19). A pearl may raise part of its hall: {rect:[x,z,w,d],
+## height, ramp:"south"|"north"|"east"|"west"}. The museum lays the raised deck,
+## makes it walkable, puts the WEDGE (walkableprism — the `wp` utility, the
+## artifact the primitives chapter introduces) at the ramp side, and every body
+## whose cell is on the stage stands on top of it. A pearl with no stage builds
+## exactly as before.
+var _cur_stages: Array = []
+var _cur_stage_pearl: String = ""
+const WEDGE_SCENE := "res://commons/scenes/mapobjects/walkableprism.tscn"
 var _bake_used: Dictionary = {}         # per key: "tok|x|y" -> how many times looked up
 var _seg_placed: Array = []             # this segment's placed rows (for the bake)
 var _seg_unbaked: int = 0               # bodies this segment placed the live way while replaying
@@ -2197,6 +2206,84 @@ func _open_bays(tile_in: Array, key: String, chapter: String) -> Array:
 ## triplanar (em_materials._base), so shading is a function of world position,
 ## not of mesh UV: an N-metre box and N one-metre boxes sample identically.
 ## The solid volume is unchanged, so the collider is unchanged too.
+## The pearl's raised platforms: deck, collider, walk cells, and the wedge up.
+func _stamp_stages(seg: Node3D, solid: StaticBody3D, tile: Array, zbase: int) -> void:
+	if _cur_stages.is_empty():
+		return
+	var m_stage: Material = _sm("podium")
+	for st_v in _cur_stages:
+		var st: Dictionary = st_v
+		var r: Array = st.get("rect", [])
+		if r.size() < 4:
+			continue
+		var x0: int = int(r[0]); var z0: int = int(r[1])
+		var w: int = maxi(1, int(r[2])); var d: int = maxi(1, int(r[3]))
+		var hgt: float = clampf(float(st.get("height", 0.4)), 0.2, 1.2)
+		var ramp: String = String(st.get("ramp", "south"))
+		var cells_made: int = 0
+		for x in range(x0, x0 + w):
+			for z in range(z0, z0 + d):
+				if z < 0 or z >= tile.size() or x < 0 or x >= (tile[z] as Array).size():
+					continue
+				if String((tile[z] as Array)[x]).begins_with("4"):
+					continue                       # never raise a wall cell
+				var zz: int = z + VESTIBULE_H
+				_box(seg, Vector3(x + 0.5, hgt * 0.5, zz + 0.5), Vector3(1, hgt, 1), Color(0.21, 0.21, 0.25), m_stage)
+				_add_col(solid, Vector3(x + 0.5, hgt * 0.5, zz + 0.5), Vector3(1, hgt, 1))
+				_walk_cells[Vector2i(x, zbase + zz)] = true
+				cells_made += 1
+		# THE WEDGE: one walkable prism per cell of the ramp side, scaled to the
+		# stage height, its slope facing the floor it climbs from.
+		var ramp_cells: Array = []
+		var yaw: float = 0.0
+		match ramp:
+			"north":  # climb from the entrance side (smaller z)
+				for x in range(x0, x0 + w): ramp_cells.append(Vector2i(x, z0 - 1))
+				yaw = 0.0
+			"south":
+				for x in range(x0, x0 + w): ramp_cells.append(Vector2i(x, z0 + d))
+				yaw = 180.0
+			"west":
+				for z in range(z0, z0 + d): ramp_cells.append(Vector2i(x0 - 1, z))
+				yaw = 90.0
+			_:
+				for z in range(z0, z0 + d): ramp_cells.append(Vector2i(x0 + w, z))
+				yaw = -90.0
+		var wedges: int = 0
+		if ResourceLoader.exists(WEDGE_SCENE):
+			var ps: PackedScene = load(WEDGE_SCENE)
+			for c in ramp_cells:
+				var cx: int = (c as Vector2i).x
+				var cz: int = (c as Vector2i).y
+				if cz < 0 or cz >= tile.size() or cx < 0 or cx >= (tile[cz] as Array).size():
+					continue
+				if String((tile[cz] as Array)[cx]).begins_with("4"):
+					continue
+				var wnode: Node3D = ps.instantiate() as Node3D
+				wnode.name = "StageWedge%d" % wedges
+				seg.add_child(wnode)
+				wnode.position = Vector3(cx + 0.5, hgt * 0.5, cz + VESTIBULE_H + 0.5)
+				wnode.rotation_degrees = Vector3(0, yaw, 0)
+				wnode.scale = Vector3(0.5, hgt, 1.0)      # the prism mesh is 2 x 1 x 1
+				_walk_cells[Vector2i(cx, zbase + cz + VESTIBULE_H)] = true
+				wedges += 1
+		print("[em-stage] %s: %d cell(s) raised to %.2f m, %d wedge(s) on the %s side" % [
+			_cur_stage_pearl, cells_made, hgt, wedges, ramp])
+
+
+## How high the ground stands at a tile cell — 0 unless a stage raises it.
+func _stage_top_at(tx: int, tz: int) -> float:
+	var top: float = 0.0
+	for st_v in _cur_stages:
+		var st: Dictionary = st_v
+		var r: Array = st.get("rect", [])
+		if r.size() < 4:
+			continue
+		if tx >= int(r[0]) and tx < int(r[0]) + maxi(1, int(r[2])) and tz >= int(r[1]) and tz < int(r[1]) + maxi(1, int(r[3])):
+			top = maxf(top, clampf(float(st.get("height", 0.4)), 0.2, 1.2))
+	return top
+
+
 func _stamp_wall_runs(seg: Node3D, solid: StaticBody3D, cells: Dictionary,
 		col: Color, mat: Material) -> void:
 	if cells.is_empty():
@@ -2291,6 +2378,8 @@ func _build_segment() -> void:
 	# rooms, cards all read `tile`/`h`, so nothing downstream needs to know.
 	# Peeked here (the deal itself runs later and does not advance the pearl).
 	var peek: Dictionary = _plan_entry(String(spec["key"]), next_seq)
+	_cur_stages = (peek.get("stages", []) as Array) if peek.get("stages") is Array else []
+	_cur_stage_pearl = String(peek.get("pearl", ""))
 	if peek.get("tile") is Array and (peek["tile"] as Array).size() >= 4:
 		var trows: Array = []
 		for r_v in (peek["tile"] as Array):
@@ -2428,6 +2517,7 @@ func _build_segment() -> void:
 				slots.append({"x": x, "y": z, "top": 0.8, "rank": 0})
 	if wr:
 		_stamp_wall_runs(seg, solid, wcells, wall_col, m_wall)
+	_stamp_stages(seg, solid, tile, zbase)
 	# DEPTH FIRST, then rank, then x — the same key em_sets._slot_before now
 	# uses. These two sorts must agree: _deal_segment picks the artifact from
 	# `_pick_pool(free[0].rank)`, so with slots rank-sorted `free[0]` was the
@@ -3945,6 +4035,7 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 		# (a rug, a drawing, a room, a wall piece) — never a float.
 		var tile_ch: String = String((tile[tz] as Array)[tx])
 		var deck_top: float = 0.4 if tile_ch.begins_with("2") else (0.8 if tile_ch.begins_with("3") else 0.0)
+		deck_top = maxf(deck_top, _stage_top_at(tx, tz))     # a body on a stage stands on the stage
 		var asked_top: float = float(row.get("support_height_m", 0.0))
 		var cell: Dictionary = {
 			"x": tx, "y": tz + VESTIBULE_H, "rank": 2,

@@ -17266,7 +17266,33 @@
     },
     "tokens_add": [],
     "tokens_remove": [],
-    "hero": "catalyst_pedestal"
+    "hero": "catalyst_pedestal",
+    "tokens_order": [
+     "catalyst_pedestal",
+     "parasol_triangle",
+     "triangle_line_puzzle",
+     "catalyst_vent",
+     "triangleprofiles",
+     "folded_strip",
+     "draw_triangle_faces",
+     "triangle",
+     "pythagorean_triangle_angles",
+     "quad",
+     "interactivetriangle",
+     "quad_line_puzzle"
+    ],
+    "stages": [
+     {
+      "rect": [
+       2,
+       6,
+       6,
+       4
+      ],
+      "height": 0.4,
+      "ramp": "north"
+     }
+    ]
    },
    {
     "map": "Point_Trace",
@@ -21689,6 +21715,18 @@
       "quad_line_puzzle"
      ],
      "blurb": "Three points close a boundary, and now: rigidity.",
+     "stages": [
+      {
+       "rect": [
+        2,
+        6,
+        6,
+        4
+       ],
+       "height": 0.4,
+       "ramp": "north"
+      }
+     ],
      "rooms": 8,
      "says": {
       "catalyst_pedestal": "the triangle. everything is made of triangles. the quad, the simplest mesh. the pyramid mesh.",
@@ -21717,7 +21755,8 @@
       "quad": "hand",
       "interactivetriangle": "claude",
       "quad_line_puzzle": "claude"
-     }
+     },
+     "ordered": true
     },
     {
      "pearl": "polythedra",

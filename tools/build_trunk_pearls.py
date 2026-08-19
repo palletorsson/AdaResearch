@@ -138,6 +138,8 @@ def seed(trunk_doc: dict) -> dict:
                         p["dropped"] = True
                     if "order" in e:
                         p["index"] = int(e["order"])
+                    if e.get("stages"):
+                        p["stages"] = list(e["stages"])        # raised platforms + their ramps (tools/book.py)
                     if e.get("rooms") is not None:
                         p["rooms"] = int(e["rooms"])       # how much of the tile this pearl gets (tools/em_rooms.py)
                     # textD (tools/em_speak.py): the hand's line wins, a draft from the
