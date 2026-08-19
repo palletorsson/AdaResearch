@@ -104,7 +104,9 @@
         "clearance": 1,
         "approach_dir": "front",
         "dir_group": "facing",
-        "stack_priority": 0.5
+        "stack_priority": 0.5,
+        "platform": "pedestal",
+        "shelf_rule": "specimen (base 0.56 m, h 0.70 m, registry.measurements)"
       }
     }
   }

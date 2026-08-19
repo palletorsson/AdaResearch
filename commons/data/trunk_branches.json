@@ -16991,7 +16991,7 @@
   }
  ],
  "counts": {
-  "branches_on_pearls": 1482,
+  "branches_on_pearls": 1425,
   "by_kind": {
    "contradicts": 0,
    "edge": 149,
@@ -17002,7 +17002,7 @@
   },
   "derived": 1544,
   "hand": 1,
-  "pearls": 269,
+  "pearls": 213,
   "pending": 2,
   "trunk": 24
  },
@@ -17657,7 +17657,8 @@
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "Symmetry_Seventeen",
@@ -17788,7 +17789,8 @@
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "Tutorial_Disco",
@@ -17955,7 +17957,8 @@
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "Color_Paint",
@@ -17996,7 +17999,8 @@
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    }
   ],
   "change": [
@@ -18154,11 +18158,24 @@
      "halting_workbench": "draft",
      "qfep_balance_workbench": "draft"
     },
-    "hero": "ca_rules_workbench"
+    "hero": "ca_rules_workbench",
+    "drop": true
    },
    {
     "map": "Force_Preview",
-    "tokens_add": [],
+    "tokens_add": [
+     "vector_addition_xl_laser",
+     "vector_subtraction_xl_laser",
+     "weather_vector_field",
+     "mortar_vector_siege",
+     "force_vortex",
+     "reflection_hall",
+     "human_catapult",
+     "adder_board",
+     "length_lantern",
+     "stretch_bench",
+     "agreement_gauge"
+    ],
     "tokens_remove": [],
     "says": {
      "vector_addition_xl_laser": "The walk-inside vector addition exhibit, sized so the tips are out of arm's reach and grabbed with the laser pointer instead",
@@ -18186,11 +18203,20 @@
      "stretch_bench": "draft",
      "agreement_gauge": "draft"
     },
-    "hero": "reflection_hall"
+    "hero": "reflection_hall",
+    "drop": true,
+    "pearl": "force preview"
    },
    {
     "map": "Console_Test",
-    "tokens_add": [],
+    "tokens_add": [
+     "triangle_curvature_workbench",
+     "cantor_diagonal_workbench",
+     "riemann_sum_workbench",
+     "tangent_slope_workbench",
+     "shannon_workbench",
+     "control_console"
+    ],
     "tokens_remove": [],
     "says": {
      "triangle_curvature_workbench": "the parallel postulate is not a fact about lines",
@@ -18208,11 +18234,21 @@
      "shannon_workbench": "draft",
      "control_console": "draft"
     },
-    "hero": "triangle_curvature_workbench"
+    "hero": "triangle_curvature_workbench",
+    "drop": true,
+    "pearl": "console test"
    },
    {
     "map": "Force_Props_Sandbox",
-    "tokens_add": [],
+    "tokens_add": [
+     "bubble_blaster",
+     "force_mower",
+     "vector_add",
+     "circle_train",
+     "wedge_slide",
+     "dot_aligner",
+     "death_pylon"
+    ],
     "tokens_remove": [],
     "says": {
      "bubble_blaster": "A soap-bubble gun that fires a spreading cone of bubbles and wears its launch vector on the muzzle - an embodied force-display prop",
@@ -18232,14 +18268,18 @@
      "dot_aligner": "draft",
      "death_pylon": "draft"
     },
-    "hero": "bubble_blaster"
+    "hero": "bubble_blaster",
+    "drop": true,
+    "pearl": "force props sandbox"
    },
    {
     "map": "VectorFoundations",
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true,
+    "pearl": "vectorfoundations"
    },
    {
     "map": "Vectors_Act1_WhatAVectorIs",
@@ -18450,21 +18490,27 @@
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true,
+    "pearl": "vectors act5 forceasplace"
    },
    {
     "map": "ForcesFoundations",
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true,
+    "pearl": "foundations"
    },
    {
     "map": "Chamber_Forces",
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true,
+    "pearl": "forces"
    },
    {
     "map": "ForcesComposition",
@@ -18637,13 +18683,14 @@
    {
     "map": "ForcesArena",
     "tokens_add": [],
-    "tokens_remove": [],
+    "tokens_remove": [
+     "destructibles_test_scene",
+     "gravity_gun_test_scene"
+    ],
     "says": {
      "hits_reset_display": "A reset is not a return to nothing — it is the act of restoring an expected state",
      "health_display": "A health display is not a stat — it is a promise that change has consequences and that the world keeps …",
-     "gravity_gun_test_scene": "A test scene is not a placeholder — it is the rehearsal where physics learns its part before the player …",
      "vector_drone": "The drone is a mirror of the turret. Same math",
-     "destructibles_test_scene": "Destruction is topology change. How something breaks reveals how it was built",
      "throw_ball": "throw_ball",
      "grab_sphere_point": "XR Tools pickable sphere with highlight ring for repositioning a reference point",
      "sphere_splitting_showcase": "There is no single way to break a sphere. Each fracture method is a decomposition basis",
@@ -18653,9 +18700,7 @@
     "says_by": {
      "hits_reset_display": "draft",
      "health_display": "draft",
-     "gravity_gun_test_scene": "draft",
      "vector_drone": "draft",
-     "destructibles_test_scene": "draft",
      "throw_ball": "draft",
      "grab_sphere_point": "draft",
      "sphere_splitting_showcase": "draft",
@@ -18747,7 +18792,8 @@
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "FormFinding_Forge",
@@ -18872,7 +18918,9 @@
    {
     "map": "WaveFunctions_John_Cage",
     "tokens_add": [],
-    "tokens_remove": [],
+    "tokens_remove": [
+     "dual_display_test"
+    ],
     "says": {},
     "says_by": {},
     "hero": "dual_display_test"
@@ -18912,7 +18960,8 @@
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "WaveFunctions_Synthesis_Lab",
@@ -19099,7 +19148,8 @@
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "Random_Mushrooms",
@@ -19332,14 +19382,16 @@
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "Lab_Path",
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    }
   ],
   "cellularautomata": [
@@ -19408,15 +19460,15 @@
    {
     "map": "CA_ExpandingSpace",
     "tokens_add": [],
-    "tokens_remove": [],
+    "tokens_remove": [
+     "ca_chair_test"
+    ],
     "says": {
-     "ca_chair_test": "A chair is a convergent form — different rules find it because sitting demands it",
      "cellular_automata_3d_tree": "A tree is what remains when you remove everything that isn't tree",
      "crossway_ca": "When every row speaks a different rule language",
      "decaying_bridge": "Architecture that reacts to presence is architecture that is alive"
     },
     "says_by": {
-     "ca_chair_test": "draft",
      "cellular_automata_3d_tree": "draft",
      "crossway_ca": "draft",
      "decaying_bridge": "draft"
@@ -19456,7 +19508,8 @@
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "CA_EdgeOfChaos",
@@ -19637,7 +19690,8 @@
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "Fractal_Synthesis",
@@ -19768,7 +19822,8 @@
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "Assemblage_Same_Desire",
@@ -19843,7 +19898,8 @@
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "PG_Caves_Mazes",
@@ -19964,14 +20020,13 @@
    {
     "map": "SoftBodies_Playground_of_Joy",
     "tokens_add": [],
-    "tokens_remove": [],
-    "says": {
-     "rounded_softbody_test": "Deformable rounded cube with 3 modes: strain energy heatmap coloring by vertex displacement"
-    },
-    "says_by": {
-     "rounded_softbody_test": "draft"
-    },
-    "hero": "rounded_softbody_test"
+    "tokens_remove": [
+     "rounded_softbody_test"
+    ],
+    "says": {},
+    "says_by": {},
+    "hero": "rounded_softbody_test",
+    "drop": true
    },
    {
     "map": "SoftBodies_Affect_Theory_Visualization",
@@ -20016,7 +20071,8 @@
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "SoftBody_sb01_cloth_drape_corners",
@@ -20035,161 +20091,184 @@
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "SoftBody_sb03_cloth_flag_sideways",
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "SoftBody_sb04_cloth_tablecloth",
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "SoftBody_sb05_jelly_box_bounce",
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "SoftBody_sb06_jelly_grid_settle",
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "SoftBody_sb07_jelly_grid_tall_stiff",
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "SoftBody_sb08_jelly_grid_floppy",
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "SoftBody_sb_ls01_plant_skeleton",
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "SoftBody_sb_ls02_plant_wind_collapse",
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "SoftBody_sb_ca01_conway_cloth",
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "SoftBody_sb_ca02_life_without_death_cloth",
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "SoftBody_sb_noise01_jelly_crystal",
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "SoftBody_sb_rd01_coral_cloth",
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "SoftBody_sb_rd02_stripes_flag",
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "SoftBody_gl01_classic_bulb",
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "SoftBody_gl02_long_bottle",
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "SoftBody_gl03_wide_bowl",
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "SoftBody_gl04_lopsided_vase",
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "SoftBody_gl05_collapsed_sag",
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "SoftBody_gm01_bottle_in_cylinder_mould",
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "SoftBody_gm02_vase_in_tapered_mould",
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "SoftBody_gm03_box_in_cube_mould",
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "SoftBody_gm04_pressed_onto_sphere",
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    }
   ],
   "isosurfaces": [
@@ -20266,7 +20345,8 @@
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "ISO_FlatTerrain",
@@ -20425,14 +20505,16 @@
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "Boolean_Architecture_Cavity",
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    }
   ],
   "swarmintelligence": [
@@ -20505,7 +20587,8 @@
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "SwarmIntelligence_Particle_Swarm_Optimization",
@@ -20630,7 +20713,8 @@
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "ML_Generative",
@@ -20737,7 +20821,8 @@
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "GT_Spanning_Trees",
@@ -20890,7 +20975,8 @@
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "Florensky_Paraconsistent",
@@ -21049,7 +21135,8 @@
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "QFEP_Sandbox",
@@ -21063,7 +21150,8 @@
      "reactive_particles": "draft",
      "qfep_reactor": "draft"
     },
-    "hero": "reactive_particles"
+    "hero": "reactive_particles",
+    "drop": true
    },
    {
     "map": "QFEP_Synthesis",
@@ -21168,7 +21256,8 @@
     "tokens_add": [],
     "tokens_remove": [],
     "says": {},
-    "says_by": {}
+    "says_by": {},
+    "drop": true
    },
    {
     "map": "AdvancedLaboratory_Lab_Equipment_Simulation",
@@ -22103,18 +22192,9 @@
      }
     },
     {
-     "pearl": "symmetry",
-     "map": "Chamber_Symmetry",
-     "index": 5,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "The chamber's verb is *to repeat*."
-    },
-    {
      "pearl": "seventeen",
      "map": "Symmetry_Seventeen",
-     "index": 6,
+     "index": 5,
      "hero": "wall_pattern_gallery",
      "hero_by": "hand",
      "tokens": [
@@ -22299,18 +22379,9 @@
      }
     },
     {
-     "pearl": "arrays",
-     "map": "Chamber_Arrays",
-     "index": 6,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "No new weapon."
-    },
-    {
      "pearl": "tutorial disco",
      "map": "Tutorial_Disco",
-     "index": 7,
+     "index": 6,
      "hero": "step_sequencer",
      "hero_by": "hand",
      "tokens": [
@@ -22555,18 +22626,9 @@
      }
     },
     {
-     "pearl": "color",
-     "map": "Chamber_Color",
-     "index": 6,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "The color sequence ends in a chamber where the bracelet meets light."
-    },
-    {
      "pearl": "paint",
      "map": "Color_Paint",
-     "index": 7,
+     "index": 6,
      "hero": "pattern_mill",
      "hero_by": "hand",
      "tokens": [
@@ -22589,7 +22651,7 @@
     {
      "pearl": "walls",
      "map": "Color_Walls",
-     "index": 8,
+     "index": 7,
      "hero": "color_space_navigator",
      "hero_by": "hand",
      "tokens": [
@@ -22612,15 +22674,6 @@
       "subpixel_display": "draft",
       "gradient_interpolator": "draft"
      }
-    },
-    {
-     "pearl": "flashlight",
-     "map": "Color_Flashlight",
-     "index": 9,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "Light reveals color by adding wavelengths."
     }
    ],
    "phase": "F_order",
@@ -22852,161 +22905,9 @@
      }
     },
     {
-     "pearl": "reformed instruments",
-     "map": "Reformed_Instruments",
-     "index": 2,
-     "hero": "ca_rules_workbench",
-     "hero_by": "hand",
-     "tokens": [
-      "russell_paradox_workbench",
-      "complexity_dial_workbench",
-      "ca_rules_workbench",
-      "halting_workbench",
-      "qfep_balance_workbench"
-     ],
-     "blurb": "Six workbenches line a central aisle, and for once they all speak the same language.",
-     "says": {
-      "russell_paradox_workbench": "self-reference is allowed (cell 4 is a well-formed set with one example)",
-      "complexity_dial_workbench": "polynomial vs exponential isn't a speed difference",
-      "ca_rules_workbench": "a 3-cell neighborhood and 8 transition bits suffice to encode every behavior on the qualitative gradient from frozen to chaotic to …",
-      "halting_workbench": "every machine is decidable PER STEP — you can always do the next step",
-      "qfep_balance_workbench": "the QFEP formula is not a description of a system"
-     },
-     "says_by": {
-      "russell_paradox_workbench": "draft",
-      "complexity_dial_workbench": "draft",
-      "ca_rules_workbench": "draft",
-      "halting_workbench": "draft",
-      "qfep_balance_workbench": "draft"
-     }
-    },
-    {
-     "pearl": "force preview",
-     "map": "Force_Preview",
-     "index": 3,
-     "hero": "reflection_hall",
-     "hero_by": "hand",
-     "tokens": [
-      "vector_addition_xl_laser",
-      "vector_subtraction_xl_laser",
-      "weather_vector_field",
-      "mortar_vector_siege",
-      "force_vortex",
-      "reflection_hall",
-      "human_catapult",
-      "adder_board",
-      "length_lantern",
-      "stretch_bench",
-      "agreement_gauge"
-     ],
-     "blurb": "A first taste of forces before the arc begins — a preview room where pushes, pulls and launches are shown but not yet explained.",
-     "says": {
-      "vector_addition_xl_laser": "The walk-inside vector addition exhibit, sized so the tips are out of arm's reach and grabbed with the laser pointer instead",
-      "vector_subtraction_xl_laser": "The walk-inside vector subtraction exhibit, sized so the tips are out of arm's reach and grabbed with the laser pointer",
-      "weather_vector_field": "A walkable storm chamber (~5x5 m) built on vector addition",
-      "mortar_vector_siege": "You aim the launch; gravity aims the landing. Hit the foot of the curve",
-      "force_vortex": "a force field is a velocity assigned to every point in space",
-      "reflection_hall": "A mirror does not change a vector's length. It changes the sign of one",
-      "human_catapult": "the surest way to understand a launch vector is to BE the projectile",
-      "adder_board": "Addition is not about arrows. It is the fact that two displacements taken",
-      "length_lantern": "A magnitude is not a number you are told. It is a diagonal you can see",
-      "stretch_bench": "To multiply a vector by a number is to choose a length and a direction-sign",
-      "agreement_gauge": "The dot product does not measure length. It measures how much two"
-     },
-     "says_by": {
-      "vector_addition_xl_laser": "draft",
-      "vector_subtraction_xl_laser": "draft",
-      "weather_vector_field": "draft",
-      "mortar_vector_siege": "draft",
-      "force_vortex": "draft",
-      "reflection_hall": "draft",
-      "human_catapult": "draft",
-      "adder_board": "draft",
-      "length_lantern": "draft",
-      "stretch_bench": "draft",
-      "agreement_gauge": "draft"
-     }
-    },
-    {
-     "pearl": "console test",
-     "map": "Console_Test",
-     "index": 4,
-     "hero": "triangle_curvature_workbench",
-     "hero_by": "hand",
-     "tokens": [
-      "triangle_curvature_workbench",
-      "cantor_diagonal_workbench",
-      "riemann_sum_workbench",
-      "tangent_slope_workbench",
-      "shannon_workbench",
-      "control_console"
-     ],
-     "blurb": "A test lab for the console work — the Shannon desktop console, the standalone control console, and the migrated workbenches gathered in one room so the new inte",
-     "says": {
-      "triangle_curvature_workbench": "the parallel postulate is not a fact about lines",
-      "cantor_diagonal_workbench": "given any countable list of reals, there is always a real not in that list",
-      "riemann_sum_workbench": "integration is the limit of a polygon. The polygon at N=4 is a coarse approximation",
-      "tangent_slope_workbench": "the derivative is the slope of the line you would draw if you zoomed in until the curve looked straight",
-      "shannon_workbench": "between pure order and pure noise lies a mathematical landscape with a floor Shannon named",
-      "control_console": "Brushed grey-metal CSG cabinet (CSGCombiner3D"
-     },
-     "says_by": {
-      "triangle_curvature_workbench": "draft",
-      "cantor_diagonal_workbench": "draft",
-      "riemann_sum_workbench": "draft",
-      "tangent_slope_workbench": "draft",
-      "shannon_workbench": "draft",
-      "control_console": "draft"
-     }
-    },
-    {
-     "pearl": "force props sandbox",
-     "map": "Force_Props_Sandbox",
-     "index": 5,
-     "hero": "bubble_blaster",
-     "hero_by": "hand",
-     "tokens": [
-      "bubble_blaster",
-      "force_mower",
-      "vector_add",
-      "circle_train",
-      "wedge_slide",
-      "dot_aligner",
-      "death_pylon"
-     ],
-     "blurb": "A sandbox for force props — the loose toys of the Forces sequence laid out in one open room.",
-     "says": {
-      "bubble_blaster": "A soap-bubble gun that fires a spreading cone of bubbles and wears its launch vector on the muzzle - an embodied force-display prop",
-      "force_mower": "The lawn-mower work diagram turned into a thing you push - an embodied force-display prop for the vectors-forces arc",
-      "vector_add": "Vector addition made playable - the entry operation of the embodied vectors-forces arc",
-      "circle_train": "Centripetal force made playable - a sci-fi intermezzo for the embodied vectors-forces arc",
-      "wedge_slide": "The inclined-plane free-body problem made playable - a primitive on a wedge",
-      "dot_aligner": "The dot product made playable, and the embodied vectors-forces arc's operations toy",
-      "death_pylon": "A pylon stand that breathes death in a cycle. During the charge it drinks energy from the ground - a wide field of grid-cells and energy …"
-     },
-     "says_by": {
-      "bubble_blaster": "draft",
-      "force_mower": "draft",
-      "vector_add": "draft",
-      "circle_train": "draft",
-      "wedge_slide": "draft",
-      "dot_aligner": "draft",
-      "death_pylon": "draft"
-     }
-    },
-    {
-     "pearl": "vectorfoundations",
-     "map": "VectorFoundations",
-     "index": 6,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "Direction is not given, it is composed."
-    },
-    {
      "pearl": "vectors act1 whatavectoris",
      "map": "Vectors_Act1_WhatAVectorIs",
-     "index": 7,
+     "index": 2,
      "hero": "vector_normalize_demo",
      "hero_by": "hand",
      "tokens": [
@@ -23024,7 +22925,7 @@
     {
      "pearl": "vfm 01 foundations",
      "map": "VFM_01_Foundations",
-     "index": 8,
+     "index": 3,
      "hero": "example_2_1_forces_vr",
      "hero_by": "hand",
      "tokens": [
@@ -23063,7 +22964,7 @@
     {
      "pearl": "vectoroperations",
      "map": "VectorOperations",
-     "index": 9,
+     "index": 4,
      "hero": "vector_dot_product_xl",
      "hero_by": "hand",
      "tokens": [
@@ -23094,7 +22995,7 @@
     {
      "pearl": "vectors act2 vectorarithmetic",
      "map": "Vectors_Act2_VectorArithmetic",
-     "index": 10,
+     "index": 5,
      "hero": "vector_addition_walk",
      "hero_by": "hand",
      "tokens": [
@@ -23123,7 +23024,7 @@
     {
      "pearl": "vfm 02 operations",
      "map": "VFM_02_Operations",
-     "index": 11,
+     "index": 6,
      "hero": "VectorWorkbench",
      "hero_by": "hand",
      "tokens": [
@@ -23149,7 +23050,7 @@
     {
      "pearl": "vectoradvanced",
      "map": "VectorAdvanced",
-     "index": 12,
+     "index": 7,
      "hero": "VectorFieldFlow",
      "hero_by": "hand",
      "tokens": [
@@ -23184,7 +23085,7 @@
     {
      "pearl": "vectors act3 fieldsandmotion",
      "map": "Vectors_Act3_FieldsAndMotion",
-     "index": 13,
+     "index": 8,
      "hero": "VectorMotion",
      "hero_by": "hand",
      "tokens": [
@@ -23204,7 +23105,7 @@
     {
      "pearl": "vfm 03 motion",
      "map": "VFM_03_Motion",
-     "index": 14,
+     "index": 9,
      "hero": "example_3_3_pointing_in_the_direction_of_motion_vr",
      "hero_by": "hand",
      "tokens": [
@@ -23254,7 +23155,7 @@
     {
      "pearl": "vectors act4a kineticforces",
      "map": "Vectors_Act4a_KineticForces",
-     "index": 15,
+     "index": 10,
      "hero": "drag_corridor",
      "hero_by": "hand",
      "tokens": [
@@ -23277,7 +23178,7 @@
     {
      "pearl": "vectors act4b oscillation",
      "map": "Vectors_Act4b_Oscillation",
-     "index": 16,
+     "index": 11,
      "hero": "bounce_well",
      "hero_by": "hand",
      "tokens": [
@@ -23307,36 +23208,9 @@
      }
     },
     {
-     "pearl": "vectors act5 forceasplace",
-     "map": "Vectors_Act5_ForceAsPlace",
-     "index": 17,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "A chasm with no floor and a far ledge you have to reach."
-    },
-    {
-     "pearl": "foundations",
-     "map": "ForcesFoundations",
-     "index": 18,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "Three islands for the fundamentals: Newton's laws on one, projectile motion on another, friction and drag on the third."
-    },
-    {
-     "pearl": "forces",
-     "map": "Chamber_Forces",
-     "index": 19,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "The calming mortar slows the kresling."
-    },
-    {
      "pearl": "composition",
      "map": "ForcesComposition",
-     "index": 20,
+     "index": 12,
      "hero": "force_field_visualizer",
      "hero_by": "hand",
      "tokens": [
@@ -23356,7 +23230,7 @@
     {
      "pearl": "vectorapplied",
      "map": "VectorApplied",
-     "index": 21,
+     "index": 13,
      "hero": "hl_turret_vectors",
      "hero_by": "hand",
      "tokens": [
@@ -23367,7 +23241,7 @@
     {
      "pearl": "vfm 04 fields",
      "map": "VFM_04_Fields",
-     "index": 22,
+     "index": 14,
      "hero": "magnetic_simulation",
      "hero_by": "hand",
      "tokens": [
@@ -23399,7 +23273,7 @@
     {
      "pearl": "vfm 05 launch",
      "map": "VFM_05_Launch",
-     "index": 23,
+     "index": 15,
      "hero": "catapult",
      "hero_by": "hand",
      "tokens": [
@@ -23429,7 +23303,7 @@
     {
      "pearl": "systems",
      "map": "ForcesSystems",
-     "index": 24,
+     "index": 16,
      "hero": "particle_systems",
      "hero_by": "hand",
      "tokens": [
@@ -23455,7 +23329,7 @@
     {
      "pearl": "vfm 06 springs",
      "map": "VFM_06_Springs",
-     "index": 25,
+     "index": 17,
      "hero": "ChainSwing",
      "hero_by": "hand",
      "tokens": [
@@ -23500,7 +23374,7 @@
     {
      "pearl": "chaos",
      "map": "ForcesChaos",
-     "index": 26,
+     "index": 18,
      "hero": "three_body_problem",
      "hero_by": "hand",
      "tokens": [
@@ -23532,7 +23406,7 @@
     {
      "pearl": "vfm 07 gravity",
      "map": "VFM_07_Gravity",
-     "index": 27,
+     "index": 19,
      "hero": "orbital_mechanics_demo",
      "hero_by": "hand",
      "tokens": [
@@ -23558,7 +23432,7 @@
     {
      "pearl": "vfm 08 arena",
      "map": "VFM_08_Arena",
-     "index": 28,
+     "index": 20,
      "hero": "collision_carts",
      "hero_by": "hand",
      "tokens": [
@@ -23583,15 +23457,13 @@
     {
      "pearl": "arena",
      "map": "ForcesArena",
-     "index": 29,
+     "index": 21,
      "hero": "hits_reset_display",
      "hero_by": "hand",
      "tokens": [
       "hits_reset_display",
       "health_display",
-      "gravity_gun_test_scene",
       "vector_drone",
-      "destructibles_test_scene",
       "throw_ball",
       "grab_sphere_point",
       "sphere_splitting_showcase",
@@ -23602,9 +23474,7 @@
      "says": {
       "hits_reset_display": "A reset is not a return to nothing — it is the act of restoring an expected state",
       "health_display": "A health display is not a stat — it is a promise that change has consequences and that the world keeps …",
-      "gravity_gun_test_scene": "A test scene is not a placeholder — it is the rehearsal where physics learns its part before the player …",
       "vector_drone": "The drone is a mirror of the turret. Same math",
-      "destructibles_test_scene": "Destruction is topology change. How something breaks reveals how it was built",
       "throw_ball": "throw_ball",
       "grab_sphere_point": "XR Tools pickable sphere with highlight ring for repositioning a reference point",
       "sphere_splitting_showcase": "There is no single way to break a sphere. Each fracture method is a decomposition basis",
@@ -23614,15 +23484,17 @@
      "says_by": {
       "hits_reset_display": "draft",
       "health_display": "draft",
-      "gravity_gun_test_scene": "draft",
       "vector_drone": "draft",
-      "destructibles_test_scene": "draft",
       "throw_ball": "draft",
       "grab_sphere_point": "draft",
       "sphere_splitting_showcase": "draft",
       "VectorAddition": "draft",
       "VectorSubtraction": "draft"
-     }
+     },
+     "excluded": [
+      "destructibles_test_scene",
+      "gravity_gun_test_scene"
+     ]
     }
    ],
    "phase": "oscillation",
@@ -23756,18 +23628,9 @@
      }
     },
     {
-     "pearl": "formfinding",
-     "map": "Chamber_FormFinding",
-     "index": 5,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "The chamber's verb is *to settle*."
-    },
-    {
      "pearl": "forge",
      "map": "FormFinding_Forge",
-     "index": 6,
+     "index": 5,
      "hero": "self_shaping_forge",
      "hero_by": "hand",
      "tokens": [
@@ -23982,11 +23845,13 @@
      "hero": "dual_display_test",
      "hero_by": "hand",
      "tokens": [
-      "dual_display_test",
       "ruth_asawa_sculpture",
       "john_cage_tech_noir"
      ],
-     "blurb": "Silence is the space between waves."
+     "blurb": "Silence is the space between waves.",
+     "excluded": [
+      "dual_display_test"
+     ]
     },
     {
      "pearl": "airmusic",
@@ -24038,18 +23903,9 @@
      }
     },
     {
-     "pearl": "waves",
-     "map": "Chamber_Waves",
-     "index": 11,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "Your helix shots spiral through the air."
-    },
-    {
      "pearl": "synthesis lab",
      "map": "WaveFunctions_Synthesis_Lab",
-     "index": 12,
+     "index": 11,
      "hero": "oscilloscope",
      "hero_by": "hand",
      "tokens": [
@@ -24338,18 +24194,9 @@
      }
     },
     {
-     "pearl": "random",
-     "map": "Chamber_Random",
-     "index": 8,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "Chaos shots scatter unpredictably."
-    },
-    {
      "pearl": "random mushrooms",
      "map": "Random_Mushrooms",
-     "index": 9,
+     "index": 8,
      "hero": "reaction_diffusion_intro",
      "hero_by": "hand",
      "tokens": [
@@ -24378,7 +24225,7 @@
     {
      "pearl": "random space geometry",
      "map": "Random_Space_Geometry",
-     "index": 10,
+     "index": 9,
      "hero": "env_one",
      "hero_by": "hand",
      "tokens": [
@@ -24407,7 +24254,7 @@
     {
      "pearl": "examples of randomness",
      "map": "Randomness_Examples_of_Randomness",
-     "index": 11,
+     "index": 10,
      "hero": "pollock_painting_in_3d",
      "hero_by": "hand",
      "tokens": [
@@ -24433,7 +24280,7 @@
     {
      "pearl": "random pheromone",
      "map": "Random_Pheromone",
-     "index": 12,
+     "index": 11,
      "hero": "pheromone_terrain",
      "hero_by": "hand",
      "tokens": [
@@ -24450,7 +24297,7 @@
     {
      "pearl": "random space",
      "map": "Random_Space",
-     "index": 13,
+     "index": 12,
      "hero": "random_space",
      "hero_by": "hand",
      "tokens": [
@@ -24473,7 +24320,7 @@
     {
      "pearl": "random game",
      "map": "Random_Game",
-     "index": 14,
+     "index": 13,
      "hero": "miura_crawler",
      "hero_by": "hand",
      "tokens": [
@@ -24688,24 +24535,6 @@
       "perlin_noise_terrain": "draft",
       "configurable_portal": "draft"
      }
-    },
-    {
-     "pearl": "noise",
-     "map": "Chamber_Noise",
-     "index": 8,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "No weapon, no creature."
-    },
-    {
-     "pearl": "lab path",
-     "map": "Lab_Path",
-     "index": 9,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "The corridor back."
     }
    ],
    "phase": "E_entropy",
@@ -24819,24 +24648,24 @@
      "hero": "decaying_bridge",
      "hero_by": "hand",
      "tokens": [
-      "ca_chair_test",
       "cellular_automata_3d_tree",
       "crossway_ca",
       "decaying_bridge"
      ],
      "blurb": "Larger neighborhoods reach further.",
      "says": {
-      "ca_chair_test": "A chair is a convergent form — different rules find it because sitting demands it",
       "cellular_automata_3d_tree": "A tree is what remains when you remove everything that isn't tree",
       "crossway_ca": "When every row speaks a different rule language",
       "decaying_bridge": "Architecture that reacts to presence is architecture that is alive"
      },
      "says_by": {
-      "ca_chair_test": "draft",
       "cellular_automata_3d_tree": "draft",
       "crossway_ca": "draft",
       "decaying_bridge": "draft"
-     }
+     },
+     "excluded": [
+      "ca_chair_test"
+     ]
     },
     {
      "pearl": "ca softrules",
@@ -24879,18 +24708,9 @@
      }
     },
     {
-     "pearl": "ca",
-     "map": "Chamber_CA",
-     "index": 7,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "Your CA burst hits the walker."
-    },
-    {
      "pearl": "ca edgeofchaos",
      "map": "CA_EdgeOfChaos",
-     "index": 8,
+     "index": 7,
      "hero": "self_organization_ca",
      "hero_by": "hand",
      "tokens": [
@@ -25157,18 +24977,9 @@
      }
     },
     {
-     "pearl": "fractals",
-     "map": "Chamber_Fractals",
-     "index": 8,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "You split."
-    },
-    {
      "pearl": "fractal synthesis",
      "map": "Fractal_Synthesis",
-     "index": 9,
+     "index": 8,
      "hero": "fractal_clouds",
      "hero_by": "hand",
      "tokens": [
@@ -25194,7 +25005,7 @@
     {
      "pearl": "fractal crosssequence",
      "map": "Fractal_CrossSequence",
-     "index": 10,
+     "index": 9,
      "hero": "space_filling_curve_gallery",
      "hero_by": "hand",
      "tokens": [
@@ -25360,18 +25171,9 @@
      }
     },
     {
-     "pearl": "lsystems",
-     "map": "Chamber_LSystems",
-     "index": 6,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "Your branching tendrils grow alongside the vine."
-    },
-    {
      "pearl": "assemblage same desire",
      "map": "Assemblage_Same_Desire",
-     "index": 7,
+     "index": 6,
      "hero": "godel_statement_plaque",
      "hero_by": "hand",
      "tokens": [
@@ -25482,18 +25284,9 @@
      }
     },
     {
-     "pearl": "procgen",
-     "map": "Chamber_ProcGen",
-     "index": 4,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "The golem rebuilds from whatever is nearby."
-    },
-    {
      "pearl": "pg caves mazes",
      "map": "PG_Caves_Mazes",
-     "index": 5,
+     "index": 4,
      "hero": "maze_generation",
      "hero_by": "hand",
      "tokens": [
@@ -25513,7 +25306,7 @@
     {
      "pearl": "pg sculpted forms",
      "map": "PG_Sculpted_Forms",
-     "index": 6,
+     "index": 5,
      "hero": "layered_membrane",
      "hero_by": "hand",
      "tokens": [
@@ -25536,7 +25329,7 @@
     {
      "pearl": "pg mirrored patterns",
      "map": "PG_Mirrored_Patterns",
-     "index": 7,
+     "index": 6,
      "hero": "mirror_cellular_texture_for_3d",
      "hero_by": "hand",
      "tokens": [
@@ -25668,26 +25461,9 @@
      }
     },
     {
-     "pearl": "playground of joy",
-     "map": "SoftBodies_Playground_of_Joy",
-     "index": 5,
-     "hero": "rounded_softbody_test",
-     "hero_by": "hand",
-     "tokens": [
-      "rounded_softbody_test"
-     ],
-     "blurb": "No instructions.",
-     "says": {
-      "rounded_softbody_test": "Deformable rounded cube with 3 modes: strain energy heatmap coloring by vertex displacement"
-     },
-     "says_by": {
-      "rounded_softbody_test": "draft"
-     }
-    },
-    {
      "pearl": "affect theory visualization",
      "map": "SoftBodies_Affect_Theory_Visualization",
-     "index": 6,
+     "index": 5,
      "hero": "radiolaria",
      "hero_by": "hand",
      "tokens": [
@@ -25704,7 +25480,7 @@
     {
      "pearl": "proceduralgeneration reaction diffusion systems",
      "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
-     "index": 7,
+     "index": 6,
      "hero": "reaction_diffusion",
      "hero_by": "hand",
      "tokens": [
@@ -25724,7 +25500,7 @@
     {
      "pearl": "topology entropy morphogenesis",
      "map": "Topology_Entropy_Morphogenesis",
-     "index": 8,
+     "index": 7,
      "hero": "entropy_morphogenesis",
      "hero_by": "hand",
      "tokens": [
@@ -25739,18 +25515,9 @@
      }
     },
     {
-     "pearl": "softbodies",
-     "map": "Chamber_SoftBodies",
-     "index": 9,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "The hopper bounces softly."
-    },
-    {
      "pearl": "softbody sb01 cloth drape corners",
      "map": "SoftBody_sb01_cloth_drape_corners",
-     "index": 10,
+     "index": 8,
      "hero": "gallery_marker_soft-body",
      "hero_by": "hand",
      "tokens": [
@@ -25763,213 +25530,6 @@
      "says_by": {
       "gallery_marker_soft-body": "draft"
      }
-    },
-    {
-     "pearl": "softbody sb02 cloth drape top row",
-     "map": "SoftBody_sb02_cloth_drape_top_row",
-     "index": 11,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "A rectangle of cloth held all along the top — every vertex in the first row pinned to the ceiling."
-    },
-    {
-     "pearl": "softbody sb03 cloth flag sideways",
-     "map": "SoftBody_sb03_cloth_flag_sideways",
-     "index": 12,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "A flag pinned along its left edge."
-    },
-    {
-     "pearl": "softbody sb04 cloth tablecloth",
-     "map": "SoftBody_sb04_cloth_tablecloth",
-     "index": 13,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "A square of cloth pinned at all four corners."
-    },
-    {
-     "pearl": "softbody sb05 jelly box bounce",
-     "map": "SoftBody_sb05_jelly_box_bounce",
-     "index": 14,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "A cube made of eight corner masses and twenty-eight springs."
-    },
-    {
-     "pearl": "softbody sb06 jelly grid settle",
-     "map": "SoftBody_sb06_jelly_grid_settle",
-     "index": 15,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "A 5×5×5 cube of mass points — one hundred twenty-five vertices, hundreds of springs holding them in a lattice."
-    },
-    {
-     "pearl": "softbody sb07 jelly grid tall stiff",
-     "map": "SoftBody_sb07_jelly_grid_tall_stiff",
-     "index": 16,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "A tall column of mass points — a 3×3×9 grid of jelly stretched upward like a thin tower."
-    },
-    {
-     "pearl": "softbody sb08 jelly grid floppy",
-     "map": "SoftBody_sb08_jelly_grid_floppy",
-     "index": 17,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "The same lattice as sb07 — but stiffness turned far down."
-    },
-    {
-     "pearl": "softbody sb ls01 plant skeleton",
-     "map": "SoftBody_sb_ls01_plant_skeleton",
-     "index": 18,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "An L-system grown into wires."
-    },
-    {
-     "pearl": "softbody sb ls02 plant wind collapse",
-     "map": "SoftBody_sb_ls02_plant_wind_collapse",
-     "index": 19,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "The same L-system word that grew sb_ls01's standing plant."
-    },
-    {
-     "pearl": "softbody sb ca01 conway cloth",
-     "map": "SoftBody_sb_ca01_conway_cloth",
-     "index": 20,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "Run Conway's Game of Life for eight generations on a small grid."
-    },
-    {
-     "pearl": "softbody sb ca02 life without death cloth",
-     "map": "SoftBody_sb_ca02_life_without_death_cloth",
-     "index": 21,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "A second CA rule, taken from the same family but with one change: cells that come alive never die."
-    },
-    {
-     "pearl": "softbody sb noise01 jelly crystal",
-     "map": "SoftBody_sb_noise01_jelly_crystal",
-     "index": 22,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "A jelly grid is built, settled, and then frozen."
-    },
-    {
-     "pearl": "softbody sb rd01 coral cloth",
-     "map": "SoftBody_sb_rd01_coral_cloth",
-     "index": 23,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "A flat cloth that is also a reaction-diffusion field."
-    },
-    {
-     "pearl": "softbody sb rd02 stripes flag",
-     "map": "SoftBody_sb_rd02_stripes_flag",
-     "index": 24,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "A flag pinned along its top row."
-    },
-    {
-     "pearl": "softbody gl01 classic bulb",
-     "map": "SoftBody_gl01_classic_bulb",
-     "index": 25,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "A sphere pinned at one small ring on top."
-    },
-    {
-     "pearl": "softbody gl02 long bottle",
-     "map": "SoftBody_gl02_long_bottle",
-     "index": 26,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "A smaller pin ring on top."
-    },
-    {
-     "pearl": "softbody gl03 wide bowl",
-     "map": "SoftBody_gl03_wide_bowl",
-     "index": 27,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "A sphere pinned along a wide ring around its top."
-    },
-    {
-     "pearl": "softbody gl04 lopsided vase",
-     "map": "SoftBody_gl04_lopsided_vase",
-     "index": 28,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "Same sphere, same pressure, same pin ring as gl01."
-    },
-    {
-     "pearl": "softbody gl05 collapsed sag",
-     "map": "SoftBody_gl05_collapsed_sag",
-     "index": 29,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "The other glass studies hold their shape."
-    },
-    {
-     "pearl": "softbody gm01 bottle in cylinder mould",
-     "map": "SoftBody_gm01_bottle_in_cylinder_mould",
-     "index": 30,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "A pressurized sphere is dropped into a cylindrical mould — open at the top, closed at the bottom, radius held constant from rim to base."
-    },
-    {
-     "pearl": "softbody gm02 vase in tapered mould",
-     "map": "SoftBody_gm02_vase_in_tapered_mould",
-     "index": 31,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "The same sphere meets a different cavity."
-    },
-    {
-     "pearl": "softbody gm03 box in cube mould",
-     "map": "SoftBody_gm03_box_in_cube_mould",
-     "index": 32,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "A pressurized sphere is dropped into a rectangular cavity — 0.9 wide, 1.4 tall, 0.9 deep."
-    },
-    {
-     "pearl": "softbody gm04 pressed onto sphere",
-     "map": "SoftBody_gm04_pressed_onto_sphere",
-     "index": 33,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "Every other mould in the gallery is a cavity."
     }
    ],
    "phase": "integration",
@@ -26084,18 +25644,9 @@
      }
     },
     {
-     "pearl": "isosurfaces",
-     "map": "Chamber_Isosurfaces",
-     "index": 5,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "The chamber's verb is *to threshold*."
-    },
-    {
      "pearl": "iso flatterrain",
      "map": "ISO_FlatTerrain",
-     "index": 6,
+     "index": 5,
      "hero": "mc_flat_landscape",
      "hero_by": "hand",
      "tokens": [
@@ -26118,7 +25669,7 @@
     {
      "pearl": "iso portallandscape",
      "map": "ISO_PortalLandscape",
-     "index": 7,
+     "index": 6,
      "hero": "marchingcubes_portal_landscape",
      "hero_by": "hand",
      "tokens": [
@@ -26135,7 +25686,7 @@
     {
      "pearl": "iso caves",
      "map": "ISO_Caves",
-     "index": 8,
+     "index": 7,
      "hero": "mc_portal_landscape",
      "hero_by": "hand",
      "tokens": [
@@ -26158,7 +25709,7 @@
     {
      "pearl": "iso cavegeneration",
      "map": "ISO_CaveGeneration",
-     "index": 9,
+     "index": 8,
      "hero": "marchingcave",
      "hero_by": "hand",
      "tokens": [
@@ -26178,7 +25729,7 @@
     {
      "pearl": "iso animatednoise",
      "map": "ISO_AnimatedNoise",
-     "index": 10,
+     "index": 9,
      "hero": "animated_noise_explorer",
      "hero_by": "hand",
      "tokens": [
@@ -26198,7 +25749,7 @@
     {
      "pearl": "iso metaballs",
      "map": "ISO_Metaballs",
-     "index": 11,
+     "index": 10,
      "hero": "nakama_metaballs",
      "hero_by": "hand",
      "tokens": [
@@ -26224,7 +25775,7 @@
     {
      "pearl": "iso implicitmodeling",
      "map": "ISO_ImplicitModeling",
-     "index": 12,
+     "index": 11,
      "hero": "implicit_surface_modeling",
      "hero_by": "hand",
      "tokens": [
@@ -26321,24 +25872,6 @@
      "says_by": {
       "csg_compose_workbench": "draft"
      }
-    },
-    {
-     "pearl": "boolean",
-     "map": "Chamber_Boolean",
-     "index": 4,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "The chamber's verb is *to compose*."
-    },
-    {
-     "pearl": "boolean architecture cavity",
-     "map": "Boolean_Architecture_Cavity",
-     "index": 5,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "Every room is a difference operation: a solid mass minus the volume of a room."
     }
    ],
    "phase": "F_order",
@@ -26447,18 +25980,9 @@
      }
     },
     {
-     "pearl": "swarm",
-     "map": "Chamber_Swarm",
-     "index": 5,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "Your eight boids meet their swarm."
-    },
-    {
      "pearl": "particle swarm optimization",
      "map": "SwarmIntelligence_Particle_Swarm_Optimization",
-     "index": 6,
+     "index": 5,
      "hero": "self_organizing_patterns",
      "hero_by": "hand",
      "tokens": [
@@ -26478,7 +26002,7 @@
     {
      "pearl": "swarm intelligence algorithms",
      "map": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
-     "index": 7,
+     "index": 6,
      "hero": "ecosystem_simulation",
      "hero_by": "hand",
      "tokens": [
@@ -26636,18 +26160,9 @@
      }
     },
     {
-     "pearl": "ml",
-     "map": "Chamber_ML",
-     "index": 6,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "The hunter learns your patterns."
-    },
-    {
      "pearl": "ml generative",
      "map": "ML_Generative",
-     "index": 7,
+     "index": 6,
      "hero": "generative_adversarial_networks_gans_vr",
      "hero_by": "hand",
      "tokens": [
@@ -26664,7 +26179,7 @@
     {
      "pearl": "ml synthesis",
      "map": "ML_Synthesis",
-     "index": 8,
+     "index": 7,
      "hero": "anomaly_detection",
      "hero_by": "hand",
      "tokens": [
@@ -26802,18 +26317,9 @@
      }
     },
     {
-     "pearl": "graphtheory",
-     "map": "Chamber_GraphTheory",
-     "index": 5,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "The chamber's verb is *to connect*."
-    },
-    {
      "pearl": "gt spanning trees",
      "map": "GT_Spanning_Trees",
-     "index": 6,
+     "index": 5,
      "hero": "mst_visualization",
      "hero_by": "hand",
      "tokens": [
@@ -26830,7 +26336,7 @@
     {
      "pearl": "gt flow",
      "map": "GT_Flow",
-     "index": 7,
+     "index": 6,
      "hero": "push_relabel_algorithm",
      "hero_by": "hand",
      "tokens": [
@@ -26850,7 +26356,7 @@
     {
      "pearl": "gt matching",
      "map": "GT_Matching",
-     "index": 8,
+     "index": 7,
      "hero": "edmonds_algorithm",
      "hero_by": "hand",
      "tokens": [
@@ -27035,18 +26541,9 @@
      }
     },
     {
-     "pearl": "foundations",
-     "map": "Chamber_Foundations",
-     "index": 6,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "Two overlapping ghosts."
-    },
-    {
      "pearl": "florensky paraconsistent",
      "map": "Florensky_Paraconsistent",
-     "index": 7,
+     "index": 6,
      "hero": "schrodinger_box",
      "hero_by": "hand",
      "tokens": [
@@ -27072,7 +26569,7 @@
     {
      "pearl": "crisis synthesis",
      "map": "Crisis_Synthesis",
-     "index": 8,
+     "index": 7,
      "hero": "lambda_slider",
      "hero_by": "hand",
      "tokens": [
@@ -27276,38 +26773,9 @@
      }
     },
     {
-     "pearl": "qfep",
-     "map": "Chamber_QFEP",
-     "index": 6,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "Every creature you befriended is here."
-    },
-    {
-     "pearl": "qfep sandbox",
-     "map": "QFEP_Sandbox",
-     "index": 7,
-     "hero": "reactive_particles",
-     "hero_by": "hand",
-     "tokens": [
-      "reactive_particles",
-      "qfep_reactor"
-     ],
-     "blurb": "*You've earned the force.*\n\nNo more guided tours.",
-     "says": {
-      "reactive_particles": "Alias for reactive_particle_field. Particles that respond to λ and φ parameters",
-      "qfep_reactor": "the reactor is the QFEP formula made tangible"
-     },
-     "says_by": {
-      "reactive_particles": "draft",
-      "qfep_reactor": "draft"
-     }
-    },
-    {
      "pearl": "qfep synthesis",
      "map": "QFEP_Synthesis",
-     "index": 8,
+     "index": 6,
      "hero": "queer_morphology_specimen",
      "hero_by": "hand",
      "tokens": [
@@ -27457,18 +26925,9 @@
      }
     },
     {
-     "pearl": "postfoundations",
-     "map": "Chamber_PostFoundations",
-     "index": 6,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "The chamber's verb is *to build anyway*."
-    },
-    {
      "pearl": "advancedlaboratory lab equipment simulation",
      "map": "AdvancedLaboratory_Lab_Equipment_Simulation",
-     "index": 7,
+     "index": 6,
      "hero": "MolecularDesigner",
      "hero_by": "hand",
      "tokens": [
@@ -27485,7 +26944,7 @@
     {
      "pearl": "postcrisis synthesis",
      "map": "PostCrisis_Synthesis",
-     "index": 8,
+     "index": 7,
      "hero": "accountability_ledger",
      "hero_by": "hand",
      "tokens": [

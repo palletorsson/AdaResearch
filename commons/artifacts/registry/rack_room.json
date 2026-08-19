@@ -38,7 +38,7 @@
 			"qfep_connection": "The rack is a format before it is an instrument: a grid of positions that exists prior to anything being fitted into it, and that goes on describing what belongs there when nothing does. `vacancy` is the value where the format speaks without a body in it - ten closed positions and one open one, all of them shaped like a module and none of them being one. The other four values can only talk about what the machine HAS.",
 			"relationships": "Synthesised from the nine registry tokens that declare a `machinery` axis, all of which were read - code, registry entry and doc block.\n\nONE SCENE, MANY NAMES - CONFIRMED, and it is seven of the nine. [[Rack303Acid]], [[Rack808Drums]], [[RackAmbientDrone]], [[RackDX7Piano]], [[RackMario]], [[RackMoogBass]] and [[RackSineBasic]] are seven .tscn files in commons/audio/rack_presets/ whose ROOT node carries the same one line, `script = ExtResource` pointing at res://addons/element_editor/element_layout_node.gd, with subset_id \"audio_rack\". They differ only in their `placements` array and their `sound_type` string. So the family is nine NAMES over THREE bodies: that script (7), [[MarioSoundController]] (1) and [[timbre_sculptor]] (1). The tell was not export counts here but file size - seven scenes of 1.0-2.9 KB with one ext_resource between them.\n\n[[MarioSoundController]] is the honest adopter and says so in its own doc block: 'Adopted word for word from the seven promoted audio racks ... because this is the same claim pointed at a different interface: a 3D mapping volume instead of a panel of sliders.' It re-implements all five builders against a ValueMapper3D instead of a cell grid, and carries a transcribed copy of the value list. [[timbre_sculptor]] adds a second axis (`waveform`) and takes `machinery` unchanged, noting in its own registry entry that 'the SOUND is invisible to a still and no axis here pretends otherwise'.\n\n[[warning_yard]] is the pattern this follows: a family word taken off a 1 m body and given a place, with the vocabulary preloaded from the owning member rather than retyped, and the whole argument in the geometry that only the larger scale can hold.",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "table",
 				"footprint_cells": 2,
 				"clearance": {
 					"front": 2,
@@ -57,7 +57,8 @@
 				],
 				"preferred_zone": "teaching",
 				"footprint_source": "computed_from_geometry",
-				"footprint_note": "1.30 x 0.74 m at the floor tile, so a 2 x 1 patch. wall_backing is FALSE ON PURPOSE and it is not a shrug: at `frame` the whole claim is that the room shows straight through where a panel would be, and at `works` you are meant to read the boards against something. A rack pushed against a wall photographs `frame` as a wall with bars on it. The front is +Z; the token needs a rotation if the approach is not from there. Nothing here is a collider."
+				"footprint_note": "1.30 x 0.74 m at the floor tile, so a 2 x 1 patch. wall_backing is FALSE ON PURPOSE and it is not a shrug: at `frame` the whole claim is that the room shows straight through where a panel would be, and at `works` you are meant to read the boards against something. A rack pushed against a wall photographs `frame` as a wall with bars on it. The front is +Z; the token needs a rotation if the approach is not from there. Nothing here is a collider.",
+				"shelf_rule": "bench (base 1.30 m, h 1.60 m, registry.measurements)"
 			},
 			"measurements": {
 				"aabb_size": [

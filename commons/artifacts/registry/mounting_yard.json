@@ -44,7 +44,7 @@
 			"category": "props",
 			"description": "One object mounted six ways, pooled from the six different vocabularies ten artifacts use for the axis support. Underneath thirteen words is one ladder from unsupported to fully housed, and each rung is a different institution: equipment, instrument, picture, specimen, signage.",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "pedestal",
 				"footprint_cells": 6,
 				"clearance": {
 					"front": 3,
@@ -55,7 +55,8 @@
 				"player_position": "front",
 				"orientation": "face_approach",
 				"preferred_zone": "teaching",
-				"footprint_source": "authored"
+				"footprint_source": "authored",
+				"shelf_rule": "UNMEASURED — default museum pose, measure it (base 0.00 m, h 0.00 m, UNMEASURED)"
 			}
 		}
 	}

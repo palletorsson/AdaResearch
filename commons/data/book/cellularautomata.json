@@ -91,11 +91,6 @@
    "map": "CA_ExpandingSpace",
    "lines": [
     {
-     "token": "ca_chair_test",
-     "text": "A chair is a convergent form — different rules find it because sitting demands it",
-     "by": "draft"
-    },
-    {
      "token": "cellular_automata_3d_tree",
      "text": "A tree is what remains when you remove everything that isn't tree",
      "by": "draft"
@@ -150,7 +145,8 @@
   {
    "pearl": "ca",
    "map": "Chamber_CA",
-   "lines": []
+   "lines": [],
+   "drop": true
   },
   {
    "pearl": "ca edgeofchaos",

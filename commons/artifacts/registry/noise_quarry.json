@@ -48,7 +48,7 @@
       "qfep_connection": "Three conventions for one field, and no neutral one among them. Each spends the sample on a different property — position, colour, extent — and each pays somewhere else: the relief hides its own low ground, the column rectifies every negative into a positive length, and the plate hides nothing and can measure nothing. The `plate` section of the ruled wall is the artifact's own dark spot: a scale with no levels on it, standing between two scales that have them, so the absence is a mark rather than an omission.",
       "relationships": "Synthesised from the eight registry names that declare the B dialect of `readout` (mandelbrot_set, complexity_pattern, perlin_noise, perlin_noise_terrain, random_edge_profile, simplex_noise, and noisesphere/noisetorus which drop `column`). Replaces none of them and re-runs none of their axes from the outside. Sibling in argument to slack_yard, which makes the same move for the `slack` family.",
       "spatial_needs": {
-        "platform": "none",
+        "platform": "platform",
         "footprint_cells": 5,
         "clearance": {
           "front": 2,
@@ -67,7 +67,8 @@
         ],
         "preferred_zone": "teaching",
         "footprint_source": "computed_from_geometry",
-        "footprint_note": "The apron is 4.20 m across the three benches by 2.17 m from the ruled wall to the front edge, so a 5 x 3 clear patch. The lane names are lettered on the apron's +Z edge, the datum rule stands at +Z and the ruled wall closes the -Z side, so the artifact reads correctly approached from +Z; `orientation: face_approach` plus a rotation in the map token is how you get that. `wall_backing` is true because the artifact BRINGS its own back wall and should not be given a second one 0.4 m behind it. There is no collider anywhere in the file, so the pathfinder will route straight through the benches — correct, because there are no benches, there is a picture of three."
+        "footprint_note": "The apron is 4.20 m across the three benches by 2.17 m from the ruled wall to the front edge, so a 5 x 3 clear patch. The lane names are lettered on the apron's +Z edge, the datum rule stands at +Z and the ruled wall closes the -Z side, so the artifact reads correctly approached from +Z; `orientation: face_approach` plus a rotation in the map token is how you get that. `wall_backing` is true because the artifact BRINGS its own back wall and should not be given a second one 0.4 m behind it. There is no collider anywhere in the file, so the pathfinder will route straight through the benches — correct, because there are no benches, there is a picture of three.",
+        "shelf_rule": "stage (base 4.20 m, h 0.60 m, registry.measurements)"
       },
       "measurements": {
         "aabb_size": [

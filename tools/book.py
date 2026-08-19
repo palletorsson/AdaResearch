@@ -195,6 +195,10 @@ def compile_book(chapter: str, reseed: bool = True) -> dict:
         foyer = [ln["token"] for ln in bp.get("lines", []) if ln.get("token") and ln.get("place") == "foyer"]
         if foyer: e["foyer"] = foyer
         else: e.pop("foyer", None)
+        # DROPPED: a test map, a sandbox, an empty pearl — it leaves the string (the
+        # seeder's `drop`); the book keeps the pearl so it can come back with one click
+        if bp.get("drop"): e["drop"] = True
+        else: e.pop("drop", None)
         if bp.get("rooms") is not None: e["rooms"] = int(bp["rooms"])
         if bp.get("join"): e["join"] = True
         else: e.pop("join", None)

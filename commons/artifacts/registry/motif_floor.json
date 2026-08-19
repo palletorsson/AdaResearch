@@ -46,7 +46,7 @@
       "qfep_connection": "The family's existing members ask which figure a grid of cells CARRIES, which is a question about decoration. A weave has no cells to carry anything: it has crossings, and a crossing is a binary relation between two thread systems that were there first. So the pattern is not on the cloth, it is the cloth's construction, and `blank` is the value that makes the point by removing the binding rather than by removing the colour - the grid stays perfectly regular and stops being a fabric. houndstooth is the other end of the same argument: a figure that exists only in the beat between a weave rule and a colour repeat that disagree, drawn by neither, belonging to neither.",
       "relationships": "Synthesised from the seven registry names that declare `motif` (pattern_tile_puzzle, _4x4, _mirror, _8x8, _brick, _herringbone on one eight-yarn editor scene; preserved_pattern on a two-material grid). Replaces none of them and re-runs none of their axes from the outside.",
       "spatial_needs": {
-        "platform": "none",
+        "platform": "table",
         "footprint_cells": 4,
         "clearance": {
           "front": 1,
@@ -66,7 +66,8 @@
         ],
         "preferred_zone": "any",
         "footprint_source": "computed_from_geometry",
-        "footprint_note": "1.28 m square, so a 2 x 2 patch at the project's 1.0 m cube_size. It is a FLOOR: the player walks on it, `player_position` is on rather than front, and it needs no approach clearance beyond not being buried. It stands 0.054 m proud of the cell (0.006 backing + 0.040 of relief), which is a mat, not a step. `orientation: any` because a floor does not face - but the weave is directional (warp in Z, weft in X) and a 90 degree rotation in the map token exchanges which yarn runs which way, which is a real and legible change and not a fault. There is no collider anywhere in the file, so the pathfinder walks straight over it, which is correct."
+        "footprint_note": "1.28 m square, so a 2 x 2 patch at the project's 1.0 m cube_size. It is a FLOOR: the player walks on it, `player_position` is on rather than front, and it needs no approach clearance beyond not being buried. It stands 0.054 m proud of the cell (0.006 backing + 0.040 of relief), which is a mat, not a step. `orientation: any` because a floor does not face - but the weave is directional (warp in Z, weft in X) and a 90 degree rotation in the map token exchanges which yarn runs which way, which is a real and legible change and not a fault. There is no collider anywhere in the file, so the pathfinder walks straight over it, which is correct.",
+        "shelf_rule": "bench (base 1.28 m, h 0.05 m, registry.measurements)"
       },
       "measurements": {
         "aabb_size": [

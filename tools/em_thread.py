@@ -117,6 +117,8 @@ def main() -> int:
     rows = []            # (n, pearl, token, text, by, source)
     n = 0
     for p in book.get("pearls", []):
+        if p.get("drop"):
+            continue                    # a dropped pearl is not in the string
         for ln in p.get("lines", []):
             tok = ln.get("token")
             if not tok:

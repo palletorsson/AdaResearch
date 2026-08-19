@@ -41,7 +41,7 @@
 			],
 			"capacity": "SEE that `accord` names four regions of a three-number space and says nothing about which of them the rules would maintain - and that when you check, three of the four are held by nothing at all, and the fourth is held by a spring with no damping, so none of them is an attractor",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "pedestal",
 				"footprint_cells": 1,
 				"clearance": {
 					"front": 2,
@@ -62,7 +62,8 @@
 				],
 				"preferred_zone": "teaching",
 				"footprint_source": "computed_from_geometry",
-				"footprint_note": "The STAND is the footprint and it is drawn before either axis is consulted: a 0.72 x 0.72 m base frame, four corner posts to y 0.58, and a 0.56 x 0.40 x 0.56 m wire cage hung at y 0.30. Boids bounce at the cage walls, so no body centre can ever leave the box; the body's own half-diagonal is 0.0395 m, which puts the widest reach at 0.320 m of a 0.36 m half-stand. Weight rods are clipped to the cage, so their reach is 0.287 m. The union AABB is therefore the STAND, 0.72 x 0.58 x 0.72, in all twelve cells and the camera never moves - which matters here more than usual, because a lane is naturally flat and an orb is naturally compact and the flock's own extent runs from 0.070 m at orb to 0.556 m at school, a factor of eight. layout=ladder stands all four accords in a row at 0.90 m pitch, about 2.7 m wide, runs four simulations instead of one, and is a design view rather than a map placement."
+				"footprint_note": "The STAND is the footprint and it is drawn before either axis is consulted: a 0.72 x 0.72 m base frame, four corner posts to y 0.58, and a 0.56 x 0.40 x 0.56 m wire cage hung at y 0.30. Boids bounce at the cage walls, so no body centre can ever leave the box; the body's own half-diagonal is 0.0395 m, which puts the widest reach at 0.320 m of a 0.36 m half-stand. Weight rods are clipped to the cage, so their reach is 0.287 m. The union AABB is therefore the STAND, 0.72 x 0.58 x 0.72, in all twelve cells and the camera never moves - which matters here more than usual, because a lane is naturally flat and an orb is naturally compact and the flock's own extent runs from 0.070 m at orb to 0.556 m at school, a factor of eight. layout=ladder stands all four accords in a row at 0.90 m pitch, about 2.7 m wide, runs four simulations instead of one, and is a design view rather than a map placement.",
+				"shelf_rule": "specimen (base 0.72 m, h 0.58 m, registry.measurements)"
 			},
 			"measurements": {
 				"aabb_size": [

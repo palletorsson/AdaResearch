@@ -1,0 +1,71 @@
+{
+  "rotations": [
+    "0",
+    "90",
+    "180",
+    "270"
+  ],
+  "approach": "south",
+  "exit": "north",
+  "footprint": [
+    1,
+    1,
+    1
+  ],
+  "clearance": [
+    3.0,
+    3.0,
+    3.0
+  ],
+  "extras": [],
+  "lookup_name": "record_room",
+  "posture": "table",
+  "footing": {
+    "anchor": [
+      2,
+      2
+    ],
+    "tiles": [
+      [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        2,
+        2,
+        2,
+        1
+      ],
+      [
+        1,
+        2,
+        2,
+        2,
+        1
+      ],
+      [
+        1,
+        2,
+        2,
+        2,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    ]
+  },
+  "artifact_offset": [
+    0.0,
+    0.0,
+    0.0
+  ]
+}

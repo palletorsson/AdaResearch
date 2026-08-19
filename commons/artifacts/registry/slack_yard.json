@@ -47,7 +47,7 @@
       "qfep_connection": "Five drawings of one situation, only one of which is the answer, and no stable runner-up: which convention is nearly right depends on the rig, so the ranking is a property of the encounter and not of the conventions. The `scored` rung is the artifact's own dark spot — the moment the yard stops showing a measurement and starts showing a number — and it is built so the two summaries of the same thirteen numbers visibly disagree.",
       "relationships": "Synthesised from the twelve registry names that declare `slack`, which resolve to three scripts and one shared const. Replaces none of them and re-runs none of their axes from the outside.",
       "spatial_needs": {
-        "platform": "none",
+        "platform": "table",
         "footprint_cells": 4,
         "clearance": {
           "front": 2,
@@ -66,7 +66,8 @@
         ],
         "preferred_zone": "teaching",
         "footprint_source": "computed_from_geometry",
-        "footprint_note": "The apron is 2.30 m across the lanes by 3.30 m along the span, so a 3 x 4 clear patch. The lane name tabs stand on the +Z edge and the score gauge at the +Z end of each lane, so the artifact reads correctly approached from +Z; `orientation: face_approach` plus a rotation in the map token is how you get that. There is no collider anywhere in the file, so the pathfinder will route straight through the masts — correct, because there are no masts, there is a picture of a yard."
+        "footprint_note": "The apron is 2.30 m across the lanes by 3.30 m along the span, so a 3 x 4 clear patch. The lane name tabs stand on the +Z edge and the score gauge at the +Z end of each lane, so the artifact reads correctly approached from +Z; `orientation: face_approach` plus a rotation in the map token is how you get that. There is no collider anywhere in the file, so the pathfinder will route straight through the masts — correct, because there are no masts, there is a picture of a yard.",
+        "shelf_rule": "bench (base 3.30 m, h 2.25 m, registry.measurements)"
       },
       "measurements": {
         "aabb_size": [

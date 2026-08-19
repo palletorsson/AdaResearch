@@ -51,7 +51,7 @@
 				"size_group": "large"
 			},
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "table",
 				"footprint_cells": 3,
 				"clearance": {
 					"front": 3,
@@ -68,7 +68,8 @@
 				],
 				"preferred_zone": "teaching",
 				"footprint_source": "derived",
-				"footprint_note": "2.96 m wide x 1.89 m tall x 0.16 m deep, computed from FRAME_W 0.92, PANEL_PITCH 1.02 and FRAME_H 1.18 in the script. Three cells of frontage, one deep. footprint_cells is a COUNT, not a [w,d] pair - a pair crashes the placement engine. The front clearance is 3 because the whole argument is a comparison read at a glance, and a viewer standing closer than about 2.5 m cannot hold all three sheets in one look."
+				"footprint_note": "2.96 m wide x 1.89 m tall x 0.16 m deep, computed from FRAME_W 0.92, PANEL_PITCH 1.02 and FRAME_H 1.18 in the script. Three cells of frontage, one deep. footprint_cells is a COUNT, not a [w,d] pair - a pair crashes the placement engine. The front clearance is 3 because the whole argument is a comparison read at a glance, and a viewer standing closer than about 2.5 m cannot hold all three sheets in one look.",
+				"shelf_rule": "bench (base 2.96 m, h 1.89 m, registry.measurements)"
 			},
 			"qfep_connection": "The three kinds of line are not three objects. They are one walk and three decisions about where to stop looking. Klee's page one is taught as a classification; put the three side by side out of one walk and it reads instead as a demonstration that classification was the wrong verb - the mark does not change, only what it is taken to be the boundary OF.",
 			"relationships": "Made entirely out of [[klee_walking_point]] - three live instances of its scene, driven by its own LINE_KINDS table, with nothing about the walk re-implemented here. WHAT THAT SOURCE LEARNED, and what this exhibits: its promotion found that walk_style says what the point DID while `line` says what the resulting mark IS, and that Klee's three kinds are one silhouette apart - open string, closed ring, filled field. Crucially it found that MEDIAL IS NOT A CIRCLE: closing the walk on itself spends the wander on the RADIUS, so a medial meander still shows where it wandered; and that PASSIVE TOUCHES THE TRAIL NOT AT ALL - the identical points are kept and a surface is raised beneath them, so only what the line bounds has changed. Both findings are invisible in a single still, because one still is one value of `line`. The triptych is that axis unrolled into space so the three can be held in one look. Sibling to [[grabbable_line]], which asks what a line is made OF and answers by breaking a solid rod into named parts (`grain` = solid|split|quartered|lattice|shell) - the mirror of this object, which asks what a line IS and answers by not touching it. Cousin to [[draw_dot_time_domain]], whose inherited `retention` axis (none|trace|lattice|archive|wax) is the same discovery in the time domain: what a trace KEEPS against what a trace IS; it also learned, and this reuses the lesson, that the standing photographable record is the axis and the live animation is not.",

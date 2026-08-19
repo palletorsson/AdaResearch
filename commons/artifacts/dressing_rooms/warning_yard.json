@@ -15,86 +15,21 @@
   "exit": "north",
   "footing": {
     "anchor": [
-      0,
-      0
+      1,
+      1
     ],
     "tiles": [
       [
         1,
         1,
-        1,
-        1,
-        1,
-        1,
-        1,
         1
       ],
       [
         1,
         1,
-        1,
-        1,
-        1,
-        1,
-        1,
         1
       ],
       [
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1
-      ],
-      [
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1
-      ],
-      [
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1
-      ],
-      [
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1
-      ],
-      [
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1
-      ],
-      [
-        1,
-        1,
-        1,
-        1,
-        1,
         1,
         1,
         1
@@ -172,5 +107,6 @@
     ],
     "note": "A DEFAULT, bootstrapped per SPATIAL_PIPELINE.md 4. Author over it freely \u2014 remove this block when you do, and the generator will leave the file alone."
   },
-  "display_name": "Warning Yard"
+  "display_name": "Warning Yard",
+  "posture": "monument"
 }

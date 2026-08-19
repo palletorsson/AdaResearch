@@ -104,7 +104,7 @@
        "statute": "issue",
        "currency": "discharged"
       },
-      "under_percent": 0.30,
+      "under_percent": 0.3,
       "why": "NOT AN IDENTITY - A CEILING, REGISTERED BECAUSE IT IS THE ONE PAIR WHOSE SMALLNESS IS A PROPERTY OF THE WORLD RATHER THAN OF THIS BENCH. discharged changes two things and both are small by nature: the gauge needle rotates from 0.0 to 2.10 rad (a 0.005 x 0.050 m bar sweeping inside a 0.033 m dial, so the moved area is at most 2 x 0.005 x 0.050 x cos(0.26) = 0.000483 m2, 0.055 percent of frame) and the tamper seal changes from an intact torus of outer radius 0.022 to two 0.006 x 0.024 stubs (a silhouette change of order 0.0006 m2, 0.07 percent of frame). Even at a full 255-level delta across every moved pixel the pair cannot exceed about 0.13 percent of frame, and the real figure will be well under that because the needle is dark against a pale dial and the stubs are the same yellow as the ring they replace. PREDICTED UNDER 0.30 PERCENT, and unlike the null above this bound is a CEILING computed from area alone, so a measurement ABOVE it means something moved that should not have - most likely the strap or the ghost leaking into a cell where currency is not absent. WHAT IT SAYS: whether an extinguisher has been fired is legible to a hand at arm's length and almost invisible to a camera across a room, which is why the law puts a seal on it rather than a colour."
      }
     ],
@@ -121,7 +121,7 @@
     "placements": 0
    },
    "spatial_needs": {
-    "platform": "none",
+    "platform": "pedestal",
     "footprint_cells": 1,
     "clearance": {
      "front": 2,
@@ -143,7 +143,8 @@
     "preferred_zone": "corridor",
     "footprint_source": "computed_from_geometry",
     "footprint_note": "THE WORLD BOX IS A CONSTANT AND THAT IS THE WHOLE POINT OF THE WALL. The board is 0.600 x 0.760 x 0.024 centred at y = 0.435 on two 0.075 x 0.055 x 0.120 feet at x = +-0.185, and every other part of every cell - bracket, strap, cylinder r 0.062, accent band r 0.0645, neck, valve, handle, hose, gauge at z 0.153, seal torus, ghost, record card - lies inside the board's world extents after the 0.62 yaw. So the box does not move when either axis moves, and in particular currency=absent, which deletes the entire cylinder assembly, frames identically to certified. The wall is rotated 0.62 rad about Y to face the sweep's standpoint, which is what makes the box 0.502 wide rather than 0.600; a map placing this artifact should expect its face to point 35.5 degrees off the grid axis, or pass its own rotation in the token.",
-    "measured_footprint_cells": 1
+    "measured_footprint_cells": 1,
+    "shelf_rule": "specimen (base 0.50 m, h 0.81 m, registry.measurements)"
    },
    "measurements": {
     "aabb_size": [

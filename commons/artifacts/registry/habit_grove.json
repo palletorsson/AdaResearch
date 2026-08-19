@@ -5,7 +5,7 @@
 			"category": "procedural",
 			"description": "One deterministic plant - branching_vine's rule F -> F[+F][-F]F to generation 4, 256 six-sided rods, fork half-angle 25.0, no randf - built under each of the family's four habits, which in all three members' code are ONE table of four numbers (0 / 30 / 90 / 137.5 degrees) and ONE mechanism: the plane of the next fork is rolled about the parent's axis by that angle once per descent. Rods coloured trunk to tip; a roll reading that draws the angle itself as an arc at every fork; a crown reading of tips only. Four names, one rule, one number.",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "pedestal",
 				"footprint_cells": 1,
 				"clearance": {
 					"front": 2,
@@ -16,7 +16,8 @@
 				"player_position": "front",
 				"orientation": "face_approach",
 				"preferred_zone": "teaching",
-				"footprint_source": "authored"
+				"footprint_source": "authored",
+				"shelf_rule": "UNMEASURED — default museum pose, measure it (base 0.00 m, h 0.00 m, UNMEASURED)"
 			},
 			"dna": {
 				"promoted": "2026-08-15",

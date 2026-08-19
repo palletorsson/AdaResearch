@@ -5,7 +5,7 @@
 			"category": "primitives",
 			"description": "Ten identical bone cubes, 90 mm, filed five ways - grid (5 x 2 on the floor), row (ten in a line), ramp (the row with each body 45 mm above the one before), ring (ten on a 0.30 m circle facing outward) and stack (a brick pyramid of 4 + 3 + 2 + 1) - and read three ways: the bodies alone, the relation each layout claims drawn as amber rods between neighbours (lattice, chain, sloped chain, cycle, bearing) with the bodies pulled back to half size, or the arrangement's floor plan as a slate plate with a pad under each body's plan square (every body projected to the floor, touching it or not) and no bodies at all. Same ten cubes, five theories of what the collection is; deterministic, nothing rolls.",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "pedestal",
 				"footprint_cells": 2,
 				"clearance": {
 					"front": 2,
@@ -16,7 +16,8 @@
 				"player_position": "front",
 				"orientation": "face_approach",
 				"preferred_zone": "teaching",
-				"footprint_source": "authored"
+				"footprint_source": "authored",
+				"shelf_rule": "UNMEASURED — default museum pose, measure it (base 0.00 m, h 0.00 m, UNMEASURED)"
 			},
 			"dna": {
 				"promoted": "2026-08-15",

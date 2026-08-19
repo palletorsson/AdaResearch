@@ -5,7 +5,7 @@
 			"category": "physics",
 			"description": "One physical event - a ball thrown at 3.0 m/s and 60 degrees, two bodies of mass 1.8 and 1.1 on a Kepler ellipse about their barycentre, or a pendulum released from 0.5 rad - computed in closed form and frozen at seven-tenths of its own window, then presented under each of the evidence family's four rungs with the working made of geometry: the trace as a real tube along the path, the longhand as the body stamped at equal time-steps and rods whose lengths are the velocity, the acceleration, the separation and the mass, the axiom as a minimal built diagram of the law (an L of rulers for the throw and the swing, identical by construction; the inverse-square flux figure for the attraction) with the body gone. No chart, no HUD; the only numerals are two masses on their rings.",
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "pedestal",
 				"footprint_cells": 4,
 				"clearance": {
 					"front": 3,
@@ -16,7 +16,8 @@
 				"player_position": "front",
 				"orientation": "face_approach",
 				"preferred_zone": "teaching",
-				"footprint_source": "authored"
+				"footprint_source": "authored",
+				"shelf_rule": "UNMEASURED — default museum pose, measure it (base 0.00 m, h 0.00 m, UNMEASURED)"
 			},
 			"dna": {
 				"promoted": "2026-08-15",

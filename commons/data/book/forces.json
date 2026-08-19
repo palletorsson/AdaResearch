@@ -85,7 +85,8 @@
      "by": "draft"
     }
    ],
-   "hero": "ca_rules_workbench"
+   "hero": "ca_rules_workbench",
+   "drop": true
   },
   {
    "pearl": "force preview",
@@ -147,7 +148,8 @@
      "by": "draft"
     }
    ],
-   "hero": "reflection_hall"
+   "hero": "reflection_hall",
+   "drop": true
   },
   {
    "pearl": "console test",
@@ -184,7 +186,8 @@
      "by": "draft"
     }
    ],
-   "hero": "triangle_curvature_workbench"
+   "hero": "triangle_curvature_workbench",
+   "drop": true
   },
   {
    "pearl": "force props sandbox",
@@ -226,12 +229,14 @@
      "by": "draft"
     }
    ],
-   "hero": "bubble_blaster"
+   "hero": "bubble_blaster",
+   "drop": true
   },
   {
    "pearl": "vectorfoundations",
    "map": "VectorFoundations",
-   "lines": []
+   "lines": [],
+   "drop": true
   },
   {
    "pearl": "vectors act1 whatavectoris",
@@ -587,17 +592,20 @@
   {
    "pearl": "vectors act5 forceasplace",
    "map": "Vectors_Act5_ForceAsPlace",
-   "lines": []
+   "lines": [],
+   "drop": true
   },
   {
    "pearl": "foundations",
    "map": "ForcesFoundations",
-   "lines": []
+   "lines": [],
+   "drop": true
   },
   {
    "pearl": "forces",
    "map": "Chamber_Forces",
-   "lines": []
+   "lines": [],
+   "drop": true
   },
   {
    "pearl": "composition",
@@ -892,18 +900,8 @@
      "by": "draft"
     },
     {
-     "token": "gravity_gun_test_scene",
-     "text": "A test scene is not a placeholder — it is the rehearsal where physics learns its part before the player …",
-     "by": "draft"
-    },
-    {
      "token": "vector_drone",
      "text": "The drone is a mirror of the turret. Same math",
-     "by": "draft"
-    },
-    {
-     "token": "destructibles_test_scene",
-     "text": "Destruction is topology change. How something breaks reveals how it was built",
      "by": "draft"
     },
     {

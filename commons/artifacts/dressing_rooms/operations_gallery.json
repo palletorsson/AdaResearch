@@ -15,11 +15,42 @@
   "exit": "north",
   "footing": {
     "anchor": [
-      0,
-      0
+      2,
+      2
     ],
     "tiles": [
       [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        2,
+        2,
+        2,
+        1
+      ],
+      [
+        1,
+        2,
+        2,
+        2,
+        1
+      ],
+      [
+        1,
+        2,
+        2,
+        2,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
         1,
         1
       ]
@@ -95,5 +126,6 @@
     "conflicts": [],
     "note": "A DEFAULT, bootstrapped per SPATIAL_PIPELINE.md 4. Author over it freely \u2014 remove this block when you do, and the generator will leave the file alone."
   },
-  "display_name": "Operations Gallery"
+  "display_name": "Operations Gallery",
+  "posture": "table"
 }
