@@ -88,6 +88,8 @@ def migrate(chapter: str) -> dict:
                 ln["lock"] = list(p["locks"][tok])
             if (p.get("configs") or {}).get(tok):
                 ln["config"] = dict(p["configs"][tok])
+            for k2, v2 in ((p.get("poses") or {}).get(tok) or {}).items():
+                ln[k2] = v2
             v = verse.get(tok)
             if isinstance(v, dict):
                 if v.get("indent"): ln["indent"] = int(v["indent"])
@@ -169,6 +171,18 @@ def compile_book(chapter: str, reseed: bool = True) -> dict:
         if locks: e["locks"] = locks
         else: e.pop("locks", None)
         # a line's CONFIG (the artifact's apply_grid_config dictionary): e.g. CoordinateSystem3M {"floating_point": 1}
+        # a line's POSE: rotation (deg), offset [x, y, z] metres (y > 0 = it floats), scale
+        poses = {}
+        for ln in bp.get("lines", []):
+            if not ln.get("token"):
+                continue
+            pose = {}
+            if ln.get("rotation") is not None: pose["rotation"] = int(ln["rotation"])
+            if isinstance(ln.get("offset"), list) and len(ln["offset"]) >= 3 and any(float(v) != 0.0 for v in ln["offset"]): pose["offset"] = [float(v) for v in ln["offset"][:3]]
+            if ln.get("scale") not in (None, 1, 1.0): pose["scale"] = float(ln["scale"])
+            if pose: poses[ln["token"]] = pose
+        if poses: e["poses"] = poses
+        else: e.pop("poses", None)
         configs = {ln["token"]: dict(ln["config"]) for ln in bp.get("lines", []) if ln.get("token") and isinstance(ln.get("config"), dict) and ln["config"]}
         if configs: e["configs"] = configs
         else: e.pop("configs", None)

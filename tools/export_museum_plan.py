@@ -229,7 +229,7 @@ def plan_museum(key: str, tokens: list[str],
             # constant would put the same number in two places, which is how
             # every unit bug in this pass started.
             "tile_cell": [int(p.anchor[0]) - APRON, int(p.anchor[1]) - APRON],
-            "rotation": int(p.rotation),
+            "rotation": int(edge_meta["pose"]["rotation"]) if (edge_meta.get("pose") or {}).get("rotation") is not None else int(p.rotation),
             "mode": p.mode,
             "venue": p.venue,
             # the book may ask for a plinth (support_m on the line): the hand's height wins
@@ -237,6 +237,8 @@ def plan_museum(key: str, tokens: list[str],
             "support_height_m": round(float(edge_meta.get("support_m") or p.support_height_m), 3),
             **({"hand": True, "ruled": {"by": "book: locked", "cell": list(edge_meta["lock"])}} if edge_meta.get("lock") else {}),
             **({"config": dict(edge_meta["config"])} if edge_meta.get("config") else {}),
+            **({"offset": list(edge_meta["pose"]["offset"])} if (edge_meta.get("pose") or {}).get("offset") else {}),
+            **({"scale": float(edge_meta["pose"]["scale"])} if (edge_meta.get("pose") or {}).get("scale") else {}),
             "slot": p.slot,
             "wall": p.wall,
             # court dims ride the row only when the negotiator granted a court;
