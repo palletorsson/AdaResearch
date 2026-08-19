@@ -62,7 +62,13 @@
 		"door_sign_proud_m": 0.10,
 		"door_sign_sub_m": 0.075,
 		"_door_sign": "written on the wall's overpanel above the door (2.92..4.5 m), both faces; a free-standing door (gate.depth_rows > 0) carries it on its own header instead",
-		"door_header_m": 0.4
+		"door_header_m": 0.4,
+		"origin_well": 1,
+		"_origin_well": "the lobby's NW corner opens around the WORLD ORIGIN: a 3x3 m well a metre deep, Point Zero (origin) standing at exactly (0,0,0), a rail, a light. The foyer is the first map in the chain (Palle, 2026-08-19).",
+		"intro_text": 1,
+		"intro_x": 3.6,
+		"intro_y": 1.75,
+		"_intro_text": "the first pearl's paragraph as wall text on the back wall, left of the window — the museum's first sentence ('you arrive late…')"
 	},
 	"speak": {
 		"caps": 0,

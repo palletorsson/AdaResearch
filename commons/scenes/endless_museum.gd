@@ -1504,6 +1504,7 @@ const LOBBY_PIECES := {
 	"extinguisher": "res://commons/artifacts/fire_extinguisher/fire_extinguisher.tscn",
 	"pallet": "res://commons/artifacts/wooden_pallet/wooden_pallet.tscn",
 	"elevator": "res://commons/artifacts/station/station_door.tscn",
+	"point_zero": "res://commons/primitives/origin/origin.tscn",
 }
 func _lobby_piece(seg: Node3D, key: String, pos: Vector3, yaw_deg: float, config: Dictionary = {}) -> Node3D:
 	var path: String = String(LOBBY_PIECES.get(key, ""))
@@ -1578,6 +1579,88 @@ func _dress_lobby(seg: Node3D, solid: StaticBody3D, w: int, zbase: int, wall_col
 		if _walk_cells.has(k):
 			_walk_cells.erase(k)
 			_walk_erased[k] = "prop:pallet"
+	# THE ORIGIN WELL (Palle, 2026-08-19): "the foyer where we land is really the
+	# first capture … at 0,0,0 add a hole in the ground or whatever you need to
+	# place the point_zero artifact visibly in that space." The lobby's NW
+	# corner opens: the floor and the two walls step back a metre around the
+	# WORLD ORIGIN, a 3 x 3 m well a metre deep, Point Zero (origin) standing
+	# at exactly (0, 0, 0) — half below the floor line, the cube's centre on
+	# the floor plane — a rail at the edge, a light in the well. The walk map
+	# never had these cells; the deck collider still spans them, so nobody
+	# falls in (VR).
+	if _L("lobby", "origin_well", 1.0) > 0.5:
+		var well_mat := StandardMaterial3D.new()
+		well_mat.albedo_color = Color(0.09, 0.09, 0.11)
+		well_mat.roughness = 0.9
+		var wall_mat: Material = m_wall
+		# floor of the well, x -1..2, z -1..2, at y -1.0
+		_box(seg, Vector3(0.5, -1.1, 0.5), Vector3(3.0, 0.2, 3.0), Color(0.09, 0.09, 0.11), well_mat)
+		# the well's four faces below grade, and the two outer faces up to the wall head
+		_box(seg, Vector3(-1.0, -0.5, 0.5), Vector3(0.2, 1.0, 3.2), Color(0.12, 0.12, 0.14), well_mat)   # west, below
+		_box(seg, Vector3(0.5, -0.5, -1.0), Vector3(3.2, 1.0, 0.2), Color(0.12, 0.12, 0.14), well_mat)   # north, below
+		_box(seg, Vector3(2.0, -0.5, 0.5), Vector3(0.2, 1.0, 3.0), Color(0.12, 0.12, 0.14), well_mat)    # east face (under the lobby floor)
+		_box(seg, Vector3(0.5, -0.5, 2.0), Vector3(3.0, 1.0, 0.2), Color(0.12, 0.12, 0.14), well_mat)    # south face
+		_box(seg, Vector3(-1.0, WALL_H / 2.0, 0.5), Vector3(0.2, WALL_H, 3.2), wall_col, wall_mat)      # west wall, stepped out
+		_add_col(solid, Vector3(-1.0, WALL_H / 2.0, 0.5), Vector3(0.2, WALL_H, 3.2))
+		_box(seg, Vector3(0.5, WALL_H / 2.0, -1.0), Vector3(3.2, WALL_H, 0.2), wall_col, wall_mat)      # back wall, stepped out
+		_add_col(solid, Vector3(0.5, WALL_H / 2.0, -1.0), Vector3(3.2, WALL_H, 0.2))
+		# the rail at the edge of the lobby floor (two sides), with a collider
+		var rail_mat := StandardMaterial3D.new()
+		rail_mat.albedo_color = Color(0.2, 0.2, 0.22)
+		rail_mat.metallic = 0.6
+		rail_mat.roughness = 0.35
+		for r_box in [[Vector3(2.0, 0.55, 0.5), Vector3(0.04, 0.04, 3.0)], [Vector3(0.5, 0.55, 2.0), Vector3(3.0, 0.04, 0.04)],
+				[Vector3(2.0, 0.275, -0.95), Vector3(0.04, 0.55, 0.04)], [Vector3(2.0, 0.275, 1.95), Vector3(0.04, 0.55, 0.04)],
+				[Vector3(-0.95, 0.275, 2.0), Vector3(0.04, 0.55, 0.04)], [Vector3(0.5, 0.275, 2.0), Vector3(0.04, 0.55, 0.04)],
+				[Vector3(2.0, 0.275, 0.5), Vector3(0.04, 0.55, 0.04)]]:
+			_box(seg, r_box[0], r_box[1], Color(0.2, 0.2, 0.22), rail_mat)
+		_add_col(solid, Vector3(2.0, 0.5, 0.5), Vector3(0.06, 1.0, 3.0))
+		_add_col(solid, Vector3(0.5, 0.5, 2.0), Vector3(3.0, 1.0, 0.06))
+		# a light in the well
+		var wl := OmniLight3D.new()
+		wl.light_color = Color(0.95, 0.93, 0.85)
+		wl.light_energy = 1.6
+		wl.omni_range = 4.0
+		wl.position = Vector3(0.0, 0.6, 0.0)
+		seg.add_child(wl)
+		# POINT ZERO at the world origin — the body itself, exactly at (0, 0, 0)
+		var pz: Node3D = _lobby_piece(seg, "point_zero", Vector3(0.0, 0.0, 0.0), 0.0)
+		if pz != null:
+			pz.set_meta("em_point_zero", true)
+		# the walk map: the corner cells are not floor
+		for k in [Vector2i(0, zbase), Vector2i(1, zbase), Vector2i(0, zbase + 1), Vector2i(1, zbase + 1)]:
+			_walk_cells.erase(k)
+			_walk_erased[k] = "prop:origin_well"
+	# THE FOYER SPEAKS (Palle: "the space should map to the book"): the first
+	# pearl's paragraph as wall text on the back wall, left of the window —
+	# Roboto, dark on the plaster — the museum's first sentence.
+	var first_pearl: String = ""
+	var rows0: Array = []
+	for pk in _plan_pearls.keys():
+		if String(pk).ends_with("|" + _first_chapter):
+			rows0 = _plan_pearls[pk]
+	if not rows0.is_empty():
+		var ci: int = int(_pearl_cursor.get(_first_chapter, 0)) % rows0.size()
+		first_pearl = String((rows0[ci] as Dictionary).get("pearl", ""))
+	var sp0: Dictionary = _speak_for(_first_chapter, first_pearl)
+	var intro: String = String(sp0.get("speak", ""))
+	if intro != "" and _L("lobby", "intro_text", 1.0) > 0.5:
+		var it := Label3D.new()
+		it.text = intro
+		if ResourceLoader.exists("res://commons/font/Roboto-VariableFont_wdth,wght.ttf"):
+			it.font = load("res://commons/font/Roboto-VariableFont_wdth,wght.ttf")
+		it.font_size = 64
+		it.pixel_size = 0.0016
+		it.width = 2.6 / 0.0016
+		it.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		it.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+		it.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		it.modulate = Color(0.14, 0.13, 0.12)
+		it.outline_size = 0
+		it.position = Vector3(_L("lobby", "intro_x", 3.6), _L("lobby", "intro_y", 1.75), 1.0 + 0.01)   # the back wall's lobby face
+		it.rotation_degrees.y = 0.0
+		it.name = "FoyerIntro"
+		seg.add_child(it)
 	print("[em-lobby] window %s (x %d..%d) · view %s · counter · extinguisher · lift + pallet" % [
 		"ok" if win != null else "MISSING", win_x0, win_x1, "ok" if view != null else "MISSING"])
 
@@ -2215,8 +2298,11 @@ func _build_segment() -> void:
 	var m_floor: Material = _sm("floor")
 	var m_podium: Material = _sm("podium")
 	var m_plinth: Material = _sm("plinth")
+	var foyer_well: bool = _seg_index == 0 and _L("lobby", "enabled", 1.0) > 0.5 and _L("lobby", "origin_well", 1.0) > 0.5
 	for zr in range(VESTIBULE_H):
 		for x in range(LOBBY_W):
+			if foyer_well and x <= 1 and zr <= 1:
+				continue                   # THE ORIGIN WELL: the corner cells open onto (0,0,0)
 			_box(seg, Vector3(x + 0.5, -0.1, zr + 0.5), Vector3(1, 0.2, 1), Color(0.13, 0.13, 0.16), m_deck)
 			if x > 0 and x < LOBBY_W - 1 and not (zr == 0 and x >= pw - 1) and not (zr == VESTIBULE_H - 1 and x >= w - 1):
 				_walk_cells[Vector2i(x, zbase + zr)] = true
@@ -2228,14 +2314,19 @@ func _build_segment() -> void:
 	# the tile is sparse. Gated on _vr: the desktop segment is untouched.
 	_add_col(solid, Vector3(LOBBY_W / 2.0, -0.1, VESTIBULE_H / 2.0),
 		Vector3(LOBBY_W, 0.2, VESTIBULE_H))
-	_stamp_scale_figure(seg, Vector3(2.0, 0.0, VESTIBULE_H * 0.5), zbase)
+	# the scale figure stands clear of the origin well in the foyer (it stood on its rail)
+	_stamp_scale_figure(seg, Vector3(2.0 if not foyer_well else 4.6, 0.0, VESTIBULE_H * 0.5 + (1.4 if foyer_well else 0.0)), zbase)
 	for zr in range(VESTIBULE_H):
 		for sx in [0, LOBBY_W - 1]:
+			if foyer_well and sx == 0 and zr <= 1:
+				continue                   # the well's corner: the wall steps out a metre (built by _dress_lobby)
 			_wall_at(seg, solid, wcells, int(sx), zr, wall_col, m_wall, wr)
 	var lobby_on: bool = _seg_index == 0 and _L("lobby", "enabled", 1.0) > 0.5
 	var win_x0: int = int(_L("lobby", "window_x0", 6.0))
 	var win_x1: int = int(_L("lobby", "window_x1", 8.0))
 	for x in range(pw - 1, LOBBY_W):        # seal beyond the previous tile's width
+		if foyer_well and x <= 1:
+			continue                       # the well's corner, see _dress_lobby
 		if lobby_on and x >= win_x0 and x <= win_x1:
 			# THE LOBBY WINDOW (2026-08-18): the back wall keeps a sill and a
 			# header here and the pane between them looks BACKWARD, out of the

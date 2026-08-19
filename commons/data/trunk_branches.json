@@ -16993,18 +16993,18 @@
  "counts": {
   "branches_on_pearls": 1504,
   "by_kind": {
-   "contradicts": 0.0,
-   "edge": 149.0,
-   "extends": 744.0,
-   "queers": 1.0,
-   "synthesizes": 170.0,
-   "varies": 481.0
+   "contradicts": 0,
+   "edge": 149,
+   "extends": 744,
+   "queers": 1,
+   "synthesizes": 170,
+   "varies": 481
   },
-  "derived": 1544.0,
-  "hand": 1.0,
+  "derived": 1544,
+  "hand": 1,
   "pearls": 269,
-  "pending": 2.0,
-  "trunk": 24.0
+  "pending": 2,
+  "trunk": 24
  },
  "dropped": [],
  "generated": "2026-08-18T08:18:53",
@@ -17015,7 +17015,7 @@
     "map": "Point_One",
     "pearl": "point",
     "rooms": 4,
-    "speak": "the one point. no point without a coordinate system. the clock is already running.",
+    "speak": "you arrive late. the clock is already running. the folding past keeps running. the frame counter. point zero; origin, (0,0,0), the root of all vectors, Vector.ZERO. the one point. no point without a coordinate system.",
     "says": {
      "folding_past": "the clock is already running — the folding past keeps running",
      "frame_counter_display": "the frame counter: the clock is already running",
@@ -17024,7 +17024,7 @@
      "you_are_here": "you are here — the one point",
      "fontana_puncture": "the one point, pierced",
      "interactive_point_origin_force": "a point that becomes a force",
-     "floating_sphere_field": "points, drifting",
+     "floating_sphere_field": "points, drifting, there is always the drift. ",
      "two_points_line": "two points is a line. it measures. it is a point, it is a laser — here it forms a vector in 3d space",
      "point": "the one point"
     },
@@ -17032,9 +17032,10 @@
      "you_are_here": "claude",
      "fontana_puncture": "claude",
      "interactive_point_origin_force": "claude",
-     "floating_sphere_field": "claude",
+     "floating_sphere_field": "hand",
      "point": "claude"
-    }
+    },
+    "speak_by": "hand"
    },
    {
     "map": "Point_Lines",
@@ -17397,7 +17398,7 @@
     "cube_scene",
     "player_trace"
    ],
-   "index": 0.0,
+   "index": 0,
    "node": "primitives",
    "pearls": [
     {
@@ -17419,7 +17420,7 @@
      ],
      "blurb": "Before the point, infrastructure.",
      "rooms": 4,
-     "speak": "the one point. no point without a coordinate system. the clock is already running.",
+     "speak": "you arrive late. the clock is already running. the folding past keeps running. the frame counter. point zero; origin, (0,0,0), the root of all vectors, Vector.ZERO. the one point. no point without a coordinate system.",
      "speak_by": "hand",
      "says": {
       "folding_past": "the clock is already running — the folding past keeps running",
@@ -17429,7 +17430,7 @@
       "you_are_here": "you are here — the one point",
       "fontana_puncture": "the one point, pierced",
       "interactive_point_origin_force": "a point that becomes a force",
-      "floating_sphere_field": "points, drifting",
+      "floating_sphere_field": "points, drifting, there is always the drift. ",
       "two_points_line": "two points is a line. it measures. it is a point, it is a laser — here it forms a vector in 3d space",
       "point": "the one point"
      },
@@ -17441,7 +17442,7 @@
       "you_are_here": "claude",
       "fontana_puncture": "claude",
       "interactive_point_origin_force": "claude",
-      "floating_sphere_field": "claude",
+      "floating_sphere_field": "hand",
       "two_points_line": "hand",
       "point": "claude"
      }
@@ -17767,7 +17768,7 @@
     "righttriangle"
    ],
    "qfep_role": "Foundation - points, lines, planes, and basic vectors",
-   "tokens": 82.0,
+   "tokens": 82,
    "speak": "a taxonomy that opens what it cannot hold: the trace, the endlessness of pi. on one side ignorance, on the other melancholia — underfitting, overfitting. queer melancholia: not an endless mutation, entropy forbids it; a drift, an edge drift. this is the endless museum.",
    "speak_by": "hand"
   },
@@ -17776,7 +17777,7 @@
     "transform_composition",
     "transform_composition_workbench"
    ],
-   "index": 1.0,
+   "index": 1,
    "node": "transformation",
    "pearls": [
     {
@@ -17990,14 +17991,14 @@
     "spin"
    ],
    "qfep_role": "Invariants - dot/cross products enable rotation",
-   "tokens": 24.0
+   "tokens": 24
   },
   {
    "heroes": [
     "kaleidoscope",
     "pattern_maker_station"
    ],
-   "index": 2.0,
+   "index": 2,
    "node": "symmetry",
    "pearls": [
     {
@@ -18094,11 +18095,11 @@
    "phase": "F_order",
    "promoted": [],
    "qfep_role": "Foundation - the group as the complete catalog of possible orders; the one census that closes",
-   "tokens": 21.0
+   "tokens": 21
   },
   {
    "heroes": [],
-   "index": 3.0,
+   "index": 3,
    "node": "array_tutorial",
    "pearls": [
     {
@@ -18209,7 +18210,7 @@
     "grid_3d_4x4x4"
    ],
    "qfep_role": "Foundation - the grid, indexing, addressable repetition",
-   "tokens": 23.0
+   "tokens": 23
   },
   {
    "heroes": [
@@ -18217,7 +18218,7 @@
     "brick_wall_factory",
     "rainbow"
    ],
-   "index": 4.0,
+   "index": 4,
    "node": "color",
    "pearls": [
     {
@@ -18379,11 +18380,11 @@
     "color_constellation_office"
    ],
    "qfep_role": "Foundation - color systems become composition systems",
-   "tokens": 50.0
+   "tokens": 50
   },
   {
    "heroes": [],
-   "index": 5.0,
+   "index": 5,
    "node": "change",
    "pearls": [
     {
@@ -18485,14 +18486,14 @@
     "ftc_bridge"
    ],
    "qfep_role": "Foundation - the calculus substrate. Derivative as instantaneous rate, integral as accumulation, vector field as flow. The vocabulary forces / wavefunctions / randomness / noise will all use.",
-   "tokens": 10.0
+   "tokens": 10
   },
   {
    "heroes": [
     "ca_rules_workbench",
     "qfep_balance_workbench"
    ],
-   "index": 6.0,
+   "index": 6,
    "node": "forces",
    "pearls": [
     {
@@ -18953,14 +18954,14 @@
     "surreal_kinetic_sculpture"
    ],
    "qfep_role": "Newton's laws - vectors become physics",
-   "tokens": 151.0
+   "tokens": 151
   },
   {
    "heroes": [
     "gradient_descent_well",
     "cable_builder"
    ],
-   "index": 7.0,
+   "index": 7,
    "node": "formfinding",
    "pearls": [
     {
@@ -19052,14 +19053,14 @@
    "phase": "F_order",
    "promoted": [],
    "qfep_role": "Foundation - the F term made physical; free-energy minimization as the shape matter settles into, stopping short of the dead-perfect bottom",
-   "tokens": 16.0
+   "tokens": 16
   },
   {
    "heroes": [
     "timbre_sculptor",
     "oscilloscope"
    ],
-   "index": 8.0,
+   "index": 8,
    "node": "wavefunctions",
    "pearls": [
     {
@@ -19283,14 +19284,14 @@
     "additive_wave_demo"
    ],
    "qfep_role": "F ↔ E oscillation - sine creates curves",
-   "tokens": 81.0
+   "tokens": 81
   },
   {
    "heroes": [
     "hardware_entropy_decay",
     "random_walk_terrarium"
    ],
-   "index": 9.0,
+   "index": 9,
    "node": "randomness",
    "pearls": [
     {
@@ -19517,14 +19518,14 @@
     "mushrooms"
    ],
    "qfep_role": "Disorder as creative force",
-   "tokens": 64.0
+   "tokens": 64
   },
   {
    "heroes": [
     "WhiteNoiseGallery",
     "perlin_terrain_sculptor"
    ],
-   "index": 10.0,
+   "index": 10,
    "node": "noise",
    "pearls": [
     {
@@ -19647,14 +19648,14 @@
     "randompoints"
    ],
    "qfep_role": "Structured randomness - Perlin, flow fields",
-   "tokens": 16.0
+   "tokens": 16
   },
   {
    "heroes": [
     "ca_bridge",
     "ca_growth_network"
    ],
-   "index": 11.0,
+   "index": 11,
    "node": "cellularautomata",
    "pearls": [
     {
@@ -19779,14 +19780,14 @@
     "self_organization_ca"
    ],
    "qfep_role": "Simple rules → complex behavior. Rule 110 is Turing complete — the λ_edge thesis.",
-   "tokens": 23.0
+   "tokens": 23
   },
   {
    "heroes": [
     "example_8_4_cantor_set_vr",
     "space_filling_curve_gallery"
    ],
-   "index": 12.0,
+   "index": 12,
    "node": "fractals",
    "pearls": [
     {
@@ -19953,13 +19954,13 @@
     "mandelbrot_dive"
    ],
    "qfep_role": "Self-similarity, infinite detail",
-   "tokens": 45.0
+   "tokens": 45
   },
   {
    "heroes": [
     "lsystem_editor"
    ],
-   "index": 13.0,
+   "index": 13,
    "node": "lsystems",
    "pearls": [
     {
@@ -20066,14 +20067,14 @@
     "godel_statement_plaque"
    ],
    "qfep_role": "Generative grammars",
-   "tokens": 16.0
+   "tokens": 16
   },
   {
    "heroes": [
     "GeneticProgramming",
     "branching_growth_algorithm"
    ],
-   "index": 14.0,
+   "index": 14,
    "node": "proceduralgeneration",
    "pearls": [
     {
@@ -20171,14 +20172,14 @@
    "phase": "lambda_edge",
    "promoted": [],
    "qfep_role": "WFC, Markov, emergence from rules",
-   "tokens": 12.0
+   "tokens": 12
   },
   {
    "heroes": [
     "jelly_cube",
     "revolving_joy_ride"
    ],
-   "index": 15.0,
+   "index": 15,
    "node": "softbodies",
    "pearls": [
     {
@@ -20519,13 +20520,13 @@
     "reaction_diffusion"
    ],
    "qfep_role": "Deformable matter, cloth, fluid + Turing morphogenesis. Cloth descends an energy landscape under gravity + spring constraints.",
-   "tokens": 16.0
+   "tokens": 16
   },
   {
    "heroes": [
     "mc_cave"
    ],
-   "index": 16.0,
+   "index": 16,
    "node": "isosurfaces",
    "pearls": [
     {
@@ -20689,13 +20690,13 @@
     "metaballs"
    ],
    "qfep_role": "Implicit fields → explicit surfaces. Marching cubes as the bridge from continuous fields to walkable mesh.",
-   "tokens": 25.0
+   "tokens": 25
   },
   {
    "heroes": [
     "csg_difference_demo"
    ],
-   "index": 17.0,
+   "index": 17,
    "node": "boolean_surfaces",
    "pearls": [
     {
@@ -20764,14 +20765,14 @@
    "phase": "F_order",
    "promoted": [],
    "qfep_role": "CSG operations as composition logic — union, intersection, difference of solids.",
-   "tokens": 4.0
+   "tokens": 4
   },
   {
    "heroes": [
     "PhysarumColony",
     "boids_aquarium"
    ],
-   "index": 18.0,
+   "index": 18,
    "node": "swarmintelligence",
    "pearls": [
     {
@@ -20868,14 +20869,14 @@
    "phase": "lambda_edge",
    "promoted": [],
    "qfep_role": "Collective behavior, stigmergy — local rules + memory of rules → emergent global pattern. Swarm's qfep_term is self-declared λ.",
-   "tokens": 11.0
+   "tokens": 11
   },
   {
    "heroes": [
     "evolved_creatures",
     "gradient_descent_visualization"
    ],
-   "index": 19.0,
+   "index": 19,
    "node": "machinelearning",
    "pearls": [
     {
@@ -20993,14 +20994,14 @@
     "random_forest_visualization"
    ],
    "qfep_role": "Learning systems, neural networks",
-   "tokens": 19.0
+   "tokens": 19
   },
   {
    "heroes": [
     "graphspace",
     "rhizomatic_structure"
    ],
-   "index": 20.0,
+   "index": 20,
    "node": "graphtheory",
    "pearls": [
     {
@@ -21113,14 +21114,14 @@
     "edmonds_algorithm"
    ],
    "qfep_role": "Connections define structure. The substrate that was always under it all — every cell, force, agent, neuron was a node; every adjacency, attraction, message, weight was an edge.",
-   "tokens": 14.0
+   "tokens": 14
   },
   {
    "heroes": [
     "angle_sum_triangle",
     "poincare_disk"
    ],
-   "index": 21.0,
+   "index": 21,
    "node": "foundationscrisis",
    "pearls": [
     {
@@ -21249,13 +21250,13 @@
     "godel_sentence_machine"
    ],
    "qfep_role": "Gödel, Russell - limits of formal systems",
-   "tokens": 31.0
+   "tokens": 31
   },
   {
    "heroes": [
     "bifurcation_walkway"
    ],
-   "index": 22.0,
+   "index": 22,
    "node": "qfeplaboratory",
    "pearls": [
     {
@@ -21384,13 +21385,13 @@
     "edge_of_chaos_unlocked"
    ],
    "qfep_role": "The complete QFEP formula embodied",
-   "tokens": 31.0
+   "tokens": 31
   },
   {
    "heroes": [
     "bias_visualizer"
    ],
-   "index": 23.0,
+   "index": 23,
    "node": "postfoundationscrisis",
    "pearls": [
     {
@@ -21502,7 +21503,7 @@
     "wiki_fragment"
    ],
    "qfep_role": "Applied limits — bias, rhizomes, molecular design as post-crisis practice",
-   "tokens": 14.0
+   "tokens": 14
   }
  ],
  "hand_nodes": {

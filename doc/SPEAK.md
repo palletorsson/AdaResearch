@@ -7,7 +7,7 @@ _one line per chapter, per pearl, per body; [hand] Palle, [claude] written in hi
 > `[hand]`
 
 ### point
-the one point. no point without a coordinate system. the clock is already running.  `[hand]`
+you arrive late. the clock is already running. the folding past keeps running. the frame counter. point zero; origin, (0,0,0), the root of all vectors, Vector.ZERO. the one point. no point without a coordinate system.  `[hand]`
 - **folding_past** — the clock is already running — the folding past keeps running `[hand]`
 - **frame_counter_display** — the frame counter: the clock is already running `[hand]`
 - **origin** — point zero. origin, (0,0,0), the root of all vectors, Vector.ZERO — the one point `[hand]`
@@ -15,7 +15,7 @@ the one point. no point without a coordinate system. the clock is already runnin
 - **you_are_here** — you are here — the one point `[claude]`
 - **fontana_puncture** — the one point, pierced `[claude]`
 - **interactive_point_origin_force** — a point that becomes a force `[claude]`
-- **floating_sphere_field** — points, drifting `[claude]`
+- **floating_sphere_field** — points, drifting, there is always the drift.  `[hand]`
 - **two_points_line** — two points is a line. it measures. it is a point, it is a laser — here it forms a vector in 3d space `[hand]`
 - **point** — the one point `[claude]`
 
