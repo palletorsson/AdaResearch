@@ -46,7 +46,8 @@ from typing import Any
 REPO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO / "tools"))
 
-from spatial_contract import SpatialContract, registry_index, resolve, room_for
+from spatial_contract import (SpatialContract, normalise_support, registry_index,
+                              resolve, room_for)
 
 ROOMS_DIR = REPO / "commons" / "artifacts" / "dressing_rooms"
 #: The grid is 1 m (commons/grid/GridSystem.gd `cube_size`). Named because the
@@ -67,7 +68,12 @@ def _footing(contract: SpatialContract) -> dict[str, Any]:
     floor, 3 a plinth. The support the contract resolved decides which.
     """
     w, d = contract.footprint_cells
-    raised = contract.required_support in ("pedestal", "podium", "table")
+    # `required_support` is normalised to `spatial_contract.SUPPORTS` before it
+    # reaches here, so this is the whole test. The tuple it replaces listed the
+    # raised words of ONE of the three authoring vocabularies and silently
+    # grounded the others — `platform`, the second-largest posture in the
+    # corpus, builds a 1.0 m stage in classify_postures and a flat pad here.
+    raised = contract.required_support == "podium"
     height = 3 if raised else 1
     return {
         "anchor": [0, 0],
@@ -248,7 +254,12 @@ def from_room(room: dict[str, Any]) -> SpatialContract:
         # round trip is exact only if both sides are coerced the same way.
         modes=list(pc.get("allowed_modes", base.modes)),
         preferred_mode=str(pc.get("preferred_mode", base.preferred_mode)),
-        required_support=str(pc.get("required_support", base.required_support)),
+        # NORMALISED, like every other reader of this field. An authored room
+        # writes the word a person used — `platform`, `plinth`, `none` — and
+        # reading it raw here is the one path that skips `resolve()`, so the
+        # negotiator saw hand-authored vocabulary it had never been taught.
+        required_support=normalise_support(
+            pc.get("required_support", base.required_support))[0],
         containment=str(pc.get("containment", base.containment)),
         importance=str(pc.get("importance", base.importance)),
         preferred_venue=str(pc.get("preferred_venue", base.preferred_venue)),

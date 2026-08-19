@@ -292,6 +292,14 @@ def build_report(
                     "goal_z": round(float(walk_verdict.get("goal_z", -1.0)), 1),
                     "walked_s": round(float(walk_verdict.get("elapsed_s", -1.0)), 1),
                     "cells_unlearned": int(walk_verdict.get("cells_unlearned", -1)),
+                    # cells_unlearned counted stall events until 2026-08-15 and
+                    # so read as a corridor 26 cells thick when it was 6 cells
+                    # and a dead plan. These say which failure this is: a
+                    # frontier short of goal with reason=no_route is a severed
+                    # walk map, not an expensive one.
+                    "stall_events": int(walk_verdict.get("stall_events", -1)),
+                    "frontier_z": int(walk_verdict.get("frontier_z", -1)),
+                    "reason": str(walk_verdict.get("reason", "")),
                 },
             }
         )

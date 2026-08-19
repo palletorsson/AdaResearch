@@ -47,7 +47,15 @@ MAPS = REPO / "commons" / "maps"
 STAND = {"1", "1s"}
 WALL = "4"
 # (name, floor, ceiling, the y-offset a token gets to sit in the band)
-BANDS = [("dado", 0.0, 0.9, 0.45), ("hang", 0.9, 2.1, 1.5), ("frieze", 2.1, 3.2, 2.6)]
+# The corridor's own scheme, derived from the viewing-distance rule above and
+# NOT the museum's low/eye/upper. Both are published together by
+# tools/wall_bands.py so the difference is visible and deliberate rather than
+# discovered; `python tools/wall_bands.py --check` reports where either scheme
+# disagrees with itself or with the certified wall.
+from wall_bands import HANGAR_BANDS as _HB
+BANDS = [("dado", _HB["dado"][0], _HB["dado"][1], 0.45),
+         ("hang", _HB["hang"][0], _HB["hang"][1], 1.5),
+         ("frieze", _HB["frieze"][0], _HB["frieze"][1], 2.6)]
 # below this the viewing-distance rule says nothing can be taken in at all
 MIN_HANGABLE_M2 = 1.0
 

@@ -104,7 +104,19 @@
      "by": "claude"
     }
    ],
-   "hero": "toruscylinder"
+   "hero": "toruscylinder",
+   "gaps": [
+    {
+     "rect": [
+      3,
+      8,
+      6,
+      4
+     ],
+     "crossing": "tc:4:z:auto"
+    }
+   ],
+   "ordered": true
   },
   {
    "pearl": "trans rotation",

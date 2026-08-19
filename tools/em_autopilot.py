@@ -60,10 +60,18 @@ def main() -> int:
                   f"{'retrying' if attempt < 3 else 'giving up'}")
             continue
         ok = bool(v.get("ok"))
+        # cells_unlearned alone once read as a fact about the corridor when it
+        # was a fact about the planner — 26 "cells" were 8 cells and 18 stalls
+        # against a dead plan. Print the three fields that tell them apart.
+        stalls = v.get("stall_events")
+        extra = ""
+        if stalls is not None:
+            extra = (f", {stalls} stall events, frontier z={v.get('frontier_z')}"
+                     f", reason={v.get('reason') or 'none'}")
         print(f"autopilot: {'PASS' if ok else 'FAIL'} (attempt {attempt}) — "
               f"{v.get('museums_target')} museums{' from ' + first if first else ''}, "
               f"z={v.get('z'):.1f}/{v.get('goal_z'):.1f}, {v.get('elapsed_s'):.1f}s walked, "
-              f"{v.get('cells_unlearned', 0)} cells unlearned")
+              f"{v.get('cells_unlearned', 0)} cells unlearned{extra}")
         return 0 if ok else 1
     print("autopilot: NO VERDICT in 3 attempts — the scene never got far enough to write one")
     return 1

@@ -43,6 +43,7 @@ from typing import Any
 REPO = Path(__file__).resolve().parent.parent
 ORDER = REPO / "commons" / "data" / "spine_artifact_order.json"
 RELATIONS = REPO / "commons" / "data" / "artifact_relations.json"
+GRAPH = REPO / "commons" / "data" / "museum_relational_graph.json"
 CAPACITY = REPO / "commons" / "data" / "slot_capacity.json"
 
 #: What each edge kind means in space. Quoted from em_sets.gd so the two cannot
@@ -53,6 +54,7 @@ KIND_RULE = {
     "axis_kin":  "adjacent, at a DIFFERENT value of the shared axis",
     "family":    "same neighbourhood, held apart by padding",
     "co_placed": "fill — they already stand together in real maps",
+    "synthesis_outcome": "synthesis bay — the family is gathered into one authored outcome",
 }
 #: Which kinds earn a place beside the anchor, best first. `co_placed` is
 #: deliberately last: standing together in existing maps is evidence of habit,
@@ -75,7 +77,7 @@ def spine_order() -> list[dict[str, Any]]:
 
 
 def brief_for(anchor: str, rel: dict[str, Any], relations_cap: int = 2,
-              dna_cap: int = 6) -> dict[str, Any]:
+              dna_cap: int = 6, graph: dict[str, Any] | None = None) -> dict[str, Any]:
     """One anchor's stanza: the lead, its typed relations, and its DNA run."""
     rec = rel.get(anchor, {})
     entries: list[dict[str, Any]] = [{
@@ -122,6 +124,26 @@ def brief_for(anchor: str, rel: dict[str, Any], relations_cap: int = 2,
                                  "a local series immediately after its parent"},
                     "why": f"{anchor}.{axis} = {v}",
                 })
+
+    # Curated synthesis-gallery works are explicit registry relationships, not
+    # similarity guesses. The graph assigns each large work to its earliest
+    # named spine source, so it enters the corridor once while all other source
+    # links remain inspectable cross-links.
+    graph_row = (graph or {}).get(anchor) or {}
+    for synth in graph_row.get("synthesis", []):
+        if synth.get("type") != "synthesis_outcome" or not synth.get("auto_place"):
+            continue
+        token = str(synth.get("to", ""))
+        if not token:
+            continue
+        entries.append({
+            "lookup_name": token,
+            "role": "synthesis",
+            "config": ((load(GRAPH).get("nodes") or {}).get(token) or {}).get("config", {}),
+            "relation": {"kind": "synthesis_outcome",
+                         "rule": KIND_RULE["synthesis_outcome"]},
+            "why": str(synth.get("why", "")),
+        })
     return {"anchor": anchor, "entries": entries, "dna_run": run,
             "multiples": rec.get("multiples", 0),
             "known_to_relations": anchor in rel}
@@ -208,6 +230,7 @@ def main() -> int:
     args = ap.parse_args()
 
     rel = load(RELATIONS).get("artifacts", {})
+    graph = load(GRAPH).get("artifacts", {})
     if not rel:
         print("no artifact_relations.json — nothing to build a brief from")
         return 1
@@ -224,7 +247,7 @@ def main() -> int:
             if len(anchors) >= args.count:
                 break
 
-    briefs = [brief_for(a, rel, args.relations) for a in anchors]
+    briefs = [brief_for(a, rel, args.relations, graph=graph) for a in anchors]
     series = series_in(args.museum)
     floor_matches = match_runs(briefs, series)
     matches = (match_runs_on_walls(briefs, args.museum) if args.museum

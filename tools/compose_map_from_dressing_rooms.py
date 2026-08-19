@@ -13,6 +13,8 @@ Adds (vs the v1 first-cut):
     from commons/maps/sequences/<id>.json.
   - PNG renderer (Pillow) showing structure / utilities / interactables
     in a top-down legend.
+  - Read-only placement negotiation from real candidate rooms via
+    --negotiate-dry-run.
 
 Usage:
     # Three hand-authored rooms in a row, render a PNG too:
@@ -29,7 +31,10 @@ from __future__ import annotations
 import argparse
 import heapq
 import json
+import math
 from pathlib import Path
+
+import placement_negotiator
 
 REPO = Path(__file__).resolve().parent.parent
 ROOMS_DIR = REPO / "commons" / "artifacts" / "dressing_rooms"
@@ -353,7 +358,19 @@ def stamp_room(structure, utilities, interactables, room: dict, lookup: str,
     # Place artifact at the rotated anchor.
     abs_anchor = (place_row + rot_anchor[0], place_col + rot_anchor[1])
     if in_bounds(abs_anchor[0], abs_anchor[1], rows_out, cols_out):
-        interactables[abs_anchor[0]][abs_anchor[1]] = f"{lookup}:{rot_deg}:0"
+        token = f"{lookup}:{rot_deg}:0"
+        artifact_config = room.get("artifact_config", {})
+        if isinstance(artifact_config, dict):
+            for key in sorted(artifact_config):
+                value = artifact_config[key]
+                if isinstance(value, bool):
+                    encoded = "true" if value else "false"
+                elif isinstance(value, (str, int, float)):
+                    encoded = str(value)
+                else:
+                    continue
+                token += f"#{key}:{encoded}"
+        interactables[abs_anchor[0]][abs_anchor[1]] = token
 
     # Extras: stamp into utilities at rotated offsets relative to anchor.
     # Mapping (best-effort, the existing project format isn't documented
@@ -388,6 +405,8 @@ def stamp_room(structure, utilities, interactables, room: dict, lookup: str,
             utilities[tr][tc] = f"tt:{extra.get('key', '?')}"
         elif et == "el":
             utilities[tr][tc] = f"el:{extra.get('params', '3:1')}"
+        elif et == "wp":
+            utilities[tr][tc] = f"wp:{int(extra.get('rotation', rot_deg))}"
         elif et == "sub":
             utilities[tr][tc] = f"sub:{extra.get('value', '?')}"
 
@@ -479,7 +498,25 @@ def collect_room_cells(structure, place_row, place_col, rot_tiles) -> set[tuple[
     return cells
 
 
-def compose(map_name: str, room_names: list[str]) -> tuple[Path, dict]:
+def required_map_height(rooms: list[tuple[str, dict]], minimum: int = 5) -> int:
+    """Return the vertical envelope required by the composed room contracts.
+
+    Clearance is authoritative because it includes visitor and installation
+    space; measured footprint height is the fallback for older rooms. Keeping
+    the legacy five-metre minimum avoids changing ordinary gallery volumes.
+    """
+    required = float(minimum)
+    for _, room in rooms:
+        clearance = room.get("clearance", [])
+        footprint = room.get("footprint", [])
+        if isinstance(clearance, list) and len(clearance) >= 3:
+            required = max(required, float(clearance[2]))
+        if isinstance(footprint, list) and len(footprint) >= 3:
+            required = max(required, float(footprint[2]))
+    return int(math.ceil(required))
+
+
+def compose(map_name: str, room_names: list[str], write: bool = True) -> tuple[Path, dict]:
     rooms = []
     for name in room_names:
         try:
@@ -488,6 +525,8 @@ def compose(map_name: str, room_names: list[str]) -> tuple[Path, dict]:
             print(f"  ! skipped {name}: no dressing room")
     if not rooms:
         raise ValueError("no rooms to compose")
+
+    max_height = required_map_height(rooms)
 
     # Pre-pick a uniform "we walk west→east" axis: every room rotates so
     # its approach is "west" and its exit is "east". Falls back if not
@@ -620,6 +659,11 @@ def compose(map_name: str, room_names: list[str]) -> tuple[Path, dict]:
         if in_bounds(tr, tc, max_rows, total_cols):
             utilities[tr][tc] = "t"
             structure[tr][tc] = "0"
+            # A teleporter is a void threshold, not the edge of the world.
+            # Keep one floor cell beyond it so an overshooting player lands.
+            catch_r, catch_c = tr + dr, tc + dc
+            if in_bounds(catch_r, catch_c, max_rows, total_cols):
+                structure[catch_r][catch_c] = "1"
 
     map_data = {
         "map_info": {
@@ -628,7 +672,7 @@ def compose(map_name: str, room_names: list[str]) -> tuple[Path, dict]:
             "description": "Auto-composed from dressing rooms (v2).",
             "version": "2.0",
             "format": "ada-3layer-v1",
-            "dimensions": {"width": total_cols, "depth": max_rows, "max_height": 5},
+            "dimensions": {"width": total_cols, "depth": max_rows, "max_height": max_height},
             "metadata": {
                 "composed_from_dressing_rooms": True,
                 "room_sequence": room_names,
@@ -655,10 +699,215 @@ def compose(map_name: str, room_names: list[str]) -> tuple[Path, dict]:
     }
 
     out_dir = MAPS_DIR / map_name
-    out_dir.mkdir(parents=True, exist_ok=True)
     out_path = out_dir / "map_data.json"
-    out_path.write_text(json.dumps(map_data, indent=2), encoding="utf-8")
+    if write:
+        out_dir.mkdir(parents=True, exist_ok=True)
+        out_path.write_text(json.dumps(map_data, indent=2), encoding="utf-8")
     return out_path, map_data
+
+
+# ── Placement-negotiation offer extraction ───────────────────────────
+
+def _edge_wall_sides(rot_tiles: list[list[int]]) -> list[str]:
+    """Return room edges that contain authored wall-height cells."""
+    if not rot_tiles or not rot_tiles[0]:
+        return []
+    rows = len(rot_tiles)
+    cols = len(rot_tiles[0])
+    sides: list[str] = []
+    if any(int(rot_tiles[0][c]) >= 4 for c in range(cols)):
+        sides.append("north")
+    if any(int(rot_tiles[r][cols - 1]) >= 4 for r in range(rows)):
+        sides.append("east")
+    if any(int(rot_tiles[rows - 1][c]) >= 4 for c in range(cols)):
+        sides.append("south")
+    if any(int(rot_tiles[r][0]) >= 4 for r in range(rows)):
+        sides.append("west")
+    return sides
+
+
+def _outer_ring_walkable(rot_tiles: list[list[int]]) -> bool:
+    """A full-orbit room keeps every cell on its outer ring walkable."""
+    if not rot_tiles or not rot_tiles[0]:
+        return False
+    rows = len(rot_tiles)
+    cols = len(rot_tiles[0])
+    ring: list[int] = []
+    ring.extend(int(rot_tiles[0][c]) for c in range(cols))
+    if rows > 1:
+        ring.extend(int(rot_tiles[rows - 1][c]) for c in range(cols))
+    if rows > 2:
+        ring.extend(int(rot_tiles[r][0]) for r in range(1, rows - 1))
+        if cols > 1:
+            ring.extend(int(rot_tiles[r][cols - 1]) for r in range(1, rows - 1))
+    return bool(ring) and all(value == 1 for value in ring)
+
+
+def _expansion_directions(
+    bounds: tuple[int, int, int, int],
+    other_cells: set[tuple[int, int]],
+    rows: int,
+    cols: int,
+) -> list[str]:
+    """Test whether a one-cell strip is free on each side of a room."""
+    top, left, height, width = bounds
+    candidates = {
+        "north": [(top - 1, c) for c in range(left, left + width)],
+        "east": [(r, left + width) for r in range(top, top + height)],
+        "south": [(top + height, c) for c in range(left, left + width)],
+        "west": [(r, left - 1) for r in range(top, top + height)],
+    }
+    available: list[str] = []
+    for direction, cells in candidates.items():
+        if cells and all(in_bounds(r, c, rows, cols) and (r, c) not in other_cells for r, c in cells):
+            available.append(direction)
+    return available
+
+
+def derive_floorplan_offers(map_name: str, map_data: dict) -> dict:
+    """Convert actual candidate placements into negotiator floorplan offers.
+
+    The offer comes from the composed candidate: rotated tile dimensions,
+    detected wall edges, authored support, surrounding free strips, and outer
+    ring walkability. No canonical room data is changed.
+    """
+    metadata = map_data.get("map_info", {}).get("metadata", {})
+    anchors = metadata.get("anchors", []) or []
+    dimensions = map_data.get("map_info", {}).get("dimensions", {})
+    rows = int(dimensions.get("depth", 0))
+    cols = int(dimensions.get("width", 0))
+
+    geometries: list[dict] = []
+    all_room_cells: dict[str, set[tuple[int, int]]] = {}
+    for index, anchor_info in enumerate(anchors):
+        lookup = str(anchor_info.get("lookup", ""))
+        room = load_room(lookup)
+        rot = int(anchor_info.get("rotation", 0)) % 360
+        src_tiles = room.get("footing", {}).get("tiles", [[1]])
+        src_rows = len(src_tiles)
+        src_cols = max((len(row) for row in src_tiles), default=1)
+        src_anchor_raw = room.get("footing", {}).get("anchor", [0, 0])
+        rotated_anchor = rotate_anchor(
+            (int(src_anchor_raw[0]), int(src_anchor_raw[1])), rot, src_rows, src_cols
+        )
+        rot_tiles = rotate_tiles([[int(v) for v in row] for row in src_tiles], rot)
+        room_rows = len(rot_tiles)
+        room_cols = len(rot_tiles[0]) if rot_tiles else 1
+        top = int(anchor_info.get("row", 0)) - rotated_anchor[0]
+        left = int(anchor_info.get("col", 0)) - rotated_anchor[1]
+        key = f"{index}:{lookup}"
+        cells = {
+            (top + dr, left + dc)
+            for dr in range(room_rows)
+            for dc in range(room_cols)
+        }
+        all_room_cells[key] = cells
+        geometries.append({
+            "key": key,
+            "lookup": lookup,
+            "room": room,
+            "rotation": rot,
+            "anchor": (int(anchor_info.get("row", 0)), int(anchor_info.get("col", 0))),
+            "tiles": rot_tiles,
+            "bounds": (top, left, room_rows, room_cols),
+        })
+
+    offers: list[dict] = []
+    for geometry in geometries:
+        lookup = geometry["lookup"]
+        room = geometry["room"]
+        contract = room.get("placement_contract", {})
+        if not isinstance(contract, dict) or not contract:
+            raise ValueError(f"{lookup}: placement_contract required for negotiation dry-run")
+        allowed_modes = [str(x) for x in contract.get("allowed_modes", [])]
+        preferred_mode = str(contract.get("preferred_mode", allowed_modes[0] if allowed_modes else ""))
+        clearance = room.get("clearance", [geometry["bounds"][3], geometry["bounds"][2], 3])
+        height = float(clearance[2]) if isinstance(clearance, list) and len(clearance) >= 3 else 3.0
+        other_cells: set[tuple[int, int]] = set()
+        for key, cells in all_room_cells.items():
+            if key != geometry["key"]:
+                other_cells |= cells
+        expansion = _expansion_directions(
+            geometry["bounds"], other_cells, rows, cols
+        )
+        circulation = str(contract.get("circulation", "frontal"))
+        route_width = 1.0 if circulation != "full_orbit" or _outer_ring_walkable(geometry["tiles"]) else 0.0
+        offers.append({
+            "artifact": lookup,
+            "room_m": [geometry["bounds"][3], geometry["bounds"][2], height],
+            "mode": preferred_mode,
+            "rotation": geometry["rotation"],
+            "support": str(contract.get("required_support", room.get("posture", ""))),
+            "support_surface_height_m": (
+                sum(float(x) for x in contract["support_surface_height_m"]) / 2.0
+                if isinstance(contract.get("support_surface_height_m"), list)
+                and len(contract["support_surface_height_m"]) == 2
+                else None
+            ),
+            "wall_sides": _edge_wall_sides(geometry["tiles"]),
+            "neighbor_artifacts": [],
+            "expansion_directions": expansion,
+            "allow_shrink": False,
+            "route_width_m": route_width,
+            "candidate_anchor": [
+                geometry["anchor"][0],
+                geometry["anchor"][1],
+            ],
+        })
+
+    return {
+        "schema": "adaresearch.floorplan_offers.v1",
+        "title": f"Composer candidate offers for {map_name}",
+        "source": "compose_map_from_dressing_rooms --negotiate-dry-run",
+        "map": map_name,
+        "offers": offers,
+    }
+
+
+def run_negotiation_dry_run(
+    map_name: str,
+    map_data: dict,
+    rules_path: Path,
+    measurement_report_path: Path,
+    output_root: Path,
+) -> tuple[bool, Path]:
+    """Evaluate and persist a candidate map without authorizing a map write."""
+    safe_name = map_name.replace("/", "__").replace("\\", "__")
+    out_dir = output_root / safe_name
+    overlay_dir = out_dir / "overlays"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    offers_path = out_dir / "floorplan_offers.json"
+
+    try:
+        offers = derive_floorplan_offers(map_name, map_data)
+        offers_path.write_text(json.dumps(offers, indent=2), encoding="utf-8")
+        rules = placement_negotiator.load_json(rules_path)
+        measurement_report = placement_negotiator.load_json(measurement_report_path)
+        report = placement_negotiator.build_report(rules, offers, measurement_report)
+        report["source_map"] = map_name
+        report["mode"] = "composer_dry_run"
+        report["map_written"] = False
+        for decision in report.get("decisions", []):
+            decision["overlay_image"] = f"overlays/{decision['artifact']}.png"
+            placement_negotiator.render_overlay(
+                decision, overlay_dir / f"{decision['artifact']}.png"
+            )
+    except Exception as exc:
+        report = {
+            "schema": "adaresearch.placement_negotiation_report.v1",
+            "source_map": map_name,
+            "mode": "composer_dry_run",
+            "map_written": False,
+            "summary": {"decisions": 0, "accepted": 0, "changed": 0,
+                        "rejected": 1, "hard_failures": 1, "soft_compromises": 0},
+            "error": str(exc),
+            "decisions": [],
+        }
+
+    report_path = out_dir / "negotiation_report.json"
+    report_path.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    accepted = int(report.get("summary", {}).get("rejected", 1)) == 0
+    return accepted, report_path
 
 
 # ── PNG renderer ──────────────────────────────────────────────────────
@@ -842,6 +1091,26 @@ def main() -> int:
     p.add_argument("--show", action="store_true", help="print ASCII preview")
     p.add_argument("--png", action="store_true", help="write a PNG render alongside the JSON")
     p.add_argument("--cell-px", type=int, default=24)
+    p.add_argument(
+        "--negotiate-dry-run",
+        action="store_true",
+        help="evaluate placements and write evidence without writing map_data.json",
+    )
+    p.add_argument(
+        "--negotiation-rules",
+        type=Path,
+        default=REPO / "commons" / "data" / "placement_rules_v1.json",
+    )
+    p.add_argument(
+        "--measurement-report",
+        type=Path,
+        default=REPO / "ada_run" / "museum_aaa_pass" / "report.json",
+    )
+    p.add_argument(
+        "--negotiation-out",
+        type=Path,
+        default=REPO / "ada_run" / "composer_negotiation",
+    )
     args = p.parse_args()
 
     targets: list[tuple[str, list[str]]] = []
@@ -853,20 +1122,45 @@ def main() -> int:
     else:
         p.error("either --rooms or --sequence required")
 
+    exit_code = 0
     for map_name, room_list in targets:
         try:
-            out_path, map_data = compose(map_name, room_list)
+            out_path, map_data = compose(
+                map_name, room_list, write=not args.negotiate_dry_run
+            )
         except Exception as e:
             print(f"  ! {map_name}: {e}")
+            exit_code = 1
             continue
-        print(f"wrote {out_path.relative_to(REPO)}  ({len(room_list)} rooms)")
+
+        if args.negotiate_dry_run:
+            accepted, report_path = run_negotiation_dry_run(
+                map_name=map_name,
+                map_data=map_data,
+                rules_path=args.negotiation_rules,
+                measurement_report_path=args.measurement_report,
+                output_root=args.negotiation_out,
+            )
+            verdict = "ACCEPTED" if accepted else "REJECTED"
+            print(
+                f"dry-run {verdict}: {report_path.relative_to(REPO)}  "
+                f"({len(room_list)} rooms; map not written)"
+            )
+            if not accepted:
+                exit_code = 1
+        else:
+            print(f"wrote {out_path.relative_to(REPO)}  ({len(room_list)} rooms)")
+
         if args.show:
             print(render_ascii(map_data))
         if args.png:
-            png_path = out_path.with_suffix(".png")
+            if args.negotiate_dry_run:
+                png_path = report_path.parent / "candidate_map.png"
+            else:
+                png_path = out_path.with_suffix(".png")
             if render_png(map_data, png_path, cell_px=args.cell_px):
                 print(f"  png:  {png_path.relative_to(REPO)}")
-    return 0
+    return exit_code
 
 
 if __name__ == "__main__":

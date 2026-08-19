@@ -100,6 +100,8 @@ DEFAULT_SPEC: dict[str, Any] = {
 def stage_brief(spec: dict[str, Any]) -> dict[str, Any]:
     """Whose exhibition this is. The only stage that reasons about MEANING."""
     rel = _load(RELATIONS).get("artifacts", {})
+    graph_doc = _load(REPO / "commons" / "data" / "museum_relational_graph.json")
+    graph = graph_doc.get("artifacts", {})
     anchors = [a for a in spec.get("anchors") or [] if a]
     if not anchors:
         seen: set[str] = set()
@@ -112,7 +114,7 @@ def stage_brief(spec: dict[str, Any]) -> dict[str, Any]:
                 break
 
     briefs = [brief_for(a, rel, int(spec.get("relations", 2)),
-                        int(spec.get("dna_cap", 6))) for a in anchors]
+                        int(spec.get("dna_cap", 6)), graph) for a in anchors]
 
     # THE ONE DECISION THIS FILE MAKES, and it is shown rather than buried:
     # features and their relations go to the FLOOR as bodies; dna_variants do
@@ -133,8 +135,9 @@ def stage_brief(spec: dict[str, Any]) -> dict[str, Any]:
                 "rule": (e.get("relation") or {}).get("rule", ""),
                 "why": e.get("why", ""),
                 "dna": e.get("dna"),
+                "config": e.get("config") or {},
             }
-            on_floor = e["role"] in ("feature", "related")
+            on_floor = e["role"] in ("feature", "related", "synthesis")
             if e["role"] == "related" and not spec.get("include_relations", True):
                 on_floor = False
             row["on_floor"] = on_floor
@@ -593,8 +596,10 @@ def apply_step(step: str, spec: dict[str, Any], stages: dict[str, Any],
         # Write through the OWNER of this file, not by hand: one writer, one
         # schema. Other museums already in the file are preserved.
         museums = dict(prev.get("museums") or {})
-        from export_museum_plan import plan_museum
-        museums[key] = plan_museum(key, list(stages["brief"]["cast"]))
+        from export_museum_plan import brief_context, plan_museum
+        museums[key] = plan_museum(key, list(stages["brief"]["cast"]),
+                                   list(stages["brief"]["anchors"]),
+                                   brief_context(stages["brief"]))
         EM_PLAN.parent.mkdir(parents=True, exist_ok=True)
         EM_PLAN.write_text(json.dumps({
             "schema": "adaresearch.em_plan.v1",

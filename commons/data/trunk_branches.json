@@ -17554,7 +17554,23 @@
     },
     "tokens_add": [],
     "tokens_remove": [],
-    "hero": "toruscylinder"
+    "hero": "toruscylinder",
+    "tokens_order": [
+     "toruscylinder",
+     "translation_cube_demo",
+     "x_translation_cube"
+    ],
+    "gaps": [
+     {
+      "rect": [
+       3,
+       8,
+       6,
+       4
+      ],
+      "crossing": "tc:4:z:auto"
+     }
+    ]
    },
    {
     "map": "Trans_Rotation",
@@ -22059,6 +22075,17 @@
       "x_translation_cube"
      ],
      "blurb": "Translation produces space as navigable extent.",
+     "gaps": [
+      {
+       "rect": [
+        3,
+        8,
+        6,
+        4
+       ],
+       "crossing": "tc:4:z:auto"
+      }
+     ],
      "speak": "one move is three moves. x, then y, then z — and the order does not matter, for translation only.",
      "speak_by": "claude",
      "says": {
@@ -22070,7 +22097,8 @@
       "toruscylinder": "claude",
       "translation_cube_demo": "claude",
       "x_translation_cube": "claude"
-     }
+     },
+     "ordered": true
     },
     {
      "pearl": "trans rotation",

@@ -433,6 +433,38 @@ def _enclosed_voids(grid: list[list[str]], w: int, h: int) -> list[set[tuple[int
     return regions
 
 
+def _apply_gaps(plan: "FloorPlan", gaps: list, apron: int) -> "FloorPlan":
+    """THE GAP (2026-08-19): cells the pearl declares hollow. The grid loses its
+    floor there and every slot loses those cells, so the negotiator never stands a
+    body over the void — the crossing (transport cube, bridge, jump pad) is the
+    only way across, and the museum builds it."""
+    from dataclasses import replace as _replace
+    void: set[tuple[int, int]] = set()
+    for g in gaps or []:
+        r = list(g.get("rect", []))
+        if len(r) < 4:
+            continue
+        for x in range(int(r[0]), int(r[0]) + max(1, int(r[2]))):
+            for z in range(int(r[1]), int(r[1]) + max(1, int(r[3]))):
+                void.add((x + apron, z + apron))
+    if not void:
+        return plan
+    grid = [list(row) for row in plan.grid]
+    for x, z in void:
+        if 0 <= z < len(grid) and 0 <= x < len(grid[z]):
+            grid[z][x] = "0"
+    slots = []
+    for s in plan.slots:
+        if s.venue == "interior":
+            cells = {c for c in (s.free_cells or set()) if c not in void}
+            if not cells or s.cell in void:
+                continue
+            slots.append(_replace(s, free_cells=cells))
+        else:
+            slots.append(s)
+    return _replace(plan, grid=grid, slots=slots, route={c for c in plan.route if c not in void})
+
+
 def from_museum(key: str, apron: int = 14, rooms: int | None = None) -> FloorPlan:
     """Load one of the 30 authored museums as a plan, with its slots' declared
     capacity attached, plus the exterior venues that can host what the building

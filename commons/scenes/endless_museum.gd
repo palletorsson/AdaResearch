@@ -416,6 +416,15 @@ var _cur_dressing: Array = []
 ## exactly as before.
 var _cur_stages: Array = []
 var _cur_stage_pearl: String = ""
+## THE GAP (2026-08-19). {rect:[x,z,w,d], crossing:"tc:4:z" | "br:z:4" | "jp:x:z" | ""}
+## — the pearl's hollow space and the utility that carries a body over it. The
+## museum lays no floor in those cells and instantiates the map's own scene.
+var _cur_gaps: Array = []
+const CROSSING_SCENES := {
+	"tc": "res://commons/scenes/mapobjects/transport_cube.tscn",
+	"br": "res://commons/scenes/mapobjects/bridge_path.tscn",
+	"jp": "res://commons/scenes/mapobjects/jump_pad.tscn",
+}
 const WEDGE_SCENE := "res://commons/scenes/mapobjects/walkableprism.tscn"
 var _bake_used: Dictionary = {}         # per key: "tok|x|y" -> how many times looked up
 var _seg_placed: Array = []             # this segment's placed rows (for the bake)
@@ -2206,6 +2215,59 @@ func _open_bays(tile_in: Array, key: String, chapter: String) -> Array:
 ## triplanar (em_materials._base), so shading is a function of world position,
 ## not of mesh UV: an N-metre box and N one-metre boxes sample identically.
 ## The solid volume is unchanged, so the collider is unchanged too.
+## The pearl's hollow space: the floor was never laid (the tile carries "0"), and
+## the crossing — the map's own transport cube, bridge or jump pad — is built at
+## the near edge and its cells enter the walk map, so the route survives the void.
+func _stamp_gaps(seg: Node3D, tile: Array, zbase: int) -> void:
+	for g_v in _cur_gaps:
+		var g: Dictionary = g_v
+		var r: Array = g.get("rect", [])
+		if r.size() < 4:
+			continue
+		var x0: int = int(r[0]); var z0: int = int(r[1])
+		var w: int = maxi(1, int(r[2])); var d: int = maxi(1, int(r[3]))
+		var spec: String = String(g.get("crossing", ""))
+		if spec == "":
+			print("[em-gap] %s: %d x %d cells hollow, no crossing asked" % [_cur_stage_pearl, w, d])
+			continue
+		var parts: PackedStringArray = spec.split(":")
+		var kind: String = parts[0]
+		if not CROSSING_SCENES.has(kind) or not ResourceLoader.exists(String(CROSSING_SCENES[kind])):
+			push_warning("endless_museum: unknown crossing %s" % spec)
+			continue
+		var node: Node3D = (load(String(CROSSING_SCENES[kind])) as PackedScene).instantiate() as Node3D
+		node.name = "Crossing_%s_%d_%d" % [kind, x0, z0]
+		seg.add_child(node)
+		# the near edge of the hollow, on its centre line
+		var cx: float = x0 + w * 0.5
+		var cz: float = z0 + VESTIBULE_H
+		match kind:
+			"tc":
+				# a cube that carries you: it starts at the near edge and travels the gap
+				var dist: float = float(parts[1]) if parts.size() > 1 and parts[1].is_valid_float() else float(d)
+				var axis: String = parts[2] if parts.size() > 2 else "z"
+				node.position = Vector3(cx, 0.0, cz - 0.5)
+				node.set("move_distance", dist)
+				node.set("move_direction", Vector3(1, 0, 0) if axis == "x" else Vector3(0, 0, 1))
+				node.set("auto_start", parts.size() > 3 and parts[3] == "auto")
+			"br":
+				var axis2: String = parts[1] if parts.size() > 1 else "z"
+				node.position = Vector3(cx, 0.0, cz)
+				node.set("bridge_axis", axis2)
+				node.set("bridge_length", int(parts[2]) if parts.size() > 2 and parts[2].is_valid_int() else (d if axis2 == "z" else w))
+			"jp":
+				node.position = Vector3(cx, 0.0, cz - 0.5)
+				if parts.size() > 2:
+					node.set("target_x", int(parts[1]))
+					node.set("target_z", int(parts[2]) + VESTIBULE_H)
+		# the crossing IS the route: its cells are walkable so the walk map, the
+		# autopilot and the reading all know the hall continues over the hollow
+		for gx in range(x0, x0 + w):
+			for gz in range(z0, z0 + d):
+				_walk_cells[Vector2i(gx, zbase + gz + VESTIBULE_H)] = true
+		print("[em-gap] %s: %d x %d cells hollow, crossing %s at (%.1f, %.1f)" % [_cur_stage_pearl, w, d, spec, cx, cz])
+
+
 ## The pearl's raised platforms: deck, collider, walk cells, and the wedge up.
 func _stamp_stages(seg: Node3D, solid: StaticBody3D, tile: Array, zbase: int) -> void:
 	if _cur_stages.is_empty():
@@ -2380,6 +2442,20 @@ func _build_segment() -> void:
 	var peek: Dictionary = _plan_entry(String(spec["key"]), next_seq)
 	_cur_stages = (peek.get("stages", []) as Array) if peek.get("stages") is Array else []
 	_cur_stage_pearl = String(peek.get("pearl", ""))
+	_cur_gaps = (peek.get("gaps", []) as Array) if peek.get("gaps") is Array else []
+	if not _cur_gaps.is_empty():
+		# the hollow is cut into the tile the segment builds, so every reader below
+		# (floor, collider, walk map, dressing) sees the void without knowing about gaps
+		for g_v in _cur_gaps:
+			var g: Dictionary = g_v
+			var gr: Array = g.get("rect", [])
+			if gr.size() < 4:
+				continue
+			for gx in range(int(gr[0]), int(gr[0]) + maxi(1, int(gr[2]))):
+				for gz in range(int(gr[1]), int(gr[1]) + maxi(1, int(gr[3]))):
+					if gz >= 0 and gz < tile.size() and gx >= 0 and gx < (tile[gz] as Array).size():
+						if not String((tile[gz] as Array)[gx]).begins_with("4"):
+							(tile[gz] as Array)[gx] = "0"      # hollow: no floor is laid here
 	if peek.get("tile") is Array and (peek["tile"] as Array).size() >= 4:
 		var trows: Array = []
 		for r_v in (peek["tile"] as Array):
@@ -2518,6 +2594,7 @@ func _build_segment() -> void:
 	if wr:
 		_stamp_wall_runs(seg, solid, wcells, wall_col, m_wall)
 	_stamp_stages(seg, solid, tile, zbase)
+	_stamp_gaps(seg, tile, zbase)
 	# DEPTH FIRST, then rank, then x — the same key em_sets._slot_before now
 	# uses. These two sorts must agree: _deal_segment picks the artifact from
 	# `_pick_pool(free[0].rank)`, so with slots rank-sorted `free[0]` was the

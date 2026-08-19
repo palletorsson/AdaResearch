@@ -171,6 +171,15 @@ def merge_aabbs(report: dict, force: bool, dry_run: bool) -> dict:
         if record.get("error"):
             stats["errors_in_report"] += 1
             continue
+        # A measurement the harness itself distrusts must never overwrite what
+        # the registry already holds. The first run of the repaired measurer
+        # wrote heights of 1003 m for the cellular automata and 9.4e19 for
+        # evolving_bloops — simulations walking away during the settle window.
+        # Silence is not an option either: it is counted and reported.
+        prov = record.get("provenance") or {}
+        if prov.get("implausible"):
+            stats["implausible_held_back"] = stats.get("implausible_held_back", 0) + 1
+            continue
         loc = index.get(lname)
         if not loc:
             stats["missing_in_registry"] += 1

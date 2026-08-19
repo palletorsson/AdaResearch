@@ -110,6 +110,7 @@ def migrate(chapter: str) -> dict:
         if not page2_done:
             lines.insert(1 if lines and "token" not in lines[0] else 0, {"text": str(p["page2"]), "by": "hand"})
         bp = {"pearl": p.get("pearl", ""), "map": p.get("map", ""), "lines": lines}
+        if p.get("gaps"): bp["gaps"] = list(p["gaps"])
         if p.get("stages"): bp["stages"] = list(p["stages"])
         if p.get("rooms") is not None: bp["rooms"] = int(p["rooms"])
         if p.get("join"): bp["join"] = True
@@ -227,6 +228,11 @@ def compile_book(chapter: str, reseed: bool = True) -> dict:
         # A STAGE (2026-08-19, Palle: "after the wedge is introduced we give rise to a
         # platform that we can step up on"): a rect of the hall raised, with the wedge
         # (walkableprism, the `wp` utility) as the way up. Architecture, not a body.
+        # A GAP (2026-08-19, Palle: "the transformation map has a transport cube over
+        # hollow space and plateaus"): cells with NO floor, and the thing that carries
+        # you over — the transport cube, a bridge, a jump pad. The maps' own utilities.
+        if bp.get("gaps"): e["gaps"] = list(bp["gaps"])
+        else: e.pop("gaps", None)
         if bp.get("stages"): e["stages"] = list(bp["stages"])
         else: e.pop("stages", None)
         if bp.get("drop"): e["drop"] = True

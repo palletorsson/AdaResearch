@@ -174,6 +174,7 @@ def run_sequence(seq: str, museum: str, rows: int, relations: int = 2,
             r["exclude"] = list(pw.get("exclude") or [])
             r["pages"] = list(pw.get("pages") or [])
             r["stages"] = list(pw.get("stages") or [])
+            r["gaps"] = list(pw.get("gaps") or [])
             r["hero_walk"] = {"hero": pw["hero"], "hand_branches": pw["hand_branches"], "pearl": pw["pearl"]}
             parts.append(r)
             print(f"  {seq:24s} PEARL {pw['pearl_index'] + 1:2d}/{len(pearls)} {pw['pearl']:16s} offered {r['offered']:3d} placed {r['placed']:3d} interior {r['interior']:3d}")
@@ -480,12 +481,15 @@ def write_plan(result: dict[str, Any], out: Path) -> dict[str, Any]:
                 fx = _fixed_cells(r["sequence"], key, pr["pearl"], APRON, only=set(pr["cast"]) if pr.get("ordered") else None)
                 fx.update(_book_locks(pr.get("cast_context", {}), APRON))
                 m = plan_museum(key, list(pr["cast"]), list(r.get("anchor_tokens", [])),
-                                dict(pr.get("cast_context", {})), rooms=pr.get("rooms"), reading=bool(pr.get("ordered")), fixed=fx)
+                                dict(pr.get("cast_context", {})), rooms=pr.get("rooms"), reading=bool(pr.get("ordered")), fixed=fx,
+                                gaps=list(pr.get("gaps") or []))
                 m["ordered"] = bool(pr.get("ordered"))
                 if pr.get("pages"):
                     m["pages"] = list(pr["pages"])     # the pearls sharing this hall, in reading order
                 if pr.get("stages"):
                     m["stages"] = list(pr["stages"])   # raised platforms the museum builds, with their ramps
+                if pr.get("gaps"):
+                    m["gaps"] = list(pr["gaps"])       # hollow space + the crossing that carries you over
                 m["sequence"] = r["sequence"]
                 m["pearl"] = pr["pearl"]; m["pearl_index"] = pr["pearl_index"]; m["map"] = pr.get("map", "")
                 if not pr.get("ordered"):

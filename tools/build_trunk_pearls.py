@@ -138,6 +138,8 @@ def seed(trunk_doc: dict) -> dict:
                         p["dropped"] = True
                     if "order" in e:
                         p["index"] = int(e["order"])
+                    if e.get("gaps"):
+                        p["gaps"] = list(e["gaps"])            # hollow space + its crossing (tools/book.py)
                     if e.get("stages"):
                         p["stages"] = list(e["stages"])        # raised platforms + their ramps (tools/book.py)
                     if e.get("rooms") is not None:

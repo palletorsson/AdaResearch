@@ -235,12 +235,25 @@ def assemble(shots_dir):
     return rows
 
 
+def _wilson(k, n, z=1.96):
+    """Wilson interval — an honest error bar on a small sample. Ten pairs cannot
+    prove indistinguishability; they can only fail to find a difference, and the
+    width of this interval is the difference between those two sentences."""
+    if not n:
+        return 0.0, 1.0
+    p = k / float(n)
+    d = 1 + z * z / n
+    c = p + z * z / (2 * n)
+    s = z * ((p * (1 - p) / n + z * z / (4 * n * n)) ** 0.5)
+    return max(0.0, (c - s) / d), min(1.0, (c + s) / d)
+
+
 def score():
     """Read the filled sheet against the key. Kept in the tool so the arithmetic
     is not done by the person who wants a particular answer."""
     key = {r["pair"]: r for r in json.loads((WORK / "key.json").read_text(encoding="utf-8"))["pairs"]}
     text = (WORK / "sheet.md").read_text(encoding="utf-8")
-    named = pref = answered = 0
+    named = pref = answered = pref_answered = 0
     by_class = {}
     for line in text.splitlines():
         if not line.startswith("| ") or "which" in line or line.startswith("|---"):
@@ -253,23 +266,41 @@ def score():
             continue
         answered += 1
         klass = key[p].get("opponent_class", "hand")
-        by_class.setdefault(klass, [0, 0, 0])
+        by_class.setdefault(klass, [0, 0, 0, 0])
         by_class[klass][0] += 1
         if key[p].get(cols[1].upper(), {}).get("kind") == "composed":
             named += 1; by_class[klass][1] += 1
-        if cols[2] and key[p].get(cols[2].upper(), {}).get("kind") == "composed":
-            pref += 1; by_class[klass][2] += 1
+        if cols[2]:
+            by_class[klass][3] += 1
+            pref_answered += 1
+            if key[p].get(cols[2].upper(), {}).get("kind") == "composed":
+                pref += 1; by_class[klass][2] += 1
     if not answered:
         print("no answers in sheet.md yet")
         return
     print("answered %d pairs" % answered)
     print("  discrimination : %d/%d = %.0f%% named the machine correctly (50%% = indistinguishable)"
           % (named, answered, 100.0 * named / answered))
-    print("  preference     : %d/%d = %.0f%% preferred the machine's map"
-          % (pref, answered, 100.0 * pref / answered))
-    for k, (tot, nm, pf) in sorted(by_class.items()):
-        print("  vs %-6s      : n=%d  named %.0f%%  preferred %.0f%%"
-              % (k, tot, 100.0 * nm / tot, 100.0 * pf / tot))
+    # An unanswered question is not a vote against. The first run of this
+    # reported "0% preferred the machine" when the preference column was simply
+    # blank — a missing measurement dressed as a finding, which is the exact
+    # failure this harness exists to prevent.
+    if pref_answered:
+        print("  preference     : %d/%d = %.0f%% preferred the machine's map"
+              % (pref, pref_answered, 100.0 * pref / pref_answered))
+    else:
+        print("  preference     : NOT ANSWERED (0 of %d) — no result, not a zero" % answered)
+    for k, (tot, nm, pf, pa) in sorted(by_class.items()):
+        print("  vs %-6s      : n=%d  named %.0f%%  preference %s"
+              % (k, tot, 100.0 * nm / tot,
+                 ("%.0f%% (n=%d)" % (100.0 * pf / pa, pa)) if pa else "not answered"))
+    # how surprised should we be? exact two-sided binomial against a coin
+    from math import comb
+    k_ = min(named, answered - named)
+    tail = sum(comb(answered, i) for i in range(0, k_ + 1)) / float(2 ** answered)
+    lo, hi = _wilson(named, answered)
+    print("  against chance : two-sided p = %.2f   95%% CI [%.0f%%, %.0f%%]"
+          % (min(1.0, 2 * tail), 100 * lo, 100 * hi))
 
 
 def main():
