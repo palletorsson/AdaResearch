@@ -28,7 +28,11 @@
     {
      "token": "you_are_here",
      "text": "You are here",
-     "by": "hand"
+     "by": "hand",
+     "lock": [
+      7,
+      4
+     ]
     },
     {
      "token": "interactive_point_origin",
@@ -36,8 +40,8 @@
      "by": "hand",
      "support_m": 0.95,
      "lock": [
-      9,
-      5
+      7,
+      6
      ]
     },
     {
@@ -46,23 +50,36 @@
      "by": "hand",
      "config": {
       "floating_point": 1
-     }
+     },
+     "lock": [
+      3,
+      3
+     ]
     },
     {
      "token": "fontana_puncture",
      "text": "the one point, pierced",
-     "by": "claude"
+     "by": "claude",
+     "lock": [
+      7,
+      8
+     ]
     },
     {
      "token": "floating_sphere_field",
-     "text": "“Show me what you can do with those hands”\n\nGrab the ball.",
-     "by": "hand",
-     "gap": 1
+     "gap": 1,
+     "text": "floating spheres all around me",
+     "by": "hand"
     },
     {
      "token": "grab_sphere_point_snap",
      "text": "A point you can take; it snaps.",
      "by": "claude"
+    },
+    {
+     "token": "interactive_point_origin_force",
+     "text": "“Show me what you can do with those hands”\n\nGrab the ball.",
+     "by": "hand"
     }
    ],
    "rooms": 5,
@@ -76,7 +93,12 @@
     {
      "token": "do_not_cross_barrier",
      "text": "Do not cross this line ...",
-     "by": "hand"
+     "by": "hand",
+     "lock": [
+      7,
+      11
+     ],
+     "rotation": 90
     },
     {
      "token": "klee_walking_point",
@@ -96,7 +118,11 @@
     {
      "token": "line",
      "text": "two points is a line — it measures",
-     "by": "hand"
+     "by": "hand",
+     "lock": [
+      7,
+      16
+     ]
     },
     {
      "token": "perspective_lines",
@@ -134,25 +160,39 @@
      "by": "claude"
     },
     {
-     "token": "lightrod"
+     "token": "lightrod",
+     "text": "A row of light rods is a punctuation mark for space",
+     "by": "draft"
     },
     {
-     "token": "scale_lines"
+     "token": "scale_lines",
+     "text": "every measurement is relative — scale only makes sense from a chosen reference",
+     "by": "draft"
     },
     {
-     "token": "science_screen"
+     "token": "science_screen",
+     "text": "the map is not the territory — science_screen shows a flattened version of the algorithm you are already inside",
+     "by": "draft"
     },
     {
-     "token": "cube_scene"
+     "token": "cube_scene",
+     "text": "a unit that has never been divided is not proven indivisible",
+     "by": "draft"
     },
     {
-     "token": "dark_sphere"
+     "token": "dark_sphere",
+     "text": "some things in a space exist not to be used but to be sensed",
+     "by": "draft"
     },
     {
-     "token": "plus_line_puzzle"
+     "token": "plus_line_puzzle",
+     "text": "perpendicularity is defined by the dot product equaling zero",
+     "by": "draft"
     },
     {
-     "token": "modulor_man_demo"
+     "token": "modulor_man_demo",
+     "text": "a standard human is not a fact about humans. It is a decision about which ones the building will …",
+     "by": "draft"
     }
    ],
    "rooms": 6,
@@ -220,7 +260,9 @@
      "by": "claude"
     },
     {
-     "token": "catalyst_vent"
+     "token": "catalyst_vent",
+     "text": "the vent is not malicious -- it is the biome leaking",
+     "by": "draft"
     },
     {
      "token": "triangleprofiles",
@@ -276,10 +318,14 @@
      "by": "claude"
     },
     {
-     "token": "path_game_controller"
+     "token": "path_game_controller",
+     "text": "a game is two truths and a verdict — can you still cross",
+     "by": "draft"
     },
     {
-     "token": "path_watchdog"
+     "token": "path_watchdog",
+     "text": "a level is solvable until someone proves it isn't",
+     "by": "draft"
     },
     {
      "token": "becoming_catalyst",
@@ -292,7 +338,9 @@
      "by": "hand"
     },
     {
-     "token": "tentacle_placer"
+     "token": "tentacle_placer",
+     "text": "the tentacle is the lab's gesture that primitives are FETCHED",
+     "by": "draft"
     }
    ],
    "hero": "grab_trihedron"
@@ -336,10 +384,14 @@
      "by": "claude"
     },
     {
-     "token": "library_rack"
+     "token": "library_rack",
+     "text": "a library is not the objects — it is the act of organizing them so they can be found",
+     "by": "draft"
     },
     {
-     "token": "diamonds"
+     "token": "diamonds",
+     "text": "complex regular patterns emerge from simple repeated rules",
+     "by": "draft"
     },
     {
      "token": "platonic_grabbables",
@@ -347,19 +399,29 @@
      "by": "claude"
     },
     {
-     "token": "plus"
+     "token": "plus",
+     "text": "symmetry is a property of the transformation group that leaves a shape invariant",
+     "by": "draft"
     },
     {
-     "token": "grab_octahedron"
+     "token": "grab_octahedron",
+     "text": "the octahedron has more symmetry than it first appears",
+     "by": "draft"
     },
     {
-     "token": "sphere_mid"
+     "token": "sphere_mid",
+     "text": "resolution is a budget decision — there is no correct polygon count",
+     "by": "draft"
     },
     {
-     "token": "star_primitive"
+     "token": "star_primitive",
+     "text": "a star is not drawn — it is a specific list of vertices and the faces that connect them",
+     "by": "draft"
     },
     {
-     "token": "lshape"
+     "token": "lshape",
+     "text": "non-convex shapes require explicit geometry at re-entrant corners",
+     "by": "draft"
     },
     {
      "token": "hole_with_cones",
@@ -372,31 +434,49 @@
      "by": "claude"
     },
     {
-     "token": "sphere_high"
+     "token": "sphere_high",
+     "text": "there is no smooth sphere in real-time 3D — only denser approximations approaching one",
+     "by": "draft"
     },
     {
-     "token": "righttriangle"
+     "token": "righttriangle",
+     "text": "the right angle is the basis of all rectangular coordinate systems",
+     "by": "draft"
     },
     {
-     "token": "sphere_low"
+     "token": "sphere_low",
+     "text": "the low-poly sphere is more honest than the high-poly one",
+     "by": "draft"
     },
     {
-     "token": "capsule"
+     "token": "capsule",
+     "text": "a capsule is a cylinder that had to be capped so nothing would be sharp",
+     "by": "draft"
     },
     {
-     "token": "torus_radials_rings"
+     "token": "torus_radials_rings",
+     "text": "the torus is topologically distinct from the sphere",
+     "by": "draft"
     },
     {
-     "token": "roughrock"
+     "token": "roughrock",
+     "text": "nature's irregularity is not random — it is deterministic noise that we lack the seed to …",
+     "by": "draft"
     },
     {
-     "token": "snap_octahedron_puzzle"
+     "token": "snap_octahedron_puzzle",
+     "text": "the octahedron is the cube's dual — swap faces and vertices and you get the other",
+     "by": "draft"
     },
     {
-     "token": "capsule_radials_rings"
+     "token": "capsule_radials_rings",
+     "text": "the capsule is the physicist's preferred solid",
+     "by": "draft"
     },
     {
-     "token": "prism_block"
+     "token": "prism_block",
+     "text": "subdividing a triangle is not the same operation as subdividing a square. The",
+     "by": "draft"
     }
    ],
    "hero": "righttriangle"
@@ -433,7 +513,9 @@
      "by": "claude"
     },
     {
-     "token": "code_display"
+     "token": "code_display",
+     "text": "A tutorial is a placement-of-words. The library holds the words",
+     "by": "draft"
     },
     {
      "token": "pyramid",
@@ -446,10 +528,14 @@
      "by": "claude"
     },
     {
-     "token": "diamondtoruscollection"
+     "token": "diamondtoruscollection",
+     "text": "a torus is a circle of circles — its symmetry group allows equal radial distribution of any …",
+     "by": "draft"
     },
     {
-     "token": "pyramidlong"
+     "token": "pyramidlong",
+     "text": "proportion is a dimension of meaning — the same topology at different aspect ratios tells different …",
+     "by": "draft"
     }
    ],
    "hero": "durer_scene"

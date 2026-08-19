@@ -16991,7 +16991,7 @@
   }
  ],
  "counts": {
-  "branches_on_pearls": 1481,
+  "branches_on_pearls": 1482,
   "by_kind": {
    "contradicts": 0,
    "edge": 149,
@@ -17023,8 +17023,9 @@
      "interactive_point_origin": "Point Zero, now as an object in the exhibition",
      "CoordinateSystem3M": "Point one, position,\nno point without the coordinate system.\n\n3D Space.",
      "fontana_puncture": "the one point, pierced",
-     "floating_sphere_field": "“Show me what you can do with those hands”\n\nGrab the ball.",
-     "grab_sphere_point_snap": "A point you can take; it snaps."
+     "floating_sphere_field": "floating spheres all around me",
+     "grab_sphere_point_snap": "A point you can take; it snaps.",
+     "interactive_point_origin_force": "“Show me what you can do with those hands”\n\nGrab the ball."
     },
     "says_by": {
      "folding_past": "hand",
@@ -17035,7 +17036,8 @@
      "CoordinateSystem3M": "hand",
      "fontana_puncture": "claude",
      "floating_sphere_field": "hand",
-     "grab_sphere_point_snap": "claude"
+     "grab_sphere_point_snap": "claude",
+     "interactive_point_origin_force": "hand"
     },
     "tokens_add": [
      "folding_past",
@@ -17047,7 +17049,6 @@
     ],
     "tokens_remove": [
      "do_not_cross_barrier",
-     "interactive_point_origin_force",
      "klee_walking_point",
      "lab_room",
      "point",
@@ -17062,7 +17063,8 @@
      "CoordinateSystem3M",
      "fontana_puncture",
      "floating_sphere_field",
-     "grab_sphere_point_snap"
+     "grab_sphere_point_snap",
+     "interactive_point_origin_force"
     ],
     "verse": {
      "floating_sphere_field": {
@@ -17079,9 +17081,21 @@
      "interactive_point_origin": 0.95
     },
     "locks": {
+     "you_are_here": [
+      7,
+      4
+     ],
      "interactive_point_origin": [
-      9,
-      5
+      7,
+      6
+     ],
+     "CoordinateSystem3M": [
+      3,
+      3
+     ],
+     "fontana_puncture": [
+      7,
+      8
      ]
     },
     "configs": {
@@ -17106,7 +17120,14 @@
      "laser_measure": "laser,",
      "laser_exploding_sphere": "laser.",
      "grabbable_line": "VR hands — the line in the hand",
-     "line_builder_3d": "here it forms a vector in 3d space"
+     "line_builder_3d": "here it forms a vector in 3d space",
+     "lightrod": "A row of light rods is a punctuation mark for space",
+     "scale_lines": "every measurement is relative — scale only makes sense from a chosen reference",
+     "science_screen": "the map is not the territory — science_screen shows a flattened version of the algorithm you are already inside",
+     "cube_scene": "a unit that has never been divided is not proven indivisible",
+     "dark_sphere": "some things in a space exist not to be used but to be sensed",
+     "plus_line_puzzle": "perpendicularity is defined by the dot product equaling zero",
+     "modulor_man_demo": "a standard human is not a fact about humans. It is a decision about which ones the building will …"
     },
     "says_by": {
      "do_not_cross_barrier": "hand",
@@ -17120,7 +17141,14 @@
      "laser_measure": "hand",
      "laser_exploding_sphere": "hand",
      "grabbable_line": "claude",
-     "line_builder_3d": "claude"
+     "line_builder_3d": "claude",
+     "lightrod": "draft",
+     "scale_lines": "draft",
+     "science_screen": "draft",
+     "cube_scene": "draft",
+     "dark_sphere": "draft",
+     "plus_line_puzzle": "draft",
+     "modulor_man_demo": "draft"
     },
     "join": true,
     "tokens_add": [
@@ -17151,7 +17179,22 @@
      "modulor_man_demo"
     ],
     "tokens_remove": [],
-    "hero": "klee_walking_point"
+    "hero": "klee_walking_point",
+    "locks": {
+     "do_not_cross_barrier": [
+      7,
+      11
+     ],
+     "line": [
+      7,
+      16
+     ]
+    },
+    "poses": {
+     "do_not_cross_barrier": {
+      "rotation": 90
+     }
+    }
    },
    {
     "map": "Point_Triangle_Context",
@@ -17161,6 +17204,7 @@
      "catalyst_pedestal": "the triangle. everything is made of triangles. the quad, the simplest mesh. the pyramid mesh.",
      "parasol_triangle": "everything is made of triangles",
      "triangle_line_puzzle": "three lines, one triangle",
+     "catalyst_vent": "the vent is not malicious -- it is the biome leaking",
      "triangleprofiles": "triangles, profiled",
      "folded_strip": "the fold",
      "draw_triangle_faces": "faces are triangles",
@@ -17174,6 +17218,7 @@
      "catalyst_pedestal": "hand",
      "parasol_triangle": "claude",
      "triangle_line_puzzle": "claude",
+     "catalyst_vent": "draft",
      "triangleprofiles": "claude",
      "folded_strip": "hand",
      "draw_triangle_faces": "claude",
@@ -17232,13 +17277,19 @@
     "pearl": "polythedra",
     "says": {
      "grab_trihedron": "three faces in the hand",
+     "path_game_controller": "a game is two truths and a verdict — can you still cross",
+     "path_watchdog": "a level is solvable until someone proves it isn't",
      "becoming_catalyst": "interactive cubes — becoming",
-     "pyramid_edit": "the pyramid mesh"
+     "pyramid_edit": "the pyramid mesh",
+     "tentacle_placer": "the tentacle is the lab's gesture that primitives are FETCHED"
     },
     "says_by": {
      "grab_trihedron": "claude",
+     "path_game_controller": "draft",
+     "path_watchdog": "draft",
      "becoming_catalyst": "claude",
-     "pyramid_edit": "hand"
+     "pyramid_edit": "hand",
+     "tentacle_placer": "draft"
     },
     "tokens_add": [],
     "tokens_remove": [],
@@ -17277,15 +17328,47 @@
     "pearl": "ignorance",
     "says": {
      "sphere": "the point, grown in every direction — and still not pi",
+     "library_rack": "a library is not the objects — it is the act of organizing them so they can be found",
+     "diamonds": "complex regular patterns emerge from simple repeated rules",
      "platonic_grabbables": "five solids, and the taxonomy ends. the rest is ignorance",
+     "plus": "symmetry is a property of the transformation group that leaves a shape invariant",
+     "grab_octahedron": "the octahedron has more symmetry than it first appears",
+     "sphere_mid": "resolution is a budget decision — there is no correct polygon count",
+     "star_primitive": "a star is not drawn — it is a specific list of vertices and the faces that connect them",
+     "lshape": "non-convex shapes require explicit geometry at re-entrant corners",
      "hole_with_cones": "a hole is not a thing — it is held by what is around it",
-     "truncatedtetrahedron": "a solid cut: what the taxonomy does to what it cannot hold"
+     "truncatedtetrahedron": "a solid cut: what the taxonomy does to what it cannot hold",
+     "sphere_high": "there is no smooth sphere in real-time 3D — only denser approximations approaching one",
+     "righttriangle": "the right angle is the basis of all rectangular coordinate systems",
+     "sphere_low": "the low-poly sphere is more honest than the high-poly one",
+     "capsule": "a capsule is a cylinder that had to be capped so nothing would be sharp",
+     "torus_radials_rings": "the torus is topologically distinct from the sphere",
+     "roughrock": "nature's irregularity is not random — it is deterministic noise that we lack the seed to …",
+     "snap_octahedron_puzzle": "the octahedron is the cube's dual — swap faces and vertices and you get the other",
+     "capsule_radials_rings": "the capsule is the physicist's preferred solid",
+     "prism_block": "subdividing a triangle is not the same operation as subdividing a square. The"
     },
     "says_by": {
      "sphere": "claude",
+     "library_rack": "draft",
+     "diamonds": "draft",
      "platonic_grabbables": "claude",
+     "plus": "draft",
+     "grab_octahedron": "draft",
+     "sphere_mid": "draft",
+     "star_primitive": "draft",
+     "lshape": "draft",
      "hole_with_cones": "claude",
-     "truncatedtetrahedron": "claude"
+     "truncatedtetrahedron": "claude",
+     "sphere_high": "draft",
+     "righttriangle": "draft",
+     "sphere_low": "draft",
+     "capsule": "draft",
+     "torus_radials_rings": "draft",
+     "roughrock": "draft",
+     "snap_octahedron_puzzle": "draft",
+     "capsule_radials_rings": "draft",
+     "prism_block": "draft"
     },
     "tokens_add": [],
     "tokens_remove": [],
@@ -17312,14 +17395,20 @@
     "says": {
      "durer_scene": "Dürer's polyhedron — the solid no taxonomy names, and the angel who keeps it",
      "snap_pyramid_puzzle": "the pyramid, snapped — held by the grid",
+     "code_display": "A tutorial is a placement-of-words. The library holds the words",
      "pyramid": "the pyramid: the triangle stood up, the first solid held",
-     "bigframe": "the frame: where the picture stops, and the trace does not"
+     "bigframe": "the frame: where the picture stops, and the trace does not",
+     "diamondtoruscollection": "a torus is a circle of circles — its symmetry group allows equal radial distribution of any …",
+     "pyramidlong": "proportion is a dimension of meaning — the same topology at different aspect ratios tells different …"
     },
     "says_by": {
      "durer_scene": "claude",
      "snap_pyramid_puzzle": "claude",
+     "code_display": "draft",
      "pyramid": "claude",
-     "bigframe": "claude"
+     "bigframe": "claude",
+     "diamondtoruscollection": "draft",
+     "pyramidlong": "draft"
     },
     "tokens_add": [],
     "tokens_remove": [],
@@ -17545,7 +17634,8 @@
       "CoordinateSystem3M",
       "fontana_puncture",
       "floating_sphere_field",
-      "grab_sphere_point_snap"
+      "grab_sphere_point_snap",
+      "interactive_point_origin_force"
      ],
      "blurb": "Before the point, infrastructure.",
      "rooms": 5,
@@ -17560,9 +17650,21 @@
       }
      },
      "locks": {
+      "you_are_here": [
+       7,
+       4
+      ],
       "interactive_point_origin": [
-       9,
-       5
+       7,
+       6
+      ],
+      "CoordinateSystem3M": [
+       3,
+       3
+      ],
+      "fontana_puncture": [
+       7,
+       8
       ]
      },
      "supports": {
@@ -17581,8 +17683,9 @@
       "interactive_point_origin": "Point Zero, now as an object in the exhibition",
       "CoordinateSystem3M": "Point one, position,\nno point without the coordinate system.\n\n3D Space.",
       "fontana_puncture": "the one point, pierced",
-      "floating_sphere_field": "“Show me what you can do with those hands”\n\nGrab the ball.",
-      "grab_sphere_point_snap": "A point you can take; it snaps."
+      "floating_sphere_field": "floating spheres all around me",
+      "grab_sphere_point_snap": "A point you can take; it snaps.",
+      "interactive_point_origin_force": "“Show me what you can do with those hands”\n\nGrab the ball."
      },
      "says_by": {
       "folding_past": "hand",
@@ -17593,11 +17696,11 @@
       "CoordinateSystem3M": "hand",
       "fontana_puncture": "claude",
       "floating_sphere_field": "hand",
-      "grab_sphere_point_snap": "claude"
+      "grab_sphere_point_snap": "claude",
+      "interactive_point_origin_force": "hand"
      },
      "excluded": [
       "do_not_cross_barrier",
-      "interactive_point_origin_force",
       "klee_walking_point",
       "lab_room",
       "point",
@@ -17635,6 +17738,21 @@
      "blurb": "A line connects two points.",
      "rooms": 6,
      "join": true,
+     "poses": {
+      "do_not_cross_barrier": {
+       "rotation": 90
+      }
+     },
+     "locks": {
+      "do_not_cross_barrier": [
+       7,
+       11
+      ],
+      "line": [
+       7,
+       16
+      ]
+     },
      "says": {
       "do_not_cross_barrier": "Do not cross this line ...",
       "klee_walking_point": "A line is a point that went for a walk.",
@@ -17647,7 +17765,14 @@
       "laser_measure": "laser,",
       "laser_exploding_sphere": "laser.",
       "grabbable_line": "VR hands — the line in the hand",
-      "line_builder_3d": "here it forms a vector in 3d space"
+      "line_builder_3d": "here it forms a vector in 3d space",
+      "lightrod": "A row of light rods is a punctuation mark for space",
+      "scale_lines": "every measurement is relative — scale only makes sense from a chosen reference",
+      "science_screen": "the map is not the territory — science_screen shows a flattened version of the algorithm you are already inside",
+      "cube_scene": "a unit that has never been divided is not proven indivisible",
+      "dark_sphere": "some things in a space exist not to be used but to be sensed",
+      "plus_line_puzzle": "perpendicularity is defined by the dot product equaling zero",
+      "modulor_man_demo": "a standard human is not a fact about humans. It is a decision about which ones the building will …"
      },
      "says_by": {
       "do_not_cross_barrier": "hand",
@@ -17661,7 +17786,14 @@
       "laser_measure": "hand",
       "laser_exploding_sphere": "hand",
       "grabbable_line": "claude",
-      "line_builder_3d": "claude"
+      "line_builder_3d": "claude",
+      "lightrod": "draft",
+      "scale_lines": "draft",
+      "science_screen": "draft",
+      "cube_scene": "draft",
+      "dark_sphere": "draft",
+      "plus_line_puzzle": "draft",
+      "modulor_man_demo": "draft"
      },
      "ordered": true
     },
@@ -17738,6 +17870,7 @@
       "catalyst_pedestal": "the triangle. everything is made of triangles. the quad, the simplest mesh. the pyramid mesh.",
       "parasol_triangle": "everything is made of triangles",
       "triangle_line_puzzle": "three lines, one triangle",
+      "catalyst_vent": "the vent is not malicious -- it is the biome leaking",
       "triangleprofiles": "triangles, profiled",
       "folded_strip": "the fold",
       "draw_triangle_faces": "faces are triangles",
@@ -17751,6 +17884,7 @@
       "catalyst_pedestal": "hand",
       "parasol_triangle": "claude",
       "triangle_line_puzzle": "claude",
+      "catalyst_vent": "draft",
       "triangleprofiles": "claude",
       "folded_strip": "hand",
       "draw_triangle_faces": "claude",
@@ -17778,13 +17912,19 @@
      "blurb": "A trihedron is a geometric configuration where three triangular faces meet at a single vertex, forming a corner of space.",
      "says": {
       "grab_trihedron": "three faces in the hand",
+      "path_game_controller": "a game is two truths and a verdict — can you still cross",
+      "path_watchdog": "a level is solvable until someone proves it isn't",
       "becoming_catalyst": "interactive cubes — becoming",
-      "pyramid_edit": "the pyramid mesh"
+      "pyramid_edit": "the pyramid mesh",
+      "tentacle_placer": "the tentacle is the lab's gesture that primitives are FETCHED"
      },
      "says_by": {
       "grab_trihedron": "claude",
+      "path_game_controller": "draft",
+      "path_watchdog": "draft",
       "becoming_catalyst": "claude",
-      "pyramid_edit": "hand"
+      "pyramid_edit": "hand",
+      "tentacle_placer": "draft"
      }
     },
     {
@@ -17855,15 +17995,47 @@
      "blurb": "Ignorance is not the absence of knowledge but a structural limit.",
      "says": {
       "sphere": "the point, grown in every direction — and still not pi",
+      "library_rack": "a library is not the objects — it is the act of organizing them so they can be found",
+      "diamonds": "complex regular patterns emerge from simple repeated rules",
       "platonic_grabbables": "five solids, and the taxonomy ends. the rest is ignorance",
+      "plus": "symmetry is a property of the transformation group that leaves a shape invariant",
+      "grab_octahedron": "the octahedron has more symmetry than it first appears",
+      "sphere_mid": "resolution is a budget decision — there is no correct polygon count",
+      "star_primitive": "a star is not drawn — it is a specific list of vertices and the faces that connect them",
+      "lshape": "non-convex shapes require explicit geometry at re-entrant corners",
       "hole_with_cones": "a hole is not a thing — it is held by what is around it",
-      "truncatedtetrahedron": "a solid cut: what the taxonomy does to what it cannot hold"
+      "truncatedtetrahedron": "a solid cut: what the taxonomy does to what it cannot hold",
+      "sphere_high": "there is no smooth sphere in real-time 3D — only denser approximations approaching one",
+      "righttriangle": "the right angle is the basis of all rectangular coordinate systems",
+      "sphere_low": "the low-poly sphere is more honest than the high-poly one",
+      "capsule": "a capsule is a cylinder that had to be capped so nothing would be sharp",
+      "torus_radials_rings": "the torus is topologically distinct from the sphere",
+      "roughrock": "nature's irregularity is not random — it is deterministic noise that we lack the seed to …",
+      "snap_octahedron_puzzle": "the octahedron is the cube's dual — swap faces and vertices and you get the other",
+      "capsule_radials_rings": "the capsule is the physicist's preferred solid",
+      "prism_block": "subdividing a triangle is not the same operation as subdividing a square. The"
      },
      "says_by": {
       "sphere": "claude",
+      "library_rack": "draft",
+      "diamonds": "draft",
       "platonic_grabbables": "claude",
+      "plus": "draft",
+      "grab_octahedron": "draft",
+      "sphere_mid": "draft",
+      "star_primitive": "draft",
+      "lshape": "draft",
       "hole_with_cones": "claude",
-      "truncatedtetrahedron": "claude"
+      "truncatedtetrahedron": "claude",
+      "sphere_high": "draft",
+      "righttriangle": "draft",
+      "sphere_low": "draft",
+      "capsule": "draft",
+      "torus_radials_rings": "draft",
+      "roughrock": "draft",
+      "snap_octahedron_puzzle": "draft",
+      "capsule_radials_rings": "draft",
+      "prism_block": "draft"
      }
     },
     {
@@ -17905,14 +18077,20 @@
      "says": {
       "durer_scene": "Dürer's polyhedron — the solid no taxonomy names, and the angel who keeps it",
       "snap_pyramid_puzzle": "the pyramid, snapped — held by the grid",
+      "code_display": "A tutorial is a placement-of-words. The library holds the words",
       "pyramid": "the pyramid: the triangle stood up, the first solid held",
-      "bigframe": "the frame: where the picture stops, and the trace does not"
+      "bigframe": "the frame: where the picture stops, and the trace does not",
+      "diamondtoruscollection": "a torus is a circle of circles — its symmetry group allows equal radial distribution of any …",
+      "pyramidlong": "proportion is a dimension of meaning — the same topology at different aspect ratios tells different …"
      },
      "says_by": {
       "durer_scene": "claude",
       "snap_pyramid_puzzle": "claude",
+      "code_display": "draft",
       "pyramid": "claude",
-      "bigframe": "claude"
+      "bigframe": "claude",
+      "diamondtoruscollection": "draft",
+      "pyramidlong": "draft"
      }
     }
    ],
