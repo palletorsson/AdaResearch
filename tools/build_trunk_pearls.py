@@ -156,6 +156,12 @@ def seed(trunk_doc: dict) -> dict:
                     if e.get("blurb"):
                         p["blurb"] = str(e["blurb"])
                     p["tokens"] = [t for t in p["tokens"] if t not in set(e.get("tokens_remove", []))]
+                    # tokens_order: the hand's reading order of the bodies (/speak paragraph) —
+                    # the order the walk meets them; unknown tokens keep their place after
+                    if e.get("tokens_order"):
+                        want = [t for t in e["tokens_order"] if t in p["tokens"] or t in (e.get("tokens_add") or [])]
+                        rest = [t for t in p["tokens"] if t not in want]
+                        p["tokens"] = want + rest
                     for t in e.get("tokens_add", []):
                         if t not in p["tokens"]:
                             p["tokens"].append(t)
