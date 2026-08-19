@@ -88,6 +88,15 @@ def migrate(chapter: str) -> dict:
                 ln["lock"] = list(p["locks"][tok])
             if (p.get("configs") or {}).get(tok):
                 ln["config"] = dict(p["configs"][tok])
+            if (p.get("footprints") or {}).get(tok):
+                ln["footprint"] = list(p["footprints"][tok])
+            if (p.get("reaches") or {}).get(tok):
+                ln["reach"] = dict(p["reaches"][tok])
+            if (p.get("counts") or {}).get(tok):
+                c = p["counts"][tok]
+                ln["count"] = int(c.get("count", 1))
+                if c.get("spread"): ln["spread"] = str(c["spread"])
+                if int(c.get("gap", 1)) != 1: ln["gap_cells"] = int(c["gap"])
             for k2, v2 in ((p.get("poses") or {}).get(tok) or {}).items():
                 ln[k2] = v2
             v = verse.get(tok)
@@ -183,6 +192,23 @@ def compile_book(chapter: str, reseed: bool = True) -> dict:
             if pose: poses[ln["token"]] = pose
         if poses: e["poses"] = poses
         else: e.pop("poses", None)
+        # THE BODY IS NOT THE REACH (2026-08-19): a laser's beam is 50 m of AABB and
+        # 1 x 1 of floor. `footprint` declares the body; `reach` declares the beam —
+        # a sightline the negotiator keeps clear of tall bodies, not floor it owns.
+        footprints = {ln["token"]: [int(ln["footprint"][0]), int(ln["footprint"][1])] for ln in bp.get("lines", []) if ln.get("token") and isinstance(ln.get("footprint"), list) and len(ln["footprint"]) >= 2}
+        if footprints: e["footprints"] = footprints
+        else: e.pop("footprints", None)
+        reaches = {ln["token"]: dict(ln["reach"]) for ln in bp.get("lines", []) if ln.get("token") and isinstance(ln.get("reach"), dict) and ln["reach"]}
+        if reaches: e["reaches"] = reaches
+        else: e.pop("reaches", None)
+        # A GROUP IS A BODY (Point_Animatedcube stands four cube builders): `count`
+        # with a `spread` — the museum stamps N, the negotiator reserves the block.
+        counts = {}
+        for ln in bp.get("lines", []):
+            if ln.get("token") and int(ln.get("count") or 1) > 1:
+                counts[ln["token"]] = {"count": int(ln["count"]), "spread": str(ln.get("spread") or "square"), "gap": int(ln.get("gap_cells") or 1)}
+        if counts: e["counts"] = counts
+        else: e.pop("counts", None)
         configs = {ln["token"]: dict(ln["config"]) for ln in bp.get("lines", []) if ln.get("token") and isinstance(ln.get("config"), dict) and ln["config"]}
         if configs: e["configs"] = configs
         else: e.pop("configs", None)

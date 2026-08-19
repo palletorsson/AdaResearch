@@ -145,7 +145,10 @@ def pearl_walks(chapter: str, trunk: dict[str, Any] | None = None) -> list[dict[
                                **({"support_m": float(p["supports"][tok])} if (p.get("supports") or {}).get(tok) else {}),
                                **({"lock": list(p["locks"][tok])} if (p.get("locks") or {}).get(tok) else {}),
                                **({"config": dict(p["configs"][tok])} if (p.get("configs") or {}).get(tok) else {}),
-                               **({"pose": dict(p["poses"][tok])} if (p.get("poses") or {}).get(tok) else {})})
+                               **({"pose": dict(p["poses"][tok])} if (p.get("poses") or {}).get(tok) else {}),
+                               **({"footprint": list(p["footprints"][tok])} if (p.get("footprints") or {}).get(tok) else {}),
+                               **({"reach": dict(p["reaches"][tok])} if (p.get("reaches") or {}).get(tok) else {}),
+                               **({"count": dict(p["counts"][tok])} if (p.get("counts") or {}).get(tok) else {})})
             for b in branches:
                 if b.get("pearl") == name and b.get("provenance") == "hand" and b.get("token") and b["token"] not in p.get("tokens", []):
                     rows_o.append({"lookup": b["token"], "walk_kind": b.get("kind", "extends"), "why": b.get("why", ""), "provenance": "hand",
@@ -166,7 +169,10 @@ def pearl_walks(chapter: str, trunk: dict[str, Any] | None = None) -> list[dict[
                                    **({"support_m": float(q["supports"][tok])} if (q.get("supports") or {}).get(tok) else {}),
                                    **({"lock": list(q["locks"][tok])} if (q.get("locks") or {}).get(tok) else {}),
                                    **({"config": dict(q["configs"][tok])} if (q.get("configs") or {}).get(tok) else {}),
-                                   **({"pose": dict(q["poses"][tok])} if (q.get("poses") or {}).get(tok) else {})})
+                                   **({"pose": dict(q["poses"][tok])} if (q.get("poses") or {}).get(tok) else {}),
+                                   **({"footprint": list(q["footprints"][tok])} if (q.get("footprints") or {}).get(tok) else {}),
+                                   **({"reach": dict(q["reaches"][tok])} if (q.get("reaches") or {}).get(tok) else {}),
+                                   **({"count": dict(q["counts"][tok])} if (q.get("counts") or {}).get(tok) else {})})
                 pages.append({"pearl": q.get("pearl"), "tokens": q_toks, "map": q.get("map", "")})
                 rooms_total += int(q.get("rooms") or 0)
                 excl |= set(q.get("excluded", []))

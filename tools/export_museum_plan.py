@@ -201,7 +201,11 @@ def plan_museum(key: str, tokens: list[str],
     # negotiator for a hanging balcony body (see spatial_negotiation.run)
     venue_asks = {t: "balcony" for t, c in (placement_context or {}).items()
                   if str((c or {}).get("walk_space", "")) == "balcony"}
-    _, placements, occupancy = run(tokens, plan=plan, venue_asks=venue_asks or None, reading=reading, fixed=fixed)
+    ctx = placement_context or {}
+    _, placements, occupancy = run(tokens, plan=plan, venue_asks=venue_asks or None, reading=reading, fixed=fixed,
+                                   footprints={t: c["footprint"] for t, c in ctx.items() if (c or {}).get("footprint")},
+                                   reaches={t: c["reach"] for t, c in ctx.items() if (c or {}).get("reach")},
+                                   counts={t: c["count"] for t, c in ctx.items() if (c or {}).get("count")})
 
     placed: list[dict[str, Any]] = []
     rejected: list[dict[str, Any]] = []

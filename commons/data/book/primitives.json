@@ -137,17 +137,41 @@
     {
      "token": "laser_sword",
      "text": "laser,",
-     "by": "hand"
+     "by": "hand",
+     "footprint": [
+      1,
+      1
+     ],
+     "reach": {
+      "axis": "z",
+      "length": 6
+     }
     },
     {
      "token": "laser_measure",
      "text": "laser,",
-     "by": "hand"
+     "by": "hand",
+     "footprint": [
+      1,
+      1
+     ],
+     "reach": {
+      "axis": "z",
+      "length": 14
+     }
     },
     {
      "token": "laser_exploding_sphere",
      "text": "laser.",
-     "by": "hand"
+     "by": "hand",
+     "footprint": [
+      1,
+      1
+     ],
+     "reach": {
+      "axis": "x",
+      "length": 5
+     }
     },
     {
      "token": "grabbable_line",
@@ -167,7 +191,15 @@
     {
      "token": "scale_lines",
      "text": "every measurement is relative — scale only makes sense from a chosen reference",
-     "by": "draft"
+     "by": "draft",
+     "footprint": [
+      1,
+      1
+     ],
+     "reach": {
+      "axis": "z",
+      "length": 24
+     }
     },
     {
      "token": "science_screen",
@@ -352,7 +384,9 @@
     {
      "token": "animatedcubebuilder",
      "text": "the cube world, built",
-     "by": "claude"
+     "by": "claude",
+     "count": 4,
+     "spread": "square"
     },
     {
      "token": "polyhedron_nets_cube",
@@ -360,7 +394,8 @@
      "by": "claude"
     }
    ],
-   "hero": "animatedcubebuilder"
+   "hero": "animatedcubebuilder",
+   "ordered": true
   },
   {
    "pearl": "primitives",

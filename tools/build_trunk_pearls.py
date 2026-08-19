@@ -158,6 +158,9 @@ def seed(trunk_doc: dict) -> dict:
                         for tk in p["foyer"]:
                             if tk not in p["tokens"]:
                                 p["tokens"].append(tk)
+                    for key_extra in ("footprints", "reaches", "counts"):
+                        if e.get(key_extra):
+                            p[key_extra] = dict(e[key_extra])   # body vs reach, and groups (tools/book.py)
                     if e.get("poses"):
                         p["poses"] = dict(e["poses"])          # {token: {rotation, offset, scale}} — the body's pose (tools/book.py)
                     if e.get("configs"):

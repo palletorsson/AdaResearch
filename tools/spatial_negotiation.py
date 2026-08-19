@@ -1128,7 +1128,9 @@ def _reading_slots(all_slots: list, min_z: int, last_x: int, span: int) -> list:
 
 def run(artifacts: list[str], plan: FloorPlan | None = None,
         bays: int = 3, venue_asks: dict[str, str] | None = None,
-        reading: bool = False, fixed: dict[str, tuple[int, int]] | None = None) -> tuple[FloorPlan, list[Placement], Occupancy]:
+        reading: bool = False, fixed: dict[str, tuple[int, int]] | None = None,
+        footprints: dict | None = None, reaches: dict | None = None,
+        counts: dict | None = None) -> tuple[FloorPlan, list[Placement], Occupancy]:
     """Negotiate a whole exhibition brief in order.
 
     venue_asks: BALCONIES-BY-ASK (2026-08-18). A hand may say, on the trunk,
@@ -1176,6 +1178,20 @@ def run(artifacts: list[str], plan: FloorPlan | None = None,
         elif reading:
             plan.slots = [s for s in all_slots if s.venue != "interior" or s.cell[1] >= min_z]
         contract = staged_contract(lookup)
+        # THE BODY IS NOT THE REACH (2026-08-19, Palle: "I want several lasers … and
+        # they have the footprint of 1 m even if the laser can extend"). laser_measure
+        # measures 0.17 x 50.07 m because the BEAM is in its AABB, so the negotiator
+        # read it as a 1 x 51 precinct and sent it to a courtyard. A declared
+        # footprint is the body; the beam is negotiated below as a sightline.
+        fp_ask = (footprints or {}).get(lookup)
+        if fp_ask:
+            fw, fd = max(1, int(fp_ask[0])), max(1, int(fp_ask[1]))
+            b = list(contract.body_m)
+            contract = replace(contract, footprint_cells=[fw, fd],
+                               body_m=[min(b[0], float(fw)), min(b[1], float(fd)), b[2]],
+                               containment="exhibited", preferred_venue="interior",
+                               provenance={**dict(getattr(contract, "provenance", {}) or {}),
+                                           "footprint_cells": f"the book declares the BODY {fw} x {fd} cells; what extends beyond it is reach, not floor"})
         if lookup in fixed and contract.preferred_venue != "interior":
             # the hand put this body IN the hall (a ruled cell): a precinct to the
             # negotiator is an exhibit to the hand — it negotiates its footprint
@@ -1245,6 +1261,21 @@ def run(artifacts: list[str], plan: FloorPlan | None = None,
                     min_z, last_x = az_, ax_
                 elif az_ == min_z:
                     last_x = max(last_x, ax_)
+        # THE REACH: the beam claims its cells SOFTLY (presentation, not physical) —
+        # a body may still stand there at a cost, nothing is refused for crossing it,
+        # and the trace says how far it goes. {"axis": "z"|"x", "length": m}
+        reach = (reaches or {}).get(lookup)
+        if reach and p.result == "ACCEPT" and p.anchor is not None:
+            ax = str(reach.get("axis", "z")).lower()
+            ln_cells = max(1, int(round(float(reach.get("length", 0)))))
+            sign = -1 if str(reach.get("towards", "")) in ("-", "back", "entrance") else 1
+            beam = set()
+            for k in range(1, ln_cells + 1):
+                c = (p.anchor[0] + sign * k, p.anchor[1]) if ax == "x" else (p.anchor[0], p.anchor[1] + sign * k)
+                beam.add((c[0] - p.anchor[0], c[1] - p.anchor[1]))
+            occ.commit(lookup + "~beam", Masks(physical=set(), circulation=set(), presentation=beam), p.anchor)
+            p.traces.append(Trace(rule="reach", status="pass",
+                                  detail=f"the beam runs {ln_cells} cells along {ax}: a sightline the room keeps open, not floor this body owns"))
         if p.result == "ACCEPT" and p.masks:
             occ.commit(lookup, p.masks, p.anchor)
             if p.mode == "against_wall" and p.wall:
@@ -1258,6 +1289,51 @@ def run(artifacts: list[str], plan: FloorPlan | None = None,
                         wall.occupied.append({"token": lookup, "rect": rect,
                                               "role": contract.importance})
         out.append(p)
+        # A GROUP IS A BODY: `count` stamps N copies around the placed one, each its
+        # own placement (its own plan row), all reserved so nothing else moves in.
+        grp = (counts or {}).get(lookup)
+        if grp and p.result == "ACCEPT" and p.anchor is not None and p.masks:
+            n_want = max(1, int(grp.get("count", 1)))
+            gap = max(1, int(grp.get("gap", 1)))
+            spread = str(grp.get("spread", "square"))
+            step = gap + max(1, int(contract.footprint_cells[0]))
+            stepz = gap + max(1, int(contract.footprint_cells[1]))
+            offs = []
+            if spread == "row":
+                offs = [(i * step, 0) for i in range(1, n_want)]
+            elif spread == "column":
+                offs = [(0, i * stepz) for i in range(1, n_want)]
+            else:                                   # square: fill a block row by row
+                import math as _mm
+                side = int(_mm.ceil(_mm.sqrt(n_want)))
+                for i in range(1, n_want):
+                    offs.append(((i % side) * step, (i // side) * stepz))
+            # the hall's own floor, not the union of the bay pockets: a group can
+            # stand between two slots (the pockets left 2 of 4 cubes homeless)
+            free_cells = {(x, z) for z, rowg in enumerate(plan.grid) for x, ch in enumerate(rowg)
+                          if str(ch).startswith(("1", "2", "3"))}
+            if not free_cells:
+                free_cells = {c for s in plan.slots if s.venue == "interior" for c in (s.free_cells or set())}
+            made = 0
+            for dx, dz in offs:
+                # the ideal offset first, then a small nudge — a pier or a doorway
+                # should cost the group a cell, not a member (3 of 4 cubes stood)
+                a2 = None
+                for ndx, ndz in [(0, 0), (1, 0), (0, 1), (-1, 0), (0, -1), (1, 1), (-1, 1), (1, -1), (-1, -1), (2, 0), (0, 2)]:
+                    cand = (p.anchor[0] + dx + ndx, p.anchor[1] + dz + ndz)
+                    cells_c = {(cand[0] + c[0], cand[1] + c[1]) for c in p.masks.physical}
+                    if cells_c <= free_cells and not any(c in occ.physical for c in cells_c):
+                        a2 = cand; break
+                if a2 is None:
+                    continue
+                cells2 = {(a2[0] + c[0], a2[1] + c[1]) for c in p.masks.physical}
+                occ.commit(f"{lookup}#{made + 2}", Masks(physical=set(p.masks.physical), circulation=set(), presentation=set()), a2)
+                p2 = replace(p, anchor=a2, traces=list(p.traces) + [Trace(rule="group", status="pass",
+                             detail=f"{made + 2} of {n_want}: the book asks for a group of {n_want} ({spread}, {gap} cell gap)")])
+                out.append(p2)
+                made += 1
+            p.traces.append(Trace(rule="group", status="pass" if made == n_want - 1 else "compromised",
+                                  detail=f"a group of {n_want} asked, {made + 1} placed ({spread})"))
         bay_cursor += 1
     return plan, out, occ
 

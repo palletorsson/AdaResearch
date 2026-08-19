@@ -17194,6 +17194,42 @@
      "do_not_cross_barrier": {
       "rotation": 90
      }
+    },
+    "footprints": {
+     "laser_sword": [
+      1,
+      1
+     ],
+     "laser_measure": [
+      1,
+      1
+     ],
+     "laser_exploding_sphere": [
+      1,
+      1
+     ],
+     "scale_lines": [
+      1,
+      1
+     ]
+    },
+    "reaches": {
+     "laser_sword": {
+      "axis": "z",
+      "length": 6
+     },
+     "laser_measure": {
+      "axis": "z",
+      "length": 14
+     },
+     "laser_exploding_sphere": {
+      "axis": "x",
+      "length": 5
+     },
+     "scale_lines": {
+      "axis": "z",
+      "length": 24
+     }
     }
    },
    {
@@ -17308,7 +17344,18 @@
     },
     "tokens_add": [],
     "tokens_remove": [],
-    "hero": "animatedcubebuilder"
+    "hero": "animatedcubebuilder",
+    "tokens_order": [
+     "animatedcubebuilder",
+     "polyhedron_nets_cube"
+    ],
+    "counts": {
+     "animatedcubebuilder": {
+      "count": 4,
+      "spread": "square",
+      "gap": 1
+     }
+    }
    },
    {
     "map": "Chamber_Primitives",
@@ -21479,6 +21526,42 @@
      "blurb": "A line connects two points.",
      "rooms": 6,
      "join": true,
+     "footprints": {
+      "laser_sword": [
+       1,
+       1
+      ],
+      "laser_measure": [
+       1,
+       1
+      ],
+      "laser_exploding_sphere": [
+       1,
+       1
+      ],
+      "scale_lines": [
+       1,
+       1
+      ]
+     },
+     "reaches": {
+      "laser_sword": {
+       "axis": "z",
+       "length": 6
+      },
+      "laser_measure": {
+       "axis": "z",
+       "length": 14
+      },
+      "laser_exploding_sphere": {
+       "axis": "x",
+       "length": 5
+      },
+      "scale_lines": {
+       "axis": "z",
+       "length": 24
+      }
+     },
      "poses": {
       "do_not_cross_barrier": {
        "rotation": 90
@@ -21679,6 +21762,13 @@
       "polyhedron_nets_cube"
      ],
      "blurb": "A manipulable quad-based object where you can drag cube corners.",
+     "counts": {
+      "animatedcubebuilder": {
+       "count": 4,
+       "spread": "square",
+       "gap": 1
+      }
+     },
      "says": {
       "animatedcubebuilder": "the cube world, built",
       "polyhedron_nets_cube": "the fold — a cube is a net"
@@ -21686,7 +21776,8 @@
      "says_by": {
       "animatedcubebuilder": "claude",
       "polyhedron_nets_cube": "claude"
-     }
+     },
+     "ordered": true
     },
     {
      "pearl": "primitives",

@@ -231,6 +231,12 @@ def _apply_walk(walk: dict[str, Any], cast_context: dict[str, Any]) -> list[str]
             cast_context[tok]["config"] = dict(r["config"])     # the book's apply_grid_config for this body
         if r.get("pose"):
             cast_context[tok]["pose"] = dict(r["pose"])         # the book's rotation / offset / scale for this body
+        if r.get("footprint"):
+            cast_context[tok]["footprint"] = [int(r["footprint"][0]), int(r["footprint"][1])]   # the BODY, not the reach
+        if r.get("reach"):
+            cast_context[tok]["reach"] = dict(r["reach"])       # the beam: a sightline, not floor
+        if r.get("count"):
+            cast_context[tok]["count"] = dict(r["count"])       # a group: N bodies, one block
         if walk.get("pearl"):
             cast_context[tok]["pearl"] = walk["pearl"]
     return list(walk["cast"])
