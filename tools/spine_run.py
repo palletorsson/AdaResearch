@@ -223,6 +223,8 @@ def _apply_walk(walk: dict[str, Any], cast_context: dict[str, Any]) -> list[str]
         cast_context[tok]["walk_kind"] = r["walk_kind"]
         cast_context[tok]["walk_why"] = r.get("why", "")
         cast_context[tok]["walk_space"] = r.get("space", "wall")   # wall | alcove | room
+        if r.get("support_m"):
+            cast_context[tok]["support_m"] = float(r["support_m"])  # the book asked for a plinth under this body
         if walk.get("pearl"):
             cast_context[tok]["pearl"] = walk["pearl"]
     return list(walk["cast"])

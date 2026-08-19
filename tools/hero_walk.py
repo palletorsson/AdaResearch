@@ -141,7 +141,8 @@ def pearl_walks(chapter: str, trunk: dict[str, Any] | None = None) -> list[dict[
                 if tok in foyer:
                     continue                       # the foyer's lines: placed by the lobby builder
                 rows_o.append({"lookup": tok, "walk_kind": "hero" if tok == hero else "sibling",
-                               "why": f"a line of the {name} poem", "provenance": "hand", "space": "wall"})
+                               "why": f"a line of the {name} poem", "provenance": "hand", "space": "wall",
+                               **({"support_m": float(p["supports"][tok])} if (p.get("supports") or {}).get(tok) else {})})
             for b in branches:
                 if b.get("pearl") == name and b.get("provenance") == "hand" and b.get("token") and b["token"] not in p.get("tokens", []):
                     rows_o.append({"lookup": b["token"], "walk_kind": b.get("kind", "extends"), "why": b.get("why", ""), "provenance": "hand",
@@ -158,7 +159,8 @@ def pearl_walks(chapter: str, trunk: dict[str, Any] | None = None) -> list[dict[
                 for tok in q_toks:
                     if tok in [r["lookup"] for r in rows_o]:
                         continue
-                    rows_o.append({"lookup": tok, "walk_kind": "sibling", "why": f"a line of the {q.get('pearl')} page", "provenance": "hand", "space": "wall", "page": q.get("pearl")})
+                    rows_o.append({"lookup": tok, "walk_kind": "sibling", "why": f"a line of the {q.get('pearl')} page", "provenance": "hand", "space": "wall", "page": q.get("pearl"),
+                                   **({"support_m": float(q["supports"][tok])} if (q.get("supports") or {}).get(tok) else {})})
                 pages.append({"pearl": q.get("pearl"), "tokens": q_toks, "map": q.get("map", "")})
                 rooms_total += int(q.get("rooms") or 0)
                 excl |= set(q.get("excluded", []))

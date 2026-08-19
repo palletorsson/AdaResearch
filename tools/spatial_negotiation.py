@@ -1155,7 +1155,17 @@ def run(artifacts: list[str], plan: FloorPlan | None = None,
     last_x = -1            # within a row the reading runs right to left: x ascending
     all_slots = list(plan.slots)
     fixed = fixed or {}
+    # the hand's cells are reserved FIRST: a body ruled to a cell holds that cell
+    # against every line dealt before it (line 5 stood on line 6's ruled cell)
+    for fl, (fx0, fz0) in fixed.items():
+        if fl in artifacts:
+            m0 = contract_masks(staged_contract(fl), 0)
+            occ.commit("__fixed__" + fl, Masks(physical=set(m0.physical), circulation=set(), presentation=set()), (fx0, fz0))
     for lookup in artifacts:
+        if lookup in fixed:
+            # its reservation is lifted as it negotiates its own cell
+            for k in [k for k, v in occ.physical.items() if v == "__fixed__" + lookup]:
+                del occ.physical[k]
         if lookup in fixed:
             fx, fz = fixed[lookup]
             holder = [s for s in all_slots if s.venue == "interior" and (fx, fz) in getattr(s, "free_cells", set())]

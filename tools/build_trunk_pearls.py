@@ -158,6 +158,10 @@ def seed(trunk_doc: dict) -> dict:
                         for tk in p["foyer"]:
                             if tk not in p["tokens"]:
                                 p["tokens"].append(tk)
+                    if e.get("supports"):
+                        p["supports"] = dict(e["supports"])    # {token: m} — a plinth under this line's body (tools/book.py)
+                    if e.get("supports"):
+                        p["supports"] = dict(e["supports"])    # {token: m} — a plinth under this line's body (tools/book.py)
                     if e.get("verse"):
                         p["verse"] = dict(e["verse"])        # textD as POETRY: {token: {indent, gap}} — the white space (tools/em_speak.py)
                     if e.get("speak") or e.get("speak_draft"):

@@ -82,6 +82,8 @@ def migrate(chapter: str) -> dict:
                 ln["text"] = str(says[tok]); ln["by"] = str(says_by.get(tok, "hand"))
             if tok in foyer:
                 ln["place"] = "foyer"
+            if (p.get("supports") or {}).get(tok):
+                ln["support_m"] = float(p["supports"][tok])
             v = verse.get(tok)
             if isinstance(v, dict):
                 if v.get("indent"): ln["indent"] = int(v["indent"])
@@ -156,6 +158,10 @@ def compile_book(chapter: str, reseed: bool = True) -> dict:
             if ln.get("gap"): v["gap"] = int(ln["gap"])
             if v: verse[tok] = v
         e["says"], e["says_by"] = says, says_by
+        # a line may ask for a PLINTH: support_m on the line -> the plan row's support
+        supports = {ln["token"]: float(ln["support_m"]) for ln in bp.get("lines", []) if ln.get("token") and ln.get("support_m")}
+        if supports: e["supports"] = supports
+        else: e.pop("supports", None)
         e.pop("says_draft", None)
         if verse: e["verse"] = verse
         else: e.pop("verse", None)

@@ -1,8 +1,8 @@
 {
 	"_readme": "The BAKE: every placement decision the museum makes from a measurement, decided ONCE by a headless --em-bake run and replayed by every later run, desktop or headset. Per chapter|pearl: placed = token, tile cell, the exact cells sealed (x, z-from-segment-base); refused = token, cell, why. Regenerate after editing the plan: python tools/em_bake.py",
-	"at": "2026-08-19 15:25:49",
+	"at": "2026-08-19 15:54:08",
 	"plan": "res://ada_run/em_plan.json",
-	"plan_at": "2026-08-19T15:25:25",
+	"plan_at": "2026-08-19T15:53:14",
 	"schema": "adaresearch.em_bake.v1",
 	"segments": {
 		"array_tutorial|array patterns": {
@@ -21107,49 +21107,32 @@
 			"placed": [
 				{
 					"cell": [
-						3.0,
-						13.0
+						3,
+						13
 					],
 					"seal": [
 						[
-							3.0,
-							13.0
+							3,
+							13
 						]
 					],
 					"token": "player_trace"
 				},
 				{
 					"cell": [
-						2.0,
-						8.0
+						2,
+						8
 					],
 					"seal": [
 						[
-							2.0,
-							8.0
+							2,
+							8
 						]
 					],
 					"token": "room_grammar"
-				},
-				{
-					"cell": [
-						23.0,
-						46.0
-					],
-					"seal": [],
-					"token": "art_history_gallery"
 				}
 			],
-			"refused": [
-				{
-					"tile_cell": [
-						2.0,
-						12.0
-					],
-					"token": "grab_sphere_point_snap",
-					"why": "sealing would sever the walk route"
-				}
-			]
+			"refused": []
 		},
 		"primitives|lines": {
 			"museum": "sainsbury-false-perspective-enfilade",
@@ -21564,402 +21547,428 @@
 			"placed": [
 				{
 					"cell": [
-						7,
-						16
+						7.0,
+						16.0
 					],
 					"seal": [
 						[
-							6,
-							15
+							6.0,
+							15.0
 						],
 						[
-							7,
-							15
+							7.0,
+							15.0
 						],
 						[
-							8,
-							15
+							8.0,
+							15.0
 						],
 						[
-							6,
-							16
+							6.0,
+							16.0
 						],
 						[
-							7,
-							16
+							7.0,
+							16.0
 						],
 						[
-							8,
-							16
+							8.0,
+							16.0
 						],
 						[
-							6,
-							17
+							6.0,
+							17.0
 						],
 						[
-							7,
-							17
+							7.0,
+							17.0
 						],
 						[
-							8,
-							17
+							8.0,
+							17.0
 						]
 					],
 					"token": "you_are_here"
 				},
 				{
 					"cell": [
-						2,
-						9
+						9.0,
+						9.0
 					],
 					"seal": [
 						[
-							1,
-							7
+							9.0,
+							9.0
+						]
+					],
+					"token": "interactive_point_origin"
+				},
+				{
+					"cell": [
+						2.0,
+						9.0
+					],
+					"seal": [
+						[
+							1.0,
+							7.0
 						],
 						[
-							2,
-							7
+							2.0,
+							7.0
 						],
 						[
-							3,
-							7
+							3.0,
+							7.0
 						],
 						[
-							4,
-							7
+							4.0,
+							7.0
 						],
 						[
-							1,
-							8
+							1.0,
+							8.0
 						],
 						[
-							2,
-							8
+							2.0,
+							8.0
 						],
 						[
-							3,
-							8
+							3.0,
+							8.0
 						],
 						[
-							4,
-							8
+							4.0,
+							8.0
 						],
 						[
-							1,
-							9
+							1.0,
+							9.0
 						],
 						[
-							2,
-							9
+							2.0,
+							9.0
 						],
 						[
-							3,
-							9
+							3.0,
+							9.0
 						],
 						[
-							4,
-							9
+							4.0,
+							9.0
 						]
 					],
 					"token": "CoordinateSystem3M"
 				},
 				{
 					"cell": [
-						5,
-						26
+						5.0,
+						26.0
 					],
 					"seal": [
 						[
-							5,
-							26
+							5.0,
+							26.0
 						]
 					],
 					"token": "fontana_puncture"
 				},
 				{
 					"cell": [
-						8,
-						11
+						11.0,
+						13.0
 					],
 					"seal": [
 						[
-							8,
-							11
+							11.0,
+							13.0
 						]
 					],
 					"token": "floating_sphere_field"
 				},
 				{
 					"cell": [
-						2,
-						12
+						12.0,
+						14.0
 					],
 					"seal": [
 						[
-							2,
-							10
+							11.0,
+							12.0
 						],
 						[
-							1,
-							11
+							12.0,
+							12.0
 						],
 						[
-							2,
-							11
+							10.0,
+							13.0
 						],
 						[
-							1,
-							12
+							12.0,
+							13.0
 						],
 						[
-							2,
-							12
+							10.0,
+							14.0
+						],
+						[
+							11.0,
+							14.0
+						],
+						[
+							12.0,
+							14.0
 						]
 					],
-					"token": "draw_dot"
+					"token": "grab_sphere_point_snap"
 				},
 				{
 					"cell": [
-						8,
-						14
+						8.0,
+						15.0
 					],
 					"seal": [
 						[
-							8,
-							12
+							8.0,
+							13.0
 						],
 						[
-							8,
-							13
-						],
-						[
-							8,
-							14
+							8.0,
+							14.0
 						]
 					],
 					"token": "do_not_cross_barrier"
 				},
 				{
 					"cell": [
-						12,
-						15
+						13.0,
+						18.0
 					],
 					"seal": [
 						[
-							11,
-							15
+							13.0,
+							17.0
 						],
 						[
-							12,
-							15
+							13.0,
+							18.0
 						],
 						[
-							13,
-							15
-						]
-					],
-					"token": "klee_walking_point"
-				},
-				{
-					"cell": [
-						12,
-						17
-					],
-					"seal": [
-						[
-							12,
-							16
-						],
-						[
-							12,
-							17
-						],
-						[
-							12,
-							18
+							13.0,
+							19.0
 						]
 					],
 					"token": "dgrid"
 				},
 				{
 					"cell": [
-						8,
-						19
+						2.0,
+						19.0
 					],
 					"seal": [
 						[
-							9,
-							18
+							3.0,
+							18.0
 						],
 						[
-							10,
-							18
+							3.0,
+							19.0
 						],
 						[
-							9,
-							19
+							4.0,
+							19.0
 						],
 						[
-							9,
-							20
+							3.0,
+							20.0
 						],
 						[
-							8,
-							19
+							4.0,
+							20.0
+						],
+						[
+							2.0,
+							19.0
 						]
 					],
 					"token": "walk_this_line_marking"
 				},
 				{
 					"cell": [
-						3,
-						20
+						8.0,
+						19.0
 					],
 					"seal": [
 						[
-							3,
-							20
+							8.0,
+							19.0
 						]
 					],
 					"token": "line"
 				},
 				{
 					"cell": [
-						12,
-						20
+						12.0,
+						20.0
 					],
 					"seal": [
 						[
-							12,
-							20
+							12.0,
+							20.0
 						]
 					],
 					"token": "parallel_line_puzzle"
 				},
 				{
 					"cell": [
-						12,
-						24
+						12.0,
+						24.0
 					],
 					"seal": [
 						[
-							12,
-							24
+							12.0,
+							24.0
 						]
 					],
 					"token": "laser_sword"
 				},
 				{
 					"cell": [
-						11,
-						26
+						11.0,
+						26.0
 					],
 					"seal": [
 						[
-							11,
-							26
+							11.0,
+							26.0
 						]
 					],
 					"token": "laser_exploding_sphere"
 				},
 				{
 					"cell": [
-						10,
-						31
+						10.0,
+						31.0
 					],
 					"seal": [
 						[
-							10,
-							31
+							10.0,
+							31.0
 						]
 					],
 					"token": "grabbable_line"
 				},
 				{
 					"cell": [
-						7,
-						31
+						7.0,
+						31.0
 					],
 					"seal": [
 						[
-							7,
-							31
+							7.0,
+							31.0
 						]
 					],
 					"token": "lightrod"
 				},
 				{
 					"cell": [
-						5,
-						31
+						5.0,
+						31.0
 					],
 					"seal": [
 						[
-							5,
-							31
+							5.0,
+							31.0
 						]
 					],
 					"token": "cube_scene"
 				},
 				{
 					"cell": [
-						2,
-						14
+						2.0,
+						14.0
 					],
 					"seal": [
 						[
-							2,
-							14
+							2.0,
+							14.0
 						]
 					],
 					"token": "dark_sphere"
 				},
 				{
 					"cell": [
-						6,
-						32
+						2.0,
+						12.0
+					],
+					"seal": [
+						[
+							2.0,
+							12.0
+						]
+					],
+					"token": "plus_line_puzzle"
+				},
+				{
+					"cell": [
+						6.0,
+						32.0
 					],
 					"seal": [],
 					"token": "modulor_man_demo"
 				},
 				{
 					"cell": [
-						12,
-						1
+						12.0,
+						1.0
 					],
 					"seal": [
 						[
-							12,
-							1
+							12.0,
+							1.0
 						],
 						[
-							13,
-							1
+							13.0,
+							1.0
 						],
 						[
-							14,
-							1
+							14.0,
+							1.0
 						]
 					],
 					"token": "line_builder_3d"
 				},
 				{
 					"cell": [
-						13,
-						46
+						7.0,
+						62.0
 					],
-					"seal": [],
-					"token": "grab_sphere_point_snap"
+					"seal": [
+						[
+							7.0,
+							60.0
+						],
+						[
+							7.0,
+							61.0
+						],
+						[
+							7.0,
+							62.0
+						]
+					],
+					"token": "laser_measure"
 				}
 			],
 			"refused": [
 				{
 					"tile_cell": [
-						3,
-						13
+						12.0,
+						17.0
 					],
-					"token": "plus_line_puzzle",
+					"token": "klee_walking_point",
 					"why": "sealing would sever the walk route"
 				}
 			]
@@ -22375,107 +22384,60 @@
 				{
 					"cell": [
 						2,
-						9
+						8
 					],
 					"seal": [
 						[
 							1,
-							9
+							8
 						],
 						[
 							2,
-							9
+							8
 						],
 						[
 							3,
-							9
+							8
 						]
 					],
 					"token": "mystic_writing_pad"
 				},
 				{
 					"cell": [
-						3,
-						13
+						4,
+						8
 					],
 					"seal": [
+						[
+							2,
+							6
+						],
 						[
 							3,
-							13
+							6
+						],
+						[
+							4,
+							6
+						],
+						[
+							2,
+							7
+						],
+						[
+							3,
+							7
+						],
+						[
+							4,
+							7
+						],
+						[
+							4,
+							8
 						]
 					],
-					"token": "automatic_writing_desk"
-				},
-				{
-					"cell": [
-						8,
-						13
-					],
-					"seal": [
-						[
-							8,
-							12
-						],
-						[
-							8,
-							13
-						],
-						[
-							8,
-							14
-						]
-					],
-					"token": "hand_telemetry_diptych"
-				},
-				{
-					"cell": [
-						9,
-						19
-					],
-					"seal": [
-						[
-							9,
-							17
-						],
-						[
-							9,
-							18
-						],
-						[
-							9,
-							19
-						],
-						[
-							9,
-							20
-						],
-						[
-							9,
-							21
-						]
-					],
-					"token": "retention_corridor"
-				},
-				{
-					"cell": [
-						7,
-						62
-					],
-					"seal": [
-						[
-							7,
-							60
-						],
-						[
-							7,
-							61
-						],
-						[
-							7,
-							62
-						]
-					],
-					"token": "laser_measure"
+					"token": "draw_dot"
 				}
 			],
 			"refused": []

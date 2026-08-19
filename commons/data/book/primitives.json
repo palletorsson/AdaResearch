@@ -27,8 +27,14 @@
     },
     {
      "token": "you_are_here",
-     "text": "Point Zero now as an object in the exhibition\n\nYou are here",
+     "text": "You are here",
      "by": "hand"
+    },
+    {
+     "token": "interactive_point_origin",
+     "text": "Point Zero, now as an object in the exhibition",
+     "by": "hand",
+     "support_m": 0.95
     },
     {
      "token": "CoordinateSystem3M",
@@ -47,9 +53,9 @@
      "gap": 1
     },
     {
-     "token": "draw_dot",
-     "text": "all life is encoded — that is enough",
-     "by": "hand"
+     "token": "grab_sphere_point_snap",
+     "text": "A point you can take; it snaps.",
+     "by": "claude"
     }
    ],
    "rooms": 5,
@@ -68,11 +74,6 @@
     {
      "token": "klee_walking_point",
      "text": "A line is a point that went for a walk.",
-     "by": "claude"
-    },
-    {
-     "token": "grab_sphere_point_snap",
-     "text": "A point you can take; it snaps.",
      "by": "claude"
     },
     {
@@ -160,9 +161,15 @@
      "token": "mystic_writing_pad",
      "text": "there is no origin of a trace",
      "by": "hand"
+    },
+    {
+     "token": "draw_dot",
+     "text": "all life is encoded — that is enough",
+     "by": "hand"
     }
    ],
-   "hero": "mystic_writing_pad"
+   "hero": "mystic_writing_pad",
+   "ordered": true
   },
   {
    "pearl": "line grid",

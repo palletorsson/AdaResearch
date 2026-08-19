@@ -1027,7 +1027,7 @@
   {
    "anchor": "primitives",
    "kind": "extends",
-   "pearl": "point",
+   "pearl": "trace",
    "provenance": "derived",
    "space": "wall",
    "space_by": "heuristic",
@@ -11943,7 +11943,7 @@
   {
    "anchor": "primitives",
    "kind": "varies",
-   "pearl": "point",
+   "pearl": "trace",
    "provenance": "derived",
    "space": "wall",
    "space_by": "heuristic",
@@ -11965,7 +11965,7 @@
   {
    "anchor": "primitives",
    "kind": "varies",
-   "pearl": "lines",
+   "pearl": "point",
    "provenance": "derived",
    "space": "wall",
    "space_by": "heuristic",
@@ -17019,32 +17019,34 @@
      "folding_past": "You arrive late. No reboot.\nThe folding past keeps running.",
      "frame_counter_display": "The internal clock is running,\nthe frame counter update cycle.",
      "origin": "Standing at Vector.ZERO,\n\nPoint zero, * ,\nVector(0,0,0)\nThe root of all vectors.\n\nThe origin, No turning back.",
-     "you_are_here": "Point Zero now as an object in the exhibition\n\nYou are here",
+     "you_are_here": "You are here",
+     "interactive_point_origin": "Point Zero, now as an object in the exhibition",
      "CoordinateSystem3M": "Point one, position,\nno point without the coordinate system.\n\n3D Space.",
      "fontana_puncture": "the one point, pierced",
      "floating_sphere_field": "“Show me what you can do with those hands”\n\nGrab the ball.",
-     "draw_dot": "all life is encoded — that is enough"
+     "grab_sphere_point_snap": "A point you can take; it snaps."
     },
     "says_by": {
      "folding_past": "hand",
      "frame_counter_display": "hand",
      "origin": "hand",
      "you_are_here": "hand",
+     "interactive_point_origin": "hand",
      "CoordinateSystem3M": "hand",
      "fontana_puncture": "claude",
      "floating_sphere_field": "hand",
-     "draw_dot": "hand"
+     "grab_sphere_point_snap": "claude"
     },
     "tokens_add": [
      "folding_past",
      "frame_counter_display",
      "origin",
+     "interactive_point_origin",
      "CoordinateSystem3M",
-     "draw_dot"
+     "grab_sphere_point_snap"
     ],
     "tokens_remove": [
      "do_not_cross_barrier",
-     "grab_sphere_point_snap",
      "interactive_point_origin_force",
      "klee_walking_point",
      "lab_room",
@@ -17056,10 +17058,11 @@
      "frame_counter_display",
      "origin",
      "you_are_here",
+     "interactive_point_origin",
      "CoordinateSystem3M",
      "fontana_puncture",
      "floating_sphere_field",
-     "draw_dot"
+     "grab_sphere_point_snap"
     ],
     "verse": {
      "floating_sphere_field": {
@@ -17071,7 +17074,10 @@
      "frame_counter_display",
      "origin"
     ],
-    "hero": "CoordinateSystem3M"
+    "hero": "CoordinateSystem3M",
+    "supports": {
+     "interactive_point_origin": 0.95
+    }
    },
    {
     "map": "Point_Lines",
@@ -17080,7 +17086,6 @@
     "says": {
      "do_not_cross_barrier": "Do not cross this line ...",
      "klee_walking_point": "A line is a point that went for a walk.",
-     "grab_sphere_point_snap": "A point you can take; it snaps.",
      "dgrid": "grid lines",
      "walk_this_line_marking": "Walk this line.",
      "line": "two points is a line — it measures",
@@ -17095,7 +17100,6 @@
     "says_by": {
      "do_not_cross_barrier": "hand",
      "klee_walking_point": "claude",
-     "grab_sphere_point_snap": "claude",
      "dgrid": "hand",
      "walk_this_line_marking": "claude",
      "line": "hand",
@@ -17111,14 +17115,12 @@
     "tokens_add": [
      "do_not_cross_barrier",
      "klee_walking_point",
-     "grab_sphere_point_snap",
      "dgrid",
      "walk_this_line_marking"
     ],
     "tokens_order": [
      "do_not_cross_barrier",
      "klee_walking_point",
-     "grab_sphere_point_snap",
      "dgrid",
      "walk_this_line_marking",
      "line",
@@ -17178,14 +17180,22 @@
     "map": "Point_Trace",
     "pearl": "trace",
     "says": {
-     "mystic_writing_pad": "there is no origin of a trace"
+     "mystic_writing_pad": "there is no origin of a trace",
+     "draw_dot": "all life is encoded — that is enough"
     },
-    "tokens_add": [],
+    "tokens_add": [
+     "draw_dot"
+    ],
     "tokens_remove": [],
     "says_by": {
-     "mystic_writing_pad": "hand"
+     "mystic_writing_pad": "hand",
+     "draw_dot": "hand"
     },
-    "hero": "mystic_writing_pad"
+    "hero": "mystic_writing_pad",
+    "tokens_order": [
+     "mystic_writing_pad",
+     "draw_dot"
+    ]
    },
    {
     "map": "Point_Line_Grid",
@@ -17201,7 +17211,9 @@
      "grid_lines": "hand"
     },
     "tokens_add": [],
-    "tokens_remove": [],
+    "tokens_remove": [
+     "grab_sphere_point_snap"
+    ],
     "hero": "player_trace"
    },
    {
@@ -17518,10 +17530,11 @@
       "frame_counter_display",
       "origin",
       "you_are_here",
+      "interactive_point_origin",
       "CoordinateSystem3M",
       "fontana_puncture",
       "floating_sphere_field",
-      "draw_dot"
+      "grab_sphere_point_snap"
      ],
      "blurb": "Before the point, infrastructure.",
      "rooms": 5,
@@ -17530,6 +17543,9 @@
       "frame_counter_display",
       "origin"
      ],
+     "supports": {
+      "interactive_point_origin": 0.95
+     },
      "verse": {
       "floating_sphere_field": {
        "gap": 1
@@ -17539,25 +17555,26 @@
       "folding_past": "You arrive late. No reboot.\nThe folding past keeps running.",
       "frame_counter_display": "The internal clock is running,\nthe frame counter update cycle.",
       "origin": "Standing at Vector.ZERO,\n\nPoint zero, * ,\nVector(0,0,0)\nThe root of all vectors.\n\nThe origin, No turning back.",
-      "you_are_here": "Point Zero now as an object in the exhibition\n\nYou are here",
+      "you_are_here": "You are here",
+      "interactive_point_origin": "Point Zero, now as an object in the exhibition",
       "CoordinateSystem3M": "Point one, position,\nno point without the coordinate system.\n\n3D Space.",
       "fontana_puncture": "the one point, pierced",
       "floating_sphere_field": "“Show me what you can do with those hands”\n\nGrab the ball.",
-      "draw_dot": "all life is encoded — that is enough"
+      "grab_sphere_point_snap": "A point you can take; it snaps."
      },
      "says_by": {
       "folding_past": "hand",
       "frame_counter_display": "hand",
       "origin": "hand",
       "you_are_here": "hand",
+      "interactive_point_origin": "hand",
       "CoordinateSystem3M": "hand",
       "fontana_puncture": "claude",
       "floating_sphere_field": "hand",
-      "draw_dot": "hand"
+      "grab_sphere_point_snap": "claude"
      },
      "excluded": [
       "do_not_cross_barrier",
-      "grab_sphere_point_snap",
       "interactive_point_origin_force",
       "klee_walking_point",
       "lab_room",
@@ -17575,7 +17592,6 @@
      "tokens": [
       "do_not_cross_barrier",
       "klee_walking_point",
-      "grab_sphere_point_snap",
       "dgrid",
       "walk_this_line_marking",
       "line",
@@ -17600,7 +17616,6 @@
      "says": {
       "do_not_cross_barrier": "Do not cross this line ...",
       "klee_walking_point": "A line is a point that went for a walk.",
-      "grab_sphere_point_snap": "A point you can take; it snaps.",
       "dgrid": "grid lines",
       "walk_this_line_marking": "Walk this line.",
       "line": "two points is a line — it measures",
@@ -17615,7 +17630,6 @@
      "says_by": {
       "do_not_cross_barrier": "hand",
       "klee_walking_point": "claude",
-      "grab_sphere_point_snap": "claude",
       "dgrid": "hand",
       "walk_this_line_marking": "claude",
       "line": "hand",
@@ -17636,15 +17650,19 @@
      "hero": "mystic_writing_pad",
      "hero_by": "hand",
      "tokens": [
-      "mystic_writing_pad"
+      "mystic_writing_pad",
+      "draw_dot"
      ],
      "blurb": "Now: duration.",
      "says": {
-      "mystic_writing_pad": "there is no origin of a trace"
+      "mystic_writing_pad": "there is no origin of a trace",
+      "draw_dot": "all life is encoded — that is enough"
      },
      "says_by": {
-      "mystic_writing_pad": "hand"
-     }
+      "mystic_writing_pad": "hand",
+      "draw_dot": "hand"
+     },
+     "ordered": true
     },
     {
      "pearl": "line grid",
@@ -17667,7 +17685,10 @@
       "room_grammar": "hand",
       "player_trace": "claude",
       "grid_lines": "hand"
-     }
+     },
+     "excluded": [
+      "grab_sphere_point_snap"
+     ]
     },
     {
      "pearl": "triangle context",
