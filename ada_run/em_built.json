@@ -1,6 +1,6 @@
 {
 	"_readme": "The AS-BUILT plan: what the assembler actually made of each segment this run — every cell's role, every body's final world pose and inventory number, every card, courts, rooms, the gate, the mode. Written as each segment finishes. Read this instead of re-deriving the floor plan; diff two runs (vr vs desktop) to prove parity.",
-	"at": "2026-08-19 07:28:04",
+	"at": "2026-08-19 08:07:43",
 	"plan": "res://ada_run/em_plan.json",
 	"schema": "adaresearch.em_built.v1",
 	"segments": [
@@ -25,7 +25,7 @@
 					]
 				},
 				{
-					"inv": "primitives:0029",
+					"inv": "primitives:0028",
 					"kind": "artifact",
 					"rot": 105.0,
 					"tile_cell": [
@@ -73,7 +73,7 @@
 					]
 				},
 				{
-					"inv": "primitives:0012",
+					"inv": "primitives:0017",
 					"kind": "plinth",
 					"rot": 0.0,
 					"tile_cell": [],
@@ -83,11 +83,11 @@
 					"world": [
 						7.5,
 						0.0,
-						9.5
+						11.5
 					]
 				},
 				{
-					"inv": "primitives:0013",
+					"inv": "primitives:0012",
 					"kind": "artifact",
 					"rot": 180.0,
 					"tile_cell": [
@@ -104,12 +104,12 @@
 					]
 				},
 				{
-					"inv": "primitives:0016",
+					"inv": "primitives:0018",
 					"kind": "artifact",
-					"rot": 180.0,
+					"rot": 165.0,
 					"tile_cell": [
 						7,
-						6
+						7
 					],
 					"token": "fontana_puncture",
 					"walk_kind": "sibling",
@@ -117,11 +117,11 @@
 					"world": [
 						7.5,
 						1.4,
-						10.5
+						11.5
 					]
 				},
 				{
-					"inv": "primitives:0024",
+					"inv": "primitives:0025",
 					"kind": "plinth",
 					"rot": 0.0,
 					"tile_cell": [],
@@ -135,7 +135,7 @@
 					]
 				},
 				{
-					"inv": "primitives:0025",
+					"inv": "primitives:0024",
 					"kind": "artifact",
 					"rot": 0.0,
 					"tile_cell": [
@@ -166,7 +166,7 @@
 					]
 				},
 				{
-					"inv": "primitives:0031",
+					"inv": "primitives:0029",
 					"kind": "artifact",
 					"rot": 0.0,
 					"tile_cell": [
@@ -214,7 +214,7 @@
 					]
 				},
 				{
-					"inv": "primitives:0028",
+					"inv": "primitives:0031",
 					"kind": "plinth",
 					"rot": 0.0,
 					"tile_cell": [],
@@ -224,7 +224,7 @@
 					"world": [
 						13.5,
 						0.0,
-						12.5
+						14.5
 					]
 				},
 				{
@@ -620,9 +620,9 @@
 					"walk_kind": "",
 					"walk_space": "",
 					"world": [
-						10.0,
+						11.0,
 						1.58,
-						5.01
+						6.01
 					]
 				},
 				{
@@ -1167,9 +1167,9 @@
 					"pearl": "point",
 					"segment": 0,
 					"world": [
-						10.3,
+						11.3,
 						1.0,
-						5.0
+						6.0
 					]
 				},
 				{
@@ -1210,10 +1210,10 @@
 				"##.....sss..sss##.....######",
 				"##.....sss..sss##.....######",
 				"###b.#.sss.######.sss.######",
-				"##...#.....#...#..sss.######",
+				"##...#..s..#...#..sss.######",
 				"##.s.......#..s##.sss.######",
 				"##.#...........##.....######",
-				"##.s.#.........##.....######",
+				"##.s.#........s##.....######",
 				"##...#....b#...#############",
 				"######.....##..#############",
 				"##...#.........#############",
@@ -1363,6 +1363,7 @@
 				"12,8": "origin",
 				"12,9": "origin",
 				"13,12": "point",
+				"13,14": "point",
 				"13,7": "origin",
 				"13,8": "origin",
 				"13,9": "origin",
@@ -1429,6 +1430,7 @@
 				"6,8": "you_are_here",
 				"6,9": "you_are_here",
 				"7,10": "you_are_here",
+				"7,11": "you_are_here",
 				"7,34": "folding_past",
 				"7,43": "lab_room",
 				"7,44": "lab_room",
@@ -2189,9 +2191,9 @@
 					"walk_kind": "",
 					"walk_space": "",
 					"world": [
-						4.0,
+						5.0,
 						1.58,
-						57.99
+						58.99
 					]
 				},
 				{
@@ -2896,9 +2898,9 @@
 					"pearl": "lines",
 					"segment": 1,
 					"world": [
-						4.6,
+						5.6,
 						1.1,
-						58.0
+						59.0
 					]
 				},
 				{

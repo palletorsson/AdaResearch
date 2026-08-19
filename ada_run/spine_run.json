@@ -1,26 +1,27 @@
 {
  "schema": "adaresearch.spine_run.v1",
- "at": "2026-08-18T11:23:18",
+ "at": "2026-08-19T07:54:31",
  "totals": {
   "sequences": 24,
   "rows": 799,
   "anchors": 799,
   "offered": 1407,
-  "placed": 1367,
-  "interior": 964,
-  "rejected": 40,
+  "placed": 1386,
+  "interior": 956,
+  "rejected": 21,
   "housed_sequences": 0,
   "lineages": 5982,
-  "lineages_walled": 1565,
-  "interior_share": 0.6851,
+  "lineages_walled": 1532,
+  "interior_share": 0.6795,
   "exterior_venues": {
-   "courtyard": 252,
-   "porch": 115,
-   "outside": 26,
+   "courtyard": 256,
+   "porch": 108,
+   "outside": 37,
+   "hall": 19,
    "balcony": 10
   },
   "reasons": {
-   "escalation": 34,
+   "escalation": 15,
    "support_matches_contract": 6
   }
  },
@@ -132,25 +133,24 @@
      "durer_scene"
     ]
    },
-   "placed": 132,
-   "interior": 99,
-   "rejected": 1,
+   "placed": 133,
+   "interior": 93,
+   "rejected": 0,
    "venues": {
-    "porch": 11,
-    "interior": 99,
-    "courtyard": 16,
-    "outside": 6
+    "courtyard": 17,
+    "interior": 93,
+    "porch": 8,
+    "outside": 14,
+    "hall": 1
    },
-   "reasons": {
-    "escalation": 1
-   },
+   "reasons": {},
    "reason_examples": [],
    "slots": 16,
    "walls": 47,
    "rooms_on_disk": 120,
    "rooms_authored": 115,
    "lineages": 726,
-   "lineages_walled": 250,
+   "lineages_walled": 228,
    "cast": [
     "CoordinateSystem3M",
     "frame_counter_display",
@@ -1137,7 +1137,7 @@
     "example_2_6_single_attractor_vr": {
      "walk_kind": "extends",
      "walk_why": "named relation of origin: an @identity relationships field names it",
-     "walk_space": "wall",
+     "walk_space": "room",
      "pearl": "point"
     },
     "mamma_monster_gallery": {
@@ -1387,9 +1387,9 @@
      "pearl": "melencolia"
     }
    },
-   "interior_share": 0.7444,
+   "interior_share": 0.6992,
    "housed": false,
-   "shortfall": 34,
+   "shortfall": 40,
    "pearls": [
     {
      "sequence": "primitives",
@@ -1491,18 +1491,17 @@
      "interior": 12,
      "rejected": 0,
      "venues": {
-      "porch": 1,
-      "interior": 12,
-      "courtyard": 4
+      "courtyard": 5,
+      "interior": 12
      },
      "reasons": {},
      "reason_examples": [],
-     "slots": 16,
-     "walls": 47,
+     "slots": 13,
+     "walls": 42,
      "rooms_on_disk": 16,
      "rooms_authored": 15,
      "lineages": 66,
-     "lineages_walled": 23,
+     "lineages_walled": 20,
      "cast": [
       "CoordinateSystem3M",
       "frame_counter_display",
@@ -2381,7 +2380,7 @@
       "example_2_6_single_attractor_vr": {
        "walk_kind": "extends",
        "walk_why": "named relation of origin: an @identity relationships field names it",
-       "walk_space": "wall",
+       "walk_space": "room",
        "pearl": "point"
       },
       "mamma_monster_gallery": {
@@ -2414,7 +2413,8 @@
      "shortfall": 5,
      "pearl": "point",
      "pearl_index": 0,
-     "map": "Point_One"
+     "map": "Point_One",
+     "rooms": 4
     },
     {
      "sequence": "primitives",
@@ -3499,7 +3499,8 @@
      "shortfall": 11,
      "pearl": "lines",
      "pearl_index": 1,
-     "map": "Point_Lines"
+     "map": "Point_Lines",
+     "rooms": 6
     },
     {
      "sequence": "primitives",
@@ -4463,7 +4464,8 @@
      "shortfall": 0,
      "pearl": "trace",
      "pearl_index": 2,
-     "map": "Point_Trace"
+     "map": "Point_Trace",
+     "rooms": null
     },
     {
      "sequence": "primitives",
@@ -5417,7 +5419,8 @@
      "shortfall": 1,
      "pearl": "line grid",
      "pearl_index": 3,
-     "map": "Point_Line_Grid"
+     "map": "Point_Line_Grid",
+     "rooms": null
     },
     {
      "sequence": "primitives",
@@ -6453,7 +6456,8 @@
      "shortfall": 3,
      "pearl": "triangle context",
      "pearl_index": 4,
-     "map": "Point_Triangle_Context"
+     "map": "Point_Triangle_Context",
+     "rooms": 8
     },
     {
      "sequence": "primitives",
@@ -7456,7 +7460,8 @@
      "shortfall": 3,
      "pearl": "polythedra",
      "pearl_index": 5,
-     "map": "Primitives_Polythedra"
+     "map": "Primitives_Polythedra",
+     "rooms": null
     },
     {
      "sequence": "primitives",
@@ -8399,7 +8404,8 @@
      "shortfall": 0,
      "pearl": "animatedcube",
      "pearl_index": 6,
-     "map": "Point_Animatedcube"
+     "map": "Point_Animatedcube",
+     "rooms": null
     },
     {
      "sequence": "primitives",
@@ -9337,7 +9343,8 @@
      "shortfall": 0,
      "pearl": "primitives",
      "pearl_index": 7,
-     "map": "Chamber_Primitives"
+     "map": "Chamber_Primitives",
+     "rooms": null
     },
     {
      "sequence": "primitives",
@@ -9435,30 +9442,24 @@
       "hand_branches": 0,
       "pearl": "ignorance"
      },
-     "placed": 25,
-     "interior": 18,
-     "rejected": 1,
+     "placed": 26,
+     "interior": 12,
+     "rejected": 0,
      "venues": {
-      "interior": 18,
+      "interior": 12,
       "courtyard": 3,
-      "porch": 3,
-      "outside": 1
+      "porch": 1,
+      "outside": 9,
+      "hall": 1
      },
-     "reasons": {
-      "escalation": 1
-     },
-     "reason_examples": [
-      {
-       "token": "light_sphere",
-       "why": "escalation: precinct: no exterior venue is large enough either"
-      }
-     ],
+     "reasons": {},
+     "reason_examples": [],
      "slots": 16,
      "walls": 47,
      "rooms_on_disk": 23,
      "rooms_authored": 23,
      "lineages": 66,
-     "lineages_walled": 22,
+     "lineages_walled": 3,
      "cast": [
       "righttriangle",
       "sphere",
@@ -10414,12 +10415,13 @@
        "pearl": "ignorance"
       }
      },
-     "interior_share": 0.6923,
+     "interior_share": 0.4615,
      "housed": false,
-     "shortfall": 8,
+     "shortfall": 14,
      "pearl": "ignorance",
      "pearl_index": 8,
-     "map": "Primitives_Ignorance"
+     "map": "Primitives_Ignorance",
+     "rooms": null
     },
     {
      "sequence": "primitives",
@@ -11363,7 +11365,8 @@
      "shortfall": 1,
      "pearl": "portals",
      "pearl_index": 9,
-     "map": "Primitives_Portals"
+     "map": "Primitives_Portals",
+     "rooms": null
     },
     {
      "sequence": "primitives",
@@ -12350,11 +12353,12 @@
      "shortfall": 2,
      "pearl": "melencolia",
      "pearl_index": 10,
-     "map": "Primitives_Melencolia"
+     "map": "Primitives_Melencolia",
+     "rooms": null
     }
    ],
    "why_museum": "crowned",
-   "seconds": 8.8
+   "seconds": 9.6
   },
   {
    "sequence": "transformation",
@@ -13323,7 +13327,8 @@
      "shortfall": 1,
      "pearl": "trans introduction",
      "pearl_index": 0,
-     "map": "Trans_Introduction"
+     "map": "Trans_Introduction",
+     "rooms": null
     },
     {
      "sequence": "transformation",
@@ -13732,7 +13737,8 @@
      "shortfall": 1,
      "pearl": "trans translation",
      "pearl_index": 1,
-     "map": "Trans_Translation"
+     "map": "Trans_Translation",
+     "rooms": null
     },
     {
      "sequence": "transformation",
@@ -14119,7 +14125,8 @@
      "shortfall": 1,
      "pearl": "trans axisdecomposition",
      "pearl_index": 2,
-     "map": "Trans_AxisDecomposition"
+     "map": "Trans_AxisDecomposition",
+     "rooms": null
     },
     {
      "sequence": "transformation",
@@ -14500,7 +14507,8 @@
      "shortfall": 0,
      "pearl": "trans rotation",
      "pearl_index": 3,
-     "map": "Trans_Rotation"
+     "map": "Trans_Rotation",
+     "rooms": null
     },
     {
      "sequence": "transformation",
@@ -14880,7 +14888,8 @@
      "shortfall": 2,
      "pearl": "trans rotationspectacle",
      "pearl_index": 4,
-     "map": "Trans_RotationSpectacle"
+     "map": "Trans_RotationSpectacle",
+     "rooms": null
     },
     {
      "sequence": "transformation",
@@ -15278,7 +15287,8 @@
      "shortfall": 0,
      "pearl": "trans scale",
      "pearl_index": 5,
-     "map": "Trans_Scale"
+     "map": "Trans_Scale",
+     "rooms": null
     },
     {
      "sequence": "transformation",
@@ -15673,7 +15683,8 @@
      "shortfall": 0,
      "pearl": "transformation",
      "pearl_index": 6,
-     "map": "Chamber_Transformation"
+     "map": "Chamber_Transformation",
+     "rooms": null
     },
     {
      "sequence": "transformation",
@@ -16054,11 +16065,12 @@
      "shortfall": 0,
      "pearl": "trans pit",
      "pearl_index": 7,
-     "map": "Trans_Pit"
+     "map": "Trans_Pit",
+     "rooms": null
     }
    ],
    "why_museum": "em_order rotation",
-   "seconds": 2.9
+   "seconds": 2.7
   },
   {
    "sequence": "symmetry",
@@ -16863,7 +16875,8 @@
      "shortfall": 2,
      "pearl": "motif",
      "pearl_index": 0,
-     "map": "Symmetry_Motif"
+     "map": "Symmetry_Motif",
+     "rooms": null
     },
     {
      "sequence": "symmetry",
@@ -17197,7 +17210,8 @@
      "shortfall": 2,
      "pearl": "translation",
      "pearl_index": 1,
-     "map": "Symmetry_Translation"
+     "map": "Symmetry_Translation",
+     "rooms": null
     },
     {
      "sequence": "symmetry",
@@ -17482,7 +17496,8 @@
      "shortfall": 0,
      "pearl": "mirror rotor",
      "pearl_index": 2,
-     "map": "Symmetry_Mirror_Rotor"
+     "map": "Symmetry_Mirror_Rotor",
+     "rooms": null
     },
     {
      "sequence": "symmetry",
@@ -17765,7 +17780,8 @@
      "shortfall": 0,
      "pearl": "glide",
      "pearl_index": 3,
-     "map": "Symmetry_Glide"
+     "map": "Symmetry_Glide",
+     "rooms": null
     },
     {
      "sequence": "symmetry",
@@ -18092,7 +18108,8 @@
      "shortfall": 0,
      "pearl": "group",
      "pearl_index": 4,
-     "map": "Symmetry_Group"
+     "map": "Symmetry_Group",
+     "rooms": null
     },
     {
      "sequence": "symmetry",
@@ -18423,7 +18440,8 @@
      "shortfall": 5,
      "pearl": "seventeen",
      "pearl_index": 6,
-     "map": "Symmetry_Seventeen"
+     "map": "Symmetry_Seventeen",
+     "rooms": null
     }
    ],
    "why_museum": "em_order rotation",
@@ -19306,7 +19324,8 @@
      "shortfall": 0,
      "pearl": "tutorial single",
      "pearl_index": 0,
-     "map": "Tutorial_Single"
+     "map": "Tutorial_Single",
+     "rooms": null
     },
     {
      "sequence": "array_tutorial",
@@ -19716,7 +19735,8 @@
      "shortfall": 2,
      "pearl": "tutorial pattern",
      "pearl_index": 1,
-     "map": "Tutorial_Pattern"
+     "map": "Tutorial_Pattern",
+     "rooms": null
     },
     {
      "sequence": "array_tutorial",
@@ -20140,7 +20160,8 @@
      "shortfall": 9,
      "pearl": "array patterns",
      "pearl_index": 2,
-     "map": "Array_Patterns"
+     "map": "Array_Patterns",
+     "rooms": null
     },
     {
      "sequence": "array_tutorial",
@@ -20487,7 +20508,8 @@
      "shortfall": 0,
      "pearl": "tutorial row",
      "pearl_index": 3,
-     "map": "Tutorial_Row"
+     "map": "Tutorial_Row",
+     "rooms": null
     },
     {
      "sequence": "array_tutorial",
@@ -20862,7 +20884,8 @@
      "shortfall": 3,
      "pearl": "tutorial 2d build",
      "pearl_index": 4,
-     "map": "Tutorial_2D_Build"
+     "map": "Tutorial_2D_Build",
+     "rooms": null
     },
     {
      "sequence": "array_tutorial",
@@ -21285,7 +21308,8 @@
      "shortfall": 2,
      "pearl": "tutorial 3d",
      "pearl_index": 5,
-     "map": "Tutorial_3D"
+     "map": "Tutorial_3D",
+     "rooms": null
     },
     {
      "sequence": "array_tutorial",
@@ -21643,11 +21667,12 @@
      "shortfall": 1,
      "pearl": "tutorial disco",
      "pearl_index": 7,
-     "map": "Tutorial_Disco"
+     "map": "Tutorial_Disco",
+     "rooms": null
     }
    ],
    "why_museum": "em_order rotation",
-   "seconds": 8.0
+   "seconds": 7.2
   },
   {
    "sequence": "color",
@@ -23007,7 +23032,8 @@
      "shortfall": 5,
      "pearl": "pattern foundry",
      "pearl_index": 0,
-     "map": "Pattern_Foundry"
+     "map": "Pattern_Foundry",
+     "rooms": null
     },
     {
      "sequence": "color",
@@ -23701,7 +23727,8 @@
      "shortfall": 5,
      "pearl": "context placed",
      "pearl_index": 1,
-     "map": "Color_Context_Placed"
+     "map": "Color_Context_Placed",
+     "rooms": null
     },
     {
      "sequence": "color",
@@ -24299,7 +24326,8 @@
      "shortfall": 2,
      "pearl": "nails",
      "pearl_index": 2,
-     "map": "Color_Nails"
+     "map": "Color_Nails",
+     "rooms": null
     },
     {
      "sequence": "color",
@@ -24887,7 +24915,8 @@
      "shortfall": 2,
      "pearl": "grid pallet",
      "pearl_index": 3,
-     "map": "Color_Grid_Pallet"
+     "map": "Color_Grid_Pallet",
+     "rooms": null
     },
     {
      "sequence": "color",
@@ -25499,7 +25528,8 @@
      "shortfall": 3,
      "pearl": "rainbow",
      "pearl_index": 4,
-     "map": "Color_Rainbow"
+     "map": "Color_Rainbow",
+     "rooms": null
     },
     {
      "sequence": "color",
@@ -26115,7 +26145,8 @@
      "shortfall": 3,
      "pearl": "pillar",
      "pearl_index": 5,
-     "map": "Color_Pillar"
+     "map": "Color_Pillar",
+     "rooms": null
     },
     {
      "sequence": "color",
@@ -26710,7 +26741,8 @@
      "shortfall": 1,
      "pearl": "paint",
      "pearl_index": 7,
-     "map": "Color_Paint"
+     "map": "Color_Paint",
+     "rooms": null
     },
     {
      "sequence": "color",
@@ -27354,11 +27386,12 @@
      "shortfall": 6,
      "pearl": "walls",
      "pearl_index": 8,
-     "map": "Color_Walls"
+     "map": "Color_Walls",
+     "rooms": null
     }
    ],
    "why_museum": "em_order rotation",
-   "seconds": 5.3
+   "seconds": 4.8
   },
   {
    "sequence": "change",
@@ -27779,7 +27812,8 @@
      "shortfall": 0,
      "pearl": "intro",
      "pearl_index": 0,
-     "map": "Change_Intro"
+     "map": "Change_Intro",
+     "rooms": null
     },
     {
      "sequence": "change",
@@ -27931,7 +27965,8 @@
      "shortfall": 0,
      "pearl": "velocity",
      "pearl_index": 1,
-     "map": "Change_Velocity"
+     "map": "Change_Velocity",
+     "rooms": null
     },
     {
      "sequence": "change",
@@ -28098,7 +28133,8 @@
      "shortfall": 1,
      "pearl": "slope surface",
      "pearl_index": 2,
-     "map": "Change_Slope_Surface"
+     "map": "Change_Slope_Surface",
+     "rooms": null
     },
     {
      "sequence": "change",
@@ -28250,7 +28286,8 @@
      "shortfall": 0,
      "pearl": "accumulation area",
      "pearl_index": 3,
-     "map": "Accumulation_Area"
+     "map": "Accumulation_Area",
+     "rooms": null
     },
     {
      "sequence": "change",
@@ -28422,7 +28459,8 @@
      "shortfall": 1,
      "pearl": "accumulation riemann",
      "pearl_index": 4,
-     "map": "Accumulation_Riemann"
+     "map": "Accumulation_Riemann",
+     "rooms": null
     },
     {
      "sequence": "change",
@@ -28581,7 +28619,8 @@
      "shortfall": 0,
      "pearl": "flow field",
      "pearl_index": 5,
-     "map": "Flow_Field"
+     "map": "Flow_Field",
+     "rooms": null
     },
     {
      "sequence": "change",
@@ -28733,7 +28772,8 @@
      "shortfall": 0,
      "pearl": "flow particle pulse",
      "pearl_index": 6,
-     "map": "Flow_Particle_Pulse"
+     "map": "Flow_Particle_Pulse",
+     "rooms": null
     },
     {
      "sequence": "change",
@@ -28885,11 +28925,12 @@
      "shortfall": 0,
      "pearl": "reconciliation",
      "pearl_index": 7,
-     "map": "Change_Reconciliation"
+     "map": "Change_Reconciliation",
+     "rooms": null
     }
    ],
    "why_museum": "crowned",
-   "seconds": 0.5
+   "seconds": 0.6
   },
   {
    "sequence": "forces",
@@ -29086,9 +29127,9 @@
    "interior": 152,
    "rejected": 3,
    "venues": {
-    "porch": 31,
+    "porch": 30,
     "interior": 152,
-    "courtyard": 31,
+    "courtyard": 32,
     "outside": 8,
     "balcony": 5
    },
@@ -29101,7 +29142,7 @@
    "rooms_on_disk": 216,
    "rooms_authored": 211,
    "lineages": 2028,
-   "lineages_walled": 449,
+   "lineages_walled": 450,
    "cast": [
     "calder_object_mobile",
     "force_pad",
@@ -32787,7 +32828,8 @@
      "shortfall": 2,
      "pearl": "sky climb",
      "pearl_index": 0,
-     "map": "Sky_Climb"
+     "map": "Sky_Climb",
+     "rooms": null
     },
     {
      "sequence": "forces",
@@ -34393,7 +34435,8 @@
      "shortfall": 1,
      "pearl": "void crossing",
      "pearl_index": 1,
-     "map": "Void_Crossing"
+     "map": "Void_Crossing",
+     "rooms": null
     },
     {
      "sequence": "forces",
@@ -36059,7 +36102,8 @@
      "shortfall": 4,
      "pearl": "reformed instruments",
      "pearl_index": 2,
-     "map": "Reformed_Instruments"
+     "map": "Reformed_Instruments",
+     "rooms": null
     },
     {
      "sequence": "forces",
@@ -37762,7 +37806,8 @@
      "shortfall": 9,
      "pearl": "force preview",
      "pearl_index": 3,
-     "map": "Force_Preview"
+     "map": "Force_Preview",
+     "rooms": null
     },
     {
      "sequence": "forces",
@@ -39421,7 +39466,8 @@
      "shortfall": 1,
      "pearl": "console test",
      "pearl_index": 4,
-     "map": "Console_Test"
+     "map": "Console_Test",
+     "rooms": null
     },
     {
      "sequence": "forces",
@@ -41047,7 +41093,8 @@
      "shortfall": 1,
      "pearl": "force props sandbox",
      "pearl_index": 5,
-     "map": "Force_Props_Sandbox"
+     "map": "Force_Props_Sandbox",
+     "rooms": null
     },
     {
      "sequence": "forces",
@@ -42667,7 +42714,8 @@
      "shortfall": 1,
      "pearl": "vectors act1 whatavectoris",
      "pearl_index": 7,
-     "map": "Vectors_Act1_WhatAVectorIs"
+     "map": "Vectors_Act1_WhatAVectorIs",
+     "rooms": null
     },
     {
      "sequence": "forces",
@@ -44364,7 +44412,8 @@
      "shortfall": 4,
      "pearl": "vfm 01 foundations",
      "pearl_index": 8,
-     "map": "VFM_01_Foundations"
+     "map": "VFM_01_Foundations",
+     "rooms": null
     },
     {
      "sequence": "forces",
@@ -46005,7 +46054,8 @@
      "shortfall": 4,
      "pearl": "vectoroperations",
      "pearl_index": 9,
-     "map": "VectorOperations"
+     "map": "VectorOperations",
+     "rooms": null
     },
     {
      "sequence": "forces",
@@ -47622,7 +47672,8 @@
      "shortfall": 2,
      "pearl": "vectors act2 vectorarithmetic",
      "pearl_index": 10,
-     "map": "Vectors_Act2_VectorArithmetic"
+     "map": "Vectors_Act2_VectorArithmetic",
+     "rooms": null
     },
     {
      "sequence": "forces",
@@ -49263,7 +49314,8 @@
      "shortfall": 0,
      "pearl": "vfm 02 operations",
      "pearl_index": 11,
-     "map": "VFM_02_Operations"
+     "map": "VFM_02_Operations",
+     "rooms": null
     },
     {
      "sequence": "forces",
@@ -50932,7 +50984,8 @@
      "shortfall": 7,
      "pearl": "vectoradvanced",
      "pearl_index": 12,
-     "map": "VectorAdvanced"
+     "map": "VectorAdvanced",
+     "rooms": null
     },
     {
      "sequence": "forces",
@@ -52533,7 +52586,8 @@
      "shortfall": 1,
      "pearl": "vectors act3 fieldsandmotion",
      "pearl_index": 13,
-     "map": "Vectors_Act3_FieldsAndMotion"
+     "map": "Vectors_Act3_FieldsAndMotion",
+     "rooms": null
     },
     {
      "sequence": "forces",
@@ -54238,7 +54292,8 @@
      "shortfall": 4,
      "pearl": "vfm 03 motion",
      "pearl_index": 14,
-     "map": "VFM_03_Motion"
+     "map": "VFM_03_Motion",
+     "rooms": null
     },
     {
      "sequence": "forces",
@@ -55844,7 +55899,8 @@
      "shortfall": 3,
      "pearl": "vectors act4a kineticforces",
      "pearl_index": 15,
-     "map": "Vectors_Act4a_KineticForces"
+     "map": "Vectors_Act4a_KineticForces",
+     "rooms": null
     },
     {
      "sequence": "forces",
@@ -57466,7 +57522,8 @@
      "shortfall": 3,
      "pearl": "vectors act4b oscillation",
      "pearl_index": 16,
-     "map": "Vectors_Act4b_Oscillation"
+     "map": "Vectors_Act4b_Oscillation",
+     "rooms": null
     },
     {
      "sequence": "forces",
@@ -59074,7 +59131,8 @@
      "shortfall": 1,
      "pearl": "composition",
      "pearl_index": 20,
-     "map": "ForcesComposition"
+     "map": "ForcesComposition",
+     "rooms": null
     },
     {
      "sequence": "forces",
@@ -60669,7 +60727,8 @@
      "shortfall": 1,
      "pearl": "vectorapplied",
      "pearl_index": 21,
-     "map": "VectorApplied"
+     "map": "VectorApplied",
+     "rooms": null
     },
     {
      "sequence": "forces",
@@ -62332,7 +62391,8 @@
      "shortfall": 8,
      "pearl": "vfm 04 fields",
      "pearl_index": 22,
-     "map": "VFM_04_Fields"
+     "map": "VFM_04_Fields",
+     "rooms": null
     },
     {
      "sequence": "forces",
@@ -63967,7 +64027,8 @@
      "shortfall": 3,
      "pearl": "vfm 05 launch",
      "pearl_index": 23,
-     "map": "VFM_05_Launch"
+     "map": "VFM_05_Launch",
+     "rooms": null
     },
     {
      "sequence": "forces",
@@ -64139,8 +64200,7 @@
      "rejected": 0,
      "venues": {
       "interior": 2,
-      "porch": 1,
-      "courtyard": 2
+      "courtyard": 3
      },
      "reasons": {},
      "reason_examples": [],
@@ -64149,7 +64209,7 @@
      "rooms_on_disk": 4,
      "rooms_authored": 4,
      "lineages": 78,
-     "lineages_walled": 17,
+     "lineages_walled": 18,
      "cast": [
       "particle_systems",
       "vector_fields",
@@ -65586,7 +65646,8 @@
      "shortfall": 3,
      "pearl": "systems",
      "pearl_index": 24,
-     "map": "ForcesSystems"
+     "map": "ForcesSystems",
+     "rooms": null
     },
     {
      "sequence": "forces",
@@ -67261,7 +67322,8 @@
      "shortfall": 10,
      "pearl": "vfm 06 springs",
      "pearl_index": 25,
-     "map": "VFM_06_Springs"
+     "map": "VFM_06_Springs",
+     "rooms": null
     },
     {
      "sequence": "forces",
@@ -68910,7 +68972,8 @@
      "shortfall": 2,
      "pearl": "chaos",
      "pearl_index": 26,
-     "map": "ForcesChaos"
+     "map": "ForcesChaos",
+     "rooms": null
     },
     {
      "sequence": "forces",
@@ -70532,7 +70595,8 @@
      "shortfall": 0,
      "pearl": "vfm 07 gravity",
      "pearl_index": 27,
-     "map": "VFM_07_Gravity"
+     "map": "VFM_07_Gravity",
+     "rooms": null
     },
     {
      "sequence": "forces",
@@ -72148,7 +72212,8 @@
      "shortfall": 1,
      "pearl": "vfm 08 arena",
      "pearl_index": 28,
-     "map": "VFM_08_Arena"
+     "map": "VFM_08_Arena",
+     "rooms": null
     },
     {
      "sequence": "forces",
@@ -73810,11 +73875,12 @@
      "shortfall": 2,
      "pearl": "arena",
      "pearl_index": 29,
-     "map": "ForcesArena"
+     "map": "ForcesArena",
+     "rooms": null
     }
    ],
    "why_museum": "crowned",
-   "seconds": 35.2
+   "seconds": 31.6
   },
   {
    "sequence": "formfinding",
@@ -74564,7 +74630,8 @@
      "shortfall": 1,
      "pearl": "descent",
      "pearl_index": 0,
-     "map": "FormFinding_Descent"
+     "map": "FormFinding_Descent",
+     "rooms": null
     },
     {
      "sequence": "formfinding",
@@ -74885,7 +74952,8 @@
      "shortfall": 2,
      "pearl": "catenary",
      "pearl_index": 1,
-     "map": "FormFinding_Catenary"
+     "map": "FormFinding_Catenary",
+     "rooms": null
     },
     {
      "sequence": "formfinding",
@@ -75184,7 +75252,8 @@
      "shortfall": 0,
      "pearl": "relaxation",
      "pearl_index": 2,
-     "map": "FormFinding_Relaxation"
+     "map": "FormFinding_Relaxation",
+     "rooms": null
     },
     {
      "sequence": "formfinding",
@@ -75486,7 +75555,8 @@
      "shortfall": 1,
      "pearl": "equilibrium",
      "pearl_index": 3,
-     "map": "FormFinding_Equilibrium"
+     "map": "FormFinding_Equilibrium",
+     "rooms": null
     },
     {
      "sequence": "formfinding",
@@ -75808,7 +75878,8 @@
      "shortfall": 5,
      "pearl": "annealing",
      "pearl_index": 4,
-     "map": "FormFinding_Annealing"
+     "map": "FormFinding_Annealing",
+     "rooms": null
     },
     {
      "sequence": "formfinding",
@@ -76076,11 +76147,12 @@
      "shortfall": 0,
      "pearl": "forge",
      "pearl_index": 6,
-     "map": "FormFinding_Forge"
+     "map": "FormFinding_Forge",
+     "rooms": null
     }
    ],
    "why_museum": "em_order rotation",
-   "seconds": 1.7
+   "seconds": 1.6
   },
   {
    "sequence": "wavefunctions",
@@ -78313,7 +78385,8 @@
      "shortfall": 3,
      "pearl": "intro",
      "pearl_index": 0,
-     "map": "WaveFunctions_Intro"
+     "map": "WaveFunctions_Intro",
+     "rooms": null
     },
     {
      "sequence": "wavefunctions",
@@ -79303,7 +79376,8 @@
      "shortfall": 3,
      "pearl": "pendulum",
      "pearl_index": 1,
-     "map": "WaveFunctions_Pendulum"
+     "map": "WaveFunctions_Pendulum",
+     "rooms": null
     },
     {
      "sequence": "wavefunctions",
@@ -80202,7 +80276,8 @@
      "shortfall": 3,
      "pearl": "unit circle",
      "pearl_index": 2,
-     "map": "WaveFunctions_Unit_Circle"
+     "map": "WaveFunctions_Unit_Circle",
+     "rooms": null
     },
     {
      "sequence": "wavefunctions",
@@ -81114,7 +81189,8 @@
      "shortfall": 2,
      "pearl": "sine space",
      "pearl_index": 3,
-     "map": "WaveFunctions_Sine_Space"
+     "map": "WaveFunctions_Sine_Space",
+     "rooms": null
     },
     {
      "sequence": "wavefunctions",
@@ -82013,7 +82089,8 @@
      "shortfall": 3,
      "pearl": "3d wave propagation",
      "pearl_index": 4,
-     "map": "WaveFunctions_3D_Wave_Propagation"
+     "map": "WaveFunctions_3D_Wave_Propagation",
+     "rooms": null
     },
     {
      "sequence": "wavefunctions",
@@ -83006,7 +83083,8 @@
      "shortfall": 2,
      "pearl": "effect sound",
      "pearl_index": 5,
-     "map": "WaveFunctions_Effect_Sound"
+     "map": "WaveFunctions_Effect_Sound",
+     "rooms": null
     },
     {
      "sequence": "wavefunctions",
@@ -83905,7 +83983,8 @@
      "shortfall": 1,
      "pearl": "bernini",
      "pearl_index": 6,
-     "map": "Wavefunctions_Bernini"
+     "map": "Wavefunctions_Bernini",
+     "rooms": null
     },
     {
      "sequence": "wavefunctions",
@@ -84811,7 +84890,8 @@
      "shortfall": 2,
      "pearl": "john cage",
      "pearl_index": 7,
-     "map": "WaveFunctions_John_Cage"
+     "map": "WaveFunctions_John_Cage",
+     "rooms": null
     },
     {
      "sequence": "wavefunctions",
@@ -85715,7 +85795,8 @@
      "shortfall": 1,
      "pearl": "airmusic",
      "pearl_index": 8,
-     "map": "WaveFunctions_AirMusic"
+     "map": "WaveFunctions_AirMusic",
+     "rooms": null
     },
     {
      "sequence": "wavefunctions",
@@ -86616,7 +86697,8 @@
      "shortfall": 2,
      "pearl": "sky stairs",
      "pearl_index": 9,
-     "map": "Wavefunctions_Sky_Stairs"
+     "map": "Wavefunctions_Sky_Stairs",
+     "rooms": null
     },
     {
      "sequence": "wavefunctions",
@@ -87537,7 +87619,8 @@
      "shortfall": 4,
      "pearl": "trigwalkingpath",
      "pearl_index": 10,
-     "map": "WaveFunctions_TrigWalkingPath"
+     "map": "WaveFunctions_TrigWalkingPath",
+     "rooms": null
     },
     {
      "sequence": "wavefunctions",
@@ -88566,11 +88649,12 @@
      "shortfall": 5,
      "pearl": "synthesis lab",
      "pearl_index": 12,
-     "map": "WaveFunctions_Synthesis_Lab"
+     "map": "WaveFunctions_Synthesis_Lab",
+     "rooms": null
     }
    ],
    "why_museum": "em_order rotation",
-   "seconds": 7.2
+   "seconds": 7.0
   },
   {
    "sequence": "randomness",
@@ -88664,25 +88748,24 @@
      "miura_crawler"
     ]
    },
-   "placed": 103,
+   "placed": 106,
    "interior": 65,
-   "rejected": 3,
+   "rejected": 0,
    "venues": {
-    "porch": 16,
+    "porch": 15,
     "interior": 65,
     "courtyard": 18,
-    "outside": 4
+    "hall": 3,
+    "outside": 5
    },
-   "reasons": {
-    "escalation": 3
-   },
+   "reasons": {},
    "reason_examples": [],
    "slots": 53,
    "walls": 55,
    "rooms_on_disk": 96,
    "rooms_authored": 91,
    "lineages": 644,
-   "lineages_walled": 149,
+   "lineages_walled": 141,
    "cast": [
     "entropy_axiom",
     "slot_machine",
@@ -89717,29 +89800,23 @@
       "hand_branches": 0,
       "pearl": "random definition"
      },
-     "placed": 19,
+     "placed": 20,
      "interior": 15,
-     "rejected": 1,
+     "rejected": 0,
      "venues": {
       "porch": 1,
       "interior": 15,
-      "courtyard": 3
+      "courtyard": 3,
+      "hall": 1
      },
-     "reasons": {
-      "escalation": 1
-     },
-     "reason_examples": [
-      {
-       "token": "bell_alley",
-       "why": "escalation: precinct: no exterior venue is large enough either"
-      }
-     ],
+     "reasons": {},
+     "reason_examples": [],
      "slots": 53,
      "walls": 55,
      "rooms_on_disk": 18,
      "rooms_authored": 17,
      "lineages": 46,
-     "lineages_walled": 11,
+     "lineages_walled": 8,
      "cast": [
       "entropy_axiom",
       "slot_machine",
@@ -90453,7 +90530,8 @@
      "shortfall": 5,
      "pearl": "random definition",
      "pearl_index": 0,
-     "map": "Random_Definition"
+     "map": "Random_Definition",
+     "rooms": null
     },
     {
      "sequence": "randomness",
@@ -91175,7 +91253,8 @@
      "shortfall": 2,
      "pearl": "random entropy",
      "pearl_index": 1,
-     "map": "Random_Entropy"
+     "map": "Random_Entropy",
+     "rooms": null
     },
     {
      "sequence": "randomness",
@@ -91904,7 +91983,8 @@
      "shortfall": 2,
      "pearl": "random remove",
      "pearl_index": 2,
-     "map": "Random_Remove"
+     "map": "Random_Remove",
+     "rooms": null
     },
     {
      "sequence": "randomness",
@@ -91984,22 +92064,16 @@
       "hand_branches": 0,
       "pearl": "10 print algorithm"
      },
-     "placed": 2,
+     "placed": 3,
      "interior": 1,
-     "rejected": 1,
+     "rejected": 0,
      "venues": {
       "courtyard": 1,
-      "interior": 1
+      "interior": 1,
+      "hall": 1
      },
-     "reasons": {
-      "escalation": 1
-     },
-     "reason_examples": [
-      {
-       "token": "nature_system_demo",
-       "why": "escalation: precinct: no exterior venue is large enough either"
-      }
-     ],
+     "reasons": {},
+     "reason_examples": [],
      "slots": 53,
      "walls": 55,
      "rooms_on_disk": 3,
@@ -92618,7 +92692,8 @@
      "shortfall": 2,
      "pearl": "10 print algorithm",
      "pearl_index": 3,
-     "map": "Randomness_10_PRINT_Algorithm"
+     "map": "Randomness_10_PRINT_Algorithm",
+     "rooms": null
     },
     {
      "sequence": "randomness",
@@ -93337,7 +93412,8 @@
      "shortfall": 1,
      "pearl": "random cubes",
      "pearl_index": 4,
-     "map": "Random_Cubes"
+     "map": "Random_Cubes",
+     "rooms": null
     },
     {
      "sequence": "randomness",
@@ -94044,7 +94120,8 @@
      "shortfall": 2,
      "pearl": "random rotate random xyz",
      "pearl_index": 5,
-     "map": "Random_Rotate_Random_XYZ"
+     "map": "Random_Rotate_Random_XYZ",
+     "rooms": null
     },
     {
      "sequence": "randomness",
@@ -94776,7 +94853,8 @@
      "shortfall": 2,
      "pearl": "random walk",
      "pearl_index": 6,
-     "map": "Random_Walk"
+     "map": "Random_Walk",
+     "rooms": null
     },
     {
      "sequence": "randomness",
@@ -95530,7 +95608,8 @@
      "shortfall": 5,
      "pearl": "random gaussian",
      "pearl_index": 7,
-     "map": "Random_Gaussian"
+     "map": "Random_Gaussian",
+     "rooms": null
     },
     {
      "sequence": "randomness",
@@ -96275,7 +96354,8 @@
      "shortfall": 6,
      "pearl": "random mushrooms",
      "pearl_index": 9,
-     "map": "Random_Mushrooms"
+     "map": "Random_Mushrooms",
+     "rooms": null
     },
     {
      "sequence": "randomness",
@@ -96355,29 +96435,23 @@
       "hand_branches": 0,
       "pearl": "random space geometry"
      },
-     "placed": 7,
+     "placed": 8,
      "interior": 5,
-     "rejected": 1,
+     "rejected": 0,
      "venues": {
+      "hall": 1,
       "courtyard": 1,
       "interior": 5,
-      "porch": 1
+      "outside": 1
      },
-     "reasons": {
-      "escalation": 1
-     },
-     "reason_examples": [
-      {
-       "token": "env_one",
-       "why": "escalation: precinct: no exterior venue is large enough either"
-      }
-     ],
+     "reasons": {},
+     "reason_examples": [],
      "slots": 53,
      "walls": 55,
      "rooms_on_disk": 6,
      "rooms_authored": 6,
      "lineages": 46,
-     "lineages_walled": 10,
+     "lineages_walled": 5,
      "cast": [
       "env_one",
       "random_transformations_geometric",
@@ -97019,7 +97093,8 @@
      "shortfall": 3,
      "pearl": "random space geometry",
      "pearl_index": 10,
-     "map": "Random_Space_Geometry"
+     "map": "Random_Space_Geometry",
+     "rooms": null
     },
     {
      "sequence": "randomness",
@@ -97746,7 +97821,8 @@
      "shortfall": 4,
      "pearl": "examples of randomness",
      "pearl_index": 11,
-     "map": "Randomness_Examples_of_Randomness"
+     "map": "Randomness_Examples_of_Randomness",
+     "rooms": null
     },
     {
      "sequence": "randomness",
@@ -98450,7 +98526,8 @@
      "shortfall": 1,
      "pearl": "random pheromone",
      "pearl_index": 12,
-     "map": "Random_Pheromone"
+     "map": "Random_Pheromone",
+     "rooms": null
     },
     {
      "sequence": "randomness",
@@ -99185,7 +99262,8 @@
      "shortfall": 2,
      "pearl": "random space",
      "pearl_index": 13,
-     "map": "Random_Space"
+     "map": "Random_Space",
+     "rooms": null
     },
     {
      "sequence": "randomness",
@@ -99960,11 +100038,12 @@
      "shortfall": 4,
      "pearl": "random game",
      "pearl_index": 14,
-     "map": "Random_Game"
+     "map": "Random_Game",
+     "rooms": null
     }
    ],
    "why_museum": "em_order rotation",
-   "seconds": 29.5
+   "seconds": 25.3
   },
   {
    "sequence": "noise",
@@ -100625,7 +100704,8 @@
      "shortfall": 5,
      "pearl": "random noise types",
      "pearl_index": 0,
-     "map": "Random_Noise_Types"
+     "map": "Random_Noise_Types",
+     "rooms": null
     },
     {
      "sequence": "noise",
@@ -100846,7 +100926,8 @@
      "shortfall": 1,
      "pearl": "columns",
      "pearl_index": 1,
-     "map": "Noise_Columns"
+     "map": "Noise_Columns",
+     "rooms": null
     },
     {
      "sequence": "noise",
@@ -101079,7 +101160,8 @@
      "shortfall": 2,
      "pearl": "point",
      "pearl_index": 2,
-     "map": "Noise_One"
+     "map": "Noise_One",
+     "rooms": null
     },
     {
      "sequence": "noise",
@@ -101339,7 +101421,8 @@
      "shortfall": 2,
      "pearl": "voxel",
      "pearl_index": 3,
-     "map": "Noise_Voxel"
+     "map": "Noise_Voxel",
+     "rooms": null
     },
     {
      "sequence": "noise",
@@ -101567,7 +101650,8 @@
      "shortfall": 2,
      "pearl": "6 wall",
      "pearl_index": 4,
-     "map": "Noise_6_Wall"
+     "map": "Noise_6_Wall",
+     "rooms": null
     },
     {
      "sequence": "noise",
@@ -101796,7 +101880,8 @@
      "shortfall": 1,
      "pearl": "inside noise",
      "pearl_index": 5,
-     "map": "Noise_Inside_Noise"
+     "map": "Noise_Inside_Noise",
+     "rooms": null
     },
     {
      "sequence": "noise",
@@ -102025,7 +102110,8 @@
      "shortfall": 1,
      "pearl": "space 10",
      "pearl_index": 6,
-     "map": "Noise_Space_10"
+     "map": "Noise_Space_10",
+     "rooms": null
     },
     {
      "sequence": "noise",
@@ -102301,11 +102387,12 @@
      "shortfall": 4,
      "pearl": "perlin simplex",
      "pearl_index": 7,
-     "map": "Noise_Perlin_Simplex"
+     "map": "Noise_Perlin_Simplex",
+     "rooms": null
     }
    ],
    "why_museum": "em_order rotation",
-   "seconds": 22.6
+   "seconds": 20.4
   },
   {
    "sequence": "cellularautomata",
@@ -102353,11 +102440,11 @@
     ]
    },
    "placed": 34,
-   "interior": 24,
+   "interior": 23,
    "rejected": 0,
    "venues": {
-    "interior": 24,
-    "courtyard": 9,
+    "interior": 23,
+    "courtyard": 10,
     "porch": 1
    },
    "reasons": {},
@@ -102716,9 +102803,9 @@
      "pearl": "ca agentscircuits"
     }
    },
-   "interior_share": 0.7059,
+   "interior_share": 0.6765,
    "housed": false,
-   "shortfall": 10,
+   "shortfall": 11,
    "pearls": [
     {
      "sequence": "cellularautomata",
@@ -103053,7 +103140,8 @@
      "shortfall": 1,
      "pearl": "ca introduction",
      "pearl_index": 0,
-     "map": "CA_Introduction"
+     "map": "CA_Introduction",
+     "rooms": null
     },
     {
      "sequence": "cellularautomata",
@@ -103372,7 +103460,8 @@
      "shortfall": 1,
      "pearl": "ca elementaryrules",
      "pearl_index": 1,
-     "map": "CA_ElementaryRules"
+     "map": "CA_ElementaryRules",
+     "rooms": null
     },
     {
      "sequence": "cellularautomata",
@@ -103412,11 +103501,11 @@
       "pearl": "ca gameoflife"
      },
      "placed": 8,
-     "interior": 7,
+     "interior": 6,
      "rejected": 0,
      "venues": {
-      "interior": 7,
-      "courtyard": 1
+      "interior": 6,
+      "courtyard": 2
      },
      "reasons": {},
      "reason_examples": [],
@@ -103730,12 +103819,13 @@
        "pearl": "ca gameoflife"
       }
      },
-     "interior_share": 0.875,
+     "interior_share": 0.75,
      "housed": false,
-     "shortfall": 1,
+     "shortfall": 2,
      "pearl": "ca gameoflife",
      "pearl_index": 2,
-     "map": "CA_GameOfLife"
+     "map": "CA_GameOfLife",
+     "rooms": null
     },
     {
      "sequence": "cellularautomata",
@@ -104070,7 +104160,8 @@
      "shortfall": 1,
      "pearl": "ca beyondbinary",
      "pearl_index": 3,
-     "map": "CA_BeyondBinary"
+     "map": "CA_BeyondBinary",
+     "rooms": null
     },
     {
      "sequence": "cellularautomata",
@@ -104418,7 +104509,8 @@
      "shortfall": 4,
      "pearl": "ca expandingspace",
      "pearl_index": 4,
-     "map": "CA_ExpandingSpace"
+     "map": "CA_ExpandingSpace",
+     "rooms": null
     },
     {
      "sequence": "cellularautomata",
@@ -104742,7 +104834,8 @@
      "shortfall": 0,
      "pearl": "ca softrules",
      "pearl_index": 5,
-     "map": "CA_SoftRules"
+     "map": "CA_SoftRules",
+     "rooms": null
     },
     {
      "sequence": "cellularautomata",
@@ -105086,7 +105179,8 @@
      "shortfall": 1,
      "pearl": "ca agentscircuits",
      "pearl_index": 6,
-     "map": "CA_AgentsCircuits"
+     "map": "CA_AgentsCircuits",
+     "rooms": null
     },
     {
      "sequence": "cellularautomata",
@@ -105421,11 +105515,12 @@
      "shortfall": 1,
      "pearl": "ca edgeofchaos",
      "pearl_index": 8,
-     "map": "CA_EdgeOfChaos"
+     "map": "CA_EdgeOfChaos",
+     "rooms": null
     }
    ],
    "why_museum": "em_order rotation",
-   "seconds": 1.1
+   "seconds": 1.2
   },
   {
    "sequence": "fractals",
@@ -105496,24 +105591,24 @@
      "space_filling_curve_gallery"
     ]
    },
-   "placed": 77,
+   "placed": 78,
    "interior": 50,
-   "rejected": 1,
+   "rejected": 0,
    "venues": {
     "interior": 50,
-    "porch": 8,
-    "courtyard": 19
+    "porch": 7,
+    "courtyard": 19,
+    "hall": 1,
+    "outside": 1
    },
-   "reasons": {
-    "escalation": 1
-   },
+   "reasons": {},
    "reason_examples": [],
    "slots": 17,
    "walls": 12,
    "rooms_on_disk": 71,
    "rooms_authored": 69,
    "lineages": 210,
-   "lineages_walled": 29,
+   "lineages_walled": 26,
    "cast": [
     "fractal_recursion_2",
     "recursive_table",
@@ -106820,7 +106915,8 @@
      "shortfall": 4,
      "pearl": "fractal recursion",
      "pearl_index": 0,
-     "map": "Fractal_Recursion"
+     "map": "Fractal_Recursion",
+     "rooms": null
     },
     {
      "sequence": "fractals",
@@ -106881,29 +106977,24 @@
       "hand_branches": 0,
       "pearl": "fractal recursivetrees"
      },
-     "placed": 15,
+     "placed": 16,
      "interior": 11,
-     "rejected": 1,
+     "rejected": 0,
      "venues": {
       "courtyard": 2,
-      "porch": 2,
-      "interior": 11
+      "porch": 1,
+      "interior": 11,
+      "hall": 1,
+      "outside": 1
      },
-     "reasons": {
-      "escalation": 1
-     },
-     "reason_examples": [
-      {
-       "token": "mobius_world",
-       "why": "escalation: precinct: no exterior venue is large enough either"
-      }
-     ],
+     "reasons": {},
+     "reason_examples": [],
      "slots": 17,
      "walls": 12,
      "rooms_on_disk": 15,
      "rooms_authored": 15,
      "lineages": 21,
-     "lineages_walled": 3,
+     "lineages_walled": 0,
      "cast": [
       "inverted_tree_cloud",
       "recursive_tree",
@@ -107456,7 +107547,8 @@
      "shortfall": 5,
      "pearl": "fractal recursivetrees",
      "pearl_index": 1,
-     "map": "Fractal_RecursiveTrees"
+     "map": "Fractal_RecursiveTrees",
+     "rooms": null
     },
     {
      "sequence": "fractals",
@@ -108049,7 +108141,8 @@
      "shortfall": 3,
      "pearl": "fractal cantorset",
      "pearl_index": 2,
-     "map": "Fractal_CantorSet"
+     "map": "Fractal_CantorSet",
+     "rooms": null
     },
     {
      "sequence": "fractals",
@@ -108667,7 +108760,8 @@
      "shortfall": 4,
      "pearl": "fractal kochsierpinski",
      "pearl_index": 3,
-     "map": "Fractal_KochSierpinski"
+     "map": "Fractal_KochSierpinski",
+     "rooms": null
     },
     {
      "sequence": "fractals",
@@ -109223,7 +109317,8 @@
      "shortfall": 3,
      "pearl": "fractal mengersponge",
      "pearl_index": 4,
-     "map": "Fractal_MengerSponge"
+     "map": "Fractal_MengerSponge",
+     "rooms": null
     },
     {
      "sequence": "fractals",
@@ -109784,7 +109879,8 @@
      "shortfall": 3,
      "pearl": "fractal goldenspiral",
      "pearl_index": 5,
-     "map": "Fractal_GoldenSpiral"
+     "map": "Fractal_GoldenSpiral",
+     "rooms": null
     },
     {
      "sequence": "fractals",
@@ -110363,7 +110459,8 @@
      "shortfall": 1,
      "pearl": "fractal juliaset",
      "pearl_index": 6,
-     "map": "Fractal_JuliaSet"
+     "map": "Fractal_JuliaSet",
+     "rooms": null
     },
     {
      "sequence": "fractals",
@@ -110920,7 +111017,8 @@
      "shortfall": 1,
      "pearl": "fractal mandelbrotset",
      "pearl_index": 7,
-     "map": "Fractal_MandelbrotSet"
+     "map": "Fractal_MandelbrotSet",
+     "rooms": null
     },
     {
      "sequence": "fractals",
@@ -111492,7 +111590,8 @@
      "shortfall": 2,
      "pearl": "fractal synthesis",
      "pearl_index": 9,
-     "map": "Fractal_Synthesis"
+     "map": "Fractal_Synthesis",
+     "rooms": null
     },
     {
      "sequence": "fractals",
@@ -112058,11 +112157,12 @@
      "shortfall": 2,
      "pearl": "fractal crosssequence",
      "pearl_index": 10,
-     "map": "Fractal_CrossSequence"
+     "map": "Fractal_CrossSequence",
+     "rooms": null
     }
    ],
    "why_museum": "em_order rotation",
-   "seconds": 9.2
+   "seconds": 8.2
   },
   {
    "sequence": "lsystems",
@@ -112756,7 +112856,8 @@
      "shortfall": 4,
      "pearl": "grammar lab",
      "pearl_index": 0,
-     "map": "LSystems_Grammar_Lab"
+     "map": "LSystems_Grammar_Lab",
+     "rooms": null
     },
     {
      "sequence": "lsystems",
@@ -113049,7 +113150,8 @@
      "shortfall": 3,
      "pearl": "growth",
      "pearl_index": 1,
-     "map": "LSystems_Growth"
+     "map": "LSystems_Growth",
+     "rooms": null
     },
     {
      "sequence": "lsystems",
@@ -113319,7 +113421,8 @@
      "shortfall": 0,
      "pearl": "grammars and curves",
      "pearl_index": 2,
-     "map": "LSystems_Grammars_And_Curves"
+     "map": "LSystems_Grammars_And_Curves",
+     "rooms": null
     },
     {
      "sequence": "lsystems",
@@ -113602,7 +113705,8 @@
      "shortfall": 1,
      "pearl": "architecture",
      "pearl_index": 3,
-     "map": "LSystems_Architecture"
+     "map": "LSystems_Architecture",
+     "rooms": null
     },
     {
      "sequence": "lsystems",
@@ -113878,7 +113982,8 @@
      "shortfall": 1,
      "pearl": "competition",
      "pearl_index": 4,
-     "map": "LSystems_Competition"
+     "map": "LSystems_Competition",
+     "rooms": null
     },
     {
      "sequence": "lsystems",
@@ -114148,7 +114253,8 @@
      "shortfall": 0,
      "pearl": "living",
      "pearl_index": 5,
-     "map": "LSystems_Living"
+     "map": "LSystems_Living",
+     "rooms": null
     },
     {
      "sequence": "lsystems",
@@ -114467,11 +114573,12 @@
      "shortfall": 2,
      "pearl": "assemblage same desire",
      "pearl_index": 7,
-     "map": "Assemblage_Same_Desire"
+     "map": "Assemblage_Same_Desire",
+     "rooms": null
     }
    ],
    "why_museum": "crowned",
-   "seconds": 0.9
+   "seconds": 1.0
   },
   {
    "sequence": "proceduralgeneration",
@@ -114506,17 +114613,17 @@
      "mirror_cellular_texture_for_3d"
     ]
    },
-   "placed": 28,
+   "placed": 29,
    "interior": 13,
-   "rejected": 1,
+   "rejected": 0,
    "venues": {
     "courtyard": 11,
     "interior": 13,
-    "porch": 4
+    "porch": 3,
+    "hall": 1,
+    "outside": 1
    },
-   "reasons": {
-    "escalation": 1
-   },
+   "reasons": {},
    "reason_examples": [],
    "slots": 19,
    "walls": 20,
@@ -115035,7 +115142,8 @@
      "shortfall": 1,
      "pearl": "pg genetic evolution",
      "pearl_index": 0,
-     "map": "PG_Genetic_Evolution"
+     "map": "PG_Genetic_Evolution",
+     "rooms": null
     },
     {
      "sequence": "proceduralgeneration",
@@ -115250,7 +115358,8 @@
      "shortfall": 2,
      "pearl": "pg space colonization",
      "pearl_index": 1,
-     "map": "PG_Space_Colonization"
+     "map": "PG_Space_Colonization",
+     "rooms": null
     },
     {
      "sequence": "proceduralgeneration",
@@ -115460,7 +115569,8 @@
      "shortfall": 1,
      "pearl": "pg percolation network",
      "pearl_index": 2,
-     "map": "PG_Percolation_Network"
+     "map": "PG_Percolation_Network",
+     "rooms": null
     },
     {
      "sequence": "proceduralgeneration",
@@ -115691,7 +115801,8 @@
      "shortfall": 3,
      "pearl": "pg branching growth",
      "pearl_index": 3,
-     "map": "PG_Branching_Growth"
+     "map": "PG_Branching_Growth",
+     "rooms": null
     },
     {
      "sequence": "proceduralgeneration",
@@ -115921,7 +116032,8 @@
      "shortfall": 3,
      "pearl": "pg caves mazes",
      "pearl_index": 5,
-     "map": "PG_Caves_Mazes"
+     "map": "PG_Caves_Mazes",
+     "rooms": null
     },
     {
      "sequence": "proceduralgeneration",
@@ -116192,7 +116304,8 @@
      "shortfall": 3,
      "pearl": "pg sculpted forms",
      "pearl_index": 6,
-     "map": "PG_Sculpted_Forms"
+     "map": "PG_Sculpted_Forms",
+     "rooms": null
     },
     {
      "sequence": "proceduralgeneration",
@@ -116220,22 +116333,17 @@
       "hand_branches": 0,
       "pearl": "pg mirrored patterns"
      },
-     "placed": 5,
+     "placed": 6,
      "interior": 3,
-     "rejected": 1,
+     "rejected": 0,
      "venues": {
-      "porch": 2,
+      "porch": 1,
+      "hall": 1,
+      "outside": 1,
       "interior": 3
      },
-     "reasons": {
-      "escalation": 1
-     },
-     "reason_examples": [
-      {
-       "token": "rhizomatic_maze_space",
-       "why": "escalation: precinct: no exterior venue is large enough either"
-      }
-     ],
+     "reasons": {},
+     "reason_examples": [],
      "slots": 19,
      "walls": 20,
      "rooms_on_disk": 4,
@@ -116443,11 +116551,12 @@
      "shortfall": 3,
      "pearl": "pg mirrored patterns",
      "pearl_index": 7,
-     "map": "PG_Mirrored_Patterns"
+     "map": "PG_Mirrored_Patterns",
+     "rooms": null
     }
    ],
    "why_museum": "em_order rotation",
-   "seconds": 3.7
+   "seconds": 2.8
   },
   {
    "sequence": "softbodies",
@@ -117236,7 +117345,8 @@
      "shortfall": 3,
      "pearl": "soft body deformation",
      "pearl_index": 0,
-     "map": "SoftBodies_Soft_Body_Deformation"
+     "map": "SoftBodies_Soft_Body_Deformation",
+     "rooms": null
     },
     {
      "sequence": "softbodies",
@@ -117544,7 +117654,8 @@
      "shortfall": 6,
      "pearl": "carusell",
      "pearl_index": 1,
-     "map": "SoftBodies_Carusell"
+     "map": "SoftBodies_Carusell",
+     "rooms": null
     },
     {
      "sequence": "softbodies",
@@ -117827,7 +117938,8 @@
      "shortfall": 1,
      "pearl": "obsticals",
      "pearl_index": 2,
-     "map": "SoftBodies_Obsticals"
+     "map": "SoftBodies_Obsticals",
+     "rooms": null
     },
     {
      "sequence": "softbodies",
@@ -118097,7 +118209,8 @@
      "shortfall": 1,
      "pearl": "obsticals part2",
      "pearl_index": 3,
-     "map": "SoftBodies_Obsticals_Part2"
+     "map": "SoftBodies_Obsticals_Part2",
+     "rooms": null
     },
     {
      "sequence": "softbodies",
@@ -118374,7 +118487,8 @@
      "shortfall": 0,
      "pearl": "cloth physics",
      "pearl_index": 4,
-     "map": "SoftBodies_Cloth_Physics"
+     "map": "SoftBodies_Cloth_Physics",
+     "rooms": null
     },
     {
      "sequence": "softbodies",
@@ -118652,7 +118766,8 @@
      "shortfall": 1,
      "pearl": "playground of joy",
      "pearl_index": 5,
-     "map": "SoftBodies_Playground_of_Joy"
+     "map": "SoftBodies_Playground_of_Joy",
+     "rooms": null
     },
     {
      "sequence": "softbodies",
@@ -118965,7 +119080,8 @@
      "shortfall": 6,
      "pearl": "affect theory visualization",
      "pearl_index": 6,
-     "map": "SoftBodies_Affect_Theory_Visualization"
+     "map": "SoftBodies_Affect_Theory_Visualization",
+     "rooms": null
     },
     {
      "sequence": "softbodies",
@@ -119269,7 +119385,8 @@
      "shortfall": 1,
      "pearl": "proceduralgeneration reaction diffusion systems",
      "pearl_index": 7,
-     "map": "ProceduralGeneration_Reaction_Diffusion_Systems"
+     "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+     "rooms": null
     },
     {
      "sequence": "softbodies",
@@ -119547,7 +119664,8 @@
      "shortfall": 1,
      "pearl": "topology entropy morphogenesis",
      "pearl_index": 8,
-     "map": "Topology_Entropy_Morphogenesis"
+     "map": "Topology_Entropy_Morphogenesis",
+     "rooms": null
     },
     {
      "sequence": "softbodies",
@@ -119845,11 +119963,12 @@
      "shortfall": 0,
      "pearl": "softbody sb01 cloth drape corners",
      "pearl_index": 10,
-     "map": "SoftBody_sb01_cloth_drape_corners"
+     "map": "SoftBody_sb01_cloth_drape_corners",
+     "rooms": null
     }
    ],
    "why_museum": "em_order rotation",
-   "seconds": 5.5
+   "seconds": 5.2
   },
   {
    "sequence": "isosurfaces",
@@ -119902,15 +120021,16 @@
      "implicit_surface_modeling"
     ]
    },
-   "placed": 25,
+   "placed": 27,
    "interior": 13,
-   "rejected": 11,
+   "rejected": 9,
    "venues": {
     "courtyard": 12,
-    "interior": 13
+    "interior": 13,
+    "hall": 2
    },
    "reasons": {
-    "escalation": 11
+    "escalation": 9
    },
    "reason_examples": [],
    "slots": 35,
@@ -120538,7 +120658,8 @@
      "shortfall": 1,
      "pearl": "iso introduction",
      "pearl_index": 0,
-     "map": "ISO_Introduction"
+     "map": "ISO_Introduction",
+     "rooms": null
     },
     {
      "sequence": "isosurfaces",
@@ -120579,15 +120700,16 @@
       "hand_branches": 0,
       "pearl": "iso lookuptable"
      },
-     "placed": 2,
+     "placed": 3,
      "interior": 1,
-     "rejected": 4,
+     "rejected": 3,
      "venues": {
       "courtyard": 1,
+      "hall": 1,
       "interior": 1
      },
      "reasons": {
-      "escalation": 4
+      "escalation": 3
      },
      "reason_examples": [
       {
@@ -120600,10 +120722,6 @@
       },
       {
        "token": "marchingcubes_flat_landscape",
-       "why": "escalation: precinct: no exterior venue is large enough either"
-      },
-      {
-       "token": "marching_cubes",
        "why": "escalation: precinct: no exterior venue is large enough either"
       }
      ],
@@ -120878,7 +120996,8 @@
      "shortfall": 5,
      "pearl": "iso lookuptable",
      "pearl_index": 1,
-     "map": "ISO_LookupTable"
+     "map": "ISO_LookupTable",
+     "rooms": null
     },
     {
      "sequence": "isosurfaces",
@@ -121188,7 +121307,8 @@
      "shortfall": 3,
      "pearl": "iso shapesgallery",
      "pearl_index": 2,
-     "map": "ISO_ShapesGallery"
+     "map": "ISO_ShapesGallery",
+     "rooms": null
     },
     {
      "sequence": "isosurfaces",
@@ -121489,7 +121609,8 @@
      "shortfall": 1,
      "pearl": "iso torusgyroid",
      "pearl_index": 3,
-     "map": "ISO_TorusGyroid"
+     "map": "ISO_TorusGyroid",
+     "rooms": null
     },
     {
      "sequence": "isosurfaces",
@@ -121795,7 +121916,8 @@
      "shortfall": 1,
      "pearl": "iso sculpting",
      "pearl_index": 4,
-     "map": "ISO_Sculpting"
+     "map": "ISO_Sculpting",
+     "rooms": null
     },
     {
      "sequence": "isosurfaces",
@@ -121836,22 +121958,19 @@
       "hand_branches": 0,
       "pearl": "iso flatterrain"
      },
-     "placed": 2,
+     "placed": 3,
      "interior": 2,
-     "rejected": 2,
+     "rejected": 1,
      "venues": {
-      "interior": 2
+      "interior": 2,
+      "hall": 1
      },
      "reasons": {
-      "escalation": 2
+      "escalation": 1
      },
      "reason_examples": [
       {
        "token": "mc_flat_landscape",
-       "why": "escalation: precinct: no exterior venue is large enough either"
-      },
-      {
-       "token": "mc_terrain_demo",
        "why": "escalation: precinct: no exterior venue is large enough either"
       }
      ],
@@ -122116,7 +122235,8 @@
      "shortfall": 2,
      "pearl": "iso flatterrain",
      "pearl_index": 6,
-     "map": "ISO_FlatTerrain"
+     "map": "ISO_FlatTerrain",
+     "rooms": null
     },
     {
      "sequence": "isosurfaces",
@@ -122409,7 +122529,8 @@
      "shortfall": 0,
      "pearl": "iso portallandscape",
      "pearl_index": 7,
-     "map": "ISO_PortalLandscape"
+     "map": "ISO_PortalLandscape",
+     "rooms": null
     },
     {
      "sequence": "isosurfaces",
@@ -122720,7 +122841,8 @@
      "shortfall": 2,
      "pearl": "iso caves",
      "pearl_index": 8,
-     "map": "ISO_Caves"
+     "map": "ISO_Caves",
+     "rooms": null
     },
     {
      "sequence": "isosurfaces",
@@ -123036,7 +123158,8 @@
      "shortfall": 2,
      "pearl": "iso cavegeneration",
      "pearl_index": 9,
-     "map": "ISO_CaveGeneration"
+     "map": "ISO_CaveGeneration",
+     "rooms": null
     },
     {
      "sequence": "isosurfaces",
@@ -123348,7 +123471,8 @@
      "shortfall": 1,
      "pearl": "iso animatednoise",
      "pearl_index": 10,
-     "map": "ISO_AnimatedNoise"
+     "map": "ISO_AnimatedNoise",
+     "rooms": null
     },
     {
      "sequence": "isosurfaces",
@@ -123664,7 +123788,8 @@
      "shortfall": 4,
      "pearl": "iso metaballs",
      "pearl_index": 11,
-     "map": "ISO_Metaballs"
+     "map": "ISO_Metaballs",
+     "rooms": null
     },
     {
      "sequence": "isosurfaces",
@@ -123957,11 +124082,12 @@
      "shortfall": 1,
      "pearl": "iso implicitmodeling",
      "pearl_index": 12,
-     "map": "ISO_ImplicitModeling"
+     "map": "ISO_ImplicitModeling",
+     "rooms": null
     }
    ],
    "why_museum": "crowned",
-   "seconds": 236.0
+   "seconds": 204.2
   },
   {
    "sequence": "boolean_surfaces",
@@ -124215,7 +124341,8 @@
      "shortfall": 1,
      "pearl": "boolean union",
      "pearl_index": 0,
-     "map": "Boolean_Union"
+     "map": "Boolean_Union",
+     "rooms": null
     },
     {
      "sequence": "boolean_surfaces",
@@ -124319,7 +124446,8 @@
      "shortfall": 0,
      "pearl": "boolean intersection",
      "pearl_index": 1,
-     "map": "Boolean_Intersection"
+     "map": "Boolean_Intersection",
+     "rooms": null
     },
     {
      "sequence": "boolean_surfaces",
@@ -124437,7 +124565,8 @@
      "shortfall": 0,
      "pearl": "boolean difference",
      "pearl_index": 2,
-     "map": "Boolean_Difference"
+     "map": "Boolean_Difference",
+     "rooms": null
     },
     {
      "sequence": "boolean_surfaces",
@@ -124541,7 +124670,8 @@
      "shortfall": 0,
      "pearl": "boolean compose workbench",
      "pearl_index": 3,
-     "map": "Boolean_Compose_Workbench"
+     "map": "Boolean_Compose_Workbench",
+     "rooms": null
     }
    ],
    "why_museum": "em_order rotation",
@@ -124579,17 +124709,16 @@
      "ecosystem_simulation"
     ]
    },
-   "placed": 22,
-   "interior": 17,
-   "rejected": 7,
+   "placed": 29,
+   "interior": 16,
+   "rejected": 0,
    "venues": {
-    "interior": 17,
-    "courtyard": 3,
+    "hall": 7,
+    "interior": 16,
+    "courtyard": 4,
     "balcony": 2
    },
-   "reasons": {
-    "escalation": 7
-   },
+   "reasons": {},
    "reason_examples": [],
    "slots": 21,
    "walls": 12,
@@ -124851,9 +124980,9 @@
      "pearl": "particle swarm optimization"
     }
    },
-   "interior_share": 0.5862,
+   "interior_share": 0.5517,
    "housed": false,
-   "shortfall": 12,
+   "shortfall": 13,
    "pearls": [
     {
      "sequence": "swarmintelligence",
@@ -124880,23 +125009,14 @@
       "hand_branches": 0,
       "pearl": "physarumcolony"
      },
-     "placed": 0,
+     "placed": 2,
      "interior": 0,
-     "rejected": 2,
-     "venues": {},
-     "reasons": {
-      "escalation": 2
+     "rejected": 0,
+     "venues": {
+      "hall": 2
      },
-     "reason_examples": [
-      {
-       "token": "PhysarumColony",
-       "why": "escalation: precinct: no exterior venue is large enough either"
-      },
-      {
-       "token": "physarum_colony",
-       "why": "escalation: precinct: no exterior venue is large enough either"
-      }
-     ],
+     "reasons": {},
+     "reason_examples": [],
      "slots": 21,
      "walls": 12,
      "rooms_on_disk": 2,
@@ -125055,7 +125175,8 @@
      "shortfall": 2,
      "pearl": "physarumcolony",
      "pearl_index": 0,
-     "map": "SwarmIntelligence_PhysarumColony"
+     "map": "SwarmIntelligence_PhysarumColony",
+     "rooms": null
     },
     {
      "sequence": "swarmintelligence",
@@ -125082,23 +125203,14 @@
       "hand_branches": 0,
       "pearl": "flowfields"
      },
-     "placed": 0,
+     "placed": 2,
      "interior": 0,
-     "rejected": 2,
-     "venues": {},
-     "reasons": {
-      "escalation": 2
+     "rejected": 0,
+     "venues": {
+      "hall": 2
      },
-     "reason_examples": [
-      {
-       "token": "FlowFieldMain",
-       "why": "escalation: precinct: no exterior venue is large enough either"
-      },
-      {
-       "token": "physarum_colony",
-       "why": "escalation: precinct: no exterior venue is large enough either"
-      }
-     ],
+     "reasons": {},
+     "reason_examples": [],
      "slots": 21,
      "walls": 12,
      "rooms_on_disk": 2,
@@ -125257,7 +125369,8 @@
      "shortfall": 2,
      "pearl": "flowfields",
      "pearl_index": 1,
-     "map": "SwarmIntelligence_FlowFields"
+     "map": "SwarmIntelligence_FlowFields",
+     "rooms": null
     },
     {
      "sequence": "swarmintelligence",
@@ -125482,7 +125595,8 @@
      "shortfall": 1,
      "pearl": "boids algorithm",
      "pearl_index": 2,
-     "map": "SwarmIntelligence_Boids_Algorithm"
+     "map": "SwarmIntelligence_Boids_Algorithm",
+     "rooms": null
     },
     {
      "sequence": "swarmintelligence",
@@ -125509,27 +125623,17 @@
       "hand_branches": 0,
       "pearl": "agent based modeling abm"
      },
-     "placed": 5,
+     "placed": 7,
      "interior": 2,
-     "rejected": 2,
+     "rejected": 0,
      "venues": {
       "courtyard": 1,
       "interior": 2,
+      "hall": 2,
       "balcony": 2
      },
-     "reasons": {
-      "escalation": 2
-     },
-     "reason_examples": [
-      {
-       "token": "ant_colony_art",
-       "why": "escalation: precinct: no exterior venue is large enough either"
-      },
-      {
-       "token": "ant_colony_v2",
-       "why": "escalation: precinct: no exterior venue is large enough either"
-      }
-     ],
+     "reasons": {},
+     "reason_examples": [],
      "slots": 21,
      "walls": 12,
      "rooms_on_disk": 7,
@@ -125723,7 +125827,8 @@
      "shortfall": 5,
      "pearl": "agent based modeling abm",
      "pearl_index": 3,
-     "map": "SwarmIntelligence_Agent_Based_Modeling_ABM"
+     "map": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+     "rooms": null
     },
     {
      "sequence": "swarmintelligence",
@@ -125750,21 +125855,15 @@
       "hand_branches": 0,
       "pearl": "ant colony optimization"
      },
-     "placed": 1,
+     "placed": 2,
      "interior": 1,
-     "rejected": 1,
+     "rejected": 0,
      "venues": {
+      "hall": 1,
       "interior": 1
      },
-     "reasons": {
-      "escalation": 1
-     },
-     "reason_examples": [
-      {
-       "token": "AntColonyV2",
-       "why": "escalation: precinct: no exterior venue is large enough either"
-      }
-     ],
+     "reasons": {},
+     "reason_examples": [],
      "slots": 21,
      "walls": 12,
      "rooms_on_disk": 1,
@@ -125925,7 +126024,8 @@
      "shortfall": 1,
      "pearl": "ant colony optimization",
      "pearl_index": 4,
-     "map": "SwarmIntelligence_Ant_Colony_Optimization"
+     "map": "SwarmIntelligence_Ant_Colony_Optimization",
+     "rooms": null
     },
     {
      "sequence": "swarmintelligence",
@@ -125953,11 +126053,11 @@
       "pearl": "particle swarm optimization"
      },
      "placed": 8,
-     "interior": 7,
+     "interior": 6,
      "rejected": 0,
      "venues": {
-      "courtyard": 1,
-      "interior": 7
+      "courtyard": 2,
+      "interior": 6
      },
      "reasons": {},
      "reason_examples": [],
@@ -126154,12 +126254,13 @@
        "pearl": "particle swarm optimization"
       }
      },
-     "interior_share": 0.875,
+     "interior_share": 0.75,
      "housed": false,
-     "shortfall": 1,
+     "shortfall": 2,
      "pearl": "particle swarm optimization",
      "pearl_index": 6,
-     "map": "SwarmIntelligence_Particle_Swarm_Optimization"
+     "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+     "rooms": null
     },
     {
      "sequence": "swarmintelligence",
@@ -126347,11 +126448,12 @@
      "shortfall": 0,
      "pearl": "swarm intelligence algorithms",
      "pearl_index": 7,
-     "map": "SwarmIntelligence_Swarm_Intelligence_Algorithms"
+     "map": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+     "rooms": null
     }
    ],
    "why_museum": "em_order rotation",
-   "seconds": 5.3
+   "seconds": 0.8
   },
   {
    "sequence": "machinelearning",
@@ -126394,24 +126496,23 @@
      "anomaly_detection"
     ]
    },
-   "placed": 30,
+   "placed": 32,
    "interior": 9,
-   "rejected": 2,
+   "rejected": 0,
    "venues": {
     "courtyard": 20,
     "interior": 9,
-    "porch": 1
+    "porch": 1,
+    "hall": 2
    },
-   "reasons": {
-    "escalation": 2
-   },
+   "reasons": {},
    "reason_examples": [],
    "slots": 7,
    "walls": 48,
    "rooms_on_disk": 28,
    "rooms_authored": 28,
    "lineages": 96,
-   "lineages_walled": 8,
+   "lineages_walled": 7,
    "cast": [
     "evolved_creatures",
     "gradient_descent_visualization",
@@ -127004,7 +127105,8 @@
      "shortfall": 8,
      "pearl": "ml evolution",
      "pearl_index": 0,
-     "map": "ML_Evolution"
+     "map": "ML_Evolution",
+     "rooms": null
     },
     {
      "sequence": "machinelearning",
@@ -127255,7 +127357,8 @@
      "shortfall": 2,
      "pearl": "ml gradient landscape",
      "pearl_index": 1,
-     "map": "ML_Gradient_Landscape"
+     "map": "ML_Gradient_Landscape",
+     "rooms": null
     },
     {
      "sequence": "machinelearning",
@@ -127290,22 +127393,16 @@
       "hand_branches": 0,
       "pearl": "ml classification"
      },
-     "placed": 3,
+     "placed": 4,
      "interior": 1,
-     "rejected": 1,
+     "rejected": 0,
      "venues": {
       "courtyard": 2,
+      "hall": 1,
       "interior": 1
      },
-     "reasons": {
-      "escalation": 1
-     },
-     "reason_examples": [
-      {
-       "token": "enhanced_kmeans",
-       "why": "escalation: precinct: no exterior venue is large enough either"
-      }
-     ],
+     "reasons": {},
+     "reason_examples": [],
      "slots": 7,
      "walls": 48,
      "rooms_on_disk": 3,
@@ -127518,7 +127615,8 @@
      "shortfall": 3,
      "pearl": "ml classification",
      "pearl_index": 2,
-     "map": "ML_Classification"
+     "map": "ML_Classification",
+     "rooms": null
     },
     {
      "sequence": "machinelearning",
@@ -127774,7 +127872,8 @@
      "shortfall": 2,
      "pearl": "ml neural networks",
      "pearl_index": 3,
-     "map": "ML_Neural_Networks"
+     "map": "ML_Neural_Networks",
+     "rooms": null
     },
     {
      "sequence": "machinelearning",
@@ -128017,7 +128116,8 @@
      "shortfall": 2,
      "pearl": "ml perception",
      "pearl_index": 4,
-     "map": "ML_Perception"
+     "map": "ML_Perception",
+     "rooms": null
     },
     {
      "sequence": "machinelearning",
@@ -128268,7 +128368,8 @@
      "shortfall": 2,
      "pearl": "ml sequence memory",
      "pearl_index": 5,
-     "map": "ML_Sequence_Memory"
+     "map": "ML_Sequence_Memory",
+     "rooms": null
     },
     {
      "sequence": "machinelearning",
@@ -128506,7 +128607,8 @@
      "shortfall": 1,
      "pearl": "ml generative",
      "pearl_index": 7,
-     "map": "ML_Generative"
+     "map": "ML_Generative",
+     "rooms": null
     },
     {
      "sequence": "machinelearning",
@@ -128541,27 +128643,21 @@
       "hand_branches": 0,
       "pearl": "ml synthesis"
      },
-     "placed": 2,
+     "placed": 3,
      "interior": 0,
-     "rejected": 1,
+     "rejected": 0,
      "venues": {
-      "courtyard": 2
+      "courtyard": 2,
+      "hall": 1
      },
-     "reasons": {
-      "escalation": 1
-     },
-     "reason_examples": [
-      {
-       "token": "joint_learn_walk",
-       "why": "escalation: precinct: no exterior venue is large enough either"
-      }
-     ],
+     "reasons": {},
+     "reason_examples": [],
      "slots": 7,
      "walls": 48,
      "rooms_on_disk": 3,
      "rooms_authored": 3,
      "lineages": 12,
-     "lineages_walled": 1,
+     "lineages_walled": 0,
      "cast": [
       "anomaly_detection",
       "joint_learn_walk",
@@ -128761,11 +128857,12 @@
      "shortfall": 3,
      "pearl": "ml synthesis",
      "pearl_index": 8,
-     "map": "ML_Synthesis"
+     "map": "ML_Synthesis",
+     "rooms": null
     }
    ],
    "why_museum": "em_order rotation",
-   "seconds": 3.2
+   "seconds": 0.9
   },
   {
    "sequence": "graphtheory",
@@ -128803,16 +128900,17 @@
      "edmonds_algorithm"
     ]
    },
-   "placed": 20,
+   "placed": 21,
    "interior": 9,
-   "rejected": 2,
+   "rejected": 1,
    "venues": {
+    "hall": 1,
     "courtyard": 9,
     "interior": 9,
     "porch": 2
    },
    "reasons": {
-    "escalation": 2
+    "escalation": 1
    },
    "reason_examples": [],
    "slots": 21,
@@ -129057,20 +129155,18 @@
       "hand_branches": 0,
       "pearl": "gt foundations"
      },
-     "placed": 0,
+     "placed": 1,
      "interior": 0,
-     "rejected": 2,
-     "venues": {},
+     "rejected": 1,
+     "venues": {
+      "hall": 1
+     },
      "reasons": {
-      "escalation": 2
+      "escalation": 1
      },
      "reason_examples": [
       {
        "token": "graphspace",
-       "why": "escalation: precinct: no exterior venue is large enough either"
-      },
-      {
-       "token": "KonigsbergBridge",
        "why": "escalation: precinct: no exterior venue is large enough either"
       }
      ],
@@ -129225,7 +129321,8 @@
      "shortfall": 2,
      "pearl": "gt foundations",
      "pearl_index": 0,
-     "map": "GT_Foundations"
+     "map": "GT_Foundations",
+     "rooms": null
     },
     {
      "sequence": "graphtheory",
@@ -129409,7 +129506,8 @@
      "shortfall": 1,
      "pearl": "gt layout",
      "pearl_index": 1,
-     "map": "GT_Layout"
+     "map": "GT_Layout",
+     "rooms": null
     },
     {
      "sequence": "graphtheory",
@@ -129600,7 +129698,8 @@
      "shortfall": 2,
      "pearl": "gt pathfinding",
      "pearl_index": 2,
-     "map": "GT_Pathfinding"
+     "map": "GT_Pathfinding",
+     "rooms": null
     },
     {
      "sequence": "graphtheory",
@@ -129837,7 +129936,8 @@
      "shortfall": 4,
      "pearl": "gt network analysis",
      "pearl_index": 3,
-     "map": "GT_Network_Analysis"
+     "map": "GT_Network_Analysis",
+     "rooms": null
     },
     {
      "sequence": "graphtheory",
@@ -130040,7 +130140,8 @@
      "shortfall": 2,
      "pearl": "gt connectivity",
      "pearl_index": 4,
-     "map": "GT_Connectivity"
+     "map": "GT_Connectivity",
+     "rooms": null
     },
     {
      "sequence": "graphtheory",
@@ -130224,7 +130325,8 @@
      "shortfall": 1,
      "pearl": "gt spanning trees",
      "pearl_index": 6,
-     "map": "GT_Spanning_Trees"
+     "map": "GT_Spanning_Trees",
+     "rooms": null
     },
     {
      "sequence": "graphtheory",
@@ -130413,7 +130515,8 @@
      "shortfall": 0,
      "pearl": "gt flow",
      "pearl_index": 7,
-     "map": "GT_Flow"
+     "map": "GT_Flow",
+     "rooms": null
     },
     {
      "sequence": "graphtheory",
@@ -130597,11 +130700,12 @@
      "shortfall": 1,
      "pearl": "gt matching",
      "pearl_index": 8,
-     "map": "GT_Matching"
+     "map": "GT_Matching",
+     "rooms": null
     }
    ],
    "why_museum": "crowned",
-   "seconds": 4.3
+   "seconds": 3.7
   },
   {
    "sequence": "foundationscrisis",
@@ -131630,7 +131734,8 @@
      "shortfall": 0,
      "pearl": "euclid parallel",
      "pearl_index": 0,
-     "map": "Euclid_Parallel"
+     "map": "Euclid_Parallel",
+     "rooms": null
     },
     {
      "sequence": "foundationscrisis",
@@ -132060,7 +132165,8 @@
      "shortfall": 1,
      "pearl": "noneuclidean spaces",
      "pearl_index": 1,
-     "map": "NonEuclidean_Spaces"
+     "map": "NonEuclidean_Spaces",
+     "rooms": null
     },
     {
      "sequence": "foundationscrisis",
@@ -132480,7 +132586,8 @@
      "shortfall": 2,
      "pearl": "russell paradox",
      "pearl_index": 2,
-     "map": "Russell_Paradox"
+     "map": "Russell_Paradox",
+     "rooms": null
     },
     {
      "sequence": "foundationscrisis",
@@ -132857,7 +132964,8 @@
      "shortfall": 0,
      "pearl": "godel incompleteness",
      "pearl_index": 3,
-     "map": "Godel_Incompleteness"
+     "map": "Godel_Incompleteness",
+     "rooms": null
     },
     {
      "sequence": "foundationscrisis",
@@ -133241,7 +133349,8 @@
      "shortfall": 0,
      "pearl": "escher impossible",
      "pearl_index": 4,
-     "map": "Escher_Impossible"
+     "map": "Escher_Impossible",
+     "rooms": null
     },
     {
      "sequence": "foundationscrisis",
@@ -133618,7 +133727,8 @@
      "shortfall": 0,
      "pearl": "brouwer intuitionism",
      "pearl_index": 5,
-     "map": "Brouwer_Intuitionism"
+     "map": "Brouwer_Intuitionism",
+     "rooms": null
     },
     {
      "sequence": "foundationscrisis",
@@ -134014,7 +134124,8 @@
      "shortfall": 0,
      "pearl": "florensky paraconsistent",
      "pearl_index": 7,
-     "map": "Florensky_Paraconsistent"
+     "map": "Florensky_Paraconsistent",
+     "rooms": null
     },
     {
      "sequence": "foundationscrisis",
@@ -134454,11 +134565,12 @@
      "shortfall": 0,
      "pearl": "crisis synthesis",
      "pearl_index": 8,
-     "map": "Crisis_Synthesis"
+     "map": "Crisis_Synthesis",
+     "rooms": null
     }
    ],
    "why_museum": "crowned",
-   "seconds": 1.2
+   "seconds": 1.0
   },
   {
    "sequence": "qfeplaboratory",
@@ -135582,7 +135694,8 @@
      "shortfall": 1,
      "pearl": "qfep introduction",
      "pearl_index": 0,
-     "map": "QFEP_Introduction"
+     "map": "QFEP_Introduction",
+     "rooms": null
     },
     {
      "sequence": "qfeplaboratory",
@@ -136065,7 +136178,8 @@
      "shortfall": 0,
      "pearl": "qfep f term",
      "pearl_index": 1,
-     "map": "QFEP_F_Term"
+     "map": "QFEP_F_Term",
+     "rooms": null
     },
     {
      "sequence": "qfeplaboratory",
@@ -136564,7 +136678,8 @@
      "shortfall": 0,
      "pearl": "qfep e term",
      "pearl_index": 2,
-     "map": "QFEP_E_Term"
+     "map": "QFEP_E_Term",
+     "rooms": null
     },
     {
      "sequence": "qfeplaboratory",
@@ -137059,7 +137174,8 @@
      "shortfall": 3,
      "pearl": "qfep lambda spectrum",
      "pearl_index": 3,
-     "map": "QFEP_Lambda_Spectrum"
+     "map": "QFEP_Lambda_Spectrum",
+     "rooms": null
     },
     {
      "sequence": "qfeplaboratory",
@@ -137532,7 +137648,8 @@
      "shortfall": 0,
      "pearl": "qfep phi term",
      "pearl_index": 4,
-     "map": "QFEP_Phi_Term"
+     "map": "QFEP_Phi_Term",
+     "rooms": null
     },
     {
      "sequence": "qfeplaboratory",
@@ -137991,7 +138108,8 @@
      "shortfall": 1,
      "pearl": "qfep edge of chaos",
      "pearl_index": 5,
-     "map": "QFEP_Edge_Of_Chaos"
+     "map": "QFEP_Edge_Of_Chaos",
+     "rooms": null
     },
     {
      "sequence": "qfeplaboratory",
@@ -138435,7 +138553,8 @@
      "shortfall": 0,
      "pearl": "qfep sandbox",
      "pearl_index": 7,
-     "map": "QFEP_Sandbox"
+     "map": "QFEP_Sandbox",
+     "rooms": null
     },
     {
      "sequence": "qfeplaboratory",
@@ -138891,11 +139010,12 @@
      "shortfall": 0,
      "pearl": "qfep synthesis",
      "pearl_index": 8,
-     "map": "QFEP_Synthesis"
+     "map": "QFEP_Synthesis",
+     "rooms": null
     }
    ],
    "why_museum": "em_order rotation",
-   "seconds": 1.5
+   "seconds": 1.4
   },
   {
    "sequence": "postfoundationscrisis",
@@ -138933,18 +139053,17 @@
      "accountability_ledger"
     ]
    },
-   "placed": 43,
+   "placed": 44,
    "interior": 37,
-   "rejected": 1,
+   "rejected": 0,
    "venues": {
     "interior": 37,
     "outside": 1,
     "courtyard": 3,
+    "hall": 1,
     "porch": 2
    },
-   "reasons": {
-    "escalation": 1
-   },
+   "reasons": {},
    "reason_examples": [],
    "slots": 20,
    "walls": 27,
@@ -139363,23 +139482,17 @@
       "hand_branches": 0,
       "pearl": "criticalalgorithms algorithmic bias visualization"
      },
-     "placed": 8,
+     "placed": 9,
      "interior": 5,
-     "rejected": 1,
+     "rejected": 0,
      "venues": {
       "interior": 5,
       "outside": 1,
-      "courtyard": 2
+      "courtyard": 2,
+      "hall": 1
      },
-     "reasons": {
-      "escalation": 1
-     },
-     "reason_examples": [
-      {
-       "token": "marching_cubes",
-       "why": "escalation: precinct: no exterior venue is large enough either"
-      }
-     ],
+     "reasons": {},
+     "reason_examples": [],
      "slots": 20,
      "walls": 27,
      "rooms_on_disk": 9,
@@ -139651,7 +139764,8 @@
      "shortfall": 4,
      "pearl": "criticalalgorithms algorithmic bias visualization",
      "pearl_index": 0,
-     "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization"
+     "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+     "rooms": null
     },
     {
      "sequence": "postfoundationscrisis",
@@ -139957,7 +140071,8 @@
      "shortfall": 0,
      "pearl": "criticalalgorithms applied ethics",
      "pearl_index": 1,
-     "map": "CriticalAlgorithms_Applied_Ethics"
+     "map": "CriticalAlgorithms_Applied_Ethics",
+     "rooms": null
     },
     {
      "sequence": "postfoundationscrisis",
@@ -140240,7 +140355,8 @@
      "shortfall": 0,
      "pearl": "speculativecomputation paraconsistent engineering",
      "pearl_index": 2,
-     "map": "SpeculativeComputation_Paraconsistent_Engineering"
+     "map": "SpeculativeComputation_Paraconsistent_Engineering",
+     "rooms": null
     },
     {
      "sequence": "postfoundationscrisis",
@@ -140501,7 +140617,8 @@
      "shortfall": 0,
      "pearl": "speculativecomputation situated computation",
      "pearl_index": 3,
-     "map": "SpeculativeComputation_Situated_Computation"
+     "map": "SpeculativeComputation_Situated_Computation",
+     "rooms": null
     },
     {
      "sequence": "postfoundationscrisis",
@@ -140807,7 +140924,8 @@
      "shortfall": 0,
      "pearl": "speculativecomputation collective knowledge",
      "pearl_index": 4,
-     "map": "SpeculativeComputation_Collective_Knowledge"
+     "map": "SpeculativeComputation_Collective_Knowledge",
+     "rooms": null
     },
     {
      "sequence": "postfoundationscrisis",
@@ -141078,7 +141196,8 @@
      "shortfall": 0,
      "pearl": "speculativecomputation rhizome network",
      "pearl_index": 5,
-     "map": "SpeculativeComputation_Rhizome_Network"
+     "map": "SpeculativeComputation_Rhizome_Network",
+     "rooms": null
     },
     {
      "sequence": "postfoundationscrisis",
@@ -141379,7 +141498,8 @@
      "shortfall": 3,
      "pearl": "advancedlaboratory lab equipment simulation",
      "pearl_index": 7,
-     "map": "AdvancedLaboratory_Lab_Equipment_Simulation"
+     "map": "AdvancedLaboratory_Lab_Equipment_Simulation",
+     "rooms": null
     },
     {
      "sequence": "postfoundationscrisis",
@@ -141652,11 +141772,12 @@
      "shortfall": 0,
      "pearl": "postcrisis synthesis",
      "pearl_index": 8,
-     "map": "PostCrisis_Synthesis"
+     "map": "PostCrisis_Synthesis",
+     "rooms": null
     }
    ],
    "why_museum": "crowned",
-   "seconds": 3.6
+   "seconds": 2.0
   }
  ],
  "plan": {
