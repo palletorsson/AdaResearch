@@ -905,15 +905,24 @@ static func _add_showing_cards(seg: Node3D, mounts: Array, opts: Dictionary) -> 
 			# the sentence FILLS the black field (Palle: "the paintings on the wall with
 			# black background and white frame, place the text there"): the field is
 			# the mount less its margins; 0.0016 m pixels at 64 px = 10 cm lines
+			# ALIGNMENT (Palle: "fix alignment"): the text box is the FIELD. The
+			# pixel size is derived from the field's width so a 400 px box is the
+			# field less a margin, whatever the format; the sentence is centred in
+			# it and wraps inside it — nothing runs under the frame.
 			var fieldw: float = maxf(wm - 2.0 * HANG_MOUNT_W, 0.12)
 			var fieldh: float = maxf(hm - 2.0 * HANG_MOUNT_W, 0.12)
-			var ps: float = 0.0016 if fieldh > 0.6 else 0.0012
+			var ps: float = clampf((fieldw - 0.08) / 400.0, 0.0006, 0.0024)
 			sl.pixel_size = ps
-			sl.font_size = 64
-			sl.width = maxf(fieldw - 0.06, 0.2) / ps
+			sl.font_size = 52
+			sl.width = 400.0
 			sl.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-			sl.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+			sl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 			sl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+			# a tall sentence in a short field: shrink until it fits ~ (lines x 1.25 x 52 px)
+			var est_lines: int = int(ceil(float(sentence.length()) * 26.0 / 400.0))
+			while est_lines * 65.0 * ps > fieldh - 0.06 and sl.font_size > 28:
+				sl.font_size -= 4
+				est_lines = int(ceil(float(sentence.length()) * (sl.font_size * 0.5) / 400.0))
 			sl.modulate = Color(0.93, 0.92, 0.9)
 			sl.outline_size = 0
 			sl.no_depth_test = false
