@@ -412,7 +412,8 @@ static func dress_segment(seg: Node3D, tile: Array, w: int, h: int, mats, prev_w
 	_add_block_chamfers(tile, ch_pod_x, ch_pli_x, tally)
 	_add_skirt_chamfers(faces, ch_skirt_x, tally)
 	_add_cornice_chamfers(faces, ch_trim_x, tally)
-	_add_ceiling(w, h, ceil_x, ch_ceil_x, tally)
+	if bool(opts.get("ceiling", true)):      # the studio looks down INTO the hall
+		_add_ceiling(w, h, ceil_x, ch_ceil_x, tally)
 	_add_seams(floors, w, h, seam_x)
 
 	if int(tally.get("over", 0)) > 0:

@@ -388,6 +388,13 @@ static func _shipped(path: String) -> String:
 	var alt: String = SHIPPED_DIR + path.get_file()
 	return alt if FileAccess.file_exists(alt) else path
 var _bake_mode: bool = false            # --em-bake: build every pearl, write the bake, quit
+var _bake_only: bool = false            # --em-bake-only: bake the start pearl only, merge into the file
+## THE STUDIO (2026-08-19). museum_studio.tscn hosts this scene as an editor:
+## one pearl built exactly as the walk builds it, no walker, no streaming, no
+## gate; the studio owns the camera and the input. Palle: "we need a more
+## fast and powerful tool … like MapStudioDesktop3D but for the endless
+## corridor". Set before add_child.
+var _studio: bool = false
 var _bake_out: Dictionary = {}          # "chapter|pearl" -> {museum, placed, refused}
 var _bake_in: Dictionary = {}           # the same, read back for replay
 var _bake_at: String = ""
@@ -667,6 +674,13 @@ func _ready() -> void:
 			_bake_total += (_plan_pearls[pk] as Array).size()
 		if _bake_total == 0:
 			_bake_total = _plan_by_chapter.size()
+		if _bake_only:
+			_bake_total = 1
+			# start from the existing bake, so one pearl's re-bake keeps the other 218
+			if FileAccess.file_exists(BAKE_PATH):
+				var prev_v: Variant = JSON.parse_string(FileAccess.get_file_as_string(BAKE_PATH))
+				if prev_v is Dictionary and (prev_v as Dictionary).get("segments") is Dictionary:
+					_bake_out = (prev_v as Dictionary)["segments"]
 		print("[em-bake] BAKING %d pearl(s) — every placement decided once, then written to %s" % [_bake_total, BAKE_PATH])
 	_start_at_map()
 	_load_guests()
@@ -695,7 +709,7 @@ func _ready() -> void:
 	var preload_n: int = _shot_segments if _shot_path != "" else 1
 	for i in range(preload_n):
 		_build_segment()
-	if _shot_path == "":
+	if _shot_path == "" and not _studio:
 		_lazy_pending = 1
 	if _edit_mode:
 		_arm_editor()
@@ -779,6 +793,11 @@ func _parse_args() -> void:
 			_shot_path = a.substr(10)
 		elif a == "--em-bake":
 			_bake_mode = true
+		elif a == "--em-bake-only":
+			_bake_mode = true
+			_bake_only = true          # one pearl (the start chapter/map), merged into the existing bake
+		elif a.begins_with("--em-map="):
+			start_map = a.substr(9)    # the pearl's MAP, as the Inspector's start_map
 		elif a.begins_with("--em-shot-at="):
 			_shot_z = float(a.substr(13))
 			_shot_z_set = true
@@ -1393,6 +1412,8 @@ func _find_node_of_type(n: Node, type_name: String) -> Node:
 
 ## Where the walker's eye is, whichever body owns it.
 func _eye_pos() -> Vector3:
+	if _studio:
+		return Vector3(7.5, EYE, 8.0)     # a standing eye in the first hall: nothing culls, nothing streams
 	if _bake_mode:
 		# the bake has no walker: the eye stands just short of the built edge, so
 		# the stream builds one segment per frame and frees the rooms behind
@@ -1610,6 +1631,11 @@ func _layout_str(section: String, key: String, fallback: String) -> String:
 	return fallback
 
 func _setup_world() -> void:
+	if _studio:
+		_mode_label = "studio"
+		_setup_environment()
+		print("[endless_museum] STUDIO: building only — the studio owns camera and input")
+		return
 	if _vr:
 		_mode_label = "vr"
 		# building only. The XR rig walks it; the environment still installs,
@@ -2392,6 +2418,7 @@ func _build_segment() -> void:
 					# selectable proxies the editor picks (desktop only)
 					"showing_rules": _furniture_rules(next_seq, "showing"),
 					"showing_proxies": true,     # ALWAYS: the same records in both modes
+					"ceiling": not _studio,      # the studio's camera looks down into the hall
 					# the LOBBY (first vestibule) hangs no showings: its walls carry the
 					# window, the counter, the extinguisher and the lift instead
 					"bare_below_z": (VESTIBULE_H + 0.6) if (_seg_index == 0 and _L("lobby", "enabled", 1.0) > 0.5) else -1.0,
@@ -2512,7 +2539,7 @@ func _build_segment() -> void:
 	# is a wall, a guest is whether the pool is wider than the spine.
 	seg.set_meta("em_chapter", seg_seq)
 	# THE GATE, on the opening segment only: the vestibule becomes its own room
-	if _seg_index == 1 and _mod_gate != null and _shot_path == "" and _autopilot == 0:
+	if _seg_index == 1 and _mod_gate != null and _shot_path == "" and _autopilot == 0 and not _studio:
 		# the entry wall's opening: the widest run of floor cells in the tile's
 		# first row (the gate module centres its door on it when depth_rows is 0)
 		var dx0: int = -1
@@ -5465,7 +5492,7 @@ func _open_gate() -> void:
 
 
 func _process(_delta: float) -> void:
-	if Engine.is_editor_hint():
+	if Engine.is_editor_hint() or _studio:
 		return
 	# the owed segment: built one frame after the first, so the visitor sees
 	# the vestibule immediately and the hall fills while they cross it
@@ -5705,6 +5732,8 @@ func _physics_process(_delta: float) -> void:
 var _jump_pressed: bool = false
 
 func _input(event: InputEvent) -> void:
+	if _studio:
+		return
 	# desktop: click the scanner to open the threshold door
 	if event is InputEventMouseButton and (event as InputEventMouseButton).pressed \
 			and (event as InputEventMouseButton).button_index == MOUSE_BUTTON_LEFT \

@@ -43,6 +43,7 @@ def check() -> int:
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--check", action="store_true")
+    ap.add_argument("--pearl", default="", metavar="CHAPTER/PEARL", help="bake ONE pearl and merge it into the bake (~20 s)")
     ap.add_argument("--timeout", type=int, default=1800)
     a = ap.parse_args()
     if a.check:
@@ -50,6 +51,14 @@ def main() -> int:
     log = REPO / "ada_run" / "em_bake.log"
     cmd = [GODOT, "--headless", "--path", str(REPO), "--xr-mode", "off",
            "res://commons/scenes/endless_museum.tscn", "--", "--em-bake"]
+    if a.pearl:
+        chapter, _, pearl = a.pearl.partition("/")
+        plan = json.loads(PLAN.read_text(encoding="utf-8"))
+        row = next((p for p in plan.get("plans", []) if p.get("sequence") == chapter and (p.get("pearl") == pearl or str(p.get("pearl_index")) == pearl)), None)
+        if row is None:
+            print(f"EM BAKE: no such pearl {a.pearl}"); return 1
+        cmd[-1] = "--em-bake-only"
+        cmd += [f"--em-chapter={chapter}", f"--em-map={row.get('map', '')}"]
     t0 = time.time()
     print("baking…", " ".join(cmd[-3:]))
     with open(log, "w", encoding="utf-8", errors="replace") as f:
@@ -64,7 +73,7 @@ def main() -> int:
     segs = b.get("segments", {})
     placed = sum(len(v.get("placed", [])) for v in segs.values())
     refused = sum(len(v.get("refused", [])) for v in segs.values())
-    print(f"EM BAKE: {len(segs)} pearl(s), {placed} placed, {refused} refused, {dt:.0f}s → {BAKE}")
+    print(f"EM BAKE: {len(segs)} pearl(s), {placed} placed, {refused} refused, {dt:.0f}s → {BAKE}" + (f" (re-baked {a.pearl})" if a.pearl else ""))
     subprocess.run([sys.executable, str(REPO / "tools" / "em_ship.py")], cwd=REPO)   # into the export
     return 0
 

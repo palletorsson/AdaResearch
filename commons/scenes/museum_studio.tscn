@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://em_museum_studio"]
+
+; MUSEUM STUDIO — edit one pearl of the endless museum from above.
+; Run: godot --path . res://commons/scenes/museum_studio.tscn [-- --em-chapter=primitives --em-pearl=point]
+; See commons/scenes/museum_studio.gd for the keys.
+
+[ext_resource type="Script" path="res://commons/scenes/museum_studio.gd" id="1_studio"]
+
+[node name="MuseumStudio" type="Node3D"]
+script = ExtResource("1_studio")
