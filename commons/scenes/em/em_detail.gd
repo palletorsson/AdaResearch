@@ -860,6 +860,10 @@ static func _add_showing_cards(seg: Node3D, mounts: Array, opts: Dictionary) -> 
 		var tok: String = String(rec.get("token", "")) if rec is Dictionary else ""
 		if txt.strip_edges() == "":
 			continue
+		# the book's number leads the line, small, as a catalogue does: "07  You are here"
+		var num: int = int(rec.get("n", 0)) if rec is Dictionary else 0
+		if num > 0:
+			txt = "%02d\n" % num + txt
 		if tok != "" and anchors.has(tok):
 			var at: Vector3 = anchors[tok]
 			var best: int = -1

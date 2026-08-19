@@ -3037,7 +3037,7 @@ func _speak_lines(chapter: String, pearl: String) -> Array:
 		var line: String = String(says[tok]).strip_edges()
 		if line != "" and not seen.has(line.to_lower()):
 			seen[line.to_lower()] = true
-			out.append({"text": line, "token": String(tok)})
+			out.append({"text": line, "token": String(tok), "n": int((sp.get("numbers", {}) as Dictionary).get(tok, 0))})
 	# the next pages in this hall: their bodies' lines, anchored the same way
 	for pg in sp.get("pages", []):
 		var pgd: Dictionary = pg
@@ -3046,7 +3046,7 @@ func _speak_lines(chapter: String, pearl: String) -> Array:
 			var l2: String = String(psays.get(tok, "")).strip_edges()
 			if l2 != "" and not seen.has(l2.to_lower()):
 				seen[l2.to_lower()] = true
-				out.append({"text": l2, "token": String(tok)})
+				out.append({"text": l2, "token": String(tok), "n": int((sp.get("numbers", {}) as Dictionary).get(tok, 0))})
 	# unanchored: a page stanza that is not a body's (legacy speak/page2), the chapter's line
 	var text: String = String(sp.get("speak", "")) if foyer.is_empty() else String(sp.get("page2", ""))
 	if not show_drafts and String(sp.get("speak_by", "hand")) != "hand":
@@ -6448,6 +6448,17 @@ func _speak_for(chapter: String, pearl: String) -> Dictionary:
 						out["tokens"] = (p as Dictionary).get("tokens", []) if (p as Dictionary).get("tokens") is Array else []
 						out["says"] = (p as Dictionary).get("says", {}) if (p as Dictionary).get("says") is Dictionary else {}
 						out["says_by"] = (p as Dictionary).get("says_by", {}) if (p as Dictionary).get("says_by") is Dictionary else {}
+				# THE NUMBER (Palle, 2026-08-19: "a number so I can refer to a specific
+				# artifact"): a running number through the chapter's book — pearl after
+				# pearl, line after line — the same number /lines shows at the row
+				var numbers: Dictionary = {}
+				var n: int = 0
+				for p3 in (t as Dictionary).get("pearls", []):
+					for tk in (p3 as Dictionary).get("tokens", []):
+						n += 1
+						if not numbers.has(String(tk)):
+							numbers[String(tk)] = n
+				out["numbers"] = numbers
 				# the pages that share this pearl's hall (join): their lines follow
 				var after: bool = false
 				for p2 in (t as Dictionary).get("pearls", []):
