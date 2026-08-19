@@ -1,0 +1,183 @@
+{
+ "chapter": "cellularautomata",
+ "speak": "",
+ "speak_by": "",
+ "pearls": [
+  {
+   "pearl": "ca introduction",
+   "map": "CA_Introduction",
+   "lines": [
+    {
+     "token": "grid_substrate_runner",
+     "text": "an integrated substrate edits the floor that's already there",
+     "by": "draft"
+    },
+    {
+     "token": "line_network_ca",
+     "text": "Connect each new cell to a neighbor and a network appears — ancestry creates structure",
+     "by": "draft"
+    },
+    {
+     "token": "persian_rug",
+     "text": "Symmetry imposed on local rules transforms noise into ornament — the rug designs itself",
+     "by": "draft"
+    }
+   ],
+   "hero": "grid_substrate_runner"
+  },
+  {
+   "pearl": "ca elementaryrules",
+   "map": "CA_ElementaryRules",
+   "lines": [
+    {
+     "token": "structure_growth",
+     "text": "3D structure growth simulation",
+     "by": "draft"
+    }
+   ],
+   "hero": "structure_growth"
+  },
+  {
+   "pearl": "ca gameoflife",
+   "map": "CA_GameOfLife",
+   "lines": [
+    {
+     "token": "ca_columns",
+     "text": "Stack time as space and a flat automaton becomes architecture",
+     "by": "draft"
+    },
+    {
+     "token": "mirrored_cellular_automata",
+     "text": "the mandala is not emergent. A fragment is computed and the rest is copied — and this",
+     "by": "draft"
+    },
+    {
+     "token": "ca_bridge",
+     "text": "A bridge built by a rule — you walk on computation",
+     "by": "draft"
+    }
+   ],
+   "hero": "ca_bridge"
+  },
+  {
+   "pearl": "ca beyondbinary",
+   "map": "CA_BeyondBinary",
+   "lines": [
+    {
+     "token": "ca_growth_network",
+     "text": "Growth toward a goal, with noise, is enough to produce every vascular pattern in nature",
+     "by": "draft"
+    },
+    {
+     "token": "mold_network",
+     "text": "Slime mold network generation",
+     "by": "draft"
+    },
+    {
+     "token": "game_of_life_petri",
+     "text": "Simple rules, applied everywhere simultaneously, produce complexity no one designed",
+     "by": "draft"
+    },
+    {
+     "token": "hexagon_ca_vr",
+     "text": "Six neighbors instead of eight — the shape of the neighborhood reshapes the world",
+     "by": "draft"
+    }
+   ],
+   "hero": "ca_growth_network"
+  },
+  {
+   "pearl": "ca expandingspace",
+   "map": "CA_ExpandingSpace",
+   "lines": [
+    {
+     "token": "ca_chair_test",
+     "text": "A chair is a convergent form — different rules find it because sitting demands it",
+     "by": "draft"
+    },
+    {
+     "token": "cellular_automata_3d_tree",
+     "text": "A tree is what remains when you remove everything that isn't tree",
+     "by": "draft"
+    },
+    {
+     "token": "crossway_ca",
+     "text": "When every row speaks a different rule language",
+     "by": "draft"
+    },
+    {
+     "token": "decaying_bridge",
+     "text": "Architecture that reacts to presence is architecture that is alive",
+     "by": "draft"
+    }
+   ],
+   "hero": "decaying_bridge"
+  },
+  {
+   "pearl": "ca softrules",
+   "map": "CA_SoftRules",
+   "lines": [
+    {
+     "token": "ca_sphere",
+     "text": "The same rules on a sphere produce forms no flat grid ever could",
+     "by": "draft"
+    },
+    {
+     "token": "rule_30_110_gravity",
+     "text": "Rule 30/110 with gravity effects",
+     "by": "draft"
+    }
+   ],
+   "hero": "ca_sphere"
+  },
+  {
+   "pearl": "ca agentscircuits",
+   "map": "CA_AgentsCircuits",
+   "lines": [
+    {
+     "token": "sierpinski_pyramid",
+     "text": "Five copies of yourself, arranged just so, and you contain yourself forever",
+     "by": "draft"
+    },
+    {
+     "token": "ca_rule_explorer",
+     "text": "An 8-bit number is a universe — Rule 110 proves that three neighbors and one bit can compute …",
+     "by": "draft"
+    }
+   ],
+   "hero": "sierpinski_pyramid"
+  },
+  {
+   "pearl": "ca",
+   "map": "Chamber_CA",
+   "lines": []
+  },
+  {
+   "pearl": "ca edgeofchaos",
+   "map": "CA_EdgeOfChaos",
+   "lines": [
+    {
+     "token": "ca_screen",
+     "text": "Screen display that renders live cellular-automata patterns",
+     "by": "draft"
+    },
+    {
+     "token": "self_organization_ca",
+     "text": "There are two ways to die — freeze into one thing",
+     "by": "draft"
+    },
+    {
+     "token": "disease_spread_ca",
+     "text": "Two probabilities and a grid of neighbors — this is how pandemics actually work",
+     "by": "draft"
+    },
+    {
+     "token": "volumetric_fog_ca",
+     "text": "Fog is a cellular automaton — local density rules produce clouds no one shaped",
+     "by": "draft"
+    }
+   ],
+   "hero": "self_organization_ca"
+  }
+ ]
+}

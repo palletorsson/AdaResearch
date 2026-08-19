@@ -1,0 +1,138 @@
+{
+ "chapter": "graphtheory",
+ "speak": "",
+ "speak_by": "",
+ "pearls": [
+  {
+   "pearl": "gt foundations",
+   "map": "GT_Foundations",
+   "lines": [
+    {
+     "token": "graphspace",
+     "text": "a graph is not a diagram — it is a set of relationships",
+     "by": "draft"
+    },
+    {
+     "token": "KonigsbergBridge",
+     "text": "graph theory begins when you stop asking \"which route should I try?\" and ask \"what does the structure allow at …",
+     "by": "draft"
+    }
+   ],
+   "hero": "graphspace"
+  },
+  {
+   "pearl": "gt layout",
+   "map": "GT_Layout",
+   "lines": [
+    {
+     "token": "force_directed_layout",
+     "text": "Watch a tangled graph draw itself. Springs pull linked nodes together while repulsion pushes every pair apart",
+     "by": "draft"
+    }
+   ],
+   "hero": "force_directed_layout"
+  },
+  {
+   "pearl": "gt pathfinding",
+   "map": "GT_Pathfinding",
+   "lines": [
+    {
+     "token": "pathfinding3d",
+     "text": "pathfinding does not move through space — it moves through a graph that happens to be embedded in space",
+     "by": "draft"
+    }
+   ],
+   "hero": "pathfinding3d"
+  },
+  {
+   "pearl": "gt network analysis",
+   "map": "GT_Network_Analysis",
+   "lines": [
+    {
+     "token": "rhizomatic_structure",
+     "text": "a rhizome has no beginning and no end — only middles",
+     "by": "draft"
+    },
+    {
+     "token": "network_analysis",
+     "text": "Read a network as hierarchy, community, and circulation at once",
+     "by": "draft"
+    },
+    {
+     "token": "networkflow3d",
+     "text": "maximum flow through a network equals the minimum cut that separates source from sink",
+     "by": "draft"
+    }
+   ],
+   "hero": "rhizomatic_structure"
+  },
+  {
+   "pearl": "gt connectivity",
+   "map": "GT_Connectivity",
+   "lines": [
+    {
+     "token": "topological_sort",
+     "text": "Topological sort — linear ordering of vertices in a directed acyclic graph",
+     "by": "draft"
+    },
+    {
+     "token": "tarjan_algorithm",
+     "text": "a strongly connected component is a pocket of mutual reachability",
+     "by": "draft"
+    },
+    {
+     "token": "kosaraju_algorithm",
+     "text": "Kosaraju's algorithm proves that strongly connected components are the same in a graph and its transpose",
+     "by": "draft"
+    }
+   ],
+   "hero": "topological_sort"
+  },
+  {
+   "pearl": "graphtheory",
+   "map": "Chamber_GraphTheory",
+   "lines": []
+  },
+  {
+   "pearl": "gt spanning trees",
+   "map": "GT_Spanning_Trees",
+   "lines": [
+    {
+     "token": "mst_visualization",
+     "text": "the minimum spanning tree is the cheapest way to keep everyone connected",
+     "by": "draft"
+    }
+   ],
+   "hero": "mst_visualization"
+  },
+  {
+   "pearl": "gt flow",
+   "map": "GT_Flow",
+   "lines": [
+    {
+     "token": "karger_algorithm",
+     "text": "Karger's algorithm is a bet that randomness repeated enough times becomes certainty",
+     "by": "draft"
+    },
+    {
+     "token": "push_relabel_algorithm",
+     "text": "push-relabel proves that maximum flow can be found without ever finding a complete path",
+     "by": "draft"
+    }
+   ],
+   "hero": "push_relabel_algorithm"
+  },
+  {
+   "pearl": "gt matching",
+   "map": "GT_Matching",
+   "lines": [
+    {
+     "token": "edmonds_algorithm",
+     "text": "matching is the mathematics of pairing — who connects with whom",
+     "by": "draft"
+    }
+   ],
+   "hero": "edmonds_algorithm"
+  }
+ ]
+}

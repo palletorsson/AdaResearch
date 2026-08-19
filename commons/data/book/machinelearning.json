@@ -1,0 +1,163 @@
+{
+ "chapter": "machinelearning",
+ "speak": "",
+ "speak_by": "",
+ "pearls": [
+  {
+   "pearl": "ml evolution",
+   "map": "ML_Evolution",
+   "lines": [
+    {
+     "token": "evolved_creatures",
+     "text": "Physics-based creature evolution inspired by Karl Sims",
+     "by": "draft"
+    },
+    {
+     "token": "gradient_descent_visualization",
+     "text": "learning is descending a landscape you cannot fully see",
+     "by": "draft"
+    },
+    {
+     "token": "non_teleological_evolution",
+     "text": "there is no ladder of progress — only a bush of persistence",
+     "by": "draft"
+    },
+    {
+     "token": "evolvingflowers",
+     "text": "beauty is what survives selection — aesthetics can be an emergent property of optimization",
+     "by": "draft"
+    }
+   ],
+   "hero": "evolved_creatures"
+  },
+  {
+   "pearl": "ml gradient landscape",
+   "map": "ML_Gradient_Landscape",
+   "lines": [
+    {
+     "token": "pca_visualization",
+     "text": "PCA reveals that high-dimensional data is a conspiracy of a few directions pretending to be …",
+     "by": "draft"
+    },
+    {
+     "token": "loss_function_comparator",
+     "text": "the landscape is not given — it is authored",
+     "by": "draft"
+    }
+   ],
+   "hero": "pca_visualization"
+  },
+  {
+   "pearl": "ml classification",
+   "map": "ML_Classification",
+   "lines": [
+    {
+     "token": "enhanced_kmeans",
+     "text": "clustering does not discover structure in data — it imposes structure by choosing K",
+     "by": "draft"
+    },
+    {
+     "token": "svm_visualization",
+     "text": "the decision boundary depends on only a few points",
+     "by": "draft"
+    },
+    {
+     "token": "random_forest_visualization",
+     "text": "a forest of imperfect decision-makers can be more reliable than any single expert",
+     "by": "draft"
+    }
+   ],
+   "hero": "svm_visualization"
+  },
+  {
+   "pearl": "ml neural networks",
+   "map": "ML_Neural_Networks",
+   "lines": [
+    {
+     "token": "neural_network_visualization",
+     "text": "a neural network does not learn rules — it learns a continuous function that happens to approximate …",
+     "by": "draft"
+    },
+    {
+     "token": "neural_networks_vr",
+     "text": "a neural network is not a brain — it is a differentiable function that learns by following its own error …",
+     "by": "draft"
+    }
+   ],
+   "hero": "neural_network_visualization"
+  },
+  {
+   "pearl": "ml perception",
+   "map": "ML_Perception",
+   "lines": [
+    {
+     "token": "computer_vision_vr",
+     "text": "every act of perception is a convolution — a commitment to which local patterns matter",
+     "by": "draft"
+    },
+    {
+     "token": "convolutional_neural_networks_cnns_vr",
+     "text": "the convolution is a bet that the same pattern can appear anywhere",
+     "by": "draft"
+    }
+   ],
+   "hero": "computer_vision_vr"
+  },
+  {
+   "pearl": "ml sequence memory",
+   "map": "ML_Sequence_Memory",
+   "lines": [
+    {
+     "token": "transformers_vr",
+     "text": "attention is all you need — the transformer proves that explicit memory gates are unnecessary when every token can directly query every …",
+     "by": "draft"
+    },
+    {
+     "token": "lstms_vr",
+     "text": "memory is not storage — it is the continuous decision of what to keep and what to let go",
+     "by": "draft"
+    }
+   ],
+   "hero": "transformers_vr"
+  },
+  {
+   "pearl": "ml",
+   "map": "Chamber_ML",
+   "lines": []
+  },
+  {
+   "pearl": "ml generative",
+   "map": "ML_Generative",
+   "lines": [
+    {
+     "token": "generative_adversarial_networks_gans_vr",
+     "text": "creation can emerge from opposition — the generator learns to create precisely because the discriminator learns to …",
+     "by": "draft"
+    }
+   ],
+   "hero": "generative_adversarial_networks_gans_vr"
+  },
+  {
+   "pearl": "ml synthesis",
+   "map": "ML_Synthesis",
+   "lines": [
+    {
+     "token": "anomaly_detection",
+     "text": "Outlier detection algorithms — isolation forests",
+     "by": "draft"
+    },
+    {
+     "token": "joint_learn_walk",
+     "text": "an agent does not need to understand its body to learn to use it",
+     "by": "draft"
+    },
+    {
+     "token": "explainable_ai_xai_vr",
+     "text": "a model that cannot explain itself is not understood — it is merely obeyed",
+     "by": "draft"
+    }
+   ],
+   "hero": "anomaly_detection"
+  }
+ ]
+}

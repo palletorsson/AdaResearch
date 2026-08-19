@@ -1,0 +1,223 @@
+{
+ "chapter": "foundationscrisis",
+ "speak": "",
+ "speak_by": "",
+ "pearls": [
+  {
+   "pearl": "euclid parallel",
+   "map": "Euclid_Parallel",
+   "lines": [
+    {
+     "token": "euclid_postulates_plaque",
+     "text": "the parallel postulate was assumed for two thousand years",
+     "by": "draft"
+    },
+    {
+     "token": "parallel_lines",
+     "text": "Three line modules arranged in parallel to visualize equidistant lines",
+     "by": "draft"
+    },
+    {
+     "token": "angle_sum_triangle",
+     "text": "the angle sum of a triangle is not a fact about triangles but a fact about the space they …",
+     "by": "draft"
+    }
+   ],
+   "hero": "angle_sum_triangle"
+  },
+  {
+   "pearl": "noneuclidean spaces",
+   "map": "NonEuclidean_Spaces",
+   "lines": [
+    {
+     "token": "curvature_slider",
+     "text": "flat space is not the default — it is the singular boundary between two infinite families of …",
+     "by": "draft"
+    },
+    {
+     "token": "elliptic_surface",
+     "text": "on a positively curved surface, there is no room for parallel lines",
+     "by": "draft"
+    },
+    {
+     "token": "poincare_disk",
+     "text": "infinity can be contained in a finite disk — the Poincare model proves that hyperbolic geometry is as consistent as …",
+     "by": "draft"
+    },
+    {
+     "token": "hyperbolic_surface",
+     "text": "on a negatively curved surface, there are infinitely many parallel lines through any point",
+     "by": "draft"
+    },
+    {
+     "token": "riemann_sphere",
+     "text": "infinity is not the absence of a boundary — it is a boundary that has been folded back into the space it …",
+     "by": "draft"
+    }
+   ],
+   "hero": "poincare_disk"
+  },
+  {
+   "pearl": "russell paradox",
+   "map": "Russell_Paradox",
+   "lines": [
+    {
+     "token": "self_membership_set",
+     "text": "The set that contains itself, all the way down - R = {x : x not-in x}, is R in R?",
+     "by": "draft"
+    },
+    {
+     "token": "barber_paradox",
+     "text": "Russell's Paradox: the barber who shaves all who don't shave themselves - does he shave himself? The rule eats …",
+     "by": "draft"
+    },
+    {
+     "token": "russell_set_box",
+     "text": "naive set theory is inconsistent — the set of all sets that do not contain themselves destroyed the foundations of mathematics in …",
+     "by": "draft"
+    },
+    {
+     "token": "liar_loop",
+     "text": "The liar paradox: THIS STATEMENT IS FALSE - a truth value that oscillates forever",
+     "by": "draft"
+    }
+   ],
+   "hero": "self_membership_set"
+  },
+  {
+   "pearl": "godel incompleteness",
+   "map": "Godel_Incompleteness",
+   "lines": [
+    {
+     "token": "godel_sentence_machine",
+     "text": "if G were provable it would be false (it asserts its own unprovability)",
+     "by": "draft"
+    },
+    {
+     "token": "provability_sorter",
+     "text": "The provable is a proper subset of the true - statements fall into the gap that never …",
+     "by": "draft"
+    },
+    {
+     "token": "incompleteness_tower",
+     "text": "Add an axiom to close the gap and a new gap opens above - incompleteness all the way up",
+     "by": "draft"
+    }
+   ],
+   "hero": "godel_sentence_machine"
+  },
+  {
+   "pearl": "escher impossible",
+   "map": "Escher_Impossible",
+   "lines": [
+    {
+     "token": "escher_staircase",
+     "text": "locally coherent does not mean globally possible",
+     "by": "draft"
+    },
+    {
+     "token": "magritte_pipe",
+     "text": "representation is a gap pretending to be a bridge -- computation runs on signs detached from …",
+     "by": "draft"
+    },
+    {
+     "token": "penrose_triangle",
+     "text": "each corner is valid, the object is not -- incompleteness you can hold in your hands",
+     "by": "draft"
+    },
+    {
+     "token": "impossible_trident",
+     "text": "The blivet: two prongs become three - consistent locally, impossible globally",
+     "by": "draft"
+    }
+   ],
+   "hero": "escher_staircase"
+  },
+  {
+   "pearl": "brouwer intuitionism",
+   "map": "Brouwer_Intuitionism",
+   "lines": [
+    {
+     "token": "constructive_proof",
+     "text": "existence without construction is an article of faith, not a proof",
+     "by": "draft"
+    },
+    {
+     "token": "brouwer_choice_sequence",
+     "text": "an infinite object that is never finished is not incomplete",
+     "by": "draft"
+    },
+    {
+     "token": "constructive_staircase",
+     "text": "Brouwer's intuitionism: the next step isn't true-or-false until you construct it",
+     "by": "draft"
+    },
+    {
+     "token": "excluded_middle_demo",
+     "text": "the law of excluded middle is not a law of logic",
+     "by": "draft"
+    }
+   ],
+   "hero": "constructive_proof"
+  },
+  {
+   "pearl": "foundations",
+   "map": "Chamber_Foundations",
+   "lines": []
+  },
+  {
+   "pearl": "florensky paraconsistent",
+   "map": "Florensky_Paraconsistent",
+   "lines": [
+    {
+     "token": "schrodinger_box",
+     "text": "observation does not reveal a pre-existing state — it creates one",
+     "by": "draft"
+    },
+    {
+     "token": "both_true_gate",
+     "text": "Florensky's paraconsistency: open AND closed, P and not-P, and the world does not end",
+     "by": "draft"
+    },
+    {
+     "token": "florensky_sphere",
+     "text": "A and not-A can both be true. This is not a failure of logic but a description of reality that classical logic cannot contain",
+     "by": "draft"
+    },
+    {
+     "token": "superposition_display",
+     "text": "superposition is not uncertainty about which state the system is in",
+     "by": "draft"
+    }
+   ],
+   "hero": "schrodinger_box"
+  },
+  {
+   "pearl": "crisis synthesis",
+   "map": "Crisis_Synthesis",
+   "lines": [
+    {
+     "token": "lambda_slider",
+     "text": "lambda is the entropy drive — the dial between crystallization and dissolution that every living system must …",
+     "by": "draft"
+    },
+    {
+     "token": "phi_slider",
+     "text": "phi is the queer parameter — positive phi means the system does not merely tolerate change but seeks it as …",
+     "by": "draft"
+    },
+    {
+     "token": "bifurcation_diagram",
+     "text": "the edge of chaos is not a metaphor — it is a precise mathematical boundary where computation is …",
+     "by": "draft"
+    },
+    {
+     "token": "qfep_formula_3d",
+     "text": "the formula is not an equation to solve but a lens to see every system through",
+     "by": "draft"
+    }
+   ],
+   "hero": "lambda_slider"
+  }
+ ]
+}

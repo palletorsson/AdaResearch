@@ -1,0 +1,393 @@
+{
+ "chapter": "wavefunctions",
+ "speak": "",
+ "speak_by": "",
+ "pearls": [
+  {
+   "pearl": "intro",
+   "map": "WaveFunctions_Intro",
+   "lines": [
+    {
+     "token": "rotatescalecubes"
+    },
+    {
+     "token": "pickup_cube_static",
+     "text": "A static pickup cube that can be collected",
+     "by": "draft"
+    },
+    {
+     "token": "transformation_cube",
+     "text": "A mysterious rotating cube that triggers the first learning sequence",
+     "by": "draft"
+    },
+    {
+     "token": "rotating_cube",
+     "text": "A mysterious rotating cube that triggers the first learning sequence",
+     "by": "draft"
+    },
+    {
+     "token": "y_oscillation_cube"
+    },
+    {
+     "token": "rotating_cube_demo"
+    },
+    {
+     "token": "pickup_cube_transforming",
+     "text": "A pickup cube that moves up and down",
+     "by": "draft"
+    },
+    {
+     "token": "pickup_cube_rotating",
+     "text": "Pickup cube that rotates continuously — wraps pick_up_cube.gd and disables internal collision so the player can walk into the pickup area …",
+     "by": "draft"
+    },
+    {
+     "token": "control_pendulum",
+     "text": "A pendulum is gravity's metronome — length alone determines the tempo",
+     "by": "draft"
+    },
+    {
+     "token": "oscillation_controlled_cube"
+    },
+    {
+     "token": "mario_cube_time_trace",
+     "text": "Every trajectory is a signal in time; recording it reveals the physics as waveform",
+     "by": "draft"
+    },
+    {
+     "token": "SphericalHarmonics"
+    }
+   ],
+   "hero": "control_pendulum"
+  },
+  {
+   "pearl": "pendulum",
+   "map": "WaveFunctions_Pendulum",
+   "lines": [
+    {
+     "token": "foucault_pendulum"
+    },
+    {
+     "token": "WavePaintings"
+    },
+    {
+     "token": "draw_dot_time_domain",
+     "text": "Every motion is a signal; recording it in time reveals the wave hidden in movement",
+     "by": "draft"
+    },
+    {
+     "token": "BigPipeSystem",
+     "text": "Industrial drain pipe network built from modular segments",
+     "by": "draft"
+    },
+    {
+     "token": "lab_table",
+     "text": "The table is the zero plane from which all measurement begins",
+     "by": "draft"
+    },
+    {
+     "token": "VRAudioMonitor"
+    },
+    {
+     "token": "PendulumWave"
+    },
+    {
+     "token": "seismograph"
+    },
+    {
+     "token": "GlassRack"
+    }
+   ],
+   "hero": "WavePaintings"
+  },
+  {
+   "pearl": "unit circle",
+   "map": "WaveFunctions_Unit_Circle",
+   "lines": [
+    {
+     "token": "unit_circle_advanced"
+    },
+    {
+     "token": "SimpleOscillatingBridge"
+    },
+    {
+     "token": "OscillationCurve"
+    }
+   ],
+   "hero": "OscillationCurve"
+  },
+  {
+   "pearl": "sine space",
+   "map": "WaveFunctions_Sine_Space",
+   "lines": [
+    {
+     "token": "sine_space_explanation"
+    },
+    {
+     "token": "sine_space",
+     "text": "3D space defined by sine waves — walls, floors",
+     "by": "draft"
+    },
+    {
+     "token": "sine_wall_corridor"
+    },
+    {
+     "token": "sine_wall_explanation"
+    }
+   ],
+   "hero": "sine_space_explanation"
+  },
+  {
+   "pearl": "3d wave propagation",
+   "map": "WaveFunctions_3D_Wave_Propagation",
+   "lines": [
+    {
+     "token": "kusama_sine"
+    },
+    {
+     "token": "wave_propagation_3d"
+    },
+    {
+     "token": "coupled_oscillator_lattice"
+    }
+   ],
+   "hero": "kusama_sine"
+  },
+  {
+   "pearl": "effect sound",
+   "map": "WaveFunctions_Effect_Sound",
+   "lines": [
+    {
+     "token": "timbre_sculptor",
+     "text": "Timbre is the harmonic fingerprint of a sound",
+     "by": "draft"
+    },
+    {
+     "token": "RackMoogBass"
+    },
+    {
+     "token": "RackDX7Piano"
+    },
+    {
+     "token": "DualBallFMController"
+    },
+    {
+     "token": "chord_tension_spring",
+     "text": "Musical tension is not metaphor — intervals exert measurable pull on perception",
+     "by": "draft"
+    },
+    {
+     "token": "wave_interference_3d",
+     "text": "Two waves meeting don't fight — they add. The pattern they make holds more information than either wave …",
+     "by": "draft"
+    },
+    {
+     "token": "harmonic_distance_table",
+     "text": "Consonance is the degree to which two pitches share the same overtone series",
+     "by": "draft"
+    },
+    {
+     "token": "MelodyChaser3D"
+    },
+    {
+     "token": "RackSineBasic"
+    },
+    {
+     "token": "interactable_demo",
+     "text": "Inspection rig laying out one of every VR control type in a single row",
+     "by": "draft"
+    },
+    {
+     "token": "AudioContr",
+     "text": "UniversalVRAudioController",
+     "by": "draft"
+    },
+    {
+     "token": "Rack303Acid"
+    },
+    {
+     "token": "mario_test_sound_ui"
+    },
+    {
+     "token": "audio_catalog_tablet",
+     "text": "A sound catalog is a periodic table of timbres, each defined by its synthesis recipe",
+     "by": "draft"
+    },
+    {
+     "token": "MarioSoundController"
+    }
+   ],
+   "hero": "timbre_sculptor"
+  },
+  {
+   "pearl": "bernini",
+   "map": "Wavefunctions_Bernini",
+   "lines": [
+    {
+     "token": "ElphabaDress"
+    },
+    {
+     "token": "vowel_sound_board",
+     "text": "Every vowel is a pair of resonant frequencies — the mouth is a tunable resonator",
+     "by": "draft"
+    },
+    {
+     "token": "bernini_columns"
+    }
+   ],
+   "hero": "ElphabaDress"
+  },
+  {
+   "pearl": "john cage",
+   "map": "WaveFunctions_John_Cage",
+   "lines": [
+    {
+     "token": "dual_display_test"
+    },
+    {
+     "token": "ruth_asawa_sculpture"
+    },
+    {
+     "token": "john_cage_tech_noir"
+    }
+   ],
+   "hero": "dual_display_test"
+  },
+  {
+   "pearl": "airmusic",
+   "map": "WaveFunctions_AirMusic",
+   "lines": [
+    {
+     "token": "RackAmbientDrone"
+    },
+    {
+     "token": "air_music_display_case"
+    },
+    {
+     "token": "resonating_metallophone"
+    },
+    {
+     "token": "SystemsMusicTest"
+    }
+   ],
+   "hero": "RackAmbientDrone"
+  },
+  {
+   "pearl": "sky stairs",
+   "map": "Wavefunctions_Sky_Stairs",
+   "lines": [
+    {
+     "token": "sine_cylinder_staircase"
+    },
+    {
+     "token": "math_objects"
+    }
+   ],
+   "hero": "sine_cylinder_staircase"
+  },
+  {
+   "pearl": "trigwalkingpath",
+   "map": "WaveFunctions_TrigWalkingPath",
+   "lines": [
+    {
+     "token": "wave_interference"
+    },
+    {
+     "token": "beat_frequency_demo",
+     "text": "When two nearly identical things interfere, their tiny difference becomes the loudest …",
+     "by": "draft"
+    },
+    {
+     "token": "lissajous_curves"
+    },
+    {
+     "token": "TrigWalkingPath"
+    },
+    {
+     "token": "sine_oscillation",
+     "text": "a sine wave is not invented — it is the inevitable shadow of constant rotation",
+     "by": "draft"
+    }
+   ],
+   "hero": "wave_interference"
+  },
+  {
+   "pearl": "waves",
+   "map": "Chamber_Waves",
+   "lines": []
+  },
+  {
+   "pearl": "synthesis lab",
+   "map": "WaveFunctions_Synthesis_Lab",
+   "lines": [
+    {
+     "token": "dna_specimen",
+     "text": "DNA is a double wave frozen in molecular form — information stored as a helix",
+     "by": "draft"
+    },
+    {
+     "token": "holographicdisplay"
+    },
+    {
+     "token": "electronicscales"
+    },
+    {
+     "token": "biomagneticresonator"
+    },
+    {
+     "token": "UnitCircleTrig"
+    },
+    {
+     "token": "coloredlines",
+     "text": "Every flowing line is a parametric curve — a point moving through space according to …",
+     "by": "draft"
+    },
+    {
+     "token": "hallway_scene"
+    },
+    {
+     "token": "additive_wave_demo",
+     "text": "Any periodic function is a sum of sines; complexity is superposition of simplicity",
+     "by": "draft"
+    },
+    {
+     "token": "samplevialrack"
+    },
+    {
+     "token": "oscilloscope",
+     "text": "Multi-mode oscilloscope with VR sliders. Shows waveform",
+     "by": "draft"
+    },
+    {
+     "token": "double_helix_scene"
+    },
+    {
+     "token": "SoundscapeRadioRack"
+    },
+    {
+     "token": "petri_dish_worms",
+     "text": "A worm moves by passing a sine wave through its body",
+     "by": "draft"
+    },
+    {
+     "token": "atmosphericmonitoring"
+    },
+    {
+     "token": "chladni_plate"
+    },
+    {
+     "token": "microscope",
+     "text": "a microscope is the architectural form of LOOKING-CLOSER",
+     "by": "draft"
+    },
+    {
+     "token": "chemicalapparatus"
+    },
+    {
+     "token": "multimeter"
+    }
+   ],
+   "hero": "oscilloscope"
+  }
+ ]
+}

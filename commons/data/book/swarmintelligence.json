@@ -1,0 +1,114 @@
+{
+ "chapter": "swarmintelligence",
+ "speak": "",
+ "speak_by": "",
+ "pearls": [
+  {
+   "pearl": "physarumcolony",
+   "map": "SwarmIntelligence_PhysarumColony",
+   "lines": [
+    {
+     "token": "PhysarumColony",
+     "text": "intelligence is a property of the medium, not the agent",
+     "by": "draft"
+    }
+   ],
+   "hero": "PhysarumColony"
+  },
+  {
+   "pearl": "flowfields",
+   "map": "SwarmIntelligence_FlowFields",
+   "lines": [
+    {
+     "token": "FlowFieldMain",
+     "text": "purpose is not inside the agent — it lives in the field the agent inhabits",
+     "by": "draft"
+    }
+   ],
+   "hero": "FlowFieldMain"
+  },
+  {
+   "pearl": "boids algorithm",
+   "map": "SwarmIntelligence_Boids_Algorithm",
+   "lines": [
+    {
+     "token": "boid_flocking",
+     "text": "Emergent flocking behavior simulation using Craig Reynolds' boids algorithm",
+     "by": "draft"
+    },
+    {
+     "token": "boids_aquarium"
+    },
+    {
+     "token": "boids_2d_in_3d",
+     "text": "boids_2d_in_3d",
+     "by": "draft"
+    },
+    {
+     "token": "boid_manager",
+     "text": "coordination is not agreement — it is geometry",
+     "by": "draft"
+    }
+   ],
+   "hero": "boids_aquarium"
+  },
+  {
+   "pearl": "agent based modeling abm",
+   "map": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+   "lines": [
+    {
+     "token": "ant_colony_optimization",
+     "text": "Ant colony optimization with pheromone evaporation gradient heatmap",
+     "by": "draft"
+    }
+   ],
+   "hero": "ant_colony_optimization"
+  },
+  {
+   "pearl": "ant colony optimization",
+   "map": "SwarmIntelligence_Ant_Colony_Optimization",
+   "lines": [
+    {
+     "token": "AntColonyV2",
+     "text": "the map is written by the travelers — the territory and the route emerge together",
+     "by": "draft"
+    }
+   ],
+   "hero": "AntColonyV2"
+  },
+  {
+   "pearl": "swarm",
+   "map": "Chamber_Swarm",
+   "lines": []
+  },
+  {
+   "pearl": "particle swarm optimization",
+   "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+   "lines": [
+    {
+     "token": "self_organizing_patterns",
+     "text": "order is not imposed from outside — it falls into existence when local interactions exceed the noise …",
+     "by": "draft"
+    },
+    {
+     "token": "fitness_landscape_politics",
+     "text": "the swarm always optimizes — the question is never whether to optimize but who wrote the objective …",
+     "by": "draft"
+    }
+   ],
+   "hero": "self_organizing_patterns"
+  },
+  {
+   "pearl": "swarm intelligence algorithms",
+   "map": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+   "lines": [
+    {
+     "token": "ecosystem_simulation",
+     "text": "evolution has no goal — only the dead are wrong, and only the living get to try again",
+     "by": "draft"
+    }
+   ],
+   "hero": "ecosystem_simulation"
+  }
+ ]
+}

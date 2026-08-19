@@ -1,0 +1,132 @@
+{
+ "chapter": "formfinding",
+ "speak": "",
+ "speak_by": "",
+ "pearls": [
+  {
+   "pearl": "descent",
+   "map": "FormFinding_Descent",
+   "lines": [
+    {
+     "token": "gradient_descent",
+     "text": "Gradient descent optimization demo — a ball rolling downhill on a loss surface",
+     "by": "draft"
+    },
+    {
+     "token": "descent_marble_toy",
+     "text": "A held marble-in-a-bowl rolling down to its minimum",
+     "by": "draft"
+    },
+    {
+     "token": "gradient_descent_well",
+     "text": "falling is how it learns. Gradient descent never sees the landscape",
+     "by": "draft"
+    }
+   ],
+   "hero": "gradient_descent_well"
+  },
+  {
+   "pearl": "catenary",
+   "map": "FormFinding_Catenary",
+   "lines": [
+    {
+     "token": "catenoid",
+     "text": "Minimal surface formed by rotating a catenary curve",
+     "by": "draft"
+    },
+    {
+     "token": "helicoid",
+     "text": "Ruled minimal surface — a plane rotating as it rises",
+     "by": "draft"
+    },
+    {
+     "token": "cable_builder"
+    }
+   ],
+   "hero": "cable_builder"
+  },
+  {
+   "pearl": "relaxation",
+   "map": "FormFinding_Relaxation",
+   "lines": [
+    {
+     "token": "mass_spring_bench",
+     "text": "A grid of masses and springs settling on a bench - each spring pulling to rest length",
+     "by": "draft"
+    },
+    {
+     "token": "verlet_workbench",
+     "text": "A cloth relaxing under a Verlet integrator with a constraint-pass dial - integrate position from position",
+     "by": "draft"
+    },
+    {
+     "token": "frozen_glass_vessel",
+     "text": "Duration is DNA. The clock is part of the genome",
+     "by": "draft"
+    }
+   ],
+   "hero": "mass_spring_bench"
+  },
+  {
+   "pearl": "equilibrium",
+   "map": "FormFinding_Equilibrium",
+   "lines": [
+    {
+     "token": "fractal_truss_tower",
+     "text": "A room-scale branching truss whose struts split into thinner struts - the Eiffel trick",
+     "by": "draft"
+    },
+    {
+     "token": "tensegrity_triangle",
+     "text": "a point is position; a line is relation; a triangle is the relation made rigid",
+     "by": "draft"
+    }
+   ],
+   "hero": "fractal_truss_tower"
+  },
+  {
+   "pearl": "annealing",
+   "map": "FormFinding_Annealing",
+   "lines": [
+    {
+     "token": "max_q_basin_room",
+     "text": "A room with a deep narrow DEAD well (rigid, one shape) and a shallow wide ALIVE well (soft",
+     "by": "draft"
+    },
+    {
+     "token": "energy_landscape_bench",
+     "text": "A soft body settling on a wavy energy-landscape surface where height is energy",
+     "by": "draft"
+    },
+    {
+     "token": "simulated_annealing",
+     "text": "Adaptive thermal optimization with basin-hopping",
+     "by": "draft"
+    }
+   ],
+   "hero": "max_q_basin_room"
+  },
+  {
+   "pearl": "formfinding",
+   "map": "Chamber_FormFinding",
+   "lines": []
+  },
+  {
+   "pearl": "forge",
+   "map": "FormFinding_Forge",
+   "lines": [
+    {
+     "token": "self_shaping_forge",
+     "text": "A forge where raw matter descends toward max Q",
+     "by": "draft"
+    },
+    {
+     "token": "gradient_descent_optimizer",
+     "text": "A soft body descending an energy landscape toward max Q with a step/energy readout - the same motion as training a model",
+     "by": "draft"
+    }
+   ],
+   "hero": "self_shaping_forge"
+  }
+ ]
+}

@@ -1,0 +1,223 @@
+{
+ "chapter": "qfeplaboratory",
+ "speak": "",
+ "speak_by": "",
+ "pearls": [
+  {
+   "pearl": "qfep introduction",
+   "map": "QFEP_Introduction",
+   "lines": [
+    {
+     "token": "tt",
+     "text": "A tutorial is a placement-of-words. The library holds the words",
+     "by": "draft"
+    },
+    {
+     "token": "grab_sphere_F",
+     "text": "Grabbable sphere representing F (Free Energy) - the order-seeking",
+     "by": "draft"
+    },
+    {
+     "token": "grab_sphere_E",
+     "text": "Grabbable sphere representing E(S) (Entropy) - the freedom and possibility space",
+     "by": "draft"
+    },
+    {
+     "token": "grab_sphere_lambda",
+     "text": "Grabbable sphere representing λ (lambda) - the entropy drive parameter. Green glow",
+     "by": "draft"
+    }
+   ],
+   "hero": "tt"
+  },
+  {
+   "pearl": "qfep f term",
+   "map": "QFEP_F_Term",
+   "lines": [
+    {
+     "token": "snap_cube_puzzle",
+     "text": "the octahedron is the cube's dual — swap faces and vertices and you get the other",
+     "by": "draft"
+    },
+    {
+     "token": "snap_tetra_puzzle",
+     "text": "you cannot enclose volume with fewer than 4 faces — the tetrahedron is the minimum",
+     "by": "draft"
+    },
+    {
+     "token": "crystal_cluster",
+     "text": "a seed turns chance into a decision you can repeat",
+     "by": "draft"
+    }
+   ],
+   "hero": "snap_cube_puzzle"
+  },
+  {
+   "pearl": "qfep e term",
+   "map": "QFEP_E_Term",
+   "lines": [
+    {
+     "token": "microstate_counter",
+     "text": "Entropy counts the ways: S = k log W - one macrostate, astronomically many microstates",
+     "by": "draft"
+    },
+    {
+     "token": "entropy_fan",
+     "text": "More ways to be is more entropy - possibility itself is what S measures",
+     "by": "draft"
+    },
+    {
+     "token": "possibility_space_cloud",
+     "text": "Entropy is the size of the space of what could be - few accessible states vs many",
+     "by": "draft"
+    },
+    {
+     "token": "particle_chaos",
+     "text": "entropy is not disorder but possibility — maximum spread means maximum freedom from …",
+     "by": "draft"
+    },
+    {
+     "token": "random_cubes",
+     "text": "randomness is not the absence of information but the presence of all possible configurations …",
+     "by": "draft"
+    }
+   ],
+   "hero": "microstate_counter"
+  },
+  {
+   "pearl": "qfep lambda spectrum",
+   "map": "QFEP_Lambda_Spectrum",
+   "lines": [
+    {
+     "token": "edge_particles",
+     "text": "Particles at the edge of chaos (λ≈0.4). Dancing, self-organizing, alive",
+     "by": "draft"
+    },
+    {
+     "token": "chaos_particles",
+     "text": "at lambda=1, information has no structure — dissolution is not destruction but the liberation of …",
+     "by": "draft"
+    },
+    {
+     "token": "bifurcation_walkway",
+     "text": "A corridor where your position = r parameter in the logistic map",
+     "by": "draft"
+    },
+    {
+     "token": "dissolving_form",
+     "text": "form is not permanent — every structure carries its own dissolution encoded in the noise of its …",
+     "by": "draft"
+    },
+    {
+     "token": "ordered_grid",
+     "text": "at lambda=0, prediction error is zero — the crystal has no surprises",
+     "by": "draft"
+    },
+    {
+     "token": "complexity_pattern",
+     "text": "at the edge of chaos, simple local rules generate unbounded computational complexity",
+     "by": "draft"
+    },
+    {
+     "token": "crystal_formation",
+     "text": "a seed turns chance into a decision you can repeat",
+     "by": "draft"
+    }
+   ],
+   "hero": "bifurcation_walkway"
+  },
+  {
+   "pearl": "qfep phi term",
+   "map": "QFEP_Phi_Term",
+   "lines": [
+    {
+     "token": "rigid_sculpture",
+     "text": "negative phi crystallizes form into monument — the rigid sculpture is beautiful and dead",
+     "by": "draft"
+    },
+    {
+     "token": "fluid_form",
+     "text": "positive phi means embracing transformation — the fluid form is not broken, it is becoming",
+     "by": "draft"
+    },
+    {
+     "token": "preserved_pattern",
+     "text": "negative phi preserves pattern at the cost of life",
+     "by": "draft"
+    },
+    {
+     "token": "transforming_pattern",
+     "text": "positive phi means the pattern itself is in motion",
+     "by": "draft"
+    }
+   ],
+   "hero": "rigid_sculpture"
+  },
+  {
+   "pearl": "qfep edge of chaos",
+   "map": "QFEP_Edge_Of_Chaos",
+   "lines": [
+    {
+     "token": "emergence_zone",
+     "text": "A zone where complexity emerges. Particles self-organize at the edge of chaos",
+     "by": "draft"
+    },
+    {
+     "token": "turing_pattern",
+     "text": "Reaction-diffusion Turing pattern. Spots, stripes, labyrinths",
+     "by": "draft"
+    },
+    {
+     "token": "edge_core",
+     "text": "life does not exist at order or chaos but at the narrow boundary between them",
+     "by": "draft"
+    },
+    {
+     "token": "edge_of_chaos_unlocked",
+     "text": "when you control lambda, you understand the parameter space",
+     "by": "draft"
+    }
+   ],
+   "hero": "edge_of_chaos_unlocked"
+  },
+  {
+   "pearl": "qfep",
+   "map": "Chamber_QFEP",
+   "lines": []
+  },
+  {
+   "pearl": "qfep sandbox",
+   "map": "QFEP_Sandbox",
+   "lines": [
+    {
+     "token": "reactive_particles",
+     "text": "Alias for reactive_particle_field. Particles that respond to λ and φ parameters",
+     "by": "draft"
+    },
+    {
+     "token": "qfep_reactor",
+     "text": "the reactor is the QFEP formula made tangible",
+     "by": "draft"
+    }
+   ],
+   "hero": "reactive_particles"
+  },
+  {
+   "pearl": "qfep synthesis",
+   "map": "QFEP_Synthesis",
+   "lines": [
+    {
+     "token": "queer_morphology_specimen",
+     "text": "queer morphology is not a fixed form but a process of becoming",
+     "by": "draft"
+    },
+    {
+     "token": "grab_sphere_phi",
+     "text": "Grabbable sphere representing φ (phi) - the rate sensitivity",
+     "by": "draft"
+    }
+   ],
+   "hero": "queer_morphology_specimen"
+  }
+ ]
+}

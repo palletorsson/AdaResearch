@@ -1,0 +1,113 @@
+{
+ "chapter": "change",
+ "speak": "",
+ "speak_by": "",
+ "pearls": [
+  {
+   "pearl": "intro",
+   "map": "Change_Intro",
+   "lines": [
+    {
+     "token": "derivative_pair",
+     "text": "the derivative is not a number at a point — it is a function in its own right",
+     "by": "draft"
+    },
+    {
+     "token": "slope_tangent_demo",
+     "text": "the slope at a point is the rate of change there",
+     "by": "draft"
+    }
+   ],
+   "hero": "slope_tangent_demo"
+  },
+  {
+   "pearl": "velocity",
+   "map": "Change_Velocity",
+   "lines": [
+    {
+     "token": "velocity_arrow",
+     "text": "velocity is the derivative of position — motion is the visible rate at which where-you-are becomes …",
+     "by": "draft"
+    }
+   ],
+   "hero": "velocity_arrow"
+  },
+  {
+   "pearl": "slope surface",
+   "map": "Change_Slope_Surface",
+   "lines": [
+    {
+     "token": "partial_derivative_terrain",
+     "text": "a derivative in more than one dimension is not one number but a choice of direction",
+     "by": "draft"
+    }
+   ],
+   "hero": "partial_derivative_terrain"
+  },
+  {
+   "pearl": "accumulation area",
+   "map": "Accumulation_Area",
+   "lines": [
+    {
+     "token": "integral_area",
+     "text": "the integral is accumulation — where the derivative asks how fast",
+     "by": "draft"
+    }
+   ],
+   "hero": "integral_area"
+  },
+  {
+   "pearl": "accumulation riemann",
+   "map": "Accumulation_Riemann",
+   "lines": [
+    {
+     "token": "riemann_pump",
+     "text": "area under a curve has no single recipe — left",
+     "by": "draft"
+    },
+    {
+     "token": "riemann_pi",
+     "text": "riemann_pi",
+     "by": "draft"
+    }
+   ],
+   "hero": "riemann_pump"
+  },
+  {
+   "pearl": "flow field",
+   "map": "Flow_Field",
+   "lines": [
+    {
+     "token": "vector_field_grid",
+     "text": "a field is not one arrow but a rule that hands you an arrow wherever you stand",
+     "by": "draft"
+    }
+   ],
+   "hero": "vector_field_grid"
+  },
+  {
+   "pearl": "flow particle pulse",
+   "map": "Flow_Particle_Pulse",
+   "lines": [
+    {
+     "token": "particle_flow_swarm",
+     "text": "a field is invisible until a body moves through it — the particle is how the field speaks",
+     "by": "draft"
+    }
+   ],
+   "hero": "particle_flow_swarm"
+  },
+  {
+   "pearl": "reconciliation",
+   "map": "Change_Reconciliation",
+   "lines": [
+    {
+     "token": "ftc_bridge",
+     "text": "differentiation and integration are the same bridge walked in opposite directions",
+     "by": "draft"
+    }
+   ],
+   "hero": "ftc_bridge"
+  }
+ ]
+}

@@ -1,0 +1,215 @@
+{
+ "chapter": "transformation",
+ "speak": "",
+ "speak_by": "",
+ "pearls": [
+  {
+   "pearl": "trans introduction",
+   "map": "Trans_Introduction",
+   "lines": [
+    {
+     "text": "one matrix does it all. move, turn, grow — the same multiplication. what stays the same is the invariant. homogeneous coordinates: a point and a direction differ by one number.",
+     "by": "claude"
+    },
+    {
+     "token": "homogeneous_coordinates",
+     "text": "a point carries a 1, a direction carries a 0 — that is the whole difference",
+     "by": "claude"
+    },
+    {
+     "token": "invariants_demo",
+     "text": "what does not change when everything moves",
+     "by": "claude"
+    },
+    {
+     "token": "rotation_gimbal",
+     "text": "three rings, and one way to lose a degree of freedom",
+     "by": "claude"
+    },
+    {
+     "token": "matrix_4x4_viewer",
+     "text": "sixteen numbers. every move you will ever make",
+     "by": "claude"
+    },
+    {
+     "token": "transform_composition",
+     "text": "one after another is one. order matters",
+     "by": "claude"
+    },
+    {
+     "token": "balance_puzzle",
+     "text": "the transform you cannot see: weight",
+     "by": "claude"
+    }
+   ],
+   "hero": "transform_composition"
+  },
+  {
+   "pearl": "trans translation",
+   "map": "Trans_Translation",
+   "lines": [
+    {
+     "text": "to move is to add. nothing turns, nothing grows; the thing arrives as it left.",
+     "by": "claude"
+    },
+    {
+     "token": "transform_composition_workbench",
+     "text": "compose: the hand builds the matrix",
+     "by": "claude"
+    },
+    {
+     "token": "z_translation_cube",
+     "text": "plus z: deeper",
+     "by": "claude"
+    },
+    {
+     "token": "pick_up_cube",
+     "text": "the first transform is the hand's",
+     "by": "claude"
+    },
+    {
+     "token": "y_translation_cube",
+     "text": "plus y: higher",
+     "by": "claude"
+    },
+    {
+     "token": "pickup_gate",
+     "text": "a move that opens",
+     "by": "claude"
+    }
+   ],
+   "hero": "transform_composition_workbench"
+  },
+  {
+   "pearl": "trans axisdecomposition",
+   "map": "Trans_AxisDecomposition",
+   "lines": [
+    {
+     "text": "one move is three moves. x, then y, then z — and the order does not matter, for translation only.",
+     "by": "claude"
+    },
+    {
+     "token": "toruscylinder",
+     "text": "a ring and a tube: the same surface, one axis apart",
+     "by": "claude"
+    },
+    {
+     "token": "translation_cube_demo",
+     "text": "the move, taken apart",
+     "by": "claude"
+    },
+    {
+     "token": "x_translation_cube",
+     "text": "plus x: across",
+     "by": "claude"
+    }
+   ],
+   "hero": "toruscylinder"
+  },
+  {
+   "pearl": "trans rotation",
+   "map": "Trans_Rotation",
+   "lines": [
+    {
+     "text": "turning is a move around something. around which axis, from where — the order matters now.",
+     "by": "claude"
+    },
+    {
+     "token": "rotate_grid_cubes",
+     "text": "the grid turns and stays a grid",
+     "by": "claude"
+    },
+    {
+     "token": "spin",
+     "text": "turning with nothing to turn around",
+     "by": "claude"
+    }
+   ],
+   "hero": "rotate_grid_cubes"
+  },
+  {
+   "pearl": "trans rotationspectacle",
+   "map": "Trans_RotationSpectacle",
+   "lines": [
+    {
+     "text": "rotation as spectacle: the tunnel turns, the cake turns, the eye is the thing that moved.",
+     "by": "claude"
+    },
+    {
+     "token": "boolean_tunnel",
+     "text": "a tunnel is a solid subtracted, turning",
+     "by": "claude"
+    },
+    {
+     "token": "carousel_cake",
+     "text": "the carousel: everything moves, the centre does not",
+     "by": "claude"
+    }
+   ],
+   "hero": "boolean_tunnel"
+  },
+  {
+   "pearl": "trans scale",
+   "map": "Trans_Scale",
+   "lines": [
+    {
+     "text": "to scale is to multiply. bigger is not more; the chair assembled at twice the size is the same chair.",
+     "by": "claude"
+    },
+    {
+     "token": "chair_assembly_puzzle",
+     "text": "parts to chair: every piece a transform",
+     "by": "claude"
+    },
+    {
+     "token": "clipboard",
+     "text": "copy, paste — the transform that makes two",
+     "by": "claude"
+    },
+    {
+     "token": "scale_me",
+     "text": "times two. the same, and not",
+     "by": "claude"
+    }
+   ],
+   "hero": "chair_assembly_puzzle"
+  },
+  {
+   "pearl": "transformation",
+   "map": "Chamber_Transformation",
+   "lines": [
+    {
+     "text": "transformation: one matrix, three moves.",
+     "by": "claude"
+    },
+    {
+     "token": "proximity_spawner",
+     "text": "come close — something appears",
+     "by": "claude"
+    }
+   ],
+   "hero": "proximity_spawner"
+  },
+  {
+   "pearl": "trans pit",
+   "map": "Trans_Pit",
+   "lines": [
+    {
+     "text": "the pit: push and grow. a transform done to you.",
+     "by": "claude"
+    },
+    {
+     "token": "pusher_block",
+     "text": "pushed — translated by the room",
+     "by": "claude"
+    },
+    {
+     "token": "grower_block",
+     "text": "grown — scaled by the room",
+     "by": "claude"
+    }
+   ],
+   "hero": "pusher_block"
+  }
+ ]
+}

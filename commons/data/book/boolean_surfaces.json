@@ -1,0 +1,65 @@
+{
+ "chapter": "boolean_surfaces",
+ "speak": "",
+ "speak_by": "",
+ "pearls": [
+  {
+   "pearl": "boolean union",
+   "map": "Boolean_Union",
+   "lines": [
+    {
+     "token": "csg_union_demo",
+     "text": "Union is the generous operator. It keeps everything either shape claims",
+     "by": "draft"
+    }
+   ],
+   "hero": "csg_union_demo"
+  },
+  {
+   "pearl": "boolean intersection",
+   "map": "Boolean_Intersection",
+   "lines": [
+    {
+     "token": "csg_intersection_demo",
+     "text": "Intersection is the shape of consensus. What both shapes agree on is always less than either …",
+     "by": "draft"
+    }
+   ],
+   "hero": "csg_intersection_demo"
+  },
+  {
+   "pearl": "boolean difference",
+   "map": "Boolean_Difference",
+   "lines": [
+    {
+     "token": "csg_difference_demo",
+     "text": "To make a room, subtract a void from a solid. Architecture is difference",
+     "by": "draft"
+    }
+   ],
+   "hero": "csg_difference_demo"
+  },
+  {
+   "pearl": "boolean compose workbench",
+   "map": "Boolean_Compose_Workbench",
+   "lines": [
+    {
+     "token": "csg_compose_workbench",
+     "text": "Three operators, one algebra. Composition is a choice",
+     "by": "draft"
+    }
+   ],
+   "hero": "csg_compose_workbench"
+  },
+  {
+   "pearl": "boolean",
+   "map": "Chamber_Boolean",
+   "lines": []
+  },
+  {
+   "pearl": "boolean architecture cavity",
+   "map": "Boolean_Architecture_Cavity",
+   "lines": []
+  }
+ ]
+}

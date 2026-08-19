@@ -1,0 +1,176 @@
+{
+ "chapter": "array_tutorial",
+ "speak": "",
+ "speak_by": "",
+ "pearls": [
+  {
+   "pearl": "tutorial single",
+   "map": "Tutorial_Single",
+   "lines": [
+    {
+     "token": "xyz_coordinates",
+     "text": "Cartesian coordinate system, x y z godot",
+     "by": "draft"
+    }
+   ],
+   "hero": "xyz_coordinates"
+  },
+  {
+   "pearl": "tutorial pattern",
+   "map": "Tutorial_Pattern",
+   "lines": [
+    {
+     "token": "panel_bridge_loom",
+     "text": "Three interactive VR panels displaying a weaving draft",
+     "by": "draft"
+    },
+    {
+     "token": "script_runner",
+     "text": "a running program is a trajectory through state space",
+     "by": "draft"
+    },
+    {
+     "token": "pattern_studio_plate",
+     "text": "Full pattern design studio ported from Three.js PatternMaker3D",
+     "by": "draft"
+    },
+    {
+     "token": "pattern_tile_plate",
+     "text": "a wallpaper group is a verb you apply to a small drawing",
+     "by": "draft"
+    },
+    {
+     "token": "grid_model",
+     "text": "a map is a 2D array made walkable — this artifact reverses the abstraction",
+     "by": "draft"
+    },
+    {
+     "token": "pulsar_compact",
+     "text": "scientific visualization is always a mapping from array index to physical property",
+     "by": "draft"
+    }
+   ],
+   "hero": "panel_bridge_loom"
+  },
+  {
+   "pearl": "array patterns",
+   "map": "Array_Patterns",
+   "lines": [
+    {
+     "token": "tiling_demo",
+     "text": "a tiling motif is a function from grid index to visual element",
+     "by": "draft"
+    },
+    {
+     "token": "pattern_tunnel_machine",
+     "text": "A subway-tiled walkway tunnel that paints itself tile by tile (floor then walls then ceiling)",
+     "by": "draft"
+    },
+    {
+     "token": "vr_tile_editor_mirror",
+     "text": "the tile editor is a live proof that a 4×4 array",
+     "by": "draft"
+    },
+    {
+     "token": "facade_grammar_demo",
+     "text": "Architectural facade gallery. Italian presets (Villa San Michele",
+     "by": "draft"
+    }
+   ],
+   "hero": "tiling_demo"
+  },
+  {
+   "pearl": "tutorial row",
+   "map": "Tutorial_Row",
+   "lines": [
+    {
+     "token": "column_3_z",
+     "text": "an array is space made countable — column_3_z makes the abstract concept of an index into a physical position you can walk …",
+     "by": "draft"
+    }
+   ],
+   "hero": "column_3_z"
+  },
+  {
+   "pearl": "tutorial 2d build",
+   "map": "Tutorial_2D_Build",
+   "lines": [
+    {
+     "token": "pulsar_visualizer",
+     "text": "the first discovered pulsar was initially called LGM-1 (Little Green Men) because the signal's regularity seemed artificial",
+     "by": "draft"
+    },
+    {
+     "token": "grid_2d_4x4",
+     "text": "a 2D array is space folded into coordinates — this artifact makes coordinates walkable positions",
+     "by": "draft"
+    },
+    {
+     "token": "row_3_x",
+     "text": "a 1D array is a line of values — row_3_x makes this literal by arranging physical objects along an axis and labeling them with their …",
+     "by": "draft"
+    },
+    {
+     "token": "gridagent",
+     "text": "an agent inside an array reveals that data structures are not passive containers",
+     "by": "draft"
+    }
+   ],
+   "hero": "pulsar_visualizer"
+  },
+  {
+   "pearl": "tutorial 3d",
+   "map": "Tutorial_3D",
+   "lines": [
+    {
+     "token": "grid_3d_4x4x4",
+     "text": "a three-dimensional array is the minimum structure needed to represent volumetric space",
+     "by": "draft"
+    },
+    {
+     "token": "sorting_algorithm_race",
+     "text": "sorting algorithms are strategies for restoring order",
+     "by": "draft"
+    },
+    {
+     "token": "bar_array",
+     "text": "Universal 1D array visualization. MultiMesh bars with emission and smooth transitions",
+     "by": "draft"
+    },
+    {
+     "token": "grid3d",
+     "text": "Universal 3D graph visualization. MultiMesh spheres + cylinder edges",
+     "by": "draft"
+    },
+    {
+     "token": "bar_array_bubble_sort",
+     "text": "Bubble sort on a MultiMesh bar array. Adjacent comparisons",
+     "by": "draft"
+    }
+   ],
+   "hero": "grid_3d_4x4x4"
+  },
+  {
+   "pearl": "arrays",
+   "map": "Chamber_Arrays",
+   "lines": []
+  },
+  {
+   "pearl": "tutorial disco",
+   "map": "Tutorial_Disco",
+   "lines": [
+    {
+     "token": "step_sequencer",
+     "text": "a step sequencer is a for-loop over time — the array of steps is executed rhythmically",
+     "by": "draft"
+    },
+    {
+     "token": "standalone_disco",
+     "text": "Self-contained disco floor with white tiles and pattern control",
+     "by": "draft"
+    }
+   ],
+   "hero": "step_sequencer"
+  }
+ ]
+}
