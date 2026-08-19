@@ -17077,6 +17077,12 @@
     "hero": "CoordinateSystem3M",
     "supports": {
      "interactive_point_origin": 0.95
+    },
+    "locks": {
+     "interactive_point_origin": [
+      9,
+      5
+     ]
     }
    },
    {
@@ -17543,6 +17549,12 @@
       "frame_counter_display",
       "origin"
      ],
+     "locks": {
+      "interactive_point_origin": [
+       9,
+       5
+      ]
+     },
      "supports": {
       "interactive_point_origin": 0.95
      },

@@ -225,6 +225,8 @@ def _apply_walk(walk: dict[str, Any], cast_context: dict[str, Any]) -> list[str]
         cast_context[tok]["walk_space"] = r.get("space", "wall")   # wall | alcove | room
         if r.get("support_m"):
             cast_context[tok]["support_m"] = float(r["support_m"])  # the book asked for a plinth under this body
+        if r.get("lock"):
+            cast_context[tok]["lock"] = [int(r["lock"][0]), int(r["lock"][1])]   # the book locks this body to a tile cell
         if walk.get("pearl"):
             cast_context[tok]["pearl"] = walk["pearl"]
     return list(walk["cast"])
@@ -250,8 +252,9 @@ def _run_cast(seq: str, museum: str, rows: int, anchors: list[str], cast: list[s
     if skip:
         placements, occ = [], None
     else:
-        _, placements, occ = negotiate_run(list(cast), plan=plan, reading=bool((walk or {}).get("ordered")),
-                                           fixed=_fixed_cells(seq, museum, (walk or {}).get("pearl", ""), plan.apron, only=set(cast) if (walk or {}).get("ordered") else None))
+        fixed_now = _fixed_cells(seq, museum, (walk or {}).get("pearl", ""), plan.apron, only=set(cast) if (walk or {}).get("ordered") else None)
+        fixed_now.update(_book_locks(cast_context, plan.apron))      # the book's locks win over a plan-editor ruling
+        _, placements, occ = negotiate_run(list(cast), plan=plan, reading=bool((walk or {}).get("ordered")), fixed=fixed_now)
 
     acc = [p for p in placements if p.result == "ACCEPT"]
     interior = [p for p in acc if p.venue == "interior"]
@@ -361,6 +364,11 @@ def spine_run(only: str = "", relations: int = 2,
             "totals": tot, "sequences": rows}
 
 
+def _book_locks(cast_context: dict[str, Any], apron: int) -> dict[str, tuple[int, int]]:
+    """The book's locked cells (tools/book.py `lock`), as plan cells."""
+    return {t: (int(c["lock"][0]) + apron, int(c["lock"][1]) + apron) for t, c in (cast_context or {}).items() if c.get("lock")}
+
+
 def _fixed_cells(seq: str, museum: str, pearl: str, apron: int, only: set | None = None) -> dict[str, tuple[int, int]]:
     """The hand's rows of this pearl in the CURRENT plan, as plan cells — handed to
     the negotiator so its occupancy and reading order know where the hand put them.
@@ -402,6 +410,8 @@ def _carry_hand_rows(m: dict[str, Any], prev: dict[str, Any], key: str, seq: str
     kept = 0
     for h in hand:
         cur = next((a for a in m.get("artifacts", []) if a.get("token") == h.get("token")), None)
+        if cur is not None and str((cur.get("ruled") or {}).get("by", "")).startswith("book: locked"):
+            continue                       # the book's lock is the newer ruling: the carried cell yields to it
         fields = {k: h[k] for k in ("tile_cell", "rotation", "offset", "scale", "config", "hand", "ruled", "mode", "venue", "support_height_m") if k in h}
         if cur is None:
             m.setdefault("artifacts", []).append(dict(h))
@@ -456,9 +466,10 @@ def write_plan(result: dict[str, Any], out: Path) -> dict[str, Any]:
         if r.get("pearls"):
             first: dict[str, Any] | None = None
             for pr in r["pearls"]:
+                fx = _fixed_cells(r["sequence"], key, pr["pearl"], APRON, only=set(pr["cast"]) if pr.get("ordered") else None)
+                fx.update(_book_locks(pr.get("cast_context", {}), APRON))
                 m = plan_museum(key, list(pr["cast"]), list(r.get("anchor_tokens", [])),
-                                dict(pr.get("cast_context", {})), rooms=pr.get("rooms"), reading=bool(pr.get("ordered")),
-                                fixed=_fixed_cells(r["sequence"], key, pr["pearl"], APRON, only=set(pr["cast"]) if pr.get("ordered") else None))
+                                dict(pr.get("cast_context", {})), rooms=pr.get("rooms"), reading=bool(pr.get("ordered")), fixed=fx)
                 m["ordered"] = bool(pr.get("ordered"))
                 if pr.get("pages"):
                     m["pages"] = list(pr["pages"])     # the pearls sharing this hall, in reading order

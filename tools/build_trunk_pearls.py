@@ -158,6 +158,8 @@ def seed(trunk_doc: dict) -> dict:
                         for tk in p["foyer"]:
                             if tk not in p["tokens"]:
                                 p["tokens"].append(tk)
+                    if e.get("locks"):
+                        p["locks"] = dict(e["locks"])          # {token: [x, z]} — the body stands HERE through every regeneration (tools/book.py)
                     if e.get("supports"):
                         p["supports"] = dict(e["supports"])    # {token: m} — a plinth under this line's body (tools/book.py)
                     if e.get("supports"):

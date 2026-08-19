@@ -235,6 +235,7 @@ def plan_museum(key: str, tokens: list[str],
             # the book may ask for a plinth (support_m on the line): the hand's height wins
             # over the slot's surface (tools/book.py -> hero_walk -> cast_context)
             "support_height_m": round(float(edge_meta.get("support_m") or p.support_height_m), 3),
+            **({"hand": True, "ruled": {"by": "book: locked", "cell": list(edge_meta["lock"])}} if edge_meta.get("lock") else {}),
             "slot": p.slot,
             "wall": p.wall,
             # court dims ride the row only when the negotiator granted a court;

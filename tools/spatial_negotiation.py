@@ -1225,7 +1225,7 @@ def run(artifacts: list[str], plan: FloorPlan | None = None,
                     break
         else:
             p = negotiate(contract, plan, occ, preferred)
-        if lookup in fixed and not (p.result == "ACCEPT" and p.venue == "interior"):
+        if lookup in fixed and not (p.result == "ACCEPT" and p.venue == "interior" and p.anchor is not None and (int(p.anchor[0]), int(p.anchor[1])) == (int(fixed[lookup][0]), int(fixed[lookup][1]))):
             # THE HAND WINS: the ruled cell holds even where the negotiator found no
             # room for the body there — it is committed to occupancy at that cell
             # (physical mask only) so the lines after it deal AROUND it, and the

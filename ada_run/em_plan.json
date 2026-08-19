@@ -2,7 +2,7 @@
   "schema": "adaresearch.em_plan.v2",
   "_readme": "Placements resolved by tools/spatial_negotiation.py. Read by commons/scenes/endless_museum.gd under --em-plan. A museum key absent here deals exactly as it did before.",
   "_spine_run": {
-    "at": "2026-08-19T15:53:14",
+    "at": "2026-08-19T16:25:47",
     "owner": {
       "sainsbury-false-perspective-enfilade": "primitives"
     },
@@ -260930,12 +260930,20 @@
             9,
             5
           ],
-          "rotation": 0,
+          "rotation": 90,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.95,
-          "slot": "sainsbury-false-perspective-enfilade/13,3~r",
-          "wall": null,
+          "hand": true,
+          "ruled": {
+            "by": "book: locked",
+            "cell": [
+              9,
+              5
+            ]
+          },
+          "slot": "hand",
+          "wall": "east",
           "relational_kind": "dna_artifact",
           "relation": {
             "anchor": "interactive_point_origin_force",
@@ -260947,6 +260955,10 @@
             "walk_why": "a line of the point poem",
             "walk_space": "wall",
             "support_m": 0.95,
+            "lock": [
+              9,
+              5
+            ],
             "pearl": "point"
           }
         },
@@ -293690,12 +293702,20 @@
             9,
             5
           ],
-          "rotation": 0,
+          "rotation": 90,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.95,
-          "slot": "sainsbury-false-perspective-enfilade/13,3~r",
-          "wall": null,
+          "hand": true,
+          "ruled": {
+            "by": "book: locked",
+            "cell": [
+              9,
+              5
+            ]
+          },
+          "slot": "hand",
+          "wall": "east",
           "relational_kind": "dna_artifact",
           "relation": {
             "anchor": "interactive_point_origin_force",
@@ -293707,6 +293727,10 @@
             "walk_why": "a line of the point poem",
             "walk_space": "wall",
             "support_m": 0.95,
+            "lock": [
+              9,
+              5
+            ],
             "pearl": "point"
           }
         },
