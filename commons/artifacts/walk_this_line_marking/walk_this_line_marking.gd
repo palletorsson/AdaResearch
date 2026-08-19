@@ -24,7 +24,7 @@ class_name WalkThisLineMarking
 ## the legend and it says something else. The mesh was always right; the
 ## description was mine.
 ##
-## SOURCE ASSET. Both artifacts instantiate ONE glTF, res://assets/models/
+## SOURCE ASSET. Both artifacts instantiate ONE glTF, res://commons/models/
 ## do_not_cross_line.glb, and each keeps only its own assembly. See the note in
 ## do_not_cross_barrier.gd for why that is not the "one scene, many names" fault
 ## this corpus keeps finding: these two draw DISJOINT subtrees and are different
@@ -50,6 +50,15 @@ const KEEP: PackedStringArray = ["floor_marking"]
 ## has a position, and the two are different claims — which is the whole reason
 ## this artifact and the barrier are a pair rather than one object.
 @export var show_stripe: bool = true
+
+## The paint colour. WHITE by default, which is not what the asset ships: the
+## glTF's `floor_paint` material is baseColor [0.025, 0.023, 0.019], a near-black
+## that reads as dark grey text on a pale floor and all but disappears on a dark
+## one. White is the colour a floor marking is in the world, and it is legible
+## against both.
+##
+## Set per placement, e.g.  walk_this_line_marking:0:0#paint_color:ffcc00
+@export var paint_color: Color = Color.WHITE
 
 ## Wear on the paint, 0 (fresh) to 1 (nearly gone), applied as transparency on
 ## the floor_paint surfaces. A rule nobody has repainted is still a rule, and
@@ -105,8 +114,7 @@ func _build() -> void:
 
 	_apply_standoff(mount)
 	_apply_stripe(mount)
-	if wear > 0.0:
-		_apply_wear(mount)
+	_apply_paint(mount)
 
 
 ## Shift the marking along +Z as a unit. The asset's own legend sits at 1.18 m,
@@ -126,19 +134,27 @@ func _apply_stripe(mount: Node3D) -> void:
 		stripe.visible = show_stripe
 
 
-## Fade the paint. Applied as a per-instance material override so the shared
-## glTF material is left alone — two placements at different wear must not
-## edit each other's surfaces.
-func _apply_wear(mount: Node3D) -> void:
+## Colour the paint and fade it. ONE pass, because colour and wear both live on
+## albedo and two passes would have the second overwrite the first.
+##
+## Applied as a per-instance material_override so the shared glTF material is
+## left alone — two placements at different colours or wear must not edit each
+## other's surfaces, and the asset is shared with do_not_cross_barrier, whose
+## tape and posts must not inherit a floor colour.
+func _apply_paint(mount: Node3D) -> void:
+	var rgba: Color = paint_color
+	rgba.a = clampf(paint_color.a * (1.0 - wear), 0.0, 1.0)
+	var translucent: bool = rgba.a < 0.999
 	for mesh in _meshes_under(mount):
 		var mat := StandardMaterial3D.new()
-		var base: Material = mesh.get_active_material(0)
-		if base is StandardMaterial3D:
-			mat.albedo_color = (base as StandardMaterial3D).albedo_color
-		else:
-			mat.albedo_color = Color(0.86, 0.82, 0.30)
-		mat.albedo_color.a = clampf(1.0 - wear, 0.0, 1.0)
-		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		mat.albedo_color = rgba
+		# The authored floor_paint is unlit-flat in intent — it is paint on a
+		# floor, not a surface with a highlight — so keep it matte rather than
+		# inheriting the glTF's roughness and picking up the room's key light.
+		mat.roughness = 1.0
+		mat.metallic = 0.0
+		if translucent:
+			mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 		mesh.material_override = mat
 
 
@@ -160,6 +176,13 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		show_stripe = bool(config_data["show_stripe"])
 	if config_data.has("wear"):
 		wear = clampf(float(config_data["wear"]), 0.0, 1.0)
+	if config_data.has("paint_color"):
+		var raw: String = str(config_data["paint_color"])
+		if raw.is_valid_html_color():
+			paint_color = Color(raw)
+		else:
+			push_warning("walk_this_line_marking: '%s' is not a colour; keeping %s"
+				% [raw, paint_color.to_html(false)])
 	if _built:
 		_built = false
 		_build()
