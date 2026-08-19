@@ -17018,47 +17018,33 @@
     "speak": "You arrive late. No reboot.\nThe folding past keeps running.\n\nThe internal clock is running,\nthe frame counter update cycle.\n\nStanding at Vector.ZERO,\n\nPoint zero, * ,\nVector(0,0,0)\nThe root of all vectors.\n\nThe origin, No turning back.",
     "says": {
      "folding_past": "The folding past keeps running.",
-     "frame_counter_display": "The internal clock is running, the frame counter update cycle.",
      "origin": "Standing at Vector.ZERO, Point zero, * , Vector(0,0,0) The root of all vectors. The origin, No turning back.",
-     "CoordinateSystem3M": "Point one, position, no point without the coordinate system. 3D Space.",
+     "frame_counter_display": "The internal clock is running, the frame counter update cycle.",
      "you_are_here": "You are here",
+     "CoordinateSystem3M": "Point one, position, no point without the coordinate system. 3D Space.",
      "fontana_puncture": "the one point, pierced",
-     "interactive_point_origin_force": "a point that becomes a force",
      "floating_sphere_field": "Grab the ball.",
-     "two_points_line": "“Show me what you can do with those hands”",
-     "point": "the one point",
-     "draw_dot": "all life is encoded — that is enough",
-     "dgrid": "grid lines",
-     "do_not_cross_barrier": "do not cross — the first line is a rule",
-     "klee_walking_point": "a line is a point that went for a walk",
-     "grab_sphere_point_snap": "a point you can take; it snaps",
-     "walk_this_line_marking": "walk this line"
+     "draw_dot": "all life is encoded — that is enough"
     },
     "says_by": {
-     "you_are_here": "hand",
-     "fontana_puncture": "claude",
-     "interactive_point_origin_force": "claude",
-     "floating_sphere_field": "hand",
-     "point": "claude",
-     "draw_dot": "hand",
-     "dgrid": "hand",
-     "do_not_cross_barrier": "claude",
-     "klee_walking_point": "claude",
-     "grab_sphere_point_snap": "claude",
-     "walk_this_line_marking": "claude",
      "folding_past": "hand",
-     "frame_counter_display": "hand",
      "origin": "hand",
+     "frame_counter_display": "hand",
+     "you_are_here": "hand",
      "CoordinateSystem3M": "hand",
-     "two_points_line": "hand"
+     "fontana_puncture": "claude",
+     "floating_sphere_field": "hand",
+     "draw_dot": "hand"
     },
     "speak_by": "hand",
     "tokens_add": [
+     "folding_past",
+     "origin",
+     "frame_counter_display",
      "CoordinateSystem3M",
      "draw_dot"
     ],
     "tokens_remove": [
-     "dgrid",
      "do_not_cross_barrier",
      "grab_sphere_point_snap",
      "interactive_point_origin_force",
@@ -17075,20 +17061,10 @@
      "CoordinateSystem3M",
      "fontana_puncture",
      "floating_sphere_field",
-     "two_points_line",
      "draw_dot"
     ],
     "verse": {
-     "you_are_here": {
-      "indent": 0,
-      "gap": 1
-     },
-     "two_points_line": {
-      "indent": 0,
-      "gap": 1
-     },
      "floating_sphere_field": {
-      "indent": 0,
       "gap": 1
      }
     },
@@ -17097,7 +17073,8 @@
      "origin",
      "frame_counter_display"
     ],
-    "page2": "Point Zero now as an object in the exhibition\n\nPoint one, position,\nno point without the coordinate system.\n\n3D Space.\n\nYou are here\n\n“Show me what you can do with those hands”\n\nGrab the ball."
+    "page2": "Point Zero now as an object in the exhibition\n\nPoint one, position,\nno point without the coordinate system.\n\n3D Space.\n\nYou are here\n\n“Show me what you can do with those hands”\n\nGrab the ball.",
+    "hero": "CoordinateSystem3M"
    },
    {
     "map": "Point_Lines",
@@ -17105,39 +17082,42 @@
     "rooms": 6,
     "speak": "Do not cross this line ...",
     "says": {
-     "perspective_lines": "perspective line",
-     "parallel_line_puzzle": "parallel line",
-     "dgrid": "grid lines",
-     "line": "two points is a line — it measures",
-     "laser_sword": "laser,",
-     "grabbable_line": "VR hands — the line in the hand",
-     "line_builder_3d": "here it forms a vector in 3d space",
-     "grid_lines": "grid lines",
      "do_not_cross_barrier": "Do not cross this line ...",
-     "walk_this_line_marking": "Walk this line.",
      "klee_walking_point": "A line is a point that went for a walk.",
      "grab_sphere_point_snap": "A point you can take; it snaps.",
+     "dgrid": "grid lines",
+     "walk_this_line_marking": "Walk this line.",
+     "line": "two points is a line — it measures",
+     "perspective_lines": "perspective line",
+     "parallel_line_puzzle": "parallel line",
+     "laser_sword": "laser,",
      "laser_measure": "laser,",
-     "laser_exploding_sphere": "laser."
+     "laser_exploding_sphere": "laser.",
+     "grabbable_line": "VR hands — the line in the hand",
+     "line_builder_3d": "here it forms a vector in 3d space"
     },
     "says_by": {
-     "grabbable_line": "claude",
-     "line_builder_3d": "claude",
      "do_not_cross_barrier": "hand",
-     "walk_this_line_marking": "claude",
      "klee_walking_point": "claude",
      "grab_sphere_point_snap": "claude",
+     "dgrid": "hand",
+     "walk_this_line_marking": "claude",
+     "line": "hand",
+     "perspective_lines": "hand",
+     "parallel_line_puzzle": "hand",
      "laser_sword": "hand",
      "laser_measure": "hand",
-     "laser_exploding_sphere": "hand"
+     "laser_exploding_sphere": "hand",
+     "grabbable_line": "claude",
+     "line_builder_3d": "claude"
     },
     "join": true,
     "speak_by": "hand",
     "tokens_add": [
-     "dgrid",
      "do_not_cross_barrier",
-     "grab_sphere_point_snap",
      "klee_walking_point",
+     "grab_sphere_point_snap",
+     "dgrid",
      "walk_this_line_marking"
     ],
     "tokens_order": [
@@ -17155,8 +17135,15 @@
      "grabbable_line",
      "line_builder_3d",
      "lightrod",
-     "scale_lines"
-    ]
+     "scale_lines",
+     "science_screen",
+     "cube_scene",
+     "dark_sphere",
+     "plus_line_puzzle",
+     "modulor_man_demo"
+    ],
+    "tokens_remove": [],
+    "hero": "klee_walking_point"
    },
    {
     "map": "Point_Triangle_Context",
@@ -17164,64 +17151,86 @@
     "rooms": 8,
     "speak": "the triangle. everything is made of triangles. the quad, the simplest mesh. the pyramid mesh.",
     "says": {
-     "triangle": "everything is made of triangles",
-     "quad": "the quad — the simplest mesh",
      "parasol_triangle": "everything is made of triangles",
-     "interactivetriangle": "the triangle, in the hand",
-     "pythagorean_triangle_angles": "the triangle measures",
-     "triangleprofiles": "triangles, profiled",
-     "draw_triangle_faces": "faces are triangles",
-     "folded_strip": "the fold",
      "triangle_line_puzzle": "three lines, one triangle",
+     "triangleprofiles": "triangles, profiled",
+     "folded_strip": "the fold",
+     "draw_triangle_faces": "faces are triangles",
+     "triangle": "everything is made of triangles",
+     "pythagorean_triangle_angles": "the triangle measures",
+     "quad": "the quad — the simplest mesh",
+     "interactivetriangle": "the triangle, in the hand",
      "quad_line_puzzle": "four lines, one quad"
     },
     "says_by": {
      "parasol_triangle": "claude",
-     "interactivetriangle": "claude",
-     "pythagorean_triangle_angles": "claude",
-     "triangleprofiles": "claude",
-     "draw_triangle_faces": "claude",
      "triangle_line_puzzle": "claude",
+     "triangleprofiles": "claude",
+     "folded_strip": "hand",
+     "draw_triangle_faces": "claude",
+     "triangle": "hand",
+     "pythagorean_triangle_angles": "claude",
+     "quad": "hand",
+     "interactivetriangle": "claude",
      "quad_line_puzzle": "claude"
-    }
+    },
+    "tokens_add": [],
+    "tokens_remove": [],
+    "speak_by": "hand",
+    "hero": "catalyst_pedestal"
    },
    {
     "map": "Point_Trace",
     "pearl": "trace",
     "speak": "the line is not trace. there is no origin of a trace. all life is encoded — that is enough.",
     "says": {
-     "mystic_writing_pad": "there is no origin of a trace",
-     "draw_dot": "all life is encoded — that is enough"
-    }
+     "mystic_writing_pad": "there is no origin of a trace"
+    },
+    "tokens_add": [],
+    "tokens_remove": [],
+    "speak_by": "hand",
+    "says_by": {
+     "mystic_writing_pad": "hand"
+    },
+    "hero": "mystic_writing_pad"
    },
    {
     "map": "Point_Line_Grid",
     "pearl": "line grid",
     "speak": "resolution keeps us sane but introduces a debt on either side of the curve: underfitting, overfitting. grid beauty. slave to the rhythm. space filling.",
     "says": {
-     "grid_lines": "grid beauty — slave to the rhythm",
      "room_grammar": "space filling",
      "player_trace": "the trace, gridded",
-     "grab_sphere_point_snap": "snap to the grid: resolution keeps us sane"
+     "grid_lines": "grid beauty — slave to the rhythm"
     },
     "says_by": {
+     "room_grammar": "hand",
      "player_trace": "claude",
-     "grab_sphere_point_snap": "claude"
-    }
+     "grid_lines": "hand"
+    },
+    "tokens_add": [],
+    "tokens_remove": [],
+    "speak_by": "hand",
+    "hero": "player_trace"
    },
    {
     "map": "Primitives_Polythedra",
     "pearl": "polythedra",
     "speak": "the pyramid mesh. the cube, the cube world. the fold. interactive cubes.",
     "says": {
-     "pyramid_edit": "the pyramid mesh",
      "grab_trihedron": "three faces in the hand",
-     "becoming_catalyst": "interactive cubes — becoming"
+     "becoming_catalyst": "interactive cubes — becoming",
+     "pyramid_edit": "the pyramid mesh"
     },
     "says_by": {
      "grab_trihedron": "claude",
-     "becoming_catalyst": "claude"
-    }
+     "becoming_catalyst": "claude",
+     "pyramid_edit": "hand"
+    },
+    "tokens_add": [],
+    "tokens_remove": [],
+    "speak_by": "hand",
+    "hero": "grab_trihedron"
    },
    {
     "map": "Point_Animatedcube",
@@ -17234,7 +17243,11 @@
     "says_by": {
      "animatedcubebuilder": "claude",
      "polyhedron_nets_cube": "claude"
-    }
+    },
+    "tokens_add": [],
+    "tokens_remove": [],
+    "speak_by": "hand",
+    "hero": "animatedcubebuilder"
    },
    {
     "map": "Chamber_Primitives",
@@ -17245,7 +17258,11 @@
     },
     "says_by": {
      "catalyst_target": "claude"
-    }
+    },
+    "tokens_add": [],
+    "tokens_remove": [],
+    "speak_by": "hand",
+    "hero": "catalyst_target"
    },
    {
     "map": "Primitives_Ignorance",
@@ -17254,16 +17271,19 @@
     "says": {
      "sphere": "the point, grown in every direction — and still not pi",
      "platonic_grabbables": "five solids, and the taxonomy ends. the rest is ignorance",
-     "truncatedtetrahedron": "a solid cut: what the taxonomy does to what it cannot hold",
-     "hole_with_cones": "a hole is not a thing — it is held by what is around it"
+     "hole_with_cones": "a hole is not a thing — it is held by what is around it",
+     "truncatedtetrahedron": "a solid cut: what the taxonomy does to what it cannot hold"
     },
     "speak_by": "hand",
     "says_by": {
      "sphere": "claude",
      "platonic_grabbables": "claude",
-     "truncatedtetrahedron": "claude",
-     "hole_with_cones": "claude"
-    }
+     "hole_with_cones": "claude",
+     "truncatedtetrahedron": "claude"
+    },
+    "tokens_add": [],
+    "tokens_remove": [],
+    "hero": "righttriangle"
    },
    {
     "map": "Primitives_Portals",
@@ -17277,7 +17297,10 @@
     "says_by": {
      "achilles_tortoise": "claude",
      "combine_portals": "claude"
-    }
+    },
+    "tokens_add": [],
+    "tokens_remove": [],
+    "hero": "achilles_tortoise"
    },
    {
     "map": "Primitives_Melencolia",
@@ -17285,17 +17308,20 @@
     "speak": "melencolia: the taxonomy that holds on. overfitting. Dürer's polyhedron, the pyramid, the frame.",
     "says": {
      "durer_scene": "Dürer's polyhedron — the solid no taxonomy names, and the angel who keeps it",
+     "snap_pyramid_puzzle": "the pyramid, snapped — held by the grid",
      "pyramid": "the pyramid: the triangle stood up, the first solid held",
-     "bigframe": "the frame: where the picture stops, and the trace does not",
-     "snap_pyramid_puzzle": "the pyramid, snapped — held by the grid"
+     "bigframe": "the frame: where the picture stops, and the trace does not"
     },
     "speak_by": "hand",
     "says_by": {
      "durer_scene": "claude",
+     "snap_pyramid_puzzle": "claude",
      "pyramid": "claude",
-     "bigframe": "claude",
-     "snap_pyramid_puzzle": "claude"
-    }
+     "bigframe": "claude"
+    },
+    "tokens_add": [],
+    "tokens_remove": [],
+    "hero": "durer_scene"
    }
   ],
   "transformation": [
@@ -17507,7 +17533,7 @@
      "map": "Point_One",
      "index": 0,
      "hero": "CoordinateSystem3M",
-     "hero_by": "first in spine order",
+     "hero_by": "hand",
      "tokens": [
       "folding_past",
       "origin",
@@ -17527,16 +17553,7 @@
       "frame_counter_display"
      ],
      "verse": {
-      "you_are_here": {
-       "indent": 0,
-       "gap": 1
-      },
-      "two_points_line": {
-       "indent": 0,
-       "gap": 1
-      },
       "floating_sphere_field": {
-       "indent": 0,
        "gap": 1
       }
      },
@@ -17544,42 +17561,25 @@
      "speak_by": "hand",
      "says": {
       "folding_past": "The folding past keeps running.",
-      "frame_counter_display": "The internal clock is running, the frame counter update cycle.",
       "origin": "Standing at Vector.ZERO, Point zero, * , Vector(0,0,0) The root of all vectors. The origin, No turning back.",
-      "CoordinateSystem3M": "Point one, position, no point without the coordinate system. 3D Space.",
+      "frame_counter_display": "The internal clock is running, the frame counter update cycle.",
       "you_are_here": "You are here",
+      "CoordinateSystem3M": "Point one, position, no point without the coordinate system. 3D Space.",
       "fontana_puncture": "the one point, pierced",
-      "interactive_point_origin_force": "a point that becomes a force",
       "floating_sphere_field": "Grab the ball.",
-      "two_points_line": "“Show me what you can do with those hands”",
-      "point": "the one point",
-      "draw_dot": "all life is encoded — that is enough",
-      "dgrid": "grid lines",
-      "do_not_cross_barrier": "do not cross — the first line is a rule",
-      "klee_walking_point": "a line is a point that went for a walk",
-      "grab_sphere_point_snap": "a point you can take; it snaps",
-      "walk_this_line_marking": "walk this line"
+      "draw_dot": "all life is encoded — that is enough"
      },
      "says_by": {
       "folding_past": "hand",
-      "frame_counter_display": "hand",
       "origin": "hand",
-      "CoordinateSystem3M": "hand",
+      "frame_counter_display": "hand",
       "you_are_here": "hand",
+      "CoordinateSystem3M": "hand",
       "fontana_puncture": "claude",
-      "interactive_point_origin_force": "claude",
       "floating_sphere_field": "hand",
-      "two_points_line": "hand",
-      "point": "claude",
-      "draw_dot": "hand",
-      "dgrid": "hand",
-      "do_not_cross_barrier": "claude",
-      "klee_walking_point": "claude",
-      "grab_sphere_point_snap": "claude",
-      "walk_this_line_marking": "claude"
+      "draw_dot": "hand"
      },
      "excluded": [
-      "dgrid",
       "do_not_cross_barrier",
       "grab_sphere_point_snap",
       "interactive_point_origin_force",
@@ -17595,7 +17595,7 @@
      "map": "Point_Lines",
      "index": 1,
      "hero": "klee_walking_point",
-     "hero_by": "dig:load-bearing",
+     "hero_by": "hand",
      "tokens": [
       "do_not_cross_barrier",
       "klee_walking_point",
@@ -17624,36 +17624,34 @@
      "speak": "Do not cross this line ...",
      "speak_by": "hand",
      "says": {
-      "perspective_lines": "perspective line",
-      "parallel_line_puzzle": "parallel line",
-      "dgrid": "grid lines",
-      "line": "two points is a line — it measures",
-      "laser_sword": "laser,",
-      "grabbable_line": "VR hands — the line in the hand",
-      "line_builder_3d": "here it forms a vector in 3d space",
-      "grid_lines": "grid lines",
       "do_not_cross_barrier": "Do not cross this line ...",
-      "walk_this_line_marking": "Walk this line.",
       "klee_walking_point": "A line is a point that went for a walk.",
       "grab_sphere_point_snap": "A point you can take; it snaps.",
+      "dgrid": "grid lines",
+      "walk_this_line_marking": "Walk this line.",
+      "line": "two points is a line — it measures",
+      "perspective_lines": "perspective line",
+      "parallel_line_puzzle": "parallel line",
+      "laser_sword": "laser,",
       "laser_measure": "laser,",
-      "laser_exploding_sphere": "laser."
+      "laser_exploding_sphere": "laser.",
+      "grabbable_line": "VR hands — the line in the hand",
+      "line_builder_3d": "here it forms a vector in 3d space"
      },
      "says_by": {
-      "perspective_lines": "hand",
-      "parallel_line_puzzle": "hand",
-      "dgrid": "hand",
-      "line": "hand",
-      "laser_sword": "hand",
-      "grabbable_line": "claude",
-      "line_builder_3d": "claude",
-      "grid_lines": "hand",
       "do_not_cross_barrier": "hand",
-      "walk_this_line_marking": "claude",
       "klee_walking_point": "claude",
       "grab_sphere_point_snap": "claude",
+      "dgrid": "hand",
+      "walk_this_line_marking": "claude",
+      "line": "hand",
+      "perspective_lines": "hand",
+      "parallel_line_puzzle": "hand",
+      "laser_sword": "hand",
       "laser_measure": "hand",
-      "laser_exploding_sphere": "hand"
+      "laser_exploding_sphere": "hand",
+      "grabbable_line": "claude",
+      "line_builder_3d": "claude"
      },
      "ordered": true
     },
@@ -17662,7 +17660,7 @@
      "map": "Point_Trace",
      "index": 2,
      "hero": "mystic_writing_pad",
-     "hero_by": "first in spine order",
+     "hero_by": "hand",
      "tokens": [
       "mystic_writing_pad"
      ],
@@ -17670,12 +17668,10 @@
      "speak": "the line is not trace. there is no origin of a trace. all life is encoded — that is enough.",
      "speak_by": "hand",
      "says": {
-      "mystic_writing_pad": "there is no origin of a trace",
-      "draw_dot": "all life is encoded — that is enough"
+      "mystic_writing_pad": "there is no origin of a trace"
      },
      "says_by": {
-      "mystic_writing_pad": "hand",
-      "draw_dot": "hand"
+      "mystic_writing_pad": "hand"
      }
     },
     {
@@ -17683,7 +17679,7 @@
      "map": "Point_Line_Grid",
      "index": 3,
      "hero": "player_trace",
-     "hero_by": "dig:load-bearing",
+     "hero_by": "hand",
      "tokens": [
       "room_grammar",
       "player_trace",
@@ -17693,16 +17689,14 @@
      "speak": "resolution keeps us sane but introduces a debt on either side of the curve: underfitting, overfitting. grid beauty. slave to the rhythm. space filling.",
      "speak_by": "hand",
      "says": {
-      "grid_lines": "grid beauty — slave to the rhythm",
       "room_grammar": "space filling",
       "player_trace": "the trace, gridded",
-      "grab_sphere_point_snap": "snap to the grid: resolution keeps us sane"
+      "grid_lines": "grid beauty — slave to the rhythm"
      },
      "says_by": {
-      "grid_lines": "hand",
       "room_grammar": "hand",
       "player_trace": "claude",
-      "grab_sphere_point_snap": "claude"
+      "grid_lines": "hand"
      }
     },
     {
@@ -17710,7 +17704,7 @@
      "map": "Point_Triangle_Context",
      "index": 4,
      "hero": "catalyst_pedestal",
-     "hero_by": "first in spine order",
+     "hero_by": "hand",
      "tokens": [
       "catalyst_pedestal",
       "parasol_triangle",
@@ -17730,27 +17724,27 @@
      "speak": "the triangle. everything is made of triangles. the quad, the simplest mesh. the pyramid mesh.",
      "speak_by": "hand",
      "says": {
-      "triangle": "everything is made of triangles",
-      "quad": "the quad — the simplest mesh",
       "parasol_triangle": "everything is made of triangles",
-      "interactivetriangle": "the triangle, in the hand",
-      "pythagorean_triangle_angles": "the triangle measures",
-      "triangleprofiles": "triangles, profiled",
-      "draw_triangle_faces": "faces are triangles",
-      "folded_strip": "the fold",
       "triangle_line_puzzle": "three lines, one triangle",
+      "triangleprofiles": "triangles, profiled",
+      "folded_strip": "the fold",
+      "draw_triangle_faces": "faces are triangles",
+      "triangle": "everything is made of triangles",
+      "pythagorean_triangle_angles": "the triangle measures",
+      "quad": "the quad — the simplest mesh",
+      "interactivetriangle": "the triangle, in the hand",
       "quad_line_puzzle": "four lines, one quad"
      },
      "says_by": {
-      "triangle": "hand",
-      "quad": "hand",
       "parasol_triangle": "claude",
-      "interactivetriangle": "claude",
-      "pythagorean_triangle_angles": "claude",
-      "triangleprofiles": "claude",
-      "draw_triangle_faces": "claude",
-      "folded_strip": "hand",
       "triangle_line_puzzle": "claude",
+      "triangleprofiles": "claude",
+      "folded_strip": "hand",
+      "draw_triangle_faces": "claude",
+      "triangle": "hand",
+      "pythagorean_triangle_angles": "claude",
+      "quad": "hand",
+      "interactivetriangle": "claude",
       "quad_line_puzzle": "claude"
      }
     },
@@ -17759,7 +17753,7 @@
      "map": "Primitives_Polythedra",
      "index": 5,
      "hero": "grab_trihedron",
-     "hero_by": "first in spine order",
+     "hero_by": "hand",
      "tokens": [
       "grab_trihedron",
       "path_game_controller",
@@ -17772,14 +17766,14 @@
      "speak": "the pyramid mesh. the cube, the cube world. the fold. interactive cubes.",
      "speak_by": "hand",
      "says": {
-      "pyramid_edit": "the pyramid mesh",
       "grab_trihedron": "three faces in the hand",
-      "becoming_catalyst": "interactive cubes — becoming"
+      "becoming_catalyst": "interactive cubes — becoming",
+      "pyramid_edit": "the pyramid mesh"
      },
      "says_by": {
-      "pyramid_edit": "hand",
       "grab_trihedron": "claude",
-      "becoming_catalyst": "claude"
+      "becoming_catalyst": "claude",
+      "pyramid_edit": "hand"
      }
     },
     {
@@ -17787,7 +17781,7 @@
      "map": "Point_Animatedcube",
      "index": 6,
      "hero": "animatedcubebuilder",
-     "hero_by": "first in spine order",
+     "hero_by": "hand",
      "tokens": [
       "animatedcubebuilder",
       "polyhedron_nets_cube"
@@ -17809,7 +17803,7 @@
      "map": "Chamber_Primitives",
      "index": 7,
      "hero": "catalyst_target",
-     "hero_by": "first in spine order",
+     "hero_by": "hand",
      "tokens": [
       "catalyst_target"
      ],
@@ -17828,7 +17822,7 @@
      "map": "Primitives_Ignorance",
      "index": 8,
      "hero": "righttriangle",
-     "hero_by": "dig:promoted from depth",
+     "hero_by": "hand",
      "tokens": [
       "sphere",
       "library_rack",
@@ -17857,14 +17851,14 @@
      "says": {
       "sphere": "the point, grown in every direction — and still not pi",
       "platonic_grabbables": "five solids, and the taxonomy ends. the rest is ignorance",
-      "truncatedtetrahedron": "a solid cut: what the taxonomy does to what it cannot hold",
-      "hole_with_cones": "a hole is not a thing — it is held by what is around it"
+      "hole_with_cones": "a hole is not a thing — it is held by what is around it",
+      "truncatedtetrahedron": "a solid cut: what the taxonomy does to what it cannot hold"
      },
      "says_by": {
       "sphere": "claude",
       "platonic_grabbables": "claude",
-      "truncatedtetrahedron": "claude",
-      "hole_with_cones": "claude"
+      "hole_with_cones": "claude",
+      "truncatedtetrahedron": "claude"
      }
     },
     {
@@ -17872,7 +17866,7 @@
      "map": "Primitives_Portals",
      "index": 9,
      "hero": "achilles_tortoise",
-     "hero_by": "first in spine order",
+     "hero_by": "hand",
      "tokens": [
       "achilles_tortoise",
       "combine_portals"
@@ -17894,7 +17888,7 @@
      "map": "Primitives_Melencolia",
      "index": 10,
      "hero": "durer_scene",
-     "hero_by": "first in spine order",
+     "hero_by": "hand",
      "tokens": [
       "durer_scene",
       "snap_pyramid_puzzle",
@@ -17909,15 +17903,15 @@
      "speak_by": "hand",
      "says": {
       "durer_scene": "Dürer's polyhedron — the solid no taxonomy names, and the angel who keeps it",
+      "snap_pyramid_puzzle": "the pyramid, snapped — held by the grid",
       "pyramid": "the pyramid: the triangle stood up, the first solid held",
-      "bigframe": "the frame: where the picture stops, and the trace does not",
-      "snap_pyramid_puzzle": "the pyramid, snapped — held by the grid"
+      "bigframe": "the frame: where the picture stops, and the trace does not"
      },
      "says_by": {
       "durer_scene": "claude",
+      "snap_pyramid_puzzle": "claude",
       "pyramid": "claude",
-      "bigframe": "claude",
-      "snap_pyramid_puzzle": "claude"
+      "bigframe": "claude"
      }
     }
    ],

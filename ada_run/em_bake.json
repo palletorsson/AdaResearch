@@ -1,8 +1,8 @@
 {
 	"_readme": "The BAKE: every placement decision the museum makes from a measurement, decided ONCE by a headless --em-bake run and replayed by every later run, desktop or headset. Per chapter|pearl: placed = token, tile cell, the exact cells sealed (x, z-from-segment-base); refused = token, cell, why. Regenerate after editing the plan: python tools/em_bake.py",
-	"at": "2026-08-19 14:24:12",
+	"at": "2026-08-19 15:14:02",
 	"plan": "res://ada_run/em_plan.json",
-	"plan_at": "2026-08-19T14:11:33",
+	"plan_at": "2026-08-19T15:13:38",
 	"schema": "adaresearch.em_bake.v1",
 	"segments": {
 		"array_tutorial|array patterns": {
@@ -21772,15 +21772,52 @@
 							16
 						],
 						[
-							12,
+							10,
+							17
+						],
+						[
+							11,
 							17
 						],
 						[
 							12,
-							18
+							17
 						]
 					],
-					"token": "dgrid"
+					"token": "grab_sphere_point_snap"
+				},
+				{
+					"cell": [
+						2,
+						19
+					],
+					"seal": [
+						[
+							3,
+							18
+						],
+						[
+							3,
+							19
+						],
+						[
+							4,
+							19
+						],
+						[
+							3,
+							20
+						],
+						[
+							4,
+							20
+						],
+						[
+							2,
+							19
+						]
+					],
+					"token": "walk_this_line_marking"
 				},
 				{
 					"cell": [
@@ -21789,37 +21826,8 @@
 					],
 					"seal": [
 						[
-							9,
-							18
-						],
-						[
-							10,
-							18
-						],
-						[
-							9,
-							19
-						],
-						[
-							9,
-							20
-						],
-						[
 							8,
 							19
-						]
-					],
-					"token": "walk_this_line_marking"
-				},
-				{
-					"cell": [
-						3,
-						20
-					],
-					"seal": [
-						[
-							3,
-							20
 						]
 					],
 					"token": "line"
@@ -21940,6 +21948,18 @@
 						[
 							14,
 							1
+						],
+						[
+							12,
+							2
+						],
+						[
+							13,
+							2
+						],
+						[
+							14,
+							2
 						]
 					],
 					"token": "line_builder_3d"
@@ -21947,50 +21967,34 @@
 				{
 					"cell": [
 						7,
-						46
+						62
 					],
 					"seal": [
 						[
-							5,
-							44
-						],
-						[
-							6,
-							44
+							7,
+							60
 						],
 						[
 							7,
-							44
-						],
-						[
-							5,
-							45
-						],
-						[
-							6,
-							45
+							61
 						],
 						[
 							7,
-							45
-						],
-						[
-							5,
-							46
-						],
-						[
-							6,
-							46
-						],
-						[
-							7,
-							46
+							62
 						]
 					],
-					"token": "grab_sphere_point_snap"
+					"token": "laser_measure"
 				}
 			],
 			"refused": [
+				{
+					"tile_cell": [
+						13,
+						18
+					],
+					"token": "dgrid",
+					"why": "sealing would sever the walk route"
+				},
 				{
 					"tile_cell": [
 						3,
@@ -22496,23 +22500,10 @@
 				{
 					"cell": [
 						7,
-						62
+						87
 					],
-					"seal": [
-						[
-							7,
-							60
-						],
-						[
-							7,
-							61
-						],
-						[
-							7,
-							62
-						]
-					],
-					"token": "laser_measure"
+					"seal": [],
+					"token": "scale_lines"
 				}
 			],
 			"refused": []

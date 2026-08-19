@@ -2,7 +2,7 @@
   "schema": "adaresearch.em_plan.v2",
   "_readme": "Placements resolved by tools/spatial_negotiation.py. Read by commons/scenes/endless_museum.gd under --em-plan. A museum key absent here deals exactly as it did before.",
   "_spine_run": {
-    "at": "2026-08-19T14:11:33",
+    "at": "2026-08-19T15:13:38",
     "owner": {
       "sainsbury-false-perspective-enfilade": "primitives"
     },
@@ -261096,23 +261096,19 @@
         {
           "token": "grab_sphere_point_snap",
           "cell": [
-            0,
-            0
+            26,
+            27
           ],
           "tile_cell": [
-            -14,
-            -14
+            12,
+            13
           ],
           "rotation": 0,
           "mode": "freestanding",
-          "venue": "courtyard",
-          "support_height_m": 0.0,
-          "slot": "courtyard",
+          "venue": "interior",
+          "support_height_m": 0.95,
+          "slot": "sainsbury-false-perspective-enfilade/12,15",
           "wall": null,
-          "court": [
-            16,
-            25
-          ],
           "relational_kind": "spine_artifact",
           "relation": {
             "anchor": "grab_sphere_point_snap",
@@ -261129,19 +261125,19 @@
         {
           "token": "dgrid",
           "cell": [
-            26,
-            27
+            27,
+            28
           ],
           "tile_cell": [
-            12,
-            13
+            13,
+            14
           ],
-          "rotation": 0,
-          "mode": "freestanding",
+          "rotation": 90,
+          "mode": "against_wall",
           "venue": "interior",
-          "support_height_m": 0.95,
-          "slot": "sainsbury-false-perspective-enfilade/12,15",
-          "wall": null,
+          "support_height_m": 0.0,
+          "slot": "sainsbury-false-perspective-enfilade/9,15",
+          "wall": "east",
           "relational_kind": "spine_artifact",
           "relation": {
             "anchor": "dgrid",
@@ -261158,18 +261154,18 @@
         {
           "token": "walk_this_line_marking",
           "cell": [
-            22,
+            16,
             29
           ],
           "tile_cell": [
-            8,
+            2,
             15
           ],
           "rotation": 90,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.0,
-          "slot": "sainsbury-false-perspective-enfilade/9,15~r",
+          "slot": "sainsbury-false-perspective-enfilade/1,14~r",
           "wall": null,
           "relation": {
             "walk_kind": "sibling",
@@ -261181,18 +261177,18 @@
         {
           "token": "line",
           "cell": [
-            17,
-            30
+            22,
+            29
           ],
           "tile_cell": [
-            3,
-            16
+            8,
+            15
           ],
-          "rotation": 0,
+          "rotation": 90,
           "mode": "freestanding",
           "venue": "interior",
-          "support_height_m": 0.0,
-          "slot": "sainsbury-false-perspective-enfilade/1,14~r",
+          "support_height_m": 0.95,
+          "slot": "sainsbury-false-perspective-enfilade/12,15",
           "wall": null,
           "relational_kind": "spine_artifact",
           "relation": {
@@ -261944,10 +261940,10 @@
             "cabinet",
             "pylon"
           ],
-          "wall": "sainsbury-false-perspective-enfilade/east_14_14",
-          "wall_side": "east",
+          "wall": "sainsbury-false-perspective-enfilade/west_28_14",
+          "wall_side": "west",
           "wall_normal": [
-            -1,
+            1,
             0
           ],
           "rects_uv": [
@@ -261978,22 +261974,22 @@
           ],
           "world": [
             [
-              14.5,
+              28.5,
               1.7,
               23.69
             ],
             [
-              14.5,
+              28.5,
               1.7,
               27.23
             ],
             [
-              14.5,
+              28.5,
               1.7,
               30.77
             ],
             [
-              14.5,
+              28.5,
               1.7,
               34.31
             ]
@@ -262043,81 +262039,21 @@
             "festoon",
             "truss"
           ],
-          "wall": "sainsbury-false-perspective-enfilade/west_28_14",
-          "wall_side": "west",
-          "wall_normal": [
-            1,
-            0
-          ],
-          "rects_uv": [
-            [
-              5.375,
-              0.785,
-              8.905,
-              2.615
-            ],
-            [
-              9.305,
-              0.785,
-              12.835,
-              2.615
-            ],
-            [
-              13.235,
-              0.785,
-              16.765,
-              2.615
-            ],
-            [
-              17.165,
-              0.785,
-              20.695,
-              2.615
-            ],
-            [
-              21.095,
-              0.785,
-              24.625,
-              2.615
-            ]
-          ],
-          "world": [
-            [
-              28.5,
-              1.7,
-              21.14
-            ],
-            [
-              28.5,
-              1.7,
-              25.07
-            ],
-            [
-              28.5,
-              1.7,
-              29.0
-            ],
-            [
-              28.5,
-              1.7,
-              32.93
-            ],
-            [
-              28.5,
-              1.7,
-              36.86
-            ]
-          ],
+          "wall": null,
+          "wall_side": "",
+          "wall_normal": [],
+          "rects_uv": [],
+          "world": [],
           "body_m": [
             3.53,
             0.68,
             1.83
           ],
           "body_source": "spatial_contract",
-          "housed": true,
-          "reserved": true,
-          "assemble": true,
-          "why": "two cells of standing room in front, walkable and unclaimed"
+          "housed": false,
+          "reserved": false,
+          "assemble": false,
+          "why": "1 wall(s) had 19.25 m free but every one was already hung across: sainsbury-false-perspective-enfilade/east_14_14: overlaps dgrid"
         },
         {
           "anchor": "laser_sword",
@@ -262426,7 +262362,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 5.93 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps line_builder_3d.slack=spline"
+          "why": "2 wall(s) had 5.93 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps science_screen.support=frame"
         },
         {
           "anchor": "dark_sphere",
@@ -262526,7 +262462,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 6.30 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps line_builder_3d.slack=spline"
+          "why": "2 wall(s) had 6.30 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps science_screen.support=frame"
         },
         {
           "anchor": "laser_measure",
@@ -262603,7 +262539,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 6.85 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps line_builder_3d.slack=spline"
+          "why": "2 wall(s) had 6.85 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps science_screen.support=frame"
         },
         {
           "anchor": "draw_dot",
@@ -262683,9 +262619,9 @@
           "rects_uv": [],
           "world": [],
           "body_m": [
-            9.5,
-            18.5,
-            1.2
+            0.04,
+            0.15,
+            0.04
           ],
           "body_source": "godot_preflight_refusal",
           "housed": false,
@@ -262901,7 +262837,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "1 wall(s) had 17.24 m free but every one was already hung across: sainsbury-false-perspective-enfilade/east_14_14: overlaps science_screen.support=stand"
+          "why": "2 wall(s) had 17.24 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps science_screen.support=stand"
         },
         {
           "anchor": "draw_triangle_faces",
@@ -262962,7 +262898,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "1 wall(s) had 13.20 m free but every one was already hung across: sainsbury-false-perspective-enfilade/east_14_14: overlaps science_screen.support=stand"
+          "why": "2 wall(s) had 13.20 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps science_screen.support=stand"
         },
         {
           "anchor": "quad_line_puzzle",
@@ -263411,7 +263347,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 6.10 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps line_builder_3d.slack=spline"
+          "why": "2 wall(s) had 6.10 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps science_screen.support=frame"
         },
         {
           "anchor": "lshape",
@@ -263436,7 +263372,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 5.60 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps line_builder_3d.slack=spline"
+          "why": "2 wall(s) had 5.60 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps science_screen.support=frame"
         },
         {
           "anchor": "hole_with_cones",
@@ -263598,7 +263534,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 5.20 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps line_builder_3d.slack=spline"
+          "why": "2 wall(s) had 5.20 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps science_screen.support=frame"
         },
         {
           "anchor": "sphere_low",
@@ -263857,7 +263793,7 @@
             "octagonal",
             "round"
           ],
-          "wall": "sainsbury-false-perspective-enfilade/west_14_27",
+          "wall": "sainsbury-false-perspective-enfilade/west_14_33",
           "wall_side": "west",
           "wall_normal": [
             1,
@@ -263899,27 +263835,27 @@
             [
               14.5,
               1.7,
-              27.7
+              33.7
             ],
             [
               14.5,
               1.7,
-              28.6
+              34.6
             ],
             [
               14.5,
               1.7,
-              29.5
+              35.5
             ],
             [
               14.5,
               1.7,
-              30.4
+              36.4
             ],
             [
               14.5,
               1.7,
-              31.3
+              37.3
             ]
           ],
           "body_m": [
@@ -264033,7 +263969,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 6.60 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps line_builder_3d.slack=spline"
+          "why": "2 wall(s) had 6.60 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps science_screen.support=frame"
         },
         {
           "anchor": "code_display",
@@ -264058,7 +263994,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 5.20 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps line_builder_3d.slack=spline"
+          "why": "2 wall(s) had 5.20 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps science_screen.support=frame"
         },
         {
           "anchor": "pyramid",
@@ -264070,7 +264006,7 @@
             6,
             8
           ],
-          "wall": "sainsbury-false-perspective-enfilade/west_14_33",
+          "wall": "sainsbury-false-perspective-enfilade/west_18_24",
           "wall_side": "west",
           "wall_normal": [
             1,
@@ -264110,29 +264046,29 @@
           ],
           "world": [
             [
-              14.5,
+              18.5,
               1.7,
-              33.5
+              24.5
             ],
             [
-              14.5,
+              18.5,
               1.7,
-              34.5
+              25.5
             ],
             [
-              14.5,
+              18.5,
               1.7,
-              35.5
+              26.5
             ],
             [
-              14.5,
+              18.5,
               1.7,
-              36.5
+              27.5
             ],
             [
-              14.5,
+              18.5,
               1.7,
-              37.5
+              28.5
             ]
           ],
           "body_m": [
@@ -264193,7 +264129,7 @@
             0.12,
             0.141
           ],
-          "why": "2 wall(s) had 5.93 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps line_builder_3d.slack=spline",
+          "why": "2 wall(s) had 5.93 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps science_screen.support=frame",
           "auto_place": false
         },
         {
@@ -264468,7 +264404,7 @@
       "relational": {
         "anchors": 82,
         "wall_runs_requested": 66,
-        "wall_runs_housed": 16,
+        "wall_runs_housed": 15,
         "dna_spatial_demand": 3,
         "dna_contract_repairs": 3,
         "measured_synthesis_pending": 20
@@ -264478,7 +264414,7 @@
         "h": 58
       },
       "apron": 14,
-      "interior_count": 19,
+      "interior_count": 20,
       "ordered": true,
       "pages": [
         {
@@ -264552,7 +264488,7 @@
             "rule": "",
             "why": "the lead this bay is about",
             "walk_kind": "hero",
-            "walk_why": "the hero of trace (first in spine order)",
+            "walk_why": "the hero of trace (hand)",
             "walk_space": "wall",
             "pearl": "trace"
           }
@@ -265764,9 +265700,9 @@
           "rects_uv": [],
           "world": [],
           "body_m": [
-            9.5,
-            18.5,
-            1.2
+            0.04,
+            0.15,
+            0.04
           ],
           "body_source": "godot_preflight_refusal",
           "housed": false,
@@ -267572,7 +267508,7 @@
             "rule": "adjacent, at a DIFFERENT value of the shared axis",
             "why": "can argue the same axis: retention",
             "walk_kind": "hero",
-            "walk_why": "the hero of line grid (dig:load-bearing)",
+            "walk_why": "the hero of line grid (hand)",
             "walk_space": "wall",
             "pearl": "line grid"
           }
@@ -268854,9 +268790,9 @@
           "rects_uv": [],
           "world": [],
           "body_m": [
-            9.5,
-            18.5,
-            1.2
+            0.04,
+            0.15,
+            0.04
           ],
           "body_source": "godot_preflight_refusal",
           "housed": false,
@@ -271176,7 +271112,7 @@
             "rule": "",
             "why": "the lead this bay is about",
             "walk_kind": "hero",
-            "walk_why": "the hero of triangle context (first in spine order)",
+            "walk_why": "the hero of triangle context (hand)",
             "walk_space": "wall",
             "pearl": "triangle context"
           }
@@ -272703,9 +272639,9 @@
           "rects_uv": [],
           "world": [],
           "body_m": [
-            9.5,
-            18.5,
-            1.2
+            0.04,
+            0.15,
+            0.04
           ],
           "body_source": "godot_preflight_refusal",
           "housed": false,
@@ -274414,7 +274350,7 @@
             "rule": "adjacent, at a DIFFERENT value of the shared axis",
             "why": "can argue the same axis: figure",
             "walk_kind": "hero",
-            "walk_why": "the hero of polythedra (first in spine order)",
+            "walk_why": "the hero of polythedra (hand)",
             "walk_space": "wall",
             "pearl": "polythedra"
           }
@@ -275945,9 +275881,9 @@
           "rects_uv": [],
           "world": [],
           "body_m": [
-            9.5,
-            18.5,
-            1.2
+            0.04,
+            0.15,
+            0.04
           ],
           "body_source": "godot_preflight_refusal",
           "housed": false,
@@ -277753,7 +277689,7 @@
             "rule": "sightline \u2014 the relative stands where the lead can be seen with it",
             "why": "an @identity relationships field names it",
             "walk_kind": "hero",
-            "walk_why": "the hero of animatedcube (first in spine order)",
+            "walk_why": "the hero of animatedcube (hand)",
             "walk_space": "wall",
             "pearl": "animatedcube"
           }
@@ -279005,9 +278941,9 @@
           "rects_uv": [],
           "world": [],
           "body_m": [
-            9.5,
-            18.5,
-            1.2
+            0.04,
+            0.15,
+            0.04
           ],
           "body_source": "godot_preflight_refusal",
           "housed": false,
@@ -280813,7 +280749,7 @@
             "rule": "adjacent, at a DIFFERENT value of the shared axis",
             "why": "can argue the same axis: support",
             "walk_kind": "hero",
-            "walk_why": "the hero of primitives (first in spine order)",
+            "walk_why": "the hero of primitives (hand)",
             "walk_space": "wall",
             "pearl": "primitives"
           }
@@ -282037,9 +281973,9 @@
           "rects_uv": [],
           "world": [],
           "body_m": [
-            9.5,
-            18.5,
-            1.2
+            0.04,
+            0.15,
+            0.04
           ],
           "body_source": "godot_preflight_refusal",
           "housed": false,
@@ -283845,7 +283781,7 @@
             "rule": "",
             "why": "the lead this bay is about",
             "walk_kind": "hero",
-            "walk_why": "the hero of ignorance (dig:promoted from depth)",
+            "walk_why": "the hero of ignorance (hand)",
             "walk_space": "wall",
             "pearl": "ignorance"
           }
@@ -285361,9 +285297,9 @@
           "rects_uv": [],
           "world": [],
           "body_m": [
-            9.5,
-            18.5,
-            1.2
+            0.04,
+            0.15,
+            0.04
           ],
           "body_source": "godot_preflight_refusal",
           "housed": false,
@@ -286910,7 +286846,7 @@
             "rule": "",
             "why": "the lead this bay is about",
             "walk_kind": "hero",
-            "walk_why": "the hero of portals (first in spine order)",
+            "walk_why": "the hero of portals (hand)",
             "walk_space": "wall",
             "pearl": "portals"
           }
@@ -288167,9 +288103,9 @@
           "rects_uv": [],
           "world": [],
           "body_m": [
-            9.5,
-            18.5,
-            1.2
+            0.04,
+            0.15,
+            0.04
           ],
           "body_source": "godot_preflight_refusal",
           "housed": false,
@@ -289979,7 +289915,7 @@
             "rule": "",
             "why": "the lead this bay is about",
             "walk_kind": "hero",
-            "walk_why": "the hero of melencolia (first in spine order)",
+            "walk_why": "the hero of melencolia (hand)",
             "walk_space": "wall",
             "pearl": "melencolia"
           }
@@ -291399,9 +291335,9 @@
           "rects_uv": [],
           "world": [],
           "body_m": [
-            9.5,
-            18.5,
-            1.2
+            0.04,
+            0.15,
+            0.04
           ],
           "body_source": "godot_preflight_refusal",
           "housed": false,
@@ -294015,23 +293951,19 @@
         {
           "token": "grab_sphere_point_snap",
           "cell": [
-            0,
-            0
+            26,
+            27
           ],
           "tile_cell": [
-            -14,
-            -14
+            12,
+            13
           ],
           "rotation": 0,
           "mode": "freestanding",
-          "venue": "courtyard",
-          "support_height_m": 0.0,
-          "slot": "courtyard",
+          "venue": "interior",
+          "support_height_m": 0.95,
+          "slot": "sainsbury-false-perspective-enfilade/12,15",
           "wall": null,
-          "court": [
-            16,
-            25
-          ],
           "relational_kind": "spine_artifact",
           "relation": {
             "anchor": "grab_sphere_point_snap",
@@ -294048,19 +293980,19 @@
         {
           "token": "dgrid",
           "cell": [
-            26,
-            27
+            27,
+            28
           ],
           "tile_cell": [
-            12,
-            13
+            13,
+            14
           ],
-          "rotation": 0,
-          "mode": "freestanding",
+          "rotation": 90,
+          "mode": "against_wall",
           "venue": "interior",
-          "support_height_m": 0.95,
-          "slot": "sainsbury-false-perspective-enfilade/12,15",
-          "wall": null,
+          "support_height_m": 0.0,
+          "slot": "sainsbury-false-perspective-enfilade/9,15",
+          "wall": "east",
           "relational_kind": "spine_artifact",
           "relation": {
             "anchor": "dgrid",
@@ -294077,18 +294009,18 @@
         {
           "token": "walk_this_line_marking",
           "cell": [
-            22,
+            16,
             29
           ],
           "tile_cell": [
-            8,
+            2,
             15
           ],
           "rotation": 90,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.0,
-          "slot": "sainsbury-false-perspective-enfilade/9,15~r",
+          "slot": "sainsbury-false-perspective-enfilade/1,14~r",
           "wall": null,
           "relation": {
             "walk_kind": "sibling",
@@ -294100,18 +294032,18 @@
         {
           "token": "line",
           "cell": [
-            17,
-            30
+            22,
+            29
           ],
           "tile_cell": [
-            3,
-            16
+            8,
+            15
           ],
-          "rotation": 0,
+          "rotation": 90,
           "mode": "freestanding",
           "venue": "interior",
-          "support_height_m": 0.0,
-          "slot": "sainsbury-false-perspective-enfilade/1,14~r",
+          "support_height_m": 0.95,
+          "slot": "sainsbury-false-perspective-enfilade/12,15",
           "wall": null,
           "relational_kind": "spine_artifact",
           "relation": {
@@ -294863,10 +294795,10 @@
             "cabinet",
             "pylon"
           ],
-          "wall": "sainsbury-false-perspective-enfilade/east_14_14",
-          "wall_side": "east",
+          "wall": "sainsbury-false-perspective-enfilade/west_28_14",
+          "wall_side": "west",
           "wall_normal": [
-            -1,
+            1,
             0
           ],
           "rects_uv": [
@@ -294897,22 +294829,22 @@
           ],
           "world": [
             [
-              14.5,
+              28.5,
               1.7,
               23.69
             ],
             [
-              14.5,
+              28.5,
               1.7,
               27.23
             ],
             [
-              14.5,
+              28.5,
               1.7,
               30.77
             ],
             [
-              14.5,
+              28.5,
               1.7,
               34.31
             ]
@@ -294962,81 +294894,21 @@
             "festoon",
             "truss"
           ],
-          "wall": "sainsbury-false-perspective-enfilade/west_28_14",
-          "wall_side": "west",
-          "wall_normal": [
-            1,
-            0
-          ],
-          "rects_uv": [
-            [
-              5.375,
-              0.785,
-              8.905,
-              2.615
-            ],
-            [
-              9.305,
-              0.785,
-              12.835,
-              2.615
-            ],
-            [
-              13.235,
-              0.785,
-              16.765,
-              2.615
-            ],
-            [
-              17.165,
-              0.785,
-              20.695,
-              2.615
-            ],
-            [
-              21.095,
-              0.785,
-              24.625,
-              2.615
-            ]
-          ],
-          "world": [
-            [
-              28.5,
-              1.7,
-              21.14
-            ],
-            [
-              28.5,
-              1.7,
-              25.07
-            ],
-            [
-              28.5,
-              1.7,
-              29.0
-            ],
-            [
-              28.5,
-              1.7,
-              32.93
-            ],
-            [
-              28.5,
-              1.7,
-              36.86
-            ]
-          ],
+          "wall": null,
+          "wall_side": "",
+          "wall_normal": [],
+          "rects_uv": [],
+          "world": [],
           "body_m": [
             3.53,
             0.68,
             1.83
           ],
           "body_source": "spatial_contract",
-          "housed": true,
-          "reserved": true,
-          "assemble": true,
-          "why": "two cells of standing room in front, walkable and unclaimed"
+          "housed": false,
+          "reserved": false,
+          "assemble": false,
+          "why": "1 wall(s) had 19.25 m free but every one was already hung across: sainsbury-false-perspective-enfilade/east_14_14: overlaps dgrid"
         },
         {
           "anchor": "laser_sword",
@@ -295345,7 +295217,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 5.93 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps line_builder_3d.slack=spline"
+          "why": "2 wall(s) had 5.93 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps science_screen.support=frame"
         },
         {
           "anchor": "dark_sphere",
@@ -295445,7 +295317,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 6.30 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps line_builder_3d.slack=spline"
+          "why": "2 wall(s) had 6.30 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps science_screen.support=frame"
         },
         {
           "anchor": "laser_measure",
@@ -295522,7 +295394,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 6.85 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps line_builder_3d.slack=spline"
+          "why": "2 wall(s) had 6.85 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps science_screen.support=frame"
         },
         {
           "anchor": "draw_dot",
@@ -295602,9 +295474,9 @@
           "rects_uv": [],
           "world": [],
           "body_m": [
-            9.5,
-            18.5,
-            1.2
+            0.04,
+            0.15,
+            0.04
           ],
           "body_source": "godot_preflight_refusal",
           "housed": false,
@@ -295820,7 +295692,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "1 wall(s) had 17.24 m free but every one was already hung across: sainsbury-false-perspective-enfilade/east_14_14: overlaps science_screen.support=stand"
+          "why": "2 wall(s) had 17.24 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps science_screen.support=stand"
         },
         {
           "anchor": "draw_triangle_faces",
@@ -295881,7 +295753,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "1 wall(s) had 13.20 m free but every one was already hung across: sainsbury-false-perspective-enfilade/east_14_14: overlaps science_screen.support=stand"
+          "why": "2 wall(s) had 13.20 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps science_screen.support=stand"
         },
         {
           "anchor": "quad_line_puzzle",
@@ -296330,7 +296202,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 6.10 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps line_builder_3d.slack=spline"
+          "why": "2 wall(s) had 6.10 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps science_screen.support=frame"
         },
         {
           "anchor": "lshape",
@@ -296355,7 +296227,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 5.60 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps line_builder_3d.slack=spline"
+          "why": "2 wall(s) had 5.60 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps science_screen.support=frame"
         },
         {
           "anchor": "hole_with_cones",
@@ -296517,7 +296389,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 5.20 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps line_builder_3d.slack=spline"
+          "why": "2 wall(s) had 5.20 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps science_screen.support=frame"
         },
         {
           "anchor": "sphere_low",
@@ -296776,7 +296648,7 @@
             "octagonal",
             "round"
           ],
-          "wall": "sainsbury-false-perspective-enfilade/west_14_27",
+          "wall": "sainsbury-false-perspective-enfilade/west_14_33",
           "wall_side": "west",
           "wall_normal": [
             1,
@@ -296818,27 +296690,27 @@
             [
               14.5,
               1.7,
-              27.7
+              33.7
             ],
             [
               14.5,
               1.7,
-              28.6
+              34.6
             ],
             [
               14.5,
               1.7,
-              29.5
+              35.5
             ],
             [
               14.5,
               1.7,
-              30.4
+              36.4
             ],
             [
               14.5,
               1.7,
-              31.3
+              37.3
             ]
           ],
           "body_m": [
@@ -296952,7 +296824,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 6.60 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps line_builder_3d.slack=spline"
+          "why": "2 wall(s) had 6.60 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps science_screen.support=frame"
         },
         {
           "anchor": "code_display",
@@ -296977,7 +296849,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 5.20 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps line_builder_3d.slack=spline"
+          "why": "2 wall(s) had 5.20 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps science_screen.support=frame"
         },
         {
           "anchor": "pyramid",
@@ -296989,7 +296861,7 @@
             6,
             8
           ],
-          "wall": "sainsbury-false-perspective-enfilade/west_14_33",
+          "wall": "sainsbury-false-perspective-enfilade/west_18_24",
           "wall_side": "west",
           "wall_normal": [
             1,
@@ -297029,29 +296901,29 @@
           ],
           "world": [
             [
-              14.5,
+              18.5,
               1.7,
-              33.5
+              24.5
             ],
             [
-              14.5,
+              18.5,
               1.7,
-              34.5
+              25.5
             ],
             [
-              14.5,
+              18.5,
               1.7,
-              35.5
+              26.5
             ],
             [
-              14.5,
+              18.5,
               1.7,
-              36.5
+              27.5
             ],
             [
-              14.5,
+              18.5,
               1.7,
-              37.5
+              28.5
             ]
           ],
           "body_m": [
@@ -297112,7 +296984,7 @@
             0.12,
             0.141
           ],
-          "why": "2 wall(s) had 5.93 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps line_builder_3d.slack=spline",
+          "why": "2 wall(s) had 5.93 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps science_screen.support=frame",
           "auto_place": false
         },
         {
@@ -297387,7 +297259,7 @@
       "relational": {
         "anchors": 82,
         "wall_runs_requested": 66,
-        "wall_runs_housed": 16,
+        "wall_runs_housed": 15,
         "dna_spatial_demand": 3,
         "dna_contract_repairs": 3,
         "measured_synthesis_pending": 20
@@ -297397,7 +297269,7 @@
         "h": 58
       },
       "apron": 14,
-      "interior_count": 19,
+      "interior_count": 20,
       "ordered": true,
       "pages": [
         {
