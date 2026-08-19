@@ -89,7 +89,23 @@ def survey(seq_filter: str = "") -> int:
             if e.get("rooms") is not None and (e.get("pearl") or e.get("map")):
                 ruled[(node, str(e.get("pearl") or ""))] = int(e["rooms"])
                 ruled[(node, "map:" + str(e.get("map") or ""))] = int(e["rooms"])
-    print(f"{'chapter':18s} {'pearl':18s} {'museum':28s} tile  pitch rooms | bodies deepest  needs   ruled")
+    # THE MAP'S OWN SPACE (Palle, 2026-08-19: "now we can see approx. how much
+    # space each map needs"): the grid map behind the pearl — its floor cells,
+    # its interactables, its long side in rows — beside what the hall gives it.
+    def map_space(name: str):
+        f = REPO / "commons" / "maps" / name / "map_data.json"
+        if not f.exists():
+            return None
+        try:
+            d = json.loads(f.read_text(encoding="utf-8"))
+        except Exception:
+            return None
+        L = d.get("layers", d)
+        S, I = L.get("structure", []), L.get("interactables", [])
+        floor = sum(1 for row in S for c in row if str(c).strip() not in ("", "0", " "))
+        arts = sum(1 for row in I for c in row if str(c).strip() not in ("", "0", " "))
+        return {"w": len(S[0]) if S else 0, "h": len(S), "floor": floor, "arts": arts}
+    print(f"{'chapter':18s} {'pearl':18s} {'museum':28s} tile  pitch rooms | bodies deepest  needs   ruled | map          size   floor  arts  ~rooms")
     for p in plan.get("plans", []):
         if seq_filter and p["sequence"] != seq_filter:
             continue
@@ -101,7 +117,18 @@ def survey(seq_filter: str = "") -> int:
         zmax = max((int(a["tile_cell"][1]) for a in interior), default=0)
         needs = max(1, math.ceil((zmax + 2) / pitch))
         r = ruled.get((p["sequence"], str(p.get("pearl") or ""))) or ruled.get((p["sequence"], "map:" + str(p.get("map") or "")))
-        print(f"{p['sequence']:18s} {str(p.get('pearl') or '-'):18s} {p['museum'][:28]:28s} {len(t):4d}  {pitch:5d} {rooms_in(t):5d} | {len(interior):6d} {zmax:7d}  {needs:5d}   {r if r is not None else '-'}")
+        ms = map_space(str(p.get("map") or ""))
+        # ~rooms: the map's floor against one room of this tile (its width x pitch),
+        # and its interactables at three to a room — whichever asks for more
+        if ms and ms["floor"] > 0:
+            room_cells = max(1, (len(t[0]) - 2) * pitch)
+            by_floor = math.ceil(ms["floor"] / room_cells)
+            by_arts = math.ceil(ms["arts"] / 3) if ms["arts"] else 1
+            approx = max(1, min(rooms_in(t), max(by_floor, by_arts)))
+            mtxt = f"{str(p.get('map') or '')[:12]:12s} {ms['w']:2d}x{ms['h']:<3d} {ms['floor']:6d} {ms['arts']:5d}   {approx:3d}"
+        else:
+            mtxt = f"{str(p.get('map') or '-')[:12]:12s} {'-':6s} {'-':6s} {'-':5s}   {'-':3s}"
+        print(f"{p['sequence']:18s} {str(p.get('pearl') or '-'):18s} {p['museum'][:28]:28s} {len(t):4d}  {pitch:5d} {rooms_in(t):5d} | {len(interior):6d} {zmax:7d}  {needs:5d}   {str(r) if r is not None else '-':5s} | {mtxt}")
     return 0
 
 
