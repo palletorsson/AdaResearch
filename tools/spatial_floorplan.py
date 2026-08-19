@@ -433,7 +433,7 @@ def _enclosed_voids(grid: list[list[str]], w: int, h: int) -> list[set[tuple[int
     return regions
 
 
-def from_museum(key: str, apron: int = 14) -> FloorPlan:
+def from_museum(key: str, apron: int = 14, rooms: int | None = None) -> FloorPlan:
     """Load one of the 30 authored museums as a plan, with its slots' declared
     capacity attached, plus the exterior venues that can host what the building
     cannot.
@@ -446,6 +446,11 @@ def from_museum(key: str, apron: int = 14) -> FloorPlan:
     if key not in patterns:
         raise KeyError(f"unknown museum template: {key}")
     tile = [list(map(str, row)) for row in patterns[key]["tile"]]
+    if rooms:
+        # ROOMS PER PEARL (tools/em_rooms.py): a pearl gets `rooms` of the tile,
+        # not all of it — the same crop the plan row will carry to the runtime
+        from em_rooms import crop_tile
+        tile = crop_tile(tile, rooms)
     th, tw = len(tile), len(tile[0])
 
     caps: dict[str, dict] = {}
@@ -492,6 +497,8 @@ def from_museum(key: str, apron: int = 14) -> FloorPlan:
     # Interior slots, carrying the capacity the table computed.
     for sid, rec in caps.items():
         sx, sz = rec["cell"]
+        if rooms and sz >= th - 1:
+            continue          # the capacity table is over the WHOLE tile; a cropped hall has no such slot
         cell = (sx + off, sz + off)
         token = rec.get("token", FLOOR_SLOT)
         plan.slots.append(Slot(

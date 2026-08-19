@@ -190,9 +190,12 @@ def brief_context(brief: dict[str, Any]) -> dict[str, dict[str, Any]]:
 
 def plan_museum(key: str, tokens: list[str],
                 branch_anchors: list[str] | None = None,
-                placement_context: dict[str, dict[str, Any]] | None = None) -> dict[str, Any]:
-    """Negotiate `tokens` into museum `key`. Reports what did NOT fit, too."""
-    plan = from_museum(key, apron=APRON)
+                placement_context: dict[str, dict[str, Any]] | None = None,
+                rooms: int | None = None) -> dict[str, Any]:
+    """Negotiate `tokens` into museum `key`. Reports what did NOT fit, too.
+    `rooms` crops the tile to that many rooms (tools/em_rooms.py); the cropped
+    tile is written into the row so the runtime builds exactly this hall."""
+    plan = from_museum(key, apron=APRON, rooms=rooms)
     # balconies-by-ask: a plan row whose walk_space is "balcony" asks the
     # negotiator for a hanging balcony body (see spatial_negotiation.run)
     venue_asks = {t: "balcony" for t, c in (placement_context or {}).items()
@@ -338,7 +341,16 @@ def plan_museum(key: str, tokens: list[str],
                 "auto_place": False,
             })
 
+    if rooms:
+        # the cropped tile travels WITH the row: endless_museum builds this, not the template
+        from em_rooms import crop_tile
+        _pats = json.loads((REPO / "commons" / "data" / "template_patterns.json").read_text(encoding="utf-8"))["patterns"]
+        _tile = crop_tile([list(map(str, r)) for r in _pats[key]["tile"]], rooms)
+        out_extra = {"rooms": int(rooms), "tile": _tile, "h": len(_tile)}
+    else:
+        out_extra = {}
     return {
+        **out_extra,
         "artifacts": placed,
         "rejected": rejected,
         "wall_runs": wall_runs,

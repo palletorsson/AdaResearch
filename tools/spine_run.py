@@ -161,6 +161,7 @@ def run_sequence(seq: str, museum: str, rows: int, relations: int = 2,
                 pcast = pcast[:cast_cap]
             r = _run_cast(seq, museum, rows, anchors, pcast, ctx, walk=pw)
             r["pearl"] = pw["pearl"]; r["pearl_index"] = pw["pearl_index"]; r["map"] = pw["map"]
+            r["rooms"] = pw.get("rooms")
             r["hero_walk"] = {"hero": pw["hero"], "hand_branches": pw["hand_branches"], "pearl": pw["pearl"]}
             parts.append(r)
             print(f"  {seq:24s} PEARL {pw['pearl_index'] + 1:2d}/{len(pearls)} {pw['pearl']:16s} offered {r['offered']:3d} placed {r['placed']:3d} interior {r['interior']:3d}")
@@ -232,7 +233,7 @@ def _run_cast(seq: str, museum: str, rows: int, anchors: list[str], cast: list[s
         if is_authored(tok):
             authored += 1
 
-    plan = from_museum(museum, apron=APRON)
+    plan = from_museum(museum, apron=APRON, rooms=(walk or {}).get("rooms"))
     if skip:
         placements, occ = [], None
     else:
@@ -346,6 +347,33 @@ def spine_run(only: str = "", relations: int = 2,
             "totals": tot, "sequences": rows}
 
 
+def _carry_hand_rows(m: dict[str, Any], prev: dict[str, Any], key: str, seq: str, pearl: str) -> None:
+    """THE HAND WINS A REGENERATION. A row the hand ruled (hand: true — the plan
+    editor, or a ruling written into the plan) keeps its cell, rotation, offset,
+    scale and config when the negotiator writes the pearl again; a hand row whose
+    token the negotiator did not place this time is appended. Printed, so the
+    regeneration says what it kept."""
+    prev_row = next((p for p in prev.get("plans", []) if p.get("museum") == key
+                     and p.get("sequence") == seq and p.get("pearl") == pearl), None)
+    if not prev_row:
+        return
+    hand = [a for a in prev_row.get("artifacts", []) if a.get("hand")]
+    if not hand:
+        return
+    apron = int(m.get("apron", 14))
+    kept = 0
+    for h in hand:
+        cur = next((a for a in m.get("artifacts", []) if a.get("token") == h.get("token")), None)
+        fields = {k: h[k] for k in ("tile_cell", "rotation", "offset", "scale", "config", "hand", "ruled", "mode", "venue", "support_height_m") if k in h}
+        if cur is None:
+            m.setdefault("artifacts", []).append(dict(h))
+        else:
+            cur.update(fields)
+            cur["cell"] = [int(h["tile_cell"][0]) + apron, int(h["tile_cell"][1]) + apron] if h.get("tile_cell") else cur.get("cell")
+        kept += 1
+    print(f"  {seq:24s} PEARL {pearl:16s} carried {kept} hand row(s) through the regeneration")
+
+
 def write_plan(result: dict[str, Any], out: Path) -> dict[str, Any]:
     """Every chapter's plan, keyed by (museum, sequence) — plus the v1 dict.
 
@@ -391,9 +419,10 @@ def write_plan(result: dict[str, Any], out: Path) -> dict[str, Any]:
             first: dict[str, Any] | None = None
             for pr in r["pearls"]:
                 m = plan_museum(key, list(pr["cast"]), list(r.get("anchor_tokens", [])),
-                                dict(pr.get("cast_context", {})))
+                                dict(pr.get("cast_context", {})), rooms=pr.get("rooms"))
                 m["sequence"] = r["sequence"]
                 m["pearl"] = pr["pearl"]; m["pearl_index"] = pr["pearl_index"]; m["map"] = pr.get("map", "")
+                _carry_hand_rows(m, prev, key, r["sequence"], pr["pearl"])
                 m["pearls_total"] = len(r["pearls"]); m["hero"] = pr.get("hero_walk", {}).get("hero", "")
                 plans.append({"museum": key, **m})
                 if first is None:
@@ -410,6 +439,18 @@ def write_plan(result: dict[str, Any], out: Path) -> dict[str, Any]:
             continue
         owner[key] = r["sequence"]
         museums[key] = m
+    # A CHAPTER-ONLY RUN KEEPS THE OTHER CHAPTERS (2026-08-18). --sequence=X
+    # --write-plan used to write a plan with one chapter in it — every other
+    # chapter gone from the file. The rows of chapters this run did not
+    # negotiate are carried from the previous plan unchanged.
+    ran = {r["sequence"] for r in result["sequences"]}
+    kept = [p for p in prev.get("plans", []) if p.get("sequence") not in ran]
+    if kept:
+        plans = kept + plans
+        for k2, v2 in (prev.get("museums") or {}).items():
+            if k2 not in museums and str(v2.get("sequence", "")) not in ran:
+                museums[k2] = v2
+        print(f"  write_plan: kept {len(kept)} row(s) of {len({p['sequence'] for p in kept})} chapter(s) this run did not negotiate")
     out.parent.mkdir(parents=True, exist_ok=True)
     # The note is DERIVED, not typed. The v1 note said "six chapters share
     # three crowned buildings" while the code two lines above it had written 7

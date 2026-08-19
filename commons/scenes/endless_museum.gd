@@ -2127,6 +2127,23 @@ func _build_segment() -> void:
 	var w: int = spec["w"]
 	var h: int = spec["h"]
 	var tile: Array = _open_bays(_widen_doors(spec["tile"]), String(spec["key"]), next_seq)
+	# ROOMS PER PEARL (2026-08-18). A plan row may carry its own `tile` — the
+	# template cropped to the pearl's `rooms` by tools/em_rooms.py, at plan
+	# time. The museum builds THAT tile: walls, seals, dressing, courts, side
+	# rooms, cards all read `tile`/`h`, so nothing downstream needs to know.
+	# Peeked here (the deal itself runs later and does not advance the pearl).
+	var peek: Dictionary = _plan_entry(String(spec["key"]), next_seq)
+	if peek.get("tile") is Array and (peek["tile"] as Array).size() >= 4:
+		var trows: Array = []
+		for r_v in (peek["tile"] as Array):
+			var rr: Array = []
+			for c_v in (r_v as Array):
+				rr.append(String(c_v))
+			trows.append(rr)
+		tile = _open_bays(_widen_doors(trows), String(spec["key"]), next_seq)
+		h = tile.size()
+		print("[em-rooms] %s · %s: %d room(s) — the hall is %d rows of the template's %d" % [
+			next_seq, String(peek.get("pearl", "")), int(peek.get("rooms", 0)), h, int(spec["h"])])
 	var seg := Node3D.new()
 	seg.name = "Seg%d_%s" % [_seg_index, spec["key"]]
 	seg.position = Vector3(0, 0, _next_z)
