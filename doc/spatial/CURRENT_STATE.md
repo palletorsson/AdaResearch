@@ -3,7 +3,44 @@
 *Fast-changing implementation state. Doctrine lives in `doc/SPATIAL_PIPELINE.md`
 (915 lines, commits `fdbfeb8d6` + `a8b7fef18`) on `origin/palm-scanner-door-entry`.*
 
-Updated 2026-08-15.
+Updated 2026-08-19.
+
+## 08-19 — PAGES: the book, the plan and the room read the same
+
+Palle: "the book and the plan and the 3d space should have the same artifact and
+artifact order — from the right to the left and along z, down the page"; then
+"point and line, lines should share the first exhibition space. Page 2: is point
+one … Page 3: Do not cross this line …".
+
+- **The poem is the cast.** A pearl the hand has ordered (`tokens_order` in
+  `hand_pearls`) is `ordered`: its tokens ARE its cast in that order, no relation
+  joins it, and the negotiator deals them z-monotone, right to left within a row
+  (`spatial_negotiation.run(reading=True)`). Per CELL, not per slot: every pocket
+  is trimmed to the cells that read on and re-anchored there; wall slots are
+  offered again as islands (a 3-wide corridor slid bodies 10 cells to the next
+  room and 10 of 18 lines fell to the last resort — now 4, all the lines pearl's
+  tail). `python tools/em_reading.py primitives/point` is the gate (informational);
+  it counts the FEWEST lines out of order (LIS complement).
+- **Pages.** `join: true` on a pearl edit makes it a PAGE of the pearl before it:
+  its tokens follow the head's, rooms are summed, the plan row carries `pages`,
+  the museum hangs its line and its bodies' lines after the head's. Point (page 2,
+  the hall) + lines (page 3, "Do not cross this line …") share the first hall.
+  `page2` on a pearl is the hall's stanza when page 1 stands in the foyer
+  (`foyer: [tokens]`) — /speak shows it as an editable block.
+- **The hand still wins in an ordered pearl** — for a LINE of the poem: its hand
+  row is carried and its cell committed to occupancy even where the negotiator
+  sent the body to a court (CoordinateSystem3M is a 7 m precinct to it and "to
+  the right when we enter" to the hand; `_fixed_cells(..., only=cast)`).
+- **Gates re-said** (all were stale, none was the change): vr_floor asserts the
+  same deck in both modes (316 == 316) since the 08-18 "one museum" ruling;
+  pearls cancels the museum's owed lazy segment before walking the string by
+  hand; the 40 m "dedicated map" test is 91 m since the turbine hall. `[em-bake]
+  UNBAKED <token> at <cell>` now names a stale row.
+- **Watch:** the first bake of the pages plan placed `you_are_here` at y14 and the
+  live build at y16 on the SAME plan (em_built FAIL, 2 unbaked); a second bake
+  agreed with the live build. Not explained. If `built` goes red again, re-bake
+  once before reading it as a fault, and if it recurs, it is nondeterminism in
+  `_stamp`'s substitute-cell search.
 
 ## 08-18 (headset log) — the Quest never had the plan; no VR scene could grab since 08-14
 
