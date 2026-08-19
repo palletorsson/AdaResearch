@@ -201,8 +201,21 @@ def export_md(d: dict) -> str:
             if p.get("speak"):
                 out.append(f"{p['speak']}  `[{p.get('speak_by', 'hand')}]`")
             by = p.get("says_by") or {}
-            for tok, line in (p.get("says") or {}).items():
-                out.append(f"- **{tok}** — {line} `[{by.get(tok, 'hand')}]`")
+            verse = p.get("verse") or {}
+            # THE POEM (Palle, 2026-08-19: "poetry is a vector distance question … keep
+            # the format of poetry"): one line per body in the pearl's token order, the
+            # hand's white space kept — a gap before (blank lines) and an indent
+            # (non-breaking spaces, which markdown keeps). Provenance in the margin.
+            out.append("")
+            for tok in p.get("tokens", []):
+                line = (p.get("says") or {}).get(tok, "")
+                if not line:
+                    continue
+                v = verse.get(tok) or {}
+                for _ in range(int(v.get("gap", 0) or 0)):
+                    out.append("")
+                ind = " " * 4 * int(v.get("indent", 0) or 0)
+                out.append(f"{ind}{line}  `[{by.get(tok, 'hand')}]`  ")
             out.append("")
     return chr(10).join(out) + chr(10)
 

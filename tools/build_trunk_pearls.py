@@ -142,6 +142,8 @@ def seed(trunk_doc: dict) -> dict:
                         p["rooms"] = int(e["rooms"])       # how much of the tile this pearl gets (tools/em_rooms.py)
                     # textD (tools/em_speak.py): the hand's line wins, a draft from the
                     # corpus fills the rest; provenance travels (speak_by / says_by)
+                    if e.get("verse"):
+                        p["verse"] = dict(e["verse"])        # textD as POETRY: {token: {indent, gap}} — the white space (tools/em_speak.py)
                     if e.get("speak") or e.get("speak_draft"):
                         p["speak"] = str(e.get("speak") or e.get("speak_draft"))
                         p["speak_by"] = (e.get("speak_by") or "hand") if e.get("speak") else "draft"
