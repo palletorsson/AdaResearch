@@ -495,521 +495,526 @@
       "h": 25,
       "artifacts": [
         {
-          "token": "CoordinateSystem3M",
           "cell": [
-            17,
-            17
+            16,
+            19
           ],
-          "tile_cell": [
-            3,
-            3
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "interior",
-          "support_height_m": 0,
-          "slot": "courtyard",
-          "wall": null,
           "court": [
-            14,
-            11
+            14.0,
+            11.0
           ],
-          "relational_kind": "spine_artifact",
+          "hand": true,
+          "mode": "freestanding",
           "relation": {
             "anchor": "CoordinateSystem3M",
-            "role": "feature",
             "kind": "",
+            "pearl": "point",
+            "role": "feature",
             "rule": "",
-            "why": "the lead this bay is about",
             "walk_kind": "hero",
-            "walk_why": "the hero of point (first in spine order)",
             "walk_space": "wall",
-            "pearl": "point"
+            "walk_why": "the hero of point (first in spine order)",
+            "why": "the lead this bay is about"
           },
-          "hand": true,
+          "relational_kind": "spine_artifact",
+          "rotation": 0,
           "ruled": {
-            "at": "2026-08-18T22:06:29",
-            "by": "palle: to the right the coordinate system, when we enter"
-          }
+            "at": "2026-08-19T08:29:28",
+            "by": "studio"
+          },
+          "slot": "courtyard",
+          "support_height_m": 0.0,
+          "tile_cell": [
+            2,
+            5
+          ],
+          "token": "CoordinateSystem3M",
+          "venue": "interior",
+          "wall": null
         },
         {
-          "token": "frame_counter_display",
           "cell": [
             16,
             23
           ],
+          "hand": true,
+          "mode": "against_wall",
+          "relation": {
+            "anchor": "CoordinateSystem3M",
+            "kind": "co_placed",
+            "pearl": "point",
+            "role": "related",
+            "rule": "fill \u2014 they already stand together in real maps",
+            "walk_kind": "sibling",
+            "walk_space": "wall",
+            "walk_why": "a body of the point pearl (Point_One)",
+            "why": "already stand together in 34 map(s)"
+          },
+          "relational_kind": "spine_artifact",
+          "rotation": 120,
+          "ruled": {
+            "at": "2026-08-18T13:28:24",
+            "by": "hand",
+            "from": [
+              2.0,
+              9.0
+            ]
+          },
+          "slot": "sainsbury-false-perspective-enfilade/1,14",
+          "support_height_m": 0.0,
           "tile_cell": [
             2,
             9
           ],
-          "rotation": 120,
-          "mode": "against_wall",
+          "token": "frame_counter_display",
           "venue": "interior",
-          "support_height_m": 0,
-          "slot": "sainsbury-false-perspective-enfilade/1,14",
-          "wall": "west",
-          "relational_kind": "spine_artifact",
-          "relation": {
-            "anchor": "CoordinateSystem3M",
-            "role": "related",
-            "kind": "co_placed",
-            "rule": "fill \u2014 they already stand together in real maps",
-            "why": "already stand together in 34 map(s)",
-            "walk_kind": "sibling",
-            "walk_why": "a body of the point pearl (Point_One)",
-            "walk_space": "wall",
-            "pearl": "point"
-          },
-          "hand": true,
-          "ruled": {
-            "from": [
-              2,
-              9
-            ],
-            "at": "2026-08-18T13:28:24",
-            "by": "hand"
-          }
+          "wall": "west"
         },
         {
-          "token": "origin",
           "cell": [
             26,
             18
           ],
+          "hand": true,
+          "mode": "freestanding",
+          "relation": {
+            "anchor": "CoordinateSystem3M",
+            "kind": "named",
+            "pearl": "point",
+            "role": "related",
+            "rule": "sightline \u2014 the relative stands where the lead can be seen with it",
+            "walk_kind": "sibling",
+            "walk_space": "wall",
+            "walk_why": "a body of the point pearl (Point_One)",
+            "why": "an @identity relationships field names it"
+          },
+          "relational_kind": "spine_artifact",
+          "rotation": 90,
+          "ruled": {
+            "at": "2026-08-19T08:28:41",
+            "by": "studio"
+          },
+          "slot": "sainsbury-false-perspective-enfilade/12,15",
+          "support_height_m": 0.95,
           "tile_cell": [
             12,
             4
           ],
-          "rotation": 90,
-          "mode": "freestanding",
+          "token": "origin",
           "venue": "interior",
-          "support_height_m": 0.95,
-          "slot": "sainsbury-false-perspective-enfilade/12,15",
-          "wall": null,
-          "relational_kind": "spine_artifact",
-          "relation": {
-            "anchor": "CoordinateSystem3M",
-            "role": "related",
-            "kind": "named",
-            "rule": "sightline \u2014 the relative stands where the lead can be seen with it",
-            "why": "an @identity relationships field names it",
-            "walk_kind": "sibling",
-            "walk_why": "a body of the point pearl (Point_One)",
-            "walk_space": "wall",
-            "pearl": "point"
-          },
-          "hand": true,
-          "ruled": {
-            "at": "2026-08-18T22:06:29",
-            "by": "palle: to the left point zero, when we enter"
-          }
+          "wall": null
         },
         {
-          "token": "you_are_here",
           "cell": [
             21,
             22
           ],
+          "hand": true,
+          "mode": "freestanding",
+          "relation": {
+            "anchor": "you_are_here",
+            "kind": "",
+            "pearl": "point",
+            "role": "feature",
+            "rule": "",
+            "walk_kind": "sibling",
+            "walk_space": "wall",
+            "walk_why": "a body of the point pearl (Point_One)",
+            "why": "the lead this bay is about"
+          },
+          "relational_kind": "spine_artifact",
+          "rotation": 180,
+          "ruled": {
+            "at": "2026-08-18T12:15:25",
+            "by": "plan-editor"
+          },
+          "slot": "sainsbury-false-perspective-enfilade/2,9",
+          "support_height_m": 0.95,
           "tile_cell": [
             7,
             8
           ],
-          "rotation": 180,
-          "mode": "freestanding",
+          "token": "you_are_here",
           "venue": "interior",
-          "support_height_m": 0.95,
-          "slot": "sainsbury-false-perspective-enfilade/2,9",
-          "wall": null,
-          "relational_kind": "spine_artifact",
-          "relation": {
-            "anchor": "you_are_here",
-            "role": "feature",
-            "kind": "",
-            "rule": "",
-            "why": "the lead this bay is about",
-            "walk_kind": "sibling",
-            "walk_why": "a body of the point pearl (Point_One)",
-            "walk_space": "wall",
-            "pearl": "point"
-          },
-          "hand": true,
-          "ruled": {
-            "at": "2026-08-18T12:15:25",
-            "by": "plan-editor"
-          }
+          "wall": null
         },
         {
-          "token": "fontana_puncture",
           "cell": [
             21,
             20
           ],
+          "hand": true,
+          "mode": "against_wall",
+          "relation": {
+            "anchor": "you_are_here",
+            "kind": "named",
+            "pearl": "point",
+            "role": "related",
+            "rule": "sightline \u2014 the relative stands where the lead can be seen with it",
+            "walk_kind": "sibling",
+            "walk_space": "wall",
+            "walk_why": "a body of the point pearl (Point_One)",
+            "why": "an @identity relationships field names it"
+          },
+          "relational_kind": "spine_artifact",
+          "rotation": 180,
+          "ruled": {
+            "at": "2026-08-18T12:11:58",
+            "by": "plan-editor"
+          },
+          "slot": "sainsbury-false-perspective-enfilade/2,9",
+          "support_height_m": 1.4,
           "tile_cell": [
             7,
             6
           ],
-          "rotation": 180,
-          "mode": "against_wall",
+          "token": "fontana_puncture",
           "venue": "interior",
-          "support_height_m": 1.4,
-          "slot": "sainsbury-false-perspective-enfilade/2,9",
-          "wall": null,
-          "relational_kind": "spine_artifact",
-          "relation": {
-            "anchor": "you_are_here",
-            "role": "related",
-            "kind": "named",
-            "rule": "sightline \u2014 the relative stands where the lead can be seen with it",
-            "why": "an @identity relationships field names it",
-            "walk_kind": "sibling",
-            "walk_why": "a body of the point pearl (Point_One)",
-            "walk_space": "wall",
-            "pearl": "point"
-          },
-          "hand": true,
-          "ruled": {
-            "at": "2026-08-18T12:11:58",
-            "by": "plan-editor"
-          }
+          "wall": null
         },
         {
-          "token": "floating_sphere_field",
           "cell": [
             16,
             22
           ],
+          "mode": "freestanding",
+          "relation": {
+            "anchor": "floating_sphere_field",
+            "kind": "",
+            "pearl": "point",
+            "role": "feature",
+            "rule": "",
+            "walk_kind": "sibling",
+            "walk_space": "wall",
+            "walk_why": "a body of the point pearl (Point_One)",
+            "why": "the lead this bay is about"
+          },
+          "relational_kind": "spine_artifact",
+          "rotation": 0,
+          "slot": "sainsbury-false-perspective-enfilade/2,9",
+          "support_height_m": 0.95,
           "tile_cell": [
             2,
             8
           ],
-          "rotation": 0,
-          "mode": "freestanding",
+          "token": "floating_sphere_field",
           "venue": "interior",
-          "support_height_m": 0.95,
-          "slot": "sainsbury-false-perspective-enfilade/2,9",
-          "wall": null,
-          "relational_kind": "spine_artifact",
-          "relation": {
-            "anchor": "floating_sphere_field",
-            "role": "feature",
-            "kind": "",
-            "rule": "",
-            "why": "the lead this bay is about",
-            "walk_kind": "sibling",
-            "walk_why": "a body of the point pearl (Point_One)",
-            "walk_space": "wall",
-            "pearl": "point"
-          }
+          "wall": null
         },
         {
-          "token": "interactive_point_origin_force",
           "cell": [
             16,
             24
           ],
+          "mode": "freestanding",
+          "relation": {
+            "anchor": "interactive_point_origin_force",
+            "kind": "",
+            "pearl": "point",
+            "role": "feature",
+            "rule": "",
+            "walk_kind": "sibling",
+            "walk_space": "wall",
+            "walk_why": "a body of the point pearl (Point_One)",
+            "why": "the lead this bay is about"
+          },
+          "relational_kind": "spine_artifact",
+          "rotation": 0,
+          "slot": "sainsbury-false-perspective-enfilade/2,9",
+          "support_height_m": 0.95,
           "tile_cell": [
             2,
             10
           ],
-          "rotation": 0,
-          "mode": "freestanding",
+          "token": "interactive_point_origin_force",
           "venue": "interior",
-          "support_height_m": 0.95,
-          "slot": "sainsbury-false-perspective-enfilade/2,9",
-          "wall": null,
-          "relational_kind": "spine_artifact",
-          "relation": {
-            "anchor": "interactive_point_origin_force",
-            "role": "feature",
-            "kind": "",
-            "rule": "",
-            "why": "the lead this bay is about",
-            "walk_kind": "sibling",
-            "walk_why": "a body of the point pearl (Point_One)",
-            "walk_space": "wall",
-            "pearl": "point"
-          }
+          "wall": null
         },
         {
-          "token": "folding_past",
           "cell": [
             0,
             0
           ],
-          "tile_cell": [
-            -14,
-            -14
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "courtyard",
-          "support_height_m": 0.0,
-          "slot": "courtyard",
-          "wall": null,
           "court": [
-            12,
-            11
-          ],
-          "relational_kind": "spine_artifact",
-          "relation": {
-            "anchor": "folding_past",
-            "role": "feature",
-            "kind": "",
-            "rule": "",
-            "why": "the lead this bay is about",
-            "walk_kind": "sibling",
-            "walk_why": "a body of the point pearl (Point_One)",
-            "walk_space": "wall",
-            "pearl": "point"
-          }
-        },
-        {
-          "token": "lab_room",
-          "cell": [
-            0,
-            0
-          ],
-          "tile_cell": [
-            -14,
-            -14
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "courtyard",
-          "support_height_m": 0.0,
-          "slot": "courtyard",
-          "wall": null,
-          "court": [
-            15,
-            14
-          ],
-          "relational_kind": "spine_artifact",
-          "relation": {
-            "anchor": "floating_sphere_field",
-            "role": "related",
-            "kind": "co_placed",
-            "rule": "fill \u2014 they already stand together in real maps",
-            "why": "already stand together in 50 map(s)",
-            "walk_kind": "sibling",
-            "walk_why": "a body of the point pearl (Point_One)",
-            "walk_space": "wall",
-            "pearl": "point"
-          }
-        },
-        {
-          "token": "xyz_slider_plate",
-          "cell": [
-            0,
-            0
-          ],
-          "tile_cell": [
-            -14,
-            -14
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "courtyard",
-          "support_height_m": 0.0,
-          "slot": "courtyard",
-          "wall": null,
-          "court": [
-            25,
-            24
+            25.0,
+            24.0
           ],
           "court_access": "bridge",
-          "relational_kind": "dna_artifact",
+          "mode": "freestanding",
           "relation": {
+            "pearl": "point",
             "walk_kind": "extends",
-            "walk_why": "named relation of CoordinateSystem3M: an @identity relationships field names it",
             "walk_space": "wall",
-            "pearl": "point"
-          }
+            "walk_why": "named relation of CoordinateSystem3M: an @identity relationships field names it"
+          },
+          "relational_kind": "dna_artifact",
+          "rotation": 0,
+          "slot": "courtyard",
+          "support_height_m": 0.0,
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "token": "xyz_slider_plate",
+          "venue": "courtyard",
+          "wall": null
         },
         {
-          "token": "interactive_point_origin",
           "cell": [
             15,
             28
           ],
+          "hand": true,
+          "mode": "against_wall",
+          "relation": {
+            "anchor": "interactive_point_origin_force",
+            "kind": "named",
+            "pearl": "point",
+            "role": "related",
+            "rule": "sightline \u2014 the relative stands where the lead can be seen with it",
+            "walk_kind": "extends",
+            "walk_space": "wall",
+            "walk_why": "named relation of origin: an @identity relationships field names it",
+            "why": "an @identity relationships field names it"
+          },
+          "relational_kind": "dna_artifact",
+          "rotation": 270,
+          "ruled": {
+            "at": "2026-08-19T08:29:53",
+            "by": "studio"
+          },
+          "slot": "sainsbury-false-perspective-enfilade/1,14",
+          "support_height_m": 0.0,
           "tile_cell": [
             1,
             14
           ],
-          "rotation": 270,
-          "mode": "against_wall",
+          "token": "interactive_point_origin",
           "venue": "interior",
-          "support_height_m": 0.0,
-          "slot": "sainsbury-false-perspective-enfilade/1,14",
-          "wall": "west",
-          "relational_kind": "dna_artifact",
-          "relation": {
-            "anchor": "interactive_point_origin_force",
-            "role": "related",
-            "kind": "named",
-            "rule": "sightline \u2014 the relative stands where the lead can be seen with it",
-            "why": "an @identity relationships field names it",
-            "walk_kind": "extends",
-            "walk_why": "named relation of origin: an @identity relationships field names it",
-            "walk_space": "wall",
-            "pearl": "point"
-          }
+          "wall": "west"
         },
         {
-          "token": "example_2_6_single_attractor_vr",
           "cell": [
             19,
             23
           ],
+          "mode": "freestanding",
+          "relation": {
+            "pearl": "point",
+            "walk_kind": "extends",
+            "walk_space": "room",
+            "walk_why": "named relation of origin: an @identity relationships field names it"
+          },
+          "relational_kind": "related_artifact",
+          "rotation": 0,
+          "slot": "sainsbury-false-perspective-enfilade/2,9",
+          "support_height_m": 0.95,
           "tile_cell": [
             5,
             9
           ],
-          "rotation": 0,
-          "mode": "freestanding",
+          "token": "example_2_6_single_attractor_vr",
           "venue": "interior",
-          "support_height_m": 0.95,
-          "slot": "sainsbury-false-perspective-enfilade/2,9",
-          "wall": null,
-          "relational_kind": "related_artifact",
-          "relation": {
-            "walk_kind": "extends",
-            "walk_why": "named relation of origin: an @identity relationships field names it",
-            "walk_space": "room",
-            "pearl": "point"
-          }
+          "wall": null
         },
         {
-          "token": "mamma_monster_gallery",
           "cell": [
             0,
             0
           ],
+          "court": [
+            16.0,
+            7.0
+          ],
+          "mode": "freestanding",
+          "relation": {
+            "pearl": "point",
+            "walk_kind": "extends",
+            "walk_space": "wall",
+            "walk_why": "named relation of origin: an @identity relationships field names it"
+          },
+          "relational_kind": "spine_artifact",
+          "rotation": 0,
+          "slot": "courtyard",
+          "support_height_m": 0.0,
           "tile_cell": [
             -14,
             -14
           ],
-          "rotation": 0,
-          "mode": "freestanding",
+          "token": "mamma_monster_gallery",
           "venue": "courtyard",
-          "support_height_m": 0.0,
-          "slot": "courtyard",
-          "wall": null,
-          "court": [
-            16,
-            7
-          ],
-          "relational_kind": "spine_artifact",
-          "relation": {
-            "walk_kind": "extends",
-            "walk_why": "named relation of origin: an @identity relationships field names it",
-            "walk_space": "wall",
-            "pearl": "point"
-          }
+          "wall": null
         },
         {
-          "token": "point",
           "cell": [
             27,
             22
           ],
+          "mode": "against_wall",
+          "relation": {
+            "anchor": "folding_past",
+            "kind": "named",
+            "pearl": "point",
+            "role": "related",
+            "rule": "sightline \u2014 the relative stands where the lead can be seen with it",
+            "walk_kind": "extends",
+            "walk_space": "wall",
+            "walk_why": "named relation of origin: an @identity relationships field names it",
+            "why": "an @identity relationships field names it"
+          },
+          "relational_kind": "dna_artifact",
+          "rotation": 90,
+          "slot": "sainsbury-false-perspective-enfilade/13,8",
+          "support_height_m": 0.0,
           "tile_cell": [
             13,
             8
           ],
-          "rotation": 90,
-          "mode": "against_wall",
+          "token": "point",
           "venue": "interior",
-          "support_height_m": 0.0,
-          "slot": "sainsbury-false-perspective-enfilade/13,8",
-          "wall": "east",
-          "relational_kind": "dna_artifact",
-          "relation": {
-            "anchor": "folding_past",
-            "role": "related",
-            "kind": "named",
-            "rule": "sightline \u2014 the relative stands where the lead can be seen with it",
-            "why": "an @identity relationships field names it",
-            "walk_kind": "extends",
-            "walk_why": "named relation of origin: an @identity relationships field names it",
-            "walk_space": "wall",
-            "pearl": "point"
-          }
+          "wall": "east"
         },
         {
-          "token": "two_points_line",
-          "cell": [
-            26,
-            30
-          ],
-          "tile_cell": [
-            12,
-            16
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "interior",
-          "support_height_m": 0.95,
-          "slot": "sainsbury-false-perspective-enfilade/12,15",
-          "wall": null,
-          "relational_kind": "related_artifact",
-          "relation": {
-            "walk_kind": "extends",
-            "walk_why": "named relation of origin: an @identity relationships field names it",
-            "walk_space": "wall",
-            "pearl": "point"
-          }
-        },
-        {
-          "token": "recession_hall",
           "cell": [
             26,
             17
           ],
+          "mode": "against_wall",
+          "relation": {
+            "pearl": "point",
+            "walk_kind": "synthesizes",
+            "walk_space": "alcove",
+            "walk_why": "synthesis of 2 sources, 1 from this node: folding_past"
+          },
+          "rotation": 90,
+          "slot": "sainsbury-false-perspective-enfilade/13,3",
+          "support_height_m": 0.0,
           "tile_cell": [
             12,
             3
           ],
-          "rotation": 90,
-          "mode": "against_wall",
+          "token": "recession_hall",
           "venue": "interior",
-          "support_height_m": 0.0,
-          "slot": "sainsbury-false-perspective-enfilade/13,3",
-          "wall": "east",
-          "relation": {
-            "walk_kind": "synthesizes",
-            "walk_why": "synthesis of 2 sources, 1 from this node: folding_past",
-            "walk_space": "alcove",
-            "pearl": "point"
-          }
+          "wall": "east"
         },
         {
-          "token": "subtraction_suite",
           "cell": [
             26,
             36
           ],
+          "hand": true,
+          "mode": "against_wall",
+          "relation": {
+            "pearl": "point",
+            "walk_kind": "synthesizes",
+            "walk_space": "alcove",
+            "walk_why": "synthesis of 4 sources, 1 from this node: fontana_puncture"
+          },
+          "relational_kind": "dna_artifact",
+          "rotation": 0,
+          "ruled": {
+            "at": "2026-08-18T12:11:58",
+            "by": "plan-editor"
+          },
+          "slot": "sainsbury-false-perspective-enfilade/5,22",
+          "support_height_m": 0.0,
           "tile_cell": [
             12,
             22
           ],
-          "rotation": 0,
-          "mode": "against_wall",
+          "token": "subtraction_suite",
           "venue": "interior",
-          "support_height_m": 0,
-          "slot": "sainsbury-false-perspective-enfilade/5,22",
-          "wall": "west",
-          "relational_kind": "dna_artifact",
+          "wall": "west"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "court": [
+            12.0,
+            11.0
+          ],
+          "mode": "freestanding",
           "relation": {
-            "walk_kind": "synthesizes",
-            "walk_why": "synthesis of 4 sources, 1 from this node: fontana_puncture",
-            "walk_space": "alcove",
-            "pearl": "point"
+            "anchor": "folding_past",
+            "kind": "",
+            "pearl": "point",
+            "role": "feature",
+            "rule": "",
+            "walk_kind": "sibling",
+            "walk_space": "wall",
+            "walk_why": "a body of the point pearl (Point_One)",
+            "why": "the lead this bay is about"
           },
-          "hand": true,
-          "ruled": {
-            "at": "2026-08-18T12:11:58",
-            "by": "plan-editor"
-          }
+          "relational_kind": "spine_artifact",
+          "rotation": 0,
+          "slot": "courtyard",
+          "support_height_m": 0.0,
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "token": "folding_past",
+          "venue": "courtyard",
+          "wall": null
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "court": [
+            15.0,
+            14.0
+          ],
+          "mode": "freestanding",
+          "relation": {
+            "anchor": "floating_sphere_field",
+            "kind": "co_placed",
+            "pearl": "point",
+            "role": "related",
+            "rule": "fill \u2014 they already stand together in real maps",
+            "walk_kind": "sibling",
+            "walk_space": "wall",
+            "walk_why": "a body of the point pearl (Point_One)",
+            "why": "already stand together in 50 map(s)"
+          },
+          "relational_kind": "spine_artifact",
+          "rotation": 0,
+          "slot": "courtyard",
+          "support_height_m": 0.0,
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "token": "lab_room",
+          "venue": "courtyard",
+          "wall": null
+        },
+        {
+          "cell": [
+            26,
+            30
+          ],
+          "mode": "freestanding",
+          "relation": {
+            "pearl": "point",
+            "walk_kind": "extends",
+            "walk_space": "wall",
+            "walk_why": "named relation of origin: an @identity relationships field names it"
+          },
+          "relational_kind": "related_artifact",
+          "rotation": 0,
+          "slot": "sainsbury-false-perspective-enfilade/12,15",
+          "support_height_m": 0.95,
+          "tile_cell": [
+            12,
+            16
+          ],
+          "token": "two_points_line",
+          "venue": "interior",
+          "wall": null
         }
       ],
       "rejected": [],

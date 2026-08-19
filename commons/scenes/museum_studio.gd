@@ -54,6 +54,8 @@ var _drag_moved: bool = false
 var _drag_start_pos: Vector3 = Vector3.ZERO
 var _placing: String = ""          # a palette token waiting for a cell
 var _orbit: bool = false
+var _iso: bool = false               # I: orthographic isometric — heights visible, grid still exact
+var _config_edit: LineEdit
 var _orbit_yaw: float = 0.6
 var _orbit_pitch: float = -0.9
 var _pan_drag: bool = false
@@ -179,9 +181,13 @@ func _build_hud() -> void:
 	_palette = ItemList.new(); _palette.custom_minimum_size = Vector2(240, 360); _palette.item_selected.connect(_on_palette_pick); left.add_child(_palette)
 
 	_sel_label = Label.new(); _sel_label.position = Vector2(260, 40); _sel_label.add_theme_color_override("font_color", Color(0.9, 0.95, 1.0)); _hud.add_child(_sel_label)
+	_config_edit = LineEdit.new(); _config_edit.position = Vector2(260, 64); _config_edit.custom_minimum_size = Vector2(520, 0)
+	_config_edit.placeholder_text = "K: config for the selected body — key=value key=value (Enter writes, empty clears)"
+	_config_edit.text_submitted.connect(_on_config_submit)
+	_hud.add_child(_config_edit)
 	_refused_label = Label.new(); _refused_label.position = Vector2(260, 100); _refused_label.add_theme_color_override("font_color", Color(1.0, 0.55, 0.5)); _hud.add_child(_refused_label)
 	_hint = Label.new()
-	_hint.text = "click select · drag move (Ctrl fine) · R/Shift+R rotate · +/- scale · P plinth · C axis · Del remove · Z/Y undo/redo · G overlay · O orbit · F frame · B bake · W walk"
+	_hint.text = "click select · drag move (Ctrl fine) · R/Shift+R rotate · +/- scale · P plinth · [ ] plinth height · C axis · K config · Del remove · Z/Y undo/redo · G overlay · I iso · O orbit · F frame · B bake · W walk"
 	_hint.add_theme_font_size_override("font_size", 12)
 	_hint.add_theme_color_override("font_color", Color(0.75, 0.75, 0.8))
 	_hud.add_child(_hint)
@@ -331,6 +337,15 @@ func _apply_cam() -> void:
 		var off := Vector3(cos(_orbit_pitch) * sin(_orbit_yaw), -sin(_orbit_pitch), cos(_orbit_pitch) * cos(_orbit_yaw)) * d
 		_cam.global_position = _cam_target + off
 		_cam.look_at(_cam_target, Vector3.UP)
+	elif _iso:
+		# isometric, still ORTHOGRAPHIC: cell snapping stays exact, heights show —
+		# the plinth under the body, what hangs on the wall. Seen from the
+		# entrance side (south-west), the walk going up-right.
+		_cam.projection = Camera3D.PROJECTION_ORTHOGONAL
+		_cam.size = _cam_size
+		var dir := Vector3(-0.55, 0.9, -0.55).normalized()
+		_cam.global_position = _cam_target + dir * 80.0
+		_cam.look_at(_cam_target, Vector3.UP)
 	else:
 		_cam.projection = Camera3D.PROJECTION_ORTHOGONAL
 		_cam.size = _cam_size
@@ -418,6 +433,16 @@ func _show_selection() -> void:
 		("  scale %.2f" % float(prow.get("scale", 1.0))) if prow.has("scale") else "",
 		("  plinth %.2f" % float(prow.get("support_height_m", 0.0))) if float(prow.get("support_height_m", 0.0)) > 0.05 else "",
 		("  config %s" % str(prow.get("config"))) if prow.has("config") else ""]
+	if _is_court_resident(_sel):
+		_sel_label.text += "
+  COURT resident — placed by the court builder (court %s); not movable here yet" % str(_plan_row_for_token(String(_sel.get("token", ""))).get("court", []))
+	var pw: String = String(_sel.get("plinth_why", ""))
+	if String(_sel.get("plinth", "")) != "":
+		_sel_label.text += "
+  plinth: %s %.2f m" % [String(_sel.get("plinth", "")), float(_sel.get("plinth_h", 0.0))]
+	elif pw != "":
+		_sel_label.text += "
+  no plinth: %s" % pw.substr(0, 90)
 
 func _plan_row_for(r: Dictionary) -> Dictionary:
 	var tc: Array = r.get("tile_cell", [])
@@ -490,7 +515,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		_key((event as InputEventKey).keycode, (event as InputEventKey).shift_pressed, (event as InputEventKey).alt_pressed)
 
 func _key(k: int, shift: bool, alt: bool) -> void:
-	if _search.has_focus():
+	if _search.has_focus() or _config_edit.has_focus():
 		return
 	match k:
 		KEY_ESCAPE:
@@ -499,6 +524,15 @@ func _key(k: int, shift: bool, alt: bool) -> void:
 			_frame_hall()
 		KEY_O:
 			_orbit = not _orbit; _apply_cam()
+		KEY_I:
+			_iso = not _iso; _orbit = false; _apply_cam()
+		KEY_BRACKETLEFT:
+			_edit_row({"support_height_m": _step_support(-1)})
+		KEY_BRACKETRIGHT:
+			_edit_row({"support_height_m": _step_support(1)})
+		KEY_K:
+			_config_edit.text = _config_text()
+			_config_edit.grab_focus()
 		KEY_G:
 			_show_overlay = not _show_overlay; _refresh_overlay()
 		KEY_B:
@@ -527,6 +561,33 @@ func _key(k: int, shift: bool, alt: bool) -> void:
 			if not _sel.is_empty():
 				_write_rows([{"token": _sel.get("token"), "cell": _sel.get("tile_cell"), "removed": true}])
 				_sel_key = ""
+
+const SUPPORTS := [0.0, 0.4, 0.64, 0.95, 1.2]
+func _step_support(dir: int) -> float:
+	var cur: float = _cur_support()
+	var i: int = 0
+	for j in range(SUPPORTS.size()):
+		if absf(float(SUPPORTS[j]) - cur) < 0.05:
+			i = j
+	return float(SUPPORTS[clampi(i + dir, 0, SUPPORTS.size() - 1)])
+
+func _config_text() -> String:
+	var cfg: Dictionary = _plan_row_for(_sel).get("config", {})
+	var parts: Array = []
+	for k in cfg:
+		parts.append("%s=%s" % [String(k), String(cfg[k])])
+	return " ".join(parts)
+
+func _on_config_submit(text: String) -> void:
+	if _sel.is_empty():
+		return
+	var cfg: Dictionary = {}
+	for part in text.split(" ", false):
+		var kv: PackedStringArray = String(part).split("=", true, 1)
+		if kv.size() == 2 and kv[0].strip_edges() != "":
+			cfg[kv[0].strip_edges()] = kv[1].strip_edges()
+	_config_edit.release_focus()
+	_edit_row({"config": cfg})
 
 func _cur_rot() -> float:
 	var pr: Dictionary = _plan_row_for(_sel)
@@ -562,12 +623,44 @@ func _cycle_config() -> void:
 	cfg[axis] = nxt
 	_edit_row({"config": cfg})
 
+func _tile_wh() -> Array:
+	var row: Dictionary = _row()
+	if row.get("tile") is Array and not (row["tile"] as Array).is_empty():
+		return [(row["tile"][0] as Array).size(), (row["tile"] as Array).size()]
+	var rm: Dictionary = row.get("room", {})
+	var apron: int = int(row.get("apron", 14))
+	return [int(rm.get("w", 43)) - 2 * apron, int(rm.get("h", 58)) - 2 * apron]
+
+func _is_court_resident(r: Dictionary) -> bool:
+	var pr: Dictionary = _plan_row_for_token(String(r.get("token", "")))
+	return String(pr.get("venue", "")) in ["courtyard", "balcony", "hall"] and (pr.get("court", []) as Array).size() >= 2
+
+func _plan_row_for_token(tok: String) -> Dictionary:
+	var hits: Array = []
+	for a in _row().get("artifacts", []):
+		if String((a as Dictionary).get("token", "")) == tok:
+			hits.append(a)
+	return hits[0] if hits.size() == 1 else _plan_row_for(_sel)
+
 func _commit_move() -> void:
 	if _sel.is_empty() or not is_instance_valid(_sel.get("node")):
 		return
 	var n: Node3D = _sel.get("node") as Node3D
 	var p: Vector3 = n.global_position
 	var cell: Array = _cell_of(p)
+	# what the plan cannot say: a court resident is placed by the court builder
+	# (its row has `court`, not a cell), and a cell outside the tile is nowhere
+	if _is_court_resident(_sel):
+		n.global_position = _drag_start_pos
+		_status.text = "%s is a COURT resident — the court builder places it; the studio cannot move it yet" % String(_sel.get("token", ""))
+		_refresh_marks()
+		return
+	var wh: Array = _tile_wh()
+	if int(cell[0]) < 0 or int(cell[0]) >= int(wh[0]) or int(cell[1]) < 0 or int(cell[1]) >= int(wh[1]):
+		n.global_position = _drag_start_pos
+		_status.text = "cell %s is outside the tile (%d x %d) — the plan cannot place a body there" % [str(cell), int(wh[0]), int(wh[1])]
+		_refresh_marks()
+		return
 	var centre := Vector3(cell[0] + 0.5, p.y, cell[1] + VESTIBULE_H + 0.5)
 	var off: Vector3 = p - centre
 	var row: Dictionary = {"token": _sel.get("token"), "token_before": _sel.get("token"),
@@ -578,6 +671,10 @@ func _commit_move() -> void:
 
 func _place_at(p: Vector3) -> void:
 	var cell: Array = _cell_of(p)
+	var wh: Array = _tile_wh()
+	if int(cell[0]) < 0 or int(cell[0]) >= int(wh[0]) or int(cell[1]) < 0 or int(cell[1]) >= int(wh[1]):
+		_status.text = "cell %s is outside the tile (%d x %d) — place inside the hall" % [str(cell), int(wh[0]), int(wh[1])]
+		return
 	var tok: String = _placing
 	_placing = ""
 	_sel_key = "%s|%d|%d" % [tok, int(cell[0]), int(cell[1])]

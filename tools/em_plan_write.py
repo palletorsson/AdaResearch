@@ -25,6 +25,28 @@ def _cell(v):
     return [int(round(float(v[0]))), int(round(float(v[1])))] if isinstance(v, (list, tuple)) and len(v) >= 2 else None
 
 
+def _tile_size(target: dict):
+    t = target.get("tile")
+    if isinstance(t, list) and t and isinstance(t[0], list):
+        return len(t[0]), len(t)
+    room = target.get("room") or {}
+    apron = int(target.get("apron", 14))
+    return max(1, int(room.get("w", 43)) - 2 * apron), max(1, int(room.get("h", 58)) - 2 * apron)
+
+
+def normalize(arts: list) -> list:
+    """Godot's JSON hands back floats; the plan keeps ints for cells and rotation."""
+    for a in arts:
+        for k in ("tile_cell", "cell"):
+            if isinstance(a.get(k), list) and len(a[k]) >= 2:
+                a[k] = [int(round(float(a[k][0]))), int(round(float(a[k][1])))]
+        if "rotation" in a:
+            a["rotation"] = int(round(float(a["rotation"])))
+        if "pearl_index" in a:
+            a["pearl_index"] = int(a["pearl_index"])
+    return arts
+
+
 def apply_rows(plan: dict, chapter: str, pearl: str, rows: list, by: str = "studio") -> dict:
     target = None
     for p in plan.get("plans", []):
@@ -41,6 +63,13 @@ def apply_rows(plan: dict, chapter: str, pearl: str, rows: list, by: str = "stud
         key_tok = r.get("token_before") or r.get("token")
         key_cell = _cell(r.get("cell_before")) or _cell(r.get("cell"))
         cur = next((a for a in arts if a.get("token") == key_tok and _cell(a.get("tile_cell")) == key_cell), None)
+        if cur is None and not r.get("add"):
+            # the studio's record may not carry the row's cell (a courtyard body
+            # stands at a court cell; the row says [-apron,-apron]): a token
+            # that occurs ONCE in the pearl is that row
+            same = [a for a in arts if a.get("token") == key_tok]
+            if len(same) == 1:
+                cur = same[0]
         if r.get("removed"):
             if cur is not None:
                 arts.remove(cur); removed += 1
@@ -56,6 +85,11 @@ def apply_rows(plan: dict, chapter: str, pearl: str, rows: list, by: str = "stud
         cur["token"] = str(r.get("token", cur["token"]))
         cur["tile_cell"] = cell
         cur["cell"] = [cell[0] + apron, cell[1] + apron]
+        # a body dragged INTO the tile is interior now; one dragged out to a
+        # court/porch keeps its venue (the assembler reads the cell)
+        tw, th = _tile_size(target)
+        if 0 <= cell[0] < tw and 0 <= cell[1] < th and cur.get("venue") in ("courtyard", "porch", "outside"):
+            cur["venue"] = "interior"; cur["mode"] = cur.get("mode") or "freestanding"
         if r.get("rotation") is not None:
             cur["rotation"] = int(round(float(r["rotation"]))) % 360
         off = r.get("offset")
@@ -81,6 +115,7 @@ def apply_rows(plan: dict, chapter: str, pearl: str, rows: list, by: str = "stud
             cur["hand"] = True
             cur["ruled"] = {"at": now, "by": by}
             touched += 1
+    normalize(arts)
     return {"chapter": chapter, "pearl": target.get("pearl"), "rows": len(arts), "touched": touched, "added": added, "removed": removed}
 
 
@@ -99,7 +134,7 @@ def main() -> int:
         target = next((p for p in plan.get("plans", []) if p.get("sequence") == a.chapter and (a.pearl == "" or p.get("pearl") == a.pearl)), None)
         if target is None:
             raise SystemExit(f"no plan row for {a.chapter}/{a.pearl}")
-        target["artifacts"] = rows
+        target["artifacts"] = normalize(rows)
         res = {"chapter": a.chapter, "pearl": target.get("pearl"), "rows": len(rows), "touched": len(rows), "added": 0, "removed": 0}
     else:
         res = apply_rows(plan, a.chapter, a.pearl, rows, a.by)

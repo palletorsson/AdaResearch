@@ -40,5 +40,10 @@ func _run() -> void:
 	print("STUDIO undo -> %s" % str(back))
 	ok = ok and int(back[0]) == int(before[0])
 	img = get_root().get_texture().get_image(); img.save_png("user://em_studio_after.png")
+	# the isometric view, zoomed on the first hall
+	s.set("_iso", true); s.set("_cam_size", 22.0); s.set("_cam_target", Vector3(7.5, 0, 10.0)); s.call("_apply_cam")
+	await create_timer(0.6).timeout
+	img = get_root().get_texture().get_image(); img.save_png("user://em_studio_iso.png")
+	print("STUDIO iso shot; selection: %s" % (s.get("_sel_label") as Label).text)
 	print("STUDIO PROBE: %s" % ("PASS" if ok else "FAIL"))
 	quit(0 if ok else 1)

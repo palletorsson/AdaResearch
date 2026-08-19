@@ -4821,7 +4821,10 @@ func _stamp_inner(seg: Node3D, scene_path: String, lookup: String, cell: Diction
 			int(cell.get("y", 0)) - VESTIBULE_H]
 		_edit_records.append({"node": node, "token": lookup,
 			"from": plan_cell.duplicate(), "tile_cell": plan_cell,
-			"rotation": yaw_deg, "chapter": "", "seg": seg})
+			"rotation": yaw_deg, "chapter": "", "seg": seg,
+			# em_plinths' answer, so an editor can say WHY there is or is not a plinth
+			"plinth": String(plan_d.get("plinth", "")), "plinth_why": String(plan_d.get("why", "")),
+			"plinth_h": float(plan_d.get("plinth_height", 0.0))})
 	return true
 
 
