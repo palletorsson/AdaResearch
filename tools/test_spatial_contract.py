@@ -243,12 +243,14 @@ class NegotiationTests(unittest.TestCase):
         self.assertTrue(any(t.rule == "escalation" and "bridge courtyard" in t.detail
                             for t in p.traces))
 
-    def test_a_world_over_40m_stays_for_a_dedicated_map(self) -> None:
-        """The bridge is not a loophole that turns a world into a corridor."""
+    def test_a_world_over_90m_stays_for_a_dedicated_map(self) -> None:
+        """The bridge is not a loophole that turns a world into a corridor —
+        nor is the turbine hall (2026-08-18): 40..90 m gets a hall the corridor
+        rings; over HALL_MAX_M (90) is still a dedicated map."""
         from dataclasses import replace
         base = sc.resolve("neural_network_visualization")
-        c = replace(base, body_m=[41.0, 41.0, base.body_m[2]],
-                    footprint_cells=[41, 41], containment="precinct",
+        c = replace(base, body_m=[91.0, 91.0, base.body_m[2]],
+                    footprint_cells=[91, 91], containment="precinct",
                     preferred_venue="courtyard")
         p = neg.negotiate(c, fp.from_museum("sainsbury-false-perspective-enfilade"),
                           neg.Occupancy())
@@ -451,3 +453,93 @@ class DressingRoomIsCanonical(unittest.TestCase):
         room = sc.room_for("science_screen")
         self.assertEqual(room["footprint"][:2], [3.14, 0.2])
         self.assertEqual(ed.from_room(room).footprint_cells, [4, 1])
+
+
+class SupportVocabularyTests(unittest.TestCase):
+    """`required_support` is authored in three vocabularies and offered in one.
+
+    The negotiator's support rule was written against
+    `placement_contract.required_support` (82 rooms) and never against
+    `room.posture` (2538 rooms), whose vocabulary — tools/classify_postures.py
+    POSTURES — is eight words wide. On the 24-chapter spine run that cost 198 of
+    1156 offered bodies and made `support_matches_contract` the largest single
+    refusal reason in the corpus, 205 of 478 rejections, while reading as a
+    shortage of podium tiles in 30 museums.
+    """
+
+    def test_every_authored_word_resolves_to_something_a_slot_offers(self) -> None:
+        """The whole corpus, not a sample. A word no slot can offer is a body
+        that cannot be placed anywhere, which is the defect this class exists
+        for — and it must be caught at the vocabulary, not at 30 museums."""
+        import json
+        # sc.ROOMS_DIR, not a cwd-relative glob. The first version of this test
+        # globbed "../commons/..." and passed from the repo root by matching
+        # ZERO files — a corpus test that asserts nothing is worse than none.
+        offered = {"floor", "podium",          # tools/spatial_floorplan.py:479
+                   "wall"}                     # any slot that backs onto one
+        paths = sorted(sc.ROOMS_DIR.glob("*.json"))
+        self.assertGreater(len(paths), 2000,
+                           f"expected the corpus, found {len(paths)} rooms")
+        for path in paths:
+            with open(path, encoding="utf-8") as fh:
+                room = json.load(fh)
+            pc = room.get("placement_contract") or {}
+            raw = pc.get("required_support") or room.get("posture") or ""
+            canon, _ = sc.normalise_support(raw)
+            self.assertIn(canon, offered,
+                          f"{room.get('lookup_name')}: {raw!r} -> {canon!r}, "
+                          f"which no slot in any museum offers")
+
+    def test_platform_is_a_raised_surface_not_a_missing_one(self) -> None:
+        """`classify_postures.build_footing` raises `platform` 5x5 at 1.0 m —
+        the same lift as `table`, which the rule already accepted. 120 of the
+        198 refused bodies were this one word."""
+        self.assertEqual(sc.normalise_support("platform")[0], "podium")
+        self.assertEqual(sc.normalise_support("plinth")[0], "podium")
+
+    def test_none_means_no_hint_not_a_demand_for_absence(self) -> None:
+        """`bootstrap_spatial_needs.py` writes `"platform": "none"` as its
+        DEFAULT — 1773 of 2721 registry entries carry it. `classify_postures`
+        knows this and leaves it out of PLATFORM_MAP; the resolver's `or`-chain
+        had no such guard and read the absence of a demand as a demand."""
+        self.assertEqual(sc.normalise_support("none")[0], "floor")
+
+    def test_furniture_the_room_builds_is_not_architecture_the_museum_lacks(self) -> None:
+        """pit, sunken, float and monument all stand on floor in their own
+        footing recipes: a pit puts the body DOWN at floor centre inside a rim,
+        float is a floor pad with a 1.5 m y-offset, monument seats flush at
+        y=0. Same argument as the plinth — furniture, not a tile."""
+        for word in ("pit", "sunken", "float", "monument"):
+            self.assertEqual(sc.normalise_support(word)[0], "floor", word)
+
+    def test_an_unknown_word_is_grounded_and_reported(self) -> None:
+        """Refusing every slot is the worst way to report a typo: it is
+        indistinguishable from a building that is too small."""
+        canon, note = sc.normalise_support("bureau")
+        self.assertEqual(canon, "floor")
+        self.assertIn("not one of", note)
+
+    def test_a_translation_is_recorded_not_performed_silently(self) -> None:
+        self.assertEqual(sc.normalise_support("floor")[1], "")
+        self.assertIn("podium", sc.normalise_support("platform")[1])
+
+    def test_the_authored_path_is_normalised_too(self) -> None:
+        """`emit_dressing_room.from_room` reads the authored word RAW — the one
+        path that skips `resolve()`. prism_block is hand-authored `plinth`."""
+        import emit_dressing_room as ed
+        room = sc.room_for("prism_block")
+        self.assertEqual(
+            (room.get("placement_contract") or {}).get("required_support"), "plinth")
+        self.assertEqual(ed.from_room(room).required_support, "podium")
+
+    def test_a_raised_contract_gets_a_raised_footing(self) -> None:
+        """The generator's own tuple listed the raised words of ONE vocabulary,
+        so a `platform` body got a flat pad here and a 1.0 m stage in
+        classify_postures — two tools disagreeing about the same token."""
+        import emit_dressing_room as ed
+        from dataclasses import replace
+        base = sc.resolve("prism_block")
+        raised = ed._footing(replace(base, required_support="podium"))
+        flat = ed._footing(replace(base, required_support="floor"))
+        self.assertEqual(raised["tiles"][0][0], 3)
+        self.assertEqual(flat["tiles"][0][0], 1)

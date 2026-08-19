@@ -6,7 +6,9 @@ extends SceneTree
 ## PlayerBody on that deck. The fix stamps floor colliders GATED ON _vr.
 ## This test asserts the gate bites in both directions:
 ##   VR build      → floor-level CollisionShape3D count is large (the deck is a body)
-##   desktop build → floor-level CollisionShape3D count is ZERO (byte-identical v1)
+##   desktop build → the SAME count (2026-08-18, "one museum in both modes": the
+##                   deck collider is stamped always; the desktop walker clamps y
+##                   and never meets it — parity, not a gate, is what is asserted)
 ## Floor-level means shape position y < 0.0: floor slabs sit at -0.1 and the
 ## balcony catch slab at -4.1, while every pre-existing collider (walls 1.5,
 ## podiums 0.1, plinths 0.3, parapets 0.55) sits at or above 0.1.
@@ -25,11 +27,11 @@ func _run() -> void:
 
 	if n_vr < 50:
 		fails.append("VR build stamped only %d floor colliders — the deck is still not a body" % n_vr)
-	if n_desk != 0:
-		fails.append("desktop build stamped %d floor colliders — the _vr gate leaks" % n_desk)
+	if n_desk != n_vr:
+		fails.append("desktop build stamped %d floor colliders, VR %d — one museum in both modes means the same deck" % [n_desk, n_vr])
 
 	if fails.is_empty():
-		print("VR FLOOR: PASS — vr=%d floor colliders, desktop=0" % n_vr)
+		print("VR FLOOR: PASS — vr=%d floor colliders, desktop=%d (the same deck)" % [n_vr, n_desk])
 	else:
 		print("VR FLOOR: FAIL %d" % fails.size())
 		for f in fails:

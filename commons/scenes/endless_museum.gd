@@ -4756,6 +4756,7 @@ func _stamp_inner(seg: Node3D, scene_path: String, lookup: String, cell: Diction
 		return false
 	if _replay and _bake_key != "" and _bake_in.has(_bake_key) and bk.is_empty():
 		_seg_unbaked += 1
+		print("[em-bake] UNBAKED %s at %s — the bake of %s never saw this row (re-bake)" % [lookup, str(cell), _bake_key])
 	if scene_path == "" or cell.is_empty():
 		_stamp_refusal = "no scene path or cell"
 		return false

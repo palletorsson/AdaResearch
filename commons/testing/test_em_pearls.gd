@@ -55,6 +55,11 @@ func _run() -> void:
 	b.set("_overrides_path", "res://ada_run/_trial_em_overrides_pearls.json")
 	get_root().add_child(b)
 	await create_timer(0.6).timeout
+	# the museum owes itself one lazy segment (the hall behind the vestibule,
+	# built 1.2 s after the first frame); this test walks the string by hand, one
+	# _build_segment per pearl, so the owed build would land between two reads
+	# and the cursor would seem to skip a pearl. Cancel the debt; walk it here.
+	b.set("_lazy_pending", 0)
 	var pp: Dictionary = b.get("_plan_pearls")
 	var key := ""
 	var n_pearls := 0
