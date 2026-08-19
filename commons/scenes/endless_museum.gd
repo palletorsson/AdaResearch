@@ -1669,6 +1669,15 @@ func _dress_lobby(seg: Node3D, solid: StaticBody3D, w: int, zbase: int, wall_col
 		first_pearl = String((rows0[ci] as Dictionary).get("pearl", ""))
 	var sp0: Dictionary = _speak_for(_first_chapter, first_pearl)
 	var intro: String = String(sp0.get("speak", ""))
+	if intro == "":
+		# the wall is the product of the text: the foyer's lines are the words of
+		# the bodies that stand in the foyer, in the poem's order
+		var parts: Array = []
+		for tok in sp0.get("foyer", []):
+			var l: String = String((sp0.get("says", {}) as Dictionary).get(tok, "")).strip_edges()
+			if l != "":
+				parts.append(l)
+		intro = "\n\n".join(parts)
 	if intro != "" and _L("lobby", "intro_text", 1.0) > 0.5:
 		var it := Label3D.new()
 		# a stanza break: autowrap drops an empty line, so the break is a line of one
@@ -2546,6 +2555,7 @@ func _build_segment() -> void:
 					"ceiling": not _studio,      # the studio's camera looks down into the hall
 					# textD on the wall works: the pearl's sentences, one per showing
 					"speak_lines": _speak_lines(next_seq, String(deal.get("pearl", "")) if deal is Dictionary else ""),
+					"speak_anchors": _speak_anchors(),     # token -> world: each line hangs on the field nearest its body
 					"speak_caps": _L("speak", "caps", 0.0) > 0.5,
 					# the LOBBY (first vestibule) hangs no showings: its walls carry the
 					# window, the counter, the extinguisher and the lift instead
@@ -3003,58 +3013,65 @@ func _speak_plaque(_seg: Node3D, _chapter: String, _pearl: String, _w: int) -> v
 	pass   # retired 2026-08-19: "no labels in space" — the speak lives on the wall works (em_detail speak_lines)
 
 func _speak_lines(chapter: String, pearl: String) -> Array:
+	## THE WALL IS THE PRODUCT OF THE TEXT (Palle, 2026-08-19: "not wall text in the
+	## short speak poem, distribute that to the nearest wall"). Every record is
+	## {text, token}: a body's line carries its token, and em_detail hangs it on
+	## the wall field NEAREST that body; a line with no body (a page's stanza, the
+	## chapter's line) is unanchored and fills the fields left over, in order.
 	var sp: Dictionary = _speak_for(chapter, pearl)
 	var out: Array = []
 	var seen: Dictionary = {}
-	# em_layout.speak.show: 0 = the hand's lines only (drafts stay black), 1 = hand + drafts
 	var show_drafts: bool = _L("speak", "show_drafts", 1.0) > 0.5
-	var text: String = String(sp.get("speak", ""))
-	if not show_drafts and String(sp.get("speak_by", "hand")) != "hand":
-		text = ""
-	# a pearl whose poem starts in the FOYER (Palle's page 1): the page stands on
-	# the foyer wall; the hall's paintings carry the hall's lines, not the page
 	var foyer: Array = sp.get("foyer", [])
-	if not foyer.is_empty():
-		text = String(sp.get("page2", ""))      # page 1 is on the foyer wall; the hall opens with page 2
-	# the CHAPTER's line hangs first, on its first pearl's walls
-	if bool(sp.get("first", false)) and String(sp.get("chapter_speak", "")) != "" 			and (show_drafts or String(sp.get("chapter_speak_by", "hand")) == "hand"):
-		text = String(sp["chapter_speak"]) + ". " + text
-	# a poem written in LINES keeps its lines; prose splits on its stops
-	var pieces: PackedStringArray = text.split("
-") if text.contains("
-") else text.replace(";", ".").replace(": ", ". ").split(".")
-	for piece in pieces:
-		var p: String = String(piece).strip_edges()
-		if p.length() >= 3 and not seen.has(p.to_lower()):
-			seen[p.to_lower()] = true
-			out.append(p)
 	var says: Dictionary = sp.get("says", {})
 	var says_by: Dictionary = sp.get("says_by", {})
+	var order: Array = sp.get("tokens", [])
 	for tok in says:
-		if foyer.has(tok):
-			continue                        # the foyer's lines are on the page, not the paintings
+		if not order.has(tok):
+			order.append(tok)
+	for tok in order:
+		if foyer.has(tok) or not says.has(tok):
+			continue                        # the foyer's lines stand on the foyer wall
 		if not show_drafts and String(says_by.get(tok, "hand")) != "hand":
 			continue
 		var line: String = String(says[tok]).strip_edges()
 		if line != "" and not seen.has(line.to_lower()):
 			seen[line.to_lower()] = true
-			out.append(line)
-	# the next pages in this hall: the page's line, then its bodies' lines
+			out.append({"text": line, "token": String(tok)})
+	# the next pages in this hall: their bodies' lines, anchored the same way
 	for pg in sp.get("pages", []):
 		var pgd: Dictionary = pg
-		var ptext: String = String(pgd.get("speak", ""))
-		var ppieces: PackedStringArray = ptext.split("\n") if ptext.contains("\n") else ptext.replace(";", ".").split(".")
-		for piece in ppieces:
-			var pp: String = String(piece).strip_edges()
-			if pp.length() >= 3 and not seen.has(pp.to_lower()):
-				seen[pp.to_lower()] = true
-				out.append(pp)
 		var psays: Dictionary = pgd.get("says", {})
 		for tok in pgd.get("tokens", []):
 			var l2: String = String(psays.get(tok, "")).strip_edges()
 			if l2 != "" and not seen.has(l2.to_lower()):
 				seen[l2.to_lower()] = true
-				out.append(l2)
+				out.append({"text": l2, "token": String(tok)})
+	# unanchored: a page stanza that is not a body's (legacy speak/page2), the chapter's line
+	var text: String = String(sp.get("speak", "")) if foyer.is_empty() else String(sp.get("page2", ""))
+	if not show_drafts and String(sp.get("speak_by", "hand")) != "hand":
+		text = ""
+	if bool(sp.get("first", false)) and String(sp.get("chapter_speak", "")) != "" 			and (show_drafts or String(sp.get("chapter_speak_by", "hand")) == "hand"):
+		text = String(sp["chapter_speak"]) + ". " + text
+	for pg in sp.get("pages", []):
+		text += "\n" + String((pg as Dictionary).get("speak", ""))
+	var pieces: PackedStringArray = text.split("\n") if text.contains("\n") else text.replace(";", ".").replace(": ", ". ").split(".")
+	for piece in pieces:
+		var p: String = String(piece).strip_edges()
+		if p.length() >= 3 and not seen.has(p.to_lower()):
+			seen[p.to_lower()] = true
+			out.append({"text": p, "token": ""})
+	return out
+
+## World anchors of this segment's placed bodies, by token — what the wall text
+## is distributed by (the nearest field to the body that speaks the line).
+func _speak_anchors() -> Dictionary:
+	var out: Dictionary = {}
+	for r in _seg_placed:
+		var rd: Dictionary = r
+		var c: Array = rd.get("cell", [])
+		if c.size() >= 2 and not out.has(String(rd.get("token", ""))):
+			out[String(rd.get("token", ""))] = Vector3(float(c[0]) + 0.5, 1.5, float(c[1]) + 0.5)
 	return out
 
 func _number_places(seg: Node3D, chapter: String, pearl: String) -> void:
@@ -6428,6 +6445,7 @@ func _speak_for(chapter: String, pearl: String) -> Dictionary:
 						out["speak_by"] = String((p as Dictionary).get("speak_by", "hand"))
 						out["foyer"] = (p as Dictionary).get("foyer", []) if (p as Dictionary).get("foyer") is Array else []
 						out["page2"] = String((p as Dictionary).get("page2", ""))
+						out["tokens"] = (p as Dictionary).get("tokens", []) if (p as Dictionary).get("tokens") is Array else []
 						out["says"] = (p as Dictionary).get("says", {}) if (p as Dictionary).get("says") is Dictionary else {}
 						out["says_by"] = (p as Dictionary).get("says_by", {}) if (p as Dictionary).get("says_by") is Dictionary else {}
 				# the pages that share this pearl's hall (join): their lines follow

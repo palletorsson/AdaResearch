@@ -8,40 +8,31 @@
    "map": "Point_One",
    "lines": [
     {
-     "text": "You arrive late. No reboot.\nThe folding past keeps running.\n\nThe internal clock is running,\nthe frame counter update cycle.\n\nStanding at Vector.ZERO,\n\nPoint zero, * ,\nVector(0,0,0)\nThe root of all vectors.\n\nThe origin, No turning back.",
-     "by": "hand",
-     "place": "foyer"
-    },
-    {
      "token": "folding_past",
-     "text": "The folding past keeps running.",
-     "by": "hand",
-     "place": "foyer"
-    },
-    {
-     "token": "origin",
-     "text": "Standing at Vector.ZERO, Point zero, * , Vector(0,0,0) The root of all vectors. The origin, No turning back.",
+     "text": "You arrive late. No reboot.\nThe folding past keeps running.",
      "by": "hand",
      "place": "foyer"
     },
     {
      "token": "frame_counter_display",
-     "text": "The internal clock is running, the frame counter update cycle.",
+     "text": "The internal clock is running,\nthe frame counter update cycle.",
      "by": "hand",
      "place": "foyer"
     },
     {
-     "text": "Point Zero now as an object in the exhibition\n\nPoint one, position,\nno point without the coordinate system.\n\n3D Space.\n\nYou are here\n\n“Show me what you can do with those hands”\n\nGrab the ball.",
-     "by": "hand"
+     "token": "origin",
+     "text": "Standing at Vector.ZERO,\n\nPoint zero, * ,\nVector(0,0,0)\nThe root of all vectors.\n\nThe origin, No turning back.",
+     "by": "hand",
+     "place": "foyer"
     },
     {
      "token": "you_are_here",
-     "text": "You are here",
+     "text": "Point Zero now as an object in the exhibition\n\nYou are here",
      "by": "hand"
     },
     {
      "token": "CoordinateSystem3M",
-     "text": "Point one, position, no point without the coordinate system. 3D Space.",
+     "text": "Point one, position,\nno point without the coordinate system.\n\n3D Space.",
      "by": "hand"
     },
     {
@@ -51,7 +42,7 @@
     },
     {
      "token": "floating_sphere_field",
-     "text": "Grab the ball.",
+     "text": "“Show me what you can do with those hands”\n\nGrab the ball.",
      "by": "hand",
      "gap": 1
     },
@@ -69,10 +60,6 @@
    "pearl": "lines",
    "map": "Point_Lines",
    "lines": [
-    {
-     "text": "Do not cross this line ...",
-     "by": "hand"
-    },
     {
      "token": "do_not_cross_barrier",
      "text": "Do not cross this line ...",
@@ -170,10 +157,6 @@
    "map": "Point_Trace",
    "lines": [
     {
-     "text": "the line is not trace. there is no origin of a trace. all life is encoded — that is enough.",
-     "by": "hand"
-    },
-    {
      "token": "mystic_writing_pad",
      "text": "there is no origin of a trace",
      "by": "hand"
@@ -185,10 +168,6 @@
    "pearl": "line grid",
    "map": "Point_Line_Grid",
    "lines": [
-    {
-     "text": "resolution keeps us sane but introduces a debt on either side of the curve: underfitting, overfitting. grid beauty. slave to the rhythm. space filling.",
-     "by": "hand"
-    },
     {
      "token": "room_grammar",
      "text": "space filling",
@@ -212,11 +191,9 @@
    "map": "Point_Triangle_Context",
    "lines": [
     {
+     "token": "catalyst_pedestal",
      "text": "the triangle. everything is made of triangles. the quad, the simplest mesh. the pyramid mesh.",
      "by": "hand"
-    },
-    {
-     "token": "catalyst_pedestal"
     },
     {
      "token": "parasol_triangle",
@@ -280,10 +257,6 @@
    "map": "Primitives_Polythedra",
    "lines": [
     {
-     "text": "the pyramid mesh. the cube, the cube world. the fold. interactive cubes.",
-     "by": "hand"
-    },
-    {
      "token": "grab_trihedron",
      "text": "three faces in the hand",
      "by": "claude"
@@ -315,10 +288,6 @@
    "map": "Point_Animatedcube",
    "lines": [
     {
-     "text": "the cube, the cube world — the fold.",
-     "by": "hand"
-    },
-    {
      "token": "animatedcubebuilder",
      "text": "the cube world, built",
      "by": "claude"
@@ -336,10 +305,6 @@
    "map": "Chamber_Primitives",
    "lines": [
     {
-     "text": "primitives, and so on.",
-     "by": "hand"
-    },
-    {
      "token": "catalyst_target",
      "text": "primitives — and so on",
      "by": "claude"
@@ -351,10 +316,6 @@
    "pearl": "ignorance",
    "map": "Primitives_Ignorance",
    "lines": [
-    {
-     "text": "ignorance: the taxonomy that cannot hold. underfitting. sphere, plus, star, L, the platonic solids — and so on.",
-     "by": "hand"
-    },
     {
      "token": "sphere",
      "text": "the point, grown in every direction — and still not pi",
@@ -431,10 +392,6 @@
    "map": "Primitives_Portals",
    "lines": [
     {
-     "text": "portals: the edge drift. entropy forbids endless mutation; what is left is a drift along the edge — from one primitive to the next.",
-     "by": "hand"
-    },
-    {
      "token": "achilles_tortoise",
      "text": "Achilles and the tortoise: the endlessness of pi in a footrace",
      "by": "claude"
@@ -451,10 +408,6 @@
    "pearl": "melencolia",
    "map": "Primitives_Melencolia",
    "lines": [
-    {
-     "text": "melencolia: the taxonomy that holds on. overfitting. Dürer's polyhedron, the pyramid, the frame.",
-     "by": "hand"
-    },
     {
      "token": "durer_scene",
      "text": "Dürer's polyhedron — the solid no taxonomy names, and the angel who keeps it",

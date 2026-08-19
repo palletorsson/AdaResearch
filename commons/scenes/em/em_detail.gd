@@ -842,8 +842,43 @@ static func _add_showing_cards(seg: Node3D, mounts: Array, opts: Dictionary) -> 
 	# opts.speak_lines: the pearl's sentences in string order; showing si gets
 	# sentence si, written across its field in Roboto, light on the dark field.
 	# opts.speak_caps: 1 = CAPS. A showing past the last sentence stays a field.
-	var speak_lines: Array = opts.get("speak_lines", [])
+	var speak_in: Array = opts.get("speak_lines", [])
 	var speak_caps: bool = bool(opts.get("speak_caps", false))
+	# THE WALL IS THE PRODUCT OF THE TEXT (2026-08-19): a record {text, token} hangs
+	# on the field NEAREST its body (opts.speak_anchors: token -> world); records
+	# with no body, and plain strings, fill the fields left over in order.
+	var anchors: Dictionary = opts.get("speak_anchors", {})
+	var speak_lines: Array = []
+	for _i in range(mounts.size()):
+		speak_lines.append("")
+	var free: Array = []
+	for _i in range(mounts.size()):
+		free.append(true)
+	var rest: Array = []
+	for rec in speak_in:
+		var txt: String = String(rec.get("text", "")) if rec is Dictionary else String(rec)
+		var tok: String = String(rec.get("token", "")) if rec is Dictionary else ""
+		if txt.strip_edges() == "":
+			continue
+		if tok != "" and anchors.has(tok):
+			var at: Vector3 = anchors[tok]
+			var best: int = -1
+			var best_d: float = 1e9
+			for mi in range(mounts.size()):
+				if not free[mi]:
+					continue
+				var dd: float = (mounts[mi] as Transform3D).origin.distance_to(at)
+				if dd < best_d:
+					best_d = dd; best = mi
+			if best >= 0:
+				speak_lines[best] = txt; free[best] = false
+				continue
+		rest.append(txt)
+	for mi in range(mounts.size()):
+		if rest.is_empty():
+			break
+		if free[mi]:
+			speak_lines[mi] = rest.pop_front(); free[mi] = false
 	var roboto: Font = null
 	if not speak_lines.is_empty() and ResourceLoader.exists("res://commons/font/Roboto-VariableFont_wdth,wght.ttf"):
 		roboto = load("res://commons/font/Roboto-VariableFont_wdth,wght.ttf")

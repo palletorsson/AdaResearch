@@ -17015,32 +17015,30 @@
     "map": "Point_One",
     "pearl": "point",
     "rooms": 5,
-    "speak": "You arrive late. No reboot.\nThe folding past keeps running.\n\nThe internal clock is running,\nthe frame counter update cycle.\n\nStanding at Vector.ZERO,\n\nPoint zero, * ,\nVector(0,0,0)\nThe root of all vectors.\n\nThe origin, No turning back.",
     "says": {
-     "folding_past": "The folding past keeps running.",
-     "origin": "Standing at Vector.ZERO, Point zero, * , Vector(0,0,0) The root of all vectors. The origin, No turning back.",
-     "frame_counter_display": "The internal clock is running, the frame counter update cycle.",
-     "you_are_here": "You are here",
-     "CoordinateSystem3M": "Point one, position, no point without the coordinate system. 3D Space.",
+     "folding_past": "You arrive late. No reboot.\nThe folding past keeps running.",
+     "frame_counter_display": "The internal clock is running,\nthe frame counter update cycle.",
+     "origin": "Standing at Vector.ZERO,\n\nPoint zero, * ,\nVector(0,0,0)\nThe root of all vectors.\n\nThe origin, No turning back.",
+     "you_are_here": "Point Zero now as an object in the exhibition\n\nYou are here",
+     "CoordinateSystem3M": "Point one, position,\nno point without the coordinate system.\n\n3D Space.",
      "fontana_puncture": "the one point, pierced",
-     "floating_sphere_field": "Grab the ball.",
+     "floating_sphere_field": "“Show me what you can do with those hands”\n\nGrab the ball.",
      "draw_dot": "all life is encoded — that is enough"
     },
     "says_by": {
      "folding_past": "hand",
-     "origin": "hand",
      "frame_counter_display": "hand",
+     "origin": "hand",
      "you_are_here": "hand",
      "CoordinateSystem3M": "hand",
      "fontana_puncture": "claude",
      "floating_sphere_field": "hand",
      "draw_dot": "hand"
     },
-    "speak_by": "hand",
     "tokens_add": [
      "folding_past",
-     "origin",
      "frame_counter_display",
+     "origin",
      "CoordinateSystem3M",
      "draw_dot"
     ],
@@ -17055,8 +17053,8 @@
     ],
     "tokens_order": [
      "folding_past",
-     "origin",
      "frame_counter_display",
+     "origin",
      "you_are_here",
      "CoordinateSystem3M",
      "fontana_puncture",
@@ -17070,17 +17068,15 @@
     },
     "foyer": [
      "folding_past",
-     "origin",
-     "frame_counter_display"
+     "frame_counter_display",
+     "origin"
     ],
-    "page2": "Point Zero now as an object in the exhibition\n\nPoint one, position,\nno point without the coordinate system.\n\n3D Space.\n\nYou are here\n\n“Show me what you can do with those hands”\n\nGrab the ball.",
     "hero": "CoordinateSystem3M"
    },
    {
     "map": "Point_Lines",
     "pearl": "lines",
     "rooms": 6,
-    "speak": "Do not cross this line ...",
     "says": {
      "do_not_cross_barrier": "Do not cross this line ...",
      "klee_walking_point": "A line is a point that went for a walk.",
@@ -17112,7 +17108,6 @@
      "line_builder_3d": "claude"
     },
     "join": true,
-    "speak_by": "hand",
     "tokens_add": [
      "do_not_cross_barrier",
      "klee_walking_point",
@@ -17149,8 +17144,8 @@
     "map": "Point_Triangle_Context",
     "pearl": "triangle context",
     "rooms": 8,
-    "speak": "the triangle. everything is made of triangles. the quad, the simplest mesh. the pyramid mesh.",
     "says": {
+     "catalyst_pedestal": "the triangle. everything is made of triangles. the quad, the simplest mesh. the pyramid mesh.",
      "parasol_triangle": "everything is made of triangles",
      "triangle_line_puzzle": "three lines, one triangle",
      "triangleprofiles": "triangles, profiled",
@@ -17163,6 +17158,7 @@
      "quad_line_puzzle": "four lines, one quad"
     },
     "says_by": {
+     "catalyst_pedestal": "hand",
      "parasol_triangle": "claude",
      "triangle_line_puzzle": "claude",
      "triangleprofiles": "claude",
@@ -17176,19 +17172,16 @@
     },
     "tokens_add": [],
     "tokens_remove": [],
-    "speak_by": "hand",
     "hero": "catalyst_pedestal"
    },
    {
     "map": "Point_Trace",
     "pearl": "trace",
-    "speak": "the line is not trace. there is no origin of a trace. all life is encoded — that is enough.",
     "says": {
      "mystic_writing_pad": "there is no origin of a trace"
     },
     "tokens_add": [],
     "tokens_remove": [],
-    "speak_by": "hand",
     "says_by": {
      "mystic_writing_pad": "hand"
     },
@@ -17197,7 +17190,6 @@
    {
     "map": "Point_Line_Grid",
     "pearl": "line grid",
-    "speak": "resolution keeps us sane but introduces a debt on either side of the curve: underfitting, overfitting. grid beauty. slave to the rhythm. space filling.",
     "says": {
      "room_grammar": "space filling",
      "player_trace": "the trace, gridded",
@@ -17210,13 +17202,11 @@
     },
     "tokens_add": [],
     "tokens_remove": [],
-    "speak_by": "hand",
     "hero": "player_trace"
    },
    {
     "map": "Primitives_Polythedra",
     "pearl": "polythedra",
-    "speak": "the pyramid mesh. the cube, the cube world. the fold. interactive cubes.",
     "says": {
      "grab_trihedron": "three faces in the hand",
      "becoming_catalyst": "interactive cubes — becoming",
@@ -17229,13 +17219,11 @@
     },
     "tokens_add": [],
     "tokens_remove": [],
-    "speak_by": "hand",
     "hero": "grab_trihedron"
    },
    {
     "map": "Point_Animatedcube",
     "pearl": "animatedcube",
-    "speak": "the cube, the cube world — the fold.",
     "says": {
      "animatedcubebuilder": "the cube world, built",
      "polyhedron_nets_cube": "the fold — a cube is a net"
@@ -17246,13 +17234,11 @@
     },
     "tokens_add": [],
     "tokens_remove": [],
-    "speak_by": "hand",
     "hero": "animatedcubebuilder"
    },
    {
     "map": "Chamber_Primitives",
     "pearl": "primitives",
-    "speak": "primitives, and so on.",
     "says": {
      "catalyst_target": "primitives — and so on"
     },
@@ -17261,20 +17247,17 @@
     },
     "tokens_add": [],
     "tokens_remove": [],
-    "speak_by": "hand",
     "hero": "catalyst_target"
    },
    {
     "map": "Primitives_Ignorance",
     "pearl": "ignorance",
-    "speak": "ignorance: the taxonomy that cannot hold. underfitting. sphere, plus, star, L, the platonic solids — and so on.",
     "says": {
      "sphere": "the point, grown in every direction — and still not pi",
      "platonic_grabbables": "five solids, and the taxonomy ends. the rest is ignorance",
      "hole_with_cones": "a hole is not a thing — it is held by what is around it",
      "truncatedtetrahedron": "a solid cut: what the taxonomy does to what it cannot hold"
     },
-    "speak_by": "hand",
     "says_by": {
      "sphere": "claude",
      "platonic_grabbables": "claude",
@@ -17288,12 +17271,10 @@
    {
     "map": "Primitives_Portals",
     "pearl": "portals",
-    "speak": "portals: the edge drift. entropy forbids endless mutation; what is left is a drift along the edge — from one primitive to the next.",
     "says": {
      "achilles_tortoise": "Achilles and the tortoise: the endlessness of pi in a footrace",
      "combine_portals": "a portal: the edge, walked through"
     },
-    "speak_by": "hand",
     "says_by": {
      "achilles_tortoise": "claude",
      "combine_portals": "claude"
@@ -17305,14 +17286,12 @@
    {
     "map": "Primitives_Melencolia",
     "pearl": "melencolia",
-    "speak": "melencolia: the taxonomy that holds on. overfitting. Dürer's polyhedron, the pyramid, the frame.",
     "says": {
      "durer_scene": "Dürer's polyhedron — the solid no taxonomy names, and the angel who keeps it",
      "snap_pyramid_puzzle": "the pyramid, snapped — held by the grid",
      "pyramid": "the pyramid: the triangle stood up, the first solid held",
      "bigframe": "the frame: where the picture stops, and the trace does not"
     },
-    "speak_by": "hand",
     "says_by": {
      "durer_scene": "claude",
      "snap_pyramid_puzzle": "claude",
@@ -17536,8 +17515,8 @@
      "hero_by": "hand",
      "tokens": [
       "folding_past",
-      "origin",
       "frame_counter_display",
+      "origin",
       "you_are_here",
       "CoordinateSystem3M",
       "fontana_puncture",
@@ -17546,33 +17525,30 @@
      ],
      "blurb": "Before the point, infrastructure.",
      "rooms": 5,
-     "page2": "Point Zero now as an object in the exhibition\n\nPoint one, position,\nno point without the coordinate system.\n\n3D Space.\n\nYou are here\n\n“Show me what you can do with those hands”\n\nGrab the ball.",
      "foyer": [
       "folding_past",
-      "origin",
-      "frame_counter_display"
+      "frame_counter_display",
+      "origin"
      ],
      "verse": {
       "floating_sphere_field": {
        "gap": 1
       }
      },
-     "speak": "You arrive late. No reboot.\nThe folding past keeps running.\n\nThe internal clock is running,\nthe frame counter update cycle.\n\nStanding at Vector.ZERO,\n\nPoint zero, * ,\nVector(0,0,0)\nThe root of all vectors.\n\nThe origin, No turning back.",
-     "speak_by": "hand",
      "says": {
-      "folding_past": "The folding past keeps running.",
-      "origin": "Standing at Vector.ZERO, Point zero, * , Vector(0,0,0) The root of all vectors. The origin, No turning back.",
-      "frame_counter_display": "The internal clock is running, the frame counter update cycle.",
-      "you_are_here": "You are here",
-      "CoordinateSystem3M": "Point one, position, no point without the coordinate system. 3D Space.",
+      "folding_past": "You arrive late. No reboot.\nThe folding past keeps running.",
+      "frame_counter_display": "The internal clock is running,\nthe frame counter update cycle.",
+      "origin": "Standing at Vector.ZERO,\n\nPoint zero, * ,\nVector(0,0,0)\nThe root of all vectors.\n\nThe origin, No turning back.",
+      "you_are_here": "Point Zero now as an object in the exhibition\n\nYou are here",
+      "CoordinateSystem3M": "Point one, position,\nno point without the coordinate system.\n\n3D Space.",
       "fontana_puncture": "the one point, pierced",
-      "floating_sphere_field": "Grab the ball.",
+      "floating_sphere_field": "“Show me what you can do with those hands”\n\nGrab the ball.",
       "draw_dot": "all life is encoded — that is enough"
      },
      "says_by": {
       "folding_past": "hand",
-      "origin": "hand",
       "frame_counter_display": "hand",
+      "origin": "hand",
       "you_are_here": "hand",
       "CoordinateSystem3M": "hand",
       "fontana_puncture": "claude",
@@ -17621,8 +17597,6 @@
      "blurb": "A line connects two points.",
      "rooms": 6,
      "join": true,
-     "speak": "Do not cross this line ...",
-     "speak_by": "hand",
      "says": {
       "do_not_cross_barrier": "Do not cross this line ...",
       "klee_walking_point": "A line is a point that went for a walk.",
@@ -17665,8 +17639,6 @@
       "mystic_writing_pad"
      ],
      "blurb": "Now: duration.",
-     "speak": "the line is not trace. there is no origin of a trace. all life is encoded — that is enough.",
-     "speak_by": "hand",
      "says": {
       "mystic_writing_pad": "there is no origin of a trace"
      },
@@ -17686,8 +17658,6 @@
       "grid_lines"
      ],
      "blurb": "The grid quantizes.",
-     "speak": "resolution keeps us sane but introduces a debt on either side of the curve: underfitting, overfitting. grid beauty. slave to the rhythm. space filling.",
-     "speak_by": "hand",
      "says": {
       "room_grammar": "space filling",
       "player_trace": "the trace, gridded",
@@ -17721,9 +17691,8 @@
      ],
      "blurb": "Three points close a boundary, and now: rigidity.",
      "rooms": 8,
-     "speak": "the triangle. everything is made of triangles. the quad, the simplest mesh. the pyramid mesh.",
-     "speak_by": "hand",
      "says": {
+      "catalyst_pedestal": "the triangle. everything is made of triangles. the quad, the simplest mesh. the pyramid mesh.",
       "parasol_triangle": "everything is made of triangles",
       "triangle_line_puzzle": "three lines, one triangle",
       "triangleprofiles": "triangles, profiled",
@@ -17736,6 +17705,7 @@
       "quad_line_puzzle": "four lines, one quad"
      },
      "says_by": {
+      "catalyst_pedestal": "hand",
       "parasol_triangle": "claude",
       "triangle_line_puzzle": "claude",
       "triangleprofiles": "claude",
@@ -17763,8 +17733,6 @@
       "tentacle_placer"
      ],
      "blurb": "A trihedron is a geometric configuration where three triangular faces meet at a single vertex, forming a corner of space.",
-     "speak": "the pyramid mesh. the cube, the cube world. the fold. interactive cubes.",
-     "speak_by": "hand",
      "says": {
       "grab_trihedron": "three faces in the hand",
       "becoming_catalyst": "interactive cubes — becoming",
@@ -17787,8 +17755,6 @@
       "polyhedron_nets_cube"
      ],
      "blurb": "A manipulable quad-based object where you can drag cube corners.",
-     "speak": "the cube, the cube world — the fold.",
-     "speak_by": "hand",
      "says": {
       "animatedcubebuilder": "the cube world, built",
       "polyhedron_nets_cube": "the fold — a cube is a net"
@@ -17808,8 +17774,6 @@
       "catalyst_target"
      ],
      "blurb": "The first mark.",
-     "speak": "primitives, and so on.",
-     "speak_by": "hand",
      "says": {
       "catalyst_target": "primitives — and so on"
      },
@@ -17846,8 +17810,6 @@
       "prism_block"
      ],
      "blurb": "Ignorance is not the absence of knowledge but a structural limit.",
-     "speak": "ignorance: the taxonomy that cannot hold. underfitting. sphere, plus, star, L, the platonic solids — and so on.",
-     "speak_by": "hand",
      "says": {
       "sphere": "the point, grown in every direction — and still not pi",
       "platonic_grabbables": "five solids, and the taxonomy ends. the rest is ignorance",
@@ -17872,8 +17834,6 @@
       "combine_portals"
      ],
      "blurb": "A toroidal portal sequence guided by increasing rings approaching π, staging continuity as asymptotic relation rather than arrival.",
-     "speak": "portals: the edge drift. entropy forbids endless mutation; what is left is a drift along the edge — from one primitive to the next.",
-     "speak_by": "hand",
      "says": {
       "achilles_tortoise": "Achilles and the tortoise: the endlessness of pi in a footrace",
       "combine_portals": "a portal: the edge, walked through"
@@ -17899,8 +17859,6 @@
       "pyramidlong"
      ],
      "blurb": "Inspired by the Herzog August Bibliothek and Melencolia I, this scene embodies the limit point of geometric aspiration and existential constraint.",
-     "speak": "melencolia: the taxonomy that holds on. overfitting. Dürer's polyhedron, the pyramid, the frame.",
-     "speak_by": "hand",
      "says": {
       "durer_scene": "Dürer's polyhedron — the solid no taxonomy names, and the angel who keeps it",
       "snap_pyramid_puzzle": "the pyramid, snapped — held by the grid",
