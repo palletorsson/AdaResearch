@@ -167,6 +167,7 @@ def run_sequence(seq: str, museum: str, rows: int, relations: int = 2,
             r = _run_cast(seq, museum, rows, anchors, pcast, ctx, walk=pw)
             r["pearl"] = pw["pearl"]; r["pearl_index"] = pw["pearl_index"]; r["map"] = pw["map"]
             r["rooms"] = pw.get("rooms")
+            r["exclude"] = list(pw.get("exclude") or [])
             r["hero_walk"] = {"hero": pw["hero"], "hand_branches": pw["hand_branches"], "pearl": pw["pearl"]}
             parts.append(r)
             print(f"  {seq:24s} PEARL {pw['pearl_index'] + 1:2d}/{len(pearls)} {pw['pearl']:16s} offered {r['offered']:3d} placed {r['placed']:3d} interior {r['interior']:3d}")
@@ -352,7 +353,7 @@ def spine_run(only: str = "", relations: int = 2,
             "totals": tot, "sequences": rows}
 
 
-def _carry_hand_rows(m: dict[str, Any], prev: dict[str, Any], key: str, seq: str, pearl: str) -> None:
+def _carry_hand_rows(m: dict[str, Any], prev: dict[str, Any], key: str, seq: str, pearl: str, exclude: set | None = None) -> None:
     """THE HAND WINS A REGENERATION. A row the hand ruled (hand: true — the plan
     editor, or a ruling written into the plan) keeps its cell, rotation, offset,
     scale and config when the negotiator writes the pearl again; a hand row whose
@@ -362,7 +363,9 @@ def _carry_hand_rows(m: dict[str, Any], prev: dict[str, Any], key: str, seq: str
                      and p.get("sequence") == seq and p.get("pearl") == pearl), None)
     if not prev_row:
         return
-    hand = [a for a in prev_row.get("artifacts", []) if a.get("hand")]
+    # a hand row for a token the hand has since taken OUT of the pearl is not carried:
+    # the newer ruling is the exclusion (Palle: "in point remove the large point artifact…")
+    hand = [a for a in prev_row.get("artifacts", []) if a.get("hand") and a.get("token") not in (exclude or set())]
     if not hand:
         return
     apron = int(m.get("apron", 14))
@@ -427,7 +430,7 @@ def write_plan(result: dict[str, Any], out: Path) -> dict[str, Any]:
                                 dict(pr.get("cast_context", {})), rooms=pr.get("rooms"))
                 m["sequence"] = r["sequence"]
                 m["pearl"] = pr["pearl"]; m["pearl_index"] = pr["pearl_index"]; m["map"] = pr.get("map", "")
-                _carry_hand_rows(m, prev, key, r["sequence"], pr["pearl"])
+                _carry_hand_rows(m, prev, key, r["sequence"], pr["pearl"], set(pr.get("exclude") or []))
                 m["pearls_total"] = len(r["pearls"]); m["hero"] = pr.get("hero_walk", {}).get("hero", "")
                 plans.append({"museum": key, **m})
                 if first is None:

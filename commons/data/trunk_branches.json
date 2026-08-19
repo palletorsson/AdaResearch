@@ -543,7 +543,7 @@
   {
    "anchor": "primitives",
    "kind": "extends",
-   "pearl": "lines",
+   "pearl": "point",
    "provenance": "derived",
    "space": "wall",
    "space_by": "heuristic",
@@ -9420,7 +9420,7 @@
   {
    "anchor": "primitives",
    "kind": "synthesizes",
-   "pearl": "lines",
+   "pearl": "point",
    "provenance": "derived",
    "space": "alcove",
    "space_by": "heuristic",
@@ -11811,7 +11811,7 @@
   {
    "anchor": "primitives",
    "kind": "varies",
-   "pearl": "lines",
+   "pearl": "point",
    "provenance": "derived",
    "space": "wall",
    "space_by": "heuristic",
@@ -11965,7 +11965,7 @@
   {
    "anchor": "primitives",
    "kind": "varies",
-   "pearl": "line grid",
+   "pearl": "point",
    "provenance": "derived",
    "space": "wall",
    "space_by": "heuristic",
@@ -16991,7 +16991,7 @@
   }
  ],
  "counts": {
-  "branches_on_pearls": 1498,
+  "branches_on_pearls": 1495,
   "by_kind": {
    "contradicts": 0,
    "edge": 149,
@@ -17026,23 +17026,59 @@
      "floating_sphere_field": "points, drifting, there is always the drift. ",
      "two_points_line": "two points is a line. it measures. it is a point, it is a laser — here it forms a vector in 3d space",
      "point": "the one point",
-     "draw_dot": "all life is encoded — that is enough"
+     "draw_dot": "all life is encoded — that is enough",
+     "do_not_cross_barrier": "do not cross — the first line is a rule",
+     "klee_walking_point": "a line is a point that went for a walk",
+     "grab_sphere_point_snap": "a point you can take; it snaps",
+     "walk_this_line_marking": "walk this line"
     },
     "says_by": {
      "you_are_here": "claude",
      "fontana_puncture": "claude",
      "floating_sphere_field": "hand",
      "point": "claude",
-     "draw_dot": "hand"
+     "draw_dot": "hand",
+     "do_not_cross_barrier": "claude",
+     "klee_walking_point": "claude",
+     "grab_sphere_point_snap": "claude",
+     "walk_this_line_marking": "claude"
     },
     "speak_by": "hand",
     "tokens_add": [
-     "draw_dot"
+     "draw_dot",
+     "do_not_cross_barrier",
+     "klee_walking_point",
+     "grab_sphere_point_snap",
+     "walk_this_line_marking"
     ],
     "tokens_remove": [
+     "CoordinateSystem3M",
+     "folding_past",
      "interactive_point_origin_force",
-     "origin"
-    ]
+     "origin",
+     "point"
+    ],
+    "tokens_order": [
+     "frame_counter_display",
+     "you_are_here",
+     "fontana_puncture",
+     "floating_sphere_field",
+     "two_points_line",
+     "do_not_cross_barrier",
+     "klee_walking_point",
+     "grab_sphere_point_snap",
+     "walk_this_line_marking"
+    ],
+    "verse": {
+     "do_not_cross_barrier": {
+      "indent": 0,
+      "gap": 1
+     },
+     "walk_this_line_marking": {
+      "indent": 1,
+      "gap": 1
+     }
+    }
    },
    {
     "map": "Point_Lines",
@@ -17412,20 +17448,32 @@
      "pearl": "point",
      "map": "Point_One",
      "index": 0,
-     "hero": "CoordinateSystem3M",
+     "hero": "frame_counter_display",
      "hero_by": "first in spine order",
      "tokens": [
-      "CoordinateSystem3M",
       "frame_counter_display",
       "you_are_here",
       "fontana_puncture",
       "floating_sphere_field",
-      "folding_past",
+      "do_not_cross_barrier",
+      "klee_walking_point",
+      "grab_sphere_point_snap",
+      "walk_this_line_marking",
       "lab_room",
       "draw_dot"
      ],
      "blurb": "Before the point, infrastructure.",
      "rooms": 4,
+     "verse": {
+      "do_not_cross_barrier": {
+       "indent": 0,
+       "gap": 1
+      },
+      "walk_this_line_marking": {
+       "indent": 1,
+       "gap": 1
+      }
+     },
      "speak": "you arrive late. the clock is already running. the folding past keeps running. the frame counter. point zero; origin, (0,0,0), the root of all vectors, Vector.ZERO. the one point. no point without a coordinate system.",
      "speak_by": "hand",
      "says": {
@@ -17438,7 +17486,11 @@
       "floating_sphere_field": "points, drifting, there is always the drift. ",
       "two_points_line": "two points is a line. it measures. it is a point, it is a laser — here it forms a vector in 3d space",
       "point": "the one point",
-      "draw_dot": "all life is encoded — that is enough"
+      "draw_dot": "all life is encoded — that is enough",
+      "do_not_cross_barrier": "do not cross — the first line is a rule",
+      "klee_walking_point": "a line is a point that went for a walk",
+      "grab_sphere_point_snap": "a point you can take; it snaps",
+      "walk_this_line_marking": "walk this line"
      },
      "says_by": {
       "folding_past": "hand",
@@ -17450,26 +17502,32 @@
       "floating_sphere_field": "hand",
       "two_points_line": "hand",
       "point": "claude",
-      "draw_dot": "hand"
+      "draw_dot": "hand",
+      "do_not_cross_barrier": "claude",
+      "klee_walking_point": "claude",
+      "grab_sphere_point_snap": "claude",
+      "walk_this_line_marking": "claude"
      },
      "excluded": [
+      "CoordinateSystem3M",
+      "folding_past",
       "interactive_point_origin_force",
-      "origin"
+      "origin",
+      "point"
      ]
     },
     {
      "pearl": "lines",
      "map": "Point_Lines",
      "index": 1,
-     "hero": "klee_walking_point",
-     "hero_by": "dig:load-bearing",
+     "hero": "science_screen",
+     "hero_by": "first in spine order",
      "tokens": [
       "science_screen",
       "dgrid",
       "perspective_lines",
       "line_builder_3d",
       "laser_sword",
-      "klee_walking_point",
       "grabbable_line",
       "lightrod",
       "cube_scene",
@@ -17536,7 +17594,6 @@
      "hero_by": "dig:load-bearing",
      "tokens": [
       "room_grammar",
-      "grab_sphere_point_snap",
       "player_trace",
       "grid_lines"
      ],

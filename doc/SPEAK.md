@@ -9,12 +9,16 @@ _one line per chapter, per pearl, per body; [hand] Palle, [claude] written in hi
 ### point
 you arrive late. the clock is already running. the folding past keeps running. the frame counter. point zero; origin, (0,0,0), the root of all vectors, Vector.ZERO. the one point. no point without a coordinate system.  `[hand]`
 
-no points without a coordinate system  `[hand]`  
 the frame counter: the clock is already running  `[hand]`  
 you are here — the one point  `[claude]`  
 the one point, pierced  `[claude]`  
 points, drifting, there is always the drift.   `[hand]`  
-the clock is already running — the folding past keeps running  `[hand]`  
+
+do not cross — the first line is a rule  `[claude]`  
+a line is a point that went for a walk  `[claude]`  
+a point you can take; it snaps  `[claude]`  
+
+    walk this line  `[claude]`  
 all life is encoded — that is enough  `[hand]`  
 
 ### lines
@@ -37,7 +41,6 @@ there is no origin of a trace  `[hand]`
 resolution keeps us sane but introduces a debt on either side of the curve: underfitting, overfitting. grid beauty. slave to the rhythm. space filling.  `[hand]`
 
 space filling  `[hand]`  
-snap to the grid: resolution keeps us sane  `[claude]`  
 the trace, gridded  `[claude]`  
 grid beauty — slave to the rhythm  `[hand]`  
 
