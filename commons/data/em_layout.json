@@ -66,7 +66,9 @@
 	},
 	"speak": {
 		"caps": 0,
-		"_caps": "textD on the wall works: 1 = the sentences in CAPS, 0 = as dictated (Roboto, light on the field)"
+		"_caps": "textD on the wall works: 1 = the sentences in CAPS, 0 = as dictated (Roboto, light on the field)",
+		"show_drafts": 1,
+		"_show_drafts": "1 = the corpus's draft lines (truths, blurbs, descriptions; em_speak.py --draft) hang beside the hand's; 0 = only lines Palle spoke — the other paintings stay black"
 	},
 	"rig": {
 		"plain_hands": true,

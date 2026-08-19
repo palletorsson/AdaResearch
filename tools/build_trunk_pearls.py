@@ -139,10 +139,19 @@ def seed(trunk_doc: dict) -> dict:
                         p["index"] = int(e["order"])
                     if e.get("rooms") is not None:
                         p["rooms"] = int(e["rooms"])       # how much of the tile this pearl gets (tools/em_rooms.py)
-                    if e.get("speak"):
-                        p["speak"] = str(e["speak"])        # textD: the pearl's short line (tools/em_speak.py)
-                    if e.get("says"):
-                        p["says"] = dict(e["says"])          # textD: a line per body
+                    # textD (tools/em_speak.py): the hand's line wins, a draft from the
+                    # corpus fills the rest; provenance travels (speak_by / says_by)
+                    if e.get("speak") or e.get("speak_draft"):
+                        p["speak"] = str(e.get("speak") or e.get("speak_draft"))
+                        p["speak_by"] = (e.get("speak_by") or "hand") if e.get("speak") else "draft"
+                    if e.get("says") or e.get("says_draft"):
+                        merged = dict(e.get("says_draft") or {})
+                        by = {k: "draft" for k in merged}
+                        hb = e.get("says_by") or {}
+                        for k, v in (e.get("says") or {}).items():
+                            merged[k] = v; by[k] = hb.get(k, "hand")
+                        p["says"] = merged
+                        p["says_by"] = by
                     if e.get("blurb"):
                         p["blurb"] = str(e["blurb"])
                     p["tokens"] = [t for t in p["tokens"] if t not in set(e.get("tokens_remove", []))]

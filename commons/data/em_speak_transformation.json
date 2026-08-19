@@ -1,0 +1,76 @@
+{
+ "transformation": {
+  "trans introduction": {
+   "by": "claude",
+   "speak": "one matrix does it all. move, turn, grow — the same multiplication. what stays the same is the invariant. homogeneous coordinates: a point and a direction differ by one number.",
+   "says": {
+    "matrix_4x4_viewer": "sixteen numbers. every move you will ever make",
+    "homogeneous_coordinates": "a point carries a 1, a direction carries a 0 — that is the whole difference",
+    "invariants_demo": "what does not change when everything moves",
+    "transform_composition": "one after another is one. order matters",
+    "rotation_gimbal": "three rings, and one way to lose a degree of freedom",
+    "balance_puzzle": "the transform you cannot see: weight"
+   }
+  },
+  "trans translation": {
+   "by": "claude",
+   "speak": "to move is to add. nothing turns, nothing grows; the thing arrives as it left.",
+   "says": {
+    "transform_composition_workbench": "compose: the hand builds the matrix",
+    "z_translation_cube": "plus z: deeper",
+    "y_translation_cube": "plus y: higher",
+    "pick_up_cube": "the first transform is the hand's",
+    "pickup_gate": "a move that opens"
+   }
+  },
+  "trans axisdecomposition": {
+   "by": "claude",
+   "speak": "one move is three moves. x, then y, then z — and the order does not matter, for translation only.",
+   "says": {
+    "toruscylinder": "a ring and a tube: the same surface, one axis apart",
+    "translation_cube_demo": "the move, taken apart",
+    "x_translation_cube": "plus x: across"
+   }
+  },
+  "trans rotation": {
+   "by": "claude",
+   "speak": "turning is a move around something. around which axis, from where — the order matters now.",
+   "says": {
+    "rotate_grid_cubes": "the grid turns and stays a grid",
+    "spin": "turning with nothing to turn around"
+   }
+  },
+  "trans rotationspectacle": {
+   "by": "claude",
+   "speak": "rotation as spectacle: the tunnel turns, the cake turns, the eye is the thing that moved.",
+   "says": {
+    "boolean_tunnel": "a tunnel is a solid subtracted, turning",
+    "carousel_cake": "the carousel: everything moves, the centre does not"
+   }
+  },
+  "trans scale": {
+   "by": "claude",
+   "speak": "to scale is to multiply. bigger is not more; the chair assembled at twice the size is the same chair.",
+   "says": {
+    "chair_assembly_puzzle": "parts to chair: every piece a transform",
+    "clipboard": "copy, paste — the transform that makes two",
+    "scale_me": "times two. the same, and not"
+   }
+  },
+  "transformation": {
+   "by": "claude",
+   "speak": "transformation: one matrix, three moves.",
+   "says": {
+    "proximity_spawner": "come close — something appears"
+   }
+  },
+  "trans pit": {
+   "by": "claude",
+   "speak": "the pit: push and grow. a transform done to you.",
+   "says": {
+    "pusher_block": "pushed — translated by the room",
+    "grower_block": "grown — scaled by the room"
+   }
+  }
+ }
+}

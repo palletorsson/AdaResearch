@@ -2888,14 +2888,21 @@ func _speak_lines(chapter: String, pearl: String) -> Array:
 	var sp: Dictionary = _speak_for(chapter, pearl)
 	var out: Array = []
 	var seen: Dictionary = {}
+	# em_layout.speak.show: 0 = the hand's lines only (drafts stay black), 1 = hand + drafts
+	var show_drafts: bool = _L("speak", "show_drafts", 1.0) > 0.5
 	var text: String = String(sp.get("speak", ""))
+	if not show_drafts and String(sp.get("speak_by", "hand")) != "hand":
+		text = ""
 	for piece in text.replace(";", ".").replace(": ", ". ").split("."):
 		var p: String = String(piece).strip_edges()
 		if p.length() >= 3 and not seen.has(p.to_lower()):
 			seen[p.to_lower()] = true
 			out.append(p)
 	var says: Dictionary = sp.get("says", {})
+	var says_by: Dictionary = sp.get("says_by", {})
 	for tok in says:
+		if not show_drafts and String(says_by.get(tok, "hand")) != "hand":
+			continue
 		var line: String = String(says[tok]).strip_edges()
 		if line != "" and not seen.has(line.to_lower()):
 			seen[line.to_lower()] = true
@@ -6265,7 +6272,9 @@ func _speak_for(chapter: String, pearl: String) -> Dictionary:
 				for p in (t as Dictionary).get("pearls", []):
 					if String((p as Dictionary).get("pearl", "")) == pearl:
 						out["speak"] = String((p as Dictionary).get("speak", ""))
+						out["speak_by"] = String((p as Dictionary).get("speak_by", "hand"))
 						out["says"] = (p as Dictionary).get("says", {}) if (p as Dictionary).get("says") is Dictionary else {}
+						out["says_by"] = (p as Dictionary).get("says_by", {}) if (p as Dictionary).get("says_by") is Dictionary else {}
 	_speak_cache[key] = out
 	return out
 const WALK_SPACES := ["wall", "alcove", "room", "balcony"]   # balcony: the hallway extends into the body (hand ask)

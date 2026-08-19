@@ -17141,6 +17141,136 @@
      "snap_pyramid_puzzle": "the pyramid, snapped"
     }
    }
+  ],
+  "transformation": [
+   {
+    "map": "Trans_Introduction",
+    "pearl": "trans introduction",
+    "speak": "one matrix does it all. move, turn, grow — the same multiplication. what stays the same is the invariant. homogeneous coordinates: a point and a direction differ by one number.",
+    "speak_by": "claude",
+    "says": {
+     "matrix_4x4_viewer": "sixteen numbers. every move you will ever make",
+     "homogeneous_coordinates": "a point carries a 1, a direction carries a 0 — that is the whole difference",
+     "invariants_demo": "what does not change when everything moves",
+     "transform_composition": "one after another is one. order matters",
+     "rotation_gimbal": "three rings, and one way to lose a degree of freedom",
+     "balance_puzzle": "the transform you cannot see: weight"
+    },
+    "says_by": {
+     "matrix_4x4_viewer": "claude",
+     "homogeneous_coordinates": "claude",
+     "invariants_demo": "claude",
+     "transform_composition": "claude",
+     "rotation_gimbal": "claude",
+     "balance_puzzle": "claude"
+    }
+   },
+   {
+    "map": "Trans_Translation",
+    "pearl": "trans translation",
+    "speak": "to move is to add. nothing turns, nothing grows; the thing arrives as it left.",
+    "speak_by": "claude",
+    "says": {
+     "transform_composition_workbench": "compose: the hand builds the matrix",
+     "z_translation_cube": "plus z: deeper",
+     "y_translation_cube": "plus y: higher",
+     "pick_up_cube": "the first transform is the hand's",
+     "pickup_gate": "a move that opens"
+    },
+    "says_by": {
+     "transform_composition_workbench": "claude",
+     "z_translation_cube": "claude",
+     "y_translation_cube": "claude",
+     "pick_up_cube": "claude",
+     "pickup_gate": "claude"
+    }
+   },
+   {
+    "map": "Trans_AxisDecomposition",
+    "pearl": "trans axisdecomposition",
+    "speak": "one move is three moves. x, then y, then z — and the order does not matter, for translation only.",
+    "speak_by": "claude",
+    "says": {
+     "toruscylinder": "a ring and a tube: the same surface, one axis apart",
+     "translation_cube_demo": "the move, taken apart",
+     "x_translation_cube": "plus x: across"
+    },
+    "says_by": {
+     "toruscylinder": "claude",
+     "translation_cube_demo": "claude",
+     "x_translation_cube": "claude"
+    }
+   },
+   {
+    "map": "Trans_Rotation",
+    "pearl": "trans rotation",
+    "speak": "turning is a move around something. around which axis, from where — the order matters now.",
+    "speak_by": "claude",
+    "says": {
+     "rotate_grid_cubes": "the grid turns and stays a grid",
+     "spin": "turning with nothing to turn around"
+    },
+    "says_by": {
+     "rotate_grid_cubes": "claude",
+     "spin": "claude"
+    }
+   },
+   {
+    "map": "Trans_RotationSpectacle",
+    "pearl": "trans rotationspectacle",
+    "speak": "rotation as spectacle: the tunnel turns, the cake turns, the eye is the thing that moved.",
+    "speak_by": "claude",
+    "says": {
+     "boolean_tunnel": "a tunnel is a solid subtracted, turning",
+     "carousel_cake": "the carousel: everything moves, the centre does not"
+    },
+    "says_by": {
+     "boolean_tunnel": "claude",
+     "carousel_cake": "claude"
+    }
+   },
+   {
+    "map": "Trans_Scale",
+    "pearl": "trans scale",
+    "speak": "to scale is to multiply. bigger is not more; the chair assembled at twice the size is the same chair.",
+    "speak_by": "claude",
+    "says": {
+     "chair_assembly_puzzle": "parts to chair: every piece a transform",
+     "clipboard": "copy, paste — the transform that makes two",
+     "scale_me": "times two. the same, and not"
+    },
+    "says_by": {
+     "chair_assembly_puzzle": "claude",
+     "clipboard": "claude",
+     "scale_me": "claude"
+    }
+   },
+   {
+    "map": "Chamber_Transformation",
+    "pearl": "transformation",
+    "speak": "transformation: one matrix, three moves.",
+    "speak_by": "claude",
+    "says": {
+     "proximity_spawner": "come close — something appears"
+    },
+    "says_by": {
+     "proximity_spawner": "claude"
+    }
+   },
+   {
+    "map": "Trans_Pit",
+    "pearl": "trans pit",
+    "speak": "the pit: push and grow. a transform done to you.",
+    "speak_by": "claude",
+    "says": {
+     "pusher_block": "pushed — translated by the room",
+     "grower_block": "grown — scaled by the room"
+    },
+    "says_by": {
+     "pusher_block": "claude",
+     "grower_block": "claude"
+    }
+   }
   ]
  },
  "kinds": [
@@ -17236,6 +17366,7 @@
      "blurb": "Before the point, infrastructure.",
      "rooms": 4,
      "speak": "the one point. no point without a coordinate system. the clock is already running.",
+     "speak_by": "hand",
      "says": {
       "folding_past": "the clock is already running — the folding past keeps running",
       "frame_counter_display": "the frame counter: the clock is already running",
@@ -17247,6 +17378,18 @@
       "floating_sphere_field": "points, drifting",
       "two_points_line": "two points is a line. it measures. it is a point, it is a laser — here it forms a vector in 3d space",
       "point": "the one point"
+     },
+     "says_by": {
+      "folding_past": "hand",
+      "frame_counter_display": "hand",
+      "origin": "hand",
+      "CoordinateSystem3M": "hand",
+      "you_are_here": "hand",
+      "fontana_puncture": "hand",
+      "interactive_point_origin_force": "hand",
+      "floating_sphere_field": "hand",
+      "two_points_line": "hand",
+      "point": "hand"
      }
     },
     {
@@ -17277,6 +17420,7 @@
      "blurb": "A line connects two points.",
      "rooms": 6,
      "speak": "two points is a line. it measures; it is a laser; it forms a vector in 3d space. parallel, perspective, horizontal, vertical, grid lines. VR hands.",
+     "speak_by": "hand",
      "says": {
       "perspective_lines": "perspective line",
       "parallel_line_puzzle": "parallel line",
@@ -17286,6 +17430,16 @@
       "grabbable_line": "VR hands — the line in the hand",
       "line_builder_3d": "here it forms a vector in 3d space",
       "grid_lines": "grid lines"
+     },
+     "says_by": {
+      "perspective_lines": "hand",
+      "parallel_line_puzzle": "hand",
+      "dgrid": "hand",
+      "line": "hand",
+      "laser_sword": "hand",
+      "grabbable_line": "hand",
+      "line_builder_3d": "hand",
+      "grid_lines": "hand"
      }
     },
     {
@@ -17300,9 +17454,14 @@
      ],
      "blurb": "Now: duration.",
      "speak": "the line is not trace. there is no origin of a trace. all life is encoded — that is enough.",
+     "speak_by": "hand",
      "says": {
       "mystic_writing_pad": "there is no origin of a trace",
       "draw_dot": "all life is encoded — that is enough"
+     },
+     "says_by": {
+      "mystic_writing_pad": "hand",
+      "draw_dot": "hand"
      }
     },
     {
@@ -17319,11 +17478,18 @@
      ],
      "blurb": "The grid quantizes.",
      "speak": "resolution keeps us sane but introduces a debt on either side of the curve: underfitting, overfitting. grid beauty. slave to the rhythm. space filling.",
+     "speak_by": "hand",
      "says": {
       "grid_lines": "grid beauty — slave to the rhythm",
       "room_grammar": "space filling",
       "player_trace": "the trace, gridded",
       "grab_sphere_point_snap": "snap to the grid: resolution keeps us sane"
+     },
+     "says_by": {
+      "grid_lines": "hand",
+      "room_grammar": "hand",
+      "player_trace": "hand",
+      "grab_sphere_point_snap": "hand"
      }
     },
     {
@@ -17349,6 +17515,7 @@
      "blurb": "Three points close a boundary, and now: rigidity.",
      "rooms": 8,
      "speak": "the triangle. everything is made of triangles. the quad, the simplest mesh. the pyramid mesh.",
+     "speak_by": "hand",
      "says": {
       "triangle": "everything is made of triangles",
       "quad": "the quad — the simplest mesh",
@@ -17360,6 +17527,18 @@
       "folded_strip": "the fold",
       "triangle_line_puzzle": "three lines, one triangle",
       "quad_line_puzzle": "four lines, one quad"
+     },
+     "says_by": {
+      "triangle": "hand",
+      "quad": "hand",
+      "parasol_triangle": "hand",
+      "interactivetriangle": "hand",
+      "pythagorean_triangle_angles": "hand",
+      "triangleprofiles": "hand",
+      "draw_triangle_faces": "hand",
+      "folded_strip": "hand",
+      "triangle_line_puzzle": "hand",
+      "quad_line_puzzle": "hand"
      }
     },
     {
@@ -17378,10 +17557,16 @@
      ],
      "blurb": "A trihedron is a geometric configuration where three triangular faces meet at a single vertex, forming a corner of space.",
      "speak": "the pyramid mesh. the cube, the cube world. the fold. interactive cubes.",
+     "speak_by": "hand",
      "says": {
       "pyramid_edit": "the pyramid mesh",
       "grab_trihedron": "three faces in the hand",
       "becoming_catalyst": "interactive cubes — becoming"
+     },
+     "says_by": {
+      "pyramid_edit": "hand",
+      "grab_trihedron": "hand",
+      "becoming_catalyst": "hand"
      }
     },
     {
@@ -17396,9 +17581,14 @@
      ],
      "blurb": "A manipulable quad-based object where you can drag cube corners.",
      "speak": "the cube, the cube world — the fold.",
+     "speak_by": "hand",
      "says": {
       "animatedcubebuilder": "the cube world, built",
       "polyhedron_nets_cube": "the fold — a cube is a net"
+     },
+     "says_by": {
+      "animatedcubebuilder": "hand",
+      "polyhedron_nets_cube": "hand"
      }
     },
     {
@@ -17412,8 +17602,12 @@
      ],
      "blurb": "The first mark.",
      "speak": "primitives, and so on.",
+     "speak_by": "hand",
      "says": {
       "catalyst_target": "primitives — and so on"
+     },
+     "says_by": {
+      "catalyst_target": "hand"
      }
     },
     {
@@ -17446,11 +17640,18 @@
      ],
      "blurb": "Ignorance is not the absence of knowledge but a structural limit.",
      "speak": "primitives, and so on: sphere, plus, star, L, the platonic solids.",
+     "speak_by": "hand",
      "says": {
       "sphere": "the sphere",
       "platonic_grabbables": "the platonic solids, in the hand",
       "truncatedtetrahedron": "a tetrahedron, truncated",
       "hole_with_cones": "a hole, cones"
+     },
+     "says_by": {
+      "sphere": "hand",
+      "platonic_grabbables": "hand",
+      "truncatedtetrahedron": "hand",
+      "hole_with_cones": "hand"
      }
     },
     {
@@ -17465,9 +17666,14 @@
      ],
      "blurb": "A toroidal portal sequence guided by increasing rings approaching π, staging continuity as asymptotic relation rather than arrival.",
      "speak": "portals — and so on.",
+     "speak_by": "hand",
      "says": {
       "achilles_tortoise": "Achilles and the tortoise: resolution, and the debt on either side",
       "combine_portals": "portals"
+     },
+     "says_by": {
+      "achilles_tortoise": "hand",
+      "combine_portals": "hand"
      }
     },
     {
@@ -17487,11 +17693,18 @@
      ],
      "blurb": "Inspired by the Herzog August Bibliothek and Melencolia I, this scene embodies the limit point of geometric aspiration and existential constraint.",
      "speak": "Melencolia: the pyramid, the polyhedron, the frame.",
+     "speak_by": "hand",
      "says": {
       "durer_scene": "Dürer's polyhedron",
       "pyramid": "the pyramid",
       "bigframe": "the frame",
       "snap_pyramid_puzzle": "the pyramid, snapped"
+     },
+     "says_by": {
+      "durer_scene": "hand",
+      "pyramid": "hand",
+      "bigframe": "hand",
+      "snap_pyramid_puzzle": "hand"
      }
     }
    ],
@@ -17524,7 +17737,25 @@
       "transform_composition",
       "balance_puzzle"
      ],
-     "blurb": "Three cubes."
+     "blurb": "Three cubes.",
+     "speak": "one matrix does it all. move, turn, grow — the same multiplication. what stays the same is the invariant. homogeneous coordinates: a point and a direction differ by one number.",
+     "speak_by": "claude",
+     "says": {
+      "matrix_4x4_viewer": "sixteen numbers. every move you will ever make",
+      "homogeneous_coordinates": "a point carries a 1, a direction carries a 0 — that is the whole difference",
+      "invariants_demo": "what does not change when everything moves",
+      "transform_composition": "one after another is one. order matters",
+      "rotation_gimbal": "three rings, and one way to lose a degree of freedom",
+      "balance_puzzle": "the transform you cannot see: weight"
+     },
+     "says_by": {
+      "matrix_4x4_viewer": "claude",
+      "homogeneous_coordinates": "claude",
+      "invariants_demo": "claude",
+      "transform_composition": "claude",
+      "rotation_gimbal": "claude",
+      "balance_puzzle": "claude"
+     }
     },
     {
      "pearl": "trans translation",
@@ -17539,7 +17770,23 @@
       "y_translation_cube",
       "pickup_gate"
      ],
-     "blurb": "Walkways extend over void."
+     "blurb": "Walkways extend over void.",
+     "speak": "to move is to add. nothing turns, nothing grows; the thing arrives as it left.",
+     "speak_by": "claude",
+     "says": {
+      "transform_composition_workbench": "compose: the hand builds the matrix",
+      "z_translation_cube": "plus z: deeper",
+      "y_translation_cube": "plus y: higher",
+      "pick_up_cube": "the first transform is the hand's",
+      "pickup_gate": "a move that opens"
+     },
+     "says_by": {
+      "transform_composition_workbench": "claude",
+      "z_translation_cube": "claude",
+      "y_translation_cube": "claude",
+      "pick_up_cube": "claude",
+      "pickup_gate": "claude"
+     }
     },
     {
      "pearl": "trans axisdecomposition",
@@ -17552,7 +17799,19 @@
       "translation_cube_demo",
       "x_translation_cube"
      ],
-     "blurb": "Translation produces space as navigable extent."
+     "blurb": "Translation produces space as navigable extent.",
+     "speak": "one move is three moves. x, then y, then z — and the order does not matter, for translation only.",
+     "speak_by": "claude",
+     "says": {
+      "toruscylinder": "a ring and a tube: the same surface, one axis apart",
+      "translation_cube_demo": "the move, taken apart",
+      "x_translation_cube": "plus x: across"
+     },
+     "says_by": {
+      "toruscylinder": "claude",
+      "translation_cube_demo": "claude",
+      "x_translation_cube": "claude"
+     }
     },
     {
      "pearl": "trans rotation",
@@ -17564,7 +17823,17 @@
       "rotate_grid_cubes",
       "spin"
      ],
-     "blurb": "Rotation produces space as anisotropic."
+     "blurb": "Rotation produces space as anisotropic.",
+     "speak": "turning is a move around something. around which axis, from where — the order matters now.",
+     "speak_by": "claude",
+     "says": {
+      "rotate_grid_cubes": "the grid turns and stays a grid",
+      "spin": "turning with nothing to turn around"
+     },
+     "says_by": {
+      "rotate_grid_cubes": "claude",
+      "spin": "claude"
+     }
     },
     {
      "pearl": "trans rotationspectacle",
@@ -17576,7 +17845,17 @@
       "boolean_tunnel",
       "carousel_cake"
      ],
-     "blurb": "Two corridors converge on a carousel."
+     "blurb": "Two corridors converge on a carousel.",
+     "speak": "rotation as spectacle: the tunnel turns, the cake turns, the eye is the thing that moved.",
+     "speak_by": "claude",
+     "says": {
+      "boolean_tunnel": "a tunnel is a solid subtracted, turning",
+      "carousel_cake": "the carousel: everything moves, the centre does not"
+     },
+     "says_by": {
+      "boolean_tunnel": "claude",
+      "carousel_cake": "claude"
+     }
     },
     {
      "pearl": "trans scale",
@@ -17589,7 +17868,19 @@
       "clipboard",
       "scale_me"
      ],
-     "blurb": "Scale me."
+     "blurb": "Scale me.",
+     "speak": "to scale is to multiply. bigger is not more; the chair assembled at twice the size is the same chair.",
+     "speak_by": "claude",
+     "says": {
+      "chair_assembly_puzzle": "parts to chair: every piece a transform",
+      "clipboard": "copy, paste — the transform that makes two",
+      "scale_me": "times two. the same, and not"
+     },
+     "says_by": {
+      "chair_assembly_puzzle": "claude",
+      "clipboard": "claude",
+      "scale_me": "claude"
+     }
     },
     {
      "pearl": "transformation",
@@ -17600,7 +17891,15 @@
      "tokens": [
       "proximity_spawner"
      ],
-     "blurb": "The crawler folds flat when your shrink ray hits it."
+     "blurb": "The crawler folds flat when your shrink ray hits it.",
+     "speak": "transformation: one matrix, three moves.",
+     "speak_by": "claude",
+     "says": {
+      "proximity_spawner": "come close — something appears"
+     },
+     "says_by": {
+      "proximity_spawner": "claude"
+     }
     },
     {
      "pearl": "trans pit",
@@ -17612,7 +17911,17 @@
       "pusher_block",
       "grower_block"
      ],
-     "blurb": "Three transformations, three ways to die."
+     "blurb": "Three transformations, three ways to die.",
+     "speak": "the pit: push and grow. a transform done to you.",
+     "speak_by": "claude",
+     "says": {
+      "pusher_block": "pushed — translated by the room",
+      "grower_block": "grown — scaled by the room"
+     },
+     "says_by": {
+      "pusher_block": "claude",
+      "grower_block": "claude"
+     }
     }
    ],
    "phase": "F_order",
