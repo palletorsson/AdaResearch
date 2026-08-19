@@ -16,6 +16,7 @@ REPO = Path(__file__).resolve().parent.parent
 SRC = REPO / "ada_run"
 DST = REPO / "commons" / "data" / "museum"
 FILES = ["em_plan.json", "em_bake.json", "em_control.json", "em_overrides.json"]
+EXTRA = {"trunk_branches.json": REPO / "commons" / "data" / "trunk_branches.json"}   # the pearls + their speak
 def main() -> int:
     DST.mkdir(parents=True, exist_ok=True)
     (DST / ".gdignore").unlink(missing_ok=True)   # must NOT be ignored by Godot
@@ -26,6 +27,9 @@ def main() -> int:
             shutil.copyfile(s, DST / f); shipped.append(f"{f} ({s.stat().st_size // 1024} KB)")
         else:
             print(f"  missing: {s}")
+    for name, src in EXTRA.items():
+        if src.exists():
+            shutil.copyfile(src, DST / name); shipped.append(f"{name} ({src.stat().st_size // 1024} KB)")
     print("EM SHIP: " + ", ".join(shipped) + f" -> {DST.relative_to(REPO)}")
     return 0 if len(shipped) == len(FILES) else 1
 if __name__ == "__main__":

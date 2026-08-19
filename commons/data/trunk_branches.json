@@ -17014,17 +17014,132 @@
    {
     "map": "Point_One",
     "pearl": "point",
-    "rooms": 4
+    "rooms": 4,
+    "speak": "the one point. no point without a coordinate system. the clock is already running.",
+    "says": {
+     "folding_past": "the clock is already running — the folding past keeps running",
+     "frame_counter_display": "the frame counter: the clock is already running",
+     "origin": "point zero. origin, (0,0,0), the root of all vectors, Vector.ZERO — the one point",
+     "CoordinateSystem3M": "no points without a coordinate system",
+     "you_are_here": "you are here — the one point",
+     "fontana_puncture": "the one point, pierced",
+     "interactive_point_origin_force": "a point that becomes a force",
+     "floating_sphere_field": "points, drifting",
+     "two_points_line": "two points is a line. it measures. it is a point, it is a laser — here it forms a vector in 3d space",
+     "point": "the one point"
+    }
    },
    {
     "map": "Point_Lines",
     "pearl": "lines",
-    "rooms": 6
+    "rooms": 6,
+    "speak": "two points is a line. it measures; it is a laser; it forms a vector in 3d space. parallel, perspective, horizontal, vertical, grid lines. VR hands.",
+    "says": {
+     "perspective_lines": "perspective line",
+     "parallel_line_puzzle": "parallel line",
+     "dgrid": "grid lines",
+     "line": "two points is a line — it measures",
+     "laser_sword": "a line is a laser",
+     "grabbable_line": "VR hands — the line in the hand",
+     "line_builder_3d": "here it forms a vector in 3d space",
+     "grid_lines": "grid lines"
+    }
    },
    {
     "map": "Point_Triangle_Context",
     "pearl": "triangle context",
-    "rooms": 8
+    "rooms": 8,
+    "speak": "the triangle. everything is made of triangles. the quad, the simplest mesh. the pyramid mesh.",
+    "says": {
+     "triangle": "everything is made of triangles",
+     "quad": "the quad — the simplest mesh",
+     "parasol_triangle": "everything is made of triangles",
+     "interactivetriangle": "the triangle, in the hand",
+     "pythagorean_triangle_angles": "the triangle measures",
+     "triangleprofiles": "triangles, profiled",
+     "draw_triangle_faces": "faces are triangles",
+     "folded_strip": "the fold",
+     "triangle_line_puzzle": "three lines, one triangle",
+     "quad_line_puzzle": "four lines, one quad"
+    }
+   },
+   {
+    "map": "Point_Trace",
+    "pearl": "trace",
+    "speak": "the line is not trace. there is no origin of a trace. all life is encoded — that is enough.",
+    "says": {
+     "mystic_writing_pad": "there is no origin of a trace",
+     "draw_dot": "all life is encoded — that is enough"
+    }
+   },
+   {
+    "map": "Point_Line_Grid",
+    "pearl": "line grid",
+    "speak": "resolution keeps us sane but introduces a debt on either side of the curve: underfitting, overfitting. grid beauty. slave to the rhythm. space filling.",
+    "says": {
+     "grid_lines": "grid beauty — slave to the rhythm",
+     "room_grammar": "space filling",
+     "player_trace": "the trace, gridded",
+     "grab_sphere_point_snap": "snap to the grid: resolution keeps us sane"
+    }
+   },
+   {
+    "map": "Primitives_Polythedra",
+    "pearl": "polythedra",
+    "speak": "the pyramid mesh. the cube, the cube world. the fold. interactive cubes.",
+    "says": {
+     "pyramid_edit": "the pyramid mesh",
+     "grab_trihedron": "three faces in the hand",
+     "becoming_catalyst": "interactive cubes — becoming"
+    }
+   },
+   {
+    "map": "Point_Animatedcube",
+    "pearl": "animatedcube",
+    "speak": "the cube, the cube world — the fold.",
+    "says": {
+     "animatedcubebuilder": "the cube world, built",
+     "polyhedron_nets_cube": "the fold — a cube is a net"
+    }
+   },
+   {
+    "map": "Chamber_Primitives",
+    "pearl": "primitives",
+    "speak": "primitives, and so on.",
+    "says": {
+     "catalyst_target": "primitives — and so on"
+    }
+   },
+   {
+    "map": "Primitives_Ignorance",
+    "pearl": "ignorance",
+    "speak": "primitives, and so on: sphere, plus, star, L, the platonic solids.",
+    "says": {
+     "sphere": "the sphere",
+     "platonic_grabbables": "the platonic solids, in the hand",
+     "truncatedtetrahedron": "a tetrahedron, truncated",
+     "hole_with_cones": "a hole, cones"
+    }
+   },
+   {
+    "map": "Primitives_Portals",
+    "pearl": "portals",
+    "speak": "portals — and so on.",
+    "says": {
+     "achilles_tortoise": "Achilles and the tortoise: resolution, and the debt on either side",
+     "combine_portals": "portals"
+    }
+   },
+   {
+    "map": "Primitives_Melencolia",
+    "pearl": "melencolia",
+    "speak": "Melencolia: the pyramid, the polyhedron, the frame.",
+    "says": {
+     "durer_scene": "Dürer's polyhedron",
+     "pyramid": "the pyramid",
+     "bigframe": "the frame",
+     "snap_pyramid_puzzle": "the pyramid, snapped"
+    }
    }
   ]
  },
@@ -17119,7 +17234,20 @@
       "lab_room"
      ],
      "blurb": "Before the point, infrastructure.",
-     "rooms": 4
+     "rooms": 4,
+     "speak": "the one point. no point without a coordinate system. the clock is already running.",
+     "says": {
+      "folding_past": "the clock is already running — the folding past keeps running",
+      "frame_counter_display": "the frame counter: the clock is already running",
+      "origin": "point zero. origin, (0,0,0), the root of all vectors, Vector.ZERO — the one point",
+      "CoordinateSystem3M": "no points without a coordinate system",
+      "you_are_here": "you are here — the one point",
+      "fontana_puncture": "the one point, pierced",
+      "interactive_point_origin_force": "a point that becomes a force",
+      "floating_sphere_field": "points, drifting",
+      "two_points_line": "two points is a line. it measures. it is a point, it is a laser — here it forms a vector in 3d space",
+      "point": "the one point"
+     }
     },
     {
      "pearl": "lines",
@@ -17147,7 +17275,18 @@
       "laser_exploding_sphere"
      ],
      "blurb": "A line connects two points.",
-     "rooms": 6
+     "rooms": 6,
+     "speak": "two points is a line. it measures; it is a laser; it forms a vector in 3d space. parallel, perspective, horizontal, vertical, grid lines. VR hands.",
+     "says": {
+      "perspective_lines": "perspective line",
+      "parallel_line_puzzle": "parallel line",
+      "dgrid": "grid lines",
+      "line": "two points is a line — it measures",
+      "laser_sword": "a line is a laser",
+      "grabbable_line": "VR hands — the line in the hand",
+      "line_builder_3d": "here it forms a vector in 3d space",
+      "grid_lines": "grid lines"
+     }
     },
     {
      "pearl": "trace",
@@ -17159,7 +17298,12 @@
       "mystic_writing_pad",
       "draw_dot"
      ],
-     "blurb": "Now: duration."
+     "blurb": "Now: duration.",
+     "speak": "the line is not trace. there is no origin of a trace. all life is encoded — that is enough.",
+     "says": {
+      "mystic_writing_pad": "there is no origin of a trace",
+      "draw_dot": "all life is encoded — that is enough"
+     }
     },
     {
      "pearl": "line grid",
@@ -17173,7 +17317,14 @@
       "player_trace",
       "grid_lines"
      ],
-     "blurb": "The grid quantizes."
+     "blurb": "The grid quantizes.",
+     "speak": "resolution keeps us sane but introduces a debt on either side of the curve: underfitting, overfitting. grid beauty. slave to the rhythm. space filling.",
+     "says": {
+      "grid_lines": "grid beauty — slave to the rhythm",
+      "room_grammar": "space filling",
+      "player_trace": "the trace, gridded",
+      "grab_sphere_point_snap": "snap to the grid: resolution keeps us sane"
+     }
     },
     {
      "pearl": "triangle context",
@@ -17196,7 +17347,20 @@
       "quad_line_puzzle"
      ],
      "blurb": "Three points close a boundary, and now: rigidity.",
-     "rooms": 8
+     "rooms": 8,
+     "speak": "the triangle. everything is made of triangles. the quad, the simplest mesh. the pyramid mesh.",
+     "says": {
+      "triangle": "everything is made of triangles",
+      "quad": "the quad — the simplest mesh",
+      "parasol_triangle": "everything is made of triangles",
+      "interactivetriangle": "the triangle, in the hand",
+      "pythagorean_triangle_angles": "the triangle measures",
+      "triangleprofiles": "triangles, profiled",
+      "draw_triangle_faces": "faces are triangles",
+      "folded_strip": "the fold",
+      "triangle_line_puzzle": "three lines, one triangle",
+      "quad_line_puzzle": "four lines, one quad"
+     }
     },
     {
      "pearl": "polythedra",
@@ -17212,7 +17376,13 @@
       "pyramid_edit",
       "tentacle_placer"
      ],
-     "blurb": "A trihedron is a geometric configuration where three triangular faces meet at a single vertex, forming a corner of space."
+     "blurb": "A trihedron is a geometric configuration where three triangular faces meet at a single vertex, forming a corner of space.",
+     "speak": "the pyramid mesh. the cube, the cube world. the fold. interactive cubes.",
+     "says": {
+      "pyramid_edit": "the pyramid mesh",
+      "grab_trihedron": "three faces in the hand",
+      "becoming_catalyst": "interactive cubes — becoming"
+     }
     },
     {
      "pearl": "animatedcube",
@@ -17224,7 +17394,12 @@
       "animatedcubebuilder",
       "polyhedron_nets_cube"
      ],
-     "blurb": "A manipulable quad-based object where you can drag cube corners."
+     "blurb": "A manipulable quad-based object where you can drag cube corners.",
+     "speak": "the cube, the cube world — the fold.",
+     "says": {
+      "animatedcubebuilder": "the cube world, built",
+      "polyhedron_nets_cube": "the fold — a cube is a net"
+     }
     },
     {
      "pearl": "primitives",
@@ -17235,7 +17410,11 @@
      "tokens": [
       "catalyst_target"
      ],
-     "blurb": "The first mark."
+     "blurb": "The first mark.",
+     "speak": "primitives, and so on.",
+     "says": {
+      "catalyst_target": "primitives — and so on"
+     }
     },
     {
      "pearl": "ignorance",
@@ -17265,7 +17444,14 @@
       "capsule_radials_rings",
       "prism_block"
      ],
-     "blurb": "Ignorance is not the absence of knowledge but a structural limit."
+     "blurb": "Ignorance is not the absence of knowledge but a structural limit.",
+     "speak": "primitives, and so on: sphere, plus, star, L, the platonic solids.",
+     "says": {
+      "sphere": "the sphere",
+      "platonic_grabbables": "the platonic solids, in the hand",
+      "truncatedtetrahedron": "a tetrahedron, truncated",
+      "hole_with_cones": "a hole, cones"
+     }
     },
     {
      "pearl": "portals",
@@ -17277,7 +17463,12 @@
       "achilles_tortoise",
       "combine_portals"
      ],
-     "blurb": "A toroidal portal sequence guided by increasing rings approaching π, staging continuity as asymptotic relation rather than arrival."
+     "blurb": "A toroidal portal sequence guided by increasing rings approaching π, staging continuity as asymptotic relation rather than arrival.",
+     "speak": "portals — and so on.",
+     "says": {
+      "achilles_tortoise": "Achilles and the tortoise: resolution, and the debt on either side",
+      "combine_portals": "portals"
+     }
     },
     {
      "pearl": "melencolia",
@@ -17294,7 +17485,14 @@
       "diamondtoruscollection",
       "pyramidlong"
      ],
-     "blurb": "Inspired by the Herzog August Bibliothek and Melencolia I, this scene embodies the limit point of geometric aspiration and existential constraint."
+     "blurb": "Inspired by the Herzog August Bibliothek and Melencolia I, this scene embodies the limit point of geometric aspiration and existential constraint.",
+     "speak": "Melencolia: the pyramid, the polyhedron, the frame.",
+     "says": {
+      "durer_scene": "Dürer's polyhedron",
+      "pyramid": "the pyramid",
+      "bigframe": "the frame",
+      "snap_pyramid_puzzle": "the pyramid, snapped"
+     }
     }
    ],
    "phase": "F_order",

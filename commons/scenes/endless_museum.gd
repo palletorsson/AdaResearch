@@ -2589,6 +2589,7 @@ func _build_segment() -> void:
 				(", %d prop(s) moved aside" % moved) if moved > 0 else ""])
 	_apply_hand_adds(seg, zbase, seg_seq)
 	_number_places(seg, seg_seq, String(deal.get("pearl", "")) if deal is Dictionary else "")
+	_speak_plaque(seg, seg_seq, String(deal.get("pearl", "")) if deal is Dictionary else "", w)
 	# THE AS-BUILT PLAN (2026-08-18). Everything the assembler just decided —
 	# which cells are floor, wall or a body's seal, where every body finally
 	# stands and what it is numbered, every card, the gate, the courts, rooms
@@ -2876,6 +2877,63 @@ func _build_side_rooms(seg: Node3D, solid: StaticBody3D, w: int, tile_h: int,
 ## `primitives:0007` — chapter and a four-digit place — and is printed on the
 ## showing's card or on a small plaque at the body's foot. Ledger:
 ## ada_run/em_inventory.json.
+## The pearl's line, on the hall side of the entry wall beside the door — the
+## first thing read after the threshold. A plaque the size of a museum text panel.
+func _speak_plaque(seg: Node3D, chapter: String, pearl: String, w: int) -> void:
+	var sp: Dictionary = _speak_for(chapter, pearl)
+	var text: String = String(sp.get("speak", ""))
+	if text == "":
+		return
+	var panel := MeshInstance3D.new()
+	var qm := QuadMesh.new()
+	qm.size = Vector2(1.6, 0.5)
+	panel.mesh = qm
+	var qmat := StandardMaterial3D.new()
+	qmat.albedo_color = Color(0.955, 0.95, 0.93)
+	qmat.roughness = 0.6
+	qmat.emission_enabled = true
+	qmat.emission = Color(0.9, 0.89, 0.85)
+	qmat.emission_energy_multiplier = 0.25
+	panel.material_override = qmat
+	# a LECTERN inside the door, left of the path, tilted up to the eye: the
+	# wall is the showings', the plaque stands on its own (a 1.1 m post)
+	panel.name = "SpeakPlaque"
+	var post := MeshInstance3D.new()
+	var pm := BoxMesh.new(); pm.size = Vector3(0.06, 1.05, 0.06)
+	post.mesh = pm
+	var post_mat := StandardMaterial3D.new(); post_mat.albedo_color = Color(0.22, 0.21, 0.2); post_mat.roughness = 0.5
+	post.material_override = post_mat
+	post.position = Vector3(float(w) / 2.0 + 2.6, 0.525, VESTIBULE_H + 2.6)
+	seg.add_child(post)
+	panel.position = Vector3(float(w) / 2.0 + 2.6, 1.18, VESTIBULE_H + 2.6)
+	panel.rotation_degrees = Vector3(-28.0, 180.0, 0.0)    # faces the door, tilted up
+	seg.add_child(panel)
+	var lbl := Label3D.new()
+	var words: PackedStringArray = text.split(" ")
+	var lines: Array = []
+	var cur := ""
+	for wd in words:
+		if (cur + " " + wd).length() > 34 and cur != "":
+			lines.append(cur)
+			cur = wd
+		else:
+			cur = (cur + " " + wd).strip_edges()
+	if cur != "":
+		lines.append(cur)
+	lbl.text = "%s · %s
+" % [chapter, pearl] + "
+".join(lines.slice(0, 6))
+	lbl.font_size = 58
+	lbl.pixel_size = 0.0010
+	lbl.modulate = Color(0.11, 0.10, 0.09)
+	lbl.outline_size = 0
+	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	lbl.width = 1500
+	lbl.autowrap_mode = TextServer.AUTOWRAP_WORD
+	lbl.position = Vector3(-0.74, 0.0, 0.006)
+	panel.add_child(lbl)
+
 func _number_places(seg: Node3D, chapter: String, pearl: String) -> void:
 	if chapter == "":
 		return
@@ -2953,6 +3011,25 @@ func _number_places(seg: Node3D, chapter: String, pearl: String) -> void:
 			var plate := Label3D.new()
 			plate.text = id + "
 " + tok.left(18)
+			var say: String = String((_speak_for(chapter, pearl).get("says", {}) as Dictionary).get(tok, ""))
+			if say != "":
+				# textD on the plaque: the body's own line, wrapped to the card
+				var words: PackedStringArray = say.split(" ")
+				var lines: Array = []
+				var cur := ""
+				for wd in words:
+					if (cur + " " + wd).length() > 30 and cur != "":
+						lines.append(cur)
+						cur = wd
+					else:
+						cur = (cur + " " + wd).strip_edges()
+				if cur != "":
+					lines.append(cur)
+				plate.text += "
+" + "
+".join(lines.slice(0, 3))
+				plate.font_size = 30
+				plate.pixel_size = 0.0010
 			plate.font_size = 44
 			# 44 x 0.0010 = 44 mm a line; "primitives:0055" is 15 characters, so
 			# about 330 mm across a 460 mm plaque — it fits, which the first
@@ -6254,6 +6331,31 @@ func _edit_fine(dx: float, dy: float, dz: float) -> void:
 ## Uniform scale ruling. Multiplicative steps so + then - is identity;
 ## snapped to 0.05 in the file; 1.0 drops the key (no ruling).
 const TRUNK_BRANCHES := "res://commons/data/trunk_branches.json"
+
+## textD — THE SPEAK (2026-08-19). Palle: "let's think about textD as short
+## speak, following the pearls…" A short line per pearl and per body, stored
+## WITH the pearl (trunk_branches pearls[].speak / .says, tools/em_speak.py).
+## The museum says it: the body's line under its number on the standing
+## plaque, the pearl's line on a plaque at the segment's threshold.
+var _speak_cache: Dictionary = {}     # "chapter|pearl" -> {speak, says}
+func _speak_for(chapter: String, pearl: String) -> Dictionary:
+	var key := "%s|%s" % [chapter, pearl]
+	if _speak_cache.has(key):
+		return _speak_cache[key]
+	var out: Dictionary = {"speak": "", "says": {}}
+	var path: String = _shipped(TRUNK_BRANCHES)
+	if FileAccess.file_exists(path):
+		var doc: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+		if doc is Dictionary:
+			for t in (doc as Dictionary).get("trunk", []):
+				if String((t as Dictionary).get("node", "")) != chapter:
+					continue
+				for p in (t as Dictionary).get("pearls", []):
+					if String((p as Dictionary).get("pearl", "")) == pearl:
+						out["speak"] = String((p as Dictionary).get("speak", ""))
+						out["says"] = (p as Dictionary).get("says", {}) if (p as Dictionary).get("says") is Dictionary else {}
+	_speak_cache[key] = out
+	return out
 const WALK_SPACES := ["wall", "alcove", "room", "balcony"]   # balcony: the hallway extends into the body (hand ask)
 
 

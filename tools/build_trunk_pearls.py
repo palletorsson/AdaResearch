@@ -139,6 +139,10 @@ def seed(trunk_doc: dict) -> dict:
                         p["index"] = int(e["order"])
                     if e.get("rooms") is not None:
                         p["rooms"] = int(e["rooms"])       # how much of the tile this pearl gets (tools/em_rooms.py)
+                    if e.get("speak"):
+                        p["speak"] = str(e["speak"])        # textD: the pearl's short line (tools/em_speak.py)
+                    if e.get("says"):
+                        p["says"] = dict(e["says"])          # textD: a line per body
                     if e.get("blurb"):
                         p["blurb"] = str(e["blurb"])
                     p["tokens"] = [t for t in p["tokens"] if t not in set(e.get("tokens_remove", []))]
