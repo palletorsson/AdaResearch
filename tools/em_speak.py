@@ -125,6 +125,37 @@ def draft(d: dict, node_filter: str = "") -> dict:
     return {"pearls": n_pearls, "says": n_says}
 
 
+def export_md(d: dict) -> str:
+    """The speak as a book: chapter line, then each pearl's line and its bodies' lines, in string order.
+    Provenance in the margin so the book knows whose sentence it sets."""
+    spine = []
+    try:
+        cs = json.loads((REPO / "commons" / "maps" / "curriculum_spine.json").read_text(encoding="utf-8"))
+        spine = [s.get("id") if isinstance(s, dict) else s for s in (cs.get("spine", {}).get("sequences") or cs.get("sequences") or [])]
+    except Exception:
+        pass
+    nodes = {t.get("node"): t for t in d.get("trunk", [])}
+    order = [n for n in spine if n in nodes] + [n for n in nodes if n not in spine]
+    out = ["# SPEAK — textD of the endless museum", "", "_one line per chapter, per pearl, per body; [hand] Palle, [claude] written in his register, [draft] the corpus's own words_", ""]
+    for n in order:
+        t = nodes[n]
+        out.append(f"## {n}")
+        if t.get("speak"):
+            out.append(f"> {t['speak']}  " + chr(10) + f"> `[{t.get('speak_by', 'hand')}]`")
+        out.append("")
+        for p in t.get("pearls", []):
+            if p.get("dropped"):
+                continue
+            out.append(f"### {p.get('pearl')}")
+            if p.get("speak"):
+                out.append(f"{p['speak']}  `[{p.get('speak_by', 'hand')}]`")
+            by = p.get("says_by") or {}
+            for tok, line in (p.get("says") or {}).items():
+                out.append(f"- **{tok}** — {line} `[{by.get(tok, 'hand')}]`")
+            out.append("")
+    return chr(10).join(out) + chr(10)
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("node", nargs="?")
@@ -136,9 +167,19 @@ def main() -> int:
     ap.add_argument("--no-reseed", action="store_true")
     ap.add_argument("--by", default="hand", help="provenance of the lines written: hand (Palle) | claude")
     ap.add_argument("--chapter-speak", help="the CHAPTER's own line (hung first, on its first pearl's walls)")
+    ap.add_argument("--export", help="write every chapter's speak as one markdown (the book's textD)")
+    ap.add_argument("--export-copy", help="a second path for the same markdown (the encyclopedia's public/)")
     a = ap.parse_args()
     d = json.loads(TRUNK.read_text(encoding="utf-8"))
     changed = False
+    if a.export:
+        md = export_md(d)
+        for pth in [a.export, a.export_copy]:
+            if pth:
+                Path(pth).parent.mkdir(parents=True, exist_ok=True)
+                Path(pth).write_text(md, encoding="utf-8")
+        print(f"exported {md.count(chr(10))} lines → {a.export}" + (f" and {a.export_copy}" if a.export_copy else ""))
+        return 0
     if a.node and a.chapter_speak is not None:
         d.setdefault("hand_nodes", {})[a.node] = {"speak": a.chapter_speak, "speak_by": a.by}
         changed = True
