@@ -20,6 +20,11 @@ extends Node3D
 ##   wheel            zoom                        MMB drag / arrows   pan
 ##   B                bake this pearl             W              walk it (endless_museum.tscn)
 ##   F                frame the hall
+##
+## KINDS (slice 2): bodies (plan rows) · plinths, benches, props, showings
+## (the plan row's DRESSING rules: offset / rotation / remove / text) · DNA
+## wall variants (wall_runs: nudge along the wall, drop / restore a value).
+## Left-drag on empty ground rotates the iso view; middle-drag pans.
 
 const MUSEUM_SCENE := "res://commons/scenes/endless_museum.tscn"
 const PLAN := "res://ada_run/em_plan.json"
@@ -55,10 +60,13 @@ var _drag_start_pos: Vector3 = Vector3.ZERO
 var _placing: String = ""          # a palette token waiting for a cell
 var _orbit: bool = false
 var _iso: bool = false               # I: orthographic isometric — heights visible, grid still exact
+var _iso_yaw: float = -2.356           # from the south-west, the walk going up-right
+var _iso_pitch: float = 0.85           # radians above the horizon
 var _config_edit: LineEdit
 var _orbit_yaw: float = 0.6
 var _orbit_pitch: float = -0.9
 var _pan_drag: bool = false
+var _orbit_drag: bool = false          # left-drag on empty ground: turn the iso view
 var _busy: bool = false
 var _undo: Array = []              # snapshots of the pearl's artifacts list
 var _redo: Array = []
@@ -187,7 +195,7 @@ func _build_hud() -> void:
 	_hud.add_child(_config_edit)
 	_refused_label = Label.new(); _refused_label.position = Vector2(260, 100); _refused_label.add_theme_color_override("font_color", Color(1.0, 0.55, 0.5)); _hud.add_child(_refused_label)
 	_hint = Label.new()
-	_hint.text = "click select · drag move (Ctrl fine) · R/Shift+R rotate · +/- scale · P plinth · [ ] plinth height · C axis · K config · Del remove · Z/Y undo/redo · G overlay · I iso · O orbit · F frame · B bake · W walk"
+	_hint.text = "click select · drag move (Ctrl fine) · left-drag on ground: turn iso · R rotate · +/- scale · P/[ ] plinth · C axis · K config/text · PgUp/PgDn height · Del remove · Home clear rule · Z/Y undo · G overlay · I iso · F frame · B bake · W walk"
 	_hint.add_theme_font_size_override("font_size", 12)
 	_hint.add_theme_color_override("font_color", Color(0.75, 0.75, 0.8))
 	_hud.add_child(_hint)
@@ -295,20 +303,31 @@ func _records() -> Array:
 	var out: Array = []
 	for r in (_museum.get("_edit_records") as Array):
 		var rd: Dictionary = r
-		if rd.has("kind"):
-			continue                      # props, furniture, showings, plinths: not this slice
-		var n: Node = rd.get("node")
-		if n == null or not is_instance_valid(n):
+		var nv: Variant = rd.get("node")
+		if not is_instance_valid(nv):          # a freed node cannot even be assigned to a typed var
+			continue
+		if (nv as Node).is_queued_for_deletion():
 			continue
 		out.append(rd)
 	return out
+
+func _kind(r: Dictionary) -> String:
+	return String(r.get("kind", "")) if r.has("kind") else "body"
+
+const KIND_COLOR := {"body": Color(0.2, 0.9, 1.0), "plinth": Color(0.85, 0.65, 0.35), "furniture": Color(0.55, 0.9, 0.45),
+	"prop": Color(0.9, 0.55, 0.9), "showing": Color(0.95, 0.9, 0.5), "variant": Color(1.0, 0.5, 0.35)}
 
 func _report() -> void:
 	var recs: Array = _records()
 	var refused: Array = _museum.get("_seg_refused") if _museum != null else []
 	var row: Dictionary = _row()
-	_status.text = "%s · %s · %s · %d bodies in the hall · %d plan rows · %d rooms" % [
-		_chapter, _pearl, _map, recs.size(), (row.get("artifacts", []) as Array).size(), int(row.get("rooms", 0))]
+	var counts: Dictionary = {}
+	for r in recs:
+		counts[_kind(r)] = int(counts.get(_kind(r), 0)) + 1
+	_status.text = "%s · %s · %s · %d bodies · %d plinths · %d furniture · %d props · %d showings · %d variants · %d plan rows · %d rooms" % [
+		_chapter, _pearl, _map, int(counts.get("body", 0)), int(counts.get("plinth", 0)), int(counts.get("furniture", 0)),
+		int(counts.get("prop", 0)), int(counts.get("showing", 0)), int(counts.get("variant", 0)),
+		(row.get("artifacts", []) as Array).size(), int(row.get("rooms", 0))]
 	var lines: Array = []
 	for r in refused:
 		var rd: Dictionary = r
@@ -343,7 +362,7 @@ func _apply_cam() -> void:
 		# entrance side (south-west), the walk going up-right.
 		_cam.projection = Camera3D.PROJECTION_ORTHOGONAL
 		_cam.size = _cam_size
-		var dir := Vector3(-0.55, 0.9, -0.55).normalized()
+		var dir := Vector3(sin(_iso_yaw) * cos(_iso_pitch), sin(_iso_pitch), cos(_iso_yaw) * cos(_iso_pitch)).normalized()
 		_cam.global_position = _cam_target + dir * 80.0
 		_cam.look_at(_cam_target, Vector3.UP)
 	else:
@@ -351,6 +370,25 @@ func _apply_cam() -> void:
 		_cam.size = _cam_size
 		_cam.global_position = _cam_target + Vector3(0, 60, 0)
 		_cam.look_at(_cam_target, Vector3(0, 0, 1))    # +z (the walk) points UP the screen
+
+func _mouse_plane(mp: Vector2, y: float) -> Vector3:
+	var o: Vector3 = _cam.project_ray_origin(mp)
+	var d: Vector3 = _cam.project_ray_normal(mp)
+	if absf(d.y) < 1e-4:
+		return o
+	var t: float = (y - o.y) / d.y
+	return o + d * t
+
+func _wall_normal_of(r: Dictionary) -> Vector3:
+	var na: Array = r.get("normal", [])
+	if na.size() >= 3:
+		return Vector3(float(na[0]), 0.0, float(na[2])).normalized()
+	# a showing/prop record: face from the node's yaw (it faces out of the wall)
+	var n: Node3D = r.get("node") as Node3D
+	var f: Vector3 = -n.global_transform.basis.z
+	if absf(f.x) > absf(f.z):
+		return Vector3(signf(f.x), 0, 0)
+	return Vector3(0, 0, signf(f.z) if absf(f.z) > 0.01 else 1.0)
 
 func _mouse_floor(mp: Vector2) -> Vector3:
 	var o: Vector3 = _cam.project_ray_origin(mp)
@@ -368,6 +406,8 @@ func _record_at(mp: Vector2) -> Dictionary:
 	for r in _records():
 		var n: Node3D = r.get("node") as Node3D
 		var sp: Vector2 = _cam.unproject_position(n.global_position + Vector3(0, 0.3, 0))
+		if _kind(r) != "body" and _kind(r) != "plinth" and _kind(r) != "furniture":
+			sp = _cam.unproject_position(n.global_position)
 		var d: float = sp.distance_to(mp)
 		if d < best_d:
 			best_d = d
@@ -375,10 +415,15 @@ func _record_at(mp: Vector2) -> Dictionary:
 	return best
 
 func _key_of(r: Dictionary) -> String:
+	var kind: String = _kind(r)
+	if kind == "variant":
+		return "variant|%d|%d" % [int(r.get("run", -1)), int(r.get("vi", -1))]
+	if kind != "body" and kind != "plinth":
+		return "%s|%s|%d" % [kind, String(r.get("token", "")), int(r.get("index", -1))]
 	var tc: Array = r.get("tile_cell", r.get("from", []))
 	if tc.size() < 2:
 		return String(r.get("token", ""))
-	return "%s|%d|%d" % [String(r.get("token", "")), int(tc[0]), int(tc[1])]
+	return "%s|%s|%d|%d" % [kind, String(r.get("token", "")), int(tc[0]), int(tc[1])]
 
 func _reselect() -> void:
 	_sel = {}
@@ -398,34 +443,56 @@ func _refresh_marks() -> void:
 	for r in _records():
 		var n: Node3D = r.get("node") as Node3D
 		var sel: bool = not _sel.is_empty() and _sel.get("node") == n
+		var kind: String = _kind(r)
+		var kc: Color = KIND_COLOR.get(kind, Color(0.8, 0.8, 0.8))
 		var lbl := Label3D.new()
-		lbl.text = String(r.get("token", ""))
+		lbl.text = String(r.get("token", "")) if kind == "body" else ("%s·%s" % [kind[0], String(r.get("token", ""))] if kind != "showing" else "s·%d" % int(r.get("index", 0)))
 		lbl.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 		lbl.fixed_size = true
 		lbl.pixel_size = 0.0007
 		lbl.font_size = 30
 		lbl.outline_size = 7
 		lbl.no_depth_test = true
-		lbl.modulate = Color(1, 0.85, 0.3) if sel else Color(0.95, 0.97, 1.0)
+		lbl.modulate = Color(1, 0.85, 0.3) if sel else (Color(0.95, 0.97, 1.0) if kind == "body" else kc)
+		if kind != "body":
+			lbl.font_size = 22
 		lbl.outline_modulate = Color(0, 0, 0, 0.9)
 		lbl.position = n.global_position + Vector3(0, 2.4, 0.55)   # a little north of the ring, so ring and name both read
 		_marks.add_child(lbl)
 		var ring := MeshInstance3D.new()
-		var tm := TorusMesh.new(); tm.inner_radius = 0.34; tm.outer_radius = 0.46; tm.rings = 24; tm.ring_segments = 8
+		var tm := TorusMesh.new(); tm.inner_radius = 0.34 if kind == "body" else 0.16; tm.outer_radius = 0.46 if kind == "body" else 0.24; tm.rings = 24; tm.ring_segments = 8
 		ring.mesh = tm
 		var mat := StandardMaterial3D.new()
 		mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-		mat.albedo_color = Color(1, 0.8, 0.2) if sel else Color(0.2, 0.9, 1.0)
+		mat.albedo_color = Color(1, 0.8, 0.2) if sel else kc
 		mat.no_depth_test = true
 		ring.material_override = mat
-		ring.position = Vector3(n.global_position.x, 0.06, n.global_position.z)
+		ring.position = Vector3(n.global_position.x, 0.06 if kind in ["body", "plinth", "furniture"] else n.global_position.y, n.global_position.z)
 		_marks.add_child(ring)
 
 func _show_selection() -> void:
 	if _sel.is_empty() or not is_instance_valid(_sel.get("node")):
 		_sel_label.text = "" if _placing == "" else ("placing %s — click a cell" % _placing)
 		return
-	var n: Node3D = _sel.get("node") as Node3D
+	var nv0: Variant = _sel.get("node")
+	var n: Node3D = nv0 as Node3D
+	var kind: String = _kind(_sel)
+	if kind != "body":
+		var rule: Dictionary = _dressing_rule_for(_sel)
+		match kind:
+			"variant":
+				_sel_label.text = "DNA variant %s · %s = %s · run %d value %d · %s wall\n  drag: nudge along the wall (Ctrl free) · PgUp/PgDn: height · Delete: drop this value · Insert: restore" % [
+					String(_sel.get("token", "")), String(_sel.get("axis", "")), String(_sel.get("value", "")), int(_sel.get("run", -1)), int(_sel.get("vi", -1)), String(_sel.get("wall_side", ""))]
+			"showing":
+				_sel_label.text = "showing #%d (a wall frame)  world (%.1f, %.1f, %.1f)%s\n  drag: offset · K: card text · Delete: remove · Home: clear the rule" % [
+					int(_sel.get("index", 0)), n.global_position.x, n.global_position.y, n.global_position.z, ("  rule %s" % str(rule)) if not rule.is_empty() else ""]
+			"plinth":
+				_sel_label.text = "plinth under %s at %s  (%.1f, %.1f, %.1f)%s\n  drag: offset the plinth alone · Home: clear the rule · P on the body removes it" % [
+					String(_sel.get("token", "")), str(_sel.get("from", [])), n.global_position.x, n.global_position.y, n.global_position.z, ("  rule %s" % str(rule)) if not rule.is_empty() else ""]
+			_:
+				_sel_label.text = "%s %s #%d  (%.1f, %.1f, %.1f)%s\n  drag: offset · R: rotate · PgUp/PgDn: height · Delete: remove · Home: clear the rule" % [
+					kind, String(_sel.get("token", "")), int(_sel.get("index", 0)), n.global_position.x, n.global_position.y, n.global_position.z, ("  rule %s" % str(rule)) if not rule.is_empty() else ""]
+		return
 	var tc: Array = _sel.get("tile_cell", [])
 	var prow: Dictionary = _plan_row_for(_sel)
 	_sel_label.text = "%s  cell %s  rot %.0f°  world (%.1f, %.1f, %.1f)%s%s%s" % [
@@ -443,6 +510,36 @@ func _show_selection() -> void:
 	elif pw != "":
 		_sel_label.text += "
   no plinth: %s" % pw.substr(0, 90)
+
+func _dressing_rule_for(r: Dictionary) -> Dictionary:
+	var kind: String = _kind(r)
+	for d in _row().get("dressing", []):
+		var dd: Dictionary = d
+		if String(dd.get("kind", "")) != kind or String(dd.get("token", "")) != String(r.get("token", "")):
+			continue
+		if kind == "plinth":
+			var f1: Array = dd.get("from", []); var f2: Array = r.get("from", [])
+			if f1.size() >= 2 and f2.size() >= 2 and int(f1[0]) == int(f2[0]) and int(f1[1]) == int(f2[1]):
+				return dd
+		elif int(dd.get("index", -2)) == int(r.get("index", -3)):
+			return dd
+	return {}
+
+func _rule_offset(r: Dictionary) -> Vector3:
+	var o: Array = _dressing_rule_for(r).get("offset", [])
+	return Vector3(float(o[0]), float(o[1]), float(o[2])) if o.size() >= 3 else Vector3.ZERO
+
+func _variant_offset(r: Dictionary) -> Vector3:
+	var runs: Array = _row().get("wall_runs", [])
+	var ri: int = int(r.get("run", -1))
+	if ri < 0 or ri >= runs.size():
+		return Vector3.ZERO
+	var offs: Array = (runs[ri] as Dictionary).get("offsets", [])
+	var vi: int = int(r.get("vi", -1))
+	if vi >= 0 and vi < offs.size() and offs[vi] is Array and (offs[vi] as Array).size() >= 3:
+		var o: Array = offs[vi]
+		return Vector3(float(o[0]), float(o[1]), float(o[2]))
+	return Vector3.ZERO
 
 func _plan_row_for(r: Dictionary) -> Dictionary:
 	var tc: Array = r.get("tile_cell", [])
@@ -475,21 +572,32 @@ func _unhandled_input(event: InputEvent) -> void:
 					_place_at(_mouse_floor(mb.position))
 					return
 				var r: Dictionary = _record_at(mb.position)
+				if r.is_empty():
+					# empty ground: left-drag turns the isometric view (Palle: "left click rotate iso")
+					_orbit_drag = true
+					return
 				_sel = r
-				_sel_key = _key_of(r) if not r.is_empty() else ""
+				_sel_key = _key_of(r)
 				_show_selection()
 				_refresh_marks()
-				if not r.is_empty():
-					_drag = true
-					_drag_moved = false
-					_drag_start_pos = (r.get("node") as Node3D).global_position
+				_drag = true
+				_drag_moved = false
+				_drag_start_pos = (r.get("node") as Node3D).global_position
 			else:
+				_orbit_drag = false
 				if _drag:
 					_drag = false
 					if _drag_moved:
 						_commit_move()
 	elif event is InputEventMouseMotion:
 		var mm := event as InputEventMouseMotion
+		if _orbit_drag:
+			if not _iso and not _orbit:
+				_iso = true
+			_iso_yaw -= mm.relative.x * 0.008
+			_iso_pitch = clampf(_iso_pitch - mm.relative.y * 0.005, 0.25, 1.45)
+			_apply_cam()
+			return
 		if _pan_drag:
 			var k: float = _cam_size / get_viewport().get_visible_rect().size.y
 			if _orbit and mm.button_mask & MOUSE_BUTTON_MASK_RIGHT:
@@ -498,14 +606,25 @@ func _unhandled_input(event: InputEvent) -> void:
 				_cam_target += Vector3(-mm.relative.x * k, 0, mm.relative.y * k)
 			_apply_cam()
 		elif _drag and not _sel.is_empty() and is_instance_valid(_sel.get("node")):
-			var p: Vector3 = _mouse_floor(mm.position)
 			var n: Node3D = _sel.get("node") as Node3D
 			var fine: bool = Input.is_key_pressed(KEY_CTRL)
+			var kind: String = _kind(_sel)
 			var np: Vector3
-			if fine:
-				np = Vector3(snappedf(p.x, 0.2), n.global_position.y, snappedf(p.z, 0.2))
+			if kind == "variant" or kind == "showing" or kind == "prop":
+				# a wall piece slides ALONG its wall (a plane at its own height)
+				var ph: Vector3 = _mouse_plane(mm.position, n.global_position.y)
+				var nrm: Vector3 = _wall_normal_of(_sel)
+				var tang := Vector3(-nrm.z, 0, nrm.x)
+				var along: float = (ph - _drag_start_pos).dot(tang)
+				if not fine:
+					along = snappedf(along, 0.25)
+				np = _drag_start_pos + tang * along
 			else:
-				np = Vector3(floor(p.x) + 0.5, n.global_position.y, floor(p.z) + 0.5)
+				var p: Vector3 = _mouse_floor(mm.position)
+				if fine or kind != "body":
+					np = Vector3(snappedf(p.x, 0.2), n.global_position.y, snappedf(p.z, 0.2))
+				else:
+					np = Vector3(floor(p.x) + 0.5, n.global_position.y, floor(p.z) + 0.5)
 			if np.distance_to(n.global_position) > 0.001:
 				n.global_position = np
 				_drag_moved = true
@@ -531,7 +650,7 @@ func _key(k: int, shift: bool, alt: bool) -> void:
 		KEY_BRACKETRIGHT:
 			_edit_row({"support_height_m": _step_support(1)})
 		KEY_K:
-			_config_edit.text = _config_text()
+			_config_edit.text = String(_dressing_rule_for(_sel).get("text", "")) if _kind(_sel) == "showing" else _config_text()
 			_config_edit.grab_focus()
 		KEY_G:
 			_show_overlay = not _show_overlay; _refresh_overlay()
@@ -548,7 +667,25 @@ func _key(k: int, shift: bool, alt: bool) -> void:
 		KEY_UP:    _cam_target.z += 1.0; _apply_cam()
 		KEY_DOWN:  _cam_target.z -= 1.0; _apply_cam()
 		KEY_R:
-			_edit_row({"rotation": _cur_rot() + (15.0 if alt else (-90.0 if shift else 90.0))})
+			if _kind(_sel) == "furniture" or _kind(_sel) == "prop":
+				var n_r: Node3D = _sel.get("node") as Node3D
+				_write_dressing([_rule_key(_sel).merged({"rotation": fmod(n_r.rotation_degrees.y + (15.0 if alt else (-90.0 if shift else 90.0)) + 360.0, 360.0)})])
+			elif _kind(_sel) == "body":
+				_edit_row({"rotation": _cur_rot() + (15.0 if alt else (-90.0 if shift else 90.0))})
+		KEY_PAGEUP, KEY_PAGEDOWN:
+			var dy: float = 0.2 if k == KEY_PAGEUP else -0.2
+			if _kind(_sel) == "variant":
+				var o: Vector3 = _variant_offset(_sel) + Vector3(0, dy, 0)
+				_write_variants([{"run": int(_sel.get("run", -1)), "vi": int(_sel.get("vi", -1)), "offset": [o.x, o.y, o.z]}])
+			elif not _sel.is_empty() and _kind(_sel) != "body":
+				var o2: Vector3 = _rule_offset(_sel) + Vector3(0, dy, 0)
+				_write_dressing([_rule_key(_sel).merged({"offset": [o2.x, o2.y, o2.z]})])
+		KEY_HOME:
+			if not _sel.is_empty() and _kind(_sel) != "body" and _kind(_sel) != "variant":
+				_write_dressing([_rule_key(_sel).merged({"clear": true})])
+		KEY_INSERT:
+			if _kind(_sel) == "variant":
+				_write_variants([{"run": int(_sel.get("run", -1)), "vi": int(_sel.get("vi", -1)), "restore": true}])
 		KEY_EQUAL, KEY_KP_ADD:
 			_edit_row({"scale": _cur_scale() * 1.1})
 		KEY_MINUS, KEY_KP_SUBTRACT:
@@ -558,9 +695,20 @@ func _key(k: int, shift: bool, alt: bool) -> void:
 		KEY_C:
 			_cycle_config()
 		KEY_DELETE, KEY_BACKSPACE:
-			if not _sel.is_empty():
-				_write_rows([{"token": _sel.get("token"), "cell": _sel.get("tile_cell"), "removed": true}])
-				_sel_key = ""
+			if _sel.is_empty():
+				return
+			match _kind(_sel):
+				"body":
+					_write_rows([{"token": _sel.get("token"), "cell": _sel.get("tile_cell"), "removed": true}])
+					_sel_key = ""
+				"variant":
+					_write_variants([{"run": int(_sel.get("run", -1)), "vi": int(_sel.get("vi", -1)), "drop": true}])
+					_sel_key = ""
+				"plinth":
+					_status.text = "a plinth is the body's request — select the body and press P"
+				_:
+					_write_dressing([_rule_key(_sel).merged({"remove": true})])
+					_sel_key = ""
 
 const SUPPORTS := [0.0, 0.4, 0.64, 0.95, 1.2]
 func _step_support(dir: int) -> float:
@@ -578,8 +726,18 @@ func _config_text() -> String:
 		parts.append("%s=%s" % [String(k), String(cfg[k])])
 	return " ".join(parts)
 
+func _rule_key(r: Dictionary) -> Dictionary:
+	var d: Dictionary = {"kind": _kind(r), "token": r.get("token"), "index": int(r.get("index", -1))}
+	if _kind(r) == "plinth":
+		d["from"] = r.get("from")
+	return d
+
 func _on_config_submit(text: String) -> void:
 	if _sel.is_empty():
+		return
+	if _kind(_sel) == "showing":
+		_config_edit.release_focus()
+		_write_dressing([_rule_key(_sel).merged({"text": text.strip_edges()})])
 		return
 	var cfg: Dictionary = {}
 	for part in text.split(" ", false):
@@ -647,6 +805,21 @@ func _commit_move() -> void:
 		return
 	var n: Node3D = _sel.get("node") as Node3D
 	var p: Vector3 = n.global_position
+	var kind: String = _kind(_sel)
+	if kind == "variant":
+		var base_v: Vector3 = _drag_start_pos - _variant_offset(_sel)
+		var dv: Vector3 = p - base_v
+		_write_variants([{"run": int(_sel.get("run", -1)), "vi": int(_sel.get("vi", -1)), "offset": [snappedf(dv.x, 0.01), snappedf(dv.y, 0.01), snappedf(dv.z, 0.01)]}])
+		return
+	if kind != "body":
+		var base_d: Vector3 = _drag_start_pos - _rule_offset(_sel)
+		var dd: Vector3 = p - base_d
+		var rule: Dictionary = {"kind": kind, "token": _sel.get("token"), "index": int(_sel.get("index", -1)),
+			"offset": [snappedf(dd.x, 0.01), snappedf(dd.y, 0.01), snappedf(dd.z, 0.01)]}
+		if kind == "plinth":
+			rule["from"] = _sel.get("from")
+		_write_dressing([rule])
+		return
 	var cell: Array = _cell_of(p)
 	# what the plan cannot say: a court resident is placed by the court builder
 	# (its row has `court`, not a cell), and a cell outside the tile is nowhere
@@ -683,11 +856,19 @@ func _place_at(p: Vector3) -> void:
 
 # ── the writer: tools/em_plan_write.py, then rebuild ────────────────────────
 func _write_rows(rows: Array, replace: bool = false) -> void:
+	_write_op(rows, "--replace" if replace else "--rows-op")
+
+func _snapshot() -> Dictionary:
+	var row: Dictionary = _row()
+	return {"artifacts": (row.get("artifacts", []) as Array).duplicate(true),
+		"dressing": (row.get("dressing", []) as Array).duplicate(true),
+		"wall_runs": (row.get("wall_runs", []) as Array).duplicate(true)}
+
+func _write_op(rows: Variant, flag: String) -> void:
 	if _busy:
 		return
-	if not replace:
-		var cur: Array = (_row().get("artifacts", []) as Array).duplicate(true)
-		_undo.append(cur)
+	if flag != "--replace-all":
+		_undo.append(_snapshot())
 		if _undo.size() > 40:
 			_undo.pop_front()
 		_redo.clear()
@@ -696,9 +877,7 @@ func _write_rows(rows: Array, replace: bool = false) -> void:
 	f.store_string(JSON.stringify(rows))
 	f.close()
 	var repo: String = ProjectSettings.globalize_path("res://")
-	var args: PackedStringArray = [repo + "tools/em_plan_write.py", "--chapter", _chapter, "--pearl", _pearl, "--rows", tmp, "--by", "studio"]
-	if replace:
-		args.append("--replace")
+	var args: PackedStringArray = [repo + "tools/em_plan_write.py", "--chapter", _chapter, "--pearl", _pearl, "--rows", tmp, "--by", "studio", flag]
 	var out: Array = []
 	var code: int = OS.execute("python", args, out, true)
 	if code != 0:
@@ -707,19 +886,25 @@ func _write_rows(rows: Array, replace: bool = false) -> void:
 	_load_plan()
 	_rebuild()
 
+func _write_dressing(rules: Array) -> void:
+	_write_op(rules, "--dressing")
+
+func _write_variants(edits: Array) -> void:
+	_write_op(edits, "--variants")
+
 func _do_undo() -> void:
 	if _undo.is_empty():
 		_status.text = "nothing to undo"; return
-	_redo.append((_row().get("artifacts", []) as Array).duplicate(true))
-	var snap: Array = _undo.pop_back()
-	_write_rows(snap, true)
+	_redo.append(_snapshot())
+	var snap: Dictionary = _undo.pop_back()
+	_write_op(snap, "--replace-all")
 
 func _do_redo() -> void:
 	if _redo.is_empty():
 		return
-	_undo.append((_row().get("artifacts", []) as Array).duplicate(true))
-	var snap: Array = _redo.pop_back()
-	_write_rows(snap, true)
+	_undo.append(_snapshot())
+	var snap: Dictionary = _redo.pop_back()
+	_write_op(snap, "--replace-all")
 
 
 # ── bake / walk ─────────────────────────────────────────────────────────────

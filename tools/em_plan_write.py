@@ -47,6 +47,85 @@ def normalize(arts: list) -> list:
     return arts
 
 
+def _target(plan: dict, chapter: str, pearl: str) -> dict:
+    for p in plan.get("plans", []):
+        if p.get("sequence") == chapter and (pearl == "" or p.get("pearl") == pearl or str(p.get("pearl_index")) == str(pearl)):
+            return p
+    raise SystemExit(f"no plan row for {chapter}/{pearl}")
+
+
+def apply_dressing(plan: dict, chapter: str, pearl: str, rules: list, by: str = "studio") -> dict:
+    """The plan row's DRESSING rules — props, benches, showings, plinth nudges —
+    same schema the rulings use: {kind, token, index | from, offset:[x,y,z],
+    rotation, remove, text}. Keyed by (kind, token, index) or (kind, token, from).
+    `clear: true` drops the rule (the piece goes back to where the dresser put it)."""
+    target = _target(plan, chapter, pearl)
+    dr = target.setdefault("dressing", [])
+    now = datetime.now().isoformat(timespec="seconds")
+    touched = 0
+    for r in rules:
+        kind, tok = str(r.get("kind", "")), str(r.get("token", ""))
+        idx = r.get("index")
+        frm = _cell(r.get("from"))
+        def same(x):
+            if x.get("kind") != kind or x.get("token") != tok:
+                return False
+            if kind == "plinth":
+                return _cell(x.get("from")) == frm
+            return int(x.get("index", -2)) == int(idx if idx is not None else -3)
+        cur = next((x for x in dr if same(x)), None)
+        if r.get("clear"):
+            if cur is not None:
+                dr.remove(cur); touched += 1
+            continue
+        if cur is None:
+            cur = {"kind": kind, "token": tok, "provenance": "hand"}
+            if kind == "plinth":
+                cur["from"] = frm
+            else:
+                cur["index"] = int(idx)
+            dr.append(cur)
+        for k in ("offset", "rotation", "remove", "text", "height"):
+            if k in r:
+                if r[k] in (None, "", False) and k != "rotation":
+                    cur.pop(k, None)
+                else:
+                    cur[k] = r[k]
+        if "offset" in cur and isinstance(cur["offset"], list):
+            cur["offset"] = [round(float(v), 2) for v in cur["offset"]]
+        cur["ruled"] = {"at": now, "by": by}
+        touched += 1
+    return {"chapter": chapter, "pearl": target.get("pearl"), "rows": len(dr), "touched": touched, "added": 0, "removed": 0}
+
+
+def apply_variants(plan: dict, chapter: str, pearl: str, edits: list, by: str = "studio") -> dict:
+    """DNA wall variants: {run, vi, offset:[x,y,z] | drop:true | restore:true} on wall_runs[run]."""
+    target = _target(plan, chapter, pearl)
+    runs = target.get("wall_runs", [])
+    now = datetime.now().isoformat(timespec="seconds")
+    touched = 0
+    for e in edits:
+        ri, vi = int(e.get("run", -1)), int(e.get("vi", -1))
+        if ri < 0 or ri >= len(runs) or vi < 0:
+            continue
+        run = runs[ri]
+        n = len(run.get("values", []))
+        if e.get("drop"):
+            d = run.setdefault("drop", [])
+            if vi not in [int(x) for x in d]:
+                d.append(int(vi))
+        if e.get("restore"):
+            run["drop"] = [int(x) for x in run.get("drop", []) if int(x) != vi]
+        if "offset" in e:
+            offs = run.setdefault("offsets", [])
+            while len(offs) < n:
+                offs.append([0, 0, 0])
+            offs[vi] = [round(float(v), 2) for v in e["offset"]] if e["offset"] else [0, 0, 0]
+        run["ruled"] = {"at": now, "by": by}
+        touched += 1
+    return {"chapter": chapter, "pearl": target.get("pearl"), "rows": len(runs), "touched": touched, "added": 0, "removed": 0}
+
+
 def apply_rows(plan: dict, chapter: str, pearl: str, rows: list, by: str = "studio") -> dict:
     target = None
     for p in plan.get("plans", []):
@@ -126,11 +205,27 @@ def main() -> int:
     ap.add_argument("--rows", required=True, help="json file: a list of row edits")
     ap.add_argument("--by", default="studio")
     ap.add_argument("--replace", action="store_true", help="rows.json IS the pearl's whole artifacts list (undo/redo)")
+    ap.add_argument("--dressing", action="store_true", help="rows.json = dressing rules (props/benches/showings/plinth nudges)")
+    ap.add_argument("--variants", action="store_true", help="rows.json = wall-variant edits (run, vi, offset|drop|restore)")
+    ap.add_argument("--replace-all", action="store_true", help="rows.json = {artifacts, dressing, wall_runs} for the pearl (undo/redo)")
     ap.add_argument("--no-ship", action="store_true")
+    ap.add_argument("--rows-op", action="store_true", help="(default) rows.json = row edits")
     a = ap.parse_args()
     plan = json.loads(PLAN.read_text(encoding="utf-8"))
     rows = json.loads(Path(a.rows).read_text(encoding="utf-8"))
-    if a.replace:
+    if a.replace_all:
+        target = _target(plan, a.chapter, a.pearl)
+        snap = rows if isinstance(rows, dict) else {}
+        target["artifacts"] = normalize(list(snap.get("artifacts", target.get("artifacts", []))))
+        target["dressing"] = list(snap.get("dressing", []))
+        if "wall_runs" in snap:
+            target["wall_runs"] = list(snap["wall_runs"])
+        res = {"chapter": a.chapter, "pearl": target.get("pearl"), "rows": len(target["artifacts"]), "touched": 0, "added": 0, "removed": 0}
+    elif a.dressing:
+        res = apply_dressing(plan, a.chapter, a.pearl, rows, a.by)
+    elif a.variants:
+        res = apply_variants(plan, a.chapter, a.pearl, rows, a.by)
+    elif a.replace:
         target = next((p for p in plan.get("plans", []) if p.get("sequence") == a.chapter and (a.pearl == "" or p.get("pearl") == a.pearl)), None)
         if target is None:
             raise SystemExit(f"no plan row for {a.chapter}/{a.pearl}")

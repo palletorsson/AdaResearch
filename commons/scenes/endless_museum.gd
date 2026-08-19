@@ -401,6 +401,12 @@ var _bake_at: String = ""
 var _replay: bool = false
 var _bake_stale: bool = false
 var _bake_key: String = ""              # "chapter|pearl" of the segment being built
+## THE PLAN ROW'S DRESSING (2026-08-19, studio slice 2). Props, benches,
+## showings and plinth nudges used to be rulings only (em_overrides, the
+## walking editor's TAB). The plan row may now carry `dressing: [rules]` in
+## the same schema ({kind, token, index|from, offset, rotation, remove, text})
+## — the studio writes there — and _furniture_rules reads both, plan first.
+var _cur_dressing: Array = []
 var _bake_used: Dictionary = {}         # per key: "tok|x|y" -> how many times looked up
 var _seg_placed: Array = []             # this segment's placed rows (for the bake)
 var _seg_unbaked: int = 0               # bodies this segment placed the live way while replaying
@@ -2118,6 +2124,7 @@ func _build_segment() -> void:
 	_seg_unbaked = 0
 	_bake_key = ""
 	_bake_used = {}
+	_cur_dressing = []
 	# THE PLAN OWNS THE BUILDING when one is loaded: the chapter's museum is
 	# read off its own plan row, so the stamped cast and the built walls can
 	# never disagree about where a chapter lives. A crowned chapter without a
@@ -2439,8 +2446,12 @@ func _build_segment() -> void:
 			if true:   # ALWAYS: showing records in both modes (the editor KEYS stay desktop-only)
 				for ch_node in seg.get_children():
 					if ch_node.has_meta("em_showing"):
+						var s_idx: int = int(ch_node.get_meta("em_showing"))
+						if _dressing_removed(next_seq, "showing", "showing", s_idx):
+							ch_node.queue_free()
+							continue
 						_edit_records.append({"node": ch_node, "kind": "showing",
-							"token": "showing", "index": int(ch_node.get_meta("em_showing")),
+							"token": "showing", "index": s_idx,
 							"from": [], "tile_cell": [], "rotation": 0.0,
 							"chapter": next_seq, "seg": seg})
 		else:
@@ -3568,6 +3579,7 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 		return {}
 	_bake_key = "%s|%s" % [chapter, String(entry.get("pearl", ""))]
 	_bake_used = {}
+	_cur_dressing = (entry.get("dressing", []) as Array) if entry.get("dressing") is Array else []
 	if entry.has("pearl"):
 		print("[em-pearl] %s · %s (%d/%d) — hero %s" % [chapter, String(entry.get("pearl", "")),
 			int(entry.get("pearl_index", 0)) + 1, int(entry.get("pearls_total", 0)), String(entry.get("hero", ""))])
@@ -3897,7 +3909,13 @@ func _deal_plan_wall_runs(seg: Node3D, entry: Dictionary,
 			continue
 		var built: Array = []
 		var failure_counts: Dictionary = {}
+		var run_index: int = (entry.get("wall_runs", []) as Array).find(run_v)
+		var drops: Array = run.get("drop", []) if run.get("drop") is Array else []
+		var offsets: Array = run.get("offsets", []) if run.get("offsets") is Array else []
 		for i in range(values.size()):
+			if drops.has(i) or drops.has(float(i)):
+				failure_counts["dropped by hand"] = int(failure_counts.get("dropped by hand", 0)) + 1
+				continue
 			var xyz: Variant = world[i]
 			if not (xyz is Array) or (xyz as Array).size() < 3:
 				failure_counts["invalid world coordinate"] = int(failure_counts.get("invalid world coordinate", 0)) + 1
@@ -3912,6 +3930,10 @@ func _deal_plan_wall_runs(seg: Node3D, entry: Dictionary,
 			var max_height := float(uv[3]) - float(uv[1])
 			var target := Vector3(float(p[0]) - apron, float(p[1]),
 				float(p[2]) - apron + VESTIBULE_H)
+			# the hand's nudge along the wall (studio): offsets[i] = [dx, dy, dz]
+			if i < offsets.size() and offsets[i] is Array and (offsets[i] as Array).size() >= 3:
+				var oa: Array = offsets[i]
+				target += Vector3(float(oa[0]), float(oa[1]), float(oa[2]))
 			# the LOBBY keeps its walls bare: a variant the plan hangs on the entry
 			# wall's lobby face (or anywhere in the vestibule) of the first segment
 			# is not assembled — the lobby's own pieces are its wall works
@@ -3924,6 +3946,13 @@ func _deal_plan_wall_runs(seg: Node3D, entry: Dictionary,
 					max_width, max_height)
 			if bool(result.get("ok", false)):
 				built.append(result.get("node"))
+				# an editor record for the variant, keyed run + value index
+				_edit_records.append({"node": result.get("node"), "kind": "variant", "token": lookup,
+					"run": run_index, "vi": i, "axis": axis, "value": str(values[i]),
+					"wall": String(run.get("wall", "")), "wall_side": String(run.get("wall_side", "")),
+					"normal": [normal.x, normal.y, normal.z],
+					"from": [], "tile_cell": [], "rotation": 0.0,
+					"chapter": String(entry.get("sequence", "")), "seg": seg, "index": i})
 			else:
 				var why := String(result.get("why", "unknown"))
 				failure_counts[why] = int(failure_counts.get(why, 0)) + 1
@@ -5430,6 +5459,10 @@ func _dress_props(seg: Node3D, tile: Array, w: int, h: int, zbase: int,
 			var rulable_h: bool = String(r.get("surface", "")) == "wall" \
 				and _mod_has(_mod_props, "mount_defaults") \
 				and (_mod_props.call("mount_defaults") as Dictionary).has(tok)
+			if _dressing_removed(seg_ch, "prop" if rulable_h else "furniture", tok, n_ok - 1):
+				node.queue_free()
+				n_ok -= 1
+				continue
 			if rulable_h:
 				# a wall prop with a height convention: UP/DOWN rules the token
 				_edit_records.append({"node": node, "token": tok, "kind": "prop",
@@ -5442,8 +5475,9 @@ func _dress_props(seg: Node3D, tile: Array, w: int, h: int, zbase: int,
 				_edit_records.append({"node": node, "token": tok, "kind": "furniture",
 					"from": [], "tile_cell": [], "rotation": float(r.get("rot_y", 0.0)),
 					"chapter": seg_ch, "seg": seg, "index": n_ok - 1})
-			# apply a saved furniture ruling on the way in
-			for fr_v in _furniture_rules(seg_ch, "furniture"):
+			# apply a saved furniture ruling on the way in (a wall prop's ruling
+			# is filed under "prop", a bench's under "furniture" — same shape)
+			for fr_v in _furniture_rules(seg_ch, "prop" if rulable_h else "furniture"):
 				var fr: Dictionary = fr_v
 				if String(fr.get("token", "")) == tok and int(fr.get("index", -1)) == n_ok - 1:
 					var o: Array = fr.get("offset", [])
@@ -6126,8 +6160,21 @@ var _edit_shift: bool = false
 ## index; furniture: token + dress index; plinth: artifact token + plan cell).
 ## Applied at build where each is created — never a transform the builder
 ## does not know about.
+func _dressing_removed(chapter: String, kind: String, tok: String, index: int) -> bool:
+	for fr_v in _furniture_rules(chapter, kind):
+		var fr: Dictionary = fr_v
+		if bool(fr.get("remove", false)) and String(fr.get("token", "")) == tok and int(fr.get("index", -2)) == index:
+			return true
+	return false
+
 func _furniture_rules(chapter: String, kind: String) -> Array:
 	var out: Array = []
+	for dr_v in _cur_dressing:                       # the plan row's own dressing first
+		var dr: Dictionary = dr_v
+		if String(dr.get("kind", "")) == kind:
+			var d2: Dictionary = dr.duplicate()
+			d2["chapter"] = chapter
+			out.append(d2)
 	for ov_v in _edit_overrides:
 		var ov: Dictionary = ov_v
 		if String(ov.get("kind", "")) == kind and String(ov.get("chapter", "")) == chapter:

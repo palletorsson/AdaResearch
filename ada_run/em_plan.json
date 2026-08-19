@@ -641,7 +641,7 @@
         {
           "cell": [
             21,
-            20
+            21
           ],
           "hand": true,
           "mode": "against_wall",
@@ -659,14 +659,14 @@
           "relational_kind": "spine_artifact",
           "rotation": 180,
           "ruled": {
-            "at": "2026-08-18T12:11:58",
-            "by": "plan-editor"
+            "at": "2026-08-19T08:42:05",
+            "by": "studio"
           },
           "slot": "sainsbury-false-perspective-enfilade/2,9",
           "support_height_m": 1.4,
           "tile_cell": [
             7,
-            6
+            7
           ],
           "token": "fontana_puncture",
           "venue": "interior",
@@ -732,14 +732,15 @@
         },
         {
           "cell": [
-            0,
-            0
+            30,
+            51
           ],
           "court": [
             25.0,
             24.0
           ],
           "court_access": "bridge",
+          "hand": true,
           "mode": "freestanding",
           "relation": {
             "pearl": "point",
@@ -749,11 +750,16 @@
           },
           "relational_kind": "dna_artifact",
           "rotation": 0,
+          "ruled": {
+            "at": "2026-08-19T08:43:56",
+            "by": "studio"
+          },
+          "scale": 1.464,
           "slot": "courtyard",
           "support_height_m": 0.0,
           "tile_cell": [
-            -14,
-            -14
+            16,
+            37
           ],
           "token": "xyz_slider_plate",
           "venue": "courtyard",
@@ -1021,19 +1027,15 @@
       "wall_runs": [
         {
           "anchor": "frame_counter_display",
+          "assemble": true,
           "axis": "reading",
-          "values": [
-            "count",
-            "rate",
-            "delta",
-            "budget"
+          "body_m": [
+            1.0,
+            0.1,
+            0.2
           ],
-          "wall": "sainsbury-false-perspective-enfilade/north_38_14",
-          "wall_side": "north",
-          "wall_normal": [
-            0,
-            1
-          ],
+          "body_source": "godot_configured_variants",
+          "housed": true,
           "rects_uv": [
             [
               0.4,
@@ -1060,6 +1062,20 @@
               1.8
             ]
           ],
+          "reserved": true,
+          "values": [
+            "count",
+            "rate",
+            "delta",
+            "budget"
+          ],
+          "wall": "sainsbury-false-perspective-enfilade/north_38_14",
+          "wall_normal": [
+            0.0,
+            1.0
+          ],
+          "wall_side": "north",
+          "why": "two cells of standing room in front, walkable and unclaimed",
           "world": [
             [
               14.9,
@@ -1081,21 +1097,21 @@
               1.7,
               38.5
             ]
-          ],
-          "body_m": [
-            1.0,
-            0.1,
-            0.2
-          ],
-          "body_source": "godot_configured_variants",
-          "housed": true,
-          "reserved": true,
-          "assemble": true,
-          "why": "two cells of standing room in front, walkable and unclaimed"
+          ]
         },
         {
           "anchor": "you_are_here",
+          "assemble": false,
           "axis": "deixis",
+          "body_m": [
+            2.67,
+            1.8,
+            0.03
+          ],
+          "body_source": "spatial_contract",
+          "housed": false,
+          "rects_uv": [],
+          "reserved": false,
           "values": [
             "words_and_mark",
             "words_only",
@@ -1104,36 +1120,22 @@
             "plan_fragment"
           ],
           "wall": null,
-          "wall_side": "",
           "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
-          "body_m": [
-            2.67,
-            1.8,
-            0.03
-          ],
-          "body_source": "spatial_contract",
-          "housed": false,
-          "reserved": false,
-          "assemble": false,
-          "why": "body projects 1.80 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear"
+          "wall_side": "",
+          "why": "body projects 1.80 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear",
+          "world": []
         },
         {
           "anchor": "fontana_puncture",
+          "assemble": true,
           "axis": "breach",
-          "values": [
-            "pierced",
-            "opened",
-            "severed",
-            "husk"
+          "body_m": [
+            0.06,
+            0.06,
+            0.06
           ],
-          "wall": "sainsbury-false-perspective-enfilade/east_18_27",
-          "wall_side": "east",
-          "wall_normal": [
-            -1,
-            0
-          ],
+          "body_source": "godot_configured_variants",
+          "housed": true,
           "rects_uv": [
             [
               0.1,
@@ -1160,6 +1162,20 @@
               1.75
             ]
           ],
+          "reserved": true,
+          "values": [
+            "pierced",
+            "opened",
+            "severed",
+            "husk"
+          ],
+          "wall": "sainsbury-false-perspective-enfilade/east_18_27",
+          "wall_normal": [
+            -1.0,
+            0.0
+          ],
+          "wall_side": "east",
+          "why": "two cells of standing room in front, walkable and unclaimed",
           "world": [
             [
               18.5,
@@ -1181,32 +1197,12 @@
               1.7,
               28.825
             ]
-          ],
-          "body_m": [
-            0.06,
-            0.06,
-            0.06
-          ],
-          "body_source": "godot_configured_variants",
-          "housed": true,
-          "reserved": true,
-          "assemble": true,
-          "why": "two cells of standing room in front, walkable and unclaimed"
+          ]
         },
         {
           "anchor": "floating_sphere_field",
+          "assemble": false,
           "axis": "density",
-          "values": [
-            "sparse",
-            "scarce",
-            "dense",
-            "fog"
-          ],
-          "wall": null,
-          "wall_side": "",
-          "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
           "body_m": [
             7.0,
             7.0,
@@ -1214,26 +1210,31 @@
           ],
           "body_source": "spatial_contract",
           "housed": false,
+          "rects_uv": [],
           "reserved": false,
-          "assemble": false,
-          "why": "body projects 7.00 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear"
+          "values": [
+            "sparse",
+            "scarce",
+            "dense",
+            "fog"
+          ],
+          "wall": null,
+          "wall_normal": [],
+          "wall_side": "",
+          "why": "body projects 7.00 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear",
+          "world": []
         },
         {
           "anchor": "interactive_point_origin_force",
+          "assemble": true,
           "axis": "retention",
-          "values": [
-            "none",
-            "trace",
-            "lattice",
-            "archive",
-            "wax"
+          "body_m": [
+            0.31,
+            0.31,
+            0.192
           ],
-          "wall": "sainsbury-false-perspective-enfilade/south_20_24",
-          "wall_side": "south",
-          "wall_normal": [
-            0,
-            -1
-          ],
+          "body_source": "godot_configured_variants",
+          "housed": true,
           "rects_uv": [
             [
               0.425,
@@ -1266,6 +1267,21 @@
               1.796
             ]
           ],
+          "reserved": true,
+          "values": [
+            "none",
+            "trace",
+            "lattice",
+            "archive",
+            "wax"
+          ],
+          "wall": "sainsbury-false-perspective-enfilade/south_20_24",
+          "wall_normal": [
+            0.0,
+            -1.0
+          ],
+          "wall_side": "south",
+          "why": "two cells of standing room in front, walkable and unclaimed",
           "world": [
             [
               24.58,
@@ -1292,32 +1308,12 @@
               1.7,
               20.5
             ]
-          ],
-          "body_m": [
-            0.31,
-            0.31,
-            0.192
-          ],
-          "body_source": "godot_configured_variants",
-          "housed": true,
-          "reserved": true,
-          "assemble": true,
-          "why": "two cells of standing room in front, walkable and unclaimed"
+          ]
         },
         {
           "anchor": "folding_past",
+          "assemble": false,
           "axis": "recession",
-          "values": [
-            "nested",
-            "collapsed",
-            "abreast",
-            "strata"
-          ],
-          "wall": null,
-          "wall_side": "",
-          "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
           "body_m": [
             6.0,
             4.05,
@@ -1325,24 +1321,24 @@
           ],
           "body_source": "spatial_contract",
           "housed": false,
+          "rects_uv": [],
           "reserved": false,
-          "assemble": false,
-          "why": "precinct work (6.0 x 4.8 m) \u2014 not hung; it wants ground of its own and a threshold into it"
+          "values": [
+            "nested",
+            "collapsed",
+            "abreast",
+            "strata"
+          ],
+          "wall": null,
+          "wall_normal": [],
+          "wall_side": "",
+          "why": "precinct work (6.0 x 4.8 m) \u2014 not hung; it wants ground of its own and a threshold into it",
+          "world": []
         },
         {
           "anchor": "lab_room",
+          "assemble": false,
           "axis": "premises",
-          "values": [
-            "chamber",
-            "workshop",
-            "theatre",
-            "ruin"
-          ],
-          "wall": null,
-          "wall_side": "",
-          "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
           "body_m": [
             8.04,
             7.98,
@@ -1350,25 +1346,31 @@
           ],
           "body_source": "spatial_contract",
           "housed": false,
+          "rects_uv": [],
           "reserved": false,
-          "assemble": false,
-          "why": "precinct work (8.0 x 4.3 m) \u2014 not hung; it wants ground of its own and a threshold into it"
+          "values": [
+            "chamber",
+            "workshop",
+            "theatre",
+            "ruin"
+          ],
+          "wall": null,
+          "wall_normal": [],
+          "wall_side": "",
+          "why": "precinct work (8.0 x 4.3 m) \u2014 not hung; it wants ground of its own and a threshold into it",
+          "world": []
         },
         {
           "anchor": "science_screen",
+          "assemble": true,
           "axis": "support",
-          "values": [
-            "stand",
-            "frame",
-            "cabinet",
-            "pylon"
+          "body_m": [
+            3.14,
+            0.2,
+            2.35
           ],
-          "wall": "sainsbury-false-perspective-enfilade/west_28_14",
-          "wall_side": "west",
-          "wall_normal": [
-            1,
-            0
-          ],
+          "body_source": "spatial_contract",
+          "housed": true,
           "rects_uv": [
             [
               5.62,
@@ -1395,6 +1397,20 @@
               2.875
             ]
           ],
+          "reserved": true,
+          "values": [
+            "stand",
+            "frame",
+            "cabinet",
+            "pylon"
+          ],
+          "wall": "sainsbury-false-perspective-enfilade/west_28_14",
+          "wall_normal": [
+            1.0,
+            0.0
+          ],
+          "wall_side": "west",
+          "why": "two cells of standing room in front, walkable and unclaimed",
           "world": [
             [
               28.5,
@@ -1416,31 +1432,12 @@
               1.7,
               31.81
             ]
-          ],
-          "body_m": [
-            3.14,
-            0.2,
-            2.35
-          ],
-          "body_source": "spatial_contract",
-          "housed": true,
-          "reserved": true,
-          "assemble": true,
-          "why": "two cells of standing room in front, walkable and unclaimed"
+          ]
         },
         {
           "anchor": "perspective_lines",
+          "assemble": false,
           "axis": "reach",
-          "values": [
-            "touch",
-            "short",
-            "through"
-          ],
-          "wall": null,
-          "wall_side": "",
-          "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
           "body_m": [
             1.02,
             2.01,
@@ -1448,13 +1445,32 @@
           ],
           "body_source": "spatial_contract",
           "housed": false,
+          "rects_uv": [],
           "reserved": false,
-          "assemble": false,
-          "why": "body projects 2.01 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear"
+          "values": [
+            "touch",
+            "short",
+            "through"
+          ],
+          "wall": null,
+          "wall_normal": [],
+          "wall_side": "",
+          "why": "body projects 2.01 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear",
+          "world": []
         },
         {
           "anchor": "line_builder_3d",
+          "assemble": false,
           "axis": "slack",
+          "body_m": [
+            3.53,
+            0.68,
+            1.83
+          ],
+          "body_source": "spatial_contract",
+          "housed": false,
+          "rects_uv": [],
+          "reserved": false,
           "values": [
             "chord",
             "spline",
@@ -1463,36 +1479,22 @@
             "truss"
           ],
           "wall": null,
-          "wall_side": "",
           "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
-          "body_m": [
-            3.53,
-            0.68,
-            1.83
-          ],
-          "body_source": "spatial_contract",
-          "housed": false,
-          "reserved": false,
-          "assemble": false,
-          "why": "1 wall(s) had 19.25 m free but every one was already hung across: sainsbury-false-perspective-enfilade/east_14_14: overlaps point"
+          "wall_side": "",
+          "why": "1 wall(s) had 19.25 m free but every one was already hung across: sainsbury-false-perspective-enfilade/east_14_14: overlaps point",
+          "world": []
         },
         {
           "anchor": "laser_sword",
+          "assemble": true,
           "axis": "repose",
-          "values": [
-            "dark",
-            "pilot",
-            "ghost",
-            "lit"
+          "body_m": [
+            0.08,
+            0.08,
+            0.966
           ],
-          "wall": "sainsbury-false-perspective-enfilade/east_18_36",
-          "wall_side": "east",
-          "wall_normal": [
-            -1,
-            0
-          ],
+          "body_source": "godot_configured_variants",
+          "housed": true,
           "rects_uv": [
             [
               0.1,
@@ -1519,6 +1521,20 @@
               2.183
             ]
           ],
+          "reserved": true,
+          "values": [
+            "dark",
+            "pilot",
+            "ghost",
+            "lit"
+          ],
+          "wall": "sainsbury-false-perspective-enfilade/east_18_36",
+          "wall_normal": [
+            -1.0,
+            0.0
+          ],
+          "wall_side": "east",
+          "why": "two cells of standing room in front, walkable and unclaimed",
           "world": [
             [
               18.5,
@@ -1540,33 +1556,19 @@
               1.7,
               37.825
             ]
-          ],
-          "body_m": [
-            0.08,
-            0.08,
-            0.966
-          ],
-          "body_source": "godot_configured_variants",
-          "housed": true,
-          "reserved": true,
-          "assemble": true,
-          "why": "two cells of standing room in front, walkable and unclaimed"
+          ]
         },
         {
           "anchor": "klee_walking_point",
+          "assemble": true,
           "axis": "walk_style",
-          "values": [
-            "meander",
-            "straight",
-            "spiral",
-            "arc"
+          "body_m": [
+            1.63,
+            0.08,
+            0.6
           ],
-          "wall": "sainsbury-false-perspective-enfilade/east_14_14",
-          "wall_side": "east",
-          "wall_normal": [
-            -1,
-            0
-          ],
+          "body_source": "spatial_contract",
+          "housed": true,
           "rects_uv": [
             [
               8.64,
@@ -1593,6 +1595,20 @@
               2.0
             ]
           ],
+          "reserved": true,
+          "values": [
+            "meander",
+            "straight",
+            "spiral",
+            "arc"
+          ],
+          "wall": "sainsbury-false-perspective-enfilade/east_14_14",
+          "wall_normal": [
+            -1.0,
+            0.0
+          ],
+          "wall_side": "east",
+          "why": "two cells of standing room in front, walkable and unclaimed",
           "world": [
             [
               14.5,
@@ -1614,34 +1630,19 @@
               1.7,
               29.545
             ]
-          ],
-          "body_m": [
-            1.63,
-            0.08,
-            0.6
-          ],
-          "body_source": "spatial_contract",
-          "housed": true,
-          "reserved": true,
-          "assemble": true,
-          "why": "two cells of standing room in front, walkable and unclaimed"
+          ]
         },
         {
           "anchor": "grabbable_line",
+          "assemble": true,
           "axis": "grain",
-          "values": [
-            "solid",
-            "split",
-            "quartered",
-            "lattice",
-            "shell"
+          "body_m": [
+            0.29,
+            0.05,
+            0.05
           ],
-          "wall": "sainsbury-false-perspective-enfilade/east_28_33",
-          "wall_side": "east",
-          "wall_normal": [
-            -1,
-            0
-          ],
+          "body_source": "godot_configured_variants",
+          "housed": true,
           "rects_uv": [
             [
               0.975,
@@ -1674,6 +1675,21 @@
               1.75
             ]
           ],
+          "reserved": true,
+          "values": [
+            "solid",
+            "split",
+            "quartered",
+            "lattice",
+            "shell"
+          ],
+          "wall": "sainsbury-false-perspective-enfilade/east_28_33",
+          "wall_normal": [
+            -1.0,
+            0.0
+          ],
+          "wall_side": "east",
+          "why": "two cells of standing room in front, walkable and unclaimed",
           "world": [
             [
               28.5,
@@ -1700,21 +1716,21 @@
               1.7,
               36.88
             ]
-          ],
-          "body_m": [
-            0.29,
-            0.05,
-            0.05
-          ],
-          "body_source": "godot_configured_variants",
-          "housed": true,
-          "reserved": true,
-          "assemble": true,
-          "why": "two cells of standing room in front, walkable and unclaimed"
+          ]
         },
         {
           "anchor": "cube_scene",
+          "assemble": false,
           "axis": "grain",
+          "body_m": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "body_source": "spatial_contract",
+          "housed": false,
+          "rects_uv": [],
+          "reserved": false,
           "values": [
             "solid",
             "split",
@@ -1723,34 +1739,15 @@
             "shell"
           ],
           "wall": null,
-          "wall_side": "",
           "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
-          "body_m": [
-            1.0,
-            1.0,
-            1.0
-          ],
-          "body_source": "spatial_contract",
-          "housed": false,
-          "reserved": false,
-          "assemble": false,
-          "why": "body projects 1.00 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear"
+          "wall_side": "",
+          "why": "body projects 1.00 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear",
+          "world": []
         },
         {
           "anchor": "parallel_line_puzzle",
+          "assemble": false,
           "axis": "pair_pose",
-          "values": [
-            "upright",
-            "oblique",
-            "lying"
-          ],
-          "wall": null,
-          "wall_side": "",
-          "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
           "body_m": [
             0.27,
             1.0,
@@ -1758,25 +1755,30 @@
           ],
           "body_source": "spatial_contract",
           "housed": false,
+          "rects_uv": [],
           "reserved": false,
-          "assemble": false,
-          "why": "body projects 1.00 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear"
+          "values": [
+            "upright",
+            "oblique",
+            "lying"
+          ],
+          "wall": null,
+          "wall_normal": [],
+          "wall_side": "",
+          "why": "body projects 1.00 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear",
+          "world": []
         },
         {
           "anchor": "line",
+          "assemble": true,
           "axis": "readout",
-          "values": [
-            "numeral",
-            "none",
-            "gradation",
-            "lattice"
+          "body_m": [
+            1.182,
+            0.12,
+            0.141
           ],
-          "wall": "sainsbury-false-perspective-enfilade/north_38_23",
-          "wall_side": "north",
-          "wall_normal": [
-            0,
-            1
-          ],
+          "body_source": "godot_configured_variants",
+          "housed": true,
           "rects_uv": [
             [
               0.036,
@@ -1803,6 +1805,20 @@
               1.77
             ]
           ],
+          "reserved": true,
+          "values": [
+            "numeral",
+            "none",
+            "gradation",
+            "lattice"
+          ],
+          "wall": "sainsbury-false-perspective-enfilade/north_38_23",
+          "wall_normal": [
+            0.0,
+            1.0
+          ],
+          "wall_side": "north",
+          "why": "two cells of standing room in front, walkable and unclaimed",
           "world": [
             [
               23.627,
@@ -1824,32 +1840,12 @@
               1.7,
               38.5
             ]
-          ],
-          "body_m": [
-            1.182,
-            0.12,
-            0.141
-          ],
-          "body_source": "godot_configured_variants",
-          "housed": true,
-          "reserved": true,
-          "assemble": true,
-          "why": "two cells of standing room in front, walkable and unclaimed"
+          ]
         },
         {
           "anchor": "dark_sphere",
+          "assemble": false,
           "axis": "body",
-          "values": [
-            "orb",
-            "swarm",
-            "cage",
-            "cairn"
-          ],
-          "wall": null,
-          "wall_side": "",
-          "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
           "body_m": [
             0.84,
             0.84,
@@ -1857,23 +1853,24 @@
           ],
           "body_source": "spatial_contract",
           "housed": false,
+          "rects_uv": [],
           "reserved": false,
-          "assemble": false,
-          "why": "body projects 0.84 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear"
+          "values": [
+            "orb",
+            "swarm",
+            "cage",
+            "cairn"
+          ],
+          "wall": null,
+          "wall_normal": [],
+          "wall_side": "",
+          "why": "body projects 0.84 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear",
+          "world": []
         },
         {
           "anchor": "scale_lines",
+          "assemble": false,
           "axis": "arrangement",
-          "values": [
-            "ladder",
-            "log",
-            "ruler"
-          ],
-          "wall": null,
-          "wall_side": "",
-          "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
           "body_m": [
             100.0,
             0.04,
@@ -1881,24 +1878,23 @@
           ],
           "body_source": "spatial_contract",
           "housed": false,
+          "rects_uv": [],
           "reserved": false,
-          "assemble": false,
-          "why": "precinct work (100.0 x 3.5 m) \u2014 not hung; it wants ground of its own and a threshold into it"
+          "values": [
+            "ladder",
+            "log",
+            "ruler"
+          ],
+          "wall": null,
+          "wall_normal": [],
+          "wall_side": "",
+          "why": "precinct work (100.0 x 3.5 m) \u2014 not hung; it wants ground of its own and a threshold into it",
+          "world": []
         },
         {
           "anchor": "plus_line_puzzle",
+          "assemble": false,
           "axis": "proof",
-          "values": [
-            "relation",
-            "targets",
-            "angle",
-            "invariant"
-          ],
-          "wall": null,
-          "wall_side": "",
-          "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
           "body_m": [
             0.27,
             1.0,
@@ -1906,13 +1902,33 @@
           ],
           "body_source": "spatial_contract",
           "housed": false,
+          "rects_uv": [],
           "reserved": false,
-          "assemble": false,
-          "why": "body projects 1.00 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear"
+          "values": [
+            "relation",
+            "targets",
+            "angle",
+            "invariant"
+          ],
+          "wall": null,
+          "wall_normal": [],
+          "wall_side": "",
+          "why": "body projects 1.00 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear",
+          "world": []
         },
         {
           "anchor": "modulor_man_demo",
+          "assemble": false,
           "axis": "measure",
+          "body_m": [
+            0.94,
+            0.16,
+            2.38
+          ],
+          "body_source": "spatial_contract",
+          "housed": false,
+          "rects_uv": [],
+          "reserved": false,
           "values": [
             "body",
             "scale",
@@ -1921,24 +1937,24 @@
             "crowd"
           ],
           "wall": null,
-          "wall_side": "",
           "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
-          "body_m": [
-            0.94,
-            0.16,
-            2.38
-          ],
-          "body_source": "spatial_contract",
-          "housed": false,
-          "reserved": false,
-          "assemble": false,
-          "why": "2 wall(s) had 6.30 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps science_screen.support=frame"
+          "wall_side": "",
+          "why": "2 wall(s) had 6.30 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps science_screen.support=frame",
+          "world": []
         },
         {
           "anchor": "laser_measure",
+          "assemble": false,
           "axis": "claim",
+          "body_m": [
+            0.17,
+            50.07,
+            0.06
+          ],
+          "body_source": "spatial_contract",
+          "housed": false,
+          "rects_uv": [],
+          "reserved": false,
           "values": [
             "metric",
             "none",
@@ -1947,35 +1963,15 @@
             "datum"
           ],
           "wall": null,
-          "wall_side": "",
           "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
-          "body_m": [
-            0.17,
-            50.07,
-            0.06
-          ],
-          "body_source": "spatial_contract",
-          "housed": false,
-          "reserved": false,
-          "assemble": false,
-          "why": "precinct work (0.2 x 0.1 m) \u2014 not hung; it wants ground of its own and a threshold into it"
+          "wall_side": "",
+          "why": "precinct work (0.2 x 0.1 m) \u2014 not hung; it wants ground of its own and a threshold into it",
+          "world": []
         },
         {
           "anchor": "laser_exploding_sphere",
+          "assemble": false,
           "axis": "moment",
-          "values": [
-            "intact",
-            "fissured",
-            "burst",
-            "scattered"
-          ],
-          "wall": null,
-          "wall_side": "",
-          "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
           "body_m": [
             0.745,
             0.762,
@@ -1983,13 +1979,33 @@
           ],
           "body_source": "godot_configured_variants",
           "housed": false,
+          "rects_uv": [],
           "reserved": false,
-          "assemble": false,
-          "why": "body projects 0.76 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear"
+          "values": [
+            "intact",
+            "fissured",
+            "burst",
+            "scattered"
+          ],
+          "wall": null,
+          "wall_normal": [],
+          "wall_side": "",
+          "why": "body projects 0.76 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear",
+          "world": []
         },
         {
           "anchor": "mystic_writing_pad",
+          "assemble": false,
           "axis": "retention",
+          "body_m": [
+            1.05,
+            0.22,
+            1.45
+          ],
+          "body_source": "spatial_contract",
+          "housed": false,
+          "rects_uv": [],
+          "reserved": false,
           "values": [
             "wax",
             "none",
@@ -1998,46 +2014,21 @@
             "archive"
           ],
           "wall": null,
-          "wall_side": "",
           "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
-          "body_m": [
-            1.05,
-            0.22,
-            1.45
-          ],
-          "body_source": "spatial_contract",
-          "housed": false,
-          "reserved": false,
-          "assemble": false,
-          "why": "2 wall(s) had 6.85 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps science_screen.support=frame"
+          "wall_side": "",
+          "why": "2 wall(s) had 6.85 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps science_screen.support=frame",
+          "world": []
         },
         {
           "anchor": "draw_dot",
+          "assemble": false,
           "axis": "retention",
-          "values": [
-            "none",
-            "trace",
-            "lattice",
-            "archive",
-            "wax"
-          ],
-          "wall": null,
-          "wall_side": "",
-          "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
           "body_m": [
             0.5,
             0.34,
             0.5
           ],
           "body_source": "godot_preflight_refusal",
-          "housed": false,
-          "reserved": false,
-          "assemble": false,
-          "why": "configured geometry does not travel with its artifact root",
           "contract_repair": {
             "invalid": [
               "none",
@@ -2047,37 +2038,10 @@
               "wax"
             ],
             "missing": []
-          }
-        },
-        {
-          "anchor": "room_grammar",
-          "axis": "depth",
-          "values": [
-            1,
-            2,
-            3,
-            4,
-            5
-          ],
-          "wall": null,
-          "wall_side": "",
-          "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
-          "body_m": [
-            0.8,
-            0.8,
-            0.0
-          ],
-          "body_source": "spatial_contract",
+          },
           "housed": false,
+          "rects_uv": [],
           "reserved": false,
-          "assemble": false,
-          "why": "body projects 0.80 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear"
-        },
-        {
-          "anchor": "grab_sphere_point_snap",
-          "axis": "retention",
           "values": [
             "none",
             "trace",
@@ -2086,20 +2050,47 @@
             "wax"
           ],
           "wall": null,
-          "wall_side": "",
           "wall_normal": [],
+          "wall_side": "",
+          "why": "configured geometry does not travel with its artifact root",
+          "world": []
+        },
+        {
+          "anchor": "room_grammar",
+          "assemble": false,
+          "axis": "depth",
+          "body_m": [
+            0.8,
+            0.8,
+            0.0
+          ],
+          "body_source": "spatial_contract",
+          "housed": false,
           "rects_uv": [],
-          "world": [],
+          "reserved": false,
+          "values": [
+            1.0,
+            2.0,
+            3.0,
+            4.0,
+            5.0
+          ],
+          "wall": null,
+          "wall_normal": [],
+          "wall_side": "",
+          "why": "body projects 0.80 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear",
+          "world": []
+        },
+        {
+          "anchor": "grab_sphere_point_snap",
+          "assemble": false,
+          "axis": "retention",
           "body_m": [
             0.04,
             0.15,
             0.04
           ],
           "body_source": "godot_preflight_refusal",
-          "housed": false,
-          "reserved": false,
-          "assemble": false,
-          "why": "configured geometry does not travel with its artifact root",
           "contract_repair": {
             "invalid": [
               "none",
@@ -2109,11 +2100,10 @@
               "wax"
             ],
             "missing": []
-          }
-        },
-        {
-          "anchor": "player_trace",
-          "axis": "retention",
+          },
+          "housed": false,
+          "rects_uv": [],
+          "reserved": false,
           "values": [
             "none",
             "trace",
@@ -2122,10 +2112,15 @@
             "wax"
           ],
           "wall": null,
-          "wall_side": "",
           "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
+          "wall_side": "",
+          "why": "configured geometry does not travel with its artifact root",
+          "world": []
+        },
+        {
+          "anchor": "player_trace",
+          "assemble": false,
+          "axis": "retention",
           "body_m": [
             1.0,
             1.0,
@@ -2133,13 +2128,34 @@
           ],
           "body_source": "spatial_contract",
           "housed": false,
+          "rects_uv": [],
           "reserved": false,
-          "assemble": false,
-          "why": "body projects 1.00 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear"
+          "values": [
+            "none",
+            "trace",
+            "lattice",
+            "archive",
+            "wax"
+          ],
+          "wall": null,
+          "wall_normal": [],
+          "wall_side": "",
+          "why": "body projects 1.00 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear",
+          "world": []
         },
         {
           "anchor": "catalyst_pedestal",
+          "assemble": false,
           "axis": "offer",
+          "body_m": [
+            1.02,
+            1.02,
+            1.02
+          ],
+          "body_source": "spatial_contract",
+          "housed": false,
+          "rects_uv": [],
+          "reserved": false,
           "values": [
             "cage",
             "plinth",
@@ -2148,36 +2164,22 @@
             "shrine"
           ],
           "wall": null,
-          "wall_side": "",
           "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
-          "body_m": [
-            1.02,
-            1.02,
-            1.02
-          ],
-          "body_source": "spatial_contract",
-          "housed": false,
-          "reserved": false,
-          "assemble": false,
-          "why": "body projects 1.02 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear"
+          "wall_side": "",
+          "why": "body projects 1.02 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear",
+          "world": []
         },
         {
           "anchor": "parasol_triangle",
+          "assemble": true,
           "axis": "convention",
-          "values": [
-            "none",
-            "normal",
-            "winding",
-            "both"
+          "body_m": [
+            0.4,
+            0.36,
+            1.841
           ],
-          "wall": "sainsbury-false-perspective-enfilade/east_24_20",
-          "wall_side": "east",
-          "wall_normal": [
-            -1,
-            0
-          ],
+          "body_source": "godot_configured_variants",
+          "housed": true,
           "rects_uv": [
             [
               0.1,
@@ -2204,6 +2206,20 @@
               2.62
             ]
           ],
+          "reserved": true,
+          "values": [
+            "none",
+            "normal",
+            "winding",
+            "both"
+          ],
+          "wall": "sainsbury-false-perspective-enfilade/east_24_20",
+          "wall_normal": [
+            -1.0,
+            0.0
+          ],
+          "wall_side": "east",
+          "why": "two cells of standing room in front, walkable and unclaimed",
           "world": [
             [
               24.5,
@@ -2225,31 +2241,12 @@
               1.7,
               22.7
             ]
-          ],
-          "body_m": [
-            0.4,
-            0.36,
-            1.841
-          ],
-          "body_source": "godot_configured_variants",
-          "housed": true,
-          "reserved": true,
-          "assemble": true,
-          "why": "two cells of standing room in front, walkable and unclaimed"
+          ]
         },
         {
           "anchor": "triangle_line_puzzle",
+          "assemble": false,
           "axis": "stock",
-          "values": [
-            "racked",
-            "strewn",
-            "ringed"
-          ],
-          "wall": null,
-          "wall_side": "",
-          "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
           "body_m": [
             0.27,
             1.0,
@@ -2257,24 +2254,23 @@
           ],
           "body_source": "spatial_contract",
           "housed": false,
+          "rects_uv": [],
           "reserved": false,
-          "assemble": false,
-          "why": "body projects 1.00 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear"
+          "values": [
+            "racked",
+            "strewn",
+            "ringed"
+          ],
+          "wall": null,
+          "wall_normal": [],
+          "wall_side": "",
+          "why": "body projects 1.00 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear",
+          "world": []
         },
         {
           "anchor": "triangleprofiles",
+          "assemble": false,
           "axis": "facture",
-          "values": [
-            "facet",
-            "cast",
-            "armature",
-            "shell"
-          ],
-          "wall": null,
-          "wall_side": "",
-          "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
           "body_m": [
             5.01,
             5.01,
@@ -2282,13 +2278,8 @@
           ],
           "body_source": "spatial_contract",
           "housed": false,
+          "rects_uv": [],
           "reserved": false,
-          "assemble": false,
-          "why": "body projects 5.01 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear"
-        },
-        {
-          "anchor": "folded_strip",
-          "axis": "facture",
           "values": [
             "facet",
             "cast",
@@ -2296,10 +2287,15 @@
             "shell"
           ],
           "wall": null,
-          "wall_side": "",
           "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
+          "wall_side": "",
+          "why": "body projects 5.01 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear",
+          "world": []
+        },
+        {
+          "anchor": "folded_strip",
+          "assemble": false,
+          "axis": "facture",
           "body_m": [
             4.01,
             0.31,
@@ -2307,35 +2303,30 @@
           ],
           "body_source": "spatial_contract",
           "housed": false,
+          "rects_uv": [],
           "reserved": false,
-          "assemble": false,
-          "why": "1 wall(s) had 17.24 m free but every one was already hung across: sainsbury-false-perspective-enfilade/east_14_14: overlaps klee_walking_point.walk_style=meander"
+          "values": [
+            "facet",
+            "cast",
+            "armature",
+            "shell"
+          ],
+          "wall": null,
+          "wall_normal": [],
+          "wall_side": "",
+          "why": "1 wall(s) had 17.24 m free but every one was already hung across: sainsbury-false-perspective-enfilade/east_14_14: overlaps klee_walking_point.walk_style=meander",
+          "world": []
         },
         {
           "anchor": "draw_triangle_faces",
+          "assemble": false,
           "axis": "retention",
-          "values": [
-            "none",
-            "trace",
-            "lattice",
-            "archive",
-            "wax"
-          ],
-          "wall": null,
-          "wall_side": "",
-          "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
           "body_m": [
             0.1,
             0.18,
             0.07
           ],
           "body_source": "godot_preflight_refusal",
-          "housed": false,
-          "reserved": false,
-          "assemble": false,
-          "why": "configured geometry does not travel with its artifact root",
           "contract_repair": {
             "invalid": [
               "none",
@@ -2345,22 +2336,27 @@
               "wax"
             ],
             "missing": []
-          }
+          },
+          "housed": false,
+          "rects_uv": [],
+          "reserved": false,
+          "values": [
+            "none",
+            "trace",
+            "lattice",
+            "archive",
+            "wax"
+          ],
+          "wall": null,
+          "wall_normal": [],
+          "wall_side": "",
+          "why": "configured geometry does not travel with its artifact root",
+          "world": []
         },
         {
           "anchor": "pythagorean_triangle_angles",
+          "assemble": false,
           "axis": "evidence",
-          "values": [
-            "result",
-            "trace",
-            "longhand",
-            "axiom"
-          ],
-          "wall": null,
-          "wall_side": "",
-          "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
           "body_m": [
             3.0,
             0.01,
@@ -2368,24 +2364,24 @@
           ],
           "body_source": "spatial_contract",
           "housed": false,
+          "rects_uv": [],
           "reserved": false,
-          "assemble": false,
-          "why": "1 wall(s) had 13.20 m free but every one was already hung across: sainsbury-false-perspective-enfilade/east_14_14: overlaps point"
+          "values": [
+            "result",
+            "trace",
+            "longhand",
+            "axiom"
+          ],
+          "wall": null,
+          "wall_normal": [],
+          "wall_side": "",
+          "why": "1 wall(s) had 13.20 m free but every one was already hung across: sainsbury-false-perspective-enfilade/east_14_14: overlaps point",
+          "world": []
         },
         {
           "anchor": "quad_line_puzzle",
+          "assemble": false,
           "axis": "figure",
-          "values": [
-            "square",
-            "rectangle",
-            "rhombus",
-            "trapezoid"
-          ],
-          "wall": null,
-          "wall_side": "",
-          "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
           "body_m": [
             0.27,
             1.0,
@@ -2393,24 +2389,24 @@
           ],
           "body_source": "spatial_contract",
           "housed": false,
+          "rects_uv": [],
           "reserved": false,
-          "assemble": false,
-          "why": "body projects 1.00 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear"
+          "values": [
+            "square",
+            "rectangle",
+            "rhombus",
+            "trapezoid"
+          ],
+          "wall": null,
+          "wall_normal": [],
+          "wall_side": "",
+          "why": "body projects 1.00 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear",
+          "world": []
         },
         {
           "anchor": "grab_trihedron",
+          "assemble": false,
           "axis": "figure",
-          "values": [
-            "wedge",
-            "corner",
-            "regular",
-            "inverted"
-          ],
-          "wall": null,
-          "wall_side": "",
-          "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
           "body_m": [
             1.2,
             1.2,
@@ -2418,25 +2414,31 @@
           ],
           "body_source": "spatial_contract",
           "housed": false,
+          "rects_uv": [],
           "reserved": false,
-          "assemble": false,
-          "why": "body projects 1.20 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear"
+          "values": [
+            "wedge",
+            "corner",
+            "regular",
+            "inverted"
+          ],
+          "wall": null,
+          "wall_normal": [],
+          "wall_side": "",
+          "why": "body projects 1.20 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear",
+          "world": []
         },
         {
           "anchor": "pyramid_edit",
+          "assemble": true,
           "axis": "constraint",
-          "values": [
-            "free",
-            "symmetric",
-            "apex_only",
-            "base_only"
+          "body_m": [
+            0.691,
+            0.691,
+            0.891
           ],
-          "wall": "sainsbury-false-perspective-enfilade/north_14_15",
-          "wall_side": "north",
-          "wall_normal": [
-            0,
-            1
-          ],
+          "body_source": "godot_configured_variants",
+          "housed": true,
           "rects_uv": [
             [
               0.518,
@@ -2463,6 +2465,20 @@
               2.146
             ]
           ],
+          "reserved": true,
+          "values": [
+            "free",
+            "symmetric",
+            "apex_only",
+            "base_only"
+          ],
+          "wall": "sainsbury-false-perspective-enfilade/north_14_15",
+          "wall_normal": [
+            0.0,
+            1.0
+          ],
+          "wall_side": "north",
+          "why": "two cells of standing room in front, walkable and unclaimed",
           "world": [
             [
               15.864,
@@ -2484,21 +2500,21 @@
               1.7,
               14.5
             ]
-          ],
-          "body_m": [
-            0.691,
-            0.691,
-            0.891
-          ],
-          "body_source": "godot_configured_variants",
-          "housed": true,
-          "reserved": true,
-          "assemble": true,
-          "why": "two cells of standing room in front, walkable and unclaimed"
+          ]
         },
         {
           "anchor": "tentacle_placer",
+          "assemble": false,
           "axis": "posture",
+          "body_m": [
+            1.04,
+            1.01,
+            7.51
+          ],
+          "body_source": "spatial_contract",
+          "housed": false,
+          "rects_uv": [],
+          "reserved": false,
           "values": [
             "cycle",
             "sentry",
@@ -2507,34 +2523,15 @@
             "cast"
           ],
           "wall": null,
-          "wall_side": "",
           "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
-          "body_m": [
-            1.04,
-            1.01,
-            7.51
-          ],
-          "body_source": "spatial_contract",
-          "housed": false,
-          "reserved": false,
-          "assemble": false,
-          "why": "precinct work (1.0 x 7.5 m) \u2014 not hung; it wants ground of its own and a threshold into it"
+          "wall_side": "",
+          "why": "precinct work (1.0 x 7.5 m) \u2014 not hung; it wants ground of its own and a threshold into it",
+          "world": []
         },
         {
           "anchor": "animatedcubebuilder",
+          "assemble": false,
           "axis": "closure",
-          "values": [
-            "strata",
-            "scaffold",
-            "solid"
-          ],
-          "wall": null,
-          "wall_side": "",
-          "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
           "body_m": [
             1.0,
             1.0,
@@ -2542,24 +2539,23 @@
           ],
           "body_source": "spatial_contract",
           "housed": false,
+          "rects_uv": [],
           "reserved": false,
-          "assemble": false,
-          "why": "body projects 1.00 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear"
+          "values": [
+            "strata",
+            "scaffold",
+            "solid"
+          ],
+          "wall": null,
+          "wall_normal": [],
+          "wall_side": "",
+          "why": "body projects 1.00 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear",
+          "world": []
         },
         {
           "anchor": "polyhedron_nets_cube",
+          "assemble": false,
           "axis": "fold",
-          "values": [
-            "animated",
-            "closed",
-            "hinged",
-            "flat"
-          ],
-          "wall": null,
-          "wall_side": "",
-          "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
           "body_m": [
             2.0,
             1.5,
@@ -2567,24 +2563,24 @@
           ],
           "body_source": "spatial_contract",
           "housed": false,
+          "rects_uv": [],
           "reserved": false,
-          "assemble": false,
-          "why": "body projects 1.50 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear"
+          "values": [
+            "animated",
+            "closed",
+            "hinged",
+            "flat"
+          ],
+          "wall": null,
+          "wall_normal": [],
+          "wall_side": "",
+          "why": "body projects 1.50 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear",
+          "world": []
         },
         {
           "anchor": "catalyst_target",
+          "assemble": false,
           "axis": "mark",
-          "values": [
-            "none",
-            "bullseye",
-            "grid",
-            "nimbus"
-          ],
-          "wall": null,
-          "wall_side": "",
-          "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
           "body_m": [
             1.61,
             1.61,
@@ -2592,13 +2588,33 @@
           ],
           "body_source": "godot_configured_variants",
           "housed": false,
+          "rects_uv": [],
           "reserved": false,
-          "assemble": false,
-          "why": "body projects 1.61 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear"
+          "values": [
+            "none",
+            "bullseye",
+            "grid",
+            "nimbus"
+          ],
+          "wall": null,
+          "wall_normal": [],
+          "wall_side": "",
+          "why": "body projects 1.61 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear",
+          "world": []
         },
         {
           "anchor": "library_rack",
+          "assemble": false,
           "axis": "guard",
+          "body_m": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "body_source": "spatial_contract",
+          "housed": false,
+          "rects_uv": [],
+          "reserved": false,
           "values": [
             "none",
             "label",
@@ -2607,35 +2623,15 @@
             "cordon"
           ],
           "wall": null,
-          "wall_side": "",
           "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
-          "body_m": [
-            1.0,
-            1.0,
-            1.0
-          ],
-          "body_source": "spatial_contract",
-          "housed": false,
-          "reserved": false,
-          "assemble": false,
-          "why": "body projects 1.00 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear"
+          "wall_side": "",
+          "why": "body projects 1.00 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear",
+          "world": []
         },
         {
           "anchor": "diamonds",
+          "assemble": false,
           "axis": "twist_rule",
-          "values": [
-            "linear",
-            "fixed",
-            "alternating",
-            "accelerating"
-          ],
-          "wall": null,
-          "wall_side": "",
-          "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
           "body_m": [
             3.54,
             3.54,
@@ -2643,23 +2639,24 @@
           ],
           "body_source": "spatial_contract",
           "housed": false,
+          "rects_uv": [],
           "reserved": false,
-          "assemble": false,
-          "why": "precinct work (3.5 x 24.0 m) \u2014 not hung; it wants ground of its own and a threshold into it"
+          "values": [
+            "linear",
+            "fixed",
+            "alternating",
+            "accelerating"
+          ],
+          "wall": null,
+          "wall_normal": [],
+          "wall_side": "",
+          "why": "precinct work (3.5 x 24.0 m) \u2014 not hung; it wants ground of its own and a threshold into it",
+          "world": []
         },
         {
           "anchor": "platonic_grabbables",
+          "assemble": false,
           "axis": "facture",
-          "values": [
-            "plate",
-            "cast",
-            "armature"
-          ],
-          "wall": null,
-          "wall_side": "",
-          "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
           "body_m": [
             6.74,
             5.11,
@@ -2667,25 +2664,30 @@
           ],
           "body_source": "spatial_contract",
           "housed": false,
+          "rects_uv": [],
           "reserved": false,
-          "assemble": false,
-          "why": "body projects 5.11 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear"
+          "values": [
+            "plate",
+            "cast",
+            "armature"
+          ],
+          "wall": null,
+          "wall_normal": [],
+          "wall_side": "",
+          "why": "body projects 5.11 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear",
+          "world": []
         },
         {
           "anchor": "plus",
+          "assemble": true,
           "axis": "symmetry",
-          "values": [
-            "c4",
-            "c2",
-            "latin",
-            "tau"
+          "body_m": [
+            0.9,
+            0.125,
+            0.9
           ],
-          "wall": "sainsbury-false-perspective-enfilade/south_38_23",
-          "wall_side": "south",
-          "wall_normal": [
-            0,
-            -1
-          ],
+          "body_source": "godot_configured_variants",
+          "housed": true,
           "rects_uv": [
             [
               0.1,
@@ -2712,6 +2714,20 @@
               2.15
             ]
           ],
+          "reserved": true,
+          "values": [
+            "c4",
+            "c2",
+            "latin",
+            "tau"
+          ],
+          "wall": "sainsbury-false-perspective-enfilade/south_38_23",
+          "wall_normal": [
+            0.0,
+            -1.0
+          ],
+          "wall_side": "south",
+          "why": "two cells of standing room in front, walkable and unclaimed",
           "world": [
             [
               23.55,
@@ -2733,21 +2749,21 @@
               1.7,
               38.5
             ]
-          ],
-          "body_m": [
-            0.9,
-            0.125,
-            0.9
-          ],
-          "body_source": "godot_configured_variants",
-          "housed": true,
-          "reserved": true,
-          "assemble": true,
-          "why": "two cells of standing room in front, walkable and unclaimed"
+          ]
         },
         {
           "anchor": "grab_octahedron",
+          "assemble": false,
           "axis": "dual",
+          "body_m": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "body_source": "spatial_contract",
+          "housed": false,
+          "rects_uv": [],
+          "reserved": false,
           "values": [
             "off",
             "around",
@@ -2755,35 +2771,15 @@
             "both"
           ],
           "wall": null,
-          "wall_side": "",
           "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
-          "body_m": [
-            1.0,
-            1.0,
-            1.0
-          ],
-          "body_source": "spatial_contract",
-          "housed": false,
-          "reserved": false,
-          "assemble": false,
-          "why": "body projects 1.00 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear"
+          "wall_side": "",
+          "why": "body projects 1.00 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear",
+          "world": []
         },
         {
           "anchor": "sphere_mid",
+          "assemble": false,
           "axis": "resolution",
-          "values": [
-            "coarse",
-            "mid",
-            "fine",
-            "ultra"
-          ],
-          "wall": null,
-          "wall_side": "",
-          "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
           "body_m": [
             0.97,
             0.95,
@@ -2791,25 +2787,24 @@
           ],
           "body_source": "spatial_contract",
           "housed": false,
+          "rects_uv": [],
           "reserved": false,
-          "assemble": false,
-          "why": "body projects 0.95 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear"
+          "values": [
+            "coarse",
+            "mid",
+            "fine",
+            "ultra"
+          ],
+          "wall": null,
+          "wall_normal": [],
+          "wall_side": "",
+          "why": "body projects 0.95 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear",
+          "world": []
         },
         {
           "anchor": "star_primitive",
+          "assemble": false,
           "axis": "points",
-          "values": [
-            4,
-            5,
-            6,
-            8,
-            12
-          ],
-          "wall": null,
-          "wall_side": "",
-          "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
           "body_m": [
             0.9,
             0.25,
@@ -2817,25 +2812,32 @@
           ],
           "body_source": "spatial_contract",
           "housed": false,
+          "rects_uv": [],
           "reserved": false,
-          "assemble": false,
-          "why": "2 wall(s) had 6.10 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps science_screen.support=frame"
+          "values": [
+            4.0,
+            5.0,
+            6.0,
+            8.0,
+            12.0
+          ],
+          "wall": null,
+          "wall_normal": [],
+          "wall_side": "",
+          "why": "2 wall(s) had 6.10 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps science_screen.support=frame",
+          "world": []
         },
         {
           "anchor": "lshape",
+          "assemble": true,
           "axis": "corner",
-          "values": [
-            "joint",
-            "butt",
-            "mitre",
-            "gap"
+          "body_m": [
+            1.1,
+            0.2,
+            3.2
           ],
-          "wall": "sainsbury-false-perspective-enfilade/south_14_14",
-          "wall_side": "south",
-          "wall_normal": [
-            0,
-            -1
-          ],
+          "body_source": "spatial_contract",
+          "housed": true,
           "rects_uv": [
             [
               0.2,
@@ -2862,6 +2864,20 @@
               3.3
             ]
           ],
+          "reserved": true,
+          "values": [
+            "joint",
+            "butt",
+            "mitre",
+            "gap"
+          ],
+          "wall": "sainsbury-false-perspective-enfilade/south_14_14",
+          "wall_normal": [
+            0.0,
+            -1.0
+          ],
+          "wall_side": "south",
+          "why": "two cells of standing room in front, walkable and unclaimed",
           "world": [
             [
               14.75,
@@ -2883,21 +2899,21 @@
               1.7,
               14.5
             ]
-          ],
-          "body_m": [
-            1.1,
-            0.2,
-            3.2
-          ],
-          "body_source": "spatial_contract",
-          "housed": true,
-          "reserved": true,
-          "assemble": true,
-          "why": "two cells of standing room in front, walkable and unclaimed"
+          ]
         },
         {
           "anchor": "hole_with_cones",
+          "assemble": false,
           "axis": "cordon",
+          "body_m": [
+            4.0,
+            4.0,
+            0.8
+          ],
+          "body_source": "spatial_contract",
+          "housed": false,
+          "rects_uv": [],
+          "reserved": false,
           "values": [
             "cones",
             "tape",
@@ -2906,37 +2922,22 @@
             "covered"
           ],
           "wall": null,
-          "wall_side": "",
           "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
-          "body_m": [
-            4.0,
-            4.0,
-            0.8
-          ],
-          "body_source": "spatial_contract",
-          "housed": false,
-          "reserved": false,
-          "assemble": false,
-          "why": "body projects 4.00 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear"
+          "wall_side": "",
+          "why": "body projects 4.00 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear",
+          "world": []
         },
         {
           "anchor": "truncatedtetrahedron",
+          "assemble": true,
           "axis": "truncation",
-          "values": [
-            0.1,
-            0.25,
-            0.5,
-            0.75,
-            1.0
+          "body_m": [
+            0.4,
+            0.4,
+            0.4
           ],
-          "wall": "sainsbury-false-perspective-enfilade/west_14_33",
-          "wall_side": "west",
-          "wall_normal": [
-            1,
-            0
-          ],
+          "body_source": "godot_configured_variants",
+          "housed": true,
           "rects_uv": [
             [
               0.7,
@@ -2969,6 +2970,21 @@
               1.9
             ]
           ],
+          "reserved": true,
+          "values": [
+            0.1,
+            0.25,
+            0.5,
+            0.75,
+            1.0
+          ],
+          "wall": "sainsbury-false-perspective-enfilade/west_14_33",
+          "wall_normal": [
+            1.0,
+            0.0
+          ],
+          "wall_side": "west",
+          "why": "two cells of standing room in front, walkable and unclaimed",
           "world": [
             [
               14.5,
@@ -2995,32 +3011,12 @@
               1.7,
               37.1
             ]
-          ],
-          "body_m": [
-            0.4,
-            0.4,
-            0.4
-          ],
-          "body_source": "godot_configured_variants",
-          "housed": true,
-          "reserved": true,
-          "assemble": true,
-          "why": "two cells of standing room in front, walkable and unclaimed"
+          ]
         },
         {
           "anchor": "sphere_high",
+          "assemble": false,
           "axis": "tessellation",
-          "values": [
-            "coarse",
-            "low",
-            "high",
-            "ultra"
-          ],
-          "wall": null,
-          "wall_side": "",
-          "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
           "body_m": [
             1.0,
             1.0,
@@ -3028,25 +3024,31 @@
           ],
           "body_source": "spatial_contract",
           "housed": false,
+          "rects_uv": [],
           "reserved": false,
-          "assemble": false,
-          "why": "body projects 1.00 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear"
+          "values": [
+            "coarse",
+            "low",
+            "high",
+            "ultra"
+          ],
+          "wall": null,
+          "wall_normal": [],
+          "wall_side": "",
+          "why": "body projects 1.00 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear",
+          "world": []
         },
         {
           "anchor": "righttriangle",
+          "assemble": true,
           "axis": "proportion",
-          "values": [
-            "isoceles",
-            "3-4-5",
-            "1-2",
-            "kepler"
+          "body_m": [
+            1.0,
+            0.1,
+            1.0
           ],
-          "wall": "sainsbury-false-perspective-enfilade/south_14_23",
-          "wall_side": "south",
-          "wall_normal": [
-            0,
-            -1
-          ],
+          "body_source": "spatial_contract",
+          "housed": true,
           "rects_uv": [
             [
               0.4,
@@ -3073,6 +3075,20 @@
               2.2
             ]
           ],
+          "reserved": true,
+          "values": [
+            "isoceles",
+            "3-4-5",
+            "1-2",
+            "kepler"
+          ],
+          "wall": "sainsbury-false-perspective-enfilade/south_14_23",
+          "wall_normal": [
+            0.0,
+            -1.0
+          ],
+          "wall_side": "south",
+          "why": "two cells of standing room in front, walkable and unclaimed",
           "world": [
             [
               23.9,
@@ -3094,31 +3110,12 @@
               1.7,
               14.5
             ]
-          ],
-          "body_m": [
-            1.0,
-            0.1,
-            1.0
-          ],
-          "body_source": "spatial_contract",
-          "housed": true,
-          "reserved": true,
-          "assemble": true,
-          "why": "two cells of standing room in front, walkable and unclaimed"
+          ]
         },
         {
           "anchor": "sphere_low",
+          "assemble": false,
           "axis": "facets",
-          "values": [
-            "shown",
-            "hidden",
-            "only"
-          ],
-          "wall": null,
-          "wall_side": "",
-          "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
           "body_m": [
             0.95,
             1.0,
@@ -3126,26 +3123,30 @@
           ],
           "body_source": "spatial_contract",
           "housed": false,
+          "rects_uv": [],
           "reserved": false,
-          "assemble": false,
-          "why": "body projects 1.00 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear"
+          "values": [
+            "shown",
+            "hidden",
+            "only"
+          ],
+          "wall": null,
+          "wall_normal": [],
+          "wall_side": "",
+          "why": "body projects 1.00 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear",
+          "world": []
         },
         {
           "anchor": "capsule",
+          "assemble": true,
           "axis": "facture",
-          "values": [
-            "cast",
-            "facet",
-            "armature",
-            "section",
-            "wear"
+          "body_m": [
+            0.5,
+            0.5,
+            1.014
           ],
-          "wall": "sainsbury-false-perspective-enfilade/west_18_24",
-          "wall_side": "west",
-          "wall_normal": [
-            1,
-            0
-          ],
+          "body_source": "godot_configured_variants",
+          "housed": true,
           "rects_uv": [
             [
               0.45,
@@ -3178,6 +3179,21 @@
               2.207
             ]
           ],
+          "reserved": true,
+          "values": [
+            "cast",
+            "facet",
+            "armature",
+            "section",
+            "wear"
+          ],
+          "wall": "sainsbury-false-perspective-enfilade/west_18_24",
+          "wall_normal": [
+            1.0,
+            0.0
+          ],
+          "wall_side": "west",
+          "why": "two cells of standing room in front, walkable and unclaimed",
           "world": [
             [
               18.5,
@@ -3204,33 +3220,12 @@
               1.7,
               28.3
             ]
-          ],
-          "body_m": [
-            0.5,
-            0.5,
-            1.014
-          ],
-          "body_source": "godot_configured_variants",
-          "housed": true,
-          "reserved": true,
-          "assemble": true,
-          "why": "two cells of standing room in front, walkable and unclaimed"
+          ]
         },
         {
           "anchor": "torus_radials_rings",
+          "assemble": false,
           "axis": "ring_segments",
-          "values": [
-            3,
-            4,
-            8,
-            16,
-            32
-          ],
-          "wall": null,
-          "wall_side": "",
-          "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
           "body_m": [
             1.0,
             1.0,
@@ -3238,25 +3233,25 @@
           ],
           "body_source": "spatial_contract",
           "housed": false,
+          "rects_uv": [],
           "reserved": false,
-          "assemble": false,
-          "why": "body projects 1.00 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear"
+          "values": [
+            3.0,
+            4.0,
+            8.0,
+            16.0,
+            32.0
+          ],
+          "wall": null,
+          "wall_normal": [],
+          "wall_side": "",
+          "why": "body projects 1.00 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear",
+          "world": []
         },
         {
           "anchor": "roughrock",
+          "assemble": false,
           "axis": "rock_seed",
-          "values": [
-            0,
-            1,
-            2,
-            3,
-            7
-          ],
-          "wall": null,
-          "wall_side": "",
-          "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
           "body_m": [
             0.61,
             0.53,
@@ -3264,24 +3259,25 @@
           ],
           "body_source": "spatial_contract",
           "housed": false,
+          "rects_uv": [],
           "reserved": false,
-          "assemble": false,
-          "why": "2 wall(s) had 4.65 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps science_screen.support=frame"
+          "values": [
+            0.0,
+            1.0,
+            2.0,
+            3.0,
+            7.0
+          ],
+          "wall": null,
+          "wall_normal": [],
+          "wall_side": "",
+          "why": "2 wall(s) had 4.65 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps science_screen.support=frame",
+          "world": []
         },
         {
           "anchor": "snap_octahedron_puzzle",
+          "assemble": false,
           "axis": "dual",
-          "values": [
-            "off",
-            "around",
-            "inside",
-            "both"
-          ],
-          "wall": null,
-          "wall_side": "",
-          "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
           "body_m": [
             1.0,
             0.8,
@@ -3289,13 +3285,33 @@
           ],
           "body_source": "spatial_contract",
           "housed": false,
+          "rects_uv": [],
           "reserved": false,
-          "assemble": false,
-          "why": "body projects 0.80 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear"
+          "values": [
+            "off",
+            "around",
+            "inside",
+            "both"
+          ],
+          "wall": null,
+          "wall_normal": [],
+          "wall_side": "",
+          "why": "body projects 0.80 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear",
+          "world": []
         },
         {
           "anchor": "capsule_radials_rings",
+          "assemble": false,
           "axis": "cross_section",
+          "body_m": [
+            0.5,
+            0.5,
+            1.0
+          ],
+          "body_source": "spatial_contract",
+          "housed": false,
+          "rects_uv": [],
+          "reserved": false,
           "values": [
             "triangular",
             "square",
@@ -3304,24 +3320,24 @@
             "round"
           ],
           "wall": null,
-          "wall_side": "",
           "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
+          "wall_side": "",
+          "why": "2 wall(s) had 4.10 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps science_screen.support=frame",
+          "world": []
+        },
+        {
+          "anchor": "prism_block",
+          "assemble": false,
+          "axis": "grain",
           "body_m": [
-            0.5,
-            0.5,
+            1.0,
+            1.0,
             1.0
           ],
           "body_source": "spatial_contract",
           "housed": false,
+          "rects_uv": [],
           "reserved": false,
-          "assemble": false,
-          "why": "2 wall(s) had 4.10 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps science_screen.support=frame"
-        },
-        {
-          "anchor": "prism_block",
-          "axis": "grain",
           "values": [
             "solid",
             "split",
@@ -3330,35 +3346,15 @@
             "shell"
           ],
           "wall": null,
-          "wall_side": "",
           "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
-          "body_m": [
-            1.0,
-            1.0,
-            1.0
-          ],
-          "body_source": "spatial_contract",
-          "housed": false,
-          "reserved": false,
-          "assemble": false,
-          "why": "body projects 1.00 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear"
+          "wall_side": "",
+          "why": "body projects 1.00 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear",
+          "world": []
         },
         {
           "anchor": "combine_portals",
+          "assemble": false,
           "axis": "refinement",
-          "values": [
-            "linear",
-            "fixed",
-            "doubling",
-            "inverted"
-          ],
-          "wall": null,
-          "wall_side": "",
-          "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
           "body_m": [
             8.0,
             86.43,
@@ -3366,24 +3362,24 @@
           ],
           "body_source": "spatial_contract",
           "housed": false,
+          "rects_uv": [],
           "reserved": false,
-          "assemble": false,
-          "why": "precinct work (8.0 x 8.0 m) \u2014 not hung; it wants ground of its own and a threshold into it"
+          "values": [
+            "linear",
+            "fixed",
+            "doubling",
+            "inverted"
+          ],
+          "wall": null,
+          "wall_normal": [],
+          "wall_side": "",
+          "why": "precinct work (8.0 x 8.0 m) \u2014 not hung; it wants ground of its own and a threshold into it",
+          "world": []
         },
         {
           "anchor": "durer_scene",
+          "assemble": false,
           "axis": "apparatus",
-          "values": [
-            "finish",
-            "cage",
-            "block",
-            "veil"
-          ],
-          "wall": null,
-          "wall_side": "",
-          "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
           "body_m": [
             5.46,
             6.1,
@@ -3391,13 +3387,33 @@
           ],
           "body_source": "spatial_contract",
           "housed": false,
+          "rects_uv": [],
           "reserved": false,
-          "assemble": false,
-          "why": "precinct work (5.5 x 8.3 m) \u2014 not hung; it wants ground of its own and a threshold into it"
+          "values": [
+            "finish",
+            "cage",
+            "block",
+            "veil"
+          ],
+          "wall": null,
+          "wall_normal": [],
+          "wall_side": "",
+          "why": "precinct work (5.5 x 8.3 m) \u2014 not hung; it wants ground of its own and a threshold into it",
+          "world": []
         },
         {
           "anchor": "snap_pyramid_puzzle",
+          "assemble": false,
           "axis": "apex",
+          "body_m": [
+            1.0,
+            0.7,
+            1.36
+          ],
+          "body_source": "spatial_contract",
+          "housed": false,
+          "rects_uv": [],
+          "reserved": false,
           "values": [
             "tall",
             "regular",
@@ -3406,35 +3422,15 @@
             "inverted"
           ],
           "wall": null,
-          "wall_side": "",
           "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
-          "body_m": [
-            1.0,
-            0.7,
-            1.36
-          ],
-          "body_source": "spatial_contract",
-          "housed": false,
-          "reserved": false,
-          "assemble": false,
-          "why": "2 wall(s) had 6.60 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps science_screen.support=frame"
+          "wall_side": "",
+          "why": "2 wall(s) had 6.60 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps science_screen.support=frame",
+          "world": []
         },
         {
           "anchor": "code_display",
+          "assemble": false,
           "axis": "support",
-          "values": [
-            "none",
-            "stand",
-            "frame",
-            "pylon"
-          ],
-          "wall": null,
-          "wall_side": "",
-          "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
           "body_m": [
             1.0,
             0.0,
@@ -3442,25 +3438,24 @@
           ],
           "body_source": "spatial_contract",
           "housed": false,
+          "rects_uv": [],
           "reserved": false,
-          "assemble": false,
-          "why": "2 wall(s) had 5.20 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps science_screen.support=frame"
+          "values": [
+            "none",
+            "stand",
+            "frame",
+            "pylon"
+          ],
+          "wall": null,
+          "wall_normal": [],
+          "wall_side": "",
+          "why": "2 wall(s) had 5.20 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps science_screen.support=frame",
+          "world": []
         },
         {
           "anchor": "pyramid",
+          "assemble": false,
           "axis": "base_sides",
-          "values": [
-            3,
-            4,
-            5,
-            6,
-            8
-          ],
-          "wall": null,
-          "wall_side": "",
-          "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
           "body_m": [
             0.6,
             0.6,
@@ -3468,24 +3463,25 @@
           ],
           "body_source": "spatial_contract",
           "housed": false,
+          "rects_uv": [],
           "reserved": false,
-          "assemble": false,
-          "why": "2 wall(s) had 4.60 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps science_screen.support=frame"
+          "values": [
+            3.0,
+            4.0,
+            5.0,
+            6.0,
+            8.0
+          ],
+          "wall": null,
+          "wall_normal": [],
+          "wall_side": "",
+          "why": "2 wall(s) had 4.60 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps science_screen.support=frame",
+          "world": []
         },
         {
           "anchor": "pyramidlong",
+          "assemble": false,
           "axis": "apex_stance",
-          "values": [
-            "centred",
-            "edge",
-            "corner",
-            "beyond"
-          ],
-          "wall": null,
-          "wall_side": "",
-          "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
           "body_m": [
             0.8,
             0.8,
@@ -3493,9 +3489,19 @@
           ],
           "body_source": "spatial_contract",
           "housed": false,
+          "rects_uv": [],
           "reserved": false,
-          "assemble": false,
-          "why": "body projects 0.80 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear"
+          "values": [
+            "centred",
+            "edge",
+            "corner",
+            "beyond"
+          ],
+          "wall": null,
+          "wall_normal": [],
+          "wall_side": "",
+          "why": "body projects 0.80 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear",
+          "world": []
         }
       ],
       "dna_spatial_demand": [
@@ -3787,7 +3793,8 @@
       "pearl_index": 0,
       "map": "Point_One",
       "pearls_total": 11,
-      "hero": "CoordinateSystem3M"
+      "hero": "CoordinateSystem3M",
+      "dressing": []
     },
     {
       "museum": "sainsbury-false-perspective-enfilade",
