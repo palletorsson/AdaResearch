@@ -86,6 +86,13 @@ func _run() -> void:
 	var row3: Dictionary = s.call("_row")
 	print("STUDIO after undos: dressing %d, drops %s" % [(row3.get("dressing", []) as Array).size(), str(((row3.get("wall_runs", []) as Array)[0] as Dictionary).get("drop", [])) if not (row3.get("wall_runs", []) as Array).is_empty() else "-"])
 	ok = ok and (row3.get("dressing", []) as Array).is_empty()
+	# speak panel: select Point Zero and shoot
+	for r in (s.call("_records") as Array):
+		if String(r.get("token", "")) == "origin" and String(s.call("_kind", r)) == "body":
+			s.set("_sel", r); s.set("_sel_key", s.call("_key_of", r)); s.call("_refresh_marks"); s.call("_refresh_speak")
+	await create_timer(0.5).timeout
+	img = get_root().get_texture().get_image(); img.save_png("user://em_studio_speak.png")
+	print("STUDIO speak panel: %d line(s)" % (s.get("_speak_box") as VBoxContainer).get_child_count())
 	img = get_root().get_texture().get_image(); img.save_png("user://em_studio_after.png")
 	# the isometric view, zoomed on the first hall
 	s.set("_iso", true); s.set("_cam_size", 22.0); s.set("_cam_target", Vector3(7.5, 0, 10.0)); s.call("_apply_cam")

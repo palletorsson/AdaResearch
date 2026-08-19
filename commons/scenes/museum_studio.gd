@@ -25,6 +25,13 @@ extends Node3D
 ## (the plan row's DRESSING rules: offset / rotation / remove / text) · DNA
 ## wall variants (wall_runs: nudge along the wall, drop / restore a value).
 ## Left-drag on empty ground rotates the iso view; middle-drag pans.
+##
+## THE SPEAK (textD) follows the space: a panel on the right lists the
+## chapter's line, the pearl's line and every body's line in the order they
+## hang on the walls, tagged hand / claude / draft, with the painting that
+## carries each. Select a body and its line lights; S edits the selected
+## body's line, Shift+S the pearl's line (written as hand, via
+## tools/em_speak.py, reseeded, rebuilt — the wall changes).
 
 const MUSEUM_SCENE := "res://commons/scenes/endless_museum.tscn"
 const PLAN := "res://ada_run/em_plan.json"
@@ -63,6 +70,9 @@ var _iso: bool = false               # I: orthographic isometric — heights vis
 var _iso_yaw: float = -2.356           # from the south-west, the walk going up-right
 var _iso_pitch: float = 0.85           # radians above the horizon
 var _config_edit: LineEdit
+var _speak_box: VBoxContainer
+var _speak_edit: LineEdit
+var _speak_target: String = ""     # "pearl" or a token
 var _orbit_yaw: float = 0.6
 var _orbit_pitch: float = -0.9
 var _pan_drag: bool = false
@@ -193,9 +203,22 @@ func _build_hud() -> void:
 	_config_edit.placeholder_text = "K: config for the selected body — key=value key=value (Enter writes, empty clears)"
 	_config_edit.text_submitted.connect(_on_config_submit)
 	_hud.add_child(_config_edit)
+	var right := VBoxContainer.new()
+	right.name = "SpeakPanel"
+	right.custom_minimum_size = Vector2(420, 0)
+	right.position = Vector2(get_viewport().get_visible_rect().size.x - 436, 40)
+	_hud.add_child(right)
+	var sh := Label.new(); sh.text = "SPEAK — following the string (S: this body · Shift+S: the pearl)"; sh.add_theme_font_size_override("font_size", 12); sh.add_theme_color_override("font_color", Color(1, 0.85, 0.4))
+	right.add_child(sh)
+	_speak_box = VBoxContainer.new(); right.add_child(_speak_box)
+	_speak_edit = LineEdit.new(); _speak_edit.custom_minimum_size = Vector2(420, 0)
+	_speak_edit.placeholder_text = "S: the selected body's line · Shift+S: the pearl's line — Enter writes (as hand)"
+	_speak_edit.text_submitted.connect(_on_speak_submit)
+	right.add_child(_speak_edit)
+	get_viewport().size_changed.connect(func(): right.position = Vector2(get_viewport().get_visible_rect().size.x - 436, 40))
 	_refused_label = Label.new(); _refused_label.position = Vector2(260, 100); _refused_label.add_theme_color_override("font_color", Color(1.0, 0.55, 0.5)); _hud.add_child(_refused_label)
 	_hint = Label.new()
-	_hint.text = "click select · drag move (Ctrl fine) · left-drag on ground: turn iso · R rotate · +/- scale · P/[ ] plinth · C axis · K config/text · PgUp/PgDn height · Del remove · Home clear rule · Z/Y undo · G overlay · I iso · F frame · B bake · W walk"
+	_hint.text = "click select · drag move (Ctrl fine) · left-drag on ground: turn iso · R rotate · +/- scale · P/[ ] plinth · C axis · K config · S speak / Shift+S pearl · PgUp/PgDn · Del · Home · Z/Y undo · G overlay · I iso · F frame · B bake · W walk"
 	_hint.add_theme_font_size_override("font_size", 12)
 	_hint.add_theme_color_override("font_color", Color(0.75, 0.75, 0.8))
 	_hud.add_child(_hint)
@@ -334,6 +357,7 @@ func _report() -> void:
 		lines.append("refused %s @%s — %s" % [rd.get("token"), rd.get("tile_cell"), String(rd.get("why", "")).substr(0, 60)])
 	_refused_label.text = "\n".join(lines)
 	_show_selection()
+	_refresh_speak()
 
 
 # ── camera ──────────────────────────────────────────────────────────────────
@@ -433,6 +457,70 @@ func _reselect() -> void:
 		if _key_of(r) == _sel_key:
 			_sel = r
 			break
+
+func _refresh_speak() -> void:
+	if _speak_box == null or _museum == null:
+		return
+	for c in _speak_box.get_children():
+		c.queue_free()
+	var sp: Dictionary = _museum.call("_speak_for", _chapter, _pearl)
+	var sel_tok: String = String(_sel.get("token", "")) if not _sel.is_empty() else ""
+	# which painting carries which sentence: the Speak<si> labels in the hall
+	var where: Dictionary = {}
+	for n in _museum.find_children("Speak*", "Label3D", true, false):
+		where[String((n as Label3D).text).to_lower()] = int(n.get_meta("em_speak")) + 1 if n.has_meta("em_speak") else 0
+	var add := func(text: String, tag: String, col: Color, lit: bool, line_key: String = "") -> void:
+		var l := Label.new()
+		var pn: int = int(where.get((line_key if line_key != "" else text).to_lower(), 0))
+		l.text = ("▶ " if lit else "  ") + ("[%s] " % tag) + text + (("   · painting %02d" % pn) if pn > 0 else "")
+		l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		l.custom_minimum_size = Vector2(420, 0)
+		l.add_theme_font_size_override("font_size", 12)
+		l.add_theme_color_override("font_color", Color(1, 0.85, 0.3) if lit else col)
+		_speak_box.add_child(l)
+	var ch_line: String = String(sp.get("chapter_speak", ""))
+	if ch_line != "" and bool(sp.get("first", false)):
+		add.call(_chapter.to_upper() + " — " + ch_line, String(sp.get("chapter_speak_by", "hand")), Color(0.9, 0.9, 0.95), false)
+	var pl: String = String(sp.get("speak", ""))
+	add.call((_pearl + " — " + pl) if pl != "" else (_pearl + " — (no line yet · Shift+S)"), String(sp.get("speak_by", "hand")), Color(0.95, 0.95, 1.0), _speak_target == "pearl", "")
+	var says: Dictionary = sp.get("says", {})
+	var says_by: Dictionary = sp.get("says_by", {})
+	# bodies in the hall first (walk order = the records' order), then lines for tokens not in the hall
+	var seen: Dictionary = {}
+	for r in _records():
+		if _kind(r) != "body":
+			continue
+		var tok: String = String(r.get("token", ""))
+		if seen.has(tok):
+			continue
+		seen[tok] = true
+		var line: String = String(says.get(tok, ""))
+		var tag: String = String(says_by.get(tok, "hand")) if line != "" else "—"
+		var col: Color = Color(0.85, 0.9, 1.0) if tag == "hand" else (Color(0.75, 0.8, 0.9) if tag == "claude" else Color(0.6, 0.6, 0.65))
+		add.call(tok + (": " + line if line != "" else ": (black — S to speak)"), tag, col, tok == sel_tok, line)
+	for tok in says:
+		if not seen.has(String(tok)):
+			add.call(String(tok) + ": " + String(says[tok]) + "   (not in this hall)", String(says_by.get(tok, "hand")), Color(0.55, 0.55, 0.6), false)
+
+func _on_speak_submit(text: String) -> void:
+	_speak_edit.release_focus()
+	if _speak_target == "":
+		return
+	var repo: String = ProjectSettings.globalize_path("res://")
+	var args: PackedStringArray = [repo + "tools/em_speak.py", _chapter, _pearl, "--by", "hand"]
+	if _speak_target == "pearl":
+		args.append("--speak"); args.append(text.strip_edges())
+	else:
+		args.append("--say"); args.append("%s=%s" % [_speak_target, text.strip_edges()])
+	var out: Array = []
+	var code: int = OS.execute("python", args, out, true)
+	if code != 0:
+		_status.text = "SPEAK WRITE FAILED: " + "".join(out).substr(0, 160)
+		return
+	_status.text = "spoken: %s" % (_pearl if _speak_target == "pearl" else _speak_target)
+	_speak_target = ""
+	OS.execute("python", [repo + "tools/em_ship.py"], [], true)
+	_rebuild()
 
 func _refresh_marks() -> void:
 	if _marks != null:
@@ -580,6 +668,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				_sel_key = _key_of(r)
 				_show_selection()
 				_refresh_marks()
+				_refresh_speak()
 				_drag = true
 				_drag_moved = false
 				_drag_start_pos = (r.get("node") as Node3D).global_position
@@ -634,7 +723,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		_key((event as InputEventKey).keycode, (event as InputEventKey).shift_pressed, (event as InputEventKey).alt_pressed)
 
 func _key(k: int, shift: bool, alt: bool) -> void:
-	if _search.has_focus() or _config_edit.has_focus():
+	if _search.has_focus() or _config_edit.has_focus() or _speak_edit.has_focus():
 		return
 	match k:
 		KEY_ESCAPE:
@@ -652,6 +741,19 @@ func _key(k: int, shift: bool, alt: bool) -> void:
 		KEY_K:
 			_config_edit.text = String(_dressing_rule_for(_sel).get("text", "")) if _kind(_sel) == "showing" else _config_text()
 			_config_edit.grab_focus()
+		KEY_S:
+			var sp2: Dictionary = _museum.call("_speak_for", _chapter, _pearl)
+			if shift:
+				_speak_target = "pearl"
+				_speak_edit.text = String(sp2.get("speak", ""))
+			elif not _sel.is_empty() and _kind(_sel) == "body":
+				_speak_target = String(_sel.get("token", ""))
+				_speak_edit.text = String((sp2.get("says", {}) as Dictionary).get(_speak_target, ""))
+			else:
+				_status.text = "select a body for S, or Shift+S for the pearl's line"
+				return
+			_refresh_speak()
+			_speak_edit.grab_focus()
 		KEY_G:
 			_show_overlay = not _show_overlay; _refresh_overlay()
 		KEY_B:
