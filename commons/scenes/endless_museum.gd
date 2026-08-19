@@ -2426,6 +2426,9 @@ func _build_segment() -> void:
 					"showing_rules": _furniture_rules(next_seq, "showing"),
 					"showing_proxies": true,     # ALWAYS: the same records in both modes
 					"ceiling": not _studio,      # the studio's camera looks down into the hall
+					# textD on the wall works: the pearl's sentences, one per showing
+					"speak_lines": _speak_lines(next_seq, String(deal.get("pearl", "")) if deal is Dictionary else ""),
+					"speak_caps": _L("speak", "caps", 0.0) > 0.5,
 					# the LOBBY (first vestibule) hangs no showings: its walls carry the
 					# window, the counter, the extinguisher and the lift instead
 					"bare_below_z": (VESTIBULE_H + 0.6) if (_seg_index == 0 and _L("lobby", "enabled", 1.0) > 0.5) else -1.0,
@@ -2589,7 +2592,6 @@ func _build_segment() -> void:
 				(", %d prop(s) moved aside" % moved) if moved > 0 else ""])
 	_apply_hand_adds(seg, zbase, seg_seq)
 	_number_places(seg, seg_seq, String(deal.get("pearl", "")) if deal is Dictionary else "")
-	_speak_plaque(seg, seg_seq, String(deal.get("pearl", "")) if deal is Dictionary else "", w)
 	# THE AS-BUILT PLAN (2026-08-18). Everything the assembler just decided —
 	# which cells are floor, wall or a body's seal, where every body finally
 	# stands and what it is numbered, every card, the gate, the courts, rooms
@@ -2879,60 +2881,26 @@ func _build_side_rooms(seg: Node3D, solid: StaticBody3D, w: int, tile_h: int,
 ## ada_run/em_inventory.json.
 ## The pearl's line, on the hall side of the entry wall beside the door — the
 ## first thing read after the threshold. A plaque the size of a museum text panel.
-func _speak_plaque(seg: Node3D, chapter: String, pearl: String, w: int) -> void:
+func _speak_plaque(_seg: Node3D, _chapter: String, _pearl: String, _w: int) -> void:
+	pass   # retired 2026-08-19: "no labels in space" — the speak lives on the wall works (em_detail speak_lines)
+
+func _speak_lines(chapter: String, pearl: String) -> Array:
 	var sp: Dictionary = _speak_for(chapter, pearl)
+	var out: Array = []
+	var seen: Dictionary = {}
 	var text: String = String(sp.get("speak", ""))
-	if text == "":
-		return
-	var panel := MeshInstance3D.new()
-	var qm := QuadMesh.new()
-	qm.size = Vector2(1.6, 0.5)
-	panel.mesh = qm
-	var qmat := StandardMaterial3D.new()
-	qmat.albedo_color = Color(0.955, 0.95, 0.93)
-	qmat.roughness = 0.6
-	qmat.emission_enabled = true
-	qmat.emission = Color(0.9, 0.89, 0.85)
-	qmat.emission_energy_multiplier = 0.25
-	panel.material_override = qmat
-	# a LECTERN inside the door, left of the path, tilted up to the eye: the
-	# wall is the showings', the plaque stands on its own (a 1.1 m post)
-	panel.name = "SpeakPlaque"
-	var post := MeshInstance3D.new()
-	var pm := BoxMesh.new(); pm.size = Vector3(0.06, 1.05, 0.06)
-	post.mesh = pm
-	var post_mat := StandardMaterial3D.new(); post_mat.albedo_color = Color(0.22, 0.21, 0.2); post_mat.roughness = 0.5
-	post.material_override = post_mat
-	post.position = Vector3(float(w) / 2.0 + 2.6, 0.525, VESTIBULE_H + 2.6)
-	seg.add_child(post)
-	panel.position = Vector3(float(w) / 2.0 + 2.6, 1.18, VESTIBULE_H + 2.6)
-	panel.rotation_degrees = Vector3(-28.0, 180.0, 0.0)    # faces the door, tilted up
-	seg.add_child(panel)
-	var lbl := Label3D.new()
-	var words: PackedStringArray = text.split(" ")
-	var lines: Array = []
-	var cur := ""
-	for wd in words:
-		if (cur + " " + wd).length() > 34 and cur != "":
-			lines.append(cur)
-			cur = wd
-		else:
-			cur = (cur + " " + wd).strip_edges()
-	if cur != "":
-		lines.append(cur)
-	lbl.text = "%s · %s
-" % [chapter, pearl] + "
-".join(lines.slice(0, 6))
-	lbl.font_size = 58
-	lbl.pixel_size = 0.0010
-	lbl.modulate = Color(0.11, 0.10, 0.09)
-	lbl.outline_size = 0
-	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	lbl.width = 1500
-	lbl.autowrap_mode = TextServer.AUTOWRAP_WORD
-	lbl.position = Vector3(-0.74, 0.0, 0.006)
-	panel.add_child(lbl)
+	for piece in text.replace(";", ".").replace(": ", ". ").split("."):
+		var p: String = String(piece).strip_edges()
+		if p.length() >= 3 and not seen.has(p.to_lower()):
+			seen[p.to_lower()] = true
+			out.append(p)
+	var says: Dictionary = sp.get("says", {})
+	for tok in says:
+		var line: String = String(says[tok]).strip_edges()
+		if line != "" and not seen.has(line.to_lower()):
+			seen[line.to_lower()] = true
+			out.append(line)
+	return out
 
 func _number_places(seg: Node3D, chapter: String, pearl: String) -> void:
 	if chapter == "":
@@ -2982,66 +2950,10 @@ func _number_places(seg: Node3D, chapter: String, pearl: String) -> void:
 			# scale — some artifacts are scaled, and the plaque stretched with
 			# them. So it is a child of the SEGMENT, placed at the body's world
 			# position, at identity scale, facing the way the visitor walks in.
-			var cap := Node3D.new()
-			cap.name = "Caption_%s" % id.replace(":", "_")
-			seg.add_child(cap)
-			cap.global_position = node.global_position + Vector3(0.0, 0.0, -0.8)
-			cap.global_rotation = Vector3.ZERO
-			var post := MeshInstance3D.new()
-			var pm := BoxMesh.new(); pm.size = Vector3(0.035, 0.72, 0.035)
-			post.mesh = pm
-			post.material_override = _sm("plinth")
-			post.position = Vector3(0.0, 0.36, 0.0)
-			cap.add_child(post)
-			var plaque := MeshInstance3D.new()
-			var qm := BoxMesh.new(); qm.size = Vector3(0.46, 0.17, 0.012)
-			plaque.mesh = qm
-			var qmat := StandardMaterial3D.new()
-			qmat.albedo_color = Color(0.955, 0.95, 0.93)
-			qmat.roughness = 0.6
-			# a caption is lit in a museum; here the light is a whisper of its own
-			# so the number reads on the dark side of a body too
-			qmat.emission_enabled = true
-			qmat.emission = Color(0.9, 0.89, 0.85)
-			qmat.emission_energy_multiplier = 0.35
-			plaque.material_override = qmat
-			plaque.position = Vector3(0.0, 0.78, 0.0)
-			plaque.rotation_degrees = Vector3(-16.0, 0.0, 0.0)   # tilted up to the eye
-			cap.add_child(plaque)
-			var plate := Label3D.new()
-			plate.text = id + "
-" + tok.left(18)
-			var say: String = String((_speak_for(chapter, pearl).get("says", {}) as Dictionary).get(tok, ""))
-			if say != "":
-				# textD on the plaque: the body's own line, wrapped to the card
-				var words: PackedStringArray = say.split(" ")
-				var lines: Array = []
-				var cur := ""
-				for wd in words:
-					if (cur + " " + wd).length() > 30 and cur != "":
-						lines.append(cur)
-						cur = wd
-					else:
-						cur = (cur + " " + wd).strip_edges()
-				if cur != "":
-					lines.append(cur)
-				plate.text += "
-" + "
-".join(lines.slice(0, 3))
-				plate.font_size = 30
-				plate.pixel_size = 0.0010
-			plate.font_size = 44
-			# 44 x 0.0010 = 44 mm a line; "primitives:0055" is 15 characters, so
-			# about 330 mm across a 460 mm plaque — it fits, which the first
-			# version did not (the text was four times the card)
-			plate.pixel_size = 0.0010
-			plate.modulate = Color(0.11, 0.10, 0.09)
-			plate.outline_size = 0
-			plate.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-			plate.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-			plate.position = Vector3(0.0, 0.0, -0.008)
-			plate.rotation_degrees.y = 180.0            # the face that looks back down the walk
-			plaque.add_child(plate)
+			# NO LABELS IN SPACE (Palle, 2026-08-19): the standing number plaque is
+			# retired. The number lives on the showing card under each wall work
+			# and in em_inventory.json; the speak lives in the paintings.
+			pass
 			(pl["rec"] as Dictionary)["inv"] = id
 		_inventory.append({"id": id, "chapter": chapter, "pearl": pearl, "kind": kind,
 			"token": tok, "segment": _seg_index - 1,

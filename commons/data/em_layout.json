@@ -64,6 +64,10 @@
 		"_door_sign": "written on the wall's overpanel above the door (2.92..4.5 m), both faces; a free-standing door (gate.depth_rows > 0) carries it on its own header instead",
 		"door_header_m": 0.4
 	},
+	"speak": {
+		"caps": 0,
+		"_caps": "textD on the wall works: 1 = the sentences in CAPS, 0 = as dictated (Roboto, light on the field)"
+	},
 	"rig": {
 		"plain_hands": true,
 		"_plain_hands": "in VR the hand is a visitor's hand: collision hand + pickup + pointer + mesh. On, the wrist tools below come off every rig in the tree, an activated catalyst bracelet is ended, and every token in no_pickup is shown but cannot be grabbed (grabbing one would put the bracelet on the hand). Palle, 2026-08-18: 'No bracelet, no editing tool, just the VR hands.'",

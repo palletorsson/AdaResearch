@@ -837,6 +837,16 @@ static func _add_showing_cards(seg: Node3D, mounts: Array, opts: Dictionary) -> 
 		if rule.has("text") and String(rule.get("text", "")) != "":
 			texts[int(rule.get("index", -1))] = String(rule["text"])
 	var card_mat: StandardMaterial3D = _fallback(Color(0.97, 0.965, 0.95), 0.6, 0.0)
+	# textD ON THE WALL WORKS (Palle, 2026-08-19: "no labels in space — the short
+	# speak distributed over the wall works, a short sentence, 2D in 3D, Roboto").
+	# opts.speak_lines: the pearl's sentences in string order; showing si gets
+	# sentence si, written across its field in Roboto, light on the dark field.
+	# opts.speak_caps: 1 = CAPS. A showing past the last sentence stays a field.
+	var speak_lines: Array = opts.get("speak_lines", [])
+	var speak_caps: bool = bool(opts.get("speak_caps", false))
+	var roboto: Font = null
+	if not speak_lines.is_empty() and ResourceLoader.exists("res://commons/font/Roboto-VariableFont_wdth,wght.ttf"):
+		roboto = load("res://commons/font/Roboto-VariableFont_wdth,wght.ttf")
 	for si in range(mounts.size()):
 		var t: Transform3D = mounts[si]
 		var wm: float = t.basis.get_scale().x if absf(t.basis.get_scale().x) > absf(t.basis.get_scale().z) else t.basis.get_scale().z
@@ -880,6 +890,45 @@ static func _add_showing_cards(seg: Node3D, mounts: Array, opts: Dictionary) -> 
 		else:
 			lbl.rotation_degrees.y = 90.0 if nrm > 0.0 else -90.0
 		card.add_child(lbl)
+		# the sentence in the field
+		if si < speak_lines.size() and String(speak_lines[si]).strip_edges() != "":
+			var sentence: String = String(speak_lines[si]).strip_edges()
+			if speak_caps:
+				sentence = sentence.to_upper()
+			var sl := Label3D.new()
+			sl.name = "Speak%d" % si
+			sl.text = sentence
+			if roboto != null:
+				sl.font = roboto
+			# fit: the field is wm x hm metres; a 0.0011 m pixel at 64 px is a
+			# 7 cm line, three to five lines in a frame; wrap at the field's width
+			# the sentence FILLS the black field (Palle: "the paintings on the wall with
+			# black background and white frame, place the text there"): the field is
+			# the mount less its margins; 0.0016 m pixels at 64 px = 10 cm lines
+			var fieldw: float = maxf(wm - 2.0 * HANG_MOUNT_W, 0.12)
+			var fieldh: float = maxf(hm - 2.0 * HANG_MOUNT_W, 0.12)
+			var ps: float = 0.0016 if fieldh > 0.6 else 0.0012
+			sl.pixel_size = ps
+			sl.font_size = 64
+			sl.width = maxf(fieldw - 0.06, 0.2) / ps
+			sl.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+			sl.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+			sl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+			sl.modulate = Color(0.93, 0.92, 0.9)
+			sl.outline_size = 0
+			sl.no_depth_test = false
+			# the mount's origin is HANG_MOUNT_PROUD/2 off the wall; the field's face is
+			# HANG_FIELD_PROUD off it — the sentence sits 4 mm in front of the field
+			var proud: float = HANG_FIELD_PROUD + 0.004 - depth * 0.5
+			var face := Vector3(origin.x, origin.y, origin.z + nrm * proud) if along_x \
+				else Vector3(origin.x + nrm * proud, origin.y, origin.z)
+			sl.position = face
+			if along_x:
+				sl.rotation_degrees.y = 0.0 if nrm > 0.0 else 180.0
+			else:
+				sl.rotation_degrees.y = 90.0 if nrm > 0.0 else -90.0
+			sl.set_meta("em_speak", si)
+			seg.add_child(sl)
 
 
 static func _hang_mount_mat() -> Material:
