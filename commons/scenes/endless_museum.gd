@@ -3883,6 +3883,8 @@ func _build_forecourt(seg: Node3D, solid: StaticBody3D, w: int, tile_h: int,
 ## The turbine hall. Returns the depth it added (the hall + its two gallery ends).
 func _build_hall(seg: Node3D, solid: StaticBody3D, w: int, zbase: int, zcur: int,
 		cw: int, cd: int, c: Dictionary, wall_col: Color, m_wall: Material, m_deck: Material) -> int:
+	if (c.get("simulation", {}) as Dictionary).size() > 0:
+		return _build_sim_pool(seg, solid, w, zbase, zcur, cw, cd, c, wall_col, m_wall, m_deck)
 	var g: int = HALL_GALLERY_W
 	var total_w: int = g + cw                # west gallery + hall
 	var total_d: int = g + cd + g            # north gallery + hall + south gallery
@@ -3947,6 +3949,72 @@ func _build_hall(seg: Node3D, solid: StaticBody3D, w: int, zbase: int, zcur: int
 			String(c.get("token", "?")), cw, cd, HALL_DEPTH, zcur, zcur + total_d])
 	else:
 		print("[em-hall] hall %s refused — %s" % [String(c.get("token", "?")), _stamp_refusal])
+	return total_d
+
+
+## THE HANGING POOL (2026-08-20, Palle: "we do not have to make it so deep, it
+## can be ground level, like a hanging pool, and make it EDGE so we get a feeling
+## of this is the simulation"). A simulation no longer sinks 4.5 m: the grid map
+## stands in a SHALLOW BASIN (0.6 m, or the sim's own `depth`), its floor almost
+## the museum's floor, and what says "simulation" is not distance but the EDGE —
+## a crisp raised lip all around, lit in the grid's own wireframe orange, the
+## rim of a pool you look across. Two wedges on the west side step you down in;
+## the through-route passes at ground level beside it.
+func _build_sim_pool(seg: Node3D, solid: StaticBody3D, w: int, zbase: int, zcur: int,
+		cw: int, cd: int, c: Dictionary, wall_col: Color, m_wall: Material, m_deck: Material) -> int:
+	var g: int = HALL_GALLERY_W
+	var total_d: int = g + cd + g
+	var sim: Dictionary = c.get("simulation", {})
+	var depth: float = clampf(float(sim.get("depth", 0.6)), 0.2, 1.2)
+	var bx0: int = g                       # basin west edge (cells)
+	var bz0: int = zcur + g
+	# the basin: floor at -depth, walls to ground on all four sides
+	_box(seg, Vector3(bx0 + cw / 2.0, -depth - 0.1, bz0 + cd / 2.0), Vector3(cw, 0.2, cd), Color(0.14, 0.14, 0.17), m_deck)
+	_add_col(solid, Vector3(bx0 + cw / 2.0, -depth - 0.1, bz0 + cd / 2.0), Vector3(cw, 0.2, cd))
+	for side in range(4):
+		var horiz: bool = side < 2
+		var pos := Vector3(bx0 + cw / 2.0, -depth / 2.0, (bz0 if side == 0 else bz0 + cd) + 0.0) if horiz 			else Vector3((bx0 if side == 2 else bx0 + cw) + 0.0, -depth / 2.0, bz0 + cd / 2.0)
+		var size := Vector3(cw, depth, 0.16) if horiz else Vector3(0.16, depth, cd)
+		_box(seg, pos, size, Color(0.35, 0.34, 0.32), m_wall)
+		_add_col(solid, pos, size)
+	# THE EDGE: a raised lip on the rim, in the grid's own wireframe orange — the
+	# line that says: past here is the simulation
+	var lip := StandardMaterial3D.new()
+	lip.albedo_color = Color(1.0, 0.45, 0.1)
+	lip.emission_enabled = true
+	lip.emission = Color(1.0, 0.45, 0.1)
+	lip.emission_energy_multiplier = 1.6
+	for side in range(4):
+		var horiz2: bool = side < 2
+		var pos2 := Vector3(bx0 + cw / 2.0, 0.07, (bz0 if side == 0 else bz0 + cd) + 0.0) if horiz2 			else Vector3((bx0 if side == 2 else bx0 + cw) + 0.0, 0.07, bz0 + cd / 2.0)
+		var size2 := Vector3(cw + 0.3, 0.14, 0.3) if horiz2 else Vector3(0.3, 0.14, cd + 0.3)
+		var lb := MeshInstance3D.new()
+		var bm2 := BoxMesh.new(); bm2.size = size2
+		lb.mesh = bm2; lb.material_override = lip
+		lb.position = pos2
+		seg.add_child(lb)
+		_add_col(solid, pos2, size2)
+	# the ground around the pool: west through-route strip + north/south aprons
+	_box(seg, Vector3(g / 2.0, -0.1, zcur + total_d / 2.0), Vector3(g, 0.2, total_d), Color(0.16, 0.16, 0.19), m_deck)
+	_add_col(solid, Vector3(g / 2.0, -0.1, zcur + total_d / 2.0), Vector3(g, 0.2, total_d))
+	_box(seg, Vector3(bx0 + cw / 2.0, -0.1, zcur + g / 2.0), Vector3(cw, 0.2, g), Color(0.16, 0.16, 0.19), m_deck)
+	_add_col(solid, Vector3(bx0 + cw / 2.0, -0.1, zcur + g / 2.0), Vector3(cw, 0.2, g))
+	_box(seg, Vector3(bx0 + cw / 2.0, -0.1, zcur + g + cd + g / 2.0), Vector3(cw, 0.2, g), Color(0.16, 0.16, 0.19), m_deck)
+	_add_col(solid, Vector3(bx0 + cw / 2.0, -0.1, zcur + g + cd + g / 2.0), Vector3(cw, 0.2, g))
+	# the walk map: the route beside and around the pool; the basin is the sim's own
+	for zz in range(zcur, zcur + total_d):
+		for x in range(0, g):
+			_walk_cells[Vector2i(x, zbase + zz)] = true
+	for rng in [range(zcur, zcur + g), range(zcur + g + cd, zcur + total_d)]:
+		for zz in rng:
+			for x in range(g, g + cw):
+				_walk_cells[Vector2i(x, zbase + zz)] = true
+	# two wedges step down in from the west rim (the taught body is the way in here too)
+	_stamp_wedge(seg, Vector2i(bx0, bz0 + 1), "west", depth, zbase)
+	_stamp_wedge(seg, Vector2i(bx0, bz0 + cd - 2), "west", depth, zbase)
+	# the installation itself, on the basin floor
+	_stamp_simulation(seg, c, g, -depth, zcur)
+	print("[em-pool] hanging pool: %d x %d, %.2f m deep, the edge lit — %s" % [cw, cd, depth, String(sim.get("map", ""))])
 	return total_d
 
 
