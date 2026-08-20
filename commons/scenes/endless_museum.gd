@@ -634,6 +634,16 @@ var _plan_mtime: int = 0
 var _boot_t0: int = 0
 var _boot_ms: Dictionary = {}
 var _boot_first_frame: bool = false
+# ── THE WAKE-UP RAMP (2026-08-20, Palle: "loading a grid map like Point_One
+# is shorter") ── Point_One pays the same engine and staging; what it skips
+# is a first frame with ~117 bodies' render pipelines to compile at once.
+# So the museum wakes AROUND the visitor: the show-ring starts at WAKE_R0
+# and widens to cull_near_m over wake_s seconds — the compiles spread over
+# dozens of frames while the first steps are taken. Shots and bake runs are
+# untouched (they never cull).
+const WAKE_R0 := 8.0
+var WAKE_S := 3.0
+var _wake_until_ms: int = 0
 var _follow_t: float = 0.0
 var _follow_pending: bool = false
 var _follow_seen_ms: int = 0
@@ -1001,6 +1011,7 @@ func _load_modules() -> void:
 	ART_HIDE_M = _L("stream", "cull_far_m", ART_HIDE_M)
 	INSTANTIATE_AHEAD_M = _L("stream", "instantiate_ahead_m", INSTANTIATE_AHEAD_M)
 	STAMP_BUDGET_MS = _L("stream", "stamp_budget_ms", STAMP_BUDGET_MS)
+	WAKE_S = _L("stream", "wake_s", WAKE_S)
 	GATE_REACH_M = _L("gate", "reach_m", GATE_REACH_M)
 	GATE_PATIENCE = _L("gate", "patience_s", GATE_PATIENCE)
 	AUTOSAVE_S = _L("editor", "autosave_seconds", AUTOSAVE_S)
@@ -6596,6 +6607,7 @@ func _process(_delta: float) -> void:
 		return
 	if not _boot_first_frame:
 		_boot_first_frame = true
+		_wake_until_ms = Time.get_ticks_msec() + int(WAKE_S * 1000.0)
 		_boot_ms["first_frame"] = Time.get_ticks_msec() - _boot_t0
 		print("[em-boot] %s" % JSON.stringify(_boot_ms))
 		# its own file too — a windowed run's stdout is swallowed on Windows,
@@ -6791,6 +6803,13 @@ func _drain_stamps() -> void:
 			var ok: bool = _stamp_inner(item["seg"], String(item["scene_path"]), String(item["lookup"]),
 				item["cell"], int(item["zbase"]), int(item["fp"]), item["axis"], bool(item["drop"]),
 				float(item["span_cap"]), float(item["yaw"]), item["config"], item["bk"])
+			if ok and best_d > _show_ring_now() and not _vis_records.is_empty():
+				# born beyond the ring: arrive hidden — a body visible for even
+				# one cull tick still compiles its pipelines on that frame
+				var born: Node3D = _node_or_null((_vis_records[-1] as Dictionary).get("node"))
+				if born != null:
+					born.visible = false
+					born.process_mode = Node.PROCESS_MODE_DISABLED
 			if not ok:
 				print("[em-stamp] deferred %s failed on drain: %s (the bake had placed it)" % [
 					String(item["lookup"]), _stamp_refusal])
@@ -6801,10 +6820,24 @@ func _drain_stamps() -> void:
 ## stamped artifact. Hysteresis (show < 32 m, hide > 38 m) keeps the boundary
 ## from flickering; freed records (their segment scrolled off behind) are
 ## pruned in place.
+## The show-ring this tick: full size after boot, ramping out from WAKE_R0
+## during the wake so first-draw pipeline compiles spread over many frames.
+func _show_ring_now() -> float:
+	if _wake_until_ms <= 0:
+		return ART_SHOW_M
+	var left: int = _wake_until_ms - Time.get_ticks_msec()
+	if left <= 0:
+		return ART_SHOW_M
+	var k: float = 1.0 - float(left) / maxf(0.001, WAKE_S * 1000.0)
+	return lerpf(WAKE_R0, ART_SHOW_M, clampf(k, 0.0, 1.0))
+
+
 func _cull_artifacts() -> void:
 	var eye: Vector3 = _eye_pos()
 	var i: int = 0
 	_vis_hidden = 0
+	var show_m: float = _show_ring_now()
+	var hide_m: float = maxf(ART_HIDE_M, show_m + 6.0) if show_m >= ART_SHOW_M else show_m + 6.0
 	# RESURRECTION IS BUDGETED (2026-08-20): re-enabling dozens of suspended
 	# bodies in one 0.3 s tick — each with its first-draw pipeline compile —
 	# was the jump felt when turning to face a full room. Hides stay
@@ -6823,7 +6856,7 @@ func _cull_artifacts() -> void:
 		var p: Vector3 = r.get("p")
 		var d: float = Vector2(p.x - eye.x, p.z - eye.z).length()
 		if node.visible:
-			if d > ART_HIDE_M:
+			if d > hide_m:
 				# SUSPEND WHAT YOU CANNOT SEE (2026-08-18). Hiding a body stops
 				# its draw, not its life: measured on primitives, one segment
 				# brings 47-97 RigidBody3D, 58-103 AudioStreamPlayer3D, 21
@@ -6842,7 +6875,7 @@ func _cull_artifacts() -> void:
 					# hall. Suspend stops them too; show restores each to the
 					# mode its artifact chose.
 					_set_viewports(node, false)
-		elif d < ART_SHOW_M:
+		elif d < show_m:
 			shows.append({"node": node, "d": d})
 		if not node.visible:
 			_vis_hidden += 1
