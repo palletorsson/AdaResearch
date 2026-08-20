@@ -7,7 +7,7 @@ extends StaticBody3D
 # critical_parameter: moment — which instant of the demonstration is standing in the room (intact / fissured / burst / scattered); explosion_particle_count still sets how many pieces there are, but only `moment` decides whether a viewer ever sees them
 # triggers: StaticBody3D collision layer 21 catches the laser raycast; trigger_explosion() spawns particles in random outward directions, plays audio, then hides the sphere; particles queue_free after explosion_lifetime
 # emerges: the sphere resets after the explosion (it is a static teaching object, not a consumable) — the reset reveals that destruction here is a demonstration, not a consequence
-# needs: VR laser pointer interaction [has via StaticBody3D layer 21]; explosion particles [has]; explosion audio [has]; respawn delay for reset [missing — appears to hide permanently after explosion]
+# needs: VR laser pointer interaction [has via StaticBody3D layer 21]; explosion particles [has]; explosion audio [has]; respawn delay for reset [has, 2026-08-20 — respawn_cooldown, default 3 s; 0 = consumable]
 # relationships: placed in Point_Lines alongside laser_measure — both are objects that the laser interacts with, but one measures and one destroys; the contrast makes the laser feel like a tool with different modes
 # truth: a laser pointer is not a cursor — it is a ray that either measures distance or triggers a reaction; the sphere teaches the second possibility
 
@@ -61,6 +61,13 @@ extends StaticBody3D
 @export var explosion_lifetime: float = 1.0
 @export var explosion_color: Color = Color(1.0, 0.6, 0.2, 1.0)
 
+## THE RESET (2026-08-20, Palle: "regen the explode with cooldown"). The
+## @identity has always claimed it — "destruction here is a demonstration,
+## not a consequence" — while the code queue_free()d the target forever.
+## Seconds from the burst to the ball standing again; 0 keeps the old
+## consumable behaviour (gone for good).
+@export var respawn_cooldown: float = 3.0
+
 @export_group("Moment")
 ## Which moment of the demonstration is standing in the room. `intact` is the
 ## shipped target exactly — no node added, nothing hidden, nothing disabled.
@@ -82,8 +89,13 @@ const SCATTER_RADIUS: float = 0.40         ## how wide the debris settles
 const SCATTER_DROP: float = 0.075          ## how far under the origin it lies
 const SCATTER_RELIEF: float = 0.012        ## deterministic unevenness of the pile
 
-# Audio
+# Audio — lazy on first explosion, one synthesized burst per process (the
+# grab_sphere lesson: three spheres stand in the point hall alone, and each
+# was synthesizing 6,600 noise samples at boot for a bang most never make)
 var _explosion_player: AudioStreamPlayer3D
+static var _shared_explosion_stream: AudioStreamWAV = null
+var _saved_layer: int = 0
+var _saved_mask: int = 0
 
 # Explosion state
 var _is_exploding: bool = false
@@ -95,15 +107,7 @@ var _built: bool = false
 var _moment_root: Node3D = null
 
 func _ready() -> void:
-	# Debug: Print collision layer
-	print("LaserExplodingSphere _ready:")
-	print("  collision_layer = ", collision_layer)
-	print("  collision_mask = ", collision_mask)
-	print("  Layer 21 bit value = ", pow(2, 20))
-	print("  Has layer 21? ", (collision_layer & int(pow(2, 20))) != 0)
-
-	# Setup explosion audio
-	_setup_explosion_audio()
+	# audio is lazy — built on first explosion, see _explode
 
 	# The grid writes config_* metadata BEFORE add_child and only calls
 	# apply_grid_config deferred, so reading it here builds the right moment
@@ -264,6 +268,8 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 	if config_data.has("moment"):
 		moment = _pick_moment(str(config_data["moment"]))
+	if config_data.has("respawn_cooldown"):
+		respawn_cooldown = float(config_data["respawn_cooldown"])
 
 	if not _built:
 		# Nothing exists yet; _ready() will build with the value just resolved.
@@ -303,7 +309,9 @@ func _rebuild_moment() -> void:
 
 
 func _setup_explosion_audio() -> void:
-	var explosion_stream = _build_explosion_stream()
+	if _shared_explosion_stream == null:
+		_shared_explosion_stream = _build_explosion_stream()
+	var explosion_stream = _shared_explosion_stream
 	_explosion_player = AudioStreamPlayer3D.new()
 	_explosion_player.name = "ExplosionPlayer"
 	_explosion_player.stream = explosion_stream
@@ -380,9 +388,10 @@ func pointer_event(event) -> void:
 func _explode() -> void:
 	_is_exploding = true
 
-	# Play explosion sound
-	if _explosion_player:
-		_explosion_player.play()
+	# Play explosion sound (built on first use)
+	if _explosion_player == null:
+		_setup_explosion_audio()
+	_explosion_player.play()
 
 	# Hide the main mesh
 	var mesh_instance = get_node_or_null("MeshInstance3D")
@@ -394,16 +403,47 @@ func _explode() -> void:
 	if is_instance_valid(_moment_root):
 		_moment_root.visible = false
 
-	# Disable collision
+	# Disable collision (saved, so the reset can hand it back exactly)
+	_saved_layer = collision_layer
+	_saved_mask = collision_mask
 	collision_layer = 0
 	collision_mask = 0
 
 	# Create particle burst
 	_create_explosion_particles()
 
-	# Queue free after particles fade
+	# After the particles fade: the grave for a consumable (cooldown 0),
+	# the RESET for the teaching object. Guards after every await — a
+	# segment freed mid-cooldown must not reach for a tree it left.
 	await get_tree().create_timer(explosion_lifetime + 0.5).timeout
-	queue_free()
+	if not is_inside_tree():
+		return
+	if respawn_cooldown <= 0.0:
+		queue_free()
+		return
+	var remaining: float = maxf(0.05, respawn_cooldown - explosion_lifetime - 0.5)
+	await get_tree().create_timer(remaining).timeout
+	if not is_inside_tree():
+		return
+	_respawn()
+
+
+## The demonstration resets: the ball grows back, the seams return with it
+## (a fissured target stays fissured), the collider wakes, and the laser can
+## make its little chaos again.
+func _respawn() -> void:
+	var shipped: MeshInstance3D = _shipped_mesh()
+	if shipped != null:
+		shipped.visible = true
+		shipped.scale = Vector3.ONE * 0.05
+		var tw := create_tween()
+		tw.tween_property(shipped, "scale", Vector3.ONE, 0.35) \
+			.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	if is_instance_valid(_moment_root):
+		_moment_root.visible = true
+	collision_layer = _saved_layer
+	collision_mask = _saved_mask
+	_is_exploding = false
 
 func _create_explosion_particles() -> void:
 	# Create small sphere particles that burst outward
