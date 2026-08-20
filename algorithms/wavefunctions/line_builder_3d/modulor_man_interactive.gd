@@ -11,6 +11,8 @@ extends Node3D
 
 var points: Array[Node3D] = []
 var mesh_instance: MeshInstance3D
+var _line_mat: ShaderMaterial = null          # created once — was duplicated EVERY frame
+var _last_points := PackedVector3Array()      # the change detector for the rebuild
 
 # Le Corbusier Modulor dimensions (in meters)
 const MODULOR_UNITS = {
@@ -146,15 +148,31 @@ func _update_line() -> void:
 	if points.size() < 2:
 		return
 
+	# Rebuild ONLY when a point moved (2026-08-20). This ran the full
+	# SurfaceTool sweep — ~1,800 vertices, generate_normals, and a freshly
+	# DUPLICATED ShaderMaterial — every frame, dragged or parked, and the
+	# museum stands the figure where nobody can drag it at all. The figure
+	# still reshapes live under a grab; parked, a frame costs one position
+	# compare. The material is created once and reused.
+	var cur := PackedVector3Array()
+	cur.resize(points.size())
+	for pi in range(points.size()):
+		cur[pi] = to_local(points[pi].global_position)
+	if cur == _last_points and mesh_instance != null and mesh_instance.mesh != null:
+		return
+	_last_points = cur
+
 	var st := SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 
-	var mat := _create_line_material()
+	if _line_mat == null:
+		_line_mat = _create_line_material()
+	var mat := _line_mat
 	st.set_material(mat)
 
 	for i in range(points.size() - 1):
-		var p1 = to_local(points[i].global_position)
-		var p2 = to_local(points[i + 1].global_position)
+		var p1 = cur[i]
+		var p2 = cur[i + 1]
 		var segment_dir = (p2 - p1).normalized()
 
 		var up = Vector3.UP

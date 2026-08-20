@@ -118,8 +118,14 @@ var _lcd_cache_key: String = ""         # cache guard — rebuild the LCD board 
 var inline_board: Node3D                # numeric tag AT the hit point (billboarded)
 var _inline_board_holder: Node3D        # container for the inline tag
 var _inline_cache_key: String = ""      # cache guard for the inline tag
-var tick_root: Node3D                  # parent for tick mesh instances
-var _tick_meshes: Array[MeshInstance3D] = []
+var tick_root: Node3D                  # parent for the tick ruler
+# THE RULER IS ONE DRAW CALL (2026-08-20): ~55 tick MeshInstance3D per measure
+# — three measures stand in the point hall, 192 mesh instances between them —
+# became one MultiMeshInstance3D each. The instances are ordered by distance,
+# so visible_instance_count IS "ticks up to the hit", the exact behaviour the
+# per-mesh visible flags implemented.
+var _tick_mm: MultiMeshInstance3D = null
+var _tick_count: int = 0
 # New body geometry built in code (laser-sword-style handle)
 var _handle_mesh: MeshInstance3D
 var _guard_mesh: MeshInstance3D
@@ -308,19 +314,23 @@ func setup_tick_marks():
 	tick_mat.emission = laser_color
 	tick_mat.emission_energy_multiplier = 2.5
 	tick_mat.albedo_color = laser_color
-	# Build a pool of ticks sized to cover max_range
+	# Build the ruler sized to cover max_range: one shared box, one multimesh
 	var n_ticks: int = int(max_range / tick_interval_m)
-	for i in range(1, n_ticks + 1):
-		var tm := MeshInstance3D.new()
-		tm.name = "Tick_%d" % i
-		var box := BoxMesh.new()
-		box.size = Vector3(tick_size, tick_size, 0.002)   # short horizontal strip
-		tm.mesh = box
-		tm.position = Vector3(0, 0, -i * tick_interval_m)
-		tm.set_surface_override_material(0, tick_mat)
-		tm.visible = false
-		tick_root.add_child(tm)
-		_tick_meshes.append(tm)
+	_tick_count = n_ticks
+	var box := BoxMesh.new()
+	box.size = Vector3(tick_size, tick_size, 0.002)   # short horizontal strip
+	var mm := MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.mesh = box
+	mm.instance_count = n_ticks
+	for i in range(n_ticks):
+		mm.set_instance_transform(i, Transform3D(Basis(), Vector3(0, 0, -float(i + 1) * tick_interval_m)))
+	mm.visible_instance_count = 0
+	_tick_mm = MultiMeshInstance3D.new()
+	_tick_mm.name = "TickRuler"
+	_tick_mm.multimesh = mm
+	_tick_mm.material_override = tick_mat
+	tick_root.add_child(_tick_mm)
 
 func setup_inline_readout():
 	# Numeric tag at the hit point — the truth says "the pairing is the primitive".
@@ -473,18 +483,18 @@ func hide_hit_dot():
 func update_tick_marks(distance: float):
 	# Show only ticks within current measurement distance.
 	# The ticks act as a ruler: ticks visible = "1, 2, 3 metres" legible in space.
-	if not show_tick_marks or _tick_meshes.is_empty():
+	if not show_tick_marks or _tick_mm == null:
 		return
-	for i in range(_tick_meshes.size()):
-		var tick_distance: float = float(i + 1) * tick_interval_m
-		_tick_meshes[i].visible = tick_distance < distance
+	# tick i sits at (i+1)*interval; visible iff strictly inside the reading —
+	# the same predicate the per-mesh flags ran, as a single count
+	_tick_mm.multimesh.visible_instance_count = clampi(
+		int(ceil(distance / tick_interval_m)) - 1, 0, _tick_count)
 
 func hide_tick_marks():
 	# When not measuring, show all ticks at low brightness as a passive ruler
-	if not show_tick_marks or _tick_meshes.is_empty():
+	if not show_tick_marks or _tick_mm == null:
 		return
-	for tm in _tick_meshes:
-		tm.visible = true   # passive ruler when not pointed at anything
+	_tick_mm.multimesh.visible_instance_count = _tick_count   # passive ruler when not pointed at anything
 
 func update_inline_readout(world_position: Vector3, distance: float):
 	# The numeric tag rides at the hit-point — the readout follows the probe. It is
@@ -696,6 +706,9 @@ func _claim_restore() -> void:
 				mi.layers = 1
 		_claim_hidden.clear()
 		touched = true
+	if _tick_mm != null and is_instance_valid(_tick_mm) and _tick_mm.layers == 0:
+		_tick_mm.layers = 1
+		touched = true
 	if _claim_freed_lcd:
 		_claim_freed_lcd = false
 		setup_display()
@@ -729,8 +742,10 @@ func _claim_mute(mi: MeshInstance3D) -> void:
 
 
 func _claim_mute_ruler() -> void:
-	for tm in _tick_meshes:
-		_claim_mute(tm)
+	# the ruler is one MultiMeshInstance3D: layers mutes the lot, and
+	# _claim_restore puts it back beside the muted mesh instances
+	if _tick_mm != null and is_instance_valid(_tick_mm):
+		_tick_mm.layers = 0
 
 
 ## Free the tag that rides the hit point. update_inline_readout and hide_inline_readout
@@ -811,8 +826,8 @@ func _claim_tolerance() -> void:
 		_claim_box(hold, Vector3(0.0, sy, -span * 0.5),
 			Vector3(laser_thickness * 2.0, laser_thickness * 2.0, span), edge)
 	var brk: StandardMaterial3D = _claim_lit(laser_hit_color, 1.8)
-	for tm in _tick_meshes:
-		var z: float = tm.position.z
+	for ti in range(_tick_count):
+		var z: float = -float(ti + 1) * tick_interval_m
 		for dz in [-half, half]:
 			_claim_box(hold, Vector3(0.0, 0.0, z + dz),
 				Vector3(tick_size * 1.7, tick_size * 0.5, laser_thickness * 2.0), brk)
@@ -842,9 +857,9 @@ func _claim_datum() -> void:
 	# The index mark ON the zero — the only lit thing on the board.
 	_claim_box(hold, Vector3(0.0, cy - ph * 0.5 - 0.003, z0 + 0.002), Vector3(pw * 0.30, 0.005, 0.006),
 		_claim_lit(laser_hit_color, 1.6))
-	var n: int = mini(_tick_meshes.size(), CLAIM_STATIONS)
+	var n: int = mini(_tick_count, CLAIM_STATIONS)
 	for i in range(n):
-		var z: float = _tick_meshes[i].position.z
+		var z: float = -float(i + 1) * tick_interval_m
 		var sy: float = tick_size * 2.6
 		_claim_box(hold, Vector3(0.0, sy * 0.5, z), Vector3(0.0022, sy, 0.0022), ink)
 		_claim_box(hold, Vector3(0.0, sy + tick_size * 0.9, z),

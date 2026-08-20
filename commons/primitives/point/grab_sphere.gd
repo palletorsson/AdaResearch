@@ -25,9 +25,13 @@ extends XRToolsPickable
 var _original_material : Material
 var _glow_material : Material
 
-# Pickup audio
+# Pickup audio — built lazily on first pickup, and the synthesized chirp is
+# ONE resource per process: the Modulor figure alone boots 37 of these
+# spheres, and each was synthesizing ~4,000 samples in GDScript at _ready
+# for a sound most spheres are never asked to make.
 var _pickup_player : AudioStreamPlayer3D
 var _pickup_stream : AudioStreamWAV
+static var _shared_pickup_stream : AudioStreamWAV = null
 
 # Glow state
 var _is_glowing := false
@@ -52,8 +56,9 @@ func _ready() -> void:
 	var mesh_instance = get_node_or_null("MeshInstance3D")
 	if mesh_instance:
 		_original_material = mesh_instance.get_active_material(0)
-		_glow_material = _build_glow_material(_original_material)
-	_setup_pickup_audio()
+		# _glow_material is built lazily by _apply_glow on first pickup —
+		# an eager duplicate per sphere was 37 duplicates in one figure.
+	# audio is lazy too: see _play_pickup_sound
 
 	# Listen for when this object is picked up or dropped
 	picked_up.connect(_on_picked_up)
@@ -81,7 +86,9 @@ func _build_glow_material(source: Material) -> Material:
 	return material
 
 func _setup_pickup_audio() -> void:
-	_pickup_stream = _build_pickup_stream()
+	if _shared_pickup_stream == null:
+		_shared_pickup_stream = _build_pickup_stream()
+	_pickup_stream = _shared_pickup_stream
 	_pickup_player = AudioStreamPlayer3D.new()
 	_pickup_player.name = "PickupPlayer"
 	_pickup_player.stream = _pickup_stream
@@ -127,7 +134,7 @@ func _restore_original_material() -> void:
 
 func _play_pickup_sound() -> void:
 	if not _pickup_player:
-		return
+		_setup_pickup_audio()   # first pickup builds the player; the chirp is unchanged
 	if _pickup_player.playing:
 		_pickup_player.stop()
 	_pickup_player.play()

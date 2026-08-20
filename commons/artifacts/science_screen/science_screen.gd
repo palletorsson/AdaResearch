@@ -729,6 +729,12 @@ func _build_face(screen_y: float) -> void:
 	screen_light.omni_attenuation = 1.5
 	screen_light.position = Vector3(0, screen_y, -0.3)  # slightly in front of screen
 	screen_light.shadow_enabled = false
+	# a 4 m glow is imperceptible from across a hall, but five screens' omnis
+	# all price into every fragment on Quest — fade the LIGHT out by 16 m
+	# (the emissive screen itself stays lit at any distance)
+	screen_light.distance_fade_enabled = true
+	screen_light.distance_fade_begin = 12.0
+	screen_light.distance_fade_length = 4.0
 	_face_root.add_child(screen_light)
 
 	_build_face_marks(screen_y, border_margin)
