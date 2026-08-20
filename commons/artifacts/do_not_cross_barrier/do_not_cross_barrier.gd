@@ -103,7 +103,12 @@ func _build_sawhorse(mount: Node3D) -> void:
 	mount.add_child(HangarKit.box(Vector3(0, PLANK_H, 0),
 		Vector3(span_m, PLANK_FACE, PLANK_D), plank_mat))
 
-	# A-frame legs at each end: two boards leaning together, a stretcher between.
+	# A-frame legs at each end: two boards meeting at the TOP, feet spread on the
+	# floor. The rotation is about each leg's own centre, so the SIGN decides the
+	# orientation: with +lean the top swings outward (tops at z ±0.19, feet at
+	# ±0.03 — a V, an upside-down trestle, and it shipped that way until Palle
+	# met it in the museum). With −lean the top swings inward: tops at z ±0.03
+	# under the plank, feet at z ±0.19. An A.
 	for side in [-1.0, 1.0]:
 		var lx: float = side * (half - 0.12)
 		for lean in [-1.0, 1.0]:
@@ -111,7 +116,7 @@ func _build_sawhorse(mount: Node3D) -> void:
 				Vector3(0.07, PLANK_H - 0.02, 0.035), leg_mat)
 			leg.position.x = lx
 			leg.position.z = lean * 0.11
-			leg.rotation_degrees.x = lean * 14.0
+			leg.rotation_degrees.x = -lean * 14.0
 			mount.add_child(leg)
 		mount.add_child(HangarKit.box(Vector3(lx, 0.24, 0),
 			Vector3(0.07, 0.035, 0.34), leg_mat))
