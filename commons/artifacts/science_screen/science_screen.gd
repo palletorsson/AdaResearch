@@ -1180,7 +1180,12 @@ func _build_viewport() -> void:
 	_viewport = SubViewport.new()
 	_viewport.size = Vector2i(VP_WIDTH, VP_HEIGHT)
 	_viewport.transparent_bg = false
-	_viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+	# WHEN_VISIBLE, not ALWAYS (2026-08-20): five screens stand in the museum's
+	# first hall alone, and ALWAYS re-renders every canvas every frame whether
+	# anyone faces it or not — measured as a per-frame tax in VR. WHEN_VISIBLE
+	# re-renders only when the screen's texture was actually drawn last frame,
+	# which is exactly the live behaviour the scan promises.
+	_viewport.render_target_update_mode = SubViewport.UPDATE_WHEN_VISIBLE
 	_viewport.canvas_item_default_texture_filter = SubViewport.DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_NEAREST
 	add_child(_viewport)
 

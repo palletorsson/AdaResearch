@@ -608,9 +608,9 @@ var STAMP_BUDGET_MS := 6.0         # ms per frame the patient stamp may spend bu
 var INSTANTIATE_AHEAD_M := 50.0    # a queued body further than this from the eye stays paper
 var _stamp_queue: Array = []       # deferred stamps: the plan row on paper, not the node
 var _headless: bool = false        # every gate, bake and capture runs headless — they get the
-                                   # synchronous build, because a test that snapshots a museum
-                                   # mid-drain is diffing a cursor, not a building (the suite
-                                   # went flaky the first hour this shipped without the guard)
+								   # synchronous build, because a test that snapshots a museum
+								   # mid-drain is diffing a cursor, not a building (the suite
+								   # went flaky the first hour this shipped without the guard)
 var _force_patient := false        # probes set this to measure the deferred path headless
 var _env_we: Node = null           # the installed WorldEnvironment (the tier A/B swaps it live)
 var _env_tier: String = ""         # tier actually installed ("high"/"perf"; "" = v1 fallback)
@@ -1978,8 +1978,13 @@ func _setup_environment() -> bool:
 		# F7 swaps by hand on desktop. (On Quest's Mobile renderer SSIL, SSR,
 		# SDFGI and volumetric fog do not exist — there the A/B shows what the
 		# device actually supports: glow, fog model, ambient, sky, grade.)
+		# No _vr fork here (the mode must not decide what is built — mode_forks
+		# gate): em_environment.tier() already embodies the headset question, so
+		# vr_high upgrades exactly the runs the module itself resolved to perf,
+		# and never the gates' forced-perf paths.
 		var want_tier := ""
-		if _vr and _L("env", "vr_high", 0.0) > 0.5:
+		if _L("env", "vr_high", 0.0) > 0.5 and _autopilot == 0 and not _test_collision \
+				and _mod_has(_mod_env, "tier") and String(_mod_env.call("tier")) == "perf":
 			want_tier = "high"
 		_env_ab_s = _L("env", "ab_seconds", 0.0)
 		if want_tier != "" and _mod_has(_mod_env, "set_tier"):
@@ -6723,6 +6728,13 @@ func _cull_artifacts() -> void:
 				if node.process_mode != Node.PROCESS_MODE_DISABLED:
 					node.process_mode = Node.PROCESS_MODE_DISABLED
 					_vis_suspended += 1
+					# A SubViewport renders on ITS clock, not the tree's:
+					# process_mode DISABLED stops the scripts that draw into it,
+					# but an UPDATE_ALWAYS target still re-renders every frame,
+					# hidden or not — measured 8 live viewports in the first
+					# hall. Suspend stops them too; show restores each to the
+					# mode its artifact chose.
+					_set_viewports(node, false)
 		elif d < ART_SHOW_M:
 			shows.append({"node": node, "d": d})
 		if not node.visible:
@@ -6733,7 +6745,23 @@ func _cull_artifacts() -> void:
 		var sn: Node3D = shows[si]["node"]
 		sn.visible = true
 		sn.process_mode = Node.PROCESS_MODE_INHERIT
+		_set_viewports(sn, true)
 		_vis_hidden -= 1
+
+
+## Stop or restore every SubViewport under a suspended body. The artifact's own
+## choice of update mode is kept in a meta and handed back on show.
+func _set_viewports(root: Node, on: bool) -> void:
+	if root is SubViewport:
+		var vp := root as SubViewport
+		if on:
+			if vp.has_meta("em_vp_mode"):
+				vp.render_target_update_mode = int(vp.get_meta("em_vp_mode")) as SubViewport.UpdateMode
+		elif vp.render_target_update_mode != SubViewport.UPDATE_DISABLED:
+			vp.set_meta("em_vp_mode", vp.render_target_update_mode)
+			vp.render_target_update_mode = SubViewport.UPDATE_DISABLED
+	for c in root.get_children():
+		_set_viewports(c, on)
 
 ## The room the walker is actually standing in decides the reverb. Crossing a
 ## threshold retunes the bed and fires the doorway whoosh; the module is a

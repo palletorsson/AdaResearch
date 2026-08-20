@@ -113,7 +113,12 @@ func _run() -> void:
 		print("%-34s %5d %6d %9d %7d %5d %5d %5d %4d %4d" % [
 			row["token"], row["count"], row["meshes"], row["verts"], row["est_kb"],
 			row["lights"], row["rigid"], row["audio"], row["cams"], row["viewports"]])
+	var chapters: Array = []
+	for sv in segs:
+		var sn: Node3D = (sv as Dictionary).get("node") as Node3D
+		chapters.append(String(sn.get_meta("em_chapter")) if sn != null and sn.has_meta("em_chapter") else "?")
 	var totals := {"roots": roots_in_seg0, "shown_at_spawn": shown,
+		"chapters": chapters, "first_chapter_var": String(inst.get("_first_chapter")),
 		"seg_build_ms": seg_times, "mem_seg0_mb": (mem_seg0 - mem0) / 1048576,
 		"mem_3segs_mb": (mem_all - mem0) / 1048576,
 		"queued_after_build": queued_after_build, "queued_beyond_horizon": queued_far,

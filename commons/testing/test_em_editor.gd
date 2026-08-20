@@ -102,28 +102,61 @@ func _run() -> void:
 	# this depth — the seal refuses it with a named reason, correctly, on every
 	# build. A curator would press ] again; so does the trial. origin (1.1 m)
 	# is the second entry and fits anywhere.
-	inst.call("_edit_handle_key", KEY_BRACKETRIGHT)
+	# The palette carries token + scene only, no sizes — "two presses past the
+	# giant" was a fact about the TRANSFORMATION pool's order, not about the
+	# editor, and it picked a different (often unhostable) body the day the
+	# museum stopped starting there. Browse to a token the trial KNOWS is
+	# small, by name.
 	inst.call("_edit_handle_key", KEY_BRACKETRIGHT)
 	var pal: Array = inst.get("_edit_pal")
-	var pal_i: int = int(inst.get("_edit_pal_i"))
 	var added_tok := ""
-	if pal.is_empty() or pal_i < 0:
+	if pal.is_empty():
 		fails.append("palette empty inside a planned chapter's segment")
 	else:
-		added_tok = String((pal[pal_i] as Dictionary).get("token", ""))
+		var want_i := -1
+		for small in ["origin", "dark_sphere", "you_are_here", "lightrod", "pick_up_cube"]:
+			for pi in range(pal.size()):
+				if String((pal[pi] as Dictionary).get("token", "")) == small:
+					want_i = pi
+					break
+			if want_i >= 0:
+				break
+		if want_i < 0:
+			want_i = mini(1, pal.size() - 1)   # no known-small token in this pool: second entry, as before
+		var guard := 0
+		while int(inst.get("_edit_pal_i")) != want_i and guard < pal.size() + 2:
+			inst.call("_edit_handle_key", KEY_BRACKETRIGHT)
+			guard += 1
+		added_tok = String((pal[int(inst.get("_edit_pal_i"))] as Dictionary).get("token", ""))
 		# ENTER can be REFUSED by the seal when 2.5 m ahead is occupied — the
 		# museum's conflict logic applies to the hand too, by design. Hunt for
-		# clear floor the way a user would: turn 90° and retry, four ways.
+		# clear floor from the museum's OWN walk map: stand over a walkable
+		# cell whose cell three ahead is also walkable, aim down the aisle,
+		# ENTER; try spread standpoints until one hosts. Standpoint-
+		# independent, so it stays a fact about the editor in any hall.
+		var walk: Dictionary = inst.get("_walk_cells")
+		var cands: Array = []
+		for k in walk:
+			var v: Vector2i = k
+			if v.y >= 8 and v.y <= 40 and walk.has(Vector2i(v.x, v.y + 3)):
+				cands.append(v)
+		cands.sort_custom(func(a, b): return (a as Vector2i).y < (b as Vector2i).y \
+			or ((a as Vector2i).y == (b as Vector2i).y and (a as Vector2i).x < (b as Vector2i).x))
 		var placed_ok := false
-		for turn in range(4):
+		var tries := 0
+		var ci := 0
+		while ci < cands.size() and tries < 20 and not placed_ok:
+			var c: Vector2i = cands[ci]
+			ci += 3
+			tries += 1
+			cam.global_position = Vector3(float(c.x) + 0.5, 1.5, float(c.y) + 0.5)
+			cam.look_at(Vector3(float(c.x) + 0.5, 1.0, float(c.y) + 3.5))
 			var n_before: int = (inst.get("_edit_records") as Array).size()
 			inst.call("_edit_handle_key", KEY_ENTER)
 			if (inst.get("_edit_records") as Array).size() == n_before + 1:
 				placed_ok = true
-				break
-			cam.rotate_y(PI / 2.0)
 		if not placed_ok:
-			fails.append("ENTER refused in all four directions — no clear floor found")
+			fails.append("ENTER refused over %d walkable standpoints — no clear floor found" % tries)
 	inst.call("_edit_handle_key", KEY_F5)
 
 	# ── the file is the deliverable; assert on IT ───────────────────────────

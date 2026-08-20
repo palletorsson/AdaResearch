@@ -115,7 +115,7 @@
  "env": {
   "vr_high": 0,
   "_vr_high": "1 = the headset installs the HIGH tier instead of its default perf. On Quest's Mobile renderer SSIL/SSR/SDFGI/volumetric fog do not exist; the A/B shows what the device supports (glow, fog model, ambient, sky, grade).",
-  "ab_seconds": 12,
+  "ab_seconds": 0,
   "_ab_seconds": "0 = off. N = alternate high/perf every N seconds, LIVE, in both modes — the in-headset A/B. Watch the log for [em-env] A/B -> tier. F7 swaps by hand on desktop."
  }
 }
