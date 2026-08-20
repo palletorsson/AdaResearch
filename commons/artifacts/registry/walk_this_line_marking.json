@@ -4,7 +4,7 @@
 			"lookup_name": "walk_this_line_marking",
 			"name": "Walk This Line — Floor Marking",
 			"class_name": "WalkThisLineMarking",
-			"description": "A legend lying flat on the floor reading WALK THIS LINE, with a guide stripe ahead of it, painted WHITE. The line as INSTRUCTION: nothing about paint prevents anything, it works by being read and obeyed. Pairs with do_not_cross_barrier, the airborne half of the same asset — which does not agree with it but stands at right angles to it.",
+			"description": "A legend painted on the floor reading WALK THIS LINE (the words are a parameter, legend_text), with a guide stripe - rebuilt PROCEDURALLY, no glb: a matte quad and a stencil, white by default because a floor marking is white in the world. The line as INSTRUCTION: nothing about paint prevents anything, it works by being read and obeyed. Pairs with do_not_cross_barrier - perpendicular relations to one line: the tape forbids crossing it, this commands following it.",
 			"scene": "res://commons/artifacts/walk_this_line_marking/walk_this_line_marking.tscn",
 			"category": "environment",
 			"artifact_type": "prop",
@@ -42,7 +42,7 @@
 				"the line as instruction"
 			],
 			"qfep_connection": "Point_Lines argues that measure is also violence. The pair stands in PERPENDICULAR relations to one line: the tape forbids crossing it, this commands following it. A body meeting both has been told the line is impassable in one direction and obligatory in the other.",
-			"note": "Instantiates res://commons/models/do_not_cross_line.glb and keeps floor_marking with its floor_legend and guide_stripe children; the posts and tape belong to do_not_cross_barrier. NAMED FOR WHAT IT SAYS, NOT FOR THE FILE IT CAME FROM: the asset is do_not_cross_line.glb and the first draft of this entry called it 'the same prohibition painted on the floor', which the node hierarchy alone cannot refute. The capture showed the legend reads WALK THIS LINE. The mesh was always right; the description was not. COLOUR: the glTF ships floor_paint at baseColor [0.025, 0.023, 0.019], a near-black that reads as dark grey text and all but vanishes on a dark floor. The artifact defaults `paint_color` to WHITE and applies it as a per-instance material_override, so the shared asset is untouched and do_not_cross_barrier's tape and posts cannot inherit a floor colour. A map can set any colour: walk_this_line_marking:0:0#paint_color:ffcc00"
+			"note": "REBUILT 2026-08-19 from the glb-mounted version. Config: #legend_text #stripe_len_m #stripe_w_m #standoff_m #show_stripe #paint_color:<html colour> #wear:0..1."
 		}
 	}
 }

@@ -1,69 +1,44 @@
 extends Node3D
 class_name WalkThisLineMarking
 
-## The floor half of the `do_not_cross_line` asset — and it does NOT say what the
-## tape says. The tape reads DO NOT CROSS. The paint reads WALK THIS LINE.
+## The floor half of the pair — REBUILT PROCEDURALLY. No glb: a painted stripe
+## and a stencilled legend, both built in _ready() like the rest of the corpus.
 ##
-## That is the pair, and it is sharper than one prohibition rendered twice: the
-## two artifacts stand in PERPENDICULAR relations to the same line. The barrier
-## forbids crossing it. The marking commands following it. A body meeting both
-## has been told the line is impassable in one direction and obligatory in the
-## other — which is what a line does when it is also a rule, and exactly the
-## claim the map they were made for makes:
+## The tape (do_not_cross_barrier) forbids crossing the line; this paint
+## commands FOLLOWING it. Perpendicular relations to one line — a body meeting
+## both has been told the line is impassable in one direction and obligatory in
+## the other, which is what a line does when it is also a rule:
 ##
 ##   "Measure is also violence. What doesn't fit the grid is remainder, error,
 ##    erased. The line inherits this: efficient, relentless, forgetting
 ##    everything but endpoints."   — Point_Lines/blurb.md
 ##
-## The barrier stops a body; the paint only informs one. Nothing about paint
-## prevents anything — it works entirely by being read and obeyed.
-##
-## THIS WAS FOUND BY LOOKING. The first version of this file called the marking
-## "the same prohibition painted on the floor", which is what the asset filename
-## implies and what the node hierarchy alone cannot tell you. The capture showed
-## the legend and it says something else. The mesh was always right; the
-## description was mine.
-##
-## SOURCE ASSET. Both artifacts instantiate ONE glTF, res://commons/models/
-## do_not_cross_line.glb, and each keeps only its own assembly. See the note in
-## do_not_cross_barrier.gd for why that is not the "one scene, many names" fault
-## this corpus keeps finding: these two draw DISJOINT subtrees and are different
-## objects on screen.
-##
-## Assembly kept here: floor_marking (floor_legend · guide_stripe).
-##
-## Authored geometry, measured off the asset: floor_legend lies at z = 1.18,
-## rotated -90 degrees about X so it reads from above; guide_stripe sits at
-## z = 1.6, 2 mm proud of the floor, spanning x = ±1.45.
+## The LEGEND IS A PARAMETER — the glb froze the words in the mesh; here they
+## are stencilled at build time, so the paint can say anything a map needs.
 
-const SOURCE_GLB: PackedScene = preload("res://commons/models/do_not_cross_line.glb")
+const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 
-## The part of the glTF this artifact owns. Its two children come with it.
-const KEEP: PackedStringArray = ["floor_marking"]
-
-## Metres the marking sits from the artifact origin, along +Z. The asset places
-## the legend 1.18 m out; this shifts the whole marking as a unit so a map can
-## set the paint back from whatever it is warning about.
-@export var standoff_m: float = 1.18
-
-## Draw the guide stripe. Without it the legend is a statement; with it the line
-## has a position, and the two are different claims — which is the whole reason
-## this artifact and the barrier are a pair rather than one object.
+## The words painted on the floor. Empty means stripe only.
+@export var legend_text: String = "WALK THIS LINE"
+## Stripe length, metres.
+@export var stripe_len_m: float = 2.9
+## Stripe width, metres.
+@export var stripe_w_m: float = 0.075
+## Metres the legend sits behind the stripe (toward the reader), so the words
+## announce the line before the feet reach it.
+@export var standoff_m: float = 0.42
+## Draw the stripe. Without it the legend is a statement; with it the line has a
+## position — and the two are different claims, which is why this artifact and
+## the barrier are a pair rather than one object.
 @export var show_stripe: bool = true
-
-## The paint colour. WHITE by default, which is not what the asset ships: the
-## glTF's `floor_paint` material is baseColor [0.025, 0.023, 0.019], a near-black
-## that reads as dark grey text on a pale floor and all but disappears on a dark
-## one. White is the colour a floor marking is in the world, and it is legible
-## against both.
-##
-## Set per placement, e.g.  walk_this_line_marking:0:0#paint_color:ffcc00
+## Paint colour. WHITE, because a floor marking is white in the world and white
+## is legible on pale and dark floors alike.
 @export var paint_color: Color = Color.WHITE
-
-## Wear on the paint, 0 (fresh) to 1 (nearly gone), applied as transparency on
-## the floor_paint surfaces. A rule nobody has repainted is still a rule, and
-## this is the cheapest way for a map to say how long it has been one.
+## Wear, 0 (fresh) to 1 (nearly gone), as paint transparency. A rule nobody has
+## repainted is still a rule; this says how long it has been one.
 @export_range(0.0, 1.0, 0.01) var wear: float = 0.0
+
+const LIFT := 0.006      # metres the paint floats above the floor, against z-fighting
 
 var _built: bool = false
 
@@ -72,110 +47,17 @@ func _ready() -> void:
 	_build()
 
 
-func _build() -> void:
-	if _built:
-		return
-	_built = true
-
-	for child in get_children():
-		child.queue_free()
-
-	var src: Node3D = SOURCE_GLB.instantiate() as Node3D
-	if src == null:
-		push_error("walk_this_line_marking: %s did not instantiate as Node3D" % SOURCE_GLB.resource_path)
-		return
-
-	var root: Node = src
-	var wrapper: Node = src.get_node_or_null("do_not_cross_line")
-	if wrapper != null:
-		root = wrapper
-
-	var mount := Node3D.new()
-	mount.name = "Marking"
-	add_child(mount)
-
-	var moved: int = 0
-	for part_name in KEEP:
-		var part: Node = root.get_node_or_null(NodePath(part_name))
-		if part == null:
-			push_warning("walk_this_line_marking: '%s' is not in the source asset" % part_name)
-			continue
-		root.remove_child(part)
-		mount.add_child(part)
-		part.owner = null
-		moved += 1
-
-	# The posts and tape belong to the companion artifact.
-	src.queue_free()
-
-	if moved == 0:
-		push_error("walk_this_line_marking: nothing was taken from the asset — the node names have changed")
-		return
-
-	_apply_standoff(mount)
-	_apply_stripe(mount)
-	_apply_paint(mount)
-
-
-## Shift the marking along +Z as a unit. The asset's own legend sits at 1.18 m,
-## so the delta rather than the absolute is what moves.
-func _apply_standoff(mount: Node3D) -> void:
-	var marking: Node3D = mount.get_node_or_null("floor_marking") as Node3D
-	if marking != null:
-		marking.position.z += standoff_m - 1.18
-
-
-func _apply_stripe(mount: Node3D) -> void:
-	var marking: Node3D = mount.get_node_or_null("floor_marking") as Node3D
-	if marking == null:
-		return
-	var stripe: Node3D = marking.get_node_or_null("guide_stripe") as Node3D
-	if stripe != null:
-		stripe.visible = show_stripe
-
-
-## Colour the paint and fade it. ONE pass, because colour and wear both live on
-## albedo and two passes would have the second overwrite the first.
-##
-## Applied as a per-instance material_override so the shared glTF material is
-## left alone — two placements at different colours or wear must not edit each
-## other's surfaces, and the asset is shared with do_not_cross_barrier, whose
-## tape and posts must not inherit a floor colour.
-func _apply_paint(mount: Node3D) -> void:
-	var rgba: Color = paint_color
-	rgba.a = clampf(paint_color.a * (1.0 - wear), 0.0, 1.0)
-	var translucent: bool = rgba.a < 0.999
-	for mesh in _meshes_under(mount):
-		var mat := StandardMaterial3D.new()
-		mat.albedo_color = rgba
-		# The authored floor_paint is unlit-flat in intent — it is paint on a
-		# floor, not a surface with a highlight — so keep it matte rather than
-		# inheriting the glTF's roughness and picking up the room's key light.
-		mat.roughness = 1.0
-		mat.metallic = 0.0
-		if translucent:
-			mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-		mesh.material_override = mat
-
-
-func _meshes_under(node: Node) -> Array[MeshInstance3D]:
-	var out: Array[MeshInstance3D] = []
-	if node is MeshInstance3D:
-		out.append(node as MeshInstance3D)
-	for child in node.get_children():
-		out.append_array(_meshes_under(child))
-	return out
-
-
-## Grid hook. Called by GridInteractablesComponent on the scene ROOT, e.g.
-##     walk_this_line_marking:0:0#standoff_m:2.0#wear:0.6
 func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data.has("legend_text"):
+		legend_text = str(config_data["legend_text"])
+	if config_data.has("stripe_len_m"):
+		stripe_len_m = clampf(float(config_data["stripe_len_m"]), 0.4, 12.0)
+	if config_data.has("stripe_w_m"):
+		stripe_w_m = clampf(float(config_data["stripe_w_m"]), 0.02, 0.5)
 	if config_data.has("standoff_m"):
 		standoff_m = float(config_data["standoff_m"])
 	if config_data.has("show_stripe"):
 		show_stripe = bool(config_data["show_stripe"])
-	if config_data.has("wear"):
-		wear = clampf(float(config_data["wear"]), 0.0, 1.0)
 	if config_data.has("paint_color"):
 		var raw: String = str(config_data["paint_color"])
 		if raw.is_valid_html_color():
@@ -183,6 +65,52 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		else:
 			push_warning("walk_this_line_marking: '%s' is not a colour; keeping %s"
 				% [raw, paint_color.to_html(false)])
+	if config_data.has("wear"):
+		wear = clampf(float(config_data["wear"]), 0.0, 1.0)
 	if _built:
 		_built = false
 		_build()
+
+
+func _build() -> void:
+	if _built:
+		return
+	_built = true
+	for child in get_children():
+		child.queue_free()
+
+	var rgba: Color = paint_color
+	rgba.a = clampf(paint_color.a * (1.0 - wear), 0.0, 1.0)
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = rgba
+	# Paint on a floor is matte: it must not take a highlight from the room's key
+	# light, so roughness is pinned rather than inherited from any kit finish.
+	mat.roughness = 1.0
+	mat.metallic = 0.0
+	if rgba.a < 0.999:
+		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+
+	var mount := Node3D.new()
+	mount.name = "Marking"
+	add_child(mount)
+
+	if show_stripe:
+		var stripe := MeshInstance3D.new()
+		var quad := PlaneMesh.new()
+		quad.size = Vector2(stripe_len_m, stripe_w_m)
+		stripe.mesh = quad
+		stripe.material_override = mat
+		stripe.position = Vector3(0, LIFT, 0)
+		mount.add_child(stripe)
+
+	if legend_text.strip_edges() != "":
+		var label: MeshInstance3D = HangarKit.stencil(legend_text,
+			Vector2(minf(stripe_len_m * 0.62, 2.2), 0.17), rgba)
+		if label:
+			# Lying flat, reading from above, standing off toward the approach.
+			label.rotation_degrees.x = -90.0
+			label.position = Vector3(0, LIFT, standoff_m)
+			if rgba.a < 0.999 and label.material_override is StandardMaterial3D:
+				(label.material_override as StandardMaterial3D).transparency = \
+					BaseMaterial3D.TRANSPARENCY_ALPHA
+			mount.add_child(label)

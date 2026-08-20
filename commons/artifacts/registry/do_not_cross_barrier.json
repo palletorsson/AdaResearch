@@ -1,10 +1,18 @@
 {
 	"artifacts": {
 		"do_not_cross_barrier": {
+			"dna": {
+			 "axes": {
+			 "form": [
+			 "sawhorse",
+			 "tape"
+			 ]
+			 }
+			},
 			"lookup_name": "do_not_cross_barrier",
 			"name": "Do Not Cross — Barrier",
 			"class_name": "DoNotCrossBarrier",
-			"description": "Two weighted posts with a tape strung between them at hip height, reading DO NOT CROSS. The line as OBSTACLE: a body would have to duck under it. Pairs with walk_this_line_marking, the floor half of the same asset — which does not repeat the prohibition but reverses it, reading WALK THIS LINE.",
+			"description": "A line you must not cross, rebuilt PROCEDURALLY - no glb, every mesh built in _ready(). Two forms as a declared axis: `sawhorse` (the New York police barricade - a straight wooden plank painted NYPD blue on A-frame legs, the legend stencilled white on both faces) and `tape` (two steel posts and a ribbon hung as a TRUE catenary, a*cosh(x/a) with the constant solved by Newton from span and sag - wave 17 published 'the catenary that is a parabola' as a defect, so a barrier shipped after that finding does not repeat it; measured honestly, at the default 0.18 m sag the catenary is 0.19 mm from the parabola, so the honesty is in the arithmetic, not the look). The legend is a PARAMETER now (legend_text), not baked geometry. Pairs with walk_this_line_marking, the floor half: the tape forbids crossing the line, the paint commands following it.",
 			"scene": "res://commons/artifacts/do_not_cross_barrier/do_not_cross_barrier.tscn",
 			"category": "environment",
 			"artifact_type": "prop",
@@ -41,7 +49,6 @@
 				"the line as instrument of exclusion"
 			],
 			"qfep_connection": "Point_Lines argues that measure is also violence — what does not fit the grid is remainder, error, erased. This and its companion are that argument as furniture, standing in PERPENDICULAR relations to one line: the tape forbids crossing it, the paint commands following it.",
-			"note": "Instantiates res://commons/models/do_not_cross_line.glb and keeps post_left, post_right, barrier_tape and printed_legend; the floor assembly belongs to its companion. The two artifacts share ONE asset and draw DISJOINT subtrees — this is not the one-scene-many-names pattern, which is two tokens running one identical script. The asset is authored as one file because the barrier and the marking are dimensioned against each other: the posts stand at x = +/-1.6 and the floor legend lies 1.18 m in front of them."
-		}
+			"note": "REBUILT 2026-08-19 from the glb-mounted version: commons/models/do_not_cross_line.glb is no longer referenced by any artifact (kept in the repo as the authored source). Config: #form:tape|sawhorse #span_m #legend_text #sag_m #shove_deg."}
 	}
 }
