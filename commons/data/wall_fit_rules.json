@@ -1,0 +1,16 @@
+{
+ "_readme": "THE WALL FIT (2026-08-20, Palle: 'we need to find out how we can place things at the walls in the right way — does it fit, can we scale to fit, does it need a shelf, and some nice distance to the wall?'). One rule set consulted by BOTH sides: tools/spatial_negotiation.hang_on_wall (the plan) and commons/scenes/em/em_wall_fit.gd (the museum, and the reference wall). Edit in res://commons/scenes/wall_fit_reference.tscn — a nudge there IS the museum's new convention. Per-token overrides win over the defaults.",
+ "defaults": {
+  "margin_m": 0.15,
+  "scale_min": 0.55,
+  "shelf_depth_m": 0.25,
+  "standoff_flat_m": 0.02,
+  "standoff_shallow_m": 0.035,
+  "standoff_boxy_m": 0.05,
+  "flat_depth_m": 0.08,
+  "shallow_depth_m": 0.25,
+  "eye_v_m": 1.55,
+  "bottom_min_m": 0.3
+ },
+ "tokens": {}
+}

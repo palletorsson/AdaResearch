@@ -36,9 +36,11 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import sys
 from dataclasses import replace, dataclass, field
 from pathlib import Path
+REPO_ROOT = Path(__file__).resolve().parent.parent
 from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -330,6 +332,9 @@ class Placement:
     exceptions: list[str]
     masks: Masks | None = None
     contract: SpatialContract | None = None
+    #: THE WALL FIT decision (hang/scale/shelf/stand-off) for against_wall
+    #: placements — one rule set with the museum (wall_fit_rules.json)
+    wall_fit: dict | None = None
     #: Courtyard outer dims [w, d] in whole cells, set only when venue is
     #: "courtyard". The negotiator owns placement SIZES the way it owns slots:
     #: computed once from the body + a 3 m apron each side, so the assembler
@@ -649,6 +654,65 @@ def try_place(contract: SpatialContract, slot: Slot, plan: FloorPlan,
 
 # ── Wall domain ─────────────────────────────────────────────────────
 
+_WALL_FIT_CACHE: dict | None = None
+
+
+def _wall_fit_rules() -> dict:
+    """commons/data/wall_fit_rules.json — the ONE rule set for wall placement,
+    shared with em_wall_fit.gd and edited on the reference wall."""
+    global _WALL_FIT_CACHE
+    if _WALL_FIT_CACHE is None:
+        try:
+            _WALL_FIT_CACHE = json.loads((REPO_ROOT / "commons" / "data" / "wall_fit_rules.json").read_text(encoding="utf-8"))
+        except Exception:
+            _WALL_FIT_CACHE = {"defaults": {}, "tokens": {}}
+    return _WALL_FIT_CACHE
+
+
+def wall_fit_decide(token: str, body_m: list, run_w: float, run_h: float) -> dict:
+    """THE WALL FIT (2026-08-20). Given a body and the wall space it faces:
+    does it FIT (margins kept)? can it SCALE to fit (never below scale_min)?
+    does its depth want a SHELF? and what STAND-OFF keeps it a nice distance
+    from the plaster? Returns {mode: hang|scale|refuse, scale, standoff,
+    shelf, v_centre}. Per-token overrides from wall_fit_rules.json win."""
+    r = dict(_wall_fit_rules().get("defaults", {}))
+    r.update(_wall_fit_rules().get("tokens", {}).get(token, {}))
+    w, d, h = float(body_m[0]), float(body_m[1]), float(body_m[2])
+    margin = float(r.get("margin_m", 0.15))
+    free_w = run_w - 2 * margin
+    free_h = run_h - 2 * margin
+    out = {"mode": "hang", "scale": 1.0, "shelf": False, "standoff": float(r.get("standoff_shallow_m", 0.035)), "v_centre": float(r.get("eye_v_m", 1.55))}
+    # stand-off by depth class: a print sits near the plaster, a box breathes
+    if d <= float(r.get("flat_depth_m", 0.08)):
+        out["standoff"] = float(r.get("standoff_flat_m", 0.02))
+    elif d <= float(r.get("shallow_depth_m", 0.25)):
+        out["standoff"] = float(r.get("standoff_shallow_m", 0.035))
+    else:
+        out["standoff"] = float(r.get("standoff_boxy_m", 0.05))
+        out["shelf"] = True                     # a deep body glued to plaster reads wrong
+    if "shelf" in r:
+        out["shelf"] = bool(r["shelf"])
+    if free_w <= 0.1 or free_h <= 0.1:
+        out["mode"] = "refuse"
+        return out
+    if w > free_w or h > free_h:
+        s = min(free_w / max(w, 0.01), free_h / max(h, 0.01))
+        s = math.floor(s * 20.0) / 20.0         # round DOWN to 0.05 so it truly fits
+        if s >= float(r.get("scale_min", 0.55)):
+            out["mode"] = "scale"
+            out["scale"] = s
+        else:
+            out["mode"] = "refuse"
+            return out
+    # small pieces hang on the eye line; tall pieces keep their feet off the skirting
+    eff_h = h * out["scale"]
+    v = float(r.get("eye_v_m", 1.55))
+    if v - eff_h / 2.0 < float(r.get("bottom_min_m", 0.3)):
+        v = float(r.get("bottom_min_m", 0.3)) + eff_h / 2.0
+    out["v_centre"] = v
+    return out
+
+
 def hang_on_wall(contract: SpatialContract, wall: WallSurface,
                  anchor: tuple[int, int]) -> tuple[list[float] | None, Trace]:
     """Place a wall-mounted work as a (u, v) rectangle on its wall.
@@ -660,8 +724,16 @@ def hang_on_wall(contract: SpatialContract, wall: WallSurface,
     w_m, _, h_m = contract.body_m
     ax, az = anchor
     ox, oz = wall.origin_cell
+    # THE WALL FIT: fit / scale-to-fit / shelf / stand-off, one rule set with
+    # the museum and the reference wall (wall_fit_rules.json)
+    fit = wall_fit_decide(contract.lookup, list(contract.body_m), float(wall.length_m if hasattr(wall, "length_m") else 6.0), 4.0)
+    if fit["mode"] == "refuse":
+        return None, Trace("wall_fit", "fail",
+                           f"{w_m:.2f} x {h_m:.2f} m cannot fit this wall even at scale {_wall_fit_rules().get('defaults', {}).get('scale_min', 0.55)}")
+    sc = float(fit["scale"])
+    w_m, h_m = w_m * sc, h_m * sc
     u_centre = float(az - oz) if wall.side in ("west", "east") else float(ax - ox)
-    centre_v = 1.55
+    centre_v = float(fit["v_centre"])
     if contract.importance == "feature":
         fz = wall.feature_zone
         u_centre = (fz[0] + fz[2]) / 2.0
@@ -677,8 +749,13 @@ def hang_on_wall(contract: SpatialContract, wall: WallSurface,
                 return trial, Trace("wall_rect_placed", "applied",
                                     f"slid {shift:+g} m along {wall.id} to clear an obstruction")
         return None, Trace("wall_rect_placed", "fail", f"{why} on {wall.id}")
-    return rect, Trace("wall_rect_placed", "pass",
-                       f"[{rect[0]:.2f}, {rect[1]:.2f}] to [{rect[2]:.2f}, {rect[3]:.2f}] on {wall.id}")
+    tr = Trace("wall_rect_placed", "pass",
+               f"[{rect[0]:.2f}, {rect[1]:.2f}] to [{rect[2]:.2f}, {rect[3]:.2f}] on {wall.id}"
+               + (f" · scaled x{sc:.2f} to fit" if sc < 1.0 else "")
+               + (" · on a shelf" if fit["shelf"] else "")
+               + f" · stand-off {fit['standoff']*100:.0f} cm")
+    tr.wall_fit = fit
+    return rect, tr
 
 
 # ── The ladder ──────────────────────────────────────────────────────
@@ -1287,6 +1364,7 @@ def run(artifacts: list[str], plan: FloorPlan | None = None,
                     p.traces.append(trace)
                     if rect:
                         p.wall_rect = rect
+                        p.wall_fit = getattr(trace, "wall_fit", None)
                         wall.occupied.append({"token": lookup, "rect": rect,
                                               "role": contract.importance})
         out.append(p)
@@ -1387,6 +1465,7 @@ def run(artifacts: list[str], plan: FloorPlan | None = None,
                     fp.traces.append(trace)
                     if rect:
                         fp.wall_rect = rect
+                        fp.wall_fit = getattr(trace, "wall_fit", None)
                         wall.occupied.append({"token": lookup, "rect": rect, "role": fc.importance})
             fp.traces.append(Trace(rule="fill", status="pass",
                                    detail="a filler: the hall's remaining room, offered to the corpus after the poem dealt"))

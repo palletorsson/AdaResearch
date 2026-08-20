@@ -478,6 +478,7 @@ const CROSSING_SCENES := {
 	"jp": "res://commons/scenes/mapobjects/jump_pad.tscn",
 }
 const WEDGE_SCENE := "res://commons/scenes/mapobjects/walkableprism.tscn"
+const EmWallFitLib := preload("res://commons/scenes/em/em_wall_fit.gd")
 var _bake_used: Dictionary = {}         # per key: "tok|x|y" -> how many times looked up
 var _seg_placed: Array = []             # this segment's placed rows (for the bake)
 var _seg_unbaked: int = 0               # bodies this segment placed the live way while replaying
@@ -4528,6 +4529,29 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 				cell["top"] = asked_top          # a wall piece hangs at its height; the wall is its support
 			else:
 				cell["support_m"] = asked_top    # a freestanding body wants a plinth, not a hover
+		# THE WALL FIT (2026-08-20): the plan's decision — scale-to-fit, hang
+		# height, a nice STAND-OFF from the plaster, and a SHELF for a deep body —
+		# applied at the stamp. One rule set (wall_fit_rules.json) with the
+		# negotiator and the reference wall.
+		var wf_v: Variant = row.get("wall_fit")
+		if wf_v is Dictionary and String(row.get("mode", "")) == "against_wall":
+			var wf: Dictionary = wf_v
+			if float(wf.get("scale", 1.0)) < 0.999:
+				cell["scale"] = float(wf.get("scale", 1.0)) * (scale_override if not is_equal_approx(scale_override, 1.0) else 1.0)
+			cell["top"] = float(wf.get("v_centre", cell.get("top", 1.55)))
+			var so: float = float(wf.get("standoff", 0.0))
+			var wside := String(row.get("wall", ""))
+			if so > 0.0 and wside != "":
+				var push := Vector3.ZERO
+				match wside:
+					"west": push = Vector3(so, 0, 0)
+					"east": push = Vector3(-so, 0, 0)
+					"north": push = Vector3(0, 0, so)
+					_: push = Vector3(0, 0, -so)
+				var fo: Array = cell.get("offset", [0.0, 0.0, 0.0]) if cell.get("offset") is Array else [0.0, 0.0, 0.0]
+				cell["offset"] = [float(fo[0]) + push.x, float(fo[1]), float(fo[2]) + push.z]
+			if bool(wf.get("shelf", false)):
+				cell["wall_shelf"] = true
 		if not fine_override.is_empty():
 			cell["offset"] = fine_override
 		if not is_equal_approx(scale_override, 1.0):
@@ -4550,6 +4574,13 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 		if _stamp(seg, scene, tok, cell, zbase, 1, {}, false, 0.0,
 				yaw_override, plan_config):
 			placed += 1
+			if bool(cell.get("wall_shelf", false)):
+				# the deep wall body earned a shelf: a plain bracket just below it
+				var shelf: MeshInstance3D = EmWallFitLib.make_shelf(0.6, 0.35)
+				shelf.name = "Shelf_" + tok
+				var sy: float = float(cell.get("top", 1.2)) - 0.25
+				shelf.position = Vector3(float(cell["x"]) + 0.5, maxf(sy, 0.35), float(cell["y"]) + 0.5)
+				seg.add_child(shelf)
 			# THE HERO'S WALK: a row planned from the trunk carries its role
 			# (relation.walk_kind: hero / extends / varies / edge / contradicts /
 			# queers / synthesizes). The museum records it on the placement and
