@@ -1330,7 +1330,12 @@ def run(artifacts: list[str], plan: FloorPlan | None = None,
             p.traces.append(Trace(rule="hand", status="compromised",
                                   detail=f"a ruled cell ({fx - plan.apron}, {fz - plan.apron} in the tile): the hand put this body in the hall; "
                                          f"its footprint is held there for the bodies after it, whatever venue the negotiation reached"))
-            p = replace(p, venue="interior", anchor=(fx, fz), slot="hand", mode="freestanding") if hasattr(p, "__dataclass_fields__") else p
+            # THE HAND WINS EVEN A REJECT (2026-08-20): a refused negotiation
+            # (science_screen: faces_out_of_wall at its ruled cell) used to leave
+            # result REJECT here, so the forced placement never became a row and
+            # the hand's monitor silently vanished. A ruled cell IS a placement.
+            p = replace(p, result="ACCEPT", venue="interior", anchor=(fx, fz), slot="hand",
+                        mode="freestanding", masks=m_fixed) if hasattr(p, "__dataclass_fields__") else p
         if reading or lookup in fixed:
             plan.slots = all_slots
             if p.result == "ACCEPT" and p.venue == "interior" and p.anchor is not None:

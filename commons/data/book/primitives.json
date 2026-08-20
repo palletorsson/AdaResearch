@@ -37,7 +37,8 @@
      "lock": [
       7,
       4
-     ]
+     ],
+     "rotation": 180
     },
     {
      "token": "interactive_point_origin",
@@ -50,6 +51,19 @@
      ]
     },
     {
+     "token": "science_screen",
+     "text": "the map is not the territory — move the point, watch its shadow",
+     "by": "claude",
+     "lock": [
+      9,
+      6
+     ],
+     "config": {
+      "support": "stand",
+      "scan_radius": 8.0
+     }
+    },
+    {
      "token": "CoordinateSystem3M",
      "text": "Point one, position,\nno point without the coordinate system.\n\n3D Space.",
      "by": "hand",
@@ -59,7 +73,8 @@
      "lock": [
       3,
       3
-     ]
+     ],
+     "scale": 0.8
     },
     {
      "token": "fontana_puncture",
@@ -104,6 +119,13 @@
       2
      ],
      "kind": "3s"
+    },
+    {
+     "cell": [
+      2,
+      14
+     ],
+     "kind": "2"
     }
    ]
   },
@@ -182,8 +204,15 @@
      ],
      "reach": {
       "axis": "z",
-      "length": 14
-     }
+      "length": 9
+     },
+     "count": 3,
+     "spread": "row",
+     "gap_cells": 2,
+     "lock": [
+      1,
+      19
+     ]
     },
     {
      "token": "laser_exploding_sphere",
@@ -193,10 +222,13 @@
       1,
       1
      ],
-     "reach": {
-      "axis": "x",
-      "length": 5
-     }
+     "count": 3,
+     "spread": "row",
+     "gap_cells": 2,
+     "lock": [
+      1,
+      25
+     ]
     },
     {
      "token": "grabbable_line",
@@ -229,7 +261,15 @@
     {
      "token": "science_screen",
      "text": "the map is not the territory — science_screen shows a flattened version of the algorithm you are already inside",
-     "by": "draft"
+     "by": "draft",
+     "lock": [
+      5,
+      24
+     ],
+     "config": {
+      "support": "stand",
+      "scan_radius": 8.0
+     }
     },
     {
      "token": "cube_scene",
@@ -561,20 +601,33 @@
     {
      "token": "snap_octahedron_puzzle",
      "text": "the octahedron is the cube's dual — swap faces and vertices and you get the other",
-     "by": "draft"
+     "by": "draft",
+     "lock": [
+      12,
+      25
+     ]
     },
     {
      "token": "capsule_radials_rings",
      "text": "the capsule is the physicist's preferred solid",
-     "by": "draft"
+     "by": "draft",
+     "lock": [
+      10,
+      25
+     ]
     },
     {
      "token": "prism_block",
      "text": "subdividing a triangle is not the same operation as subdividing a square. The",
-     "by": "draft"
+     "by": "draft",
+     "lock": [
+      11,
+      25
+     ]
     }
    ],
-   "hero": "righttriangle"
+   "hero": "righttriangle",
+   "ordered": true
   },
   {
    "pearl": "portals",
