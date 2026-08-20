@@ -4,10 +4,10 @@
  "gate": {
   "depth_rows": 0,
   "_depth_rows": "0 = IN THE DOORWAY: the door sits in the entry wall's opening, sized to it, the wall is the jamb, the scanner on the wall face beside it (Palle, 2026-08-18: 'it should be in the doorway'). N > 0 = a free-standing door N rows into the first hall with its own piers (4 was the run-up version).",
-  "reach_m": 1.2,
-  "_reach_m": "eye or controller this close to the scanner glass counts as a hand",
-  "patience_s": 20.0,
-  "_patience_s": "seconds at a sealed door before it opens itself (a museum is not a locked room)",
+  "reach_m": 1.5,
+  "_reach_m": "eye or controller this close to the scanner glass counts as a hand — 1.5 so a bare-hands lean-in grants without kissing the glass",
+  "patience_s": 6.0,
+  "_patience_s": "seconds at a sealed door before it opens itself (a museum is not a locked room). 20 made Palle serve a third of his felt load time at the door; 6 is a beat of ritual.",
   "open_seconds": 1.6,
   "click_reach_m": 3.2,
   "click_cone_rad": 0.55
