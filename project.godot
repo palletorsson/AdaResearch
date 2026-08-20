@@ -26,6 +26,7 @@ driver/enable_input=true
 
 [autoload]
 
+BootClock="*res://commons/managers/BootClock.gd"
 XRToolsUserSettings="*uid://bqgb8i74tm0t"
 XRToolsRumbleManager="*uid://by853dk86g1qw"
 GameManager="*res://commons/managers/GameManager.gd"

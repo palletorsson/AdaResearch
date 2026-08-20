@@ -760,6 +760,11 @@ func _ready() -> void:
 		return                        # @tool is for the Inspector dropdowns only
 	_boot_t0 = Time.get_ticks_msec()
 	_boot_ms["engine_to_ready"] = _boot_t0   # since process start
+	# BootClock (first autoload) splits that number: engine+pak vs the parade
+	var bclock: Node = get_node_or_null("/root/BootClock")
+	if bclock != null:
+		_boot_ms["engine_pak"] = int(bclock.get("t_init_ms"))
+		_boot_ms["autoloads_scene"] = _boot_t0 - int(bclock.get("t_init_ms"))
 	_parse_args()
 	_vr = _is_vr()
 	_load_modules()
@@ -3747,7 +3752,11 @@ var _built: Array = []          # one entry per segment built this run
 ## pak cannot write ada_run; VR reads the shipped copy); the healed file's
 ## own mtime is what marks the bake fresh again.
 func _heal_bake(key: String) -> void:
-	if key == "" or _shot_path != "" or _studio or _vr:
+	# no _vr fork (the mode must not decide what is built): the ada_run path
+	# guard below already excludes every export, and a PCVR walk on the
+	# authoring tree heals the SAME seals — vr_parity proves the two modes
+	# build one museum, so either may write the verdicts back.
+	if key == "" or _shot_path != "" or _studio:
 		return
 	if not _plan_path.begins_with("res://ada_run/"):
 		return
