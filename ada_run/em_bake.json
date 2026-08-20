@@ -1,8 +1,8 @@
 {
 	"_readme": "The BAKE: every placement decision the museum makes from a measurement, decided ONCE by a headless --em-bake run and replayed by every later run, desktop or headset. Per chapter|pearl: placed = token, tile cell, the exact cells sealed (x, z-from-segment-base); refused = token, cell, why. Regenerate after editing the plan: python tools/em_bake.py",
-	"at": "2026-08-20 08:09:40",
+	"at": "2026-08-20 08:30:48",
 	"plan": "res://ada_run/em_plan.json",
-	"plan_at": "2026-08-20T08:07:06",
+	"plan_at": "2026-08-20T08:27:43",
 	"schema": "adaresearch.em_bake.v1",
 	"segments": {
 		"array_tutorial|array patterns": {
@@ -21859,146 +21859,146 @@
 			"placed": [
 				{
 					"cell": [
-						3,
-						13
+						3.0,
+						13.0
 					],
 					"seal": [
 						[
-							3,
-							13
+							3.0,
+							13.0
 						]
 					],
 					"token": "path_game_controller"
 				},
 				{
 					"cell": [
-						3,
-						8
+						3.0,
+						8.0
 					],
 					"seal": [
 						[
-							3,
-							8
+							3.0,
+							8.0
 						]
 					],
 					"token": "path_watchdog"
 				},
 				{
 					"cell": [
-						8,
-						13
+						8.0,
+						13.0
 					],
 					"seal": [
 						[
-							8,
-							13
+							8.0,
+							13.0
 						]
 					],
 					"token": "becoming_catalyst"
 				},
 				{
 					"cell": [
-						2,
-						7
+						2.0,
+						7.0
 					],
 					"seal": [
 						[
-							2,
-							7
+							2.0,
+							7.0
 						]
 					],
 					"token": "pyramid_edit"
 				},
 				{
 					"cell": [
-						2,
-						14
+						2.0,
+						14.0
 					],
 					"seal": [
 						[
-							2,
-							14
+							2.0,
+							14.0
 						],
 						[
-							3,
-							14
+							3.0,
+							14.0
 						]
 					],
 					"token": "folding_cube"
 				},
 				{
 					"cell": [
-						2,
-						12
+						2.0,
+						12.0
 					],
 					"seal": [
 						[
-							2,
-							12
+							2.0,
+							12.0
 						]
 					],
 					"token": "edible_mushroom"
 				},
 				{
 					"cell": [
-						12,
-						20
+						12.0,
+						20.0
 					],
 					"seal": [
 						[
-							12,
-							20
+							12.0,
+							20.0
 						]
 					],
 					"token": "octapod_crawler"
 				},
 				{
 					"cell": [
-						9,
-						18
+						9.0,
+						18.0
 					],
 					"seal": [
 						[
-							9,
-							18
+							9.0,
+							18.0
 						]
 					],
 					"token": "facets_sphere"
 				},
 				{
 					"cell": [
-						12,
-						17
+						12.0,
+						17.0
 					],
 					"seal": [
 						[
-							12,
-							17
+							12.0,
+							17.0
 						]
 					],
 					"token": "posture_bench"
 				},
 				{
 					"cell": [
-						7,
-						38
+						7.0,
+						38.0
 					],
 					"seal": [
 						[
-							6,
-							37
+							6.0,
+							37.0
 						],
 						[
-							7,
-							37
+							7.0,
+							37.0
 						],
 						[
-							6,
-							38
+							6.0,
+							38.0
 						],
 						[
-							7,
-							38
+							7.0,
+							38.0
 						]
 					],
 					"token": "tentacle_placer"
@@ -22007,16 +22007,16 @@
 			"refused": [
 				{
 					"tile_cell": [
-						12,
-						14
+						12.0,
+						14.0
 					],
 					"token": "grab_trihedron",
 					"why": "sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
-						12,
-						2
+						12.0,
+						2.0
 					],
 					"token": "fetishtorus",
 					"why": "sealing would sever the walk route"
@@ -22251,240 +22251,240 @@
 			"placed": [
 				{
 					"cell": [
-						2,
-						6
+						2.0,
+						6.0
 					],
 					"seal": [
 						[
-							1,
-							5
+							1.0,
+							5.0
 						],
 						[
-							2,
-							5
+							2.0,
+							5.0
 						],
 						[
-							1,
-							6
+							1.0,
+							6.0
 						],
 						[
-							2,
-							6
+							2.0,
+							6.0
 						],
 						[
-							3,
-							5
+							3.0,
+							5.0
 						],
 						[
-							3,
-							6
+							3.0,
+							6.0
 						],
 						[
-							1,
-							7
+							1.0,
+							7.0
 						],
 						[
-							2,
-							7
+							2.0,
+							7.0
 						],
 						[
-							3,
-							7
+							3.0,
+							7.0
 						]
 					],
 					"token": "catalyst_pedestal"
 				},
 				{
 					"cell": [
-						3,
-						8
+						3.0,
+						8.0
 					],
 					"seal": [
 						[
-							3,
-							8
+							3.0,
+							8.0
 						]
 					],
 					"token": "parasol_triangle"
 				},
 				{
 					"cell": [
-						8,
-						11
+						8.0,
+						11.0
 					],
 					"seal": [
 						[
-							8,
-							9
+							8.0,
+							9.0
 						],
 						[
-							8,
-							10
+							8.0,
+							10.0
 						],
 						[
-							8,
-							11
+							8.0,
+							11.0
 						],
 						[
-							8,
-							12
+							8.0,
+							12.0
 						],
 						[
-							8,
-							13
+							8.0,
+							13.0
 						],
 						[
-							6,
-							9
+							6.0,
+							9.0
 						],
 						[
-							7,
-							9
+							7.0,
+							9.0
 						],
 						[
-							9,
-							9
+							9.0,
+							9.0
 						],
 						[
-							10,
-							9
+							10.0,
+							9.0
 						],
 						[
-							6,
-							10
+							6.0,
+							10.0
 						],
 						[
-							7,
-							10
+							7.0,
+							10.0
 						],
 						[
-							9,
-							10
+							9.0,
+							10.0
 						],
 						[
-							6,
-							11
+							6.0,
+							11.0
 						],
 						[
-							7,
-							11
+							7.0,
+							11.0
 						],
 						[
-							9,
-							11
+							9.0,
+							11.0
 						],
 						[
-							6,
-							12
+							6.0,
+							12.0
 						],
 						[
-							7,
-							12
+							7.0,
+							12.0
 						],
 						[
-							9,
-							12
+							9.0,
+							12.0
 						],
 						[
-							6,
-							13
+							6.0,
+							13.0
 						],
 						[
-							7,
-							13
+							7.0,
+							13.0
 						],
 						[
-							9,
-							13
+							9.0,
+							13.0
 						],
 						[
-							10,
-							13
+							10.0,
+							13.0
 						]
 					],
 					"token": "folded_strip"
 				},
 				{
 					"cell": [
-						9,
-						15
+						9.0,
+						15.0
 					],
 					"seal": [
 						[
-							9,
-							15
+							9.0,
+							15.0
 						]
 					],
 					"token": "triangle"
 				},
 				{
 					"cell": [
-						10,
-						32
+						10.0,
+						32.0
 					],
 					"seal": [
 						[
-							10,
-							32
+							10.0,
+							32.0
 						],
 						[
-							11,
-							32
+							11.0,
+							32.0
 						]
 					],
 					"token": "pythagorean_triangle_angles"
 				},
 				{
 					"cell": [
-						6,
-						32
+						6.0,
+						32.0
 					],
 					"seal": [],
 					"token": "quad"
 				},
 				{
 					"cell": [
-						1,
-						19
+						1.0,
+						19.0
 					],
 					"seal": [
 						[
-							1,
-							18
+							1.0,
+							18.0
 						],
 						[
-							1,
-							19
+							1.0,
+							19.0
 						],
 						[
-							1,
-							20
+							1.0,
+							20.0
 						]
 					],
 					"token": "interactivetriangle"
 				},
 				{
 					"cell": [
-						2,
-						12
+						2.0,
+						12.0
 					],
 					"seal": [
 						[
-							2,
-							12
+							2.0,
+							12.0
 						]
 					],
 					"token": "quad_line_puzzle"
 				},
 				{
 					"cell": [
-						7,
-						37
+						7.0,
+						37.0
 					],
 					"seal": [
 						[
-							7,
-							37
+							7.0,
+							37.0
 						]
 					],
 					"token": "catalyst_vent"
@@ -22493,16 +22493,16 @@
 			"refused": [
 				{
 					"tile_cell": [
-						2,
-						9
+						2.0,
+						9.0
 					],
 					"token": "triangle_line_puzzle",
 					"why": "sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
-						3,
-						13
+						3.0,
+						13.0
 					],
 					"token": "draw_triangle_faces",
 					"why": "sealing would sever the walk route"
@@ -29584,42 +29584,42 @@
 			"placed": [
 				{
 					"cell": [
-						12.0,
-						14.0
+						12,
+						14
 					],
 					"seal": [
 						[
-							12.0,
-							14.0
+							12,
+							14
 						],
 						[
-							13.0,
-							14.0
+							13,
+							14
 						],
 						[
-							12.0,
-							15.0
+							12,
+							15
 						],
 						[
-							13.0,
-							15.0
+							13,
+							15
 						]
 					],
 					"token": "x_translation_cube"
 				},
 				{
 					"cell": [
-						15.0,
-						1.0
+						15,
+						1
 					],
 					"seal": [
 						[
-							14.0,
-							1.0
+							14,
+							1
 						],
 						[
-							14.0,
-							2.0
+							14,
+							2
 						]
 					],
 					"token": "toruscylinder"
@@ -29938,111 +29938,111 @@
 			"placed": [
 				{
 					"cell": [
-						6.0,
-						15.0
+						6,
+						15
 					],
 					"seal": [
 						[
-							6.0,
-							15.0
+							6,
+							15
 						]
 					],
 					"token": "rotate_grid_cubes"
 				},
 				{
 					"cell": [
-						3.0,
-						6.0
+						3,
+						6
 					],
 					"seal": [
 						[
-							1.0,
-							5.0
+							1,
+							5
 						],
 						[
-							2.0,
-							5.0
+							2,
+							5
 						],
 						[
-							3.0,
-							5.0
+							3,
+							5
 						],
 						[
-							4.0,
-							5.0
+							4,
+							5
 						],
 						[
-							1.0,
-							6.0
+							1,
+							6
 						],
 						[
-							2.0,
-							6.0
+							2,
+							6
 						],
 						[
-							3.0,
-							6.0
+							3,
+							6
 						],
 						[
-							4.0,
-							6.0
+							4,
+							6
 						],
 						[
-							2.0,
-							7.0
+							2,
+							7
 						],
 						[
-							3.0,
-							7.0
+							3,
+							7
 						],
 						[
-							4.0,
-							7.0
+							4,
+							7
 						]
 					],
 					"token": "example_3_2_forces_with_arbitrary_angular_motion_vr"
 				},
 				{
 					"cell": [
-						15.0,
-						2.0
+						15,
+						2
 					],
 					"seal": [
 						[
-							13.0,
-							2.0
+							13,
+							2
 						],
 						[
-							14.0,
-							2.0
+							14,
+							2
 						],
 						[
-							15.0,
-							2.0
+							15,
+							2
 						],
 						[
-							13.0,
-							0.0
+							13,
+							0
 						],
 						[
-							13.0,
-							1.0
+							13,
+							1
 						],
 						[
-							14.0,
-							1.0
+							14,
+							1
 						],
 						[
-							15.0,
-							1.0
+							15,
+							1
 						],
 						[
-							13.0,
-							3.0
+							13,
+							3
 						],
 						[
-							13.0,
-							4.0
+							13,
+							4
 						]
 					],
 					"token": "spin"

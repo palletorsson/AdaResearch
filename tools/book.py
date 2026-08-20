@@ -110,6 +110,7 @@ def migrate(chapter: str) -> dict:
         if not page2_done:
             lines.insert(1 if lines and "token" not in lines[0] else 0, {"text": str(p["page2"]), "by": "hand"})
         bp = {"pearl": p.get("pearl", ""), "map": p.get("map", ""), "lines": lines}
+        if p.get("utilities"): bp["utilities"] = list(p["utilities"])
         if p.get("ramps"): bp["ramps"] = list(p["ramps"])
         if p.get("gaps"): bp["gaps"] = list(p["gaps"])
         if p.get("stages"): bp["stages"] = list(p["stages"])
@@ -236,6 +237,13 @@ def compile_book(chapter: str, reseed: bool = True) -> dict:
         # its own thing, not one compass value on a stage rect. The walkableprism
         # is the corpus's third most-placed body (1567 instances in 290 maps) and
         # the pathfinder's only legal way UP; here it is also the museum's.
+        # THE UTILITY DISPATCHER (2026-08-20): a pearl may place a grid utility by
+        # its own map grammar — {spec: "rc:45:y:2", cell: [x, z]} — the SAME code
+        # and parameters a map_data.json cell carries. The museum's dispatcher
+        # (endless_museum._stamp_utility) parses it with UtilityRegistry, so the
+        # two systems cannot drift apart on what "rc:45:y:2" means.
+        if bp.get("utilities"): e["utilities"] = list(bp["utilities"])
+        else: e.pop("utilities", None)
         if bp.get("ramps"): e["ramps"] = list(bp["ramps"])
         else: e.pop("ramps", None)
         if bp.get("gaps"): e["gaps"] = list(bp["gaps"])

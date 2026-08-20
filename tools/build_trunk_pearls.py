@@ -138,6 +138,8 @@ def seed(trunk_doc: dict) -> dict:
                         p["dropped"] = True
                     if "order" in e:
                         p["index"] = int(e["order"])
+                    if e.get("utilities"):
+                        p["utilities"] = list(e["utilities"])  # grid utilities by their own grammar (tools/book.py)
                     if e.get("ramps"):
                         p["ramps"] = list(e["ramps"])          # the wedge, placed anywhere (tools/book.py)
                     if e.get("gaps"):

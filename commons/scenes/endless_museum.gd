@@ -445,6 +445,33 @@ var _ride_cells: Dictionary = {}
 ## the same body a stage's ramp uses — the corpus's third most-placed artifact and
 ## the grid pathfinder's only legal way up — and now the museum's way up too.
 var _cur_ramps: Array = []
+## THE UTILITY DISPATCHER (2026-08-20). A pearl may place a grid utility by its
+## own map grammar: {spec: "rc:45:y:2", cell: [x, z]}. The spec is parsed by
+## UtilityRegistry.parse_utility_cell — the SAME parser a map_data.json cell goes
+## through — and the parameters are applied with the grid's own hard-won rules
+## (rc angle:axis:pause:y, sc max:min:offset:y, tc distance:axis[:auto],
+## br axis:length, jp x:z[:arc]), ported from GridUtilitiesComponent so one
+## artifact means one thing in both systems. ALWAYS pose-and-parameters BEFORE
+## add_child: transport_cube caches its target in _ready.
+## The allowed set is the SELF-CONTAINED transport family — scenes with exports,
+## no autoload, no GridSystem, no player-layer gate (rc and sc measured at zero
+## such references). The rest are refused by name, with the reason printed:
+## h/f (hazards: damage into GameManager, scene-reload death), r (reset_cube
+## reloads the scene — the endless walk severed by its own rescue), cp
+## (CheckpointManager is not autoloaded; it records nothing), l (a lift breaks
+## the single-storey walk map — see the height-work ceiling note), t/m (they
+## move the player between MAPS; the museum is one endless map).
+var _cur_utilities: Array = []
+const UTIL_ALLOWED := {"rc": true, "sc": true, "tc": true, "br": true, "jp": true, "wp": true}
+const UTIL_REFUSED := {
+	"h": "a hazard deals damage into GameManager and its death path reloads the scene",
+	"f": "force_field is the h: register at a slower tick, not a push volume",
+	"r": "reset_cube reloads the whole scene — the endless walk severed by its own rescue (_catch_if_fallen is the museum's catch)",
+	"cp": "CheckpointManager is not autoloaded; a checkpoint here records nothing",
+	"l": "a lift needs a second floor the walk map cannot describe (one ground height per cell is the contract)",
+	"t": "a teleporter leaves the map; the museum is one endless map",
+	"m": "move_player teleports on a timer; the walk is the museum's argument",
+}
 const CROSSING_SCENES := {
 	"tc": "res://commons/scenes/mapobjects/transport_cube.tscn",
 	"br": "res://commons/scenes/mapobjects/bridge_path.tscn",
@@ -2282,28 +2309,20 @@ func _stamp_gaps(seg: Node3D, tile: Array, zbase: int) -> void:
 		# to the instance before adding it), and the museum has to keep it too.
 		var cx: float = x0 + w * 0.5
 		var cz: float = z0 + VESTIBULE_H
-		match kind:
-			"tc":
-				# a cube that carries you: it starts at the near edge and travels the gap
-				var dist: float = float(parts[1]) if parts.size() > 1 and parts[1].is_valid_float() else float(d)
-				var axis: String = parts[2] if parts.size() > 2 else "z"
-				node.position = Vector3(cx, 0.0, cz - 0.5)
-				node.set("move_distance", dist)
-				node.set("move_direction", Vector3(1, 0, 0) if axis == "x" else Vector3(0, 0, 1))
-				# a crossing nobody can trigger is a crossing that is not there: the desktop
-				# walker is layer 1 and in no group, while the cube waits on layer 20, so
-				# only `auto` moves for both modes. Default to auto until the walker is gated.
-				node.set("auto_start", true if parts.size() <= 3 else parts[3] == "auto")
-			"br":
-				var axis2: String = parts[1] if parts.size() > 1 else "z"
-				node.position = Vector3(cx, 0.0, cz)
-				node.set("bridge_axis", axis2)
-				node.set("bridge_length", int(parts[2]) if parts.size() > 2 and parts[2].is_valid_int() else (d if axis2 == "z" else w))
-			"jp":
-				node.position = Vector3(cx, 0.0, cz - 0.5)
-				if parts.size() > 2:
-					node.set("target_x", int(parts[1]))
-					node.set("target_z", int(parts[2]) + VESTIBULE_H)
+		# the crossing's POSITION is the gap's business (the near edge, on the centre
+		# line); its PARAMETERS are the dispatcher's — one site of grid knowledge
+		node.position = Vector3(cx, 0.0, cz if kind == "br" else cz - 0.5)
+		var xparams: Array = []
+		for pi2 in range(1, parts.size()):
+			xparams.append(parts[pi2])
+		if kind == "br" and xparams.size() < 2:
+			var axis2: String = String(xparams[0]) if xparams.size() > 0 else "z"
+			xparams = [axis2, str(d if axis2 == "z" else w)]
+		if kind == "jp" and xparams.size() > 1:
+			xparams[1] = str(int(xparams[1]) + VESTIBULE_H)   # the book speaks tile z; the pad wants world z
+		if kind == "tc" and xparams.is_empty():
+			xparams = [str(d), "z"]
+		_utility_apply_params(node, kind, xparams)
 		seg.add_child(node)
 		# THE CROSSING IS THE ROUTE — but only a STATIC one is floor. A bridge is
 		# always there, so its cells are walk cells like any other. A transport
@@ -2349,6 +2368,131 @@ func _stamp_wedge(seg: Node3D, cell: Vector2i, facing: String, rise: float, zbas
 	seg.add_child(w)
 	_walk_cells[Vector2i(cell.x, zbase + cell.y)] = true
 	return true
+
+
+## THE DISPATCHER. One entry for every grid utility the museum will stamp:
+## parse with the registry, refuse with a reason, instantiate, apply the grid's
+## parameter rules, THEN enter the tree. Returns the node, or null with the
+## refusal printed — a refusal is a fact about the museum, never silence.
+func _stamp_utility(spec: String, cell: Vector2i, seg: Node3D, zbase: int) -> Node3D:
+	var parsed: Dictionary = UtilityRegistry.parse_utility_cell(spec)
+	var code: String = String(parsed.get("type", " ")).strip_edges()
+	var params: Array = parsed.get("parameters", [])
+	if code == "" or code == " ":
+		return null
+	if UTIL_REFUSED.has(code):
+		print("[em-utility] REFUSED %s at %s — %s" % [spec, str(cell), String(UTIL_REFUSED[code])])
+		return null
+	if not UTIL_ALLOWED.has(code):
+		print("[em-utility] REFUSED %s at %s — not in the museum's allowed set (self-contained transport scenes only)" % [spec, str(cell)])
+		return null
+	if code == "wp":
+		# the wedge has its own placer (shared with the stage ramps); the wp
+		# grammar's first parameter is a yaw in degrees — map it to a facing
+		var yaw_p: float = float(params[0]) if params.size() > 0 and String(params[0]).is_valid_float() else 0.0
+		var facing: String = "north"
+		var yq: int = int(round(fposmod(yaw_p, 360.0) / 90.0)) % 4
+		match yq:
+			1: facing = "west"
+			2: facing = "south"
+			3: facing = "east"
+		_stamp_wedge(seg, cell, facing, 0.4, zbase)
+		return seg.get_node_or_null("Wedge_%d_%d" % [cell.x, cell.y])
+	var path: String = UtilityRegistry.get_utility_scene_path(code)
+	if path == "" or not ResourceLoader.exists(path):
+		print("[em-utility] REFUSED %s — no scene at %s" % [spec, path])
+		return null
+	var node: Node3D = (load(path) as PackedScene).instantiate() as Node3D
+	node.name = "Utility_%s_%d_%d" % [code, cell.x, cell.y]
+	node.position = Vector3(cell.x + 0.5, 0.0, cell.y + 0.5)
+	_utility_apply_params(node, code, params)
+	seg.add_child(node)
+	# a moving surface is a RIDE, never promised floor; a bridge is floor
+	var gc := Vector2i(cell.x, zbase + cell.y)
+	if code == "br":
+		_walk_cells[gc] = true
+	else:
+		_ride_cells[gc] = code
+	return node
+
+
+## The grid's parameter knowledge, ported from GridUtilitiesComponent
+## _apply_utility_parameters — the rules the corpus's 2400 maps already obey.
+## Every set() lands before _ready (the caller adds to the tree after), so a
+## typed export takes it or the value was wrong in the grid too.
+func _utility_apply_params(node: Node3D, code: String, params: Array) -> void:
+	match code:
+		"tc":   # tc:distance:axis[:auto]
+			var dist: float = float(params[0]) if params.size() > 0 and String(params[0]).is_valid_float() else 4.0
+			var axis: String = String(params[1]) if params.size() > 1 else "z"
+			node.set("move_distance", dist)
+			node.set("move_direction", Vector3(1, 0, 0) if axis == "x" else (Vector3(0, 1, 0) if axis == "y" else Vector3(0, 0, 1)))
+			node.set("auto_start", true if params.size() <= 2 else String(params[2]) == "auto")
+		"br":   # br:axis:length
+			var axis2: String = String(params[0]) if params.size() > 0 else "z"
+			node.set("bridge_axis", axis2.trim_prefix("-"))
+			if params.size() > 1 and String(params[1]).is_valid_int():
+				node.set("bridge_length", int(params[1]))
+		"jp":   # jp:target_x:target_z[:arc]
+			if params.size() > 1:
+				node.set("target_x", int(params[0]))
+				node.set("target_z", int(params[1]))
+			if params.size() > 2 and String(params[2]).is_valid_float():
+				node.set("arc_height", float(params[2]))
+		"rc":   # rc:angle:axis:pause:y_offset — or rc:continuous:x:30
+			if params.size() > 0 and String(params[0]) == "continuous":
+				node.set("mode", 1)
+				if params.size() > 1:
+					node.set("continuous_axis", _axis_of(String(params[1])))
+				if params.size() > 2 and String(params[2]).is_valid_float():
+					node.set("continuous_speed", float(params[2]))
+			elif params.size() > 0 and String(params[0]).is_valid_float():
+				node.set("rotation_angle", float(params[0]))
+				if params.size() > 1:
+					node.set("rotation_axis", _axis_of(String(params[1])))
+				if params.size() > 2 and String(params[2]).is_valid_float():
+					node.set("pause_duration", float(params[2]))
+				if params.size() > 3 and String(params[3]).is_valid_float():
+					node.set("y_offset", float(params[3]))
+		"sc":   # sc:max:min:offset_x:y_offset
+			if params.size() > 0 and String(params[0]).is_valid_float():
+				node.set("max_scale", float(params[0]))
+			if params.size() > 1 and String(params[1]).is_valid_float():
+				node.set("min_scale", float(params[1]))
+			if params.size() > 2 and String(params[2]).is_valid_float():
+				node.set("center_offset", Vector3(float(params[2]), 0, 0))
+			if params.size() > 3 and String(params[3]).is_valid_float():
+				node.set("y_offset", float(params[3]))
+
+
+func _axis_of(a: String) -> Vector3:
+	match a.to_lower():
+		"x": return Vector3.RIGHT
+		"-x": return Vector3.LEFT
+		"y": return Vector3.UP
+		"-y": return Vector3.DOWN
+		"-z": return Vector3.FORWARD
+		_: return Vector3.BACK
+
+
+## The pearl's utilities, stamped after stages/gaps/ramps so a cube can stand
+## on a stage or beside a hollow.
+func _stamp_utilities(seg: Node3D, tile: Array, zbase: int) -> void:
+	var made: int = 0
+	for u_v in _cur_utilities:
+		var u: Dictionary = u_v
+		var c: Array = u.get("cell", [])
+		var spec: String = String(u.get("spec", ""))
+		if c.size() < 2 or spec == "":
+			continue
+		var cx: int = int(c[0])
+		var cz: int = int(c[1]) + VESTIBULE_H
+		if cz - VESTIBULE_H < 0 or cz - VESTIBULE_H >= tile.size():
+			continue
+		if _stamp_utility(spec, Vector2i(cx, cz), seg, zbase) != null:
+			made += 1
+	if made > 0:
+		print("[em-utility] %s: %d utility(ies) stamped by the pearl" % [_cur_stage_pearl, made])
 
 
 ## The wedge wherever the hall needs one — not only at a stage's edge. A ramp may
@@ -2539,6 +2683,7 @@ func _build_segment() -> void:
 	_cur_stage_pearl = String(peek.get("pearl", ""))
 	_cur_gaps = (peek.get("gaps", []) as Array) if peek.get("gaps") is Array else []
 	_cur_ramps = (peek.get("ramps", []) as Array) if peek.get("ramps") is Array else []
+	_cur_utilities = (peek.get("utilities", []) as Array) if peek.get("utilities") is Array else []
 	if not _cur_gaps.is_empty():
 		# the hollow is cut into the tile the segment builds, so every reader below
 		# (floor, collider, walk map, dressing) sees the void without knowing about gaps
@@ -2692,6 +2837,7 @@ func _build_segment() -> void:
 	_stamp_stages(seg, solid, tile, zbase)
 	_stamp_gaps(seg, tile, zbase)
 	_stamp_ramps(seg, tile, zbase)
+	_stamp_utilities(seg, tile, zbase)
 	# DEPTH FIRST, then rank, then x — the same key em_sets._slot_before now
 	# uses. These two sorts must agree: _deal_segment picks the artifact from
 	# `_pick_pool(free[0].rank)`, so with slots rank-sorted `free[0]` was the

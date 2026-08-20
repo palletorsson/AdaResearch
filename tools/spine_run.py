@@ -176,6 +176,7 @@ def run_sequence(seq: str, museum: str, rows: int, relations: int = 2,
             r["stages"] = list(pw.get("stages") or [])
             r["gaps"] = list(pw.get("gaps") or [])
             r["ramps"] = list(pw.get("ramps") or [])
+            r["utilities"] = list(pw.get("utilities") or [])
             r["hero_walk"] = {"hero": pw["hero"], "hand_branches": pw["hand_branches"], "pearl": pw["pearl"]}
             parts.append(r)
             print(f"  {seq:24s} PEARL {pw['pearl_index'] + 1:2d}/{len(pearls)} {pw['pearl']:16s} offered {r['offered']:3d} placed {r['placed']:3d} interior {r['interior']:3d}")
@@ -493,6 +494,8 @@ def write_plan(result: dict[str, Any], out: Path) -> dict[str, Any]:
                     m["gaps"] = list(pr["gaps"])       # hollow space + the crossing that carries you over
                 if pr.get("ramps"):
                     m["ramps"] = list(pr["ramps"])     # the wedge, wherever the hall needs a way up
+                if pr.get("utilities"):
+                    m["utilities"] = list(pr["utilities"])   # grid utilities by their own map grammar
                 m["sequence"] = r["sequence"]
                 m["pearl"] = pr["pearl"]; m["pearl_index"] = pr["pearl_index"]; m["map"] = pr.get("map", "")
                 if not pr.get("ordered"):
