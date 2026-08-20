@@ -193,7 +193,8 @@ def plan_museum(key: str, tokens: list[str],
                 placement_context: dict[str, dict[str, Any]] | None = None,
                 rooms: int | None = None, reading: bool = False,
                 fixed: dict[str, tuple[int, int]] | None = None,
-                gaps: list | None = None, fillers: list | None = None) -> dict[str, Any]:
+                gaps: list | None = None, fillers: list | None = None,
+                saturate: str = "") -> dict[str, Any]:
     """Negotiate `tokens` into museum `key`. Reports what did NOT fit, too.
     `rooms` crops the tile to that many rooms (tools/em_rooms.py); the cropped
     tile is written into the row so the runtime builds exactly this hall."""
@@ -211,7 +212,7 @@ def plan_museum(key: str, tokens: list[str],
                                    footprints={t: c["footprint"] for t, c in ctx.items() if (c or {}).get("footprint")},
                                    reaches={t: c["reach"] for t, c in ctx.items() if (c or {}).get("reach")},
                                    counts={t: c["count"] for t, c in ctx.items() if (c or {}).get("count")},
-                                   fillers=[t for t in (fillers or []) if t not in set(tokens)])
+                                   fillers=[t for t in (fillers or []) if t not in set(tokens)], saturate=saturate)
 
     placed: list[dict[str, Any]] = []
     rejected: list[dict[str, Any]] = []
@@ -245,7 +246,8 @@ def plan_museum(key: str, tokens: list[str],
             # the book may ask for a plinth (support_m on the line): the hand's height wins
             # over the slot's surface (tools/book.py -> hero_walk -> cast_context)
             "support_height_m": round(float(edge_meta.get("support_m") or p.support_height_m), 3),
-            **({"fill": True} if p.artifact in fill_set else {}),
+            **({"fill": True} if (p.artifact in fill_set or (saturate and p.artifact == saturate)) else {}),
+            **({"dummy": True} if (saturate and p.artifact == saturate) else {}),
             **({"hand": True, "ruled": {"by": "book: locked", "cell": list(edge_meta["lock"])}} if edge_meta.get("lock") else {}),
             **({"config": dict(edge_meta["config"])} if edge_meta.get("config") else {}),
             **({"offset": list(edge_meta["pose"]["offset"])} if (edge_meta.get("pose") or {}).get("offset") else {}),

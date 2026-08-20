@@ -1130,7 +1130,8 @@ def run(artifacts: list[str], plan: FloorPlan | None = None,
         bays: int = 3, venue_asks: dict[str, str] | None = None,
         reading: bool = False, fixed: dict[str, tuple[int, int]] | None = None,
         footprints: dict | None = None, reaches: dict | None = None,
-        counts: dict | None = None, fillers: list[str] | None = None) -> tuple[FloorPlan, list[Placement], Occupancy]:
+        counts: dict | None = None, fillers: list[str] | None = None,
+        saturate: str = "") -> tuple[FloorPlan, list[Placement], Occupancy]:
     """Negotiate a whole exhibition brief in order.
 
     venue_asks: BALCONIES-BY-ASK (2026-08-18). A hand may say, on the trunk,
@@ -1374,6 +1375,30 @@ def run(artifacts: list[str], plan: FloorPlan | None = None,
             misses = 0
         else:
             misses += 1
+    # THE SATURATION (2026-08-20, Palle: "for each place where we can add an
+    # artifact add a dummy dark sphere if there is nothing there"). When the pool
+    # is dry, the remaining spots take the DUMMY — dark_sphere, the body whose own
+    # truth is "some things in a space exist not to be used but to be sensed" —
+    # until the hall genuinely refuses. Every empty spot is thereby VISIBLE: a
+    # dark sphere in the walk is a place waiting for a real body.
+    if saturate:
+        try:
+            dc = staged_contract(saturate)
+        except Exception:
+            dc = None
+        sat_misses = 0
+        sat_placed = 0
+        while dc is not None and sat_misses < 12 and sat_placed < 120:
+            pref2 = next((s for s in plan.slots if s.venue == "interior" and _slot_suits(dc, s)), None)
+            dp = negotiate(dc, plan, occ, pref2)
+            if dp.result == "ACCEPT" and dp.venue == "interior" and dp.masks:
+                occ.commit(saturate + "~%d" % sat_placed, dp.masks, dp.anchor)
+                dp.traces.append(Trace(rule="fill", status="pass", detail="the dummy: an empty spot made visible"))
+                out.append(dp)
+                sat_placed += 1
+                sat_misses = 0
+            else:
+                sat_misses += 1
     return plan, out, occ
 
 

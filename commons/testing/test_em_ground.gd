@@ -13,7 +13,7 @@ func _run() -> void:
 	var m: Node3D = (load("res://commons/scenes/endless_museum.tscn") as PackedScene).instantiate() as Node3D
 	m.set("_plan_path", "res://ada_run/em_plan.json")
 	m.set("_first_chapter", "primitives")
-	m.set("start_map", "Point_Triangle_Context")     # the one pearl with a stage
+	m.set("start_map", "Point_Line_Grid")     # the stage's pearl (triangle context) is a PAGE of this hall now
 	get_root().add_child(m)
 	await create_timer(4.0).timeout
 	var w: CharacterBody3D = m.get("_player")
@@ -49,7 +49,7 @@ func _run() -> void:
 	var g: Node3D = (load("res://commons/scenes/endless_museum.tscn") as PackedScene).instantiate() as Node3D
 	g.set("_plan_path", "res://ada_run/em_plan.json")
 	g.set("_first_chapter", "transformation")
-	g.set("start_map", "Trans_AxisDecomposition")     # the one pearl with a gap
+	g.set("start_map", "Trans_Introduction")     # the gap's pearl (axisdecomposition) is a PAGE of this hall now
 	get_root().add_child(g)
 	await create_timer(4.0).timeout
 	var w2: CharacterBody3D = g.get("_player")

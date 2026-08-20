@@ -384,7 +384,7 @@ def _book_locks(cast_context: dict[str, Any], apron: int) -> dict[str, tuple[int
     return {t: (int(c["lock"][0]) + apron, int(c["lock"][1]) + apron) for t, c in (cast_context or {}).items() if c.get("lock")}
 
 
-def _fill_pools(trunk: dict) -> tuple[dict, dict, list]:
+def _fill_pools(trunk: dict) -> tuple[dict, dict, list, dict, list]:
     """THE PACKING POOLS (2026-08-20). Per map: its interactables layer (every
     token the hand once placed there). Per chapter: the spine order's tokens.
     Global: registry tokens that appear in no chapter — the homeless, offered
@@ -445,7 +445,28 @@ def _fill_pools(trunk: dict) -> tuple[dict, dict, list]:
                     homeless.append(k)
             except Exception:
                 pass
-    return by_map, by_seq, homeless
+    # THE RELATED: the trunk's branches, per chapter — the readings that attach
+    # to this chapter's pearls (extends / queers / contradicts …), Palle's ring 3.
+    related: dict = {}
+    for b in trunk.get("branches", []):
+        ch = str(b.get("anchor", ""))
+        tk = str(b.get("token", ""))
+        if ch and tk and tk not in related.setdefault(ch, []):
+            related[ch].append(tk)
+    # THE DNA: promoted artifacts (declared dna.axes) — ring 4.
+    dna: list = []
+    for f in _glob.glob(str(REPO / "commons" / "artifacts" / "registry" / "*.json")):
+        try:
+            reg = json.loads(Path(f).read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        arts = reg.get("artifacts") if "artifacts" in reg else reg
+        if not isinstance(arts, dict):
+            continue
+        for k, v in arts.items():
+            if isinstance(v, dict) and isinstance(v.get("dna"), dict) and v["dna"].get("axes") and k not in dna:
+                dna.append(k)
+    return by_map, by_seq, homeless, related, dna
 
 
 def _fixed_cells(seq: str, museum: str, pearl: str, apron: int, only: set | None = None) -> dict[str, tuple[int, int]]:
@@ -531,9 +552,10 @@ def write_plan(result: dict[str, Any], out: Path) -> dict[str, Any]:
     plans: list[dict[str, Any]] = []
     owner: dict[str, str] = {}
     trunk_doc = json.loads((REPO / "commons" / "data" / "trunk_branches.json").read_text(encoding="utf-8"))
-    fill_by_map, fill_by_seq, fill_homeless = _fill_pools(trunk_doc)
+    fill_by_map, fill_by_seq, fill_homeless, fill_related, fill_dna = _fill_pools(trunk_doc)
     print(f"  packing pools: {sum(len(v) for v in fill_by_map.values())} map tokens, "
-          f"{sum(len(v) for v in fill_by_seq.values())} spine tokens, {len(fill_homeless)} homeless registry tokens")
+          f"{sum(len(v) for v in fill_by_seq.values())} spine tokens, {len(fill_homeless)} homeless, "
+          f"{sum(len(v) for v in fill_related.values())} related, {len(fill_dna)} dna")
     displaced: list[dict[str, str]] = []
     for r in result["sequences"]:
         key = r["museum"]
@@ -556,21 +578,31 @@ def write_plan(result: dict[str, Any], out: Path) -> dict[str, Any]:
                 # THE PACKING: the hall's leftover room is offered to (1) the pearl's own
                 # map, (2) the chapter's spine order, (3) the homeless registry tokens —
                 # each token once per chapter, exclusions honoured, never over the poem.
+                # THE RINGS (2026-08-20, Palle): the hero holds the centre (the cast
+                # leads and the hero slot is ranked first by the negotiator), then the
+                # grid's own artifacts (this pearl's map, the chapter's spine), then the
+                # RELATED (the trunk's readings on this chapter), then the DNA families,
+                # then the homeless — and after all of that, the dummy saturates.
                 exq = set(pr.get("exclude") or []) | {"lab_room"}
                 pool = [t for t in fill_by_map.get(pr.get("map", ""), []) if t not in chapter_used]
                 pool += [t for t in fill_by_seq.get(r["sequence"], []) if t not in chapter_used and t not in pool]
+                pool += [t for t in fill_related.get(r["sequence"], []) if t not in chapter_used and t not in pool]
+                pool += [t for t in fill_dna[:30] if t not in chapter_used and t not in pool]
                 pool += [t for t in fill_homeless[:24] if t not in chapter_used and t not in pool]
                 pool = [t for t in pool if t not in exq]
                 m = plan_museum(key, list(pr["cast"]), list(r.get("anchor_tokens", [])),
                                 dict(pr.get("cast_context", {})), rooms=pr.get("rooms"), reading=bool(pr.get("ordered")), fixed=fx,
-                                gaps=list(pr.get("gaps") or []), fillers=pool[:90])
-                filled = [a["token"] for a in m.get("artifacts", []) if a.get("fill")]
+                                gaps=list(pr.get("gaps") or []), fillers=pool[:120], saturate="dark_sphere")
+                filled = [a["token"] for a in m.get("artifacts", []) if a.get("fill") and not a.get("dummy")]
+                dummies = sum(1 for a in m.get("artifacts", []) if a.get("dummy"))
                 chapter_used.update(filled)
                 for t in filled:
                     if t in fill_homeless:
                         fill_homeless.remove(t)
-                if filled:
-                    print(f"  {r['sequence']:24s} PEARL {pr['pearl']:16s} packed +{len(filled)} filler(s)")
+                    if t in fill_dna:
+                        fill_dna.remove(t)
+                if filled or dummies:
+                    print(f"  {r['sequence']:24s} PEARL {pr['pearl']:16s} packed +{len(filled)} filler(s), +{dummies} dark sphere(s)")
                 m["ordered"] = bool(pr.get("ordered"))
                 if pr.get("pages"):
                     m["pages"] = list(pr["pages"])     # the pearls sharing this hall, in reading order

@@ -17310,7 +17310,8 @@
       "facing": "east",
       "rise": 0.4
      }
-    ]
+    ],
+    "join": true
    },
    {
     "map": "Point_Trace",
@@ -17331,7 +17332,8 @@
     "tokens_order": [
      "mystic_writing_pad",
      "draw_dot"
-    ]
+    ],
+    "join": true
    },
    {
     "map": "Point_Line_Grid",
@@ -17399,7 +17401,8 @@
       "spread": "square",
       "gap": 1
      }
-    }
+    },
+    "join": true
    },
    {
     "map": "Chamber_Primitives",
@@ -17412,7 +17415,8 @@
     },
     "tokens_add": [],
     "tokens_remove": [],
-    "hero": "catalyst_target"
+    "hero": "catalyst_target",
+    "join": true
    },
    {
     "map": "Primitives_Ignorance",
@@ -17503,7 +17507,8 @@
     },
     "tokens_add": [],
     "tokens_remove": [],
-    "hero": "durer_scene"
+    "hero": "durer_scene",
+    "join": true
    }
   ],
   "transformation": [
@@ -17559,7 +17564,8 @@
     },
     "tokens_add": [],
     "tokens_remove": [],
-    "hero": "transform_composition_workbench"
+    "hero": "transform_composition_workbench",
+    "join": true
    },
    {
     "map": "Trans_AxisDecomposition",
@@ -17617,7 +17623,8 @@
        5
       ]
      }
-    ]
+    ],
+    "join": true
    },
    {
     "map": "Trans_Rotation",
@@ -17634,7 +17641,8 @@
     },
     "tokens_add": [],
     "tokens_remove": [],
-    "hero": "rotate_grid_cubes"
+    "hero": "rotate_grid_cubes",
+    "join": true
    },
    {
     "map": "Trans_RotationSpectacle",
@@ -17670,7 +17678,8 @@
     },
     "tokens_add": [],
     "tokens_remove": [],
-    "hero": "chair_assembly_puzzle"
+    "hero": "chair_assembly_puzzle",
+    "join": true
    },
    {
     "map": "Chamber_Transformation",
@@ -17685,7 +17694,8 @@
     },
     "tokens_add": [],
     "tokens_remove": [],
-    "hero": "proximity_spawner"
+    "hero": "proximity_spawner",
+    "join": true
    },
    {
     "map": "Trans_Pit",
@@ -17702,7 +17712,8 @@
     },
     "tokens_add": [],
     "tokens_remove": [],
-    "hero": "pusher_block"
+    "hero": "pusher_block",
+    "join": true
    }
   ],
   "symmetry": [
@@ -21721,6 +21732,7 @@
       "draw_dot"
      ],
      "blurb": "Now: duration.",
+     "join": true,
      "says": {
       "mystic_writing_pad": "there is no origin of a trace",
       "draw_dot": "all life is encoded — that is enough"
@@ -21809,6 +21821,7 @@
       }
      ],
      "rooms": 8,
+     "join": true,
      "says": {
       "catalyst_pedestal": "the triangle. everything is made of triangles. the quad, the simplest mesh. the pyramid mesh.",
       "parasol_triangle": "everything is made of triangles",
@@ -21882,6 +21895,7 @@
       "polyhedron_nets_cube"
      ],
      "blurb": "A manipulable quad-based object where you can drag cube corners.",
+     "join": true,
      "counts": {
       "animatedcubebuilder": {
        "count": 4,
@@ -21909,6 +21923,7 @@
       "catalyst_target"
      ],
      "blurb": "The first mark.",
+     "join": true,
      "says": {
       "catalyst_target": "primitives — and so on"
      },
@@ -22026,6 +22041,7 @@
       "pyramidlong"
      ],
      "blurb": "Inspired by the Herzog August Bibliothek and Melencolia I, this scene embodies the limit point of geometric aspiration and existential constraint.",
+     "join": true,
      "says": {
       "durer_scene": "Dürer's polyhedron — the solid no taxonomy names, and the angel who keeps it",
       "snap_pyramid_puzzle": "the pyramid, snapped — held by the grid",
@@ -22117,6 +22133,7 @@
       "pickup_gate"
      ],
      "blurb": "Walkways extend over void.",
+     "join": true,
      "speak": "to move is to add. nothing turns, nothing grows; the thing arrives as it left.",
      "speak_by": "claude",
      "says": {
@@ -22180,6 +22197,7 @@
        "crossing": "tc:4:z:auto"
       }
      ],
+     "join": true,
      "speak": "one move is three moves. x, then y, then z — and the order does not matter, for translation only.",
      "speak_by": "claude",
      "says": {
@@ -22205,6 +22223,7 @@
       "spin"
      ],
      "blurb": "Rotation produces space as anisotropic.",
+     "join": true,
      "speak": "turning is a move around something. around which axis, from where — the order matters now.",
      "speak_by": "claude",
      "says": {
@@ -22250,6 +22269,7 @@
       "scale_me"
      ],
      "blurb": "Scale me.",
+     "join": true,
      "speak": "to scale is to multiply. bigger is not more; the chair assembled at twice the size is the same chair.",
      "speak_by": "claude",
      "says": {
@@ -22273,6 +22293,7 @@
       "proximity_spawner"
      ],
      "blurb": "The crawler folds flat when your shrink ray hits it.",
+     "join": true,
      "speak": "transformation: one matrix, three moves.",
      "speak_by": "claude",
      "says": {
@@ -22293,6 +22314,7 @@
       "grower_block"
      ],
      "blurb": "Three transformations, three ways to die.",
+     "join": true,
      "speak": "the pit: push and grow. a transform done to you.",
      "speak_by": "claude",
      "says": {

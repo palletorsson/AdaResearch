@@ -234,13 +234,45 @@ def pearl_walks(chapter: str, trunk: dict[str, Any] | None = None) -> list[dict[
                 seen.add(tok)
                 rows.append({"lookup": tok, "walk_kind": kind, "why": b.get("why", ""), "provenance": b.get("provenance", "derived"),
                              "via": b.get("via", ""), "space": b.get("space", "wall")})
+        # THE PAGES join UNORDERED heads too (2026-08-20). The merge lived only in
+        # the ordered branch, so folding transformation into two halls silently
+        # DROPPED the joined pearls' bodies: trans introduction kept its own 13 and
+        # translation/axisdecomposition/rotation vanished from the museum entirely.
+        # A join must merge whichever kind of head it lands on.
+        pages_u: list[dict] = [{"pearl": name, "tokens": [r2["lookup"] for r2 in rows]}]
+        rooms_total_u = int(p.get("rooms") or 0)
+        excl_u = set(p.get("excluded", []))
+        stages_u = list(p.get("stages", [])); gaps_u = list(p.get("gaps", []))
+        ramps_u = list(p.get("ramps", [])); utils_u = list(p.get("utilities", [])); sims_u = list(p.get("simulations", []))
+        qi_u = pi + 1
+        while qi_u < len(pearls_all) and pearls_all[qi_u].get("join"):
+            q = pearls_all[qi_u]
+            q_foyer = set(q.get("foyer", []))
+            q_toks = [t for t in q.get("tokens", []) if t not in q_foyer]
+            have = {r2["lookup"] for r2 in rows}
+            for tok in q_toks:
+                if tok in have:
+                    continue
+                rows.append({"lookup": tok, "walk_kind": "sibling", "why": f"a line of the {q.get('pearl')} page", "provenance": "hand", "space": "wall", "page": q.get("pearl"),
+                             **({"support_m": float(q["supports"][tok])} if (q.get("supports") or {}).get(tok) else {}),
+                             **({"lock": list(q["locks"][tok])} if (q.get("locks") or {}).get(tok) else {}),
+                             **({"config": dict(q["configs"][tok])} if (q.get("configs") or {}).get(tok) else {}),
+                             **({"pose": dict(q["poses"][tok])} if (q.get("poses") or {}).get(tok) else {})})
+            pages_u.append({"pearl": q.get("pearl"), "tokens": q_toks, "map": q.get("map", "")})
+            rooms_total_u += int(q.get("rooms") or 0)
+            excl_u |= set(q.get("excluded", []))
+            stages_u += list(q.get("stages", [])); gaps_u += list(q.get("gaps", []))
+            ramps_u += list(q.get("ramps", [])); utils_u += list(q.get("utilities", [])); sims_u += list(q.get("simulations", []))
+            qi_u += 1
+        excl_u -= {r2["lookup"] for r2 in rows}
         uniq: list[str] = []
         for r in rows:
             if r["lookup"] not in uniq:
                 uniq.append(r["lookup"])
-        walks.append({"chapter": chapter, "pearl": name, "pearl_index": int(p.get("index", len(walks))), "map": p.get("map", ""), "stages": list(p.get("stages", [])), "gaps": list(p.get("gaps", [])), "ramps": list(p.get("ramps", [])), "utilities": list(p.get("utilities", [])), "simulations": list(p.get("simulations", [])), "rooms": p.get("rooms"), "exclude": list(p.get("excluded", [])),
+        walks.append({"chapter": chapter, "pearl": name, "pearl_index": int(p.get("index", len(walks))), "map": p.get("map", ""), "stages": stages_u, "gaps": gaps_u, "ramps": ramps_u, "utilities": utils_u, "simulations": sims_u, "rooms": (rooms_total_u or p.get("rooms")), "exclude": sorted(excl_u),
+                      **({"pages": pages_u} if len(pages_u) > 1 else {}),
                       "hero": hero, "hand_branches": len(hand), "cast": uniq, "rows": rows,
-                      "why": f"pearl {name}: {hero} + {sib} siblings + {len(rows) - 1 - sib} branches ({len(hand)} hand)"})
+                      "why": f"pearl {name}: {hero} + {sib} siblings + {len(rows) - 1 - sib} branches ({len(hand)} hand)" + (f", {len(pages_u)} pages" if len(pages_u) > 1 else "")})
     return walks
 
 

@@ -15,7 +15,7 @@ func _run() -> void:
 	var m: Node3D = (load("res://commons/scenes/endless_museum.tscn") as PackedScene).instantiate() as Node3D
 	m.set("_plan_path", "res://ada_run/em_plan.json")
 	m.set("_first_chapter", "primitives")
-	m.set("start_map", "Point_Triangle_Context")
+	m.set("start_map", "Point_Line_Grid")
 	get_root().add_child(m)
 	await create_timer(4.0).timeout
 	var w: CharacterBody3D = m.get("_player")
