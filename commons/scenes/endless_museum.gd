@@ -6577,6 +6577,13 @@ func _process(_delta: float) -> void:
 		_boot_first_frame = true
 		_boot_ms["first_frame"] = Time.get_ticks_msec() - _boot_t0
 		print("[em-boot] %s" % JSON.stringify(_boot_ms))
+		# its own file too — a windowed run's stdout is swallowed on Windows,
+		# and em_built's copy is written before this stamp exists
+		var bf := FileAccess.open("res://ada_run/em_boot_last.json", FileAccess.WRITE)
+		if bf != null:
+			bf.store_string(JSON.stringify({"at": Time.get_datetime_string_from_system(false, true),
+				"tier": _env_tier, "vr": _vr, "boot_ms": _boot_ms}, " "))
+			bf.close()
 	# the owed segment: built one frame after the first, so the visitor sees
 	# the vestibule immediately and the hall fills while they cross it
 	if _lazy_pending > 0:
