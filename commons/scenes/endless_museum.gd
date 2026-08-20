@@ -4816,14 +4816,27 @@ func _stamp_plan_wall_variant(seg: Node3D, scene_path: String, lookup: String,
 	var n_global := (seg_basis * normal).normalized()
 	var target_global: Vector3 = seg.global_transform * target
 	var built_width := box.size.z if absf(normal.x) > 0.5 else box.size.x
-	if built_width > max_width + DNA_WALL_ENVELOPE_TOLERANCE_M:
+	# THE WALL FIT, on the MEASURED body (2026-08-20): the same decide() the
+	# negotiator and the reference wall use — fit / scale-to-fit / shelf /
+	# stand-off, one rule set (wall_fit_rules.json). The rect the plan allotted
+	# is the space; margins are neutralised so the envelope semantics of the
+	# old hard refusal are kept, but a variant that is merely TOO BIG now
+	# scales down (never below scale_min) instead of being rolled back — and a
+	# per-token nudge on the reference wall governs DNA variants too.
+	var pre_depth := float(_aabb_projection(box, n_global).y - _aabb_projection(box, n_global).x)
+	var wf_margin: float = float((EmWallFitLib.rules().get("defaults", {}) as Dictionary).get("margin_m", 0.15))
+	var fit: Dictionary = EmWallFitLib.decide(lookup, Vector3(built_width, pre_depth, box.size.y),
+		max_width + 2.0 * wf_margin + DNA_WALL_ENVELOPE_TOLERANCE_M,
+		max_height + 2.0 * wf_margin + DNA_WALL_ENVELOPE_TOLERANCE_M)
+	if String(fit["mode"]) == "refuse":
 		seg.remove_child(node)
 		node.queue_free()
-		return {"ok": false, "why": "built width %.2f m exceeds %.2f m wall rectangle" % [built_width, max_width]}
-	if box.size.y > max_height + DNA_WALL_ENVELOPE_TOLERANCE_M:
-		seg.remove_child(node)
-		node.queue_free()
-		return {"ok": false, "why": "built height %.2f m exceeds %.2f m wall rectangle" % [box.size.y, max_height]}
+		return {"ok": false, "why": "built %.2f x %.2f m cannot fit the %.2f x %.2f m wall rectangle even scaled" % [
+			built_width, box.size.y, max_width, max_height]}
+	if float(fit["scale"]) < 0.999:
+		node.scale *= float(fit["scale"])
+		box = _extent_of(node)
+		built_width = box.size.z if absf(normal.x) > 0.5 else box.size.x
 	var delta := Vector3(0.0, target_global.y - box.get_center().y, 0.0)
 	if absf(normal.x) > 0.5:
 		delta.z = target_global.z - box.get_center().z
@@ -4836,9 +4849,18 @@ func _stamp_plan_wall_variant(seg: Node3D, scene_path: String, lookup: String,
 		seg.remove_child(node)
 		node.queue_free()
 		return {"ok": false, "why": "built depth %.2f m exceeds wall limit" % depth}
-	delta += n_global * (plane_global.dot(n_global) + DNA_WALL_STANDOFF_M - span.x)
+	# stand-off by depth class (flat print near the plaster, boxy body breathing),
+	# from the shared rules — not one flat constant for every kind of body
+	delta += n_global * (plane_global.dot(n_global) + float(fit["standoff"]) - span.x)
 	node.global_position += delta
-	return {"ok": true, "node": node, "depth": depth}
+	if bool(fit["shelf"]):
+		# a deep variant earns the same shelf a deep hung body earns
+		var box2: AABB = _extent_of(node)
+		var shelf: MeshInstance3D = EmWallFitLib.make_shelf(built_width, depth)
+		shelf.name = "Shelf_" + lookup + "_" + value
+		shelf.global_position = Vector3(box2.get_center().x, box2.position.y - 0.03, box2.get_center().z)
+		seg.add_child(shelf)
+	return {"ok": true, "node": node, "depth": depth, "wall_fit": fit}
 
 
 func _plan_wall_normal(run: Dictionary) -> Vector3:
