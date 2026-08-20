@@ -17292,6 +17292,24 @@
       "height": 0.4,
       "ramp": "north"
      }
+    ],
+    "ramps": [
+     {
+      "cell": [
+       1,
+       7
+      ],
+      "facing": "east",
+      "rise": 0.4
+     },
+     {
+      "cell": [
+       1,
+       8
+      ],
+      "facing": "east",
+      "rise": 0.4
+     }
     ]
    },
    {
@@ -21731,6 +21749,24 @@
       "quad_line_puzzle"
      ],
      "blurb": "Three points close a boundary, and now: rigidity.",
+     "ramps": [
+      {
+       "cell": [
+        1,
+        7
+       ],
+       "facing": "east",
+       "rise": 0.4
+      },
+      {
+       "cell": [
+        1,
+        8
+       ],
+       "facing": "east",
+       "rise": 0.4
+      }
+     ],
      "stages": [
       {
        "rect": [

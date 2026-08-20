@@ -138,6 +138,8 @@ def seed(trunk_doc: dict) -> dict:
                         p["dropped"] = True
                     if "order" in e:
                         p["index"] = int(e["order"])
+                    if e.get("ramps"):
+                        p["ramps"] = list(e["ramps"])          # the wedge, placed anywhere (tools/book.py)
                     if e.get("gaps"):
                         p["gaps"] = list(e["gaps"])            # hollow space + its crossing (tools/book.py)
                     if e.get("stages"):

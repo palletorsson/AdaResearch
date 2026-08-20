@@ -440,6 +440,11 @@ var _cur_gaps: Array = []
 ## Cells a visitor crosses on something that moves (tc, jp): passable, but never
 ## promised to the walk map. Reported in em_built.json so the hall can say so.
 var _ride_cells: Dictionary = {}
+## THE WEDGE, FREED (2026-08-20). A pearl may place the walkable prism anywhere:
+## {cell:[x,z], facing:"north"|"south"|"east"|"west", rise: m, run: cells}. It is
+## the same body a stage's ramp uses — the corpus's third most-placed artifact and
+## the grid pathfinder's only legal way up — and now the museum's way up too.
+var _cur_ramps: Array = []
 const CROSSING_SCENES := {
 	"tc": "res://commons/scenes/mapobjects/transport_cube.tscn",
 	"br": "res://commons/scenes/mapobjects/bridge_path.tscn",
@@ -2318,6 +2323,57 @@ func _stamp_gaps(seg: Node3D, tile: Array, zbase: int) -> void:
 		print("[em-gap] %s: %d x %d cells hollow, crossing %s at (%.1f, %.1f)" % [_cur_stage_pearl, w, d, spec, cx, cz])
 
 
+## ONE WEDGE, ONE PLACER. The walkableprism (commons/scenes/mapobjects/
+## walkableprism.tscn) is a PrismMesh 2 x 1 x 1 with a concave collider and NO
+## script — no autoload, no player detection, no layer gate — which is why it is
+## the one grid body the museum can stamp without a shim. Scaled to `rise` and
+## turned to `facing`, it is a climbable slope from the floor to the height above.
+## Both the stage ramps and the free ramps come through here, so there is one
+## place where the wedge's geometry is understood.
+func _stamp_wedge(seg: Node3D, cell: Vector2i, facing: String, rise: float, zbase: int, run_cells: float = 1.0) -> bool:
+	if not ResourceLoader.exists(WEDGE_SCENE):
+		return false
+	var yaw: float = 0.0
+	match facing:
+		"north": yaw = 0.0        # climbs from the entrance side (smaller z)
+		"south": yaw = 180.0
+		"west":  yaw = 90.0
+		_:       yaw = -90.0
+	var w: Node3D = (load(WEDGE_SCENE) as PackedScene).instantiate() as Node3D
+	w.name = "Wedge_%d_%d" % [cell.x, cell.y]
+	# pose BEFORE the tree: a scene that caches anything in _ready must be told
+	# first (the transport cube taught the museum that the hard way)
+	w.position = Vector3(cell.x + 0.5, rise * 0.5, cell.y + 0.5)
+	w.rotation_degrees = Vector3(0, yaw, 0)
+	w.scale = Vector3(0.5 * maxf(0.2, run_cells), maxf(0.05, rise), 1.0)   # the mesh is 2 x 1 x 1
+	seg.add_child(w)
+	_walk_cells[Vector2i(cell.x, zbase + cell.y)] = true
+	return true
+
+
+## The wedge wherever the hall needs one — not only at a stage's edge. A ramp may
+## climb to a stage, to a gallery, or to nothing at all (a slope is a thing to
+## stand on the way a step is).
+func _stamp_ramps(seg: Node3D, tile: Array, zbase: int) -> void:
+	var made: int = 0
+	for r_v in _cur_ramps:
+		var r: Dictionary = r_v
+		var c: Array = r.get("cell", [])
+		if c.size() < 2:
+			continue
+		var cx: int = int(c[0])
+		var cz: int = int(c[1]) + VESTIBULE_H
+		if cz < VESTIBULE_H or cz - VESTIBULE_H >= tile.size():
+			continue
+		if String((tile[cz - VESTIBULE_H] as Array)[cx] if cx < (tile[cz - VESTIBULE_H] as Array).size() else "4").begins_with("4"):
+			continue                                   # never a wall cell
+		var rise: float = clampf(float(r.get("rise", 0.4)), 0.1, 2.0)
+		if _stamp_wedge(seg, Vector2i(cx, cz), String(r.get("facing", "north")), rise, zbase, float(r.get("run", 1))):
+			made += 1
+	if made > 0:
+		print("[em-ramp] %s: %d wedge(s) placed by the pearl" % [_cur_stage_pearl, made])
+
+
 ## The pearl's raised platforms: deck, collider, walk cells, and the wedge up.
 func _stamp_stages(seg: Node3D, solid: StaticBody3D, tile: Array, zbase: int) -> void:
 	if _cur_stages.is_empty():
@@ -2346,38 +2402,27 @@ func _stamp_stages(seg: Node3D, solid: StaticBody3D, tile: Array, zbase: int) ->
 				cells_made += 1
 		# THE WEDGE: one walkable prism per cell of the ramp side, scaled to the
 		# stage height, its slope facing the floor it climbs from.
+		# which cells the ramp occupies; _stamp_wedge owns the turn
 		var ramp_cells: Array = []
-		var yaw: float = 0.0
 		match ramp:
 			"north":  # climb from the entrance side (smaller z)
 				for x in range(x0, x0 + w): ramp_cells.append(Vector2i(x, z0 - 1))
-				yaw = 0.0
 			"south":
 				for x in range(x0, x0 + w): ramp_cells.append(Vector2i(x, z0 + d))
-				yaw = 180.0
 			"west":
 				for z in range(z0, z0 + d): ramp_cells.append(Vector2i(x0 - 1, z))
-				yaw = 90.0
 			_:
 				for z in range(z0, z0 + d): ramp_cells.append(Vector2i(x0 + w, z))
-				yaw = -90.0
 		var wedges: int = 0
-		if ResourceLoader.exists(WEDGE_SCENE):
-			var ps: PackedScene = load(WEDGE_SCENE)
-			for c in ramp_cells:
-				var cx: int = (c as Vector2i).x
-				var cz: int = (c as Vector2i).y
-				if cz < 0 or cz >= tile.size() or cx < 0 or cx >= (tile[cz] as Array).size():
-					continue
-				if String((tile[cz] as Array)[cx]).begins_with("4"):
-					continue
-				var wnode: Node3D = ps.instantiate() as Node3D
-				wnode.name = "StageWedge%d" % wedges
-				seg.add_child(wnode)
-				wnode.position = Vector3(cx + 0.5, hgt * 0.5, cz + VESTIBULE_H + 0.5)
-				wnode.rotation_degrees = Vector3(0, yaw, 0)
-				wnode.scale = Vector3(0.5, hgt, 1.0)      # the prism mesh is 2 x 1 x 1
-				_walk_cells[Vector2i(cx, zbase + cz + VESTIBULE_H)] = true
+		for c in ramp_cells:
+			var cx: int = (c as Vector2i).x
+			var cz: int = (c as Vector2i).y
+			if cz < 0 or cz >= tile.size() or cx < 0 or cx >= (tile[cz] as Array).size():
+				continue
+			if String((tile[cz] as Array)[cx]).begins_with("4"):
+				continue
+			# the same placer the free ramps use, so the wedge is understood once
+			if _stamp_wedge(seg, Vector2i(cx, cz + VESTIBULE_H), ramp, hgt, zbase):
 				wedges += 1
 		print("[em-stage] %s: %d cell(s) raised to %.2f m, %d wedge(s) on the %s side" % [
 			_cur_stage_pearl, cells_made, hgt, wedges, ramp])
@@ -2493,6 +2538,7 @@ func _build_segment() -> void:
 	_cur_stages = (peek.get("stages", []) as Array) if peek.get("stages") is Array else []
 	_cur_stage_pearl = String(peek.get("pearl", ""))
 	_cur_gaps = (peek.get("gaps", []) as Array) if peek.get("gaps") is Array else []
+	_cur_ramps = (peek.get("ramps", []) as Array) if peek.get("ramps") is Array else []
 	if not _cur_gaps.is_empty():
 		# the hollow is cut into the tile the segment builds, so every reader below
 		# (floor, collider, walk map, dressing) sees the void without knowing about gaps
@@ -2645,6 +2691,7 @@ func _build_segment() -> void:
 		_stamp_wall_runs(seg, solid, wcells, wall_col, m_wall)
 	_stamp_stages(seg, solid, tile, zbase)
 	_stamp_gaps(seg, tile, zbase)
+	_stamp_ramps(seg, tile, zbase)
 	# DEPTH FIRST, then rank, then x — the same key em_sets._slot_before now
 	# uses. These two sorts must agree: _deal_segment picks the artifact from
 	# `_pick_pool(free[0].rank)`, so with slots rank-sorted `free[0]` was the

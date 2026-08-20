@@ -351,7 +351,25 @@
      "ramp": "north"
     }
    ],
-   "ordered": true
+   "ordered": true,
+   "ramps": [
+    {
+     "cell": [
+      1,
+      7
+     ],
+     "facing": "east",
+     "rise": 0.4
+    },
+    {
+     "cell": [
+      1,
+      8
+     ],
+     "facing": "east",
+     "rise": 0.4
+    }
+   ]
   },
   {
    "pearl": "polythedra",

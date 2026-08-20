@@ -65,6 +65,9 @@ GATES: dict[str, tuple[str, str, str, int]] = {
     # and the catch sets you down without reloading the museum. The negative half
     # is the point — with the old y-clamp the fall was impossible to observe.
     "ground":        ("gd", "res://commons/testing/test_em_ground.gd", r"EM GROUND: (PASS|FAIL)", 400),
+    # THE WEDGE (2026-08-20): the walkable prism carries a body up a stage, and a
+    # bare step of the same height does not — the negative half is the argument.
+    "wedge":         ("gd", "res://commons/testing/test_em_wedge.gd", r"EM WEDGE: (PASS|FAIL)", 400),
     "plain_hands":   ("gd", "res://commons/testing/test_em_plain_hands.gd", r"EM PLAIN HANDS: (PASS|FAIL)", 400),
     "bake_fresh":    ("py", "tools/em_bake.py --check", r"EM BAKE: .*(fresh|STALE|MISSING)", 30),
     "reading":       ("py", "tools/em_reading.py primitives/point", r"READS|out of order", 60),
