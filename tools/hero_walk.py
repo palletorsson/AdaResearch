@@ -273,6 +273,10 @@ def pearl_walks(chapter: str, trunk: dict[str, Any] | None = None) -> list[dict[
                       **({"pages": pages_u} if len(pages_u) > 1 else {}),
                       "hero": hero, "hand_branches": len(hand), "cast": uniq, "rows": rows,
                       "why": f"pearl {name}: {hero} + {sib} siblings + {len(rows) - 1 - sib} branches ({len(hand)} hand)" + (f", {len(pages_u)} pages" if len(pages_u) > 1 else "")})
+    # the walks ARE the halls now: renumber so the threshold says 2/5, not 6/5 —
+    # a joined string keeps its old pearl indices and the label lies about the walk
+    for wi, w in enumerate(walks):
+        w["pearl_index"] = wi
     return walks
 
 
