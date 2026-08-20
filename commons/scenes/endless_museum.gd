@@ -3739,6 +3739,39 @@ var _built: Array = []          # one entry per segment built this run
 ## (floor the walker may use) and the erased map (what took a cell and why);
 ## bodies from the records with their final world pose and inventory number;
 ## cards from the showing ledger; rooms/courts/halls/gate from the deal.
+## THE BAKE HEALS BY BEING WALKED (2026-08-20). With the editors folding and
+## writing the plan all day (one endless museum), a five-minute full bake can
+## never stay fresh — so a segment whose rows the bake never saw is measured
+## live ONCE, and the verdicts are written straight back into em_bake.json:
+## the next boot replays them like any baked row. Authoring desktop only (a
+## pak cannot write ada_run; VR reads the shipped copy); the healed file's
+## own mtime is what marks the bake fresh again.
+func _heal_bake(key: String) -> void:
+	if key == "" or _shot_path != "" or _studio or _vr:
+		return
+	if not _plan_path.begins_with("res://ada_run/"):
+		return
+	if _seg_unbaked <= 0 and not _bake_stale:
+		return
+	var doc: Dictionary = {}
+	if FileAccess.file_exists(BAKE_PATH):
+		var v: Variant = JSON.parse_string(FileAccess.get_file_as_string(BAKE_PATH))
+		if v is Dictionary:
+			doc = v
+	if not (doc.get("segments") is Dictionary):
+		doc = {"schema": "adaresearch.em_bake.v1", "segments": {}}
+	(doc["segments"] as Dictionary)[key] = _bake_out.get(key, {})
+	doc["at"] = Time.get_datetime_string_from_system(false, true)
+	doc["plan"] = String(_plan_path)
+	doc["plan_at"] = _plan_stamp()
+	var f := FileAccess.open(BAKE_PATH, FileAccess.WRITE)
+	if f == null:
+		return   # another museum holds the file this millisecond — the next boot heals
+	f.store_string(JSON.stringify(doc, "	"))
+	f.close()
+	print("[em-bake] HEALED %s — %d live-measured row(s) written back; the next boot replays them" % [key, _seg_unbaked])
+
+
 func _write_built(seg: Node3D, chapter: String, deal: Variant, zbase: int, w: int, h: int,
 		porch_depth: int, court_depth: int) -> void:
 	var z1: int = zbase + VESTIBULE_H + h + porch_depth + court_depth
@@ -3802,6 +3835,8 @@ func _write_built(seg: Node3D, chapter: String, deal: Variant, zbase: int, w: in
 	if _bake_key != "":
 		_bake_out[_bake_key] = {"museum": String(seg.get_meta("em_key")) if seg.has_meta("em_key") else "",
 			"placed": _seg_placed.duplicate(true), "refused": _seg_refused.duplicate(true)}
+		if not _bake_mode:
+			_heal_bake(_bake_key)
 	if _bake_mode:
 		if _built.size() > 2:
 			_built.pop_front()          # the bake keeps the bake, not the as-built

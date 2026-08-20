@@ -30,6 +30,13 @@ func _run() -> void:
 	get_root().add_child(inst)
 	for i in range(5):
 		await create_timer(0.2).timeout
+	# THE PATIENT STAMP drains bodies in the background for many frames after
+	# boot — wait until the hall is whole, or every "did my key place a body"
+	# count below can be satisfied by a drain instead of the key.
+	for i in range(400):
+		if (inst.get("_stamp_queue") as Array).is_empty():
+			break
+		await process_frame
 
 	var records: Array = inst.get("_edit_records")
 	var cam: Camera3D = inst.get("_cam")
@@ -151,9 +158,14 @@ func _run() -> void:
 			tries += 1
 			cam.global_position = Vector3(float(c.x) + 0.5, 1.5, float(c.y) + 0.5)
 			cam.look_at(Vector3(float(c.x) + 0.5, 1.0, float(c.y) + 3.5))
-			var n_before: int = (inst.get("_edit_records") as Array).size()
+			# count the ADD RULINGS, not the records: records also grow when the
+			# patient stamp drains a deferred body in the same frame, and that
+			# once let the trial believe an ENTER that placed nothing
+			var n_before: int = (inst.get("_edit_overrides") as Array).filter(
+				func(r): return bool((r as Dictionary).get("add", false))).size()
 			inst.call("_edit_handle_key", KEY_ENTER)
-			if (inst.get("_edit_records") as Array).size() == n_before + 1:
+			if (inst.get("_edit_overrides") as Array).filter(
+					func(r): return bool((r as Dictionary).get("add", false))).size() == n_before + 1:
 				placed_ok = true
 		if not placed_ok:
 			fails.append("ENTER refused over %d walkable standpoints — no clear floor found" % tries)
