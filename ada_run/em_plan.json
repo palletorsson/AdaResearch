@@ -330900,11 +330900,11 @@
           "token": "you_are_here",
           "cell": [
             21,
-            18
+            17
           ],
           "tile_cell": [
             7,
-            4
+            3
           ],
           "rotation": 180,
           "mode": "freestanding",
@@ -330912,11 +330912,8 @@
           "support_height_m": 0.0,
           "hand": true,
           "ruled": {
-            "by": "book: locked",
-            "cell": [
-              7,
-              4
-            ]
+            "at": "2026-08-20T20:59:03",
+            "by": "walk"
           },
           "slot": "hand",
           "wall": null,
@@ -330938,7 +330935,13 @@
               "rotation": 180
             },
             "pearl": "point"
-          }
+          },
+          "offset": [
+            0.0,
+            0.0,
+            2.0
+          ],
+          "scale": 0.95
         },
         {
           "token": "interactive_point_origin",
@@ -330956,11 +330959,8 @@
           "support_height_m": 0.95,
           "hand": true,
           "ruled": {
-            "by": "book: locked",
-            "cell": [
-              7,
-              6
-            ]
+            "at": "2026-08-20T20:59:03",
+            "by": "walk"
           },
           "slot": "hand",
           "wall": null,
@@ -330980,7 +330980,12 @@
               6
             ],
             "pearl": "point"
-          }
+          },
+          "offset": [
+            0.0,
+            0.2,
+            0.0
+          ]
         },
         {
           "token": "science_screen",
@@ -331034,12 +331039,12 @@
         {
           "token": "CoordinateSystem3M",
           "cell": [
-            17,
-            17
+            16,
+            19
           ],
           "tile_cell": [
-            3,
-            3
+            2,
+            5
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -331047,16 +331052,13 @@
           "support_height_m": 0.0,
           "hand": true,
           "ruled": {
-            "by": "book: locked",
-            "cell": [
-              3,
-              3
-            ]
+            "at": "2026-08-20T20:59:03",
+            "by": "walk"
           },
           "config": {
             "floating_point": 1
           },
-          "scale": 0.8,
+          "scale": 0.95,
           "slot": "hand",
           "wall": null,
           "relational_kind": "spine_artifact",
@@ -331080,7 +331082,12 @@
               "scale": 0.8
             },
             "pearl": "point"
-          }
+          },
+          "offset": [
+            0.0,
+            0.2,
+            0.0
+          ]
         },
         {
           "token": "fontana_puncture",
@@ -331092,17 +331099,14 @@
             7,
             8
           ],
-          "rotation": 0,
+          "rotation": 345,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.95,
           "hand": true,
           "ruled": {
-            "by": "book: locked",
-            "cell": [
-              7,
-              8
-            ]
+            "at": "2026-08-20T20:59:03",
+            "by": "walk"
           },
           "slot": "hand",
           "wall": null,
@@ -331121,7 +331125,13 @@
               8
             ],
             "pearl": "point"
-          }
+          },
+          "offset": [
+            0.0,
+            0.4,
+            0.0
+          ],
+          "scale": 1.2
         },
         {
           "token": "floating_sphere_field",
@@ -331220,17 +331230,14 @@
             7,
             11
           ],
-          "rotation": 90,
+          "rotation": 0,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.0,
           "hand": true,
           "ruled": {
-            "by": "book: locked",
-            "cell": [
-              7,
-              11
-            ]
+            "at": "2026-08-20T21:03:47",
+            "by": "halls"
           },
           "slot": "hand",
           "wall": null,
@@ -332032,7 +332039,7 @@
           ],
           "hand": true,
           "ruled": {
-            "at": "2026-08-20T13:27:46",
+            "at": "2026-08-20T20:59:03",
             "by": "walk"
           }
         },
@@ -343103,12 +343110,12 @@
         {
           "token": "prism_block",
           "cell": [
-            25,
-            39
+            23,
+            24
           ],
           "tile_cell": [
-            11,
-            25
+            9,
+            10
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -343116,11 +343123,8 @@
           "support_height_m": 0.0,
           "hand": true,
           "ruled": {
-            "by": "book: locked",
-            "cell": [
-              11,
-              25
-            ]
+            "at": "2026-08-20T20:59:05",
+            "by": "walk"
           },
           "slot": "hand",
           "wall": null,
@@ -343139,7 +343143,8 @@
               25
             ],
             "pearl": "ignorance"
-          }
+          },
+          "scale": 0.8
         },
         {
           "token": "robotarm",
@@ -346511,7 +346516,7 @@
           ],
           "hand": true,
           "ruled": {
-            "at": "2026-08-20T13:27:47",
+            "at": "2026-08-20T20:59:04",
             "by": "walk"
           }
         }
