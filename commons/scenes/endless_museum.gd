@@ -3290,10 +3290,19 @@ func _start_at_map() -> void:
 			continue
 		var rows: Array = _plan_pearls[pk]
 		for i in range(rows.size()):
-			if String((rows[i] as Dictionary).get("map", "")) == start_map:
+			var row_i: Dictionary = rows[i]
+			var hit: bool = String(row_i.get("map", "")) == start_map
+			if not hit:
+				# a JOINED pearl's map (Trans_Translation is a page of the intro
+				# hall): its head's hall is where that map now lives
+				for pg_v in (row_i.get("pages", []) as Array):
+					if String((pg_v as Dictionary).get("map", "")) == start_map:
+						hit = true
+						break
+			if hit:
 				_pearl_cursor[_first_chapter] = i
 				print("[endless_museum] the walk opens at %s · %s (pearl %d/%d, map %s) — Inspector start_map" % [
-					_first_chapter, String((rows[i] as Dictionary).get("pearl", "")), i + 1, rows.size(), start_map])
+					_first_chapter, String(row_i.get("pearl", "")), i + 1, rows.size(), start_map])
 				return
 	push_warning("endless_museum: start_map %s is not a pearl of %s — opening at its first pearl" % [start_map, _first_chapter])
 
@@ -6502,6 +6511,92 @@ func _physics_process(_delta: float) -> void:
 	_catch_if_fallen()
 
 var _jump_pressed: bool = false
+## THE JUMP (2026-08-20, Palle: "in the endless museum desktop can we move
+## directly to trans translation map or other?"). J opens the list of every hall
+## in walk order (chapter · pearl · its pages); Enter writes the choice into
+## ada_run/em_control.json — the same file the menu speaks through — and reloads
+## the scene, so the museum opens AT that hall. Desktop only; the pak cannot
+## write res://, so an export keeps its menu.
+var _jump_ui: Control = null
+var _jump_list: ItemList = null
+var _jump_rows: Array = []
+
+
+func _jump_toggle() -> void:
+	if _jump_ui != null:
+		_jump_ui.queue_free()
+		_jump_ui = null
+		return
+	_jump_rows = []
+	var layer := CanvasLayer.new()
+	layer.layer = 90
+	var panel := PanelContainer.new()
+	panel.set_anchors_preset(Control.PRESET_CENTER)
+	panel.custom_minimum_size = Vector2(560, 640)
+	var vb := VBoxContainer.new()
+	var title := Label.new()
+	title.text = "JUMP — every hall, 1 to the end   (Enter travels · J or Esc closes)"
+	vb.add_child(title)
+	_jump_list = ItemList.new()
+	_jump_list.custom_minimum_size = Vector2(540, 590)
+	var n: int = 0
+	# chapters in the walk's own order (first appearance in the pool), then each
+	# chapter's pearl rows — the pool rows carry no building key, so the plan's
+	# pearl table is matched by its |chapter suffix
+	var chapters_seen: Array = []
+	for pool_row_v in _pool:
+		var c0 := String((pool_row_v as Dictionary).get("sequence", ""))
+		if c0 != "" and not chapters_seen.has(c0):
+			chapters_seen.append(c0)
+	for chapter_v in chapters_seen:
+		var chapter := String(chapter_v)
+		var pk := ""
+		for k_v in _plan_pearls.keys():
+			if String(k_v).ends_with("|" + chapter):
+				pk = String(k_v)
+				break
+		if pk == "":
+			continue
+		for row_v in (_plan_pearls[pk] as Array):
+			var row: Dictionary = row_v
+			n += 1
+			var pages: Array = []
+			for pg_v in (row.get("pages", []) as Array):
+				pages.append(String((pg_v as Dictionary).get("pearl", "")))
+			var label := "%02d  %s · %s" % [n, chapter, String(row.get("pearl", ""))]
+			if pages.size() > 1:
+				label += "   (" + " + ".join(PackedStringArray(pages)) + ")"
+			if (row.get("simulations", []) as Array).size() > 0:
+				label += "   ◉ pool"
+			_jump_list.add_item(label)
+			_jump_rows.append({"chapter": chapter, "map": String(row.get("map", ""))})
+	_jump_list.item_activated.connect(_jump_go)
+	vb.add_child(_jump_list)
+	panel.add_child(vb)
+	layer.add_child(panel)
+	add_child(layer)
+	_jump_ui = panel
+	_jump_list.grab_focus()
+	if _jump_list.item_count > 0:
+		_jump_list.select(0)
+
+
+func _jump_go(idx: int) -> void:
+	if idx < 0 or idx >= _jump_rows.size():
+		return
+	var target: Dictionary = _jump_rows[idx]
+	var f := FileAccess.open(EM_CONTROL, FileAccess.WRITE)
+	if f == null:
+		push_warning("endless_museum: cannot write %s — an export keeps its menu" % EM_CONTROL)
+		return
+	f.store_string(JSON.stringify({
+		"_readme": "the menu's / the jump's voice: which chapter and map the museum opens at",
+		"first_chapter": String(target.get("chapter", "")),
+		"first_map": String(target.get("map", "")),
+	}, " "))
+	f.close()
+	print("[em-jump] travelling to %s · %s" % [target.get("chapter"), target.get("map")])
+	get_tree().reload_current_scene()
 
 
 ## Fell past every floor: stand again where the ground last was. Counted, and
@@ -6520,6 +6615,14 @@ func _catch_if_fallen() -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if event is InputEventKey and (event as InputEventKey).pressed and not (event as InputEventKey).echo \
+			and (event as InputEventKey).keycode == KEY_J and not _vr and not _studio and _autopilot == 0 and _shot_path == "":
+		_jump_toggle()
+		return
+	if _jump_ui != null and event is InputEventKey and (event as InputEventKey).pressed \
+			and (event as InputEventKey).keycode == KEY_ESCAPE:
+		_jump_toggle()
+		return
 	if _studio:
 		return
 	# desktop: click the scanner to open the threshold door
