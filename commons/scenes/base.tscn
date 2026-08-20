@@ -32,7 +32,6 @@
 [ext_resource type="Script" uid="uid://qlvmq6ji5udp" path="res://commons/player/WristStatsDisplay.gd" id="31_wrist_stats"]
 [ext_resource type="Script" uid="uid://cb6ip8nxoqb78" path="res://commons/tools/OversightVoiceBridge.gd" id="32_voice_bridge"]
 [ext_resource type="Script" uid="uid://bd3rk0iph2m2k" path="res://commons/managers/MovementCapabilityGate.gd" id="33_move_cap_gate"]
-[ext_resource type="PackedScene" path="res://commons/artifacts/workstation/HandWorkstationVR.tscn" id="34_hand_ws"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_upvej"]
 size = Vector3(0.096401334, 0.121734604, 0.16770938)
@@ -108,9 +107,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.330398, 0, -2.98023e-08)
 visible = false
 light_color = Color(0, 1, 0, 1)
 light_energy = 1.5
-
-[node name="HandWorkstationVR" parent="XROrigin3D/LeftHand" index="5" unique_id=1738547464 instance=ExtResource("34_hand_ws")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0.07)
 
 [node name="XRToolsCollisionHand" parent="XROrigin3D/RightHand" index="0" unique_id=1055388144 instance=ExtResource("4_q0s61")]
 mode = 1
