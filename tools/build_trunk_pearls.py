@@ -138,6 +138,8 @@ def seed(trunk_doc: dict) -> dict:
                         p["dropped"] = True
                     if "order" in e:
                         p["index"] = int(e["order"])
+                    if e.get("simulations"):
+                        p["simulations"] = list(e["simulations"])   # grid maps as installations (tools/book.py)
                     if e.get("utilities"):
                         p["utilities"] = list(e["utilities"])  # grid utilities by their own grammar (tools/book.py)
                     if e.get("ramps"):

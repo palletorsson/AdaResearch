@@ -17530,7 +17530,13 @@
     },
     "tokens_add": [],
     "tokens_remove": [],
-    "hero": "transform_composition"
+    "hero": "transform_composition",
+    "simulations": [
+     {
+      "map": "Trans_Translation",
+      "scale": 1.0
+     }
+    ]
    },
    {
     "map": "Trans_Translation",
@@ -22072,6 +22078,12 @@
       "balance_puzzle"
      ],
      "blurb": "Three cubes.",
+     "simulations": [
+      {
+       "map": "Trans_Translation",
+       "scale": 1.0
+      }
+     ],
      "speak": "one matrix does it all. move, turn, grow — the same multiplication. what stays the same is the invariant. homogeneous coordinates: a point and a direction differ by one number.",
      "speak_by": "claude",
      "says": {

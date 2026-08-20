@@ -44,6 +44,8 @@ def check(chapter: str, pearl: str | None) -> int:
             poem += [t for t in pg.get("tokens", []) if t not in poem]
         where = {}
         for a in row.get("artifacts", []):
+            if a.get("fill"):
+                continue                    # the salon hang is not the argument
             if a.get("venue") == "interior" and a.get("tile_cell"):
                 where.setdefault(a["token"], (int(a["tile_cell"][1]), int(a["tile_cell"][0])))   # (z, x): down the page, right to left
         for i, t in enumerate(p.get("foyer", [])):

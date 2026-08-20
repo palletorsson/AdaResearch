@@ -1130,7 +1130,7 @@ def run(artifacts: list[str], plan: FloorPlan | None = None,
         bays: int = 3, venue_asks: dict[str, str] | None = None,
         reading: bool = False, fixed: dict[str, tuple[int, int]] | None = None,
         footprints: dict | None = None, reaches: dict | None = None,
-        counts: dict | None = None) -> tuple[FloorPlan, list[Placement], Occupancy]:
+        counts: dict | None = None, fillers: list[str] | None = None) -> tuple[FloorPlan, list[Placement], Occupancy]:
     """Negotiate a whole exhibition brief in order.
 
     venue_asks: BALCONIES-BY-ASK (2026-08-18). A hand may say, on the trunk,
@@ -1335,6 +1335,45 @@ def run(artifacts: list[str], plan: FloorPlan | None = None,
             p.traces.append(Trace(rule="group", status="pass" if made == n_want - 1 else "compromised",
                                   detail=f"a group of {n_want} asked, {made + 1} placed ({spread})"))
         bay_cursor += 1
+    # THE FILL (2026-08-20, Palle: "the museum can be more packed … in the end all
+    # artifact placement spots should be filled"). After the poem has dealt, the
+    # hall's remaining room is offered to the corpus: the pearl's own map first,
+    # then the chapter, then the homeless. A filler is SECONDARY by construction —
+    # it never earns a courtyard, a porch or a wall of its own architecture
+    # (interior only, exhibited only), it never displaces a line of the poem
+    # (occupancy already holds every cast cell), and its row is marked `fill` so
+    # the reading gate does not mistake the salon hang for the argument.
+    misses = 0
+    for lookup in (fillers or []):
+        if misses >= 25:
+            break
+        try:
+            fc = staged_contract(lookup)
+        except Exception:
+            continue
+        if fc.preferred_venue != "interior" or fc.containment == "precinct":
+            continue                        # a filler never earns a court
+        if max(fc.footprint_cells[0], fc.footprint_cells[1]) > 4:
+            continue                        # nothing room-sized sneaks in as decor
+        pref = next((s for s in plan.slots if s.venue == "interior" and _slot_suits(fc, s)), None)
+        fp = negotiate(fc, plan, occ, pref)
+        if fp.result == "ACCEPT" and fp.venue == "interior" and fp.masks:
+            occ.commit(lookup, fp.masks, fp.anchor)
+            if fp.mode == "against_wall" and fp.wall:
+                wall = next((w for w in plan.walls
+                             if w.side == fp.wall and w.bay == _bay_of(plan, fp.slot)), None)
+                if wall is not None and fc.body_m[1] <= WALL_BODY_MAX_DEPTH_M:
+                    rect, trace = hang_on_wall(fc, wall, fp.anchor)
+                    fp.traces.append(trace)
+                    if rect:
+                        fp.wall_rect = rect
+                        wall.occupied.append({"token": lookup, "rect": rect, "role": fc.importance})
+            fp.traces.append(Trace(rule="fill", status="pass",
+                                   detail="a filler: the hall's remaining room, offered to the corpus after the poem dealt"))
+            out.append(fp)
+            misses = 0
+        else:
+            misses += 1
     return plan, out, occ
 
 

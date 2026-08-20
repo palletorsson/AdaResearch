@@ -3939,13 +3939,80 @@ func _build_hall(seg: Node3D, solid: StaticBody3D, w: int, zbase: int, zcur: int
 		cs.position = ramp.position; cs.rotation = ramp.rotation; solid.add_child(cs)
 	# the body on the hall floor, through _stamp
 	var cell: Dictionary = {"x": g + int(cw / 2.0), "y": zcur + g + int(cd / 2.0), "rank": 2, "top": floor_y}
-	if _stamp(seg, String(c.get("scene", "")), String(c.get("token", "")), cell, zbase, 1, {}, false, 0.0, float(c.get("rotation", 0.0))):
+	if (c.get("simulation", {}) as Dictionary).size() > 0:
+		_stamp_simulation(seg, c, g, floor_y, zcur)
+	elif _stamp(seg, String(c.get("scene", "")), String(c.get("token", "")), cell, zbase, 1, {}, false, 0.0, float(c.get("rotation", 0.0))):
 		_deal_stats["halls"] = int(_deal_stats.get("halls", 0)) + 1
 		print("[em-hall] %s stands in a %d x %d m TURBINE HALL, floor %.1f m down, ringed at z %d..%d" % [
 			String(c.get("token", "?")), cw, cd, HALL_DEPTH, zcur, zcur + total_d])
 	else:
 		print("[em-hall] hall %s refused — %s" % [String(c.get("token", "?")), _stamp_refusal])
 	return total_d
+
+
+## THE GRID IN THE REACTOR HALL (2026-08-20, Palle: "we will use the grid system
+## as a spatial installation in a reactor hall … the existing transformation maps
+## as is inside the museum"). GridSystem itself — the same scene the game loads a
+## map with — is instantiated on the hall's sunken floor, map_name set BEFORE the
+## tree (exports are read in _ready). The gallery ring looks down into it; the
+## two ramps walk down into it. When the map finishes generating, its EXITS and
+## HAZARDS are stripped: teleporters, spawns, movers and danger zones — inside
+## the museum a map is an installation, not a level, and a hazard here would fire
+## on the VR rig (layer 20) while the desktop walker (layer 1) strolled past —
+## the exact parity fork the bake exists to prevent.
+func _stamp_simulation(seg: Node3D, c: Dictionary, g: int, floor_y: float, zcur: int) -> void:
+	var sim: Dictionary = c.get("simulation", {})
+	var sim_map := String(sim.get("map", ""))
+	var s_scale: float = clampf(float(sim.get("scale", 1.0)), 0.2, 1.0)
+	if not ResourceLoader.exists("res://commons/grid/grid_system.tscn"):
+		push_warning("endless_museum: grid_system.tscn missing — no simulation")
+		return
+	var grid: Node3D = (load("res://commons/grid/grid_system.tscn") as PackedScene).instantiate() as Node3D
+	grid.name = "Simulation_" + sim_map
+	grid.set("map_name", sim_map)
+	grid.set("auto_load_map_on_ready", true)
+	grid.position = Vector3(g + 1.0, floor_y, zcur + g + 1.0)
+	grid.scale = Vector3.ONE * s_scale
+	if grid.has_signal("map_generation_complete"):
+		grid.connect("map_generation_complete", _strip_simulation_exits.bind(grid), CONNECT_ONE_SHOT)
+	seg.add_child(grid)
+	print("[em-sim] %s installed in the reactor hall at z %d (scale %.2f)" % [sim_map, zcur, s_scale])
+
+
+## The installation keeps its bodies and its floors; it loses everything that
+## would take the visitor OUT of the museum or hurt them asymmetrically.
+func _strip_simulation_exits(grid: Node3D) -> void:
+	if grid == null or not is_instance_valid(grid):
+		return
+	var stripped: int = 0
+	for n in grid.find_children("*", "Node3D", true, false):
+		if not is_instance_valid(n):
+			continue
+		var nm := String(n.name).to_lower()
+		var is_exit := n.is_in_group("utility") and (nm.contains("teleport") or nm.contains("spawn") or nm.contains("move_player") or nm.contains("reset"))
+		var is_hazard := nm.contains("dangerzone") or nm.contains("danger_zone") or (n.get_script() != null and String(n.get_script().resource_path).ends_with("DangerZone.gd"))
+		if is_exit or is_hazard:
+			n.queue_free()
+			stripped += 1
+	if stripped > 0:
+		print("[em-sim] %s: %d exit/hazard node(s) stripped — an installation, not a level" % [grid.name, stripped])
+
+
+## A map's footprint in cells, from its own structure layer.
+func _map_dims(map_name_q: String) -> Vector2i:
+	var path := "res://commons/maps/%s/map_data.json" % map_name_q
+	if not FileAccess.file_exists(path):
+		return Vector2i.ZERO
+	var d_v: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+	if not (d_v is Dictionary):
+		return Vector2i.ZERO
+	var st: Array = ((d_v as Dictionary).get("layers", {}) as Dictionary).get("structure", [])
+	if st.is_empty():
+		return Vector2i.ZERO
+	var wmax: int = 0
+	for r in st:
+		wmax = maxi(wmax, (r as Array).size() if r is Array else String(r).split(",").size())
+	return Vector2i(wmax, st.size())
 
 
 func _build_courtyard(seg: Node3D, solid: StaticBody3D, w: int, tile_h: int,
@@ -4195,6 +4262,24 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 	var off_tile: int = 0
 	var courts: Array = []
 	var forecourt: Array = []   # porch/outside rows, stamped on vestibule + joint ground
+	# THE SIMULATION (2026-08-20): a whole grid MAP in the reactor hall. The plan
+	# row's `simulations` become hall courts sized from the map's own structure
+	# layer; _build_hall instantiates GridSystem on the sunken floor.
+	for sim_v in (entry.get("simulations", []) as Array):
+		var sim: Dictionary = sim_v
+		var sim_map := String(sim.get("map", ""))
+		if sim_map == "":
+			continue
+		var dims := _map_dims(sim_map)
+		if dims == Vector2i.ZERO:
+			push_warning("endless_museum: simulation map %s has no structure layer" % sim_map)
+			continue
+		var s_scale: float = clampf(float(sim.get("scale", 1.0)), 0.2, 1.0)
+		courts.append({"token": "", "scene": "",
+			"court": [int(ceil(dims.x * s_scale)) + 2, int(ceil(dims.y * s_scale)) + 2],
+			"access": "ring", "venue": "hall",
+			"simulation": {"map": sim_map, "scale": s_scale},
+			"chapter": String(entry.get("sequence", ""))})
 	var side_rooms: Array = []  # trunk branches whose space is "room" - rooms off the east skin
 	var walk_kinds: Dictionary = {}   # hero-walk roles stamped in this chapter
 	for row_v in rows:

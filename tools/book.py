@@ -110,6 +110,7 @@ def migrate(chapter: str) -> dict:
         if not page2_done:
             lines.insert(1 if lines and "token" not in lines[0] else 0, {"text": str(p["page2"]), "by": "hand"})
         bp = {"pearl": p.get("pearl", ""), "map": p.get("map", ""), "lines": lines}
+        if p.get("simulations"): bp["simulations"] = list(p["simulations"])
         if p.get("utilities"): bp["utilities"] = list(p["utilities"])
         if p.get("ramps"): bp["ramps"] = list(p["ramps"])
         if p.get("gaps"): bp["gaps"] = list(p["gaps"])
@@ -242,6 +243,14 @@ def compile_book(chapter: str, reseed: bool = True) -> dict:
         # and parameters a map_data.json cell carries. The museum's dispatcher
         # (endless_museum._stamp_utility) parses it with UtilityRegistry, so the
         # two systems cannot drift apart on what "rc:45:y:2" means.
+        # THE SIMULATION (2026-08-20, Palle: "bring the grid system into the museum …
+        # as a spatial installation in a reactor hall"): a whole grid MAP, built by
+        # GridSystem itself on the sunken floor of the turbine hall — the reactor
+        # hall — viewed from the gallery ring, entered down the ramps. The museum
+        # strips the map's EXITS (teleporters, spawns, movers) and hazards: inside
+        # the museum a map is an installation, not a level.
+        if bp.get("simulations"): e["simulations"] = list(bp["simulations"])
+        else: e.pop("simulations", None)
         if bp.get("utilities"): e["utilities"] = list(bp["utilities"])
         else: e.pop("utilities", None)
         if bp.get("ramps"): e["ramps"] = list(bp["ramps"])

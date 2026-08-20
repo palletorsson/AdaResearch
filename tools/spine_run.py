@@ -177,6 +177,7 @@ def run_sequence(seq: str, museum: str, rows: int, relations: int = 2,
             r["gaps"] = list(pw.get("gaps") or [])
             r["ramps"] = list(pw.get("ramps") or [])
             r["utilities"] = list(pw.get("utilities") or [])
+            r["simulations"] = list(pw.get("simulations") or [])
             r["hero_walk"] = {"hero": pw["hero"], "hand_branches": pw["hand_branches"], "pearl": pw["pearl"]}
             parts.append(r)
             print(f"  {seq:24s} PEARL {pw['pearl_index'] + 1:2d}/{len(pearls)} {pw['pearl']:16s} offered {r['offered']:3d} placed {r['placed']:3d} interior {r['interior']:3d}")
@@ -383,6 +384,70 @@ def _book_locks(cast_context: dict[str, Any], apron: int) -> dict[str, tuple[int
     return {t: (int(c["lock"][0]) + apron, int(c["lock"][1]) + apron) for t, c in (cast_context or {}).items() if c.get("lock")}
 
 
+def _fill_pools(trunk: dict) -> tuple[dict, dict, list]:
+    """THE PACKING POOLS (2026-08-20). Per map: its interactables layer (every
+    token the hand once placed there). Per chapter: the spine order's tokens.
+    Global: registry tokens that appear in no chapter — the homeless, offered
+    round-robin so 'all artifacts from the grid system' can hang somewhere."""
+    import glob as _glob
+    by_map: dict = {}
+    for n in trunk.get("trunk", []):
+        for p in n.get("pearls", []):
+            m = p.get("map", "")
+            f = REPO / "commons" / "maps" / m / "map_data.json"
+            if not m or not f.exists() or m in by_map:
+                continue
+            try:
+                layers = json.loads(f.read_text(encoding="utf-8")).get("layers", {})
+            except Exception:
+                continue
+            toks = []
+            for row in layers.get("interactables", []):
+                for cell in (row if isinstance(row, list) else str(row).split(",")):
+                    c = str(cell).strip()
+                    if not c or c.startswith("#"):
+                        continue
+                    tok = c.split(":")[0].split("#")[0].split("|")[0].strip()
+                    if tok and tok not in toks:
+                        toks.append(tok)
+            by_map[m] = toks
+    by_seq: dict = {}
+    try:
+        order = json.loads((REPO / "commons" / "data" / "spine_artifact_order.json").read_text(encoding="utf-8")).get("order", [])
+        for e in order:
+            by_seq.setdefault(str(e.get("sequence", "")), []).append(str(e.get("lookup", "")))
+    except Exception:
+        pass
+    # the homeless: registry tokens with a scene, in no map and no spine order
+    # PREFILTERED to bodies a hall can hold: an unmeasured body measures huge (the
+    # beam-in-the-AABB lesson) and reads as a precinct — most of the raw homeless
+    # were courtyard skips, and re-offering the same dead dozen to every pearl
+    # starved the later halls of fill entirely.
+    housed = {t for ts in by_map.values() for t in ts} | {t for ts in by_seq.values() for t in ts}
+    homeless: list = []
+    from spatial_negotiation import staged_contract as _sc
+    seen: set = set()
+    for f in _glob.glob(str(REPO / "commons" / "artifacts" / "registry" / "*.json")):
+        try:
+            reg = json.loads(Path(f).read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        arts = reg.get("artifacts") if "artifacts" in reg else reg
+        if not isinstance(arts, dict):
+            continue
+        for k, v in arts.items():
+            if not (isinstance(v, dict) and (v.get("scene_path") or v.get("scene")) and k not in housed and k not in seen):
+                continue
+            seen.add(k)
+            try:
+                c = _sc(k)
+                if c.preferred_venue == "interior" and c.containment != "precinct" and max(c.footprint_cells[0], c.footprint_cells[1]) <= 4:
+                    homeless.append(k)
+            except Exception:
+                pass
+    return by_map, by_seq, homeless
+
+
 def _fixed_cells(seq: str, museum: str, pearl: str, apron: int, only: set | None = None) -> dict[str, tuple[int, int]]:
     """The hand's rows of this pearl in the CURRENT plan, as plan cells — handed to
     the negotiator so its occupancy and reading order know where the hand put them.
@@ -465,6 +530,10 @@ def write_plan(result: dict[str, Any], out: Path) -> dict[str, Any]:
     museums: dict[str, Any] = {}
     plans: list[dict[str, Any]] = []
     owner: dict[str, str] = {}
+    trunk_doc = json.loads((REPO / "commons" / "data" / "trunk_branches.json").read_text(encoding="utf-8"))
+    fill_by_map, fill_by_seq, fill_homeless = _fill_pools(trunk_doc)
+    print(f"  packing pools: {sum(len(v) for v in fill_by_map.values())} map tokens, "
+          f"{sum(len(v) for v in fill_by_seq.values())} spine tokens, {len(fill_homeless)} homeless registry tokens")
     displaced: list[dict[str, str]] = []
     for r in result["sequences"]:
         key = r["museum"]
@@ -479,12 +548,29 @@ def write_plan(result: dict[str, Any], out: Path) -> dict[str, Any]:
         # that key by (museum, sequence) alone, so nothing older goes blank.
         if r.get("pearls"):
             first: dict[str, Any] | None = None
+            # every token the chapter's poems already claim: a filler never repeats one
+            chapter_used = {t for p2 in r["pearls"] for t in p2.get("cast", [])}
             for pr in r["pearls"]:
                 fx = _fixed_cells(r["sequence"], key, pr["pearl"], APRON, only=set(pr["cast"]) if pr.get("ordered") else None)
                 fx.update(_book_locks(pr.get("cast_context", {}), APRON))
+                # THE PACKING: the hall's leftover room is offered to (1) the pearl's own
+                # map, (2) the chapter's spine order, (3) the homeless registry tokens —
+                # each token once per chapter, exclusions honoured, never over the poem.
+                exq = set(pr.get("exclude") or []) | {"lab_room"}
+                pool = [t for t in fill_by_map.get(pr.get("map", ""), []) if t not in chapter_used]
+                pool += [t for t in fill_by_seq.get(r["sequence"], []) if t not in chapter_used and t not in pool]
+                pool += [t for t in fill_homeless[:24] if t not in chapter_used and t not in pool]
+                pool = [t for t in pool if t not in exq]
                 m = plan_museum(key, list(pr["cast"]), list(r.get("anchor_tokens", [])),
                                 dict(pr.get("cast_context", {})), rooms=pr.get("rooms"), reading=bool(pr.get("ordered")), fixed=fx,
-                                gaps=list(pr.get("gaps") or []))
+                                gaps=list(pr.get("gaps") or []), fillers=pool[:90])
+                filled = [a["token"] for a in m.get("artifacts", []) if a.get("fill")]
+                chapter_used.update(filled)
+                for t in filled:
+                    if t in fill_homeless:
+                        fill_homeless.remove(t)
+                if filled:
+                    print(f"  {r['sequence']:24s} PEARL {pr['pearl']:16s} packed +{len(filled)} filler(s)")
                 m["ordered"] = bool(pr.get("ordered"))
                 if pr.get("pages"):
                     m["pages"] = list(pr["pages"])     # the pearls sharing this hall, in reading order
@@ -496,6 +582,8 @@ def write_plan(result: dict[str, Any], out: Path) -> dict[str, Any]:
                     m["ramps"] = list(pr["ramps"])     # the wedge, wherever the hall needs a way up
                 if pr.get("utilities"):
                     m["utilities"] = list(pr["utilities"])   # grid utilities by their own map grammar
+                if pr.get("simulations"):
+                    m["simulations"] = list(pr["simulations"])   # grid maps in the reactor hall
                 m["sequence"] = r["sequence"]
                 m["pearl"] = pr["pearl"]; m["pearl_index"] = pr["pearl_index"]; m["map"] = pr.get("map", "")
                 if not pr.get("ordered"):

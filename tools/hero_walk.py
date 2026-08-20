@@ -179,7 +179,7 @@ def pearl_walks(chapter: str, trunk: dict[str, Any] | None = None) -> list[dict[
                 q_i += 1
             excl -= {r["lookup"] for r in rows_o}     # a line of any page in this hall is never excluded by another page
             walks.append({"chapter": chapter, "pearl": name, "pearl_index": int(p.get("index", len(walks))), "map": p.get("map", ""),
-                          "stages": list(p.get("stages", [])), "gaps": list(p.get("gaps", [])), "ramps": list(p.get("ramps", [])), "utilities": list(p.get("utilities", [])),
+                          "stages": list(p.get("stages", [])), "gaps": list(p.get("gaps", [])), "ramps": list(p.get("ramps", [])), "utilities": list(p.get("utilities", [])), "simulations": list(p.get("simulations", [])),
                           "rooms": (rooms_total or p.get("rooms")), "exclude": sorted(excl), "ordered": True, "pages": pages,
                           "hero": hero, "hand_branches": sum(1 for r in rows_o if r["walk_kind"] not in ("hero", "sibling")),
                           "cast": [r["lookup"] for r in rows_o], "rows": rows_o,
@@ -238,7 +238,7 @@ def pearl_walks(chapter: str, trunk: dict[str, Any] | None = None) -> list[dict[
         for r in rows:
             if r["lookup"] not in uniq:
                 uniq.append(r["lookup"])
-        walks.append({"chapter": chapter, "pearl": name, "pearl_index": int(p.get("index", len(walks))), "map": p.get("map", ""), "stages": list(p.get("stages", [])), "gaps": list(p.get("gaps", [])), "ramps": list(p.get("ramps", [])), "utilities": list(p.get("utilities", [])), "rooms": p.get("rooms"), "exclude": list(p.get("excluded", [])),
+        walks.append({"chapter": chapter, "pearl": name, "pearl_index": int(p.get("index", len(walks))), "map": p.get("map", ""), "stages": list(p.get("stages", [])), "gaps": list(p.get("gaps", [])), "ramps": list(p.get("ramps", [])), "utilities": list(p.get("utilities", [])), "simulations": list(p.get("simulations", [])), "rooms": p.get("rooms"), "exclude": list(p.get("excluded", [])),
                       "hero": hero, "hand_branches": len(hand), "cast": uniq, "rows": rows,
                       "why": f"pearl {name}: {hero} + {sib} siblings + {len(rows) - 1 - sib} branches ({len(hand)} hand)"})
     return walks
