@@ -1,8 +1,8 @@
 {
 	"_readme": "The BAKE: every placement decision the museum makes from a measurement, decided ONCE by a headless --em-bake run and replayed by every later run, desktop or headset. Per chapter|pearl: placed = token, tile cell, the exact cells sealed (x, z-from-segment-base); refused = token, cell, why. Regenerate after editing the plan: python tools/em_bake.py",
-	"at": "2026-08-20 14:27:06",
+	"at": "2026-08-20 16:10:26",
 	"plan": "res://ada_run/em_plan.json",
-	"plan_at": "2026-08-20T14:26:32",
+	"plan_at": "2026-08-20T16:09:36",
 	"schema": "adaresearch.em_bake.v1",
 	"segments": {
 		"array_tutorial|array patterns": {
@@ -44273,19 +44273,6 @@
 						]
 					],
 					"token": "frame_counter_display"
-				},
-				{
-					"cell": [
-						4,
-						28
-					],
-					"seal": [
-						[
-							6,
-							28
-						]
-					],
-					"token": "science_screen"
 				},
 				{
 					"cell": [

@@ -601,8 +601,17 @@ func _node_or_null(v: Variant) -> Node3D:
 # (visible=false leaves colliders live, so seals and walls still bite).
 # Architecture (walls, floors, lights) is never culled — the building is the
 # horizon; the artifacts are the crowd.
-const ART_SHOW_M := 32.0
-const ART_HIDE_M := 38.0
+var ART_SHOW_M := 32.0
+var ART_HIDE_M := 38.0
+const SHOW_PER_TICK := 8           # bodies resurrected per cull tick — the burst was the hitch
+var STAMP_BUDGET_MS := 6.0         # ms per frame the patient stamp may spend building bodies
+var INSTANTIATE_AHEAD_M := 50.0    # a queued body further than this from the eye stays paper
+var _stamp_queue: Array = []       # deferred stamps: the plan row on paper, not the node
+var _headless: bool = false        # every gate, bake and capture runs headless — they get the
+                                   # synchronous build, because a test that snapshots a museum
+                                   # mid-drain is diffing a cursor, not a building (the suite
+                                   # went flaky the first hour this shipped without the guard)
+var _force_patient := false        # probes set this to measure the deferred path headless
 var _vis_records: Array = []       # [{node, p}] every stamped artifact, always
 var _vis_timer: float = 0.0
 var _vis_hidden: int = 0
@@ -782,6 +791,7 @@ func _ready() -> void:
 	if stuck != null and "enabled" in stuck:
 		stuck.set("enabled", false)
 		print("[endless_museum] StuckDetector stood down for the museum (spawn_point at 7.5, 0.1, 1.5)")
+	_headless = DisplayServer.get_name() == "headless"
 	# LAZY: one segment now, the rest owed. A shot run still builds all it
 	# needs synchronously — a frame of a museum half-built is not a proof.
 	var preload_n: int = _shot_segments if _shot_path != "" else 1
@@ -936,6 +946,10 @@ func _load_modules() -> void:
 	BUILD_AHEAD_M = _L("stream", "build_ahead_m", BUILD_AHEAD_M)
 	KEEP_BEHIND_M = _L("stream", "keep_behind_m", KEEP_BEHIND_M)
 	MIN_SEGMENTS = int(_L("stream", "min_segments", float(MIN_SEGMENTS)))
+	ART_SHOW_M = _L("stream", "art_show_m", ART_SHOW_M)
+	ART_HIDE_M = _L("stream", "art_hide_m", ART_HIDE_M)
+	INSTANTIATE_AHEAD_M = _L("stream", "instantiate_ahead_m", INSTANTIATE_AHEAD_M)
+	STAMP_BUDGET_MS = _L("stream", "stamp_budget_ms", STAMP_BUDGET_MS)
 	GATE_REACH_M = _L("gate", "reach_m", GATE_REACH_M)
 	GATE_PATIENCE = _L("gate", "patience_s", GATE_PATIENCE)
 	AUTOSAVE_S = _L("editor", "autosave_seconds", AUTOSAVE_S)
@@ -4649,7 +4663,17 @@ func _deal_plan_wall_runs(seg: Node3D, entry: Dictionary,
 	var planned_refused: int = 0
 	var assembly_refused: int = 0
 	var value_refused: int = 0
+	var queued_runs: int = 0
 	var apron: float = float(entry.get("apron", 0.0))
+	# THE PATIENT LINEAGE (2026-08-20). Measured: the wall runs, not the floor
+	# stamps, were the segment's stall — matrix_4x4_viewer costs 0.6 s and
+	# 12 MB PER COPY and a run hangs seven of them in one frame. On the live
+	# path each eligible run becomes a work item drained ONE VARIANT PER FRAME
+	# beside the deferred stamps; commit/rollback semantics are unchanged
+	# because a run still commits only when its last variant lands. Bake, shot
+	# and studio runs keep the synchronous build — their frames are proofs.
+	var defer_live: bool = _shot_path == "" and not _bake_mode and not _studio \
+			and (_force_patient or not _headless)
 	for run_v in (entry.get("wall_runs", []) as Array):
 		if not (run_v is Dictionary):
 			continue
@@ -4678,91 +4702,168 @@ func _deal_plan_wall_runs(seg: Node3D, entry: Dictionary,
 				or values.size() < 2 or normal == Vector3.ZERO:
 			assembly_refused += 1
 			continue
-		var built: Array = []
-		var failure_counts: Dictionary = {}
 		var run_index: int = (entry.get("wall_runs", []) as Array).find(run_v)
-		var drops: Array = run.get("drop", []) if run.get("drop") is Array else []
-		var offsets: Array = run.get("offsets", []) if run.get("offsets") is Array else []
-		for i in range(values.size()):
-			if drops.has(i) or drops.has(float(i)):
-				failure_counts["dropped by hand"] = int(failure_counts.get("dropped by hand", 0)) + 1
-				continue
-			var xyz: Variant = world[i]
-			if not (xyz is Array) or (xyz as Array).size() < 3:
-				failure_counts["invalid world coordinate"] = int(failure_counts.get("invalid world coordinate", 0)) + 1
-				continue
-			var p: Array = xyz as Array
-			var uv_v: Variant = rects[i]
-			if not (uv_v is Array) or (uv_v as Array).size() < 4:
-				failure_counts["invalid wall rectangle"] = int(failure_counts.get("invalid wall rectangle", 0)) + 1
-				continue
-			var uv: Array = uv_v as Array
-			var max_width := float(uv[2]) - float(uv[0])
-			var max_height := float(uv[3]) - float(uv[1])
-			var target := Vector3(float(p[0]) - apron, float(p[1]),
-				float(p[2]) - apron + VESTIBULE_H)
-			# the hand's nudge along the wall (studio): offsets[i] = [dx, dy, dz]
-			if i < offsets.size() and offsets[i] is Array and (offsets[i] as Array).size() >= 3:
-				var oa: Array = offsets[i]
-				target += Vector3(float(oa[0]), float(oa[1]), float(oa[2]))
-			# the LOBBY keeps its walls bare: a variant the plan hangs on the entry
-			# wall's lobby face (or anywhere in the vestibule) of the first segment
-			# is not assembled — the lobby's own pieces are its wall works
-			if _seg_index == 0 and _L("lobby", "enabled", 1.0) > 0.5 and target.z < VESTIBULE_H + 0.6:
-				failure_counts["lobby: bare wall"] = int(failure_counts.get("lobby: bare wall", 0)) + 1
-				continue
-			var result: Dictionary = _stamp_plan_wall_variant(seg, scene_path, lookup, axis,
-					str(values[i]), String(run.get("wall", "")),
-					String(run.get("wall_side", "")), target, normal,
-					max_width, max_height)
-			if bool(result.get("ok", false)):
-				built.append(result.get("node"))
-				# an editor record for the variant, keyed run + value index
-				_edit_records.append({"node": result.get("node"), "kind": "variant", "token": lookup,
-					"run": run_index, "vi": i, "axis": axis, "value": str(values[i]),
-					"wall": String(run.get("wall", "")), "wall_side": String(run.get("wall_side", "")),
-					"normal": [normal.x, normal.y, normal.z],
-					"from": [], "tile_cell": [], "rotation": 0.0,
-					"chapter": String(entry.get("sequence", "")), "seg": seg, "index": i})
-			else:
-				var why := String(result.get("why", "unknown"))
-				failure_counts[why] = int(failure_counts.get(why, 0)) + 1
-		if built.size() == values.size():
+		var item: Dictionary = _wallrun_item(seg, entry, run, run_index, apron,
+			scene_path, lookup, axis, normal)
+		if defer_live:
+			_stamp_queue.append(item)
+			queued_runs += 1
+			continue
+		while not (item["pending"] as Array).is_empty():
+			_wallrun_step(item)
+		var res: Dictionary = item.get("result", {})
+		if bool(res.get("assembled", false)):
 			assembled_runs += 1
-			variants += built.size()
-			for built_v in built:
-				var committed_node: Node3D = built_v as Node3D
-				_vis_records.append({"node": committed_node, "p": committed_node.global_position})
-				# Wall variants are evidence too. Without targets the proof camera
-				# composes only against floor objects and can stand directly beside a
-				# lineage it never turns to see. Aim through the already-negotiated
-				# standing cell one metre inward from the wall face.
-				var committed_box := _extent_of(committed_node)
-				var target_p := committed_box.get_center()
-				var inward_global := (seg.global_transform.basis * normal).normalized()
-				var stand_p := target_p + inward_global
-				_shot_targets.append({
-					"p": target_p,
-					"cell": Vector2i(int(floor(stand_p.x)), int(floor(stand_p.z))),
-					"token": "%s.%s=%s" % [lookup, axis,
-						str(committed_node.get_meta("em_dna_value", ""))],
-				})
+			variants += int(res.get("built", 0))
 		else:
 			assembly_refused += 1
-			value_refused += values.size() - built.size()
-			for built_v in built:
-				var rollback_node: Node3D = built_v as Node3D
-				if is_instance_valid(rollback_node) and rollback_node.get_parent() == seg:
-					seg.remove_child(rollback_node)
-					rollback_node.queue_free()
-			print("[em-dna-wall] %s.%s rolled back (%d/%d built): %s" % [
-				lookup, axis, built.size(), values.size(), str(failure_counts)])
+			value_refused += int(res.get("expected", 0)) - int(res.get("built", 0))
 	var refused := planned_refused + assembly_refused
-	print("[em-dna-wall] assembled %d run(s) / %d variants; %d plan refusals, %d assembly refusals (%d values)" % [
-		assembled_runs, variants, planned_refused, assembly_refused, value_refused])
+	if queued_runs > 0:
+		print("[em-dna-wall] %d run(s) queued for the patient stamp; %d plan refusals" % [
+			queued_runs, planned_refused])
+	else:
+		print("[em-dna-wall] assembled %d run(s) / %d variants; %d plan refusals, %d assembly refusals (%d values)" % [
+			assembled_runs, variants, planned_refused, assembly_refused, value_refused])
 	return {"runs": assembled_runs, "variants": variants, "refused": refused,
 		"planned_refused": planned_refused, "assembly_refused": assembly_refused,
-		"value_refused": value_refused}
+		"value_refused": value_refused, "queued": queued_runs}
+
+
+## One wall run as a drainable work item: the plan's decision plus a cursor.
+## Everything a variant build needs is captured here, because by drain time
+## _seg_index and the entry have both moved on.
+func _wallrun_item(seg: Node3D, entry: Dictionary, run: Dictionary, run_index: int,
+		apron: float, scene_path: String, lookup: String, axis: String,
+		normal: Vector3) -> Dictionary:
+	var values: Array = run.get("values", [])
+	var pending: Array = []
+	for i in range(values.size()):
+		pending.append(i)
+	# the run's standpoint for nearest-first draining: its first wall point
+	var px := 0.0
+	var pz := 0.0
+	var world: Array = run.get("world", [])
+	if world.size() > 0 and world[0] is Array and (world[0] as Array).size() >= 3:
+		var w0: Array = world[0]
+		var t0 := Vector3(float(w0[0]) - apron, float(w0[1]), float(w0[2]) - apron + VESTIBULE_H)
+		var g0: Vector3 = seg.global_transform * t0
+		px = g0.x
+		pz = g0.z
+	return {"kind": "wallrun", "seg": seg, "run": run, "run_index": run_index,
+		"apron": apron, "scene_path": scene_path, "lookup": lookup, "axis": axis,
+		"normal": normal, "sequence": String(entry.get("sequence", "")),
+		"lobby_bare": _seg_index == 0 and _L("lobby", "enabled", 1.0) > 0.5,
+		"pending": pending, "built": [], "failures": {}, "px": px, "pz": pz}
+
+
+## Build ONE variant of a wall run; when the last lands, commit or roll back
+## exactly as the synchronous assembler always did.
+func _wallrun_step(item: Dictionary) -> void:
+	var pending: Array = item["pending"]
+	if pending.is_empty():
+		return
+	var i: int = int(pending.pop_front())
+	_wallrun_try_variant(item, i)
+	if pending.is_empty():
+		_wallrun_commit(item)
+
+
+func _wallrun_try_variant(item: Dictionary, i: int) -> void:
+	var seg: Node3D = item["seg"]
+	var run: Dictionary = item["run"]
+	var failures: Dictionary = item["failures"]
+	var values: Array = run.get("values", [])
+	var world: Array = run.get("world", [])
+	var rects: Array = run.get("rects_uv", [])
+	var drops: Array = run.get("drop", []) if run.get("drop") is Array else []
+	var offsets: Array = run.get("offsets", []) if run.get("offsets") is Array else []
+	var apron: float = float(item["apron"])
+	var normal: Vector3 = item["normal"]
+	var lookup: String = String(item["lookup"])
+	var axis: String = String(item["axis"])
+	if drops.has(i) or drops.has(float(i)):
+		failures["dropped by hand"] = int(failures.get("dropped by hand", 0)) + 1
+		return
+	var xyz: Variant = world[i]
+	if not (xyz is Array) or (xyz as Array).size() < 3:
+		failures["invalid world coordinate"] = int(failures.get("invalid world coordinate", 0)) + 1
+		return
+	var p: Array = xyz as Array
+	var uv_v: Variant = rects[i]
+	if not (uv_v is Array) or (uv_v as Array).size() < 4:
+		failures["invalid wall rectangle"] = int(failures.get("invalid wall rectangle", 0)) + 1
+		return
+	var uv: Array = uv_v as Array
+	var max_width := float(uv[2]) - float(uv[0])
+	var max_height := float(uv[3]) - float(uv[1])
+	var target := Vector3(float(p[0]) - apron, float(p[1]),
+		float(p[2]) - apron + VESTIBULE_H)
+	# the hand's nudge along the wall (studio): offsets[i] = [dx, dy, dz]
+	if i < offsets.size() and offsets[i] is Array and (offsets[i] as Array).size() >= 3:
+		var oa: Array = offsets[i]
+		target += Vector3(float(oa[0]), float(oa[1]), float(oa[2]))
+	# the LOBBY keeps its walls bare: a variant the plan hangs on the entry
+	# wall's lobby face (or anywhere in the vestibule) of the first segment
+	# is not assembled — the lobby's own pieces are its wall works.
+	# (Captured at queue time: by drain time _seg_index has moved on.)
+	if bool(item["lobby_bare"]) and target.z < VESTIBULE_H + 0.6:
+		failures["lobby: bare wall"] = int(failures.get("lobby: bare wall", 0)) + 1
+		return
+	var result: Dictionary = _stamp_plan_wall_variant(seg, String(item["scene_path"]), lookup, axis,
+			str(values[i]), String(run.get("wall", "")),
+			String(run.get("wall_side", "")), target, normal,
+			max_width, max_height)
+	if bool(result.get("ok", false)):
+		(item["built"] as Array).append(result.get("node"))
+		# an editor record for the variant, keyed run + value index
+		_edit_records.append({"node": result.get("node"), "kind": "variant", "token": lookup,
+			"run": int(item["run_index"]), "vi": i, "axis": axis, "value": str(values[i]),
+			"wall": String(run.get("wall", "")), "wall_side": String(run.get("wall_side", "")),
+			"normal": [normal.x, normal.y, normal.z],
+			"from": [], "tile_cell": [], "rotation": 0.0,
+			"chapter": String(item["sequence"]), "seg": seg, "index": i})
+	else:
+		var why := String(result.get("why", "unknown"))
+		failures[why] = int(failures.get(why, 0)) + 1
+
+
+func _wallrun_commit(item: Dictionary) -> void:
+	var seg: Node3D = item["seg"]
+	var run: Dictionary = item["run"]
+	var built: Array = item["built"]
+	var values: Array = run.get("values", [])
+	var normal: Vector3 = item["normal"]
+	var lookup: String = String(item["lookup"])
+	var axis: String = String(item["axis"])
+	if built.size() == values.size():
+		for built_v in built:
+			var committed_node: Node3D = built_v as Node3D
+			_vis_records.append({"node": committed_node, "p": committed_node.global_position})
+			# Wall variants are evidence too. Without targets the proof camera
+			# composes only against floor objects and can stand directly beside a
+			# lineage it never turns to see. Aim through the already-negotiated
+			# standing cell one metre inward from the wall face.
+			var committed_box := _extent_of(committed_node)
+			var target_p := committed_box.get_center()
+			var inward_global := (seg.global_transform.basis * normal).normalized()
+			var stand_p := target_p + inward_global
+			_shot_targets.append({
+				"p": target_p,
+				"cell": Vector2i(int(floor(stand_p.x)), int(floor(stand_p.z))),
+				"token": "%s.%s=%s" % [lookup, axis,
+					str(committed_node.get_meta("em_dna_value", ""))],
+			})
+		item["result"] = {"assembled": true, "built": built.size(), "expected": values.size()}
+	else:
+		for built_v in built:
+			var rollback_node: Node3D = built_v as Node3D
+			if is_instance_valid(rollback_node) and rollback_node.get_parent() == seg:
+				seg.remove_child(rollback_node)
+				rollback_node.queue_free()
+		print("[em-dna-wall] %s.%s rolled back (%d/%d built): %s" % [
+			lookup, axis, built.size(), values.size(), str(item["failures"])])
+		item["result"] = {"assembled": false, "built": 0, "expected": values.size()}
 
 
 ## Build one configured copy and seat its BACK face on the negotiated wall
@@ -5395,11 +5496,13 @@ func _stamp(seg: Node3D, scene_path: String, lookup: String, cell: Dictionary,
 func _stamp_inner(seg: Node3D, scene_path: String, lookup: String, cell: Dictionary,
 		zbase: int, fp: int, axis_entry: Dictionary, drop_if_unvaried: bool,
 		span_cap: float = 0.0, yaw_deg: float = 0.0,
-		plan_config: Dictionary = {}) -> bool:
+		plan_config: Dictionary = {}, defer_bk: Dictionary = {}) -> bool:
 	# THE BAKE decides first: a body the bake refused is refused here without
 	# being instantiated; a body the bake placed carries its sealed cells and is
 	# never measured; a body the bake never saw goes the live way (and counts).
-	var bk: Dictionary = _bake_lookup(lookup, cell)
+	# A DRAINED deferred stamp hands its baked row back in defer_bk — _bake_key
+	# has moved on to a later segment by then, so it must not be looked up again.
+	var bk: Dictionary = defer_bk if not defer_bk.is_empty() else _bake_lookup(lookup, cell)
 	if bk.has("refused"):
 		_stamp_refusal = "baked: " + String(bk["refused"])
 		return false
@@ -5409,6 +5512,37 @@ func _stamp_inner(seg: Node3D, scene_path: String, lookup: String, cell: Diction
 	if scene_path == "" or cell.is_empty():
 		_stamp_refusal = "no scene path or cell"
 		return false
+	# ── THE PATIENT STAMP (2026-08-20) ──────────────────────────────────────
+	# Measured (probe_em_firstroom): one hall instantiated ~4 s of procedural
+	# bodies in a single frame — matrix_4x4_viewer costs 0.6 s and 12 MB EACH
+	# and stands seven times — and each owed segment cost a ~1 s frame. In VR
+	# that frame IS "the world jumps until it settles". On the replay path the
+	# bake already carries every seal, so nothing needs the body in order to
+	# know the floor: the walk map is sealed NOW, the instantiate is queued
+	# and drained a few ms per frame, nearest the eye first — and a body
+	# further than INSTANTIATE_AHEAD_M stays a row on paper until the visitor
+	# nears, which is also the memory fix: a 90 m hall no longer holds its far
+	# end resident (~230 MB static per hall, meshes only ~21 MB of it). Bake,
+	# shot and studio runs keep the old synchronous path — a proof frame of a
+	# half-built museum proves nothing — and a row the bake never saw is
+	# measured live, synchronously, as before.
+	if defer_bk.is_empty() and _replay and not _bake_mode and _shot_path == "" \
+			and not _studio and bk.has("seal") and (_force_patient or not _headless):
+		_last_seal_cells = []
+		for dc in bk["seal"]:
+			var dca: Array = dc
+			var dk := Vector2i(int(dca[0]), zbase + int(dca[1]))
+			if _walk_cells.has(dk):
+				_walk_cells.erase(dk)
+				_walk_erased[dk] = "seal:%s" % lookup
+			_last_seal_cells.append(dk)
+		_stamp_queue.append({"seg": seg, "scene_path": scene_path, "lookup": lookup,
+			"cell": cell, "zbase": zbase, "fp": fp, "axis": axis_entry,
+			"drop": drop_if_unvaried, "span_cap": span_cap, "yaw": yaw_deg,
+			"config": plan_config, "bk": bk,
+			"px": float(cell.get("x", 0)) + 0.5,
+			"pz": float(zbase + int(cell.get("y", 0))) + 0.5})
+		return true
 	var ps: PackedScene = load(scene_path) as PackedScene
 	if ps == null:
 		_stamp_refusal = "scene failed to load"
@@ -6431,11 +6565,75 @@ func _process(_delta: float) -> void:
 		print("[em-stream] freeing the room behind: z %.0f..%.0f (%d left in the tree)" % [
 			float(old["z0"]), float(old["z1"]), _segments.size()])
 		n.queue_free()
+	_drain_stamps()
 	_vis_timer += _delta
 	if _vis_timer >= 0.3:
 		_vis_timer = 0.0
 		_cull_artifacts()
 	_track_acoustic()
+
+
+## Drain EVERY queued stamp and wall-run variant NOW, ignoring distance and
+## budget. For tests and proofs: their claim is the finished museum, not a
+## moment of its assembly. (The parity gate snapshots two builds at one clock
+## time — without this, it would be diffing two drain cursors.)
+func flush_stamps() -> void:
+	while not _stamp_queue.is_empty():
+		var item: Dictionary = _stamp_queue.pop_at(0)
+		if not is_instance_valid(item.get("seg")):
+			continue
+		if String(item.get("kind", "stamp")) == "wallrun":
+			while not (item["pending"] as Array).is_empty():
+				_wallrun_step(item)
+		else:
+			_stamp_inner(item["seg"], String(item["scene_path"]), String(item["lookup"]),
+				item["cell"], int(item["zbase"]), int(item["fp"]), item["axis"], bool(item["drop"]),
+				float(item["span_cap"]), float(item["yaw"]), item["config"], item["bk"])
+
+
+## The patient stamp's drain: a few milliseconds a frame, nearest body first,
+## so the room assembles around the visitor instead of costing one giant frame.
+## An item whose segment scrolled off behind is dropped un-built; an item
+## beyond INSTANTIATE_AHEAD_M waits where it is (its seal is already in the
+## walk map, so nothing about the route is provisional).
+func _drain_stamps() -> void:
+	if _stamp_queue.is_empty():
+		return
+	var eye: Vector3 = _eye_pos()
+	var t0 := Time.get_ticks_usec()
+	var built := 0
+	while not _stamp_queue.is_empty() and built < 8:
+		if built > 0 and float(Time.get_ticks_usec() - t0) > STAMP_BUDGET_MS * 1000.0:
+			break
+		var best := -1
+		var best_d := 1e20
+		var qi := 0
+		while qi < _stamp_queue.size():
+			var it: Dictionary = _stamp_queue[qi]
+			if not is_instance_valid(it["seg"]):
+				_stamp_queue.remove_at(qi)
+				continue
+			var qd: float = Vector2(float(it["px"]) - eye.x, float(it["pz"]) - eye.z).length()
+			if qd < best_d:
+				best_d = qd
+				best = qi
+			qi += 1
+		if best < 0 or best_d > INSTANTIATE_AHEAD_M:
+			return
+		var item: Dictionary = _stamp_queue.pop_at(best)
+		if String(item.get("kind", "stamp")) == "wallrun":
+			# one VARIANT this slot; the run re-queues until its last lands
+			_wallrun_step(item)
+			if not (item["pending"] as Array).is_empty():
+				_stamp_queue.append(item)
+		else:
+			var ok: bool = _stamp_inner(item["seg"], String(item["scene_path"]), String(item["lookup"]),
+				item["cell"], int(item["zbase"]), int(item["fp"]), item["axis"], bool(item["drop"]),
+				float(item["span_cap"]), float(item["yaw"]), item["config"], item["bk"])
+			if not ok:
+				print("[em-stamp] deferred %s failed on drain: %s (the bake had placed it)" % [
+					String(item["lookup"]), _stamp_refusal])
+		built += 1
 
 
 ## Near-artifact rendering: one cheap pass, a few times a second, over every
@@ -6446,6 +6644,12 @@ func _cull_artifacts() -> void:
 	var eye: Vector3 = _eye_pos()
 	var i: int = 0
 	_vis_hidden = 0
+	# RESURRECTION IS BUDGETED (2026-08-20): re-enabling dozens of suspended
+	# bodies in one 0.3 s tick — each with its first-draw pipeline compile —
+	# was the jump felt when turning to face a full room. Hides stay
+	# immediate (cheap); shows happen nearest-first, SHOW_PER_TICK per tick,
+	# so a room fades in over a second instead of arriving as one spike.
+	var shows: Array = []
 	while i < _vis_records.size():
 		var r: Dictionary = _vis_records[i]
 		var node: Node3D = _node_or_null(r.get("node"))
@@ -6459,25 +6663,28 @@ func _cull_artifacts() -> void:
 		var d: float = Vector2(p.x - eye.x, p.z - eye.z).length()
 		if node.visible:
 			if d > ART_HIDE_M:
+				# SUSPEND WHAT YOU CANNOT SEE (2026-08-18). Hiding a body stops
+				# its draw, not its life: measured on primitives, one segment
+				# brings 47-97 RigidBody3D, 58-103 AudioStreamPlayer3D, 21
+				# Camera3D and 2 SubViewports, all simulating whether the
+				# visitor is beside them or fifty metres away — that, not the
+				# museum's own geometry, is the hitch. A hidden body is DISABLED:
+				# no _process, no physics, no audio; back to INHERIT when shown.
 				node.visible = false
+				if node.process_mode != Node.PROCESS_MODE_DISABLED:
+					node.process_mode = Node.PROCESS_MODE_DISABLED
+					_vis_suspended += 1
 		elif d < ART_SHOW_M:
-			node.visible = true
-		# SUSPEND WHAT YOU CANNOT SEE (2026-08-18). Hiding a body stops its
-		# draw, not its life: measured on primitives, one segment brings
-		# 47-97 RigidBody3D, 58-103 AudioStreamPlayer3D, 21 Camera3D and
-		# 2 SubViewports, all simulating whether the visitor is beside them or
-		# fifty metres away — that, not the museum's own geometry, is the
-		# hitch. So a hidden body is also DISABLED: no _process, no physics,
-		# no audio, its subtree frozen where it stands; back to INHERIT the
-		# frame it is shown again. Nothing is unloaded and nothing moves.
-		var want_mode: int = Node.PROCESS_MODE_INHERIT if node.visible else Node.PROCESS_MODE_DISABLED
-		if node.process_mode != want_mode:
-			node.process_mode = want_mode
-			if not node.visible:
-				_vis_suspended += 1
+			shows.append({"node": node, "d": d})
 		if not node.visible:
 			_vis_hidden += 1
 		i += 1
+	shows.sort_custom(func(a, b): return float(a["d"]) < float(b["d"]))
+	for si in range(mini(SHOW_PER_TICK, shows.size())):
+		var sn: Node3D = shows[si]["node"]
+		sn.visible = true
+		sn.process_mode = Node.PROCESS_MODE_INHERIT
+		_vis_hidden -= 1
 
 ## The room the walker is actually standing in decides the reverb. Crossing a
 ## threshold retunes the bed and fires the doorway whoosh; the module is a

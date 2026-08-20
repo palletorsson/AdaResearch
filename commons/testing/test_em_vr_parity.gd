@@ -11,7 +11,12 @@ func _snapshot(m: Node3D) -> Dictionary:
 		var n: Node3D = rd.get("node") as Node3D
 		if n == null or not is_instance_valid(n): continue
 		out[String(rd.get("token", "")) + "@" + str(rd.get("tile_cell", []))] = {
-			"pos": n.global_position, "rot": n.rotation_degrees.y, "inv": rd.get("inv", "")}
+			# rotation from the RECORD (the stamped yaw), not the live node: a body
+			# that animates its own spin (pick_up_cube turns and bobs) has only a
+			# PHASE at snapshot time, and the patient stamp de-synchronised the two
+			# builds' clocks. The plan's claim is the stamp, and that is what parity
+			# is about. XZ stays live, so real drift is still caught.
+			"pos": n.global_position, "rot": float(rd.get("rotation", 0.0)), "inv": rd.get("inv", "")}
 	return out
 func _initialize() -> void: call_deferred("_run")
 func _run() -> void:
@@ -20,6 +25,8 @@ func _run() -> void:
 	var a: Node3D = ps.instantiate() as Node3D
 	get_root().add_child(a)
 	await create_timer(3.0).timeout
+	a.call("flush_stamps")   # the patient stamp drains over frames; parity claims the FINISHED museum
+	await create_timer(1.5).timeout   # a freed RigidBody needs the same settle in both builds
 	var desk := _snapshot(a)
 	var inv_a: int = (a.get("_inventory") as Array).size()
 	var a_inv: Array = (a.get("_inventory") as Array).duplicate(true)
@@ -30,6 +37,8 @@ func _run() -> void:
 	b.set("_force_vr", true)        # the VR build path, without a headset
 	get_root().add_child(b)
 	await create_timer(3.0).timeout
+	b.call("flush_stamps")   # the rigless VR build never drains on its own (no eye, no stream)
+	await create_timer(1.5).timeout   # a freed RigidBody needs the same settle in both builds
 	var vr := _snapshot(b)
 	var inv_b: int = (b.get("_inventory") as Array).size()
 	var kinds_a := {}; var kinds_b := {}
