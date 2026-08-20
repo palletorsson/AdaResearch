@@ -585,7 +585,16 @@ def write_plan(result: dict[str, Any], out: Path) -> dict[str, Any]:
                 # RELATED (the trunk's readings on this chapter), then the DNA families,
                 # then the homeless — and after all of that, the dummy saturates.
                 exq = set(pr.get("exclude") or []) | {"lab_room"}
-                pool = [t for t in fill_by_map.get(pr.get("map", ""), []) if t not in chapter_used]
+                # STICKY FILL: the fillers this hall held LAST build come first in
+                # the pool, each asking for its own cell back (fill_prefs); they
+                # yield to any new hand fact but otherwise the salon holds still.
+                prev_row0 = next((p0 for p0 in prev.get("plans", []) if p0.get("museum") == key
+                                  and p0.get("sequence") == r["sequence"] and p0.get("pearl") == pr["pearl"]), None)
+                prev_fill = {a["token"]: a["tile_cell"] for a in (prev_row0 or {}).get("artifacts", [])
+                             if a.get("fill") and not a.get("dummy") and a.get("tile_cell")}
+                fprefs = {t: (int(c[0]) + APRON, int(c[1]) + APRON) for t, c in prev_fill.items()}
+                pool = [t for t in prev_fill if t not in chapter_used]
+                pool += [t for t in fill_by_map.get(pr.get("map", ""), []) if t not in chapter_used and t not in pool]
                 pool += [t for t in fill_by_seq.get(r["sequence"], []) if t not in chapter_used and t not in pool]
                 pool += [t for t in fill_related.get(r["sequence"], []) if t not in chapter_used and t not in pool]
                 pool += [t for t in fill_dna[:30] if t not in chapter_used and t not in pool]
@@ -594,7 +603,7 @@ def write_plan(result: dict[str, Any], out: Path) -> dict[str, Any]:
                 m = plan_museum(key, list(pr["cast"]), list(r.get("anchor_tokens", [])),
                                 dict(pr.get("cast_context", {})), rooms=pr.get("rooms"), reading=bool(pr.get("ordered")), fixed=fx,
                                 gaps=list(pr.get("gaps") or []), fillers=pool[:120], saturate="dark_sphere",
-                                cell_overrides=list(pr.get("cell_overrides") or []))
+                                cell_overrides=list(pr.get("cell_overrides") or []), fill_prefs=fprefs)
                 filled = [a["token"] for a in m.get("artifacts", []) if a.get("fill") and not a.get("dummy")]
                 dummies = sum(1 for a in m.get("artifacts", []) if a.get("dummy"))
                 chapter_used.update(filled)

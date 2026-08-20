@@ -1131,7 +1131,7 @@ def run(artifacts: list[str], plan: FloorPlan | None = None,
         reading: bool = False, fixed: dict[str, tuple[int, int]] | None = None,
         footprints: dict | None = None, reaches: dict | None = None,
         counts: dict | None = None, fillers: list[str] | None = None,
-        saturate: str = "") -> tuple[FloorPlan, list[Placement], Occupancy]:
+        saturate: str = "", fill_prefs: dict | None = None) -> tuple[FloorPlan, list[Placement], Occupancy]:
     """Negotiate a whole exhibition brief in order.
 
     venue_asks: BALCONIES-BY-ASK (2026-08-18). A hand may say, on the trunk,
@@ -1356,8 +1356,27 @@ def run(artifacts: list[str], plan: FloorPlan | None = None,
             continue                        # a filler never earns a court
         if max(fc.footprint_cells[0], fc.footprint_cells[1]) > 4:
             continue                        # nothing room-sized sneaks in as decor
-        pref = next((s for s in plan.slots if s.venue == "interior" and _slot_suits(fc, s)), None)
-        fp = negotiate(fc, plan, occ, pref)
+        # STICKY FILL (2026-08-20, Palle: "make fill sticky"): a filler that stood
+        # in this hall last build asks for ITS OWN CELL back first, so a rebuild
+        # does not reshuffle the salon around the visitor's memory. It YIELDS —
+        # if the hand, the poem or the masonry took the cell, it negotiates fresh
+        # like any filler; nothing is forced.
+        fp = None
+        pv = (fill_prefs or {}).get(lookup)
+        if pv is not None:
+            pvt = (int(pv[0]), int(pv[1]))
+            holder = [s for s in plan.slots if s.venue == "interior" and pvt in (s.free_cells or set())]
+            if holder and pvt not in occ.physical:
+                keep_slots = plan.slots
+                plan.slots = holder
+                cand = negotiate(fc, plan, occ, holder[0])
+                plan.slots = keep_slots
+                if cand.result == "ACCEPT" and cand.venue == "interior" and cand.anchor is not None                         and abs(int(cand.anchor[0]) - pvt[0]) + abs(int(cand.anchor[1]) - pvt[1]) <= 1:
+                    cand.traces.append(Trace(rule="fill", status="pass", detail="sticky: the cell it held last build"))
+                    fp = cand
+        if fp is None:
+            pref = next((s for s in plan.slots if s.venue == "interior" and _slot_suits(fc, s)), None)
+            fp = negotiate(fc, plan, occ, pref)
         if fp.result == "ACCEPT" and fp.venue == "interior" and fp.masks:
             occ.commit(lookup, fp.masks, fp.anchor)
             if fp.mode == "against_wall" and fp.wall:

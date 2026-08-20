@@ -194,7 +194,8 @@ def plan_museum(key: str, tokens: list[str],
                 rooms: int | None = None, reading: bool = False,
                 fixed: dict[str, tuple[int, int]] | None = None,
                 gaps: list | None = None, fillers: list | None = None,
-                saturate: str = "", cell_overrides: list | None = None) -> dict[str, Any]:
+                saturate: str = "", cell_overrides: list | None = None,
+                fill_prefs: dict | None = None) -> dict[str, Any]:
     """Negotiate `tokens` into museum `key`. Reports what did NOT fit, too.
     `rooms` crops the tile to that many rooms (tools/em_rooms.py); the cropped
     tile is written into the row so the runtime builds exactly this hall."""
@@ -215,7 +216,8 @@ def plan_museum(key: str, tokens: list[str],
                                    footprints={t: c["footprint"] for t, c in ctx.items() if (c or {}).get("footprint")},
                                    reaches={t: c["reach"] for t, c in ctx.items() if (c or {}).get("reach")},
                                    counts={t: c["count"] for t, c in ctx.items() if (c or {}).get("count")},
-                                   fillers=[t for t in (fillers or []) if t not in set(tokens)], saturate=saturate)
+                                   fillers=[t for t in (fillers or []) if t not in set(tokens)], saturate=saturate,
+                                   fill_prefs=fill_prefs)
 
     placed: list[dict[str, Any]] = []
     rejected: list[dict[str, Any]] = []
