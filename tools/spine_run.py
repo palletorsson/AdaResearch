@@ -571,8 +571,19 @@ def write_plan(result: dict[str, Any], out: Path) -> dict[str, Any]:
         # that key by (museum, sequence) alone, so nothing older goes blank.
         if r.get("pearls"):
             first: dict[str, Any] | None = None
-            # every token the chapter's poems already claim: a filler never repeats one
+            # every token the chapter's poems already claim: a filler never repeats one.
+            # CLAIM MEANS THE BOOK'S, NOT THE CAST'S (2026-08-20): ignorance's cast is
+            # capped below its 20 book lines, so snap_octahedron_puzzle, capsule and
+            # prism_block were in no cast, fell to the fill pool, and the FIRST hall
+            # with room — point — took another pearl's bodies. A token that belongs to
+            # any pearl of the chapter may fill only ITS OWN pearl.
             chapter_used = {t for p2 in r["pearls"] for t in p2.get("cast", [])}
+            trunk_node = next((n2 for n2 in trunk_doc.get("trunk", []) if n2.get("node") == r["sequence"]), None)
+            own_tokens: dict = {}
+            if trunk_node:
+                for p3 in trunk_node.get("pearls", []):
+                    own_tokens[p3.get("pearl", "")] = list(p3.get("tokens", []))
+                    chapter_used |= set(p3.get("tokens", []))
             for pr in r["pearls"]:
                 fx = _fixed_cells(r["sequence"], key, pr["pearl"], APRON, only=set(pr["cast"]) if pr.get("ordered") else None)
                 fx.update(_book_locks(pr.get("cast_context", {}), APRON))
@@ -594,6 +605,10 @@ def write_plan(result: dict[str, Any], out: Path) -> dict[str, Any]:
                              if a.get("fill") and not a.get("dummy") and a.get("tile_cell")}
                 fprefs = {t: (int(c[0]) + APRON, int(c[1]) + APRON) for t, c in prev_fill.items()}
                 pool = [t for t in prev_fill if t not in chapter_used]
+                # RING 0: the pearl's OWN book tokens the cast did not carry — they
+                # come home before anything else fills the hall
+                placed_here = set(pr.get("cast", []))
+                pool += [t for t in own_tokens.get(pr.get("pearl", ""), []) if t not in placed_here and t not in pool]
                 pool += [t for t in fill_by_map.get(pr.get("map", ""), []) if t not in chapter_used and t not in pool]
                 pool += [t for t in fill_by_seq.get(r["sequence"], []) if t not in chapter_used and t not in pool]
                 pool += [t for t in fill_related.get(r["sequence"], []) if t not in chapter_used and t not in pool]
