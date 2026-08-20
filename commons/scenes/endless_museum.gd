@@ -616,6 +616,28 @@ var _env_we: Node = null           # the installed WorldEnvironment (the tier A/
 var _env_tier: String = ""         # tier actually installed ("high"/"perf"; "" = v1 fallback)
 var _env_ab_s: float = 0.0         # em_layout env.ab_seconds — alternate tiers every N s
 var _env_ab_t: float = 0.0
+# ── ONE ENDLESS MUSEUM (2026-08-20, Palle: "these should just be one endless
+# museum") ── the desktop museum FOLLOWS the editors: when em_plan.json
+# changes on disk (an edit in /halls or /lines, or the auto-fold of this
+# museum's own walk rulings), the museum rebuilds itself around the eye — the
+# walk resumes at the nearest walkable cell to where the visitor stood.
+# Desktop authoring-tree only (a pak has no editors and no mtimes); local
+# edits mute the follow for 45 s so the curator is never yanked mid-ruling.
+# F6 follows by hand at any moment.
+var _plan_mtime: int = 0
+# ── THE BOOT CLOCK (2026-08-20, Palle: "still takes ~10 s to load the first
+# hall — what is happening there?") ── every boot phase timed and written into
+# em_built_*.json as `boot_ms`, so a slow launch answers by name instead of
+# being guessed at. `first_frame` lands when the first _process runs — the
+# gap between `ready_done` and `first_frame` is the renderer compiling
+# pipelines for everything the opening standpoint can see.
+var _boot_t0: int = 0
+var _boot_ms: Dictionary = {}
+var _boot_first_frame: bool = false
+var _follow_t: float = 0.0
+var _follow_pending: bool = false
+var _follow_seen_ms: int = 0
+var _follow_mute_ms: int = 0
 var _vis_records: Array = []       # [{node, p}] every stamped artifact, always
 var _vis_timer: float = 0.0
 var _vis_hidden: int = 0
@@ -736,12 +758,15 @@ var _deal_stats: Dictionary = {}   # running totals for the end-of-run print
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		return                        # @tool is for the Inspector dropdowns only
+	_boot_t0 = Time.get_ticks_msec()
+	_boot_ms["engine_to_ready"] = _boot_t0   # since process start
 	_parse_args()
 	_vr = _is_vr()
 	_load_modules()
 	_load_museums()
 	_load_crowns()
 	_load_relations()
+	_boot_ms["modules_pool"] = Time.get_ticks_msec() - _boot_t0
 	_load_pool()
 	# the flag wins; the scene's own field speaks when there was no flag
 	if _plan_path == "" and plan_file != "" and FileAccess.file_exists(plan_file):
@@ -757,8 +782,11 @@ func _ready() -> void:
 		push_warning("[em-plan] PLAN MISSING: %s is not in this build (nor %s) — dealing from the pool as v1; run python tools/em_ship.py and re-export" % [_plan_path, SHIPPED_DIR])
 	else:
 		print("[em-plan] plan: %s" % _plan_path)
+	_boot_ms["pool_done"] = Time.get_ticks_msec() - _boot_t0
 	_load_plan()
+	_boot_ms["plan_parsed"] = Time.get_ticks_msec() - _boot_t0
 	_load_bake()
+	_boot_ms["bake_parsed"] = Time.get_ticks_msec() - _boot_t0
 	if _bake_mode:
 		_bake_total = 0
 		for pk in _plan_pearls:
@@ -801,10 +829,12 @@ func _ready() -> void:
 	var preload_n: int = _shot_segments if _shot_path != "" else 1
 	for i in range(preload_n):
 		_build_segment()
+	_boot_ms["segment0_built"] = Time.get_ticks_msec() - _boot_t0
 	if _shot_path == "" and not _studio:
 		_lazy_pending = 1
 	if _edit_mode:
 		_arm_editor()
+	_follow_resume()
 	# the number the whole set-deal pass exists to move: v1 stamped at most 8
 	# objects per segment for every one of the twenty-six buildings.
 	var segs_built: int = int(_deal_stats.get("segments", 0))
@@ -3784,6 +3814,7 @@ func _write_built(seg: Node3D, chapter: String, deal: Variant, zbase: int, w: in
 			+ "the gate, the mode. Written as each segment finishes. Read this instead of re-deriving the "
 			+ "floor plan; diff two runs (vr vs desktop) to prove parity."),
 		"plan": String(_plan_path), "at": Time.get_datetime_string_from_system(false, true),
+		"boot_ms": _boot_ms,
 		"segments": _built}, "	")
 	# the latest run, AND one file per mode that survives the other mode's run —
 	# so after a headset walk and a desktop walk,
@@ -6507,6 +6538,10 @@ func _open_gate() -> void:
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint() or _studio:
 		return
+	if not _boot_first_frame:
+		_boot_first_frame = true
+		_boot_ms["first_frame"] = Time.get_ticks_msec() - _boot_t0
+		print("[em-boot] %s" % JSON.stringify(_boot_ms))
 	# the owed segment: built one frame after the first, so the visitor sees
 	# the vestibule immediately and the hall fills while they cross it
 	if _lazy_pending > 0:
@@ -6528,6 +6563,9 @@ func _process(_delta: float) -> void:
 			_autosave_t = 0.0
 			if _mod_editor.call("save", _edit_overrides, _overrides_path):
 				print("[em-edit] autosaved %d ruling(s) -> %s" % [_edit_overrides.size(), _overrides_path])
+				# the curator is mid-ruling: the follow waits 45 s (the editors'
+				# auto-fold will change the plan moments after this write)
+				_follow_mute_ms = Time.get_ticks_msec() + 45000
 				if not _edit_prop_rules.is_empty() and _save_prop_rules():
 					_edit_prop_rules.clear()
 				_edit_dirty = false
@@ -6613,6 +6651,12 @@ func _process(_delta: float) -> void:
 		print("[em-stream] freeing the room behind: z %.0f..%.0f (%d left in the tree)" % [
 			float(old["z0"]), float(old["z1"]), _segments.size()])
 		n.queue_free()
+	# one endless museum: follow the editors when the plan changes on disk
+	if not _vr and _shot_path == "" and not _bake_mode and _autopilot == 0 and not _studio:
+		_follow_t += _delta
+		if _follow_t >= 2.0:
+			_follow_t = 0.0
+			_follow_check()
 	# the tier A/B clock: alternate high/perf every env.ab_seconds, live
 	if _env_ab_s > 0.0 and _env_tier != "" and _shot_path == "" and not _bake_mode and _autopilot == 0:
 		_env_ab_t += _delta
@@ -6936,6 +6980,100 @@ func _jump_go(idx: int) -> void:
 	get_tree().reload_current_scene()
 
 
+## The plan changed on disk. Wait until the write settles (editors fold and
+## rewrite a 9.8 MB file), then rebuild the museum around the eye.
+func _follow_check() -> void:
+	if not _plan_path.begins_with("res://ada_run/"):
+		return
+	var mt: int = FileAccess.get_modified_time(_plan_path)
+	if mt == 0:
+		return
+	if _plan_mtime == 0:
+		_plan_mtime = mt
+		return
+	if mt == _plan_mtime:
+		if _follow_pending and Time.get_ticks_msec() - _follow_seen_ms > 2500 \
+				and Time.get_ticks_msec() > _follow_mute_ms \
+				and not _edit_dirty and _jump_ui == null:
+			_follow_pending = false
+			_follow_reload()
+		return
+	_plan_mtime = mt
+	_follow_pending = true
+	_follow_seen_ms = Time.get_ticks_msec()
+	print("[em-follow] the plan changed on disk — the museum will rebuild around the eye in a moment (F6 = now)")
+
+
+## Rebuild around the eye: the current chapter becomes the cursor, the eye's
+## place in its SEGMENT is remembered (segment-local, so it survives the
+## chapter dealing into segment 0), and the scene reloads. _follow_resume
+## finishes the journey on the other side.
+func _follow_reload() -> void:
+	if get_tree().current_scene == null:
+		return   # a probe added the museum by hand; reloading would tear its harness
+	var ch := ""
+	var z_local: float = 0.0
+	var eye_z: float = _eye_pos().z
+	for sv in _segments:
+		var sd: Dictionary = sv
+		if eye_z >= float(sd["z0"]) and eye_z < float(sd["z1"]):
+			var sn: Node3D = _node_or_null(sd.get("node"))
+			if sn != null and sn.has_meta("em_chapter"):
+				ch = String(sn.get_meta("em_chapter"))
+			z_local = eye_z - float(sd["z0"])
+			break
+	var f := FileAccess.open(EM_CONTROL, FileAccess.WRITE)
+	if f == null:
+		return
+	var doc := {
+		"_readme": "the menu's / the jump's / the follow's voice: which chapter the museum opens at",
+		"first_chapter": ch,
+		"first_map": "",
+	}
+	if _player != null:
+		doc["resume_eye"] = [_player.position.x, _player.position.y, z_local]
+		doc["resume_yaw"] = _yaw   # the walker's heading is the _yaw var, not the body
+	f.store_string(JSON.stringify(doc, " "))
+	f.close()
+	print("[em-follow] the plan changed under the museum — rebuilding around the eye (chapter %s, z %.1f local)" % [ch, z_local])
+	get_tree().reload_current_scene()
+
+
+## The other side of the follow: stand the visitor at the nearest walkable
+## cell to where they stood, then CONSUME the resume so a fresh launch opens
+## at the door as always.
+func _follow_resume() -> void:
+	if _player == null or not FileAccess.file_exists(EM_CONTROL):
+		return
+	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(EM_CONTROL))
+	if not (parsed is Dictionary) or not (parsed as Dictionary).has("resume_eye"):
+		return
+	var pd: Dictionary = parsed
+	var re_v: Variant = pd.get("resume_eye")
+	if re_v is Array and (re_v as Array).size() >= 3:
+		var want := Vector3(float(re_v[0]), float(re_v[1]), float(re_v[2]))
+		var best := Vector2i(-2147483648, 0)
+		var bd: float = 1e18
+		for k in _walk_cells:
+			var c: Vector2i = k
+			var d2: float = Vector2(float(c.x) + 0.5 - want.x, float(c.y) + 0.5 - want.z).length_squared()
+			if d2 < bd:
+				bd = d2
+				best = c
+		if best.x != -2147483648:
+			_player.position = Vector3(float(best.x) + 0.5, maxf(want.y, 0.05) + 0.1, float(best.y) + 0.5)
+			_yaw = float(pd.get("resume_yaw", _yaw))
+			_player.rotation.y = _yaw
+			_last_ground = _player.position
+			print("[em-follow] the walk resumes at (%.1f, %.1f)" % [_player.position.x, _player.position.z])
+	pd.erase("resume_eye")
+	pd.erase("resume_yaw")
+	var f := FileAccess.open(EM_CONTROL, FileAccess.WRITE)
+	if f != null:
+		f.store_string(JSON.stringify(pd, " "))
+		f.close()
+
+
 ## Fell past every floor: stand again where the ground last was. Counted, and
 ## said once, because a museum that catches its visitor often has a hole in it.
 func _catch_if_fallen() -> void:
@@ -6959,6 +7097,10 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventKey and (event as InputEventKey).pressed and not (event as InputEventKey).echo \
 			and (event as InputEventKey).keycode == KEY_F7 and not _studio and _shot_path == "":
 		_env_swap()
+		return
+	if event is InputEventKey and (event as InputEventKey).pressed and not (event as InputEventKey).echo \
+			and (event as InputEventKey).keycode == KEY_F6 and not _vr and not _studio and _shot_path == "":
+		_follow_reload()
 		return
 	if _jump_ui != null and event is InputEventKey and (event as InputEventKey).pressed \
 			and (event as InputEventKey).keycode == KEY_ESCAPE:
