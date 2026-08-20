@@ -2237,8 +2237,16 @@ func _stamp_gaps(seg: Node3D, tile: Array, zbase: int) -> void:
 			continue
 		var node: Node3D = (load(String(CROSSING_SCENES[kind])) as PackedScene).instantiate() as Node3D
 		node.name = "Crossing_%s_%d_%d" % [kind, x0, z0]
-		seg.add_child(node)
-		# the near edge of the hollow, on its centre line
+		# POSE AND PARAMETERS BEFORE add_child, ALWAYS. transport_cube._ready caches
+		# `initial_position = global_position` and `target_position = initial_position +
+		# move_direction * move_distance` (transport_cube.gd:44-51), and _ready fires the
+		# moment the node enters the tree — so the first shipped crossing (tc:4:z:auto)
+		# was set to travel along z AFTER its cube had already computed a target 4 m along
+		# its default +x, from the segment origin. It moved the wrong way, out of the
+		# hollow, and nothing complained: the exported values read back exactly as asked.
+		# bridge_path._generate_bridge and jump_pad._setup_launch_area do the same.
+		# This is the grid's own hard-won rule (GridUtilitiesComponent applies parameters
+		# to the instance before adding it), and the museum has to keep it too.
 		var cx: float = x0 + w * 0.5
 		var cz: float = z0 + VESTIBULE_H
 		match kind:
@@ -2249,7 +2257,10 @@ func _stamp_gaps(seg: Node3D, tile: Array, zbase: int) -> void:
 				node.position = Vector3(cx, 0.0, cz - 0.5)
 				node.set("move_distance", dist)
 				node.set("move_direction", Vector3(1, 0, 0) if axis == "x" else Vector3(0, 0, 1))
-				node.set("auto_start", parts.size() > 3 and parts[3] == "auto")
+				# a crossing nobody can trigger is a crossing that is not there: the desktop
+				# walker is layer 1 and in no group, while the cube waits on layer 20, so
+				# only `auto` moves for both modes. Default to auto until the walker is gated.
+				node.set("auto_start", true if parts.size() <= 3 else parts[3] == "auto")
 			"br":
 				var axis2: String = parts[1] if parts.size() > 1 else "z"
 				node.position = Vector3(cx, 0.0, cz)
@@ -2260,6 +2271,7 @@ func _stamp_gaps(seg: Node3D, tile: Array, zbase: int) -> void:
 				if parts.size() > 2:
 					node.set("target_x", int(parts[1]))
 					node.set("target_z", int(parts[2]) + VESTIBULE_H)
+		seg.add_child(node)
 		# the crossing IS the route: its cells are walkable so the walk map, the
 		# autopilot and the reading all know the hall continues over the hollow
 		for gx in range(x0, x0 + w):

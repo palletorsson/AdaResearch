@@ -1,5 +1,6 @@
 extends SceneTree
-## PROBE: the pearl's hollow space and its crossing
+## PROBE: the pearl's hollow space and its crossing — including where the cube is
+## actually going (target_position is cached at _ready, so parameters must be set first)
 func _initialize() -> void: call_deferred("_run")
 func _run() -> void:
 	var m: Node3D = (load("res://commons/scenes/endless_museum.tscn") as PackedScene).instantiate() as Node3D
@@ -12,12 +13,6 @@ func _run() -> void:
 	print("GAP crossings: %d" % cross.size())
 	for c in cross:
 		var n: Node3D = c
-		print("   %s at %s  move_distance=%s auto=%s" % [n.name, n.global_position, str(n.get("move_distance")), str(n.get("auto_start"))])
-	# is the floor really gone? count collision boxes under the gap rect
-	var walk: Dictionary = m.get("_walk_cells")
-	var inside := 0
-	for k in walk.keys():
-		var v: Vector2i = k
-		if v.x >= 3 and v.x < 9: inside += 1
-	print("GAP walk cells across the gap x-range: %d" % inside)
+		print("   %s at %s -> target %s (dir %s dist %s auto %s)" % [n.name, n.global_position,
+			str(n.get("target_position")), str(n.get("move_direction")), str(n.get("move_distance")), str(n.get("auto_start"))])
 	quit(0)
