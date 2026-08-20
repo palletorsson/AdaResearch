@@ -28,7 +28,16 @@ cannot see (a collider the cell map does not know about). A cut is proof.
   python tools/check_walk_severance.py
   python tools/check_walk_severance.py --built=ada_run/em_built.json --json
 
-Exit code is the number of cuts, so it gates.
+Exit code is the number of cuts, so it gates. It also prints a LAST line in the
+gate runner's vocabulary — `WALK SEVERANCE: PASS|FAIL|SKIP — …` — because
+run_em_gates.py reads a verdict line, not a status. Between 08-19 and 08-20 this
+file was correct, exited 4, and was never run: its only mention in the whole
+repo was this docstring, and the fault it detects went from one cut to four
+unwatched. A detector nothing calls is not a gate.
+
+SKIP is not PASS. No built file, or a built file with no cells, means nothing
+was measured, and the verdict says so rather than returning a quiet zero — a
+null that reads as green is the instrument lying about the museum.
 """
 
 from __future__ import annotations
@@ -134,6 +143,27 @@ def find_cuts(world: dict[tuple[int, int], bool], segs: list[dict]) -> list[dict
     return cuts
 
 
+def first_sealed_row(world: dict[tuple[int, int], bool], reached: int, max_z: int) -> int:
+    """The first row past the frontier with NO walkable cell at all.
+
+    find_cuts is defined on ADJACENT PAIRS, and a row with nothing open in it
+    shares no column with either neighbour — so the pair rule would fire twice on
+    every stretch of empty padding. It skips empty rows for that reason, which
+    leaves the most complete severance there is invisible: a row sealed end to end
+    by bodies ('b'/'p'/'s') is a wall, and the pair rule says nothing about it.
+
+    It is safe to call such a row a cut here and only here, because this runs only
+    when the flood stopped with walkable territory still ahead of it. Padding at
+    the ends of the world is never in that position — max_z is taken from walkable
+    cells, so trailing empties sit beyond it and the flood is already WHOLE.
+    """
+    for z in range(reached + 1, max_z + 1):
+        row = [ok for (_x, zz), ok in world.items() if zz == z]
+        if row and not any(row):
+            return z
+    return -1
+
+
 def flood(world: dict[tuple[int, int], bool]) -> tuple[int, int, tuple[int, int] | None]:
     """4-connected flood from the shallowest walkable cell. Returns (reached_z,
     max_z, start)."""
@@ -169,11 +199,13 @@ def main() -> int:
         built = REPO / built
     if not built.exists():
         print(f"no built file at {built} — run the autopilot or a bake first")
+        print(f"WALK SEVERANCE: SKIP — nothing measured, no built file at {built}")
         return 0
 
     segs = load_segments(built)
     if not segs:
         print("built file carries no segments with cells")
+        print("WALK SEVERANCE: SKIP — nothing measured, built file carries no cells")
         return 0
 
     world = build_world(segs)
@@ -203,10 +235,26 @@ def main() -> int:
               f"  {s['museum']}")
     print(f"flood: from {start} reaches z={reached} of {max_z}"
           f"  ({'WHOLE' if reached >= max_z else f'{max_z - reached} rows short'})")
+    short = max_z - reached
     if not cuts:
         print("cuts: none — every adjacent z row pair shares a walkable column")
         print("      (a short flood with no cut means the walk dies of something")
         print("       the cell map cannot see — look at colliders, not this file)")
+        # A whole flood and no cuts is the only PASS. A SHORT flood with no cut is
+        # not a pass and not this file's verdict to give: the cell map is intact,
+        # so whatever stops the walker is a collider, and saying PASS here would
+        # hand a green row to a museum a body cannot cross.
+        if short > 0:
+            sealed = first_sealed_row(world, reached, max_z)
+            if sealed >= 0:
+                print(f"WALK SEVERANCE: FAIL — flood reaches z={reached} of {max_z}"
+                      f" ({short} rows short); row z={sealed} is sealed end to end"
+                      " (no walkable cell in it) — a wall of bodies, not a join")
+                return 1
+            print(f"WALK SEVERANCE: SKIP — cell map intact but flood stops at z={reached}"
+                  f" of {max_z} ({short} rows short); the obstruction is not in this file")
+        else:
+            print(f"WALK SEVERANCE: PASS — flood reaches z={reached} of {max_z}, 0 cuts")
         return 0
 
     print(f"cuts: {len(cuts)}")
@@ -227,6 +275,16 @@ def main() -> int:
             )
             mark = "<<" if z in (c["z"], c["z_next"]) else "  "
             print(f"    z={z:<5}{row} {mark}")
+    # The verdict names the FIRST cut, because that is the one the walker meets;
+    # the rest are behind a wall it never reaches. A coordinate alone is what five
+    # breaths of gate F handed over and each one guessed the mechanism wrong, so
+    # the columns on both sides ride along — they are the mechanism.
+    c0 = cuts[0]
+    print(f"\nWALK SEVERANCE: FAIL — flood reaches z={reached} of {max_z}"
+          f" ({short} rows short), {len(cuts)} cut(s); first at"
+          f" z={c0['z']}->{c0['z_next']} in {c0['segment_z']}"
+          f" ({'SEAM' if c0['at_seam'] else 'inside one museum'}),"
+          f" open {c0['open_at_z']} vs {c0['open_at_z_next']}")
     return len(cuts)
 
 

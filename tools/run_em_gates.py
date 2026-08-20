@@ -69,6 +69,13 @@ GATES: dict[str, tuple[str, str, str, int]] = {
     # bare step of the same height does not — the negative half is the argument.
     "wedge":         ("gd", "res://commons/testing/test_em_wedge.gd", r"EM WEDGE: (PASS|FAIL)", 400),
     "plain_hands":   ("gd", "res://commons/testing/test_em_plain_hands.gd", r"EM PLAIN HANDS: (PASS|FAIL)", 400),
+    # THE WALK IS CUT OR IT IS NOT (2026-08-20): the only gate here that answers
+    # "can a body cross this museum" without booting Godot — it reads the roles
+    # the builder already wrote into em_built.json. Gate F answers the same
+    # question by walking it, costs 30-50 s, needs the user:// lock, and returns a
+    # coordinate with no mechanism. This one is a second, runs on a contended
+    # tree, and names the columns on both sides of the join that failed.
+    "severance":     ("py", "tools/check_walk_severance.py", r"WALK SEVERANCE: (PASS|FAIL|SKIP)", 60),
     "bake_fresh":    ("py", "tools/em_bake.py --check", r"EM BAKE: .*(fresh|STALE|MISSING)", 30),
     "reading":       ("py", "tools/em_reading.py primitives/point", r"READS|out of order", 60),
     "shipped":       ("gd", "res://commons/testing/test_em_shipped.gd", r"EM SHIPPED: (PASS|FAIL)", 300),
