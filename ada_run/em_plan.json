@@ -330906,17 +330906,14 @@
             7,
             4
           ],
-          "rotation": 0,
+          "rotation": 180,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.0,
           "hand": true,
           "ruled": {
-            "by": "book: locked",
-            "cell": [
-              7,
-              4
-            ]
+            "at": "2026-08-20T13:27:46",
+            "by": "walk"
           },
           "slot": "hand",
           "wall": null,
@@ -330935,7 +330932,13 @@
               4
             ],
             "pearl": "point"
-          }
+          },
+          "offset": [
+            0.0,
+            0.0,
+            2.0
+          ],
+          "scale": 0.95
         },
         {
           "token": "interactive_point_origin",
@@ -330953,11 +330956,8 @@
           "support_height_m": 0.95,
           "hand": true,
           "ruled": {
-            "by": "book: locked",
-            "cell": [
-              7,
-              6
-            ]
+            "at": "2026-08-20T13:27:46",
+            "by": "walk"
           },
           "slot": "hand",
           "wall": null,
@@ -330977,17 +330977,22 @@
               6
             ],
             "pearl": "point"
-          }
+          },
+          "offset": [
+            0.0,
+            0.2,
+            0.0
+          ]
         },
         {
           "token": "CoordinateSystem3M",
           "cell": [
-            17,
-            17
+            16,
+            19
           ],
           "tile_cell": [
-            3,
-            3
+            2,
+            5
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -330995,11 +331000,8 @@
           "support_height_m": 0.0,
           "hand": true,
           "ruled": {
-            "by": "book: locked",
-            "cell": [
-              3,
-              3
-            ]
+            "at": "2026-08-20T13:27:46",
+            "by": "walk"
           },
           "config": {
             "floating_point": 1
@@ -331024,7 +331026,13 @@
               "floating_point": 1
             },
             "pearl": "point"
-          }
+          },
+          "scale": 0.95,
+          "offset": [
+            0.0,
+            0.2,
+            0.0
+          ]
         },
         {
           "token": "fontana_puncture",
@@ -331036,17 +331044,14 @@
             7,
             8
           ],
-          "rotation": 0,
+          "rotation": 165,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.95,
           "hand": true,
           "ruled": {
-            "by": "book: locked",
-            "cell": [
-              7,
-              8
-            ]
+            "at": "2026-08-20T13:27:46",
+            "by": "walk"
           },
           "slot": "hand",
           "wall": null,
@@ -331065,7 +331070,13 @@
               8
             ],
             "pearl": "point"
-          }
+          },
+          "offset": [
+            0.0,
+            0.4,
+            0.0
+          ],
+          "scale": 1.2
         },
         {
           "token": "floating_sphere_field",
@@ -331260,7 +331271,7 @@
             2,
             21
           ],
-          "rotation": 90,
+          "rotation": 135,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.0,
@@ -331271,6 +331282,16 @@
             "walk_why": "a line of the lines page",
             "walk_space": "wall",
             "pearl": "point"
+          },
+          "offset": [
+            0.0,
+            0.2,
+            0.0
+          ],
+          "hand": true,
+          "ruled": {
+            "at": "2026-08-20T13:27:46",
+            "by": "walk"
           }
         },
         {
@@ -331709,9 +331730,14 @@
           },
           "hand": true,
           "ruled": {
-            "at": "2026-08-20T12:29:01",
-            "by": "halls"
-          }
+            "at": "2026-08-20T13:27:46",
+            "by": "walk"
+          },
+          "offset": [
+            1.0,
+            0.0,
+            -4.0
+          ]
         },
         {
           "token": "plus_line_puzzle",
@@ -331833,30 +331859,40 @@
           "token": "frame_counter_display",
           "cell": [
             15,
-            29
+            28
           ],
           "tile_cell": [
             1,
-            15
+            14
           ],
-          "rotation": 270,
+          "rotation": 75,
           "mode": "against_wall",
           "venue": "interior",
           "support_height_m": 0.0,
           "fill": true,
           "slot": "sainsbury-false-perspective-enfilade/1,14",
           "wall": "west",
-          "relational_kind": "spine_artifact"
+          "relational_kind": "spine_artifact",
+          "hand": true,
+          "ruled": {
+            "at": "2026-08-20T13:27:46",
+            "by": "walk"
+          },
+          "offset": [
+            0.0,
+            0.2,
+            0.0
+          ]
         },
         {
           "token": "snap_octahedron_puzzle",
           "cell": [
             26,
-            23
+            39
           ],
           "tile_cell": [
             12,
-            9
+            25
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -331865,17 +331901,22 @@
           "fill": true,
           "slot": "sainsbury-false-perspective-enfilade/12,15",
           "wall": null,
-          "relational_kind": "spine_artifact"
+          "relational_kind": "spine_artifact",
+          "hand": true,
+          "ruled": {
+            "at": "2026-08-20T13:15:54",
+            "by": "halls"
+          }
         },
         {
           "token": "capsule_radials_rings",
           "cell": [
-            22,
-            29
+            24,
+            39
           ],
           "tile_cell": [
-            8,
-            15
+            10,
+            25
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -331884,7 +331925,12 @@
           "fill": true,
           "slot": "sainsbury-false-perspective-enfilade/12,15",
           "wall": null,
-          "relational_kind": "spine_artifact"
+          "relational_kind": "spine_artifact",
+          "hand": true,
+          "ruled": {
+            "at": "2026-08-20T13:23:11",
+            "by": "halls"
+          }
         },
         {
           "token": "prism_block",
@@ -331903,7 +331949,13 @@
           "fill": true,
           "slot": "sainsbury-false-perspective-enfilade/9,15",
           "wall": null,
-          "relational_kind": "spine_artifact"
+          "relational_kind": "spine_artifact",
+          "hand": true,
+          "ruled": {
+            "at": "2026-08-20T13:27:46",
+            "by": "walk"
+          },
+          "scale": 0.8
         },
         {
           "token": "static_point",
@@ -335778,6 +335830,16 @@
             "kind": "named",
             "rule": "sightline \u2014 the relative stands where the lead can be seen with it",
             "why": "an @identity relationships field names it"
+          },
+          "offset": [
+            0.0,
+            0.0,
+            2.0
+          ],
+          "hand": true,
+          "ruled": {
+            "at": "2026-08-20T13:27:48",
+            "by": "walk"
           }
         },
         {
@@ -345618,12 +345680,12 @@
         {
           "token": "origin",
           "cell": [
-            26,
-            24
+            16,
+            13
           ],
           "tile_cell": [
-            12,
-            10
+            2,
+            -1
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -345639,6 +345701,16 @@
             "kind": "named",
             "rule": "sightline \u2014 the relative stands where the lead can be seen with it",
             "why": "an @identity relationships field names it"
+          },
+          "offset": [
+            2.0,
+            0.0,
+            -1.0
+          ],
+          "hand": true,
+          "ruled": {
+            "at": "2026-08-20T13:27:47",
+            "by": "walk"
           }
         },
         {
