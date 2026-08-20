@@ -9321,7 +9321,7 @@
   {
    "anchor": "forces",
    "kind": "synthesizes",
-   "pearl": "force preview",
+   "pearl": "vfm 02 operations",
    "provenance": "derived",
    "space": "alcove",
    "space_by": "heuristic",
@@ -16991,7 +16991,7 @@
   }
  ],
  "counts": {
-  "branches_on_pearls": 1425,
+  "branches_on_pearls": 1418,
   "by_kind": {
    "contradicts": 0,
    "edge": 149,
@@ -17260,6 +17260,13 @@
     "poses": {
      "do_not_cross_barrier": {
       "rotation": 90
+     },
+     "laser_measure": {
+      "offset": [
+       0.0,
+       1.0,
+       0.0
+      ]
      }
     },
     "footprints": {
@@ -21787,7 +21794,8 @@
       "cube_scene",
       "dark_sphere",
       "plus_line_puzzle",
-      "modulor_man_demo"
+      "modulor_man_demo",
+      "synthesis_stand"
      ],
      "blurb": "A line connects two points.",
      "rooms": 6,
@@ -21839,6 +21847,13 @@
      "poses": {
       "do_not_cross_barrier": {
        "rotation": 90
+      },
+      "laser_measure": {
+       "offset": [
+        0.0,
+        1.0,
+        0.0
+       ]
       }
      },
      "configs": {
@@ -21946,9 +21961,11 @@
      "hero": "player_trace",
      "hero_by": "hand",
      "tokens": [
-      "room_grammar",
       "player_trace",
-      "grid_lines"
+      "grid_lines",
+      "ConeTwistBag",
+      "ConnectedTriangles",
+      "room_grammar"
      ],
      "blurb": "The grid quantizes.",
      "says": {
@@ -21972,7 +21989,6 @@
      "hero": "catalyst_pedestal",
      "hero_by": "hand",
      "tokens": [
-      "catalyst_pedestal",
       "parasol_triangle",
       "triangle_line_puzzle",
       "catalyst_vent",
@@ -21983,7 +21999,8 @@
       "pythagorean_triangle_angles",
       "quad",
       "interactivetriangle",
-      "quad_line_puzzle"
+      "quad_line_puzzle",
+      "catalyst_prompter_box"
      ],
      "blurb": "Three points close a boundary, and now: rigidity.",
      "ramps": [
@@ -22223,8 +22240,8 @@
      "hero": "achilles_tortoise",
      "hero_by": "hand",
      "tokens": [
-      "achilles_tortoise",
-      "combine_portals"
+      "combine_portals",
+      "achilles_tortoise"
      ],
      "blurb": "A toroidal portal sequence guided by increasing rings approaching π, staging continuity as asymptotic relation rather than arrival.",
      "says": {
@@ -22297,12 +22314,12 @@
      "hero": "transform_composition",
      "hero_by": "hand",
      "tokens": [
-      "homogeneous_coordinates",
       "invariants_demo",
-      "rotation_gimbal",
       "matrix_4x4_viewer",
-      "transform_composition",
-      "balance_puzzle"
+      "homogeneous_coordinates",
+      "rotation_gimbal",
+      "balance_puzzle",
+      "transform_composition"
      ],
      "blurb": "Three cubes.",
      "simulations": [
@@ -22588,9 +22605,9 @@
      "hero": "ten_print_textile",
      "hero_by": "hand",
      "tokens": [
-      "ten_print_textile",
+      "pattern_tile_puzzle",
       "pattern_loom",
-      "pattern_tile_puzzle"
+      "ten_print_textile"
      ],
      "blurb": "The tile repeats.",
      "says": {
@@ -22611,8 +22628,8 @@
      "hero": "kaleidoscope",
      "hero_by": "hand",
      "tokens": [
-      "mill_persian_p4",
       "pattern_tile_mirror",
+      "mill_persian_p4",
       "kaleidoscope"
      ],
      "blurb": "Two new moves.",
@@ -22660,9 +22677,9 @@
      "hero": "pattern_maker_station",
      "hero_by": "hand",
      "tokens": [
+      "pattern_maker_station",
       "loom_bolt_memphis_p4g",
-      "pattern_artifact",
-      "pattern_maker_station"
+      "pattern_artifact"
      ],
      "blurb": "Closure.",
      "says": {
@@ -22740,11 +22757,11 @@
      "hero": "panel_bridge_loom",
      "hero_by": "hand",
      "tokens": [
-      "panel_bridge_loom",
-      "script_runner",
+      "grid_model",
       "pattern_studio_plate",
       "pattern_tile_plate",
-      "grid_model",
+      "panel_bridge_loom",
+      "script_runner",
       "pulsar_compact"
      ],
      "blurb": "Arrays hold data.",
@@ -22772,9 +22789,9 @@
      "hero": "tiling_demo",
      "hero_by": "hand",
      "tokens": [
+      "vr_tile_editor_mirror",
       "tiling_demo",
       "pattern_tunnel_machine",
-      "vr_tile_editor_mirror",
       "facade_grammar_demo"
      ],
      "blurb": "Every carpet is an algorithm.",
@@ -22815,9 +22832,9 @@
      "hero": "pulsar_visualizer",
      "hero_by": "hand",
      "tokens": [
-      "pulsar_visualizer",
-      "grid_2d_4x4",
       "row_3_x",
+      "grid_2d_4x4",
+      "pulsar_visualizer",
       "gridagent"
      ],
      "blurb": "One index finds a slot.",
@@ -22907,10 +22924,10 @@
      "hero": "pattern_machine_d",
      "hero_by": "hand",
      "tokens": [
-      "pattern_machine_d",
-      "pattern_machine_b",
+      "pattern_machine_c",
       "pattern_machine_a",
-      "pattern_machine_c"
+      "pattern_machine_b",
+      "pattern_machine_d"
      ],
      "blurb": "Four machines stand in a long hall, each one a different way of making a pattern.",
      "says": {
@@ -23016,11 +23033,13 @@
      "hero": "brick_wall_factory",
      "hero_by": "hand",
      "tokens": [
-      "colorballs",
-      "hand_model",
-      "brick_wall_factory",
       "nail_color_controller",
-      "hand_color_controller"
+      "hand_model",
+      "hand_color_controller",
+      "dark_side_prism",
+      "grab_stick_scanner",
+      "colorballs",
+      "brick_wall_factory"
      ],
      "blurb": "A salon for digital fingers.",
      "says": {
@@ -23085,11 +23104,11 @@
      "hero": "color_sets_overview",
      "hero_by": "hand",
      "tokens": [
-      "visual_color_mixing",
-      "grab_rainbow_stick",
-      "loom_drum_persian_p6",
       "pillarcolorcollection",
+      "loom_drum_persian_p6",
+      "visual_color_mixing",
       "color_sets_overview",
+      "grab_rainbow_stick",
       "SpectrumVisualizer"
      ],
      "blurb": "Pillars of color rise along the runway, each a collection point for chromatic data.",
@@ -23117,9 +23136,9 @@
      "hero": "pattern_mill",
      "hero_by": "hand",
      "tokens": [
+      "ball_painting_demo",
       "pattern_mill",
-      "albers_wall_gallery",
-      "ball_painting_demo"
+      "albers_wall_gallery"
      ],
      "blurb": "Paint meets physics.",
      "says": {
@@ -23185,6 +23204,7 @@
      "hero": "slope_tangent_demo",
      "hero_by": "hand",
      "tokens": [
+      "tangent_slope_workbench",
       "derivative_pair",
       "slope_tangent_demo"
      ],
@@ -23256,8 +23276,9 @@
      "hero": "riemann_pump",
      "hero_by": "hand",
      "tokens": [
-      "riemann_pump",
-      "riemann_pi"
+      "riemann_sum_workbench",
+      "riemann_pi",
+      "riemann_pump"
      ],
      "blurb": "The smooth area from the last map was a lie of convenience — or rather, a limit.",
      "says": {
@@ -23396,8 +23417,8 @@
      "hero": "vector_normalize_demo",
      "hero_by": "hand",
      "tokens": [
-      "vector_normalize_demo",
-      "VectorBasics"
+      "VectorBasics",
+      "vector_normalize_demo"
      ],
      "blurb": "A processional hall with four stations and one question: what is a vector, before it is any particular arrow?",
      "says": {
@@ -23414,16 +23435,17 @@
      "hero": "example_2_1_forces_vr",
      "hero_by": "hand",
      "tokens": [
+      "vector_subtraction_demo",
+      "vector_addition_xl",
+      "vector_sub",
+      "basis_vectors_rig",
+      "vector_magnitude_demo",
+      "vector_translation_demo",
+      "example_1_4_vector_multiplication_vr",
+      "2d_in_3d_vectors_vis",
+      "coordinate_system_switcher",
       "newtons_laws",
       "example_2_1_forces_vr",
-      "vector_translation_demo",
-      "coordinate_system_switcher",
-      "basis_vectors_rig",
-      "vector_addition_xl",
-      "vector_subtraction_demo",
-      "vector_magnitude_demo",
-      "vector_sub",
-      "example_1_4_vector_multiplication_vr",
       "graphics_monitor"
      ],
      "blurb": "The museum's front door: what a vector actually is.",
@@ -23453,13 +23475,13 @@
      "hero": "vector_dot_product_xl",
      "hero_by": "hand",
      "tokens": [
+      "VectorDotProduct",
+      "VectorCrossProduct",
+      "dot_product_projector",
       "vector_dot_product_xl",
       "vector_cross_product_xl",
-      "VectorCrossProduct",
-      "normal_force_demo",
-      "VectorDotProduct",
-      "dot_product_projector",
-      "vector_projection_demo"
+      "vector_projection_demo",
+      "normal_force_demo"
      ],
      "blurb": "Dot product, cross product, and projection — the three operations that make vectors useful beyond addition.",
      "says": {
@@ -23514,9 +23536,10 @@
      "hero_by": "hand",
      "tokens": [
       "VectorWorkbench",
-      "exercise_5_9_angle_between",
       "work_energy_demo",
-      "torque_demo"
+      "opening_pair",
+      "torque_demo",
+      "exercise_5_9_angle_between"
      ],
      "blurb": "Dot, cross, projection — the operations, walk-around scale.",
      "says": {
@@ -23540,11 +23563,11 @@
      "hero_by": "hand",
      "tokens": [
       "VectorFieldFlow",
-      "exercise_1_8_solution_attraction_magnitude_vr",
-      "exercise_1_3_solution_3_d_bouncing_ball_vr",
       "VectorTorque",
+      "exercise_1_3_solution_3_d_bouncing_ball_vr",
       "example_1_9_motion_101_velocity_and_random_acceleration_vr",
       "exercise_1_5_solution_accelerate_and_decelerate_vr",
+      "exercise_1_8_solution_attraction_magnitude_vr",
       "VectorThrowing"
      ],
      "blurb": "Torque, acceleration, steering, and throwing — four islands connected by bridges across the void.",
@@ -23574,8 +23597,8 @@
      "hero": "VectorMotion",
      "hero_by": "hand",
      "tokens": [
-      "VectorMotion",
-      "launch_arc"
+      "launch_arc",
+      "VectorMotion"
      ],
      "blurb": "Two rooms, two ways a vector stops holding still.",
      "says": {
@@ -23595,17 +23618,17 @@
      "hero_by": "hand",
      "tokens": [
       "bouncing_ball",
-      "example_3_3_pointing_in_the_direction_of_motion_vr",
-      "example_3_2_forces_with_arbitrary_angular_motion_vr",
-      "flocking_controls",
-      "VectorForces",
-      "ForceMagnitudeDemo",
-      "combined_forces_demo",
       "trajectory_artifact",
+      "ForceMagnitudeDemo",
+      "VectorForces",
       "example_2_5_fluid_resistance_vr",
+      "example_3_2_forces_with_arbitrary_angular_motion_vr",
+      "example_3_3_pointing_in_the_direction_of_motion_vr",
       "friction_ramp",
-      "collision_crasher",
-      "newton_cradle"
+      "newton_cradle",
+      "combined_forces_demo",
+      "flocking_controls",
+      "collision_crasher"
      ],
      "blurb": "Velocity, acceleration, and what forces do over time.",
      "says": {
@@ -23644,9 +23667,9 @@
      "hero": "drag_corridor",
      "hero_by": "hand",
      "tokens": [
-      "drag_corridor",
+      "centrifuge_ring",
       "orbit_walk",
-      "centrifuge_ring"
+      "drag_corridor"
      ],
      "blurb": "The forces, at the size of your body.",
      "says": {
@@ -23667,12 +23690,12 @@
      "hero": "bounce_well",
      "hero_by": "hand",
      "tokens": [
-      "bounce_well",
-      "momentum_cradle",
+      "pendulum_hall",
+      "spring_tower",
       "weather_vane",
       "lever_balance",
-      "pendulum_hall",
-      "spring_tower"
+      "momentum_cradle",
+      "bounce_well"
      ],
      "blurb": "The forces that return what they are given.",
      "says": {
@@ -23699,6 +23722,7 @@
      "hero": "force_field_visualizer",
      "hero_by": "hand",
      "tokens": [
+      "3t",
       "momentum_collision",
       "force_field_visualizer"
      ],
@@ -23719,7 +23743,8 @@
      "hero": "hl_turret_vectors",
      "hero_by": "hand",
      "tokens": [
-      "hl_turret_vectors"
+      "hl_turret_vectors",
+      "field_room"
      ],
      "blurb": "Vectors aim turrets."
     },
@@ -23792,8 +23817,8 @@
      "hero": "particle_systems",
      "hero_by": "hand",
      "tokens": [
-      "particle_systems",
       "vector_fields",
+      "particle_systems",
       "mass_spring_damper",
       "spring_system"
      ],
@@ -23823,7 +23848,6 @@
       "ChainSwing",
       "surreal_kinetic_sculpture",
       "vector_joint_playground",
-      "ConeTwistBag",
       "HingeCrank",
       "SliderPress",
       "spring_demo",
@@ -23895,10 +23919,10 @@
      "hero": "orbital_mechanics_demo",
      "hero_by": "hand",
      "tokens": [
-      "orbital_mechanics_demo",
       "orbit_pair",
-      "grid3d_force_directed",
-      "gravity_well"
+      "gravity_well",
+      "orbital_mechanics_demo",
+      "grid3d_force_directed"
      ],
      "blurb": "Attraction at every scale.",
      "says": {
@@ -23921,11 +23945,11 @@
      "hero": "collision_carts",
      "hero_by": "hand",
      "tokens": [
-      "collision_carts",
-      "vector_arena",
       "turret_targeting",
-      "sentry_turret",
-      "queer_cylinder_target"
+      "queer_cylinder_target",
+      "vector_arena",
+      "collision_carts",
+      "sentry_turret"
      ],
      "blurb": "Vectors you play against.",
      "says": {
@@ -24009,8 +24033,8 @@
      "hero": "gradient_descent_well",
      "hero_by": "hand",
      "tokens": [
-      "gradient_descent",
       "descent_marble_toy",
+      "gradient_descent",
       "gradient_descent_well"
      ],
      "blurb": "A marble in a bowl comes to rest at the bottom and nowhere else — not because anything placed it there, but because the bottom is where the energy stops droppin",
@@ -24032,9 +24056,9 @@
      "hero": "cable_builder",
      "hero_by": "hand",
      "tokens": [
+      "cable_builder",
       "catenoid",
-      "helicoid",
-      "cable_builder"
+      "helicoid"
      ],
      "blurb": "Two of the oldest solved minimizations in the world, side by side.",
      "says": {
@@ -24193,15 +24217,15 @@
      "hero": "WavePaintings",
      "hero_by": "hand",
      "tokens": [
-      "foucault_pendulum",
       "WavePaintings",
-      "draw_dot_time_domain",
+      "foucault_pendulum",
       "BigPipeSystem",
-      "lab_table",
-      "VRAudioMonitor",
       "PendulumWave",
+      "draw_dot_time_domain",
+      "lab_table",
       "seismograph",
-      "GlassRack"
+      "GlassRack",
+      "VRAudioMonitor"
      ],
      "blurb": "Gravity creates rhythm.",
      "says": {
@@ -24235,10 +24259,10 @@
      "hero": "sine_space_explanation",
      "hero_by": "hand",
      "tokens": [
-      "sine_space_explanation",
-      "sine_space",
       "sine_wall_corridor",
-      "sine_wall_explanation"
+      "sine_wall_explanation",
+      "sine_space_explanation",
+      "sine_space"
      ],
      "blurb": "The wave made spatial.",
      "says": {
@@ -24268,21 +24292,22 @@
      "hero": "timbre_sculptor",
      "hero_by": "hand",
      "tokens": [
-      "timbre_sculptor",
+      "AudioContr",
+      "RackSineBasic",
+      "DualBallFMController",
+      "Rack303Acid",
+      "rack_room",
       "RackMoogBass",
       "RackDX7Piano",
-      "DualBallFMController",
-      "chord_tension_spring",
+      "audio_catalog_tablet",
       "wave_interference_3d",
       "harmonic_distance_table",
-      "MelodyChaser3D",
-      "RackSineBasic",
-      "interactable_demo",
-      "AudioContr",
-      "Rack303Acid",
+      "chord_tension_spring",
+      "timbre_sculptor",
+      "MarioSoundController",
       "mario_test_sound_ui",
-      "audio_catalog_tablet",
-      "MarioSoundController"
+      "MelodyChaser3D",
+      "interactable_demo"
      ],
      "blurb": "Sound is oscillation made audible.",
      "says": {
@@ -24312,8 +24337,8 @@
      "hero_by": "hand",
      "tokens": [
       "ElphabaDress",
-      "vowel_sound_board",
-      "bernini_columns"
+      "bernini_columns",
+      "vowel_sound_board"
      ],
      "blurb": "Baroque columns twist like frozen waves.",
      "says": {
@@ -24345,10 +24370,10 @@
      "hero": "RackAmbientDrone",
      "hero_by": "hand",
      "tokens": [
+      "SystemsMusicTest",
       "RackAmbientDrone",
       "air_music_display_case",
-      "resonating_metallophone",
-      "SystemsMusicTest"
+      "resonating_metallophone"
      ],
      "blurb": "A laboratory where sound is spatial."
     },
@@ -24371,11 +24396,11 @@
      "hero": "wave_interference",
      "hero_by": "hand",
      "tokens": [
-      "wave_interference",
-      "beat_frequency_demo",
+      "sine_oscillation",
       "lissajous_curves",
       "TrigWalkingPath",
-      "sine_oscillation"
+      "wave_interference",
+      "beat_frequency_demo"
      ],
      "blurb": "Sine and cosine become architecture.",
      "says": {
@@ -24399,6 +24424,7 @@
       "electronicscales",
       "biomagneticresonator",
       "UnitCircleTrig",
+      "record_room",
       "coloredlines",
       "hallway_scene",
       "additive_wave_demo",
@@ -24569,10 +24595,10 @@
      "hero": "random_object_spawner",
      "hero_by": "hand",
      "tokens": [
-      "random_edge_profile",
-      "random_object_spawner",
+      "dice_throw",
       "coin_toss",
-      "dice_throw"
+      "random_object_spawner",
+      "random_edge_profile"
      ],
      "blurb": "An arena of randomized edges — cubes with profiles shaped by chance.",
      "says": {
@@ -24647,14 +24673,14 @@
      "hero": "distribution_comparator",
      "hero_by": "hand",
      "tokens": [
-      "gaussian_random",
       "GaussianBlurShader",
       "GaussianPaintSplatter",
-      "galton_board",
+      "GaussianBlurCircle",
       "random_bell_curve",
       "distribution_comparator",
+      "gaussian_random",
       "distribution_sampler",
-      "GaussianBlurCircle"
+      "galton_board"
      ],
      "blurb": "Not all random is equal.",
      "says": {
@@ -24685,10 +24711,10 @@
      "hero": "reaction_diffusion_intro",
      "hero_by": "hand",
      "tokens": [
-      "reaction_diffusion_intro",
+      "mushrooms",
       "bubbles_random",
       "bubble_particles",
-      "mushrooms",
+      "reaction_diffusion_intro",
       "random_number_book_page_collection"
      ],
      "blurb": "Fungi grow where conditions permit — random spore distribution meeting environmental constraint.",
@@ -24714,11 +24740,11 @@
      "hero": "env_one",
      "hero_by": "hand",
      "tokens": [
-      "env_one",
-      "random_transformations_geometric",
       "perlin_noise_bridge",
-      "sculpt_one",
-      "curl_noise_particles"
+      "env_one",
+      "curl_noise_particles",
+      "random_transformations_geometric",
+      "sculpt_one"
      ],
      "blurb": "Geometry meets entropy.",
      "says": {
@@ -24786,9 +24812,9 @@
      "hero": "random_space",
      "hero_by": "hand",
      "tokens": [
-      "random_space",
       "noise_mixer",
-      "worley_noise"
+      "worley_noise",
+      "random_space"
      ],
      "blurb": "The sequence finale — randomness fills space itself.",
      "says": {
@@ -24870,7 +24896,8 @@
      "tokens": [
       "randompoint",
       "randompoints",
-      "WhiteNoiseGallery"
+      "WhiteNoiseGallery",
+      "NoiseColors3D"
      ],
      "blurb": "White noise screams chaos — every frequency, every sample independent, pure static.",
      "says": {
@@ -25044,9 +25071,9 @@
      "hero": "grid_substrate_runner",
      "hero_by": "hand",
      "tokens": [
+      "persian_rug",
       "grid_substrate_runner",
-      "line_network_ca",
-      "persian_rug"
+      "line_network_ca"
      ],
      "blurb": "A grid of cells.",
      "says": {
@@ -25107,10 +25134,10 @@
      "hero": "ca_growth_network",
      "hero_by": "hand",
      "tokens": [
-      "ca_growth_network",
       "mold_network",
       "game_of_life_petri",
-      "hexagon_ca_vr"
+      "hexagon_ca_vr",
+      "ca_growth_network"
      ],
      "blurb": "Totalistic rules count neighbors without distinguishing direction.",
      "says": {
@@ -25280,15 +25307,15 @@
      "hero": "inverted_tree_cloud",
      "hero_by": "hand",
      "tokens": [
+      "living_paper",
+      "fractal_lsystem_tree",
+      "recursive_tree_2",
+      "small_subdivision_cube",
       "inverted_tree_cloud",
       "recursive_tree",
-      "fractal_scene",
-      "small_subdivision_cube",
-      "recursive_tree_2",
       "cube_desk",
-      "mobius_world",
-      "living_paper",
-      "fractal_lsystem_tree"
+      "fractal_scene",
+      "mobius_world"
      ],
      "blurb": "Trees grow without blueprints.",
      "says": {
@@ -25347,12 +25374,13 @@
      "hero": "box_counting_dimension",
      "hero_by": "hand",
      "tokens": [
-      "cube_bookshelf",
-      "box_counting_dimension",
-      "fractal_koch_curve",
-      "sierpinski_triangle",
       "cube_cabin",
-      "koch_curve_3d"
+      "fractal_koch_curve",
+      "recursion_observatory",
+      "koch_curve_3d",
+      "sierpinski_triangle",
+      "cube_bookshelf",
+      "box_counting_dimension"
      ],
      "blurb": "Replace every edge with a spike.",
      "says": {
@@ -25468,10 +25496,10 @@
      "hero": "fractal_clouds",
      "hero_by": "hand",
      "tokens": [
-      "fractal_clouds",
-      "strange_attractors",
+      "fractal_recursion_1",
       "koch_curve",
-      "fractal_recursion_1"
+      "strange_attractors",
+      "fractal_clouds"
      ],
      "blurb": "All the fractal forms converge.",
      "says": {
@@ -25539,8 +25567,8 @@
      "hero": "lsystem_editor",
      "hero_by": "hand",
      "tokens": [
-      "grammar_provenance",
       "lsystem_editor",
+      "grammar_provenance",
       "lsystem_tree",
       "fractal_lsystem_string"
      ],
@@ -25663,8 +25691,8 @@
      "hero_by": "hand",
      "tokens": [
       "mamma_monster_gallery",
-      "incompleteness_scale",
-      "godel_statement_plaque"
+      "godel_statement_plaque",
+      "incompleteness_scale"
      ],
      "blurb": "The room where the whole thread ties.",
      "says": {
@@ -25755,8 +25783,8 @@
      "hero": "branching_growth_algorithm",
      "hero_by": "hand",
      "tokens": [
-      "organic_space",
-      "branching_growth_algorithm"
+      "branching_growth_algorithm",
+      "organic_space"
      ],
      "blurb": "Two strategies for filling space.",
      "says": {
@@ -25795,9 +25823,9 @@
      "hero": "layered_membrane",
      "hero_by": "hand",
      "tokens": [
-      "layered_membrane",
       "cube_mound_scene",
-      "dome"
+      "dome",
+      "layered_membrane"
      ],
      "blurb": "Geometry from accumulation.",
      "says": {
@@ -25852,8 +25880,8 @@
      "hero": "jelly_cube",
      "hero_by": "hand",
      "tokens": [
-      "softmill",
-      "jelly_cube"
+      "jelly_cube",
+      "softmill"
      ],
      "blurb": "A cube that won't hold its shape.",
      "says": {
@@ -25872,9 +25900,9 @@
      "hero": "revolving_joy_ride",
      "hero_by": "hand",
      "tokens": [
+      "grab_long_stick",
       "revolving_joy_ride",
       "cloth_straps",
-      "grab_long_stick",
       "soft_mushroom"
      ],
      "blurb": "Cloth hangs from a spinning carousel.",
@@ -26348,6 +26376,7 @@
      "hero": "csg_compose_workbench",
      "hero_by": "hand",
      "tokens": [
+      "subtraction_suite",
       "csg_compose_workbench"
      ],
      "blurb": "AND, OR, NOT — stack them.",
@@ -26957,7 +26986,11 @@
      "hero": "godel_sentence_machine",
      "hero_by": "hand",
      "tokens": [
+      "negative_control_fixture",
+      "critic_regress_stack",
       "godel_sentence_machine",
+      "rice_verifier_booth",
+      "fluency_seam",
       "provability_sorter",
       "incompleteness_tower"
      ],
@@ -27215,6 +27248,7 @@
       "rigid_sculpture",
       "fluid_form",
       "preserved_pattern",
+      "lambda_promenade",
       "transforming_pattern"
      ],
      "blurb": "*φ = sensitivity to the rate of change.*\n\nLambda tells you where you are on the spectrum.",
@@ -27265,6 +27299,7 @@
      "hero_by": "hand",
      "tokens": [
       "queer_morphology_specimen",
+      "grasp_cabinet",
       "grab_sphere_phi"
      ],
      "blurb": "*You understand it now.*\n\nNot just intellectually — you've felt it, controlled it, lived it.",
