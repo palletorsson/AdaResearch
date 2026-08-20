@@ -612,6 +612,10 @@ var _headless: bool = false        # every gate, bake and capture runs headless 
                                    # mid-drain is diffing a cursor, not a building (the suite
                                    # went flaky the first hour this shipped without the guard)
 var _force_patient := false        # probes set this to measure the deferred path headless
+var _env_we: Node = null           # the installed WorldEnvironment (the tier A/B swaps it live)
+var _env_tier: String = ""         # tier actually installed ("high"/"perf"; "" = v1 fallback)
+var _env_ab_s: float = 0.0         # em_layout env.ab_seconds — alternate tiers every N s
+var _env_ab_t: float = 0.0
 var _vis_records: Array = []       # [{node, p}] every stamped artifact, always
 var _vis_timer: float = 0.0
 var _vis_hidden: int = 0
@@ -946,8 +950,8 @@ func _load_modules() -> void:
 	BUILD_AHEAD_M = _L("stream", "build_ahead_m", BUILD_AHEAD_M)
 	KEEP_BEHIND_M = _L("stream", "keep_behind_m", KEEP_BEHIND_M)
 	MIN_SEGMENTS = int(_L("stream", "min_segments", float(MIN_SEGMENTS)))
-	ART_SHOW_M = _L("stream", "art_show_m", ART_SHOW_M)
-	ART_HIDE_M = _L("stream", "art_hide_m", ART_HIDE_M)
+	ART_SHOW_M = _L("stream", "cull_near_m", ART_SHOW_M)
+	ART_HIDE_M = _L("stream", "cull_far_m", ART_HIDE_M)
 	INSTANTIATE_AHEAD_M = _L("stream", "instantiate_ahead_m", INSTANTIATE_AHEAD_M)
 	STAMP_BUDGET_MS = _L("stream", "stamp_budget_ms", STAMP_BUDGET_MS)
 	GATE_REACH_M = _L("gate", "reach_m", GATE_REACH_M)
@@ -1966,8 +1970,24 @@ func _setup_environment() -> bool:
 		# artefact would be reported as a corridor failure.
 		if (_autopilot > 0 or _test_collision) and _mod_has(_mod_env, "set_tier"):
 			_mod_env.call("set_tier", "perf")
-		var we = _mod_env.call("install", self, _cam)
+		# THE TIER A/B (2026-08-20, Palle: "wire the VR perf tier so I can A/B
+		# it"). The headset has ALWAYS resolved to perf inside
+		# em_environment.tier() — the A/B runs the other way: em_layout
+		# env.vr_high=1 installs the HIGH tier in VR, and env.ab_seconds=N
+		# alternates the two live so both can be judged against the same wall.
+		# F7 swaps by hand on desktop. (On Quest's Mobile renderer SSIL, SSR,
+		# SDFGI and volumetric fog do not exist — there the A/B shows what the
+		# device actually supports: glow, fog model, ambient, sky, grade.)
+		var want_tier := ""
+		if _vr and _L("env", "vr_high", 0.0) > 0.5:
+			want_tier = "high"
+		_env_ab_s = _L("env", "ab_seconds", 0.0)
+		if want_tier != "" and _mod_has(_mod_env, "set_tier"):
+			_mod_env.call("set_tier", want_tier)
+		var we = _mod_env.call("install", self, _cam, want_tier)
 		if we != null:
+			_env_we = we
+			_env_tier = String(_mod_env.call("tier")) if _mod_has(_mod_env, "tier") else "high"
 			if _mod_has(_mod_env, "apply_render_quality"):
 				_mod_env.call("apply_render_quality")
 			return true
@@ -1982,6 +2002,29 @@ func _setup_environment() -> bool:
 	env.environment = e
 	add_child(env)
 	return false
+
+## Swap the whole environment tier LIVE — high <-> perf — for the A/B.
+## Everything install() added is taken down and rebuilt: the WorldEnvironment,
+## the vignette (high tier only), the camera attributes, and the
+## renderer-wide quality knobs. Nothing else in the museum is touched, so the
+## flip isolates exactly what the tier costs and looks like.
+func _env_swap() -> void:
+	if _mod_env == null or _env_tier == "" or not _mod_has(_mod_env, "install"):
+		return
+	var next_tier: String = "perf" if _env_tier == "high" else "high"
+	if _env_we != null and is_instance_valid(_env_we):
+		_env_we.queue_free()
+	var vg := get_node_or_null("EmVignette")
+	if vg != null:
+		vg.queue_free()
+	if _mod_has(_mod_env, "set_tier"):
+		_mod_env.call("set_tier", next_tier)
+	_env_we = _mod_env.call("install", self, _cam, next_tier)
+	if _mod_has(_mod_env, "apply_render_quality"):
+		_mod_env.call("apply_render_quality", next_tier)
+	_env_tier = next_tier
+	print("[em-env] A/B -> %s" % next_tier)
+
 
 ## The movement feel. Only for the interactive walk — the proof shot, the
 ## collision test and the autopilot all aim the body themselves and must not be
@@ -6565,6 +6608,12 @@ func _process(_delta: float) -> void:
 		print("[em-stream] freeing the room behind: z %.0f..%.0f (%d left in the tree)" % [
 			float(old["z0"]), float(old["z1"]), _segments.size()])
 		n.queue_free()
+	# the tier A/B clock: alternate high/perf every env.ab_seconds, live
+	if _env_ab_s > 0.0 and _env_tier != "" and _shot_path == "" and not _bake_mode and _autopilot == 0:
+		_env_ab_t += _delta
+		if _env_ab_t >= _env_ab_s:
+			_env_ab_t = 0.0
+			_env_swap()
 	_drain_stamps()
 	_vis_timer += _delta
 	if _vis_timer >= 0.3:
@@ -6878,6 +6927,10 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventKey and (event as InputEventKey).pressed and not (event as InputEventKey).echo \
 			and (event as InputEventKey).keycode == KEY_J and not _vr and not _studio and _autopilot == 0 and _shot_path == "":
 		_jump_toggle()
+		return
+	if event is InputEventKey and (event as InputEventKey).pressed and not (event as InputEventKey).echo \
+			and (event as InputEventKey).keycode == KEY_F7 and not _studio and _shot_path == "":
+		_env_swap()
 		return
 	if _jump_ui != null and event is InputEventKey and (event as InputEventKey).pressed \
 			and (event as InputEventKey).keycode == KEY_ESCAPE:
