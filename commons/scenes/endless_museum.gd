@@ -145,16 +145,33 @@ const EYE := 1.65
 const _DetailLib := preload("res://commons/scenes/em/em_detail.gd")
 const WALL_H: float = _DetailLib.WALL_H
 const WALK_SPEED := 4.0
-# JUMP + DOUBLE JUMP (2026-08-18, desktop walker). SPACE on the deck jumps;
-# SPACE once more in the air jumps again. Gravity is simulated only while
-# airborne — the deck stays flat by construction and the walker still lands
-# on y = 0 exactly, so nothing that reads the walker's height (streaming,
-# seals, captures) sees anything but 0 when it is standing.
+# JUMP + DOUBLE JUMP (2026-08-18) and GRAVITY, ALWAYS (2026-08-20).
+# The 08-18 note said "the deck stays flat by construction" and clamped y to 0
+# instead of simulating it. That was true of a museum of one flat deck; it was
+# false the day a pearl could ask for a STAGE (a raised walkable platform) or a
+# GAP (cells with no floor at all), and it had never been true of the seven
+# templates whose interiors carry floorless cells, nor of the sunken turbine
+# hall at -4.5 with its two real ramps. The clamp meant the desktop walked over
+# a hollow the VR rig fell into — the one fork the bake exists to prevent. Now
+# the walker falls, lands and climbs like the rig, and the physics world (every
+# floor, deck, stage, gallery, ramp and plinth goes into one StaticBody3D per
+# segment) IS the ground query. What catches a fall is _catch_if_fallen, which
+# returns the walker to the last cell that held it and reloads NOTHING.
 const JUMP_V := 4.2            # m/s up: ~0.9 m apex, over a plinth, not a wall
 const DOUBLE_JUMP_V := 3.6
 const JUMP_GRAVITY := 11.0     # snappier than 9.81 — a game walk, not a sim
 var _vy: float = 0.0
 var _jumps_left: int = 2       # 2 on the deck, 1 after the first, 0 after the second
+## THE CATCH (2026-08-20). A museum-local rescue, because the grid's answer to a
+## fall — `r` reset_cube — calls SceneManager and RELOADS THE SCENE, which in an
+## endless museum means every streamed segment, the pearl cursor and any
+## autopilot run in flight, restarting at segment 0: the endless walk severed by
+## its own rescue. This returns the walker to the last cell that held it and
+## reloads nothing. CATCH_Y sits below every real floor in the building — the
+## turbine hall stands at -4.5 and the balcony's catch slab at -4.1.
+const CATCH_Y := -6.0
+var _last_ground: Vector3 = Vector3(7.5, 0.0, 1.5)
+var _catches: int = 0
 # STREAMING (em_layout.json `stream`): how far ahead a segment opens, how far
 # behind one is freed, and the floor under that. Palle: "when we walk can we
 # unload the map we are leaving behind?" — the museum always has; these are
@@ -420,6 +437,9 @@ var _cur_stage_pearl: String = ""
 ## — the pearl's hollow space and the utility that carries a body over it. The
 ## museum lays no floor in those cells and instantiates the map's own scene.
 var _cur_gaps: Array = []
+## Cells a visitor crosses on something that moves (tc, jp): passable, but never
+## promised to the walk map. Reported in em_built.json so the hall can say so.
+var _ride_cells: Dictionary = {}
 const CROSSING_SCENES := {
 	"tc": "res://commons/scenes/mapobjects/transport_cube.tscn",
 	"br": "res://commons/scenes/mapobjects/bridge_path.tscn",
@@ -1819,7 +1839,15 @@ func _setup_world() -> void:
 	cap.radius = 0.32
 	cap.height = 1.5
 	col.shape = cap
-	col.position = Vector3(0, 0.95, 0)
+	# THE FEET ARE THE ORIGIN. This was Vector3(0, 0.95, 0): a 1.5 m capsule
+	# centred at 0.95 has its bottom at +0.20, so with y clamped to 0 the walker
+	# FLOATED 20 cm over a deck whose collider top is exactly y = 0 — and
+	# `is_on_floor()` had therefore never once been true in this scene (which is
+	# why em_feel's landing dip is documented as inert). Seating the shape at
+	# half its height puts the feet at the body origin, so gravity leaves every
+	# eye, capture and plinth number where it was instead of dropping all of
+	# them 20 cm.
+	col.position = Vector3(0, 0.75, 0)
 	_player.add_child(col)
 	add_child(_player)
 	_cam = Camera3D.new()
@@ -2272,11 +2300,21 @@ func _stamp_gaps(seg: Node3D, tile: Array, zbase: int) -> void:
 					node.set("target_x", int(parts[1]))
 					node.set("target_z", int(parts[2]) + VESTIBULE_H)
 		seg.add_child(node)
-		# the crossing IS the route: its cells are walkable so the walk map, the
-		# autopilot and the reading all know the hall continues over the hollow
+		# THE CROSSING IS THE ROUTE — but only a STATIC one is floor. A bridge is
+		# always there, so its cells are walk cells like any other. A transport
+		# cube or a jump pad is there only sometimes, and promising the walk map
+		# 24 cells of hollow would have the autopilot plan straight over the hole
+		# and then spend its whole 25-cell unlearn budget discovering that it is
+		# a hole. Those cells are a RIDE: the visitor may take them, the plan may
+		# not count on them.
+		var static_crossing: bool = kind == "br"
 		for gx in range(x0, x0 + w):
 			for gz in range(z0, z0 + d):
-				_walk_cells[Vector2i(gx, zbase + gz + VESTIBULE_H)] = true
+				var gc := Vector2i(gx, zbase + gz + VESTIBULE_H)
+				if static_crossing:
+					_walk_cells[gc] = true
+				else:
+					_ride_cells[gc] = kind
 		print("[em-gap] %s: %d x %d cells hollow, crossing %s at (%.1f, %.1f)" % [_cur_stage_pearl, w, d, spec, cx, cz])
 
 
@@ -2525,7 +2563,7 @@ func _build_segment() -> void:
 			_box(seg, Vector3(x + 0.5, -0.1, zr + 0.5), Vector3(1, 0.2, 1), Color(0.13, 0.13, 0.16), m_deck)
 			if x > 0 and x < LOBBY_W - 1 and not (zr == 0 and x >= pw - 1) and not (zr == VESTIBULE_H - 1 and x >= w - 1):
 				_walk_cells[Vector2i(x, zbase + zr)] = true
-	# floor/deck collider — ALWAYS (2026-08-18): one museum in both modes; the desktop walker clamps y and never meets it
+	# floor/deck collider — ALWAYS: one museum in both modes, and since 2026-08-20 the desktop walker MEETS it (gravity, is_on_floor), as the rig always did
 	# VR floor body. The desktop walker CLAMPS y and needs no deck
 	# collision, but the XR rig's PlayerBody simulates gravity — without
 	# a collider under the deck the headset falls through on frame one.
@@ -2586,7 +2624,7 @@ func _build_segment() -> void:
 			match c:
 				"1", "1s":
 					_box(seg, Vector3(x + 0.5, -0.1, z + 0.5), Vector3(1, 0.2, 1), Color(0.16, 0.16, 0.19), m_floor)
-					# floor/deck collider — ALWAYS (2026-08-18): one museum in both modes; the desktop walker clamps y and never meets it
+					# floor/deck collider — ALWAYS: one museum in both modes, and since 2026-08-20 the desktop walker MEETS it (gravity, is_on_floor), as the rig always did
 					_add_col(solid, Vector3(x + 0.5, -0.1, z + 0.5), Vector3(1, 0.2, 1))
 					_walk_cells[Vector2i(x, zbase + z)] = true
 				"2", "2s":
@@ -3142,7 +3180,7 @@ func _build_side_rooms(seg: Node3D, solid: StaticBody3D, w: int, tile_h: int,
 		_box(seg, Vector3(x0 + ROOM_W / 2.0, -0.1, z0 + ROOM_D / 2.0),
 			Vector3(ROOM_W, 0.2, ROOM_D), Color(0.17, 0.165, 0.18), m_deck)
 		_box(seg, Vector3(w + 0.5, -0.1, door_z + 0.5), Vector3(1, 0.2, 1), Color(0.17, 0.165, 0.18), m_deck)
-		# floor/deck collider — ALWAYS (2026-08-18): one museum in both modes; the desktop walker clamps y and never meets it
+		# floor/deck collider — ALWAYS: one museum in both modes, and since 2026-08-20 the desktop walker MEETS it (gravity, is_on_floor), as the rig always did
 		_add_col(solid, Vector3(x0 + ROOM_W / 2.0, -0.1, z0 + ROOM_D / 2.0), Vector3(ROOM_W, 0.2, ROOM_D))
 		_add_col(solid, Vector3(w + 0.5, -0.1, door_z + 0.5), Vector3(1, 0.2, 1))
 		_walk_cells[Vector2i(w, zbase + door_z)] = true
@@ -3585,7 +3623,7 @@ func _build_forecourt(seg: Node3D, solid: StaticBody3D, w: int, tile_h: int,
 		var z0: int = VESTIBULE_H + tile_h
 		_box(seg, Vector3(w / 2.0, -0.1, z0 + porch_d / 2.0),
 			Vector3(w, 0.2, porch_d), Color(0.15, 0.155, 0.15), m_deck)
-		# floor/deck collider — ALWAYS (2026-08-18): one museum in both modes; the desktop walker clamps y and never meets it
+		# floor/deck collider — ALWAYS: one museum in both modes, and since 2026-08-20 the desktop walker MEETS it (gravity, is_on_floor), as the rig always did
 		_add_col(solid, Vector3(w / 2.0, -0.1, z0 + porch_d / 2.0), Vector3(w, 0.2, porch_d))
 		for zz in range(z0, z0 + porch_d):
 			for x in range(1, w - 1):
@@ -3668,7 +3706,7 @@ func _build_hall(seg: Node3D, solid: StaticBody3D, w: int, zbase: int, zcur: int
 	_box(seg, Vector3(g / 2.0, -0.05, zcur + total_d / 2.0), Vector3(g, 0.3, total_d), Color(0.31, 0.29, 0.25), _sm("plinth"))
 	_box(seg, Vector3(g + cw / 2.0, -0.05, zcur + g / 2.0), Vector3(cw, 0.3, g), Color(0.31, 0.29, 0.25), _sm("plinth"))
 	_box(seg, Vector3(g + cw / 2.0, -0.05, zcur + g + cd + g / 2.0), Vector3(cw, 0.3, g), Color(0.31, 0.29, 0.25), _sm("plinth"))
-	# floor/deck collider — ALWAYS (2026-08-18): one museum in both modes; the desktop walker clamps y and never meets it
+	# floor/deck collider — ALWAYS: one museum in both modes, and since 2026-08-20 the desktop walker MEETS it (gravity, is_on_floor), as the rig always did
 	_add_col(solid, Vector3(g / 2.0, -0.05, zcur + total_d / 2.0), Vector3(g, 0.3, total_d))
 	_add_col(solid, Vector3(g + cw / 2.0, -0.05, zcur + g / 2.0), Vector3(cw, 0.3, g))
 	_add_col(solid, Vector3(g + cw / 2.0, -0.05, zcur + g + cd + g / 2.0), Vector3(cw, 0.3, g))
@@ -3754,7 +3792,7 @@ func _build_courtyard(seg: Node3D, solid: StaticBody3D, w: int, tile_h: int,
 				Color(0.31, 0.29, 0.25), m_bridge)
 			_box(seg, Vector3(BRIDGE_COURT_PATH_W + cw / 2.0, -0.1, zcur + cd / 2.0),
 				Vector3(cw, 0.2, cd), Color(0.145, 0.155, 0.145), m_deck)
-			# floor/deck collider — ALWAYS (2026-08-18): one museum in both modes; the desktop walker clamps y and never meets it
+			# floor/deck collider — ALWAYS: one museum in both modes, and since 2026-08-20 the desktop walker MEETS it (gravity, is_on_floor), as the rig always did
 			_add_col(solid,
 				Vector3(BRIDGE_COURT_PATH_W / 2.0, -0.05, zcur + cd / 2.0),
 				Vector3(BRIDGE_COURT_PATH_W, 0.30, cd))
@@ -3842,7 +3880,7 @@ func _build_courtyard(seg: Node3D, solid: StaticBody3D, w: int, tile_h: int,
 			var deck_w: int = 4
 			_box(seg, Vector3(deck_w / 2.0, -0.1, zcur + cd / 2.0),
 				Vector3(deck_w, 0.2, cd), Color(0.145, 0.155, 0.145), m_deck)
-			# floor/deck collider — ALWAYS (2026-08-18): one museum in both modes; the desktop walker clamps y and never meets it
+			# floor/deck collider — ALWAYS: one museum in both modes, and since 2026-08-20 the desktop walker MEETS it (gravity, is_on_floor), as the rig always did
 			_add_col(solid, Vector3(deck_w / 2.0, -0.1, zcur + cd / 2.0),
 				Vector3(deck_w, 0.2, cd))
 			for zz in range(zcur, zcur + cd):
@@ -3858,7 +3896,7 @@ func _build_courtyard(seg: Node3D, solid: StaticBody3D, w: int, tile_h: int,
 			# was a mesh with no collider until the staging pass met gravity.
 			_box(seg, Vector3((deck_w + w) / 2.0, -4.1, zcur + cd / 2.0),
 				Vector3(w - deck_w, 0.2, cd), Color(0.05, 0.05, 0.06), m_deck)
-			# floor/deck collider — ALWAYS (2026-08-18): one museum in both modes; the desktop walker clamps y and never meets it
+			# floor/deck collider — ALWAYS: one museum in both modes, and since 2026-08-20 the desktop walker MEETS it (gravity, is_on_floor), as the rig always did
 			_add_col(solid, Vector3((deck_w + w) / 2.0, -4.1, zcur + cd / 2.0),
 				Vector3(w - deck_w, 0.2, cd))
 			# outer parapets frame the joint on both edges, open sky above
@@ -3888,7 +3926,7 @@ func _build_courtyard(seg: Node3D, solid: StaticBody3D, w: int, tile_h: int,
 		# exterior tone; no ceiling is BUILT, which is the whole venue
 		_box(seg, Vector3(w / 2.0, -0.1, zcur + cd / 2.0),
 			Vector3(w, 0.2, cd), Color(0.145, 0.155, 0.145), m_deck)
-		# floor/deck collider — ALWAYS (2026-08-18): one museum in both modes; the desktop walker clamps y and never meets it
+		# floor/deck collider — ALWAYS: one museum in both modes, and since 2026-08-20 the desktop walker MEETS it (gravity, is_on_floor), as the rig always did
 		_add_col(solid, Vector3(w / 2.0, -0.1, zcur + cd / 2.0),
 			Vector3(w, 0.2, cd))
 		for zz in range(zcur, zcur + cd):
@@ -6096,25 +6134,44 @@ func _physics_process(_delta: float) -> void:
 		_player.velocity = dir.normalized() * speed
 	else:
 		_player.velocity = Vector3.ZERO
-	# jump: SPACE on the deck, and once more in the air (double jump)
+	# GROUND IS WHAT THE BODY IS STANDING ON, not y = 0. is_on_floor() is the
+	# answer the physics world already has: it reads the same colliders the VR
+	# rig meets, so a stage is a step in both modes and a gap is a fall in both.
+	var on_floor: bool = _player.is_on_floor()
+	if on_floor:
+		if _vy < 0.0:
+			_vy = 0.0
+		_jumps_left = 2
+	# jump: SPACE from the ground, and once more in the air (double jump)
 	if _jump_pressed and _jumps_left > 0:
 		_vy = JUMP_V if _jumps_left == 2 else DOUBLE_JUMP_V
 		_jumps_left -= 1
 	_jump_pressed = false
-	if _vy != 0.0 or _player.position.y > 0.0:
+	if not on_floor:
 		_vy -= JUMP_GRAVITY * _delta
-		_player.velocity.y = _vy
-	else:
-		_player.velocity.y = 0.0
+	_player.velocity.y = _vy
 	_player.move_and_slide()
-	# the deck is flat by construction — land on it exactly, never below it
-	if _player.position.y <= 0.0:
-		_player.position.y = 0.0
-		if _vy < 0.0:
-			_vy = 0.0
-			_jumps_left = 2
+	if _player.is_on_floor():
+		_last_ground = _player.position          # the last place that held us
+	_catch_if_fallen()
 
 var _jump_pressed: bool = false
+
+
+## Fell past every floor: stand again where the ground last was. Counted, and
+## said once, because a museum that catches its visitor often has a hole in it.
+func _catch_if_fallen() -> void:
+	if _player == null or _player.position.y > CATCH_Y:
+		return
+	_catches += 1
+	_player.position = _last_ground + Vector3(0.0, 0.05, 0.0)
+	_player.velocity = Vector3.ZERO
+	_vy = 0.0
+	_jumps_left = 2
+	if _catches <= 3 or _catches % 25 == 0:
+		print("[em-catch] fell past the floor at z %.1f — set down again at %s (catch %d)" % [
+			_player.position.z, str(_last_ground), _catches])
+
 
 func _input(event: InputEvent) -> void:
 	if _studio:
@@ -6798,8 +6855,14 @@ func _edit_rotate(deg: float) -> void:
 func _run_collision_test() -> void:
 	_test_frames += 1
 	_player.velocity = Vector3(-WALK_SPEED, 0.0, 0.0)
+	# gravity here too, so the probe measures the shipped body and not a
+	# frictionless one that cannot fall (the vestibule is flat, so it rests)
+	if not _player.is_on_floor():
+		_vy -= JUMP_GRAVITY * get_physics_process_delta_time()
+	else:
+		_vy = 0.0
+	_player.velocity.y = _vy
 	_player.move_and_slide()
-	_player.position.y = 0.0
 	if _test_frames < 120:
 		return
 	var x := _player.position.x
@@ -6893,8 +6956,20 @@ func _run_autopilot(delta: float) -> void:
 		_auto_path.pop_front()
 		return
 	_player.velocity = to.normalized() * WALK_SPEED
+	# THE GATE WALKS THE BODY THE PLAYER WALKS. This clamped y to 0 too, so the
+	# autopilot certified a museum a player falls out of — the gate blind to
+	# exactly the class of fault it exists to catch. It now falls, lands and is
+	# caught like the walker; a fall costs it progress, so the stall/unlearn loop
+	# routes around a hole instead of gliding over it.
+	if _player.is_on_floor():
+		if _vy < 0.0:
+			_vy = 0.0
+		_last_ground = _player.position
+	else:
+		_vy -= JUMP_GRAVITY * delta
+	_player.velocity.y = _vy
 	_player.move_and_slide()
-	_player.position.y = 0.0
+	_catch_if_fallen()
 
 ## BFS over the stamped cells from the walker's cell to the deepest-z cell the
 ## built world can reach; the path replans on every new segment and on stalls.

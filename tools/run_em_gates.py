@@ -61,6 +61,10 @@ GATES: dict[str, tuple[str, str, str, int]] = {
     "vr_eye":        ("gd", "res://commons/testing/test_em_vr_eye.gd", r"EM VR EYE: (PASS|FAIL)", 400),
     "mode_forks":    ("py", "tools/test_em_mode_forks.py", r"MODE FORKS: (PASS|FAIL)", 30),
     "built":         ("gd", "res://commons/testing/test_em_built.gd", r"EM BUILT: (PASS|FAIL)", 400),
+    # THE GROUND (2026-08-20): the deck holds, a stage is a step, a hollow BITES,
+    # and the catch sets you down without reloading the museum. The negative half
+    # is the point — with the old y-clamp the fall was impossible to observe.
+    "ground":        ("gd", "res://commons/testing/test_em_ground.gd", r"EM GROUND: (PASS|FAIL)", 400),
     "plain_hands":   ("gd", "res://commons/testing/test_em_plain_hands.gd", r"EM PLAIN HANDS: (PASS|FAIL)", 400),
     "bake_fresh":    ("py", "tools/em_bake.py --check", r"EM BAKE: .*(fresh|STALE|MISSING)", 30),
     "reading":       ("py", "tools/em_reading.py primitives/point", r"READS|out of order", 60),
