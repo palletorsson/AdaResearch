@@ -762,9 +762,21 @@ func _ready() -> void:
 	_boot_ms["engine_to_ready"] = _boot_t0   # since process start
 	# BootClock (first autoload) splits that number: engine+pak vs the parade
 	var bclock: Node = get_node_or_null("/root/BootClock")
+	var bclock_end: Node = get_node_or_null("/root/BootClockEnd")
 	if bclock != null:
 		_boot_ms["engine_pak"] = int(bclock.get("t_init_ms"))
-		_boot_ms["autoloads_scene"] = _boot_t0 - int(bclock.get("t_init_ms"))
+		if bclock_end != null:
+			# the three-way split Palle's manager test asked for: the parade
+			# vs the MAIN SCENE CHAIN (vr_staging and all it drags off the pak)
+			_boot_ms["autoloads"] = int(bclock_end.get("t_init_ms")) - int(bclock.get("t_init_ms"))
+			var t_stage: int = int(bclock_end.get("t_staging_ms"))
+			if t_stage > 0:
+				_boot_ms["staging_load"] = t_stage - int(bclock_end.get("t_init_ms"))
+				_boot_ms["staging_to_museum"] = _boot_t0 - t_stage
+			else:
+				_boot_ms["scene_chain"] = _boot_t0 - int(bclock_end.get("t_init_ms"))
+		else:
+			_boot_ms["autoloads_scene"] = _boot_t0 - int(bclock.get("t_init_ms"))
 	_parse_args()
 	_vr = _is_vr()
 	_load_modules()

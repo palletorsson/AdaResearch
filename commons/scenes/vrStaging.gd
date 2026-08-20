@@ -45,6 +45,11 @@ func _ready() -> void:
 	# Do not initialise if in the editor
 	if Engine.is_editor_hint():
 		return
+	# the boot clock's midpoint: staging loaded; what follows is XR init,
+	# the menu, and the museum scene itself
+	var bce: Node = get_node_or_null("/root/BootClockEnd")
+	if bce != null:
+		bce.set("t_staging_ms", Time.get_ticks_msec())
 
 	# Movement-only hands: strip gadgets from every LOADED scene's rig (the
 	# staging menu keeps its pointers — a menu you cannot click is a lockout,
