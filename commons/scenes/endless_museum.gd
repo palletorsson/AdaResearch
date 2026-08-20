@@ -271,7 +271,10 @@ const LAYOUT_PATH := "res://commons/data/em_layout.json"
 var _layout: Dictionary = {}
 var _mode_label: String = "desktop"   # what the as-built plan says it was built as
 var GATE_REACH_M := 1.2            # eye or controller this close to the glass = a hand
-var GATE_PATIENCE := 20.0          # seconds at a sealed door before it opens itself
+var GATE_PATIENCE := 6.0           # seconds at a sealed door before it opens itself —
+                                   # Palle served the full 20 on the Quest (bare hands put
+                                   # nothing in the scanner's groups); a beat of ritual,
+                                   # never a jail (em_layout gate.patience_s)
 var _gate_wait: float = 0.0
 var _vr_wait: float = 0.0
 var _diag_t: float = 0.0
@@ -1012,6 +1015,7 @@ func _load_modules() -> void:
 	INSTANTIATE_AHEAD_M = _L("stream", "instantiate_ahead_m", INSTANTIATE_AHEAD_M)
 	STAMP_BUDGET_MS = _L("stream", "stamp_budget_ms", STAMP_BUDGET_MS)
 	WAKE_S = _L("stream", "wake_s", WAKE_S)
+	GATE_PATIENCE = _L("gate", "patience_s", GATE_PATIENCE)
 	GATE_REACH_M = _L("gate", "reach_m", GATE_REACH_M)
 	GATE_PATIENCE = _L("gate", "patience_s", GATE_PATIENCE)
 	AUTOSAVE_S = _L("editor", "autosave_seconds", AUTOSAVE_S)

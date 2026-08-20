@@ -64,12 +64,29 @@ func _ready() -> void:
 		place_btn.pressed.connect(_on_place)
 		button_row.add_child(place_btn)
 
+	# THE CATALOG IS LAZY (2026-08-20). _load_data() reads all 231 registry
+	# files (2,799 artifacts) — measured in Palle's Quest log INSIDE the
+	# museum's load window, paid whether or not the wrist is ever raised.
+	# The data now loads the first time this panel is actually SEEN (or on
+	# first use via _ensure_data); boot pays nothing.
+	visibility_changed.connect(_ensure_data)
+	if visible and is_visible_in_tree():
+		_ensure_data()
+
+
+func _ensure_data() -> void:
+	if _data_loaded or not is_visible_in_tree():
+		return
+	_data_loaded = true
 	_load_data()
 	_build_badges()
 
 	if _current_list.size() > 0:
 		_update_ui()
 		artifact_changed.emit(str(_current_list[0].get("lookup_name", "")))
+
+var _data_loaded: bool = false
+
 
 func _load_data() -> void:
 	_all_artifacts = ArtifactCatalogDataProvider.get_all_artifacts()
