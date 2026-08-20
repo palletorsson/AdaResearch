@@ -194,7 +194,7 @@ def plan_museum(key: str, tokens: list[str],
                 rooms: int | None = None, reading: bool = False,
                 fixed: dict[str, tuple[int, int]] | None = None,
                 gaps: list | None = None, fillers: list | None = None,
-                saturate: str = "") -> dict[str, Any]:
+                saturate: str = "", cell_overrides: list | None = None) -> dict[str, Any]:
     """Negotiate `tokens` into museum `key`. Reports what did NOT fit, too.
     `rooms` crops the tile to that many rooms (tools/em_rooms.py); the cropped
     tile is written into the row so the runtime builds exactly this hall."""
@@ -202,6 +202,9 @@ def plan_museum(key: str, tokens: list[str],
     if gaps:
         from spatial_floorplan import _apply_gaps
         plan = _apply_gaps(plan, gaps, APRON)      # the hollow: no floor, no slot
+    if cell_overrides:
+        from spatial_floorplan import _apply_cell_overrides
+        plan = _apply_cell_overrides(plan, cell_overrides, APRON)   # the hand's masonry binds the negotiation
     # balconies-by-ask: a plan row whose walk_space is "balcony" asks the
     # negotiator for a hanging balcony body (see spatial_negotiation.run)
     venue_asks = {t: "balcony" for t, c in (placement_context or {}).items()

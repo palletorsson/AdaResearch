@@ -9,7 +9,7 @@
    "lines": [
     {
      "token": "folding_past",
-     "text": "You arrive late. No reboot.\nThe folding past keeps running.",
+     "text": "You arrive late. No reboot, always restart.\nThe folding past keeps running.",
      "by": "hand",
      "place": "foyer"
     },
@@ -17,7 +17,12 @@
      "token": "frame_counter_display",
      "text": "The internal clock is running,\nthe frame counter update cycle.",
      "by": "hand",
-     "place": "foyer"
+     "place": "foyer",
+     "lock": [
+      1,
+      14
+     ],
+     "rotation": 90
     },
     {
      "token": "origin",
@@ -145,7 +150,11 @@
      "reach": {
       "axis": "z",
       "length": 6
-     }
+     },
+     "lock": [
+      6,
+      20
+     ]
     },
     {
      "token": "laser_measure",

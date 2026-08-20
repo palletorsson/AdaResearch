@@ -110,6 +110,7 @@ def migrate(chapter: str) -> dict:
         if not page2_done:
             lines.insert(1 if lines and "token" not in lines[0] else 0, {"text": str(p["page2"]), "by": "hand"})
         bp = {"pearl": p.get("pearl", ""), "map": p.get("map", ""), "lines": lines}
+        if p.get("cells"): bp["cells"] = list(p["cells"])
         if p.get("simulations"): bp["simulations"] = list(p["simulations"])
         if p.get("utilities"): bp["utilities"] = list(p["utilities"])
         if p.get("ramps"): bp["ramps"] = list(p["ramps"])
@@ -249,6 +250,13 @@ def compile_book(chapter: str, reseed: bool = True) -> dict:
         # hall — viewed from the gallery ring, entered down the ramps. The museum
         # strips the map's EXITS (teleporters, spawns, movers) and hazards: inside
         # the museum a map is an installation, not a level.
+        # THE CELLS (2026-08-20, Palle: "move blocks and plinth in layer 2 … add
+        # structure wall layer"): per-cell tile overrides. kind "1" floor, "2"
+        # block (0.4), "2s" block with a spot, "3s" plinth with a spot, "4" wall,
+        # "0" a hole. The museum repaints its tile with these before building, so
+        # the hand can move masonry the template decided.
+        if bp.get("cells"): e["cells"] = list(bp["cells"])
+        else: e.pop("cells", None)
         if bp.get("simulations"): e["simulations"] = list(bp["simulations"])
         else: e.pop("simulations", None)
         if bp.get("utilities"): e["utilities"] = list(bp["utilities"])

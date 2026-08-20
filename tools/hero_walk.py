@@ -179,7 +179,7 @@ def pearl_walks(chapter: str, trunk: dict[str, Any] | None = None) -> list[dict[
                 q_i += 1
             excl -= {r["lookup"] for r in rows_o}     # a line of any page in this hall is never excluded by another page
             walks.append({"chapter": chapter, "pearl": name, "pearl_index": int(p.get("index", len(walks))), "map": p.get("map", ""),
-                          "stages": list(p.get("stages", [])), "gaps": list(p.get("gaps", [])), "ramps": list(p.get("ramps", [])), "utilities": list(p.get("utilities", [])), "simulations": list(p.get("simulations", [])),
+                          "stages": list(p.get("stages", [])), "gaps": list(p.get("gaps", [])), "ramps": list(p.get("ramps", [])), "utilities": list(p.get("utilities", [])), "simulations": list(p.get("simulations", [])), "cells": list(p.get("cells", [])),
                           "rooms": (rooms_total or p.get("rooms")), "exclude": sorted(excl), "ordered": True, "pages": pages,
                           "hero": hero, "hand_branches": sum(1 for r in rows_o if r["walk_kind"] not in ("hero", "sibling")),
                           "cast": [r["lookup"] for r in rows_o], "rows": rows_o,
@@ -239,6 +239,7 @@ def pearl_walks(chapter: str, trunk: dict[str, Any] | None = None) -> list[dict[
         # DROPPED the joined pearls' bodies: trans introduction kept its own 13 and
         # translation/axisdecomposition/rotation vanished from the museum entirely.
         # A join must merge whichever kind of head it lands on.
+        cells_u = list(p.get("cells", []))
         pages_u: list[dict] = [{"pearl": name, "tokens": [r2["lookup"] for r2 in rows]}]
         rooms_total_u = int(p.get("rooms") or 0)
         excl_u = set(p.get("excluded", []))
@@ -263,13 +264,14 @@ def pearl_walks(chapter: str, trunk: dict[str, Any] | None = None) -> list[dict[
             excl_u |= set(q.get("excluded", []))
             stages_u += list(q.get("stages", [])); gaps_u += list(q.get("gaps", []))
             ramps_u += list(q.get("ramps", [])); utils_u += list(q.get("utilities", [])); sims_u += list(q.get("simulations", []))
+            cells_u += list(q.get("cells", []))
             qi_u += 1
         excl_u -= {r2["lookup"] for r2 in rows}
         uniq: list[str] = []
         for r in rows:
             if r["lookup"] not in uniq:
                 uniq.append(r["lookup"])
-        walks.append({"chapter": chapter, "pearl": name, "pearl_index": int(p.get("index", len(walks))), "map": p.get("map", ""), "stages": stages_u, "gaps": gaps_u, "ramps": ramps_u, "utilities": utils_u, "simulations": sims_u, "rooms": (rooms_total_u or p.get("rooms")), "exclude": sorted(excl_u),
+        walks.append({"chapter": chapter, "pearl": name, "pearl_index": int(p.get("index", len(walks))), "map": p.get("map", ""), "stages": stages_u, "gaps": gaps_u, "ramps": ramps_u, "utilities": utils_u, "simulations": sims_u, "cells": cells_u, "rooms": (rooms_total_u or p.get("rooms")), "exclude": sorted(excl_u),
                       **({"pages": pages_u} if len(pages_u) > 1 else {}),
                       "hero": hero, "hand_branches": len(hand), "cast": uniq, "rows": rows,
                       "why": f"pearl {name}: {hero} + {sib} siblings + {len(rows) - 1 - sib} branches ({len(hand)} hand)" + (f", {len(pages_u)} pages" if len(pages_u) > 1 else "")})

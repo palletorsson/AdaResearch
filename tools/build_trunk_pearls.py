@@ -138,6 +138,8 @@ def seed(trunk_doc: dict) -> dict:
                         p["dropped"] = True
                     if "order" in e:
                         p["index"] = int(e["order"])
+                    if e.get("cells"):
+                        p["cells"] = list(e["cells"])          # per-cell tile overrides (tools/book.py)
                     if e.get("simulations"):
                         p["simulations"] = list(e["simulations"])   # grid maps as installations (tools/book.py)
                     if e.get("utilities"):

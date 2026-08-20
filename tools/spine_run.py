@@ -178,6 +178,7 @@ def run_sequence(seq: str, museum: str, rows: int, relations: int = 2,
             r["ramps"] = list(pw.get("ramps") or [])
             r["utilities"] = list(pw.get("utilities") or [])
             r["simulations"] = list(pw.get("simulations") or [])
+            r["cell_overrides"] = list(pw.get("cells") or [])
             r["hero_walk"] = {"hero": pw["hero"], "hand_branches": pw["hand_branches"], "pearl": pw["pearl"]}
             parts.append(r)
             print(f"  {seq:24s} PEARL {pw['pearl_index'] + 1:2d}/{len(pearls)} {pw['pearl']:16s} offered {r['offered']:3d} placed {r['placed']:3d} interior {r['interior']:3d}")
@@ -592,7 +593,8 @@ def write_plan(result: dict[str, Any], out: Path) -> dict[str, Any]:
                 pool = [t for t in pool if t not in exq]
                 m = plan_museum(key, list(pr["cast"]), list(r.get("anchor_tokens", [])),
                                 dict(pr.get("cast_context", {})), rooms=pr.get("rooms"), reading=bool(pr.get("ordered")), fixed=fx,
-                                gaps=list(pr.get("gaps") or []), fillers=pool[:120], saturate="dark_sphere")
+                                gaps=list(pr.get("gaps") or []), fillers=pool[:120], saturate="dark_sphere",
+                                cell_overrides=list(pr.get("cell_overrides") or []))
                 filled = [a["token"] for a in m.get("artifacts", []) if a.get("fill") and not a.get("dummy")]
                 dummies = sum(1 for a in m.get("artifacts", []) if a.get("dummy"))
                 chapter_used.update(filled)
@@ -616,6 +618,8 @@ def write_plan(result: dict[str, Any], out: Path) -> dict[str, Any]:
                     m["utilities"] = list(pr["utilities"])   # grid utilities by their own map grammar
                 if pr.get("simulations"):
                     m["simulations"] = list(pr["simulations"])   # grid maps in the reactor hall
+                if pr.get("cell_overrides"):
+                    m["cell_overrides"] = list(pr["cell_overrides"])   # the hand's masonry: per-cell tile repaint
                 m["sequence"] = r["sequence"]
                 m["pearl"] = pr["pearl"]; m["pearl_index"] = pr["pearl_index"]; m["map"] = pr.get("map", "")
                 if not pr.get("ordered"):

@@ -17016,7 +17016,7 @@
     "pearl": "point",
     "rooms": 5,
     "says": {
-     "folding_past": "You arrive late. No reboot.\nThe folding past keeps running.",
+     "folding_past": "You arrive late. No reboot, always restart.\nThe folding past keeps running.",
      "frame_counter_display": "The internal clock is running,\nthe frame counter update cycle.",
      "origin": "Standing at Vector.ZERO,\n\nPoint zero, * ,\nVector(0,0,0)\nThe root of all vectors.\n\nThe origin, No turning back.",
      "you_are_here": "You are here",
@@ -17081,6 +17081,10 @@
      "interactive_point_origin": 0.95
     },
     "locks": {
+     "frame_counter_display": [
+      1,
+      14
+     ],
      "you_are_here": [
       7,
       4
@@ -17101,6 +17105,11 @@
     "configs": {
      "CoordinateSystem3M": {
       "floating_point": 1
+     }
+    },
+    "poses": {
+     "frame_counter_display": {
+      "rotation": 90
      }
     }
    },
@@ -17188,6 +17197,10 @@
      "line": [
       7,
       16
+     ],
+     "laser_sword": [
+      6,
+      20
      ]
     },
     "poses": {
@@ -21532,12 +21545,21 @@
       "frame_counter_display",
       "origin"
      ],
+     "poses": {
+      "frame_counter_display": {
+       "rotation": 90
+      }
+     },
      "configs": {
       "CoordinateSystem3M": {
        "floating_point": 1
       }
      },
      "locks": {
+      "frame_counter_display": [
+       1,
+       14
+      ],
       "you_are_here": [
        7,
        4
@@ -21564,7 +21586,7 @@
       }
      },
      "says": {
-      "folding_past": "You arrive late. No reboot.\nThe folding past keeps running.",
+      "folding_past": "You arrive late. No reboot, always restart.\nThe folding past keeps running.",
       "frame_counter_display": "The internal clock is running,\nthe frame counter update cycle.",
       "origin": "Standing at Vector.ZERO,\n\nPoint zero, * ,\nVector(0,0,0)\nThe root of all vectors.\n\nThe origin, No turning back.",
       "you_are_here": "You are here",
@@ -21675,6 +21697,10 @@
       "line": [
        7,
        16
+      ],
+      "laser_sword": [
+       6,
+       20
       ]
      },
      "says": {

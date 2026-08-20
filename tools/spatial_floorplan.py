@@ -465,6 +465,42 @@ def _apply_gaps(plan: "FloorPlan", gaps: list, apron: int) -> "FloorPlan":
     return _replace(plan, grid=grid, slots=slots, route={c for c in plan.route if c not in void})
 
 
+def _apply_cell_overrides(plan: "FloorPlan", overrides: list, apron: int) -> "FloorPlan":
+    """THE HAND'S MASONRY (2026-08-20). Per-cell tile repaints from the book. A
+    "4" (wall) or "0" (hole) removes the cell from the grid, the slots and the
+    route — a body is never negotiated into a wall the hand just built. The
+    walkable kinds ("1", "2", "2s", "3s") repaint the grid character only: the
+    negotiator's slots come from the template and do not grow, which is honest —
+    a hand block is masonry, not a new dealing spot."""
+    from dataclasses import replace as _replace
+    if not overrides:
+        return plan
+    solid: set = set()
+    grid = [list(row) for row in plan.grid]
+    for o in overrides:
+        c = o.get("cell", [])
+        k = str(o.get("kind", ""))
+        if len(c) < 2 or not k:
+            continue
+        x, z = int(c[0]) + apron, int(c[1]) + apron
+        if 0 <= z < len(grid) and 0 <= x < len(grid[z]):
+            grid[z][x] = k
+            if k in ("4", "0"):
+                solid.add((x, z))
+    if not solid:
+        return _replace(plan, grid=grid)
+    slots = []
+    for s in plan.slots:
+        if s.venue == "interior":
+            cells = {c for c in (s.free_cells or set()) if c not in solid}
+            if not cells or s.cell in solid:
+                continue
+            slots.append(_replace(s, free_cells=cells))
+        else:
+            slots.append(s)
+    return _replace(plan, grid=grid, slots=slots, route={c for c in plan.route if c not in solid})
+
+
 def from_museum(key: str, apron: int = 14, rooms: int | None = None) -> FloorPlan:
     """Load one of the 30 authored museums as a plan, with its slots' declared
     capacity attached, plus the exterior venues that can host what the building
