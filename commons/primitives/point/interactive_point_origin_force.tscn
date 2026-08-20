@@ -54,9 +54,6 @@ radius = 0.03
 [node name="OmniLight3D" type="OmniLight3D" parent="MeshInstance3D" index="2"]
 light_energy = 0.3
 light_color = Color(1, 0.7, 0.3, 1)
-distance_fade_enabled = true
-distance_fade_begin = 12.0
-distance_fade_length = 4.0
 
 [node name="HighlightRing" parent="." index="2" instance=ExtResource("3_highlight")]
 transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, 0, 0)

@@ -16991,7 +16991,7 @@
   }
  ],
  "counts": {
-  "branches_on_pearls": 1418,
+  "branches_on_pearls": 1425,
   "by_kind": {
    "contradicts": 0,
    "edge": 149,
@@ -17151,6 +17151,27 @@
        14
       ],
       "kind": "2"
+     },
+     {
+      "cell": [
+       6,
+       18
+      ],
+      "kind": "4"
+     },
+     {
+      "cell": [
+       7,
+       18
+      ],
+      "kind": "4"
+     },
+     {
+      "cell": [
+       8,
+       18
+      ],
+      "kind": "4"
      }
     ]
    },
@@ -17229,7 +17250,9 @@
      "plus_line_puzzle",
      "modulor_man_demo"
     ],
-    "tokens_remove": [],
+    "tokens_remove": [
+     "synthesis_stand"
+    ],
     "hero": "klee_walking_point",
     "locks": {
      "do_not_cross_barrier": [
@@ -17305,12 +17328,12 @@
      "laser_measure": {
       "count": 3,
       "spread": "row",
-      "gap": 2
+      "gap": 3
      },
      "laser_exploding_sphere": {
       "count": 3,
       "spread": "row",
-      "gap": 2
+      "gap": 3
      }
     },
     "configs": {
@@ -17352,8 +17375,12 @@
      "interactivetriangle": "claude",
      "quad_line_puzzle": "claude"
     },
-    "tokens_add": [],
-    "tokens_remove": [],
+    "tokens_add": [
+     "catalyst_pedestal"
+    ],
+    "tokens_remove": [
+     "catalyst_prompter_box"
+    ],
     "hero": "catalyst_pedestal",
     "tokens_order": [
      "catalyst_pedestal",
@@ -17438,6 +17465,8 @@
     },
     "tokens_add": [],
     "tokens_remove": [
+     "ConeTwistBag",
+     "ConnectedTriangles",
      "grab_sphere_point_snap"
     ],
     "hero": "player_trace"
@@ -21672,6 +21701,27 @@
         14
        ],
        "kind": "2"
+      },
+      {
+       "cell": [
+        6,
+        18
+       ],
+       "kind": "4"
+      },
+      {
+       "cell": [
+        7,
+        18
+       ],
+       "kind": "4"
+      },
+      {
+       "cell": [
+        8,
+        18
+       ],
+       "kind": "4"
       }
      ],
      "rooms": 5,
@@ -21794,8 +21844,7 @@
       "cube_scene",
       "dark_sphere",
       "plus_line_puzzle",
-      "modulor_man_demo",
-      "synthesis_stand"
+      "modulor_man_demo"
      ],
      "blurb": "A line connects two points.",
      "rooms": 6,
@@ -21836,12 +21885,12 @@
       "laser_measure": {
        "count": 3,
        "spread": "row",
-       "gap": 2
+       "gap": 3
       },
       "laser_exploding_sphere": {
        "count": 3,
        "spread": "row",
-       "gap": 2
+       "gap": 3
       }
      },
      "poses": {
@@ -21930,6 +21979,9 @@
       "plus_line_puzzle": "draft",
       "modulor_man_demo": "draft"
      },
+     "excluded": [
+      "synthesis_stand"
+     ],
      "ordered": true
     },
     {
@@ -21963,8 +22015,6 @@
      "tokens": [
       "player_trace",
       "grid_lines",
-      "ConeTwistBag",
-      "ConnectedTriangles",
       "room_grammar"
      ],
      "blurb": "The grid quantizes.",
@@ -21979,6 +22029,8 @@
       "grid_lines": "hand"
      },
      "excluded": [
+      "ConeTwistBag",
+      "ConnectedTriangles",
       "grab_sphere_point_snap"
      ]
     },
@@ -21989,6 +22041,7 @@
      "hero": "catalyst_pedestal",
      "hero_by": "hand",
      "tokens": [
+      "catalyst_pedestal",
       "parasol_triangle",
       "triangle_line_puzzle",
       "catalyst_vent",
@@ -21999,8 +22052,7 @@
       "pythagorean_triangle_angles",
       "quad",
       "interactivetriangle",
-      "quad_line_puzzle",
-      "catalyst_prompter_box"
+      "quad_line_puzzle"
      ],
      "blurb": "Three points close a boundary, and now: rigidity.",
      "ramps": [
@@ -22063,6 +22115,9 @@
       "interactivetriangle": "claude",
       "quad_line_puzzle": "claude"
      },
+     "excluded": [
+      "catalyst_prompter_box"
+     ],
      "ordered": true
     },
     {

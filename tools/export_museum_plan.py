@@ -372,6 +372,20 @@ def plan_museum(key: str, tokens: list[str],
         from em_rooms import crop_tile
         _pats = json.loads((REPO / "commons" / "data" / "template_patterns.json").read_text(encoding="utf-8"))["patterns"]
         _tile = crop_tile([list(map(str, r)) for r in _pats[key]["tile"]], rooms)
+        # THE HAND'S MASONRY, VISIBLE (2026-08-20). _apply_cell_overrides bound
+        # the NEGOTIATION (no body dealt into the wall, route filtered) but the
+        # exported tile came straight off the template, so the wall the hand
+        # asked for never became geometry — a divider that stopped furniture
+        # and let the visitor walk through it. The repaint lands here, on the
+        # tile the runtime actually builds. Cells are tile-space, same frame
+        # as the book's `cells` field.
+        for _o in (cell_overrides or []):
+            _c = _o.get("cell", [])
+            _k = str(_o.get("kind", ""))
+            if len(_c) >= 2 and _k:
+                _x, _z = int(_c[0]), int(_c[1])
+                if 0 <= _z < len(_tile) and 0 <= _x < len(_tile[_z]):
+                    _tile[_z][_x] = _k
         out_extra = {"rooms": int(rooms), "tile": _tile, "h": len(_tile)}
     else:
         out_extra = {}
