@@ -2023,7 +2023,7 @@ func _setup_world() -> void:
 		_cam.size = _doll_zoom
 		_cam.far = 400.0
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		print("[em-doll] THE DOLL HOUSE — walls cut at %.2f m; WASD pans, wheel zooms, Q/E turns, F8 returns to the walk" % DOLL_CUT)
+		print("[em-doll] THE DOLL HOUSE — walls cut at %.2f m; WASD pans, wheel zooms, Q/E turns, H returns to the walk" % DOLL_CUT)
 	# the desktop hand — the same crosshair interaction the map scenes use:
 	# LMB press/drag on handles and buttons, RMB carry-grab, wheel = hold
 	# distance. Desktop-only by construction (the VR branch returned above;
@@ -7449,7 +7449,7 @@ func _follow_reload() -> void:
 	get_tree().reload_current_scene()
 
 
-## F8: enter or leave the doll house. The scene reloads through the same
+## H: enter or leave the doll house. The scene reloads through the same
 ## door the follow uses — chapter kept, the eye resumed where it stood —
 ## with the dollhouse flag flipped in em_control.
 func _doll_toggle() -> void:
@@ -7548,7 +7548,9 @@ func _input(event: InputEvent) -> void:
 		_follow_reload()
 		return
 	if event is InputEventKey and (event as InputEventKey).pressed and not (event as InputEventKey).echo \
-			and (event as InputEventKey).keycode == KEY_F8 and not _vr and not _studio and _shot_path == "" and _autopilot == 0:
+			and (event as InputEventKey).keycode == KEY_H and not _vr and not _studio and _shot_path == "" and _autopilot == 0:
+		# H for HOUSE — F8 belonged to the editor's own Stop shortcut, which
+		# reaches through to a focused game and closed the museum instead
 		_doll_toggle()
 		return
 	if _dollhouse and event is InputEventMouseButton:
