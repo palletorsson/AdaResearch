@@ -33,7 +33,7 @@ func _tall_visible(seg: Node3D) -> int:
 			stack.append(c)
 		if n is MeshInstance3D and (n as MeshInstance3D).mesh != null and (n as MeshInstance3D).visible:
 			var wb: AABB = (n as MeshInstance3D).global_transform * (n as MeshInstance3D).get_aabb()
-			if wb.position.y + wb.size.y > 1.6 and String(n.name) != "DetailExtentAnchor":
+			if wb.position.y + wb.size.y > 2.9 and String(n.name) != "DetailExtentAnchor":
 				tall += 1
 	return tall
 

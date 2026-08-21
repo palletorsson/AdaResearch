@@ -636,7 +636,11 @@ var _plan_mtime: int = 0
 # editing lane is the same museum's. Desktop only; F8 toggles (reload, the
 # eye resumed), --em-dollhouse or em_control {"dollhouse": 1} opens into it.
 var _dollhouse: bool = false
-var DOLL_CUT := 1.15               # walls become knee walls at this height (em_layout hall.doll_cut_m)
+var DOLL_CUT := 2.4                # walls cut at this height — ABOVE the 1.55 m
+                                   # hanging line, so the galleries keep their
+                                   # pictures and the artifacts stay whole in
+                                   # view (Palle: "higher so I can see the
+                                   # artifacts"); em_layout hall.doll_cut_m
 var _doll_zoom: float = 16.0       # orthographic size; wheel zooms 6..60
 var _doll_yaw: float = PI * 0.75   # the iso angle; Q/E turn in 45-degree steps
 # THE DOLL'S HANDS (2026-08-21, Palle: "build the mouse drag editing in the
