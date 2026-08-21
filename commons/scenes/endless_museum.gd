@@ -683,13 +683,10 @@ var _spine_ui: CanvasLayer = null
 var _spine_list: ItemList = null
 var _spine_lines: ItemList = null
 var _spine_head: Label = null
-var _spine_token: LineEdit = null
-var _spine_edit: TextEdit = null
 var _spine_status: Label = null
 var _spine_rows: Array = []               # {chapter, map, pearl} per strip row
 var _spine_cur: Dictionary = {}           # the open pearl {chapter, pearl}
-var _spine_snapshot: Array = []           # lines as LOADED — the merge guard's memory
-var _spine_line_i: int = -1
+var _spine_snapshot: Array = []           # lines as shown (their tokens aim the web jump)
 var _spine_prev_mouse: int = 0
 var _spine_watch_t: float = 0.0           # the web bridge: poll the open page's mtime
 var _spine_mtime: int = 0                 # 0 = no page open / nothing to watch
@@ -7704,12 +7701,11 @@ func _doll_pick(pt: Vector3) -> int:
 ## critical thing and poem examples"). The museum's fourth zoom level: the
 ## whole spine as a strip of pearls in walk order — the 1D museum. The left
 ## list is the order; the right pane is the OPEN pearl: its lines (token +
-## text — the poems and critical things the halls speak), each editable in
-## place. F5 writes ONE line back into the book through a merge guard: the
-## file is re-read at save and the line must still say what it said when this
-## pane loaded it — the web /lines editor and this strip share the same book,
-## and the loser of a silent race would be a poem. Enter on a pearl travels
-## there, keeping whichever view you stand in.
+## text — the poems and critical things the halls speak). The strip SHOWS and
+## TRAVELS; every edit happens in the web (/lines), reached by O or by Enter
+## on a line — "since we have o we can skip the text level". The watcher
+## folds a web save back into the pane within a second. Enter on a pearl
+## travels there, keeping whichever view you stand in.
 func _spine_toggle() -> void:
 	if _spine_ui != null and is_instance_valid(_spine_ui):
 		_spine_ui.queue_free()
@@ -7748,23 +7744,10 @@ func _spine_toggle() -> void:
 	right.add_child(_spine_head)
 	_spine_lines = ItemList.new()
 	_spine_lines.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	_spine_lines.item_selected.connect(_spine_show_line)
-	_spine_lines.item_activated.connect(func(i): if i == _spine_lines.item_count - 1: _spine_new_line())
+	_spine_lines.item_activated.connect(_spine_line_web)
 	right.add_child(_spine_lines)
-	var tokrow := HBoxContainer.new()
-	right.add_child(tokrow)
-	var tl := Label.new()
-	tl.text = "token"
-	tokrow.add_child(tl)
-	_spine_token = LineEdit.new()
-	_spine_token.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	tokrow.add_child(_spine_token)
-	_spine_edit = TextEdit.new()
-	_spine_edit.custom_minimum_size = Vector2(0, 150)
-	_spine_edit.wrap_mode = TextEdit.LINE_WRAPPING_BOUNDARY
-	right.add_child(_spine_edit)
 	_spine_status = Label.new()
-	_spine_status.text = "Enter on a pearl travels there · click a line, edit, F5 writes it into the book · Enter on '+ new line' adds · DEL (in the list) removes · O opens this page in the web editor · ESC closes"
+	_spine_status.text = "Enter on a pearl travels there · Enter on a line opens it in the web editor · O opens the page — the web is the editor · ESC closes"
 	_spine_status.autowrap_mode = TextServer.AUTOWRAP_WORD
 	right.add_child(_spine_status)
 	_spine_ui.add_child(panel)
@@ -7832,9 +7815,6 @@ func _spine_show_pearl(idx: int) -> void:
 		return
 	var row: Dictionary = _spine_rows[idx]
 	_spine_cur = {"chapter": row.get("chapter"), "pearl": row.get("pearl")}
-	_spine_line_i = -1
-	_spine_edit.text = ""
-	_spine_token.text = ""
 	_spine_snapshot = []
 	_spine_lines.clear()
 	var bk := _spine_book()
@@ -7852,117 +7832,82 @@ func _spine_show_pearl(idx: int) -> void:
 		_spine_snapshot.append(ln.duplicate(true))
 		var one := String(ln.get("text", "")).replace("\n", " · ")
 		_spine_lines.add_item("%s — %s" % [String(ln.get("token", "?")), one.substr(0, 76)])
-	_spine_lines.add_item("+ new line")
-
-
-func _spine_show_line(idx: int) -> void:
-	if idx >= _spine_snapshot.size():   # the "+ new line" row: Enter creates
-		return
-	if idx < 0:
-		return
-	_spine_line_i = idx
-	var ln: Dictionary = _spine_snapshot[idx]
-	_spine_token.text = String(ln.get("token", ""))
-	_spine_edit.text = String(ln.get("text", ""))
-	_spine_status.text = "editing line %d — F5 writes it into the book" % (idx + 1)
-
-
-func _spine_new_line() -> void:
-	var bk := _spine_book()
-	_spine_line_i = _spine_snapshot.size()   # one past the end = an add
-	_spine_token.text = String((bk.get("pearl", {}) as Dictionary).get("hero", "")) if not bk.is_empty() else ""
-	_spine_edit.text = ""
-	_spine_status.text = "new line for %s · %s — write, then F5" % [_spine_cur.get("chapter"), _spine_cur.get("pearl")]
-	_spine_edit.grab_focus()
-
-
-## ONE line into the book, through the merge guard.
-func _spine_save() -> void:
-	if _spine_line_i < 0 or _spine_cur.is_empty():
-		return
-	var bk := _spine_book()
-	if bk.is_empty():
-		_spine_status.text = "the pearl left the book — nothing written"
-		return
-	var pl: Dictionary = bk.get("pearl")
-	var lines: Array = pl.get("lines", [])
-	if _spine_line_i < _spine_snapshot.size():
-		# EDIT — the guard: the line on disk must still say what it said when
-		# this pane loaded it, or someone else (the /lines editor, another
-		# session) got here first and their words must not be overwritten.
-		var moved := true
-		if _spine_line_i < lines.size():
-			moved = String((lines[_spine_line_i] as Dictionary).get("text", "")) \
-					!= String((_spine_snapshot[_spine_line_i] as Dictionary).get("text", ""))
-		if moved:
-			_spine_status.text = "the book moved under you — reopen the pearl (nothing written)"
-			return
-		var ln: Dictionary = lines[_spine_line_i]
-		ln["text"] = _spine_edit.text
-		ln["token"] = _spine_token.text
-		ln["by"] = "hand"
-	else:
-		lines.append({"token": _spine_token.text, "text": _spine_edit.text, "by": "hand"})
-	pl["lines"] = lines
-	var f := FileAccess.open(String(bk.get("path")), FileAccess.WRITE)
-	if f == null:
-		_spine_status.text = "the book would not open for writing"
-		return
-	f.store_string(JSON.stringify(bk.get("doc"), " ") + "\n")
-	f.close()
-	var psel := _spine_list.get_selected_items()
-	_spine_show_pearl(psel[0] if psel.size() > 0 else 0)
-	_spine_status.text = "written — real on the next build"
-
-
-func _spine_del_line() -> void:
-	var sel := _spine_lines.get_selected_items()
-	if sel.is_empty() or sel[0] >= _spine_snapshot.size() or _spine_cur.is_empty():
-		return
-	var i: int = sel[0]
-	var bk := _spine_book()
-	if bk.is_empty():
-		return
-	var pl: Dictionary = bk.get("pearl")
-	var lines: Array = pl.get("lines", [])
-	var moved := true
-	if i < lines.size():
-		moved = String((lines[i] as Dictionary).get("text", "")) \
-				!= String((_spine_snapshot[i] as Dictionary).get("text", ""))
-	if moved:
-		_spine_status.text = "the book moved under you — reopen the pearl (nothing removed)"
-		return
-	lines.remove_at(i)
-	if lines.is_empty():
-		pl.erase("lines")
-	else:
-		pl["lines"] = lines
-	var f := FileAccess.open(String(bk.get("path")), FileAccess.WRITE)
-	if f == null:
-		return
-	f.store_string(JSON.stringify(bk.get("doc"), " ") + "\n")
-	f.close()
-	var psel := _spine_list.get_selected_items()
-	_spine_show_pearl(psel[0] if psel.size() > 0 else 0)
-	_spine_status.text = "line removed — real on the next build"
 
 
 ## THE WEB BRIDGE (2026-08-21, Palle: "for text editing the web has so much
-## more experience"). No webview, no new dependency: O opens the system
-## browser at /lines deep-linked to the open pearl — the encyclopedia's own
-## editor, which already writes the same book files. The watcher below closes
-## the loop: while the strip is open, the page's mtime is polled once a
-## second, and a save made in the web lands here without a keystroke. An edit
-## IN FLIGHT is never clobbered — the pane only warns (the merge guard would
-## refuse the stale F5 anyway), and reopening the pearl takes the new text.
+## more experience", then "since we have o we can skip the text level"). No
+## webview, no new dependency, and no in-game text editor either: /lines IS
+## the editor. O opens the system browser deep-linked to whatever is focused
+## — the open pearl in the strip (with the selected line's token), a line by
+## Enter, or, out in the walk and the doll house, the selected body or the
+## nearest artifact to the eye. The watcher folds a web save back into the
+## strip within a second.
+func _web_url(chapter: String, pearl: String, token: String) -> String:
+	var url := "http://localhost:3003/lines?chapter=%s&pearl=%s" % [
+		chapter.uri_encode(), pearl.uri_encode()]
+	if token != "":
+		url += "&token=" + token.uri_encode()
+	return url
+
+
 func _spine_open_web() -> void:
 	if _spine_cur.is_empty():
 		return
-	var url := "http://localhost:3003/lines?chapter=%s&pearl=%s" % [
-		String(_spine_cur.get("chapter", "")).uri_encode(),
-		String(_spine_cur.get("pearl", "")).uri_encode()]
-	OS.shell_open(url)
+	var tok := ""
+	var sel := _spine_lines.get_selected_items()
+	if sel.size() > 0 and sel[0] < _spine_snapshot.size():
+		tok = String((_spine_snapshot[sel[0]] as Dictionary).get("token", ""))
+	OS.shell_open(_web_url(String(_spine_cur.get("chapter", "")), String(_spine_cur.get("pearl", "")), tok))
 	_spine_status.text = "opened in the web editor — a save there lands here within a second"
+
+
+func _spine_line_web(i: int) -> void:
+	if i < 0 or i >= _spine_snapshot.size() or _spine_cur.is_empty():
+		return
+	OS.shell_open(_web_url(String(_spine_cur.get("chapter", "")), String(_spine_cur.get("pearl", "")),
+		String((_spine_snapshot[i] as Dictionary).get("token", ""))))
+	_spine_status.text = "line opened in the web editor"
+
+
+## O outside the strip (Palle: "if focus on artifact in walk, iso or nearest
+## launch web"): the held body if a hand holds one, else the nearest artifact
+## to the eye — within arm's-reach-of-attention, 8 m.
+func _web_focus_record() -> int:
+	if _edit_sel >= 0 and _edit_sel < _edit_records.size():
+		return _edit_sel
+	var eye := _eye_pos()
+	var best := -1
+	var best_d := 8.0
+	for i in range(_edit_records.size()):
+		var n: Node3D = _node_or_null((_edit_records[i] as Dictionary).get("node"))
+		if n == null:
+			continue
+		var d: float = Vector2(n.global_position.x - eye.x, n.global_position.z - eye.z).length()
+		if d < best_d:
+			best_d = d
+			best = i
+	return best
+
+
+func _web_open_focus() -> void:
+	var i := _web_focus_record()
+	if i < 0:
+		print("[em-web] no artifact within reach — walk closer and press O again")
+		return
+	var r: Dictionary = _edit_records[i]
+	var ch := String(r.get("chapter", ""))
+	var pearl := ""
+	var sg: Node = r.get("seg")
+	if sg != null and is_instance_valid(sg):
+		if ch == "" and sg.has_meta("em_chapter"):
+			ch = String(sg.get_meta("em_chapter"))
+		if sg.has_meta("em_pearl"):
+			pearl = String(sg.get_meta("em_pearl"))
+	if ch == "":
+		print("[em-web] %s stands in no chapter — nothing to open" % r.get("token"))
+		return
+	OS.shell_open(_web_url(ch, pearl, String(r.get("token", ""))))
+	print("[em-web] %s -> the web editor (%s · %s)" % [r.get("token"), ch, pearl])
 
 
 func _spine_watch(delta: float) -> void:
@@ -7977,9 +7922,6 @@ func _spine_watch(delta: float) -> void:
 	if mt == 0 or mt == _spine_mtime:
 		return
 	_spine_mtime = mt
-	if _spine_line_i >= 0:
-		_spine_status.text = "the web editor changed this page — an F5 now will be refused; click the pearl again to take the new text"
-		return
 	var psel := _spine_list.get_selected_items()
 	_spine_show_pearl(psel[0] if psel.size() > 0 else 0)
 	_spine_status.text = "reloaded — the book changed in the web editor"
@@ -8422,17 +8364,21 @@ func _input(event: InputEvent) -> void:
 		if event is InputEventKey and (event as InputEventKey).pressed and not (event as InputEventKey).echo:
 			var skc := (event as InputEventKey).keycode
 			if skc == KEY_ESCAPE:
-				if _spine_edit != null and _spine_edit.has_focus():
-					_spine_lines.grab_focus()
-				else:
-					_spine_toggle()
-			elif skc == KEY_F5:
-				_spine_save()
-			elif skc == KEY_O and not (_spine_edit != null and _spine_edit.has_focus()) \
-					and not (_spine_token != null and _spine_token.has_focus()):
-				_spine_open_web()   # typing an o in a poem stays an o
-			elif skc == KEY_DELETE and _spine_lines != null and _spine_lines.has_focus():
-				_spine_del_line()
+				_spine_toggle()
+			elif skc == KEY_O:
+				_spine_open_web()
+		return
+	# the N menu's filter owns the letters (a pre-existing wound, found while
+	# wiring O: typing any of h/j/l/o into the filter fired the museum's own
+	# top-level keys — the plan view toggled mid-word). While the filter
+	# types, every top-level key stands down; ESC still closes the menu.
+	if _doll_menu != null and is_instance_valid(_doll_menu) and event is InputEventKey \
+			and (event as InputEventKey).pressed and not (event as InputEventKey).echo \
+			and _doll_menu_filter != null and is_instance_valid(_doll_menu_filter) \
+			and _doll_menu_filter.has_focus():
+		if (event as InputEventKey).keycode == KEY_ESCAPE:
+			_doll_menu.queue_free()
+			_doll_menu = null
 		return
 	if event is InputEventKey and (event as InputEventKey).pressed and not (event as InputEventKey).echo \
 			and (event as InputEventKey).keycode == KEY_J and not _vr and not _studio and _autopilot == 0 and _shot_path == "":
@@ -8462,6 +8408,10 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventKey and (event as InputEventKey).pressed and not (event as InputEventKey).echo \
 			and (event as InputEventKey).keycode == KEY_L and not _vr and not _studio and _shot_path == "" and _autopilot == 0:
 		_spine_toggle()
+		return
+	if event is InputEventKey and (event as InputEventKey).pressed and not (event as InputEventKey).echo \
+			and (event as InputEventKey).keycode == KEY_O and not _vr and not _studio and _shot_path == "" and _autopilot == 0:
+		_web_open_focus()   # the artifact in front of you — walk or doll — opens in the web
 		return
 	if _dollhouse and event is InputEventMouseButton:
 		var mbe := event as InputEventMouseButton

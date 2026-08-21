@@ -1,9 +1,11 @@
 extends SceneTree
-## THE SPINE STRIP, proven against a TRIAL copy of the book: the strip lists
-## the walk order, an edited line lands in the pearl's page as by:hand, the
-## merge guard refuses to overwrite a line another hand changed on disk, a
-## new line appends, DEL removes, and a travel writes the control file with
-## the current view preserved. The real book is never touched.
+## THE SPINE STRIP under the new contract — the web is the editor: the strip
+## lists the walk order and the open pearl's lines, the URL builder aims at
+## chapter · pearl · token, the watcher folds a disk-side (web) save into the
+## open pane within a tick, O's focus resolver finds the held body or the
+## nearest artifact to the eye, and a travel writes the control file with the
+## current view preserved. Runs against a TRIAL copy of the book and a trial
+## control file — the real ones are never touched.
 ##   godot --headless --path . --xr-mode off --script res://commons/testing/probe_spine_strip.gd
 
 const OUT := "res://ada_run/spine_strip_probe.txt"
@@ -12,14 +14,6 @@ const BOOK := "res://ada_run/_trial_book"
 
 func _initialize() -> void:
 	call_deferred("_run")
-
-
-func _read_point_lines() -> Array:
-	var doc: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(BOOK + "/primitives.json"))
-	for pv in (doc.get("pearls", []) as Array):
-		if String((pv as Dictionary).get("pearl", "")) == "point":
-			return (pv as Dictionary).get("lines", [])
-	return []
 
 
 func _run() -> void:
@@ -42,6 +36,13 @@ func _run() -> void:
 			break
 		await process_frame
 
+	# the URL builder is pure and exact
+	var url := String(inst.call("_web_url", "primitives", "point", "you_are_here"))
+	if url != "http://localhost:3003/lines?chapter=primitives&pearl=point&token=you_are_here":
+		fails.append("the web url is wrong: " + url)
+	if String(inst.call("_web_url", "primitives", "point", "")).contains("token"):
+		fails.append("an empty token leaked into the url")
+
 	inst.call("_spine_toggle")
 	var slist: ItemList = inst.get("_spine_list")
 	if slist == null or slist.item_count == 0:
@@ -61,60 +62,11 @@ func _run() -> void:
 		var lines_ui: ItemList = inst.get("_spine_lines")
 		if snap.is_empty():
 			fails.append("point's page loaded no lines")
-		elif lines_ui.item_count != snap.size() + 1:
-			fails.append("lines pane shows %d rows for %d lines (+1 expected)" % [lines_ui.item_count, snap.size()])
-		var n0: int = snap.size()
-
-		# EDIT line 0 → the trial book
-		inst.call("_spine_show_line", 0)
-		(inst.get("_spine_edit") as TextEdit).text = "PROBE WROTE THIS"
-		inst.call("_spine_save")
-		var after: Array = _read_point_lines()
-		if after.is_empty() or String((after[0] as Dictionary).get("text", "")) != "PROBE WROTE THIS":
-			fails.append("the edit did not land in the book")
-		elif String((after[0] as Dictionary).get("by", "")) != "hand":
-			fails.append("the edited line is not by:hand")
-
-		# THE MERGE GUARD: another hand moves the line on disk; our stale save
-		# must be refused
-		var doc: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(BOOK + "/primitives.json"))
-		for pv in (doc.get("pearls", []) as Array):
-			if String((pv as Dictionary).get("pearl", "")) == "point":
-				(((pv as Dictionary).get("lines", []) as Array)[0] as Dictionary)["text"] = "MOVED BY ANOTHER HAND"
-		var fg := FileAccess.open(BOOK + "/primitives.json", FileAccess.WRITE)
-		fg.store_string(JSON.stringify(doc, " ") + "\n")
-		fg.close()
-		inst.call("_spine_show_line", 0)   # pane still holds its old snapshot
-		(inst.get("_spine_edit") as TextEdit).text = "SECOND TRY"
-		inst.call("_spine_save")
-		var guarded: Array = _read_point_lines()
-		if String((guarded[0] as Dictionary).get("text", "")) != "MOVED BY ANOTHER HAND":
-			fails.append("the merge guard let a stale save overwrite another hand's line")
-
-		# ADD a line (reopen first — the guard told us to)
-		inst.call("_spine_show_pearl", point_i)
-		inst.call("_spine_new_line")
-		(inst.get("_spine_edit") as TextEdit).text = "A NEW POEM FOR THE PROBE"
-		(inst.get("_spine_token") as LineEdit).text = "origin"
-		inst.call("_spine_save")
-		var added: Array = _read_point_lines()
-		if added.size() != n0 + 1:
-			fails.append("the new line did not append (%d -> %d)" % [n0, added.size()])
-		elif String((added[added.size() - 1] as Dictionary).get("text", "")) != "A NEW POEM FOR THE PROBE":
-			fails.append("the appended line carries the wrong text")
-
-		# DEL removes it again
-		inst.call("_spine_show_pearl", point_i)
-		var lines_ui2: ItemList = inst.get("_spine_lines")
-		lines_ui2.select(added.size() - 1)
-		lines_ui2.grab_focus()
-		inst.call("_spine_del_line")
-		if _read_point_lines().size() != n0:
-			fails.append("DEL did not remove the appended line")
+		elif lines_ui.item_count != snap.size():
+			fails.append("lines pane shows %d rows for %d lines (no editor rows expected)" % [lines_ui.item_count, snap.size()])
 
 		# THE WATCHER: a save made in the web editor lands in the open pane
 		# within a tick (mtime has 1 s grain, so the baseline is forced old)
-		inst.call("_spine_show_pearl", point_i)
 		var docw: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(BOOK + "/primitives.json"))
 		for pv in (docw.get("pearls", []) as Array):
 			if String((pv as Dictionary).get("pearl", "")) == "point":
@@ -127,22 +79,6 @@ func _run() -> void:
 		var snapw: Array = inst.get("_spine_snapshot")
 		if snapw.is_empty() or String((snapw[0] as Dictionary).get("text", "")) != "HOT FROM THE WEB":
 			fails.append("the watcher did not reload the web editor's save")
-		# …and an edit IN FLIGHT is never clobbered
-		inst.call("_spine_show_line", 0)
-		var docw2: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(BOOK + "/primitives.json"))
-		for pv in (docw2.get("pearls", []) as Array):
-			if String((pv as Dictionary).get("pearl", "")) == "point":
-				(((pv as Dictionary).get("lines", []) as Array)[0] as Dictionary)["text"] = "MOVED WHILE EDITING"
-		var fw2 := FileAccess.open(BOOK + "/primitives.json", FileAccess.WRITE)
-		fw2.store_string(JSON.stringify(docw2, " ") + "\n")
-		fw2.close()
-		inst.set("_spine_mtime", 1)
-		await create_timer(1.5).timeout
-		if int(inst.get("_spine_line_i")) != 0:
-			fails.append("the watcher clobbered an edit in flight")
-		var snapw2: Array = inst.get("_spine_snapshot")
-		if String((snapw2[0] as Dictionary).get("text", "")) == "MOVED WHILE EDITING":
-			fails.append("the watcher reloaded the pane under a held line")
 
 		# TRAVEL writes the control file, view preserved (walk here)
 		inst.call("_spine_travel", point_i)
@@ -151,6 +87,35 @@ func _run() -> void:
 			fails.append("travel did not write the chapter")
 		if int(ctl.get("dollhouse", -1)) != 0:
 			fails.append("travel forgot which view it was made from")
+
+	inst.call("_spine_toggle")   # close, so the focus test stands in the walk
+
+	# O'S FOCUS: held body first, else the nearest artifact to the eye
+	var records: Array = inst.get("_edit_records")
+	var near := -1
+	for i in range(records.size()):
+		var nd: Node3D = _rec_node(records[i])
+		if nd != null and nd.global_position.z > 6.0:
+			near = i
+			break
+	if near < 0:
+		fails.append("no artifact to focus")
+	else:
+		var nd2: Node3D = _rec_node(records[near])
+		var pl: CharacterBody3D = inst.get("_player")
+		pl.position = Vector3(nd2.global_position.x + 0.5, 0.0, nd2.global_position.z)
+		inst.set("_edit_sel", -1)
+		var got: int = int(inst.call("_web_focus_record"))
+		if got < 0:
+			fails.append("the focus resolver found nothing beside a body")
+		else:
+			var gn: Node3D = _rec_node(records[got])
+			if gn == null or Vector2(gn.global_position.x - pl.position.x, gn.global_position.z - pl.position.z).length() > 8.0:
+				fails.append("the focus resolver picked a body out of reach")
+		inst.set("_edit_sel", near)
+		if int(inst.call("_web_focus_record")) != near:
+			fails.append("a held body did not outrank the nearest")
+		inst.set("_edit_sel", -1)
 
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(CTL))
 	DirAccess.remove_absolute(ProjectSettings.globalize_path("res://ada_run/_doll_trial_overrides.json"))
@@ -161,3 +126,10 @@ func _run() -> void:
 	f3.close()
 	print("SPINE STRIP: " + ("PASS" if fails.is_empty() else "FAIL " + "; ".join(fails)))
 	quit(0 if fails.is_empty() else 1)
+
+
+func _rec_node(r_v: Variant) -> Node3D:
+	var n: Variant = (r_v as Dictionary).get("node")
+	if n is Node3D and is_instance_valid(n):
+		return n
+	return null
