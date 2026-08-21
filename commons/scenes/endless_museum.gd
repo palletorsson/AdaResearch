@@ -2193,6 +2193,17 @@ func _setup_environment() -> bool:
 		if we != null:
 			_env_we = we
 			_env_tier = String(_mod_env.call("tier")) if _mod_has(_mod_env, "tier") else "high"
+			if _dollhouse and (we as WorldEnvironment).environment != null:
+				# the aerial fog and adaptive exposure are tuned for a 1.65 m
+				# eye — from the 46 m perch they wash the whole toy white.
+				# (This must live HERE: the walker builds before the
+				# environment, so the doll setup ran against a null env.)
+				var denv: Environment = (we as WorldEnvironment).environment
+				denv.fog_enabled = false
+				denv.volumetric_fog_enabled = false
+				if _cam != null and _cam.attributes is CameraAttributesPractical:
+					(_cam.attributes as CameraAttributesPractical).auto_exposure_enabled = false
+				print("[em-doll] the perch's optics: fog off, exposure pinned")
 			if _mod_has(_mod_env, "apply_render_quality"):
 				_mod_env.call("apply_render_quality")
 			return true
