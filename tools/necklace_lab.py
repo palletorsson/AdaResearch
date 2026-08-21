@@ -294,18 +294,45 @@ def main():
         for name, sol in sols.items():
             entry["strategies"][name] = {
                 "positions": [{"token": bodies[i]["token"], "x": sol[i][0], "z": sol[i][1],
+                               "gx": bodies[i]["gx"], "gz": bodies[i]["gz"],
                                "plinth": bodies[i]["plinth"]} for i in chain if i in sol],
                 "score": score(bodies, chain, hall, sol)}
+        # THE HAND (2026-08-21, Palle: "make it editable… add and remove
+        # beads"): a hall with a saved hand necklace (ada_run/
+        # necklace_hand.json, written by the /transplant bench) replaces the
+        # derived spring with it verbatim — the bench's own live simulation
+        # already relaxed it under the curator's fingers, and re-deriving
+        # would undo their adds, removals and pins.
+        hand_doc = read_json(REPO / "ada_run" / "necklace_hand.json") or {}
+        hand = (hand_doc.get("halls", {}) or {}).get(key)
+        if hand and hand.get("beads"):
+            hb = hand["beads"]
+            hsol = {k2: (float(b["x"]), float(b["z"])) for k2, b in enumerate(hb)}
+            hbodies = [{"token": b["token"], "gx": b.get("gx", 0), "gz": b.get("gz", 0),
+                        "plinth": bool(b.get("plinth"))} for b in hb]
+            hchain = list(range(len(hb)))
+            entry["strategies"]["hand"] = {
+                "positions": [{"token": hb[k2]["token"], "x": hsol[k2][0], "z": hsol[k2][1],
+                               "gx": hb[k2].get("gx", 0), "gz": hb[k2].get("gz", 0),
+                               "plinth": bool(hb[k2].get("plinth")),
+                               "pinned": bool(hb[k2].get("pinned")),
+                               "added": bool(hb[k2].get("added"))} for k2 in hchain],
+                "score": score(hbodies, hchain, hall, hsol)}
         out[key] = entry
         line = "  %-38s" % key
         for name in ("rigid", "serpentine", "spring", "mesh"):
             sc = entry["strategies"].get(name, {}).get("score")
             line += "  %s ord %.2f dist %.2f" % (name[:4], sc["order"], sc["distortion"]) if sc else "  %s —" % name[:4]
         print(line)
-    (REPO / "ada_run" / "necklace_lab.json").write_text(
-        json.dumps({"_readme": "the necklace bake-off: per hall, four placement strategies with scores. Written by tools/necklace_lab.py; read by /transplant.",
-                    "halls": out}, indent=1), encoding="utf-8")
-    print("-> ada_run/necklace_lab.json (%d halls)" % len(out))
+    # a --hall run re-scores ONE hall; the others keep their rows (an
+    # overwrite here would silently drop seven halls to update one)
+    lab_path = REPO / "ada_run" / "necklace_lab.json"
+    existing = (read_json(lab_path) or {}).get("halls", {})
+    existing.update(out)
+    lab_path.write_text(
+        json.dumps({"_readme": "the necklace bake-off: per hall, placement strategies with scores. Written by tools/necklace_lab.py; read by /transplant.",
+                    "halls": existing}, indent=1), encoding="utf-8")
+    print("-> ada_run/necklace_lab.json (%d hall(s) refreshed, %d total)" % (len(out), len(existing)))
     return 0
 
 

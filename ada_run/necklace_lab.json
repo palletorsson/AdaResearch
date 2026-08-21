@@ -1,5 +1,5 @@
 {
- "_readme": "the necklace bake-off: per hall, four placement strategies with scores. Written by tools/necklace_lab.py; read by /transplant.",
+ "_readme": "the necklace bake-off: per hall, placement strategies with scores. Written by tools/necklace_lab.py; read by /transplant.",
  "halls": {
   "primitives|ignorance": {
    "chapter": "primitives",
@@ -54,240 +54,320 @@
        "token": "dark_sphere",
        "x": 2,
        "z": 6,
+       "gx": 0,
+       "gz": 0,
        "plinth": false
       },
       {
        "token": "cube_scene",
        "x": 4,
        "z": 6,
+       "gx": 1,
+       "gz": 0,
        "plinth": false
       },
       {
        "token": "sphere",
        "x": 5,
        "z": 6,
+       "gx": 2,
+       "gz": 0,
        "plinth": false
       },
       {
        "token": "platonic_grabbables",
        "x": 9,
        "z": 6,
+       "gx": 3,
+       "gz": 4,
        "plinth": true
       },
       {
        "token": "sphere_high",
        "x": 12,
        "z": 8,
+       "gx": 3,
+       "gz": 11,
        "plinth": true
       },
       {
        "token": "hole_with_cones",
        "x": 10,
        "z": 8,
+       "gx": 1,
+       "gz": 11,
        "plinth": false
       },
       {
        "token": "righttriangle",
        "x": 8,
        "z": 8,
+       "gx": 1,
+       "gz": 13,
        "plinth": true
       },
       {
        "token": "sphere_mid",
        "x": 6,
        "z": 8,
+       "gx": 3,
+       "gz": 13,
        "plinth": false
       },
       {
        "token": "floating_sphere_field",
        "x": 5,
        "z": 8,
+       "gx": 4,
+       "gz": 13,
        "plinth": false
       },
       {
        "token": "sphere_mid",
        "x": 3,
        "z": 8,
+       "gx": 5,
+       "gz": 13,
        "plinth": false
       },
       {
        "token": "sphere_high",
        "x": 2,
        "z": 10,
+       "gx": 5,
+       "gz": 11,
        "plinth": true
       },
       {
        "token": "star_primitive",
        "x": 5,
        "z": 10,
+       "gx": 7,
+       "gz": 11,
        "plinth": true
       },
       {
        "token": "truncatedtetrahedron",
        "x": 7,
        "z": 10,
+       "gx": 7,
+       "gz": 13,
        "plinth": true
       },
       {
        "token": "capsule",
        "x": 9,
        "z": 10,
+       "gx": 7,
+       "gz": 15,
        "plinth": true
       },
       {
        "token": "sphere_low",
        "x": 11,
        "z": 12,
+       "gx": 5,
+       "gz": 15,
        "plinth": false
       },
       {
        "token": "sphere_low",
        "x": 8,
        "z": 12,
+       "gx": 3,
+       "gz": 15,
        "plinth": false
       },
       {
        "token": "roughrock",
        "x": 6,
        "z": 12,
+       "gx": 1,
+       "gz": 15,
        "plinth": true
       },
       {
        "token": "grab_octahedron",
        "x": 4,
        "z": 12,
+       "gx": 2,
+       "gz": 17,
        "plinth": true
       },
       {
        "token": "snap_octahedron_puzzle",
        "x": 2,
        "z": 12,
+       "gx": 4,
+       "gz": 17,
        "plinth": false
       },
       {
        "token": "grab_octahedron",
        "x": 3,
        "z": 14,
+       "gx": 6,
+       "gz": 17,
        "plinth": true
       },
       {
        "token": "lshape",
        "x": 7,
        "z": 14,
+       "gx": 5,
+       "gz": 20,
        "plinth": false
       },
       {
        "token": "prism_block",
        "x": 9,
        "z": 14,
+       "gx": 5,
+       "gz": 21,
        "plinth": false
       },
       {
        "token": "prism_block",
        "x": 10,
        "z": 14,
+       "gx": 6,
+       "gz": 21,
        "plinth": false
       },
       {
        "token": "prism_block",
        "x": 12,
        "z": 14,
+       "gx": 7,
+       "gz": 21,
        "plinth": false
       },
       {
        "token": "prism_block",
        "x": 12,
        "z": 16,
+       "gx": 8,
+       "gz": 21,
        "plinth": false
       },
       {
        "token": "library_rack",
        "x": 8,
        "z": 16,
+       "gx": 8,
+       "gz": 22,
        "plinth": false
       },
       {
        "token": "torus_radials_rings",
        "x": 7,
        "z": 16,
+       "gx": 8,
+       "gz": 23,
        "plinth": false
       },
       {
        "token": "capsule_radials_rings",
        "x": 5,
        "z": 16,
+       "gx": 6,
+       "gz": 23,
        "plinth": false
       },
       {
        "token": "capsule_radials_rings",
        "x": 3,
        "z": 18,
+       "gx": 5,
+       "gz": 23,
        "plinth": false
       },
       {
        "token": "capsule_radials_rings",
        "x": 6,
        "z": 18,
+       "gx": 3,
+       "gz": 23,
        "plinth": false
       },
       {
        "token": "capsule_radials_rings",
        "x": 7,
        "z": 18,
+       "gx": 2,
+       "gz": 23,
        "plinth": false
       },
       {
        "token": "prism_block",
        "x": 9,
        "z": 18,
+       "gx": 2,
+       "gz": 21,
        "plinth": false
       },
       {
        "token": "prism_block",
        "x": 11,
        "z": 18,
+       "gx": 3,
+       "gz": 21,
        "plinth": false
       },
       {
        "token": "lshape",
        "x": 12,
        "z": 18,
+       "gx": 3,
+       "gz": 20,
        "plinth": false
       },
       {
        "token": "prism_block",
        "x": 9,
        "z": 20,
+       "gx": 1,
+       "gz": 21,
        "plinth": false
       },
       {
        "token": "prism_block",
        "x": 8,
        "z": 20,
+       "gx": 0,
+       "gz": 21,
        "plinth": false
       },
       {
        "token": "torus_radials_rings",
        "x": 6,
        "z": 20,
+       "gx": 0,
+       "gz": 23,
        "plinth": false
       },
       {
        "token": "plus",
        "x": 4,
        "z": 20,
+       "gx": 1,
+       "gz": 25,
        "plinth": false
       },
       {
        "token": "diamonds",
        "x": 2,
        "z": 22,
+       "gx": 4,
+       "gz": 25,
        "plinth": false
       },
       {
        "token": "plus",
        "x": 7,
        "z": 22,
+       "gx": 7,
+       "gz": 25,
        "plinth": false
       }
      ],
@@ -306,240 +386,320 @@
        "token": "dark_sphere",
        "x": 2,
        "z": 6,
+       "gx": 0,
+       "gz": 0,
        "plinth": false
       },
       {
        "token": "cube_scene",
        "x": 4,
        "z": 6,
+       "gx": 1,
+       "gz": 0,
        "plinth": false
       },
       {
        "token": "sphere",
        "x": 5,
        "z": 6,
+       "gx": 2,
+       "gz": 0,
        "plinth": false
       },
       {
        "token": "platonic_grabbables",
        "x": 9,
        "z": 6,
+       "gx": 3,
+       "gz": 4,
        "plinth": true
       },
       {
        "token": "sphere_high",
        "x": 12,
        "z": 8,
+       "gx": 3,
+       "gz": 11,
        "plinth": true
       },
       {
        "token": "hole_with_cones",
        "x": 10,
        "z": 8,
+       "gx": 1,
+       "gz": 11,
        "plinth": false
       },
       {
        "token": "righttriangle",
        "x": 8,
        "z": 8,
+       "gx": 1,
+       "gz": 13,
        "plinth": true
       },
       {
        "token": "sphere_mid",
        "x": 6,
        "z": 8,
+       "gx": 3,
+       "gz": 13,
        "plinth": false
       },
       {
        "token": "floating_sphere_field",
        "x": 4,
        "z": 8,
+       "gx": 4,
+       "gz": 13,
        "plinth": false
       },
       {
        "token": "sphere_mid",
        "x": 3,
        "z": 8,
+       "gx": 5,
+       "gz": 13,
        "plinth": false
       },
       {
        "token": "sphere_high",
        "x": 3,
        "z": 10,
+       "gx": 5,
+       "gz": 11,
        "plinth": true
       },
       {
        "token": "star_primitive",
        "x": 5,
        "z": 10,
+       "gx": 7,
+       "gz": 11,
        "plinth": true
       },
       {
        "token": "truncatedtetrahedron",
        "x": 7,
        "z": 10,
+       "gx": 7,
+       "gz": 13,
        "plinth": true
       },
       {
        "token": "capsule",
        "x": 9,
        "z": 10,
+       "gx": 7,
+       "gz": 15,
        "plinth": true
       },
       {
        "token": "sphere_low",
        "x": 11,
        "z": 12,
+       "gx": 5,
+       "gz": 15,
        "plinth": false
       },
       {
        "token": "sphere_low",
        "x": 8,
        "z": 12,
+       "gx": 3,
+       "gz": 15,
        "plinth": false
       },
       {
        "token": "roughrock",
        "x": 6,
        "z": 12,
+       "gx": 1,
+       "gz": 15,
        "plinth": true
       },
       {
        "token": "grab_octahedron",
        "x": 4,
        "z": 12,
+       "gx": 2,
+       "gz": 17,
        "plinth": true
       },
       {
        "token": "snap_octahedron_puzzle",
        "x": 2,
        "z": 12,
+       "gx": 4,
+       "gz": 17,
        "plinth": false
       },
       {
        "token": "grab_octahedron",
        "x": 5,
        "z": 14,
+       "gx": 6,
+       "gz": 17,
        "plinth": true
       },
       {
        "token": "lshape",
        "x": 7,
        "z": 14,
+       "gx": 5,
+       "gz": 20,
        "plinth": false
       },
       {
        "token": "prism_block",
        "x": 8,
        "z": 14,
+       "gx": 5,
+       "gz": 21,
        "plinth": false
       },
       {
        "token": "prism_block",
        "x": 10,
        "z": 14,
+       "gx": 6,
+       "gz": 21,
        "plinth": false
       },
       {
        "token": "prism_block",
        "x": 11,
        "z": 15,
+       "gx": 7,
+       "gz": 21,
        "plinth": false
       },
       {
        "token": "prism_block",
        "x": 11,
        "z": 17,
+       "gx": 8,
+       "gz": 21,
        "plinth": false
       },
       {
        "token": "library_rack",
        "x": 9,
        "z": 16,
+       "gx": 8,
+       "gz": 22,
        "plinth": false
       },
       {
        "token": "torus_radials_rings",
        "x": 7,
        "z": 16,
+       "gx": 8,
+       "gz": 23,
        "plinth": false
       },
       {
        "token": "capsule_radials_rings",
        "x": 5,
        "z": 17,
+       "gx": 6,
+       "gz": 23,
        "plinth": false
       },
       {
        "token": "capsule_radials_rings",
        "x": 5,
        "z": 18,
+       "gx": 5,
+       "gz": 23,
        "plinth": false
       },
       {
        "token": "capsule_radials_rings",
        "x": 6,
        "z": 18,
+       "gx": 3,
+       "gz": 23,
        "plinth": false
       },
       {
        "token": "capsule_radials_rings",
        "x": 7,
        "z": 18,
+       "gx": 2,
+       "gz": 23,
        "plinth": false
       },
       {
        "token": "prism_block",
        "x": 9,
        "z": 18,
+       "gx": 2,
+       "gz": 21,
        "plinth": false
       },
       {
        "token": "prism_block",
        "x": 11,
        "z": 18,
+       "gx": 3,
+       "gz": 21,
        "plinth": false
       },
       {
        "token": "lshape",
        "x": 13,
        "z": 19,
+       "gx": 3,
+       "gz": 20,
        "plinth": false
       },
       {
        "token": "prism_block",
        "x": 11,
        "z": 20,
+       "gx": 1,
+       "gz": 21,
        "plinth": false
       },
       {
        "token": "prism_block",
        "x": 8,
        "z": 20,
+       "gx": 0,
+       "gz": 21,
        "plinth": false
       },
       {
        "token": "torus_radials_rings",
        "x": 6,
        "z": 20,
+       "gx": 0,
+       "gz": 23,
        "plinth": false
       },
       {
        "token": "plus",
        "x": 4,
        "z": 20,
+       "gx": 1,
+       "gz": 25,
        "plinth": false
       },
       {
        "token": "diamonds",
        "x": 3,
        "z": 22,
+       "gx": 4,
+       "gz": 25,
        "plinth": false
       },
       {
        "token": "plus",
        "x": 6,
        "z": 22,
+       "gx": 7,
+       "gz": 25,
        "plinth": false
       }
      ],
@@ -558,240 +718,320 @@
        "token": "dark_sphere",
        "x": 3,
        "z": 6,
+       "gx": 0,
+       "gz": 0,
        "plinth": false
       },
       {
        "token": "cube_scene",
        "x": 4,
        "z": 5,
+       "gx": 1,
+       "gz": 0,
        "plinth": false
       },
       {
        "token": "sphere",
        "x": 5,
        "z": 6,
+       "gx": 2,
+       "gz": 0,
        "plinth": false
       },
       {
        "token": "platonic_grabbables",
        "x": 9,
        "z": 6,
+       "gx": 3,
+       "gz": 4,
        "plinth": true
       },
       {
        "token": "sphere_high",
        "x": 8,
        "z": 10,
+       "gx": 3,
+       "gz": 11,
        "plinth": true
       },
       {
        "token": "hole_with_cones",
        "x": 10,
        "z": 9,
+       "gx": 1,
+       "gz": 11,
        "plinth": false
       },
       {
        "token": "righttriangle",
        "x": 8,
        "z": 8,
+       "gx": 1,
+       "gz": 13,
        "plinth": true
       },
       {
        "token": "sphere_mid",
        "x": 7,
        "z": 9,
+       "gx": 3,
+       "gz": 13,
        "plinth": false
       },
       {
        "token": "floating_sphere_field",
        "x": 5,
        "z": 8,
+       "gx": 4,
+       "gz": 13,
        "plinth": false
       },
       {
        "token": "sphere_mid",
        "x": 6,
        "z": 10,
+       "gx": 5,
+       "gz": 13,
        "plinth": false
       },
       {
        "token": "sphere_high",
        "x": 5,
        "z": 10,
+       "gx": 5,
+       "gz": 11,
        "plinth": true
       },
       {
        "token": "star_primitive",
        "x": 4,
        "z": 12,
+       "gx": 7,
+       "gz": 11,
        "plinth": true
       },
       {
        "token": "truncatedtetrahedron",
        "x": 7,
        "z": 11,
+       "gx": 7,
+       "gz": 13,
        "plinth": true
       },
       {
        "token": "capsule",
        "x": 8,
        "z": 12,
+       "gx": 7,
+       "gz": 15,
        "plinth": true
       },
       {
        "token": "sphere_low",
        "x": 6,
        "z": 12,
+       "gx": 5,
+       "gz": 15,
        "plinth": false
       },
       {
        "token": "sphere_low",
        "x": 8,
        "z": 11,
+       "gx": 3,
+       "gz": 15,
        "plinth": false
       },
       {
        "token": "roughrock",
        "x": 6,
        "z": 11,
+       "gx": 1,
+       "gz": 15,
        "plinth": true
       },
       {
        "token": "grab_octahedron",
        "x": 7,
        "z": 13,
+       "gx": 2,
+       "gz": 17,
        "plinth": true
       },
       {
        "token": "snap_octahedron_puzzle",
        "x": 5,
        "z": 13,
+       "gx": 4,
+       "gz": 17,
        "plinth": false
       },
       {
        "token": "grab_octahedron",
        "x": 6,
        "z": 15,
+       "gx": 6,
+       "gz": 17,
        "plinth": true
       },
       {
        "token": "lshape",
        "x": 8,
        "z": 14,
+       "gx": 5,
+       "gz": 20,
        "plinth": false
       },
       {
        "token": "prism_block",
        "x": 8,
        "z": 15,
+       "gx": 5,
+       "gz": 21,
        "plinth": false
       },
       {
        "token": "prism_block",
        "x": 9,
        "z": 15,
+       "gx": 6,
+       "gz": 21,
        "plinth": false
       },
       {
        "token": "prism_block",
        "x": 9,
        "z": 16,
+       "gx": 7,
+       "gz": 21,
        "plinth": false
       },
       {
        "token": "prism_block",
        "x": 12,
        "z": 16,
+       "gx": 8,
+       "gz": 21,
        "plinth": false
       },
       {
        "token": "library_rack",
        "x": 10,
        "z": 17,
+       "gx": 8,
+       "gz": 22,
        "plinth": false
       },
       {
        "token": "torus_radials_rings",
        "x": 9,
        "z": 18,
+       "gx": 8,
+       "gz": 23,
        "plinth": false
       },
       {
        "token": "capsule_radials_rings",
        "x": 7,
        "z": 17,
+       "gx": 6,
+       "gz": 23,
        "plinth": false
       },
       {
        "token": "capsule_radials_rings",
        "x": 7,
        "z": 16,
+       "gx": 5,
+       "gz": 23,
        "plinth": false
       },
       {
        "token": "capsule_radials_rings",
        "x": 5,
        "z": 17,
+       "gx": 3,
+       "gz": 23,
        "plinth": false
       },
       {
        "token": "capsule_radials_rings",
        "x": 6,
        "z": 18,
+       "gx": 2,
+       "gz": 23,
        "plinth": false
       },
       {
        "token": "prism_block",
        "x": 8,
        "z": 18,
+       "gx": 2,
+       "gz": 21,
        "plinth": false
       },
       {
        "token": "prism_block",
        "x": 9,
        "z": 17,
+       "gx": 3,
+       "gz": 21,
        "plinth": false
       },
       {
        "token": "lshape",
        "x": 8,
        "z": 16,
+       "gx": 3,
+       "gz": 20,
        "plinth": false
       },
       {
        "token": "prism_block",
        "x": 8,
        "z": 19,
+       "gx": 1,
+       "gz": 21,
        "plinth": false
       },
       {
        "token": "prism_block",
        "x": 8,
        "z": 20,
+       "gx": 0,
+       "gz": 21,
        "plinth": false
       },
       {
        "token": "torus_radials_rings",
        "x": 6,
        "z": 19,
+       "gx": 0,
+       "gz": 23,
        "plinth": false
       },
       {
        "token": "plus",
        "x": 5,
        "z": 18,
+       "gx": 1,
+       "gz": 25,
        "plinth": false
       },
       {
        "token": "diamonds",
        "x": 5,
        "z": 20,
+       "gx": 4,
+       "gz": 25,
        "plinth": false
       },
       {
        "token": "plus",
        "x": 7,
        "z": 19,
+       "gx": 7,
+       "gz": 25,
        "plinth": false
       }
      ],
@@ -810,240 +1050,320 @@
        "token": "dark_sphere",
        "x": 3,
        "z": 6,
+       "gx": 0,
+       "gz": 0,
        "plinth": false
       },
       {
        "token": "cube_scene",
        "x": 4,
        "z": 6,
+       "gx": 1,
+       "gz": 0,
        "plinth": false
       },
       {
        "token": "sphere",
        "x": 5,
        "z": 6,
+       "gx": 2,
+       "gz": 0,
        "plinth": false
       },
       {
        "token": "platonic_grabbables",
        "x": 6,
        "z": 10,
+       "gx": 3,
+       "gz": 4,
        "plinth": true
       },
       {
        "token": "sphere_high",
        "x": 6,
        "z": 17,
+       "gx": 3,
+       "gz": 11,
        "plinth": true
       },
       {
        "token": "hole_with_cones",
        "x": 4,
        "z": 18,
+       "gx": 1,
+       "gz": 11,
        "plinth": false
       },
       {
        "token": "righttriangle",
        "x": 4,
        "z": 19,
+       "gx": 1,
+       "gz": 13,
        "plinth": true
       },
       {
        "token": "sphere_mid",
        "x": 6,
        "z": 19,
+       "gx": 3,
+       "gz": 13,
        "plinth": false
       },
       {
        "token": "floating_sphere_field",
        "x": 7,
        "z": 19,
+       "gx": 4,
+       "gz": 13,
        "plinth": false
       },
       {
        "token": "sphere_mid",
        "x": 8,
        "z": 19,
+       "gx": 5,
+       "gz": 13,
        "plinth": false
       },
       {
        "token": "sphere_high",
        "x": 8,
        "z": 17,
+       "gx": 5,
+       "gz": 11,
        "plinth": true
       },
       {
        "token": "star_primitive",
        "x": 10,
        "z": 17,
+       "gx": 7,
+       "gz": 11,
        "plinth": true
       },
       {
        "token": "truncatedtetrahedron",
        "x": 10,
        "z": 19,
+       "gx": 7,
+       "gz": 13,
        "plinth": true
       },
       {
        "token": "capsule",
        "x": 10,
        "z": 21,
+       "gx": 7,
+       "gz": 15,
        "plinth": true
       },
       {
        "token": "sphere_low",
        "x": 7,
        "z": 21,
+       "gx": 5,
+       "gz": 15,
        "plinth": false
       },
       {
        "token": "sphere_low",
        "x": 6,
        "z": 21,
+       "gx": 3,
+       "gz": 15,
        "plinth": false
       },
       {
        "token": "roughrock",
        "x": 4,
        "z": 21,
+       "gx": 1,
+       "gz": 15,
        "plinth": true
       },
       {
        "token": "grab_octahedron",
        "x": 5,
        "z": 23,
+       "gx": 2,
+       "gz": 17,
        "plinth": true
       },
       {
        "token": "snap_octahedron_puzzle",
        "x": 7,
        "z": 23,
+       "gx": 4,
+       "gz": 17,
        "plinth": false
       },
       {
        "token": "grab_octahedron",
        "x": 9,
        "z": 23,
+       "gx": 6,
+       "gz": 17,
        "plinth": true
       },
       {
        "token": "lshape",
        "x": 8,
        "z": 26,
+       "gx": 5,
+       "gz": 20,
        "plinth": false
       },
       {
        "token": "prism_block",
        "x": 7,
        "z": 27,
+       "gx": 5,
+       "gz": 21,
        "plinth": false
       },
       {
        "token": "prism_block",
        "x": 9,
        "z": 28,
+       "gx": 6,
+       "gz": 21,
        "plinth": false
       },
       {
        "token": "prism_block",
        "x": 10,
        "z": 27,
+       "gx": 7,
+       "gz": 21,
        "plinth": false
       },
       {
        "token": "prism_block",
        "x": 11,
        "z": 27,
+       "gx": 8,
+       "gz": 21,
        "plinth": false
       },
       {
        "token": "library_rack",
        "x": 11,
        "z": 28,
+       "gx": 8,
+       "gz": 22,
        "plinth": false
       },
       {
        "token": "torus_radials_rings",
        "x": 11,
        "z": 29,
+       "gx": 8,
+       "gz": 23,
        "plinth": false
       },
       {
        "token": "capsule_radials_rings",
        "x": 9,
        "z": 29,
+       "gx": 6,
+       "gz": 23,
        "plinth": false
       },
       {
        "token": "capsule_radials_rings",
        "x": 8,
        "z": 29,
+       "gx": 5,
+       "gz": 23,
        "plinth": false
       },
       {
        "token": "capsule_radials_rings",
        "x": 6,
        "z": 29,
+       "gx": 3,
+       "gz": 23,
        "plinth": false
       },
       {
        "token": "capsule_radials_rings",
        "x": 5,
        "z": 29,
+       "gx": 2,
+       "gz": 23,
        "plinth": false
       },
       {
        "token": "prism_block",
        "x": 5,
        "z": 27,
+       "gx": 2,
+       "gz": 21,
        "plinth": false
       },
       {
        "token": "prism_block",
        "x": 6,
        "z": 27,
+       "gx": 3,
+       "gz": 21,
        "plinth": false
       },
       {
        "token": "lshape",
        "x": 6,
        "z": 26,
+       "gx": 3,
+       "gz": 20,
        "plinth": false
       },
       {
        "token": "prism_block",
        "x": 4,
        "z": 27,
+       "gx": 1,
+       "gz": 21,
        "plinth": false
       },
       {
        "token": "prism_block",
        "x": 3,
        "z": 27,
+       "gx": 0,
+       "gz": 21,
        "plinth": false
       },
       {
        "token": "torus_radials_rings",
        "x": 3,
        "z": 29,
+       "gx": 0,
+       "gz": 23,
        "plinth": false
       },
       {
        "token": "plus",
        "x": 4,
        "z": 31,
+       "gx": 1,
+       "gz": 25,
        "plinth": false
       },
       {
        "token": "diamonds",
        "x": 11,
        "z": 31,
+       "gx": 4,
+       "gz": 25,
        "plinth": false
       },
       {
        "token": "plus",
        "x": 10,
        "z": 31,
+       "gx": 7,
+       "gz": 25,
        "plinth": false
       }
      ],
@@ -1054,6 +1374,418 @@
       "distortion": 0.49,
       "blocked": 7,
       "min_sep": 1.0
+     }
+    },
+    "hand": {
+     "positions": [
+      {
+       "token": "dark_sphere",
+       "x": 2.44,
+       "z": 6.5,
+       "gx": 0,
+       "gz": 0,
+       "plinth": false,
+       "pinned": false,
+       "added": false
+      },
+      {
+       "token": "cube_scene",
+       "x": 4.0,
+       "z": 6.5,
+       "gx": 1,
+       "gz": 0,
+       "plinth": false,
+       "pinned": false,
+       "added": false
+      },
+      {
+       "token": "sphere",
+       "x": 5.56,
+       "z": 6.53,
+       "gx": 2,
+       "gz": 0,
+       "plinth": false,
+       "pinned": false,
+       "added": false
+      },
+      {
+       "token": "platonic_grabbables",
+       "x": 9.54,
+       "z": 6.11,
+       "gx": 3,
+       "gz": 4,
+       "plinth": true,
+       "pinned": false,
+       "added": false
+      },
+      {
+       "token": "sphere_high",
+       "x": 12.4,
+       "z": 8.9,
+       "gx": 3,
+       "gz": 11,
+       "plinth": true,
+       "pinned": false,
+       "added": false
+      },
+      {
+       "token": "hole_with_cones",
+       "x": 10.45,
+       "z": 8.45,
+       "gx": 1,
+       "gz": 11,
+       "plinth": false,
+       "pinned": false,
+       "added": false
+      },
+      {
+       "token": "righttriangle",
+       "x": 8.45,
+       "z": 8.51,
+       "gx": 1,
+       "gz": 13,
+       "plinth": true,
+       "pinned": false,
+       "added": false
+      },
+      {
+       "token": "sphere_mid",
+       "x": 6.45,
+       "z": 8.48,
+       "gx": 3,
+       "gz": 13,
+       "plinth": false,
+       "pinned": false,
+       "added": false
+      },
+      {
+       "token": "floating_sphere_field",
+       "x": 6.01,
+       "z": 9.98,
+       "gx": 4,
+       "gz": 13,
+       "plinth": false,
+       "pinned": false,
+       "added": false
+      },
+      {
+       "token": "sphere_mid",
+       "x": 7.11,
+       "z": 11.09,
+       "gx": 5,
+       "gz": 13,
+       "plinth": false,
+       "pinned": false,
+       "added": false
+      },
+      {
+       "token": "sphere_high",
+       "x": 8.51,
+       "z": 12.6,
+       "gx": 5,
+       "gz": 11,
+       "plinth": true,
+       "pinned": false,
+       "added": false
+      },
+      {
+       "token": "star_primitive",
+       "x": 10.48,
+       "z": 13.28,
+       "gx": 7,
+       "gz": 11,
+       "plinth": true,
+       "pinned": false,
+       "added": false
+      },
+      {
+       "token": "truncatedtetrahedron",
+       "x": 12.92,
+       "z": 14.01,
+       "gx": 7,
+       "gz": 13,
+       "plinth": true,
+       "pinned": true,
+       "added": false
+      },
+      {
+       "token": "capsule",
+       "x": 9.79,
+       "z": 12.12,
+       "gx": 7,
+       "gz": 15,
+       "plinth": true,
+       "pinned": false,
+       "added": false
+      },
+      {
+       "token": "sphere_low",
+       "x": 11.55,
+       "z": 13.55,
+       "gx": 5,
+       "gz": 15,
+       "plinth": false,
+       "pinned": false,
+       "added": false
+      },
+      {
+       "token": "sphere_low",
+       "x": 9.34,
+       "z": 14.15,
+       "gx": 3,
+       "gz": 15,
+       "plinth": false,
+       "pinned": false,
+       "added": false
+      },
+      {
+       "token": "roughrock",
+       "x": 7.34,
+       "z": 13.68,
+       "gx": 1,
+       "gz": 15,
+       "plinth": true,
+       "pinned": false,
+       "added": false
+      },
+      {
+       "token": "grab_octahedron",
+       "x": 5.46,
+       "z": 12.43,
+       "gx": 2,
+       "gz": 17,
+       "plinth": true,
+       "pinned": false,
+       "added": false
+      },
+      {
+       "token": "snap_octahedron_puzzle",
+       "x": 3.46,
+       "z": 12.61,
+       "gx": 4,
+       "gz": 17,
+       "plinth": false,
+       "pinned": false,
+       "added": false
+      },
+      {
+       "token": "grab_octahedron",
+       "x": 4.95,
+       "z": 13.95,
+       "gx": 6,
+       "gz": 17,
+       "plinth": true,
+       "pinned": false,
+       "added": false
+      },
+      {
+       "token": "lshape",
+       "x": 7.89,
+       "z": 15.17,
+       "gx": 5,
+       "gz": 20,
+       "plinth": false,
+       "pinned": false,
+       "added": false
+      },
+      {
+       "token": "prism_block",
+       "x": 9.36,
+       "z": 15.72,
+       "gx": 5,
+       "gz": 21,
+       "plinth": false,
+       "pinned": false,
+       "added": false
+      },
+      {
+       "token": "prism_block",
+       "x": 10.71,
+       "z": 14.92,
+       "gx": 6,
+       "gz": 21,
+       "plinth": false,
+       "pinned": false,
+       "added": false
+      },
+      {
+       "token": "prism_block",
+       "x": 11.96,
+       "z": 15.83,
+       "gx": 7,
+       "gz": 21,
+       "plinth": false,
+       "pinned": false,
+       "added": false
+      },
+      {
+       "token": "prism_block",
+       "x": 10.96,
+       "z": 17.02,
+       "gx": 8,
+       "gz": 21,
+       "plinth": false,
+       "pinned": false,
+       "added": false
+      },
+      {
+       "token": "library_rack",
+       "x": 9.44,
+       "z": 17.35,
+       "gx": 8,
+       "gz": 22,
+       "plinth": false,
+       "pinned": false,
+       "added": false
+      },
+      {
+       "token": "torus_radials_rings",
+       "x": 7.96,
+       "z": 16.85,
+       "gx": 8,
+       "gz": 23,
+       "plinth": false,
+       "pinned": false,
+       "added": false
+      },
+      {
+       "token": "capsule_radials_rings",
+       "x": 5.97,
+       "z": 16.95,
+       "gx": 6,
+       "gz": 23,
+       "plinth": false,
+       "pinned": false,
+       "added": false
+      },
+      {
+       "token": "capsule_radials_rings",
+       "x": 5.04,
+       "z": 18.2,
+       "gx": 5,
+       "gz": 23,
+       "plinth": false,
+       "pinned": false,
+       "added": false
+      },
+      {
+       "token": "capsule_radials_rings",
+       "x": 7.04,
+       "z": 18.15,
+       "gx": 3,
+       "gz": 23,
+       "plinth": false,
+       "pinned": false,
+       "added": false
+      },
+      {
+       "token": "capsule_radials_rings",
+       "x": 7.94,
+       "z": 19.42,
+       "gx": 2,
+       "gz": 23,
+       "plinth": false,
+       "pinned": false,
+       "added": false
+      },
+      {
+       "token": "prism_block",
+       "x": 9.94,
+       "z": 19.38,
+       "gx": 2,
+       "gz": 21,
+       "plinth": false,
+       "pinned": false,
+       "added": false
+      },
+      {
+       "token": "prism_block",
+       "x": 11.28,
+       "z": 18.59,
+       "gx": 3,
+       "gz": 21,
+       "plinth": false,
+       "pinned": false,
+       "added": false
+      },
+      {
+       "token": "lshape",
+       "x": 11.98,
+       "z": 19.98,
+       "gx": 3,
+       "gz": 20,
+       "plinth": false,
+       "pinned": false,
+       "added": false
+      },
+      {
+       "token": "prism_block",
+       "x": 11.02,
+       "z": 21.99,
+       "gx": 1,
+       "gz": 21,
+       "plinth": false,
+       "pinned": false,
+       "added": false
+      },
+      {
+       "token": "prism_block",
+       "x": 9.61,
+       "z": 21.34,
+       "gx": 0,
+       "gz": 21,
+       "plinth": false,
+       "pinned": false,
+       "added": false
+      },
+      {
+       "token": "torus_radials_rings",
+       "x": 7.64,
+       "z": 21.0,
+       "gx": 0,
+       "gz": 23,
+       "plinth": false,
+       "pinned": false,
+       "added": false
+      },
+      {
+       "token": "plus",
+       "x": 5.45,
+       "z": 20.61,
+       "gx": 1,
+       "gz": 25,
+       "plinth": false,
+       "pinned": false,
+       "added": false
+      },
+      {
+       "token": "diamonds",
+       "x": 3.45,
+       "z": 22.85,
+       "gx": 4,
+       "gz": 25,
+       "plinth": false,
+       "pinned": false,
+       "added": false
+      },
+      {
+       "token": "plus",
+       "x": 6.43,
+       "z": 22.51,
+       "gx": 7,
+       "gz": 25,
+       "plinth": false,
+       "pinned": false,
+       "added": false
+      }
+     ],
+     "score": {
+      "placed": 40,
+      "of": 40,
+      "order": 0.949,
+      "distortion": 0.1,
+      "blocked": 0,
+      "min_sep": 1.1
      }
     }
    }
@@ -1078,42 +1810,56 @@
        "token": "player_trace",
        "x": 2,
        "z": 6,
+       "gx": 0,
+       "gz": 0,
        "plinth": false
       },
       {
        "token": "grid_lines",
        "x": 6,
        "z": 6,
+       "gx": 4,
+       "gz": 3,
        "plinth": false
       },
       {
        "token": "floating_sphere_field",
        "x": 10,
        "z": 6,
+       "gx": 4,
+       "gz": 7,
        "plinth": false
       },
       {
        "token": "grab_sphere_point_snap",
        "x": 12,
        "z": 6,
+       "gx": 2,
+       "gz": 8,
        "plinth": true
       },
       {
        "token": "ConeTwistBag",
        "x": 11,
        "z": 8,
+       "gx": 0,
+       "gz": 9,
        "plinth": false
       },
       {
        "token": "ConnectedTriangles",
        "x": 7,
        "z": 8,
+       "gx": 6,
+       "gz": 10,
        "plinth": false
       },
       {
        "token": "room_grammar",
        "x": 3,
        "z": 8,
+       "gx": 7,
+       "gz": 13,
        "plinth": false
       }
      ],
@@ -1132,42 +1878,56 @@
        "token": "player_trace",
        "x": 2,
        "z": 6,
+       "gx": 0,
+       "gz": 0,
        "plinth": false
       },
       {
        "token": "grid_lines",
        "x": 6,
        "z": 6,
+       "gx": 4,
+       "gz": 3,
        "plinth": false
       },
       {
        "token": "floating_sphere_field",
        "x": 10,
        "z": 6,
+       "gx": 4,
+       "gz": 7,
        "plinth": false
       },
       {
        "token": "grab_sphere_point_snap",
        "x": 12,
        "z": 6,
+       "gx": 2,
+       "gz": 8,
        "plinth": true
       },
       {
        "token": "ConeTwistBag",
        "x": 11,
        "z": 8,
+       "gx": 0,
+       "gz": 9,
        "plinth": false
       },
       {
        "token": "ConnectedTriangles",
        "x": 7,
        "z": 8,
+       "gx": 6,
+       "gz": 10,
        "plinth": false
       },
       {
        "token": "room_grammar",
        "x": 4,
        "z": 8,
+       "gx": 7,
+       "gz": 13,
        "plinth": false
       }
      ],
@@ -1186,42 +1946,56 @@
        "token": "player_trace",
        "x": 2,
        "z": 6,
+       "gx": 0,
+       "gz": 0,
        "plinth": false
       },
       {
        "token": "grid_lines",
        "x": 6,
        "z": 6,
+       "gx": 4,
+       "gz": 3,
        "plinth": false
       },
       {
        "token": "floating_sphere_field",
        "x": 10,
        "z": 6,
+       "gx": 4,
+       "gz": 7,
        "plinth": false
       },
       {
        "token": "grab_sphere_point_snap",
        "x": 12,
        "z": 6,
+       "gx": 2,
+       "gz": 8,
        "plinth": true
       },
       {
        "token": "ConeTwistBag",
        "x": 11,
        "z": 8,
+       "gx": 0,
+       "gz": 9,
        "plinth": false
       },
       {
        "token": "ConnectedTriangles",
        "x": 7,
        "z": 8,
+       "gx": 6,
+       "gz": 10,
        "plinth": false
       },
       {
        "token": "room_grammar",
        "x": 4,
        "z": 8,
+       "gx": 7,
+       "gz": 13,
        "plinth": false
       }
      ],
@@ -1240,42 +2014,56 @@
        "token": "player_trace",
        "x": 3,
        "z": 12,
+       "gx": 0,
+       "gz": 0,
        "plinth": false
       },
       {
        "token": "grid_lines",
        "x": 6,
        "z": 15,
+       "gx": 4,
+       "gz": 3,
        "plinth": false
       },
       {
        "token": "floating_sphere_field",
        "x": 7,
        "z": 19,
+       "gx": 4,
+       "gz": 7,
        "plinth": false
       },
       {
        "token": "grab_sphere_point_snap",
        "x": 5,
        "z": 20,
+       "gx": 2,
+       "gz": 8,
        "plinth": true
       },
       {
        "token": "ConeTwistBag",
        "x": 5,
        "z": 20,
+       "gx": 0,
+       "gz": 9,
        "plinth": false
       },
       {
        "token": "ConnectedTriangles",
        "x": 12,
        "z": 27,
+       "gx": 6,
+       "gz": 10,
        "plinth": false
       },
       {
        "token": "room_grammar",
        "x": 10,
        "z": 25,
+       "gx": 7,
+       "gz": 13,
        "plinth": false
       }
      ],
@@ -1314,66 +2102,88 @@
        "token": "folding_past",
        "x": 2,
        "z": 6,
+       "gx": 2,
+       "gz": 0,
        "plinth": false
       },
       {
        "token": "lab_room",
        "x": 4,
        "z": 6,
+       "gx": 1,
+       "gz": 0,
        "plinth": false
       },
       {
        "token": "origin",
        "x": 5,
        "z": 6,
+       "gx": 0,
+       "gz": 0,
        "plinth": false
       },
       {
        "token": "frame_counter_display",
        "x": 11,
        "z": 6,
+       "gx": 0,
+       "gz": 5,
        "plinth": false
       },
       {
        "token": "you_are_here",
        "x": 10,
        "z": 8,
+       "gx": 3,
+       "gz": 7,
        "plinth": false
       },
       {
        "token": "fontana_puncture",
        "x": 7,
        "z": 8,
+       "gx": 3,
+       "gz": 10,
        "plinth": false
       },
       {
        "token": "interactive_point_origin_force",
        "x": 6,
        "z": 8,
+       "gx": 2,
+       "gz": 11,
        "plinth": false
       },
       {
        "token": "interactive_point_origin_force",
        "x": 4,
        "z": 8,
+       "gx": 1,
+       "gz": 11,
        "plinth": false
       },
       {
        "token": "interactive_point_origin_force",
        "x": 2,
        "z": 10,
+       "gx": 4,
+       "gz": 11,
        "plinth": false
       },
       {
        "token": "floating_sphere_field",
        "x": 3,
        "z": 10,
+       "gx": 5,
+       "gz": 12,
        "plinth": false
       },
       {
        "token": "CoordinateSystem3M",
        "x": 8,
        "z": 10,
+       "gx": 0,
+       "gz": 14,
        "plinth": false
       }
      ],
@@ -1392,66 +2202,88 @@
        "token": "folding_past",
        "x": 3,
        "z": 6,
+       "gx": 2,
+       "gz": 0,
        "plinth": false
       },
       {
        "token": "lab_room",
        "x": 4,
        "z": 6,
+       "gx": 1,
+       "gz": 0,
        "plinth": false
       },
       {
        "token": "origin",
        "x": 6,
        "z": 7,
+       "gx": 0,
+       "gz": 0,
        "plinth": false
       },
       {
        "token": "frame_counter_display",
        "x": 10,
        "z": 5,
+       "gx": 0,
+       "gz": 5,
        "plinth": false
       },
       {
        "token": "you_are_here",
        "x": 10,
        "z": 9,
+       "gx": 3,
+       "gz": 7,
        "plinth": false
       },
       {
        "token": "fontana_puncture",
        "x": 7,
        "z": 8,
+       "gx": 3,
+       "gz": 10,
        "plinth": false
       },
       {
        "token": "interactive_point_origin_force",
        "x": 6,
        "z": 8,
+       "gx": 2,
+       "gz": 11,
        "plinth": false
       },
       {
        "token": "interactive_point_origin_force",
        "x": 4,
        "z": 8,
+       "gx": 1,
+       "gz": 11,
        "plinth": false
       },
       {
        "token": "interactive_point_origin_force",
        "x": 2,
        "z": 10,
+       "gx": 4,
+       "gz": 11,
        "plinth": false
       },
       {
        "token": "floating_sphere_field",
        "x": 3,
        "z": 10,
+       "gx": 5,
+       "gz": 12,
        "plinth": false
       },
       {
        "token": "CoordinateSystem3M",
        "x": 7,
        "z": 10,
+       "gx": 0,
+       "gz": 14,
        "plinth": false
       }
      ],
@@ -1470,66 +2302,88 @@
        "token": "folding_past",
        "x": 4,
        "z": 7,
+       "gx": 2,
+       "gz": 0,
        "plinth": false
       },
       {
        "token": "lab_room",
        "x": 4,
        "z": 5,
+       "gx": 1,
+       "gz": 0,
        "plinth": false
       },
       {
        "token": "origin",
        "x": 5,
        "z": 6,
+       "gx": 0,
+       "gz": 0,
        "plinth": false
       },
       {
        "token": "frame_counter_display",
        "x": 9,
        "z": 5,
+       "gx": 0,
+       "gz": 5,
        "plinth": false
       },
       {
        "token": "you_are_here",
        "x": 9,
        "z": 9,
+       "gx": 3,
+       "gz": 7,
        "plinth": false
       },
       {
        "token": "fontana_puncture",
        "x": 6,
        "z": 9,
+       "gx": 3,
+       "gz": 10,
        "plinth": false
       },
       {
        "token": "interactive_point_origin_force",
        "x": 4,
        "z": 8,
+       "gx": 2,
+       "gz": 11,
        "plinth": false
       },
       {
        "token": "interactive_point_origin_force",
        "x": 5,
        "z": 7,
+       "gx": 1,
+       "gz": 11,
        "plinth": false
       },
       {
        "token": "interactive_point_origin_force",
        "x": 5,
        "z": 11,
+       "gx": 4,
+       "gz": 11,
        "plinth": false
       },
       {
        "token": "floating_sphere_field",
        "x": 4,
        "z": 12,
+       "gx": 5,
+       "gz": 12,
        "plinth": false
       },
       {
        "token": "CoordinateSystem3M",
        "x": 7,
        "z": 10,
+       "gx": 0,
+       "gz": 14,
        "plinth": false
       }
      ],
@@ -1548,66 +2402,88 @@
        "token": "folding_past",
        "x": 6,
        "z": 11,
+       "gx": 2,
+       "gz": 0,
        "plinth": false
       },
       {
        "token": "lab_room",
        "x": 4,
        "z": 11,
+       "gx": 1,
+       "gz": 0,
        "plinth": false
       },
       {
        "token": "origin",
        "x": 4,
        "z": 11,
+       "gx": 0,
+       "gz": 0,
        "plinth": false
       },
       {
        "token": "frame_counter_display",
        "x": 4,
        "z": 16,
+       "gx": 0,
+       "gz": 5,
        "plinth": false
       },
       {
        "token": "you_are_here",
        "x": 7,
        "z": 18,
+       "gx": 3,
+       "gz": 7,
        "plinth": false
       },
       {
        "token": "fontana_puncture",
        "x": 7,
        "z": 21,
+       "gx": 3,
+       "gz": 10,
        "plinth": false
       },
       {
        "token": "interactive_point_origin_force",
        "x": 6,
        "z": 22,
+       "gx": 2,
+       "gz": 11,
        "plinth": false
       },
       {
        "token": "interactive_point_origin_force",
        "x": 5,
        "z": 22,
+       "gx": 1,
+       "gz": 11,
        "plinth": false
       },
       {
        "token": "interactive_point_origin_force",
        "x": 8,
        "z": 22,
+       "gx": 4,
+       "gz": 11,
        "plinth": false
       },
       {
        "token": "floating_sphere_field",
        "x": 9,
        "z": 23,
+       "gx": 5,
+       "gz": 12,
        "plinth": false
       },
       {
        "token": "CoordinateSystem3M",
        "x": 4,
        "z": 27,
+       "gx": 0,
+       "gz": 14,
        "plinth": false
       }
      ],
@@ -1644,54 +2520,72 @@
        "token": "grab_trihedron",
        "x": 2,
        "z": 6,
+       "gx": 2,
+       "gz": 0,
        "plinth": false
       },
       {
        "token": "path_game_controller",
        "x": 4,
        "z": 6,
+       "gx": 4,
+       "gz": 0,
        "plinth": false
       },
       {
        "token": "path_watchdog",
        "x": 6,
        "z": 6,
+       "gx": 4,
+       "gz": 1,
        "plinth": false
       },
       {
        "token": "lab_room",
        "x": 10,
        "z": 6,
+       "gx": 0,
+       "gz": 2,
        "plinth": false
       },
       {
        "token": "cube_scene",
        "x": 11,
        "z": 8,
+       "gx": 2,
+       "gz": 8,
        "plinth": false
       },
       {
        "token": "becoming_catalyst",
        "x": 10,
        "z": 8,
+       "gx": 3,
+       "gz": 8,
        "plinth": false
       },
       {
        "token": "tentacle_placer",
        "x": 9,
        "z": 8,
+       "gx": 3,
+       "gz": 9,
        "plinth": false
       },
       {
        "token": "pyramid_edit",
        "x": 7,
        "z": 8,
+       "gx": 2,
+       "gz": 9,
        "plinth": false
       },
       {
        "token": "interactive_point_origin_force",
        "x": 5,
        "z": 8,
+       "gx": 4,
+       "gz": 8,
        "plinth": false
       }
      ],
@@ -1710,54 +2604,72 @@
        "token": "grab_trihedron",
        "x": 2,
        "z": 6,
+       "gx": 2,
+       "gz": 0,
        "plinth": false
       },
       {
        "token": "path_game_controller",
        "x": 4,
        "z": 6,
+       "gx": 4,
+       "gz": 0,
        "plinth": false
       },
       {
        "token": "path_watchdog",
        "x": 6,
        "z": 6,
+       "gx": 4,
+       "gz": 1,
        "plinth": false
       },
       {
        "token": "lab_room",
        "x": 10,
        "z": 5,
+       "gx": 0,
+       "gz": 2,
        "plinth": false
       },
       {
        "token": "cube_scene",
        "x": 12,
        "z": 9,
+       "gx": 2,
+       "gz": 8,
        "plinth": false
       },
       {
        "token": "becoming_catalyst",
        "x": 10,
        "z": 8,
+       "gx": 3,
+       "gz": 8,
        "plinth": false
       },
       {
        "token": "tentacle_placer",
        "x": 9,
        "z": 8,
+       "gx": 3,
+       "gz": 9,
        "plinth": false
       },
       {
        "token": "pyramid_edit",
        "x": 7,
        "z": 8,
+       "gx": 2,
+       "gz": 9,
        "plinth": false
       },
       {
        "token": "interactive_point_origin_force",
        "x": 5,
        "z": 8,
+       "gx": 4,
+       "gz": 8,
        "plinth": false
       }
      ],
@@ -1776,54 +2688,72 @@
        "token": "grab_trihedron",
        "x": 5,
        "z": 5,
+       "gx": 2,
+       "gz": 0,
        "plinth": false
       },
       {
        "token": "path_game_controller",
        "x": 6,
        "z": 7,
+       "gx": 4,
+       "gz": 0,
        "plinth": false
       },
       {
        "token": "path_watchdog",
        "x": 4,
        "z": 7,
+       "gx": 4,
+       "gz": 1,
        "plinth": false
       },
       {
        "token": "lab_room",
        "x": 8,
        "z": 5,
+       "gx": 0,
+       "gz": 2,
        "plinth": false
       },
       {
        "token": "cube_scene",
        "x": 9,
        "z": 9,
+       "gx": 2,
+       "gz": 8,
        "plinth": false
       },
       {
        "token": "becoming_catalyst",
        "x": 9,
        "z": 8,
+       "gx": 3,
+       "gz": 8,
        "plinth": false
       },
       {
        "token": "tentacle_placer",
        "x": 8,
        "z": 8,
+       "gx": 3,
+       "gz": 9,
        "plinth": false
       },
       {
        "token": "pyramid_edit",
        "x": 8,
        "z": 7,
+       "gx": 2,
+       "gz": 9,
        "plinth": false
       },
       {
        "token": "interactive_point_origin_force",
        "x": 8,
        "z": 9,
+       "gx": 4,
+       "gz": 8,
        "plinth": false
       }
      ],
@@ -1842,54 +2772,72 @@
        "token": "grab_trihedron",
        "x": 7,
        "z": 14,
+       "gx": 2,
+       "gz": 0,
        "plinth": false
       },
       {
        "token": "path_game_controller",
        "x": 9,
        "z": 14,
+       "gx": 4,
+       "gz": 0,
        "plinth": false
       },
       {
        "token": "path_watchdog",
        "x": 9,
        "z": 15,
+       "gx": 4,
+       "gz": 1,
        "plinth": false
       },
       {
        "token": "lab_room",
        "x": 3,
        "z": 16,
+       "gx": 0,
+       "gz": 2,
        "plinth": false
       },
       {
        "token": "cube_scene",
        "x": 7,
        "z": 22,
+       "gx": 2,
+       "gz": 8,
        "plinth": false
       },
       {
        "token": "becoming_catalyst",
        "x": 7,
        "z": 22,
+       "gx": 3,
+       "gz": 8,
        "plinth": false
       },
       {
        "token": "tentacle_placer",
        "x": 7,
        "z": 23,
+       "gx": 3,
+       "gz": 9,
        "plinth": false
       },
       {
        "token": "pyramid_edit",
        "x": 7,
        "z": 23,
+       "gx": 2,
+       "gz": 9,
        "plinth": false
       },
       {
        "token": "interactive_point_origin_force",
        "x": 9,
        "z": 22,
+       "gx": 4,
+       "gz": 8,
        "plinth": false
       }
      ],
@@ -1922,30 +2870,40 @@
        "token": "dark_sphere",
        "x": 2,
        "z": 6,
+       "gx": 0,
+       "gz": 0,
        "plinth": false
       },
       {
        "token": "combine_portals",
        "x": 6,
        "z": 6,
+       "gx": 3,
+       "gz": 4,
        "plinth": false
       },
       {
        "token": "achilles_tortoise",
        "x": 8,
        "z": 6,
+       "gx": 5,
+       "gz": 5,
        "plinth": false
       },
       {
        "token": "capsule",
        "x": 11,
        "z": 6,
+       "gx": 5,
+       "gz": 2,
        "plinth": false
       },
       {
        "token": "floating_sphere_field",
        "x": 10,
        "z": 8,
+       "gx": 3,
+       "gz": 17,
        "plinth": false
       }
      ],
@@ -1964,30 +2922,40 @@
        "token": "dark_sphere",
        "x": 2,
        "z": 6,
+       "gx": 0,
+       "gz": 0,
        "plinth": false
       },
       {
        "token": "combine_portals",
        "x": 6,
        "z": 6,
+       "gx": 3,
+       "gz": 4,
        "plinth": false
       },
       {
        "token": "achilles_tortoise",
        "x": 8,
        "z": 6,
+       "gx": 5,
+       "gz": 5,
        "plinth": false
       },
       {
        "token": "capsule",
        "x": 11,
        "z": 5,
+       "gx": 5,
+       "gz": 2,
        "plinth": false
       },
       {
        "token": "floating_sphere_field",
        "x": 10,
        "z": 9,
+       "gx": 3,
+       "gz": 17,
        "plinth": false
       }
      ],
@@ -2006,30 +2974,40 @@
        "token": "dark_sphere",
        "x": 3,
        "z": 6,
+       "gx": 0,
+       "gz": 0,
        "plinth": false
       },
       {
        "token": "combine_portals",
        "x": 7,
        "z": 5,
+       "gx": 3,
+       "gz": 4,
        "plinth": false
       },
       {
        "token": "achilles_tortoise",
        "x": 8,
        "z": 7,
+       "gx": 5,
+       "gz": 5,
        "plinth": false
       },
       {
        "token": "capsule",
        "x": 10,
        "z": 5,
+       "gx": 5,
+       "gz": 2,
        "plinth": false
       },
       {
        "token": "floating_sphere_field",
        "x": 10,
        "z": 9,
+       "gx": 3,
+       "gz": 17,
        "plinth": false
       }
      ],
@@ -2048,30 +3026,40 @@
        "token": "dark_sphere",
        "x": 4,
        "z": 10,
+       "gx": 0,
+       "gz": 0,
        "plinth": false
       },
       {
        "token": "combine_portals",
        "x": 7,
        "z": 14,
+       "gx": 3,
+       "gz": 4,
        "plinth": false
       },
       {
        "token": "achilles_tortoise",
        "x": 9,
        "z": 15,
+       "gx": 5,
+       "gz": 5,
        "plinth": false
       },
       {
        "token": "capsule",
        "x": 9,
        "z": 12,
+       "gx": 5,
+       "gz": 2,
        "plinth": false
       },
       {
        "token": "floating_sphere_field",
        "x": 7,
        "z": 27,
+       "gx": 3,
+       "gz": 17,
        "plinth": false
       }
      ],
@@ -2103,24 +3091,32 @@
        "token": "pattern_tile_4x4",
        "x": 2,
        "z": 6,
+       "gx": 4,
+       "gz": 2,
        "plinth": false
       },
       {
        "token": "pattern_tile_cube",
        "x": 6,
        "z": 6,
+       "gx": 7,
+       "gz": 4,
        "plinth": false
       },
       {
        "token": "science_screen",
        "x": 8,
        "z": 6,
+       "gx": 9,
+       "gz": 5,
        "plinth": false
       },
       {
        "token": "tile_meander_floor",
        "x": 8,
        "z": 8,
+       "gx": 3,
+       "gz": 6,
        "plinth": false
       }
      ],
@@ -2139,24 +3135,32 @@
        "token": "pattern_tile_4x4",
        "x": 2,
        "z": 6,
+       "gx": 4,
+       "gz": 2,
        "plinth": false
       },
       {
        "token": "pattern_tile_cube",
        "x": 6,
        "z": 6,
+       "gx": 7,
+       "gz": 4,
        "plinth": false
       },
       {
        "token": "science_screen",
        "x": 8,
        "z": 5,
+       "gx": 9,
+       "gz": 5,
        "plinth": false
       },
       {
        "token": "tile_meander_floor",
        "x": 8,
        "z": 9,
+       "gx": 3,
+       "gz": 6,
        "plinth": false
       }
      ],
@@ -2175,24 +3179,32 @@
        "token": "pattern_tile_4x4",
        "x": 2,
        "z": 6,
+       "gx": 4,
+       "gz": 2,
        "plinth": false
       },
       {
        "token": "pattern_tile_cube",
        "x": 6,
        "z": 6,
+       "gx": 7,
+       "gz": 4,
        "plinth": false
       },
       {
        "token": "science_screen",
        "x": 8,
        "z": 5,
+       "gx": 9,
+       "gz": 5,
        "plinth": false
       },
       {
        "token": "tile_meander_floor",
        "x": 8,
        "z": 9,
+       "gx": 3,
+       "gz": 6,
        "plinth": false
       }
      ],
@@ -2211,24 +3223,32 @@
        "token": "pattern_tile_4x4",
        "x": 4,
        "z": 19,
+       "gx": 4,
+       "gz": 2,
        "plinth": false
       },
       {
        "token": "pattern_tile_cube",
        "x": 7,
        "z": 21,
+       "gx": 7,
+       "gz": 4,
        "plinth": false
       },
       {
        "token": "science_screen",
        "x": 9,
        "z": 22,
+       "gx": 9,
+       "gz": 5,
        "plinth": false
       },
       {
        "token": "tile_meander_floor",
        "x": 3,
        "z": 23,
+       "gx": 3,
+       "gz": 6,
        "plinth": false
       }
      ],
@@ -2263,42 +3283,56 @@
        "token": "invariants_demo",
        "x": 2,
        "z": 6,
+       "gx": 0,
+       "gz": 0,
        "plinth": true
       },
       {
        "token": "matrix_4x4_viewer",
        "x": 6,
        "z": 6,
+       "gx": 5,
+       "gz": 6,
        "plinth": false
       },
       {
        "token": "homogeneous_coordinates",
        "x": 12,
        "z": 6,
+       "gx": 2,
+       "gz": 8,
        "plinth": false
       },
       {
        "token": "balance_puzzle",
        "x": 8,
        "z": 8,
+       "gx": 5,
+       "gz": 10,
        "plinth": false
       },
       {
        "token": "transform_composition",
        "x": 3,
        "z": 8,
+       "gx": 2,
+       "gz": 12,
        "plinth": false
       },
       {
        "token": "dark_sphere",
        "x": 3,
        "z": 10,
+       "gx": 5,
+       "gz": 14,
        "plinth": false
       },
       {
        "token": "rotation_gimbal",
        "x": 7,
        "z": 10,
+       "gx": 8,
+       "gz": 8,
        "plinth": false
       }
      ],
@@ -2317,42 +3351,56 @@
        "token": "invariants_demo",
        "x": 3,
        "z": 6,
+       "gx": 0,
+       "gz": 0,
        "plinth": true
       },
       {
        "token": "matrix_4x4_viewer",
        "x": 7,
        "z": 6,
+       "gx": 5,
+       "gz": 6,
        "plinth": false
       },
       {
        "token": "homogeneous_coordinates",
        "x": 11,
        "z": 6,
+       "gx": 2,
+       "gz": 8,
        "plinth": false
       },
       {
        "token": "balance_puzzle",
        "x": 7,
        "z": 8,
+       "gx": 5,
+       "gz": 10,
        "plinth": false
       },
       {
        "token": "transform_composition",
        "x": 4,
        "z": 7,
+       "gx": 2,
+       "gz": 12,
        "plinth": false
       },
       {
        "token": "dark_sphere",
        "x": 3,
        "z": 11,
+       "gx": 5,
+       "gz": 14,
        "plinth": false
       },
       {
        "token": "rotation_gimbal",
        "x": 7,
        "z": 10,
+       "gx": 8,
+       "gz": 8,
        "plinth": false
       }
      ],
@@ -2371,42 +3419,56 @@
        "token": "invariants_demo",
        "x": 3,
        "z": 6,
+       "gx": 0,
+       "gz": 0,
        "plinth": true
       },
       {
        "token": "matrix_4x4_viewer",
        "x": 7,
        "z": 6,
+       "gx": 5,
+       "gz": 6,
        "plinth": false
       },
       {
        "token": "homogeneous_coordinates",
        "x": 11,
        "z": 6,
+       "gx": 2,
+       "gz": 8,
        "plinth": false
       },
       {
        "token": "balance_puzzle",
        "x": 7,
        "z": 8,
+       "gx": 5,
+       "gz": 10,
        "plinth": false
       },
       {
        "token": "transform_composition",
        "x": 4,
        "z": 7,
+       "gx": 2,
+       "gz": 12,
        "plinth": false
       },
       {
        "token": "dark_sphere",
        "x": 3,
        "z": 11,
+       "gx": 5,
+       "gz": 14,
        "plinth": false
       },
       {
        "token": "rotation_gimbal",
        "x": 7,
        "z": 10,
+       "gx": 8,
+       "gz": 8,
        "plinth": false
       }
      ],
@@ -2425,42 +3487,56 @@
        "token": "invariants_demo",
        "x": 3,
        "z": 11,
+       "gx": 0,
+       "gz": 0,
        "plinth": true
       },
       {
        "token": "matrix_4x4_viewer",
        "x": 8,
        "z": 17,
+       "gx": 5,
+       "gz": 6,
        "plinth": false
       },
       {
        "token": "homogeneous_coordinates",
        "x": 5,
        "z": 19,
+       "gx": 2,
+       "gz": 8,
        "plinth": false
       },
       {
        "token": "balance_puzzle",
        "x": 8,
        "z": 21,
+       "gx": 5,
+       "gz": 10,
        "plinth": false
       },
       {
        "token": "transform_composition",
        "x": 5,
        "z": 23,
+       "gx": 2,
+       "gz": 12,
        "plinth": false
       },
       {
        "token": "dark_sphere",
        "x": 8,
        "z": 25,
+       "gx": 5,
+       "gz": 14,
        "plinth": false
       },
       {
        "token": "rotation_gimbal",
        "x": 11,
        "z": 19,
+       "gx": 8,
+       "gz": 8,
        "plinth": false
       }
      ],
@@ -2493,30 +3569,40 @@
        "token": "righttriangle",
        "x": 2,
        "z": 6,
+       "gx": 0,
+       "gz": 4,
        "plinth": true
       },
       {
        "token": "boolean_tunnel",
        "x": 5,
        "z": 6,
+       "gx": 3,
+       "gz": 3,
        "plinth": false
       },
       {
        "token": "dark_sphere",
        "x": 8,
        "z": 6,
+       "gx": 3,
+       "gz": 6,
        "plinth": false
       },
       {
        "token": "pick_up_cube",
        "x": 11,
        "z": 8,
+       "gx": 2,
+       "gz": 51,
        "plinth": false
       },
       {
        "token": "carousel_cake",
        "x": 7,
        "z": 8,
+       "gx": 3,
+       "gz": 53,
        "plinth": false
       }
      ],
@@ -2535,30 +3621,40 @@
        "token": "righttriangle",
        "x": 2,
        "z": 6,
+       "gx": 0,
+       "gz": 4,
        "plinth": true
       },
       {
        "token": "boolean_tunnel",
        "x": 5,
        "z": 6,
+       "gx": 3,
+       "gz": 3,
        "plinth": false
       },
       {
        "token": "dark_sphere",
        "x": 8,
        "z": 5,
+       "gx": 3,
+       "gz": 6,
        "plinth": false
       },
       {
        "token": "pick_up_cube",
        "x": 11,
        "z": 9,
+       "gx": 2,
+       "gz": 51,
        "plinth": false
       },
       {
        "token": "carousel_cake",
        "x": 8,
        "z": 8,
+       "gx": 3,
+       "gz": 53,
        "plinth": false
       }
      ],
@@ -2577,30 +3673,40 @@
        "token": "righttriangle",
        "x": 2,
        "z": 6,
+       "gx": 0,
+       "gz": 4,
        "plinth": true
       },
       {
        "token": "boolean_tunnel",
        "x": 5,
        "z": 6,
+       "gx": 3,
+       "gz": 3,
        "plinth": false
       },
       {
        "token": "dark_sphere",
        "x": 8,
        "z": 5,
+       "gx": 3,
+       "gz": 6,
        "plinth": false
       },
       {
        "token": "pick_up_cube",
        "x": 11,
        "z": 9,
+       "gx": 2,
+       "gz": 51,
        "plinth": false
       },
       {
        "token": "carousel_cake",
        "x": 8,
        "z": 8,
+       "gx": 3,
+       "gz": 53,
        "plinth": false
       }
      ],
@@ -2619,30 +3725,40 @@
        "token": "righttriangle",
        "x": 5,
        "z": 5,
+       "gx": 0,
+       "gz": 4,
        "plinth": true
       },
       {
        "token": "boolean_tunnel",
        "x": 8,
        "z": 5,
+       "gx": 3,
+       "gz": 3,
        "plinth": false
       },
       {
        "token": "dark_sphere",
        "x": 8,
        "z": 5,
+       "gx": 3,
+       "gz": 6,
        "plinth": false
       },
       {
        "token": "pick_up_cube",
        "x": 7,
        "z": 32,
+       "gx": 2,
+       "gz": 51,
        "plinth": false
       },
       {
        "token": "carousel_cake",
        "x": 8,
        "z": 32,
+       "gx": 3,
+       "gz": 53,
        "plinth": false
       }
      ],
