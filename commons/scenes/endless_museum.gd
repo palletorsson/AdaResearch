@@ -674,6 +674,24 @@ var _doll_menu_tokens: Array = []
 var _doll_insp: CanvasLayer = null        # the inspector — a selected body's values, live
 var _doll_insp_lbl: Label = null
 var _doll_insp_t: float = 0.0
+var _doll_top: bool = false               # H's second stop: the plan view, straight down
+
+## THE SPINE STRIP (L): the museum's fourth zoom level — the whole spine as a
+## 1D strip of pearls in walk order, each pearl's lines readable and editable
+## in place. Desktop only; the book is the truth it writes.
+var _spine_ui: CanvasLayer = null
+var _spine_list: ItemList = null
+var _spine_lines: ItemList = null
+var _spine_head: Label = null
+var _spine_token: LineEdit = null
+var _spine_edit: TextEdit = null
+var _spine_status: Label = null
+var _spine_rows: Array = []               # {chapter, map, pearl} per strip row
+var _spine_cur: Dictionary = {}           # the open pearl {chapter, pearl}
+var _spine_snapshot: Array = []           # lines as LOADED — the merge guard's memory
+var _spine_line_i: int = -1
+var _spine_prev_mouse: int = 0
+var _book_dir: String = "res://commons/data/book"   # a var: probes inject a trial copy
 var _doll_walk_to: Vector3 = Vector3(1e9, 0, 0)   # click-to-walk target; 1e9 = none
 var _doll_mark: MeshInstance3D = null              # the little goal disc
 # ── THE BOOT CLOCK (2026-08-20, Palle: "still takes ~10 s to load the first
@@ -2076,7 +2094,7 @@ func _setup_world() -> void:
 		var help_layer := CanvasLayer.new()
 		help_layer.layer = 80
 		var help := Label.new()
-		help.text = "DOLL HOUSE   click floor: walk · click body: drag · N: add menu · X: remove · B: brush · R: turn · MMB: pan · RMB: orbit · wheel: zoom · Q/E: turn house · H: back to the walk"
+		help.text = "DOLL HOUSE   click floor: walk · click body: drag · N: add · X: remove · B: brush · R: turn · MMB: pan · RMB: orbit · wheel: zoom · Q/E: turn house · L: the spine · H: plan view, then the walk"
 		help.set_anchors_preset(Control.PRESET_BOTTOM_LEFT)
 		help.offset_left = 12
 		help.offset_top = -34
@@ -7333,6 +7351,9 @@ func _physics_process(_delta: float) -> void:
 	if _autopilot > 0:
 		_run_autopilot(_delta)
 		return
+	if _spine_ui != null and is_instance_valid(_spine_ui):
+		_player.velocity = Vector3.ZERO   # the strip is open: typing is typing
+		return
 	if _dollhouse:
 		_doll_frame(_delta)
 		return
@@ -7429,13 +7450,24 @@ func _doll_frame(delta: float) -> void:
 	# pan reads as a camera move, not a teleport
 	var kf: float = 1.0 - exp(-9.0 * delta)
 	_doll_yaw_now = lerp_angle(_doll_yaw_now, _doll_yaw, kf)
+	# two perches, one butter: the iso shoulder or the plan's noon. The same
+	# exponential lerp carries the camera between them, so H reads as a climb,
+	# not a cut. Straight down cannot use look_at (the pole degenerates its up
+	# vector), so the plan builds its basis by hand: screen-up follows the
+	# house yaw, which keeps Q/E turning the drawing.
 	var perch := Vector3(sin(_doll_yaw_now), 0.0, cos(_doll_yaw_now)) * 42.0 + Vector3(0, 46.0, 0)
+	if _doll_top:
+		perch = Vector3(0, 62.0, 0)
 	var want_pos: Vector3 = _player.position + perch
 	_doll_cam_pos = want_pos if _doll_cam_pos == Vector3.ZERO else _doll_cam_pos.lerp(want_pos, kf)
 	_cam.global_position = _doll_cam_pos
-	var look_target: Vector3 = _player.position + Vector3(0, 0.5, 0)
-	if (_cam.global_position - look_target).length() > 0.5:
-		_cam.look_at(look_target)
+	if _doll_top:
+		var down_basis := Basis.looking_at(Vector3.DOWN, Vector3(-sin(_doll_yaw_now), 0.0, -cos(_doll_yaw_now)))
+		_cam.global_basis = _cam.global_basis.slerp(down_basis, kf).orthonormalized()
+	else:
+		var look_target: Vector3 = _player.position + Vector3(0, 0.5, 0)
+		if (_cam.global_position - look_target).length() > 0.5:
+			_cam.look_at(look_target)
 	_cam.size = lerpf(_cam.size, _doll_zoom, kf)
 	# the patient stamp and the deferred dress deliver bodies AFTER the build's
 	# cut ran — the roof re-entered with them. The cut is idempotent, so it
@@ -7574,7 +7606,7 @@ func _doll_paint(wx: int, wz: int, erase: bool) -> void:
 		return
 	var key := "%d|%d" % [wx, wz]
 	# the book: read, rule, write
-	var path := "res://commons/data/book/%s.json" % chapter
+	var path := _book_dir + ("/%s.json" % chapter)
 	if not FileAccess.file_exists(path):
 		print("[em-doll] no book for %s" % chapter)
 		return
@@ -7662,6 +7694,272 @@ func _doll_pick(pt: Vector3) -> int:
 			bd = d
 			best = i
 	return best
+
+
+## ── THE SPINE STRIP ──────────────────────────────────────────────────────
+## (2026-08-21, Palle: "even the pearl order 1D view with editable code,
+## critical thing and poem examples"). The museum's fourth zoom level: the
+## whole spine as a strip of pearls in walk order — the 1D museum. The left
+## list is the order; the right pane is the OPEN pearl: its lines (token +
+## text — the poems and critical things the halls speak), each editable in
+## place. F5 writes ONE line back into the book through a merge guard: the
+## file is re-read at save and the line must still say what it said when this
+## pane loaded it — the web /lines editor and this strip share the same book,
+## and the loser of a silent race would be a poem. Enter on a pearl travels
+## there, keeping whichever view you stand in.
+func _spine_toggle() -> void:
+	if _spine_ui != null and is_instance_valid(_spine_ui):
+		_spine_ui.queue_free()
+		_spine_ui = null
+		Input.mouse_mode = _spine_prev_mouse as Input.MouseMode
+		return
+	_spine_prev_mouse = Input.mouse_mode
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	_spine_ui = CanvasLayer.new()
+	_spine_ui.layer = 92
+	var panel := PanelContainer.new()
+	panel.set_anchors_preset(Control.PRESET_FULL_RECT)
+	panel.offset_left = 36
+	panel.offset_top = 24
+	panel.offset_right = -36
+	panel.offset_bottom = -24
+	var hb := HBoxContainer.new()
+	hb.add_theme_constant_override("separation", 14)
+	panel.add_child(hb)
+	var left := VBoxContainer.new()
+	hb.add_child(left)
+	var lt := Label.new()
+	lt.text = "THE SPINE — every pearl, 1 to the end"
+	left.add_child(lt)
+	_spine_list = ItemList.new()
+	_spine_list.custom_minimum_size = Vector2(360, 0)
+	_spine_list.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	_spine_list.item_selected.connect(_spine_show_pearl)
+	_spine_list.item_activated.connect(_spine_travel)
+	left.add_child(_spine_list)
+	var right := VBoxContainer.new()
+	right.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	hb.add_child(right)
+	_spine_head = Label.new()
+	_spine_head.text = "pick a pearl"
+	right.add_child(_spine_head)
+	_spine_lines = ItemList.new()
+	_spine_lines.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	_spine_lines.item_selected.connect(_spine_show_line)
+	_spine_lines.item_activated.connect(func(i): if i == _spine_lines.item_count - 1: _spine_new_line())
+	right.add_child(_spine_lines)
+	var tokrow := HBoxContainer.new()
+	right.add_child(tokrow)
+	var tl := Label.new()
+	tl.text = "token"
+	tokrow.add_child(tl)
+	_spine_token = LineEdit.new()
+	_spine_token.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	tokrow.add_child(_spine_token)
+	_spine_edit = TextEdit.new()
+	_spine_edit.custom_minimum_size = Vector2(0, 150)
+	_spine_edit.wrap_mode = TextEdit.LINE_WRAPPING_BOUNDARY
+	right.add_child(_spine_edit)
+	_spine_status = Label.new()
+	_spine_status.text = "Enter on a pearl travels there · click a line, edit, F5 writes it into the book · Enter on '+ new line' adds · DEL (in the list) removes · ESC closes"
+	_spine_status.autowrap_mode = TextServer.AUTOWRAP_WORD
+	right.add_child(_spine_status)
+	_spine_ui.add_child(panel)
+	add_child(_spine_ui)
+	_spine_fill()
+	_spine_list.grab_focus()
+	if _spine_list.item_count > 0:
+		_spine_list.select(0)
+		_spine_show_pearl(0)
+
+
+## The strip's rows: the jump list's walk order, opened to PAGE grain — a hall
+## that shows several book pearls becomes several rows, because lines live on
+## pages, not on halls.
+func _spine_fill() -> void:
+	_spine_rows = []
+	_spine_list.clear()
+	var chapters_seen: Array = []
+	for pool_row_v in _pool:
+		var c0 := String((pool_row_v as Dictionary).get("sequence", ""))
+		if c0 != "" and not chapters_seen.has(c0):
+			chapters_seen.append(c0)
+	var n: int = 0
+	for chapter_v in chapters_seen:
+		var chapter := String(chapter_v)
+		var pk := ""
+		for k_v in _plan_pearls.keys():
+			if String(k_v).ends_with("|" + chapter):
+				pk = String(k_v)
+				break
+		if pk == "":
+			continue
+		for row_v in (_plan_pearls[pk] as Array):
+			var row: Dictionary = row_v
+			var pages: Array = []
+			for pg_v in (row.get("pages", []) as Array):
+				var pg := String((pg_v as Dictionary).get("pearl", ""))
+				if pg != "":
+					pages.append(pg)
+			if pages.is_empty():
+				pages = [String(row.get("pearl", ""))]
+			for pg2_v in pages:
+				n += 1
+				_spine_list.add_item("%03d  %s · %s" % [n, chapter, String(pg2_v)])
+				_spine_rows.append({"chapter": chapter, "map": String(row.get("map", "")),
+					"pearl": String(pg2_v)})
+
+
+## The open book at the open pearl: {doc, pearl} read fresh from disk, or {}.
+func _spine_book() -> Dictionary:
+	var path := _book_dir + ("/%s.json" % String(_spine_cur.get("chapter", "")))
+	if not FileAccess.file_exists(path):
+		return {}
+	var doc_v: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+	if not (doc_v is Dictionary):
+		return {}
+	for pv in ((doc_v as Dictionary).get("pearls", []) as Array):
+		if String((pv as Dictionary).get("pearl", "")) == String(_spine_cur.get("pearl", "")):
+			return {"doc": doc_v, "pearl": pv, "path": path}
+	return {}
+
+
+func _spine_show_pearl(idx: int) -> void:
+	if idx < 0 or idx >= _spine_rows.size():
+		return
+	var row: Dictionary = _spine_rows[idx]
+	_spine_cur = {"chapter": row.get("chapter"), "pearl": row.get("pearl")}
+	_spine_line_i = -1
+	_spine_edit.text = ""
+	_spine_token.text = ""
+	_spine_snapshot = []
+	_spine_lines.clear()
+	var bk := _spine_book()
+	if bk.is_empty():
+		_spine_head.text = "%s · %s — no page in the book" % [row.get("chapter"), row.get("pearl")]
+		return
+	var pl: Dictionary = bk.get("pearl")
+	var hero := String(pl.get("hero", ""))
+	_spine_head.text = "%s · %s%s" % [row.get("chapter"), row.get("pearl"),
+		("   hero " + hero) if hero != "" else ""]
+	for ln_v in (pl.get("lines", []) as Array):
+		var ln: Dictionary = ln_v
+		_spine_snapshot.append(ln.duplicate(true))
+		var one := String(ln.get("text", "")).replace("\n", " · ")
+		_spine_lines.add_item("%s — %s" % [String(ln.get("token", "?")), one.substr(0, 76)])
+	_spine_lines.add_item("+ new line")
+
+
+func _spine_show_line(idx: int) -> void:
+	if idx >= _spine_snapshot.size():   # the "+ new line" row: Enter creates
+		return
+	if idx < 0:
+		return
+	_spine_line_i = idx
+	var ln: Dictionary = _spine_snapshot[idx]
+	_spine_token.text = String(ln.get("token", ""))
+	_spine_edit.text = String(ln.get("text", ""))
+	_spine_status.text = "editing line %d — F5 writes it into the book" % (idx + 1)
+
+
+func _spine_new_line() -> void:
+	var bk := _spine_book()
+	_spine_line_i = _spine_snapshot.size()   # one past the end = an add
+	_spine_token.text = String((bk.get("pearl", {}) as Dictionary).get("hero", "")) if not bk.is_empty() else ""
+	_spine_edit.text = ""
+	_spine_status.text = "new line for %s · %s — write, then F5" % [_spine_cur.get("chapter"), _spine_cur.get("pearl")]
+	_spine_edit.grab_focus()
+
+
+## ONE line into the book, through the merge guard.
+func _spine_save() -> void:
+	if _spine_line_i < 0 or _spine_cur.is_empty():
+		return
+	var bk := _spine_book()
+	if bk.is_empty():
+		_spine_status.text = "the pearl left the book — nothing written"
+		return
+	var pl: Dictionary = bk.get("pearl")
+	var lines: Array = pl.get("lines", [])
+	if _spine_line_i < _spine_snapshot.size():
+		# EDIT — the guard: the line on disk must still say what it said when
+		# this pane loaded it, or someone else (the /lines editor, another
+		# session) got here first and their words must not be overwritten.
+		var moved := true
+		if _spine_line_i < lines.size():
+			moved = String((lines[_spine_line_i] as Dictionary).get("text", "")) \
+					!= String((_spine_snapshot[_spine_line_i] as Dictionary).get("text", ""))
+		if moved:
+			_spine_status.text = "the book moved under you — reopen the pearl (nothing written)"
+			return
+		var ln: Dictionary = lines[_spine_line_i]
+		ln["text"] = _spine_edit.text
+		ln["token"] = _spine_token.text
+		ln["by"] = "hand"
+	else:
+		lines.append({"token": _spine_token.text, "text": _spine_edit.text, "by": "hand"})
+	pl["lines"] = lines
+	var f := FileAccess.open(String(bk.get("path")), FileAccess.WRITE)
+	if f == null:
+		_spine_status.text = "the book would not open for writing"
+		return
+	f.store_string(JSON.stringify(bk.get("doc"), " ") + "\n")
+	f.close()
+	var psel := _spine_list.get_selected_items()
+	_spine_show_pearl(psel[0] if psel.size() > 0 else 0)
+	_spine_status.text = "written — real on the next build"
+
+
+func _spine_del_line() -> void:
+	var sel := _spine_lines.get_selected_items()
+	if sel.is_empty() or sel[0] >= _spine_snapshot.size() or _spine_cur.is_empty():
+		return
+	var i: int = sel[0]
+	var bk := _spine_book()
+	if bk.is_empty():
+		return
+	var pl: Dictionary = bk.get("pearl")
+	var lines: Array = pl.get("lines", [])
+	var moved := true
+	if i < lines.size():
+		moved = String((lines[i] as Dictionary).get("text", "")) \
+				!= String((_spine_snapshot[i] as Dictionary).get("text", ""))
+	if moved:
+		_spine_status.text = "the book moved under you — reopen the pearl (nothing removed)"
+		return
+	lines.remove_at(i)
+	if lines.is_empty():
+		pl.erase("lines")
+	else:
+		pl["lines"] = lines
+	var f := FileAccess.open(String(bk.get("path")), FileAccess.WRITE)
+	if f == null:
+		return
+	f.store_string(JSON.stringify(bk.get("doc"), " ") + "\n")
+	f.close()
+	var psel := _spine_list.get_selected_items()
+	_spine_show_pearl(psel[0] if psel.size() > 0 else 0)
+	_spine_status.text = "line removed — real on the next build"
+
+
+func _spine_travel(idx: int) -> void:
+	if idx < 0 or idx >= _spine_rows.size():
+		return
+	var target: Dictionary = _spine_rows[idx]
+	var f := FileAccess.open(EM_CONTROL, FileAccess.WRITE)
+	if f == null:
+		return
+	f.store_string(JSON.stringify({
+		"_readme": "the spine strip's voice: which chapter and map the museum opens at",
+		"first_chapter": String(target.get("chapter", "")),
+		"first_map": String(target.get("map", "")),
+		"dollhouse": 1 if _dollhouse else 0,
+	}, " "))
+	f.close()
+	_edit_flush()
+	print("[em-spine] travelling to %s · %s" % [target.get("chapter"), target.get("pearl")])
+	if get_tree().current_scene != null:
+		get_tree().reload_current_scene()
 
 
 ## THE GAG (2026-08-21). In the walk the artifacts may listen to the
@@ -7891,6 +8189,9 @@ func _jump_go(idx: int) -> void:
 		"_readme": "the menu's / the jump's voice: which chapter and map the museum opens at",
 		"first_chapter": String(target.get("chapter", "")),
 		"first_map": String(target.get("map", "")),
+		# the ladder holds through a travel: a jump made from the doll house
+		# lands in the doll house
+		"dollhouse": 1 if _dollhouse else 0,
 	}, " "))
 	f.close()
 	_edit_flush()
@@ -8070,6 +8371,23 @@ func _catch_if_fallen() -> void:
 
 
 func _input(event: InputEvent) -> void:
+	# THE SPINE STRIP is modal: while it is open the museum's hands stay off
+	# the keys AND the mouse (a click on the list must not walk the doll on
+	# the floor underneath, and typing a poem must not toggle the house).
+	# ESC steps out of the text first, then closes. F5 writes the held line.
+	if _spine_ui != null and is_instance_valid(_spine_ui):
+		if event is InputEventKey and (event as InputEventKey).pressed and not (event as InputEventKey).echo:
+			var skc := (event as InputEventKey).keycode
+			if skc == KEY_ESCAPE:
+				if _spine_edit != null and _spine_edit.has_focus():
+					_spine_lines.grab_focus()
+				else:
+					_spine_toggle()
+			elif skc == KEY_F5:
+				_spine_save()
+			elif skc == KEY_DELETE and _spine_lines != null and _spine_lines.has_focus():
+				_spine_del_line()
+		return
 	if event is InputEventKey and (event as InputEventKey).pressed and not (event as InputEventKey).echo \
 			and (event as InputEventKey).keycode == KEY_J and not _vr and not _studio and _autopilot == 0 and _shot_path == "":
 		_jump_toggle()
@@ -8085,8 +8403,19 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventKey and (event as InputEventKey).pressed and not (event as InputEventKey).echo \
 			and (event as InputEventKey).keycode == KEY_H and not _vr and not _studio and _shot_path == "" and _autopilot == 0:
 		# H for HOUSE — F8 belonged to the editor's own Stop shortcut, which
-		# reaches through to a focused game and closed the museum instead
+		# reaches through to a focused game and closed the museum instead.
+		# THE LADDER (Palle: "an even more simple view top down perspective"):
+		# walk → iso → plan → walk. iso → plan is a camera climb, no reload —
+		# same doll, same cut, same hands; the next H falls through to the exit.
+		if _dollhouse and not _doll_top:
+			_doll_top = true
+			print("[em-doll] plan view — the camera at noon; H returns to the walk")
+			return
 		_doll_toggle()
+		return
+	if event is InputEventKey and (event as InputEventKey).pressed and not (event as InputEventKey).echo \
+			and (event as InputEventKey).keycode == KEY_L and not _vr and not _studio and _shot_path == "" and _autopilot == 0:
+		_spine_toggle()
 		return
 	if _dollhouse and event is InputEventMouseButton:
 		var mbe := event as InputEventMouseButton
