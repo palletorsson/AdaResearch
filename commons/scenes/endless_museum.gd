@@ -4954,6 +4954,7 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 	# final, per body, with the slide's ring count and the refusal that
 	# caused it. /transplant reads this beside map_data.json (step 1) and
 	# em_built.json (the hall floor) to draw the four stages side by side.
+	_pack_report_load()
 	_pack_report["%s|%s" % [chapter, String(entry.get("pearl", ""))]] = {
 		"chapter": chapter, "pearl": String(entry.get("pearl", "")), "map": map_name,
 		"w": w, "h": h, "vestibule": VESTIBULE_H, "offx": offx, "offz": offz,
@@ -4965,6 +4966,19 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 		pf.close()
 	return {"pearl": String(entry.get("pearl", "")), "placed": placed, "packed": true,
 		"offered": bodies.size(), "interior": placed}
+
+
+## The pack report on disk survives across boots: merge it into the live
+## dict before the first write, so a short walk never erases a long one's
+## prep ("can you prepare the rest of the maps" — 201 halls of it).
+func _pack_report_load() -> void:
+	if not _pack_report.is_empty():
+		return
+	if not FileAccess.file_exists("res://ada_run/em_pack_report.json"):
+		return
+	var prev_v: Variant = JSON.parse_string(FileAccess.get_file_as_string("res://ada_run/em_pack_report.json"))
+	if prev_v is Dictionary and (prev_v as Dictionary).get("halls") is Dictionary:
+		_pack_report = (prev_v as Dictionary)["halls"]
 
 
 ## The bench's saved necklace for this hall, IF it was force-stamped there.
@@ -5062,6 +5076,7 @@ func _stamp_necklace(seg: Node3D, zbase: int, chapter: String, entry: Dictionary
 		chapter, entry.get("pearl", ""), placed, left])
 	# a stamped hall still reports itself — otherwise it vanishes from
 	# /transplant's hall list the moment it graduates past the bake-off
+	_pack_report_load()
 	_pack_report["%s|%s" % [chapter, String(entry.get("pearl", ""))]] = {
 		"chapter": chapter, "pearl": String(entry.get("pearl", "")),
 		"map": String(entry.get("map", "")), "w": w, "h": h, "vestibule": VESTIBULE_H,
