@@ -628,6 +628,17 @@ var _env_ab_t: float = 0.0
 # edits mute the follow for 45 s so the curator is never yanked mid-ruling.
 # F6 follows by hand at any moment.
 var _plan_mtime: int = 0
+# ── THE DOLL HOUSE (2026-08-21, Palle: "can we do this as a really nice doll
+# house editor in godot instead?") ── the museum seen from above at an
+# isometric angle, walls cut to knee height, the walker still standing in it
+# as the doll. Everything real stays real: the artifacts keep their shaders
+# and screens, streaming/cull/doors still anchor on the walker, and every
+# editing lane is the same museum's. Desktop only; F8 toggles (reload, the
+# eye resumed), --em-dollhouse or em_control {"dollhouse": 1} opens into it.
+var _dollhouse: bool = false
+var DOLL_CUT := 1.15               # walls become knee walls at this height (em_layout hall.doll_cut_m)
+var _doll_zoom: float = 16.0       # orthographic size; wheel zooms 6..60
+var _doll_yaw: float = PI * 0.75   # the iso angle; Q/E turn in 45-degree steps
 # ── THE BOOT CLOCK (2026-08-20, Palle: "still takes ~10 s to load the first
 # hall — what is happening there?") ── every boot phase timed and written into
 # em_built_*.json as `boot_ms`, so a slow launch answers by name instead of
@@ -969,6 +980,8 @@ func _parse_args() -> void:
 			_look_token = a.substr(10)
 		elif a.begins_with("--em-segments="):
 			_shot_segments = int(a.substr(14))
+		elif a == "--em-dollhouse":
+			_dollhouse = true
 		elif a == "--em-test-collision":
 			_test_collision = true
 		elif a.begins_with("--em-autopilot="):
@@ -1028,8 +1041,8 @@ func _load_modules() -> void:
 	if not _bodies_on:
 		print("[endless_museum] STREAM.BODIES=0 — the empty-museum experiment: architecture only, every artifact skipped")
 	GATE_PATIENCE = _L("gate", "patience_s", GATE_PATIENCE)
+	DOLL_CUT = _L("hall", "doll_cut_m", DOLL_CUT)
 	GATE_REACH_M = _L("gate", "reach_m", GATE_REACH_M)
-	GATE_PATIENCE = _L("gate", "patience_s", GATE_PATIENCE)
 	AUTOSAVE_S = _L("editor", "autosave_seconds", AUTOSAVE_S)
 	_mod_pool = _load_module("em_pool.gd")
 	print("[endless_museum] modules: mats=%s light=%s env=%s detail=%s feel=%s audio=%s" % [
@@ -1415,6 +1428,8 @@ func _start_at_chapter() -> void:
 		var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(control_path))
 		if parsed is Dictionary:
 			_first_chapter = String((parsed as Dictionary).get("first_chapter", ""))
+			if int((parsed as Dictionary).get("dollhouse", 0)) == 1:
+				_dollhouse = true
 			if start_map == "":
 				start_map = String((parsed as Dictionary).get("first_map", ""))   # the menu's voice for the pearl
 	if _first_chapter == "" or _pool.is_empty():
@@ -1925,6 +1940,10 @@ func _layout_str(section: String, key: String, fallback: String) -> String:
 	return fallback
 
 func _setup_world() -> void:
+	# the doll house is a desk tool: a headset never inherits a cut-open
+	# museum, however the control file was left
+	if _vr:
+		_dollhouse = false
 	if _studio:
 		_mode_label = "studio"
 		_setup_environment()
@@ -1987,6 +2006,14 @@ func _setup_world() -> void:
 	_cam.fov = 75.0
 	_player.add_child(_cam)
 	_cam.make_current()
+	if _dollhouse:
+		# the doll house eye: orthographic, high and oblique, re-aimed every
+		# frame at the walker — who remains in the house as the doll
+		_cam.projection = Camera3D.PROJECTION_ORTHOGONAL
+		_cam.size = _doll_zoom
+		_cam.far = 400.0
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		print("[em-doll] THE DOLL HOUSE — walls cut at %.2f m; WASD pans, wheel zooms, Q/E turns, F8 returns to the walk" % DOLL_CUT)
 	# the desktop hand — the same crosshair interaction the map scenes use:
 	# LMB press/drag on handles and buttons, RMB carry-grab, wheel = hold
 	# distance. Desktop-only by construction (the VR branch returned above;
@@ -2135,6 +2162,49 @@ func _setup_audio() -> void:
 	_mod_audio.call("install", self)
 	if _feel != null and _mod_has(_mod_audio, "bind_footsteps"):
 		_mod_audio.call("bind_footsteps", _feel, "footstep")
+
+## THE KNEE-WALL CUT. Measured (probe_wall_census): today's walls are MERGED
+## MeshInstance3D boxes, not MultiMeshes — so the cut walks the segment's
+## subtree, STOPS at every artifact root (meta artifact_lookup_name — an
+## artifact is never cut), and then: a mesh wholly above the cut (lintels,
+## ceiling trims, vents, slats) is hidden; a centred box straddling it (the
+## walls) is shrunk so its top sits at the cut. Collision untouched — the
+## doll's floor still holds.
+func _doll_cut(seg: Node3D) -> void:
+	if not _dollhouse:
+		return
+	var hidden := 0
+	var shrunk := 0
+	var stack: Array = [seg]
+	while not stack.is_empty():
+		var n: Node = stack.pop_back()
+		if n != seg and n is Node3D and (n as Node).has_meta("artifact_lookup_name"):
+			continue   # an artifact keeps its full height — it is the exhibit
+		for c in n.get_children():
+			stack.append(c)
+		if not (n is MeshInstance3D):
+			continue
+		var mi := n as MeshInstance3D
+		if mi.mesh == null or String(mi.name) == "DetailExtentAnchor":
+			continue
+		var world_box: AABB = mi.global_transform * mi.get_aabb()
+		var bottom: float = world_box.position.y
+		var top: float = bottom + world_box.size.y
+		if bottom >= DOLL_CUT:
+			mi.visible = false
+			hidden += 1
+		elif top > DOLL_CUT + 0.05:
+			# shrink about the box centre so the top lands exactly at the cut
+			var h: float = top - bottom
+			var k: float = (DOLL_CUT - bottom) / h
+			mi.scale = Vector3(mi.scale.x, mi.scale.y * k, mi.scale.z)
+			var c_old: float = (top + bottom) * 0.5
+			var c_new: float = bottom + (DOLL_CUT - bottom) * 0.5
+			mi.global_position.y += c_new - c_old
+			shrunk += 1
+	if hidden + shrunk > 0:
+		print("[em-doll] the house opens: %d wall(s) cut to %.2f m, %d high piece(s) hidden" % [shrunk, DOLL_CUT, hidden])
+
 
 func _mat(color: Color) -> StandardMaterial3D:
 	# cached by colour: same-coloured cells share ONE material, so the
@@ -3901,6 +3971,7 @@ func _write_built(seg: Node3D, chapter: String, deal: Variant, zbase: int, w: in
 			"placed": _seg_placed.duplicate(true), "refused": _seg_refused.duplicate(true)}
 		if not _bake_mode:
 			_heal_bake(_bake_key)
+	_doll_cut(seg)
 	if _bake_mode:
 		if _built.size() > 2:
 			_built.pop_front()          # the bake keeps the bake, not the as-built
@@ -7075,6 +7146,9 @@ func _physics_process(_delta: float) -> void:
 	if _autopilot > 0:
 		_run_autopilot(_delta)
 		return
+	if _dollhouse:
+		_doll_frame(_delta)
+		return
 	# walk — as a body: move_and_slide lets the walls and podiums push back
 	var dir := Vector3.ZERO
 	if Input.is_key_pressed(KEY_W):
@@ -7120,6 +7194,36 @@ func _physics_process(_delta: float) -> void:
 	if _player.is_on_floor():
 		_last_ground = _player.position          # the last place that held us
 	_catch_if_fallen()
+
+## One frame of the doll house: WASD pans the doll across the floor (walls
+## do not block a god's hand), the camera re-aims from its iso perch. The
+## doll IS the eye — streaming, culling, the door and the follow machinery
+## never learn that anything changed.
+func _doll_frame(delta: float) -> void:
+	if _player == null or _cam == null:
+		return
+	var dir := Vector3.ZERO
+	if Input.is_key_pressed(KEY_W):
+		dir += Vector3(-sin(_doll_yaw), 0, -cos(_doll_yaw))
+	if Input.is_key_pressed(KEY_S):
+		dir -= Vector3(-sin(_doll_yaw), 0, -cos(_doll_yaw))
+	if Input.is_key_pressed(KEY_A):
+		dir += Vector3(-cos(_doll_yaw), 0, sin(_doll_yaw))
+	if Input.is_key_pressed(KEY_D):
+		dir -= Vector3(-cos(_doll_yaw), 0, sin(_doll_yaw))
+	if dir.length() > 0.1:
+		var speed: float = _doll_zoom * 0.6 * (2.5 if Input.is_key_pressed(KEY_SHIFT) else 1.0)
+		_player.position += dir.normalized() * speed * delta
+		_player.position.y = 0.0
+		_last_ground = _player.position
+	_player.velocity = Vector3.ZERO
+	var perch := Vector3(sin(_doll_yaw), 0.0, cos(_doll_yaw)) * 42.0 + Vector3(0, 46.0, 0)
+	_cam.global_position = _player.position + perch
+	var look_target: Vector3 = _player.position + Vector3(0, 0.5, 0)
+	if (_cam.global_position - look_target).length() > 0.5:
+		_cam.look_at(look_target)
+	_cam.size = _doll_zoom
+
 
 var _jump_pressed: bool = false
 ## THE JUMP (2026-08-20, Palle: "in the endless museum desktop can we move
@@ -7259,6 +7363,7 @@ func _follow_reload() -> void:
 		"_readme": "the menu's / the jump's / the follow's voice: which chapter the museum opens at",
 		"first_chapter": ch,
 		"first_map": "",
+		"dollhouse": 1 if _dollhouse else 0,
 	}
 	if _player != null:
 		doc["resume_eye"] = [_player.position.x, _player.position.y, z_local]
@@ -7266,6 +7371,41 @@ func _follow_reload() -> void:
 	f.store_string(JSON.stringify(doc, " "))
 	f.close()
 	print("[em-follow] the plan changed under the museum — rebuilding around the eye (chapter %s, z %.1f local)" % [ch, z_local])
+	get_tree().reload_current_scene()
+
+
+## F8: enter or leave the doll house. The scene reloads through the same
+## door the follow uses — chapter kept, the eye resumed where it stood —
+## with the dollhouse flag flipped in em_control.
+func _doll_toggle() -> void:
+	if get_tree().current_scene == null:
+		return
+	var ch := ""
+	var z_local: float = 0.0
+	var eye_z: float = _eye_pos().z
+	for sv in _segments:
+		var sd: Dictionary = sv
+		if eye_z >= float(sd["z0"]) and eye_z < float(sd["z1"]):
+			var sn: Node3D = _node_or_null(sd.get("node"))
+			if sn != null and sn.has_meta("em_chapter"):
+				ch = String(sn.get_meta("em_chapter"))
+			z_local = eye_z - float(sd["z0"])
+			break
+	var f := FileAccess.open(EM_CONTROL, FileAccess.WRITE)
+	if f == null:
+		return
+	var doc := {
+		"_readme": "the menu's / the jump's / the follow's / the doll house's voice",
+		"first_chapter": ch,
+		"first_map": "",
+		"dollhouse": 0 if _dollhouse else 1,
+	}
+	if _player != null:
+		doc["resume_eye"] = [_player.position.x, _player.position.y, z_local]
+		doc["resume_yaw"] = _yaw
+	f.store_string(JSON.stringify(doc, " "))
+	f.close()
+	print("[em-doll] %s — rebuilding around the eye" % ("back to the walk" if _dollhouse else "up into the doll house"))
 	get_tree().reload_current_scene()
 
 
@@ -7332,6 +7472,25 @@ func _input(event: InputEvent) -> void:
 			and (event as InputEventKey).keycode == KEY_F6 and not _vr and not _studio and _shot_path == "":
 		_follow_reload()
 		return
+	if event is InputEventKey and (event as InputEventKey).pressed and not (event as InputEventKey).echo \
+			and (event as InputEventKey).keycode == KEY_F8 and not _vr and not _studio and _shot_path == "" and _autopilot == 0:
+		_doll_toggle()
+		return
+	if _dollhouse and event is InputEventMouseButton and (event as InputEventMouseButton).pressed:
+		var mb := (event as InputEventMouseButton).button_index
+		if mb == MOUSE_BUTTON_WHEEL_UP:
+			_doll_zoom = clampf(_doll_zoom * 0.87, 6.0, 60.0)
+			return
+		elif mb == MOUSE_BUTTON_WHEEL_DOWN:
+			_doll_zoom = clampf(_doll_zoom / 0.87, 6.0, 60.0)
+			return
+	if _dollhouse and event is InputEventKey and (event as InputEventKey).pressed and not (event as InputEventKey).echo:
+		if (event as InputEventKey).keycode == KEY_Q:
+			_doll_yaw += PI * 0.25
+			return
+		elif (event as InputEventKey).keycode == KEY_E:
+			_doll_yaw -= PI * 0.25
+			return
 	if _jump_ui != null and event is InputEventKey and (event as InputEventKey).pressed \
 			and (event as InputEventKey).keycode == KEY_ESCAPE:
 		_jump_toggle()
