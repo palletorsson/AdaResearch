@@ -636,13 +636,54 @@ def propose():
     return 0
 
 
+def stamp_all():
+    """Bless every hall's best necklace as its floor plan (Palle: "I do not
+    see it inside the endless museum" — only stamped halls build the bench's
+    layout; this stamps the lot so the museum shows the FINAL DISTRIBUTION
+    everywhere). Merge discipline: a hall already in the hand file keeps its
+    beads untouched and merely gains the stamp; missing halls are written
+    from the lab's spring solution. Un-stamping any hall is one edit on the
+    bench."""
+    lab = read_json(REPO / "ada_run" / "necklace_lab.json") or {}
+    hand_path = REPO / "ada_run" / "necklace_hand.json"
+    hand = read_json(hand_path) or {"_readme": "hand-edited necklaces from /transplant's bench — the lab treats a hall's entry here as its truth", "halls": {}}
+    stamped = created = kept = 0
+    for key, v in (lab.get("halls") or {}).items():
+        entry = hand["halls"].get(key)
+        if entry and entry.get("beads"):
+            if not entry.get("stamp"):
+                entry["stamp"] = True
+                stamped += 1
+            else:
+                kept += 1
+            continue
+        sp = (v.get("strategies") or {}).get("spring")
+        if not sp or not sp.get("positions"):
+            continue
+        hand["halls"][key] = {"stamp": True, "at": "stamp_all",
+            "beads": [{"token": p["token"], "x": p["x"] + 0.5, "z": p["z"] + 0.5,
+                       "gx": p.get("gx", 0), "gz": p.get("gz", 0), "fp": p.get("fp", 1),
+                       "count": p.get("count", 1), "spread": p.get("spread", ""),
+                       "gap": p.get("gap", 1), "plinth": bool(p.get("plinth")),
+                       "pinned": False, "added": False} for p in sp["positions"]]}
+        created += 1
+    hand_path.write_text(json.dumps(hand, indent=1) + "\n", encoding="utf-8")
+    print("stamp-all: %d halls newly stamped from spring, %d hand halls stamped, %d already stamped — %d total in the hand file"
+          % (created, stamped, kept, len(hand["halls"])))
+    print("reload the museum (F6) — every hall now builds its necklace")
+    return 0
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--hall", default="")
     ap.add_argument("--propose", action="store_true")
+    ap.add_argument("--stamp-all", action="store_true")
     args = ap.parse_args()
     if args.propose:
         return propose()
+    if args.stamp_all:
+        return stamp_all()
     report = read_json(REPO / "ada_run" / "em_pack_report.json")
     if not report:
         print("no em_pack_report.json — boot with grid_pack first (boot_pack_report.gd)")
