@@ -3116,6 +3116,24 @@ func _build_segment() -> void:
 		h = tile.size()
 		print("[em-rooms] %s · %s: %d room(s) — the hall is %d rows of the template's %d" % [
 			next_seq, String(peek.get("pearl", "")), int(peek.get("rooms", 0)), h, int(spec["h"])])
+	# STAMP MEANS REMOVE WALLS (2026-08-21, Palle). A hall whose necklace was
+	# force-stamped on the bench builds as an OPEN SHELL: the composition was
+	# laid on open floor, and interior partitions would fight it. The tile is
+	# the single author — walls, colliders, seals, walk cells and the door
+	# list all derive from it (see _widen_doors) — so the interior opens
+	# HERE, once, and everything downstream simply agrees. The perimeter and
+	# its doors stand; the vestibule and gate are untouched.
+	if not _necklace_hand(next_seq, String(peek.get("pearl", ""))).is_empty():
+		var opened := 0
+		for oz in range(1, tile.size() - 1):
+			var orow: Array = tile[oz]
+			for ox in range(1, orow.size() - 1):
+				if String(orow[ox]) != "1":
+					orow[ox] = "1"
+					opened += 1
+		if opened > 0:
+			print("[em-stamp] %s · %s: open shell — %d interior cell(s) cleared for the bench's floor plan" % [
+				next_seq, String(peek.get("pearl", "")), opened])
 	var seg := Node3D.new()
 	seg.name = "Seg%d_%s" % [_seg_index, spec["key"]]
 	seg.position = Vector3(0, 0, _next_z)

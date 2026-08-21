@@ -1259,8 +1259,8 @@
    "bodies": [
     {
      "final": [
-      4,
-      10
+      3,
+      5
      ],
      "grid": [
       0,
@@ -1269,34 +1269,16 @@
      "plinth": false,
      "rings": 0,
      "target": [
-      4,
-      10
+      3,
+      5
      ],
      "token": "dark_sphere",
      "why": ""
     },
     {
      "final": [
-      9,
-      12
-     ],
-     "grid": [
-      5,
-      2
-     ],
-     "plinth": false,
-     "rings": 0,
-     "target": [
-      9,
-      12
-     ],
-     "token": "capsule",
-     "why": ""
-    },
-    {
-     "final": [
       7,
-      14
+      10
      ],
      "grid": [
       3,
@@ -1306,15 +1288,15 @@
      "rings": 0,
      "target": [
       7,
-      14
+      10
      ],
      "token": "combine_portals",
      "why": ""
     },
     {
      "final": [
-      9,
-      15
+      10,
+      7
      ],
      "grid": [
       5,
@@ -1323,16 +1305,34 @@
      "plinth": false,
      "rings": 0,
      "target": [
-      9,
-      15
+      10,
+      7
      ],
      "token": "achilles_tortoise",
      "why": ""
     },
     {
      "final": [
-      7,
-      27
+      12,
+      7
+     ],
+     "grid": [
+      5,
+      2
+     ],
+     "plinth": false,
+     "rings": 1,
+     "target": [
+      13,
+      7
+     ],
+     "token": "capsule",
+     "why": ""
+    },
+    {
+     "final": [
+      11,
+      10
      ],
      "grid": [
       3,
@@ -1341,8 +1341,8 @@
      "plinth": false,
      "rings": 0,
      "target": [
-      7,
-      27
+      11,
+      10
      ],
      "token": "floating_sphere_field",
      "why": ""
@@ -1351,9 +1351,10 @@
    "chapter": "primitives",
    "h": 30,
    "map": "Primitives_Portals",
-   "offx": 4,
-   "offz": 10,
+   "offx": 0,
+   "offz": 0,
    "pearl": "portals",
+   "stamped": true,
    "vestibule": 4,
    "w": 15
   },
@@ -1576,6 +1577,109 @@
    "offx": 3,
    "offz": 11,
    "pearl": "trans introduction",
+   "vestibule": 4,
+   "w": 15
+  },
+  "transformation|trans rotationspectacle": {
+   "bodies": [
+    {
+     "final": [
+      6,
+      5
+     ],
+     "grid": [
+      0,
+      4
+     ],
+     "plinth": true,
+     "rings": 0,
+     "target": [
+      6,
+      5
+     ],
+     "token": "righttriangle",
+     "why": ""
+    },
+    {
+     "final": [
+      12,
+      9
+     ],
+     "grid": [
+      3,
+      3
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      12,
+      9
+     ],
+     "token": "boolean_tunnel",
+     "why": ""
+    },
+    {
+     "final": [
+      6,
+      16
+     ],
+     "grid": [
+      3,
+      6
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      6,
+      16
+     ],
+     "token": "dark_sphere",
+     "why": ""
+    },
+    {
+     "final": [
+      12,
+      17
+     ],
+     "grid": [
+      2,
+      51
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      12,
+      17
+     ],
+     "token": "pick_up_cube",
+     "why": ""
+    },
+    {
+     "final": [
+      4,
+      25
+     ],
+     "grid": [
+      3,
+      53
+     ],
+     "plinth": false,
+     "rings": 1,
+     "target": [
+      5,
+      25
+     ],
+     "token": "carousel_cake",
+     "why": ""
+    }
+   ],
+   "chapter": "transformation",
+   "h": 30,
+   "map": "Trans_RotationSpectacle",
+   "offx": 0,
+   "offz": 0,
+   "pearl": "trans rotationspectacle",
+   "stamped": true,
    "vestibule": 4,
    "w": 15
   }

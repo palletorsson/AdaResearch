@@ -1,6 +1,18 @@
 {
 	"_readme": "The AS-BUILT plan: what the assembler actually made of each segment this run — every cell's role, every body's final world pose and inventory number, every card, courts, rooms, the gate, the mode. Written as each segment finishes. Read this instead of re-deriving the floor plan; diff two runs (vr vs desktop) to prove parity.",
-	"at": "2026-08-19 08:07:39",
+	"at": "2026-08-21 16:03:35",
+	"boot_ms": {
+		"autoloads": 2164,
+		"bake_parsed": 985,
+		"engine_pak": 156,
+		"engine_to_ready": 3147,
+		"first_frame": 10315,
+		"modules_pool": 332,
+		"plan_parsed": 969,
+		"pool_done": 770,
+		"scene_chain": 827,
+		"segment0_built": 2728
+	},
 	"plan": "res://ada_run/em_plan.json",
 	"schema": "adaresearch.em_built.v1",
 	"segments": [
@@ -8,41 +20,7 @@
 			"bake_stale": false,
 			"bodies": [
 				{
-					"inv": "primitives:0006",
-					"kind": "artifact",
-					"rot": 0.0,
-					"tile_cell": [
-						3,
-						3
-					],
-					"token": "CoordinateSystem3M",
-					"walk_kind": "hero",
-					"walk_space": "wall",
-					"world": [
-						3.5,
-						0.0,
-						7.5
-					]
-				},
-				{
-					"inv": "primitives:0028",
-					"kind": "artifact",
-					"rot": 105.0,
-					"tile_cell": [
-						2,
-						9
-					],
-					"token": "frame_counter_display",
-					"walk_kind": "sibling",
-					"walk_space": "wall",
-					"world": [
-						2.5,
-						0.6,
-						13.5
-					]
-				},
-				{
-					"inv": "primitives:0009",
+					"inv": "",
 					"kind": "plinth",
 					"rot": 0.0,
 					"tile_cell": [],
@@ -50,812 +28,196 @@
 					"walk_kind": "",
 					"walk_space": "",
 					"world": [
-						12.5,
+						4.5,
 						0.0,
-						8.5
+						11.5
 					]
 				},
 				{
-					"inv": "primitives:0010",
+					"inv": "",
 					"kind": "artifact",
-					"rot": 90.0,
+					"rot": 0.0,
 					"tile_cell": [
-						12,
-						4
+						4,
+						7
 					],
 					"token": "origin",
-					"walk_kind": "sibling",
-					"walk_space": "wall",
+					"walk_kind": "",
+					"walk_space": "",
 					"world": [
-						12.5,
+						4.5,
 						1.45,
-						8.5
-					]
-				},
-				{
-					"inv": "primitives:0017",
-					"kind": "plinth",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "you_are_here",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						7.5,
-						0.0,
 						11.5
 					]
 				},
 				{
-					"inv": "primitives:0012",
+					"inv": "",
 					"kind": "artifact",
-					"rot": 180.0,
+					"rot": 0.0,
 					"tile_cell": [
-						7,
-						5
-					],
-					"token": "you_are_here",
-					"walk_kind": "sibling",
-					"walk_space": "wall",
-					"world": [
-						7.5,
-						0.96,
-						9.5
-					]
-				},
-				{
-					"inv": "primitives:0018",
-					"kind": "artifact",
-					"rot": 165.0,
-					"tile_cell": [
-						7,
+						4,
 						7
-					],
-					"token": "fontana_puncture",
-					"walk_kind": "sibling",
-					"walk_space": "wall",
-					"world": [
-						7.5,
-						1.4,
-						11.5
-					]
-				},
-				{
-					"inv": "primitives:0025",
-					"kind": "plinth",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "floating_sphere_field",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						2.5,
-						0.0,
-						12.5
-					]
-				},
-				{
-					"inv": "primitives:0024",
-					"kind": "artifact",
-					"rot": 0.0,
-					"tile_cell": [
-						2,
-						8
-					],
-					"token": "floating_sphere_field",
-					"walk_kind": "sibling",
-					"walk_space": "wall",
-					"world": [
-						2.5,
-						0.95,
-						12.5
-					]
-				},
-				{
-					"inv": "primitives:0030",
-					"kind": "plinth",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "interactive_point_origin_force",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						2.5,
-						0.0,
-						14.5
-					]
-				},
-				{
-					"inv": "primitives:0029",
-					"kind": "artifact",
-					"rot": 0.0,
-					"tile_cell": [
-						2,
-						10
-					],
-					"token": "interactive_point_origin_force",
-					"walk_kind": "sibling",
-					"walk_space": "wall",
-					"world": [
-						2.5,
-						1.0,
-						14.5
-					]
-				},
-				{
-					"inv": "primitives:0038",
-					"kind": "plinth",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "interactive_point_origin",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						1.5,
-						0.0,
-						18.5
-					]
-				},
-				{
-					"inv": "primitives:0039",
-					"kind": "artifact",
-					"rot": 270.0,
-					"tile_cell": [
-						1,
-						14
-					],
-					"token": "interactive_point_origin",
-					"walk_kind": "extends",
-					"walk_space": "wall",
-					"world": [
-						1.5,
-						1.17,
-						18.5
-					]
-				},
-				{
-					"inv": "primitives:0031",
-					"kind": "plinth",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "point",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						13.5,
-						0.0,
-						14.5
-					]
-				},
-				{
-					"inv": "primitives:0027",
-					"kind": "artifact",
-					"rot": 90.0,
-					"tile_cell": [
-						13,
-						8
-					],
-					"token": "point",
-					"walk_kind": "extends",
-					"walk_space": "wall",
-					"world": [
-						13.5,
-						1.17,
-						12.5
-					]
-				},
-				{
-					"inv": "primitives:0007",
-					"kind": "artifact",
-					"rot": 90.0,
-					"tile_cell": [
-						12,
-						3
-					],
-					"token": "recession_hall",
-					"walk_kind": "synthesizes",
-					"walk_space": "alcove",
-					"world": [
-						12.5,
-						0.0,
-						7.5
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						11.0,
-						1.58,
-						9.99
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						12.0,
-						1.58,
-						11.01
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						2.0,
-						1.58,
-						15.99
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						2.0,
-						1.58,
-						17.01
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						12.0,
-						1.58,
-						21.99
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						12.0,
-						1.58,
-						23.01
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						2.0,
-						1.58,
-						27.99
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						2.0,
-						1.58,
-						5.01
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						1.01,
-						1.58,
-						6.0
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						9.99,
-						1.58,
-						11.0
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						11.01,
-						1.58,
-						12.0
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						13.99,
-						1.58,
-						6.0
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						3.99,
-						1.58,
-						11.0
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						5.01,
-						1.58,
-						11.0
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						13.0,
-						1.58,
-						9.99
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						11.0,
-						1.58,
-						17.01
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						10.0,
-						1.58,
-						27.99
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						4.0,
-						1.58,
-						5.01
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						1.01,
-						1.58,
-						8.0
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						9.99,
-						1.58,
-						16.0
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						11.01,
-						1.58,
-						20.0
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						13.99,
-						1.58,
-						8.0
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						3.99,
-						1.58,
-						15.0
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						5.01,
-						1.58,
-						15.0
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						12.0,
-						1.58,
-						27.99
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						11.0,
-						1.58,
-						6.01
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						1.01,
-						1.58,
-						12.0
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						9.99,
-						1.58,
-						20.0
-					]
-				},
-				{
-					"inv": "",
-					"kind": "prop",
-					"rot": 180.0,
-					"tile_cell": [],
-					"token": "exit_sign",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						7.5,
-						3.52,
-						3.0
-					]
-				},
-				{
-					"inv": "",
-					"kind": "prop",
-					"rot": 180.0,
-					"tile_cell": [],
-					"token": "exit_sign",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						1.5,
-						3.0,
-						28.0
-					]
-				},
-				{
-					"inv": "",
-					"kind": "prop",
-					"rot": -90.0,
-					"tile_cell": [],
-					"token": "emergency_button",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						9.0,
-						1.05,
-						6.5
-					]
-				},
-				{
-					"inv": "",
-					"kind": "prop",
-					"rot": 90.0,
-					"tile_cell": [],
-					"token": "wall_clock",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						1.02,
-						2.25,
-						0.5
-					]
-				},
-				{
-					"inv": "",
-					"kind": "prop",
-					"rot": 90.0,
-					"tile_cell": [],
-					"token": "info_screen",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						1.0,
-						1.7,
-						9.5
-					]
-				},
-				{
-					"inv": "",
-					"kind": "prop",
-					"rot": 90.0,
-					"tile_cell": [],
-					"token": "whiteboard",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						1.0,
-						1.3,
-						13.5
-					]
-				},
-				{
-					"inv": "",
-					"kind": "prop",
-					"rot": 90.0,
-					"tile_cell": [],
-					"token": "electrical_panel",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						1.0,
-						1.5,
-						1.5
-					]
-				},
-				{
-					"inv": "",
-					"kind": "furniture",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "ceiling_vent",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						3.75,
-						4.64,
-						10.23
-					]
-				},
-				{
-					"inv": "",
-					"kind": "furniture",
-					"rot": 90.0,
-					"tile_cell": [],
-					"token": "cable_tray",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						6.5,
-						4.36,
-						16.5
-					]
-				},
-				{
-					"inv": "",
-					"kind": "furniture",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "floor_grate",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						6.5,
-						0.0,
-						5.5
-					]
-				},
-				{
-					"inv": "primitives:0021",
-					"kind": "plinth",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "example_2_6_single_attractor_vr",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						18.5,
-						0.0,
-						11.5
-					]
-				},
-				{
-					"inv": "primitives:0022",
-					"kind": "artifact",
-					"rot": 0.0,
-					"tile_cell": [
-						18,
-						7
-					],
-					"token": "example_2_6_single_attractor_vr",
-					"walk_kind": "extends",
-					"walk_space": "room",
-					"world": [
-						18.5,
-						1.15,
-						11.5
-					]
-				},
-				{
-					"inv": "primitives:0047",
-					"kind": "artifact",
-					"rot": 0.0,
-					"tile_cell": [
-						7,
-						30
-					],
-					"token": "folding_past",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						7.5,
-						0.0,
-						34.5
-					]
-				},
-				{
-					"inv": "primitives:0048",
-					"kind": "artifact",
-					"rot": 0.0,
-					"tile_cell": [
-						7,
-						43
 					],
 					"token": "lab_room",
 					"walk_kind": "",
 					"walk_space": "",
 					"world": [
+						4.5,
+						0.0,
+						11.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 1.0,
+					"tile_cell": [
+						6,
+						7
+					],
+					"token": "folding_past",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						6.5,
+						0.0,
+						11.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 180.0,
+					"tile_cell": [
+						4,
+						12
+					],
+					"token": "frame_counter_display",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						4.5,
+						0.0,
+						16.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						7,
+						14
+					],
+					"token": "you_are_here",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
 						7.5,
 						0.0,
-						47.5
+						18.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						7,
+						17
+					],
+					"token": "fontana_puncture",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						0.0,
+						21.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						5,
+						18
+					],
+					"token": "interactive_point_origin_force",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						5.5,
+						0.0,
+						22.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						6,
+						18
+					],
+					"token": "interactive_point_origin_force",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						6.5,
+						0.0,
+						22.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						8,
+						18
+					],
+					"token": "interactive_point_origin_force",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						8.5,
+						0.0,
+						22.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						9,
+						19
+					],
+					"token": "floating_sphere_field",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						9.5,
+						0.0,
+						23.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 1.0,
+					"tile_cell": [
+						4,
+						23
+					],
+					"token": "CoordinateSystem3M",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						4.5,
+						0.0,
+						27.5
 					]
 				}
 			],
@@ -867,6 +229,18 @@
 					"pearl": "point",
 					"segment": 0,
 					"world": [
+						15.2,
+						1.2,
+						1.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · point · 02",
+					"index": 2,
+					"pearl": "point",
+					"segment": 0,
+					"world": [
 						11.3,
 						1.0,
 						10.0
@@ -874,8 +248,8 @@
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · point · 02",
-					"index": 2,
+					"id": "primitives · point · 03",
+					"index": 3,
 					"pearl": "point",
 					"segment": 0,
 					"world": [
@@ -886,8 +260,8 @@
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · point · 03",
-					"index": 3,
+					"id": "primitives · point · 04",
+					"index": 4,
 					"pearl": "point",
 					"segment": 0,
 					"world": [
@@ -898,8 +272,8 @@
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · point · 04",
-					"index": 4,
+					"id": "primitives · point · 05",
+					"index": 5,
 					"pearl": "point",
 					"segment": 0,
 					"world": [
@@ -910,32 +284,32 @@
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · point · 05",
-					"index": 5,
+					"id": "primitives · point · 06",
+					"index": 6,
 					"pearl": "point",
 					"segment": 0,
 					"world": [
-						12.2,
+						6.2,
 						1.2,
 						22.0
 					]
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · point · 06",
-					"index": 6,
+					"id": "primitives · point · 07",
+					"index": 7,
 					"pearl": "point",
 					"segment": 0,
 					"world": [
-						12.6,
+						6.6,
 						1.1,
 						23.0
 					]
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · point · 07",
-					"index": 7,
+					"id": "primitives · point · 08",
+					"index": 8,
 					"pearl": "point",
 					"segment": 0,
 					"world": [
@@ -946,8 +320,56 @@
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · point · 08",
-					"index": 8,
+					"id": "primitives · point · 09",
+					"index": 9,
+					"pearl": "point",
+					"segment": 0,
+					"world": [
+						2.2,
+						1.2,
+						29.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · point · 10",
+					"index": 10,
+					"pearl": "point",
+					"segment": 0,
+					"world": [
+						15.3,
+						1.0,
+						3.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · point · 11",
+					"index": 11,
+					"pearl": "point",
+					"segment": 0,
+					"world": [
+						11.6,
+						1.1,
+						33.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · point · 12",
+					"index": 12,
+					"pearl": "point",
+					"segment": 0,
+					"world": [
+						2.3,
+						1.0,
+						4.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · point · 13",
+					"index": 13,
 					"pearl": "point",
 					"segment": 0,
 					"world": [
@@ -958,20 +380,20 @@
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · point · 09",
-					"index": 9,
+					"id": "primitives · point · 14",
+					"index": 14,
 					"pearl": "point",
 					"segment": 0,
 					"world": [
 						1.0,
-						1.2,
-						6.2
+						1.1,
+						1.6
 					]
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · point · 10",
-					"index": 10,
+					"id": "primitives · point · 15",
+					"index": 15,
 					"pearl": "point",
 					"segment": 0,
 					"world": [
@@ -982,8 +404,8 @@
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · point · 11",
-					"index": 11,
+					"id": "primitives · point · 16",
+					"index": 16,
 					"pearl": "point",
 					"segment": 0,
 					"world": [
@@ -994,8 +416,8 @@
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · point · 12",
-					"index": 12,
+					"id": "primitives · point · 17",
+					"index": 17,
 					"pearl": "point",
 					"segment": 0,
 					"world": [
@@ -1006,8 +428,20 @@
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · point · 13",
-					"index": 13,
+					"id": "primitives · point · 18",
+					"index": 18,
+					"pearl": "point",
+					"segment": 0,
+					"world": [
+						16.0,
+						1.0,
+						2.3
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · point · 19",
+					"index": 19,
 					"pearl": "point",
 					"segment": 0,
 					"world": [
@@ -1018,8 +452,8 @@
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · point · 14",
-					"index": 14,
+					"id": "primitives · point · 20",
+					"index": 20,
 					"pearl": "point",
 					"segment": 0,
 					"world": [
@@ -1030,8 +464,8 @@
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · point · 15",
-					"index": 15,
+					"id": "primitives · point · 21",
+					"index": 21,
 					"pearl": "point",
 					"segment": 0,
 					"world": [
@@ -1042,8 +476,8 @@
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · point · 16",
-					"index": 16,
+					"id": "primitives · point · 22",
+					"index": 22,
 					"pearl": "point",
 					"segment": 0,
 					"world": [
@@ -1054,8 +488,32 @@
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · point · 17",
-					"index": 17,
+					"id": "primitives · point · 23",
+					"index": 23,
+					"pearl": "point",
+					"segment": 0,
+					"world": [
+						8.3,
+						1.0,
+						22.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · point · 24",
+					"index": 24,
+					"pearl": "point",
+					"segment": 0,
+					"world": [
+						8.2,
+						1.2,
+						23.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · point · 25",
+					"index": 25,
 					"pearl": "point",
 					"segment": 0,
 					"world": [
@@ -1066,8 +524,44 @@
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · point · 18",
-					"index": 18,
+					"id": "primitives · point · 26",
+					"index": 26,
+					"pearl": "point",
+					"segment": 0,
+					"world": [
+						4.3,
+						1.0,
+						29.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · point · 27",
+					"index": 27,
+					"pearl": "point",
+					"segment": 0,
+					"world": [
+						13.2,
+						1.2,
+						33.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · point · 28",
+					"index": 28,
+					"pearl": "point",
+					"segment": 0,
+					"world": [
+						4.6,
+						1.1,
+						4.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · point · 29",
+					"index": 29,
 					"pearl": "point",
 					"segment": 0,
 					"world": [
@@ -1078,20 +572,20 @@
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · point · 19",
-					"index": 19,
+					"id": "primitives · point · 30",
+					"index": 30,
 					"pearl": "point",
 					"segment": 0,
 					"world": [
 						1.0,
-						1.0,
-						8.3
+						1.2,
+						3.2
 					]
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · point · 20",
-					"index": 20,
+					"id": "primitives · point · 31",
+					"index": 31,
 					"pearl": "point",
 					"segment": 0,
 					"world": [
@@ -1102,8 +596,8 @@
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · point · 21",
-					"index": 21,
+					"id": "primitives · point · 32",
+					"index": 32,
 					"pearl": "point",
 					"segment": 0,
 					"world": [
@@ -1114,8 +608,8 @@
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · point · 22",
-					"index": 22,
+					"id": "primitives · point · 33",
+					"index": 33,
 					"pearl": "point",
 					"segment": 0,
 					"world": [
@@ -1126,8 +620,8 @@
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · point · 23",
-					"index": 23,
+					"id": "primitives · point · 34",
+					"index": 34,
 					"pearl": "point",
 					"segment": 0,
 					"world": [
@@ -1135,170 +629,53 @@
 						1.2,
 						15.2
 					]
-				},
-				{
-					"chapter": "primitives",
-					"id": "primitives · point · 24",
-					"index": 24,
-					"pearl": "point",
-					"segment": 0,
-					"world": [
-						5.0,
-						1.1,
-						15.6
-					]
-				},
-				{
-					"chapter": "primitives",
-					"id": "primitives · point · 25",
-					"index": 25,
-					"pearl": "point",
-					"segment": 0,
-					"world": [
-						12.2,
-						1.2,
-						28.0
-					]
-				},
-				{
-					"chapter": "primitives",
-					"id": "primitives · point · 26",
-					"index": 26,
-					"pearl": "point",
-					"segment": 0,
-					"world": [
-						11.3,
-						1.0,
-						6.0
-					]
-				},
-				{
-					"chapter": "primitives",
-					"id": "primitives · point · 27",
-					"index": 27,
-					"pearl": "point",
-					"segment": 0,
-					"world": [
-						1.0,
-						1.2,
-						12.2
-					]
-				},
-				{
-					"chapter": "primitives",
-					"id": "primitives · point · 28",
-					"index": 28,
-					"pearl": "point",
-					"segment": 0,
-					"world": [
-						10.0,
-						1.0,
-						20.3
-					]
 				}
 			],
 			"cell_x0": -1,
 			"cells": [
-				"############################",
-				"##..............p###########",
+				"pp.#########################",
+				"................p###########",
 				"##..............p###########",
 				"##.............#############",
 				"#######...##################",
-				"##sssss........#############",
-				"##sssss.....ss.#############",
-				"##sssss.....sss#############",
-				"##.....sss..sss##.....######",
-				"##.....sss..sss##.....######",
-				"###b.#.sss.######.sss.######",
-				"##...#..s..#...#..sss.######",
-				"##.s.......#..s##.sss.######",
-				"##.#...........##.....######",
-				"##.s.#........s##.....######",
-				"##...#....b#...#############",
-				"######.....##..#############",
-				"##...#.........#############",
-				"##s..#.........#############",
-				"##.........#.#.#############",
-				"##b........#...#############",
-				"##...#.....#...#############",
-				"###..##...##################",
-				"##...#.....#...#############",
+				"##.............#############",
+				"##.....##......#############",
+				"##ssssssss.....#############",
+				"##ssssssss.....#############",
+				"##ssssssss.....#############",
+				"###ss#ssss.#################",
+				"##sss#ssss.#...#############",
+				"##ssssssss.#...#############",
+				"##s#ssssss.....#############",
+				"##sss#ssss.....#############",
+				"##sss#ssss.#...#############",
+				"######ssss.##..#############",
+				"##sss#ssss.....#############",
+				"##.#.#.sss.....#############",
+				"##.....sss.#.#.#############",
 				"##.........#...#############",
-				"##........b#...#############",
-				"##...#.........#############",
-				"##...#.........#############",
-				"#######...##################",
+				"##...#..s..#...#############",
+				"###..#######################",
+				"##...#....s#...#############",
+				"##.........#...#############",
+				"##.sssss...#...#############",
+				"##.ss#ss.......#############",
+				"##.ss#ss.......#############",
+				"#######s..##################",
 				"##.............#############",
 				"##.............#############",
-				"##.............#############",
-				"##.............#############",
-				"##.............#############",
-				"##......s......#############",
-				"##.............#############",
-				"##.............#############",
-				"##.............#############",
-				"##.............#############",
-				"##.............#############",
-				"##.............#############",
-				"##.............#############",
-				"##.............#############",
-				"##..sssssssss..#############",
-				"##..sssssssss..#############",
-				"##..sssssssss..#############",
-				"##..sssssssss..#############",
-				"##..sssssssss..#############",
-				"##..sssssssss..#############",
-				"##..sssssssss..#############",
-				"##..sssssssss..#############",
-				"##..sssssssss..#############",
-				"##.............#############",
-				"##.............#############"
+				"##.....#.#.....#############",
+				"##....#####....#############",
+				"###...######################"
 			],
-			"chapter": "primitives",
-			"court_depth": 25,
-			"courts": [
-				{
-					"access": "",
-					"chapter": "primitives",
-					"court": [
-						12.0,
-						11.0
-					],
-					"rotation": 0.0,
-					"scene": "res://commons/primitives/temporal/animated_folding_past.tscn",
-					"token": "folding_past",
-					"venue": "courtyard"
-				},
-				{
-					"access": "",
-					"chapter": "primitives",
-					"court": [
-						15.0,
-						14.0
-					],
-					"rotation": 0.0,
-					"scene": "res://commons/artifacts/lab_room/lab_room.tscn",
-					"token": "lab_room",
-					"venue": "courtyard"
-				},
-				{
-					"access": "bridge",
-					"chapter": "primitives",
-					"court": [
-						25.0,
-						24.0
-					],
-					"rotation": 0.0,
-					"scene": "res://commons/primitives/point/xyz_slider_plate.tscn",
-					"token": "xyz_slider_plate",
-					"venue": "courtyard"
-				}
-			],
+			"chapter": "",
+			"court_depth": 0,
+			"courts": [],
 			"forecourt": 0,
 			"gate": {
 				"sealed": true
 			},
-			"h": 25,
+			"h": 30,
 			"legend": {
 				"#": "not floor",
 				".": "floor",
@@ -1310,1801 +687,806 @@
 			"mode": "desktop",
 			"museum": "sainsbury-false-perspective-enfilade",
 			"pearl": "point",
-			"pearl_index": 0,
+			"pearl_index": -1,
 			"porch_depth": 0,
 			"refused": [
 				{
 					"tile_cell": [
-						12,
-						20
+						5,
+						11
 					],
-					"token": "two_points_line",
+					"token": "lab_room",
 					"why": "baked: sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
-						12,
+						4,
+						25
+					],
+					"token": "CoordinateSystem3M",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						3,
+						25
+					],
+					"token": "CoordinateSystem3M",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						4,
+						24
+					],
+					"token": "CoordinateSystem3M",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						4,
 						26
 					],
-					"token": "subtraction_suite",
+					"token": "CoordinateSystem3M",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						5,
+						25
+					],
+					"token": "CoordinateSystem3M",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						3,
+						24
+					],
+					"token": "CoordinateSystem3M",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						3,
+						26
+					],
+					"token": "CoordinateSystem3M",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						5,
+						24
+					],
+					"token": "CoordinateSystem3M",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						5,
+						26
+					],
+					"token": "CoordinateSystem3M",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						2,
+						25
+					],
+					"token": "CoordinateSystem3M",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						4,
+						23
+					],
+					"token": "CoordinateSystem3M",
 					"why": "baked: sealing would sever the walk route"
 				}
 			],
 			"replay": true,
 			"seals": {
-				"1,18": "interactive_point_origin",
-				"1,5": "CoordinateSystem3M",
-				"1,6": "CoordinateSystem3M",
-				"1,7": "CoordinateSystem3M",
-				"10,43": "lab_room",
-				"10,44": "lab_room",
-				"10,45": "lab_room",
-				"10,46": "lab_room",
-				"10,47": "lab_room",
-				"10,48": "lab_room",
-				"10,49": "lab_room",
-				"10,50": "lab_room",
-				"10,51": "lab_room",
-				"11,43": "lab_room",
-				"11,44": "lab_room",
-				"11,45": "lab_room",
-				"11,46": "lab_room",
-				"11,47": "lab_room",
-				"11,48": "lab_room",
-				"11,49": "lab_room",
-				"11,50": "lab_room",
-				"11,51": "lab_room",
-				"11,6": "recession_hall",
-				"11,7": "origin",
-				"11,8": "origin",
-				"11,9": "origin",
-				"12,6": "recession_hall",
-				"12,7": "origin",
-				"12,8": "origin",
-				"12,9": "origin",
-				"13,12": "point",
-				"13,14": "point",
-				"13,7": "origin",
-				"13,8": "origin",
-				"13,9": "origin",
-				"17,10": "example_2_6_single_attractor_vr",
-				"17,11": "example_2_6_single_attractor_vr",
-				"17,12": "example_2_6_single_attractor_vr",
-				"18,10": "example_2_6_single_attractor_vr",
-				"18,11": "example_2_6_single_attractor_vr",
-				"18,12": "example_2_6_single_attractor_vr",
-				"19,10": "example_2_6_single_attractor_vr",
-				"19,11": "example_2_6_single_attractor_vr",
-				"19,12": "example_2_6_single_attractor_vr",
-				"2,12": "floating_sphere_field",
-				"2,14": "interactive_point_origin_force",
-				"2,5": "CoordinateSystem3M",
-				"2,6": "CoordinateSystem3M",
-				"2,7": "CoordinateSystem3M",
-				"3,43": "lab_room",
-				"3,44": "lab_room",
-				"3,45": "lab_room",
-				"3,46": "lab_room",
-				"3,47": "lab_room",
-				"3,48": "lab_room",
-				"3,49": "lab_room",
-				"3,5": "CoordinateSystem3M",
-				"3,50": "lab_room",
-				"3,51": "lab_room",
-				"3,6": "CoordinateSystem3M",
-				"3,7": "CoordinateSystem3M",
-				"4,43": "lab_room",
-				"4,44": "lab_room",
-				"4,45": "lab_room",
-				"4,46": "lab_room",
-				"4,47": "lab_room",
-				"4,48": "lab_room",
-				"4,49": "lab_room",
-				"4,5": "CoordinateSystem3M",
-				"4,50": "lab_room",
-				"4,51": "lab_room",
-				"4,6": "CoordinateSystem3M",
-				"4,7": "CoordinateSystem3M",
-				"5,43": "lab_room",
-				"5,44": "lab_room",
-				"5,45": "lab_room",
-				"5,46": "lab_room",
-				"5,47": "lab_room",
-				"5,48": "lab_room",
-				"5,49": "lab_room",
-				"5,5": "CoordinateSystem3M",
-				"5,50": "lab_room",
-				"5,51": "lab_room",
-				"5,6": "CoordinateSystem3M",
-				"5,7": "CoordinateSystem3M",
-				"6,10": "you_are_here",
-				"6,43": "lab_room",
-				"6,44": "lab_room",
-				"6,45": "lab_room",
-				"6,46": "lab_room",
-				"6,47": "lab_room",
-				"6,48": "lab_room",
-				"6,49": "lab_room",
-				"6,50": "lab_room",
-				"6,51": "lab_room",
-				"6,8": "you_are_here",
-				"6,9": "you_are_here",
-				"7,10": "you_are_here",
-				"7,11": "you_are_here",
-				"7,34": "folding_past",
-				"7,43": "lab_room",
-				"7,44": "lab_room",
-				"7,45": "lab_room",
-				"7,46": "lab_room",
-				"7,47": "lab_room",
-				"7,48": "lab_room",
-				"7,49": "lab_room",
-				"7,50": "lab_room",
-				"7,51": "lab_room",
-				"7,8": "you_are_here",
-				"7,9": "you_are_here",
-				"8,10": "you_are_here",
-				"8,43": "lab_room",
-				"8,44": "lab_room",
-				"8,45": "lab_room",
-				"8,46": "lab_room",
-				"8,47": "lab_room",
-				"8,48": "lab_room",
-				"8,49": "lab_room",
-				"8,50": "lab_room",
-				"8,51": "lab_room",
-				"8,8": "you_are_here",
-				"8,9": "you_are_here",
-				"9,43": "lab_room",
-				"9,44": "lab_room",
-				"9,45": "lab_room",
-				"9,46": "lab_room",
-				"9,47": "lab_room",
-				"9,48": "lab_room",
-				"9,49": "lab_room",
-				"9,50": "lab_room",
-				"9,51": "lab_room"
+				"1,11": "lab_room",
+				"1,12": "lab_room",
+				"1,13": "lab_room",
+				"1,14": "lab_room",
+				"1,15": "lab_room",
+				"1,17": "lab_room",
+				"1,7": "lab_room",
+				"1,8": "lab_room",
+				"1,9": "lab_room",
+				"2,10": "lab_room",
+				"2,11": "lab_room",
+				"2,12": "lab_room",
+				"2,14": "lab_room",
+				"2,15": "lab_room",
+				"2,17": "lab_room",
+				"2,25": "CoordinateSystem3M",
+				"2,26": "CoordinateSystem3M",
+				"2,27": "CoordinateSystem3M",
+				"2,7": "lab_room",
+				"2,8": "lab_room",
+				"2,9": "lab_room",
+				"3,10": "origin",
+				"3,11": "origin",
+				"3,12": "origin",
+				"3,13": "lab_room",
+				"3,14": "lab_room",
+				"3,15": "lab_room",
+				"3,17": "lab_room",
+				"3,25": "CoordinateSystem3M",
+				"3,26": "CoordinateSystem3M",
+				"3,27": "CoordinateSystem3M",
+				"3,7": "lab_room",
+				"3,8": "lab_room",
+				"3,9": "lab_room",
+				"4,12": "origin",
+				"4,13": "lab_room",
+				"4,25": "CoordinateSystem3M",
+				"4,7": "lab_room",
+				"4,8": "lab_room",
+				"4,9": "lab_room",
+				"5,10": "origin",
+				"5,11": "origin",
+				"5,12": "origin",
+				"5,13": "lab_room",
+				"5,14": "lab_room",
+				"5,15": "lab_room",
+				"5,16": "lab_room",
+				"5,17": "lab_room",
+				"5,25": "CoordinateSystem3M",
+				"5,26": "CoordinateSystem3M",
+				"5,27": "CoordinateSystem3M",
+				"5,7": "lab_room",
+				"5,8": "lab_room",
+				"5,9": "lab_room",
+				"6,10": "lab_room",
+				"6,11": "lab_room",
+				"6,12": "lab_room",
+				"6,13": "lab_room",
+				"6,14": "lab_room",
+				"6,15": "lab_room",
+				"6,16": "lab_room",
+				"6,17": "lab_room",
+				"6,18": "you_are_here",
+				"6,19": "you_are_here",
+				"6,25": "CoordinateSystem3M",
+				"6,26": "CoordinateSystem3M",
+				"6,27": "CoordinateSystem3M",
+				"6,28": "CoordinateSystem3M",
+				"6,7": "lab_room",
+				"6,8": "lab_room",
+				"6,9": "lab_room",
+				"7,10": "lab_room",
+				"7,11": "lab_room",
+				"7,12": "lab_room",
+				"7,13": "lab_room",
+				"7,14": "lab_room",
+				"7,15": "lab_room",
+				"7,16": "lab_room",
+				"7,17": "lab_room",
+				"7,18": "you_are_here",
+				"7,19": "you_are_here",
+				"7,21": "fontana_puncture",
+				"7,7": "lab_room",
+				"7,8": "lab_room",
+				"7,9": "lab_room",
+				"8,10": "lab_room",
+				"8,11": "lab_room",
+				"8,12": "lab_room",
+				"8,13": "lab_room",
+				"8,14": "lab_room",
+				"8,15": "lab_room",
+				"8,16": "lab_room",
+				"8,17": "lab_room",
+				"8,18": "you_are_here",
+				"8,19": "you_are_here",
+				"8,7": "lab_room",
+				"8,8": "lab_room",
+				"8,9": "lab_room",
+				"9,23": "floating_sphere_field"
 			},
 			"segment": 0,
-			"side_rooms": [
-				{
-					"chapter": "primitives",
-					"kind": "extends",
-					"rotation": 0.0,
-					"scene": "res://algorithms/forces/example_2_6_single_attractor_vr.tscn",
-					"token": "example_2_6_single_attractor_vr",
-					"why": "named relation of origin: an @identity relationships field names it"
-				}
-			],
+			"side_rooms": [],
 			"unbaked": 0,
 			"vestibule": 4,
 			"w": 15,
 			"z0": 0,
-			"z1": 54
+			"z1": 34
 		},
 		{
 			"bake_stale": false,
 			"bodies": [
 				{
-					"inv": "primitives:0067",
-					"kind": "plinth",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "klee_walking_point",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						2.5,
-						0.0,
-						63.5
-					]
-				},
-				{
-					"inv": "primitives:0066",
-					"kind": "artifact",
-					"rot": 0.0,
-					"tile_cell": [
-						2,
-						5
-					],
-					"token": "klee_walking_point",
-					"walk_kind": "hero",
-					"walk_space": "wall",
-					"world": [
-						2.5,
-						0.9,
-						63.5
-					]
-				},
-				{
-					"inv": "primitives:0095",
-					"kind": "artifact",
-					"rot": 90.0,
-					"tile_cell": [
-						9,
-						14
-					],
-					"token": "science_screen",
-					"walk_kind": "sibling",
-					"walk_space": "wall",
-					"world": [
-						9.5,
-						0.0,
-						72.5
-					]
-				},
-				{
-					"inv": "primitives:0103",
-					"kind": "artifact",
-					"rot": 180.0,
-					"tile_cell": [
-						7,
-						28
-					],
-					"token": "dgrid",
-					"walk_kind": "sibling",
-					"walk_space": "wall",
-					"world": [
-						7.5,
-						1.4,
-						86.5
-					]
-				},
-				{
-					"inv": "primitives:0083",
-					"kind": "plinth",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "laser_sword",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						2.5,
-						0.0,
-						68.5
-					]
-				},
-				{
-					"inv": "primitives:0084",
-					"kind": "artifact",
-					"rot": 0.0,
-					"tile_cell": [
-						2,
-						10
-					],
-					"token": "laser_sword",
-					"walk_kind": "sibling",
-					"walk_space": "wall",
-					"world": [
-						2.5,
-						0.76,
-						68.5
-					]
-				},
-				{
-					"inv": "primitives:0064",
+					"inv": "",
 					"kind": "artifact",
 					"rot": 0.0,
 					"tile_cell": [
 						3,
-						4
-					],
-					"token": "lightrod",
-					"walk_kind": "sibling",
-					"walk_space": "wall",
-					"world": [
-						3.5,
-						0.0,
-						62.5
-					]
-				},
-				{
-					"inv": "primitives:0077",
-					"kind": "plinth",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "cube_scene",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						3.5,
-						0.0,
-						67.5
-					]
-				},
-				{
-					"inv": "primitives:0078",
-					"kind": "artifact",
-					"rot": 0.0,
-					"tile_cell": [
-						3,
-						9
-					],
-					"token": "cube_scene",
-					"walk_kind": "sibling",
-					"walk_space": "wall",
-					"world": [
-						3.5,
-						1.15,
-						67.5
-					]
-				},
-				{
-					"inv": "primitives:0062",
-					"kind": "plinth",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "parallel_line_puzzle",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						2.5,
-						0.0,
-						61.5
-					]
-				},
-				{
-					"inv": "primitives:0063",
-					"kind": "artifact",
-					"rot": 90.0,
-					"tile_cell": [
-						2,
-						3
-					],
-					"token": "parallel_line_puzzle",
-					"walk_kind": "sibling",
-					"walk_space": "wall",
-					"world": [
-						2.5,
-						0.19,
-						61.5
-					]
-				},
-				{
-					"inv": "primitives:0079",
-					"kind": "plinth",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "line",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						8.5,
-						0.0,
-						67.5
-					]
-				},
-				{
-					"inv": "primitives:0080",
-					"kind": "artifact",
-					"rot": 0.0,
-					"tile_cell": [
-						8,
-						9
-					],
-					"token": "line",
-					"walk_kind": "sibling",
-					"walk_space": "wall",
-					"world": [
-						8.5,
-						1.18,
-						67.5
-					]
-				},
-				{
-					"inv": "primitives:0074",
-					"kind": "plinth",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "dark_sphere",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						2.5,
-						0.0,
-						66.5
-					]
-				},
-				{
-					"inv": "primitives:0075",
-					"kind": "artifact",
-					"rot": 0.0,
-					"tile_cell": [
-						2,
 						8
 					],
-					"token": "dark_sphere",
-					"walk_kind": "sibling",
-					"walk_space": "wall",
-					"world": [
-						2.5,
-						0.67,
-						66.5
-					]
-				},
-				{
-					"inv": "primitives:0081",
-					"kind": "plinth",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "wall_pattern_gallery",
+					"token": "player_trace",
 					"walk_kind": "",
 					"walk_space": "",
 					"world": [
-						12.5,
+						3.5,
 						0.0,
-						67.5
+						46.5
 					]
 				},
 				{
-					"inv": "primitives:0082",
+					"inv": "",
 					"kind": "artifact",
 					"rot": 0.0,
 					"tile_cell": [
-						12,
-						9
-					],
-					"token": "wall_pattern_gallery",
-					"walk_kind": "extends",
-					"walk_space": "wall",
-					"world": [
-						12.5,
-						0.95,
-						67.5
-					]
-				},
-				{
-					"inv": "primitives:0088",
-					"kind": "plinth",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "plus_line_puzzle",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						12.5,
-						0.0,
-						69.5
-					]
-				},
-				{
-					"inv": "primitives:0089",
-					"kind": "artifact",
-					"rot": 90.0,
-					"tile_cell": [
-						12,
+						6,
 						11
 					],
-					"token": "plus_line_puzzle",
-					"walk_kind": "varies",
-					"walk_space": "wall",
-					"world": [
-						12.5,
-						0.19,
-						69.5
-					]
-				},
-				{
-					"inv": "primitives:0104",
-					"kind": "artifact",
-					"rot": 180.0,
-					"tile_cell": [
-						10,
-						28
-					],
-					"token": "modulor_man_demo",
-					"walk_kind": "varies",
-					"walk_space": "wall",
-					"world": [
-						10.5,
-						1.4,
-						86.5
-					]
-				},
-				{
-					"inv": "primitives:0093",
-					"kind": "plinth",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "line_slack",
+					"token": "grid_lines",
 					"walk_kind": "",
 					"walk_space": "",
 					"world": [
-						12.5,
+						6.5,
 						0.0,
-						71.5
+						49.5
 					]
 				},
 				{
-					"inv": "primitives:0094",
+					"inv": "",
 					"kind": "artifact",
-					"rot": 90.0,
+					"rot": 0.0,
 					"tile_cell": [
-						12,
-						13
+						7,
+						15
 					],
-					"token": "line_slack",
-					"walk_kind": "synthesizes",
-					"walk_space": "alcove",
-					"world": [
-						12.5,
-						0.95,
-						71.5
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						15.0,
-						1.58,
-						55.01
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						11.0,
-						1.58,
-						63.99
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						12.0,
-						1.58,
-						65.01
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						2.0,
-						1.58,
-						69.99
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						2.0,
-						1.58,
-						71.01
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						12.0,
-						1.58,
-						75.99
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						12.0,
-						1.58,
-						77.01
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						2.0,
-						1.58,
-						81.99
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						2.0,
-						1.58,
-						83.01
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						15.0,
-						1.58,
-						56.99
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						11.0,
-						1.58,
-						86.99
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						2.0,
-						1.58,
-						57.99
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						2.0,
-						1.58,
-						59.01
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						1.01,
-						1.58,
-						55.0
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						9.99,
-						1.58,
-						65.0
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						11.01,
-						1.58,
-						66.0
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						13.99,
-						1.58,
-						60.0
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						15.99,
-						1.58,
-						56.0
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						3.99,
-						1.58,
-						65.0
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						5.01,
-						1.58,
-						65.0
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						13.0,
-						1.58,
-						63.99
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						11.0,
-						1.58,
-						71.01
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						10.0,
-						1.58,
-						81.99
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						4.0,
-						1.58,
-						83.01
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						13.0,
-						1.58,
-						86.99
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						5.0,
-						1.58,
-						58.99
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						4.0,
-						1.58,
-						59.01
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						1.01,
-						1.58,
-						57.0
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						9.99,
-						1.58,
-						70.0
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						11.01,
-						1.58,
-						74.0
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						13.99,
-						1.58,
-						62.0
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						3.99,
-						1.58,
-						69.0
-					]
-				},
-				{
-					"inv": "",
-					"kind": "showing",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "showing",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						5.01,
-						1.58,
-						69.0
-					]
-				},
-				{
-					"inv": "",
-					"kind": "prop",
-					"rot": 180.0,
-					"tile_cell": [],
-					"token": "exit_sign",
+					"token": "floating_sphere_field",
 					"walk_kind": "",
 					"walk_space": "",
 					"world": [
 						7.5,
-						3.52,
-						57.0
+						0.0,
+						53.5
 					]
 				},
 				{
 					"inv": "",
-					"kind": "prop",
-					"rot": 180.0,
+					"kind": "plinth",
+					"rot": 0.0,
 					"tile_cell": [],
-					"token": "exit_sign",
+					"token": "grab_sphere_point_snap",
 					"walk_kind": "",
 					"walk_space": "",
 					"world": [
-						1.5,
-						3.0,
-						87.0
-					]
-				},
-				{
-					"inv": "",
-					"kind": "prop",
-					"rot": -90.0,
-					"tile_cell": [],
-					"token": "emergency_button",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						9.0,
-						1.05,
-						58.5
-					]
-				},
-				{
-					"inv": "",
-					"kind": "prop",
-					"rot": 90.0,
-					"tile_cell": [],
-					"token": "wall_clock",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						1.02,
-						2.25,
+						5.5,
+						0.0,
 						54.5
 					]
 				},
 				{
 					"inv": "",
-					"kind": "prop",
-					"rot": 90.0,
-					"tile_cell": [],
-					"token": "info_screen",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						1.0,
-						1.7,
-						63.5
-					]
-				},
-				{
-					"inv": "",
-					"kind": "prop",
-					"rot": 90.0,
-					"tile_cell": [],
-					"token": "whiteboard",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						1.0,
-						1.3,
-						67.5
-					]
-				},
-				{
-					"inv": "",
-					"kind": "prop",
-					"rot": 90.0,
-					"tile_cell": [],
-					"token": "electrical_panel",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						1.0,
-						1.5,
-						55.5
-					]
-				},
-				{
-					"inv": "",
-					"kind": "prop",
-					"rot": -90.0,
-					"tile_cell": [],
-					"token": "palm_scanner",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						15.95,
-						1.35,
-						56.5
-					]
-				},
-				{
-					"inv": "",
-					"kind": "furniture",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "ceiling_vent",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						3.75,
-						4.64,
-						64.22
-					]
-				},
-				{
-					"inv": "",
-					"kind": "furniture",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "ceiling_vent",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						3.75,
-						4.64,
-						76.22
-					]
-				},
-				{
-					"inv": "",
-					"kind": "furniture",
-					"rot": 90.0,
-					"tile_cell": [],
-					"token": "cable_tray",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						6.5,
-						4.36,
-						71.5
-					]
-				},
-				{
-					"inv": "",
-					"kind": "furniture",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "floor_grate",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						6.5,
-						0.0,
-						59.5
-					]
-				},
-				{
-					"inv": "",
-					"kind": "furniture",
-					"rot": 90.0,
-					"tile_cell": [],
-					"token": "fire_hose_box",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						1.28,
-						0.85,
-						72.5
-					]
-				},
-				{
-					"inv": "primitives:0052",
 					"kind": "artifact",
 					"rot": 0.0,
 					"tile_cell": [
-						12,
-						-3
+						5,
+						16
 					],
-					"token": "line_builder_3d",
+					"token": "grab_sphere_point_snap",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						5.5,
+						2.26,
+						54.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						5,
+						16
+					],
+					"token": "ConeTwistBag",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						5.5,
+						0.0,
+						54.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "ConnectedTriangles",
 					"walk_kind": "",
 					"walk_space": "",
 					"world": [
 						12.5,
 						0.0,
-						55.5
+						61.5
 					]
 				},
 				{
-					"inv": "primitives:0051",
-					"kind": "plinth",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "grabbable_line",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						2.5,
-						0.0,
-						55.5
-					]
-				},
-				{
-					"inv": "primitives:0050",
+					"inv": "",
 					"kind": "artifact",
 					"rot": 0.0,
 					"tile_cell": [
-						2,
-						-3
+						12,
+						23
 					],
-					"token": "grabbable_line",
+					"token": "ConnectedTriangles",
 					"walk_kind": "",
 					"walk_space": "",
 					"world": [
-						2.5,
-						1.15,
-						55.5
+						12.5,
+						2.89,
+						61.5
 					]
 				},
 				{
-					"inv": "primitives:0107",
+					"inv": "",
 					"kind": "artifact",
 					"rot": 0.0,
 					"tile_cell": [
-						1,
-						32
+						10,
+						21
 					],
-					"token": "cove_display",
+					"token": "room_grammar",
 					"walk_kind": "",
 					"walk_space": "",
 					"world": [
-						1.5,
+						10.5,
 						0.0,
-						90.5
-					]
-				},
-				{
-					"inv": "primitives:0108",
-					"kind": "artifact",
-					"rot": 0.0,
-					"tile_cell": [
-						13,
-						32
-					],
-					"token": "adjacency_shelf",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						13.5,
-						0.0,
-						90.5
-					]
-				},
-				{
-					"inv": "primitives:0109",
-					"kind": "plinth",
-					"rot": 0.0,
-					"tile_cell": [],
-					"token": "xyz_slider_plate",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						16.5,
-						0.0,
-						103.5
-					]
-				},
-				{
-					"inv": "primitives:0110",
-					"kind": "artifact",
-					"rot": 0.0,
-					"tile_cell": [
-						16,
-						45
-					],
-					"token": "xyz_slider_plate",
-					"walk_kind": "",
-					"walk_space": "",
-					"world": [
-						16.5,
-						1.43,
-						103.5
+						59.5
 					]
 				}
 			],
 			"cards": [
 				{
 					"chapter": "primitives",
-					"id": "primitives · lines · 01",
+					"id": "primitives · line grid · 01",
 					"index": 1,
-					"pearl": "lines",
+					"pearl": "line grid",
 					"segment": 1,
 					"world": [
 						15.2,
 						1.2,
-						55.0
+						35.0
 					]
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · lines · 02",
+					"id": "primitives · line grid · 02",
 					"index": 2,
-					"pearl": "lines",
+					"pearl": "line grid",
 					"segment": 1,
 					"world": [
 						11.3,
 						1.0,
-						64.0
+						44.0
 					]
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · lines · 03",
+					"id": "primitives · line grid · 03",
 					"index": 3,
-					"pearl": "lines",
+					"pearl": "line grid",
 					"segment": 1,
 					"world": [
 						12.6,
 						1.1,
-						65.0
+						45.0
 					]
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · lines · 04",
+					"id": "primitives · line grid · 04",
 					"index": 4,
-					"pearl": "lines",
+					"pearl": "line grid",
 					"segment": 1,
 					"world": [
 						2.3,
 						1.0,
-						70.0
+						50.0
 					]
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · lines · 05",
+					"id": "primitives · line grid · 05",
 					"index": 5,
-					"pearl": "lines",
+					"pearl": "line grid",
 					"segment": 1,
 					"world": [
 						2.2,
 						1.2,
-						71.0
+						51.0
 					]
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · lines · 06",
+					"id": "primitives · line grid · 06",
 					"index": 6,
-					"pearl": "lines",
+					"pearl": "line grid",
 					"segment": 1,
 					"world": [
 						12.2,
 						1.2,
-						76.0
+						56.0
 					]
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · lines · 07",
+					"id": "primitives · line grid · 07",
 					"index": 7,
-					"pearl": "lines",
+					"pearl": "line grid",
 					"segment": 1,
 					"world": [
 						12.6,
 						1.1,
-						77.0
-					]
-				},
-				{
-					"chapter": "primitives",
-					"id": "primitives · lines · 08",
-					"index": 8,
-					"pearl": "lines",
-					"segment": 1,
-					"world": [
-						2.3,
-						1.0,
-						82.0
-					]
-				},
-				{
-					"chapter": "primitives",
-					"id": "primitives · lines · 09",
-					"index": 9,
-					"pearl": "lines",
-					"segment": 1,
-					"world": [
-						2.2,
-						1.2,
-						83.0
-					]
-				},
-				{
-					"chapter": "primitives",
-					"id": "primitives · lines · 10",
-					"index": 10,
-					"pearl": "lines",
-					"segment": 1,
-					"world": [
-						15.3,
-						1.0,
 						57.0
 					]
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · lines · 11",
-					"index": 11,
-					"pearl": "lines",
-					"segment": 1,
-					"world": [
-						11.6,
-						1.1,
-						87.0
-					]
-				},
-				{
-					"chapter": "primitives",
-					"id": "primitives · lines · 12",
-					"index": 12,
-					"pearl": "lines",
+					"id": "primitives · line grid · 08",
+					"index": 8,
+					"pearl": "line grid",
 					"segment": 1,
 					"world": [
 						2.3,
 						1.0,
-						58.0
+						62.0
 					]
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · lines · 13",
-					"index": 13,
-					"pearl": "lines",
+					"id": "primitives · line grid · 09",
+					"index": 9,
+					"pearl": "line grid",
 					"segment": 1,
 					"world": [
 						2.2,
 						1.2,
-						59.0
+						63.0
 					]
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · lines · 14",
+					"id": "primitives · line grid · 10",
+					"index": 10,
+					"pearl": "line grid",
+					"segment": 1,
+					"world": [
+						15.3,
+						1.0,
+						37.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · line grid · 11",
+					"index": 11,
+					"pearl": "line grid",
+					"segment": 1,
+					"world": [
+						11.6,
+						1.1,
+						67.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · line grid · 12",
+					"index": 12,
+					"pearl": "line grid",
+					"segment": 1,
+					"world": [
+						2.3,
+						1.0,
+						38.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · line grid · 13",
+					"index": 13,
+					"pearl": "line grid",
+					"segment": 1,
+					"world": [
+						2.2,
+						1.2,
+						39.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · line grid · 14",
 					"index": 14,
-					"pearl": "lines",
+					"pearl": "line grid",
 					"segment": 1,
 					"world": [
 						1.0,
 						1.1,
-						55.6
+						35.6
 					]
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · lines · 15",
+					"id": "primitives · line grid · 15",
 					"index": 15,
-					"pearl": "lines",
+					"pearl": "line grid",
 					"segment": 1,
 					"world": [
 						10.0,
 						1.0,
-						65.3
+						45.3
 					]
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · lines · 16",
+					"id": "primitives · line grid · 16",
 					"index": 16,
-					"pearl": "lines",
+					"pearl": "line grid",
 					"segment": 1,
 					"world": [
 						11.0,
 						1.1,
-						66.6
+						46.6
 					]
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · lines · 17",
+					"id": "primitives · line grid · 17",
 					"index": 17,
-					"pearl": "lines",
+					"pearl": "line grid",
 					"segment": 1,
 					"world": [
 						14.0,
 						1.1,
-						60.6
+						40.6
 					]
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · lines · 18",
+					"id": "primitives · line grid · 18",
 					"index": 18,
-					"pearl": "lines",
+					"pearl": "line grid",
 					"segment": 1,
 					"world": [
 						16.0,
 						1.0,
-						56.3
+						36.3
 					]
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · lines · 19",
+					"id": "primitives · line grid · 19",
 					"index": 19,
-					"pearl": "lines",
+					"pearl": "line grid",
 					"segment": 1,
 					"world": [
 						4.0,
 						1.0,
-						65.3
+						45.3
 					]
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · lines · 20",
+					"id": "primitives · line grid · 20",
 					"index": 20,
-					"pearl": "lines",
+					"pearl": "line grid",
 					"segment": 1,
 					"world": [
 						5.0,
 						1.2,
-						65.2
+						45.2
 					]
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · lines · 21",
+					"id": "primitives · line grid · 21",
 					"index": 21,
-					"pearl": "lines",
+					"pearl": "line grid",
 					"segment": 1,
 					"world": [
 						13.6,
 						1.1,
-						64.0
+						44.0
 					]
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · lines · 22",
+					"id": "primitives · line grid · 22",
 					"index": 22,
-					"pearl": "lines",
+					"pearl": "line grid",
 					"segment": 1,
 					"world": [
 						11.2,
 						1.2,
-						71.0
+						51.0
 					]
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · lines · 23",
+					"id": "primitives · line grid · 23",
 					"index": 23,
-					"pearl": "lines",
+					"pearl": "line grid",
 					"segment": 1,
 					"world": [
 						10.6,
 						1.1,
-						82.0
+						62.0
 					]
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · lines · 24",
+					"id": "primitives · line grid · 24",
 					"index": 24,
-					"pearl": "lines",
+					"pearl": "line grid",
 					"segment": 1,
 					"world": [
 						4.3,
 						1.0,
-						83.0
+						63.0
 					]
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · lines · 25",
+					"id": "primitives · line grid · 25",
 					"index": 25,
-					"pearl": "lines",
+					"pearl": "line grid",
 					"segment": 1,
 					"world": [
 						13.2,
 						1.2,
-						87.0
+						67.0
 					]
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · lines · 26",
+					"id": "primitives · line grid · 26",
 					"index": 26,
-					"pearl": "lines",
+					"pearl": "line grid",
 					"segment": 1,
 					"world": [
-						5.6,
+						4.6,
 						1.1,
-						59.0
+						38.0
 					]
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · lines · 27",
+					"id": "primitives · line grid · 27",
 					"index": 27,
-					"pearl": "lines",
+					"pearl": "line grid",
 					"segment": 1,
 					"world": [
 						4.3,
 						1.0,
-						59.0
+						39.0
 					]
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · lines · 28",
+					"id": "primitives · line grid · 28",
 					"index": 28,
-					"pearl": "lines",
+					"pearl": "line grid",
 					"segment": 1,
 					"world": [
 						1.0,
 						1.2,
-						57.2
+						37.2
 					]
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · lines · 29",
+					"id": "primitives · line grid · 29",
 					"index": 29,
-					"pearl": "lines",
+					"pearl": "line grid",
 					"segment": 1,
 					"world": [
 						10.0,
 						1.1,
-						70.6
+						50.6
 					]
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · lines · 30",
+					"id": "primitives · line grid · 30",
 					"index": 30,
-					"pearl": "lines",
+					"pearl": "line grid",
 					"segment": 1,
 					"world": [
 						11.0,
 						1.2,
-						74.2
+						54.2
 					]
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · lines · 31",
+					"id": "primitives · line grid · 31",
 					"index": 31,
-					"pearl": "lines",
+					"pearl": "line grid",
 					"segment": 1,
 					"world": [
 						14.0,
 						1.2,
-						62.2
+						42.2
 					]
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · lines · 32",
+					"id": "primitives · line grid · 32",
 					"index": 32,
-					"pearl": "lines",
+					"pearl": "line grid",
 					"segment": 1,
 					"world": [
 						4.0,
 						1.2,
-						69.2
+						49.2
 					]
 				},
 				{
 					"chapter": "primitives",
-					"id": "primitives · lines · 33",
+					"id": "primitives · line grid · 33",
 					"index": 33,
-					"pearl": "lines",
+					"pearl": "line grid",
 					"segment": 1,
 					"world": [
 						5.0,
 						1.1,
-						69.6
+						49.6
 					]
 				}
 			],
 			"cell_x0": -1,
 			"cells": [
 				"##.............#############",
-				"##.s.........ssss###########",
+				"##...............###########",
 				"##...............###########",
 				"##.............#############",
 				"#######...##################",
 				"##.............#############",
 				"##.............#############",
-				"##.s...........#############",
-				"##..s..........#############",
-				"##sss..........#############",
-				"###b.#.....#################",
-				"##...#.....#...#############",
-				"##.s.......#...#############",
-				"##.#s....s...s.#############",
-				"##.s.#.........#############",
-				"##...#....b#.s.#############",
-				"######....s##..#############",
-				"##...#....s..s.#############",
-				"##p..#....s....#############",
-				"##........s#.#.#############",
-				"##b.......s#...#############",
-				"##...#.....#...#############",
-				"###..##...##################",
-				"##...#.....#...#############",
-				"##.........#...#############",
-				"##........b#...#############",
-				"##...#.........#############",
-				"##...#.........#############",
-				"#######...##################",
-				"##.............#############",
-				"##b............#############",
-				"##.....#.#.....#############",
-				"##....#####s...#############",
-				"###...######################",
 				"##.............#############",
 				"##.............#############",
-				"##ss.........ss#############",
-				"##...#######################",
-				"##...#......................",
-				"##...#......................",
-				"##...#..###################.",
-				"##...#..###################.",
-				"##...#..###################.",
-				"##...#..###################.",
-				"##...#..###################.",
-				"##...#..###################.",
-				"##...#..###################.",
-				"##......###################.",
-				"##......###################.",
-				"##......###################.",
-				"##......###################.",
-				"##...#..###################.",
-				"##...#..###################.",
-				"##...#..###################.",
-				"##...#..###################.",
-				"##...#..###################.",
-				"##...#..###################.",
-				"##...#..###################.",
-				"##...#......................",
-				"##...#......................",
-				"##...#######################"
+				"##.............#############",
+				"###..#.....#################",
+				"##...#.....#...#############",
+				"##..s......#...#############",
+				"##...sssss.....#############",
+				"##...#ssss.....#############",
+				"##...#ssss.#...#############",
+				"######ssss.##..#############",
+				"##...#ssss.....#############",
+				"##..s#s........#############",
+				"##..sss.s..#.#.#############",
+				"##.sssssss.#...#############",
+				"##...#.....#...#############",
+				"###..##.ss##################",
+				"##...#..sss#sss#############",
+				"##......sss#sss#############",
+				"##......sss#sss#############",
+				"##...#..sssssss#############",
+				"##...#..sssssss#############",
+				"#######.ss##################",
+				"##......sssssss#############",
+				"##......sssssss#############",
+				"##.....#s#sssss#############",
+				"##....#####ssss#############",
+				"###...######################"
 			],
-			"chapter": "primitives",
-			"court_depth": 24,
-			"courts": [
-				{
-					"access": "",
-					"chapter": "primitives",
-					"court": [
-						7.0,
-						106.0
-					],
-					"rotation": 90.0,
-					"scene": "res://commons/primitives/line/scale_lines.tscn",
-					"token": "scale_lines",
-					"venue": "courtyard"
-				},
-				{
-					"access": "bridge",
-					"chapter": "primitives",
-					"court": [
-						38.0,
-						25.0
-					],
-					"rotation": 0.0,
-					"scene": "res://commons/artifacts/art_history_gallery/art_history_gallery.tscn",
-					"token": "art_history_gallery",
-					"venue": "courtyard"
-				},
-				{
-					"access": "bridge",
-					"chapter": "primitives",
-					"court": [
-						19.0,
-						36.0
-					],
-					"rotation": 0.0,
-					"scene": "res://algorithms/shaders/carpet_cove_gallery/carpet_cove_gallery.tscn",
-					"token": "carpet_cove_gallery",
-					"venue": "courtyard"
-				},
-				{
-					"access": "",
-					"chapter": "primitives",
-					"court": [
-						7.0,
-						57.0
-					],
-					"rotation": 0.0,
-					"scene": "res://commons/primitives/laser_measure/grab_laser_measure.tscn",
-					"token": "laser_measure",
-					"venue": "courtyard"
-				}
-			],
-			"forecourt": 7,
+			"chapter": "",
+			"court_depth": 0,
+			"courts": [],
+			"forecourt": 0,
 			"gate": {
 
 			},
@@ -3119,64 +1501,5920 @@
 			},
 			"mode": "desktop",
 			"museum": "sainsbury-false-perspective-enfilade",
-			"pearl": "lines",
-			"pearl_index": 1,
-			"porch_depth": 3,
+			"pearl": "line grid",
+			"pearl_index": -1,
+			"porch_depth": 0,
 			"refused": [
 				{
 					"tile_cell": [
-						12,
+						7,
+						15
+					],
+					"token": "grid_lines",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						3,
+						21
+					],
+					"token": "ConeTwistBag",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						2,
+						21
+					],
+					"token": "ConeTwistBag",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						3,
+						20
+					],
+					"token": "ConeTwistBag",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						3,
+						22
+					],
+					"token": "ConeTwistBag",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						4,
+						21
+					],
+					"token": "ConeTwistBag",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						2,
+						20
+					],
+					"token": "ConeTwistBag",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						2,
+						22
+					],
+					"token": "ConeTwistBag",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						4,
+						20
+					],
+					"token": "ConeTwistBag",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						4,
+						22
+					],
+					"token": "ConeTwistBag",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						1,
+						21
+					],
+					"token": "ConeTwistBag",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						3,
 						19
 					],
-					"token": "color_space_navigator",
+					"token": "ConeTwistBag",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						3,
+						23
+					],
+					"token": "ConeTwistBag",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						5,
+						21
+					],
+					"token": "ConeTwistBag",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						1,
+						20
+					],
+					"token": "ConeTwistBag",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						1,
+						22
+					],
+					"token": "ConeTwistBag",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						2,
+						19
+					],
+					"token": "ConeTwistBag",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						2,
+						23
+					],
+					"token": "ConeTwistBag",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						4,
+						19
+					],
+					"token": "ConeTwistBag",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						4,
+						23
+					],
+					"token": "ConeTwistBag",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						9,
+						22
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						8,
+						22
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						9,
+						21
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						9,
+						23
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						10,
+						22
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						8,
+						21
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						8,
+						23
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						10,
+						21
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						10,
+						23
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						7,
+						22
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						9,
+						20
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						9,
+						24
+					],
+					"token": "ConnectedTriangles",
 					"why": "baked: sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
 						11,
-						14
+						22
 					],
-					"token": "laser_exploding_sphere",
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						7,
+						21
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						7,
+						23
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						8,
+						20
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						8,
+						24
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						10,
+						20
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						10,
+						24
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						11,
+						21
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						11,
+						23
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						7,
+						20
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						7,
+						24
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						11,
+						20
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						11,
+						24
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						12,
+						22
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						6,
+						22
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						9,
+						25
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						9,
+						19
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						12,
+						21
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						12,
+						23
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						10,
+						25
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						10,
+						19
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						8,
+						25
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						8,
+						19
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						6,
+						23
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						6,
+						21
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						7,
+						25
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						7,
+						19
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						12,
+						24
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						6,
+						24
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						11,
+						19
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						11,
+						25
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						12,
+						20
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						6,
+						20
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						12,
+						25
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						12,
+						19
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						6,
+						25
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						6,
+						19
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						13,
+						22
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						5,
+						22
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						9,
+						26
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						9,
+						18
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						13,
+						23
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						13,
+						21
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						10,
+						26
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						10,
+						18
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						8,
+						26
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						8,
+						18
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						5,
+						23
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						5,
+						21
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						7,
+						18
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						7,
+						26
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						5,
+						20
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						13,
+						20
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						5,
+						24
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						11,
+						18
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						11,
+						26
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						13,
+						24
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						5,
+						19
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						13,
+						19
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						12,
+						26
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						12,
+						18
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						5,
+						25
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						13,
+						25
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						6,
+						18
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						6,
+						26
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						13,
+						26
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						13,
+						18
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						5,
+						26
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						5,
+						18
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						4,
+						22
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						9,
+						27
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						9,
+						17
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						4,
+						21
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						4,
+						23
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						10,
+						27
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						10,
+						17
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						8,
+						27
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						8,
+						17
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						11,
+						27
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						11,
+						17
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						7,
+						27
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						7,
+						17
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						4,
+						20
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						4,
+						24
+					],
+					"token": "ConnectedTriangles",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						4,
+						19
+					],
+					"token": "ConnectedTriangles",
 					"why": "baked: sealing would sever the walk route"
 				}
 			],
 			"replay": true,
 			"seals": {
-				"1,63": "klee_walking_point",
-				"1,90": "cove_display",
-				"10,86": "modulor_man_demo",
-				"12,55": "line_builder_3d",
-				"12,67": "wall_pattern_gallery",
-				"12,69": "plus_line_puzzle",
-				"12,71": "line_slack",
-				"12,90": "adjacency_shelf",
-				"13,55": "line_builder_3d",
-				"13,90": "adjacency_shelf",
-				"14,55": "line_builder_3d",
-				"15,55": "line_builder_3d",
-				"2,55": "grabbable_line",
-				"2,61": "parallel_line_puzzle",
-				"2,63": "klee_walking_point",
-				"2,66": "dark_sphere",
-				"2,68": "laser_sword",
-				"2,90": "cove_display",
-				"3,62": "lightrod",
-				"3,63": "klee_walking_point",
-				"3,67": "cube_scene",
-				"8,67": "line",
-				"9,70": "science_screen",
-				"9,71": "science_screen",
-				"9,72": "science_screen",
-				"9,73": "science_screen",
-				"9,74": "science_screen"
+				"10,60": "ConnectedTriangles",
+				"10,61": "ConnectedTriangles",
+				"10,63": "ConnectedTriangles",
+				"10,64": "ConnectedTriangles",
+				"10,65": "ConnectedTriangles",
+				"10,66": "ConnectedTriangles",
+				"11,57": "ConnectedTriangles",
+				"11,58": "ConnectedTriangles",
+				"11,59": "ConnectedTriangles",
+				"11,60": "ConnectedTriangles",
+				"11,61": "ConnectedTriangles",
+				"11,63": "ConnectedTriangles",
+				"11,64": "ConnectedTriangles",
+				"11,65": "ConnectedTriangles",
+				"11,66": "ConnectedTriangles",
+				"12,57": "ConnectedTriangles",
+				"12,58": "ConnectedTriangles",
+				"12,59": "ConnectedTriangles",
+				"12,60": "ConnectedTriangles",
+				"12,61": "ConnectedTriangles",
+				"12,63": "ConnectedTriangles",
+				"12,64": "ConnectedTriangles",
+				"12,65": "ConnectedTriangles",
+				"12,66": "ConnectedTriangles",
+				"13,57": "ConnectedTriangles",
+				"13,58": "ConnectedTriangles",
+				"13,59": "ConnectedTriangles",
+				"13,60": "ConnectedTriangles",
+				"13,61": "ConnectedTriangles",
+				"13,63": "ConnectedTriangles",
+				"13,64": "ConnectedTriangles",
+				"13,65": "ConnectedTriangles",
+				"13,66": "ConnectedTriangles",
+				"2,54": "ConeTwistBag",
+				"3,46": "player_trace",
+				"3,52": "grab_sphere_point_snap",
+				"3,53": "grab_sphere_point_snap",
+				"3,54": "grab_sphere_point_snap",
+				"4,47": "grid_lines",
+				"4,53": "grab_sphere_point_snap",
+				"4,54": "grab_sphere_point_snap",
+				"5,47": "grid_lines",
+				"5,48": "grid_lines",
+				"5,49": "grid_lines",
+				"5,50": "grid_lines",
+				"5,51": "grid_lines",
+				"5,52": "grab_sphere_point_snap",
+				"5,53": "grab_sphere_point_snap",
+				"5,54": "grab_sphere_point_snap",
+				"6,47": "grid_lines",
+				"6,48": "grid_lines",
+				"6,49": "grid_lines",
+				"6,50": "grid_lines",
+				"6,51": "grid_lines",
+				"6,54": "ConeTwistBag",
+				"7,47": "grid_lines",
+				"7,48": "grid_lines",
+				"7,49": "grid_lines",
+				"7,50": "grid_lines",
+				"7,51": "grid_lines",
+				"7,53": "floating_sphere_field",
+				"7,54": "ConeTwistBag",
+				"7,56": "ConnectedTriangles",
+				"7,57": "ConnectedTriangles",
+				"7,58": "ConnectedTriangles",
+				"7,59": "ConnectedTriangles",
+				"7,60": "ConnectedTriangles",
+				"7,61": "ConnectedTriangles",
+				"7,62": "ConnectedTriangles",
+				"7,63": "ConnectedTriangles",
+				"7,64": "ConnectedTriangles",
+				"7,65": "ConnectedTriangles",
+				"8,47": "grid_lines",
+				"8,48": "grid_lines",
+				"8,49": "grid_lines",
+				"8,50": "grid_lines",
+				"8,51": "grid_lines",
+				"8,54": "ConeTwistBag",
+				"8,56": "ConnectedTriangles",
+				"8,57": "ConnectedTriangles",
+				"8,58": "ConnectedTriangles",
+				"8,59": "ConnectedTriangles",
+				"8,60": "ConnectedTriangles",
+				"8,61": "ConnectedTriangles",
+				"8,62": "ConnectedTriangles",
+				"8,63": "ConnectedTriangles",
+				"8,64": "ConnectedTriangles",
+				"9,57": "ConnectedTriangles",
+				"9,58": "ConnectedTriangles",
+				"9,59": "ConnectedTriangles",
+				"9,60": "ConnectedTriangles",
+				"9,61": "ConnectedTriangles",
+				"9,63": "ConnectedTriangles",
+				"9,64": "ConnectedTriangles",
+				"9,65": "ConnectedTriangles"
 			},
 			"segment": 1,
 			"side_rooms": [],
 			"unbaked": 0,
 			"vestibule": 4,
 			"w": 15,
-			"z0": 54,
-			"z1": 115
+			"z0": 34,
+			"z1": 68
+		},
+		{
+			"bake_stale": false,
+			"bodies": [
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "grab_trihedron",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						0.0,
+						82.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 90.0,
+					"tile_cell": [
+						7,
+						10
+					],
+					"token": "grab_trihedron",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						1.15,
+						82.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						9,
+						10
+					],
+					"token": "path_game_controller",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						9.5,
+						0.0,
+						82.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						9,
+						11
+					],
+					"token": "path_watchdog",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						9.5,
+						0.0,
+						83.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						3,
+						12
+					],
+					"token": "lab_room",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						3.5,
+						0.0,
+						84.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "cube_scene",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						0.0,
+						90.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						7,
+						18
+					],
+					"token": "cube_scene",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						1.15,
+						90.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "becoming_catalyst",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						0.0,
+						90.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						7,
+						18
+					],
+					"token": "becoming_catalyst",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						1.25,
+						90.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						9,
+						18
+					],
+					"token": "interactive_point_origin_force",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						9.5,
+						0.0,
+						90.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "pyramid_edit",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						0.0,
+						91.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						7,
+						19
+					],
+					"token": "pyramid_edit",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						0.77,
+						91.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						7,
+						19
+					],
+					"token": "tentacle_placer",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						0.0,
+						91.5
+					]
+				}
+			],
+			"cards": [
+				{
+					"chapter": "primitives",
+					"id": "primitives · polythedra · 01",
+					"index": 1,
+					"pearl": "polythedra",
+					"segment": 2,
+					"world": [
+						15.2,
+						1.2,
+						69.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · polythedra · 02",
+					"index": 2,
+					"pearl": "polythedra",
+					"segment": 2,
+					"world": [
+						11.3,
+						1.0,
+						78.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · polythedra · 03",
+					"index": 3,
+					"pearl": "polythedra",
+					"segment": 2,
+					"world": [
+						12.6,
+						1.1,
+						79.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · polythedra · 04",
+					"index": 4,
+					"pearl": "polythedra",
+					"segment": 2,
+					"world": [
+						2.3,
+						1.0,
+						84.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · polythedra · 05",
+					"index": 5,
+					"pearl": "polythedra",
+					"segment": 2,
+					"world": [
+						2.2,
+						1.2,
+						85.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · polythedra · 06",
+					"index": 6,
+					"pearl": "polythedra",
+					"segment": 2,
+					"world": [
+						12.2,
+						1.2,
+						90.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · polythedra · 07",
+					"index": 7,
+					"pearl": "polythedra",
+					"segment": 2,
+					"world": [
+						12.6,
+						1.1,
+						91.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · polythedra · 08",
+					"index": 8,
+					"pearl": "polythedra",
+					"segment": 2,
+					"world": [
+						2.3,
+						1.0,
+						96.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · polythedra · 09",
+					"index": 9,
+					"pearl": "polythedra",
+					"segment": 2,
+					"world": [
+						2.2,
+						1.2,
+						97.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · polythedra · 10",
+					"index": 10,
+					"pearl": "polythedra",
+					"segment": 2,
+					"world": [
+						15.3,
+						1.0,
+						71.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · polythedra · 11",
+					"index": 11,
+					"pearl": "polythedra",
+					"segment": 2,
+					"world": [
+						11.6,
+						1.1,
+						101.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · polythedra · 12",
+					"index": 12,
+					"pearl": "polythedra",
+					"segment": 2,
+					"world": [
+						2.3,
+						1.0,
+						72.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · polythedra · 13",
+					"index": 13,
+					"pearl": "polythedra",
+					"segment": 2,
+					"world": [
+						2.2,
+						1.2,
+						73.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · polythedra · 14",
+					"index": 14,
+					"pearl": "polythedra",
+					"segment": 2,
+					"world": [
+						1.0,
+						1.1,
+						69.6
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · polythedra · 15",
+					"index": 15,
+					"pearl": "polythedra",
+					"segment": 2,
+					"world": [
+						10.0,
+						1.0,
+						79.3
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · polythedra · 16",
+					"index": 16,
+					"pearl": "polythedra",
+					"segment": 2,
+					"world": [
+						11.0,
+						1.1,
+						80.6
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · polythedra · 17",
+					"index": 17,
+					"pearl": "polythedra",
+					"segment": 2,
+					"world": [
+						14.0,
+						1.1,
+						74.6
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · polythedra · 18",
+					"index": 18,
+					"pearl": "polythedra",
+					"segment": 2,
+					"world": [
+						16.0,
+						1.0,
+						70.3
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · polythedra · 19",
+					"index": 19,
+					"pearl": "polythedra",
+					"segment": 2,
+					"world": [
+						4.0,
+						1.0,
+						79.3
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · polythedra · 20",
+					"index": 20,
+					"pearl": "polythedra",
+					"segment": 2,
+					"world": [
+						5.0,
+						1.2,
+						79.2
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · polythedra · 21",
+					"index": 21,
+					"pearl": "polythedra",
+					"segment": 2,
+					"world": [
+						13.6,
+						1.1,
+						78.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · polythedra · 22",
+					"index": 22,
+					"pearl": "polythedra",
+					"segment": 2,
+					"world": [
+						11.2,
+						1.2,
+						85.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · polythedra · 23",
+					"index": 23,
+					"pearl": "polythedra",
+					"segment": 2,
+					"world": [
+						10.6,
+						1.1,
+						96.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · polythedra · 24",
+					"index": 24,
+					"pearl": "polythedra",
+					"segment": 2,
+					"world": [
+						4.3,
+						1.0,
+						97.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · polythedra · 25",
+					"index": 25,
+					"pearl": "polythedra",
+					"segment": 2,
+					"world": [
+						13.2,
+						1.2,
+						101.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · polythedra · 26",
+					"index": 26,
+					"pearl": "polythedra",
+					"segment": 2,
+					"world": [
+						4.6,
+						1.1,
+						72.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · polythedra · 27",
+					"index": 27,
+					"pearl": "polythedra",
+					"segment": 2,
+					"world": [
+						4.3,
+						1.0,
+						73.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · polythedra · 28",
+					"index": 28,
+					"pearl": "polythedra",
+					"segment": 2,
+					"world": [
+						1.0,
+						1.2,
+						71.2
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · polythedra · 29",
+					"index": 29,
+					"pearl": "polythedra",
+					"segment": 2,
+					"world": [
+						10.0,
+						1.1,
+						84.6
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · polythedra · 30",
+					"index": 30,
+					"pearl": "polythedra",
+					"segment": 2,
+					"world": [
+						11.0,
+						1.2,
+						88.2
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · polythedra · 31",
+					"index": 31,
+					"pearl": "polythedra",
+					"segment": 2,
+					"world": [
+						14.0,
+						1.2,
+						76.2
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · polythedra · 32",
+					"index": 32,
+					"pearl": "polythedra",
+					"segment": 2,
+					"world": [
+						4.0,
+						1.2,
+						83.2
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · polythedra · 33",
+					"index": 33,
+					"pearl": "polythedra",
+					"segment": 2,
+					"world": [
+						5.0,
+						1.1,
+						83.6
+					]
+				}
+			],
+			"cell_x0": -1,
+			"cells": [
+				"##.............#############",
+				"##...............###########",
+				"##...............###########",
+				"##.............#############",
+				"#######...##################",
+				"##.............#############",
+				"##.............#############",
+				"##.............#############",
+				"##.............#############",
+				"##.............#############",
+				"###..#.....#################",
+				"##...#.....#...#############",
+				"##sssssss..#...#############",
+				"##s#ssssss.....#############",
+				"##sss#sssss....#############",
+				"##sss#sssss#...#############",
+				"######sss..##..#############",
+				"##sss#sss......#############",
+				"##sss#sss......#############",
+				"##sssssss..#.#.#############",
+				"##sssssss..#...#############",
+				"##sss#sss..#...#############",
+				"###ss##ss.##################",
+				"##...#.ss..#...#############",
+				"##.........#...#############",
+				"##.........#...#############",
+				"##...#.........#############",
+				"##...#.........#############",
+				"#######...##################",
+				"##.............#############",
+				"##.............#############",
+				"##.....#.#.....#############",
+				"##....#####....#############",
+				"###...######################"
+			],
+			"chapter": "",
+			"court_depth": 0,
+			"courts": [],
+			"forecourt": 0,
+			"gate": {
+
+			},
+			"h": 30,
+			"legend": {
+				"#": "not floor",
+				".": "floor",
+				"b": "bench",
+				"p": "prop",
+				"s": "sealed by a body",
+				"x": "erased"
+			},
+			"mode": "desktop",
+			"museum": "sainsbury-false-perspective-enfilade",
+			"pearl": "polythedra",
+			"pearl_index": -1,
+			"porch_depth": 0,
+			"refused": [
+				{
+					"tile_cell": [
+						5,
+						16
+					],
+					"token": "lab_room",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						4,
+						16
+					],
+					"token": "lab_room",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						5,
+						15
+					],
+					"token": "lab_room",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						5,
+						17
+					],
+					"token": "lab_room",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						6,
+						16
+					],
+					"token": "lab_room",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						4,
+						15
+					],
+					"token": "lab_room",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						4,
+						17
+					],
+					"token": "lab_room",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						6,
+						15
+					],
+					"token": "lab_room",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						6,
+						17
+					],
+					"token": "lab_room",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						8,
+						22
+					],
+					"token": "becoming_catalyst",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						8,
+						23
+					],
+					"token": "tentacle_placer",
+					"why": "baked: sealing would sever the walk route"
+				}
+			],
+			"replay": true,
+			"seals": {
+				"1,80": "lab_room",
+				"1,81": "lab_room",
+				"1,82": "lab_room",
+				"1,83": "lab_room",
+				"1,85": "lab_room",
+				"1,86": "lab_room",
+				"1,87": "lab_room",
+				"1,88": "lab_room",
+				"1,89": "lab_room",
+				"2,80": "lab_room",
+				"2,82": "lab_room",
+				"2,83": "lab_room",
+				"2,85": "lab_room",
+				"2,86": "lab_room",
+				"2,87": "lab_room",
+				"2,88": "lab_room",
+				"2,89": "lab_room",
+				"2,90": "lab_room",
+				"3,80": "lab_room",
+				"3,81": "lab_room",
+				"3,82": "lab_room",
+				"3,83": "lab_room",
+				"3,85": "lab_room",
+				"3,86": "lab_room",
+				"3,87": "lab_room",
+				"3,88": "lab_room",
+				"3,89": "lab_room",
+				"3,90": "lab_room",
+				"4,80": "lab_room",
+				"4,81": "lab_room",
+				"4,87": "lab_room",
+				"4,88": "lab_room",
+				"5,80": "lab_room",
+				"5,81": "lab_room",
+				"5,82": "lab_room",
+				"5,83": "lab_room",
+				"5,84": "lab_room",
+				"5,85": "lab_room",
+				"5,86": "lab_room",
+				"5,87": "lab_room",
+				"5,88": "lab_room",
+				"5,89": "lab_room",
+				"6,80": "lab_room",
+				"6,81": "grab_trihedron",
+				"6,82": "grab_trihedron",
+				"6,83": "grab_trihedron",
+				"6,84": "lab_room",
+				"6,85": "lab_room",
+				"6,86": "lab_room",
+				"6,87": "lab_room",
+				"6,88": "lab_room",
+				"6,89": "lab_room",
+				"6,90": "lab_room",
+				"6,91": "tentacle_placer",
+				"7,80": "lab_room",
+				"7,81": "grab_trihedron",
+				"7,82": "grab_trihedron",
+				"7,83": "grab_trihedron",
+				"7,84": "lab_room",
+				"7,85": "lab_room",
+				"7,86": "lab_room",
+				"7,87": "lab_room",
+				"7,88": "lab_room",
+				"7,89": "lab_room",
+				"7,90": "lab_room",
+				"7,91": "pyramid_edit",
+				"8,81": "grab_trihedron",
+				"8,82": "grab_trihedron",
+				"8,83": "grab_trihedron",
+				"9,82": "path_game_controller",
+				"9,83": "path_watchdog"
+			},
+			"segment": 2,
+			"side_rooms": [],
+			"unbaked": 0,
+			"vestibule": 4,
+			"w": 15,
+			"z0": 68,
+			"z1": 102
+		},
+		{
+			"bake_stale": false,
+			"bodies": [
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "dark_sphere",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						3.5,
+						0.0,
+						108.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						3,
+						2
+					],
+					"token": "dark_sphere",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						3.5,
+						0.67,
+						108.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "cube_scene",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						4.5,
+						0.0,
+						108.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						4,
+						2
+					],
+					"token": "cube_scene",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						4.5,
+						1.15,
+						108.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "sphere",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						5.5,
+						0.0,
+						108.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						5,
+						2
+					],
+					"token": "sphere",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						5.5,
+						1.15,
+						108.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						6,
+						6
+					],
+					"token": "platonic_grabbables",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						6.5,
+						0.0,
+						112.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "hole_with_cones",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						4.5,
+						0.0,
+						120.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 30.0,
+					"tile_cell": [
+						4,
+						14
+					],
+					"token": "hole_with_cones",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						4.5,
+						0.15,
+						120.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "sphere_high",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						6.5,
+						0.0,
+						119.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						6,
+						13
+					],
+					"token": "sphere_high",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						6.5,
+						1.5,
+						119.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "sphere_high",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						8.5,
+						0.0,
+						119.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						8,
+						13
+					],
+					"token": "sphere_high",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						8.5,
+						1.5,
+						119.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "star_primitive",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						10.5,
+						0.0,
+						119.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						10,
+						13
+					],
+					"token": "star_primitive",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						10.5,
+						1.15,
+						119.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						4,
+						15
+					],
+					"token": "righttriangle",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						4.5,
+						0.0,
+						121.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						6,
+						15
+					],
+					"token": "sphere_mid",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						6.5,
+						0.0,
+						121.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						7,
+						15
+					],
+					"token": "floating_sphere_field",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						0.0,
+						121.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						8,
+						15
+					],
+					"token": "sphere_mid",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						8.5,
+						0.0,
+						121.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "truncatedtetrahedron",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						10.5,
+						0.0,
+						121.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						10,
+						15
+					],
+					"token": "truncatedtetrahedron",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						10.5,
+						1.15,
+						121.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "roughrock",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						4.5,
+						0.0,
+						123.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						4,
+						17
+					],
+					"token": "roughrock",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						4.5,
+						1.12,
+						123.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						6,
+						17
+					],
+					"token": "sphere_low",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						6.5,
+						0.0,
+						123.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						7,
+						17
+					],
+					"token": "sphere_low",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						0.0,
+						123.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "capsule",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						10.5,
+						0.0,
+						123.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						10,
+						17
+					],
+					"token": "capsule",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						10.5,
+						1.15,
+						123.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "grab_octahedron",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						5.5,
+						0.0,
+						125.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						5,
+						19
+					],
+					"token": "grab_octahedron",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						5.5,
+						1.15,
+						125.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "snap_octahedron_puzzle",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						0.0,
+						125.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						7,
+						19
+					],
+					"token": "snap_octahedron_puzzle",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						0.56,
+						125.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "grab_octahedron",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						9.5,
+						0.0,
+						125.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						9,
+						19
+					],
+					"token": "grab_octahedron",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						9.5,
+						1.15,
+						125.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						6,
+						22
+					],
+					"token": "lshape",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						6.5,
+						0.0,
+						128.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 180.0,
+					"tile_cell": [
+						8,
+						22
+					],
+					"token": "lshape",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						8.5,
+						0.0,
+						128.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "prism_block",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						3.5,
+						0.0,
+						129.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 90.0,
+					"tile_cell": [
+						3,
+						23
+					],
+					"token": "prism_block",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						3.5,
+						1.15,
+						129.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "prism_block",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						4.5,
+						0.0,
+						129.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 90.0,
+					"tile_cell": [
+						4,
+						23
+					],
+					"token": "prism_block",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						4.5,
+						1.15,
+						129.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "prism_block",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						5.5,
+						0.0,
+						129.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 90.0,
+					"tile_cell": [
+						5,
+						23
+					],
+					"token": "prism_block",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						5.5,
+						1.15,
+						129.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "prism_block",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						6.5,
+						0.0,
+						129.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 90.0,
+					"tile_cell": [
+						6,
+						23
+					],
+					"token": "prism_block",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						6.5,
+						1.15,
+						129.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "prism_block",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						0.0,
+						129.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 90.0,
+					"tile_cell": [
+						7,
+						23
+					],
+					"token": "prism_block",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						1.15,
+						129.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "prism_block",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						9.5,
+						0.0,
+						130.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 90.0,
+					"tile_cell": [
+						9,
+						24
+					],
+					"token": "prism_block",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						9.5,
+						1.15,
+						130.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "prism_block",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						10.5,
+						0.0,
+						129.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 90.0,
+					"tile_cell": [
+						10,
+						23
+					],
+					"token": "prism_block",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						10.5,
+						1.15,
+						129.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "prism_block",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						11.5,
+						0.0,
+						129.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 90.0,
+					"tile_cell": [
+						11,
+						23
+					],
+					"token": "prism_block",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						11.5,
+						1.15,
+						129.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						11,
+						24
+					],
+					"token": "library_rack",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						11.5,
+						0.0,
+						130.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "torus_radials_rings",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						3.5,
+						0.0,
+						131.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						3,
+						25
+					],
+					"token": "torus_radials_rings",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						3.5,
+						1.15,
+						131.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "capsule_radials_rings",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						5.5,
+						0.0,
+						131.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 90.0,
+					"tile_cell": [
+						5,
+						25
+					],
+					"token": "capsule_radials_rings",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						5.5,
+						1.15,
+						131.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "capsule_radials_rings",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						6.5,
+						0.0,
+						131.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 90.0,
+					"tile_cell": [
+						6,
+						25
+					],
+					"token": "capsule_radials_rings",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						6.5,
+						1.15,
+						131.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "capsule_radials_rings",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						8.5,
+						0.0,
+						131.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 90.0,
+					"tile_cell": [
+						8,
+						25
+					],
+					"token": "capsule_radials_rings",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						8.5,
+						1.15,
+						131.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "capsule_radials_rings",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						9.5,
+						0.0,
+						131.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 90.0,
+					"tile_cell": [
+						9,
+						25
+					],
+					"token": "capsule_radials_rings",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						9.5,
+						1.15,
+						131.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "torus_radials_rings",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						11.5,
+						0.0,
+						131.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						11,
+						25
+					],
+					"token": "torus_radials_rings",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						11.5,
+						1.15,
+						131.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "plus",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						4.5,
+						0.0,
+						133.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						4,
+						27
+					],
+					"token": "plus",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						4.5,
+						1.15,
+						133.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						11,
+						27
+					],
+					"token": "diamonds",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						11.5,
+						0.0,
+						133.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "plus",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						10.5,
+						0.0,
+						133.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						10,
+						27
+					],
+					"token": "plus",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						10.5,
+						1.15,
+						133.5
+					]
+				}
+			],
+			"cards": [
+				{
+					"chapter": "primitives",
+					"id": "primitives · ignorance · 01",
+					"index": 1,
+					"pearl": "ignorance",
+					"segment": 3,
+					"world": [
+						15.2,
+						1.2,
+						103.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · ignorance · 02",
+					"index": 2,
+					"pearl": "ignorance",
+					"segment": 3,
+					"world": [
+						11.3,
+						1.0,
+						112.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · ignorance · 03",
+					"index": 3,
+					"pearl": "ignorance",
+					"segment": 3,
+					"world": [
+						12.6,
+						1.1,
+						113.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · ignorance · 04",
+					"index": 4,
+					"pearl": "ignorance",
+					"segment": 3,
+					"world": [
+						2.3,
+						1.0,
+						118.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · ignorance · 05",
+					"index": 5,
+					"pearl": "ignorance",
+					"segment": 3,
+					"world": [
+						2.2,
+						1.2,
+						119.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · ignorance · 06",
+					"index": 6,
+					"pearl": "ignorance",
+					"segment": 3,
+					"world": [
+						12.2,
+						1.2,
+						124.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · ignorance · 07",
+					"index": 7,
+					"pearl": "ignorance",
+					"segment": 3,
+					"world": [
+						12.6,
+						1.1,
+						125.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · ignorance · 08",
+					"index": 8,
+					"pearl": "ignorance",
+					"segment": 3,
+					"world": [
+						2.3,
+						1.0,
+						130.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · ignorance · 09",
+					"index": 9,
+					"pearl": "ignorance",
+					"segment": 3,
+					"world": [
+						2.2,
+						1.2,
+						131.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · ignorance · 10",
+					"index": 10,
+					"pearl": "ignorance",
+					"segment": 3,
+					"world": [
+						15.3,
+						1.0,
+						105.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · ignorance · 11",
+					"index": 11,
+					"pearl": "ignorance",
+					"segment": 3,
+					"world": [
+						11.6,
+						1.1,
+						135.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · ignorance · 12",
+					"index": 12,
+					"pearl": "ignorance",
+					"segment": 3,
+					"world": [
+						2.3,
+						1.0,
+						106.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · ignorance · 13",
+					"index": 13,
+					"pearl": "ignorance",
+					"segment": 3,
+					"world": [
+						2.2,
+						1.2,
+						107.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · ignorance · 14",
+					"index": 14,
+					"pearl": "ignorance",
+					"segment": 3,
+					"world": [
+						1.0,
+						1.1,
+						103.6
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · ignorance · 15",
+					"index": 15,
+					"pearl": "ignorance",
+					"segment": 3,
+					"world": [
+						10.0,
+						1.0,
+						113.3
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · ignorance · 16",
+					"index": 16,
+					"pearl": "ignorance",
+					"segment": 3,
+					"world": [
+						11.0,
+						1.1,
+						114.6
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · ignorance · 17",
+					"index": 17,
+					"pearl": "ignorance",
+					"segment": 3,
+					"world": [
+						14.0,
+						1.1,
+						108.6
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · ignorance · 18",
+					"index": 18,
+					"pearl": "ignorance",
+					"segment": 3,
+					"world": [
+						16.0,
+						1.0,
+						104.3
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · ignorance · 19",
+					"index": 19,
+					"pearl": "ignorance",
+					"segment": 3,
+					"world": [
+						4.0,
+						1.0,
+						113.3
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · ignorance · 20",
+					"index": 20,
+					"pearl": "ignorance",
+					"segment": 3,
+					"world": [
+						5.0,
+						1.2,
+						113.2
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · ignorance · 21",
+					"index": 21,
+					"pearl": "ignorance",
+					"segment": 3,
+					"world": [
+						13.6,
+						1.1,
+						112.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · ignorance · 22",
+					"index": 22,
+					"pearl": "ignorance",
+					"segment": 3,
+					"world": [
+						11.2,
+						1.2,
+						119.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · ignorance · 23",
+					"index": 23,
+					"pearl": "ignorance",
+					"segment": 3,
+					"world": [
+						10.6,
+						1.1,
+						130.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · ignorance · 24",
+					"index": 24,
+					"pearl": "ignorance",
+					"segment": 3,
+					"world": [
+						4.3,
+						1.0,
+						131.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · ignorance · 25",
+					"index": 25,
+					"pearl": "ignorance",
+					"segment": 3,
+					"world": [
+						13.2,
+						1.2,
+						135.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · ignorance · 26",
+					"index": 26,
+					"pearl": "ignorance",
+					"segment": 3,
+					"world": [
+						4.6,
+						1.1,
+						106.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · ignorance · 27",
+					"index": 27,
+					"pearl": "ignorance",
+					"segment": 3,
+					"world": [
+						4.3,
+						1.0,
+						107.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · ignorance · 28",
+					"index": 28,
+					"pearl": "ignorance",
+					"segment": 3,
+					"world": [
+						1.0,
+						1.2,
+						105.2
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · ignorance · 29",
+					"index": 29,
+					"pearl": "ignorance",
+					"segment": 3,
+					"world": [
+						10.0,
+						1.1,
+						118.6
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · ignorance · 30",
+					"index": 30,
+					"pearl": "ignorance",
+					"segment": 3,
+					"world": [
+						11.0,
+						1.2,
+						122.2
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · ignorance · 31",
+					"index": 31,
+					"pearl": "ignorance",
+					"segment": 3,
+					"world": [
+						14.0,
+						1.2,
+						110.2
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · ignorance · 32",
+					"index": 32,
+					"pearl": "ignorance",
+					"segment": 3,
+					"world": [
+						4.0,
+						1.2,
+						117.2
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · ignorance · 33",
+					"index": 33,
+					"pearl": "ignorance",
+					"segment": 3,
+					"world": [
+						5.0,
+						1.1,
+						117.6
+					]
+				}
+			],
+			"cell_x0": -1,
+			"cells": [
+				"##.............#############",
+				"##...............###########",
+				"##...............###########",
+				"##.............#############",
+				"#######...##################",
+				"##.............#############",
+				"##..sss........#############",
+				"##.............#############",
+				"##.............#############",
+				"##..sssssss....#############",
+				"###.s#sssss#################",
+				"##..s#sssss#...#############",
+				"##..sssssss#...#############",
+				"##.#...........#############",
+				"##...#.........#############",
+				"##sss#sss..#...#############",
+				"######sss..##..#############",
+				"##sss#ssss.s...#############",
+				"##sss#sss......#############",
+				"##ssssssss.#.#.#############",
+				"##sssssss..#...#############",
+				"##sss#sss..#...#############",
+				"###..##...##################",
+				"##...#s.s.s#...#############",
+				"##.........#...#############",
+				"##.........#...#############",
+				"##...#.sss.....#############",
+				"##..s#sss..ss..#############",
+				"#######...##################",
+				"##..s.ss.ssssss#############",
+				"##........sssss#############",
+				"##...s.#.#sssss#############",
+				"##....#####ssss#############",
+				"###...######################"
+			],
+			"chapter": "",
+			"court_depth": 0,
+			"courts": [],
+			"forecourt": 0,
+			"gate": {
+
+			},
+			"h": 30,
+			"legend": {
+				"#": "not floor",
+				".": "floor",
+				"b": "bench",
+				"p": "prop",
+				"s": "sealed by a body",
+				"x": "erased"
+			},
+			"mode": "desktop",
+			"museum": "sainsbury-false-perspective-enfilade",
+			"pearl": "ignorance",
+			"pearl_index": -1,
+			"porch_depth": 0,
+			"refused": [
+				{
+					"tile_cell": [
+						4,
+						17
+					],
+					"token": "hole_with_cones",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						3,
+						17
+					],
+					"token": "hole_with_cones",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						4,
+						16
+					],
+					"token": "hole_with_cones",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						8,
+						21
+					],
+					"token": "sphere_low",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						8,
+						27
+					],
+					"token": "prism_block",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						9,
+						27
+					],
+					"token": "prism_block",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						8,
+						27
+					],
+					"token": "prism_block",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						9,
+						26
+					],
+					"token": "prism_block",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						7,
+						31
+					],
+					"token": "diamonds",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						6,
+						31
+					],
+					"token": "diamonds",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						7,
+						30
+					],
+					"token": "diamonds",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						7,
+						32
+					],
+					"token": "diamonds",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						8,
+						31
+					],
+					"token": "diamonds",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						6,
+						30
+					],
+					"token": "diamonds",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						6,
+						32
+					],
+					"token": "diamonds",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						8,
+						30
+					],
+					"token": "diamonds",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						8,
+						32
+					],
+					"token": "diamonds",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						5,
+						31
+					],
+					"token": "diamonds",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						7,
+						29
+					],
+					"token": "diamonds",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						9,
+						31
+					],
+					"token": "diamonds",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						5,
+						30
+					],
+					"token": "diamonds",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						5,
+						32
+					],
+					"token": "diamonds",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						6,
+						29
+					],
+					"token": "diamonds",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						8,
+						29
+					],
+					"token": "diamonds",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						9,
+						30
+					],
+					"token": "diamonds",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						9,
+						32
+					],
+					"token": "diamonds",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						5,
+						29
+					],
+					"token": "diamonds",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						9,
+						29
+					],
+					"token": "diamonds",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						10,
+						31
+					],
+					"token": "diamonds",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						4,
+						31
+					],
+					"token": "diamonds",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						7,
+						28
+					],
+					"token": "diamonds",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						10,
+						30
+					],
+					"token": "diamonds",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						10,
+						32
+					],
+					"token": "diamonds",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						8,
+						28
+					],
+					"token": "diamonds",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						6,
+						28
+					],
+					"token": "diamonds",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						4,
+						32
+					],
+					"token": "diamonds",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						4,
+						30
+					],
+					"token": "diamonds",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						5,
+						28
+					],
+					"token": "diamonds",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						9,
+						28
+					],
+					"token": "diamonds",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						10,
+						29
+					],
+					"token": "diamonds",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						4,
+						29
+					],
+					"token": "diamonds",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						10,
+						28
+					],
+					"token": "diamonds",
+					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						4,
+						28
+					],
+					"token": "diamonds",
+					"why": "baked: sealing would sever the walk route"
+				}
+			],
+			"replay": true,
+			"seals": {
+				"1,117": "hole_with_cones",
+				"1,119": "hole_with_cones",
+				"1,120": "hole_with_cones",
+				"1,121": "hole_with_cones",
+				"1,122": "hole_with_cones",
+				"1,123": "hole_with_cones",
+				"10,119": "star_primitive",
+				"10,129": "prism_block",
+				"10,131": "library_rack",
+				"10,132": "diamonds",
+				"10,133": "diamonds",
+				"10,134": "diamonds",
+				"11,129": "prism_block",
+				"11,131": "library_rack",
+				"11,132": "diamonds",
+				"11,133": "diamonds",
+				"11,134": "diamonds",
+				"12,131": "library_rack",
+				"12,132": "diamonds",
+				"12,133": "diamonds",
+				"12,134": "diamonds",
+				"13,131": "library_rack",
+				"13,132": "diamonds",
+				"13,133": "diamonds",
+				"13,134": "diamonds",
+				"2,117": "hole_with_cones",
+				"2,119": "hole_with_cones",
+				"2,120": "hole_with_cones",
+				"2,121": "hole_with_cones",
+				"2,122": "hole_with_cones",
+				"2,123": "hole_with_cones",
+				"3,108": "dark_sphere",
+				"3,111": "platonic_grabbables",
+				"3,112": "platonic_grabbables",
+				"3,113": "platonic_grabbables",
+				"3,114": "platonic_grabbables",
+				"3,117": "hole_with_cones",
+				"3,119": "hole_with_cones",
+				"3,120": "hole_with_cones",
+				"3,121": "hole_with_cones",
+				"3,122": "hole_with_cones",
+				"3,123": "hole_with_cones",
+				"3,129": "prism_block",
+				"3,131": "torus_radials_rings",
+				"4,108": "cube_scene",
+				"4,111": "platonic_grabbables",
+				"4,114": "platonic_grabbables",
+				"4,121": "hole_with_cones",
+				"4,122": "hole_with_cones",
+				"4,133": "plus",
+				"5,108": "sphere",
+				"5,111": "platonic_grabbables",
+				"5,112": "platonic_grabbables",
+				"5,113": "platonic_grabbables",
+				"5,114": "platonic_grabbables",
+				"5,117": "hole_with_cones",
+				"5,118": "hole_with_cones",
+				"5,119": "hole_with_cones",
+				"5,120": "hole_with_cones",
+				"5,121": "hole_with_cones",
+				"5,122": "hole_with_cones",
+				"5,123": "hole_with_cones",
+				"5,125": "grab_octahedron",
+				"5,129": "prism_block",
+				"5,131": "capsule_radials_rings",
+				"6,111": "platonic_grabbables",
+				"6,112": "platonic_grabbables",
+				"6,113": "platonic_grabbables",
+				"6,114": "platonic_grabbables",
+				"6,117": "hole_with_cones",
+				"6,118": "hole_with_cones",
+				"6,119": "hole_with_cones",
+				"6,120": "hole_with_cones",
+				"6,121": "hole_with_cones",
+				"6,122": "hole_with_cones",
+				"6,123": "hole_with_cones",
+				"6,128": "lshape",
+				"6,129": "prism_block",
+				"6,131": "capsule_radials_rings",
+				"7,111": "platonic_grabbables",
+				"7,112": "platonic_grabbables",
+				"7,113": "platonic_grabbables",
+				"7,114": "platonic_grabbables",
+				"7,117": "hole_with_cones",
+				"7,118": "hole_with_cones",
+				"7,119": "hole_with_cones",
+				"7,120": "hole_with_cones",
+				"7,121": "hole_with_cones",
+				"7,122": "hole_with_cones",
+				"7,123": "hole_with_cones",
+				"7,125": "snap_octahedron_puzzle",
+				"7,128": "lshape",
+				"7,129": "prism_block",
+				"8,111": "platonic_grabbables",
+				"8,112": "platonic_grabbables",
+				"8,113": "platonic_grabbables",
+				"8,114": "platonic_grabbables",
+				"8,119": "sphere_high",
+				"8,121": "sphere_mid",
+				"8,128": "lshape",
+				"8,131": "capsule_radials_rings",
+				"9,111": "platonic_grabbables",
+				"9,112": "platonic_grabbables",
+				"9,113": "platonic_grabbables",
+				"9,114": "platonic_grabbables",
+				"9,125": "grab_octahedron",
+				"9,131": "library_rack",
+				"9,132": "diamonds",
+				"9,133": "diamonds"
+			},
+			"segment": 3,
+			"side_rooms": [],
+			"unbaked": 0,
+			"vestibule": 4,
+			"w": 15,
+			"z0": 102,
+			"z1": 136
+		},
+		{
+			"bake_stale": false,
+			"bodies": [
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "dark_sphere",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						3.5,
+						0.0,
+						141.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						3,
+						1
+					],
+					"token": "dark_sphere",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						3.5,
+						0.67,
+						141.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						7,
+						6
+					],
+					"token": "combine_portals",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						0.0,
+						146.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "achilles_tortoise",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						10.5,
+						0.0,
+						143.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						10,
+						3
+					],
+					"token": "achilles_tortoise",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						10.5,
+						0.13,
+						143.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "capsule",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						12.5,
+						0.0,
+						143.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						12,
+						3
+					],
+					"token": "capsule",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						12.5,
+						1.15,
+						143.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						11,
+						6
+					],
+					"token": "floating_sphere_field",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						11.5,
+						0.0,
+						146.5
+					]
+				}
+			],
+			"cards": [
+				{
+					"chapter": "primitives",
+					"id": "primitives · portals · 01",
+					"index": 1,
+					"pearl": "portals",
+					"segment": 4,
+					"world": [
+						15.2,
+						1.2,
+						137.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · portals · 02",
+					"index": 2,
+					"pearl": "portals",
+					"segment": 4,
+					"world": [
+						15.3,
+						1.0,
+						139.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · portals · 03",
+					"index": 3,
+					"pearl": "portals",
+					"segment": 4,
+					"world": [
+						6.3,
+						1.0,
+						169.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · portals · 04",
+					"index": 4,
+					"pearl": "portals",
+					"segment": 4,
+					"world": [
+						2.3,
+						1.0,
+						140.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · portals · 05",
+					"index": 5,
+					"pearl": "portals",
+					"segment": 4,
+					"world": [
+						2.2,
+						1.2,
+						141.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · portals · 06",
+					"index": 6,
+					"pearl": "portals",
+					"segment": 4,
+					"world": [
+						1.0,
+						1.1,
+						137.6
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · portals · 07",
+					"index": 7,
+					"pearl": "portals",
+					"segment": 4,
+					"world": [
+						14.0,
+						1.1,
+						142.6
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · portals · 08",
+					"index": 8,
+					"pearl": "portals",
+					"segment": 4,
+					"world": [
+						16.0,
+						1.0,
+						138.3
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · portals · 09",
+					"index": 9,
+					"pearl": "portals",
+					"segment": 4,
+					"world": [
+						8.6,
+						1.1,
+						169.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · portals · 10",
+					"index": 10,
+					"pearl": "portals",
+					"segment": 4,
+					"world": [
+						4.6,
+						1.1,
+						140.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · portals · 11",
+					"index": 11,
+					"pearl": "portals",
+					"segment": 4,
+					"world": [
+						4.3,
+						1.0,
+						141.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · portals · 12",
+					"index": 12,
+					"pearl": "portals",
+					"segment": 4,
+					"world": [
+						1.0,
+						1.2,
+						139.2
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · portals · 13",
+					"index": 13,
+					"pearl": "portals",
+					"segment": 4,
+					"world": [
+						14.0,
+						1.2,
+						144.2
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · portals · 14",
+					"index": 14,
+					"pearl": "portals",
+					"segment": 4,
+					"world": [
+						10.2,
+						1.2,
+						169.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · portals · 15",
+					"index": 15,
+					"pearl": "portals",
+					"segment": 4,
+					"world": [
+						10.6,
+						1.1,
+						140.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · portals · 16",
+					"index": 16,
+					"pearl": "portals",
+					"segment": 4,
+					"world": [
+						10.3,
+						1.0,
+						141.0
+					]
+				},
+				{
+					"chapter": "primitives",
+					"id": "primitives · portals · 17",
+					"index": 17,
+					"pearl": "portals",
+					"segment": 4,
+					"world": [
+						1.0,
+						1.2,
+						142.2
+					]
+				}
+			],
+			"cell_x0": -1,
+			"cells": [
+				"##.............#############",
+				"##...............###########",
+				"##...............###########",
+				"##.............#############",
+				"#######...##################",
+				"##..s....sssss.#############",
+				"##.......sssss.#############",
+				"##.......sssss.#############",
+				"##.......sssss.#############",
+				"##.......sssss.#############",
+				"##..........s..#############",
+				"##.............#############",
+				"##.............#############",
+				"##.............#############",
+				"##.............#############",
+				"##.............#############",
+				"##.............#############",
+				"##.............#############",
+				"##.............#############",
+				"##.............#############",
+				"##.............#############",
+				"##.............#############",
+				"##.............#############",
+				"##.............#############",
+				"##.............#############",
+				"##.............#############",
+				"##.............#############",
+				"##.............#############",
+				"##.............#############",
+				"##.............#############",
+				"##.............#############",
+				"##.............#############",
+				"##.............#############",
+				"###...######################"
+			],
+			"chapter": "",
+			"court_depth": 0,
+			"courts": [],
+			"forecourt": 0,
+			"gate": {
+
+			},
+			"h": 30,
+			"legend": {
+				"#": "not floor",
+				".": "floor",
+				"b": "bench",
+				"p": "prop",
+				"s": "sealed by a body",
+				"x": "erased"
+			},
+			"mode": "desktop",
+			"museum": "sainsbury-false-perspective-enfilade",
+			"pearl": "portals",
+			"pearl_index": -1,
+			"porch_depth": 0,
+			"refused": [
+				{
+					"tile_cell": [
+						13,
+						7
+					],
+					"token": "capsule",
+					"why": "sealing would sever the walk route"
+				}
+			],
+			"replay": true,
+			"seals": {
+				"10,141": "achilles_tortoise",
+				"10,142": "achilles_tortoise",
+				"10,143": "achilles_tortoise",
+				"10,144": "achilles_tortoise",
+				"10,145": "achilles_tortoise",
+				"11,141": "achilles_tortoise",
+				"11,142": "achilles_tortoise",
+				"11,143": "achilles_tortoise",
+				"11,144": "achilles_tortoise",
+				"11,145": "achilles_tortoise",
+				"11,146": "floating_sphere_field",
+				"12,141": "achilles_tortoise",
+				"12,142": "achilles_tortoise",
+				"12,143": "achilles_tortoise",
+				"12,144": "achilles_tortoise",
+				"12,145": "achilles_tortoise",
+				"3,141": "dark_sphere",
+				"8,141": "achilles_tortoise",
+				"8,142": "achilles_tortoise",
+				"8,143": "achilles_tortoise",
+				"8,144": "achilles_tortoise",
+				"8,145": "achilles_tortoise",
+				"9,141": "achilles_tortoise",
+				"9,142": "achilles_tortoise",
+				"9,143": "achilles_tortoise",
+				"9,144": "achilles_tortoise",
+				"9,145": "achilles_tortoise"
+			},
+			"segment": 4,
+			"side_rooms": [],
+			"unbaked": 6,
+			"vestibule": 4,
+			"w": 15,
+			"z0": 136,
+			"z1": 170
+		},
+		{
+			"bake_stale": false,
+			"bodies": [
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "invariants_demo",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						3.5,
+						0.0,
+						181.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						3,
+						7
+					],
+					"token": "invariants_demo",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						3.5,
+						0.88,
+						181.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "matrix_4x4_viewer",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						8.5,
+						0.0,
+						187.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						8,
+						13
+					],
+					"token": "matrix_4x4_viewer",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						8.5,
+						1.41,
+						187.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						5,
+						15
+					],
+					"token": "homogeneous_coordinates",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						5.5,
+						0.0,
+						189.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "rotation_gimbal",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						11.5,
+						0.0,
+						189.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						11,
+						15
+					],
+					"token": "rotation_gimbal",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						11.5,
+						0.95,
+						189.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "balance_puzzle",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						8.5,
+						0.0,
+						191.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 90.0,
+					"tile_cell": [
+						8,
+						17
+					],
+					"token": "balance_puzzle",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						8.5,
+						0.42,
+						191.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "transform_composition",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						5.5,
+						0.0,
+						193.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						5,
+						19
+					],
+					"token": "transform_composition",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						5.5,
+						0.83,
+						193.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "dark_sphere",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						8.5,
+						0.0,
+						195.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						8,
+						21
+					],
+					"token": "dark_sphere",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						8.5,
+						0.67,
+						195.5
+					]
+				}
+			],
+			"cards": [
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans introduction · 01",
+					"index": 1,
+					"pearl": "trans introduction",
+					"segment": 5,
+					"world": [
+						15.2,
+						1.2,
+						171.0
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans introduction · 02",
+					"index": 2,
+					"pearl": "trans introduction",
+					"segment": 5,
+					"world": [
+						5.6,
+						1.1,
+						182.0
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans introduction · 03",
+					"index": 3,
+					"pearl": "trans introduction",
+					"segment": 5,
+					"world": [
+						5.2,
+						1.2,
+						190.0
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans introduction · 04",
+					"index": 4,
+					"pearl": "trans introduction",
+					"segment": 5,
+					"world": [
+						5.6,
+						1.1,
+						191.0
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans introduction · 05",
+					"index": 5,
+					"pearl": "trans introduction",
+					"segment": 5,
+					"world": [
+						5.3,
+						1.0,
+						198.0
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans introduction · 06",
+					"index": 6,
+					"pearl": "trans introduction",
+					"segment": 5,
+					"world": [
+						5.2,
+						1.2,
+						199.0
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans introduction · 07",
+					"index": 7,
+					"pearl": "trans introduction",
+					"segment": 5,
+					"world": [
+						15.3,
+						1.0,
+						173.0
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans introduction · 08",
+					"index": 8,
+					"pearl": "trans introduction",
+					"segment": 5,
+					"world": [
+						6.3,
+						1.0,
+						203.0
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans introduction · 09",
+					"index": 9,
+					"pearl": "trans introduction",
+					"segment": 5,
+					"world": [
+						2.3,
+						1.0,
+						174.0
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans introduction · 10",
+					"index": 10,
+					"pearl": "trans introduction",
+					"segment": 5,
+					"world": [
+						2.2,
+						1.2,
+						175.0
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans introduction · 11",
+					"index": 11,
+					"pearl": "trans introduction",
+					"segment": 5,
+					"world": [
+						1.0,
+						1.1,
+						171.6
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans introduction · 12",
+					"index": 12,
+					"pearl": "trans introduction",
+					"segment": 5,
+					"world": [
+						14.0,
+						1.0,
+						174.3
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans introduction · 13",
+					"index": 13,
+					"pearl": "trans introduction",
+					"segment": 5,
+					"world": [
+						16.0,
+						1.0,
+						172.3
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans introduction · 14",
+					"index": 14,
+					"pearl": "trans introduction",
+					"segment": 5,
+					"world": [
+						9.0,
+						1.0,
+						176.3
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans introduction · 15",
+					"index": 15,
+					"pearl": "trans introduction",
+					"segment": 5,
+					"world": [
+						7.2,
+						1.2,
+						182.0
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans introduction · 16",
+					"index": 16,
+					"pearl": "trans introduction",
+					"segment": 5,
+					"world": [
+						7.3,
+						1.0,
+						190.0
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans introduction · 17",
+					"index": 17,
+					"pearl": "trans introduction",
+					"segment": 5,
+					"world": [
+						7.2,
+						1.2,
+						191.0
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans introduction · 18",
+					"index": 18,
+					"pearl": "trans introduction",
+					"segment": 5,
+					"world": [
+						7.6,
+						1.1,
+						198.0
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans introduction · 19",
+					"index": 19,
+					"pearl": "trans introduction",
+					"segment": 5,
+					"world": [
+						7.3,
+						1.0,
+						199.0
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans introduction · 20",
+					"index": 20,
+					"pearl": "trans introduction",
+					"segment": 5,
+					"world": [
+						8.6,
+						1.1,
+						203.0
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans introduction · 21",
+					"index": 21,
+					"pearl": "trans introduction",
+					"segment": 5,
+					"world": [
+						4.6,
+						1.1,
+						174.0
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans introduction · 22",
+					"index": 22,
+					"pearl": "trans introduction",
+					"segment": 5,
+					"world": [
+						4.3,
+						1.0,
+						175.0
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans introduction · 23",
+					"index": 23,
+					"pearl": "trans introduction",
+					"segment": 5,
+					"world": [
+						1.0,
+						1.2,
+						173.2
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans introduction · 24",
+					"index": 24,
+					"pearl": "trans introduction",
+					"segment": 5,
+					"world": [
+						14.0,
+						1.1,
+						176.6
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans introduction · 25",
+					"index": 25,
+					"pearl": "trans introduction",
+					"segment": 5,
+					"world": [
+						9.0,
+						1.1,
+						178.6
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans introduction · 26",
+					"index": 26,
+					"pearl": "trans introduction",
+					"segment": 5,
+					"world": [
+						9.6,
+						1.1,
+						199.0
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans introduction · 27",
+					"index": 27,
+					"pearl": "trans introduction",
+					"segment": 5,
+					"world": [
+						10.2,
+						1.2,
+						203.0
+					]
+				}
+			],
+			"cell_x0": -1,
+			"cells": [
+				"##.............#############",
+				"##...............###########",
+				"##...............###########",
+				"##.............#############",
+				"############...#############",
+				"##........#....#############",
+				"##........##...#############",
+				"##........#....#############",
+				"##....#...##...#############",
+				"##.............#############",
+				"##.............#############",
+				"##..s.....#....#############",
+				"###.########...#############",
+				"##..#######....#############",
+				"##..########...#############",
+				"##..#######....#############",
+				"##.............#############",
+				"##......sss....#############",
+				"##........#....#############",
+				"##...sss..##ss.#############",
+				"###..######....#############",
+				"##.......s##...#############",
+				"##........#....#############",
+				"##...#s........#############",
+				"##.............#############",
+				"##.......s#....#############",
+				"##........##...#############",
+				"##........#....#############",
+				"###..#######...#############",
+				"##.............#############",
+				"##..........################",
+				"##...........#.#############",
+				"##...........#.#############",
+				"###...######################"
+			],
+			"chapter": "",
+			"court_depth": 0,
+			"courts": [],
+			"forecourt": 0,
+			"gate": {
+
+			},
+			"h": 30,
+			"legend": {
+				"#": "not floor",
+				".": "floor",
+				"b": "bench",
+				"p": "prop",
+				"s": "sealed by a body",
+				"x": "erased"
+			},
+			"mode": "desktop",
+			"museum": "uffizi-spine-enfilade",
+			"pearl": "trans introduction",
+			"pearl_index": -1,
+			"porch_depth": 0,
+			"refused": [],
+			"replay": true,
+			"seals": {
+				"11,189": "rotation_gimbal",
+				"12,189": "rotation_gimbal",
+				"3,181": "invariants_demo",
+				"4,189": "homogeneous_coordinates",
+				"5,189": "homogeneous_coordinates",
+				"5,193": "transform_composition",
+				"6,189": "homogeneous_coordinates",
+				"7,187": "matrix_4x4_viewer",
+				"8,187": "matrix_4x4_viewer",
+				"8,191": "balance_puzzle",
+				"8,195": "dark_sphere",
+				"9,187": "matrix_4x4_viewer"
+			},
+			"segment": 5,
+			"side_rooms": [],
+			"unbaked": 0,
+			"vestibule": 4,
+			"w": 15,
+			"z0": 170,
+			"z1": 204
+		},
+		{
+			"bake_stale": false,
+			"bodies": [
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 90.0,
+					"tile_cell": [
+						6,
+						1
+					],
+					"token": "righttriangle",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						6.5,
+						0.0,
+						209.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						12,
+						5
+					],
+					"token": "boolean_tunnel",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						12.5,
+						0.0,
+						213.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "dark_sphere",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						6.5,
+						0.0,
+						220.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						6,
+						12
+					],
+					"token": "dark_sphere",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						6.5,
+						0.67,
+						220.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"tile_cell": [],
+					"token": "pick_up_cube",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						12.5,
+						0.0,
+						221.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						12,
+						13
+					],
+					"token": "pick_up_cube",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						12.5,
+						0.67,
+						221.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						4,
+						21
+					],
+					"token": "carousel_cake",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						4.5,
+						0.0,
+						229.5
+					]
+				}
+			],
+			"cards": [
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans rotationspectacle · 01",
+					"index": 1,
+					"pearl": "trans rotationspectacle",
+					"segment": 6,
+					"world": [
+						15.2,
+						1.2,
+						205.0
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans rotationspectacle · 02",
+					"index": 2,
+					"pearl": "trans rotationspectacle",
+					"segment": 6,
+					"world": [
+						15.3,
+						1.0,
+						207.0
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans rotationspectacle · 03",
+					"index": 3,
+					"pearl": "trans rotationspectacle",
+					"segment": 6,
+					"world": [
+						6.3,
+						1.0,
+						237.0
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans rotationspectacle · 04",
+					"index": 4,
+					"pearl": "trans rotationspectacle",
+					"segment": 6,
+					"world": [
+						2.3,
+						1.0,
+						208.0
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans rotationspectacle · 05",
+					"index": 5,
+					"pearl": "trans rotationspectacle",
+					"segment": 6,
+					"world": [
+						2.2,
+						1.2,
+						209.0
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans rotationspectacle · 06",
+					"index": 6,
+					"pearl": "trans rotationspectacle",
+					"segment": 6,
+					"world": [
+						1.0,
+						1.1,
+						205.6
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans rotationspectacle · 07",
+					"index": 7,
+					"pearl": "trans rotationspectacle",
+					"segment": 6,
+					"world": [
+						14.0,
+						1.0,
+						208.3
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans rotationspectacle · 08",
+					"index": 8,
+					"pearl": "trans rotationspectacle",
+					"segment": 6,
+					"world": [
+						16.0,
+						1.0,
+						206.3
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans rotationspectacle · 09",
+					"index": 9,
+					"pearl": "trans rotationspectacle",
+					"segment": 6,
+					"world": [
+						8.6,
+						1.1,
+						237.0
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans rotationspectacle · 10",
+					"index": 10,
+					"pearl": "trans rotationspectacle",
+					"segment": 6,
+					"world": [
+						4.6,
+						1.1,
+						208.0
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans rotationspectacle · 11",
+					"index": 11,
+					"pearl": "trans rotationspectacle",
+					"segment": 6,
+					"world": [
+						4.3,
+						1.0,
+						209.0
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans rotationspectacle · 12",
+					"index": 12,
+					"pearl": "trans rotationspectacle",
+					"segment": 6,
+					"world": [
+						1.0,
+						1.2,
+						207.2
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans rotationspectacle · 13",
+					"index": 13,
+					"pearl": "trans rotationspectacle",
+					"segment": 6,
+					"world": [
+						14.0,
+						1.1,
+						210.6
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans rotationspectacle · 14",
+					"index": 14,
+					"pearl": "trans rotationspectacle",
+					"segment": 6,
+					"world": [
+						10.2,
+						1.2,
+						237.0
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans rotationspectacle · 15",
+					"index": 15,
+					"pearl": "trans rotationspectacle",
+					"segment": 6,
+					"world": [
+						6.2,
+						1.2,
+						208.0
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans rotationspectacle · 16",
+					"index": 16,
+					"pearl": "trans rotationspectacle",
+					"segment": 6,
+					"world": [
+						6.6,
+						1.1,
+						209.0
+					]
+				},
+				{
+					"chapter": "transformation",
+					"id": "transformation · trans rotationspectacle · 17",
+					"index": 17,
+					"pearl": "trans rotationspectacle",
+					"segment": 6,
+					"world": [
+						1.0,
+						1.2,
+						210.2
+					]
+				}
+			],
+			"cell_x0": -1,
+			"cells": [
+				"##.............#############",
+				"##...............###########",
+				"##...............###########",
+				"##.............#############",
+				"############...#############",
+				"##.....s.......#############",
+				"##.............#############",
+				"##.............#############",
+				"##.............#############",
+				"##...........s.#############",
+				"##.............#############",
+				"##.............#############",
+				"##.............#############",
+				"##.............#############",
+				"##.............#############",
+				"##.............#############",
+				"##.....s.......#############",
+				"##...........s.#############",
+				"##.............#############",
+				"##.............#############",
+				"##.ss..........#############",
+				"##ssssssss.....#############",
+				"##ssssssss.....#############",
+				"##sss.sssss....#############",
+				"##sssssssss....#############",
+				"##ssssssss.....#############",
+				"##ssssssss.....#############",
+				"##ssssssss.....#############",
+				"##.ss..........#############",
+				"##sssssssss....#############",
+				"##sssssssss....#############",
+				"##.............#############",
+				"##.............#############",
+				"###...######################"
+			],
+			"chapter": "",
+			"court_depth": 0,
+			"courts": [],
+			"forecourt": 0,
+			"gate": {
+
+			},
+			"h": 30,
+			"legend": {
+				"#": "not floor",
+				".": "floor",
+				"b": "bench",
+				"p": "prop",
+				"s": "sealed by a body",
+				"x": "erased"
+			},
+			"mode": "desktop",
+			"museum": "uffizi-spine-enfilade",
+			"pearl": "trans rotationspectacle",
+			"pearl_index": -1,
+			"porch_depth": 0,
+			"refused": [
+				{
+					"tile_cell": [
+						5,
+						25
+					],
+					"token": "carousel_cake",
+					"why": "baked: sealing would sever the walk route"
+				}
+			],
+			"replay": true,
+			"seals": {
+				"1,225": "carousel_cake",
+				"1,226": "carousel_cake",
+				"1,227": "carousel_cake",
+				"1,228": "carousel_cake",
+				"1,229": "carousel_cake",
+				"1,230": "carousel_cake",
+				"1,231": "carousel_cake",
+				"1,233": "carousel_cake",
+				"1,234": "carousel_cake",
+				"12,213": "boolean_tunnel",
+				"12,221": "pick_up_cube",
+				"2,224": "carousel_cake",
+				"2,225": "carousel_cake",
+				"2,226": "carousel_cake",
+				"2,227": "carousel_cake",
+				"2,228": "carousel_cake",
+				"2,229": "carousel_cake",
+				"2,230": "carousel_cake",
+				"2,231": "carousel_cake",
+				"2,232": "carousel_cake",
+				"2,233": "carousel_cake",
+				"2,234": "carousel_cake",
+				"3,224": "carousel_cake",
+				"3,225": "carousel_cake",
+				"3,226": "carousel_cake",
+				"3,227": "carousel_cake",
+				"3,228": "carousel_cake",
+				"3,229": "carousel_cake",
+				"3,230": "carousel_cake",
+				"3,231": "carousel_cake",
+				"3,232": "carousel_cake",
+				"3,233": "carousel_cake",
+				"3,234": "carousel_cake",
+				"4,225": "carousel_cake",
+				"4,226": "carousel_cake",
+				"4,228": "carousel_cake",
+				"4,229": "carousel_cake",
+				"4,230": "carousel_cake",
+				"4,231": "carousel_cake",
+				"4,233": "carousel_cake",
+				"4,234": "carousel_cake",
+				"5,225": "carousel_cake",
+				"5,226": "carousel_cake",
+				"5,227": "carousel_cake",
+				"5,228": "carousel_cake",
+				"5,229": "carousel_cake",
+				"5,230": "carousel_cake",
+				"5,231": "carousel_cake",
+				"5,233": "carousel_cake",
+				"5,234": "carousel_cake",
+				"6,209": "righttriangle",
+				"6,220": "dark_sphere",
+				"6,225": "carousel_cake",
+				"6,226": "carousel_cake",
+				"6,227": "carousel_cake",
+				"6,228": "carousel_cake",
+				"6,229": "carousel_cake",
+				"6,230": "carousel_cake",
+				"6,231": "carousel_cake",
+				"6,233": "carousel_cake",
+				"6,234": "carousel_cake",
+				"7,225": "carousel_cake",
+				"7,226": "carousel_cake",
+				"7,227": "carousel_cake",
+				"7,228": "carousel_cake",
+				"7,229": "carousel_cake",
+				"7,230": "carousel_cake",
+				"7,231": "carousel_cake",
+				"7,233": "carousel_cake",
+				"7,234": "carousel_cake",
+				"8,225": "carousel_cake",
+				"8,226": "carousel_cake",
+				"8,227": "carousel_cake",
+				"8,228": "carousel_cake",
+				"8,229": "carousel_cake",
+				"8,230": "carousel_cake",
+				"8,231": "carousel_cake",
+				"8,233": "carousel_cake",
+				"8,234": "carousel_cake",
+				"9,227": "carousel_cake",
+				"9,228": "carousel_cake",
+				"9,233": "carousel_cake",
+				"9,234": "carousel_cake"
+			},
+			"segment": 6,
+			"side_rooms": [],
+			"unbaked": 0,
+			"vestibule": 4,
+			"w": 15,
+			"z0": 204,
+			"z1": 238
+		},
+		{
+			"bake_stale": false,
+			"bodies": [
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						4,
+						15
+					],
+					"token": "pattern_tile_4x4",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						4.5,
+						0.0,
+						257.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						7,
+						17
+					],
+					"token": "pattern_tile_cube",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						0.0,
+						259.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						9,
+						18
+					],
+					"token": "science_screen",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						9.5,
+						0.0,
+						260.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"tile_cell": [
+						3,
+						19
+					],
+					"token": "tile_meander_floor",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						3.5,
+						0.0,
+						261.5
+					]
+				}
+			],
+			"cards": [
+				{
+					"chapter": "symmetry",
+					"id": "symmetry · motif · 01",
+					"index": 1,
+					"pearl": "motif",
+					"segment": 7,
+					"world": [
+						13.6,
+						1.1,
+						239.0
+					]
+				},
+				{
+					"chapter": "symmetry",
+					"id": "symmetry · motif · 02",
+					"index": 2,
+					"pearl": "motif",
+					"segment": 7,
+					"world": [
+						13.2,
+						1.2,
+						241.0
+					]
+				},
+				{
+					"chapter": "symmetry",
+					"id": "symmetry · motif · 03",
+					"index": 3,
+					"pearl": "motif",
+					"segment": 7,
+					"world": [
+						6.6,
+						1.1,
+						276.0
+					]
+				},
+				{
+					"chapter": "symmetry",
+					"id": "symmetry · motif · 04",
+					"index": 4,
+					"pearl": "motif",
+					"segment": 7,
+					"world": [
+						6.3,
+						1.0,
+						277.0
+					]
+				},
+				{
+					"chapter": "symmetry",
+					"id": "symmetry · motif · 05",
+					"index": 5,
+					"pearl": "motif",
+					"segment": 7,
+					"world": [
+						1.0,
+						1.1,
+						239.6
+					]
+				},
+				{
+					"chapter": "symmetry",
+					"id": "symmetry · motif · 06",
+					"index": 6,
+					"pearl": "motif",
+					"segment": 7,
+					"world": [
+						12.0,
+						1.2,
+						242.2
+					]
+				},
+				{
+					"chapter": "symmetry",
+					"id": "symmetry · motif · 07",
+					"index": 7,
+					"pearl": "motif",
+					"segment": 7,
+					"world": [
+						16.0,
+						1.0,
+						240.3
+					]
+				},
+				{
+					"chapter": "symmetry",
+					"id": "symmetry · motif · 08",
+					"index": 8,
+					"pearl": "motif",
+					"segment": 7,
+					"world": [
+						15.2,
+						1.2,
+						239.0
+					]
+				},
+				{
+					"chapter": "symmetry",
+					"id": "symmetry · motif · 09",
+					"index": 9,
+					"pearl": "motif",
+					"segment": 7,
+					"world": [
+						15.3,
+						1.0,
+						241.0
+					]
+				},
+				{
+					"chapter": "symmetry",
+					"id": "symmetry · motif · 10",
+					"index": 10,
+					"pearl": "motif",
+					"segment": 7,
+					"world": [
+						1.0,
+						1.2,
+						241.2
+					]
+				},
+				{
+					"chapter": "symmetry",
+					"id": "symmetry · motif · 11",
+					"index": 11,
+					"pearl": "motif",
+					"segment": 7,
+					"world": [
+						12.0,
+						1.0,
+						244.3
+					]
+				},
+				{
+					"chapter": "symmetry",
+					"id": "symmetry · motif · 12",
+					"index": 12,
+					"pearl": "motif",
+					"segment": 7,
+					"world": [
+						1.0,
+						1.0,
+						243.3
+					]
+				},
+				{
+					"chapter": "symmetry",
+					"id": "symmetry · motif · 13",
+					"index": 13,
+					"pearl": "motif",
+					"segment": 7,
+					"world": [
+						12.0,
+						1.1,
+						246.6
+					]
+				},
+				{
+					"chapter": "symmetry",
+					"id": "symmetry · motif · 14",
+					"index": 14,
+					"pearl": "motif",
+					"segment": 7,
+					"world": [
+						1.0,
+						1.1,
+						245.6
+					]
+				},
+				{
+					"chapter": "symmetry",
+					"id": "symmetry · motif · 15",
+					"index": 15,
+					"pearl": "motif",
+					"segment": 7,
+					"world": [
+						12.0,
+						1.2,
+						248.2
+					]
+				},
+				{
+					"chapter": "symmetry",
+					"id": "symmetry · motif · 16",
+					"index": 16,
+					"pearl": "motif",
+					"segment": 7,
+					"world": [
+						1.0,
+						1.2,
+						247.2
+					]
+				},
+				{
+					"chapter": "symmetry",
+					"id": "symmetry · motif · 17",
+					"index": 17,
+					"pearl": "motif",
+					"segment": 7,
+					"world": [
+						12.0,
+						1.0,
+						250.3
+					]
+				},
+				{
+					"chapter": "symmetry",
+					"id": "symmetry · motif · 18",
+					"index": 18,
+					"pearl": "motif",
+					"segment": 7,
+					"world": [
+						1.0,
+						1.0,
+						249.3
+					]
+				},
+				{
+					"chapter": "symmetry",
+					"id": "symmetry · motif · 19",
+					"index": 19,
+					"pearl": "motif",
+					"segment": 7,
+					"world": [
+						12.0,
+						1.1,
+						252.6
+					]
+				},
+				{
+					"chapter": "symmetry",
+					"id": "symmetry · motif · 20",
+					"index": 20,
+					"pearl": "motif",
+					"segment": 7,
+					"world": [
+						1.0,
+						1.1,
+						251.6
+					]
+				},
+				{
+					"chapter": "symmetry",
+					"id": "symmetry · motif · 21",
+					"index": 21,
+					"pearl": "motif",
+					"segment": 7,
+					"world": [
+						12.0,
+						1.2,
+						254.2
+					]
+				},
+				{
+					"chapter": "symmetry",
+					"id": "symmetry · motif · 22",
+					"index": 22,
+					"pearl": "motif",
+					"segment": 7,
+					"world": [
+						1.0,
+						1.2,
+						253.2
+					]
+				},
+				{
+					"chapter": "symmetry",
+					"id": "symmetry · motif · 23",
+					"index": 23,
+					"pearl": "motif",
+					"segment": 7,
+					"world": [
+						12.0,
+						1.0,
+						256.3
+					]
+				},
+				{
+					"chapter": "symmetry",
+					"id": "symmetry · motif · 24",
+					"index": 24,
+					"pearl": "motif",
+					"segment": 7,
+					"world": [
+						1.0,
+						1.0,
+						255.3
+					]
+				},
+				{
+					"chapter": "symmetry",
+					"id": "symmetry · motif · 25",
+					"index": 25,
+					"pearl": "motif",
+					"segment": 7,
+					"world": [
+						12.0,
+						1.1,
+						258.6
+					]
+				},
+				{
+					"chapter": "symmetry",
+					"id": "symmetry · motif · 26",
+					"index": 26,
+					"pearl": "motif",
+					"segment": 7,
+					"world": [
+						1.0,
+						1.1,
+						257.6
+					]
+				}
+			],
+			"cell_x0": -1,
+			"cells": [
+				"##.............###########",
+				"##...............#########",
+				"##...............#########",
+				"##...........#############",
+				"##...........#############",
+				"##...........#############",
+				"##...........#############",
+				"##...........#############",
+				"##.#.......#.#############",
+				"##...........#############",
+				"##...........#############",
+				"##...........#############",
+				"##.#.......#.#############",
+				"##...........#############",
+				"##...........#############",
+				"##...........#############",
+				"##.#.......#.#############",
+				"##...........#############",
+				"##...s...#...#############",
+				"##...s.......#############",
+				"##.#.......#.#############",
+				"##......s....#############",
+				"##......sssss#############",
+				"##.ss........#############",
+				"##.#.......#.#############",
+				"##...........#############",
+				"##...#.......#############",
+				"##...........#############",
+				"##.#.......#.#############",
+				"##...........#############",
+				"##...........#############",
+				"##...........#############",
+				"##.#.......#.#############",
+				"##...........#############",
+				"##...........#############",
+				"##...........#############",
+				"##.#.......#.#############",
+				"##......#....#############",
+				"##....###....#############",
+				"##...........#############"
+			],
+			"chapter": "",
+			"court_depth": 0,
+			"courts": [],
+			"forecourt": 0,
+			"gate": {
+
+			},
+			"h": 36,
+			"legend": {
+				"#": "not floor",
+				".": "floor",
+				"b": "bench",
+				"p": "prop",
+				"s": "sealed by a body",
+				"x": "erased"
+			},
+			"mode": "desktop",
+			"museum": "grande-galerie-axial",
+			"pearl": "motif",
+			"pearl_index": -1,
+			"porch_depth": 0,
+			"refused": [],
+			"replay": true,
+			"seals": {
+				"10,260": "science_screen",
+				"11,260": "science_screen",
+				"2,261": "tile_meander_floor",
+				"3,261": "tile_meander_floor",
+				"4,256": "pattern_tile_4x4",
+				"4,257": "pattern_tile_4x4",
+				"7,259": "pattern_tile_cube",
+				"7,260": "science_screen",
+				"8,260": "science_screen",
+				"9,260": "science_screen"
+			},
+			"segment": 7,
+			"side_rooms": [],
+			"unbaked": 0,
+			"vestibule": 4,
+			"w": 13,
+			"z0": 238,
+			"z1": 278
 		}
 	]
 }
