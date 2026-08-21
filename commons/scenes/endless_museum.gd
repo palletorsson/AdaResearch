@@ -666,6 +666,8 @@ var _doll_menu: CanvasLayer = null        # N: the add menu — click a name, it
 var _doll_menu_list: ItemList = null
 var _doll_menu_filter: LineEdit = null
 var _doll_menu_tokens: Array = []
+var _doll_walk_to: Vector3 = Vector3(1e9, 0, 0)   # click-to-walk target; 1e9 = none
+var _doll_mark: MeshInstance3D = null              # the little goal disc
 # ── THE BOOT CLOCK (2026-08-20, Palle: "still takes ~10 s to load the first
 # hall — what is happening there?") ── every boot phase timed and written into
 # em_built_*.json as `boot_ms`, so a slow launch answers by name instead of
@@ -7355,6 +7357,19 @@ func _doll_frame(delta: float) -> void:
 	if Input.is_key_pressed(KEY_D):
 		dir -= Vector3(-cos(_doll_yaw_now), 0, sin(_doll_yaw_now))
 	if dir.length() > 0.1:
+		_doll_walk_to = Vector3(1e9, 0, 0)   # the hand on the keys outranks the click
+		if _doll_mark != null and is_instance_valid(_doll_mark):
+			_doll_mark.visible = false
+	elif _doll_walk_to.x < 1e8:
+		var to_goal := _doll_walk_to - _player.position
+		to_goal.y = 0.0
+		if to_goal.length() < 0.35:
+			_doll_walk_to = Vector3(1e9, 0, 0)
+			if _doll_mark != null and is_instance_valid(_doll_mark):
+				_doll_mark.visible = false
+		else:
+			dir = to_goal.normalized()
+	if dir.length() > 0.1:
 		dir = dir.normalized()
 		_player.velocity = dir * 4.4 * (2.3 if Input.is_key_pressed(KEY_SHIFT) else 1.0)
 		if _doll_fig != null and is_instance_valid(_doll_fig):
@@ -7917,6 +7932,9 @@ func _input(event: InputEvent) -> void:
 			var pt := _doll_floor_point(mbe.position)
 			var idx := _doll_pick(pt)
 			if mbe.double_click and idx < 0:
+				_doll_walk_to = Vector3(1e9, 0, 0)
+				if _doll_mark != null and is_instance_valid(_doll_mark):
+					_doll_mark.visible = false
 				# double-click on empty floor: the palette pick lands there
 				if _edit_pal_i < 0 or _edit_pal.is_empty():
 					_edit_handle_key(KEY_BRACKETRIGHT)   # open the palette on this chapter
@@ -7931,6 +7949,26 @@ func _input(event: InputEvent) -> void:
 				_doll_drag_start = Vector2i(int(floor(pt.x)), int(floor(pt.z)))
 				var nsel: Node3D = _node_or_null((_edit_records[idx] as Dictionary).get("node"))
 				_doll_node_start = nsel.position if nsel != null else Vector3.ZERO
+			else:
+				# LEFT CLICK WALKS (Palle): empty floor becomes the doll's goal
+				_doll_walk_to = Vector3(pt.x, 0.0, pt.z)
+				if _doll_mark == null or not is_instance_valid(_doll_mark):
+					var mm2 := TorusMesh.new()
+					mm2.inner_radius = 0.18
+					mm2.outer_radius = 0.26
+					mm2.rings = 20
+					mm2.ring_segments = 5
+					_doll_mark = MeshInstance3D.new()
+					_doll_mark.mesh = mm2
+					var mmat := StandardMaterial3D.new()
+					mmat.albedo_color = Color(0.35, 0.75, 1.0)
+					mmat.emission_enabled = true
+					mmat.emission = Color(0.35, 0.75, 1.0)
+					mmat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+					_doll_mark.material_override = mmat
+					add_child(_doll_mark)
+				_doll_mark.global_position = Vector3(pt.x, 0.05, pt.z)
+				_doll_mark.visible = true
 			return
 		elif mb == MOUSE_BUTTON_LEFT and not mbe.pressed and _doll_drag:
 			_doll_drag = false
