@@ -56,6 +56,19 @@ def main() -> int:
             colon_tail = raw[len(head):]      # ':rot:y' or ''
             old_name = head.split("#")[0].strip()
             was = str(c.get("was", "")).strip()
+            if c.get("add"):
+                # a NEW placement: only an empty cell may receive it
+                new_name = str(c.get("token", "")).strip()
+                if not new_name:
+                    refused.append(f"{map_name} ({x},{z}): add with no name")
+                    continue
+                if old_name:
+                    refused.append(f"{map_name} ({x},{z}): the cell holds '{old_name}' — adds land on empty floor only")
+                    continue
+                inter[z][x] = new_name
+                touched = True
+                applied += 1
+                continue
             if old_name != was:
                 refused.append(f"{map_name} ({x},{z}): holds '{old_name}', the list expected '{was}' — re-open the list")
                 continue
