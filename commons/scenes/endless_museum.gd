@@ -2059,6 +2059,10 @@ func _setup_world() -> void:
 		# the editor HUD stands from the first frame — palette, selection,
 		# dirty count, all visible while the mouse works
 		call_deferred("_arm_editor")
+		# the lo-fi bed: the doll house has a soundtrack (em_audio synthesises
+		# it — no file, seamless 75 BPM loop through the room's own tone bus)
+		if _mod_has(_mod_audio, "lofi"):
+			call_deferred("_doll_lofi_on")
 		# the visible key-help — iso deserves a 2D face
 		var help_layer := CanvasLayer.new()
 		help_layer.layer = 80
@@ -7515,6 +7519,12 @@ func _doll_menu_place(list_idx: int) -> void:
 		_doll_select(_edit_records.size() - 1)
 	else:
 		print("[em-doll] the floor before the doll refused it — walk a step and try again")
+
+
+func _doll_lofi_on() -> void:
+	# deferred: em_audio installs during _setup_world, after the walker
+	if _mod_has(_mod_audio, "lofi"):
+		_mod_audio.call("lofi", true)
 
 
 ## THE MASON (2026-08-21, Palle: "can I place blocks and build structure in

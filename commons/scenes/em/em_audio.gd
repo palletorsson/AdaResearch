@@ -136,6 +136,8 @@ class Rig extends Node:
 
 	var air_player: AudioStreamPlayer
 	var rum_player: AudioStreamPlayer
+	var music_player: AudioStreamPlayer = null   # THE LO-FI BED, lazy (see lofi())
+	var lofi_stream: AudioStreamWAV = null
 	var whoosh_player: AudioStreamPlayer
 	var step_players: Array[AudioStreamPlayer] = []
 	var steps: Dictionary = {}          # "stone"/"oak" -> Array[AudioStreamWAV]
@@ -729,6 +731,147 @@ class Rig extends Node:
 			AudioServer.remove_bus(ti)
 
 
+	# ── THE LO-FI BED (2026-08-21, Palle: "we have a music system, can add
+	# some low fi") ── a 75 BPM loop synthesised like everything else here:
+	# no file, deterministic from a seed, seamless BY CONSTRUCTION. 75 BPM
+	# makes the beat exactly 0.8 s = 17,640 frames at 22050 Hz, so four bars
+	# are 282,240 frames and the loop closes on an integer — no crossfade,
+	# no seam. Four warm chords (Fmaj7 Am7 Dm7 Cmaj7) with tremolo and a
+	# soft second harmonic, a bass root on the strong beats, a gliding kick,
+	# a brushed snare, swung hats, and vinyl: hiss plus Poisson crackle whose
+	# tick tails WRAP the loop with modulo indexing. Routed through BUS_TONE,
+	# so the music inherits each room's low-pass like the air does.
+	const LOFI_BPM := 75.0
+	const LOFI_RATE := 22050
+	const LOFI_DB := -14.0
+
+	func lofi(on: bool) -> void:
+		if not on:
+			if music_player != null and music_player.playing:
+				var tw_off := create_tween()
+				tw_off.tween_property(music_player, "volume_db", -60.0, 1.2)
+				tw_off.tween_callback(music_player.stop)
+			return
+		if lofi_stream == null:
+			var t0 := Time.get_ticks_msec()
+			lofi_stream = _build_lofi()
+			print("[em_audio] lo-fi bed synthesised: %.1f s loop in %d ms" % [
+				lofi_stream.data.size() / 2.0 / LOFI_RATE, Time.get_ticks_msec() - t0])
+		if music_player == null:
+			music_player = AudioStreamPlayer.new()
+			music_player.name = "LofiBed"
+			music_player.bus = BUS_TONE
+			music_player.stream = lofi_stream
+			add_child(music_player)
+		music_player.volume_db = -60.0
+		music_player.play()
+		var tw := create_tween()
+		tw.tween_property(music_player, "volume_db", LOFI_DB, 2.5)
+
+	func _build_lofi() -> AudioStreamWAV:
+		var rng := RandomNumberGenerator.new()
+		rng.seed = SYNTH_SEED + 1
+		var beat := int(round(60.0 / LOFI_BPM * LOFI_RATE))   # 17,640
+		var bar := beat * 4
+		var n := bar * 4                                       # 282,240
+		var buf := PackedFloat32Array()
+		buf.resize(n)
+		# chords: [root, third-ish, fifth, seventh] in Hz, one per bar
+		var chords := [
+			[174.61, 220.0, 261.63, 329.63],   # Fmaj7
+			[220.0, 261.63, 329.63, 392.0],    # Am7
+			[146.83, 174.61, 220.0, 261.63],   # Dm7
+			[130.81, 164.81, 196.0, 246.94],   # Cmaj7
+		]
+		var dt := 1.0 / float(LOFI_RATE)
+		for b in range(4):
+			var notes: Array = chords[b]
+			var det := 1.0 + rng.randf_range(-0.0015, 0.0015)
+			for i in range(bar):
+				var t := float(i) * dt
+				var u := float(i) / float(bar)
+				var env := minf(t / 0.05, 1.0) * (1.0 if u < 0.94 else (1.0 - u) / 0.06)
+				var trem := 1.0 - 0.18 * (0.5 - 0.5 * cos(TAU * 4.7 * t))
+				var v := 0.0
+				for f_v in notes:
+					var f := float(f_v)
+					v += sin(TAU * f * t) + 0.32 * sin(TAU * f * 2.0 * t) \
+						+ 0.5 * sin(TAU * f * det * t)
+				buf[b * bar + i] += v * env * trem * 0.045
+				# bass root on beats 1 and 3
+				var ib := i % (beat * 2)
+				var tb := float(ib) * dt
+				buf[b * bar + i] += sin(TAU * float(notes[0]) * 0.5 * tb) \
+					* exp(-tb / 0.4) * 0.16
+		# drums per bar
+		for b in range(4):
+			for k in [0, 2]:                                   # kick, beats 1 and 3
+				var at: int = b * bar + k * beat
+				for j in range(int(0.25 * LOFI_RATE)):
+					var t2 := float(j) * dt
+					var f2 := 58.0 - 20.0 * minf(t2 / 0.12, 1.0)
+					buf[(at + j) % n] += sin(TAU * f2 * t2) * exp(-t2 / 0.07) * 0.42
+			for sn in [1, 3]:                                  # brushed snare, 2 and 4
+				var at2: int = b * bar + sn * beat
+				var lp := 0.0
+				for j in range(int(0.12 * LOFI_RATE)):
+					lp += 0.25 * (rng.randf_range(-1, 1) - lp)
+					buf[(at2 + j) % n] += lp * exp(-float(j) * dt / 0.05) * 0.30
+			for e in range(8):                                 # swung hats
+				if rng.randf() < 0.15:
+					continue
+				var swing := int(0.085 * LOFI_RATE) if e % 2 == 1 else 0
+				var at3: int = b * bar + e * (beat / 2) + swing
+				var hp := 0.0
+				var prev := 0.0
+				for j in range(int(0.035 * LOFI_RATE)):
+					var w := rng.randf_range(-1, 1)
+					hp = w - prev + 0.6 * hp
+					prev = w
+					buf[(at3 + j) % n] += hp * exp(-float(j) * dt / 0.016) * 0.06
+		# vinyl: hiss + crackle, tails wrapping the seam
+		var hiss := 0.0
+		for i in range(n):
+			hiss += 0.3 * (rng.randf_range(-1, 1) - hiss)
+			buf[i] += hiss * 0.010
+		var ticks := int(3.5 * float(n) / float(LOFI_RATE))
+		for _t in range(ticks):
+			var at4 := rng.randi_range(0, n - 1)
+			var amp := rng.randf_range(0.02, 0.09) * (1.0 if rng.randf() < 0.5 else -1.0)
+			var tau := rng.randf_range(0.0012, 0.004)
+			for j in range(int(tau * 6.0 * LOFI_RATE)):
+				buf[(at4 + j) % n] += amp * exp(-float(j) * dt / tau)
+		# the lo in lo-fi: one-pole LP ~3.1 kHz, primed on the tail so the
+		# filtered loop is exactly periodic (the beds' own trick)
+		var a := 1.0 - exp(-TAU * 3100.0 * dt)
+		var st := 0.0
+		for i in range(n - int(0.25 * LOFI_RATE), n):
+			st += a * (buf[i] - st)
+		for i in range(n):
+			st += a * (buf[i] - st)
+			buf[i] = st
+		# normalise and pack
+		var peak := 0.0
+		for i in range(n):
+			peak = maxf(peak, absf(buf[i]))
+		var g := 0.7 / maxf(peak, 0.001)
+		var data := PackedByteArray()
+		data.resize(n * 2)
+		for i in range(n):
+			var q := int(clampf(buf[i] * g, -1.0, 1.0) * 32767.0)
+			data[2 * i] = q & 0xFF
+			data[2 * i + 1] = (q >> 8) & 0xFF
+		var stream := AudioStreamWAV.new()
+		stream.format = AudioStreamWAV.FORMAT_16_BITS
+		stream.mix_rate = LOFI_RATE
+		stream.stereo = false
+		stream.data = data
+		stream.loop_mode = AudioStreamWAV.LOOP_FORWARD
+		stream.loop_begin = 0
+		stream.loop_end = n
+		return stream
+
+
 ## ── static facade ────────────────────────────────────────────────────────────
 
 static var _rig: Rig = null
@@ -755,6 +898,11 @@ static func install(root: Node3D) -> void:
 
 ## cabinet | corridor | gallery | hall. Anything else resolves to gallery.
 ## Crossfades the bed and the reverb over 0.9 s and fires the threshold whoosh.
+static func lofi(on: bool) -> void:
+	if _rig != null:
+		_rig.lofi(on)
+
+
 static func set_space(kind: String) -> void:
 	if _rig == null or not is_instance_valid(_rig):
 		return
