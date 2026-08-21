@@ -662,6 +662,10 @@ var _doll_recut_t: float = 0.0     # deferred bodies arrive late; the cut re-run
 var _doll_brush: String = ""       # "" off · "2" block · "4" wall · "0" hole · "1" floor
 var _doll_brush_meshes: Dictionary = {}   # "x|z" -> instant preview mesh
 var _doll_fig: Node3D = null              # the visible doll — walks, faces its way
+var _doll_menu: CanvasLayer = null        # N: the add menu — click a name, it stands before the doll
+var _doll_menu_list: ItemList = null
+var _doll_menu_filter: LineEdit = null
+var _doll_menu_tokens: Array = []
 # ── THE BOOT CLOCK (2026-08-20, Palle: "still takes ~10 s to load the first
 # hall — what is happening there?") ── every boot phase timed and written into
 # em_built_*.json as `boot_ms`, so a slow launch answers by name instead of
@@ -7395,6 +7399,80 @@ func _doll_frame(delta: float) -> void:
 			_doll_ring.visible = false
 
 
+## THE ADD MENU (2026-08-21, Palle: "iso needs a menu to add new artifact,
+## place in front of player"). N opens a clickable list of the chapter's own
+## palette, with a filter box; clicking a name places that artifact on the
+## floor cell in FRONT of the doll (its facing), as the same add ruling every
+## other door writes. The menu stays open for a run of placements; N or ESC
+## closes it.
+func _doll_menu_toggle() -> void:
+	if _doll_menu != null and is_instance_valid(_doll_menu):
+		_doll_menu.queue_free()
+		_doll_menu = null
+		return
+	var ch := _edit_chapter_here()
+	_edit_pal = _mod_editor.call("palette", _pool, ch) if _mod_has(_mod_editor, "palette") else []
+	if _edit_pal.is_empty():
+		print("[em-doll] chapter %s offers nothing to add here" % ch)
+		return
+	_doll_menu = CanvasLayer.new()
+	_doll_menu.layer = 88
+	var panel := PanelContainer.new()
+	panel.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	panel.offset_left = -320
+	panel.offset_top = 16
+	panel.offset_right = -12
+	panel.offset_bottom = 560
+	var vb := VBoxContainer.new()
+	panel.add_child(vb)
+	var title := Label.new()
+	title.text = "add to %s — click places it before the doll" % ch
+	title.autowrap_mode = TextServer.AUTOWRAP_WORD
+	vb.add_child(title)
+	_doll_menu_filter = LineEdit.new()
+	_doll_menu_filter.placeholder_text = "filter…"
+	_doll_menu_filter.text_changed.connect(func(_t): _doll_menu_fill())
+	vb.add_child(_doll_menu_filter)
+	_doll_menu_list = ItemList.new()
+	_doll_menu_list.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	_doll_menu_list.item_activated.connect(_doll_menu_place)
+	_doll_menu_list.item_clicked.connect(func(idx, _pos, btn): if btn == MOUSE_BUTTON_LEFT: _doll_menu_place(idx))
+	vb.add_child(_doll_menu_list)
+	_doll_menu.add_child(panel)
+	add_child(_doll_menu)
+	_doll_menu_fill()
+	_doll_menu_filter.grab_focus()
+
+
+func _doll_menu_fill() -> void:
+	if _doll_menu_list == null or not is_instance_valid(_doll_menu_list):
+		return
+	var q := _doll_menu_filter.text.to_lower() if _doll_menu_filter != null else ""
+	_doll_menu_list.clear()
+	_doll_menu_tokens = []
+	for i in range(_edit_pal.size()):
+		var tok := String((_edit_pal[i] as Dictionary).get("token", ""))
+		if q != "" and not tok.to_lower().contains(q):
+			continue
+		_doll_menu_list.add_item(tok)
+		_doll_menu_tokens.append(i)
+
+
+func _doll_menu_place(list_idx: int) -> void:
+	if list_idx < 0 or list_idx >= _doll_menu_tokens.size():
+		return
+	_edit_pal_i = int(_doll_menu_tokens[list_idx])
+	# the cell in FRONT of the doll: 1.8 m along its facing
+	var facing: float = _doll_fig.rotation.y if (_doll_fig != null and is_instance_valid(_doll_fig)) else _doll_yaw_now
+	var front: Vector3 = _player.position + Vector3(-sin(facing), 0, -cos(facing)) * 1.8
+	var before: int = _edit_records.size()
+	_edit_place_at(int(floor(front.x)), int(floor(front.z)))
+	if _edit_records.size() > before:
+		_doll_select(_edit_records.size() - 1)
+	else:
+		print("[em-doll] the floor before the doll refused it — walk a step and try again")
+
+
 ## THE MASON (2026-08-21, Palle: "can I place blocks and build structure in
 ## the doll house too?"). A painted cell does two things at once: an INSTANT
 ## preview mesh stands in the scene, and a `cells` ruling is written into
@@ -7930,6 +8008,13 @@ func _input(event: InputEvent) -> void:
 	if _dollhouse and event is InputEventKey and (event as InputEventKey).pressed and not (event as InputEventKey).echo:
 		var kc := (event as InputEventKey).keycode
 		_edit_shift = (event as InputEventKey).shift_pressed
+		if kc == KEY_N:
+			_doll_menu_toggle()
+			return
+		if kc == KEY_X and _edit_sel >= 0:
+			_edit_handle_key(KEY_DELETE)   # X removes the held body (Palle: "select artifact, x to remove")
+			_doll_select(-1)
+			return
 		if kc == KEY_B:
 			var order := ["", "2", "4", "0", "1"]
 			_doll_brush = order[(order.find(_doll_brush) + 1) % order.size()]
@@ -7946,6 +8031,10 @@ func _input(event: InputEvent) -> void:
 			return
 		if kc == KEY_F5 and _edit_sel >= 0:
 			_edit_handle_key(KEY_F5)
+			return
+		if kc == KEY_ESCAPE and _doll_menu != null and is_instance_valid(_doll_menu):
+			_doll_menu.queue_free()
+			_doll_menu = null
 			return
 		if kc == KEY_ESCAPE and (_doll_drag or _edit_sel >= 0):
 			if _doll_drag and _edit_sel >= 0:
@@ -8235,7 +8324,10 @@ func _edit_config_axis() -> void:
 func _edit_chapter_here() -> String:
 	if _cam == null:
 		return ""
-	var z: float = _cam.global_position.z
+	# in the doll house the CAMERA hangs ~30 m behind and above the doll —
+	# often over the next hall or the void, which opened the add menu EMPTY.
+	# The chapter is where the DOLL stands, in either view.
+	var z: float = _player.position.z if (_dollhouse and _player != null) else _cam.global_position.z
 	for srec in _segments:
 		if z >= float(srec.get("z0", 0.0)) and z < float(srec.get("z1", 0.0)):
 			var n: Node = srec.get("node")

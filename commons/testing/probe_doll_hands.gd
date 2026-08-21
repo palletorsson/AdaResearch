@@ -102,6 +102,35 @@ func _run() -> void:
 		if int(inst.get("_edit_sel")) >= 0:
 			fails.append("ESC did not release the selection")
 
+	# THE ADD MENU: N fills a list from the chapter palette; placing the first
+	# entry stands a new body before the doll, selected
+	inst.call("_doll_menu_toggle")
+	var ml: ItemList = inst.get("_doll_menu_list")
+	if ml == null or ml.item_count == 0:
+		fails.append("the add menu opened empty")
+	else:
+		var rc_before: int = (inst.get("_edit_records") as Array).size()
+		inst.call("_doll_menu_place", 0)
+		if (inst.get("_edit_records") as Array).size() != rc_before + 1:
+			fails.append("the menu's first entry did not place before the doll")
+		elif int(inst.get("_edit_sel")) != rc_before:
+			fails.append("the placed body did not arrive selected")
+		else:
+			# X removes it again — an add's removal erases the add itself, which
+			# may free the node at frame end and reshuffle the records; judge by
+			# THE NODE captured at placement, after a frame has passed
+			var placed_node: Node3D = ((inst.get("_edit_records") as Array)[rc_before] as Dictionary).get("node")
+			var xev := InputEventKey.new()
+			xev.keycode = KEY_X
+			xev.pressed = true
+			inst.call("_input", xev)
+			await process_frame
+			await process_frame
+			var gone: bool = placed_node == null or not is_instance_valid(placed_node) 				or not placed_node.is_inside_tree() or not placed_node.visible
+			if not gone:
+				fails.append("X did not remove the placed body")
+	inst.call("_doll_menu_toggle")
+
 	var f2 := FileAccess.open(CTL, FileAccess.WRITE)
 	f2.store_string(ctl_before)
 	f2.close()
