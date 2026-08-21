@@ -645,10 +645,10 @@ var _plan_mtime: int = 0
 # eye resumed), --em-dollhouse or em_control {"dollhouse": 1} opens into it.
 var _dollhouse: bool = false
 var DOLL_CUT := 2.4                # walls cut at this height — ABOVE the 1.55 m
-                                   # hanging line, so the galleries keep their
-                                   # pictures and the artifacts stay whole in
-                                   # view (Palle: "higher so I can see the
-                                   # artifacts"); em_layout hall.doll_cut_m
+								   # hanging line, so the galleries keep their
+								   # pictures and the artifacts stay whole in
+								   # view (Palle: "higher so I can see the
+								   # artifacts"); em_layout hall.doll_cut_m
 var _doll_zoom: float = 16.0       # orthographic size; wheel zooms 6..60
 var _doll_yaw: float = PI * 0.75   # the iso angle; Q/E turn in 45-degree steps
 # THE DOLL'S HANDS (2026-08-21, Palle: "build the mouse drag editing in the
@@ -8341,6 +8341,7 @@ func _spine_travel(idx: int) -> void:
 		"first_chapter": String(target.get("chapter", "")),
 		"first_map": String(target.get("map", "")),
 		"dollhouse": 1 if _dollhouse else 0,
+		"grid_pack": 1 if _grid_pack else 0,
 	}, " "))
 	f.close()
 	_edit_flush()
@@ -8579,6 +8580,7 @@ func _jump_go(idx: int) -> void:
 		# the ladder holds through a travel: a jump made from the doll house
 		# lands in the doll house
 		"dollhouse": 1 if _dollhouse else 0,
+		"grid_pack": 1 if _grid_pack else 0,
 	}, " "))
 	f.close()
 	_edit_flush()
@@ -8636,6 +8638,7 @@ func _follow_reload() -> void:
 		"first_chapter": ch,
 		"first_map": "",
 		"dollhouse": 1 if _dollhouse else 0,
+		"grid_pack": 1 if _grid_pack else 0,
 		"gate_open": 1 if (_gate_t >= 0.0 or _gate.is_empty()) else 0,
 	}
 	if _player != null:
@@ -8690,6 +8693,7 @@ func _doll_toggle() -> void:
 		"first_chapter": ch,
 		"first_map": "",
 		"dollhouse": 0 if _dollhouse else 1,
+		"grid_pack": 1 if _grid_pack else 0,
 		# ONE MUSEUM, ONE DOOR (Palle: "open door in regular means open door
 		# in iso"): a door opened in either view stays open through the toggle
 		"gate_open": 1 if (_gate_t >= 0.0 or _gate.is_empty()) else 0,
