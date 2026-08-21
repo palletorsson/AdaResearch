@@ -503,10 +503,121 @@ def score(bodies, chain, hall, sol, footprints=None, measures=None):
             "sight": first_sight(chain, hall, sol)}
 
 
+def _necklace_bbox(positions, measures, cap=4.5):
+    """The necklace's true footprint (w, d) with per-body extents CAPPED at
+    the registry's own 9-cell rule — an AABB hog (combine_portals' 87-cell
+    reach) must not turn a hall into a courtyard by lying about its body."""
+    xs0 = zs0 = 1e9
+    xs1 = zs1 = -1e9
+    for p in positions:
+        m = measures.get(p["token"])
+        hw = min(cap, (m[3] if m else p.get("fp", 1)) / 2.0)
+        hd = min(cap, (m[4] if m else p.get("fp", 1)) / 2.0)
+        if p.get("count", 1) > 1:
+            ext = (p["count"] - 1) * p.get("gap", 1) / 2.0
+            if p.get("spread") == "x":
+                hw += ext
+            else:
+                hd += ext
+        xs0 = min(xs0, p["x"] - hw)
+        xs1 = max(xs1, p["x"] + hw)
+        zs0 = min(zs0, p["z"] - hd)
+        zs1 = max(zs1, p["z"] + hd)
+    return (max(0.0, xs1 - xs0), max(0.0, zs1 - zs0))
+
+
+def propose():
+    """The occupancy + join proposer (Palle: "most necklace spaces were less
+    than their hall — meaning they could share?" and the ruling: "if the size
+    is bigger than hall space it is a courtyard").
+
+    Verdicts, per hall:
+      courtyard   the capped necklace exceeds the hall's interior in either
+                  dimension — the composition wants open air, not clamping
+      fits        it stands, and is a candidate for sharing
+    Then a greedy pass over consecutive same-chapter pearls (spine order from
+    the plan): strings whose depths stack within one interior with 3 cells of
+    air become a JOIN proposal — the book's own `join: true` lane, decided by
+    measurement instead of hand-feel. Proposals only; Palle enacts.
+    Output: ada_run/necklace_proposals.json + the table below."""
+    lab = read_json(REPO / "ada_run" / "necklace_lab.json") or {}
+    rep = read_json(REPO / "ada_run" / "em_pack_report.json") or {}
+    plan = read_json(REPO / "ada_run" / "em_plan.json") or {}
+    measures = lab.get("measures", {})
+    order = []
+    for row in plan.get("plans", []):
+        k = "%s|%s" % (row.get("sequence", ""), row.get("pearl", ""))
+        if k in (lab.get("halls") or {}) and k not in [o[0] for o in order]:
+            order.append((k, row.get("sequence", ""), int(row.get("pearl_index", 0))))
+    order.sort(key=lambda o: (o[1], o[2]))
+    verdicts = {}
+    for k, chapter, _ in order:
+        hall_meta = (rep.get("halls") or {}).get(k)
+        strat = (lab["halls"][k].get("strategies") or {})
+        sp = strat.get("hand") or strat.get("spring")
+        if not hall_meta or not sp:
+            continue
+        nw, nd = _necklace_bbox(sp["positions"], measures)
+        iw = int(hall_meta["w"]) - 2
+        idp = int(hall_meta["h"]) - 2
+        occ = (nw * nd) / max(1.0, iw * idp)
+        court = nw > iw + 0.5 or nd > idp + 0.5
+        verdicts[k] = {"chapter": chapter, "nw": round(nw, 1), "nd": round(nd, 1),
+                       "iw": iw, "id": idp, "occupancy": round(occ, 2),
+                       "verdict": "courtyard" if court else "fits",
+                       "stamped": bool((read_json(REPO / "ada_run" / "necklace_hand.json") or {}).get("halls", {}).get(k, {}).get("stamp"))}
+    joins = []
+    i = 0
+    keys = [k for k, _, _ in order if k in verdicts]
+    while i < len(keys):
+        k = keys[i]
+        v = verdicts[k]
+        group = [k]
+        depth = v["nd"]
+        if v["verdict"] == "fits":
+            j = i + 1
+            while j < len(keys) and len(group) < 3:
+                k2 = keys[j]
+                v2 = verdicts[k2]
+                if v2["chapter"] != v["chapter"] or v2["verdict"] != "fits":
+                    break
+                if depth + v2["nd"] + 3.0 <= max(v["id"], v2["id"]) and v2["nw"] <= v["iw"]:
+                    group.append(k2)
+                    depth += v2["nd"] + 3.0
+                    j += 1
+                else:
+                    break
+        if len(group) > 1:
+            joins.append(group)
+            i += len(group)
+        else:
+            i += 1
+    print("%-42s %-11s %12s %9s %s" % ("hall", "verdict", "necklace", "interior", "occupancy"))
+    for k in keys:
+        v = verdicts[k]
+        print("%-42s %-11s %5.1f x %-5.1f %3d x %-3d %5.0f%%%s" % (
+            k, v["verdict"].upper() if v["verdict"] == "courtyard" else v["verdict"],
+            v["nw"], v["nd"], v["iw"], v["id"], v["occupancy"] * 100,
+            "  · STAMPED" if v["stamped"] else ""))
+    print()
+    for g in joins:
+        print("JOIN proposal: %s  (stacked depths fit one hall with air)" % "  +  ".join(g))
+    courts = [k for k in keys if verdicts[k]["verdict"] == "courtyard"]
+    (REPO / "ada_run" / "necklace_proposals.json").write_text(json.dumps({
+        "_readme": "the proposer's verdicts: courtyard = the capped necklace exceeds the hall interior (Palle's ruling); joins = consecutive same-chapter pearls whose strings stack in one hall. Proposals only — enactment is the curator's.",
+        "verdicts": verdicts, "joins": joins, "courtyards": courts}, indent=1), encoding="utf-8")
+    print("\n%d hall(s): %d fit, %d courtyard, %d join proposal(s) -> ada_run/necklace_proposals.json" % (
+        len(verdicts), len(verdicts) - len(courts), len(courts), len(joins)))
+    return 0
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--hall", default="")
+    ap.add_argument("--propose", action="store_true")
     args = ap.parse_args()
+    if args.propose:
+        return propose()
     report = read_json(REPO / "ada_run" / "em_pack_report.json")
     if not report:
         print("no em_pack_report.json — boot with grid_pack first (boot_pack_report.gd)")

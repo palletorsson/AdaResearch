@@ -1,0 +1,94 @@
+{
+ "_readme": "the proposer's verdicts: courtyard = the capped necklace exceeds the hall interior (Palle's ruling); joins = consecutive same-chapter pearls whose strings stack in one hall. Proposals only \u2014 enactment is the curator's.",
+ "verdicts": {
+  "primitives|point": {
+   "chapter": "primitives",
+   "nw": 13.3,
+   "nd": 15.3,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.56,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "primitives|line grid": {
+   "chapter": "primitives",
+   "nw": 10.6,
+   "nd": 11.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.32,
+   "verdict": "fits",
+   "stamped": true
+  },
+  "primitives|polythedra": {
+   "chapter": "primitives",
+   "nw": 11.0,
+   "nd": 10.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.3,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "primitives|ignorance": {
+   "chapter": "primitives",
+   "nw": 13.1,
+   "nd": 26.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.94,
+   "verdict": "fits",
+   "stamped": true
+  },
+  "primitives|portals": {
+   "chapter": "primitives",
+   "nw": 10.3,
+   "nd": 12.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.34,
+   "verdict": "fits",
+   "stamped": true
+  },
+  "symmetry|motif": {
+   "chapter": "symmetry",
+   "nw": 9.0,
+   "nd": 5.0,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.12,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "transformation|trans introduction": {
+   "chapter": "transformation",
+   "nw": 13.5,
+   "nd": 27.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 1.0,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "transformation|trans rotationspectacle": {
+   "chapter": "transformation",
+   "nw": 15.9,
+   "nd": 28.6,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 1.25,
+   "verdict": "courtyard",
+   "stamped": true
+  }
+ },
+ "joins": [
+  [
+   "primitives|line grid",
+   "primitives|polythedra"
+  ]
+ ],
+ "courtyards": [
+  "transformation|trans rotationspectacle"
+ ]
+}
