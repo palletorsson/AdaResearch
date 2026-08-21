@@ -1,0 +1,213 @@
+001 primitives             point                      hero=CoordinateSystem3M               map=Point_One
+002 primitives             lines                      hero=klee_walking_point               map=Point_Lines
+003 primitives             trace                      hero=mystic_writing_pad               map=Point_Trace
+004 primitives             line grid                  hero=player_trace                     map=Point_Line_Grid
+005 primitives             triangle context           hero=catalyst_pedestal                map=Point_Triangle_Context
+006 primitives             polythedra                 hero=grab_trihedron                   map=Primitives_Polythedra
+007 primitives             animatedcube               hero=animatedcubebuilder              map=Point_Animatedcube
+008 primitives             primitives                 hero=catalyst_target                  map=Chamber_Primitives
+009 primitives             ignorance                  hero=righttriangle                    map=Primitives_Ignorance
+010 primitives             portals                    hero=achilles_tortoise                map=Primitives_Portals
+011 primitives             melencolia                 hero=durer_scene                      map=Primitives_Melencolia
+012 transformation         trans introduction         hero=transform_composition            map=Trans_Introduction
+013 transformation         trans translation          hero=transform_composition_workbench  map=Trans_Translation
+014 transformation         trans axisdecomposition    hero=toruscylinder                    map=Trans_AxisDecomposition
+015 transformation         trans rotation             hero=rotate_grid_cubes                map=Trans_Rotation
+016 transformation         trans rotationspectacle    hero=boolean_tunnel                   map=Trans_RotationSpectacle
+017 transformation         trans scale                hero=chair_assembly_puzzle            map=Trans_Scale
+018 transformation         transformation             hero=proximity_spawner                map=Chamber_Transformation
+019 transformation         trans pit                  hero=pusher_block                     map=Trans_Pit
+020 symmetry               motif                      hero=pattern_tile_4x4                 map=Symmetry_Motif
+021 symmetry               translation                hero=ten_print_textile                map=Symmetry_Translation
+022 symmetry               mirror rotor               hero=kaleidoscope                     map=Symmetry_Mirror_Rotor
+023 symmetry               glide                      hero=mill_escher_p4g                  map=Symmetry_Glide
+024 symmetry               group                      hero=pattern_maker_station            map=Symmetry_Group
+025 symmetry               seventeen                  hero=wall_pattern_gallery             map=Symmetry_Seventeen
+026 array_tutorial         tutorial single            hero=xyz_coordinates                  map=Tutorial_Single
+027 array_tutorial         tutorial pattern           hero=panel_bridge_loom                map=Tutorial_Pattern
+028 array_tutorial         array patterns             hero=tiling_demo                      map=Array_Patterns
+029 array_tutorial         tutorial row               hero=column_3_z                       map=Tutorial_Row
+030 array_tutorial         tutorial 2d build          hero=pulsar_visualizer                map=Tutorial_2D_Build
+031 array_tutorial         tutorial 3d                hero=grid_3d_4x4x4                    map=Tutorial_3D
+032 array_tutorial         tutorial disco             hero=step_sequencer                   map=Tutorial_Disco
+033 color                  pattern foundry            hero=pattern_machine_d                map=Pattern_Foundry
+034 color                  context placed             hero=csg_architecture_cavity          map=Color_Context_Placed
+035 color                  nails                      hero=brick_wall_factory               map=Color_Nails
+036 color                  grid pallet                hero=spectrum_forest                  map=Color_Grid_Pallet
+037 color                  rainbow                    hero=rainbow                          map=Color_Rainbow
+038 color                  pillar                     hero=color_sets_overview              map=Color_Pillar
+039 color                  paint                      hero=pattern_mill                     map=Color_Paint
+040 color                  walls                      hero=color_space_navigator            map=Color_Walls
+041 change                 intro                      hero=slope_tangent_demo               map=Change_Intro
+042 change                 velocity                   hero=velocity_arrow                   map=Change_Velocity
+043 change                 slope surface              hero=partial_derivative_terrain       map=Change_Slope_Surface
+044 change                 accumulation area          hero=integral_area                    map=Accumulation_Area
+045 change                 accumulation riemann       hero=riemann_pump                     map=Accumulation_Riemann
+046 change                 flow field                 hero=vector_field_grid                map=Flow_Field
+047 change                 flow particle pulse        hero=particle_flow_swarm              map=Flow_Particle_Pulse
+048 change                 reconciliation             hero=ftc_bridge                       map=Change_Reconciliation
+049 forces                 sky climb                  hero=calder_object_mobile             map=Sky_Climb
+050 forces                 void crossing              hero=force_cube                       map=Void_Crossing
+051 forces                 vectors act1 whatavectoris hero=vector_normalize_demo            map=Vectors_Act1_WhatAVectorIs
+052 forces                 vfm 01 foundations         hero=example_2_1_forces_vr            map=VFM_01_Foundations
+053 forces                 vectoroperations           hero=vector_dot_product_xl            map=VectorOperations
+054 forces                 vectors act2 vectorarithmetic hero=vector_addition_walk             map=Vectors_Act2_VectorArithmetic
+055 forces                 vfm 02 operations          hero=VectorWorkbench                  map=VFM_02_Operations
+056 forces                 vectoradvanced             hero=VectorFieldFlow                  map=VectorAdvanced
+057 forces                 vectors act3 fieldsandmotion hero=VectorMotion                     map=Vectors_Act3_FieldsAndMotion
+058 forces                 vfm 03 motion              hero=example_3_3_pointing_in_the_direction_of_motion_vr map=VFM_03_Motion
+059 forces                 vectors act4a kineticforces hero=drag_corridor                    map=Vectors_Act4a_KineticForces
+060 forces                 vectors act4b oscillation  hero=bounce_well                      map=Vectors_Act4b_Oscillation
+061 forces                 composition                hero=force_field_visualizer           map=ForcesComposition
+062 forces                 vectorapplied              hero=hl_turret_vectors                map=VectorApplied
+063 forces                 vfm 04 fields              hero=magnetic_simulation              map=VFM_04_Fields
+064 forces                 vfm 05 launch              hero=catapult                         map=VFM_05_Launch
+065 forces                 systems                    hero=particle_systems                 map=ForcesSystems
+066 forces                 vfm 06 springs             hero=ChainSwing                       map=VFM_06_Springs
+067 forces                 chaos                      hero=three_body_problem               map=ForcesChaos
+068 forces                 vfm 07 gravity             hero=orbital_mechanics_demo           map=VFM_07_Gravity
+069 forces                 vfm 08 arena               hero=collision_carts                  map=VFM_08_Arena
+070 forces                 arena                      hero=hits_reset_display               map=ForcesArena
+071 formfinding            descent                    hero=gradient_descent_well            map=FormFinding_Descent
+072 formfinding            catenary                   hero=cable_builder                    map=FormFinding_Catenary
+073 formfinding            relaxation                 hero=mass_spring_bench                map=FormFinding_Relaxation
+074 formfinding            equilibrium                hero=fractal_truss_tower              map=FormFinding_Equilibrium
+075 formfinding            annealing                  hero=max_q_basin_room                 map=FormFinding_Annealing
+076 formfinding            forge                      hero=self_shaping_forge               map=FormFinding_Forge
+077 wavefunctions          intro                      hero=control_pendulum                 map=WaveFunctions_Intro
+078 wavefunctions          pendulum                   hero=WavePaintings                    map=WaveFunctions_Pendulum
+079 wavefunctions          unit circle                hero=OscillationCurve                 map=WaveFunctions_Unit_Circle
+080 wavefunctions          sine space                 hero=sine_space_explanation           map=WaveFunctions_Sine_Space
+081 wavefunctions          3d wave propagation        hero=kusama_sine                      map=WaveFunctions_3D_Wave_Propagation
+082 wavefunctions          effect sound               hero=timbre_sculptor                  map=WaveFunctions_Effect_Sound
+083 wavefunctions          bernini                    hero=ElphabaDress                     map=Wavefunctions_Bernini
+084 wavefunctions          john cage                  hero=dual_display_test                map=WaveFunctions_John_Cage
+085 wavefunctions          airmusic                   hero=RackAmbientDrone                 map=WaveFunctions_AirMusic
+086 wavefunctions          sky stairs                 hero=sine_cylinder_staircase          map=Wavefunctions_Sky_Stairs
+087 wavefunctions          trigwalkingpath            hero=wave_interference                map=WaveFunctions_TrigWalkingPath
+088 wavefunctions          synthesis lab              hero=oscilloscope                     map=WaveFunctions_Synthesis_Lab
+089 randomness             random definition          hero=entropy_axiom                    map=Random_Definition
+090 randomness             random entropy             hero=hardware_entropy_decay           map=Random_Entropy
+091 randomness             random remove              hero=remove_random                    map=Random_Remove
+092 randomness             10 print algorithm         hero=ten_print_maze_3d                map=Randomness_10_PRINT_Algorithm
+093 randomness             random cubes               hero=random_object_spawner            map=Random_Cubes
+094 randomness             random rotate random xyz   hero=RotateGridCubes                  map=Random_Rotate_Random_XYZ
+095 randomness             random walk                hero=random_walk_terrarium            map=Random_Walk
+096 randomness             random gaussian            hero=distribution_comparator          map=Random_Gaussian
+097 randomness             random mushrooms           hero=reaction_diffusion_intro         map=Random_Mushrooms
+098 randomness             random space geometry      hero=env_one                          map=Random_Space_Geometry
+099 randomness             examples of randomness     hero=pollock_painting_in_3d           map=Randomness_Examples_of_Randomness
+100 randomness             random pheromone           hero=pheromone_terrain                map=Random_Pheromone
+101 randomness             random space               hero=random_space                     map=Random_Space
+102 randomness             random game                hero=miura_crawler                    map=Random_Game
+103 noise                  random noise types         hero=WhiteNoiseGallery                map=Random_Noise_Types
+104 noise                  columns                    hero=MeltingBerniniScene              map=Noise_Columns
+105 noise                  point                      hero=noisetorus                       map=Noise_One
+106 noise                  voxel                      hero=perlin_terrain_sculptor          map=Noise_Voxel
+107 noise                  6 wall                     hero=shader_noise_space               map=Noise_6_Wall
+108 noise                  inside noise               hero=noisesphere                      map=Noise_Inside_Noise
+109 noise                  space 10                   hero=noise_space                      map=Noise_Space_10
+110 noise                  perlin simplex             hero=simplex_noise                    map=Noise_Perlin_Simplex
+111 cellularautomata       ca introduction            hero=grid_substrate_runner            map=CA_Introduction
+112 cellularautomata       ca elementaryrules         hero=structure_growth                 map=CA_ElementaryRules
+113 cellularautomata       ca gameoflife              hero=ca_bridge                        map=CA_GameOfLife
+114 cellularautomata       ca beyondbinary            hero=ca_growth_network                map=CA_BeyondBinary
+115 cellularautomata       ca expandingspace          hero=decaying_bridge                  map=CA_ExpandingSpace
+116 cellularautomata       ca softrules               hero=ca_sphere                        map=CA_SoftRules
+117 cellularautomata       ca agentscircuits          hero=sierpinski_pyramid               map=CA_AgentsCircuits
+118 cellularautomata       ca edgeofchaos             hero=self_organization_ca             map=CA_EdgeOfChaos
+119 fractals               fractal recursion          hero=fractal_recursion_2              map=Fractal_Recursion
+120 fractals               fractal recursivetrees     hero=inverted_tree_cloud              map=Fractal_RecursiveTrees
+121 fractals               fractal cantorset          hero=example_8_4_cantor_set_vr        map=Fractal_CantorSet
+122 fractals               fractal kochsierpinski     hero=box_counting_dimension           map=Fractal_KochSierpinski
+123 fractals               fractal mengersponge       hero=diffusion_limited_aggregation    map=Fractal_MengerSponge
+124 fractals               fractal goldenspiral       hero=fibonacci_sequences              map=Fractal_GoldenSpiral
+125 fractals               fractal juliaset           hero=lyapunov_fractal                 map=Fractal_JuliaSet
+126 fractals               fractal mandelbrotset      hero=mandelbrot_dive                  map=Fractal_MandelbrotSet
+127 fractals               fractal synthesis          hero=fractal_clouds                   map=Fractal_Synthesis
+128 fractals               fractal crosssequence      hero=space_filling_curve_gallery      map=Fractal_CrossSequence
+129 lsystems               grammar lab                hero=lsystem_editor                   map=LSystems_Grammar_Lab
+130 lsystems               growth                     hero=ContextSensitiveTree             map=LSystems_Growth
+131 lsystems               grammars and curves        hero=ContextFreeGrammars              map=LSystems_Grammars_And_Curves
+132 lsystems               architecture               hero=CityGenerator                    map=LSystems_Architecture
+133 lsystems               competition                hero=branching_coral                  map=LSystems_Competition
+134 lsystems               living                     hero=genetic_tree_sculptor            map=LSystems_Living
+135 lsystems               assemblage same desire     hero=godel_statement_plaque           map=Assemblage_Same_Desire
+136 proceduralgeneration   pg genetic evolution       hero=GeneticProgramming               map=PG_Genetic_Evolution
+137 proceduralgeneration   pg space colonization      hero=space_colonization_algorithm     map=PG_Space_Colonization
+138 proceduralgeneration   pg percolation network     hero=percolationnetwork_ca            map=PG_Percolation_Network
+139 proceduralgeneration   pg branching growth        hero=branching_growth_algorithm       map=PG_Branching_Growth
+140 proceduralgeneration   pg caves mazes             hero=maze_generation                  map=PG_Caves_Mazes
+141 proceduralgeneration   pg sculpted forms          hero=layered_membrane                 map=PG_Sculpted_Forms
+142 proceduralgeneration   pg mirrored patterns       hero=mirror_cellular_texture_for_3d   map=PG_Mirrored_Patterns
+143 softbodies             soft body deformation      hero=jelly_cube                       map=SoftBodies_Soft_Body_Deformation
+144 softbodies             carusell                   hero=revolving_joy_ride               map=SoftBodies_Carusell
+145 softbodies             obsticals                  hero=breathing_room                   map=SoftBodies_Obsticals
+146 softbodies             obsticals part2            hero=softbody_gallery_part2           map=SoftBodies_Obsticals_Part2
+147 softbodies             cloth physics              hero=softstopscene                    map=SoftBodies_Cloth_Physics
+148 softbodies             affect theory visualization hero=radiolaria                       map=SoftBodies_Affect_Theory_Visualization
+149 softbodies             proceduralgeneration reaction diffusion systems hero=reaction_diffusion               map=ProceduralGeneration_Reaction_Diffusion_Systems
+150 softbodies             topology entropy morphogenesis hero=entropy_morphogenesis            map=Topology_Entropy_Morphogenesis
+151 softbodies             softbody sb01 cloth drape corners hero=gallery_marker_soft-body         map=SoftBody_sb01_cloth_drape_corners
+152 isosurfaces            iso introduction           hero=voxel_noise_demo                 map=ISO_Introduction
+153 isosurfaces            iso lookuptable            hero=mc_cave                          map=ISO_LookupTable
+154 isosurfaces            iso shapesgallery          hero=mc_torus_sculpture               map=ISO_ShapesGallery
+155 isosurfaces            iso torusgyroid            hero=GyroidDemo                       map=ISO_TorusGyroid
+156 isosurfaces            iso sculpting              hero=fountain_demo                    map=ISO_Sculpting
+157 isosurfaces            iso flatterrain            hero=mc_flat_landscape                map=ISO_FlatTerrain
+158 isosurfaces            iso portallandscape        hero=marchingcubes_portal_landscape   map=ISO_PortalLandscape
+159 isosurfaces            iso caves                  hero=mc_portal_landscape              map=ISO_Caves
+160 isosurfaces            iso cavegeneration         hero=marchingcave                     map=ISO_CaveGeneration
+161 isosurfaces            iso animatednoise          hero=animated_noise_explorer          map=ISO_AnimatedNoise
+162 isosurfaces            iso metaballs              hero=nakama_metaballs                 map=ISO_Metaballs
+163 isosurfaces            iso implicitmodeling       hero=implicit_surface_modeling        map=ISO_ImplicitModeling
+164 boolean_surfaces       boolean union              hero=csg_union_demo                   map=Boolean_Union
+165 boolean_surfaces       boolean intersection       hero=csg_intersection_demo            map=Boolean_Intersection
+166 boolean_surfaces       boolean difference         hero=csg_difference_demo              map=Boolean_Difference
+167 boolean_surfaces       boolean compose workbench  hero=csg_compose_workbench            map=Boolean_Compose_Workbench
+168 swarmintelligence      physarumcolony             hero=PhysarumColony                   map=SwarmIntelligence_PhysarumColony
+169 swarmintelligence      flowfields                 hero=FlowFieldMain                    map=SwarmIntelligence_FlowFields
+170 swarmintelligence      boids algorithm            hero=boids_aquarium                   map=SwarmIntelligence_Boids_Algorithm
+171 swarmintelligence      agent based modeling abm   hero=ant_colony_optimization          map=SwarmIntelligence_Agent_Based_Modeling_ABM
+172 swarmintelligence      ant colony optimization    hero=AntColonyV2                      map=SwarmIntelligence_Ant_Colony_Optimization
+173 swarmintelligence      particle swarm optimization hero=self_organizing_patterns         map=SwarmIntelligence_Particle_Swarm_Optimization
+174 swarmintelligence      swarm intelligence algorithms hero=ecosystem_simulation             map=SwarmIntelligence_Swarm_Intelligence_Algorithms
+175 machinelearning        ml evolution               hero=evolved_creatures                map=ML_Evolution
+176 machinelearning        ml gradient landscape      hero=pca_visualization                map=ML_Gradient_Landscape
+177 machinelearning        ml classification          hero=svm_visualization                map=ML_Classification
+178 machinelearning        ml neural networks         hero=neural_network_visualization     map=ML_Neural_Networks
+179 machinelearning        ml perception              hero=computer_vision_vr               map=ML_Perception
+180 machinelearning        ml sequence memory         hero=transformers_vr                  map=ML_Sequence_Memory
+181 machinelearning        ml generative              hero=generative_adversarial_networks_gans_vr map=ML_Generative
+182 machinelearning        ml synthesis               hero=anomaly_detection                map=ML_Synthesis
+183 graphtheory            gt foundations             hero=graphspace                       map=GT_Foundations
+184 graphtheory            gt layout                  hero=force_directed_layout            map=GT_Layout
+185 graphtheory            gt pathfinding             hero=pathfinding3d                    map=GT_Pathfinding
+186 graphtheory            gt network analysis        hero=rhizomatic_structure             map=GT_Network_Analysis
+187 graphtheory            gt connectivity            hero=topological_sort                 map=GT_Connectivity
+188 graphtheory            gt spanning trees          hero=mst_visualization                map=GT_Spanning_Trees
+189 graphtheory            gt flow                    hero=push_relabel_algorithm           map=GT_Flow
+190 graphtheory            gt matching                hero=edmonds_algorithm                map=GT_Matching
+191 foundationscrisis      euclid parallel            hero=angle_sum_triangle               map=Euclid_Parallel
+192 foundationscrisis      noneuclidean spaces        hero=poincare_disk                    map=NonEuclidean_Spaces
+193 foundationscrisis      russell paradox            hero=self_membership_set              map=Russell_Paradox
+194 foundationscrisis      godel incompleteness       hero=godel_sentence_machine           map=Godel_Incompleteness
+195 foundationscrisis      escher impossible          hero=escher_staircase                 map=Escher_Impossible
+196 foundationscrisis      brouwer intuitionism       hero=constructive_proof               map=Brouwer_Intuitionism
+197 foundationscrisis      florensky paraconsistent   hero=schrodinger_box                  map=Florensky_Paraconsistent
+198 foundationscrisis      crisis synthesis           hero=lambda_slider                    map=Crisis_Synthesis
+199 qfeplaboratory         qfep introduction          hero=tt                               map=QFEP_Introduction
+200 qfeplaboratory         qfep f term                hero=snap_cube_puzzle                 map=QFEP_F_Term
+201 qfeplaboratory         qfep e term                hero=microstate_counter               map=QFEP_E_Term
+202 qfeplaboratory         qfep lambda spectrum       hero=bifurcation_walkway              map=QFEP_Lambda_Spectrum
+203 qfeplaboratory         qfep phi term              hero=rigid_sculpture                  map=QFEP_Phi_Term
+204 qfeplaboratory         qfep edge of chaos         hero=edge_of_chaos_unlocked           map=QFEP_Edge_Of_Chaos
+205 qfeplaboratory         qfep synthesis             hero=queer_morphology_specimen        map=QFEP_Synthesis
+206 postfoundationscrisis  criticalalgorithms algorithmic bias visualization hero=bias_visualizer                  map=CriticalAlgorithms_Algorithmic_Bias_Visualization
+207 postfoundationscrisis  criticalalgorithms applied ethics hero=room_shape_demonstrator          map=CriticalAlgorithms_Applied_Ethics
+208 postfoundationscrisis  speculativecomputation paraconsistent engineering hero=merge_conflict_visualizer        map=SpeculativeComputation_Paraconsistent_Engineering
+209 postfoundationscrisis  speculativecomputation situated computation hero=situated_readout                 map=SpeculativeComputation_Situated_Computation
+210 postfoundationscrisis  speculativecomputation collective knowledge hero=wiki_fragment                    map=SpeculativeComputation_Collective_Knowledge
+211 postfoundationscrisis  speculativecomputation rhizome network hero=rhizome_cave_demo                map=SpeculativeComputation_Rhizome_Network
+212 postfoundationscrisis  advancedlaboratory lab equipment simulation hero=MolecularDesigner                map=AdvancedLaboratory_Lab_Equipment_Simulation
+213 postfoundationscrisis  postcrisis synthesis       hero=accountability_ledger            map=PostCrisis_Synthesis
