@@ -308,10 +308,23 @@ def relax(bodies, chain, hall, seed_pos, footprints=None, measures=None, mesh=Fa
                 if 0.5 < d <= 3.5:
                     pairs.append((a, b, d, 0.12))
     ids = list(pos.keys())
+    # THE KIN PULL (Palle: "cluster artifacts of the same type harder"):
+    # scattered beads of the same token attract until their bodies nearly
+    # touch — pull-only (the reluctance owns the inside), so kin gather
+    # into groups without stacking.
+    kin = []
+    by_tok = {}
+    for i in ids:
+        by_tok.setdefault(bodies[i]["token"], []).append(i)
+    for tok, members in by_tok.items():
+        for a_i in range(len(members)):
+            for b_i in range(a_i + 1, len(members)):
+                a, b = members[a_i], members[b_i]
+                kin.append((a, b, (halves[a][0] + halves[b][0]) + 0.8))
 
     def sweep(n):
         for _ in range(n):
-            _relax_step(bodies, chain, hall, pos, halves, pairs, ids, footprints)
+            _relax_step(bodies, chain, hall, pos, halves, pairs, ids, footprints, kin)
 
     sweep(iters)
     # THE PIVOT (polymer physics' gift): when two string segments cross, the
@@ -338,9 +351,19 @@ def relax(bodies, chain, hall, seed_pos, footprints=None, measures=None, mesh=Fa
     return out
 
 
-def _relax_step(bodies, chain, hall, pos, halves, pairs, ids, footprints):
+def _relax_step(bodies, chain, hall, pos, halves, pairs, ids, footprints, kin=()):
     if True:
         force = {i: [0.0, 0.0] for i in ids}
+        for a, b, rest in kin:
+            dx = pos[b][0] - pos[a][0]
+            dz = pos[b][1] - pos[a][1]
+            d = math.hypot(dx, dz) or 1e-6
+            if d > rest:
+                f = min(0.10 * (d - rest), 0.6) / d
+                force[a][0] += f * dx
+                force[a][1] += f * dz
+                force[b][0] -= f * dx
+                force[b][1] -= f * dz
         for a, b, rest, k in pairs:
             dx = pos[b][0] - pos[a][0]
             dz = pos[b][1] - pos[a][1]
@@ -391,9 +414,11 @@ def _relax_step(bodies, chain, hall, pos, halves, pairs, ids, footprints):
             size = bead_size(bodies[i], footprints)
             if size >= 2.0:
                 force[i][0] += 0.022 * min(size - 1.0, 3.0) * (mid - pos[i][0])
-            elif bodies[i].get("count", 1) == 1:
-                wall_x = 2.2 if pos[i][0] < mid else hall.w - 3.2
-                force[i][0] += 0.025 * (wall_x - pos[i][0])
+            else:
+                # HARDER to the walls (Palle: "push artifacts to the side of
+                # the walls") — every small body hugs the nearer wall line
+                wall_x = 1.8 if pos[i][0] < mid else hall.w - 2.8
+                force[i][0] += 0.05 * (wall_x - pos[i][0])
         for i in ids:
             pos[i][0] = min(max(pos[i][0] + 0.3 * force[i][0], 1.6), hall.w - 2.6)
             pos[i][1] = min(max(pos[i][1] + 0.3 * force[i][1], hall.vest + 1.6), hall.vest + hall.h - 2.6)
