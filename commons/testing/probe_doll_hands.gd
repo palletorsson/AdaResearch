@@ -46,6 +46,7 @@ func _run() -> void:
 		var node: Node3D = (records[target] as Dictionary).get("node")
 		var start_pos: Vector3 = node.position
 		var start_cell: Array = ((records[target] as Dictionary).get("tile_cell") as Array).duplicate()
+		# (re-bound after the press to whatever was actually selected)
 		# aim the doll eye at the body so the unprojection is honest
 		var pl: CharacterBody3D = inst.get("_player")
 		pl.position = Vector3(node.global_position.x, 0, node.global_position.z)
@@ -59,6 +60,14 @@ func _run() -> void:
 		inst.call("_input", press)
 		if int(inst.get("_edit_sel")) < 0:
 			fails.append("LMB press selected nothing")
+		else:
+			# the press picks the NEAREST pickable — in a packed hall that may
+			# be a neighbour of the aimed body. The claim under test is that
+			# THE SELECTED body moves one cell; assert on it, not on the aim.
+			target = int(inst.get("_edit_sel"))
+			node = (records[target] as Dictionary).get("node")
+			start_pos = node.position
+			start_cell = ((records[target] as Dictionary).get("tile_cell") as Array).duplicate()
 		var ring: MeshInstance3D = inst.get("_doll_ring")
 		if ring == null or not ring.visible:
 			fails.append("no selection ring")

@@ -7123,7 +7123,10 @@ func _drain_stamps() -> void:
 				best_d = qd
 				best = qi
 			qi += 1
-		if best < 0 or best_d > INSTANTIATE_AHEAD_M:
+		var horizon: float = INSTANTIATE_AHEAD_M
+		if _dollhouse:
+			horizon = maxf(horizon, _doll_zoom * 1.8 + 16.0)
+		if best < 0 or best_d > horizon:
 			return
 		var item: Dictionary = _stamp_queue.pop_at(best)
 		if String(item.get("kind", "stamp")) == "dress":
@@ -7171,6 +7174,10 @@ func _cull_artifacts() -> void:
 	var i: int = 0
 	_vis_hidden = 0
 	var show_m: float = _show_ring_now()
+	if _dollhouse:
+		# the iso perch sees the whole hall — bodies must not hide at the
+		# walker's 32 m ("most artifacts are invisible in iso")
+		show_m = maxf(show_m, _doll_zoom * 1.8 + 10.0)
 	var hide_m: float = maxf(ART_HIDE_M, show_m + 6.0) if show_m >= ART_SHOW_M else show_m + 6.0
 	# RESURRECTION IS BUDGETED (2026-08-20): re-enabling dozens of suspended
 	# bodies in one 0.3 s tick — each with its first-draw pipeline compile —
@@ -7215,7 +7222,7 @@ func _cull_artifacts() -> void:
 			_vis_hidden += 1
 		i += 1
 	shows.sort_custom(func(a, b): return float(a["d"]) < float(b["d"]))
-	for si in range(mini(SHOW_PER_TICK, shows.size())):
+	for si in range(mini(SHOW_PER_TICK * (3 if _dollhouse else 1), shows.size())):
 		var sn: Node3D = shows[si]["node"]
 		sn.visible = true
 		sn.process_mode = Node.PROCESS_MODE_INHERIT
@@ -7674,6 +7681,7 @@ func _follow_reload() -> void:
 		"first_chapter": ch,
 		"first_map": "",
 		"dollhouse": 1 if _dollhouse else 0,
+		"gate_open": 1 if (_gate_t >= 0.0 or _gate.is_empty()) else 0,
 	}
 	if _player != null:
 		doc["resume_eye"] = [_player.position.x, _player.position.y, z_local]
@@ -7709,6 +7717,9 @@ func _doll_toggle() -> void:
 		"first_chapter": ch,
 		"first_map": "",
 		"dollhouse": 0 if _dollhouse else 1,
+		# ONE MUSEUM, ONE DOOR (Palle: "open door in regular means open door
+		# in iso"): a door opened in either view stays open through the toggle
+		"gate_open": 1 if (_gate_t >= 0.0 or _gate.is_empty()) else 0,
 	}
 	if _player != null:
 		doc["resume_eye"] = [_player.position.x, _player.position.y, z_local]
@@ -7729,6 +7740,9 @@ func _follow_resume() -> void:
 	if not (parsed is Dictionary) or not (parsed as Dictionary).has("resume_eye"):
 		return
 	var pd: Dictionary = parsed
+	if int(pd.get("gate_open", 0)) == 1 and not _gate.is_empty() and _gate_t < 0.0:
+		print("[em-gate] the door was open when the view turned — it stays open")
+		_open_gate()
 	var re_v: Variant = pd.get("resume_eye")
 	if re_v is Array and (re_v as Array).size() >= 3:
 		var want := Vector3(float(re_v[0]), float(re_v[1]), float(re_v[2]))
@@ -7925,6 +7939,13 @@ func _input(event: InputEvent) -> void:
 			_doll_yaw += PI * 0.25
 			return
 		elif kc == KEY_E:
+			# a sealed door near the doll answers to E; otherwise E turns the house
+			if not _gate.is_empty() and _gate_t < 0.0:
+				var dv: Variant = _gate.get("door")
+				if dv != null and is_instance_valid(dv) 						and _player.position.distance_to((dv as Node3D).global_position) < 5.0:
+					print("[em-doll] E at the door — granted")
+					_open_gate()
+					return
 			_doll_yaw -= PI * 0.25
 			return
 	if _jump_ui != null and event is InputEventKey and (event as InputEventKey).pressed \
