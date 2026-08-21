@@ -3087,71 +3087,87 @@ func _build_segment() -> void:
 	#    coffered ceiling with open daylight slots, floor seams. Adds NO
 	#    collision and never touches _walk_cells, so the autopilot's BFS plan is
 	#    bit-identical with and without it.
-	if _mod_has(_mod_detail, "dress_segment") and _bodies_on:
-		# THE SEVENTH ARGUMENT IS THE WALL FURNITURE WIRE. em_budget has always
-		# licensed hung showings per building (Soane 80, a bare-wall building 0)
-		# and dress_segment had no parameter to receive the licence, so 60-70% of
-		# every proof frame was plaster with nothing on it. Arity-probed rather
-		# than assumed: an older em_detail on disk keeps the 6-arg contract and
-		# degrades to its own derived rate instead of erroring out.
-		if _mod_arity(_mod_detail, "dress_segment") >= 7:
-			_mod_detail.call("dress_segment", seg, tile, w, h, _detail_mats, _prev_w,
-				{"wall_features_max": int(deal.get("wall_features_max", -1)),
-					"fill_walls": bool(deal.get("fill_walls", true)),
-					"hang_min_stretch": int(deal.get("hang_min_stretch", 2)),
-					"label_every": int(deal.get("label_every", 11)),
-					# the hand's rulings on this chapter's showings, and the
-					# selectable proxies the editor picks (desktop only)
-					"showing_rules": _furniture_rules(next_seq, "showing"),
-					"showing_proxies": true,     # ALWAYS: the same records in both modes
-					"ceiling": not _studio,      # the studio's camera looks down into the hall
-					# textD on the wall works: the pearl's sentences, one per showing
-					"speak_lines": _speak_lines(next_seq, String(deal.get("pearl", "")) if deal is Dictionary else ""),
-					"speak_anchors": _speak_anchors(),     # token -> world: each line hangs on the field nearest its body
-					"speak_caps": _L("speak", "caps", 0.0) > 0.5,
-					# the LOBBY (first vestibule) hangs no showings: its walls carry the
-					# window, the counter, the extinguisher and the lift instead
-					"bare_below_z": (VESTIBULE_H + 0.6) if (_seg_index == 0 and _L("lobby", "enabled", 1.0) > 0.5) else -1.0,
-					# the CARDS name their place: chapter · pearl · number
-					"chapter": next_seq,
-					"pearl": String(deal.get("pearl", "")) if deal is Dictionary else ""})
-			# the card ledger: every showing's place id and world position, so a
-			# hand can refer to "primitives · lines · 07" and rule on it later
-			for ch_node in seg.get_children():
-				if ch_node.has_meta("em_showing_card"):
-					_showing_cards.append({"segment": _seg_index, "chapter": next_seq,   # the segment being built (advanced later)
-						"pearl": String(deal.get("pearl", "")) if deal is Dictionary else "",
-						"index": int(ch_node.get_meta("em_showing_card")) + 1,
-						"id": "%s · %s · %02d" % [next_seq, String(deal.get("pearl", "")) if deal is Dictionary else "-", int(ch_node.get_meta("em_showing_card")) + 1],
-						"world": [snappedf((ch_node as Node3D).global_position.x, 0.1), snappedf((ch_node as Node3D).global_position.y, 0.1), snappedf((ch_node as Node3D).global_position.z, 0.1)]})
-			_save_showing_cards()
-			# every showing proxy becomes an editor record of kind "showing"
-			if true:   # ALWAYS: showing records in both modes (the editor KEYS stay desktop-only)
+	# THE LOADING ROOM (2026-08-21, Palle: "separate the room before the door
+	# as a loading room... and lazy load the artifacts in the room behind").
+	# The dressing pass — showings, fixtures, props — is the synchronous tail
+	# of every segment build. It now rides the patient stamp's queue as ONE
+	# deferred call: the architecture and lights stand immediately, the door
+	# holds, and the walls dress themselves while the visitor crosses the
+	# loading room. Bake, shot and studio keep the synchronous order — a proof
+	# frame of an undressed hall proves nothing.
+	var dress_seg_no: int = _seg_index
+	var dress_pass := func() -> void:
+		if _mod_has(_mod_detail, "dress_segment") and _bodies_on:
+			# THE SEVENTH ARGUMENT IS THE WALL FURNITURE WIRE. em_budget has always
+			# licensed hung showings per building (Soane 80, a bare-wall building 0)
+			# and dress_segment had no parameter to receive the licence, so 60-70% of
+			# every proof frame was plaster with nothing on it. Arity-probed rather
+			# than assumed: an older em_detail on disk keeps the 6-arg contract and
+			# degrades to its own derived rate instead of erroring out.
+			if _mod_arity(_mod_detail, "dress_segment") >= 7:
+				_mod_detail.call("dress_segment", seg, tile, w, h, _detail_mats, _prev_w,
+					{"wall_features_max": int(deal.get("wall_features_max", -1)),
+						"fill_walls": bool(deal.get("fill_walls", true)),
+						"hang_min_stretch": int(deal.get("hang_min_stretch", 2)),
+						"label_every": int(deal.get("label_every", 11)),
+						# the hand's rulings on this chapter's showings, and the
+						# selectable proxies the editor picks (desktop only)
+						"showing_rules": _furniture_rules(next_seq, "showing"),
+						"showing_proxies": true,     # ALWAYS: the same records in both modes
+						"ceiling": not _studio,      # the studio's camera looks down into the hall
+						# textD on the wall works: the pearl's sentences, one per showing
+						"speak_lines": _speak_lines(next_seq, String(deal.get("pearl", "")) if deal is Dictionary else ""),
+						"speak_anchors": _speak_anchors(),     # token -> world: each line hangs on the field nearest its body
+						"speak_caps": _L("speak", "caps", 0.0) > 0.5,
+						# the LOBBY (first vestibule) hangs no showings: its walls carry the
+						# window, the counter, the extinguisher and the lift instead
+						"bare_below_z": (VESTIBULE_H + 0.6) if (_seg_index == 0 and _L("lobby", "enabled", 1.0) > 0.5) else -1.0,
+						# the CARDS name their place: chapter · pearl · number
+						"chapter": next_seq,
+						"pearl": String(deal.get("pearl", "")) if deal is Dictionary else ""})
+				# the card ledger: every showing's place id and world position, so a
+				# hand can refer to "primitives · lines · 07" and rule on it later
 				for ch_node in seg.get_children():
-					if ch_node.has_meta("em_showing"):
-						var s_idx: int = int(ch_node.get_meta("em_showing"))
-						if _dressing_removed(next_seq, "showing", "showing", s_idx):
-							ch_node.queue_free()
-							continue
-						_edit_records.append({"node": ch_node, "kind": "showing",
-							"token": "showing", "index": s_idx,
-							"from": [], "tile_cell": [], "rotation": 0.0,
-							"chapter": next_seq, "seg": seg})
-		else:
-			_mod_detail.call("dress_segment", seg, tile, w, h, _detail_mats, _prev_w)
-	# 1b. FURNITURE. em_detail is contractually forbidden to add collision, and a
-	#     bench you can walk through is worse than no bench — so the one fixture
-	#     family that occupies floor lives here, where the segment's StaticBody3D
-	#     and the walk map are both in scope.
-	_dress_fixtures(seg, solid, tile, w, zbase)
-	# 1c. SERVICE FURNITURE. A critic measured a 420x360 crop of this museum's
-	#     wall — about 2 m2 of plaster — and found exactly one feature in it, a
-	#     light blob: no socket, no vent, no seam, no signage. em_props answers
-	#     with 87 already-built props positioned off the geometry the generator
-	#     already owns (the door list, the wall runs, the ceiling bays, the
-	#     walker's own BFS route). It runs AFTER the benches, so a bench cell is
-	#     already out of the walk map when the floor rules look for a free pocket.
-	_dress_props(seg, tile, w, h, zbase, deal)
+					if ch_node.has_meta("em_showing_card"):
+						_showing_cards.append({"segment": dress_seg_no, "chapter": next_seq,   # captured at queue time — the dress may drain segments later
+							"pearl": String(deal.get("pearl", "")) if deal is Dictionary else "",
+							"index": int(ch_node.get_meta("em_showing_card")) + 1,
+							"id": "%s · %s · %02d" % [next_seq, String(deal.get("pearl", "")) if deal is Dictionary else "-", int(ch_node.get_meta("em_showing_card")) + 1],
+							"world": [snappedf((ch_node as Node3D).global_position.x, 0.1), snappedf((ch_node as Node3D).global_position.y, 0.1), snappedf((ch_node as Node3D).global_position.z, 0.1)]})
+				_save_showing_cards()
+				# every showing proxy becomes an editor record of kind "showing"
+				if true:   # ALWAYS: showing records in both modes (the editor KEYS stay desktop-only)
+					for ch_node in seg.get_children():
+						if ch_node.has_meta("em_showing"):
+							var s_idx: int = int(ch_node.get_meta("em_showing"))
+							if _dressing_removed(next_seq, "showing", "showing", s_idx):
+								ch_node.queue_free()
+								continue
+							_edit_records.append({"node": ch_node, "kind": "showing",
+								"token": "showing", "index": s_idx,
+								"from": [], "tile_cell": [], "rotation": 0.0,
+								"chapter": next_seq, "seg": seg})
+			else:
+				_mod_detail.call("dress_segment", seg, tile, w, h, _detail_mats, _prev_w)
+		# 1b. FURNITURE. em_detail is contractually forbidden to add collision, and a
+		#     bench you can walk through is worse than no bench — so the one fixture
+		#     family that occupies floor lives here, where the segment's StaticBody3D
+		#     and the walk map are both in scope.
+		_dress_fixtures(seg, solid, tile, w, zbase)
+		# 1c. SERVICE FURNITURE. A critic measured a 420x360 crop of this museum's
+		#     wall — about 2 m2 of plaster — and found exactly one feature in it, a
+		#     light blob: no socket, no vent, no seam, no signage. em_props answers
+		#     with 87 already-built props positioned off the geometry the generator
+		#     already owns (the door list, the wall runs, the ceiling bays, the
+		#     walker's own BFS route). It runs AFTER the benches, so a bench cell is
+		#     already out of the walk map when the floor rules look for a free pocket.
+		_dress_props(seg, tile, w, h, zbase, deal)
+	if _replay and not _bake_mode and _shot_path == "" and not _studio:
+		_stamp_queue.append({"kind": "dress", "run": dress_pass, "seg": seg,
+			"seg_no": dress_seg_no,
+			"px": w / 2.0, "pz": float(zbase) + float(VESTIBULE_H) + 2.0})
+	else:
+		dress_pass.call()
 	# 2. the light rig: ambient floor, north daylight down the axis, keys on the
 	#    hero and podium slots, cove and accent grazer at the threshold, wall
 	#    wash, floor fill. Capped at 24 lights / 6 shadow casters per segment.
@@ -3890,6 +3906,12 @@ func _write_built(seg: Node3D, chapter: String, deal: Variant, zbase: int, w: in
 		if _seg_index % 20 == 0:
 			_write_bake()               # a partial bake survives a hang
 		return
+	_flush_built_files(seg_no)
+
+
+## Serialize and write the as-built doc — from _write_built at segment end,
+## and again from the drain when a deferred dress adds its cards late.
+func _flush_built_files(seg_no: int) -> void:
 	var txt: String = JSON.stringify({"schema": "adaresearch.em_built.v1",
 		"_readme": ("The AS-BUILT plan: what the assembler actually made of each segment this run — every "
 			+ "cell's role, every body's final world pose and inventory number, every card, courts, rooms, "
@@ -6730,6 +6752,12 @@ func _process(_delta: float) -> void:
 				_vr_wait_said = true
 				push_warning("[endless_museum] no XRCamera3D under any XROrigin3D — nothing will stream until the rig appears")
 				print("[endless_museum] waiting for the XR camera; the museum cannot stream without an eye")
+			# the dress needs no eye: the walls hang themselves while the rig
+			# is still arriving (and the headless parity museum never gets one)
+			for qi in range(_stamp_queue.size()):
+				if String((_stamp_queue[qi] as Dictionary).get("kind", "stamp")) == "dress":
+					_run_dress_item(_stamp_queue.pop_at(qi))
+					break
 			return
 		_vr_wait = 0.0
 	elif _cam == null:
@@ -6787,6 +6815,24 @@ func flush_stamps() -> void:
 				float(item["span_cap"]), float(item["yaw"]), item["config"], item["bk"])
 
 
+## One deferred dress pass: run it, then refresh the as-built entry that was
+## written before these cards existed — the ledger and the parity gate see
+## the dressed hall. Called from the drain, and from the VR wait (the dress
+## needs no eye, and the harness's headless VR museum never gets one).
+func _run_dress_item(item: Dictionary) -> void:
+	(item["run"] as Callable).call()
+	var dsn: int = int(item.get("seg_no", -1))
+	for be in _built:
+		if int((be as Dictionary).get("segment", -2)) == dsn:
+			var fresh: Array = []
+			for c in _showing_cards:
+				if int((c as Dictionary).get("segment", -1)) == dsn:
+					fresh.append(c)
+			(be as Dictionary)["cards"] = fresh
+			_flush_built_files(dsn)
+			break
+
+
 ## The patient stamp's drain: a few milliseconds a frame, nearest body first,
 ## so the room assembles around the visitor instead of costing one giant frame.
 ## An item whose segment scrolled off behind is dropped un-built; an item
@@ -6817,7 +6863,9 @@ func _drain_stamps() -> void:
 		if best < 0 or best_d > INSTANTIATE_AHEAD_M:
 			return
 		var item: Dictionary = _stamp_queue.pop_at(best)
-		if String(item.get("kind", "stamp")) == "wallrun":
+		if String(item.get("kind", "stamp")) == "dress":
+			_run_dress_item(item)
+		elif String(item.get("kind", "stamp")) == "wallrun":
 			# one VARIANT this slot; the run re-queues until its last lands
 			_wallrun_step(item)
 			if not (item["pending"] as Array).is_empty():

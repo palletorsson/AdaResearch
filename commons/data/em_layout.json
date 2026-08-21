@@ -2,8 +2,8 @@
  "schema": "adaresearch.em_layout.v1",
  "_readme": "The museum's LAYOUT NUMBERS, in one file instead of scattered through endless_museum.gd and em_*.gd. Anything an eye would otherwise tune in code lives here: how deep the threshold gate stands, how far a hand must be to open it, how big an inventory caption is, how a hall and a side room are proportioned. The assembler reads this at boot and falls back to the value in the code when a key is absent, so deleting a key is safe and deleting the file changes nothing.",
  "gate": {
-  "depth_rows": 0,
-  "_depth_rows": "0 = IN THE DOORWAY: the door sits in the entry wall's opening, sized to it, the wall is the jamb, the scanner on the wall face beside it (Palle, 2026-08-18: 'it should be in the doorway'). N > 0 = a free-standing door N rows into the first hall with its own piers (4 was the run-up version).",
+  "depth_rows": 5,
+  "_depth_rows": "0 = the door in the entry wall (the 2026-08-18 in-doorway ruling). N>0 = the door N rows INTO the hall. 5 since 2026-08-21 (Palle: separate the room before the door as a LOADING ROOM, make it a bit bigger) — the lobby + five hall rows are the loading room; the hall dresses itself behind the sealed door.",
   "reach_m": 1.5,
   "_reach_m": "eye or controller this close to the scanner glass counts as a hand — 1.5 so a bare-hands lean-in grants without kissing the glass",
   "patience_s": 6.0,
