@@ -1,0 +1,2661 @@
+{
+ "_readme": "the necklace bake-off: per hall, four placement strategies with scores. Written by tools/necklace_lab.py; read by /transplant.",
+ "halls": {
+  "primitives|ignorance": {
+   "chapter": "primitives",
+   "pearl": "ignorance",
+   "map": "Primitives_Ignorance",
+   "chain": [
+    "dark_sphere",
+    "cube_scene",
+    "sphere",
+    "platonic_grabbables",
+    "sphere_high",
+    "hole_with_cones",
+    "righttriangle",
+    "sphere_mid",
+    "floating_sphere_field",
+    "sphere_mid",
+    "sphere_high",
+    "star_primitive",
+    "truncatedtetrahedron",
+    "capsule",
+    "sphere_low",
+    "sphere_low",
+    "roughrock",
+    "grab_octahedron",
+    "snap_octahedron_puzzle",
+    "grab_octahedron",
+    "lshape",
+    "prism_block",
+    "prism_block",
+    "prism_block",
+    "prism_block",
+    "library_rack",
+    "torus_radials_rings",
+    "capsule_radials_rings",
+    "capsule_radials_rings",
+    "capsule_radials_rings",
+    "capsule_radials_rings",
+    "prism_block",
+    "prism_block",
+    "lshape",
+    "prism_block",
+    "prism_block",
+    "torus_radials_rings",
+    "plus",
+    "diamonds",
+    "plus"
+   ],
+   "strategies": {
+    "serpentine": {
+     "positions": [
+      {
+       "token": "dark_sphere",
+       "x": 2,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "cube_scene",
+       "x": 4,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "sphere",
+       "x": 5,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "platonic_grabbables",
+       "x": 9,
+       "z": 6,
+       "plinth": true
+      },
+      {
+       "token": "sphere_high",
+       "x": 12,
+       "z": 8,
+       "plinth": true
+      },
+      {
+       "token": "hole_with_cones",
+       "x": 10,
+       "z": 8,
+       "plinth": false
+      },
+      {
+       "token": "righttriangle",
+       "x": 8,
+       "z": 8,
+       "plinth": true
+      },
+      {
+       "token": "sphere_mid",
+       "x": 6,
+       "z": 8,
+       "plinth": false
+      },
+      {
+       "token": "floating_sphere_field",
+       "x": 5,
+       "z": 8,
+       "plinth": false
+      },
+      {
+       "token": "sphere_mid",
+       "x": 3,
+       "z": 8,
+       "plinth": false
+      },
+      {
+       "token": "sphere_high",
+       "x": 2,
+       "z": 10,
+       "plinth": true
+      },
+      {
+       "token": "star_primitive",
+       "x": 5,
+       "z": 10,
+       "plinth": true
+      },
+      {
+       "token": "truncatedtetrahedron",
+       "x": 7,
+       "z": 10,
+       "plinth": true
+      },
+      {
+       "token": "capsule",
+       "x": 9,
+       "z": 10,
+       "plinth": true
+      },
+      {
+       "token": "sphere_low",
+       "x": 11,
+       "z": 12,
+       "plinth": false
+      },
+      {
+       "token": "sphere_low",
+       "x": 8,
+       "z": 12,
+       "plinth": false
+      },
+      {
+       "token": "roughrock",
+       "x": 6,
+       "z": 12,
+       "plinth": true
+      },
+      {
+       "token": "grab_octahedron",
+       "x": 4,
+       "z": 12,
+       "plinth": true
+      },
+      {
+       "token": "snap_octahedron_puzzle",
+       "x": 2,
+       "z": 12,
+       "plinth": false
+      },
+      {
+       "token": "grab_octahedron",
+       "x": 3,
+       "z": 14,
+       "plinth": true
+      },
+      {
+       "token": "lshape",
+       "x": 7,
+       "z": 14,
+       "plinth": false
+      },
+      {
+       "token": "prism_block",
+       "x": 9,
+       "z": 14,
+       "plinth": false
+      },
+      {
+       "token": "prism_block",
+       "x": 10,
+       "z": 14,
+       "plinth": false
+      },
+      {
+       "token": "prism_block",
+       "x": 12,
+       "z": 14,
+       "plinth": false
+      },
+      {
+       "token": "prism_block",
+       "x": 12,
+       "z": 16,
+       "plinth": false
+      },
+      {
+       "token": "library_rack",
+       "x": 8,
+       "z": 16,
+       "plinth": false
+      },
+      {
+       "token": "torus_radials_rings",
+       "x": 7,
+       "z": 16,
+       "plinth": false
+      },
+      {
+       "token": "capsule_radials_rings",
+       "x": 5,
+       "z": 16,
+       "plinth": false
+      },
+      {
+       "token": "capsule_radials_rings",
+       "x": 3,
+       "z": 18,
+       "plinth": false
+      },
+      {
+       "token": "capsule_radials_rings",
+       "x": 6,
+       "z": 18,
+       "plinth": false
+      },
+      {
+       "token": "capsule_radials_rings",
+       "x": 7,
+       "z": 18,
+       "plinth": false
+      },
+      {
+       "token": "prism_block",
+       "x": 9,
+       "z": 18,
+       "plinth": false
+      },
+      {
+       "token": "prism_block",
+       "x": 11,
+       "z": 18,
+       "plinth": false
+      },
+      {
+       "token": "lshape",
+       "x": 12,
+       "z": 18,
+       "plinth": false
+      },
+      {
+       "token": "prism_block",
+       "x": 9,
+       "z": 20,
+       "plinth": false
+      },
+      {
+       "token": "prism_block",
+       "x": 8,
+       "z": 20,
+       "plinth": false
+      },
+      {
+       "token": "torus_radials_rings",
+       "x": 6,
+       "z": 20,
+       "plinth": false
+      },
+      {
+       "token": "plus",
+       "x": 4,
+       "z": 20,
+       "plinth": false
+      },
+      {
+       "token": "diamonds",
+       "x": 2,
+       "z": 22,
+       "plinth": false
+      },
+      {
+       "token": "plus",
+       "x": 7,
+       "z": 22,
+       "plinth": false
+      }
+     ],
+     "score": {
+      "placed": 40,
+      "of": 40,
+      "order": 1.0,
+      "distortion": 0.51,
+      "blocked": 0,
+      "min_sep": 1.0
+     }
+    },
+    "spring": {
+     "positions": [
+      {
+       "token": "dark_sphere",
+       "x": 2,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "cube_scene",
+       "x": 4,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "sphere",
+       "x": 5,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "platonic_grabbables",
+       "x": 9,
+       "z": 6,
+       "plinth": true
+      },
+      {
+       "token": "sphere_high",
+       "x": 12,
+       "z": 8,
+       "plinth": true
+      },
+      {
+       "token": "hole_with_cones",
+       "x": 10,
+       "z": 8,
+       "plinth": false
+      },
+      {
+       "token": "righttriangle",
+       "x": 8,
+       "z": 8,
+       "plinth": true
+      },
+      {
+       "token": "sphere_mid",
+       "x": 6,
+       "z": 8,
+       "plinth": false
+      },
+      {
+       "token": "floating_sphere_field",
+       "x": 4,
+       "z": 8,
+       "plinth": false
+      },
+      {
+       "token": "sphere_mid",
+       "x": 3,
+       "z": 8,
+       "plinth": false
+      },
+      {
+       "token": "sphere_high",
+       "x": 3,
+       "z": 10,
+       "plinth": true
+      },
+      {
+       "token": "star_primitive",
+       "x": 5,
+       "z": 10,
+       "plinth": true
+      },
+      {
+       "token": "truncatedtetrahedron",
+       "x": 7,
+       "z": 10,
+       "plinth": true
+      },
+      {
+       "token": "capsule",
+       "x": 9,
+       "z": 10,
+       "plinth": true
+      },
+      {
+       "token": "sphere_low",
+       "x": 11,
+       "z": 12,
+       "plinth": false
+      },
+      {
+       "token": "sphere_low",
+       "x": 8,
+       "z": 12,
+       "plinth": false
+      },
+      {
+       "token": "roughrock",
+       "x": 6,
+       "z": 12,
+       "plinth": true
+      },
+      {
+       "token": "grab_octahedron",
+       "x": 4,
+       "z": 12,
+       "plinth": true
+      },
+      {
+       "token": "snap_octahedron_puzzle",
+       "x": 2,
+       "z": 12,
+       "plinth": false
+      },
+      {
+       "token": "grab_octahedron",
+       "x": 5,
+       "z": 14,
+       "plinth": true
+      },
+      {
+       "token": "lshape",
+       "x": 7,
+       "z": 14,
+       "plinth": false
+      },
+      {
+       "token": "prism_block",
+       "x": 8,
+       "z": 14,
+       "plinth": false
+      },
+      {
+       "token": "prism_block",
+       "x": 10,
+       "z": 14,
+       "plinth": false
+      },
+      {
+       "token": "prism_block",
+       "x": 11,
+       "z": 15,
+       "plinth": false
+      },
+      {
+       "token": "prism_block",
+       "x": 11,
+       "z": 17,
+       "plinth": false
+      },
+      {
+       "token": "library_rack",
+       "x": 9,
+       "z": 16,
+       "plinth": false
+      },
+      {
+       "token": "torus_radials_rings",
+       "x": 7,
+       "z": 16,
+       "plinth": false
+      },
+      {
+       "token": "capsule_radials_rings",
+       "x": 5,
+       "z": 17,
+       "plinth": false
+      },
+      {
+       "token": "capsule_radials_rings",
+       "x": 5,
+       "z": 18,
+       "plinth": false
+      },
+      {
+       "token": "capsule_radials_rings",
+       "x": 6,
+       "z": 18,
+       "plinth": false
+      },
+      {
+       "token": "capsule_radials_rings",
+       "x": 7,
+       "z": 18,
+       "plinth": false
+      },
+      {
+       "token": "prism_block",
+       "x": 9,
+       "z": 18,
+       "plinth": false
+      },
+      {
+       "token": "prism_block",
+       "x": 11,
+       "z": 18,
+       "plinth": false
+      },
+      {
+       "token": "lshape",
+       "x": 13,
+       "z": 19,
+       "plinth": false
+      },
+      {
+       "token": "prism_block",
+       "x": 11,
+       "z": 20,
+       "plinth": false
+      },
+      {
+       "token": "prism_block",
+       "x": 8,
+       "z": 20,
+       "plinth": false
+      },
+      {
+       "token": "torus_radials_rings",
+       "x": 6,
+       "z": 20,
+       "plinth": false
+      },
+      {
+       "token": "plus",
+       "x": 4,
+       "z": 20,
+       "plinth": false
+      },
+      {
+       "token": "diamonds",
+       "x": 3,
+       "z": 22,
+       "plinth": false
+      },
+      {
+       "token": "plus",
+       "x": 6,
+       "z": 22,
+       "plinth": false
+      }
+     ],
+     "score": {
+      "placed": 40,
+      "of": 40,
+      "order": 1.0,
+      "distortion": 0.41,
+      "blocked": 0,
+      "min_sep": 1.0
+     }
+    },
+    "mesh": {
+     "positions": [
+      {
+       "token": "dark_sphere",
+       "x": 3,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "cube_scene",
+       "x": 4,
+       "z": 5,
+       "plinth": false
+      },
+      {
+       "token": "sphere",
+       "x": 5,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "platonic_grabbables",
+       "x": 9,
+       "z": 6,
+       "plinth": true
+      },
+      {
+       "token": "sphere_high",
+       "x": 8,
+       "z": 10,
+       "plinth": true
+      },
+      {
+       "token": "hole_with_cones",
+       "x": 10,
+       "z": 9,
+       "plinth": false
+      },
+      {
+       "token": "righttriangle",
+       "x": 8,
+       "z": 8,
+       "plinth": true
+      },
+      {
+       "token": "sphere_mid",
+       "x": 7,
+       "z": 9,
+       "plinth": false
+      },
+      {
+       "token": "floating_sphere_field",
+       "x": 5,
+       "z": 8,
+       "plinth": false
+      },
+      {
+       "token": "sphere_mid",
+       "x": 6,
+       "z": 10,
+       "plinth": false
+      },
+      {
+       "token": "sphere_high",
+       "x": 5,
+       "z": 10,
+       "plinth": true
+      },
+      {
+       "token": "star_primitive",
+       "x": 4,
+       "z": 12,
+       "plinth": true
+      },
+      {
+       "token": "truncatedtetrahedron",
+       "x": 7,
+       "z": 11,
+       "plinth": true
+      },
+      {
+       "token": "capsule",
+       "x": 8,
+       "z": 12,
+       "plinth": true
+      },
+      {
+       "token": "sphere_low",
+       "x": 6,
+       "z": 12,
+       "plinth": false
+      },
+      {
+       "token": "sphere_low",
+       "x": 8,
+       "z": 11,
+       "plinth": false
+      },
+      {
+       "token": "roughrock",
+       "x": 6,
+       "z": 11,
+       "plinth": true
+      },
+      {
+       "token": "grab_octahedron",
+       "x": 7,
+       "z": 13,
+       "plinth": true
+      },
+      {
+       "token": "snap_octahedron_puzzle",
+       "x": 5,
+       "z": 13,
+       "plinth": false
+      },
+      {
+       "token": "grab_octahedron",
+       "x": 6,
+       "z": 15,
+       "plinth": true
+      },
+      {
+       "token": "lshape",
+       "x": 8,
+       "z": 14,
+       "plinth": false
+      },
+      {
+       "token": "prism_block",
+       "x": 8,
+       "z": 15,
+       "plinth": false
+      },
+      {
+       "token": "prism_block",
+       "x": 9,
+       "z": 15,
+       "plinth": false
+      },
+      {
+       "token": "prism_block",
+       "x": 9,
+       "z": 16,
+       "plinth": false
+      },
+      {
+       "token": "prism_block",
+       "x": 12,
+       "z": 16,
+       "plinth": false
+      },
+      {
+       "token": "library_rack",
+       "x": 10,
+       "z": 17,
+       "plinth": false
+      },
+      {
+       "token": "torus_radials_rings",
+       "x": 9,
+       "z": 18,
+       "plinth": false
+      },
+      {
+       "token": "capsule_radials_rings",
+       "x": 7,
+       "z": 17,
+       "plinth": false
+      },
+      {
+       "token": "capsule_radials_rings",
+       "x": 7,
+       "z": 16,
+       "plinth": false
+      },
+      {
+       "token": "capsule_radials_rings",
+       "x": 5,
+       "z": 17,
+       "plinth": false
+      },
+      {
+       "token": "capsule_radials_rings",
+       "x": 6,
+       "z": 18,
+       "plinth": false
+      },
+      {
+       "token": "prism_block",
+       "x": 8,
+       "z": 18,
+       "plinth": false
+      },
+      {
+       "token": "prism_block",
+       "x": 9,
+       "z": 17,
+       "plinth": false
+      },
+      {
+       "token": "lshape",
+       "x": 8,
+       "z": 16,
+       "plinth": false
+      },
+      {
+       "token": "prism_block",
+       "x": 8,
+       "z": 19,
+       "plinth": false
+      },
+      {
+       "token": "prism_block",
+       "x": 8,
+       "z": 20,
+       "plinth": false
+      },
+      {
+       "token": "torus_radials_rings",
+       "x": 6,
+       "z": 19,
+       "plinth": false
+      },
+      {
+       "token": "plus",
+       "x": 5,
+       "z": 18,
+       "plinth": false
+      },
+      {
+       "token": "diamonds",
+       "x": 5,
+       "z": 20,
+       "plinth": false
+      },
+      {
+       "token": "plus",
+       "x": 7,
+       "z": 19,
+       "plinth": false
+      }
+     ],
+     "score": {
+      "placed": 40,
+      "of": 40,
+      "order": 1.0,
+      "distortion": 0.42,
+      "blocked": 0,
+      "min_sep": 1.0
+     }
+    },
+    "rigid": {
+     "positions": [
+      {
+       "token": "dark_sphere",
+       "x": 3,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "cube_scene",
+       "x": 4,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "sphere",
+       "x": 5,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "platonic_grabbables",
+       "x": 6,
+       "z": 10,
+       "plinth": true
+      },
+      {
+       "token": "sphere_high",
+       "x": 6,
+       "z": 17,
+       "plinth": true
+      },
+      {
+       "token": "hole_with_cones",
+       "x": 4,
+       "z": 18,
+       "plinth": false
+      },
+      {
+       "token": "righttriangle",
+       "x": 4,
+       "z": 19,
+       "plinth": true
+      },
+      {
+       "token": "sphere_mid",
+       "x": 6,
+       "z": 19,
+       "plinth": false
+      },
+      {
+       "token": "floating_sphere_field",
+       "x": 7,
+       "z": 19,
+       "plinth": false
+      },
+      {
+       "token": "sphere_mid",
+       "x": 8,
+       "z": 19,
+       "plinth": false
+      },
+      {
+       "token": "sphere_high",
+       "x": 8,
+       "z": 17,
+       "plinth": true
+      },
+      {
+       "token": "star_primitive",
+       "x": 10,
+       "z": 17,
+       "plinth": true
+      },
+      {
+       "token": "truncatedtetrahedron",
+       "x": 10,
+       "z": 19,
+       "plinth": true
+      },
+      {
+       "token": "capsule",
+       "x": 10,
+       "z": 21,
+       "plinth": true
+      },
+      {
+       "token": "sphere_low",
+       "x": 7,
+       "z": 21,
+       "plinth": false
+      },
+      {
+       "token": "sphere_low",
+       "x": 6,
+       "z": 21,
+       "plinth": false
+      },
+      {
+       "token": "roughrock",
+       "x": 4,
+       "z": 21,
+       "plinth": true
+      },
+      {
+       "token": "grab_octahedron",
+       "x": 5,
+       "z": 23,
+       "plinth": true
+      },
+      {
+       "token": "snap_octahedron_puzzle",
+       "x": 7,
+       "z": 23,
+       "plinth": false
+      },
+      {
+       "token": "grab_octahedron",
+       "x": 9,
+       "z": 23,
+       "plinth": true
+      },
+      {
+       "token": "lshape",
+       "x": 8,
+       "z": 26,
+       "plinth": false
+      },
+      {
+       "token": "prism_block",
+       "x": 7,
+       "z": 27,
+       "plinth": false
+      },
+      {
+       "token": "prism_block",
+       "x": 9,
+       "z": 28,
+       "plinth": false
+      },
+      {
+       "token": "prism_block",
+       "x": 10,
+       "z": 27,
+       "plinth": false
+      },
+      {
+       "token": "prism_block",
+       "x": 11,
+       "z": 27,
+       "plinth": false
+      },
+      {
+       "token": "library_rack",
+       "x": 11,
+       "z": 28,
+       "plinth": false
+      },
+      {
+       "token": "torus_radials_rings",
+       "x": 11,
+       "z": 29,
+       "plinth": false
+      },
+      {
+       "token": "capsule_radials_rings",
+       "x": 9,
+       "z": 29,
+       "plinth": false
+      },
+      {
+       "token": "capsule_radials_rings",
+       "x": 8,
+       "z": 29,
+       "plinth": false
+      },
+      {
+       "token": "capsule_radials_rings",
+       "x": 6,
+       "z": 29,
+       "plinth": false
+      },
+      {
+       "token": "capsule_radials_rings",
+       "x": 5,
+       "z": 29,
+       "plinth": false
+      },
+      {
+       "token": "prism_block",
+       "x": 5,
+       "z": 27,
+       "plinth": false
+      },
+      {
+       "token": "prism_block",
+       "x": 6,
+       "z": 27,
+       "plinth": false
+      },
+      {
+       "token": "lshape",
+       "x": 6,
+       "z": 26,
+       "plinth": false
+      },
+      {
+       "token": "prism_block",
+       "x": 4,
+       "z": 27,
+       "plinth": false
+      },
+      {
+       "token": "prism_block",
+       "x": 3,
+       "z": 27,
+       "plinth": false
+      },
+      {
+       "token": "torus_radials_rings",
+       "x": 3,
+       "z": 29,
+       "plinth": false
+      },
+      {
+       "token": "plus",
+       "x": 4,
+       "z": 31,
+       "plinth": false
+      },
+      {
+       "token": "diamonds",
+       "x": 11,
+       "z": 31,
+       "plinth": false
+      },
+      {
+       "token": "plus",
+       "x": 10,
+       "z": 31,
+       "plinth": false
+      }
+     ],
+     "score": {
+      "placed": 40,
+      "of": 40,
+      "order": 0.949,
+      "distortion": 0.49,
+      "blocked": 7,
+      "min_sep": 1.0
+     }
+    }
+   }
+  },
+  "primitives|line grid": {
+   "chapter": "primitives",
+   "pearl": "line grid",
+   "map": "Point_Line_Grid",
+   "chain": [
+    "player_trace",
+    "grid_lines",
+    "floating_sphere_field",
+    "grab_sphere_point_snap",
+    "ConeTwistBag",
+    "ConnectedTriangles",
+    "room_grammar"
+   ],
+   "strategies": {
+    "serpentine": {
+     "positions": [
+      {
+       "token": "player_trace",
+       "x": 2,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "grid_lines",
+       "x": 6,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "floating_sphere_field",
+       "x": 10,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "grab_sphere_point_snap",
+       "x": 12,
+       "z": 6,
+       "plinth": true
+      },
+      {
+       "token": "ConeTwistBag",
+       "x": 11,
+       "z": 8,
+       "plinth": false
+      },
+      {
+       "token": "ConnectedTriangles",
+       "x": 7,
+       "z": 8,
+       "plinth": false
+      },
+      {
+       "token": "room_grammar",
+       "x": 3,
+       "z": 8,
+       "plinth": false
+      }
+     ],
+     "score": {
+      "placed": 7,
+      "of": 7,
+      "order": 1.0,
+      "distortion": 0.18,
+      "blocked": 0,
+      "min_sep": 2.0
+     }
+    },
+    "spring": {
+     "positions": [
+      {
+       "token": "player_trace",
+       "x": 2,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "grid_lines",
+       "x": 6,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "floating_sphere_field",
+       "x": 10,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "grab_sphere_point_snap",
+       "x": 12,
+       "z": 6,
+       "plinth": true
+      },
+      {
+       "token": "ConeTwistBag",
+       "x": 11,
+       "z": 8,
+       "plinth": false
+      },
+      {
+       "token": "ConnectedTriangles",
+       "x": 7,
+       "z": 8,
+       "plinth": false
+      },
+      {
+       "token": "room_grammar",
+       "x": 4,
+       "z": 8,
+       "plinth": false
+      }
+     ],
+     "score": {
+      "placed": 7,
+      "of": 7,
+      "order": 1.0,
+      "distortion": 0.07,
+      "blocked": 0,
+      "min_sep": 2.0
+     }
+    },
+    "mesh": {
+     "positions": [
+      {
+       "token": "player_trace",
+       "x": 2,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "grid_lines",
+       "x": 6,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "floating_sphere_field",
+       "x": 10,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "grab_sphere_point_snap",
+       "x": 12,
+       "z": 6,
+       "plinth": true
+      },
+      {
+       "token": "ConeTwistBag",
+       "x": 11,
+       "z": 8,
+       "plinth": false
+      },
+      {
+       "token": "ConnectedTriangles",
+       "x": 7,
+       "z": 8,
+       "plinth": false
+      },
+      {
+       "token": "room_grammar",
+       "x": 4,
+       "z": 8,
+       "plinth": false
+      }
+     ],
+     "score": {
+      "placed": 7,
+      "of": 7,
+      "order": 1.0,
+      "distortion": 0.07,
+      "blocked": 0,
+      "min_sep": 2.0
+     }
+    },
+    "rigid": {
+     "positions": [
+      {
+       "token": "player_trace",
+       "x": 3,
+       "z": 12,
+       "plinth": false
+      },
+      {
+       "token": "grid_lines",
+       "x": 6,
+       "z": 15,
+       "plinth": false
+      },
+      {
+       "token": "floating_sphere_field",
+       "x": 7,
+       "z": 19,
+       "plinth": false
+      },
+      {
+       "token": "grab_sphere_point_snap",
+       "x": 5,
+       "z": 20,
+       "plinth": true
+      },
+      {
+       "token": "ConeTwistBag",
+       "x": 5,
+       "z": 20,
+       "plinth": false
+      },
+      {
+       "token": "ConnectedTriangles",
+       "x": 12,
+       "z": 27,
+       "plinth": false
+      },
+      {
+       "token": "room_grammar",
+       "x": 10,
+       "z": 25,
+       "plinth": false
+      }
+     ],
+     "score": {
+      "placed": 7,
+      "of": 7,
+      "order": 0.833,
+      "distortion": 1.47,
+      "blocked": 1,
+      "min_sep": 0.0
+     }
+    }
+   }
+  },
+  "primitives|point": {
+   "chapter": "primitives",
+   "pearl": "point",
+   "map": "Point_One",
+   "chain": [
+    "folding_past",
+    "lab_room",
+    "origin",
+    "frame_counter_display",
+    "you_are_here",
+    "fontana_puncture",
+    "interactive_point_origin_force",
+    "interactive_point_origin_force",
+    "interactive_point_origin_force",
+    "floating_sphere_field",
+    "CoordinateSystem3M"
+   ],
+   "strategies": {
+    "serpentine": {
+     "positions": [
+      {
+       "token": "folding_past",
+       "x": 2,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "lab_room",
+       "x": 4,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "origin",
+       "x": 5,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "frame_counter_display",
+       "x": 11,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "you_are_here",
+       "x": 10,
+       "z": 8,
+       "plinth": false
+      },
+      {
+       "token": "fontana_puncture",
+       "x": 7,
+       "z": 8,
+       "plinth": false
+      },
+      {
+       "token": "interactive_point_origin_force",
+       "x": 6,
+       "z": 8,
+       "plinth": false
+      },
+      {
+       "token": "interactive_point_origin_force",
+       "x": 4,
+       "z": 8,
+       "plinth": false
+      },
+      {
+       "token": "interactive_point_origin_force",
+       "x": 2,
+       "z": 10,
+       "plinth": false
+      },
+      {
+       "token": "floating_sphere_field",
+       "x": 3,
+       "z": 10,
+       "plinth": false
+      },
+      {
+       "token": "CoordinateSystem3M",
+       "x": 8,
+       "z": 10,
+       "plinth": false
+      }
+     ],
+     "score": {
+      "placed": 11,
+      "of": 11,
+      "order": 1.0,
+      "distortion": 0.7,
+      "blocked": 0,
+      "min_sep": 1.0
+     }
+    },
+    "spring": {
+     "positions": [
+      {
+       "token": "folding_past",
+       "x": 3,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "lab_room",
+       "x": 4,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "origin",
+       "x": 6,
+       "z": 7,
+       "plinth": false
+      },
+      {
+       "token": "frame_counter_display",
+       "x": 10,
+       "z": 5,
+       "plinth": false
+      },
+      {
+       "token": "you_are_here",
+       "x": 10,
+       "z": 9,
+       "plinth": false
+      },
+      {
+       "token": "fontana_puncture",
+       "x": 7,
+       "z": 8,
+       "plinth": false
+      },
+      {
+       "token": "interactive_point_origin_force",
+       "x": 6,
+       "z": 8,
+       "plinth": false
+      },
+      {
+       "token": "interactive_point_origin_force",
+       "x": 4,
+       "z": 8,
+       "plinth": false
+      },
+      {
+       "token": "interactive_point_origin_force",
+       "x": 2,
+       "z": 10,
+       "plinth": false
+      },
+      {
+       "token": "floating_sphere_field",
+       "x": 3,
+       "z": 10,
+       "plinth": false
+      },
+      {
+       "token": "CoordinateSystem3M",
+       "x": 7,
+       "z": 10,
+       "plinth": false
+      }
+     ],
+     "score": {
+      "placed": 11,
+      "of": 11,
+      "order": 0.9,
+      "distortion": 0.39,
+      "blocked": 0,
+      "min_sep": 1.0
+     }
+    },
+    "mesh": {
+     "positions": [
+      {
+       "token": "folding_past",
+       "x": 4,
+       "z": 7,
+       "plinth": false
+      },
+      {
+       "token": "lab_room",
+       "x": 4,
+       "z": 5,
+       "plinth": false
+      },
+      {
+       "token": "origin",
+       "x": 5,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "frame_counter_display",
+       "x": 9,
+       "z": 5,
+       "plinth": false
+      },
+      {
+       "token": "you_are_here",
+       "x": 9,
+       "z": 9,
+       "plinth": false
+      },
+      {
+       "token": "fontana_puncture",
+       "x": 6,
+       "z": 9,
+       "plinth": false
+      },
+      {
+       "token": "interactive_point_origin_force",
+       "x": 4,
+       "z": 8,
+       "plinth": false
+      },
+      {
+       "token": "interactive_point_origin_force",
+       "x": 5,
+       "z": 7,
+       "plinth": false
+      },
+      {
+       "token": "interactive_point_origin_force",
+       "x": 5,
+       "z": 11,
+       "plinth": false
+      },
+      {
+       "token": "floating_sphere_field",
+       "x": 4,
+       "z": 12,
+       "plinth": false
+      },
+      {
+       "token": "CoordinateSystem3M",
+       "x": 7,
+       "z": 10,
+       "plinth": false
+      }
+     ],
+     "score": {
+      "placed": 11,
+      "of": 11,
+      "order": 0.8,
+      "distortion": 0.34,
+      "blocked": 0,
+      "min_sep": 1.0
+     }
+    },
+    "rigid": {
+     "positions": [
+      {
+       "token": "folding_past",
+       "x": 6,
+       "z": 11,
+       "plinth": false
+      },
+      {
+       "token": "lab_room",
+       "x": 4,
+       "z": 11,
+       "plinth": false
+      },
+      {
+       "token": "origin",
+       "x": 4,
+       "z": 11,
+       "plinth": false
+      },
+      {
+       "token": "frame_counter_display",
+       "x": 4,
+       "z": 16,
+       "plinth": false
+      },
+      {
+       "token": "you_are_here",
+       "x": 7,
+       "z": 18,
+       "plinth": false
+      },
+      {
+       "token": "fontana_puncture",
+       "x": 7,
+       "z": 21,
+       "plinth": false
+      },
+      {
+       "token": "interactive_point_origin_force",
+       "x": 6,
+       "z": 22,
+       "plinth": false
+      },
+      {
+       "token": "interactive_point_origin_force",
+       "x": 5,
+       "z": 22,
+       "plinth": false
+      },
+      {
+       "token": "interactive_point_origin_force",
+       "x": 8,
+       "z": 22,
+       "plinth": false
+      },
+      {
+       "token": "floating_sphere_field",
+       "x": 9,
+       "z": 23,
+       "plinth": false
+      },
+      {
+       "token": "CoordinateSystem3M",
+       "x": 4,
+       "z": 27,
+       "plinth": false
+      }
+     ],
+     "score": {
+      "placed": 11,
+      "of": 11,
+      "order": 1.0,
+      "distortion": 0.61,
+      "blocked": 7,
+      "min_sep": 0.0
+     }
+    }
+   }
+  },
+  "primitives|polythedra": {
+   "chapter": "primitives",
+   "pearl": "polythedra",
+   "map": "Primitives_Polythedra",
+   "chain": [
+    "grab_trihedron",
+    "path_game_controller",
+    "path_watchdog",
+    "lab_room",
+    "cube_scene",
+    "becoming_catalyst",
+    "tentacle_placer",
+    "pyramid_edit",
+    "interactive_point_origin_force"
+   ],
+   "strategies": {
+    "serpentine": {
+     "positions": [
+      {
+       "token": "grab_trihedron",
+       "x": 2,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "path_game_controller",
+       "x": 4,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "path_watchdog",
+       "x": 6,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "lab_room",
+       "x": 10,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "cube_scene",
+       "x": 11,
+       "z": 8,
+       "plinth": false
+      },
+      {
+       "token": "becoming_catalyst",
+       "x": 10,
+       "z": 8,
+       "plinth": false
+      },
+      {
+       "token": "tentacle_placer",
+       "x": 9,
+       "z": 8,
+       "plinth": false
+      },
+      {
+       "token": "pyramid_edit",
+       "x": 7,
+       "z": 8,
+       "plinth": false
+      },
+      {
+       "token": "interactive_point_origin_force",
+       "x": 5,
+       "z": 8,
+       "plinth": false
+      }
+     ],
+     "score": {
+      "placed": 9,
+      "of": 9,
+      "order": 1.0,
+      "distortion": 0.5,
+      "blocked": 0,
+      "min_sep": 1.0
+     }
+    },
+    "spring": {
+     "positions": [
+      {
+       "token": "grab_trihedron",
+       "x": 2,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "path_game_controller",
+       "x": 4,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "path_watchdog",
+       "x": 6,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "lab_room",
+       "x": 10,
+       "z": 5,
+       "plinth": false
+      },
+      {
+       "token": "cube_scene",
+       "x": 12,
+       "z": 9,
+       "plinth": false
+      },
+      {
+       "token": "becoming_catalyst",
+       "x": 10,
+       "z": 8,
+       "plinth": false
+      },
+      {
+       "token": "tentacle_placer",
+       "x": 9,
+       "z": 8,
+       "plinth": false
+      },
+      {
+       "token": "pyramid_edit",
+       "x": 7,
+       "z": 8,
+       "plinth": false
+      },
+      {
+       "token": "interactive_point_origin_force",
+       "x": 5,
+       "z": 8,
+       "plinth": false
+      }
+     ],
+     "score": {
+      "placed": 9,
+      "of": 9,
+      "order": 1.0,
+      "distortion": 0.38,
+      "blocked": 0,
+      "min_sep": 1.0
+     }
+    },
+    "mesh": {
+     "positions": [
+      {
+       "token": "grab_trihedron",
+       "x": 5,
+       "z": 5,
+       "plinth": false
+      },
+      {
+       "token": "path_game_controller",
+       "x": 6,
+       "z": 7,
+       "plinth": false
+      },
+      {
+       "token": "path_watchdog",
+       "x": 4,
+       "z": 7,
+       "plinth": false
+      },
+      {
+       "token": "lab_room",
+       "x": 8,
+       "z": 5,
+       "plinth": false
+      },
+      {
+       "token": "cube_scene",
+       "x": 9,
+       "z": 9,
+       "plinth": false
+      },
+      {
+       "token": "becoming_catalyst",
+       "x": 9,
+       "z": 8,
+       "plinth": false
+      },
+      {
+       "token": "tentacle_placer",
+       "x": 8,
+       "z": 8,
+       "plinth": false
+      },
+      {
+       "token": "pyramid_edit",
+       "x": 8,
+       "z": 7,
+       "plinth": false
+      },
+      {
+       "token": "interactive_point_origin_force",
+       "x": 8,
+       "z": 9,
+       "plinth": false
+      }
+     ],
+     "score": {
+      "placed": 9,
+      "of": 9,
+      "order": 0.875,
+      "distortion": 0.38,
+      "blocked": 0,
+      "min_sep": 1.0
+     }
+    },
+    "rigid": {
+     "positions": [
+      {
+       "token": "grab_trihedron",
+       "x": 7,
+       "z": 14,
+       "plinth": false
+      },
+      {
+       "token": "path_game_controller",
+       "x": 9,
+       "z": 14,
+       "plinth": false
+      },
+      {
+       "token": "path_watchdog",
+       "x": 9,
+       "z": 15,
+       "plinth": false
+      },
+      {
+       "token": "lab_room",
+       "x": 3,
+       "z": 16,
+       "plinth": false
+      },
+      {
+       "token": "cube_scene",
+       "x": 7,
+       "z": 22,
+       "plinth": false
+      },
+      {
+       "token": "becoming_catalyst",
+       "x": 7,
+       "z": 22,
+       "plinth": false
+      },
+      {
+       "token": "tentacle_placer",
+       "x": 7,
+       "z": 23,
+       "plinth": false
+      },
+      {
+       "token": "pyramid_edit",
+       "x": 7,
+       "z": 23,
+       "plinth": false
+      },
+      {
+       "token": "interactive_point_origin_force",
+       "x": 9,
+       "z": 22,
+       "plinth": false
+      }
+     ],
+     "score": {
+      "placed": 9,
+      "of": 9,
+      "order": 1.0,
+      "distortion": 1.16,
+      "blocked": 2,
+      "min_sep": 0.0
+     }
+    }
+   }
+  },
+  "primitives|portals": {
+   "chapter": "primitives",
+   "pearl": "portals",
+   "map": "Primitives_Portals",
+   "chain": [
+    "dark_sphere",
+    "combine_portals",
+    "achilles_tortoise",
+    "capsule",
+    "floating_sphere_field"
+   ],
+   "strategies": {
+    "serpentine": {
+     "positions": [
+      {
+       "token": "dark_sphere",
+       "x": 2,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "combine_portals",
+       "x": 6,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "achilles_tortoise",
+       "x": 8,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "capsule",
+       "x": 11,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "floating_sphere_field",
+       "x": 10,
+       "z": 8,
+       "plinth": false
+      }
+     ],
+     "score": {
+      "placed": 5,
+      "of": 5,
+      "order": 1.0,
+      "distortion": 0.5,
+      "blocked": 0,
+      "min_sep": 2.0
+     }
+    },
+    "spring": {
+     "positions": [
+      {
+       "token": "dark_sphere",
+       "x": 2,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "combine_portals",
+       "x": 6,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "achilles_tortoise",
+       "x": 8,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "capsule",
+       "x": 11,
+       "z": 5,
+       "plinth": false
+      },
+      {
+       "token": "floating_sphere_field",
+       "x": 10,
+       "z": 9,
+       "plinth": false
+      }
+     ],
+     "score": {
+      "placed": 5,
+      "of": 5,
+      "order": 1.0,
+      "distortion": 0.13,
+      "blocked": 0,
+      "min_sep": 2.0
+     }
+    },
+    "mesh": {
+     "positions": [
+      {
+       "token": "dark_sphere",
+       "x": 3,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "combine_portals",
+       "x": 7,
+       "z": 5,
+       "plinth": false
+      },
+      {
+       "token": "achilles_tortoise",
+       "x": 8,
+       "z": 7,
+       "plinth": false
+      },
+      {
+       "token": "capsule",
+       "x": 10,
+       "z": 5,
+       "plinth": false
+      },
+      {
+       "token": "floating_sphere_field",
+       "x": 10,
+       "z": 9,
+       "plinth": false
+      }
+     ],
+     "score": {
+      "placed": 5,
+      "of": 5,
+      "order": 0.75,
+      "distortion": 0.07,
+      "blocked": 0,
+      "min_sep": 2.24
+     }
+    },
+    "rigid": {
+     "positions": [
+      {
+       "token": "dark_sphere",
+       "x": 4,
+       "z": 10,
+       "plinth": false
+      },
+      {
+       "token": "combine_portals",
+       "x": 7,
+       "z": 14,
+       "plinth": false
+      },
+      {
+       "token": "achilles_tortoise",
+       "x": 9,
+       "z": 15,
+       "plinth": false
+      },
+      {
+       "token": "capsule",
+       "x": 9,
+       "z": 12,
+       "plinth": false
+      },
+      {
+       "token": "floating_sphere_field",
+       "x": 7,
+       "z": 27,
+       "plinth": false
+      }
+     ],
+     "score": {
+      "placed": 5,
+      "of": 5,
+      "order": 0.75,
+      "distortion": 3.03,
+      "blocked": 1,
+      "min_sep": 2.24
+     }
+    }
+   }
+  },
+  "symmetry|motif": {
+   "chapter": "symmetry",
+   "pearl": "motif",
+   "map": "Symmetry_Motif",
+   "chain": [
+    "pattern_tile_4x4",
+    "pattern_tile_cube",
+    "science_screen",
+    "tile_meander_floor"
+   ],
+   "strategies": {
+    "serpentine": {
+     "positions": [
+      {
+       "token": "pattern_tile_4x4",
+       "x": 2,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "pattern_tile_cube",
+       "x": 6,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "science_screen",
+       "x": 8,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "tile_meander_floor",
+       "x": 8,
+       "z": 8,
+       "plinth": false
+      }
+     ],
+     "score": {
+      "placed": 4,
+      "of": 4,
+      "order": 1.0,
+      "distortion": 0.88,
+      "blocked": 0,
+      "min_sep": 2.0
+     }
+    },
+    "spring": {
+     "positions": [
+      {
+       "token": "pattern_tile_4x4",
+       "x": 2,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "pattern_tile_cube",
+       "x": 6,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "science_screen",
+       "x": 8,
+       "z": 5,
+       "plinth": false
+      },
+      {
+       "token": "tile_meander_floor",
+       "x": 8,
+       "z": 9,
+       "plinth": false
+      }
+     ],
+     "score": {
+      "placed": 4,
+      "of": 4,
+      "order": 1.0,
+      "distortion": 0.13,
+      "blocked": 0,
+      "min_sep": 2.24
+     }
+    },
+    "mesh": {
+     "positions": [
+      {
+       "token": "pattern_tile_4x4",
+       "x": 2,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "pattern_tile_cube",
+       "x": 6,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "science_screen",
+       "x": 8,
+       "z": 5,
+       "plinth": false
+      },
+      {
+       "token": "tile_meander_floor",
+       "x": 8,
+       "z": 9,
+       "plinth": false
+      }
+     ],
+     "score": {
+      "placed": 4,
+      "of": 4,
+      "order": 1.0,
+      "distortion": 0.13,
+      "blocked": 0,
+      "min_sep": 2.24
+     }
+    },
+    "rigid": {
+     "positions": [
+      {
+       "token": "pattern_tile_4x4",
+       "x": 4,
+       "z": 19,
+       "plinth": false
+      },
+      {
+       "token": "pattern_tile_cube",
+       "x": 7,
+       "z": 21,
+       "plinth": false
+      },
+      {
+       "token": "science_screen",
+       "x": 9,
+       "z": 22,
+       "plinth": false
+      },
+      {
+       "token": "tile_meander_floor",
+       "x": 3,
+       "z": 23,
+       "plinth": false
+      }
+     ],
+     "score": {
+      "placed": 4,
+      "of": 4,
+      "order": 1.0,
+      "distortion": 0.69,
+      "blocked": 0,
+      "min_sep": 2.24
+     }
+    }
+   }
+  },
+  "transformation|trans introduction": {
+   "chapter": "transformation",
+   "pearl": "trans introduction",
+   "map": "Trans_Introduction",
+   "chain": [
+    "invariants_demo",
+    "matrix_4x4_viewer",
+    "homogeneous_coordinates",
+    "balance_puzzle",
+    "transform_composition",
+    "dark_sphere",
+    "rotation_gimbal"
+   ],
+   "strategies": {
+    "serpentine": {
+     "positions": [
+      {
+       "token": "invariants_demo",
+       "x": 2,
+       "z": 6,
+       "plinth": true
+      },
+      {
+       "token": "matrix_4x4_viewer",
+       "x": 6,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "homogeneous_coordinates",
+       "x": 12,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "balance_puzzle",
+       "x": 8,
+       "z": 8,
+       "plinth": false
+      },
+      {
+       "token": "transform_composition",
+       "x": 3,
+       "z": 8,
+       "plinth": false
+      },
+      {
+       "token": "dark_sphere",
+       "x": 3,
+       "z": 10,
+       "plinth": false
+      },
+      {
+       "token": "rotation_gimbal",
+       "x": 7,
+       "z": 10,
+       "plinth": false
+      }
+     ],
+     "score": {
+      "placed": 7,
+      "of": 7,
+      "order": 1.0,
+      "distortion": 1.04,
+      "blocked": 0,
+      "min_sep": 2.0
+     }
+    },
+    "spring": {
+     "positions": [
+      {
+       "token": "invariants_demo",
+       "x": 3,
+       "z": 6,
+       "plinth": true
+      },
+      {
+       "token": "matrix_4x4_viewer",
+       "x": 7,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "homogeneous_coordinates",
+       "x": 11,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "balance_puzzle",
+       "x": 7,
+       "z": 8,
+       "plinth": false
+      },
+      {
+       "token": "transform_composition",
+       "x": 4,
+       "z": 7,
+       "plinth": false
+      },
+      {
+       "token": "dark_sphere",
+       "x": 3,
+       "z": 11,
+       "plinth": false
+      },
+      {
+       "token": "rotation_gimbal",
+       "x": 7,
+       "z": 10,
+       "plinth": false
+      }
+     ],
+     "score": {
+      "placed": 7,
+      "of": 7,
+      "order": 1.0,
+      "distortion": 0.39,
+      "blocked": 0,
+      "min_sep": 1.41
+     }
+    },
+    "mesh": {
+     "positions": [
+      {
+       "token": "invariants_demo",
+       "x": 3,
+       "z": 6,
+       "plinth": true
+      },
+      {
+       "token": "matrix_4x4_viewer",
+       "x": 7,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "homogeneous_coordinates",
+       "x": 11,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "balance_puzzle",
+       "x": 7,
+       "z": 8,
+       "plinth": false
+      },
+      {
+       "token": "transform_composition",
+       "x": 4,
+       "z": 7,
+       "plinth": false
+      },
+      {
+       "token": "dark_sphere",
+       "x": 3,
+       "z": 11,
+       "plinth": false
+      },
+      {
+       "token": "rotation_gimbal",
+       "x": 7,
+       "z": 10,
+       "plinth": false
+      }
+     ],
+     "score": {
+      "placed": 7,
+      "of": 7,
+      "order": 1.0,
+      "distortion": 0.39,
+      "blocked": 0,
+      "min_sep": 1.41
+     }
+    },
+    "rigid": {
+     "positions": [
+      {
+       "token": "invariants_demo",
+       "x": 3,
+       "z": 11,
+       "plinth": true
+      },
+      {
+       "token": "matrix_4x4_viewer",
+       "x": 8,
+       "z": 17,
+       "plinth": false
+      },
+      {
+       "token": "homogeneous_coordinates",
+       "x": 5,
+       "z": 19,
+       "plinth": false
+      },
+      {
+       "token": "balance_puzzle",
+       "x": 8,
+       "z": 21,
+       "plinth": false
+      },
+      {
+       "token": "transform_composition",
+       "x": 5,
+       "z": 23,
+       "plinth": false
+      },
+      {
+       "token": "dark_sphere",
+       "x": 8,
+       "z": 25,
+       "plinth": false
+      },
+      {
+       "token": "rotation_gimbal",
+       "x": 11,
+       "z": 19,
+       "plinth": false
+      }
+     ],
+     "score": {
+      "placed": 7,
+      "of": 7,
+      "order": 0.833,
+      "distortion": 1.09,
+      "blocked": 0,
+      "min_sep": 3.61
+     }
+    }
+   }
+  },
+  "transformation|trans rotationspectacle": {
+   "chapter": "transformation",
+   "pearl": "trans rotationspectacle",
+   "map": "Trans_RotationSpectacle",
+   "chain": [
+    "righttriangle",
+    "boolean_tunnel",
+    "dark_sphere",
+    "pick_up_cube",
+    "carousel_cake"
+   ],
+   "strategies": {
+    "serpentine": {
+     "positions": [
+      {
+       "token": "righttriangle",
+       "x": 2,
+       "z": 6,
+       "plinth": true
+      },
+      {
+       "token": "boolean_tunnel",
+       "x": 5,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "dark_sphere",
+       "x": 8,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "pick_up_cube",
+       "x": 11,
+       "z": 8,
+       "plinth": false
+      },
+      {
+       "token": "carousel_cake",
+       "x": 7,
+       "z": 8,
+       "plinth": false
+      }
+     ],
+     "score": {
+      "placed": 5,
+      "of": 5,
+      "order": 1.0,
+      "distortion": 0.58,
+      "blocked": 0,
+      "min_sep": 2.24
+     }
+    },
+    "spring": {
+     "positions": [
+      {
+       "token": "righttriangle",
+       "x": 2,
+       "z": 6,
+       "plinth": true
+      },
+      {
+       "token": "boolean_tunnel",
+       "x": 5,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "dark_sphere",
+       "x": 8,
+       "z": 5,
+       "plinth": false
+      },
+      {
+       "token": "pick_up_cube",
+       "x": 11,
+       "z": 9,
+       "plinth": false
+      },
+      {
+       "token": "carousel_cake",
+       "x": 8,
+       "z": 8,
+       "plinth": false
+      }
+     ],
+     "score": {
+      "placed": 5,
+      "of": 5,
+      "order": 1.0,
+      "distortion": 0.56,
+      "blocked": 0,
+      "min_sep": 3.0
+     }
+    },
+    "mesh": {
+     "positions": [
+      {
+       "token": "righttriangle",
+       "x": 2,
+       "z": 6,
+       "plinth": true
+      },
+      {
+       "token": "boolean_tunnel",
+       "x": 5,
+       "z": 6,
+       "plinth": false
+      },
+      {
+       "token": "dark_sphere",
+       "x": 8,
+       "z": 5,
+       "plinth": false
+      },
+      {
+       "token": "pick_up_cube",
+       "x": 11,
+       "z": 9,
+       "plinth": false
+      },
+      {
+       "token": "carousel_cake",
+       "x": 8,
+       "z": 8,
+       "plinth": false
+      }
+     ],
+     "score": {
+      "placed": 5,
+      "of": 5,
+      "order": 1.0,
+      "distortion": 0.56,
+      "blocked": 0,
+      "min_sep": 3.0
+     }
+    },
+    "rigid": {
+     "positions": [
+      {
+       "token": "righttriangle",
+       "x": 5,
+       "z": 5,
+       "plinth": true
+      },
+      {
+       "token": "boolean_tunnel",
+       "x": 8,
+       "z": 5,
+       "plinth": false
+      },
+      {
+       "token": "dark_sphere",
+       "x": 8,
+       "z": 5,
+       "plinth": false
+      },
+      {
+       "token": "pick_up_cube",
+       "x": 7,
+       "z": 32,
+       "plinth": false
+      },
+      {
+       "token": "carousel_cake",
+       "x": 8,
+       "z": 32,
+       "plinth": false
+      }
+     ],
+     "score": {
+      "placed": 5,
+      "of": 5,
+      "order": 1.0,
+      "distortion": 6.85,
+      "blocked": 0,
+      "min_sep": 0.0
+     }
+    }
+   }
+  }
+ }
+}
