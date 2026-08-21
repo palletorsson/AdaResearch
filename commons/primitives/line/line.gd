@@ -448,10 +448,12 @@ func _process_resistance(distance: float):
 		_trigger_resistance_haptics(intensity)
 		
 		# 4. Label Glitch (Optional - make text shake?)
-		if length_label and randf() < intensity * 0.2:
-			length_label.modulate = Color.RED
-		else:
-			length_label.modulate = Color(1.0, 1.0, 1.0, 0.8)
+		# The null test used to live INSIDE the condition, where it guarded only the
+		# true branch: a null label failed `length_label and ...` and fell straight
+		# into the else, which assigned to it regardless. Guard the pair, then choose.
+		if length_label:
+			length_label.modulate = Color.RED if randf() < intensity * 0.2 \
+				else Color(1.0, 1.0, 1.0, 0.8)
 			
 	else:
 		# Reset effects
