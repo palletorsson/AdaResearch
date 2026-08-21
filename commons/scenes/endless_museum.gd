@@ -637,6 +637,7 @@ var _plan_mtime: int = 0
 var _boot_t0: int = 0
 var _boot_ms: Dictionary = {}
 var _boot_first_frame: bool = false
+var _built_res_writable: bool = true   # false once the pak refuses — writes go to user://
 # ── THE WAKE-UP RAMP (2026-08-20, Palle: "loading a grid map like Point_One
 # is shorter") ── Point_One pays the same engine and staging; what it skips
 # is a first frame with ~117 bodies' render pipelines to compile at once.
@@ -3925,7 +3926,15 @@ func _flush_built_files(seg_no: int) -> void:
 	#   python tools/em_built.py --diff ada_run/em_built_desktop.json ada_run/em_built_vr.json
 	# answers "did VR build the same museum?" from the two files alone.
 	var wrote: int = 0
-	for path in [BUILT_PATH, BUILT_PATH.replace(".json", "_%s.json" % _mode_label)]:
+	# ON THE QUEST res://ada_run is INSIDE THE PAK — every write fails with
+	# error 2, three retries and a printed complaint per segment, and the
+	# headset keeps no as-built at all. After the first refusal the writes go
+	# to user:// instead, which adb can pull from the desk:
+	#   adb pull /sdcard/Android/data/<pkg>/files/em_built_vr.json
+	var paths: Array = [BUILT_PATH, BUILT_PATH.replace(".json", "_%s.json" % _mode_label)]
+	if not _built_res_writable:
+		paths = [("user://" + BUILT_PATH.get_file()), "user://" + BUILT_PATH.get_file().replace(".json", "_%s.json" % _mode_label)]
+	for path in paths:
 		# another museum (a second agent's gate, a desktop walk beside a headset
 		# run) can hold the same file for the millisecond we want it: error 12,
 		# a sharing violation. Three tries, 30 ms apart, before giving up loudly.
@@ -3941,6 +3950,11 @@ func _flush_built_files(seg_no: int) -> void:
 			wrote += 1
 		else:
 			print("[em-built] cannot open %s for write: error %d (another writer holds it)" % [path, FileAccess.get_open_error()])
+	if wrote == 0 and _built_res_writable and String(paths[0]).begins_with("res://"):
+		_built_res_writable = false
+		print("[em-built] the pak refuses writes — the as-built moves to user:// (adb-pullable) from here on")
+		_flush_built_files(seg_no)
+		return
 	print("[em-built] seg %d (%s) written: %d segment(s), %d bytes, %d file(s)" % [seg_no, _mode_label, _built.size(), txt.length(), wrote])
 
 
@@ -4849,6 +4863,7 @@ func _deal_plan_wall_runs(seg: Node3D, entry: Dictionary,
 	var planned_refused: int = 0
 	var assembly_refused: int = 0
 	var value_refused: int = 0
+	var remembered: int = 0
 	var queued_runs: int = 0
 	var apron: float = float(entry.get("apron", 0.0))
 	# THE PATIENT LINEAGE (2026-08-20). Measured: the wall runs, not the floor
@@ -4889,8 +4904,15 @@ func _deal_plan_wall_runs(seg: Node3D, entry: Dictionary,
 			assembly_refused += 1
 			continue
 		var run_index: int = (entry.get("wall_runs", []) as Array).find(run_v)
+		_wallrun_verdicts_load()
+		var sig := _wallrun_sig(run, lookup, axis)
+		if _wallrun_verdicts.has(sig):
+			remembered += 1
+			assembly_refused += 1
+			continue
 		var item: Dictionary = _wallrun_item(seg, entry, run, run_index, apron,
 			scene_path, lookup, axis, normal)
+		item["sig"] = sig
 		if defer_live:
 			_stamp_queue.append(item)
 			queued_runs += 1
@@ -4905,6 +4927,8 @@ func _deal_plan_wall_runs(seg: Node3D, entry: Dictionary,
 			assembly_refused += 1
 			value_refused += int(res.get("expected", 0)) - int(res.get("built", 0))
 	var refused := planned_refused + assembly_refused
+	if remembered > 0:
+		print("[em-dna-wall] %d run(s) skipped by remembered rollback verdicts (user://em_wallrun_verdicts.json)" % remembered)
 	if queued_runs > 0:
 		print("[em-dna-wall] %d run(s) queued for the patient stamp; %d plan refusals" % [
 			queued_runs, planned_refused])
@@ -4914,6 +4938,36 @@ func _deal_plan_wall_runs(seg: Node3D, entry: Dictionary,
 	return {"runs": assembled_runs, "variants": variants, "refused": refused,
 		"planned_refused": planned_refused, "assembly_refused": assembly_refused,
 		"value_refused": value_refused, "queued": queued_runs}
+
+
+# ── THE WALLRUN VERDICT MEMORY (2026-08-21) ─────────────────────────────────
+# modulor_man_demo.measure built five 37-point figures and rolled three back
+# EVERY BOOT, twice per walk — a deterministic verdict re-litigated forever.
+# A rolled-back run's signature (anchor.axis + values + rects + drops +
+# offsets) is remembered in user://em_wallrun_verdicts.json; the next boot
+# skips the build outright. A plan edit changes the signature, so a repaired
+# run is re-tried; an assembled run erases its old conviction.
+var _wallrun_verdicts: Dictionary = {}
+var _wallrun_verdicts_loaded: bool = false
+
+func _wallrun_sig(run: Dictionary, lookup: String, axis: String) -> String:
+	return ("%s.%s|%s|%s|%s|%s" % [lookup, axis, str(run.get("values", [])),
+		str(run.get("rects_uv", [])), str(run.get("drop", [])),
+		str(run.get("offsets", []))]).md5_text()
+
+func _wallrun_verdicts_load() -> void:
+	if _wallrun_verdicts_loaded:
+		return
+	_wallrun_verdicts_loaded = true
+	var v: Variant = JSON.parse_string(FileAccess.get_file_as_string("user://em_wallrun_verdicts.json"))
+	if v is Dictionary:
+		_wallrun_verdicts = v
+
+func _wallrun_verdicts_save() -> void:
+	var f := FileAccess.open("user://em_wallrun_verdicts.json", FileAccess.WRITE)
+	if f != null:
+		f.store_string(JSON.stringify(_wallrun_verdicts, " "))
+		f.close()
 
 
 ## One wall run as a drainable work item: the plan's decision plus a cursor.
@@ -5041,6 +5095,8 @@ func _wallrun_commit(item: Dictionary) -> void:
 					str(committed_node.get_meta("em_dna_value", ""))],
 			})
 		item["result"] = {"assembled": true, "built": built.size(), "expected": values.size()}
+		if item.has("sig") and _wallrun_verdicts.erase(String(item["sig"])):
+			_wallrun_verdicts_save()   # a repaired run clears its old conviction
 	else:
 		for built_v in built:
 			var rollback_node: Node3D = built_v as Node3D
@@ -5050,6 +5106,11 @@ func _wallrun_commit(item: Dictionary) -> void:
 		print("[em-dna-wall] %s.%s rolled back (%d/%d built): %s" % [
 			lookup, axis, built.size(), values.size(), str(item["failures"])])
 		item["result"] = {"assembled": false, "built": 0, "expected": values.size()}
+		if item.has("sig"):
+			_wallrun_verdicts[String(item["sig"])] = {"run": "%s.%s" % [lookup, axis],
+				"at": Time.get_datetime_string_from_system(false, true),
+				"why": str(item["failures"]).left(160)}
+			_wallrun_verdicts_save()
 
 
 ## Build one configured copy and seat its BACK face on the negotiated wall
@@ -6658,6 +6719,8 @@ func _process(_delta: float) -> void:
 		# its own file too — a windowed run's stdout is swallowed on Windows,
 		# and em_built's copy is written before this stamp exists
 		var bf := FileAccess.open("res://ada_run/em_boot_last.json", FileAccess.WRITE)
+		if bf == null:
+			bf = FileAccess.open("user://em_boot_last.json", FileAccess.WRITE)   # the pak refuses; adb pulls this one
 		if bf != null:
 			bf.store_string(JSON.stringify({"at": Time.get_datetime_string_from_system(false, true),
 				"tier": _env_tier, "vr": _vr, "boot_ms": _boot_ms}, " "))
