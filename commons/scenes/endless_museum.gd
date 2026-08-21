@@ -272,9 +272,9 @@ var _layout: Dictionary = {}
 var _mode_label: String = "desktop"   # what the as-built plan says it was built as
 var GATE_REACH_M := 1.2            # eye or controller this close to the glass = a hand
 var GATE_PATIENCE := 6.0           # seconds at a sealed door before it opens itself —
-                                   # Palle served the full 20 on the Quest (bare hands put
-                                   # nothing in the scanner's groups); a beat of ritual,
-                                   # never a jail (em_layout gate.patience_s)
+								   # Palle served the full 20 on the Quest (bare hands put
+								   # nothing in the scanner's groups); a beat of ritual,
+								   # never a jail (em_layout gate.patience_s)
 var _gate_wait: float = 0.0
 var _vr_wait: float = 0.0
 var _diag_t: float = 0.0
@@ -647,6 +647,14 @@ var _boot_first_frame: bool = false
 const WAKE_R0 := 8.0
 var WAKE_S := 3.0
 var _wake_until_ms: int = 0
+# ── THE EMPTY-MUSEUM EXPERIMENT (2026-08-20, Palle: "if we load with zero
+# artifacts, will that take away the load time?") ── em_layout stream.bodies
+# = 0 boots the ARCHITECTURE ALONE: no interior bodies, no wall showings, no
+# props, no DNA runs. The boot clock then says exactly which seconds the
+# artifacts own (prediction: engine/pak/staging/plan hold still; segment
+# build and the first-frame pipeline gap fall). A diagnostic, not a mode —
+# the default is 1 and every gate runs with it.
+var _bodies_on: bool = true
 var _follow_t: float = 0.0
 var _follow_pending: bool = false
 var _follow_seen_ms: int = 0
@@ -1015,6 +1023,9 @@ func _load_modules() -> void:
 	INSTANTIATE_AHEAD_M = _L("stream", "instantiate_ahead_m", INSTANTIATE_AHEAD_M)
 	STAMP_BUDGET_MS = _L("stream", "stamp_budget_ms", STAMP_BUDGET_MS)
 	WAKE_S = _L("stream", "wake_s", WAKE_S)
+	_bodies_on = _L("stream", "bodies", 1.0) > 0.5
+	if not _bodies_on:
+		print("[endless_museum] STREAM.BODIES=0 — the empty-museum experiment: architecture only, every artifact skipped")
 	GATE_PATIENCE = _L("gate", "patience_s", GATE_PATIENCE)
 	GATE_REACH_M = _L("gate", "reach_m", GATE_REACH_M)
 	GATE_PATIENCE = _L("gate", "patience_s", GATE_PATIENCE)
@@ -3076,7 +3087,7 @@ func _build_segment() -> void:
 	#    coffered ceiling with open daylight slots, floor seams. Adds NO
 	#    collision and never touches _walk_cells, so the autopilot's BFS plan is
 	#    bit-identical with and without it.
-	if _mod_has(_mod_detail, "dress_segment"):
+	if _mod_has(_mod_detail, "dress_segment") and _bodies_on:
 		# THE SEVENTH ARGUMENT IS THE WALL FURNITURE WIRE. em_budget has always
 		# licensed hung showings per building (Soane 80, a bare-wall building 0)
 		# and dress_segment had no parameter to receive the licence, so 60-70% of
@@ -4808,6 +4819,9 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 ## tile_cell conversion above rather than a second placement algorithm.
 func _deal_plan_wall_runs(seg: Node3D, entry: Dictionary,
 		scene_of: Dictionary) -> Dictionary:
+	if not _bodies_on:
+		return {"runs": 0, "variants": 0, "refused": 0, "planned_refused": 0,
+			"assembly_refused": 0, "value_refused": 0}
 	var assembled_runs: int = 0
 	var variants: int = 0
 	var planned_refused: int = 0
@@ -5662,6 +5676,9 @@ func _stamp_inner(seg: Node3D, scene_path: String, lookup: String, cell: Diction
 	if scene_path == "" or cell.is_empty():
 		_stamp_refusal = "no scene path or cell"
 		return false
+	if not _bodies_on:
+		_stamp_refusal = "stream.bodies=0 (the empty-museum experiment)"
+		return false
 	# ── THE PATIENT STAMP (2026-08-20) ──────────────────────────────────────
 	# Measured (probe_em_firstroom): one hall instantiated ~4 s of procedural
 	# bodies in a single frame — matrix_4x4_viewer costs 0.6 s and 12 MB EACH
@@ -6486,6 +6503,8 @@ func _dress_props(seg: Node3D, tile: Array, w: int, h: int, zbase: int,
 	# the liveness oracle. A token absent from `_live` is dropped inside the
 	# module, so nothing unresolvable can reach the stamp loop below.
 	allowance["live"] = _live
+	if not _bodies_on:
+		return
 	var rv: Variant = _mod_props.call("dress", seg, tile, w, h, allowance, _detail_mats)
 	if not (rv is Array):
 		return
