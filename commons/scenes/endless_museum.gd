@@ -337,6 +337,7 @@ var _first_key: String = ""       # --em-first=<key> rotates the dealing order
 var _first_chapter: String = ""   # --em-chapter=<seq> (or ada_run/em_control.json first_chapter): deal this CHAPTER first
 var _grid_pack: bool = false      # em_control grid_pack: halls are TRANSPLANTED from their grid maps — no dealer, no guests
 var _pack_report: Dictionary = {} # chapter|pearl -> the transplant's ledger (grid -> target -> final per body), for /transplant
+var _hand_path: String = "res://ada_run/necklace_hand.json"   # a var: probes inject a trial hand
 # menu launches have no flags; this file speaks for them. A VAR, not a const:
 # a probe injects its own path here (inst.set) so a test run never writes the
 # file the user's LIVE session is reading — one morning of shared-file toggles
@@ -3129,7 +3130,7 @@ func _build_segment() -> void:
 	var hand_pre := _necklace_hand(next_seq, String(peek.get("pearl", "")))
 	if not hand_pre.is_empty():
 		var opened := 0
-		for b_v in (hand_pre.get("beads", []) as Array):
+		for b_v in _stamped_beads(hand_pre):
 			var b: Dictionary = b_v
 			var fpc: int = maxi(1, int(ceil(float(b.get("fp", 1.0)))))
 			var cnt: int = maxi(1, int(b.get("count", 1)))
@@ -4840,8 +4841,18 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 	# builds FROM those beads — the bench IS the floor plan. Everything else
 	# about the transplant (no dealer, no guests, plinths, the walls) holds.
 	var hand_hall := _necklace_hand(chapter, String(entry.get("pearl", "")))
-	if not hand_hall.is_empty():
+	if bool(hand_hall.get("stamp", false)):
 		return _stamp_necklace(seg, zbase, chapter, entry, hand_hall, doc_v, w, h)
+	# bead-grain stamps: each stamped bead CLAIMS one occurrence of its token
+	# in the map — that body builds at the bead's position instead of the
+	# grid's; everything unclaimed transplants as usual. An added stamped
+	# bead (no map occurrence left to claim) stamps at the end.
+	var bead_claims: Dictionary = {}
+	for sb_v in _stamped_beads(hand_hall):
+		var sb: Dictionary = sb_v
+		if not bead_claims.has(sb.get("token", "")):
+			bead_claims[sb.get("token", "")] = []
+		(bead_claims[sb.get("token", "")] as Array).append(sb)
 	var layers: Dictionary = (doc_v as Dictionary).get("layers", {})
 	var structure: Array = layers.get("structure", [])
 	var inter: Array = layers.get("interactables", [])
@@ -4909,6 +4920,13 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 		var scene := String((lv as Dictionary).get("scene", ""))
 		var base_x: int = clampi(int(b["gx"]) + offx, bx0, bx1)
 		var base_z: int = clampi(int(b["gz"]) + offz, bz0, bz1)
+		var claimed_plinth := bool(b["plinth"])
+		if bead_claims.has(b["token"]) and not (bead_claims[b["token"]] as Array).is_empty():
+			var cb: Dictionary = (bead_claims[b["token"]] as Array).pop_front()
+			base_x = clampi(int(floor(float(cb.get("x", 0.0)))), bx0, bx1)
+			base_z = clampi(int(floor(float(cb.get("z", 0.0)))), bz0, bz1)
+			claimed_plinth = bool(cb.get("plinth", claimed_plinth))
+			print("[em-stamp]   %s claimed by a stamped bead -> [%d,%d]" % [b["token"], base_x, base_z])
 		var cfg := {}
 		if String(b["att"]) != "":
 			var kv := String(b["att"]).split(":", true, 1)
@@ -4922,7 +4940,7 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 				if base_x + d.x < bx0 or base_x + d.x > bx1 or base_z + d.y < bz0 or base_z + d.y > bz1:
 					continue   # never past the walls — _stamp would not stop us
 				var cell := {"x": base_x + d.x, "y": base_z + d.y, "rank": 2, "top": 0.0}
-				if bool(b["plinth"]):
+				if claimed_plinth:
 					cell["support_m"] = 1.0
 				if _stamp(seg, scene, String(b["token"]), cell, zbase, 1, {}, false, 0.0, float(b["rot"]), cfg):
 					placed += 1
@@ -4947,6 +4965,22 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 				"why": first_refusal, "plinth": bool(b["plinth"])})
 			print("[em-pack]   %s found no floor within 6 rings of [%d,%d] — %s" % [
 				b["token"], base_x, base_z, first_refusal])
+	# stamped beads that claimed no map body (added by hand on the bench)
+	for tok_v in bead_claims.keys():
+		for cb_v in (bead_claims[tok_v] as Array):
+			var cb2: Dictionary = cb_v
+			var lv2: Variant = _live.get(String(tok_v))
+			if not (lv2 is Dictionary):
+				continue
+			var cell2 := {"x": clampi(int(floor(float(cb2.get("x", 0.0)))), bx0, bx1),
+				"y": clampi(int(floor(float(cb2.get("z", 0.0)))), bz0, bz1), "rank": 2, "top": 0.0}
+			if bool(cb2.get("plinth", false)):
+				cell2["support_m"] = 1.0
+			if _stamp(seg, String((lv2 as Dictionary).get("scene", "")), String(tok_v), cell2, zbase, 1, {}, false):
+				placed += 1
+				ledger.append({"token": String(tok_v), "grid": null,
+					"target": [int(cell2["x"]), int(cell2["y"])], "final": [int(cell2["x"]), int(cell2["y"])],
+					"rings": 0, "why": "added by hand, stamped", "plinth": bool(cb2.get("plinth", false))})
 	print("[em-pack] %s · %s <- %s: %d verbatim + %d slid of %d, %d left behind, %d plinth(s)" % [
 		chapter, entry.get("pearl", ""), map_name, placed - slid, slid, bodies.size(), left, plinth_n])
 	# THE LEDGER (2026-08-21, Palle: "a page with the grid of each step") —
@@ -4982,17 +5016,41 @@ func _pack_report_load() -> void:
 
 
 ## The bench's saved necklace for this hall, IF it was force-stamped there.
+## The bench's word for this hall. Two grains of stamping (Palle: "force
+## stamp mean force stamp for selected artifact at that position"):
+##   hall  `stamp: true` on the hall — the WHOLE necklace is the floor plan
+##   bead  `stamp: true` on a bead — THAT artifact builds at that position,
+##         the rest of the hall transplants from the map as usual
 func _necklace_hand(chapter: String, pearl: String) -> Dictionary:
-	if not FileAccess.file_exists("res://ada_run/necklace_hand.json"):
+	if not FileAccess.file_exists(_hand_path):
 		return {}
-	var doc_v: Variant = JSON.parse_string(FileAccess.get_file_as_string("res://ada_run/necklace_hand.json"))
+	var doc_v: Variant = JSON.parse_string(FileAccess.get_file_as_string(_hand_path))
 	if not (doc_v is Dictionary):
 		return {}
 	var hh: Variant = ((doc_v as Dictionary).get("halls", {}) as Dictionary).get("%s|%s" % [chapter, pearl])
-	if hh is Dictionary and bool((hh as Dictionary).get("stamp", false)) \
-			and not ((hh as Dictionary).get("beads", []) as Array).is_empty():
+	if not (hh is Dictionary):
+		return {}
+	var beads: Array = (hh as Dictionary).get("beads", [])
+	if beads.is_empty():
+		return {}
+	if bool((hh as Dictionary).get("stamp", false)):
 		return hh
+	for b_v in beads:
+		if bool((b_v as Dictionary).get("stamp", false)):
+			return hh
 	return {}
+
+
+## The beads this hall builds by hand: all of them under a hall stamp, only
+## the bead-stamped ones otherwise.
+func _stamped_beads(hand: Dictionary) -> Array:
+	if bool(hand.get("stamp", false)):
+		return hand.get("beads", [])
+	var out: Array = []
+	for b_v in (hand.get("beads", []) as Array):
+		if bool((b_v as Dictionary).get("stamp", false)):
+			out.append(b_v)
+	return out
 
 
 ## The bench's floor plan, built: each bead stamps at its laid cell (a folded

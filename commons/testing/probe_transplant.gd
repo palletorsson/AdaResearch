@@ -23,10 +23,18 @@ func _run() -> void:
 	f.store_string(JSON.stringify({"first_chapter": "primitives", "first_map": "",
 		"dollhouse": 0, "grid_pack": 1}, " "))
 	f.close()
+	# a TRIAL hand with one bead-grain stamp: you_are_here claims [5, 20]
+	# ("force stamp mean force stamp for selected artifact at that position")
+	var fh := FileAccess.open("res://ada_run/_trial_hand.json", FileAccess.WRITE)
+	fh.store_string(JSON.stringify({"halls": {"primitives|point": {"beads": [
+		{"token": "you_are_here", "x": 5.5, "z": 20.5, "fp": 1, "count": 1,
+		 "plinth": false, "stamp": true}]}}}, " "))
+	fh.close()
 	var inst: Node3D = (load("res://commons/scenes/endless_museum.tscn") as PackedScene).instantiate() as Node3D
 	inst.set("_plan_path", "res://ada_run/em_plan.json")
 	inst.set("EM_CONTROL", CTL)
 	inst.set("_overrides_path", "res://ada_run/_doll_trial_overrides.json")
+	inst.set("_hand_path", "res://ada_run/_trial_hand.json")
 	get_root().add_child(inst)
 	await create_timer(1.2).timeout
 	for i in range(300):
@@ -111,6 +119,14 @@ func _run() -> void:
 					(r_v as Dictionary).get("token"), gp.x, gp.z, int(seg_w), int(seg_z0), int(seg_z1)])
 				break
 
+	# (2c) THE BEAD-GRAIN STAMP: the stamped artifact stands at ITS position;
+	# everything else transplants as usual
+	var yah := _pos_of(in_hall, "you_are_here")
+	if yah == Vector3.INF:
+		fails.append("the stamped bead's artifact is missing")
+	elif Vector2(yah.x - 5.5, yah.z - 20.5).length() > 1.8:
+		fails.append("the stamped bead did not land at its position (got %.1f, %.1f — wanted 5.5, 20.5)" % [yah.x, yah.z])
+
 	# (3) THE PLINTH RULE
 	var plinthed := 0
 	for r_v in in_hall:
@@ -121,6 +137,7 @@ func _run() -> void:
 
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(CTL))
 	DirAccess.remove_absolute(ProjectSettings.globalize_path("res://ada_run/_doll_trial_overrides.json"))
+	DirAccess.remove_absolute(ProjectSettings.globalize_path("res://ada_run/_trial_hand.json"))
 	# the ruler, printed every run: the segment's real bounds vs where the
 	# bodies actually stand (absolute world cells) — theory got this wrong twice
 	var srow: Dictionary = (inst.get("_segments") as Array)[0]

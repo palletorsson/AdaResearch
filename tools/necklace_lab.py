@@ -682,6 +682,7 @@ def main():
                                "gx": hb[k2].get("gx", 0), "gz": hb[k2].get("gz", 0),
                                "plinth": bool(hb[k2].get("plinth")),
                                "pinned": bool(hb[k2].get("pinned")),
+                               "stamp": bool(hb[k2].get("stamp")),
                                "added": bool(hb[k2].get("added"))} for k2 in hchain],
                 "score": score(hbodies, hchain, hall, hsol, footprints, measures)}
         out[key] = entry
