@@ -649,6 +649,8 @@ var _doll_drag: bool = false
 var _doll_drag_start: Vector2i = Vector2i.ZERO   # floor cell where the grab began
 var _doll_node_start: Vector3 = Vector3.ZERO     # the node's position at grab
 var _doll_ring: MeshInstance3D = null
+var _doll_pan: bool = false        # MMB held — the hand drags the ground itself
+var _doll_orbit: bool = false      # RMB held over nothing — the house turns smoothly
 # ── THE BOOT CLOCK (2026-08-20, Palle: "still takes ~10 s to load the first
 # hall — what is happening there?") ── every boot phase timed and written into
 # em_built_*.json as `boot_ms`, so a slow launch answers by name instead of
@@ -2185,6 +2187,35 @@ func _doll_cut(seg: Node3D) -> void:
 		return
 	var hidden := 0
 	var shrunk := 0
+	# the BATCHED architecture too (ArchBatch MultiMeshes, wherever parented):
+	# a ceiling slab lives there and sailed over the mesh-only cut
+	var mstack: Array = [seg]
+	while not mstack.is_empty():
+		var mn: Node = mstack.pop_back()
+		if mn != seg and mn is Node3D and (mn as Node).has_meta("artifact_lookup_name"):
+			continue
+		for mc in mn.get_children():
+			mstack.append(mc)
+		if mn is MultiMeshInstance3D and String(mn.name).begins_with("ArchBatch"):
+			var mm: MultiMesh = (mn as MultiMeshInstance3D).multimesh
+			if mm == null:
+				continue
+			for i in range(mm.instance_count):
+				var t: Transform3D = mm.get_instance_transform(i)
+				var sy: float = t.basis.y.length()
+				var bot: float = t.origin.y - sy * 0.5
+				var top2: float = t.origin.y + sy * 0.5
+				if top2 <= DOLL_CUT:
+					continue
+				if bot >= DOLL_CUT:
+					t.origin.y = -1000.0
+					hidden += 1
+				else:
+					var ny: float = DOLL_CUT - bot
+					t.basis.y = t.basis.y.normalized() * ny
+					t.origin.y = bot + ny * 0.5
+					shrunk += 1
+				mm.set_instance_transform(i, t)
 	var stack: Array = [seg]
 	while not stack.is_empty():
 		var n: Node = stack.pop_back()
@@ -7594,6 +7625,24 @@ func _input(event: InputEvent) -> void:
 			if nc != null:
 				nc.position = _doll_node_start
 			return
+		elif mb == MOUSE_BUTTON_RIGHT:
+			_doll_orbit = mbe.pressed          # empty-handed RMB drag turns the house
+			return
+		elif mb == MOUSE_BUTTON_MIDDLE:
+			_doll_pan = mbe.pressed            # MMB drag carries the ground
+			return
+	if _dollhouse and event is InputEventMouseMotion and (_doll_pan or _doll_orbit) and _player != null:
+		var mrel: Vector2 = (event as InputEventMouseMotion).relative
+		if _doll_orbit:
+			_doll_yaw -= mrel.x * 0.008
+		else:
+			var k: float = _doll_zoom * 0.0021
+			var fwd := Vector3(-sin(_doll_yaw), 0, -cos(_doll_yaw))
+			var right := Vector3(-cos(_doll_yaw), 0, sin(_doll_yaw))
+			_player.position += right * mrel.x * k - fwd * mrel.y * k
+			_player.position.y = 0.0
+			_last_ground = _player.position
+		return
 	if _dollhouse and event is InputEventMouseMotion and _doll_drag and _cam != null and _edit_sel >= 0:
 		var ptm := _doll_floor_point((event as InputEventMouseMotion).position)
 		var ddx := int(floor(ptm.x)) - _doll_drag_start.x
