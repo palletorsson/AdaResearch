@@ -7627,6 +7627,7 @@ func _jump_go(idx: int) -> void:
 		"first_map": String(target.get("map", "")),
 	}, " "))
 	f.close()
+	_edit_flush()
 	print("[em-jump] travelling to %s · %s" % [target.get("chapter"), target.get("map")])
 	get_tree().reload_current_scene()
 
@@ -7688,8 +7689,26 @@ func _follow_reload() -> void:
 		doc["resume_yaw"] = _yaw   # the walker's heading is the _yaw var, not the body
 	f.store_string(JSON.stringify(doc, " "))
 	f.close()
+	_edit_flush()
 	print("[em-follow] the plan changed under the museum — rebuilding around the eye (chapter %s, z %.1f local)" % [ch, z_local])
 	get_tree().reload_current_scene()
+
+
+## EVERY EXIT SAVES (2026-08-21, Palle: "auto save changes"). Rulings
+## autosave 0.6 s after each gesture — but a toggle, a follow-reload or a
+## window close inside that window reloaded the scene and dropped the last
+## edit. Every exit now flushes first.
+func _edit_flush() -> void:
+	if not _edit_dirty or _mod_editor == null:
+		return
+	if _mod_editor.call("save", _edit_overrides, _overrides_path):
+		_edit_dirty = false
+		print("[em-edit] flushed %d ruling(s) on exit -> %s" % [_edit_overrides.size(), _overrides_path])
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		_edit_flush()
 
 
 ## H: enter or leave the doll house. The scene reloads through the same
@@ -7726,6 +7745,7 @@ func _doll_toggle() -> void:
 		doc["resume_yaw"] = _yaw
 	f.store_string(JSON.stringify(doc, " "))
 	f.close()
+	_edit_flush()
 	print("[em-doll] %s — rebuilding around the eye" % ("back to the walk" if _dollhouse else "up into the doll house"))
 	get_tree().reload_current_scene()
 
