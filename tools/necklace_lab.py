@@ -308,7 +308,38 @@ def relax(bodies, chain, hall, seed_pos, footprints=None, measures=None, mesh=Fa
                 if 0.5 < d <= 3.5:
                     pairs.append((a, b, d, 0.12))
     ids = list(pos.keys())
-    for _ in range(iters):
+
+    def sweep(n):
+        for _ in range(n):
+            _relax_step(bodies, chain, hall, pos, halves, pairs, ids, footprints)
+
+    sweep(iters)
+    # THE PIVOT (polymer physics' gift): when two string segments cross, the
+    # spring cannot uncross them — gradients only push, never re-thread. A
+    # 2-opt pivot can: reverse the POSITIONS of the sub-chain between the
+    # crossing segments (bead ORDER is sacred and never changes; the beads
+    # exchange places). Position-preserving, so nothing new collides — then
+    # a short re-relax re-tensions gaps and re-separates unequal bodies.
+    if _pivot_uncross(chain, pos) > 0:
+        sweep(60)
+        _pivot_uncross(chain, pos)   # a stubborn second knot, rarely
+        sweep(30)
+    out = {}
+    taken = set()
+    for i in chain:
+        c = (int(pos[i][0]), int(pos[i][1]))
+        if hall.blocked(*c) or c in taken:
+            nf = hall.nearest_free(pos[i][0], pos[i][1], taken)
+            if nf is None:
+                continue
+            c = nf
+        taken.add(c)
+        out[i] = c
+    return out
+
+
+def _relax_step(bodies, chain, hall, pos, halves, pairs, ids, footprints):
+    if True:
         force = {i: [0.0, 0.0] for i in ids}
         for a, b, rest, k in pairs:
             dx = pos[b][0] - pos[a][0]
@@ -366,18 +397,77 @@ def relax(bodies, chain, hall, seed_pos, footprints=None, measures=None, mesh=Fa
         for i in ids:
             pos[i][0] = min(max(pos[i][0] + 0.3 * force[i][0], 1.6), hall.w - 2.6)
             pos[i][1] = min(max(pos[i][1] + 0.3 * force[i][1], hall.vest + 1.6), hall.vest + hall.h - 2.6)
-    out = {}
-    taken = set()
-    for i in chain:
-        c = (int(pos[i][0]), int(pos[i][1]))
-        if hall.blocked(*c) or c in taken:
-            nf = hall.nearest_free(pos[i][0], pos[i][1], taken)
-            if nf is None:
+
+
+def _pivot_uncross(chain, pos, max_passes=40):
+    """2-opt on POSITIONS under fixed bead order: if string segments
+    (s, s+1) and (t, t+1) cross, the beads between them reverse places.
+    The position multiset is preserved, so separation survives; only the
+    threading changes. Returns the number of pivots applied."""
+    pivots = 0
+    for _ in range(max_passes):
+        found = False
+        for s in range(len(chain) - 1):
+            for t in range(s + 2, len(chain) - 1):
+                if _segs_cross(pos[chain[s]], pos[chain[s + 1]], pos[chain[t]], pos[chain[t + 1]]):
+                    seq = [list(pos[chain[m]]) for m in range(s + 1, t + 1)]
+                    seq.reverse()
+                    for off, m in enumerate(range(s + 1, t + 1)):
+                        pos[chain[m]] = seq[off]
+                    pivots += 1
+                    found = True
+                    break
+            if found:
+                break
+        if not found:
+            break
+    return pivots
+
+
+def _segs_cross(a, b, c, d):
+    def orient(p, q, r):
+        v = (q[0] - p[0]) * (r[1] - p[1]) - (q[1] - p[1]) * (r[0] - p[0])
+        return 0 if abs(v) < 1e-9 else (1 if v > 0 else -1)
+    o1, o2 = orient(a, b, c), orient(a, b, d)
+    o3, o4 = orient(c, d, a), orient(c, d, b)
+    return o1 != o2 and o3 != o4 and 0 not in (o1, o2, o3, o4)
+
+
+def _los(hall, a, b):
+    """Line of sight between two cells, walls occlude (space syntax's atom):
+    sample the segment every half-cell; a blocked sample kills the ray."""
+    d = math.hypot(b[0] - a[0], b[1] - a[1])
+    steps = max(1, int(d * 2))
+    for k in range(1, steps):
+        t = k / steps
+        x = a[0] + (b[0] - a[0]) * t
+        z = a[1] + (b[1] - a[1]) * t
+        if hall.blocked(int(x), int(z)):
+            return False
+    return True
+
+
+def first_sight(chain, hall, sol, view=14.0):
+    """Space syntax's question, asked of the string: standing at each bead in
+    walk order, which bodies come into view for the first time — and does
+    that first-sight order agree with the walk order? 1.0 = the museum
+    reveals itself in the order it is walked."""
+    placed = [i for i in chain if i in sol]
+    if len(placed) < 3:
+        return None
+    fs = {}
+    for k, standing in enumerate(placed):
+        sp = sol[standing]
+        for j in placed:
+            if j in fs:
                 continue
-            c = nf
-        taken.add(c)
-        out[i] = c
-    return out
+            if math.hypot(sol[j][0] - sp[0], sol[j][1] - sp[1]) > view:
+                continue
+            if _los(hall, sp, sol[j]):
+                fs[j] = k
+    seq = [fs.get(j, 10 ** 6) for j in placed]
+    good = sum(1 for x, y in zip(seq, seq[1:]) if x <= y)
+    return round(good / max(1, len(seq) - 1), 3)
 
 
 def score(bodies, chain, hall, sol, footprints=None, measures=None):
@@ -409,7 +499,8 @@ def score(bodies, chain, hall, sol, footprints=None, measures=None):
     return {"placed": len(placed), "of": len(chain),
             "order": round(mono / max(1, len(placed) - 1), 3),
             "distortion": round(sum(dist_err) / len(dist_err), 2),
-            "blocked": blocked, "min_sep": round(min_sep, 2), "overlaps": overlaps}
+            "blocked": blocked, "min_sep": round(min_sep, 2), "overlaps": overlaps,
+            "sight": first_sight(chain, hall, sol)}
 
 
 def main():
