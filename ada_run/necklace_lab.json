@@ -22114,14 +22114,15 @@
       "order": 1.0,
       "distortion": 0.55,
       "blocked": 0,
-      "min_sep": 1.0
+      "min_sep": 1.0,
+      "overlaps": 20
      }
     },
     "spring": {
      "positions": [
       {
        "token": "dark_sphere",
-       "x": 2,
+       "x": 1,
        "z": 6,
        "gx": 0,
        "gz": 0,
@@ -22133,7 +22134,7 @@
       },
       {
        "token": "cube_scene",
-       "x": 3,
+       "x": 2,
        "z": 5,
        "gx": 1,
        "gz": 0,
@@ -22145,8 +22146,8 @@
       },
       {
        "token": "sphere",
-       "x": 5,
-       "z": 5,
+       "x": 4,
+       "z": 6,
        "gx": 2,
        "gz": 0,
        "fp": 1,
@@ -22157,7 +22158,7 @@
       },
       {
        "token": "platonic_grabbables",
-       "x": 9,
+       "x": 8,
        "z": 5,
        "gx": 3,
        "gz": 4,
@@ -22169,8 +22170,8 @@
       },
       {
        "token": "sphere_high",
-       "x": 12,
-       "z": 11,
+       "x": 11,
+       "z": 9,
        "gx": 4.0,
        "gz": 11.0,
        "fp": 1,
@@ -22182,7 +22183,7 @@
       {
        "token": "sphere_mid",
        "x": 11,
-       "z": 12,
+       "z": 11,
        "gx": 4.0,
        "gz": 13.0,
        "fp": 1,
@@ -22217,8 +22218,8 @@
       },
       {
        "token": "grab_octahedron",
-       "x": 4,
-       "z": 8,
+       "x": 5,
+       "z": 11,
        "gx": 4.0,
        "gz": 17.0,
        "fp": 1,
@@ -22229,7 +22230,7 @@
       },
       {
        "token": "snap_octahedron_puzzle",
-       "x": 2,
+       "x": 3,
        "z": 9,
        "gx": 4,
        "gz": 17,
@@ -22241,8 +22242,8 @@
       },
       {
        "token": "lshape",
-       "x": 5,
-       "z": 12,
+       "x": 4,
+       "z": 13,
        "gx": 4.0,
        "gz": 20.0,
        "fp": 2,
@@ -22253,7 +22254,7 @@
       },
       {
        "token": "prism_block",
-       "x": 7,
+       "x": 8,
        "z": 12,
        "gx": 1.5,
        "gz": 21.0,
@@ -22265,8 +22266,8 @@
       },
       {
        "token": "capsule_radials_rings",
-       "x": 9,
-       "z": 14,
+       "x": 11,
+       "z": 13,
        "gx": 2.5,
        "gz": 23.0,
        "fp": 1,
@@ -22278,7 +22279,7 @@
       {
        "token": "torus_radials_rings",
        "x": 12,
-       "z": 16,
+       "z": 14,
        "gx": 4.0,
        "gz": 23.0,
        "fp": 1,
@@ -22289,7 +22290,7 @@
       },
       {
        "token": "capsule_radials_rings",
-       "x": 9,
+       "x": 11,
        "z": 17,
        "gx": 5.5,
        "gz": 23.0,
@@ -22301,8 +22302,8 @@
       },
       {
        "token": "prism_block",
-       "x": 7,
-       "z": 16,
+       "x": 8,
+       "z": 15,
        "gx": 6.5,
        "gz": 21.0,
        "fp": 1,
@@ -22313,7 +22314,7 @@
       },
       {
        "token": "library_rack",
-       "x": 5,
+       "x": 6,
        "z": 14,
        "gx": 8,
        "gz": 22,
@@ -22326,7 +22327,7 @@
       {
        "token": "plus",
        "x": 2,
-       "z": 14,
+       "z": 15,
        "gx": 4.0,
        "gz": 25.0,
        "fp": 1,
@@ -22337,8 +22338,8 @@
       },
       {
        "token": "diamonds",
-       "x": 2,
-       "z": 19,
+       "x": 3,
+       "z": 18,
        "gx": 4,
        "gz": 25,
        "fp": 8,
@@ -22349,7 +22350,7 @@
       },
       {
        "token": "capsule",
-       "x": 7,
+       "x": 8,
        "z": 18,
        "gx": 7,
        "gz": 15,
@@ -22361,8 +22362,8 @@
       },
       {
        "token": "truncatedtetrahedron",
-       "x": 9,
-       "z": 19,
+       "x": 10,
+       "z": 18,
        "gx": 7,
        "gz": 13,
        "fp": 1,
@@ -22398,7 +22399,7 @@
       {
        "token": "righttriangle",
        "x": 5,
-       "z": 24,
+       "z": 23,
        "gx": 1,
        "gz": 13,
        "fp": 1,
@@ -22409,8 +22410,8 @@
       },
       {
        "token": "roughrock",
-       "x": 2,
-       "z": 24,
+       "x": 3,
+       "z": 23,
        "gx": 1,
        "gz": 15,
        "fp": 1,
@@ -22424,9 +22425,10 @@
       "placed": 25,
       "of": 25,
       "order": 0.917,
-      "distortion": 0.98,
+      "distortion": 0.74,
       "blocked": 0,
-      "min_sep": 1.41
+      "min_sep": 1.41,
+      "overlaps": 0
      }
     },
     "mesh": {
@@ -22457,8 +22459,8 @@
       },
       {
        "token": "sphere",
-       "x": 6,
-       "z": 5,
+       "x": 5,
+       "z": 6,
        "gx": 2,
        "gz": 0,
        "fp": 1,
@@ -22470,7 +22472,7 @@
       {
        "token": "platonic_grabbables",
        "x": 10,
-       "z": 6,
+       "z": 5,
        "gx": 3,
        "gz": 4,
        "fp": 8,
@@ -22481,7 +22483,7 @@
       },
       {
        "token": "sphere_high",
-       "x": 11,
+       "x": 12,
        "z": 11,
        "gx": 4.0,
        "gz": 11.0,
@@ -22493,8 +22495,8 @@
       },
       {
        "token": "sphere_mid",
-       "x": 9,
-       "z": 11,
+       "x": 11,
+       "z": 12,
        "gx": 4.0,
        "gz": 13.0,
        "fp": 1,
@@ -22505,8 +22507,8 @@
       },
       {
        "token": "floating_sphere_field",
-       "x": 8,
-       "z": 12,
+       "x": 11,
+       "z": 11,
        "gx": 4,
        "gz": 13,
        "fp": 1,
@@ -22517,8 +22519,8 @@
       },
       {
        "token": "sphere_low",
-       "x": 6,
-       "z": 11,
+       "x": 8,
+       "z": 10,
        "gx": 4.0,
        "gz": 15.0,
        "fp": 1,
@@ -22529,8 +22531,8 @@
       },
       {
        "token": "grab_octahedron",
-       "x": 5,
-       "z": 8,
+       "x": 6,
+       "z": 9,
        "gx": 4.0,
        "gz": 17.0,
        "fp": 1,
@@ -22541,7 +22543,7 @@
       },
       {
        "token": "snap_octahedron_puzzle",
-       "x": 3,
+       "x": 4,
        "z": 8,
        "gx": 4,
        "gz": 17,
@@ -22553,8 +22555,8 @@
       },
       {
        "token": "lshape",
-       "x": 4,
-       "z": 12,
+       "x": 2,
+       "z": 11,
        "gx": 4.0,
        "gz": 20.0,
        "fp": 2,
@@ -22565,7 +22567,7 @@
       },
       {
        "token": "prism_block",
-       "x": 7,
+       "x": 5,
        "z": 10,
        "gx": 1.5,
        "gz": 21.0,
@@ -22577,8 +22579,8 @@
       },
       {
        "token": "capsule_radials_rings",
-       "x": 5,
-       "z": 13,
+       "x": 4,
+       "z": 12,
        "gx": 2.5,
        "gz": 23.0,
        "fp": 1,
@@ -22589,8 +22591,8 @@
       },
       {
        "token": "torus_radials_rings",
-       "x": 5,
-       "z": 15,
+       "x": 6,
+       "z": 13,
        "gx": 4.0,
        "gz": 23.0,
        "fp": 1,
@@ -22601,8 +22603,8 @@
       },
       {
        "token": "capsule_radials_rings",
-       "x": 3,
-       "z": 14,
+       "x": 5,
+       "z": 15,
        "gx": 5.5,
        "gz": 23.0,
        "fp": 1,
@@ -22614,7 +22616,7 @@
       {
        "token": "prism_block",
        "x": 1,
-       "z": 12,
+       "z": 14,
        "gx": 6.5,
        "gz": 21.0,
        "fp": 1,
@@ -22625,7 +22627,7 @@
       },
       {
        "token": "library_rack",
-       "x": 3,
+       "x": 2,
        "z": 12,
        "gx": 8,
        "gz": 22,
@@ -22637,7 +22639,7 @@
       },
       {
        "token": "plus",
-       "x": 2,
+       "x": 3,
        "z": 17,
        "gx": 4.0,
        "gz": 25.0,
@@ -22649,8 +22651,8 @@
       },
       {
        "token": "diamonds",
-       "x": 4,
-       "z": 19,
+       "x": 5,
+       "z": 18,
        "gx": 4,
        "gz": 25,
        "fp": 8,
@@ -22662,7 +22664,7 @@
       {
        "token": "capsule",
        "x": 8,
-       "z": 14,
+       "z": 15,
        "gx": 7,
        "gz": 15,
        "fp": 1,
@@ -22674,7 +22676,7 @@
       {
        "token": "truncatedtetrahedron",
        "x": 10,
-       "z": 13,
+       "z": 14,
        "gx": 7,
        "gz": 13,
        "fp": 1,
@@ -22698,7 +22700,7 @@
       {
        "token": "hole_with_cones",
        "x": 12,
-       "z": 18,
+       "z": 17,
        "gx": 1,
        "gz": 11,
        "fp": 8,
@@ -22709,8 +22711,8 @@
       },
       {
        "token": "righttriangle",
-       "x": 10,
-       "z": 14,
+       "x": 11,
+       "z": 15,
        "gx": 1,
        "gz": 13,
        "fp": 1,
@@ -22722,7 +22724,7 @@
       {
        "token": "roughrock",
        "x": 9,
-       "z": 15,
+       "z": 14,
        "gx": 1,
        "gz": 15,
        "fp": 1,
@@ -22735,10 +22737,11 @@
      "score": {
       "placed": 25,
       "of": 25,
-      "order": 0.792,
-      "distortion": 0.76,
+      "order": 0.875,
+      "distortion": 0.61,
       "blocked": 0,
-      "min_sep": 1.0
+      "min_sep": 1.0,
+      "overlaps": 4
      }
     },
     "rigid": {
@@ -23050,7 +23053,8 @@
       "order": 0.833,
       "distortion": 1.37,
       "blocked": 6,
-      "min_sep": 1.0
+      "min_sep": 1.0,
+      "overlaps": 9
      }
     },
     "hand": {
@@ -23462,7 +23466,8 @@
       "order": 0.872,
       "distortion": 0.89,
       "blocked": 6,
-      "min_sep": 0.92
+      "min_sep": 0.92,
+      "overlaps": 12
      }
     }
    }
@@ -23574,7 +23579,8 @@
       "order": 1.0,
       "distortion": 0.18,
       "blocked": 0,
-      "min_sep": 2.0
+      "min_sep": 2.0,
+      "overlaps": 3
      }
     },
     "spring": {
@@ -23593,7 +23599,7 @@
       },
       {
        "token": "grid_lines",
-       "x": 7,
+       "x": 6,
        "z": 5,
        "gx": 4,
        "gz": 3,
@@ -23642,7 +23648,7 @@
       {
        "token": "ConnectedTriangles",
        "x": 5,
-       "z": 10,
+       "z": 11,
        "gx": 6,
        "gz": 10,
        "fp": 2,
@@ -23667,10 +23673,11 @@
      "score": {
       "placed": 7,
       "of": 7,
-      "order": 0.833,
-      "distortion": 0.52,
+      "order": 1.0,
+      "distortion": 0.43,
       "blocked": 0,
-      "min_sep": 2.24
+      "min_sep": 2.24,
+      "overlaps": 0
      }
     },
     "mesh": {
@@ -23689,7 +23696,7 @@
       },
       {
        "token": "grid_lines",
-       "x": 7,
+       "x": 6,
        "z": 5,
        "gx": 4,
        "gz": 3,
@@ -23701,7 +23708,7 @@
       },
       {
        "token": "floating_sphere_field",
-       "x": 11,
+       "x": 10,
        "z": 7,
        "gx": 4,
        "gz": 7,
@@ -23738,7 +23745,7 @@
       {
        "token": "ConnectedTriangles",
        "x": 5,
-       "z": 10,
+       "z": 11,
        "gx": 6,
        "gz": 10,
        "fp": 2,
@@ -23763,10 +23770,11 @@
      "score": {
       "placed": 7,
       "of": 7,
-      "order": 0.833,
-      "distortion": 0.52,
+      "order": 1.0,
+      "distortion": 0.31,
       "blocked": 0,
-      "min_sep": 2.24
+      "min_sep": 2.0,
+      "overlaps": 0
      }
     },
     "rigid": {
@@ -23862,7 +23870,8 @@
       "order": 0.833,
       "distortion": 1.47,
       "blocked": 1,
-      "min_sep": 0.0
+      "min_sep": 0.0,
+      "overlaps": 3
      }
     }
    }
@@ -24013,15 +24022,16 @@
       "order": 1.0,
       "distortion": 0.87,
       "blocked": 0,
-      "min_sep": 1.0
+      "min_sep": 1.0,
+      "overlaps": 13
      }
     },
     "spring": {
      "positions": [
       {
        "token": "folding_past",
-       "x": 2,
-       "z": 8,
+       "x": 1,
+       "z": 5,
        "gx": 2,
        "gz": 0,
        "fp": 8,
@@ -24032,7 +24042,7 @@
       },
       {
        "token": "lab_room",
-       "x": 6,
+       "x": 7,
        "z": 5,
        "gx": 1,
        "gz": 0,
@@ -24044,7 +24054,7 @@
       },
       {
        "token": "origin",
-       "x": 10,
+       "x": 11,
        "z": 5,
        "gx": 0,
        "gz": 0,
@@ -24056,7 +24066,7 @@
       },
       {
        "token": "frame_counter_display",
-       "x": 11,
+       "x": 12,
        "z": 9,
        "gx": 0,
        "gz": 5,
@@ -24081,7 +24091,7 @@
       {
        "token": "fontana_puncture",
        "x": 5,
-       "z": 13,
+       "z": 10,
        "gx": 3,
        "gz": 10,
        "fp": 1,
@@ -24093,138 +24103,6 @@
       {
        "token": "interactive_point_origin_force",
        "x": 5,
-       "z": 11,
-       "gx": 4,
-       "gz": 11,
-       "fp": 1,
-       "count": 1,
-       "spread": "",
-       "gap": 1,
-       "plinth": false
-      },
-      {
-       "token": "floating_sphere_field",
-       "x": 4,
-       "z": 12,
-       "gx": 5,
-       "gz": 12,
-       "fp": 1,
-       "count": 1,
-       "spread": "",
-       "gap": 1,
-       "plinth": false
-      },
-      {
-       "token": "interactive_point_origin_force",
-       "x": 3,
-       "z": 17,
-       "gx": 1.5,
-       "gz": 11.0,
-       "fp": 1,
-       "count": 2,
-       "spread": "x",
-       "gap": 1,
-       "plinth": false
-      },
-      {
-       "token": "CoordinateSystem3M",
-       "x": 7,
-       "z": 18,
-       "gx": 0,
-       "gz": 14,
-       "fp": 8,
-       "count": 1,
-       "spread": "",
-       "gap": 1,
-       "plinth": false
-      }
-     ],
-     "score": {
-      "placed": 10,
-      "of": 10,
-      "order": 0.778,
-      "distortion": 1.06,
-      "blocked": 0,
-      "min_sep": 1.41
-     }
-    },
-    "mesh": {
-     "positions": [
-      {
-       "token": "folding_past",
-       "x": 3,
-       "z": 6,
-       "gx": 2,
-       "gz": 0,
-       "fp": 8,
-       "count": 1,
-       "spread": "",
-       "gap": 1,
-       "plinth": false
-      },
-      {
-       "token": "lab_room",
-       "x": 7,
-       "z": 5,
-       "gx": 1,
-       "gz": 0,
-       "fp": 8,
-       "count": 1,
-       "spread": "",
-       "gap": 1,
-       "plinth": false
-      },
-      {
-       "token": "origin",
-       "x": 10,
-       "z": 6,
-       "gx": 0,
-       "gz": 0,
-       "fp": 4,
-       "count": 1,
-       "spread": "",
-       "gap": 1,
-       "plinth": false
-      },
-      {
-       "token": "frame_counter_display",
-       "x": 11,
-       "z": 9,
-       "gx": 0,
-       "gz": 5,
-       "fp": 1,
-       "count": 1,
-       "spread": "",
-       "gap": 1,
-       "plinth": false
-      },
-      {
-       "token": "you_are_here",
-       "x": 8,
-       "z": 11,
-       "gx": 3,
-       "gz": 7,
-       "fp": 3,
-       "count": 1,
-       "spread": "",
-       "gap": 1,
-       "plinth": false
-      },
-      {
-       "token": "fontana_puncture",
-       "x": 5,
-       "z": 11,
-       "gx": 3,
-       "gz": 10,
-       "fp": 1,
-       "count": 1,
-       "spread": "",
-       "gap": 1,
-       "plinth": false
-      },
-      {
-       "token": "interactive_point_origin_force",
-       "x": 3,
        "z": 11,
        "gx": 4,
        "gz": 11,
@@ -24248,8 +24126,8 @@
       },
       {
        "token": "interactive_point_origin_force",
-       "x": 5,
-       "z": 13,
+       "x": 3,
+       "z": 14,
        "gx": 1.5,
        "gz": 11.0,
        "fp": 1,
@@ -24261,7 +24139,7 @@
       {
        "token": "CoordinateSystem3M",
        "x": 7,
-       "z": 17,
+       "z": 16,
        "gx": 0,
        "gz": 14,
        "fp": 8,
@@ -24275,9 +24153,143 @@
       "placed": 10,
       "of": 10,
       "order": 1.0,
-      "distortion": 0.81,
+      "distortion": 1.31,
       "blocked": 0,
-      "min_sep": 1.0
+      "min_sep": 1.0,
+      "overlaps": 2
+     }
+    },
+    "mesh": {
+     "positions": [
+      {
+       "token": "folding_past",
+       "x": 2,
+       "z": 5,
+       "gx": 2,
+       "gz": 0,
+       "fp": 8,
+       "count": 1,
+       "spread": "",
+       "gap": 1,
+       "plinth": false
+      },
+      {
+       "token": "lab_room",
+       "x": 7,
+       "z": 5,
+       "gx": 1,
+       "gz": 0,
+       "fp": 8,
+       "count": 1,
+       "spread": "",
+       "gap": 1,
+       "plinth": false
+      },
+      {
+       "token": "origin",
+       "x": 10,
+       "z": 5,
+       "gx": 0,
+       "gz": 0,
+       "fp": 4,
+       "count": 1,
+       "spread": "",
+       "gap": 1,
+       "plinth": false
+      },
+      {
+       "token": "frame_counter_display",
+       "x": 12,
+       "z": 9,
+       "gx": 0,
+       "gz": 5,
+       "fp": 1,
+       "count": 1,
+       "spread": "",
+       "gap": 1,
+       "plinth": false
+      },
+      {
+       "token": "you_are_here",
+       "x": 8,
+       "z": 11,
+       "gx": 3,
+       "gz": 7,
+       "fp": 3,
+       "count": 1,
+       "spread": "",
+       "gap": 1,
+       "plinth": false
+      },
+      {
+       "token": "fontana_puncture",
+       "x": 5,
+       "z": 11,
+       "gx": 3,
+       "gz": 10,
+       "fp": 1,
+       "count": 1,
+       "spread": "",
+       "gap": 1,
+       "plinth": false
+      },
+      {
+       "token": "interactive_point_origin_force",
+       "x": 3,
+       "z": 11,
+       "gx": 4,
+       "gz": 11,
+       "fp": 1,
+       "count": 1,
+       "spread": "",
+       "gap": 1,
+       "plinth": false
+      },
+      {
+       "token": "floating_sphere_field",
+       "x": 2,
+       "z": 11,
+       "gx": 5,
+       "gz": 12,
+       "fp": 1,
+       "count": 1,
+       "spread": "",
+       "gap": 1,
+       "plinth": false
+      },
+      {
+       "token": "interactive_point_origin_force",
+       "x": 5,
+       "z": 13,
+       "gx": 1.5,
+       "gz": 11.0,
+       "fp": 1,
+       "count": 2,
+       "spread": "x",
+       "gap": 1,
+       "plinth": false
+      },
+      {
+       "token": "CoordinateSystem3M",
+       "x": 7,
+       "z": 16,
+       "gx": 0,
+       "gz": 14,
+       "fp": 8,
+       "count": 1,
+       "spread": "",
+       "gap": 1,
+       "plinth": false
+      }
+     ],
+     "score": {
+      "placed": 10,
+      "of": 10,
+      "order": 1.0,
+      "distortion": 0.85,
+      "blocked": 0,
+      "min_sep": 1.0,
+      "overlaps": 2
      }
     },
     "rigid": {
@@ -24409,7 +24421,8 @@
       "order": 1.0,
       "distortion": 0.78,
       "blocked": 6,
-      "min_sep": 0.0
+      "min_sep": 0.0,
+      "overlaps": 4
      }
     },
     "hand": {
@@ -24521,7 +24534,8 @@
       "order": 0.778,
       "distortion": 2.19,
       "blocked": 4,
-      "min_sep": 1.15
+      "min_sep": 1.15,
+      "overlaps": 1
      }
     }
    }
@@ -24659,130 +24673,11 @@
       "order": 1.0,
       "distortion": 0.5,
       "blocked": 0,
-      "min_sep": 1.0
+      "min_sep": 1.0,
+      "overlaps": 6
      }
     },
     "spring": {
-     "positions": [
-      {
-       "token": "grab_trihedron",
-       "x": 3,
-       "z": 5,
-       "gx": 2,
-       "gz": 0,
-       "fp": 4,
-       "count": 1,
-       "spread": "",
-       "gap": 1,
-       "plinth": false
-      },
-      {
-       "token": "path_game_controller",
-       "x": 3,
-       "z": 8,
-       "gx": 4,
-       "gz": 0,
-       "fp": 1,
-       "count": 1,
-       "spread": "",
-       "gap": 1,
-       "plinth": false
-      },
-      {
-       "token": "path_watchdog",
-       "x": 5,
-       "z": 7,
-       "gx": 4,
-       "gz": 1,
-       "fp": 1,
-       "count": 1,
-       "spread": "",
-       "gap": 1,
-       "plinth": false
-      },
-      {
-       "token": "lab_room",
-       "x": 9,
-       "z": 5,
-       "gx": 0,
-       "gz": 2,
-       "fp": 8,
-       "count": 1,
-       "spread": "",
-       "gap": 1,
-       "plinth": false
-      },
-      {
-       "token": "cube_scene",
-       "x": 11,
-       "z": 11,
-       "gx": 2,
-       "gz": 8,
-       "fp": 1,
-       "count": 1,
-       "spread": "",
-       "gap": 1,
-       "plinth": false
-      },
-      {
-       "token": "becoming_catalyst",
-       "x": 9,
-       "z": 10,
-       "gx": 3,
-       "gz": 8,
-       "fp": 1,
-       "count": 1,
-       "spread": "",
-       "gap": 1,
-       "plinth": false
-      },
-      {
-       "token": "tentacle_placer",
-       "x": 7,
-       "z": 10,
-       "gx": 3,
-       "gz": 9,
-       "fp": 2,
-       "count": 1,
-       "spread": "",
-       "gap": 1,
-       "plinth": false
-      },
-      {
-       "token": "pyramid_edit",
-       "x": 5,
-       "z": 10,
-       "gx": 2,
-       "gz": 9,
-       "fp": 1,
-       "count": 1,
-       "spread": "",
-       "gap": 1,
-       "plinth": false
-      },
-      {
-       "token": "interactive_point_origin_force",
-       "x": 3,
-       "z": 9,
-       "gx": 4,
-       "gz": 8,
-       "fp": 1,
-       "count": 1,
-       "spread": "",
-       "gap": 1,
-       "plinth": false
-      }
-     ],
-     "score": {
-      "placed": 9,
-      "of": 9,
-      "order": 0.875,
-      "distortion": 0.78,
-      "blocked": 0,
-      "min_sep": 1.0
-     }
-    },
-    "mesh": {
      "positions": [
       {
        "token": "grab_trihedron",
@@ -24823,7 +24718,7 @@
       {
        "token": "lab_room",
        "x": 9,
-       "z": 5,
+       "z": 6,
        "gx": 0,
        "gz": 2,
        "fp": 8,
@@ -24858,8 +24753,129 @@
       },
       {
        "token": "tentacle_placer",
-       "x": 8,
+       "x": 7,
+       "z": 11,
+       "gx": 3,
+       "gz": 9,
+       "fp": 2,
+       "count": 1,
+       "spread": "",
+       "gap": 1,
+       "plinth": false
+      },
+      {
+       "token": "pyramid_edit",
+       "x": 5,
+       "z": 11,
+       "gx": 2,
+       "gz": 9,
+       "fp": 1,
+       "count": 1,
+       "spread": "",
+       "gap": 1,
+       "plinth": false
+      },
+      {
+       "token": "interactive_point_origin_force",
+       "x": 3,
+       "z": 10,
+       "gx": 4,
+       "gz": 8,
+       "fp": 1,
+       "count": 1,
+       "spread": "",
+       "gap": 1,
+       "plinth": false
+      }
+     ],
+     "score": {
+      "placed": 9,
+      "of": 9,
+      "order": 0.875,
+      "distortion": 0.63,
+      "blocked": 0,
+      "min_sep": 2.0,
+      "overlaps": 2
+     }
+    },
+    "mesh": {
+     "positions": [
+      {
+       "token": "grab_trihedron",
+       "x": 4,
+       "z": 5,
+       "gx": 2,
+       "gz": 0,
+       "fp": 4,
+       "count": 1,
+       "spread": "",
+       "gap": 1,
+       "plinth": false
+      },
+      {
+       "token": "path_game_controller",
+       "x": 3,
+       "z": 7,
+       "gx": 4,
+       "gz": 0,
+       "fp": 1,
+       "count": 1,
+       "spread": "",
+       "gap": 1,
+       "plinth": false
+      },
+      {
+       "token": "path_watchdog",
+       "x": 4,
+       "z": 8,
+       "gx": 4,
+       "gz": 1,
+       "fp": 1,
+       "count": 1,
+       "spread": "",
+       "gap": 1,
+       "plinth": false
+      },
+      {
+       "token": "lab_room",
+       "x": 9,
+       "z": 6,
+       "gx": 0,
+       "gz": 2,
+       "fp": 8,
+       "count": 1,
+       "spread": "",
+       "gap": 1,
+       "plinth": false
+      },
+      {
+       "token": "cube_scene",
+       "x": 11,
+       "z": 11,
+       "gx": 2,
+       "gz": 8,
+       "fp": 1,
+       "count": 1,
+       "spread": "",
+       "gap": 1,
+       "plinth": false
+      },
+      {
+       "token": "becoming_catalyst",
+       "x": 9,
        "z": 12,
+       "gx": 3,
+       "gz": 8,
+       "fp": 1,
+       "count": 1,
+       "spread": "",
+       "gap": 1,
+       "plinth": false
+      },
+      {
+       "token": "tentacle_placer",
+       "x": 8,
+       "z": 13,
        "gx": 3,
        "gz": 9,
        "fp": 2,
@@ -24871,7 +24887,7 @@
       {
        "token": "pyramid_edit",
        "x": 8,
-       "z": 10,
+       "z": 11,
        "gx": 2,
        "gz": 9,
        "fp": 1,
@@ -24897,9 +24913,10 @@
       "placed": 9,
       "of": 9,
       "order": 0.75,
-      "distortion": 0.86,
+      "distortion": 0.71,
       "blocked": 0,
-      "min_sep": 1.41
+      "min_sep": 1.0,
+      "overlaps": 2
      }
     },
     "rigid": {
@@ -25019,7 +25036,8 @@
       "order": 1.0,
       "distortion": 1.16,
       "blocked": 2,
-      "min_sep": 0.0
+      "min_sep": 0.0,
+      "overlaps": 5
      }
     }
    }
@@ -25105,15 +25123,16 @@
       "order": 1.0,
       "distortion": 0.5,
       "blocked": 0,
-      "min_sep": 2.0
+      "min_sep": 2.0,
+      "overlaps": 3
      }
     },
     "spring": {
      "positions": [
       {
        "token": "dark_sphere",
-       "x": 3,
-       "z": 8,
+       "x": 1,
+       "z": 6,
        "gx": 0,
        "gz": 0,
        "fp": 1,
@@ -25125,7 +25144,7 @@
       {
        "token": "combine_portals",
        "x": 6,
-       "z": 11,
+       "z": 7,
        "gx": 3,
        "gz": 4,
        "fp": 8,
@@ -25136,7 +25155,7 @@
       },
       {
        "token": "achilles_tortoise",
-       "x": 7,
+       "x": 10,
        "z": 5,
        "gx": 5,
        "gz": 5,
@@ -25148,8 +25167,8 @@
       },
       {
        "token": "capsule",
-       "x": 11,
-       "z": 6,
+       "x": 12,
+       "z": 8,
        "gx": 5,
        "gz": 2,
        "fp": 1,
@@ -25160,8 +25179,8 @@
       },
       {
        "token": "floating_sphere_field",
-       "x": 12,
-       "z": 11,
+       "x": 11,
+       "z": 12,
        "gx": 3,
        "gz": 17,
        "fp": 1,
@@ -25175,17 +25194,18 @@
       "placed": 5,
       "of": 5,
       "order": 0.75,
-      "distortion": 1.58,
+      "distortion": 1.02,
       "blocked": 0,
-      "min_sep": 4.12
+      "min_sep": 3.61,
+      "overlaps": 1
      }
     },
     "mesh": {
      "positions": [
       {
        "token": "dark_sphere",
-       "x": 3,
-       "z": 8,
+       "x": 1,
+       "z": 7,
        "gx": 0,
        "gz": 0,
        "fp": 1,
@@ -25197,7 +25217,7 @@
       {
        "token": "combine_portals",
        "x": 6,
-       "z": 10,
+       "z": 7,
        "gx": 3,
        "gz": 4,
        "fp": 8,
@@ -25208,7 +25228,7 @@
       },
       {
        "token": "achilles_tortoise",
-       "x": 7,
+       "x": 9,
        "z": 5,
        "gx": 5,
        "gz": 5,
@@ -25247,17 +25267,18 @@
       "placed": 5,
       "of": 5,
       "order": 0.75,
-      "distortion": 1.16,
+      "distortion": 0.66,
       "blocked": 0,
-      "min_sep": 3.61
+      "min_sep": 3.16,
+      "overlaps": 2
      }
     },
     "rigid": {
      "positions": [
       {
        "token": "dark_sphere",
-       "x": 4,
-       "z": 10,
+       "x": 3,
+       "z": 5,
        "gx": 0,
        "gz": 0,
        "fp": 1,
@@ -25269,7 +25290,7 @@
       {
        "token": "combine_portals",
        "x": 7,
-       "z": 14,
+       "z": 10,
        "gx": 3,
        "gz": 4,
        "fp": 8,
@@ -25280,8 +25301,8 @@
       },
       {
        "token": "achilles_tortoise",
-       "x": 9,
-       "z": 15,
+       "x": 10,
+       "z": 7,
        "gx": 5,
        "gz": 5,
        "fp": 7,
@@ -25292,8 +25313,8 @@
       },
       {
        "token": "capsule",
-       "x": 9,
-       "z": 12,
+       "x": 12,
+       "z": 7,
        "gx": 5,
        "gz": 2,
        "fp": 1,
@@ -25304,8 +25325,8 @@
       },
       {
        "token": "floating_sphere_field",
-       "x": 7,
-       "z": 27,
+       "x": 11,
+       "z": 10,
        "gx": 3,
        "gz": 17,
        "fp": 1,
@@ -25319,17 +25340,18 @@
       "placed": 5,
       "of": 5,
       "order": 0.75,
-      "distortion": 3.03,
-      "blocked": 1,
-      "min_sep": 2.24
+      "distortion": 1.56,
+      "blocked": 0,
+      "min_sep": 2.0,
+      "overlaps": 3
      }
     },
     "hand": {
      "positions": [
       {
        "token": "dark_sphere",
-       "x": 5.13,
-       "z": 6.55,
+       "x": 3.71,
+       "z": 3.44,
        "gx": 0,
        "gz": 0,
        "plinth": false,
@@ -25338,8 +25360,8 @@
       },
       {
        "token": "combine_portals",
-       "x": 7.46,
-       "z": 1.59,
+       "x": 7.75,
+       "z": 10.44,
        "gx": 3,
        "gz": 4,
        "plinth": false,
@@ -25348,8 +25370,8 @@
       },
       {
        "token": "achilles_tortoise",
-       "x": 10.21,
-       "z": 7.13,
+       "x": 10.71,
+       "z": 7.63,
        "gx": 5,
        "gz": 5,
        "plinth": false,
@@ -25358,8 +25380,8 @@
       },
       {
        "token": "capsule",
-       "x": 12.5,
-       "z": 7.13,
+       "x": 13.0,
+       "z": 7.63,
        "gx": 5,
        "gz": 2,
        "plinth": false,
@@ -25368,8 +25390,8 @@
       },
       {
        "token": "floating_sphere_field",
-       "x": 10.54,
-       "z": 9.63,
+       "x": 11.04,
+       "z": 10.13,
        "gx": 3,
        "gz": 17,
        "plinth": false,
@@ -25381,9 +25403,10 @@
       "placed": 5,
       "of": 5,
       "order": 0.75,
-      "distortion": 1.74,
+      "distortion": 1.87,
       "blocked": 1,
-      "min_sep": 2.29
+      "min_sep": 2.29,
+      "overlaps": 4
      }
     }
    }
@@ -25456,7 +25479,8 @@
       "order": 1.0,
       "distortion": 0.88,
       "blocked": 0,
-      "min_sep": 2.0
+      "min_sep": 2.0,
+      "overlaps": 1
      }
     },
     "spring": {
@@ -25464,7 +25488,7 @@
       {
        "token": "pattern_tile_4x4",
        "x": 1,
-       "z": 5,
+       "z": 8,
        "gx": 4,
        "gz": 2,
        "fp": 1,
@@ -25475,8 +25499,8 @@
       },
       {
        "token": "pattern_tile_cube",
-       "x": 4,
-       "z": 7,
+       "x": 3,
+       "z": 5,
        "gx": 7,
        "gz": 4,
        "fp": 1,
@@ -25500,7 +25524,7 @@
       {
        "token": "tile_meander_floor",
        "x": 9,
-       "z": 8,
+       "z": 9,
        "gx": 3,
        "gz": 6,
        "fp": 1,
@@ -25513,10 +25537,11 @@
      "score": {
       "placed": 4,
       "of": 4,
-      "order": 1.0,
-      "distortion": 0.13,
+      "order": 0.667,
+      "distortion": 0.39,
       "blocked": 0,
-      "min_sep": 2.24
+      "min_sep": 3.16,
+      "overlaps": 0
      }
     },
     "mesh": {
@@ -25524,7 +25549,7 @@
       {
        "token": "pattern_tile_4x4",
        "x": 1,
-       "z": 5,
+       "z": 8,
        "gx": 4,
        "gz": 2,
        "fp": 1,
@@ -25535,8 +25560,8 @@
       },
       {
        "token": "pattern_tile_cube",
-       "x": 4,
-       "z": 7,
+       "x": 3,
+       "z": 5,
        "gx": 7,
        "gz": 4,
        "fp": 1,
@@ -25548,7 +25573,7 @@
       {
        "token": "science_screen",
        "x": 6,
-       "z": 6,
+       "z": 5,
        "gx": 9,
        "gz": 5,
        "fp": 4,
@@ -25573,10 +25598,11 @@
      "score": {
       "placed": 4,
       "of": 4,
-      "order": 1.0,
-      "distortion": 0.13,
+      "order": 0.667,
+      "distortion": 0.34,
       "blocked": 0,
-      "min_sep": 2.24
+      "min_sep": 3.0,
+      "overlaps": 0
      }
     },
     "rigid": {
@@ -25636,7 +25662,8 @@
       "order": 1.0,
       "distortion": 0.69,
       "blocked": 0,
-      "min_sep": 2.24
+      "min_sep": 2.24,
+      "overlaps": 0
      }
     }
    }
@@ -25748,7 +25775,8 @@
       "order": 1.0,
       "distortion": 1.04,
       "blocked": 0,
-      "min_sep": 2.0
+      "min_sep": 2.0,
+      "overlaps": 0
      }
     },
     "spring": {
@@ -25844,7 +25872,8 @@
       "order": 0.833,
       "distortion": 0.42,
       "blocked": 0,
-      "min_sep": 2.24
+      "min_sep": 2.24,
+      "overlaps": 0
      }
     },
     "mesh": {
@@ -25940,7 +25969,8 @@
       "order": 0.833,
       "distortion": 0.42,
       "blocked": 0,
-      "min_sep": 2.24
+      "min_sep": 2.24,
+      "overlaps": 0
      }
     },
     "rigid": {
@@ -26036,7 +26066,8 @@
       "order": 0.833,
       "distortion": 1.09,
       "blocked": 0,
-      "min_sep": 3.61
+      "min_sep": 3.61,
+      "overlaps": 0
      }
     },
     "hand": {
@@ -26118,7 +26149,8 @@
       "order": 1.0,
       "distortion": 3.0,
       "blocked": 1,
-      "min_sep": 4.29
+      "min_sep": 4.29,
+      "overlaps": 0
      }
     }
    }
@@ -26155,7 +26187,7 @@
        "z": 6,
        "gx": 3,
        "gz": 3,
-       "fp": 1,
+       "fp": 8,
        "count": 1,
        "spread": "",
        "gap": 1,
@@ -26175,8 +26207,8 @@
       },
       {
        "token": "pick_up_cube",
-       "x": 11,
-       "z": 8,
+       "x": 12,
+       "z": 6,
        "gx": 2,
        "gz": 51,
        "fp": 1,
@@ -26187,11 +26219,11 @@
       },
       {
        "token": "carousel_cake",
-       "x": 7,
+       "x": 11,
        "z": 8,
        "gx": 3,
        "gz": 53,
-       "fp": 9,
+       "fp": 8,
        "count": 1,
        "spread": "",
        "gap": 1,
@@ -26202,17 +26234,18 @@
       "placed": 5,
       "of": 5,
       "order": 1.0,
-      "distortion": 0.58,
+      "distortion": 0.04,
       "blocked": 0,
-      "min_sep": 2.24
+      "min_sep": 2.24,
+      "overlaps": 5
      }
     },
     "spring": {
      "positions": [
       {
        "token": "righttriangle",
-       "x": 2,
-       "z": 6,
+       "x": 1,
+       "z": 9,
        "gx": 0,
        "gz": 4,
        "fp": 1,
@@ -26223,11 +26256,11 @@
       },
       {
        "token": "boolean_tunnel",
-       "x": 5,
+       "x": 2,
        "z": 5,
        "gx": 3,
        "gz": 3,
-       "fp": 1,
+       "fp": 8,
        "count": 1,
        "spread": "",
        "gap": 1,
@@ -26235,8 +26268,8 @@
       },
       {
        "token": "dark_sphere",
-       "x": 8,
-       "z": 5,
+       "x": 6,
+       "z": 6,
        "gx": 3,
        "gz": 6,
        "fp": 1,
@@ -26248,7 +26281,7 @@
       {
        "token": "pick_up_cube",
        "x": 11,
-       "z": 8,
+       "z": 5,
        "gx": 2,
        "gz": 51,
        "fp": 1,
@@ -26259,11 +26292,11 @@
       },
       {
        "token": "carousel_cake",
-       "x": 7,
+       "x": 12,
        "z": 11,
        "gx": 3,
        "gz": 53,
-       "fp": 9,
+       "fp": 8,
        "count": 1,
        "spread": "",
        "gap": 1,
@@ -26273,18 +26306,19 @@
      "score": {
       "placed": 5,
       "of": 5,
-      "order": 1.0,
-      "distortion": 0.75,
+      "order": 0.75,
+      "distortion": 1.76,
       "blocked": 0,
-      "min_sep": 3.0
+      "min_sep": 4.12,
+      "overlaps": 5
      }
     },
     "mesh": {
      "positions": [
       {
        "token": "righttriangle",
-       "x": 2,
-       "z": 6,
+       "x": 1,
+       "z": 9,
        "gx": 0,
        "gz": 4,
        "fp": 1,
@@ -26295,11 +26329,11 @@
       },
       {
        "token": "boolean_tunnel",
-       "x": 5,
+       "x": 2,
        "z": 5,
        "gx": 3,
        "gz": 3,
-       "fp": 1,
+       "fp": 8,
        "count": 1,
        "spread": "",
        "gap": 1,
@@ -26307,7 +26341,7 @@
       },
       {
        "token": "dark_sphere",
-       "x": 8,
+       "x": 6,
        "z": 5,
        "gx": 3,
        "gz": 6,
@@ -26320,7 +26354,7 @@
       {
        "token": "pick_up_cube",
        "x": 11,
-       "z": 9,
+       "z": 5,
        "gx": 2,
        "gz": 51,
        "fp": 1,
@@ -26331,11 +26365,11 @@
       },
       {
        "token": "carousel_cake",
-       "x": 7,
+       "x": 12,
        "z": 11,
        "gx": 3,
        "gz": 53,
-       "fp": 9,
+       "fp": 8,
        "count": 1,
        "spread": "",
        "gap": 1,
@@ -26345,17 +26379,18 @@
      "score": {
       "placed": 5,
       "of": 5,
-      "order": 1.0,
-      "distortion": 0.81,
+      "order": 0.75,
+      "distortion": 1.7,
       "blocked": 0,
-      "min_sep": 3.0
+      "min_sep": 4.0,
+      "overlaps": 5
      }
     },
     "rigid": {
      "positions": [
       {
        "token": "righttriangle",
-       "x": 5,
+       "x": 6,
        "z": 5,
        "gx": 0,
        "gz": 4,
@@ -26367,11 +26402,11 @@
       },
       {
        "token": "boolean_tunnel",
-       "x": 8,
-       "z": 5,
+       "x": 12,
+       "z": 9,
        "gx": 3,
        "gz": 3,
-       "fp": 1,
+       "fp": 8,
        "count": 1,
        "spread": "",
        "gap": 1,
@@ -26379,8 +26414,8 @@
       },
       {
        "token": "dark_sphere",
-       "x": 8,
-       "z": 5,
+       "x": 6,
+       "z": 16,
        "gx": 3,
        "gz": 6,
        "fp": 1,
@@ -26391,8 +26426,8 @@
       },
       {
        "token": "pick_up_cube",
-       "x": 7,
-       "z": 32,
+       "x": 12,
+       "z": 17,
        "gx": 2,
        "gz": 51,
        "fp": 1,
@@ -26403,11 +26438,11 @@
       },
       {
        "token": "carousel_cake",
-       "x": 8,
-       "z": 32,
+       "x": 4,
+       "z": 25,
        "gx": 3,
        "gz": 53,
-       "fp": 9,
+       "fp": 8,
        "count": 1,
        "spread": "",
        "gap": 1,
@@ -26418,9 +26453,10 @@
       "placed": 5,
       "of": 5,
       "order": 1.0,
-      "distortion": 6.85,
+      "distortion": 5.36,
       "blocked": 0,
-      "min_sep": 0.0
+      "min_sep": 6.08,
+      "overlaps": 2
      }
     },
     "hand": {
@@ -26482,7 +26518,8 @@
       "order": 1.0,
       "distortion": 5.82,
       "blocked": 1,
-      "min_sep": 6.02
+      "min_sep": 6.02,
+      "overlaps": 2
      }
     }
    }

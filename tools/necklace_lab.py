@@ -277,9 +277,27 @@ def bead_size(b, footprints):
     return fp
 
 
-def relax(bodies, chain, hall, seed_pos, footprints=None, mesh=False, iters=260):
+def rect_half(b, footprints, measures):
+    """Half-extents (hw, hd) in cells of the bead's REAL body — the measured
+    w x d rectangle, run-extended along its spread axis."""
+    m = measures.get(b["token"]) if measures else None
+    cw = float(m[3]) if m else float(footprints.get(b["token"], 1))
+    cd = float(m[4]) if m else float(footprints.get(b["token"], 1))
+    hw, hd = cw / 2.0, cd / 2.0
+    if b.get("count", 1) > 1:
+        ext = ((b["count"] - 1) * b.get("gap", 1)) / 2.0
+        if b.get("spread") == "x":
+            hw += ext
+        else:
+            hd += ext
+    return hw, hd
+
+
+def relax(bodies, chain, hall, seed_pos, footprints=None, measures=None, mesh=False, iters=260):
     footprints = footprints or {}
+    measures = measures or {}
     pos = {i: [float(p[0]) + 0.5, float(p[1]) + 0.5] for i, p in seed_pos.items()}
+    halves = {i: rect_half(bodies[i], footprints, measures) for i in seed_pos}
     pairs = [(chain[k - 1], chain[k],
               max(LEEWAY[0], min(LEEWAY[1], grid_dist(bodies[chain[k - 1]], bodies[chain[k]]))), 0.35)
              for k in range(1, len(chain))]
@@ -301,16 +319,31 @@ def relax(bodies, chain, hall, seed_pos, footprints=None, mesh=False, iters=260)
             force[a][1] += f * dz
             force[b][0] -= f * dx
             force[b][1] -= f * dz
+        # THE RELUCTANCE (Palle: "reluctant to place on the foot print of
+        # another artifact — think separation"): the REAL measured rectangles
+        # must not overlap. A rect overlap pushes hard along the axis of
+        # least escape; the soft radius keeps polite spacing beyond contact.
         radii = {i: 0.5 * max(1.0, bead_size(bodies[i], footprints)) for i in ids}
         for ai in range(len(ids)):
             for bi in range(ai + 1, len(ids)):
                 a, b = ids[ai], ids[bi]
                 dx = pos[b][0] - pos[a][0]
                 dz = pos[b][1] - pos[a][1]
+                ox = halves[a][0] + halves[b][0] + 0.3 - abs(dx)
+                oz = halves[a][1] + halves[b][1] + 0.3 - abs(dz)
+                if ox > 0 and oz > 0:
+                    if ox < oz:
+                        push = 0.45 * ox * (1 if dx >= 0 else -1)
+                        force[a][0] -= push
+                        force[b][0] += push
+                    else:
+                        push = 0.45 * oz * (1 if dz >= 0 else -1)
+                        force[a][1] -= push
+                        force[b][1] += push
                 d = math.hypot(dx, dz) or 1e-6
                 sep = radii[a] + radii[b] + 0.6
                 if d < sep:
-                    f = 0.5 * (sep - d) / d
+                    f = 0.25 * (sep - d) / d
                     force[a][0] -= f * dx
                     force[a][1] -= f * dz
                     force[b][0] += f * dx
@@ -347,7 +380,7 @@ def relax(bodies, chain, hall, seed_pos, footprints=None, mesh=False, iters=260)
     return out
 
 
-def score(bodies, chain, hall, sol):
+def score(bodies, chain, hall, sol, footprints=None, measures=None):
     if not sol:
         return None
     placed = [(i, sol[i]) for i in chain if i in sol]
@@ -364,10 +397,19 @@ def score(bodies, chain, hall, sol):
     blocked = sum(1 for _, c in placed if hall.blocked(*c))
     min_sep = min((math.hypot(a[1][0] - b[1][0], a[1][1] - b[1][1])
                    for x_i, a in enumerate(placed) for b in placed[x_i + 1:]), default=99)
+    # the reluctance, measured: pairs whose REAL rectangles overlap
+    overlaps = 0
+    if measures or footprints:
+        hv = {i: rect_half(bodies[i], footprints or {}, measures or {}) for i, _ in placed}
+        for x_i in range(len(placed)):
+            for y_i in range(x_i + 1, len(placed)):
+                (ia, ca), (ib, cb) = placed[x_i], placed[y_i]
+                if abs(cb[0] - ca[0]) < hv[ia][0] + hv[ib][0] and abs(cb[1] - ca[1]) < hv[ia][1] + hv[ib][1]:
+                    overlaps += 1
     return {"placed": len(placed), "of": len(chain),
             "order": round(mono / max(1, len(placed) - 1), 3),
             "distortion": round(sum(dist_err) / len(dist_err), 2),
-            "blocked": blocked, "min_sep": round(min_sep, 2)}
+            "blocked": blocked, "min_sep": round(min_sep, 2), "overlaps": overlaps}
 
 
 def main():
@@ -394,8 +436,8 @@ def main():
         serp = solve_serpentine(bodies, chain, hall)
         if serp:
             sols["serpentine"] = serp
-            sols["spring"] = relax(bodies, chain, hall, serp, footprints=footprints, mesh=False)
-            sols["mesh"] = relax(bodies, chain, hall, serp, footprints=footprints, mesh=True)
+            sols["spring"] = relax(bodies, chain, hall, serp, footprints=footprints, measures=measures, mesh=False)
+            sols["mesh"] = relax(bodies, chain, hall, serp, footprints=footprints, measures=measures, mesh=True)
         # the rigid baseline: the ledger's own finals, scored on the same terms
         rigid = {}
         tok_seen = {}
@@ -418,7 +460,7 @@ def main():
                                "spread": bodies[i].get("spread", ""),
                                "gap": bodies[i].get("gap", 1),
                                "plinth": bodies[i]["plinth"]} for i in chain if i in sol],
-                "score": score(bodies, chain, hall, sol)}
+                "score": score(bodies, chain, hall, sol, footprints, measures)}
         # THE HAND (2026-08-21, Palle: "make it editable… add and remove
         # beads"): a hall with a saved hand necklace (ada_run/
         # necklace_hand.json, written by the /transplant bench) replaces the
@@ -439,7 +481,7 @@ def main():
                                "plinth": bool(hb[k2].get("plinth")),
                                "pinned": bool(hb[k2].get("pinned")),
                                "added": bool(hb[k2].get("added"))} for k2 in hchain],
-                "score": score(hbodies, hchain, hall, hsol)}
+                "score": score(hbodies, hchain, hall, hsol, footprints, measures)}
         out[key] = entry
         line = "  %-38s" % key
         for name in ("rigid", "serpentine", "spring", "mesh"):
