@@ -657,6 +657,7 @@ var _doll_hover: MeshInstance3D = null      # the faint ring under the mouse
 var _doll_recut_t: float = 0.0     # deferred bodies arrive late; the cut re-runs
 var _doll_brush: String = ""       # "" off · "2" block · "4" wall · "0" hole · "1" floor
 var _doll_brush_meshes: Dictionary = {}   # "x|z" -> instant preview mesh
+var _doll_fig: Node3D = null              # the visible doll — walks, faces its way
 # ── THE BOOT CLOCK (2026-08-20, Palle: "still takes ~10 s to load the first
 # hall — what is happening there?") ── every boot phase timed and written into
 # em_built_*.json as `boot_ms`, so a slow launch answers by name instead of
@@ -2042,6 +2043,44 @@ func _setup_world() -> void:
 		# the editor HUD stands from the first frame — palette, selection,
 		# dirty count, all visible while the mouse works
 		call_deferred("_arm_editor")
+		# THE DOLL ITSELF (2026-08-21, Palle: "a player walking around in the
+		# world in isometric perspective... the player can work very cute").
+		# The walker was an invisible capsule; from above, cuteness needs a
+		# body. A small figure with a nose, so its heading reads.
+		var fig := Node3D.new()
+		fig.name = "Doll"
+		var body := MeshInstance3D.new()
+		var bcap := CapsuleMesh.new()
+		bcap.radius = 0.2
+		bcap.height = 0.95
+		body.mesh = bcap
+		body.position = Vector3(0, 0.62, 0)
+		var bmat := StandardMaterial3D.new()
+		bmat.albedo_color = Color(0.92, 0.55, 0.18)
+		body.material_override = bmat
+		fig.add_child(body)
+		var head := MeshInstance3D.new()
+		var hs := SphereMesh.new()
+		hs.radius = 0.14
+		hs.height = 0.28
+		head.mesh = hs
+		head.position = Vector3(0, 1.28, 0)
+		var hmat := StandardMaterial3D.new()
+		hmat.albedo_color = Color(0.96, 0.87, 0.76)
+		head.material_override = hmat
+		fig.add_child(head)
+		var nose := MeshInstance3D.new()
+		var ns := CylinderMesh.new()
+		ns.top_radius = 0.0
+		ns.bottom_radius = 0.05
+		ns.height = 0.14
+		nose.mesh = ns
+		nose.position = Vector3(0, 1.28, -0.16)
+		nose.rotation_degrees = Vector3(-90, 0, 0)
+		nose.material_override = hmat
+		fig.add_child(nose)
+		_player.add_child(fig)
+		_doll_fig = fig
 		print("[em-doll] THE DOLL HOUSE — walls cut at %.2f m; drag bodies, double-click drops the palette pick, [ ] browse, MMB pan, RMB orbit, H returns" % DOLL_CUT)
 	# the desktop hand — the same crosshair interaction the map scenes use:
 	# LMB press/drag on handles and buttons, RMB carry-grab, wheel = hold
@@ -2204,8 +2243,10 @@ func _doll_cut(seg: Node3D) -> void:
 		return
 	var hidden := 0
 	var shrunk := 0
-	# the BATCHED architecture too (ArchBatch MultiMeshes, wherever parented):
-	# a ceiling slab lives there and sailed over the mesh-only cut
+	# EVERY batched architecture MultiMesh, wherever parented and WHATEVER its
+	# name — em_detail emits its coffered ceiling as "Ceiling"/"ArrisCeiling"
+	# MultiMeshes, and the ArchBatch-only knife walked right past them (the
+	# ceiling Palle kept seeing). Artifact subtrees stay exempt as ever.
 	var mstack: Array = [seg]
 	while not mstack.is_empty():
 		var mn: Node = mstack.pop_back()
@@ -2213,7 +2254,7 @@ func _doll_cut(seg: Node3D) -> void:
 			continue
 		for mc in mn.get_children():
 			mstack.append(mc)
-		if mn is MultiMeshInstance3D and String(mn.name).begins_with("ArchBatch"):
+		if mn is MultiMeshInstance3D:
 			var mm: MultiMesh = (mn as MultiMeshInstance3D).multimesh
 			if mm == null:
 				continue
@@ -7286,21 +7327,29 @@ func _physics_process(_delta: float) -> void:
 func _doll_frame(delta: float) -> void:
 	if _player == null or _cam == null:
 		return
+	# WASD WALKS the doll — a body among bodies: move_and_slide, walls and
+	# podiums push back, the streaming follows its z like any visitor's.
+	# (MMB drag stays the god's hand and glides through everything.)
 	var dir := Vector3.ZERO
 	if Input.is_key_pressed(KEY_W):
-		dir += Vector3(-sin(_doll_yaw), 0, -cos(_doll_yaw))
+		dir += Vector3(-sin(_doll_yaw_now), 0, -cos(_doll_yaw_now))
 	if Input.is_key_pressed(KEY_S):
-		dir -= Vector3(-sin(_doll_yaw), 0, -cos(_doll_yaw))
+		dir -= Vector3(-sin(_doll_yaw_now), 0, -cos(_doll_yaw_now))
 	if Input.is_key_pressed(KEY_A):
-		dir += Vector3(-cos(_doll_yaw), 0, sin(_doll_yaw))
+		dir += Vector3(-cos(_doll_yaw_now), 0, sin(_doll_yaw_now))
 	if Input.is_key_pressed(KEY_D):
-		dir -= Vector3(-cos(_doll_yaw), 0, sin(_doll_yaw))
+		dir -= Vector3(-cos(_doll_yaw_now), 0, sin(_doll_yaw_now))
 	if dir.length() > 0.1:
-		var speed: float = _doll_zoom * 0.6 * (2.5 if Input.is_key_pressed(KEY_SHIFT) else 1.0)
-		_player.position += dir.normalized() * speed * delta
-		_player.position.y = 0.0
-		_last_ground = _player.position
-	_player.velocity = Vector3.ZERO
+		dir = dir.normalized()
+		_player.velocity = dir * 4.4 * (2.3 if Input.is_key_pressed(KEY_SHIFT) else 1.0)
+		if _doll_fig != null and is_instance_valid(_doll_fig):
+			_doll_fig.rotation.y = lerp_angle(_doll_fig.rotation.y, atan2(-dir.x, -dir.z), 1.0 - exp(-12.0 * delta))
+	else:
+		_player.velocity = Vector3.ZERO
+	_player.velocity.y = 0.0
+	_player.move_and_slide()
+	_player.position.y = 0.0
+	_last_ground = _player.position
 	# butter: the yaw and the perch ease toward their targets, so a turn or a
 	# pan reads as a camera move, not a teleport
 	var kf: float = 1.0 - exp(-9.0 * delta)
