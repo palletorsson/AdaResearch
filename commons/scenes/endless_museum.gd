@@ -1640,6 +1640,12 @@ func _eye_pos() -> Vector3:
 	if _vr:
 		var e := _vr_eye()
 		return e.global_position if e != null else Vector3(7.5, EYE, 0.0)
+	if _dollhouse and _player != null:
+		# the CAMERA is a perch 30 m behind and 46 m above — the doll is the
+		# visitor. Cull, streaming, the door, the acoustics and the toggle's
+		# resume all follow the DOLL ("player position should be the same in
+		# 3d as in iso").
+		return _player.position + Vector3(0, EYE, 0)
 	return _cam.global_position if _cam != null else Vector3.ZERO
 
 ## PLAIN HANDS (2026-08-18). Palle: "Can I have just the hands we've been
@@ -2053,6 +2059,21 @@ func _setup_world() -> void:
 		# the editor HUD stands from the first frame — palette, selection,
 		# dirty count, all visible while the mouse works
 		call_deferred("_arm_editor")
+		# the visible key-help — iso deserves a 2D face
+		var help_layer := CanvasLayer.new()
+		help_layer.layer = 80
+		var help := Label.new()
+		help.text = "DOLL HOUSE   click floor: walk · click body: drag · N: add menu · X: remove · B: brush · R: turn · MMB: pan · RMB: orbit · wheel: zoom · Q/E: turn house · H: back to the walk"
+		help.set_anchors_preset(Control.PRESET_BOTTOM_LEFT)
+		help.offset_left = 12
+		help.offset_top = -34
+		help.offset_bottom = -10
+		help.add_theme_font_size_override("font_size", 13)
+		help.add_theme_color_override("font_color", Color(1, 1, 1, 0.85))
+		help.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.8))
+		help.add_theme_constant_override("outline_size", 6)
+		help_layer.add_child(help)
+		add_child(help_layer)
 		# THE DOLL ITSELF (2026-08-21, Palle: "a player walking around in the
 		# world in isometric perspective... the player can work very cute").
 		# The walker was an invisible capsule; from above, cuteness needs a
@@ -7427,9 +7448,6 @@ func _doll_menu_toggle() -> void:
 		return
 	var ch := _edit_chapter_here()
 	_edit_pal = _mod_editor.call("palette", _pool, ch) if _mod_has(_mod_editor, "palette") else []
-	if _edit_pal.is_empty():
-		print("[em-doll] chapter %s offers nothing to add here" % ch)
-		return
 	_doll_menu = CanvasLayer.new()
 	_doll_menu.layer = 88
 	var panel := PanelContainer.new()
@@ -7441,7 +7459,7 @@ func _doll_menu_toggle() -> void:
 	var vb := VBoxContainer.new()
 	panel.add_child(vb)
 	var title := Label.new()
-	title.text = "add to %s — click places it before the doll" % ch
+	title.text = ("add to %s — click places it before the doll" % ch) if not _edit_pal.is_empty() 		else "chapter '%s' offers nothing here — walk the doll into a hall and press N again" % ch
 	title.autowrap_mode = TextServer.AUTOWRAP_WORD
 	vb.add_child(title)
 	_doll_menu_filter = LineEdit.new()
