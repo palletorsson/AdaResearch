@@ -28,6 +28,28 @@ var _use_quick_transition: bool = false  # Set by AdaSceneManager for in-sequenc
 
 const VR_MAP_LOADER_KIOSK_SCENE_PATH := "res://algorithms/wavefunctions/mariocontrol/kiosk.tscn"
 const SPAWNED_MAP_LOADER_GROUP := "desktop_spawned_map_loader_kiosk"
+
+# THE CLASS WARMER (2026-08-21, the Quest's 'order' crash). This staging loads
+# scenes on a BACKGROUND thread, and on the Quest that thread parsed the hand
+# providers before their base class was registered: movement_direct/turn/jump/
+# flight each failed with `Could not resolve class "XRToolsMovementProvider"`,
+# cached as broken, and their nodes came up as bare Node3Ds still in the
+# movement_providers group — player_body's sort_by_order then crashed on
+# p.order and the thumbsticks died. The same build never fails on desktop:
+# faster IO wins the race there, which is why every local census was CLEAN.
+# Preloading the chain HERE — the main scene's script, parsed on the main
+# thread before any load_scene runs — registers every class first, so the
+# loader thread only ever finds them.
+const _XR_CLASS_WARMER := [
+	preload("res://addons/godot-xr-tools/functions/movement_provider.gd"),
+	preload("res://addons/godot-xr-tools/player/player_body.gd"),
+	preload("res://addons/godot-xr-tools/functions/movement_direct.gd"),
+	preload("res://addons/godot-xr-tools/functions/movement_turn.gd"),
+	preload("res://addons/godot-xr-tools/functions/movement_jump.gd"),
+	preload("res://addons/godot-xr-tools/functions/movement_flight.gd"),
+	preload("res://addons/godot-xr-tools/functions/movement_wall_walk.gd"),
+	preload("res://addons/godot-xr-tools/functions/movement_climb.gd"),
+]
 const MAP_LOADER_SPAWN_COOLDOWN_MS := 250
 const MAP_READY_TIMEOUT_SEC := 20.0
 
