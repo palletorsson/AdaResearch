@@ -5,7 +5,7 @@ extends SceneTree
 ##   godot --headless --path . --xr-mode off --script res://commons/testing/probe_dollhouse.gd
 
 const OUT := "res://ada_run/dollhouse_probe.txt"
-const CTL := "res://ada_run/em_control.json"
+const CTL := "res://ada_run/_doll_trial_control.json"   # the trial's own voice — never the live session's file
 
 func _initialize() -> void:
 	call_deferred("_run")
@@ -17,6 +17,7 @@ func _boot(doll: bool) -> Dictionary:
 	f.close()
 	var inst: Node3D = (load("res://commons/scenes/endless_museum.tscn") as PackedScene).instantiate() as Node3D
 	inst.set("_plan_path", "res://ada_run/em_plan.json")
+	inst.set("EM_CONTROL", CTL)
 	get_root().add_child(inst)
 	var r := {}
 	return {"inst": inst}
@@ -40,7 +41,6 @@ func _tall_visible(seg: Node3D) -> int:
 
 func _run() -> void:
 	var fails: Array = []
-	var ctl_before := FileAccess.get_file_as_string(CTL)
 
 	var a: Node3D = _boot(true)["inst"]
 	await create_timer(1.0).timeout
@@ -82,9 +82,7 @@ func _run() -> void:
 		fails.append("the plain walk has NO tall walls — the cut leaked into it")
 	b.queue_free()
 
-	var f2 := FileAccess.open(CTL, FileAccess.WRITE)
-	f2.store_string(ctl_before)
-	f2.close()
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(CTL))
 	var f3 := FileAccess.open(OUT, FileAccess.WRITE)
 	f3.store_string("PASS" if fails.is_empty() else "FAIL: " + "; ".join(fails))
 	f3.close()

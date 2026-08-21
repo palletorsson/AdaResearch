@@ -2,11 +2,12 @@ extends SceneTree
 ## WHO ARE THE WALLS? Everything tall in segment 0, by class, name, parent.
 func _initialize() -> void: call_deferred("_run")
 func _run() -> void:
-	var f0 := FileAccess.open("res://ada_run/em_control.json", FileAccess.WRITE)
+	var f0 := FileAccess.open("res://ada_run/_doll_trial_control.json", FileAccess.WRITE)
 	f0.store_string(JSON.stringify({"first_chapter": "primitives", "first_map": "", "dollhouse": 1}, " "))
 	f0.close()
 	var inst: Node3D = (load("res://commons/scenes/endless_museum.tscn") as PackedScene).instantiate() as Node3D
 	inst.set("_plan_path", "res://ada_run/em_plan.json")
+	inst.set("EM_CONTROL", "res://ada_run/_doll_trial_control.json")   # never the live session's file
 	get_root().add_child(inst)
 	await create_timer(1.0).timeout
 	var seg: Node3D = ((inst.get("_segments") as Array)[0] as Dictionary).get("node")
@@ -16,9 +17,7 @@ func _run() -> void:
 	var lines: Array = []
 	for t in talls.slice(0, 20):
 		lines.append("%.1f m top · %s '%s' under '%s' · artifact=%s" % [t["top"], t["cls"], t["name"], t["parent"], t.get("artifact", "")])
-	var fr := FileAccess.open("res://ada_run/em_control.json", FileAccess.WRITE)
-	fr.store_string(JSON.stringify({"first_chapter": "primitives", "first_map": "", "dollhouse": 0}, " "))
-	fr.close()
+	DirAccess.remove_absolute(ProjectSettings.globalize_path("res://ada_run/_doll_trial_control.json"))
 	var f := FileAccess.open("res://ada_run/wall_census.txt", FileAccess.WRITE)
 	f.store_string("\n".join(lines))
 	f.close()

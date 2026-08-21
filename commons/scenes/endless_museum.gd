@@ -335,7 +335,12 @@ var _seg_index: int = 0
 var _prev_w: int = -1             # width of the previous segment's tile (lobby seals the jump)
 var _first_key: String = ""       # --em-first=<key> rotates the dealing order
 var _first_chapter: String = ""   # --em-chapter=<seq> (or ada_run/em_control.json first_chapter): deal this CHAPTER first
-const EM_CONTROL := "res://ada_run/em_control.json"   # menu launches have no flags; this file speaks for them
+# menu launches have no flags; this file speaks for them. A VAR, not a const:
+# a probe injects its own path here (inst.set) so a test run never writes the
+# file the user's LIVE session is reading — one morning of shared-file toggles
+# taught that lesson ("change between iso and walk does not update": a probe's
+# restore landed between the player's H press and the reload's read).
+var EM_CONTROL := "res://ada_run/em_control.json"
 # ── THE WHITE CUBE GATE (2026-08-12) ─────────────────────────────────────────
 # OFF by default and gated twice, so a museum that never opted in is untouched:
 #   --em-white-cube          forces every segment of THIS RUN into the mode
@@ -666,6 +671,9 @@ var _doll_menu: CanvasLayer = null        # N: the add menu — click a name, it
 var _doll_menu_list: ItemList = null
 var _doll_menu_filter: LineEdit = null
 var _doll_menu_tokens: Array = []
+var _doll_insp: CanvasLayer = null        # the inspector — a selected body's values, live
+var _doll_insp_lbl: Label = null
+var _doll_insp_t: float = 0.0
 var _doll_walk_to: Vector3 = Vector3(1e9, 0, 0)   # click-to-walk target; 1e9 = none
 var _doll_mark: MeshInstance3D = null              # the little goal disc
 # ── THE BOOT CLOCK (2026-08-20, Palle: "still takes ~10 s to load the first
@@ -2059,6 +2067,7 @@ func _setup_world() -> void:
 		# the editor HUD stands from the first frame — palette, selection,
 		# dirty count, all visible while the mouse works
 		call_deferred("_arm_editor")
+		call_deferred("_doll_gag")   # artifacts listen to keys; in the doll house the hand owns them
 		# the lo-fi bed: the doll house has a soundtrack (em_audio synthesises
 		# it — no file, seamless 75 BPM loop through the room's own tone bus)
 		if _mod_has(_mod_audio, "lofi"):
@@ -7438,6 +7447,7 @@ func _doll_frame(delta: float) -> void:
 			var sn: Node3D = _node_or_null((sv as Dictionary).get("node"))
 			if sn != null:
 				_doll_cut(sn)
+		_doll_gag()   # late-stamped arrivals may listen to keys — silence them too
 	if _doll_ring != null and is_instance_valid(_doll_ring):
 		if _edit_sel >= 0 and _edit_sel < _edit_records.size():
 			var rn: Node3D = _node_or_null((_edit_records[_edit_sel] as Dictionary).get("node"))
@@ -7448,6 +7458,12 @@ func _doll_frame(delta: float) -> void:
 				_doll_ring.visible = false
 		else:
 			_doll_ring.visible = false
+	# the inspector breathes at 4 Hz — a drag or a turn shows its numbers move
+	_doll_insp_t += delta
+	if _doll_insp_t >= 0.25:
+		_doll_insp_t = 0.0
+		if _edit_sel >= 0 and _doll_insp != null and is_instance_valid(_doll_insp) and _doll_insp.visible:
+			_doll_insp_fill()
 
 
 ## THE ADD MENU (2026-08-21, Palle: "iso needs a menu to add new artifact,
@@ -7648,6 +7664,120 @@ func _doll_pick(pt: Vector3) -> int:
 	return best
 
 
+## THE GAG (2026-08-21). In the walk the artifacts may listen to the
+## keyboard — the clipboard turns its pages on the arrow keys, the scalable
+## cube claims X, Y, Z and TAB — and any of them calling
+## set_input_as_handled() stops the event BEFORE the museum's _input sees it,
+## because children stand earlier in the propagation order. In the doll house
+## the keyboard belongs to the hand, so every child subtree has its _input
+## silenced. WASD survives (the walker POLLS Input), the menu's filter
+## survives (typing is gui input, a later stage), and the exit needs no
+## undo: leaving the doll house reloads the scene. The recut re-applies it,
+## so late-stamped arrivals are gagged too.
+func _doll_gag() -> void:
+	if not _dollhouse:
+		return
+	for c in get_children():
+		c.propagate_call("set_process_input", [false])
+		c.propagate_call("set_process_unhandled_input", [false])
+		c.propagate_call("set_process_unhandled_key_input", [false])
+		c.propagate_call("set_process_shortcut_input", [false])
+
+
+## THE INSPECTOR (2026-08-21, Palle: "when click on a artifact show values in
+## inspector window"). Selecting a body opens a pane, bottom-right, that reads
+## the record as it stands NOW: token, kind, hall (chapter · pearl), the cell
+## the plan gave and the cell it holds, live position, turn and scale, the
+## plinth's verdict, and every hand ruling that names it. It refreshes while
+## held, so a drag or a turn shows its numbers as they change.
+func _doll_insp_show() -> void:
+	if _doll_insp == null or not is_instance_valid(_doll_insp):
+		_doll_insp = CanvasLayer.new()
+		_doll_insp.layer = 87
+		var panel := PanelContainer.new()
+		panel.set_anchors_preset(Control.PRESET_BOTTOM_RIGHT)
+		panel.offset_left = -348
+		panel.offset_top = -324
+		panel.offset_right = -12
+		panel.offset_bottom = -40
+		_doll_insp_lbl = Label.new()
+		_doll_insp_lbl.add_theme_font_size_override("font_size", 13)
+		_doll_insp_lbl.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		panel.add_child(_doll_insp_lbl)
+		_doll_insp.add_child(panel)
+		add_child(_doll_insp)
+	_doll_insp.visible = true
+	_doll_insp_fill()
+
+
+func _doll_insp_fill() -> void:
+	if _doll_insp_lbl == null or not is_instance_valid(_doll_insp_lbl):
+		return
+	if _edit_sel < 0 or _edit_sel >= _edit_records.size():
+		return
+	var r: Dictionary = _edit_records[_edit_sel]
+	var n: Node3D = _node_or_null(r.get("node"))
+	var kind := String(r.get("kind", ""))
+	var rows: PackedStringArray = []
+	rows.append(String(r.get("token", "?")))
+	rows.append("kind      " + (kind if kind != "" else "artifact"))
+	var ch := String(r.get("chapter", ""))
+	var sgn: Node = r.get("seg")
+	var pearl := ""
+	if sgn != null and is_instance_valid(sgn) and sgn.has_meta("em_pearl"):
+		pearl = String(sgn.get_meta("em_pearl"))
+	if ch != "" or pearl != "":
+		rows.append("hall      " + ch + ((" · " + pearl) if pearl != "" else ""))
+	var tc: Array = r.get("tile_cell", []) if r.get("tile_cell") is Array else []
+	var fc: Array = r.get("from", []) if r.get("from") is Array else []
+	if tc.size() >= 2:
+		var cell_s := "cell      [%d, %d]" % [int(tc[0]), int(tc[1])]
+		if fc.size() >= 2 and (int(fc[0]) != int(tc[0]) or int(fc[1]) != int(tc[1])):
+			cell_s += "   (plan had [%d, %d])" % [int(fc[0]), int(fc[1])]
+		rows.append(cell_s)
+	if n != null:
+		rows.append("stands    %.1f  %.1f  %.1f m" % [n.global_position.x, n.global_position.y, n.global_position.z])
+		rows.append("turned    %.0f°" % rad_to_deg(n.rotation.y))
+		if absf(n.scale.x - 1.0) > 0.01:
+			rows.append("scaled    ×%.2f" % n.scale.x)
+	if String(r.get("plinth", "")) != "":
+		rows.append("plinth    %s (%.2f m) — %s" % [String(r.get("plinth", "")),
+			float(r.get("plinth_h", 0.0)), String(r.get("plinth_why", ""))])
+	var tok := String(r.get("token", ""))
+	var ruled: PackedStringArray = []
+	for ov_v in _edit_overrides:
+		var ov: Dictionary = ov_v
+		if String(ov.get("token", "")) != tok:
+			continue
+		if String(ov.get("chapter", "")) != "" and ch != "" and String(ov.get("chapter", "")) != ch:
+			continue
+		var bits: PackedStringArray = []
+		if bool(ov.get("add", false)):
+			bits.append("added by hand")
+		var to_v: Variant = ov.get("to")
+		if to_v is Array and (to_v as Array).size() >= 2:
+			bits.append("to [%d, %d]" % [int((to_v as Array)[0]), int((to_v as Array)[1])])
+		if ov.has("rotation") and absf(float(ov.get("rotation", 0.0))) > 0.01:
+			bits.append("rot %.0f°" % float(ov.get("rotation")))
+		if ov.has("offset"):
+			bits.append("offset " + str(ov.get("offset")))
+		if ov.has("scale"):
+			bits.append("scale " + str(ov.get("scale")))
+		if ov.has("y"):
+			bits.append("y " + str(ov.get("y")))
+		if bool(ov.get("remove", false)):
+			bits.append("REMOVED")
+		if not bits.is_empty():
+			ruled.append("  · " + " · ".join(bits))
+	if not ruled.is_empty():
+		rows.append("rulings")
+		for line in ruled:
+			rows.append(line)
+	rows.append("")
+	rows.append("R turn · +/- scale · PGUP/PGDN lift · X remove")
+	_doll_insp_lbl.text = "\n".join(rows)
+
+
 func _doll_select(idx: int) -> void:
 	_edit_sel = idx
 	if idx >= 0:
@@ -7672,6 +7802,10 @@ func _doll_select(idx: int) -> void:
 		_doll_ring.material_override = m
 		add_child(_doll_ring)
 	_doll_ring.visible = idx >= 0
+	if idx >= 0:
+		_doll_insp_show()
+	elif _doll_insp != null and is_instance_valid(_doll_insp):
+		_doll_insp.visible = false
 
 
 var _jump_pressed: bool = false
@@ -8085,6 +8219,17 @@ func _input(event: InputEvent) -> void:
 	if _dollhouse and event is InputEventKey and (event as InputEventKey).pressed and not (event as InputEventKey).echo:
 		var kc := (event as InputEventKey).keycode
 		_edit_shift = (event as InputEventKey).shift_pressed
+		if _doll_menu != null and is_instance_valid(_doll_menu):
+			# the menu is open and the museum's _input runs BEFORE gui input:
+			# typing "line" in the filter must not turn the house or close the
+			# panel on its n. ESC always closes; N closes only when nobody is
+			# typing; every other key belongs to the menu's own controls.
+			var typing: bool = _doll_menu_filter != null \
+					and is_instance_valid(_doll_menu_filter) and _doll_menu_filter.has_focus()
+			if kc == KEY_ESCAPE or (kc == KEY_N and not typing):
+				_doll_menu.queue_free()
+				_doll_menu = null
+			return
 		if kc == KEY_N:
 			_doll_menu_toggle()
 			return
@@ -8108,10 +8253,6 @@ func _input(event: InputEvent) -> void:
 			return
 		if kc == KEY_F5 and _edit_sel >= 0:
 			_edit_handle_key(KEY_F5)
-			return
-		if kc == KEY_ESCAPE and _doll_menu != null and is_instance_valid(_doll_menu):
-			_doll_menu.queue_free()
-			_doll_menu = null
 			return
 		if kc == KEY_ESCAPE and (_doll_drag or _edit_sel >= 0):
 			if _doll_drag and _edit_sel >= 0:
@@ -8196,11 +8337,20 @@ func _input(event: InputEvent) -> void:
 func _apply_hand_adds(seg: Node3D, zbase: int, chapter: String) -> void:
 	if chapter == "" or _edit_overrides.is_empty():
 		return
+	var seg_pearl := String(seg.get_meta("em_pearl")) if seg.has_meta("em_pearl") else ""
 	for ov_v in _edit_overrides:
 		var ovd: Dictionary = ov_v as Dictionary
 		if not bool(ovd.get("add", false)):
 			continue
 		if String(ovd.get("chapter", "")) != chapter:
+			continue
+		# THE PEARL KEY (2026-08-21, Palle: "when we add things to space 2 it
+		# also added to space one"). A chapter is MANY halls — one per pearl —
+		# and a chapter-keyed add replayed in every one of them. A ruling that
+		# names its pearl binds to that hall alone; legacy rows without one
+		# keep the old chapter-wide reach.
+		if String(ovd.get("pearl", "")) != "" and seg_pearl != "" \
+				and String(ovd.get("pearl", "")) != seg_pearl:
 			continue
 		ovd["_matched"] = true
 		var atok := String(ovd.get("token", ""))
@@ -8440,10 +8590,11 @@ func _edit_place_at(wx: int, wz: int) -> void:
 		var ch := ""
 		if seg.has_meta("em_chapter"):
 			ch = String(seg.get_meta("em_chapter"))
+		var pr := String(seg.get_meta("em_pearl")) if seg.has_meta("em_pearl") else ""
 		var cell: Dictionary = {"x": wx, "y": wz - zbase, "rank": 2, "top": 0.0}
 		if _stamp(seg, String(cand.get("scene", "")), String(cand.get("token", "")),
 				cell, zbase, 1, {}, false):
-			_edit_overrides.append({"add": true, "chapter": ch,
+			_edit_overrides.append({"add": true, "chapter": ch, "pearl": pr,
 				"token": String(cand.get("token", "")),
 				"from": [wx, wz - zbase - VESTIBULE_H],
 				"to": [wx, wz - zbase - VESTIBULE_H],

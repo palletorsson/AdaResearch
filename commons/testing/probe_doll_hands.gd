@@ -6,7 +6,7 @@ extends SceneTree
 ##   godot --headless --path . --xr-mode off --script res://commons/testing/probe_doll_hands.gd
 
 const OUT := "res://ada_run/doll_hands_probe.txt"
-const CTL := "res://ada_run/em_control.json"
+const CTL := "res://ada_run/_doll_trial_control.json"   # the trial's own voice — never the live session's file
 
 func _initialize() -> void:
 	call_deferred("_run")
@@ -14,12 +14,12 @@ func _initialize() -> void:
 
 func _run() -> void:
 	var fails: Array = []
-	var ctl_before := FileAccess.get_file_as_string(CTL)
 	var f := FileAccess.open(CTL, FileAccess.WRITE)
 	f.store_string(JSON.stringify({"first_chapter": "primitives", "first_map": "", "dollhouse": 1}, " "))
 	f.close()
 	var inst: Node3D = (load("res://commons/scenes/endless_museum.tscn") as PackedScene).instantiate() as Node3D
 	inst.set("_plan_path", "res://ada_run/em_plan.json")
+	inst.set("EM_CONTROL", CTL)
 	inst.set("_overrides_path", "res://ada_run/_doll_trial_overrides.json")   # the trial's file, never the curator's
 	get_root().add_child(inst)
 	await create_timer(1.2).timeout
@@ -137,9 +137,7 @@ func _run() -> void:
 				fails.append("X did not remove the placed body")
 	inst.call("_doll_menu_toggle")
 
-	var f2 := FileAccess.open(CTL, FileAccess.WRITE)
-	f2.store_string(ctl_before)
-	f2.close()
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(CTL))
 	DirAccess.remove_absolute(ProjectSettings.globalize_path("res://ada_run/_doll_trial_overrides.json"))
 	var f3 := FileAccess.open(OUT, FileAccess.WRITE)
 	f3.store_string("PASS" if fails.is_empty() else "FAIL: " + "; ".join(fails))
