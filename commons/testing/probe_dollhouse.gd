@@ -57,6 +57,14 @@ func _run() -> void:
 	if tall_a > 0:
 		fails.append(str(tall_a) + " tall architecture piece(s) still visible in the doll house")
 	var cut := 0
+	# the pan: carry the doll 30 m along z and wait past the bounds check's
+	# 1 s interval — a sleeping check leaves it there; the old bug snapped it home
+	var pl: CharacterBody3D = a.get("_player")
+	var z0: float = pl.position.z
+	pl.position.z += 30.0
+	await create_timer(1.6).timeout
+	if absf(pl.position.z - (z0 + 30.0)) > 2.0:
+		fails.append("the doll was yanked home after a 30 m pan (bounds check awake?) — z %.1f" % pl.position.z)
 	a.queue_free()
 	await process_frame
 

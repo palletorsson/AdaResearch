@@ -654,6 +654,9 @@ var _doll_orbit: bool = false      # RMB held over nothing — the house turns s
 var _doll_cam_pos: Vector3 = Vector3.ZERO   # smoothed perch (butter, not snap)
 var _doll_yaw_now: float = 0.0              # smoothed yaw
 var _doll_hover: MeshInstance3D = null      # the faint ring under the mouse
+var _doll_recut_t: float = 0.0     # deferred bodies arrive late; the cut re-runs
+var _doll_brush: String = ""       # "" off · "2" block · "4" wall · "0" hole · "1" floor
+var _doll_brush_meshes: Dictionary = {}   # "x|z" -> instant preview mesh
 # ── THE BOOT CLOCK (2026-08-20, Palle: "still takes ~10 s to load the first
 # hall — what is happening there?") ── every boot phase timed and written into
 # em_built_*.json as `boot_ms`, so a slow launch answers by name instead of
@@ -2028,11 +2031,14 @@ func _setup_world() -> void:
 		_cam.size = _doll_zoom
 		_cam.far = 400.0
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		# a god's hand pans anywhere: the walk-time bounds box would yank the
-		# doll back at x ±20 the moment the eye left the building
+		# a god's hand pans anywhere. Setting box_bounds was not enough — the
+		# check's default box is ±10 and check_type decides what it reads, so
+		# panning x snapped the doll home ("can only move along z"). The
+		# check now simply SLEEPS in the doll house; the walk's reload wakes
+		# a fresh one.
 		var db: Node = get_tree().get_root().find_child("PlayerBoundsCheck", true, false)
 		if db != null:
-			db.set("box_bounds", Vector3(1.0e12, 1.0e12, 1.0e12))
+			db.set("active", false)
 		# the editor HUD stands from the first frame — palette, selection,
 		# dirty count, all visible while the mouse works
 		call_deferred("_arm_editor")
@@ -2234,7 +2240,14 @@ func _doll_cut(seg: Node3D) -> void:
 	while not stack.is_empty():
 		var n: Node = stack.pop_back()
 		if n != seg and n is Node3D and (n as Node).has_meta("artifact_lookup_name"):
-			continue   # an artifact keeps its full height — it is the exhibit
+			# a FLOOR artifact keeps its height — it is the exhibit. But an
+			# artifact HANGING wholly above the cut (ceiling_vent, service
+			# trays, lamps — the census named them) is the roof's furniture,
+			# and it goes with the roof.
+			if (n as Node3D).visible and _subtree_bottom(n) > 2.0:
+				(n as Node3D).visible = false
+				hidden += 1
+			continue
 		for c in n.get_children():
 			stack.append(c)
 		if not (n is MeshInstance3D):
@@ -2259,6 +2272,21 @@ func _doll_cut(seg: Node3D) -> void:
 			shrunk += 1
 	if hidden + shrunk > 0:
 		print("[em-doll] the house opens: %d wall(s) cut to %.2f m, %d high piece(s) hidden" % [shrunk, DOLL_CUT, hidden])
+
+
+## The lowest world-space point of any mesh under a node — the test that
+## separates a hung thing from a standing thing.
+func _subtree_bottom(root: Node) -> float:
+	var lo: float = 1e18
+	var st: Array = [root]
+	while not st.is_empty():
+		var n: Node = st.pop_back()
+		for c in n.get_children():
+			st.append(c)
+		if n is MeshInstance3D and (n as MeshInstance3D).mesh != null:
+			var wb: AABB = (n as MeshInstance3D).global_transform * (n as MeshInstance3D).get_aabb()
+			lo = minf(lo, wb.position.y)
+	return lo
 
 
 func _mat(color: Color) -> StandardMaterial3D:
@@ -4637,6 +4665,7 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 	if entry.is_empty():
 		return {}
 	_bake_key = "%s|%s" % [chapter, String(entry.get("pearl", ""))]
+	seg.set_meta("em_pearl", String(entry.get("pearl", "")))
 	_bake_used = {}
 	_cur_dressing = (entry.get("dressing", []) as Array) if entry.get("dressing") is Array else []
 	if entry.has("pearl"):
@@ -7284,6 +7313,16 @@ func _doll_frame(delta: float) -> void:
 	if (_cam.global_position - look_target).length() > 0.5:
 		_cam.look_at(look_target)
 	_cam.size = lerpf(_cam.size, _doll_zoom, kf)
+	# the patient stamp and the deferred dress deliver bodies AFTER the build's
+	# cut ran — the roof re-entered with them. The cut is idempotent, so it
+	# simply runs again, cheaply, every couple of seconds.
+	_doll_recut_t += delta
+	if _doll_recut_t >= 2.0:
+		_doll_recut_t = 0.0
+		for sv in _segments:
+			var sn: Node3D = _node_or_null((sv as Dictionary).get("node"))
+			if sn != null:
+				_doll_cut(sn)
 	if _doll_ring != null and is_instance_valid(_doll_ring):
 		if _edit_sel >= 0 and _edit_sel < _edit_records.size():
 			var rn: Node3D = _node_or_null((_edit_records[_edit_sel] as Dictionary).get("node"))
@@ -7294,6 +7333,98 @@ func _doll_frame(delta: float) -> void:
 				_doll_ring.visible = false
 		else:
 			_doll_ring.visible = false
+
+
+## THE MASON (2026-08-21, Palle: "can I place blocks and build structure in
+## the doll house too?"). A painted cell does two things at once: an INSTANT
+## preview mesh stands in the scene, and a `cells` ruling is written into
+## the pearl's page of THE BOOK (commons/data/book/<chapter>.json) — the
+## same hand-masonry field the /lines editor writes (kind 2 block, 4 wall,
+## 0 hole, 1 floor). The next build negotiates it for real: seals, route,
+## the walls that actually stand. SHIFT-click erases the cell's ruling.
+func _doll_paint(wx: int, wz: int, erase: bool) -> void:
+	var seg: Node3D = null
+	var zbase: int = 0
+	for sv in _segments:
+		var sd: Dictionary = sv
+		if wz >= int(sd.get("z0", 0)) and wz < int(sd.get("z1", 0)):
+			seg = _node_or_null(sd.get("node"))
+			zbase = int(sd.get("z0", 0))
+			break
+	if seg == null or not seg.has_meta("em_chapter"):
+		print("[em-doll] no hall under that cell")
+		return
+	var chapter := String(seg.get_meta("em_chapter"))
+	var pearl := String(seg.get_meta("em_pearl")) if seg.has_meta("em_pearl") else ""
+	if pearl == "":
+		print("[em-doll] this hall carries no pearl name — the mason needs the book's page")
+		return
+	var tx: int = wx
+	var tz: int = wz - zbase - VESTIBULE_H
+	if tz < 0:
+		print("[em-doll] the vestibule is not a page of the book")
+		return
+	var key := "%d|%d" % [wx, wz]
+	# the book: read, rule, write
+	var path := "res://commons/data/book/%s.json" % chapter
+	if not FileAccess.file_exists(path):
+		print("[em-doll] no book for %s" % chapter)
+		return
+	var doc_v: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+	if not (doc_v is Dictionary):
+		return
+	var doc: Dictionary = doc_v
+	var pl: Dictionary = {}
+	for pv in (doc.get("pearls", []) as Array):
+		if String((pv as Dictionary).get("pearl", "")) == pearl:
+			pl = pv
+			break
+	if pl.is_empty():
+		print("[em-doll] pearl '%s' is not in %s's book" % [pearl, chapter])
+		return
+	var cells: Array = pl.get("cells", [])
+	cells = cells.filter(func(c): return not ((c as Dictionary).get("cell") is Array 		and int(((c as Dictionary)["cell"] as Array)[0]) == tx and int(((c as Dictionary)["cell"] as Array)[1]) == tz))
+	if not erase:
+		cells.append({"cell": [tx, tz], "kind": _doll_brush})
+	if cells.is_empty():
+		pl.erase("cells")
+	else:
+		pl["cells"] = cells
+	var f := FileAccess.open(path, FileAccess.WRITE)
+	if f == null:
+		print("[em-doll] the book would not open for writing")
+		return
+	f.store_string(JSON.stringify(doc, " ") + "
+")
+	f.close()
+	# the instant preview
+	var old: Variant = _doll_brush_meshes.get(key)
+	if old != null and is_instance_valid(old):
+		(old as Node).queue_free()
+	_doll_brush_meshes.erase(key)
+	if not erase and _doll_brush in ["2", "4", "0"]:
+		var mi := MeshInstance3D.new()
+		var bm := BoxMesh.new()
+		var mat := StandardMaterial3D.new()
+		if _doll_brush == "2":
+			bm.size = Vector3(0.96, 1.0, 0.96)
+			mi.position = Vector3(float(wx) + 0.5, 0.5, float(wz) + 0.5)
+			mat.albedo_color = Color(0.78, 0.75, 0.7)
+		elif _doll_brush == "4":
+			bm.size = Vector3(0.96, DOLL_CUT, 0.96)
+			mi.position = Vector3(float(wx) + 0.5, DOLL_CUT * 0.5, float(wz) + 0.5)
+			mat.albedo_color = Color(0.42, 0.4, 0.38)
+		else:
+			bm.size = Vector3(0.96, 0.05, 0.96)
+			mi.position = Vector3(float(wx) + 0.5, 0.03, float(wz) + 0.5)
+			mat.albedo_color = Color(0.08, 0.08, 0.1)
+		mi.mesh = bm
+		mi.material_override = mat
+		add_child(mi)
+		_doll_brush_meshes[key] = mi
+	print("[em-doll] %s cell (%d,%d) of %s · %s — the book holds it; build makes it real" % [
+		"cleared" if erase else {"2": "BLOCK on", "4": "WALL on", "0": "HOLE at", "1": "FLOOR at"}.get(_doll_brush, "?"),
+		tx, tz, chapter, pearl])
 
 
 ## Where the mouse touches the floor (y = 0), from the iso eye.
@@ -7613,6 +7744,10 @@ func _input(event: InputEvent) -> void:
 		elif mbe.pressed and mb == MOUSE_BUTTON_WHEEL_DOWN:
 			_doll_zoom = clampf(_doll_zoom / 0.87, 6.0, 60.0)
 			return
+		elif mb == MOUSE_BUTTON_LEFT and mbe.pressed and _cam != null and _doll_brush != "":
+			var ptb := _doll_floor_point(mbe.position)
+			_doll_paint(int(floor(ptb.x)), int(floor(ptb.z)), mbe.shift_pressed)
+			return
 		elif mb == MOUSE_BUTTON_LEFT and mbe.pressed and _cam != null:
 			var pt := _doll_floor_point(mbe.position)
 			var idx := _doll_pick(pt)
@@ -7708,6 +7843,12 @@ func _input(event: InputEvent) -> void:
 	if _dollhouse and event is InputEventKey and (event as InputEventKey).pressed and not (event as InputEventKey).echo:
 		var kc := (event as InputEventKey).keycode
 		_edit_shift = (event as InputEventKey).shift_pressed
+		if kc == KEY_B:
+			var order := ["", "2", "4", "0", "1"]
+			_doll_brush = order[(order.find(_doll_brush) + 1) % order.size()]
+			var names := {"": "OFF — the hand picks bodies again", "2": "BLOCK (a 1 m stand)", "4": "WALL", "0": "HOLE (no floor)", "1": "FLOOR (clear the cell)"}
+			print("[em-doll] brush: %s — click paints the cell; SHIFT-click erases the ruling; real on next build" % names[_doll_brush])
+			return
 		if kc in [KEY_BRACKETLEFT, KEY_BRACKETRIGHT]:
 			_edit_handle_key(kc)   # browse the chapter palette; double-click drops the pick
 			return
