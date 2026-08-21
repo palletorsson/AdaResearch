@@ -1,28 +1,1458 @@
 {
  "_readme": "the proposer's verdicts: courtyard = the capped necklace exceeds the hall interior (Palle's ruling); joins = consecutive same-chapter pearls whose strings stack in one hall. Proposals only \u2014 enactment is the curator's.",
  "verdicts": {
-  "primitives|point": {
-   "chapter": "primitives",
-   "nw": 13.3,
-   "nd": 15.3,
+  "array_tutorial|tutorial single": {
+   "chapter": "array_tutorial",
+   "nw": 9.0,
+   "nd": 7.0,
    "iw": 13,
-   "id": 28,
-   "occupancy": 0.56,
+   "id": 27,
+   "occupancy": 0.18,
    "verdict": "fits",
    "stamped": false
   },
-  "primitives|line grid": {
-   "chapter": "primitives",
-   "nw": 10.6,
+  "array_tutorial|tutorial pattern": {
+   "chapter": "array_tutorial",
+   "nw": 13.5,
+   "nd": 9.5,
+   "iw": 13,
+   "id": 27,
+   "occupancy": 0.37,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "array_tutorial|array patterns": {
+   "chapter": "array_tutorial",
+   "nw": 18.0,
+   "nd": 23.0,
+   "iw": 13,
+   "id": 27,
+   "occupancy": 1.18,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "array_tutorial|tutorial row": {
+   "chapter": "array_tutorial",
+   "nw": 6.5,
+   "nd": 4.0,
+   "iw": 13,
+   "id": 27,
+   "occupancy": 0.07,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "array_tutorial|tutorial 2d build": {
+   "chapter": "array_tutorial",
+   "nw": 12.0,
+   "nd": 13.0,
+   "iw": 13,
+   "id": 27,
+   "occupancy": 0.44,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "array_tutorial|tutorial 3d": {
+   "chapter": "array_tutorial",
+   "nw": 13.5,
+   "nd": 4.0,
+   "iw": 13,
+   "id": 27,
+   "occupancy": 0.15,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "array_tutorial|tutorial disco": {
+   "chapter": "array_tutorial",
+   "nw": 11.5,
+   "nd": 6.0,
+   "iw": 13,
+   "id": 27,
+   "occupancy": 0.2,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "boolean_surfaces|boolean union": {
+   "chapter": "boolean_surfaces",
+   "nw": 2.0,
+   "nd": 2.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.01,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "boolean_surfaces|boolean intersection": {
+   "chapter": "boolean_surfaces",
+   "nw": 1.0,
+   "nd": 1.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.0,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "boolean_surfaces|boolean difference": {
+   "chapter": "boolean_surfaces",
+   "nw": 2.0,
+   "nd": 2.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.01,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "boolean_surfaces|boolean compose workbench": {
+   "chapter": "boolean_surfaces",
+   "nw": 7.5,
+   "nd": 2.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.04,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "cellularautomata|ca introduction": {
+   "chapter": "cellularautomata",
+   "nw": 11.0,
+   "nd": 13.5,
+   "iw": 13,
+   "id": 25,
+   "occupancy": 0.46,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "cellularautomata|ca elementaryrules": {
+   "chapter": "cellularautomata",
+   "nw": 9.5,
+   "nd": 8.0,
+   "iw": 13,
+   "id": 25,
+   "occupancy": 0.23,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "cellularautomata|ca gameoflife": {
+   "chapter": "cellularautomata",
+   "nw": 18.0,
+   "nd": 18.5,
+   "iw": 13,
+   "id": 25,
+   "occupancy": 1.02,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "cellularautomata|ca beyondbinary": {
+   "chapter": "cellularautomata",
+   "nw": 16.0,
+   "nd": 21.0,
+   "iw": 13,
+   "id": 25,
+   "occupancy": 1.03,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "cellularautomata|ca expandingspace": {
+   "chapter": "cellularautomata",
+   "nw": 12.5,
+   "nd": 13.5,
+   "iw": 13,
+   "id": 25,
+   "occupancy": 0.52,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "cellularautomata|ca softrules": {
+   "chapter": "cellularautomata",
+   "nw": 4.5,
+   "nd": 2.0,
+   "iw": 13,
+   "id": 25,
+   "occupancy": 0.03,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "cellularautomata|ca agentscircuits": {
+   "chapter": "cellularautomata",
+   "nw": 10.5,
+   "nd": 9.0,
+   "iw": 13,
+   "id": 25,
+   "occupancy": 0.29,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "cellularautomata|ca edgeofchaos": {
+   "chapter": "cellularautomata",
+   "nw": 9.0,
+   "nd": 10.0,
+   "iw": 13,
+   "id": 25,
+   "occupancy": 0.28,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "change|intro": {
+   "chapter": "change",
+   "nw": 11.5,
+   "nd": 10.5,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.32,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "change|velocity": {
+   "chapter": "change",
+   "nw": 6.5,
+   "nd": 7.0,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.12,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "change|slope surface": {
+   "chapter": "change",
+   "nw": 9.0,
+   "nd": 2.0,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.05,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "change|accumulation area": {
+   "chapter": "change",
+   "nw": 9.5,
+   "nd": 1.0,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.03,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "change|accumulation riemann": {
+   "chapter": "change",
+   "nw": 9.0,
+   "nd": 12.5,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.3,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "change|flow field": {
+   "chapter": "change",
+   "nw": 6.5,
+   "nd": 2.0,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.03,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "change|flow particle pulse": {
+   "chapter": "change",
+   "nw": 6.0,
+   "nd": 2.0,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.03,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "change|reconciliation": {
+   "chapter": "change",
+   "nw": 9.5,
+   "nd": 1.0,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.03,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "color|pattern foundry": {
+   "chapter": "color",
+   "nw": 14.5,
+   "nd": 10.0,
+   "iw": 13,
+   "id": 30,
+   "occupancy": 0.37,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "color|context placed": {
+   "chapter": "color",
+   "nw": 13.5,
+   "nd": 20.5,
+   "iw": 13,
+   "id": 30,
+   "occupancy": 0.71,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "color|nails": {
+   "chapter": "color",
+   "nw": 15.0,
+   "nd": 13.0,
+   "iw": 13,
+   "id": 30,
+   "occupancy": 0.5,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "color|grid pallet": {
+   "chapter": "color",
+   "nw": 13.5,
+   "nd": 9.0,
+   "iw": 13,
+   "id": 30,
+   "occupancy": 0.31,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "color|rainbow": {
+   "chapter": "color",
+   "nw": 14.0,
+   "nd": 10.5,
+   "iw": 13,
+   "id": 30,
+   "occupancy": 0.38,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "color|pillar": {
+   "chapter": "color",
+   "nw": 14.5,
+   "nd": 17.0,
+   "iw": 13,
+   "id": 30,
+   "occupancy": 0.63,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "color|paint": {
+   "chapter": "color",
+   "nw": 15.5,
+   "nd": 5.0,
+   "iw": 13,
+   "id": 30,
+   "occupancy": 0.2,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "color|walls": {
+   "chapter": "color",
+   "nw": 17.0,
+   "nd": 13.5,
+   "iw": 13,
+   "id": 30,
+   "occupancy": 0.59,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "forces|sky climb": {
+   "chapter": "forces",
+   "nw": 12.0,
+   "nd": 20.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.66,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "forces|void crossing": {
+   "chapter": "forces",
+   "nw": 13.5,
+   "nd": 6.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.22,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "forces|vectors act1 whatavectoris": {
+   "chapter": "forces",
+   "nw": 8.5,
+   "nd": 8.5,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.2,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "forces|vfm 01 foundations": {
+   "chapter": "forces",
+   "nw": 14.0,
+   "nd": 24.5,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.94,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "forces|vectoroperations": {
+   "chapter": "forces",
+   "nw": 17.5,
+   "nd": 23.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 1.11,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "forces|vectors act2 vectorarithmetic": {
+   "chapter": "forces",
+   "nw": 20.0,
+   "nd": 21.5,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 1.18,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "forces|vfm 02 operations": {
+   "chapter": "forces",
+   "nw": 17.0,
+   "nd": 27.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 1.26,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "forces|vectoradvanced": {
+   "chapter": "forces",
+   "nw": 24.0,
+   "nd": 26.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 1.71,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "forces|vectors act3 fieldsandmotion": {
+   "chapter": "forces",
+   "nw": 14.0,
    "nd": 11.0,
    "iw": 13,
    "id": 28,
-   "occupancy": 0.32,
+   "occupancy": 0.42,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "forces|vfm 03 motion": {
+   "chapter": "forces",
+   "nw": 16.0,
+   "nd": 18.5,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.81,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "forces|vectors act4a kineticforces": {
+   "chapter": "forces",
+   "nw": 16.0,
+   "nd": 12.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.53,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "forces|vectors act4b oscillation": {
+   "chapter": "forces",
+   "nw": 11.5,
+   "nd": 19.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.6,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "forces|composition": {
+   "chapter": "forces",
+   "nw": 22.5,
+   "nd": 16.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.99,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "forces|vectorapplied": {
+   "chapter": "forces",
+   "nw": 20.0,
+   "nd": 20.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 1.1,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "forces|vfm 04 fields": {
+   "chapter": "forces",
+   "nw": 20.0,
+   "nd": 31.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 1.7,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "forces|vfm 05 launch": {
+   "chapter": "forces",
+   "nw": 16.5,
+   "nd": 35.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 1.59,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "forces|systems": {
+   "chapter": "forces",
+   "nw": 19.0,
+   "nd": 26.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 1.36,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "forces|vfm 06 springs": {
+   "chapter": "forces",
+   "nw": 18.0,
+   "nd": 35.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 1.73,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "forces|chaos": {
+   "chapter": "forces",
+   "nw": 20.0,
+   "nd": 31.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 1.7,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "forces|vfm 07 gravity": {
+   "chapter": "forces",
+   "nw": 20.0,
+   "nd": 29.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 1.59,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "forces|vfm 08 arena": {
+   "chapter": "forces",
+   "nw": 11.0,
+   "nd": 15.5,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.47,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "forces|arena": {
+   "chapter": "forces",
+   "nw": 20.0,
+   "nd": 23.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 1.26,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "formfinding|descent": {
+   "chapter": "formfinding",
+   "nw": 13.5,
+   "nd": 9.0,
+   "iw": 13,
+   "id": 30,
+   "occupancy": 0.31,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "formfinding|catenary": {
+   "chapter": "formfinding",
+   "nw": 14.5,
+   "nd": 2.0,
+   "iw": 13,
+   "id": 30,
+   "occupancy": 0.07,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "formfinding|relaxation": {
+   "chapter": "formfinding",
+   "nw": 8.5,
+   "nd": 6.0,
+   "iw": 13,
+   "id": 30,
+   "occupancy": 0.13,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "formfinding|equilibrium": {
+   "chapter": "formfinding",
+   "nw": 17.5,
+   "nd": 7.0,
+   "iw": 13,
+   "id": 30,
+   "occupancy": 0.31,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "formfinding|annealing": {
+   "chapter": "formfinding",
+   "nw": 11.0,
+   "nd": 10.0,
+   "iw": 13,
+   "id": 30,
+   "occupancy": 0.28,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "formfinding|forge": {
+   "chapter": "formfinding",
+   "nw": 11.5,
+   "nd": 1.0,
+   "iw": 13,
+   "id": 30,
+   "occupancy": 0.03,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "foundationscrisis|euclid parallel": {
+   "chapter": "foundationscrisis",
+   "nw": 9.0,
+   "nd": 1.0,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.02,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "foundationscrisis|noneuclidean spaces": {
+   "chapter": "foundationscrisis",
+   "nw": 9.0,
+   "nd": 5.0,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.12,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "foundationscrisis|russell paradox": {
+   "chapter": "foundationscrisis",
+   "nw": 5.5,
+   "nd": 5.5,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.08,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "foundationscrisis|godel incompleteness": {
+   "chapter": "foundationscrisis",
+   "nw": 9.5,
+   "nd": 11.0,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.28,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "foundationscrisis|escher impossible": {
+   "chapter": "foundationscrisis",
+   "nw": 5.5,
+   "nd": 8.5,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.12,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "foundationscrisis|brouwer intuitionism": {
+   "chapter": "foundationscrisis",
+   "nw": 7.5,
+   "nd": 2.0,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.04,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "foundationscrisis|florensky paraconsistent": {
+   "chapter": "foundationscrisis",
+   "nw": 8.0,
+   "nd": 2.0,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.04,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "foundationscrisis|crisis synthesis": {
+   "chapter": "foundationscrisis",
+   "nw": 8.0,
+   "nd": 12.0,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.26,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "fractals|fractal recursion": {
+   "chapter": "fractals",
+   "nw": 8.5,
+   "nd": 19.5,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.44,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "fractals|fractal recursivetrees": {
+   "chapter": "fractals",
+   "nw": 18.0,
+   "nd": 43.0,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 2.07,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "fractals|fractal cantorset": {
+   "chapter": "fractals",
+   "nw": 16.0,
+   "nd": 13.0,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.56,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "fractals|fractal kochsierpinski": {
+   "chapter": "fractals",
+   "nw": 17.0,
+   "nd": 20.5,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.93,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "fractals|fractal mengersponge": {
+   "chapter": "fractals",
+   "nw": 13.0,
+   "nd": 12.0,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.42,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "fractals|fractal goldenspiral": {
+   "chapter": "fractals",
+   "nw": 17.5,
+   "nd": 14.0,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.66,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "fractals|fractal juliaset": {
+   "chapter": "fractals",
+   "nw": 14.0,
+   "nd": 9.0,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.34,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "fractals|fractal mandelbrotset": {
+   "chapter": "fractals",
+   "nw": 13.5,
+   "nd": 10.5,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.38,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "fractals|fractal synthesis": {
+   "chapter": "fractals",
+   "nw": 18.0,
+   "nd": 29.0,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 1.4,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "fractals|fractal crosssequence": {
+   "chapter": "fractals",
+   "nw": 8.5,
+   "nd": 7.5,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.17,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "graphtheory|gt foundations": {
+   "chapter": "graphtheory",
+   "nw": 9.0,
+   "nd": 41.0,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.99,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "graphtheory|gt layout": {
+   "chapter": "graphtheory",
+   "nw": 9.0,
+   "nd": 2.0,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.05,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "graphtheory|gt pathfinding": {
+   "chapter": "graphtheory",
+   "nw": 9.0,
+   "nd": 9.0,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.22,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "graphtheory|gt network analysis": {
+   "chapter": "graphtheory",
+   "nw": 9.0,
+   "nd": 32.0,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.77,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "graphtheory|gt connectivity": {
+   "chapter": "graphtheory",
+   "nw": 11.0,
+   "nd": 8.0,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.24,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "graphtheory|gt spanning trees": {
+   "chapter": "graphtheory",
+   "nw": 9.0,
+   "nd": 9.0,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.22,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "graphtheory|gt flow": {
+   "chapter": "graphtheory",
+   "nw": 6.5,
+   "nd": 4.0,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.07,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "graphtheory|gt matching": {
+   "chapter": "graphtheory",
+   "nw": 7.0,
+   "nd": 7.0,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.13,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "isosurfaces|iso introduction": {
+   "chapter": "isosurfaces",
+   "nw": 17.5,
+   "nd": 9.0,
+   "iw": 13,
+   "id": 30,
+   "occupancy": 0.4,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "isosurfaces|iso lookuptable": {
+   "chapter": "isosurfaces",
+   "nw": 20.0,
+   "nd": 9.0,
+   "iw": 13,
+   "id": 30,
+   "occupancy": 0.46,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "isosurfaces|iso shapesgallery": {
+   "chapter": "isosurfaces",
+   "nw": 18.0,
+   "nd": 37.0,
+   "iw": 13,
+   "id": 30,
+   "occupancy": 1.71,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "isosurfaces|iso torusgyroid": {
+   "chapter": "isosurfaces",
+   "nw": 9.0,
+   "nd": 35.0,
+   "iw": 13,
+   "id": 30,
+   "occupancy": 0.81,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "isosurfaces|iso sculpting": {
+   "chapter": "isosurfaces",
+   "nw": 12.0,
+   "nd": 9.0,
+   "iw": 13,
+   "id": 30,
+   "occupancy": 0.28,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "isosurfaces|iso flatterrain": {
+   "chapter": "isosurfaces",
+   "nw": 21.0,
+   "nd": 33.0,
+   "iw": 13,
+   "id": 30,
+   "occupancy": 1.78,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "isosurfaces|iso portallandscape": {
+   "chapter": "isosurfaces",
+   "nw": 1.0,
+   "nd": 1.0,
+   "iw": 13,
+   "id": 30,
+   "occupancy": 0.0,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "isosurfaces|iso caves": {
+   "chapter": "isosurfaces",
+   "nw": 20.0,
+   "nd": 13.0,
+   "iw": 13,
+   "id": 30,
+   "occupancy": 0.67,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "isosurfaces|iso cavegeneration": {
+   "chapter": "isosurfaces",
+   "nw": 20.0,
+   "nd": 9.0,
+   "iw": 13,
+   "id": 30,
+   "occupancy": 0.46,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "isosurfaces|iso animatednoise": {
+   "chapter": "isosurfaces",
+   "nw": 16.0,
+   "nd": 9.0,
+   "iw": 13,
+   "id": 30,
+   "occupancy": 0.37,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "isosurfaces|iso metaballs": {
+   "chapter": "isosurfaces",
+   "nw": 17.5,
+   "nd": 21.0,
+   "iw": 13,
+   "id": 30,
+   "occupancy": 0.94,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "isosurfaces|iso implicitmodeling": {
+   "chapter": "isosurfaces",
+   "nw": 9.0,
+   "nd": 9.0,
+   "iw": 13,
+   "id": 30,
+   "occupancy": 0.21,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "lsystems|grammar lab": {
+   "chapter": "lsystems",
+   "nw": 12.0,
+   "nd": 9.0,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.29,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "lsystems|growth": {
+   "chapter": "lsystems",
+   "nw": 11.5,
+   "nd": 1.0,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.03,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "lsystems|grammars and curves": {
+   "chapter": "lsystems",
+   "nw": 6.0,
+   "nd": 9.5,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.15,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "lsystems|architecture": {
+   "chapter": "lsystems",
+   "nw": 10.0,
+   "nd": 15.0,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.4,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "lsystems|competition": {
+   "chapter": "lsystems",
+   "nw": 11.5,
+   "nd": 7.0,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.22,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "lsystems|living": {
+   "chapter": "lsystems",
+   "nw": 8.5,
+   "nd": 2.0,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.05,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "lsystems|assemblage same desire": {
+   "chapter": "lsystems",
+   "nw": 14.5,
+   "nd": 15.5,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.6,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "machinelearning|ml evolution": {
+   "chapter": "machinelearning",
+   "nw": 18.0,
+   "nd": 33.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 1.63,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "machinelearning|ml gradient landscape": {
+   "chapter": "machinelearning",
+   "nw": 16.0,
+   "nd": 9.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.4,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "machinelearning|ml classification": {
+   "chapter": "machinelearning",
+   "nw": 18.0,
+   "nd": 33.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 1.63,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "machinelearning|ml neural networks": {
+   "chapter": "machinelearning",
+   "nw": 9.0,
+   "nd": 14.5,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.36,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "machinelearning|ml perception": {
+   "chapter": "machinelearning",
+   "nw": 9.0,
+   "nd": 8.5,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.21,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "machinelearning|ml sequence memory": {
+   "chapter": "machinelearning",
+   "nw": 9.0,
+   "nd": 17.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.42,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "machinelearning|ml generative": {
+   "chapter": "machinelearning",
+   "nw": 9.0,
+   "nd": 9.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.22,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "machinelearning|ml synthesis": {
+   "chapter": "machinelearning",
+   "nw": 15.0,
+   "nd": 33.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 1.36,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "noise|random noise types": {
+   "chapter": "noise",
+   "nw": 16.5,
+   "nd": 16.0,
+   "iw": 13,
+   "id": 25,
+   "occupancy": 0.81,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "noise|columns": {
+   "chapter": "noise",
+   "nw": 10.0,
+   "nd": 12.5,
+   "iw": 13,
+   "id": 25,
+   "occupancy": 0.38,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "noise|point": {
+   "chapter": "noise",
+   "nw": 9.0,
+   "nd": 27.0,
+   "iw": 13,
+   "id": 25,
+   "occupancy": 0.75,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "noise|voxel": {
+   "chapter": "noise",
+   "nw": 15.5,
+   "nd": 21.0,
+   "iw": 13,
+   "id": 25,
+   "occupancy": 1.0,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "noise|6 wall": {
+   "chapter": "noise",
+   "nw": 12.0,
+   "nd": 9.0,
+   "iw": 13,
+   "id": 25,
+   "occupancy": 0.33,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "noise|inside noise": {
+   "chapter": "noise",
+   "nw": 15.0,
+   "nd": 9.0,
+   "iw": 13,
+   "id": 25,
+   "occupancy": 0.42,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "noise|space 10": {
+   "chapter": "noise",
+   "nw": 10.0,
+   "nd": 9.0,
+   "iw": 13,
+   "id": 25,
+   "occupancy": 0.28,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "noise|perlin simplex": {
+   "chapter": "noise",
+   "nw": 20.0,
+   "nd": 32.0,
+   "iw": 13,
+   "id": 25,
+   "occupancy": 1.97,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "postfoundationscrisis|criticalalgorithms algorithmic bias visualization": {
+   "chapter": "postfoundationscrisis",
+   "nw": 10.0,
+   "nd": 2.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.05,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "postfoundationscrisis|criticalalgorithms applied ethics": {
+   "chapter": "postfoundationscrisis",
+   "nw": 11.0,
+   "nd": 6.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.18,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "postfoundationscrisis|speculativecomputation paraconsistent engineering": {
+   "chapter": "postfoundationscrisis",
+   "nw": 10.0,
+   "nd": 4.5,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.12,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "postfoundationscrisis|speculativecomputation situated computation": {
+   "chapter": "postfoundationscrisis",
+   "nw": 7.0,
+   "nd": 5.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.1,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "postfoundationscrisis|speculativecomputation collective knowledge": {
+   "chapter": "postfoundationscrisis",
+   "nw": 5.5,
+   "nd": 2.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.03,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "postfoundationscrisis|speculativecomputation rhizome network": {
+   "chapter": "postfoundationscrisis",
+   "nw": 4.0,
+   "nd": 1.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.01,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "postfoundationscrisis|advancedlaboratory lab equipment simulation": {
+   "chapter": "postfoundationscrisis",
+   "nw": 4.0,
+   "nd": 4.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.04,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "postfoundationscrisis|postcrisis synthesis": {
+   "chapter": "postfoundationscrisis",
+   "nw": 7.5,
+   "nd": 9.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.19,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "primitives|point": {
+   "chapter": "primitives",
+   "nw": 13.9,
+   "nd": 15.5,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.59,
+   "verdict": "courtyard",
+   "stamped": true
+  },
+  "primitives|line grid": {
+   "chapter": "primitives",
+   "nw": 10.8,
+   "nd": 10.2,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.3,
    "verdict": "fits",
    "stamped": true
   },
   "primitives|polythedra": {
    "chapter": "primitives",
+   "nw": 12.0,
+   "nd": 10.5,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.35,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "primitives|ignorance": {
+   "chapter": "primitives",
+   "nw": 11.8,
+   "nd": 28.5,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.92,
+   "verdict": "fits",
+   "stamped": true
+  },
+  "primitives|portals": {
+   "chapter": "primitives",
+   "nw": 12.9,
+   "nd": 12.2,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.43,
+   "verdict": "fits",
+   "stamped": true
+  },
+  "proceduralgeneration|pg genetic evolution": {
+   "chapter": "proceduralgeneration",
+   "nw": 9.0,
+   "nd": 15.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.37,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "proceduralgeneration|pg space colonization": {
+   "chapter": "proceduralgeneration",
+   "nw": 8.0,
+   "nd": 8.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.18,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "proceduralgeneration|pg percolation network": {
+   "chapter": "proceduralgeneration",
+   "nw": 15.5,
+   "nd": 9.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.38,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "proceduralgeneration|pg branching growth": {
+   "chapter": "proceduralgeneration",
+   "nw": 18.5,
+   "nd": 9.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.46,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "proceduralgeneration|pg caves mazes": {
+   "chapter": "proceduralgeneration",
+   "nw": 20.0,
+   "nd": 9.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.49,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "proceduralgeneration|pg sculpted forms": {
+   "chapter": "proceduralgeneration",
+   "nw": 19.0,
+   "nd": 9.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.47,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "proceduralgeneration|pg mirrored patterns": {
+   "chapter": "proceduralgeneration",
+   "nw": 9.0,
+   "nd": 23.5,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.58,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "qfeplaboratory|qfep introduction": {
+   "chapter": "qfeplaboratory",
+   "nw": 10.5,
+   "nd": 14.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.4,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "qfeplaboratory|qfep f term": {
+   "chapter": "qfeplaboratory",
    "nw": 11.0,
    "nd": 10.0,
    "iw": 13,
@@ -31,33 +1461,413 @@
    "verdict": "fits",
    "stamped": false
   },
-  "primitives|ignorance": {
-   "chapter": "primitives",
-   "nw": 13.1,
-   "nd": 26.0,
+  "qfeplaboratory|qfep e term": {
+   "chapter": "qfeplaboratory",
+   "nw": 8.5,
+   "nd": 13.5,
    "iw": 13,
    "id": 28,
-   "occupancy": 0.94,
+   "occupancy": 0.32,
    "verdict": "fits",
-   "stamped": true
+   "stamped": false
   },
-  "primitives|portals": {
-   "chapter": "primitives",
-   "nw": 10.3,
-   "nd": 12.0,
+  "qfeplaboratory|qfep lambda spectrum": {
+   "chapter": "qfeplaboratory",
+   "nw": 12.0,
+   "nd": 12.5,
    "iw": 13,
    "id": 28,
-   "occupancy": 0.34,
+   "occupancy": 0.41,
    "verdict": "fits",
-   "stamped": true
+   "stamped": false
+  },
+  "qfeplaboratory|qfep phi term": {
+   "chapter": "qfeplaboratory",
+   "nw": 11.0,
+   "nd": 13.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.39,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "qfeplaboratory|qfep edge of chaos": {
+   "chapter": "qfeplaboratory",
+   "nw": 9.0,
+   "nd": 10.5,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.26,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "qfeplaboratory|qfep synthesis": {
+   "chapter": "qfeplaboratory",
+   "nw": 10.0,
+   "nd": 6.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.16,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "randomness|random definition": {
+   "chapter": "randomness",
+   "nw": 15.5,
+   "nd": 23.5,
+   "iw": 11,
+   "id": 26,
+   "occupancy": 1.27,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "randomness|random entropy": {
+   "chapter": "randomness",
+   "nw": 12.0,
+   "nd": 18.0,
+   "iw": 11,
+   "id": 26,
+   "occupancy": 0.76,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "randomness|random remove": {
+   "chapter": "randomness",
+   "nw": 13.0,
+   "nd": 9.0,
+   "iw": 11,
+   "id": 26,
+   "occupancy": 0.41,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "randomness|10 print algorithm": {
+   "chapter": "randomness",
+   "nw": 18.0,
+   "nd": 20.0,
+   "iw": 11,
+   "id": 26,
+   "occupancy": 1.26,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "randomness|random cubes": {
+   "chapter": "randomness",
+   "nw": 13.0,
+   "nd": 14.5,
+   "iw": 11,
+   "id": 26,
+   "occupancy": 0.66,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "randomness|random rotate random xyz": {
+   "chapter": "randomness",
+   "nw": 16.0,
+   "nd": 10.5,
+   "iw": 11,
+   "id": 26,
+   "occupancy": 0.59,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "randomness|random walk": {
+   "chapter": "randomness",
+   "nw": 16.5,
+   "nd": 21.5,
+   "iw": 11,
+   "id": 26,
+   "occupancy": 1.24,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "randomness|random gaussian": {
+   "chapter": "randomness",
+   "nw": 18.0,
+   "nd": 25.0,
+   "iw": 11,
+   "id": 26,
+   "occupancy": 1.57,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "randomness|random mushrooms": {
+   "chapter": "randomness",
+   "nw": 16.0,
+   "nd": 11.5,
+   "iw": 11,
+   "id": 26,
+   "occupancy": 0.64,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "randomness|random space geometry": {
+   "chapter": "randomness",
+   "nw": 9.5,
+   "nd": 31.0,
+   "iw": 11,
+   "id": 26,
+   "occupancy": 1.03,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "randomness|examples of randomness": {
+   "chapter": "randomness",
+   "nw": 10.5,
+   "nd": 15.0,
+   "iw": 11,
+   "id": 26,
+   "occupancy": 0.55,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "randomness|random pheromone": {
+   "chapter": "randomness",
+   "nw": 14.0,
+   "nd": 9.0,
+   "iw": 11,
+   "id": 26,
+   "occupancy": 0.44,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "randomness|random space": {
+   "chapter": "randomness",
+   "nw": 9.5,
+   "nd": 9.0,
+   "iw": 11,
+   "id": 26,
+   "occupancy": 0.3,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "randomness|random game": {
+   "chapter": "randomness",
+   "nw": 9.0,
+   "nd": 12.5,
+   "iw": 11,
+   "id": 26,
+   "occupancy": 0.39,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "softbodies|soft body deformation": {
+   "chapter": "softbodies",
+   "nw": 8.5,
+   "nd": 8.5,
+   "iw": 15,
+   "id": 27,
+   "occupancy": 0.18,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "softbodies|carusell": {
+   "chapter": "softbodies",
+   "nw": 22.0,
+   "nd": 21.0,
+   "iw": 15,
+   "id": 27,
+   "occupancy": 1.14,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "softbodies|obsticals": {
+   "chapter": "softbodies",
+   "nw": 8.0,
+   "nd": 11.0,
+   "iw": 15,
+   "id": 27,
+   "occupancy": 0.22,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "softbodies|obsticals part2": {
+   "chapter": "softbodies",
+   "nw": 9.0,
+   "nd": 10.5,
+   "iw": 15,
+   "id": 27,
+   "occupancy": 0.23,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "softbodies|cloth physics": {
+   "chapter": "softbodies",
+   "nw": 1.0,
+   "nd": 1.0,
+   "iw": 15,
+   "id": 27,
+   "occupancy": 0.0,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "softbodies|affect theory visualization": {
+   "chapter": "softbodies",
+   "nw": 8.0,
+   "nd": 7.0,
+   "iw": 15,
+   "id": 27,
+   "occupancy": 0.14,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "softbodies|proceduralgeneration reaction diffusion systems": {
+   "chapter": "softbodies",
+   "nw": 5.5,
+   "nd": 2.0,
+   "iw": 15,
+   "id": 27,
+   "occupancy": 0.03,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "softbodies|topology entropy morphogenesis": {
+   "chapter": "softbodies",
+   "nw": 5.0,
+   "nd": 5.0,
+   "iw": 15,
+   "id": 27,
+   "occupancy": 0.06,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "softbodies|softbody sb01 cloth drape corners": {
+   "chapter": "softbodies",
+   "nw": 1.0,
+   "nd": 1.0,
+   "iw": 15,
+   "id": 27,
+   "occupancy": 0.0,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "swarmintelligence|physarumcolony": {
+   "chapter": "swarmintelligence",
+   "nw": 17.5,
+   "nd": 9.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.43,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "swarmintelligence|flowfields": {
+   "chapter": "swarmintelligence",
+   "nw": 9.0,
+   "nd": 9.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.22,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "swarmintelligence|boids algorithm": {
+   "chapter": "swarmintelligence",
+   "nw": 17.5,
+   "nd": 9.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.43,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "swarmintelligence|agent based modeling abm": {
+   "chapter": "swarmintelligence",
+   "nw": 10.0,
+   "nd": 1.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.03,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "swarmintelligence|ant colony optimization": {
+   "chapter": "swarmintelligence",
+   "nw": 9.0,
+   "nd": 9.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.22,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "swarmintelligence|particle swarm optimization": {
+   "chapter": "swarmintelligence",
+   "nw": 7.0,
+   "nd": 6.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.12,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "swarmintelligence|swarm intelligence algorithms": {
+   "chapter": "swarmintelligence",
+   "nw": 1.0,
+   "nd": 1.0,
+   "iw": 13,
+   "id": 28,
+   "occupancy": 0.0,
+   "verdict": "fits",
+   "stamped": false
   },
   "symmetry|motif": {
+   "chapter": "symmetry",
+   "nw": 9.0,
+   "nd": 4.0,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.1,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "symmetry|translation": {
+   "chapter": "symmetry",
+   "nw": 8.0,
+   "nd": 7.0,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.15,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "symmetry|mirror rotor": {
+   "chapter": "symmetry",
+   "nw": 7.0,
+   "nd": 6.0,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.11,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "symmetry|glide": {
    "chapter": "symmetry",
    "nw": 9.0,
    "nd": 5.0,
    "iw": 11,
    "id": 34,
    "occupancy": 0.12,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "symmetry|group": {
+   "chapter": "symmetry",
+   "nw": 7.5,
+   "nd": 8.5,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.17,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "symmetry|seventeen": {
+   "chapter": "symmetry",
+   "nw": 9.0,
+   "nd": 13.0,
+   "iw": 11,
+   "id": 34,
+   "occupancy": 0.31,
    "verdict": "fits",
    "stamped": false
   },
@@ -80,15 +1890,365 @@
    "occupancy": 1.25,
    "verdict": "courtyard",
    "stamped": true
+  },
+  "wavefunctions|intro": {
+   "chapter": "wavefunctions",
+   "nw": 16.5,
+   "nd": 19.5,
+   "iw": 13,
+   "id": 32,
+   "occupancy": 0.77,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "wavefunctions|pendulum": {
+   "chapter": "wavefunctions",
+   "nw": 12.0,
+   "nd": 18.0,
+   "iw": 13,
+   "id": 32,
+   "occupancy": 0.52,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "wavefunctions|unit circle": {
+   "chapter": "wavefunctions",
+   "nw": 18.0,
+   "nd": 13.0,
+   "iw": 13,
+   "id": 32,
+   "occupancy": 0.56,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "wavefunctions|sine space": {
+   "chapter": "wavefunctions",
+   "nw": 20.0,
+   "nd": 21.0,
+   "iw": 13,
+   "id": 32,
+   "occupancy": 1.01,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "wavefunctions|3d wave propagation": {
+   "chapter": "wavefunctions",
+   "nw": 19.0,
+   "nd": 17.0,
+   "iw": 13,
+   "id": 32,
+   "occupancy": 0.78,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "wavefunctions|effect sound": {
+   "chapter": "wavefunctions",
+   "nw": 13.5,
+   "nd": 16.0,
+   "iw": 13,
+   "id": 32,
+   "occupancy": 0.52,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "wavefunctions|bernini": {
+   "chapter": "wavefunctions",
+   "nw": 12.0,
+   "nd": 9.0,
+   "iw": 13,
+   "id": 32,
+   "occupancy": 0.26,
+   "verdict": "fits",
+   "stamped": false
+  },
+  "wavefunctions|john cage": {
+   "chapter": "wavefunctions",
+   "nw": 18.5,
+   "nd": 11.0,
+   "iw": 13,
+   "id": 32,
+   "occupancy": 0.49,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "wavefunctions|airmusic": {
+   "chapter": "wavefunctions",
+   "nw": 15.0,
+   "nd": 13.5,
+   "iw": 13,
+   "id": 32,
+   "occupancy": 0.49,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "wavefunctions|sky stairs": {
+   "chapter": "wavefunctions",
+   "nw": 15.5,
+   "nd": 9.0,
+   "iw": 13,
+   "id": 32,
+   "occupancy": 0.34,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "wavefunctions|trigwalkingpath": {
+   "chapter": "wavefunctions",
+   "nw": 18.0,
+   "nd": 18.0,
+   "iw": 13,
+   "id": 32,
+   "occupancy": 0.78,
+   "verdict": "courtyard",
+   "stamped": false
+  },
+  "wavefunctions|synthesis lab": {
+   "chapter": "wavefunctions",
+   "nw": 18.5,
+   "nd": 32.0,
+   "iw": 13,
+   "id": 32,
+   "occupancy": 1.42,
+   "verdict": "courtyard",
+   "stamped": false
   }
  },
  "joins": [
   [
+   "array_tutorial|tutorial row",
+   "array_tutorial|tutorial 2d build"
+  ],
+  [
+   "array_tutorial|tutorial 3d",
+   "array_tutorial|tutorial disco"
+  ],
+  [
+   "boolean_surfaces|boolean union",
+   "boolean_surfaces|boolean intersection",
+   "boolean_surfaces|boolean difference"
+  ],
+  [
+   "cellularautomata|ca introduction",
+   "cellularautomata|ca elementaryrules"
+  ],
+  [
+   "cellularautomata|ca expandingspace",
+   "cellularautomata|ca softrules"
+  ],
+  [
+   "cellularautomata|ca agentscircuits",
+   "cellularautomata|ca edgeofchaos"
+  ],
+  [
+   "change|intro",
+   "change|velocity",
+   "change|slope surface"
+  ],
+  [
+   "change|accumulation area",
+   "change|accumulation riemann",
+   "change|flow field"
+  ],
+  [
+   "change|flow particle pulse",
+   "change|reconciliation"
+  ],
+  [
+   "forces|void crossing",
+   "forces|vectors act1 whatavectoris"
+  ],
+  [
+   "formfinding|annealing",
+   "formfinding|forge"
+  ],
+  [
+   "foundationscrisis|euclid parallel",
+   "foundationscrisis|noneuclidean spaces",
+   "foundationscrisis|russell paradox"
+  ],
+  [
+   "foundationscrisis|godel incompleteness",
+   "foundationscrisis|escher impossible",
+   "foundationscrisis|brouwer intuitionism"
+  ],
+  [
+   "foundationscrisis|florensky paraconsistent",
+   "foundationscrisis|crisis synthesis"
+  ],
+  [
+   "graphtheory|gt layout",
+   "graphtheory|gt pathfinding"
+  ],
+  [
+   "graphtheory|gt connectivity",
+   "graphtheory|gt spanning trees",
+   "graphtheory|gt flow"
+  ],
+  [
+   "lsystems|growth",
+   "lsystems|grammars and curves",
+   "lsystems|architecture"
+  ],
+  [
+   "lsystems|competition",
+   "lsystems|living"
+  ],
+  [
+   "machinelearning|ml neural networks",
+   "machinelearning|ml perception"
+  ],
+  [
+   "postfoundationscrisis|criticalalgorithms algorithmic bias visualization",
+   "postfoundationscrisis|criticalalgorithms applied ethics",
+   "postfoundationscrisis|speculativecomputation paraconsistent engineering"
+  ],
+  [
+   "postfoundationscrisis|speculativecomputation situated computation",
+   "postfoundationscrisis|speculativecomputation collective knowledge",
+   "postfoundationscrisis|speculativecomputation rhizome network"
+  ],
+  [
+   "postfoundationscrisis|advancedlaboratory lab equipment simulation",
+   "postfoundationscrisis|postcrisis synthesis"
+  ],
+  [
    "primitives|line grid",
    "primitives|polythedra"
+  ],
+  [
+   "proceduralgeneration|pg genetic evolution",
+   "proceduralgeneration|pg space colonization"
+  ],
+  [
+   "qfeplaboratory|qfep introduction",
+   "qfeplaboratory|qfep f term"
+  ],
+  [
+   "qfeplaboratory|qfep phi term",
+   "qfeplaboratory|qfep edge of chaos"
+  ],
+  [
+   "randomness|random space",
+   "randomness|random game"
+  ],
+  [
+   "softbodies|obsticals",
+   "softbodies|obsticals part2"
+  ],
+  [
+   "softbodies|cloth physics",
+   "softbodies|affect theory visualization",
+   "softbodies|proceduralgeneration reaction diffusion systems"
+  ],
+  [
+   "softbodies|topology entropy morphogenesis",
+   "softbodies|softbody sb01 cloth drape corners"
+  ],
+  [
+   "swarmintelligence|agent based modeling abm",
+   "swarmintelligence|ant colony optimization",
+   "swarmintelligence|particle swarm optimization"
+  ],
+  [
+   "symmetry|motif",
+   "symmetry|translation",
+   "symmetry|mirror rotor"
+  ],
+  [
+   "symmetry|glide",
+   "symmetry|group",
+   "symmetry|seventeen"
+  ],
+  [
+   "wavefunctions|effect sound",
+   "wavefunctions|bernini"
   ]
  ],
  "courtyards": [
-  "transformation|trans rotationspectacle"
+  "array_tutorial|array patterns",
+  "cellularautomata|ca gameoflife",
+  "cellularautomata|ca beyondbinary",
+  "color|pattern foundry",
+  "color|nails",
+  "color|rainbow",
+  "color|pillar",
+  "color|paint",
+  "color|walls",
+  "forces|vfm 01 foundations",
+  "forces|vectoroperations",
+  "forces|vectors act2 vectorarithmetic",
+  "forces|vfm 02 operations",
+  "forces|vectoradvanced",
+  "forces|vectors act3 fieldsandmotion",
+  "forces|vfm 03 motion",
+  "forces|vectors act4a kineticforces",
+  "forces|composition",
+  "forces|vectorapplied",
+  "forces|vfm 04 fields",
+  "forces|vfm 05 launch",
+  "forces|systems",
+  "forces|vfm 06 springs",
+  "forces|chaos",
+  "forces|vfm 07 gravity",
+  "forces|arena",
+  "formfinding|catenary",
+  "formfinding|equilibrium",
+  "fractals|fractal recursivetrees",
+  "fractals|fractal cantorset",
+  "fractals|fractal kochsierpinski",
+  "fractals|fractal mengersponge",
+  "fractals|fractal goldenspiral",
+  "fractals|fractal juliaset",
+  "fractals|fractal mandelbrotset",
+  "fractals|fractal synthesis",
+  "graphtheory|gt foundations",
+  "isosurfaces|iso introduction",
+  "isosurfaces|iso lookuptable",
+  "isosurfaces|iso shapesgallery",
+  "isosurfaces|iso torusgyroid",
+  "isosurfaces|iso flatterrain",
+  "isosurfaces|iso caves",
+  "isosurfaces|iso cavegeneration",
+  "isosurfaces|iso animatednoise",
+  "isosurfaces|iso metaballs",
+  "lsystems|grammar lab",
+  "lsystems|assemblage same desire",
+  "machinelearning|ml evolution",
+  "machinelearning|ml gradient landscape",
+  "machinelearning|ml classification",
+  "machinelearning|ml synthesis",
+  "noise|random noise types",
+  "noise|point",
+  "noise|voxel",
+  "noise|inside noise",
+  "noise|perlin simplex",
+  "primitives|point",
+  "proceduralgeneration|pg percolation network",
+  "proceduralgeneration|pg branching growth",
+  "proceduralgeneration|pg caves mazes",
+  "proceduralgeneration|pg sculpted forms",
+  "randomness|random definition",
+  "randomness|random entropy",
+  "randomness|random remove",
+  "randomness|10 print algorithm",
+  "randomness|random cubes",
+  "randomness|random rotate random xyz",
+  "randomness|random walk",
+  "randomness|random gaussian",
+  "randomness|random mushrooms",
+  "randomness|random space geometry",
+  "randomness|random pheromone",
+  "softbodies|carusell",
+  "swarmintelligence|physarumcolony",
+  "swarmintelligence|boids algorithm",
+  "transformation|trans rotationspectacle",
+  "wavefunctions|intro",
+  "wavefunctions|unit circle",
+  "wavefunctions|sine space",
+  "wavefunctions|3d wave propagation",
+  "wavefunctions|john cage",
+  "wavefunctions|airmusic",
+  "wavefunctions|sky stairs",
+  "wavefunctions|trigwalkingpath",
+  "wavefunctions|synthesis lab"
  ]
 }
