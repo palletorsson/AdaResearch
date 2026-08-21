@@ -44,9 +44,12 @@ def read_json(p):
 
 
 def load_footprints():
-    """token -> footprint cells (int) from the registry's spatial_needs.
-    Registry files wrap their tokens under a top-level 'artifacts' key."""
+    """(footprints, measures): token -> pearl cells (spatial_needs), and
+    token -> [w_m, h_m, d_m, cells_w, cells_d] — the REAL measured body
+    (measurements.aabb_size + grid_cells; 2720 tokens carry them). Registry
+    files wrap their tokens under a top-level 'artifacts' key."""
     out = {}
+    measures = {}
     for f in (REPO / "commons" / "artifacts" / "registry").glob("*.json"):
         doc = read_json(f)
         if not isinstance(doc, dict):
@@ -55,14 +58,28 @@ def load_footprints():
         if not isinstance(toks, dict):
             continue
         for tok, e in toks.items():
-            if isinstance(e, dict):
-                fc = (e.get("spatial_needs") or {}).get("footprint_cells")
-                if fc:
-                    try:
-                        out[str(tok)] = max(1, int(fc))
-                    except (TypeError, ValueError):
-                        pass
-    return out
+            if not isinstance(e, dict):
+                continue
+            fc = (e.get("spatial_needs") or {}).get("footprint_cells")
+            if fc:
+                try:
+                    out[str(tok)] = max(1, int(fc))
+                except (TypeError, ValueError):
+                    pass
+            m = e.get("measurements") or {}
+            ab = m.get("aabb_size")
+            gc = m.get("grid_cells")
+            if isinstance(ab, list) and len(ab) >= 3:
+                cw = int(gc[0]) if isinstance(gc, list) and len(gc) >= 2 else max(1, round(float(ab[0])))
+                cd = int(gc[1]) if isinstance(gc, list) and len(gc) >= 2 else max(1, round(float(ab[2])))
+                measures[str(tok)] = [round(float(ab[0]), 2), round(float(ab[1]), 2),
+                                      round(float(ab[2]), 2), max(1, cw), max(1, cd)]
+    # the pearl DEFAULT trusts the measured body ("combine portals is very
+    # large" — its spatial_needs said small): max of the declared footprint
+    # and the measured cells, capped at 8 (the AABB-hog trap inflates a few)
+    for tok, m in measures.items():
+        out[tok] = min(8, max(out.get(tok, 1), int(m[3]), int(m[4])))
+    return out, measures
 
 
 def load_floor_index():
@@ -362,7 +379,7 @@ def main():
         print("no em_pack_report.json — boot with grid_pack first (boot_pack_report.gd)")
         return 2
     floors = load_floor_index()
-    footprints = load_footprints()
+    footprints, measures = load_footprints()
     out = {}
     for key, meta in sorted(report.get("halls", {}).items()):
         if args.hall and key != args.hall:
@@ -437,6 +454,7 @@ def main():
     lab_path.write_text(
         json.dumps({"_readme": "the necklace bake-off: per hall, placement strategies with scores. Written by tools/necklace_lab.py; read by /transplant.",
                     "footprints": footprints,
+                    "measures": measures,
                     "halls": existing}, indent=1), encoding="utf-8")
     print("-> ada_run/necklace_lab.json (%d hall(s) refreshed, %d total)" % (len(out), len(existing)))
     return 0

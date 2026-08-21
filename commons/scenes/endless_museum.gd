@@ -4978,12 +4978,16 @@ func _stamp_necklace(seg: Node3D, zbase: int, chapter: String, entry: Dictionary
 	var bz1: int = VESTIBULE_H + h - 2
 	var placed := 0
 	var left := 0
+	var ledger: Array = []
 	for b_v in (hand.get("beads", []) as Array):
 		var b: Dictionary = b_v
 		var tok := String(b.get("token", ""))
 		var lv: Variant = _live.get(tok)
 		if not (lv is Dictionary):
 			left += 1
+			ledger.append({"token": tok, "grid": [int(b.get("gx", 0)), int(b.get("gz", 0))],
+				"target": null, "final": null, "rings": 0, "why": "no living scene",
+				"plinth": bool(b.get("plinth", false))})
 			print("[em-stamp]   %s has no living scene — left behind" % tok)
 			continue
 		var scene := String((lv as Dictionary).get("scene", ""))
@@ -5009,12 +5013,29 @@ func _stamp_necklace(seg: Node3D, zbase: int, chapter: String, entry: Dictionary
 					if _stamp(seg, scene, tok, cell, zbase, 1, {}, false, 0.0,
 							float(rot_of.get(tok, 0.0)), cfg_of.get(tok, {})):
 						placed += 1
+						ledger.append({"token": tok, "grid": [int(b.get("gx", 0)), int(b.get("gz", 0))],
+							"target": [tx, tz], "final": [int(cell["x"]), int(cell["y"])],
+							"rings": ring, "why": "", "plinth": bool(b.get("plinth", false))})
 						done = true
 						break
 			if not done:
 				left += 1
+				ledger.append({"token": tok, "grid": [int(b.get("gx", 0)), int(b.get("gz", 0))],
+					"target": [tx, tz], "final": null, "rings": 4, "why": _stamp_refusal,
+					"plinth": bool(b.get("plinth", false))})
 	print("[em-stamp] %s · %s <- the bench's necklace: %d placed, %d left behind" % [
 		chapter, entry.get("pearl", ""), placed, left])
+	# a stamped hall still reports itself — otherwise it vanishes from
+	# /transplant's hall list the moment it graduates past the bake-off
+	_pack_report["%s|%s" % [chapter, String(entry.get("pearl", ""))]] = {
+		"chapter": chapter, "pearl": String(entry.get("pearl", "")),
+		"map": String(entry.get("map", "")), "w": w, "h": h, "vestibule": VESTIBULE_H,
+		"offx": 0, "offz": 0, "stamped": true, "bodies": ledger}
+	var pf := FileAccess.open("res://ada_run/em_pack_report.json", FileAccess.WRITE)
+	if pf != null:
+		pf.store_string(JSON.stringify({"_readme": "the transplant's ledger, one entry per packed hall: grid -> target -> final per body. Written by _transplant_from_map; read by /transplant.",
+			"halls": _pack_report}, " ") + "\n")
+		pf.close()
 	return {"pearl": String(entry.get("pearl", "")), "placed": placed, "packed": true,
 		"offered": placed + left, "interior": placed}
 
