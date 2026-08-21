@@ -335,6 +335,7 @@ var _seg_index: int = 0
 var _prev_w: int = -1             # width of the previous segment's tile (lobby seals the jump)
 var _first_key: String = ""       # --em-first=<key> rotates the dealing order
 var _first_chapter: String = ""   # --em-chapter=<seq> (or ada_run/em_control.json first_chapter): deal this CHAPTER first
+var _grid_pack: bool = false      # em_control grid_pack: halls are TRANSPLANTED from their grid maps — no dealer, no guests
 # menu launches have no flags; this file speaks for them. A VAR, not a const:
 # a probe injects its own path here (inst.set) so a test run never writes the
 # file the user's LIVE session is reading — one morning of shared-file toggles
@@ -1482,6 +1483,9 @@ func _start_at_chapter() -> void:
 		var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(control_path))
 		if parsed is Dictionary:
 			_first_chapter = String((parsed as Dictionary).get("first_chapter", ""))
+			_grid_pack = int(round(float((parsed as Dictionary).get("grid_pack", 0.0)))) == 1
+			if _grid_pack:
+				print("[em-pack] GRID PACK — every hall with a named map is transplanted from it")
 			if int((parsed as Dictionary).get("dollhouse", 0)) == 1:
 				_dollhouse = true
 			if start_map == "":
@@ -4763,6 +4767,152 @@ func _build_courtyard(seg: Node3D, solid: StaticBody3D, w: int, tile_h: int,
 	return zcur - z0
 
 
+## ── THE TRANSPLANT (2026-08-21, Palle: "we take the grid plan… place all
+## grid artifacts as they are ordered now… place the grid artifact center
+## into the endless museum halls… then move the artifact to a floor place
+## where it can stand — find nearest empty"). A hall in grid-pack mode is its
+## GRID MAP, moved house: the map's artifact constellation is taken RIGID —
+## every body at its curated cell, in the map's own reading order — its
+## centre aligned to the hall interior's centre, and stamped verbatim. No
+## dealer, no fillers, no DNA runs, no guests: the map is the hall, which is
+## also the spine-only purge in one stroke. A body whose target cell cannot
+## hold it (a wall's seal, the gate's path) slides to the NEAREST EMPTY floor
+## cell — ring by ring, six rings at most — and says so out loud; nothing
+## relocates silently, nothing renegotiates. Structure "2" under a grid cell
+## rides along as support_m, so the plinth rule stands here too. Duplicates
+## simply work: each cell stamps its own body.
+func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, chapter: String) -> Dictionary:
+	var entry: Dictionary = _plan_entry(key, chapter)
+	if entry.is_empty():
+		return {}
+	var map_name := String(entry.get("map", ""))
+	var path := "res://commons/maps/%s/map_data.json" % map_name
+	if map_name == "" or not FileAccess.file_exists(path):
+		print("[em-pack] %s · %s has no grid map (%s) — the dealer takes this hall" % [
+			chapter, entry.get("pearl", ""), map_name])
+		return {}
+	var doc_v: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+	if not (doc_v is Dictionary):
+		print("[em-pack] %s did not parse — the dealer takes this hall" % path)
+		return {}
+	_bake_key = "%s|%s" % [chapter, String(entry.get("pearl", ""))]
+	seg.set_meta("em_pearl", String(entry.get("pearl", "")))
+	_bake_used = {}
+	_cur_dressing = []
+	var layers: Dictionary = (doc_v as Dictionary).get("layers", {})
+	var structure: Array = layers.get("structure", [])
+	var inter: Array = layers.get("interactables", [])
+	var plinths := {}
+	for gz in range(structure.size()):
+		var srow: Array = structure[gz]
+		for gx in range(srow.size()):
+			if String(srow[gx]).strip_edges() == "2":
+				plinths[Vector2i(gx, gz)] = true
+	var bodies: Array = []
+	var minx := 999999
+	var maxx := -999999
+	var minz := 999999
+	var maxz := -999999
+	for gz in range(inter.size()):
+		var irow: Array = inter[gz]
+		for gx in range(irow.size()):
+			var cellv := String(irow[gx]).strip_edges()
+			if cellv == "" or cellv.begins_with("#"):
+				continue
+			var att := ""
+			if "#" in cellv:
+				var hp := cellv.split("#", true, 1)
+				cellv = hp[0]
+				att = hp[1]
+			var parts := cellv.split(":")
+			var rot: float = float(parts[1]) if parts.size() > 1 and parts[1].is_valid_float() else 0.0
+			bodies.append({"token": parts[0], "gx": gx, "gz": gz, "rot": rot, "att": att,
+				"plinth": plinths.has(Vector2i(gx, gz))})
+			minx = mini(minx, gx)
+			maxx = maxi(maxx, gx)
+			minz = mini(minz, gz)
+			maxz = maxi(maxz, gz)
+	if bodies.is_empty():
+		print("[em-pack] %s carries no artifacts — the dealer takes this hall" % map_name)
+		return {}
+	# the constellation's centre onto the TILE's centre. Two wrong theories
+	# died here before the probe grew a ruler: the plan row's room/apron are
+	# PLAN-SPACE bookkeeping (a plan cell is a grid cell + apron) — the built
+	# tile speaks grid cells directly, w by h, vestibule first. And _stamp
+	# does not refuse a cell beyond the walls, so the transplant carries its
+	# own bounds: every target is clamped into the walkable interior before
+	# the ring search, and a map wider than the tile presses against the
+	# walls rather than spilling through them (reported as clamped).
+	var offx: int = int(floor((w - (maxx - minx + 1)) / 2.0)) - minx
+	var offz: int = VESTIBULE_H + int(floor((h - (maxz - minz + 1)) / 2.0)) - minz
+	var bx0: int = 1
+	var bx1: int = w - 2
+	var bz0: int = VESTIBULE_H + 1
+	var bz1: int = VESTIBULE_H + h - 2
+	var placed := 0
+	var slid := 0
+	var left := 0
+	var plinth_n := 0
+	for b_v in bodies:
+		var b: Dictionary = b_v
+		var lv: Variant = _live.get(b["token"])
+		if not (lv is Dictionary):
+			left += 1
+			print("[em-pack]   %s has no living scene — left behind" % b["token"])
+			continue
+		var scene := String((lv as Dictionary).get("scene", ""))
+		var base_x: int = clampi(int(b["gx"]) + offx, bx0, bx1)
+		var base_z: int = clampi(int(b["gz"]) + offz, bz0, bz1)
+		var cfg := {}
+		if String(b["att"]) != "":
+			var kv := String(b["att"]).split(":", true, 1)
+			cfg[kv[0]] = kv[1] if kv.size() > 1 else "1"
+		var done := false
+		var first_refusal := ""
+		for ring in range(0, 7):
+			if done:
+				break
+			for d in _pack_ring(ring):
+				if base_x + d.x < bx0 or base_x + d.x > bx1 or base_z + d.y < bz0 or base_z + d.y > bz1:
+					continue   # never past the walls — _stamp would not stop us
+				var cell := {"x": base_x + d.x, "y": base_z + d.y, "rank": 2, "top": 0.0}
+				if bool(b["plinth"]):
+					cell["support_m"] = 1.0
+				if _stamp(seg, scene, String(b["token"]), cell, zbase, 1, {}, false, 0.0, float(b["rot"]), cfg):
+					placed += 1
+					if bool(b["plinth"]):
+						plinth_n += 1
+					if ring > 0:
+						slid += 1
+						print("[em-pack]   %s slid %d ring(s) off grid [%d,%d] — %s" % [
+							b["token"], ring, b["gx"], b["gz"], first_refusal])
+					done = true
+					break
+				elif first_refusal == "":
+					first_refusal = _stamp_refusal
+		if not done:
+			left += 1
+			print("[em-pack]   %s found no floor within 6 rings of [%d,%d] — %s" % [
+				b["token"], base_x, base_z, first_refusal])
+	print("[em-pack] %s · %s <- %s: %d verbatim + %d slid of %d, %d left behind, %d plinth(s)" % [
+		chapter, entry.get("pearl", ""), map_name, placed - slid, slid, bodies.size(), left, plinth_n])
+	return {"pearl": String(entry.get("pearl", "")), "placed": placed, "packed": true,
+		"offered": bodies.size(), "interior": placed}
+
+
+## The ring of cells at Chebyshev radius r, the transplant's repair search.
+func _pack_ring(r: int) -> Array:
+	if r == 0:
+		return [Vector2i.ZERO]
+	var out: Array = []
+	for dx in range(-r, r + 1):
+		for dz in range(-r, r + 1):
+			if maxi(absi(dx), absi(dz)) == r:
+				out.append(Vector2i(dx, dz))
+	out.sort_custom(func(a, b): return (a as Vector2i).length_squared() < (b as Vector2i).length_squared())
+	return out
+
+
 func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 		w: int, h: int, chapter: String = "") -> Dictionary:
 	# RESOLUTION ORDER: the chapter's own row first, the v1 building dict
@@ -5539,7 +5689,11 @@ func _deal_segment(seg: Node3D, slots: Array, zbase: int, spec: Dictionary,
 	# choice cannot disagree about which chapter this segment is for.
 	var mkey := String(spec.get("key", ""))
 	if not (_plan_db.is_empty() and _plan_by_chapter.is_empty()):
-		var planned: Dictionary = _deal_from_plan(seg, zbase, mkey, tile, w, h, chapter)
+		var planned: Dictionary = {}
+		if _grid_pack:
+			planned = _transplant_from_map(seg, zbase, mkey, w, h, chapter)
+		if planned.is_empty():
+			planned = _deal_from_plan(seg, zbase, mkey, tile, w, h, chapter)
 		if not planned.is_empty():
 			# THE CURSOR MUST STILL MOVE. `_pick_pool` (the only `_pool_i += 1`
 			# in the file) sits below this early return, so under `--em-plan`
