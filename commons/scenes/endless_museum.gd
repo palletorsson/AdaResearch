@@ -651,6 +651,9 @@ var _doll_node_start: Vector3 = Vector3.ZERO     # the node's position at grab
 var _doll_ring: MeshInstance3D = null
 var _doll_pan: bool = false        # MMB held — the hand drags the ground itself
 var _doll_orbit: bool = false      # RMB held over nothing — the house turns smoothly
+var _doll_cam_pos: Vector3 = Vector3.ZERO   # smoothed perch (butter, not snap)
+var _doll_yaw_now: float = 0.0              # smoothed yaw
+var _doll_hover: MeshInstance3D = null      # the faint ring under the mouse
 # ── THE BOOT CLOCK (2026-08-20, Palle: "still takes ~10 s to load the first
 # hall — what is happening there?") ── every boot phase timed and written into
 # em_built_*.json as `boot_ms`, so a slow launch answers by name instead of
@@ -2025,7 +2028,15 @@ func _setup_world() -> void:
 		_cam.size = _doll_zoom
 		_cam.far = 400.0
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		print("[em-doll] THE DOLL HOUSE — walls cut at %.2f m; WASD pans, wheel zooms, Q/E turns, H returns to the walk" % DOLL_CUT)
+		# a god's hand pans anywhere: the walk-time bounds box would yank the
+		# doll back at x ±20 the moment the eye left the building
+		var db: Node = get_tree().get_root().find_child("PlayerBoundsCheck", true, false)
+		if db != null:
+			db.set("box_bounds", Vector3(1.0e12, 1.0e12, 1.0e12))
+		# the editor HUD stands from the first frame — palette, selection,
+		# dirty count, all visible while the mouse works
+		call_deferred("_arm_editor")
+		print("[em-doll] THE DOLL HOUSE — walls cut at %.2f m; drag bodies, double-click drops the palette pick, [ ] browse, MMB pan, RMB orbit, H returns" % DOLL_CUT)
 	# the desktop hand — the same crosshair interaction the map scenes use:
 	# LMB press/drag on handles and buttons, RMB carry-grab, wheel = hold
 	# distance. Desktop-only by construction (the VR branch returned above;
@@ -2207,7 +2218,10 @@ func _doll_cut(seg: Node3D) -> void:
 				var top2: float = t.origin.y + sy * 0.5
 				if top2 <= DOLL_CUT:
 					continue
-				if bot >= DOLL_CUT:
+				var span2: float = t.basis.x.length() * t.basis.z.length()
+				if bot >= DOLL_CUT or span2 > 10.0:
+					# above the cut, OR a wide slab (a LID — shrinking one made
+					# a knee-height ceiling; a lid is REMOVED, not lowered)
 					t.origin.y = -1000.0
 					hidden += 1
 				else:
@@ -2231,7 +2245,7 @@ func _doll_cut(seg: Node3D) -> void:
 		var world_box: AABB = mi.global_transform * mi.get_aabb()
 		var bottom: float = world_box.position.y
 		var top: float = bottom + world_box.size.y
-		if bottom >= DOLL_CUT:
+		if bottom >= DOLL_CUT or (top > DOLL_CUT and world_box.size.x * world_box.size.z > 10.0):
 			mi.visible = false
 			hidden += 1
 		elif top > DOLL_CUT + 0.05:
@@ -7258,12 +7272,18 @@ func _doll_frame(delta: float) -> void:
 		_player.position.y = 0.0
 		_last_ground = _player.position
 	_player.velocity = Vector3.ZERO
-	var perch := Vector3(sin(_doll_yaw), 0.0, cos(_doll_yaw)) * 42.0 + Vector3(0, 46.0, 0)
-	_cam.global_position = _player.position + perch
+	# butter: the yaw and the perch ease toward their targets, so a turn or a
+	# pan reads as a camera move, not a teleport
+	var kf: float = 1.0 - exp(-9.0 * delta)
+	_doll_yaw_now = lerp_angle(_doll_yaw_now, _doll_yaw, kf)
+	var perch := Vector3(sin(_doll_yaw_now), 0.0, cos(_doll_yaw_now)) * 42.0 + Vector3(0, 46.0, 0)
+	var want_pos: Vector3 = _player.position + perch
+	_doll_cam_pos = want_pos if _doll_cam_pos == Vector3.ZERO else _doll_cam_pos.lerp(want_pos, kf)
+	_cam.global_position = _doll_cam_pos
 	var look_target: Vector3 = _player.position + Vector3(0, 0.5, 0)
 	if (_cam.global_position - look_target).length() > 0.5:
 		_cam.look_at(look_target)
-	_cam.size = _doll_zoom
+	_cam.size = lerpf(_cam.size, _doll_zoom, kf)
 	if _doll_ring != null and is_instance_valid(_doll_ring):
 		if _edit_sel >= 0 and _edit_sel < _edit_records.size():
 			var rn: Node3D = _node_or_null((_edit_records[_edit_sel] as Dictionary).get("node"))
@@ -7596,6 +7616,15 @@ func _input(event: InputEvent) -> void:
 		elif mb == MOUSE_BUTTON_LEFT and mbe.pressed and _cam != null:
 			var pt := _doll_floor_point(mbe.position)
 			var idx := _doll_pick(pt)
+			if mbe.double_click and idx < 0:
+				# double-click on empty floor: the palette pick lands there
+				if _edit_pal_i < 0 or _edit_pal.is_empty():
+					_edit_handle_key(KEY_BRACKETRIGHT)   # open the palette on this chapter
+				var before: int = _edit_records.size()
+				_edit_place_at(int(floor(pt.x)), int(floor(pt.z)))
+				if _edit_records.size() > before:
+					_doll_select(_edit_records.size() - 1)
+				return
 			_doll_select(idx)
 			if idx >= 0:
 				_doll_drag = true
@@ -7651,9 +7680,37 @@ func _input(event: InputEvent) -> void:
 		if nmv != null:
 			nmv.position = _doll_node_start + Vector3(float(ddx), 0.0, float(ddz))
 		return
+	if _dollhouse and event is InputEventMouseMotion and not _doll_drag and _cam != null:
+		# the faint ring: what WOULD the hand pick here?
+		var hp := _doll_floor_point((event as InputEventMouseMotion).position)
+		var hidx := _doll_pick(hp)
+		if _doll_hover == null or not is_instance_valid(_doll_hover):
+			var htm := TorusMesh.new()
+			htm.inner_radius = 0.46
+			htm.outer_radius = 0.52
+			htm.rings = 24
+			htm.ring_segments = 5
+			_doll_hover = MeshInstance3D.new()
+			_doll_hover.mesh = htm
+			var hm := StandardMaterial3D.new()
+			hm.albedo_color = Color(1, 1, 1, 0.5)
+			hm.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+			hm.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+			_doll_hover.material_override = hm
+			add_child(_doll_hover)
+		if hidx >= 0 and hidx != _edit_sel:
+			var hn: Node3D = _node_or_null((_edit_records[hidx] as Dictionary).get("node"))
+			if hn != null:
+				_doll_hover.global_position = Vector3(hn.global_position.x, 0.06, hn.global_position.z)
+				_doll_hover.visible = true
+		else:
+			_doll_hover.visible = false
 	if _dollhouse and event is InputEventKey and (event as InputEventKey).pressed and not (event as InputEventKey).echo:
 		var kc := (event as InputEventKey).keycode
 		_edit_shift = (event as InputEventKey).shift_pressed
+		if kc in [KEY_BRACKETLEFT, KEY_BRACKETRIGHT]:
+			_edit_handle_key(kc)   # browse the chapter palette; double-click drops the pick
+			return
 		if _edit_sel >= 0 and kc in [KEY_R, KEY_DELETE, KEY_EQUAL, KEY_PLUS, KEY_KP_ADD, KEY_MINUS, KEY_KP_SUBTRACT, KEY_PAGEUP, KEY_PAGEDOWN]:
 			_edit_handle_key(kc)
 			if kc == KEY_DELETE:
@@ -7956,13 +8013,19 @@ func _edit_chapter_here() -> String:
 ## as a ruling — {"add": true, chapter, token, to} — that _deal_from_plan
 ## applies on every future build.
 func _edit_place_from_palette() -> void:
-	if _edit_pal_i < 0 or _edit_pal_i >= _edit_pal.size() or _cam == null:
+	if _cam == null:
 		return
-	var cand: Dictionary = _edit_pal[_edit_pal_i]
 	var fwd: Vector3 = -_cam.global_transform.basis.z
 	var spot: Vector3 = _cam.global_position + fwd * 2.5
-	var wx: int = int(floor(spot.x))
-	var wz: int = int(floor(spot.z))
+	_edit_place_at(int(floor(spot.x)), int(floor(spot.z)))
+
+
+## The palette's pick, placed at a NAMED world cell — the crosshair hands in
+## its 2.5 m spot, the doll house hands in the cell under the mouse.
+func _edit_place_at(wx: int, wz: int) -> void:
+	if _edit_pal_i < 0 or _edit_pal_i >= _edit_pal.size():
+		return
+	var cand: Dictionary = _edit_pal[_edit_pal_i]
 	for srec in _segments:
 		if wz < int(srec.get("z0", 0)) or wz >= int(srec.get("z1", 0)):
 			continue
