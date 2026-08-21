@@ -38,6 +38,36 @@ unwatched. A detector nothing calls is not a gate.
 SKIP is not PASS. No built file, or a built file with no cells, means nothing
 was measured, and the verdict says so rather than returning a quiet zero — a
 null that reads as green is the instrument lying about the museum.
+
+AND A PRE-DRESSING GRID IS ALSO NOTHING MEASURED (2026-08-21). On 08-21 this
+file returned PASS — flood z=77 of 77, 0 cuts — in the same hour gate F died at
+z=21.2 with a fourteen-cell cut list, four of those cells sealed by
+`laser_measure` and the one column that crosses the enfilade door blocked by a
+`bench`. The two instruments were not disagreeing: they were reading different
+museums. `endless_museum.gd` calls `_write_built` when a segment finishes
+(:3453), but in replay mode the dressing pass is not run there — it is appended
+to `_stamp_queue` (:3319) and drained frames later from `_process`. Benches
+(`_dress_fixtures`, :6707) and route props (`_dress_props`) erase their cells
+AFTER the grid has been stamped, so a replay segment's grid is the UNDRESSED
+SHELL. Measured on that day's file: 0 cells marked "b" and 4 marked "p" in a
+segment whose builder places up to 5 benches and dozens of props.
+
+And the file does not LOOK stale, which is why five breaths read past it.
+`_run_dress_item` (:7040) runs the dressing and then calls `_flush_built_files`
+— so the record is rewritten after the benches land, with a fresh mtime and a
+refreshed `cards` list. Only `cells` is never re-stamped. A current-looking
+file carrying a grid from before the furniture is the exact shape of a green
+instrument lying, so the flag is read per segment, not from the timestamp.
+
+The asymmetry is what makes this safe to gate on. Dressing only ever REMOVES
+walk cells — every dress call site is an `erase`, never an assignment — so:
+
+  a cut in the shell is a cut in the dressed museum  -> FAIL stays sound
+  a whole shell says nothing about the dressed museum -> PASS is NOT earned
+
+So a segment carrying `replay: true` degrades a would-be PASS to SKIP, names
+the mechanism, and leaves FAIL alone. To get a real PASS, measure a built file
+whose segments were dressed in place (a bake, a shot run, or the studio).
 """
 
 from __future__ import annotations
@@ -56,6 +86,11 @@ REPO = Path(__file__).resolve().parent.parent
 # recording the roles apart.
 WALKABLE = {"."}
 
+# The two roles the deferred dressing pass stamps. Their ABSENCE is not proof of
+# an undressed grid (a bench-free museum is legal), which is why the verdict
+# turns on the segment's own `replay` flag and only PRINTS these as evidence.
+DRESS_ROLES = ("b", "p")
+
 
 def load_segments(built_path: Path) -> list[dict]:
     data = json.loads(built_path.read_text(encoding="utf-8"))
@@ -72,9 +107,31 @@ def load_segments(built_path: Path) -> list[dict]:
                 "z0": int(s.get("z0", 0)),
                 "x0": int(s.get("cell_x0", 0)),
                 "cells": cells,
+                # written by the builder; true means the dressing was queued, not
+                # run, at the instant this grid was stamped
+                "replay": bool(s.get("replay", False)),
             }
         )
     return out
+
+
+def dressing(segs: list[dict]) -> dict:
+    """Whether the grid on disk is the dressed museum or the undressed shell.
+
+    Returns the segments whose record predates their own dressing pass, plus the
+    role histogram, so the verdict can show its working instead of asserting.
+    """
+    shell = [s for s in segs if s["replay"]]
+    hist = {role: 0 for role in DRESS_ROLES}
+    for s in segs:
+        for row in s["cells"]:
+            for role in DRESS_ROLES:
+                hist[role] += row.count(role)
+    return {
+        "shell_segments": [f"{s['index']}:{s['museum']}" for s in shell],
+        "dressed": not shell,
+        "roles": hist,
+    }
 
 
 def build_world(segs: list[dict]) -> dict[tuple[int, int], bool]:
@@ -211,8 +268,10 @@ def main() -> int:
     world = build_world(segs)
     cuts = find_cuts(world, segs)
     reached, max_z, start = flood(world)
+    dress = dressing(segs)
 
     verdict = {
+        "dressing": dress,
         "built": str(built),
         "segments": [
             {"index": s["index"], "museum": s["museum"], "z0": s["z0"],
@@ -236,6 +295,21 @@ def main() -> int:
     print(f"flood: from {start} reaches z={reached} of {max_z}"
           f"  ({'WHOLE' if reached >= max_z else f'{max_z - reached} rows short'})")
     short = max_z - reached
+    # prop-031 clause 1, landed here where it was written: the SUBJECT rides in
+    # the verdict line, not only in the body. Two verdicts nine hours apart, one
+    # over 40 museums and one over a single 33-row segment, both read as facts
+    # about "the museum" because neither said how much it had looked at.
+    subject = (f"{len(segs)} segment(s) / {max_z + 1} rows /"
+               f" {len({s['museum'] for s in segs})} museum(s),"
+               f" {'DRESSED' if dress['dressed'] else 'SHELL'}")
+    if dress["dressed"]:
+        print(f"grid:  DRESSED — benches {dress['roles']['b']}, props"
+              f" {dress['roles']['p']} cells; this is the museum a body meets")
+    else:
+        print(f"grid:  SHELL — {len(dress['shell_segments'])} of {len(segs)} segment(s)"
+              " stamped their record before the dressing pass ran"
+              f" (replay); benches {dress['roles']['b']}, props"
+              f" {dress['roles']['p']} cells in it")
     if not cuts:
         print("cuts: none — every adjacent z row pair shares a walkable column")
         print("      (a short flood with no cut means the walk dies of something")
@@ -247,14 +321,25 @@ def main() -> int:
         if short > 0:
             sealed = first_sealed_row(world, reached, max_z)
             if sealed >= 0:
-                print(f"WALK SEVERANCE: FAIL — flood reaches z={reached} of {max_z}"
+                print(f"WALK SEVERANCE: FAIL — {subject} — flood reaches z={reached}"
+                      f" of {max_z}"
                       f" ({short} rows short); row z={sealed} is sealed end to end"
                       " (no walkable cell in it) — a wall of bodies, not a join")
                 return 1
-            print(f"WALK SEVERANCE: SKIP — cell map intact but flood stops at z={reached}"
+            print(f"WALK SEVERANCE: SKIP — {subject} — cell map intact but flood stops at z={reached}"
                   f" of {max_z} ({short} rows short); the obstruction is not in this file")
+        elif not dress["dressed"]:
+            # The whole flood is real, and it is a fact about the SHELL. Benches
+            # and props are subtractive and land after this record, so the museum
+            # a walker meets can be cut where this grid is whole — which is what
+            # happened on 08-21. Not measured, so not green.
+            print(f"WALK SEVERANCE: SKIP — {subject} — shell only: flood reaches z={reached} of"
+                  f" {max_z} with 0 cuts, but {len(dress['shell_segments'])} of"
+                  f" {len(segs)} segment(s) wrote their grid before the dressing"
+                  " pass ran, so benches and route props are not in it")
         else:
-            print(f"WALK SEVERANCE: PASS — flood reaches z={reached} of {max_z}, 0 cuts")
+            print(f"WALK SEVERANCE: PASS — {subject} — flood reaches z={reached}"
+                  f" of {max_z}, 0 cuts")
         return 0
 
     print(f"cuts: {len(cuts)}")
@@ -280,7 +365,7 @@ def main() -> int:
     # breaths of gate F handed over and each one guessed the mechanism wrong, so
     # the columns on both sides ride along — they are the mechanism.
     c0 = cuts[0]
-    print(f"\nWALK SEVERANCE: FAIL — flood reaches z={reached} of {max_z}"
+    print(f"\nWALK SEVERANCE: FAIL — {subject} — flood reaches z={reached} of {max_z}"
           f" ({short} rows short), {len(cuts)} cut(s); first at"
           f" z={c0['z']}->{c0['z_next']} in {c0['segment_z']}"
           f" ({'SEAM' if c0['at_seam'] else 'inside one museum'}),"

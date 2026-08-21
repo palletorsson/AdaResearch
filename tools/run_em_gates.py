@@ -76,6 +76,12 @@ GATES: dict[str, tuple[str, str, str, int]] = {
     # coordinate with no mechanism. This one is a second, runs on a contended
     # tree, and names the columns on both sides of the join that failed.
     "severance":     ("py", "tools/check_walk_severance.py", r"WALK SEVERANCE: (PASS|FAIL|SKIP)", 60),
+    # ...and the negative half of that detector, because on 08-21 it said PASS
+    # over a grid stamped before the benches landed while gate F died at a
+    # bench-blocked door. The degrade that fixed it must never swallow a cut,
+    # which is a claim about the detector, not about any museum: four synthetic
+    # grids, no Godot, under a second.
+    "severance_neg": ("py", "tools/test_walk_severance_shell.py", r"WALK SEVERANCE SHELL: (PASS|FAIL)", 60),
     "bake_fresh":    ("py", "tools/em_bake.py --check", r"EM BAKE: .*(fresh|STALE|MISSING)", 30),
     "reading":       ("py", "tools/em_reading.py primitives/point", r"READS|out of order", 60),
     "shipped":       ("gd", "res://commons/testing/test_em_shipped.gd", r"EM SHIPPED: (PASS|FAIL)", 300),

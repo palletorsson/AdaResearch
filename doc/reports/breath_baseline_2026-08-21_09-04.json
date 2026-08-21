@@ -1,0 +1,58 @@
+{
+  "timestamp": "2026-08-21T09:04:00",
+  "phase": "baseline",
+  "mode": "full",
+  "_readme": "Snapshot taken before the 2026-08-21 morning breath. Every number here was RUN, not read from a previous report.",
+  "pipeline_summary": {
+    "global_avg": 6.083,
+    "sequences_scored": 24,
+    "complete": 1,
+    "at_stage_6_vr_testing": 23,
+    "at_stage_8_complete": 1,
+    "note": "Eighteenth consecutive flat reading. Stage 6 is VR testing, which no autonomous breath can advance."
+  },
+  "heat_map_top_5": [
+    {"item": "museum", "temperature": 80, "reason": "active (14 recent commits)"},
+    {"item": "floor", "temperature": 65, "reason": "active (1 recent commits)"},
+    {"item": "endless_museum seal", "temperature": 60, "reason": "deep discovery: colliders clamped to a 5-cell seal"},
+    {"item": "breath harvest", "temperature": 60, "reason": "deep discovery: a green gate is a fact about a TREE"},
+    {"item": "gate_f_seal_overflow", "temperature": 60, "reason": "deep discovery: seal_overflow records only the MESH clamp"}
+  ],
+  "release_gates": {
+    "overall": "FAIL",
+    "enabled_passing": "5/6",
+    "A_sequence_contract": "PASS",
+    "B_artifact_registry": "PASS",
+    "C_map_validation": "PASS (grade_A 1890, B 363, C 174, F 0)",
+    "D_lab_progression": "PASS",
+    "E_museum_template": "PASS (900/900 chain pairs)",
+    "F_museum_walkthrough": {
+      "ok": false,
+      "reason": "no_route",
+      "museums": 3,
+      "z_reached": 21.2,
+      "goal_z": -1.0,
+      "frontier_z": 21,
+      "stall_events": 8,
+      "walked_s": 16.4,
+      "seal_overflow": 0,
+      "cut_cells": 14,
+      "cut_by": {"seal:laser_measure": 4, "bench": 1, "never": 9}
+    }
+  },
+  "em_gates_quick": {
+    "before_this_breath": "severance PASS (flood 77 of 77, 0 cuts)",
+    "note": "That PASS is the subject of this breath: it was a fact about an undressed shell."
+  },
+  "tree": {
+    "contended": true,
+    "dirty_files": 928,
+    "concurrent_session": "committing into commons/scenes/endless_museum.gd (5 museum commits at HEAD) and rebuilding ada_run/em_built.json during the breath (1 segment at 09:07, 3 by 09:40)",
+    "head": "a57138ddf"
+  },
+  "focus_vector": {
+    "primary": "Rebuild all primitives maps using Map Studio (dated 2026-03-28)",
+    "autonomously_actionable": false,
+    "note": "A hands-on Map Studio task. This breath worked the museum chapter that carries the primitives pearls, which is the nearest autonomous neighbour."
+  }
+}

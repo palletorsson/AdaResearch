@@ -528,6 +528,12 @@
       "topic": "gate_f_seal_overflow",
       "insight": "seal_overflow records only the MESH clamp (MAX_SEAL_RADIUS=2); the COLLIDER clamp (MAX_BODY_RADIUS=6) is the one that can strand a walker and it records nothing. A mesh overflow cannot cause a stall - colliders seal unclamped 45 lines below the comment that says otherwise.",
       "lod": 3
+    },
+    {
+      "timestamp": "2026-08-21T07:16:40.293474+00:00",
+      "topic": "walk severance",
+      "insight": "em_built.json's cell grid is stamped in _write_built (endless_museum.gd:3453) BEFORE the deferred dressing pass (queued :3319) erases bench and prop cells, and _run_dress_item (:7050) re-flushes the file afterwards with fresh mtime and cards but the same stale grid -- so a replay segment's grid is the undressed shell. Dressing is subtractive, so a cut in the shell is real (FAIL sound) but a whole shell earns no PASS.",
+      "lod": 3
     }
   ]
 }

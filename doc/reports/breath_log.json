@@ -4591,6 +4591,55 @@
         "ada_run/gates.json": "left unwritten - two threads, one file (the 08-13 rule)."
       },
       "duration_minutes": 18
+    },
+    {
+      "breath_id": "2026-08-21T09:04",
+      "mode": "full",
+      "baseline_avg": 6.083,
+      "post_avg": 6.083,
+      "delta": 0.0,
+      "items_attempted": [
+        "Baseline: pipeline + heat map + release gates + severance gate (run live, not read from file)",
+        "Read the disagreement rather than either instrument: gate F FAIL at z=21.2 against severance PASS at z=77 of 77, same tree, same hour",
+        "Name the mechanism in the source, not from the coordinate",
+        "Repair the instrument so it cannot issue that green again -- and only that branch",
+        "Negative test + register it, so the repair is itself watched"
+      ],
+      "items_succeeded": [
+        "gateF-cut-list-read-14-cells-4-sealed-by-laser_measure-1-bench",
+        "mechanism-found-write_built-3453-precedes-deferred-dress-3319",
+        "reflush-7050-refreshes-cards-not-cells-so-the-file-looks-current",
+        "measured-0-bench-cells-and-4-prop-cells-across-3-segments",
+        "shell-degrade-implemented-PASS-only-FAIL-untouched",
+        "neg-test-4-of-4-tools-test_walk_severance_shell.py",
+        "registered-as-gate-severance_neg-in-run_em_gates.py",
+        "false-green-removed-severance-row-now-reads-SKIP-not-PASS"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "THE SEVERANCE GATE'S GREEN WAS A FACT ABOUT AN UNDRESSED SHELL, AND THE FILE DID NOT LOOK STALE. At 09:05 gate F returned no_route, frontier z=21.2, 8 stall events, with a fourteen-cell cut list: row z=21 closed across x=1..14, four cells by seal:laser_measure, one by bench, the rest never learned. At 09:07 check_walk_severance.py returned PASS -- flood z=77 of 77, 0 cuts. Neither was wrong; they were reading different museums. endless_museum.gd stamps a segment's cell grid in _write_built (:3453) when the segment finishes, but in replay mode the dressing pass is not run there -- it is appended to _stamp_queue (:3319) and drained frames later from _process. _dress_fixtures (:6707) and _dress_props erase their cells after that stamp, so a replay segment's grid is the shell. The trap is that _run_dress_item (:7040) calls _flush_built_files AFTER the dressing, refreshing mtime and the cards list while never re-stamping cells: a current-looking file carrying a pre-furniture grid. Measured on the day's file: 0 cells marked 'b' and 4 marked 'p' across three segments whose builder places up to five benches each. The severance detector reads only that grid, so it is structurally blind to the exact fault class that failed gate F -- the enfilade door at (3,22) whose single approach cell (3,21) the walker reports as bench.",
+        "THE REPAIR IS SOUND ONLY IN ONE DIRECTION, AND THAT IS WHY IT COULD BE MADE WITHOUT TOUCHING THE CONTENDED BUILDER. Dressing is purely subtractive -- every dress call site erases walk cells and none assigns one (the only assignment near it, :6403, is _seal_cells rolling a refused seal back). So a cut in the shell is a cut in the dressed museum (FAIL stays sound) while a whole shell says nothing about the dressed museum (PASS is not earned). The degrade therefore touches the PASS branch alone: a segment carrying replay:true turns a would-be PASS into SKIP and names the mechanism. tools/test_walk_severance_shell.py holds that asymmetry down with four synthetic grids in under a second -- dressed+whole PASS, shell+whole SKIP, dressed+cut FAIL, shell+cut FAIL -- and is registered as gate severance_neg, because the lesson of 08-20 was that an instrument nothing calls is not a measurement.",
+        "A GREEN ROW WAS DELETED TODAY, NOT ADDED, AND THAT IS THE MOVEMENT. Before: severance PASS, gate F FAIL, and five breaths of reading the two as a puzzle. After: severance SKIP -- ok=false in gates.json, since run_em_gates scores on 'PASS' in the verdict line -- which agrees with gate F instead of contradicting it. The tree was contended throughout (928 dirty files, the concurrent session committing into endless_museum.gd eight times yesterday and rebuilding em_built.json twice during this breath: 1 segment at 09:07, 3 by 09:40), which is precisely why the repair went into the reader rather than the builder. The builder-side fix -- re-stamp cells after the dress drain, or write a second dressed grid -- belongs to whoever owns endless_museum.gd."
+      ],
+      "files_changed": [
+        "tools/check_walk_severance.py",
+        "tools/test_walk_severance_shell.py",
+        "tools/run_em_gates.py",
+        "doc/reports/breath_log.json",
+        "doc/reports/improvement_trajectory.json"
+      ],
+      "duration_minutes": 36
     }
   ]
 }
