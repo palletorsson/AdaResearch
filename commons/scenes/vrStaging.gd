@@ -191,6 +191,13 @@ func _start_game():
 
 		# Preload the lab scene in background while showing menu
 		_preload_lab_scene()
+		# ...and the ENDLESS MUSEUM beside it (2026-08-20, Palle: "preload").
+		# The Quest measured 5.3 s of staged load starting only at the click;
+		# menu idle is exactly the time to spend it. XRToolsStaging's own
+		# load_scene uses threaded loading on the same path, so a finished
+		# preload makes the click near-instant and an unfinished one is
+		# simply joined in flight — there is no double work either way.
+		_preload_museum_scene()
 		return
 
 	print("AdaVRStaging: Starting game with consolidated system")
@@ -250,6 +257,36 @@ func _load_lab_with_loading_screen():
 		await _setup_lab_system()
 	else:
 		await _setup_basic_vr_scene()
+
+const MUSEUM_STAGED_SCENE := "res://commons/scenes/endless_museum_staged.tscn"
+var _museum_preload_started: bool = false
+
+
+func _preload_museum_scene():
+	if _museum_preload_started:
+		return
+	_museum_preload_started = true
+	print("AdaVRStaging: Starting background preload of the endless museum...")
+	ResourceLoader.load_threaded_request(MUSEUM_STAGED_SCENE)
+	if OS.is_debug_build():
+		_monitor_museum_preload()
+
+
+func _monitor_museum_preload():
+	while true:
+		var progress := []
+		var status = ResourceLoader.load_threaded_get_status(MUSEUM_STAGED_SCENE, progress)
+		if status == ResourceLoader.THREAD_LOAD_LOADED:
+			print("AdaVRStaging: Endless museum preloaded successfully!")
+			break
+		elif status == ResourceLoader.THREAD_LOAD_FAILED:
+			print("AdaVRStaging: ERROR - endless museum preload failed!")
+			break
+		else:
+			if not is_inside_tree():
+				await tree_entered
+			await get_tree().create_timer(0.5).timeout
+
 
 func _preload_lab_scene():
 	"""Start preloading the lab scene in the background while menu is visible"""
@@ -468,6 +505,9 @@ func _on_scene_loaded_handler(scene, user_data):
 	prompt_for_continue = false
 
 func _on_scene_visible_handler(scene, _user_data):
+	# the boot clock's last witness: when the fade lifts and the visitor SEES.
+	# Read beside [em-boot]'s first_frame — the difference is staging's hold.
+	print("[em-boot] scene_visible at %d ms since process start" % Time.get_ticks_msec())
 	"""Connected to XRToolsStaging scene_visible signal"""
 	print("AdaVRStaging: Scene visible - %s" % scene.name if scene else "null")
 
