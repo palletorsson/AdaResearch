@@ -534,6 +534,12 @@
       "topic": "walk severance",
       "insight": "em_built.json's cell grid is stamped in _write_built (endless_museum.gd:3453) BEFORE the deferred dressing pass (queued :3319) erases bench and prop cells, and _run_dress_item (:7050) re-flushes the file afterwards with fresh mtime and cards but the same stale grid -- so a replay segment's grid is the undressed shell. Dressing is subtractive, so a cut in the shell is real (FAIL sound) but a whole shell earns no PASS.",
       "lod": 3
+    },
+    {
+      "timestamp": "2026-08-21T16:58:38.065412+00:00",
+      "topic": "gate verdict states",
+      "insight": "run_em_gates scores 37 gates on one line (PASS in verdict); 7 gates declare SKIP and none is honoured, so an honest SKIP is stored ok:false and printed FAIL beside real defects",
+      "lod": 3
     }
   ]
 }
