@@ -182,6 +182,16 @@ func _start_game():
 		await _load_lab_with_loading_screen()
 		return
 
+	# UNATTENDED TEST LANE (2026-08-20, Palle: "can you upload and test on the
+	# quest via usb without me"). A flag file in user:// — adb-pushable from
+	# the desk — skips the menu and loads the museum directly, so an agent can
+	# install, launch and read the boot clock with no hand in the headset.
+	# Absent flag = the menu exactly as always.
+	if FileAccess.file_exists("user://em_autolaunch.txt"):
+		print("AdaVRStaging: em_autolaunch.txt found — straight to the endless museum, no menu")
+		_preload_museum_scene()
+		load_scene(MUSEUM_STAGED_SCENE)
+		return
 	if menu:
 		print("AdaVRStaging: Menu found, waiting for user input")
 		if not menu.start_game_requested.is_connected(_on_menu_start_game):
