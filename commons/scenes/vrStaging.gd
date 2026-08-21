@@ -190,6 +190,19 @@ func _start_game():
 	if FileAccess.file_exists("user://em_autolaunch.txt"):
 		print("AdaVRStaging: em_autolaunch.txt found — straight to the endless museum, no menu")
 		_preload_museum_scene()
+		# THE WAITING ROOM THE MENU USED TO BE (2026-08-21): loading the very
+		# instant staging stood up raced the XR session — Palle's first
+		# unattended walk arrived with DEAD CONTROLLERS. The menu's real gift
+		# was seconds: the session focuses, the controllers register, and the
+		# preload overlaps. Grant them explicitly, then hand off the pointers
+		# exactly as the menu click does.
+		if not is_inside_tree():
+			await tree_entered
+		await get_tree().create_timer(5.0).timeout
+		var lp = find_child("FunctionPointerLeft", true, false)
+		var rp = find_child("FunctionPointerRight", true, false)
+		if lp: lp.visible = false
+		if rp: rp.visible = false
 		load_scene(MUSEUM_STAGED_SCENE)
 		return
 	if menu:
