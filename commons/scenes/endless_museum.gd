@@ -2072,6 +2072,22 @@ func _setup_world() -> void:
 	_cam.fov = 75.0
 	_player.add_child(_cam)
 	_cam.make_current()
+	# THE VIEW BELONGS TO THE WALKER (2026-08-21, Palle: "for some reason I'm
+	# jumping out in the air above the museum" — the OLD deferred bug: under
+	# the staging lane, the staging's own desktop rig finishes loading AFTER
+	# this camera claims current and quietly steals the view, so the player
+	# watches from the staging rig's perch in the sky while the real walker
+	# stands on the floor). A cheap standing guard: reclaim current whenever
+	# it drifts, desktop walk only — VR and the doll house own their views.
+	var cam_guard := Timer.new()
+	cam_guard.wait_time = 1.0
+	cam_guard.autostart = true
+	cam_guard.timeout.connect(func():
+		if _cam != null and is_instance_valid(_cam) and not _cam.current \
+				and not _vr and _shot_path == "":
+			_cam.make_current()
+			print("[em-cam] the view drifted to another camera — reclaimed for the walker"))
+	_cam.add_child(cam_guard)
 	if _dollhouse:
 		# the doll house eye: orthographic, high and oblique, re-aimed every
 		# frame at the walker — who remains in the house as the doll
