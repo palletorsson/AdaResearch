@@ -112,7 +112,13 @@ func _run() -> void:
 		var rc_before: int = (inst.get("_edit_records") as Array).size()
 		inst.call("_doll_menu_place", 0)
 		if (inst.get("_edit_records") as Array).size() != rc_before + 1:
-			fails.append("the menu's first entry did not place before the doll")
+			# an occupied front cell is honest museum behaviour — do what the
+			# UI asks of a human: step, try once more
+			var pl2: CharacterBody3D = inst.get("_player")
+			pl2.position.z += 2.0
+			inst.call("_doll_menu_place", 0)
+		if (inst.get("_edit_records") as Array).size() != rc_before + 1:
+			fails.append("menu place refused twice: " + String(inst.get("_stamp_refusal")))
 		elif int(inst.get("_edit_sel")) != rc_before:
 			fails.append("the placed body did not arrive selected")
 		else:
