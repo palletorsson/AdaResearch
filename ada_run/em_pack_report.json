@@ -5,7 +5,7 @@
    "bodies": [
     {
      "final": [
-      3,
+      11,
       6
      ],
      "grid": [
@@ -15,7 +15,7 @@
      "plinth": false,
      "rings": 0,
      "target": [
-      3,
+      11,
       6
      ],
      "token": "dark_sphere",
@@ -23,8 +23,8 @@
     },
     {
      "final": [
-      4,
-      6
+      10,
+      7
      ],
      "grid": [
       1,
@@ -33,16 +33,16 @@
      "plinth": false,
      "rings": 0,
      "target": [
-      4,
-      6
+      10,
+      7
      ],
      "token": "cube_scene",
      "why": ""
     },
     {
      "final": [
-      5,
-      6
+      9,
+      7
      ],
      "grid": [
       2,
@@ -51,16 +51,16 @@
      "plinth": false,
      "rings": 0,
      "target": [
-      5,
-      6
+      9,
+      7
      ],
      "token": "sphere",
      "why": ""
     },
     {
      "final": [
-      6,
-      10
+      4,
+      9
      ],
      "grid": [
       3,
@@ -69,34 +69,16 @@
      "plinth": true,
      "rings": 0,
      "target": [
-      6,
-      10
+      4,
+      9
      ],
      "token": "platonic_grabbables",
      "why": ""
     },
     {
      "final": [
-      4,
-      18
-     ],
-     "grid": [
-      1,
-      11
-     ],
-     "plinth": false,
-     "rings": 1,
-     "target": [
-      4,
-      17
-     ],
-     "token": "hole_with_cones",
-     "why": "baked: sealing would sever the walk route"
-    },
-    {
-     "final": [
-      6,
-      17
+      9,
+      10
      ],
      "grid": [
       3,
@@ -105,16 +87,106 @@
      "plinth": true,
      "rings": 0,
      "target": [
-      6,
-      17
+      9,
+      10
      ],
      "token": "sphere_high",
      "why": ""
     },
     {
      "final": [
+      12,
+      13
+     ],
+     "grid": [
+      1,
+      11
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      12,
+      13
+     ],
+     "token": "hole_with_cones",
+     "why": ""
+    },
+    {
+     "final": [
+      10,
+      9
+     ],
+     "grid": [
+      1,
+      13
+     ],
+     "plinth": true,
+     "rings": 0,
+     "target": [
+      10,
+      9
+     ],
+     "token": "righttriangle",
+     "why": ""
+    },
+    {
+     "final": [
+      7,
+      11
+     ],
+     "grid": [
+      3,
+      13
+     ],
+     "plinth": false,
+     "rings": 1,
+     "target": [
       8,
-      17
+      11
+     ],
+     "token": "sphere_mid",
+     "why": ""
+    },
+    {
+     "final": [
+      7,
+      13
+     ],
+     "grid": [
+      4,
+      13
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      7,
+      13
+     ],
+     "token": "floating_sphere_field",
+     "why": ""
+    },
+    {
+     "final": [
+      6,
+      14
+     ],
+     "grid": [
+      5,
+      13
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      6,
+      14
+     ],
+     "token": "sphere_mid",
+     "why": ""
+    },
+    {
+     "final": [
+      8,
+      15
      ],
      "grid": [
       5,
@@ -124,7 +196,7 @@
      "rings": 0,
      "target": [
       8,
-      17
+      15
      ],
      "token": "sphere_high",
      "why": ""
@@ -149,152 +221,26 @@
     },
     {
      "final": [
-      4,
-      19
-     ],
-     "grid": [
-      1,
-      13
-     ],
-     "plinth": true,
-     "rings": 0,
-     "target": [
-      4,
-      19
-     ],
-     "token": "righttriangle",
-     "why": ""
-    },
-    {
-     "final": [
-      6,
-      19
-     ],
-     "grid": [
-      3,
-      13
-     ],
-     "plinth": false,
-     "rings": 0,
-     "target": [
-      6,
-      19
-     ],
-     "token": "sphere_mid",
-     "why": ""
-    },
-    {
-     "final": [
-      7,
-      19
-     ],
-     "grid": [
-      4,
-      13
-     ],
-     "plinth": false,
-     "rings": 0,
-     "target": [
-      7,
-      19
-     ],
-     "token": "floating_sphere_field",
-     "why": ""
-    },
-    {
-     "final": [
-      8,
-      19
-     ],
-     "grid": [
-      5,
-      13
-     ],
-     "plinth": false,
-     "rings": 0,
-     "target": [
-      8,
-      19
-     ],
-     "token": "sphere_mid",
-     "why": ""
-    },
-    {
-     "final": [
-      10,
-      19
+      11,
+      17
      ],
      "grid": [
       7,
       13
      ],
      "plinth": true,
-     "rings": 0,
+     "rings": 1,
      "target": [
-      10,
-      19
+      11,
+      18
      ],
      "token": "truncatedtetrahedron",
      "why": ""
     },
     {
      "final": [
-      4,
-      21
-     ],
-     "grid": [
-      1,
-      15
-     ],
-     "plinth": true,
-     "rings": 0,
-     "target": [
-      4,
-      21
-     ],
-     "token": "roughrock",
-     "why": ""
-    },
-    {
-     "final": [
-      6,
-      21
-     ],
-     "grid": [
-      3,
-      15
-     ],
-     "plinth": false,
-     "rings": 0,
-     "target": [
-      6,
-      21
-     ],
-     "token": "sphere_low",
-     "why": ""
-    },
-    {
-     "final": [
-      7,
-      21
-     ],
-     "grid": [
-      5,
-      15
-     ],
-     "plinth": false,
-     "rings": 1,
-     "target": [
-      8,
-      21
-     ],
-     "token": "sphere_low",
-     "why": "baked: sealing would sever the walk route"
-    },
-    {
-     "final": [
-      10,
-      21
+      9,
+      17
      ],
      "grid": [
       7,
@@ -303,16 +249,70 @@
      "plinth": true,
      "rings": 0,
      "target": [
-      10,
-      21
+      9,
+      17
      ],
      "token": "capsule",
      "why": ""
     },
     {
      "final": [
+      8,
+      18
+     ],
+     "grid": [
       5,
-      23
+      15
+     ],
+     "plinth": false,
+     "rings": 1,
+     "target": [
+      9,
+      18
+     ],
+     "token": "sphere_low",
+     "why": ""
+    },
+    {
+     "final": [
+      7,
+      17
+     ],
+     "grid": [
+      3,
+      15
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      7,
+      17
+     ],
+     "token": "sphere_low",
+     "why": ""
+    },
+    {
+     "final": [
+      6,
+      15
+     ],
+     "grid": [
+      1,
+      15
+     ],
+     "plinth": true,
+     "rings": 0,
+     "target": [
+      6,
+      15
+     ],
+     "token": "roughrock",
+     "why": ""
+    },
+    {
+     "final": [
+      4,
+      13
      ],
      "grid": [
       2,
@@ -321,16 +321,16 @@
      "plinth": true,
      "rings": 0,
      "target": [
-      5,
-      23
+      4,
+      13
      ],
      "token": "grab_octahedron",
      "why": ""
     },
     {
      "final": [
-      7,
-      23
+      3,
+      15
      ],
      "grid": [
       4,
@@ -339,16 +339,16 @@
      "plinth": false,
      "rings": 0,
      "target": [
-      7,
-      23
+      3,
+      15
      ],
      "token": "snap_octahedron_puzzle",
      "why": ""
     },
     {
      "final": [
-      9,
-      23
+      5,
+      15
      ],
      "grid": [
       6,
@@ -357,8 +357,8 @@
      "plinth": true,
      "rings": 0,
      "target": [
-      9,
-      23
+      5,
+      15
      ],
      "token": "grab_octahedron",
      "why": ""
@@ -366,25 +366,7 @@
     {
      "final": [
       6,
-      26
-     ],
-     "grid": [
-      3,
-      20
-     ],
-     "plinth": false,
-     "rings": 0,
-     "target": [
-      6,
-      26
-     ],
-     "token": "lshape",
-     "why": ""
-    },
-    {
-     "final": [
-      8,
-      26
+      18
      ],
      "grid": [
       5,
@@ -393,106 +375,34 @@
      "plinth": false,
      "rings": 0,
      "target": [
-      8,
-      26
+      6,
+      18
      ],
      "token": "lshape",
      "why": ""
     },
     {
      "final": [
-      3,
-      27
-     ],
-     "grid": [
-      0,
-      21
-     ],
-     "plinth": false,
-     "rings": 0,
-     "target": [
-      3,
-      27
-     ],
-     "token": "prism_block",
-     "why": ""
-    },
-    {
-     "final": [
-      4,
-      27
-     ],
-     "grid": [
-      1,
-      21
-     ],
-     "plinth": false,
-     "rings": 0,
-     "target": [
-      4,
-      27
-     ],
-     "token": "prism_block",
-     "why": ""
-    },
-    {
-     "final": [
-      5,
-      27
-     ],
-     "grid": [
-      2,
-      21
-     ],
-     "plinth": false,
-     "rings": 0,
-     "target": [
-      5,
-      27
-     ],
-     "token": "prism_block",
-     "why": ""
-    },
-    {
-     "final": [
-      6,
-      27
-     ],
-     "grid": [
-      3,
-      21
-     ],
-     "plinth": false,
-     "rings": 0,
-     "target": [
-      6,
-      27
-     ],
-     "token": "prism_block",
-     "why": ""
-    },
-    {
-     "final": [
-      7,
-      27
+      8,
+      18
      ],
      "grid": [
       5,
       21
      ],
      "plinth": false,
-     "rings": 1,
+     "rings": 0,
      "target": [
       8,
-      27
+      18
      ],
      "token": "prism_block",
-     "why": "baked: sealing would sever the walk route"
+     "why": ""
     },
     {
      "final": [
-      9,
-      28
+      8,
+      19
      ],
      "grid": [
       6,
@@ -502,15 +412,15 @@
      "rings": 1,
      "target": [
       9,
-      27
+      19
      ],
      "token": "prism_block",
-     "why": "baked: sealing would sever the walk route"
+     "why": ""
     },
     {
      "final": [
-      10,
-      27
+      11,
+      19
      ],
      "grid": [
       7,
@@ -519,26 +429,26 @@
      "plinth": false,
      "rings": 0,
      "target": [
-      10,
-      27
+      11,
+      19
      ],
      "token": "prism_block",
      "why": ""
     },
     {
      "final": [
-      11,
-      27
+      12,
+      17
      ],
      "grid": [
       8,
       21
      ],
      "plinth": false,
-     "rings": 0,
+     "rings": 1,
      "target": [
-      11,
-      27
+      12,
+      18
      ],
      "token": "prism_block",
      "why": ""
@@ -546,43 +456,97 @@
     {
      "final": [
       11,
-      28
+      21
      ],
      "grid": [
       8,
       22
      ],
      "plinth": false,
-     "rings": 0,
+     "rings": 1,
      "target": [
       11,
-      28
+      20
      ],
      "token": "library_rack",
      "why": ""
     },
     {
      "final": [
-      3,
-      29
+      9,
+      21
      ],
      "grid": [
-      0,
+      8,
       23
      ],
      "plinth": false,
      "rings": 0,
      "target": [
-      3,
-      29
+      9,
+      21
      ],
      "token": "torus_radials_rings",
      "why": ""
     },
     {
      "final": [
+      7,
+      20
+     ],
+     "grid": [
+      6,
+      23
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      7,
+      20
+     ],
+     "token": "capsule_radials_rings",
+     "why": ""
+    },
+    {
+     "final": [
+      6,
+      20
+     ],
+     "grid": [
       5,
-      29
+      23
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      6,
+      20
+     ],
+     "token": "capsule_radials_rings",
+     "why": ""
+    },
+    {
+     "final": [
+      4,
+      20
+     ],
+     "grid": [
+      3,
+      23
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      4,
+      20
+     ],
+     "token": "capsule_radials_rings",
+     "why": ""
+    },
+    {
+     "final": [
+      5,
+      21
      ],
      "grid": [
       2,
@@ -592,87 +556,123 @@
      "rings": 0,
      "target": [
       5,
-      29
+      21
      ],
      "token": "capsule_radials_rings",
      "why": ""
     },
     {
      "final": [
-      6,
-      29
+      7,
+      21
+     ],
+     "grid": [
+      2,
+      21
+     ],
+     "plinth": false,
+     "rings": 1,
+     "target": [
+      8,
+      21
+     ],
+     "token": "prism_block",
+     "why": ""
+    },
+    {
+     "final": [
+      7,
+      22
      ],
      "grid": [
       3,
-      23
+      21
      ],
      "plinth": false,
-     "rings": 0,
+     "rings": 1,
      "target": [
-      6,
-      29
+      8,
+      22
      ],
-     "token": "capsule_radials_rings",
+     "token": "prism_block",
      "why": ""
     },
     {
      "final": [
-      8,
-      29
+      6,
+      21
      ],
      "grid": [
+      3,
+      20
+     ],
+     "plinth": false,
+     "rings": 1,
+     "target": [
+      7,
+      22
+     ],
+     "token": "lshape",
+     "why": ""
+    },
+    {
+     "final": [
+      7,
+      24
+     ],
+     "grid": [
+      1,
+      21
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      7,
+      24
+     ],
+     "token": "prism_block",
+     "why": ""
+    },
+    {
+     "final": [
       5,
-      23
+      24
+     ],
+     "grid": [
+      0,
+      21
      ],
      "plinth": false,
      "rings": 0,
      "target": [
-      8,
-      29
+      5,
+      24
      ],
-     "token": "capsule_radials_rings",
+     "token": "prism_block",
      "why": ""
     },
     {
      "final": [
-      9,
-      29
+      3,
+      25
      ],
      "grid": [
-      6,
+      0,
       23
      ],
      "plinth": false,
      "rings": 0,
      "target": [
-      9,
-      29
-     ],
-     "token": "capsule_radials_rings",
-     "why": ""
-    },
-    {
-     "final": [
-      11,
-      29
-     ],
-     "grid": [
-      8,
-      23
-     ],
-     "plinth": false,
-     "rings": 0,
-     "target": [
-      11,
-      29
+      3,
+      25
      ],
      "token": "torus_radials_rings",
      "why": ""
     },
     {
      "final": [
-      4,
-      31
+      5,
+      27
      ],
      "grid": [
       1,
@@ -681,34 +681,34 @@
      "plinth": false,
      "rings": 0,
      "target": [
-      4,
-      31
+      5,
+      27
      ],
      "token": "plus",
      "why": ""
     },
     {
      "final": [
-      11,
-      31
+      6,
+      27
      ],
      "grid": [
       4,
       25
      ],
      "plinth": false,
-     "rings": 4,
+     "rings": 2,
      "target": [
       7,
-      31
+      29
      ],
      "token": "diamonds",
-     "why": "baked: sealing would sever the walk route"
+     "why": ""
     },
     {
      "final": [
-      10,
-      31
+      6,
+      25
      ],
      "grid": [
       7,
@@ -717,8 +717,8 @@
      "plinth": false,
      "rings": 0,
      "target": [
-      10,
-      31
+      6,
+      25
      ],
      "token": "plus",
      "why": ""
@@ -727,9 +727,10 @@
    "chapter": "primitives",
    "h": 30,
    "map": "Primitives_Ignorance",
-   "offx": 3,
-   "offz": 6,
+   "offx": 0,
+   "offz": 0,
    "pearl": "ignorance",
+   "stamped": true,
    "vestibule": 4,
    "w": 15
   },
@@ -737,8 +738,8 @@
    "bodies": [
     {
      "final": [
-      3,
-      12
+      2,
+      6
      ],
      "grid": [
       0,
@@ -747,34 +748,34 @@
      "plinth": false,
      "rings": 0,
      "target": [
-      3,
-      12
+      2,
+      6
      ],
      "token": "player_trace",
      "why": ""
     },
     {
      "final": [
-      6,
-      15
+      5,
+      5
      ],
      "grid": [
       4,
       3
      ],
      "plinth": false,
-     "rings": 1,
+     "rings": 2,
      "target": [
       7,
-      15
+      5
      ],
      "token": "grid_lines",
-     "why": "baked: sealing would sever the walk route"
+     "why": ""
     },
     {
      "final": [
-      7,
-      19
+      11,
+      7
      ],
      "grid": [
       4,
@@ -783,16 +784,16 @@
      "plinth": false,
      "rings": 0,
      "target": [
-      7,
-      19
+      11,
+      7
      ],
      "token": "floating_sphere_field",
      "why": ""
     },
     {
      "final": [
-      5,
-      20
+      10,
+      9
      ],
      "grid": [
       2,
@@ -801,52 +802,52 @@
      "plinth": true,
      "rings": 0,
      "target": [
-      5,
-      20
+      10,
+      9
      ],
      "token": "grab_sphere_point_snap",
      "why": ""
     },
     {
      "final": [
-      5,
-      20
+      9,
+      12
      ],
      "grid": [
       0,
       9
      ],
      "plinth": false,
-     "rings": 2,
+     "rings": 0,
      "target": [
-      3,
-      21
+      9,
+      12
      ],
      "token": "ConeTwistBag",
-     "why": "baked: sealing would sever the walk route"
+     "why": ""
     },
     {
      "final": [
-      12,
-      27
+      2,
+      10
      ],
      "grid": [
       6,
       10
      ],
      "plinth": false,
-     "rings": 5,
+     "rings": 3,
      "target": [
-      9,
-      22
+      5,
+      11
      ],
      "token": "ConnectedTriangles",
-     "why": "baked: sealing would sever the walk route"
+     "why": ""
     },
     {
      "final": [
-      10,
-      25
+      2,
+      10
      ],
      "grid": [
       7,
@@ -855,8 +856,8 @@
      "plinth": false,
      "rings": 0,
      "target": [
-      10,
-      25
+      2,
+      10
      ],
      "token": "room_grammar",
      "why": ""
@@ -865,9 +866,10 @@
    "chapter": "primitives",
    "h": 30,
    "map": "Point_Line_Grid",
-   "offx": 3,
-   "offz": 12,
+   "offx": 0,
+   "offz": 0,
    "pearl": "line grid",
+   "stamped": true,
    "vestibule": 4,
    "w": 15
   },

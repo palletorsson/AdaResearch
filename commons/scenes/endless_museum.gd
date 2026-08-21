@@ -3116,23 +3116,40 @@ func _build_segment() -> void:
 		h = tile.size()
 		print("[em-rooms] %s · %s: %d room(s) — the hall is %d rows of the template's %d" % [
 			next_seq, String(peek.get("pearl", "")), int(peek.get("rooms", 0)), h, int(spec["h"])])
-	# STAMP MEANS REMOVE WALLS (2026-08-21, Palle). A hall whose necklace was
-	# force-stamped on the bench builds as an OPEN SHELL: the composition was
-	# laid on open floor, and interior partitions would fight it. The tile is
-	# the single author — walls, colliders, seals, walk cells and the door
-	# list all derive from it (see _widen_doors) — so the interior opens
-	# HERE, once, and everything downstream simply agrees. The perimeter and
-	# its doors stand; the vestibule and gate are untouched.
-	if not _necklace_hand(next_seq, String(peek.get("pearl", ""))).is_empty():
+	# STAMP MEANS REMOVE WALLS — UNDER ITSELF (2026-08-21, Palle, twice: first
+	# "stamp means remove walls", then "it should only stamp away under it
+	# self, now it too much"). The stamp clears the tile ONLY where the
+	# necklace's bodies stand: each bead opens the cells of its own footprint
+	# (run-extended along its spread axis), and the hall keeps the rest of
+	# its architecture. The tile is the single author — walls, colliders,
+	# seals, walk cells and the door list all derive from it (see
+	# _widen_doors) — so the clearing happens HERE, once. A bead whose
+	# pocket ends up unreachable is still guarded downstream: the severance
+	# rule refuses the seal and the ring search slides it to honest floor.
+	var hand_pre := _necklace_hand(next_seq, String(peek.get("pearl", "")))
+	if not hand_pre.is_empty():
 		var opened := 0
-		for oz in range(1, tile.size() - 1):
-			var orow: Array = tile[oz]
-			for ox in range(1, orow.size() - 1):
-				if String(orow[ox]) != "1":
-					orow[ox] = "1"
-					opened += 1
+		for b_v in (hand_pre.get("beads", []) as Array):
+			var b: Dictionary = b_v
+			var fpc: int = maxi(1, int(ceil(float(b.get("fp", 1.0)))))
+			var cnt: int = maxi(1, int(b.get("count", 1)))
+			var gapc: int = maxi(1, int(b.get("gap", 1)))
+			var ex_w: int = fpc + ((cnt - 1) * gapc if String(b.get("spread", "")) == "x" else 0)
+			var ex_d: int = fpc + ((cnt - 1) * gapc if String(b.get("spread", "")) == "z" else 0)
+			var bx: int = int(floor(float(b.get("x", 0.0))))
+			var bz_tile: int = int(floor(float(b.get("z", 0.0)))) - VESTIBULE_H
+			for oz in range(bz_tile - int(floor(ex_d / 2.0)), bz_tile - int(floor(ex_d / 2.0)) + ex_d):
+				if oz < 1 or oz > tile.size() - 2:
+					continue
+				var orow: Array = tile[oz]
+				for ox in range(bx - int(floor(ex_w / 2.0)), bx - int(floor(ex_w / 2.0)) + ex_w):
+					if ox < 1 or ox > orow.size() - 2:
+						continue
+					if String(orow[ox]) != "1":
+						orow[ox] = "1"
+						opened += 1
 		if opened > 0:
-			print("[em-stamp] %s · %s: open shell — %d interior cell(s) cleared for the bench's floor plan" % [
+			print("[em-stamp] %s · %s: %d cell(s) cleared UNDER the stamp — the hall keeps the rest of its walls" % [
 				next_seq, String(peek.get("pearl", "")), opened])
 	var seg := Node3D.new()
 	seg.name = "Seg%d_%s" % [_seg_index, spec["key"]]
