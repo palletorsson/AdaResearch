@@ -639,6 +639,16 @@ var _dollhouse: bool = false
 var DOLL_CUT := 1.15               # walls become knee walls at this height (em_layout hall.doll_cut_m)
 var _doll_zoom: float = 16.0       # orthographic size; wheel zooms 6..60
 var _doll_yaw: float = PI * 0.75   # the iso angle; Q/E turn in 45-degree steps
+# THE DOLL'S HANDS (2026-08-21, Palle: "build the mouse drag editing in the
+# doll house"): LMB picks the nearest body on the floor, dragging carries it
+# cell by cell, release commits ONE _edit_nudge with the whole delta — the
+# same override ruling the first-person arrows write, autosaved and folded
+# by the same lanes. R/Q turn, DELETE removes, +/- scale via the existing
+# editor verbs once a body is held in selection.
+var _doll_drag: bool = false
+var _doll_drag_start: Vector2i = Vector2i.ZERO   # floor cell where the grab began
+var _doll_node_start: Vector3 = Vector3.ZERO     # the node's position at grab
+var _doll_ring: MeshInstance3D = null
 # ── THE BOOT CLOCK (2026-08-20, Palle: "still takes ~10 s to load the first
 # hall — what is happening there?") ── every boot phase timed and written into
 # em_built_*.json as `boot_ms`, so a slow launch answers by name instead of
@@ -7223,6 +7233,71 @@ func _doll_frame(delta: float) -> void:
 	if (_cam.global_position - look_target).length() > 0.5:
 		_cam.look_at(look_target)
 	_cam.size = _doll_zoom
+	if _doll_ring != null and is_instance_valid(_doll_ring):
+		if _edit_sel >= 0 and _edit_sel < _edit_records.size():
+			var rn: Node3D = _node_or_null((_edit_records[_edit_sel] as Dictionary).get("node"))
+			if rn != null:
+				_doll_ring.global_position = Vector3(rn.global_position.x, 0.07, rn.global_position.z)
+				_doll_ring.visible = true
+			else:
+				_doll_ring.visible = false
+		else:
+			_doll_ring.visible = false
+
+
+## Where the mouse touches the floor (y = 0), from the iso eye.
+func _doll_floor_point(mouse: Vector2) -> Vector3:
+	var o: Vector3 = _cam.project_ray_origin(mouse)
+	var d: Vector3 = _cam.project_ray_normal(mouse)
+	if absf(d.y) < 0.0001:
+		return o
+	var t: float = -o.y / d.y
+	return o + d * t
+
+
+## The nearest movable body to a floor point. Floor-standing kinds only —
+## a wall showing or a prop has no cell to drag to.
+func _doll_pick(pt: Vector3) -> int:
+	var best := -1
+	var bd := 1.6
+	for i in range(_edit_records.size()):
+		var r: Dictionary = _edit_records[i]
+		if String(r.get("kind", "")) in ["prop", "showing", "furniture", "variant"]:
+			continue
+		var n: Node3D = _node_or_null(r.get("node"))
+		if n == null or not is_instance_valid(n) or n.has_meta("em_hand_removed"):
+			continue
+		var d: float = Vector2(n.global_position.x - pt.x, n.global_position.z - pt.z).length()
+		if d < bd:
+			bd = d
+			best = i
+	return best
+
+
+func _doll_select(idx: int) -> void:
+	_edit_sel = idx
+	if idx >= 0:
+		var r: Dictionary = _edit_records[idx]
+		var sg: Node = r.get("seg")
+		if String(r.get("chapter", "")) == "" and sg != null and is_instance_valid(sg) and sg.has_meta("em_chapter"):
+			r["chapter"] = String(sg.get_meta("em_chapter"))
+	if _doll_ring == null or not is_instance_valid(_doll_ring):
+		var tm := TorusMesh.new()
+		tm.inner_radius = 0.42
+		tm.outer_radius = 0.5
+		tm.rings = 32
+		tm.ring_segments = 6
+		_doll_ring = MeshInstance3D.new()
+		_doll_ring.mesh = tm
+		var m := StandardMaterial3D.new()
+		m.albedo_color = Color(1.0, 0.62, 0.1)
+		m.emission_enabled = true
+		m.emission = Color(1.0, 0.62, 0.1)
+		m.emission_energy_multiplier = 1.6
+		m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		_doll_ring.material_override = m
+		add_child(_doll_ring)
+	_doll_ring.visible = idx >= 0
 
 
 var _jump_pressed: bool = false
@@ -7476,19 +7551,78 @@ func _input(event: InputEvent) -> void:
 			and (event as InputEventKey).keycode == KEY_F8 and not _vr and not _studio and _shot_path == "" and _autopilot == 0:
 		_doll_toggle()
 		return
-	if _dollhouse and event is InputEventMouseButton and (event as InputEventMouseButton).pressed:
-		var mb := (event as InputEventMouseButton).button_index
-		if mb == MOUSE_BUTTON_WHEEL_UP:
+	if _dollhouse and event is InputEventMouseButton:
+		var mbe := event as InputEventMouseButton
+		var mb := mbe.button_index
+		if mbe.pressed and mb == MOUSE_BUTTON_WHEEL_UP:
 			_doll_zoom = clampf(_doll_zoom * 0.87, 6.0, 60.0)
 			return
-		elif mb == MOUSE_BUTTON_WHEEL_DOWN:
+		elif mbe.pressed and mb == MOUSE_BUTTON_WHEEL_DOWN:
 			_doll_zoom = clampf(_doll_zoom / 0.87, 6.0, 60.0)
 			return
+		elif mb == MOUSE_BUTTON_LEFT and mbe.pressed and _cam != null:
+			var pt := _doll_floor_point(mbe.position)
+			var idx := _doll_pick(pt)
+			_doll_select(idx)
+			if idx >= 0:
+				_doll_drag = true
+				_doll_drag_start = Vector2i(int(floor(pt.x)), int(floor(pt.z)))
+				var nsel: Node3D = _node_or_null((_edit_records[idx] as Dictionary).get("node"))
+				_doll_node_start = nsel.position if nsel != null else Vector3.ZERO
+			return
+		elif mb == MOUSE_BUTTON_LEFT and not mbe.pressed and _doll_drag:
+			_doll_drag = false
+			var pt2 := _doll_floor_point(mbe.position)
+			var dx := int(floor(pt2.x)) - _doll_drag_start.x
+			var dz := int(floor(pt2.z)) - _doll_drag_start.y
+			if _edit_sel >= 0 and (dx != 0 or dz != 0):
+				# put the preview back, then commit the WHOLE delta as one
+				# nudge — one ruling, the arrows' own bookkeeping
+				var nrel: Node3D = _node_or_null((_edit_records[_edit_sel] as Dictionary).get("node"))
+				if nrel != null:
+					nrel.position = _doll_node_start
+				_edit_nudge(dx, dz)
+				print("[em-doll] %s dragged %+d,%+d cell(s)" % [
+					(_edit_records[_edit_sel] as Dictionary).get("token"), dx, dz])
+			return
+		elif mb == MOUSE_BUTTON_RIGHT and mbe.pressed and _doll_drag:
+			# cancel: the body glides home, no ruling
+			_doll_drag = false
+			var nc: Node3D = _node_or_null((_edit_records[_edit_sel] as Dictionary).get("node"))
+			if nc != null:
+				nc.position = _doll_node_start
+			return
+	if _dollhouse and event is InputEventMouseMotion and _doll_drag and _cam != null and _edit_sel >= 0:
+		var ptm := _doll_floor_point((event as InputEventMouseMotion).position)
+		var ddx := int(floor(ptm.x)) - _doll_drag_start.x
+		var ddz := int(floor(ptm.z)) - _doll_drag_start.y
+		var nmv: Node3D = _node_or_null((_edit_records[_edit_sel] as Dictionary).get("node"))
+		if nmv != null:
+			nmv.position = _doll_node_start + Vector3(float(ddx), 0.0, float(ddz))
+		return
 	if _dollhouse and event is InputEventKey and (event as InputEventKey).pressed and not (event as InputEventKey).echo:
-		if (event as InputEventKey).keycode == KEY_Q:
+		var kc := (event as InputEventKey).keycode
+		_edit_shift = (event as InputEventKey).shift_pressed
+		if _edit_sel >= 0 and kc in [KEY_R, KEY_DELETE, KEY_EQUAL, KEY_PLUS, KEY_KP_ADD, KEY_MINUS, KEY_KP_SUBTRACT, KEY_PAGEUP, KEY_PAGEDOWN]:
+			_edit_handle_key(kc)
+			if kc == KEY_DELETE:
+				_doll_select(-1)
+			return
+		if kc == KEY_F5 and _edit_sel >= 0:
+			_edit_handle_key(KEY_F5)
+			return
+		if kc == KEY_ESCAPE and (_doll_drag or _edit_sel >= 0):
+			if _doll_drag and _edit_sel >= 0:
+				var ne: Node3D = _node_or_null((_edit_records[_edit_sel] as Dictionary).get("node"))
+				if ne != null:
+					ne.position = _doll_node_start
+				_doll_drag = false
+			_doll_select(-1)
+			return
+		if kc == KEY_Q:
 			_doll_yaw += PI * 0.25
 			return
-		elif (event as InputEventKey).keycode == KEY_E:
+		elif kc == KEY_E:
 			_doll_yaw -= PI * 0.25
 			return
 	if _jump_ui != null and event is InputEventKey and (event as InputEventKey).pressed \
