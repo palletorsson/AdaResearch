@@ -112,6 +112,38 @@ func _run() -> void:
 		if _read_point_lines().size() != n0:
 			fails.append("DEL did not remove the appended line")
 
+		# THE WATCHER: a save made in the web editor lands in the open pane
+		# within a tick (mtime has 1 s grain, so the baseline is forced old)
+		inst.call("_spine_show_pearl", point_i)
+		var docw: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(BOOK + "/primitives.json"))
+		for pv in (docw.get("pearls", []) as Array):
+			if String((pv as Dictionary).get("pearl", "")) == "point":
+				(((pv as Dictionary).get("lines", []) as Array)[0] as Dictionary)["text"] = "HOT FROM THE WEB"
+		var fw := FileAccess.open(BOOK + "/primitives.json", FileAccess.WRITE)
+		fw.store_string(JSON.stringify(docw, " ") + "\n")
+		fw.close()
+		inst.set("_spine_mtime", 1)
+		await create_timer(1.5).timeout
+		var snapw: Array = inst.get("_spine_snapshot")
+		if snapw.is_empty() or String((snapw[0] as Dictionary).get("text", "")) != "HOT FROM THE WEB":
+			fails.append("the watcher did not reload the web editor's save")
+		# …and an edit IN FLIGHT is never clobbered
+		inst.call("_spine_show_line", 0)
+		var docw2: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(BOOK + "/primitives.json"))
+		for pv in (docw2.get("pearls", []) as Array):
+			if String((pv as Dictionary).get("pearl", "")) == "point":
+				(((pv as Dictionary).get("lines", []) as Array)[0] as Dictionary)["text"] = "MOVED WHILE EDITING"
+		var fw2 := FileAccess.open(BOOK + "/primitives.json", FileAccess.WRITE)
+		fw2.store_string(JSON.stringify(docw2, " ") + "\n")
+		fw2.close()
+		inst.set("_spine_mtime", 1)
+		await create_timer(1.5).timeout
+		if int(inst.get("_spine_line_i")) != 0:
+			fails.append("the watcher clobbered an edit in flight")
+		var snapw2: Array = inst.get("_spine_snapshot")
+		if String((snapw2[0] as Dictionary).get("text", "")) == "MOVED WHILE EDITING":
+			fails.append("the watcher reloaded the pane under a held line")
+
 		# TRAVEL writes the control file, view preserved (walk here)
 		inst.call("_spine_travel", point_i)
 		var ctl: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(CTL))
