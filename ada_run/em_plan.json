@@ -2,7 +2,7 @@
   "schema": "adaresearch.em_plan.v2",
   "_readme": "Placements resolved by tools/spatial_negotiation.py. Read by commons/scenes/endless_museum.gd under --em-plan. A museum key absent here deals exactly as it did before.",
   "_spine_run": {
-    "at": "2026-08-20T20:20:21",
+    "at": "2026-08-21T14:00:55",
     "owner": {
       "sainsbury-false-perspective-enfilade": "primitives"
     },
@@ -330900,11 +330900,11 @@
           "token": "you_are_here",
           "cell": [
             21,
-            17
+            18
           ],
           "tile_cell": [
             7,
-            3
+            4
           ],
           "rotation": 180,
           "mode": "freestanding",
@@ -330912,8 +330912,11 @@
           "support_height_m": 0.0,
           "hand": true,
           "ruled": {
-            "at": "2026-08-20T20:59:03",
-            "by": "walk"
+            "by": "book: locked",
+            "cell": [
+              7,
+              4
+            ]
           },
           "slot": "hand",
           "wall": null,
@@ -330935,13 +330938,7 @@
               "rotation": 180
             },
             "pearl": "point"
-          },
-          "offset": [
-            0.0,
-            0.0,
-            2.0
-          ],
-          "scale": 0.95
+          }
         },
         {
           "token": "interactive_point_origin",
@@ -330959,8 +330956,11 @@
           "support_height_m": 0.95,
           "hand": true,
           "ruled": {
-            "at": "2026-08-20T20:59:03",
-            "by": "walk"
+            "by": "book: locked",
+            "cell": [
+              7,
+              6
+            ]
           },
           "slot": "hand",
           "wall": null,
@@ -330980,12 +330980,7 @@
               6
             ],
             "pearl": "point"
-          },
-          "offset": [
-            0.0,
-            0.2,
-            0.0
-          ]
+          }
         },
         {
           "token": "science_screen",
@@ -331011,7 +331006,7 @@
           },
           "config": {
             "support": "stand",
-            "scan_radius": 8.0
+            "scan_radius": 8
           },
           "slot": "hand",
           "wall": null,
@@ -331031,7 +331026,7 @@
             ],
             "config": {
               "support": "stand",
-              "scan_radius": 8.0
+              "scan_radius": 8
             },
             "pearl": "point"
           }
@@ -331039,12 +331034,12 @@
         {
           "token": "CoordinateSystem3M",
           "cell": [
-            16,
-            19
+            17,
+            17
           ],
           "tile_cell": [
-            2,
-            5
+            3,
+            3
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -331052,13 +331047,16 @@
           "support_height_m": 0.0,
           "hand": true,
           "ruled": {
-            "at": "2026-08-20T20:59:03",
-            "by": "walk"
+            "by": "book: locked",
+            "cell": [
+              3,
+              3
+            ]
           },
           "config": {
             "floating_point": 1
           },
-          "scale": 0.95,
+          "scale": 0.8,
           "slot": "hand",
           "wall": null,
           "relational_kind": "spine_artifact",
@@ -331082,12 +331080,7 @@
               "scale": 0.8
             },
             "pearl": "point"
-          },
-          "offset": [
-            0.0,
-            0.2,
-            0.0
-          ]
+          }
         },
         {
           "token": "fontana_puncture",
@@ -331099,14 +331092,17 @@
             7,
             8
           ],
-          "rotation": 345,
+          "rotation": 0,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.95,
           "hand": true,
           "ruled": {
-            "at": "2026-08-20T20:59:03",
-            "by": "walk"
+            "by": "book: locked",
+            "cell": [
+              7,
+              8
+            ]
           },
           "slot": "hand",
           "wall": null,
@@ -331125,29 +331121,23 @@
               8
             ],
             "pearl": "point"
-          },
-          "offset": [
-            0.0,
-            0.4,
-            0.0
-          ],
-          "scale": 1.2
+          }
         },
         {
           "token": "floating_sphere_field",
           "cell": [
-            25,
-            24
+            26,
+            22
           ],
           "tile_cell": [
-            11,
-            10
+            12,
+            8
           ],
           "rotation": 0,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.0,
-          "slot": "sainsbury-false-perspective-enfilade/5,10~r",
+          "slot": "sainsbury-false-perspective-enfilade/13,8~r",
           "wall": null,
           "relational_kind": "spine_artifact",
           "relation": {
@@ -331165,12 +331155,12 @@
         {
           "token": "grab_sphere_point_snap",
           "cell": [
-            26,
-            25
+            23,
+            27
           ],
           "tile_cell": [
-            12,
-            11
+            9,
+            13
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -331194,18 +331184,18 @@
         {
           "token": "interactive_point_origin_force",
           "cell": [
-            26,
-            27
+            17,
+            29
           ],
           "tile_cell": [
-            12,
-            13
+            3,
+            15
           ],
           "rotation": 0,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.0,
-          "slot": "sainsbury-false-perspective-enfilade/13,8~r",
+          "slot": "sainsbury-false-perspective-enfilade/1,14~r",
           "wall": null,
           "relational_kind": "spine_artifact",
           "relation": {
@@ -331236,8 +331226,11 @@
           "support_height_m": 0.0,
           "hand": true,
           "ruled": {
-            "at": "2026-08-20T21:03:47",
-            "by": "halls"
+            "by": "book: locked",
+            "cell": [
+              7,
+              11
+            ]
           },
           "slot": "hand",
           "wall": null,
@@ -331250,7 +331243,7 @@
               11
             ],
             "pose": {
-              "rotation": 90
+              "rotation": 0
             },
             "pearl": "point"
           }
@@ -331258,11 +331251,11 @@
         {
           "token": "klee_walking_point",
           "cell": [
-            26,
+            22,
             29
           ],
           "tile_cell": [
-            12,
+            8,
             15
           ],
           "rotation": 0,
@@ -331287,25 +331280,18 @@
         {
           "token": "dgrid",
           "cell": [
-            27,
-            30
+            26,
+            29
           ],
           "tile_cell": [
-            13,
-            16
+            12,
+            15
           ],
-          "rotation": 90,
+          "rotation": 195,
           "mode": "against_wall",
           "venue": "interior",
           "support_height_m": 0.0,
-          "wall_fit": {
-            "mode": "hang",
-            "scale": 1.0,
-            "shelf": false,
-            "standoff": 0.02,
-            "v_centre": 1.55
-          },
-          "slot": "sainsbury-false-perspective-enfilade/9,15",
+          "slot": "hand",
           "wall": "east",
           "relational_kind": "spine_artifact",
           "relation": {
@@ -331318,39 +331304,34 @@
             "walk_why": "a line of the lines page",
             "walk_space": "wall",
             "pearl": "point"
+          },
+          "hand": true,
+          "ruled": {
+            "at": "2026-08-21T07:27:34",
+            "by": "walk"
           }
         },
         {
           "token": "walk_this_line_marking",
           "cell": [
-            16,
+            26,
             35
           ],
           "tile_cell": [
-            2,
+            12,
             21
           ],
-          "rotation": 135,
+          "rotation": 90,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.0,
-          "slot": "hand",
+          "slot": "sainsbury-false-perspective-enfilade/13,20~r",
           "wall": null,
           "relation": {
             "walk_kind": "sibling",
             "walk_why": "a line of the lines page",
             "walk_space": "wall",
             "pearl": "point"
-          },
-          "offset": [
-            0.0,
-            0.2,
-            0.0
-          ],
-          "hand": true,
-          "ruled": {
-            "at": "2026-08-20T13:27:46",
-            "by": "walk"
           }
         },
         {
@@ -331437,7 +331418,7 @@
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 1.4,
-          "slot": "sainsbury-false-perspective-enfilade/7,28",
+          "slot": "hand",
           "wall": null,
           "relational_kind": "spine_artifact",
           "relation": {
@@ -331450,6 +331431,16 @@
             "walk_why": "a line of the lines page",
             "walk_space": "wall",
             "pearl": "point"
+          },
+          "offset": [
+            5.0,
+            0.0,
+            1.0
+          ],
+          "hand": true,
+          "ruled": {
+            "at": "2026-08-21T11:15:08",
+            "by": "walk"
           }
         },
         {
@@ -331511,7 +331502,7 @@
             1,
             19
           ],
-          "rotation": 0,
+          "rotation": 270,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.0,
@@ -331529,7 +331520,7 @@
             0.0
           ],
           "slot": "hand",
-          "wall": null,
+          "wall": "west",
           "relational_kind": "spine_artifact",
           "relation": {
             "anchor": "laser_measure",
@@ -331577,7 +331568,7 @@
             5,
             19
           ],
-          "rotation": 0,
+          "rotation": 270,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.0,
@@ -331595,7 +331586,7 @@
             0.0
           ],
           "slot": "hand",
-          "wall": null,
+          "wall": "west",
           "relational_kind": "spine_artifact",
           "relation": {
             "anchor": "laser_measure",
@@ -331643,7 +331634,7 @@
             9,
             19
           ],
-          "rotation": 0,
+          "rotation": 270,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.0,
@@ -331661,7 +331652,7 @@
             0.0
           ],
           "slot": "hand",
-          "wall": null,
+          "wall": "west",
           "relational_kind": "spine_artifact",
           "relation": {
             "anchor": "laser_measure",
@@ -331852,18 +331843,18 @@
         {
           "token": "grabbable_line",
           "cell": [
-            25,
-            41
+            26,
+            11
           ],
           "tile_cell": [
-            11,
-            27
+            12,
+            -3
           ],
           "rotation": 0,
           "mode": "freestanding",
-          "venue": "interior",
-          "support_height_m": 1.4,
-          "slot": "sainsbury-false-perspective-enfilade/7,28~r",
+          "venue": "porch",
+          "support_height_m": 0.0,
+          "slot": "sainsbury-false-perspective-enfilade/porch",
           "wall": null,
           "relational_kind": "spine_artifact",
           "relation": {
@@ -331881,14 +331872,14 @@
         {
           "token": "line_builder_3d",
           "cell": [
-            26,
-            9
+            16,
+            8
           ],
           "tile_cell": [
-            12,
-            -5
+            2,
+            -6
           ],
-          "rotation": 0,
+          "rotation": 90,
           "mode": "freestanding",
           "venue": "porch",
           "support_height_m": 0.0,
@@ -331920,8 +331911,8 @@
           "rotation": 0,
           "mode": "freestanding",
           "venue": "interior",
-          "support_height_m": 1.4,
-          "slot": "sainsbury-false-perspective-enfilade/7,28",
+          "support_height_m": 0.95,
+          "slot": "sainsbury-false-perspective-enfilade/9,28~r",
           "wall": null,
           "relational_kind": "spine_artifact",
           "relation": {
@@ -331939,18 +331930,18 @@
         {
           "token": "scale_lines",
           "cell": [
-            23,
-            28
+            20,
+            24
           ],
           "tile_cell": [
-            9,
-            14
+            6,
+            10
           ],
           "rotation": 0,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.95,
-          "slot": "sainsbury-false-perspective-enfilade/12,15",
+          "slot": "hand",
           "wall": null,
           "relational_kind": "spine_artifact",
           "relation": {
@@ -331971,23 +331962,33 @@
               "length": 24
             },
             "pearl": "point"
+          },
+          "offset": [
+            1.0,
+            0.0,
+            -1.0
+          ],
+          "hand": true,
+          "ruled": {
+            "at": "2026-08-21T11:39:31",
+            "by": "walk"
           }
         },
         {
           "token": "cube_scene",
           "cell": [
-            20,
-            41
+            23,
+            40
           ],
           "tile_cell": [
-            6,
-            27
+            9,
+            26
           ],
           "rotation": 0,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 1.4,
-          "slot": "sainsbury-false-perspective-enfilade/7,28",
+          "slot": "hand",
           "wall": null,
           "relational_kind": "spine_artifact",
           "relation": {
@@ -332000,17 +332001,22 @@
             "walk_why": "a line of the lines page",
             "walk_space": "wall",
             "pearl": "point"
+          },
+          "hand": true,
+          "ruled": {
+            "at": "2026-08-21T11:15:08",
+            "by": "walk"
           }
         },
         {
           "token": "dark_sphere",
           "cell": [
-            23,
-            21
+            24,
+            22
           ],
           "tile_cell": [
-            9,
-            7
+            10,
+            8
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -332039,25 +332045,25 @@
           ],
           "hand": true,
           "ruled": {
-            "at": "2026-08-20T20:59:03",
+            "at": "2026-08-21T09:27:42",
             "by": "walk"
           }
         },
         {
           "token": "plus_line_puzzle",
           "cell": [
-            16,
-            24
+            24,
+            41
           ],
           "tile_cell": [
-            2,
-            10
+            10,
+            27
           ],
           "rotation": 0,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.95,
-          "slot": "sainsbury-false-perspective-enfilade/2,9",
+          "slot": "sainsbury-false-perspective-enfilade/5,28",
           "wall": null,
           "relational_kind": "spine_artifact",
           "relation": {
@@ -332075,17 +332081,17 @@
         {
           "token": "modulor_man_demo",
           "cell": [
-            21,
-            42
+            26,
+            41
           ],
           "tile_cell": [
-            7,
-            28
+            12,
+            27
           ],
           "rotation": 180,
           "mode": "against_wall",
           "venue": "interior",
-          "support_height_m": 0.95,
+          "support_height_m": 1.4,
           "wall_fit": {
             "mode": "hang",
             "scale": 1.0,
@@ -332093,7 +332099,7 @@
             "standoff": 0.035,
             "v_centre": 1.55
           },
-          "slot": "sainsbury-false-perspective-enfilade/5,28",
+          "slot": "sainsbury-false-perspective-enfilade/7,28",
           "wall": "south",
           "relational_kind": "spine_artifact",
           "relation": {
@@ -332109,14 +332115,43 @@
           }
         },
         {
-          "token": "draw_dot",
+          "token": "mystic_writing_pad",
           "cell": [
-            17,
-            23
+            20,
+            41
           ],
           "tile_cell": [
-            3,
-            9
+            6,
+            27
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "interior",
+          "support_height_m": 0.95,
+          "slot": "sainsbury-false-perspective-enfilade/9,28",
+          "wall": null,
+          "relational_kind": "spine_artifact",
+          "relation": {
+            "anchor": "mystic_writing_pad",
+            "role": "feature",
+            "kind": "",
+            "rule": "",
+            "why": "the lead this bay is about",
+            "walk_kind": "sibling",
+            "walk_why": "a line of the trace page",
+            "walk_space": "wall",
+            "pearl": "point"
+          }
+        },
+        {
+          "token": "draw_dot",
+          "cell": [
+            16,
+            24
+          ],
+          "tile_cell": [
+            2,
+            10
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -332140,11 +332175,56 @@
         {
           "token": "static_point",
           "cell": [
-            23,
+            15,
+            22
+          ],
+          "tile_cell": [
+            1,
+            8
+          ],
+          "rotation": 270,
+          "mode": "against_wall",
+          "venue": "interior",
+          "support_height_m": 0.0,
+          "fill": true,
+          "slot": "sainsbury-false-perspective-enfilade/1,3",
+          "wall": "west",
+          "relational_kind": "related_artifact"
+        },
+        {
+          "token": "portal",
+          "cell": [
+            27,
+            24
+          ],
+          "tile_cell": [
+            13,
+            10
+          ],
+          "rotation": 90,
+          "mode": "against_wall",
+          "venue": "interior",
+          "support_height_m": 0.0,
+          "fill": true,
+          "wall_fit": {
+            "mode": "hang",
+            "scale": 1.0,
+            "shelf": true,
+            "standoff": 0.05,
+            "v_centre": 1.8
+          },
+          "slot": "sainsbury-false-perspective-enfilade/13,8",
+          "wall": "east",
+          "relational_kind": "related_artifact"
+        },
+        {
+          "token": "whiteboard",
+          "cell": [
+            27,
             42
           ],
           "tile_cell": [
-            9,
+            13,
             28
           ],
           "rotation": 180,
@@ -332157,52 +332237,14 @@
           "relational_kind": "related_artifact"
         },
         {
-          "token": "portal",
-          "cell": [
-            27,
-            35
-          ],
-          "tile_cell": [
-            13,
-            21
-          ],
-          "rotation": 90,
-          "mode": "against_wall",
-          "venue": "interior",
-          "support_height_m": 0.0,
-          "fill": true,
-          "slot": "sainsbury-false-perspective-enfilade/13,20",
-          "wall": "east",
-          "relational_kind": "related_artifact"
-        },
-        {
-          "token": "whiteboard",
-          "cell": [
-            15,
-            21
-          ],
-          "tile_cell": [
-            1,
-            7
-          ],
-          "rotation": 270,
-          "mode": "against_wall",
-          "venue": "interior",
-          "support_height_m": 0.0,
-          "fill": true,
-          "slot": "sainsbury-false-perspective-enfilade/1,3",
-          "wall": "west",
-          "relational_kind": "related_artifact"
-        },
-        {
           "token": "exit_sign",
           "cell": [
             15,
-            29
+            27
           ],
           "tile_cell": [
             1,
-            15
+            13
           ],
           "rotation": 270,
           "mode": "against_wall",
@@ -332287,53 +332329,39 @@
         {
           "token": "terminal",
           "cell": [
-            27,
-            24
+            23,
+            42
           ],
           "tile_cell": [
-            13,
-            10
+            9,
+            28
           ],
-          "rotation": 90,
+          "rotation": 180,
           "mode": "against_wall",
           "venue": "interior",
-          "support_height_m": 0.0,
+          "support_height_m": 0.95,
           "fill": true,
-          "wall_fit": {
-            "mode": "hang",
-            "scale": 1.0,
-            "shelf": true,
-            "standoff": 0.05,
-            "v_centre": 1.55
-          },
-          "slot": "sainsbury-false-perspective-enfilade/13,8",
-          "wall": "east",
+          "slot": "sainsbury-false-perspective-enfilade/9,28",
+          "wall": "south",
           "relational_kind": "related_artifact"
         },
         {
           "token": "tt",
           "cell": [
-            27,
-            22
+            21,
+            42
           ],
           "tile_cell": [
-            13,
-            8
+            7,
+            28
           ],
-          "rotation": 90,
+          "rotation": 180,
           "mode": "against_wall",
           "venue": "interior",
-          "support_height_m": 0.0,
+          "support_height_m": 0.95,
           "fill": true,
-          "wall_fit": {
-            "mode": "hang",
-            "scale": 1.0,
-            "shelf": false,
-            "standoff": 0.02,
-            "v_centre": 1.55
-          },
-          "slot": "sainsbury-false-perspective-enfilade/13,8",
-          "wall": "east",
+          "slot": "sainsbury-false-perspective-enfilade/9,28",
+          "wall": "south",
           "relational_kind": "spine_artifact"
         },
         {
@@ -332351,6 +332379,13 @@
           "venue": "interior",
           "support_height_m": 0.0,
           "fill": true,
+          "wall_fit": {
+            "mode": "hang",
+            "scale": 1.0,
+            "shelf": false,
+            "standoff": 0.02,
+            "v_centre": 1.55
+          },
           "slot": "sainsbury-false-perspective-enfilade/9,15",
           "wall": "east",
           "relational_kind": "related_artifact"
@@ -332358,11 +332393,11 @@
         {
           "token": "example_2_6_single_attractor_vr",
           "cell": [
-            22,
+            17,
             23
           ],
           "tile_cell": [
-            8,
+            3,
             9
           ],
           "rotation": 0,
@@ -332377,19 +332412,19 @@
         {
           "token": "two_points_line",
           "cell": [
-            26,
-            23
+            16,
+            21
           ],
           "tile_cell": [
-            12,
-            9
+            2,
+            7
           ],
           "rotation": 0,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.95,
           "fill": true,
-          "slot": "sainsbury-false-perspective-enfilade/12,15",
+          "slot": "sainsbury-false-perspective-enfilade/2,9",
           "wall": null,
           "relational_kind": "related_artifact"
         },
@@ -332397,18 +332432,18 @@
           "token": "hand_telemetry_display",
           "cell": [
             22,
-            29
+            23
           ],
           "tile_cell": [
             8,
-            15
+            9
           ],
           "rotation": 0,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.95,
           "fill": true,
-          "slot": "sainsbury-false-perspective-enfilade/12,15",
+          "slot": "sainsbury-false-perspective-enfilade/2,9",
           "wall": null,
           "relational_kind": "related_artifact"
         },
@@ -332430,6 +332465,184 @@
           "slot": "sainsbury-false-perspective-enfilade/2,9",
           "wall": null,
           "relational_kind": "dna_artifact"
+        },
+        {
+          "token": "frame_counter_display",
+          "cell": [
+            15,
+            29
+          ],
+          "tile_cell": [
+            1,
+            15
+          ],
+          "rotation": 270,
+          "mode": "against_wall",
+          "venue": "interior",
+          "support_height_m": 0.0,
+          "fill": true,
+          "slot": "sainsbury-false-perspective-enfilade/1,14",
+          "wall": "west",
+          "relational_kind": "spine_artifact"
+        },
+        {
+          "token": "catalyst_pickup",
+          "cell": [
+            26,
+            27
+          ],
+          "tile_cell": [
+            12,
+            13
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "interior",
+          "support_height_m": 0.95,
+          "fill": true,
+          "slot": "sainsbury-false-perspective-enfilade/12,15",
+          "wall": null,
+          "relational_kind": "spine_artifact"
+        },
+        {
+          "token": "large_table",
+          "cell": [
+            25,
+            28
+          ],
+          "tile_cell": [
+            11,
+            14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "interior",
+          "support_height_m": 0.95,
+          "fill": true,
+          "slot": "sainsbury-false-perspective-enfilade/12,15",
+          "wall": null,
+          "relational_kind": "related_artifact"
+        },
+        {
+          "token": "circularradarmonitor",
+          "cell": [
+            26,
+            25
+          ],
+          "tile_cell": [
+            12,
+            11
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "interior",
+          "support_height_m": 0.95,
+          "fill": true,
+          "slot": "sainsbury-false-perspective-enfilade/12,15",
+          "wall": null,
+          "relational_kind": "related_artifact"
+        },
+        {
+          "token": "datatablet",
+          "cell": [
+            25,
+            24
+          ],
+          "tile_cell": [
+            11,
+            10
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "interior",
+          "support_height_m": 0.95,
+          "fill": true,
+          "slot": "sainsbury-false-perspective-enfilade/12,15",
+          "wall": null,
+          "relational_kind": "related_artifact"
+        },
+        {
+          "token": "cross_lines",
+          "cell": [
+            25,
+            42
+          ],
+          "tile_cell": [
+            11,
+            28
+          ],
+          "rotation": 180,
+          "mode": "against_wall",
+          "venue": "interior",
+          "support_height_m": 1.4,
+          "fill": true,
+          "slot": "sainsbury-false-perspective-enfilade/7,28",
+          "wall": "south",
+          "relational_kind": "related_artifact"
+        },
+        {
+          "token": "steel_barricade",
+          "cell": [
+            17,
+            25
+          ],
+          "tile_cell": [
+            3,
+            11
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "interior",
+          "support_height_m": 0.95,
+          "fill": true,
+          "slot": "sainsbury-false-perspective-enfilade/2,9",
+          "wall": null,
+          "relational_kind": "related_artifact"
+        },
+        {
+          "token": "modulor_man_interactive",
+          "cell": [
+            15,
+            35
+          ],
+          "tile_cell": [
+            1,
+            21
+          ],
+          "rotation": 270,
+          "mode": "against_wall",
+          "venue": "interior",
+          "support_height_m": 0.0,
+          "fill": true,
+          "wall_fit": {
+            "mode": "hang",
+            "scale": 1.0,
+            "shelf": false,
+            "standoff": 0.035,
+            "v_centre": 1.55
+          },
+          "slot": "sainsbury-false-perspective-enfilade/1,21",
+          "wall": "west",
+          "relational_kind": "related_artifact"
+        },
+        {
+          "token": "transformer",
+          "cell": [
+            15,
+            31
+          ],
+          "tile_cell": [
+            1,
+            17
+          ],
+          "rotation": 270,
+          "mode": "against_wall",
+          "venue": "interior",
+          "support_height_m": 0.0,
+          "fill": true,
+          "slot": "sainsbury-false-perspective-enfilade/1,14",
+          "wall": "west",
+          "relational_kind": "related_artifact"
         }
       ],
       "rejected": [],
@@ -332978,7 +333191,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 19.25 m free but every one was already hung across: sainsbury-false-perspective-enfilade/east_14_14: overlaps tt"
+          "why": "2 wall(s) had 19.25 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps modulor_man_demo.measure=body"
         },
         {
           "anchor": "science_screen",
@@ -333003,7 +333216,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 13.76 m free but every one was already hung across: sainsbury-false-perspective-enfilade/east_14_14: overlaps terminal"
+          "why": "2 wall(s) had 13.76 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps modulor_man_demo.measure=body"
         },
         {
           "anchor": "plus_line_puzzle",
@@ -333141,81 +333354,21 @@
             "lattice",
             "shell"
           ],
-          "wall": "sainsbury-false-perspective-enfilade/south_38_23",
-          "wall_side": "south",
-          "wall_normal": [
-            0,
-            -1
-          ],
-          "rects_uv": [
-            [
-              0.975,
-              1.65,
-              1.265,
-              1.75
-            ],
-            [
-              1.665,
-              1.65,
-              1.955,
-              1.75
-            ],
-            [
-              2.355,
-              1.65,
-              2.645,
-              1.75
-            ],
-            [
-              3.045,
-              1.65,
-              3.335,
-              1.75
-            ],
-            [
-              3.735,
-              1.65,
-              4.025,
-              1.75
-            ]
-          ],
-          "world": [
-            [
-              24.12,
-              1.7,
-              38.5
-            ],
-            [
-              24.81,
-              1.7,
-              38.5
-            ],
-            [
-              25.5,
-              1.7,
-              38.5
-            ],
-            [
-              26.19,
-              1.7,
-              38.5
-            ],
-            [
-              26.88,
-              1.7,
-              38.5
-            ]
-          ],
+          "wall": null,
+          "wall_side": "",
+          "wall_normal": [],
+          "rects_uv": [],
+          "world": [],
           "body_m": [
             0.29,
             0.05,
             0.05
           ],
           "body_source": "godot_configured_variants",
-          "housed": true,
-          "reserved": true,
-          "assemble": true,
-          "why": "two cells of standing room in front, walkable and unclaimed"
+          "housed": false,
+          "reserved": false,
+          "assemble": false,
+          "why": "3 wall(s) had 3.05 m free but every one was already hung across: sainsbury-false-perspective-enfilade/north_43_19: overlaps line.readout=none"
         },
         {
           "anchor": "laser_sword",
@@ -333362,7 +333515,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 7.72 m free but every one was already hung across: sainsbury-false-perspective-enfilade/east_14_14: overlaps dgrid"
+          "why": "2 wall(s) had 7.72 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps modulor_man_demo.measure=body"
         },
         {
           "anchor": "mystic_writing_pad",
@@ -333388,7 +333541,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 6.85 m free but every one was already hung across: sainsbury-false-perspective-enfilade/east_14_14: overlaps dgrid"
+          "why": "2 wall(s) had 6.85 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps modulor_man_demo.measure=body"
         },
         {
           "anchor": "draw_dot",
@@ -333523,11 +333676,11 @@
             "winding",
             "both"
           ],
-          "wall": "sainsbury-false-perspective-enfilade/north_20_25",
-          "wall_side": "north",
+          "wall": "sainsbury-false-perspective-enfilade/south_32_25",
+          "wall_side": "south",
           "wall_normal": [
             0,
-            1
+            -1
           ],
           "rects_uv": [
             [
@@ -333559,22 +333712,22 @@
             [
               25.3,
               1.7,
-              20.5
+              32.5
             ],
             [
               26.1,
               1.7,
-              20.5
+              32.5
             ],
             [
               26.9,
               1.7,
-              20.5
+              32.5
             ],
             [
               27.7,
               1.7,
-              20.5
+              32.5
             ]
           ],
           "body_m": [
@@ -333660,7 +333813,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 17.24 m free but every one was already hung across: sainsbury-false-perspective-enfilade/east_14_14: overlaps terminal"
+          "why": "2 wall(s) had 17.24 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps modulor_man_demo.measure=body"
         },
         {
           "anchor": "draw_triangle_faces",
@@ -333721,7 +333874,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 13.20 m free but every one was already hung across: sainsbury-false-perspective-enfilade/east_14_14: overlaps terminal"
+          "why": "2 wall(s) had 13.20 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps modulor_man_demo.measure=body"
         },
         {
           "anchor": "quad_line_puzzle",
@@ -333796,7 +333949,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "4 wall(s) had 3.96 m free but every one was already hung across: sainsbury-false-perspective-enfilade/south_14_14: overlaps modulor_man_demo"
+          "why": "3 wall(s) had 3.96 m free but every one was already hung across: sainsbury-false-perspective-enfilade/north_43_19: overlaps line.readout=numeral"
         },
         {
           "anchor": "tentacle_placer",
@@ -333997,7 +334150,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 6.10 m free but every one was already hung across: sainsbury-false-perspective-enfilade/east_14_14: overlaps dgrid"
+          "why": "2 wall(s) had 6.10 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps modulor_man_demo.measure=body"
         },
         {
           "anchor": "righttriangle",
@@ -334073,7 +334226,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "4 wall(s) had 3.60 m free but every one was already hung across: sainsbury-false-perspective-enfilade/south_14_14: overlaps modulor_man_demo"
+          "why": "3 wall(s) had 3.60 m free but every one was already hung across: sainsbury-false-perspective-enfilade/north_43_19: overlaps line.readout=numeral"
         },
         {
           "anchor": "roughrock",
@@ -334224,7 +334377,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 5.60 m free but every one was already hung across: sainsbury-false-perspective-enfilade/east_14_14: overlaps dgrid"
+          "why": "2 wall(s) had 5.60 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps modulor_man_demo.measure=body"
         },
         {
           "anchor": "prism_block",
@@ -334454,7 +334607,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 6.60 m free but every one was already hung across: sainsbury-false-perspective-enfilade/east_14_14: overlaps dgrid"
+          "why": "2 wall(s) had 6.60 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps modulor_man_demo.measure=body"
         },
         {
           "anchor": "code_display",
@@ -334558,6 +334711,30 @@
           "auto_place": false
         },
         {
+          "id": "dna:grabbable_line:grain",
+          "anchor": "grabbable_line",
+          "axis": "grain",
+          "values": [
+            "solid",
+            "split",
+            "quartered",
+            "lattice",
+            "shell"
+          ],
+          "space": "side_gallery",
+          "footprint_xz": [
+            6,
+            4
+          ],
+          "envelope_wdh": [
+            0.29,
+            0.05,
+            0.05
+          ],
+          "why": "3 wall(s) had 3.05 m free but every one was already hung across: sainsbury-false-perspective-enfilade/north_43_19: overlaps line.readout=none",
+          "auto_place": false
+        },
+        {
           "id": "dna:pyramid_edit:constraint",
           "anchor": "pyramid_edit",
           "axis": "constraint",
@@ -334577,7 +334754,7 @@
             0.691,
             0.891
           ],
-          "why": "4 wall(s) had 3.96 m free but every one was already hung across: sainsbury-false-perspective-enfilade/south_14_14: overlaps modulor_man_demo",
+          "why": "3 wall(s) had 3.96 m free but every one was already hung across: sainsbury-false-perspective-enfilade/north_43_19: overlaps line.readout=numeral",
           "auto_place": false
         },
         {
@@ -334624,7 +334801,7 @@
             0.4,
             0.4
           ],
-          "why": "4 wall(s) had 3.60 m free but every one was already hung across: sainsbury-false-perspective-enfilade/south_14_14: overlaps modulor_man_demo",
+          "why": "3 wall(s) had 3.60 m free but every one was already hung across: sainsbury-false-perspective-enfilade/north_43_19: overlaps line.readout=numeral",
           "auto_place": false
         },
         {
@@ -334900,8 +335077,8 @@
       "relational": {
         "anchors": 82,
         "wall_runs_requested": 65,
-        "wall_runs_housed": 8,
-        "dna_spatial_demand": 6,
+        "wall_runs_housed": 7,
+        "dna_spatial_demand": 7,
         "dna_contract_repairs": 3,
         "measured_synthesis_pending": 20
       },
@@ -334910,7 +335087,7 @@
         "h": 58
       },
       "apron": 14,
-      "interior_count": 45,
+      "interior_count": 52,
       "ordered": true,
       "pages": [
         {
@@ -335817,6 +335994,16 @@
             "walk_why": "a line of the triangle context page",
             "walk_space": "wall",
             "pearl": "line grid"
+          },
+          "offset": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "hand": true,
+          "ruled": {
+            "at": "2026-08-21T11:15:08",
+            "by": "walk"
           }
         },
         {
@@ -335888,17 +336075,17 @@
           "token": "pythagorean_triangle_angles",
           "cell": [
             25,
-            11
+            17
           ],
           "tile_cell": [
             11,
-            -3
+            3
           ],
-          "rotation": 0,
+          "rotation": 60,
           "mode": "freestanding",
-          "venue": "porch",
+          "venue": "interior",
           "support_height_m": 0.0,
-          "slot": "sainsbury-false-perspective-enfilade/porch",
+          "slot": "hand",
           "wall": null,
           "relational_kind": "spine_artifact",
           "relation": {
@@ -335911,6 +336098,11 @@
             "walk_why": "a line of the triangle context page",
             "walk_space": "wall",
             "pearl": "line grid"
+          },
+          "hand": true,
+          "ruled": {
+            "at": "2026-08-21T11:15:08",
+            "by": "walk"
           }
         },
         {
@@ -336054,23 +336246,23 @@
           "token": "filter_screen",
           "cell": [
             27,
-            17
+            35
           ],
           "tile_cell": [
             13,
-            3
+            21
           ],
           "rotation": 90,
           "mode": "against_wall",
           "venue": "interior",
           "support_height_m": 0.0,
           "fill": true,
-          "slot": "sainsbury-false-perspective-enfilade/13,3",
+          "slot": "sainsbury-false-perspective-enfilade/13,20",
           "wall": "east",
           "relational_kind": "related_artifact"
         },
         {
-          "token": "cross_lines",
+          "token": "editable_curve",
           "cell": [
             15,
             35
@@ -336089,97 +336281,14 @@
           "relational_kind": "related_artifact"
         },
         {
-          "token": "editable_curve",
-          "cell": [
-            27,
-            35
-          ],
-          "tile_cell": [
-            13,
-            21
-          ],
-          "rotation": 90,
-          "mode": "against_wall",
-          "venue": "interior",
-          "support_height_m": 0.0,
-          "fill": true,
-          "slot": "sainsbury-false-perspective-enfilade/13,20",
-          "wall": "east",
-          "relational_kind": "related_artifact"
-        },
-        {
-          "token": "steel_barricade",
-          "cell": [
-            15,
-            23
-          ],
-          "tile_cell": [
-            1,
-            9
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "interior",
-          "support_height_m": 0.95,
-          "fill": true,
-          "slot": "sainsbury-false-perspective-enfilade/2,9",
-          "wall": null,
-          "relational_kind": "related_artifact"
-        },
-        {
-          "token": "modulor_man_interactive",
-          "cell": [
-            19,
-            41
-          ],
-          "tile_cell": [
-            5,
-            27
-          ],
-          "rotation": 270,
-          "mode": "against_wall",
-          "venue": "interior",
-          "support_height_m": 0.0,
-          "fill": true,
-          "slot": "sainsbury-false-perspective-enfilade/5,22",
-          "wall": "west",
-          "relational_kind": "related_artifact"
-        },
-        {
           "token": "score_display",
           "cell": [
-            23,
-            34
-          ],
-          "tile_cell": [
-            9,
-            20
-          ],
-          "rotation": 90,
-          "mode": "against_wall",
-          "venue": "interior",
-          "support_height_m": 0.0,
-          "fill": true,
-          "wall_fit": {
-            "mode": "hang",
-            "scale": 1.0,
-            "shelf": false,
-            "standoff": 0.035,
-            "v_centre": 1.55
-          },
-          "slot": "sainsbury-false-perspective-enfilade/9,15",
-          "wall": "east",
-          "relational_kind": "related_artifact"
-        },
-        {
-          "token": "transformer",
-          "cell": [
             15,
-            15
+            22
           ],
           "tile_cell": [
             1,
-            1
+            8
           ],
           "rotation": 270,
           "mode": "against_wall",
@@ -336210,13 +336319,32 @@
           "relational_kind": "related_artifact"
         },
         {
-          "token": "large_table",
+          "token": "fluxdetector",
           "cell": [
             26,
-            24
+            25
           ],
           "tile_cell": [
             12,
+            11
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "interior",
+          "support_height_m": 0.95,
+          "fill": true,
+          "slot": "sainsbury-false-perspective-enfilade/12,15",
+          "wall": null,
+          "relational_kind": "related_artifact"
+        },
+        {
+          "token": "pipettedispenser",
+          "cell": [
+            25,
+            24
+          ],
+          "tile_cell": [
+            11,
             10
           ],
           "rotation": 0,
@@ -336229,7 +336357,7 @@
           "relational_kind": "related_artifact"
         },
         {
-          "token": "circularradarmonitor",
+          "token": "quantumentanglementmeter",
           "cell": [
             26,
             27
@@ -336248,7 +336376,7 @@
           "relational_kind": "related_artifact"
         },
         {
-          "token": "datatablet",
+          "token": "robotarm",
           "cell": [
             25,
             28
@@ -336265,6 +336393,25 @@
           "slot": "sainsbury-false-perspective-enfilade/12,15",
           "wall": null,
           "relational_kind": "related_artifact"
+        },
+        {
+          "token": "color_space_navigator",
+          "cell": [
+            19,
+            41
+          ],
+          "tile_cell": [
+            5,
+            27
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "interior",
+          "support_height_m": 0.0,
+          "fill": true,
+          "slot": "sainsbury-false-perspective-enfilade/5,22",
+          "wall": null,
+          "relational_kind": "spine_artifact"
         }
       ],
       "rejected": [],
@@ -336813,7 +336960,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 19.25 m free but every one was already hung across: sainsbury-false-perspective-enfilade/east_14_14: overlaps editable_curve"
+          "why": "2 wall(s) had 19.25 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps modulor_man_demo.measure=body"
         },
         {
           "anchor": "science_screen",
@@ -336838,7 +336985,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 13.76 m free but every one was already hung across: sainsbury-false-perspective-enfilade/east_14_14: overlaps interactivetriangle"
+          "why": "2 wall(s) had 13.76 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps modulor_man_demo.measure=body"
         },
         {
           "anchor": "plus_line_puzzle",
@@ -337197,7 +337344,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 7.72 m free but every one was already hung across: sainsbury-false-perspective-enfilade/east_14_14: overlaps editable_curve"
+          "why": "2 wall(s) had 7.72 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps modulor_man_demo.measure=body"
         },
         {
           "anchor": "mystic_writing_pad",
@@ -337223,7 +337370,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 6.85 m free but every one was already hung across: sainsbury-false-perspective-enfilade/east_14_14: overlaps editable_curve"
+          "why": "2 wall(s) had 6.85 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps modulor_man_demo.measure=body"
         },
         {
           "anchor": "draw_dot",
@@ -337358,11 +337505,11 @@
             "winding",
             "both"
           ],
-          "wall": "sainsbury-false-perspective-enfilade/north_20_25",
-          "wall_side": "north",
+          "wall": "sainsbury-false-perspective-enfilade/east_24_33",
+          "wall_side": "east",
           "wall_normal": [
-            0,
-            1
+            -1,
+            0
           ],
           "rects_uv": [
             [
@@ -337392,24 +337539,24 @@
           ],
           "world": [
             [
-              25.3,
+              24.5,
               1.7,
-              20.5
+              33.3
             ],
             [
-              26.1,
+              24.5,
               1.7,
-              20.5
+              34.1
             ],
             [
-              26.9,
+              24.5,
               1.7,
-              20.5
+              34.9
             ],
             [
-              27.7,
+              24.5,
               1.7,
-              20.5
+              35.7
             ]
           ],
           "body_m": [
@@ -337495,7 +337642,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 17.24 m free but every one was already hung across: sainsbury-false-perspective-enfilade/east_14_14: overlaps interactivetriangle"
+          "why": "2 wall(s) had 17.24 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps modulor_man_demo.measure=body"
         },
         {
           "anchor": "draw_triangle_faces",
@@ -337556,7 +337703,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 13.20 m free but every one was already hung across: sainsbury-false-perspective-enfilade/east_14_14: overlaps interactivetriangle"
+          "why": "2 wall(s) had 13.20 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps modulor_man_demo.measure=body"
         },
         {
           "anchor": "quad_line_puzzle",
@@ -337617,7 +337764,7 @@
             "apex_only",
             "base_only"
           ],
-          "wall": "sainsbury-false-perspective-enfilade/north_14_23",
+          "wall": "sainsbury-false-perspective-enfilade/north_14_15",
           "wall_side": "north",
           "wall_normal": [
             0,
@@ -337651,22 +337798,22 @@
           ],
           "world": [
             [
-              23.863,
+              15.864,
               1.7,
               14.5
             ],
             [
-              24.954,
+              16.954,
               1.7,
               14.5
             ],
             [
-              26.046,
+              18.046,
               1.7,
               14.5
             ],
             [
-              27.136,
+              19.136,
               1.7,
               14.5
             ]
@@ -337881,7 +338028,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 6.10 m free but every one was already hung across: sainsbury-false-perspective-enfilade/east_14_14: overlaps editable_curve"
+          "why": "2 wall(s) had 6.10 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps modulor_man_demo.measure=body"
         },
         {
           "anchor": "righttriangle",
@@ -337943,7 +338090,7 @@
             0.75,
             1.0
           ],
-          "wall": "sainsbury-false-perspective-enfilade/north_38_15",
+          "wall": "sainsbury-false-perspective-enfilade/north_14_23",
           "wall_side": "north",
           "wall_normal": [
             0,
@@ -337983,29 +338130,29 @@
           ],
           "world": [
             [
-              15.9,
+              23.9,
               1.7,
-              38.5
+              14.5
             ],
             [
-              16.7,
+              24.7,
               1.7,
-              38.5
+              14.5
             ],
             [
-              17.5,
+              25.5,
               1.7,
-              38.5
+              14.5
             ],
             [
-              18.3,
+              26.3,
               1.7,
-              38.5
+              14.5
             ],
             [
-              19.1,
+              27.1,
               1.7,
-              38.5
+              14.5
             ]
           ],
           "body_m": [
@@ -338029,7 +338176,7 @@
             3,
             7
           ],
-          "wall": "sainsbury-false-perspective-enfilade/north_38_23",
+          "wall": "sainsbury-false-perspective-enfilade/north_38_15",
           "wall_side": "north",
           "wall_normal": [
             0,
@@ -338069,27 +338216,27 @@
           ],
           "world": [
             [
-              23.48,
+              15.48,
               1.7,
               38.5
             ],
             [
-              24.49,
+              16.49,
               1.7,
               38.5
             ],
             [
-              25.5,
+              17.5,
               1.7,
               38.5
             ],
             [
-              26.51,
+              18.51,
               1.7,
               38.5
             ],
             [
-              27.52,
+              19.52,
               1.7,
               38.5
             ]
@@ -338139,11 +338286,11 @@
             "section",
             "wear"
           ],
-          "wall": "sainsbury-false-perspective-enfilade/south_38_23",
-          "wall_side": "south",
+          "wall": "sainsbury-false-perspective-enfilade/north_38_23",
+          "wall_side": "north",
           "wall_normal": [
             0,
-            -1
+            1
           ],
           "rects_uv": [
             [
@@ -338288,7 +338435,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 5.60 m free but every one was already hung across: sainsbury-false-perspective-enfilade/east_14_14: overlaps editable_curve"
+          "why": "2 wall(s) had 5.60 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps modulor_man_demo.measure=body"
         },
         {
           "anchor": "prism_block",
@@ -338378,11 +338525,11 @@
             "octagonal",
             "round"
           ],
-          "wall": "sainsbury-false-perspective-enfilade/west_18_24",
-          "wall_side": "west",
+          "wall": "sainsbury-false-perspective-enfilade/south_38_23",
+          "wall_side": "south",
           "wall_normal": [
-            1,
-            0
+            0,
+            -1
           ],
           "rects_uv": [
             [
@@ -338418,29 +338565,29 @@
           ],
           "world": [
             [
-              18.5,
+              23.7,
               1.7,
-              24.7
+              38.5
             ],
             [
-              18.5,
+              24.6,
               1.7,
-              25.6
+              38.5
             ],
             [
-              18.5,
+              25.5,
               1.7,
-              26.5
+              38.5
             ],
             [
-              18.5,
+              26.4,
               1.7,
-              27.4
+              38.5
             ],
             [
-              18.5,
+              27.3,
               1.7,
-              28.3
+              38.5
             ]
           ],
           "body_m": [
@@ -338463,21 +338610,70 @@
             "latin",
             "tau"
           ],
-          "wall": null,
-          "wall_side": "",
-          "wall_normal": [],
-          "rects_uv": [],
-          "world": [],
+          "wall": "sainsbury-false-perspective-enfilade/west_18_24",
+          "wall_side": "west",
+          "wall_normal": [
+            1,
+            0
+          ],
+          "rects_uv": [
+            [
+              0.1,
+              1.25,
+              1.0,
+              2.15
+            ],
+            [
+              1.4,
+              1.25,
+              2.3,
+              2.15
+            ],
+            [
+              2.7,
+              1.25,
+              3.6,
+              2.15
+            ],
+            [
+              4.0,
+              1.25,
+              4.9,
+              2.15
+            ]
+          ],
+          "world": [
+            [
+              18.5,
+              1.7,
+              24.55
+            ],
+            [
+              18.5,
+              1.7,
+              25.85
+            ],
+            [
+              18.5,
+              1.7,
+              27.15
+            ],
+            [
+              18.5,
+              1.7,
+              28.45
+            ]
+          ],
           "body_m": [
             0.9,
             0.125,
             0.9
           ],
           "body_source": "godot_configured_variants",
-          "housed": false,
-          "reserved": false,
-          "assemble": false,
-          "why": "3 wall(s) had 4.80 m free but every one was already hung across: sainsbury-false-perspective-enfilade/north_43_19: overlaps line.readout=numeral"
+          "housed": true,
+          "reserved": true,
+          "assemble": true,
+          "why": "two cells of standing room in front, walkable and unclaimed"
         },
         {
           "anchor": "diamonds",
@@ -338578,7 +338774,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 6.60 m free but every one was already hung across: sainsbury-false-perspective-enfilade/east_14_14: overlaps editable_curve"
+          "why": "2 wall(s) had 6.60 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps modulor_man_demo.measure=body"
         },
         {
           "anchor": "code_display",
@@ -338702,29 +338898,6 @@
             0.4
           ],
           "why": "body projects 1.61 m; wall series permit at most 0.70 m so the two-cell standing zone remains clear",
-          "auto_place": false
-        },
-        {
-          "id": "dna:plus:symmetry",
-          "anchor": "plus",
-          "axis": "symmetry",
-          "values": [
-            "c4",
-            "c2",
-            "latin",
-            "tau"
-          ],
-          "space": "side_gallery",
-          "footprint_xz": [
-            7,
-            4
-          ],
-          "envelope_wdh": [
-            0.9,
-            0.125,
-            0.9
-          ],
-          "why": "3 wall(s) had 4.80 m free but every one was already hung across: sainsbury-false-perspective-enfilade/north_43_19: overlaps line.readout=numeral",
           "auto_place": false
         }
       ],
@@ -338953,8 +339126,8 @@
       "relational": {
         "anchors": 82,
         "wall_runs_requested": 65,
-        "wall_runs_housed": 13,
-        "dna_spatial_demand": 3,
+        "wall_runs_housed": 14,
+        "dna_spatial_demand": 2,
         "dna_contract_repairs": 3,
         "measured_synthesis_pending": 20
       },
@@ -338963,7 +339136,7 @@
         "h": 58
       },
       "apron": 14,
-      "interior_count": 24,
+      "interior_count": 23,
       "ordered": false,
       "pages": [
         {
@@ -339090,23 +339263,33 @@
             "walk_why": "a body of the polythedra pearl (Primitives_Polythedra)",
             "walk_space": "wall",
             "pearl": "polythedra"
+          },
+          "offset": [
+            2.0,
+            0.0,
+            4.0
+          ],
+          "hand": true,
+          "ruled": {
+            "at": "2026-08-21T11:15:09",
+            "by": "walk"
           }
         },
         {
           "token": "path_watchdog",
           "cell": [
-            17,
-            18
+            14,
+            15
           ],
           "tile_cell": [
-            3,
-            4
+            0,
+            1
           ],
           "rotation": 0,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.95,
-          "slot": "sainsbury-false-perspective-enfilade/2,9",
+          "slot": "hand",
           "wall": null,
           "relational_kind": "spine_artifact",
           "relation": {
@@ -339119,23 +339302,33 @@
             "walk_why": "a body of the polythedra pearl (Primitives_Polythedra)",
             "walk_space": "wall",
             "pearl": "polythedra"
+          },
+          "offset": [
+            1.0,
+            0.0,
+            1.0
+          ],
+          "hand": true,
+          "ruled": {
+            "at": "2026-08-21T11:15:09",
+            "by": "walk"
           }
         },
         {
           "token": "becoming_catalyst",
           "cell": [
-            22,
-            23
+            14,
+            15
           ],
           "tile_cell": [
-            8,
-            9
+            0,
+            1
           ],
           "rotation": 0,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.95,
-          "slot": "sainsbury-false-perspective-enfilade/2,9",
+          "slot": "hand",
           "wall": null,
           "relational_kind": "spine_artifact",
           "relation": {
@@ -339148,6 +339341,16 @@
             "walk_why": "a body of the polythedra pearl (Primitives_Polythedra)",
             "walk_space": "wall",
             "pearl": "polythedra"
+          },
+          "offset": [
+            5.0,
+            0.0,
+            -1.0
+          ],
+          "hand": true,
+          "ruled": {
+            "at": "2026-08-21T11:15:09",
+            "by": "walk"
           }
         },
         {
@@ -339164,7 +339367,7 @@
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.95,
-          "slot": "sainsbury-false-perspective-enfilade/2,9",
+          "slot": "hand",
           "wall": null,
           "relational_kind": "spine_artifact",
           "relation": {
@@ -339177,6 +339380,16 @@
             "walk_why": "a body of the polythedra pearl (Primitives_Polythedra)",
             "walk_space": "wall",
             "pearl": "polythedra"
+          },
+          "offset": [
+            3.0,
+            0.0,
+            3.0
+          ],
+          "hand": true,
+          "ruled": {
+            "at": "2026-08-21T11:15:09",
+            "by": "walk"
           }
         },
         {
@@ -339308,7 +339521,7 @@
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.95,
-          "slot": "sainsbury-false-perspective-enfilade/2,9",
+          "slot": "hand",
           "wall": null,
           "relational_kind": "related_artifact",
           "relation": {
@@ -339316,23 +339529,33 @@
             "walk_why": "named relation of becoming_catalyst: an @identity relationships field names it",
             "walk_space": "wall",
             "pearl": "polythedra"
+          },
+          "offset": [
+            3.0,
+            0.0,
+            4.0
+          ],
+          "hand": true,
+          "ruled": {
+            "at": "2026-08-21T11:15:09",
+            "by": "walk"
           }
         },
         {
           "token": "octapod_crawler",
           "cell": [
-            26,
-            30
+            17,
+            18
           ],
           "tile_cell": [
-            12,
-            16
+            3,
+            4
           ],
           "rotation": 0,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.95,
-          "slot": "sainsbury-false-perspective-enfilade/12,15",
+          "slot": "sainsbury-false-perspective-enfilade/2,9",
           "wall": null,
           "relational_kind": "dna_artifact",
           "relation": {
@@ -339350,18 +339573,18 @@
         {
           "token": "facets_sphere",
           "cell": [
-            23,
-            28
+            10,
+            11
           ],
           "tile_cell": [
-            9,
-            14
+            -4,
+            -3
           ],
           "rotation": 0,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.95,
-          "slot": "sainsbury-false-perspective-enfilade/12,15",
+          "slot": "hand",
           "wall": null,
           "relational_kind": "dna_artifact",
           "relation": {
@@ -339369,23 +339592,33 @@
             "walk_why": "synthesis of 3 sources, 3 from this node: grab_trihedron, sphere_high, sphere_low",
             "walk_space": "alcove",
             "pearl": "polythedra"
+          },
+          "offset": [
+            -4.0,
+            0.0,
+            -3.0
+          ],
+          "hand": true,
+          "ruled": {
+            "at": "2026-08-21T11:15:09",
+            "by": "walk"
           }
         },
         {
           "token": "posture_bench",
           "cell": [
-            26,
-            27
+            22,
+            23
           ],
           "tile_cell": [
-            12,
-            13
+            8,
+            9
           ],
           "rotation": 0,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.95,
-          "slot": "sainsbury-false-perspective-enfilade/12,15",
+          "slot": "sainsbury-false-perspective-enfilade/2,9",
           "wall": null,
           "relation": {
             "walk_kind": "synthesizes",
@@ -339397,18 +339630,18 @@
         {
           "token": "animatedcubebuilder",
           "cell": [
-            16,
-            8
+            15,
+            13
           ],
           "tile_cell": [
-            2,
-            -6
+            1,
+            -1
           ],
           "rotation": 0,
           "mode": "freestanding",
           "venue": "porch",
           "support_height_m": 0.0,
-          "slot": "sainsbury-false-perspective-enfilade/porch",
+          "slot": "sainsbury-false-perspective-enfilade/12,15",
           "wall": null,
           "relational_kind": "spine_artifact",
           "relation": {
@@ -339421,17 +339654,22 @@
             "walk_why": "a line of the animatedcube page",
             "walk_space": "wall",
             "pearl": "polythedra"
+          },
+          "hand": true,
+          "ruled": {
+            "at": "2026-08-21T11:15:09",
+            "by": "walk"
           }
         },
         {
           "token": "polyhedron_nets_cube",
           "cell": [
-            21,
-            11
+            18,
+            8
           ],
           "tile_cell": [
-            7,
-            -3
+            4,
+            -6
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -339455,12 +339693,12 @@
         {
           "token": "catalyst_target",
           "cell": [
-            25,
-            28
+            26,
+            29
           ],
           "tile_cell": [
-            11,
-            14
+            12,
+            15
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -339527,32 +339765,13 @@
           "relational_kind": "related_artifact"
         },
         {
-          "token": "fluxdetector",
+          "token": "wall_pattern_gallery",
           "cell": [
-            22,
-            29
-          ],
-          "tile_cell": [
-            8,
-            15
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "interior",
-          "support_height_m": 0.95,
-          "fill": true,
-          "slot": "sainsbury-false-perspective-enfilade/12,15",
-          "wall": null,
-          "relational_kind": "related_artifact"
-        },
-        {
-          "token": "pipettedispenser",
-          "cell": [
-            22,
+            26,
             27
           ],
           "tile_cell": [
-            8,
+            12,
             13
           ],
           "rotation": 0,
@@ -339562,10 +339781,10 @@
           "fill": true,
           "slot": "sainsbury-false-perspective-enfilade/12,15",
           "wall": null,
-          "relational_kind": "related_artifact"
+          "relational_kind": "spine_artifact"
         },
         {
-          "token": "quantumentanglementmeter",
+          "token": "wall_cove",
           "cell": [
             23,
             24
@@ -342596,25 +342815,18 @@
         {
           "token": "plus",
           "cell": [
-            23,
+            24,
             19
           ],
           "tile_cell": [
-            9,
+            10,
             5
           ],
           "rotation": 90,
           "mode": "against_wall",
           "venue": "interior",
           "support_height_m": 0.0,
-          "wall_fit": {
-            "mode": "hang",
-            "scale": 1.0,
-            "shelf": false,
-            "standoff": 0.035,
-            "v_centre": 1.55
-          },
-          "slot": "sainsbury-false-perspective-enfilade/13,3",
+          "slot": "hand",
           "wall": "east",
           "relational_kind": "spine_artifact",
           "relation": {
@@ -342627,6 +342839,11 @@
             "walk_why": "a line of the ignorance poem",
             "walk_space": "wall",
             "pearl": "ignorance"
+          },
+          "hand": true,
+          "ruled": {
+            "at": "2026-08-21T11:15:10",
+            "by": "walk"
           }
         },
         {
@@ -342730,6 +342947,13 @@
           "mode": "against_wall",
           "venue": "interior",
           "support_height_m": 0.0,
+          "wall_fit": {
+            "mode": "hang",
+            "scale": 1.0,
+            "shelf": false,
+            "standoff": 0.035,
+            "v_centre": 1.9000000000000001
+          },
           "slot": "sainsbury-false-perspective-enfilade/13,8",
           "wall": "east",
           "relational_kind": "spine_artifact",
@@ -342904,6 +343128,13 @@
           "mode": "against_wall",
           "venue": "interior",
           "support_height_m": 0.0,
+          "wall_fit": {
+            "mode": "hang",
+            "scale": 1.0,
+            "shelf": true,
+            "standoff": 0.05,
+            "v_centre": 1.55
+          },
           "slot": "sainsbury-false-perspective-enfilade/9,15",
           "wall": "east",
           "relational_kind": "spine_artifact",
@@ -343062,12 +343293,12 @@
         {
           "token": "prism_block",
           "cell": [
-            23,
-            24
+            25,
+            39
           ],
           "tile_cell": [
-            9,
-            10
+            11,
+            25
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -343075,8 +343306,11 @@
           "support_height_m": 0.0,
           "hand": true,
           "ruled": {
-            "at": "2026-08-20T20:59:05",
-            "by": "walk"
+            "by": "book: locked",
+            "cell": [
+              11,
+              25
+            ]
           },
           "slot": "hand",
           "wall": null,
@@ -343095,49 +343329,10 @@
               25
             ],
             "pearl": "ignorance"
-          },
-          "scale": 0.8
+          }
         },
         {
-          "token": "robotarm",
-          "cell": [
-            26,
-            27
-          ],
-          "tile_cell": [
-            12,
-            13
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "interior",
-          "support_height_m": 0.95,
-          "fill": true,
-          "slot": "sainsbury-false-perspective-enfilade/12,15",
-          "wall": null,
-          "relational_kind": "related_artifact"
-        },
-        {
-          "token": "color_space_navigator",
-          "cell": [
-            25,
-            28
-          ],
-          "tile_cell": [
-            11,
-            14
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "interior",
-          "support_height_m": 0.95,
-          "fill": true,
-          "slot": "sainsbury-false-perspective-enfilade/12,15",
-          "wall": null,
-          "relational_kind": "spine_artifact"
-        },
-        {
-          "token": "wall_pattern_gallery",
+          "token": "wall_pattern_colorizer",
           "cell": [
             26,
             23
@@ -343152,44 +343347,6 @@
           "support_height_m": 0.95,
           "fill": true,
           "slot": "sainsbury-false-perspective-enfilade/12,15",
-          "wall": null,
-          "relational_kind": "spine_artifact"
-        },
-        {
-          "token": "wall_cove",
-          "cell": [
-            22,
-            28
-          ],
-          "tile_cell": [
-            8,
-            14
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "interior",
-          "support_height_m": 0.95,
-          "fill": true,
-          "slot": "sainsbury-false-perspective-enfilade/12,15",
-          "wall": null,
-          "relational_kind": "related_artifact"
-        },
-        {
-          "token": "wall_pattern_colorizer",
-          "cell": [
-            19,
-            41
-          ],
-          "tile_cell": [
-            5,
-            27
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "interior",
-          "support_height_m": 0.0,
-          "fill": true,
-          "slot": "sainsbury-false-perspective-enfilade/5,22",
           "wall": null,
           "relational_kind": "related_artifact"
         },
@@ -343236,6 +343393,82 @@
           },
           "slot": "sainsbury-false-perspective-enfilade/5,28",
           "wall": "south",
+          "relational_kind": "related_artifact"
+        },
+        {
+          "token": "vectorline",
+          "cell": [
+            26,
+            27
+          ],
+          "tile_cell": [
+            12,
+            13
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "interior",
+          "support_height_m": 0.95,
+          "fill": true,
+          "slot": "sainsbury-false-perspective-enfilade/12,15",
+          "wall": null,
+          "relational_kind": "related_artifact"
+        },
+        {
+          "token": "cylinder_radials_rings",
+          "cell": [
+            25,
+            28
+          ],
+          "tile_cell": [
+            11,
+            14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "interior",
+          "support_height_m": 0.95,
+          "fill": true,
+          "slot": "sainsbury-false-perspective-enfilade/12,15",
+          "wall": null,
+          "relational_kind": "related_artifact"
+        },
+        {
+          "token": "horizon_line",
+          "cell": [
+            20,
+            41
+          ],
+          "tile_cell": [
+            6,
+            27
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "interior",
+          "support_height_m": 0.0,
+          "fill": true,
+          "slot": "sainsbury-false-perspective-enfilade/5,22",
+          "wall": null,
+          "relational_kind": "related_artifact"
+        },
+        {
+          "token": "hangar_cabinet_cluster",
+          "cell": [
+            22,
+            28
+          ],
+          "tile_cell": [
+            8,
+            14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "interior",
+          "support_height_m": 0.95,
+          "fill": true,
+          "slot": "sainsbury-false-perspective-enfilade/12,15",
+          "wall": null,
           "relational_kind": "related_artifact"
         }
       ],
@@ -343475,11 +343708,11 @@
             "archive",
             "wax"
           ],
-          "wall": "sainsbury-false-perspective-enfilade/south_20_24",
-          "wall_side": "south",
+          "wall": "sainsbury-false-perspective-enfilade/west_14_39",
+          "wall_side": "west",
           "wall_normal": [
-            0,
-            -1
+            1,
+            0
           ],
           "rects_uv": [
             [
@@ -343515,29 +343748,29 @@
           ],
           "world": [
             [
-              24.58,
+              14.5,
               1.7,
-              20.5
+              39.58
             ],
             [
-              25.29,
+              14.5,
               1.7,
-              20.5
+              40.29
             ],
             [
-              26.0,
+              14.5,
               1.7,
-              20.5
+              41.0
             ],
             [
-              26.71,
+              14.5,
               1.7,
-              20.5
+              41.71
             ],
             [
-              27.42,
+              14.5,
               1.7,
-              20.5
+              42.42
             ]
           ],
           "body_m": [
@@ -343948,69 +344181,69 @@
             "lattice",
             "shell"
           ],
-          "wall": "sainsbury-false-perspective-enfilade/west_14_39",
-          "wall_side": "west",
+          "wall": "sainsbury-false-perspective-enfilade/east_28_15",
+          "wall_side": "east",
           "wall_normal": [
-            1,
+            -1,
             0
           ],
           "rects_uv": [
             [
-              0.475,
+              0.975,
               1.65,
-              0.765,
+              1.265,
               1.75
             ],
             [
-              1.165,
+              1.665,
               1.65,
-              1.455,
+              1.955,
               1.75
             ],
             [
-              1.855,
+              2.355,
               1.65,
-              2.145,
+              2.645,
               1.75
             ],
             [
-              2.545,
+              3.045,
               1.65,
-              2.835,
+              3.335,
               1.75
             ],
             [
-              3.235,
+              3.735,
               1.65,
-              3.525,
+              4.025,
               1.75
             ]
           ],
           "world": [
             [
-              14.5,
+              28.5,
               1.7,
-              39.62
+              16.12
             ],
             [
-              14.5,
+              28.5,
               1.7,
-              40.31
+              16.81
             ],
             [
-              14.5,
+              28.5,
               1.7,
-              41.0
+              17.5
             ],
             [
-              14.5,
+              28.5,
               1.7,
-              41.69
+              18.19
             ],
             [
-              14.5,
+              28.5,
               1.7,
-              42.38
+              18.88
             ]
           ],
           "body_m": [
@@ -344589,7 +344822,7 @@
             "apex_only",
             "base_only"
           ],
-          "wall": "sainsbury-false-perspective-enfilade/east_28_15",
+          "wall": "sainsbury-false-perspective-enfilade/east_28_33",
           "wall_side": "east",
           "wall_normal": [
             -1,
@@ -344625,22 +344858,22 @@
             [
               28.5,
               1.7,
-              15.864
+              33.864
             ],
             [
               28.5,
               1.7,
-              16.954
+              34.955
             ],
             [
               28.5,
               1.7,
-              18.046
+              36.045
             ],
             [
               28.5,
               1.7,
-              19.136
+              37.136
             ]
           ],
           "body_m": [
@@ -344915,11 +345148,11 @@
             0.75,
             1.0
           ],
-          "wall": "sainsbury-false-perspective-enfilade/east_28_33",
-          "wall_side": "east",
+          "wall": "sainsbury-false-perspective-enfilade/north_14_15",
+          "wall_side": "north",
           "wall_normal": [
-            -1,
-            0
+            0,
+            1
           ],
           "rects_uv": [
             [
@@ -344955,29 +345188,29 @@
           ],
           "world": [
             [
-              28.5,
+              15.9,
               1.7,
-              33.9
+              14.5
             ],
             [
-              28.5,
+              16.7,
               1.7,
-              34.7
+              14.5
             ],
             [
-              28.5,
+              17.5,
               1.7,
-              35.5
+              14.5
             ],
             [
-              28.5,
+              18.3,
               1.7,
-              36.3
+              14.5
             ],
             [
-              28.5,
+              19.1,
               1.7,
-              37.1
+              14.5
             ]
           ],
           "body_m": [
@@ -345001,7 +345234,7 @@
             3,
             7
           ],
-          "wall": "sainsbury-false-perspective-enfilade/north_14_15",
+          "wall": "sainsbury-false-perspective-enfilade/north_14_23",
           "wall_side": "north",
           "wall_normal": [
             0,
@@ -345041,27 +345274,27 @@
           ],
           "world": [
             [
-              15.48,
+              23.48,
               1.7,
               14.5
             ],
             [
-              16.49,
+              24.49,
               1.7,
               14.5
             ],
             [
-              17.5,
+              25.5,
               1.7,
               14.5
             ],
             [
-              18.51,
+              26.51,
               1.7,
               14.5
             ],
             [
-              19.52,
+              27.52,
               1.7,
               14.5
             ]
@@ -345111,7 +345344,7 @@
             "section",
             "wear"
           ],
-          "wall": "sainsbury-false-perspective-enfilade/north_14_23",
+          "wall": "sainsbury-false-perspective-enfilade/north_38_15",
           "wall_side": "north",
           "wall_normal": [
             0,
@@ -345151,29 +345384,29 @@
           ],
           "world": [
             [
-              23.7,
+              15.7,
               1.7,
-              14.5
+              38.5
             ],
             [
-              24.6,
+              16.6,
               1.7,
-              14.5
+              38.5
             ],
             [
-              25.5,
+              17.5,
               1.7,
-              14.5
+              38.5
             ],
             [
-              26.4,
+              18.4,
               1.7,
-              14.5
+              38.5
             ],
             [
-              27.3,
+              19.3,
               1.7,
-              14.5
+              38.5
             ]
           ],
           "body_m": [
@@ -345350,11 +345583,11 @@
             "octagonal",
             "round"
           ],
-          "wall": "sainsbury-false-perspective-enfilade/north_38_15",
-          "wall_side": "north",
+          "wall": "sainsbury-false-perspective-enfilade/south_38_23",
+          "wall_side": "south",
           "wall_normal": [
             0,
-            1
+            -1
           ],
           "rects_uv": [
             [
@@ -345390,27 +345623,27 @@
           ],
           "world": [
             [
-              15.7,
+              23.7,
               1.7,
               38.5
             ],
             [
-              16.6,
+              24.6,
               1.7,
               38.5
             ],
             [
-              17.5,
+              25.5,
               1.7,
               38.5
             ],
             [
-              18.4,
+              26.4,
               1.7,
               38.5
             ],
             [
-              19.3,
+              27.3,
               1.7,
               38.5
             ]
@@ -345435,11 +345668,11 @@
             "latin",
             "tau"
           ],
-          "wall": "sainsbury-false-perspective-enfilade/south_38_23",
-          "wall_side": "south",
+          "wall": "sainsbury-false-perspective-enfilade/west_14_27",
+          "wall_side": "west",
           "wall_normal": [
-            0,
-            -1
+            1,
+            0
           ],
           "rects_uv": [
             [
@@ -345469,24 +345702,24 @@
           ],
           "world": [
             [
-              23.55,
+              14.5,
               1.7,
-              38.5
+              27.55
             ],
             [
-              24.85,
+              14.5,
               1.7,
-              38.5
+              28.85
             ],
             [
-              26.15,
+              14.5,
               1.7,
-              38.5
+              30.15
             ],
             [
-              27.45,
+              14.5,
               1.7,
-              38.5
+              31.45
             ]
           ],
           "body_m": [
@@ -345636,7 +345869,7 @@
             6,
             8
           ],
-          "wall": "sainsbury-false-perspective-enfilade/west_14_27",
+          "wall": "sainsbury-false-perspective-enfilade/west_14_33",
           "wall_side": "west",
           "wall_normal": [
             1,
@@ -345678,27 +345911,27 @@
             [
               14.5,
               1.7,
-              27.5
+              33.5
             ],
             [
               14.5,
               1.7,
-              28.5
+              34.5
             ],
             [
               14.5,
               1.7,
-              29.5
+              35.5
             ],
             [
               14.5,
               1.7,
-              30.5
+              36.5
             ],
             [
               14.5,
               1.7,
-              31.5
+              37.5
             ]
           ],
           "body_m": [
@@ -346373,44 +346606,6 @@
           "relational_kind": "related_artifact"
         },
         {
-          "token": "vectorline",
-          "cell": [
-            23,
-            28
-          ],
-          "tile_cell": [
-            9,
-            14
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "interior",
-          "support_height_m": 0.0,
-          "fill": true,
-          "slot": "sainsbury-false-perspective-enfilade/9,15",
-          "wall": null,
-          "relational_kind": "related_artifact"
-        },
-        {
-          "token": "cylinder_radials_rings",
-          "cell": [
-            22,
-            29
-          ],
-          "tile_cell": [
-            8,
-            15
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "interior",
-          "support_height_m": 0.95,
-          "fill": true,
-          "slot": "sainsbury-false-perspective-enfilade/12,15",
-          "wall": null,
-          "relational_kind": "related_artifact"
-        },
-        {
           "token": "array_translate",
           "cell": [
             23,
@@ -346434,6 +346629,44 @@
           },
           "slot": "sainsbury-false-perspective-enfilade/5,28",
           "wall": "south",
+          "relational_kind": "related_artifact"
+        },
+        {
+          "token": "chalkboard",
+          "cell": [
+            23,
+            28
+          ],
+          "tile_cell": [
+            9,
+            14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "interior",
+          "support_height_m": 0.95,
+          "fill": true,
+          "slot": "sainsbury-false-perspective-enfilade/12,15",
+          "wall": null,
+          "relational_kind": "related_artifact"
+        },
+        {
+          "token": "cube_specimen",
+          "cell": [
+            22,
+            29
+          ],
+          "tile_cell": [
+            8,
+            15
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "interior",
+          "support_height_m": 0.95,
+          "fill": true,
+          "slot": "sainsbury-false-perspective-enfilade/12,15",
+          "wall": null,
           "relational_kind": "related_artifact"
         },
         {
@@ -350067,7 +350300,7 @@
           },
           "config": {
             "support": "stand",
-            "scan_radius": 8.0
+            "scan_radius": 8
           },
           "slot": "hand",
           "wall": null,
@@ -350087,7 +350320,7 @@
             ],
             "config": {
               "support": "stand",
-              "scan_radius": 8.0
+              "scan_radius": 8
             },
             "pearl": "point"
           }
@@ -350187,18 +350420,18 @@
         {
           "token": "floating_sphere_field",
           "cell": [
-            25,
-            24
+            26,
+            22
           ],
           "tile_cell": [
-            11,
-            10
+            12,
+            8
           ],
           "rotation": 0,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.0,
-          "slot": "sainsbury-false-perspective-enfilade/5,10~r",
+          "slot": "sainsbury-false-perspective-enfilade/13,8~r",
           "wall": null,
           "relational_kind": "spine_artifact",
           "relation": {
@@ -350216,12 +350449,12 @@
         {
           "token": "grab_sphere_point_snap",
           "cell": [
-            26,
-            25
+            23,
+            27
           ],
           "tile_cell": [
-            12,
-            11
+            9,
+            13
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -350245,18 +350478,18 @@
         {
           "token": "interactive_point_origin_force",
           "cell": [
-            26,
-            27
+            17,
+            29
           ],
           "tile_cell": [
-            12,
-            13
+            3,
+            15
           ],
           "rotation": 0,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.0,
-          "slot": "sainsbury-false-perspective-enfilade/13,8~r",
+          "slot": "sainsbury-false-perspective-enfilade/1,14~r",
           "wall": null,
           "relational_kind": "spine_artifact",
           "relation": {
@@ -350281,7 +350514,7 @@
             7,
             11
           ],
-          "rotation": 90,
+          "rotation": 0,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.0,
@@ -350304,7 +350537,7 @@
               11
             ],
             "pose": {
-              "rotation": 90
+              "rotation": 0
             },
             "pearl": "point"
           }
@@ -350312,11 +350545,11 @@
         {
           "token": "klee_walking_point",
           "cell": [
-            26,
+            22,
             29
           ],
           "tile_cell": [
-            12,
+            8,
             15
           ],
           "rotation": 0,
@@ -350341,25 +350574,18 @@
         {
           "token": "dgrid",
           "cell": [
-            27,
-            30
+            26,
+            29
           ],
           "tile_cell": [
-            13,
-            16
+            12,
+            15
           ],
-          "rotation": 90,
+          "rotation": 195,
           "mode": "against_wall",
           "venue": "interior",
           "support_height_m": 0.0,
-          "wall_fit": {
-            "mode": "hang",
-            "scale": 1.0,
-            "shelf": false,
-            "standoff": 0.02,
-            "v_centre": 1.55
-          },
-          "slot": "sainsbury-false-perspective-enfilade/9,15",
+          "slot": "hand",
           "wall": "east",
           "relational_kind": "spine_artifact",
           "relation": {
@@ -350372,39 +350598,34 @@
             "walk_why": "a line of the lines page",
             "walk_space": "wall",
             "pearl": "point"
+          },
+          "hand": true,
+          "ruled": {
+            "at": "2026-08-21T07:27:34",
+            "by": "walk"
           }
         },
         {
           "token": "walk_this_line_marking",
           "cell": [
-            16,
+            26,
             35
           ],
           "tile_cell": [
-            2,
+            12,
             21
           ],
-          "rotation": 135,
+          "rotation": 90,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.0,
-          "slot": "hand",
+          "slot": "sainsbury-false-perspective-enfilade/13,20~r",
           "wall": null,
           "relation": {
             "walk_kind": "sibling",
             "walk_why": "a line of the lines page",
             "walk_space": "wall",
             "pearl": "point"
-          },
-          "offset": [
-            0.0,
-            0.2,
-            0.0
-          ],
-          "hand": true,
-          "ruled": {
-            "at": "2026-08-20T13:27:46",
-            "by": "walk"
           }
         },
         {
@@ -350491,7 +350712,7 @@
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 1.4,
-          "slot": "sainsbury-false-perspective-enfilade/7,28",
+          "slot": "hand",
           "wall": null,
           "relational_kind": "spine_artifact",
           "relation": {
@@ -350504,6 +350725,16 @@
             "walk_why": "a line of the lines page",
             "walk_space": "wall",
             "pearl": "point"
+          },
+          "offset": [
+            5.0,
+            0.0,
+            1.0
+          ],
+          "hand": true,
+          "ruled": {
+            "at": "2026-08-21T11:15:08",
+            "by": "walk"
           }
         },
         {
@@ -350565,7 +350796,7 @@
             1,
             19
           ],
-          "rotation": 0,
+          "rotation": 270,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.0,
@@ -350583,7 +350814,7 @@
             0.0
           ],
           "slot": "hand",
-          "wall": null,
+          "wall": "west",
           "relational_kind": "spine_artifact",
           "relation": {
             "anchor": "laser_measure",
@@ -350631,7 +350862,7 @@
             5,
             19
           ],
-          "rotation": 0,
+          "rotation": 270,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.0,
@@ -350649,7 +350880,7 @@
             0.0
           ],
           "slot": "hand",
-          "wall": null,
+          "wall": "west",
           "relational_kind": "spine_artifact",
           "relation": {
             "anchor": "laser_measure",
@@ -350697,7 +350928,7 @@
             9,
             19
           ],
-          "rotation": 0,
+          "rotation": 270,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.0,
@@ -350715,7 +350946,7 @@
             0.0
           ],
           "slot": "hand",
-          "wall": null,
+          "wall": "west",
           "relational_kind": "spine_artifact",
           "relation": {
             "anchor": "laser_measure",
@@ -350906,18 +351137,18 @@
         {
           "token": "grabbable_line",
           "cell": [
-            25,
-            41
+            26,
+            11
           ],
           "tile_cell": [
-            11,
-            27
+            12,
+            -3
           ],
           "rotation": 0,
           "mode": "freestanding",
-          "venue": "interior",
-          "support_height_m": 1.4,
-          "slot": "sainsbury-false-perspective-enfilade/7,28~r",
+          "venue": "porch",
+          "support_height_m": 0.0,
+          "slot": "sainsbury-false-perspective-enfilade/porch",
           "wall": null,
           "relational_kind": "spine_artifact",
           "relation": {
@@ -350935,14 +351166,14 @@
         {
           "token": "line_builder_3d",
           "cell": [
-            26,
-            9
+            16,
+            8
           ],
           "tile_cell": [
-            12,
-            -5
+            2,
+            -6
           ],
-          "rotation": 0,
+          "rotation": 90,
           "mode": "freestanding",
           "venue": "porch",
           "support_height_m": 0.0,
@@ -350974,8 +351205,8 @@
           "rotation": 0,
           "mode": "freestanding",
           "venue": "interior",
-          "support_height_m": 1.4,
-          "slot": "sainsbury-false-perspective-enfilade/7,28",
+          "support_height_m": 0.95,
+          "slot": "sainsbury-false-perspective-enfilade/9,28~r",
           "wall": null,
           "relational_kind": "spine_artifact",
           "relation": {
@@ -350993,18 +351224,18 @@
         {
           "token": "scale_lines",
           "cell": [
-            23,
-            28
+            20,
+            24
           ],
           "tile_cell": [
-            9,
-            14
+            6,
+            10
           ],
           "rotation": 0,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.95,
-          "slot": "sainsbury-false-perspective-enfilade/12,15",
+          "slot": "hand",
           "wall": null,
           "relational_kind": "spine_artifact",
           "relation": {
@@ -351025,23 +351256,33 @@
               "length": 24
             },
             "pearl": "point"
+          },
+          "offset": [
+            1.0,
+            0.0,
+            -1.0
+          ],
+          "hand": true,
+          "ruled": {
+            "at": "2026-08-21T11:39:31",
+            "by": "walk"
           }
         },
         {
           "token": "cube_scene",
           "cell": [
-            20,
-            41
+            23,
+            40
           ],
           "tile_cell": [
-            6,
-            27
+            9,
+            26
           ],
           "rotation": 0,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 1.4,
-          "slot": "sainsbury-false-perspective-enfilade/7,28",
+          "slot": "hand",
           "wall": null,
           "relational_kind": "spine_artifact",
           "relation": {
@@ -351054,17 +351295,22 @@
             "walk_why": "a line of the lines page",
             "walk_space": "wall",
             "pearl": "point"
+          },
+          "hand": true,
+          "ruled": {
+            "at": "2026-08-21T11:15:08",
+            "by": "walk"
           }
         },
         {
           "token": "dark_sphere",
           "cell": [
-            23,
-            21
+            24,
+            22
           ],
           "tile_cell": [
-            9,
-            7
+            10,
+            8
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -351093,25 +351339,25 @@
           ],
           "hand": true,
           "ruled": {
-            "at": "2026-08-20T13:27:46",
+            "at": "2026-08-21T09:27:42",
             "by": "walk"
           }
         },
         {
           "token": "plus_line_puzzle",
           "cell": [
-            16,
-            24
+            24,
+            41
           ],
           "tile_cell": [
-            2,
-            10
+            10,
+            27
           ],
           "rotation": 0,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.95,
-          "slot": "sainsbury-false-perspective-enfilade/2,9",
+          "slot": "sainsbury-false-perspective-enfilade/5,28",
           "wall": null,
           "relational_kind": "spine_artifact",
           "relation": {
@@ -351129,17 +351375,17 @@
         {
           "token": "modulor_man_demo",
           "cell": [
-            21,
-            42
+            26,
+            41
           ],
           "tile_cell": [
-            7,
-            28
+            12,
+            27
           ],
           "rotation": 180,
           "mode": "against_wall",
           "venue": "interior",
-          "support_height_m": 0.95,
+          "support_height_m": 1.4,
           "wall_fit": {
             "mode": "hang",
             "scale": 1.0,
@@ -351147,7 +351393,7 @@
             "standoff": 0.035,
             "v_centre": 1.55
           },
-          "slot": "sainsbury-false-perspective-enfilade/5,28",
+          "slot": "sainsbury-false-perspective-enfilade/7,28",
           "wall": "south",
           "relational_kind": "spine_artifact",
           "relation": {
@@ -351165,18 +351411,18 @@
         {
           "token": "mystic_writing_pad",
           "cell": [
-            16,
-            22
+            20,
+            41
           ],
           "tile_cell": [
-            2,
-            8
+            6,
+            27
           ],
           "rotation": 0,
           "mode": "freestanding",
           "venue": "interior",
           "support_height_m": 0.95,
-          "slot": "sainsbury-false-perspective-enfilade/2,9",
+          "slot": "sainsbury-false-perspective-enfilade/9,28",
           "wall": null,
           "relational_kind": "spine_artifact",
           "relation": {
@@ -351194,12 +351440,12 @@
         {
           "token": "draw_dot",
           "cell": [
-            17,
-            23
+            16,
+            24
           ],
           "tile_cell": [
-            3,
-            9
+            2,
+            10
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -351223,11 +351469,56 @@
         {
           "token": "static_point",
           "cell": [
-            23,
+            15,
+            22
+          ],
+          "tile_cell": [
+            1,
+            8
+          ],
+          "rotation": 270,
+          "mode": "against_wall",
+          "venue": "interior",
+          "support_height_m": 0.0,
+          "fill": true,
+          "slot": "sainsbury-false-perspective-enfilade/1,3",
+          "wall": "west",
+          "relational_kind": "related_artifact"
+        },
+        {
+          "token": "portal",
+          "cell": [
+            27,
+            24
+          ],
+          "tile_cell": [
+            13,
+            10
+          ],
+          "rotation": 90,
+          "mode": "against_wall",
+          "venue": "interior",
+          "support_height_m": 0.0,
+          "fill": true,
+          "wall_fit": {
+            "mode": "hang",
+            "scale": 1.0,
+            "shelf": true,
+            "standoff": 0.05,
+            "v_centre": 1.8
+          },
+          "slot": "sainsbury-false-perspective-enfilade/13,8",
+          "wall": "east",
+          "relational_kind": "related_artifact"
+        },
+        {
+          "token": "whiteboard",
+          "cell": [
+            27,
             42
           ],
           "tile_cell": [
-            9,
+            13,
             28
           ],
           "rotation": 180,
@@ -351240,52 +351531,14 @@
           "relational_kind": "related_artifact"
         },
         {
-          "token": "portal",
-          "cell": [
-            27,
-            35
-          ],
-          "tile_cell": [
-            13,
-            21
-          ],
-          "rotation": 90,
-          "mode": "against_wall",
-          "venue": "interior",
-          "support_height_m": 0.0,
-          "fill": true,
-          "slot": "sainsbury-false-perspective-enfilade/13,20",
-          "wall": "east",
-          "relational_kind": "related_artifact"
-        },
-        {
-          "token": "whiteboard",
-          "cell": [
-            15,
-            21
-          ],
-          "tile_cell": [
-            1,
-            7
-          ],
-          "rotation": 270,
-          "mode": "against_wall",
-          "venue": "interior",
-          "support_height_m": 0.0,
-          "fill": true,
-          "slot": "sainsbury-false-perspective-enfilade/1,3",
-          "wall": "west",
-          "relational_kind": "related_artifact"
-        },
-        {
           "token": "exit_sign",
           "cell": [
             15,
-            29
+            27
           ],
           "tile_cell": [
             1,
-            15
+            13
           ],
           "rotation": 270,
           "mode": "against_wall",
@@ -351370,53 +351623,39 @@
         {
           "token": "terminal",
           "cell": [
-            27,
-            24
+            23,
+            42
           ],
           "tile_cell": [
-            13,
-            10
+            9,
+            28
           ],
-          "rotation": 90,
+          "rotation": 180,
           "mode": "against_wall",
           "venue": "interior",
-          "support_height_m": 0.0,
+          "support_height_m": 0.95,
           "fill": true,
-          "wall_fit": {
-            "mode": "hang",
-            "scale": 1.0,
-            "shelf": true,
-            "standoff": 0.05,
-            "v_centre": 1.55
-          },
-          "slot": "sainsbury-false-perspective-enfilade/13,8",
-          "wall": "east",
+          "slot": "sainsbury-false-perspective-enfilade/9,28",
+          "wall": "south",
           "relational_kind": "related_artifact"
         },
         {
           "token": "tt",
           "cell": [
-            27,
-            22
+            21,
+            42
           ],
           "tile_cell": [
-            13,
-            8
+            7,
+            28
           ],
-          "rotation": 90,
+          "rotation": 180,
           "mode": "against_wall",
           "venue": "interior",
-          "support_height_m": 0.0,
+          "support_height_m": 0.95,
           "fill": true,
-          "wall_fit": {
-            "mode": "hang",
-            "scale": 1.0,
-            "shelf": false,
-            "standoff": 0.02,
-            "v_centre": 1.55
-          },
-          "slot": "sainsbury-false-perspective-enfilade/13,8",
-          "wall": "east",
+          "slot": "sainsbury-false-perspective-enfilade/9,28",
+          "wall": "south",
           "relational_kind": "spine_artifact"
         },
         {
@@ -351434,12 +351673,57 @@
           "venue": "interior",
           "support_height_m": 0.0,
           "fill": true,
+          "wall_fit": {
+            "mode": "hang",
+            "scale": 1.0,
+            "shelf": false,
+            "standoff": 0.02,
+            "v_centre": 1.55
+          },
           "slot": "sainsbury-false-perspective-enfilade/9,15",
           "wall": "east",
           "relational_kind": "related_artifact"
         },
         {
           "token": "example_2_6_single_attractor_vr",
+          "cell": [
+            17,
+            23
+          ],
+          "tile_cell": [
+            3,
+            9
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "interior",
+          "support_height_m": 0.95,
+          "fill": true,
+          "slot": "sainsbury-false-perspective-enfilade/2,9",
+          "wall": null,
+          "relational_kind": "related_artifact"
+        },
+        {
+          "token": "two_points_line",
+          "cell": [
+            16,
+            21
+          ],
+          "tile_cell": [
+            2,
+            7
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "interior",
+          "support_height_m": 0.95,
+          "fill": true,
+          "slot": "sainsbury-false-perspective-enfilade/2,9",
+          "wall": null,
+          "relational_kind": "related_artifact"
+        },
+        {
+          "token": "hand_telemetry_display",
           "cell": [
             22,
             23
@@ -351456,63 +351740,6 @@
           "slot": "sainsbury-false-perspective-enfilade/2,9",
           "wall": null,
           "relational_kind": "related_artifact"
-        },
-        {
-          "token": "two_points_line",
-          "cell": [
-            26,
-            23
-          ],
-          "tile_cell": [
-            12,
-            9
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "interior",
-          "support_height_m": 0.95,
-          "fill": true,
-          "slot": "sainsbury-false-perspective-enfilade/12,15",
-          "wall": null,
-          "relational_kind": "related_artifact"
-        },
-        {
-          "token": "hand_telemetry_display",
-          "cell": [
-            22,
-            29
-          ],
-          "tile_cell": [
-            8,
-            15
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "interior",
-          "support_height_m": 0.95,
-          "fill": true,
-          "slot": "sainsbury-false-perspective-enfilade/12,15",
-          "wall": null,
-          "relational_kind": "related_artifact"
-        },
-        {
-          "token": "catalyst_pickup",
-          "cell": [
-            22,
-            27
-          ],
-          "tile_cell": [
-            8,
-            13
-          ],
-          "rotation": 0,
-          "mode": "freestanding",
-          "venue": "interior",
-          "support_height_m": 0.95,
-          "fill": true,
-          "slot": "sainsbury-false-perspective-enfilade/12,15",
-          "wall": null,
-          "relational_kind": "spine_artifact"
         },
         {
           "token": "catalyst_prompter_box",
@@ -351532,6 +351759,184 @@
           "slot": "sainsbury-false-perspective-enfilade/2,9",
           "wall": null,
           "relational_kind": "dna_artifact"
+        },
+        {
+          "token": "frame_counter_display",
+          "cell": [
+            15,
+            29
+          ],
+          "tile_cell": [
+            1,
+            15
+          ],
+          "rotation": 270,
+          "mode": "against_wall",
+          "venue": "interior",
+          "support_height_m": 0.0,
+          "fill": true,
+          "slot": "sainsbury-false-perspective-enfilade/1,14",
+          "wall": "west",
+          "relational_kind": "spine_artifact"
+        },
+        {
+          "token": "catalyst_pickup",
+          "cell": [
+            26,
+            27
+          ],
+          "tile_cell": [
+            12,
+            13
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "interior",
+          "support_height_m": 0.95,
+          "fill": true,
+          "slot": "sainsbury-false-perspective-enfilade/12,15",
+          "wall": null,
+          "relational_kind": "spine_artifact"
+        },
+        {
+          "token": "large_table",
+          "cell": [
+            25,
+            28
+          ],
+          "tile_cell": [
+            11,
+            14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "interior",
+          "support_height_m": 0.95,
+          "fill": true,
+          "slot": "sainsbury-false-perspective-enfilade/12,15",
+          "wall": null,
+          "relational_kind": "related_artifact"
+        },
+        {
+          "token": "circularradarmonitor",
+          "cell": [
+            26,
+            25
+          ],
+          "tile_cell": [
+            12,
+            11
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "interior",
+          "support_height_m": 0.95,
+          "fill": true,
+          "slot": "sainsbury-false-perspective-enfilade/12,15",
+          "wall": null,
+          "relational_kind": "related_artifact"
+        },
+        {
+          "token": "datatablet",
+          "cell": [
+            25,
+            24
+          ],
+          "tile_cell": [
+            11,
+            10
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "interior",
+          "support_height_m": 0.95,
+          "fill": true,
+          "slot": "sainsbury-false-perspective-enfilade/12,15",
+          "wall": null,
+          "relational_kind": "related_artifact"
+        },
+        {
+          "token": "cross_lines",
+          "cell": [
+            25,
+            42
+          ],
+          "tile_cell": [
+            11,
+            28
+          ],
+          "rotation": 180,
+          "mode": "against_wall",
+          "venue": "interior",
+          "support_height_m": 1.4,
+          "fill": true,
+          "slot": "sainsbury-false-perspective-enfilade/7,28",
+          "wall": "south",
+          "relational_kind": "related_artifact"
+        },
+        {
+          "token": "steel_barricade",
+          "cell": [
+            17,
+            25
+          ],
+          "tile_cell": [
+            3,
+            11
+          ],
+          "rotation": 90,
+          "mode": "freestanding",
+          "venue": "interior",
+          "support_height_m": 0.95,
+          "fill": true,
+          "slot": "sainsbury-false-perspective-enfilade/2,9",
+          "wall": null,
+          "relational_kind": "related_artifact"
+        },
+        {
+          "token": "modulor_man_interactive",
+          "cell": [
+            15,
+            35
+          ],
+          "tile_cell": [
+            1,
+            21
+          ],
+          "rotation": 270,
+          "mode": "against_wall",
+          "venue": "interior",
+          "support_height_m": 0.0,
+          "fill": true,
+          "wall_fit": {
+            "mode": "hang",
+            "scale": 1.0,
+            "shelf": false,
+            "standoff": 0.035,
+            "v_centre": 1.55
+          },
+          "slot": "sainsbury-false-perspective-enfilade/1,21",
+          "wall": "west",
+          "relational_kind": "related_artifact"
+        },
+        {
+          "token": "transformer",
+          "cell": [
+            15,
+            31
+          ],
+          "tile_cell": [
+            1,
+            17
+          ],
+          "rotation": 270,
+          "mode": "against_wall",
+          "venue": "interior",
+          "support_height_m": 0.0,
+          "fill": true,
+          "slot": "sainsbury-false-perspective-enfilade/1,14",
+          "wall": "west",
+          "relational_kind": "related_artifact"
         }
       ],
       "rejected": [],
@@ -352080,7 +352485,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 19.25 m free but every one was already hung across: sainsbury-false-perspective-enfilade/east_14_14: overlaps tt"
+          "why": "2 wall(s) had 19.25 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps modulor_man_demo.measure=body"
         },
         {
           "anchor": "science_screen",
@@ -352105,7 +352510,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 13.76 m free but every one was already hung across: sainsbury-false-perspective-enfilade/east_14_14: overlaps terminal"
+          "why": "2 wall(s) had 13.76 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps modulor_man_demo.measure=body"
         },
         {
           "anchor": "plus_line_puzzle",
@@ -352243,81 +352648,21 @@
             "lattice",
             "shell"
           ],
-          "wall": "sainsbury-false-perspective-enfilade/south_38_23",
-          "wall_side": "south",
-          "wall_normal": [
-            0,
-            -1
-          ],
-          "rects_uv": [
-            [
-              0.975,
-              1.65,
-              1.265,
-              1.75
-            ],
-            [
-              1.665,
-              1.65,
-              1.955,
-              1.75
-            ],
-            [
-              2.355,
-              1.65,
-              2.645,
-              1.75
-            ],
-            [
-              3.045,
-              1.65,
-              3.335,
-              1.75
-            ],
-            [
-              3.735,
-              1.65,
-              4.025,
-              1.75
-            ]
-          ],
-          "world": [
-            [
-              24.12,
-              1.7,
-              38.5
-            ],
-            [
-              24.81,
-              1.7,
-              38.5
-            ],
-            [
-              25.5,
-              1.7,
-              38.5
-            ],
-            [
-              26.19,
-              1.7,
-              38.5
-            ],
-            [
-              26.88,
-              1.7,
-              38.5
-            ]
-          ],
+          "wall": null,
+          "wall_side": "",
+          "wall_normal": [],
+          "rects_uv": [],
+          "world": [],
           "body_m": [
             0.29,
             0.05,
             0.05
           ],
           "body_source": "godot_configured_variants",
-          "housed": true,
-          "reserved": true,
-          "assemble": true,
-          "why": "two cells of standing room in front, walkable and unclaimed"
+          "housed": false,
+          "reserved": false,
+          "assemble": false,
+          "why": "3 wall(s) had 3.05 m free but every one was already hung across: sainsbury-false-perspective-enfilade/north_43_19: overlaps line.readout=none"
         },
         {
           "anchor": "laser_sword",
@@ -352464,7 +352809,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 7.72 m free but every one was already hung across: sainsbury-false-perspective-enfilade/east_14_14: overlaps dgrid"
+          "why": "2 wall(s) had 7.72 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps modulor_man_demo.measure=body"
         },
         {
           "anchor": "mystic_writing_pad",
@@ -352490,7 +352835,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 6.85 m free but every one was already hung across: sainsbury-false-perspective-enfilade/east_14_14: overlaps dgrid"
+          "why": "2 wall(s) had 6.85 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps modulor_man_demo.measure=body"
         },
         {
           "anchor": "draw_dot",
@@ -352625,11 +352970,11 @@
             "winding",
             "both"
           ],
-          "wall": "sainsbury-false-perspective-enfilade/north_20_25",
-          "wall_side": "north",
+          "wall": "sainsbury-false-perspective-enfilade/south_32_25",
+          "wall_side": "south",
           "wall_normal": [
             0,
-            1
+            -1
           ],
           "rects_uv": [
             [
@@ -352661,22 +353006,22 @@
             [
               25.3,
               1.7,
-              20.5
+              32.5
             ],
             [
               26.1,
               1.7,
-              20.5
+              32.5
             ],
             [
               26.9,
               1.7,
-              20.5
+              32.5
             ],
             [
               27.7,
               1.7,
-              20.5
+              32.5
             ]
           ],
           "body_m": [
@@ -352762,7 +353107,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 17.24 m free but every one was already hung across: sainsbury-false-perspective-enfilade/east_14_14: overlaps terminal"
+          "why": "2 wall(s) had 17.24 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps modulor_man_demo.measure=body"
         },
         {
           "anchor": "draw_triangle_faces",
@@ -352823,7 +353168,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 13.20 m free but every one was already hung across: sainsbury-false-perspective-enfilade/east_14_14: overlaps terminal"
+          "why": "2 wall(s) had 13.20 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps modulor_man_demo.measure=body"
         },
         {
           "anchor": "quad_line_puzzle",
@@ -352898,7 +353243,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "4 wall(s) had 3.96 m free but every one was already hung across: sainsbury-false-perspective-enfilade/south_14_14: overlaps modulor_man_demo"
+          "why": "3 wall(s) had 3.96 m free but every one was already hung across: sainsbury-false-perspective-enfilade/north_43_19: overlaps line.readout=numeral"
         },
         {
           "anchor": "tentacle_placer",
@@ -353099,7 +353444,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 6.10 m free but every one was already hung across: sainsbury-false-perspective-enfilade/east_14_14: overlaps dgrid"
+          "why": "2 wall(s) had 6.10 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps modulor_man_demo.measure=body"
         },
         {
           "anchor": "righttriangle",
@@ -353175,7 +353520,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "4 wall(s) had 3.60 m free but every one was already hung across: sainsbury-false-perspective-enfilade/south_14_14: overlaps modulor_man_demo"
+          "why": "3 wall(s) had 3.60 m free but every one was already hung across: sainsbury-false-perspective-enfilade/north_43_19: overlaps line.readout=numeral"
         },
         {
           "anchor": "roughrock",
@@ -353326,7 +353671,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 5.60 m free but every one was already hung across: sainsbury-false-perspective-enfilade/east_14_14: overlaps dgrid"
+          "why": "2 wall(s) had 5.60 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps modulor_man_demo.measure=body"
         },
         {
           "anchor": "prism_block",
@@ -353556,7 +353901,7 @@
           "housed": false,
           "reserved": false,
           "assemble": false,
-          "why": "2 wall(s) had 6.60 m free but every one was already hung across: sainsbury-false-perspective-enfilade/east_14_14: overlaps dgrid"
+          "why": "2 wall(s) had 6.60 m free but every one was already hung across: sainsbury-false-perspective-enfilade/west_28_14: overlaps modulor_man_demo.measure=body"
         },
         {
           "anchor": "code_display",
@@ -353660,6 +354005,30 @@
           "auto_place": false
         },
         {
+          "id": "dna:grabbable_line:grain",
+          "anchor": "grabbable_line",
+          "axis": "grain",
+          "values": [
+            "solid",
+            "split",
+            "quartered",
+            "lattice",
+            "shell"
+          ],
+          "space": "side_gallery",
+          "footprint_xz": [
+            6,
+            4
+          ],
+          "envelope_wdh": [
+            0.29,
+            0.05,
+            0.05
+          ],
+          "why": "3 wall(s) had 3.05 m free but every one was already hung across: sainsbury-false-perspective-enfilade/north_43_19: overlaps line.readout=none",
+          "auto_place": false
+        },
+        {
           "id": "dna:pyramid_edit:constraint",
           "anchor": "pyramid_edit",
           "axis": "constraint",
@@ -353679,7 +354048,7 @@
             0.691,
             0.891
           ],
-          "why": "4 wall(s) had 3.96 m free but every one was already hung across: sainsbury-false-perspective-enfilade/south_14_14: overlaps modulor_man_demo",
+          "why": "3 wall(s) had 3.96 m free but every one was already hung across: sainsbury-false-perspective-enfilade/north_43_19: overlaps line.readout=numeral",
           "auto_place": false
         },
         {
@@ -353726,7 +354095,7 @@
             0.4,
             0.4
           ],
-          "why": "4 wall(s) had 3.60 m free but every one was already hung across: sainsbury-false-perspective-enfilade/south_14_14: overlaps modulor_man_demo",
+          "why": "3 wall(s) had 3.60 m free but every one was already hung across: sainsbury-false-perspective-enfilade/north_43_19: overlaps line.readout=numeral",
           "auto_place": false
         },
         {
@@ -354002,8 +354371,8 @@
       "relational": {
         "anchors": 82,
         "wall_runs_requested": 65,
-        "wall_runs_housed": 8,
-        "dna_spatial_demand": 6,
+        "wall_runs_housed": 7,
+        "dna_spatial_demand": 7,
         "dna_contract_repairs": 3,
         "measured_synthesis_pending": 20
       },
@@ -354012,7 +354381,7 @@
         "h": 58
       },
       "apron": 14,
-      "interior_count": 45,
+      "interior_count": 52,
       "ordered": true,
       "pages": [
         {

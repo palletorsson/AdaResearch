@@ -17113,7 +17113,7 @@
     "configs": {
      "science_screen": {
       "support": "stand",
-      "scan_radius": 8.0
+      "scan_radius": 8
      },
      "CoordinateSystem3M": {
       "floating_point": 1
@@ -17282,7 +17282,7 @@
     },
     "poses": {
      "do_not_cross_barrier": {
-      "rotation": 90
+      "rotation": 0
      },
      "laser_measure": {
       "offset": [
@@ -17339,7 +17339,7 @@
     "configs": {
      "science_screen": {
       "support": "stand",
-      "scan_radius": 8.0
+      "scan_radius": 8
      }
     }
    },
@@ -21744,7 +21744,7 @@
      "configs": {
       "science_screen": {
        "support": "stand",
-       "scan_radius": 8.0
+       "scan_radius": 8
       },
       "CoordinateSystem3M": {
        "floating_point": 1
@@ -21895,7 +21895,7 @@
      },
      "poses": {
       "do_not_cross_barrier": {
-       "rotation": 90
+       "rotation": 0
       },
       "laser_measure": {
        "offset": [
@@ -21908,7 +21908,7 @@
      "configs": {
       "science_screen": {
        "support": "stand",
-       "scan_radius": 8.0
+       "scan_radius": 8
       }
      },
      "locks": {

@@ -11,7 +11,13 @@
      "token": "folding_past",
      "text": "You arrive late. No reboot, always restart.\nThe folding past keeps running.",
      "by": "hand",
-     "place": "foyer"
+     "place": "foyer",
+     "lock": [
+      2,
+      0
+     ],
+     "rotation": 1,
+     "placed_by": "grid"
     },
     {
      "token": "frame_counter_display",
@@ -28,7 +34,12 @@
      "token": "origin",
      "text": "Standing at Vector.ZERO,\n\nPoint zero, * ,\nVector(0,0,0)\nThe root of all vectors.\n\nThe origin, No turning back.",
      "by": "hand",
-     "place": "foyer"
+     "place": "foyer",
+     "lock": [
+      0,
+      0
+     ],
+     "placed_by": "grid"
     },
     {
      "token": "you_are_here",
@@ -89,7 +100,12 @@
      "token": "floating_sphere_field",
      "gap": 1,
      "text": "floating spheres all around me",
-     "by": "hand"
+     "by": "hand",
+     "lock": [
+      5,
+      12
+     ],
+     "placed_by": "grid"
     },
     {
      "token": "grab_sphere_point_snap",
@@ -99,7 +115,29 @@
     {
      "token": "interactive_point_origin_force",
      "text": "“Show me what you can do with those hands”\n\nGrab the ball.",
-     "by": "hand"
+     "by": "hand",
+     "lock": [
+      1,
+      11
+     ],
+     "config": {
+      "mode": "transformation"
+     },
+     "count": 3,
+     "spread": "square",
+     "gap_cells": 1,
+     "placed_by": "grid"
+    },
+    {
+     "token": "lab_room",
+     "by": "grid",
+     "lock": [
+      1,
+      0
+     ],
+     "config": {
+      "mounted_lab_json": "res://commons/labs/point_one.lab.json"
+     }
     }
    ],
    "rooms": 5,
@@ -167,17 +205,36 @@
     {
      "token": "klee_walking_point",
      "text": "A line is a point that went for a walk.",
-     "by": "claude"
+     "by": "claude",
+     "lock": [
+      2,
+      24
+     ],
+     "placed_by": "grid"
     },
     {
      "token": "dgrid",
      "text": "grid lines",
-     "by": "hand"
+     "by": "hand",
+     "lock": [
+      6,
+      26
+     ],
+     "rotation": 90,
+     "config": {
+      "config": "5:5"
+     },
+     "placed_by": "grid"
     },
     {
      "token": "walk_this_line_marking",
      "text": "Walk this line.",
-     "by": "claude"
+     "by": "claude",
+     "lock": [
+      3,
+      6
+     ],
+     "placed_by": "grid"
     },
     {
      "token": "line",
@@ -191,12 +248,28 @@
     {
      "token": "perspective_lines",
      "text": "perspective line",
-     "by": "hand"
+     "by": "hand",
+     "lock": [
+      1,
+      23
+     ],
+     "count": 2,
+     "spread": "x",
+     "gap_cells": 4,
+     "placed_by": "grid"
     },
     {
      "token": "parallel_line_puzzle",
      "text": "parallel line",
-     "by": "hand"
+     "by": "hand",
+     "lock": [
+      4,
+      10
+     ],
+     "config": {
+      "fillhole": "remove"
+     },
+     "placed_by": "grid"
     },
     {
      "token": "laser_sword",
@@ -259,17 +332,39 @@
     {
      "token": "grabbable_line",
      "text": "VR hands — the line in the hand",
-     "by": "claude"
+     "by": "claude",
+     "lock": [
+      2,
+      15
+     ],
+     "placed_by": "grid"
     },
     {
      "token": "line_builder_3d",
      "text": "here it forms a vector in 3d space",
-     "by": "claude"
+     "by": "claude",
+     "lock": [
+      5,
+      4
+     ],
+     "placed_by": "grid"
     },
     {
      "token": "lightrod",
      "text": "A row of light rods is a punctuation mark for space",
-     "by": "draft"
+     "by": "draft",
+     "lock": [
+      1,
+      19
+     ],
+     "rotation": 90,
+     "config": {
+      "config": "4"
+     },
+     "count": 2,
+     "spread": "x",
+     "gap_cells": 4,
+     "placed_by": "grid"
     },
     {
      "token": "scale_lines",
@@ -282,7 +377,12 @@
      "reach": {
       "axis": "z",
       "length": 24
-     }
+     },
+     "lock": [
+      3,
+      23
+     ],
+     "placed_by": "grid"
     },
     {
      "token": "science_screen",
@@ -300,22 +400,92 @@
     {
      "token": "cube_scene",
      "text": "a unit that has never been divided is not proven indivisible",
-     "by": "draft"
+     "by": "draft",
+     "lock": [
+      2,
+      11
+     ],
+     "config": {
+      "group": "plusfillhole"
+     },
+     "count": 5,
+     "spread": "square",
+     "gap_cells": 1,
+     "placed_by": "grid"
     },
     {
      "token": "dark_sphere",
      "text": "some things in a space exist not to be used but to be sensed",
-     "by": "draft"
+     "by": "draft",
+     "lock": [
+      0,
+      0
+     ],
+     "placed_by": "grid"
     },
     {
      "token": "plus_line_puzzle",
      "text": "perpendicularity is defined by the dot product equaling zero",
-     "by": "draft"
+     "by": "draft",
+     "lock": [
+      2,
+      10
+     ],
+     "config": {
+      "plusfillhole": "remove"
+     },
+     "placed_by": "grid"
     },
     {
      "token": "modulor_man_demo",
      "text": "a standard human is not a fact about humans. It is a decision about which ones the building will …",
-     "by": "draft"
+     "by": "draft",
+     "lock": [
+      1,
+      4
+     ],
+     "placed_by": "grid"
+    },
+    {
+     "token": "lab_room",
+     "by": "grid",
+     "lock": [
+      1,
+      0
+     ],
+     "config": {
+      "mounted_lab_json": "res://commons/labs/point_line.lab.json"
+     }
+    },
+    {
+     "token": "floating_sphere_field",
+     "by": "grid",
+     "lock": [
+      3,
+      13
+     ],
+     "config": {
+      "bounds": "4,3,14"
+     }
+    },
+    {
+     "token": "fontana_puncture",
+     "by": "grid",
+     "lock": [
+      1,
+      21
+     ]
+    },
+    {
+     "token": "synthesis_stand",
+     "by": "grid",
+     "lock": [
+      4,
+      23
+     ],
+     "config": {
+      "subject": "dark_sphere#mode:hero"
+     }
     }
    ],
    "rooms": 6,
@@ -330,12 +500,54 @@
     {
      "token": "mystic_writing_pad",
      "text": "there is no origin of a trace",
-     "by": "hand"
+     "by": "hand",
+     "lock": [
+      4,
+      5
+     ],
+     "rotation": 180,
+     "placed_by": "grid"
     },
     {
      "token": "draw_dot",
      "text": "all life is encoded — that is enough",
-     "by": "hand"
+     "by": "hand",
+     "lock": [
+      3,
+      8
+     ],
+     "placed_by": "grid"
+    },
+    {
+     "token": "lab_room",
+     "by": "grid",
+     "lock": [
+      0,
+      0
+     ],
+     "config": {
+      "mounted_lab_json": "res://commons/labs/trace.lab.json"
+     }
+    },
+    {
+     "token": "floating_sphere_field",
+     "by": "grid",
+     "lock": [
+      3,
+      7
+     ],
+     "config": {
+      "bounds": "4,3,10"
+     }
+    },
+    {
+     "token": "science_screen",
+     "by": "grid",
+     "lock": [
+      2,
+      12
+     ],
+     "rotation": 180
     }
    ],
    "hero": "mystic_writing_pad",
@@ -349,17 +561,68 @@
     {
      "token": "room_grammar",
      "text": "space filling",
-     "by": "hand"
+     "by": "hand",
+     "lock": [
+      7,
+      13
+     ],
+     "placed_by": "grid"
     },
     {
      "token": "player_trace",
      "text": "the trace, gridded",
-     "by": "claude"
+     "by": "claude",
+     "lock": [
+      0,
+      0
+     ],
+     "placed_by": "grid"
     },
     {
      "token": "grid_lines",
      "text": "grid beauty — slave to the rhythm",
-     "by": "hand"
+     "by": "hand",
+     "lock": [
+      4,
+      3
+     ],
+     "placed_by": "grid"
+    },
+    {
+     "token": "floating_sphere_field",
+     "by": "grid",
+     "lock": [
+      4,
+      7
+     ],
+     "config": {
+      "bounds": "5,3,8"
+     }
+    },
+    {
+     "token": "grab_sphere_point_snap",
+     "by": "grid",
+     "lock": [
+      2,
+      8
+     ],
+     "support_m": 1.0
+    },
+    {
+     "token": "ConeTwistBag",
+     "by": "grid",
+     "lock": [
+      0,
+      9
+     ]
+    },
+    {
+     "token": "ConnectedTriangles",
+     "by": "grid",
+     "lock": [
+      6,
+      10
+     ]
     }
    ],
    "hero": "player_trace"
@@ -376,57 +639,180 @@
     {
      "token": "parasol_triangle",
      "text": "everything is made of triangles",
-     "by": "claude"
+     "by": "claude",
+     "lock": [
+      5,
+      6
+     ],
+     "rotation": 90,
+     "placed_by": "grid"
     },
     {
      "token": "triangle_line_puzzle",
      "text": "three lines, one triangle",
-     "by": "claude"
+     "by": "claude",
+     "lock": [
+      3,
+      7
+     ],
+     "rotation": 90,
+     "placed_by": "grid"
     },
     {
      "token": "catalyst_vent",
      "text": "the vent is not malicious -- it is the biome leaking",
-     "by": "draft"
+     "by": "draft",
+     "lock": [
+      0,
+      8
+     ],
+     "config": {
+      "emit_interval_s": "2.5#wave_size:3#start_delay_s:5.0#sequence:auto"
+     },
+     "placed_by": "grid"
     },
     {
      "token": "triangleprofiles",
      "text": "triangles, profiled",
-     "by": "claude"
+     "by": "claude",
+     "lock": [
+      2,
+      10
+     ],
+     "placed_by": "grid"
     },
     {
      "token": "folded_strip",
      "text": "the fold",
-     "by": "hand"
+     "by": "hand",
+     "lock": [
+      5,
+      12
+     ],
+     "rotation": 270,
+     "placed_by": "grid"
     },
     {
      "token": "draw_triangle_faces",
      "text": "faces are triangles",
-     "by": "claude"
+     "by": "claude",
+     "lock": [
+      1,
+      13
+     ],
+     "support_m": 1.0,
+     "rotation": 90,
+     "placed_by": "grid"
     },
     {
      "token": "triangle",
      "text": "everything is made of triangles",
-     "by": "hand"
+     "by": "hand",
+     "lock": [
+      2,
+      14
+     ],
+     "support_m": 1.0,
+     "rotation": 90,
+     "placed_by": "grid"
     },
     {
      "token": "pythagorean_triangle_angles",
      "text": "the triangle measures",
-     "by": "claude"
+     "by": "claude",
+     "lock": [
+      4,
+      14
+     ],
+     "support_m": 1.0,
+     "rotation": 90,
+     "placed_by": "grid"
     },
     {
      "token": "quad",
      "text": "the quad — the simplest mesh",
-     "by": "hand"
+     "by": "hand",
+     "lock": [
+      6,
+      15
+     ],
+     "support_m": 1.0,
+     "rotation": 90,
+     "placed_by": "grid"
     },
     {
      "token": "interactivetriangle",
      "text": "the triangle, in the hand",
-     "by": "claude"
+     "by": "claude",
+     "lock": [
+      0,
+      16
+     ],
+     "support_m": 1.0,
+     "rotation": 180,
+     "placed_by": "grid"
     },
     {
      "token": "quad_line_puzzle",
      "text": "four lines, one quad",
-     "by": "claude"
+     "by": "claude",
+     "lock": [
+      3,
+      17
+     ],
+     "rotation": 90,
+     "placed_by": "grid"
+    },
+    {
+     "token": "lab_room",
+     "by": "grid",
+     "lock": [
+      0,
+      0
+     ],
+     "config": {
+      "mounted_lab_json": "res://commons/labs/trace.lab.json"
+     }
+    },
+    {
+     "token": "catalyst_prompter_box",
+     "by": "grid",
+     "lock": [
+      2,
+      1
+     ],
+     "config": {
+      "emergence": "hatch#sequence:auto#lease_s:45"
+     }
+    },
+    {
+     "token": "dark_sphere",
+     "by": "grid",
+     "lock": [
+      0,
+      10
+     ]
+    },
+    {
+     "token": "floating_sphere_field",
+     "by": "grid",
+     "lock": [
+      3,
+      11
+     ],
+     "config": {
+      "bounds": "4,3,12"
+     }
+    },
+    {
+     "token": "science_screen",
+     "by": "grid",
+     "lock": [
+      0,
+      14
+     ],
+     "support_m": 1.0,
+     "rotation": 90
     }
    ],
    "rooms": 8,
@@ -471,32 +857,99 @@
     {
      "token": "grab_trihedron",
      "text": "three faces in the hand",
-     "by": "claude"
+     "by": "claude",
+     "lock": [
+      2,
+      0
+     ],
+     "rotation": 90,
+     "placed_by": "grid"
     },
     {
      "token": "path_game_controller",
      "text": "a game is two truths and a verdict — can you still cross",
-     "by": "draft"
+     "by": "draft",
+     "lock": [
+      4,
+      0
+     ],
+     "placed_by": "grid"
     },
     {
      "token": "path_watchdog",
      "text": "a level is solvable until someone proves it isn't",
-     "by": "draft"
+     "by": "draft",
+     "lock": [
+      4,
+      1
+     ],
+     "placed_by": "grid"
     },
     {
      "token": "becoming_catalyst",
      "text": "interactive cubes — becoming",
-     "by": "claude"
+     "by": "claude",
+     "lock": [
+      3,
+      8
+     ],
+     "placed_by": "grid"
     },
     {
      "token": "pyramid_edit",
      "text": "the pyramid mesh",
-     "by": "hand"
+     "by": "hand",
+     "lock": [
+      2,
+      9
+     ],
+     "placed_by": "grid"
     },
     {
      "token": "tentacle_placer",
      "text": "the tentacle is the lab's gesture that primitives are FETCHED",
-     "by": "draft"
+     "by": "draft",
+     "lock": [
+      3,
+      9
+     ],
+     "config": {
+      "place_positions": "-1.5,0,0;0,0,0;1.5,0,0#sky_height:7.0#travel_speed:0.6#dwell_seconds:1.5#pyramid_size:1.0#pyramid_height:-0.5#debug_log:true"
+     },
+     "placed_by": "grid"
+    },
+    {
+     "token": "lab_room",
+     "by": "grid",
+     "lock": [
+      0,
+      2
+     ],
+     "config": {
+      "mounted_lab_json": "res://commons/labs/trace.lab.json"
+     }
+    },
+    {
+     "token": "cube_scene",
+     "by": "grid",
+     "lock": [
+      2,
+      8
+     ],
+     "config": {
+      "group": "fillhole"
+     }
+    },
+    {
+     "token": "interactive_point_origin_force",
+     "by": "grid",
+     "lock": [
+      4,
+      8
+     ],
+     "config": {
+      "mode": "transformation"
+     }
     }
    ],
    "hero": "grab_trihedron"
@@ -515,7 +968,47 @@
     {
      "token": "polyhedron_nets_cube",
      "text": "the fold — a cube is a net",
-     "by": "claude"
+     "by": "claude",
+     "lock": [
+      3,
+      10
+     ],
+     "support_m": 1.0,
+     "config": {
+      "loop_fold": "true"
+     },
+     "placed_by": "grid"
+    },
+    {
+     "token": "dark_sphere",
+     "by": "grid",
+     "lock": [
+      0,
+      0
+     ]
+    },
+    {
+     "token": "science_screen",
+     "by": "grid",
+     "lock": [
+      5,
+      6
+     ],
+     "rotation": 180,
+     "config": {
+      "mode": "net"
+     }
+    },
+    {
+     "token": "floating_sphere_field",
+     "by": "grid",
+     "lock": [
+      3,
+      7
+     ],
+     "config": {
+      "bounds": "4,3,8"
+     }
     }
    ],
    "hero": "animatedcubebuilder",
@@ -529,7 +1022,46 @@
     {
      "token": "catalyst_target",
      "text": "primitives — and so on",
-     "by": "claude"
+     "by": "claude",
+     "lock": [
+      1,
+      2
+     ],
+     "placed_by": "grid"
+    },
+    {
+     "token": "catalyst_vent",
+     "by": "grid",
+     "lock": [
+      9,
+      1
+     ],
+     "config": {
+      "emit_interval_s": "3.0#wave_size:3#start_delay_s:5.0#initial_state:foe"
+     }
+    },
+    {
+     "token": "becoming_catalyst",
+     "by": "grid",
+     "lock": [
+      7,
+      3
+     ],
+     "config": {
+      "start_mode": "primitives"
+     }
+    },
+    {
+     "token": "science_screen",
+     "by": "grid",
+     "lock": [
+      3,
+      5
+     ],
+     "rotation": 180,
+     "config": {
+      "mode": "point"
+     }
     }
    ],
    "hero": "catalyst_target",
@@ -542,87 +1074,208 @@
     {
      "token": "sphere",
      "text": "the point, grown in every direction — and still not pi",
-     "by": "claude"
+     "by": "claude",
+     "lock": [
+      2,
+      0
+     ],
+     "placed_by": "grid"
     },
     {
      "token": "library_rack",
      "text": "a library is not the objects — it is the act of organizing them so they can be found",
-     "by": "draft"
+     "by": "draft",
+     "lock": [
+      8,
+      22
+     ],
+     "config": {
+      "collection": "primitives#layout:rack_torus.json"
+     },
+     "placed_by": "grid"
     },
     {
      "token": "diamonds",
      "text": "complex regular patterns emerge from simple repeated rules",
-     "by": "draft"
+     "by": "draft",
+     "lock": [
+      4,
+      25
+     ],
+     "placed_by": "grid"
     },
     {
      "token": "platonic_grabbables",
      "text": "five solids, and the taxonomy ends. the rest is ignorance",
-     "by": "claude"
+     "by": "claude",
+     "lock": [
+      3,
+      4
+     ],
+     "support_m": 1.0,
+     "placed_by": "grid"
     },
     {
      "token": "plus",
      "text": "symmetry is a property of the transformation group that leaves a shape invariant",
-     "by": "draft"
+     "by": "draft",
+     "lock": [
+      1,
+      25
+     ],
+     "count": 2,
+     "spread": "x",
+     "gap_cells": 6,
+     "placed_by": "grid"
     },
     {
      "token": "grab_octahedron",
      "text": "the octahedron has more symmetry than it first appears",
-     "by": "draft"
+     "by": "draft",
+     "lock": [
+      2,
+      17
+     ],
+     "support_m": 1.0,
+     "count": 2,
+     "spread": "x",
+     "gap_cells": 4,
+     "placed_by": "grid"
     },
     {
      "token": "sphere_mid",
      "text": "resolution is a budget decision — there is no correct polygon count",
-     "by": "draft"
+     "by": "draft",
+     "lock": [
+      3,
+      13
+     ],
+     "count": 2,
+     "spread": "x",
+     "gap_cells": 2,
+     "placed_by": "grid"
     },
     {
      "token": "star_primitive",
      "text": "a star is not drawn — it is a specific list of vertices and the faces that connect them",
-     "by": "draft"
+     "by": "draft",
+     "lock": [
+      7,
+      11
+     ],
+     "support_m": 1.0,
+     "placed_by": "grid"
     },
     {
      "token": "lshape",
      "text": "non-convex shapes require explicit geometry at re-entrant corners",
-     "by": "draft"
+     "by": "draft",
+     "lock": [
+      3,
+      20
+     ],
+     "count": 2,
+     "spread": "x",
+     "gap_cells": 2,
+     "placed_by": "grid"
     },
     {
      "token": "hole_with_cones",
      "text": "a hole is not a thing — it is held by what is around it",
-     "by": "claude"
+     "by": "claude",
+     "lock": [
+      1,
+      11
+     ],
+     "rotation": 30,
+     "placed_by": "grid"
     },
     {
      "token": "truncatedtetrahedron",
      "text": "a solid cut: what the taxonomy does to what it cannot hold",
-     "by": "claude"
+     "by": "claude",
+     "lock": [
+      7,
+      13
+     ],
+     "support_m": 1.0,
+     "placed_by": "grid"
     },
     {
      "token": "sphere_high",
      "text": "there is no smooth sphere in real-time 3D — only denser approximations approaching one",
-     "by": "draft"
+     "by": "draft",
+     "lock": [
+      3,
+      11
+     ],
+     "support_m": 1.0,
+     "count": 2,
+     "spread": "x",
+     "gap_cells": 2,
+     "placed_by": "grid"
     },
     {
      "token": "righttriangle",
      "text": "the right angle is the basis of all rectangular coordinate systems",
-     "by": "draft"
+     "by": "draft",
+     "lock": [
+      1,
+      13
+     ],
+     "support_m": 1.0,
+     "placed_by": "grid"
     },
     {
      "token": "sphere_low",
      "text": "the low-poly sphere is more honest than the high-poly one",
-     "by": "draft"
+     "by": "draft",
+     "lock": [
+      3,
+      15
+     ],
+     "count": 2,
+     "spread": "x",
+     "gap_cells": 2,
+     "placed_by": "grid"
     },
     {
      "token": "capsule",
      "text": "a capsule is a cylinder that had to be capped so nothing would be sharp",
-     "by": "draft"
+     "by": "draft",
+     "lock": [
+      7,
+      15
+     ],
+     "support_m": 1.0,
+     "placed_by": "grid"
     },
     {
      "token": "torus_radials_rings",
      "text": "the torus is topologically distinct from the sphere",
-     "by": "draft"
+     "by": "draft",
+     "lock": [
+      0,
+      23
+     ],
+     "config": {
+      "config": "8:4"
+     },
+     "count": 2,
+     "spread": "x",
+     "gap_cells": 8,
+     "placed_by": "grid"
     },
     {
      "token": "roughrock",
      "text": "nature's irregularity is not random — it is deterministic noise that we lack the seed to …",
-     "by": "draft"
+     "by": "draft",
+     "lock": [
+      1,
+      15
+     ],
+     "support_m": 1.0,
+     "placed_by": "grid"
     },
     {
      "token": "snap_octahedron_puzzle",
@@ -650,6 +1303,33 @@
       11,
       25
      ]
+    },
+    {
+     "token": "dark_sphere",
+     "by": "grid",
+     "lock": [
+      0,
+      0
+     ]
+    },
+    {
+     "token": "cube_scene",
+     "by": "grid",
+     "lock": [
+      1,
+      0
+     ]
+    },
+    {
+     "token": "floating_sphere_field",
+     "by": "grid",
+     "lock": [
+      4,
+      13
+     ],
+     "config": {
+      "bounds": "5,3,14"
+     }
     }
    ],
    "hero": "righttriangle",
@@ -662,12 +1342,49 @@
     {
      "token": "achilles_tortoise",
      "text": "Achilles and the tortoise: the endlessness of pi in a footrace",
-     "by": "claude"
+     "by": "claude",
+     "lock": [
+      5,
+      5
+     ],
+     "placed_by": "grid"
     },
     {
      "token": "combine_portals",
      "text": "a portal: the edge, walked through",
-     "by": "claude"
+     "by": "claude",
+     "lock": [
+      3,
+      4
+     ],
+     "placed_by": "grid"
+    },
+    {
+     "token": "dark_sphere",
+     "by": "grid",
+     "lock": [
+      0,
+      0
+     ]
+    },
+    {
+     "token": "capsule",
+     "by": "grid",
+     "lock": [
+      5,
+      2
+     ]
+    },
+    {
+     "token": "floating_sphere_field",
+     "by": "grid",
+     "lock": [
+      3,
+      17
+     ],
+     "config": {
+      "bounds": "4,3,18"
+     }
     }
    ],
    "hero": "achilles_tortoise"
@@ -679,37 +1396,122 @@
     {
      "token": "durer_scene",
      "text": "Dürer's polyhedron — the solid no taxonomy names, and the angel who keeps it",
-     "by": "claude"
+     "by": "claude",
+     "lock": [
+      3,
+      0
+     ],
+     "rotation": 180,
+     "placed_by": "grid"
     },
     {
      "token": "snap_pyramid_puzzle",
      "text": "the pyramid, snapped — held by the grid",
-     "by": "claude"
+     "by": "claude",
+     "lock": [
+      2,
+      1
+     ],
+     "support_m": 1.0,
+     "rotation": 180,
+     "placed_by": "grid"
     },
     {
      "token": "code_display",
      "text": "A tutorial is a placement-of-words. The library holds the words",
-     "by": "draft"
+     "by": "draft",
+     "lock": [
+      2,
+      2
+     ],
+     "support_m": 1.0,
+     "rotation": 180,
+     "config": {
+      "tutorial": "melencolia_axioms"
+     },
+     "placed_by": "grid"
     },
     {
      "token": "pyramid",
      "text": "the pyramid: the triangle stood up, the first solid held",
-     "by": "claude"
+     "by": "claude",
+     "lock": [
+      3,
+      3
+     ],
+     "support_m": 1.0,
+     "placed_by": "grid"
     },
     {
      "token": "bigframe",
      "text": "the frame: where the picture stops, and the trace does not",
-     "by": "claude"
+     "by": "claude",
+     "lock": [
+      4,
+      3
+     ],
+     "support_m": 1.0,
+     "rotation": 90,
+     "placed_by": "grid"
     },
     {
      "token": "diamondtoruscollection",
      "text": "a torus is a circle of circles — its symmetry group allows equal radial distribution of any …",
-     "by": "draft"
+     "by": "draft",
+     "lock": [
+      2,
+      4
+     ],
+     "support_m": 1.0,
+     "placed_by": "grid"
     },
     {
      "token": "pyramidlong",
      "text": "proportion is a dimension of meaning — the same topology at different aspect ratios tells different …",
-     "by": "draft"
+     "by": "draft",
+     "lock": [
+      3,
+      7
+     ],
+     "support_m": 1.0,
+     "placed_by": "grid"
+    },
+    {
+     "token": "prism_block",
+     "by": "grid",
+     "lock": [
+      2,
+      0
+     ],
+     "rotation": 90
+    },
+    {
+     "token": "dark_sphere",
+     "by": "grid",
+     "lock": [
+      2,
+      3
+     ],
+     "support_m": 1.0
+    },
+    {
+     "token": "floating_sphere_field",
+     "by": "grid",
+     "lock": [
+      2,
+      7
+     ],
+     "config": {
+      "bounds": "4,3,8"
+     }
+    },
+    {
+     "token": "cube_scene",
+     "by": "grid",
+     "lock": [
+      4,
+      7
+     ]
     }
    ],
    "hero": "durer_scene",

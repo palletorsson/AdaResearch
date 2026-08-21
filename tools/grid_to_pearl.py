@@ -185,13 +185,160 @@ def plan_rooms():
     return out
 
 
+def translate_pearl(mapdoc):
+    """One map -> grid lines, token-unique (the trunk keys locks/supports/
+    counts BY TOKEN per pearl, so a token gets exactly one line).
+
+    - one body               -> {token, lock, support_m?, rotation?, config?}
+    - one clean run          -> the COLLECTION: {token, count, spread, gap_cells, lock}
+    - scattered duplicates   -> RELAXED: one count line, spread "square" — the
+                                constellation partially breathes; reported.
+    Structure stays behind in v1: the museum's hall is the bed, the grid
+    supplies the constellation. A "2" under the first body -> support_m 1.0.
+    """
+    L = mapdoc.get("layers", {})
+    structure = L.get("structure", [])
+    plinth_cells = set()
+    for z, row in enumerate(structure):
+        for x, c in enumerate(row):
+            if str(c).strip() == "2":
+                plinth_cells.add((x, z))
+    bodies = []
+    for z, row in enumerate(L.get("interactables", [])):
+        for x, c in enumerate(row):
+            t = parse_token(str(c))
+            if t is None or t["flagged"]:
+                continue
+            t["x"], t["z"] = x, z
+            t["plinth"] = (x, z) in plinth_cells
+            bodies.append(t)
+
+    by_token = {}
+    for b in bodies:
+        by_token.setdefault(b["token"], []).append(b)
+
+    lines, relaxed = [], []
+    for tok in sorted(by_token, key=lambda t: (by_token[t][0]["z"], by_token[t][0]["x"])):
+        group = by_token[tok]
+        first = group[0]
+        ln = {"token": tok, "by": "grid", "lock": [first["x"], first["z"]]}
+        if first["plinth"]:
+            ln["support_m"] = 1.0
+        try:
+            rot = int(float(first["rot"])) if first["rot"] else 0
+        except ValueError:
+            rot = 0
+        if rot:
+            ln["rotation"] = rot
+        if first["config"]:
+            raw = None
+            # re-read the raw cell text for the attachment
+            for z, row in enumerate(L.get("interactables", [])):
+                for x, c in enumerate(row):
+                    if x == first["x"] and z == first["z"]:
+                        raw = str(c).strip()
+            if raw and "#" in raw:
+                att = raw.split("#", 1)[1]
+                k, _, v = att.partition(":")
+                ln["config"] = {k: (v if v != "" else True)}
+        if len(group) > 1:
+            xs = sorted(set(b["x"] for b in group))
+            zs = sorted(set(b["z"] for b in group))
+            run_axis = ""
+            if len(zs) == 1 and len(xs) == len(group):
+                gaps = {xs[i + 1] - xs[i] for i in range(len(xs) - 1)}
+                if len(gaps) == 1:
+                    run_axis, gap = "x", gaps.pop()
+            if not run_axis and len(xs) == 1 and len(zs) == len(group):
+                gaps = {zs[i + 1] - zs[i] for i in range(len(zs) - 1)}
+                if len(gaps) == 1:
+                    run_axis, gap = "z", gaps.pop()
+            if run_axis:
+                ln["count"] = len(group)
+                ln["spread"] = run_axis
+                ln["gap_cells"] = gap
+            else:
+                ln["count"] = len(group)
+                ln["spread"] = "square"
+                ln["gap_cells"] = 1
+                relaxed.append("%s x%d" % (tok, len(group)))
+        lines.append(ln)
+    return lines, relaxed
+
+
+GRID_POSE_KEYS = ("lock", "support_m", "rotation", "config", "count", "spread", "gap_cells")
+
+
+def merge_into_pearl(pl, grid_lines):
+    """The merge discipline: hand lines are never removed and never lose a
+    field they already carry. A hand line naming the same token is ENRICHED
+    with the grid's pose (absent fields only) and stamped placed_by:"grid" so
+    re-runs may keep updating those fields until a hand deletes the stamp.
+    Pure by:"grid" lines are replaced wholesale each run; tokens gone from the
+    map lose their by:"grid" line. Returns (added, enriched, removed)."""
+    old = pl.get("lines", [])
+    kept = [ln for ln in old if ln.get("by") != "grid"]
+    removed = len(old) - len(kept)
+    by_tok = {ln.get("token"): ln for ln in kept if ln.get("token")}
+    added = enriched = 0
+    out = list(kept)
+    for g in grid_lines:
+        have = by_tok.get(g["token"])
+        if have is not None:
+            grid_owns = have.get("placed_by") == "grid" or not any(k in have for k in GRID_POSE_KEYS)
+            if grid_owns:
+                for k in GRID_POSE_KEYS:
+                    if k in g:
+                        have[k] = g[k]
+                    elif have.get("placed_by") == "grid" and k in have:
+                        del have[k]
+                have["placed_by"] = "grid"
+                enriched += 1
+        else:
+            out.append(g)
+            added += 1
+    pl["lines"] = out
+    return added, enriched, removed
+
+
+def write_chapter(chapter):
+    bp = BOOK / ("%s.json" % chapter)
+    book = json.loads(bp.read_text(encoding="utf-8"))
+    report = []
+    for pl in book.get("pearls", []):
+        if pl.get("drop"):
+            continue
+        mp = pl.get("map", "")
+        doc = load_map(mp) if mp else None
+        if doc is None:
+            report.append("  %-26s SKIP (no map %s)" % (pl.get("pearl"), mp))
+            continue
+        grid_lines, relaxed = translate_pearl(doc)
+        added, enriched, removed = merge_into_pearl(pl, grid_lines)
+        report.append("  %-26s %2d grid line(s): +%d new · %d enrich hand · %d old replaced%s" % (
+            pl.get("pearl"), len(grid_lines), added, enriched, removed,
+            ("  RELAXED: " + ", ".join(relaxed)) if relaxed else ""))
+    bp.write_text(json.dumps(book, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
+    return report
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry", action="store_true")
+    ap.add_argument("--write", action="store_true")
     ap.add_argument("--chapter", default="")
     args = ap.parse_args()
+    if args.write:
+        if not args.chapter:
+            print("write mode wants one chapter at a time: --write --chapter=primitives")
+            return 2
+        for line in write_chapter(args.chapter):
+            print(line)
+        print("written -> %s" % (BOOK / (args.chapter + ".json")).relative_to(REPO))
+        print("next: python tools/build_trunk_pearls.py --node %s && python tools/spine_run.py --sequence %s --write-plan" % (args.chapter, args.chapter))
+        return 0
     if not args.dry:
-        print("only --dry exists so far — the write mode comes after the report is read")
+        print("--dry measures, --write --chapter=X translates one chapter")
         return 2
 
     rooms = plan_rooms()
