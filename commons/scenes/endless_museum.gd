@@ -336,6 +336,7 @@ var _prev_w: int = -1             # width of the previous segment's tile (lobby 
 var _first_key: String = ""       # --em-first=<key> rotates the dealing order
 var _first_chapter: String = ""   # --em-chapter=<seq> (or ada_run/em_control.json first_chapter): deal this CHAPTER first
 var _grid_pack: bool = false      # em_control grid_pack: halls are TRANSPLANTED from their grid maps — no dealer, no guests
+var _pack_report: Dictionary = {} # chapter|pearl -> the transplant's ledger (grid -> target -> final per body), for /transplant
 # menu launches have no flags; this file speaks for them. A VAR, not a const:
 # a probe injects its own path here (inst.set) so a test run never writes the
 # file the user's LIVE session is reading — one morning of shared-file toggles
@@ -4853,11 +4854,14 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 	var slid := 0
 	var left := 0
 	var plinth_n := 0
+	var ledger: Array = []
 	for b_v in bodies:
 		var b: Dictionary = b_v
 		var lv: Variant = _live.get(b["token"])
 		if not (lv is Dictionary):
 			left += 1
+			ledger.append({"token": b["token"], "grid": [b["gx"], b["gz"]], "target": null,
+				"final": null, "rings": 0, "why": "no living scene", "plinth": bool(b["plinth"])})
 			print("[em-pack]   %s has no living scene — left behind" % b["token"])
 			continue
 		var scene := String((lv as Dictionary).get("scene", ""))
@@ -4886,16 +4890,37 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 						slid += 1
 						print("[em-pack]   %s slid %d ring(s) off grid [%d,%d] — %s" % [
 							b["token"], ring, b["gx"], b["gz"], first_refusal])
+					ledger.append({"token": b["token"], "grid": [b["gx"], b["gz"]],
+						"target": [base_x, base_z], "final": [int(cell["x"]), int(cell["y"])],
+						"rings": ring, "why": first_refusal if ring > 0 else "",
+						"plinth": bool(b["plinth"])})
 					done = true
 					break
 				elif first_refusal == "":
 					first_refusal = _stamp_refusal
 		if not done:
 			left += 1
+			ledger.append({"token": b["token"], "grid": [b["gx"], b["gz"]],
+				"target": [base_x, base_z], "final": null, "rings": 7,
+				"why": first_refusal, "plinth": bool(b["plinth"])})
 			print("[em-pack]   %s found no floor within 6 rings of [%d,%d] — %s" % [
 				b["token"], base_x, base_z, first_refusal])
 	print("[em-pack] %s · %s <- %s: %d verbatim + %d slid of %d, %d left behind, %d plinth(s)" % [
 		chapter, entry.get("pearl", ""), map_name, placed - slid, slid, bodies.size(), left, plinth_n])
+	# THE LEDGER (2026-08-21, Palle: "a page with the grid of each step") —
+	# what only the transplant knows: grid cell -> centred target -> solved
+	# final, per body, with the slide's ring count and the refusal that
+	# caused it. /transplant reads this beside map_data.json (step 1) and
+	# em_built.json (the hall floor) to draw the four stages side by side.
+	_pack_report["%s|%s" % [chapter, String(entry.get("pearl", ""))]] = {
+		"chapter": chapter, "pearl": String(entry.get("pearl", "")), "map": map_name,
+		"w": w, "h": h, "vestibule": VESTIBULE_H, "offx": offx, "offz": offz,
+		"bodies": ledger}
+	var pf := FileAccess.open("res://ada_run/em_pack_report.json", FileAccess.WRITE)
+	if pf != null:
+		pf.store_string(JSON.stringify({"_readme": "the transplant's ledger, one entry per packed hall: grid -> target -> final per body. Written by _transplant_from_map; read by /transplant.",
+			"halls": _pack_report}, " ") + "\n")
+		pf.close()
 	return {"pearl": String(entry.get("pearl", "")), "placed": placed, "packed": true,
 		"offered": bodies.size(), "interior": placed}
 

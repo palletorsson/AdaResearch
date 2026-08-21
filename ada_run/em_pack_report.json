@@ -1,0 +1,1685 @@
+{
+ "_readme": "the transplant's ledger, one entry per packed hall: grid -> target -> final per body. Written by _transplant_from_map; read by /transplant.",
+ "halls": {
+  "primitives|ignorance": {
+   "bodies": [
+    {
+     "final": [
+      3,
+      6
+     ],
+     "grid": [
+      0,
+      0
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      3,
+      6
+     ],
+     "token": "dark_sphere",
+     "why": ""
+    },
+    {
+     "final": [
+      4,
+      6
+     ],
+     "grid": [
+      1,
+      0
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      4,
+      6
+     ],
+     "token": "cube_scene",
+     "why": ""
+    },
+    {
+     "final": [
+      5,
+      6
+     ],
+     "grid": [
+      2,
+      0
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      5,
+      6
+     ],
+     "token": "sphere",
+     "why": ""
+    },
+    {
+     "final": [
+      6,
+      10
+     ],
+     "grid": [
+      3,
+      4
+     ],
+     "plinth": true,
+     "rings": 0,
+     "target": [
+      6,
+      10
+     ],
+     "token": "platonic_grabbables",
+     "why": ""
+    },
+    {
+     "final": [
+      4,
+      18
+     ],
+     "grid": [
+      1,
+      11
+     ],
+     "plinth": false,
+     "rings": 1,
+     "target": [
+      4,
+      17
+     ],
+     "token": "hole_with_cones",
+     "why": "sealing would sever the walk route"
+    },
+    {
+     "final": [
+      6,
+      17
+     ],
+     "grid": [
+      3,
+      11
+     ],
+     "plinth": true,
+     "rings": 0,
+     "target": [
+      6,
+      17
+     ],
+     "token": "sphere_high",
+     "why": ""
+    },
+    {
+     "final": [
+      8,
+      17
+     ],
+     "grid": [
+      5,
+      11
+     ],
+     "plinth": true,
+     "rings": 0,
+     "target": [
+      8,
+      17
+     ],
+     "token": "sphere_high",
+     "why": ""
+    },
+    {
+     "final": [
+      10,
+      17
+     ],
+     "grid": [
+      7,
+      11
+     ],
+     "plinth": true,
+     "rings": 0,
+     "target": [
+      10,
+      17
+     ],
+     "token": "star_primitive",
+     "why": ""
+    },
+    {
+     "final": [
+      4,
+      19
+     ],
+     "grid": [
+      1,
+      13
+     ],
+     "plinth": true,
+     "rings": 0,
+     "target": [
+      4,
+      19
+     ],
+     "token": "righttriangle",
+     "why": ""
+    },
+    {
+     "final": [
+      6,
+      19
+     ],
+     "grid": [
+      3,
+      13
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      6,
+      19
+     ],
+     "token": "sphere_mid",
+     "why": ""
+    },
+    {
+     "final": [
+      7,
+      19
+     ],
+     "grid": [
+      4,
+      13
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      7,
+      19
+     ],
+     "token": "floating_sphere_field",
+     "why": ""
+    },
+    {
+     "final": [
+      8,
+      19
+     ],
+     "grid": [
+      5,
+      13
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      8,
+      19
+     ],
+     "token": "sphere_mid",
+     "why": ""
+    },
+    {
+     "final": [
+      10,
+      19
+     ],
+     "grid": [
+      7,
+      13
+     ],
+     "plinth": true,
+     "rings": 0,
+     "target": [
+      10,
+      19
+     ],
+     "token": "truncatedtetrahedron",
+     "why": ""
+    },
+    {
+     "final": [
+      4,
+      21
+     ],
+     "grid": [
+      1,
+      15
+     ],
+     "plinth": true,
+     "rings": 0,
+     "target": [
+      4,
+      21
+     ],
+     "token": "roughrock",
+     "why": ""
+    },
+    {
+     "final": [
+      6,
+      21
+     ],
+     "grid": [
+      3,
+      15
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      6,
+      21
+     ],
+     "token": "sphere_low",
+     "why": ""
+    },
+    {
+     "final": [
+      7,
+      21
+     ],
+     "grid": [
+      5,
+      15
+     ],
+     "plinth": false,
+     "rings": 1,
+     "target": [
+      8,
+      21
+     ],
+     "token": "sphere_low",
+     "why": "sealing would sever the walk route"
+    },
+    {
+     "final": [
+      10,
+      21
+     ],
+     "grid": [
+      7,
+      15
+     ],
+     "plinth": true,
+     "rings": 0,
+     "target": [
+      10,
+      21
+     ],
+     "token": "capsule",
+     "why": ""
+    },
+    {
+     "final": [
+      5,
+      23
+     ],
+     "grid": [
+      2,
+      17
+     ],
+     "plinth": true,
+     "rings": 0,
+     "target": [
+      5,
+      23
+     ],
+     "token": "grab_octahedron",
+     "why": ""
+    },
+    {
+     "final": [
+      7,
+      23
+     ],
+     "grid": [
+      4,
+      17
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      7,
+      23
+     ],
+     "token": "snap_octahedron_puzzle",
+     "why": ""
+    },
+    {
+     "final": [
+      9,
+      23
+     ],
+     "grid": [
+      6,
+      17
+     ],
+     "plinth": true,
+     "rings": 0,
+     "target": [
+      9,
+      23
+     ],
+     "token": "grab_octahedron",
+     "why": ""
+    },
+    {
+     "final": [
+      6,
+      26
+     ],
+     "grid": [
+      3,
+      20
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      6,
+      26
+     ],
+     "token": "lshape",
+     "why": ""
+    },
+    {
+     "final": [
+      8,
+      26
+     ],
+     "grid": [
+      5,
+      20
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      8,
+      26
+     ],
+     "token": "lshape",
+     "why": ""
+    },
+    {
+     "final": [
+      3,
+      27
+     ],
+     "grid": [
+      0,
+      21
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      3,
+      27
+     ],
+     "token": "prism_block",
+     "why": ""
+    },
+    {
+     "final": [
+      4,
+      27
+     ],
+     "grid": [
+      1,
+      21
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      4,
+      27
+     ],
+     "token": "prism_block",
+     "why": ""
+    },
+    {
+     "final": [
+      5,
+      27
+     ],
+     "grid": [
+      2,
+      21
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      5,
+      27
+     ],
+     "token": "prism_block",
+     "why": ""
+    },
+    {
+     "final": [
+      6,
+      27
+     ],
+     "grid": [
+      3,
+      21
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      6,
+      27
+     ],
+     "token": "prism_block",
+     "why": ""
+    },
+    {
+     "final": [
+      7,
+      27
+     ],
+     "grid": [
+      5,
+      21
+     ],
+     "plinth": false,
+     "rings": 1,
+     "target": [
+      8,
+      27
+     ],
+     "token": "prism_block",
+     "why": "sealing would sever the walk route"
+    },
+    {
+     "final": [
+      9,
+      28
+     ],
+     "grid": [
+      6,
+      21
+     ],
+     "plinth": false,
+     "rings": 1,
+     "target": [
+      9,
+      27
+     ],
+     "token": "prism_block",
+     "why": "sealing would sever the walk route"
+    },
+    {
+     "final": [
+      10,
+      27
+     ],
+     "grid": [
+      7,
+      21
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      10,
+      27
+     ],
+     "token": "prism_block",
+     "why": ""
+    },
+    {
+     "final": [
+      11,
+      27
+     ],
+     "grid": [
+      8,
+      21
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      11,
+      27
+     ],
+     "token": "prism_block",
+     "why": ""
+    },
+    {
+     "final": [
+      11,
+      28
+     ],
+     "grid": [
+      8,
+      22
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      11,
+      28
+     ],
+     "token": "library_rack",
+     "why": ""
+    },
+    {
+     "final": [
+      3,
+      29
+     ],
+     "grid": [
+      0,
+      23
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      3,
+      29
+     ],
+     "token": "torus_radials_rings",
+     "why": ""
+    },
+    {
+     "final": [
+      5,
+      29
+     ],
+     "grid": [
+      2,
+      23
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      5,
+      29
+     ],
+     "token": "capsule_radials_rings",
+     "why": ""
+    },
+    {
+     "final": [
+      6,
+      29
+     ],
+     "grid": [
+      3,
+      23
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      6,
+      29
+     ],
+     "token": "capsule_radials_rings",
+     "why": ""
+    },
+    {
+     "final": [
+      8,
+      29
+     ],
+     "grid": [
+      5,
+      23
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      8,
+      29
+     ],
+     "token": "capsule_radials_rings",
+     "why": ""
+    },
+    {
+     "final": [
+      9,
+      29
+     ],
+     "grid": [
+      6,
+      23
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      9,
+      29
+     ],
+     "token": "capsule_radials_rings",
+     "why": ""
+    },
+    {
+     "final": [
+      11,
+      29
+     ],
+     "grid": [
+      8,
+      23
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      11,
+      29
+     ],
+     "token": "torus_radials_rings",
+     "why": ""
+    },
+    {
+     "final": [
+      4,
+      31
+     ],
+     "grid": [
+      1,
+      25
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      4,
+      31
+     ],
+     "token": "plus",
+     "why": ""
+    },
+    {
+     "final": [
+      11,
+      31
+     ],
+     "grid": [
+      4,
+      25
+     ],
+     "plinth": false,
+     "rings": 4,
+     "target": [
+      7,
+      31
+     ],
+     "token": "diamonds",
+     "why": "sealing would sever the walk route"
+    },
+    {
+     "final": [
+      10,
+      31
+     ],
+     "grid": [
+      7,
+      25
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      10,
+      31
+     ],
+     "token": "plus",
+     "why": ""
+    }
+   ],
+   "chapter": "primitives",
+   "h": 30,
+   "map": "Primitives_Ignorance",
+   "offx": 3,
+   "offz": 6,
+   "pearl": "ignorance",
+   "vestibule": 4,
+   "w": 15
+  },
+  "primitives|line grid": {
+   "bodies": [
+    {
+     "final": [
+      3,
+      12
+     ],
+     "grid": [
+      0,
+      0
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      3,
+      12
+     ],
+     "token": "player_trace",
+     "why": ""
+    },
+    {
+     "final": [
+      6,
+      15
+     ],
+     "grid": [
+      4,
+      3
+     ],
+     "plinth": false,
+     "rings": 1,
+     "target": [
+      7,
+      15
+     ],
+     "token": "grid_lines",
+     "why": "sealing would sever the walk route"
+    },
+    {
+     "final": [
+      7,
+      19
+     ],
+     "grid": [
+      4,
+      7
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      7,
+      19
+     ],
+     "token": "floating_sphere_field",
+     "why": ""
+    },
+    {
+     "final": [
+      5,
+      20
+     ],
+     "grid": [
+      2,
+      8
+     ],
+     "plinth": true,
+     "rings": 0,
+     "target": [
+      5,
+      20
+     ],
+     "token": "grab_sphere_point_snap",
+     "why": ""
+    },
+    {
+     "final": [
+      5,
+      20
+     ],
+     "grid": [
+      0,
+      9
+     ],
+     "plinth": false,
+     "rings": 2,
+     "target": [
+      3,
+      21
+     ],
+     "token": "ConeTwistBag",
+     "why": "sealing would sever the walk route"
+    },
+    {
+     "final": [
+      12,
+      27
+     ],
+     "grid": [
+      6,
+      10
+     ],
+     "plinth": false,
+     "rings": 5,
+     "target": [
+      9,
+      22
+     ],
+     "token": "ConnectedTriangles",
+     "why": "sealing would sever the walk route"
+    },
+    {
+     "final": [
+      10,
+      25
+     ],
+     "grid": [
+      7,
+      13
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      10,
+      25
+     ],
+     "token": "room_grammar",
+     "why": ""
+    }
+   ],
+   "chapter": "primitives",
+   "h": 30,
+   "map": "Point_Line_Grid",
+   "offx": 3,
+   "offz": 12,
+   "pearl": "line grid",
+   "vestibule": 4,
+   "w": 15
+  },
+  "primitives|point": {
+   "bodies": [
+    {
+     "final": [
+      4,
+      11
+     ],
+     "grid": [
+      0,
+      0
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      4,
+      11
+     ],
+     "token": "origin",
+     "why": ""
+    },
+    {
+     "final": [
+      4,
+      11
+     ],
+     "grid": [
+      1,
+      0
+     ],
+     "plinth": false,
+     "rings": 1,
+     "target": [
+      5,
+      11
+     ],
+     "token": "lab_room",
+     "why": "sealing would sever the walk route"
+    },
+    {
+     "final": [
+      6,
+      11
+     ],
+     "grid": [
+      2,
+      0
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      6,
+      11
+     ],
+     "token": "folding_past",
+     "why": ""
+    },
+    {
+     "final": [
+      4,
+      16
+     ],
+     "grid": [
+      0,
+      5
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      4,
+      16
+     ],
+     "token": "frame_counter_display",
+     "why": ""
+    },
+    {
+     "final": [
+      7,
+      18
+     ],
+     "grid": [
+      3,
+      7
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      7,
+      18
+     ],
+     "token": "you_are_here",
+     "why": ""
+    },
+    {
+     "final": [
+      7,
+      21
+     ],
+     "grid": [
+      3,
+      10
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      7,
+      21
+     ],
+     "token": "fontana_puncture",
+     "why": ""
+    },
+    {
+     "final": [
+      5,
+      22
+     ],
+     "grid": [
+      1,
+      11
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      5,
+      22
+     ],
+     "token": "interactive_point_origin_force",
+     "why": ""
+    },
+    {
+     "final": [
+      6,
+      22
+     ],
+     "grid": [
+      2,
+      11
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      6,
+      22
+     ],
+     "token": "interactive_point_origin_force",
+     "why": ""
+    },
+    {
+     "final": [
+      8,
+      22
+     ],
+     "grid": [
+      4,
+      11
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      8,
+      22
+     ],
+     "token": "interactive_point_origin_force",
+     "why": ""
+    },
+    {
+     "final": [
+      9,
+      23
+     ],
+     "grid": [
+      5,
+      12
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      9,
+      23
+     ],
+     "token": "floating_sphere_field",
+     "why": ""
+    },
+    {
+     "final": [
+      4,
+      27
+     ],
+     "grid": [
+      0,
+      14
+     ],
+     "plinth": false,
+     "rings": 2,
+     "target": [
+      4,
+      25
+     ],
+     "token": "CoordinateSystem3M",
+     "why": "sealing would sever the walk route"
+    }
+   ],
+   "chapter": "primitives",
+   "h": 30,
+   "map": "Point_One",
+   "offx": 4,
+   "offz": 11,
+   "pearl": "point",
+   "vestibule": 4,
+   "w": 15
+  },
+  "primitives|polythedra": {
+   "bodies": [
+    {
+     "final": [
+      7,
+      14
+     ],
+     "grid": [
+      2,
+      0
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      7,
+      14
+     ],
+     "token": "grab_trihedron",
+     "why": ""
+    },
+    {
+     "final": [
+      9,
+      14
+     ],
+     "grid": [
+      4,
+      0
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      9,
+      14
+     ],
+     "token": "path_game_controller",
+     "why": ""
+    },
+    {
+     "final": [
+      9,
+      15
+     ],
+     "grid": [
+      4,
+      1
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      9,
+      15
+     ],
+     "token": "path_watchdog",
+     "why": ""
+    },
+    {
+     "final": [
+      3,
+      16
+     ],
+     "grid": [
+      0,
+      2
+     ],
+     "plinth": false,
+     "rings": 2,
+     "target": [
+      5,
+      16
+     ],
+     "token": "lab_room",
+     "why": "sealing would sever the walk route"
+    },
+    {
+     "final": [
+      7,
+      22
+     ],
+     "grid": [
+      2,
+      8
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      7,
+      22
+     ],
+     "token": "cube_scene",
+     "why": ""
+    },
+    {
+     "final": [
+      7,
+      22
+     ],
+     "grid": [
+      3,
+      8
+     ],
+     "plinth": false,
+     "rings": 1,
+     "target": [
+      8,
+      22
+     ],
+     "token": "becoming_catalyst",
+     "why": "sealing would sever the walk route"
+    },
+    {
+     "final": [
+      9,
+      22
+     ],
+     "grid": [
+      4,
+      8
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      9,
+      22
+     ],
+     "token": "interactive_point_origin_force",
+     "why": ""
+    },
+    {
+     "final": [
+      7,
+      23
+     ],
+     "grid": [
+      2,
+      9
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      7,
+      23
+     ],
+     "token": "pyramid_edit",
+     "why": ""
+    },
+    {
+     "final": [
+      7,
+      23
+     ],
+     "grid": [
+      3,
+      9
+     ],
+     "plinth": false,
+     "rings": 1,
+     "target": [
+      8,
+      23
+     ],
+     "token": "tentacle_placer",
+     "why": "sealing would sever the walk route"
+    }
+   ],
+   "chapter": "primitives",
+   "h": 30,
+   "map": "Primitives_Polythedra",
+   "offx": 5,
+   "offz": 14,
+   "pearl": "polythedra",
+   "vestibule": 4,
+   "w": 15
+  },
+  "primitives|portals": {
+   "bodies": [
+    {
+     "final": [
+      4,
+      10
+     ],
+     "grid": [
+      0,
+      0
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      4,
+      10
+     ],
+     "token": "dark_sphere",
+     "why": ""
+    },
+    {
+     "final": [
+      9,
+      12
+     ],
+     "grid": [
+      5,
+      2
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      9,
+      12
+     ],
+     "token": "capsule",
+     "why": ""
+    },
+    {
+     "final": [
+      7,
+      14
+     ],
+     "grid": [
+      3,
+      4
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      7,
+      14
+     ],
+     "token": "combine_portals",
+     "why": ""
+    },
+    {
+     "final": [
+      9,
+      15
+     ],
+     "grid": [
+      5,
+      5
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      9,
+      15
+     ],
+     "token": "achilles_tortoise",
+     "why": ""
+    },
+    {
+     "final": [
+      7,
+      27
+     ],
+     "grid": [
+      3,
+      17
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      7,
+      27
+     ],
+     "token": "floating_sphere_field",
+     "why": ""
+    }
+   ],
+   "chapter": "primitives",
+   "h": 30,
+   "map": "Primitives_Portals",
+   "offx": 4,
+   "offz": 10,
+   "pearl": "portals",
+   "vestibule": 4,
+   "w": 15
+  },
+  "symmetry|motif": {
+   "bodies": [
+    {
+     "final": [
+      4,
+      19
+     ],
+     "grid": [
+      4,
+      2
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      4,
+      19
+     ],
+     "token": "pattern_tile_4x4",
+     "why": ""
+    },
+    {
+     "final": [
+      7,
+      21
+     ],
+     "grid": [
+      7,
+      4
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      7,
+      21
+     ],
+     "token": "pattern_tile_cube",
+     "why": ""
+    },
+    {
+     "final": [
+      9,
+      22
+     ],
+     "grid": [
+      9,
+      5
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      9,
+      22
+     ],
+     "token": "science_screen",
+     "why": ""
+    },
+    {
+     "final": [
+      3,
+      23
+     ],
+     "grid": [
+      3,
+      6
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      3,
+      23
+     ],
+     "token": "tile_meander_floor",
+     "why": ""
+    }
+   ],
+   "chapter": "symmetry",
+   "h": 36,
+   "map": "Symmetry_Motif",
+   "offx": 0,
+   "offz": 17,
+   "pearl": "motif",
+   "vestibule": 4,
+   "w": 13
+  },
+  "transformation|trans introduction": {
+   "bodies": [
+    {
+     "final": [
+      3,
+      11
+     ],
+     "grid": [
+      0,
+      0
+     ],
+     "plinth": true,
+     "rings": 0,
+     "target": [
+      3,
+      11
+     ],
+     "token": "invariants_demo",
+     "why": ""
+    },
+    {
+     "final": [
+      8,
+      17
+     ],
+     "grid": [
+      5,
+      6
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      8,
+      17
+     ],
+     "token": "matrix_4x4_viewer",
+     "why": ""
+    },
+    {
+     "final": [
+      5,
+      19
+     ],
+     "grid": [
+      2,
+      8
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      5,
+      19
+     ],
+     "token": "homogeneous_coordinates",
+     "why": ""
+    },
+    {
+     "final": [
+      11,
+      19
+     ],
+     "grid": [
+      8,
+      8
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      11,
+      19
+     ],
+     "token": "rotation_gimbal",
+     "why": ""
+    },
+    {
+     "final": [
+      8,
+      21
+     ],
+     "grid": [
+      5,
+      10
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      8,
+      21
+     ],
+     "token": "balance_puzzle",
+     "why": ""
+    },
+    {
+     "final": [
+      5,
+      23
+     ],
+     "grid": [
+      2,
+      12
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      5,
+      23
+     ],
+     "token": "transform_composition",
+     "why": ""
+    },
+    {
+     "final": [
+      8,
+      25
+     ],
+     "grid": [
+      5,
+      14
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      8,
+      25
+     ],
+     "token": "dark_sphere",
+     "why": ""
+    }
+   ],
+   "chapter": "transformation",
+   "h": 30,
+   "map": "Trans_Introduction",
+   "offx": 3,
+   "offz": 11,
+   "pearl": "trans introduction",
+   "vestibule": 4,
+   "w": 15
+  },
+  "transformation|trans rotationspectacle": {
+   "bodies": [
+    {
+     "final": [
+      8,
+      5
+     ],
+     "grid": [
+      3,
+      3
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      8,
+      5
+     ],
+     "token": "boolean_tunnel",
+     "why": ""
+    },
+    {
+     "final": [
+      5,
+      5
+     ],
+     "grid": [
+      0,
+      4
+     ],
+     "plinth": true,
+     "rings": 0,
+     "target": [
+      5,
+      5
+     ],
+     "token": "righttriangle",
+     "why": ""
+    },
+    {
+     "final": [
+      8,
+      5
+     ],
+     "grid": [
+      3,
+      6
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      8,
+      5
+     ],
+     "token": "dark_sphere",
+     "why": ""
+    },
+    {
+     "final": [
+      7,
+      32
+     ],
+     "grid": [
+      2,
+      51
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      7,
+      32
+     ],
+     "token": "pick_up_cube",
+     "why": ""
+    },
+    {
+     "final": [
+      8,
+      32
+     ],
+     "grid": [
+      3,
+      53
+     ],
+     "plinth": false,
+     "rings": 0,
+     "target": [
+      8,
+      32
+     ],
+     "token": "carousel_cake",
+     "why": ""
+    }
+   ],
+   "chapter": "transformation",
+   "h": 30,
+   "map": "Trans_RotationSpectacle",
+   "offx": 5,
+   "offz": -10,
+   "pearl": "trans rotationspectacle",
+   "vestibule": 4,
+   "w": 15
+  }
+ }
+}
