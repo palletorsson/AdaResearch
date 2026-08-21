@@ -43,6 +43,28 @@ def read_json(p):
         return None
 
 
+def load_footprints():
+    """token -> footprint cells (int) from the registry's spatial_needs.
+    Registry files wrap their tokens under a top-level 'artifacts' key."""
+    out = {}
+    for f in (REPO / "commons" / "artifacts" / "registry").glob("*.json"):
+        doc = read_json(f)
+        if not isinstance(doc, dict):
+            continue
+        toks = doc.get("artifacts", doc)
+        if not isinstance(toks, dict):
+            continue
+        for tok, e in toks.items():
+            if isinstance(e, dict):
+                fc = (e.get("spatial_needs") or {}).get("footprint_cells")
+                if fc:
+                    try:
+                        out[str(tok)] = max(1, int(fc))
+                    except (TypeError, ValueError):
+                        pass
+    return out
+
+
 def load_floor_index():
     floors = {}
     for name in ("em_built_desktop.json", "em_built.json"):
@@ -72,15 +94,66 @@ def map_bodies(map_name):
         for x, c in enumerate(row):
             if str(c).strip().lstrip("#@").split(":")[0] == "sp":
                 spawn = (x, z)
-    bodies = []
+    raw = []
     for z, row in enumerate(L.get("interactables", [])):
         for x, c in enumerate(row):
             cell = str(c).strip()
             if not cell or cell.startswith("#"):
                 continue
             tok = cell.split("#")[0].split(":")[0]
-            bodies.append({"token": tok, "gx": x, "gz": z, "plinth": (x, z) in plinths})
+            raw.append({"token": tok, "gx": x, "gz": z, "plinth": (x, z) in plinths})
+    # THE FOLD (Palle: "many the same did not work") — a straight, evenly
+    # spaced run of identical artifacts is ONE bead: the grid's deliberate
+    # ROW kept as a row, dragged as one, stamped later via the count lane.
+    # Dissolving it into loose beads let the spring spread a composition
+    # into mush.
+    bodies = []
+    used = set()
+    by_tok = {}
+    for i, b in enumerate(raw):
+        by_tok.setdefault(b["token"], []).append(i)
+    for tok, idxs in by_tok.items():
+        for axis, other in (("gx", "gz"), ("gz", "gx")):
+            lanes = {}
+            for i in idxs:
+                if i not in used:
+                    lanes.setdefault(raw[i][other], []).append(i)
+            for lane_is in lanes.values():
+                if len(lane_is) < 2:
+                    continue
+                lane_is.sort(key=lambda i: raw[i][axis])
+                run = [lane_is[0]]
+                for i in lane_is[1:]:
+                    gap = raw[i][axis] - raw[run[-1]][axis]
+                    ref = (raw[run[1]][axis] - raw[run[0]][axis]) if len(run) > 1 else gap
+                    if gap == ref:
+                        run.append(i)
+                    else:
+                        if len(run) >= 2:
+                            bodies.append(_fold_run(raw, run, axis))
+                            used.update(run)
+                        run = [i]
+                if len(run) >= 2:
+                    bodies.append(_fold_run(raw, run, axis))
+                    used.update(run)
+    for i, b in enumerate(raw):
+        if i not in used:
+            b["count"] = 1
+            b["spread"] = ""
+            b["gap"] = 1
+            bodies.append(b)
+    bodies.sort(key=lambda b: (b["gz"], b["gx"]))
     return bodies, spawn
+
+
+def _fold_run(raw, run, axis):
+    first = raw[run[0]]
+    last = raw[run[-1]]
+    gap = raw[run[1]][axis] - raw[run[0]][axis] if len(run) > 1 else 1
+    return {"token": first["token"],
+            "gx": (first["gx"] + last["gx"]) / 2.0, "gz": (first["gz"] + last["gz"]) / 2.0,
+            "plinth": first["plinth"], "count": len(run),
+            "spread": "x" if axis == "gx" else "z", "gap": gap}
 
 
 def string_order(bodies, spawn):
@@ -178,7 +251,17 @@ def solve_serpentine(bodies, chain, hall):
     return out
 
 
-def relax(bodies, chain, hall, seed_pos, mesh=False, iters=260):
+def bead_size(b, footprints):
+    """One bead's effective diameter in cells: the registry footprint, or a
+    folded run's extent along its axis."""
+    fp = footprints.get(b["token"], 1)
+    if b.get("count", 1) > 1:
+        return max(fp, 1 + (b["count"] - 1) * b.get("gap", 1) * 0.6)
+    return fp
+
+
+def relax(bodies, chain, hall, seed_pos, footprints=None, mesh=False, iters=260):
+    footprints = footprints or {}
     pos = {i: [float(p[0]) + 0.5, float(p[1]) + 0.5] for i, p in seed_pos.items()}
     pairs = [(chain[k - 1], chain[k],
               max(LEEWAY[0], min(LEEWAY[1], grid_dist(bodies[chain[k - 1]], bodies[chain[k]]))), 0.35)
@@ -201,18 +284,35 @@ def relax(bodies, chain, hall, seed_pos, mesh=False, iters=260):
             force[a][1] += f * dz
             force[b][0] -= f * dx
             force[b][1] -= f * dz
+        radii = {i: 0.5 * max(1.0, bead_size(bodies[i], footprints)) for i in ids}
         for ai in range(len(ids)):
             for bi in range(ai + 1, len(ids)):
                 a, b = ids[ai], ids[bi]
                 dx = pos[b][0] - pos[a][0]
                 dz = pos[b][1] - pos[a][1]
                 d = math.hypot(dx, dz) or 1e-6
-                if d < 1.6:
-                    f = 0.5 * (1.6 - d) / d
+                sep = radii[a] + radii[b] + 0.6
+                if d < sep:
+                    f = 0.5 * (sep - d) / d
                     force[a][0] -= f * dx
                     force[a][1] -= f * dz
                     force[b][0] += f * dx
                     force[b][1] += f * dz
+        # THE COMPOSITION LAW (Palle: "the bigger footprint in the middle and
+        # 1x1s along the walls, mostly in the flow walk corridors"): a big
+        # bead is drawn to the hall's centre axis like a sculpture in a nave;
+        # a lone 1x1 drifts to the nearer wall and lines the corridor.
+        # gently — the first tuning (0.05/0.06) overpowered the string:
+        # distortion tripled and the chain crossed itself. The law shapes
+        # the lateral drift; the necklace still owns the walk.
+        mid = hall.w / 2.0
+        for i in ids:
+            size = bead_size(bodies[i], footprints)
+            if size >= 2.0:
+                force[i][0] += 0.022 * min(size - 1.0, 3.0) * (mid - pos[i][0])
+            elif bodies[i].get("count", 1) == 1:
+                wall_x = 2.2 if pos[i][0] < mid else hall.w - 3.2
+                force[i][0] += 0.025 * (wall_x - pos[i][0])
         for i in ids:
             pos[i][0] = min(max(pos[i][0] + 0.3 * force[i][0], 1.6), hall.w - 2.6)
             pos[i][1] = min(max(pos[i][1] + 0.3 * force[i][1], hall.vest + 1.6), hall.vest + hall.h - 2.6)
@@ -262,6 +362,7 @@ def main():
         print("no em_pack_report.json — boot with grid_pack first (boot_pack_report.gd)")
         return 2
     floors = load_floor_index()
+    footprints = load_footprints()
     out = {}
     for key, meta in sorted(report.get("halls", {}).items()):
         if args.hall and key != args.hall:
@@ -276,8 +377,8 @@ def main():
         serp = solve_serpentine(bodies, chain, hall)
         if serp:
             sols["serpentine"] = serp
-            sols["spring"] = relax(bodies, chain, hall, serp, mesh=False)
-            sols["mesh"] = relax(bodies, chain, hall, serp, mesh=True)
+            sols["spring"] = relax(bodies, chain, hall, serp, footprints=footprints, mesh=False)
+            sols["mesh"] = relax(bodies, chain, hall, serp, footprints=footprints, mesh=True)
         # the rigid baseline: the ledger's own finals, scored on the same terms
         rigid = {}
         tok_seen = {}
@@ -295,6 +396,10 @@ def main():
             entry["strategies"][name] = {
                 "positions": [{"token": bodies[i]["token"], "x": sol[i][0], "z": sol[i][1],
                                "gx": bodies[i]["gx"], "gz": bodies[i]["gz"],
+                               "fp": footprints.get(bodies[i]["token"], 1),
+                               "count": bodies[i].get("count", 1),
+                               "spread": bodies[i].get("spread", ""),
+                               "gap": bodies[i].get("gap", 1),
                                "plinth": bodies[i]["plinth"]} for i in chain if i in sol],
                 "score": score(bodies, chain, hall, sol)}
         # THE HAND (2026-08-21, Palle: "make it editable… add and remove
@@ -331,6 +436,7 @@ def main():
     existing.update(out)
     lab_path.write_text(
         json.dumps({"_readme": "the necklace bake-off: per hall, placement strategies with scores. Written by tools/necklace_lab.py; read by /transplant.",
+                    "footprints": footprints,
                     "halls": existing}, indent=1), encoding="utf-8")
     print("-> ada_run/necklace_lab.json (%d hall(s) refreshed, %d total)" % (len(out), len(existing)))
     return 0

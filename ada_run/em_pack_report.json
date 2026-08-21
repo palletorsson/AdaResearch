@@ -91,7 +91,7 @@
       17
      ],
      "token": "hole_with_cones",
-     "why": "sealing would sever the walk route"
+     "why": "baked: sealing would sever the walk route"
     },
     {
      "final": [
@@ -289,7 +289,7 @@
       21
      ],
      "token": "sphere_low",
-     "why": "sealing would sever the walk route"
+     "why": "baked: sealing would sever the walk route"
     },
     {
      "final": [
@@ -487,7 +487,7 @@
       27
      ],
      "token": "prism_block",
-     "why": "sealing would sever the walk route"
+     "why": "baked: sealing would sever the walk route"
     },
     {
      "final": [
@@ -505,7 +505,7 @@
       27
      ],
      "token": "prism_block",
-     "why": "sealing would sever the walk route"
+     "why": "baked: sealing would sever the walk route"
     },
     {
      "final": [
@@ -703,7 +703,7 @@
       31
      ],
      "token": "diamonds",
-     "why": "sealing would sever the walk route"
+     "why": "baked: sealing would sever the walk route"
     },
     {
      "final": [
@@ -769,7 +769,7 @@
       15
      ],
      "token": "grid_lines",
-     "why": "sealing would sever the walk route"
+     "why": "baked: sealing would sever the walk route"
     },
     {
      "final": [
@@ -823,7 +823,7 @@
       21
      ],
      "token": "ConeTwistBag",
-     "why": "sealing would sever the walk route"
+     "why": "baked: sealing would sever the walk route"
     },
     {
      "final": [
@@ -841,7 +841,7 @@
       22
      ],
      "token": "ConnectedTriangles",
-     "why": "sealing would sever the walk route"
+     "why": "baked: sealing would sever the walk route"
     },
     {
      "final": [
@@ -907,7 +907,7 @@
       11
      ],
      "token": "lab_room",
-     "why": "sealing would sever the walk route"
+     "why": "baked: sealing would sever the walk route"
     },
     {
      "final": [
@@ -1069,7 +1069,7 @@
       25
      ],
      "token": "CoordinateSystem3M",
-     "why": "sealing would sever the walk route"
+     "why": "baked: sealing would sever the walk route"
     }
    ],
    "chapter": "primitives",
@@ -1153,7 +1153,7 @@
       16
      ],
      "token": "lab_room",
-     "why": "sealing would sever the walk route"
+     "why": "baked: sealing would sever the walk route"
     },
     {
      "final": [
@@ -1189,7 +1189,7 @@
       22
      ],
      "token": "becoming_catalyst",
-     "why": "sealing would sever the walk route"
+     "why": "baked: sealing would sever the walk route"
     },
     {
      "final": [
@@ -1243,7 +1243,7 @@
       23
      ],
      "token": "tentacle_placer",
-     "why": "sealing would sever the walk route"
+     "why": "baked: sealing would sever the walk route"
     }
    ],
    "chapter": "primitives",
@@ -1576,108 +1576,6 @@
    "offx": 3,
    "offz": 11,
    "pearl": "trans introduction",
-   "vestibule": 4,
-   "w": 15
-  },
-  "transformation|trans rotationspectacle": {
-   "bodies": [
-    {
-     "final": [
-      8,
-      5
-     ],
-     "grid": [
-      3,
-      3
-     ],
-     "plinth": false,
-     "rings": 0,
-     "target": [
-      8,
-      5
-     ],
-     "token": "boolean_tunnel",
-     "why": ""
-    },
-    {
-     "final": [
-      5,
-      5
-     ],
-     "grid": [
-      0,
-      4
-     ],
-     "plinth": true,
-     "rings": 0,
-     "target": [
-      5,
-      5
-     ],
-     "token": "righttriangle",
-     "why": ""
-    },
-    {
-     "final": [
-      8,
-      5
-     ],
-     "grid": [
-      3,
-      6
-     ],
-     "plinth": false,
-     "rings": 0,
-     "target": [
-      8,
-      5
-     ],
-     "token": "dark_sphere",
-     "why": ""
-    },
-    {
-     "final": [
-      7,
-      32
-     ],
-     "grid": [
-      2,
-      51
-     ],
-     "plinth": false,
-     "rings": 0,
-     "target": [
-      7,
-      32
-     ],
-     "token": "pick_up_cube",
-     "why": ""
-    },
-    {
-     "final": [
-      8,
-      32
-     ],
-     "grid": [
-      3,
-      53
-     ],
-     "plinth": false,
-     "rings": 0,
-     "target": [
-      8,
-      32
-     ],
-     "token": "carousel_cake",
-     "why": ""
-    }
-   ],
-   "chapter": "transformation",
-   "h": 30,
-   "map": "Trans_RotationSpectacle",
-   "offx": 5,
-   "offz": -10,
-   "pearl": "trans rotationspectacle",
    "vestibule": 4,
    "w": 15
   }

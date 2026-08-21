@@ -4800,6 +4800,13 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 	seg.set_meta("em_pearl", String(entry.get("pearl", "")))
 	_bake_used = {}
 	_cur_dressing = []
+	# THE FORCE STAMP (2026-08-21, Palle: "add a force stamp to change the
+	# floor plan"): a hall whose necklace was stamped on /transplant's bench
+	# builds FROM those beads — the bench IS the floor plan. Everything else
+	# about the transplant (no dealer, no guests, plinths, the walls) holds.
+	var hand_hall := _necklace_hand(chapter, String(entry.get("pearl", "")))
+	if not hand_hall.is_empty():
+		return _stamp_necklace(seg, zbase, chapter, entry, hand_hall, doc_v, w, h)
 	var layers: Dictionary = (doc_v as Dictionary).get("layers", {})
 	var structure: Array = layers.get("structure", [])
 	var inter: Array = layers.get("interactables", [])
@@ -4923,6 +4930,93 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 		pf.close()
 	return {"pearl": String(entry.get("pearl", "")), "placed": placed, "packed": true,
 		"offered": bodies.size(), "interior": placed}
+
+
+## The bench's saved necklace for this hall, IF it was force-stamped there.
+func _necklace_hand(chapter: String, pearl: String) -> Dictionary:
+	if not FileAccess.file_exists("res://ada_run/necklace_hand.json"):
+		return {}
+	var doc_v: Variant = JSON.parse_string(FileAccess.get_file_as_string("res://ada_run/necklace_hand.json"))
+	if not (doc_v is Dictionary):
+		return {}
+	var hh: Variant = ((doc_v as Dictionary).get("halls", {}) as Dictionary).get("%s|%s" % [chapter, pearl])
+	if hh is Dictionary and bool((hh as Dictionary).get("stamp", false)) \
+			and not ((hh as Dictionary).get("beads", []) as Array).is_empty():
+		return hh
+	return {}
+
+
+## The bench's floor plan, built: each bead stamps at its laid cell (a folded
+## run unrolls back into its row along the spread axis); rotation and #config
+## attachments are re-joined from the grid map by token, first occurrence.
+func _stamp_necklace(seg: Node3D, zbase: int, chapter: String, entry: Dictionary,
+		hand: Dictionary, map_doc: Variant, w: int, h: int) -> Dictionary:
+	var rot_of := {}
+	var cfg_of := {}
+	if map_doc is Dictionary:
+		var inter: Array = ((map_doc as Dictionary).get("layers", {}) as Dictionary).get("interactables", [])
+		for gz in range(inter.size()):
+			var irow: Array = inter[gz]
+			for gx in range(irow.size()):
+				var cellv := String(irow[gx]).strip_edges()
+				if cellv == "" or cellv.begins_with("#"):
+					continue
+				var att := ""
+				if "#" in cellv:
+					var hp := cellv.split("#", true, 1)
+					cellv = hp[0]
+					att = hp[1]
+				var parts := cellv.split(":")
+				if not rot_of.has(parts[0]):
+					rot_of[parts[0]] = float(parts[1]) if parts.size() > 1 and parts[1].is_valid_float() else 0.0
+					if att != "":
+						var kv := att.split(":", true, 1)
+						cfg_of[parts[0]] = {kv[0]: (kv[1] if kv.size() > 1 else "1")}
+	var bx0: int = 1
+	var bx1: int = w - 2
+	var bz0: int = VESTIBULE_H + 1
+	var bz1: int = VESTIBULE_H + h - 2
+	var placed := 0
+	var left := 0
+	for b_v in (hand.get("beads", []) as Array):
+		var b: Dictionary = b_v
+		var tok := String(b.get("token", ""))
+		var lv: Variant = _live.get(tok)
+		if not (lv is Dictionary):
+			left += 1
+			print("[em-stamp]   %s has no living scene — left behind" % tok)
+			continue
+		var scene := String((lv as Dictionary).get("scene", ""))
+		var count: int = maxi(1, int(b.get("count", 1)))
+		var gap: int = maxi(1, int(b.get("gap", 1)))
+		var spread := String(b.get("spread", ""))
+		var cx := float(b.get("x", 0.0))
+		var cz := float(b.get("z", 0.0))
+		for k in range(count):
+			var off: float = (float(k) - float(count - 1) / 2.0) * float(gap)
+			var tx: int = clampi(int(floor(cx + (off if spread == "x" else 0.0))), bx0, bx1)
+			var tz: int = clampi(int(floor(cz + (off if spread == "z" else 0.0))), bz0, bz1)
+			var done := false
+			for ring in range(0, 4):
+				if done:
+					break
+				for d in _pack_ring(ring):
+					if tx + d.x < bx0 or tx + d.x > bx1 or tz + d.y < bz0 or tz + d.y > bz1:
+						continue
+					var cell := {"x": tx + d.x, "y": tz + d.y, "rank": 2, "top": 0.0}
+					if bool(b.get("plinth", false)):
+						cell["support_m"] = 1.0
+					if _stamp(seg, scene, tok, cell, zbase, 1, {}, false, 0.0,
+							float(rot_of.get(tok, 0.0)), cfg_of.get(tok, {})):
+						placed += 1
+						done = true
+						break
+			if not done:
+				left += 1
+	print("[em-stamp] %s · %s <- the bench's necklace: %d placed, %d left behind" % [
+		chapter, entry.get("pearl", ""), placed, left])
+	return {"pearl": String(entry.get("pearl", "")), "placed": placed, "packed": true,
+		"offered": placed + left, "interior": placed}
 
 
 ## The ring of cells at Chebyshev radius r, the transplant's repair search.
