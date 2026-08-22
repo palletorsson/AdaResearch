@@ -74,6 +74,10 @@ const COL_GCUBE := Color(0.50, 0.72, 0.58)   # structure cube while edit_grid is
 @export_tool_button("🏛 Stamp at cursor") var _b_stapply: Callable = _stamp_apply
 @export_tool_button("⌫ Erase at cursor") var _b_sterase: Callable = _stamp_erase
 @export_multiline var stamp_status: String = "(load a map, then Prev/Next stamp)"
+## Set the museum layer's z length (rows). 0 = leave as is.
+@export var museum_length_z: int = 0
+@export_tool_button("📏 Apply length z") var _b_stlen: Callable = _stamp_set_length
+@export_tool_button("⌜ To zero corner") var _b_stzero: Callable = _stamp_to_zero
 
 @export_group("Selection")
 @export_tool_button("🗑  Remove selected") var _b_remove: Callable = _remove_selected
@@ -1042,3 +1046,59 @@ func _draw_museum_layer() -> void:
 			box.material_override = mat
 			box.position = Vector3((x + 0.5) * _total, 0.28 if wall else 0.08, (z + 0.5) * _total)
 			view.add_child(box)
+
+
+func _stamp_set_length() -> void:
+	if _map.is_empty() or museum_length_z <= 0:
+		return
+	if not _map.has("layers"):
+		_map["layers"] = {}
+	var mus: Array = _map["layers"].get("museum", [])
+	while mus.size() > museum_length_z:
+		mus.pop_back()
+	while mus.size() < museum_length_z:
+		var blank: Array = []
+		for i in range(MUSEUM_W):
+			blank.append("0")
+		mus.append(blank)
+	_map["layers"]["museum"] = mus
+	_draw_museum_layer()
+	_refresh_stamp_status()
+	print("MapToolEditor: museum layer length = %d row(s)" % mus.size())
+
+
+func _stamp_to_zero() -> void:
+	if _map.is_empty():
+		return
+	var mus: Variant = _map.get("layers", {}).get("museum", [])
+	if not (mus is Array) or (mus as Array).is_empty():
+		return
+	var rows: Array = mus
+	var min_r := 1 << 30
+	var min_c := 1 << 30
+	for r in range(rows.size()):
+		for c in range((rows[r] as Array).size()):
+			var v := str((rows[r] as Array)[c])
+			if v == "1" or v == "2":
+				min_r = mini(min_r, r)
+				min_c = mini(min_c, c)
+	if min_r >= 1 << 30 or (min_r == 0 and min_c == 0):
+		return
+	var next: Array = []
+	for r in range(rows.size()):
+		var blank: Array = []
+		for i in range(MUSEUM_W):
+			blank.append("0")
+		next.append(blank)
+	for r in range(rows.size()):
+		for c in range((rows[r] as Array).size()):
+			var v := str((rows[r] as Array)[c])
+			if v != "1" and v != "2":
+				continue
+			var rr := r - min_r
+			var cc := c - min_c
+			if rr >= 0 and rr < next.size() and cc >= 0 and cc < MUSEUM_W:
+				(next[rr] as Array)[cc] = v
+	_map["layers"]["museum"] = next
+	_draw_museum_layer()
+	print("MapToolEditor: museum layer slid to the zero corner (was %d, %d)" % [min_r, min_c])
