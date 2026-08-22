@@ -122,8 +122,16 @@ func _run() -> void:
 			var t0: Array = (c3 as Node).get_meta("em_tile")
 			if t0.size() > rule_z and (t0[rule_z] as Array).size() > rule_x:
 				cell_rule = String((t0[rule_z] as Array)[rule_x]) == "4"
+	# ONE-TRUTH serializer round-trip: the museum WRITES maps now — parse ->
+	# _jsonc -> parse must be data-identical, or a first save corrupts a map
+	var rt := false
+	var src := FileAccess.get_file_as_string("res://commons/maps/Point_One/map_data.json")
+	var doc0: Variant = JSON.parse_string(src)
+	if doc0 is Dictionary:
+		var again: Variant = JSON.parse_string(String(inst.call("_jsonc", doc0, "")))
+		rt = again is Dictionary and JSON.stringify(again) == JSON.stringify(doc0)
 	var out := FileAccess.open(OUT, FileAccess.WRITE)
-	out.store_string(JSON.stringify({"segments": segs, "shots": shots, "seam": seam, "cell_rule": cell_rule,
+	out.store_string(JSON.stringify({"segments": segs, "shots": shots, "seam": seam, "cell_rule": cell_rule, "map_roundtrip": rt,
 		"at": Time.get_datetime_string_from_system(false, true)}, " "))
 	out.close()
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(CTL))

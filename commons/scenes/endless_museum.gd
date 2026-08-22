@@ -3140,6 +3140,16 @@ func _build_segment() -> void:
 					if gz >= 0 and gz < tile.size() and gx >= 0 and gx < (tile[gz] as Array).size():
 						if not String((tile[gz] as Array)[gx]).begins_with("4"):
 							(tile[gz] as Array)[gx] = "0"      # hollow: no floor is laid here
+	# ONE TRUTH (2026-08-22, Palle: "I want the change from the editor to be
+	# encoded right away... one truth when I edit the room"): a map-authored
+	# hall builds FROM ITS MAP, read fresh at every build — the plan row is a
+	# POINTER (pearl, museum key). Edits encode into map_data.json; rulings
+	# (props, frames, the gate, the enter room, the web's) still layer on.
+	if String(peek.get("authored", "")) == "map" and String(peek.get("map", "")) != "":
+		var derived := _derive_map_row(String(peek["map"]))
+		if not derived.is_empty():
+			peek["tile"] = derived["tile"]
+			peek["artifacts"] = derived["artifacts"]
 	if peek.get("tile") is Array and (peek["tile"] as Array).size() >= 4:
 		var trows: Array = []
 		for r_v in (peek["tile"] as Array):
@@ -3234,6 +3244,7 @@ func _build_segment() -> void:
 	seg.set_meta("em_tile", tile)
 	seg.set_meta("em_pearl", cur_pearl)
 	seg.set_meta("em_chapter", next_seq)
+	seg.set_meta("em_map", String(peek.get("map", "")) if String(peek.get("authored", "")) == "map" else "")
 	# one static body per segment carries every collision box — walls, podiums,
 	# hero plinths — so the whole museum frees with its segment node
 	var solid := StaticBody3D.new()
@@ -10032,13 +10043,27 @@ func _edit_nudge(dx: int, dz: int) -> void:
 	var node: Node3D = _node_or_null(r.get("node"))
 	if node == null or not is_instance_valid(node):
 		return
+	var nseg: Node3D = _node_or_null(r.get("seg"))
+	var amap := String(nseg.get_meta("em_map")) if nseg != null and nseg.has_meta("em_map") else ""
+	var tc0: Array = r.get("tile_cell", [0, 0])
+	if amap != "":
+		# ONE TRUTH: the move encodes into the map's interactables layer
+		var why := _map_move_token(amap, int(tc0[0]), int(tc0[1]),
+			int(tc0[0]) + dx, int(tc0[1]) + dz)
+		if why != "":
+			_doll_toast("the map refuses: " + why)
+			return
+		node.position += Vector3(float(dx), 0.0, float(dz))
+		r["tile_cell"] = [int(tc0[0]) + dx, int(tc0[1]) + dz]
+		_doll_toast("%s encoded into %s at [%d,%d]" % [str(r.get("token")), amap,
+			int(tc0[0]) + dx, int(tc0[1]) + dz])
+		return
 	var ov: Dictionary = _mod_editor.call(
 		"override_for", _edit_records, _edit_sel, _edit_overrides)
 	ov["to"] = [int((ov.get("to", [0, 0]) as Array)[0]) + dx,
 		int((ov.get("to", [0, 0]) as Array)[1]) + dz]
 	node.position += Vector3(float(dx), 0.0, float(dz))
-	r["tile_cell"] = [int((r.get("tile_cell", [0, 0]) as Array)[0]) + dx,
-		int((r.get("tile_cell", [0, 0]) as Array)[1]) + dz]
+	r["tile_cell"] = [int(tc0[0]) + dx, int(tc0[1]) + dz]
 	_edit_dirty = true
 
 
@@ -10842,25 +10867,31 @@ func _rule_cell(segn: Node3D, zbase: int, wx: int, wz: int, erase: bool, force: 
 	var pearl := String(segn.get_meta("em_pearl")) if segn.has_meta("em_pearl") else ""
 	if in_hall:
 		(tile[cz_t] as Array)[wx] = nv
-	var found := false
-	var kept: Array = []
-	for ov_v in _edit_overrides:
-		var ov: Dictionary = ov_v
-		if String(ov.get("kind", "")) == "cell" and String(ov.get("chapter", "")) == ch \
-				and String(ov.get("pearl", "")) == pearl:
-			var of: Array = ov.get("from", [])
-			if of.size() >= 2 and int(of[0]) == wx and int(of[1]) == cz_t:
-				if erase:
-					continue
-				ov["value"] = nv
-				found = true
-		kept.append(ov)
-	_edit_overrides = kept
-	if not found and not erase:
-		_edit_overrides.append({"kind": "cell", "chapter": ch, "pearl": pearl,
-			"token": "cell:" + pearl, "from": [wx, cz_t], "value": nv,
-			"provenance": "hand"})
-	_edit_dirty = true
+	var seg_map := String(segn.get_meta("em_map")) if segn.has_meta("em_map") else ""
+	if seg_map != "" and in_hall:
+		# ONE TRUTH: the wall encodes into the map itself, right away
+		if not _map_write_cell(seg_map, wx, cz_t, nv == "4"):
+			return ""
+	else:
+		var found := false
+		var kept: Array = []
+		for ov_v in _edit_overrides:
+			var ov: Dictionary = ov_v
+			if String(ov.get("kind", "")) == "cell" and String(ov.get("chapter", "")) == ch \
+					and String(ov.get("pearl", "")) == pearl:
+				var of: Array = ov.get("from", [])
+				if of.size() >= 2 and int(of[0]) == wx and int(of[1]) == cz_t:
+					if erase:
+						continue
+					ov["value"] = nv
+					found = true
+			kept.append(ov)
+		_edit_overrides = kept
+		if not found and not erase:
+			_edit_overrides.append({"kind": "cell", "chapter": ch, "pearl": pearl,
+				"token": "cell:" + pearl, "from": [wx, cz_t], "value": nv,
+				"provenance": "hand"})
+		_edit_dirty = true
 	if erase:
 		return "ruling erased at [%d,%d] — the look reverts on the next build (F6)" % [wx, cz_t]
 	# THE ACTUAL LOOK, DIRECTLY (Palle: "instead of green can we see the
@@ -11204,3 +11235,147 @@ func _room_commit(a: Vector2i, b: Vector2i) -> void:
 		_rule_undo.append({"group": grp})
 	_doll_toast("room %d×%d — %d wall(s), the door faces %s · ctrl+Z takes it back" % [
 		x1 - x0 + 1, z1 - z0 + 1, walls, side])
+
+
+# ── ONE TRUTH (2026-08-22): map-authored halls read and WRITE their map ─────
+
+func _derive_map_row(map_name: String) -> Dictionary:
+	## The hall derived from its map, fresh: origin-pinned (tile cells ARE
+	## map cells), floors filled, h>=2 wall — the GDScript twin of
+	## tools/em_map_halls.derive_row.
+	var path := "res://commons/maps/%s/map_data.json" % map_name
+	if not FileAccess.file_exists(path):
+		return {}
+	var doc_v: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+	if not (doc_v is Dictionary):
+		return {}
+	var layers: Dictionary = (doc_v as Dictionary).get("layers", {})
+	var struct: Array = layers.get("structure", [])
+	var inter: Array = layers.get("interactables", [])
+	var r1 := -1
+	var c1 := -1
+	for r in range(struct.size()):
+		var row: Array = struct[r]
+		for c in range(row.size()):
+			var sv := str(row[c]).strip_edges()
+			if sv.is_valid_int() and int(sv) > 0:
+				if r > r1:
+					r1 = r
+				if c > c1:
+					c1 = c
+	if r1 < 2 or c1 < 2:
+		return {}
+	var tile: Array = []
+	for r in range(0, r1 + 1):
+		var line: Array = []
+		var srow: Array = struct[r] if r < struct.size() else []
+		for c in range(0, c1 + 1):
+			var v := 0
+			if c < srow.size():
+				var sv2 := str(srow[c]).strip_edges()
+				v = int(sv2) if sv2.is_valid_int() else 0
+			line.append("4" if v >= 2 else "1")
+		tile.append(line)
+	var arts: Array = []
+	for r in range(inter.size()):
+		var irow: Array = inter[r]
+		for c in range(irow.size()):
+			var tok := str(irow[c]).strip_edges()
+			if tok == "":
+				continue
+			var base := tok.split("#")[0]
+			var parts := base.split(":")
+			var rot := 0
+			if parts.size() > 1 and str(parts[1]).is_valid_float():
+				rot = int(float(parts[1]))
+			var under := 0
+			if r < struct.size() and c < (struct[r] as Array).size():
+				var uv := str((struct[r] as Array)[c]).strip_edges()
+				under = int(uv) if uv.is_valid_int() else 0
+			arts.append({"token": String(parts[0]), "cell": [c, r], "tile_cell": [c, r],
+				"rotation": ((rot % 360) + 360) % 360, "mode": "freestanding",
+				"venue": "interior", "support_height_m": 0.95 if under >= 2 else 0.0,
+				"hand": false, "ruled": {"by": "map: " + map_name, "cell": [c, r]}})
+	return {"tile": tile, "artifacts": arts}
+
+
+func _map_write_cell(map_name: String, cx: int, cz: int, wall: bool) -> bool:
+	var path := "res://commons/maps/%s/map_data.json" % map_name
+	if not FileAccess.file_exists(path):
+		return false
+	var doc_v: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+	if not (doc_v is Dictionary):
+		return false
+	var struct: Array = ((doc_v as Dictionary).get("layers", {}) as Dictionary).get("structure", [])
+	if cz < 0 or cz >= struct.size() or cx < 0 or cx >= (struct[cz] as Array).size():
+		return false
+	(struct[cz] as Array)[cx] = "2" if wall else "1"
+	return _map_store(path, doc_v)
+
+
+func _map_move_token(map_name: String, fx: int, fz: int, tx2: int, tz2: int) -> String:
+	## "" on success, else the reason. The token string travels whole —
+	## rotation, y-offset, config all ride along.
+	var path := "res://commons/maps/%s/map_data.json" % map_name
+	if not FileAccess.file_exists(path):
+		return "no map file"
+	var doc_v: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+	if not (doc_v is Dictionary):
+		return "bad map json"
+	var inter: Array = ((doc_v as Dictionary).get("layers", {}) as Dictionary).get("interactables", [])
+	if fz < 0 or fz >= inter.size() or fx < 0 or fx >= (inter[fz] as Array).size():
+		return "source off the map"
+	if tz2 < 0 or tz2 >= inter.size() or tx2 < 0 or tx2 >= (inter[tz2] as Array).size():
+		return "target off the map"
+	var tok := str((inter[fz] as Array)[fx]).strip_edges()
+	if tok == "":
+		return "no artifact at the source cell"
+	if str((inter[tz2] as Array)[tx2]).strip_edges() != "":
+		return "target cell occupied"
+	(inter[fz] as Array)[fx] = " "
+	(inter[tz2] as Array)[tx2] = tok
+	if not _map_store(path, doc_v):
+		return "could not write the map"
+	return ""
+
+
+func _map_store(path: String, doc: Variant) -> bool:
+	## The compact-rows discipline: every grid row on ONE line (a plain
+	## stringify once reformatted 15k lines of a registry).
+	var f := FileAccess.open(path, FileAccess.WRITE)
+	if f == null:
+		return false
+	f.store_string(_jsonc(doc, ""))
+	f.close()
+	print("[em-map] encoded -> %s" % path)
+	return true
+
+
+func _jsonc(v: Variant, ind: String) -> String:
+	if v is Dictionary:
+		var d: Dictionary = v
+		if d.is_empty():
+			return "{}"
+		var parts: Array = []
+		for k in d.keys():
+			parts.append("%s\t%s: %s" % [ind, JSON.stringify(str(k)), _jsonc(d[k], ind + "\t")])
+		return "{\n" + ",\n".join(PackedStringArray(parts)) + "\n" + ind + "}"
+	if v is Array:
+		var a: Array = v
+		if a.is_empty():
+			return "[]"
+		var scalars := true
+		for e in a:
+			if e is Dictionary or e is Array:
+				scalars = false
+				break
+		if scalars:
+			var ss: Array = []
+			for e in a:
+				ss.append(JSON.stringify(e))
+			return "[" + ", ".join(PackedStringArray(ss)) + "]"
+		var parts2: Array = []
+		for e in a:
+			parts2.append(ind + "\t" + _jsonc(e, ind + "\t"))
+		return "[\n" + ",\n".join(PackedStringArray(parts2)) + "\n" + ind + "]"
+	return JSON.stringify(v)
