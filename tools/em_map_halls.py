@@ -81,19 +81,11 @@ def derive_row(pearl: str, map_name: str, museum_key: str, idx: int, total: int,
             # them and keeps only the walls as walls.
             line.append("4" if v >= 2 else "1")
         tile.append(line)
-    # THE ENTRANCE ("move the entrance to hall one back again"): grid maps
-    # carry no north/south hall wall, so the museum's entry lost its doorway
-    # and the gate centred on an open edge. Give the hall proper entry and
-    # exit walls — one added row each, a 3-cell door centred like the
-    # templates' — and shift the artifacts down one row with the tile.
-    width = len(tile[0]) if tile else 1
-    mid = width // 2
-    door_row = ["4"] * width
-    for dc in (mid - 1, mid, mid + 1):
-        if 0 <= dc < width:
-            door_row[dc] = "1"
-    tile.insert(0, list(door_row))
-    tile.append(list(door_row))
+    # NO inserted walls (Palle: "there is a wall where the sliding door
+    # should be — you can simplify"): the museum's vestibule + gate already
+    # own the entrance; an added wall row stood exactly where the gate's
+    # sliding door slides. The hall stays the pure map tile — the gate
+    # centres a normal-width door on an open edge by itself now.
     arts = []
     for r, row in enumerate(inter):
         for c, v in enumerate(row):
@@ -105,7 +97,7 @@ def derive_row(pearl: str, map_name: str, museum_key: str, idx: int, total: int,
             name = parts[0]
             rot = int(float(parts[1])) if len(parts) > 1 and parts[1] else 0
             under = struct[r][c] if r < len(struct) and c < len(struct[r]) else 0
-            tc = [c - c0, r - r0 + 1]   # +1: the inserted entry-wall row
+            tc = [c - c0, r - r0]
             arts.append({
                 "token": name, "cell": list(tc), "tile_cell": list(tc),
                 "rotation": ((rot % 360) + 360) % 360,

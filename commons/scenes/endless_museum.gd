@@ -3613,6 +3613,13 @@ func _build_segment() -> void:
 			"open_seconds": _L("gate", "open_seconds", 1.6),
 			"click_reach_m": _L("gate", "click_reach_m", 3.2),
 			"click_cone_rad": _L("gate", "click_cone_rad", 0.55)}
+		# a map-authored hall may have NO entry wall — the widest floor run is
+		# then the whole open edge, and the gate would build a door as wide as
+		# the hall. Cap the span to a normal 3-cell door centred on the run.
+		if dx0 >= 0 and dx1 - dx0 > 2:
+			var dmid: int = (dx0 + dx1) / 2
+			dx0 = dmid - 1
+			dx1 = dmid + 1
 		if dx0 >= 0:
 			gate_layout["door_x0"] = dx0
 			gate_layout["door_x1"] = dx1
