@@ -3134,6 +3134,11 @@ func _build_segment() -> void:
 			trows.append(rr)
 		tile = _open_bays(_widen_doors(trows), String(spec["key"]), next_seq)
 		h = tile.size()
+		# the WIDTH follows the tile too: rooms-per-pearl crops only rows (no
+		# change), but a map-authored tile can be wider than the template —
+		# the vestibule, skin, doors and _prev_w must all speak the real width
+		if not tile.is_empty():
+			w = maxi(1, (tile[0] as Array).size())
 		print("[em-rooms] %s · %s: %d room(s) — the hall is %d rows of the template's %d" % [
 			next_seq, String(peek.get("pearl", "")), int(peek.get("rooms", 0)), h, int(spec["h"])])
 	# STAMP MEANS REMOVE WALLS — UNDER ITSELF (2026-08-21, Palle, twice: first
@@ -3214,12 +3219,18 @@ func _build_segment() -> void:
 	var m_podium: Material = _sm("podium")
 	var m_plinth: Material = _sm("plinth")
 	var foyer_well: bool = _seg_index == 0 and _L("lobby", "enabled", 1.0) > 0.5 and _L("lobby", "origin_well", 1.0) > 0.5
+	# THE SEAM (2026-08-22, Palle: "there is a gap in the floor between maps"):
+	# map-authored halls can be WIDER than the 17-cell lobby (Point_One is 20),
+	# and the vestibule's fixed-width deck left void strips beside it. The
+	# vestibule now spans the widest of lobby / previous hall / this hall —
+	# template halls are all ≤ 17, so nothing changes for them.
+	var vest_w: int = maxi(LOBBY_W, maxi(pw, w))
 	for zr in range(VESTIBULE_H):
-		for x in range(LOBBY_W):
+		for x in range(vest_w):
 			if foyer_well and x <= 1 and zr <= 1:
 				continue                   # THE ORIGIN WELL: the corner cells open onto (0,0,0)
 			_box(seg, Vector3(x + 0.5, -0.1, zr + 0.5), Vector3(1, 0.2, 1), Color(0.13, 0.13, 0.16), m_deck)
-			if x > 0 and x < LOBBY_W - 1 and not (zr == 0 and x >= pw - 1) and not (zr == VESTIBULE_H - 1 and x >= w - 1):
+			if x > 0 and x < vest_w - 1 and not (zr == 0 and x >= pw - 1) and not (zr == VESTIBULE_H - 1 and x >= w - 1):
 				_walk_cells[Vector2i(x, zbase + zr)] = true
 	# floor/deck collider — ALWAYS: one museum in both modes, and since 2026-08-20 the desktop walker MEETS it (gravity, is_on_floor), as the rig always did
 	# VR floor body. The desktop walker CLAMPS y and needs no deck
@@ -3227,19 +3238,19 @@ func _build_segment() -> void:
 	# a collider under the deck the headset falls through on frame one.
 	# One merged slab for the rectangular vestibule; per-cell below where
 	# the tile is sparse. Gated on _vr: the desktop segment is untouched.
-	_add_col(solid, Vector3(LOBBY_W / 2.0, -0.1, VESTIBULE_H / 2.0),
-		Vector3(LOBBY_W, 0.2, VESTIBULE_H))
+	_add_col(solid, Vector3(vest_w / 2.0, -0.1, VESTIBULE_H / 2.0),
+		Vector3(vest_w, 0.2, VESTIBULE_H))
 	# the scale figure stands clear of the origin well in the foyer (it stood on its rail)
 	_stamp_scale_figure(seg, Vector3(2.0 if not foyer_well else 13.2, 0.0, VESTIBULE_H * 0.5 + (1.3 if foyer_well else 0.0)), zbase)
 	for zr in range(VESTIBULE_H):
-		for sx in [0, LOBBY_W - 1]:
+		for sx in [0, vest_w - 1]:
 			if foyer_well and sx == 0 and zr <= 1:
 				continue                   # the well's corner: the wall steps out a metre (built by _dress_lobby)
 			_wall_at(seg, solid, wcells, int(sx), zr, wall_col, m_wall, wr)
 	var lobby_on: bool = _seg_index == 0 and _L("lobby", "enabled", 1.0) > 0.5
 	var win_x0: int = int(_L("lobby", "window_x0", 6.0))
 	var win_x1: int = int(_L("lobby", "window_x1", 8.0))
-	for x in range(pw - 1, LOBBY_W):        # seal beyond the previous tile's width
+	for x in range(pw - 1, vest_w):        # seal beyond the previous tile's width
 		if foyer_well and x <= 1:
 			continue                       # the well's corner, see _dress_lobby
 		if lobby_on and x >= win_x0 and x <= win_x1:

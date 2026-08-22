@@ -91,8 +91,20 @@ func _run() -> void:
 		var path := "res://ada_run/map_hall_%d.png" % idx
 		img.save_png(ProjectSettings.globalize_path(path))
 		shots.append(path)
+	# THE SEAM (Palle: "there is a gap in the floor between maps"): the strip
+	# beside the 17-wide lobby, inside a 20-wide hall's span — the vestibule
+	# must lay floor there now. Raycast straight down at x=18.5 in segment
+	# 1's vestibule (z = seg1.z + 2): a hit is floor, empty is the gap.
+	var seam := {}
+	if segs.size() > 1 and segs[1].has("z"):
+		await physics_frame
+		var space := get_root().get_world_3d().direct_space_state
+		var sz: float = float(segs[1]["z"]) + 2.0
+		var q := PhysicsRayQueryParameters3D.create(Vector3(18.5, 2.0, sz), Vector3(18.5, -2.0, sz))
+		var hit := space.intersect_ray(q)
+		seam = {"probe": [18.5, sz], "floor": not hit.is_empty()}
 	var out := FileAccess.open(OUT, FileAccess.WRITE)
-	out.store_string(JSON.stringify({"segments": segs, "shots": shots,
+	out.store_string(JSON.stringify({"segments": segs, "shots": shots, "seam": seam,
 		"at": Time.get_datetime_string_from_system(false, true)}, " "))
 	out.close()
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(CTL))
