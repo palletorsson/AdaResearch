@@ -8276,7 +8276,9 @@ func _doll_pick(pt: Vector3) -> int:
 	var bd := 1.6
 	for i in range(_edit_records.size()):
 		var r: Dictionary = _edit_records[i]
-		if String(r.get("kind", "")) in ["prop", "showing", "furniture", "variant"]:
+		# props, furniture and frames are draggable now (Palle: "in 3d I want
+		# to be able to move the props as well") — only variants stay gizmoless
+		if String(r.get("kind", "")) == "variant":
 			continue
 		var n: Node3D = _node_or_null(r.get("node"))
 		if n == null or not is_instance_valid(n) or n.has_meta("em_hand_removed"):
@@ -9022,7 +9024,9 @@ func _input(event: InputEvent) -> void:
 		elif mb == MOUSE_BUTTON_LEFT and mbe.pressed and _cam != null and _doll_brush != "":
 			var ptb := _doll_floor_point(mbe.position)
 			if _doll_brush == "R":
-				_doll_rule(int(floor(ptb.x)), int(floor(ptb.z)), mbe.shift_pressed)
+				_rule_paint_drag = "1" if mbe.shift_pressed else "4"
+				_rule_last_cell = Vector2i(int(floor(ptb.x)), int(floor(ptb.z)))
+				_doll_rule_set(_rule_last_cell.x, _rule_last_cell.y, _rule_paint_drag, true)
 			elif _doll_brush == "D":
 				_doll_door(int(floor(ptb.x)), int(floor(ptb.z)))
 			else:
@@ -9070,6 +9074,10 @@ func _input(event: InputEvent) -> void:
 				_doll_mark.global_position = Vector3(pt.x, 0.05, pt.z)
 				_doll_mark.visible = true
 			return
+		elif mb == MOUSE_BUTTON_LEFT and not mbe.pressed and _rule_paint_drag != "":
+			_rule_paint_drag = ""
+			_rule_last_cell = Vector2i(-9999, -9999)
+			return
 		elif mb == MOUSE_BUTTON_LEFT and not mbe.pressed and _doll_drag:
 			_doll_drag = false
 			var pt2 := _doll_floor_point(mbe.position)
@@ -9093,6 +9101,15 @@ func _input(event: InputEvent) -> void:
 				nc.position = _doll_node_start
 			return
 		elif mb == MOUSE_BUTTON_RIGHT:
+			if mbe.pressed:
+				_rule_rmb_pos = mbe.position
+			elif _doll_brush == "R" and _cam != null \
+					and mbe.position.distance_to(_rule_rmb_pos) < 6.0:
+				# the sledgehammer click: right mouse OPENS the wall
+				var ptr := _doll_floor_point(mbe.position)
+				_doll_rule_set(int(floor(ptr.x)), int(floor(ptr.z)), "1", true)
+				_doll_orbit = false
+				return
 			_doll_orbit = mbe.pressed          # empty-handed RMB drag turns the house
 			return
 		elif mb == MOUSE_BUTTON_MIDDLE:
@@ -9125,6 +9142,11 @@ func _input(event: InputEvent) -> void:
 		var hpr := _doll_floor_point((event as InputEventMouseMotion).position)
 		var hx := int(floor(hpr.x))
 		var hz := int(floor(hpr.z))
+		if _rule_paint_drag != "" and _doll_brush == "R":
+			var pcell := Vector2i(hx, hz)
+			if pcell != _rule_last_cell:
+				_rule_last_cell = pcell
+				_doll_rule_set(hx, hz, _rule_paint_drag, false)   # silent mid-stroke
 		if _rule_hover == null or not is_instance_valid(_rule_hover):
 			_rule_hover = MeshInstance3D.new()
 			var hbm := BoxMesh.new()
@@ -9189,6 +9211,9 @@ func _input(event: InputEvent) -> void:
 		if kc == KEY_X and _edit_sel >= 0:
 			_edit_handle_key(KEY_DELETE)   # X removes the held body (Palle: "select artifact, x to remove")
 			_doll_select(-1)
+			return
+		if kc == KEY_Z and Input.is_key_pressed(KEY_CTRL):
+			_rule_undo_pop()
 			return
 		if kc == KEY_B:
 			var order := ["", "R", "D", "2", "4", "0", "1"]
@@ -9388,8 +9413,19 @@ func _edit_handle_key(key: int) -> bool:
 		KEY_T:
 			_wall_toggle_under_crosshair()
 		KEY_DELETE:
-			if _edit_sel >= 0 and String((_edit_records[_edit_sel] as Dictionary).get("kind", "")) in ["prop", "furniture", "showing", "plinth"]:
-				print("[em-edit] %s is dressed by rule, not placed by the plan — no per-copy removal (v1)" % (_edit_records[_edit_sel] as Dictionary).get("kind"))
+			if _edit_sel >= 0 and String((_edit_records[_edit_sel] as Dictionary).get("kind", "")) in ["prop", "furniture", "showing"]:
+				# a per-copy REMOVAL ruling — _dressing_removed skips this
+				# index on every later build; the node hides now
+				var rrem: Dictionary = _edit_records[_edit_sel]
+				var ovr: Dictionary = _furniture_override(rrem)
+				ovr["remove"] = true
+				var nrem: Node3D = _node_or_null(rrem.get("node"))
+				if nrem != null and is_instance_valid(nrem):
+					nrem.visible = false
+				_edit_dirty = true
+				_doll_toast("%s removed — the ruling keeps it out of every build" % str(rrem.get("token")))
+			elif _edit_sel >= 0 and String((_edit_records[_edit_sel] as Dictionary).get("kind", "")) == "plinth":
+				print("[em-edit] a plinth belongs to its artifact — move the artifact instead")
 			elif _edit_sel >= 0:
 				var r2: Dictionary = _edit_records[_edit_sel]
 				# an ADDED row's delete erases the add ruling itself; a plan
@@ -9718,17 +9754,14 @@ func _edit_fine(dx: float, dy: float, dz: float) -> void:
 		return
 	var r: Dictionary = _edit_records[_edit_sel]
 	var kind := String(r.get("kind", ""))
-	if kind == "prop":
-		if dy != 0.0:
-			_edit_prop_nudge(dy)   # PGUP/PGDN on a prop = the same 0.2 height ruling
-		else:
-			print("[em-edit] %s is a wall prop — no fine offset (v1)" % r.get("token"))
+	if kind == "prop" and dy != 0.0:
+		_edit_prop_nudge(dy)   # PGUP/PGDN on a prop = the token-wide height ruling
 		return
 	var node: Node3D = _node_or_null(r.get("node"))
 	if node == null or not is_instance_valid(node):
 		return
 	var ov: Dictionary
-	if kind in ["showing", "furniture", "plinth"]:
+	if kind in ["showing", "furniture", "plinth", "prop"]:
 		ov = _furniture_override(r)
 		if kind == "showing":
 			# a showing proxy is invisible; the picture it stands for is a
@@ -9921,12 +9954,9 @@ func _edit_nudge(dx: int, dz: int) -> void:
 		_edit_fine(float(dx), 0.0, float(dz))
 		return
 	if String(r.get("kind", "")) == "prop":
-		# a wall prop has no cell to move to — its convention is HEIGHT.
-		# UP/DOWN rule it; LEFT/RIGHT are refused with a voice.
-		if dz != 0:
-			_edit_prop_nudge(-0.05 * float(dz))   # UP is dz=-1 -> +5 cm
-		else:
-			print("[em-edit] %s is a wall prop — its convention is height (UP/DOWN); walk to the corridor for the rest" % r.get("token"))
+		# a drag or arrow on a wall prop is a PER-COPY offset now, same as
+		# furniture (its token-wide height convention stays on PGUP/PGDN)
+		_edit_fine(float(dx), 0.0, float(dz))
 		return
 	var node: Node3D = _node_or_null(r.get("node"))
 	if node == null or not is_instance_valid(node):
@@ -10659,6 +10689,14 @@ func _wall_toggle_under_crosshair() -> void:
 var _rule_hover: MeshInstance3D = null
 var _doll_palette: HBoxContainer = null
 var _doll_hover_idx: int = -1   # the body under the hover ring — E selects it while editing
+# THE SIMS GRAMMAR (Palle: "can we right mouse to remove wall. How does
+# similar software work, like sims"): asymmetric verbs — LMB BUILDS,
+# SHIFT-LMB or a right CLICK OPENS (RMB-drag still orbits) — drag draws
+# wall RUNS, and ctrl+Z undoes ruling by ruling.
+var _rule_paint_drag: String = ""            # "4" building / "1" opening / "" idle
+var _rule_last_cell := Vector2i(-9999, -9999)
+var _rule_rmb_pos := Vector2.ZERO
+var _rule_undo: Array = []                   # [{seg, zbase, wx, wz, prev}]
 
 
 func _rule_peek(wx: int, wz: int) -> String:
@@ -10694,7 +10732,7 @@ func _rule_peek(wx: int, wz: int) -> String:
 	return ""
 
 
-func _rule_cell(segn: Node3D, zbase: int, wx: int, wz: int, erase: bool) -> String:
+func _rule_cell(segn: Node3D, zbase: int, wx: int, wz: int, erase: bool, force: String = "", from_undo: bool = false) -> String:
 	## The ONE author of a wall/passage ruling: toggles the cell (hall tile
 	## or enter room), records/updates/erases the override row, and drops a
 	## translucent preview box. Returns the toast text ("" = nothing done).
@@ -10713,6 +10751,15 @@ func _rule_cell(segn: Node3D, zbase: int, wx: int, wz: int, erase: bool) -> Stri
 	else:
 		cur = _rule_peek(wx, wz)
 	var nv := "1" if cur.begins_with("4") else "4"
+	if force != "":
+		# paint mode: only act when the cell would CHANGE (drag-safe)
+		if cur.begins_with(force):
+			return ""
+		nv = force
+	if not erase and not from_undo:
+		_rule_undo.append({"seg": segn, "zbase": zbase, "wx": wx, "wz": wz, "prev": cur})
+		if _rule_undo.size() > 200:
+			_rule_undo.pop_front()
 	var ch := String(segn.get_meta("em_chapter")) if segn.has_meta("em_chapter") else ""
 	var pearl := String(segn.get_meta("em_pearl")) if segn.has_meta("em_pearl") else ""
 	if in_hall:
@@ -10862,7 +10909,7 @@ func _doll_palette_pressed(b: Button) -> void:
 		_doll_toast("saved — the walls you built stand; F6 re-deals the whole hall if you want a clean rebuild")
 		return
 	_doll_brush = br
-	var names := {"": "the hand picks and drags bodies", "R": "wall/passage — click a cell (SHIFT-click erases the ruling)", "D": "door — click where the sliding door should stand"}
+	var names := {"": "the hand picks and drags bodies", "R": "wall — LMB builds (drag draws a run) · right-click or SHIFT opens · ctrl+Z undoes", "D": "door — click where the sliding door should stand"}
 	_doll_toast(String(names.get(br, "")))
 	_doll_palette_refresh()
 
@@ -10897,3 +10944,35 @@ func _live_wall_remove(segn: Node3D, wx: int, wz_local: float) -> bool:
 						and absf(cs.position.x - (wx + 0.5)) < 0.35 and absf(cs.position.z - wz_local) < 0.35:
 					cs.queue_free()
 	return hit
+
+
+func _doll_rule_set(wx: int, wz: int, val: String, speak: bool) -> void:
+	## Paint ONE cell to `val` ("4" wall / "1" passage) — the Sims verbs:
+	## used by LMB press, the drag stroke, and the RMB sledgehammer click.
+	for sv in _segments:
+		var sd: Dictionary = sv
+		if wz >= int(sd.get("z0", 0)) and wz < int(sd.get("z1", 0)):
+			var msg := _rule_cell(_node_or_null(sd.get("node")), int(sd.get("z0", 0)), wx, wz, false, val)
+			if speak and msg != "":
+				_doll_toast(msg)
+			return
+	if speak:
+		_doll_toast("no hall under that cell")
+
+
+func _rule_undo_pop() -> void:
+	if _rule_undo.is_empty():
+		_doll_toast("nothing to undo")
+		return
+	var u: Dictionary = _rule_undo.pop_back()
+	var segn: Node3D = _node_or_null(u.get("seg"))
+	if segn == null or not is_instance_valid(segn):
+		_doll_toast("that hall is gone — nothing to undo there")
+		return
+	var prev := String(u.get("prev", "1"))
+	var back := "4" if prev.begins_with("4") else "1"
+	var msg := _rule_cell(segn, int(u.get("zbase", 0)), int(u.get("wx", 0)),
+		int(u.get("wz", 0)), false, back, true)
+	_doll_toast("undone — [%d,%d] back to %s" % [int(u.get("wx", 0)),
+		int(u.get("wz", 0)) - int(u.get("zbase", 0)) - VESTIBULE_H,
+		"WALL" if back == "4" else "floor"] if msg != "" else "undo: nothing changed")
