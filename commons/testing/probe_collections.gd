@@ -35,17 +35,42 @@ func _run() -> void:
 	grid[2][2] = "laser_point"
 	grid[2][3] = "laser_point"
 	grid[5][5] = "pick_up_cube"
+	# a BOUND SERIES: same base, config differing in exactly one key
+	grid[7][1] = "accord_swarm:0#accord:school"
+	grid[7][2] = "accord_swarm:0#accord:orb"
+	grid[7][3] = "accord_swarm:0#accord:lane"
+	# NOT a series: two keys differ — must stay individual
+	grid[9][1] = "adder_board:0#workings:trace#extra:a"
+	grid[9][2] = "adder_board:0#workings:outcome#extra:b"
 	ed.call("_spawn", grid, "interactable", Color(1, 1, 1), null)
 	await process_frame
 	var masters: Array = []
 	for c in ed.get_children():
 		if c is Node3D and (c as Node).has_meta("token"):
 			masters.append(c)
-	if masters.size() != 2:
-		fails.append("expected 2 markers after fold, got %d" % masters.size())
+	# laser master + lone cube + bound accord master + 2 unfoldable adders = 5
+	if masters.size() != 5:
+		fails.append("expected 5 markers after fold, got %d" % masters.size())
+	var bound: Node3D = null
+	var adders := 0
+	for m in masters:
+		if str((m as Node).get_meta("bound_axis", "")) == "accord":
+			bound = m
+		if str((m as Node).get_meta("token")).begins_with("adder_board"):
+			adders += 1
+	if bound == null:
+		fails.append("no master bound to the accord axis")
+	else:
+		if int(bound.get_meta("count", 0)) != 3:
+			fails.append("bound master count %s, wanted 3" % str(bound.get_meta("count")))
+		var vals: Array = bound.get_meta("bound_values", [])
+		if str("|".join(PackedStringArray(vals))) != "school|orb|lane":
+			fails.append("bound values wrong: %s" % str(vals))
+	if adders != 2:
+		fails.append("two-key-diff run folded anyway (%d adder markers)" % adders)
 	var fam: Node3D = null
 	for m in masters:
-		if int((m as Node).get_meta("count", 1)) == 3:
+		if int((m as Node).get_meta("count", 1)) == 3 and str((m as Node).get_meta("token")).begins_with("laser_point"):
 			fam = m
 	if fam == null:
 		fails.append("no marker carries count 3")

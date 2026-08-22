@@ -101,6 +101,9 @@ const COL_GCUBE := Color(0.50, 0.72, 0.58)   # structure cube while edit_grid is
 @export_tool_button("Collection −1") var _b_colm: Callable = _col_minus
 @export_tool_button("Spread x ⇄ z") var _b_cols: Callable = _col_spread
 @export_tool_button("Gap 1→2→3→4→1") var _b_colg: Callable = _col_gap
+## BIND AXIS: the collection steps through one of the token's declared
+## dna.axes — member i saves with #axis:value_i. Cycles none → each axis.
+@export_tool_button("🧬 Bind axis (cycle)") var _b_colb: Callable = _col_bind
 
 @export_group("Selection")
 @export_tool_button("🗑  Remove selected") var _b_remove: Callable = _remove_selected
@@ -130,6 +133,7 @@ var _depth := 0
 var edit_grid: bool = false   # derived from active_layer == "Structure" — selectable structure cubes
 var active_layer: String = "Interactables"   # Interactables / Utilities / Structure / Clusters
 var _scene_map: Dictionary = {}   # lookup_name -> scene path (lazy from REGISTRY_DIR), for live_preview
+var _axes_map: Dictionary = {}    # lookup_name -> {axis: [values]} from dna.axes (same scan)
 const MUSEUM_W := 17                # the museum layer's canvas width (odd; widest museum tile)
 var _stamps: Array = []             # [{key, label, w, h, tile}] — lazy from data files
 var _stamp_i: int = 0
@@ -387,34 +391,47 @@ func _spawn(grid: Array, layer: String, col: Color, root: Node) -> void:
 		if used.has(k):
 			continue
 		var tok: String = cells[k]
+		var base := tok.split("#")[0]
 		var best_n := 1
 		var best_spread := "x"
 		var best_gap := 1
 		for spread in ["x", "z"]:
-			for gap in range(1, 5):
+			for gap in range(1, 9):
 				var n := 1
 				while true:
 					var nxt := Vector2i(k.x + n * gap, k.y) if spread == "x" else Vector2i(k.x, k.y + n * gap)
-					if used.has(nxt) or cells.get(nxt, "") != tok:
+					if used.has(nxt) or str(cells.get(nxt, "")).split("#")[0] != base or not cells.has(nxt):
 						break
 					n += 1
 				if n > best_n:
 					best_n = n
 					best_spread = spread
 					best_gap = gap
+		var did := false
 		if best_n >= 2:
+			var toks: Array = []
 			for i in range(best_n):
-				used[Vector2i(k.x + i * best_gap, k.y) if best_spread == "x" else Vector2i(k.x, k.y + i * best_gap)] = true
-			_make_marker(tok, layer, k.x, k.y, col, root, best_n, best_spread, best_gap)
-		else:
+				var mp := Vector2i(k.x + i * best_gap, k.y) if best_spread == "x" else Vector2i(k.x, k.y + i * best_gap)
+				toks.append(cells[mp])
+			var fold := _col_classify(toks)
+			if str(fold["mode"]) != "none":
+				var mk := _make_marker(tok, layer, k.x, k.y, col, root, best_n, best_spread, best_gap)
+				if mk != null and str(fold["mode"]) == "bound":
+					mk.set_meta("bound_axis", fold["axis"])
+					mk.set_meta("bound_values", fold["values"])
+					_col_refresh(mk)
+				for i in range(best_n):
+					used[Vector2i(k.x + i * best_gap, k.y) if best_spread == "x" else Vector2i(k.x, k.y + i * best_gap)] = true
+				did = true
+		if not did:
 			used[k] = true
 			_make_marker(tok, layer, k.x, k.y, col, root)
 
 
-func _make_marker(token: String, layer: String, x: int, z: int, col: Color, root: Node, count: int = 1, spread: String = "x", gap: int = 1) -> void:
+func _make_marker(token: String, layer: String, x: int, z: int, col: Color, root: Node, count: int = 1, spread: String = "x", gap: int = 1) -> Node3D:
 	if layer == "interactable" and token.begins_with("cluster:"):
 		_spawn_cluster(token, x, z, root)
-		return
+		return null
 	var label := token.split("#")[0]
 	var m := _box(Vector3(0.5, 0.5, 0.5), col)
 	m.name = label.replace(":", "_")
@@ -438,6 +455,7 @@ func _make_marker(token: String, layer: String, x: int, z: int, col: Color, root
 		_attach_billboard(m, label.split(":")[0])
 	if root:
 		m.owner = root
+	return m
 
 
 func _spawn_cluster(token: String, x: int, z: int, root: Node) -> void:
@@ -651,6 +669,9 @@ func _build_scene_map() -> void:
 				if e is Dictionary and e.has("scene"):
 					var lookup := str(e.get("lookup_name", k))
 					_scene_map[lookup] = str(e["scene"])
+					var dna_v: Variant = (e as Dictionary).get("dna")
+					if dna_v is Dictionary and (dna_v as Dictionary).get("axes") is Dictionary:
+						_axes_map[lookup] = (dna_v as Dictionary)["axes"]
 
 
 func _attach_live_scene(anchor: Node3D, lookup: String) -> bool:
@@ -784,6 +805,8 @@ func _save() -> void:
 		var cnt: int = maxi(1, int(m.get_meta("count", 1)))
 		var spr := str(m.get_meta("spread", "x"))
 		var gp: int = maxi(1, int(m.get_meta("gap", 1)))
+		var b_axis := str(m.get_meta("bound_axis", ""))
+		var b_vals: Array = m.get_meta("bound_values", [])
 		for i in range(cnt):
 			var rr: int = cz + (i * gp if spr == "z" else 0)
 			var cc: int = cx + (i * gp if spr == "x" else 0)
@@ -791,7 +814,10 @@ func _save() -> void:
 				continue
 			if i > 0 and str(inter[rr][cc]).strip_edges() != "":
 				continue
-			inter[rr][cc] = token
+			var tok_i := token
+			if b_axis != "" and not b_vals.is_empty():
+				tok_i = _tok_set_config(token, b_axis, str(b_vals[mini(i, b_vals.size() - 1)]))
+			inter[rr][cc] = tok_i
 		placed += 1
 	if not _map.has("layers"):
 		_map["layers"] = {}
@@ -1528,9 +1554,15 @@ func _col_refresh(m: Node3D) -> void:
 	_col_copies(m, COL_ARTIFACT)
 	var base := str(m.get_meta("base_label", str(m.get_meta("token")).split("#")[0]))
 	var cnt: int = maxi(1, int(m.get_meta("count", 1)))
+	var suffix := ""
+	if cnt > 1:
+		suffix = " ×%d" % cnt
+		var bx := str(m.get_meta("bound_axis", ""))
+		if bx != "":
+			suffix += " · " + bx
 	for c in m.get_children():
 		if c is Label3D:
-			(c as Label3D).text = base + (" ×%d" % cnt if cnt > 1 else "")
+			(c as Label3D).text = base + suffix
 	status = _status_line()
 
 
@@ -1577,5 +1609,105 @@ func _col_gap() -> void:
 	var m := _first_selected_marker()
 	if m == null:
 		return
-	m.set_meta("gap", (int(m.get_meta("gap", 1)) % 4) + 1)
+	m.set_meta("gap", (int(m.get_meta("gap", 1)) % 8) + 1)
 	_col_refresh(m)
+
+
+func _tok_config(tok: String) -> Dictionary:
+	## Parse the token's #k:v#k:v suffix (first colon splits, mirrors /editor).
+	var out: Dictionary = {}
+	var parts := tok.split("#")
+	for i in range(1, parts.size()):
+		var seg := str(parts[i])
+		var colon := seg.find(":")
+		if colon < 0:
+			continue
+		var kk := seg.substr(0, colon).strip_edges()
+		if kk != "":
+			out[kk] = seg.substr(colon + 1).strip_edges()
+	return out
+
+
+func _tok_set_config(tok: String, key: String, val: String) -> String:
+	## The token with config[key] set to val (other segments kept in order).
+	var parts := tok.split("#")
+	var out := str(parts[0])
+	for i in range(1, parts.size()):
+		var seg := str(parts[i])
+		if seg.begins_with(key + ":"):
+			continue
+		if seg != "":
+			out += "#" + seg
+	return out + "#" + key + ":" + val
+
+
+func _col_classify(toks: Array) -> Dictionary:
+	## plain: identical tokens. bound: configs differ in EXACTLY one shared
+	## key (a series). none: anything else — the run stays individual.
+	var all_same := true
+	for t in toks:
+		if str(t) != str(toks[0]):
+			all_same = false
+	if all_same:
+		return {"mode": "plain"}
+	var cfgs: Array = []
+	for t in toks:
+		cfgs.append(_tok_config(str(t)))
+	var key_set: Dictionary = {}
+	for c in cfgs:
+		for kk in (c as Dictionary).keys():
+			key_set[kk] = true
+	var diff: Array = []
+	for kk in key_set.keys():
+		var v0: Variant = (cfgs[0] as Dictionary).get(kk)
+		for c in cfgs:
+			if (c as Dictionary).get(kk) != v0:
+				diff.append(kk)
+				break
+	if diff.size() == 1:
+		var kx := str(diff[0])
+		var vals: Array = []
+		for c in cfgs:
+			if not (c as Dictionary).has(kx):
+				return {"mode": "none"}
+			vals.append(str((c as Dictionary)[kx]))
+		return {"mode": "bound", "axis": kx, "values": vals}
+	return {"mode": "none"}
+
+
+func _col_bind() -> void:
+	## Cycle the selected collection through its token's declared axes:
+	## none → axis1 → axis2 → … → none. Count snaps to the value count.
+	var m := _first_selected_marker()
+	if m == null:
+		push_warning("MapToolEditor: select an artifact marker first")
+		return
+	if _scene_map.is_empty():
+		_build_scene_map()
+	var lookup := str(m.get_meta("token")).split("#")[0].split(":")[0]
+	var axes_v: Variant = _axes_map.get(lookup)
+	if not (axes_v is Dictionary) or (axes_v as Dictionary).is_empty():
+		push_warning("MapToolEditor: '%s' declares no dna.axes" % lookup)
+		return
+	var names: Array = (axes_v as Dictionary).keys()
+	var cur := str(m.get_meta("bound_axis", ""))
+	var idx := names.find(cur)
+	if cur != "" and idx == names.size() - 1:
+		if m.has_meta("bound_axis"):
+			m.remove_meta("bound_axis")
+		if m.has_meta("bound_values"):
+			m.remove_meta("bound_values")
+		_col_refresh(m)
+		print("MapToolEditor: axis unbound — the collection repeats the default")
+		return
+	var nxt := str(names[0] if cur == "" or idx < 0 else names[idx + 1])
+	var vals: Array = ((axes_v as Dictionary)[nxt] as Array).duplicate()
+	m.set_meta("bound_axis", nxt)
+	m.set_meta("bound_values", vals)
+	m.set_meta("count", maxi(2, vals.size()))
+	if not m.has_meta("spread"):
+		m.set_meta("spread", "x")
+	if not m.has_meta("gap"):
+		m.set_meta("gap", 1)
+	_col_refresh(m)
+	print("MapToolEditor: bound '%s.%s' — %d member(s): %s" % [lookup, nxt, vals.size(), " · ".join(PackedStringArray(vals))])
