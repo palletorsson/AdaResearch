@@ -11345,8 +11345,18 @@ func _map_move_token(map_name: String, fx: int, fz: int, tx2: int, tz2: int) -> 
 func _map_store(path: String, doc: Variant) -> bool:
 	## The compact-rows discipline: every grid row on ONE line (a plain
 	## stringify once reformatted 15k lines of a registry).
-	var f := FileAccess.open(path, FileAccess.WRITE)
+	## RETRY the open: a Godot EDITOR left open on the project rescans
+	## changed files and holds them briefly without write-sharing — one
+	## null handle in that window read as "editing refused, they snap
+	## back". Six tries across ~0.3 s ride the scan window out.
+	var f: FileAccess = null
+	for attempt in range(6):
+		f = FileAccess.open(path, FileAccess.WRITE)
+		if f != null:
+			break
+		OS.delay_msec(50)
 	if f == null:
+		push_warning("[em-map] %s is LOCKED (another Godot open on the project?) — the edit was refused" % path)
 		return false
 	f.store_string(_jsonc(doc, ""))
 	f.close()

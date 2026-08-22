@@ -72,10 +72,36 @@ func _run() -> void:
 		var msg: String = inst.call("_rule_cell", seg0, 0, 6, 10, false)
 		if msg == "":
 			fails.append("_rule_cell returned '' (the editing-refused symptom)")
-	# RESTORE the map byte-for-byte
-	var f := FileAccess.open(MAP, FileAccess.WRITE)
-	f.store_string(original)
-	f.close()
+		# 4. the REAL drag path (Palle: "moving artifacts still refused, they
+		# snap back"): _edit_nudge on an actual artifact record
+		var recs: Array = inst.get("_edit_records")
+		var target_i := -1
+		for i in range(recs.size()):
+			var r: Dictionary = recs[i]
+			if String(r.get("token", "")) == "you_are_here" and r.get("seg") == seg0:
+				target_i = i
+		if target_i < 0:
+			fails.append("no you_are_here record on Seg0")
+		else:
+			inst.set("_edit_sel", target_i)
+			var tc_b: Array = ((recs[target_i] as Dictionary).get("tile_cell", []) as Array).duplicate()
+			inst.call("_edit_nudge", 1, 0)
+			var tc_a: Array = (recs[target_i] as Dictionary).get("tile_cell", [])
+			if tc_b.size() < 2 or tc_a.size() < 2 or int(tc_a[0]) != int(tc_b[0]) + 1:
+				fails.append("SNAP-BACK reproduced: _edit_nudge left tile_cell %s (was %s)" % [str(tc_a), str(tc_b)])
+	# RESTORE the map byte-for-byte (retry: an open Godot editor's rescans
+	# can hold the file — a failed restore once left probe edits behind)
+	var f: FileAccess = null
+	for attempt in range(20):
+		f = FileAccess.open(MAP, FileAccess.WRITE)
+		if f != null:
+			break
+		OS.delay_msec(100)
+	if f == null:
+		fails.append("RESTORE FAILED — map left dirty, git checkout it")
+	else:
+		f.store_string(original)
+		f.close()
 	var out := FileAccess.open(OUT, FileAccess.WRITE)
 	out.store_string("PASS" if fails.is_empty() else "FAIL: " + "; ".join(fails))
 	out.close()
