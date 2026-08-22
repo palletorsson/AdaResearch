@@ -3233,6 +3233,8 @@ func _build_segment() -> void:
 	# the material library replaces the flat albedos role by role; a role the
 	# library never produced stays on its v1 colour
 	var m_wall: Material = _sm("wall_white") if wc else _sm("wall")
+	seg.set_meta("em_wall_mat", m_wall)
+	seg.set_meta("em_wall_col", wall_col)
 	if m_wall == null:
 		m_wall = _sm("wall")
 	# door overpanels are stamped by em_detail in the "wall" role, so the role it
@@ -10734,26 +10736,36 @@ func _rule_cell(segn: Node3D, zbase: int, wx: int, wz: int, erase: bool) -> Stri
 			"token": "cell:" + pearl, "from": [wx, cz_t], "value": nv,
 			"provenance": "hand"})
 	_edit_dirty = true
-	var pname := "CellPreview_%d_%d" % [wx, cz_t]
-	var old_pv := segn.get_node_or_null(pname)
-	if old_pv != null:
-		old_pv.free()
 	if erase:
-		return "ruling erased at [%d,%d]" % [wx, cz_t]
+		return "ruling erased at [%d,%d] — the look reverts on the next build (F6)" % [wx, cz_t]
+	# THE ACTUAL LOOK, DIRECTLY (Palle: "instead of green can we see the
+	# actual look directly, no build — just save"): a ruled wall is BUILT
+	# now — real plaster, real collider — and a ruled passage removes the
+	# standing wall box + its collider. Save only persists.
+	var wz_local: float = float(VESTIBULE_H + cz_t) + 0.5
+	var place := "hall" if in_hall else "enter room"
+	if nv == "4":
+		_live_wall_add(segn, wx, wz_local)
+		_walk_cells.erase(Vector2i(wx, wz))
+		return "%s [%d,%d]: WALL built — save keeps it" % [place, wx, cz_t]
+	var removed := _live_wall_remove(segn, wx, wz_local)
+	_walk_cells[Vector2i(wx, wz)] = true
+	if removed:
+		return "%s [%d,%d]: wall OPENED — save keeps it" % [place, wx, cz_t]
+	# merged wall runs cannot lose one cell live — mark it rose, F6 rebuilds
 	var pv := MeshInstance3D.new()
-	pv.name = pname
+	pv.name = "CellPreview_%d_%d" % [wx, cz_t]
 	var bm := BoxMesh.new()
 	bm.size = Vector3(0.98, 3.0, 0.98)
 	pv.mesh = bm
 	var mt := StandardMaterial3D.new()
 	mt.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	mt.albedo_color = Color(0.2, 0.9, 0.4, 0.35) if nv == "4" else Color(0.95, 0.3, 0.3, 0.3)
+	mt.albedo_color = Color(0.95, 0.3, 0.3, 0.3)
 	mt.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	pv.material_override = mt
 	segn.add_child(pv)
-	pv.position = Vector3(wx + 0.5, 1.5, float(VESTIBULE_H + cz_t) + 0.5)
-	var place := "hall" if in_hall else "enter room"
-	return "%s [%d,%d] ruled %s — Save+Build makes it real" % [place, wx, cz_t, "WALL" if nv == "4" else "PASSAGE"]
+	pv.position = Vector3(wx + 0.5, 1.5, wz_local)
+	return "%s [%d,%d] ruled PASSAGE — this wall is merged; F6 rebuilds it open" % [place, wx, cz_t]
 
 
 func _doll_rule(wx: int, wz: int, erase: bool) -> void:
@@ -10826,7 +10838,7 @@ func _doll_palette_refresh() -> void:
 		_doll_palette.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM)
 		_doll_palette.offset_top = -64.0
 		_doll_palette.offset_bottom = -20.0
-		var tools := [["🖐 hand", ""], ["🧱 wall/passage", "R"], ["🚪 door", "D"], ["💾 save+build", "!"]]
+		var tools := [["🖐 hand", ""], ["🧱 wall/passage", "R"], ["🚪 door", "D"], ["💾 save", "!"]]
 		for t in tools:
 			var b := Button.new()
 			b.text = String((t as Array)[0])
@@ -10847,10 +10859,41 @@ func _doll_palette_pressed(b: Button) -> void:
 	var br := String(b.get_meta("brush"))
 	if br == "!":
 		_edit_flush()
-		_doll_toast("saved — the museum rebuilds around you…")
-		_follow_reload()
+		_doll_toast("saved — the walls you built stand; F6 re-deals the whole hall if you want a clean rebuild")
 		return
 	_doll_brush = br
 	var names := {"": "the hand picks and drags bodies", "R": "wall/passage — click a cell (SHIFT-click erases the ruling)", "D": "door — click where the sliding door should stand"}
 	_doll_toast(String(names.get(br, "")))
 	_doll_palette_refresh()
+
+
+func _live_wall_add(segn: Node3D, wx: int, wz_local: float) -> void:
+	## A REAL wall, on the spot: the segment's own plaster + a collider.
+	var col: Color = segn.get_meta("em_wall_col") if segn.has_meta("em_wall_col") else Color(0.85, 0.84, 0.8)
+	var mat: Material = segn.get_meta("em_wall_mat") if segn.has_meta("em_wall_mat") else null
+	_box(segn, Vector3(wx + 0.5, WALL_H / 2.0, wz_local), Vector3(1, WALL_H, 1), col, mat)
+	var solid := segn.get_node_or_null("Collision")
+	if solid is StaticBody3D:
+		_add_col(solid as StaticBody3D, Vector3(wx + 0.5, WALL_H / 2.0, wz_local), Vector3(1, WALL_H, 1))
+
+
+func _live_wall_remove(segn: Node3D, wx: int, wz_local: float) -> bool:
+	## Free the standing wall box at the cell — mesh AND collider. False when
+	## nothing wall-sized stands there (merged runs; the caller says F6).
+	var hit := false
+	for c in [] + segn.get_children():
+		if c is MeshInstance3D:
+			var m := c as MeshInstance3D
+			if m.mesh is BoxMesh and absf((m.mesh as BoxMesh).size.y - WALL_H) < 0.8 \
+					and absf(m.position.x - (wx + 0.5)) < 0.35 and absf(m.position.z - wz_local) < 0.35:
+				m.queue_free()
+				hit = true
+	var solid := segn.get_node_or_null("Collision")
+	if solid != null:
+		for c2 in [] + solid.get_children():
+			if c2 is CollisionShape3D:
+				var cs := c2 as CollisionShape3D
+				if cs.shape is BoxShape3D and absf((cs.shape as BoxShape3D).size.y - WALL_H) < 0.8 \
+						and absf(cs.position.x - (wx + 0.5)) < 0.35 and absf(cs.position.z - wz_local) < 0.35:
+					cs.queue_free()
+	return hit
