@@ -75,7 +75,10 @@ const COL_GCUBE := Color(0.50, 0.72, 0.58)   # structure cube while edit_grid is
 @export_tool_button("⌫ Erase at cursor") var _b_sterase: Callable = _stamp_erase
 @export_multiline var stamp_status: String = "(load a map, then Prev/Next stamp)"
 ## Set the museum layer's z length (rows). 0 = leave as is.
-@export var museum_length_z: int = 0
+@export_range(0, 60) var museum_length_z: int = 0
+## 0 = the hall's own width; smaller removes MIDDLE columns (the wall
+## edges survive), larger repeats the middle column — same rule as /editor.
+@export_range(0, 17) var museum_width_x: int = 0
 @export_tool_button("📏 Apply length z") var _b_stlen: Callable = _stamp_set_length
 @export_tool_button("⌜ To zero corner") var _b_stzero: Callable = _stamp_to_zero
 @export_tool_button("⚒ Build walls from museum layer") var _b_stbuild: Callable = _stamp_build_walls
@@ -982,6 +985,8 @@ func _stamp_write(erase: bool) -> void:
 	var st: Dictionary = _stamps[_stamp_i % _stamps.size()]
 	var row0 := 0   # the stamp starts at 0,0 — origin-anchored, always
 	var tile: Array = st["tile"]
+	if museum_width_x > 0 and museum_width_x != int(st["w"]):
+		tile = _resample_tile_width(tile, int(st["w"]), museum_width_x)
 	if not _map.has("layers"):
 		_map["layers"] = {}
 	var mus: Array = _map["layers"].get("museum", [])
@@ -1203,3 +1208,24 @@ func _stamp_yield() -> void:
 	_map["layers"]["museum"] = rows
 	_draw_museum_layer()
 	print("MapToolEditor: %d wall cell(s) yielded to artifact footprints" % cleared)
+
+
+func _resample_tile_width(tile: Array, w: int, want: int) -> Array:
+	## Narrower keeps the left and right edges — the walls — and drops
+	## columns out of the MIDDLE; wider repeats the middle column.
+	var keep_l: int = int(ceil(min(want, w) / 2.0))
+	var keep_r: int = int(floor(min(want, w) / 2.0))
+	var out: Array = []
+	for row_v in tile:
+		var row: Array = row_v
+		var nr: Array = []
+		if want < w:
+			nr = row.slice(0, keep_l) + row.slice(w - keep_r)
+		else:
+			var mid: int = w / 2
+			nr = row.slice(0, mid)
+			for i in range(want - w):
+				nr.append(row[mid] if mid < row.size() else "0")
+			nr += row.slice(mid)
+		out.append(nr)
+	return out
