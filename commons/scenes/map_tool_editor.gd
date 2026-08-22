@@ -79,6 +79,7 @@ const COL_GCUBE := Color(0.50, 0.72, 0.58)   # structure cube while edit_grid is
 @export_tool_button("📏 Apply length z") var _b_stlen: Callable = _stamp_set_length
 @export_tool_button("⌜ To zero corner") var _b_stzero: Callable = _stamp_to_zero
 @export_tool_button("⚒ Build walls from museum layer") var _b_stbuild: Callable = _stamp_build_walls
+@export_tool_button("⌫ Walls yield to artifacts") var _b_styield: Callable = _stamp_yield
 
 @export_group("Selection")
 @export_tool_button("🗑  Remove selected") var _b_remove: Callable = _remove_selected
@@ -947,14 +948,14 @@ func _stamp_place_cursor() -> void:
 			var wall := not v.begins_with("1")
 			var box := MeshInstance3D.new()
 			var bm := BoxMesh.new()
-			bm.size = Vector3(0.9, 2.0 if wall else 1.0, 0.9)
+			bm.size = Vector3(0.9, 2.0 if wall else 0.1, 0.9)
 			box.mesh = bm
 			var mat := StandardMaterial3D.new()
-			mat.albedo_color = Color(0.05, 0.45, 0.56, 0.5) if wall else Color(0.22, 0.74, 0.97, 0.28)
+			mat.albedo_color = Color(0.05, 0.45, 0.56, 0.5) if wall else Color(0.96, 0.62, 0.04, 0.25)
 			mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 			mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 			box.material_override = mat
-			box.position = Vector3((x0 + dx + 0.5) * _total, 1.0 if wall else 0.5, (dz + 0.5) * _total)
+			box.position = Vector3((x0 + dx + 0.5) * _total, 1.0 if wall else 0.06, (dz + 0.5) * _total)
 			cur.add_child(box)
 	print("MapToolEditor: stamp cursor = %s — drag it, then 'Stamp at cursor'" % st["label"])
 
@@ -979,7 +980,7 @@ func _stamp_write(erase: bool) -> void:
 		push_warning("MapToolEditor: place the stamp cursor first")
 		return
 	var st: Dictionary = _stamps[_stamp_i % _stamps.size()]
-	var row0 := int(round(cur.position.z / _total))
+	var row0 := 0   # the stamp starts at 0,0 — origin-anchored, always
 	var tile: Array = st["tile"]
 	if not _map.has("layers"):
 		_map["layers"] = {}
@@ -993,7 +994,7 @@ func _stamp_write(erase: bool) -> void:
 	for i in range(mus.size()):
 		while (mus[i] as Array).size() < MUSEUM_W:
 			(mus[i] as Array).append("0")
-	var x0 := int(floor((MUSEUM_W - int(st["w"])) / 2.0))
+	var x0 := 0
 	for dz in range(tile.size()):
 		var row: Array = tile[dz]
 		for dx in range(row.size()):
@@ -1008,11 +1009,21 @@ func _stamp_write(erase: bool) -> void:
 			if v == "" or v == "0":
 				continue
 			(mus[zz] as Array)[xx] = "1" if v.begins_with("1") else "2"
+	# the length rides the stamp — museum_length_z wins when set, else the
+	# stamp's own height IS the canvas (no extra apply step)
+	var want: int = museum_length_z if museum_length_z > 0 else tile.size()
+	while mus.size() > want:
+		mus.pop_back()
+	while mus.size() < want:
+		var blank2: Array = []
+		for i in range(MUSEUM_W):
+			blank2.append("0")
+		mus.append(blank2)
 	_map["layers"]["museum"] = mus
 	_draw_museum_layer()
 	_refresh_stamp_status()
-	print("MapToolEditor: %s %s at row %d — Save map writes layers.museum" % [
-		"erased" if erase else "stamped", st["label"], row0])
+	print("MapToolEditor: %s %s at 0,0 — %d row(s); Save map writes layers.museum" % [
+		"erased" if erase else "stamped", st["label"], mus.size()])
 
 
 func _draw_museum_layer() -> void:
@@ -1038,14 +1049,14 @@ func _draw_museum_layer() -> void:
 			var wall := v == "2"
 			var box := MeshInstance3D.new()
 			var bm := BoxMesh.new()
-			bm.size = Vector3(0.92, 2.0 if wall else 1.0, 0.92)
+			bm.size = Vector3(0.92, 2.0 if wall else 0.08, 0.92)
 			box.mesh = bm
 			var mat := StandardMaterial3D.new()
-			mat.albedo_color = Color(0.05, 0.45, 0.56, 0.55) if wall else Color(0.22, 0.74, 0.97, 0.25)
+			mat.albedo_color = Color(0.05, 0.45, 0.56, 0.55) if wall else Color(0.96, 0.62, 0.04, 0.22)
 			mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 			mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 			box.material_override = mat
-			box.position = Vector3((x + 0.5) * _total, 1.0 if wall else 0.5, (z + 0.5) * _total)
+			box.position = Vector3((x + 0.5) * _total, 1.0 if wall else 0.05, (z + 0.5) * _total)
 			view.add_child(box)
 
 
@@ -1146,3 +1157,49 @@ func _stamp_build_walls() -> void:
 	if _map.has("map_info") and (_map["map_info"] as Dictionary).has("dimensions"):
 		(_map["map_info"]["dimensions"] as Dictionary)["depth"] = _depth
 	print("MapToolEditor: built %d wall cell(s) + %d floor cell(s) from the museum layer — Save map, then Load map to see the cubes" % [walls, floors])
+
+
+var _measures: Dictionary = {}   # token -> [w_m, h_m, d_m, cells_w, cells_d], lazy from necklace_lab.json
+
+func _load_measures() -> void:
+	if not _measures.is_empty():
+		return
+	if not FileAccess.file_exists("res://ada_run/necklace_lab.json"):
+		return
+	var d: Variant = JSON.parse_string(FileAccess.get_file_as_string("res://ada_run/necklace_lab.json"))
+	if d is Dictionary and (d as Dictionary).get("measures") is Dictionary:
+		_measures = (d as Dictionary)["measures"]
+
+
+func _stamp_yield() -> void:
+	## The museum-side rule, mirrored into the grid (Palle: "enable stamp out
+	## remove walls in the museum from the artifacts footprint like in the
+	## artifact to museum setup"): museum-layer walls over any artifact
+	## marker's MEASURED footprint become floor.
+	if _map.is_empty():
+		return
+	_load_measures()
+	var mus: Variant = _map.get("layers", {}).get("museum", [])
+	if not (mus is Array) or (mus as Array).is_empty():
+		return
+	var rows: Array = mus
+	var cleared := 0
+	for m in get_children():
+		if not (m is Node3D) or not m.has_meta("token"):
+			continue
+		var tok := str(m.get_meta("token")).split(":")[0]
+		var me: Variant = _measures.get(tok)
+		var cw: int = maxi(1, int((me as Array)[3])) if me is Array else 1
+		var cd: int = maxi(1, int((me as Array)[4])) if me is Array else 1
+		var cx := int(round((m as Node3D).position.x / _total))
+		var cz := int(round((m as Node3D).position.z / _total))
+		for z in range(cz - int(floor(cd / 2.0)), cz - int(floor(cd / 2.0)) + cd):
+			for x in range(cx - int(floor(cw / 2.0)), cx - int(floor(cw / 2.0)) + cw):
+				if z < 0 or z >= rows.size() or x < 0 or x >= (rows[z] as Array).size():
+					continue
+				if str((rows[z] as Array)[x]) == "2":
+					(rows[z] as Array)[x] = "1"
+					cleared += 1
+	_map["layers"]["museum"] = rows
+	_draw_museum_layer()
+	print("MapToolEditor: %d wall cell(s) yielded to artifact footprints" % cleared)
