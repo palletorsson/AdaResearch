@@ -1403,3 +1403,25 @@ func _nearest_museum_spot() -> void:
 			taken[Vector2i(cx, cz)] = true
 	status = _status_line()
 	print("MapToolEditor: nearest spot — %d marker(s) moved onto the museum floor" % moved)
+
+
+func marker_at_cell(cx: int, cz: int) -> Node3D:
+	## The marker sitting on a cell — interactables win over utilities.
+	var best: Node3D = null
+	for m in get_children():
+		if m is Node3D and m.has_meta("token"):
+			var mm := m as Node3D
+			if roundi(mm.position.x / _total) == cx and roundi(mm.position.z / _total) == cz:
+				best = mm
+				if str(m.get_meta("layer")) == "interactable":
+					return mm
+	return best
+
+
+func move_marker_to(m: Node3D, cx: int, cz: int) -> void:
+	## Seat a marker on a cell (drag + undo both land here).
+	if m == null or not is_instance_valid(m):
+		return
+	m.position = Vector3(cx * _total,
+		_height_at(cx, cz) * _total + float(m.get_meta("y_lift", 0.3)), cz * _total)
+	status = _status_line()
