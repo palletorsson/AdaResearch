@@ -3186,6 +3186,7 @@ func _build_segment() -> void:
 	# -VESTIBULE_H..-1) — Palle: "there is a space before the hall … it is
 	# not defined or I can not move stuff or door there".
 	var vest_rules: Dictionary = {}
+	var hall_is_authored := String(peek.get("authored", "")) == "map"
 	for cv_v in _edit_overrides:
 		var cvd: Dictionary = cv_v
 		if String(cvd.get("kind", "")) != "cell":
@@ -3202,6 +3203,8 @@ func _build_segment() -> void:
 			continue
 		var ccx: int = int(cf[0])
 		var ccz: int = int(cf[1])
+		if hall_is_authored and ccz >= 0:
+			continue   # ONE TRUTH: the map alone authors an authored hall's walls
 		if ccz < 0:
 			if ccz >= -VESTIBULE_H:
 				vest_rules[Vector2i(ccx, ccz + VESTIBULE_H)] = String(cvd.get("value", "1"))
@@ -5457,8 +5460,8 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 		var fine_override: Array = (row.get("offset", []) as Array).duplicate() if row.get("offset") is Array else []
 		var scale_override: float = float(row.get("scale", 1.0))
 		var removed_by_hand := false
-		var found: Dictionary = _ruling_for(tok, String(entry.get("sequence", "")), tx, tz,
-			bool(row.get("hand", false)))
+		var found: Dictionary = {} if String(entry.get("authored", "")) == "map" 			else _ruling_for(tok, String(entry.get("sequence", "")), tx, tz,
+				bool(row.get("hand", false)))
 		for ov_v in ([found] if not found.is_empty() else []):
 			var ov: Dictionary = ov_v as Dictionary
 			if bool(ov.get("remove", false)):

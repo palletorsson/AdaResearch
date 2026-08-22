@@ -113,7 +113,10 @@ func _run() -> void:
 		var q := PhysicsRayQueryParameters3D.create(Vector3(18.5, 2.0, sz), Vector3(18.5, -2.0, sz))
 		var hit := space.intersect_ray(q)
 		seam = {"probe": [18.5, sz], "floor": not hit.is_empty()}
-	# did the cell ruling land? read the built segment's own tile
+	# ONE TRUTH, both directions: with --live the curator's wall at [9,10]
+	# must stand (it lives IN THE MAP since the migration); in trial mode the
+	# trial cell RULING must be IGNORED — an authored hall's walls have one
+	# author, the map.
 	var cell_rule := false
 	var rule_x: int = 9 if live_rules else 5
 	var rule_z: int = 10 if live_rules else 5
@@ -121,7 +124,8 @@ func _run() -> void:
 		if c3 is Node3D and str(c3.name).begins_with("Seg0_") and (c3 as Node).has_meta("em_tile"):
 			var t0: Array = (c3 as Node).get_meta("em_tile")
 			if t0.size() > rule_z and (t0[rule_z] as Array).size() > rule_x:
-				cell_rule = String((t0[rule_z] as Array)[rule_x]) == "4"
+				var cv := String((t0[rule_z] as Array)[rule_x])
+				cell_rule = (cv == "4") if live_rules else (cv != "4")
 	# ONE-TRUTH serializer round-trip: the museum WRITES maps now — parse ->
 	# _jsonc -> parse must be data-identical, or a first save corrupts a map
 	var rt := false
