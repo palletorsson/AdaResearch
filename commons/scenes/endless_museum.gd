@@ -3157,6 +3157,10 @@ func _build_segment() -> void:
 	# walls, colliders, seals and the walk map derive from it — the tile stays
 	# the single author.
 	var cur_pearl := String(peek.get("pearl", ""))
+	# rulings with NEGATIVE z address the ENTER ROOM (the vestibule, rows
+	# -VESTIBULE_H..-1) — Palle: "there is a space before the hall … it is
+	# not defined or I can not move stuff or door there".
+	var vest_rules: Dictionary = {}
 	for cv_v in _furniture_rules(next_seq, "cell"):
 		var cvd: Dictionary = cv_v
 		if String(cvd.get("pearl", "")) != "" and cur_pearl != "" \
@@ -3167,7 +3171,11 @@ func _build_segment() -> void:
 			continue
 		var ccx: int = int(cf[0])
 		var ccz: int = int(cf[1])
-		if ccz >= 0 and ccz < tile.size() and ccx >= 0 and ccx < (tile[ccz] as Array).size():
+		if ccz < 0:
+			if ccz >= -VESTIBULE_H:
+				vest_rules[Vector2i(ccx, ccz + VESTIBULE_H)] = String(cvd.get("value", "1"))
+			continue
+		if ccz < tile.size() and ccx >= 0 and ccx < (tile[ccz] as Array).size():
 			(tile[ccz] as Array)[ccx] = String(cvd.get("value", "1"))
 	# MAP-AUTHORED halls (plan rows carrying authored:"map", written by
 	# tools/em_map_halls.py from the grid maps themselves): the map is the
@@ -3266,7 +3274,15 @@ func _build_segment() -> void:
 		for sx in [0, vest_w - 1]:
 			if foyer_well and sx == 0 and zr <= 1:
 				continue                   # the well's corner: the wall steps out a metre (built by _dress_lobby)
+			if String(vest_rules.get(Vector2i(int(sx), zr), "")) == "1":
+				continue                   # ruled OPEN — a side doorway in the enter room
 			_wall_at(seg, solid, wcells, int(sx), zr, wall_col, m_wall, wr)
+	# ruled WALLS inside the enter room (partitions, a narrowed mouth…)
+	for vk_v in vest_rules.keys():
+		var vk: Vector2i = vk_v
+		if String(vest_rules[vk]) == "4" and vk.x > 0 and vk.x < vest_w - 1:
+			_wall_at(seg, solid, wcells, vk.x, vk.y, wall_col, m_wall, wr)
+			_walk_cells.erase(Vector2i(vk.x, zbase + vk.y))
 	var lobby_on: bool = _seg_index == 0 and _L("lobby", "enabled", 1.0) > 0.5
 	var win_x0: int = int(_L("lobby", "window_x0", 6.0))
 	var win_x1: int = int(_L("lobby", "window_x1", 8.0))
@@ -3640,13 +3656,19 @@ func _build_segment() -> void:
 			var dmid: int = (dx0 + dx1) / 2
 			dx0 = dmid - 1
 			dx1 = dmid + 1
-		# the sliding door obeys its ruling (kind "gate": arrows in edit mode)
+		# the sliding door obeys its ruling (kind "gate": arrows in edit mode,
+		# or /hall-editor's sliders). gate_x slides it along the wall; gate_z
+		# places it in DEPTH — 4.0 is the seam between the enter room and the
+		# hall ("I want the sliding door between the big hall and the enter
+		# room"), smaller is inside the enter room, larger inside the hall.
 		for gv_v in _furniture_rules(next_seq, "gate"):
 			var gvd: Dictionary = gv_v
 			if gvd.has("gate_x"):
 				var gmid: int = clampi(int(gvd["gate_x"]), 1, w - 2)
 				dx0 = gmid - 1
 				dx1 = gmid + 1
+			if gvd.has("gate_z"):
+				gate_layout["door_z"] = clampf(float(gvd["gate_z"]), 0.5, float(VESTIBULE_H) + 6.0)
 		if dx0 >= 0:
 			gate_layout["door_x0"] = dx0
 			gate_layout["door_x1"] = dx1

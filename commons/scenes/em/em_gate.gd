@@ -56,6 +56,10 @@ static func build(seg: Node3D, solid: StaticBody3D, w: int, wall_col: Color,
 	# GATE_DEPTH rows into the hall with its own piers.
 	var in_doorway: bool = depth <= 0.0 and layout.has("door_x0") and layout.has("door_x1")
 	var z: float = 4.5 if in_doorway else 4.0 + depth - 0.5
+	# door_z (a ruling, rows from the lobby wall): the hand's word on WHERE the
+	# door stands — 4.0 is the seam between the enter room and the hall
+	if layout.has("door_z"):
+		z = float(layout["door_z"])
 	var clear: float = minf(float(w) - 2.0, 6.0)
 	var cx: float = w / 2.0
 	if in_doorway:
