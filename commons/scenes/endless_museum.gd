@@ -3151,6 +3151,24 @@ func _build_segment() -> void:
 	# _widen_doors) — so the clearing happens HERE, once. A bead whose
 	# pocket ends up unreachable is still guarded downstream: the severance
 	# rule refuses the seal and the ring search slides it to honest floor.
+	# HAND CELLS (2026-08-22, Palle: "an editor where I can edit the interior
+	# of the museum, the wall, passages"): wall/passage rulings from the
+	# in-museum editor (kind "cell", the T key) rewrite the tile HERE, before
+	# walls, colliders, seals and the walk map derive from it — the tile stays
+	# the single author.
+	var cur_pearl := String(peek.get("pearl", ""))
+	for cv_v in _furniture_rules(next_seq, "cell"):
+		var cvd: Dictionary = cv_v
+		if String(cvd.get("pearl", "")) != "" and cur_pearl != "" \
+				and String(cvd.get("pearl", "")) != cur_pearl:
+			continue
+		var cf: Array = cvd.get("from", [])
+		if cf.size() < 2:
+			continue
+		var ccx: int = int(cf[0])
+		var ccz: int = int(cf[1])
+		if ccz >= 0 and ccz < tile.size() and ccx >= 0 and ccx < (tile[ccz] as Array).size():
+			(tile[ccz] as Array)[ccx] = String(cvd.get("value", "1"))
 	# MAP-AUTHORED halls (plan rows carrying authored:"map", written by
 	# tools/em_map_halls.py from the grid maps themselves): the map is the
 	# placement authority — the necklace hand's stamp-clear must not punch
@@ -3184,6 +3202,8 @@ func _build_segment() -> void:
 	seg.name = "Seg%d_%s" % [_seg_index, spec["key"]]
 	seg.position = Vector3(0, 0, _next_z)
 	add_child(seg)
+	seg.set_meta("em_tile", tile)
+	seg.set_meta("em_pearl", cur_pearl)
 	# one static body per segment carries every collision box — walls, podiums,
 	# hero plinths — so the whole museum frees with its segment node
 	var solid := StaticBody3D.new()
@@ -3620,6 +3640,13 @@ func _build_segment() -> void:
 			var dmid: int = (dx0 + dx1) / 2
 			dx0 = dmid - 1
 			dx1 = dmid + 1
+		# the sliding door obeys its ruling (kind "gate": arrows in edit mode)
+		for gv_v in _furniture_rules(next_seq, "gate"):
+			var gvd: Dictionary = gv_v
+			if gvd.has("gate_x"):
+				var gmid: int = clampi(int(gvd["gate_x"]), 1, w - 2)
+				dx0 = gmid - 1
+				dx1 = gmid + 1
 		if dx0 >= 0:
 			gate_layout["door_x0"] = dx0
 			gate_layout["door_x1"] = dx1
@@ -3627,6 +3654,12 @@ func _build_segment() -> void:
 			gate_layout["header_depth"] = _L("lobby", "door_header_m", 0.4)   # room for the name
 		_gate = _mod_gate.call("build", seg, solid, w, wall_col, m_wall, gate_layout)
 		if not _gate.is_empty():
+			var gdoor: Node3D = _gate.get("door") as Node3D
+			if gdoor != null:
+				var gtok := "gate:" + (String(deal.get("pearl", "")) if deal is Dictionary else "")
+				_edit_records.append({"node": gdoor, "kind": "gate", "token": gtok,
+					"index": 0, "from": [], "tile_cell": [], "rotation": 0.0,
+					"chapter": next_seq, "seg": seg})
 			if _L("lobby", "enabled", 1.0) > 0.5:
 				_sign_door(_gate.get("door") as Node3D)
 			var sc: Node3D = _gate.get("scanner") as Node3D
@@ -9280,6 +9313,8 @@ func _edit_handle_key(key: int) -> bool:
 		# only — the plan's footprint and seal are untouched (see _stamp).
 		KEY_EQUAL, KEY_PLUS, KEY_KP_ADD:      _edit_scale(1.05)
 		KEY_MINUS, KEY_KP_SUBTRACT:           _edit_scale(1.0 / 1.05)
+		KEY_T:
+			_wall_toggle_under_crosshair()
 		KEY_DELETE:
 			if _edit_sel >= 0 and String((_edit_records[_edit_sel] as Dictionary).get("kind", "")) in ["prop", "furniture", "showing", "plinth"]:
 				print("[em-edit] %s is dressed by rule, not placed by the plan — no per-copy removal (v1)" % (_edit_records[_edit_sel] as Dictionary).get("kind"))
@@ -9625,8 +9660,22 @@ func _edit_fine(dx: float, dy: float, dz: float) -> void:
 		ov = _furniture_override(r)
 		if kind == "showing":
 			# a showing proxy is invisible; the picture it stands for is a
-			# batched MultiMesh that only moves on rebuild. Say so.
+			# batched MultiMesh that only moves on rebuild. A magenta ghost
+			# rides the proxy so the move can be SEEN live (Palle: "move the
+			# frames on the wall in edit mode").
 			print("[em-edit] showing %d: offset ruled — the picture moves on the next build" % int(r.get("index", -1)))
+			if node != null and node.get_node_or_null("OffsetGhost") == null:
+				var gm := MeshInstance3D.new()
+				gm.name = "OffsetGhost"
+				var gb := BoxMesh.new()
+				gb.size = Vector3(1.2, 0.9, 0.08)
+				gm.mesh = gb
+				var mt2 := StandardMaterial3D.new()
+				mt2.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+				mt2.albedo_color = Color(0.9, 0.2, 0.8, 0.4)
+				mt2.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+				gm.material_override = mt2
+				node.add_child(gm)
 	else:
 		ov = _mod_editor.call("override_for", _edit_records, _edit_sel, _edit_overrides)
 	var off: Array = ov.get("offset", [0.0, 0.0, 0.0])
@@ -9781,6 +9830,20 @@ func _edit_nudge(dx: int, dz: int) -> void:
 	if _edit_sel < 0 or _edit_sel >= _edit_records.size():
 		return
 	var r: Dictionary = _edit_records[_edit_sel]
+	if String(r.get("kind", "")) == "gate":
+		# the sliding door slides along its wall: LEFT/RIGHT, one cell a step
+		if dx == 0:
+			print("[em-edit] the sliding door slides along its wall — LEFT/RIGHT")
+			return
+		var gnode: Node3D = _node_or_null(r.get("node"))
+		var gov: Dictionary = _furniture_override(r)
+		var base_x: int = int(gov.get("gate_x", int(round(gnode.position.x)) if gnode != null else 7))
+		gov["gate_x"] = base_x + dx
+		if gnode != null and is_instance_valid(gnode):
+			gnode.position.x += float(dx)
+		_edit_dirty = true
+		print("[em-edit] sliding door ruled to x %d — the gate rebuilds there on the next build" % int(gov["gate_x"]))
+		return
 	if String(r.get("kind", "")) in ["showing", "furniture", "plinth"]:
 		# furniture has no plan cell: an unshifted arrow is a 1.0 m offset step
 		_edit_fine(float(dx), 0.0, float(dz))
@@ -10472,3 +10535,79 @@ func _exit_tree() -> void:
 	var stuck_x: Node = get_node_or_null("/root/StuckDetector")
 	if stuck_x != null and "enabled" in stuck_x:
 		stuck_x.set("enabled", true)
+
+
+## THE WALL TOOL (2026-08-22, Palle: "an editor where I can edit the interior
+## of the museum, the wall, passages"). In edit mode, T toggles the tile cell
+## under the crosshair: wall becomes passage, floor becomes wall. The ruling
+## (kind "cell", per chapter+pearl) rewrites the tile at the top of
+## _build_segment on the next build — walls, colliders, seals and the walk
+## map all follow, because the tile stays the single author. A translucent
+## box previews it live: green = wall to come, red = wall to go.
+func _wall_toggle_under_crosshair() -> void:
+	if _cam == null:
+		return
+	var from := _cam.global_position
+	var dir := -_cam.global_transform.basis.z
+	var space := get_world_3d().direct_space_state
+	var q := PhysicsRayQueryParameters3D.create(from, from + dir * 24.0)
+	var hit := space.intersect_ray(q)
+	if hit.is_empty():
+		print("[em-edit] wall tool: nothing under the crosshair")
+		return
+	var wp: Vector3 = (hit["position"] as Vector3) - dir * 0.05
+	var seg_d: Dictionary = {}
+	for s_v in _segments:
+		var sd: Dictionary = s_v
+		if wp.z >= float(sd["z0"]) and wp.z < float(sd["z1"]):
+			seg_d = sd
+			break
+	if seg_d.is_empty():
+		return
+	var segn: Node3D = seg_d.get("node")
+	if segn == null or not is_instance_valid(segn) or not segn.has_meta("em_tile"):
+		print("[em-edit] wall tool: this segment carries no tile")
+		return
+	var tile: Array = segn.get_meta("em_tile")
+	var cx: int = int(floor(wp.x))
+	var cz_t: int = int(floor(wp.z - float(seg_d["z0"]))) - VESTIBULE_H
+	if cz_t < 0 or cz_t >= tile.size() or cx < 0 or cx >= (tile[cz_t] as Array).size():
+		print("[em-edit] wall tool: aim inside the hall (the vestibule is not the tile)")
+		return
+	var cur := String((tile[cz_t] as Array)[cx])
+	var nv := "1" if cur.begins_with("4") else "4"
+	(tile[cz_t] as Array)[cx] = nv
+	var ch := String(segn.get_meta("em_chapter")) if segn.has_meta("em_chapter") else ""
+	var pearl := String(segn.get_meta("em_pearl")) if segn.has_meta("em_pearl") else ""
+	var found := false
+	for ov_v in _edit_overrides:
+		var ov: Dictionary = ov_v
+		if String(ov.get("kind", "")) != "cell" or String(ov.get("chapter", "")) != ch \
+				or String(ov.get("pearl", "")) != pearl:
+			continue
+		var of: Array = ov.get("from", [])
+		if of.size() >= 2 and int(of[0]) == cx and int(of[1]) == cz_t:
+			ov["value"] = nv
+			found = true
+	if not found:
+		_edit_overrides.append({"kind": "cell", "chapter": ch, "pearl": pearl,
+			"token": "cell:" + pearl, "from": [cx, cz_t], "value": nv,
+			"provenance": "hand"})
+	_edit_dirty = true
+	var pv := MeshInstance3D.new()
+	pv.name = "CellPreview_%d_%d" % [cx, cz_t]
+	var old_pv := segn.get_node_or_null(String(pv.name))
+	if old_pv != null:
+		old_pv.free()
+	var bm := BoxMesh.new()
+	bm.size = Vector3(0.98, 3.0, 0.98)
+	pv.mesh = bm
+	var mt := StandardMaterial3D.new()
+	mt.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mt.albedo_color = Color(0.2, 0.9, 0.4, 0.35) if nv == "4" else Color(0.95, 0.3, 0.3, 0.3)
+	mt.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	pv.material_override = mt
+	segn.add_child(pv)
+	pv.position = Vector3(cx + 0.5, 1.5, float(VESTIBULE_H + cz_t) + 0.5)
+	print("[em-edit] cell [%d,%d] of %s · %s ruled %s — F5 save; the wall changes on the next build" % [
+		cx, cz_t, ch, pearl, "WALL" if nv == "4" else "PASSAGE"])

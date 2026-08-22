@@ -35,6 +35,13 @@ func _run() -> void:
 	var fh := FileAccess.open(HAND, FileAccess.WRITE)
 	fh.store_string(JSON.stringify({"_readme": "trial: empty — the plan authors everything", "halls": {}}, " "))
 	fh.close()
+	# a trial CELL RULING: the interior editor's wall-at-[5,5] in the point
+	# hall — the build must obey it (the tile is the single author)
+	var fo := FileAccess.open("res://ada_run/_trial_map_overrides.json", FileAccess.WRITE)
+	fo.store_string(JSON.stringify({"schema": "adaresearch.em_overrides.v1", "overrides": [
+		{"kind": "cell", "chapter": "primitives", "pearl": "point one",
+			"token": "cell:point one", "from": [5, 5], "value": "4", "provenance": "hand"}]}, " "))
+	fo.close()
 	var inst: Node3D = (load("res://commons/scenes/endless_museum.tscn") as PackedScene).instantiate() as Node3D
 	var plan := PLAN
 	if OS.get_cmdline_user_args().has("--live"):
@@ -103,8 +110,15 @@ func _run() -> void:
 		var q := PhysicsRayQueryParameters3D.create(Vector3(18.5, 2.0, sz), Vector3(18.5, -2.0, sz))
 		var hit := space.intersect_ray(q)
 		seam = {"probe": [18.5, sz], "floor": not hit.is_empty()}
+	# did the cell ruling land? read the built segment's own tile
+	var cell_rule := false
+	for c3 in inst.get_children():
+		if c3 is Node3D and str(c3.name).begins_with("Seg0_") and (c3 as Node).has_meta("em_tile"):
+			var t0: Array = (c3 as Node).get_meta("em_tile")
+			if t0.size() > 5 and (t0[5] as Array).size() > 5:
+				cell_rule = String((t0[5] as Array)[5]) == "4"
 	var out := FileAccess.open(OUT, FileAccess.WRITE)
-	out.store_string(JSON.stringify({"segments": segs, "shots": shots, "seam": seam,
+	out.store_string(JSON.stringify({"segments": segs, "shots": shots, "seam": seam, "cell_rule": cell_rule,
 		"at": Time.get_datetime_string_from_system(false, true)}, " "))
 	out.close()
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(CTL))
