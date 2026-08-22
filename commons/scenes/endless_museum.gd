@@ -9023,6 +9023,9 @@ func _input(event: InputEvent) -> void:
 			return
 		elif mb == MOUSE_BUTTON_LEFT and mbe.pressed and _cam != null and _doll_brush != "":
 			var ptb := _doll_floor_point(mbe.position)
+			if _doll_brush == "O":
+				_room_drag_start = Vector2i(int(floor(ptb.x)), int(floor(ptb.z)))
+				return
 			if _doll_brush == "R":
 				_rule_paint_drag = "1" if mbe.shift_pressed else "4"
 				_rule_last_cell = Vector2i(int(floor(ptb.x)), int(floor(ptb.z)))
@@ -9074,6 +9077,13 @@ func _input(event: InputEvent) -> void:
 				_doll_mark.global_position = Vector3(pt.x, 0.05, pt.z)
 				_doll_mark.visible = true
 			return
+		elif mb == MOUSE_BUTTON_LEFT and not mbe.pressed and _room_drag_start.x != -9999:
+			var ptc := _doll_floor_point(mbe.position)
+			_room_commit(_room_drag_start, Vector2i(int(floor(ptc.x)), int(floor(ptc.z))))
+			_room_drag_start = Vector2i(-9999, -9999)
+			if _room_preview != null and is_instance_valid(_room_preview):
+				_room_preview.visible = false
+			return
 		elif mb == MOUSE_BUTTON_LEFT and not mbe.pressed and _rule_paint_drag != "":
 			_rule_paint_drag = ""
 			_rule_last_cell = Vector2i(-9999, -9999)
@@ -9101,6 +9111,12 @@ func _input(event: InputEvent) -> void:
 				nc.position = _doll_node_start
 			return
 		elif mb == MOUSE_BUTTON_RIGHT:
+			if mbe.pressed and _room_drag_start.x != -9999:
+				_room_drag_start = Vector2i(-9999, -9999)
+				if _room_preview != null and is_instance_valid(_room_preview):
+					_room_preview.visible = false
+				_doll_toast("room cancelled")
+				return
 			if mbe.pressed:
 				_rule_rmb_pos = mbe.position
 			elif _doll_brush == "R" and _cam != null \
@@ -9136,7 +9152,7 @@ func _input(event: InputEvent) -> void:
 			nmv.position = _doll_node_start + Vector3(float(ddx), 0.0, float(ddz))
 		return
 	if _dollhouse and event is InputEventMouseMotion and not _doll_drag and _cam != null \
-			and _doll_brush in ["R", "D"]:
+			and _doll_brush in ["R", "D", "O"]:
 		# the rule brushes show their CELL: green = a wall would rise, rose =
 		# a wall would open, amber = the door would stand here
 		var hpr := _doll_floor_point((event as InputEventMouseMotion).position)
@@ -9147,6 +9163,27 @@ func _input(event: InputEvent) -> void:
 			if pcell != _rule_last_cell:
 				_rule_last_cell = pcell
 				_doll_rule_set(hx, hz, _rule_paint_drag, false)   # silent mid-stroke
+		if _doll_brush == "O" and _room_drag_start.x != -9999:
+			# the rectangle, live: a translucent slab spanning anchor..cursor
+			if _room_preview == null or not is_instance_valid(_room_preview):
+				_room_preview = MeshInstance3D.new()
+				_room_preview.mesh = BoxMesh.new()
+				var rpm := StandardMaterial3D.new()
+				rpm.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+				rpm.albedo_color = Color(0.35, 0.8, 0.5, 0.3)
+				rpm.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+				_room_preview.material_override = rpm
+				add_child(_room_preview)
+			var rx0: int = mini(_room_drag_start.x, hx)
+			var rx1: int = maxi(_room_drag_start.x, hx)
+			var rz0: int = mini(_room_drag_start.y, hz)
+			var rz1: int = maxi(_room_drag_start.y, hz)
+			(_room_preview.mesh as BoxMesh).size = Vector3(float(rx1 - rx0 + 1), 0.12, float(rz1 - rz0 + 1))
+			_room_preview.global_position = Vector3((rx0 + rx1 + 1) / 2.0, 0.18, (rz0 + rz1 + 1) / 2.0)
+			_room_preview.visible = true
+			if _rule_hover != null and is_instance_valid(_rule_hover):
+				_rule_hover.visible = false
+			return
 		if _rule_hover == null or not is_instance_valid(_rule_hover):
 			_rule_hover = MeshInstance3D.new()
 			var hbm := BoxMesh.new()
@@ -9216,9 +9253,9 @@ func _input(event: InputEvent) -> void:
 			_rule_undo_pop()
 			return
 		if kc == KEY_B:
-			var order := ["", "R", "D", "2", "4", "0", "1"]
+			var order := ["", "R", "D", "O", "2", "4", "0", "1"]
 			_doll_brush = order[(order.find(_doll_brush) + 1) % order.size()]
-			var names := {"": "OFF — the hand picks bodies again", "R": "WALL/PASSAGE (a ruling — Save+Build makes it real)", "D": "DOOR (click where the sliding door should stand)", "2": "BLOCK (a 1 m stand)", "4": "WALL", "0": "HOLE (no floor)", "1": "FLOOR (clear the cell)"}
+			var names := {"": "OFF — the hand picks bodies again", "R": "WALL/PASSAGE (a ruling — Save+Build makes it real)", "D": "DOOR (click where the sliding door should stand)", "O": "ROOM (drag a rectangle — walls rise around it, a door faces you)", "2": "BLOCK (a 1 m stand)", "4": "WALL", "0": "HOLE (no floor)", "1": "FLOOR (clear the cell)"}
 			print("[em-doll] brush: %s" % names[_doll_brush])
 			_doll_palette_refresh()
 			return
@@ -10696,7 +10733,12 @@ var _doll_hover_idx: int = -1   # the body under the hover ring — E selects it
 var _rule_paint_drag: String = ""            # "4" building / "1" opening / "" idle
 var _rule_last_cell := Vector2i(-9999, -9999)
 var _rule_rmb_pos := Vector2.ZERO
-var _rule_undo: Array = []                   # [{seg, zbase, wx, wz, prev}]
+var _rule_undo: Array = []                   # [{seg, zbase, wx, wz, prev}] or {"group": [...]}
+# THE ROOM TOOL (The Sims' deepest cut: rooms are the unit of thought, not
+# cells): drag a rectangle, four ruled walls rise around it with a door cell
+# in the side facing the doll. One ctrl+Z takes the whole room back.
+var _room_drag_start := Vector2i(-9999, -9999)
+var _room_preview: MeshInstance3D = null
 
 
 func _rule_peek(wx: int, wz: int) -> String:
@@ -10885,7 +10927,7 @@ func _doll_palette_refresh() -> void:
 		_doll_palette.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM)
 		_doll_palette.offset_top = -64.0
 		_doll_palette.offset_bottom = -20.0
-		var tools := [["🖐 hand", ""], ["🧱 wall/passage", "R"], ["🚪 door", "D"], ["💾 save", "!"]]
+		var tools := [["🖐 hand", ""], ["🧱 wall/passage", "R"], ["⬛ room", "O"], ["🚪 door", "D"], ["💾 save", "!"]]
 		for t in tools:
 			var b := Button.new()
 			b.text = String((t as Array)[0])
@@ -10909,7 +10951,7 @@ func _doll_palette_pressed(b: Button) -> void:
 		_doll_toast("saved — the walls you built stand; F6 re-deals the whole hall if you want a clean rebuild")
 		return
 	_doll_brush = br
-	var names := {"": "the hand picks and drags bodies", "R": "wall — LMB builds (drag draws a run) · right-click or SHIFT opens · ctrl+Z undoes", "D": "door — click where the sliding door should stand"}
+	var names := {"": "the hand picks and drags bodies", "R": "wall — LMB builds (drag draws a run) · right-click or SHIFT opens · ctrl+Z undoes", "O": "room — drag a rectangle; walls rise around it with a door facing you; ctrl+Z takes the whole room back", "D": "door — click where the sliding door should stand"}
 	_doll_toast(String(names.get(br, "")))
 	_doll_palette_refresh()
 
@@ -10965,14 +11007,77 @@ func _rule_undo_pop() -> void:
 		_doll_toast("nothing to undo")
 		return
 	var u: Dictionary = _rule_undo.pop_back()
+	if u.has("group"):
+		var n: int = 0
+		var grp: Array = u["group"]
+		for i in range(grp.size() - 1, -1, -1):
+			if _rule_undo_apply(grp[i]):
+				n += 1
+		_doll_toast("room undone — %d cell(s) back" % n)
+		return
+	if _rule_undo_apply(u):
+		_doll_toast("undone — [%d,%d] back" % [int(u.get("wx", 0)),
+			int(u.get("wz", 0)) - int(u.get("zbase", 0)) - VESTIBULE_H])
+	else:
+		_doll_toast("undo: nothing changed")
+
+
+func _rule_undo_apply(u: Dictionary) -> bool:
 	var segn: Node3D = _node_or_null(u.get("seg"))
 	if segn == null or not is_instance_valid(segn):
-		_doll_toast("that hall is gone — nothing to undo there")
-		return
+		return false
 	var prev := String(u.get("prev", "1"))
 	var back := "4" if prev.begins_with("4") else "1"
-	var msg := _rule_cell(segn, int(u.get("zbase", 0)), int(u.get("wx", 0)),
-		int(u.get("wz", 0)), false, back, true)
-	_doll_toast("undone — [%d,%d] back to %s" % [int(u.get("wx", 0)),
-		int(u.get("wz", 0)) - int(u.get("zbase", 0)) - VESTIBULE_H,
-		"WALL" if back == "4" else "floor"] if msg != "" else "undo: nothing changed")
+	return _rule_cell(segn, int(u.get("zbase", 0)), int(u.get("wx", 0)),
+		int(u.get("wz", 0)), false, back, true) != ""
+
+
+func _room_commit(a: Vector2i, b: Vector2i) -> void:
+	## Four ruled walls around the dragged rectangle, a door cell in the
+	## middle of the side nearest the doll — one gesture, one undo step.
+	var x0: int = mini(a.x, b.x)
+	var x1: int = maxi(a.x, b.x)
+	var z0: int = mini(a.y, b.y)
+	var z1: int = maxi(a.y, b.y)
+	if x1 - x0 < 2 or z1 - z0 < 2:
+		_doll_toast("a room needs at least 3×3 — drag a bigger rectangle")
+		return
+	# the door: middle of the side facing the doll's own feet
+	var eye := _player.position if _player != null else Vector3.ZERO
+	var mid_x: int = (x0 + x1) / 2
+	var mid_z: int = (z0 + z1) / 2
+	var d_n: float = absf(eye.z - float(z0))
+	var d_s: float = absf(eye.z - float(z1))
+	var d_w: float = absf(eye.x - float(x0))
+	var d_e: float = absf(eye.x - float(x1))
+	var best: float = minf(minf(d_n, d_s), minf(d_w, d_e))
+	var door := Vector2i(mid_x, z0)
+	var side := "north"
+	if best == d_s:
+		door = Vector2i(mid_x, z1)
+		side = "south"
+	elif best == d_w:
+		door = Vector2i(x0, mid_z)
+		side = "west"
+	elif best == d_e:
+		door = Vector2i(x1, mid_z)
+		side = "east"
+	var undo_mark: int = _rule_undo.size()
+	var walls: int = 0
+	for x in range(x0, x1 + 1):
+		for z in range(z0, z1 + 1):
+			if x != x0 and x != x1 and z != z0 and z != z1:
+				continue
+			var cell := Vector2i(x, z)
+			if cell == door:
+				_doll_rule_set(x, z, "1", false)   # the doorway stays open
+				continue
+			_doll_rule_set(x, z, "4", false)
+			walls += 1
+	# fold this room's rulings into ONE undo step
+	if _rule_undo.size() > undo_mark:
+		var grp: Array = _rule_undo.slice(undo_mark)
+		_rule_undo.resize(undo_mark)
+		_rule_undo.append({"group": grp})
+	_doll_toast("room %d×%d — %d wall(s), the door faces %s · ctrl+Z takes it back" % [
+		x1 - x0 + 1, z1 - z0 + 1, walls, side])
