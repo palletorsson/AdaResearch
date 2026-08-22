@@ -9,7 +9,7 @@ extends SceneTree
 
 const CTL := "res://ada_run/_trial_map_control.json"
 const HAND := "res://ada_run/_trial_map_hand.json"
-const PLAN := "res://ada_run/_trial_map_plan.json"
+const PLAN := "res://ada_run/_trial_map_plan.json"   # --live shoots the real plan instead
 const OUT := "res://ada_run/map_halls_verdict.json"
 
 func _initialize() -> void:
@@ -36,7 +36,10 @@ func _run() -> void:
 	fh.store_string(JSON.stringify({"_readme": "trial: empty — the plan authors everything", "halls": {}}, " "))
 	fh.close()
 	var inst: Node3D = (load("res://commons/scenes/endless_museum.tscn") as PackedScene).instantiate() as Node3D
-	inst.set("_plan_path", PLAN)
+	var plan := PLAN
+	if OS.get_cmdline_user_args().has("--live"):
+		plan = "res://ada_run/em_plan.json"
+	inst.set("_plan_path", plan)
 	inst.set("EM_CONTROL", CTL)
 	inst.set("_overrides_path", "res://ada_run/_trial_map_overrides.json")
 	inst.set("_hand_path", HAND)

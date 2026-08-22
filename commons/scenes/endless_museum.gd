@@ -246,7 +246,10 @@ const AUTO_IDLE_LIMIT: int = 8
 # fault from a cell some fixture took away, and the two want opposite repairs.
 var _walk_erased: Dictionary = {}  # Vector2i -> String provenance
 var _auto_reach: Dictionary = {}   # last BFS's reachable set, for the cut
-var _seal_overflow: Array = []     # bodies too wide for MAX_SEAL_RADIUS to seal
+# Every clamp that took cells off a body and left them in the walk map, tagged
+# `by`: "mesh" (MAX_SEAL_RADIUS, decorative, cannot stall a walker), "collider"
+# (MAX_BODY_RADIUS, the one that can), "origin_reach" (the extent is not a body).
+var _seal_overflow: Array = []
 # THE THRESHOLD GATE (2026-08-18). The vestibule stands alone: a sealed
 # bi-parting door across the way into the first hall, a palm scanner on the
 # jamb. VR: a hand in the scanner's box. Desktop: click it. The walk map is
@@ -3143,7 +3146,11 @@ func _build_segment() -> void:
 	# _widen_doors) — so the clearing happens HERE, once. A bead whose
 	# pocket ends up unreachable is still guarded downstream: the severance
 	# rule refuses the seal and the ring search slides it to honest floor.
-	var hand_pre := _necklace_hand(next_seq, String(peek.get("pearl", "")))
+	# MAP-AUTHORED halls (plan rows carrying authored:"map", written by
+	# tools/em_map_halls.py from the grid maps themselves): the map is the
+	# placement authority — the necklace hand's stamp-clear must not punch
+	# holes in walls the map itself drew.
+	var hand_pre: Dictionary = {} if String(peek.get("authored", "")) == "map" else _necklace_hand(next_seq, String(peek.get("pearl", "")))
 	if not hand_pre.is_empty():
 		var opened := 0
 		for b_v in _stamped_beads(hand_pre):
@@ -6890,6 +6897,56 @@ const GUEST_SPAN_CAP := float(MAX_SEAL_RADIUS * 2 + 1)
 # is sealed whole and then judged by _reaches_all like everything else.
 const MAX_BODY_RADIUS := 6
 
+## Did a clamp take cells the body stands in, and WHICH clamp was it? Empty when
+## the raw span already fitted inside the sealed one, so a caller reads it as
+## `if not rec.is_empty()`.
+##
+## Static and pure on purpose. The whole claim of the two records below is four
+## comparisons and two subtractions, and until 2026-08-22 neither branch had a
+## test because testing it meant building a museum. It does not: give it two
+## boxes and it answers. commons/testing/test_em_seal_clamp.gd drives it with
+## synthetic bounds, in a second, without a segment.
+static func clamp_overflow(raw: Array, sealed: Array, by: String) -> Dictionary:
+	if raw.size() < 4 or sealed.size() < 4:
+		return {}
+	var r0: int = int(raw[0]); var r1: int = int(raw[1])
+	var r2: int = int(raw[2]); var r3: int = int(raw[3])
+	var s0: int = int(sealed[0]); var s1: int = int(sealed[1])
+	var s2: int = int(sealed[2]); var s3: int = int(sealed[3])
+	if r0 >= s0 and r1 <= s1 and r2 >= s2 and r3 <= s3:
+		return {}
+	return {
+		"by": by,
+		"raw": [r0, r1, r2, r3],
+		"sealed": [s0, s1, s2, s3],
+		# how many cells of the body were left standing in the walk map, per axis
+		"lost_x": maxi(0, s0 - r0) + maxi(0, r1 - s1),
+		"lost_z": maxi(0, s2 - r2) + maxi(0, r3 - s3),
+	}
+
+## THE EXTENT THAT NEVER LEFT HOME. A merged AABB whose z starts at the world
+## origin and runs all the way out to the cell the body stands in is not a
+## measurement of a body: it is a body plus one member that stayed at (0,0,0)
+## — a child that was never moved with its parent, or one built from world
+## coordinates. The museum runs along +z, so this shows up in z and only in z.
+##
+## Measured 2026-08-22 in ada_run/em_live_footprints.json: 21 of 213 ledgered
+## bodies carry a live_aabb.z equal to their own cell z, the largest reading
+## 11767.7 m for 9_3_smart_rockets_vr at cell z 11767. Those numbers went into
+## the ledger as SIZES and out to tools/spatial_contract.py, which is told to
+## negotiate from the larger of the still measurement and the live one.
+##
+## Near the origin a big body and a homesick one are the same picture, so the
+## test only speaks past one segment's length.
+const ORIGIN_REACH_M := 2.0
+const ORIGIN_REACH_MIN_Z := 40.0
+static func reaches_origin(pos_z: float, size_z: float, cz: int) -> bool:
+	if float(cz) < ORIGIN_REACH_MIN_Z:
+		return false
+	if pos_z > ORIGIN_REACH_M:
+		return false                      # the extent does not start at the origin
+	return size_z >= float(cz) - ORIGIN_REACH_M
+
 func _seal_cells(node: Node3D, cell: Dictionary, zbase: int, fp: int,
 		also: Node3D = null) -> bool:
 	var cells: Array = _occupied_cells(node, cell, zbase)
@@ -6943,6 +7000,8 @@ func _occupied_cells(node: Node3D, cell: Dictionary, zbase: int) -> Array:
 	var cx: int = int(cell.get("x", 0))
 	var cz: int = zbase + int(cell.get("y", 0))
 	var out: Array = []
+	var tok: String = String(node.get_meta("artifact_lookup_name")) \
+		if node.has_meta("artifact_lookup_name") else String(node.name)
 	var box: AABB = _extent_of(node)
 	if box.size.x > 0.0 or box.size.z > 0.0:
 		var rx0: int = int(floor(box.position.x))
@@ -6963,14 +7022,11 @@ func _occupied_cells(node: Node3D, cell: Dictionary, zbase: int) -> Array:
 		# a failed walk can be read against the objects that were too big to seal
 		# honestly. (Recording only — widening the clamp is a separate change with
 		# its own negative test; the trap it guards against is real.)
-		if rx0 < x0 or rx1 > x1 or rz0 < z0 or rz1 > z1:
-			var tok: String = String(node.get_meta("artifact_lookup_name")) 					if node.has_meta("artifact_lookup_name") else String(node.name)
-			_seal_overflow.append({
-				"token": tok,
-				"cell": [cx, cz],
-				"raw": [rx0, rx1, rz0, rz1],
-				"sealed": [x0, x1, z0, z1],
-			})
+		var mrec: Dictionary = clamp_overflow([rx0, rx1, rz0, rz1], [x0, x1, z0, z1], "mesh")
+		if not mrec.is_empty():
+			mrec["token"] = tok
+			mrec["cell"] = [cx, cz]
+			_seal_overflow.append(mrec)
 			# the ledger: the body the museum actually got, and whether a walker
 			# can enter it. Overshoot beyond the planned footprint by more than
 			# LIVE_OVERSHOOT_CELLS is what makes it a ledger entry.
@@ -7014,10 +7070,36 @@ func _occupied_cells(node: Node3D, cell: Dictionary, zbase: int) -> Array:
 	# An artifact too big for its slot should leave; it should not stay and lie.
 	var cbox: AABB = _extent_of(node, true)
 	if cbox.size.x > 0.0 or cbox.size.z > 0.0:
-		var bx0: int = maxi(int(floor(cbox.position.x)), cx - MAX_BODY_RADIUS)
-		var bx1: int = mini(int(floor(cbox.position.x + cbox.size.x - 0.01)), cx + MAX_BODY_RADIUS)
-		var bz0: int = maxi(int(floor(cbox.position.z)), cz - MAX_BODY_RADIUS)
-		var bz1: int = mini(int(floor(cbox.position.z + cbox.size.z - 0.01)), cz + MAX_BODY_RADIUS)
+		var crx0: int = int(floor(cbox.position.x))
+		var crx1: int = int(floor(cbox.position.x + cbox.size.x - 0.01))
+		var crz0: int = int(floor(cbox.position.z))
+		var crz1: int = int(floor(cbox.position.z + cbox.size.z - 0.01))
+		var bx0: int = maxi(crx0, cx - MAX_BODY_RADIUS)
+		var bx1: int = mini(crx1, cx + MAX_BODY_RADIUS)
+		var bz0: int = maxi(crz0, cz - MAX_BODY_RADIUS)
+		var bz1: int = mini(crz1, cz + MAX_BODY_RADIUS)
+		# THE SILENT HALF (2026-08-22). The comment above this block says collision
+		# extent "seals UNCLAMPED, out to MAX_BODY_RADIUS", which is a contradiction
+		# read slowly: those four maxi/mini ARE a clamp, at radius 6 instead of 2,
+		# and until today it was the only clamp in the file that recorded nothing.
+		#
+		# That silence is the expensive kind. `seal_overflow` is written into
+		# em_autopilot.json beside the cut list, where a reader takes a 0 to mean
+		# no body was too wide to seal honestly — and gate F has now failed on three
+		# separate mornings with `seal_overflow: 0` in the verdict. For the one fault
+		# class that can actually strand a walker, that zero could not have been
+		# anything else: a decorative mesh does not stop a body and was counted, a
+		# collider does and was not. A number that cannot rise is not evidence of
+		# innocence, it is an absence of testimony.
+		#
+		# Recording only, exactly as the mesh branch is: the cells sealed are the
+		# same cells, and `by` is what tells a reader which of the two they are
+		# reading. Widening MAX_BODY_RADIUS remains a separate change.
+		var crec: Dictionary = clamp_overflow([crx0, crx1, crz0, crz1], [bx0, bx1, bz0, bz1], "collider")
+		if not crec.is_empty():
+			crec["token"] = tok
+			crec["cell"] = [cx, cz]
+			_seal_overflow.append(crec)
 		for zz in range(bz0, bz1 + 1):
 			for xx in range(bx0, bx1 + 1):
 				var bk := Vector2i(xx, zz)
@@ -7048,6 +7130,22 @@ func _has_collider(root: Node3D) -> bool:
 ## save. The ledger is read by tools/spatial_contract.py: the next
 ## negotiation uses the larger of the still measurement and the live one.
 func _ledger_note(tok: String, node: Node3D, box: AABB, has_col: bool, cx: int, cz: int) -> void:
+	# ...but only for a body whose extent is a body. An AABB that still touches
+	# the world origin measures the distance this artifact was carried, not its
+	# size, and the ledger is read as a size by the next negotiation. Refuse it
+	# here and file it as its own fault, so the failed-walk report says "one of
+	# this body's members never left the origin" instead of quietly nominating a
+	# 11 km room for a venue it cannot have. See reaches_origin.
+	if reaches_origin(box.position.z, box.size.z, cz):
+		_seal_overflow.append({
+			"by": "origin_reach", "token": tok, "cell": [cx, cz],
+			"raw": [int(floor(box.position.x)), int(floor(box.position.x + box.size.x)),
+				int(floor(box.position.z)), int(floor(box.position.z + box.size.z))],
+			"sealed": [cx, cx, cz, cz], "lost_x": 0, "lost_z": 0,
+		})
+		print("[em-footprint] %s ORIGIN-REACH: extent runs z %.1f .. %.1f at cell z %d — a member never left (0,0,0); NOT ledgered" % [
+			tok, box.position.z, box.position.z + box.size.z, cz])
+		return
 	if not _live_ledger_loaded:
 		_live_ledger_loaded = true
 		if FileAccess.file_exists(LIVE_LEDGER):
@@ -9928,8 +10026,24 @@ func _auto_write(done: bool, ok: bool) -> void:
 			# stand within reach of the cut. A walk that dies next to one of these
 			# is not a mystery.
 			"seal_overflow": _seal_overflow.size(),
+			# ...and WHICH clamp, because the three cannot be read the same way. A
+			# mesh overflow beside a stall is a coincidence; a collider overflow
+			# beside one is a suspect. Until 2026-08-22 the total was mesh-only, so
+			# every `seal_overflow: 0` printed under a failed walk was a fact about
+			# what the file counted rather than about what stood in the corridor.
+			"seal_overflow_by": _overflow_by(),
 			"seal_overflow_near": _overflow_near() if (done and not ok) else [],
 		}, " "))
+
+## How many of each clamp, so a zero can be read as a zero and a total is never
+## mistaken for one class. Absent keys mean none of that kind.
+func _overflow_by() -> Dictionary:
+	var out: Dictionary = {}
+	for o0 in _seal_overflow:
+		var k: String = String((o0 as Dictionary).get("by", "mesh"))
+		out[k] = int(out.get(k, 0)) + 1
+	return out
+
 
 ## The over-wide bodies standing within four cells of the frontier, which is the
 ## only place they could be responsible for this stall.
