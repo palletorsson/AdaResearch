@@ -9514,8 +9514,18 @@ func _edit_handle_key(key: int) -> bool:
 			elif _edit_sel >= 0:
 				var r2: Dictionary = _edit_records[_edit_sel]
 				# an ADDED row's delete erases the add ruling itself; a plan
-				# row's delete records a removal. Different truths.
-				if not _mod_editor.call("remove_add",
+				# row's delete records a removal; an AUTHORED body's delete
+				# clears its map cell — one truth. Different truths, three.
+				var del_seg: Node3D = _node_or_null(r2.get("seg"))
+				var del_map := String(del_seg.get_meta("em_map")) if del_seg != null and del_seg.has_meta("em_map") else ""
+				if del_map != "":
+					var dtc: Array = r2.get("tile_cell", [0, 0])
+					var dwhy := _map_clear_token(del_map, int(dtc[0]), int(dtc[1]))
+					if dwhy != "":
+						_doll_toast("the map refuses: " + dwhy)
+						return true
+					_doll_toast("%s removed from %s" % [str(r2.get("token")), del_map])
+				elif not _mod_editor.call("remove_add",
 						_edit_records, _edit_sel, _edit_overrides):
 					var ov: Dictionary = _mod_editor.call(
 						"override_for", _edit_records, _edit_sel, _edit_overrides)
@@ -9846,6 +9856,12 @@ func _edit_fine(dx: float, dy: float, dz: float) -> void:
 	if node == null or not is_instance_valid(node):
 		return
 	var ov: Dictionary
+	var fin_seg: Node3D = _node_or_null(r.get("seg"))
+	if not (kind in ["showing", "furniture", "plinth", "prop"]) \
+			and fin_seg != null and fin_seg.has_meta("em_map") \
+			and String(fin_seg.get_meta("em_map")) != "":
+		_doll_toast("an authored body moves by WHOLE cells (the map has no millimetres) — plain arrows move it")
+		return
 	if kind in ["showing", "furniture", "plinth", "prop"]:
 		ov = _furniture_override(r)
 		if kind == "showing":
@@ -10087,6 +10103,20 @@ func _edit_rotate(deg: float) -> void:
 		return
 	var node: Node3D = _node_or_null(r.get("node"))
 	if node == null or not is_instance_valid(node):
+		return
+	var rot_seg: Node3D = _node_or_null(r.get("seg"))
+	var rot_map := String(rot_seg.get_meta("em_map")) if rot_seg != null and rot_seg.has_meta("em_map") else ""
+	if rot_map != "":
+		# ONE TRUTH: the turn encodes into the token's own rotation field
+		var rtc: Array = r.get("tile_cell", [0, 0])
+		var nrot := fposmod(float(r.get("rotation", 0.0)) + deg, 360.0)
+		var rwhy := _map_set_rotation(rot_map, int(rtc[0]), int(rtc[1]), nrot)
+		if rwhy != "":
+			_doll_toast("the map refuses: " + rwhy)
+			return
+		node.rotation_degrees.y = nrot
+		r["rotation"] = nrot
+		_doll_toast("%s turned to %.0f\u00b0 — encoded into %s" % [str(r.get("token")), nrot, rot_map])
 		return
 	var ov: Dictionary = _mod_editor.call(
 		"override_for", _edit_records, _edit_sel, _edit_overrides)
@@ -11392,3 +11422,50 @@ func _jsonc(v: Variant, ind: String) -> String:
 			parts2.append(ind + "\t" + _jsonc(e, ind + "\t"))
 		return "[\n" + ",\n".join(PackedStringArray(parts2)) + "\n" + ind + "]"
 	return JSON.stringify(v)
+
+
+func _map_set_rotation(map_name: String, fx: int, fz: int, rot: float) -> String:
+	## Rewrite the token's rotation field (name:ROT[:y][#config...]) in place.
+	var path := "res://commons/maps/%s/map_data.json" % map_name
+	if not FileAccess.file_exists(path):
+		return "no map file"
+	var doc_v: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+	if not (doc_v is Dictionary):
+		return "bad map json"
+	var inter: Array = ((doc_v as Dictionary).get("layers", {}) as Dictionary).get("interactables", [])
+	if fz < 0 or fz >= inter.size() or fx < 0 or fx >= (inter[fz] as Array).size():
+		return "cell off the map"
+	var tok := str((inter[fz] as Array)[fx]).strip_edges()
+	if tok == "":
+		return "no artifact at the cell"
+	var hash_i := tok.find("#")
+	var base := tok.substr(0, hash_i) if hash_i >= 0 else tok
+	var config := tok.substr(hash_i) if hash_i >= 0 else ""
+	var parts := base.split(":")
+	var name := str(parts[0])
+	var y_off := str(parts[2]) if parts.size() > 2 else ""
+	var nb := name + ":" + str(int(round(rot)))
+	if y_off != "":
+		nb += ":" + y_off
+	(inter[fz] as Array)[fx] = nb + config
+	if not _map_store(path, doc_v):
+		return "could not write the map"
+	return ""
+
+
+func _map_clear_token(map_name: String, fx: int, fz: int) -> String:
+	var path := "res://commons/maps/%s/map_data.json" % map_name
+	if not FileAccess.file_exists(path):
+		return "no map file"
+	var doc_v: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+	if not (doc_v is Dictionary):
+		return "bad map json"
+	var inter: Array = ((doc_v as Dictionary).get("layers", {}) as Dictionary).get("interactables", [])
+	if fz < 0 or fz >= inter.size() or fx < 0 or fx >= (inter[fz] as Array).size():
+		return "cell off the map"
+	if str((inter[fz] as Array)[fx]).strip_edges() == "":
+		return "no artifact at the cell"
+	(inter[fz] as Array)[fx] = " "
+	if not _map_store(path, doc_v):
+		return "could not write the map"
+	return ""
