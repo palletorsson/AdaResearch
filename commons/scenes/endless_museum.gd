@@ -4224,6 +4224,7 @@ func _ruling_for(tok: String, chapter: String, tx: int, tz: int, hand_row: bool 
 	if not best.is_empty():
 		print("[em-edit] %s at [%d,%d]: nearest ruling is %d cells away — too far, left idle"
 			% [tok, tx, tz, best_d])
+		_ruling_stats["idle_far"] = int(_ruling_stats["idle_far"]) + 1
 	return {}
 
 
@@ -5457,6 +5458,7 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 			if to.size() >= 2 and (int(to[0]) != tx or int(to[1]) != tz):
 				print("[em-edit] %s moved by hand [%d,%d] -> [%d,%d]"
 					% [tok, tx, tz, int(to[0]), int(to[1])])
+				_ruling_stats["moved"] = int(_ruling_stats["moved"]) + 1
 				tx = int(to[0])
 				tz = int(to[1])
 			# THE SWAP: a ruling may put ANOTHER body in this place. The place
@@ -8958,6 +8960,9 @@ func _follow_resume() -> void:
 			_yaw = float(pd.get("resume_yaw", _yaw))
 			_player.rotation.y = _yaw
 			_last_ground = _player.position
+		if int(_ruling_stats["moved"]) > 0 or int(_ruling_stats["idle_far"]) > 0:
+			_doll_toast("rebuilt: %d hand ruling(s) applied%s" % [int(_ruling_stats["moved"]),
+				(", %d too far away — left idle" % int(_ruling_stats["idle_far"])) if int(_ruling_stats["idle_far"]) > 0 else ""])
 			print("[em-follow] the walk resumes at (%.1f, %.1f)" % [_player.position.x, _player.position.z])
 	pd.erase("resume_eye")
 	pd.erase("resume_yaw")
@@ -10765,6 +10770,11 @@ var _rule_undo: Array = []                   # [{seg, zbase, wx, wz, prev}] or {
 # in the side facing the doll. One ctrl+Z takes the whole room back.
 var _room_drag_start := Vector2i(-9999, -9999)
 var _room_preview: MeshInstance3D = null
+# WHAT THE REBUILD DID with the hand's rulings — the iso/walk toggle is a
+# full scene rebuild (Palle: "the iso and 3d is not the same after moving
+# artifacts"), so the difference between the dragged preview and the built
+# truth must be SAID on screen, not buried in the console.
+var _ruling_stats := {"moved": 0, "idle_far": 0}
 
 
 func _rule_peek(wx: int, wz: int) -> String:
@@ -10922,9 +10932,14 @@ func _doll_door(wx: int, wz: int) -> void:
 
 func _doll_toast(msg: String) -> void:
 	print("[em-doll] " + msg)
-	if _edit_hud == null or not is_instance_valid(_edit_hud):
-		return
-	var lay := _edit_hud.get_parent() as CanvasLayer
+	var lay: CanvasLayer = null
+	if _edit_hud != null and is_instance_valid(_edit_hud):
+		lay = _edit_hud.get_parent() as CanvasLayer
+	else:
+		# no editor HUD (fresh reload) — a transient layer carries the toast
+		lay = CanvasLayer.new()
+		lay.layer = 95
+		add_child(lay)
 	var l := Label.new()
 	l.text = msg
 	l.add_theme_font_size_override("font_size", 17)
