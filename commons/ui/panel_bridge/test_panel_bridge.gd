@@ -132,6 +132,16 @@ func apply_grid_config(config_data: Dictionary) -> void:
 			config_data.get("picks", 0),
 		])
 
+	# apply_grid_config can arrive BEFORE _ready. The museum stamps config on the
+	# root while it is still outside the tree (endless_museum.gd:6581), and @onready
+	# does not assign until the node ENTERS the tree — so `panel_bridge` is null here
+	# even though the child itself exists. get_node resolves inside a detached
+	# subtree, so ask for it by hand rather than trusting @onready to have run.
+	if panel_bridge == null:
+		panel_bridge = get_node_or_null("PanelBridgeLoader")
+	if panel_bridge == null:
+		push_warning("test_panel_bridge: no PanelBridgeLoader child — config ignored")
+		return
 	panel_bridge.layout_json_path = layout_path
 	panel_bridge.data_json_path = tmp_path
 	panel_bridge.load_panels()
