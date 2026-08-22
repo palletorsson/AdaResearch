@@ -3253,6 +3253,7 @@ func _build_segment() -> void:
 	# vestibule now spans the widest of lobby / previous hall / this hall —
 	# template halls are all ≤ 17, so nothing changes for them.
 	var vest_w: int = maxi(LOBBY_W, maxi(pw, w))
+	seg.set_meta("em_vest_w", vest_w)
 	for zr in range(VESTIBULE_H):
 		for x in range(vest_w):
 			if foyer_well and x <= 1 and zr <= 1:
@@ -8997,6 +8998,7 @@ func _input(event: InputEvent) -> void:
 			print("[em-doll] plan view — the camera at noon; H returns to the walk")
 			return
 		_doll_toggle()
+		_doll_palette_refresh()
 		return
 	if event is InputEventKey and (event as InputEventKey).pressed and not (event as InputEventKey).echo \
 			and (event as InputEventKey).keycode == KEY_L and not _vr and not _studio and _shot_path == "" and _autopilot == 0:
@@ -9017,7 +9019,12 @@ func _input(event: InputEvent) -> void:
 			return
 		elif mb == MOUSE_BUTTON_LEFT and mbe.pressed and _cam != null and _doll_brush != "":
 			var ptb := _doll_floor_point(mbe.position)
-			_doll_paint(int(floor(ptb.x)), int(floor(ptb.z)), mbe.shift_pressed)
+			if _doll_brush == "R":
+				_doll_rule(int(floor(ptb.x)), int(floor(ptb.z)), mbe.shift_pressed)
+			elif _doll_brush == "D":
+				_doll_door(int(floor(ptb.x)), int(floor(ptb.z)))
+			else:
+				_doll_paint(int(floor(ptb.x)), int(floor(ptb.z)), mbe.shift_pressed)
 			return
 		elif mb == MOUSE_BUTTON_LEFT and mbe.pressed and _cam != null:
 			var pt := _doll_floor_point(mbe.position)
@@ -9109,6 +9116,31 @@ func _input(event: InputEvent) -> void:
 		if nmv != null:
 			nmv.position = _doll_node_start + Vector3(float(ddx), 0.0, float(ddz))
 		return
+	if _dollhouse and event is InputEventMouseMotion and not _doll_drag and _cam != null \
+			and _doll_brush in ["R", "D"]:
+		# the rule brushes show their CELL: green = a wall would rise, rose =
+		# a wall would open, amber = the door would stand here
+		var hpr := _doll_floor_point((event as InputEventMouseMotion).position)
+		var hx := int(floor(hpr.x))
+		var hz := int(floor(hpr.z))
+		if _rule_hover == null or not is_instance_valid(_rule_hover):
+			_rule_hover = MeshInstance3D.new()
+			var hbm := BoxMesh.new()
+			hbm.size = Vector3(0.98, 0.35, 0.98)
+			_rule_hover.mesh = hbm
+			var hmat := StandardMaterial3D.new()
+			hmat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+			hmat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+			_rule_hover.material_override = hmat
+			add_child(_rule_hover)
+		var hcol := Color(0.95, 0.7, 0.2, 0.5)
+		if _doll_brush == "R":
+			var cur := _rule_peek(hx, hz)
+			hcol = Color(0.95, 0.35, 0.4, 0.5) if cur.begins_with("4") else Color(0.25, 0.85, 0.45, 0.5)
+		(_rule_hover.material_override as StandardMaterial3D).albedo_color = hcol
+		_rule_hover.global_position = Vector3(hx + 0.5, 0.2, hz + 0.5)
+		_rule_hover.visible = true
+		return
 	if _dollhouse and event is InputEventMouseMotion and not _doll_drag and _cam != null:
 		# the faint ring: what WOULD the hand pick here?
 		var hp := _doll_floor_point((event as InputEventMouseMotion).position)
@@ -9156,10 +9188,11 @@ func _input(event: InputEvent) -> void:
 			_doll_select(-1)
 			return
 		if kc == KEY_B:
-			var order := ["", "2", "4", "0", "1"]
+			var order := ["", "R", "D", "2", "4", "0", "1"]
 			_doll_brush = order[(order.find(_doll_brush) + 1) % order.size()]
-			var names := {"": "OFF — the hand picks bodies again", "2": "BLOCK (a 1 m stand)", "4": "WALL", "0": "HOLE (no floor)", "1": "FLOOR (clear the cell)"}
-			print("[em-doll] brush: %s — click paints the cell; SHIFT-click erases the ruling; real on next build" % names[_doll_brush])
+			var names := {"": "OFF — the hand picks bodies again", "R": "WALL/PASSAGE (a ruling — Save+Build makes it real)", "D": "DOOR (click where the sliding door should stand)", "2": "BLOCK (a 1 m stand)", "4": "WALL", "0": "HOLE (no floor)", "1": "FLOOR (clear the cell)"}
+			print("[em-doll] brush: %s" % names[_doll_brush])
+			_doll_palette_refresh()
 			return
 		if kc in [KEY_BRACKETLEFT, KEY_BRACKETRIGHT]:
 			_edit_handle_key(kc)   # browse the chapter palette; double-click drops the pick
@@ -9225,6 +9258,8 @@ func _input(event: InputEvent) -> void:
 		elif _edit_hud != null:
 			(_edit_hud.get_parent() as CanvasLayer).visible = false
 			print("[em-edit] editor sheathed — TAB to resume; unsaved rulings stay in memory")
+		if _doll_palette != null and is_instance_valid(_doll_palette):
+			_doll_palette.visible = _edit_mode and _dollhouse
 		return
 	if _edit_mode and event is InputEventKey and event.pressed and not event.echo:
 		_edit_shift = (event as InputEventKey).shift_pressed
@@ -9305,6 +9340,7 @@ func _arm_editor() -> void:
 		_edit_hud.text = _mod_editor.call(
 			"hud_text", _edit_records, _edit_sel, _edit_overrides, _edit_dirty)
 	print("[em-edit] editor armed: %d editable placement(s)" % _edit_records.size())
+	_doll_palette_refresh()
 
 
 func _edit_handle_key(key: int) -> bool:
@@ -10594,37 +10630,105 @@ func _wall_toggle_under_crosshair() -> void:
 	if segn == null or not is_instance_valid(segn) or not segn.has_meta("em_tile"):
 		print("[em-edit] wall tool: this segment carries no tile")
 		return
+	var msg := _rule_cell(segn, int(seg_d["z0"]), int(floor(wp.x)), int(floor(wp.z)), false)
+	if msg != "":
+		_doll_toast(msg)
+
+
+# ── THE CUTE DOLL EDITOR (2026-08-22, Palle: "a cute editing mode in the
+# godot version but more developed, more clear"). Two rule brushes on the
+# proven overrides lane (wall/passage + door), a clickable palette, a hover
+# cell that says what a click would do, toasts instead of console prints —
+# and SAVE+BUILD: flush the rulings and _follow_reload rebuilds the museum
+# around the eye, so the wall you just ruled is THERE seconds later.
+
+var _rule_hover: MeshInstance3D = null
+var _doll_palette: HBoxContainer = null
+
+
+func _rule_peek(wx: int, wz: int) -> String:
+	## The current value of the cell under (wx, wz): tile glyph in the hall,
+	## side-wall/deck in the enter room, "" when nothing is there.
+	for sv in _segments:
+		var sd: Dictionary = sv
+		if wz < int(sd.get("z0", 0)) or wz >= int(sd.get("z1", 0)):
+			continue
+		var segn: Node3D = _node_or_null(sd.get("node"))
+		if segn == null or not segn.has_meta("em_tile"):
+			return ""
+		var zb: int = int(sd.get("z0", 0))
+		var tz: int = wz - zb - VESTIBULE_H
+		if tz >= 0:
+			var tile: Array = segn.get_meta("em_tile")
+			if tz < tile.size() and wx >= 0 and wx < (tile[tz] as Array).size():
+				return String((tile[tz] as Array)[wx])
+			return ""
+		if tz >= -VESTIBULE_H:
+			var vw: int = int(segn.get_meta("em_vest_w")) if segn.has_meta("em_vest_w") else LOBBY_W
+			# pending rulings first
+			var ch := String(segn.get_meta("em_chapter")) if segn.has_meta("em_chapter") else ""
+			var pearl := String(segn.get_meta("em_pearl")) if segn.has_meta("em_pearl") else ""
+			for ov_v in _edit_overrides:
+				var ov: Dictionary = ov_v
+				if String(ov.get("kind", "")) == "cell" and String(ov.get("chapter", "")) == ch \
+						and String(ov.get("pearl", "")) == pearl:
+					var of: Array = ov.get("from", [])
+					if of.size() >= 2 and int(of[0]) == wx and int(of[1]) == tz:
+						return String(ov.get("value", "1"))
+			return "4" if (wx == 0 or wx == vw - 1) else "1"
+	return ""
+
+
+func _rule_cell(segn: Node3D, zbase: int, wx: int, wz: int, erase: bool) -> String:
+	## The ONE author of a wall/passage ruling: toggles the cell (hall tile
+	## or enter room), records/updates/erases the override row, and drops a
+	## translucent preview box. Returns the toast text ("" = nothing done).
+	if segn == null or not segn.has_meta("em_tile"):
+		return ""
 	var tile: Array = segn.get_meta("em_tile")
-	var cx: int = int(floor(wp.x))
-	var cz_t: int = int(floor(wp.z - float(seg_d["z0"]))) - VESTIBULE_H
-	if cz_t < 0 or cz_t >= tile.size() or cx < 0 or cx >= (tile[cz_t] as Array).size():
-		print("[em-edit] wall tool: aim inside the hall (the vestibule is not the tile)")
-		return
-	var cur := String((tile[cz_t] as Array)[cx])
+	var cz_t: int = wz - zbase - VESTIBULE_H
+	if cz_t < -VESTIBULE_H:
+		return ""
+	var in_hall: bool = cz_t >= 0
+	if in_hall and (cz_t >= tile.size() or wx < 0 or wx >= (tile[cz_t] as Array).size()):
+		return ""
+	var cur := ""
+	if in_hall:
+		cur = String((tile[cz_t] as Array)[wx])
+	else:
+		cur = _rule_peek(wx, wz)
 	var nv := "1" if cur.begins_with("4") else "4"
-	(tile[cz_t] as Array)[cx] = nv
 	var ch := String(segn.get_meta("em_chapter")) if segn.has_meta("em_chapter") else ""
 	var pearl := String(segn.get_meta("em_pearl")) if segn.has_meta("em_pearl") else ""
+	if in_hall:
+		(tile[cz_t] as Array)[wx] = nv
 	var found := false
+	var kept: Array = []
 	for ov_v in _edit_overrides:
 		var ov: Dictionary = ov_v
-		if String(ov.get("kind", "")) != "cell" or String(ov.get("chapter", "")) != ch \
-				or String(ov.get("pearl", "")) != pearl:
-			continue
-		var of: Array = ov.get("from", [])
-		if of.size() >= 2 and int(of[0]) == cx and int(of[1]) == cz_t:
-			ov["value"] = nv
-			found = true
-	if not found:
+		if String(ov.get("kind", "")) == "cell" and String(ov.get("chapter", "")) == ch \
+				and String(ov.get("pearl", "")) == pearl:
+			var of: Array = ov.get("from", [])
+			if of.size() >= 2 and int(of[0]) == wx and int(of[1]) == cz_t:
+				if erase:
+					continue
+				ov["value"] = nv
+				found = true
+		kept.append(ov)
+	_edit_overrides = kept
+	if not found and not erase:
 		_edit_overrides.append({"kind": "cell", "chapter": ch, "pearl": pearl,
-			"token": "cell:" + pearl, "from": [cx, cz_t], "value": nv,
+			"token": "cell:" + pearl, "from": [wx, cz_t], "value": nv,
 			"provenance": "hand"})
 	_edit_dirty = true
-	var pv := MeshInstance3D.new()
-	pv.name = "CellPreview_%d_%d" % [cx, cz_t]
-	var old_pv := segn.get_node_or_null(String(pv.name))
+	var pname := "CellPreview_%d_%d" % [wx, cz_t]
+	var old_pv := segn.get_node_or_null(pname)
 	if old_pv != null:
 		old_pv.free()
+	if erase:
+		return "ruling erased at [%d,%d]" % [wx, cz_t]
+	var pv := MeshInstance3D.new()
+	pv.name = pname
 	var bm := BoxMesh.new()
 	bm.size = Vector3(0.98, 3.0, 0.98)
 	pv.mesh = bm
@@ -10634,6 +10738,106 @@ func _wall_toggle_under_crosshair() -> void:
 	mt.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	pv.material_override = mt
 	segn.add_child(pv)
-	pv.position = Vector3(cx + 0.5, 1.5, float(VESTIBULE_H + cz_t) + 0.5)
-	print("[em-edit] cell [%d,%d] of %s · %s ruled %s — F5 save; the wall changes on the next build" % [
-		cx, cz_t, ch, pearl, "WALL" if nv == "4" else "PASSAGE"])
+	pv.position = Vector3(wx + 0.5, 1.5, float(VESTIBULE_H + cz_t) + 0.5)
+	var place := "hall" if in_hall else "enter room"
+	return "%s [%d,%d] ruled %s — Save+Build makes it real" % [place, wx, cz_t, "WALL" if nv == "4" else "PASSAGE"]
+
+
+func _doll_rule(wx: int, wz: int, erase: bool) -> void:
+	for sv in _segments:
+		var sd: Dictionary = sv
+		if wz >= int(sd.get("z0", 0)) and wz < int(sd.get("z1", 0)):
+			var msg := _rule_cell(_node_or_null(sd.get("node")), int(sd.get("z0", 0)), wx, wz, erase)
+			if msg != "":
+				_doll_toast(msg)
+			else:
+				_doll_toast("no hall cell there")
+			return
+	_doll_toast("no hall under that cell")
+
+
+func _doll_door(wx: int, wz: int) -> void:
+	## Click where the sliding door should stand — gate_x from the column,
+	## gate_z from the row (rows from that segment's lobby wall).
+	for i in range(_edit_records.size()):
+		var r: Dictionary = _edit_records[i]
+		if String(r.get("kind", "")) != "gate":
+			continue
+		var gseg: Node3D = _node_or_null(r.get("seg"))
+		if gseg == null:
+			continue
+		var gz0: int = int(round(gseg.position.z))
+		var gov: Dictionary = _furniture_override(r)
+		gov["gate_x"] = wx
+		gov["gate_z"] = clampf(float(wz - gz0) + 0.5, 0.5, float(VESTIBULE_H) + 6.0)
+		var gnode: Node3D = _node_or_null(r.get("node"))
+		if gnode != null and is_instance_valid(gnode):
+			gnode.position.x = float(wx)
+			gnode.position.z = float(gov["gate_z"])
+		_edit_dirty = true
+		_doll_toast("sliding door ruled to x %d · z %.1f — Save+Build makes it real" % [wx, float(gov["gate_z"])])
+		return
+	_doll_toast("the sliding door lives at the second hall's threshold — walk there first")
+
+
+func _doll_toast(msg: String) -> void:
+	print("[em-doll] " + msg)
+	if _edit_hud == null or not is_instance_valid(_edit_hud):
+		return
+	var lay := _edit_hud.get_parent() as CanvasLayer
+	var l := Label.new()
+	l.text = msg
+	l.add_theme_font_size_override("font_size", 17)
+	l.add_theme_color_override("font_color", Color(1.0, 0.9, 0.55))
+	l.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.9))
+	l.add_theme_constant_override("outline_size", 6)
+	lay.add_child(l)
+	l.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM)
+	l.offset_top = -110.0
+	l.offset_bottom = -84.0
+	var tw := create_tween()
+	tw.tween_interval(1.7)
+	tw.tween_property(l, "modulate:a", 0.0, 0.5)
+	tw.tween_callback(l.queue_free)
+
+
+func _doll_palette_refresh() -> void:
+	## The clickable tool row, dollhouse-only (the walk captures the mouse).
+	if _edit_hud == null or not is_instance_valid(_edit_hud):
+		return
+	var lay := _edit_hud.get_parent() as CanvasLayer
+	if _doll_palette == null or not is_instance_valid(_doll_palette):
+		_doll_palette = HBoxContainer.new()
+		_doll_palette.add_theme_constant_override("separation", 6)
+		lay.add_child(_doll_palette)
+		_doll_palette.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM)
+		_doll_palette.offset_top = -64.0
+		_doll_palette.offset_bottom = -20.0
+		var tools := [["🖐 hand", ""], ["🧱 wall/passage", "R"], ["🚪 door", "D"], ["💾 save+build", "!"]]
+		for t in tools:
+			var b := Button.new()
+			b.text = String((t as Array)[0])
+			b.set_meta("brush", String((t as Array)[1]))
+			b.focus_mode = Control.FOCUS_NONE
+			b.pressed.connect(_doll_palette_pressed.bind(b))
+			_doll_palette.add_child(b)
+	_doll_palette.visible = _edit_mode and _dollhouse
+	for b_v in _doll_palette.get_children():
+		var b2 := b_v as Button
+		if b2 == null:
+			continue
+		var br := String(b2.get_meta("brush"))
+		b2.modulate = Color(1.0, 0.82, 0.3) if (br == _doll_brush and br != "!") else Color(1, 1, 1)
+
+
+func _doll_palette_pressed(b: Button) -> void:
+	var br := String(b.get_meta("brush"))
+	if br == "!":
+		_edit_flush()
+		_doll_toast("saved — the museum rebuilds around you…")
+		_follow_reload()
+		return
+	_doll_brush = br
+	var names := {"": "the hand picks and drags bodies", "R": "wall/passage — click a cell (SHIFT-click erases the ruling)", "D": "door — click where the sliding door should stand"}
+	_doll_toast(String(names.get(br, "")))
+	_doll_palette_refresh()
