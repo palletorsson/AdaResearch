@@ -10551,6 +10551,10 @@ func _wall_toggle_under_crosshair() -> void:
 	var dir := -_cam.global_transform.basis.z
 	var space := get_world_3d().direct_space_state
 	var q := PhysicsRayQueryParameters3D.create(from, from + dir * 24.0)
+	# the camera stands INSIDE the player capsule — without this the ray hits
+	# yourself at zero distance and the tool reads as dead
+	if _player != null:
+		q.exclude = [_player.get_rid()]
 	var hit := space.intersect_ray(q)
 	if hit.is_empty():
 		print("[em-edit] wall tool: nothing under the crosshair")
