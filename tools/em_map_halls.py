@@ -65,11 +65,14 @@ def derive_row(pearl: str, map_name: str, museum_key: str, idx: int, total: int,
     struct = [[int(str(v)) if str(v).strip().isdigit() else 0 for v in row]
               for row in md["layers"]["structure"]]
     inter = md["layers"].get("interactables", [])
-    # crop to content
+    # ORIGIN-PINNED (the ruling drift lesson: tile cells ARE map cells,
+    # forever). Cropping to the content bbox moved (0,0) whenever the map's
+    # content changed, which silently re-addressed every saved ruling —
+    # walls, artifact moves, all of them. Only the FAR edges trim now.
     rows = [r for r, row in enumerate(struct) if any(v > 0 for v in row)]
     cols = [c for row in struct for c, v in enumerate(row) if v > 0]
-    r0, r1 = min(rows), max(rows)
-    c0, c1 = min(cols), max(cols)
+    r0, r1 = 0, max(rows)
+    c0, c1 = 0, max(cols)
     tile = []
     for r in range(r0, r1 + 1):
         line = []
@@ -103,7 +106,10 @@ def derive_row(pearl: str, map_name: str, museum_key: str, idx: int, total: int,
                 "rotation": ((rot % 360) + 360) % 360,
                 "mode": "freestanding", "venue": "interior",
                 "support_height_m": 0.95 if under >= 2 else 0.0,
-                "hand": True, "ruled": {"by": "map: " + map_name, "cell": list(tc)},
+                # hand stays FALSE: the curator's rulings may rebind by
+                # nearest when the plan re-derives (hand:true blocks rebind —
+                # that is bake_rulings' contract, not the map's)
+                "hand": False, "ruled": {"by": "map: " + map_name, "cell": list(tc)},
             })
     return {
         "museum": museum_key,

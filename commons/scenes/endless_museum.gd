@@ -4196,12 +4196,19 @@ func _ruling_for(tok: String, chapter: String, tx: int, tz: int, hand_row: bool 
 		if d2 < best_d:
 			best_d = d2
 			best = ov2
-	if not best.is_empty():
+	# a ruling recorded three plan-generations ago can sit ARBITRARILY far
+	# from today's row — rebinding it would drag the body to a stale cell
+	# (or off the tile, where the bounds check silently drops the body).
+	# Beyond 8 cells the ruling goes idle and is REPORTED, never guessed.
+	if not best.is_empty() and best_d <= 8:
 		best["_matched"] = true
 		best["_rebound"] = [tx, tz]
 		print("[em-edit] %s: the plan moved this row to [%d,%d]; its ruling (from %s, %d cells away) REBOUND to it"
 			% [tok, tx, tz, str(best.get("from", [])), best_d])
 		return best
+	if not best.is_empty():
+		print("[em-edit] %s at [%d,%d]: nearest ruling is %d cells away — too far, left idle"
+			% [tok, tx, tz, best_d])
 	return {}
 
 
