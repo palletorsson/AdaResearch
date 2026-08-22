@@ -62,6 +62,19 @@ const COL_GCUBE := Color(0.50, 0.72, 0.58)   # structure cube while edit_grid is
 @export var wall_cluster: String = ""
 @export_tool_button("➕  Add to active layer") var _b_add: Callable = _add
 
+@export_group("Museum stamp")
+## THE MUSEUM LAYER in Godot (Palle: "make a stamp editor in godot with the
+## same principal for the grid where we can see the artifacts"). Cycle the 25
+## hall architectures, drag the ghost cursor over the map, stamp — floor "1",
+## wall "2" into layers.museum (a 17-wide canvas), drawn translucent so the
+## artifacts stay visible. Save map writes it with everything else.
+@export_tool_button("◀ Prev stamp") var _b_stprev: Callable = _stamp_prev
+@export_tool_button("Next stamp ▶") var _b_stnext: Callable = _stamp_next
+@export_tool_button("👻 Place stamp cursor") var _b_stcur: Callable = _stamp_place_cursor
+@export_tool_button("🏛 Stamp at cursor") var _b_stapply: Callable = _stamp_apply
+@export_tool_button("⌫ Erase at cursor") var _b_sterase: Callable = _stamp_erase
+@export_multiline var stamp_status: String = "(load a map, then Prev/Next stamp)"
+
 @export_group("Selection")
 @export_tool_button("🗑  Remove selected") var _b_remove: Callable = _remove_selected
 
@@ -90,6 +103,9 @@ var _depth := 0
 var edit_grid: bool = false   # derived from active_layer == "Structure" — selectable structure cubes
 var active_layer: String = "Interactables"   # Interactables / Utilities / Structure / Clusters
 var _scene_map: Dictionary = {}   # lookup_name -> scene path (lazy from REGISTRY_DIR), for live_preview
+const MUSEUM_W := 17                # the museum layer's canvas width (odd; widest museum tile)
+var _stamps: Array = []             # [{key, label, w, h, tile}] — lazy from data files
+var _stamp_i: int = 0
 
 
 # ── Tool-button actions (real inspector buttons via @export_tool_button) ──
@@ -282,6 +298,8 @@ func _load() -> void:
 	_structure = layers.get("structure", [])
 	_depth = _structure.size()
 	_width = (int(_structure[0].size()) if _depth > 0 and _structure[0] is Array else 0)
+	call_deferred("_draw_museum_layer")
+	call_deferred("_refresh_stamp_status")
 	# out-of-tree guard: get_tree() is null once a map is torn down
 	if not is_inside_tree():
 		return
@@ -831,3 +849,196 @@ func _box(size: Vector3, col: Color) -> MeshInstance3D:
 	mat.albedo_color = col
 	mi.material_override = mat
 	return mi
+
+
+# ── THE MUSEUM STAMP (2026-08-22) ────────────────────────────────────────────
+# The same principle as /editor's Stamp tab, in the viewport where the
+# artifacts are visible: layers.museum is a 17-wide canvas; a stamp writes
+# floor "1" and wall "2"; the view draws it translucent and low.
+
+func _load_stamps() -> void:
+	if not _stamps.is_empty():
+		return
+	var pats_v: Variant = JSON.parse_string(FileAccess.get_file_as_string("res://commons/data/template_patterns.json"))
+	var mus_v: Variant = JSON.parse_string(FileAccess.get_file_as_string("res://commons/data/museum_templates.json"))
+	if not (pats_v is Dictionary and mus_v is Dictionary):
+		return
+	var pats: Dictionary = (pats_v as Dictionary).get("patterns", {})
+	for m_v in ((mus_v as Dictionary).get("museums", []) as Array):
+		var m: Dictionary = m_v
+		var key := str(m.get("template_key", ""))
+		var pat: Variant = pats.get(key)
+		if not (pat is Dictionary) or not ((pat as Dictionary).get("tile") is Array):
+			continue
+		var pd: Dictionary = pat
+		_stamps.append({"key": key, "label": str(pd.get("label", key)),
+			"w": int(pd.get("w", 0)), "h": int(pd.get("h", 0)), "tile": pd.get("tile")})
+	_stamps.sort_custom(func(a, b): return str(a["label"]) < str(b["label"]))
+
+
+func _refresh_stamp_status() -> void:
+	_load_stamps()
+	if _stamps.is_empty():
+		stamp_status = "(no museum stamps found)"
+		return
+	var st: Dictionary = _stamps[_stamp_i % _stamps.size()]
+	var rows := 0
+	var mus: Variant = _map.get("layers", {}).get("museum", []) if not _map.is_empty() else []
+	if mus is Array:
+		rows = (mus as Array).size()
+	stamp_status = "stamp %d/%d: %s (%dx%d)\nmuseum layer: %d row(s) stamped\ndrag the ghost, then 'Stamp at cursor'" % [
+		(_stamp_i % _stamps.size()) + 1, _stamps.size(), st["label"], int(st["w"]), int(st["h"]), rows]
+
+
+func _stamp_prev() -> void:
+	_load_stamps()
+	if _stamps.is_empty():
+		return
+	_stamp_i = (_stamp_i - 1 + _stamps.size()) % _stamps.size()
+	_refresh_stamp_status()
+	_stamp_place_cursor()
+
+
+func _stamp_next() -> void:
+	_load_stamps()
+	if _stamps.is_empty():
+		return
+	_stamp_i = (_stamp_i + 1) % _stamps.size()
+	_refresh_stamp_status()
+	_stamp_place_cursor()
+
+
+func _stamp_cursor_node() -> Node3D:
+	for c in get_children():
+		if c.name == "StampCursor":
+			return c
+	return null
+
+
+func _stamp_place_cursor() -> void:
+	_load_stamps()
+	if _stamps.is_empty():
+		return
+	var old := _stamp_cursor_node()
+	var keep := Vector3(0, 0, 0)
+	if old != null:
+		keep = old.position
+		old.free()
+	var st: Dictionary = _stamps[_stamp_i % _stamps.size()]
+	var cur := Node3D.new()
+	cur.name = "StampCursor"
+	add_child(cur)
+	if is_inside_tree() and get_tree().edited_scene_root != null:
+		cur.owner = get_tree().edited_scene_root
+	cur.position = keep
+	var tile: Array = st["tile"]
+	var x0 := int(floor((MUSEUM_W - int(st["w"])) / 2.0))
+	for dz in range(tile.size()):
+		var row: Array = tile[dz]
+		for dx in range(row.size()):
+			var v := str(row[dx]).strip_edges()
+			if v == "" or v == "0":
+				continue
+			var wall := not v.begins_with("1")
+			var box := MeshInstance3D.new()
+			var bm := BoxMesh.new()
+			bm.size = Vector3(0.9, 0.5 if wall else 0.08, 0.9)
+			box.mesh = bm
+			var mat := StandardMaterial3D.new()
+			mat.albedo_color = Color(0.05, 0.45, 0.56, 0.5) if wall else Color(0.22, 0.74, 0.97, 0.28)
+			mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+			mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+			box.material_override = mat
+			box.position = Vector3((x0 + dx + 0.5) * _total, 0.3 if wall else 0.1, (dz + 0.5) * _total)
+			cur.add_child(box)
+	print("MapToolEditor: stamp cursor = %s — drag it, then 'Stamp at cursor'" % st["label"])
+
+
+func _stamp_apply() -> void:
+	_stamp_write(false)
+
+
+func _stamp_erase() -> void:
+	_stamp_write(true)
+
+
+func _stamp_write(erase: bool) -> void:
+	if _map.is_empty():
+		push_warning("MapToolEditor: load a map first")
+		return
+	_load_stamps()
+	if _stamps.is_empty():
+		return
+	var cur := _stamp_cursor_node()
+	if cur == null:
+		push_warning("MapToolEditor: place the stamp cursor first")
+		return
+	var st: Dictionary = _stamps[_stamp_i % _stamps.size()]
+	var row0 := int(round(cur.position.z / _total))
+	var tile: Array = st["tile"]
+	if not _map.has("layers"):
+		_map["layers"] = {}
+	var mus: Array = _map["layers"].get("museum", [])
+	var need := row0 + tile.size()
+	while mus.size() < need:
+		var blank: Array = []
+		for i in range(MUSEUM_W):
+			blank.append("0")
+		mus.append(blank)
+	for i in range(mus.size()):
+		while (mus[i] as Array).size() < MUSEUM_W:
+			(mus[i] as Array).append("0")
+	var x0 := int(floor((MUSEUM_W - int(st["w"])) / 2.0))
+	for dz in range(tile.size()):
+		var row: Array = tile[dz]
+		for dx in range(row.size()):
+			var zz := row0 + dz
+			var xx := x0 + dx
+			if zz < 0 or zz >= mus.size() or xx < 0 or xx >= MUSEUM_W:
+				continue
+			if erase:
+				(mus[zz] as Array)[xx] = "0"
+				continue
+			var v := str(row[dx]).strip_edges()
+			if v == "" or v == "0":
+				continue
+			(mus[zz] as Array)[xx] = "1" if v.begins_with("1") else "2"
+	_map["layers"]["museum"] = mus
+	_draw_museum_layer()
+	_refresh_stamp_status()
+	print("MapToolEditor: %s %s at row %d — Save map writes layers.museum" % [
+		"erased" if erase else "stamped", st["label"], row0])
+
+
+func _draw_museum_layer() -> void:
+	for c in get_children():
+		if c.name == "MuseumLayerView":
+			c.free()
+	if _map.is_empty():
+		return
+	var mus: Variant = _map.get("layers", {}).get("museum", [])
+	if not (mus is Array) or (mus as Array).is_empty():
+		return
+	var view := Node3D.new()
+	view.name = "MuseumLayerView"
+	add_child(view)
+	if is_inside_tree() and get_tree().edited_scene_root != null:
+		view.owner = get_tree().edited_scene_root
+	for z in range((mus as Array).size()):
+		var row: Array = (mus as Array)[z]
+		for x in range(row.size()):
+			var v := str(row[x]).strip_edges()
+			if v != "1" and v != "2":
+				continue
+			var wall := v == "2"
+			var box := MeshInstance3D.new()
+			var bm := BoxMesh.new()
+			bm.size = Vector3(0.92, 0.45 if wall else 0.06, 0.92)
+			box.mesh = bm
+			var mat := StandardMaterial3D.new()
+			mat.albedo_color = Color(0.05, 0.45, 0.56, 0.55) if wall else Color(0.22, 0.74, 0.97, 0.25)
+			mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+			mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+			box.material_override = mat
+			box.position = Vector3((x + 0.5) * _total, 0.28 if wall else 0.08, (z + 0.5) * _total)
+			view.add_child(box)
