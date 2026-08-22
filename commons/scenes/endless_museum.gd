@@ -1781,6 +1781,21 @@ func _lobby_piece(seg: Node3D, key: String, pos: Vector3, yaw_deg: float, config
 	seg.add_child(n)
 	if key in ["pallet", "extinguisher"]:
 		_plain_hands_disarm(n, key)          # furniture, not a pickup
+	# the lobby's furniture is the curator's too (Palle: "edit transform
+	# props like fire extinguishers and cardboard boxes"): one record per
+	# piece, ruled as lobby:<key>, offset + rotation applied on the way in
+	var lch := String(seg.get_meta("em_chapter")) if seg.has_meta("em_chapter") else ""
+	_edit_records.append({"node": n, "token": "lobby:" + key, "kind": "furniture",
+		"from": [], "tile_cell": [], "rotation": yaw_deg,
+		"chapter": lch, "seg": seg, "index": 0})
+	for lr_v in _furniture_rules(lch, "furniture"):
+		var lr: Dictionary = lr_v
+		if String(lr.get("token", "")) == "lobby:" + key and int(lr.get("index", -1)) == 0:
+			var lo: Array = lr.get("offset", [])
+			if lo.size() >= 3:
+				n.position += Vector3(float(lo[0]), float(lo[1]), float(lo[2]))
+			if lr.has("rotation"):
+				n.rotation_degrees.y = float(lr["rotation"])
 	return n
 
 func _dress_lobby(seg: Node3D, solid: StaticBody3D, w: int, zbase: int, wall_col: Color,
@@ -10026,13 +10041,10 @@ func _edit_rotate(deg: float) -> void:
 	if _edit_sel < 0 or _edit_sel >= _edit_records.size():
 		return
 	var r: Dictionary = _edit_records[_edit_sel]
-	if String(r.get("kind", "")) == "prop":
-		print("[em-edit] %s is a wall prop — it faces its wall; no rotation ruling" % r.get("token"))
-		return
 	if String(r.get("kind", "")) in ["showing", "plinth"]:
 		print("[em-edit] a %s faces its wall / its artifact — no rotation ruling" % r.get("kind"))
 		return
-	if String(r.get("kind", "")) == "furniture":
+	if String(r.get("kind", "")) in ["furniture", "prop"]:
 		var fnode: Node3D = _node_or_null(r.get("node"))
 		var fov: Dictionary = _furniture_override(r)
 		fov["rotation"] = fposmod(float(fov.get("rotation", float(r.get("rotation", 0.0)))) + deg, 360.0)
