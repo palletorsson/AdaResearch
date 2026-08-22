@@ -2118,7 +2118,7 @@ func _setup_world() -> void:
 		var help_layer := CanvasLayer.new()
 		help_layer.layer = 80
 		var help := Label.new()
-		help.text = "DOLL HOUSE   click floor: walk · click body: drag · N: add · X: remove · B: brush · R: turn · MMB: pan · RMB: orbit · wheel: zoom · Q/E: turn house · L: the spine · H: plan view, then the walk"
+		help.text = "DOLL HOUSE   click floor: walk · click body: drag · N: add · X: remove · B: brush · R: turn · MMB: pan · RMB: orbit · wheel: zoom · Q/E: turn house (EDITING: E selects the hovered, Q rotates the held) · L: the spine · H: plan view, then the walk"
 		help.set_anchors_preset(Control.PRESET_BOTTOM_LEFT)
 		help.offset_left = 12
 		help.offset_top = -34
@@ -9145,6 +9145,7 @@ func _input(event: InputEvent) -> void:
 		# the faint ring: what WOULD the hand pick here?
 		var hp := _doll_floor_point((event as InputEventMouseMotion).position)
 		var hidx := _doll_pick(hp)
+		_doll_hover_idx = hidx
 		if _doll_hover == null or not is_instance_valid(_doll_hover):
 			var htm := TorusMesh.new()
 			htm.inner_radius = 0.46
@@ -9214,6 +9215,9 @@ func _input(event: InputEvent) -> void:
 			_doll_select(-1)
 			return
 		if kc == KEY_Q:
+			if _edit_mode and _edit_sel >= 0:
+				_edit_handle_key(KEY_Q)   # rotate the HELD body, not the house
+				return
 			_doll_yaw += PI * 0.25
 			return
 		elif kc == KEY_E:
@@ -9224,6 +9228,14 @@ func _input(event: InputEvent) -> void:
 					print("[em-doll] E at the door — granted")
 					_open_gate()
 					return
+			if _edit_mode:
+				# E SELECTS while editing (Palle: "e collides with rotate") —
+				# it picks the body under the hover ring; the house keeps
+				# RMB-orbit, and Q/E-turn belongs to the un-armed walk
+				_doll_select(_doll_hover_idx)
+				if _doll_hover_idx < 0:
+					_doll_toast("nothing under the hand — hover a body, then E")
+				return
 			_doll_yaw -= PI * 0.25
 			return
 	if _jump_ui != null and event is InputEventKey and (event as InputEventKey).pressed \
@@ -10644,6 +10656,7 @@ func _wall_toggle_under_crosshair() -> void:
 
 var _rule_hover: MeshInstance3D = null
 var _doll_palette: HBoxContainer = null
+var _doll_hover_idx: int = -1   # the body under the hover ring — E selects it while editing
 
 
 func _rule_peek(wx: int, wz: int) -> String:
