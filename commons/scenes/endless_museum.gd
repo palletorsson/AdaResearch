@@ -11276,8 +11276,15 @@ func _derive_map_row(map_name: String) -> Dictionary:
 	## The hall derived from its map, fresh: origin-pinned (tile cells ARE
 	## map cells), floors filled, h>=2 wall — the GDScript twin of
 	## tools/em_map_halls.derive_row.
-	var path := "res://commons/maps/%s/map_data.json" % map_name
+	# the QUEST fallback chain: a map hot-pushed to user:// (push_map_to_
+	# quest.ps1) outranks the pak's copy; when neither reads, the caller
+	# falls back to the plan row's --apply-time snapshot — the museum
+	# degrades to slightly stale, never to broken.
+	var path := "user://maps/%s/map_data.json" % map_name
 	if not FileAccess.file_exists(path):
+		path = "res://commons/maps/%s/map_data.json" % map_name
+	if not FileAccess.file_exists(path):
+		print("[em-map] %s: no map file (user:// or res://) — the plan snapshot stands" % map_name)
 		return {}
 	var doc_v: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
 	if not (doc_v is Dictionary):
