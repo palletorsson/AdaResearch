@@ -3161,10 +3161,16 @@ func _build_segment() -> void:
 	# -VESTIBULE_H..-1) — Palle: "there is a space before the hall … it is
 	# not defined or I can not move stuff or door there".
 	var vest_rules: Dictionary = {}
-	for cv_v in _furniture_rules(next_seq, "cell"):
+	for cv_v in _edit_overrides:
 		var cvd: Dictionary = cv_v
-		if String(cvd.get("pearl", "")) != "" and cur_pearl != "" \
-				and String(cvd.get("pearl", "")) != cur_pearl:
+		if String(cvd.get("kind", "")) != "cell":
+			continue
+		# chapter "" = rows saved before segments carried their chapter meta
+		# at click time — the pearl name is the strong key either way
+		var cv_ch := String(cvd.get("chapter", ""))
+		if cv_ch != "" and cv_ch != next_seq:
+			continue
+		if String(cvd.get("pearl", "")) == "" or cur_pearl == "" or String(cvd.get("pearl", "")) != cur_pearl:
 			continue
 		var cf: Array = cvd.get("from", [])
 		if cf.size() < 2:
@@ -3212,6 +3218,7 @@ func _build_segment() -> void:
 	add_child(seg)
 	seg.set_meta("em_tile", tile)
 	seg.set_meta("em_pearl", cur_pearl)
+	seg.set_meta("em_chapter", next_seq)
 	# one static body per segment carries every collision box — walls, podiums,
 	# hero plinths — so the whole museum frees with its segment node
 	var solid := StaticBody3D.new()
@@ -10967,25 +10974,107 @@ func _live_wall_add(segn: Node3D, wx: int, wz_local: float) -> void:
 
 
 func _live_wall_remove(segn: Node3D, wx: int, wz_local: float) -> bool:
-	## Free the standing wall box at the cell — mesh AND collider. False when
-	## nothing wall-sized stands there (merged runs; the caller says F6).
+	## Free the standing wall at the cell — mesh AND collider. Three homes
+	## (Palle: "I can not remove existing walls" — the built architecture is
+	## a MULTIMESH batch, not per-cell nodes):
+	##   1. a live-built per-cell MeshInstance3D (the editor's own walls)
+	##   2. an instance inside an ArchBatch MultiMesh — dropped by rebuilding
+	##      the instance buffer (instance_count reset CLEARS it), the rest of
+	##      a multi-cell run rebuilt as live boxes
+	##   3. the collider — per-cell freed, a run slab SPLIT around the cell
+	var cx: float = wx + 0.5
 	var hit := false
 	for c in [] + segn.get_children():
 		if c is MeshInstance3D:
 			var m := c as MeshInstance3D
-			if m.mesh is BoxMesh and absf((m.mesh as BoxMesh).size.y - WALL_H) < 0.8 \
-					and absf(m.position.x - (wx + 0.5)) < 0.35 and absf(m.position.z - wz_local) < 0.35:
-				m.queue_free()
+			if m.mesh is BoxMesh:
+				var bs: Vector3 = (m.mesh as BoxMesh).size
+				if bs.y > WALL_H - 0.8 and bs.x < 1.5 and bs.z < 1.5 \
+						and absf(m.position.x - cx) < 0.45 and absf(m.position.z - wz_local) < 0.45:
+					m.queue_free()
+					hit = true
+	if not hit:
+		for c2 in [] + segn.get_children():
+			if hit:
+				break
+			if not (c2 is MultiMeshInstance3D):
+				continue
+			var mmi := c2 as MultiMeshInstance3D
+			var mm := mmi.multimesh
+			if mm == null:
+				continue
+			for i in range(mm.instance_count):
+				var t := mm.get_instance_transform(i)
+				var o := t.origin
+				var sx := t.basis.x.length()
+				var sy := t.basis.y.length()
+				var sz := t.basis.z.length()
+				if sy < WALL_H - 0.8 or absf(o.y - WALL_H / 2.0) > 1.2:
+					continue
+				if cx < o.x - sx / 2.0 - 0.02 or cx > o.x + sx / 2.0 + 0.02:
+					continue
+				if wz_local < o.z - sz / 2.0 - 0.02 or wz_local > o.z + sz / 2.0 + 0.02:
+					continue
+				# the remainder of a multi-cell run comes back as live boxes
+				for part_v in _box_minus_cell(o, Vector3(sx, sy, sz), cx, wz_local):
+					var part: Dictionary = part_v
+					_box(segn, part["p"], part["s"], Color(0.85, 0.84, 0.8), mmi.material_override)
+				var keep: Array = []
+				for j in range(mm.instance_count):
+					if j != i:
+						keep.append(mm.get_instance_transform(j))
+				mm.instance_count = keep.size()
+				for j in range(keep.size()):
+					mm.set_instance_transform(j, keep[j])
 				hit = true
-	var solid := segn.get_node_or_null("Collision")
-	if solid != null:
-		for c2 in [] + solid.get_children():
-			if c2 is CollisionShape3D:
-				var cs := c2 as CollisionShape3D
-				if cs.shape is BoxShape3D and absf((cs.shape as BoxShape3D).size.y - WALL_H) < 0.8 \
-						and absf(cs.position.x - (wx + 0.5)) < 0.35 and absf(cs.position.z - wz_local) < 0.35:
-					cs.queue_free()
+				break
+	if hit:
+		var solid := segn.get_node_or_null("Collision")
+		if solid != null:
+			for c3 in [] + solid.get_children():
+				if not (c3 is CollisionShape3D):
+					continue
+				var cs := c3 as CollisionShape3D
+				if not (cs.shape is BoxShape3D):
+					continue
+				var bsz: Vector3 = (cs.shape as BoxShape3D).size
+				if bsz.y < WALL_H - 0.8:
+					continue
+				var op: Vector3 = cs.position
+				if cx < op.x - bsz.x / 2.0 - 0.02 or cx > op.x + bsz.x / 2.0 + 0.02:
+					continue
+				if wz_local < op.z - bsz.z / 2.0 - 0.02 or wz_local > op.z + bsz.z / 2.0 + 0.02:
+					continue
+				for part2_v in _box_minus_cell(op, bsz, cx, wz_local):
+					var part2: Dictionary = part2_v
+					_add_col(solid as StaticBody3D, part2["p"], part2["s"])
+				cs.queue_free()
 	return hit
+
+
+func _box_minus_cell(origin: Vector3, size: Vector3, cx: float, cz: float) -> Array:
+	## The box minus the 1-cell column at (cx, cz): 0..2 remainder boxes
+	## along the long axis (a single-cell box leaves nothing).
+	var out: Array = []
+	if size.x > 1.5:
+		var x0: float = origin.x - size.x / 2.0
+		var x1: float = origin.x + size.x / 2.0
+		var lw: float = (cx - 0.5) - x0
+		if lw > 0.01:
+			out.append({"p": Vector3(x0 + lw / 2.0, origin.y, origin.z), "s": Vector3(lw, size.y, size.z)})
+		var rw: float = x1 - (cx + 0.5)
+		if rw > 0.01:
+			out.append({"p": Vector3(x1 - rw / 2.0, origin.y, origin.z), "s": Vector3(rw, size.y, size.z)})
+	elif size.z > 1.5:
+		var z0: float = origin.z - size.z / 2.0
+		var z1: float = origin.z + size.z / 2.0
+		var fw: float = (cz - 0.5) - z0
+		if fw > 0.01:
+			out.append({"p": Vector3(origin.x, origin.y, z0 + fw / 2.0), "s": Vector3(size.x, size.y, fw)})
+		var bw: float = z1 - (cz + 0.5)
+		if bw > 0.01:
+			out.append({"p": Vector3(origin.x, origin.y, z1 - bw / 2.0), "s": Vector3(size.x, size.y, bw)})
+	return out
 
 
 func _doll_rule_set(wx: int, wz: int, val: String, speak: bool) -> void:
