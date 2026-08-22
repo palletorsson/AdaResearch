@@ -84,6 +84,17 @@ const COL_GCUBE := Color(0.50, 0.72, 0.58)   # structure cube while edit_grid is
 @export_tool_button("⚒ Build walls from museum layer") var _b_stbuild: Callable = _stamp_build_walls
 @export_tool_button("⌫ Walls yield to artifacts") var _b_styield: Callable = _stamp_yield
 
+@export_group("Arrange")
+## The web stamp tab's arrange hand, in the viewport. Markers are already
+## gizmo-draggable (live_snap seats them on cells; Save map reads their
+## positions), and the editor's own rect-select + multi-select group-drags —
+## these buttons add the rest: select-all, and the nearest-spot walk onto
+## the museum floor. Billboards show each artifact's capture as a
+## camera-facing card when no live scene is attached.
+@export var show_billboards: bool = true: set = _set_show_billboards
+@export_tool_button("⛶ Select all artifacts") var _b_selall: Callable = _select_all_artifacts
+@export_tool_button("⌖ Nearest museum spot") var _b_nearest: Callable = _nearest_museum_spot
+
 @export_group("Selection")
 @export_tool_button("🗑  Remove selected") var _b_remove: Callable = _remove_selected
 
@@ -364,8 +375,11 @@ func _make_marker(token: String, layer: String, x: int, z: int, col: Color, root
 	m.set_meta("layer", layer)
 	m.set_meta("y_lift", 0.3)
 	_label(m, label, col, 0.55)
+	var live_attached := false
 	if live_preview and layer != "utility":
-		_attach_live_scene(m, label)
+		live_attached = _attach_live_scene(m, label)
+	if show_billboards and layer == "interactable" and not live_attached:
+		_attach_billboard(m, label.split(":")[0])
 	if root:
 		m.owner = root
 
@@ -583,7 +597,7 @@ func _build_scene_map() -> void:
 					_scene_map[lookup] = str(e["scene"])
 
 
-func _attach_live_scene(anchor: Node3D, lookup: String) -> void:
+func _attach_live_scene(anchor: Node3D, lookup: String) -> bool:
 	# Instance the artifact's real scene under the marker anchor. @tool artifacts build their
 	# geometry at edit-time; non-@tool ones render nothing (their _ready only runs at game
 	# runtime), so the box anchor simply stays.
@@ -592,14 +606,16 @@ func _attach_live_scene(anchor: Node3D, lookup: String) -> void:
 	var base := lookup.split("#")[0].split(":")[0]
 	var path: String = _scene_map.get(base, "")
 	if path == "" or not ResourceLoader.exists(path):
-		return
+		return false
 	var packed = load(path)
 	if not (packed is PackedScene):
-		return
+		return false
 	var inst = (packed as PackedScene).instantiate()
 	if inst is Node3D:
 		_suppress_chrome(inst)   # never let a demo scene's Camera3D/CanvasLayer hijack the editor
 		anchor.add_child(inst)   # not owned → rides the marker, not separately selectable
+		return true
+	return false
 
 
 func _suppress_chrome(n: Node) -> void:
@@ -1229,3 +1245,161 @@ func _resample_tile_width(tile: Array, w: int, want: int) -> Array:
 			nr += row.slice(mid)
 		out.append(nr)
 	return out
+
+
+# ── ARRANGE + BILLBOARDS (2026-08-22, mirror of /editor's stamp tab) ─────────
+
+var _billboard_cache: Dictionary = {}   # base token -> ImageTexture (or null: no capture anywhere)
+
+
+func _set_show_billboards(v: bool) -> void:
+	show_billboards = v
+	if not _map.is_empty():
+		_load()
+
+
+func _billboard_texture(token: String) -> ImageTexture:
+	## The capture as a texture — encyclopedia gallery first, then the
+	## scene-catalog, then this project's own user://multi_shots.
+	if _billboard_cache.has(token):
+		return _billboard_cache[token]
+	var gh := ProjectSettings.globalize_path("res://").rstrip("/").get_base_dir()
+	var cands: Array = [
+		gh + "/ada_encyclopedia/public/artifact-gallery/captures/%s/front.png" % token,
+		gh + "/ada_encyclopedia/public/scene-catalog/%s.png" % token,
+		ProjectSettings.globalize_path("user://multi_shots/%s/front.png" % token),
+	]
+	var tex: ImageTexture = null
+	for c in cands:
+		if not FileAccess.file_exists(str(c)):
+			continue
+		var img: Image = Image.load_from_file(str(c))
+		if img != null and not img.is_empty():
+			tex = ImageTexture.create_from_image(img)
+			break
+	_billboard_cache[token] = tex
+	return tex
+
+
+func _attach_billboard(anchor: Node3D, token: String) -> void:
+	var tex := _billboard_texture(token)
+	if tex == null:
+		return
+	var spr := Sprite3D.new()
+	spr.name = "Billboard"
+	spr.texture = tex
+	spr.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	spr.pixel_size = 1.15 / maxf(1.0, float(tex.get_width()))
+	spr.position = Vector3(0, 0.75, 0)
+	anchor.add_child(spr)   # not owned — rides the marker
+
+
+func _select_all_artifacts() -> void:
+	## Every interactable marker into the editor selection — then dragging
+	## any one gizmo moves the whole group (native multi-select drag).
+	if not Engine.is_editor_hint() or not Engine.has_singleton("EditorInterface"):
+		return
+	var sel: Object = Engine.get_singleton("EditorInterface").call("get_selection")
+	sel.call("clear")
+	var n := 0
+	for m in get_children():
+		if m is Node3D and m.has_meta("token") and str(m.get_meta("layer")) == "interactable":
+			sel.call("add_node", m)
+			n += 1
+	print("MapToolEditor: %d artifact marker(s) selected — drag one gizmo to move the group" % n)
+
+
+func _museum_floor(rows: Array, r: int, c: int) -> bool:
+	if r < 0 or r >= rows.size():
+		return false
+	var row: Array = rows[r]
+	if c < 0 or c >= row.size():
+		return false
+	return str(row[c]) == "1"
+
+
+func _museum_fits(rows: Array, cx: int, cz: int, cw: int, cd: int) -> bool:
+	var r0: int = cz - int(floor(cd / 2.0))
+	var c0: int = cx - int(floor(cw / 2.0))
+	for r in range(r0, r0 + cd):
+		for c in range(c0, c0 + cw):
+			if not _museum_floor(rows, r, c):
+				return false
+	return true
+
+
+func _nearest_museum_spot() -> void:
+	## The web's nearest-spot, in the viewport: each interactable marker
+	## (the editor selection if it holds any, else all) walks a spiral to
+	## the closest museum floor cell where its measured footprint fits —
+	## any free floor cell as fallback.
+	if _map.is_empty():
+		push_warning("MapToolEditor: load a map first")
+		return
+	_load_measures()
+	var mus: Variant = _map.get("layers", {}).get("museum", [])
+	if not (mus is Array) or (mus as Array).is_empty():
+		push_warning("MapToolEditor: no museum layer — stamp one first")
+		return
+	var rows: Array = mus
+	var all_markers: Array = []
+	for m in get_children():
+		if m is Node3D and m.has_meta("token") and str(m.get_meta("layer")) == "interactable":
+			all_markers.append(m)
+	var chosen: Array = []
+	if Engine.is_editor_hint() and Engine.has_singleton("EditorInterface"):
+		var sel: Object = Engine.get_singleton("EditorInterface").call("get_selection")
+		for n in (sel.call("get_selected_nodes") as Array):
+			if n is Node3D and (n as Node).has_meta("token"):
+				chosen.append(n)
+	if chosen.is_empty():
+		chosen = all_markers
+	var taken: Dictionary = {}
+	for m in all_markers:
+		taken[Vector2i(roundi((m as Node3D).position.x / _total), roundi((m as Node3D).position.z / _total))] = true
+	var moved := 0
+	for m_v in chosen:
+		var m: Node3D = m_v
+		var cx := roundi(m.position.x / _total)
+		var cz := roundi(m.position.z / _total)
+		var tok := str(m.get_meta("token")).split(":")[0]
+		var me: Variant = _measures.get(tok)
+		var cw: int = maxi(1, int((me as Array)[3])) if me is Array else 1
+		var cd: int = maxi(1, int((me as Array)[4])) if me is Array else 1
+		taken.erase(Vector2i(cx, cz))
+		if _museum_fits(rows, cx, cz, cw, cd):
+			taken[Vector2i(cx, cz)] = true
+			continue
+		var best := Vector2i(-9999, -9999)
+		var loose := Vector2i(-9999, -9999)
+		for rad in range(0, 17):
+			if best.x != -9999:
+				break
+			for dr in range(-rad, rad + 1):
+				if best.x != -9999:
+					break
+				for dc in range(-rad, rad + 1):
+					if maxi(absi(dr), absi(dc)) != rad:
+						continue
+					var r: int = cz + dr
+					var c: int = cx + dc
+					if not _museum_floor(rows, r, c):
+						continue
+					if taken.has(Vector2i(c, r)):
+						continue
+					if loose.x == -9999:
+						loose = Vector2i(c, r)
+					if _museum_fits(rows, c, r, cw, cd):
+						best = Vector2i(c, r)
+						break
+		var dest := best if best.x != -9999 else loose
+		if dest.x != -9999:
+			taken[dest] = true
+			m.position = Vector3(dest.x * _total,
+				_height_at(dest.x, dest.y) * _total + float(m.get_meta("y_lift", 0.3)),
+				dest.y * _total)
+			moved += 1
+		else:
+			taken[Vector2i(cx, cz)] = true
+	status = _status_line()
+	print("MapToolEditor: nearest spot — %d marker(s) moved onto the museum floor" % moved)

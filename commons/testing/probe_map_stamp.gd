@@ -64,6 +64,25 @@ func _run() -> void:
 					break
 			if first_content > 0:
 				fails.append("first stamped row is %d, wanted 0 (origin anchor)" % first_content)
+			# the arrange mirror: markers off the tile walk a spiral to the
+			# nearest museum floor cell (footprint-aware, selection-or-all)
+			ed.call("_make_marker", "pick_up_cube", "interactable", 16, 2, Color(1, 1, 1), null)
+			ed.call("_make_marker", "grab_sphere", "interactable", 16, 4, Color(1, 1, 1), null)
+			await process_frame
+			ed.call("_nearest_museum_spot")
+			# the scene file may carry saved markers from real sessions —
+			# judge only the two this probe placed, found by name
+			var on_floor := 0
+			var marker_n := 0
+			for c2 in ed.get_children():
+				if c2 is Node3D and (c2 as Node).name in ["pick_up_cube", "grab_sphere"]:
+					marker_n += 1
+					var mx := roundi((c2 as Node3D).position.x)
+					var mz := roundi((c2 as Node3D).position.z)
+					if bool(ed.call("_museum_floor", rows, mz, mx)):
+						on_floor += 1
+			if marker_n != 2 or on_floor != 2:
+				fails.append("nearest spot: %d/%d probe markers on the museum floor" % [on_floor, marker_n])
 			ed.call("_stamp_erase")
 			var mus2: Array = ((ed.get("_map") as Dictionary).get("layers", {}) as Dictionary).get("museum")
 			var left := 0
