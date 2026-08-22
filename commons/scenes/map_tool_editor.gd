@@ -94,6 +94,13 @@ const COL_GCUBE := Color(0.50, 0.72, 0.58)   # structure cube while edit_grid is
 @export var show_billboards: bool = true: set = _set_show_billboards
 @export_tool_button("⛶ Select all artifacts") var _b_selall: Callable = _select_all_artifacts
 @export_tool_button("⌖ Nearest museum spot") var _b_nearest: Callable = _nearest_museum_spot
+## COLLECTIONS (mirror of /editor): a run of the same token folds into one
+## master marker with count/spread/gap; Save map expands it back into real
+## cells. Select a marker, then:
+@export_tool_button("𝄃 Collection +1") var _b_colp: Callable = _col_plus
+@export_tool_button("Collection −1") var _b_colm: Callable = _col_minus
+@export_tool_button("Spread x ⇄ z") var _b_cols: Callable = _col_spread
+@export_tool_button("Gap 1→2→3→4→1") var _b_colg: Callable = _col_gap
 
 @export_group("Selection")
 @export_tool_button("🗑  Remove selected") var _b_remove: Callable = _remove_selected
@@ -350,18 +357,61 @@ func _load() -> void:
 
 
 func _spawn(grid: Array, layer: String, col: Color, root: Node) -> void:
+	if layer != "interactable":
+		for z in range(grid.size()):
+			var row = grid[z]
+			if not (row is Array):
+				continue
+			for x in range(row.size()):
+				var tok := str(row[x]).strip_edges()
+				if tok == "" or tok == " ":
+					continue
+				_make_marker(tok, layer, x, z, col, root)
+		return
+	# COLLECTION FOLD (mirror of /editor + necklace_lab): consecutive
+	# identical tokens along a row or column with a uniform gap become ONE
+	# master marker; Save map re-expands, so untouched maps round-trip.
+	var cells: Dictionary = {}
 	for z in range(grid.size()):
 		var row = grid[z]
 		if not (row is Array):
 			continue
 		for x in range(row.size()):
 			var tok := str(row[x]).strip_edges()
-			if tok == "" or tok == " ":
-				continue
-			_make_marker(tok, layer, x, z, col, root)
+			if tok != "" and tok != " ":
+				cells[Vector2i(x, z)] = tok
+	var used: Dictionary = {}
+	var keys: Array = cells.keys()
+	keys.sort_custom(func(a, b): return a.y < b.y or (a.y == b.y and a.x < b.x))
+	for k in keys:
+		if used.has(k):
+			continue
+		var tok: String = cells[k]
+		var best_n := 1
+		var best_spread := "x"
+		var best_gap := 1
+		for spread in ["x", "z"]:
+			for gap in range(1, 5):
+				var n := 1
+				while true:
+					var nxt := Vector2i(k.x + n * gap, k.y) if spread == "x" else Vector2i(k.x, k.y + n * gap)
+					if used.has(nxt) or cells.get(nxt, "") != tok:
+						break
+					n += 1
+				if n > best_n:
+					best_n = n
+					best_spread = spread
+					best_gap = gap
+		if best_n >= 2:
+			for i in range(best_n):
+				used[Vector2i(k.x + i * best_gap, k.y) if best_spread == "x" else Vector2i(k.x, k.y + i * best_gap)] = true
+			_make_marker(tok, layer, k.x, k.y, col, root, best_n, best_spread, best_gap)
+		else:
+			used[k] = true
+			_make_marker(tok, layer, k.x, k.y, col, root)
 
 
-func _make_marker(token: String, layer: String, x: int, z: int, col: Color, root: Node) -> void:
+func _make_marker(token: String, layer: String, x: int, z: int, col: Color, root: Node, count: int = 1, spread: String = "x", gap: int = 1) -> void:
 	if layer == "interactable" and token.begins_with("cluster:"):
 		_spawn_cluster(token, x, z, root)
 		return
@@ -374,7 +424,13 @@ func _make_marker(token: String, layer: String, x: int, z: int, col: Color, root
 	m.set_meta("token", token)
 	m.set_meta("layer", layer)
 	m.set_meta("y_lift", 0.3)
-	_label(m, label, col, 0.55)
+	m.set_meta("base_label", label)
+	if count > 1:
+		m.set_meta("count", count)
+		m.set_meta("spread", spread)
+		m.set_meta("gap", gap)
+	_label(m, label + (" ×%d" % count if count > 1 else ""), col, 0.55)
+	_col_copies(m, col)
 	var live_attached := false
 	if live_preview and layer != "utility":
 		live_attached = _attach_live_scene(m, label)
@@ -723,8 +779,19 @@ func _save() -> void:
 		var token := _token_with_rot(str(m.get_meta("token")), layer, (m as Node3D).rotation_degrees.y)
 		if layer == "utility":
 			util[cz][cx] = token
-		else:
-			inter[cz][cx] = token
+			placed += 1
+			continue
+		var cnt: int = maxi(1, int(m.get_meta("count", 1)))
+		var spr := str(m.get_meta("spread", "x"))
+		var gp: int = maxi(1, int(m.get_meta("gap", 1)))
+		for i in range(cnt):
+			var rr: int = cz + (i * gp if spr == "z" else 0)
+			var cc: int = cx + (i * gp if spr == "x" else 0)
+			if rr < 0 or rr >= _depth or cc < 0 or cc >= _width:
+				continue
+			if i > 0 and str(inter[rr][cc]).strip_edges() != "":
+				continue
+			inter[rr][cc] = token
 		placed += 1
 	if not _map.has("layers"):
 		_map["layers"] = {}
@@ -1411,10 +1478,19 @@ func marker_at_cell(cx: int, cz: int) -> Node3D:
 	for m in get_children():
 		if m is Node3D and m.has_meta("token"):
 			var mm := m as Node3D
-			if roundi(mm.position.x / _total) == cx and roundi(mm.position.z / _total) == cz:
-				best = mm
-				if str(m.get_meta("layer")) == "interactable":
-					return mm
+			var cnt: int = maxi(1, int(m.get_meta("count", 1)))
+			var spr := str(m.get_meta("spread", "x"))
+			var gp: int = maxi(1, int(m.get_meta("gap", 1)))
+			var mx := roundi(mm.position.x / _total)
+			var mz := roundi(mm.position.z / _total)
+			for i in range(cnt):
+				var xx: int = mx + (i * gp if spr == "x" else 0)
+				var zz: int = mz + (i * gp if spr == "z" else 0)
+				if xx == cx and zz == cz:
+					best = mm
+					if str(m.get_meta("layer")) == "interactable":
+						return mm
+					break
 	return best
 
 
@@ -1425,3 +1501,81 @@ func move_marker_to(m: Node3D, cx: int, cz: int) -> void:
 	m.position = Vector3(cx * _total,
 		_height_at(cx, cz) * _total + float(m.get_meta("y_lift", 0.3)), cz * _total)
 	status = _status_line()
+
+
+# ── COLLECTIONS (2026-08-22, mirror of /editor) ──────────────────────────────
+
+func _col_copies(m: Node3D, col: Color) -> void:
+	## Rebuild the master's copy boxes from its count/spread/gap meta.
+	for c in [] + m.get_children():
+		if str(c.name).begins_with("CollectionCopy"):
+			c.free()
+	var cnt: int = maxi(1, int(m.get_meta("count", 1)))
+	if cnt <= 1:
+		return
+	var spr := str(m.get_meta("spread", "x"))
+	var gp: int = maxi(1, int(m.get_meta("gap", 1)))
+	for i in range(1, cnt):
+		var cp := _box(Vector3(0.4, 0.4, 0.4), col)
+		cp.name = "CollectionCopy%d" % i
+		cp.position = Vector3(
+			(i * gp) * _total if spr == "x" else 0.0, 0.0,
+			(i * gp) * _total if spr == "z" else 0.0)
+		m.add_child(cp)
+
+
+func _col_refresh(m: Node3D) -> void:
+	_col_copies(m, COL_ARTIFACT)
+	var base := str(m.get_meta("base_label", str(m.get_meta("token")).split("#")[0]))
+	var cnt: int = maxi(1, int(m.get_meta("count", 1)))
+	for c in m.get_children():
+		if c is Label3D:
+			(c as Label3D).text = base + (" ×%d" % cnt if cnt > 1 else "")
+	status = _status_line()
+
+
+func _first_selected_marker() -> Node3D:
+	if not Engine.is_editor_hint() or not Engine.has_singleton("EditorInterface"):
+		return null
+	var sel: Object = Engine.get_singleton("EditorInterface").call("get_selection")
+	for n in (sel.call("get_selected_nodes") as Array):
+		if n is Node3D and (n as Node).has_meta("token") and (n as Node).get_parent() == self:
+			return n
+	return null
+
+
+func _col_plus() -> void:
+	var m := _first_selected_marker()
+	if m == null:
+		push_warning("MapToolEditor: select an artifact marker first")
+		return
+	m.set_meta("count", mini(8, maxi(1, int(m.get_meta("count", 1))) + 1))
+	if not m.has_meta("spread"):
+		m.set_meta("spread", "x")
+	if not m.has_meta("gap"):
+		m.set_meta("gap", 1)
+	_col_refresh(m)
+
+
+func _col_minus() -> void:
+	var m := _first_selected_marker()
+	if m == null:
+		return
+	m.set_meta("count", maxi(1, int(m.get_meta("count", 1)) - 1))
+	_col_refresh(m)
+
+
+func _col_spread() -> void:
+	var m := _first_selected_marker()
+	if m == null:
+		return
+	m.set_meta("spread", "z" if str(m.get_meta("spread", "x")) == "x" else "x")
+	_col_refresh(m)
+
+
+func _col_gap() -> void:
+	var m := _first_selected_marker()
+	if m == null:
+		return
+	m.set_meta("gap", (int(m.get_meta("gap", 1)) % 4) + 1)
+	_col_refresh(m)
