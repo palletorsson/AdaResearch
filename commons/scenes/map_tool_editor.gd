@@ -78,6 +78,7 @@ const COL_GCUBE := Color(0.50, 0.72, 0.58)   # structure cube while edit_grid is
 @export var museum_length_z: int = 0
 @export_tool_button("📏 Apply length z") var _b_stlen: Callable = _stamp_set_length
 @export_tool_button("⌜ To zero corner") var _b_stzero: Callable = _stamp_to_zero
+@export_tool_button("⚒ Build walls from museum layer") var _b_stbuild: Callable = _stamp_build_walls
 
 @export_group("Selection")
 @export_tool_button("🗑  Remove selected") var _b_remove: Callable = _remove_selected
@@ -946,14 +947,14 @@ func _stamp_place_cursor() -> void:
 			var wall := not v.begins_with("1")
 			var box := MeshInstance3D.new()
 			var bm := BoxMesh.new()
-			bm.size = Vector3(0.9, 0.5 if wall else 0.08, 0.9)
+			bm.size = Vector3(0.9, 2.0 if wall else 1.0, 0.9)
 			box.mesh = bm
 			var mat := StandardMaterial3D.new()
 			mat.albedo_color = Color(0.05, 0.45, 0.56, 0.5) if wall else Color(0.22, 0.74, 0.97, 0.28)
 			mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 			mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 			box.material_override = mat
-			box.position = Vector3((x0 + dx + 0.5) * _total, 0.3 if wall else 0.1, (dz + 0.5) * _total)
+			box.position = Vector3((x0 + dx + 0.5) * _total, 1.0 if wall else 0.5, (dz + 0.5) * _total)
 			cur.add_child(box)
 	print("MapToolEditor: stamp cursor = %s — drag it, then 'Stamp at cursor'" % st["label"])
 
@@ -1037,14 +1038,14 @@ func _draw_museum_layer() -> void:
 			var wall := v == "2"
 			var box := MeshInstance3D.new()
 			var bm := BoxMesh.new()
-			bm.size = Vector3(0.92, 0.45 if wall else 0.06, 0.92)
+			bm.size = Vector3(0.92, 2.0 if wall else 1.0, 0.92)
 			box.mesh = bm
 			var mat := StandardMaterial3D.new()
 			mat.albedo_color = Color(0.05, 0.45, 0.56, 0.55) if wall else Color(0.22, 0.74, 0.97, 0.25)
 			mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 			mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 			box.material_override = mat
-			box.position = Vector3((x + 0.5) * _total, 0.28 if wall else 0.08, (z + 0.5) * _total)
+			box.position = Vector3((x + 0.5) * _total, 1.0 if wall else 0.5, (z + 0.5) * _total)
 			view.add_child(box)
 
 
@@ -1102,3 +1103,46 @@ func _stamp_to_zero() -> void:
 	_map["layers"]["museum"] = next
 	_draw_museum_layer()
 	print("MapToolEditor: museum layer slid to the zero corner (was %d, %d)" % [min_r, min_c])
+
+
+func _stamp_build_walls() -> void:
+	## THE WALLS GO REAL (Palle: "make the grid build walls from the museum
+	## layer with a button… floor 1 and wall 2 cubes in y"): the museum layer
+	## writes into layers.structure in the grid's own heights — wall "2"
+	## raises height 2, floor "1" lays height 1 where there was void. Rows
+	## beyond the map's depth extend the structure (the grid follows the
+	## museum length). Save map, then Load map to see the cubes.
+	if _map.is_empty():
+		push_warning("MapToolEditor: load a map first")
+		return
+	var mus: Variant = _map.get("layers", {}).get("museum", [])
+	if not (mus is Array) or (mus as Array).is_empty():
+		push_warning("MapToolEditor: nothing stamped in the museum layer")
+		return
+	var rows: Array = mus
+	var struct: Array = _map["layers"].get("structure", [])
+	var width: int = _width if _width > 0 else MUSEUM_W
+	while struct.size() < rows.size():
+		var blank: Array = []
+		for i in range(width):
+			blank.append("0")
+		struct.append(blank)
+	var walls := 0
+	var floors := 0
+	for z in range(rows.size()):
+		var srow: Array = struct[z]
+		for x in range(mini((rows[z] as Array).size(), srow.size())):
+			var v := str((rows[z] as Array)[x])
+			if v == "2":
+				srow[x] = "2"
+				walls += 1
+			elif v == "1":
+				var cur := int(str(srow[x])) if str(srow[x]).is_valid_int() else 0
+				if cur <= 0:
+					srow[x] = "1"
+					floors += 1
+	_map["layers"]["structure"] = struct
+	_depth = struct.size()
+	if _map.has("map_info") and (_map["map_info"] as Dictionary).has("dimensions"):
+		(_map["map_info"]["dimensions"] as Dictionary)["depth"] = _depth
+	print("MapToolEditor: built %d wall cell(s) + %d floor cell(s) from the museum layer — Save map, then Load map to see the cubes" % [walls, floors])
