@@ -142,6 +142,38 @@ func _run() -> void:
 	inst.set("_paint2d", "")
 	inst.set("_doll_top", false)
 
+	# ── THE DRESS SECTION (2026-08-23, "a section editing tool for artifact
+	# dressing"): P-cycle lands on an artifact, G opens, Q writes #plinth into
+	# the map token, an arrow writes #offset, close flags the rebuild
+	inst.call("_dress_cycle", 1)
+	var d_sel: int = inst.get("_edit_sel")
+	var d_ok_sel := d_sel >= 0
+	inst.call("_dress_toggle")
+	var d_on: bool = inst.get("_dress_on")
+	if not d_on:
+		say("dress_tool", false, "panel did not open (sel=%d)" % d_sel)
+	else:
+		# RELATIVE, not absolute: the cycled-to artifact may already wear a
+		# plinth (origin carries its authored 1.0) — Q must add 0.1 to THAT
+		var d_p0: float = inst.get("_dress_plinth")
+		inst.call("_dress_key", KEY_Q)      # plinth +0.10
+		inst.call("_dress_key", KEY_RIGHT)  # offset +0.05 x
+		var d_map: String = inst.get("_dress_map")
+		var d_cell: Vector2i = inst.get("_dress_cell")
+		var d_cfg: Dictionary = inst.call("_map_token_config", d_map, d_cell.x, d_cell.y)
+		var d_plinth_ok := str(d_cfg.get("plinth", "")) == "%.2f" % (d_p0 + 0.1)
+		var d_off_ok := str(d_cfg.get("offset", "")).begins_with("0.05")
+		# undo the dress by hand (clear both keys), then close WITHOUT rebuild
+		inst.call("_map_dress", d_map, d_cell.x, d_cell.y, "plinth", "")
+		inst.call("_map_dress", d_map, d_cell.x, d_cell.y, "offset", "")
+		inst.set("_dress_rebuild", false)
+		inst.call("_dress_close")
+		var d_cfg2: Dictionary = inst.call("_map_token_config", d_map, d_cell.x, d_cell.y)
+		say("dress_tool", d_ok_sel and d_plinth_ok and d_off_ok \
+			and not d_cfg2.has("plinth") and not d_cfg2.has("offset"),
+			"sel=%s plinth=%s offset=%s cleared=%s" % [str(d_ok_sel), str(d_cfg.get("plinth")),
+			str(d_cfg.get("offset")), str(not d_cfg2.has("plinth"))])
+
 	# ── BEYOND THE TILE (2026-08-23, "not all cells are open for change"):
 	# an authored hall edits ANY map cell — the crop is not a fence
 	var mdoc: Variant = JSON.parse_string(FileAccess.get_file_as_string(MAP1))

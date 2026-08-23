@@ -9365,6 +9365,15 @@ func _input(event: InputEvent) -> void:
 	if _dollhouse and event is InputEventKey and (event as InputEventKey).pressed and not (event as InputEventKey).echo:
 		var kc := (event as InputEventKey).keycode
 		_edit_shift = (event as InputEventKey).shift_pressed
+		if _dress_on:
+			_dress_key(kc)
+			return
+		if kc == KEY_P:
+			_dress_cycle(-1 if _edit_shift else 1)
+			return
+		if kc == KEY_G and _edit_sel >= 0:
+			_dress_toggle()
+			return
 		if _doll_menu != null and is_instance_valid(_doll_menu):
 			# the menu is open and the museum's _input runs BEFORE gui input:
 			# typing "line" in the filter must not turn the house or close the
@@ -10960,6 +10969,25 @@ var _paint2d_stroke: bool = false
 var _paint2d_last := Vector2i(-9999, -9999)
 var _paint2d_canvas: Control = null
 var _paint2d_undo: Array = []
+
+# ── THE DRESS SECTION (2026-08-23, Palle: "a section editing tool for
+# artifact dressing — plinth etc; n or p to jump between artifacts; an
+# overlay when an artifact is selected") — P cycles artifacts (SHIFT+P back),
+# G opens a SECTION view of the selected body: a side elevation of artifact +
+# plinth with live values. Every edit writes the MAP TOKEN's dress keys
+# (#plinth / #offset / #scale) — the bundle format — and offset/scale preview
+# live on the node; a plinth change rebuilds the hall on close (paint2d's
+# law: the map is the truth, reconstruction is the guarantee).
+var _dress_on: bool = false
+var _dress_canvas: Control = null
+var _dress_map: String = ""
+var _dress_cell := Vector2i(-1, -1)
+var _dress_plinth: float = 0.0
+var _dress_scale: float = 1.0
+var _dress_off := Vector3.ZERO
+var _dress_off0 := Vector3.ZERO
+var _dress_pos0 := Vector3.ZERO
+var _dress_rebuild: bool = false
 var _rule_last_cell := Vector2i(-9999, -9999)
 var _rule_rmb_pos := Vector2.ZERO
 var _rule_undo: Array = []                   # [{seg, zbase, wx, wz, prev}] or {"group": [...]}
@@ -11127,6 +11155,250 @@ func _rule_cell(segn: Node3D, zbase: int, wx: int, wz: int, erase: bool, force: 
 	segn.add_child(pv)
 	pv.position = Vector3(wx + 0.5, 1.5, wz_local)
 	return "%s [%d,%d] ruled PASSAGE — this wall is merged; F6 rebuilds it open" % [place, wx, cz_t]
+
+
+func _dress_cycle(dir: int) -> void:
+	## P jumps to the next artifact record, SHIFT+P back — the walkless walk.
+	var idxs: Array = []
+	for i in range(_edit_records.size()):
+		var r: Dictionary = _edit_records[i]
+		if String(r.get("kind", "")) != "":
+			continue   # plinths, props, gates, showings — dress belongs to artifacts
+		var n: Node3D = _node_or_null(r.get("node"))
+		if n == null or not is_instance_valid(n):
+			continue
+		idxs.append(i)
+	if idxs.is_empty():
+		_doll_toast("no artifacts to jump between")
+		return
+	var at: int = idxs.find(_edit_sel)
+	var nxt: int = idxs[posmod((at if at >= 0 else -1) + dir, idxs.size())] if at >= 0 \
+		else idxs[0 if dir > 0 else idxs.size() - 1]
+	_doll_select(nxt)
+	var rr: Dictionary = _edit_records[nxt]
+	_doll_toast("%d/%d  %s   (P next · shift+P back · G dresses)" % [
+		idxs.find(nxt) + 1, idxs.size(), str(rr.get("token"))])
+
+
+func _dress_toggle() -> void:
+	if _dress_on:
+		_dress_close()
+		return
+	if _edit_sel < 0 or _edit_sel >= _edit_records.size():
+		return
+	var r: Dictionary = _edit_records[_edit_sel]
+	if String(r.get("kind", "")) != "":
+		_doll_toast("dress belongs to artifacts — this is a %s" % String(r.get("kind")))
+		return
+	var seg: Node3D = _node_or_null(r.get("seg"))
+	var dmap := String(seg.get_meta("em_map")) if seg != null and seg.has_meta("em_map") else ""
+	if dmap == "":
+		_doll_toast("this hall's bodies are dealt, not authored — dress lives in the map")
+		return
+	var tc: Array = r.get("tile_cell", [0, 0])
+	var cell := _map_locate(dmap, String(r.get("token", "")), int(tc[0]), int(tc[1]))
+	if cell.x < 0:
+		_doll_toast("%s is not in the map near its record" % str(r.get("token")))
+		return
+	var cfg := _map_token_config(dmap, cell.x, cell.y)
+	_dress_map = dmap
+	_dress_cell = cell
+	_dress_plinth = float(str(cfg.get("plinth", "0"))) if str(cfg.get("plinth", "0")).is_valid_float() else 0.0
+	_dress_scale = float(str(cfg.get("scale", "1"))) if str(cfg.get("scale", "1")).is_valid_float() else 1.0
+	_dress_off = Vector3.ZERO
+	var ov := str(cfg.get("offset", "")).split(",")
+	if ov.size() >= 3 and str(ov[0]).strip_edges().is_valid_float():
+		_dress_off = Vector3(float(ov[0]), float(ov[1]), float(ov[2]))
+	_dress_off0 = _dress_off
+	var node: Node3D = _node_or_null(r.get("node"))
+	_dress_pos0 = node.position if node != null else Vector3.ZERO
+	_dress_rebuild = false
+	_dress_on = true
+	var cl := CanvasLayer.new()
+	cl.name = "DressSection"
+	cl.layer = 61
+	var ctl := Control.new()
+	ctl.set_anchors_preset(Control.PRESET_FULL_RECT)
+	ctl.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	cl.add_child(ctl)
+	add_child(cl)
+	_dress_canvas = ctl
+	ctl.draw.connect(_dress_draw)
+	ctl.queue_redraw()
+
+
+func _dress_close() -> void:
+	_dress_on = false
+	if _dress_canvas != null and is_instance_valid(_dress_canvas):
+		_dress_canvas.get_parent().queue_free()
+	_dress_canvas = null
+	if _dress_rebuild:
+		_dress_rebuild = false
+		_doll_toast("dressed — rebuilding the hall so the plinth stands…")
+		_follow_reload()
+	else:
+		_doll_toast("dressed — the map has it")
+
+
+func _dress_key(kc: int) -> void:
+	match kc:
+		KEY_G, KEY_ESCAPE:
+			_dress_close()
+			return
+		KEY_Q:
+			_dress_plinth = snappedf(_dress_plinth + 0.1, 0.05)
+			_dress_write("plinth", "" if _dress_plinth < 0.05 else "%.2f" % _dress_plinth)
+			_dress_rebuild = true
+		KEY_A:
+			_dress_plinth = maxf(0.0, snappedf(_dress_plinth - 0.1, 0.05))
+			_dress_write("plinth", "" if _dress_plinth < 0.05 else "%.2f" % _dress_plinth)
+			_dress_rebuild = true
+		KEY_W:
+			_dress_scale = snappedf(_dress_scale + 0.05, 0.01)
+			_dress_write("scale", "" if absf(_dress_scale - 1.0) < 0.02 else "%.2f" % _dress_scale)
+			_dress_preview()
+		KEY_S:
+			_dress_scale = maxf(0.1, snappedf(_dress_scale - 0.05, 0.01))
+			_dress_write("scale", "" if absf(_dress_scale - 1.0) < 0.02 else "%.2f" % _dress_scale)
+			_dress_preview()
+		KEY_LEFT:
+			_dress_nudge(Vector3(-0.05, 0, 0))
+		KEY_RIGHT:
+			_dress_nudge(Vector3(0.05, 0, 0))
+		KEY_UP:
+			_dress_nudge(Vector3(0, 0, -0.05))
+		KEY_DOWN:
+			_dress_nudge(Vector3(0, 0, 0.05))
+		KEY_PAGEUP:
+			_dress_nudge(Vector3(0, 0.05, 0))
+		KEY_PAGEDOWN:
+			_dress_nudge(Vector3(0, -0.05, 0))
+	if _dress_canvas != null and is_instance_valid(_dress_canvas):
+		_dress_canvas.queue_redraw()
+
+
+func _dress_nudge(d: Vector3) -> void:
+	_dress_off += d
+	var z := absf(_dress_off.x) < 0.001 and absf(_dress_off.y) < 0.001 and absf(_dress_off.z) < 0.001
+	_dress_write("offset", "" if z else "%.2f,%.2f,%.2f" % [_dress_off.x, _dress_off.y, _dress_off.z])
+	_dress_preview()
+
+
+func _dress_preview() -> void:
+	## Offset and scale show on the node NOW; the plinth waits for the rebuild.
+	if _edit_sel < 0 or _edit_sel >= _edit_records.size():
+		return
+	var node: Node3D = _node_or_null((_edit_records[_edit_sel] as Dictionary).get("node"))
+	if node == null or not is_instance_valid(node):
+		return
+	node.position = _dress_pos0 + (_dress_off - _dress_off0)
+	node.scale = Vector3.ONE * _dress_scale
+
+
+func _dress_write(key: String, val: String) -> void:
+	var why := _map_dress(_dress_map, _dress_cell.x, _dress_cell.y, key, val)
+	if why != "":
+		_doll_toast("the map refuses: " + why)
+
+
+func _dress_draw() -> void:
+	var ctl := _dress_canvas
+	if ctl == null or not is_instance_valid(ctl) or _edit_sel < 0:
+		return
+	var r: Dictionary = _edit_records[_edit_sel]
+	var node: Node3D = _node_or_null(r.get("node"))
+	var sz := ctl.size
+	var px := sz.x - 380.0
+	var panel := Rect2(px, 60, 350, 430)
+	ctl.draw_rect(panel, Color(0.07, 0.08, 0.1, 0.92))
+	ctl.draw_rect(panel, Color(1, 1, 1, 0.25), false, 1.0)
+	var f := ThemeDB.fallback_font
+	# the SECTION: floor line, plinth, artifact — side elevation to scale
+	var ppm := 70.0
+	var fy := panel.position.y + 330.0
+	var cxm := panel.position.x + 175.0
+	ctl.draw_line(Vector2(panel.position.x + 15, fy), Vector2(panel.end.x - 15, fy), Color(1, 1, 1, 0.6), 2.0)
+	var aw := 1.0
+	var ah := 1.0
+	if node != null and is_instance_valid(node):
+		var box: AABB = _extent_of(node)
+		aw = clampf(box.size.x, 0.2, 4.0)
+		ah = clampf(box.size.y, 0.2, 4.0)
+	var pw := 0.9 * ppm
+	var ph := _dress_plinth * ppm
+	if _dress_plinth > 0.01:
+		ctl.draw_rect(Rect2(cxm - pw / 2.0, fy - ph, pw, ph), Color(0.5, 0.45, 0.4, 0.9))
+		ctl.draw_rect(Rect2(cxm - pw / 2.0, fy - ph, pw, ph), Color(1, 1, 1, 0.4), false, 1.0)
+	var ax := cxm - (aw * ppm) / 2.0 + _dress_off.x * ppm
+	var ay := fy - ph - (ah * ppm) - _dress_off.y * ppm
+	ctl.draw_rect(Rect2(ax, ay, aw * ppm, ah * ppm), Color(0.3, 0.6, 0.8, 0.55))
+	ctl.draw_rect(Rect2(ax, ay, aw * ppm, ah * ppm), Color(0.7, 0.9, 1.0, 0.8), false, 1.5)
+	# the words
+	var lines := [
+		"DRESS — %s" % str(r.get("token")),
+		"%s  [%d,%d]" % [_dress_map, _dress_cell.x, _dress_cell.y],
+		"",
+		"plinth   %.2f m    Q up · A down" % _dress_plinth,
+		"scale    %.2f      W up · S down" % _dress_scale,
+		"offset   %.2f, %.2f, %.2f" % [_dress_off.x, _dress_off.y, _dress_off.z],
+		"         arrows x/z · PgUp/PgDn y",
+		"",
+		"written into the map as it changes",
+		"G or ESC closes" + ("  ·  rebuild follows (plinth)" if _dress_rebuild else ""),
+	]
+	for i in range(lines.size()):
+		ctl.draw_string(f, Vector2(panel.position.x + 18, panel.position.y + 28 + i * 22),
+			str(lines[i]), HORIZONTAL_ALIGNMENT_LEFT, -1, 15, Color(1, 1, 1, 0.92))
+
+
+func _map_token_config(map_name: String, fx: int, fz: int) -> Dictionary:
+	var out: Dictionary = {}
+	var path := "res://commons/maps/%s/map_data.json" % map_name
+	if not FileAccess.file_exists(path):
+		return out
+	var doc_v: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+	if not (doc_v is Dictionary):
+		return out
+	var inter: Array = ((doc_v as Dictionary).get("layers", {}) as Dictionary).get("interactables", [])
+	if fz < 0 or fz >= inter.size() or fx < 0 or fx >= (inter[fz] as Array).size():
+		return out
+	var segs := str((inter[fz] as Array)[fx]).strip_edges().split("#")
+	for i in range(1, segs.size()):
+		var s := str(segs[i])
+		var ci := s.find(":")
+		if ci > 0:
+			out[s.substr(0, ci).strip_edges()] = s.substr(ci + 1).strip_edges()
+	return out
+
+
+func _map_dress(map_name: String, fx: int, fz: int, key: String, val: String) -> String:
+	## Set or clear ("") ONE dress config key on the token at the cell.
+	var path := "res://commons/maps/%s/map_data.json" % map_name
+	if not FileAccess.file_exists(path):
+		return "no map file"
+	var doc_v: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+	if not (doc_v is Dictionary):
+		return "bad map json"
+	var inter: Array = ((doc_v as Dictionary).get("layers", {}) as Dictionary).get("interactables", [])
+	if fz < 0 or fz >= inter.size() or fx < 0 or fx >= (inter[fz] as Array).size():
+		return "cell off the map"
+	var tok := str((inter[fz] as Array)[fx]).strip_edges()
+	if tok == "":
+		return "no artifact at the cell"
+	var segs := tok.split("#")
+	var out := str(segs[0])
+	for i in range(1, segs.size()):
+		var s := str(segs[i])
+		if s.begins_with(key + ":"):
+			continue
+		if s != "":
+			out += "#" + s
+	if val != "":
+		out += "#" + key + ":" + val
+	(inter[fz] as Array)[fx] = out
+	if not _map_store(path, doc_v):
+		return "could not write the map"
+	return ""
 
 
 func _paint2d_apply(wx: int, wz: int) -> void:
