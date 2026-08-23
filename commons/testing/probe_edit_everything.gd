@@ -110,6 +110,30 @@ func _run() -> void:
 		inter = ((doc as Dictionary)["layers"] as Dictionary)["interactables"]
 		say("artifact_delete", str((inter[int(tc_a[1])] as Array)[int(tc_a[0])]).strip_edges() == "", "cell=%s" % str((inter[int(tc_a[1])] as Array)[int(tc_a[0])]))
 
+	# ── THE SLID BODY (Palle's field case: "still get the map refuses —
+	# no artifact at the source cell"): a record whose tile_cell sits
+	# BESIDE its map token (the stamp slid it) must still encode, resolved
+	# to the nearest occurrence
+	var slid_i := -1
+	for i3 in range(recs.size()):
+		var r3: Dictionary = recs[i3]
+		if String(r3.get("token", "")) == "fontana_puncture" and r3.get("seg") == seg0:
+			slid_i = i3
+	if slid_i < 0:
+		say("slid_record", false, "no fontana_puncture")
+	else:
+		say("slid_record", true)
+		var real_tc: Array = ((recs[slid_i] as Dictionary).get("tile_cell", []) as Array).duplicate()
+		# falsify the record by one cell — the slide, simulated
+		(recs[slid_i] as Dictionary)["tile_cell"] = [int(real_tc[0]) + 1, int(real_tc[1])]
+		inst.set("_edit_sel", slid_i)
+		inst.call("_edit_nudge", 0, 1)
+		var tc_s: Array = (recs[slid_i] as Dictionary).get("tile_cell", [])
+		var doc_s: Variant = JSON.parse_string(FileAccess.get_file_as_string(MAP1))
+		var inter_s: Array = ((doc_s as Dictionary)["layers"] as Dictionary)["interactables"]
+		var moved_ok := int(tc_s[0]) == int(real_tc[0]) and int(tc_s[1]) == int(real_tc[1]) + 1 			and str((inter_s[int(tc_s[1])] as Array)[int(tc_s[0])]).begins_with("fontana")
+		say("slid_move_resolved", moved_ok, "record %s (real was %s)" % [str(tc_s), str(real_tc)])
+
 	# ── PROPS / FURNITURE (rulings lane) ─────────────────────────────
 	var fur_i := -1
 	var show_i := -1

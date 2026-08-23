@@ -9520,7 +9520,11 @@ func _edit_handle_key(key: int) -> bool:
 				var del_map := String(del_seg.get_meta("em_map")) if del_seg != null and del_seg.has_meta("em_map") else ""
 				if del_map != "":
 					var dtc: Array = r2.get("tile_cell", [0, 0])
-					var dwhy := _map_clear_token(del_map, int(dtc[0]), int(dtc[1]))
+					var dres := _map_locate(del_map, String(r2.get("token", "")), int(dtc[0]), int(dtc[1]))
+					if dres.x < 0:
+						_doll_toast("%s is not in the map near its record — an added body is removed by ruling (it was)" % str(r2.get("token")))
+						return true
+					var dwhy := _map_clear_token(del_map, dres.x, dres.y)
 					if dwhy != "":
 						_doll_toast("the map refuses: " + dwhy)
 						return true
@@ -10067,15 +10071,19 @@ func _edit_nudge(dx: int, dz: int) -> void:
 	var tc0: Array = r.get("tile_cell", [0, 0])
 	if amap != "":
 		# ONE TRUTH: the move encodes into the map's interactables layer
-		var why := _map_move_token(amap, int(tc0[0]), int(tc0[1]),
-			int(tc0[0]) + dx, int(tc0[1]) + dz)
+		# resolve FIRST: a slid body's record points beside its map token
+		var lres := _map_locate(amap, String(r.get("token", "")), int(tc0[0]), int(tc0[1]))
+		if lres.x < 0:
+			_doll_toast("%s is not in the map near its record — an added body moves by ruling" % str(r.get("token")))
+			return
+		var why := _map_move_token(amap, lres.x, lres.y, lres.x + dx, lres.y + dz)
 		if why != "":
 			_doll_toast("the map refuses: " + why)
 			return
 		node.position += Vector3(float(dx), 0.0, float(dz))
-		r["tile_cell"] = [int(tc0[0]) + dx, int(tc0[1]) + dz]
+		r["tile_cell"] = [lres.x + dx, lres.y + dz]
 		_doll_toast("%s encoded into %s at [%d,%d]" % [str(r.get("token")), amap,
-			int(tc0[0]) + dx, int(tc0[1]) + dz])
+			lres.x + dx, lres.y + dz])
 		return
 	var ov: Dictionary = _mod_editor.call(
 		"override_for", _edit_records, _edit_sel, _edit_overrides)
@@ -10110,7 +10118,12 @@ func _edit_rotate(deg: float) -> void:
 		# ONE TRUTH: the turn encodes into the token's own rotation field
 		var rtc: Array = r.get("tile_cell", [0, 0])
 		var nrot := fposmod(float(r.get("rotation", 0.0)) + deg, 360.0)
-		var rwhy := _map_set_rotation(rot_map, int(rtc[0]), int(rtc[1]), nrot)
+		var rres := _map_locate(rot_map, String(r.get("token", "")), int(rtc[0]), int(rtc[1]))
+		if rres.x < 0:
+			_doll_toast("%s is not in the map near its record — an added body turns by ruling" % str(r.get("token")))
+			return
+		r["tile_cell"] = [rres.x, rres.y]
+		var rwhy := _map_set_rotation(rot_map, rres.x, rres.y, nrot)
 		if rwhy != "":
 			_doll_toast("the map refuses: " + rwhy)
 			return
@@ -11353,9 +11366,11 @@ func _map_write_cell(map_name: String, cx: int, cz: int, wall: bool) -> bool:
 	return _map_store(path, doc_v)
 
 
-func _map_move_token(map_name: String, fx: int, fz: int, tx2: int, tz2: int) -> String:
+func _map_move_token(map_name: String, fx: int, fz: int, tx2: int, tz2: int, token: String = "") -> String:
 	## "" on success, else the reason. The token string travels whole —
-	## rotation, y-offset, config all ride along.
+	## rotation, y-offset, config all ride along. When `token` is given the
+	## source RESOLVES to its nearest occurrence (slid bodies) and the move
+	## keeps the intended delta.
 	var path := "res://commons/maps/%s/map_data.json" % map_name
 	if not FileAccess.file_exists(path):
 		return "no map file"
@@ -11363,6 +11378,14 @@ func _map_move_token(map_name: String, fx: int, fz: int, tx2: int, tz2: int) -> 
 	if not (doc_v is Dictionary):
 		return "bad map json"
 	var inter: Array = ((doc_v as Dictionary).get("layers", {}) as Dictionary).get("interactables", [])
+	if token != "":
+		var rsv := _map_resolve_token(inter, token, fx, fz)
+		if rsv.x < 0:
+			return "%s is not in the map near [%d,%d] — an added body is a ruling, not map content" % [token, fx, fz]
+		tx2 = rsv.x + (tx2 - fx)
+		tz2 = rsv.y + (tz2 - fz)
+		fx = rsv.x
+		fz = rsv.y
 	if fz < 0 or fz >= inter.size() or fx < 0 or fx >= (inter[fz] as Array).size():
 		return "source off the map"
 	if tz2 < 0 or tz2 >= inter.size() or tx2 < 0 or tx2 >= (inter[tz2] as Array).size():
@@ -11476,3 +11499,37 @@ func _map_clear_token(map_name: String, fx: int, fz: int) -> String:
 	if not _map_store(path, doc_v):
 		return "could not write the map"
 	return ""
+
+
+func _map_resolve_token(inter: Array, token: String, fx: int, fz: int) -> Vector2i:
+	## The map cell where `token` actually stands, nearest (fx, fz) — a body
+	## the stamp SLID to honest floor carries a tile_cell its map token never
+	## had ("the map refuses: no artifact at the source cell"). Manhattan
+	## radius 6, exact cell wins outright. (-1,-1) when the token is not in
+	## the map at all (an ADDED body — that one is a ruling, not map content).
+	if fz >= 0 and fz < inter.size() and fx >= 0 and fx < (inter[fz] as Array).size() \
+			and str((inter[fz] as Array)[fx]).strip_edges().split("#")[0].split(":")[0] == token:
+		return Vector2i(fx, fz)
+	var best := Vector2i(-1, -1)
+	var bd := 7
+	for r in range(inter.size()):
+		var row: Array = inter[r]
+		for c in range(row.size()):
+			if str(row[c]).strip_edges().split("#")[0].split(":")[0] != token:
+				continue
+			var d: int = absi(c - fx) + absi(r - fz)
+			if d < bd:
+				bd = d
+				best = Vector2i(c, r)
+	return best
+
+
+func _map_locate(map_name: String, token: String, fx: int, fz: int) -> Vector2i:
+	var path := "res://commons/maps/%s/map_data.json" % map_name
+	if not FileAccess.file_exists(path):
+		return Vector2i(-1, -1)
+	var doc_v: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+	if not (doc_v is Dictionary):
+		return Vector2i(-1, -1)
+	var inter: Array = ((doc_v as Dictionary).get("layers", {}) as Dictionary).get("interactables", [])
+	return _map_resolve_token(inter, token, fx, fz)
