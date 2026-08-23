@@ -663,6 +663,7 @@ var _doll_yaw: float = PI * 0.75   # the iso angle; Q/E turn in 45-degree steps
 var _doll_drag: bool = false
 var _doll_drag_start: Vector2i = Vector2i.ZERO   # floor cell where the grab began
 var _doll_node_start: Vector3 = Vector3.ZERO     # the node's position at grab
+var _doll_plinth_start: Vector3 = Vector3.ZERO   # its plinth's position at grab (the bundle)
 var _doll_ring: MeshInstance3D = null
 var _doll_pan: bool = false        # MMB held — the hand drags the ground itself
 var _doll_orbit: bool = false      # RMB held over nothing — the house turns smoothly
@@ -5091,6 +5092,14 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 					cfg[aseg.substr(0, aci).strip_edges()] = aseg.substr(aci + 1).strip_edges()
 				else:
 					cfg[aseg] = "1"
+		# a DRESS plinth is a plinth in the LEDGER's eyes too — /transplant
+		# reads the flag, and after the materialization most plinths are dress
+		var dress_pl := false
+		if cfg.has("plinth"):
+			var dpv := str(cfg["plinth"]).split(",")
+			dress_pl = str(dpv[0]).strip_edges().is_valid_float() and float(str(dpv[0])) > 0.05
+		if dress_pl:
+			b["plinth"] = true
 		var done := false
 		var first_refusal := ""
 		for ring in range(0, 7):
@@ -8396,8 +8405,11 @@ func _doll_pick(pt: Vector3) -> int:
 	for i in range(_edit_records.size()):
 		var r: Dictionary = _edit_records[i]
 		# props, furniture and frames are draggable now (Palle: "in 3d I want
-		# to be able to move the props as well") — only variants stay gizmoless
-		if String(r.get("kind", "")) == "variant":
+		# to be able to move the props as well") — only variants stay gizmoless,
+		# and PLINTHS are unpickable (2026-08-23: a plinth belongs to its
+		# artifact; clicking a plinthed body used to grab the pedestal's own
+		# record — no bundle bond — so "they are not moved as one")
+		if String(r.get("kind", "")) in ["variant", "plinth"]:
 			continue
 		var n: Node3D = _node_or_null(r.get("node"))
 		if n == null or not is_instance_valid(n) or n.has_meta("em_hand_removed"):
@@ -9193,6 +9205,9 @@ func _input(event: InputEvent) -> void:
 				_doll_drag_start = Vector2i(int(floor(pt.x)), int(floor(pt.z)))
 				var nsel: Node3D = _node_or_null((_edit_records[idx] as Dictionary).get("node"))
 				_doll_node_start = nsel.position if nsel != null else Vector3.ZERO
+				# the BUNDLE: the plinth ghost-drags with its artifact
+				var plsel: Node3D = _node_or_null((_edit_records[idx] as Dictionary).get("plinth_node"))
+				_doll_plinth_start = plsel.position if plsel != null else Vector3.ZERO
 			else:
 				# LEFT CLICK WALKS (Palle): empty floor becomes the doll's goal
 				_doll_walk_to = Vector3(pt.x, 0.0, pt.z)
@@ -9231,21 +9246,27 @@ func _input(event: InputEvent) -> void:
 			var dx := int(floor(pt2.x)) - _doll_drag_start.x
 			var dz := int(floor(pt2.z)) - _doll_drag_start.y
 			if _edit_sel >= 0 and (dx != 0 or dz != 0):
-				# put the preview back, then commit the WHOLE delta as one
-				# nudge — one ruling, the arrows' own bookkeeping
+				# put the preview back (artifact AND its plinth), then commit
+				# the WHOLE delta as one nudge — the nudge moves the bundle
 				var nrel: Node3D = _node_or_null((_edit_records[_edit_sel] as Dictionary).get("node"))
 				if nrel != null:
 					nrel.position = _doll_node_start
+				var prel: Node3D = _node_or_null((_edit_records[_edit_sel] as Dictionary).get("plinth_node"))
+				if prel != null:
+					prel.position = _doll_plinth_start
 				_edit_nudge(dx, dz)
 				print("[em-doll] %s dragged %+d,%+d cell(s)" % [
 					(_edit_records[_edit_sel] as Dictionary).get("token"), dx, dz])
 			return
 		elif mb == MOUSE_BUTTON_RIGHT and mbe.pressed and _doll_drag:
-			# cancel: the body glides home, no ruling
+			# cancel: the body glides home — and its pedestal with it
 			_doll_drag = false
 			var nc: Node3D = _node_or_null((_edit_records[_edit_sel] as Dictionary).get("node"))
 			if nc != null:
 				nc.position = _doll_node_start
+			var pc: Node3D = _node_or_null((_edit_records[_edit_sel] as Dictionary).get("plinth_node"))
+			if pc != null:
+				pc.position = _doll_plinth_start
 			return
 		elif mb == MOUSE_BUTTON_RIGHT:
 			if mbe.pressed and _room_drag_start.x != -9999:
@@ -9288,6 +9309,10 @@ func _input(event: InputEvent) -> void:
 		var nmv: Node3D = _node_or_null((_edit_records[_edit_sel] as Dictionary).get("node"))
 		if nmv != null:
 			nmv.position = _doll_node_start + Vector3(float(ddx), 0.0, float(ddz))
+		# the BUNDLE: the pedestal rides the ghost drag too
+		var pmv: Node3D = _node_or_null((_edit_records[_edit_sel] as Dictionary).get("plinth_node"))
+		if pmv != null:
+			pmv.position = _doll_plinth_start + Vector3(float(ddx), 0.0, float(ddz))
 		return
 	if _dollhouse and event is InputEventMouseMotion and _paint2d_stroke and _paint2d != "" and _cam != null:
 		var pmr := _doll_floor_point((event as InputEventMouseMotion).position)
