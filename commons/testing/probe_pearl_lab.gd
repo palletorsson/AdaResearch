@@ -20,17 +20,25 @@ func _run() -> void:
 	await create_timer(2.0).timeout
 
 	var beads: Array = lab.get("_beads")
-	if beads.size() < 8:
-		fails.append("only %d beads on the string" % beads.size())
+	# the string spans EVERY spine map + the registry tail
+	if beads.size() < 500:
+		fails.append("only %d beads on the string (wanted spine+registry scale)" % beads.size())
+	var maps_seen: Dictionary = {}
+	for b_v2 in beads:
+		maps_seen[String((b_v2 as Dictionary)["map"])] = true
+	if maps_seen.size() < 50:
+		fails.append("only %d distinct maps on the string" % maps_seen.size())
 	# the DRESSING ROOM shows ONE pearl: the selected bead is spawned
 	var sel0: int = lab.get("_sel")
 	if sel0 < 0 or (beads[sel0] as Dictionary).get("node") == null:
 		fails.append("no pearl standing in the dressing room after boot")
 
-	# select a plinthed bead: it must arrive WITH its pedestal, close up
+	# select a plinthed bead IN POINT_ONE (the map this probe restores):
+	# it must arrive WITH its pedestal, close up
 	var pi := -1
 	for i in range(beads.size()):
-		if str((beads[i] as Dictionary).get("tok", "")).find("#plinth:") >= 0:
+		if String((beads[i] as Dictionary).get("map", "")) == "Point_One" \
+				and str((beads[i] as Dictionary).get("tok", "")).find("#plinth:") >= 0:
 			pi = i
 	if pi < 0:
 		fails.append("no plinthed bead to exercise the write path")
@@ -48,12 +56,28 @@ func _run() -> void:
 		lab.call("_bump_plinth", -0.1)
 		await create_timer(0.2).timeout
 		var tok1 := str(((lab.get("_beads") as Array)[pi] as Dictionary).get("tok"))
-		# compare VALUES, not bytes — the writer's %.2f turns 1.0 into 1.00
-		var p0 := float(str(tok0.split("#plinth:")[1]).split(",")[0].split("#")[0])
-		var p1 := float(str(tok1.split("#plinth:")[1]).split(",")[0].split("#")[0])
-		var rest0 := tok0.split("#plinth:")[0]
-		var rest1 := tok1.split("#plinth:")[0]
-		if absf(p0 - p1) > 0.001 or rest0 != rest1:
+		# compare AS A SET, values not bytes — the writer re-appends the edited
+		# key (order moves) and %.2f turns 1.0 into 1.00; config is a set
+		var same: bool = tok0.split("#")[0] == tok1.split("#")[0]
+		var c0: Dictionary = lab.call("_tok_cfg", tok0)
+		var c1: Dictionary = lab.call("_tok_cfg", tok1)
+		same = same and c0.size() == c1.size()
+		if same:
+			for ck in c0:
+				var p0s := str(c0[ck]).split(",")
+				var p1s := str(c1.get(ck, "<gone>")).split(",")
+				if p0s.size() != p1s.size():
+					same = false
+					continue
+				for j in range(p0s.size()):
+					var s0 := str(p0s[j]).strip_edges()
+					var s1 := str(p1s[j]).strip_edges()
+					if s0.is_valid_float() and s1.is_valid_float():
+						if absf(float(s0) - float(s1)) > 0.001:
+							same = false
+					elif s0 != s1:
+						same = false
+		if not same:
 			fails.append("write round-trip drifted: %s -> %s" % [tok0, tok1])
 
 	var rf: FileAccess = null
