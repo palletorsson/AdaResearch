@@ -1,10 +1,10 @@
 # @identity
-# essence: a standalone Godot bench for ONE map's pearls and their config — every
-# artifact spawned REAL (registry scene, dress plinth, offset, scale, rotation),
-# on a bare stage, with the museum's dress keys editing the MAP live
+# essence: a DRESSING ROOM for one pearl at a time — the artifact and its dress
+# alone on a flat floor, close up, real (registry scene, plinth, offset, scale),
+# with the museum's dress keys editing the MAP live
 # desire: see how the dress actually looks without booting the whole museum —
-# the /necklace web bench's abstract card made flesh (Palle, 2026-08-23: "can we
-# do a stand alone editor for the pearl config in godot and see how it looks")
+# one pearl, one deck, the camera at arm's length (Palle, 2026-08-23: "we just
+# see the artifact and its dress on flat floor, close up")
 # critical_parameter: map_name — the one map whose truth this bench reads/writes
 # truth: the token is the pearl; the config is how it stands; the map is the string
 extends Node3D
@@ -23,7 +23,6 @@ var _pitch := -0.9
 var _dist := 14.0
 var _focus := Vector3(8, 0, 8)
 var _panel: Label
-var _ring: MeshInstance3D
 var _orbit := false
 
 
@@ -67,22 +66,14 @@ func _map_doc() -> Dictionary:
 
 
 func _build_stage() -> void:
-	var doc := _map_doc()
-	var st: Array = (doc.get("layers", {}) as Dictionary).get("structure", [])
+	# ONE flat deck, nothing else — the dressing room's whole architecture
 	var fm := StandardMaterial3D.new()
 	fm.albedo_color = Color(0.16, 0.16, 0.19)
-	var wm := StandardMaterial3D.new()
-	wm.albedo_color = Color(0.90, 0.895, 0.875)
-	wm.roughness = 0.86
-	for z in range(st.size()):
-		var row: Array = st[z]
-		for x in range(row.size()):
-			var v := str(row[x]).strip_edges()
-			var h := int(v) if v.is_valid_int() else 0
-			if h >= 2:
-				_box(Vector3(x + 0.5, 1.4, z + 0.5), Vector3(1, 2.8, 1), wm)
-			elif h >= 1:
-				_box(Vector3(x + 0.5, -0.1, z + 0.5), Vector3(1, 0.2, 1), fm)
+	_box(Vector3(0, -0.1, 0), Vector3(7, 0.2, 7), fm)
+	var bm := StandardMaterial3D.new()
+	bm.albedo_color = Color(0.90, 0.895, 0.875)
+	bm.roughness = 0.86
+	_box(Vector3(0, 1.6, -3.6), Vector3(7, 3.6, 0.2), bm)   # a plain backdrop
 	var sun := DirectionalLight3D.new()
 	sun.rotation_degrees = Vector3(-52, 34, 0)
 	sun.light_energy = 1.1
@@ -109,11 +100,8 @@ func _box(p: Vector3, s: Vector3, m: Material) -> void:
 
 
 func _load_and_spawn() -> void:
-	for b_v in _beads:
-		for k in ["node", "plinth_node"]:
-			var n: Node = (b_v as Dictionary).get(k)
-			if n != null and is_instance_valid(n):
-				n.queue_free()
+	# the STRING only — tokens + their map cells; one pearl spawns at a time
+	_despawn_shown()
 	_beads.clear()
 	var doc := _map_doc()
 	var inter: Array = (doc.get("layers", {}) as Dictionary).get("interactables", [])
@@ -123,9 +111,18 @@ func _load_and_spawn() -> void:
 			var tok := str(row[x]).strip_edges()
 			if tok == "" or tok.begins_with("cluster:"):
 				continue
-			_beads.append(_spawn(tok, x, z))
+			_beads.append({"x": x, "z": z, "tok": tok, "node": null, "plinth_node": null})
 	_beads.sort_custom(func(a, b): return int(a["z"]) < int(b["z"]) \
 		or (int(a["z"]) == int(b["z"]) and int(a["x"]) < int(b["x"])))
+
+
+func _despawn_shown() -> void:
+	for b_v in _beads:
+		for k in ["node", "plinth_node"]:
+			var n: Node = (b_v as Dictionary).get(k)
+			if n != null and is_instance_valid(n):
+				n.queue_free()
+			(b_v as Dictionary)[k] = null
 
 
 func _tok_cfg(tok: String) -> Dictionary:
@@ -170,7 +167,9 @@ func _spawn(tok: String, x: int, z: int) -> Dictionary:
 		var op := str(cfg["offset"]).split(",")
 		if op.size() >= 3 and str(op[0]).strip_edges().is_valid_float():
 			off = Vector3(float(op[0]), float(op[1]), float(op[2]))
-	var base := Vector3(x + 0.5, 0.0, z + 0.5)
+	# the dressing room: every pearl stands at the STAGE CENTRE, close up —
+	# its map cell rides along only as the write address
+	var base := Vector3(0.0, 0.0, 0.0)
 	if ph > 0.05:
 		var ps: PackedScene = load("res://commons/artifacts/station/%s.tscn" % pkind) as PackedScene
 		if ps != null:
@@ -198,13 +197,8 @@ func _spawn(tok: String, x: int, z: int) -> Dictionary:
 func _build_camera() -> void:
 	_cam = Camera3D.new()
 	add_child(_cam)
-	var doc := _map_doc()
-	var st: Array = (doc.get("layers", {}) as Dictionary).get("structure", [])
-	var w := 16
-	if not st.is_empty():
-		w = (st[0] as Array).size()
-	_focus = Vector3(w / 2.0, 0.0, st.size() / 2.0)
-	_dist = maxf(float(w), float(st.size())) * 1.1
+	_focus = Vector3(0.0, 0.9, 0.0)
+	_dist = 4.0
 	_update_cam()
 	_cam.current = true
 
@@ -238,25 +232,10 @@ func _refresh_panel() -> void:
 
 func _select(i: int) -> void:
 	_sel = posmod(i, _beads.size()) if not _beads.is_empty() else -1
-	if _ring == null or not is_instance_valid(_ring):
-		var tm := TorusMesh.new()
-		tm.inner_radius = 0.5
-		tm.outer_radius = 0.62
-		_ring = MeshInstance3D.new()
-		_ring.mesh = tm
-		var rm := StandardMaterial3D.new()
-		rm.albedo_color = Color(1.0, 0.72, 0.15)
-		rm.emission_enabled = true
-		rm.emission = Color(1.0, 0.72, 0.15)
-		rm.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-		_ring.material_override = rm
-		add_child(_ring)
+	_despawn_shown()
 	if _sel >= 0:
 		var b: Dictionary = _beads[_sel]
-		_ring.position = Vector3(int(b["x"]) + 0.5, 0.08, int(b["z"]) + 0.5)
-		_ring.visible = true
-	else:
-		_ring.visible = false
+		_beads[_sel] = _spawn(str(b["tok"]), int(b["x"]), int(b["z"]))
 	_refresh_panel()
 
 
@@ -344,10 +323,10 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		var mb := event as InputEventMouseButton
 		if mb.button_index == MOUSE_BUTTON_WHEEL_UP and mb.pressed:
-			_dist = clampf(_dist * 0.9, 3.0, 80.0)
+			_dist = clampf(_dist * 0.9, 1.2, 20.0)
 			_update_cam()
 		elif mb.button_index == MOUSE_BUTTON_WHEEL_DOWN and mb.pressed:
-			_dist = clampf(_dist / 0.9, 3.0, 80.0)
+			_dist = clampf(_dist / 0.9, 1.2, 20.0)
 			_update_cam()
 		elif mb.button_index == MOUSE_BUTTON_RIGHT:
 			_orbit = mb.pressed

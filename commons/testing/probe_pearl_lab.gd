@@ -20,20 +20,14 @@ func _run() -> void:
 	await create_timer(2.0).timeout
 
 	var beads: Array = lab.get("_beads")
-	var alive := 0
-	var dressed := 0
-	for b_v in beads:
-		var b: Dictionary = b_v
-		if b.get("node") != null and is_instance_valid(b.get("node")):
-			alive += 1
-		if b.get("plinth_node") != null and is_instance_valid(b.get("plinth_node")):
-			dressed += 1
-	if alive < 8:
-		fails.append("only %d of %d beads spawned a living scene" % [alive, beads.size()])
-	if dressed < 1:
-		fails.append("no dressed bead carries a plinth node (the map has #plinth tokens)")
+	if beads.size() < 8:
+		fails.append("only %d beads on the string" % beads.size())
+	# the DRESSING ROOM shows ONE pearl: the selected bead is spawned
+	var sel0: int = lab.get("_sel")
+	if sel0 < 0 or (beads[sel0] as Dictionary).get("node") == null:
+		fails.append("no pearl standing in the dressing room after boot")
 
-	# the write path, net zero: select a plinthed bead, +0.1 then -0.1
+	# select a plinthed bead: it must arrive WITH its pedestal, close up
 	var pi := -1
 	for i in range(beads.size()):
 		if str((beads[i] as Dictionary).get("tok", "")).find("#plinth:") >= 0:
@@ -41,6 +35,12 @@ func _run() -> void:
 	if pi < 0:
 		fails.append("no plinthed bead to exercise the write path")
 	else:
+		lab.call("_select", pi)
+		await create_timer(0.3).timeout
+		beads = lab.get("_beads")
+		var pb: Dictionary = beads[pi]
+		if pb.get("plinth_node") == null or not is_instance_valid(pb.get("plinth_node")):
+			fails.append("the dressed pearl stands without its pedestal")
 		var tok0 := str((beads[pi] as Dictionary).get("tok"))
 		lab.call("_select", pi)
 		lab.call("_bump_plinth", 0.1)
