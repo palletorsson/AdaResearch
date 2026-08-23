@@ -45,8 +45,31 @@ var _built: bool = false
 
 
 func _ready() -> void:
+	add_to_group("ada_writable_board")
 	_read_metadata_overrides()
 	_build()
+
+
+func write_surfaces() -> Array:
+	## BOTH writing faces in GLOBAL space (the board is double-sided) —
+	## draw_dot's pen writes ON these planes (2026-08-23, "wire the pen to the
+	## whiteboard"). Computed per call, so a rolled board answers from where it
+	## stands now. Face front z = 0.026, back z = -0.004 (see _build_board:
+	## frame 0.05 thick, face 0.03 thick, +0.001 proud).
+	var xf := global_transform
+	var cy: float = stand_height * 0.66
+	var face_cz: float = 0.05 * 0.5 - 0.03 * 0.5 + 0.001
+	var out: Array = []
+	for side in [1.0, -1.0]:
+		out.append({
+			"origin": xf * Vector3(0.0, cy, face_cz + side * 0.015),
+			"normal": (xf.basis * Vector3(0, 0, side)).normalized(),
+			"u": (xf.basis * Vector3(side, 0, 0)).normalized(),
+			"v": (xf.basis * Vector3(0, 1, 0)).normalized(),
+			"half_w": board_width * 0.5,
+			"half_h": board_height * 0.5,
+		})
+	return out
 
 
 func apply_grid_config(config_data: Dictionary) -> void:

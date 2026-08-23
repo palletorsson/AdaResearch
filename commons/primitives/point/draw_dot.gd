@@ -385,15 +385,13 @@ func _process(delta: float) -> void:
 		return
 
 	_last_global_position = current_global
-	# RESOLUTION: snap the sample onto the world grid — a coarser grid makes
-	# the line stair-step into a larger grid pattern (config `resolution`, mm;
-	# 2026-08-23). One dot per grid cell, which is the point of a grid.
-	var rec: Vector3 = current_global
-	if resolution_mm > 0.0:
-		var rs: float = resolution_mm / 1000.0
-		rec = Vector3(snappedf(rec.x, rs), snappedf(rec.y, rs), snappedf(rec.z, rs))
-		if not _trail_points.is_empty() and _trail_points[_trail_points.size() - 1].is_equal_approx(rec):
-			return
+	# Shape the sample: ON a nearby whiteboard face (pen-on-board — projected
+	# onto the plane and snapped in BOARD space, so the grid pattern hangs as
+	# wall work) or in free space (world-grid snap). One dot per grid cell,
+	# which is the point of a grid.
+	var rec: Vector3 = _shape_sample(current_global)
+	if not _trail_points.is_empty() and _trail_points[_trail_points.size() - 1].is_equal_approx(rec):
+		return
 	# Use global position for the trail points since the mesh is top_level
 	_trail_points.append(rec)
 
@@ -630,6 +628,64 @@ func _set_resolution(v: String) -> void:
 	var g: String = v.strip_edges().to_lower()
 	if g.is_valid_float():
 		resolution_mm = clampf(g.to_float(), 0.0, 500.0)
+
+
+# ── PEN ON THE WHITEBOARD (2026-08-23, "wire the pen to the whiteboard") ──
+# Whiteboards join the "ada_writable_board" group and answer write_surfaces()
+# with their face planes in global space. When the pen tip samples within
+# board_write_distance of a face, the dot lands ON the board: projected onto
+# the plane, snapped on a 2D grid IN BOARD SPACE (a true grid pattern on the
+# board — wall work), lifted just proud of the surface so it reads as ink.
+
+const BOARD_GROUP := "ada_writable_board"
+## Pen tip within this distance of a board face writes ON the board.
+@export var board_write_distance: float = 0.05
+
+
+func _nearest_board_face(p: Vector3) -> Dictionary:
+	var best: Dictionary = {}
+	var bd: float = board_write_distance
+	if not is_inside_tree():
+		return best
+	for b in get_tree().get_nodes_in_group(BOARD_GROUP):
+		if not (b as Node).has_method("write_surfaces"):
+			continue
+		for srf in (b.call("write_surfaces") as Array):
+			var s: Dictionary = srf
+			var d: Vector3 = p - (s["origin"] as Vector3)
+			var dist: float = absf(d.dot(s["normal"] as Vector3))
+			if dist <= bd \
+					and absf(d.dot(s["u"] as Vector3)) <= float(s["half_w"]) + 0.02 \
+					and absf(d.dot(s["v"] as Vector3)) <= float(s["half_h"]) + 0.02:
+				bd = dist
+				best = s
+	return best
+
+
+func _shape_sample(p: Vector3) -> Vector3:
+	## Where a hand sample actually lands: ON a nearby whiteboard face, or in
+	## free space with the world-grid resolution snap.
+	var srf: Dictionary = _nearest_board_face(p)
+	if not srf.is_empty():
+		var o: Vector3 = srf["origin"]
+		var u_ax: Vector3 = srf["u"]
+		var v_ax: Vector3 = srf["v"]
+		var d: Vector3 = p - o
+		var u: float = d.dot(u_ax)
+		var v: float = d.dot(v_ax)
+		var rs: float = _res_step()
+		if rs > 0.0:
+			u = snappedf(u, rs)
+			v = snappedf(v, rs)
+		u = clampf(u, -float(srf["half_w"]), float(srf["half_w"]))
+		v = clampf(v, -float(srf["half_h"]), float(srf["half_h"]))
+		var lift: float = maxf(dot_size, _res_step() * 0.45) * 0.6 + 0.002
+		return o + u_ax * u + v_ax * v + (srf["normal"] as Vector3) * lift
+	var rec: Vector3 = p
+	if resolution_mm > 0.0:
+		var s: float = resolution_mm / 1000.0
+		rec = Vector3(snappedf(rec.x, s), snappedf(rec.y, s), snappedf(rec.z, s))
+	return rec
 
 
 func _res_step() -> float:

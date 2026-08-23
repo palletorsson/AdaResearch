@@ -79,6 +79,40 @@ func _run() -> void:
 	else:
 		fails.append("no _trail_instance on the live node")
 
+	# 3b. PEN ON THE WHITEBOARD — a board in the tree, a sample near its face:
+	# the dot must land ON the plane, snapped in BOARD space, inside bounds
+	var wb: Node3D = (load("res://commons/artifacts/whiteboard/whiteboard.tscn") as PackedScene).instantiate()
+	wb.position = Vector3(5, 0, 0)
+	get_root().add_child(wb)
+	var pen: Node = scene.instantiate()
+	pen.set_meta("config_resolution", "40")
+	get_root().add_child(pen)
+	await process_frame
+	await process_frame
+	var srfs: Array = wb.call("write_surfaces")
+	if srfs.size() != 1:
+		fails.append("wall board should answer ONE face, got %d" % srfs.size())
+	else:
+		var s: Dictionary = srfs[0]
+		var o: Vector3 = s["origin"]
+		var n: Vector3 = s["normal"]
+		var u_ax: Vector3 = s["u"]
+		var v_ax: Vector3 = s["v"]
+		# a messy point 3 cm off the face, off-grid in u/v
+		var probe_p: Vector3 = o + u_ax * 0.137 + v_ax * -0.093 + n * 0.03
+		var rec: Vector3 = pen.call("_shape_sample", probe_p)
+		var db: Vector3 = rec - o
+		if absf(db.dot(u_ax) - 0.12) > 0.001 or absf(db.dot(v_ax) - (-0.08)) > 0.001:
+			fails.append("board snap wrong: u=%.3f v=%.3f (wanted 0.12, -0.08)" % [db.dot(u_ax), db.dot(v_ax)])
+		if db.dot(n) <= 0.0 or db.dot(n) > 0.05:
+			fails.append("dot not lifted off the face: %.4f" % db.dot(n))
+		# far from any board: free-space world snap still rules
+		var free_rec: Vector3 = pen.call("_shape_sample", Vector3(0.501, 1.013, 0.497))
+		if free_rec != Vector3(0.52, 1.0, 0.48):
+			fails.append("free-space snap broken: %s" % str(free_rec))
+	wb.queue_free()
+	pen.queue_free()
+
 	# 4. defaults sacred — an untouched instance keeps the legacy colour
 	var b: Node = scene.instantiate()
 	get_root().add_child(b)

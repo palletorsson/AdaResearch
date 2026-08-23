@@ -56,8 +56,24 @@ var _built: bool = false
 # ── Lifecycle ─────────────────────────────────────────────────────────
 
 func _ready() -> void:
+	add_to_group("ada_writable_board")
 	_read_metadata_overrides()
 	_build_board()
+
+
+func write_surfaces() -> Array:
+	## The writing face in GLOBAL space — draw_dot's pen writes ON this plane
+	## (2026-08-23, "wire the pen to the whiteboard"). Computed per call, so a
+	## re-posed board answers with its current face.
+	var xf := global_transform
+	return [{
+		"origin": xf * Vector3(0.0, board_height * 0.5, SURFACE_THICKNESS),
+		"normal": (xf.basis * Vector3(0, 0, 1)).normalized(),
+		"u": (xf.basis * Vector3(1, 0, 0)).normalized(),
+		"v": (xf.basis * Vector3(0, 1, 0)).normalized(),
+		"half_w": board_width * 0.5,
+		"half_h": board_height * 0.5,
+	}]
 
 
 func apply_grid_config(config_data: Dictionary) -> void:
