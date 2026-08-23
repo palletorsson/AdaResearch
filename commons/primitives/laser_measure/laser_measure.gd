@@ -2,9 +2,9 @@
 # essence: a handheld measurement instrument — a sword-style cylindrical handle with a copper guard, an emissive LCD screen on its top, a precision laser beam from the guard, and a numeric readout that pairs the beam-tip with the number
 # desire: make scale legible by hand — turn empty space into a measurable quantity, in a body that reads as a tool, not as a placeholder cube
 # critical_parameter: max_range and unit — they set what the tool can see and how it reports
-# triggers: _ready() builds handle + copper guard + LCD frame + lit screen panel + raycast + beam mesh + tick-mark ruler + inline hit-point label; _process() casts every frame, updates readouts, reveals ticks up to hit-distance
-# emerges: a beam that snaps to surfaces, a hit-dot at the intersection, a glowing green-on-black LCD reading on the handle's top face, a hovering numeric label AT the hit-point, and a tick-mark ruler along the beam
-# needs: raycast configurable range [present]; unit selector m/cm [present]; damage mode for laser-hazard repurposing [present]; inline hit-point readout [present]; tick-mark ruler along beam [present]; sword-style cylinder body [present, 2026-05-19]; emissive LCD screen panel [present, 2026-05-19]
+# triggers: _ready() builds handle + copper guard + LCD housing + lit screen panel + raycast + beam core + glow shell + inline hit-point label; _process() casts every frame, updates readouts
+# emerges: a wide glowing beam that snaps to surfaces, a hit-dot at the intersection, a glowing green-on-black LCD reading in the handle's saddled housing, and a billboarded numeric label AT the hit-point
+# needs: raycast configurable range [present]; unit selector m/cm [present]; damage mode for laser-hazard repurposing [present]; inline hit-point readout [present]; tick-mark ruler along beam [opt-in, default OFF 2026-08-23 — "just the laser"]; sword-style cylinder body [present, 2026-05-19; hand-scale grip 2026-08-23]; emissive LCD screen panel [present, 2026-05-19; saddle housing 2026-08-23]
 # relationships: shares body geometry vocabulary with laser_sword (cylinder handle + copper guard); companion to vectorline (geometric length) and to the science_screen family (in-world numeric readouts); doubles as a hazard via deals_damage flag
 # truth: Measurement is a probe with a number attached. The beam without the readout is decoration; the readout without the beam is abstract. The pairing is the primitive — now made explicit in three places: a readout that rides the hit-point, a ruler that lives along the beam, and a screen on the handle that reads like a real instrument's LCD.
 
@@ -22,9 +22,9 @@ const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
 @export var show_laser: bool = true
 @export var laser_color: Color = Color(1.0, 0.1, 0.1, 0.9)
 @export var laser_hit_color: Color = Color(0.1, 1.0, 0.3, 0.9)
-@export var laser_thickness: float = 0.003
+@export var laser_thickness: float = 0.008
 @export var show_hit_dot: bool = true
-@export var hit_dot_size: float = 0.02
+@export var hit_dot_size: float = 0.035
 
 @export_category("Damage Settings")
 @export var deals_damage: bool = false           ## Enable to make laser hurt the player
@@ -36,8 +36,10 @@ const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
 @export var show_target_name: bool = true
 ## Show a small numeric label at the hit point — tightens the beam ↔ readout pairing
 @export var show_inline_readout: bool = true
-## Show tick marks along the beam at unit intervals — makes scale legible by hand, not just as a number
-@export var show_tick_marks: bool = true
+## Show tick marks along the beam at unit intervals — makes scale legible by hand, not just as a number.
+## OFF by default since 2026-08-23 ("remove the measure along the laser — just the laser"):
+## the ruler is opt-in, the beam + endpoint tag carry the reading.
+@export var show_tick_marks: bool = false
 @export var tick_interval_m: float = 1.0   # 1m intervals
 @export var tick_size: float = 0.012
 
@@ -45,8 +47,8 @@ const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
 ## Build a laser-sword-style cylinder handle + copper guard in code.
 ## Set false to keep the legacy box-body from grab_laser_measure.tscn.
 @export var build_body_in_code: bool = true
-@export var handle_length: float = 0.14
-@export var handle_radius: float = 0.016
+@export var handle_length: float = 0.22
+@export var handle_radius: float = 0.024
 @export var handle_color: Color = Color(0.25, 0.23, 0.20)   # Rams dark, same as laser_sword
 @export var guard_radius_scale: float = 1.8                  # copper disc relative to handle radius
 @export var guard_color: Color = Color(0.75, 0.38, 0.13)     # copper
@@ -54,7 +56,7 @@ const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
 @export_category("LCD Screen")
 ## Build a proper LCD screen panel on the handle (vs raw Label3D).
 @export var build_lcd_screen: bool = true
-@export var lcd_size: Vector2 = Vector2(0.05, 0.024)         # width × height in metres
+@export var lcd_size: Vector2 = Vector2(0.044, 0.026)        # width × height in metres (≤ barrel diameter)
 @export var lcd_bg_color: Color = Color(0.0, 0.08, 0.04)     # deep dark green like an LCD
 @export var lcd_frame_color: Color = Color(0.18, 0.16, 0.13) # dark frame (matches handle)
 @export var lcd_text_color: Color = Color(0.4, 1.0, 0.55)    # bright green digits
@@ -72,10 +74,10 @@ const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
 ##   figure     a bare quantity. The bay is refitted as one large window carrying a single
 ##              numeral — no unit, no target named, no graduation anywhere on the beam.
 ##              A number belonging to no system.
-##   metric     THE LEGACY LINEAGE, byte for byte: number and unit on the fitted screen,
-##              the target named under it, unit ticks stepping along the beam, a tag
-##              riding the hit point. The quantity belongs to a system, and the system is
-##              inscribed on the world.
+##   metric     THE LEGACY LINEAGE: number and unit on the fitted screen, the target
+##              named under it, a tag riding the hit point. The quantity belongs to a
+##              system. (2026-08-23: the base ruler is opt-in — show_tick_marks defaults
+##              OFF, so `metric` reads as beam + readouts unless a map fits the ruler.)
 ##   tolerance  the number carries its error. A translucent envelope sleeves the beam for
 ##              its whole length between two bound lines, every tick becomes a bracketed
 ##              PAIR straddling its nominal place, and the screen reads with a +/- band.
@@ -108,6 +110,10 @@ var _claim_freed_inline: bool = false            # `none`/`figure` freed the hit
 var raycast: RayCast3D
 var laser_beam: MeshInstance3D
 var laser_material: StandardMaterial3D
+# Soft additive shell around the beam core — the visibility at room scale
+# (2026-08-23: "make the laser wider, more visible")
+var laser_glow: MeshInstance3D
+var glow_material: StandardMaterial3D
 var hit_dot: MeshInstance3D
 var hit_dot_material: StandardMaterial3D
 var body_mesh: MeshInstance3D
@@ -183,9 +189,28 @@ func setup_laser_beam():
 	laser_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	laser_material.emission_enabled = true
 	laser_material.emission = laser_color
-	laser_material.emission_energy_multiplier = 2.0
+	laser_material.emission_energy_multiplier = 3.5
 	laser_material.albedo_color = laser_color
 	laser_beam.set_surface_override_material(0, laser_material)
+
+	# Glow shell — a wider additive box around the core, resized alongside it in
+	# update_laser_hit/miss. Additive blend so it brightens, never occludes.
+	laser_glow = MeshInstance3D.new()
+	laser_glow.name = "LaserGlow"
+	add_child(laser_glow)
+	var glow_mesh = BoxMesh.new()
+	glow_mesh.size = Vector3(laser_thickness * 3.0, laser_thickness * 3.0, max_range)
+	laser_glow.mesh = glow_mesh
+	laser_glow.position = Vector3(0, 0, -max_range / 2)
+	glow_material = StandardMaterial3D.new()
+	glow_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	glow_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	glow_material.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
+	glow_material.albedo_color = Color(laser_color.r, laser_color.g, laser_color.b, 0.16)
+	glow_material.emission_enabled = true
+	glow_material.emission = laser_color
+	glow_material.emission_energy_multiplier = 0.9
+	laser_glow.set_surface_override_material(0, glow_material)
 
 func setup_hit_dot():
 	if not show_hit_dot:
@@ -259,23 +284,43 @@ func setup_body_geometry():
 	add_child(_guard_mesh)
 
 
-func setup_lcd_screen():
-	# A small, screen-shaped LCD panel mounted on the handle's "top" surface,
-	# facing roughly toward the operator. Frame around a dark-green panel; the
-	# consolidated readout board (distance + target as one baked-text block) gets
-	# parented to this screen so the text reads as a real digital readout.
-	#
-	# Local convention: handle is along Z; mount the panel on +Y face (top of
-	# the handle when held horizontally), inset slightly along the length.
-	var panel_y := handle_radius + 0.001   # just above handle surface
+func _lcd_mount_z() -> float:
+	## The display's place along the barrel: forward of the knuckles, behind the
+	## guard. Proportional so a short legacy handle still mounts sensibly. Shared
+	## with the claim branches (`none` bolts its blind cover over this same bay,
+	## `figure` refits it) so the axis always dresses the bay where it actually is.
+	return -handle_length * 0.15
 
-	# Frame — slightly larger than the lit area
+
+func _lcd_mount_y() -> float:
+	## Top surface of the display housing — proud of the barrel by a fixed lip.
+	return handle_radius + 0.005
+
+
+func setup_lcd_screen():
+	# A screen-shaped LCD housing on the handle's "top" surface, facing the
+	# operator. Housing around a dark-green panel; the consolidated readout
+	# board (distance + target as one baked-text block) gets parented to this
+	# screen so the text reads as a real digital readout.
+	#
+	# Local convention: handle is along Z; the housing SADDLES the +Y face —
+	# a box slightly wider than the cylinder whose underside sinks past the
+	# curve, so nothing floats at the panel's edges (the old flat frame hovered
+	# tangent to the cylinder). Mounted forward of the grip (grab points ride
+	# z ≈ +0.04) so the holding hand never covers it.
+	var mount_z := _lcd_mount_z()
+	var mount_y := _lcd_mount_y()
+
+	# Housing — bottom buried in the barrel, top carries the panel
 	_lcd_frame = MeshInstance3D.new()
 	_lcd_frame.name = "LCDFrame"
 	var frame_box := BoxMesh.new()
-	frame_box.size = Vector3(lcd_size.x + 0.004, 0.002, lcd_size.y + 0.004)
+	frame_box.size = Vector3(
+		maxf(lcd_size.x + 0.006, handle_radius * 2.0 + 0.002),
+		0.014,
+		lcd_size.y + 0.008)
 	_lcd_frame.mesh = frame_box
-	_lcd_frame.position = Vector3(0, panel_y, 0.015)   # slight offset toward the butt
+	_lcd_frame.position = Vector3(0, mount_y - frame_box.size.y * 0.5, mount_z)
 	var frame_mat := StandardMaterial3D.new()
 	frame_mat.albedo_color = lcd_frame_color
 	frame_mat.metallic = 0.5
@@ -283,13 +328,13 @@ func setup_lcd_screen():
 	_lcd_frame.material_override = frame_mat
 	add_child(_lcd_frame)
 
-	# Lit screen surface — slightly raised from frame top, emissive dark green
+	# Lit screen surface — flush in the housing top, emissive dark green
 	_lcd_screen = MeshInstance3D.new()
 	_lcd_screen.name = "LCDScreen"
 	var screen_box := BoxMesh.new()
 	screen_box.size = Vector3(lcd_size.x, 0.0012, lcd_size.y)
 	_lcd_screen.mesh = screen_box
-	_lcd_screen.position = Vector3(0, panel_y + 0.0016, 0.015)
+	_lcd_screen.position = Vector3(0, mount_y + 0.0007, mount_z)
 	var screen_mat := StandardMaterial3D.new()
 	screen_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	screen_mat.albedo_color = lcd_bg_color
@@ -303,6 +348,10 @@ func setup_lcd_screen():
 func setup_tick_marks():
 	# Tick marks along the beam at tick_interval_m intervals.
 	# Make scale legible by hand — the desire in @identity.
+	# _tick_count is computed even when the ruler is not fitted: the claim
+	# branches (`tolerance` brackets, `datum` stations) build their OWN marks
+	# from it, and they must survive show_tick_marks defaulting off.
+	_tick_count = int(max_range / tick_interval_m)
 	if not show_tick_marks:
 		return
 	tick_root = Node3D.new()
@@ -315,8 +364,7 @@ func setup_tick_marks():
 	tick_mat.emission_energy_multiplier = 2.5
 	tick_mat.albedo_color = laser_color
 	# Build the ruler sized to cover max_range: one shared box, one multimesh
-	var n_ticks: int = int(max_range / tick_interval_m)
-	_tick_count = n_ticks
+	var n_ticks: int = _tick_count
 	var box := BoxMesh.new()
 	box.size = Vector3(tick_size, tick_size, 0.002)   # short horizontal strip
 	var mm := MultiMesh.new()
@@ -453,6 +501,13 @@ func update_laser_hit(distance: float):
 	laser_material.emission = laser_hit_color
 	laser_material.albedo_color = laser_hit_color
 
+	if laser_glow and laser_glow.mesh is BoxMesh:
+		(laser_glow.mesh as BoxMesh).size.z = distance
+		laser_glow.position.z = -distance / 2
+	if glow_material:
+		glow_material.emission = laser_hit_color
+		glow_material.albedo_color = Color(laser_hit_color.r, laser_hit_color.g, laser_hit_color.b, 0.16)
+
 func update_laser_miss():
 	if not laser_beam or not laser_material:
 		return
@@ -464,6 +519,13 @@ func update_laser_miss():
 
 	laser_material.emission = laser_color
 	laser_material.albedo_color = laser_color
+
+	if laser_glow and laser_glow.mesh is BoxMesh:
+		(laser_glow.mesh as BoxMesh).size.z = max_range
+		laser_glow.position.z = -max_range / 2
+	if glow_material:
+		glow_material.emission = laser_color
+		glow_material.albedo_color = Color(laser_color.r, laser_color.g, laser_color.b, 0.16)
 
 func update_hit_dot(world_position: Vector3):
 	if not hit_dot:
@@ -503,7 +565,7 @@ func update_inline_readout(world_position: Vector3, distance: float):
 	# which is cheap. This keeps the per-frame cost low while the value updates live.
 	if not show_inline_readout or not _inline_board_holder:
 		return
-	_inline_board_holder.global_position = world_position + Vector3(0, 0.08, 0)
+	_inline_board_holder.global_position = world_position + Vector3(0, 0.10, 0)
 	_inline_board_holder.visible = true
 	var unit_suffix = unit
 	var display_value = distance
@@ -516,7 +578,7 @@ func update_inline_readout(world_position: Vector3, distance: float):
 	_inline_cache_key = txt
 	if inline_board and is_instance_valid(inline_board):
 		inline_board.queue_free()
-	inline_board = BakedText.make_tag(txt, laser_hit_color, 0.05,
+	inline_board = BakedText.make_tag(txt, laser_hit_color, 0.065,
 		Color(0.03, 0.06, 0.04), true, laser_hit_color)
 	if inline_board:
 		_inline_board_holder.add_child(inline_board)
@@ -774,15 +836,18 @@ func _claim_none() -> void:
 	lcd_board = null
 	_claim_freed_lcd = true
 	_claim_drop_inline()
-	var panel_y: float = handle_radius + 0.001
+	# The cover bolts over the housing's actual bay — shared mount helpers, so
+	# it follows wherever setup_lcd_screen puts the screen.
+	var cov_y: float = _lcd_mount_y() + 0.0012
+	var cov_z: float = _lcd_mount_z()
 	var cw: float = lcd_size.x + 0.006
 	var cl: float = lcd_size.y + 0.006
-	_claim_box(hold, Vector3(0.0, panel_y + 0.0012, 0.015), Vector3(cw, 0.0035, cl),
+	_claim_box(hold, Vector3(0.0, cov_y, cov_z), Vector3(cw, 0.0035, cl),
 		_claim_solid(lcd_frame_color))
 	var head: StandardMaterial3D = _claim_solid(lcd_frame_color.lightened(0.28))
 	for bx in [-(cw * 0.5 - 0.005), cw * 0.5 - 0.005]:
-		for bz in [0.015 - (cl * 0.5 - 0.005), 0.015 + (cl * 0.5 - 0.005)]:
-			_claim_box(hold, Vector3(bx, panel_y + 0.0032, bz), Vector3(0.004, 0.002, 0.004), head)
+		for bz in [cov_z - (cl * 0.5 - 0.005), cov_z + (cl * 0.5 - 0.005)]:
+			_claim_box(hold, Vector3(bx, cov_y + 0.002, bz), Vector3(0.004, 0.002, 0.004), head)
 
 
 ## FIGURE — a quantity and nothing else. The fitted screen is replaced by one window of
@@ -795,13 +860,15 @@ func _claim_figure() -> void:
 	_claim_mute(_lcd_frame)
 	_claim_mute(_lcd_screen)
 	_claim_drop_inline()
-	var panel_y: float = handle_radius + 0.001
+	# The one big window refits the same bay the housing occupies.
+	var fig_y: float = _lcd_mount_y()
+	var fig_z: float = _lcd_mount_z()
 	var w: float = lcd_size.x * 1.10
 	var l: float = lcd_size.y * 2.20
-	_claim_box(hold, Vector3(0.0, panel_y, 0.015), Vector3(w + 0.004, 0.002, l + 0.004),
+	_claim_box(hold, Vector3(0.0, fig_y, fig_z), Vector3(w + 0.004, 0.002, l + 0.004),
 		_claim_solid(lcd_frame_color))
 	var lit: StandardMaterial3D = _claim_lit(lcd_bg_color, 0.6)
-	_claim_box(hold, Vector3(0.0, panel_y + 0.0016, 0.015), Vector3(w, 0.0012, l), lit)
+	_claim_box(hold, Vector3(0.0, fig_y + 0.0016, fig_z), Vector3(w, 0.0012, l), lit)
 	_lcd_cache_key = ""
 
 

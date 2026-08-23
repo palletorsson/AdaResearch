@@ -45,6 +45,34 @@ extends Node3D
 @export var retention: String = "none"
 const RETENTIONS: PackedStringArray = ["none", "trace", "lattice", "archive", "wax"]
 
+## AXIS — THE INK the hand writes with (2026-08-23, built for collations: several
+## draw_dots in one room, each writing in its own colour). A named palette so a map
+## token can say it (#ink:cyan); "magenta" maps byte-for-byte onto the legacy
+## trail_color default, so a map that says nothing gets exactly the artifact that
+## shipped. When ink is default, a scene's own trail_color override still rules —
+## the palette never fights an existing hand-tuned colour.
+## Visible in a still ONLY when a retention record shows a stroke — the sweep
+## fixture pins retention:trace for exactly that reason.
+@export_enum("magenta", "cyan", "amber", "lime", "white") var ink: String = "magenta"
+const INKS: Dictionary = {
+	"magenta": Color(1.0, 0.4, 0.9, 1.0),
+	"cyan": Color(0.25, 0.85, 1.0, 1.0),
+	"amber": Color(1.0, 0.72, 0.15, 1.0),
+	"lime": Color(0.55, 1.0, 0.3, 1.0),
+	"white": Color(0.95, 0.95, 1.0, 1.0),
+}
+
+## GRAIN — the drawing resolution: how far the hand travels before the trail records
+## another point (min_segment_distance). Config key only, NEVER a dna.axis — a
+## sampling rate is invisible in a still (the info_board lesson). Named steps or a
+## bare number: #grain:coarse or #grain:0.02.
+const GRAINS: Dictionary = {
+	"fine": 0.004,
+	"standard": 0.01,
+	"coarse": 0.03,
+	"chunky": 0.08,
+}
+
 var _grab_point: Node3D
 var _draw_sphere: Node3D
 var _trail_mesh: ImmediateMesh
@@ -258,6 +286,10 @@ func _ready() -> void:
 
 	_grab_point = get_node_or_null(grab_point_path)
 	_draw_sphere = get_node_or_null(draw_sphere_path)
+
+	# INK / GRAIN before _setup_trail — the trail material bakes trail_color in,
+	# so the colour must be settled before the material exists.
+	_ink_read_config()
 
 	# Setup progress indicator as world-space (not child of grab point)
 	_setup_progress_indicator()
@@ -508,15 +540,58 @@ func _ret_read_config() -> void:
 		retention = r if RETENTIONS.has(r) else retention
 
 
-## Gated on the key: a map that says nothing about retention gets no call at all, so a
-## config carrying only other keys cannot disturb the legacy path.
+func _ink_read_config() -> void:
+	## Meta path — a map token's #ink / #grain land as config_* metadata before
+	## _ready (the bricolage pattern). Runs before _setup_trail.
+	if has_meta("config_ink"):
+		var v: String = str(get_meta("config_ink")).strip_edges().to_lower()
+		if INKS.has(v):
+			ink = v
+	# Sync export → colour: a non-default ink rules; on the default ink an existing
+	# scene's hand-tuned trail_color keeps ruling (additive, defaults sacred).
+	if ink != "magenta" and INKS.has(ink):
+		trail_color = INKS[ink]
+	if has_meta("config_grain"):
+		_set_grain(str(get_meta("config_grain")))
+
+
+func _set_grain(v: String) -> void:
+	var g: String = v.strip_edges().to_lower()
+	if GRAINS.has(g):
+		min_segment_distance = GRAINS[g]
+	elif g.is_valid_float():
+		min_segment_distance = clampf(g.to_float(), 0.001, 0.5)
+
+
+func _apply_ink() -> void:
+	## Re-tint the live trail material — it baked trail_color in at _setup_trail.
+	if _trail_instance and is_instance_valid(_trail_instance):
+		var m := _trail_instance.material_override as StandardMaterial3D
+		if m:
+			m.albedo_color = trail_color
+			m.emission = trail_color
+
+
+## Gated per key: a map that says nothing about a key leaves its path untouched, so a
+## config carrying only other keys cannot disturb the legacy lineage.
 func apply_grid_config(config_data: Dictionary) -> void:
-	if not config_data.has("retention"):
+	var dirty: bool = false
+	if config_data.has("ink"):
+		var v: String = str(config_data["ink"]).strip_edges().to_lower()
+		if INKS.has(v) and v != ink:
+			ink = v
+			trail_color = INKS[v]
+			dirty = true
+	if config_data.has("grain"):
+		_set_grain(str(config_data["grain"]))
+	if config_data.has("retention"):
+		var r: String = str(config_data["retention"]).strip_edges().to_lower()
+		if RETENTIONS.has(r) and r != retention:
+			retention = r
+			dirty = true
+	if not dirty:
 		return
-	var r: String = str(config_data["retention"]).strip_edges().to_lower()
-	if not RETENTIONS.has(r) or r == retention:
-		return
-	retention = r
+	_apply_ink()
 	_ret_build()
 
 

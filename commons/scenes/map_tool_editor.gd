@@ -101,9 +101,18 @@ const COL_GCUBE := Color(0.50, 0.72, 0.58)   # structure cube while edit_grid is
 @export_tool_button("Collection −1") var _b_colm: Callable = _col_minus
 @export_tool_button("Spread x ⇄ z") var _b_cols: Callable = _col_spread
 @export_tool_button("Gap 1→2→3→4→1") var _b_colg: Callable = _col_gap
+## SPIN: each member stands spin° further round than the one before — a
+## collection of laser_measures fanning across the room (2026-08-23).
+@export_tool_button("↻ Spin 0→45→90→…") var _b_colr: Callable = _col_spin
 ## BIND AXIS: the collection steps through one of the token's declared
 ## dna.axes — member i saves with #axis:value_i. Cycles none → each axis.
 @export_tool_button("🧬 Bind axis (cycle)") var _b_colb: Callable = _col_bind
+## BIND CUSTOM: any config key with hand-typed values — the door for keys the
+## registry does not declare (draw_dot's grain, a numeric series, …).
+## Fill bind_key + bind_values (comma-separated), then press.
+@export var bind_key: String = ""
+@export var bind_values: String = ""
+@export_tool_button("🧬 Bind custom key") var _b_colc: Callable = _col_bind_custom
 
 @export_group("Selection")
 @export_tool_button("🗑  Remove selected") var _b_remove: Callable = _remove_selected
@@ -391,7 +400,7 @@ func _spawn(grid: Array, layer: String, col: Color, root: Node) -> void:
 		if used.has(k):
 			continue
 		var tok: String = cells[k]
-		var base := tok.split("#")[0]
+		var base := _fold_key(tok)
 		var best_n := 1
 		var best_spread := "x"
 		var best_gap := 1
@@ -400,7 +409,7 @@ func _spawn(grid: Array, layer: String, col: Color, root: Node) -> void:
 				var n := 1
 				while true:
 					var nxt := Vector2i(k.x + n * gap, k.y) if spread == "x" else Vector2i(k.x, k.y + n * gap)
-					if used.has(nxt) or str(cells.get(nxt, "")).split("#")[0] != base or not cells.has(nxt):
+					if used.has(nxt) or not cells.has(nxt) or _fold_key(str(cells[nxt])) != base:
 						break
 					n += 1
 				if n > best_n:
@@ -416,9 +425,12 @@ func _spawn(grid: Array, layer: String, col: Color, root: Node) -> void:
 			var fold := _col_classify(toks)
 			if str(fold["mode"]) != "none":
 				var mk := _make_marker(tok, layer, k.x, k.y, col, root, best_n, best_spread, best_gap)
-				if mk != null and str(fold["mode"]) == "bound":
-					mk.set_meta("bound_axis", fold["axis"])
-					mk.set_meta("bound_values", fold["values"])
+				if mk != null:
+					if int(fold.get("spin", 0)) != 0:
+						mk.set_meta("spin", int(fold["spin"]))
+					if str(fold["mode"]) == "bound":
+						mk.set_meta("bound_axis", fold["axis"])
+						mk.set_meta("bound_values", fold["values"])
 					_col_refresh(mk)
 				for i in range(best_n):
 					used[Vector2i(k.x + i * best_gap, k.y) if best_spread == "x" else Vector2i(k.x, k.y + i * best_gap)] = true
@@ -807,6 +819,7 @@ func _save() -> void:
 		var gp: int = maxi(1, int(m.get_meta("gap", 1)))
 		var b_axis := str(m.get_meta("bound_axis", ""))
 		var b_vals: Array = m.get_meta("bound_values", [])
+		var spn: int = int(m.get_meta("spin", 0))
 		for i in range(cnt):
 			var rr: int = cz + (i * gp if spr == "z" else 0)
 			var cc: int = cx + (i * gp if spr == "x" else 0)
@@ -817,6 +830,8 @@ func _save() -> void:
 			var tok_i := token
 			if b_axis != "" and not b_vals.is_empty():
 				tok_i = _tok_set_config(token, b_axis, str(b_vals[mini(i, b_vals.size() - 1)]))
+			if spn != 0 and i > 0:
+				tok_i = _tok_add_rot(tok_i, spn * i)
 			inter[rr][cc] = tok_i
 		placed += 1
 	if not _map.has("layers"):
@@ -1541,12 +1556,20 @@ func _col_copies(m: Node3D, col: Color) -> void:
 		return
 	var spr := str(m.get_meta("spread", "x"))
 	var gp: int = maxi(1, int(m.get_meta("gap", 1)))
+	var spn: int = int(m.get_meta("spin", 0))
 	for i in range(1, cnt):
 		var cp := _box(Vector3(0.4, 0.4, 0.4), col)
 		cp.name = "CollectionCopy%d" % i
 		cp.position = Vector3(
 			(i * gp) * _total if spr == "x" else 0.0, 0.0,
 			(i * gp) * _total if spr == "z" else 0.0)
+		if spn != 0:
+			# a nose so the fan reads in the viewport — copies without one are
+			# rotation-blind cubes
+			var nose := _box(Vector3(0.08, 0.08, 0.28), col.lightened(0.3))
+			nose.position = Vector3(0, 0, -0.3)
+			cp.add_child(nose)
+			cp.rotation_degrees.y = float(posmod(spn * i, 360))
 		m.add_child(cp)
 
 
@@ -1560,6 +1583,9 @@ func _col_refresh(m: Node3D) -> void:
 		var bx := str(m.get_meta("bound_axis", ""))
 		if bx != "":
 			suffix += " · " + bx
+		var spn: int = int(m.get_meta("spin", 0))
+		if spn != 0:
+			suffix += " · ↻%d°" % spn
 	for c in m.get_children():
 		if c is Label3D:
 			(c as Label3D).text = base + suffix
@@ -1613,6 +1639,53 @@ func _col_gap() -> void:
 	_col_refresh(m)
 
 
+func _col_spin() -> void:
+	## Cycle the per-member turn — each copy stands spin° further round than
+	## the one before. 0 turns it off.
+	var m := _first_selected_marker()
+	if m == null:
+		push_warning("MapToolEditor: select an artifact marker first")
+		return
+	var steps: Array = [0, 45, 90, 135, 180, 270]
+	var idx := steps.find(int(m.get_meta("spin", 0)))
+	var nxt: int = int(steps[(idx + 1) % steps.size()]) if idx >= 0 else 45
+	if nxt == 0:
+		if m.has_meta("spin"):
+			m.remove_meta("spin")
+		print("MapToolEditor: spin off — every member faces the same way")
+	else:
+		m.set_meta("spin", nxt)
+		print("MapToolEditor: spin %d° — member i turns %d° x i further" % [nxt, nxt])
+	_col_refresh(m)
+
+
+func _col_bind_custom() -> void:
+	## Bind the collection to ANY config key with hand-typed values. The
+	## declared-axes cycle stays the fast path; this is the door for keys the
+	## registry does not declare (grain, a numeric series, …).
+	var m := _first_selected_marker()
+	if m == null:
+		push_warning("MapToolEditor: select an artifact marker first")
+		return
+	var kk := bind_key.strip_edges()
+	var vals: Array = []
+	for v in bind_values.split(","):
+		if str(v).strip_edges() != "":
+			vals.append(str(v).strip_edges())
+	if kk == "" or vals.size() < 2:
+		push_warning("MapToolEditor: set bind_key and 2+ comma-separated bind_values first")
+		return
+	m.set_meta("bound_axis", kk)
+	m.set_meta("bound_values", vals)
+	m.set_meta("count", vals.size())
+	if not m.has_meta("spread"):
+		m.set_meta("spread", "x")
+	if not m.has_meta("gap"):
+		m.set_meta("gap", 1)
+	_col_refresh(m)
+	print("MapToolEditor: bound custom '%s' — %d member(s): %s" % [kk, vals.size(), " · ".join(PackedStringArray(vals))])
+
+
 func _tok_config(tok: String) -> Dictionary:
 	## Parse the token's #k:v#k:v suffix (first colon splits, mirrors /editor).
 	var out: Dictionary = {}
@@ -1641,15 +1714,58 @@ func _tok_set_config(tok: String, key: String, val: String) -> String:
 	return out + "#" + key + ":" + val
 
 
+func _fold_key(tok: String) -> String:
+	## Run-matching key: name + y-offset. ROTATION excluded (a spin run turns
+	## member by member — 2026-08-23), config excluded (a bound run varies one
+	## key). Clusters keep their whole head — they never spin or bind.
+	var head := tok.split("#")[0]
+	var parts := head.split(":")
+	if str(parts[0]) == "cluster":
+		return head
+	return str(parts[0]) + "|" + (str(parts[2]) if parts.size() > 2 else "")
+
+
+func _tok_rot(tok: String) -> int:
+	var parts := tok.split("#")[0].split(":")
+	if parts.size() > 1 and str(parts[1]).is_valid_float():
+		return posmod(int(round(float(str(parts[1])))), 360)
+	return 0
+
+
+func _tok_add_rot(tok: String, delta: int) -> String:
+	## The token turned delta° further — spin members. name[:rot[:y]]#cfg.
+	var hash_i := tok.find("#")
+	var head := tok if hash_i == -1 else tok.substr(0, hash_i)
+	var tail := "" if hash_i == -1 else tok.substr(hash_i)
+	var parts := head.split(":")
+	if str(parts[0]) == "cluster":
+		return tok
+	var r0 := 0
+	if parts.size() > 1 and str(parts[1]).is_valid_float():
+		r0 = int(round(float(str(parts[1]))))
+	var rebuilt := [str(parts[0]), str(posmod(r0 + delta, 360))]
+	for k in range(2, parts.size()):
+		rebuilt.append(str(parts[k]))
+	return ":".join(rebuilt) + tail
+
+
 func _col_classify(toks: Array) -> Dictionary:
-	## plain: identical tokens. bound: configs differ in EXACTLY one shared
-	## key (a series). none: anything else — the run stays individual.
-	var all_same := true
+	## Decompose the run on two independent sides. Rotation: all equal, or one
+	## uniform non-zero step (SPIN — "point in a different direction so it
+	## looks nice"). Config: identical, or EXACTLY one shared key differing (a
+	## bound series). Any other shape refuses the fold and the run stays
+	## individual. spin can ride plain or bound.
+	var rots: Array = []
 	for t in toks:
-		if str(t) != str(toks[0]):
-			all_same = false
-	if all_same:
-		return {"mode": "plain"}
+		rots.append(_tok_rot(str(t)))
+	var step: int = posmod(int(rots[1]) - int(rots[0]), 360) if rots.size() > 1 else 0
+	var rot_uniform := true
+	for i in range(1, rots.size()):
+		if posmod(int(rots[i]) - int(rots[i - 1]), 360) != step:
+			rot_uniform = false
+	if not rot_uniform:
+		return {"mode": "none"}
+	var spin: int = step
 	var cfgs: Array = []
 	for t in toks:
 		cfgs.append(_tok_config(str(t)))
@@ -1664,6 +1780,8 @@ func _col_classify(toks: Array) -> Dictionary:
 			if (c as Dictionary).get(kk) != v0:
 				diff.append(kk)
 				break
+	if diff.is_empty():
+		return {"mode": "plain", "spin": spin}
 	if diff.size() == 1:
 		var kx := str(diff[0])
 		var vals: Array = []
@@ -1671,7 +1789,7 @@ func _col_classify(toks: Array) -> Dictionary:
 			if not (c as Dictionary).has(kx):
 				return {"mode": "none"}
 			vals.append(str((c as Dictionary)[kx]))
-		return {"mode": "bound", "axis": kx, "values": vals}
+		return {"mode": "bound", "axis": kx, "values": vals, "spin": spin}
 	return {"mode": "none"}
 
 
