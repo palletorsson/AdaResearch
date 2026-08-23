@@ -561,17 +561,36 @@ func _ret_read_config() -> void:
 		retention = r if RETENTIONS.has(r) else retention
 
 
+func _ink_color(v: String) -> Color:
+	## The colour a config `ink` value names: a palette word, or RAW HEX
+	## (ff0000 — no leading '#', since '#' is the token's own config separator)
+	## — the escape hatch past the five named inks, the way `grain` accepts a
+	## bare number (2026-08-23, "color rgb"). Alpha 0 = not a colour, refused.
+	var g: String = v.strip_edges().to_lower()
+	if INKS.has(g):
+		return INKS[g]
+	if Color.html_is_valid(g):
+		return Color.html(g)
+	return Color(0, 0, 0, 0)
+
+
 func _ink_read_config() -> void:
 	## Meta path — a map token's #ink / #grain land as config_* metadata before
 	## _ready (the bricolage pattern). Runs before _setup_trail.
+	var ink_set: bool = false
 	if has_meta("config_ink"):
 		var v: String = str(get_meta("config_ink")).strip_edges().to_lower()
-		if INKS.has(v):
+		var ic: Color = _ink_color(v)
+		if ic.a > 0.0:
 			ink = v
+			trail_color = ic
+			ink_set = true
 	# Sync export → colour: a non-default ink rules; on the default ink an existing
 	# scene's hand-tuned trail_color keeps ruling (additive, defaults sacred).
-	if ink != "magenta" and INKS.has(ink):
-		trail_color = INKS[ink]
+	if not ink_set and ink != "magenta":
+		var ec: Color = _ink_color(ink)
+		if ec.a > 0.0:
+			trail_color = ec
 	if has_meta("config_grain"):
 		_set_grain(str(get_meta("config_grain")))
 	if has_meta("config_resolution"):
@@ -613,9 +632,10 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	var dirty: bool = false
 	if config_data.has("ink"):
 		var v: String = str(config_data["ink"]).strip_edges().to_lower()
-		if INKS.has(v) and v != ink:
+		var ic: Color = _ink_color(v)
+		if ic.a > 0.0 and v != ink:
 			ink = v
-			trail_color = INKS[v]
+			trail_color = ic
 			dirty = true
 	if config_data.has("grain"):
 		_set_grain(str(config_data["grain"]))

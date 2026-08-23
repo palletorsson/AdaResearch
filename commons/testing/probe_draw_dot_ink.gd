@@ -48,6 +48,21 @@ func _run() -> void:
 		fails.append("_res_step wrong: %s" % str(c.call("_res_step")))
 	c.queue_free()
 
+	# 2c. HEX ink — the RGB escape hatch past the palette (bare hex, no '#')
+	var d: Node = scene.instantiate()
+	d.set_meta("config_ink", "00ff00")
+	get_root().add_child(d)
+	await process_frame
+	if d.get("trail_color") != Color.html("00ff00"):
+		fails.append("hex meta ink refused: %s" % str(d.get("trail_color")))
+	d.call("apply_grid_config", {"ink": "0000ff"})
+	if d.get("trail_color") != Color.html("0000ff"):
+		fails.append("hex runtime ink refused: %s" % str(d.get("trail_color")))
+	d.call("apply_grid_config", {"ink": "not_a_colour"})
+	if d.get("trail_color") != Color.html("0000ff"):
+		fails.append("invalid ink should be refused, got: %s" % str(d.get("trail_color")))
+	d.queue_free()
+
 	# 3. runtime ink change re-tints the LIVE trail material
 	a.call("apply_grid_config", {"ink": "amber"})
 	if a.get("trail_color") != inks["amber"]:
