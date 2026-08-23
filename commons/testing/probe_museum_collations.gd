@@ -53,18 +53,30 @@ func _run() -> void:
 		var rots: Dictionary = {}
 		var lasers: int = 0
 		var low: int = 0
+		var unfrozen: int = 0
 		for n in seg1.find_children("*", "Node3D", true, false):
 			if n.get("laser_thickness") != null and n.has_method("get_distance"):
 				lasers += 1
 				rots[posmod(roundi((n as Node3D).global_rotation_degrees.y), 360)] = true
 				if (n as Node3D).global_position.y < 0.85:
 					low += 1
+				# FROZEN, not falling: the pickable root must hold freeze=true
+				# so gravity never takes it ("freeze as in not falling to the
+				# ground"). The y-check above is the empirical twin — physics
+				# has run for seconds by now, an unfrozen body would be down.
+				var anc: Node = n
+				while anc != null and not (anc is RigidBody3D):
+					anc = anc.get_parent()
+				if anc is RigidBody3D and not (anc as RigidBody3D).freeze:
+					unfrozen += 1
 		if lasers < 5:
 			fails.append("point lines: %d laser_measure(s), wanted >=5" % lasers)
 		if rots.size() < 4:
 			fails.append("the fan is flat: only %d distinct heading(s): %s" % [rots.size(), str(rots.keys())])
 		if low > 0:
 			fails.append("%d laser(s) NOT hovering (y < 0.85 — the map says 1 m)" % low)
+		if unfrozen > 0:
+			fails.append("%d laser(s) UNFROZEN — gravity will take them" % unfrozen)
 
 	if seg2 == null:
 		fails.append("Seg2 (point trace) never built")
