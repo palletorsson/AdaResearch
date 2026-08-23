@@ -6692,14 +6692,25 @@ func _stamp_inner(seg: Node3D, scene_path: String, lookup: String, cell: Diction
 	# plain station plinth of that height under this body; #offset:x,y,z and
 	# #scale:S land on the transform below. The token is the bundle — the keys
 	# ride the map cell, so moving the token moves the whole dress with it.
+	# value syntax: H, H,micropod, or 0 — a bare 0 is the NO-PLINTH ruling,
+	# overriding the planner to flat (the other half of "no-plinth, plinth")
 	var dress_plinth: float = 0.0
-	if plan_config.has("plinth") and str(plan_config["plinth"]).is_valid_float():
-		dress_plinth = clampf(float(str(plan_config["plinth"])), 0.0, 3.0)
-	if dress_plinth > 0.05:
-		var dcap: float = 0.9
-		plan_d = {"needs": true, "plinth": "station_plinth", "plinth_height": dress_plinth,
-			"artifact_y": dress_plinth, "why": "dress: the token asked for a %.2f m plinth" % dress_plinth,
-			"scene": "res://commons/artifacts/station/station_plinth.tscn",
+	var dress_kind: String = "station_plinth"
+	var dress_flat: bool = false
+	if plan_config.has("plinth"):
+		var pparts := str(plan_config["plinth"]).split(",")
+		if str(pparts[0]).strip_edges().is_valid_float():
+			dress_plinth = clampf(float(str(pparts[0])), 0.0, 3.0)
+			dress_flat = dress_plinth < 0.05
+		if pparts.size() > 1 and str(pparts[1]).strip_edges() == "micropod":
+			dress_kind = "station_micropod"
+	if dress_flat:
+		plan_d = {"needs": false, "why": "dress: the token says NO plinth — flat by the hand's word"}
+	elif dress_plinth > 0.05:
+		var dcap: float = 0.9 if dress_kind == "station_plinth" else 0.6
+		plan_d = {"needs": true, "plinth": dress_kind, "plinth_height": dress_plinth,
+			"artifact_y": dress_plinth, "why": "dress: the token asked for a %.2f m %s" % [dress_plinth, dress_kind],
+			"scene": "res://commons/artifacts/station/%s.tscn" % dress_kind,
 			"config": {"top_height": dress_plinth, "cap_meters": dcap, "width_cells": 1, "depth_cells": 1,
 				"top_style": "flat", "glow_light": false},
 			"footprint_cells": 1, "foot_m": dcap + 0.06, "centre": dress_plinth, "height_m": 0.0,
@@ -10983,6 +10994,7 @@ var _dress_canvas: Control = null
 var _dress_map: String = ""
 var _dress_cell := Vector2i(-1, -1)
 var _dress_plinth: float = 0.0
+var _dress_plinth_kind: String = ""     # ",micropod" preserved through edits
 var _dress_scale: float = 1.0
 var _dress_off := Vector3.ZERO
 var _dress_off0 := Vector3.ZERO
@@ -11203,7 +11215,9 @@ func _dress_toggle() -> void:
 	var cfg := _map_token_config(dmap, cell.x, cell.y)
 	_dress_map = dmap
 	_dress_cell = cell
-	_dress_plinth = float(str(cfg.get("plinth", "0"))) if str(cfg.get("plinth", "0")).is_valid_float() else 0.0
+	var pparse := str(cfg.get("plinth", "0")).split(",")
+	_dress_plinth = float(str(pparse[0])) if str(pparse[0]).strip_edges().is_valid_float() else 0.0
+	_dress_plinth_kind = ",micropod" if pparse.size() > 1 and str(pparse[1]).strip_edges() == "micropod" else ""
 	_dress_scale = float(str(cfg.get("scale", "1"))) if str(cfg.get("scale", "1")).is_valid_float() else 1.0
 	_dress_off = Vector3.ZERO
 	var ov := str(cfg.get("offset", "")).split(",")
@@ -11247,12 +11261,18 @@ func _dress_key(kc: int) -> void:
 			return
 		KEY_Q:
 			_dress_plinth = snappedf(_dress_plinth + 0.1, 0.05)
-			_dress_write("plinth", "" if _dress_plinth < 0.05 else "%.2f" % _dress_plinth)
+			_dress_write("plinth", "" if _dress_plinth < 0.05 else "%.2f%s" % [_dress_plinth, _dress_plinth_kind])
 			_dress_rebuild = true
 		KEY_A:
 			_dress_plinth = maxf(0.0, snappedf(_dress_plinth - 0.1, 0.05))
-			_dress_write("plinth", "" if _dress_plinth < 0.05 else "%.2f" % _dress_plinth)
+			_dress_write("plinth", "" if _dress_plinth < 0.05 else "%.2f%s" % [_dress_plinth, _dress_plinth_kind])
 			_dress_rebuild = true
+		KEY_M:
+			# M swaps the pedestal KIND: full plinth foot <-> micropod
+			_dress_plinth_kind = "" if _dress_plinth_kind != "" else ",micropod"
+			if _dress_plinth >= 0.05:
+				_dress_write("plinth", "%.2f%s" % [_dress_plinth, _dress_plinth_kind])
+				_dress_rebuild = true
 		KEY_W:
 			_dress_scale = snappedf(_dress_scale + 0.05, 0.01)
 			_dress_write("scale", "" if absf(_dress_scale - 1.0) < 0.02 else "%.2f" % _dress_scale)
@@ -11338,7 +11358,8 @@ func _dress_draw() -> void:
 		"DRESS — %s" % str(r.get("token")),
 		"%s  [%d,%d]" % [_dress_map, _dress_cell.x, _dress_cell.y],
 		"",
-		"plinth   %.2f m    Q up · A down" % _dress_plinth,
+		"plinth   %.2f m %s   Q up · A down · M kind" % [_dress_plinth,
+			"(micropod)" if _dress_plinth_kind != "" else ""],
 		"scale    %.2f      W up · S down" % _dress_scale,
 		"offset   %.2f, %.2f, %.2f" % [_dress_off.x, _dress_off.y, _dress_off.z],
 		"         arrows x/z · PgUp/PgDn y",

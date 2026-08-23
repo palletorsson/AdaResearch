@@ -1269,11 +1269,17 @@ func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: fl
 	# them is byte-identical to before. The lift and offset are deferred so
 	# they run AFTER _auto_ground (deferreds are FIFO): the base grounds to
 	# the cell first, then rises to the deck / takes its nudge.
-	if artifact_object is Node3D and config_data.has("plinth") \
-			and str(config_data["plinth"]).is_valid_float():
-		var dress_h: float = clampf(float(str(config_data["plinth"])), 0.0, 3.0)
+	if artifact_object is Node3D and config_data.has("plinth"):
+		# value syntax mirrors the museum: H, H,micropod, or 0 (= flat, which
+		# in the grid simply builds nothing)
+		var dress_parts := str(config_data["plinth"]).split(",")
+		var dress_h: float = 0.0
+		if str(dress_parts[0]).strip_edges().is_valid_float():
+			dress_h = clampf(float(str(dress_parts[0])), 0.0, 3.0)
+		var dress_scene := "station_micropod" if dress_parts.size() > 1 \
+			and str(dress_parts[1]).strip_edges() == "micropod" else "station_plinth"
 		if dress_h > 0.05:
-			var pl_scene: PackedScene = load("res://commons/artifacts/station/station_plinth.tscn") as PackedScene
+			var pl_scene: PackedScene = load("res://commons/artifacts/station/%s.tscn" % dress_scene) as PackedScene
 			var pl: Node3D = pl_scene.instantiate() as Node3D if pl_scene != null else null
 			if pl != null:
 				var pl_cfg := {"top_height": dress_h, "cap_meters": 0.9, "width_cells": 1,
@@ -1286,7 +1292,10 @@ func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: fl
 				pl.set_meta("dress_plinth_for", lookup_name)
 				parent_node.add_child(pl)
 				artifact_object.set_meta("dress_plinth_path", artifact_object.get_path_to(pl) if pl.is_inside_tree() and artifact_object.is_inside_tree() else NodePath())
-				call_deferred("_dress_adjust", artifact_object, Vector3(0.0, dress_h, 0.0))
+				# the plinth CONSUMES the token's y-offset — same law as the
+				# museum: a body on a pedestal does not also hover above it
+				var hover_eaten: float = float(overrides.get("y_position", 0.0))
+				call_deferred("_dress_adjust", artifact_object, Vector3(0.0, dress_h - hover_eaten, 0.0))
 	if artifact_object is Node3D and config_data.has("offset"):
 		var dop := str(config_data["offset"]).split(",")
 		if dop.size() >= 3 and str(dop[0]).strip_edges().is_valid_float() \
