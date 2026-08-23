@@ -62,7 +62,7 @@ const INKS: Dictionary = {
 	"white": Color(0.95, 0.95, 1.0, 1.0),
 }
 
-## GRAIN — the drawing resolution: how far the hand travels before the trail records
+## GRAIN — the sampling distance: how far the hand travels before the trail records
 ## another point (min_segment_distance). Config key only, NEVER a dna.axis — a
 ## sampling rate is invisible in a still (the info_board lesson). Named steps or a
 ## bare number: #grain:coarse or #grain:0.02.
@@ -72,6 +72,18 @@ const GRAINS: Dictionary = {
 	"coarse": 0.03,
 	"chunky": 0.08,
 }
+
+## RESOLUTION — the grid the hand's line is snapped ONTO, in millimetres
+## (2026-08-23, Palle: "so the line becomes more in larger grid pattern —
+## 0.1, 1, 10, 20, 40, 80"). Every recorded point lands on a world-aligned
+## lattice of this pitch, so a coarse value stair-steps the stroke into
+## blocks; 0 = off, the legacy continuous line, and 0.1 mm is effectively
+## continuous. Reaches the retention record too, so a collation of draw_dots
+## with different resolutions reads across a room. Config key `resolution`
+## (#resolution:40) — a natural custom-key collation series. Distinct from
+## grain: grain is WHEN the hand is sampled, resolution is WHERE a sample is
+## allowed to stand.
+@export var resolution_mm: float = 0.0
 
 var _grab_point: Node3D
 var _draw_sphere: Node3D
@@ -353,8 +365,17 @@ func _process(delta: float) -> void:
 		return
 
 	_last_global_position = current_global
+	# RESOLUTION: snap the sample onto the world grid — a coarser grid makes
+	# the line stair-step into a larger grid pattern (config `resolution`, mm;
+	# 2026-08-23). One dot per grid cell, which is the point of a grid.
+	var rec: Vector3 = current_global
+	if resolution_mm > 0.0:
+		var rs: float = resolution_mm / 1000.0
+		rec = Vector3(snappedf(rec.x, rs), snappedf(rec.y, rs), snappedf(rec.z, rs))
+		if not _trail_points.is_empty() and _trail_points[_trail_points.size() - 1].is_equal_approx(rec):
+			return
 	# Use global position for the trail points since the mesh is top_level
-	_trail_points.append(current_global)
+	_trail_points.append(rec)
 
 	# Only count movement when actually drawing (adding trail points)
 	_total_movement += dist
@@ -553,6 +574,8 @@ func _ink_read_config() -> void:
 		trail_color = INKS[ink]
 	if has_meta("config_grain"):
 		_set_grain(str(get_meta("config_grain")))
+	if has_meta("config_resolution"):
+		_set_resolution(str(get_meta("config_resolution")))
 
 
 func _set_grain(v: String) -> void:
@@ -561,6 +584,18 @@ func _set_grain(v: String) -> void:
 		min_segment_distance = GRAINS[g]
 	elif g.is_valid_float():
 		min_segment_distance = clampf(g.to_float(), 0.001, 0.5)
+
+
+func _set_resolution(v: String) -> void:
+	var g: String = v.strip_edges().to_lower()
+	if g.is_valid_float():
+		resolution_mm = clampf(g.to_float(), 0.0, 500.0)
+
+
+func _res_step() -> float:
+	## The snap pitch in metres — 0.0 when resolution is off, which is the
+	## value _ret_stroke reads as "no quantisation".
+	return resolution_mm / 1000.0 if resolution_mm > 0.0 else 0.0
 
 
 func _apply_ink() -> void:
@@ -584,6 +619,11 @@ func apply_grid_config(config_data: Dictionary) -> void:
 			dirty = true
 	if config_data.has("grain"):
 		_set_grain(str(config_data["grain"]))
+	if config_data.has("resolution"):
+		var res0 := resolution_mm
+		_set_resolution(str(config_data["resolution"]))
+		if not is_equal_approx(res0, resolution_mm):
+			dirty = true   # the record strokes are drawn AT the resolution
 	if config_data.has("retention"):
 		var r: String = str(config_data["retention"]).strip_edges().to_lower()
 		if RETENTIONS.has(r) and r != retention:
@@ -628,7 +668,7 @@ func _ret_root() -> Node3D:
 
 ## TRACE — one stroke, left where the hand left it, in the ink the hand writes with.
 func _ret_trace() -> void:
-	_ret_stroke(1.31, 0.0, trail_color, 1.6, 0.0)
+	_ret_stroke(1.31, 0.0, trail_color, 1.6, _res_step())
 
 
 ## LATTICE — the ruling first (a regular field of pale nodes over the whole plane), then
@@ -649,14 +689,14 @@ func _ret_lattice() -> void:
 				Vector3(-span + float(cx) * step, -span + float(cy) * step, 0.0)))
 			k += 1
 	_ret_root().add_child(grid)
-	_ret_stroke(1.31, 0.0, trail_color, 1.6, step)
+	_ret_stroke(1.31, 0.0, trail_color, 1.6, maxf(step, _res_step()))
 
 
 ## ARCHIVE — nine strokes kept at once, none dimmed by age. The frame fills; the individual
 ## mark stops being findable. Total retention and total illegibility are the same picture.
 func _ret_archive() -> void:
 	for i in range(9):
-		_ret_stroke(1.31 + 0.83 * float(i), 0.004 * float(i), trail_color, 1.35, 0.0)
+		_ret_stroke(1.31 + 0.83 * float(i), 0.004 * float(i), trail_color, 1.35, _res_step())
 
 
 ## WAX — the Wunderblock construction, borrowed straight from mystic_writing_pad: a matte
@@ -683,7 +723,7 @@ func _ret_wax() -> void:
 	for i in range(5):
 		var f: float = float(5 - i) / 5.0
 		var c: Color = warm.lerp(Color(0.10, 0.085, 0.095), 1.0 - f)
-		_ret_stroke(1.31 + 1.7 * float(i), -0.004 + 0.0016 * float(i), c, 0.45 + 1.1 * f, 0.0)
+		_ret_stroke(1.31 + 1.7 * float(i), -0.004 + 0.0016 * float(i), c, 0.45 + 1.1 * f, _res_step())
 
 	var sheet := MeshInstance3D.new()
 	sheet.name = "ClearingSheet"

@@ -34,6 +34,20 @@ func _run() -> void:
 	if not is_equal_approx(float(a.get("min_segment_distance")), 0.02):
 		fails.append("numeric grain refused: %s" % str(a.get("min_segment_distance")))
 
+	# 2b. resolution — the grid the line snaps onto (mm), meta + runtime
+	var c: Node = scene.instantiate()
+	c.set_meta("config_resolution", "40")
+	get_root().add_child(c)
+	await process_frame
+	if not is_equal_approx(float(c.get("resolution_mm")), 40.0):
+		fails.append("meta resolution refused: %s" % str(c.get("resolution_mm")))
+	c.call("apply_grid_config", {"resolution": "80"})
+	if not is_equal_approx(float(c.get("resolution_mm")), 80.0):
+		fails.append("runtime resolution refused: %s" % str(c.get("resolution_mm")))
+	if not is_equal_approx(float(c.call("_res_step")), 0.08):
+		fails.append("_res_step wrong: %s" % str(c.call("_res_step")))
+	c.queue_free()
+
 	# 3. runtime ink change re-tints the LIVE trail material
 	a.call("apply_grid_config", {"ink": "amber"})
 	if a.get("trail_color") != inks["amber"]:
@@ -54,6 +68,8 @@ func _run() -> void:
 		fails.append("default trail_color drifted: %s" % str(b.get("trail_color")))
 	if str(b.get("ink")) != "magenta":
 		fails.append("default ink drifted: %s" % str(b.get("ink")))
+	if float(b.get("resolution_mm")) != 0.0:
+		fails.append("default resolution drifted: %s" % str(b.get("resolution_mm")))
 
 	a.queue_free()
 	b.queue_free()
