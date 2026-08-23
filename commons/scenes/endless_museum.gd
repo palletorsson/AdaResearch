@@ -6685,6 +6685,28 @@ func _stamp_inner(seg: Node3D, scene_path: String, lookup: String, cell: Diction
 				"top_style": "flat", "glow_light": false},
 			"footprint_cells": 1, "foot_m": cap_m + 0.06, "centre": support_m, "height_m": 0.0,
 			"base_m": 0.0, "source": "plan", "band": "asked", "token": lookup}
+	# ── DRESS (2026-08-23, Palle: "plinth height, rotate, offset connected to
+	# the artifact, per instance — drag the bundle with the artifact") ────────
+	# Reserved token-config keys are the hand's PER-INSTANCE staging, and they
+	# outrank the planner (the hand outranks derivation): #plinth:H builds a
+	# plain station plinth of that height under this body; #offset:x,y,z and
+	# #scale:S land on the transform below. The token is the bundle — the keys
+	# ride the map cell, so moving the token moves the whole dress with it.
+	var dress_plinth: float = 0.0
+	if plan_config.has("plinth") and str(plan_config["plinth"]).is_valid_float():
+		dress_plinth = clampf(float(str(plan_config["plinth"])), 0.0, 3.0)
+	if dress_plinth > 0.05:
+		var dcap: float = 0.9
+		plan_d = {"needs": true, "plinth": "station_plinth", "plinth_height": dress_plinth,
+			"artifact_y": dress_plinth, "why": "dress: the token asked for a %.2f m plinth" % dress_plinth,
+			"scene": "res://commons/artifacts/station/station_plinth.tscn",
+			"config": {"top_height": dress_plinth, "cap_meters": dcap, "width_cells": 1, "depth_cells": 1,
+				"top_style": "flat", "glow_light": false},
+			"footprint_cells": 1, "foot_m": dcap + 0.06, "centre": dress_plinth, "height_m": 0.0,
+			"base_m": 0.0, "source": "dress", "band": "asked", "token": lookup}
+		# the plinth IS the height claim: a token that asks for a pedestal does
+		# not also hover above it (the y-offset would stack on the deck)
+		cell.erase("hover_m")
 	var pscene: String = String(plan_d.get("scene", ""))
 	if bool(plan_d.get("needs", false)) and pscene != "" and ResourceLoader.exists(pscene):
 		var pps: PackedScene = load(pscene) as PackedScene
@@ -6737,6 +6759,17 @@ func _stamp_inner(seg: Node3D, scene_path: String, lookup: String, cell: Diction
 	var sc: float = float(cell.get("scale", 1.0))
 	if not is_equal_approx(sc, 1.0):
 		node.scale = Vector3.ONE * sc
+	# DRESS offset/scale — the token's own fine staging, same law as the
+	# curator's rulings above: transform only, the seal keeps the cell.
+	if plan_config.has("offset"):
+		var dop := str(plan_config["offset"]).split(",")
+		if dop.size() >= 3 and str(dop[0]).strip_edges().is_valid_float() \
+				and str(dop[1]).strip_edges().is_valid_float() and str(dop[2]).strip_edges().is_valid_float():
+			node.position += Vector3(float(dop[0]), float(dop[1]), float(dop[2]))
+	if plan_config.has("scale") and str(plan_config["scale"]).is_valid_float():
+		var dsc: float = clampf(float(str(plan_config["scale"])), 0.1, 5.0)
+		if not is_equal_approx(dsc, 1.0):
+			node.scale = Vector3.ONE * dsc
 	# The negotiated turn, applied BEFORE the node enters the tree — the same
 	# order the dressing-room builder and the config sweep both use, so an
 	# artifact that builds differently per facing builds the right one first time.
@@ -6869,7 +6902,11 @@ func _stamp_inner(seg: Node3D, scene_path: String, lookup: String, cell: Diction
 			"rotation": yaw_deg, "chapter": "", "seg": seg,
 			# em_plinths' answer, so an editor can say WHY there is or is not a plinth
 			"plinth": String(plan_d.get("plinth", "")), "plinth_why": String(plan_d.get("why", "")),
-			"plinth_h": float(plan_d.get("plinth_height", 0.0))})
+			"plinth_h": float(plan_d.get("plinth_height", 0.0)),
+			# THE BUNDLE BOND (2026-08-23): the artifact's record knows its own
+			# plinth NODE, so the doll editor drags/removes the dress WITH the
+			# artifact instead of leaving the pedestal behind
+			"plinth_node": plinth_node})
 	return true
 
 
@@ -9565,6 +9602,12 @@ func _edit_handle_key(key: int) -> bool:
 				if rn != null:
 					rn.set_meta("em_hand_removed", true)
 					rn.visible = false
+				# THE BUNDLE: the dress leaves with the artifact — its plinth
+				# hides too instead of standing as an empty pedestal
+				var del_pl: Node3D = _node_or_null(r2.get("plinth_node"))
+				if del_pl != null and is_instance_valid(del_pl):
+					del_pl.set_meta("em_hand_removed", true)
+					del_pl.visible = false
 				_edit_dirty = true
 		KEY_BRACKETLEFT, KEY_BRACKETRIGHT:
 			# palette scoped to the chapter the CAMERA stands in — walk into a
@@ -10105,6 +10148,11 @@ func _edit_nudge(dx: int, dz: int) -> void:
 			_doll_toast("the map refuses: " + why)
 			return
 		node.position += Vector3(float(dx), 0.0, float(dz))
+		# THE BUNDLE: the dress travels with the artifact — its plinth moves
+		# by the same cells instead of standing orphaned where the body was
+		var mv_pl: Node3D = _node_or_null(r.get("plinth_node"))
+		if mv_pl != null and is_instance_valid(mv_pl):
+			mv_pl.position += Vector3(float(dx), 0.0, float(dz))
 		r["tile_cell"] = [lres.x + dx, lres.y + dz]
 		_doll_toast("%s encoded into %s at [%d,%d]" % [str(r.get("token")), amap,
 			lres.x + dx, lres.y + dz])
@@ -10114,6 +10162,10 @@ func _edit_nudge(dx: int, dz: int) -> void:
 	ov["to"] = [int((ov.get("to", [0, 0]) as Array)[0]) + dx,
 		int((ov.get("to", [0, 0]) as Array)[1]) + dz]
 	node.position += Vector3(float(dx), 0.0, float(dz))
+	# THE BUNDLE: the plinth rides the ruling move too
+	var ov_pl: Node3D = _node_or_null(r.get("plinth_node"))
+	if ov_pl != null and is_instance_valid(ov_pl):
+		ov_pl.position += Vector3(float(dx), 0.0, float(dz))
 	r["tile_cell"] = [int(tc0[0]) + dx, int(tc0[1]) + dz]
 	_edit_dirty = true
 

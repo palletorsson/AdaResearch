@@ -25,7 +25,7 @@ const CONFIG_PARAM_NAMES = [
 	# Configurable portal / transform params
 	"rot_x", "rot_y", "rot_z", "pos_x", "pos_y", "pos_z",
 	"dest", "dest_x", "dest_y", "dest_z", "dest_map", "map", "spawn",
-	"label", "color1", "color2", "energy", "frame", "active", "cooldown", "mode",
+	"label", "color1", "color2", "energy", "frame", "active", "cooldown", "mode", "sky",
 	# Path-and-block game params
 	"debug_test", "grace_seconds", "cell_size", "shape", "win_on_all_befriended",
 	"build_shape", "build_interval", "build_ahead", "max_blocks", "build_size", "use_grid_shader",
@@ -1015,6 +1015,13 @@ func _frame_labels_deferred(node: Node) -> void:
 # Suppress standalone-demo chrome on an embedded artifact: hide screen-space CanvasLayers
 # (2D overlays have no place in a VR map) and de-activate the artifact's own Camera3D so it
 # can't steal the player's view. Recurses the whole subtree. Safe to call more than once.
+func _dress_adjust(node: Node3D, delta: Vector3) -> void:
+	## Deferred transform nudge for the dress keys — runs after _auto_ground
+	## (FIFO), so the plinth lift / offset stands on the grounded seat.
+	if node != null and is_instance_valid(node):
+		node.position += delta
+
+
 func _suppress_embedded_chrome(node: Node) -> void:
 	if not is_instance_valid(node):
 		return
@@ -1253,6 +1260,44 @@ func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: fl
 		var want_ground: bool = artifact_info.get("auto_ground", true) and not overrides.has("y_position")
 		if want_ground:
 			call_deferred("_auto_ground_artifact", artifact_object, lookup_name)
+
+	# ── DRESS (2026-08-23, grid twin of the museum's per-instance staging:
+	# "plinth height, rotate, offset connected to the artifact") ─────────────
+	# Reserved token-config keys: #plinth:H stands a plain station plinth
+	# under the artifact and lifts the body to its deck; #offset:x,y,z nudges
+	# the transform; #scale:S scales it. GATED BY THE KEYS — a token without
+	# them is byte-identical to before. The lift and offset are deferred so
+	# they run AFTER _auto_ground (deferreds are FIFO): the base grounds to
+	# the cell first, then rises to the deck / takes its nudge.
+	if artifact_object is Node3D and config_data.has("plinth") \
+			and str(config_data["plinth"]).is_valid_float():
+		var dress_h: float = clampf(float(str(config_data["plinth"])), 0.0, 3.0)
+		if dress_h > 0.05:
+			var pl_scene: PackedScene = load("res://commons/artifacts/station/station_plinth.tscn") as PackedScene
+			var pl: Node3D = pl_scene.instantiate() as Node3D if pl_scene != null else null
+			if pl != null:
+				var pl_cfg := {"top_height": dress_h, "cap_meters": 0.9, "width_cells": 1,
+					"depth_cells": 1, "top_style": "flat", "glow_light": false}
+				for pk in pl_cfg:
+					pl.set_meta("config_%s" % str(pk), pl_cfg[pk])
+				if pl.has_method("apply_grid_config"):
+					pl.call("apply_grid_config", pl_cfg)
+				pl.position = Vector3(x * total_size, GridCommon.surface_world_y(y, total_size), z * total_size)
+				pl.set_meta("dress_plinth_for", lookup_name)
+				parent_node.add_child(pl)
+				artifact_object.set_meta("dress_plinth_path", artifact_object.get_path_to(pl) if pl.is_inside_tree() and artifact_object.is_inside_tree() else NodePath())
+				call_deferred("_dress_adjust", artifact_object, Vector3(0.0, dress_h, 0.0))
+	if artifact_object is Node3D and config_data.has("offset"):
+		var dop := str(config_data["offset"]).split(",")
+		if dop.size() >= 3 and str(dop[0]).strip_edges().is_valid_float() \
+				and str(dop[1]).strip_edges().is_valid_float() and str(dop[2]).strip_edges().is_valid_float():
+			call_deferred("_dress_adjust", artifact_object,
+				Vector3(float(dop[0]), float(dop[1]), float(dop[2])))
+	if artifact_object is Node3D and config_data.has("scale") \
+			and str(config_data["scale"]).is_valid_float():
+		var dsc: float = clampf(float(str(config_data["scale"])), 0.1, 5.0)
+		if not is_equal_approx(dsc, 1.0):
+			artifact_object.scale *= dsc
 
 	# Packaging (GATED, default OFF): spawn grounding furniture + a framed caption around the
 	# artifact from its spatial_needs. Deferred so it runs AFTER _auto_ground (registered first),
