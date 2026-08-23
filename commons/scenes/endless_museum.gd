@@ -5072,8 +5072,21 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 			print("[em-stamp]   %s claimed by a stamped bead -> [%d,%d]" % [b["token"], base_x, base_z])
 		var cfg := {}
 		if String(b["att"]) != "":
-			var kv := String(b["att"]).split(":", true, 1)
-			cfg[kv[0]] = kv[1] if kv.size() > 1 else "1"
+			# EVERY #k:v segment, not just the first — a token can carry
+			# #retention:trace#resolution:40#ink:00ff00, and the old single
+			# split on the first colon handed `retention` the whole tail,
+			# which its setter refused, so ALL of it silently died
+			# (2026-08-23: the RGB rank stood in the museum at default
+			# magenta while every single-key token worked, hiding the hole).
+			for aseg_v in String(b["att"]).split("#"):
+				var aseg := String(aseg_v).strip_edges()
+				if aseg == "":
+					continue
+				var aci := aseg.find(":")
+				if aci > 0:
+					cfg[aseg.substr(0, aci).strip_edges()] = aseg.substr(aci + 1).strip_edges()
+				else:
+					cfg[aseg] = "1"
 		var done := false
 		var first_refusal := ""
 		for ring in range(0, 7):
@@ -11341,14 +11354,31 @@ func _derive_map_row(map_name: String) -> Dictionary:
 			var rot := 0
 			if parts.size() > 1 and str(parts[1]).is_valid_float():
 				rot = int(float(parts[1]))
+			# the token's #k:v#k:v config rides into the row — the stamp
+			# applies row["config"] via set_meta + apply_grid_config, so a
+			# map's #ink / #resolution / #board_width reach the hall's
+			# bodies. This twin dropped it silently until 2026-08-23 (the
+			# RGB rank stood in the museum at default magenta); the Python
+			# twin em_map_halls.derive_row had the same hole, fixed the
+			# same day.
+			var cfg: Dictionary = {}
+			var tsegs := tok.split("#")
+			for ti in range(1, tsegs.size()):
+				var cseg := str(tsegs[ti])
+				var colon := cseg.find(":")
+				if colon > 0:
+					cfg[cseg.substr(0, colon).strip_edges()] = cseg.substr(colon + 1).strip_edges()
 			var under := 0
 			if r < struct.size() and c < (struct[r] as Array).size():
 				var uv := str((struct[r] as Array)[c]).strip_edges()
 				under = int(uv) if uv.is_valid_int() else 0
-			arts.append({"token": String(parts[0]), "cell": [c, r], "tile_cell": [c, r],
+			var art: Dictionary = {"token": String(parts[0]), "cell": [c, r], "tile_cell": [c, r],
 				"rotation": ((rot % 360) + 360) % 360, "mode": "freestanding",
 				"venue": "interior", "support_height_m": 0.95 if under >= 2 else 0.0,
-				"hand": false, "ruled": {"by": "map: " + map_name, "cell": [c, r]}})
+				"hand": false, "ruled": {"by": "map: " + map_name, "cell": [c, r]}}
+			if not cfg.is_empty():
+				art["config"] = cfg
+			arts.append(art)
 	return {"tile": tile, "artifacts": arts}
 
 

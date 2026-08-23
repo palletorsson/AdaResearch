@@ -99,6 +99,17 @@ def derive_row(pearl: str, map_name: str, museum_key: str, idx: int, total: int,
             parts = base.split(":")
             name = parts[0]
             rot = int(float(parts[1])) if len(parts) > 1 and parts[1] else 0
+            # the token's #k:v#k:v config rides into the row — the stamp
+            # applies row["config"] via set_meta + apply_grid_config, so a
+            # map's #ink / #resolution / #board_width reach the hall's
+            # bodies. Dropped silently until 2026-08-23: the RGB rank stood
+            # in the museum at default magenta and nothing complained.
+            config = {}
+            for cseg in tok.split("#")[1:]:
+                if ":" in cseg:
+                    ck, cv = cseg.split(":", 1)
+                    if ck.strip():
+                        config[ck.strip()] = cv.strip()
             under = struct[r][c] if r < len(struct) and c < len(struct[r]) else 0
             tc = [c - c0, r - r0]
             arts.append({
@@ -110,6 +121,7 @@ def derive_row(pearl: str, map_name: str, museum_key: str, idx: int, total: int,
                 # nearest when the plan re-derives (hand:true blocks rebind —
                 # that is bake_rulings' contract, not the map's)
                 "hand": False, "ruled": {"by": "map: " + map_name, "cell": list(tc)},
+                **({"config": config} if config else {}),
             })
     return {
         "museum": museum_key,
