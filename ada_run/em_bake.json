@@ -1,6 +1,6 @@
 {
 	"_readme": "The BAKE: every placement decision the museum makes from a measurement, decided ONCE by a headless --em-bake run and replayed by every later run, desktop or headset. Per chapter|pearl: placed = token, tile cell, the exact cells sealed (x, z-from-segment-base); refused = token, cell, why. Regenerate after editing the plan: python tools/em_bake.py",
-	"at": "2026-08-23 15:29:27",
+	"at": "2026-08-23 16:17:58",
 	"plan": "res://ada_run/em_plan.json",
 	"plan_at": "2026-08-21T14:00:55",
 	"schema": "adaresearch.em_bake.v1",
@@ -6289,8 +6289,8 @@
 					],
 					"seal": [
 						[
-							12,
-							6
+							10,
+							14
 						],
 						[
 							11,
@@ -6305,6 +6305,10 @@
 						11
 					],
 					"seal": [
+						[
+							8,
+							9
+						],
 						[
 							11,
 							11
@@ -6356,10 +6360,6 @@
 						],
 						[
 							9,
-							14
-						],
-						[
-							10,
 							14
 						],
 						[
@@ -10168,10 +10168,6 @@
 							28
 						],
 						[
-							5,
-							26
-						],
-						[
 							6,
 							26
 						],
@@ -10180,28 +10176,12 @@
 							26
 						],
 						[
-							13,
-							26
-						],
-						[
-							5,
-							27
-						],
-						[
 							6,
 							27
 						],
 						[
 							12,
 							27
-						],
-						[
-							13,
-							27
-						],
-						[
-							5,
-							28
 						],
 						[
 							6,
@@ -20567,10 +20547,6 @@
 					],
 					"seal": [
 						[
-							4,
-							15
-						],
-						[
 							5,
 							15
 						],
@@ -20595,6 +20571,10 @@
 						15
 					],
 					"seal": [
+						[
+							9,
+							15
+						],
 						[
 							10,
 							15
@@ -20631,6 +20611,26 @@
 						[
 							6,
 							17
+						],
+						[
+							2,
+							18
+						],
+						[
+							3,
+							18
+						],
+						[
+							4,
+							18
+						],
+						[
+							5,
+							18
+						],
+						[
+							6,
+							18
 						]
 					],
 					"token": "stochastic_tree_separated"
@@ -32241,28 +32241,28 @@
 							5
 						],
 						[
-							0,
-							6
-						],
-						[
-							1,
-							6
-						],
-						[
-							0,
-							7
-						],
-						[
-							1,
-							7
-						],
-						[
 							2,
 							5
 						],
 						[
+							0,
+							6
+						],
+						[
+							1,
+							6
+						],
+						[
 							2,
 							6
+						],
+						[
+							0,
+							7
+						],
+						[
+							1,
+							7
 						],
 						[
 							2,
@@ -33638,14 +33638,9 @@
 				{
 					"cell": [
 						11,
-						5
+						6
 					],
-					"seal": [
-						[
-							11,
-							5
-						]
-					],
+					"seal": [],
 					"token": "floating_sphere_field"
 				},
 				{
@@ -33701,31 +33696,11 @@
 				},
 				{
 					"cell": [
-						7,
-						9
+						9,
+						10
 					],
 					"seal": [
 						[
-							6,
-							8
-						],
-						[
-							7,
-							8
-						],
-						[
-							8,
-							8
-						],
-						[
-							5,
-							9
-						],
-						[
-							6,
-							9
-						],
-						[
 							7,
 							9
 						],
@@ -33738,12 +33713,8 @@
 							9
 						],
 						[
-							5,
-							10
-						],
-						[
-							6,
-							10
+							11,
+							9
 						],
 						[
 							7,
@@ -33756,6 +33727,30 @@
 						[
 							9,
 							10
+						],
+						[
+							11,
+							10
+						],
+						[
+							7,
+							11
+						],
+						[
+							8,
+							11
+						],
+						[
+							9,
+							11
+						],
+						[
+							10,
+							11
+						],
+						[
+							11,
+							11
 						]
 					],
 					"token": "do_not_cross_barrier"
@@ -33763,20 +33758,16 @@
 				{
 					"cell": [
 						13,
-						7
+						10
 					],
 					"seal": [
 						[
 							13,
-							7
+							10
 						],
 						[
-							14,
-							7
-						],
-						[
-							15,
-							7
+							13,
+							11
 						]
 					],
 					"token": "line_builder_3d"
@@ -33786,20 +33777,7 @@
 						11,
 						11
 					],
-					"seal": [
-						[
-							11,
-							9
-						],
-						[
-							11,
-							10
-						],
-						[
-							11,
-							11
-						]
-					],
+					"seal": [],
 					"token": "laser_measure"
 				},
 				{
@@ -33830,19 +33808,10 @@
 				},
 				{
 					"cell": [
-						9,
-						12
+						10,
+						11
 					],
-					"seal": [
-						[
-							8,
-							12
-						],
-						[
-							9,
-							12
-						]
-					],
+					"seal": [],
 					"token": "laser_measure"
 				},
 				{
@@ -34093,6 +34062,22 @@
 			"refused": [
 				{
 					"tile_cell": [
+						11,
+						5
+					],
+					"token": "floating_sphere_field",
+					"why": "sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						10,
+						5
+					],
+					"token": "floating_sphere_field",
+					"why": "sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
 						7,
 						10
 					],
@@ -34109,183 +34094,95 @@
 				},
 				{
 					"tile_cell": [
-						13,
-						10
-					],
-					"token": "line_builder_3d",
-					"why": "sealing would sever the walk route"
-				},
-				{
-					"tile_cell": [
-						12,
-						10
-					],
-					"token": "line_builder_3d",
-					"why": "sealing would sever the walk route"
-				},
-				{
-					"tile_cell": [
-						13,
+						7,
 						9
 					],
-					"token": "line_builder_3d",
+					"token": "do_not_cross_barrier",
 					"why": "sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
-						13,
+						7,
 						11
 					],
-					"token": "line_builder_3d",
+					"token": "do_not_cross_barrier",
 					"why": "sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
-						14,
+						8,
 						10
 					],
-					"token": "line_builder_3d",
+					"token": "do_not_cross_barrier",
 					"why": "sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
-						12,
+						6,
 						9
 					],
-					"token": "line_builder_3d",
+					"token": "do_not_cross_barrier",
 					"why": "sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
-						12,
+						6,
 						11
 					],
-					"token": "line_builder_3d",
+					"token": "do_not_cross_barrier",
 					"why": "sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
-						14,
+						8,
 						9
 					],
-					"token": "line_builder_3d",
+					"token": "do_not_cross_barrier",
 					"why": "sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
-						14,
+						8,
 						11
 					],
-					"token": "line_builder_3d",
+					"token": "do_not_cross_barrier",
 					"why": "sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
-						11,
+						5,
 						10
 					],
-					"token": "line_builder_3d",
+					"token": "do_not_cross_barrier",
 					"why": "sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
-						13,
+						7,
 						8
 					],
-					"token": "line_builder_3d",
+					"token": "do_not_cross_barrier",
 					"why": "sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
-						13,
+						7,
 						12
 					],
-					"token": "line_builder_3d",
-					"why": "sealing would sever the walk route"
-				},
-				{
-					"tile_cell": [
-						11,
-						9
-					],
-					"token": "line_builder_3d",
-					"why": "sealing would sever the walk route"
-				},
-				{
-					"tile_cell": [
-						11,
-						11
-					],
-					"token": "line_builder_3d",
-					"why": "sealing would sever the walk route"
-				},
-				{
-					"tile_cell": [
-						12,
-						8
-					],
-					"token": "line_builder_3d",
-					"why": "sealing would sever the walk route"
-				},
-				{
-					"tile_cell": [
-						12,
-						12
-					],
-					"token": "line_builder_3d",
-					"why": "sealing would sever the walk route"
-				},
-				{
-					"tile_cell": [
-						14,
-						8
-					],
-					"token": "line_builder_3d",
-					"why": "sealing would sever the walk route"
-				},
-				{
-					"tile_cell": [
-						14,
-						12
-					],
-					"token": "line_builder_3d",
-					"why": "sealing would sever the walk route"
-				},
-				{
-					"tile_cell": [
-						11,
-						8
-					],
-					"token": "line_builder_3d",
-					"why": "sealing would sever the walk route"
-				},
-				{
-					"tile_cell": [
-						11,
-						12
-					],
-					"token": "line_builder_3d",
+					"token": "do_not_cross_barrier",
 					"why": "sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
 						10,
-						10
+						12
 					],
-					"token": "line_builder_3d",
+					"token": "laser_measure",
 					"why": "sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
-						13,
-						13
-					],
-					"token": "line_builder_3d",
-					"why": "sealing would sever the walk route"
-				},
-				{
-					"tile_cell": [
-						10,
+						9,
 						12
 					],
 					"token": "laser_measure",
@@ -34346,49 +34243,52 @@
 			"placed": [
 				{
 					"cell": [
-						9,
+						8,
 						7
 					],
 					"seal": [
 						[
-							9,
-							7
-						]
-					],
-					"token": "folding_past"
-				},
-				{
-					"cell": [
-						10,
-						7
-					],
-					"seal": [
+							7,
+							6
+						],
+						[
+							8,
+							6
+						],
 						[
 							9,
 							6
 						],
 						[
-							10,
-							6
-						],
-						[
-							11,
-							6
-						],
-						[
-							10,
+							7,
 							7
 						],
 						[
-							11,
+							8,
 							7
 						],
 						[
-							11,
+							9,
+							7
+						],
+						[
+							7,
+							8
+						],
+						[
+							8,
 							8
 						]
 					],
 					"token": "origin"
+				},
+				{
+					"cell": [
+						9,
+						7
+					],
+					"seal": [],
+					"token": "folding_past"
 				},
 				{
 					"cell": [
@@ -34525,12 +34425,7 @@
 						14,
 						13
 					],
-					"seal": [
-						[
-							14,
-							13
-						]
-					],
+					"seal": [],
 					"token": "interactive_point_origin_force"
 				},
 				{
@@ -34538,12 +34433,7 @@
 						15,
 						13
 					],
-					"seal": [
-						[
-							15,
-							13
-						]
-					],
+					"seal": [],
 					"token": "interactive_point_origin_force"
 				},
 				{
@@ -34551,12 +34441,7 @@
 						9,
 						19
 					],
-					"seal": [
-						[
-							9,
-							19
-						]
-					],
+					"seal": [],
 					"token": "floating_sphere_field"
 				},
 				{
@@ -34564,49 +34449,11 @@
 						12,
 						19
 					],
-					"seal": [
-						[
-							12,
-							19
-						]
-					],
+					"seal": [],
 					"token": "interactive_point_origin_force"
 				}
 			],
-			"refused": [
-				{
-					"tile_cell": [
-						11,
-						7
-					],
-					"token": "origin",
-					"why": "sealing would sever the walk route"
-				},
-				{
-					"tile_cell": [
-						7,
-						11
-					],
-					"token": "you_are_here",
-					"why": "sealing would sever the walk route"
-				},
-				{
-					"tile_cell": [
-						6,
-						11
-					],
-					"token": "you_are_here",
-					"why": "sealing would sever the walk route"
-				},
-				{
-					"tile_cell": [
-						7,
-						10
-					],
-					"token": "you_are_here",
-					"why": "sealing would sever the walk route"
-				}
-			]
+			"refused": []
 		},
 		"primitives|point trace": {
 			"museum": "sainsbury-false-perspective-enfilade",
@@ -34812,40 +34659,68 @@
 							8
 						],
 						[
-							1,
-							1
+							4,
+							5
 						],
 						[
-							2,
-							1
+							4,
+							6
 						],
 						[
-							3,
-							1
+							4,
+							7
 						],
 						[
-							1,
-							2
-						],
-						[
-							2,
-							2
-						],
-						[
-							3,
-							2
+							4,
+							8
 						],
 						[
 							1,
-							3
+							9
 						],
 						[
 							2,
-							3
+							9
 						],
 						[
 							3,
-							3
+							9
+						],
+						[
+							4,
+							9
+						],
+						[
+							1,
+							10
+						],
+						[
+							2,
+							10
+						],
+						[
+							3,
+							10
+						],
+						[
+							4,
+							10
+						],
+						[
+							1,
+							11
+						],
+						[
+							2,
+							11
+						],
+						[
+							3,
+							11
+						],
+						[
+							4,
+							11
 						]
 					],
 					"token": "organic_space"
@@ -36004,6 +35879,10 @@
 							8
 						],
 						[
+							8,
+							2
+						],
+						[
 							9,
 							2
 						],
@@ -36032,6 +35911,10 @@
 							2
 						],
 						[
+							8,
+							3
+						],
+						[
 							9,
 							3
 						],
@@ -36050,22 +35933,46 @@
 						[
 							13,
 							3
+						],
+						[
+							8,
+							4
+						],
+						[
+							8,
+							5
 						],
 						[
 							9,
 							5
 						],
 						[
+							8,
+							6
+						],
+						[
 							9,
 							6
+						],
+						[
+							8,
+							7
 						],
 						[
 							9,
 							7
 						],
 						[
+							8,
+							8
+						],
+						[
 							9,
 							8
+						],
+						[
+							8,
+							9
 						],
 						[
 							9,
@@ -36086,6 +35993,10 @@
 						[
 							13,
 							9
+						],
+						[
+							8,
+							10
 						],
 						[
 							9,
@@ -38087,8 +37998,20 @@
 					],
 					"seal": [
 						[
-							11,
+							8,
 							6
+						],
+						[
+							9,
+							6
+						],
+						[
+							8,
+							7
+						],
+						[
+							9,
+							7
 						],
 						[
 							10,
@@ -38096,14 +38019,10 @@
 						],
 						[
 							11,
-							7
-						],
-						[
-							9,
 							6
 						],
 						[
-							9,
+							11,
 							7
 						],
 						[
@@ -38366,35 +38285,31 @@
 					],
 					"seal": [
 						[
-							11,
-							11
-						],
-						[
-							10,
-							12
-						],
-						[
-							11,
-							12
-						],
-						[
 							10,
 							13
 						],
 						[
-							9,
-							12
-						],
-						[
-							9,
-							13
-						],
-						[
-							9,
+							10,
 							14
 						],
 						[
+							9,
+							12
+						],
+						[
 							10,
+							12
+						],
+						[
+							11,
+							12
+						],
+						[
+							9,
+							13
+						],
+						[
+							9,
 							14
 						],
 						[
@@ -40757,6 +40672,26 @@
 					"seal": [
 						[
 							4,
+							27
+						],
+						[
+							5,
+							27
+						],
+						[
+							6,
+							27
+						],
+						[
+							7,
+							27
+						],
+						[
+							8,
+							27
+						],
+						[
+							4,
 							28
 						],
 						[
@@ -41085,10 +41020,6 @@
 					],
 					"seal": [
 						[
-							4,
-							11
-						],
-						[
 							5,
 							11
 						],
@@ -41097,8 +41028,8 @@
 							11
 						],
 						[
-							4,
-							12
+							7,
+							11
 						],
 						[
 							5,
@@ -41109,8 +41040,8 @@
 							12
 						],
 						[
-							4,
-							13
+							7,
+							12
 						],
 						[
 							5,
@@ -41121,16 +41052,8 @@
 							13
 						],
 						[
-							4,
-							14
-						],
-						[
-							5,
-							14
-						],
-						[
-							6,
-							14
+							7,
+							13
 						]
 					],
 					"token": "pixel_cloud"
@@ -41225,21 +41148,61 @@
 				},
 				{
 					"cell": [
-						1,
+						2,
 						24
 					],
 					"seal": [
 						[
 							1,
-							23
+							24
 						],
 						[
-							1,
+							2,
+							24
+						],
+						[
+							3,
 							24
 						],
 						[
 							1,
 							25
+						],
+						[
+							2,
+							25
+						],
+						[
+							3,
+							25
+						],
+						[
+							1,
+							26
+						],
+						[
+							2,
+							26
+						],
+						[
+							3,
+							26
+						],
+						[
+							1,
+							27
+						],
+						[
+							2,
+							27
+						],
+						[
+							3,
+							27
+						],
+						[
+							2,
+							28
 						]
 					],
 					"token": "pixel_cloud"
@@ -41251,28 +41214,20 @@
 					],
 					"seal": [
 						[
-							11,
-							22
+							10,
+							23
 						],
 						[
 							11,
 							23
 						],
 						[
-							11,
+							10,
 							24
 						],
 						[
 							11,
-							19
-						],
-						[
-							11,
-							20
-						],
-						[
-							11,
-							21
+							24
 						]
 					],
 					"token": "pixel_cloud"
@@ -41285,14 +41240,6 @@
 						5
 					],
 					"token": "random_walk_collection",
-					"why": "sealing would sever the walk route"
-				},
-				{
-					"tile_cell": [
-						2,
-						24
-					],
-					"token": "pixel_cloud",
 					"why": "sealing would sever the walk route"
 				}
 			]
@@ -48961,8 +48908,8 @@
 					],
 					"seal": [
 						[
-							10,
-							11
+							9,
+							6
 						],
 						[
 							12,
@@ -48977,6 +48924,10 @@
 						11
 					],
 					"seal": [
+						[
+							12,
+							8
+						],
 						[
 							12,
 							11
@@ -50536,6 +50487,10 @@
 						11
 					],
 					"seal": [
+						[
+							7,
+							14
+						],
 						[
 							12,
 							11

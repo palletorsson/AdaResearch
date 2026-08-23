@@ -70,12 +70,25 @@ func _run() -> void:
 	doc = JSON.parse_string(FileAccess.get_file_as_string(MAP1))
 	sv = str((((doc as Dictionary)["layers"] as Dictionary)["structure"][wall_c.y] as Array)[wall_c.x])
 	say("wall_open", m2 != "" and sv == "1", "msg=%s cell=%s" % [m2, sv])
+	# the wall_c cell is a MERGED built wall — before 2026-08-23 only
+	# session-built walls opened live and this toast said "F6 rebuilds"
+	say("wall_open_live", m2.contains("OPENED"), "msg=%s" % m2)
 	inst.call("_rule_undo_pop")
 	inst.call("_rule_undo_pop")
 	doc = JSON.parse_string(FileAccess.get_file_as_string(MAP1))
 	var sv_f := str((((doc as Dictionary)["layers"] as Dictionary)["structure"][floor_c.y] as Array)[floor_c.x])
 	var sv_w := str((((doc as Dictionary)["layers"] as Dictionary)["structure"][wall_c.y] as Array)[wall_c.x])
 	say("wall_undo", int(sv_f) <= 1 and int(sv_w) >= 2, "floor=%s wall=%s" % [sv_f, sv_w])
+
+	# ── HOLES (value 0, 2026-08-23): dig through the floor, then lay it back
+	var m3: String = inst.call("_rule_cell", seg0, 0, floor_c.x, floor_c.y + 4, false, "0")
+	doc = JSON.parse_string(FileAccess.get_file_as_string(MAP1))
+	sv = str((((doc as Dictionary)["layers"] as Dictionary)["structure"][floor_c.y] as Array)[floor_c.x])
+	say("hole_dig", m3.contains("HOLE") and sv == "0", "msg=%s cell=%s" % [m3, sv])
+	var m4: String = inst.call("_rule_cell", seg0, 0, floor_c.x, floor_c.y + 4, false, "1")
+	doc = JSON.parse_string(FileAccess.get_file_as_string(MAP1))
+	sv = str((((doc as Dictionary)["layers"] as Dictionary)["structure"][floor_c.y] as Array)[floor_c.x])
+	say("hole_fill", m4.contains("LAID") and sv == "1", "msg=%s cell=%s" % [m4, sv])
 
 	# ── ARTIFACTS (map lane): move, rotate, delete ───────────────────
 	var recs: Array = inst.get("_edit_records")

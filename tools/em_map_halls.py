@@ -82,7 +82,10 @@ def derive_row(pearl: str, map_name: str, museum_key: str, idx: int, total: int,
             # floor between segments"): the grid's height-0 cells (teleporter
             # zones, designed voids) are pits in a museum — the hall floors
             # them and keeps only the walls as walls.
-            line.append("4" if v >= 2 else "1")
+            # h>=2 wall, h==1 floor, 0 stays a HOLE — the docstring promised
+            # `else "0"` from day one but the code flattened holes to floor
+            # (caught 2026-08-23, Palle: "value 0 for floating objects")
+            line.append("4" if v >= 2 else ("1" if v >= 1 else "0"))
         tile.append(line)
     # NO inserted walls (Palle: "there is a wall where the sliding door
     # should be — you can simplify"): the museum's vestibule + gate already

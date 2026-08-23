@@ -9136,7 +9136,8 @@ func _input(event: InputEvent) -> void:
 				_room_drag_start = Vector2i(int(floor(ptb.x)), int(floor(ptb.z)))
 				return
 			if _doll_brush == "R":
-				_rule_paint_drag = "1" if mbe.shift_pressed else "4"
+				# ALT digs a HOLE (value 0) — for floating bodies over void
+				_rule_paint_drag = "0" if mbe.alt_pressed else ("1" if mbe.shift_pressed else "4")
 				_rule_last_cell = Vector2i(int(floor(ptb.x)), int(floor(ptb.z)))
 				_doll_rule_set(_rule_last_cell.x, _rule_last_cell.y, _rule_paint_drag, true)
 			elif _doll_brush == "D":
@@ -9230,9 +9231,10 @@ func _input(event: InputEvent) -> void:
 				_rule_rmb_pos = mbe.position
 			elif _doll_brush == "R" and _cam != null \
 					and mbe.position.distance_to(_rule_rmb_pos) < 6.0:
-				# the sledgehammer click: right mouse OPENS the wall
+				# the sledgehammer click: right mouse OPENS the wall — with
+				# ALT it digs straight through the floor (a HOLE, value 0)
 				var ptr := _doll_floor_point(mbe.position)
-				_doll_rule_set(int(floor(ptr.x)), int(floor(ptr.z)), "1", true)
+				_doll_rule_set(int(floor(ptr.x)), int(floor(ptr.z)), "0" if mbe.alt_pressed else "1", true)
 				_doll_orbit = false
 				return
 			_doll_orbit = mbe.pressed          # empty-handed RMB drag turns the house
@@ -10991,8 +10993,10 @@ func _rule_cell(segn: Node3D, zbase: int, wx: int, wz: int, erase: bool, force: 
 		(tile[cz_t] as Array)[wx] = nv
 	var seg_map := String(segn.get_meta("em_map")) if segn.has_meta("em_map") else ""
 	if seg_map != "" and in_hall:
-		# ONE TRUTH: the wall encodes into the map itself, right away
-		if not _map_write_cell(seg_map, wx, cz_t, nv == "4"):
+		# ONE TRUTH: the ruling encodes into the map itself, right away —
+		# tile "4"/"1"/"0" is map "2"/"1"/"0"
+		var map_v := "2" if nv == "4" else nv
+		if not _map_write_cell(seg_map, wx, cz_t, nv == "4", map_v):
 			return ""
 	else:
 		var found := false
@@ -11027,6 +11031,20 @@ func _rule_cell(segn: Node3D, zbase: int, wx: int, wz: int, erase: bool, force: 
 		_walk_cells.erase(Vector2i(wx, wz))
 		return "%s [%d,%d]: WALL built — save keeps it" % [place, wx, cz_t]
 	var removed := _live_wall_remove(segn, wx, wz_local)
+	if nv == "0":
+		# A HOLE (2026-08-23, Palle: "value 0 for floating objects like the
+		# grid lines"): the floor deck at the cell comes out too, and the
+		# cell leaves the walk map — nothing stands or walks there.
+		var fl := _live_floor_remove(segn, wx, wz_local)
+		_walk_cells.erase(Vector2i(wx, wz))
+		if fl or removed:
+			return "%s [%d,%d]: HOLE dug — save keeps it" % [place, wx, cz_t]
+		return "%s [%d,%d] ruled HOLE — F6 rebuilds it open" % [place, wx, cz_t]
+	if cur.begins_with("0"):
+		# floor returns over a former hole
+		_live_floor_add(segn, wx, wz_local)
+		_walk_cells[Vector2i(wx, wz)] = true
+		return "%s [%d,%d]: floor LAID over the hole — save keeps it" % [place, wx, cz_t]
 	_walk_cells[Vector2i(wx, wz)] = true
 	if removed:
 		return "%s [%d,%d]: wall OPENED — save keeps it" % [place, wx, cz_t]
@@ -11145,7 +11163,7 @@ func _doll_palette_pressed(b: Button) -> void:
 		_doll_toast("saved — the walls you built stand; F6 re-deals the whole hall if you want a clean rebuild")
 		return
 	_doll_brush = br
-	var names := {"": "the hand picks and drags bodies", "R": "wall — LMB builds (drag draws a run) · right-click or SHIFT opens · ctrl+Z undoes", "O": "room — drag a rectangle; walls rise around it with a door facing you; ctrl+Z takes the whole room back", "D": "door — click where the sliding door should stand"}
+	var names := {"": "the hand picks and drags bodies", "R": "wall — LMB builds (drag draws a run) · right-click or SHIFT opens · ALT digs a HOLE (value 0) · ctrl+Z undoes", "O": "room — drag a rectangle; walls rise around it with a door facing you; ctrl+Z takes the whole room back", "D": "door — click where the sliding door should stand"}
 	_doll_toast(String(names.get(br, "")))
 	_doll_palette_refresh()
 
@@ -11171,15 +11189,37 @@ func _live_wall_remove(segn: Node3D, wx: int, wz_local: float) -> bool:
 	##   3. the collider — per-cell freed, a run slab SPLIT around the cell
 	var cx: float = wx + 0.5
 	var hit := false
-	for c in [] + segn.get_children():
-		if c is MeshInstance3D:
-			var m := c as MeshInstance3D
-			if m.mesh is BoxMesh:
-				var bs: Vector3 = (m.mesh as BoxMesh).size
-				if bs.y > WALL_H - 0.8 and bs.x < 1.5 and bs.z < 1.5 \
-						and absf(m.position.x - cx) < 0.45 and absf(m.position.z - wz_local) < 0.45:
-					m.queue_free()
-					hit = true
+	# 1. MeshInstance3D wall boxes ANYWHERE in the segment subtree (artifact
+	# roots exempt): a single-cell box is freed whole; a MERGED RUN — the
+	# built halls' walls are merged boxes (probe_wall_census), which is why
+	# "remove existing wall" used to work only on session-built walls
+	# (2026-08-23) — is SPLIT around the cell and the remainder rebuilt.
+	var wstack: Array = [segn]
+	while not wstack.is_empty():
+		var wn: Node = wstack.pop_back()
+		if wn != segn and wn is Node3D and wn.has_meta("artifact_lookup_name"):
+			continue
+		for wcn in wn.get_children():
+			wstack.append(wcn)
+		if not (wn is MeshInstance3D):
+			continue
+		var m := wn as MeshInstance3D
+		if not (m.mesh is BoxMesh):
+			continue
+		var bs: Vector3 = (m.mesh as BoxMesh).size
+		if bs.y < WALL_H - 0.8:
+			continue
+		var wop: Vector3 = segn.to_local(m.global_position)
+		if cx < wop.x - bs.x / 2.0 - 0.02 or cx > wop.x + bs.x / 2.0 + 0.02:
+			continue
+		if wz_local < wop.z - bs.z / 2.0 - 0.02 or wz_local > wop.z + bs.z / 2.0 + 0.02:
+			continue
+		if bs.x > 1.5 or bs.z > 1.5:
+			for wpart_v in _box_minus_cell(wop, bs, cx, wz_local):
+				var wpart: Dictionary = wpart_v
+				_box(segn, wpart["p"], wpart["s"], Color(0.85, 0.84, 0.8), m.material_override)
+		m.queue_free()
+		hit = true
 	if not hit:
 		for c2 in [] + segn.get_children():
 			if hit:
@@ -11237,6 +11277,48 @@ func _live_wall_remove(segn: Node3D, wx: int, wz_local: float) -> bool:
 					_add_col(solid as StaticBody3D, part2["p"], part2["s"])
 				cs.queue_free()
 	return hit
+
+
+func _live_floor_remove(segn: Node3D, wx: int, wz_local: float) -> bool:
+	## Free the floor deck at one cell — mesh AND collider — so a ruled HOLE
+	## opens live (2026-08-23, "value 0 for floating objects"). The floor is
+	## laid PER CELL ((1, 0.2, 1) at y -0.1), so no splitting is needed.
+	## Podiums (0.6 tall) and plinths (1.0) are excluded by the height gate.
+	var cx: float = wx + 0.5
+	var hit := false
+	for c in [] + segn.get_children():
+		if c is MeshInstance3D:
+			var m := c as MeshInstance3D
+			if m.mesh is BoxMesh:
+				var bs: Vector3 = (m.mesh as BoxMesh).size
+				if bs.y <= 0.45 and bs.x < 1.5 and bs.z < 1.5 and m.position.y < 0.35 \
+						and absf(m.position.x - cx) < 0.45 and absf(m.position.z - wz_local) < 0.45:
+					m.queue_free()
+					hit = true
+	if hit:
+		var solid := segn.get_node_or_null("Collision")
+		if solid != null:
+			for c3 in [] + solid.get_children():
+				if not (c3 is CollisionShape3D):
+					continue
+				var cs := c3 as CollisionShape3D
+				if not (cs.shape is BoxShape3D):
+					continue
+				var bsz: Vector3 = (cs.shape as BoxShape3D).size
+				if bsz.y <= 0.45 and bsz.x < 1.5 and bsz.z < 1.5 and cs.position.y < 0.35 \
+						and absf(cs.position.x - cx) < 0.45 and absf(cs.position.z - wz_local) < 0.45:
+					cs.queue_free()
+	return hit
+
+
+func _live_floor_add(segn: Node3D, wx: int, wz_local: float) -> void:
+	## Lay the one-cell floor deck back — the inverse of _live_floor_remove,
+	## the same box the builder lays for a "1" cell.
+	var col: Color = Color(0.16, 0.16, 0.19)
+	_box(segn, Vector3(wx + 0.5, -0.1, wz_local), Vector3(1, 0.2, 1), col, null)
+	var solid := segn.get_node_or_null("Collision")
+	if solid is StaticBody3D:
+		_add_col(solid as StaticBody3D, Vector3(wx + 0.5, -0.1, wz_local), Vector3(1, 0.2, 1))
 
 
 func _box_minus_cell(origin: Vector3, size: Vector3, cx: float, cz: float) -> Array:
@@ -11303,7 +11385,7 @@ func _rule_undo_apply(u: Dictionary) -> bool:
 	if segn == null or not is_instance_valid(segn):
 		return false
 	var prev := String(u.get("prev", "1"))
-	var back := "4" if prev.begins_with("4") else "1"
+	var back := "4" if prev.begins_with("4") else ("0" if prev.begins_with("0") else "1")
 	return _rule_cell(segn, int(u.get("zbase", 0)), int(u.get("wx", 0)),
 		int(u.get("wz", 0)), false, back, true) != ""
 
@@ -11403,7 +11485,9 @@ func _derive_map_row(map_name: String) -> Dictionary:
 			if c < srow.size():
 				var sv2 := str(srow[c]).strip_edges()
 				v = int(sv2) if sv2.is_valid_int() else 0
-			line.append("4" if v >= 2 else "1")
+			# h>=2 wall, h==1 floor, 0 stays a HOLE (hollow — no floor laid,
+			# not walkable; 2026-08-23, "value 0 for floating objects")
+			line.append("4" if v >= 2 else ("1" if v >= 1 else "0"))
 		tile.append(line)
 	var arts: Array = []
 	for r in range(inter.size()):
@@ -11445,7 +11529,9 @@ func _derive_map_row(map_name: String) -> Dictionary:
 	return {"tile": tile, "artifacts": arts}
 
 
-func _map_write_cell(map_name: String, cx: int, cz: int, wall: bool) -> bool:
+func _map_write_cell(map_name: String, cx: int, cz: int, wall: bool, value: String = "") -> bool:
+	## `value` (map vocabulary: "0" hole / "1" floor / "2" wall) wins when
+	## given; the wall bool stays for the older callers and probes.
 	var path := "res://commons/maps/%s/map_data.json" % map_name
 	if not FileAccess.file_exists(path):
 		return false
@@ -11455,7 +11541,7 @@ func _map_write_cell(map_name: String, cx: int, cz: int, wall: bool) -> bool:
 	var struct: Array = ((doc_v as Dictionary).get("layers", {}) as Dictionary).get("structure", [])
 	if cz < 0 or cz >= struct.size() or cx < 0 or cx >= (struct[cz] as Array).size():
 		return false
-	(struct[cz] as Array)[cx] = "2" if wall else "1"
+	(struct[cz] as Array)[cx] = value if value in ["0", "1", "2"] else ("2" if wall else "1")
 	return _map_store(path, doc_v)
 
 
