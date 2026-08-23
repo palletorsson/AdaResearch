@@ -7677,6 +7677,8 @@ func _open_gate() -> void:
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint() or _studio:
 		return
+	if _paint2d != "" and _paint2d_canvas != null and is_instance_valid(_paint2d_canvas):
+		_paint2d_canvas.queue_redraw()   # the overlay tracks the camera
 	if not _boot_first_frame:
 		_boot_first_frame = true
 		_wake_until_ms = Time.get_ticks_msec() + int(WAKE_S * 1000.0)
@@ -9108,8 +9110,10 @@ func _input(event: InputEvent) -> void:
 		# same doll, same cut, same hands; the next H falls through to the exit.
 		if _dollhouse and not _doll_top:
 			_doll_top = true
-			print("[em-doll] plan view — the camera at noon; H returns to the walk")
+			print("[em-doll] plan view — the camera at noon; 0/1/2 arms the 2D painter; H returns to the walk")
 			return
+		if _paint2d != "":
+			_paint2d_off()   # leaving the plan view closes the painter (rebuilds if dirty)
 		_doll_toggle()
 		_doll_palette_refresh()
 		return
@@ -9129,6 +9133,18 @@ func _input(event: InputEvent) -> void:
 			return
 		elif mbe.pressed and mb == MOUSE_BUTTON_WHEEL_DOWN:
 			_doll_zoom = clampf(_doll_zoom / 0.87, 6.0, 60.0)
+			return
+		elif mb == MOUSE_BUTTON_LEFT and _paint2d != "" and _doll_top and _cam != null:
+			# the 2D painter owns LMB while armed — press starts a stroke,
+			# release ends it; painting is map-only, rebuild on exit
+			if mbe.pressed:
+				_paint2d_stroke = true
+				var ppt := _doll_floor_point(mbe.position)
+				_paint2d_last = Vector2i(int(floor(ppt.x)), int(floor(ppt.z)))
+				_paint2d_apply(_paint2d_last.x, _paint2d_last.y)
+			else:
+				_paint2d_stroke = false
+				_paint2d_last = Vector2i(-9999, -9999)
 			return
 		elif mb == MOUSE_BUTTON_LEFT and mbe.pressed and _cam != null and _doll_brush != "":
 			var ptb := _doll_floor_point(mbe.position)
@@ -9262,6 +9278,13 @@ func _input(event: InputEvent) -> void:
 		if nmv != null:
 			nmv.position = _doll_node_start + Vector3(float(ddx), 0.0, float(ddz))
 		return
+	if _dollhouse and event is InputEventMouseMotion and _paint2d_stroke and _paint2d != "" and _cam != null:
+		var pmr := _doll_floor_point((event as InputEventMouseMotion).position)
+		var pcell2 := Vector2i(int(floor(pmr.x)), int(floor(pmr.z)))
+		if pcell2 != _paint2d_last:
+			_paint2d_last = pcell2
+			_paint2d_apply(pcell2.x, pcell2.y)
+		return
 	if _dollhouse and event is InputEventMouseMotion and not _doll_drag and _cam != null \
 			and _doll_brush in ["R", "D", "O"]:
 		# the rule brushes show their CELL: green = a wall would rise, rose =
@@ -9361,7 +9384,21 @@ func _input(event: InputEvent) -> void:
 			_doll_select(-1)
 			return
 		if kc == KEY_Z and Input.is_key_pressed(KEY_CTRL):
+			if _paint2d != "":
+				_paint2d_undo_pop()
+				return
 			_rule_undo_pop()
+			return
+		if _doll_top and kc in [KEY_0, KEY_KP_0, KEY_1, KEY_KP_1, KEY_2, KEY_KP_2]:
+			# 2D TOP PAINT: 0 empty · 1 floor · 2 wall — the same key exits
+			var pv2 := "0" if kc in [KEY_0, KEY_KP_0] else ("1" if kc in [KEY_1, KEY_KP_1] else "2")
+			if _paint2d == pv2:
+				_paint2d_off()
+				return
+			_paint2d = pv2
+			_paint2d_canvas_on()
+			var vn := {"0": "EMPTY (hole)", "1": "FLOOR", "2": "WALL"}
+			_doll_toast("2D paint: %s — LMB paints the map; same key exits + rebuilds" % String(vn[pv2]))
 			return
 		if kc == KEY_B:
 			var order := ["", "R", "D", "O", "2", "4", "0", "1"]
@@ -10911,6 +10948,18 @@ var _doll_hover_idx: int = -1   # the body under the hover ring — E selects it
 # SHIFT-LMB or a right CLICK OPENS (RMB-drag still orbits) — drag draws
 # wall RUNS, and ctrl+Z undoes ruling by ruling.
 var _rule_paint_drag: String = ""            # "4" building / "1" opening / "" idle
+
+# ── 2D TOP PAINT (2026-08-23, Palle: "plain 2d top paint cells for editing
+# the floor — 0 1 or 2, empty floor or wall") — armed in PLAN view (H twice)
+# with keys 0/1/2. Paints the MAP only, the one truth; NO live surgery —
+# leaving paint mode rebuilds the hall from the map, so removal is guaranteed
+# by reconstruction, never by mesh surgery (which the doll cut kept defeating).
+var _paint2d: String = ""                    # "" off, else the armed map value 0/1/2
+var _paint2d_dirty: bool = false
+var _paint2d_stroke: bool = false
+var _paint2d_last := Vector2i(-9999, -9999)
+var _paint2d_canvas: Control = null
+var _paint2d_undo: Array = []
 var _rule_last_cell := Vector2i(-9999, -9999)
 var _rule_rmb_pos := Vector2.ZERO
 var _rule_undo: Array = []                   # [{seg, zbase, wx, wz, prev}] or {"group": [...]}
@@ -11078,6 +11127,149 @@ func _rule_cell(segn: Node3D, zbase: int, wx: int, wz: int, erase: bool, force: 
 	segn.add_child(pv)
 	pv.position = Vector3(wx + 0.5, 1.5, wz_local)
 	return "%s [%d,%d] ruled PASSAGE — this wall is merged; F6 rebuilds it open" % [place, wx, cz_t]
+
+
+func _paint2d_apply(wx: int, wz: int) -> void:
+	## Paint ONE map cell to the armed value — MAP ONLY, no live surgery.
+	for sv in _segments:
+		var sd: Dictionary = sv
+		if wz < int(sd.get("z0", 0)) or wz >= int(sd.get("z1", 0)):
+			continue
+		var segn: Node3D = _node_or_null(sd.get("node"))
+		if segn == null:
+			return
+		var pmap := String(segn.get_meta("em_map")) if segn.has_meta("em_map") else ""
+		if pmap == "":
+			_doll_toast("this hall has no map behind it — 2D paint edits authored halls")
+			return
+		var cz_t: int = wz - int(sd.get("z0", 0)) - VESTIBULE_H
+		if cz_t < 0 or wx < 0 or wx >= 64 or cz_t >= 64:
+			return
+		var mpath := "res://commons/maps/%s/map_data.json" % pmap
+		var mdoc: Variant = JSON.parse_string(FileAccess.get_file_as_string(mpath))
+		if not (mdoc is Dictionary):
+			return
+		var mst: Array = ((mdoc as Dictionary).get("layers", {}) as Dictionary).get("structure", [])
+		if cz_t >= mst.size() or wx >= (mst[cz_t] as Array).size():
+			_doll_toast("past the map's edge")
+			return
+		var prev := str((mst[cz_t] as Array)[wx]).strip_edges()
+		if prev == _paint2d:
+			return
+		if not _map_write_cell(pmap, wx, cz_t, _paint2d == "2", _paint2d):
+			_doll_toast("the map refused the write")
+			return
+		_paint2d_undo.append({"map": pmap, "x": wx, "z": cz_t, "prev": prev})
+		if _paint2d_undo.size() > 400:
+			_paint2d_undo.pop_front()
+		_paint2d_sync_tile(segn, wx, cz_t, _paint2d)
+		_paint2d_dirty = true
+		if _paint2d_canvas != null and is_instance_valid(_paint2d_canvas):
+			_paint2d_canvas.queue_redraw()
+		return
+
+
+func _paint2d_sync_tile(segn: Node3D, wx: int, cz_t: int, map_v: String) -> void:
+	## The tile meta follows the map so the overlay shows the truth.
+	if not segn.has_meta("em_tile"):
+		return
+	var ptile: Array = segn.get_meta("em_tile")
+	while ptile.size() <= cz_t:
+		ptile.append([])
+	for prow_v in ptile:
+		var prow: Array = prow_v
+		while prow.size() <= wx:
+			prow.append("0")
+	(ptile[cz_t] as Array)[wx] = "4" if int(map_v) >= 2 else map_v
+
+
+func _paint2d_undo_pop() -> void:
+	if _paint2d_undo.is_empty():
+		_doll_toast("nothing to undo")
+		return
+	var u: Dictionary = _paint2d_undo.pop_back()
+	var pv := String(u.get("prev", "1"))
+	if not (pv.is_valid_int() and int(pv) >= 0 and int(pv) <= 5):
+		pv = "1"
+	_map_write_cell(String(u["map"]), int(u["x"]), int(u["z"]), int(pv) >= 2, pv)
+	for sv in _segments:
+		var segn: Node3D = _node_or_null((sv as Dictionary).get("node"))
+		if segn != null and segn.has_meta("em_map") and String(segn.get_meta("em_map")) == String(u["map"]):
+			_paint2d_sync_tile(segn, int(u["x"]), int(u["z"]), pv)
+	_paint2d_dirty = true
+	if _paint2d_canvas != null and is_instance_valid(_paint2d_canvas):
+		_paint2d_canvas.queue_redraw()
+	_doll_toast("undone — [%d,%d] back to %s" % [int(u["x"]), int(u["z"]), pv])
+
+
+func _paint2d_canvas_on() -> void:
+	if _paint2d_canvas != null and is_instance_valid(_paint2d_canvas):
+		_paint2d_canvas.queue_redraw()
+		return
+	var cl := CanvasLayer.new()
+	cl.name = "Paint2D"
+	cl.layer = 60
+	var ctl := Control.new()
+	ctl.name = "Grid"
+	ctl.set_anchors_preset(Control.PRESET_FULL_RECT)
+	ctl.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	cl.add_child(ctl)
+	add_child(cl)
+	_paint2d_canvas = ctl
+	ctl.draw.connect(_paint2d_draw)
+
+
+func _paint2d_off() -> void:
+	_paint2d = ""
+	_paint2d_stroke = false
+	if _paint2d_canvas != null and is_instance_valid(_paint2d_canvas):
+		_paint2d_canvas.get_parent().queue_free()
+	_paint2d_canvas = null
+	if _paint2d_dirty:
+		_paint2d_dirty = false
+		_doll_toast("rebuilding the hall from the map…")
+		_follow_reload()
+	else:
+		_doll_toast("2D paint off")
+
+
+func _paint2d_draw() -> void:
+	var ctl := _paint2d_canvas
+	if ctl == null or not is_instance_valid(ctl):
+		return
+	var cam := get_viewport().get_camera_3d()
+	if cam == null:
+		return
+	var vcol := {"0": Color(0.06, 0.06, 0.09, 0.6), "1": Color(0.28, 0.5, 0.34, 0.38),
+		"4": Color(0.92, 0.9, 0.82, 0.68)}
+	for sv in _segments:
+		var sd: Dictionary = sv
+		var segn: Node3D = _node_or_null(sd.get("node"))
+		if segn == null or not segn.has_meta("em_tile"):
+			continue
+		if not segn.has_meta("em_map") or String(segn.get_meta("em_map")) == "":
+			continue
+		var z0: int = int(sd.get("z0", 0))
+		var ptile: Array = segn.get_meta("em_tile")
+		for tz in range(ptile.size()):
+			var prow: Array = ptile[tz]
+			for tx in range(prow.size()):
+				var v := String(prow[tx])
+				var key := "4" if v.begins_with("4") else ("0" if v.begins_with("0") else "1")
+				var wz := z0 + VESTIBULE_H + tz
+				var pts := PackedVector2Array([
+					cam.unproject_position(Vector3(float(tx), 0.05, float(wz))),
+					cam.unproject_position(Vector3(float(tx + 1), 0.05, float(wz))),
+					cam.unproject_position(Vector3(float(tx + 1), 0.05, float(wz + 1))),
+					cam.unproject_position(Vector3(float(tx), 0.05, float(wz + 1)))])
+				ctl.draw_colored_polygon(pts, vcol[key])
+				var closed := pts.duplicate()
+				closed.append(pts[0])
+				ctl.draw_polyline(closed, Color(0, 0, 0, 0.25), 1.0)
+	var bn := {"0": "0 EMPTY", "1": "1 FLOOR", "2": "2 WALL"}
+	ctl.draw_string(ThemeDB.fallback_font, Vector2(20, 40),
+		"2D PAINT — %s   ·   LMB paints the map   ·   0/1/2 switch   ·   same key exits + rebuilds   ·   ctrl+Z undo" % String(bn.get(_paint2d, _paint2d)),
+		HORIZONTAL_ALIGNMENT_LEFT, -1, 18, Color(1, 1, 1, 0.92))
 
 
 func _doll_rule(wx: int, wz: int, erase: bool) -> void:
@@ -11637,7 +11829,7 @@ func _map_write_cell(map_name: String, cx: int, cz: int, wall: bool, value: Stri
 	var struct: Array = ((doc_v as Dictionary).get("layers", {}) as Dictionary).get("structure", [])
 	if cz < 0 or cz >= struct.size() or cx < 0 or cx >= (struct[cz] as Array).size():
 		return false
-	(struct[cz] as Array)[cx] = value if value in ["0", "1", "2"] else ("2" if wall else "1")
+	(struct[cz] as Array)[cx] = value if value in ["0", "1", "2", "3", "4", "5"] else ("2" if wall else "1")
 	return _map_store(path, doc_v)
 
 

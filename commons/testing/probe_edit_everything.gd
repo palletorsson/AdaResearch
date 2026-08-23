@@ -120,6 +120,28 @@ func _run() -> void:
 		for i4 in range(4):
 			inst.call("_rule_undo_pop")
 
+	# ── 2D TOP PAINT (2026-08-23, "plain 2d top paint cells"): the painter
+	# writes the MAP only — paint a wall over floor, read the map, undo it
+	inst.set("_doll_top", true)
+	inst.set("_paint2d", "2")
+	inst.call("_paint2d_apply", floor_c.x, floor_c.y + 4)
+	doc = JSON.parse_string(FileAccess.get_file_as_string(MAP1))
+	sv = str((((doc as Dictionary)["layers"] as Dictionary)["structure"][floor_c.y] as Array)[floor_c.x])
+	var p2_wall_ok := sv == "2"
+	inst.set("_paint2d", "0")
+	inst.call("_paint2d_apply", floor_c.x, floor_c.y + 4)
+	doc = JSON.parse_string(FileAccess.get_file_as_string(MAP1))
+	sv = str((((doc as Dictionary)["layers"] as Dictionary)["structure"][floor_c.y] as Array)[floor_c.x])
+	var p2_hole_ok := sv == "0"
+	inst.call("_paint2d_undo_pop")
+	inst.call("_paint2d_undo_pop")
+	doc = JSON.parse_string(FileAccess.get_file_as_string(MAP1))
+	sv = str((((doc as Dictionary)["layers"] as Dictionary)["structure"][floor_c.y] as Array)[floor_c.x])
+	say("paint2d", p2_wall_ok and p2_hole_ok and sv == "1",
+		"wall=%s hole=%s undo=%s" % [str(p2_wall_ok), str(p2_hole_ok), sv])
+	inst.set("_paint2d", "")
+	inst.set("_doll_top", false)
+
 	# ── BEYOND THE TILE (2026-08-23, "not all cells are open for change"):
 	# an authored hall edits ANY map cell — the crop is not a fence
 	var mdoc: Variant = JSON.parse_string(FileAccess.get_file_as_string(MAP1))
