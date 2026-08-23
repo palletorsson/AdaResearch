@@ -72,10 +72,10 @@ func _run() -> void:
 		var m := (ti as GeometryInstance3D).material_override as StandardMaterial3D
 		if m == null or m.albedo_color != inks["amber"]:
 			fails.append("trail material not re-tinted")
-		# dots, not a line: the trail is a MultiMesh dot pool
-		if not (ti is MultiMeshInstance3D) or (ti as MultiMeshInstance3D).multimesh == null \
-				or (ti as MultiMeshInstance3D).multimesh.instance_count <= 0:
-			fails.append("trail is not a dot pool")
+		# a LINE ("that is where we see the resolution of the line"): the
+		# trail is an ImmediateMesh line strip through the shaped samples
+		if not (ti is MeshInstance3D) or not ((ti as MeshInstance3D).mesh is ImmediateMesh):
+			fails.append("trail is not a line mesh")
 	else:
 		fails.append("no _trail_instance on the live node")
 
