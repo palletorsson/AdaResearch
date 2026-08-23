@@ -5023,8 +5023,12 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 				att = hp[1]
 			var parts := cellv.split(":")
 			var rot: float = float(parts[1]) if parts.size() > 1 and parts[1].is_valid_float() else 0.0
+			# the token's THIRD field is the y-offset — in the grid maps a
+			# frozen body floats there (laser_measure:0:1 hangs at 1 m, in
+			# reach of the hand). Dropped here until 2026-08-23.
+			var yoff: float = float(parts[2]) if parts.size() > 2 and str(parts[2]).is_valid_float() else 0.0
 			bodies.append({"token": parts[0], "gx": gx, "gz": gz, "rot": rot, "att": att,
-				"plinth": plinths.has(Vector2i(gx, gz))})
+				"yoff": yoff, "plinth": plinths.has(Vector2i(gx, gz))})
 			minx = mini(minx, gx)
 			maxx = maxi(maxx, gx)
 			minz = mini(minz, gz)
@@ -5098,6 +5102,8 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 				var cell := {"x": base_x + d.x, "y": base_z + d.y, "rank": 2, "top": 0.0}
 				if claimed_plinth:
 					cell["support_m"] = 1.0
+				if float(b["yoff"]) > 0.01:
+					cell["hover_m"] = float(b["yoff"])
 				if _stamp(seg, scene, String(b["token"]), cell, zbase, 1, {}, false, 0.0, float(b["rot"]), cfg):
 					placed += 1
 					if bool(b["plinth"]):
@@ -6708,8 +6714,13 @@ func _stamp_inner(seg: Node3D, scene_path: String, lookup: String, cell: Diction
 				lift = float(plan_d.get("artifact_y", 0.0))
 				_seg_plinths += 1
 				_deal_stats["plinths"] = int(_deal_stats.get("plinths", 0)) + 1
+	# hover_m: the map token's y-offset (name:rot:Y) — a frozen body FLOATS
+	# there, no plinth built (2026-08-23, Palle: "freeze the laser in the air
+	# at 1 m, so I can pick them up"). Distinct from support_m, which builds
+	# a pedestal; the hover is the grid maps' own semantics carried over.
 	node.position = Vector3(float(cell.get("x", 0)) + 0.5,
-		float(cell.get("top", 0.0)) + lift, float(cell.get("y", 0)) + 0.5)
+		float(cell.get("top", 0.0)) + lift + float(cell.get("hover_m", 0.0)),
+		float(cell.get("y", 0)) + 0.5)
 	# the hand's FINE offset (metres, 0.2 snap, from an override) — visual
 	# only: the seal and the walk map stay on the cell, because a body 0.4 m
 	# to the left still owns the same floor. Applied to the transform, never
