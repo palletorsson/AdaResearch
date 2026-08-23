@@ -51,7 +51,13 @@ func _run() -> void:
 		return _finish(original1)
 	say("boot", true)
 
-	# ── WALLS (map lane) ──────────────────────────────────────────────
+	# ── WALLS (map lane) — IN THE FIELD'S SHOES (2026-08-23): Palle edits
+	# in the DOLL, where _doll_cut shrinks every built wall to DOLL_CUT
+	# (2.4 of 4.5 m). The removal gates skipped cut walls and this probe
+	# stood on full-height ones — green three runs while the field failed.
+	# The cut is applied FIRST now, so every wall check runs on cut walls.
+	inst.set("_dollhouse", true)
+	inst.call("_doll_cut", seg0)
 	var tile: Array = seg0.get_meta("em_tile")
 	var floor_c := Vector2i(-1, -1)
 	var wall_c := Vector2i(-1, -1)

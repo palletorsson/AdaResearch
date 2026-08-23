@@ -9366,7 +9366,7 @@ func _input(event: InputEvent) -> void:
 		if kc == KEY_B:
 			var order := ["", "R", "D", "O", "2", "4", "0", "1"]
 			_doll_brush = order[(order.find(_doll_brush) + 1) % order.size()]
-			var names := {"": "OFF — the hand picks bodies again", "R": "WALL/PASSAGE (a ruling — Save+Build makes it real)", "D": "DOOR (click where the sliding door should stand)", "O": "ROOM (drag a rectangle — walls rise around it, a door faces you)", "2": "BLOCK (a 1 m stand)", "4": "WALL", "0": "HOLE (no floor)", "1": "FLOOR (clear the cell)"}
+			var names := {"": "OFF — the hand picks bodies again", "R": "WALL/PASSAGE — LIVE: LMB builds · rclick/SHIFT opens · ALT digs a HOLE", "D": "DOOR (click where the sliding door should stand)", "O": "ROOM (drag a rectangle — walls rise around it, a door faces you)", "2": "BLOCK (a 1 m stand)", "4": "WALL", "0": "HOLE (no floor)", "1": "FLOOR (clear the cell)"}
 			print("[em-doll] brush: %s" % names[_doll_brush])
 			_doll_palette_refresh()
 			return
@@ -11170,9 +11170,13 @@ func _doll_palette_pressed(b: Button) -> void:
 
 func _live_wall_add(segn: Node3D, wx: int, wz_local: float) -> void:
 	## A REAL wall, on the spot: the segment's own plaster + a collider.
+	## In the doll the VISUAL matches the knee-cut (a full-height box would
+	## tower over every cut wall around it); the collider is FULL height in
+	## both modes — one museum, and the next full build restores the look.
 	var col: Color = segn.get_meta("em_wall_col") if segn.has_meta("em_wall_col") else Color(0.85, 0.84, 0.8)
 	var mat: Material = segn.get_meta("em_wall_mat") if segn.has_meta("em_wall_mat") else null
-	_box(segn, Vector3(wx + 0.5, WALL_H / 2.0, wz_local), Vector3(1, WALL_H, 1), col, mat)
+	var wh: float = minf(WALL_H, DOLL_CUT) if _dollhouse else WALL_H
+	_box(segn, Vector3(wx + 0.5, wh / 2.0, wz_local), Vector3(1, wh, 1), col, mat)
 	var solid := segn.get_node_or_null("Collision")
 	if solid is StaticBody3D:
 		_add_col(solid as StaticBody3D, Vector3(wx + 0.5, WALL_H / 2.0, wz_local), Vector3(1, WALL_H, 1))
@@ -11207,15 +11211,23 @@ func _live_wall_remove(segn: Node3D, wx: int, wz_local: float) -> bool:
 		if not (m.mesh is BoxMesh):
 			continue
 		var bs: Vector3 = (m.mesh as BoxMesh).size
-		if bs.y < WALL_H - 0.8:
-			continue
+		# EFFECTIVE size: the doll cut shrinks wall nodes by scale.y — a gate
+		# on the raw mesh size wears the wrong shoes in doll mode
+		var eff: Vector3 = bs * m.scale
 		var wop: Vector3 = segn.to_local(m.global_position)
-		if cx < wop.x - bs.x / 2.0 - 0.02 or cx > wop.x + bs.x / 2.0 + 0.02:
+		var wtop: float = wop.y + eff.y / 2.0
+		var wbot: float = wop.y - eff.y / 2.0
+		# a WALL, cut or not: stands on the floor, rises past chest height.
+		# The doll cut leaves 2.4 of the 4.5; floors (0.2), podiums (0.6) and
+		# plinth boxes (top 0.8) all stay below the 0.9 line.
+		if eff.y < 0.5 or wtop < 0.9 or wbot < -0.35 or wbot > 0.45:
 			continue
-		if wz_local < wop.z - bs.z / 2.0 - 0.02 or wz_local > wop.z + bs.z / 2.0 + 0.02:
+		if cx < wop.x - eff.x / 2.0 - 0.02 or cx > wop.x + eff.x / 2.0 + 0.02:
 			continue
-		if bs.x > 1.5 or bs.z > 1.5:
-			for wpart_v in _box_minus_cell(wop, bs, cx, wz_local):
+		if wz_local < wop.z - eff.z / 2.0 - 0.02 or wz_local > wop.z + eff.z / 2.0 + 0.02:
+			continue
+		if eff.x > 1.5 or eff.z > 1.5:
+			for wpart_v in _box_minus_cell(wop, eff, cx, wz_local):
 				var wpart: Dictionary = wpart_v
 				_box(segn, wpart["p"], wpart["s"], Color(0.85, 0.84, 0.8), m.material_override)
 		m.queue_free()
@@ -11236,7 +11248,15 @@ func _live_wall_remove(segn: Node3D, wx: int, wz_local: float) -> bool:
 				var sx := t.basis.x.length()
 				var sy := t.basis.y.length()
 				var sz := t.basis.z.length()
-				if sy < WALL_H - 0.8 or absf(o.y - WALL_H / 2.0) > 1.2:
+				# CUT-AWARE (2026-08-23, Palle: "still not possible to remove
+				# existing walls"): the doll cut shrinks ArchBatch wall
+				# instances to DOLL_CUT (2.4 m of the 4.5), and the old
+				# `sy < WALL_H - 0.8` gate skipped every one — only uncut
+				# session walls ever matched. A wall, cut or not: stands on
+				# the floor, rises past 0.9 (floors/podiums/plinths do not).
+				var mtop: float = o.y + sy / 2.0
+				var mbot: float = o.y - sy / 2.0
+				if sy < 0.5 or mtop < 0.9 or mbot < -0.35 or mbot > 0.45:
 					continue
 				if cx < o.x - sx / 2.0 - 0.02 or cx > o.x + sx / 2.0 + 0.02:
 					continue
