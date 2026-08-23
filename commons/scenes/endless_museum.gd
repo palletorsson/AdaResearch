@@ -667,6 +667,7 @@ var _doll_drag: bool = false
 var _doll_drag_start: Vector2i = Vector2i.ZERO   # floor cell where the grab began
 var _doll_node_start: Vector3 = Vector3.ZERO     # the node's position at grab
 var _doll_plinth_start: Vector3 = Vector3.ZERO   # its plinth's position at grab (the bundle)
+var _m_corner: Material = null                   # the corner sides' flat off-white (one instance)
 var _doll_ring: MeshInstance3D = null
 var _doll_pan: bool = false        # MMB held — the hand drags the ground itself
 var _doll_orbit: bool = false      # RMB held over nothing — the house turns smoothly
@@ -3277,6 +3278,18 @@ func _build_segment() -> void:
 	seg.set_meta("em_wall_col", wall_col)
 	if m_wall == null:
 		m_wall = _sm("wall")
+	# THE CORNER SIDES (2026-08-23, Palle: "change the corner sides shader to
+	# a lighter off white non repeat one"): the vestibule's side walls, the
+	# closing strips and the halls' outer skins wear a FLAT off-white — no
+	# noise texture at all, so nothing can tile or repeat — a shade lighter
+	# than the plaster and the same in both gate modes.
+	if _m_corner == null:
+		_m_corner = StandardMaterial3D.new()
+		(_m_corner as StandardMaterial3D).albedo_color = Color(0.90, 0.895, 0.875)
+		(_m_corner as StandardMaterial3D).roughness = 0.86
+		(_m_corner as StandardMaterial3D).metallic = 0.0
+	var corner_col := Color(0.90, 0.895, 0.875)
+	var m_corner: Material = _m_corner
 	# door overpanels are stamped by em_detail in the "wall" role, so the role it
 	# probes has to be the same plaster the segment is actually built from or the
 	# panel over every door is a different colour from the wall around it
@@ -3319,7 +3332,7 @@ func _build_segment() -> void:
 				continue                   # the well's corner: the wall steps out a metre (built by _dress_lobby)
 			if String(vest_rules.get(Vector2i(int(sx), zr), "")) == "1":
 				continue                   # ruled OPEN — a side doorway in the enter room
-			_wall_at(seg, solid, wcells, int(sx), zr, wall_col, m_wall, wr)
+			_wall_at(seg, solid, wcells, int(sx), zr, corner_col, m_corner, wr)
 	# ruled WALLS inside the enter room (partitions, a narrowed mouth…)
 	for vk_v in vest_rules.keys():
 		var vk: Vector2i = vk_v
@@ -3345,11 +3358,11 @@ func _build_segment() -> void:
 			# the pane's own collider so a hand does not pass through the glass
 			_add_col(solid, Vector3(x + 0.5, (sill_h + head_y) / 2.0, 0.5), Vector3(1, head_y - sill_h, 0.1))
 			continue
-		_wall_at(seg, solid, wcells, x, 0, wall_col, m_wall, wr)
+		_wall_at(seg, solid, wcells, x, 0, corner_col, m_corner, wr)
 	if lobby_on:
 		_dress_lobby(seg, solid, w, zbase, wall_col, m_wall, win_x0, win_x1)
 	for x in range(w - 1, LOBBY_W):         # seal beyond this tile's width
-		_wall_at(seg, solid, wcells, x, VESTIBULE_H - 1, wall_col, m_wall, wr)
+		_wall_at(seg, solid, wcells, x, VESTIBULE_H - 1, corner_col, m_corner, wr)
 	# outer skin: an implicit wall just beyond both side columns of the tile, so
 	# free-plan templates with a walkable rim (Kanazawa, Neue Nationalgalerie)
 	# cannot leak the walker off the edge of the world
@@ -3361,7 +3374,7 @@ func _build_segment() -> void:
 		for sx2 in [-1, w]:
 			if sx2 == w and doorways.has(y_skin):
 				continue                    # the doorway: no skin; the room's walls take over
-			_wall_at(seg, solid, wcells, int(sx2), y_skin + VESTIBULE_H, wall_col, m_wall, wr)
+			_wall_at(seg, solid, wcells, int(sx2), y_skin + VESTIBULE_H, corner_col, m_corner, wr)
 	# collect slots first so the artifact budget prefers hero > podium > floor
 	var slots: Array = []
 	for y in range(tile.size()):
