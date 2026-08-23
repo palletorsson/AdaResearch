@@ -10970,8 +10970,23 @@ func _rule_cell(segn: Node3D, zbase: int, wx: int, wz: int, erase: bool, force: 
 	if cz_t < -VESTIBULE_H:
 		return ""
 	var in_hall: bool = cz_t >= 0
+	var authored_map := String(segn.get_meta("em_map")) if segn.has_meta("em_map") else ""
 	if in_hall and (cz_t >= tile.size() or wx < 0 or wx >= (tile[cz_t] as Array).size()):
-		return ""
+		# AUTHORED halls: the tile is CROPPED to content, but the MAP is the
+		# truth and every map cell is editable (2026-08-23, Palle: "for some
+		# reason not all cells are open for change... anything I edit inside
+		# the endless museum should comply"). Pad the tile out to the cell;
+		# the map write below is the real gate — it refuses only past the
+		# map's own edge. Non-authored halls keep the tile bound (their
+		# architecture has no map behind it).
+		if authored_map == "" or wx < 0 or wx >= 64 or cz_t >= 64:
+			return ""
+		while tile.size() <= cz_t:
+			tile.append([])
+		for trow_v in tile:
+			var trow: Array = trow_v
+			while trow.size() <= wx:
+				trow.append("0")
 	var cur := ""
 	if in_hall:
 		cur = String((tile[cz_t] as Array)[wx])
@@ -11028,6 +11043,7 @@ func _rule_cell(segn: Node3D, zbase: int, wx: int, wz: int, erase: bool, force: 
 	var place := "hall" if in_hall else "enter room"
 	if nv == "4":
 		_live_wall_add(segn, wx, wz_local)
+		_live_wall_recombine(segn)
 		_walk_cells.erase(Vector2i(wx, wz))
 		return "%s [%d,%d]: WALL built — save keeps it" % [place, wx, cz_t]
 	var removed := _live_wall_remove(segn, wx, wz_local)
@@ -11297,6 +11313,66 @@ func _live_wall_remove(segn: Node3D, wx: int, wz_local: float) -> bool:
 					_add_col(solid as StaticBody3D, part2["p"], part2["s"])
 				cs.queue_free()
 	return hit
+
+
+func _wall_box_kin(a: Dictionary, b: Dictionary) -> bool:
+	return a["mat"] == b["mat"] and absf(float(a["h"]) - float(b["h"])) < 0.05 \
+		and absf(float(a["y"]) - float(b["y"])) < 0.05
+
+
+func _live_wall_recombine(segn: Node3D) -> void:
+	## Straight runs of per-cell wall boxes MERGE into one box, live
+	## (2026-08-23, Palle: "the walls should be recombined in real time").
+	## Only the editor's per-cell boxes take part — the ArchBatch runs are
+	## already merged, and a session box beside one shares its material so
+	## the seam is invisible. A recombined run splits again on removal via
+	## the same _box_minus_cell surgery as the built runs.
+	var cells: Dictionary = {}
+	for c in [] + segn.get_children():
+		if not (c is MeshInstance3D) or (c as Node).is_queued_for_deletion():
+			continue
+		var m := c as MeshInstance3D
+		if not (m.mesh is BoxMesh):
+			continue
+		var eff: Vector3 = (m.mesh as BoxMesh).size * m.scale
+		if eff.x > 1.2 or eff.z > 1.2 or eff.y < 0.5:
+			continue
+		var top: float = m.position.y + eff.y / 2.0
+		var bot: float = m.position.y - eff.y / 2.0
+		if top < 0.9 or bot < -0.35 or bot > 0.45:
+			continue
+		cells[Vector2i(int(floor(m.position.x)), int(floor(m.position.z)))] = {
+			"n": m, "mat": m.material_override, "h": eff.y, "y": m.position.y}
+	if cells.size() < 2:
+		return
+	var used: Dictionary = {}
+	for cell_v in cells.keys():
+		var cell: Vector2i = cell_v
+		if used.has(cell):
+			continue
+		var d0: Dictionary = cells[cell]
+		for ax_v in [Vector2i(1, 0), Vector2i(0, 1)]:
+			var ax: Vector2i = ax_v
+			var behind: Vector2i = cell - ax
+			if cells.has(behind) and not used.has(behind) and _wall_box_kin(cells[behind], d0):
+				continue   # not the head of this run
+			var run: Array = [cell]
+			var nxt: Vector2i = cell + ax
+			while cells.has(nxt) and not used.has(nxt) and _wall_box_kin(cells[nxt], d0):
+				run.append(nxt)
+				nxt += ax
+			if run.size() < 2:
+				continue
+			for rc_v in run:
+				used[rc_v] = true
+				(cells[rc_v]["n"] as MeshInstance3D).queue_free()
+			var a: Vector2i = run[0]
+			var b: Vector2i = run[run.size() - 1]
+			_box(segn,
+				Vector3((a.x + b.x) * 0.5 + 0.5, float(d0["y"]), (a.y + b.y) * 0.5 + 0.5),
+				Vector3(absf(float(b.x - a.x)) + 1.0, float(d0["h"]), absf(float(b.y - a.y)) + 1.0),
+				Color(0.85, 0.84, 0.8), d0["mat"])
+			break
 
 
 func _live_floor_remove(segn: Node3D, wx: int, wz_local: float) -> bool:

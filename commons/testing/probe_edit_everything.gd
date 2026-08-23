@@ -96,6 +96,44 @@ func _run() -> void:
 	sv = str((((doc as Dictionary)["layers"] as Dictionary)["structure"][floor_c.y] as Array)[floor_c.x])
 	say("hole_fill", m4.contains("LAID") and sv == "1", "msg=%s cell=%s" % [m4, sv])
 
+	# ── RECOMBINE (2026-08-23, "the walls should be recombined in real
+	# time"): three painted cells merge into ONE run box, and the merged run
+	# still OPENS live at its middle cell — the split surgery on our own work
+	var run_x := -1
+	var run_z := -1
+	for tz2 in range(1, tile.size() - 1):
+		for tx2 in range(1, (tile[tz2] as Array).size() - 3):
+			if String((tile[tz2] as Array)[tx2]) == "1" and String((tile[tz2] as Array)[tx2 + 1]) == "1" \
+					and String((tile[tz2] as Array)[tx2 + 2]) == "1":
+				run_x = tx2
+				run_z = tz2
+				break
+		if run_x >= 0:
+			break
+	if run_x < 0:
+		say("wall_recombine", false, "no 3-cell floor run to test on")
+	else:
+		for i3 in range(3):
+			inst.call("_rule_cell", seg0, 0, run_x + i3, run_z + 4, false, "4")
+		var mo: String = inst.call("_rule_cell", seg0, 0, run_x + 1, run_z + 4, false, "1")
+		say("wall_recombine", mo.contains("OPENED"), "mid-open msg=%s" % mo)
+		for i4 in range(4):
+			inst.call("_rule_undo_pop")
+
+	# ── BEYOND THE TILE (2026-08-23, "not all cells are open for change"):
+	# an authored hall edits ANY map cell — the crop is not a fence
+	var mdoc: Variant = JSON.parse_string(FileAccess.get_file_as_string(MAP1))
+	var mrows: int = ((((mdoc as Dictionary)["layers"] as Dictionary)["structure"]) as Array).size()
+	if tile.size() < mrows:
+		var bz: int = tile.size()
+		var mb: String = inst.call("_rule_cell", seg0, 0, 2, bz + 4, false, "4")
+		mdoc = JSON.parse_string(FileAccess.get_file_as_string(MAP1))
+		var bv := str(((((mdoc as Dictionary)["layers"] as Dictionary)["structure"][bz]) as Array)[2])
+		say("wall_expand", mb != "" and bv == "2", "msg=%s cell=%s" % [mb, bv])
+		inst.call("_rule_undo_pop")
+	else:
+		say("wall_expand", true, "map fully cropped — nothing beyond the tile (vacuous)")
+
 	# ── ARTIFACTS (map lane): move, rotate, delete ───────────────────
 	var recs: Array = inst.get("_edit_records")
 	var art_i := -1
