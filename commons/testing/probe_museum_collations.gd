@@ -128,6 +128,21 @@ func _run() -> void:
 			if lift <= 0.0 or lift > 0.02:
 				fails.append("museum board ink not proud of the face: %.4f" % lift)
 
+	# POINT ONE'S CONVERTED DRESS (2026-08-23: the first map's h2 grid-cube
+	# plinths became #plinth:1.0 token dress) — origin and
+	# floating_sphere_field must carry the bundle bond and stand lifted
+	var dressed_found: Dictionary = {}
+	for rv in (inst.get("_edit_records") as Array):
+		var rr: Dictionary = rv
+		if String(rr.get("token", "")) in ["origin", "floating_sphere_field"] \
+				and rr.get("plinth_node") != null and is_instance_valid(rr.get("plinth_node")):
+			var rn2: Node3D = rr.get("node")
+			if rn2 != null and is_instance_valid(rn2) and rn2.position.y > 0.6:
+				dressed_found[String(rr.get("token", ""))] = true
+	for want_tok in ["origin", "floating_sphere_field"]:
+		if not dressed_found.has(want_tok):
+			fails.append("point one: %s lost its converted plinth dress (bond or lift missing)" % want_tok)
+
 	# DIAGNOSIS DUMP — what actually stands (the dead-reading rule: count the
 	# thing being measured before believing any null)
 	var dump: Array = []
