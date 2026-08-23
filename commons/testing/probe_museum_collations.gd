@@ -128,22 +128,44 @@ func _run() -> void:
 			if lift <= 0.0 or lift > 0.02:
 				fails.append("museum board ink not proud of the face: %.4f" % lift)
 
-	# THE CONVERTED DRESS (2026-08-23: maps one + two — true h2 grid-cube
-	# plinths became #plinth:1.0 token dress; the spawn-ridge and wall cells
-	# that only LOOKED like plinths stayed architecture, the pathfinder's 29
-	# unreachable warnings taught that). Each converted token must carry the
-	# bundle bond and stand lifted.
-	var dressed_found: Dictionary = {}
+	# THE DRESS MECHANISM, self-adapting (2026-08-23, second lesson: a probe
+	# must not pin tokens against a LIVE curator — floating_sphere_field's
+	# plinth was removed by the hand mid-day and the old fixed list called
+	# that a regression). Read the maps NOW: every token wearing #plinth:H
+	# must stand in the museum with the bundle bond and the planner's height
+	# matching the map's word.
+	var want_dress: Dictionary = {}   # token -> H (first instance per token)
+	for mname in ["Point_One", "Point_Lines", "Point_Trace"]:
+		var mdoc2: Variant = JSON.parse_string(FileAccess.get_file_as_string(
+			"res://commons/maps/%s/map_data.json" % mname))
+		if not (mdoc2 is Dictionary):
+			continue
+		for row_v in (((mdoc2 as Dictionary)["layers"] as Dictionary)["interactables"] as Array):
+			for cell_v in (row_v as Array):
+				var t2 := str(cell_v).strip_edges()
+				if t2 == "" or t2.find("#plinth:") < 0:
+					continue
+				var nm2 := t2.split("#")[0].split(":")[0]
+				for cs in t2.split("#"):
+					if str(cs).begins_with("plinth:"):
+						var hv := str(cs).substr(7).split(",")[0]
+						if hv.is_valid_float() and float(hv) > 0.05 and not want_dress.has(nm2):
+							want_dress[nm2] = float(hv)
+	var have_dress: Dictionary = {}
 	for rv in (inst.get("_edit_records") as Array):
 		var rr: Dictionary = rv
-		if String(rr.get("token", "")) in ["origin", "floating_sphere_field", "modulor_man_demo"] \
-				and rr.get("plinth_node") != null and is_instance_valid(rr.get("plinth_node")):
-			var rn2: Node3D = rr.get("node")
-			if rn2 != null and is_instance_valid(rn2) and rn2.position.y > 0.4:
-				dressed_found[String(rr.get("token", ""))] = true
-	for want_tok in ["origin", "floating_sphere_field", "modulor_man_demo"]:
-		if not dressed_found.has(want_tok):
-			fails.append("converted dress: %s lost its plinth (bond or lift missing)" % want_tok)
+		var tk := String(rr.get("token", ""))
+		if not want_dress.has(tk) or have_dress.has(tk):
+			continue
+		var bond: bool = rr.get("plinth_node") != null and is_instance_valid(rr.get("plinth_node"))
+		if bond and absf(float(rr.get("plinth_h", 0.0)) - float(want_dress[tk])) < 0.02:
+			have_dress[tk] = true
+	for want_tok in want_dress.keys():
+		if not have_dress.has(want_tok):
+			fails.append("dress mechanism: %s wears #plinth:%.2f in the map but no museum record carries the bond at that height" % [
+				str(want_tok), float(want_dress[want_tok])])
+	if want_dress.is_empty():
+		fails.append("no dressed tokens in any point map — the mechanism test is vacuous (did the dress format vanish?)")
 
 	# DIAGNOSIS DUMP — what actually stands (the dead-reading rule: count the
 	# thing being measured before believing any null)

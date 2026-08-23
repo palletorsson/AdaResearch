@@ -143,6 +143,9 @@ const EYE := 1.65
 # the cornice, the ceiling and the lighting rig can never disagree again.
 # 3.0 -> 4.5 on Palle's first walk: "higher for a museum."
 const _DetailLib := preload("res://commons/scenes/em/em_detail.gd")
+## A body on a pedestal FLOATS a little above the deck (2026-08-23, Palle:
+## "at 0 y with its base but also floating a bit above the plinth").
+const DRESS_FLOAT := 0.03
 const WALL_H: float = _DetailLib.WALL_H
 const WALK_SPEED := 4.0
 # JUMP + DOUBLE JUMP (2026-08-18) and GRAVITY, ALWAYS (2026-08-20).
@@ -6879,13 +6882,30 @@ func _stamp_inner(seg: Node3D, scene_path: String, lookup: String, cell: Diction
 	# relationship to the deck it has always had: correcting those is a different
 	# change, to every museum ever captured, and it is not this pass's claim.
 	if plinth_node != null:
-		var abox: AABB = _extent_of(node)
+		# the seat's TARGET (2026-08-23, Palle: "the base at 0 y — but also
+		# floating a bit above the plinth"): deck + DRESS_FLOAT + the token's
+		# own y-offset. The old target was the bare deck, which meant the
+		# seat ATE any #offset y the hand had set — fontana's lift vanished
+		# on every rebuild.
+		var doffy: float = 0.0
+		if plan_config.has("offset"):
+			var dop2 := str(plan_config["offset"]).split(",")
+			if dop2.size() >= 3 and str(dop2[1]).strip_edges().is_valid_float():
+				doffy = float(str(dop2[1]))
+		var deck: float = float(cell.get("top", 0.0)) + lift
+		var seat_y: float = deck + DRESS_FLOAT + doffy
+		var abox: AABB = _seat_extent(node)
 		if abox.size.y > 0.0:
-			var deck: float = float(cell.get("top", 0.0)) + lift
-			var gap: float = abox.position.y - deck
+			var gap: float = abox.position.y - seat_y
 			if absf(gap) > 0.005:
 				node.position.y -= gap
 			_seat_rows.append({"token": lookup, "gap": gap})
+		# procedural bodies keep building for a few frames past _ready — the
+		# immediate measure photographs them HALF-BUILT and seats the wrong
+		# floor (fontana stood IN its plinth: its slashed canvas builds late).
+		# One late re-seat after the settle measures the whole body.
+		if is_inside_tree():
+			get_tree().create_timer(0.45).timeout.connect(_seat_late.bind(node, seat_y, lookup))
 	# where the deal actually put something, in world space — recorded AFTER the
 	# seal check, so the list holds only artifacts that survived into the museum.
 	# A proof shot is composed against this rather than aimed at a hardcoded z.
@@ -11266,6 +11286,94 @@ func _dress_toggle() -> void:
 	ctl.queue_redraw()
 
 
+func _seat_extent(root: Node3D) -> AABB:
+	## The SEAT's own measure: like _extent_of, but TOP-LEVEL subtrees are
+	## excluded — a draw_dot's world-frozen trail or a sphere field's
+	## floaters do not ride the node, so a seat that reads them has a floor
+	## that never moves with its own correction and re-seats FOREVER (the
+	## probes caught the double-lift on the first run).
+	var acc: AABB = AABB()
+	var got: bool = false
+	var stack: Array = [root]
+	while not stack.is_empty():
+		var n: Node = stack.pop_back()
+		if n != root and n is Node3D and (n as Node3D).top_level:
+			continue
+		for c in n.get_children():
+			stack.append(c)
+		if n is MeshInstance3D:
+			var mi: MeshInstance3D = n as MeshInstance3D
+			if mi.mesh != null:
+				var b: AABB = mi.global_transform * mi.get_aabb()
+				if b.size.length_squared() < 0.0001:
+					continue
+				if got:
+					acc = acc.merge(b)
+				else:
+					acc = b
+					got = true
+	return acc
+
+
+func _seat_late(node: Node3D, seat_y: float, lookup: String) -> void:
+	## The settle re-seat: procedural bodies finish building a few frames
+	## after _ready, so the stamp's immediate measure can seat a half-built
+	## box (fontana stood IN its plinth). Measured whole, seated once more.
+	if node == null or not is_instance_valid(node) or not node.is_inside_tree():
+		return
+	var abox: AABB = _seat_extent(node)
+	if abox.size.y <= 0.0:
+		return
+	var gap: float = abox.position.y - seat_y
+	# SMALL corrections only: a floor still far off the deck after the sync
+	# seat is a body whose geometry HOVERS by design (floating_sphere_field's
+	# spheres orbit high) — the settle re-seat fixes late-built lag, it never
+	# drags a field down by its floaters (the probe caught exactly that).
+	if absf(gap) > 0.01 and absf(gap) <= 0.6:
+		node.position.y -= gap
+		print("[em-seat] %s re-seated %+.2f m after the settle (late-built geometry)" % [lookup, -gap])
+
+
+func _dress_replinth() -> void:
+	## THE REAL LOOK, LIVE (2026-08-23, Palle: "make this tool in godot so we
+	## can see how it looks"): a plinth change in the G panel rebuilds the
+	## actual pedestal on the spot — real plaster, real light — and re-seats
+	## the body on its new deck (base at deck + DRESS_FLOAT + offset.y). The
+	## map already has the truth; this makes the eye agree without a rebuild.
+	if _edit_sel < 0 or _edit_sel >= _edit_records.size():
+		return
+	var r: Dictionary = _edit_records[_edit_sel]
+	var node: Node3D = _node_or_null(r.get("node"))
+	var seg: Node3D = _node_or_null(r.get("seg"))
+	if node == null or seg == null:
+		return
+	var ground := Vector3(node.position.x, 0.0, node.position.z)
+	var old_pl: Node3D = _node_or_null(r.get("plinth_node"))
+	if old_pl != null and is_instance_valid(old_pl):
+		ground = old_pl.position
+		old_pl.queue_free()
+	r["plinth_node"] = null
+	if _dress_plinth >= 0.05:
+		var kind := "station_micropod" if _dress_plinth_kind != "" else "station_plinth"
+		var ps: PackedScene = load("res://commons/artifacts/station/%s.tscn" % kind) as PackedScene
+		if ps != null:
+			var pn: Node3D = ps.instantiate() as Node3D
+			if pn != null:
+				var pcfg := {"top_height": _dress_plinth,
+					"cap_meters": 0.9 if kind == "station_plinth" else 0.6,
+					"width_cells": 1, "depth_cells": 1, "top_style": "flat", "glow_light": false}
+				for k in pcfg:
+					pn.set_meta("config_%s" % str(k), pcfg[k])
+				if pn.has_method("apply_grid_config"):
+					pn.call("apply_grid_config", pcfg)
+				pn.position = ground
+				seg.add_child(pn)
+				r["plinth_node"] = pn
+	var seat_y: float = ground.y + _dress_plinth + DRESS_FLOAT + _dress_off.y
+	var tok := String(r.get("token", ""))
+	get_tree().create_timer(0.12).timeout.connect(_seat_late.bind(node, seat_y, tok))
+
+
 func _dress_close() -> void:
 	_dress_on = false
 	if _dress_canvas != null and is_instance_valid(_dress_canvas):
@@ -11287,17 +11395,17 @@ func _dress_key(kc: int) -> void:
 		KEY_Q:
 			_dress_plinth = snappedf(_dress_plinth + 0.1, 0.05)
 			_dress_write("plinth", "" if _dress_plinth < 0.05 else "%.2f%s" % [_dress_plinth, _dress_plinth_kind])
-			_dress_rebuild = true
+			_dress_replinth()
 		KEY_A:
 			_dress_plinth = maxf(0.0, snappedf(_dress_plinth - 0.1, 0.05))
 			_dress_write("plinth", "" if _dress_plinth < 0.05 else "%.2f%s" % [_dress_plinth, _dress_plinth_kind])
-			_dress_rebuild = true
+			_dress_replinth()
 		KEY_M:
 			# M swaps the pedestal KIND: full plinth foot <-> micropod
 			_dress_plinth_kind = "" if _dress_plinth_kind != "" else ",micropod"
 			if _dress_plinth >= 0.05:
 				_dress_write("plinth", "%.2f%s" % [_dress_plinth, _dress_plinth_kind])
-				_dress_rebuild = true
+				_dress_replinth()
 		KEY_W:
 			_dress_scale = snappedf(_dress_scale + 0.05, 0.01)
 			_dress_write("scale", "" if absf(_dress_scale - 1.0) < 0.02 else "%.2f" % _dress_scale)
