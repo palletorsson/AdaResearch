@@ -15,6 +15,9 @@ extends Node3D
 @export var trail_color: Color = Color(1.0, 0.4, 0.9, 1.0)
 @export var trail_max_points: int = 1024
 @export var min_segment_distance: float = 0.01
+## Radius of one drawn dot. When `resolution` is coarse the dots grow to the
+## grid pitch instead (maxf of the two), so the drawing blocks up honestly.
+@export var dot_size: float = 0.007
 @export var record_only_when_grabbed: bool = true
 @export var auto_clear_on_drop: bool = false
 @export var reference_frame_position: Vector3 = Vector3(0, 0, 0.2)
@@ -87,8 +90,8 @@ const GRAINS: Dictionary = {
 
 var _grab_point: Node3D
 var _draw_sphere: Node3D
-var _trail_mesh: ImmediateMesh
-var _trail_instance: MeshInstance3D
+var _trail_dot_mesh: SphereMesh
+var _trail_instance: MultiMeshInstance3D
 var _trail_points: Array[Vector3] = []
 var _last_global_position: Vector3 = Vector3.ZERO
 var _reference_frame: MeshInstance3D
@@ -96,19 +99,36 @@ var _reference_frame: MeshInstance3D
 
 
 func _setup_trail() -> void:
-	_trail_mesh = ImmediateMesh.new()
-	_trail_instance = MeshInstance3D.new()
+	# DOTS, not a line (2026-08-23, Palle: "the draw dot draws a line not
+	# dots") — the artifact's own truth statement says a curve is only ever a
+	# dense set of point samples, and now the live trail renders that way:
+	# one small sphere per sample on a MultiMesh (pool = trail_max_points,
+	# visible_instance_count = samples — the laser ruler's trick).
+	_trail_instance = MultiMeshInstance3D.new()
 	_trail_instance.name = "DrawTrail"
-	_trail_instance.mesh = _trail_mesh
+	var mm := MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.use_colors = true
+	_trail_dot_mesh = SphereMesh.new()
+	_trail_dot_mesh.radius = dot_size
+	_trail_dot_mesh.height = dot_size * 2.0
+	_trail_dot_mesh.radial_segments = 6
+	_trail_dot_mesh.rings = 3
+	mm.mesh = _trail_dot_mesh
+	mm.instance_count = trail_max_points
+	mm.visible_instance_count = 0
+	_trail_instance.multimesh = mm
 
 	var material := StandardMaterial3D.new()
 	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	material.vertex_color_use_as_albedo = true
 	material.albedo_color = trail_color
+	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	material.emission_enabled = true
 	material.emission = trail_color
 	material.emission_energy_multiplier = 1.25
 	_trail_instance.material_override = material
-	
+
 	# Important: Trail should be in global space, not moving with the hand
 	_trail_instance.set_as_top_level(true)
 
@@ -496,31 +516,32 @@ func _cleanup_old_points() -> void:
 		_trail_points.pop_front()
 
 func _rebuild_trail() -> void:
-	_trail_mesh.clear_surfaces()
-	if _trail_points.size() < 2:
+	# One dot per sample. On a coarse resolution the dots grow to the grid
+	# pitch, so the line literally becomes its larger pattern — the meaning of
+	# understanding the resolution of the trace.
+	if _trail_instance == null or _trail_instance.multimesh == null:
 		return
-
-	_trail_mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
-	
-	if fade_trail and _trail_times.size() == _trail_points.size():
-		for i in range(_trail_points.size()):
-			var age = _time_elapsed - _trail_times[i]
-			var alpha = 1.0 - clamp(age / fade_duration, 0.0, 1.0)
-			var color = trail_color
-			color.a = alpha
-			_trail_mesh.surface_set_color(color)
-			_trail_mesh.surface_add_vertex(_trail_points[i])
-	else:
-		for point in _trail_points:
-			_trail_mesh.surface_add_vertex(point)
-	
-	_trail_mesh.surface_end()
+	var mm: MultiMesh = _trail_instance.multimesh
+	var n: int = mini(_trail_points.size(), mm.instance_count)
+	var r: float = maxf(dot_size, _res_step() * 0.45)
+	if _trail_dot_mesh and not is_equal_approx(_trail_dot_mesh.radius, r):
+		_trail_dot_mesh.radius = r
+		_trail_dot_mesh.height = r * 2.0
+	var fading: bool = fade_trail and _trail_times.size() == _trail_points.size()
+	for i in range(n):
+		mm.set_instance_transform(i, Transform3D(Basis(), _trail_points[i]))
+		var color: Color = trail_color
+		if fading:
+			var age: float = _time_elapsed - _trail_times[i]
+			color.a = 1.0 - clampf(age / fade_duration, 0.0, 1.0)
+		mm.set_instance_color(i, color)
+	mm.visible_instance_count = n
 
 
 func clear_trail() -> void:
 	_trail_points.clear()
-	if _trail_mesh:
-		_trail_mesh.clear_surfaces()
+	if _trail_instance and _trail_instance.multimesh:
+		_trail_instance.multimesh.visible_instance_count = 0
 	if is_instance_valid(_draw_sphere):
 		_last_global_position = _draw_sphere.global_position
 

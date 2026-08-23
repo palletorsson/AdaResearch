@@ -69,9 +69,13 @@ func _run() -> void:
 		fails.append("runtime ink refused: %s" % str(a.get("trail_color")))
 	var ti: Node = a.get("_trail_instance")
 	if ti != null:
-		var m := (ti as MeshInstance3D).material_override as StandardMaterial3D
+		var m := (ti as GeometryInstance3D).material_override as StandardMaterial3D
 		if m == null or m.albedo_color != inks["amber"]:
 			fails.append("trail material not re-tinted")
+		# dots, not a line: the trail is a MultiMesh dot pool
+		if not (ti is MultiMeshInstance3D) or (ti as MultiMeshInstance3D).multimesh == null \
+				or (ti as MultiMeshInstance3D).multimesh.instance_count <= 0:
+			fails.append("trail is not a dot pool")
 	else:
 		fails.append("no _trail_instance on the live node")
 
