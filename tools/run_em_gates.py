@@ -82,6 +82,14 @@ GATES: dict[str, tuple[str, str, str, int]] = {
     # which is a claim about the detector, not about any museum: four synthetic
     # grids, no Godot, under a second.
     "severance_neg": ("py", "tools/test_walk_severance_shell.py", r"WALK SEVERANCE SHELL: (PASS|FAIL)", 60),
+    # THE CLAMP THAT SAID NOTHING (2026-08-22). `_occupied_cells` clamps twice —
+    # meshes to radius 2, colliders to radius 6 — and only the mesh half recorded
+    # its overflow. The collider half is the one that can strand a walker, so the
+    # `seal_overflow: 0` printed beside three failed gate F runs was a fact about
+    # what the file counted. Four cases bite, four must stay silent, and five more
+    # rule on an extent that reaches back to the world origin. Arithmetic on two
+    # boxes: no museum, no segment, 7 s.
+    "seal_clamp":    ("gd", "res://commons/testing/test_em_seal_clamp.gd", r"EM SEAL CLAMP: (PASS|FAIL)", 120),
     "bake_fresh":    ("py", "tools/em_bake.py --check", r"EM BAKE: .*(fresh|STALE|MISSING)", 30),
     "reading":       ("py", "tools/em_reading.py primitives/point", r"READS|out of order", 60),
     "shipped":       ("gd", "res://commons/testing/test_em_shipped.gd", r"EM SHIPPED: (PASS|FAIL)", 300),

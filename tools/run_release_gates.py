@@ -121,6 +121,12 @@ def build_report(
         rc_map, out_map = run_cmd(
             [sys.executable, "scripts/validate_map.py", "--all", "--json"]
         )
+        # Gate B checks registry -> scene. This is the mirror direction,
+        # map -> registry, which nothing checked until 2026-08-23. See
+        # gate G below for why the pipeline scorer is not a substitute.
+        rc_tok, out_tok = run_cmd(
+            [sys.executable, "tools/check_map_tokens.py", "--json"]
+        )
 
         # Force UTF-8 console encoding for audit_lab_chain (contains Unicode separators).
         lab_env = os.environ.copy()
@@ -304,6 +310,47 @@ def build_report(
             }
         )
 
+        # Gate G: every interactable token in a spine map resolves to a
+        # scene on disk. The pipeline scorer already had this information
+        # and could not report it: it prints a ROUNDED percentage, so its
+        # sensitivity scales inversely with the size of the sequence it is
+        # judging. One dead token in primitives (1 of 144) dropped that
+        # sequence's HEAD by three stages; one dead token in forces
+        # (1 of 319) printed OK for 68 days. Same fault, opposite verdicts,
+        # and the discriminator was the denominator. This gate counts
+        # placements instead, so one is one wherever it lands.
+        tok_summary = {}
+        if out_tok.strip():
+            try:
+                tok_summary = json.loads(out_tok)
+            except json.JSONDecodeError:
+                tok_summary = {}
+        gates.append(
+            {
+                "id": "G",
+                "name": "Map Token Resolution",
+                "pass": rc_tok == 0
+                and int(tok_summary.get("unresolved_placements", 999999)) == 0
+                # A scan of nothing prints identically to a clean corpus in
+                # every summary form; this gate's own first run did exactly
+                # that. An empty denominator is a broken gate, not a green one.
+                and int(tok_summary.get("placements", 0)) > 0,
+                "metrics": {
+                    "maps_scanned": int(tok_summary.get("maps_scanned", -1)),
+                    "placements": int(tok_summary.get("placements", -1)),
+                    "unresolved_placements": int(
+                        tok_summary.get("unresolved_placements", -1)
+                    ),
+                    "unresolved_tokens": ", ".join(
+                        sorted(tok_summary.get("unresolved_tokens", {}))
+                    ),
+                    "malformed_empty_cells": int(
+                        tok_summary.get("malformed_empty_cells", -1)
+                    ),
+                },
+            }
+        )
+
         pass_count, enabled_count, overall_pass, overall_status = apply_gate_toggles(
             gates, gate_enabled
         )
@@ -321,6 +368,7 @@ def build_report(
                 "audit_lab_chain": rc_lab,
                 "validate_museum_templates": rc_mus,
                 "em_autopilot": rc_walk,
+                "check_map_tokens": rc_tok,
             },
             "gates": gates,
             "raw": {
