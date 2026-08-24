@@ -367,6 +367,43 @@ def build_report(
             }
         )
 
+        # Gate H: every tool this table's rows are produced by is in the
+        # repository. On 2026-08-24 gate G had been printing PASS for a day
+        # from an untracked file, and gate seal_clamp named a .gd in no
+        # commit -- so a clone of HEAD ran six gates, printed six, and had
+        # no row missing to notice. Six breaths found instances of that by
+        # hand, one at a time, which is the signature of a class nothing
+        # watches. This gate is the class.
+        rc_chain, out_chain = run_cmd(
+            [sys.executable, "tools/check_gate_chain.py", "--json"]
+        )
+        chain = {}
+        if out_chain.strip():
+            try:
+                chain = json.loads(out_chain)
+            except json.JSONDecodeError:
+                chain = {}
+        gates.append(
+            {
+                "id": "H",
+                "name": "Gate Chain Integrity",
+                "pass": rc_chain == 0
+                and int(chain.get("unreachable_from_a_clone", 999999)) == 0
+                # An empty scan is a broken check, not a green one.
+                and int(chain.get("tools_referenced", 0)) > 0,
+                "metrics": {
+                    "tools_referenced": int(chain.get("tools_referenced", -1)),
+                    "absent_on_disk": ", ".join(
+                        chain.get("absent_on_disk", []) or []) or "none",
+                    "present_but_untracked": ", ".join(
+                        chain.get("present_but_untracked", []) or []) or "none",
+                    "unreachable_from_a_clone": int(
+                        chain.get("unreachable_from_a_clone", -1)
+                    ),
+                },
+            }
+        )
+
         pass_count, enabled_count, overall_pass, overall_status = apply_gate_toggles(
             gates, gate_enabled
         )
