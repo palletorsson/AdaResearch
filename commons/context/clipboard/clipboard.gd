@@ -92,9 +92,22 @@ var _body_material: ShaderMaterial
 var _inner_mesh: Node
 var _inner_material: ShaderMaterial
 
+## The tutorial library, built on demand.
+##
+## _ready() used to be the only place it was created, but apply_grid_config can run
+## BEFORE _ready — the museum stamps config on a root that is still outside the tree
+## (endless_museum.gd:6581) — and all four fallback paths in this file dereferenced
+## it blind. It is a plain object with no tree dependency, so there is no reason to
+## make it wait for _ready.
+func _library() -> TutorialTextLibrary:
+	if _tutorial_library == null:
+		_tutorial_library = TutorialTextLibrary.new()
+	return _tutorial_library
+
+
 func _ready() -> void:
 	# Initialize tutorial library
-	_tutorial_library = TutorialTextLibrary.new()
+	_library()
 	
 	# Setup Smart Screen Shader
 	var viewport_2d = null
@@ -426,7 +439,7 @@ func apply_grid_config(config_data: Dictionary) -> void:
 				return  # Done - codeDisplay handles everything
 			else:
 				# Fallback to loading content directly
-				var tutorial_content = _tutorial_library.get_tutorial_content(key_str)
+				var tutorial_content = _library().get_tutorial_content(key_str)
 				if not tutorial_content.is_empty():
 					description_sets = [tutorial_content]
 					print("  -> Loaded tutorial from shorthand: %s" % key_str)
@@ -453,7 +466,7 @@ func apply_grid_config(config_data: Dictionary) -> void:
 					if tutorial_id.begins_with("tutorial:"):
 						tutorial_id = tutorial_id.substr(9)
 
-					var tutorial_content = _tutorial_library.get_tutorial_content(tutorial_id)
+					var tutorial_content = _library().get_tutorial_content(tutorial_id)
 					if not tutorial_content.is_empty():
 						description_sets.append(tutorial_content)
 					else:
@@ -473,7 +486,7 @@ func apply_grid_config(config_data: Dictionary) -> void:
 					if tutorial_id.begins_with("tutorial:"):
 						tutorial_id = tutorial_id.substr(9)
 
-					var tutorial_content = _tutorial_library.get_tutorial_content(tutorial_id)
+					var tutorial_content = _library().get_tutorial_content(tutorial_id)
 					if not tutorial_content.is_empty():
 						description_sets.append(tutorial_content)
 					else:
@@ -502,7 +515,7 @@ func apply_grid_config(config_data: Dictionary) -> void:
 				tutorial_id = tutorial_id.substr(9)  # Remove "tutorial:" prefix
 
 			# Load tutorial content
-			var tutorial_content = _tutorial_library.get_tutorial_content(tutorial_id)
+			var tutorial_content = _library().get_tutorial_content(tutorial_id)
 			if not tutorial_content.is_empty():
 				description_sets = [tutorial_content]
 				print("  -> Loaded tutorial: %s" % tutorial_id)
