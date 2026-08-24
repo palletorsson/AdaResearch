@@ -1,147 +1,147 @@
 {
   "documentation": {
-    "key_elements": ["`player_trace` records movement path through the route","`y_translation_cube:180:1.5:2` and `z_translation_cube:180:1.5:2` axis demonstrations","Multiple `pick_up_cube` targets staged across levels","`pickup_gate#pickups:7` as collection threshold gate","`dark_sphere` landmark with teleporter `t` and score point `sp` at sequence exit"],
-    "layout": "Asymmetric multi-level platform network bridged by walkways and transport cubes.",
-    "objective": "Show translation as a formal displacement system across X/Y/Z through navigation and collection tasks.",
-    "summary": "Transformation_2 - Translation Route Field"
+	"key_elements": ["`player_trace` records movement path through the route","`y_translation_cube:180:1.5:2` and `z_translation_cube:180:1.5:2` axis demonstrations","Multiple `pick_up_cube` targets staged across levels","`pickup_gate#pickups:7` as collection threshold gate","`dark_sphere` landmark with teleporter `t` and score point `sp` at sequence exit"],
+	"layout": "Asymmetric multi-level platform network bridged by walkways and transport cubes.",
+	"objective": "Show translation as a formal displacement system across X/Y/Z through navigation and collection tasks.",
+	"summary": "Transformation_2 - Translation Route Field"
   },
   "layers": {
-    "interactables": [
-      ["player_trace"," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," ","z_translation_cube:180:1.5:2"],
-      [" "," "," "," "," ","pick_up_cube:0:1"," "],
-      [" "," "," "," "," "," ","science_screen:180:1.5#mode:point"],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," ",""],
-      [" ",""," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," ","dark_sphere"," "," "," "],
-      [" ","y_translation_cube:180:1.5:2"," "," "," "," "," "],
-      [" "," ","pick_up_cube:0:1"," ","pick_up_cube:0:1"," "," "],
-      [" "," "," "," "," "," "," "],
-      [" ",""," "," "," "," "," "],
-      [""," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," ","pick_up_cube:0:1"," "," "," "," "],
-      [" "," ","pick_up_cube"," "," ",""," "],
-      [" "," "," "," "," ","pickup_gate#pickups:7"," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "]
-    ],
-    "structure": [
-      ["1","1","1","1","2","1","2"],
-      ["1","1","1","0","1","0","1"],
-      ["1","1","1","0","0","0","1"],
-      ["1","1","1","0","0","1","0"],
-      ["1","1","1","0","0","1","0"],
-      ["1","1","1","0","1","1","1"],
-      ["2","1","1","1","1","1","1"],
-      ["0","0","1","0","0","1","0"],
-      ["0","0","1","0","1","1","1"],
-      ["0","0","2","0","0","1","1"],
-      ["0","0","1","1","0","1","0"],
-      ["0","1","1","1","1","1","1"],
-      ["0","1","3","1","2","1","2"],
-      ["0","1","1","1","3","1","3"],
-      ["1","1","1","1","2","1","2"],
-      ["1","1","1","1","3","1","3"],
-      ["1","1","0","1","0","0","0"],
-      ["0","0","0","0","0","0","0"],
-      ["0","0","0","0","0","0","0"],
-      ["1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1"],
-      ["0","1","1","1","1","1","1"],
-      ["0","0","1","1","1","0","1"],
-      ["0","0","0","1","1","1","1"]
-    ],
-    "utilities": [
-      [" "," "," ","wp:90"," "," ","an:-90"],
-      [" "," "," ",""," ","tc:3:z"," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," ","tc:1:y:auto"," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," ","wp"," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," ","tc:3:y"," ","tc:2:y"," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," ",""," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," ","tc:6:y"," "," "," "," "],
-      [" "," "," "," ","sc:3:-0.5:1:-1"," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," ","s"," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," ","t","sp"],
-      [" "," "," "," "," "," "," "]
-    ]
+	"interactables": [
+	  ["player_trace"," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," ","z_translation_cube:180:1.5:2"],
+	  [" "," "," "," "," ","pick_up_cube:0:1"," "],
+	  [" "," "," "," "," "," ","science_screen:180:1.5#mode:point"],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," ",""],
+	  [" ",""," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," ","dark_sphere"," "," "," "],
+	  [" ","y_translation_cube:180:1.5:2"," "," "," "," "," "],
+	  [" "," ","pick_up_cube:0:1"," ","pick_up_cube:0:1"," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" ",""," "," "," "," "," "],
+	  [""," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," ","pick_up_cube:0:1"," "," "," "," "],
+	  [" "," ","pick_up_cube"," "," ",""," "],
+	  [" "," "," "," "," ","pickup_gate#pickups:7"," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "]
+	],
+	"structure": [
+	  ["1","1","1","1","2","1","2"],
+	  ["1","1","1","0","1","0","1"],
+	  ["1","1","1","0","0","0","1"],
+	  ["1","1","1","0","0","1","0"],
+	  ["1","1","1","0","0","1","0"],
+	  ["1","1","1","0","1","1","1"],
+	  ["2","1","1","1","1","1","1"],
+	  ["0","0","1","0","0","1","0"],
+	  ["0","0","1","0","1","1","1"],
+	  ["0","0","2","0","0","1","1"],
+	  ["0","0","1","1","0","1","0"],
+	  ["0","1","1","1","1","1","1"],
+	  ["0","1","3","1","2","1","2"],
+	  ["0","1","1","1","3","1","3"],
+	  ["1","1","1","1","2","1","2"],
+	  ["1","1","1","1","3","1","3"],
+	  ["1","1","0","1","0","0","0"],
+	  ["0","0","0","0","0","0","0"],
+	  ["0","0","0","0","0","0","0"],
+	  ["1","1","1","1","1","1","1"],
+	  ["1","1","1","1","1","1","1"],
+	  ["0","1","1","1","1","1","1"],
+	  ["0","0","1","1","1","0","1"],
+	  ["0","0","0","1","1","1","1"]
+	],
+	"utilities": [
+	  [" "," "," ","wp:90"," "," ","an:-90"],
+	  [" "," "," ",""," ","tc:3:z"," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," ","tc:1:y:auto"," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," ","wp"," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," ","tc:3:y"," ","tc:2:y"," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," ",""," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," ","tc:6:y"," "," "," "," "],
+	  [" "," "," "," ","sc:3:-0.5:1:-1"," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," ","s"," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," ","t","sp"],
+	  [" "," "," "," "," "," "," "]
+	]
   },
   "lighting": {
-    "ambient_color": [0.4,0.4,0.5],
-    "ambient_energy": 0.6,
-    "directional_light": {
-      "color": [1,0.9,0.8],
-      "direction": [-0.4,-0.7,-0.4],
-      "enabled": true,
-      "energy": 1.2
-    }
+	"ambient_color": [0.4,0.4,0.5],
+	"ambient_energy": 0.6,
+	"directional_light": {
+	  "color": [1,0.9,0.8],
+	  "direction": [-0.4,-0.7,-0.4],
+	  "enabled": true,
+	  "energy": 1.2
+	}
   },
   "map_info": {
-    "description": "Translation as navigational infrastructure. Walkways, transport cubes, and axis-constrained artifacts stage displacement across voids while keeping orientation and scale intact.",
-    "dimensions": {
-      "depth": 24,
-      "max_height": 10,
-      "width": 7
-    },
-    "format": "json",
-    "lookup_name": "Trans_Translation_edit826",
-    "metadata": {
-      "category": "tutorial",
-      "difficulty": "beginner",
-      "estimated_time": "3-4 minutes",
-      "learning_objectives": ["Translation along constrained axes","Displacement without rotation or scaling","Route planning through transport systems","Spatial reasoning across voids"],
-      "derived_from": "Trans_Translation",
-      "placed_cubes": 1,
-      "saved_at": "2026-04-29T06:26:49.071Z"
-    },
-    "name": "Trans Translation edit826",
-    "title": "Translation Basics",
-    "version": "1.0"
+	"description": "Translation as navigational infrastructure. Walkways, transport cubes, and axis-constrained artifacts stage displacement across voids while keeping orientation and scale intact.",
+	"dimensions": {
+	  "depth": 24,
+	  "max_height": 10,
+	  "width": 7
+	},
+	"format": "json",
+	"lookup_name": "Trans_Translation_edit826",
+	"metadata": {
+	  "category": "tutorial",
+	  "difficulty": "beginner",
+	  "estimated_time": "3-4 minutes",
+	  "learning_objectives": ["Translation along constrained axes","Displacement without rotation or scaling","Route planning through transport systems","Spatial reasoning across voids"],
+	  "derived_from": "Trans_Translation",
+	  "placed_cubes": 1,
+	  "saved_at": "2026-04-29T06:26:49.071Z"
+	},
+	"name": "Trans Translation edit826",
+	"title": "Translation Basics",
+	"version": "1.0"
   },
   "settings": {
-    "auto_reveal_on_entry": false,
-    "background": {
-      "color": [0.2,0.3,0.7],
-      "type": "sky"
-    },
-    "cube_size": 1,
-    "enable_physics": true,
-    "gutter": 0,
-    "initial_tile_visibility": "hidden_except_corners",
-    "show_grid": true
+	"auto_reveal_on_entry": false,
+	"background": {
+	  "color": [0.2,0.3,0.7],
+	  "type": "sky"
+	},
+	"cube_size": 1,
+	"enable_physics": true,
+	"gutter": 0,
+	"initial_tile_visibility": "hidden_except_corners",
+	"show_grid": true
   },
   "utility_definitions": {
-    "s": {
-      "properties": {
-        "height": 5.5
-      }
-    },
-    "t": {
-      "description": "Continue to next step",
-      "name": "Next",
-      "properties": {
-        "action": "next_in_sequence"
-      },
-      "type": "teleporter"
-    }
+	"s": {
+	  "properties": {
+		"height": 5.5
+	  }
+	},
+	"t": {
+	  "description": "Continue to next step",
+	  "name": "Next",
+	  "properties": {
+		"action": "next_in_sequence"
+	  },
+	  "type": "teleporter"
+	}
   }
 }

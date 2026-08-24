@@ -1,532 +1,532 @@
 {
   "_meta": {
-    "description": "Explicit curriculum spine - recommended progression through QFEP",
-    "version": "1.4",
-    "last_updated": "2026-04-29",
-    "note": "v1.3: array_tutorial moved before color; color absorbs composition (sourced from primitive-stack, pattern, and facade galleries). v1.4: reactivated isosurfaces + boolean_surfaces as spine sequences (orders 12.5 and 12.7) on the lambda_edge phase between proceduralgeneration and softbodies."
+	"description": "Explicit curriculum spine - recommended progression through QFEP",
+	"version": "1.4",
+	"last_updated": "2026-04-29",
+	"note": "v1.3: array_tutorial moved before color; color absorbs composition (sourced from primitive-stack, pattern, and facade galleries). v1.4: reactivated isosurfaces + boolean_surfaces as spine sequences (orders 12.5 and 12.7) on the lambda_edge phase between proceduralgeneration and softbodies."
   },
   "navigation": {
-    "description": "How the player moves through the game",
-    "pattern": "hub_and_spoke",
-    "hub": "Lab",
-    "rules": [
-      "The Lab is the central hub. All sequences start and end here.",
-      "The last map in every sequence returns the player to the Lab.",
-      "On return to Lab, new teleporters appear based on completed sequences.",
-      "Spine sequences unlock the next spine sequence teleporter.",
-      "Branch sequences unlock from their parent (spine or branch).",
-      "Branch completions can unlock further branch sequences (chain unlocks).",
+	"description": "How the player moves through the game",
+	"pattern": "hub_and_spoke",
+	"hub": "Lab",
+	"rules": [
+	  "The Lab is the central hub. All sequences start and end here.",
+	  "The last map in every sequence returns the player to the Lab.",
+	  "On return to Lab, new teleporters appear based on completed sequences.",
+	  "Spine sequences unlock the next spine sequence teleporter.",
+	  "Branch sequences unlock from their parent (spine or branch).",
+	  "Branch completions can unlock further branch sequences (chain unlocks).",
       "The player discovers the full curriculum by completing sequences and returning to see what opened."
-    ],
-    "teleporter_logic": "Defined by branch_points + branch_chains. Spine progression is linear (order field). On completing sequence X, all sequences listed in X's unlocks appear as new Lab teleporters."
+	],
+	"teleporter_logic": "Defined by branch_points + branch_chains. Spine progression is linear (order field). On completing sequence X, all sequences listed in X's unlocks appear as new Lab teleporters."
   },
   "spine": {
-    "description": "The recommended path through Ada Research, ordered by QFEP phases",
-    "sequences": [
-      {
-        "name": "primitives",
-        "phase": "F_order",
-        "qfep_role": "Foundation - points, lines, planes, and basic vectors",
-        "lab_post": "Lab/map_data_post_primitives",
-        "order": 1
-      },
-      {
-        "name": "transformation",
-        "phase": "F_order",
-        "qfep_role": "Invariants - dot/cross products enable rotation",
-        "lab_post": "Lab/map_data_post_transformation",
-        "order": 2
-      },
-      {
-        "name": "array_tutorial",
-        "phase": "F_order",
-        "order": 3,
-        "description": "Array fundamentals - grid structures and indexing. Moved before color so its repetition primitives feed the composition vocabulary.",
-        "qfep_role": "Foundation - the grid, indexing, addressable repetition"
-      },
-      {
-        "name": "color",
-        "phase": "F_order",
-        "order": 4,
-        "description": "Color and composition. Hue/value/saturation lead into pattern, stack, and facade composition (gallery-sourced). Absorbed the standalone composition study.",
-        "qfep_role": "Foundation - color systems become composition systems",
-        "composition_sources": [
-          {
-            "gallery": "primitive-stack-gallery",
-            "role": "vertical stacking compositions"
-          },
-          {
-            "gallery": "pattern-gallery",
-            "role": "wallpaper-group plane compositions"
-          },
-          {
-            "gallery": "facade-gallery",
-            "role": "architectural-facade compositions"
-          }
-        ]
-      },
-      {
-        "name": "change",
-        "phase": "F_order",
-        "qfep_role": "Foundation - the calculus substrate. Derivative as instantaneous rate, integral as accumulation, vector field as flow. The vocabulary forces / wavefunctions / randomness / noise will all use.",
-        "lab_post": "Lab/map_data_post_change",
-        "order": 5,
-        "description": "New sequence (2026-05-13) addressing the calculus shadow named in the math-density sieve. Sits between color (4) and forces (5). Status: scaffolded — maps and artifacts as placeholders; build follows.",
-        "introduces_affordance": "sustain"
-      },
-      {
-        "name": "forces",
-        "phase": "oscillation",
-        "qfep_role": "Newton's laws - vectors become physics",
-        "lab_post": "Lab/map_data_post_forces",
-        "order": 6
-      },
-      {
-        "name": "formfinding",
-        "phase": "F_order",
-        "order": 7,
-        "description": "The variational principle — form as the minimum of a functional. Sequence #24, inserted 2026-07-07 after forces (dynamics) and before wavefunctions: forces move things, form-finding is where they come to REST. Cast entirely from the pre-existing gradient-descent / minimal-surface / energy-landscape families.",
-        "qfep_role": "Foundation - the F term made physical; free-energy minimization as the shape matter settles into, stopping short of the dead-perfect bottom"
-      },
-      {
-        "name": "wavefunctions",
-        "phase": "oscillation",
-        "qfep_role": "F ↔ E oscillation - sine creates curves",
-        "lab_post": "Lab/map_data_post_wavefunctions",
-        "order": 8
-      },
-      {
-        "name": "randomness",
-        "phase": "E_entropy",
-        "qfep_role": "Disorder as creative force",
-        "lab_post": "Lab/map_data_post_random",
-        "order": 9
-      },
-      {
-        "name": "noise",
-        "phase": "E_entropy",
-        "qfep_role": "Structured randomness - Perlin, flow fields",
-        "lab_post": "Lab/map_data_post_noise",
-        "order": 10
-      },
-      {
-        "name": "cellularautomata",
-        "phase": "lambda_edge",
-        "qfep_role": "Simple rules → complex behavior. Rule 110 is Turing complete — the λ_edge thesis.",
-        "lab_post": "Lab/map_data_post_cellularautomata",
-        "order": 11,
-        "note": "Moved from E_entropy to λ_edge in 2026-05-13 sieve. CA's truth (local rules producing global pattern) is the λ_edge claim's clearest statement."
-      },
-      {
-        "name": "fractals",
-        "phase": "lambda_edge",
-        "qfep_role": "Self-similarity, infinite detail",
-        "lab_post": "Lab/map_data_post_fractals",
-        "order": 12
-      },
-      {
-        "name": "lsystems",
-        "phase": "lambda_edge",
-        "qfep_role": "Generative grammars",
-        "lab_post": "Lab/map_data_post_lsystems",
-        "order": 13
-      },
-      {
-        "name": "proceduralgeneration",
-        "phase": "lambda_edge",
-        "qfep_role": "WFC, Markov, emergence from rules",
-        "lab_post": "Lab/map_data_post_proceduralgeneration",
-        "order": 14
-      },
-      {
-        "name": "softbodies",
-        "phase": "integration",
-        "qfep_role": "Deformable matter, cloth, fluid + Turing morphogenesis. Cloth descends an energy landscape under gravity + spring constraints.",
-        "lab_post": "Lab/map_data_post_softbodies",
-        "order": 15,
-        "note": "Absorbed morphogenesis (2 maps). Turing's reaction-diffusion as soft matter finding form. 2026-05-13: shifted from 13 to 14; swarm moved earlier into λ_edge."
-      },
-      {
-        "name": "isosurfaces",
-        "phase": "F_order",
-        "qfep_role": "Implicit fields → explicit surfaces. Marching cubes as the bridge from continuous fields to walkable mesh.",
-        "lab_post": "Lab/map_data_post_isosurfaces",
-        "order": 16,
-        "note": "2026-05-13: moved from λ_edge order 12.5 to F_order order 4.6. Geometric construction at depth — no entropy term. Pairs with boolean_surfaces as advanced F_order."
-      },
-      {
-        "name": "boolean_surfaces",
-        "phase": "F_order",
-        "qfep_role": "CSG operations as composition logic — union, intersection, difference of solids.",
-        "lab_post": "Lab/map_data_post_boolean_surfaces",
-        "order": 17,
-        "note": "2026-05-13: moved from λ_edge order 12.7 to F_order order 4.7. CSG is pure geometric algebra; F_order is its home."
-      },
-      {
-        "name": "swarmintelligence",
-        "phase": "lambda_edge",
-        "qfep_role": "Collective behavior, stigmergy — local rules + memory of rules → emergent global pattern. Swarm's qfep_term is self-declared λ.",
-        "lab_post": "Lab/map_data_post_swarmintelligence",
-        "order": 18,
-        "note": "2026-05-13: moved from integration order 14 to λ_edge order 13. Sequence self-declares qfep_term=λ. Joins CA, fractals, lsystems, procgen as 5th color of the edge."
-      },
-      {
-        "name": "machinelearning",
-        "phase": "integration",
-        "qfep_role": "Learning systems, neural networks",
-        "lab_post": "Lab/map_data_post_machinelearning",
-        "order": 19
-      },
-      {
-        "name": "graphtheory",
-        "phase": "relation",
-        "qfep_role": "Connections define structure. The substrate that was always under it all — every cell, force, agent, neuron was a node; every adjacency, attraction, message, weight was an edge.",
-        "lab_post": "Lab/map_data_post_graphtheory",
-        "order": 20,
-        "description": "Graph structures and algorithms",
-        "note": "2026-05-13: moved from integration order 19 (terminal) to relation hinge order 16, between integration and synthesis. Repositioned as retroactive substrate recognition — the player meets graphs after seeing every prior system was secretly a graph."
-      },
-      {
-        "name": "foundationscrisis",
-        "phase": "synthesis",
-        "qfep_role": "Gödel, Russell - limits of formal systems",
-        "lab_post": "Lab/map_data_post_foundationscrisis",
-        "order": 21,
-        "note": "2026-05-13: shifted from 16 to 17 after graphtheory moved up to 16."
-      },
-      {
-        "name": "qfeplaboratory",
-        "phase": "synthesis",
-        "qfep_role": "The complete QFEP formula embodied",
-        "lab_post": "Lab/map_data_post_qfeplaboratory",
-        "order": 22,
-        "note": "2026-05-13: shifted from 17 to 18."
-      },
-      {
-        "name": "postfoundationscrisis",
-        "phase": "synthesis",
-        "qfep_role": "Applied limits — bias, rhizomes, molecular design as post-crisis practice",
-        "lab_post": "Lab/map_data_post_foundationscrisis",
-        "order": 23,
-        "note": "2026-05-13: shifted from 18 to 19 — now spine-terminal. Collects real maps from deferred sequences (criticalalgorithms, speculativecomputation, advancedlaboratory). 5 of 8 maps still SCAFFOLD-only; phase 2 build queued."
-      }
-    ]
+	"description": "The recommended path through Ada Research, ordered by QFEP phases",
+	"sequences": [
+	  {
+		"name": "primitives",
+		"phase": "F_order",
+		"qfep_role": "Foundation - points, lines, planes, and basic vectors",
+		"lab_post": "Lab/map_data_post_primitives",
+		"order": 1
+	  },
+	  {
+		"name": "transformation",
+		"phase": "F_order",
+		"qfep_role": "Invariants - dot/cross products enable rotation",
+		"lab_post": "Lab/map_data_post_transformation",
+		"order": 2
+	  },
+	  {
+		"name": "array_tutorial",
+		"phase": "F_order",
+		"order": 3,
+		"description": "Array fundamentals - grid structures and indexing. Moved before color so its repetition primitives feed the composition vocabulary.",
+		"qfep_role": "Foundation - the grid, indexing, addressable repetition"
+	  },
+	  {
+		"name": "color",
+		"phase": "F_order",
+		"order": 4,
+		"description": "Color and composition. Hue/value/saturation lead into pattern, stack, and facade composition (gallery-sourced). Absorbed the standalone composition study.",
+		"qfep_role": "Foundation - color systems become composition systems",
+		"composition_sources": [
+		  {
+			"gallery": "primitive-stack-gallery",
+			"role": "vertical stacking compositions"
+		  },
+		  {
+			"gallery": "pattern-gallery",
+			"role": "wallpaper-group plane compositions"
+		  },
+		  {
+			"gallery": "facade-gallery",
+			"role": "architectural-facade compositions"
+		  }
+		]
+	  },
+	  {
+		"name": "change",
+		"phase": "F_order",
+		"qfep_role": "Foundation - the calculus substrate. Derivative as instantaneous rate, integral as accumulation, vector field as flow. The vocabulary forces / wavefunctions / randomness / noise will all use.",
+		"lab_post": "Lab/map_data_post_change",
+		"order": 5,
+		"description": "New sequence (2026-05-13) addressing the calculus shadow named in the math-density sieve. Sits between color (4) and forces (5). Status: scaffolded — maps and artifacts as placeholders; build follows.",
+		"introduces_affordance": "sustain"
+	  },
+	  {
+		"name": "forces",
+		"phase": "oscillation",
+		"qfep_role": "Newton's laws - vectors become physics",
+		"lab_post": "Lab/map_data_post_forces",
+		"order": 6
+	  },
+	  {
+		"name": "formfinding",
+		"phase": "F_order",
+		"order": 7,
+		"description": "The variational principle — form as the minimum of a functional. Sequence #24, inserted 2026-07-07 after forces (dynamics) and before wavefunctions: forces move things, form-finding is where they come to REST. Cast entirely from the pre-existing gradient-descent / minimal-surface / energy-landscape families.",
+		"qfep_role": "Foundation - the F term made physical; free-energy minimization as the shape matter settles into, stopping short of the dead-perfect bottom"
+	  },
+	  {
+		"name": "wavefunctions",
+		"phase": "oscillation",
+		"qfep_role": "F ↔ E oscillation - sine creates curves",
+		"lab_post": "Lab/map_data_post_wavefunctions",
+		"order": 8
+	  },
+	  {
+		"name": "randomness",
+		"phase": "E_entropy",
+		"qfep_role": "Disorder as creative force",
+		"lab_post": "Lab/map_data_post_random",
+		"order": 9
+	  },
+	  {
+		"name": "noise",
+		"phase": "E_entropy",
+		"qfep_role": "Structured randomness - Perlin, flow fields",
+		"lab_post": "Lab/map_data_post_noise",
+		"order": 10
+	  },
+	  {
+		"name": "cellularautomata",
+		"phase": "lambda_edge",
+		"qfep_role": "Simple rules → complex behavior. Rule 110 is Turing complete — the λ_edge thesis.",
+		"lab_post": "Lab/map_data_post_cellularautomata",
+		"order": 11,
+		"note": "Moved from E_entropy to λ_edge in 2026-05-13 sieve. CA's truth (local rules producing global pattern) is the λ_edge claim's clearest statement."
+	  },
+	  {
+		"name": "fractals",
+		"phase": "lambda_edge",
+		"qfep_role": "Self-similarity, infinite detail",
+		"lab_post": "Lab/map_data_post_fractals",
+		"order": 12
+	  },
+	  {
+		"name": "lsystems",
+		"phase": "lambda_edge",
+		"qfep_role": "Generative grammars",
+		"lab_post": "Lab/map_data_post_lsystems",
+		"order": 13
+	  },
+	  {
+		"name": "proceduralgeneration",
+		"phase": "lambda_edge",
+		"qfep_role": "WFC, Markov, emergence from rules",
+		"lab_post": "Lab/map_data_post_proceduralgeneration",
+		"order": 14
+	  },
+	  {
+		"name": "softbodies",
+		"phase": "integration",
+		"qfep_role": "Deformable matter, cloth, fluid + Turing morphogenesis. Cloth descends an energy landscape under gravity + spring constraints.",
+		"lab_post": "Lab/map_data_post_softbodies",
+		"order": 15,
+		"note": "Absorbed morphogenesis (2 maps). Turing's reaction-diffusion as soft matter finding form. 2026-05-13: shifted from 13 to 14; swarm moved earlier into λ_edge."
+	  },
+	  {
+		"name": "isosurfaces",
+		"phase": "F_order",
+		"qfep_role": "Implicit fields → explicit surfaces. Marching cubes as the bridge from continuous fields to walkable mesh.",
+		"lab_post": "Lab/map_data_post_isosurfaces",
+		"order": 16,
+		"note": "2026-05-13: moved from λ_edge order 12.5 to F_order order 4.6. Geometric construction at depth — no entropy term. Pairs with boolean_surfaces as advanced F_order."
+	  },
+	  {
+		"name": "boolean_surfaces",
+		"phase": "F_order",
+		"qfep_role": "CSG operations as composition logic — union, intersection, difference of solids.",
+		"lab_post": "Lab/map_data_post_boolean_surfaces",
+		"order": 17,
+		"note": "2026-05-13: moved from λ_edge order 12.7 to F_order order 4.7. CSG is pure geometric algebra; F_order is its home."
+	  },
+	  {
+		"name": "swarmintelligence",
+		"phase": "lambda_edge",
+		"qfep_role": "Collective behavior, stigmergy — local rules + memory of rules → emergent global pattern. Swarm's qfep_term is self-declared λ.",
+		"lab_post": "Lab/map_data_post_swarmintelligence",
+		"order": 18,
+		"note": "2026-05-13: moved from integration order 14 to λ_edge order 13. Sequence self-declares qfep_term=λ. Joins CA, fractals, lsystems, procgen as 5th color of the edge."
+	  },
+	  {
+		"name": "machinelearning",
+		"phase": "integration",
+		"qfep_role": "Learning systems, neural networks",
+		"lab_post": "Lab/map_data_post_machinelearning",
+		"order": 19
+	  },
+	  {
+		"name": "graphtheory",
+		"phase": "relation",
+		"qfep_role": "Connections define structure. The substrate that was always under it all — every cell, force, agent, neuron was a node; every adjacency, attraction, message, weight was an edge.",
+		"lab_post": "Lab/map_data_post_graphtheory",
+		"order": 20,
+		"description": "Graph structures and algorithms",
+		"note": "2026-05-13: moved from integration order 19 (terminal) to relation hinge order 16, between integration and synthesis. Repositioned as retroactive substrate recognition — the player meets graphs after seeing every prior system was secretly a graph."
+	  },
+	  {
+		"name": "foundationscrisis",
+		"phase": "synthesis",
+		"qfep_role": "Gödel, Russell - limits of formal systems",
+		"lab_post": "Lab/map_data_post_foundationscrisis",
+		"order": 21,
+		"note": "2026-05-13: shifted from 16 to 17 after graphtheory moved up to 16."
+	  },
+	  {
+		"name": "qfeplaboratory",
+		"phase": "synthesis",
+		"qfep_role": "The complete QFEP formula embodied",
+		"lab_post": "Lab/map_data_post_qfeplaboratory",
+		"order": 22,
+		"note": "2026-05-13: shifted from 17 to 18."
+	  },
+	  {
+		"name": "postfoundationscrisis",
+		"phase": "synthesis",
+		"qfep_role": "Applied limits — bias, rhizomes, molecular design as post-crisis practice",
+		"lab_post": "Lab/map_data_post_foundationscrisis",
+		"order": 23,
+		"note": "2026-05-13: shifted from 18 to 19 — now spine-terminal. Collects real maps from deferred sequences (criticalalgorithms, speculativecomputation, advancedlaboratory). 5 of 8 maps still SCAFFOLD-only; phase 2 build queued."
+	  }
+	]
   },
   "phases": {
-    "F_order": {
-      "name": "Order (F)",
-      "color": "#4A90D9",
-      "description": "Free energy minimization - prediction, stability, structure",
-      "gamwell_chapters": "Ch 1-4: Euclid, Formalism",
-      "truth": "What is form, before it moves? A point, a line, a triangle, a cube. Then transformation, array, color, change as time-derivative, isosurfaces extracting form from a field, booleans composing form from form. Seven steps to a vocabulary of deterministic shape."
-    },
-    "oscillation": {
-      "name": "Oscillation (F ↔ E)",
-      "color": "#9B59B6",
-      "description": "Dynamic balance between order and entropy",
-      "gamwell_chapters": "Ch 7-8: Symmetry, Bauhaus",
-      "truth": "Things that move under rules can run smooth or run wild. Sine is the rule's most ordered output; chaos is its least. The phase oscillates between them — your job is to feel when."
-    },
-    "E_entropy": {
-      "name": "Entropy (E(S))",
-      "color": "#E74C3C",
-      "description": "System entropy - disorder as creative force",
-      "gamwell_chapters": "Ch 10: Turing Morphogenesis",
-      "truth": "Disorder is a creative force. First, pure: any state equally possible. Then, structured: disorder that remembers continuity. Two sequences; both teach how possibility shapes."
-    },
-    "lambda_edge": {
-      "name": "Edge of Chaos (λ)",
-      "color": "#F39C12",
-      "description": "The λ parameter - tuning between order and chaos",
-      "gamwell_chapters": "Ch 12: Fractals, Complexity",
-      "truth": "Where rules and entropy meet, form emerges. CA shows local-rule-makes-global-pattern. Fractals show recursion making infinity. L-systems show grammar making space. Procedural generation shows that an author isn't needed for a world. Swarm shows that no leader is needed for coordination. Five colors of the same edge."
-    },
-    "integration": {
-      "name": "Integration (φΔE)",
-      "color": "#2ECC71",
-      "description": "Rate of entropy change - emergence, self-organization",
-      "gamwell_chapters": "Ch 10-12: Turing, Emergence",
-      "truth": "Every system you have built so far has been settling. Cloth finds equilibrium under springs. Gradient descent finds minima under loss. Both are landscapes, both descend. Integration is the phase where matter and math do the same thing in different clothes."
-    },
-    "relation": {
-      "name": "Relation (substrate)",
-      "color": "#16A085",
-      "description": "The substrate that was always there — graphs as the universal connection structure",
-      "gamwell_chapters": "Ch 5: Klein/Erlangen Program",
-      "truth": "This was always here. Every cell, force, agent, neuron was a node. Every adjacency, attraction, message, weight was an edge. The phase makes the substrate visible."
-    },
-    "synthesis": {
-      "name": "Synthesis",
-      "color": "#E91E63",
-      "description": "Full QFEP - edges, paradoxes, queer futures",
-      "gamwell_chapters": "Ch 3-6, 9, 13: Foundations Crisis",
-      "truth": "The curriculum is an argument. The crisis says formal systems break. The lab says here is what doesn't break — F − λE(S) + φΔE(S,t), a formula that holds chaos as part of itself. The applied phase says now build with that. The edge is not a failure of formalism. The edge is the ground."
-    }
+	"F_order": {
+	  "name": "Order (F)",
+	  "color": "#4A90D9",
+	  "description": "Free energy minimization - prediction, stability, structure",
+	  "gamwell_chapters": "Ch 1-4: Euclid, Formalism",
+	  "truth": "What is form, before it moves? A point, a line, a triangle, a cube. Then transformation, array, color, change as time-derivative, isosurfaces extracting form from a field, booleans composing form from form. Seven steps to a vocabulary of deterministic shape."
+	},
+	"oscillation": {
+	  "name": "Oscillation (F ↔ E)",
+	  "color": "#9B59B6",
+	  "description": "Dynamic balance between order and entropy",
+	  "gamwell_chapters": "Ch 7-8: Symmetry, Bauhaus",
+	  "truth": "Things that move under rules can run smooth or run wild. Sine is the rule's most ordered output; chaos is its least. The phase oscillates between them — your job is to feel when."
+	},
+	"E_entropy": {
+	  "name": "Entropy (E(S))",
+	  "color": "#E74C3C",
+	  "description": "System entropy - disorder as creative force",
+	  "gamwell_chapters": "Ch 10: Turing Morphogenesis",
+	  "truth": "Disorder is a creative force. First, pure: any state equally possible. Then, structured: disorder that remembers continuity. Two sequences; both teach how possibility shapes."
+	},
+	"lambda_edge": {
+	  "name": "Edge of Chaos (λ)",
+	  "color": "#F39C12",
+	  "description": "The λ parameter - tuning between order and chaos",
+	  "gamwell_chapters": "Ch 12: Fractals, Complexity",
+	  "truth": "Where rules and entropy meet, form emerges. CA shows local-rule-makes-global-pattern. Fractals show recursion making infinity. L-systems show grammar making space. Procedural generation shows that an author isn't needed for a world. Swarm shows that no leader is needed for coordination. Five colors of the same edge."
+	},
+	"integration": {
+	  "name": "Integration (φΔE)",
+	  "color": "#2ECC71",
+	  "description": "Rate of entropy change - emergence, self-organization",
+	  "gamwell_chapters": "Ch 10-12: Turing, Emergence",
+	  "truth": "Every system you have built so far has been settling. Cloth finds equilibrium under springs. Gradient descent finds minima under loss. Both are landscapes, both descend. Integration is the phase where matter and math do the same thing in different clothes."
+	},
+	"relation": {
+	  "name": "Relation (substrate)",
+	  "color": "#16A085",
+	  "description": "The substrate that was always there — graphs as the universal connection structure",
+	  "gamwell_chapters": "Ch 5: Klein/Erlangen Program",
+	  "truth": "This was always here. Every cell, force, agent, neuron was a node. Every adjacency, attraction, message, weight was an edge. The phase makes the substrate visible."
+	},
+	"synthesis": {
+	  "name": "Synthesis",
+	  "color": "#E91E63",
+	  "description": "Full QFEP - edges, paradoxes, queer futures",
+	  "gamwell_chapters": "Ch 3-6, 9, 13: Foundations Crisis",
+	  "truth": "The curriculum is an argument. The crisis says formal systems break. The lab says here is what doesn't break — F − λE(S) + φΔE(S,t), a formula that holds chaos as part of itself. The applied phase says now build with that. The edge is not a failure of formalism. The edge is the ground."
+	}
   },
   "branches": {
-    "description": "Optional sequences that unlock from spine or other branch completions",
-    "branch_points": {
-      "primitives": {
-        "unlocks": [
-          "meshes",
-          "datastructures",
+	"description": "Optional sequences that unlock from spine or other branch completions",
+	"branch_points": {
+	  "primitives": {
+		"unlocks": [
+		  "meshes",
+		  "datastructures",
           "array_tutorial"
-        ],
-        "note": "Foundation tools for building (v1.3: array_tutorial replaces color here; color now follows array)"
-      },
-      "transformation": {
-        "unlocks": [
-          "computationalgeometry",
+		],
+		"note": "Foundation tools for building (v1.3: array_tutorial replaces color here; color now follows array)"
+	  },
+	  "transformation": {
+		"unlocks": [
+		  "computationalgeometry",
           "graphtheory"
-        ],
-        "note": "Spatial and relational structures"
-      },
-      "forces": {
-        "unlocks": [
-          "physicssimulation",
+		],
+		"note": "Spatial and relational structures"
+	  },
+	  "forces": {
+		"unlocks": [
+		  "physicssimulation",
           "particles"
-        ],
-        "note": "Physics engines and particle systems"
-      },
-      "wavefunctions": {
-        "unlocks": [
+		],
+		"note": "Physics engines and particle systems"
+	  },
+	  "wavefunctions": {
+		"unlocks": [
           "proceduralaudio"
-        ],
-        "note": "Sound synthesis"
-      },
-      "noise": {
-        "unlocks": [
+		],
+		"note": "Sound synthesis"
+	  },
+	  "noise": {
+		"unlocks": [
           "patterngeneration"
-        ],
-        "note": "Shaders and visual pattern generation"
-      },
-      "patterngeneration": {
-        "unlocks": [
+		],
+		"note": "Shaders and visual pattern generation"
+	  },
+	  "patterngeneration": {
+		"unlocks": [
           "mosaicanalysis"
-        ],
-        "note": "Field study: Italian mosaics as frozen algorithms"
-      },
-      "boolean_surfaces": {
-        "unlocks": [
+		],
+		"note": "Field study: Italian mosaics as frozen algorithms"
+	  },
+	  "boolean_surfaces": {
+		"unlocks": [
           "facade_assembly"
-        ],
-        "note": "Composition grammar at architectural scale — column orders, rhythm, hierarchy, fenestration. Branch off CSG; built 2026-05-13 from doc/proposals/2026-05-13_facade-assembly-sequence.md."
-      },
-      "proceduralgeneration": {
-        "unlocks": [
-          "spatial_partitioning",
-          "constraint_solvers",
-          "isosurfaces",
-          "higher_dimensions",
+		],
+		"note": "Composition grammar at architectural scale — column orders, rhythm, hierarchy, fenestration. Branch off CSG; built 2026-05-13 from doc/proposals/2026-05-13_facade-assembly-sequence.md."
+	  },
+	  "proceduralgeneration": {
+		"unlocks": [
+		  "spatial_partitioning",
+		  "constraint_solvers",
+		  "isosurfaces",
+		  "higher_dimensions",
           "grammar_systems"
-        ],
-        "note": "The split procgen sub-sequences"
-      },
-      "machinelearning": {
-        "unlocks": [
-          "recursiveemergence",
+		],
+		"note": "The split procgen sub-sequences"
+	  },
+	  "machinelearning": {
+		"unlocks": [
+		  "recursiveemergence",
           "artmathematics"
-        ],
-        "note": "Recursive patterns and art history"
-      },
-      "postfoundationscrisis": {
-        "unlocks": [],
-        "note": "Collects real maps from deferred sequences. AdvancedLaboratory absorbed."
-      }
-    },
-    "branch_chains": {
-      "description": "Branch completions that unlock further branches",
-      "array_tutorial": {
-        "unlocks": [
+		],
+		"note": "Recursive patterns and art history"
+	  },
+	  "postfoundationscrisis": {
+		"unlocks": [],
+		"note": "Collects real maps from deferred sequences. AdvancedLaboratory absorbed."
+	  }
+	},
+	"branch_chains": {
+	  "description": "Branch completions that unlock further branches",
+	  "array_tutorial": {
+		"unlocks": [
           "color"
-        ],
-        "note": "Array fundamentals lead into color/composition (v1.3 reversal: array now precedes color in the spine)"
-      },
-      "datastructures": {
-        "unlocks": [
+		],
+		"note": "Array fundamentals lead into color/composition (v1.3 reversal: array now precedes color in the spine)"
+	  },
+	  "datastructures": {
+		"unlocks": [
           "searchpathfinding"
-        ],
-        "note": "Data structures enable search and traversal algorithms"
-      }
-    },
-    "unassigned": {
-      "description": "Sequences not yet connected to the unlock graph",
-      "sequences": [
-        "vectors",
-        "resourcemanagement",
+		],
+		"note": "Data structures enable search and traversal algorithms"
+	  }
+	},
+	"unassigned": {
+	  "description": "Sequences not yet connected to the unlock graph",
+	  "sequences": [
+		"vectors",
+		"resourcemanagement",
         "bricolage"
-      ],
-      "note": "Pending design decisions on where these branch from"
-    }
+	  ],
+	  "note": "Pending design decisions on where these branch from"
+	}
   },
   "lab_evolution": {
-    "description": "Lab teleporter progression. Each post-map is a FULL lab layout loaded after completing that sequence. The Lab is the hub: every sequence ends here, new teleporters appear on return.",
-    "actual_progression": [
-      {
-        "stage": "initial",
-        "map": "Lab/map_data_init",
-        "added": [
-          "primitives",
-          "transformation",
+	"description": "Lab teleporter progression. Each post-map is a FULL lab layout loaded after completing that sequence. The Lab is the hub: every sequence ends here, new teleporters appear on return.",
+	"actual_progression": [
+	  {
+		"stage": "initial",
+		"map": "Lab/map_data_init",
+		"added": [
+		  "primitives",
+		  "transformation",
           "array_tutorial"
-        ],
-        "note": "Starting lab state with first three teleporters (v1.3: array before color)"
-      },
-      {
-        "stage": "post_primitives",
-        "map": "Lab/map_data_post_primitives",
-        "added": [],
-        "note": "No new teleporters"
-      },
-      {
-        "stage": "post_transformation",
-        "map": "Lab/map_data_post_transformation",
-        "added": [],
-        "note": "No new teleporters, added tc:2:y transport cube"
-      },
-      {
-        "stage": "post_array_tutorial",
-        "map": "Lab/map_data_post_array_tutorial",
-        "added": [
+		],
+		"note": "Starting lab state with first three teleporters (v1.3: array before color)"
+	  },
+	  {
+		"stage": "post_primitives",
+		"map": "Lab/map_data_post_primitives",
+		"added": [],
+		"note": "No new teleporters"
+	  },
+	  {
+		"stage": "post_transformation",
+		"map": "Lab/map_data_post_transformation",
+		"added": [],
+		"note": "No new teleporters, added tc:2:y transport cube"
+	  },
+	  {
+		"stage": "post_array_tutorial",
+		"map": "Lab/map_data_post_array_tutorial",
+		"added": [
           "color"
-        ],
-        "note": "Gate: array fundamentals open the color/composition study (v1.3 reorder)"
-      },
-      {
-        "stage": "post_color",
-        "map": "Lab/map_data_post_color",
-        "added": [
-          "forces",
+		],
+		"note": "Gate: array fundamentals open the color/composition study (v1.3 reorder)"
+	  },
+	  {
+		"stage": "post_color",
+		"map": "Lab/map_data_post_color",
+		"added": [
+		  "forces",
           "wavefunctions"
-        ],
-        "note": "Gate: color/composition opens the oscillation phase (forces, wavefunctions)"
-      },
-      {
-        "stage": "post_forces",
-        "map": "Lab/map_data_post_forces",
-        "added": [
-          "noise",
+		],
+		"note": "Gate: color/composition opens the oscillation phase (forces, wavefunctions)"
+	  },
+	  {
+		"stage": "post_forces",
+		"map": "Lab/map_data_post_forces",
+		"added": [
+		  "noise",
           "randomness"
-        ],
-        "note": "Gate: opens entropy branch"
-      },
-      {
-        "stage": "post_wavefunctions",
-        "map": "Lab/map_data_post_wavefunctions",
-        "added": [
-          "cellularautomata",
-          "fractals",
+		],
+		"note": "Gate: opens entropy branch"
+	  },
+	  {
+		"stage": "post_wavefunctions",
+		"map": "Lab/map_data_post_wavefunctions",
+		"added": [
+		  "cellularautomata",
+		  "fractals",
           "lsystems"
-        ],
-        "note": "Gate: opens pattern branch"
-      },
-      {
-        "stage": "post_noise",
-        "map": "Lab/map_data_post_noise",
-        "added": [],
-        "note": "Neutral - same as post_forces"
-      },
-      {
-        "stage": "post_randomness",
-        "map": "Lab/map_data_post_randomness",
-        "added": [],
-        "note": "Neutral - same as post_forces"
-      },
-      {
-        "stage": "post_cellularautomata",
-        "map": "Lab/map_data_post_cellularautomata",
-        "added": [],
-        "note": "Neutral - same as post_noise"
-      },
-      {
-        "stage": "post_lsystems",
-        "map": "Lab/map_data_post_lsystems",
-        "added": [],
-        "note": "Neutral - same as post_noise"
-      },
-      {
-        "stage": "post_fractals",
-        "map": "Lab/map_data_post_fractals",
-        "added": [
-          "proceduralgeneration",
+		],
+		"note": "Gate: opens pattern branch"
+	  },
+	  {
+		"stage": "post_noise",
+		"map": "Lab/map_data_post_noise",
+		"added": [],
+		"note": "Neutral - same as post_forces"
+	  },
+	  {
+		"stage": "post_randomness",
+		"map": "Lab/map_data_post_randomness",
+		"added": [],
+		"note": "Neutral - same as post_forces"
+	  },
+	  {
+		"stage": "post_cellularautomata",
+		"map": "Lab/map_data_post_cellularautomata",
+		"added": [],
+		"note": "Neutral - same as post_noise"
+	  },
+	  {
+		"stage": "post_lsystems",
+		"map": "Lab/map_data_post_lsystems",
+		"added": [],
+		"note": "Neutral - same as post_noise"
+	  },
+	  {
+		"stage": "post_fractals",
+		"map": "Lab/map_data_post_fractals",
+		"added": [
+		  "proceduralgeneration",
           "softbodies"
-        ],
-        "note": "Gate: opens generation branch"
-      },
-      {
-        "stage": "post_proceduralgeneration",
-        "map": "Lab/map_data_post_proceduralgeneration",
-        "added": [],
-        "note": "Neutral - same as post_fractals"
-      },
-      {
-        "stage": "post_softbodies",
-        "map": "Lab/map_data_post_softbodies",
-        "added": [
-          "swarmintelligence",
+		],
+		"note": "Gate: opens generation branch"
+	  },
+	  {
+		"stage": "post_proceduralgeneration",
+		"map": "Lab/map_data_post_proceduralgeneration",
+		"added": [],
+		"note": "Neutral - same as post_fractals"
+	  },
+	  {
+		"stage": "post_softbodies",
+		"map": "Lab/map_data_post_softbodies",
+		"added": [
+		  "swarmintelligence",
           "machinelearning"
-        ],
-        "note": "Gate: opens emergence branch + machinelearning. Morphogenesis absorbed into softbodies."
-      },
-      {
-        "stage": "post_swarmintelligence",
-        "map": "Lab/map_data_post_swarmintelligence",
-        "added": [],
-        "note": "Neutral - same as post_softbodies"
-      },
-      {
-        "stage": "post_machinelearning",
-        "map": "Lab/map_data_post_machinelearning",
-        "added": [
-          "foundationscrisis",
+		],
+		"note": "Gate: opens emergence branch + machinelearning. Morphogenesis absorbed into softbodies."
+	  },
+	  {
+		"stage": "post_swarmintelligence",
+		"map": "Lab/map_data_post_swarmintelligence",
+		"added": [],
+		"note": "Neutral - same as post_softbodies"
+	  },
+	  {
+		"stage": "post_machinelearning",
+		"map": "Lab/map_data_post_machinelearning",
+		"added": [
+		  "foundationscrisis",
           "graphtheory"
-        ],
-        "note": "Gate: opens east corridor and south rooms"
-      },
-      {
-        "stage": "post_graphtheory",
-        "map": "Lab/map_data_post_graphtheory",
-        "added": [],
-        "note": "Neutral - same as post_machinelearning"
-      },
-      {
-        "stage": "post_foundationscrisis",
-        "map": "Lab/map_data_post_foundationscrisis",
-        "added": [
-          "qfeplaboratory",
+		],
+		"note": "Gate: opens east corridor and south rooms"
+	  },
+	  {
+		"stage": "post_graphtheory",
+		"map": "Lab/map_data_post_graphtheory",
+		"added": [],
+		"note": "Neutral - same as post_machinelearning"
+	  },
+	  {
+		"stage": "post_foundationscrisis",
+		"map": "Lab/map_data_post_foundationscrisis",
+		"added": [
+		  "qfeplaboratory",
           "postfoundationscrisis"
-        ],
-        "note": "Gate: opens northeast room and final teleporters"
-      },
-      {
-        "stage": "post_qfeplaboratory",
-        "map": "Lab/map_data_post_qfeplaboratory",
-        "added": [],
-        "note": "Neutral - same as post_foundationscrisis"
-      },
-      {
-        "stage": "post_postfoundationscrisis",
-        "map": "Lab/map_data_post_foundationscrisis",
-        "added": [],
-        "note": "Neutral - collects bias visualization, rhizome network, molecular design"
-      }
-    ],
-    "known_issues": [
+		],
+		"note": "Gate: opens northeast room and final teleporters"
+	  },
+	  {
+		"stage": "post_qfeplaboratory",
+		"map": "Lab/map_data_post_qfeplaboratory",
+		"added": [],
+		"note": "Neutral - same as post_foundationscrisis"
+	  },
+	  {
+		"stage": "post_postfoundationscrisis",
+		"map": "Lab/map_data_post_foundationscrisis",
+		"added": [],
+		"note": "Neutral - collects bias visualization, rhizome network, molecular design"
+	  }
+	],
+	"known_issues": [
       "Branch sequences have post-map files but aren't in the main progression chain yet"
-    ],
-    "rebuild_log": "2026-02-17: Full chain rebuild with branching tree structure. Gate maps open new rooms; neutral maps are identical to parent. Fixed sizes, teleporter accumulation, m: markers, typos. post_random renamed to post_randomness."
+	],
+	"rebuild_log": "2026-02-17: Full chain rebuild with branching tree structure. Gate maps open new rooms; neutral maps are identical to parent. Fixed sizes, teleporter accumulation, m: markers, typos. post_random renamed to post_randomness."
   },
   "visualization": {
-    "layout": "metro_map",
-    "spine_style": {
-      "line_width": 8,
-      "station_size": 24,
-      "glow": true
-    },
-    "branch_style": {
-      "line_width": 4,
-      "station_size": 16,
-      "dashed": true
-    }
+	"layout": "metro_map",
+	"spine_style": {
+	  "line_width": 8,
+	  "station_size": 24,
+	  "glow": true
+	},
+	"branch_style": {
+	  "line_width": 4,
+	  "station_size": 16,
+	  "dashed": true
+	}
   }
 }

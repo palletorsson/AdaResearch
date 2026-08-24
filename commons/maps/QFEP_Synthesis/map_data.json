@@ -1,637 +1,117 @@
 {
- "map_info": {
-  "name": "QFEP_Synthesis",
-  "lookup_name": "QFEP_Synthesis",
-  "description": "QFE = F \u2212 \u03bbE(S) + \u03c6\u0394E(S,t). The formula is not a static equation \u2014 it is a metamorphosis. Walk the egg \u2192 larva \u2192 imago strip; collect F, E, \u03bb, \u03c6 along the path; the formula unfolds atop the plinth; the imago you return as is what the force has earned. Merian's lifecycle plate, mid-fold.\n\n[Placement applied humanoid_walker engine \u2014 constraint 0.889\u21920.943, walkability 0.458\u21920.544]",
-  "version": "placed-humanoid_walker",
-  "format": "json",
-  "dimensions": {
-   "width": 12,
-   "depth": 14,
-   "max_height": 4
+  "map_info": {
+    "name": "QFEP_Synthesis",
+    "lookup_name": "QFEP_Synthesis",
+    "description": "QFE = F − λE(S) + φΔE(S,t). The formula is not a static equation — it is a metamorphosis. Walk the egg → larva → imago strip; collect F, E, λ, φ along the path; the formula unfolds atop the plinth; the imago you return as is what the force has earned. Merian's lifecycle plate, mid-fold.\n\n[Placement applied humanoid_walker engine — constraint 0.889→0.943, walkability 0.458→0.544]",
+    "version": "placed-humanoid_walker",
+    "format": "json",
+    "dimensions": {
+      "width": 12,
+      "depth": 14,
+      "max_height": 4
+    },
+    "metadata": {
+      "difficulty": "advanced",
+      "category": "qfep",
+      "estimated_time": "5-6 minutes",
+      "learning_objectives": ["Integration of all QFEP concepts","The formula as lived experience","You have the capacity to oscillate consciously","Return to the lab transformed"]
+    },
+    "title": "QFEP_Synthesis",
+    "eye_shot_adopted": "Trial_eye_QFEP_Synthesis"
   },
-  "metadata": {
-   "difficulty": "advanced",
-   "category": "qfep",
-   "estimated_time": "5-6 minutes",
-   "learning_objectives": [
-    "Integration of all QFEP concepts",
-    "The formula as lived experience",
-    "You have the capacity to oscillate consciously",
-    "Return to the lab transformed"
-   ]
+  "utility_definitions": {
+    "t": {
+      "type": "teleporter",
+      "name": "Return to Lab",
+      "description": "Return transformed. The lab has changed.",
+      "properties": {
+        "destination": "Lab",
+        "lab_variant": "post_qfeplaboratory"
+      }
+    }
   },
-  "title": "QFEP_Synthesis",
-  "eye_shot_adopted": "Trial_eye_QFEP_Synthesis"
- },
- "utility_definitions": {
-  "t": {
-   "type": "teleporter",
-   "name": "Return to Lab",
-   "description": "Return transformed. The lab has changed.",
-   "properties": {
-    "destination": "Lab",
-    "lab_variant": "post_qfeplaboratory"
-   }
-  }
- },
- "audio": {
-  "ambient_preset": "synthesis_harmonic",
-  "volume": -5.0
- },
- "documentation": {
-  "summary": "QFEP_Synthesis - Integration and Mastery",
-  "layout": "Reflective space. The formula complete. Return portal to transformed lab.",
-  "objective": "Reflect on the journey. See the complete formula. Return to the lab with new capabilities.",
-  "key_elements": [
-   "Complete QFEP formula display",
-   "Summary of each term",
-   "Your \u03bb and \u03c6 settings displayed",
-   "Portal to post-QFEP lab"
-  ]
- },
- "lighting": {
-  "ambient_color": [
-   0.25,
-   0.25,
-   0.3
-  ],
-  "ambient_energy": 0.7,
-  "directional_light": {
-   "enabled": true,
-   "direction": [
-    -0.3,
-    -0.8,
-    -0.3
-   ],
-   "color": [
-    1.0,
-    1.0,
-    1.0
-   ],
-   "energy": 1.0
-  }
- },
- "settings": {
-  "cube_size": 1.0,
-  "gutter": 0.0,
-  "show_grid": true,
-  "enable_physics": true,
-  "background": {
-   "type": "sky",
-   "color": [
-    0.1,
-    0.1,
-    0.15
-   ]
+  "audio": {
+    "ambient_preset": "synthesis_harmonic",
+    "volume": -5.0
   },
-  "grid_animation": {
-   "enabled": true,
-   "type": "scale_up",
-   "duration": 0.5,
-   "delay_between": 0.03,
-   "order": "radial_center",
-   "easing": "ease_out"
+  "documentation": {
+    "summary": "QFEP_Synthesis - Integration and Mastery",
+    "layout": "Reflective space. The formula complete. Return portal to transformed lab.",
+    "objective": "Reflect on the journey. See the complete formula. Return to the lab with new capabilities.",
+    "key_elements": ["Complete QFEP formula display","Summary of each term","Your λ and φ settings displayed","Portal to post-QFEP lab"]
+  },
+  "lighting": {
+    "ambient_color": [0.25,0.25,0.3],
+    "ambient_energy": 0.7,
+    "directional_light": {
+      "enabled": true,
+      "direction": [-0.3,-0.8,-0.3],
+      "color": [1.0,1.0,1.0],
+      "energy": 1.0
+    }
+  },
+  "settings": {
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": true,
+    "enable_physics": true,
+    "background": {
+      "type": "sky",
+      "color": [0.1,0.1,0.15]
+    },
+    "grid_animation": {
+      "enabled": true,
+      "type": "scale_up",
+      "duration": 0.5,
+      "delay_between": 0.03,
+      "order": "radial_center",
+      "easing": "ease_out"
+    }
+  },
+  "layers": {
+    "structure": [
+      ["1","1","2","2","2","2","2","2","2","2","2","2"],
+      ["1","1","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","2","2","2","2","1","1","1","2"],
+      ["2","1","1","2","2","3","3","2","2","1","1","2"],
+      ["2","1","1","2","3","3","3","3","2","1","1","2"],
+      ["2","1","1","2","3","3","3","3","2","1","1","2"],
+      ["2","1","1","2","2","3","3","2","2","1","1","2"],
+      ["2","1","1","1","2","2","2","2","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","1","2"],
+      ["2","2","2","2","1","0","0","1","2","2","2","0"]
+    ],
+    "utilities": [
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," ","s"," "," "," "," "," "," "],
+      [" "," "," ","3t:EGG"," "," "," "," "," "," "," "," "],
+      [" "," ","3t:F"," "," "," "," "," ","3t:E(S)"," "," "," "],
+      [" "," "," "," "," ","3t:THE PLINTH OF BECOMING"," "," "," "," "," "," "],
+      [" "," ","3t:λ"," "," ","el:3:1"," "," ","3t:φ"," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," ","3t:FORMULA UNFOLDS"," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," ","3t:IMAGO"," "," "," "," "," "," "],
+      [" "," "," "," "," ","3t:RETURN TRANSFORMED"," "," "," "," "," "," "],
+      [" "," "," "," "," ","t:lab"," "," "," "," "," "," "]
+    ],
+    "interactables": [
+      [" ","tt:270:qfep_synthesis:180:0.5","queer_morphology_specimen:0:0.05:0.25"," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," ","grab_sphere_F:0:0.4","qfep_formula_3d:0:2.0"," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," ","grasp_cabinet:0:0"," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" ","grab_sphere_E:0:0.4","grab_sphere_lambda:0:0.4","grab_sphere_phi:0:0.4"," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "]
+    ]
   }
- },
- "layers": {
-  "structure": [
-   [
-    "1",
-    "1",
-    "2",
-    "2",
-    "2",
-    "2",
-    "2",
-    "2",
-    "2",
-    "2",
-    "2",
-    "2"
-   ],
-   [
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "2"
-   ],
-   [
-    "2",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "2"
-   ],
-   [
-    "2",
-    "1",
-    "1",
-    "1",
-    "2",
-    "2",
-    "2",
-    "2",
-    "1",
-    "1",
-    "1",
-    "2"
-   ],
-   [
-    "2",
-    "1",
-    "1",
-    "2",
-    "2",
-    "3",
-    "3",
-    "2",
-    "2",
-    "1",
-    "1",
-    "2"
-   ],
-   [
-    "2",
-    "1",
-    "1",
-    "2",
-    "3",
-    "3",
-    "3",
-    "3",
-    "2",
-    "1",
-    "1",
-    "2"
-   ],
-   [
-    "2",
-    "1",
-    "1",
-    "2",
-    "3",
-    "3",
-    "3",
-    "3",
-    "2",
-    "1",
-    "1",
-    "2"
-   ],
-   [
-    "2",
-    "1",
-    "1",
-    "2",
-    "2",
-    "3",
-    "3",
-    "2",
-    "2",
-    "1",
-    "1",
-    "2"
-   ],
-   [
-    "2",
-    "1",
-    "1",
-    "1",
-    "2",
-    "2",
-    "2",
-    "2",
-    "1",
-    "1",
-    "1",
-    "2"
-   ],
-   [
-    "2",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "2"
-   ],
-   [
-    "2",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "2"
-   ],
-   [
-    "2",
-    "2",
-    "2",
-    "2",
-    "1",
-    "0",
-    "0",
-    "1",
-    "2",
-    "2",
-    "2",
-    "0"
-   ]
-  ],
-  "utilities": [
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    "s",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    "3t:EGG",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    "3t:F",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    "3t:E(S)",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    "3t:THE PLINTH OF BECOMING",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    "3t:\u03bb",
-    " ",
-    " ",
-    "el:3:1",
-    " ",
-    " ",
-    "3t:\u03c6",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    "3t:FORMULA UNFOLDS",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    "3t:IMAGO",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    "3t:RETURN TRANSFORMED",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    "t:lab",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ]
-  ],
-  "interactables": [
-   [
-    " ",
-    "tt:qfep_synthesis:180:0.5",
-    "queer_morphology_specimen:0:0.05:0.25",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    "grab_sphere_F:0:0.4",
-    "qfep_formula_3d:0:2.0",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    "grab_sphere_E:0:0.4",
-    "grab_sphere_lambda:0:0.4",
-    "grab_sphere_phi:0:0.4",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ]
-  ]
- }
 }

@@ -1,0 +1,36 @@
+{
+  "schema": "adaresearch.dedicated_world_site.v1",
+  "site_id": "world-konigsberg3d-c025c77",
+  "status": "pilot_authored",
+  "source_register": "res://ada_run/dedicated_world_register.json",
+  "artifact": {
+    "lookup": "KonigsbergBridge",
+    "scene": "res://algorithms/graphtheory/graphspace3d/konigsberg3d.tscn",
+    "body_m": [50.0, 32.0, 4.9],
+    "scale": [1.0, 1.0, 1.0]
+  },
+  "site": {
+    "map": "World_Konigsberg_Bridge",
+    "scene": "res://commons/artifacts/museum/konigsberg_observation_court.tscn",
+    "formula": "perimeter_observation_court",
+    "envelope_m": [56, 38, 5],
+    "grid_m": 1,
+    "apron_m": 3,
+    "floor_tile_count": 528,
+    "continuous_player_route": true,
+    "graph_edges_added": 0
+  },
+  "artifact_order": {
+    "departure_index": 710,
+    "departure_lookup": "KonigsbergBridge",
+    "return_index": 711,
+    "return_lookup": "force_directed_layout",
+    "fallback_return_map": "GT_Layout"
+  },
+  "negotiation": {
+    "derived_layer_decides": "dedicated site required; body and apron envelope",
+    "authored_layer_decides": "court formula, circulation, material distinction, entry and return",
+    "body_must_remain_full_scale": true,
+    "architecture_must_not_modify_graph_topology": true
+  }
+}

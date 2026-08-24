@@ -1,111 +1,111 @@
 {
   "documentation": {
-    "key_elements": ["`nail_color_controller:180:1.0` console at (2,3)","`colorballs` accessory rack at (2,4)","`dark_sphere` dome creating the studio ambiance","Ring of extra lights `el` and teleporter `t` at (3,6)"],
-    "layout": "6x7 salon bay with concentric lighting and nail interaction stations.",
-    "objective": "Use the nail color controller and color balls to practice precise color selection.",
-    "summary": "Color_Nails - Nail Polish Studio"
+	"key_elements": ["`nail_color_controller:180:1.0` console at (2,3)","`colorballs` accessory rack at (2,4)","`dark_sphere` dome creating the studio ambiance","Ring of extra lights `el` and teleporter `t` at (3,6)"],
+	"layout": "6x7 salon bay with concentric lighting and nail interaction stations.",
+	"objective": "Use the nail color controller and color balls to practice precise color selection.",
+	"summary": "Color_Nails - Nail Polish Studio"
   },
   "layers": {
-    "interactables": [
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," ","dark_sphere"," "," "," "],
-      [" "," ","nail_color_controller:180","hand_model:90:-1:3","hand_color_controller:180"," "," "],
-      [" "," "," "," "," "," ","science_screen:180:1.5#mode:field"],
-      [" "," "," ","dark_side_prism:0:1.5"," "," "," "],
-      [" ","grab_stick_scanner:0:1","colorballs"," "," "," "," "],
-      ["brick_wall_factory:90"," ","colorballs"," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "]
-    ],
-    "structure": [
-      ["1","1","2","2","2","2","2"],
-      ["2","1","1","1","1","1","2"],
-      ["2","1","1","1","1","1","2"],
-      ["2","1","1","1","1","1","2"],
-      ["2","1","1","1","1","1","2"],
-      ["2","1","2","1","2","1","2"],
-      ["2","1","3","3","3","0","2"],
-      ["2","1","2","1","2","1","2"],
-      ["2","1","1","1","1","1","2"],
-      ["2","1","1","1","1","1","2"],
-      ["2","1","1","1","1","1","2"],
-      ["2","1","1","1","1","1","2"],
-      ["2","1","2","2","2","2","2"]
-    ],
-    "utilities": [
-      ["sp"," "," "," "," "," "," "],
-      [" ","el"," ","el"," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," ","t"," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "]
-    ]
+	"interactables": [
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," ","dark_sphere"," "," "," "],
+	  [" "," ","nail_color_controller:180","hand_model:90:-1:3","hand_color_controller:180"," "," "],
+	  [" "," "," "," "," "," ","science_screen:180:1.5#mode:field"],
+	  [" "," "," ","dark_side_prism:0:1.5"," "," "," "],
+	  [" ","grab_stick_scanner:0:1","colorballs"," "," "," "," "],
+	  ["brick_wall_factory:90"," ","colorballs"," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "]
+	],
+	"structure": [
+	  ["1","1","2","2","2","2","2"],
+	  ["2","1","1","1","1","1","2"],
+	  ["2","1","1","1","1","1","2"],
+	  ["2","1","1","1","1","1","2"],
+	  ["2","1","1","1","1","1","2"],
+	  ["2","1","2","1","2","1","2"],
+	  ["2","1","3","3","3","0","2"],
+	  ["2","1","2","1","2","1","2"],
+	  ["2","1","1","1","1","1","2"],
+	  ["2","1","1","1","1","1","2"],
+	  ["2","1","1","1","1","1","2"],
+	  ["2","1","1","1","1","1","2"],
+	  ["2","1","2","2","2","2","2"]
+	],
+	"utilities": [
+	  ["sp"," "," "," "," "," "," "],
+	  [" ","el"," ","el"," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," ","t"," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "]
+	]
   },
   "lighting": {
-    "ambient_color": [0.4,0.4,0.5],
-    "ambient_energy": 0.6,
-    "directional_light": {
-      "color": [1.0,0.9,0.8],
-      "direction": [-0.4,-0.7,-0.4],
-      "enabled": true,
-      "energy": 1.2
-    }
+	"ambient_color": [0.4,0.4,0.5],
+	"ambient_energy": 0.6,
+	"directional_light": {
+	  "color": [1.0,0.9,0.8],
+	  "direction": [-0.4,-0.7,-0.4],
+	  "enabled": true,
+	  "energy": 1.2
+	}
   },
   "map_info": {
-    "description": "A salon for digital fingers. Use the nail color controller and color balls to practice precise color selection - decoration for a body that exists only as data.",
-    "dimensions": {
-      "depth": 13.0,
-      "max_height": 3.0,
-      "width": 7.0
-    },
-    "format": "json",
-    "lookup_name": "Color_Nails",
-    "metadata": {
-      "category": "color",
-      "difficulty": "beginner",
-      "estimated_time": "3-4 minutes",
-      "learning_objectives": ["Color selection","Precise hue control","Digital materiality"]
-    },
-    "name": "Color Nails",
-    "title": "Nail Salon Color Selection",
-    "version": "1.0"
+	"description": "A salon for digital fingers. Use the nail color controller and color balls to practice precise color selection - decoration for a body that exists only as data.",
+	"dimensions": {
+	  "depth": 13.0,
+	  "max_height": 3.0,
+	  "width": 7.0
+	},
+	"format": "json",
+	"lookup_name": "Color_Nails",
+	"metadata": {
+	  "category": "color",
+	  "difficulty": "beginner",
+	  "estimated_time": "3-4 minutes",
+	  "learning_objectives": ["Color selection","Precise hue control","Digital materiality"]
+	},
+	"name": "Color Nails",
+	"title": "Nail Salon Color Selection",
+	"version": "1.0"
   },
   "settings": {
-    "auto_reveal_on_entry": false,
-    "background": {
-      "color": [0.2,0.3,0.7],
-      "type": "sky"
-    },
-    "cube_size": 1.0,
-    "enable_physics": true,
-    "gutter": 0.0,
-    "initial_tile_visibility": "hidden_except_corners",
-    "show_grid": true
+	"auto_reveal_on_entry": false,
+	"background": {
+	  "color": [0.2,0.3,0.7],
+	  "type": "sky"
+	},
+	"cube_size": 1.0,
+	"enable_physics": true,
+	"gutter": 0.0,
+	"initial_tile_visibility": "hidden_except_corners",
+	"show_grid": true
   },
   "utility_definitions": {
-    "s": {
-      "properties": {
-        "height": 5.5
-      }
-    },
-    "t": {
-      "description": "Continue to next step",
-      "name": "Next",
-      "properties": {
-        "action": "next_in_sequence"
-      },
-      "type": "teleporter"
-    }
+	"s": {
+	  "properties": {
+		"height": 5.5
+	  }
+	},
+	"t": {
+	  "description": "Continue to next step",
+	  "name": "Next",
+	  "properties": {
+		"action": "next_in_sequence"
+	  },
+	  "type": "teleporter"
+	}
   }
 }
