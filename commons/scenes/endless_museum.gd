@@ -3579,21 +3579,37 @@ func _build_segment() -> void:
 	# cell moves), wedges connecting the entry door down into the pool, the
 	# exit door up out of it, and each side margin to the pool floor.
 	if sim_margin > 0 and not basin_cells.is_empty():
+		# THE POOL TAKES THE SIDES (2026-08-24, Palle: "make the pool a bit
+		# more width so we can not walk on the sides, you must take the way
+		# through the simulation"). The margin is no longer a dry walkway
+		# beside the simulation — it is MORE POOL: the basin runs wall to
+		# wall, so the only route across is down the entry wedge, through
+		# the grid, and up the far one. Registered in basin_cells FIRST, so
+		# the tile loop below draws no rim wall where pool meets pool.
+		for zz0 in range(tile.size()):
+			for mxo0 in range(1, sim_margin + 1):
+				basin_cells[Vector2i(-mxo0, zz0)] = true
+				basin_cells[Vector2i(w - 1 + mxo0, zz0)] = true
 		for zz in range(tile.size()):
 			var z2: int = zz + VESTIBULE_H
 			for mxo in range(1, sim_margin + 1):
 				for sxm_v in [-mxo, w - 1 + mxo]:
 					var sxm: int = sxm_v
-					_box(seg, Vector3(sxm + 0.5, -0.1, z2 + 0.5), Vector3(1, 0.2, 1), Color(0.16, 0.16, 0.19), m_floor)
-					_add_col(solid, Vector3(sxm + 0.5, -0.1, z2 + 0.5), Vector3(1, 0.2, 1))
+					_box(seg, Vector3(sxm + 0.5, -basin_depth - 0.1, z2 + 0.5), Vector3(1, 0.2, 1), Color(0.10, 0.10, 0.13), m_floor)
+					_add_col(solid, Vector3(sxm + 0.5, -basin_depth - 0.1, z2 + 0.5), Vector3(1, 0.2, 1))
 					_walk_cells[Vector2i(sxm, zbase + z2)] = true
+					# the OUTER rim: the pool's own wall against the courtyard
+					if mxo == sim_margin:
+						var rimx: float = sxm + (0.5 - 0.45 if sxm < 0 else 0.5 + 0.45)
+						_box(seg, Vector3(rimx, -basin_depth / 2.0, z2 + 0.5), Vector3(0.1, basin_depth, 1), Color(0.14, 0.14, 0.17), m_wall)
+						_add_col(solid, Vector3(rimx, -basin_depth / 2.0, z2 + 0.5), Vector3(0.1, basin_depth, 1))
+		# ONLY the entry and exit wedges now — the side pair climbed onto
+		# margins that are pool, and a wedge to nowhere is a trap
 		var sim_h: int = maxi(1, tile.size() - 3)   # the chicane's 3 rows came after the map
 		var dc0: int = _open_col(tile, 0)
 		var dc1: int = _open_col(tile, sim_h - 1)
 		_stamp_wedge(seg, Vector2i(dc0, VESTIBULE_H), "south", basin_depth, zbase, 1.0, -basin_depth)
 		_stamp_wedge(seg, Vector2i(dc1, VESTIBULE_H + sim_h - 1), "north", basin_depth, zbase, 1.0, -basin_depth)
-		_stamp_wedge(seg, Vector2i(0, VESTIBULE_H + sim_h / 2), "east", basin_depth, zbase, 1.0, -basin_depth)
-		_stamp_wedge(seg, Vector2i(w - 1, VESTIBULE_H + sim_h / 2), "west", basin_depth, zbase, 1.0, -basin_depth)
 		# the pool floor IS the exhibition floor here — walkable for every
 		# planner that reads the walk map
 		for bc_v in basin_cells.keys():
@@ -3816,6 +3832,20 @@ func _build_segment() -> void:
 	# holds, and the walls dress themselves while the visitor crosses the
 	# loading room. Bake, shot and studio keep the synchronous order — a proof
 	# frame of an undressed hall proves nothing.
+	# NO SEAMS OVER THE WATER (2026-08-24, Palle: "remove any left floor
+	# seams"). em_detail lays joint strips and floor props per FLOOR cell,
+	# and a basin cell still reads as floor in the tile — so every seam in a
+	# sunken hall hung at deck height over open pool. The dress sees a MASKED
+	# tile where the pool is hollow ("0"); the built hall keeps its own.
+	var dress_tile: Array = tile
+	if not basin_cells.is_empty():
+		dress_tile = []
+		for dz in range(tile.size()):
+			var drow: Array = (tile[dz] as Array).duplicate()
+			for dx in range(drow.size()):
+				if basin_cells.has(Vector2i(dx, dz)):
+					drow[dx] = "0"
+			dress_tile.append(drow)
 	var dress_seg_no: int = _seg_index
 	var dress_pass := func() -> void:
 		if _mod_has(_mod_detail, "dress_segment") and _bodies_on:
@@ -3826,7 +3856,7 @@ func _build_segment() -> void:
 			# than assumed: an older em_detail on disk keeps the 6-arg contract and
 			# degrades to its own derived rate instead of erroring out.
 			if _mod_arity(_mod_detail, "dress_segment") >= 7:
-				_mod_detail.call("dress_segment", seg, tile, w, h, _detail_mats, _prev_w,
+				_mod_detail.call("dress_segment", seg, dress_tile, w, h, _detail_mats, _prev_w,
 					{"wall_features_max": int(deal.get("wall_features_max", -1)),
 						"fill_walls": bool(deal.get("fill_walls", true)),
 						"hang_min_stretch": int(deal.get("hang_min_stretch", 2)),
@@ -3880,7 +3910,7 @@ func _build_segment() -> void:
 								"from": [], "tile_cell": [], "rotation": 0.0,
 								"chapter": next_seq, "seg": seg})
 			else:
-				_mod_detail.call("dress_segment", seg, tile, w, h, _detail_mats, _prev_w)
+				_mod_detail.call("dress_segment", seg, dress_tile, w, h, _detail_mats, _prev_w)
 		# 1b. FURNITURE. em_detail is contractually forbidden to add collision, and a
 		#     bench you can walk through is worse than no bench — so the one fixture
 		#     family that occupies floor lives here, where the segment's StaticBody3D
