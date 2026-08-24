@@ -52,7 +52,9 @@ var _control_panel: Node3D
 var _octaves_slider: Node
 var _lacunarity_slider: Node
 var _persistence_slider: Node
-var _rng: RandomNumberGenerator
+## Built HERE, not in _ready: apply_grid_config can run before _ready (the museum
+## stamps config on a root still outside the tree) and used to find this null.
+var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var _grid_config: Dictionary = {}  # Stored for case fitting
 
 # Random offsets per octave for variety
@@ -60,7 +62,6 @@ var _octave_offsets: Array[Vector2] = []
 
 
 func _ready() -> void:
-	_rng = RandomNumberGenerator.new()
 	_rng.seed = seed_value
 	_generate_octave_offsets()
 	_build_floor_quad()

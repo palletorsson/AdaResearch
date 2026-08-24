@@ -41,7 +41,9 @@ const GRID_COLOR: Color = Color(0.08, 0.08, 0.12)
 
 # --- Internal ---
 
-var _rng: RandomNumberGenerator
+## Built HERE, not in _ready: apply_grid_config can run before _ready (the museum
+## stamps config on a root still outside the tree) and used to find this null.
+var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var _mesh_inst: MeshInstance3D
 var _material: StandardMaterial3D
 var _stats_label: Label3D
@@ -50,7 +52,6 @@ var _dist_label: Label3D
 
 
 func _ready() -> void:
-	_rng = RandomNumberGenerator.new()
 	_rng.seed = seed_value
 	_build_floor_quad()
 	_build_labels()

@@ -58,11 +58,10 @@ const COLOR_EXIT = Color(0.85, 0.15, 0.1)     # red
 var _grid: PackedInt32Array
 var _mesh_inst: MeshInstance3D
 var _material: StandardMaterial3D
-var _rng: RandomNumberGenerator
-
-
+## Built HERE, not in _ready: apply_grid_config can run before _ready (the museum
+## stamps config on a root still outside the tree) and used to find this null.
+var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
 func _ready() -> void:
-	_rng = RandomNumberGenerator.new()
 	_rng.seed = seed_value
 	_build_floor_quad()
 	_generate_cave()

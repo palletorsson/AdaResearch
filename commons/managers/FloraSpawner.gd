@@ -425,9 +425,11 @@ func _update_visibility(density: float) -> void:
 func apply_grid_config(_config: Dictionary) -> void:
 	_cached_density = -1.0
 	_nature_data = {}
-	# Clear existing flora
-	for child in _spawn_root.get_children():
-		child.queue_free()
+	# Clear existing flora. _spawn_root is built in _ready and config can arrive
+	# before that — in which case there is nothing spawned to clear.
+	if _spawn_root:
+		for child in _spawn_root.get_children():
+			child.queue_free()
 	_multimeshes.clear()
 	_real_nodes.clear()
 	_canonical_nodes.clear()

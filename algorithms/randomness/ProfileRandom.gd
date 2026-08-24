@@ -483,6 +483,16 @@ func _read_meta_overrides() -> void:
 ## profile_points already on the table, because a late readout change must not deal a
 ## different set of numbers under a placement that pinned its seed.
 func apply_grid_config(config: Dictionary) -> void:
+	# _ready assigns `profile_mesh = $RandomPlane`, and config can arrive before
+	# _ready — the museum stamps it on a root still outside the tree. The CHILD
+	# exists from instantiate(); only the assignment waits. Resolve it here, once,
+	# so every path below (including _create_column_mesh, which dereferences it
+	# too) is safe rather than just the line that happened to crash.
+	if profile_mesh == null:
+		profile_mesh = get_node_or_null("RandomPlane") as MeshInstance3D
+	if profile_mesh == null:
+		push_warning("ProfileRandom: no RandomPlane child — config ignored")
+		return
 	var before: String = readout
 	for k in config.keys():
 		set_meta("config_%s" % str(k), config[k])

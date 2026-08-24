@@ -52,14 +52,15 @@ const DOOR_COLOR: Color = Color(0.35, 0.25, 0.15)
 
 var _mesh_inst: MeshInstance3D
 var _material: StandardMaterial3D
-var _rng: RandomNumberGenerator
+## Built HERE, not in _ready: apply_grid_config can run before _ready (the museum
+## stamps config on a root still outside the tree) and used to find this null.
+var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var _rooms: Array = []  # Array of Rect2i (leaf rooms)
 var _title: Label3D
 var _built: bool = false
 
 
 func _ready() -> void:
-	_rng = RandomNumberGenerator.new()
 	_rng.seed = seed_value
 	_build_floor_quad()
 	_generate_floor_plan()

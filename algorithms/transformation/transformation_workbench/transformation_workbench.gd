@@ -234,6 +234,13 @@ func get_coordinate_swap_text(euler: Vector3) -> String:
 
 # Grid artifact configuration API
 func apply_grid_config(config: Dictionary) -> void:
+	# @onready does not assign until the node enters the tree, and config can arrive
+	# before that (the museum stamps it on a detached root). Both children exist from
+	# instantiate(), so resolve them by hand rather than trusting @onready to have run.
+	if matrix_display == null:
+		matrix_display = get_node_or_null("MatrixDisplay")
+	if vector_display == null:
+		vector_display = get_node_or_null("VectorDisplay")
 	if config.has("mode"):
 		var mode_str = str(config["mode"]).to_lower()
 		match mode_str:
@@ -249,10 +256,12 @@ func apply_grid_config(config: Dictionary) -> void:
 		show_vectors = str(config["show_vectors"]).to_lower() == "true"
 	if config.has("snap_90"):
 		snap_rotation_to_90 = str(config["snap_90"]).to_lower() == "true"
-	
+
 	update_mode_visuals()
-	matrix_display.visible = show_matrix
-	vector_display.visible = show_vectors
+	if matrix_display:
+		matrix_display.visible = show_matrix
+	if vector_display:
+		vector_display.visible = show_vectors
 
 func _exit_tree() -> void:
 	for child in get_children():
