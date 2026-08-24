@@ -59,13 +59,9 @@
         "Pattern_Foundry",
         "Color_Context_Placed",
         "Color_Nails",
-        "Color_Grid_Pallet",
-        "Color_Rainbow",
         "Color_Pillar",
         "Chamber_Color",
-        "Color_Paint",
         "Color_Walls",
-        "Color_Flashlight",
         "Symmetry_Seventeen"
       ],
       "deferred_maps": [
@@ -73,9 +69,13 @@
         "Color_Grabbable",
         "Color_Overlay",
         "Color_Spectrum",
-        "Color_Sphere"
+        "Color_Sphere",
+        "Color_Flashlight",
+        "Color_Grid_Pallet",
+        "Color_Rainbow",
+        "Color_Paint"
       ],
-      "deferred_reason": "Removed from active sequence to tighten progression. Color_Context is a 30-artifact showcase map â€” potential future standalone or advanced color sequence.",
+      "deferred_reason": "2026-08-24 CONSOLIDATION: Color_Flashlight held zero artifacts; Color_Grid_Pallet, Color_Rainbow and Color_Paint held four to seven, mostly recall and furniture. Their six real pieces moved into the ladder's rooms (spectrum_forest, rainbow, ball_painting_demo -> Color_Walls; gridcolorizer -> Array; pattern_mill -> Pattern_Foundry; albers_wall_gallery -> Color_Context_Placed). The map FILES remain on disk — deferred, not deleted.",
       "axiom_files": [
         "res://commons/context/clipboard/tutorial_text/color_axioms.md",
         "res://commons/context/clipboard/tutorial_text/rgb_axioms.md",
