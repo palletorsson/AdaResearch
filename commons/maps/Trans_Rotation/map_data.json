@@ -16,7 +16,16 @@
       "estimated_time": "3-4 minutes",
       "learning_objectives": ["2D arrays","Grid navigation","X-Y coordinate system","Multi-dimensional thinking"]
     },
-    "title": "Rotation and Composition"
+    "title": "Rotation and Composition",
+    "museum": {
+      "basin": {
+        "depth": 1.0,
+        "glass": false,
+        "rects": [
+          [1,2,5,5]
+        ]
+      }
+    }
   },
   "utility_definitions": {
     "t": {
@@ -107,7 +116,7 @@
     "utilities": [
       [" "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
+      [" "," "," ","wp"," "," "," "],
       [" "," "," ","@signature:rotate_grid_cubes"," "," "," "],
       [" "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "],
@@ -165,8 +174,8 @@
       [" "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "],
       [" "," ","dark_sphere"," "," "," "," "],
-      [" "," ","spin:180:1"," "," "," "," "],
-      [" "," ","spin:0:1"," "," "," "," "],
+      [" "," ","spin:180:1#plinth:0.90"," "," "," "," "],
+      [" "," ","spin:0:1#plinth:0.90"," "," "," "," "],
       [" "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "],

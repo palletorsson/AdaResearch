@@ -180,8 +180,23 @@ var _catches: int = 0
 # unload the map we are leaving behind?" — the museum always has; these are
 # the numbers it does it by, and they now live in the config with the rest.
 var BUILD_AHEAD_M := 24.0
-var KEEP_BEHIND_M := 70.0
+## THE TWO-HALL WINDOW (2026-08-24, Palle: "too heavy to render when many
+## halls are shown at the same time ... no more than two maps at a time,
+## reload if we walk back"). The hall behind frees once the eye is 10 m past
+## its far edge — deep enough into the current hall that the door has closed
+## behind you — so the tree holds the current hall + the built-ahead next,
+## with the previous alive only for the first ten metres of a crossing.
+var KEEP_BEHIND_M := 10.0
+## A hall AHEAD frees when the walker has turned back and left it this far in
+## front — well past the rebuild margin, so free/rebuild cannot thrash.
+var KEEP_AHEAD_M := 50.0
+## Rebuild a freed neighbour when the eye is this close to the alive window's
+## edge. MUST stay under KEEP_BEHIND_M (the hysteresis that prevents a freed
+## hall from rebuilding the same frame it was freed).
+var REBUILD_MARGIN_M := 6.0
 var MIN_SEGMENTS := 2
+## Freed segments' records — z-range + the cursor snapshot that rebuilds them.
+var _freed: Array = []
 # THE V1 CONSTANT, now only a FALLBACK. Eight objects for twenty-six buildings
 # was simultaneously far too few for the Soane (51 declared slots in 13 cells of
 # width, a building whose whole argument is that every wall of the path is the
@@ -335,7 +350,7 @@ var _live_ledger: Dictionary = {}     # token -> entry, loaded once, saved when 
 var _live_ledger_loaded: bool = false
 var _live_dirty: bool = false
 var _walk_inside: Dictionary = {}     # token -> true, this run
-var _segments: Array = []         # [{node, z0, z1, index}]
+var _segments: Array = []         # [{node, z0, z1, index, w, snap, pearl}] — snap rebuilds a freed hall
 var _next_z: float = 0.0
 var _seg_index: int = 0
 var _prev_w: int = -1             # width of the previous segment's tile (lobby seals the jump)
@@ -1096,6 +1111,8 @@ func _load_modules() -> void:
 	_mod_gate = _load_module("em_gate.gd")
 	BUILD_AHEAD_M = _L("stream", "build_ahead_m", BUILD_AHEAD_M)
 	KEEP_BEHIND_M = _L("stream", "keep_behind_m", KEEP_BEHIND_M)
+	KEEP_AHEAD_M = _L("stream", "keep_ahead_m", KEEP_AHEAD_M)
+	REBUILD_MARGIN_M = _L("stream", "rebuild_margin_m", REBUILD_MARGIN_M)
 	MIN_SEGMENTS = int(_L("stream", "min_segments", float(MIN_SEGMENTS)))
 	ART_SHOW_M = _L("stream", "cull_near_m", ART_SHOW_M)
 	ART_HIDE_M = _L("stream", "cull_far_m", ART_HIDE_M)
@@ -2818,6 +2835,71 @@ func _stamp_wedge(seg: Node3D, cell: Vector2i, facing: String, rise: float, zbas
 	return true
 
 
+## MUSEUM-SAFE DANGER (2026-08-24, Trans_Pit): a hazard patch — the fire
+## look, an Area3D, and a touch that flashes red and sets the walker back at
+## the hall's entrance. The grid keeps the true death system; the museum's
+## walk never reloads. Desktop-only teleport (the VR rig is not moved).
+func _stamp_hazard(seg: Node3D, cell: Vector2i, zbase: int, entrance: Vector3) -> void:
+	var patch := Node3D.new()
+	patch.name = "Hazard_%d_%d" % [cell.x, cell.y]
+	patch.position = Vector3(cell.x + 0.5, 0.0, cell.y + 0.5)
+	var mesh := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = Vector3(0.94, 0.12, 0.94)
+	mesh.mesh = bm
+	mesh.position.y = 0.06
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(1.0, 0.32, 0.08)
+	mat.emission_enabled = true
+	mat.emission = Color(1.0, 0.38, 0.05)
+	mat.emission_energy_multiplier = 2.2
+	mesh.material_override = mat
+	patch.add_child(mesh)
+	var area := Area3D.new()
+	var cs := CollisionShape3D.new()
+	var bs := BoxShape3D.new()
+	bs.size = Vector3(0.88, 1.6, 0.88)
+	cs.shape = bs
+	cs.position.y = 0.8
+	area.add_child(cs)
+	patch.add_child(area)
+	area.body_entered.connect(_hazard_touched.bind(entrance))
+	seg.add_child(patch)
+	# a hazard cell is not promised floor — the walker routes around it
+	var gc := Vector2i(cell.x, zbase + cell.y)
+	if _walk_cells.has(gc):
+		_walk_cells.erase(gc)
+		_walk_erased[gc] = "hazard"
+
+
+func _hazard_touched(body: Node3D, entrance: Vector3) -> void:
+	if _player == null or body != _player:
+		return
+	_player.position = entrance
+	_player.velocity = Vector3.ZERO
+	_hazard_flash()
+	print("[em-hazard] burned — set down at the hall's entrance")
+
+
+var _hazard_overlay: CanvasLayer = null
+func _hazard_flash() -> void:
+	if _vr:
+		return
+	if _hazard_overlay == null or not is_instance_valid(_hazard_overlay):
+		_hazard_overlay = CanvasLayer.new()
+		var cr := ColorRect.new()
+		cr.name = "Flash"
+		cr.color = Color(1, 0.1, 0.05, 0.0)
+		cr.set_anchors_preset(Control.PRESET_FULL_RECT)
+		cr.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		_hazard_overlay.add_child(cr)
+		add_child(_hazard_overlay)
+	var crn := _hazard_overlay.get_node("Flash") as ColorRect
+	crn.color.a = 0.55
+	var tw := crn.create_tween()
+	tw.tween_property(crn, "color:a", 0.0, 0.5)
+
+
 ## THE DISPATCHER. One entry for every grid utility the museum will stamp:
 ## parse with the registry, refuse with a reason, instantiate, apply the grid's
 ## parameter rules, THEN enter the tree. Returns the node, or null with the
@@ -3086,6 +3168,13 @@ func _build_segment() -> void:
 	_bake_key = ""
 	_bake_used = {}
 	_cur_dressing = []
+	# STREAM SNAPSHOT (2026-08-24, Palle: "load and unload so we do not show
+	# more than two maps at a time; reload if we walk back"): everything this
+	# build will consume from the walk's cursors, taken BEFORE consumption.
+	# A freed hall rebuilds from this — restore the cursors, build, restore
+	# back — and the same pearl stands at the same z, deterministically.
+	var stream_snap := {"rot_i": _rot_i, "pool_i": _pool_i, "seg_index": _seg_index,
+		"next_z": _next_z, "prev_w": _prev_w, "pearl_cursor": _pearl_cursor.duplicate(true)}
 	# THE PLAN OWNS THE BUILDING when one is loaded: the chapter's museum is
 	# read off its own plan row, so the stamped cast and the built walls can
 	# never disagree about where a chapter lives. A crowned chapter without a
@@ -3155,14 +3244,32 @@ func _build_segment() -> void:
 		if not derived.is_empty():
 			peek["tile"] = derived["tile"]
 			peek["artifacts"] = derived["artifacts"]
+			# the map's own museum block rides the same ONE-TRUTH refresh:
+			# open_roof and basin re-read from map_info.museum every build,
+			# so a map edit needs no plan re-apply to change the hall's sky
+			# or sink its void
+			var mm: Dictionary = derived.get("museum", {}) if derived.get("museum") is Dictionary else {}
+			peek["open_roof"] = bool(mm.get("open_roof", peek.get("open_roof", false)))
+			if mm.get("basin") is Dictionary:
+				peek["basin"] = mm["basin"]
 	if peek.get("tile") is Array and (peek["tile"] as Array).size() >= 4:
 		var trows: Array = []
 		for r_v in (peek["tile"] as Array):
 			var rr: Array = []
 			for c_v in (r_v as Array):
-				rr.append(String(c_v))
+				rr.append(str(c_v))
 			trows.append(rr)
 		tile = _open_bays(_widen_doors(trows), String(spec["key"]), next_seq)
+		# THE PASSAGES (2026-08-24, Palle: "each hall should have a starting
+		# passage and an ending passage so we can make the inevitable
+		# transformation"). An authored hall gets carved doors on BOTH edges
+		# (Trans_Introduction's solid north wall was "just a wall" where the
+		# next chapter should begin) and an exit CHICANE — door, sidestep,
+		# offset door — appended museum-side. The next segment's vestibule is
+		# the starting passage; the chicane's offset is the corner the
+		# one-hall stream hides its swap behind.
+		if String(peek.get("authored", "")) == "map":
+			tile = _authored_passages(tile)
 		h = tile.size()
 		# the WIDTH follows the tile too: rooms-per-pearl crops only rows (no
 		# change), but a map-authored tile can be wider than the template —
@@ -3375,6 +3482,39 @@ func _build_segment() -> void:
 			if sx2 == w and doorways.has(y_skin):
 				continue                    # the doorway: no skin; the room's walls take over
 			_wall_at(seg, solid, wcells, int(sx2), y_skin + VESTIBULE_H, corner_col, m_corner, wr)
+	# ── THE BASIN (2026-08-24, Palle: "like a basin with walls under the
+	# floor, like a pool, one meter down where the grid lines with the trace
+	# sit ... covered with transparent glass so we can walk over it") ────────
+	# A map declares map_info.museum.basin {depth, glass}; the hall's ENCLOSED
+	# void regions sink into pools: floor a metre down, side walls where the
+	# pool meets ground, a walkable glass lid flush with the deck. Rides peek
+	# (refreshed from the map each build). Border-touching holes stay holes.
+	var basin_cells: Dictionary = {}
+	var basin_depth: float = 0.0
+	var m_basin_glass: StandardMaterial3D = null
+	if peek.get("basin") is Dictionary:
+		var basin_decl: Dictionary = peek["basin"]
+		basin_depth = clampf(float(basin_decl.get("depth", 1.0)), 0.3, 3.0)
+		basin_cells = _basin_regions(tile)
+		# RECT BASINS (2026-08-24, the transformation series: "put it in the
+		# museum like a simulation"): a declared rect sinks FLOOR cells too —
+		# the museum's pool over a field the GRID keeps walkable, so the two
+		# worlds decouple without touching the map's structure. Shape:
+		# {"rects": [[x, z, w, d], ...]} in map/tile cells.
+		for rv in (basin_decl.get("rects", []) as Array):
+			var ra: Array = rv
+			if ra.size() < 4:
+				continue
+			for rz in range(int(ra[1]), int(ra[1]) + int(ra[3])):
+				for rx in range(int(ra[0]), int(ra[0]) + int(ra[2])):
+					if rz >= 0 and rz < tile.size() and rx >= 0 and rx < (tile[rz] as Array).size():
+						basin_cells[Vector2i(rx, rz)] = true
+		if not basin_cells.is_empty() and bool(basin_decl.get("glass", true)):
+			m_basin_glass = StandardMaterial3D.new()
+			m_basin_glass.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+			m_basin_glass.albedo_color = Color(0.72, 0.84, 0.87, 0.14)
+			m_basin_glass.roughness = 0.04
+			m_basin_glass.metallic = 0.15
 	# collect slots first so the artifact budget prefers hero > podium > floor
 	var slots: Array = []
 	for y in range(tile.size()):
@@ -3382,6 +3522,48 @@ func _build_segment() -> void:
 		var z := y + VESTIBULE_H
 		for x in range(row.size()):
 			var c := String(row[x])
+			if basin_cells.has(Vector2i(x, y)) and c != "4" and not c.begins_with("4"):
+				# pool floor, a basin_depth down (a floor cell in a declared
+				# rect sinks too — the pool replaces its deck, `continue`
+				# below skips the normal floor/slot handling). A platform or
+				# podium cell inside the pool becomes a PIER — the column
+				# rises from the pool floor, not from a floating deck.
+				_box(seg, Vector3(x + 0.5, -basin_depth - 0.1, z + 0.5), Vector3(1, 0.2, 1), Color(0.10, 0.10, 0.13), m_floor)
+				_add_col(solid, Vector3(x + 0.5, -basin_depth - 0.1, z + 0.5), Vector3(1, 0.2, 1))
+				# pool side walls on every edge where the basin meets ground
+				for bd_v in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+					var bd: Vector2i = bd_v
+					if basin_cells.has(Vector2i(x, y) + bd):
+						continue
+					var bwc := Vector3(x + 0.5 + bd.x * 0.45, -basin_depth / 2.0, z + 0.5 + bd.y * 0.45)
+					var bws := Vector3(0.1 if bd.x != 0 else 1.0, basin_depth, 0.1 if bd.y != 0 else 1.0)
+					_box(seg, bwc, bws, Color(0.14, 0.14, 0.17), m_wall)
+					_add_col(solid, bwc, bws)
+				# the glass lid: top flush with the deck, its own collider —
+				# the pool is floor you can WALK over
+				# the pier: a platform/podium cell keeps its top height, but
+				# its column stands ON the pool floor
+				var pier_top: float = 0.0
+				if c.begins_with("p"):
+					pier_top = 1.0
+					if c.length() > 1 and str(c.substr(1)).is_valid_int():
+						pier_top = float(maxi(1, int(str(c.substr(1)))))
+				elif c == "2" or c == "2s":
+					pier_top = 0.6
+				elif c == "3s":
+					pier_top = 1.0
+				if pier_top > 0.0:
+					_box(seg, Vector3(x + 0.5, (pier_top - basin_depth) / 2.0, z + 0.5),
+						Vector3(1, pier_top + basin_depth, 1), Color(0.21, 0.21, 0.25), m_podium)
+					_add_col(solid, Vector3(x + 0.5, (pier_top - basin_depth) / 2.0, z + 0.5),
+						Vector3(1, pier_top + basin_depth, 1))
+				elif m_basin_glass != null:
+					_box(seg, Vector3(x + 0.5, -0.03, z + 0.5), Vector3(1, 0.06, 1), Color(0.72, 0.84, 0.87, 0.14), m_basin_glass)
+					_add_col(solid, Vector3(x + 0.5, -0.03, z + 0.5), Vector3(1, 0.06, 1))
+					_walk_cells[Vector2i(x, zbase + z)] = true
+				# an OPEN pool (glass:false) is stepped into by wedge: no walk
+				# cell, no deck floor, no slots — the pool is the whole cell
+				continue
 			match c:
 				"1", "1s":
 					_box(seg, Vector3(x + 0.5, -0.1, z + 0.5), Vector3(1, 0.2, 1), Color(0.16, 0.16, 0.19), m_floor)
@@ -3565,7 +3747,14 @@ func _build_segment() -> void:
 						# selectable proxies the editor picks (desktop only)
 						"showing_rules": _furniture_rules(next_seq, "showing"),
 						"showing_proxies": true,     # ALWAYS: the same records in both modes
-						"ceiling": not _studio,      # the studio's camera looks down into the hall
+						# the studio's camera looks down into the hall; a hall
+						# may also declare itself OUTDOOR (2026-08-24, Palle:
+						# "the first outdoor space courtyard" / "open roof, the
+						# Durer example") — map_info.museum.open_roof rides the
+						# PLAN ROW (peek, refreshed from the map each build —
+						# deal is the dealing RESULT and never carries row
+						# fields) and unroofs the hall
+						"ceiling": (not _studio) and not bool(peek.get("open_roof", false)),
 						# textD on the wall works: the pearl's sentences, one per showing
 						"speak_lines": _speak_lines(next_seq, String(deal.get("pearl", "")) if deal is Dictionary else ""),
 						"speak_anchors": _speak_anchors(),     # token -> world: each line hangs on the field nearest its body
@@ -3688,7 +3877,8 @@ func _build_segment() -> void:
 			joint, wall_col, m_wall)
 	_flush_boxes(seg)
 	_batch_open = false
-	_segments.append({"node": seg, "z0": _next_z, "z1": _next_z + float(h) + float(VESTIBULE_H) + float(porch_depth) + float(court_depth), "index": _seg_index, "w": w})
+	_segments.append({"node": seg, "z0": _next_z, "z1": _next_z + float(h) + float(VESTIBULE_H) + float(porch_depth) + float(court_depth), "index": _seg_index, "w": w,
+		"snap": stream_snap, "pearl": String(deal.get("pearl", "")) if deal is Dictionary else ""})
 	_next_z += float(h) + float(VESTIBULE_H) + float(porch_depth) + float(court_depth)
 	_seg_index += 1
 	_prev_w = w
@@ -5041,7 +5231,7 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 	for gz in range(structure.size()):
 		var srow: Array = structure[gz]
 		for gx in range(srow.size()):
-			var psv := String(srow[gx]).strip_edges()
+			var psv := str(srow[gx]).strip_edges()
 			if psv == "2":
 				plinths[Vector2i(gx, gz)] = 1.0
 			elif psv == "p" or psv.begins_with("p:"):
@@ -5059,7 +5249,7 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 	for gz in range(inter.size()):
 		var irow: Array = inter[gz]
 		for gx in range(irow.size()):
-			var cellv := String(irow[gx]).strip_edges()
+			var cellv := str(irow[gx]).strip_edges()
 			if cellv == "" or cellv.begins_with("#"):
 				continue
 			var att := ""
@@ -5093,6 +5283,31 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 	# walls rather than spilling through them (reported as clamped).
 	var offx: int = int(floor((w - (maxx - minx + 1)) / 2.0)) - minx
 	var offz: int = VESTIBULE_H + int(floor((h - (maxz - minz + 1)) / 2.0)) - minz
+	# MAP-AUTHORED HALLS ARE ORIGIN-PINNED (2026-08-24): tile cells ARE map
+	# cells, forever. The centring above shifted line grid's bodies +1 east
+	# while its void stayed put (measured in em_pack_report: offx 1) — the
+	# constellation drifted off the tile it stands in. The map is the
+	# placement authority, so an authored row refuses the centring.
+	if String(entry.get("authored", "")) == "map":
+		offx = 0
+		offz = VESTIBULE_H
+	# THE BASIN (2026-08-24): bodies whose map cell is an enclosed void sink
+	# to the pool floor — cell top -depth, under the glass lid, unsealed
+	# (the lid above them is the walk surface). Read fresh from the map doc.
+	var basin_map: Dictionary = {}
+	var basin_pack_depth: float = 0.0
+	var minfo_pack_v: Variant = (doc_v as Dictionary).get("map_info", {})
+	if minfo_pack_v is Dictionary and ((minfo_pack_v as Dictionary).get("museum", {}) is Dictionary) \
+			and (((minfo_pack_v as Dictionary).get("museum", {}) as Dictionary).get("basin") is Dictionary):
+		var basin_pack: Dictionary = ((minfo_pack_v as Dictionary)["museum"] as Dictionary)["basin"]
+		basin_pack_depth = clampf(float(basin_pack.get("depth", 1.0)), 0.3, 3.0)
+		basin_map = _basin_regions(structure)
+		for rv2 in (basin_pack.get("rects", []) as Array):
+			var ra2: Array = rv2
+			if ra2.size() >= 4:
+				for rz2 in range(int(ra2[1]), int(ra2[1]) + int(ra2[3])):
+					for rx2 in range(int(ra2[0]), int(ra2[0]) + int(ra2[2])):
+						basin_map[Vector2i(rx2, rz2)] = true
 	var bx0: int = 1
 	var bx1: int = w - 2
 	var bz0: int = VESTIBULE_H + 1
@@ -5155,6 +5370,9 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 				if base_x + d.x < bx0 or base_x + d.x > bx1 or base_z + d.y < bz0 or base_z + d.y > bz1:
 					continue   # never past the walls — _stamp would not stop us
 				var cell := {"x": base_x + d.x, "y": base_z + d.y, "rank": 2, "top": 0.0}
+				# a basin cell: the body stands on the pool floor, under glass
+				if basin_pack_depth > 0.0 and basin_map.has(Vector2i(base_x + d.x - offx, base_z + d.y - offz)):
+					cell["top"] = -basin_pack_depth
 				if claimed_plinth:
 					cell["support_m"] = float(b.get("support_h", 1.0))
 				if float(b["yoff"]) > 0.01:
@@ -5212,7 +5430,18 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 			for gz2 in range(utils.size()):
 				var urow: Array = utils[gz2]
 				for gx2 in range(urow.size()):
-					var uv := String(urow[gx2]).strip_edges()
+					var uv := str(urow[gx2]).strip_edges()
+					# MUSEUM-SAFE DANGER (2026-08-24, Palle: "a Lara Croft map
+					# where translation, scale and rotation becomes dangerous"):
+					# the grid's h: cells reload the scene on death — severed
+					# walk, which is why the dispatcher refuses them. In an
+					# authored hall the cell becomes a museum patch: the fire
+					# look, an Area3D, and a touch that flashes and sets the
+					# walker back at the hall's entrance.
+					if uv.begins_with("h:"):
+						_stamp_hazard(seg, Vector2i(clampi(gx2 + offx, bx0, bx1), clampi(gz2 + offz, bz0, bz1)),
+							zbase, Vector3(float(w) / 2.0, 0.1, float(zbase) + 2.0))
+						continue
 					if not (uv == "wp" or uv.begins_with("wp:")):
 						continue
 					var wnode: Node3D = wp_scene.instantiate() as Node3D
@@ -5222,11 +5451,16 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 					var wz2: int = clampi(gz2 + offz, bz0, bz1)
 					var base_h := 0.0
 					if gz2 < structure.size() and gx2 < (structure[gz2] as Array).size():
-						var sv3 := String((structure[gz2] as Array)[gx2]).strip_edges()
+						var sv3 := str((structure[gz2] as Array)[gx2]).strip_edges()
 						if sv3 == "p" or sv3.begins_with("p:"):
 							base_h = 1.0
 							if ":" in sv3 and str(sv3.split(":")[1]).is_valid_int():
 								base_h = float(maxi(1, int(str(sv3.split(":")[1]))))
+					# a wedge ON a pool cell seats on the POOL floor — the way
+					# in and out of an open basin ("we use wedges to step in
+					# and out of the new basin pool space")
+					if basin_pack_depth > 0.0 and basin_map.has(Vector2i(wx2 - offx, wz2 - offz)):
+						base_h = -basin_pack_depth
 					# CENTER-origin prism: +0.5 seats the base on the cell's top
 					wnode.position = Vector3(wx2 + 0.5, base_h + 0.5, float(wz2) + 0.5)
 					var uparts := uv.split(":")
@@ -5320,7 +5554,7 @@ func _stamp_necklace(seg: Node3D, zbase: int, chapter: String, entry: Dictionary
 		for gz in range(inter.size()):
 			var irow: Array = inter[gz]
 			for gx in range(irow.size()):
-				var cellv := String(irow[gx]).strip_edges()
+				var cellv := str(irow[gx]).strip_edges()
 				if cellv == "" or cellv.begins_with("#"):
 					continue
 				var att := ""
@@ -6882,6 +7116,15 @@ func _stamp_inner(seg: Node3D, scene_path: String, lookup: String, cell: Diction
 	if not is_zero_approx(yaw_deg):
 		node.rotation_degrees.y = yaw_deg
 	seg.add_child(node)
+	# DRESS spin (2026-08-24, Palle: "trace slowly rotating in the middle"):
+	# #spin:DEG/S turns the body forever about its own y — a turntable for
+	# the piece, not a physics motion. After add_child (a tween needs a tree).
+	if plan_config.has("spin") and str(plan_config["spin"]).is_valid_float():
+		var spin_dps: float = clampf(float(str(plan_config["spin"])), -90.0, 90.0)
+		if absf(spin_dps) > 0.01:
+			var spin_tw: Tween = node.create_tween().set_loops()
+			spin_tw.tween_property(node, "rotation:y", TAU * signf(spin_dps),
+				TAU / deg_to_rad(absf(spin_dps))).as_relative()
 	# a catalyst body builds its pickables in _ready: disarm them a frame later
 	if _plain and _layout_list("rig", "no_pickup", RIG_NO_PICKUP).has(lookup):
 		get_tree().create_timer(0.3).timeout.connect(_plain_hands_disarm.bind(node, lookup))
@@ -6932,6 +7175,11 @@ func _stamp_inner(seg: Node3D, scene_path: String, lookup: String, cell: Diction
 				_walk_cells.erase(k)
 				_walk_erased[k] = "seal:%s" % lookup
 			_last_seal_cells.append(k)
+	elif float(cell.get("top", 0.0)) < -0.05:
+		# a SUNKEN body (the basin) lives under the walk surface — the glass
+		# lid above it is floor; sealing would erase the very cells that make
+		# the pool walkable
+		pass
 	elif not _seal_cells(node, cell, zbase, fp, plinth_node):
 		# it would have cut the corridor in two. Take it back out rather than ship
 		# a museum with a room nobody can reach.
@@ -7922,13 +8170,40 @@ func _process(_delta: float) -> void:
 			print("[em-bake] DONE — %d pearl(s) baked to %s" % [_bake_out.size(), BAKE_PATH])
 			get_tree().quit()
 			return
-	# free far-behind segments (keep the museum endless, not the node tree)
-	while _segments.size() > MIN_SEGMENTS and float(_segments[0]["z1"]) < _eye_pos().z - KEEP_BEHIND_M:
-		var old: Dictionary = _segments.pop_front()
-		var n: Node3D = old["node"]
-		print("[em-stream] freeing the room behind: z %.0f..%.0f (%d left in the tree)" % [
-			float(old["z0"]), float(old["z1"]), _segments.size()])
-		n.queue_free()
+	# ── THE TWO-HALL WINDOW (2026-08-24) ────────────────────────────────────
+	# Free far-behind AND (when the walker turned around) far-ahead segments,
+	# keeping their cursor snapshots; rebuild a freed neighbour when the eye
+	# nears the alive window's edge from either side. The margins are the
+	# hysteresis — REBUILD_MARGIN_M < KEEP_BEHIND_M, so nothing thrashes.
+	var ez: float = _eye_pos().z
+	while _segments.size() > MIN_SEGMENTS and float(_segments[0]["z1"]) < ez - KEEP_BEHIND_M:
+		_stream_free(0, "behind")
+	if _shot_path == "":   # a proof shot preloads segments the eye never nears
+		while _segments.size() > MIN_SEGMENTS and float(_segments[-1]["z0"]) > ez + KEEP_AHEAD_M:
+			_stream_free(_segments.size() - 1, "ahead")
+	if not _segments.is_empty() and not _freed.is_empty():
+		# walking BACK: a freed hall sits just before the window's low edge
+		if ez < float(_segments[0]["z0"]) + REBUILD_MARGIN_M:
+			var pi: int = -1
+			for fi in range(_freed.size() - 1, -1, -1):
+				if float((_freed[fi] as Dictionary)["z0"]) < float(_segments[0]["z0"]):
+					pi = fi
+					break
+			if pi >= 0:
+				var rb: Dictionary = _freed[pi]
+				_freed.remove_at(pi)
+				_stream_rebuild(rb)
+		# walking FORWARD over ground that was freed: rebuild before the frontier
+		elif ez > float(_segments[-1]["z1"]) - BUILD_AHEAD_M:
+			var ni: int = -1
+			for fi2 in range(_freed.size()):
+				if float((_freed[fi2] as Dictionary)["z0"]) >= float(_segments[-1]["z1"]) - 0.5:
+					ni = fi2
+					break
+			if ni >= 0:
+				var rf: Dictionary = _freed[ni]
+				_freed.remove_at(ni)
+				_stream_rebuild(rf)
 	# one endless museum: follow the editors when the plan changes on disk
 	if not _vr and _shot_path == "" and not _bake_mode and _autopilot == 0 and not _studio:
 		_follow_t += _delta
@@ -7947,6 +8222,61 @@ func _process(_delta: float) -> void:
 		_vis_timer = 0.0
 		_cull_artifacts()
 	_track_acoustic()
+
+
+## Free one alive segment into a _freed record (its z-range + the cursor
+## snapshot taken before its build). The record is what walks it back in.
+func _stream_free(i: int, side: String) -> void:
+	var old: Dictionary = _segments[i]
+	_segments.remove_at(i)
+	var n: Node3D = _node_or_null(old.get("node"))
+	print("[em-stream] freeing the room %s: z %.0f..%.0f (%d left, %d rebuildable)" % [
+		side, float(old["z0"]), float(old["z1"]), _segments.size(), _freed.size() + 1])
+	# prune the editor/visibility records that live inside the freed hall, so
+	# the doll editor and the cull never walk a dead subtree
+	if n != null and is_instance_valid(n):
+		# is_instance_valid FIRST: `x is Node` on a freed instance is a runtime
+		# error, and these records dangle whenever anything else freed a node
+		# (a replaced plinth, a doll delete) before this prune ran
+		for ri in range(_vis_records.size() - 1, -1, -1):
+			var rn: Variant = (_vis_records[ri] as Dictionary).get("node")
+			if not is_instance_valid(rn) or not (rn is Node) or n.is_ancestor_of(rn):
+				_vis_records.remove_at(ri)
+		for ei in range(_edit_records.size() - 1, -1, -1):
+			var en: Variant = (_edit_records[ei] as Dictionary).get("node")
+			if not is_instance_valid(en) or not (en is Node) or n.is_ancestor_of(en):
+				_edit_records.remove_at(ei)
+		n.queue_free()
+	old.erase("node")
+	_freed.append(old)
+	_freed.sort_custom(func(a, b): return float(a["z0"]) < float(b["z0"]))
+
+
+## Rebuild a freed hall from its record: restore the cursors its build
+## consumed, build, restore the frontier's cursors, and re-order the window.
+## Same pearl, same z, same walls — the bake replay makes it cheap.
+func _stream_rebuild(rec: Dictionary) -> void:
+	var snap: Dictionary = rec.get("snap", {})
+	if snap.is_empty():
+		print("[em-stream] cannot rebuild z %.0f — no cursor snapshot (pre-window hall)" % float(rec.get("z0", -1.0)))
+		return
+	var live := {"rot_i": _rot_i, "pool_i": _pool_i, "seg_index": _seg_index,
+		"next_z": _next_z, "prev_w": _prev_w, "pearl_cursor": _pearl_cursor}
+	_rot_i = int(snap["rot_i"])
+	_pool_i = int(snap["pool_i"])
+	_seg_index = int(snap["seg_index"])
+	_next_z = float(snap["next_z"])
+	_prev_w = int(snap["prev_w"])
+	_pearl_cursor = (snap["pearl_cursor"] as Dictionary).duplicate(true)
+	print("[em-stream] REBUILD %s at z %.0f — the walk came back" % [String(rec.get("pearl", "?")), _next_z])
+	_build_segment()
+	_rot_i = int(live["rot_i"])
+	_pool_i = int(live["pool_i"])
+	_seg_index = int(live["seg_index"])
+	_next_z = float(live["next_z"])
+	_prev_w = int(live["prev_w"])
+	_pearl_cursor = live["pearl_cursor"]
+	_segments.sort_custom(func(a, b): return float(a["z0"]) < float(b["z0"]))
 
 
 ## Drain EVERY queued stamp and wall-run variant NOW, ignoring distance and
@@ -12264,7 +12594,9 @@ func _derive_map_row(map_name: String) -> Dictionary:
 		var row: Array = struct[r]
 		for c in range(row.size()):
 			var sv := str(row[c]).strip_edges()
-			if sv.is_valid_int() and int(sv) > 0:
+			# letters are content too — a map whose far edge ends in a "w"
+			# wall or "p" platform must not be cropped at that edge
+			if (sv.is_valid_int() and int(sv) > 0) or sv == "w" or sv == "p" or sv.begins_with("p:"):
 				if r > r1:
 					r1 = r
 				if c > c1:
@@ -12320,17 +12652,153 @@ func _derive_map_row(map_name: String) -> Dictionary:
 				if colon > 0:
 					cfg[cseg.substr(0, colon).strip_edges()] = cseg.substr(colon + 1).strip_edges()
 			var under := 0
+			var plat_h := 0.0
 			if r < struct.size() and c < (struct[r] as Array).size():
 				var uv := str((struct[r] as Array)[c]).strip_edges()
-				under = int(uv) if uv.is_valid_int() else 0
+				under = int(uv) if uv.is_valid_int() else (3 if uv == "w" else 0)
+				# a body ON a platform letter stands on the platform's own
+				# height (em-pack's plinths dict says the same — the two
+				# lanes must not disagree about what the body stands on)
+				if uv == "p" or uv.begins_with("p:"):
+					plat_h = 1.0
+					if ":" in uv and str(uv.split(":")[1]).is_valid_int():
+						plat_h = float(maxi(1, int(str(uv.split(":")[1]))))
 			var art: Dictionary = {"token": String(parts[0]), "cell": [c, r], "tile_cell": [c, r],
 				"rotation": ((rot % 360) + 360) % 360, "mode": "freestanding",
-				"venue": "interior", "support_height_m": 0.95 if under >= 2 else 0.0,
+				"venue": "interior", "support_height_m": plat_h if plat_h > 0.0 else (0.95 if under >= 2 else 0.0),
 				"hand": false, "ruled": {"by": "map: " + map_name, "cell": [c, r]}}
 			if not cfg.is_empty():
 				art["config"] = cfg
 			arts.append(art)
-	return {"tile": tile, "artifacts": arts}
+	var minfo_v: Variant = (doc_v as Dictionary).get("map_info", {})
+	var museum_d: Dictionary = {}
+	if minfo_v is Dictionary and (minfo_v as Dictionary).get("museum") is Dictionary:
+		museum_d = (minfo_v as Dictionary)["museum"]
+	return {"tile": tile, "artifacts": arts, "museum": museum_d}
+
+
+## THE PASSAGES (2026-08-24). Every authored hall ends in a chicane: a door
+## on the hall's own south edge, one lateral corridor row, and an offset
+## door into the boundary. A straight sight-line through either door ends at
+## passage wall — the corner that hides the one-hall stream's build and free.
+## Both edges are carved open first, because the gate can only centre a door
+## on an edge that has an opening (a fully-walled map edge read as "just a
+## wall" where the next chapter should begin).
+func _authored_passages(tile_in: Array) -> Array:
+	var tile: Array = []
+	for row in tile_in:
+		tile.append((row as Array).duplicate())
+	if tile.size() < 4:
+		return tile
+	var w: int = (tile[0] as Array).size()
+	if not _edge_has_open(tile, 0):
+		_carve(tile, 0, _door_col(tile, 0))
+	if not _edge_has_open(tile, tile.size() - 1):
+		_carve(tile, tile.size() - 1, _door_col(tile, tile.size() - 1))
+	var cl: int = _open_col(tile, tile.size() - 1)
+	var cr: int = cl + (3 if cl + 3 <= w - 2 else -3)
+	cr = clampi(cr, 1, w - 2)
+	var row_a: Array = []
+	var row_b: Array = []
+	var row_c: Array = []
+	for x in range(w):
+		row_a.append("1" if x == cl else "4")
+		row_b.append("1" if x >= mini(cl, cr) and x <= maxi(cl, cr) else "4")
+		row_c.append("1" if x == cr else "4")
+	tile.append(row_a)
+	tile.append(row_b)
+	tile.append(row_c)
+	return tile
+
+
+func _edge_has_open(tile: Array, y: int) -> bool:
+	var row: Array = tile[y]
+	for x in range(row.size()):
+		var v := String(row[x])
+		if v == "1" or v == "1s":
+			return true
+	return false
+
+
+## The door column for a walled edge: nearest to centre whose INTERIOR
+## neighbour row is floor (a door into a wall cavity helps nobody).
+func _door_col(tile: Array, y: int) -> int:
+	var w: int = (tile[y] as Array).size()
+	var inner: int = 1 if y == 0 else y - 1
+	var best: int = w / 2
+	var bestd: int = 999
+	for x in range(1, w - 1):
+		var v := String((tile[inner] as Array)[x])
+		if v == "1" or v == "1s":
+			var dd: int = absi(x - w / 2)
+			if dd < bestd:
+				bestd = dd
+				best = x
+	return best
+
+
+func _carve(tile: Array, y: int, c: int) -> void:
+	var row: Array = tile[y]
+	for x in [c - 1, c, c + 1]:
+		if x >= 1 and x < row.size() - 1:
+			var v := String(row[x])
+			if v == "4" or v == "0":
+				row[x] = "1"
+
+
+func _open_col(tile: Array, y: int) -> int:
+	var row: Array = tile[y]
+	var w: int = row.size()
+	for off in range(w):
+		for x in [w / 2 - off, w / 2 + off]:
+			if x >= 0 and x < w:
+				var v := String(row[x])
+				if v == "1" or v == "1s":
+					return x
+	return w / 2
+
+
+## ENCLOSED VOID REGIONS (2026-08-24, Palle: "the void basin should be like a
+## basin with walls under the floor, like a pool"). Flood-fills the "0" cells
+## of a tile/structure grid; a region that touches NO border of the grid is
+## enclosed — the cells a declared basin sinks into a glass-covered pool.
+## Border-touching holes (Melencolia's outside-the-wall 0s, the beyond-crop
+## padding) stay plain holes — and so does any region under min_cells (the
+## Portals exit held a single authored void cell that is a peephole, not a
+## pool; a pool needs room to be a pool). Returns {Vector2i(x, row): true}.
+func _basin_regions(grid: Array, min_cells: int = 4) -> Dictionary:
+	var pools: Dictionary = {}
+	var seen: Dictionary = {}
+	for ty in range(grid.size()):
+		var trow: Array = grid[ty]
+		for tx in range(trow.size()):
+			var tk := Vector2i(tx, ty)
+			if str(trow[tx]).strip_edges() != "0" or seen.has(tk):
+				continue
+			var region: Array = []
+			var queue: Array = [tk]
+			var touches := false
+			seen[tk] = true
+			while not queue.is_empty():
+				var cq: Vector2i = queue.pop_back()
+				region.append(cq)
+				var rw: int = (grid[cq.y] as Array).size()
+				if cq.x == 0 or cq.y == 0 or cq.y == grid.size() - 1 or cq.x == rw - 1:
+					touches = true
+				for dq_v in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+					var nq: Vector2i = cq + (dq_v as Vector2i)
+					if nq.y < 0 or nq.y >= grid.size():
+						continue
+					if nq.x < 0 or nq.x >= (grid[nq.y] as Array).size():
+						continue
+					if seen.has(nq) or str((grid[nq.y] as Array)[nq.x]).strip_edges() != "0":
+						continue
+					seen[nq] = true
+					queue.append(nq)
+			if not touches and region.size() >= min_cells:
+				for rq_v in region:
+					pools[rq_v] = true
+	return pools
 
 
 func _map_write_cell(map_name: String, cx: int, cz: int, wall: bool, value: String = "") -> bool:

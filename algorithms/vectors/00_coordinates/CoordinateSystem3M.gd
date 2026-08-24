@@ -36,8 +36,19 @@ const CoordinateLineScript = preload("res://commons/primitives/line/coordinate_l
 ## Where the floating point starts, in axis units (the frame's own metres).
 @export var floating_point_at: Vector3 = Vector3(1.0, 1.0, 1.0)
 const FloatingPointScene := "res://commons/primitives/point/interactive_point_origin.tscn"
+## THE BARE FRAME (2026-08-24, Palle: "remove indicators along axels and text
+## labels ... put the text of x,y,z on the wall work displays instead"):
+## `#labels:0` drops the X/Y/Z letters, `#panel:0` drops the info panel — the
+## words move to `coordinate_readout` wall works, fed live through the
+## "ada_coordinate_readout" group while the grab point moves.
+@export var show_labels: bool = true
+@export var show_panel: bool = true
 
 var gyroscope: Node3D
+var _fp_ref: Node3D = null              # the grab point (survives re-parenting by a grab)
+var _axis_markers: Array = []           # projection markers riding the three axes
+var _proj_lines: MeshInstance3D = null  # thin guide lines, point -> each marker
+var _proj_mesh: ImmediateMesh = null
 
 func _ready() -> void:
 	# Uniform display scale — controlled by the display_scale @export
@@ -54,7 +65,8 @@ func _ready() -> void:
 
 	# Info frame and gadget only at runtime (not in editor tool mode)
 	if not Engine.is_editor_hint():
-		_add_info_frame()
+		if show_panel:
+			_add_info_frame()
 		_add_gyroscope()
 		if floating_point:
 			_add_floating_point()
@@ -66,6 +78,7 @@ func _add_floating_point() -> void:
 	var ps: PackedScene = load(FloatingPointScene)
 	var pt: Node3D = ps.instantiate() as Node3D
 	pt.name = "FloatingPoint"
+	_fp_ref = pt
 	# the point is a body: it does not inherit this frame's display scale
 	pt.top_level = false
 	add_child(pt)
@@ -216,6 +229,10 @@ func create_axis(direction: Vector3, color: Color, label_text: String) -> void:
 
 	# Label (Label3D) — kept here so the label-positioning logic stays a
 	# CoordinateSystem3M concern. CoordinateLine doesn't ship a label.
+	# Gated: with show_labels off the letters live on the hall's
+	# coordinate_readout wall works instead of floating at the axis tips.
+	if not show_labels:
+		return
 	var label = Label3D.new()
 	label.text = label_text
 	label.modulate = color
@@ -228,6 +245,84 @@ func _exit_tree() -> void:
 	for child in get_children():
 		if not child.owner:
 			child.queue_free()
+
+
+## ── THE PROJECTION (2026-08-24, Palle: "add a grab point and indicate the
+## position along axels") ────────────────────────────────────────────────────
+## While the grab point exists, three axis-coloured markers ride the axes at
+## its x, y and z, joined to the point by thin guide lines — the position is
+## INDICATED on the frame; the WORDS go to the hall's coordinate_readout
+## displays (group "ada_coordinate_readout"), not to floating labels.
+func _find_point() -> Node3D:
+	if _fp_ref != null and is_instance_valid(_fp_ref):
+		return _fp_ref
+	_fp_ref = get_node_or_null("FloatingPoint") as Node3D
+	return _fp_ref
+
+
+func _ensure_projection() -> void:
+	if not _axis_markers.is_empty():
+		return
+	var cols: Array = [Color.RED, Color.GREEN, Color.BLUE]
+	for i in range(3):
+		var m := MeshInstance3D.new()
+		var sm := SphereMesh.new()
+		sm.radius = maxf(0.02, axis_thickness * 3.0)
+		sm.height = sm.radius * 2.0
+		m.mesh = sm
+		var mat := StandardMaterial3D.new()
+		mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		mat.albedo_color = cols[i]
+		mat.emission_enabled = true
+		mat.emission = cols[i]
+		m.material_override = mat
+		m.name = "AxisMarker%d" % i
+		add_child(m)
+		_axis_markers.append(m)
+	_proj_mesh = ImmediateMesh.new()
+	_proj_lines = MeshInstance3D.new()
+	_proj_lines.mesh = _proj_mesh
+	var lm := StandardMaterial3D.new()
+	lm.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	lm.albedo_color = Color(1, 1, 1, 0.35)
+	lm.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	_proj_lines.material_override = lm
+	_proj_lines.name = "AxisProjection"
+	add_child(_proj_lines)
+
+
+func _process(_delta: float) -> void:
+	if Engine.is_editor_hint():
+		return
+	var pt := _find_point()
+	if pt == null:
+		if _proj_lines != null:
+			_proj_lines.visible = false
+			for mk in _axis_markers:
+				(mk as Node3D).visible = false
+		return
+	_ensure_projection()
+	# frame-local coordinates survive a grab's re-parenting: read the GLOBAL
+	# position back through this frame (to_local includes the display scale)
+	var lp: Vector3 = to_local(pt.global_position)
+	var cl := Vector3(clampf(lp.x, 0.0, axis_length), clampf(lp.y, 0.0, axis_length), clampf(lp.z, 0.0, axis_length))
+	(_axis_markers[0] as Node3D).position = Vector3(cl.x, 0, 0)
+	(_axis_markers[1] as Node3D).position = Vector3(0, cl.y, 0)
+	(_axis_markers[2] as Node3D).position = Vector3(0, 0, cl.z)
+	for mk in _axis_markers:
+		(mk as Node3D).visible = true
+	_proj_lines.visible = true
+	_proj_mesh.clear_surfaces()
+	_proj_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+	for tgt_v in [Vector3(cl.x, 0, 0), Vector3(0, cl.y, 0), Vector3(0, 0, cl.z)]:
+		_proj_mesh.surface_add_vertex(lp)
+		_proj_mesh.surface_add_vertex(tgt_v as Vector3)
+	_proj_mesh.surface_end()
+	# the x,y,z TEXT lives on the hall's wall works
+	if is_inside_tree():
+		for rd in get_tree().get_nodes_in_group("ada_coordinate_readout"):
+			if rd.has_method("show_coordinates"):
+				rd.show_coordinates(lp)
 
 
 func apply_grid_config(config: Dictionary) -> void:
@@ -259,6 +354,18 @@ func apply_grid_config(config: Dictionary) -> void:
 		axis_thickness = float(config["axis_thickness"]); rebuild_axes = true
 	if config.has("tick_step"):
 		tick_step = float(config["tick_step"]); rebuild_axes = true
+	# the BARE FRAME keys (2026-08-24): #labels:0 drops the axis letters,
+	# #panel:0 drops the info panel — the words move to the wall works
+	if config.has("labels"):
+		var lv2: String = str(config["labels"])
+		show_labels = (float(lv2) != 0.0) if lv2.is_valid_float() else (lv2.to_lower() in ["true", "yes", "on"])
+		rebuild_axes = true
+	if config.has("panel"):
+		var pv2: String = str(config["panel"])
+		show_panel = (float(pv2) != 0.0) if pv2.is_valid_float() else (pv2.to_lower() in ["true", "yes", "on"])
+		var ip := get_node_or_null("InfoPanel")
+		if ip != null and not show_panel:
+			ip.queue_free()
 	if rebuild_axes:
 		_rebuild_axes()
 

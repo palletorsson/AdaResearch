@@ -140,20 +140,39 @@ def derive_row(pearl: str, map_name: str, museum_key: str, idx: int, total: int,
                     if ck.strip():
                         config[ck.strip()] = cv.strip()
             under = struct[r][c] if r < len(struct) and c < len(struct[r]) else 0
+            # a body ON a "p"/"p:N" platform stands on the platform's own
+            # height (parity with em-pack's plinths dict and _derive_map_row)
+            raw_under = str(raw[r][c]).strip() if r < len(raw) and c < len(raw[r]) else ""
+            plat_h = 0.0
+            if raw_under == "p" or raw_under.startswith("p:"):
+                plat_h = float(under)
             tc = [c - c0, r - r0]
             arts.append({
                 "token": name, "cell": list(tc), "tile_cell": list(tc),
                 "rotation": ((rot % 360) + 360) % 360,
                 "mode": "freestanding", "venue": "interior",
-                "support_height_m": 0.95 if under >= 2 else 0.0,
+                "support_height_m": plat_h if plat_h > 0.0 else (0.95 if under >= 2 else 0.0),
                 # hand stays FALSE: the curator's rulings may rebind by
                 # nearest when the plan re-derives (hand:true blocks rebind —
                 # that is bake_rulings' contract, not the map's)
                 "hand": False, "ruled": {"by": "map: " + map_name, "cell": list(tc)},
                 **({"config": config} if config else {}),
             })
+    # OUTDOOR HALLS (2026-08-24, Palle: "the first outdoor space courtyard to
+    # host the long portal corridor" / "open roof, the Durer example"): a map
+    # declares map_info.museum.open_roof and the museum skips that hall's
+    # ceiling (dress_segment's "ceiling" flag, the one roof feed).
+    open_roof = bool(md.get("map_info", {}).get("museum", {}).get("open_roof", False))
+    # THE BASIN (2026-08-24, Palle: "like a basin with walls under the floor,
+    # like a pool ... covered with transparent glass so we can walk over it"):
+    # map_info.museum.basin {depth, glass} rides the row; the museum sinks the
+    # hall's enclosed void regions into glass-covered pools (and re-reads the
+    # map fresh each build — this copy serves /transplant and the plan readers).
+    basin = md.get("map_info", {}).get("museum", {}).get("basin")
     return {
         "museum": museum_key,
+        **({"open_roof": True} if open_roof else {}),
+        **({"basin": basin} if isinstance(basin, dict) else {}),
         "tile": tile, "h": len(tile),
         "rooms": 0, "artifacts": arts, "rejected": [],
         "room": {"w": len(tile[0]) if tile else 0, "h": len(tile)}, "apron": 0,

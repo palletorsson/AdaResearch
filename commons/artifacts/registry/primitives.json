@@ -3360,6 +3360,41 @@
 			},
 			"qfep_connection": "Y is not its own thing: it is the X axis instanced a second time and rotated 90 degrees, with billboard letters doing the work of keeping two identical arrows distinct. Orthogonality here is a transform plus a label — the plane's second dimension is a reuse."
 		},
+		"coordinate_readout": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "One axis of the grab point's position as a wall work — x = 1.24 on a dark panel, fed live by CoordinateSystem3M through the ada_coordinate_readout group.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "coordinate_readout",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "coordinate_readout",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/point/coordinate_readout.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive",
+				"display"
+			]
+		},
 		"coordinate_lines": {
 			"category": "unknown",
 			"complexity": "intermediate",

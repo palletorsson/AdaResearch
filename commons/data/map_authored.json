@@ -1,9 +1,24 @@
 {
-	"_readme": "MAP-AUTHORED HALLS \u2014 chapters listed here build their museum halls FROM the named grid maps (in order): tile from the map's structure (h>=2 wall, h==1 floor, cropped to content), artifacts at their map cells, plinth = height 2 under the anchor. Applied to em_plan.json by `python tools/em_map_halls.py --apply` (backup kept, shipped copy follows); the museum skips the necklace hand's stamp-clear for these rows \u2014 the map is the placement authority. Remove a chapter to return it to the dealt plan on the next apply.",
+	"_readme": "MAP-AUTHORED HALLS — chapters listed here build their museum halls FROM the named grid maps (in order): tile from the map's structure (h>=2 wall, h==1 floor, cropped to content), artifacts at their map cells, plinth = height 2 under the anchor. Applied to em_plan.json by `python tools/em_map_halls.py --apply` (backup kept, shipped copy follows); the museum skips the necklace hand's stamp-clear for these rows — the map is the placement authority. Remove a chapter to return it to the dealt plan on the next apply.",
 	"primitives": [
 		"Point_One",
 		"Point_Lines",
 		"Point_Trace",
-		"Point_Line_Grid"
+		"Point_Line_Grid",
+		"Point_Triangle_Context",
+		"Primitives_Polythedra",
+		"Point_Animatedcube",
+		"Primitives_Ignorance",
+		"Primitives_Portals",
+		"Primitives_Melencolia"
+	],
+	"transformation": [
+		"Trans_Introduction",
+		"Trans_Translation",
+		"Trans_AxisDecomposition",
+		"Trans_Rotation",
+		"Trans_RotationSpectacle",
+		"Trans_Scale",
+		"Trans_Pit"
 	]
 }

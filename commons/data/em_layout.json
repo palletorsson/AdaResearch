@@ -99,12 +99,12 @@
   ]
  },
  "stream": {
-  "build_ahead_m": 24.0,
-  "_build_ahead_m": "open the next segment when the eye is this close to the built edge",
-  "keep_behind_m": 70.0,
-  "_keep_behind_m": "free a segment once its far end is this far behind the eye. Lower = less in the tree, but a turn-around walks into nothing until it rebuilds; 70 is about two rooms.",
-  "min_segments": 2,
-  "_min_segments": "never free below this many, however far behind they are",
+  "build_ahead_m": 6.0,
+  "_build_ahead_m": "open the next segment when the eye is this close to the built edge. 6 = the build happens in the EXIT PASSAGE - the passages must turn a corner, or the doorway shows the unbuilt beyond (the one-hall contract, 2026-08-24)",
+  "keep_behind_m": 6.0,
+  "_keep_behind_m": "free a segment once its far end is this far behind the eye. 6 = the hall behind dies when you are through the starting passage; it REBUILDS if you walk back (rebuild_margin_m)",
+  "min_segments": 1,
+  "_min_segments": "never free below this many. 1 = the one-hall museum: current hall only, plus the next during a passage crossing",
   "cull_near_m": 32.0,
   "_cull_near_m": "artifacts closer than this render (the museum's near-artifact cull; shows are budgeted 8 per tick, nearest first)",
   "cull_far_m": 38.0,
@@ -114,7 +114,11 @@
   "stamp_budget_ms": 6.0,
   "_stamp_budget_ms": "ms per frame the patient stamp may spend building queued bodies",
   "bodies": 1,
-  "_bodies": "1 = the museum as authored. 0 = THE EMPTY-MUSEUM EXPERIMENT: architecture only — no interior bodies, showings, props or DNA runs — so the boot clock can say which seconds the artifacts own. A diagnostic, never a mode."
+  "_bodies": "1 = the museum as authored. 0 = THE EMPTY-MUSEUM EXPERIMENT: architecture only — no interior bodies, showings, props or DNA runs — so the boot clock can say which seconds the artifacts own. A diagnostic, never a mode.",
+  "keep_ahead_m": 30.0,
+  "_keep_ahead_m": "a segment this far AHEAD frees too - the walker turned around; it rebuilds on approach like everything else",
+  "rebuild_margin_m": 2.0,
+  "_rebuild_margin_m": "rebuild a freed neighbour when the eye is this close to the alive window's edge. MUST stay under keep_behind_m - the gap is the hysteresis that stops free/rebuild thrash"
  },
  "env": {
   "vr_high": 0,

@@ -1022,6 +1022,15 @@ func _dress_adjust(node: Node3D, delta: Vector3) -> void:
 		node.position += delta
 
 
+func _dress_spin(node: Node3D, dps: float) -> void:
+	## Deferred turntable for the #spin dress key — a tween needs the node in
+	## the tree, and deferred runs after the artifact was parented.
+	if node == null or not is_instance_valid(node) or not node.is_inside_tree():
+		return
+	var tw: Tween = node.create_tween().set_loops()
+	tw.tween_property(node, "rotation:y", TAU * signf(dps), TAU / deg_to_rad(absf(dps))).as_relative()
+
+
 func _suppress_embedded_chrome(node: Node) -> void:
 	if not is_instance_valid(node):
 		return
@@ -1307,6 +1316,14 @@ func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: fl
 		var dsc: float = clampf(float(str(config_data["scale"])), 0.1, 5.0)
 		if not is_equal_approx(dsc, 1.0):
 			artifact_object.scale *= dsc
+	# DRESS spin (2026-08-24, grid twin of the museum's turntable: "trace
+	# slowly rotating in the middle") — #spin:DEG/S turns the body forever
+	# about its own y. Deferred: a tween needs the node in the tree.
+	if artifact_object is Node3D and config_data.has("spin") \
+			and str(config_data["spin"]).is_valid_float():
+		var spin_dps: float = clampf(float(str(config_data["spin"])), -90.0, 90.0)
+		if absf(spin_dps) > 0.01:
+			call_deferred("_dress_spin", artifact_object, spin_dps)
 
 	# Packaging (GATED, default OFF): spawn grounding furniture + a framed caption around the
 	# artifact from its spatial_needs. Deferred so it runs AFTER _auto_ground (registered first),

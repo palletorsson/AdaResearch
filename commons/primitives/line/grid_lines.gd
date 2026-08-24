@@ -45,6 +45,17 @@ func spine_hints() -> Dictionary:
 @export var data_table_font_size: int = 20
 @export var data_table_page_duration: float = 2.0  # Seconds per page
 
+func apply_grid_config(config: Dictionary) -> void:
+	## Map-token dress for the lattice (2026-08-24, Palle: "the grid should
+	## not rotate, only the trace, but slower"): the lattice itself never
+	## turns — _process spins only the saved-trace instances — and the map
+	## slows that turn per placement (#rotation_speed:2, degrees per second).
+	if config.has("rotation_speed") and str(config["rotation_speed"]).is_valid_float():
+		rotation_speed = clampf(float(str(config["rotation_speed"])), 0.0, 90.0)
+	if config.has("trace_height") and str(config["trace_height"]).is_valid_float():
+		trace_height = clampf(float(str(config["trace_height"])), 0.0, 3.0)
+
+
 var _rotating_instances: Array[Node3D] = []
 var _data_table_label: Label3D
 var _trace_data_list: Array[Dictionary] = []  # Store info about each trace
