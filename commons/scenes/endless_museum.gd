@@ -1505,18 +1505,26 @@ func _start_at_chapter() -> void:
 	# (the control file only speaks for a launch that has neither)
 	if _first_chapter == "" and start_chapter != "":
 		_first_chapter = start_chapter            # the Inspector's voice
+	# THE CONTROL SPEAKS FOR THE MODES ALWAYS (2026-08-24): grid_pack and
+	# dollhouse were read only when the control also named the chapter — so
+	# the moment the Inspector's start_chapter spoke, the transplant lane
+	# silently DIED: every authored hall fell to the dealer (template rooms,
+	# dealt bodies, no maps). Palle walked exactly that and called it "the
+	# transformation translation did not work". Only the chapter/pearl
+	# fields defer to the flag and the Inspector; the modes never do.
 	var control_path: String = _shipped(EM_CONTROL)
-	if _first_chapter == "" and FileAccess.file_exists(control_path):
+	if FileAccess.file_exists(control_path):
 		var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(control_path))
 		if parsed is Dictionary:
-			_first_chapter = String((parsed as Dictionary).get("first_chapter", ""))
 			_grid_pack = int(round(float((parsed as Dictionary).get("grid_pack", 0.0)))) == 1
 			if _grid_pack:
 				print("[em-pack] GRID PACK — every hall with a named map is transplanted from it")
 			if int((parsed as Dictionary).get("dollhouse", 0)) == 1:
 				_dollhouse = true
-			if start_map == "":
-				start_map = String((parsed as Dictionary).get("first_map", ""))   # the menu's voice for the pearl
+			if _first_chapter == "":
+				_first_chapter = String((parsed as Dictionary).get("first_chapter", ""))
+				if start_map == "":
+					start_map = String((parsed as Dictionary).get("first_map", ""))   # the menu's voice for the pearl
 	if _first_chapter == "" or _pool.is_empty():
 		return
 	for i in range(_pool.size()):
@@ -3267,8 +3275,12 @@ func _build_segment() -> void:
 				peek["basin"] = {"depth": clampf(float(simd.get("depth", 1.0)), 0.3, 3.0),
 					"glass": false, "rects": [[0, 0, map_w, map_h]]}
 				peek["sim_margin"] = clampi(int(simd.get("margin", 2)), 1, 4)
+				# grid: true — the REAL GridSystem stands in the basin; the
+				# museum builds no piers there (the grid stands its own towers)
+				peek["sim_grid"] = bool(simd.get("grid", false))
 			elif peek.has("sim_margin"):
 				peek.erase("sim_margin")
+				peek.erase("sim_grid")
 	if peek.get("tile") is Array and (peek["tile"] as Array).size() >= 4:
 		var trows: Array = []
 		for r_v in (peek["tile"] as Array):
@@ -3599,7 +3611,7 @@ func _build_segment() -> void:
 					pier_top = 0.6
 				elif c == "3s":
 					pier_top = 1.0
-				if pier_top > 0.0:
+				if pier_top > 0.0 and not bool(peek.get("sim_grid", false)):
 					_box(seg, Vector3(x + 0.5, (pier_top - basin_depth) / 2.0, z + 0.5),
 						Vector3(1, pier_top + basin_depth, 1), Color(0.21, 0.21, 0.25), m_podium)
 					_add_col(solid, Vector3(x + 0.5, (pier_top - basin_depth) / 2.0, z + 0.5),
@@ -5274,6 +5286,37 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 	var layers: Dictionary = (doc_v as Dictionary).get("layers", {})
 	var structure: Array = layers.get("structure", [])
 	var inter: Array = layers.get("interactables", [])
+	# THE GRID VERSION (2026-08-24, Palle: "no, it's a museum version — it
+	# should be the grid version?"): museum.simulation.grid embeds the REAL
+	# GridSystem in the basin — the grid's own cubes, utilities and
+	# interactables ARE the simulation; the transplant stamps nothing.
+	# bare_world keeps the sky out, skip_player_spawn keeps the walker's
+	# feet, and the disarm pass takes the live teleporters/hazards (they
+	# would switch maps or reload the scene — severing the endless walk).
+	var minfo_g: Variant = (doc_v as Dictionary).get("map_info", {})
+	# fetch-then-type-check: `.get("museum", {}) is Dictionary` passes when
+	# the key is ABSENT (the default {} IS a Dictionary) and the follow-up
+	# ["museum"] index then crashed the transplant for every map without a
+	# museum block — taking pit's hazards with it (caught by the probe)
+	var mus_g: Variant = (minfo_g as Dictionary).get("museum") if minfo_g is Dictionary else null
+	if mus_g is Dictionary:
+		var sim_g: Variant = (mus_g as Dictionary).get("simulation")
+		if sim_g is Dictionary and bool((sim_g as Dictionary).get("grid", false)):
+			var gdepth: float = clampf(float((sim_g as Dictionary).get("depth", 1.0)), 0.3, 3.0)
+			# the grid's SCENE, not a bare script node — GridSystem expects
+			# its CubeScene template child ("Base cube reference not found")
+			var gs: Node3D = (load("res://commons/grid/grid_system.tscn") as PackedScene).instantiate() as Node3D
+			gs.name = "SimGrid_%s" % map_name
+			gs.set("map_name", map_name)
+			gs.set("bare_world", true)
+			gs.set("skip_player_spawn", true)
+			gs.position = Vector3(0.0, -gdepth, float(VESTIBULE_H))
+			seg.add_child(gs)
+			if is_inside_tree():
+				get_tree().create_timer(2.5).timeout.connect(_sim_grid_disarm.bind(gs))
+			print("[em-sim-grid] %s: the REAL grid builds the simulation (bare_world, player kept)" % map_name)
+			return {"pearl": String(entry.get("pearl", "")), "placed": 0, "packed": true,
+				"offered": 0, "interior": 0, "grid_embed": true}
 	var plinths := {}
 	for gz in range(structure.size()):
 		var srow: Array = structure[gz]
@@ -5546,6 +5589,27 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 		pf.close()
 	return {"pearl": String(entry.get("pearl", "")), "placed": placed, "packed": true,
 		"offered": bodies.size(), "interior": placed}
+
+
+## The embedded grid's LIVE utilities disarmed: a teleporter switches maps,
+## a hazard reloads the scene on death, a reset cube reloads outright — each
+## would sever the endless walk. The simulation keeps its moving bodies
+## (transport/rotate/scale cubes ride on), loses its exits.
+func _sim_grid_disarm(gs: Node3D) -> void:
+	if gs == null or not is_instance_valid(gs):
+		return
+	var disarmed := 0
+	for n in gs.find_children("*", "Node", true, false):
+		var sp := ""
+		if n.get_script() != null:
+			sp = str((n.get_script() as Script).resource_path).to_lower()
+		if sp.contains("teleport") or sp.contains("danger") or sp.contains("reset_cube") or sp.contains("hazard"):
+			var areas: Array = [n] if n is Area3D else n.find_children("*", "Area3D", true, false)
+			for a_v in areas:
+				(a_v as Area3D).monitoring = false
+				(a_v as Area3D).monitorable = false
+			disarmed += 1
+	print("[em-sim-grid] %d live utility(ies) disarmed — the museum owns the walk" % disarmed)
 
 
 ## The pack report on disk survives across boots: merge it into the live

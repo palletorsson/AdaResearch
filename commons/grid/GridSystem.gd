@@ -711,7 +711,17 @@ func _try_load_floor_plan() -> void:
 		print("GridSystem: No floor plan found")
 
 # Handle player spawn positioning
+## Embedding (2026-08-24, the endless museum's simulation halls): the HOST
+## owns the player — an embedded grid must never reposition it. Additive:
+## default false, the game path is untouched. Set before add_child, like
+## map_name and bare_world.
+var skip_player_spawn: bool = false
+
+
 func _handle_player_spawn():
+	if skip_player_spawn:
+		print("GridSystem: skip_player_spawn — the host owns the player")
+		return
 	print("GridSystem: Handling player spawn positioning...")
 	spawn_component.handle_player_spawn()
 

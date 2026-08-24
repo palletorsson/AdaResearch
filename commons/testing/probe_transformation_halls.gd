@@ -54,6 +54,10 @@ func _run() -> void:
 	inst.set("EM_CONTROL", "res://ada_run/_trial_tf_control.json")
 	inst.set("_overrides_path", "res://ada_run/_trial_tf_overrides.json")
 	inst.set("_hand_path", "res://ada_run/_trial_tf_hand.json")
+	# the probe wants the WHOLE chapter from pearl 1 — the .tscn may carry
+	# Palle's live Inspector start (chapter + pearl); speak over it
+	inst.set("start_chapter", "transformation")
+	inst.set("start_map", "")
 	var ctl := FileAccess.open("res://ada_run/_trial_tf_control.json", FileAccess.WRITE)
 	ctl.store_string(JSON.stringify({"first_chapter": "transformation", "dollhouse": 0, "grid_pack": 1}, " "))
 	ctl.close()
@@ -70,7 +74,7 @@ func _run() -> void:
 		inst.call("_build_segment")
 		await create_timer(0.3).timeout
 	inst.call("flush_stamps")
-	await create_timer(1.5).timeout   # settle: deferred configs, late seats, physics
+	await create_timer(3.0).timeout   # settle: deferred configs, late seats, the embedded grid's own build
 
 	var segs: Array = inst.get("_segments")
 	if segs.size() < 7:
@@ -158,13 +162,16 @@ func _run() -> void:
 		var ya: float = _ray_y(w3d, pa.x, pa.y)
 		if absf(ya + 1.0) > 0.25:
 			fails.append("axisdecomposition: field floor at %.2f, wanted -1.0" % ya)
-		# the SIMULATION declaration sinks the WHOLE map (2026-08-24): the
-		# west strip is pool floor now, and the margins outside the tile walk
-		# at deck 0 with wedges connecting them
+		# THE GRID VERSION (2026-08-24): the real GridSystem stands in the
+		# basin — a floor cell reads as the grid's own cube TOP (flush with
+		# the deck: -depth + 1 = 0), a void cell reads the pool floor at -1,
+		# and the margins outside the tile walk at deck 0
 		var da: Vector2 = cellw.call(ra, 1.0, 1.0)
 		var yd: float = _ray_y(w3d, da.x, da.y)
-		if absf(yd + 1.0) > 0.25:
-			fails.append("axisdecomposition: west strip at %.2f, wanted -1.0 (the whole map is the simulation)" % yd)
+		# grid cubes are CENTER-origin (top at +0.5 in grid space) — a floor
+		# cube in a 1 m basin tops out at -depth + 0.5 = -0.5
+		if absf(yd + 0.5) > 0.25:
+			fails.append("axisdecomposition: grid floor cube top at %.2f, wanted -0.5 (the real grid in the basin)" % yd)
 		var ma: Vector2 = cellw.call(ra, -1.0, 8.0)
 		var yma: float = _ray_y(w3d, ma.x, ma.y)
 		if absf(yma) > 0.2:
@@ -176,8 +183,14 @@ func _run() -> void:
 				auto_wedges += 1
 		if auto_wedges < 3:
 			fails.append("axisdecomposition: %d auto wedge(s), wanted >=3 (entry/exit/sides)" % auto_wedges)
-		if absf(yd + 1.0) <= 0.25 and absf(yma) <= 0.2 and auto_wedges >= 3:
-			notes.append("axisdecomposition: whole map sunk / margin 0 / %d connecting wedges" % auto_wedges)
+		var grid_node := false
+		for n in an2.find_children("*", "Node3D", true, false):
+			if str(n.name).begins_with("SimGrid_"):
+				grid_node = true
+		if not grid_node:
+			fails.append("axisdecomposition: no SimGrid_ node — the REAL grid is not standing in the basin")
+		if absf(yd) <= 0.25 and absf(yma) <= 0.2 and auto_wedges >= 3 and grid_node:
+			notes.append("axisdecomposition: the REAL grid in the basin (cube tops 0, pool -1) / margin 0 / %d wedges" % auto_wedges)
 
 	# ── trans rotation ──────────────────────────────────────────────────────
 	if by_pearl.has("trans rotation"):

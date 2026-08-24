@@ -1,6 +1,6 @@
 {
 	"_readme": "The BAKE: every placement decision the museum makes from a measurement, decided ONCE by a headless --em-bake run and replayed by every later run, desktop or headset. Per chapter|pearl: placed = token, tile cell, the exact cells sealed (x, z-from-segment-base); refused = token, cell, why. Regenerate after editing the plan: python tools/em_bake.py",
-	"at": "2026-08-24 14:58:52",
+	"at": "2026-08-24 15:12:15",
 	"plan": "res://ada_run/em_plan.json",
 	"plan_at": "2026-08-21T14:00:55",
 	"schema": "adaresearch.em_bake.v1",
@@ -47002,79 +47002,290 @@
 			"placed": [
 				{
 					"cell": [
-						1.0,
-						8.0
+						4.0,
+						28.0
 					],
 					"seal": [
 						[
-							1.0,
-							7.0
+							4.0,
+							27.0
 						],
 						[
-							1.0,
-							8.0
+							4.0,
+							28.0
 						]
 					],
 					"token": "pattern_tile_4x4"
 				},
 				{
 					"cell": [
-						3.0,
-						5.0
+						5.0,
+						24.0
 					],
 					"seal": [
 						[
-							3.0,
-							5.0
+							5.0,
+							24.0
 						]
 					],
 					"token": "pattern_tile_cube"
 				},
 				{
 					"cell": [
-						6.0,
-						6.0
+						4.0,
+						31.0
 					],
 					"seal": [
 						[
-							4.0,
-							6.0
+							3.0,
+							31.0
 						],
 						[
+							4.0,
+							31.0
+						]
+					],
+					"token": "tile_meander_floor"
+				},
+				{
+					"cell": [
+						1.0,
+						4.0
+					],
+					"seal": [
+						[
+							1.0,
+							4.0
+						]
+					],
+					"token": "array_carpet"
+				},
+				{
+					"cell": [
+						1.0,
+						10.0
+					],
+					"seal": [
+						[
+							1.0,
+							10.0
+						]
+					],
+					"token": "mirror"
+				},
+				{
+					"cell": [
+						5.0,
+						18.0
+					],
+					"seal": [
+						[
 							5.0,
-							6.0
+							16.0
 						],
 						[
 							6.0,
-							6.0
+							16.0
 						],
 						[
 							7.0,
-							6.0
+							16.0
 						],
 						[
-							8.0,
-							6.0
+							5.0,
+							17.0
+						],
+						[
+							6.0,
+							17.0
+						],
+						[
+							7.0,
+							17.0
+						],
+						[
+							5.0,
+							18.0
+						],
+						[
+							6.0,
+							18.0
+						],
+						[
+							7.0,
+							18.0
+						],
+						[
+							5.0,
+							19.0
+						],
+						[
+							6.0,
+							19.0
+						],
+						[
+							7.0,
+							19.0
+						]
+					],
+					"token": "vr_tile_editor_mirror"
+				},
+				{
+					"cell": [
+						6.0,
+						27.0
+					],
+					"seal": [
+						[
+							5.0,
+							26.0
+						],
+						[
+							6.0,
+							26.0
+						],
+						[
+							7.0,
+							26.0
+						],
+						[
+							5.0,
+							27.0
+						],
+						[
+							6.0,
+							27.0
+						],
+						[
+							7.0,
+							27.0
+						]
+					],
+					"token": "pattern_tile_plate"
+				},
+				{
+					"cell": [
+						4.0,
+						37.0
+					],
+					"seal": [
+						[
+							2.0,
+							37.0
+						],
+						[
+							3.0,
+							37.0
+						],
+						[
+							4.0,
+							37.0
+						],
+						[
+							5.0,
+							37.0
+						],
+						[
+							6.0,
+							37.0
 						]
 					],
 					"token": "science_screen"
 				},
 				{
 					"cell": [
-						9.0,
-						8.0
+						1.0,
+						6.0
 					],
 					"seal": [
 						[
-							8.0,
-							8.0
+							1.0,
+							6.0
+						]
+					],
+					"token": "sorting_algorithm_race"
+				},
+				{
+					"cell": [
+						10.0,
+						18.0
+					],
+					"seal": [
+						[
+							10.0,
+							18.0
 						],
 						[
 							9.0,
-							8.0
+							17.0
+						],
+						[
+							10.0,
+							17.0
+						],
+						[
+							11.0,
+							17.0
+						],
+						[
+							9.0,
+							18.0
+						],
+						[
+							11.0,
+							18.0
+						],
+						[
+							9.0,
+							19.0
+						],
+						[
+							10.0,
+							19.0
+						],
+						[
+							11.0,
+							19.0
 						]
 					],
-					"token": "tile_meander_floor"
+					"token": "step_sequencer"
+				},
+				{
+					"cell": [
+						11.0,
+						6.0
+					],
+					"seal": [
+						[
+							11.0,
+							5.0
+						],
+						[
+							11.0,
+							6.0
+						],
+						[
+							11.0,
+							7.0
+						]
+					],
+					"token": "situated_readout"
+				},
+				{
+					"cell": [
+						16.0,
+						49.0
+					],
+					"seal": [],
+					"token": "tiling_demo"
+				},
+				{
+					"cell": [
+						14.0,
+						69.0
+					],
+					"seal": [],
+					"token": "facade_grammar_demo"
 				}
 			],
 			"refused": []
@@ -47295,14 +47506,6 @@
 			"placed": [
 				{
 					"cell": [
-						7.0,
-						5.0
-					],
-					"seal": [],
-					"token": "pickup_gate"
-				},
-				{
-					"cell": [
 						2.0,
 						9.0
 					],
@@ -47418,27 +47621,24 @@
 				},
 				{
 					"cell": [
-						1.0,
-						20.0
-					],
-					"seal": [],
-					"token": "cube_scene"
-				},
-				{
-					"cell": [
 						5.0,
-						20.0
+						22.0
 					],
-					"seal": [],
+					"seal": [
+						[
+							4.0,
+							21.0
+						],
+						[
+							5.0,
+							21.0
+						],
+						[
+							5.0,
+							22.0
+						]
+					],
 					"token": "x_translation_cube"
-				},
-				{
-					"cell": [
-						5.0,
-						20.0
-					],
-					"seal": [],
-					"token": "pick_up_cube"
 				}
 			],
 			"refused": [
@@ -47448,38 +47648,6 @@
 						20.0
 					],
 					"token": "cube_scene",
-					"why": "baked: sealing would sever the walk route"
-				},
-				{
-					"tile_cell": [
-						5.0,
-						21.0
-					],
-					"token": "x_translation_cube",
-					"why": "sealing would sever the walk route"
-				},
-				{
-					"tile_cell": [
-						4.0,
-						21.0
-					],
-					"token": "x_translation_cube",
-					"why": "sealing would sever the walk route"
-				},
-				{
-					"tile_cell": [
-						5.0,
-						21.0
-					],
-					"token": "pick_up_cube",
-					"why": "sealing would sever the walk route"
-				},
-				{
-					"tile_cell": [
-						4.0,
-						21.0
-					],
-					"token": "pick_up_cube",
 					"why": "sealing would sever the walk route"
 				}
 			]
@@ -47995,161 +48163,161 @@
 			"placed": [
 				{
 					"cell": [
-						3,
-						7
+						3.0,
+						7.0
 					],
 					"seal": [
 						[
-							3,
-							7
+							3.0,
+							7.0
 						]
 					],
 					"token": "boolean_tunnel"
 				},
 				{
 					"cell": [
-						1,
-						8
+						1.0,
+						8.0
 					],
 					"seal": [
 						[
-							1,
-							7
+							1.0,
+							7.0
 						],
 						[
-							1,
-							8
+							1.0,
+							8.0
 						]
 					],
 					"token": "righttriangle"
 				},
 				{
 					"cell": [
-						3,
-						10
+						3.0,
+						10.0
 					],
 					"seal": [
 						[
-							3,
-							10
+							3.0,
+							10.0
 						]
 					],
 					"token": "dark_sphere"
 				},
 				{
 					"cell": [
-						2,
-						55
+						2.0,
+						55.0
 					],
 					"seal": [
 						[
-							2,
-							55
+							2.0,
+							55.0
 						]
 					],
 					"token": "pick_up_cube"
 				},
 				{
 					"cell": [
-						3,
-						57
+						3.0,
+						57.0
 					],
 					"seal": [
 						[
-							3,
-							57
+							3.0,
+							57.0
 						],
 						[
-							3,
-							58
+							3.0,
+							58.0
 						],
 						[
-							3,
-							59
+							3.0,
+							59.0
 						],
 						[
-							4,
-							59
+							4.0,
+							59.0
 						],
 						[
-							5,
-							59
+							5.0,
+							59.0
 						],
 						[
-							0,
-							52
+							0.0,
+							52.0
 						],
 						[
-							1,
-							52
+							1.0,
+							52.0
 						],
 						[
-							2,
-							52
+							2.0,
+							52.0
 						],
 						[
-							4,
-							52
+							4.0,
+							52.0
 						],
 						[
-							5,
-							52
+							5.0,
+							52.0
 						],
 						[
-							6,
-							52
+							6.0,
+							52.0
 						],
 						[
-							7,
-							52
+							7.0,
+							52.0
 						],
 						[
-							8,
-							52
+							8.0,
+							52.0
 						],
 						[
-							0,
-							53
+							0.0,
+							53.0
 						],
 						[
-							1,
-							53
+							1.0,
+							53.0
 						],
 						[
-							2,
-							53
+							2.0,
+							53.0
 						],
 						[
-							3,
-							53
+							3.0,
+							53.0
 						],
 						[
-							4,
-							53
+							4.0,
+							53.0
 						],
 						[
-							5,
-							53
+							5.0,
+							53.0
 						],
 						[
-							6,
-							53
+							6.0,
+							53.0
 						],
 						[
-							7,
-							53
+							7.0,
+							53.0
 						],
 						[
-							8,
-							53
+							8.0,
+							53.0
 						],
 						[
-							6,
-							59
+							6.0,
+							59.0
 						],
 						[
-							6,
-							60
+							6.0,
+							60.0
 						]
 					],
 					"token": "carousel_cake"
@@ -48162,243 +48330,243 @@
 			"placed": [
 				{
 					"cell": [
-						3.0,
-						8.0
+						3,
+						8
 					],
 					"seal": [
 						[
-							2.0,
-							7.0
+							2,
+							7
 						],
 						[
-							3.0,
-							7.0
+							3,
+							7
 						],
 						[
-							4.0,
-							7.0
+							4,
+							7
 						],
 						[
-							2.0,
-							9.0
+							2,
+							9
 						],
 						[
-							3.0,
-							9.0
+							3,
+							9
 						],
 						[
-							4.0,
-							9.0
+							4,
+							9
 						]
 					],
 					"token": "chair_assembly_puzzle"
 				},
 				{
 					"cell": [
-						4.0,
-						8.0
+						4,
+						8
 					],
 					"seal": [],
 					"token": "clipboard"
 				},
 				{
 					"cell": [
-						6.0,
-						8.0
+						6,
+						8
 					],
 					"seal": [
 						[
-							5.0,
-							8.0
+							5,
+							8
 						],
 						[
-							6.0,
-							8.0
+							6,
+							8
 						]
 					],
 					"token": "science_screen"
 				},
 				{
 					"cell": [
-						3.0,
-						12.0
+						3,
+						12
 					],
 					"seal": [
 						[
-							3.0,
-							12.0
+							3,
+							12
 						]
 					],
 					"token": "scale_me"
 				},
 				{
 					"cell": [
-						1.0,
-						14.0
+						1,
+						14
 					],
 					"seal": [
 						[
-							1.0,
-							14.0
+							1,
+							14
 						]
 					],
 					"token": "prism_block"
 				},
 				{
 					"cell": [
-						1.0,
-						14.0
+						1,
+						14
 					],
 					"seal": [],
 					"token": "prism_block"
 				},
 				{
 					"cell": [
-						2.0,
-						14.0
+						2,
+						14
 					],
 					"seal": [
 						[
-							1.0,
-							13.0
+							1,
+							13
 						],
 						[
-							2.0,
-							13.0
+							2,
+							13
 						],
 						[
-							3.0,
-							13.0
+							3,
+							13
 						],
 						[
-							2.0,
-							14.0
+							2,
+							14
 						],
 						[
-							3.0,
-							14.0
+							3,
+							14
 						],
 						[
-							1.0,
-							15.0
+							1,
+							15
 						],
 						[
-							2.0,
-							15.0
+							2,
+							15
 						],
 						[
-							3.0,
-							15.0
+							3,
+							15
 						]
 					],
 					"token": "cube_scene"
 				},
 				{
 					"cell": [
-						3.0,
-						14.0
+						3,
+						14
 					],
 					"seal": [
 						[
-							4.0,
-							13.0
+							4,
+							13
 						],
 						[
-							4.0,
-							14.0
+							4,
+							14
 						],
 						[
-							4.0,
-							15.0
+							4,
+							15
 						]
 					],
 					"token": "cube_scene"
 				},
 				{
 					"cell": [
-						4.0,
-						14.0
+						4,
+						14
 					],
 					"seal": [
 						[
-							5.0,
-							13.0
+							5,
+							13
 						],
 						[
-							5.0,
-							14.0
+							5,
+							14
 						],
 						[
-							5.0,
-							15.0
+							5,
+							15
 						]
 					],
 					"token": "cube_scene"
 				},
 				{
 					"cell": [
-						5.0,
-						14.0
+						5,
+						14
 					],
 					"seal": [],
 					"token": "prism_block"
 				},
 				{
 					"cell": [
-						5.0,
-						14.0
+						5,
+						14
 					],
 					"seal": [],
 					"token": "prism_block"
 				},
 				{
 					"cell": [
-						2.0,
-						17.0
+						2,
+						17
 					],
 					"seal": [
 						[
-							2.0,
-							17.0
+							2,
+							17
 						]
 					],
 					"token": "dark_sphere"
 				},
 				{
 					"cell": [
-						1.0,
-						19.0
+						1,
+						19
 					],
 					"seal": [
 						[
-							1.0,
-							19.0
+							1,
+							19
 						]
 					],
 					"token": "prism_block"
 				},
 				{
 					"cell": [
-						5.0,
-						19.0
+						5,
+						19
 					],
 					"seal": [
 						[
-							5.0,
-							19.0
+							5,
+							19
 						]
 					],
 					"token": "prism_block"
 				},
 				{
 					"cell": [
-						3.0,
-						20.0
+						3,
+						20
 					],
 					"seal": [
 						[
-							3.0,
-							20.0
+							3,
+							20
 						]
 					],
 					"token": "prism_block"
@@ -48407,11 +48575,11 @@
 			"refused": [
 				{
 					"tile_cell": [
-						6.0,
-						14.0
+						6,
+						14
 					],
 					"token": "prism_block",
-					"why": "sealing would sever the walk route"
+					"why": "baked: baked: sealing would sever the walk route"
 				}
 			]
 		},
