@@ -158,12 +158,26 @@ func _run() -> void:
 		var ya: float = _ray_y(w3d, pa.x, pa.y)
 		if absf(ya + 1.0) > 0.25:
 			fails.append("axisdecomposition: field floor at %.2f, wanted -1.0" % ya)
+		# the SIMULATION declaration sinks the WHOLE map (2026-08-24): the
+		# west strip is pool floor now, and the margins outside the tile walk
+		# at deck 0 with wedges connecting them
 		var da: Vector2 = cellw.call(ra, 1.0, 1.0)
 		var yd: float = _ray_y(w3d, da.x, da.y)
-		if absf(yd) > 0.2:
-			fails.append("axisdecomposition: west strip at %.2f, wanted 0" % yd)
-		else:
-			notes.append("axisdecomposition: pool -1 / deck 0")
+		if absf(yd + 1.0) > 0.25:
+			fails.append("axisdecomposition: west strip at %.2f, wanted -1.0 (the whole map is the simulation)" % yd)
+		var ma: Vector2 = cellw.call(ra, -1.0, 8.0)
+		var yma: float = _ray_y(w3d, ma.x, ma.y)
+		if absf(yma) > 0.2:
+			fails.append("axisdecomposition: margin at %.2f, wanted 0 (the walk-around)" % yma)
+		var auto_wedges: int = 0
+		var an2: Node3D = ra.get("node")
+		for n in an2.find_children("*", "Node3D", true, false):
+			if str(n.name).begins_with("Wedge_") and (n as Node3D).position.y < 0.2:
+				auto_wedges += 1
+		if auto_wedges < 3:
+			fails.append("axisdecomposition: %d auto wedge(s), wanted >=3 (entry/exit/sides)" % auto_wedges)
+		if absf(yd + 1.0) <= 0.25 and absf(yma) <= 0.2 and auto_wedges >= 3:
+			notes.append("axisdecomposition: whole map sunk / margin 0 / %d connecting wedges" % auto_wedges)
 
 	# ── trans rotation ──────────────────────────────────────────────────────
 	if by_pearl.has("trans rotation"):

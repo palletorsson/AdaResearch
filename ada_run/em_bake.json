@@ -1,6 +1,6 @@
 {
 	"_readme": "The BAKE: every placement decision the museum makes from a measurement, decided ONCE by a headless --em-bake run and replayed by every later run, desktop or headset. Per chapter|pearl: placed = token, tile cell, the exact cells sealed (x, z-from-segment-base); refused = token, cell, why. Regenerate after editing the plan: python tools/em_bake.py",
-	"at": "2026-08-24 14:40:04",
+	"at": "2026-08-24 14:58:52",
 	"plan": "res://ada_run/em_plan.json",
 	"plan_at": "2026-08-21T14:00:55",
 	"schema": "adaresearch.em_bake.v1",
@@ -47295,69 +47295,147 @@
 			"placed": [
 				{
 					"cell": [
-						7,
-						5
+						7.0,
+						5.0
 					],
 					"seal": [],
 					"token": "pickup_gate"
 				},
 				{
 					"cell": [
-						2,
-						9
+						2.0,
+						9.0
 					],
-					"seal": [],
+					"seal": [
+						[
+							2.0,
+							9.0
+						]
+					],
 					"token": "dark_sphere"
 				},
 				{
 					"cell": [
-						3,
-						12
+						3.0,
+						12.0
 					],
 					"seal": [
 						[
-							2,
-							11
+							2.0,
+							11.0
 						],
 						[
-							2,
-							12
+							3.0,
+							11.0
 						],
 						[
-							2,
-							13
+							4.0,
+							11.0
+						],
+						[
+							5.0,
+							11.0
+						],
+						[
+							2.0,
+							12.0
+						],
+						[
+							3.0,
+							12.0
+						],
+						[
+							4.0,
+							12.0
+						],
+						[
+							5.0,
+							12.0
+						],
+						[
+							2.0,
+							13.0
+						],
+						[
+							3.0,
+							13.0
+						],
+						[
+							4.0,
+							13.0
+						],
+						[
+							5.0,
+							13.0
 						]
 					],
 					"token": "toruscylinder"
 				},
 				{
 					"cell": [
-						5,
-						18
+						5.0,
+						18.0
 					],
-					"seal": [],
+					"seal": [
+						[
+							5.0,
+							18.0
+						],
+						[
+							5.0,
+							19.0
+						],
+						[
+							4.0,
+							17.0
+						],
+						[
+							5.0,
+							17.0
+						],
+						[
+							6.0,
+							17.0
+						],
+						[
+							4.0,
+							18.0
+						],
+						[
+							6.0,
+							18.0
+						],
+						[
+							4.0,
+							19.0
+						],
+						[
+							6.0,
+							19.0
+						]
+					],
 					"token": "z_translation_cube"
 				},
 				{
 					"cell": [
-						1,
-						20
+						1.0,
+						20.0
 					],
 					"seal": [],
 					"token": "cube_scene"
 				},
 				{
 					"cell": [
-						5,
-						21
+						5.0,
+						20.0
 					],
 					"seal": [],
 					"token": "x_translation_cube"
 				},
 				{
 					"cell": [
-						5,
-						21
+						5.0,
+						20.0
 					],
 					"seal": [],
 					"token": "pick_up_cube"
@@ -47366,11 +47444,43 @@
 			"refused": [
 				{
 					"tile_cell": [
-						2,
-						20
+						2.0,
+						20.0
 					],
 					"token": "cube_scene",
 					"why": "baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						5.0,
+						21.0
+					],
+					"token": "x_translation_cube",
+					"why": "sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						4.0,
+						21.0
+					],
+					"token": "x_translation_cube",
+					"why": "sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						5.0,
+						21.0
+					],
+					"token": "pick_up_cube",
+					"why": "sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						4.0,
+						21.0
+					],
+					"token": "pick_up_cube",
+					"why": "sealing would sever the walk route"
 				}
 			]
 		},
@@ -47637,7 +47747,7 @@
 						6.0
 					],
 					"token": "matrix_4x4_viewer",
-					"why": "baked: sealing would sever the walk route"
+					"why": "sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
@@ -47645,7 +47755,7 @@
 						10.0
 					],
 					"token": "homogeneous_coordinates",
-					"why": "baked: sealing would sever the walk route"
+					"why": "sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
@@ -47677,7 +47787,7 @@
 						21.0
 					],
 					"token": "spin",
-					"why": "baked: sealing would sever the walk route"
+					"why": "sealing would sever the walk route"
 				}
 			]
 		},
@@ -47885,161 +47995,161 @@
 			"placed": [
 				{
 					"cell": [
-						3.0,
-						7.0
+						3,
+						7
 					],
 					"seal": [
 						[
-							3.0,
-							7.0
+							3,
+							7
 						]
 					],
 					"token": "boolean_tunnel"
 				},
 				{
 					"cell": [
-						1.0,
-						8.0
+						1,
+						8
 					],
 					"seal": [
 						[
-							1.0,
-							7.0
+							1,
+							7
 						],
 						[
-							1.0,
-							8.0
+							1,
+							8
 						]
 					],
 					"token": "righttriangle"
 				},
 				{
 					"cell": [
-						3.0,
-						10.0
+						3,
+						10
 					],
 					"seal": [
 						[
-							3.0,
-							10.0
+							3,
+							10
 						]
 					],
 					"token": "dark_sphere"
 				},
 				{
 					"cell": [
-						2.0,
-						55.0
+						2,
+						55
 					],
 					"seal": [
 						[
-							2.0,
-							55.0
+							2,
+							55
 						]
 					],
 					"token": "pick_up_cube"
 				},
 				{
 					"cell": [
-						3.0,
-						57.0
+						3,
+						57
 					],
 					"seal": [
 						[
-							3.0,
-							57.0
+							3,
+							57
 						],
 						[
-							3.0,
-							58.0
+							3,
+							58
 						],
 						[
-							3.0,
-							59.0
+							3,
+							59
 						],
 						[
-							4.0,
-							59.0
+							4,
+							59
 						],
 						[
-							5.0,
-							59.0
+							5,
+							59
 						],
 						[
-							0.0,
-							52.0
+							0,
+							52
 						],
 						[
-							1.0,
-							52.0
+							1,
+							52
 						],
 						[
-							2.0,
-							52.0
+							2,
+							52
 						],
 						[
-							4.0,
-							52.0
+							4,
+							52
 						],
 						[
-							5.0,
-							52.0
+							5,
+							52
 						],
 						[
-							6.0,
-							52.0
+							6,
+							52
 						],
 						[
-							7.0,
-							52.0
+							7,
+							52
 						],
 						[
-							8.0,
-							52.0
+							8,
+							52
 						],
 						[
-							0.0,
-							53.0
+							0,
+							53
 						],
 						[
-							1.0,
-							53.0
+							1,
+							53
 						],
 						[
-							2.0,
-							53.0
+							2,
+							53
 						],
 						[
-							3.0,
-							53.0
+							3,
+							53
 						],
 						[
-							4.0,
-							53.0
+							4,
+							53
 						],
 						[
-							5.0,
-							53.0
+							5,
+							53
 						],
 						[
-							6.0,
-							53.0
+							6,
+							53
 						],
 						[
-							7.0,
-							53.0
+							7,
+							53
 						],
 						[
-							8.0,
-							53.0
+							8,
+							53
 						],
 						[
-							6.0,
-							59.0
+							6,
+							59
 						],
 						[
-							6.0,
-							60.0
+							6,
+							60
 						]
 					],
 					"token": "carousel_cake"

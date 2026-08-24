@@ -2814,7 +2814,7 @@ func _stamp_gaps(seg: Node3D, tile: Array, zbase: int) -> void:
 ## turned to `facing`, it is a climbable slope from the floor to the height above.
 ## Both the stage ramps and the free ramps come through here, so there is one
 ## place where the wedge's geometry is understood.
-func _stamp_wedge(seg: Node3D, cell: Vector2i, facing: String, rise: float, zbase: int, run_cells: float = 1.0) -> bool:
+func _stamp_wedge(seg: Node3D, cell: Vector2i, facing: String, rise: float, zbase: int, run_cells: float = 1.0, base_y: float = 0.0) -> bool:
 	if not ResourceLoader.exists(WEDGE_SCENE):
 		return false
 	var yaw: float = 0.0
@@ -2826,8 +2826,9 @@ func _stamp_wedge(seg: Node3D, cell: Vector2i, facing: String, rise: float, zbas
 	var w: Node3D = (load(WEDGE_SCENE) as PackedScene).instantiate() as Node3D
 	w.name = "Wedge_%d_%d" % [cell.x, cell.y]
 	# pose BEFORE the tree: a scene that caches anything in _ready must be told
-	# first (the transport cube taught the museum that the hard way)
-	w.position = Vector3(cell.x + 0.5, rise * 0.5, cell.y + 0.5)
+	# first (the transport cube taught the museum that the hard way).
+	# base_y sinks a wedge onto a pool floor (the simulation courtyards).
+	w.position = Vector3(cell.x + 0.5, base_y + rise * 0.5, cell.y + 0.5)
 	w.rotation_degrees = Vector3(0, yaw, 0)
 	w.scale = Vector3(0.5 * maxf(0.2, run_cells), maxf(0.05, rise), 1.0)   # the mesh is 2 x 1 x 1
 	seg.add_child(w)
@@ -3252,6 +3253,22 @@ func _build_segment() -> void:
 			peek["open_roof"] = bool(mm.get("open_roof", peek.get("open_roof", false)))
 			if mm.get("basin") is Dictionary:
 				peek["basin"] = mm["basin"]
+			# THE SIMULATION DECLARATION (2026-08-24, Palle: "use the grid
+			# system as simulation inside the museum, add it to a courtyard
+			# with a basin that can host the size with extra meters on the
+			# side we can walk"): museum.simulation {depth, margin} is the
+			# whole pattern in one key — courtyard roof, the ENTIRE map sunk
+			# as one basin (auto-sized to the tile), margins laid museum-side.
+			if mm.get("simulation") is Dictionary:
+				var simd: Dictionary = mm["simulation"]
+				peek["open_roof"] = true
+				var map_h: int = (peek["tile"] as Array).size()
+				var map_w: int = ((peek["tile"] as Array)[0] as Array).size() if map_h > 0 else 0
+				peek["basin"] = {"depth": clampf(float(simd.get("depth", 1.0)), 0.3, 3.0),
+					"glass": false, "rects": [[0, 0, map_w, map_h]]}
+				peek["sim_margin"] = clampi(int(simd.get("margin", 2)), 1, 4)
+			elif peek.has("sim_margin"):
+				peek.erase("sim_margin")
 	if peek.get("tile") is Array and (peek["tile"] as Array).size() >= 4:
 		var trows: Array = []
 		for r_v in (peek["tile"] as Array):
@@ -3476,10 +3493,14 @@ func _build_segment() -> void:
 	# side-room doorways in the EAST skin are decided from the PLAN here,
 	# before the skin is stamped (the deal runs later); _side_room_doorways
 	# and _build_side_rooms number rooms in the same plan order so they agree
-	var doorways: Dictionary = _side_room_doorways(spec, next_seq, tile.size())
+	# a SIMULATION hall pushes its skins out by the margin — the courtyard
+	# walls hold the walk-around; side rooms make no sense against a margin
+	var sim_margin: int = int(peek.get("sim_margin", 0))
+	var doorways: Dictionary = {} if sim_margin > 0 else _side_room_doorways(spec, next_seq, tile.size())
+	var skin_xs: Array = [-1 - sim_margin, w + sim_margin] if sim_margin > 0 else [-1, w]
 	for y_skin in range(tile.size()):
-		for sx2 in [-1, w]:
-			if sx2 == w and doorways.has(y_skin):
+		for sx2 in skin_xs:
+			if int(sx2) == w and doorways.has(y_skin):
 				continue                    # the doorway: no skin; the room's walls take over
 			_wall_at(seg, solid, wcells, int(sx2), y_skin + VESTIBULE_H, corner_col, m_corner, wr)
 	# ── THE BASIN (2026-08-24, Palle: "like a basin with walls under the
@@ -3515,6 +3536,32 @@ func _build_segment() -> void:
 			m_basin_glass.albedo_color = Color(0.72, 0.84, 0.87, 0.14)
 			m_basin_glass.roughness = 0.04
 			m_basin_glass.metallic = 0.15
+	# ── THE SIMULATION MARGINS (2026-08-24, Palle: "a basin that can host
+	# the size with extra meters on the side we can walk") ──────────────────
+	# Deck-level walks laid OUTSIDE the tile (origin-pinning holds: no map
+	# cell moves), wedges connecting the entry door down into the pool, the
+	# exit door up out of it, and each side margin to the pool floor.
+	if sim_margin > 0 and not basin_cells.is_empty():
+		for zz in range(tile.size()):
+			var z2: int = zz + VESTIBULE_H
+			for mxo in range(1, sim_margin + 1):
+				for sxm_v in [-mxo, w - 1 + mxo]:
+					var sxm: int = sxm_v
+					_box(seg, Vector3(sxm + 0.5, -0.1, z2 + 0.5), Vector3(1, 0.2, 1), Color(0.16, 0.16, 0.19), m_floor)
+					_add_col(solid, Vector3(sxm + 0.5, -0.1, z2 + 0.5), Vector3(1, 0.2, 1))
+					_walk_cells[Vector2i(sxm, zbase + z2)] = true
+		var sim_h: int = maxi(1, tile.size() - 3)   # the chicane's 3 rows came after the map
+		var dc0: int = _open_col(tile, 0)
+		var dc1: int = _open_col(tile, sim_h - 1)
+		_stamp_wedge(seg, Vector2i(dc0, VESTIBULE_H), "south", basin_depth, zbase, 1.0, -basin_depth)
+		_stamp_wedge(seg, Vector2i(dc1, VESTIBULE_H + sim_h - 1), "north", basin_depth, zbase, 1.0, -basin_depth)
+		_stamp_wedge(seg, Vector2i(0, VESTIBULE_H + sim_h / 2), "east", basin_depth, zbase, 1.0, -basin_depth)
+		_stamp_wedge(seg, Vector2i(w - 1, VESTIBULE_H + sim_h / 2), "west", basin_depth, zbase, 1.0, -basin_depth)
+		# the pool floor IS the exhibition floor here — walkable for every
+		# planner that reads the walk map
+		for bc_v in basin_cells.keys():
+			var bc: Vector2i = bc_v
+			_walk_cells[Vector2i(bc.x, zbase + VESTIBULE_H + bc.y)] = true
 	# collect slots first so the artifact budget prefers hero > podium > floor
 	var slots: Array = []
 	for y in range(tile.size()):
@@ -5308,6 +5355,16 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 				for rz2 in range(int(ra2[1]), int(ra2[1]) + int(ra2[3])):
 					for rx2 in range(int(ra2[0]), int(ra2[0]) + int(ra2[2])):
 						basin_map[Vector2i(rx2, rz2)] = true
+	# THE SIMULATION DECLARATION sinks the WHOLE map: every body stands on
+	# the pool floor (museum.simulation, the courtyard pattern in one key)
+	if basin_map.is_empty() and minfo_pack_v is Dictionary \
+			and ((minfo_pack_v as Dictionary).get("museum", {}) is Dictionary) \
+			and (((minfo_pack_v as Dictionary).get("museum", {}) as Dictionary).get("simulation") is Dictionary):
+		var sim_pack: Dictionary = ((minfo_pack_v as Dictionary)["museum"] as Dictionary)["simulation"]
+		basin_pack_depth = clampf(float(sim_pack.get("depth", 1.0)), 0.3, 3.0)
+		for gz3 in range(structure.size()):
+			for gx3 in range((structure[gz3] as Array).size()):
+				basin_map[Vector2i(gx3, gz3)] = true
 	var bx0: int = 1
 	var bx1: int = w - 2
 	var bz0: int = VESTIBULE_H + 1

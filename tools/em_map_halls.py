@@ -169,10 +169,15 @@ def derive_row(pearl: str, map_name: str, museum_key: str, idx: int, total: int,
     # hall's enclosed void regions into glass-covered pools (and re-reads the
     # map fresh each build — this copy serves /transplant and the plan readers).
     basin = md.get("map_info", {}).get("museum", {}).get("basin")
+    # museum.simulation {depth, margin}: the courtyard pattern in one key —
+    # the museum synthesizes roof/basin/margins from it at build time; the
+    # copy here serves the plan readers.
+    simulation = md.get("map_info", {}).get("museum", {}).get("simulation")
     return {
         "museum": museum_key,
-        **({"open_roof": True} if open_roof else {}),
+        **({"open_roof": True} if (open_roof or isinstance(simulation, dict)) else {}),
         **({"basin": basin} if isinstance(basin, dict) else {}),
+        **({"simulation": simulation} if isinstance(simulation, dict) else {}),
         "tile": tile, "h": len(tile),
         "rooms": 0, "artifacts": arts, "rejected": [],
         "room": {"w": len(tile[0]) if tile else 0, "h": len(tile)}, "apron": 0,
