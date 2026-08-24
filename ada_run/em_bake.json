@@ -1,6 +1,6 @@
 {
 	"_readme": "The BAKE: every placement decision the museum makes from a measurement, decided ONCE by a headless --em-bake run and replayed by every later run, desktop or headset. Per chapter|pearl: placed = token, tile cell, the exact cells sealed (x, z-from-segment-base); refused = token, cell, why. Regenerate after editing the plan: python tools/em_bake.py",
-	"at": "2026-08-24 16:13:56",
+	"at": "2026-08-24 16:34:31",
 	"plan": "res://ada_run/em_plan.json",
 	"plan_at": "2026-08-21T14:00:55",
 	"schema": "adaresearch.em_bake.v1",
@@ -47494,158 +47494,20 @@
 		},
 		"transformation|trans axisdecomposition": {
 			"museum": "uffizi-spine-enfilade",
-			"placed": [
-				{
-					"cell": [
-						2.0,
-						9.0
-					],
-					"seal": [
-						[
-							2.0,
-							9.0
-						]
-					],
-					"token": "dark_sphere"
-				},
-				{
-					"cell": [
-						3.0,
-						12.0
-					],
-					"seal": [
-						[
-							2.0,
-							11.0
-						],
-						[
-							3.0,
-							11.0
-						],
-						[
-							4.0,
-							11.0
-						],
-						[
-							5.0,
-							11.0
-						],
-						[
-							2.0,
-							12.0
-						],
-						[
-							3.0,
-							12.0
-						],
-						[
-							4.0,
-							12.0
-						],
-						[
-							5.0,
-							12.0
-						],
-						[
-							2.0,
-							13.0
-						],
-						[
-							3.0,
-							13.0
-						],
-						[
-							4.0,
-							13.0
-						],
-						[
-							5.0,
-							13.0
-						]
-					],
-					"token": "toruscylinder"
-				},
-				{
-					"cell": [
-						5.0,
-						18.0
-					],
-					"seal": [
-						[
-							5.0,
-							18.0
-						],
-						[
-							5.0,
-							19.0
-						],
-						[
-							4.0,
-							17.0
-						],
-						[
-							5.0,
-							17.0
-						],
-						[
-							6.0,
-							17.0
-						],
-						[
-							4.0,
-							18.0
-						],
-						[
-							6.0,
-							18.0
-						],
-						[
-							4.0,
-							19.0
-						],
-						[
-							6.0,
-							19.0
-						]
-					],
-					"token": "z_translation_cube"
-				},
-				{
-					"cell": [
-						2.0,
-						20.0
-					],
-					"seal": [
-						[
-							2.0,
-							20.0
-						]
-					],
-					"token": "cube_scene"
-				}
-			],
-			"refused": [
-				{
-					"tile_cell": [
-						5.0,
-						22.0
-					],
-					"token": "x_translation_cube",
-					"why": "sealing would sever the walk route"
-				}
-			]
+			"placed": [],
+			"refused": []
 		},
 		"transformation|trans introduction": {
 			"museum": "uffizi-spine-enfilade",
 			"placed": [
 				{
 					"cell": [
-						1.0,
+						9.0,
 						5.0
 					],
 					"seal": [
 						[
-							1.0,
+							9.0,
 							5.0
 						]
 					],
@@ -47653,41 +47515,20 @@
 				},
 				{
 					"cell": [
-						5.0,
-						5.0
-					],
-					"seal": [
-						[
-							4.0,
-							5.0
-						],
-						[
-							5.0,
-							5.0
-						],
-						[
-							6.0,
-							5.0
-						]
-					],
-					"token": "rotation_gimbal"
-				},
-				{
-					"cell": [
-						7.0,
+						2.0,
 						6.0
 					],
 					"seal": [
 						[
-							6.0,
+							1.0,
 							6.0
 						],
 						[
-							7.0,
+							2.0,
 							6.0
 						],
 						[
-							8.0,
+							3.0,
 							6.0
 						]
 					],
@@ -47695,250 +47536,85 @@
 				},
 				{
 					"cell": [
-						9.0,
+						7.0,
 						9.0
 					],
 					"seal": [
 						[
-							9.0,
+							6.0,
 							9.0
-						]
-					],
-					"token": "balance_puzzle"
-				},
-				{
-					"cell": [
-						3.0,
-						10.0
-					],
-					"seal": [
+						],
 						[
-							2.0,
-							10.0
+							8.0,
+							9.0
 						]
 					],
 					"token": "homogeneous_coordinates"
 				},
 				{
 					"cell": [
-						2.0,
+						9.0,
 						11.0
 					],
 					"seal": [
 						[
-							2.0,
+							9.0,
 							11.0
-						],
-						[
-							2.0,
-							12.0
 						]
 					],
-					"token": "x_translation_cube"
-				},
-				{
-					"cell": [
-						8.0,
-						11.0
-					],
-					"seal": [
-						[
-							8.0,
-							11.0
-						],
-						[
-							8.0,
-							12.0
-						],
-						[
-							8.0,
-							10.0
-						],
-						[
-							9.0,
-							10.0
-						],
-						[
-							9.0,
-							11.0
-						],
-						[
-							9.0,
-							12.0
-						]
-					],
-					"token": "z_translation_cube"
+					"token": "balance_puzzle"
 				},
 				{
 					"cell": [
 						9.0,
-						11.0
-					],
-					"seal": [],
-					"token": "dark_sphere"
-				},
-				{
-					"cell": [
-						1.0,
-						12.0
+						16.0
 					],
 					"seal": [
 						[
-							1.0,
-							12.0
+							9.0,
+							16.0
 						]
 					],
 					"token": "transform_composition"
 				},
 				{
 					"cell": [
-						2.0,
-						16.0
-					],
-					"seal": [
-						[
-							2.0,
-							16.0
-						]
-					],
-					"token": "scale_me"
-				},
-				{
-					"cell": [
-						8.0,
-						16.0
-					],
-					"seal": [
-						[
-							8.0,
-							16.0
-						],
-						[
-							8.0,
-							17.0
-						]
-					],
-					"token": "y_translation_cube"
-				},
-				{
-					"cell": [
-						1.0,
+						9.0,
 						21.0
 					],
 					"seal": [
 						[
-							1.0,
+							9.0,
 							21.0
-						],
-						[
-							2.0,
-							21.0
-						],
-						[
-							3.0,
-							21.0
-						],
-						[
-							1.0,
-							20.0
-						],
-						[
-							2.0,
-							20.0
-						],
-						[
-							3.0,
-							20.0
-						],
-						[
-							1.0,
-							22.0
-						],
-						[
-							2.0,
-							22.0
-						],
-						[
-							3.0,
-							22.0
-						],
-						[
-							1.0,
-							23.0
-						],
-						[
-							2.0,
-							23.0
-						],
-						[
-							3.0,
-							23.0
 						]
 					],
-					"token": "spin"
+					"token": "dark_sphere"
 				},
 				{
 					"cell": [
-						8.0,
-						21.0
+						9.0,
+						24.0
 					],
-					"seal": [
-						[
-							8.0,
-							21.0
-						]
-					],
-					"token": "pick_up_cube"
+					"seal": [],
+					"token": "rotation_gimbal"
 				}
 			],
 			"refused": [
 				{
 					"tile_cell": [
+						9.0,
+						25.0
+					],
+					"token": "rotation_gimbal",
+					"why": "sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
 						8.0,
-						6.0
+						25.0
 					],
-					"token": "matrix_4x4_viewer",
-					"why": "baked: baked: sealing would sever the walk route"
-				},
-				{
-					"tile_cell": [
-						2.0,
-						10.0
-					],
-					"token": "homogeneous_coordinates",
-					"why": "baked: baked: sealing would sever the walk route"
-				},
-				{
-					"tile_cell": [
-						1.0,
-						10.0
-					],
-					"token": "homogeneous_coordinates",
+					"token": "rotation_gimbal",
 					"why": "sealing would sever the walk route"
-				},
-				{
-					"tile_cell": [
-						2.0,
-						9.0
-					],
-					"token": "homogeneous_coordinates",
-					"why": "sealing would sever the walk route"
-				},
-				{
-					"tile_cell": [
-						2.0,
-						11.0
-					],
-					"token": "homogeneous_coordinates",
-					"why": "sealing would sever the walk route"
-				},
-				{
-					"tile_cell": [
-						2.0,
-						21.0
-					],
-					"token": "spin",
-					"why": "baked: baked: sealing would sever the walk route"
 				}
 			]
 		},
@@ -47998,173 +47674,7 @@
 		},
 		"transformation|trans rotation": {
 			"museum": "uffizi-spine-enfilade",
-			"placed": [
-				{
-					"cell": [
-						3,
-						7
-					],
-					"seal": [
-						[
-							3,
-							7
-						]
-					],
-					"token": "rotate_grid_cubes"
-				},
-				{
-					"cell": [
-						6,
-						8
-					],
-					"seal": [
-						[
-							4,
-							8
-						],
-						[
-							5,
-							8
-						],
-						[
-							6,
-							8
-						],
-						[
-							7,
-							8
-						],
-						[
-							8,
-							8
-						]
-					],
-					"token": "science_screen"
-				},
-				{
-					"cell": [
-						2,
-						21
-					],
-					"seal": [
-						[
-							2,
-							21
-						]
-					],
-					"token": "dark_sphere"
-				},
-				{
-					"cell": [
-						2,
-						22
-					],
-					"seal": [
-						[
-							0,
-							22
-						],
-						[
-							1,
-							22
-						],
-						[
-							2,
-							22
-						],
-						[
-							3,
-							22
-						],
-						[
-							4,
-							22
-						]
-					],
-					"token": "spin"
-				},
-				{
-					"cell": [
-						2,
-						23
-					],
-					"seal": [
-						[
-							0,
-							23
-						],
-						[
-							1,
-							23
-						],
-						[
-							2,
-							23
-						],
-						[
-							3,
-							23
-						],
-						[
-							4,
-							23
-						]
-					],
-					"token": "spin"
-				},
-				{
-					"cell": [
-						0,
-						35
-					],
-					"seal": [
-						[
-							0,
-							35
-						]
-					],
-					"token": "catalyst_vent"
-				},
-				{
-					"cell": [
-						3,
-						40
-					],
-					"seal": [
-						[
-							3,
-							40
-						]
-					],
-					"token": "pick_up_cube"
-				},
-				{
-					"cell": [
-						4,
-						40
-					],
-					"seal": [
-						[
-							4,
-							40
-						]
-					],
-					"token": "pickup_gate"
-				},
-				{
-					"cell": [
-						3,
-						42
-					],
-					"seal": [
-						[
-							3,
-							42
-						]
-					],
-					"token": "catalyst_prompter_box"
-				}
-			],
+			"placed": [],
 			"refused": []
 		},
 		"transformation|trans rotationspectacle": {
@@ -48172,52 +47682,47 @@
 			"placed": [
 				{
 					"cell": [
-						3,
-						7
+						6,
+						5
 					],
 					"seal": [
 						[
-							3,
-							7
-						]
-					],
-					"token": "boolean_tunnel"
-				},
-				{
-					"cell": [
-						0,
-						8
-					],
-					"seal": [
-						[
-							0,
-							7
+							6,
+							4
 						]
 					],
 					"token": "righttriangle"
 				},
 				{
 					"cell": [
-						3,
-						10
+						8,
+						9
 					],
 					"seal": [
 						[
-							3,
-							10
+							8,
+							9
 						]
 					],
+					"token": "boolean_tunnel"
+				},
+				{
+					"cell": [
+						6,
+						16
+					],
+					"seal": [],
 					"token": "dark_sphere"
 				},
 				{
 					"cell": [
-						2,
-						55
+						8,
+						17
 					],
 					"seal": [
 						[
-							2,
-							55
+							8,
+							17
 						]
 					],
 					"token": "pick_up_cube"
@@ -48225,122 +47730,263 @@
 				{
 					"cell": [
 						3,
-						57
+						25
 					],
 					"seal": [
 						[
-							3,
-							57
-						],
-						[
-							3,
-							58
-						],
-						[
-							4,
-							58
-						],
-						[
-							3,
-							59
-						],
-						[
-							4,
-							59
+							1,
+							23
 						],
 						[
 							5,
-							59
-						],
-						[
-							0,
-							52
+							23
 						],
 						[
 							1,
-							52
-						],
-						[
-							2,
-							52
-						],
-						[
-							4,
-							52
+							24
 						],
 						[
 							5,
-							52
-						],
-						[
-							6,
-							52
-						],
-						[
-							7,
-							52
-						],
-						[
-							8,
-							52
-						],
-						[
-							0,
-							53
+							24
 						],
 						[
 							1,
-							53
-						],
-						[
-							2,
-							53
-						],
-						[
-							3,
-							53
-						],
-						[
-							4,
-							53
+							25
 						],
 						[
 							5,
-							53
+							25
 						],
 						[
-							6,
-							53
+							1,
+							26
+						],
+						[
+							5,
+							26
+						],
+						[
+							1,
+							27
+						],
+						[
+							5,
+							27
+						],
+						[
+							1,
+							20
+						],
+						[
+							5,
+							20
 						],
 						[
 							7,
-							53
+							20
 						],
 						[
 							8,
-							53
+							20
 						],
 						[
-							6,
-							59
+							1,
+							21
 						],
 						[
-							7,
-							59
-						],
-						[
-							6,
-							60
+							5,
+							21
 						],
 						[
 							7,
-							60
+							21
+						],
+						[
+							8,
+							21
+						],
+						[
+							1,
+							22
+						],
+						[
+							5,
+							22
+						],
+						[
+							7,
+							22
+						],
+						[
+							8,
+							22
+						],
+						[
+							7,
+							23
+						],
+						[
+							8,
+							23
+						],
+						[
+							7,
+							24
+						],
+						[
+							8,
+							24
+						],
+						[
+							7,
+							25
+						],
+						[
+							8,
+							25
+						],
+						[
+							7,
+							26
+						],
+						[
+							8,
+							26
+						],
+						[
+							7,
+							27
+						],
+						[
+							8,
+							27
+						],
+						[
+							1,
+							28
+						],
+						[
+							5,
+							28
+						],
+						[
+							7,
+							28
+						],
+						[
+							8,
+							28
+						],
+						[
+							1,
+							29
+						],
+						[
+							5,
+							29
+						],
+						[
+							7,
+							29
+						],
+						[
+							8,
+							29
+						],
+						[
+							1,
+							30
+						],
+						[
+							5,
+							30
+						],
+						[
+							7,
+							30
+						],
+						[
+							8,
+							30
 						]
 					],
 					"token": "carousel_cake"
 				}
 			],
-			"refused": []
+			"refused": [
+				{
+					"tile_cell": [
+						5,
+						25
+					],
+					"token": "carousel_cake",
+					"why": "sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						4,
+						25
+					],
+					"token": "carousel_cake",
+					"why": "sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						5,
+						24
+					],
+					"token": "carousel_cake",
+					"why": "sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						5,
+						26
+					],
+					"token": "carousel_cake",
+					"why": "sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						6,
+						25
+					],
+					"token": "carousel_cake",
+					"why": "sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						4,
+						24
+					],
+					"token": "carousel_cake",
+					"why": "sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						4,
+						26
+					],
+					"token": "carousel_cake",
+					"why": "sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						6,
+						24
+					],
+					"token": "carousel_cake",
+					"why": "sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						6,
+						26
+					],
+					"token": "carousel_cake",
+					"why": "sealing would sever the walk route"
+				}
+			]
 		},
 		"transformation|trans scale": {
 			"museum": "uffizi-spine-enfilade",
@@ -48418,6 +48064,14 @@
 				},
 				{
 					"cell": [
+						0.0,
+						14.0
+					],
+					"seal": [],
+					"token": "prism_block"
+				},
+				{
+					"cell": [
 						1.0,
 						14.0
 					],
@@ -48427,14 +48081,6 @@
 							14.0
 						]
 					],
-					"token": "prism_block"
-				},
-				{
-					"cell": [
-						1.0,
-						14.0
-					],
-					"seal": [],
 					"token": "prism_block"
 				},
 				{
@@ -48519,14 +48165,6 @@
 						]
 					],
 					"token": "cube_scene"
-				},
-				{
-					"cell": [
-						5.0,
-						14.0
-					],
-					"seal": [],
-					"token": "prism_block"
 				},
 				{
 					"cell": [
@@ -48596,249 +48234,13 @@
 						14.0
 					],
 					"token": "prism_block",
-					"why": "baked: baked: sealing would sever the walk route"
+					"why": "baked: baked: baked: sealing would sever the walk route"
 				}
 			]
 		},
 		"transformation|trans translation": {
 			"museum": "uffizi-spine-enfilade",
-			"placed": [
-				{
-					"cell": [
-						0.0,
-						4.0
-					],
-					"seal": [
-						[
-							0.0,
-							4.0
-						]
-					],
-					"token": "player_trace"
-				},
-				{
-					"cell": [
-						3.0,
-						4.0
-					],
-					"seal": [
-						[
-							2.0,
-							3.0
-						],
-						[
-							3.0,
-							3.0
-						],
-						[
-							4.0,
-							3.0
-						],
-						[
-							2.0,
-							4.0
-						],
-						[
-							3.0,
-							4.0
-						],
-						[
-							4.0,
-							4.0
-						],
-						[
-							2.0,
-							5.0
-						],
-						[
-							3.0,
-							5.0
-						],
-						[
-							4.0,
-							5.0
-						]
-					],
-					"token": "transform_composition_workbench"
-				},
-				{
-					"cell": [
-						6.0,
-						6.0
-					],
-					"seal": [
-						[
-							6.0,
-							5.0
-						],
-						[
-							6.0,
-							6.0
-						],
-						[
-							5.0,
-							5.0
-						],
-						[
-							7.0,
-							5.0
-						],
-						[
-							5.0,
-							6.0
-						],
-						[
-							7.0,
-							6.0
-						],
-						[
-							5.0,
-							7.0
-						],
-						[
-							6.0,
-							7.0
-						],
-						[
-							7.0,
-							7.0
-						]
-					],
-					"token": "z_translation_cube"
-				},
-				{
-					"cell": [
-						5.0,
-						7.0
-					],
-					"seal": [],
-					"token": "pick_up_cube"
-				},
-				{
-					"cell": [
-						6.0,
-						8.0
-					],
-					"seal": [
-						[
-							4.0,
-							8.0
-						],
-						[
-							5.0,
-							8.0
-						],
-						[
-							6.0,
-							8.0
-						],
-						[
-							7.0,
-							8.0
-						],
-						[
-							8.0,
-							8.0
-						]
-					],
-					"token": "science_screen"
-				},
-				{
-					"cell": [
-						3.0,
-						14.0
-					],
-					"seal": [
-						[
-							3.0,
-							14.0
-						]
-					],
-					"token": "dark_sphere"
-				},
-				{
-					"cell": [
-						1.0,
-						15.0
-					],
-					"seal": [
-						[
-							1.0,
-							14.0
-						],
-						[
-							1.0,
-							15.0
-						]
-					],
-					"token": "y_translation_cube"
-				},
-				{
-					"cell": [
-						2.0,
-						16.0
-					],
-					"seal": [
-						[
-							2.0,
-							16.0
-						]
-					],
-					"token": "pick_up_cube"
-				},
-				{
-					"cell": [
-						4.0,
-						16.0
-					],
-					"seal": [
-						[
-							4.0,
-							16.0
-						]
-					],
-					"token": "pick_up_cube"
-				},
-				{
-					"cell": [
-						2.0,
-						23.0
-					],
-					"seal": [
-						[
-							2.0,
-							23.0
-						]
-					],
-					"token": "pick_up_cube"
-				},
-				{
-					"cell": [
-						2.0,
-						24.0
-					],
-					"seal": [
-						[
-							2.0,
-							24.0
-						]
-					],
-					"token": "pick_up_cube"
-				},
-				{
-					"cell": [
-						5.0,
-						25.0
-					],
-					"seal": [
-						[
-							5.0,
-							25.0
-						]
-					],
-					"token": "pickup_gate"
-				}
-			],
+			"placed": [],
 			"refused": []
 		},
 		"wavefunctions|3d wave propagation": {
