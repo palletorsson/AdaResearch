@@ -60,7 +60,6 @@
         "Color_Context_Placed",
         "Color_Nails",
         "Color_Pillar",
-        "Chamber_Color",
         "Color_Walls",
         "Symmetry_Seventeen"
       ],
@@ -73,9 +72,10 @@
         "Color_Flashlight",
         "Color_Grid_Pallet",
         "Color_Rainbow",
-        "Color_Paint"
+        "Color_Paint",
+        "Chamber_Color"
       ],
-      "deferred_reason": "2026-08-24 CONSOLIDATION: Color_Flashlight held zero artifacts; Color_Grid_Pallet, Color_Rainbow and Color_Paint held four to seven, mostly recall and furniture. Their six real pieces moved into the ladder's rooms (spectrum_forest, rainbow, ball_painting_demo -> Color_Walls; gridcolorizer -> Array; pattern_mill -> Pattern_Foundry; albers_wall_gallery -> Color_Context_Placed). The map FILES remain on disk — deferred, not deleted.",
+      "deferred_reason": "2026-08-24 CONSOLIDATION: Color_Flashlight held zero artifacts; Color_Grid_Pallet, Color_Rainbow and Color_Paint held four to seven, mostly recall and furniture. Their six real pieces moved into the ladder's rooms (spectrum_forest, rainbow, ball_painting_demo -> Color_Walls; gridcolorizer -> Array; pattern_mill -> Pattern_Foundry; albers_wall_gallery -> Color_Context_Placed). The map FILES remain on disk — deferred, not deleted. Chamber_Color leaves too (2026-08-24): its four artifacts were the catalyst's own machinery — proximity_spawner, becoming_catalyst, catalyst_target and a dark sphere — infrastructure rather than a rung of the ladder.",
       "axiom_files": [
         "res://commons/context/clipboard/tutorial_text/color_axioms.md",
         "res://commons/context/clipboard/tutorial_text/rgb_axioms.md",
@@ -195,7 +195,7 @@
         "3_attribute": "what does a unit carry? — THREE rooms, not one, and they must not be folded (Palle, 2026-08-24). Measured, the three meet colour three different ways: Color_Nails is colour IN THE HAND (nail and hand controllers, the scanner stick, colourballs — colour as an act, applied to a point, 7x13); Color_Pillar is colour AS A SET (the pillar collection, spectrum visualiser, colour-sets overview, visual mixing — colour as relation between samples, 12x22); Color_Walls is colour AS SPACE (the colour-space navigator, gradient interpolator, subpixel display, rainbow hallway, spectrum forest — colour walked through, and the only one at architectural scale: 31 deep, height 6). Folding them would flatten the sequence's own claim — that colour is relational — into a single cabinet of swatches. The hand, the comparing eye and the walking body are three different proofs of the same truth.",
         "4_rule": "how does an attribute REPEAT across an index? — tiles, looms, mills, the wallpaper groups (Pattern_Foundry). REPETITION ONLY.",
         "5_composition": "when does the rule become a made thing? — THE ROOM IS Color_Context_Placed (measured 73% composition, 22 artifacts): the colour stacks, Albers, Mondrian, Rothko, Kandinsky and the furniture already stand there. The primitive stack is its RECAPITULATION — one config is sequence (index) + colour and scale (attribute) + layout (rule) + artist (composition), the whole ladder folded into one object; 283 configs in /primitive-stack-gallery, one promoted so far (dna_primitive_stack_ps01_bauhaus_totem_green, already in this room).",
-        "_generation_comes_later": "Palle, 2026-08-24: grammar, CA and factories — a rule that MAKES rules — are downstream, not here. crackpropagation_ca -> biological_growth, csg_architecture_cavity -> boolean_surfaces, constraint_sculptor -> gallery (all removed; each already placed there). STILL HERE for want of a home: pattern_tunnel_machine, brick_wall_factory — they exist nowhere else in the corpus, and orphaning an artifact to tidy a taxonomy is the worse error.",
+        "_generation_comes_later": "Palle, 2026-08-24: grammar, CA and factories — a rule that MAKES rules — are downstream, not here. crackpropagation_ca -> biological_growth, csg_architecture_cavity -> boolean_surfaces, constraint_sculptor -> gallery, brick_wall_factory -> facade_assembly (Facade_Rustication: the factory that makes the wall belongs with the course that reads its blocks), pattern_tunnel_machine -> proceduralgeneration (PG_Mirrored_Patterns). NOTHING generative is left in the sequence, and no artifact was orphaned.",
         "0_unit_recalled": "carried from primitives (spine 1) — pick_up_cube, xyz_coordinates and the synthesis stand appear as recall beats inside the index room, never as a rung of their own",
         "_rooms": {
           "2_index": "Array",
