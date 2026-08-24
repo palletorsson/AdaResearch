@@ -127,6 +127,15 @@ def build_report(
         rc_tok, out_tok = run_cmd(
             [sys.executable, "tools/check_map_tokens.py", "--json"]
         )
+        # ...and the detector's own negative half. A gate that reports a
+        # clean corpus is making two claims -- that the corpus is clean,
+        # and that it would have said so if it were not. Only the first is
+        # tested by running it on the corpus, and a green row over a blind
+        # detector is the exact failure this gate exists to prevent. 17
+        # synthetic cases, no corpus, under a second.
+        rc_tokneg, _ = run_cmd(
+            [sys.executable, "tools/test_map_token_scan.py"]
+        )
 
         # Force UTF-8 console encoding for audit_lab_chain (contains Unicode separators).
         lab_env = os.environ.copy()
@@ -334,9 +343,16 @@ def build_report(
                 # A scan of nothing prints identically to a clean corpus in
                 # every summary form; this gate's own first run did exactly
                 # that. An empty denominator is a broken gate, not a green one.
-                and int(tok_summary.get("placements", 0)) > 0,
+                and int(tok_summary.get("placements", 0)) > 0
+                # ...and neither is a blind detector.
+                and rc_tokneg == 0,
                 "metrics": {
+                    "detector_selftest": "PASS" if rc_tokneg == 0
+                    else "FAIL rc=%d" % rc_tokneg,
                     "maps_scanned": int(tok_summary.get("maps_scanned", -1)),
+                    "maps_named": int(tok_summary.get("maps_named", -1)),
+                    "maps_without_data": ", ".join(
+                        tok_summary.get("maps_without_data", []) or []) or "none",
                     "placements": int(tok_summary.get("placements", -1)),
                     "unresolved_placements": int(
                         tok_summary.get("unresolved_placements", -1)
