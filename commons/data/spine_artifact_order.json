@@ -1,16 +1,16 @@
 {
  "_meta": {
-  "generated": "2026-07-31 11:52:21",
+  "generated": "2026-08-24 15:32:05",
   "generator": "tools/build_spine_artifact_order.py",
   "rule": "first appearance walking the spine: sequence order -> map order -> interactables row-major",
-  "sequences": 24,
-  "maps_read": 269,
+  "sequences": 23,
+  "maps_read": 261,
   "maps_missing": 0,
-  "artifacts": 799
+  "artifacts": 810
  },
  "order": [
   {
-   "lookup": "CoordinateSystem3M",
+   "lookup": "folding_past",
    "sequence": "primitives",
    "map": "Point_One"
   },
@@ -20,7 +20,17 @@
    "map": "Point_One"
   },
   {
+   "lookup": "fontana_puncture",
+   "sequence": "primitives",
+   "map": "Point_One"
+  },
+  {
    "lookup": "origin",
+   "sequence": "primitives",
+   "map": "Point_One"
+  },
+  {
+   "lookup": "coordinate_readout",
    "sequence": "primitives",
    "map": "Point_One"
   },
@@ -30,7 +40,12 @@
    "map": "Point_One"
   },
   {
-   "lookup": "fontana_puncture",
+   "lookup": "interactive_point_origin_force",
+   "sequence": "primitives",
+   "map": "Point_One"
+  },
+  {
+   "lookup": "CoordinateSystem3M",
    "sequence": "primitives",
    "map": "Point_One"
   },
@@ -40,87 +55,7 @@
    "map": "Point_One"
   },
   {
-   "lookup": "interactive_point_origin_force",
-   "sequence": "primitives",
-   "map": "Point_One"
-  },
-  {
-   "lookup": "folding_past",
-   "sequence": "primitives",
-   "map": "Point_One"
-  },
-  {
-   "lookup": "lab_room",
-   "sequence": "primitives",
-   "map": "Point_One"
-  },
-  {
-   "lookup": "science_screen",
-   "sequence": "primitives",
-   "map": "Point_Lines"
-  },
-  {
-   "lookup": "dgrid",
-   "sequence": "primitives",
-   "map": "Point_Lines"
-  },
-  {
-   "lookup": "perspective_lines",
-   "sequence": "primitives",
-   "map": "Point_Lines"
-  },
-  {
-   "lookup": "line_builder_3d",
-   "sequence": "primitives",
-   "map": "Point_Lines"
-  },
-  {
-   "lookup": "laser_sword",
-   "sequence": "primitives",
-   "map": "Point_Lines"
-  },
-  {
-   "lookup": "klee_walking_point",
-   "sequence": "primitives",
-   "map": "Point_Lines"
-  },
-  {
-   "lookup": "grabbable_line",
-   "sequence": "primitives",
-   "map": "Point_Lines"
-  },
-  {
-   "lookup": "lightrod",
-   "sequence": "primitives",
-   "map": "Point_Lines"
-  },
-  {
-   "lookup": "cube_scene",
-   "sequence": "primitives",
-   "map": "Point_Lines"
-  },
-  {
-   "lookup": "parallel_line_puzzle",
-   "sequence": "primitives",
-   "map": "Point_Lines"
-  },
-  {
-   "lookup": "line",
-   "sequence": "primitives",
-   "map": "Point_Lines"
-  },
-  {
    "lookup": "dark_sphere",
-   "sequence": "primitives",
-   "map": "Point_Lines"
-  },
-  {
-   "lookup": "scale_lines",
-   "sequence": "primitives",
-   "map": "Point_Lines"
-  },
-  {
-   "lookup": "plus_line_puzzle",
    "sequence": "primitives",
    "map": "Point_Lines"
   },
@@ -130,7 +65,37 @@
    "map": "Point_Lines"
   },
   {
+   "lookup": "line",
+   "sequence": "primitives",
+   "map": "Point_Lines"
+  },
+  {
+   "lookup": "walk_this_line_marking",
+   "sequence": "primitives",
+   "map": "Point_Lines"
+  },
+  {
+   "lookup": "do_not_cross_barrier",
+   "sequence": "primitives",
+   "map": "Point_Lines"
+  },
+  {
+   "lookup": "line_builder_3d",
+   "sequence": "primitives",
+   "map": "Point_Lines"
+  },
+  {
    "lookup": "laser_measure",
+   "sequence": "primitives",
+   "map": "Point_Lines"
+  },
+  {
+   "lookup": "parallel_line_puzzle",
+   "sequence": "primitives",
+   "map": "Point_Lines"
+  },
+  {
+   "lookup": "science_screen",
    "sequence": "primitives",
    "map": "Point_Lines"
   },
@@ -140,9 +105,24 @@
    "map": "Point_Lines"
   },
   {
-   "lookup": "mystic_writing_pad",
+   "lookup": "grabbable_line",
    "sequence": "primitives",
-   "map": "Point_Trace"
+   "map": "Point_Lines"
+  },
+  {
+   "lookup": "cube_scene",
+   "sequence": "primitives",
+   "map": "Point_Lines"
+  },
+  {
+   "lookup": "plus_line_puzzle",
+   "sequence": "primitives",
+   "map": "Point_Lines"
+  },
+  {
+   "lookup": "lightrod",
+   "sequence": "primitives",
+   "map": "Point_Lines"
   },
   {
    "lookup": "draw_dot",
@@ -150,14 +130,9 @@
    "map": "Point_Trace"
   },
   {
-   "lookup": "room_grammar",
+   "lookup": "whiteboard",
    "sequence": "primitives",
-   "map": "Point_Line_Grid"
-  },
-  {
-   "lookup": "grab_sphere_point_snap",
-   "sequence": "primitives",
-   "map": "Point_Line_Grid"
+   "map": "Point_Trace"
   },
   {
    "lookup": "player_trace",
@@ -170,27 +145,17 @@
    "map": "Point_Line_Grid"
   },
   {
-   "lookup": "catalyst_pedestal",
+   "lookup": "grab_sphere_point_snap",
    "sequence": "primitives",
-   "map": "Point_Triangle_Context"
+   "map": "Point_Line_Grid"
   },
   {
-   "lookup": "parasol_triangle",
+   "lookup": "room_grammar",
    "sequence": "primitives",
-   "map": "Point_Triangle_Context"
+   "map": "Point_Line_Grid"
   },
   {
    "lookup": "triangle_line_puzzle",
-   "sequence": "primitives",
-   "map": "Point_Triangle_Context"
-  },
-  {
-   "lookup": "catalyst_vent",
-   "sequence": "primitives",
-   "map": "Point_Triangle_Context"
-  },
-  {
-   "lookup": "triangleprofiles",
    "sequence": "primitives",
    "map": "Point_Triangle_Context"
   },
@@ -200,12 +165,27 @@
    "map": "Point_Triangle_Context"
   },
   {
-   "lookup": "draw_triangle_faces",
+   "lookup": "catalyst_prompter_box",
    "sequence": "primitives",
    "map": "Point_Triangle_Context"
   },
   {
-   "lookup": "triangle",
+   "lookup": "catalyst_vent",
+   "sequence": "primitives",
+   "map": "Point_Triangle_Context"
+  },
+  {
+   "lookup": "parasol_triangle",
+   "sequence": "primitives",
+   "map": "Point_Triangle_Context"
+  },
+  {
+   "lookup": "triangleprofiles",
+   "sequence": "primitives",
+   "map": "Point_Triangle_Context"
+  },
+  {
+   "lookup": "draw_triangle_faces",
    "sequence": "primitives",
    "map": "Point_Triangle_Context"
   },
@@ -215,12 +195,12 @@
    "map": "Point_Triangle_Context"
   },
   {
-   "lookup": "quad",
+   "lookup": "interactivetriangle",
    "sequence": "primitives",
    "map": "Point_Triangle_Context"
   },
   {
-   "lookup": "interactivetriangle",
+   "lookup": "triangle",
    "sequence": "primitives",
    "map": "Point_Triangle_Context"
   },
@@ -230,7 +210,12 @@
    "map": "Point_Triangle_Context"
   },
   {
-   "lookup": "grab_trihedron",
+   "lookup": "quad",
+   "sequence": "primitives",
+   "map": "Point_Triangle_Context"
+  },
+  {
+   "lookup": "path_watchdog",
    "sequence": "primitives",
    "map": "Primitives_Polythedra"
   },
@@ -240,17 +225,22 @@
    "map": "Primitives_Polythedra"
   },
   {
-   "lookup": "path_watchdog",
+   "lookup": "pyramid_edit",
+   "sequence": "primitives",
+   "map": "Primitives_Polythedra"
+  },
+  {
+   "lookup": "grab_tetrahedron",
+   "sequence": "primitives",
+   "map": "Primitives_Polythedra"
+  },
+  {
+   "lookup": "grab_trihedron",
    "sequence": "primitives",
    "map": "Primitives_Polythedra"
   },
   {
    "lookup": "becoming_catalyst",
-   "sequence": "primitives",
-   "map": "Primitives_Polythedra"
-  },
-  {
-   "lookup": "pyramid_edit",
    "sequence": "primitives",
    "map": "Primitives_Polythedra"
   },
@@ -270,22 +260,7 @@
    "map": "Point_Animatedcube"
   },
   {
-   "lookup": "catalyst_target",
-   "sequence": "primitives",
-   "map": "Chamber_Primitives"
-  },
-  {
    "lookup": "sphere",
-   "sequence": "primitives",
-   "map": "Primitives_Ignorance"
-  },
-  {
-   "lookup": "library_rack",
-   "sequence": "primitives",
-   "map": "Primitives_Ignorance"
-  },
-  {
-   "lookup": "diamonds",
    "sequence": "primitives",
    "map": "Primitives_Ignorance"
   },
@@ -295,17 +270,7 @@
    "map": "Primitives_Ignorance"
   },
   {
-   "lookup": "plus",
-   "sequence": "primitives",
-   "map": "Primitives_Ignorance"
-  },
-  {
-   "lookup": "grab_octahedron",
-   "sequence": "primitives",
-   "map": "Primitives_Ignorance"
-  },
-  {
-   "lookup": "sphere_mid",
+   "lookup": "hole_with_cones",
    "sequence": "primitives",
    "map": "Primitives_Ignorance"
   },
@@ -315,27 +280,17 @@
    "map": "Primitives_Ignorance"
   },
   {
-   "lookup": "lshape",
-   "sequence": "primitives",
-   "map": "Primitives_Ignorance"
-  },
-  {
-   "lookup": "hole_with_cones",
-   "sequence": "primitives",
-   "map": "Primitives_Ignorance"
-  },
-  {
-   "lookup": "truncatedtetrahedron",
-   "sequence": "primitives",
-   "map": "Primitives_Ignorance"
-  },
-  {
    "lookup": "sphere_high",
    "sequence": "primitives",
    "map": "Primitives_Ignorance"
   },
   {
-   "lookup": "righttriangle",
+   "lookup": "sphere_mid",
+   "sequence": "primitives",
+   "map": "Primitives_Ignorance"
+  },
+  {
+   "lookup": "truncatedtetrahedron",
    "sequence": "primitives",
    "map": "Primitives_Ignorance"
   },
@@ -350,12 +305,7 @@
    "map": "Primitives_Ignorance"
   },
   {
-   "lookup": "torus_radials_rings",
-   "sequence": "primitives",
-   "map": "Primitives_Ignorance"
-  },
-  {
-   "lookup": "roughrock",
+   "lookup": "grab_octahedron",
    "sequence": "primitives",
    "map": "Primitives_Ignorance"
   },
@@ -365,19 +315,14 @@
    "map": "Primitives_Ignorance"
   },
   {
-   "lookup": "capsule_radials_rings",
+   "lookup": "roughrock",
    "sequence": "primitives",
    "map": "Primitives_Ignorance"
   },
   {
-   "lookup": "prism_block",
+   "lookup": "righttriangle",
    "sequence": "primitives",
    "map": "Primitives_Ignorance"
-  },
-  {
-   "lookup": "achilles_tortoise",
-   "sequence": "primitives",
-   "map": "Primitives_Portals"
   },
   {
    "lookup": "combine_portals",
@@ -385,22 +330,12 @@
    "map": "Primitives_Portals"
   },
   {
-   "lookup": "durer_scene",
+   "lookup": "achilles_tortoise",
    "sequence": "primitives",
-   "map": "Primitives_Melencolia"
-  },
-  {
-   "lookup": "snap_pyramid_puzzle",
-   "sequence": "primitives",
-   "map": "Primitives_Melencolia"
+   "map": "Primitives_Portals"
   },
   {
    "lookup": "code_display",
-   "sequence": "primitives",
-   "map": "Primitives_Melencolia"
-  },
-  {
-   "lookup": "pyramid",
    "sequence": "primitives",
    "map": "Primitives_Melencolia"
   },
@@ -410,7 +345,22 @@
    "map": "Primitives_Melencolia"
   },
   {
+   "lookup": "snap_pyramid_puzzle",
+   "sequence": "primitives",
+   "map": "Primitives_Melencolia"
+  },
+  {
    "lookup": "diamondtoruscollection",
+   "sequence": "primitives",
+   "map": "Primitives_Melencolia"
+  },
+  {
+   "lookup": "pyramid",
+   "sequence": "primitives",
+   "map": "Primitives_Melencolia"
+  },
+  {
+   "lookup": "prism_block",
    "sequence": "primitives",
    "map": "Primitives_Melencolia"
   },
@@ -420,9 +370,9 @@
    "map": "Primitives_Melencolia"
   },
   {
-   "lookup": "homogeneous_coordinates",
-   "sequence": "transformation",
-   "map": "Trans_Introduction"
+   "lookup": "durer_scene",
+   "sequence": "primitives",
+   "map": "Primitives_Melencolia"
   },
   {
    "lookup": "invariants_demo",
@@ -440,12 +390,47 @@
    "map": "Trans_Introduction"
   },
   {
+   "lookup": "balance_puzzle",
+   "sequence": "transformation",
+   "map": "Trans_Introduction"
+  },
+  {
+   "lookup": "homogeneous_coordinates",
+   "sequence": "transformation",
+   "map": "Trans_Introduction"
+  },
+  {
+   "lookup": "x_translation_cube",
+   "sequence": "transformation",
+   "map": "Trans_Introduction"
+  },
+  {
+   "lookup": "z_translation_cube",
+   "sequence": "transformation",
+   "map": "Trans_Introduction"
+  },
+  {
    "lookup": "transform_composition",
    "sequence": "transformation",
    "map": "Trans_Introduction"
   },
   {
-   "lookup": "balance_puzzle",
+   "lookup": "scale_me",
+   "sequence": "transformation",
+   "map": "Trans_Introduction"
+  },
+  {
+   "lookup": "y_translation_cube",
+   "sequence": "transformation",
+   "map": "Trans_Introduction"
+  },
+  {
+   "lookup": "spin",
+   "sequence": "transformation",
+   "map": "Trans_Introduction"
+  },
+  {
+   "lookup": "pick_up_cube",
    "sequence": "transformation",
    "map": "Trans_Introduction"
   },
@@ -455,17 +440,7 @@
    "map": "Trans_Translation"
   },
   {
-   "lookup": "z_translation_cube",
-   "sequence": "transformation",
-   "map": "Trans_Translation"
-  },
-  {
-   "lookup": "pick_up_cube",
-   "sequence": "transformation",
-   "map": "Trans_Translation"
-  },
-  {
-   "lookup": "y_translation_cube",
+   "lookup": "synthesis_stand",
    "sequence": "transformation",
    "map": "Trans_Translation"
   },
@@ -485,17 +460,7 @@
    "map": "Trans_AxisDecomposition"
   },
   {
-   "lookup": "x_translation_cube",
-   "sequence": "transformation",
-   "map": "Trans_AxisDecomposition"
-  },
-  {
    "lookup": "rotate_grid_cubes",
-   "sequence": "transformation",
-   "map": "Trans_Rotation"
-  },
-  {
-   "lookup": "spin",
    "sequence": "transformation",
    "map": "Trans_Rotation"
   },
@@ -520,16 +485,6 @@
    "map": "Trans_Scale"
   },
   {
-   "lookup": "scale_me",
-   "sequence": "transformation",
-   "map": "Trans_Scale"
-  },
-  {
-   "lookup": "proximity_spawner",
-   "sequence": "transformation",
-   "map": "Chamber_Transformation"
-  },
-  {
    "lookup": "pusher_block",
    "sequence": "transformation",
    "map": "Trans_Pit"
@@ -540,122 +495,12 @@
    "map": "Trans_Pit"
   },
   {
-   "lookup": "pattern_tile_4x4",
-   "sequence": "symmetry",
-   "map": "Symmetry_Motif"
-  },
-  {
-   "lookup": "pattern_tile_cube",
-   "sequence": "symmetry",
-   "map": "Symmetry_Motif"
-  },
-  {
-   "lookup": "tile_meander_floor",
-   "sequence": "symmetry",
-   "map": "Symmetry_Motif"
-  },
-  {
-   "lookup": "ten_print_textile",
-   "sequence": "symmetry",
-   "map": "Symmetry_Translation"
-  },
-  {
-   "lookup": "pattern_loom",
-   "sequence": "symmetry",
-   "map": "Symmetry_Translation"
-  },
-  {
-   "lookup": "pattern_tile_puzzle",
-   "sequence": "symmetry",
-   "map": "Symmetry_Translation"
-  },
-  {
-   "lookup": "mill_persian_p4",
-   "sequence": "symmetry",
-   "map": "Symmetry_Mirror_Rotor"
-  },
-  {
-   "lookup": "pattern_tile_mirror",
-   "sequence": "symmetry",
-   "map": "Symmetry_Mirror_Rotor"
-  },
-  {
-   "lookup": "kaleidoscope",
-   "sequence": "symmetry",
-   "map": "Symmetry_Mirror_Rotor"
-  },
-  {
-   "lookup": "mill_escher_p4g",
-   "sequence": "symmetry",
-   "map": "Symmetry_Glide"
-  },
-  {
-   "lookup": "loom_escher_mirror",
-   "sequence": "symmetry",
-   "map": "Symmetry_Glide"
-  },
-  {
-   "lookup": "pattern_tile_brick",
-   "sequence": "symmetry",
-   "map": "Symmetry_Glide"
-  },
-  {
-   "lookup": "pattern_tile_herringbone",
-   "sequence": "symmetry",
-   "map": "Symmetry_Glide"
-  },
-  {
-   "lookup": "loom_bolt_memphis_p4g",
-   "sequence": "symmetry",
-   "map": "Symmetry_Group"
-  },
-  {
-   "lookup": "pattern_artifact",
-   "sequence": "symmetry",
-   "map": "Symmetry_Group"
-  },
-  {
-   "lookup": "pattern_maker_station",
-   "sequence": "symmetry",
-   "map": "Symmetry_Group"
-  },
-  {
-   "lookup": "wall_pattern_gallery",
-   "sequence": "symmetry",
-   "map": "Symmetry_Seventeen"
-  },
-  {
-   "lookup": "loom_alhambra_p6m",
-   "sequence": "symmetry",
-   "map": "Symmetry_Seventeen"
-  },
-  {
-   "lookup": "vr_tile_editor",
-   "sequence": "symmetry",
-   "map": "Symmetry_Seventeen"
-  },
-  {
-   "lookup": "mill_alhambra_p6m",
-   "sequence": "symmetry",
-   "map": "Symmetry_Seventeen"
-  },
-  {
-   "lookup": "pattern_atlas_gallery",
-   "sequence": "symmetry",
-   "map": "Symmetry_Seventeen"
-  },
-  {
    "lookup": "xyz_coordinates",
    "sequence": "array_tutorial",
    "map": "Tutorial_Single"
   },
   {
-   "lookup": "panel_bridge_loom",
-   "sequence": "array_tutorial",
-   "map": "Tutorial_Pattern"
-  },
-  {
-   "lookup": "script_runner",
+   "lookup": "grid_model",
    "sequence": "array_tutorial",
    "map": "Tutorial_Pattern"
   },
@@ -670,7 +515,27 @@
    "map": "Tutorial_Pattern"
   },
   {
-   "lookup": "grid_model",
+   "lookup": "pattern_tile_mirror",
+   "sequence": "array_tutorial",
+   "map": "Tutorial_Pattern"
+  },
+  {
+   "lookup": "pattern_tile_puzzle",
+   "sequence": "array_tutorial",
+   "map": "Tutorial_Pattern"
+  },
+  {
+   "lookup": "pattern_maker_station",
+   "sequence": "array_tutorial",
+   "map": "Tutorial_Pattern"
+  },
+  {
+   "lookup": "panel_bridge_loom",
+   "sequence": "array_tutorial",
+   "map": "Tutorial_Pattern"
+  },
+  {
+   "lookup": "script_runner",
    "sequence": "array_tutorial",
    "map": "Tutorial_Pattern"
   },
@@ -678,6 +543,16 @@
    "lookup": "pulsar_compact",
    "sequence": "array_tutorial",
    "map": "Tutorial_Pattern"
+  },
+  {
+   "lookup": "pattern_tile_4x4",
+   "sequence": "array_tutorial",
+   "map": "Array_Patterns"
+  },
+  {
+   "lookup": "vr_tile_editor_mirror",
+   "sequence": "array_tutorial",
+   "map": "Array_Patterns"
   },
   {
    "lookup": "tiling_demo",
@@ -690,12 +565,17 @@
    "map": "Array_Patterns"
   },
   {
-   "lookup": "vr_tile_editor_mirror",
+   "lookup": "facade_grammar_demo",
    "sequence": "array_tutorial",
    "map": "Array_Patterns"
   },
   {
-   "lookup": "facade_grammar_demo",
+   "lookup": "pattern_tile_brick",
+   "sequence": "array_tutorial",
+   "map": "Array_Patterns"
+  },
+  {
+   "lookup": "pattern_tile_herringbone",
    "sequence": "array_tutorial",
    "map": "Array_Patterns"
   },
@@ -705,7 +585,7 @@
    "map": "Tutorial_Row"
   },
   {
-   "lookup": "pulsar_visualizer",
+   "lookup": "row_3_x",
    "sequence": "array_tutorial",
    "map": "Tutorial_2D_Build"
   },
@@ -715,7 +595,7 @@
    "map": "Tutorial_2D_Build"
   },
   {
-   "lookup": "row_3_x",
+   "lookup": "pulsar_visualizer",
    "sequence": "array_tutorial",
    "map": "Tutorial_2D_Build"
   },
@@ -750,6 +630,16 @@
    "map": "Tutorial_3D"
   },
   {
+   "lookup": "catalyst_target",
+   "sequence": "array_tutorial",
+   "map": "Chamber_Arrays"
+  },
+  {
+   "lookup": "proximity_spawner",
+   "sequence": "array_tutorial",
+   "map": "Chamber_Arrays"
+  },
+  {
    "lookup": "step_sequencer",
    "sequence": "array_tutorial",
    "map": "Tutorial_Disco"
@@ -760,12 +650,7 @@
    "map": "Tutorial_Disco"
   },
   {
-   "lookup": "pattern_machine_d",
-   "sequence": "color",
-   "map": "Pattern_Foundry"
-  },
-  {
-   "lookup": "pattern_machine_b",
+   "lookup": "pattern_machine_c",
    "sequence": "color",
    "map": "Pattern_Foundry"
   },
@@ -775,7 +660,12 @@
    "map": "Pattern_Foundry"
   },
   {
-   "lookup": "pattern_machine_c",
+   "lookup": "pattern_machine_b",
+   "sequence": "color",
+   "map": "Pattern_Foundry"
+  },
+  {
+   "lookup": "pattern_machine_d",
    "sequence": "color",
    "map": "Pattern_Foundry"
   },
@@ -865,6 +755,11 @@
    "map": "Color_Context_Placed"
   },
   {
+   "lookup": "loom_bolt_memphis_p4g",
+   "sequence": "color",
+   "map": "Color_Context_Placed"
+  },
+  {
    "lookup": "dna_modern_art_rothko_chromatic_field",
    "sequence": "color",
    "map": "Color_Context_Placed"
@@ -895,7 +790,7 @@
    "map": "Color_Context_Placed"
   },
   {
-   "lookup": "colorballs",
+   "lookup": "nail_color_controller",
    "sequence": "color",
    "map": "Color_Nails"
   },
@@ -905,17 +800,27 @@
    "map": "Color_Nails"
   },
   {
-   "lookup": "brick_wall_factory",
-   "sequence": "color",
-   "map": "Color_Nails"
-  },
-  {
-   "lookup": "nail_color_controller",
-   "sequence": "color",
-   "map": "Color_Nails"
-  },
-  {
    "lookup": "hand_color_controller",
+   "sequence": "color",
+   "map": "Color_Nails"
+  },
+  {
+   "lookup": "dark_side_prism",
+   "sequence": "color",
+   "map": "Color_Nails"
+  },
+  {
+   "lookup": "grab_stick_scanner",
+   "sequence": "color",
+   "map": "Color_Nails"
+  },
+  {
+   "lookup": "colorballs",
+   "sequence": "color",
+   "map": "Color_Nails"
+  },
+  {
+   "lookup": "brick_wall_factory",
    "sequence": "color",
    "map": "Color_Nails"
   },
@@ -940,12 +845,7 @@
    "map": "Color_Rainbow"
   },
   {
-   "lookup": "visual_color_mixing",
-   "sequence": "color",
-   "map": "Color_Pillar"
-  },
-  {
-   "lookup": "grab_rainbow_stick",
+   "lookup": "pillarcolorcollection",
    "sequence": "color",
    "map": "Color_Pillar"
   },
@@ -955,7 +855,7 @@
    "map": "Color_Pillar"
   },
   {
-   "lookup": "pillarcolorcollection",
+   "lookup": "visual_color_mixing",
    "sequence": "color",
    "map": "Color_Pillar"
   },
@@ -965,9 +865,19 @@
    "map": "Color_Pillar"
   },
   {
+   "lookup": "grab_rainbow_stick",
+   "sequence": "color",
+   "map": "Color_Pillar"
+  },
+  {
    "lookup": "SpectrumVisualizer",
    "sequence": "color",
    "map": "Color_Pillar"
+  },
+  {
+   "lookup": "ball_painting_demo",
+   "sequence": "color",
+   "map": "Color_Paint"
   },
   {
    "lookup": "pattern_mill",
@@ -976,11 +886,6 @@
   },
   {
    "lookup": "albers_wall_gallery",
-   "sequence": "color",
-   "map": "Color_Paint"
-  },
-  {
-   "lookup": "ball_painting_demo",
    "sequence": "color",
    "map": "Color_Paint"
   },
@@ -1010,6 +915,71 @@
    "map": "Color_Walls"
   },
   {
+   "lookup": "wall_pattern_gallery",
+   "sequence": "color",
+   "map": "Symmetry_Seventeen"
+  },
+  {
+   "lookup": "pattern_loom",
+   "sequence": "color",
+   "map": "Symmetry_Seventeen"
+  },
+  {
+   "lookup": "loom_escher_mirror",
+   "sequence": "color",
+   "map": "Symmetry_Seventeen"
+  },
+  {
+   "lookup": "loom_alhambra_p6m",
+   "sequence": "color",
+   "map": "Symmetry_Seventeen"
+  },
+  {
+   "lookup": "vr_tile_editor",
+   "sequence": "color",
+   "map": "Symmetry_Seventeen"
+  },
+  {
+   "lookup": "mill_alhambra_p6m",
+   "sequence": "color",
+   "map": "Symmetry_Seventeen"
+  },
+  {
+   "lookup": "mill_persian_p4",
+   "sequence": "color",
+   "map": "Symmetry_Seventeen"
+  },
+  {
+   "lookup": "mill_escher_p4g",
+   "sequence": "color",
+   "map": "Symmetry_Seventeen"
+  },
+  {
+   "lookup": "kaleidoscope",
+   "sequence": "color",
+   "map": "Symmetry_Seventeen"
+  },
+  {
+   "lookup": "pattern_artifact",
+   "sequence": "color",
+   "map": "Symmetry_Seventeen"
+  },
+  {
+   "lookup": "pattern_atlas_gallery",
+   "sequence": "color",
+   "map": "Symmetry_Seventeen"
+  },
+  {
+   "lookup": "tile_meander_floor",
+   "sequence": "color",
+   "map": "Symmetry_Seventeen"
+  },
+  {
+   "lookup": "tangent_slope_workbench",
+   "sequence": "change",
+   "map": "Change_Intro"
+  },
+  {
    "lookup": "derivative_pair",
    "sequence": "change",
    "map": "Change_Intro"
@@ -1035,12 +1005,17 @@
    "map": "Accumulation_Area"
   },
   {
-   "lookup": "riemann_pump",
+   "lookup": "riemann_sum_workbench",
    "sequence": "change",
    "map": "Accumulation_Riemann"
   },
   {
    "lookup": "riemann_pi",
+   "sequence": "change",
+   "map": "Accumulation_Riemann"
+  },
+  {
+   "lookup": "riemann_pump",
    "sequence": "change",
    "map": "Accumulation_Riemann"
   },
@@ -1075,11 +1050,6 @@
    "map": "Sky_Climb"
   },
   {
-   "lookup": "calder_mobile_primaries",
-   "sequence": "forces",
-   "map": "Sky_Climb"
-  },
-  {
    "lookup": "return_launcher",
    "sequence": "forces",
    "map": "Sky_Climb"
@@ -1100,12 +1070,7 @@
    "map": "Void_Crossing"
   },
   {
-   "lookup": "russell_paradox_workbench",
-   "sequence": "forces",
-   "map": "Reformed_Instruments"
-  },
-  {
-   "lookup": "complexity_dial_workbench",
+   "lookup": "qfep_balance_workbench",
    "sequence": "forces",
    "map": "Reformed_Instruments"
   },
@@ -1120,9 +1085,19 @@
    "map": "Reformed_Instruments"
   },
   {
-   "lookup": "qfep_balance_workbench",
+   "lookup": "complexity_dial_workbench",
    "sequence": "forces",
    "map": "Reformed_Instruments"
+  },
+  {
+   "lookup": "russell_paradox_workbench",
+   "sequence": "forces",
+   "map": "Reformed_Instruments"
+  },
+  {
+   "lookup": "foresight_range",
+   "sequence": "forces",
+   "map": "Force_Preview"
   },
   {
    "lookup": "vector_addition_xl_laser",
@@ -1180,26 +1155,6 @@
    "map": "Force_Preview"
   },
   {
-   "lookup": "triangle_curvature_workbench",
-   "sequence": "forces",
-   "map": "Console_Test"
-  },
-  {
-   "lookup": "cantor_diagonal_workbench",
-   "sequence": "forces",
-   "map": "Console_Test"
-  },
-  {
-   "lookup": "riemann_sum_workbench",
-   "sequence": "forces",
-   "map": "Console_Test"
-  },
-  {
-   "lookup": "tangent_slope_workbench",
-   "sequence": "forces",
-   "map": "Console_Test"
-  },
-  {
    "lookup": "shannon_workbench",
    "sequence": "forces",
    "map": "Console_Test"
@@ -1210,12 +1165,17 @@
    "map": "Console_Test"
   },
   {
-   "lookup": "bubble_blaster",
+   "lookup": "cantor_diagonal_workbench",
    "sequence": "forces",
-   "map": "Force_Props_Sandbox"
+   "map": "Console_Test"
   },
   {
-   "lookup": "force_mower",
+   "lookup": "triangle_curvature_workbench",
+   "sequence": "forces",
+   "map": "Console_Test"
+  },
+  {
+   "lookup": "bubble_blaster",
    "sequence": "forces",
    "map": "Force_Props_Sandbox"
   },
@@ -1225,12 +1185,7 @@
    "map": "Force_Props_Sandbox"
   },
   {
-   "lookup": "circle_train",
-   "sequence": "forces",
-   "map": "Force_Props_Sandbox"
-  },
-  {
-   "lookup": "wedge_slide",
+   "lookup": "death_pylon",
    "sequence": "forces",
    "map": "Force_Props_Sandbox"
   },
@@ -1240,9 +1195,24 @@
    "map": "Force_Props_Sandbox"
   },
   {
-   "lookup": "death_pylon",
+   "lookup": "circle_train",
    "sequence": "forces",
    "map": "Force_Props_Sandbox"
+  },
+  {
+   "lookup": "force_mower",
+   "sequence": "forces",
+   "map": "Force_Props_Sandbox"
+  },
+  {
+   "lookup": "wedge_slide",
+   "sequence": "forces",
+   "map": "Force_Props_Sandbox"
+  },
+  {
+   "lookup": "VectorBasics",
+   "sequence": "forces",
+   "map": "Vectors_Act1_WhatAVectorIs"
   },
   {
    "lookup": "vector_normalize_demo",
@@ -1250,9 +1220,49 @@
    "map": "Vectors_Act1_WhatAVectorIs"
   },
   {
-   "lookup": "VectorBasics",
+   "lookup": "vector_subtraction_demo",
    "sequence": "forces",
-   "map": "Vectors_Act1_WhatAVectorIs"
+   "map": "VFM_01_Foundations"
+  },
+  {
+   "lookup": "vector_addition_xl",
+   "sequence": "forces",
+   "map": "VFM_01_Foundations"
+  },
+  {
+   "lookup": "vector_sub",
+   "sequence": "forces",
+   "map": "VFM_01_Foundations"
+  },
+  {
+   "lookup": "basis_vectors_rig",
+   "sequence": "forces",
+   "map": "VFM_01_Foundations"
+  },
+  {
+   "lookup": "vector_magnitude_demo",
+   "sequence": "forces",
+   "map": "VFM_01_Foundations"
+  },
+  {
+   "lookup": "vector_translation_demo",
+   "sequence": "forces",
+   "map": "VFM_01_Foundations"
+  },
+  {
+   "lookup": "example_1_4_vector_multiplication_vr",
+   "sequence": "forces",
+   "map": "VFM_01_Foundations"
+  },
+  {
+   "lookup": "2d_in_3d_vectors_vis",
+   "sequence": "forces",
+   "map": "VFM_01_Foundations"
+  },
+  {
+   "lookup": "coordinate_system_switcher",
+   "sequence": "forces",
+   "map": "VFM_01_Foundations"
   },
   {
    "lookup": "newtons_laws",
@@ -1265,49 +1275,24 @@
    "map": "VFM_01_Foundations"
   },
   {
-   "lookup": "vector_translation_demo",
-   "sequence": "forces",
-   "map": "VFM_01_Foundations"
-  },
-  {
-   "lookup": "coordinate_system_switcher",
-   "sequence": "forces",
-   "map": "VFM_01_Foundations"
-  },
-  {
-   "lookup": "basis_vectors_rig",
-   "sequence": "forces",
-   "map": "VFM_01_Foundations"
-  },
-  {
-   "lookup": "vector_addition_xl",
-   "sequence": "forces",
-   "map": "VFM_01_Foundations"
-  },
-  {
-   "lookup": "vector_subtraction_demo",
-   "sequence": "forces",
-   "map": "VFM_01_Foundations"
-  },
-  {
-   "lookup": "vector_magnitude_demo",
-   "sequence": "forces",
-   "map": "VFM_01_Foundations"
-  },
-  {
-   "lookup": "vector_sub",
-   "sequence": "forces",
-   "map": "VFM_01_Foundations"
-  },
-  {
-   "lookup": "example_1_4_vector_multiplication_vr",
-   "sequence": "forces",
-   "map": "VFM_01_Foundations"
-  },
-  {
    "lookup": "graphics_monitor",
    "sequence": "forces",
    "map": "VFM_01_Foundations"
+  },
+  {
+   "lookup": "VectorDotProduct",
+   "sequence": "forces",
+   "map": "VectorOperations"
+  },
+  {
+   "lookup": "VectorCrossProduct",
+   "sequence": "forces",
+   "map": "VectorOperations"
+  },
+  {
+   "lookup": "dot_product_projector",
+   "sequence": "forces",
+   "map": "VectorOperations"
   },
   {
    "lookup": "vector_dot_product_xl",
@@ -1320,27 +1305,12 @@
    "map": "VectorOperations"
   },
   {
-   "lookup": "VectorCrossProduct",
+   "lookup": "vector_projection_demo",
    "sequence": "forces",
    "map": "VectorOperations"
   },
   {
    "lookup": "normal_force_demo",
-   "sequence": "forces",
-   "map": "VectorOperations"
-  },
-  {
-   "lookup": "VectorDotProduct",
-   "sequence": "forces",
-   "map": "VectorOperations"
-  },
-  {
-   "lookup": "dot_product_projector",
-   "sequence": "forces",
-   "map": "VectorOperations"
-  },
-  {
-   "lookup": "vector_projection_demo",
    "sequence": "forces",
    "map": "VectorOperations"
   },
@@ -1375,12 +1345,12 @@
    "map": "VFM_02_Operations"
   },
   {
-   "lookup": "exercise_5_9_angle_between",
+   "lookup": "work_energy_demo",
    "sequence": "forces",
    "map": "VFM_02_Operations"
   },
   {
-   "lookup": "work_energy_demo",
+   "lookup": "opening_pair",
    "sequence": "forces",
    "map": "VFM_02_Operations"
   },
@@ -1390,22 +1360,22 @@
    "map": "VFM_02_Operations"
   },
   {
+   "lookup": "exercise_5_9_angle_between",
+   "sequence": "forces",
+   "map": "VFM_02_Operations"
+  },
+  {
    "lookup": "VectorFieldFlow",
    "sequence": "forces",
    "map": "VectorAdvanced"
   },
   {
-   "lookup": "exercise_1_8_solution_attraction_magnitude_vr",
+   "lookup": "VectorTorque",
    "sequence": "forces",
    "map": "VectorAdvanced"
   },
   {
    "lookup": "exercise_1_3_solution_3_d_bouncing_ball_vr",
-   "sequence": "forces",
-   "map": "VectorAdvanced"
-  },
-  {
-   "lookup": "VectorTorque",
    "sequence": "forces",
    "map": "VectorAdvanced"
   },
@@ -1420,17 +1390,22 @@
    "map": "VectorAdvanced"
   },
   {
+   "lookup": "exercise_1_8_solution_attraction_magnitude_vr",
+   "sequence": "forces",
+   "map": "VectorAdvanced"
+  },
+  {
    "lookup": "VectorThrowing",
    "sequence": "forces",
    "map": "VectorAdvanced"
   },
   {
-   "lookup": "VectorMotion",
+   "lookup": "launch_arc",
    "sequence": "forces",
    "map": "Vectors_Act3_FieldsAndMotion"
   },
   {
-   "lookup": "launch_arc",
+   "lookup": "VectorMotion",
    "sequence": "forces",
    "map": "Vectors_Act3_FieldsAndMotion"
   },
@@ -1440,22 +1415,7 @@
    "map": "VFM_03_Motion"
   },
   {
-   "lookup": "example_3_3_pointing_in_the_direction_of_motion_vr",
-   "sequence": "forces",
-   "map": "VFM_03_Motion"
-  },
-  {
-   "lookup": "example_3_2_forces_with_arbitrary_angular_motion_vr",
-   "sequence": "forces",
-   "map": "VFM_03_Motion"
-  },
-  {
-   "lookup": "flocking_controls",
-   "sequence": "forces",
-   "map": "VFM_03_Motion"
-  },
-  {
-   "lookup": "VectorForces",
+   "lookup": "trajectory_artifact",
    "sequence": "forces",
    "map": "VFM_03_Motion"
   },
@@ -1465,12 +1425,7 @@
    "map": "VFM_03_Motion"
   },
   {
-   "lookup": "combined_forces_demo",
-   "sequence": "forces",
-   "map": "VFM_03_Motion"
-  },
-  {
-   "lookup": "trajectory_artifact",
+   "lookup": "VectorForces",
    "sequence": "forces",
    "map": "VFM_03_Motion"
   },
@@ -1480,12 +1435,17 @@
    "map": "VFM_03_Motion"
   },
   {
-   "lookup": "friction_ramp",
+   "lookup": "example_3_2_forces_with_arbitrary_angular_motion_vr",
    "sequence": "forces",
    "map": "VFM_03_Motion"
   },
   {
-   "lookup": "collision_crasher",
+   "lookup": "example_3_3_pointing_in_the_direction_of_motion_vr",
+   "sequence": "forces",
+   "map": "VFM_03_Motion"
+  },
+  {
+   "lookup": "friction_ramp",
    "sequence": "forces",
    "map": "VFM_03_Motion"
   },
@@ -1495,7 +1455,22 @@
    "map": "VFM_03_Motion"
   },
   {
-   "lookup": "drag_corridor",
+   "lookup": "combined_forces_demo",
+   "sequence": "forces",
+   "map": "VFM_03_Motion"
+  },
+  {
+   "lookup": "flocking_controls",
+   "sequence": "forces",
+   "map": "VFM_03_Motion"
+  },
+  {
+   "lookup": "collision_crasher",
+   "sequence": "forces",
+   "map": "VFM_03_Motion"
+  },
+  {
+   "lookup": "centrifuge_ring",
    "sequence": "forces",
    "map": "Vectors_Act4a_KineticForces"
   },
@@ -1505,17 +1480,17 @@
    "map": "Vectors_Act4a_KineticForces"
   },
   {
-   "lookup": "centrifuge_ring",
+   "lookup": "drag_corridor",
    "sequence": "forces",
    "map": "Vectors_Act4a_KineticForces"
   },
   {
-   "lookup": "bounce_well",
+   "lookup": "pendulum_hall",
    "sequence": "forces",
    "map": "Vectors_Act4b_Oscillation"
   },
   {
-   "lookup": "momentum_cradle",
+   "lookup": "spring_tower",
    "sequence": "forces",
    "map": "Vectors_Act4b_Oscillation"
   },
@@ -1530,14 +1505,19 @@
    "map": "Vectors_Act4b_Oscillation"
   },
   {
-   "lookup": "pendulum_hall",
+   "lookup": "momentum_cradle",
    "sequence": "forces",
    "map": "Vectors_Act4b_Oscillation"
   },
   {
-   "lookup": "spring_tower",
+   "lookup": "bounce_well",
    "sequence": "forces",
    "map": "Vectors_Act4b_Oscillation"
+  },
+  {
+   "lookup": "3t",
+   "sequence": "forces",
+   "map": "ForcesComposition"
   },
   {
    "lookup": "momentum_collision",
@@ -1551,6 +1531,11 @@
   },
   {
    "lookup": "hl_turret_vectors",
+   "sequence": "forces",
+   "map": "VectorApplied"
+  },
+  {
+   "lookup": "field_room",
    "sequence": "forces",
    "map": "VectorApplied"
   },
@@ -1615,12 +1600,17 @@
    "map": "VFM_05_Launch"
   },
   {
-   "lookup": "particle_systems",
+   "lookup": "library_rack",
    "sequence": "forces",
    "map": "ForcesSystems"
   },
   {
    "lookup": "vector_fields",
+   "sequence": "forces",
+   "map": "ForcesSystems"
+  },
+  {
+   "lookup": "particle_systems",
    "sequence": "forces",
    "map": "ForcesSystems"
   },
@@ -1720,17 +1710,7 @@
    "map": "ForcesChaos"
   },
   {
-   "lookup": "orbital_mechanics_demo",
-   "sequence": "forces",
-   "map": "VFM_07_Gravity"
-  },
-  {
    "lookup": "orbit_pair",
-   "sequence": "forces",
-   "map": "VFM_07_Gravity"
-  },
-  {
-   "lookup": "grid3d_force_directed",
    "sequence": "forces",
    "map": "VFM_07_Gravity"
   },
@@ -1740,7 +1720,22 @@
    "map": "VFM_07_Gravity"
   },
   {
-   "lookup": "collision_carts",
+   "lookup": "orbital_mechanics_demo",
+   "sequence": "forces",
+   "map": "VFM_07_Gravity"
+  },
+  {
+   "lookup": "grid3d_force_directed",
+   "sequence": "forces",
+   "map": "VFM_07_Gravity"
+  },
+  {
+   "lookup": "turret_targeting",
+   "sequence": "forces",
+   "map": "VFM_08_Arena"
+  },
+  {
+   "lookup": "queer_cylinder_target",
    "sequence": "forces",
    "map": "VFM_08_Arena"
   },
@@ -1750,17 +1745,12 @@
    "map": "VFM_08_Arena"
   },
   {
-   "lookup": "turret_targeting",
+   "lookup": "collision_carts",
    "sequence": "forces",
    "map": "VFM_08_Arena"
   },
   {
    "lookup": "sentry_turret",
-   "sequence": "forces",
-   "map": "VFM_08_Arena"
-  },
-  {
-   "lookup": "queer_cylinder_target",
    "sequence": "forces",
    "map": "VFM_08_Arena"
   },
@@ -1815,12 +1805,12 @@
    "map": "ForcesArena"
   },
   {
-   "lookup": "gradient_descent",
+   "lookup": "descent_marble_toy",
    "sequence": "formfinding",
    "map": "FormFinding_Descent"
   },
   {
-   "lookup": "descent_marble_toy",
+   "lookup": "gradient_descent",
    "sequence": "formfinding",
    "map": "FormFinding_Descent"
   },
@@ -1830,17 +1820,17 @@
    "map": "FormFinding_Descent"
   },
   {
+   "lookup": "cable_builder",
+   "sequence": "formfinding",
+   "map": "FormFinding_Catenary"
+  },
+  {
    "lookup": "catenoid",
    "sequence": "formfinding",
    "map": "FormFinding_Catenary"
   },
   {
    "lookup": "helicoid",
-   "sequence": "formfinding",
-   "map": "FormFinding_Catenary"
-  },
-  {
-   "lookup": "cable_builder",
    "sequence": "formfinding",
    "map": "FormFinding_Catenary"
   },
@@ -1955,17 +1945,12 @@
    "map": "WaveFunctions_Intro"
   },
   {
-   "lookup": "foucault_pendulum",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Pendulum"
-  },
-  {
    "lookup": "WavePaintings",
    "sequence": "wavefunctions",
    "map": "WaveFunctions_Pendulum"
   },
   {
-   "lookup": "draw_dot_time_domain",
+   "lookup": "foucault_pendulum",
    "sequence": "wavefunctions",
    "map": "WaveFunctions_Pendulum"
   },
@@ -1975,17 +1960,17 @@
    "map": "WaveFunctions_Pendulum"
   },
   {
-   "lookup": "lab_table",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Pendulum"
-  },
-  {
-   "lookup": "VRAudioMonitor",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Pendulum"
-  },
-  {
    "lookup": "PendulumWave",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Pendulum"
+  },
+  {
+   "lookup": "draw_dot_time_domain",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Pendulum"
+  },
+  {
+   "lookup": "lab_table",
    "sequence": "wavefunctions",
    "map": "WaveFunctions_Pendulum"
   },
@@ -1996,6 +1981,11 @@
   },
   {
    "lookup": "GlassRack",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Pendulum"
+  },
+  {
+   "lookup": "VRAudioMonitor",
    "sequence": "wavefunctions",
    "map": "WaveFunctions_Pendulum"
   },
@@ -2015,22 +2005,22 @@
    "map": "WaveFunctions_Unit_Circle"
   },
   {
-   "lookup": "sine_space_explanation",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Sine_Space"
-  },
-  {
-   "lookup": "sine_space",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Sine_Space"
-  },
-  {
    "lookup": "sine_wall_corridor",
    "sequence": "wavefunctions",
    "map": "WaveFunctions_Sine_Space"
   },
   {
    "lookup": "sine_wall_explanation",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Sine_Space"
+  },
+  {
+   "lookup": "sine_space_explanation",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Sine_Space"
+  },
+  {
+   "lookup": "sine_space",
    "sequence": "wavefunctions",
    "map": "WaveFunctions_Sine_Space"
   },
@@ -2050,7 +2040,27 @@
    "map": "WaveFunctions_3D_Wave_Propagation"
   },
   {
-   "lookup": "timbre_sculptor",
+   "lookup": "AudioContr",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Effect_Sound"
+  },
+  {
+   "lookup": "RackSineBasic",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Effect_Sound"
+  },
+  {
+   "lookup": "DualBallFMController",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Effect_Sound"
+  },
+  {
+   "lookup": "Rack303Acid",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Effect_Sound"
+  },
+  {
+   "lookup": "rack_room",
    "sequence": "wavefunctions",
    "map": "WaveFunctions_Effect_Sound"
   },
@@ -2065,12 +2075,7 @@
    "map": "WaveFunctions_Effect_Sound"
   },
   {
-   "lookup": "DualBallFMController",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Effect_Sound"
-  },
-  {
-   "lookup": "chord_tension_spring",
+   "lookup": "audio_catalog_tablet",
    "sequence": "wavefunctions",
    "map": "WaveFunctions_Effect_Sound"
   },
@@ -2085,37 +2090,12 @@
    "map": "WaveFunctions_Effect_Sound"
   },
   {
-   "lookup": "MelodyChaser3D",
+   "lookup": "chord_tension_spring",
    "sequence": "wavefunctions",
    "map": "WaveFunctions_Effect_Sound"
   },
   {
-   "lookup": "RackSineBasic",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Effect_Sound"
-  },
-  {
-   "lookup": "interactable_demo",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Effect_Sound"
-  },
-  {
-   "lookup": "AudioContr",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Effect_Sound"
-  },
-  {
-   "lookup": "Rack303Acid",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Effect_Sound"
-  },
-  {
-   "lookup": "mario_test_sound_ui",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Effect_Sound"
-  },
-  {
-   "lookup": "audio_catalog_tablet",
+   "lookup": "timbre_sculptor",
    "sequence": "wavefunctions",
    "map": "WaveFunctions_Effect_Sound"
   },
@@ -2125,17 +2105,32 @@
    "map": "WaveFunctions_Effect_Sound"
   },
   {
+   "lookup": "mario_test_sound_ui",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Effect_Sound"
+  },
+  {
+   "lookup": "MelodyChaser3D",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Effect_Sound"
+  },
+  {
+   "lookup": "interactable_demo",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Effect_Sound"
+  },
+  {
    "lookup": "ElphabaDress",
    "sequence": "wavefunctions",
    "map": "Wavefunctions_Bernini"
   },
   {
-   "lookup": "vowel_sound_board",
+   "lookup": "bernini_columns",
    "sequence": "wavefunctions",
    "map": "Wavefunctions_Bernini"
   },
   {
-   "lookup": "bernini_columns",
+   "lookup": "vowel_sound_board",
    "sequence": "wavefunctions",
    "map": "Wavefunctions_Bernini"
   },
@@ -2155,6 +2150,11 @@
    "map": "WaveFunctions_John_Cage"
   },
   {
+   "lookup": "SystemsMusicTest",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_AirMusic"
+  },
+  {
    "lookup": "RackAmbientDrone",
    "sequence": "wavefunctions",
    "map": "WaveFunctions_AirMusic"
@@ -2170,11 +2170,6 @@
    "map": "WaveFunctions_AirMusic"
   },
   {
-   "lookup": "SystemsMusicTest",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_AirMusic"
-  },
-  {
    "lookup": "sine_cylinder_staircase",
    "sequence": "wavefunctions",
    "map": "Wavefunctions_Sky_Stairs"
@@ -2185,12 +2180,7 @@
    "map": "Wavefunctions_Sky_Stairs"
   },
   {
-   "lookup": "wave_interference",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_TrigWalkingPath"
-  },
-  {
-   "lookup": "beat_frequency_demo",
+   "lookup": "sine_oscillation",
    "sequence": "wavefunctions",
    "map": "WaveFunctions_TrigWalkingPath"
   },
@@ -2205,7 +2195,12 @@
    "map": "WaveFunctions_TrigWalkingPath"
   },
   {
-   "lookup": "sine_oscillation",
+   "lookup": "wave_interference",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_TrigWalkingPath"
+  },
+  {
+   "lookup": "beat_frequency_demo",
    "sequence": "wavefunctions",
    "map": "WaveFunctions_TrigWalkingPath"
   },
@@ -2231,6 +2226,11 @@
   },
   {
    "lookup": "UnitCircleTrig",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Synthesis_Lab"
+  },
+  {
+   "lookup": "record_room",
    "sequence": "wavefunctions",
    "map": "WaveFunctions_Synthesis_Lab"
   },
@@ -2390,12 +2390,7 @@
    "map": "Randomness_10_PRINT_Algorithm"
   },
   {
-   "lookup": "random_edge_profile",
-   "sequence": "randomness",
-   "map": "Random_Cubes"
-  },
-  {
-   "lookup": "random_object_spawner",
+   "lookup": "dice_throw",
    "sequence": "randomness",
    "map": "Random_Cubes"
   },
@@ -2405,7 +2400,12 @@
    "map": "Random_Cubes"
   },
   {
-   "lookup": "dice_throw",
+   "lookup": "random_object_spawner",
+   "sequence": "randomness",
+   "map": "Random_Cubes"
+  },
+  {
+   "lookup": "random_edge_profile",
    "sequence": "randomness",
    "map": "Random_Cubes"
   },
@@ -2440,6 +2440,11 @@
    "map": "Random_Walk"
   },
   {
+   "lookup": "lab_room",
+   "sequence": "randomness",
+   "map": "Random_Walk"
+  },
+  {
    "lookup": "random_walk_128",
    "sequence": "randomness",
    "map": "Random_Walk"
@@ -2448,11 +2453,6 @@
    "lookup": "random_walk_leash",
    "sequence": "randomness",
    "map": "Random_Walk"
-  },
-  {
-   "lookup": "gaussian_random",
-   "sequence": "randomness",
-   "map": "Random_Gaussian"
   },
   {
    "lookup": "GaussianBlurShader",
@@ -2465,7 +2465,7 @@
    "map": "Random_Gaussian"
   },
   {
-   "lookup": "galton_board",
+   "lookup": "GaussianBlurCircle",
    "sequence": "randomness",
    "map": "Random_Gaussian"
   },
@@ -2480,17 +2480,22 @@
    "map": "Random_Gaussian"
   },
   {
+   "lookup": "gaussian_random",
+   "sequence": "randomness",
+   "map": "Random_Gaussian"
+  },
+  {
    "lookup": "distribution_sampler",
    "sequence": "randomness",
    "map": "Random_Gaussian"
   },
   {
-   "lookup": "GaussianBlurCircle",
+   "lookup": "galton_board",
    "sequence": "randomness",
    "map": "Random_Gaussian"
   },
   {
-   "lookup": "reaction_diffusion_intro",
+   "lookup": "mushrooms",
    "sequence": "randomness",
    "map": "Random_Mushrooms"
   },
@@ -2505,7 +2510,7 @@
    "map": "Random_Mushrooms"
   },
   {
-   "lookup": "mushrooms",
+   "lookup": "reaction_diffusion_intro",
    "sequence": "randomness",
    "map": "Random_Mushrooms"
   },
@@ -2515,7 +2520,17 @@
    "map": "Random_Mushrooms"
   },
   {
+   "lookup": "perlin_noise_bridge",
+   "sequence": "randomness",
+   "map": "Random_Space_Geometry"
+  },
+  {
    "lookup": "env_one",
+   "sequence": "randomness",
+   "map": "Random_Space_Geometry"
+  },
+  {
+   "lookup": "curl_noise_particles",
    "sequence": "randomness",
    "map": "Random_Space_Geometry"
   },
@@ -2525,17 +2540,7 @@
    "map": "Random_Space_Geometry"
   },
   {
-   "lookup": "perlin_noise_bridge",
-   "sequence": "randomness",
-   "map": "Random_Space_Geometry"
-  },
-  {
    "lookup": "sculpt_one",
-   "sequence": "randomness",
-   "map": "Random_Space_Geometry"
-  },
-  {
-   "lookup": "curl_noise_particles",
    "sequence": "randomness",
    "map": "Random_Space_Geometry"
   },
@@ -2565,17 +2570,17 @@
    "map": "Random_Pheromone"
   },
   {
-   "lookup": "random_space",
-   "sequence": "randomness",
-   "map": "Random_Space"
-  },
-  {
    "lookup": "noise_mixer",
    "sequence": "randomness",
    "map": "Random_Space"
   },
   {
    "lookup": "worley_noise",
+   "sequence": "randomness",
+   "map": "Random_Space"
+  },
+  {
+   "lookup": "random_space",
    "sequence": "randomness",
    "map": "Random_Space"
   },
@@ -2631,6 +2636,11 @@
   },
   {
    "lookup": "WhiteNoiseGallery",
+   "sequence": "noise",
+   "map": "Random_Noise_Types"
+  },
+  {
+   "lookup": "NoiseColors3D",
    "sequence": "noise",
    "map": "Random_Noise_Types"
   },
@@ -2700,17 +2710,17 @@
    "map": "Noise_Perlin_Simplex"
   },
   {
+   "lookup": "persian_rug",
+   "sequence": "cellularautomata",
+   "map": "CA_Introduction"
+  },
+  {
    "lookup": "grid_substrate_runner",
    "sequence": "cellularautomata",
    "map": "CA_Introduction"
   },
   {
    "lookup": "line_network_ca",
-   "sequence": "cellularautomata",
-   "map": "CA_Introduction"
-  },
-  {
-   "lookup": "persian_rug",
    "sequence": "cellularautomata",
    "map": "CA_Introduction"
   },
@@ -2735,11 +2745,6 @@
    "map": "CA_GameOfLife"
   },
   {
-   "lookup": "ca_growth_network",
-   "sequence": "cellularautomata",
-   "map": "CA_BeyondBinary"
-  },
-  {
    "lookup": "mold_network",
    "sequence": "cellularautomata",
    "map": "CA_BeyondBinary"
@@ -2751,6 +2756,11 @@
   },
   {
    "lookup": "hexagon_ca_vr",
+   "sequence": "cellularautomata",
+   "map": "CA_BeyondBinary"
+  },
+  {
+   "lookup": "ca_growth_network",
    "sequence": "cellularautomata",
    "map": "CA_BeyondBinary"
   },
@@ -2850,6 +2860,26 @@
    "map": "Fractal_Recursion"
   },
   {
+   "lookup": "living_paper",
+   "sequence": "fractals",
+   "map": "Fractal_RecursiveTrees"
+  },
+  {
+   "lookup": "fractal_lsystem_tree",
+   "sequence": "fractals",
+   "map": "Fractal_RecursiveTrees"
+  },
+  {
+   "lookup": "recursive_tree_2",
+   "sequence": "fractals",
+   "map": "Fractal_RecursiveTrees"
+  },
+  {
+   "lookup": "small_subdivision_cube",
+   "sequence": "fractals",
+   "map": "Fractal_RecursiveTrees"
+  },
+  {
    "lookup": "inverted_tree_cloud",
    "sequence": "fractals",
    "map": "Fractal_RecursiveTrees"
@@ -2860,37 +2890,17 @@
    "map": "Fractal_RecursiveTrees"
   },
   {
-   "lookup": "fractal_scene",
-   "sequence": "fractals",
-   "map": "Fractal_RecursiveTrees"
-  },
-  {
-   "lookup": "small_subdivision_cube",
-   "sequence": "fractals",
-   "map": "Fractal_RecursiveTrees"
-  },
-  {
-   "lookup": "recursive_tree_2",
-   "sequence": "fractals",
-   "map": "Fractal_RecursiveTrees"
-  },
-  {
    "lookup": "cube_desk",
    "sequence": "fractals",
    "map": "Fractal_RecursiveTrees"
   },
   {
+   "lookup": "fractal_scene",
+   "sequence": "fractals",
+   "map": "Fractal_RecursiveTrees"
+  },
+  {
    "lookup": "mobius_world",
-   "sequence": "fractals",
-   "map": "Fractal_RecursiveTrees"
-  },
-  {
-   "lookup": "living_paper",
-   "sequence": "fractals",
-   "map": "Fractal_RecursiveTrees"
-  },
-  {
-   "lookup": "fractal_lsystem_tree",
    "sequence": "fractals",
    "map": "Fractal_RecursiveTrees"
   },
@@ -2915,12 +2925,7 @@
    "map": "Fractal_CantorSet"
   },
   {
-   "lookup": "cube_bookshelf",
-   "sequence": "fractals",
-   "map": "Fractal_KochSierpinski"
-  },
-  {
-   "lookup": "box_counting_dimension",
+   "lookup": "cube_cabin",
    "sequence": "fractals",
    "map": "Fractal_KochSierpinski"
   },
@@ -2930,17 +2935,27 @@
    "map": "Fractal_KochSierpinski"
   },
   {
-   "lookup": "sierpinski_triangle",
-   "sequence": "fractals",
-   "map": "Fractal_KochSierpinski"
-  },
-  {
-   "lookup": "cube_cabin",
+   "lookup": "recursion_observatory",
    "sequence": "fractals",
    "map": "Fractal_KochSierpinski"
   },
   {
    "lookup": "koch_curve_3d",
+   "sequence": "fractals",
+   "map": "Fractal_KochSierpinski"
+  },
+  {
+   "lookup": "sierpinski_triangle",
+   "sequence": "fractals",
+   "map": "Fractal_KochSierpinski"
+  },
+  {
+   "lookup": "cube_bookshelf",
+   "sequence": "fractals",
+   "map": "Fractal_KochSierpinski"
+  },
+  {
+   "lookup": "box_counting_dimension",
    "sequence": "fractals",
    "map": "Fractal_KochSierpinski"
   },
@@ -3000,12 +3015,7 @@
    "map": "Fractal_MandelbrotSet"
   },
   {
-   "lookup": "fractal_clouds",
-   "sequence": "fractals",
-   "map": "Fractal_Synthesis"
-  },
-  {
-   "lookup": "strange_attractors",
+   "lookup": "fractal_recursion_1",
    "sequence": "fractals",
    "map": "Fractal_Synthesis"
   },
@@ -3015,7 +3025,12 @@
    "map": "Fractal_Synthesis"
   },
   {
-   "lookup": "fractal_recursion_1",
+   "lookup": "strange_attractors",
+   "sequence": "fractals",
+   "map": "Fractal_Synthesis"
+  },
+  {
+   "lookup": "fractal_clouds",
    "sequence": "fractals",
    "map": "Fractal_Synthesis"
   },
@@ -3040,12 +3055,12 @@
    "map": "Fractal_CrossSequence"
   },
   {
-   "lookup": "grammar_provenance",
+   "lookup": "lsystem_editor",
    "sequence": "lsystems",
    "map": "LSystems_Grammar_Lab"
   },
   {
-   "lookup": "lsystem_editor",
+   "lookup": "grammar_provenance",
    "sequence": "lsystems",
    "map": "LSystems_Grammar_Lab"
   },
@@ -3105,17 +3120,22 @@
    "map": "LSystems_Living"
   },
   {
+   "lookup": "ten_print_textile",
+   "sequence": "lsystems",
+   "map": "Assemblage_Same_Desire"
+  },
+  {
    "lookup": "mamma_monster_gallery",
    "sequence": "lsystems",
    "map": "Assemblage_Same_Desire"
   },
   {
-   "lookup": "incompleteness_scale",
+   "lookup": "godel_statement_plaque",
    "sequence": "lsystems",
    "map": "Assemblage_Same_Desire"
   },
   {
-   "lookup": "godel_statement_plaque",
+   "lookup": "incompleteness_scale",
    "sequence": "lsystems",
    "map": "Assemblage_Same_Desire"
   },
@@ -3135,12 +3155,12 @@
    "map": "PG_Percolation_Network"
   },
   {
-   "lookup": "organic_space",
+   "lookup": "branching_growth_algorithm",
    "sequence": "proceduralgeneration",
    "map": "PG_Branching_Growth"
   },
   {
-   "lookup": "branching_growth_algorithm",
+   "lookup": "organic_space",
    "sequence": "proceduralgeneration",
    "map": "PG_Branching_Growth"
   },
@@ -3155,17 +3175,17 @@
    "map": "PG_Caves_Mazes"
   },
   {
-   "lookup": "layered_membrane",
-   "sequence": "proceduralgeneration",
-   "map": "PG_Sculpted_Forms"
-  },
-  {
    "lookup": "cube_mound_scene",
    "sequence": "proceduralgeneration",
    "map": "PG_Sculpted_Forms"
   },
   {
    "lookup": "dome",
+   "sequence": "proceduralgeneration",
+   "map": "PG_Sculpted_Forms"
+  },
+  {
+   "lookup": "layered_membrane",
    "sequence": "proceduralgeneration",
    "map": "PG_Sculpted_Forms"
   },
@@ -3180,14 +3200,19 @@
    "map": "PG_Mirrored_Patterns"
   },
   {
+   "lookup": "jelly_cube",
+   "sequence": "softbodies",
+   "map": "SoftBodies_Soft_Body_Deformation"
+  },
+  {
    "lookup": "softmill",
    "sequence": "softbodies",
    "map": "SoftBodies_Soft_Body_Deformation"
   },
   {
-   "lookup": "jelly_cube",
+   "lookup": "grab_long_stick",
    "sequence": "softbodies",
-   "map": "SoftBodies_Soft_Body_Deformation"
+   "map": "SoftBodies_Carusell"
   },
   {
    "lookup": "revolving_joy_ride",
@@ -3196,11 +3221,6 @@
   },
   {
    "lookup": "cloth_straps",
-   "sequence": "softbodies",
-   "map": "SoftBodies_Carusell"
-  },
-  {
-   "lookup": "grab_long_stick",
    "sequence": "softbodies",
    "map": "SoftBodies_Carusell"
   },
@@ -3398,6 +3418,11 @@
    "lookup": "csg_difference_demo",
    "sequence": "boolean_surfaces",
    "map": "Boolean_Difference"
+  },
+  {
+   "lookup": "subtraction_suite",
+   "sequence": "boolean_surfaces",
+   "map": "Boolean_Compose_Workbench"
   },
   {
    "lookup": "csg_compose_workbench",
@@ -3685,7 +3710,27 @@
    "map": "Russell_Paradox"
   },
   {
+   "lookup": "negative_control_fixture",
+   "sequence": "foundationscrisis",
+   "map": "Godel_Incompleteness"
+  },
+  {
+   "lookup": "critic_regress_stack",
+   "sequence": "foundationscrisis",
+   "map": "Godel_Incompleteness"
+  },
+  {
    "lookup": "godel_sentence_machine",
+   "sequence": "foundationscrisis",
+   "map": "Godel_Incompleteness"
+  },
+  {
+   "lookup": "rice_verifier_booth",
+   "sequence": "foundationscrisis",
+   "map": "Godel_Incompleteness"
+  },
+  {
+   "lookup": "fluency_seam",
    "sequence": "foundationscrisis",
    "map": "Godel_Incompleteness"
   },
@@ -3890,6 +3935,11 @@
    "map": "QFEP_Phi_Term"
   },
   {
+   "lookup": "lambda_promenade",
+   "sequence": "qfeplaboratory",
+   "map": "QFEP_Phi_Term"
+  },
+  {
    "lookup": "transforming_pattern",
    "sequence": "qfeplaboratory",
    "map": "QFEP_Phi_Term"
@@ -3926,6 +3976,11 @@
   },
   {
    "lookup": "queer_morphology_specimen",
+   "sequence": "qfeplaboratory",
+   "map": "QFEP_Synthesis"
+  },
+  {
+   "lookup": "grasp_cabinet",
    "sequence": "qfeplaboratory",
    "map": "QFEP_Synthesis"
   },
