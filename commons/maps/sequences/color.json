@@ -2,7 +2,7 @@
   "sequences": {
     "color": {
       "name": "Color and Composition",
-      "v1_3_note": "Renamed from 'Color: Perception, Not Physics'. As of spine v1.3, this sequence absorbs the composition study and is sourced from three auto-research galleries: primitive-stack, pattern, and facade.",
+      "v1_3_note": "Renamed from 'Color: Perception, Not Physics'. As of spine v1.3, this sequence absorbs the composition study and is sourced from three auto-research galleries: primitive-stack, pattern, and facade. 2026-08-24 THE FOLD: array_tutorial collapses into this sequence — Color_Arrays is the whole array grammar in one map (1d unit, row, column, 2d grid, 3d grid and the sorting arrays in the last basin), built on the Array map's own three-pool structure. The pattern work of Tutorial_Pattern / Array_Patterns joins Pattern_Foundry.",
       "composition_sources": [
         {
           "gallery": "primitive-stack-gallery",
@@ -55,6 +55,7 @@
         "Color_Flashlight: Light Reveals Color"
       ],
       "maps": [
+        "Color_Arrays",
         "Pattern_Foundry",
         "Color_Context_Placed",
         "Color_Nails",
