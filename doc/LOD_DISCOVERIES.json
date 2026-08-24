@@ -540,6 +540,30 @@
       "topic": "gate verdict states",
       "insight": "run_em_gates scores 37 gates on one line (PASS in verdict); 7 gates declare SKIP and none is honoured, so an honest SKIP is stored ok:false and printed FAIL beside real defects",
       "lod": 3
+    },
+    {
+      "timestamp": "2026-08-22T07:21:17.840556+00:00",
+      "topic": "seal clamp testimony",
+      "insight": "endless_museum.gd clamps a body's footprint TWICE - meshes to MAX_SEAL_RADIUS 2, colliders to MAX_BODY_RADIUS 6 - and only the mesh half recorded its overflow. The collider half is the only one that can strand a walker (there is no decorative collider), so the seal_overflow:0 printed beside three failed gate F runs was a fact about what the counter counted, not about the corridor. Both halves now record through one static classifier with a 'by' tag, tested by 8 synthetic cases of which 4 must stay SILENT. Today's rerun still reads 0, but the zero is now evidence: the cut is 13 cells at z=38 that the builder never stamped.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-08-22T07:21:22.123032+00:00",
+      "topic": "live footprint origin reach",
+      "insight": "24 of 213 bodies in ada_run/em_live_footprints.json carry a live_aabb.z equal to the world z of the cell they were measured at - up to 11767.7 m for 9_3_smart_rockets_vr at cell z 11767. That is not a size, it is the distance the artifact was carried: one member of the body never left (0,0,0). tools/spatial_contract.py is told to negotiate from the larger of the still measurement and the live one; its LINE and venue guards did catch these, but both file them as 'still kept - a hand call', so the ledger handed the negotiation two dozen measurement questions that are one build fault. Now refused BY NAME on both sides.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-08-23T17:03:36.528650+00:00",
+      "topic": "breath-ledger-tree-vs-repo",
+      "insight": "Of 9 file artifacts the last two morning breaths recorded as succeeded, 8 are outside the repo; the 1 that landed landed by a concurrent sweep. But 12 of 14 tools the gate runners invoke are clean - so the defect is latency and non-determinism, not loss. prop-012's two-snapshot test needs BOTH scopes: whole-tree said LIVE (em_built.json written at 19:00), per-path said STRANDED (gate files 9-33h untouched).",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-08-24T07:21:53.236639+00:00",
+      "topic": "gate chain integrity",
+      "insight": "Eight breaths found stranded gate tools one instance at a time; gate H (tools/check_gate_chain.py) asks the general question in 30 lines and caught itself on its first run. A gate runner naming a file the repo does not contain is silent in the only direction that matters: a clone has fewer gates, no row missing.",
+      "lod": 3
     }
   ]
 }

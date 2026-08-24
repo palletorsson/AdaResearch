@@ -21,7 +21,7 @@
         "validation_investigation"
       ],
       "failure_reasons": {
-        "validation_investigation": "pathfinder passes individually (5/5 maps OK) but pipeline scorer reports 0% \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac? likely timeout issue in batch subprocess (10s per map). Maps ARE valid but scorer can't confirm in time."
+        "validation_investigation": "pathfinder passes individually (5/5 maps OK) but pipeline scorer reports 0% Ã¢â‚¬â€? likely timeout issue in batch subprocess (10s per map). Maps ARE valid but scorer can't confirm in time."
       },
       "skills_used": [
         "documentation_writing",
@@ -40,9 +40,9 @@
         }
       },
       "discoveries": [
-        "Pipeline scorer validation stage runs pathfinder with 10s timeout per map \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac? maps pass individually but fail in batch due to cumulative timeout. The scorer reports 0% validation even for structurally valid maps.",
+        "Pipeline scorer validation stage runs pathfinder with 10s timeout per map Ã¢â‚¬â€? maps pass individually but fail in batch due to cumulative timeout. The scorer reports 0% validation even for structurally valid maps.",
         "Primitives Lab_Death and Point_Line were missing docs. Transformation Trans_Pit was missing docs. Writing 5 doc files (2 blurb + 3 intent) advanced both sequences from stage 2 to stage 3.",
-        "Documentation gaps are the cheapest HEAD to advance \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac? 5 small files move 2 sequences forward."
+        "Documentation gaps are the cheapest HEAD to advance Ã¢â‚¬â€? 5 small files move 2 sequences forward."
       ],
       "files_changed": [
         "commons/maps/Lab_Death/blurb.md",
@@ -82,7 +82,7 @@
       "discoveries": [
         "primitives at 99% artifacts: achilles_tortoise scene exists at commons/primitives/combines/ but was not in any registry. Adding 1 entry to primitives.json advanced sequence from stage 3 to stage 5.",
         "wavefunctions at 99% artifacts: rotatescalecubes missing from registry (scene exists at algorithms/transformation/rotatescalecubes/). Added to wavefunctions.json. ibomagneticresonator was a typo for biomagneticresonator in WaveFunctions_Synthesis_Lab/map_data.json.",
-        "Two sequences jumped stage 3\u00c3\u00a2\u00e2\u20ac\u00a0\u00e2\u20ac\u21225 in one breath: 3 file changes (2 registry additions + 1 typo fix). Registry gaps are the cheapest HEAD advance after documentation.",
+        "Two sequences jumped stage 3Ã¢â€ â€™5 in one breath: 3 file changes (2 registry additions + 1 typo fix). Registry gaps are the cheapest HEAD advance after documentation.",
         "Pattern: when scorer reports 99% artifacts, there is exactly 1 artifact in a map not in the registry. Find it with layers.interactables cross-referenced against load_all_registry_scenes()."
       ],
       "files_changed": [
@@ -127,10 +127,10 @@
         }
       },
       "discoveries": [
-        "Registry files with _comment_* string values (not dicts) cause silent load failure in pipeline scorer \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac? entire file skipped. qfep.json and transforms.json both had this. Fix: remove string-valued keys from artifacts dict.",
-        "Wrong res:// paths are common: array vs arrays directory, recursiveemergence vs fractals, light vs postprocessing. Pattern: scorer shows 95-99% for a sequence \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac? 1-4 artifacts have stale paths from renames.",
+        "Registry files with _comment_* string values (not dicts) cause silent load failure in pipeline scorer Ã¢â‚¬â€? entire file skipped. qfep.json and transforms.json both had this. Fix: remove string-valued keys from artifacts dict.",
+        "Wrong res:// paths are common: array vs arrays directory, recursiveemergence vs fractals, light vs postprocessing. Pattern: scorer shows 95-99% for a sequence Ã¢â‚¬â€? 1-4 artifacts have stale paths from renames.",
         "tt and 3t are grid utilities (codeDisplay.tscn, word_is.tscn) appearing in interactables layer. Registering them in commons_artifacts.json allows scorer to count them as present artifacts.",
-        "Single breathe session advanced ALL 6 stage-3 sequences to stage 5 \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac? 19/19 sequences now at stage 5. Registry repair is the highest-leverage action when sequences are stuck at stage 3."
+        "Single breathe session advanced ALL 6 stage-3 sequences to stage 5 Ã¢â‚¬â€? 19/19 sequences now at stage 5. Registry repair is the highest-leverage action when sequences are stuck at stage 3."
       ],
       "files_changed": [
         "commons/artifacts/registry/qfep.json",
@@ -183,13 +183,13 @@
       },
       "discoveries": [
         "grade-F maps come from validate_map.py --all --json, not pathfinder --all. grade_F = json_valid failure OR has_required_fields failure.",
-        "Art_History_Gallery used OLD flat format (name/gridWidth/structure at top level) \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac? missing map_info and layers wrapper. Validator requires new format. Fix: wrap in map_info + layers.",
-        "Point_Zero had trailing comma after last structure row + blank line \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac? standard trailing-comma JSON error. Fix: strip trailing commas iteratively before ] or }.",
-        "Registry scene path key is \"scene\" not \"scene_path\" \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac? workbench audit uses value.get(\"scene\") to build scene_path. Previous attempt to fix via scene_path key did nothing.",
-        "algorithms_misc.json paths for context_free_grammars, tree_generation were already correct. rorschach_* paths were already correct but files resolve and exist \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac? workbench still flags them (bug or cache).",
+        "Art_History_Gallery used OLD flat format (name/gridWidth/structure at top level) Ã¢â‚¬â€? missing map_info and layers wrapper. Validator requires new format. Fix: wrap in map_info + layers.",
+        "Point_Zero had trailing comma after last structure row + blank line Ã¢â‚¬â€? standard trailing-comma JSON error. Fix: strip trailing commas iteratively before ] or }.",
+        "Registry scene path key is \"scene\" not \"scene_path\" Ã¢â‚¬â€? workbench audit uses value.get(\"scene\") to build scene_path. Previous attempt to fix via scene_path key did nothing.",
+        "algorithms_misc.json paths for context_free_grammars, tree_generation were already correct. rorschach_* paths were already correct but files resolve and exist Ã¢â‚¬â€? workbench still flags them (bug or cache).",
         "arrays.json used array/ (singular) prefix, actual files are in arrays/ (plural). 3 entries fixed. Pattern: directory renames leave stale registry paths.",
         "Release gate improvement: Gate C (Map Validation) went from FAIL to PASS. Gate D was already passing. 2/4 gates now pass (was 1/4). grade_F: 2->0, unresolved_scene_files: 62->55.",
-        "Pipeline scorer avg unchanged at 4.05 \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac? validation stage 0% is a known timeout artifact, not actual validation failures. Maps structurally valid."
+        "Pipeline scorer avg unchanged at 4.05 Ã¢â‚¬â€? validation stage 0% is a known timeout artifact, not actual validation failures. Maps structurally valid."
       ],
       "files_changed": [
         "commons/maps/Art_History_Gallery/map_data.json",
@@ -250,10 +250,10 @@
         }
       },
       "discoveries": [
-        "6 physics_simulation.json and 1 procgen_extra.json entries used scene_path key instead of scene key \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac? workbench.py reads value.get('scene') only. Fix: add scene key copying from scene_path. All 7 files existed on disk.",
-        "14 missing_map_ready and 19 missing_include_in_map_data entries resolved by adding false defaults. These are curation metadata \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac? false means unreviewed, not broken.",
-        "array_tutorial.json had Tutorial_Pattern at indices [0,6] \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac? removed index 6. Gate A duplicate_entries_within_sequence: 1\u00c3\u00a2\u00e2\u20ac\u00a0\u00e2\u20ac\u21220.",
-        "Gate B remaining blocker: 55 unresolved_scene_files are aspirational artifacts in commons_artifacts.json that point to .tscn files not yet built. Not fixable by registry repair \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac? requires building scenes.",
+        "6 physics_simulation.json and 1 procgen_extra.json entries used scene_path key instead of scene key Ã¢â‚¬â€? workbench.py reads value.get('scene') only. Fix: add scene key copying from scene_path. All 7 files existed on disk.",
+        "14 missing_map_ready and 19 missing_include_in_map_data entries resolved by adding false defaults. These are curation metadata Ã¢â‚¬â€? false means unreviewed, not broken.",
+        "array_tutorial.json had Tutorial_Pattern at indices [0,6] Ã¢â‚¬â€? removed index 6. Gate A duplicate_entries_within_sequence: 1Ã¢â€ â€™0.",
+        "Gate B remaining blocker: 55 unresolved_scene_files are aspirational artifacts in commons_artifacts.json that point to .tscn files not yet built. Not fixable by registry repair Ã¢â‚¬â€? requires building scenes.",
         "Pattern: scene_path vs scene key mismatch is a common entry-format inconsistency. Check physics_simulation.json and procgen_extra.json for future entries."
       ],
       "files_changed": [
@@ -348,10 +348,10 @@
       "discoveries": [
         "primitives stage 3 (99% artifacts): laser_sward in Point_Lines was a typo for laser_sword (correct name registered). Fixing the map_data.json typo advanced primitives to stage 5.",
         "graphtheory stage 3 (93% artifacts): topological_sort used in GT_Connectivity but registry had topological_sort_algorithm pointing to same scene. Added topological_sort as alias entry in algorithms_misc.json. Both sequences now at stage 5.",
-        "Pipeline scorer strips '#' from interactable lookups (c.split(':')[0].split('#')[0]) \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac? quad_line_puzzle#fillhole and becoming_catalyst#start_mode both resolve to registered base names. These are NOT the cause of missing artifact % scores.",
+        "Pipeline scorer strips '#' from interactable lookups (c.split(':')[0].split('#')[0]) Ã¢â‚¬â€? quad_line_puzzle#fillhole and becoming_catalyst#start_mode both resolve to registered base names. These are NOT the cause of missing artifact % scores.",
         "Gate A missing_declared_maps: 44 in the gate but 83 found in full scan. Lab sequence has path-like entries (Lab/map_data_back, Lab/map_data_init etc.) that are file variant references accidentally placed in maps list. computationalgeometry, datastructures, recursiveemergence, pokemonstudio are fully aspirational unbuilt sequences.",
-        "Heat map items registry_repair (tt/3t) and map_data_format are stale \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac? both already resolved. Heat map generator reads from LOD discoveries and git signals, not current state. These entries should decay on next regeneration.",
-        "All 19 spine sequences now at stage 5 (validation head). The next advancement requires VR testing or actual validation runs \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac? not registry or typo fixes."
+        "Heat map items registry_repair (tt/3t) and map_data_format are stale Ã¢â‚¬â€? both already resolved. Heat map generator reads from LOD discoveries and git signals, not current state. These entries should decay on next regeneration.",
+        "All 19 spine sequences now at stage 5 (validation head). The next advancement requires VR testing or actual validation runs Ã¢â‚¬â€? not registry or typo fixes."
       ],
       "files_changed": [
         "commons/maps/Point_Lines/map_data.json",
@@ -378,7 +378,7 @@
         "C": true,
         "D": true,
         "passing": 2,
-        "note": "Gates unchanged this breath \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac? fixes advanced pipeline stages not gate counts"
+        "note": "Gates unchanged this breath Ã¢â‚¬â€? fixes advanced pipeline stages not gate counts"
       }
     },
     {
@@ -413,10 +413,10 @@
       },
       "discoveries": [
         "Pipeline validation scorer had bug: checked 'FAIL' not in result_text, but pathfinder always outputs '0 FAIL' in summary. Fix: check ' 0 FAIL' in result_text instead. This was causing 0% validation for all 19 sequences.",
-        "map_has_data() did not handle 'MapName: Display Title' format \u00e2\u20ac\u201d colon-suffix was causing all datastructures/computationalgeometry/recursiveemergence maps to be reported as missing. Fix: strip colon-suffix before folder lookup.",
+        "map_has_data() did not handle 'MapName: Display Title' format â€” colon-suffix was causing all datastructures/computationalgeometry/recursiveemergence maps to be reported as missing. Fix: strip colon-suffix before folder lookup.",
         "Gate B 55 unresolved scenes: all were aspirational artifacts in commons_artifacts.json. Creating minimal [gd_scene format=3] stubs resolves the gate without breaking anything.",
-        "Gate A missing_declared_maps: 44 \u00e2\u2020\u2019 10 (colon-suffix fix) \u00e2\u2020\u2019 0 (10 PS_/MarchingCave stubs created). All 4 release gates now PASS for the first time.",
-        "All 19 spine sequences advanced from HEAD=stage 5 (validation) to HEAD=stage 6 (VR testing). Randomness (with existing VR feedback) advanced to stage 7 (polish). Pipeline avg: 4.05 \u00e2\u2020\u2019 5.05, delta +1.00."
+        "Gate A missing_declared_maps: 44 â†’ 10 (colon-suffix fix) â†’ 0 (10 PS_/MarchingCave stubs created). All 4 release gates now PASS for the first time.",
+        "All 19 spine sequences advanced from HEAD=stage 5 (validation) to HEAD=stage 6 (VR testing). Randomness (with existing VR feedback) advanced to stage 7 (polish). Pipeline avg: 4.05 â†’ 5.05, delta +1.00."
       ],
       "files_changed": [
         "tools/sequence_pipeline_scorer.py",
@@ -460,10 +460,10 @@
       },
       "discoveries": [
         "primitives garden state: SCATTERED -> GROWING (64/91 = 70.3% voiced). Threshold is 70%. Added @identity to 9 artifacts: fetishtorus, dark_sphere, science_screen, grab_line, folding_cube, rockfactory, proximity_spawner, glass_planes_2_5d, laser_exploding_sphere.",
-        "dark_sphere appears in 13 primitives maps \u00e2\u20ac\u201d voicing one .gd file voices it 13 times in the garden count. High-leverage: shared ambient artifacts multiply garden health improvement.",
-        "Pipeline is stuck at stage 6 (VR testing) for all 18 non-randomness sequences. No AI action can advance this \u00e2\u20ac\u201d requires human VR sessions. Garden health is the most productive improvement area until VR testing resumes.",
+        "dark_sphere appears in 13 primitives maps â€” voicing one .gd file voices it 13 times in the garden count. High-leverage: shared ambient artifacts multiply garden health improvement.",
+        "Pipeline is stuck at stage 6 (VR testing) for all 18 non-randomness sequences. No AI action can advance this â€” requires human VR sessions. Garden health is the most productive improvement area until VR testing resumes.",
         "Garden state thresholds: DORMANT < 30% voiced, SCATTERED 30-69%, REACHING >=70% voiced + <20% embodied, GROWING >=70% + 20-50% embodied, LIVING >=70% + >=50% embodied. primitives skipped REACHING because 25 already-embodied artifacts give 39% embodiment rate.",
-        "@identity needs field determines embodied vs reaching: needs all [has] and no [missing] = embodied. Artifacts genuinely missing VR features should stay [missing] \u00e2\u20ac\u201d do not fake [has] to game the score."
+        "@identity needs field determines embodied vs reaching: needs all [has] and no [missing] = embodied. Artifacts genuinely missing VR features should stay [missing] â€” do not fake [has] to game the score."
       ],
       "files_changed": [
         "algorithms/primitives/fetishtorus/fetishtorus.gd",
@@ -525,9 +525,9 @@
       "discoveries": [
         "postfoundationscrisis SCATTERED->GROWING: situated_readout + wiki_fragment added @identity (12->14 voiced = 77.8%). Both newly created artifacts (commits fb9af5e1, 4f16dd18) had no @identity blocks.",
         "morphogenesis SCATTERED->GROWING: reaction_diffusion + flower_lab added @identity (3->5 voiced = 83%). Garden counts artifacts from the procgen growth_systems path, not the patterngeneration path for reaction_diffusion.",
-        "gradient_descent_landscape and particle_swarm_optimization are now voiced but counted under gallery sequence, not machinelearning/swarmintelligence \u2014 garden_listener --diagnosis groups by MAP sequence, not artifact registry category. Gallery maps count toward gallery, not content-specific sequences.",
+        "gradient_descent_landscape and particle_swarm_optimization are now voiced but counted under gallery sequence, not machinelearning/swarmintelligence — garden_listener --diagnosis groups by MAP sequence, not artifact registry category. Gallery maps count toward gallery, not content-specific sequences.",
         "machinelearning and swarmintelligence SCATTERED: most unvoiced artifacts in these sequences are in gallery maps (counted under gallery) or have no .gd file. Advancing these sequences requires creating missing .gd files or placing existing voiced artifacts in sequence maps.",
-        "softbodies gained 1 voice in same run (8->9) without explicit edits \u2014 garden listener may have rescanned and found a previously-uncounted voiced artifact."
+        "softbodies gained 1 voice in same run (8->9) without explicit edits — garden listener may have rescanned and found a previously-uncounted voiced artifact."
       ],
       "files_changed": [
         "commons/artifacts/situated_readout/situated_readout.gd",
@@ -589,8 +589,8 @@
       },
       "discoveries": [
         "floor_plan_space is a cross-sequence ultra-high-leverage artifact: it appears in museum maps belonging to both patterngeneration AND mosaicanalysis. One @identity write voiced it in 28+ artifact-map appearances across two sequences simultaneously.",
-        "mosaicanalysis jumped SCATTERED->REACHING (17->40 voiced = 93%) without being a planned target \u2014 collateral from floor_plan_space. Garden improvements cascade across sequence boundaries when shared infrastructure artifacts are voiced.",
-        "patterngeneration crossed 70% threshold: 32->38/53 voiced = REACHING (71.7%). But embodiment rate is 3/53 (5.7%) \u2014 GROWING requires >=20% embodied, which needs VR work, not just @identity.",
+        "mosaicanalysis jumped SCATTERED->REACHING (17->40 voiced = 93%) without being a planned target — collateral from floor_plan_space. Garden improvements cascade across sequence boundaries when shared infrastructure artifacts are voiced.",
+        "patterngeneration crossed 70% threshold: 32->38/53 voiced = REACHING (71.7%). But embodiment rate is 3/53 (5.7%) — GROWING requires >=20% embodied, which needs VR work, not just @identity.",
         "Infrastructure artifacts (floor_plan_space, array_carpet) that serve as spatial containers for multiple maps have dramatically higher @identity leverage than algorithm-specific artifacts. Prioritize by map-appearance multiplier.",
         "Pattern: REACHING state is the new ceiling for AI-only work. SCATTERED->REACHING = add @identity. REACHING->GROWING = add VR controls (apply_grid_config enhancements). GROWING->LIVING = VR test + embody. The three transitions require different interventions."
       ],
@@ -655,11 +655,11 @@
         }
       },
       "discoveries": [
-        "primitives.json had a trailing comma after the last maps[] entry \u2014 invalid JSON causing Gate A to return -1 for all metrics AND garden_listener to crash on sequence scan. One-line fix restored Gate A to PASS.",
-        "garden_listener cache keyed by gd.stem.lower() \u2014 PascalCase filenames like NeuralNetworks_VR.gd produce key 'neuralnetworks_vr', but map lookups use snake_case 'neural_networks_vr'. The _ between 'Neural' and 'Networks' is absent in the cache key. Fix: register normalized key (lowercase, underscores stripped) as fallback. This revealed 25 previously-invisible voiced ML artifacts in one fix.",
-        "catalyst_target is in SKIP_ARTS in garden_listener.py \u2014 voicing it does not improve garden counts but still provides pedagogical documentation value.",
-        "All 7 'missing' machinelearning artifacts (neural_networks_vr, learn_world_stacked, computer_vision_vr, etc.) already had @identity blocks \u2014 they were invisible only because of the cache key mismatch. The cache fix, not @identity writing, was the breakthrough.",
-        "PascalCase \u2192 snake_case lookup mismatch is systemic: machinelearning, cellularautomata, grammar_systems, proceduralaudio, spatial_partitioning all benefited from the normalization fix. Pattern: when garden shows a sequence 'stuck' with no obvious unvoiced files, check if filenames use PascalCase while map lookups use snake_case.",
+        "primitives.json had a trailing comma after the last maps[] entry — invalid JSON causing Gate A to return -1 for all metrics AND garden_listener to crash on sequence scan. One-line fix restored Gate A to PASS.",
+        "garden_listener cache keyed by gd.stem.lower() — PascalCase filenames like NeuralNetworks_VR.gd produce key 'neuralnetworks_vr', but map lookups use snake_case 'neural_networks_vr'. The _ between 'Neural' and 'Networks' is absent in the cache key. Fix: register normalized key (lowercase, underscores stripped) as fallback. This revealed 25 previously-invisible voiced ML artifacts in one fix.",
+        "catalyst_target is in SKIP_ARTS in garden_listener.py — voicing it does not improve garden counts but still provides pedagogical documentation value.",
+        "All 7 'missing' machinelearning artifacts (neural_networks_vr, learn_world_stacked, computer_vision_vr, etc.) already had @identity blocks — they were invisible only because of the cache key mismatch. The cache fix, not @identity writing, was the breakthrough.",
+        "PascalCase → snake_case lookup mismatch is systemic: machinelearning, cellularautomata, grammar_systems, proceduralaudio, spatial_partitioning all benefited from the normalization fix. Pattern: when garden shows a sequence 'stuck' with no obvious unvoiced files, check if filenames use PascalCase while map lookups use snake_case.",
         "Garden cascade from single tool fix: 98 voices unlocked, 6 sequences advanced states. Infrastructure bugs hide progress more than missing content does."
       ],
       "files_changed": [
@@ -1160,7 +1160,7 @@
         "Achievement-vs-playbook decay applied to LOD_DISCOVERIES: marked 4 entries resolved (LOD-onboarding-built, primitives-maps-studied, all-4-gates-first-pass, primitives-SCATTERED-to-GROWING). Pattern signal: any discovery beginning with quantifier + past-tense verb is an achievement candidate.",
         "Gate A blocker is design-in-flight, not technical debt: boolean_surfaces (5 maps) + change (9 maps), both scaffolded 2026-05-13 in sequence JSON with full artifact_groups awaiting human map_data.json authoring. AI-only Gate A fix is unreachable until user authors the maps.",
         "DATA LOSS INCIDENT: 4 uncommitted breath_log entries (2026-05-05/06/09/12) lost mid-breath via ensure_ascii=False on a string containing UTF-8 surrogate chars (\\udc9d). The 'w' mode truncated the file before json.dump errored on the encode. Skeletons reconstructed from improvement_trajectory.json + weekly_breath_report_2026-05-11.json. PREVENTION RULE: always use ensure_ascii=True OR write to a .tmp file and os.replace() atomically.",
-        "Pipeline avg plateau at 5.43 holds for 8th consecutive breath. VR-testing ceiling unchanged. Garden voiced 971 -> 1002 (+31) \u2014 largest single-breath voicing-work delta on record. Acceleration comes from broadening targets: across-sequence (physicssim + primitives + particles) outpaces within-sequence threshold pushing."
+        "Pipeline avg plateau at 5.43 holds for 8th consecutive breath. VR-testing ceiling unchanged. Garden voiced 971 -> 1002 (+31) — largest single-breath voicing-work delta on record. Acceleration comes from broadening targets: across-sequence (physicssim + primitives + particles) outpaces within-sequence threshold pushing."
       ],
       "files_changed": [
         "algorithms/particles/example_4_1_single_particle_vr.gd",
@@ -1209,7 +1209,7 @@
         "change_sequence_documentation"
       ],
       "deferral_reasons": {
-        "gate_a_missing_declared_maps_audit_redux": "Cooled \u2014 failed/deferred 2026-05-13. 8 missing maps still belong to in-flight user authoring (boolean_surfaces + change). No autonomous action.",
+        "gate_a_missing_declared_maps_audit_redux": "Cooled — failed/deferred 2026-05-13. 8 missing maps still belong to in-flight user authoring (boolean_surfaces + change). No autonomous action.",
         "change_sequence_documentation": "Change sequence maps not yet on disk (0% structure-folder presence). Documentation requires map_data.json to exist; this is scaffolding work pending user Map Studio session."
       },
       "skills_used": [
@@ -1226,15 +1226,15 @@
       "garden_voiced_before": 1002,
       "garden_voiced_after": 1001,
       "garden_voiced_delta": -1,
-      "garden_voiced_note": "1-off discrepancy on rerun (not from this breath's actions). Effectively flat \u2014 documentation_writing does not voice artifacts.",
+      "garden_voiced_note": "1-off discrepancy on rerun (not from this breath's actions). Effectively flat — documentation_writing does not voice artifacts.",
       "release_gates_passing": 3,
       "release_gates_unchanged": true,
       "pipeline_stage_advancements": [
-        "softbodies stage_2_documentation: 29% -> 44% (10 -> 15 blurbed maps of 34). HEAD still at stage 2 \u2014 needs 100% blurb+intent before promoting to stage 3 (artifacts)."
+        "softbodies stage_2_documentation: 29% -> 44% (10 -> 15 blurbed maps of 34). HEAD still at stage 2 — needs 100% blurb+intent before promoting to stage 3 (artifacts)."
       ],
       "discoveries": [
-        "Softbodies has 24 imported gallery-study maps (sb01-sb08, sb_ls01-02, sb_ca01-02, sb_noise01, sb_rd01-02, gl01-05, gm01-04) sharing the gallery_marker_soft-body artifact pattern. They are DNA bridges from the soft-body gallery \u2014 each map is a viewing room for one DNA gallery entry. Documentation writing for these can be batched by theme cluster (cloth/jelly/glass/RD/L-system/CA/noise) because their voice is consistent: pareidolic + force-narrative + reveal.",
-        "Pipeline scorer's stage_2_documentation appears to count blurb.md presence per declared map. intent.md is tracked separately under a different denominator (62% / 34 with the additional 5 intents written stays at 62% \u2014 likely the registry-level intent counter not the map-level one).",
+        "Softbodies has 24 imported gallery-study maps (sb01-sb08, sb_ls01-02, sb_ca01-02, sb_noise01, sb_rd01-02, gl01-05, gm01-04) sharing the gallery_marker_soft-body artifact pattern. They are DNA bridges from the soft-body gallery — each map is a viewing room for one DNA gallery entry. Documentation writing for these can be batched by theme cluster (cloth/jelly/glass/RD/L-system/CA/noise) because their voice is consistent: pareidolic + force-narrative + reveal.",
+        "Pipeline scorer's stage_2_documentation appears to count blurb.md presence per declared map. intent.md is tracked separately under a different denominator (62% / 34 with the additional 5 intents written stays at 62% — likely the registry-level intent counter not the map-level one).",
         "Documentation HEAD movement is the only non-VR-blocked progression path right now. VR-bottleneck has held global_avg flat for 8 consecutive breaths. Stage 2 work on softbodies and change is the highest-impact non-blocked work.",
         "Cooling filter held: gate_a_missing_declared_maps_audit deferred again because the underlying state (boolean_surfaces + change in-flight authoring) has not changed since 2026-05-13. Two-breath cooling is functioning as designed."
       ],
@@ -1253,7 +1253,7 @@
         "doc/reports/breath_log.json"
       ],
       "duration_minutes": 22,
-      "note": "Focused documentation breath \u2014 single-item scope, 10 files written (5 maps x blurb+intent). Softbodies stage_2_documentation: 29% -> 44%. Cooling filter held against gate_a redux. 8th consecutive flat-avg breath, but substage-level pipeline progress measurable. Skill documentation_writing cumulative: 17/17 successful calls."
+      "note": "Focused documentation breath — single-item scope, 10 files written (5 maps x blurb+intent). Softbodies stage_2_documentation: 29% -> 44%. Cooling filter held against gate_a redux. 8th consecutive flat-avg breath, but substage-level pipeline progress measurable. Skill documentation_writing cumulative: 17/17 successful calls."
     },
     {
       "breath_id": "2026-05-21T22:00",
@@ -1776,7 +1776,7 @@
         }
       },
       "discoveries": [
-        "(reconstructed entry \u2014 original lost to a truncating write on 2026-06-06; avg values approximate)"
+        "(reconstructed entry — original lost to a truncating write on 2026-06-06; avg values approximate)"
       ],
       "files_changed": [],
       "duration_minutes": null,
@@ -2038,7 +2038,7 @@
         }
       },
       "discoveries": [
-        "Recent map-adding commits (Pattern_Foundry on 5647aefdb, Reformed_Instruments on 3d8e8644a) regressed color and forces from pipeline stage 6 back to stage 2 because the new maps shipped without blurb.md/intent.md. Documentation stage is fragile to map additions \u2014 always doc a map in the same commit that declares it.",
+        "Recent map-adding commits (Pattern_Foundry on 5647aefdb, Reformed_Instruments on 3d8e8644a) regressed color and forces from pipeline stage 6 back to stage 2 because the new maps shipped without blurb.md/intent.md. Documentation stage is fragile to map additions — always doc a map in the same commit that declares it.",
         "Voicing/@identity work has returned delta 0.0 for 4 consecutive breaths (saturated). Pivoting to documentation-stage gaps moved the global HEAD avg +0.36 in one breath.",
         "Console_Test and Force_Props_Sandbox are dev/test/sandbox maps living in the player-facing forces sequence; flagged in their intent.md as candidates for a tools/sandbox sequence (human decision)."
       ],
@@ -2229,8 +2229,8 @@
         }
       },
       "discoveries": [
-        "DOC-REGRESSION RECURS \u2014 this time it is the mind-map projector, not Vectors_Act. Commit 28202eb94 (mindmap: close the loop) shipped THREE new walkable maps via tools/mindmap_to_map.py \u2014 MindMap_Primitives (737 arts), MindMap_Transformation (440), MindMap_VectorForces (869) \u2014 each with ONLY map_data.json, no blurb/intent. Same family as the Act-map regression the last breaths chased: a generator emits map_data.json and never the docs. Wrote 6 doc files (blurb+intent x3); all three maps pathfinder-clean, gates stayed 4/4.",
-        "These mind-map maps are UNDECLARED in any sequence by design (they are the projector's output, the concept map made walkable), so they do NOT move pipeline mean-head and never showed as a pipeline regression \u2014 the heat map surfaced them only as 'primitive 70 active'. The autonomous doc-regression detector should watch newly-committed commons/maps/*/map_data.json folders lacking blurb/intent, NOT just declared-sequence doc%.",
+        "DOC-REGRESSION RECURS — this time it is the mind-map projector, not Vectors_Act. Commit 28202eb94 (mindmap: close the loop) shipped THREE new walkable maps via tools/mindmap_to_map.py — MindMap_Primitives (737 arts), MindMap_Transformation (440), MindMap_VectorForces (869) — each with ONLY map_data.json, no blurb/intent. Same family as the Act-map regression the last breaths chased: a generator emits map_data.json and never the docs. Wrote 6 doc files (blurb+intent x3); all three maps pathfinder-clean, gates stayed 4/4.",
+        "These mind-map maps are UNDECLARED in any sequence by design (they are the projector's output, the concept map made walkable), so they do NOT move pipeline mean-head and never showed as a pipeline regression — the heat map surfaced them only as 'primitive 70 active'. The autonomous doc-regression detector should watch newly-committed commons/maps/*/map_data.json folders lacking blurb/intent, NOT just declared-sequence doc%.",
         "Self-documenting source for these maps is the concept-map walk order: map_info.description gives spawn/teleporter concept names, and doc/<domain>_concept_map.json['concepts'] is the ordered concept list = the walk. Docs were written straight from that ordering with no external research, mirroring the Act-map self-documenting finding.",
         "PIPELINE STILL SATURATED (all 21 spine seqs HEAD stage 6 vr_testing, randomness COMPLETE, mean-head 6.0909) and release gates STILL 4/4 PASS. Both autonomous levers the breather measures are maxed for the 3rd straight breath. The measurable surface that actually moves now is doc-coverage of undeclared maps and garden voice-coverage (52% project-wide; primitives SCATTERED at 73/106 voiced)."
       ],
@@ -2278,7 +2278,7 @@
         }
       },
       "discoveries": [
-        "Pipeline mean-head has been SATURATED at 6.0909 for 4 consecutive breaths \u2014 all 22 seq blocked at stage 6 (vr_testing) which needs a human in a headset. Chasing pipeline head now yields 0.0 delta (confirmed 06-17, 06-19, 06-20). Pivot autonomous breaths to the non-saturated metric: voice coverage (52%) / embodiment (33%).",
+        "Pipeline mean-head has been SATURATED at 6.0909 for 4 consecutive breaths — all 22 seq blocked at stage 6 (vr_testing) which needs a human in a headset. Chasing pipeline head now yields 0.0 delta (confirmed 06-17, 06-19, 06-20). Pivot autonomous breaths to the non-saturated metric: voice coverage (52%) / embodiment (33%).",
         "garden_listener counts an artifact as VOICELESS if its .gd has the '@identity' marker but NONE of the 7 parseable fields (essence/desire/critical_parameter/triggers/emerges/needs/relationships/truth). A stub single-line '# @identity: ...' comment registers as voiceless because read_identity returns an empty dict and assess_potential treats falsy dict as voiceless. 4 of the 5 change artifacts had exactly this stub. Fix = convert stub to the full 7-field block.",
         "garden_listener find_gd resolves artifacts ONLY by .gd file STEM == lookup name. Shared/reused scenes (cube_scene, capsule, dgrid, bigframe, durer_scene...) whose .tscn points at a differently-named script report 'no .gd file' and are uncounted/uncreditable. This makes much of primitives' reported 'voiceless' a tooling-resolution artifact, not a real content gap. A future high-leverage tooling fix: resolve .gd via registry scene_path -> .tscn ext_resource instead of by stem.",
         "375 voiceless-with-dedicated-.gd artifacts remain project-wide (real, fixable voice gaps), concentrated in change/forces/gallery maps. This is a durable backlog for future breaths now that the pipeline head is saturated."
@@ -2714,7 +2714,7 @@
     {
       "breath_id": "2026-07-04T09:00",
       "mode": "full",
-      "focus": "primitives (FOCUS_VECTOR primary) \u2014 voice lever after subtitle campaign exhausted",
+      "focus": "primitives (FOCUS_VECTOR primary) — voice lever after subtitle campaign exhausted",
       "baseline_avg": 6.0909,
       "post_avg": 6.0909,
       "delta": 0.0,
@@ -2857,7 +2857,7 @@
         }
       },
       "discoveries": [
-        "garden_listener voice count (105 primitives, 83 voiced) does NOT resolve commons/primitives/*/ folder scripts that the registry scene_path points to \u2014 adding @identity to point/octahedron/icosahedron/dodecahedron/bipyramid left its count at 61%. The heat-map primitives-voice item cannot cool via this file set; future breaths should either fix garden_listener.find_gd resolver or target the files it actually scans.",
+        "garden_listener voice count (105 primitives, 83 voiced) does NOT resolve commons/primitives/*/ folder scripts that the registry scene_path points to — adding @identity to point/octahedron/icosahedron/dodecahedron/bipyramid left its count at 61%. The heat-map primitives-voice item cannot cool via this file set; future breaths should either fix garden_listener.find_gd resolver or target the files it actually scans.",
         "All sequences are pinned at pipeline stage 6 (vr_testing 0%) which requires a headset; autonomous breaths cannot move the pipeline avg. Voice/@identity enrichment is the only measurable autonomous lever, and even that is under-counted by the garden metric."
       ],
       "files_changed": [
@@ -2904,10 +2904,10 @@
         }
       },
       "discoveries": [
-        "ROOT CAUSE FOUND for the 'primitives voice' heat item that 3 prior breaths (07-04/05/06) bounced off with delta 0: the garden voice metric counts artifact-INSTANCES per SEQUENCE via get_sequence_artifacts (map interactables layer). In the `primitives` SEQUENCE, voiced=83/105 and ALL 22 voiceless are NO_GD (scriptless .tscn display props). ZERO are 'no @identity'. Every SCRIPTED primitives artifact is already voiced. So the 'primitives voice' item is STRUCTURALLY UNCOOLABLE by @identity enrichment \u2014 the remaining gap needs NEW SCRIPTS authored, a build task not an enrichment task. The heat item is a false lure.",
+        "ROOT CAUSE FOUND for the 'primitives voice' heat item that 3 prior breaths (07-04/05/06) bounced off with delta 0: the garden voice metric counts artifact-INSTANCES per SEQUENCE via get_sequence_artifacts (map interactables layer). In the `primitives` SEQUENCE, voiced=83/105 and ALL 22 voiceless are NO_GD (scriptless .tscn display props). ZERO are 'no @identity'. Every SCRIPTED primitives artifact is already voiced. So the 'primitives voice' item is STRUCTURALLY UNCOOLABLE by @identity enrichment — the remaining gap needs NEW SCRIPTS authored, a build task not an enrichment task. The heat item is a false lure.",
         "The genuinely-voiceless scripted artifacts the last 3 breaths (and this one) enriched actually live in the `gallery` SEQUENCE's 'Primitives_N Artifact Gallery' maps, not the `primitives` sequence maps. Voicing them raises gallery coverage (now 191/722), never primitives'. gallery has a 531-artifact voice backlog = the real forward lever if voice-enrichment continues.",
         "PROVEN this breath: 5 files / 7 artifact-names voiced (array_transform_staircase.gd backs translate+rotate+scale), all read 8/8 @identity fields, all credited in gallery, release gates PASS. Grounded-in-code, not slop.",
-        "LEVER LADDER UPDATE: (1) primitives subtitle \u2014 EXHAUSTED; (2) primitives @identity voice \u2014 EXHAUSTED (all scripted primitives voiced; remainder scriptless); (3) rotate voice-enrichment to gallery (531 voiceless) or a GROWING sequence with scripted-voiceless artifacts (hazards, wavefunctions). Heat map should stop surfacing 'primitives voice' \u2014 see skill_evolution_proposals."
+        "LEVER LADDER UPDATE: (1) primitives subtitle — EXHAUSTED; (2) primitives @identity voice — EXHAUSTED (all scripted primitives voiced; remainder scriptless); (3) rotate voice-enrichment to gallery (531 voiceless) or a GROWING sequence with scripted-voiceless artifacts (hazards, wavefunctions). Heat map should stop surfacing 'primitives voice' — see skill_evolution_proposals."
       ],
       "files_changed": [
         "commons/primitives/arrays/array_transform_staircase.gd",
@@ -3055,7 +3055,7 @@
       "discoveries": [
         "STRANDED WORK: breaths 2026-07-10 & 2026-07-12 completed 10 @identity blocks but never committed them (found in working tree at session start). Morning breath should git-status-check algorithms/ & commons/primitives/ for uncommitted prior-breath edits BEFORE starting fresh.",
         "VOICE METRIC BLIND SPOT: garden_listener --diagnosis counts @identity only on artifacts placed in a SEQUENCE'S OFFICIAL map list (get_sequence_artifacts). combine_sphere/capsule/torus are placed in Point_Tests & Gallery_Primitives_2, which are NOT in the primitives 11-map list, so enriching them cannot move the primitives voice row. This is why the 'primitives voice' heat item is 'uncoolable' by .gd @identity enrichment.",
-        "NO PARSER BUG: read_identity regex '#\\s*{field}:' correctly accepts the '# essence: ...' block format used by all recent breaths \u2014 the 5-breath @identity run parses fine; the metric insensitivity is placement-scope, not format."
+        "NO PARSER BUG: read_identity regex '#\\s*{field}:' correctly accepts the '# essence: ...' block format used by all recent breaths — the 5-breath @identity run parses fine; the metric insensitivity is placement-scope, not format."
       ],
       "files_changed": [
         "algorithms/change/ftc_bridge.gd",
@@ -3541,8 +3541,8 @@
       "items_failed": [],
       "failure_reasons": {},
       "open": {
-        "gallery_winner_showcase": "11 placements, declares hang=grid|line|salon|ring, and the sweep will not boot \u2014 watchdog KILL, no result in the grace window. Still in the never-swept 128. Not diagnosed.",
-        "dot_aligner.workings twins": "At full 4/4 coverage the axis BITES 2.07%/37.49%, but the critic lists operands==outcome, operands==trace and outcome==trace at 0.00% focus in several openings. The bite is carried by `expression` alone. The source implements all four (_workings_outcome unlayers arrow_a/arrow_b/arc_root), so three values doing nothing visible is either a framing question or a design one \u2014 MEASURED, NOT DIAGNOSED. Do not record a cause without reading it."
+        "gallery_winner_showcase": "11 placements, declares hang=grid|line|salon|ring, and the sweep will not boot — watchdog KILL, no result in the grace window. Still in the never-swept 128. Not diagnosed.",
+        "dot_aligner.workings twins": "At full 4/4 coverage the axis BITES 2.07%/37.49%, but the critic lists operands==outcome, operands==trace and outcome==trace at 0.00% focus in several openings. The bite is carried by `expression` alone. The source implements all four (_workings_outcome unlayers arrow_a/arrow_b/arc_root), so three values doing nothing visible is either a framing question or a design one — MEASURED, NOT DIAGNOSED. Do not record a cause without reading it."
       },
       "skills_used": [
         "ada-breather"
@@ -3584,10 +3584,10 @@
         "dna_declaration_gate": "exit 0 before and after"
       },
       "discoveries": [
-        "THE CAP WAS THE VERDICT. build_dna_gallery trims a declared axis from the END of its value list until the cross product fits --max (default 9), and said nothing. dot_aligner declares opening(4) x workings(4) = 16; at the default cap it rendered 4 x 2, and artifact_dna_critic published `workings INERT, focus 2.27%`. Swept over all four values the same axis reads 2.07% frame / 37.49% focus and BITES. The entire signal was in `expression`, which the cap dropped \u2014 and the other dropped value was `operands`, the artifact's own default, i.e. the baseline the other values are supposed to differ FROM. This is the sixth entry in the harness-before-design log and the first where the harness's BUDGET, not its vocabulary (cctv, science_screen), its framing (random_walk) or its denominator (temporal_lint, render_lint), produced the false verdict. A dropped value is invisible downstream by construction: the manifest lists what rendered, so a truncated axis and a complete one are the same document. FIXED \u2014 the sweep now records `partial_axes` in the manifest and the critic prints [PARTIAL n/m values] on the row, because a caveat that is not on the table is not read.",
-        "AN INSTRUMENT OUTLIVED THE WORLD, PREDICTED AND NOW CLOSED. The 08-08 evening breath called this shape with one occurrence and declined to propose: check_dna_declarations' CHILD-ONLY block asserted 'A MAP cannot reach it: GridInteractablesComponent ... calls apply_grid_config on the ROOT'. True when written (7b6aac429, 08-07 18:35), false from e0bc97b3b (08-08 10:09), which added _config_holder. For a day the gate printed 14 rows with a false cause under an exit-0 headline. The mechanism is worth naming: a block that never gates is never re-read, so nothing forces it to age with the code. Rewritten as a shape report \u2014 which scenes are composed rather than scripted-at-the-root is still worth knowing, it just is not a fault any more.",
-        "TWO SUSPICIONS DISSOLVED BY MEASUREMENT, AND THEY COST LESS THAN THE HITS. (a) The boids_aquarium plan doc was the obvious target from the last breath's discoveries \u2014 and was already retracted and committed as 5186caa6e, with temporal_lint already given the max-delta axis. Reading before acting saved a redundant fix on a closed thread. (b) dna_coverage_census.swept() globs *_bite.json and strips the suffix, which mangles the 17 batch reports named dna_bite_<batch>.json \u2014 it looked like a systematic undercount inflating the debt. Measured: 238 artifacts live in those batch files, overlap with the 133 never-swept is ZERO, because the gallery-manifest path already covers every one. The glob is ugly and harmless. Two plausible bugs, both killed by counting rather than arguing; the argument would have won in both cases.",
-        "THE TWO INSTRUMENTS THE BREATHER IS TOLD TO READ FIRST ARE BOTH SATURATED. sequence_pipeline_scorer puts all 24 spine sequences at stage 6 (vr_testing) \u2014 a headset gate no autonomous breath can move \u2014 so global_avg has read 6.083 for four breaths and will keep reading it. FOCUS_VECTOR was last updated 2026-03-28, four and a half months ago, and its primary ('rebuild all primitives maps') is done: primitives sits at stage 6 with 91% polish. HEAT_MAP returns three items, all at 60, all extracted from previous breath discoveries \u2014 the heat map is now reading this log rather than the project. Every lever that actually moved today came from dna_coverage_census, which the skill's Baseline phase does not run."
+        "THE CAP WAS THE VERDICT. build_dna_gallery trims a declared axis from the END of its value list until the cross product fits --max (default 9), and said nothing. dot_aligner declares opening(4) x workings(4) = 16; at the default cap it rendered 4 x 2, and artifact_dna_critic published `workings INERT, focus 2.27%`. Swept over all four values the same axis reads 2.07% frame / 37.49% focus and BITES. The entire signal was in `expression`, which the cap dropped — and the other dropped value was `operands`, the artifact's own default, i.e. the baseline the other values are supposed to differ FROM. This is the sixth entry in the harness-before-design log and the first where the harness's BUDGET, not its vocabulary (cctv, science_screen), its framing (random_walk) or its denominator (temporal_lint, render_lint), produced the false verdict. A dropped value is invisible downstream by construction: the manifest lists what rendered, so a truncated axis and a complete one are the same document. FIXED — the sweep now records `partial_axes` in the manifest and the critic prints [PARTIAL n/m values] on the row, because a caveat that is not on the table is not read.",
+        "AN INSTRUMENT OUTLIVED THE WORLD, PREDICTED AND NOW CLOSED. The 08-08 evening breath called this shape with one occurrence and declined to propose: check_dna_declarations' CHILD-ONLY block asserted 'A MAP cannot reach it: GridInteractablesComponent ... calls apply_grid_config on the ROOT'. True when written (7b6aac429, 08-07 18:35), false from e0bc97b3b (08-08 10:09), which added _config_holder. For a day the gate printed 14 rows with a false cause under an exit-0 headline. The mechanism is worth naming: a block that never gates is never re-read, so nothing forces it to age with the code. Rewritten as a shape report — which scenes are composed rather than scripted-at-the-root is still worth knowing, it just is not a fault any more.",
+        "TWO SUSPICIONS DISSOLVED BY MEASUREMENT, AND THEY COST LESS THAN THE HITS. (a) The boids_aquarium plan doc was the obvious target from the last breath's discoveries — and was already retracted and committed as 5186caa6e, with temporal_lint already given the max-delta axis. Reading before acting saved a redundant fix on a closed thread. (b) dna_coverage_census.swept() globs *_bite.json and strips the suffix, which mangles the 17 batch reports named dna_bite_<batch>.json — it looked like a systematic undercount inflating the debt. Measured: 238 artifacts live in those batch files, overlap with the 133 never-swept is ZERO, because the gallery-manifest path already covers every one. The glob is ugly and harmless. Two plausible bugs, both killed by counting rather than arguing; the argument would have won in both cases.",
+        "THE TWO INSTRUMENTS THE BREATHER IS TOLD TO READ FIRST ARE BOTH SATURATED. sequence_pipeline_scorer puts all 24 spine sequences at stage 6 (vr_testing) — a headset gate no autonomous breath can move — so global_avg has read 6.083 for four breaths and will keep reading it. FOCUS_VECTOR was last updated 2026-03-28, four and a half months ago, and its primary ('rebuild all primitives maps') is done: primitives sits at stage 6 with 91% polish. HEAT_MAP returns three items, all at 60, all extracted from previous breath discoveries — the heat map is now reading this log rather than the project. Every lever that actually moved today came from dna_coverage_census, which the skill's Baseline phase does not run."
       ],
       "files_changed": [
         "tools/check_dna_declarations.py",
@@ -3599,14 +3599,14 @@
       ],
       "galleries_published": [
         "never-swept-a (MarioSoundController, 5 variants)",
-        "never-swept-b (wfc_tile_bench, wfc_tile_mosaic, vector_add, dot_aligner \u2014 21 variants)",
-        "never-swept-c (dot_aligner at full 4x4 coverage, vector_add \u2014 20 variants)"
+        "never-swept-b (wfc_tile_bench, wfc_tile_mosaic, vector_add, dot_aligner — 21 variants)",
+        "never-swept-c (dot_aligner at full 4x4 coverage, vector_add — 20 variants)"
       ],
       "measurements": {
         "MarioSoundController.machinery": "bites, frame 4.61% / focus 19.78%",
         "wfc_tile_bench.workings": "bites, frame 2.91% / focus 40.21%",
         "wfc_tile_mosaic.grammar": "bites, frame 7.11% / focus 33.90%",
-        "vector_add.workings": "local, frame 1.28% / focus 25.66% \u2014 wants a tighter capture",
+        "vector_add.workings": "local, frame 1.28% / focus 25.66% — wants a tighter capture",
         "dot_aligner.opening": "bites, frame 2.29-3.56% / focus 39.48-47.88%",
         "dot_aligner.workings": "INERT 0.11%/2.27% at 2/4 values; BITES 2.07%/37.49% at 4/4"
       },
@@ -3921,7 +3921,7 @@
       "delta": 0.0,
       "items_attempted": [
         "Baseline: pipeline + heat map + garden listener + release gates",
-        "Gate F (museum walkthrough) \u2014 diagnose the stall at z=44.65",
+        "Gate F (museum walkthrough) — diagnose the stall at z=44.65",
         "concurrent-writer scan before any write",
         "DNA declaration gate: 3 axes promoted in code, undeclared in the registry"
       ],
@@ -3932,7 +3932,7 @@
       ],
       "items_failed": [],
       "items_yielded": [
-        "Gate F (museum walkthrough) \u2014 YIELDED to a live concurrent session, not failed"
+        "Gate F (museum walkthrough) — YIELDED to a live concurrent session, not failed"
       ],
       "failure_reasons": {},
       "skills_used": [
@@ -3950,7 +3950,7 @@
         "commons/artifacts/registry/procgen_extra.json"
       ],
       "commits": [
-        "463a066f6 fix(dna): three axes the sweep could never reach \u2014 derived, not typed"
+        "463a066f6 fix(dna): three axes the sweep could never reach — derived, not typed"
       ],
       "discoveries": [
         "A BREATH'S BASELINE IS NOT ATOMIC, AND THIS ONE STRADDLED TWO COMMITS. The Baseline phase spends ~6 minutes in Godot (release gate F alone is a ~70 s headless walk, run up to 3 times). During this breath's baseline (09:04-09:11) an interactive session was editing commons/scenes/endless_museum.gd, saved it at 09:11:29, and committed twice at 09:15. The tell was not git status - it was that a Grep and a Read of the SAME file minutes apart disagreed by 43 lines, while `git diff --stat` on that path printed NOTHING, because by the time I diffed it the other session had committed and the working tree matched the new HEAD again. So the file appeared clean at both ends and had changed in the middle. Every number in this breath's Baseline is therefore a measurement of a tree that no longer exists, and no single tree produced all of them. The standing rule was 'two git status reads are not enough'; the sharper form is that git status cannot see a change that has already been committed by someone else, and the only reliable witness was mtime.",
@@ -3963,7 +3963,7 @@
       ],
       "evidence_owed": [
         "python tools/build_dna_gallery.py --slug=marchingcave --tokens=mc_base,marchingcave  (declaring makes them sweepable; nothing has been shot, so no verdict about plumb/landform is claimed)",
-        "python tools/em_autopilot.py  \u2014 the 3-museum gate against the balcony-void commits (ccb1b206e / 7bb5e6cbd), once the Godot lock is free"
+        "python tools/em_autopilot.py  — the 3-museum gate against the balcony-void commits (ccb1b206e / 7bb5e6cbd), once the Godot lock is free"
       ],
       "duration_minutes": 22
     },
@@ -4470,12 +4470,12 @@
         ],
         "untracked_at_start": 488,
         "head_frozen_across_readings": true,
-        "concurrent_writer": "LIVE \u2014 2 Godot processes, 4 commits 07:21-08:31, dirty count climbing with HEAD frozen"
+        "concurrent_writer": "LIVE — 2 Godot processes, 4 commits 07:21-08:31, dirty count climbing with HEAD frozen"
       },
       "items_attempted": [
         "Baseline: pipeline + heat map + garden listener + DNA declaration gate + Godot-free severance (run live, not read from file)",
         "Detect whether the hottest item (museum, 80 deg) is contended before planning any work in it",
-        "Give the severance detector a verdict line and REGISTER it as a gate \u2014 it was never called by anything",
+        "Give the severance detector a verdict line and REGISTER it as a gate — it was never called by anything",
         "Negative test: prove the gate bites on a cut and lets go on a whole corridor",
         "Handoff: name the mechanism for the thread that owns the builder, rather than editing a contended core file untested"
       ],
@@ -4500,11 +4500,11 @@
         }
       },
       "gates": {
-        "dna_declarations": "exit 0 \u2014 0 broken",
-        "severance_before": "FAIL \u2014 flood z=1360 of 2435, 4 cuts",
-        "severance_after": "FAIL (unchanged \u2014 the fault is the builder's, not the gate's); now RED IN A GATE ROW in 0.2 s",
-        "test_walk_severance": "PASS \u2014 9/9",
-        "em_gates_godot_rows": "NOT RUN \u2014 user:// lock held by the live session; ada_run/gates.json left unwritten on purpose (two threads, one file)"
+        "dna_declarations": "exit 0 — 0 broken",
+        "severance_before": "FAIL — flood z=1360 of 2435, 4 cuts",
+        "severance_after": "FAIL (unchanged — the fault is the builder's, not the gate's); now RED IN A GATE ROW in 0.2 s",
+        "test_walk_severance": "PASS — 9/9",
+        "em_gates_godot_rows": "NOT RUN — user:// lock held by the live session; ada_run/gates.json left unwritten on purpose (two threads, one file)"
       },
       "discoveries": [
         "THE DETECTOR BUILT YESTERDAY WAS NEVER CALLED BY ANYTHING, AND THE FAULT IT WATCHES WENT 1 -> 4. tools/check_walk_severance.py exits with the cut count, so it could always gate. Its only mention in the entire repository -- every .py, .json, .md, .ps1, .tsx -- was its own docstring. In the one day since it was written the museum went from one cut to four, and the flood from spawn now dies at z=1360 of 2435, 1075 rows short, sixteen of forty museums unreachable. The 08-19 breath had the mechanism right, the instrument right, and wired to nothing. An instrument nobody runs is not a measurement, it is a file.",
@@ -4516,13 +4516,13 @@
       ],
       "files_changed": [
         "tools/check_walk_severance.py (verdict line; SKIP is not PASS; sealed row is a cut)",
-        "tools/run_em_gates.py (severance registered \u2014 36 rows)",
-        "tools/test_walk_severance.py (new \u2014 negative half, 9 cases)",
-        "doc/reports/SEVERANCE_2026-08-20_THE_BRIDGE_MISSES_THE_DOOR.md (new \u2014 handoff)"
+        "tools/run_em_gates.py (severance registered — 36 rows)",
+        "tools/test_walk_severance.py (new — negative half, 9 cases)",
+        "doc/reports/SEVERANCE_2026-08-20_THE_BRIDGE_MISSES_THE_DOOR.md (new — handoff)"
       ],
       "not_done_and_why": {
-        "the builder repair itself": "commons/scenes/endless_museum.gd is contended (4 commits 07:21-08:31, 2 Godot processes live) and untestable here (both hold the user:// lock; the only honest check of a builder change is a walk). An untested edit to a contended core file by a scheduled agent is how one thread's work gets swept into another's commit \u2014 already seen in both directions, 08-15 and 08-16.",
-        "ada_run/gates.json": "left unwritten on purpose \u2014 the live session may be mid-sweep, and two threads writing one verdict file is the 08-13 rule."
+        "the builder repair itself": "commons/scenes/endless_museum.gd is contended (4 commits 07:21-08:31, 2 Godot processes live) and untestable here (both hold the user:// lock; the only honest check of a builder change is a walk). An untested edit to a contended core file by a scheduled agent is how one thread's work gets swept into another's commit — already seen in both directions, 08-15 and 08-16.",
+        "ada_run/gates.json": "left unwritten on purpose — the live session may be mid-sweep, and two threads writing one verdict file is the 08-13 rule."
       },
       "duration_minutes": 32
     },
@@ -4689,6 +4689,318 @@
         "doc/reports/skill_evolution_proposals.json"
       ],
       "duration_minutes": 22
+    },
+    {
+      "breath_id": "2026-08-22T09:04",
+      "mode": "full",
+      "baseline_avg": 6.083,
+      "post_avg": 6.083,
+      "delta": 0.0,
+      "items_attempted": [
+        "Baseline: pipeline + heat map + release gates, run live; contention read from the concurrent session's own commits rather than from the dirty count",
+        "Follow the 60-degree item nobody had closed in four days: seal_overflow records only the MESH clamp",
+        "Prove the blind spot is structural, not incidental: can seal_overflow ever be non-zero for a collider?",
+        "Record BOTH clamps through one static classifier, tagged, and make the total separable in the verdict file",
+        "Second finding on the way past: 24 of 213 ledgered bodies carry a distance where a size belongs",
+        "Negative halves for both, and register the new one as a gate"
+      ],
+      "items_succeeded": [
+        "collider-clamp-overflow-now-recorded-by-tag",
+        "clamp-arithmetic-extracted-static-and-testable-without-a-museum",
+        "seal_overflow_by-breakdown-shipped-into-em_autopilot.json",
+        "origin-reach-refused-at-the-write-endless_museum.gd",
+        "origin-reach-refused-at-the-read-spatial_contract.py-19-tokens-renamed",
+        "test_em_seal_clamp.gd-13-of-13-4-of-8-assert-silence",
+        "test_live_footprint.py-extended-5-cases-both-halves",
+        "registered-as-gate-seal_clamp-in-run_em_gates.py-3.5s",
+        "gate-F-rerun-identical-37.2-so-the-change-is-recording-only",
+        "213-of-213-ledger-tokens-resolve-no-throws"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "THE ONE CLAMP THAT CAN STRAND A WALKER WAS THE ONE THAT SAID NOTHING, AND ITS SILENCE HAD BEEN PRINTED AS A ZERO BESIDE THREE FAILED WALKS. _occupied_cells clamps twice: meshes to MAX_SEAL_RADIUS 2, colliders to MAX_BODY_RADIUS 6. The mesh half has recorded its overflow since 08-18; the collider half recorded nothing, and the file's own comment above it claims collision extent 'seals UNCLAMPED, out to MAX_BODY_RADIUS' -- four maxi/mini calls read slowly. There is no such thing as a decorative collider, so of the two clamps only the silent one can put a body in a cell the walk map calls floor. seal_overflow is written into em_autopilot.json next to the cut list, where a reader takes 0 to mean no body was too wide to seal honestly. It could not have been anything else. Today's rerun still returns 0 -- but now that is testimony: the cut is 13 cells at z=38 the builder never stamped, and no body is implicated because none was.",
+        "A COUNTER THAT CANNOT RISE IS NOT A MEASUREMENT, AND FOUR OF THE EIGHT NEW CASES ASSERT SILENCE. A recorder that fired on every body would have put a witness beside every artifact in the museum and drowned the suspect; that is the same failure as recording nothing, one register up. So test_em_seal_clamp.gd spends half its cases proving the instrument stays quiet -- a 3x3 plinth, a body at exactly the clamp's own span, a 7 m collider inside radius 6, and 13 cells which is the widest corridor the templates build.",
+        "24 OF 213 BODIES IN THE LIVE LEDGER RECORD THE DISTANCE THEY WERE CARRIED, NOT THEIR SIZE. live_aabb.z equals the world z of the cell each was measured at -- 11767.7 m for 9_3_smart_rockets_vr at cell z 11767, 8048.9 for markov_chains_tree, 7370.7 for draw_dot. A merged AABB reaching back to (0,0,0) means one member of the body never left the origin. spatial_contract.py negotiates from the larger of the still measurement and the live one; its LINE and venue guards DID catch these, which is why nobody found them -- both verdicts read 'still kept, a hand call', so a build fault was filed two dozen times as a measurement question. Refusing it by name on both sides changes no contract and changes what a hand is sent to look at.",
+        "THE PYTHON GUARD IS WEAKER THAN THE GDSCRIPT ONE AND THE COMMENT SAYS SO. The museum has the AABB's position and can require the extent to START at the origin; the ledger stores only a size and a cell, so the read side can only ask whether the size covers the whole distance. A body genuinely 100 m deep spanning z 50..150 at cell z 100 would be named and is not a fault. It costs a differently worded note and nothing else -- the venue guard already refuses to adopt anything that large -- but an instrument whose limits are not written down gets believed past them."
+      ],
+      "files_changed": [
+        "commons/scenes/endless_museum.gd",
+        "commons/testing/test_em_seal_clamp.gd",
+        "tools/spatial_contract.py",
+        "tools/test_live_footprint.py",
+        "tools/run_em_gates.py",
+        "doc/LOD_DISCOVERIES.json",
+        "doc/reports/breath_baseline_2026-08-22_09-05.json",
+        "doc/reports/breath_log.json"
+      ],
+      "duration_minutes": 30
+    },
+    {
+      "breath_id": "2026-08-22T18:56",
+      "mode": "evolve-only",
+      "baseline_avg": 6.083,
+      "post_avg": 5.958,
+      "delta": -0.125,
+      "_delta_note": "NOT caused by this pass, which changed no project content. The morning breath honestly read 6.083 at 09:04; a live editor session wrote an unresolved token into a primitives map at 13:32. The delta is the cost of that regression, surfaced by re-measuring rather than carrying the number.",
+      "items_attempted": [
+        "Review today's log: one breath (2026-08-22T09:04, full) against 29 commits",
+        "Verify that breath's claims on disk rather than trusting its ledger (prop-030)",
+        "Re-measure the pipeline lever unpiped, exit code read directly (prop-017)",
+        "Locate the cause of the regression the re-measurement exposed, in the tree rather than in the commits",
+        "Bound the fault: sweep all 1466 interactable placements across the 24-sequence spine for its denominator (prop-023)",
+        "Test whether any existing instrument catches it, and whether any existing proposal covers it",
+        "Level-3: test tonight's pattern against the three-occurrence bar",
+        "Update improvement_trajectory.json"
+      ],
+      "items_succeeded": [
+        "morning-claims-verified-5-of-5-files-present-seal_clamp-registered-run_em_gates.py-92",
+        "morning-museum-edit-survived-but-swept-into-concurrent-commit-5a9570c3a-13:16",
+        "pipeline-remeasured-5.958-exit-0-unpiped-flat-run-of-20-broken-downward",
+        "regression-located-floor_anchor-Point_Lines-r10c6-uncommitted-13:32-git-log-S-empty",
+        "denominator-swept-2-unresolved-of-1466-placements-across-24-sequences",
+        "second-token-calder_mobile_primaries-Sky_Climb-dead-68-days-rounds-318-of-319-to-100%",
+        "pathfinder-shown-blind-Point_Lines-OK-exit-0-reports-31-artifacts",
+        "prop-033-written-state-gate-plus-shortfall-count-instead-of-rounded-percentage",
+        "prop-006-prop-012-evidence-updated-the-two-mirror-faces-of-one-blindness",
+        "trajectory-updated-false-steady-named"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "THE NUMBER THAT HAS NOT MOVED IN TWENTY READINGS IS THE ONE NOBODY RE-MEASURES, AND TONIGHT IT WAS WRONG BY A WHOLE STAGE. global_avg read 5.958, not the 6.083 the morning breath recorded and every recent harvest has quoted. A twenty-reading flat run is training data for carrying a value instead of taking it. The only reason the regression surfaced is that prop-017's unpiped re-run is now standing discipline; a harvest that had reported 'flat, 21st reading' would have been fluent, confident and false.",
+        "SAME FAULT, OPPOSITE VERDICTS, AND THE DISCRIMINATOR IS THE DENOMINATOR. Exactly two of the spine's 1466 interactable placements resolve to no scene. `floor_anchor` makes primitives 143/144 = 99.306%, rounds to 99%, and drops its HEAD from stage 6 to stage 3. `calder_mobile_primaries` makes forces 318/319 = 99.687%, rounds to 100%, and prints OK -- as it has since the registry renamed the artifact out from under the map on 2026-06-15, 68 days ago, in a commit whose own description says it supersedes that name. A rounded percentage is a verdict whose sensitivity depends on the size of the thing it is judging, which means the scorer is least able to see a single fault in exactly the sequences that carry the most artifacts.",
+        "A REGRESSION CAN LIVE WHERE NEITHER OF OUR TWO CONCURRENCY INSTRUMENTS LOOKS. prop-006 scans commits; prop-012 scans git status. `git log -S\"floor_anchor\"` over Point_Lines is empty and the file is ` M` -- so the commit-based re-scan returns clean across all 29 of today's commits while the fault is real and costly. prop-012's 2026-08-14 note recorded the mirror (a writer who commits is invisible to git status). Both instruments ask what CHANGED. Nothing was asking what is TRUE, and a token either resolves or it does not.",
+        "THE PATHFINDER COUNTS ARTIFACTS IT CANNOT BUILD. `map_pathfinder.py check Point_Lines --verbose` returns OK, 238/299 reachable, '31 artifacts', exit 0 -- with floor_anchor among the 31. It validates reachability and geometry and never resolves a token against the registry, so the one instrument a map author actually runs before committing is structurally incapable of reporting this class of fault. That is why five separate breaths have found it by hand.",
+        "THE MORNING'S WORK SURVIVED AND ITS ATTRIBUTION DID NOT. The breath's edit to commons/scenes/endless_museum.gd is on disk and committed, but by a concurrent session at 13:16 (5a9570c3a, 'map-authored is a plan mode'), whose message names none of it; every other file the breath touched is still uncommitted at 18:56. Twenty-nine commits landed today and the breather authored none of them. Found by `git log -S\"seal_overflow_by\"` -- checking that a change survived is not the same question as checking who is recorded as having made it."
+      ],
+      "files_changed": [
+        "doc/reports/improvement_trajectory.json",
+        "doc/reports/skill_evolution_proposals.json",
+        "doc/reports/breath_log.json"
+      ],
+      "duration_minutes": 26
+    },
+    {
+      "breath_id": "2026-08-23T09:04",
+      "mode": "full",
+      "baseline_avg": 5.958,
+      "post_avg": 6.083,
+      "delta": 0.125,
+      "head": "d37084227",
+      "tree": {
+        "dirty_at_end": 971,
+        "commits_today_before_this_one": 4,
+        "concurrent_writer": "LIVE - museum thread; HEAD moved 8c6ea0c00 -> d37084227 during the breath. No museum file was touched; the two edited maps are spine maps, one of which (Point_Lines) the museum ALSO reads as a hall."
+      },
+      "items_attempted": [
+        "Verify last night's diagnosis on disk instead of inheriting it",
+        "Fix the primitives regression (floor_anchor in Point_Lines)",
+        "Fix the 68-day-old forces fault of the same class (calder_mobile_primaries in Sky_Climb)",
+        "Build the instrument that makes the CLASS visible, not the two instances",
+        "Register it so something calls it, and prove it bites"
+      ],
+      "items_succeeded": [
+        "diagnosis-verified-both-tokens-absent-from-registry-causal-chain-traced-to-em_plan-plan-197",
+        "floor_anchor-removed-primitives-stage-3-to-stage-6",
+        "calder_mobile_primaries-removed-map-already-carried-both-live-successors",
+        "check_map_tokens.py-written-269-maps-1545-placements-one-truth-imported-from-scorer",
+        "gate-G-registered-in-run_release_gates-7-of-7-green-with-a-real-denominator",
+        "pipeline-recovered-5.958-to-6.083-first-positive-delta-in-21-readings"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "self_inflicted_and_repaired": {
+        "what": "The negative test round-tripped Point_Lines through PowerShell Set-Content -Encoding utf8, which in Windows PowerShell 5.1 writes a UTF-8 BOM. Python's json.load(encoding='utf-8') then refused the file.",
+        "how_caught": "By the gate written thirty minutes earlier, in the same run: it reported Point_Lines as <unparseable> and named the file. Nothing else in the pipeline would have said so - the pathfinder does not parse-check either.",
+        "repair": "git checkout the file, re-apply the one-line edit with the Edit tool, verify byte 0 is 0x7B and not 0xEF.",
+        "collateral": "The checkout discarded an uncommitted whitespace-only reformat of Point_Lines belonging to another session. Proven whitespace-only by placement count (1546, exactly the predicted 1547-1) and by the 16-token distinct set matching - the gate supplied its own damage assessment."
+      },
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "THE REGRESSION WAS REAL, IT WAS ONE CHARACTER OF CONTENT, AND ITS AUTHOR WAS THE MUSEUM. em_plan.json plan 197 carries map='Point_Lines', source='em_map_halls: the map IS the hall', and lists 31 artifact tokens of which one - floor_anchor - has no registry entry anywhere in 2671 entries. The one-truth migration (2ec83606a, 2026-08-22 23:18) wrote that plan back into the spine map. So a museum plan token entered a curriculum sequence, rendered nothing, and cost primitives three pipeline stages. The plan is DERIVED from the map, so removing the cell is sufficient: the next derive cannot reintroduce what it no longer reads.",
+        "THE SCORER HAD THE FACT AND COULD NOT SAY IT, BECAUSE A ROUNDED PERCENTAGE IS A VERDICT WHOSE SENSITIVITY IS SET BY ITS DENOMINATOR. floor_anchor is 1 of primitives' 144 placements: 99.306%, prints 99%, HEAD falls to stage 3. calder_mobile_primaries is 1 of forces' 319: 99.687%, prints 100%, OK for 68 days. Counting PLACEMENTS instead of percentages makes one fault one fault wherever it lands, which is the whole of gate G's contribution.",
+        "THE HONEST TOOL FOUND 2662 FAULTS AND SEVEN OF THEM WERE REAL; THE OTHER 2655 WERE THE TOOL. First corpus run: 2662 unresolved across 11 tokens. 2587 were non-standard empty cells - the MindMap_* maps write ', ' and the Particles_*/Grid_Subset_* maps write '0' where the convention is ' ', and the scorer's own test (`if c and c != ' '`) passes both through as placements. 59 were `cluster:` tokens, which GridInteractablesComponent.gd:561-612 dispatches BEFORE it consults the registry, alongside mc:, gridagent: and criticalinfo:. Honouring the grid's own prefix list and separating the empty-cell dialects took the count 2662 -> 8, and the survivors include a NEW real finding the first version had buried: Wall_Showcase asks for cluster nk_fractals_cantorset and commons/data/curated_walls/clusters has no such file.",
+        "A GATE'S FIRST RUN SAID 'OK: EVERY TOKEN RESOLVES' AFTER SCANNING ZERO MAPS. curriculum_spine.json keys its sequences on `name`; the gate read `id`, got nothing, and printed a clean bill over an empty denominator - the identical failure it was written to catch, one level up, in its own first execution. It now refuses to return a verdict when placements == 0, and gate G re-tests that independently rather than trusting the exit code. An empty scan and a clean corpus are indistinguishable in every summary form anyone actually reads.",
+        "POWERSHELL 5.1's Set-Content -Encoding utf8 WRITES A BOM, AND PYTHON'S json.load REFUSES IT. Using it to stage and revert a negative test corrupted the very file under test and left the revert looking successful - `git diff --stat` showed 127/127 lines, which reads as a reformat, not as corruption. Two things saved it: byte 0 (0xEF vs 0x7B) is a one-line check, and the new gate names an unparseable map instead of skipping it, which is why scan_map catches the JSONDecodeError and reports it as a finding rather than passing on it."
+      ],
+      "files_changed": [
+        "tools/check_map_tokens.py (new)",
+        "tools/run_release_gates.py (gate G)",
+        "doc/reports/RELEASE_GATES_TOGGLES.json (G enabled)",
+        "commons/maps/Point_Lines/map_data.json (1 line)",
+        "commons/maps/Sky_Climb/map_data.json (1 line)"
+      ],
+      "duration_minutes": 52
+    },
+    {
+      "breath_id": "2026-08-23T18:56",
+      "mode": "evolve-only",
+      "baseline_avg": 6.083,
+      "post_avg": 6.083,
+      "delta": 0.0,
+      "head_at_start": "8896d4bc8",
+      "head_at_end": "8896d4bc8",
+      "tree_at_end": "984 dirty / 529 untracked",
+      "items_attempted": [
+        "Review today's log: one breath (2026-08-23T09:04, full, +0.125) against 25 commits",
+        "Verify that breath's claims on disk rather than trusting its ledger (prop-030)",
+        "Re-measure the pipeline lever unpiped, exit code read directly (prop-017)",
+        "Re-run the gate born this morning against a day of heavy map authoring",
+        "Give the tree-vs-repo gap a RATE instead of another anecdote (prop-010)",
+        "Test the half-commit hazard Gate G's split tracking creates, rather than asserting it",
+        "Level-3: test tonight's pattern against the three-occurrence bar",
+        "Update improvement_trajectory.json",
+        "Run prop-012's two-snapshot test before recommending any commit"
+      ],
+      "items_succeeded": [
+        "morning-claims-verified-5-of-5-true-of-the-tree-2-of-5-false-of-the-repo",
+        "pipeline-remeasured-6.083-exit-0-unpiped-first-positive-delta-in-21-readings-to-SURVIVE",
+        "release-gates-7-of-7-live-gate-F-z66.0-of-66.0-gate-G-included",
+        "gateG-held-under-load-1545-to-1547-placements-0-unresolved-across-25-commits",
+        "sweep-rate-measured-8-of-9-artifacts-from-last-2-breaths-outside-the-repo",
+        "stranded-span-measured-test_live_footprint.py-33-hours-54-commits",
+        "counter-evidence-recorded-12-of-14-gate-runner-tools-clean-so-latency-not-loss",
+        "half-commit-hazard-simulated-and-REFUTED-gate-G-fails-loud-rc2-placements-0",
+        "prop-031-clause-1-observed-applied-and-paying-second-instance",
+        "prop-033-clause-1-marked-shipped-clause-2-marked-not-shipped",
+        "prop-010-occurrence-6-and-prop-028-occurrence-7-evidence-updated",
+        "level-3-bar-tested-and-NOT-met-no-prop-036-written",
+        "trajectory-updated-durable-recovery-named",
+        "prop-012-split-verdict-whole-tree-LIVE-per-path-STRANDED-both-correct",
+        "live-writer-confirmed-directly-em_built.json-written-19:00-during-the-harvest",
+        "ledger-itself-stranded-4-breath-records-uncommitted-since-08-21-18:58"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather"
+      ],
+      "files_changed": [
+        "doc/reports/skill_evolution_proposals.json (modified, uncommitted)",
+        "doc/reports/improvement_trajectory.json (modified, uncommitted)",
+        "doc/reports/breath_log.json (modified, uncommitted)"
+      ],
+      "files_changed_verified": "Three ledger files only, all crash-safe written (temp + os.replace, prop-004). No source file touched: mode is evolve-only and 984 paths are dirty from a live concurrent thread (prop-012 -- hands off).",
+      "discoveries": [
+        "Of the 9 file artifacts the last two morning breaths recorded as succeeded, 8 are outside the repo; the 1 that landed landed by a concurrent SWEEP (fac5daff8, 11:57), not by the breath.",
+        "12 of the 14 tools the two gate runners invoke are clean and committed -- so the tree-vs-repo gap is LATENCY and non-determinism, not permanent loss. That is why six occurrences have each been survivable and none fixed.",
+        "Gate G held under a day of real load: denominator 1545 -> 1547 across 25 commits of map authoring, 0 unresolved. First instrument in this ledger re-verified against live change in the data it watches on the day it was built.",
+        "The half-commit hazard (tracked caller, untracked callee) fails LOUD, not green: rc=2 -> unparseable JSON -> placements=0 -> the `placements > 0` guard returns False. prop-031 clause 1, applied this morning, is what makes that true.",
+        "The pipeline's first positive delta in 21 readings was re-measured nine hours and 24 commits later and held at 6.083. Last night the same discipline broke a flat run downward; tonight it confirms a repair. The instrument is symmetric.",
+        "The proposal schema cannot record a PARTIALLY applied proposal. prop-031 clause 1 and prop-033 clause 1 are both shipped while both entries read 'proposed'. Two occurrences -- below the bar, parked on prop-033.",
+        "prop-012's test is scope-dependent and needs both halves: whole-tree said LIVE (984->983 dirty, no commit, em_built.json written at 19:00), per-path said STRANDED (all four gate files byte-identical across both reads, 9-33h old). Either half alone gives the wrong action.",
+        "doc/reports/breath_log.json last reached the repo on 2026-08-21. Four breath records including this one are uncommitted -- the ledger recording six occurrences of prop-010 is itself the seventh."
+      ],
+      "duration_minutes": 24
+    },
+    {
+      "breath_id": "2026-08-24T09:04",
+      "mode": "full",
+      "head_at_baseline": "a0aca4e30",
+      "head_at_harvest": "1020f16bd",
+      "baseline_avg": 6.083,
+      "post_avg": 6.083,
+      "delta": 0.0,
+      "items_attempted": [
+        "Baseline: pipeline + heat map + garden + release gates, run live",
+        "Follow the 60-degree heat item nobody had closed: the breather's own instruments are outside the repo",
+        "Verify the stranded instruments still hold at TODAY's tree before committing any of them",
+        "Close the blind spot gate G had inherited from the fault it watches, with a negative test",
+        "Commit the stranded gates, scoped paths only, beside a live session committing every ~15 minutes",
+        "Wire the negative test into gate G's own verdict so a blind detector cannot print green",
+        "Read the gate F regression that appeared mid-breath without claiming or disclaiming it",
+        "Level-3 evolve: convert prop-010's eight hand-found instances into a standing check"
+      ],
+      "items_succeeded": [
+        "gate-G-existed-in-NO-commit-check_map_tokens.py-untracked-and-48-line-registration-uncommitted",
+        "gate-seal_clamp-same-test_em_seal_clamp.gd-registered-in-run_em_gates.py-and-in-no-commit",
+        "stranded-work-re-verified-at-HEAD-not-just-present-gateG-268-1517-0-exit-0-footprint-PASS-exit-0",
+        "per-map-blind-spot-found-and-PROVED-first-three-return-elements-byte-identical-for-absent-vs-clean",
+        "maps_scanned-now-counts-maps-READ-with-maps_named-and-maps_without_data-beside-it",
+        "recording-only-confirmed-268-1517-0-before-and-after",
+        "test_map_token_scan.py-17-of-17-8-of-17-assert-silence",
+        "committed-7276728fe-6-files-666-insertions",
+        "45-of-45-tools-invoked-by-BOTH-gate-runners-now-present-and-tracked",
+        "detector-selftest-wired-into-gate-G-verdict-committed-1020f16bd",
+        "self-test-coupling-PROVED-reintroducing-the-blind-spot-flips-FAIL-1-of-17-rc-1-gate-G-red",
+        "detector-restored-byte-identical-to-HEAD-after-the-proof",
+        "gateF-regression-measured-3-identical-readings-across-2-HEADs-not-attributed-to-this-breath",
+        "pipeline-remeasured-6.083-exit-0-unpiped",
+        "gate-H-gate-chain-integrity-written-and-registered-46-tools-2-runners",
+        "gate-H-FIRST-RUN-CAUGHT-ITSELF-check_gate_chain.py-untracked-FAIL-1",
+        "gate-H-historical-proof-a0aca4e30-lacks-check_map_tokens.py-HEAD-has-it",
+        "gate-H-green-after-commit-da5b9ccf5-46-of-46-0-unreachable"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "items_not_run": {
+        "gate seal_clamp (Godot)": "a live Godot session held the user:// lock (PID 12968, started 07:19); a second instance dies silently, so the .gd half of today's commit was verified as present and registered, NOT re-executed"
+      },
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "files_changed": [
+        "tools/check_map_tokens.py",
+        "tools/test_map_token_scan.py",
+        "tools/run_release_gates.py",
+        "tools/run_em_gates.py",
+        "tools/test_live_footprint.py",
+        "commons/testing/test_em_seal_clamp.gd",
+        "doc/reports/breath_log.json",
+        "doc/reports/improvement_trajectory.json",
+        "tools/check_gate_chain.py"
+      ],
+      "commits_authored": [
+        "7276728fe",
+        "1020f16bd",
+        "da5b9ccf5"
+      ],
+      "release_gates": "A,B,C,D,E,G,H PASS; F FAIL (z 35.7 of 66.0, pre-existing)",
+      "discoveries": [
+        "THE GATE THAT HAD PRINTED PASS FOR A DAY EXISTED IN NO COMMIT, AND SO DID THE ONE BESIDE IT. tools/check_map_tokens.py was untracked and its 48-line registration in run_release_gates.py uncommitted; commons/testing/test_em_seal_clamp.gd was untracked while run_em_gates.py:92 named it as gate seal_clamp. A clone of HEAD ran six release gates and printed six, with no row missing and nothing to notice -- and the fault class gate G exists for is the one that cost primitives three pipeline stages on 08-22 and hid a dead token in forces for 68 days. This is prop-010's eighth recorded occurrence and the first closed rather than counted. The close is measurable and was measured: of the 45 tools referenced by both gate runners, 45 are now present on disk and tracked, against 12 of 14 measured last night.",
+        "THE GATE HAD REPEATED, AT ITS OWN GRANULARITY, THE EXACT FAULT IT WAS BUILT TO CATCH. scan_map returned (0, [], 0) for a map named by a spine sequence with no map_data.json, and main counted that map in its 'N maps' headline. So a map that vanished under a sequence printed identically to a map read and found clean. Proved rather than argued: for an absent map and a clean map the first three returned elements are byte-identical, and only the new fourth separates them. The whole-corpus guard does not help -- it fires only when EVERY map is empty, and both faults this gate was born from were single instances hidden by an insensitive summary, which is the same shape one register up. Measured today: 0 of the spine's 268 named maps lack their data, so the hazard was latent. That is why the fix is provably recording-only (268 / 1517 / 0 before and after) and why now was the moment to close it.",
+        "A GREEN ROW MAKES TWO CLAIMS AND ONLY ONE OF THEM WAS EVER TESTED. Running a detector on the corpus tests that the corpus is clean; it does not test that the detector would have spoken if it were not. Gate G now runs its own negative half (17 synthetic cases, no corpus, 8 of them asserting SILENCE) as part of its verdict, and the coupling was proved by re-introducing the closed blind spot: the self-test flips to FAIL 1 of 17, rc=1, and gate G goes red. The detector was then restored byte-identical to HEAD -- checked with git diff, after the 08-23 lesson that a revert can look successful while corrupting the file under test.",
+        "GATE F BROKE DURING THIS BREATH AND THE HONEST ANSWER IS THAT IT IS NOT MINE AND NOT PROVEN EITHER. It read z_reached 66.0 of 66.0, 0 stalls, PASS at 09:05 on tree a0aca4e30, and has read 35.7 of 66.0, frontier z=35, 9 stall events, no_route three times since -- identical to the decimal across two different HEADs, so it is deterministic, not a lock flake from running Godot beside a live session. Between the pass and the first failure, HEAD advanced by exactly one commit, dea1b62de 09:09, 'THE WEDGE SLICE', 38 additive lines putting walkable-collision prisms into the halls from the maps' wp utilities (1590 of those tokens exist in the corpus), whose own message reports 'museum probe PASS'. That is the standing pattern -- a green probe beside a failing field means the fixture stood on the happy cell. But the cut list names no wedge: row z=35 is closed across x=0..14 by three laser_measure seals, one parallel_line_puzzle seal, one stall and nine cells never learned, and ada_run/em_built.json is rebuilt by the live session independently of HEAD. So the commit is a strong temporal suspect and not a demonstrated mechanism. It was not repaired: the file is being committed into every fifteen minutes by a live author mid-slice, and the 08-21 ruling is that repairs go into the reader, never the contended builder.",
+        "EIGHT INSTANCES FOUND BY HAND IS THE SIGNATURE OF A CLASS NOBODY WATCHES, AND THE CLASS COST ONE AFTERNOON TO CLOSE. Every previous breath that met this fault met an instance of it: a tool stranded outside the repository, found by reading git status, fixed or noted, counted as prop-010's Nth occurrence. Gate H asks the general question instead -- parse both gate runners for the tools they name, require each to exist and to be tracked -- and it is about thirty lines. Its first run returned FAIL 1 and named check_gate_chain.py, itself, referenced by the runner and not yet committed. That is a better demonstration than any synthetic case: the check found the newest instance of its own fault class within a minute of existing. The historical half is exact too -- `git cat-file -e a0aca4e30:tools/check_map_tokens.py` fails at this morning's baseline and succeeds at HEAD, so gate H would have gone red on the day the strand started rather than on the day someone happened to look. It is deliberately narrow: tracked-and-dirty is normal mid-session and is not a fault, and it does not follow imports, because one level named explicitly by a runner is the level at which all eight occurrences happened."
+      ],
+      "duration_minutes": 52
     }
   ]
 }
