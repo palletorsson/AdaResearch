@@ -3261,6 +3261,15 @@ func _build_segment() -> void:
 			peek["open_roof"] = bool(mm.get("open_roof", peek.get("open_roof", false)))
 			if mm.get("basin") is Dictionary:
 				peek["basin"] = mm["basin"]
+			# THE HALL OWNS ITS CROSSING (2026-08-24, Palle: "maybe it becomes
+			# too static to have a similar solution for all passages?" — yes).
+			# map_info.museum.passage {kind, width, offset, side} overrides the
+			# automatic chicane for THIS hall's exit; a silent hall keeps the
+			# default, so the corpus is untouched until a hall speaks.
+			if mm.get("passage") is Dictionary:
+				peek["passage"] = mm["passage"]
+			elif peek.has("passage"):
+				peek.erase("passage")
 			# THE SIMULATION DECLARATION (2026-08-24, Palle: "use the grid
 			# system as simulation inside the museum, add it to a courtyard
 			# with a basin that can host the size with extra meters on the
@@ -3298,7 +3307,7 @@ func _build_segment() -> void:
 		# the starting passage; the chicane's offset is the corner the
 		# one-hall stream hides its swap behind.
 		if String(peek.get("authored", "")) == "map":
-			tile = _authored_passages(tile)
+			tile = _authored_passages(tile, peek.get("passage", {}) if peek.get("passage") is Dictionary else {})
 		h = tile.size()
 		# the WIDTH follows the tile too: rooms-per-pearl crops only rows (no
 		# change), but a map-authored tile can be wider than the template —
@@ -12812,36 +12821,60 @@ func _derive_map_row(map_name: String) -> Dictionary:
 ## Both edges are carved open first, because the gate can only centre a door
 ## on an edge that has an opening (a fully-walled map edge read as "just a
 ## wall" where the next chapter should begin).
-func _authored_passages(tile_in: Array) -> Array:
+## THE PASSAGE DECLARATION (2026-08-24): map_info.museum.passage lets a hall
+## own its own crossing instead of taking the automatic chicane —
+##   kind   "chicane" (default) · "straight" · "hall" · "none"
+##   width  path cells (default 2 — "2 blocks wide as default")
+##   offset how far the second door slides across (default 3; 0 = straight)
+##   side   "left" | "right" (default: whichever fits the tile)
+## A hall that says nothing builds exactly as before.
+func _authored_passages(tile_in: Array, decl: Dictionary = {}) -> Array:
 	var tile: Array = []
 	for row in tile_in:
 		tile.append((row as Array).duplicate())
 	if tile.size() < 4:
 		return tile
 	var w: int = (tile[0] as Array).size()
+	var kind: String = String(decl.get("kind", "chicane")).to_lower()
+	var pw: int = clampi(int(decl.get("width", 2)), 1, maxi(1, w - 2))
 	if not _edge_has_open(tile, 0):
-		_carve(tile, 0, _door_col(tile, 0))
+		_carve(tile, 0, _door_col(tile, 0), pw)
 	if not _edge_has_open(tile, tile.size() - 1):
-		_carve(tile, tile.size() - 1, _door_col(tile, tile.size() - 1))
+		_carve(tile, tile.size() - 1, _door_col(tile, tile.size() - 1), pw)
+	if kind == "none":
+		return tile        # the halls meet at their own doors; no added rows
 	var cl: int = _open_col(tile, tile.size() - 1)
-	var cr: int = cl + (3 if cl + 3 <= w - 2 else -3)
-	cr = clampi(cr, 1, w - 2)
-	# THE 2-WIDE PATH (2026-08-24, Palle: "make the path way of the pass 2
-	# blocks wide as default" — one block read as a squeeze). Doors and the
-	# sidestep corridor each take a second cell; the offset stays big enough
-	# that no straight line passes both doors (the corner holds).
-	var cl2: int = clampi(cl + 1, 1, w - 2)
-	var cr2: int = clampi(cr + 1, 1, w - 2)
-	var row_a: Array = []
-	var row_b: Array = []
-	var row_c: Array = []
-	for x in range(w):
-		row_a.append("1" if (x == cl or x == cl2) else "4")
-		row_b.append("1" if x >= mini(cl, cr) and x <= maxi(cl2, cr2) else "4")
-		row_c.append("1" if (x == cr or x == cr2) else "4")
-	tile.append(row_a)
-	tile.append(row_b)
-	tile.append(row_c)
+	var off: int = int(decl.get("offset", 3)) if kind != "straight" else 0
+	var side: String = String(decl.get("side", "")).to_lower()
+	if side == "left":
+		off = -absi(off)
+	elif side == "right":
+		off = absi(off)
+	var cr: int = cl + off
+	if cr + pw > w - 1 or cr < 1:
+		cr = cl - off      # the other side, when the asked one runs off the tile
+	cr = clampi(cr, 1, maxi(1, w - 1 - pw))
+	# a HALL passage is a room between the halls: the whole span walks, and
+	# it is deeper (4 rows) — for crossings that deserve air, not a corridor
+	var depth: int = 4 if kind == "hall" else 3
+	var lo: int = mini(cl, cr)
+	var hi: int = maxi(cl, cr) + pw - 1
+	for r in range(depth):
+		var row: Array = []
+		var first: bool = r == 0
+		var last: bool = r == depth - 1
+		for x in range(w):
+			var open: bool = false
+			if kind == "hall" and not (first or last):
+				open = x >= lo and x <= hi
+			elif first:
+				open = x >= cl and x < cl + pw
+			elif last:
+				open = x >= cr and x < cr + pw
+			else:
+				open = x >= lo and x <= hi
+			row.append("1" if open else "4")
+		tile.append(row)
 	return tile
 
 
@@ -12871,9 +12904,10 @@ func _door_col(tile: Array, y: int) -> int:
 	return best
 
 
-func _carve(tile: Array, y: int, c: int) -> void:
+func _carve(tile: Array, y: int, c: int, width: int = 3) -> void:
 	var row: Array = tile[y]
-	for x in [c - 1, c, c + 1]:
+	var half: int = maxi(1, width) / 2
+	for x in range(c - half, c - half + maxi(1, width) + 1):
 		if x >= 1 and x < row.size() - 1:
 			var v := String(row[x])
 			if v == "4" or v == "0":

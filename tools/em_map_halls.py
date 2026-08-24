@@ -173,11 +173,15 @@ def derive_row(pearl: str, map_name: str, museum_key: str, idx: int, total: int,
     # the museum synthesizes roof/basin/margins from it at build time; the
     # copy here serves the plan readers.
     simulation = md.get("map_info", {}).get("museum", {}).get("simulation")
+    # museum.passage {kind, width, offset, side}: the hall owns its crossing
+    # (the museum builds it; this copy serves the plan readers and /paint)
+    passage = md.get("map_info", {}).get("museum", {}).get("passage")
     return {
         "museum": museum_key,
         **({"open_roof": True} if (open_roof or isinstance(simulation, dict)) else {}),
         **({"basin": basin} if isinstance(basin, dict) else {}),
         **({"simulation": simulation} if isinstance(simulation, dict) else {}),
+        **({"passage": passage} if isinstance(passage, dict) else {}),
         "tile": tile, "h": len(tile),
         "rooms": 0, "artifacts": arts, "rejected": [],
         "room": {"w": len(tile[0]) if tile else 0, "h": len(tile)}, "apron": 0,
