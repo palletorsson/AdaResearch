@@ -1,6 +1,6 @@
 {
 	"_readme": "The BAKE: every placement decision the museum makes from a measurement, decided ONCE by a headless --em-bake run and replayed by every later run, desktop or headset. Per chapter|pearl: placed = token, tile cell, the exact cells sealed (x, z-from-segment-base); refused = token, cell, why. Regenerate after editing the plan: python tools/em_bake.py",
-	"at": "2026-08-24 16:01:24",
+	"at": "2026-08-24 16:13:56",
 	"plan": "res://ada_run/em_plan.json",
 	"plan_at": "2026-08-21T14:00:55",
 	"schema": "adaresearch.em_bake.v1",
@@ -35925,193 +35925,193 @@
 			"placed": [
 				{
 					"cell": [
-						3,
-						6
+						3.0,
+						6.0
 					],
 					"seal": [
 						[
-							3,
-							6
+							3.0,
+							6.0
 						]
 					],
 					"token": "code_display"
 				},
 				{
 					"cell": [
-						5,
-						6
+						5.0,
+						6.0
 					],
 					"seal": [
 						[
-							5,
-							6
+							5.0,
+							6.0
 						]
 					],
 					"token": "dark_sphere"
 				},
 				{
 					"cell": [
-						5,
-						7
+						5.0,
+						7.0
 					],
 					"seal": [
 						[
-							5,
-							7
+							5.0,
+							7.0
 						],
 						[
-							5,
-							8
+							5.0,
+							8.0
 						]
 					],
 					"token": "bigframe"
 				},
 				{
 					"cell": [
-						6,
-						7
+						6.0,
+						7.0
 					],
 					"seal": [
 						[
-							6,
-							7
+							6.0,
+							7.0
 						]
 					],
 					"token": "snap_pyramid_puzzle"
 				},
 				{
 					"cell": [
-						5,
-						9
+						5.0,
+						9.0
 					],
 					"seal": [
 						[
-							5,
-							9
+							5.0,
+							9.0
 						]
 					],
 					"token": "pyramid"
 				},
 				{
 					"cell": [
-						6,
-						9
+						6.0,
+						9.0
 					],
 					"seal": [
 						[
-							6,
-							9
+							6.0,
+							9.0
 						]
 					],
 					"token": "prism_block"
 				},
 				{
 					"cell": [
-						5,
-						17
+						5.0,
+						17.0
 					],
 					"seal": [
 						[
-							5,
-							17
+							5.0,
+							17.0
 						]
 					],
 					"token": "pyramidlong"
 				},
 				{
 					"cell": [
-						2,
-						18
+						2.0,
+						18.0
 					],
 					"seal": [],
 					"token": "pyramid"
 				},
 				{
 					"cell": [
-						3,
-						19
+						3.0,
+						19.0
 					],
 					"seal": [],
 					"token": "pyramid"
 				},
 				{
 					"cell": [
-						4,
-						19
+						4.0,
+						19.0
 					],
 					"seal": [
 						[
-							4,
-							18
+							4.0,
+							18.0
 						],
 						[
-							5,
-							18
+							5.0,
+							18.0
 						],
 						[
-							4,
-							19
+							4.0,
+							19.0
 						],
 						[
-							5,
-							19
+							5.0,
+							19.0
 						],
 						[
-							3,
-							20
+							3.0,
+							20.0
 						],
 						[
-							4,
-							20
+							4.0,
+							20.0
 						],
 						[
-							5,
-							20
+							5.0,
+							20.0
 						]
 					],
 					"token": "pyramid"
 				},
 				{
 					"cell": [
-						5,
-						21
+						5.0,
+						21.0
 					],
 					"seal": [],
 					"token": "durer_scene"
 				},
 				{
 					"cell": [
-						6,
-						26
+						6.0,
+						26.0
 					],
 					"seal": [
 						[
-							6,
-							26
+							6.0,
+							26.0
 						]
 					],
 					"token": "folding_past"
 				},
 				{
 					"cell": [
-						3,
-						27
+						3.0,
+						27.0
 					],
 					"seal": [],
 					"token": "folding_past"
 				},
 				{
 					"cell": [
-						3,
-						27
+						3.0,
+						27.0
 					],
 					"seal": [],
 					"token": "folding_past"
 				},
 				{
 					"cell": [
-						3,
-						27
+						3.0,
+						27.0
 					],
 					"seal": [],
 					"token": "folding_past"
@@ -36120,8 +36120,8 @@
 			"refused": [
 				{
 					"tile_cell": [
-						4,
-						8
+						4.0,
+						8.0
 					],
 					"token": "diamondtoruscollection",
 					"why": "sealing would sever the walk route"
@@ -47612,33 +47612,25 @@
 				},
 				{
 					"cell": [
-						5.0,
-						22.0
+						2.0,
+						20.0
 					],
 					"seal": [
 						[
-							4.0,
-							21.0
-						],
-						[
-							5.0,
-							21.0
-						],
-						[
-							5.0,
-							22.0
+							2.0,
+							20.0
 						]
 					],
-					"token": "x_translation_cube"
+					"token": "cube_scene"
 				}
 			],
 			"refused": [
 				{
 					"tile_cell": [
-						2.0,
-						20.0
+						5.0,
+						22.0
 					],
-					"token": "cube_scene",
+					"token": "x_translation_cube",
 					"why": "sealing would sever the walk route"
 				}
 			]
@@ -47648,156 +47640,252 @@
 			"placed": [
 				{
 					"cell": [
-						0,
-						4
+						1.0,
+						5.0
 					],
-					"seal": [],
+					"seal": [
+						[
+							1.0,
+							5.0
+						]
+					],
 					"token": "invariants_demo"
 				},
 				{
 					"cell": [
-						5,
-						5
+						5.0,
+						5.0
 					],
 					"seal": [
 						[
-							4,
-							5
+							4.0,
+							5.0
 						],
 						[
-							5,
-							5
+							5.0,
+							5.0
 						],
 						[
-							6,
-							5
+							6.0,
+							5.0
 						]
 					],
 					"token": "rotation_gimbal"
 				},
 				{
 					"cell": [
-						9,
-						9
+						7.0,
+						6.0
 					],
 					"seal": [
 						[
-							9,
-							9
+							6.0,
+							6.0
+						],
+						[
+							7.0,
+							6.0
+						],
+						[
+							8.0,
+							6.0
+						]
+					],
+					"token": "matrix_4x4_viewer"
+				},
+				{
+					"cell": [
+						9.0,
+						9.0
+					],
+					"seal": [
+						[
+							9.0,
+							9.0
 						]
 					],
 					"token": "balance_puzzle"
 				},
 				{
 					"cell": [
-						2,
-						11
+						3.0,
+						10.0
 					],
 					"seal": [
 						[
-							2,
-							11
+							2.0,
+							10.0
+						]
+					],
+					"token": "homogeneous_coordinates"
+				},
+				{
+					"cell": [
+						2.0,
+						11.0
+					],
+					"seal": [
+						[
+							2.0,
+							11.0
 						],
 						[
-							2,
-							12
+							2.0,
+							12.0
 						]
 					],
 					"token": "x_translation_cube"
 				},
 				{
 					"cell": [
-						8,
-						11
+						8.0,
+						11.0
 					],
 					"seal": [
 						[
-							8,
-							11
+							8.0,
+							11.0
 						],
 						[
-							8,
-							12
+							8.0,
+							12.0
 						],
 						[
-							8,
-							10
+							8.0,
+							10.0
 						],
 						[
-							9,
-							10
+							9.0,
+							10.0
 						],
 						[
-							9,
-							11
+							9.0,
+							11.0
 						],
 						[
-							9,
-							12
+							9.0,
+							12.0
 						]
 					],
 					"token": "z_translation_cube"
 				},
 				{
 					"cell": [
-						9,
-						11
+						9.0,
+						11.0
 					],
 					"seal": [],
 					"token": "dark_sphere"
 				},
 				{
 					"cell": [
-						1,
-						12
+						1.0,
+						12.0
 					],
 					"seal": [
 						[
-							1,
-							12
+							1.0,
+							12.0
 						]
 					],
 					"token": "transform_composition"
 				},
 				{
 					"cell": [
-						2,
-						16
+						2.0,
+						16.0
 					],
 					"seal": [
 						[
-							2,
-							16
+							2.0,
+							16.0
 						]
 					],
 					"token": "scale_me"
 				},
 				{
 					"cell": [
-						8,
-						16
+						8.0,
+						16.0
 					],
 					"seal": [
 						[
-							8,
-							16
+							8.0,
+							16.0
 						],
 						[
-							8,
-							17
+							8.0,
+							17.0
 						]
 					],
 					"token": "y_translation_cube"
 				},
 				{
 					"cell": [
-						8,
-						21
+						1.0,
+						21.0
 					],
 					"seal": [
 						[
-							8,
-							21
+							1.0,
+							21.0
+						],
+						[
+							2.0,
+							21.0
+						],
+						[
+							3.0,
+							21.0
+						],
+						[
+							1.0,
+							20.0
+						],
+						[
+							2.0,
+							20.0
+						],
+						[
+							3.0,
+							20.0
+						],
+						[
+							1.0,
+							22.0
+						],
+						[
+							2.0,
+							22.0
+						],
+						[
+							3.0,
+							22.0
+						],
+						[
+							1.0,
+							23.0
+						],
+						[
+							2.0,
+							23.0
+						],
+						[
+							3.0,
+							23.0
+						]
+					],
+					"token": "spin"
+				},
+				{
+					"cell": [
+						8.0,
+						21.0
+					],
+					"seal": [
+						[
+							8.0,
+							21.0
 						]
 					],
 					"token": "pick_up_cube"
@@ -47806,27 +47894,51 @@
 			"refused": [
 				{
 					"tile_cell": [
-						8,
-						6
+						8.0,
+						6.0
 					],
 					"token": "matrix_4x4_viewer",
-					"why": "sealing would sever the walk route"
+					"why": "baked: baked: sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
-						2,
-						10
+						2.0,
+						10.0
+					],
+					"token": "homogeneous_coordinates",
+					"why": "baked: baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						1.0,
+						10.0
 					],
 					"token": "homogeneous_coordinates",
 					"why": "sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
-						2,
-						21
+						2.0,
+						9.0
+					],
+					"token": "homogeneous_coordinates",
+					"why": "sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						2.0,
+						11.0
+					],
+					"token": "homogeneous_coordinates",
+					"why": "sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						2.0,
+						21.0
 					],
 					"token": "spin",
-					"why": "sealing would sever the walk route"
+					"why": "baked: baked: sealing would sever the walk route"
 				}
 			]
 		},
@@ -47889,139 +48001,165 @@
 			"placed": [
 				{
 					"cell": [
-						3.0,
-						7.0
+						3,
+						7
 					],
-					"seal": [],
+					"seal": [
+						[
+							3,
+							7
+						]
+					],
 					"token": "rotate_grid_cubes"
 				},
 				{
 					"cell": [
-						5.0,
-						8.0
+						6,
+						8
 					],
-					"seal": [],
+					"seal": [
+						[
+							4,
+							8
+						],
+						[
+							5,
+							8
+						],
+						[
+							6,
+							8
+						],
+						[
+							7,
+							8
+						],
+						[
+							8,
+							8
+						]
+					],
 					"token": "science_screen"
 				},
 				{
 					"cell": [
-						2.0,
-						21.0
+						2,
+						21
 					],
 					"seal": [
 						[
-							2.0,
-							21.0
+							2,
+							21
 						]
 					],
 					"token": "dark_sphere"
 				},
 				{
 					"cell": [
-						2.0,
-						22.0
+						2,
+						22
 					],
 					"seal": [
 						[
-							0.0,
-							22.0
+							0,
+							22
 						],
 						[
-							1.0,
-							22.0
+							1,
+							22
 						],
 						[
-							2.0,
-							22.0
+							2,
+							22
 						],
 						[
-							3.0,
-							22.0
+							3,
+							22
 						],
 						[
-							4.0,
-							22.0
+							4,
+							22
 						]
 					],
 					"token": "spin"
 				},
 				{
 					"cell": [
-						2.0,
-						23.0
+						2,
+						23
 					],
 					"seal": [
 						[
-							0.0,
-							23.0
+							0,
+							23
 						],
 						[
-							1.0,
-							23.0
+							1,
+							23
 						],
 						[
-							2.0,
-							23.0
+							2,
+							23
 						],
 						[
-							3.0,
-							23.0
+							3,
+							23
 						],
 						[
-							4.0,
-							23.0
+							4,
+							23
 						]
 					],
 					"token": "spin"
 				},
 				{
 					"cell": [
-						1.0,
-						35.0
+						0,
+						35
 					],
 					"seal": [
 						[
-							1.0,
-							35.0
+							0,
+							35
 						]
 					],
 					"token": "catalyst_vent"
 				},
 				{
 					"cell": [
-						3.0,
-						40.0
+						3,
+						40
 					],
 					"seal": [
 						[
-							3.0,
-							40.0
+							3,
+							40
 						]
 					],
 					"token": "pick_up_cube"
 				},
 				{
 					"cell": [
-						4.0,
-						40.0
+						4,
+						40
 					],
 					"seal": [
 						[
-							4.0,
-							40.0
+							4,
+							40
 						]
 					],
 					"token": "pickup_gate"
 				},
 				{
 					"cell": [
-						3.0,
-						42.0
+						3,
+						42
 					],
 					"seal": [
 						[
-							3.0,
-							42.0
+							3,
+							42
 						]
 					],
 					"token": "catalyst_prompter_box"
@@ -48034,161 +48172,169 @@
 			"placed": [
 				{
 					"cell": [
-						3.0,
-						7.0
+						3,
+						7
 					],
 					"seal": [
 						[
-							3.0,
-							7.0
+							3,
+							7
 						]
 					],
 					"token": "boolean_tunnel"
 				},
 				{
 					"cell": [
-						1.0,
-						8.0
+						0,
+						8
 					],
 					"seal": [
 						[
-							1.0,
-							7.0
-						],
-						[
-							1.0,
-							8.0
+							0,
+							7
 						]
 					],
 					"token": "righttriangle"
 				},
 				{
 					"cell": [
-						3.0,
-						10.0
+						3,
+						10
 					],
 					"seal": [
 						[
-							3.0,
-							10.0
+							3,
+							10
 						]
 					],
 					"token": "dark_sphere"
 				},
 				{
 					"cell": [
-						2.0,
-						55.0
+						2,
+						55
 					],
 					"seal": [
 						[
-							2.0,
-							55.0
+							2,
+							55
 						]
 					],
 					"token": "pick_up_cube"
 				},
 				{
 					"cell": [
-						3.0,
-						57.0
+						3,
+						57
 					],
 					"seal": [
 						[
-							3.0,
-							57.0
+							3,
+							57
 						],
 						[
-							3.0,
-							58.0
+							3,
+							58
 						],
 						[
-							3.0,
-							59.0
+							4,
+							58
 						],
 						[
-							4.0,
-							59.0
+							3,
+							59
 						],
 						[
-							5.0,
-							59.0
+							4,
+							59
 						],
 						[
-							0.0,
-							52.0
+							5,
+							59
 						],
 						[
-							1.0,
-							52.0
+							0,
+							52
 						],
 						[
-							2.0,
-							52.0
+							1,
+							52
 						],
 						[
-							4.0,
-							52.0
+							2,
+							52
 						],
 						[
-							5.0,
-							52.0
+							4,
+							52
 						],
 						[
-							6.0,
-							52.0
+							5,
+							52
 						],
 						[
-							7.0,
-							52.0
+							6,
+							52
 						],
 						[
-							8.0,
-							52.0
+							7,
+							52
 						],
 						[
-							0.0,
-							53.0
+							8,
+							52
 						],
 						[
-							1.0,
-							53.0
+							0,
+							53
 						],
 						[
-							2.0,
-							53.0
+							1,
+							53
 						],
 						[
-							3.0,
-							53.0
+							2,
+							53
 						],
 						[
-							4.0,
-							53.0
+							3,
+							53
 						],
 						[
-							5.0,
-							53.0
+							4,
+							53
 						],
 						[
-							6.0,
-							53.0
+							5,
+							53
 						],
 						[
-							7.0,
-							53.0
+							6,
+							53
 						],
 						[
-							8.0,
-							53.0
+							7,
+							53
 						],
 						[
-							6.0,
-							59.0
+							8,
+							53
 						],
 						[
-							6.0,
-							60.0
+							6,
+							59
+						],
+						[
+							7,
+							59
+						],
+						[
+							6,
+							60
+						],
+						[
+							7,
+							60
 						]
 					],
 					"token": "carousel_cake"
@@ -48497,7 +48643,15 @@
 							4.0
 						],
 						[
+							4.0,
+							4.0
+						],
+						[
 							2.0,
+							5.0
+						],
+						[
+							3.0,
 							5.0
 						],
 						[
@@ -48520,6 +48674,34 @@
 						[
 							6.0,
 							6.0
+						],
+						[
+							5.0,
+							5.0
+						],
+						[
+							7.0,
+							5.0
+						],
+						[
+							5.0,
+							6.0
+						],
+						[
+							7.0,
+							6.0
+						],
+						[
+							5.0,
+							7.0
+						],
+						[
+							6.0,
+							7.0
+						],
+						[
+							7.0,
+							7.0
 						]
 					],
 					"token": "z_translation_cube"
@@ -48537,7 +48719,28 @@
 						6.0,
 						8.0
 					],
-					"seal": [],
+					"seal": [
+						[
+							4.0,
+							8.0
+						],
+						[
+							5.0,
+							8.0
+						],
+						[
+							6.0,
+							8.0
+						],
+						[
+							7.0,
+							8.0
+						],
+						[
+							8.0,
+							8.0
+						]
+					],
 					"token": "science_screen"
 				},
 				{
@@ -48545,7 +48748,12 @@
 						3.0,
 						14.0
 					],
-					"seal": [],
+					"seal": [
+						[
+							3.0,
+							14.0
+						]
+					],
 					"token": "dark_sphere"
 				},
 				{
@@ -48553,7 +48761,16 @@
 						1.0,
 						15.0
 					],
-					"seal": [],
+					"seal": [
+						[
+							1.0,
+							14.0
+						],
+						[
+							1.0,
+							15.0
+						]
+					],
 					"token": "y_translation_cube"
 				},
 				{
@@ -48561,7 +48778,12 @@
 						2.0,
 						16.0
 					],
-					"seal": [],
+					"seal": [
+						[
+							2.0,
+							16.0
+						]
+					],
 					"token": "pick_up_cube"
 				},
 				{
@@ -48569,7 +48791,12 @@
 						4.0,
 						16.0
 					],
-					"seal": [],
+					"seal": [
+						[
+							4.0,
+							16.0
+						]
+					],
 					"token": "pick_up_cube"
 				},
 				{

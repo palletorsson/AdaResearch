@@ -14,13 +14,10 @@
       "n_artifacts": 15
     },
     "museum": {
-      "open_roof": true,
-      "basin": {
+      "simulation": {
         "depth": 1.0,
-        "glass": false,
-        "rects": [
-          [1,7,6,12]
-        ]
+        "margin": 2,
+        "grid": true
       }
     }
   },

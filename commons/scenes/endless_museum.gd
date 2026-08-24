@@ -3590,7 +3590,11 @@ func _build_segment() -> void:
 		var z := y + VESTIBULE_H
 		for x in range(row.size()):
 			var c := String(row[x])
-			if basin_cells.has(Vector2i(x, y)) and c != "4" and not c.begins_with("4"):
+			# a GRID simulation sinks EVERY cell, walls included — the real
+			# GridSystem rebuilds its own architecture in the pool, and the
+			# museum drawing the map's walls too would double every one
+			if basin_cells.has(Vector2i(x, y)) and (bool(peek.get("sim_grid", false)) \
+					or (c != "4" and not c.begins_with("4"))):
 				# pool floor, a basin_depth down (a floor cell in a declared
 				# rect sinks too — the pool replaces its deck, `continue`
 				# below skips the normal floor/slot handling). A platform or

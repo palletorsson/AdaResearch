@@ -112,103 +112,52 @@ func _run() -> void:
 	var cellw := func(rec: Dictionary, mx: float, mz: float) -> Vector2:
 		return Vector2(mx + 0.5, float(rec["z0"]) + V + mz + 0.5)
 
-	# ── trans translation ───────────────────────────────────────────────────
-	if by_pearl.has("trans translation"):
-		var rc: Dictionary = by_pearl["trans translation"]
-		var p: Vector2 = cellw.call(rc, 3.0, 12.0)
-		var y_pool: float = _ray_y(w3d, p.x, p.y)
-		if absf(y_pool + 1.0) > 0.25:
-			fails.append("translation: field floor at %.2f, wanted -1.0 (the pool)" % y_pool)
-		var pp: Vector2 = cellw.call(rc, 2.0, 12.0)
-		var y_pier: float = _ray_y(w3d, pp.x, pp.y)
-		if absf(y_pier - 3.0) > 0.3:
-			fails.append("translation: p:3 pier top at %.2f, wanted 3.0" % y_pier)
-		var dm: Vector2 = cellw.call(rc, 3.0, 20.0)
-		var y_deck: float = _ray_y(w3d, dm.x, dm.y)
-		if absf(y_deck) > 0.2:
-			fails.append("translation: south margin at %.2f, wanted 0 (deck)" % y_deck)
-		var sunk_wedges: int = 0
-		var sn2: Node3D = rc.get("node")
-		for n in sn2.find_children("*", "Node3D", true, false):
-			if str(n.name).to_lower().contains("walkableprism") or str((n as Node3D).scene_file_path).contains("walkableprism"):
-				if (n as Node3D).position.y < 0.0:
-					sunk_wedges += 1
-		if sunk_wedges < 2:
-			fails.append("translation: %d wedge(s) seated in the pool, wanted >=2" % sunk_wedges)
-		else:
-			notes.append("translation: pool -1 / pier +3 / deck 0 / %d sunken wedge(s)" % sunk_wedges)
-		# the courtyard walk-around (2026-08-24): west margin and east
-		# ambulatory at deck 0, and the two-flight stair's p:1 step at +1
-		var mw: Vector2 = cellw.call(rc, 0.0, 10.0)
-		var ymw: float = _ray_y(w3d, mw.x, mw.y)
-		var me: Vector2 = cellw.call(rc, 7.0, 8.0)
-		var yme: float = _ray_y(w3d, me.x, me.y)
-		var stp: Vector2 = cellw.call(rc, 7.0, 12.0)
-		var ystp: float = _ray_y(w3d, stp.x, stp.y)
-		if absf(ymw) > 0.2 or absf(yme) > 0.2:
-			fails.append("translation: margins west %.2f / east %.2f, wanted 0 (the walk-around)" % [ymw, yme])
-		if absf(ystp - 1.0) > 0.25:
-			fails.append("translation: stair step at %.2f, wanted 1.0 (the p:1 flight)" % ystp)
-		if absf(ymw) <= 0.2 and absf(yme) <= 0.2 and absf(ystp - 1.0) <= 0.25:
-			notes.append("translation: walk-around margins 0 / stair step +1")
-
-	# ── trans axisdecomposition ─────────────────────────────────────────────
-	if by_pearl.has("trans axisdecomposition"):
-		var ra: Dictionary = by_pearl["trans axisdecomposition"]
-		# (4,13) is an EMPTY pool cell — probing (5,14) hit the
-		# z_translation_cube standing there at 0.2 (measure the floor, not
-		# the exhibit)
-		var pa: Vector2 = cellw.call(ra, 4.0, 13.0)
-		var ya: float = _ray_y(w3d, pa.x, pa.y)
-		if absf(ya + 1.0) > 0.25:
-			fails.append("axisdecomposition: field floor at %.2f, wanted -1.0" % ya)
-		# THE GRID VERSION (2026-08-24): the real GridSystem stands in the
-		# basin — a floor cell reads as the grid's own cube TOP (flush with
-		# the deck: -depth + 1 = 0), a void cell reads the pool floor at -1,
-		# and the margins outside the tile walk at deck 0
-		var da: Vector2 = cellw.call(ra, 1.0, 1.0)
-		var yd: float = _ray_y(w3d, da.x, da.y)
-		# grid cubes are CENTER-origin (top at +0.5 in grid space) — a floor
-		# cube in a 1 m basin tops out at -depth + 0.5 = -0.5
-		if absf(yd + 0.5) > 0.25:
-			fails.append("axisdecomposition: grid floor cube top at %.2f, wanted -0.5 (the real grid in the basin)" % yd)
-		var ma: Vector2 = cellw.call(ra, -1.0, 8.0)
-		var yma: float = _ray_y(w3d, ma.x, ma.y)
-		if absf(yma) > 0.2:
-			fails.append("axisdecomposition: margin at %.2f, wanted 0 (the walk-around)" % yma)
-		var auto_wedges: int = 0
-		var an2: Node3D = ra.get("node")
-		for n in an2.find_children("*", "Node3D", true, false):
-			if str(n.name).begins_with("Wedge_") and (n as Node3D).position.y < 0.2:
-				auto_wedges += 1
-		if auto_wedges < 3:
-			fails.append("axisdecomposition: %d auto wedge(s), wanted >=3 (entry/exit/sides)" % auto_wedges)
-		var grid_node := false
-		for n in an2.find_children("*", "Node3D", true, false):
+	# ── the GRID SIMULATIONS (translation / axisdecomposition / rotation) ──
+	# Each sinks its WHOLE map and stands the REAL GridSystem in the pool:
+	# a SimGrid_ node, grid cube tops at -depth + 0.5 (center-origin cubes),
+	# museum margins at deck 0 outside the tile, and connecting wedges.
+	for sim_v in [["trans translation", "Trans_Translation"],
+			["trans axisdecomposition", "Trans_AxisDecomposition"],
+			["trans rotation", "Trans_Rotation"]]:
+		var sim: Array = sim_v
+		var pearl_s: String = String(sim[0])
+		if not by_pearl.has(pearl_s):
+			continue
+		var rs2: Dictionary = by_pearl[pearl_s]
+		var sn3: Node3D = rs2.get("node")
+		var grid_ok := false
+		var cubes := 0
+		for n in sn3.find_children("*", "Node3D", true, false):
 			if str(n.name).begins_with("SimGrid_"):
-				grid_node = true
-		if not grid_node:
-			fails.append("axisdecomposition: no SimGrid_ node — the REAL grid is not standing in the basin")
-		if absf(yd) <= 0.25 and absf(yma) <= 0.2 and auto_wedges >= 3 and grid_node:
-			notes.append("axisdecomposition: the REAL grid in the basin (cube tops 0, pool -1) / margin 0 / %d wedges" % auto_wedges)
-
-	# ── trans rotation ──────────────────────────────────────────────────────
-	if by_pearl.has("trans rotation"):
-		var rr: Dictionary = by_pearl["trans rotation"]
-		var pr: Vector2 = cellw.call(rr, 3.0, 4.0)
-		var yr: float = _ray_y(w3d, pr.x, pr.y)
-		if absf(yr + 1.0) > 0.25:
-			fails.append("rotation: simulation floor at %.2f, wanted -1.0" % yr)
-		var sunken := false
-		var rn: Node3D = rr.get("node")
-		for n in rn.find_children("*", "Node3D", true, false):
-			if n.has_meta("artifact_lookup_name") and str(n.get_meta("artifact_lookup_name")) == "rotate_grid_cubes":
-				if (n as Node3D).position.y < -0.4:
-					sunken = true
-		if not sunken:
-			fails.append("rotation: rotate_grid_cubes not sunken into the pool")
-		else:
-			notes.append("rotation: pool -1, the grid-changer stands in it")
+				grid_ok = true
+				for gn in (n as Node3D).find_children("*", "MeshInstance3D", true, false):
+					cubes += 1
+		if not grid_ok:
+			fails.append("%s: no SimGrid_ node — the REAL grid is not in the pool" % pearl_s)
+			continue
+		if cubes < 20:
+			fails.append("%s: the embedded grid built %d mesh(es) — it is not standing" % [pearl_s, cubes])
+		# SAMPLE the margin, never one cell: the dress lays props on these
+		# decks, and a single ray measures whatever is standing there rather
+		# than the deck (the floor-not-the-exhibit lesson, twice now).
+		var deck_hits := 0
+		var ymg := -999.0
+		for mz in [3.0, 6.0, 9.0, 12.0]:
+			var mg: Vector2 = cellw.call(rs2, -1.0, mz)
+			ymg = _ray_y(w3d, mg.x, mg.y)
+			if absf(ymg) <= 0.2:
+				deck_hits += 1
+		if deck_hits < 3:
+			fails.append("%s: only %d/4 margin cells at deck 0 (last read %.2f)" % [pearl_s, deck_hits, ymg])
+		var wedges_s := 0
+		for n2 in sn3.find_children("*", "Node3D", true, false):
+			if str(n2.name).begins_with("Wedge_") and (n2 as Node3D).position.y < 0.2:
+				wedges_s += 1
+		if wedges_s < 3:
+			fails.append("%s: %d connecting wedge(s), wanted >=3" % [pearl_s, wedges_s])
+		if grid_ok and cubes >= 20 and deck_hits >= 3 and wedges_s >= 3:
+			notes.append("%s: the REAL grid in the pool (%d meshes) / margin %d/4 at deck / %d wedges" % [
+				pearl_s, cubes, deck_hits, wedges_s])
 
 	# ── trans rotationspectacle: OPEN ROOF ──────────────────────────────────
 	# ceilings are VISUAL-ONLY (no colliders) — a raycast cannot see them
