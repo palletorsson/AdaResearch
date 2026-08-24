@@ -133,6 +133,20 @@ func _run() -> void:
 			fails.append("translation: %d wedge(s) seated in the pool, wanted >=2" % sunk_wedges)
 		else:
 			notes.append("translation: pool -1 / pier +3 / deck 0 / %d sunken wedge(s)" % sunk_wedges)
+		# the courtyard walk-around (2026-08-24): west margin and east
+		# ambulatory at deck 0, and the two-flight stair's p:1 step at +1
+		var mw: Vector2 = cellw.call(rc, 0.0, 10.0)
+		var ymw: float = _ray_y(w3d, mw.x, mw.y)
+		var me: Vector2 = cellw.call(rc, 7.0, 8.0)
+		var yme: float = _ray_y(w3d, me.x, me.y)
+		var stp: Vector2 = cellw.call(rc, 7.0, 12.0)
+		var ystp: float = _ray_y(w3d, stp.x, stp.y)
+		if absf(ymw) > 0.2 or absf(yme) > 0.2:
+			fails.append("translation: margins west %.2f / east %.2f, wanted 0 (the walk-around)" % [ymw, yme])
+		if absf(ystp - 1.0) > 0.25:
+			fails.append("translation: stair step at %.2f, wanted 1.0 (the p:1 flight)" % ystp)
+		if absf(ymw) <= 0.2 and absf(yme) <= 0.2 and absf(ystp - 1.0) <= 0.25:
+			notes.append("translation: walk-around margins 0 / stair step +1")
 
 	# ── trans axisdecomposition ─────────────────────────────────────────────
 	if by_pearl.has("trans axisdecomposition"):
