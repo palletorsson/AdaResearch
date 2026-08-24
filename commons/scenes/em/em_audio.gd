@@ -296,7 +296,11 @@ class Rig extends Node:
 		p.pitch_scale = clampf(_rng.randf_range(0.945, 1.065) + foot * 0.015, 0.85, 1.20)
 		var sp: Dictionary = SPACES[space]
 		var trim: float = _num(sp, "step_db", 0.0)
-		p.volume_db = -8.0 + trim + _rng.randf_range(-3.0, 1.0) + (0.0 if foot > 0.0 else -0.8)
+		# THE SHOES (2026-08-24, Palle: "can we lower the sound of the shoes").
+		# The base was -8 dB, which reads as boots in a stone hall. -17 keeps
+		# the footfall present without narrating every step; em_layout's
+		# audio.step_db moves it live for anyone who wants it louder again.
+		p.volume_db = _step_base() + trim + _rng.randf_range(-3.0, 1.0) + (0.0 if foot > 0.0 else -0.8)
 		p.play()
 
 	func _family(surface: String) -> String:
@@ -380,6 +384,24 @@ class Rig extends Node:
 		if d.has(key):
 			return float(d[key])
 		return fallback
+
+	## The footfall's base level, read ONCE from em_layout's audio.step_db
+	## (default -17 dB). A dial rather than a constant: the shoes are the one
+	## sound the walker hears on every single step, so the right level is a
+	## matter of taste and headphones, not of code.
+	var _step_base_db: float = 1.0e9
+	func _step_base() -> float:
+		if _step_base_db < 1.0e8:
+			return _step_base_db
+		_step_base_db = -17.0
+		var lp := "res://commons/data/em_layout.json"
+		if FileAccess.file_exists(lp):
+			var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(lp))
+			if parsed is Dictionary and (parsed as Dictionary).get("audio") is Dictionary:
+				var a: Dictionary = (parsed as Dictionary)["audio"]
+				if a.has("step_db"):
+					_step_base_db = clampf(float(a["step_db"]), -60.0, 6.0)
+		return _step_base_db
 
 	# ── footstep autowiring ─────────────────────────────────────────────────
 

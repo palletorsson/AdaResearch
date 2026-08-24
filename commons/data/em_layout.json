@@ -125,5 +125,9 @@
   "_vr_high": "1 = the headset installs the HIGH tier instead of its default perf. On Quest's Mobile renderer SSIL/SSR/SDFGI/volumetric fog do not exist; the A/B shows what the device supports (glow, fog model, ambient, sky, grade).",
   "ab_seconds": 0,
   "_ab_seconds": "0 = off. N = alternate high/perf every N seconds, LIVE, in both modes — the in-headset A/B. Watch the log for [em-env] A/B -> tier. F7 swaps by hand on desktop."
+ },
+ "audio": {
+  "step_db": -17.0,
+  "_step_db": "the FOOTFALL's base level in dB (2026-08-24, Palle: \"can we lower the sound of the shoes\"). Was -8, which reads as boots in a stone hall. The per-space step_db trim and the 4 dB random window ride on top of this. Raise toward -8 for a heavier walker, drop to -30 to nearly mute the shoes."
  }
 }
