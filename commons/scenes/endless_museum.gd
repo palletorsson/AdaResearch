@@ -5198,6 +5198,44 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 				ledger.append({"token": String(tok_v), "grid": null,
 					"target": [int(cell2["x"]), int(cell2["y"])], "final": [int(cell2["x"]), int(cell2["y"])],
 					"rings": 0, "why": "added by hand, stamped", "plinth": bool(cb2.get("plinth", false))})
+	# ── THE WEDGE SLICE (2026-08-23, Palle: "include the utility layer in the
+	# endless museum so we can place wedges up on the platform") ─────────────
+	# Utilities slice ONE: `wp` (walkable prism — the grid's own stair). Each
+	# wp in the map builds in the hall at its cell, seated on the cell's own
+	# top (a platform cell hosts the next flight), turned by its parameter.
+	# The scene carries its own walkable collision. Subtitles etc. come later.
+	var utils: Array = layers.get("utilities", [])
+	var wedges := 0
+	if not utils.is_empty():
+		var wp_scene: PackedScene = load("res://commons/scenes/mapobjects/walkableprism.tscn") as PackedScene
+		if wp_scene != null:
+			for gz2 in range(utils.size()):
+				var urow: Array = utils[gz2]
+				for gx2 in range(urow.size()):
+					var uv := String(urow[gx2]).strip_edges()
+					if not (uv == "wp" or uv.begins_with("wp:")):
+						continue
+					var wnode: Node3D = wp_scene.instantiate() as Node3D
+					if wnode == null:
+						continue
+					var wx2: int = clampi(gx2 + offx, bx0, bx1)
+					var wz2: int = clampi(gz2 + offz, bz0, bz1)
+					var base_h := 0.0
+					if gz2 < structure.size() and gx2 < (structure[gz2] as Array).size():
+						var sv3 := String((structure[gz2] as Array)[gx2]).strip_edges()
+						if sv3 == "p" or sv3.begins_with("p:"):
+							base_h = 1.0
+							if ":" in sv3 and str(sv3.split(":")[1]).is_valid_int():
+								base_h = float(maxi(1, int(str(sv3.split(":")[1]))))
+					# CENTER-origin prism: +0.5 seats the base on the cell's top
+					wnode.position = Vector3(wx2 + 0.5, base_h + 0.5, float(wz2) + 0.5)
+					var uparts := uv.split(":")
+					if uparts.size() > 1 and str(uparts[1]).is_valid_float():
+						wnode.rotation_degrees.y = float(uparts[1])
+					seg.add_child(wnode)
+					wedges += 1
+	if wedges > 0:
+		print("[em-pack]   %d wedge(s) from the map's utilities" % wedges)
 	print("[em-pack] %s · %s <- %s: %d verbatim + %d slid of %d, %d left behind, %d plinth(s)" % [
 		chapter, entry.get("pearl", ""), map_name, placed - slid, slid, bodies.size(), left, plinth_n])
 	# THE LEDGER (2026-08-21, Palle: "a page with the grid of each step") —
