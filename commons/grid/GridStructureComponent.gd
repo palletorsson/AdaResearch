@@ -209,6 +209,23 @@ func _print_tree(node: Node, depth: int = 0):
 		_print_tree(child, depth + 1)
 
 # Generate structure from data
+## Numbers are the legacy heights (0-5). The LETTERS end the double meaning
+## of "2" (2026-08-23, Palle: the grid says platform, the museum said wall):
+## "w" is an explicit WALL, built as a 3-cube column (taller than any climb);
+## "p" / "p:N" is an explicit PLATFORM of N cubes — climbable terrain, exactly
+## what numeric N built. A map without letters behaves byte-identically.
+static func parse_cell_height(cell_value: String) -> int:
+	var s := cell_value.strip_edges()
+	if s == "w":
+		return 3
+	if s == "p" or s.begins_with("p:"):
+		if ":" in s:
+			var n := str(s.split(":")[1])
+			return maxi(1, int(n)) if n.is_valid_int() else 1
+		return 1
+	return int(s) if s.is_valid_int() else 0
+
+
 func generate_structure(structure_data, dimensions: Vector3i):
 	if not structure_data:
 		print("GridStructureComponent: No structure data provided")
@@ -270,10 +287,7 @@ func _apply_structure_data(structure_data):
 				break
 
 			var cell_value = str(row[x]).strip_edges()
-			var stack_height = 0
-
-			if cell_value.is_valid_int():
-				stack_height = int(cell_value)
+			var stack_height = parse_cell_height(cell_value)
 
 			# Collect stacked cube positions
 			for y in range(0, min(stack_height, grid_y)):
@@ -1014,8 +1028,7 @@ func get_height_at(x: int, z: int) -> int:
 		return 0
 	if x < 0 or x >= _editable_layout[z].size():
 		return 0
-	var val: String = str(_editable_layout[z][x]).strip_edges()
-	return int(val) if val.is_valid_int() else 0
+	return parse_cell_height(str(_editable_layout[z][x]))
 
 
 ## Add a cube on top of the stack at column (x, z). Returns true if successful.
@@ -1114,7 +1127,7 @@ func _rebuild_from_layout() -> void:
 	for z in _editable_layout.size():
 		var row = _editable_layout[z]
 		for x in row.size():
-			var height: int = int(str(row[x])) if str(row[x]).is_valid_int() else 0
+			var height: int = parse_cell_height(str(row[x]))
 			for y in range(0, mini(height, grid_y)):
 				temp_positions.append(Vector3i(x, y, z))
 				if x < grid_x and y < grid_y and z < grid_z:

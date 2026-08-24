@@ -3396,6 +3396,18 @@ func _build_segment() -> void:
 					_add_col(solid, Vector3(x + 0.5, 0.3, z + 0.5), Vector3(1, 1.0, 1))
 				"4":
 					_wall_at(seg, solid, wcells, x, z, wall_col, m_wall, wr)
+			# PLATFORMS ("p", "p2", "p3"… — 2026-08-23, the letter that ends
+			# the double meaning of "2"): a real climbable block of N metres,
+			# floored on top, artifact-bearing, NEVER a wall. The walk map
+			# stays conservative (the doll walker keeps to the floor); the
+			# player's body climbs it by wedge or jump.
+			if c.begins_with("p"):
+				var pn := 1
+				if c.length() > 1 and str(c.substr(1)).is_valid_int():
+					pn = maxi(1, int(str(c.substr(1))))
+				var pf := float(pn)
+				_box(seg, Vector3(x + 0.5, pf / 2.0, z + 0.5), Vector3(1, pf, 1), Color(0.21, 0.21, 0.25), m_podium)
+				_add_col(solid, Vector3(x + 0.5, pf / 2.0, z + 0.5), Vector3(1, pf, 1))
 			if c == "1s":
 				slots.append({"x": x, "y": z, "top": 0.0, "rank": 2})
 			elif c == "2s":
@@ -5029,8 +5041,16 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 	for gz in range(structure.size()):
 		var srow: Array = structure[gz]
 		for gx in range(srow.size()):
-			if String(srow[gx]).strip_edges() == "2":
-				plinths[Vector2i(gx, gz)] = true
+			var psv := String(srow[gx]).strip_edges()
+			if psv == "2":
+				plinths[Vector2i(gx, gz)] = 1.0
+			elif psv == "p" or psv.begins_with("p:"):
+				# an explicit PLATFORM under the anchor: the support is the
+				# platform's own height (the letter that ends the "2" collision)
+				var pn2 := 1
+				if ":" in psv and str(psv.split(":")[1]).is_valid_int():
+					pn2 = maxi(1, int(str(psv.split(":")[1])))
+				plinths[Vector2i(gx, gz)] = float(pn2)
 	var bodies: Array = []
 	var minx := 999999
 	var maxx := -999999
@@ -5054,7 +5074,8 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 			# reach of the hand). Dropped here until 2026-08-23.
 			var yoff: float = float(parts[2]) if parts.size() > 2 and str(parts[2]).is_valid_float() else 0.0
 			bodies.append({"token": parts[0], "gx": gx, "gz": gz, "rot": rot, "att": att,
-				"yoff": yoff, "plinth": plinths.has(Vector2i(gx, gz))})
+				"yoff": yoff, "plinth": plinths.has(Vector2i(gx, gz)),
+				"support_h": float(plinths.get(Vector2i(gx, gz), 1.0))})
 			minx = mini(minx, gx)
 			maxx = maxi(maxx, gx)
 			minz = mini(minz, gz)
@@ -5135,7 +5156,7 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 					continue   # never past the walls — _stamp would not stop us
 				var cell := {"x": base_x + d.x, "y": base_z + d.y, "rank": 2, "top": 0.0}
 				if claimed_plinth:
-					cell["support_m"] = 1.0
+					cell["support_m"] = float(b.get("support_h", 1.0))
 				if float(b["yoff"]) > 0.01:
 					cell["hover_m"] = float(b["yoff"])
 				if _stamp(seg, scene, String(b["token"]), cell, zbase, 1, {}, false, 0.0, float(b["rot"]), cfg):
@@ -12217,13 +12238,22 @@ func _derive_map_row(map_name: String) -> Dictionary:
 		var line: Array = []
 		var srow: Array = struct[r] if r < struct.size() else []
 		for c in range(0, c1 + 1):
-			var v := 0
-			if c < srow.size():
-				var sv2 := str(srow[c]).strip_edges()
-				v = int(sv2) if sv2.is_valid_int() else 0
+			var sv2 := str(srow[c]).strip_edges() if c < srow.size() else ""
+			var v := int(sv2) if sv2.is_valid_int() else 0
 			# h>=2 wall, h==1 floor, 0 stays a HOLE (hollow — no floor laid,
-			# not walkable; 2026-08-23, "value 0 for floating objects")
-			line.append("4" if v >= 2 else ("1" if v >= 1 else "0"))
+			# not walkable; 2026-08-23, "value 0 for floating objects").
+			# LETTERS end the double meaning of "2" (same day): "w" is an
+			# explicit WALL; "p"/"p:N" an explicit PLATFORM tile ("p"/"pN")
+			# — a climbable block in the hall, never a wall.
+			if sv2 == "w":
+				line.append("4")
+			elif sv2 == "p" or sv2.begins_with("p:"):
+				var pn := 1
+				if ":" in sv2 and str(sv2.split(":")[1]).is_valid_int():
+					pn = maxi(1, int(str(sv2.split(":")[1])))
+				line.append("p" if pn == 1 else "p%d" % pn)
+			else:
+				line.append("4" if v >= 2 else ("1" if v >= 1 else "0"))
 		tile.append(line)
 	var arts: Array = []
 	for r in range(inter.size()):

@@ -177,8 +177,20 @@ def load_sequence_map_groups() -> dict[str, dict]:
 # ---------------------------------------------------------------------------
 
 def parse_height(cell) -> int:
+    """Numbers are the legacy vocabulary (0-5 heights). The LETTERS end the
+    double meaning of '2' (2026-08-23, Palle: grid says platform, museum said
+    wall): 'w' is an explicit WALL (unwalkable, effectively infinite), and
+    'p' / 'p:N' is an explicit PLATFORM of N cubes (climbable terrain)."""
+    s = str(cell).strip()
+    if s == "w":
+        return 99
+    if s == "p" or s.startswith("p:"):
+        try:
+            return max(1, int(s.split(":")[1])) if ":" in s else 1
+        except (ValueError, IndexError):
+            return 1
     try:
-        h = int(str(cell).strip())
+        h = int(s)
         return h if h > 0 else 0
     except (ValueError, TypeError):
         return 0

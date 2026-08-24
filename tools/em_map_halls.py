@@ -62,8 +62,21 @@ def declared() -> dict[str, list[tuple[str, str]]]:
 
 def derive_row(pearl: str, map_name: str, museum_key: str, idx: int, total: int, chapter: str = "primitives") -> dict:
     md = json.loads((ROOT / "commons" / "maps" / map_name / "map_data.json").read_text(encoding="utf-8"))
-    struct = [[int(str(v)) if str(v).strip().isdigit() else 0 for v in row]
-              for row in md["layers"]["structure"]]
+    raw = md["layers"]["structure"]
+
+    def eff(v):
+        # numbers = legacy heights; "w" = wall (3), "p"/"p:N" = platform (N)
+        s = str(v).strip()
+        if s == "w":
+            return 3
+        if s == "p" or s.startswith("p:"):
+            try:
+                return max(1, int(s.split(":")[1])) if ":" in s else 1
+            except ValueError:
+                return 1
+        return int(s) if s.isdigit() else 0
+
+    struct = [[eff(v) for v in row] for row in raw]
     inter = md["layers"].get("interactables", [])
     # ORIGIN-PINNED (the ruling drift lesson: tile cells ARE map cells,
     # forever). Cropping to the content bbox moved (0,0) whenever the map's
@@ -84,8 +97,21 @@ def derive_row(pearl: str, map_name: str, museum_key: str, idx: int, total: int,
             # them and keeps only the walls as walls.
             # h>=2 wall, h==1 floor, 0 stays a HOLE — the docstring promised
             # `else "0"` from day one but the code flattened holes to floor
-            # (caught 2026-08-23, Palle: "value 0 for floating objects")
-            line.append("4" if v >= 2 else ("1" if v >= 1 else "0"))
+            # (caught 2026-08-23, Palle: "value 0 for floating objects").
+            # LETTERS end the double meaning of "2" (same day): "w" is an
+            # explicit WALL, "p"/"p:N" an explicit PLATFORM (tile "p"/"pN" —
+            # a climbable block, never a wall).
+            sv2 = str(raw[r][c]).strip() if r < len(raw) and c < len(raw[r]) else ""
+            if sv2 == "w":
+                line.append("4")
+            elif sv2 == "p" or sv2.startswith("p:"):
+                n = 1
+                if ":" in sv2:
+                    try: n = max(1, int(sv2.split(":")[1]))
+                    except ValueError: n = 1
+                line.append("p" if n == 1 else "p%d" % n)
+            else:
+                line.append("4" if v >= 2 else ("1" if v >= 1 else "0"))
         tile.append(line)
     # NO inserted walls (Palle: "there is a wall where the sliding door
     # should be — you can simplify"): the museum's vestibule + gate already
