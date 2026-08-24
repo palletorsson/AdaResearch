@@ -3474,30 +3474,35 @@ func _build_segment() -> void:
 	const BANNER_Z := 2.30
 	const BANNER_Y := 1.95
 	const BANNER_W := 2.2
-	var banner: Node3D = TextScreenRes.new()
-	banner.mode = TextScreenRes.Mode.SCREEN
-	banner.title = String(spec["label"])
-	# the banner names the building AND the chapter it houses — and the PEARL,
-	# when the chapter arrived as a string: "primitives · lines (2/11)"
-	var seg_label := seg_seq
-	if deal is Dictionary and String(deal.get("pearl", "")) != "":
-		seg_label = "%s · %s (%d/%d)" % [seg_seq, String(deal.get("pearl", "")),
-			int(deal.get("pearl_index", 0)) + 1, int(deal.get("pearls_total", 0))]
-	banner.body = ("%s\n\n%s" % [spec["museum"], seg_label]) if seg_seq != "" else String(spec["museum"])
-	banner.title_color = legend.lightened(0.35)   # ink on a panel, not light on a wall
-	banner.width_m = BANNER_W
-	banner.position = Vector3(BANNER_X, BANNER_Y, BANNER_Z)
-	# TextScreen faces its own local +Z; yaw +90 turns that to world +X, i.e. off
-	# the west wall into the lobby
-	banner.rotation_degrees = Vector3(0, 90, 0)
-	seg.add_child(banner)
-	# the surround: buried in the wall, 50 mm proud, so the sign sits IN a reveal
-	# and throws a real shadow instead of floating
-	_box(seg, Vector3(1.005, BANNER_Y, BANNER_Z),
-		Vector3(0.09, BANNER_W * 0.62 + 0.18, BANNER_W + 0.18),
-		Color(0.25, 0.17, 0.10), m_plinth)
-	if _banner_pos == Vector3.ZERO:
-		_banner_pos = Vector3(BANNER_X, BANNER_Y, BANNER_Z + _next_z)
+	# THE BANNER IS GONE BY DEFAULT (2026-08-23, Palle: "in the beginning of
+	# each map there is a gallery label info board — can we remove that").
+	# em_layout hall.banner = 1 brings the sign back; its consumer keeps a
+	# hardcoded fallback position, so nothing downstream needs it to exist.
+	if _L("hall", "banner", 0.0) > 0.5:
+		var banner: Node3D = TextScreenRes.new()
+		banner.mode = TextScreenRes.Mode.SCREEN
+		banner.title = String(spec["label"])
+		# the banner names the building AND the chapter it houses — and the PEARL,
+		# when the chapter arrived as a string: "primitives · lines (2/11)"
+		var seg_label := seg_seq
+		if deal is Dictionary and String(deal.get("pearl", "")) != "":
+			seg_label = "%s · %s (%d/%d)" % [seg_seq, String(deal.get("pearl", "")),
+				int(deal.get("pearl_index", 0)) + 1, int(deal.get("pearls_total", 0))]
+		banner.body = ("%s\n\n%s" % [spec["museum"], seg_label]) if seg_seq != "" else String(spec["museum"])
+		banner.title_color = legend.lightened(0.35)   # ink on a panel, not light on a wall
+		banner.width_m = BANNER_W
+		banner.position = Vector3(BANNER_X, BANNER_Y, BANNER_Z)
+		# TextScreen faces its own local +Z; yaw +90 turns that to world +X, i.e. off
+		# the west wall into the lobby
+		banner.rotation_degrees = Vector3(0, 90, 0)
+		seg.add_child(banner)
+		# the surround: buried in the wall, 50 mm proud, so the sign sits IN a reveal
+		# and throws a real shadow instead of floating
+		_box(seg, Vector3(1.005, BANNER_Y, BANNER_Z),
+			Vector3(0.09, BANNER_W * 0.62 + 0.18, BANNER_W + 0.18),
+			Color(0.25, 0.17, 0.10), m_plinth)
+		if _banner_pos == Vector3.ZERO:
+			_banner_pos = Vector3(BANNER_X, BANNER_Y, BANNER_Z + _next_z)
 	var ember := MeshInstance3D.new()
 	var ebm := BoxMesh.new()
 	ebm.size = Vector3(w - 2.0, 0.02, 0.08)
@@ -3553,9 +3558,13 @@ func _build_segment() -> void:
 						"speak_lines": _speak_lines(next_seq, String(deal.get("pearl", "")) if deal is Dictionary else ""),
 						"speak_anchors": _speak_anchors(),     # token -> world: each line hangs on the field nearest its body
 						"speak_caps": _L("speak", "caps", 0.0) > 0.5,
-						# the LOBBY (first vestibule) hangs no showings: its walls carry the
-						# window, the counter, the extinguisher and the lift instead
-						"bare_below_z": (VESTIBULE_H + 0.6) if (_seg_index == 0 and _L("lobby", "enabled", 1.0) > 0.5) else -1.0,
+						# EVERY enter room stays bare (2026-08-23, Palle: "remove
+						# ... other objects on the wall around that info board"):
+						# no showings, mounts or cards hang below the threshold —
+						# the walk begins on plain walls, the hall's own showings
+						# start past the door. The lobby was always bare; now the
+						# rule is the corridor's.
+						"bare_below_z": VESTIBULE_H + 0.6,
 						# the CARDS name their place: chapter · pearl · number
 						"chapter": next_seq,
 						"pearl": String(deal.get("pearl", "")) if deal is Dictionary else ""})
