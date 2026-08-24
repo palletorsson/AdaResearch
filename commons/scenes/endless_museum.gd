@@ -8291,6 +8291,13 @@ func flush_stamps() -> void:
 		if String(item.get("kind", "stamp")) == "wallrun":
 			while not (item["pending"] as Array).is_empty():
 				_wallrun_step(item)
+		elif String(item.get("kind", "stamp")) == "dress":
+			# a dress item has run/seg_no, not scene_path/cell — falling into
+			# the stamp branch indexed missing keys and KILLED the flush on
+			# the first dressed-deferred hall (probes and the parity gate saw
+			# undressed, ceiling-less segments; found 2026-08-24 when the
+			# transformation probe counted 0 ceiling meshes on a roofed hall)
+			_run_dress_item(item)
 		else:
 			_stamp_inner(item["seg"], String(item["scene_path"]), String(item["lookup"]),
 				item["cell"], int(item["zbase"]), int(item["fp"]), item["axis"], bool(item["drop"]),
