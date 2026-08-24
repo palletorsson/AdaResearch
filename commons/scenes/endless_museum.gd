@@ -12826,13 +12826,19 @@ func _authored_passages(tile_in: Array) -> Array:
 	var cl: int = _open_col(tile, tile.size() - 1)
 	var cr: int = cl + (3 if cl + 3 <= w - 2 else -3)
 	cr = clampi(cr, 1, w - 2)
+	# THE 2-WIDE PATH (2026-08-24, Palle: "make the path way of the pass 2
+	# blocks wide as default" — one block read as a squeeze). Doors and the
+	# sidestep corridor each take a second cell; the offset stays big enough
+	# that no straight line passes both doors (the corner holds).
+	var cl2: int = clampi(cl + 1, 1, w - 2)
+	var cr2: int = clampi(cr + 1, 1, w - 2)
 	var row_a: Array = []
 	var row_b: Array = []
 	var row_c: Array = []
 	for x in range(w):
-		row_a.append("1" if x == cl else "4")
-		row_b.append("1" if x >= mini(cl, cr) and x <= maxi(cl, cr) else "4")
-		row_c.append("1" if x == cr else "4")
+		row_a.append("1" if (x == cl or x == cl2) else "4")
+		row_b.append("1" if x >= mini(cl, cr) and x <= maxi(cl2, cr2) else "4")
+		row_c.append("1" if (x == cr or x == cr2) else "4")
 	tile.append(row_a)
 	tile.append(row_b)
 	tile.append(row_c)
