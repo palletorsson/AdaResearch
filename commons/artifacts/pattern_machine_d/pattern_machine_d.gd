@@ -52,10 +52,10 @@ const PatternSim = preload("res://commons/pattern_grammar/pattern_sim.gd")
 @export var accent_color: Color = Color(1.0, 0.55, 0.12)    # press-orange accent
 @export var ink_glow_color: Color = Color(1.0, 0.7, 0.25)
 ## Side length of the printed carpet that feeds off the tray (metres).
-@export var carpet_width: float = 2.0
-@export var carpet_length: float = 3.8
+@export var carpet_width: float = 3.4
+@export var carpet_length: float = 6.6
 ## How many matrix repeats span the carpet width.
-@export var carpet_repeats: int = 8
+@export var carpet_repeats: int = 11
 @export var feed_speed: float = 0.10
 
 # ── Stamp ink palette (Bauhaus textile, matches the station) ───────────
@@ -238,6 +238,10 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		motif_seed = int(config_data["motif_seed"])
 	if config_data.has("matrix_size"):
 		matrix_size = clampi(int(config_data["matrix_size"]), 2, 6)
+	if config_data.has("carpet_width"):
+		carpet_width = maxf(0.3, float(config_data["carpet_width"]))
+	if config_data.has("carpet_length"):
+		carpet_length = maxf(0.3, float(config_data["carpet_length"]))
 	if config_data.has("carpet_repeats"):
 		carpet_repeats = maxi(1, int(config_data["carpet_repeats"]))
 	if config_data.has("feed_speed"):

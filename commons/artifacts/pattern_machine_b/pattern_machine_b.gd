@@ -52,11 +52,11 @@ const WallpaperGroupsScript = preload("res://commons/primitives/arrays/wallpaper
 @export var frame_color: Color = Color(0.10, 0.10, 0.13)
 @export var accent_color: Color = Color(0.35, 0.95, 0.85)   # cyan-mint sci-fi accent
 @export var holo_color: Color = Color(0.40, 0.95, 1.0)      # holographic grid glow
-@export var sheet_width: float = 1.1                        # printed sheet / carpet width
-@export var sheet_height: float = 1.8                       # how tall the extruded sheet rises
-@export var carpet_length: float = 2.2                      # floor carpet run
+@export var sheet_width: float = 2.2                        # printed sheet / carpet width
+@export var sheet_height: float = 2.8                       # how tall the extruded sheet rises
+@export var carpet_length: float = 4.8                      # floor carpet run
 @export var scroll_speed: float = 0.14                      # uv feed speed
-@export var carpet_repeats: int = 6                         # tile repeats across the output
+@export var carpet_repeats: int = 9                         # tile repeats across the output
 
 # ── Layout constants ───────────────────────────────────────────────────
 const CONSOLE_TILT_DEG := -32.0      # tilt of the holographic edit console

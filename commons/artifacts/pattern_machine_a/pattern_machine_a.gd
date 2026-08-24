@@ -56,9 +56,9 @@ class_name PatternMachineA
 @export var frame_color: Color = Color(0.11, 0.12, 0.16)
 @export var accent_color: Color = Color(0.95, 0.55, 0.18)   # amber/copper sci-fi accent
 @export var warp_color: Color = Color(1.0, 0.7, 0.3)
-@export var carpet_width: float = 1.3
-@export var carpet_length: float = 2.6
-@export var carpet_repeats: int = 8        # how many card-repeats across the carpet
+@export var carpet_width: float = 2.6
+@export var carpet_length: float = 5.6
+@export var carpet_repeats: int = 11       # how many card-repeats across the carpet
 @export var scroll_speed: float = 0.14
 
 # ── Group order (string names indexed for cycling) ───────────────────────
@@ -271,6 +271,8 @@ func apply_grid_config(config: Dictionary) -> void:
 	if config.has("motif_seed"): motif_seed = int(config["motif_seed"])
 	if config.has("card_size"): card_size = clampi(int(config["card_size"]), 4, 8)
 	if config.has("density"): density = clampf(float(config["density"]), 0.0, 1.0)
+	if config.has("carpet_width"): carpet_width = maxf(0.3, float(config["carpet_width"]))
+	if config.has("carpet_length"): carpet_length = maxf(0.3, float(config["carpet_length"]))
 	if config.has("carpet_repeats"): carpet_repeats = maxi(1, int(config["carpet_repeats"]))
 	if config.has("scroll_speed"): scroll_speed = float(config["scroll_speed"])
 	# Rebuild from scratch with the new DNA.

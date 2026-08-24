@@ -100,8 +100,8 @@ const EXHIBITS: PackedStringArray = ["bolt", "unit", "operation", "catalogue"]
 @export var metal_color: Color = Color(0.32, 0.34, 0.40)      # brushed metal
 @export var accent_color: Color = Color(1.0, 0.55, 0.15)      # warm amber accent
 @export var core_color: Color = Color(0.35, 0.9, 1.0)         # cyan core glow
-@export var carpet_world_size: float = 5.4                    # carpet side length (m)
-@export var carpet_repeats: int = 9                           # domain repeats across carpet
+@export var carpet_world_size: float = 7.6                    # carpet side length (m)
+@export var carpet_repeats: int = 12                           # domain repeats across carpet
 @export var rotor_speed: float = 0.6                          # rad/s base spin of mirror wedges
 
 # ── Palette (Italian textile, matches pattern_maker_station) ──────────────

@@ -20,9 +20,9 @@
 				"artmathematics"
 			],
 			"footprint": [
-				2,
+				4,
 				3,
-				2
+				6
 			],
 			"tags": [
 				"dna",
@@ -46,10 +46,10 @@
 				"density": 0.5,
 				"carpet_repeats": 8,
 				"footprint": [
-					2,
-					3,
-					2
-				],
+				4,
+				3,
+				6
+			],
 				"size_group": "large"
 			},
 			"size_group": "large",
@@ -62,20 +62,20 @@
 			},
 			"measurements": {
 				"aabb_size": [
-					2.4,
+					3.2,
 					2.48,
-					4.73
+					5.95
 				],
 				"aabb_center": [
 					0.0,
 					1.24,
-					2.19
+					2.8
 				],
 				"grid_cells": [
-					3,
-					5
+					4,
+					6
 				],
-				"max_dimension_m": 4.73,
+				"max_dimension_m": 5.95,
 				"measured_at": "2026-08-12T04:39:51.280397Z"
 			}
 		}
