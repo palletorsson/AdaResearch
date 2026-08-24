@@ -619,6 +619,22 @@ var _edit_records: Array = []      # [{node, token, tile_cell, rotation, chapter
 ## twelve of this file's record reads were written, never runs. Neither _edit_records
 ## nor _segments is ever pruned, so their nodes outlive the map that made them and
 ## the third map load walks a list of ghosts.
+## Does commons/data/map_authored.json declare this chapter? Read once — the
+## declaration is the transplant's own licence (see the grid_pack note).
+var _authored_chapters: Dictionary = {}
+func _authored_chapter(chapter: String) -> bool:
+	if _authored_chapters.is_empty():
+		_authored_chapters["_read"] = true
+		var ap := "res://commons/data/map_authored.json"
+		if FileAccess.file_exists(ap):
+			var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(ap))
+			if parsed is Dictionary:
+				for k in (parsed as Dictionary).keys():
+					if not String(k).begins_with("_") and (parsed as Dictionary)[k] is Array:
+						_authored_chapters[String(k)] = true
+	return _authored_chapters.has(chapter)
+
+
 func _node_or_null(v: Variant) -> Node3D:
 	if v == null or not is_instance_valid(v):
 		return null
@@ -6562,7 +6578,15 @@ func _deal_segment(seg: Node3D, slots: Array, zbase: int, spec: Dictionary,
 	var mkey := String(spec.get("key", ""))
 	if not (_plan_db.is_empty() and _plan_by_chapter.is_empty()):
 		var planned: Dictionary = {}
-		if _grid_pack:
+		# AN AUTHORED CHAPTER IS ITS OWN LICENCE (2026-08-24). grid_pack was a
+		# separate switch that could silently disable the transplant for halls
+		# whose declaration says "build from the map" — and it DID: the museum
+		# writes the flag back into em_control on every reload, so one run with
+		# the flag unread (the Inspector-precedence bug) persisted grid_pack 0
+		# and every authored hall fell to the dealer from then on. Palle walked
+		# that for days ("there is still no simulation"). map_authored.json is
+		# the ruling; the flag only speaks for chapters it never named.
+		if _grid_pack or _authored_chapter(chapter):
 			planned = _transplant_from_map(seg, zbase, mkey, w, h, chapter)
 		if planned.is_empty():
 			planned = _deal_from_plan(seg, zbase, mkey, tile, w, h, chapter)
