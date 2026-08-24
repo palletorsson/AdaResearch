@@ -40,6 +40,7 @@ Exit code is the number of unresolved PLACEMENTS, so it gates.
 """
 
 import json
+import re
 import sys
 from collections import defaultdict
 from pathlib import Path
@@ -67,6 +68,40 @@ ALWAYS_OK = {"dark_sphere", "ds"}
 # checked, because ClusterResolver names its source directory.
 PREFIX_FORMS = ("mc:", "gridagent:", "criticalinfo:", "cluster:")
 CLUSTERS_DIR = ROOT / "commons" / "data" / "curated_walls" / "clusters"
+
+
+# ── THE ROOT-TYPE CHECK (2026-08-24) ─────────────────────────────────────────
+# A token can resolve to a scene that EXISTS and still be unplaceable: the
+# museum needs a Node3D, and a scene whose root is Node / Node2D / Control
+# fails at instantiate — silently, in the middle of a hall build. Found when
+# `gridcolorizer` (a MUTATOR that colours an existing MultiMesh, root type
+# Node) was moved into a room and the bake refused it 117 times, once per
+# ring-search cell. The file-exists gate is blind to this whole class, so it
+# reports it beside the resolution verdict rather than pretending it is fine.
+SPATIAL_ROOTS = re.compile(
+    r"^(Node3D|Spatial|StaticBody3D|RigidBody3D|CharacterBody3D|Area3D|"
+    r"MeshInstance3D|MultiMeshInstance3D|CSG\w+|XR\w+|Marker3D|GridMap|"
+    r"Path3D|VehicleBody3D|SoftBody3D|GPUParticles3D|CPUParticles3D|"
+    r"Camera3D|\w*Light3D|Skeleton3D|BoneAttachment3D|AudioStreamPlayer3D|"
+    r"NavigationRegion3D|ReflectionProbe|VoxelGI|Decal|OccluderInstance3D)$")
+
+
+def scene_root_type(scene_path):
+    """The root node's type as the .tscn declares it, or None when the file is
+    missing / inherits its root from another scene (which we cannot judge)."""
+    rel = str(scene_path).replace("res://", "")
+    f = ROOT / rel
+    if not f.exists():
+        return None
+    try:
+        text = f.read_text(encoding="utf-8", errors="ignore")
+    except OSError:
+        return None
+    for line in text.splitlines():
+        if line.startswith("[node name=") and "parent=" not in line:
+            m = re.search(r'type="([^"]+)"', line)
+            return m.group(1) if m else None      # no type = inherited root
+    return None
 
 
 def is_empty_cell(raw):
@@ -191,12 +226,30 @@ def main():
     else:
         names = sorted(owners.keys())
 
+    placed_tokens = {}          # map -> {token} for the root-type pass
     total_placements = 0
     total_malformed = 0
     malformed_maps = {}
     findings = {}
     unscanned = []
     for name in names:
+        mf = MAPS_DIR / name / "map_data.json"
+        if mf.exists():
+            try:
+                with open(mf, encoding="utf-8") as fh:
+                    _md = json.load(fh)
+                toks = set()
+                for _row in (_md.get("layers", {}).get("interactables", []) or []):
+                    if not isinstance(_row, list):
+                        continue
+                    for _c in _row:
+                        _raw = (_c or "").strip() if isinstance(_c, str) else ""
+                        if _raw and not _raw.startswith("#"):
+                            toks.add(_raw.split("#")[0].split(":")[0])
+                if toks:
+                    placed_tokens[name] = toks
+            except Exception:
+                pass
         placements, bad, malformed, scanned = scan_map(
             name, registry_scenes, check_scenes)
         if not scanned:
@@ -243,6 +296,20 @@ def main():
         }, indent=2))
         return unresolved
 
+    # THE ROOT-TYPE PASS: placeable means a 3D root, not merely a file that
+    # exists. Reported beside the resolution verdict, never folded into it —
+    # these tokens resolve fine and still cannot stand in a room.
+    unplaceable = {}
+    for _name, _toks in placed_tokens.items():
+        for _t in _toks:
+            _sc = registry_scenes.get(_t) or registry_scenes.get(_t.lower())
+            if not _sc:
+                continue
+            _rt = scene_root_type(_sc)
+            if _rt and not SPATIAL_ROOTS.match(_rt):
+                _u = unplaceable.setdefault(_t, {"root": _rt, "maps": set()})
+                _u["maps"].add(_name)
+
     scope = "ALL MAPS" if scan_all else "SPINE"
     print("=== MAP TOKEN RESOLUTION (%s) ===" % scope)
     print("%d maps read, %d placements, %d unresolved (%d distinct tokens)"
@@ -261,6 +328,18 @@ def main():
                  ", ".join("%s x%d" % (m, n) for m, n in
                            sorted(malformed_maps.items(),
                                   key=lambda kv: -kv[1])[:3])))
+    if unplaceable:
+        print()
+        print("UNPLACEABLE ROOTS: %d token(s) resolve to a scene whose root is "
+              "not a 3D node - they cannot instantiate in a hall, and the museum "
+              "refuses one once per ring-search cell (a single bad token cost 117 "
+              "refusals in one bake):" % len(unplaceable))
+        for _t in sorted(unplaceable):
+            _u = unplaceable[_t]
+            _ms = sorted(_u["maps"])
+            print("  %-28s root=%-12s in %s%s"
+                  % (_t, _u["root"], ", ".join(_ms[:4]),
+                     " ..." if len(_ms) > 4 else ""))
     if not unresolved:
         print("\nOK: every interactable token resolves to a scene on disk.")
         return 0
