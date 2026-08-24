@@ -73,7 +73,7 @@ Godot 4 VR/desktop project. Algorithms taught through maps and interactable arti
 - `interactables`: artifacts by lookup name
 
 **Scale (measured 2026-08-01):** 83 sequence files, 2049 maps, 2671 registry entries across
-108 registry files, 23 spine sequences (symmetry dissolved into color's census room, 2026-08-24). The older figures here (42/503/752) were roughly a
+108 registry files, 22 spine sequences (symmetry dissolved into color's census room, and array_tutorial folded into color as its index + rule rungs, both 2026-08-24). The older figures here (42/503/752) were roughly a
 quarter of the truth, so any "sweep the corpus" or "rename everywhere" estimate made from
 them was off by 4x.
 
@@ -84,7 +84,7 @@ Run from repo root:
 ### Steering & Status
 | Tool | Command | Purpose |
 |------|---------|---------|
-| **Pipeline Scorer** | `python tools/sequence_pipeline_scorer.py` | Score all 23 spine sequences through 7 completion stages |
+| **Pipeline Scorer** | `python tools/sequence_pipeline_scorer.py` | Score all 22 spine sequences through 7 completion stages |
 | **Pipeline (single)** | `python tools/sequence_pipeline_scorer.py <seq_id>` | Score one sequence |
 | **Dashboard** | `powershell -ExecutionPolicy Bypass -File commons/tools/project_dashboard_cli.ps1 -Mode status` | Project status, recommendations |
 | **Heat Map** | `python tools/heat_map_generator.py` | Temperature-based priority scoring |
@@ -324,7 +324,7 @@ See `doc/MAP_BUILDING_GUIDE.md` for full details. Key points:
 
 **Map Studio:** `/map-studio` in the encyclopedia — 3-layer visual editor built from scratch.
 
-**Spine sequences are the priority** — 23 sequences forming the core curriculum (symmetry dissolved 2026-08-24: its wallpaper heroes live in color's closing census room, Symmetry_Seventeen).
+**Spine sequences are the priority** — 22 sequences forming the core curriculum (symmetry dissolved 2026-08-24: its wallpaper heroes live in color's closing census room, Symmetry_Seventeen).
 
 ## Heat Map
 
