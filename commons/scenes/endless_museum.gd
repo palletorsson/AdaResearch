@@ -187,12 +187,8 @@ var _catches: int = 0
 # unload the map we are leaving behind?" — the museum always has; these are
 # the numbers it does it by, and they now live in the config with the rest.
 var BUILD_AHEAD_M := 24.0
-## THE TWO-HALL WINDOW (2026-08-24, Palle: "too heavy to render when many
-## halls are shown at the same time ... no more than two maps at a time,
-## reload if we walk back"). The hall behind frees once the eye is 10 m past
-## its far edge — deep enough into the current hall that the door has closed
-## behind you — so the tree holds the current hall + the built-ahead next,
-## with the previous alive only for the first ten metres of a crossing.
+## Desktop/proof streaming margins. VR no longer uses this resident window: its
+## blocking passage frees the current map before constructing the next one.
 var KEEP_BEHIND_M := 10.0
 ## A hall AHEAD frees when the walker has turned back and left it this far in
 ## front — well past the rebuild margin, so free/rebuild cannot thrash.
@@ -201,18 +197,11 @@ var KEEP_AHEAD_M := 50.0
 ## edge. MUST stay under KEEP_BEHIND_M (the hysteresis that prevents a freed
 ## hall from rebuilding the same frame it was freed).
 var REBUILD_MARGIN_M := 6.0
-var MIN_SEGMENTS := 2
-## ONE HALL ON SCREEN (2026-08-24, Palle: "only one hall should render at the
-## time in VR"). The BUILD window stays at two — the next hall must exist
-## before the walker crosses into it or the crossing costs a hitch, which in
-## a headset is worse than a draw call. What changes is what is DRAWN: every
-## segment but the one the eye stands in is hidden. Hidden, not freed, so the
-## flip is free and walking back shows the hall again instantly.
-## The margin is why it is not a hard cut: hiding a segment hides its meshes
-## and NOT its colliders, so a walker at the threshold of an invisible hall
-## would step onto a floor that renders as nothing. Anything within this many
-## metres of the eye stays drawn. The passages turn a corner, so the second
-## hall inside the margin is behind a wall anyway.
+var MIN_SEGMENTS := 2          # desktop; forced to one in VR
+## STRICT ONE-MAP VR. `VR_ONE_HALL` now means resident, not merely visible.
+## A temporary passage owns floor and collision during the zero-map frame; the
+## next map is constructed behind its blocking wall and the passage disappears
+## after the visitor crosses. Walking back uses the same sequence in reverse.
 var VR_RENDER_WINDOW_M := 4.0
 var VR_ONE_HALL := true
 var _render_hidden: int = -1
@@ -778,6 +767,35 @@ var _boot_t0: int = 0
 var _boot_ms: Dictionary = {}
 var _boot_first_frame: bool = false
 var _built_res_writable: bool = true   # false once the pak refuses — writes go to user://
+## The staged loader asks `is_map_ready()` before it reveals a destination. For
+## the museum that means the tiny airlock is ready, not that the heavy hall is
+## finished: the airlock is the honest thing the visitor may see while the hall
+## assembles behind its blocking wall.
+signal loading_shell_ready
+signal museum_ready
+var _loading_shell_ready: bool = false
+var _museum_core_ready: bool = false
+var _museum_ready: bool = false
+var _boot_cell: Node3D = null
+var _boot_loading_label: Label3D = null
+var _loading_anim_t: float = 0.0
+## A passage is not a map. In strict VR streaming it temporarily owns the floor
+## while the current map is freed, then the next map is built behind its far
+## wall. At no point does a hidden second map remain resident.
+var _vr_passage: Node3D = null
+var _vr_passage_label: Label3D = null
+var _vr_passage_far: Node3D = null
+var _vr_passage_rear: Node3D = null
+var _vr_passage_phase: String = ""
+var _vr_passage_dir: int = 0
+var _vr_passage_boundary: float = 0.0
+var _vr_passage_old_node: Node3D = null
+var _vr_passage_target: Node3D = null
+var _vr_passage_width: float = 0.0
+var _vr_passage_frame: int = -1
+var _vr_passage_open_t: float = 0.0
+var _vr_last_eye_z: float = 0.0
+var _loading_cell_mats: Dictionary = {}
 # ── THE WAKE-UP RAMP (2026-08-20, Palle: "loading a grid map like Point_One
 # is shorter") ── Point_One pays the same engine and staging; what it skips
 # is a first frame with ~117 bodies' render pipelines to compile at once.
@@ -917,6 +935,10 @@ var _live: Dictionary = {}         # lookup -> {scene, fp} for EVERY alive artif
 								   # and most names are not in the curriculum order
 var _deal_stats: Dictionary = {}   # running totals for the end-of-run print
 
+## XRToolsStaging reveals this scene as soon as the lightweight cell exists. The
+## expensive registry scan, material preparation, and first hall build start on
+## the following frame, so VR gets a real first image instead of staring at the
+## previous scene's camera-attached "Loading..." label through a blocked frame.
 func _ready() -> void:
 	# every lethal thing in the museum calls this node (a laser, a pool)
 	add_to_group("em_lethal")
@@ -924,6 +946,28 @@ func _ready() -> void:
 		return                        # @tool is for the Inspector dropdowns only
 	_boot_t0 = Time.get_ticks_msec()
 	_boot_ms["engine_to_ready"] = _boot_t0   # since process start
+	_parse_args()
+	_vr = _is_vr()
+	_headless = DisplayServer.get_name() == "headless"
+	if _vr and not _headless:
+		_create_boot_loading_cell()
+	_loading_shell_ready = true
+	_boot_ms["loading_shell"] = Time.get_ticks_msec() - _boot_t0
+	loading_shell_ready.emit()
+	_hide_legacy_loading_text.call_deferred()
+	_boot_museum.call_deferred()
+
+
+## Readiness for the OUTER staging loader. The internal blocking wall remains
+## until `_museum_ready`; returning shell readiness here is what lets the visitor
+## see the animated cell while construction continues safely out of sight.
+func is_map_ready() -> bool:
+	return _loading_shell_ready
+
+
+func _boot_museum() -> void:
+	if _vr and not _headless:
+		await get_tree().process_frame
 	# BootClock (first autoload) splits that number: engine+pak vs the parade
 	var bclock: Node = get_node_or_null("/root/BootClock")
 	var bclock_end: Node = get_node_or_null("/root/BootClockEnd")
@@ -941,13 +985,17 @@ func _ready() -> void:
 				_boot_ms["scene_chain"] = _boot_t0 - int(bclock_end.get("t_init_ms"))
 		else:
 			_boot_ms["autoloads_scene"] = _boot_t0 - int(bclock.get("t_init_ms"))
-	_parse_args()
-	_vr = _is_vr()
 	_load_modules()
+	_boot_ms["modules_loaded"] = Time.get_ticks_msec() - _boot_t0
+	if _vr and not _headless:
+		await get_tree().process_frame
 	_load_museums()
 	_load_crowns()
 	_load_relations()
+	_boot_ms["museum_data"] = Time.get_ticks_msec() - _boot_t0
 	_boot_ms["modules_pool"] = Time.get_ticks_msec() - _boot_t0
+	if _vr and not _headless:
+		await get_tree().process_frame
 	_load_pool()
 	# the flag wins; the scene's own field speaks when there was no flag
 	if _plan_path == "" and plan_file != "" and FileAccess.file_exists(plan_file):
@@ -964,6 +1012,8 @@ func _ready() -> void:
 	else:
 		print("[em-plan] plan: %s" % _plan_path)
 	_boot_ms["pool_done"] = Time.get_ticks_msec() - _boot_t0
+	if _vr and not _headless:
+		await get_tree().process_frame
 	_load_plan()
 	_boot_ms["plan_parsed"] = Time.get_ticks_msec() - _boot_t0
 	_load_bake()
@@ -984,10 +1034,14 @@ func _ready() -> void:
 		print("[em-bake] BAKING %d pearl(s) — every placement decided once, then written to %s" % [_bake_total, BAKE_PATH])
 	_start_at_map()
 	_load_guests()
+	_boot_ms["guests_loaded"] = Time.get_ticks_msec() - _boot_t0
 	if _museums.is_empty():
 		push_error("endless_museum: no museum-tagged templates in %s" % TEMPLATES)
 		return
+	if _vr and not _headless:
+		await get_tree().process_frame
 	_setup_world()
+	_boot_ms["world_ready"] = Time.get_ticks_msec() - _boot_t0
 	# THE RESCUE POINT (2026-08-18). The StuckDetector autoload rays from the
 	# rig it found first (the staging rig, parked in a wall of the museum), calls
 	# that stuck and teleported it to a fallback (2, 3, 2) — measured on the
@@ -1004,15 +1058,21 @@ func _ready() -> void:
 	if stuck != null and "enabled" in stuck:
 		stuck.set("enabled", false)
 		print("[endless_museum] StuckDetector stood down for the museum (spawn_point at 7.5, 0.1, 1.5)")
-	_headless = DisplayServer.get_name() == "headless"
 	# LAZY: one segment now, the rest owed. A shot run still builds all it
 	# needs synchronously — a frame of a museum half-built is not a proof.
 	var preload_n: int = _shot_segments if _shot_path != "" else 1
 	for i in range(preload_n):
 		_build_segment()
 	_boot_ms["segment0_built"] = Time.get_ticks_msec() - _boot_t0
-	if _shot_path == "" and not _studio:
+	if _shot_path == "" and not _studio and not _vr:
 		_lazy_pending = 1
+	# VR starts with exactly one map. The passage state machine, not build-ahead,
+	# owns every later handoff.
+	if _vr:
+		VR_ONE_HALL = true
+		MIN_SEGMENTS = 1
+		_lazy_pending = 0
+	_museum_core_ready = true
 	if _edit_mode:
 		_arm_editor()
 	_follow_resume()
@@ -1070,6 +1130,173 @@ func _ready() -> void:
 					(miss as Array).size(), str((miss as Array).slice(0, 24))])
 	if _shot_path != "":
 		_take_proof_shot()
+
+
+# ── THE LOADING CELL ────────────────────────────────────────────────────────
+
+## Six boxes, one shadowless light, and one Label3D: this is deliberately much
+## cheaper than even an empty museum segment. It exists before registry parsing
+## or material warm-up, so it uses tiny flat materials and engine primitives.
+func _create_boot_loading_cell() -> void:
+	if _boot_cell != null and is_instance_valid(_boot_cell):
+		return
+	_boot_cell = Node3D.new()
+	_boot_cell.name = "MuseumLoadingCell"
+	add_child(_boot_cell)
+	const CX := 7.5
+	const Z0 := -0.2
+	const Z1 := 4.2
+	const X0 := 5.0
+	const X1 := 10.0
+	var plaster := Color(0.885, 0.88, 0.865)
+	var floor_col := Color(0.52, 0.51, 0.49)
+	_loading_box(_boot_cell, Vector3(CX, -0.10, (Z0 + Z1) * 0.5),
+		Vector3(X1 - X0, 0.20, Z1 - Z0), floor_col, true)
+	_loading_box(_boot_cell, Vector3(X0, 2.25, (Z0 + Z1) * 0.5),
+		Vector3(0.20, 4.5, Z1 - Z0), plaster, true)
+	_loading_box(_boot_cell, Vector3(X1, 2.25, (Z0 + Z1) * 0.5),
+		Vector3(0.20, 4.5, Z1 - Z0), plaster, true)
+	_loading_box(_boot_cell, Vector3(CX, 2.25, Z0),
+		Vector3(X1 - X0, 4.5, 0.20), plaster, true)
+	_loading_box(_boot_cell, Vector3(CX, 4.50, (Z0 + Z1) * 0.5),
+		Vector3(X1 - X0, 0.20, Z1 - Z0), plaster, true)
+	_loading_box(_boot_cell, Vector3(CX, 2.25, Z1),
+		Vector3(X1 - X0, 4.5, 0.20), plaster, true)
+	_loading_painting(_boot_cell, Vector3(CX, 2.15, Z1 - 0.115), -1, true)
+	var lamp := OmniLight3D.new()
+	lamp.name = "LoadingCellLight"
+	lamp.position = Vector3(CX, 3.55, 1.8)
+	lamp.light_color = Color(1.0, 0.94, 0.84)
+	lamp.light_energy = 0.75
+	lamp.omni_range = 6.0
+	lamp.shadow_enabled = false
+	_boot_cell.add_child(lamp)
+	print("[em-loading] lightweight cell visible; the first hall now builds behind its wall")
+
+
+func _loading_material(color: Color) -> StandardMaterial3D:
+	var key := color.to_html(true)
+	if _loading_cell_mats.has(key):
+		return _loading_cell_mats[key]
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = color
+	mat.roughness = 0.92
+	mat.metallic = 0.0
+	_loading_cell_mats[key] = mat
+	return mat
+
+
+## One temporary box, optionally collision-bearing. The wrapper is returned so
+## a passage wall can be removed atomically (mesh and collider together).
+func _loading_box(parent: Node3D, at: Vector3, size: Vector3, color: Color,
+		collision: bool) -> Node3D:
+	var holder := Node3D.new()
+	holder.position = at
+	parent.add_child(holder)
+	var mesh_instance := MeshInstance3D.new()
+	var mesh := BoxMesh.new()
+	mesh.size = size
+	mesh_instance.mesh = mesh
+	mesh_instance.material_override = _loading_material(color)
+	holder.add_child(mesh_instance)
+	if collision:
+		var body := StaticBody3D.new()
+		var shape_node := CollisionShape3D.new()
+		var shape := BoxShape3D.new()
+		shape.size = size
+		shape_node.shape = shape
+		body.add_child(shape_node)
+		holder.add_child(body)
+	return holder
+
+
+## The one painting in both the boot cell and the streamed passages. Direction
+## is +1 when approached walking +z, -1 when approached walking -z.
+func _loading_painting(parent: Node3D, at: Vector3, direction: int,
+		boot: bool = false) -> void:
+	var dark := Color(0.07, 0.065, 0.06)
+	var frame := Color(0.80, 0.79, 0.76)
+	var panel := _loading_box(parent, at, Vector3(2.6, 1.45, 0.06), dark, false)
+	panel.rotation_degrees.y = 0.0
+	for bar in [
+		[Vector3(0.0, 0.79, 0.0), Vector3(2.86, 0.12, 0.10)],
+		[Vector3(0.0, -0.79, 0.0), Vector3(2.86, 0.12, 0.10)],
+		[Vector3(-1.37, 0.0, 0.0), Vector3(0.12, 1.58, 0.10)],
+		[Vector3(1.37, 0.0, 0.0), Vector3(0.12, 1.58, 0.10)],
+	]:
+		_loading_box(panel, bar[0], bar[1], frame, false)
+	var label := Label3D.new()
+	label.name = "MuseumLoadingPaintingText"
+	label.text = "LOADING."
+	label.font_size = 64
+	label.pixel_size = 0.006
+	label.outline_size = 8
+	label.modulate = Color(0.95, 0.94, 0.90)
+	label.outline_modulate = Color(0.05, 0.045, 0.04)
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	# `direction` is the face normal toward the approaching visitor. Keep the
+	# glyphs on that side of the panel; the opposite sign buried them inside the
+	# blocking wall, leaving a blank black painting in the first visual proof.
+	label.position = at + Vector3(0.0, 0.0, 0.055 * float(direction))
+	label.rotation_degrees.y = 180.0 if direction < 0 else 0.0
+	parent.add_child(label)
+	if boot:
+		_boot_loading_label = label
+	else:
+		_vr_passage_label = label
+
+
+func _tick_loading_paintings(delta: float) -> void:
+	_loading_anim_t += delta
+	var dots := 1 + int(floor(_loading_anim_t * 2.0)) % 3
+	var pulse := 0.82 + 0.18 * (0.5 + 0.5 * sin(_loading_anim_t * 2.4))
+	for lv in [_boot_loading_label, _vr_passage_label]:
+		var label: Label3D = lv
+		if label != null and is_instance_valid(label):
+			label.text = "LOADING" + ".".repeat(dots)
+			label.modulate.a = pulse
+
+
+## `base.tscn/MapInfo` waits for GridSystem.map_generation_complete, a signal
+## the Endless Museum intentionally does not own. It therefore stayed attached
+## to the headset forever. The physical loading painting replaces it here; later
+## subtitle calls may still make MapInfo visible again normally.
+func _hide_legacy_loading_text() -> void:
+	if not is_inside_tree():
+		return
+	for nv in get_tree().root.find_children("*", "Label3D", true, false):
+		var label := nv as Label3D
+		if label == _boot_loading_label or label == _vr_passage_label:
+			continue
+		var low := label.text.to_lower()
+		if label.name == "MapInfo" or label.name == "LevelInfoLabel" \
+				or low.begins_with("loading... portal"):
+			label.visible = false
+			if label.has_method("hide_subtitle"):
+				label.call("hide_subtitle")
+
+
+func _finish_initial_loading() -> void:
+	if _museum_ready:
+		return
+	_museum_ready = true
+	_boot_ms["content_ready"] = Time.get_ticks_msec() - _boot_t0
+	var report := FileAccess.open(_report_path("res://ada_run/em_boot_last.json"), FileAccess.WRITE)
+	if report == null:
+		report = FileAccess.open("user://em_boot_last.json", FileAccess.WRITE)
+	if report != null:
+		report.store_string(JSON.stringify({"at": Time.get_datetime_string_from_system(false, true),
+			"tier": _env_tier, "vr": _vr, "boot_ms": _boot_ms}, " "))
+		report.close()
+	_open_gate()
+	if _boot_cell != null and is_instance_valid(_boot_cell):
+		_boot_cell.queue_free()
+	_boot_cell = null
+	_boot_loading_label = null
+	_hide_legacy_loading_text()
+	museum_ready.emit()
+	print("[em-loading] first hall complete in %d ms — loading cell removed, one map resident" % int(_boot_ms["content_ready"]))
 
 func _parse_args() -> void:
 	var args := OS.get_cmdline_user_args()
@@ -1299,7 +1526,9 @@ func _mod_arity(m, fn: String) -> int:
 func _build_surfaces() -> void:
 	if _mod_mats == null:
 		return
-	if _mod_has(_mod_mats, "warm_up"):
+	if _mod_has(_mod_mats, "warm_up_museum"):
+		_mod_mats.call("warm_up_museum")
+	elif _mod_has(_mod_mats, "warm_up"):
 		_mod_mats.call("warm_up")
 	# ONE CONTINUOUS GALLERY FLOOR. The hall used dark granite while the four-metre
 	# vestibule used terrazzo, producing a black reflective field and a material
@@ -2548,6 +2777,60 @@ func _mat(color: Color) -> StandardMaterial3D:
 
 ## One role out of the resolved library, or null when the library never
 ## produced it.
+## THE SAME BASE THE PATTERN ARTIFACTS USE, ON A WALL (2026-08-25).
+## PatternSim.render_to_image(cfg) is a static call behind pattern_artifact,
+## pattern_loom, pattern_mill, the three machines, the compositor and the DNA
+## workstation — nine artifacts and one renderer. A hall declares
+##   map_info.museum.pattern { wall: "p6m", floor: {group: "p4g", palette: "..."},
+##                             wall_tiles: 2.0, floor_tiles: 1.0 }
+## and the same seventeen groups that stand on the plinths dress the room they
+## stand in. Each value is either a group NAME or a full PatternSim config.
+##
+## Cached by config: a 192-square canvas is 36,864 pixels through a GDScript
+## loop, and streaming rebuilds a hall every time the walker turns around.
+var _pattern_cache: Dictionary = {}
+const PatternSimScript = preload("res://commons/pattern_grammar/pattern_sim.gd")
+
+func _pattern_material(base: Material, spec: Variant, tiles: float) -> Material:
+	var cfg: Dictionary = {}
+	if spec is String and String(spec) != "":
+		cfg = {"group": String(spec)}
+	elif spec is Dictionary:
+		cfg = (spec as Dictionary).duplicate(true)
+	else:
+		return base
+	# the museum's own defaults, not the artifact's: a smaller canvas because a
+	# wall is read from metres away, and a DOT motif because a random one at
+	# density 0.5 buries the symmetry in noise — which is the whole claim
+	if not cfg.has("canvas_size"):
+		cfg["canvas_size"] = 192
+	if not cfg.has("motif"):
+		cfg["motif"] = "dot"
+	var key: String = JSON.stringify(cfg) + "|%.2f" % tiles
+	if _pattern_cache.has(key) and _pattern_cache[key] is Material:
+		return _pattern_cache[key]
+	var img: Image = PatternSimScript.render_to_image(cfg)
+	if img == null:
+		push_warning("[em-pattern] %s rendered nothing" % str(cfg.get("group", "?")))
+		return base
+	var m: StandardMaterial3D
+	if base is StandardMaterial3D:
+		m = (base as StandardMaterial3D).duplicate() as StandardMaterial3D
+	else:
+		m = StandardMaterial3D.new()
+	m.albedo_texture = ImageTexture.create_from_image(img)
+	# WHITE, not the plaster tint: multiplying a pattern by 0.72 grey mutes the
+	# palette the group is made of. `tint` in the declaration puts it back.
+	var tint: Variant = cfg.get("tint")
+	m.albedo_color = Color(float(tint), float(tint), float(tint)) if tint is float else Color(1, 1, 1)
+	m.uv1_scale = Vector3(tiles, tiles, tiles)
+	m.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST_WITH_MIPMAPS
+	_pattern_cache[key] = m
+	print("[em-pattern] %s -> %s at %.1f tile(s)/m (%d cached)" % [
+		String(cfg.get("group", "?")), "wall/floor", tiles, _pattern_cache.size()])
+	return m
+
+
 func _sm(role: String) -> Material:
 	var v = _surf.get(role, null)
 	if v is Material:
@@ -3804,6 +4087,16 @@ func _build_segment() -> void:
 				peek["gate"] = bool(mm["gate"])
 			if mm.get("basin") is Dictionary:
 				peek["basin"] = mm["basin"]
+			# THE PATTERN BASE ON THE ARCHITECTURE (2026-08-25, Palle: "many
+			# pattern maker artifacts have the same base. Can we connect them
+			# to the wall and floor making of the endless museum"). Nine
+			# artifacts render through PatternSim.render_to_image; so can a
+			# wall. Rides the same refresh, so a map edit re-dresses the hall
+			# with no plan re-apply.
+			if mm.get("pattern") is Dictionary:
+				peek["pattern"] = mm["pattern"]
+			elif peek.has("pattern"):
+				peek.erase("pattern")
 			# THE HALL OWNS ITS CROSSING (2026-08-24, Palle: "maybe it becomes
 			# too static to have a similar solution for all passages?" — yes).
 			# map_info.museum.passage {kind, width, offset, side} overrides the
@@ -3973,6 +4266,14 @@ func _build_segment() -> void:
 	var m_wall: Material = _sm("wall_white")
 	if m_wall == null:
 		m_wall = _sm("wall")
+	# THE SKIN COPIES m_wall FOUR LINES DOWN (2026-08-25): patterning it
+	# any later dressed the map's own wall cells and left the museum-built
+	# skin plain — and Symmetry_Seventeen has ZERO wall cells, so the whole
+	# hall stayed plaster while the log said the pattern rendered.
+	if peek.get("pattern") is Dictionary and (peek["pattern"] as Dictionary).has("wall"):
+		var patw: Dictionary = peek["pattern"]
+		m_wall = _pattern_material(m_wall, patw["wall"], float(patw.get("wall_tiles", 1.0)))
+		_detail_mats["wall"] = m_wall
 	seg.set_meta("em_wall_mat", m_wall)
 	seg.set_meta("em_wall_col", wall_col)
 	# Returns and corner panels belong to the wall plane. Sharing the exact
@@ -3996,6 +4297,18 @@ func _build_segment() -> void:
 	var m_floor: Material = _sm("floor")
 	var m_podium: Material = _sm("podium")
 	var m_plinth: Material = _sm("plinth")
+	# the hall's own pattern, if it declares one: the role materials are SHARED
+	# across every hall, so this hands back a duplicate and leaves the pool alone
+	if peek.get("pattern") is Dictionary:
+		var pat: Dictionary = peek["pattern"]
+		if pat.has("floor"):
+			# THE DECK, not only the "floor" role: m_deck draws the walkable
+			# ground at sixteen call sites while m_floor appears at three, all
+			# of them pool bottoms. Patterning only the latter dressed two
+			# meshes in the whole hall and looked like the feature working.
+			var ft: float = float(pat.get("floor_tiles", 1.0))
+			m_floor = _pattern_material(m_floor, pat["floor"], ft)
+			m_deck = _pattern_material(m_deck, pat["floor"], ft)
 	var foyer_well: bool = _seg_index == 0 and _L("lobby", "enabled", 1.0) > 0.5 and _L("lobby", "origin_well", 1.0) > 0.5
 	# THE SEAM (2026-08-22, Palle: "there is a gap in the floor between maps"):
 	# map-authored halls can be WIDER than the 17-cell lobby (Point_One is 20),
@@ -8886,6 +9199,7 @@ func _open_gate() -> void:
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint() or _studio:
 		return
+	_tick_loading_paintings(_delta)
 	if _doll_top and _paint2d_canvas != null and is_instance_valid(_paint2d_canvas):
 		_paint2d_canvas.queue_redraw()   # the overlay tracks the camera
 	_edit_gizmo_frame()
@@ -8903,6 +9217,11 @@ func _process(_delta: float) -> void:
 			bf.store_string(JSON.stringify({"at": Time.get_datetime_string_from_system(false, true),
 				"tier": _env_tier, "vr": _vr, "boot_ms": _boot_ms}, " "))
 			bf.close()
+	# During deferred VR boot the only live system is the six-box loading cell.
+	# Returning here protects every module-dependent path below while still
+	# letting the painting animate and the true first-frame time be recorded.
+	if not _museum_core_ready:
+		return
 	# the owed segment: built one frame after the first, so the visitor sees
 	# the vestibule immediately and the hall fills while they cross it
 	if _lazy_pending > 0:
@@ -8999,54 +9318,58 @@ func _process(_delta: float) -> void:
 				if String((_stamp_queue[qi] as Dictionary).get("kind", "stamp")) == "dress":
 					_run_dress_item(_stamp_queue.pop_at(qi))
 					break
+			# The force-VR/headless probe never receives an XR camera. It still
+			# needs to complete the same readiness contract as a headset build;
+			# otherwise the loading cell would be correct on-device but impossible
+			# to verify in automation.
+			if not _museum_ready and _stamp_queue.is_empty():
+				_finish_initial_loading()
 			return
 		_vr_wait = 0.0
 	elif _cam == null:
 		return
-	# stream: open the next museum as the walker nears the built edge
-	if _eye_pos().z > _next_z - BUILD_AHEAD_M:
-		_build_segment()
-		if _bake_mode and _seg_index >= _bake_total:
-			_write_bake()
-			print("[em-bake] DONE — %d pearl(s) baked to %s" % [_bake_out.size(), BAKE_PATH])
-			get_tree().quit()
-			return
-	# ── THE TWO-HALL WINDOW (2026-08-24) ────────────────────────────────────
-	# Free far-behind AND (when the walker turned around) far-ahead segments,
-	# keeping their cursor snapshots; rebuild a freed neighbour when the eye
-	# nears the alive window's edge from either side. The margins are the
-	# hysteresis — REBUILD_MARGIN_M < KEEP_BEHIND_M, so nothing thrashes.
 	var ez: float = _eye_pos().z
-	if _vr and VR_ONE_HALL:
-		_render_window(ez, VR_RENDER_WINDOW_M)
-	while _segments.size() > MIN_SEGMENTS and float(_segments[0]["z1"]) < ez - KEEP_BEHIND_M:
-		_stream_free(0, "behind")
-	if _shot_path == "":   # a proof shot preloads segments the eye never nears
-		while _segments.size() > MIN_SEGMENTS and float(_segments[-1]["z0"]) > ez + KEEP_AHEAD_M:
-			_stream_free(_segments.size() - 1, "ahead")
-	if not _segments.is_empty() and not _freed.is_empty():
-		# walking BACK: a freed hall sits just before the window's low edge
-		if ez < float(_segments[0]["z0"]) + REBUILD_MARGIN_M:
-			var pi: int = -1
-			for fi in range(_freed.size() - 1, -1, -1):
-				if float((_freed[fi] as Dictionary)["z0"]) < float(_segments[0]["z0"]):
-					pi = fi
-					break
-			if pi >= 0:
-				var rb: Dictionary = _freed[pi]
-				_freed.remove_at(pi)
-				_stream_rebuild(rb)
-		# walking FORWARD over ground that was freed: rebuild before the frontier
-		elif ez > float(_segments[-1]["z1"]) - BUILD_AHEAD_M:
-			var ni: int = -1
-			for fi2 in range(_freed.size()):
-				if float((_freed[fi2] as Dictionary)["z0"]) >= float(_segments[-1]["z1"]) - 0.5:
-					ni = fi2
-					break
-			if ni >= 0:
-				var rf: Dictionary = _freed[ni]
-				_freed.remove_at(ni)
-				_stream_rebuild(rf)
+	if _vr and VR_ONE_HALL and not _bake_mode:
+		_vr_single_map_stream(ez, _delta)
+	else:
+		# Desktop/proof streaming keeps its look-ahead window. VR deliberately
+		# never reaches this branch: hidden nodes are still loaded nodes.
+		if ez > _next_z - BUILD_AHEAD_M:
+			_build_segment()
+			if _bake_mode and _seg_index >= _bake_total:
+				_write_bake()
+				print("[em-bake] DONE — %d pearl(s) baked to %s" % [_bake_out.size(), BAKE_PATH])
+				get_tree().quit()
+				return
+		# ── THE DESKTOP TWO-HALL WINDOW ─────────────────────────────────────
+		while _segments.size() > MIN_SEGMENTS and float(_segments[0]["z1"]) < ez - KEEP_BEHIND_M:
+			_stream_free(0, "behind")
+		if _shot_path == "":   # a proof shot preloads segments the eye never nears
+			while _segments.size() > MIN_SEGMENTS and float(_segments[-1]["z0"]) > ez + KEEP_AHEAD_M:
+				_stream_free(_segments.size() - 1, "ahead")
+		if not _segments.is_empty() and not _freed.is_empty():
+			# walking BACK: a freed hall sits just before the window's low edge
+			if ez < float(_segments[0]["z0"]) + REBUILD_MARGIN_M:
+				var pi: int = -1
+				for fi in range(_freed.size() - 1, -1, -1):
+					if float((_freed[fi] as Dictionary)["z0"]) < float(_segments[0]["z0"]):
+						pi = fi
+						break
+				if pi >= 0:
+					var rb: Dictionary = _freed[pi]
+					_freed.remove_at(pi)
+					_stream_rebuild(rb)
+			# walking FORWARD over ground that was freed: rebuild before the frontier
+			elif ez > float(_segments[-1]["z1"]) - BUILD_AHEAD_M:
+				var ni: int = -1
+				for fi2 in range(_freed.size()):
+					if float((_freed[fi2] as Dictionary)["z0"]) >= float(_segments[-1]["z1"]) - 0.5:
+						ni = fi2
+						break
+				if ni >= 0:
+					var rf: Dictionary = _freed[ni]
+					_freed.remove_at(ni)
+					_stream_rebuild(rf)
 	# one endless museum: follow the editors when the plan changes on disk
 	if not _vr and _shot_path == "" and not _bake_mode and _autopilot == 0 and not _studio:
 		_follow_t += _delta
@@ -9060,11 +9383,230 @@ func _process(_delta: float) -> void:
 			_env_ab_t = 0.0
 			_env_swap()
 	_drain_stamps()
+	if not _museum_ready and _stamp_queue.is_empty():
+		_finish_initial_loading()
 	_vis_timer += _delta
 	if _vis_timer >= 0.3:
 		_vis_timer = 0.0
 		_cull_artifacts()
 	_track_acoustic()
+
+
+## STRICT ONE-MAP VR STREAMING. The state sequence is:
+##   current map + open passage -> sealed passage only -> next map + passage
+##   -> next map only.
+## The old map is queued for deletion on one frame and the new map is not built
+## until a later frame, after deletion has completed. The passage owns its own
+## floor/collision, so the visitor never stands on the subtree being removed.
+func _vr_single_map_stream(ez: float, delta: float) -> void:
+	if not _museum_ready:
+		return
+	var eye_step := ez - _vr_last_eye_z
+	_vr_last_eye_z = ez
+	# Defensive migration from the former two-map window: if a saved/live run
+	# reaches this code with two segments, retain only the one containing the eye.
+	if _vr_passage_phase == "" and _segments.size() > 1:
+		var keep := _segment_index_at(ez)
+		for i in range(_segments.size() - 1, -1, -1):
+			if i != keep:
+				_stream_free(i, "strict VR startup prune")
+	if _vr_passage_phase == "":
+		if _segments.is_empty():
+			return
+		var ci := _segment_index_at(ez)
+		if ci < 0:
+			ci = 0
+		var current: Dictionary = _segments[ci]
+		var z0 := float(current.get("z0", 0.0))
+		var z1 := float(current.get("z1", 0.0))
+		var can_back := _freed_index_for_boundary(z0, -1) >= 0
+		if can_back and ez - z0 < 7.0 and eye_step < -0.01:
+			_create_vr_passage(current, -1, z0)
+		elif z1 - ez < 7.0 and eye_step > -0.01:
+			_create_vr_passage(current, 1, z1)
+		return
+
+	if _vr_passage_phase == "armed":
+		var moving_away := ez < _vr_passage_boundary - 8.0 if _vr_passage_dir > 0 \
+			else ez > _vr_passage_boundary + 8.0
+		if moving_away:
+			_remove_vr_passage()
+			return
+		var entered := ez >= _vr_passage_boundary - 1.5 if _vr_passage_dir > 0 \
+			else ez <= _vr_passage_boundary + 1.5
+		if entered:
+			_seal_vr_passage_and_unload(ez)
+		return
+
+	if _vr_passage_phase == "unloading":
+		# queue_free completes at frame end. Do not instantiate a replacement in
+		# the same frame: that one-frame zero-map interval is the memory guarantee.
+		if Engine.get_process_frames() <= _vr_passage_frame:
+			return
+		if _vr_passage_old_node != null and is_instance_valid(_vr_passage_old_node):
+			return
+		_build_vr_passage_target()
+		return
+
+	if _vr_passage_phase == "building":
+		if _vr_passage_target == null or not is_instance_valid(_vr_passage_target):
+			return
+		if _segment_has_pending_stamps(_vr_passage_target):
+			return
+		_open_gate()
+		_vr_passage_phase = "opening"
+		_vr_passage_open_t = 0.0
+		print("[em-stream] target complete behind the blocking wall — passage opening")
+		return
+
+	if _vr_passage_phase == "opening":
+		_vr_passage_open_t += delta
+		if _vr_passage_open_t >= 0.65:
+			if _vr_passage_far != null and is_instance_valid(_vr_passage_far):
+				_vr_passage_far.queue_free()
+			_vr_passage_far = null
+			_vr_passage_phase = "entering"
+		return
+
+	if _vr_passage_phase == "entering":
+		var crossed := ez >= _vr_passage_boundary + 2.2 if _vr_passage_dir > 0 \
+			else ez <= _vr_passage_boundary - 2.2
+		if crossed:
+			_remove_vr_passage()
+
+
+func _segment_index_at(ez: float) -> int:
+	for i in range(_segments.size()):
+		var sd: Dictionary = _segments[i]
+		if ez >= float(sd.get("z0", 0.0)) - 0.01 \
+				and ez <= float(sd.get("z1", 0.0)) + 0.01:
+			return i
+	return -1
+
+
+## Find the rebuild record across `boundary`: backward records end there,
+## forward records begin there. A 0.75 m tolerance covers authored porch depth
+## rounding without ever selecting a non-neighbouring hall.
+func _freed_index_for_boundary(boundary: float, direction: int) -> int:
+	for i in range(_freed.size()):
+		var rec: Dictionary = _freed[i]
+		var edge := float(rec.get("z0" if direction > 0 else "z1", -99999.0))
+		if absf(edge - boundary) <= 0.75:
+			return i
+	return -1
+
+
+func _create_vr_passage(current: Dictionary, direction: int, boundary: float) -> void:
+	if _vr_passage != null and is_instance_valid(_vr_passage):
+		return
+	_vr_passage_dir = direction
+	_vr_passage_boundary = boundary
+	_vr_passage_width = clampf(float(current.get("w", LOBBY_W)), 5.0, 24.0)
+	_vr_passage = Node3D.new()
+	_vr_passage.name = "MuseumMapLoadingPassage"
+	_vr_passage.set_meta("em_loading_passage", true)
+	add_child(_vr_passage)
+	var cx := _vr_passage_width * 0.5
+	var center_z := boundary + float(direction) * 0.5
+	var plaster := Color(0.885, 0.88, 0.865)
+	var floor_col := Color(0.52, 0.51, 0.49)
+	_loading_box(_vr_passage, Vector3(cx, -0.10, center_z),
+		Vector3(_vr_passage_width, 0.20, 7.0), floor_col, true)
+	_loading_box(_vr_passage, Vector3(0.0, 2.25, center_z),
+		Vector3(0.20, 4.5, 7.0), plaster, true)
+	_loading_box(_vr_passage, Vector3(_vr_passage_width, 2.25, center_z),
+		Vector3(0.20, 4.5, 7.0), plaster, true)
+	_loading_box(_vr_passage, Vector3(cx, 4.50, center_z),
+		Vector3(_vr_passage_width, 0.20, 7.0), plaster, true)
+	var far_z := boundary + float(direction) * 4.0
+	_vr_passage_far = _loading_box(_vr_passage, Vector3(cx, 2.25, far_z),
+		Vector3(_vr_passage_width, 4.5, 0.20), plaster, true)
+	_loading_painting(_vr_passage,
+		Vector3(cx, 2.15, far_z - float(direction) * 0.115), -direction, false)
+	var lamp := OmniLight3D.new()
+	lamp.name = "PassageLoadingLight"
+	lamp.position = Vector3(cx, 3.55, center_z)
+	lamp.light_color = Color(1.0, 0.94, 0.84)
+	lamp.light_energy = 0.75
+	lamp.omni_range = 7.0
+	lamp.shadow_enabled = false
+	_vr_passage.add_child(lamp)
+	_vr_passage_phase = "armed"
+	print("[em-stream] loading passage armed at z %.1f (%s); one map resident" % [
+		boundary, "forward" if direction > 0 else "backward"])
+
+
+func _seal_vr_passage_and_unload(ez: float) -> void:
+	var ci := _segment_index_at(ez)
+	if ci < 0 and not _segments.is_empty():
+		ci = 0
+	if ci < 0:
+		return
+	var cx := _vr_passage_width * 0.5
+	var rear_z := _vr_passage_boundary - float(_vr_passage_dir) * 3.0
+	_vr_passage_rear = _loading_box(_vr_passage, Vector3(cx, 2.25, rear_z),
+		Vector3(_vr_passage_width, 4.5, 0.20), Color(0.885, 0.88, 0.865), true)
+	var old: Dictionary = _segments[ci]
+	_vr_passage_old_node = _node_or_null(old.get("node"))
+	# The gate belongs to the disappearing segment; forgetting its references
+	# before deletion prevents the process loop touching a stale scanner.
+	_gate = {}
+	_gate_t = -1.0
+	_stream_free(ci, "sealed VR passage")
+	_vr_passage_phase = "unloading"
+	_vr_passage_frame = Engine.get_process_frames()
+	print("[em-stream] passage sealed — resident maps=%d; waiting one frame before target build" % _segments.size())
+
+
+func _build_vr_passage_target() -> void:
+	var ri := _freed_index_for_boundary(_vr_passage_boundary, _vr_passage_dir)
+	# The just-freed CURRENT segment also touches the boundary. Choose the record
+	# on the destination side, never the source side.
+	if ri >= 0:
+		var candidate: Dictionary = _freed[ri]
+		var on_target_side := float(candidate.get("z0", 0.0)) >= _vr_passage_boundary - 0.75 \
+			if _vr_passage_dir > 0 else float(candidate.get("z1", 0.0)) <= _vr_passage_boundary + 0.75
+		if not on_target_side:
+			ri = -1
+	if ri >= 0:
+		var rec: Dictionary = _freed[ri]
+		_freed.remove_at(ri)
+		_stream_rebuild(rec)
+	elif _vr_passage_dir > 0:
+		_build_segment()
+	else:
+		push_warning("[em-stream] no previous hall record behind passage z %.1f" % _vr_passage_boundary)
+		_remove_vr_passage()
+		return
+	if _segments.size() != 1:
+		push_error("[em-stream] strict VR invariant failed after target build: %d resident maps" % _segments.size())
+	_vr_passage_target = _node_or_null((_segments[0] as Dictionary).get("node")) if not _segments.is_empty() else null
+	_vr_passage_phase = "building"
+	print("[em-stream] target architecture built; resident maps=%d, passage remains sealed while contents drain" % _segments.size())
+
+
+func _segment_has_pending_stamps(seg: Node3D) -> bool:
+	for iv in _stamp_queue:
+		var item: Dictionary = iv
+		var owner: Variant = item.get("seg")
+		if owner != null and is_instance_valid(owner) and owner == seg:
+			return true
+	return false
+
+
+func _remove_vr_passage() -> void:
+	if _vr_passage != null and is_instance_valid(_vr_passage):
+		_vr_passage.queue_free()
+	_vr_passage = null
+	_vr_passage_label = null
+	_vr_passage_far = null
+	_vr_passage_rear = null
+	_vr_passage_old_node = null
+	_vr_passage_target = null
+	_vr_passage_phase = ""
+	_vr_passage_dir = 0
+	_vr_passage_open_t = 0.0
+	print("[em-stream] loading passage removed — one map resident")
 
 
 ## Free one alive segment into a _freed record (its z-range + the cursor
@@ -9177,12 +9719,6 @@ func flush_stamps() -> void:
 			_stamp_inner(item["seg"], String(item["scene_path"]), String(item["lookup"]),
 				item["cell"], int(item["zbase"]), int(item["fp"]), item["axis"], bool(item["drop"]),
 				float(item["span_cap"]), float(item["yaw"]), item["config"], item["bk"])
-
-
-## One deferred dress pass: run it, then refresh the as-built entry that was
-## written before these cards existed — the ledger and the parity gate see
-## the dressed hall. Called from the drain, and from the VR wait (the dress
-## needs no eye, and the harness's headless VR museum never gets one).
 func _run_dress_item(item: Dictionary) -> void:
 	(item["run"] as Callable).call()
 	var dsn: int = int(item.get("seg_no", -1))
