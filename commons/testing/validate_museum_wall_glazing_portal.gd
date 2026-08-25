@@ -85,9 +85,15 @@ func _run() -> void:
 					_append_failure(gp01_failures, "%s glass surface '%s' != glass_laminated" % [key, raw_surface])
 				if glass_body == structure_body:
 					_append_failure(gp01_failures, "%s glass collider is not distinct" % key)
-				var center_without_glass := _ray_surface(piece, _glass_center(glass_body) + Vector3(0, 0, 0.8), _glass_center(glass_body) + Vector3(0, 0, -0.8), [glass_body.get_rid()])
+				# Probe a clear portion of the pane and only the glass plane itself.
+				# The former centerline/full-depth ray contradicted GP-02 whenever a
+				# real centre mullion existed, and contradicted the required vitrine
+				# backing behind the cavity. This short ray still catches a full-wall
+				# substitute while leaving authored frame and backing routes intact.
+				var clear_probe := _glass_clear_probe_point(piece, family, glass_body)
+				var center_without_glass := _ray_surface(piece, clear_probe + Vector3(0, 0, 0.06), clear_probe + Vector3(0, 0, -0.06), [glass_body.get_rid()])
 				if center_without_glass != "":
-					_append_failure(gp01_failures, "%s structural collider blocks center behind glass as '%s'" % [key, center_without_glass])
+					_append_failure(gp01_failures, "%s structural collider replaces the clear pane as '%s'" % [key, center_without_glass])
 
 				var probes := _glaze_routing_probes(piece, family, width, glass_body)
 				routing_probes += int(probes["count"])
@@ -559,6 +565,20 @@ func _glass_visual(piece: Node3D, family: String) -> MeshInstance3D:
 func _glass_center(body: StaticBody3D) -> Vector3:
 	var shape := _first_collision_shape(body)
 	return shape.global_position if shape != null else body.global_position
+
+
+func _glass_clear_probe_point(piece: Node3D, family: String, glass_body: StaticBody3D) -> Vector3:
+	var visible := _glass_visual(piece, family)
+	if visible == null:
+		return _glass_center(glass_body)
+	var bounds: AABB = visible.global_transform * visible.get_aabb()
+	var center := bounds.get_center()
+	var half := bounds.size * 0.5
+	return Vector3(
+		center.x + minf(0.23, half.x * 0.33),
+		center.y - minf(0.27, half.y * 0.2),
+		_glass_center(glass_body).z
+	)
 
 
 func _first_collision_shape(node: Node) -> CollisionShape3D:

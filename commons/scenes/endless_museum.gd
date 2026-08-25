@@ -6069,72 +6069,9 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 				ledger.append({"token": String(tok_v), "grid": null,
 					"target": [int(cell2["x"]), int(cell2["y"])], "final": [int(cell2["x"]), int(cell2["y"])],
 					"rings": 0, "why": "added by hand, stamped", "plinth": bool(cb2.get("plinth", false))})
-	# ── THE UTILITY SLICE (2026-08-23 as the wedge slice; widened 2026-08-24,
-	# Palle: "we should use the utility layer of the grid but I do not see the
-	# transport cube, scale cube and rotate cube") ───────────────────────────
-	# It built `wp` ALONE. Every other utility the map placed — the transport
-	# cube that ferries you, the scale cube that grows under you, the rotate
-	# cube that sweeps a plank across a gap — was read and dropped, so the
-	# three crossings Trans_Introduction places over its three pools simply
-	# were not there. Now every cell goes through _stamp_utility, which is the
-	# one place that knows the grammar and REFUSES with a reason (h: hazards
-	# get the museum-safe patch above; t/m/l/r/cp stay refused, and say why).
-	# `wp` keeps its own branch below because only it knows about pool floors.
-	var utils: Array = layers.get("utilities", [])
-	var wedges := 0
-	var utils_built := 0
-	if not utils.is_empty():
-		var wp_scene: PackedScene = load("res://commons/scenes/mapobjects/walkableprism.tscn") as PackedScene
-		if wp_scene != null:
-			for gz2 in range(utils.size()):
-				var urow: Array = utils[gz2]
-				for gx2 in range(urow.size()):
-					var uv := str(urow[gx2]).strip_edges()
-					# MUSEUM-SAFE DANGER (2026-08-24, Palle: "a Lara Croft map
-					# where translation, scale and rotation becomes dangerous"):
-					# the grid's h: cells reload the scene on death — severed
-					# walk, which is why the dispatcher refuses them. In an
-					# authored hall the cell becomes a museum patch: the fire
-					# look, an Area3D, and a touch that flashes and sets the
-					# walker back at the hall's entrance.
-					if uv.begins_with("h:"):
-						_stamp_hazard(seg, Vector2i(clampi(gx2 + offx, bx0, bx1), clampi(gz2 + offz, bz0, bz1)),
-							zbase, Vector3(float(w) / 2.0, 0.1, float(zbase) + 2.0))
-						continue
-					if not (uv == "wp" or uv.begins_with("wp:")):
-						# every other utility the map placed: the dispatcher
-						# builds it or prints its refusal — never silence
-						var ucell := Vector2i(clampi(gx2 + offx, bx0, bx1),
-							clampi(gz2 + offz, bz0, bz1))
-						if _stamp_utility(uv, ucell, seg, zbase) != null:
-							utils_built += 1
-						continue
-					var wnode: Node3D = wp_scene.instantiate() as Node3D
-					if wnode == null:
-						continue
-					var wx2: int = clampi(gx2 + offx, bx0, bx1)
-					var wz2: int = clampi(gz2 + offz, bz0, bz1)
-					var base_h := 0.0
-					if gz2 < structure.size() and gx2 < (structure[gz2] as Array).size():
-						var sv3 := str((structure[gz2] as Array)[gx2]).strip_edges()
-						if sv3 == "p" or sv3.begins_with("p:"):
-							base_h = 1.0
-							if ":" in sv3 and str(sv3.split(":")[1]).is_valid_int():
-								base_h = float(maxi(1, int(str(sv3.split(":")[1]))))
-					# a wedge ON a pool cell seats on the POOL floor — the way
-					# in and out of an open basin ("we use wedges to step in
-					# and out of the new basin pool space")
-					if basin_pack_depth > 0.0 and basin_map.has(Vector2i(wx2 - offx, wz2 - offz)):
-						base_h = -basin_pack_depth
-					# CENTER-origin prism: +0.5 seats the base on the cell's top
-					wnode.position = Vector3(wx2 + 0.5, base_h + 0.5, float(wz2) + 0.5)
-					var uparts := uv.split(":")
-					if uparts.size() > 1 and str(uparts[1]).is_valid_float():
-						wnode.rotation_degrees.y = float(uparts[1])
-					seg.add_child(wnode)
-					wedges += 1
-	if wedges > 0 or utils_built > 0:
-		print("[em-pack]   %d wedge(s) + %d other utility(ies) from the map's utility layer" % [wedges, utils_built])
+	# the map's utility layer, in the one place both lanes can reach it
+	_stamp_map_utilities(seg, layers, zbase, offx, offz, bx0, bx1, bz0, bz1, w,
+		basin_pack_depth, basin_map)
 	print("[em-pack] %s · %s <- %s: %d verbatim + %d slid of %d, %d left behind, %d plinth(s)" % [
 		chapter, entry.get("pearl", ""), map_name, placed - slid, slid, bodies.size(), left, plinth_n])
 	# THE LEDGER (2026-08-21, Palle: "a page with the grid of each step") —
@@ -6231,6 +6168,89 @@ func _stamped_beads(hand: Dictionary) -> Array:
 ## The bench's floor plan, built: each bead stamps at its laid cell (a folded
 ## run unrolls back into its row along the spread axis); rotation and #config
 ## attachments are re-joined from the grid map by token, first occurrence.
+## THE MAP'S UTILITY LAYER, FOR BOTH LANES (2026-08-25). Palle, three times:
+## "there is still no transport cube, rotate cube or scale cube" — and the
+## probes kept answering that all five were built, because a probe hands the
+## museum an EMPTY hand file. The walker's necklace_hand.json has a stamped
+## hall for transformation|trans introduction, and a stamped hall RETURNS
+## from the transplant before it ever reaches this code. So the crossings
+## were real in every measurement and absent in the only run that mattered.
+##
+## Lifted out verbatim so the necklace lane can call it too: a hand ruling
+## says where the BODIES go, and was never meant to say whether the map's
+## utility layer exists.
+func _stamp_map_utilities(seg: Node3D, layers: Dictionary, zbase: int, offx: int, offz: int,
+		bx0: int, bx1: int, bz0: int, bz1: int, w: int,
+		basin_pack_depth: float, basin_map: Dictionary) -> void:
+	var structure: Array = layers.get("structure", [])
+	# ── THE UTILITY SLICE (2026-08-23 as the wedge slice; widened 2026-08-24,
+	# Palle: "we should use the utility layer of the grid but I do not see the
+	# transport cube, scale cube and rotate cube") ───────────────────────────
+	# It built `wp` ALONE. Every other utility the map placed — the transport
+	# cube that ferries you, the scale cube that grows under you, the rotate
+	# cube that sweeps a plank across a gap — was read and dropped, so the
+	# three crossings Trans_Introduction places over its three pools simply
+	# were not there. Now every cell goes through _stamp_utility, which is the
+	# one place that knows the grammar and REFUSES with a reason (h: hazards
+	# get the museum-safe patch above; t/m/l/r/cp stay refused, and say why).
+	# `wp` keeps its own branch below because only it knows about pool floors.
+	var utils: Array = layers.get("utilities", [])
+	var wedges := 0
+	var utils_built := 0
+	if not utils.is_empty():
+		var wp_scene: PackedScene = load("res://commons/scenes/mapobjects/walkableprism.tscn") as PackedScene
+		if wp_scene != null:
+			for gz2 in range(utils.size()):
+				var urow: Array = utils[gz2]
+				for gx2 in range(urow.size()):
+					var uv := str(urow[gx2]).strip_edges()
+					# MUSEUM-SAFE DANGER (2026-08-24, Palle: "a Lara Croft map
+					# where translation, scale and rotation becomes dangerous"):
+					# the grid's h: cells reload the scene on death — severed
+					# walk, which is why the dispatcher refuses them. In an
+					# authored hall the cell becomes a museum patch: the fire
+					# look, an Area3D, and a touch that flashes and sets the
+					# walker back at the hall's entrance.
+					if uv.begins_with("h:"):
+						_stamp_hazard(seg, Vector2i(clampi(gx2 + offx, bx0, bx1), clampi(gz2 + offz, bz0, bz1)),
+							zbase, Vector3(float(w) / 2.0, 0.1, float(zbase) + 2.0))
+						continue
+					if not (uv == "wp" or uv.begins_with("wp:")):
+						# every other utility the map placed: the dispatcher
+						# builds it or prints its refusal — never silence
+						var ucell := Vector2i(clampi(gx2 + offx, bx0, bx1),
+							clampi(gz2 + offz, bz0, bz1))
+						if _stamp_utility(uv, ucell, seg, zbase) != null:
+							utils_built += 1
+						continue
+					var wnode: Node3D = wp_scene.instantiate() as Node3D
+					if wnode == null:
+						continue
+					var wx2: int = clampi(gx2 + offx, bx0, bx1)
+					var wz2: int = clampi(gz2 + offz, bz0, bz1)
+					var base_h := 0.0
+					if gz2 < structure.size() and gx2 < (structure[gz2] as Array).size():
+						var sv3 := str((structure[gz2] as Array)[gx2]).strip_edges()
+						if sv3 == "p" or sv3.begins_with("p:"):
+							base_h = 1.0
+							if ":" in sv3 and str(sv3.split(":")[1]).is_valid_int():
+								base_h = float(maxi(1, int(str(sv3.split(":")[1]))))
+					# a wedge ON a pool cell seats on the POOL floor — the way
+					# in and out of an open basin ("we use wedges to step in
+					# and out of the new basin pool space")
+					if basin_pack_depth > 0.0 and basin_map.has(Vector2i(wx2 - offx, wz2 - offz)):
+						base_h = -basin_pack_depth
+					# CENTER-origin prism: +0.5 seats the base on the cell's top
+					wnode.position = Vector3(wx2 + 0.5, base_h + 0.5, float(wz2) + 0.5)
+					var uparts := uv.split(":")
+					if uparts.size() > 1 and str(uparts[1]).is_valid_float():
+						wnode.rotation_degrees.y = float(uparts[1])
+					seg.add_child(wnode)
+					wedges += 1
+	if wedges > 0 or utils_built > 0:
+		print("[em-pack]   %d wedge(s) + %d other utility(ies) from the map's utility layer" % [wedges, utils_built])
+
+
 func _stamp_necklace(seg: Node3D, zbase: int, chapter: String, entry: Dictionary,
 		hand: Dictionary, map_doc: Variant, w: int, h: int) -> Dictionary:
 	var rot_of := {}
@@ -6319,6 +6339,15 @@ func _stamp_necklace(seg: Node3D, zbase: int, chapter: String, entry: Dictionary
 		pf.store_string(JSON.stringify({"_readme": "the transplant's ledger, one entry per packed hall: grid -> target -> final per body. Written by _transplant_from_map; read by /transplant.",
 			"halls": _pack_report}, " ") + "\n")
 		pf.close()
+	# A HAND RULING PLACES BODIES, NOT THE UTILITY LAYER (2026-08-25). The
+	# stamped hall returns from the transplant before the slice below the
+	# ledger ever runs, so a hall Palle had stamped on the bench lost its
+	# transport, scale and rotate cubes — invisibly, and only in the walk.
+	# offx 0 / offz VESTIBULE_H is the transplant's own fallback for a map
+	# that fills its hall, which is what an authored hall is.
+	if map_doc is Dictionary:
+		_stamp_map_utilities(seg, ((map_doc as Dictionary).get("layers", {}) as Dictionary),
+			zbase, 0, VESTIBULE_H, bx0, bx1, bz0, bz1, w, 0.0, {})
 	return {"pearl": String(entry.get("pearl", "")), "placed": placed, "packed": true,
 		"offered": placed + left, "interior": placed}
 

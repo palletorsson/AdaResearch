@@ -9,9 +9,9 @@ extends SceneTree
 
 const WIDTH := 1920
 const HEIGHT := 1080
-const OUT_DIR := "res://ada_run/museum_aaa_pass/c27_round5"
-const MANIFEST_PATH := "res://ada_run/museum_aaa_pass/round5_c27_capture_manifest.json"
-const CONTEXT_SCENE := "res://commons/artifacts/museum/museum_wall_piece_ideal_context.tscn"
+const OUT_DIR := "res://ada_run/museum_aaa_pass/c27_round7"
+const MANIFEST_PATH := "res://ada_run/museum_aaa_pass/round7_c27_capture_manifest.json"
+const CONTEXT_SCENE := "res://commons/artifacts/museum/museum_wall_c27_occupied_gallery.tscn"
 
 const ENTITIES: Array[Dictionary] = [
 	{"id":"atlas","scene":"res://commons/artifacts/museum/museum_wall_kit_atlas.tscn","params":{},"seed":4067,"lod":0},
@@ -30,6 +30,8 @@ const SOURCE_PATHS: Array[String] = [
 	"res://commons/artifacts/museum/museum_wall_piece.tscn",
 	"res://commons/artifacts/museum/museum_wall_piece_ideal_context.gd",
 	"res://commons/artifacts/museum/museum_wall_piece_ideal_context.tscn",
+	"res://commons/artifacts/museum/museum_wall_c27_occupied_gallery.gd",
+	"res://commons/artifacts/museum/museum_wall_c27_occupied_gallery.tscn",
 	"res://commons/artifacts/museum/museum_wall_architectural_spans.gd",
 	"res://commons/artifacts/museum/museum_wall_opening_spans.gd",
 	"res://commons/artifacts/museum/museum_wall_run.gd",
@@ -50,13 +52,14 @@ var _renderer := ""
 var _environment_config := {
 	"ecosystem_bridges":"disabled_by_user_arg",
 	"background":"color",
-	"background_color":"#343b49",
-	"background_energy":0.5,
+	"background_color":"#485362",
+	"background_energy":0.8,
 	"ambient_color":"#d1d6e0",
-	"ambient_energy":0.65,
+	"ambient_energy":0.9,
 	"reflected_light":"background",
 	"tonemap":"aces",
-	"exposure_multiplier":0.95,
+	"exposure_multiplier":1.08,
+	"camera_backdrop":"unshaded_neutral_charcoal",
 	"glow":true,
 	"msaa":"4x",
 	"taa":true
@@ -112,18 +115,18 @@ func _make_viewport() -> SubViewport:
 	# Use explicit linear values rather than named-string parsing: invalid HTML-like
 	# strings silently fall back to the project clear colour and poison the entire
 	# matched corpus with a green cast.
-	environment.background_color = Color(0.034, 0.043, 0.061, 1.0)
-	environment.background_energy_multiplier = 0.5
+	environment.background_color = Color(0.065, 0.085, 0.115, 1.0)
+	environment.background_energy_multiplier = 0.8
 	environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	environment.ambient_light_color = Color(0.82, 0.84, 0.88, 1.0)
-	environment.ambient_light_energy = 0.65
+	environment.ambient_light_energy = 0.9
 	environment.reflected_light_source = Environment.REFLECTION_SOURCE_BG
 	environment.tonemap_mode = Environment.TONE_MAPPER_ACES
 	environment.glow_enabled = true
 	if _renderer == "forward_plus":
 		environment.ssao_enabled = true
 		environment.ssao_radius = 0.75
-		environment.ssao_intensity = 1.35
+		environment.ssao_intensity = 0.9
 		environment.ssil_enabled = true
 		environment.ssil_radius = 2.0
 		environment.ssil_intensity = 0.55
@@ -139,14 +142,15 @@ func _make_viewport() -> SubViewport:
 	camera.far = 180.0
 	var attrs := CameraAttributesPractical.new()
 	attrs.auto_exposure_enabled = false
-	attrs.exposure_multiplier = 0.95
+	attrs.exposure_multiplier = 1.08
 	camera.attributes = attrs
+	_add_camera_backdrop(camera)
 	viewport.add_child(camera)
 
 	var key := DirectionalLight3D.new()
 	key.name = "C27_ArchitecturalKey"
 	key.light_color = Color(1.0, 0.88, 0.74, 1.0)
-	key.light_energy = 1.65
+	key.light_energy = 1.75
 	key.shadow_enabled = true
 	key.directional_shadow_max_distance = 50.0
 	viewport.add_child(key)
@@ -155,11 +159,30 @@ func _make_viewport() -> SubViewport:
 	var fill := DirectionalLight3D.new()
 	fill.name = "C27_CoolFill"
 	fill.light_color = Color(0.64, 0.75, 0.92, 1.0)
-	fill.light_energy = 0.55
+	fill.light_energy = 0.72
 	fill.shadow_enabled = false
 	viewport.add_child(fill)
 	fill.rotation_degrees = Vector3(-18.0, 142.0, 0.0)
 	return viewport
+
+
+func _add_camera_backdrop(camera: Camera3D) -> void:
+	# The certification scenes deliberately expose open construction edges. A
+	# camera-bound neutral card keeps those edges legible without adding geometry
+	# to, or hiding any part of, the measured production assemblies.
+	var backdrop := MeshInstance3D.new()
+	backdrop.name = "C27_NeutralCameraBackdrop"
+	var quad := QuadMesh.new()
+	quad.size = Vector2(160.0, 90.0)
+	backdrop.mesh = quad
+	backdrop.position = Vector3(0, 0, -80.0)
+	var material := StandardMaterial3D.new()
+	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	material.albedo_color = Color(0.055, 0.07, 0.09, 1.0)
+	material.cull_mode = BaseMaterial3D.CULL_DISABLED
+	backdrop.material_override = material
+	backdrop.set_meta("capture_context_only", true)
+	camera.add_child(backdrop)
 
 
 func _capture_entity(viewport: SubViewport, entity: Dictionary) -> void:
@@ -302,7 +325,7 @@ func _camera_manifest(camera: Camera3D) -> Dictionary:
 		"basis_x":_vec3(transform.basis.x),"basis_y":_vec3(transform.basis.y),"basis_z":_vec3(transform.basis.z),
 		"fov_deg":camera.fov,"near_m":camera.near,"far_m":camera.far,
 		"projection":"perspective","keep_aspect":"height",
-		"exposure_multiplier":0.95,"auto_exposure":false
+		"exposure_multiplier":1.08,"auto_exposure":false
 	}
 
 
@@ -379,7 +402,7 @@ func _finish() -> void:
 		if int(entity_counts.get(entity.id, 0)) != 3:
 			complete = false
 	var manifest := {
-		"schema":"ada-museum-wall-c27-v1","round":5,
+		"schema":"ada-museum-wall-c27-v1","round":7,
 		"complete":complete,"missing_is_failure":true,
 		"renderer_required":["mobile","forward_plus"],"renderer_actual":_renderer,
 		"resolution":[WIDTH,HEIGHT],"view_ids":VIEW_IDS,

@@ -21,6 +21,18 @@ func _key(kc: int) -> void:
 	Input.parse_input_event(up)
 
 
+func _wheel(target: Node, button: MouseButton) -> void:
+	var ev := InputEventMouseButton.new()
+	ev.button_index = button
+	ev.pressed = true
+	ev.factor = 1.0
+	ev.position = get_root().get_visible_rect().size * 0.5
+	# Call the museum's input lane directly. The project autoloads also consume
+	# synthetic mouse events in headless runs, making parse_input_event timing
+	# nondeterministic even though the museum handler itself is synchronous.
+	target.call("_input", ev)
+
+
 func _initialize() -> void:
 	call_deferred("_run")
 
@@ -49,6 +61,12 @@ func _run() -> void:
 		fails.append("H did not climb to the plan view")
 	if not is_instance_valid(inst) or not bool(inst.get("_dollhouse")):
 		fails.append("the climb reloaded or left the doll house")
+	var toolbar: HBoxContainer = inst.get("_plan_toolbar")
+	if toolbar == null or not is_instance_valid(toolbar) or toolbar.get_child_count() != 9:
+		fails.append("the plan toolbar is missing its nine editor tools")
+	var paint_canvas: Control = inst.get("_paint2d_canvas")
+	if paint_canvas == null or not is_instance_valid(paint_canvas):
+		fails.append("the plan overlay/selection canvas was not created")
 	await create_timer(1.6).timeout   # the butter carries the camera up
 
 	var cam: Camera3D = inst.get("_cam")
@@ -64,11 +82,40 @@ func _run() -> void:
 		var fwd: Vector3 = -cam.global_basis.z
 		if fwd.dot(Vector3.DOWN) < 0.95:
 			fails.append("plan camera not looking down (dot %.2f)" % fwd.dot(Vector3.DOWN))
+		var screen_up: Vector3 = cam.global_basis.y
+		if screen_up.dot(Vector3.FORWARD) < 0.95:
+			fails.append("plan is not north-up (screen-up dot north %.2f)" % screen_up.dot(Vector3.FORWARD))
 		# the crosshair still finds the floor under the doll
 		var centre: Vector2 = get_root().get_visible_rect().size * 0.5
 		var pt: Vector3 = inst.call("_doll_floor_point", centre)
 		if Vector2(pt.x - pl.position.x, pt.z - pl.position.z).length() > 3.0:
 			fails.append("floor point under the crosshair missed the doll (%.1f m off)" % Vector2(pt.x - pl.position.x, pt.z - pl.position.z).length())
+		# In plan view the wheel scrolls continuously along the museum axis; it
+		# must move the view and never mutate isometric zoom.
+		var iso_zoom: float = float(inst.get("_doll_zoom"))
+		var before_scroll_z: float = pl.position.z
+		_wheel(inst, MOUSE_BUTTON_WHEEL_DOWN)
+		await process_frame
+		await process_frame
+		if absf(float(inst.get("_doll_zoom")) - iso_zoom) > 0.001:
+			fails.append("plan wheel changed zoom instead of scrolling maps")
+		if pl.position.z <= before_scroll_z + 0.1:
+			fails.append("plan wheel did not scroll down the map axis (%.2f -> %.2f)" % [
+				before_scroll_z, pl.position.z])
+
+	# The real top-down artifact footprint is backed by the LMB picker.
+	var records: Array = inst.get("_edit_records")
+	for i in range(records.size()):
+		var record: Dictionary = records[i]
+		if String(record.get("kind", "")) in ["variant", "plinth"]:
+			continue
+		var node_v: Variant = record.get("node")
+		if node_v is Node3D and is_instance_valid(node_v):
+			var node := node_v as Node3D
+			var picked: int = int(inst.call("_doll_pick", Vector3(node.global_position.x, 0.0, node.global_position.z)))
+			if picked < 0:
+				fails.append("visible artifact has no selectable plan-space record")
+			break
 
 	# the next H falls through to the exit branch (in a probe the reload is a
 	# guarded no-op, so the observable is: the plan does NOT flip back to iso)

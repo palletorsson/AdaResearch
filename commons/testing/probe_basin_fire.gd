@@ -30,8 +30,8 @@ func _run() -> void:
 	var chapter := _arg("chapter", "transformation")
 	var inst: Node3D = (load("res://commons/scenes/endless_museum.tscn") as PackedScene).instantiate() as Node3D
 	inst.set("EM_CONTROL", "res://ada_run/_trial_bf_control.json")
-	inst.set("_overrides_path", "res://ada_run/_trial_bf_overrides.json")
-	inst.set("_hand_path", "res://ada_run/_trial_bf_hand.json")
+	inst.set("_overrides_path", "res://ada_run/em_overrides.json")
+	inst.set("_hand_path", "res://ada_run/necklace_hand.json")
 	inst.set("start_chapter", chapter)
 	inst.set("start_map", map_name)
 	var ctl := FileAccess.open("res://ada_run/_trial_bf_control.json", FileAccess.WRITE)

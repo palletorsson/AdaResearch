@@ -30,22 +30,28 @@ func _run() -> void:
 		var detail_root := host.get_node_or_null("ArchitecturalSpanDetail") as Node3D
 		_check(detail_root != null, "%s detail root" % case["family"])
 		_check(int(report.get("surface_story_elements", 0)) >= _minimum_story_elements(str(case["family"])), "%s bounded surface story" % case["family"])
+		_check((report.get("authored_construction_systems", []) as Array).size() == 1, "%s one authored construction system" % case["family"])
 		if detail_root != null:
 			var actual_bounds := _visual_bounds_x(detail_root)
 			var half_width := float(case["width_cells"]) * 0.5
 			_check(actual_bounds.x >= -half_width - 0.001 and actual_bounds.y <= half_width + 0.001, "%s actual mesh envelope" % case["family"])
 			_check(detail_root.find_child(_story_witness(str(case["family"])), true, false) != null, "%s semantic story witness" % case["family"])
+			_check(detail_root.find_child(_construction_witness(str(case["family"])), true, false) != null, "%s construction witness" % case["family"])
 		if case["family"] in ["service", "endcap"]:
 			_check(int(report.get("collision_shapes", 0)) == 1, "%s detail collision" % case["family"])
+			_check(_canonical_collision_ok(detail_root, str(case["family"])), "%s canonical collision surface" % case["family"])
 	var stone := Spans.create_pbr_material("stone", Color.WHITE, Vector2.ONE, 3)
 	var bronze := Spans.create_pbr_material("bronze", Color.WHITE, Vector2.ONE, 3)
 	_check(stone != null and bronze != null, "PBR material factory")
+	_check(str(stone.get_meta("museum_surface_id", "")) == "stone" and str(bronze.get_meta("museum_surface_id", "")) == "bronze", "canonical PBR material metadata")
+	_check(stone == Spans.create_pbr_material("stone", Color.WHITE, Vector2.ONE, 3), "pooled PBR resource identity")
 	_check(Spans.uv_variant(20, 0) != Spans.uv_variant(20, 1), "adjacent-cell UV variation")
 	_check(not Spans.instance_uniforms_supported(), "zero instance-uniform contract")
 	var caches: Dictionary = Spans.cache_report()
 	_check(int(caches.get("uv_variant_limit", 0)) == 8, "bounded UV material variants")
 	_check(int(caches.get("materials", 999)) <= 14, "architectural material cache <= 14")
 	_check(int(caches.get("profile_meshes", 0)) > 0, "shared chamfer profile cache")
+	_check(int(caches.get("physics_materials", 0)) == 2, "canonical helper physics material pool")
 	print("MUSEUM_WALL_ARCHITECTURAL_SPANS_TEST failures=%d cache=%s" % [_failures, caches])
 	test_root.queue_free()
 	quit(0 if _failures == 0 else 1)
@@ -60,7 +66,7 @@ func _check(condition: bool, label: String) -> void:
 
 
 func _minimum_story_elements(family: String) -> int:
-	return {"solid": 7, "feature": 6, "service": 7, "endcap": 7}.get(family, 0)
+	return {"solid": 8, "feature": 10, "service": 11, "endcap": 11}.get(family, 0)
 
 
 func _story_witness(family: String) -> String:
@@ -70,6 +76,31 @@ func _story_witness(family: String) -> String:
 		"service": "ServiceCabinetHinges",
 		"endcap": "EndcapCornerRepairPlate",
 	}.get(family, "")
+
+
+func _construction_witness(family: String) -> String:
+	return {
+		"solid": "SolidStaggeredPerpJoints",
+		"feature": "FeatureHangerCarriages",
+		"service": "ServiceEquipotentialBond",
+		"endcap": "EndcapTrolleyGuard",
+	}.get(family, "")
+
+
+func _canonical_collision_ok(detail_root: Node3D, family: String) -> bool:
+	if detail_root == null:
+		return false
+	var node_name := "ServiceFixtureCollision" if family == "service" else "EndcapReturnCollision"
+	var expected_surface := "painted_metal" if family == "service" else "stone"
+	var expected_friction := 0.55 if family == "service" else 0.82
+	var expected_bounce := 0.03 if family == "service" else 0.02
+	var body := detail_root.find_child(node_name, true, false) as StaticBody3D
+	if body == null or body.physics_material_override == null:
+		return false
+	var surface_ok := str(body.get_meta("physics_surface_id", "")) == expected_surface
+	var friction_ok := is_equal_approx(body.physics_material_override.friction, expected_friction)
+	var bounce_ok := is_equal_approx(body.physics_material_override.bounce, expected_bounce)
+	return surface_ok and friction_ok and bounce_ok
 
 
 func _visual_bounds_x(root: Node3D) -> Vector2:

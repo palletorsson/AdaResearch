@@ -20,6 +20,7 @@ var _quality: Dictionary = {}
 var _physics: Dictionary = {}
 var _tests: Dictionary = {}
 var _variant_metrics: Array[Dictionary] = []
+var _visual_role_failures: PackedStringArray = []
 
 
 func _init() -> void:
@@ -85,7 +86,11 @@ func _run() -> void:
 		for failure in body_audit["failures"]:
 			_append_failure(ct01_failures, "%s: %s" % [key, failure])
 
+		_visual_role_failures.clear()
 		var visual_records := _declared_visual_aabbs(piece, family)
+		for failure in _visual_role_failures:
+			_append_failure(ct02_failures, "%s: %s" % [key, failure])
+			_append_failure(ct03_failures, "%s: %s" % [key, failure])
 		var coverage := _sample_mesh_to_collider(piece, visual_records, COVERAGE_SAMPLES_PER_VARIANT)
 		coverage_queries += int(coverage["queries"])
 		if not bool(coverage["passed"]):
@@ -364,6 +369,17 @@ func _sample_mesh_to_collider(piece: Node3D, records: Array[Dictionary], sample_
 		total_area += float(record["area"])
 	if total_area <= 0.0:
 		return {"passed": false, "queries": 0, "misses": sample_count, "p95_m": 9999.0, "max_m": 9999.0}
+	var exclusion_sets: Dictionary = {}
+	var bodies := _nodes_of_type(piece, "body")
+	for record in records:
+		var target := str(record.get("collision_target", ""))
+		if exclusion_sets.has(target):
+			continue
+		var excluded: Array[RID] = []
+		for body_node in bodies:
+			if body_node is CollisionObject3D and str(body_node.name) != target:
+				excluded.append((body_node as CollisionObject3D).get_rid())
+		exclusion_sets[target] = excluded
 	var space := piece.get_world_3d().direct_space_state
 	for index in range(sample_count):
 		var record := _weighted_record(records, total_area, (float(index) + 0.5) / float(sample_count))
@@ -379,6 +395,7 @@ func _sample_mesh_to_collider(piece: Node3D, records: Array[Dictionary], sample_
 			query.collide_with_areas = false
 			query.collide_with_bodies = true
 			query.hit_from_inside = true
+			query.exclude = exclusion_sets.get(str(record.get("collision_target", "")), [])
 			var hit := space.intersect_ray(query)
 			if not hit.is_empty():
 				best = minf(best, Vector3(hit["position"]).distance_to(point))
@@ -398,11 +415,17 @@ func _sample_collider_to_mesh(shapes: Array[Node], records: Array[Dictionary], s
 		var collision := node as CollisionShape3D
 		if collision == null or not collision.shape is BoxShape3D or collision.disabled:
 			continue
+		# Area3D shapes are interaction/query volumes, not solid collision proxies.
+		# Live CT rays and sweeps also set collide_with_areas=false, so including an
+		# Area here would compare a non-blocking volume against visible structure.
+		var owner := collision.get_parent()
+		if not owner is PhysicsBody3D:
+			continue
 		var size := (collision.shape as BoxShape3D).size
 		var local_bounds := AABB(-size * 0.5, size)
 		var bounds: AABB = collision.global_transform * local_bounds
 		var area := maxf(0.000001, bounds.size.x * bounds.size.y * 2.0 + bounds.size.x * bounds.size.z * 2.0 + bounds.size.y * bounds.size.z * 2.0)
-		collider_records.append({"aabb": bounds, "area": area})
+		collider_records.append({"aabb": bounds, "area": area, "collision_target": str(owner.name)})
 		total_area += area
 	if collider_records.is_empty() or records.is_empty():
 		return {"passed": false, "queries": 0, "misses": sample_count, "p95_m": 9999.0, "max_m": 9999.0}
@@ -416,7 +439,8 @@ func _sample_collider_to_mesh(shapes: Array[Node], records: Array[Dictionary], s
 		var point := Vector3(lerpf(bounds.position.x, bounds.end.x, u), lerpf(bounds.position.y, bounds.end.y, v), bounds.end.z if index % 2 == 0 else bounds.position.z)
 		var best := 9999.0
 		for visual_record in records:
-			best = minf(best, _point_aabb_distance(point, visual_record["aabb"]))
+			if str(visual_record.get("collision_target", "")) == str(record.get("collision_target", "")):
+				best = minf(best, _point_aabb_distance(point, visual_record["aabb"]))
 		if best >= 9998.0:
 			misses += 1
 		errors.append(best)
@@ -428,34 +452,37 @@ func _sample_collider_to_mesh(shapes: Array[Node], records: Array[Dictionary], s
 
 func _declared_visual_aabbs(piece: Node3D, family: String) -> Array[Dictionary]:
 	var result: Array[Dictionary] = []
+	var surfaces: Dictionary = _physics.get("surfaces", {})
 	for node in _all_descendants(piece):
 		if not node is MeshInstance3D:
 			continue
 		var mesh_instance := node as MeshInstance3D
-		if mesh_instance.mesh == null or not _is_declared_collidable_mesh(family, mesh_instance):
+		if mesh_instance.mesh == null:
+			continue
+		var role := str(mesh_instance.get_meta("collision_role", ""))
+		var surface_id := str(mesh_instance.get_meta("physics_surface_id", ""))
+		var target := str(mesh_instance.get_meta("collision_target", ""))
+		if role == "visual_only":
+			if surface_id != "" or target != "":
+				_append_failure(_visual_role_failures, "%s visual_only mesh has solid target/surface metadata" % mesh_instance.name)
+			continue
+		if role != "solid":
+			_append_failure(_visual_role_failures, "%s mesh has missing/unknown collision_role '%s'" % [mesh_instance.name, role])
+			continue
+		if target == "" or not surfaces.has(surface_id):
+			_append_failure(_visual_role_failures, "%s solid mesh has invalid surface '%s' or empty target" % [mesh_instance.name, surface_id])
+			continue
+		var target_node := piece.find_child(target, true, false)
+		if not target_node is PhysicsBody3D:
+			_append_failure(_visual_role_failures, "%s solid target '%s' is not a PhysicsBody3D" % [mesh_instance.name, target])
+			continue
+		if _resolved_surface_id(target_node as CollisionObject3D) != surface_id:
+			_append_failure(_visual_role_failures, "%s surface '%s' does not match target '%s'" % [mesh_instance.name, surface_id, target])
 			continue
 		var bounds: AABB = mesh_instance.global_transform * mesh_instance.get_aabb()
 		var area := maxf(0.000001, bounds.size.x * bounds.size.y)
-		result.append({"name": str(mesh_instance.name), "aabb": bounds, "area": area})
+		result.append({"name": str(mesh_instance.name), "aabb": bounds, "area": area, "physics_surface_id": surface_id, "collision_target": target})
 	return result
-
-
-func _is_declared_collidable_mesh(family: String, mesh_instance: MeshInstance3D) -> bool:
-	var n := str(mesh_instance.name).to_lower()
-	var slot := str(mesh_instance.get_meta("surface_slot", "")).to_lower()
-	if family in ["window", "vitrine", "portal"] and slot in ["stone", "stone_alt", "frame", "trim", "bronze", "glass", "glass_edge", "gasket", "backing"]:
-		return true
-	if n.contains("wallcell") or n.contains("skirting") or n.contains("cornice"):
-		return true
-	match family:
-		"solid": return n.contains("stonefield")
-		"feature": return n.contains("picturerail") or n.contains("hangingbus") or n.contains("anchor")
-		"window": return n.contains("apron") or n.contains("head") or n.contains("pier") or n.contains("jamb") or n.contains("frame") or n.contains("mullion") or n.contains("transom") or n.contains("lamination") or n.contains("gasket") or n.contains("sill")
-		"vitrine": return n.contains("backing") or n.contains("liner") or n.contains("frame") or n.contains("door") or n.contains("shelf") or n.contains("gasket")
-		"service": return n.contains("servicecabinet") or n.contains("servicedoor") or n.contains("servicedrop") or n.contains("serviceriser") or n.contains("raceway")
-		"portal": return n.contains("portalstructural") or n.contains("portaldeep") or n.contains("portalhead") or n.contains("portalgasket") or n.contains("portalthreshold") or n.contains("portalflush") or n.contains("portalcorn")
-		"endcap": return n.contains("endcap") or n.contains("terminal")
-	return false
 
 
 func _weighted_record(records: Array[Dictionary], total_area: float, normalized: float) -> Dictionary:

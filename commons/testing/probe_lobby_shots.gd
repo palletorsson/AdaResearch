@@ -14,7 +14,7 @@ func _run() -> void:
 		["door", Vector3(7.5, 1.6, 1.3), Vector3(7.5, 1.6, 4.5)],
 		["well", Vector3(3.5, 1.6, 3.2), Vector3(0.0, 0.0, 0.0)],
 		["well2", Vector3(-1.6, 1.6, -1.6), Vector3(0.0, 0.2, 0.0)],
-		["intro", Vector3(4.6, 1.5, 3.6), Vector3(3.6, 1.7, 1.0)],
+		["intro", Vector3(4.0, 1.5, 3.7), Vector3(3.6, 1.7, 1.0)],
 		["enter", Vector3(7.5, 1.6, 5.2), Vector3(7.5, 1.3, 12.0)],
 		["origin", Vector3(10.0, 1.5, 6.3), Vector3(12.5, 0.7, 8.5)],
 		["speak", Vector3(7.5, 1.6, 7.0), Vector3(2.2, 1.5, 11.0)],
