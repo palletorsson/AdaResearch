@@ -1,6 +1,6 @@
 {
 	"_readme": "The BAKE: every placement decision the museum makes from a measurement, decided ONCE by a headless --em-bake run and replayed by every later run, desktop or headset. Per chapter|pearl: placed = token, tile cell, the exact cells sealed (x, z-from-segment-base); refused = token, cell, why. Regenerate after editing the plan: python tools/em_bake.py",
-	"at": "2026-08-25 09:07:02",
+	"at": "2026-08-25 09:16:11",
 	"plan": "res://ada_run/em_plan.json",
 	"plan_at": "2026-08-21T14:00:55",
 	"schema": "adaresearch.em_bake.v1",
@@ -44321,246 +44321,246 @@
 			"placed": [
 				{
 					"cell": [
-						7.0,
-						5.0
+						7,
+						5
 					],
 					"seal": [],
 					"token": "folding_past"
 				},
 				{
 					"cell": [
-						11.0,
-						5.0
+						11,
+						5
 					],
 					"seal": [
 						[
-							11.0,
-							5.0
+							11,
+							5
 						]
 					],
 					"token": "frame_counter_display"
 				},
 				{
 					"cell": [
-						4.0,
-						6.0
+						4,
+						6
 					],
 					"seal": [
 						[
-							4.0,
-							6.0
+							4,
+							6
 						]
 					],
 					"token": "fontana_puncture"
 				},
 				{
 					"cell": [
-						6.0,
-						7.0
+						6,
+						7
 					],
 					"seal": [
 						[
-							6.0,
-							7.0
+							6,
+							7
 						],
 						[
-							7.0,
-							7.0
+							7,
+							7
 						],
 						[
-							6.0,
-							8.0
+							6,
+							8
 						],
 						[
-							7.0,
-							8.0
+							7,
+							8
 						]
 					],
 					"token": "origin"
 				},
 				{
 					"cell": [
-						1.0,
-						8.0
+						1,
+						8
 					],
 					"seal": [
 						[
-							1.0,
-							8.0
+							1,
+							8
 						]
 					],
 					"token": "coordinate_readout"
 				},
 				{
 					"cell": [
-						6.0,
-						9.0
+						6,
+						9
 					],
 					"seal": [
 						[
-							5.0,
-							8.0
+							5,
+							8
 						],
 						[
-							6.0,
-							8.0
+							6,
+							8
 						],
 						[
-							5.0,
-							9.0
+							5,
+							9
 						],
 						[
-							6.0,
-							9.0
+							6,
+							9
 						],
 						[
-							7.0,
-							9.0
+							7,
+							9
 						],
 						[
-							5.0,
-							10.0
+							5,
+							10
 						],
 						[
-							6.0,
-							10.0
+							6,
+							10
 						],
 						[
-							7.0,
-							10.0
+							7,
+							10
 						]
 					],
 					"token": "you_are_here"
 				},
 				{
 					"cell": [
-						12.0,
-						10.0
+						12,
+						10
 					],
 					"seal": [
 						[
-							12.0,
-							10.0
+							12,
+							10
 						]
 					],
 					"token": "interactive_point_origin_force"
 				},
 				{
 					"cell": [
-						13.0,
-						10.0
+						13,
+						10
 					],
 					"seal": [
 						[
-							13.0,
-							10.0
+							13,
+							10
 						]
 					],
 					"token": "interactive_point_origin_force"
 				},
 				{
 					"cell": [
-						1.0,
-						15.0
+						1,
+						15
 					],
 					"seal": [
 						[
-							0.0,
-							13.0
+							0,
+							13
 						],
 						[
-							1.0,
-							13.0
+							1,
+							13
 						],
 						[
-							2.0,
-							13.0
+							2,
+							13
 						],
 						[
-							3.0,
-							13.0
+							3,
+							13
 						],
 						[
-							1.0,
-							14.0
+							1,
+							14
 						],
 						[
-							2.0,
-							14.0
+							2,
+							14
 						],
 						[
-							3.0,
-							14.0
+							3,
+							14
 						],
 						[
-							0.0,
-							15.0
+							0,
+							15
 						],
 						[
-							1.0,
-							15.0
+							1,
+							15
 						],
 						[
-							2.0,
-							15.0
+							2,
+							15
 						],
 						[
-							3.0,
-							15.0
+							3,
+							15
 						],
 						[
-							0.0,
-							16.0
+							0,
+							16
 						],
 						[
-							1.0,
-							16.0
+							1,
+							16
 						],
 						[
-							2.0,
-							16.0
+							2,
+							16
 						],
 						[
-							3.0,
-							16.0
+							3,
+							16
 						],
 						[
-							1.0,
-							17.0
+							1,
+							17
 						],
 						[
-							2.0,
-							17.0
+							2,
+							17
 						],
 						[
-							3.0,
-							17.0
+							3,
+							17
 						]
 					],
 					"token": "CoordinateSystem3M"
 				},
 				{
 					"cell": [
-						7.0,
-						16.0
+						7,
+						16
 					],
 					"seal": [
 						[
-							7.0,
-							16.0
+							7,
+							16
 						]
 					],
 					"token": "floating_sphere_field"
 				},
 				{
 					"cell": [
-						10.0,
-						16.0
+						10,
+						16
 					],
 					"seal": [
 						[
-							10.0,
-							16.0
+							10,
+							16
 						]
 					],
 					"token": "interactive_point_origin_force"
