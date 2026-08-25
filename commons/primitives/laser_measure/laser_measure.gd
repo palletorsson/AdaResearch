@@ -741,6 +741,12 @@ func _is_player_body(obj: Node) -> bool:
 	# Direct checks
 	if obj.is_in_group("player") or obj.is_in_group("player_body"):
 		return true
+	# em_walker: the endless museum's desktop walker (2026-08-25). It is named
+	# "Walker", joins none of the groups below and sits on collision layer 1,
+	# so every test in this function missed it and the beam has been passing
+	# straight through the only body in the museum that can be killed.
+	if obj.is_in_group("em_walker"):
+		return true
 	if obj.name.containsn("player") or obj.name.containsn("Player"):
 		return true
 	# Check collision layer 20 (player body layer = 524288)
