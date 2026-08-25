@@ -4567,7 +4567,12 @@ func _build_segment() -> void:
 		_save_points.append({"z": sp_z,
 			"pos": Vector3(float(w) / 2.0 + 0.5, 0.25, float(zbase) + float(VESTIBULE_H) - 1.5)})
 	_segments.append({"node": seg, "z0": _next_z, "z1": _next_z + float(h) + float(VESTIBULE_H) + float(porch_depth) + float(court_depth), "index": _seg_index, "w": w,
-		"snap": stream_snap, "pearl": String(deal.get("pearl", "")) if deal is Dictionary else ""})
+		"snap": stream_snap, "pearl": String(deal.get("pearl", "")) if deal is Dictionary else "",
+		# THE MAP NAME, not only the pearl (2026-08-25): the view toggle rebuilds
+		# around the eye and needs to name the hall it was over. A pearl cannot
+		# be turned back into a map name — "trans rotationspectacle" does not
+		# reconstruct "Trans_RotationSpectacle" — so it is carried, not derived.
+		"map": String(peek.get("map", "")) if peek is Dictionary else ""})
 	_next_z += float(h) + float(VESTIBULE_H) + float(porch_depth) + float(court_depth)
 	_seg_index += 1
 	_prev_w = w
@@ -10577,36 +10582,56 @@ func _notification(what: int) -> void:
 ## H: enter or leave the doll house. The scene reloads through the same
 ## door the follow uses — chapter kept, the eye resumed where it stood —
 ## with the dollhouse flag flipped in em_control.
+## ONE POSITION FOR THREE VIEWS (2026-08-25, Palle: "the player should have
+## the same position in 3d in iso and top down. so if we scroll in top down and
+## go the 3d we should end up in the top down player position").
+##
+## The toggle rebuilds the museum around the eye and used to record only the
+## CHAPTER plus a z measured from the hall's own start. After the reload the
+## chapter opens at its FIRST pearl, so scrolling the plan across three halls
+## and pressing H put the walker in hall one at the local z of hall three —
+## and if the eye had scrolled past the built halls entirely, into a segment
+## that no longer existed, the chapter came back "" and the walk restarted at
+## the door. Now the hall is named, and an eye outside every segment takes the
+## NEAREST one instead of nothing.
+func _toggle_doc() -> Dictionary:
+	var ch := ""
+	var mp := ""
+	var z_local: float = 0.0
+	var eye_z: float = _eye_pos().z
+	var best_d := INF
+	for sv in _segments:
+		var sd: Dictionary = sv
+		var z0: float = float(sd["z0"])
+		var z1: float = float(sd["z1"])
+		var d: float = 0.0 if (eye_z >= z0 and eye_z < z1) else minf(absf(eye_z - z0), absf(eye_z - z1))
+		if d >= best_d:
+			continue
+		best_d = d
+		var sn: Node3D = _node_or_null(sd.get("node"))
+		if sn != null and sn.has_meta("em_chapter"):
+			ch = String(sn.get_meta("em_chapter"))
+		mp = String(sd.get("map", ""))
+		z_local = clampf(eye_z - z0, 0.0, maxf(0.0, z1 - z0))
+	return {
+		"_readme": "the menu's / the jump's / the follow's / the doll house's voice",
+		"first_chapter": ch,
+		"first_map": mp,
+		"_resume_hall": mp,
+		"dollhouse": 0 if _dollhouse else 1,
+		"grid_pack": 1 if _grid_pack else 0,
+		"gate_open": 1 if (_gate_t >= 0.0 or _gate.is_empty()) else 0,
+		"resume_eye": [_player.position.x, _player.position.y, z_local] if _player != null else null,
+		"resume_yaw": _yaw}
+
+
 func _doll_toggle() -> void:
 	if get_tree().current_scene == null:
 		return
-	var ch := ""
-	var z_local: float = 0.0
-	var eye_z: float = _eye_pos().z
-	for sv in _segments:
-		var sd: Dictionary = sv
-		if eye_z >= float(sd["z0"]) and eye_z < float(sd["z1"]):
-			var sn: Node3D = _node_or_null(sd.get("node"))
-			if sn != null and sn.has_meta("em_chapter"):
-				ch = String(sn.get_meta("em_chapter"))
-			z_local = eye_z - float(sd["z0"])
-			break
 	var f := FileAccess.open(EM_CONTROL, FileAccess.WRITE)
 	if f == null:
 		return
-	var doc := {
-		"_readme": "the menu's / the jump's / the follow's / the doll house's voice",
-		"first_chapter": ch,
-		"first_map": "",
-		"dollhouse": 0 if _dollhouse else 1,
-		"grid_pack": 1 if _grid_pack else 0,
-		# ONE MUSEUM, ONE DOOR (Palle: "open door in regular means open door
-		# in iso"): a door opened in either view stays open through the toggle
-		"gate_open": 1 if (_gate_t >= 0.0 or _gate.is_empty()) else 0,
-	}
-	if _player != null:
-		doc["resume_eye"] = [_player.position.x, _player.position.y, z_local]
-		doc["resume_yaw"] = _yaw
+	var doc := _toggle_doc()
 	f.store_string(JSON.stringify(doc, " "))
 	f.close()
 	_edit_flush()
