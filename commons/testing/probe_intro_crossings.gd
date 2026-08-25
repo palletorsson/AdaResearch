@@ -99,7 +99,7 @@ func _run() -> void:
 				if seen_fire.has(key):
 					continue
 				seen_fire[key] = true
-				found.append("FIRE  at (%5.1f,%5.1f,%5.1f)  size %4.1f x %4.1f x %4.1f  TOP %5.2f" % [
+				found.append("KILL  at (%5.1f,%5.1f,%5.1f)  size %4.1f x %4.1f x %4.1f  TOP %5.2f" % [
 					cs.position.x, cs.position.y, cs.position.z,
 					bs.size.x, bs.size.y, bs.size.z, cs.position.y + bs.size.y * 0.5])
 		found.sort()

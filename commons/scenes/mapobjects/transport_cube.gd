@@ -228,7 +228,9 @@ func _process(delta: float) -> void:
 
 func _is_player(body: Node3D) -> bool:
 	"""Check if the body is a player"""
-	return body.is_in_group("player") or body.is_in_group("vr_player") or body.name.contains("Player") or body.is_in_group("player_body")
+	# em_walker: the endless museum's desktop walker, which is named "Walker"
+	# and joins none of the four below (2026-08-25)
+	return body.is_in_group("player") or body.is_in_group("vr_player") or body.name.contains("Player") or body.is_in_group("player_body") or body.is_in_group("em_walker")
 
 func _on_detection_area_body_entered(body: Node3D) -> void:
 	if _is_player(body):

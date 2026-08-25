@@ -2142,6 +2142,15 @@ func _setup_world() -> void:
 	# environment binds its camera attributes to the camera.
 	_player = CharacterBody3D.new()
 	_player.name = "Walker"
+	# CARRIABLE (2026-08-25, Palle: "in the endless museum 3d we want to be
+	# able to be transported by transport cube like in VR"). The cube carries
+	# whatever _is_player() recognises — the groups player / vr_player /
+	# player_body, or a name containing "Player" — and this walker is named
+	# Walker and joins nothing, so it has never been carried on the desktop.
+	# A dedicated group rather than "player_body": that one is also read by
+	# force_field_zone, drag_corridor and artifact_runner, and being pushed
+	# around by every field in the corpus is not what was asked for.
+	_player.add_to_group("em_walker")
 	_player.position = Vector3(7.5, 0.0, 1.5)
 	_yaw = PI  # segments extend along +z; face into the museum
 	_player.rotation = Vector3(0.0, _yaw, 0.0)
@@ -3356,6 +3365,7 @@ func _stamp_utility(spec: String, cell: Vector2i, seg: Node3D, zbase: int) -> No
 			if kv.size() == 2 and String(kv[0]).strip_edges() == "lift" 					and String(kv[1]).strip_edges().is_valid_float():
 				lift = float(String(kv[1]).strip_edges())
 	var parsed: Dictionary = UtilityRegistry.parse_utility_cell(spec_clean)
+	# (the carrier's areas are widened after instantiation, below)
 	var code: String = String(parsed.get("type", " ")).strip_edges()
 	var params: Array = parsed.get("parameters", [])
 	if code == "" or code == " ":
@@ -3390,6 +3400,25 @@ func _stamp_utility(spec: String, cell: Vector2i, seg: Node3D, zbase: int) -> No
 	# the crossing's top belongs on the deck — measured after the settle
 	if is_inside_tree():
 		get_tree().create_timer(0.45).timeout.connect(_utility_seat.bind(node, lift))
+	# THE RIDE (2026-08-25, Palle: "in the endless museum 3d we want to be able
+	# to be transported by transport cube like in VR"). The cube does not carry
+	# what stands on it — it carries what its CarryArea sees, and that area
+	# masks layer 20, the grid's player layer. The museum's walker is on the
+	# default layer 1 and is therefore invisible to it, which is the whole of
+	# why the desktop has never been carried. Widen the carrier's own areas
+	# rather than moving the walker onto layer 20: that layer is also watched
+	# by danger_zone, next_cube and every pick-up in the corpus, and being
+	# seen by all of them is not what was asked for.
+	if code == "tc":
+		var widened := 0
+		for a_v in node.find_children("*", "Area3D", true, false):
+			var ar := a_v as Area3D
+			if (ar.collision_mask & 1) == 0:
+				ar.collision_mask |= 1
+				widened += 1
+		if widened > 0:
+			print("[em-utility] %s carries the walker (%d area(s) widened to layer 1)" % [
+				node.name, widened])
 	# a moving surface is a RIDE, never promised floor; a bridge is floor
 	var gc := Vector2i(cell.x, zbase + cell.y)
 	if code == "br":
@@ -3467,20 +3496,35 @@ func _museum_y_offset(v: float) -> float:
 func _utility_seat(node: Node3D, deck_y: float) -> void:
 	if node == null or not is_instance_valid(node):
 		return
+	# WHAT YOU STAND ON IS THE COLLIDER, NOT THE PICTURE (2026-08-25). Seating
+	# by the visual AABB sank the transport cube: its mesh is 1.8 m tall
+	# (marker included) while the box you can actually stand on is 1 m, so
+	# laying the picture's top on the deck left the solid part 0.5 m UNDER it
+	# — a crossing you fall straight through. Prefer the physics bodies'
+	# shapes; fall back to the mesh only when a utility has no collider.
 	var box := AABB()
 	var first := true
-	for vi_v in node.find_children("*", "VisualInstance3D", true, false):
-		var vi := vi_v as VisualInstance3D
-		var ab: AABB = vi.global_transform * vi.get_aabb()
-		box = ab if first else box.merge(ab)
-		first = false
+	for pb_v in node.find_children("*", "PhysicsBody3D", true, false):
+		for cs_v in (pb_v as Node).find_children("*", "CollisionShape3D", true, false):
+			var cs := cs_v as CollisionShape3D
+			if cs.shape == null or cs.disabled:
+				continue
+			var ab_c: AABB = cs.global_transform * cs.shape.get_debug_mesh().get_aabb()
+			box = ab_c if first else box.merge(ab_c)
+			first = false
+	if first:
+		for vi_v in node.find_children("*", "VisualInstance3D", true, false):
+			var vi := vi_v as VisualInstance3D
+			var ab: AABB = vi.global_transform * vi.get_aabb()
+			box = ab if first else box.merge(ab)
+			first = false
 	if first:
 		return
 	var top: float = box.position.y + box.size.y
 	# a scale cube measured mid-breath is not at its full size: extrapolate
 	# from the scale it is at to the scale it will reach
-	var cur: Variant = node.get("current_scale")
-	var mx: Variant = node.get("max_scale")
+	var cur: Variant = _prop_under(node, "current_scale")
+	var mx: Variant = _prop_under(node, "max_scale")
 	if cur is float and mx is float and float(cur) > 0.01 and float(mx) > float(cur):
 		var grow: float = float(mx) / float(cur)
 		top = node.global_position.y + (top - node.global_position.y) * grow
