@@ -1301,10 +1301,14 @@ func _build_surfaces() -> void:
 		return
 	if _mod_has(_mod_mats, "warm_up"):
 		_mod_mats.call("warm_up")
-	_surf["floor"] = _mat_of("floor_stone", [])
-	# circulation is the floor that gets walked on. soil 0.15 was in the library
-	# from the start and had never once been passed non-zero by anybody.
-	_surf["deck"] = _mat_of("floor_terrazzo", [Color.WHITE, 0.15])
+	# ONE CONTINUOUS GALLERY FLOOR. The hall used dark granite while the four-metre
+	# vestibule used terrazzo, producing a black reflective field and a material
+	# change at every map boundary. Both roles now share the exact same cached
+	# warm-grey terrazzo instance. This removes a state change as well as making
+	# the endless museum read as one institution.
+	var circulation: Material = _mat_of("floor_terrazzo", [Color.WHITE, 0.0])
+	_surf["floor"] = circulation
+	_surf["deck"] = circulation
 	_surf["wall"] = _mat_of("wall_plaster", [])
 	# THE MUSEUM'S DEFINING SURFACE: a matte 0.885 sRGB emulsion and the main
 	# bounce surface. It is resolved once and used by every hall; templates still
@@ -1319,17 +1323,14 @@ func _build_surfaces() -> void:
 	_surf["trim"] = _surf["wall_white"] if _surf["wall_white"] != null \
 		else _mat_of("ceiling_plaster", [])
 	_surf["brass"] = _mat_of("accent_brass", [0.35])
-	# THE 130 mm CONTACT STRIP. em_materials.skirting() existed with no callers in
-	# the whole repo; it is the library's one real light-reactive edge-darkening
-	# mechanism and it was dead code while every frame showed a wall meeting a
-	# floor at an indistinguishable value step.
-	_surf["skirting"] = _mat_of("skirting", [&"plaster", Color.WHITE])
-	# A JOINT IS A SHADOW, NOT A LIGHT. The floor seams used to be drawn in aged
-	# brass — metallic, roughness ~0.27 in the high spots, so every strip mirrored
-	# whatever spot was overhead and blew to 0.75-0.95 against a 0.03 floor. The
-	# least important element in the building (a 5 mm joint) was doing all the
-	# leading-line work. A dark soiled stone reads by shadow instead.
-	_surf["joint"] = _mat_of("skirting", [&"floor_stone", Color.WHITE])
+	# A restrained painted base: one quarter of the contact-soil treatment keeps
+	# the wall/floor junction legible without the heavy dark band of the earlier
+	# 130 mm plinth. It retains the existing shared AO field and draw family.
+	_surf["skirting"] = _mat_of("wall_plaster", [Color.WHITE, 0.25])
+	# A JOINT IS A SHADOW, NOT A SECOND FLOOR COLOUR. The 5 mm seam geometry still
+	# catches a fine highlight and contact shadow, but sharing the floor material
+	# stops the 3 m planning module from overpowering artifacts and room form.
+	_surf["joint"] = circulation
 	for k in _surf.keys():
 		if _surf[k] == null:
 			_surf.erase(k)
@@ -2987,6 +2988,16 @@ func _xform_under(anc: Node3D, n: Node3D) -> Transform3D:
 	return t
 
 
+## A numeric property on a node OR anywhere under it, whichever answers first.
+func _prop_under(n: Node, key: String) -> Variant:
+	if key in n:
+		return n.get(key)
+	for c in n.find_children("*", "Node", true, false):
+		if key in c:
+			return c.get(key)
+	return null
+
+
 func _pool_obstacles(seg: Node3D) -> Array:
 	var out: Array = []
 	for n_v in seg.find_children("Utility_*", "Node3D", true, false):
@@ -3011,8 +3022,12 @@ func _pool_obstacles(seg: Node3D) -> Array:
 		# this moment and will be 3 m across, and the seat that lowers every
 		# crossing runs on a timer that has not fired yet. Measuring a thing
 		# before it has happened put one pool of three under a brim-full fill.
-		var cur: Variant = n.get("current_scale")
-		var mx: Variant = n.get("max_scale")
+		# THE PROPERTY IS RARELY ON THE WRAPPER (2026-08-25). Utility_sc_6_16
+		# answered null for current_scale while the scale cube under it
+		# answered 0.5 — the same trap that made an armed laser read
+		# lethal=false on its root. Search the subtree.
+		var cur: Variant = _prop_under(n, "current_scale")
+		var mx: Variant = _prop_under(n, "max_scale")
 		if cur is float and mx is float and float(cur) > 0.01 and float(mx) > float(cur):
 			var grow: float = float(mx) / float(cur)
 			var mid_x: float = (x0 + x1) * 0.5
@@ -3029,10 +3044,14 @@ func _pool_obstacles(seg: Node3D) -> Array:
 			var d: Vector3 = (tp as Vector3) - (ip as Vector3)
 			x0 = minf(x0, x0 + d.x); x1 = maxf(x1, x1 + d.x)
 			z0 = minf(z0, z0 + d.z); z1 = maxf(z1, z1 + d.z)
-		var cx0: int = int(floor(x0 + 0.01))
-		var cx1: int = int(floor(x1 - 0.01))
-		var cz0: int = int(floor(z0 + 0.01))
-		var cz1: int = int(floor(z1 - 0.01))
+		# ONE CELL OF MARGIN, always: a crossing is allowed to overhang the rim
+		# it serves (Palle moved the scale cube +1 in x and z, and its body
+		# then measured a cell OUTSIDE the pool it crosses — the middle pool
+		# went back to brim-full while the other two were beds).
+		var cx0: int = int(floor(x0 + 0.01)) - 1
+		var cx1: int = int(floor(x1 - 0.01)) + 1
+		var cz0: int = int(floor(z0 + 0.01)) - 1
+		var cz1: int = int(floor(z1 - 0.01)) + 1
 		out.append({"rect": Rect2i(cx0, cz0, maxi(1, cx1 - cx0 + 1), maxi(1, cz1 - cz0 + 1)),
 			"who": String(n.name)})
 	return out
@@ -3051,7 +3070,14 @@ func _basin_fire(seg: Node3D, cells: Array, depth: float, top_y: float) -> void:
 	m_fire.emission = Color(0.86, 0.10, 0.02)
 	# LOW energy on purpose: at 1.9 the fill blew out to white-pink and the
 	# crossings standing in it lost their edges. A red cube, lit from inside.
-	m_fire.emission_energy_multiplier = 0.85
+	m_fire.emission_energy_multiplier = 1.35
+	# the thin air above the bed: same fire, almost all the way transparent
+	var m_haze := StandardMaterial3D.new()
+	m_haze.albedo_color = Color(0.80, 0.12, 0.06, 0.20)
+	m_haze.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	m_haze.emission_enabled = true
+	m_haze.emission = Color(0.90, 0.22, 0.05)
+	m_haze.emission_energy_multiplier = 0.55
 	var area := Area3D.new()
 	area.name = "BasinFire"
 	area.monitoring = true
@@ -3076,20 +3102,41 @@ func _basin_fire(seg: Node3D, cells: Array, depth: float, top_y: float) -> void:
 		for o_v in obstacles:
 			var o: Dictionary = o_v
 			if r.intersects(o["rect"] as Rect2i):
-				my_top = minf(my_top, floor_y + 0.6)
+				# 1.0, not 0.6 (2026-08-25, Palle: "no fire cube"). The bed was
+				# built and lit and invisible: too shallow to read as fire from
+				# a standing eye, which is the only place the walker ever is.
+				# Still 1.6 m under the lowest crossing's top.
+				my_top = minf(my_top, floor_y + 1.0)
 		my_top = maxf(my_top, floor_y + 0.5)
 		if my_top < top_y - 0.01:
 			lowered += 1
 		var hgt: float = my_top - floor_y
-		var c := Vector3(float(r.position.x) + float(r.size.x) * 0.5,
-			floor_y + hgt * 0.5, float(r.position.y) + float(r.size.y) * 0.5)
-		var sz := Vector3(float(r.size.x) - 0.04, hgt, float(r.size.y) - 0.04)
+		var cx: float = float(r.position.x) + float(r.size.x) * 0.5
+		var cz: float = float(r.position.y) + float(r.size.y) * 0.5
+		var wx: float = float(r.size.x) - 0.04
+		var wz: float = float(r.size.y) - 0.04
+		var c := Vector3(cx, floor_y + hgt * 0.5, cz)
+		var sz := Vector3(wx, hgt, wz)
 		_box(seg, c, sz, Color(0.78, 0.09, 0.05, 0.86), m_fire)
+		# THE HAZE (2026-08-25, Palle: "no fire cube"). A bed at the bottom of a
+		# 2.5 m pool is invisible from a standing eye — the near rim occludes it
+		# until you are at the edge looking down, which is one step before you
+		# are dead. So above the bed, up to where the brim-full fill would have
+		# stopped, a thin red air: the pool reads as burning from across the
+		# hall, and a crossing standing in it is still plainly a crossing.
+		if my_top < top_y - 0.01:
+			var haze_h: float = top_y - my_top
+			_box(seg, Vector3(cx, my_top + haze_h * 0.5, cz), Vector3(wx, haze_h, wz),
+				Color(0.80, 0.12, 0.06, 0.20), m_haze)
+		# THE KILL IS THE WHOLE POOL, bed and haze alike: falling in at any
+		# depth is falling in. Every crossing's top stands above top_y, so a
+		# walker riding one is never inside it.
+		var kill_h: float = top_y - floor_y
 		var cs := CollisionShape3D.new()
 		var bs := BoxShape3D.new()
-		bs.size = sz
+		bs.size = Vector3(wx, kill_h, wz)
 		cs.shape = bs
-		cs.position = c
+		cs.position = Vector3(cx, floor_y + kill_h * 0.5, cz)
 		area.add_child(cs)
 	seg.add_child(area)
 	area.body_entered.connect(_basin_burned)
@@ -3097,8 +3144,8 @@ func _basin_fire(seg: Node3D, cells: Array, depth: float, top_y: float) -> void:
 	# the AREA, so it dies when the hall is streamed out — one made on the
 	# museum itself would outlive every hall it lit.
 	var tw := area.create_tween().set_loops()
-	tw.tween_property(m_fire, "emission_energy_multiplier", 1.25, 1.1)
-	tw.tween_property(m_fire, "emission_energy_multiplier", 0.7, 0.9)
+	tw.tween_property(m_fire, "emission_energy_multiplier", 1.9, 1.1)
+	tw.tween_property(m_fire, "emission_energy_multiplier", 1.1, 0.9)
 	print("[em-basin] fire: %d cell(s) -> %d cube(s), top at %.2f (%d lowered under %d crossing(s))" % [
 		cells.size(), rects.size(), top_y, lowered, obstacles.size()])
 
@@ -3293,7 +3340,22 @@ func _hazard_flash() -> void:
 ## parameter rules, THEN enter the tree. Returns the node, or null with the
 ## refusal printed — a refusal is a fact about the museum, never silence.
 func _stamp_utility(spec: String, cell: Vector2i, seg: Node3D, zbase: int) -> Node3D:
-	var parsed: Dictionary = UtilityRegistry.parse_utility_cell(spec)
+	# THE MUSEUM LIFT (2026-08-25, Palle: "the transport cube is too low, must
+	# be up plus 1 m"). The seat lays every crossing's TOP flush with the deck,
+	# which is right for a gap you walk across and wrong for one that carries
+	# you. A trailing #lift:<metres> raises the seated body, and is stripped
+	# before the registry sees the cell so the grid's own grammar is untouched
+	# and the same map still loads in the grid.
+	var lift := 0.0
+	var spec_clean := spec
+	if "#" in spec:
+		var hp := spec.split("#", true, 1)
+		spec_clean = String(hp[0])
+		for part in String(hp[1]).split("#"):
+			var kv := String(part).split(":", true, 1)
+			if kv.size() == 2 and String(kv[0]).strip_edges() == "lift" 					and String(kv[1]).strip_edges().is_valid_float():
+				lift = float(String(kv[1]).strip_edges())
+	var parsed: Dictionary = UtilityRegistry.parse_utility_cell(spec_clean)
 	var code: String = String(parsed.get("type", " ")).strip_edges()
 	var params: Array = parsed.get("parameters", [])
 	if code == "" or code == " ":
@@ -3327,7 +3389,7 @@ func _stamp_utility(spec: String, cell: Vector2i, seg: Node3D, zbase: int) -> No
 	seg.add_child(node)
 	# the crossing's top belongs on the deck — measured after the settle
 	if is_inside_tree():
-		get_tree().create_timer(0.45).timeout.connect(_utility_seat.bind(node, 0.0))
+		get_tree().create_timer(0.45).timeout.connect(_utility_seat.bind(node, lift))
 	# a moving surface is a RIDE, never promised floor; a bridge is floor
 	var gc := Vector2i(cell.x, zbase + cell.y)
 	if code == "br":
