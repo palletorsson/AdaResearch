@@ -153,6 +153,83 @@ def capacity(x, z, n):
     return {"holds": holds, "compositions": comps, "also_holds": best_other}
 
 
+def capacity_run(n, gap=1):
+    """A run is a menu too, in one dimension. A 9-long wall takes one 9-long
+    frieze, or three 2-long pieces with a walking gap between them."""
+    holds, comps = {}, [{"name": "one %d-long" % n, "items": [{"off": 0, "len": n}]}]
+    for k in range(1, n + 1):
+        step = k + gap
+        c = (n + gap) // step
+        if c >= 1:
+            holds[str(k)] = c
+    for k in range(n - 1, 0, -1):
+        step = k + gap
+        c = (n + gap) // step
+        if c >= 2:
+            used = c * step - gap
+            off = (n - used) // 2
+            comps.append({"name": "%d x %d-long" % (c, k),
+                          "items": [{"off": off + i * step, "len": k} for i in range(c)]})
+            break
+    return holds, comps
+
+
+def runs_for(grid):
+    """CONTIGUOUS FLOOR ALONG A WALL — the other currency (2026-08-25). 23% of
+    the corpus is oblong and those pieces are RUNS, things that lie along a
+    wall: 1x2, 1x6, 1x9. A square finder reads a 1x6 frieze as six separate
+    1x1 slots, which is the wrong unit and hides what the room can take.
+
+    depth is how far the free floor reaches back from the wall, so a run
+    carries both numbers a piece needs: how long it may be, how deep it may sit."""
+    h = len(grid)
+    w = len(grid[0]) if h else 0
+    out = []
+
+    def depth_at(x, z, dx, dz):
+        n = 0
+        cx, cz = x + dx, z + dz
+        while 0 <= cx < w and 0 <= cz < h and grid[cz][cx] == "floor" and n < 5:
+            n += 1
+            cx += dx
+            cz += dz
+        return max(1, n)
+
+    for z in range(1, h - 1):
+        for side in (-1, 1):
+            run = []
+            for x in range(1, w):
+                ok = (x < w - 1 and grid[z][x] == "floor" and grid[z + side][x] == "wall")
+                if ok:
+                    run.append(x)
+                    continue
+                if len(run) >= 2:
+                    out.append({"kind": "run", "x": run[0], "z": z, "dir": "x",
+                                "len": len(run), "depth": min(depth_at(cx0, z, 0, -side)
+                                                              for cx0 in run)})
+                run = []
+    for x in range(1, w - 1):
+        for side in (-1, 1):
+            run = []
+            for z in range(1, h):
+                ok = (z < h - 1 and grid[z][x] == "floor" and grid[z][x + side] == "wall")
+                if ok:
+                    run.append(z)
+                    continue
+                if len(run) >= 2:
+                    out.append({"kind": "run", "x": x, "z": run[0], "dir": "z",
+                                "len": len(run), "depth": min(depth_at(x, cz0, -side, 0)
+                                                              for cz0 in run)})
+                run = []
+    for r in out:
+        holds, comps = capacity_run(r["len"])
+        r["holds"] = holds
+        r["compositions"] = comps
+        r["also_holds"] = max([c for k, c in holds.items() if int(k) < r["len"]] or [0])
+        r["fp"] = r["depth"]
+    return out
+
+
 def slots_for(tile):
     """Every place a thing could stand, with a kind and a footprint."""
     grid = [[kind_of(c) for c in row] for row in tile]
@@ -191,22 +268,41 @@ def slots_for(tile):
     return out, grid
 
 
-def thin(slots, variant):
-    """Publish only what this variant is interested in, spread out so two
-    slots never sit on top of each other."""
+def box_of(s):
+    """Every slot as a rectangle, so a run and a square can be compared."""
+    if s["kind"] == "run":
+        if s["dir"] == "x":
+            return (s["x"], s["z"], s["len"], 1)
+        return (s["x"], s["z"], 1, s["len"])
+    return (s["x"], s["z"], s["fp"], s["fp"])
+
+
+def hits(a, b):
+    ax, az, aw, ad = a
+    bx, bz, bw, bd = b
+    return not (ax + aw <= bx or bx + bw <= ax or az + ad <= bz or bz + bd <= az)
+
+
+def thin(slots, runs, variant):
+    """Publish only what this variant is interested in, spread out so two slots
+    never sit on top of each other. A variant that keeps `wall` gets RUNS
+    instead of per-cell wall slots — a 1x6 frieze is one offer, not six."""
     spec = VARIANTS[variant]
-    keep = [s for s in slots if s["kind"] in spec["keep"]]
-    keep.sort(key=lambda s: (-{"hero": 5, "alcove": 4, "plinth": 3, "pair": 2,
-                               "wall": 1}.get(s["kind"], 0), -s["fp"], s["z"], s["x"]))
-    taken = []
-    for s in keep:
+    pool = [s for s in slots if s["kind"] in spec["keep"] and s["kind"] != "wall"]
+    if "wall" in spec["keep"]:
+        pool += runs
+    pool.sort(key=lambda s: (-{"hero": 6, "run": 5, "alcove": 4, "plinth": 3,
+                               "pair": 2}.get(s["kind"], 0),
+                             -(s.get("len", 0)), -s["fp"], s["z"], s["x"]))
+    taken, boxes = [], []
+    for s in pool:
         if len(taken) >= spec["max"]:
             break
-        # a slot must clear every slot already taken by both their footprints
-        if any(abs(s["x"] - t["x"]) < max(s["fp"], t["fp"]) and
-               abs(s["z"] - t["z"]) < max(s["fp"], t["fp"]) for t in taken):
+        b = box_of(s)
+        if any(hits(b, t) for t in boxes):
             continue
         taken.append(s)
+        boxes.append(b)
     return taken
 
 
@@ -240,7 +336,8 @@ def main():
             continue
         variant = order[i % len(order)]
         slots, grid = slots_for(tile)
-        pub = thin(slots, variant)
+        runs = runs_for(grid)
+        pub = thin(slots, runs, variant)
         if not pub:
             continue
         floor = sum(1 for r in grid for c in r if c == "floor")
@@ -256,9 +353,11 @@ def main():
             "slots": pub,
             "footprints": sorted({s["fp"] for s in pub}, reverse=True),
             "biggest": max((s["fp"] for s in pub), default=0),
+            "longest_run": max((s.get("len", 0) for s in pub), default=0),
+            "runs": sum(1 for s in pub if s["kind"] == "run"),
             "divisible": sum(1 for s in pub if s.get("also_holds", 0) >= 2),
             "counts": {k: sum(1 for s in pub if s["kind"] == k)
-                       for k in ("hero", "alcove", "plinth", "pair", "wall", "field")
+                       for k in ("hero", "run", "alcove", "plinth", "pair", "wall", "field")
                        if any(s["kind"] == k for s in pub)},
         })
 
@@ -284,8 +383,9 @@ def main():
     return 0
 
 
-KIND_COLOR = {"hero": "#fbbf24", "alcove": "#c084fc", "plinth": "#34d399",
-              "pair": "#38bdf8", "wall": "#f472b6", "field": "#94a3b8"}
+KIND_COLOR = {"hero": "#fbbf24", "run": "#f472b6", "alcove": "#c084fc",
+              "plinth": "#34d399", "pair": "#38bdf8", "wall": "#f472b6",
+              "field": "#94a3b8"}
 
 
 def _fill(v):
@@ -337,20 +437,35 @@ def _sheet(museums, dest, cell=5, cols=10):
                            % (ox + x * cell, top + z * cell, cell, cell, _fill(v)))
         for s in m["slots"]:
             c = KIND_COLOR.get(s["kind"], "#94a3b8")
-            n = max(1, int(s["fp"])) * cell
+            run = s["kind"] == "run"
+            if run:
+                bw = (s["len"] if s["dir"] == "x" else 1) * cell
+                bh = (1 if s["dir"] == "x" else s["len"]) * cell
+            else:
+                bw = bh = max(1, int(s["fp"])) * cell
             out.append('<rect x="%d" y="%d" width="%d" height="%d" fill="%s" fill-opacity="0.22" '
                        'stroke="%s" stroke-width="0.8"/>'
-                       % (ox + s["x"] * cell, top + s["z"] * cell, n, n, c, c))
+                       % (ox + s["x"] * cell, top + s["z"] * cell, bw, bh, c, c))
             # WHAT ELSE FITS: the last composition drawn as inner outlines, so a
             # big slot shows on the sheet that it is also two or four smaller
             # offers and not only one large one
             comps = s.get("compositions") or []
             if s.get("also_holds", 0) >= 2 and len(comps) > 1:
                 for it in comps[-1]["items"]:
-                    k = max(1, int(it["fp"])) * cell
+                    if run:
+                        # a run's items are an OFFSET and a LENGTH along it
+                        if s["dir"] == "x":
+                            ix, iz = s["x"] + int(it["off"]), s["z"]
+                            iw, ih = int(it["len"]) * cell, cell
+                        else:
+                            ix, iz = s["x"], s["z"] + int(it["off"])
+                            iw, ih = cell, int(it["len"]) * cell
+                    else:
+                        ix, iz = it["x"], it["z"]
+                        iw = ih = max(1, int(it["fp"])) * cell
                     out.append('<rect x="%d" y="%d" width="%d" height="%d" fill="none" '
                                'stroke="%s" stroke-width="0.5" stroke-opacity="0.85"/>'
-                               % (ox + it["x"] * cell, top + it["z"] * cell, k, k, c))
+                               % (ox + ix * cell, top + iz * cell, iw, ih, c))
     out.append("</svg>")
     with open(dest, "w", encoding="utf-8") as fh:
         fh.write("\n".join(out))
