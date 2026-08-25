@@ -1,133 +1,137 @@
 {
- "schema": "adaresearch.em_layout.v1",
- "_readme": "The museum's LAYOUT NUMBERS, in one file instead of scattered through endless_museum.gd and em_*.gd. Anything an eye would otherwise tune in code lives here: how deep the threshold gate stands, how far a hand must be to open it, how big an inventory caption is, how a hall and a side room are proportioned. The assembler reads this at boot and falls back to the value in the code when a key is absent, so deleting a key is safe and deleting the file changes nothing.",
- "gate": {
-  "depth_rows": 5,
-  "_depth_rows": "0 = the door in the entry wall (the 2026-08-18 in-doorway ruling). N>0 = the door N rows INTO the hall. 5 since 2026-08-21 (Palle: separate the room before the door as a LOADING ROOM, make it a bit bigger) — the lobby + five hall rows are the loading room; the hall dresses itself behind the sealed door.",
-  "reach_m": 1.5,
-  "_reach_m": "eye or controller this close to the scanner glass counts as a hand — 1.5 so a bare-hands lean-in grants without kissing the glass",
-  "patience_s": 6.0,
-  "_patience_s": "seconds at a sealed door before it opens itself (a museum is not a locked room). 20 made Palle serve a third of his felt load time at the door; 6 is a beat of ritual.",
-  "open_seconds": 1.6,
-  "click_reach_m": 3.2,
-  "click_cone_rad": 0.55
- },
- "caption": {
-  "height_m": 0.78,
-  "tilt_deg": -16.0,
-  "stand_off_m": 0.8,
-  "plaque_w_m": 0.46,
-  "plaque_h_m": 0.17,
-  "font_px": 44,
-  "pixel_size": 0.001
- },
- "hall": {
-  "depth_m": 4.5,
-  "ramp_len_m": 14,
-  "gallery_w_m": 4,
-  "max_body_m": 90.0,
-  "doll_cut_m": 2.4,
-  "_doll_cut_m": "the doll house's wall cut height. 2.4 keeps the hanging line (1.55) and its showings on visible wall; 1.15 was knee walls that took the pictures with them."
- },
- "side_room": {
-  "width_cells": 5,
-  "depth_cells": 7,
-  "gap_cells": 2,
-  "first_row": 4
- },
- "editor": {
-  "autosave_seconds": 0.6,
-  "snap_m": 0.2
- },
- "lobby": {
-  "enabled": true,
-  "_readme": "the FIRST vestibule, dressed as the museum's lobby (Palle, 2026-08-18): no wall works; a large window in the back wall looking backward at Folding Past; a frame counter on the wall; a fire extinguisher; a wooden pallet (pyramid) in the corner blocking a lift door; and MOA on the threshold door's header. Segment-local metres: the lobby floor is x 1..16, z 1..4, the back wall at z 0..1, the entry wall at z 4..5.",
-  "window_x0": 6,
-  "window_x1": 8,
-  "window_sill_m": 0.9,
-  "window_head_m": 2.5,
-  "view_behind_m": 12.0,
-  "view_y": 1.7,
-  "view_light": 2.0,
-  "counter_x": 11.0,
-  "counter_y": 1.6,
-  "extinguisher_y": 0.85,
-  "extinguisher_z": 2.6,
-  "elevator_z": 2.2,
-  "pallet_off_m": 0.9,
-  "pallet_yaw": 20.0,
-  "door_sign": "MOA",
-  "door_sign_sub": "Museum of Algorithms",
-  "door_sign_y": 3.13,
-  "door_sign_m": 0.21,
-  "door_sign_sub_y": 2.985,
-  "door_sign_proud_m": 0.1,
-  "door_sign_sub_m": 0.075,
-  "_door_sign": "written on the wall's overpanel above the door (2.92..4.5 m), both faces; a free-standing door (gate.depth_rows > 0) carries it on its own header instead",
-  "door_header_m": 0.4,
-  "origin_well": 1,
-  "_origin_well": "the lobby's NW corner opens around the WORLD ORIGIN: a 3x3 m well a metre deep, Point Zero (origin) standing at exactly (0,0,0), a rail, a light. The foyer is the first map in the chain (Palle, 2026-08-19).",
-  "intro_text": 1,
-  "intro_x": 3.6,
-  "intro_y": 1.75,
-  "_intro_text": "the first pearl's paragraph as wall text on the back wall, left of the window — the museum's first sentence ('you arrive late…')"
- },
- "speak": {
-  "caps": 0,
-  "_caps": "textD on the wall works: 1 = the sentences in CAPS, 0 = as dictated (Roboto, light on the field)",
-  "show_drafts": 1,
-  "_show_drafts": "1 = the corpus's draft lines (truths, blurbs, descriptions; em_speak.py --draft) hang beside the hand's; 0 = only lines Palle spoke — the other paintings stay black"
- },
- "rig": {
-  "plain_hands": true,
-  "_plain_hands": "in VR the hand is a visitor's hand: collision hand + pickup + pointer + mesh. On, the wrist tools below come off every rig in the tree, an activated catalyst bracelet is ended, and every token in no_pickup is shown but cannot be grabbed (grabbing one would put the bracelet on the hand). Palle, 2026-08-18: 'No bracelet, no editing tool, just the VR hands.'",
-  "wrist_tools": [
-   "HandWorkstationVR",
-   "messageconsole",
-   "WristStatsDisplay",
-   "GravityGun"
-  ],
-  "no_pickup": [
-   "catalyst_pedestal",
-   "catalyst_pickup",
-   "becoming_catalyst",
-   "catalyst_prompter_box",
-   "catalyst_vent",
-   "catalyst_target",
-   "wedge_skill_pickup",
-   "catalyst_sustain_demo"
-  ]
- },
- "stream": {
-  "build_ahead_m": 6.0,
-  "_build_ahead_m": "open the next segment when the eye is this close to the built edge. 6 = the build happens in the EXIT PASSAGE - the passages must turn a corner, or the doorway shows the unbuilt beyond (the one-hall contract, 2026-08-24)",
-  "keep_behind_m": 6.0,
-  "_keep_behind_m": "free a segment once its far end is this far behind the eye. 6 = the hall behind dies when you are through the starting passage; it REBUILDS if you walk back (rebuild_margin_m)",
-  "min_segments": 1,
-  "_min_segments": "never free below this many. 1 = the one-hall museum: current hall only, plus the next during a passage crossing",
-  "cull_near_m": 32.0,
-  "_cull_near_m": "artifacts closer than this render (the museum's near-artifact cull; shows are budgeted 8 per tick, nearest first)",
-  "cull_far_m": 38.0,
-  "_cull_far_m": "artifacts further than this hide AND suspend (no process, no physics, no audio); the gap is hysteresis",
-  "instantiate_ahead_m": 50.0,
-  "_instantiate_ahead_m": "the patient stamp: a queued body further than this from the eye stays a plan row on paper — not built, not resident",
-  "stamp_budget_ms": 6.0,
-  "_stamp_budget_ms": "ms per frame the patient stamp may spend building queued bodies",
-  "bodies": 1,
-  "_bodies": "1 = the museum as authored. 0 = THE EMPTY-MUSEUM EXPERIMENT: architecture only — no interior bodies, showings, props or DNA runs — so the boot clock can say which seconds the artifacts own. A diagnostic, never a mode.",
-  "keep_ahead_m": 30.0,
-  "_keep_ahead_m": "a segment this far AHEAD frees too - the walker turned around; it rebuilds on approach like everything else",
-  "rebuild_margin_m": 2.0,
-  "_rebuild_margin_m": "rebuild a freed neighbour when the eye is this close to the alive window's edge. MUST stay under keep_behind_m - the gap is the hysteresis that stops free/rebuild thrash"
- },
- "env": {
-  "vr_high": 0,
-  "_vr_high": "1 = the headset installs the HIGH tier instead of its default perf. On Quest's Mobile renderer SSIL/SSR/SDFGI/volumetric fog do not exist; the A/B shows what the device supports (glow, fog model, ambient, sky, grade).",
-  "ab_seconds": 0,
-  "_ab_seconds": "0 = off. N = alternate high/perf every N seconds, LIVE, in both modes — the in-headset A/B. Watch the log for [em-env] A/B -> tier. F7 swaps by hand on desktop."
- },
- "audio": {
-  "step_db": -17.0,
-  "_step_db": "the FOOTFALL's base level in dB (2026-08-24, Palle: \"can we lower the sound of the shoes\"). Was -8, which reads as boots in a stone hall. The per-space step_db trim and the 4 dB random window ride on top of this. Raise toward -8 for a heavier walker, drop to -30 to nearly mute the shoes."
- }
+	"schema": "adaresearch.em_layout.v1",
+	"_readme": "The museum's LAYOUT NUMBERS, in one file instead of scattered through endless_museum.gd and em_*.gd. Anything an eye would otherwise tune in code lives here: how deep the threshold gate stands, how far a hand must be to open it, how big an inventory caption is, how a hall and a side room are proportioned. The assembler reads this at boot and falls back to the value in the code when a key is absent, so deleting a key is safe and deleting the file changes nothing.",
+	"gate": {
+		"depth_rows": 5,
+		"_depth_rows": "0 = the door in the entry wall (the 2026-08-18 in-doorway ruling). N>0 = the door N rows INTO the hall. 5 since 2026-08-21 (Palle: separate the room before the door as a LOADING ROOM, make it a bit bigger) — the lobby + five hall rows are the loading room; the hall dresses itself behind the sealed door.",
+		"reach_m": 1.5,
+		"_reach_m": "eye or controller this close to the scanner glass counts as a hand — 1.5 so a bare-hands lean-in grants without kissing the glass",
+		"patience_s": 6.0,
+		"_patience_s": "seconds at a sealed door before it opens itself (a museum is not a locked room). 20 made Palle serve a third of his felt load time at the door; 6 is a beat of ritual.",
+		"open_seconds": 1.6,
+		"click_reach_m": 3.2,
+		"click_cone_rad": 0.55
+	},
+	"caption": {
+		"height_m": 0.78,
+		"tilt_deg": -16.0,
+		"stand_off_m": 0.8,
+		"plaque_w_m": 0.46,
+		"plaque_h_m": 0.17,
+		"font_px": 44,
+		"pixel_size": 0.001
+	},
+	"hall": {
+		"depth_m": 4.5,
+		"ramp_len_m": 14,
+		"gallery_w_m": 4,
+		"max_body_m": 90.0,
+		"doll_cut_m": 2.4,
+		"_doll_cut_m": "the doll house's wall cut height. 2.4 keeps the hanging line (1.55) and its showings on visible wall; 1.15 was knee walls that took the pictures with them."
+	},
+	"side_room": {
+		"width_cells": 5,
+		"depth_cells": 7,
+		"gap_cells": 2,
+		"first_row": 4
+	},
+	"editor": {
+		"autosave_seconds": 0.6,
+		"snap_m": 0.2
+	},
+	"lobby": {
+		"enabled": true,
+		"_readme": "the FIRST vestibule, dressed as the museum's lobby (Palle, 2026-08-18): no wall works; a large window in the back wall looking backward at Folding Past; a frame counter on the wall; a fire extinguisher; a wooden pallet (pyramid) in the corner blocking a lift door; and MOA on the threshold door's header. Segment-local metres: the lobby floor is x 1..16, z 1..4, the back wall at z 0..1, the entry wall at z 4..5.",
+		"window_x0": 6,
+		"window_x1": 8,
+		"window_sill_m": 0.9,
+		"window_head_m": 2.5,
+		"view_behind_m": 12.0,
+		"view_y": 1.7,
+		"view_light": 2.0,
+		"counter_x": 11.0,
+		"counter_y": 1.6,
+		"extinguisher_y": 0.85,
+		"extinguisher_z": 2.6,
+		"elevator_z": 2.2,
+		"pallet_off_m": 0.9,
+		"pallet_yaw": 20.0,
+		"door_sign": "MOA",
+		"door_sign_sub": "Museum of Algorithms",
+		"door_sign_y": 3.13,
+		"door_sign_m": 0.21,
+		"door_sign_sub_y": 2.985,
+		"door_sign_proud_m": 0.1,
+		"door_sign_sub_m": 0.075,
+		"_door_sign": "written on the wall's overpanel above the door (2.92..4.5 m), both faces; a free-standing door (gate.depth_rows > 0) carries it on its own header instead",
+		"door_header_m": 0.4,
+		"origin_well": 1,
+		"_origin_well": "the lobby's NW corner opens around the WORLD ORIGIN: a 3x3 m well a metre deep, Point Zero (origin) standing at exactly (0,0,0), a rail, a light. The foyer is the first map in the chain (Palle, 2026-08-19).",
+		"intro_text": 1,
+		"intro_x": 3.6,
+		"intro_y": 1.75,
+		"_intro_text": "the first pearl's paragraph as wall text on the back wall, left of the window — the museum's first sentence ('you arrive late…')"
+	},
+	"speak": {
+		"caps": 0,
+		"_caps": "textD on the wall works: 1 = the sentences in CAPS, 0 = as dictated (Roboto, light on the field)",
+		"show_drafts": 1,
+		"_show_drafts": "1 = the corpus's draft lines (truths, blurbs, descriptions; em_speak.py --draft) hang beside the hand's; 0 = only lines Palle spoke — the other paintings stay black"
+	},
+	"rig": {
+		"plain_hands": true,
+		"_plain_hands": "in VR the hand is a visitor's hand: collision hand + pickup + pointer + mesh. On, the wrist tools below come off every rig in the tree, an activated catalyst bracelet is ended, and every token in no_pickup is shown but cannot be grabbed (grabbing one would put the bracelet on the hand). Palle, 2026-08-18: 'No bracelet, no editing tool, just the VR hands.'",
+		"wrist_tools": [
+			"HandWorkstationVR",
+			"messageconsole",
+			"WristStatsDisplay",
+			"GravityGun"
+		],
+		"no_pickup": [
+			"catalyst_pedestal",
+			"catalyst_pickup",
+			"becoming_catalyst",
+			"catalyst_prompter_box",
+			"catalyst_vent",
+			"catalyst_target",
+			"wedge_skill_pickup",
+			"catalyst_sustain_demo"
+		]
+	},
+	"stream": {
+		"build_ahead_m": 6.0,
+		"_build_ahead_m": "open the next segment when the eye is this close to the built edge. 6 = the build happens in the EXIT PASSAGE - the passages must turn a corner, or the doorway shows the unbuilt beyond (the one-hall contract, 2026-08-24)",
+		"keep_behind_m": 6.0,
+		"_keep_behind_m": "free a segment once its far end is this far behind the eye. 6 = the hall behind dies when you are through the starting passage; it REBUILDS if you walk back (rebuild_margin_m)",
+		"min_segments": 1,
+		"_min_segments": "never free below this many. 1 = the one-hall museum: current hall only, plus the next during a passage crossing",
+		"cull_near_m": 32.0,
+		"_cull_near_m": "artifacts closer than this render (the museum's near-artifact cull; shows are budgeted 8 per tick, nearest first)",
+		"cull_far_m": 38.0,
+		"_cull_far_m": "artifacts further than this hide AND suspend (no process, no physics, no audio); the gap is hysteresis",
+		"instantiate_ahead_m": 50.0,
+		"_instantiate_ahead_m": "the patient stamp: a queued body further than this from the eye stays a plan row on paper — not built, not resident",
+		"stamp_budget_ms": 6.0,
+		"_stamp_budget_ms": "ms per frame the patient stamp may spend building queued bodies",
+		"bodies": 1,
+		"_bodies": "1 = the museum as authored. 0 = THE EMPTY-MUSEUM EXPERIMENT: architecture only — no interior bodies, showings, props or DNA runs — so the boot clock can say which seconds the artifacts own. A diagnostic, never a mode.",
+		"keep_ahead_m": 30.0,
+		"_keep_ahead_m": "a segment this far AHEAD frees too - the walker turned around; it rebuilds on approach like everything else",
+		"rebuild_margin_m": 2.0,
+		"_rebuild_margin_m": "rebuild a freed neighbour when the eye is this close to the alive window's edge. MUST stay under keep_behind_m - the gap is the hysteresis that stops free/rebuild thrash",
+		"vr_one_hall": 1,
+		"_vr_one_hall": "1 = in VR only the hall the eye stands in is DRAWN; the build window stays at two so a crossing costs no hitch. 0 = draw whatever is built (the desktop behaviour).",
+		"vr_render_window_m": 4.0,
+		"_vr_render_window_m": "metres either side of a segment that keep it drawn. Hiding a hall hides its meshes and NOT its colliders, so a walker at the threshold of an invisible hall walks on a floor that renders as nothing - this margin is what stops that. Under ~3 the threshold pops."
+	},
+	"env": {
+		"vr_high": 0,
+		"_vr_high": "1 = the headset installs the HIGH tier instead of its default perf. On Quest's Mobile renderer SSIL/SSR/SDFGI/volumetric fog do not exist; the A/B shows what the device supports (glow, fog model, ambient, sky, grade).",
+		"ab_seconds": 0,
+		"_ab_seconds": "0 = off. N = alternate high/perf every N seconds, LIVE, in both modes — the in-headset A/B. Watch the log for [em-env] A/B -> tier. F7 swaps by hand on desktop."
+	},
+	"audio": {
+		"step_db": -17.0,
+		"_step_db": "the FOOTFALL's base level in dB (2026-08-24, Palle: \"can we lower the sound of the shoes\"). Was -8, which reads as boots in a stone hall. The per-space step_db trim and the 4 dB random window ride on top of this. Raise toward -8 for a heavier walker, drop to -30 to nearly mute the shoes."
+	}
 }

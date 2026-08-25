@@ -202,6 +202,20 @@ var KEEP_AHEAD_M := 50.0
 ## hall from rebuilding the same frame it was freed).
 var REBUILD_MARGIN_M := 6.0
 var MIN_SEGMENTS := 2
+## ONE HALL ON SCREEN (2026-08-24, Palle: "only one hall should render at the
+## time in VR"). The BUILD window stays at two — the next hall must exist
+## before the walker crosses into it or the crossing costs a hitch, which in
+## a headset is worse than a draw call. What changes is what is DRAWN: every
+## segment but the one the eye stands in is hidden. Hidden, not freed, so the
+## flip is free and walking back shows the hall again instantly.
+## The margin is why it is not a hard cut: hiding a segment hides its meshes
+## and NOT its colliders, so a walker at the threshold of an invisible hall
+## would step onto a floor that renders as nothing. Anything within this many
+## metres of the eye stays drawn. The passages turn a corner, so the second
+## hall inside the margin is behind a wall anyway.
+var VR_RENDER_WINDOW_M := 4.0
+var VR_ONE_HALL := true
+var _render_hidden: int = -1
 ## Freed segments' records — z-range + the cursor snapshot that rebuilds them.
 var _freed: Array = []
 # THE V1 CONSTANT, now only a FALLBACK. Eight objects for twenty-six buildings
@@ -1147,6 +1161,8 @@ func _load_modules() -> void:
 	KEEP_AHEAD_M = _L("stream", "keep_ahead_m", KEEP_AHEAD_M)
 	REBUILD_MARGIN_M = _L("stream", "rebuild_margin_m", REBUILD_MARGIN_M)
 	MIN_SEGMENTS = int(_L("stream", "min_segments", float(MIN_SEGMENTS)))
+	VR_RENDER_WINDOW_M = _L("stream", "vr_render_window_m", VR_RENDER_WINDOW_M)
+	VR_ONE_HALL = _L("stream", "vr_one_hall", 1.0 if VR_ONE_HALL else 0.0) > 0.5
 	ART_SHOW_M = _L("stream", "cull_near_m", ART_SHOW_M)
 	ART_HIDE_M = _L("stream", "cull_far_m", ART_HIDE_M)
 	INSTANTIATE_AHEAD_M = _L("stream", "instantiate_ahead_m", INSTANTIATE_AHEAD_M)
@@ -8750,6 +8766,8 @@ func _process(_delta: float) -> void:
 	# nears the alive window's edge from either side. The margins are the
 	# hysteresis — REBUILD_MARGIN_M < KEEP_BEHIND_M, so nothing thrashes.
 	var ez: float = _eye_pos().z
+	if _vr and VR_ONE_HALL:
+		_render_window(ez, VR_RENDER_WINDOW_M)
 	while _segments.size() > MIN_SEGMENTS and float(_segments[0]["z1"]) < ez - KEEP_BEHIND_M:
 		_stream_free(0, "behind")
 	if _shot_path == "":   # a proof shot preloads segments the eye never nears
@@ -8800,6 +8818,35 @@ func _process(_delta: float) -> void:
 
 ## Free one alive segment into a _freed record (its z-range + the cursor
 ## snapshot taken before its build). The record is what walks it back in.
+## Draw the hall the eye is in, and nothing else. Returns how many segments
+## are visible — a number a probe can be wrong about, which is why this takes
+## the eye as an argument instead of reading it: the VR path cannot be walked
+## headless, but this can.
+func _render_window(ez: float, radius: float) -> int:
+	var shown := 0
+	var hidden := 0
+	for s_v in _segments:
+		var sd: Dictionary = s_v
+		var n: Node3D = sd.get("node")
+		if n == null or not is_instance_valid(n):
+			continue
+		var z0: float = float(sd.get("z0", 0.0))
+		var z1: float = float(sd.get("z1", 0.0))
+		# inside, or close enough that its floor is under the next few steps
+		var draw_it: bool = ez >= z0 - radius and ez <= z1 + radius
+		if n.visible != draw_it:
+			n.visible = draw_it
+		if draw_it:
+			shown += 1
+		else:
+			hidden += 1
+	if hidden != _render_hidden:
+		_render_hidden = hidden
+		print("[em-render] %d hall(s) drawn, %d hidden (the one-hall window, %.0f m)" % [
+			shown, hidden, radius])
+	return shown
+
+
 func _stream_free(i: int, side: String) -> void:
 	var old: Dictionary = _segments[i]
 	_segments.remove_at(i)
@@ -8829,6 +8876,9 @@ func _stream_free(i: int, side: String) -> void:
 ## Rebuild a freed hall from its record: restore the cursors its build
 ## consumed, build, restore the frontier's cursors, and re-order the window.
 ## Same pearl, same z, same walls — the bake replay makes it cheap.
+## A hall built or rebuilt while the window was closed enters visible; the
+## next tick hides it again if it should be. Never leave a hall dark because
+## a flip happened before it existed.
 func _stream_rebuild(rec: Dictionary) -> void:
 	var snap: Dictionary = rec.get("snap", {})
 	if snap.is_empty():
