@@ -1,0 +1,17 @@
+{
+ "_readme": "FIVE MISFILED TOKENS IN FORCES (2026-08-25). Named in forces.json taxonomy._known_weak and fixed here. These are MOVES, not mirrors: the whole point is that a rung stops holding another rung's material, and a second placement would not fix that. Each destination is chosen from what the room already holds, not from the token's name.",
+ "keep": [],
+ "verdicts": {
+  "newtons_laws": "move VFM_01_Foundations VFM_08_Arena",
+  "example_2_1_forces_vr": "move VFM_01_Foundations VFM_08_Arena",
+  "work_energy_demo": "move VFM_02_Operations VFM_06_Springs",
+  "normal_force_demo": "move VFM_02_Operations VFM_03_Motion",
+  "flocking_controls": "move VFM_03_Motion SwarmIntelligence_Boids_Algorithm"
+ },
+ "_why": {
+  "newtons_laws + example_2_1_forces_vr": "were in the QUANTITY room, rung 1, which is about what a single arrow carries. Both are the statement that force changes motion. VFM_08_Arena holds collision_carts, momentum_collision and momentum_cradle — the third law made playable — so the laws land in the room where you MEET them rather than in the front door where you read them.",
+  "work_energy_demo": "was in the OPERATIONS room, rung 2, which is about what two arrows do to each other. Work is force times distance. VFM_06_Springs is titled 'force as a conversation over time' and is full of energy stored and returned, which is what the work-energy theorem is about.",
+  "normal_force_demo": "was in OPERATIONS too. It goes to VFM_03_Motion because friction_ramp is already there and friction is proportional to the normal force. This puts a contact force in the motion rung on purpose: the pairing is worth more than the rung boundary, and rung 3 is declared as motion AND the contact forces that shape it.",
+  "flocking_controls": "was never a forces artifact. SwarmIntelligence_Boids_Algorithm holds boid_flocking, boid_manager, boids_2d_in_3d and boids_aquarium; a controls panel belongs with the thing it controls."
+ }
+}

@@ -73,6 +73,7 @@ def main():
         plan = json.load(fh)
 
     by_map = {}
+    moves = []
     for tok, spec in plan.get("verdicts", {}).items():
         parts = str(spec).split()
         if parts and parts[0] == "rescue" and len(parts) > 1:
@@ -80,8 +81,31 @@ def main():
         elif parts and parts[0] == "rehome" and len(parts) > 2:
             # "rehome <sequence> <map>" — the room is named, so place it there
             by_map.setdefault(parts[2], []).append(tok)
+        elif parts and parts[0] == "move" and len(parts) > 2:
+            # "move <from> <to>" — a MISFILING, not a rescue: the token leaves
+            # its old room. Mirroring would not fix a rung whose problem is
+            # that it holds material belonging to another rung.
+            moves.append((tok, parts[1], parts[2]))
+            by_map.setdefault(parts[2], []).append(tok)
 
     touched = []
+    # the removals first, so a token moving between two rooms is never in both
+    for tok, src, _dst in moves:
+        path, doc = load(src)
+        inter = doc["layers"]["interactables"]
+        gone = 0
+        for z, row in enumerate(inter):
+            for x, cell in enumerate(row):
+                if str(cell).strip().split("#")[0].split(":")[0] == tok:
+                    row[x] = ""
+                    gone += 1
+        print("  %-46s removed from %-24s (%d cell%s)" % (tok, src, gone, "" if gone == 1 else "s"))
+        if args.apply and gone:
+            with open(path, "w", encoding="utf-8") as fh:
+                json.dump(doc, fh)
+            if path not in touched:
+                touched.append(path)
+
     for name in sorted(by_map):
         path, doc = load(name)
         inter = doc["layers"]["interactables"]
