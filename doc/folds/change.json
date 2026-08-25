@@ -1,0 +1,10 @@
+{
+ "_readme": "THE CHANGE FOLD (2026-08-25). The opposite problem to forces: not too many artifacts in too many rooms, but too few — eight rooms, seven of them 10x11, holding 27 placements between them (2 to 5 each). The ladder was already written in the map names; this fold just stops pretending each rung needs three rooms. rate / accumulation / flow / reconciliation, and the last one closes the loop by showing the first two were the same operation read in opposite directions.",
+ "keep": ["Change_Intro", "Accumulation_Riemann", "Flow_Field", "Change_Reconciliation"],
+ "verdicts": {
+  "partial_derivative_terrain": "rescue Change_Intro",
+  "velocity_arrow": "rescue Change_Intro",
+  "particle_flow_swarm": "rescue Flow_Field",
+  "player_trace": "retire furniture, 21 other maps"
+ }
+}

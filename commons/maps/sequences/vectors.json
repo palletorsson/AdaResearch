@@ -1,18 +1,23 @@
 {
-	"_meta": {
-		"merged_into": "forces",
-		"merged_date": "2026-02-20",
-		"note": "Vector maps have been merged into forces.json as the combined 'Vectors & Forces: From Direction to Dynamics' sequence. All Vector* maps are now part of the forces sequence. This file is kept for reference."
-	},
-	"sequences": {
-		"vectors": {
-			"name": "Vectors: Direction + Magnitude = Everything (MERGED INTO FORCES)",
-			"description": "This sequence has been merged into forces.json. All vector maps now form Acts 1-2 of the combined 'Vectors & Forces' sequence, which progresses from pure vector math through to physical forces. See forces.json for the complete map list.",
-			"merged_into": "forces",
-			"maps": ["Vectors_Intro"],
-			"artifact_groups": []
-		}
-	},
-	"world_phase": "grid",
-	"artifact_groups": []
+ "_meta": {
+  "merged_into": "forces",
+  "merged_date": "2026-02-20",
+  "note": "Vector maps have been merged into forces.json as the combined 'Vectors & Forces: From Direction to Dynamics' sequence. All Vector* maps are now part of the forces sequence. This file is kept for reference."
+ },
+ "sequences": {
+  "vectors": {
+   "name": "Vectors: Direction + Magnitude = Everything (MERGED INTO FORCES)",
+   "description": "This sequence has been merged into forces.json. All vector maps now form Acts 1-2 of the combined 'Vectors & Forces' sequence, which progresses from pure vector math through to physical forces. See forces.json for the complete map list.",
+   "merged_into": "forces",
+   "maps": [
+    "Vectors_Intro"
+   ],
+   "artifact_groups": [],
+   "retired": "2026-08-25",
+   "retired_into": "forces",
+   "retired_reason": "Retired 2026-08-25. Its own truth line already said 'merged into forces.json' — the Acts have been listed under forces for months. Its last unlisted room, Vectors_Intro (5x5, five artifacts), folded in: vector_addition_demo went to VFM_01_Foundations beside vector_subtraction_demo, and its other four tokens already stood in kept rooms."
+  }
+ },
+ "world_phase": "grid",
+ "artifact_groups": []
 }
