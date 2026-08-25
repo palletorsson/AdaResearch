@@ -138,6 +138,7 @@ const CROWNS := "res://commons/data/museum_crowns.json"
 # one axis value. This is what turns one-artifact-per-slot into a SET.
 const RELATIONS := "res://commons/data/artifact_relations.json"
 const TextScreenRes = preload("res://commons/ui/text_screen.gd")
+const _TransformGizmo := preload("res://commons/scenes/em/em_transform_gizmo.gd")
 const EYE := 1.65
 # wall height, read from its ONE owner (em_detail.gd) so the stamped walls,
 # the cornice, the ceiling and the lighting rig can never disagree again.
@@ -174,6 +175,12 @@ var _jumps_left: int = 2       # 2 on the deck, 1 after the first, 0 after the s
 ## turbine hall stands at -4.5 and the balcony's catch slab at -4.1.
 const CATCH_Y := -6.0
 var _last_ground: Vector3 = Vector3(7.5, 0.0, 1.5)
+## SAVE POINTS (2026-08-24, Palle: "create save points after each map" /
+## "if the player falls reset to save point"). One per hall, recorded at its
+## threshold as the hall is built: {z, pos}. A fall into a basin or a touch
+## on fire returns the walker to the last threshold they crossed — never to
+## the start of the walk, and never through a scene reload.
+var _save_points: Array = []
 var _catches: int = 0
 # STREAMING (em_layout.json `stream`): how far ahead a segment opens, how far
 # behind one is freed, and the floor under that. Palle: "when we walk can we
@@ -698,6 +705,13 @@ var _doll_drag: bool = false
 var _doll_drag_start: Vector2i = Vector2i.ZERO   # floor cell where the grab began
 var _doll_node_start: Vector3 = Vector3.ZERO     # the node's position at grab
 var _doll_plinth_start: Vector3 = Vector3.ZERO   # its plinth's position at grab (the bundle)
+var _edit_gizmo: Node3D = null                   # shared 3D / iso world-axis hand
+var _gizmo_drag_axis: String = ""
+var _gizmo_mouse_start: Vector2 = Vector2.ZERO
+var _gizmo_node_start: Vector3 = Vector3.ZERO
+var _gizmo_plinth_start: Vector3 = Vector3.ZERO
+var _gizmo_preview_delta: float = 0.0
+var _gizmo_fine: bool = false
 var _m_corner: Material = null                   # the corner sides' flat off-white (one instance)
 var _doll_ring: MeshInstance3D = null
 var _doll_pan: bool = false        # MMB held — the hand drags the ground itself
@@ -2898,13 +2912,79 @@ func _stamp_hazard(seg: Node3D, cell: Vector2i, zbase: int, entrance: Vector3) -
 		_walk_erased[gc] = "hazard"
 
 
-func _hazard_touched(body: Node3D, entrance: Vector3) -> void:
+## The last threshold the walker crossed — the save point a fall returns to.
+func _save_point_now() -> Vector3:
+	if _player == null:
+		return _last_ground
+	var pz: float = _player.position.z
+	var best: Vector3 = _last_ground
+	var best_z: float = -1.0e9
+	for sp_v in _save_points:
+		var sp: Dictionary = sp_v
+		var z: float = float(sp.get("z", 0.0))
+		if z <= pz + 1.0 and z > best_z:
+			best_z = z
+			best = sp.get("pos", _last_ground)
+	return best
+
+
+func _hazard_touched(body: Node3D, _entrance: Vector3) -> void:
 	if _player == null or body != _player:
 		return
-	_player.position = entrance
+	# the SAVE POINT, not the hall entrance: a hall you entered from the far
+	# end would otherwise throw you backwards past the room you were in
+	_player.position = _save_point_now()
 	_player.velocity = Vector3.ZERO
 	_hazard_flash()
-	print("[em-hazard] burned — set down at the hall's entrance")
+	print("[em-hazard] burned — set down at the last save point %s" % str(_player.position))
+
+
+## FIRE AT THE BOTTOM OF EVERY OPEN POOL (2026-08-24, Palle: "at every basin
+## pool place deadly fire to the bottom, if the player falls reset to save
+## point"). One Area3D per hall with a shape per pool cell, at the pool
+## floor: the museum's own death, which flashes and returns the walker to the
+## last threshold instead of reloading the scene the way the grid's h: does.
+func _basin_fire(seg: Node3D, cells: Array, depth: float) -> void:
+	if cells.is_empty() or depth <= 0.0:
+		return
+	var m_fire := StandardMaterial3D.new()
+	m_fire.albedo_color = Color(0.85, 0.22, 0.05)
+	m_fire.emission_enabled = true
+	m_fire.emission = Color(1.0, 0.42, 0.08)
+	m_fire.emission_energy_multiplier = 2.4
+	var area := Area3D.new()
+	area.name = "BasinFire"
+	area.monitoring = true
+	for c_v in cells:
+		var c: Vector2i = c_v
+		# the look: a glowing bed on the pool floor, seen from the rim
+		_box(seg, Vector3(c.x + 0.5, -depth + 0.06, c.y + 0.5), Vector3(0.98, 0.12, 0.98),
+			Color(0.85, 0.22, 0.05), m_fire)
+		var cs := CollisionShape3D.new()
+		var bs := BoxShape3D.new()
+		bs.size = Vector3(0.96, 1.2, 0.96)
+		cs.shape = bs
+		cs.position = Vector3(c.x + 0.5, -depth + 0.6, c.y + 0.5)
+		area.add_child(cs)
+	seg.add_child(area)
+	area.body_entered.connect(_basin_burned)
+	# a slow breath so it reads as fire and not as paint. The tween hangs off
+	# the AREA, so it dies when the hall is streamed out — one made on the
+	# museum itself would outlive every hall it lit.
+	var tw := area.create_tween().set_loops()
+	tw.tween_property(m_fire, "emission_energy_multiplier", 3.4, 1.1)
+	tw.tween_property(m_fire, "emission_energy_multiplier", 1.6, 0.9)
+	print("[em-basin] fire on %d pool cell(s), %.1f m down" % [cells.size(), depth])
+
+
+func _basin_burned(body: Node3D) -> void:
+	if _player == null or body != _player:
+		return
+	_player.position = _save_point_now()
+	_player.velocity = Vector3.ZERO
+	_vy = 0.0
+	_hazard_flash()
+	print("[em-basin] the pool burned — back to the save point")
 
 
 var _hazard_overlay: CanvasLayer = null
@@ -2963,6 +3043,9 @@ func _stamp_utility(spec: String, cell: Vector2i, seg: Node3D, zbase: int) -> No
 	node.position = Vector3(cell.x + 0.5, 0.0, cell.y + 0.5)
 	_utility_apply_params(node, code, params)
 	seg.add_child(node)
+	# the crossing's top belongs on the deck — measured after the settle
+	if is_inside_tree():
+		get_tree().create_timer(0.45).timeout.connect(_utility_seat.bind(node, 0.0))
 	# a moving surface is a RIDE, never promised floor; a bridge is floor
 	var gc := Vector2i(cell.x, zbase + cell.y)
 	if code == "br":
@@ -3021,17 +3104,57 @@ func _utility_apply_params(node: Node3D, code: String, params: Array) -> void:
 				node.set("y_offset", _museum_y_offset(float(params[3])))
 
 
-## A GRID Y-OFFSET IS NOT A MUSEUM Y-OFFSET (2026-08-24, Palle: "I do not see
-## the scale rotate and transport cube"). They were standing, all six of them,
-## and BURIED: the probe found rc at y -0.6 and sc at y -1.0 while tc sat at
-## 0. The maps carry rc:45:y:4:-0.6 and sc:3:-0.5:1:-1, offsets authored
-## against the GRID's floor — where a cube is centre-origin and its surface
-## sits half a metre above the cell's origin, so a small negative number
-## settles the body onto the floor. The museum's deck top IS 0, so the same
-## number sinks the body through it. Negative offsets are clamped here: a
-## body the hand placed on the floor stands ON the museum's floor.
+## THE CROSSING IS A FLOOR, NOT AN ORNAMENT (2026-08-24, Palle: "all cube has
+## to be level with the ground, scale when it is at is max"). A pool is a GAP
+## in the walk; the cube fills it, and you step across its TOP. So the seat
+## rule is not "stand on the deck" (my first fix, which floated every crossing
+## a metre proud of the floor and half-buried the walker's route) but "top
+## flush with the deck at FULL size". scale_cube's own export says it:
+## `max_scale = 3.0  # Maximum size (fills 3m gap)`, so the height to seat by
+## is the height at max, not the height at the moment we happen to measure.
+## Offsets pass through unchanged now; the seat below does the work.
 func _museum_y_offset(v: float) -> float:
-	return maxf(0.0, v)
+	return v
+
+
+## Seat one utility body so the top of its FULL extent lies on the cell's
+## deck. Deferred: these scenes build in _ready and a few animate, so an
+## immediate measure photographs a half-grown cube.
+func _utility_seat(node: Node3D, deck_y: float) -> void:
+	if node == null or not is_instance_valid(node):
+		return
+	var box := AABB()
+	var first := true
+	for vi_v in node.find_children("*", "VisualInstance3D", true, false):
+		var vi := vi_v as VisualInstance3D
+		var ab: AABB = vi.global_transform * vi.get_aabb()
+		box = ab if first else box.merge(ab)
+		first = false
+	if first:
+		return
+	var top: float = box.position.y + box.size.y
+	# a scale cube measured mid-breath is not at its full size: extrapolate
+	# from the scale it is at to the scale it will reach
+	var cur: Variant = node.get("current_scale")
+	var mx: Variant = node.get("max_scale")
+	if cur is float and mx is float and float(cur) > 0.01 and float(mx) > float(cur):
+		var grow: float = float(mx) / float(cur)
+		top = node.global_position.y + (top - node.global_position.y) * grow
+	var drop: float = top - deck_y
+	if absf(drop) < 0.001:
+		return
+	node.position.y -= drop
+	# A MOVING BODY CACHES ITS ORIGIN. transport_cube stores initial_position
+	# and target_position in _ready and drives global_position between them
+	# every frame (transport_cube.gd:46-51), so a seat applied afterwards is
+	# undone on the next tick — the cube measured y 0.0 again while the rotate
+	# and scale cubes stayed where they were put. Move the memory with the body.
+	for key in ["initial_position", "target_position", "original_y"]:
+		var v: Variant = node.get(key)
+		if v is Vector3:
+			node.set(key, (v as Vector3) - Vector3(0.0, drop, 0.0))
+		elif v is float:
+			node.set(key, float(v) - drop)
 
 
 func _axis_of(a: String) -> Vector3:
@@ -3322,6 +3445,8 @@ func _build_segment() -> void:
 			elif peek.has("sim_margin"):
 				peek.erase("sim_margin")
 				peek.erase("sim_grid")
+	var passage_start: int = -1
+	var passage_decl: Dictionary = {}
 	if peek.get("tile") is Array and (peek["tile"] as Array).size() >= 4:
 		var trows: Array = []
 		for r_v in (peek["tile"] as Array):
@@ -3339,7 +3464,9 @@ func _build_segment() -> void:
 		# the starting passage; the chicane's offset is the corner the
 		# one-hall stream hides its swap behind.
 		if String(peek.get("authored", "")) == "map":
-			tile = _authored_passages(tile, peek.get("passage", {}) if peek.get("passage") is Dictionary else {})
+			passage_start = tile.size()
+			passage_decl = peek.get("passage", {}) if peek.get("passage") is Dictionary else {}
+			tile = _authored_passages(tile, passage_decl)
 		h = tile.size()
 		# the WIDTH follows the tile too: rooms-per-pearl crops only rows (no
 		# change), but a map-authored tile can be wider than the template —
@@ -3430,6 +3557,8 @@ func _build_segment() -> void:
 	seg.set_meta("em_pearl", cur_pearl)
 	seg.set_meta("em_chapter", next_seq)
 	seg.set_meta("em_map", String(peek.get("map", "")) if String(peek.get("authored", "")) == "map" else "")
+	seg.set_meta("em_passage_start", passage_start)
+	seg.set_meta("em_passage_decl", passage_decl)
 	# one static body per segment carries every collision box — walls, podiums,
 	# hero plinths — so the whole museum frees with its segment node
 	var solid := StaticBody3D.new()
@@ -3566,6 +3695,8 @@ func _build_segment() -> void:
 	var basin_cells: Dictionary = {}
 	var basin_depth: float = 0.0
 	var m_basin_glass: StandardMaterial3D = null
+	# every cell of open water gets FIRE at the bottom (2026-08-24, Palle)
+	var basin_fire: Array = []
 	if peek.get("basin") is Dictionary:
 		var basin_decl: Dictionary = peek["basin"]
 		basin_depth = clampf(float(basin_decl.get("depth", 1.0)), 0.3, 8.0)
@@ -3624,6 +3755,7 @@ func _build_segment() -> void:
 					var sxm: int = sxm_v
 					_box(seg, Vector3(sxm + 0.5, -basin_depth - 0.1, z2 + 0.5), Vector3(1, 0.2, 1), Color(0.10, 0.10, 0.13), m_floor)
 					_add_col(solid, Vector3(sxm + 0.5, -basin_depth - 0.1, z2 + 0.5), Vector3(1, 0.2, 1))
+					basin_fire.append(Vector2i(sxm, z2))
 					_walk_cells[Vector2i(sxm, zbase + z2)] = true
 					# the OUTER rim: the pool's own wall against the courtyard
 					if mxo == sim_margin:
@@ -3689,6 +3821,9 @@ func _build_segment() -> void:
 					_box(seg, Vector3(x + 0.5, -0.03, z + 0.5), Vector3(1, 0.06, 1), Color(0.72, 0.84, 0.87, 0.14), m_basin_glass)
 					_add_col(solid, Vector3(x + 0.5, -0.03, z + 0.5), Vector3(1, 0.06, 1))
 					_walk_cells[Vector2i(x, zbase + z)] = true
+				elif pier_top <= 0.0:
+					# open water: nothing between the deck and the bottom
+					basin_fire.append(Vector2i(x, z))
 				# an OPEN pool (glass:false) is stepped into by wedge: no walk
 				# cell, no deck floor, no slots — the pool is the whole cell
 				continue
@@ -3862,6 +3997,7 @@ func _build_segment() -> void:
 	# sunken hall hung at deck height over open pool. The dress sees a MASKED
 	# tile where the pool is hollow ("0"); the built hall keeps its own.
 	var dress_tile: Array = tile
+	_basin_fire(seg, basin_fire, basin_depth)
 	if not basin_cells.is_empty():
 		dress_tile = []
 		for dz in range(tile.size()):
@@ -4019,6 +4155,17 @@ func _build_segment() -> void:
 			joint, wall_col, m_wall)
 	_flush_boxes(seg)
 	_batch_open = false
+	# one per threshold, and only one: streaming rebuilds the same hall again
+	# and again, and a list with six copies of one door is a list that lies
+	var sp_z: float = float(zbase + VESTIBULE_H)
+	var sp_seen := false
+	for sp_v in _save_points:
+		if absf(float((sp_v as Dictionary).get("z", -999.0)) - sp_z) < 0.5:
+			sp_seen = true
+			break
+	if not sp_seen:
+		_save_points.append({"z": sp_z,
+			"pos": Vector3(float(w) / 2.0 + 0.5, 0.25, float(zbase) + float(VESTIBULE_H) - 1.5)})
 	_segments.append({"node": seg, "z0": _next_z, "z1": _next_z + float(h) + float(VESTIBULE_H) + float(porch_depth) + float(court_depth), "index": _seg_index, "w": w,
 		"snap": stream_snap, "pearl": String(deal.get("pearl", "")) if deal is Dictionary else ""})
 	_next_z += float(h) + float(VESTIBULE_H) + float(porch_depth) + float(court_depth)
@@ -8288,6 +8435,7 @@ func _process(_delta: float) -> void:
 		return
 	if _doll_top and _paint2d_canvas != null and is_instance_valid(_paint2d_canvas):
 		_paint2d_canvas.queue_redraw()   # the overlay tracks the camera
+	_edit_gizmo_frame()
 	if not _boot_first_frame:
 		_boot_first_frame = true
 		_wake_until_ms = Time.get_ticks_msec() + int(WAKE_S * 1000.0)
@@ -9186,6 +9334,194 @@ func _doll_pick(pt: Vector3) -> int:
 	return best
 
 
+## The same selection test serves perspective and isometric editing. It uses
+## the projected LIVE extent rather than physics, so shader diagrams and other
+## artifacts without colliders can still be clicked anywhere on their body.
+func _edit_pick_screen(mouse: Vector2) -> int:
+	if _cam == null:
+		return -1
+	var best := -1
+	var best_score := INF
+	for i in range(_edit_records.size()):
+		var r: Dictionary = _edit_records[i]
+		if String(r.get("kind", "")) in ["variant", "plinth"]:
+			continue
+		var node: Node3D = _node_or_null(r.get("node"))
+		if node == null or node.has_meta("em_hand_removed") or not node.visible:
+			continue
+		var center := node.global_position
+		if _cam.is_position_behind(center):
+			continue
+		var min_screen := Vector2(INF, INF)
+		var max_screen := Vector2(-INF, -INF)
+		var projected := false
+		var box := _extent_of(node)
+		if box.size.length_squared() > 0.0001:
+			for corner in [
+				box.position,
+				box.position + Vector3(box.size.x, 0.0, 0.0),
+				box.position + Vector3(0.0, box.size.y, 0.0),
+				box.position + Vector3(0.0, 0.0, box.size.z),
+				box.position + Vector3(box.size.x, box.size.y, 0.0),
+				box.position + Vector3(box.size.x, 0.0, box.size.z),
+				box.position + Vector3(0.0, box.size.y, box.size.z),
+				box.end,
+			]:
+				if _cam.is_position_behind(corner):
+					continue
+				var screen := _cam.unproject_position(corner)
+				min_screen = min_screen.min(screen)
+				max_screen = max_screen.max(screen)
+				projected = true
+		var hit := false
+		var screen_center := _cam.unproject_position(center)
+		if projected:
+			hit = Rect2(min_screen, max_screen - min_screen).grow(7.0).has_point(mouse)
+		else:
+			hit = screen_center.distance_to(mouse) <= 18.0
+		if not hit:
+			continue
+		# Foreground wins where projected silhouettes overlap; closeness to the
+		# body's centre breaks ties between pieces at almost the same depth.
+		var score := _cam.global_position.distance_to(center) + screen_center.distance_to(mouse) * 0.002
+		if score < best_score:
+			best_score = score
+			best = i
+	return best
+
+
+func _edit_mouse_over_ui() -> bool:
+	var hovered := get_viewport().gui_get_hovered_control()
+	if hovered == null:
+		return false
+	for owner_v in [_plan_toolbar, _plan_config_panel, _doll_menu, _doll_insp,
+			_doll_palette, _edit_hud]:
+		if owner_v == null or not is_instance_valid(owner_v):
+			continue
+		var owner := owner_v as Node
+		if hovered == owner or owner.is_ancestor_of(hovered):
+			return true
+	return false
+
+
+func _edit_gizmo_frame() -> void:
+	var should_show := (_edit_mode or _dollhouse) and not _doll_top \
+		and _edit_sel >= 0 and _edit_sel < _edit_records.size() and _cam != null
+	if not should_show:
+		if _edit_gizmo != null and is_instance_valid(_edit_gizmo):
+			_edit_gizmo.visible = false
+		return
+	var node: Node3D = _node_or_null((_edit_records[_edit_sel] as Dictionary).get("node"))
+	if node == null or node.has_meta("em_hand_removed"):
+		if _edit_gizmo != null and is_instance_valid(_edit_gizmo):
+			_edit_gizmo.visible = false
+		return
+	if _edit_gizmo == null or not is_instance_valid(_edit_gizmo):
+		_edit_gizmo = _TransformGizmo.new()
+		_edit_gizmo.name = "TransformGizmo"
+		add_child(_edit_gizmo)
+	_edit_gizmo.call("place", node.global_position, _cam, true)
+
+
+func _edit_gizmo_begin(mouse: Vector2) -> bool:
+	_edit_gizmo_frame()
+	if _edit_gizmo == null or not is_instance_valid(_edit_gizmo) or not _edit_gizmo.visible:
+		return false
+	var axis := String(_edit_gizmo.call("hit_axis", _cam, mouse))
+	if axis == "":
+		return false
+	if _edit_sel < 0 or _edit_sel >= _edit_records.size():
+		return false
+	var r: Dictionary = _edit_records[_edit_sel]
+	var node: Node3D = _node_or_null(r.get("node"))
+	if node == null:
+		return false
+	_gizmo_drag_axis = axis
+	_gizmo_mouse_start = mouse
+	_gizmo_node_start = node.global_position
+	var plinth: Node3D = _node_or_null(r.get("plinth_node"))
+	_gizmo_plinth_start = plinth.global_position if plinth != null else Vector3.ZERO
+	_gizmo_preview_delta = 0.0
+	_gizmo_fine = axis == "y"
+	_edit_gizmo.call("set_hot_axis", axis)
+	return true
+
+
+func _edit_gizmo_motion(mouse: Vector2, shift_pressed: bool) -> void:
+	if _gizmo_drag_axis == "" or _edit_sel < 0 or _edit_sel >= _edit_records.size():
+		return
+	var r: Dictionary = _edit_records[_edit_sel]
+	var node: Node3D = _node_or_null(r.get("node"))
+	if node == null:
+		_edit_gizmo_cancel()
+		return
+	var screen_axis: Vector2 = _edit_gizmo.call("screen_axis", _cam, _gizmo_drag_axis)
+	if screen_axis.length() < 1.0:
+		return
+	_gizmo_fine = shift_pressed or _gizmo_drag_axis == "y"
+	var step := 0.2 if _gizmo_fine else 1.0
+	var raw_metres := (mouse - _gizmo_mouse_start).dot(screen_axis.normalized()) / screen_axis.length()
+	_gizmo_preview_delta = snappedf(raw_metres, step)
+	var axis3 := Vector3.RIGHT if _gizmo_drag_axis == "x" else (Vector3.UP if _gizmo_drag_axis == "y" else Vector3.BACK)
+	node.global_position = _gizmo_node_start + axis3 * _gizmo_preview_delta
+	# A whole-cell ground move carries the display bundle. Fine staging and Y
+	# are dress offsets on the artifact itself, so the plinth remains planted.
+	var plinth: Node3D = _node_or_null(r.get("plinth_node"))
+	if plinth != null:
+		plinth.global_position = _gizmo_plinth_start + axis3 * _gizmo_preview_delta \
+			if not _gizmo_fine and _gizmo_drag_axis != "y" else _gizmo_plinth_start
+	_edit_gizmo.call("place", node.global_position, _cam, true)
+	_edit_gizmo.call("set_hot_axis", _gizmo_drag_axis)
+
+
+func _edit_gizmo_commit() -> void:
+	if _gizmo_drag_axis == "" or _edit_sel < 0 or _edit_sel >= _edit_records.size():
+		return
+	var axis := _gizmo_drag_axis
+	var amount := _gizmo_preview_delta
+	var fine := _gizmo_fine
+	var r: Dictionary = _edit_records[_edit_sel]
+	var node: Node3D = _node_or_null(r.get("node"))
+	if node != null:
+		node.global_position = _gizmo_node_start
+	var plinth: Node3D = _node_or_null(r.get("plinth_node"))
+	if plinth != null:
+		plinth.global_position = _gizmo_plinth_start
+	_gizmo_drag_axis = ""
+	_gizmo_preview_delta = 0.0
+	if _edit_gizmo != null and is_instance_valid(_edit_gizmo):
+		_edit_gizmo.call("set_hot_axis", "")
+	if is_zero_approx(amount):
+		_edit_gizmo_frame()
+		return
+	if not fine and axis == "x":
+		_edit_nudge(int(round(amount)), 0)
+	elif not fine and axis == "z":
+		_edit_nudge(0, int(round(amount)))
+	else:
+		_edit_fine(amount if axis == "x" else 0.0,
+			amount if axis == "y" else 0.0, amount if axis == "z" else 0.0)
+	_edit_gizmo_frame()
+
+
+func _edit_gizmo_cancel() -> void:
+	if _gizmo_drag_axis == "":
+		return
+	if _edit_sel >= 0 and _edit_sel < _edit_records.size():
+		var r: Dictionary = _edit_records[_edit_sel]
+		var node: Node3D = _node_or_null(r.get("node"))
+		if node != null:
+			node.global_position = _gizmo_node_start
+		var plinth: Node3D = _node_or_null(r.get("plinth_node"))
+		if plinth != null:
+			plinth.global_position = _gizmo_plinth_start
+	_gizmo_drag_axis = ""
+	_gizmo_preview_delta = 0.0
+	if _edit_gizmo != null and is_instance_valid(_edit_gizmo):
+		_edit_gizmo.call("set_hot_axis", "")
+	_edit_gizmo_frame()
+
+
 ## ── THE SPINE STRIP ──────────────────────────────────────────────────────
 ## (2026-08-21, Palle: "even the pearl order 1D view with editable code,
 ## critical thing and poem examples"). The museum's fourth zoom level: the
@@ -9548,7 +9884,7 @@ func _doll_insp_fill() -> void:
 		for line in ruled:
 			rows.append(line)
 	rows.append("")
-	rows.append("R turn · +/- scale · PGUP/PGDN lift · X remove")
+	rows.append("drag X/Y/Z · SHIFT 0.2 m · Q/R turn · +/- scale · X remove")
 	_doll_insp_lbl.text = "\n".join(rows)
 
 
@@ -9843,7 +10179,10 @@ func _catch_if_fallen() -> void:
 	if _player == null or _player.position.y > CATCH_Y:
 		return
 	_catches += 1
-	_player.position = _last_ground + Vector3(0.0, 0.05, 0.0)
+	# the SAVE POINT, not merely the last ground: the last threshold crossed
+	# is a place with a floor and a door, which "wherever I stood before the
+	# hole" is not (2026-08-24)
+	_player.position = _save_point_now() + Vector3(0.0, 0.05, 0.0)
 	_player.velocity = Vector3.ZERO
 	_vy = 0.0
 	_jumps_left = 2
@@ -9930,11 +10269,19 @@ func _input(event: InputEvent) -> void:
 	if _dollhouse and event is InputEventMouseButton:
 		var mbe := event as InputEventMouseButton
 		var mb := mbe.button_index
-		var gui_hover := get_viewport().gui_get_hovered_control()
-		if gui_hover != null and ((_plan_toolbar != null and is_instance_valid(_plan_toolbar) \
-				and (gui_hover == _plan_toolbar or _plan_toolbar.is_ancestor_of(gui_hover))) \
-				or (_plan_config_panel != null and is_instance_valid(_plan_config_panel) \
-				and (gui_hover == _plan_config_panel or _plan_config_panel.is_ancestor_of(gui_hover)))):
+		if _edit_mouse_over_ui():
+			return
+		# ISO's selected artifact exposes the same X/Y/Z hand as perspective.
+		# It gets first refusal over an ordinary body drag; plan view keeps its
+		# direct top-down whole-artifact gesture and therefore hides the gizmo.
+		if mb == MOUSE_BUTTON_LEFT and not _doll_top and _doll_brush == "" and _paint2d == "":
+			if mbe.pressed and _edit_gizmo_begin(mbe.position):
+				return
+			if not mbe.pressed and _gizmo_drag_axis != "":
+				_edit_gizmo_commit()
+				return
+		if mb == MOUSE_BUTTON_RIGHT and mbe.pressed and _gizmo_drag_axis != "":
+			_edit_gizmo_cancel()
 			return
 		if mbe.pressed and mb == MOUSE_BUTTON_WHEEL_UP:
 			if _doll_top:
@@ -9977,7 +10324,9 @@ func _input(event: InputEvent) -> void:
 			return
 		elif mb == MOUSE_BUTTON_LEFT and mbe.pressed and _cam != null:
 			var pt := _doll_floor_point(mbe.position)
-			var idx := _doll_pick(pt)
+			var idx := _edit_pick_screen(mbe.position) if not _doll_top else _doll_pick(pt)
+			if idx < 0:
+				idx = _doll_pick(pt)
 			if mbe.double_click and idx < 0:
 				_doll_walk_to = Vector3(1e9, 0, 0)
 				if _doll_mark != null and is_instance_valid(_doll_mark):
@@ -10083,6 +10432,10 @@ func _input(event: InputEvent) -> void:
 		elif mb == MOUSE_BUTTON_MIDDLE:
 			_doll_pan = mbe.pressed            # MMB drag carries the ground
 			return
+	if _dollhouse and event is InputEventMouseMotion and _gizmo_drag_axis != "":
+		var gmotion := event as InputEventMouseMotion
+		_edit_gizmo_motion(gmotion.position, gmotion.shift_pressed)
+		return
 	if _dollhouse and event is InputEventMouseMotion and (_doll_pan or _doll_orbit) and _player != null:
 		var mrel: Vector2 = (event as InputEventMouseMotion).relative
 		if _doll_orbit:
@@ -10166,6 +10519,9 @@ func _input(event: InputEvent) -> void:
 		_rule_hover.visible = true
 		return
 	if _dollhouse and event is InputEventMouseMotion and not _doll_drag and _cam != null:
+		if not _doll_top and _edit_gizmo != null and is_instance_valid(_edit_gizmo) and _edit_gizmo.visible:
+			_edit_gizmo.call("set_hot_axis", _edit_gizmo.call("hit_axis", _cam,
+				(event as InputEventMouseMotion).position))
 		# the faint ring: what WOULD the hand pick here?
 		var hp := _doll_floor_point((event as InputEventMouseMotion).position)
 		var hidx := _doll_pick(hp)
@@ -10216,6 +10572,9 @@ func _input(event: InputEvent) -> void:
 			return
 		if kc == KEY_N:
 			_doll_menu_toggle()
+			return
+		if kc == KEY_V:
+			_passage_open()
 			return
 		if kc == KEY_X and _edit_sel >= 0:
 			_edit_handle_key(KEY_DELETE)   # X removes the held body (Palle: "select artifact, x to remove")
@@ -10304,6 +10663,36 @@ func _input(event: InputEvent) -> void:
 		return
 	if _studio:
 		return
+	# PERSPECTIVE EDITING uses the same screen-footprint pick and the same
+	# world-axis drag as ISO. RMB temporarily borrows the mouse for camera look;
+	# releasing it gives the cursor straight back to the curator.
+	if _edit_mode and not _dollhouse:
+		if event is InputEventMouseMotion:
+			var emove := event as InputEventMouseMotion
+			if _gizmo_drag_axis != "":
+				_edit_gizmo_motion(emove.position, emove.shift_pressed)
+				return
+			if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE and _edit_gizmo != null \
+					and is_instance_valid(_edit_gizmo) and _edit_gizmo.visible:
+				_edit_gizmo.call("set_hot_axis", _edit_gizmo.call("hit_axis", _cam, emove.position))
+		if event is InputEventMouseButton:
+			var emb := event as InputEventMouseButton
+			if emb.button_index == MOUSE_BUTTON_LEFT:
+				if _edit_mouse_over_ui():
+					return
+				if emb.pressed:
+					if _edit_gizmo_begin(emb.position):
+						return
+					_doll_select(_edit_pick_screen(emb.position))
+				else:
+					_edit_gizmo_commit()
+				return
+			if emb.button_index == MOUSE_BUTTON_RIGHT:
+				if _gizmo_drag_axis != "":
+					_edit_gizmo_cancel()
+					return
+				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED if emb.pressed else Input.MOUSE_MODE_VISIBLE
+				return
 	# desktop: click the scanner to open the threshold door
 	if event is InputEventMouseButton and (event as InputEventMouseButton).pressed \
 			and (event as InputEventMouseButton).button_index == MOUSE_BUTTON_LEFT \
@@ -10329,6 +10718,9 @@ func _input(event: InputEvent) -> void:
 			_arm_editor()
 		elif _edit_hud != null:
 			(_edit_hud.get_parent() as CanvasLayer).visible = false
+			_edit_gizmo_cancel()
+			if not _dollhouse:
+				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 			print("[em-edit] editor sheathed — TAB to resume; unsaved rulings stay in memory")
 		if _doll_palette != null and is_instance_valid(_doll_palette):
 			_doll_palette.visible = _edit_mode and _dollhouse
@@ -10404,6 +10796,8 @@ func _apply_hand_adds(seg: Node3D, zbase: int, chapter: String) -> void:
 ## _stamp collects them always, so an editor armed mid-walk sees every
 ## placement built since boot, not just those after the toggle.
 func _arm_editor() -> void:
+	if not _dollhouse and not _vr:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	if _edit_hud != null and is_instance_valid(_edit_hud):
 		(_edit_hud.get_parent() as CanvasLayer).visible = true
 	elif _mod_has(_mod_editor, "hud"):
@@ -10420,7 +10814,7 @@ func _edit_handle_key(key: int) -> bool:
 		return false
 	match key:
 		KEY_E:
-			_edit_sel = _mod_editor.call("pick", _cam, _edit_records)
+			_doll_select(_mod_editor.call("pick", _cam, _edit_records))
 			if _edit_sel >= 0:
 				var r: Dictionary = _edit_records[_edit_sel]
 				# chapter resolves lazily off the segment's meta
@@ -10445,6 +10839,8 @@ func _edit_handle_key(key: int) -> bool:
 		KEY_MINUS, KEY_KP_SUBTRACT:           _edit_scale(1.0 / 1.05)
 		KEY_T:
 			_wall_toggle_under_crosshair()
+		KEY_V:
+			_passage_open()
 		KEY_DELETE:
 			if _edit_sel >= 0 and String((_edit_records[_edit_sel] as Dictionary).get("kind", "")) in ["prop", "furniture", "showing"]:
 				# a per-copy REMOVAL ruling — _dressing_removed skips this
@@ -10800,8 +11196,8 @@ func _furniture_override(r: Dictionary) -> Dictionary:
 ## The 0.2 m fine nudge. A visual offset recorded on the override as
 ## `offset` [dx, dy, dz] metres, snapped to 0.2 — applied by _stamp AFTER the
 ## cell places the body, so the seal and the walk map keep the cell. The
-## live node previews it. Props are refused here as everywhere (their
-## convention is height, ruled by UP/DOWN unshifted).
+## live node previews it. For an authored map body the same value is written
+## into its token's #offset:x,y,z dress, keeping the map as the single truth.
 func _edit_fine(dx: float, dy: float, dz: float) -> void:
 	if _edit_sel < 0 or _edit_sel >= _edit_records.size():
 		return
@@ -10818,7 +11214,30 @@ func _edit_fine(dx: float, dy: float, dz: float) -> void:
 	if not (kind in ["showing", "furniture", "plinth", "prop"]) \
 			and fin_seg != null and fin_seg.has_meta("em_map") \
 			and String(fin_seg.get_meta("em_map")) != "":
-		_doll_toast("an authored body moves by WHOLE cells (the map has no millimetres) — plain arrows move it")
+		var map_name := String(fin_seg.get_meta("em_map"))
+		var tc: Array = r.get("tile_cell", [0, 0])
+		var cell := _map_locate(map_name, String(r.get("token", "")), int(tc[0]), int(tc[1]))
+		if cell.x < 0:
+			_doll_toast("%s is not in the map near its record" % str(r.get("token")))
+			return
+		var cfg := _map_token_config(map_name, cell.x, cell.y)
+		var current := Vector3.ZERO
+		var bits := str(cfg.get("offset", "")).split(",")
+		if bits.size() >= 3 and str(bits[0]).strip_edges().is_valid_float() \
+				and str(bits[1]).strip_edges().is_valid_float() and str(bits[2]).strip_edges().is_valid_float():
+			current = Vector3(float(bits[0]), float(bits[1]), float(bits[2]))
+		var next := Vector3(snappedf(current.x + dx, 0.2), snappedf(current.y + dy, 0.2),
+			snappedf(current.z + dz, 0.2))
+		var zero := next.is_equal_approx(Vector3.ZERO)
+		var value := "" if zero else "%.2f,%.2f,%.2f" % [next.x, next.y, next.z]
+		var why := _map_dress(map_name, cell.x, cell.y, "offset", value)
+		if why != "":
+			_doll_toast("the map refuses: " + why)
+			return
+		node.position += Vector3(dx, dy, dz)
+		_follow_mute_ms = Time.get_ticks_msec() + 45000
+		_doll_toast("%s fine offset encoded in %s: %s" % [str(r.get("token")), map_name,
+			"0,0,0" if zero else value])
 		return
 	if kind in ["showing", "furniture", "plinth", "prop"]:
 		ov = _furniture_override(r)
@@ -11814,6 +12233,12 @@ var _plan_config_text: TextEdit = null
 var _plan_config_map: String = ""
 var _plan_config_cell := Vector2i(-1, -1)
 var _plan_marks_cache: Dictionary = {}
+var _passage_map: String = ""
+var _passage_kind: OptionButton = null
+var _passage_width: SpinBox = null
+var _passage_offset: SpinBox = null
+var _passage_side: OptionButton = null
+var _passage_preview: Control = null
 
 # ── THE DRESS SECTION (2026-08-23, Palle: "a section editing tool for
 # artifact dressing — plinth etc; n or p to jump between artifacts; an
@@ -12624,6 +13049,25 @@ func _paint2d_draw() -> void:
 				var closed := pts.duplicate()
 				closed.append(pts[0])
 				ctl.draw_polyline(closed, Color(0, 0, 0, 0.3), 1.0)
+		# The generated crossing is map-owned but appended museum-side. Mark its
+		# complete footprint so it reads as an editable architectural unit rather
+		# than unexplained extra rows beyond the authored grid.
+		var passage_at := int(segn.get_meta("em_passage_start", -1))
+		if passage_at >= 0 and not ptile.is_empty():
+			var passage_end := maxi(passage_at + 1, ptile.size())
+			var map_w := (ptile[0] as Array).size()
+			var pz0 := z0 + VESTIBULE_H + passage_at
+			var pz1 := z0 + VESTIBULE_H + passage_end
+			var passage_outline := PackedVector2Array([
+				cam.unproject_position(Vector3(0.0, 0.09, float(pz0))),
+				cam.unproject_position(Vector3(float(map_w), 0.09, float(pz0))),
+				cam.unproject_position(Vector3(float(map_w), 0.09, float(pz1))),
+				cam.unproject_position(Vector3(0.0, 0.09, float(pz1))),
+				cam.unproject_position(Vector3(0.0, 0.09, float(pz0)))])
+			ctl.draw_polyline(passage_outline, Color(1.0, 0.66, 0.16, 0.92), 3.0)
+			ctl.draw_string(ThemeDB.fallback_font, passage_outline[0] + Vector2(7, -6),
+				"PASSAGE — edit from toolbar", HORIZONTAL_ALIGNMENT_LEFT, -1, 14,
+				Color(1.0, 0.78, 0.36))
 	# Selection outlines the REAL artifact's top-down extent. There is no pin
 	# or surrogate sprite: the geometry beneath this line is the artifact.
 	if _edit_sel >= 0 and _edit_sel < _edit_records.size():
@@ -12649,7 +13093,7 @@ func _paint2d_draw() -> void:
 		"MUSEUM PLAN — %s   ·   wheel: scroll along maps   ·   MMB drag: pan   ·   north is up" % String(bn.get(_paint2d, _paint2d)),
 		HORIZONTAL_ALIGNMENT_LEFT, -1, 18, Color(1, 1, 1, 0.92))
 	ctl.draw_string(ThemeDB.fallback_font, Vector2(20, 64),
-		"hand: select + drag artifact   ·   Q rotates selected   ·   CONFIG edits it   ·   ctrl+Z undo   ·   H builds + exits",
+		"hand: select + drag artifact   ·   PASSAGE edits the hall join   ·   CONFIG edits artifact   ·   H builds + exits",
 		HORIZONTAL_ALIGNMENT_LEFT, -1, 15, Color(1, 1, 1, 0.78))
 
 
@@ -12666,8 +13110,8 @@ func _plan_toolbar_on() -> void:
 	bar.name = "Toolbar"
 	bar.add_theme_constant_override("separation", 7)
 	bar.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM)
-	bar.offset_left = -390.0
-	bar.offset_right = 390.0
+	bar.offset_left = -455.0
+	bar.offset_right = 455.0
 	bar.offset_top = -72.0
 	bar.offset_bottom = -24.0
 	layer.add_child(bar)
@@ -12675,7 +13119,7 @@ func _plan_toolbar_on() -> void:
 	var tools := [
 		["HAND / MOVE", ""], ["WALL  2", "2"], ["FLOOR  1", "1"],
 		["POOL  3", "pool"], ["DOOR  4", "door"], ["VOID  0", "0"],
-		["CONFIG", "config"], ["SAVE + BUILD", "build"]]
+		["PASSAGE", "passage"], ["CONFIG", "config"], ["SAVE + BUILD", "build"]]
 	for tv in tools:
 		var t: Array = tv
 		var b := Button.new()
@@ -12707,6 +13151,9 @@ func _plan_toolbar_refresh() -> void:
 
 func _plan_toolbar_pressed(button: Button) -> void:
 	var tool := String(button.get_meta("plan_tool", ""))
+	if tool == "passage":
+		_passage_open()
+		return
 	if tool == "config":
 		_plan_config_open()
 		return
@@ -12730,6 +13177,251 @@ func _plan_toolbar_pressed(button: Button) -> void:
 		"1": "floor", "2": "wall", "pool": "pool — museum basin cell",
 		"door": "door — click to place/remove; Q rotates after selection"}
 	_doll_toast(String(names.get(tool, tool)))
+
+
+func _passage_target_segment() -> Node3D:
+	## Selection owns context first; otherwise the passage belongs to the hall
+	## the doll/walker currently occupies (including its appended exit rows).
+	if _edit_sel >= 0 and _edit_sel < _edit_records.size():
+		var selected_seg: Node3D = _node_or_null((_edit_records[_edit_sel] as Dictionary).get("seg"))
+		if selected_seg != null and selected_seg.has_meta("em_map") \
+				and String(selected_seg.get_meta("em_map")) != "":
+			return selected_seg
+	var at_z := _player.position.z if _player != null else (_cam.global_position.z if _cam != null else 0.0)
+	var nearest: Node3D = null
+	var nearest_d := INF
+	for sv in _segments:
+		var sd: Dictionary = sv
+		var segn: Node3D = _node_or_null(sd.get("node"))
+		if segn == null or not segn.has_meta("em_map") or String(segn.get_meta("em_map")) == "":
+			continue
+		var z0 := float(sd.get("z0", segn.position.z))
+		var z1 := float(sd.get("z1", z0))
+		if at_z >= z0 and at_z < z1:
+			return segn
+		var d := minf(absf(at_z - z0), absf(at_z - z1))
+		if d < nearest_d:
+			nearest_d = d
+			nearest = segn
+	return nearest
+
+
+func _map_passage_replace(map_name: String, decl: Dictionary) -> Dictionary:
+	## The passage's ONE author: map_info.museum.passage. Generated rows and
+	## meshes are never edited in place; the next build derives them from here.
+	var path := "res://commons/maps/%s/map_data.json" % map_name
+	if not FileAccess.file_exists(path):
+		return {"ok": false, "why": "no map file"}
+	var doc_v: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+	if not (doc_v is Dictionary):
+		return {"ok": false, "why": "bad map json"}
+	var doc: Dictionary = doc_v
+	var map_info: Dictionary = doc.get("map_info", {}) if doc.get("map_info") is Dictionary else {}
+	doc["map_info"] = map_info
+	var museum: Dictionary = map_info.get("museum", {}) if map_info.get("museum") is Dictionary else {}
+	map_info["museum"] = museum
+	if decl.is_empty():
+		museum.erase("passage")
+	else:
+		var structure: Array = ((doc.get("layers", {}) as Dictionary).get("structure", []) as Array)
+		var map_w := (structure[0] as Array).size() if not structure.is_empty() and structure[0] is Array else 17
+		var kind := String(decl.get("kind", "chicane")).to_lower()
+		if kind not in ["chicane", "straight", "hall", "none"]:
+			return {"ok": false, "why": "kind must be chicane, straight, hall, or none"}
+		var side := String(decl.get("side", "")).to_lower()
+		if side not in ["", "left", "right"]:
+			return {"ok": false, "why": "side must be auto, left, or right"}
+		var safe: Dictionary = {
+			"kind": kind,
+			"width": clampi(int(decl.get("width", 2)), 1, maxi(1, map_w - 2)),
+		}
+		if kind in ["chicane", "hall"]:
+			safe["offset"] = clampi(absi(int(decl.get("offset", 3))), 0, maxi(0, map_w - 2))
+			if side != "":
+				safe["side"] = side
+		museum["passage"] = safe
+	if not _map_store(path, doc):
+		return {"ok": false, "why": "could not write the map"}
+	return {"ok": true, "passage": museum.get("passage", {})}
+
+
+func _passage_open() -> void:
+	var segn := _passage_target_segment()
+	if segn == null:
+		_doll_toast("stand in or select an authored hall first")
+		return
+	var map_name := String(segn.get_meta("em_map"))
+	var path := "res://commons/maps/%s/map_data.json" % map_name
+	var doc_v: Variant = JSON.parse_string(FileAccess.get_file_as_string(path)) \
+		if FileAccess.file_exists(path) else null
+	if not (doc_v is Dictionary):
+		_doll_toast("the passage has no readable map")
+		return
+	var doc: Dictionary = doc_v
+	var museum: Dictionary = ((doc.get("map_info", {}) as Dictionary).get("museum", {}) as Dictionary)
+	var decl: Dictionary = museum.get("passage", {}) if museum.get("passage") is Dictionary else {}
+	var structure: Array = ((doc.get("layers", {}) as Dictionary).get("structure", []) as Array)
+	var map_w := (structure[0] as Array).size() if not structure.is_empty() and structure[0] is Array else 17
+	_plan_config_close()
+	_passage_map = map_name
+	var layer := CanvasLayer.new()
+	layer.name = "PassageEditor"
+	layer.layer = 91
+	add_child(layer)
+	var panel := PanelContainer.new()
+	panel.name = "Panel"
+	panel.set_anchors_preset(Control.PRESET_CENTER_RIGHT)
+	panel.offset_left = -470.0
+	panel.offset_right = -24.0
+	panel.offset_top = -330.0
+	panel.offset_bottom = 330.0
+	layer.add_child(panel)
+	_plan_config_panel = panel
+	var box := VBoxContainer.new()
+	box.add_theme_constant_override("separation", 8)
+	panel.add_child(box)
+	var title := Label.new()
+	title.text = "PASSAGE BETWEEN HALLS\n%s" % map_name
+	title.add_theme_font_size_override("font_size", 19)
+	box.add_child(title)
+	var help := Label.new()
+	help.text = "This hall owns the crossing after its exit. The preview protects a continuous route; Apply + Build reconstructs walls, floor, collision, and streaming seam together."
+	help.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	box.add_child(help)
+	var grid := GridContainer.new()
+	grid.columns = 2
+	grid.add_theme_constant_override("h_separation", 16)
+	grid.add_theme_constant_override("v_separation", 7)
+	box.add_child(grid)
+	var fields: Array = []
+	_passage_kind = OptionButton.new()
+	for item in [["CHICANE — turn a corner", "chicane"], ["STRAIGHT — aligned corridor", "straight"],
+			["PASSAGE HALL — wider room", "hall"], ["DIRECT JOIN — no added rows", "none"]]:
+		_passage_kind.add_item(String(item[0]))
+		_passage_kind.set_item_metadata(_passage_kind.item_count - 1, String(item[1]))
+	fields.append(["form", _passage_kind])
+	_passage_width = SpinBox.new()
+	_passage_width.min_value = 1
+	_passage_width.max_value = maxi(1, map_w - 2)
+	_passage_width.step = 1
+	_passage_width.value = clampi(int(decl.get("width", 2)), 1, maxi(1, map_w - 2))
+	fields.append(["path width (m)", _passage_width])
+	_passage_offset = SpinBox.new()
+	_passage_offset.min_value = 0
+	_passage_offset.max_value = maxi(0, map_w - 2)
+	_passage_offset.step = 1
+	_passage_offset.value = clampi(absi(int(decl.get("offset", 3))), 0, maxi(0, map_w - 2))
+	fields.append(["side-step (m)", _passage_offset])
+	_passage_side = OptionButton.new()
+	for item in [["AUTO — whichever fits", ""], ["LEFT", "left"], ["RIGHT", "right"]]:
+		_passage_side.add_item(String(item[0]))
+		_passage_side.set_item_metadata(_passage_side.item_count - 1, String(item[1]))
+	fields.append(["turn side", _passage_side])
+	for field_v in fields:
+		var field: Array = field_v
+		var label := Label.new()
+		label.text = String(field[0])
+		grid.add_child(label)
+		var control: Control = field[1]
+		control.custom_minimum_size.x = 240
+		grid.add_child(control)
+	var current_kind := String(decl.get("kind", "chicane")).to_lower()
+	for i in range(_passage_kind.item_count):
+		if String(_passage_kind.get_item_metadata(i)) == current_kind:
+			_passage_kind.select(i)
+	var current_side := String(decl.get("side", "")).to_lower()
+	for i in range(_passage_side.item_count):
+		if String(_passage_side.get_item_metadata(i)) == current_side:
+			_passage_side.select(i)
+	_passage_preview = Control.new()
+	_passage_preview.custom_minimum_size = Vector2(405, 220)
+	box.add_child(_passage_preview)
+	_passage_preview.draw.connect(_passage_preview_draw)
+	_passage_kind.item_selected.connect(func(_i): _passage_preview.queue_redraw())
+	_passage_side.item_selected.connect(func(_i): _passage_preview.queue_redraw())
+	_passage_width.value_changed.connect(func(_v): _passage_preview.queue_redraw())
+	_passage_offset.value_changed.connect(func(_v): _passage_preview.queue_redraw())
+	var actions := HBoxContainer.new()
+	box.add_child(actions)
+	var apply := Button.new()
+	apply.text = "APPLY + BUILD"
+	apply.pressed.connect(_passage_apply)
+	actions.add_child(apply)
+	var reset := Button.new()
+	reset.text = "DEFAULT"
+	reset.tooltip_text = "Remove the declaration; the automatic 2 m chicane returns"
+	reset.pressed.connect(_passage_default)
+	actions.add_child(reset)
+	var cancel := Button.new()
+	cancel.text = "CANCEL"
+	cancel.pressed.connect(_plan_config_close)
+	actions.add_child(cancel)
+	_passage_preview.queue_redraw()
+
+
+func _passage_controls_decl() -> Dictionary:
+	if _passage_kind == null or _passage_width == null or _passage_offset == null or _passage_side == null:
+		return {}
+	return {
+		"kind": String(_passage_kind.get_item_metadata(_passage_kind.selected)),
+		"width": int(_passage_width.value),
+		"offset": int(_passage_offset.value),
+		"side": String(_passage_side.get_item_metadata(_passage_side.selected)),
+	}
+
+
+func _passage_preview_draw() -> void:
+	if _passage_preview == null or not is_instance_valid(_passage_preview):
+		return
+	var w := 13
+	var base: Array = []
+	for z in range(4):
+		var row: Array = []
+		for x in range(w):
+			row.append("4" if x == 0 or x == w - 1 or z in [0, 3] else "1")
+		base.append(row)
+	var shaped := _authored_passages(base, _passage_controls_decl())
+	var first_row := 2
+	var rows := maxi(1, shaped.size() - first_row)
+	var cell := minf((_passage_preview.size.x - 18.0) / float(w),
+		(_passage_preview.size.y - 42.0) / float(rows))
+	var origin := Vector2((_passage_preview.size.x - cell * w) * 0.5, 24.0)
+	_passage_preview.draw_string(ThemeDB.fallback_font, Vector2(origin.x, 16),
+		"CURRENT HALL ↓", HORIZONTAL_ALIGNMENT_LEFT, -1, 13, Color(1, 1, 1, 0.72))
+	for z in range(first_row, shaped.size()):
+		var row: Array = shaped[z]
+		for x in range(w):
+			var wall := String(row[x]).begins_with("4")
+			var rect := Rect2(origin + Vector2(x * cell, (z - first_row) * cell), Vector2.ONE * (cell - 1.0))
+			_passage_preview.draw_rect(rect,
+				Color(0.88, 0.86, 0.8, 0.9) if wall else Color(0.18, 0.52, 0.68, 0.82))
+	_passage_preview.draw_string(ThemeDB.fallback_font,
+		Vector2(origin.x, origin.y + rows * cell + 17.0), "↓ NEXT HALL",
+		HORIZONTAL_ALIGNMENT_LEFT, -1, 13, Color(1.0, 0.72, 0.3))
+
+
+func _passage_apply() -> void:
+	var result := _map_passage_replace(_passage_map, _passage_controls_decl())
+	if not bool(result.get("ok", false)):
+		_doll_toast("the map refuses: " + String(result.get("why", "write failed")))
+		return
+	_passage_rebuild("passage written into %s — rebuilding the hall join…" % _passage_map)
+
+
+func _passage_default() -> void:
+	var result := _map_passage_replace(_passage_map, {})
+	if not bool(result.get("ok", false)):
+		_doll_toast("the map refuses: " + String(result.get("why", "write failed")))
+		return
+	_passage_rebuild("automatic 2 m chicane restored — rebuilding…")
+
+
+func _passage_rebuild(message: String) -> void:
+	_plan_config_close()
+	_paint2d_dirty = false
+	_edit_flush()
+	_doll_toast(message)
+	_follow_reload()
 
 
 func _map_config_replace(map_name: String, cx: int, cz: int, cfg: Dictionary) -> Dictionary:
@@ -12872,6 +13564,12 @@ func _plan_config_close() -> void:
 	_plan_config_text = null
 	_plan_config_map = ""
 	_plan_config_cell = Vector2i(-1, -1)
+	_passage_map = ""
+	_passage_kind = null
+	_passage_width = null
+	_passage_offset = null
+	_passage_side = null
+	_passage_preview = null
 
 
 func _doll_rule(wx: int, wz: int, erase: bool) -> void:
@@ -12949,7 +13647,8 @@ func _doll_palette_refresh() -> void:
 		_doll_palette.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM)
 		_doll_palette.offset_top = -64.0
 		_doll_palette.offset_bottom = -20.0
-		var tools := [["🖐 hand", ""], ["🧱 wall/passage", "R"], ["⬛ room", "O"], ["🚪 door", "D"], ["💾 save", "!"]]
+		var tools := [["🖐 hand", ""], ["🧱 wall/passage", "R"], ["⬛ room", "O"],
+			["↔ hall passage", "passage"], ["🚪 door", "D"], ["💾 save", "!"]]
 		for t in tools:
 			var b := Button.new()
 			b.text = String((t as Array)[0])
@@ -12971,6 +13670,11 @@ func _doll_palette_pressed(b: Button) -> void:
 	if br == "!":
 		_edit_flush()
 		_doll_toast("saved — the walls you built stand; F6 re-deals the whole hall if you want a clean rebuild")
+		return
+	if br == "passage":
+		_doll_brush = ""
+		_doll_palette_refresh()
+		_passage_open()
 		return
 	_doll_brush = br
 	var names := {"": "the hand picks and drags bodies", "R": "wall — LMB builds (drag draws a run) · right-click or SHIFT opens · ALT digs a HOLE (value 0) · ctrl+Z undoes", "O": "room — drag a rectangle; walls rise around it with a door facing you; ctrl+Z takes the whole room back", "D": "door — click where the sliding door should stand"}

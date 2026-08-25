@@ -43,8 +43,34 @@ func _run() -> void:
 		for n in seg.find_children("*", "Node3D", true, false):
 			var nm := String(n.name)
 			if nm.begins_with("Utility_") or nm.begins_with("Wedge_"):
-				found.append("%-26s at (%.1f, %.1f, %.1f)" % [nm,
-					(n as Node3D).position.x, (n as Node3D).position.y, (n as Node3D).position.z])
+				# SIZE, not just position: a crossing that does not fit its
+				# 3x3 pool is a wall you walk into (2026-08-24)
+				var box := AABB()
+				var first := true
+				for vi_v in (n as Node3D).find_children("*", "VisualInstance3D", true, false):
+					var vi := vi_v as VisualInstance3D
+					var ab: AABB = vi.global_transform * vi.get_aabb()
+					box = ab if first else box.merge(ab)
+					first = false
+				found.append("%-24s at (%5.1f,%5.1f,%5.1f)  size %4.1f x %4.1f x %4.1f" % [nm,
+					(n as Node3D).position.x, (n as Node3D).position.y, (n as Node3D).position.z,
+					box.size.x, box.size.y, box.size.z])
+		# AND THE BODIES: a crossing you cannot see may be behind something
+		for n2 in seg.find_children("*", "Node3D", true, false):
+			if not n2.has_meta("artifact_lookup_name"):
+				continue
+			var box2 := AABB()
+			var f2 := true
+			for vi2_v in (n2 as Node3D).find_children("*", "VisualInstance3D", true, false):
+				var vi2 := vi2_v as VisualInstance3D
+				var ab2: AABB = vi2.global_transform * vi2.get_aabb()
+				box2 = ab2 if f2 else box2.merge(ab2)
+				f2 = false
+			if box2.size.length() > 3.5:
+				found.append("BODY %-19s at (%5.1f,%5.1f,%5.1f)  size %4.1f x %4.1f x %4.1f" % [
+					String(n2.get_meta("artifact_lookup_name")),
+					(n2 as Node3D).global_position.x, (n2 as Node3D).global_position.y,
+					(n2 as Node3D).global_position.z, box2.size.x, box2.size.y, box2.size.z])
 		found.sort()
 		report += "  %d utility node(s) standing in the hall:\n" % found.size()
 		for f in found:

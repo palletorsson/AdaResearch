@@ -27,6 +27,10 @@ func _run() -> void:
 	var map_name := _arg("map", "Trans_Introduction")
 	var out := _arg("out", "res://ada_run/iso_hall.png")
 	var top := OS.get_cmdline_user_args().has("--top")
+	# --eye=<map row>: stand IN the hall at walking height and look down the
+	# walk, instead of the doll perch. The proof camera composes toward
+	# artifacts and has stood inside a column; this one is told where to be.
+	var eye_row := float(_arg("eye", "-1"))
 
 	var inst: Node3D = (load("res://commons/scenes/endless_museum.tscn") as PackedScene).instantiate() as Node3D
 	inst.set("EM_CONTROL", "res://ada_run/_trial_iso_control.json")
@@ -78,6 +82,17 @@ func _run() -> void:
 	var player: Node3D = inst.get("_player") as Node3D
 	if player != null:
 		player.position = Vector3(cx, player.position.y, cz)
+	if eye_row >= 0.0:
+		# leave the doll house entirely: a walker's eye, 1.65 m, two metres
+		# back from the named row, looking along the walk
+		inst.set("_dollhouse", false)
+		var ecam: Camera3D = inst.get("_cam") as Camera3D
+		if ecam != null:
+			ecam.projection = Camera3D.PROJECTION_PERSPECTIVE
+			ecam.fov = 70.0
+			ecam.global_position = Vector3(cx, 1.65, z0 + 4.0 + eye_row - 3.0)
+			ecam.look_at(Vector3(cx, 1.0, z0 + 4.0 + eye_row + 4.0), Vector3.UP)
+			ecam.current = true
 	inst.set("_doll_zoom", clampf(span * 0.62, 6.0, 60.0))
 	inst.set("_doll_top", top)
 	inst.set("_doll_cam_pos", Vector3.ZERO)      # let it re-seat, no lerp trail
