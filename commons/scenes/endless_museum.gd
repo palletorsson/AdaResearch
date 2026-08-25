@@ -636,6 +636,12 @@ var _edit_records: Array = []      # [{node, token, tile_cell, rotation, chapter
 ## Does commons/data/map_authored.json declare this chapter? Read once — the
 ## declaration is the transplant's own licence (see the grid_pack note).
 var _authored_chapters: Dictionary = {}
+## map name -> chapter, from the same file. The view toggle needs it: a
+## segment's em_chapter meta comes back EMPTY for authored halls, so the
+## rebuilt museum opened at the default chapter and hunted twelve halls for a
+## map that chapter does not contain (2026-08-25, Palle: "now I'm back at the
+## beginning"). map_authored.json already knows which chapter owns which map.
+var _authored_map_chapter: Dictionary = {}
 func _authored_chapter(chapter: String) -> bool:
 	if _authored_chapters.is_empty():
 		_authored_chapters["_read"] = true
@@ -646,7 +652,19 @@ func _authored_chapter(chapter: String) -> bool:
 				for k in (parsed as Dictionary).keys():
 					if not String(k).begins_with("_") and (parsed as Dictionary)[k] is Array:
 						_authored_chapters[String(k)] = true
+						for m_v in ((parsed as Dictionary)[k] as Array):
+							_authored_map_chapter[String(m_v)] = String(k)
 	return _authored_chapters.has(chapter)
+
+
+## Which chapter owns this hall. The segment meta is the first source and this
+## is the second — a fallback that cannot be empty for an authored hall, since
+## map_authored.json is the file that made it authored in the first place.
+func _chapter_of_map(map_name: String) -> String:
+	if map_name == "":
+		return ""
+	_authored_chapter("")        # forces the one-time read
+	return String(_authored_map_chapter.get(map_name, ""))
 
 
 func _node_or_null(v: Variant) -> Node3D:
@@ -925,6 +943,7 @@ var _mod_plinths = null
 var _mod_props = null
 var _mod_pool = null
 var _guest_pool: Dictionary = {}   # em_pool.build()'s own report, for the print
+var _guest_registry: Dictionary = {} # em_pool-ready metadata harvested with _live
 var _seg_plinths: int = 0          # plinths stamped in the segment being dealt
 var _seat_rows: Array = []         # [{token, gap}] — measured seat error per lifted artifact
 var _rel_db: Dictionary = {}       # parsed artifact_relations.json
@@ -1160,7 +1179,7 @@ func _create_boot_loading_cell() -> void:
 		Vector3(X1 - X0, 0.20, Z1 - Z0), plaster, true)
 	_loading_box(_boot_cell, Vector3(CX, 2.25, Z1),
 		Vector3(X1 - X0, 4.5, 0.20), plaster, true)
-	_loading_painting(_boot_cell, Vector3(CX, 2.15, Z1 - 0.115), -1, true)
+	_loading_painting(_boot_cell, Vector3(CX, 2.15, Z1 - 0.115), -1)
 	var lamp := OmniLight3D.new()
 	lamp.name = "LoadingCellLight"
 	lamp.position = Vector3(CX, 3.55, 1.8)
@@ -1211,8 +1230,7 @@ func _loading_box(parent: Node3D, at: Vector3, size: Vector3, color: Color,
 ## The single startup painting. Inter-hall passages deliberately have no
 ## loading presentation: they read as ordinary museum vestibules while their
 ## far wall protects the one-map handoff.
-func _loading_painting(parent: Node3D, at: Vector3, direction: int,
-		boot: bool = false) -> void:
+func _loading_painting(parent: Node3D, at: Vector3, direction: int) -> void:
 	var dark := Color(0.07, 0.065, 0.06)
 	var frame := Color(0.80, 0.79, 0.76)
 	var panel := _loading_box(parent, at, Vector3(2.6, 1.45, 0.06), dark, false)
@@ -1240,8 +1258,7 @@ func _loading_painting(parent: Node3D, at: Vector3, direction: int,
 	label.position = at + Vector3(0.0, 0.0, 0.055 * float(direction))
 	label.rotation_degrees.y = 180.0 if direction < 0 else 0.0
 	parent.add_child(label)
-	if boot:
-		_boot_loading_label = label
+	_boot_loading_label = label
 
 
 func _tick_loading_paintings(delta: float) -> void:
@@ -1449,7 +1466,13 @@ func _load_relations() -> void:
 func _load_guests() -> void:
 	if not _mod_has(_mod_pool, "build"):
 		return
-	var r: Variant = _mod_pool.call("build", _live, PackedStringArray())
+	# `_load_pool()` has already parsed every registry JSON. Hand that same pass
+	# to em_pool instead of reading the current 222 files / 10.5 MB a second time.
+	var r: Variant
+	if _mod_arity(_mod_pool, "build") >= 3:
+		r = _mod_pool.call("build", _live, PackedStringArray(), _guest_registry)
+	else:
+		r = _mod_pool.call("build", _live, PackedStringArray())
 	if r is Dictionary:
 		_guest_pool = r as Dictionary
 	if _mod_has(_mod_pool, "report"):
@@ -1693,6 +1716,7 @@ func _load_pool() -> void:
 	# scan the whole registry again for them — one pass over ~7 MB of JSON is
 	# cheap, two in one boot is pure waste on the streaming frame.
 	var dna_by_token: Dictionary = {}   # also kept as _dna_axes, for the editor's C key
+	_guest_registry = {}
 	var dir := DirAccess.open(REGISTRY_DIR)
 	if dir == null:
 		return
@@ -1709,8 +1733,27 @@ func _load_pool() -> void:
 		for lookup in arts:
 			var a: Dictionary = arts[lookup]
 			var scene: String = String(a.get("scene", ""))
-			if scene != "" and a.get("map_ready", false) and ResourceLoader.exists(scene):
+			var alive: bool = scene != "" and bool(a.get("map_ready", false)) \
+				and ResourceLoader.exists(scene)
+			if alive:
 				live[String(lookup)] = {"scene": scene, "fp": _footprint_of(a)}
+			# em_pool needs liveness, DNA axes, and sequence membership. Preserve
+			# any live duplicate just as its former independent scan did.
+			var token := String(lookup)
+			var was: Variant = _guest_registry.get(token, null)
+			if not (was is Dictionary and bool((was as Dictionary).get("alive", false))):
+				var axes: Dictionary = {}
+				var dna_v: Variant = a.get("dna", null)
+				if dna_v is Dictionary and (dna_v as Dictionary).get("axes", null) is Dictionary:
+					axes = (dna_v as Dictionary)["axes"]
+				var seqs: Array = []
+				var seq_v: Variant = a.get("sequences", a.get("map_sequences", []))
+				if seq_v is Array:
+					for sv in seq_v:
+						var seq := String(sv)
+						if seq != "" and not seqs.has(seq):
+							seqs.append(seq)
+				_guest_registry[token] = {"alive": alive, "axes": axes, "sequences": seqs}
 			var dna: Variant = a.get("dna", null)
 			if dna is Dictionary:
 				dna_by_token[String(lookup)] = dna
@@ -1780,9 +1823,36 @@ func _load_policy_pool(live: Dictionary, policy: String) -> bool:
 ## has no flags (VR from the StagingVR picker). Gated: no flag, no file, no
 ## change — the walk opens with the first artifact of the spine as before.
 func _start_at_chapter() -> void:
+	# A REBUILD IS NOT A LAUNCH (2026-08-25, Palle: "when changing view in
+	# endless museum between 3d, iso and topdown we want the layer to be in the
+	# same spot as in the view we are coming from... now I'm back at the
+	# beginning"). The scene file ships start_chapter "primitives" and start_map
+	# "Point_One", so the Inspector's voice is NEVER empty — and the control
+	# file, which the view toggle had just written with the right chapter, could
+	# never be heard. Measured on the round trip: leaving Pattern_Foundry wrote
+	# first_chapter "color" and the rebuild opened in Point_One, 31.5 m away.
+	#
+	# `resume_eye` is written ONLY by _toggle_doc and erased by _follow_resume
+	# the moment it is spent, so it marks exactly one thing — the same session
+	# coming back from a view change. On that mark the control outranks the
+	# Inspector; every other launch keeps the precedence below untouched.
+	var resuming := false
+	var ctl0: String = _shipped(EM_CONTROL)
+	if FileAccess.file_exists(ctl0):
+		var pv: Variant = JSON.parse_string(FileAccess.get_file_as_string(ctl0))
+		if pv is Dictionary and (pv as Dictionary).get("resume_eye") != null:
+			var pd0: Dictionary = pv
+			if String(pd0.get("first_chapter", "")) != "":
+				_first_chapter = String(pd0["first_chapter"])
+				resuming = true
+			if String(pd0.get("first_map", "")) != "":
+				start_map = String(pd0["first_map"])
+			if resuming:
+				print("[em-resume] the view changed inside %s / %s — the walk reopens there, not at the door" % [
+					_first_chapter, start_map])
 	# precedence: the flag, then the Inspector, then ada_run/em_control.json
 	# (the control file only speaks for a launch that has neither)
-	if _first_chapter == "" and start_chapter != "":
+	if not resuming and _first_chapter == "" and start_chapter != "":
 		_first_chapter = start_chapter            # the Inspector's voice
 	# THE CONTROL SPEAKS FOR THE MODES ALWAYS (2026-08-24): grid_pack and
 	# dollhouse were read only when the control also named the chapter — so
@@ -9751,7 +9821,7 @@ func _process(_delta: float) -> void:
 ## The old map is queued for deletion on one frame and the new map is not built
 ## until a later frame, after deletion has completed. The passage owns its own
 ## floor/collision, so the visitor never stands on the subtree being removed.
-func _vr_single_map_stream(ez: float, delta: float) -> void:
+func _vr_single_map_stream(ez: float, _delta: float) -> void:
 	if not _museum_ready:
 		return
 	var eye_step := ez - _vr_last_eye_z
@@ -11491,6 +11561,13 @@ func _toggle_doc() -> Dictionary:
 			ch = String(sn.get_meta("em_chapter"))
 		mp = String(sd.get("map", ""))
 		z_local = clampf(eye_z - z0, 0.0, maxf(0.0, z1 - z0))
+	# THE CHAPTER, OR THE WALK REOPENS SOMEWHERE ELSE (2026-08-25). An empty
+	# first_chapter sends the rebuilt museum to the default chapter, where it
+	# searches twelve halls for a map that chapter has never heard of and then
+	# stands the visitor at the door. Measured: leaving Pattern_Foundry wrote
+	# first_chapter "" and came back 31.5 m away in Point_One.
+	if ch == "":
+		ch = _chapter_of_map(mp)
 	return {
 		"_readme": "the menu's / the jump's / the follow's / the doll house's voice",
 		"first_chapter": ch,
