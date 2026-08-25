@@ -3617,13 +3617,10 @@ func _build_segment() -> void:
 						var rimx: float = sxm + (0.5 - 0.45 if sxm < 0 else 0.5 + 0.45)
 						_box(seg, Vector3(rimx, -basin_depth / 2.0, z2 + 0.5), Vector3(0.1, basin_depth, 1), Color(0.14, 0.14, 0.17), m_wall)
 						_add_col(solid, Vector3(rimx, -basin_depth / 2.0, z2 + 0.5), Vector3(0.1, basin_depth, 1))
-		# ONLY the entry and exit wedges now — the side pair climbed onto
-		# margins that are pool, and a wedge to nowhere is a trap
-		var sim_h: int = maxi(1, tile.size() - 3)   # the chicane's 3 rows came after the map
-		var dc0: int = _open_col(tile, 0)
-		var dc1: int = _open_col(tile, sim_h - 1)
-		_stamp_wedge(seg, Vector2i(dc0, VESTIBULE_H), "south", basin_depth, zbase, 1.0, -basin_depth)
-		_stamp_wedge(seg, Vector2i(dc1, VESTIBULE_H + sim_h - 1), "north", basin_depth, zbase, 1.0, -basin_depth)
+		# NO WEDGES (2026-08-24, Palle: "remove all wedges from the
+		# simulation"). They existed to climb down to a grid standing on the
+		# pool floor; the grid is at water level now, flush with the deck, so
+		# every wedge was a ramp to the height it already stood at.
 		# the pool floor IS the exhibition floor here — walkable for every
 		# planner that reads the walk map
 		for bc_v in basin_cells.keys():
@@ -5379,7 +5376,15 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 	if mus_g is Dictionary:
 		var sim_g: Variant = (mus_g as Dictionary).get("simulation")
 		if sim_g is Dictionary and bool((sim_g as Dictionary).get("grid", false)):
-			var gdepth: float = clampf(float((sim_g as Dictionary).get("depth", 1.0)), 0.3, 8.0)
+			# WATER LEVEL (2026-08-24, Palle: "the pool basin should be deep
+			# but the grid simulation boxes should be at water level"). The
+			# grid used to stand on the pool FLOOR, so deepening the basin
+			# sank the exhibit with it. The basin's depth is now scenery —
+			# the drop you see around and below — while the grid sits at the
+			# rim: its floor cubes are centre-origin, so -0.5 puts their TOPS
+			# flush with the museum deck, and the walk crosses the simulation
+			# on the level. No wedge, because there is no step.
+			var gdepth: float = 0.5      # the node sits at -gdepth
 			# the grid's SCENE, not a bare script node — GridSystem expects
 			# its CubeScene template child ("Base cube reference not found")
 			var gs: Node3D = (load("res://commons/grid/grid_system.tscn") as PackedScene).instantiate() as Node3D
