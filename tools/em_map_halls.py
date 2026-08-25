@@ -77,6 +77,14 @@ def derive_row(pearl: str, map_name: str, museum_key: str, idx: int, total: int,
         return int(s) if s.isdigit() else 0
 
     struct = [[eff(v) for v in row] for row in raw]
+    # WHERE THIS MAP'S FLOOR IS (2026-08-25, Palle: "the last transformation
+    # hall has no way out"). Trans_Pit walks on height-3 slabs over fire, so
+    # the default h>=2 rule read its entire floor as wall and derived a solid
+    # block with holes where the fire was — the map INVERTED. map_info.museum
+    # .wall_height says which height starts being a wall; everything above 0
+    # and below it is floor. Default 2 = the rule every other map already has.
+    mus_decl = (md.get("map_info", {}) or {}).get("museum", {}) or {}
+    wall_h = int(mus_decl.get("wall_height", 2)) if isinstance(mus_decl, dict) else 2
     inter = md["layers"].get("interactables", [])
     # ORIGIN-PINNED (the ruling drift lesson: tile cells ARE map cells,
     # forever). Cropping to the content bbox moved (0,0) whenever the map's
@@ -111,7 +119,7 @@ def derive_row(pearl: str, map_name: str, museum_key: str, idx: int, total: int,
                     except ValueError: n = 1
                 line.append("p" if n == 1 else "p%d" % n)
             else:
-                line.append("4" if v >= 2 else ("1" if v >= 1 else "0"))
+                line.append("4" if v >= wall_h else ("1" if v >= 1 else "0"))
         tile.append(line)
     # NO inserted walls (Palle: "there is a wall where the sliding door
     # should be — you can simplify"): the museum's vestibule + gate already

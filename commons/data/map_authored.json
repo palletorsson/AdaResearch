@@ -1,33 +1,55 @@
 {
-	"_readme": "MAP-AUTHORED HALLS — chapters listed here build their museum halls FROM the named grid maps (in order): tile from the map's structure (h>=2 wall, h==1 floor, cropped to content), artifacts at their map cells, plinth = height 2 under the anchor. Applied to em_plan.json by `python tools/em_map_halls.py --apply` (backup kept, shipped copy follows); the museum skips the necklace hand's stamp-clear for these rows — the map is the placement authority. Remove a chapter to return it to the dealt plan on the next apply.",
-	"primitives": [
-		"Point_One",
-		"Point_Lines",
-		"Point_Trace",
-		"Point_Line_Grid",
-		"Point_Triangle_Context",
-		"Primitives_Polythedra",
-		"Point_Animatedcube",
-		"Primitives_Ignorance",
-		"Primitives_Portals",
-		"Primitives_Melencolia"
-	],
-	"transformation": [
-		"Trans_Introduction",
-		"Trans_Translation",
-		"Trans_AxisDecomposition",
-		"Trans_Rotation",
-		"Trans_RotationSpectacle",
-		"Trans_Scale",
-		"Trans_Pit"
-	],
-	"color": [
-		"Array",
-		"Pattern_Foundry",
-		"Color_Context_Placed",
-		"Color_Nails",
-		"Color_Pillar",
-		"Color_Walls",
-		"Symmetry_Seventeen"
-	]
+ "_readme": "MAP-AUTHORED HALLS — chapters listed here build their museum halls FROM the named grid maps (in order): tile from the map's structure (h>=2 wall, h==1 floor, cropped to content), artifacts at their map cells, plinth = height 2 under the anchor. Applied to em_plan.json by `python tools/em_map_halls.py --apply` (backup kept, shipped copy follows); the museum skips the necklace hand's stamp-clear for these rows — the map is the placement authority. Remove a chapter to return it to the dealt plan on the next apply.",
+ "primitives": [
+  "Point_One",
+  "Point_Lines",
+  "Point_Trace",
+  "Point_Line_Grid",
+  "Point_Triangle_Context",
+  "Primitives_Polythedra",
+  "Point_Animatedcube",
+  "Primitives_Ignorance",
+  "Primitives_Portals",
+  "Primitives_Melencolia"
+ ],
+ "transformation": [
+  "Trans_Introduction",
+  "Trans_Translation",
+  "Trans_AxisDecomposition",
+  "Trans_Rotation",
+  "Trans_RotationSpectacle",
+  "Trans_Scale",
+  "Trans_Pit"
+ ],
+ "color": [
+  "Array",
+  "Pattern_Foundry",
+  "Color_Context_Placed",
+  "Color_Nails",
+  "Color_Pillar",
+  "Color_Walls",
+  "Symmetry_Seventeen"
+ ],
+ "forces": [
+  "VFM_01_Foundations",
+  "Vectors_Act1_WhatAVectorIs",
+  "VFM_02_Operations",
+  "Vectors_Act2_VectorArithmetic",
+  "VFM_03_Motion",
+  "VFM_05_Launch",
+  "Vectors_Act3_FieldsAndMotion",
+  "VFM_06_Springs",
+  "VFM_07_Gravity",
+  "VFM_08_Arena",
+  "Vectors_Act4a_KineticForces",
+  "Vectors_Act4b_Oscillation",
+  "VFM_04_Fields",
+  "Vectors_Act5_ForceAsPlace"
+ ],
+ "change": [
+  "Change_Intro",
+  "Accumulation_Riemann",
+  "Flow_Field",
+  "Change_Reconciliation"
+ ]
 }
