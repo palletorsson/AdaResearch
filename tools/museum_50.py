@@ -102,6 +102,57 @@ def free_square(grid, x, z, cap=5):
     return best
 
 
+def pack(x0, z0, n, k, gap=1):
+    """Where k-sized things sit inside an n-square, with `gap` cells between
+    them so they read as separate objects rather than one lump. Centred, so a
+    subdivision sits in the middle of the space it was given."""
+    step = k + gap
+    count = (n + gap) // step
+    if count < 1 or k > n:
+        return []
+    used = count * step - gap
+    off = (n - used) // 2
+    return [(x0 + off + i * step, z0 + off + j * step)
+            for j in range(count) for i in range(count)]
+
+
+def capacity(x, z, n):
+    """WHAT ELSE FITS IN HERE (2026-08-25, Palle: "can we have some system
+    where we know if there is 5 there can be room for at least 2 other
+    artifacts inside?").
+
+    A footprint is not one offer, it is a menu. A 5x5 is one 5x5 thing, OR
+    four 2x2 things with a walking gap, OR nine 1x1 — and, most usefully, a
+    3x3 with four 1x1 attendants in its corners. Answering by construction
+    beats answering by eye: every option below is a real list of cells, so a
+    placer can take one and a person can see it."""
+    holds = {}
+    for k in range(1, n + 1):
+        cells = pack(x, z, n, k)
+        if cells:
+            holds[str(k)] = len(cells)
+    comps = []
+    if n >= 1:
+        comps.append({"name": "one", "items": [{"x": x, "z": z, "fp": n}]})
+    for k in range(n - 1, 0, -1):
+        cells = pack(x, z, n, k)
+        if len(cells) >= 2:
+            comps.append({"name": "%d x %dx%d" % (len(cells), k, k),
+                          "items": [{"x": cx, "z": cz, "fp": k} for cx, cz in cells]})
+            break
+    # HERO AND ATTENDANTS: the big one in the middle, small ones in the corners
+    # of the ring it leaves. Only when the ring is a full cell wide, otherwise
+    # the attendants are touching the hero and it reads as one object.
+    if n >= 4:
+        inner = n - 2
+        items = [{"x": x + 1, "z": z + 1, "fp": inner}]
+        for cx, cz in [(x, z), (x + n - 1, z), (x, z + n - 1), (x + n - 1, z + n - 1)]:
+            items.append({"x": cx, "z": cz, "fp": 1})
+        comps.append({"name": "hero %dx%d + 4 attendants" % (inner, inner), "items": items})
+    best_other = max([c for k, c in holds.items() if int(k) < n] or [0])
+    return {"holds": holds, "compositions": comps, "also_holds": best_other}
+
+
 def slots_for(tile):
     """Every place a thing could stand, with a kind and a footprint."""
     grid = [[kind_of(c) for c in row] for row in tile]
@@ -127,8 +178,9 @@ def slots_for(tile):
                 kind = "plinth"
             if kind == "field" and abs(x - mid) <= 1.5 and fp >= 2:
                 kind = "pair"
-            out.append({"x": x, "z": z, "kind": kind, "fp": fp,
-                        "wall_backing": walls >= 1})
+            slot = {"x": x, "z": z, "kind": kind, "fp": fp, "wall_backing": walls >= 1}
+            slot.update(capacity(x, z, fp))
+            out.append(slot)
             if fp > hero_best[0]:
                 hero_best = (fp, (x, z))
     if hero_best[1] is not None and hero_best[0] >= 3:
@@ -204,6 +256,7 @@ def main():
             "slots": pub,
             "footprints": sorted({s["fp"] for s in pub}, reverse=True),
             "biggest": max((s["fp"] for s in pub), default=0),
+            "divisible": sum(1 for s in pub if s.get("also_holds", 0) >= 2),
             "counts": {k: sum(1 for s in pub if s["kind"] == k)
                        for k in ("hero", "alcove", "plinth", "pair", "wall", "field")
                        if any(s["kind"] == k for s in pub)},
@@ -212,9 +265,9 @@ def main():
     print("FIFTY MUSEUMS — %d built from %d named plans + %d bays\n" % (
         len(museums), len(named), len(bays)))
     for m in museums:
-        print("  %-4s %-40s %-10s %2dx%-3d  %2d slot(s) up to %dx%d  %s" % (
-            m["id"], m["pattern"][:40], m["variant"], m["w"], m["h"],
-            len(m["slots"]), m["biggest"], m["biggest"],
+        print("  %-4s %-38s %-10s %2dx%-3d %2d slot(s) to %dx%d  %2d divisible  %s" % (
+            m["id"], m["pattern"][:38], m["variant"], m["w"], m["h"],
+            len(m["slots"]), m["biggest"], m["biggest"], m["divisible"],
             " ".join("%s:%d" % (k, v) for k, v in m["counts"].items())))
     if not args.list:
         dest = os.path.join(ROOT, args.out)
@@ -288,6 +341,16 @@ def _sheet(museums, dest, cell=5, cols=10):
             out.append('<rect x="%d" y="%d" width="%d" height="%d" fill="%s" fill-opacity="0.22" '
                        'stroke="%s" stroke-width="0.8"/>'
                        % (ox + s["x"] * cell, top + s["z"] * cell, n, n, c, c))
+            # WHAT ELSE FITS: the last composition drawn as inner outlines, so a
+            # big slot shows on the sheet that it is also two or four smaller
+            # offers and not only one large one
+            comps = s.get("compositions") or []
+            if s.get("also_holds", 0) >= 2 and len(comps) > 1:
+                for it in comps[-1]["items"]:
+                    k = max(1, int(it["fp"])) * cell
+                    out.append('<rect x="%d" y="%d" width="%d" height="%d" fill="none" '
+                               'stroke="%s" stroke-width="0.5" stroke-opacity="0.85"/>'
+                               % (ox + it["x"] * cell, top + it["z"] * cell, k, k, c))
     out.append("</svg>")
     with open(dest, "w", encoding="utf-8") as fh:
         fh.write("\n".join(out))
