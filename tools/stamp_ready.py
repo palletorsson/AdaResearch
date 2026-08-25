@@ -13,9 +13,9 @@ rules that make it one, checked on the map, in the grid, before any stamp:
   WALL   the map's outer border is a complete wall. Measured 2026-08-25:
          exactly ONE of 187 unstamped spine maps had this. 178 had five or
          more gaps, which the museum wraps into a hall with holes in its shell.
-  BAND   the map, INCLUDING that wall, is 13-19 cells on both axes. The
-         corpus spikes at 12 (50 maps) and 20 (23), so most maps are one or
-         two cells off in one direction or the other.
+  BAND   the map, INCLUDING that wall, is an EVEN size between 9 and 19 on
+         both axes — so 10, 12, 14, 16 or 18. The corpus spikes at 12 (50
+         maps) and 10 (24), both legal; the 20-wides come down to 18.
   SPINE  the artifacts stand near the central walk line, so the walker meets
          them instead of hunting for them. Reported, never enforced — where a
          thing stands is a design act and a percentage is not an argument.
@@ -49,8 +49,27 @@ import subprocess
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-BAND_LO, BAND_HI = 13, 19
+# THE BAND (2026-08-25, Palle: "a map can be down to 9 cells but up to 19 but
+# must be even"). 9 and 19 are both odd, so the reachable sizes are 10, 12, 14,
+# 16 and 18 — the floor is 10 and the ceiling 18. This replaced a 13-19 band
+# ruled earlier the same day, and it fits the corpus far better: 12 is its
+# biggest spike (50 maps) and 10 its third (24), and both are now legal.
+BAND_LO, BAND_HI = 9, 19
+EVEN_LO, EVEN_HI = 10, 18
 WALL = "w"
+
+
+def in_band(n):
+    return BAND_LO <= n <= BAND_HI and n % 2 == 0
+
+
+def target(n):
+    """The nearest legal size: round UP to even, then clamp into [10, 18].
+    Rounding up rather than down means a map only ever grows to reach the
+    band, and only shrinks when it is genuinely over it — growth is
+    origin-safe, shrinking is conditional on the far edge being empty."""
+    t = n + (n % 2)
+    return min(EVEN_HI, max(EVEN_LO, t))
 
 
 def height(v):
@@ -119,9 +138,9 @@ def analyse(doc):
         "gaps": gaps, "blocked": blocked,
         "arts": len(arts),
         "spine": (100.0 * near / len(arts)) if arts else None,
-        "band": BAND_LO <= w <= BAND_HI and BAND_LO <= h <= BAND_HI,
-        "grow_x": max(0, BAND_LO - w), "grow_z": max(0, BAND_LO - h),
-        "over": (w > BAND_HI or h > BAND_HI),
+        "band": in_band(w) and in_band(h),
+        "grow_x": max(0, target(w) - w), "grow_z": max(0, target(h) - h),
+        "over": (target(w) < w or target(h) < h),
     }
 
 
@@ -169,7 +188,7 @@ def grow(doc, add_x, add_z):
     return opened
 
 
-def trim(doc, hi=BAND_HI):
+def trim(doc, want_w=EVEN_HI, want_h=EVEN_HI):
     """Drop FAR rows and columns while the map is over the band and the far
     edge carries nothing. Also origin-preserving — (0,0) and every remaining
     cell keep their address — which is why only the far edge is ever dropped.
@@ -195,14 +214,14 @@ def trim(doc, hi=BAND_HI):
                 return False
         return True
 
-    while len(st[0]) > hi and col_free(len(st[0]) - 1):
+    while len(st[0]) > want_w and col_free(len(st[0]) - 1):
         for key, layer in layers.items():
             if isinstance(layer, list) and layer and isinstance(layer[0], list):
                 for row in layer:
                     if row:
                         row.pop()
         dropped_x += 1
-    while len(st) > hi and row_free(len(st) - 1):
+    while len(st) > want_h and row_free(len(st) - 1):
         for key, layer in layers.items():
             if isinstance(layer, list) and layer and isinstance(layer[0], list):
                 if layer:
@@ -239,7 +258,7 @@ def main():
                 actions.append("grew +%dx +%dz%s" % (a["grow_x"], a["grow_z"],
                                (", opened %d old wall cell(s)" % opened) if opened else ""))
             if args.grow and a["over"]:
-                dx, dz = trim(doc)
+                dx, dz = trim(doc, target(a["w"]), target(a["h"]))
                 if dx or dz:
                     actions.append("trimmed -%dx -%dz" % (dx, dz))
             st = doc["layers"]["structure"]
