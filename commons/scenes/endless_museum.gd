@@ -783,7 +783,6 @@ var _loading_anim_t: float = 0.0
 ## while the current map is freed, then the next map is built behind its far
 ## wall. At no point does a hidden second map remain resident.
 var _vr_passage: Node3D = null
-var _vr_passage_label: Label3D = null
 var _vr_passage_far: Node3D = null
 var _vr_passage_rear: Node3D = null
 var _vr_passage_phase: String = ""
@@ -793,7 +792,6 @@ var _vr_passage_old_node: Node3D = null
 var _vr_passage_target: Node3D = null
 var _vr_passage_width: float = 0.0
 var _vr_passage_frame: int = -1
-var _vr_passage_open_t: float = 0.0
 var _vr_last_eye_z: float = 0.0
 var _loading_cell_mats: Dictionary = {}
 # ── THE WAKE-UP RAMP (2026-08-20, Palle: "loading a grid map like Point_One
@@ -1210,8 +1208,9 @@ func _loading_box(parent: Node3D, at: Vector3, size: Vector3, color: Color,
 	return holder
 
 
-## The one painting in both the boot cell and the streamed passages. Direction
-## is +1 when approached walking +z, -1 when approached walking -z.
+## The single startup painting. Inter-hall passages deliberately have no
+## loading presentation: they read as ordinary museum vestibules while their
+## far wall protects the one-map handoff.
 func _loading_painting(parent: Node3D, at: Vector3, direction: int,
 		boot: bool = false) -> void:
 	var dark := Color(0.07, 0.065, 0.06)
@@ -1243,15 +1242,13 @@ func _loading_painting(parent: Node3D, at: Vector3, direction: int,
 	parent.add_child(label)
 	if boot:
 		_boot_loading_label = label
-	else:
-		_vr_passage_label = label
 
 
 func _tick_loading_paintings(delta: float) -> void:
 	_loading_anim_t += delta
 	var dots := 1 + int(floor(_loading_anim_t * 2.0)) % 3
 	var pulse := 0.82 + 0.18 * (0.5 + 0.5 * sin(_loading_anim_t * 2.4))
-	for lv in [_boot_loading_label, _vr_passage_label]:
+	for lv in [_boot_loading_label]:
 		var label: Label3D = lv
 		if label != null and is_instance_valid(label):
 			label.text = "LOADING" + ".".repeat(dots)
@@ -1267,7 +1264,7 @@ func _hide_legacy_loading_text() -> void:
 		return
 	for nv in get_tree().root.find_children("*", "Label3D", true, false):
 		var label := nv as Label3D
-		if label == _boot_loading_label or label == _vr_passage_label:
+		if label == _boot_loading_label:
 			continue
 		var low := label.text.to_lower()
 		if label.name == "MapInfo" or label.name == "LevelInfoLabel" \
@@ -3528,9 +3525,12 @@ func _stamp_hazard(seg: Node3D, cell: Vector2i, zbase: int, entrance: Vector3) -
 
 ## The last threshold the walker crossed — the save point a fall returns to.
 func _save_point_now() -> Vector3:
-	if _player == null:
+	# THE EYE, not the walker: in the headset the walker is furniture and its
+	# z never changes, so every death in VR resolved to the same save point —
+	# the first one — however far in the visitor had walked.
+	var pz: float = _eye_pos().z
+	if _player == null and _segments.is_empty():
 		return _last_ground
-	var pz: float = _player.position.z
 	var best: Vector3 = _last_ground
 	var best_z: float = -1.0e9
 	for sp_v in _save_points:
@@ -3830,6 +3830,32 @@ func on_lethal_touch(kind: String, _at: Vector3 = Vector3.ZERO) -> void:
 	_museum_death(kind)
 
 
+## WHERE THE RIG MUST STAND so the HEADSET lands on `target` (2026-08-25,
+## Palle: "in VR we are after death we are re-dropped in the same spot meaning
+## we die again and again"). The museum's walker is a desktop body; in the
+## headset nothing rides it, so setting its position moved furniture while the
+## visitor stayed in the fire and burned again on the next tick.
+##
+## The rig moves by the CAMERA'S OFFSET inside it: a room-scale player can be
+## two metres from their own origin, and dropping the origin straight onto the
+## save point leaves the headset that far off — often still over the pool.
+## Pure arithmetic on purpose, so it can be tested without a headset.
+static func _vr_drop(origin_pos: Vector3, eye_pos: Vector3, target: Vector3) -> Vector3:
+	var off := Vector3(eye_pos.x - origin_pos.x, 0.0, eye_pos.z - origin_pos.z)
+	return Vector3(target.x - off.x, target.y, target.z - off.z)
+
+
+## The XROrigin3D above the eye, or null on the desktop.
+func _vr_rig() -> Node3D:
+	var eye: Camera3D = _vr_eye()
+	if eye == null:
+		return null
+	var o: Node = eye.get_parent()
+	while o != null and not (o is XROrigin3D):
+		o = o.get_parent()
+	return o as Node3D
+
+
 func _museum_death(kind: String) -> void:
 	if _dying or _player == null:
 		return
@@ -3840,8 +3866,17 @@ func _museum_death(kind: String) -> void:
 	if _vr:
 		# no canvas in the headset: the fade is the museum's own, and the
 		# splatter would sit on the walker's face
-		_player.position = back
-		_player.velocity = Vector3.ZERO
+		var rig: Node3D = _vr_rig()
+		var eye: Camera3D = _vr_eye()
+		if rig != null and eye != null:
+			rig.global_position = _vr_drop(rig.global_position, eye.global_position, back)
+			print("[em-death] the rig moved to %s so the headset lands on %s" % [
+				str(rig.global_position), str(back)])
+		else:
+			push_warning("[em-death] no XR rig to move — the headset stays where it died")
+		if _player != null:
+			_player.position = back          # the walker keeps step with the rig
+			_player.velocity = Vector3.ZERO
 		_vy = 0.0
 		_hazard_flash()
 		_dying = false
@@ -9772,18 +9807,11 @@ func _vr_single_map_stream(ez: float, delta: float) -> void:
 		if _segment_has_pending_stamps(_vr_passage_target):
 			return
 		_open_gate()
-		_vr_passage_phase = "opening"
-		_vr_passage_open_t = 0.0
-		print("[em-stream] target complete behind the blocking wall — passage opening")
-		return
-
-	if _vr_passage_phase == "opening":
-		_vr_passage_open_t += delta
-		if _vr_passage_open_t >= 0.65:
-			if _vr_passage_far != null and is_instance_valid(_vr_passage_far):
-				_vr_passage_far.queue_free()
-			_vr_passage_far = null
-			_vr_passage_phase = "entering"
+		if _vr_passage_far != null and is_instance_valid(_vr_passage_far):
+			_vr_passage_far.queue_free()
+		_vr_passage_far = null
+		_vr_passage_phase = "entering"
+		print("[em-stream] target complete — vestibule opens immediately")
 		return
 
 	if _vr_passage_phase == "entering":
@@ -9821,8 +9849,8 @@ func _create_vr_passage(current: Dictionary, direction: int, boundary: float) ->
 	_vr_passage_boundary = boundary
 	_vr_passage_width = clampf(float(current.get("w", LOBBY_W)), 5.0, 24.0)
 	_vr_passage = Node3D.new()
-	_vr_passage.name = "MuseumMapLoadingPassage"
-	_vr_passage.set_meta("em_loading_passage", true)
+	_vr_passage.name = "MuseumTransitionVestibule"
+	_vr_passage.set_meta("em_transition_vestibule", true)
 	add_child(_vr_passage)
 	var cx := _vr_passage_width * 0.5
 	var center_z := boundary + float(direction) * 0.5
@@ -9839,10 +9867,8 @@ func _create_vr_passage(current: Dictionary, direction: int, boundary: float) ->
 	var far_z := boundary + float(direction) * 4.0
 	_vr_passage_far = _loading_box(_vr_passage, Vector3(cx, 2.25, far_z),
 		Vector3(_vr_passage_width, 4.5, 0.20), plaster, true)
-	_loading_painting(_vr_passage,
-		Vector3(cx, 2.15, far_z - float(direction) * 0.115), -direction, false)
 	var lamp := OmniLight3D.new()
-	lamp.name = "PassageLoadingLight"
+	lamp.name = "TransitionVestibuleLight"
 	lamp.position = Vector3(cx, 3.55, center_z)
 	lamp.light_color = Color(1.0, 0.94, 0.84)
 	lamp.light_energy = 0.75
@@ -9850,7 +9876,7 @@ func _create_vr_passage(current: Dictionary, direction: int, boundary: float) ->
 	lamp.shadow_enabled = false
 	_vr_passage.add_child(lamp)
 	_vr_passage_phase = "armed"
-	print("[em-stream] loading passage armed at z %.1f (%s); one map resident" % [
+	print("[em-stream] transition vestibule armed at z %.1f (%s); one map resident" % [
 		boundary, "forward" if direction > 0 else "backward"])
 
 
@@ -9916,15 +9942,13 @@ func _remove_vr_passage() -> void:
 	if _vr_passage != null and is_instance_valid(_vr_passage):
 		_vr_passage.queue_free()
 	_vr_passage = null
-	_vr_passage_label = null
 	_vr_passage_far = null
 	_vr_passage_rear = null
 	_vr_passage_old_node = null
 	_vr_passage_target = null
 	_vr_passage_phase = ""
 	_vr_passage_dir = 0
-	_vr_passage_open_t = 0.0
-	print("[em-stream] loading passage removed — one map resident")
+	print("[em-stream] transition vestibule removed — one map resident")
 
 
 ## Free one alive segment into a _freed record (its z-range + the cursor
