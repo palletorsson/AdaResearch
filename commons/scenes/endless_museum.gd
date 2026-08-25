@@ -5575,14 +5575,20 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 				ledger.append({"token": String(tok_v), "grid": null,
 					"target": [int(cell2["x"]), int(cell2["y"])], "final": [int(cell2["x"]), int(cell2["y"])],
 					"rings": 0, "why": "added by hand, stamped", "plinth": bool(cb2.get("plinth", false))})
-	# ── THE WEDGE SLICE (2026-08-23, Palle: "include the utility layer in the
-	# endless museum so we can place wedges up on the platform") ─────────────
-	# Utilities slice ONE: `wp` (walkable prism — the grid's own stair). Each
-	# wp in the map builds in the hall at its cell, seated on the cell's own
-	# top (a platform cell hosts the next flight), turned by its parameter.
-	# The scene carries its own walkable collision. Subtitles etc. come later.
+	# ── THE UTILITY SLICE (2026-08-23 as the wedge slice; widened 2026-08-24,
+	# Palle: "we should use the utility layer of the grid but I do not see the
+	# transport cube, scale cube and rotate cube") ───────────────────────────
+	# It built `wp` ALONE. Every other utility the map placed — the transport
+	# cube that ferries you, the scale cube that grows under you, the rotate
+	# cube that sweeps a plank across a gap — was read and dropped, so the
+	# three crossings Trans_Introduction places over its three pools simply
+	# were not there. Now every cell goes through _stamp_utility, which is the
+	# one place that knows the grammar and REFUSES with a reason (h: hazards
+	# get the museum-safe patch above; t/m/l/r/cp stay refused, and say why).
+	# `wp` keeps its own branch below because only it knows about pool floors.
 	var utils: Array = layers.get("utilities", [])
 	var wedges := 0
+	var utils_built := 0
 	if not utils.is_empty():
 		var wp_scene: PackedScene = load("res://commons/scenes/mapobjects/walkableprism.tscn") as PackedScene
 		if wp_scene != null:
@@ -5602,6 +5608,12 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 							zbase, Vector3(float(w) / 2.0, 0.1, float(zbase) + 2.0))
 						continue
 					if not (uv == "wp" or uv.begins_with("wp:")):
+						# every other utility the map placed: the dispatcher
+						# builds it or prints its refusal — never silence
+						var ucell := Vector2i(clampi(gx2 + offx, bx0, bx1),
+							clampi(gz2 + offz, bz0, bz1))
+						if _stamp_utility(uv, ucell, seg, zbase) != null:
+							utils_built += 1
 						continue
 					var wnode: Node3D = wp_scene.instantiate() as Node3D
 					if wnode == null:
@@ -5627,8 +5639,8 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 						wnode.rotation_degrees.y = float(uparts[1])
 					seg.add_child(wnode)
 					wedges += 1
-	if wedges > 0:
-		print("[em-pack]   %d wedge(s) from the map's utilities" % wedges)
+	if wedges > 0 or utils_built > 0:
+		print("[em-pack]   %d wedge(s) + %d other utility(ies) from the map's utility layer" % [wedges, utils_built])
 	print("[em-pack] %s · %s <- %s: %d verbatim + %d slid of %d, %d left behind, %d plinth(s)" % [
 		chapter, entry.get("pearl", ""), map_name, placed - slid, slid, bodies.size(), left, plinth_n])
 	# THE LEDGER (2026-08-21, Palle: "a page with the grid of each step") —
