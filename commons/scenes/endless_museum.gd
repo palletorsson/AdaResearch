@@ -3155,12 +3155,12 @@ func _death_build() -> void:
 	_death_veil = ColorRect.new()
 	_death_veil.name = "Veil"
 	_death_veil.color = Color(0, 0, 0, 0)
-	_death_veil.set_anchors_preset(Control.PRESET_FULL_RECT)
+	_death_veil.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_death_veil.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_death_layer.add_child(_death_veil)
 	_death_line = Label.new()
 	_death_line.name = "Line"
-	_death_line.set_anchors_preset(Control.PRESET_FULL_RECT)
+	_death_line.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_death_line.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_death_line.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	_death_line.add_theme_font_size_override("font_size", 34)
