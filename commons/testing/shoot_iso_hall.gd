@@ -39,9 +39,12 @@ func _run() -> void:
 	inst.set("start_chapter", chapter)
 	inst.set("start_map", map_name)
 	var ctl := FileAccess.open("res://ada_run/_trial_iso_control.json", FileAccess.WRITE)
-	# dollhouse ON: the walls cut to 2.4 m is exactly what makes a plan legible
+	# dollhouse ON: the walls cut to 2.4 m is exactly what makes a plan legible.
+	# OFF for --eye, and it must be off HERE and not only on the node: the
+	# museum re-reads this control while it runs, so a 1 written here turned
+	# the doll house back on and two "eye level" shots came back as plans.
 	ctl.store_string(JSON.stringify({"first_chapter": chapter, "first_map": map_name,
-		"dollhouse": 1, "grid_pack": 1}, " "))
+		"dollhouse": 0 if eye_row >= 0.0 else 1, "grid_pack": 1}, " "))
 	ctl.close()
 	get_root().add_child(inst)
 	await create_timer(3.0).timeout

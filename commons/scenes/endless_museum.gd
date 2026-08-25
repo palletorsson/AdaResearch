@@ -2959,6 +2959,82 @@ func _hazard_touched(body: Node3D, _entrance: Vector3) -> void:
 ## point"). One Area3D per hall with a shape per pool cell, at the pool
 ## floor: the museum's own death, which flashes and returns the walker to the
 ## last threshold instead of reloading the scene the way the grid's h: does.
+## WHAT STANDS IN THE POOL (2026-08-25, Palle: "there is still no transport
+## cube, rotate cube or scale cube"). They were built, seated and correct —
+## and invisible, because the fill is a red box at alpha 0.86 that rises to
+## 0.25 m under the deck, and every crossing stands INSIDE it. The simulation
+## halls already dodge this ("a hall filled to the brim would swallow the
+## simulation it exists to show"); a hall whose whole argument is three ways
+## across a pool needs the same courtesy. So: measure the crossings, and let
+## the fire stop under them. A pool with nothing in it still fills to the brim.
+##
+## Returns [{rect: Rect2i in cell space, bottom: float}] — a moving crossing
+## contributes the bounding rect of where it starts AND where it is going, so
+## the lane it travels is not a lane of fire.
+## The transform from an ancestor down to a node, walked by hand: global_
+## transform is only meaningful once BOTH are in the tree, and the fire is
+## built while the segment may not be. Exact either way.
+func _xform_under(anc: Node3D, n: Node3D) -> Transform3D:
+	var t := Transform3D.IDENTITY
+	var cur: Node = n
+	while cur != null and cur != anc:
+		if cur is Node3D:
+			t = (cur as Node3D).transform * t
+		cur = cur.get_parent()
+	return t
+
+
+func _pool_obstacles(seg: Node3D) -> Array:
+	var out: Array = []
+	for n_v in seg.find_children("Utility_*", "Node3D", true, false):
+		var n := n_v as Node3D
+		var box := AABB()
+		var first := true
+		for vi_v in n.find_children("*", "VisualInstance3D", true, false):
+			var vi := vi_v as VisualInstance3D
+			var ab: AABB = _xform_under(seg, vi) * vi.get_aabb()
+			box = ab if first else box.merge(ab)
+			first = false
+		if first:
+			continue
+		# THE BOX'S OWN CORNERS, not the node origin +/- half the size: a
+		# rotating plank's mesh is nowhere near centred on its node, and that
+		# assumption left one pool of three still filled to the brim.
+		var x0: float = box.position.x
+		var x1: float = box.end.x
+		var z0: float = box.position.z
+		var z1: float = box.end.z
+		# AT ITS LARGEST, not as first built: the scale cube measures 1 x 1 at
+		# this moment and will be 3 m across, and the seat that lowers every
+		# crossing runs on a timer that has not fired yet. Measuring a thing
+		# before it has happened put one pool of three under a brim-full fill.
+		var cur: Variant = n.get("current_scale")
+		var mx: Variant = n.get("max_scale")
+		if cur is float and mx is float and float(cur) > 0.01 and float(mx) > float(cur):
+			var grow: float = float(mx) / float(cur)
+			var mid_x: float = (x0 + x1) * 0.5
+			var mid_z: float = (z0 + z1) * 0.5
+			x0 = mid_x - (mid_x - x0) * grow
+			x1 = mid_x + (x1 - mid_x) * grow
+			z0 = mid_z - (mid_z - z0) * grow
+			z1 = mid_z + (z1 - mid_z) * grow
+		# a crossing that TRAVELS: take in where it is headed, so the lane it
+		# crosses is not a lane of fire
+		var tp: Variant = n.get("target_position")
+		var ip: Variant = n.get("initial_position")
+		if tp is Vector3 and ip is Vector3:
+			var d: Vector3 = (tp as Vector3) - (ip as Vector3)
+			x0 = minf(x0, x0 + d.x); x1 = maxf(x1, x1 + d.x)
+			z0 = minf(z0, z0 + d.z); z1 = maxf(z1, z1 + d.z)
+		var cx0: int = int(floor(x0 + 0.01))
+		var cx1: int = int(floor(x1 - 0.01))
+		var cz0: int = int(floor(z0 + 0.01))
+		var cz1: int = int(floor(z1 - 0.01))
+		out.append({"rect": Rect2i(cx0, cz0, maxi(1, cx1 - cx0 + 1), maxi(1, cz1 - cz0 + 1)),
+			"who": String(n.name)})
+	return out
+
+
 func _basin_fire(seg: Node3D, cells: Array, depth: float, top_y: float) -> void:
 	if cells.is_empty() or depth <= 0.0:
 		return
@@ -2980,9 +3056,28 @@ func _basin_fire(seg: Node3D, cells: Array, depth: float, top_y: float) -> void:
 	# hundred adjacent transparent boxes draw a hundred internal faces. Greedy
 	# rectangles turn 318 cells into a handful of slabs with no seams inside.
 	var rects: Array = _rect_pack(cells)
-	var hgt: float = top_y - floor_y
+	var obstacles: Array = _pool_obstacles(seg)
+	var lowered := 0
+	for o_dv in obstacles:
+		var od: Dictionary = o_dv
+		print("[em-basin]   crosses the water: %-18s cells %s" % [od["who"], str(od["rect"])])
 	for r_v in rects:
 		var r: Rect2i = r_v
+		# THE FILL STOPS UNDER WHATEVER IT WOULD HIDE. Never below floor + 0.5,
+		# or the pool has no fire in it at all and the death is invisible too.
+		# A BED, NOT A LAKE, wherever something crosses: fire at the bottom is
+		# what a pool with a way over it needs, and the measured height of the
+		# crossing cannot be trusted this early (see _pool_obstacles). A pool
+		# with nothing in it keeps the brim-full fill.
+		var my_top: float = top_y
+		for o_v in obstacles:
+			var o: Dictionary = o_v
+			if r.intersects(o["rect"] as Rect2i):
+				my_top = minf(my_top, floor_y + 0.6)
+		my_top = maxf(my_top, floor_y + 0.5)
+		if my_top < top_y - 0.01:
+			lowered += 1
+		var hgt: float = my_top - floor_y
 		var c := Vector3(float(r.position.x) + float(r.size.x) * 0.5,
 			floor_y + hgt * 0.5, float(r.position.y) + float(r.size.y) * 0.5)
 		var sz := Vector3(float(r.size.x) - 0.04, hgt, float(r.size.y) - 0.04)
@@ -3001,8 +3096,8 @@ func _basin_fire(seg: Node3D, cells: Array, depth: float, top_y: float) -> void:
 	var tw := area.create_tween().set_loops()
 	tw.tween_property(m_fire, "emission_energy_multiplier", 1.25, 1.1)
 	tw.tween_property(m_fire, "emission_energy_multiplier", 0.7, 0.9)
-	print("[em-basin] fire: %d cell(s) -> %d cube(s), %.1f m deep, top at %.2f" % [
-		cells.size(), rects.size(), hgt, top_y])
+	print("[em-basin] fire: %d cell(s) -> %d cube(s), top at %.2f (%d lowered under %d crossing(s))" % [
+		cells.size(), rects.size(), top_y, lowered, obstacles.size()])
 
 
 ## Greedy rectangles over a cell set: widest run first, then grown in z while

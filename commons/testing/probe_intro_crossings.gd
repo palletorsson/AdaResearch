@@ -71,6 +71,28 @@ func _run() -> void:
 					String(n2.get_meta("artifact_lookup_name")),
 					(n2 as Node3D).global_position.x, (n2 as Node3D).global_position.y,
 					(n2 as Node3D).global_position.z, box2.size.x, box2.size.y, box2.size.z])
+		# AND THE FIRE: the crossings were built, seated and correct for a
+		# whole day while standing INSIDE the fill — a red box at alpha 0.86
+		# rising to 0.25 m under the deck. A crossing inside the fire is a
+		# crossing nobody can see, so the fill's top belongs in this report.
+		var seen_fire: Dictionary = {}
+		for a_v in seg.find_children("*", "Area3D", true, false):
+			if not String((a_v as Node).name).begins_with("BasinFire"):
+				continue
+			for cs_v in (a_v as Area3D).get_children():
+				var cs := cs_v as CollisionShape3D
+				if cs == null:
+					continue
+				var bs := cs.shape as BoxShape3D
+				if bs == null:
+					continue
+				var key := str(cs.position)
+				if seen_fire.has(key):
+					continue
+				seen_fire[key] = true
+				found.append("FIRE  at (%5.1f,%5.1f,%5.1f)  size %4.1f x %4.1f x %4.1f  TOP %5.2f" % [
+					cs.position.x, cs.position.y, cs.position.z,
+					bs.size.x, bs.size.y, bs.size.z, cs.position.y + bs.size.y * 0.5])
 		found.sort()
 		report += "  %d utility node(s) standing in the hall:\n" % found.size()
 		for f in found:
