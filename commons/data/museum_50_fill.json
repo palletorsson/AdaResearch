@@ -1,0 +1,4582 @@
+{
+ "_readme": "A PROPOSAL. One spine sequence per room, cycling in spine order, greedy by tightest fit. Written by tools/match_slots.py --fill-all. Nothing here is placed in any map.",
+ "rooms": [
+  {
+   "id": "m01",
+   "pattern": "louisiana-pavilion-chain",
+   "variant": "enfilade",
+   "sequence": "primitives",
+   "pool": 73,
+   "filled": 14,
+   "slots": 14,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "diamonds",
+     "waste": 16,
+     "kind": "hero",
+     "x": 4,
+     "z": 1,
+     "others": 58
+    },
+    {
+     "slot": 1,
+     "token": "combine_portals",
+     "waste": 13,
+     "kind": "run",
+     "x": 3,
+     "z": 23,
+     "others": 64
+    },
+    {
+     "slot": 2,
+     "token": "perspective_lines",
+     "waste": 5,
+     "kind": "run",
+     "x": 1,
+     "z": 14,
+     "others": 55
+    },
+    {
+     "slot": 3,
+     "token": "platonic_grabbables",
+     "waste": 8,
+     "kind": "run",
+     "x": 1,
+     "z": 10,
+     "others": 63
+    },
+    {
+     "slot": 4,
+     "token": "line_builder_3d",
+     "waste": 5,
+     "kind": "run",
+     "x": 6,
+     "z": 19,
+     "others": 54
+    },
+    {
+     "slot": 5,
+     "token": "pedagogical_sketchbook",
+     "waste": 4,
+     "kind": "run",
+     "x": 2,
+     "z": 8,
+     "others": 53
+    },
+    {
+     "slot": 6,
+     "token": "pythagorean_triangle_angles",
+     "waste": 4,
+     "kind": "run",
+     "x": 5,
+     "z": 17,
+     "others": 52
+    },
+    {
+     "slot": 7,
+     "token": "subtraction_suite",
+     "waste": 4,
+     "kind": "run",
+     "x": 1,
+     "z": 28,
+     "others": 51
+    },
+    {
+     "slot": 8,
+     "token": "dgrid",
+     "waste": 4,
+     "kind": "run",
+     "x": 2,
+     "z": 26,
+     "others": 50
+    },
+    {
+     "slot": 9,
+     "token": "interactivetriangle",
+     "waste": 4,
+     "kind": "run",
+     "x": 1,
+     "z": 32,
+     "others": 49
+    },
+    {
+     "slot": 10,
+     "token": "CoordinateSystem3M",
+     "waste": 11,
+     "kind": "run",
+     "x": 9,
+     "z": 28,
+     "others": 69
+    },
+    {
+     "slot": 11,
+     "token": "diamondtoruscollection",
+     "waste": 11,
+     "kind": "run",
+     "x": 9,
+     "z": 32,
+     "others": 68
+    },
+    {
+     "slot": 12,
+     "token": "durer_scene",
+     "waste": 6,
+     "kind": "run",
+     "x": 13,
+     "z": 10,
+     "others": 66
+    },
+    {
+     "slot": 13,
+     "token": "lshape",
+     "waste": 3,
+     "kind": "run",
+     "x": 1,
+     "z": 1,
+     "others": 48
+    }
+   ]
+  },
+  {
+   "id": "m02",
+   "pattern": "caracalla-thermal-axis",
+   "variant": "cabinet",
+   "sequence": "transformation",
+   "pool": 55,
+   "filled": 18,
+   "slots": 18,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "attractorsphere",
+     "waste": 6,
+     "kind": "run",
+     "x": 1,
+     "z": 1,
+     "others": 50
+    },
+    {
+     "slot": 1,
+     "token": "spin",
+     "waste": 6,
+     "kind": "run",
+     "x": 13,
+     "z": 1,
+     "others": 49
+    },
+    {
+     "slot": 2,
+     "token": "sweeper_block",
+     "waste": 6,
+     "kind": "run",
+     "x": 1,
+     "z": 26,
+     "others": 48
+    },
+    {
+     "slot": 3,
+     "token": "example_2_5_fluid_resistance_vr",
+     "waste": 8,
+     "kind": "run",
+     "x": 13,
+     "z": 26,
+     "others": 47
+    },
+    {
+     "slot": 4,
+     "token": "VectorSubtraction",
+     "waste": 1,
+     "kind": "run",
+     "x": 1,
+     "z": 8,
+     "others": 42
+    },
+    {
+     "slot": 5,
+     "token": "chair_assembly_puzzle",
+     "waste": 1,
+     "kind": "run",
+     "x": 11,
+     "z": 8,
+     "others": 41
+    },
+    {
+     "slot": 6,
+     "token": "example_1_5_vector_magnitude_vr",
+     "waste": 1,
+     "kind": "run",
+     "x": 4,
+     "z": 9,
+     "others": 40
+    },
+    {
+     "slot": 7,
+     "token": "example_2_2_forces_mass_variation_vr",
+     "waste": 1,
+     "kind": "run",
+     "x": 10,
+     "z": 9,
+     "others": 39
+    },
+    {
+     "slot": 8,
+     "token": "example_2_3_gravity_scaled_by_mass_vr",
+     "waste": 1,
+     "kind": "run",
+     "x": 4,
+     "z": 21,
+     "others": 38
+    },
+    {
+     "slot": 9,
+     "token": "example_2_6_single_attractor_vr",
+     "waste": 1,
+     "kind": "run",
+     "x": 10,
+     "z": 21,
+     "others": 37
+    },
+    {
+     "slot": 10,
+     "token": "example_2_7_multiple_attractors_vr",
+     "waste": 1,
+     "kind": "run",
+     "x": 1,
+     "z": 24,
+     "others": 36
+    },
+    {
+     "slot": 11,
+     "token": "example_2_8_two_body_attraction_vr",
+     "waste": 1,
+     "kind": "run",
+     "x": 11,
+     "z": 24,
+     "others": 35
+    },
+    {
+     "slot": 12,
+     "token": "translation_cube_demo",
+     "waste": 0,
+     "kind": "run",
+     "x": 3,
+     "z": 14,
+     "others": 46
+    },
+    {
+     "slot": 13,
+     "token": "VectorAddition",
+     "waste": 2,
+     "kind": "run",
+     "x": 11,
+     "z": 14,
+     "others": 45
+    },
+    {
+     "slot": 14,
+     "token": "VectorBasics",
+     "waste": 2,
+     "kind": "run",
+     "x": 3,
+     "z": 17,
+     "others": 44
+    },
+    {
+     "slot": 15,
+     "token": "VectorCrossProduct",
+     "waste": 2,
+     "kind": "run",
+     "x": 11,
+     "z": 17,
+     "others": 43
+    },
+    {
+     "slot": 16,
+     "token": "balance_puzzle",
+     "waste": 0,
+     "kind": "alcove",
+     "x": 2,
+     "z": 16,
+     "others": 29
+    },
+    {
+     "slot": 17,
+     "token": "boolean_tunnel",
+     "waste": 0,
+     "kind": "alcove",
+     "x": 12,
+     "z": 16,
+     "others": 28
+    }
+   ]
+  },
+  {
+   "id": "m03",
+   "pattern": "labrouste-stack-hall",
+   "variant": "free_plan",
+   "sequence": "color",
+   "pool": 44,
+   "filled": 7,
+   "slots": 7,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "RotatingLaser",
+     "waste": 0,
+     "kind": "hero",
+     "x": 4,
+     "z": 1,
+     "others": 34
+    },
+    {
+     "slot": 1,
+     "token": "MetamerismLab",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 9,
+     "z": 2,
+     "others": 19
+    },
+    {
+     "slot": 2,
+     "token": "grab_rainbow_stick",
+     "waste": 2,
+     "kind": "plinth",
+     "x": 3,
+     "z": 30,
+     "others": 18
+    },
+    {
+     "slot": 3,
+     "token": "grabcolorcollection",
+     "waste": 2,
+     "kind": "plinth",
+     "x": 5,
+     "z": 30,
+     "others": 17
+    },
+    {
+     "slot": 4,
+     "token": "hand_color_controller",
+     "waste": 2,
+     "kind": "plinth",
+     "x": 9,
+     "z": 30,
+     "others": 16
+    },
+    {
+     "slot": 5,
+     "token": "nail_color_controller",
+     "waste": 2,
+     "kind": "plinth",
+     "x": 11,
+     "z": 30,
+     "others": 15
+    },
+    {
+     "slot": 6,
+     "token": "SpectrumVisualizer",
+     "waste": 3,
+     "kind": "plinth",
+     "x": 7,
+     "z": 31,
+     "others": 14
+    }
+   ]
+  },
+  {
+   "id": "m04",
+   "pattern": "mengoni-glazed-thoroughfare",
+   "variant": "field",
+   "sequence": "change",
+   "pool": 2,
+   "filled": 2,
+   "slots": 19,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "riemann_sum_workbench",
+     "waste": 21,
+     "kind": "plinth",
+     "x": 8,
+     "z": 14,
+     "others": 1
+    },
+    {
+     "slot": 1,
+     "token": "tangent_slope_workbench",
+     "waste": 21,
+     "kind": "plinth",
+     "x": 5,
+     "z": 19,
+     "others": 0
+    },
+    {
+     "slot": 2,
+     "token": null,
+     "waste": null,
+     "kind": "plinth",
+     "x": 6,
+     "z": 2
+    },
+    {
+     "slot": 3,
+     "token": null,
+     "waste": null,
+     "kind": "plinth",
+     "x": 6,
+     "z": 6
+    },
+    {
+     "slot": 4,
+     "token": null,
+     "waste": null,
+     "kind": "plinth",
+     "x": 6,
+     "z": 10
+    },
+    {
+     "slot": 5,
+     "token": null,
+     "waste": null,
+     "kind": "plinth",
+     "x": 3,
+     "z": 15
+    },
+    {
+     "slot": 6,
+     "token": null,
+     "waste": null,
+     "kind": "plinth",
+     "x": 6,
+     "z": 24
+    },
+    {
+     "slot": 7,
+     "token": null,
+     "waste": null,
+     "kind": "plinth",
+     "x": 6,
+     "z": 28
+    },
+    {
+     "slot": 8,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 10,
+     "z": 12
+    },
+    {
+     "slot": 9,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 11,
+     "z": 13
+    },
+    {
+     "slot": 10,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 7,
+     "z": 15
+    },
+    {
+     "slot": 11,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 1,
+     "z": 16
+    },
+    {
+     "slot": 12,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 13,
+     "z": 16
+    },
+    {
+     "slot": 13,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 2,
+     "z": 18
+    },
+    {
+     "slot": 14,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 3,
+     "z": 19
+    },
+    {
+     "slot": 15,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 10,
+     "z": 19
+    },
+    {
+     "slot": 16,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 11,
+     "z": 19
+    },
+    {
+     "slot": 17,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 4,
+     "z": 20
+    },
+    {
+     "slot": 18,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 10,
+     "z": 20
+    }
+   ]
+  },
+  {
+   "id": "m05",
+   "pattern": "mezquita-hypostyle",
+   "variant": "hypostyle",
+   "sequence": "forces",
+   "pool": 135,
+   "filled": 20,
+   "slots": 20,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "VectorFieldFlow",
+     "waste": 0,
+     "kind": "pair",
+     "x": 9,
+     "z": 15,
+     "others": 116
+    },
+    {
+     "slot": 1,
+     "token": "calder_mobile",
+     "waste": 0,
+     "kind": "pair",
+     "x": 9,
+     "z": 23,
+     "others": 115
+    },
+    {
+     "slot": 2,
+     "token": "calder_object_mobile",
+     "waste": 0,
+     "kind": "field",
+     "x": 5,
+     "z": 11,
+     "others": 114
+    },
+    {
+     "slot": 3,
+     "token": "centripetal_bench",
+     "waste": 0,
+     "kind": "field",
+     "x": 13,
+     "z": 19,
+     "others": 113
+    },
+    {
+     "slot": 4,
+     "token": "basis_vectors_rig",
+     "waste": 0,
+     "kind": "field",
+     "x": 3,
+     "z": 27,
+     "others": 72
+    },
+    {
+     "slot": 5,
+     "token": "ForceMagnitudeDemo",
+     "waste": 0,
+     "kind": "field",
+     "x": 7,
+     "z": 1,
+     "others": 27
+    },
+    {
+     "slot": 6,
+     "token": "VectorTorque",
+     "waste": 0,
+     "kind": "field",
+     "x": 9,
+     "z": 1,
+     "others": 26
+    },
+    {
+     "slot": 7,
+     "token": "ball_dropper",
+     "waste": 0,
+     "kind": "field",
+     "x": 3,
+     "z": 3,
+     "others": 25
+    },
+    {
+     "slot": 8,
+     "token": "centripetal_force_demo",
+     "waste": 0,
+     "kind": "field",
+     "x": 5,
+     "z": 3,
+     "others": 24
+    },
+    {
+     "slot": 9,
+     "token": "chaos_attractor",
+     "waste": 0,
+     "kind": "field",
+     "x": 7,
+     "z": 3,
+     "others": 23
+    },
+    {
+     "slot": 10,
+     "token": "combined_forces_demo",
+     "waste": 0,
+     "kind": "field",
+     "x": 9,
+     "z": 3,
+     "others": 22
+    },
+    {
+     "slot": 11,
+     "token": "coupled_pendulums",
+     "waste": 0,
+     "kind": "field",
+     "x": 13,
+     "z": 3,
+     "others": 21
+    },
+    {
+     "slot": 12,
+     "token": "dark_sphere",
+     "waste": 0,
+     "kind": "field",
+     "x": 3,
+     "z": 5,
+     "others": 20
+    },
+    {
+     "slot": 13,
+     "token": "drag_coefficient_wind_tunnel",
+     "waste": 0,
+     "kind": "field",
+     "x": 5,
+     "z": 5,
+     "others": 19
+    },
+    {
+     "slot": 14,
+     "token": "example_1_9_motion_101_velocity_and_random_acceleration_vr",
+     "waste": 0,
+     "kind": "field",
+     "x": 7,
+     "z": 5,
+     "others": 18
+    },
+    {
+     "slot": 15,
+     "token": "example_3_3_pointing_in_the_direction_of_motion_vr",
+     "waste": 0,
+     "kind": "field",
+     "x": 9,
+     "z": 5,
+     "others": 17
+    },
+    {
+     "slot": 16,
+     "token": "exercise_1_3_solution_3_d_bouncing_ball_vr",
+     "waste": 0,
+     "kind": "field",
+     "x": 11,
+     "z": 5,
+     "others": 16
+    },
+    {
+     "slot": 17,
+     "token": "exercise_1_5_solution_accelerate_and_decelerate_vr",
+     "waste": 0,
+     "kind": "field",
+     "x": 13,
+     "z": 5,
+     "others": 15
+    },
+    {
+     "slot": 18,
+     "token": "exercise_1_8_solution_attraction_magnitude_vr",
+     "waste": 0,
+     "kind": "field",
+     "x": 3,
+     "z": 7,
+     "others": 14
+    },
+    {
+     "slot": 19,
+     "token": "firework_launcher",
+     "waste": 0,
+     "kind": "field",
+     "x": 5,
+     "z": 7,
+     "others": 13
+    }
+   ]
+  },
+  {
+   "id": "m06",
+   "pattern": "castelvecchio-endstopped-enfilade",
+   "variant": "crypt",
+   "sequence": "formfinding",
+   "pool": 0,
+   "filled": 0,
+   "slots": 5,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": null,
+     "waste": null,
+     "kind": "pair",
+     "x": 6,
+     "z": 1
+    },
+    {
+     "slot": 1,
+     "token": null,
+     "waste": null,
+     "kind": "pair",
+     "x": 6,
+     "z": 6
+    },
+    {
+     "slot": 2,
+     "token": null,
+     "waste": null,
+     "kind": "pair",
+     "x": 6,
+     "z": 11
+    },
+    {
+     "slot": 3,
+     "token": null,
+     "waste": null,
+     "kind": "pair",
+     "x": 6,
+     "z": 16
+    },
+    {
+     "slot": 4,
+     "token": null,
+     "waste": null,
+     "kind": "pair",
+     "x": 6,
+     "z": 21
+    }
+   ]
+  },
+  {
+   "id": "m07",
+   "pattern": "castelvecchio-endstop-pinch",
+   "variant": "drum",
+   "sequence": "wavefunctions",
+   "pool": 105,
+   "filled": 1,
+   "slots": 1,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "OscillationCurve",
+     "waste": 7,
+     "kind": "hero",
+     "x": 1,
+     "z": 1,
+     "others": 83
+    }
+   ]
+  },
+  {
+   "id": "m08",
+   "pattern": "katsura-miegakure-circuit",
+   "variant": "enfilade",
+   "sequence": "randomness",
+   "pool": 149,
+   "filled": 14,
+   "slots": 14,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "RotateGridCubes",
+     "waste": 0,
+     "kind": "hero",
+     "x": 5,
+     "z": 1,
+     "others": 133
+    },
+    {
+     "slot": 1,
+     "token": "nature_system_demo",
+     "waste": 0,
+     "kind": "run",
+     "x": 13,
+     "z": 5,
+     "others": 85
+    },
+    {
+     "slot": 2,
+     "token": "random_walk_collection",
+     "waste": 0,
+     "kind": "run",
+     "x": 13,
+     "z": 22,
+     "others": 84
+    },
+    {
+     "slot": 3,
+     "token": "2d_in_3d_randomness_vis",
+     "waste": 3,
+     "kind": "run",
+     "x": 10,
+     "z": 11,
+     "others": 83
+    },
+    {
+     "slot": 4,
+     "token": "GaussianBlurShader",
+     "waste": 3,
+     "kind": "run",
+     "x": 13,
+     "z": 15,
+     "others": 82
+    },
+    {
+     "slot": 5,
+     "token": "RandomGaussianTexture",
+     "waste": 3,
+     "kind": "run",
+     "x": 10,
+     "z": 18,
+     "others": 81
+    },
+    {
+     "slot": 6,
+     "token": "random_gaussian_texture",
+     "waste": 2,
+     "kind": "run",
+     "x": 10,
+     "z": 5,
+     "others": 80
+    },
+    {
+     "slot": 7,
+     "token": "random_number_book_page_1955",
+     "waste": 2,
+     "kind": "run",
+     "x": 2,
+     "z": 11,
+     "others": 79
+    },
+    {
+     "slot": 8,
+     "token": "bar_array",
+     "waste": 3,
+     "kind": "run",
+     "x": 1,
+     "z": 19,
+     "others": 78
+    },
+    {
+     "slot": 9,
+     "token": "blue_noise_bench",
+     "waste": 2,
+     "kind": "run",
+     "x": 1,
+     "z": 3,
+     "others": 77
+    },
+    {
+     "slot": 10,
+     "token": "blue_noise_toy",
+     "waste": 2,
+     "kind": "run",
+     "x": 1,
+     "z": 8,
+     "others": 76
+    },
+    {
+     "slot": 11,
+     "token": "dna_sprout",
+     "waste": 2,
+     "kind": "run",
+     "x": 11,
+     "z": 16,
+     "others": 75
+    },
+    {
+     "slot": 12,
+     "token": "noise_dunes_bench",
+     "waste": 2,
+     "kind": "run",
+     "x": 11,
+     "z": 23,
+     "others": 74
+    },
+    {
+     "slot": 13,
+     "token": "noise_height_toy",
+     "waste": 1,
+     "kind": "run",
+     "x": 2,
+     "z": 6,
+     "others": 73
+    }
+   ]
+  },
+  {
+   "id": "m09",
+   "pattern": "castelvecchio-pinch-v2",
+   "variant": "cabinet",
+   "sequence": "noise",
+   "pool": 41,
+   "filled": 18,
+   "slots": 18,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "RandomGaussianTexture",
+     "waste": 7,
+     "kind": "run",
+     "x": 1,
+     "z": 27,
+     "others": 21
+    },
+    {
+     "slot": 1,
+     "token": "shader_noise_space",
+     "waste": 2,
+     "kind": "run",
+     "x": 1,
+     "z": 21,
+     "others": 24
+    },
+    {
+     "slot": 2,
+     "token": "configurable_portal",
+     "waste": 3,
+     "kind": "run",
+     "x": 1,
+     "z": 4,
+     "others": 20
+    },
+    {
+     "slot": 3,
+     "token": "noise_mixer",
+     "waste": 3,
+     "kind": "run",
+     "x": 9,
+     "z": 4,
+     "others": 19
+    },
+    {
+     "slot": 4,
+     "token": "noisetext",
+     "waste": 3,
+     "kind": "run",
+     "x": 1,
+     "z": 9,
+     "others": 18
+    },
+    {
+     "slot": 5,
+     "token": "randompoint",
+     "waste": 3,
+     "kind": "run",
+     "x": 9,
+     "z": 9,
+     "others": 17
+    },
+    {
+     "slot": 6,
+     "token": "randompoints",
+     "waste": 3,
+     "kind": "run",
+     "x": 1,
+     "z": 14,
+     "others": 16
+    },
+    {
+     "slot": 7,
+     "token": "curl_noise_particles",
+     "waste": 4,
+     "kind": "run",
+     "x": 9,
+     "z": 14,
+     "others": 15
+    },
+    {
+     "slot": 8,
+     "token": "dark_sphere",
+     "waste": 4,
+     "kind": "run",
+     "x": 1,
+     "z": 19,
+     "others": 14
+    },
+    {
+     "slot": 9,
+     "token": "living_paper_noise_octaves",
+     "waste": 4,
+     "kind": "run",
+     "x": 9,
+     "z": 19,
+     "others": 13
+    },
+    {
+     "slot": 10,
+     "token": "living_paper_perlin",
+     "waste": 4,
+     "kind": "run",
+     "x": 9,
+     "z": 21,
+     "others": 12
+    },
+    {
+     "slot": 11,
+     "token": "VoxelNoiseROIs",
+     "waste": 4,
+     "kind": "run",
+     "x": 13,
+     "z": 27,
+     "others": 23
+    },
+    {
+     "slot": 12,
+     "token": "living_paper_voronoi",
+     "waste": 3,
+     "kind": "run",
+     "x": 10,
+     "z": 22,
+     "others": 11
+    },
+    {
+     "slot": 13,
+     "token": "MeltingBerniniScene",
+     "waste": 0,
+     "kind": "run",
+     "x": 3,
+     "z": 1,
+     "others": 37
+    },
+    {
+     "slot": 14,
+     "token": "NoiseColors3D",
+     "waste": 0,
+     "kind": "run",
+     "x": 9,
+     "z": 1,
+     "others": 36
+    },
+    {
+     "slot": 15,
+     "token": "VectorFieldFlow",
+     "waste": 0,
+     "kind": "run",
+     "x": 3,
+     "z": 6,
+     "others": 35
+    },
+    {
+     "slot": 16,
+     "token": "WhiteNoiseGallery",
+     "waste": 0,
+     "kind": "run",
+     "x": 9,
+     "z": 6,
+     "others": 34
+    },
+    {
+     "slot": 17,
+     "token": "neon_wave_grid",
+     "waste": 0,
+     "kind": "run",
+     "x": 3,
+     "z": 11,
+     "others": 33
+    }
+   ]
+  },
+  {
+   "id": "m10",
+   "pattern": "grande-galerie-axial",
+   "variant": "free_plan",
+   "sequence": "cellularautomata",
+   "pool": 72,
+   "filled": 9,
+   "slots": 9,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "ca_columns",
+     "waste": 16,
+     "kind": "hero",
+     "x": 3,
+     "z": 1,
+     "others": 67
+    },
+    {
+     "slot": 1,
+     "token": "ca_conway_city",
+     "waste": 16,
+     "kind": "plinth",
+     "x": 3,
+     "z": 6,
+     "others": 66
+    },
+    {
+     "slot": 2,
+     "token": "ca_rule_comparison",
+     "waste": 16,
+     "kind": "plinth",
+     "x": 3,
+     "z": 14,
+     "others": 65
+    },
+    {
+     "slot": 3,
+     "token": "ca_texture_bench",
+     "waste": 16,
+     "kind": "plinth",
+     "x": 5,
+     "z": 19,
+     "others": 64
+    },
+    {
+     "slot": 4,
+     "token": "ca_texture_wall",
+     "waste": 16,
+     "kind": "plinth",
+     "x": 4,
+     "z": 24,
+     "others": 63
+    },
+    {
+     "slot": 5,
+     "token": "cave_bench",
+     "waste": 7,
+     "kind": "plinth",
+     "x": 4,
+     "z": 29,
+     "others": 62
+    },
+    {
+     "slot": 6,
+     "token": "cellular_automata_3d_tree",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 8,
+     "z": 1,
+     "others": 61
+    },
+    {
+     "slot": 7,
+     "token": "crossway_ca",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 8,
+     "z": 5,
+     "others": 60
+    },
+    {
+     "slot": 8,
+     "token": "edge_of_chaos_bench",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 8,
+     "z": 9,
+     "others": 59
+    }
+   ]
+  },
+  {
+   "id": "m11",
+   "pattern": "pompidou-plateau-libre",
+   "variant": "field",
+   "sequence": "fractals",
+   "pool": 87,
+   "filled": 24,
+   "slots": 24,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "attractor_bench",
+     "waste": 16,
+     "kind": "plinth",
+     "x": 4,
+     "z": 2,
+     "others": 82
+    },
+    {
+     "slot": 1,
+     "token": "attractor_room",
+     "waste": 16,
+     "kind": "plinth",
+     "x": 3,
+     "z": 7,
+     "others": 81
+    },
+    {
+     "slot": 2,
+     "token": "cantor_set",
+     "waste": 16,
+     "kind": "plinth",
+     "x": 3,
+     "z": 18,
+     "others": 80
+    },
+    {
+     "slot": 3,
+     "token": "dimension_room",
+     "waste": 16,
+     "kind": "plinth",
+     "x": 4,
+     "z": 23,
+     "others": 79
+    },
+    {
+     "slot": 4,
+     "token": "escape_time_room",
+     "waste": 16,
+     "kind": "plinth",
+     "x": 3,
+     "z": 28,
+     "others": 78
+    },
+    {
+     "slot": 5,
+     "token": "fibonacci_pagoda",
+     "waste": 7,
+     "kind": "plinth",
+     "x": 5,
+     "z": 12,
+     "others": 77
+    },
+    {
+     "slot": 6,
+     "token": "fractal_furniture_room",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 8,
+     "z": 7,
+     "others": 70
+    },
+    {
+     "slot": 7,
+     "token": "fractal_skyline_room",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 8,
+     "z": 16,
+     "others": 69
+    },
+    {
+     "slot": 8,
+     "token": "fractal_truss_tower",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 8,
+     "z": 19,
+     "others": 68
+    },
+    {
+     "slot": 9,
+     "token": "ifs_room",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 8,
+     "z": 28,
+     "others": 67
+    },
+    {
+     "slot": 10,
+     "token": "julia_set",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 8,
+     "z": 31,
+     "others": 66
+    },
+    {
+     "slot": 11,
+     "token": "koch_curve",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 5,
+     "z": 33,
+     "others": 65
+    },
+    {
+     "slot": 12,
+     "token": "attractor_plotter",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 9,
+     "z": 2,
+     "others": 59
+    },
+    {
+     "slot": 13,
+     "token": "cantor_bench",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 9,
+     "z": 10,
+     "others": 58
+    },
+    {
+     "slot": 14,
+     "token": "cellular_automata_3d_stacked",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 4,
+     "z": 16,
+     "others": 57
+    },
+    {
+     "slot": 15,
+     "token": "chaos_game_tool",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 9,
+     "z": 22,
+     "others": 56
+    },
+    {
+     "slot": 16,
+     "token": "dimension_meter",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 3,
+     "z": 33,
+     "others": 55
+    },
+    {
+     "slot": 17,
+     "token": "dla_bench",
+     "waste": 0,
+     "kind": "field",
+     "x": 2,
+     "z": 3,
+     "others": 54
+    },
+    {
+     "slot": 18,
+     "token": "dla_grower",
+     "waste": 0,
+     "kind": "field",
+     "x": 9,
+     "z": 14,
+     "others": 53
+    },
+    {
+     "slot": 19,
+     "token": "evolutionary_algorithms",
+     "waste": 0,
+     "kind": "field",
+     "x": 2,
+     "z": 23,
+     "others": 52
+    },
+    {
+     "slot": 20,
+     "token": "fractal_antenna",
+     "waste": 0,
+     "kind": "field",
+     "x": 10,
+     "z": 25,
+     "others": 51
+    },
+    {
+     "slot": 21,
+     "token": "cube_cabin",
+     "waste": 0,
+     "kind": "field",
+     "x": 9,
+     "z": 4,
+     "others": 21
+    },
+    {
+     "slot": 22,
+     "token": "cube_desk",
+     "waste": 0,
+     "kind": "field",
+     "x": 10,
+     "z": 4,
+     "others": 20
+    },
+    {
+     "slot": 23,
+     "token": "cube_staircase",
+     "waste": 0,
+     "kind": "field",
+     "x": 2,
+     "z": 5,
+     "others": 19
+    }
+   ]
+  },
+  {
+   "id": "m12",
+   "pattern": "mesdag-panorama-drum",
+   "variant": "hypostyle",
+   "sequence": "lsystems",
+   "pool": 75,
+   "filled": 14,
+   "slots": 14,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "axiom_bench",
+     "waste": 0,
+     "kind": "pair",
+     "x": 7,
+     "z": 14,
+     "others": 44
+    },
+    {
+     "slot": 1,
+     "token": "AnimatedTree",
+     "waste": 0,
+     "kind": "field",
+     "x": 4,
+     "z": 11,
+     "others": 15
+    },
+    {
+     "slot": 2,
+     "token": "Hilbert3D",
+     "waste": 0,
+     "kind": "field",
+     "x": 4,
+     "z": 12,
+     "others": 14
+    },
+    {
+     "slot": 3,
+     "token": "branching_coral",
+     "waste": 0,
+     "kind": "field",
+     "x": 4,
+     "z": 13,
+     "others": 13
+    },
+    {
+     "slot": 4,
+     "token": "dark_sphere",
+     "waste": 0,
+     "kind": "field",
+     "x": 5,
+     "z": 13,
+     "others": 12
+    },
+    {
+     "slot": 5,
+     "token": "fractal_lsystem_string",
+     "waste": 0,
+     "kind": "field",
+     "x": 6,
+     "z": 13,
+     "others": 11
+    },
+    {
+     "slot": 6,
+     "token": "living_paper_dragon",
+     "waste": 0,
+     "kind": "field",
+     "x": 6,
+     "z": 16,
+     "others": 10
+    },
+    {
+     "slot": 7,
+     "token": "living_paper_fern",
+     "waste": 0,
+     "kind": "field",
+     "x": 7,
+     "z": 16,
+     "others": 9
+    },
+    {
+     "slot": 8,
+     "token": "living_paper_tree",
+     "waste": 0,
+     "kind": "field",
+     "x": 8,
+     "z": 16,
+     "others": 8
+    },
+    {
+     "slot": 9,
+     "token": "lsystem_dungeon",
+     "waste": 0,
+     "kind": "field",
+     "x": 8,
+     "z": 17,
+     "others": 7
+    },
+    {
+     "slot": 10,
+     "token": "lsystem_tree",
+     "waste": 0,
+     "kind": "field",
+     "x": 9,
+     "z": 17,
+     "others": 6
+    },
+    {
+     "slot": 11,
+     "token": "mesh_grammar_blooming_bulge",
+     "waste": 0,
+     "kind": "field",
+     "x": 10,
+     "z": 17,
+     "others": 5
+    },
+    {
+     "slot": 12,
+     "token": "mesh_grammar_branching_coral",
+     "waste": 0,
+     "kind": "field",
+     "x": 10,
+     "z": 18,
+     "others": 4
+    },
+    {
+     "slot": 13,
+     "token": "mesh_grammar_coral_fingers",
+     "waste": 0,
+     "kind": "field",
+     "x": 10,
+     "z": 19,
+     "others": 3
+    }
+   ]
+  },
+  {
+   "id": "m13",
+   "pattern": "uffizi-spine-enfilade",
+   "variant": "crypt",
+   "sequence": "proceduralgeneration",
+   "pool": 67,
+   "filled": 4,
+   "slots": 4,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "array_visualizer",
+     "waste": 0,
+     "kind": "alcove",
+     "x": 13,
+     "z": 28,
+     "others": 19
+    },
+    {
+     "slot": 1,
+     "token": "caverandomwalk",
+     "waste": 0,
+     "kind": "pair",
+     "x": 6,
+     "z": 3,
+     "others": 60
+    },
+    {
+     "slot": 2,
+     "token": "bsp_bench",
+     "waste": 0,
+     "kind": "pair",
+     "x": 8,
+     "z": 12,
+     "others": 43
+    },
+    {
+     "slot": 3,
+     "token": "bsp_floorplan_tool",
+     "waste": 0,
+     "kind": "pair",
+     "x": 8,
+     "z": 19,
+     "others": 42
+    }
+   ]
+  },
+  {
+   "id": "m14",
+   "pattern": "guggenheim-serpentine",
+   "variant": "drum",
+   "sequence": "softbodies",
+   "pool": 77,
+   "filled": 1,
+   "slots": 1,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "branching_growth_algorithm",
+     "waste": 9,
+     "kind": "hero",
+     "x": 1,
+     "z": 24,
+     "others": 76
+    }
+   ]
+  },
+  {
+   "id": "m15",
+   "pattern": "sainsbury-false-perspective-enfilade",
+   "variant": "enfilade",
+   "sequence": "isosurfaces",
+   "pool": 31,
+   "filled": 14,
+   "slots": 14,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "GyroidDemo",
+     "waste": 16,
+     "kind": "hero",
+     "x": 1,
+     "z": 1,
+     "others": 25
+    },
+    {
+     "slot": 1,
+     "token": "gyroid_demo",
+     "waste": 16,
+     "kind": "run",
+     "x": 13,
+     "z": 1,
+     "others": 25
+    },
+    {
+     "slot": 2,
+     "token": "implicit_surface_modeling",
+     "waste": 11,
+     "kind": "run",
+     "x": 5,
+     "z": 10,
+     "others": 24
+    },
+    {
+     "slot": 3,
+     "token": "mc_sculpt_vr",
+     "waste": 4,
+     "kind": "run",
+     "x": 13,
+     "z": 7,
+     "others": 18
+    },
+    {
+     "slot": 4,
+     "token": "portal",
+     "waste": 8,
+     "kind": "run",
+     "x": 1,
+     "z": 13,
+     "others": 17
+    },
+    {
+     "slot": 5,
+     "token": "animated_noise_explorer",
+     "waste": 9,
+     "kind": "run",
+     "x": 1,
+     "z": 19,
+     "others": 16
+    },
+    {
+     "slot": 6,
+     "token": "dark_sphere",
+     "waste": 9,
+     "kind": "run",
+     "x": 13,
+     "z": 19,
+     "others": 15
+    },
+    {
+     "slot": 7,
+     "token": "marchingcave",
+     "waste": 9,
+     "kind": "run",
+     "x": 1,
+     "z": 25,
+     "others": 14
+    },
+    {
+     "slot": 8,
+     "token": "marchingcubes_cave",
+     "waste": 9,
+     "kind": "run",
+     "x": 9,
+     "z": 25,
+     "others": 13
+    },
+    {
+     "slot": 9,
+     "token": "marchingcubes_flat_landscape",
+     "waste": 4,
+     "kind": "run",
+     "x": 1,
+     "z": 7,
+     "others": 12
+    },
+    {
+     "slot": 10,
+     "token": "marchingcubes_inside_cave",
+     "waste": 4,
+     "kind": "run",
+     "x": 13,
+     "z": 13,
+     "others": 11
+    },
+    {
+     "slot": 11,
+     "token": "marchingcubes_voxel_noise_demo",
+     "waste": 3,
+     "kind": "run",
+     "x": 10,
+     "z": 28,
+     "others": 23
+    },
+    {
+     "slot": 12,
+     "token": "metaball_world",
+     "waste": 3,
+     "kind": "run",
+     "x": 9,
+     "z": 6,
+     "others": 22
+    },
+    {
+     "slot": 13,
+     "token": "metaballs",
+     "waste": 3,
+     "kind": "run",
+     "x": 9,
+     "z": 15,
+     "others": 21
+    }
+   ]
+  },
+  {
+   "id": "m16",
+   "pattern": "bilbao-atrium-radial",
+   "variant": "cabinet",
+   "sequence": "boolean_surfaces",
+   "pool": 2,
+   "filled": 2,
+   "slots": 18,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": null,
+     "waste": null,
+     "kind": "run",
+     "x": 1,
+     "z": 20
+    },
+    {
+     "slot": 1,
+     "token": null,
+     "waste": null,
+     "kind": "run",
+     "x": 1,
+     "z": 1
+    },
+    {
+     "slot": 2,
+     "token": null,
+     "waste": null,
+     "kind": "run",
+     "x": 9,
+     "z": 1
+    },
+    {
+     "slot": 3,
+     "token": null,
+     "waste": null,
+     "kind": "run",
+     "x": 1,
+     "z": 3
+    },
+    {
+     "slot": 4,
+     "token": null,
+     "waste": null,
+     "kind": "run",
+     "x": 9,
+     "z": 3
+    },
+    {
+     "slot": 5,
+     "token": null,
+     "waste": null,
+     "kind": "run",
+     "x": 9,
+     "z": 20
+    },
+    {
+     "slot": 6,
+     "token": null,
+     "waste": null,
+     "kind": "run",
+     "x": 1,
+     "z": 24
+    },
+    {
+     "slot": 7,
+     "token": null,
+     "waste": null,
+     "kind": "run",
+     "x": 9,
+     "z": 24
+    },
+    {
+     "slot": 8,
+     "token": null,
+     "waste": null,
+     "kind": "run",
+     "x": 1,
+     "z": 26
+    },
+    {
+     "slot": 9,
+     "token": null,
+     "waste": null,
+     "kind": "run",
+     "x": 9,
+     "z": 26
+    },
+    {
+     "slot": 10,
+     "token": null,
+     "waste": null,
+     "kind": "run",
+     "x": 1,
+     "z": 28
+    },
+    {
+     "slot": 11,
+     "token": null,
+     "waste": null,
+     "kind": "run",
+     "x": 9,
+     "z": 28
+    },
+    {
+     "slot": 12,
+     "token": "csg_difference_demo",
+     "waste": 12,
+     "kind": "run",
+     "x": 5,
+     "z": 7,
+     "others": 1
+    },
+    {
+     "slot": 13,
+     "token": "subtraction_suite",
+     "waste": 13,
+     "kind": "run",
+     "x": 9,
+     "z": 8,
+     "others": 0
+    },
+    {
+     "slot": 14,
+     "token": null,
+     "waste": null,
+     "kind": "run",
+     "x": 5,
+     "z": 12
+    },
+    {
+     "slot": 15,
+     "token": null,
+     "waste": null,
+     "kind": "run",
+     "x": 9,
+     "z": 13
+    },
+    {
+     "slot": 16,
+     "token": null,
+     "waste": null,
+     "kind": "run",
+     "x": 1,
+     "z": 5
+    },
+    {
+     "slot": 17,
+     "token": null,
+     "waste": null,
+     "kind": "run",
+     "x": 13,
+     "z": 5
+    }
+   ]
+  },
+  {
+   "id": "m17",
+   "pattern": "chichu-buried-cells",
+   "variant": "free_plan",
+   "sequence": "swarmintelligence",
+   "pool": 11,
+   "filled": 5,
+   "slots": 5,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "boid_manager",
+     "waste": 0,
+     "kind": "hero",
+     "x": 2,
+     "z": 5,
+     "others": 7
+    },
+    {
+     "slot": 1,
+     "token": "boids_aquarium",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 10,
+     "z": 6,
+     "others": 4
+    },
+    {
+     "slot": 2,
+     "token": "ant_colony_optimization",
+     "waste": 3,
+     "kind": "plinth",
+     "x": 10,
+     "z": 12,
+     "others": 3
+    },
+    {
+     "slot": 3,
+     "token": "boid_flocking",
+     "waste": 3,
+     "kind": "plinth",
+     "x": 6,
+     "z": 22,
+     "others": 2
+    },
+    {
+     "slot": 4,
+     "token": "ecosystem_simulation",
+     "waste": 3,
+     "kind": "plinth",
+     "x": 8,
+     "z": 22,
+     "others": 1
+    }
+   ]
+  },
+  {
+   "id": "m18",
+   "pattern": "dia-beacon-field",
+   "variant": "field",
+   "sequence": "machinelearning",
+   "pool": 66,
+   "filled": 24,
+   "slots": 24,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "adaboost",
+     "waste": 7,
+     "kind": "plinth",
+     "x": 7,
+     "z": 1,
+     "others": 60
+    },
+    {
+     "slot": 1,
+     "token": "anomaly_detection",
+     "waste": 7,
+     "kind": "plinth",
+     "x": 5,
+     "z": 6,
+     "others": 59
+    },
+    {
+     "slot": 2,
+     "token": "clustering_algorithms",
+     "waste": 7,
+     "kind": "plinth",
+     "x": 5,
+     "z": 11,
+     "others": 58
+    },
+    {
+     "slot": 3,
+     "token": "computer_vision",
+     "waste": 7,
+     "kind": "plinth",
+     "x": 9,
+     "z": 11,
+     "others": 57
+    },
+    {
+     "slot": 4,
+     "token": "dimensionality_reduction",
+     "waste": 7,
+     "kind": "plinth",
+     "x": 5,
+     "z": 21,
+     "others": 56
+    },
+    {
+     "slot": 5,
+     "token": "enhanced_kmeans",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 2,
+     "z": 2,
+     "others": 48
+    },
+    {
+     "slot": 6,
+     "token": "ensemble_methods",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 11,
+     "z": 2,
+     "others": 47
+    },
+    {
+     "slot": 7,
+     "token": "env_one",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 2,
+     "z": 7,
+     "others": 46
+    },
+    {
+     "slot": 8,
+     "token": "evolved_creatures",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 9,
+     "z": 7,
+     "others": 45
+    },
+    {
+     "slot": 9,
+     "token": "evolved_creatures_v2",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 2,
+     "z": 12,
+     "others": 44
+    },
+    {
+     "slot": 10,
+     "token": "evolvingflowers",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 2,
+     "z": 17,
+     "others": 43
+    },
+    {
+     "slot": 11,
+     "token": "explainable_ai",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 5,
+     "z": 17,
+     "others": 42
+    },
+    {
+     "slot": 12,
+     "token": "explainable_ai_xai_vr",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 8,
+     "z": 17,
+     "others": 41
+    },
+    {
+     "slot": 13,
+     "token": "feature_engineering",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 11,
+     "z": 17,
+     "others": 40
+    },
+    {
+     "slot": 14,
+     "token": "fine_tuning",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 9,
+     "z": 21,
+     "others": 39
+    },
+    {
+     "slot": 15,
+     "token": "gans",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 5,
+     "z": 26,
+     "others": 38
+    },
+    {
+     "slot": 16,
+     "token": "genetic_algorithm",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 9,
+     "z": 26,
+     "others": 37
+    },
+    {
+     "slot": 17,
+     "token": "9_2_smart_rockets_basic_vr",
+     "waste": 2,
+     "kind": "plinth",
+     "x": 5,
+     "z": 3,
+     "others": 20
+    },
+    {
+     "slot": 18,
+     "token": "9_3_smart_rockets_vr",
+     "waste": 2,
+     "kind": "plinth",
+     "x": 12,
+     "z": 7,
+     "others": 19
+    },
+    {
+     "slot": 19,
+     "token": "9_4_interactive_selection_vr",
+     "waste": 2,
+     "kind": "plinth",
+     "x": 12,
+     "z": 22,
+     "others": 18
+    },
+    {
+     "slot": 20,
+     "token": "9_5_evolving_bloops_vr",
+     "waste": 2,
+     "kind": "plinth",
+     "x": 2,
+     "z": 27,
+     "others": 17
+    },
+    {
+     "slot": 21,
+     "token": "backpropagation_flow",
+     "waste": 2,
+     "kind": "plinth",
+     "x": 12,
+     "z": 27,
+     "others": 16
+    },
+    {
+     "slot": 22,
+     "token": "loss_function_comparator",
+     "waste": 2,
+     "kind": "field",
+     "x": 12,
+     "z": 9,
+     "others": 15
+    },
+    {
+     "slot": 23,
+     "token": "perceptron_playground",
+     "waste": 2,
+     "kind": "field",
+     "x": 2,
+     "z": 23,
+     "others": 14
+    }
+   ]
+  },
+  {
+   "id": "m19",
+   "pattern": "libeskind-void-axis",
+   "variant": "hypostyle",
+   "sequence": "graphtheory",
+   "pool": 19,
+   "filled": 14,
+   "slots": 18,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "edmonds_algorithm",
+     "waste": 7,
+     "kind": "field",
+     "x": 2,
+     "z": 1,
+     "others": 16
+    },
+    {
+     "slot": 1,
+     "token": "env_one",
+     "waste": 7,
+     "kind": "field",
+     "x": 2,
+     "z": 5,
+     "others": 15
+    },
+    {
+     "slot": 2,
+     "token": "kosaraju_algorithm",
+     "waste": 7,
+     "kind": "field",
+     "x": 10,
+     "z": 5,
+     "others": 14
+    },
+    {
+     "slot": 3,
+     "token": "mst_visualization",
+     "waste": 7,
+     "kind": "field",
+     "x": 10,
+     "z": 13,
+     "others": 13
+    },
+    {
+     "slot": 4,
+     "token": "networkflow3d",
+     "waste": 7,
+     "kind": "field",
+     "x": 10,
+     "z": 23,
+     "others": 12
+    },
+    {
+     "slot": 5,
+     "token": "pathfinding3d",
+     "waste": 0,
+     "kind": "field",
+     "x": 11,
+     "z": 10,
+     "others": 9
+    },
+    {
+     "slot": 6,
+     "token": "push_relabel_algorithm",
+     "waste": 0,
+     "kind": "field",
+     "x": 3,
+     "z": 19,
+     "others": 8
+    },
+    {
+     "slot": 7,
+     "token": "bottleneck_cut",
+     "waste": 3,
+     "kind": "field",
+     "x": 4,
+     "z": 16,
+     "others": 6
+    },
+    {
+     "slot": 8,
+     "token": "graphspace",
+     "waste": 3,
+     "kind": "field",
+     "x": 4,
+     "z": 25,
+     "others": 5
+    },
+    {
+     "slot": 9,
+     "token": "grid3d",
+     "waste": 3,
+     "kind": "field",
+     "x": 5,
+     "z": 27,
+     "others": 4
+    },
+    {
+     "slot": 10,
+     "token": "grid3d_dfs",
+     "waste": 3,
+     "kind": "field",
+     "x": 9,
+     "z": 27,
+     "others": 3
+    },
+    {
+     "slot": 11,
+     "token": "grid3d_prim",
+     "waste": 3,
+     "kind": "field",
+     "x": 11,
+     "z": 28,
+     "others": 2
+    },
+    {
+     "slot": 12,
+     "token": "living_paper_bfs",
+     "waste": 0,
+     "kind": "field",
+     "x": 5,
+     "z": 11,
+     "others": 1
+    },
+    {
+     "slot": 13,
+     "token": "living_paper_dfs_maze",
+     "waste": 0,
+     "kind": "field",
+     "x": 4,
+     "z": 14,
+     "others": 0
+    },
+    {
+     "slot": 14,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 4,
+     "z": 15
+    },
+    {
+     "slot": 15,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 3,
+     "z": 17
+    },
+    {
+     "slot": 16,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 4,
+     "z": 23
+    },
+    {
+     "slot": 17,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 4,
+     "z": 24
+    }
+   ]
+  },
+  {
+   "id": "m20",
+   "pattern": "teshima-droplet",
+   "variant": "crypt",
+   "sequence": "foundationscrisis",
+   "pool": 57,
+   "filled": 4,
+   "slots": 4,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "constructive_room",
+     "waste": 7,
+     "kind": "pair",
+     "x": 6,
+     "z": 23,
+     "others": 55
+    },
+    {
+     "slot": 1,
+     "token": "escher_room",
+     "waste": 0,
+     "kind": "pair",
+     "x": 6,
+     "z": 19,
+     "others": 54
+    },
+    {
+     "slot": 2,
+     "token": "euclid_parallel_bench",
+     "waste": 0,
+     "kind": "pair",
+     "x": 6,
+     "z": 27,
+     "others": 53
+    },
+    {
+     "slot": 3,
+     "token": "bifurcation_diagram",
+     "waste": 0,
+     "kind": "pair",
+     "x": 6,
+     "z": 1,
+     "others": 43
+    }
+   ]
+  },
+  {
+   "id": "m21",
+   "pattern": "uffizi-spine-ordered",
+   "variant": "drum",
+   "sequence": "qfeplaboratory",
+   "pool": 51,
+   "filled": 1,
+   "slots": 1,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "chaos_particles",
+     "waste": 16,
+     "kind": "hero",
+     "x": 1,
+     "z": 1,
+     "others": 43
+    }
+   ]
+  },
+  {
+   "id": "m22",
+   "pattern": "altes-rotunda-hub",
+   "variant": "enfilade",
+   "sequence": "postfoundationscrisis",
+   "pool": 30,
+   "filled": 14,
+   "slots": 14,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "bias_atlas_room",
+     "waste": 7,
+     "kind": "hero",
+     "x": 2,
+     "z": 1,
+     "others": 28
+    },
+    {
+     "slot": 1,
+     "token": "accountability_ledger",
+     "waste": 10,
+     "kind": "run",
+     "x": 1,
+     "z": 11,
+     "others": 20
+    },
+    {
+     "slot": 2,
+     "token": "cap_theorem_bench",
+     "waste": 10,
+     "kind": "run",
+     "x": 13,
+     "z": 11,
+     "others": 19
+    },
+    {
+     "slot": 3,
+     "token": "commons_bench",
+     "waste": 6,
+     "kind": "run",
+     "x": 9,
+     "z": 1,
+     "others": 18
+    },
+    {
+     "slot": 4,
+     "token": "edge_ground_bench",
+     "waste": 6,
+     "kind": "run",
+     "x": 1,
+     "z": 27,
+     "others": 17
+    },
+    {
+     "slot": 5,
+     "token": "edge_ground_synthesis",
+     "waste": 6,
+     "kind": "run",
+     "x": 9,
+     "z": 27,
+     "others": 16
+    },
+    {
+     "slot": 6,
+     "token": "bias_visualizer",
+     "waste": 1,
+     "kind": "run",
+     "x": 3,
+     "z": 10,
+     "others": 7
+    },
+    {
+     "slot": 7,
+     "token": "bias_blindspot_toy",
+     "waste": 2,
+     "kind": "run",
+     "x": 11,
+     "z": 10,
+     "others": 6
+    },
+    {
+     "slot": 8,
+     "token": "edge_ground_toy",
+     "waste": 2,
+     "kind": "run",
+     "x": 3,
+     "z": 15,
+     "others": 5
+    },
+    {
+     "slot": 9,
+     "token": "ethics_toy",
+     "waste": 2,
+     "kind": "run",
+     "x": 11,
+     "z": 15,
+     "others": 4
+    },
+    {
+     "slot": 10,
+     "token": "commons_room",
+     "waste": 6,
+     "kind": "run",
+     "x": 1,
+     "z": 1,
+     "others": 27
+    },
+    {
+     "slot": 11,
+     "token": "edge_ground_room",
+     "waste": 0,
+     "kind": "run",
+     "x": 8,
+     "z": 4,
+     "others": 21
+    },
+    {
+     "slot": 12,
+     "token": "ethics_room",
+     "waste": 0,
+     "kind": "run",
+     "x": 4,
+     "z": 6,
+     "others": 20
+    },
+    {
+     "slot": 13,
+     "token": "molecular_room",
+     "waste": 0,
+     "kind": "run",
+     "x": 8,
+     "z": 6,
+     "others": 19
+    }
+   ]
+  },
+  {
+   "id": "m23",
+   "pattern": "thoronet-circumambulation-void",
+   "variant": "cabinet",
+   "sequence": "primitives",
+   "pool": 73,
+   "filled": 8,
+   "slots": 8,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "combine_portals",
+     "waste": 18,
+     "kind": "run",
+     "x": 13,
+     "z": 1,
+     "others": 56
+    },
+    {
+     "slot": 1,
+     "token": "perspective_lines",
+     "waste": 8,
+     "kind": "run",
+     "x": 1,
+     "z": 1,
+     "others": 55
+    },
+    {
+     "slot": 2,
+     "token": "platonic_grabbables",
+     "waste": 14,
+     "kind": "run",
+     "x": 1,
+     "z": 17,
+     "others": 63
+    },
+    {
+     "slot": 3,
+     "token": "animatedcubebuilder",
+     "waste": 0,
+     "kind": "run",
+     "x": 3,
+     "z": 24,
+     "others": 56
+    },
+    {
+     "slot": 4,
+     "token": "dgrid",
+     "waste": 0,
+     "kind": "run",
+     "x": 2,
+     "z": 3,
+     "others": 50
+    },
+    {
+     "slot": 5,
+     "token": "interactivetriangle",
+     "waste": 0,
+     "kind": "run",
+     "x": 12,
+     "z": 3,
+     "others": 49
+    },
+    {
+     "slot": 6,
+     "token": "lshape",
+     "waste": 0,
+     "kind": "run",
+     "x": 12,
+     "z": 24,
+     "others": 48
+    },
+    {
+     "slot": 7,
+     "token": "modulor_man_demo",
+     "waste": 0,
+     "kind": "run",
+     "x": 10,
+     "z": 26,
+     "others": 47
+    }
+   ]
+  },
+  {
+   "id": "m24",
+   "pattern": "sando-threshold-run",
+   "variant": "free_plan",
+   "sequence": "transformation",
+   "pool": 55,
+   "filled": 2,
+   "slots": 2,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "toruscylinder",
+     "waste": 0,
+     "kind": "hero",
+     "x": 4,
+     "z": 3,
+     "others": 45
+    },
+    {
+     "slot": 1,
+     "token": "translation_cube_demo",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 7,
+     "z": 4,
+     "others": 40
+    }
+   ]
+  },
+  {
+   "id": "m25",
+   "pattern": "neue-nationalgalerie-free-plan",
+   "variant": "field",
+   "sequence": "color",
+   "pool": 44,
+   "filled": 24,
+   "slots": 24,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "RotatingLaser",
+     "waste": 16,
+     "kind": "plinth",
+     "x": 6,
+     "z": 7,
+     "others": 40
+    },
+    {
+     "slot": 1,
+     "token": "albers_wall_gallery",
+     "waste": 16,
+     "kind": "plinth",
+     "x": 5,
+     "z": 14,
+     "others": 39
+    },
+    {
+     "slot": 2,
+     "token": "brick_wall_factory",
+     "waste": 7,
+     "kind": "plinth",
+     "x": 6,
+     "z": 1,
+     "others": 37
+    },
+    {
+     "slot": 3,
+     "token": "color_constellation_office",
+     "waste": 7,
+     "kind": "plinth",
+     "x": 5,
+     "z": 22,
+     "others": 36
+    },
+    {
+     "slot": 4,
+     "token": "coloredlines",
+     "waste": 7,
+     "kind": "plinth",
+     "x": 11,
+     "z": 22,
+     "others": 35
+    },
+    {
+     "slot": 5,
+     "token": "flashlight_demo",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 1,
+     "z": 1,
+     "others": 29
+    },
+    {
+     "slot": 6,
+     "token": "glitchcolor",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 12,
+     "z": 1,
+     "others": 28
+    },
+    {
+     "slot": 7,
+     "token": "grab_stick",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 3,
+     "z": 8,
+     "others": 27
+    },
+    {
+     "slot": 8,
+     "token": "laser_turret",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 11,
+     "z": 10,
+     "others": 26
+    },
+    {
+     "slot": 9,
+     "token": "mario_cube",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 1,
+     "z": 14,
+     "others": 25
+    },
+    {
+     "slot": 10,
+     "token": "minimalglitch",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 10,
+     "z": 17,
+     "others": 24
+    },
+    {
+     "slot": 11,
+     "token": "pillarcolorcollection",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 6,
+     "z": 19,
+     "others": 23
+    },
+    {
+     "slot": 12,
+     "token": "spherecolors",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 1,
+     "z": 22,
+     "others": 22
+    },
+    {
+     "slot": 13,
+     "token": "MetamerismLab",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 1,
+     "z": 4,
+     "others": 19
+    },
+    {
+     "slot": 14,
+     "token": "grab_rainbow_stick",
+     "waste": 2,
+     "kind": "plinth",
+     "x": 3,
+     "z": 4,
+     "others": 18
+    },
+    {
+     "slot": 15,
+     "token": "grabcolorcollection",
+     "waste": 2,
+     "kind": "plinth",
+     "x": 10,
+     "z": 4,
+     "others": 17
+    },
+    {
+     "slot": 16,
+     "token": "hand_color_controller",
+     "waste": 2,
+     "kind": "plinth",
+     "x": 12,
+     "z": 4,
+     "others": 16
+    },
+    {
+     "slot": 17,
+     "token": "nail_color_controller",
+     "waste": 2,
+     "kind": "plinth",
+     "x": 8,
+     "z": 5,
+     "others": 15
+    },
+    {
+     "slot": 18,
+     "token": "SpectrumVisualizer",
+     "waste": 3,
+     "kind": "plinth",
+     "x": 11,
+     "z": 8,
+     "others": 14
+    },
+    {
+     "slot": 19,
+     "token": "colorballs",
+     "waste": 3,
+     "kind": "plinth",
+     "x": 1,
+     "z": 11,
+     "others": 13
+    },
+    {
+     "slot": 20,
+     "token": "colorsheets",
+     "waste": 3,
+     "kind": "plinth",
+     "x": 5,
+     "z": 12,
+     "others": 12
+    },
+    {
+     "slot": 21,
+     "token": "colortrails",
+     "waste": 3,
+     "kind": "plinth",
+     "x": 9,
+     "z": 12,
+     "others": 11
+    },
+    {
+     "slot": 22,
+     "token": "dark_sphere",
+     "waste": 3,
+     "kind": "plinth",
+     "x": 13,
+     "z": 13,
+     "others": 10
+    },
+    {
+     "slot": 23,
+     "token": "disco_lights",
+     "waste": 3,
+     "kind": "plinth",
+     "x": 13,
+     "z": 15,
+     "others": 9
+    }
+   ]
+  },
+  {
+   "id": "m26",
+   "pattern": "kanazawa-room-matrix",
+   "variant": "hypostyle",
+   "sequence": "change",
+   "pool": 2,
+   "filled": 2,
+   "slots": 17,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": null,
+     "waste": null,
+     "kind": "pair",
+     "x": 7,
+     "z": 1
+    },
+    {
+     "slot": 1,
+     "token": null,
+     "waste": null,
+     "kind": "pair",
+     "x": 7,
+     "z": 4
+    },
+    {
+     "slot": 2,
+     "token": null,
+     "waste": null,
+     "kind": "pair",
+     "x": 7,
+     "z": 7
+    },
+    {
+     "slot": 3,
+     "token": null,
+     "waste": null,
+     "kind": "pair",
+     "x": 7,
+     "z": 14
+    },
+    {
+     "slot": 4,
+     "token": "riemann_sum_workbench",
+     "waste": 12,
+     "kind": "field",
+     "x": 11,
+     "z": 15,
+     "others": 1
+    },
+    {
+     "slot": 5,
+     "token": "tangent_slope_workbench",
+     "waste": 12,
+     "kind": "field",
+     "x": 2,
+     "z": 21,
+     "others": 0
+    },
+    {
+     "slot": 6,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 11,
+     "z": 23
+    },
+    {
+     "slot": 7,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 1,
+     "z": 1
+    },
+    {
+     "slot": 8,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 11,
+     "z": 4
+    },
+    {
+     "slot": 9,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 2,
+     "z": 7
+    },
+    {
+     "slot": 10,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 2,
+     "z": 14
+    },
+    {
+     "slot": 11,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 1,
+     "z": 25
+    },
+    {
+     "slot": 12,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 5,
+     "z": 4
+    },
+    {
+     "slot": 13,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 5,
+     "z": 8
+    },
+    {
+     "slot": 14,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 9,
+     "z": 11
+    },
+    {
+     "slot": 15,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 2,
+     "z": 18
+    },
+    {
+     "slot": 16,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 8,
+     "z": 20
+    }
+   ]
+  },
+  {
+   "id": "m27",
+   "pattern": "kanazawa-matrix-vista",
+   "variant": "crypt",
+   "sequence": "forces",
+   "pool": 135,
+   "filled": 6,
+   "slots": 6,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "ForceMagnitudeDemo",
+     "waste": 0,
+     "kind": "alcove",
+     "x": 4,
+     "z": 17,
+     "others": 29
+    },
+    {
+     "slot": 1,
+     "token": "VectorTorque",
+     "waste": 0,
+     "kind": "alcove",
+     "x": 4,
+     "z": 19,
+     "others": 28
+    },
+    {
+     "slot": 2,
+     "token": "VectorFieldFlow",
+     "waste": 0,
+     "kind": "pair",
+     "x": 7,
+     "z": 1,
+     "others": 116
+    },
+    {
+     "slot": 3,
+     "token": "calder_mobile",
+     "waste": 0,
+     "kind": "pair",
+     "x": 7,
+     "z": 4,
+     "others": 115
+    },
+    {
+     "slot": 4,
+     "token": "calder_object_mobile",
+     "waste": 0,
+     "kind": "pair",
+     "x": 7,
+     "z": 7,
+     "others": 114
+    },
+    {
+     "slot": 5,
+     "token": "centripetal_bench",
+     "waste": 0,
+     "kind": "pair",
+     "x": 7,
+     "z": 15,
+     "others": 113
+    }
+   ]
+  },
+  {
+   "id": "m28",
+   "pattern": "kanazawa-vista-v2",
+   "variant": "drum",
+   "sequence": "formfinding",
+   "pool": 0,
+   "filled": 0,
+   "slots": 1,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": null,
+     "waste": null,
+     "kind": "hero",
+     "x": 1,
+     "z": 21
+    }
+   ]
+  },
+  {
+   "id": "m29",
+   "pattern": "capuchin-crypt-corridor",
+   "variant": "enfilade",
+   "sequence": "wavefunctions",
+   "pool": 105,
+   "filled": 2,
+   "slots": 2,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "PendulumWave",
+     "waste": 7,
+     "kind": "hero",
+     "x": 2,
+     "z": 7,
+     "others": 82
+    },
+    {
+     "slot": 1,
+     "token": "OscillationCurve",
+     "waste": 11,
+     "kind": "run",
+     "x": 7,
+     "z": 7,
+     "others": 99
+    }
+   ]
+  },
+  {
+   "id": "m30",
+   "pattern": "soane-cabinet-vista",
+   "variant": "cabinet",
+   "sequence": "randomness",
+   "pool": 149,
+   "filled": 18,
+   "slots": 18,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "2d_in_3d_randomness_vis",
+     "waste": 2,
+     "kind": "run",
+     "x": 7,
+     "z": 25,
+     "others": 83
+    },
+    {
+     "slot": 1,
+     "token": "GaussianPaintSplatter",
+     "waste": 2,
+     "kind": "run",
+     "x": 7,
+     "z": 1,
+     "others": 107
+    },
+    {
+     "slot": 2,
+     "token": "blue_noise_planter",
+     "waste": 2,
+     "kind": "run",
+     "x": 5,
+     "z": 19,
+     "others": 106
+    },
+    {
+     "slot": 3,
+     "token": "GaussianBlurShader",
+     "waste": 0,
+     "kind": "run",
+     "x": 1,
+     "z": 2,
+     "others": 82
+    },
+    {
+     "slot": 4,
+     "token": "RandomGaussianTexture",
+     "waste": 0,
+     "kind": "run",
+     "x": 9,
+     "z": 2,
+     "others": 81
+    },
+    {
+     "slot": 5,
+     "token": "random_gaussian_texture",
+     "waste": 0,
+     "kind": "run",
+     "x": 1,
+     "z": 5,
+     "others": 80
+    },
+    {
+     "slot": 6,
+     "token": "random_number_book_page_1955",
+     "waste": 0,
+     "kind": "run",
+     "x": 9,
+     "z": 5,
+     "others": 79
+    },
+    {
+     "slot": 7,
+     "token": "bar_array",
+     "waste": 1,
+     "kind": "run",
+     "x": 1,
+     "z": 7,
+     "others": 78
+    },
+    {
+     "slot": 8,
+     "token": "blue_noise_bench",
+     "waste": 1,
+     "kind": "run",
+     "x": 9,
+     "z": 7,
+     "others": 77
+    },
+    {
+     "slot": 9,
+     "token": "blue_noise_toy",
+     "waste": 1,
+     "kind": "run",
+     "x": 1,
+     "z": 10,
+     "others": 76
+    },
+    {
+     "slot": 10,
+     "token": "dna_sprout",
+     "waste": 1,
+     "kind": "run",
+     "x": 9,
+     "z": 10,
+     "others": 75
+    },
+    {
+     "slot": 11,
+     "token": "noise_dunes_bench",
+     "waste": 1,
+     "kind": "run",
+     "x": 1,
+     "z": 12,
+     "others": 74
+    },
+    {
+     "slot": 12,
+     "token": "noise_height_toy",
+     "waste": 1,
+     "kind": "run",
+     "x": 9,
+     "z": 12,
+     "others": 73
+    },
+    {
+     "slot": 13,
+     "token": "noise_mixer",
+     "waste": 1,
+     "kind": "run",
+     "x": 1,
+     "z": 15,
+     "others": 72
+    },
+    {
+     "slot": 14,
+     "token": "noisetext",
+     "waste": 1,
+     "kind": "run",
+     "x": 9,
+     "z": 15,
+     "others": 71
+    },
+    {
+     "slot": 15,
+     "token": "perlin_bench",
+     "waste": 1,
+     "kind": "run",
+     "x": 1,
+     "z": 17,
+     "others": 70
+    },
+    {
+     "slot": 16,
+     "token": "pi_dart_toy",
+     "waste": 1,
+     "kind": "run",
+     "x": 9,
+     "z": 17,
+     "others": 69
+    },
+    {
+     "slot": 17,
+     "token": "random_butterflies",
+     "waste": 1,
+     "kind": "run",
+     "x": 1,
+     "z": 20,
+     "others": 68
+    }
+   ]
+  },
+  {
+   "id": "m31",
+   "pattern": "bay:katsura-miegakure-circuit#b0",
+   "variant": "free_plan",
+   "sequence": "noise",
+   "pool": 41,
+   "filled": 1,
+   "slots": 1,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "MeltingBerniniScene",
+     "waste": 0,
+     "kind": "hero",
+     "x": 5,
+     "z": 1,
+     "others": 37
+    }
+   ]
+  },
+  {
+   "id": "m32",
+   "pattern": "bay:altes-rotunda-hub#b2",
+   "variant": "field",
+   "sequence": "cellularautomata",
+   "pool": 72,
+   "filled": 19,
+   "slots": 19,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "ca_columns",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 5,
+     "z": 3,
+     "others": 67
+    },
+    {
+     "slot": 1,
+     "token": "ca_conway_city",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 8,
+     "z": 3,
+     "others": 66
+    },
+    {
+     "slot": 2,
+     "token": "CellularAutomata3DStacked",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 2,
+     "z": 8,
+     "others": 45
+    },
+    {
+     "slot": 3,
+     "token": "brians_brain_display",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 7,
+     "z": 8,
+     "others": 44
+    },
+    {
+     "slot": 4,
+     "token": "ca_growth_network",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 12,
+     "z": 8,
+     "others": 43
+    },
+    {
+     "slot": 5,
+     "token": "ca_rule_explorer",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 2,
+     "z": 10,
+     "others": 42
+    },
+    {
+     "slot": 6,
+     "token": "ca_rules_workbench",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 12,
+     "z": 10,
+     "others": 41
+    },
+    {
+     "slot": 7,
+     "token": "ca_sphere",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 2,
+     "z": 12,
+     "others": 40
+    },
+    {
+     "slot": 8,
+     "token": "dendrite_bench",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 7,
+     "z": 12,
+     "others": 39
+    },
+    {
+     "slot": 9,
+     "token": "elementary_ca_bench",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 12,
+     "z": 12,
+     "others": 38
+    },
+    {
+     "slot": 10,
+     "token": "four_classes_bench",
+     "waste": 0,
+     "kind": "field",
+     "x": 2,
+     "z": 1,
+     "others": 37
+    },
+    {
+     "slot": 11,
+     "token": "langton_bench",
+     "waste": 0,
+     "kind": "field",
+     "x": 12,
+     "z": 1,
+     "others": 36
+    },
+    {
+     "slot": 12,
+     "token": "langton_swarm",
+     "waste": 0,
+     "kind": "field",
+     "x": 2,
+     "z": 4,
+     "others": 35
+    },
+    {
+     "slot": 13,
+     "token": "lattice_gas_bench",
+     "waste": 0,
+     "kind": "field",
+     "x": 12,
+     "z": 4,
+     "others": 34
+    },
+    {
+     "slot": 14,
+     "token": "lattice_gas_pump",
+     "waste": 0,
+     "kind": "field",
+     "x": 2,
+     "z": 6,
+     "others": 33
+    },
+    {
+     "slot": 15,
+     "token": "lenia_aquarium",
+     "waste": 0,
+     "kind": "field",
+     "x": 5,
+     "z": 10,
+     "others": 32
+    },
+    {
+     "slot": 16,
+     "token": "brians_brain_bench",
+     "waste": 0,
+     "kind": "field",
+     "x": 12,
+     "z": 6,
+     "others": 10
+    },
+    {
+     "slot": 17,
+     "token": "ca_bridge",
+     "waste": 0,
+     "kind": "field",
+     "x": 6,
+     "z": 9,
+     "others": 9
+    },
+    {
+     "slot": 18,
+     "token": "ca_chair_test",
+     "waste": 0,
+     "kind": "field",
+     "x": 9,
+     "z": 10,
+     "others": 8
+    }
+   ]
+  },
+  {
+   "id": "m33",
+   "pattern": "bay:mesdag-panorama-drum#b3",
+   "variant": "hypostyle",
+   "sequence": "fractals",
+   "pool": 87,
+   "filled": 14,
+   "slots": 14,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "attractor_plotter",
+     "waste": 0,
+     "kind": "pair",
+     "x": 7,
+     "z": 6,
+     "others": 59
+    },
+    {
+     "slot": 1,
+     "token": "cube_cabin",
+     "waste": 0,
+     "kind": "field",
+     "x": 4,
+     "z": 3,
+     "others": 21
+    },
+    {
+     "slot": 2,
+     "token": "cube_desk",
+     "waste": 0,
+     "kind": "field",
+     "x": 4,
+     "z": 4,
+     "others": 20
+    },
+    {
+     "slot": 3,
+     "token": "cube_staircase",
+     "waste": 0,
+     "kind": "field",
+     "x": 4,
+     "z": 5,
+     "others": 19
+    },
+    {
+     "slot": 4,
+     "token": "cube_subdivision",
+     "waste": 0,
+     "kind": "field",
+     "x": 5,
+     "z": 5,
+     "others": 18
+    },
+    {
+     "slot": 5,
+     "token": "dark_sphere",
+     "waste": 0,
+     "kind": "field",
+     "x": 6,
+     "z": 5,
+     "others": 17
+    },
+    {
+     "slot": 6,
+     "token": "example_8_4_cantor_set_vr",
+     "waste": 0,
+     "kind": "field",
+     "x": 6,
+     "z": 8,
+     "others": 16
+    },
+    {
+     "slot": 7,
+     "token": "fibonacci_sequences",
+     "waste": 0,
+     "kind": "field",
+     "x": 7,
+     "z": 8,
+     "others": 15
+    },
+    {
+     "slot": 8,
+     "token": "fractal_koch_curve",
+     "waste": 0,
+     "kind": "field",
+     "x": 8,
+     "z": 8,
+     "others": 14
+    },
+    {
+     "slot": 9,
+     "token": "fractal_recursion_1",
+     "waste": 0,
+     "kind": "field",
+     "x": 8,
+     "z": 9,
+     "others": 13
+    },
+    {
+     "slot": 10,
+     "token": "fractal_scene",
+     "waste": 0,
+     "kind": "field",
+     "x": 9,
+     "z": 9,
+     "others": 12
+    },
+    {
+     "slot": 11,
+     "token": "fractal_stochastic_tree",
+     "waste": 0,
+     "kind": "field",
+     "x": 10,
+     "z": 9,
+     "others": 11
+    },
+    {
+     "slot": 12,
+     "token": "furniture_recursion_bench",
+     "waste": 0,
+     "kind": "field",
+     "x": 10,
+     "z": 10,
+     "others": 10
+    },
+    {
+     "slot": 13,
+     "token": "living_paper",
+     "waste": 0,
+     "kind": "field",
+     "x": 10,
+     "z": 11,
+     "others": 9
+    }
+   ]
+  },
+  {
+   "id": "m34",
+   "pattern": "bay:thoronet-circumambulation-void#b3",
+   "variant": "crypt",
+   "sequence": "lsystems",
+   "pool": 75,
+   "filled": 1,
+   "slots": 1,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "axiom_bench",
+     "waste": 0,
+     "kind": "pair",
+     "x": 7,
+     "z": 12,
+     "others": 44
+    }
+   ]
+  },
+  {
+   "id": "m35",
+   "pattern": "bay:kanazawa-matrix-vista#b1",
+   "variant": "drum",
+   "sequence": "proceduralgeneration",
+   "pool": 67,
+   "filled": 1,
+   "slots": 1,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "branching_growth_algorithm",
+     "waste": 0,
+     "kind": "hero",
+     "x": 11,
+     "z": 5,
+     "others": 61
+    }
+   ]
+  },
+  {
+   "id": "m36",
+   "pattern": "bay:uffizi-spine-enfilade#b2",
+   "variant": "enfilade",
+   "sequence": "softbodies",
+   "pool": 77,
+   "filled": 7,
+   "slots": 7,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "branching_growth_algorithm",
+     "waste": 0,
+     "kind": "hero",
+     "x": 5,
+     "z": 1,
+     "others": 75
+    },
+    {
+     "slot": 1,
+     "token": "softmill",
+     "waste": 14,
+     "kind": "run",
+     "x": 13,
+     "z": 1,
+     "others": 52
+    },
+    {
+     "slot": 2,
+     "token": "breathing_room",
+     "waste": 4,
+     "kind": "run",
+     "x": 1,
+     "z": 1,
+     "others": 51
+    },
+    {
+     "slot": 3,
+     "token": "abject_room",
+     "waste": 6,
+     "kind": "run",
+     "x": 4,
+     "z": 6,
+     "others": 74
+    },
+    {
+     "slot": 4,
+     "token": "flagdancer",
+     "waste": 4,
+     "kind": "run",
+     "x": 1,
+     "z": 8,
+     "others": 50
+    },
+    {
+     "slot": 5,
+     "token": "jelly_variants",
+     "waste": 2,
+     "kind": "run",
+     "x": 4,
+     "z": 8,
+     "others": 24
+    },
+    {
+     "slot": 6,
+     "token": "abject_bench",
+     "waste": 0,
+     "kind": "pair",
+     "x": 8,
+     "z": 10,
+     "others": 48
+    }
+   ]
+  },
+  {
+   "id": "m37",
+   "pattern": "bay:teshima-droplet#b3",
+   "variant": "free_plan",
+   "sequence": "isosurfaces",
+   "pool": 31,
+   "filled": 4,
+   "slots": 4,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "GyroidDemo",
+     "waste": 16,
+     "kind": "hero",
+     "x": 8,
+     "z": 1,
+     "others": 25
+    },
+    {
+     "slot": 1,
+     "token": "gyroid_demo",
+     "waste": 16,
+     "kind": "plinth",
+     "x": 5,
+     "z": 6,
+     "others": 24
+    },
+    {
+     "slot": 2,
+     "token": "animated_noise_explorer",
+     "waste": 3,
+     "kind": "plinth",
+     "x": 12,
+     "z": 6,
+     "others": 16
+    },
+    {
+     "slot": 3,
+     "token": "dark_sphere",
+     "waste": 3,
+     "kind": "plinth",
+     "x": 7,
+     "z": 11,
+     "others": 15
+    }
+   ]
+  },
+  {
+   "id": "m38",
+   "pattern": "bay:teshima-droplet#b2",
+   "variant": "field",
+   "sequence": "boolean_surfaces",
+   "pool": 2,
+   "filled": 1,
+   "slots": 11,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "csg_difference_demo",
+     "waste": 21,
+     "kind": "plinth",
+     "x": 8,
+     "z": 2,
+     "others": 0
+    },
+    {
+     "slot": 1,
+     "token": null,
+     "waste": null,
+     "kind": "plinth",
+     "x": 3,
+     "z": 5
+    },
+    {
+     "slot": 2,
+     "token": null,
+     "waste": null,
+     "kind": "plinth",
+     "x": 7,
+     "z": 7
+    },
+    {
+     "slot": 3,
+     "token": null,
+     "waste": null,
+     "kind": "plinth",
+     "x": 7,
+     "z": 10
+    },
+    {
+     "slot": 4,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 11,
+     "z": 7
+    },
+    {
+     "slot": 5,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 5,
+     "z": 9
+    },
+    {
+     "slot": 6,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 4,
+     "z": 3
+    },
+    {
+     "slot": 7,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 6,
+     "z": 4
+    },
+    {
+     "slot": 8,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 7,
+     "z": 4
+    },
+    {
+     "slot": 9,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 10,
+     "z": 9
+    },
+    {
+     "slot": 10,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 9,
+     "z": 10
+    }
+   ]
+  },
+  {
+   "id": "m39",
+   "pattern": "bay:sainsbury-false-perspective-enfilade#b3",
+   "variant": "hypostyle",
+   "sequence": "swarmintelligence",
+   "pool": 11,
+   "filled": 5,
+   "slots": 10,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "boids_aquarium",
+     "waste": 0,
+     "kind": "pair",
+     "x": 6,
+     "z": 8,
+     "others": 4
+    },
+    {
+     "slot": 1,
+     "token": "ant_colony_optimization",
+     "waste": 3,
+     "kind": "field",
+     "x": 2,
+     "z": 1,
+     "others": 3
+    },
+    {
+     "slot": 2,
+     "token": "boid_flocking",
+     "waste": 3,
+     "kind": "field",
+     "x": 11,
+     "z": 1,
+     "others": 2
+    },
+    {
+     "slot": 3,
+     "token": "ecosystem_simulation",
+     "waste": 3,
+     "kind": "field",
+     "x": 9,
+     "z": 4,
+     "others": 1
+    },
+    {
+     "slot": 4,
+     "token": "self_organizing_patterns",
+     "waste": 3,
+     "kind": "field",
+     "x": 12,
+     "z": 4,
+     "others": 0
+    },
+    {
+     "slot": 5,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 3,
+     "z": 6
+    },
+    {
+     "slot": 6,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 12,
+     "z": 7
+    },
+    {
+     "slot": 7,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 9,
+     "z": 1
+    },
+    {
+     "slot": 8,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 11,
+     "z": 5
+    },
+    {
+     "slot": 9,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 8,
+     "z": 8
+    }
+   ]
+  },
+  {
+   "id": "m40",
+   "pattern": "bay:uffizi-spine-ordered#b4",
+   "variant": "drum",
+   "sequence": "machinelearning",
+   "pool": 66,
+   "filled": 1,
+   "slots": 1,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "adaboost",
+     "waste": 7,
+     "kind": "hero",
+     "x": 1,
+     "z": 4,
+     "others": 60
+    }
+   ]
+  },
+  {
+   "id": "m41",
+   "pattern": "bay:caracalla-thermal-axis#b4",
+   "variant": "enfilade",
+   "sequence": "graphtheory",
+   "pool": 19,
+   "filled": 5,
+   "slots": 5,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "edmonds_algorithm",
+     "waste": 0,
+     "kind": "hero",
+     "x": 3,
+     "z": 2,
+     "others": 14
+    },
+    {
+     "slot": 1,
+     "token": "bottleneck_cut",
+     "waste": 3,
+     "kind": "run",
+     "x": 11,
+     "z": 2,
+     "others": 6
+    },
+    {
+     "slot": 2,
+     "token": "graphspace",
+     "waste": 3,
+     "kind": "run",
+     "x": 3,
+     "z": 5,
+     "others": 5
+    },
+    {
+     "slot": 3,
+     "token": "grid3d",
+     "waste": 3,
+     "kind": "run",
+     "x": 11,
+     "z": 5,
+     "others": 4
+    },
+    {
+     "slot": 4,
+     "token": "env_one",
+     "waste": 0,
+     "kind": "pair",
+     "x": 6,
+     "z": 6,
+     "others": 13
+    }
+   ]
+  },
+  {
+   "id": "m42",
+   "pattern": "bay:dia-beacon-field#b4",
+   "variant": "cabinet",
+   "sequence": "foundationscrisis",
+   "pool": 57,
+   "filled": 2,
+   "slots": 2,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "barber_paradox",
+     "waste": 4,
+     "kind": "run",
+     "x": 1,
+     "z": 1,
+     "others": 33
+    },
+    {
+     "slot": 1,
+     "token": "both_true_gate",
+     "waste": 3,
+     "kind": "run",
+     "x": 13,
+     "z": 2,
+     "others": 32
+    }
+   ]
+  },
+  {
+   "id": "m43",
+   "pattern": "bay:guggenheim-serpentine#b0",
+   "variant": "free_plan",
+   "sequence": "qfeplaboratory",
+   "pool": 51,
+   "filled": 9,
+   "slots": 9,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "chaos_particles",
+     "waste": 0,
+     "kind": "hero",
+     "x": 12,
+     "z": 1,
+     "others": 43
+    },
+    {
+     "slot": 1,
+     "token": "edge_of_chaos_unlocked",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 1,
+     "z": 1,
+     "others": 28
+    },
+    {
+     "slot": 2,
+     "token": "f_order_bench",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 3,
+     "z": 1,
+     "others": 27
+    },
+    {
+     "slot": 3,
+     "token": "formation_field",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 5,
+     "z": 1,
+     "others": 26
+    },
+    {
+     "slot": 4,
+     "token": "lambda_dial_bench",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 7,
+     "z": 1,
+     "others": 25
+    },
+    {
+     "slot": 5,
+     "token": "phi_rate_bench",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 9,
+     "z": 1,
+     "others": 24
+    },
+    {
+     "slot": 6,
+     "token": "qfep_formula_3d",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 13,
+     "z": 4,
+     "others": 23
+    },
+    {
+     "slot": 7,
+     "token": "qfep_reactor_bench",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 1,
+     "z": 5,
+     "others": 22
+    },
+    {
+     "slot": 8,
+     "token": "shannon_workbench",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 3,
+     "z": 5,
+     "others": 21
+    }
+   ]
+  },
+  {
+   "id": "m44",
+   "pattern": "bay:soane-cabinet-vista#b1",
+   "variant": "field",
+   "sequence": "postfoundationscrisis",
+   "pool": 30,
+   "filled": 5,
+   "slots": 13,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "accountability_ledger",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 6,
+     "z": 1,
+     "others": 19
+    },
+    {
+     "slot": 1,
+     "token": "cap_theorem_bench",
+     "waste": 0,
+     "kind": "plinth",
+     "x": 6,
+     "z": 3,
+     "others": 18
+    },
+    {
+     "slot": 2,
+     "token": "commons_bench",
+     "waste": 0,
+     "kind": "field",
+     "x": 2,
+     "z": 1,
+     "others": 17
+    },
+    {
+     "slot": 3,
+     "token": "edge_ground_bench",
+     "waste": 0,
+     "kind": "field",
+     "x": 9,
+     "z": 2,
+     "others": 16
+    },
+    {
+     "slot": 4,
+     "token": "rhizome_cave_demo",
+     "waste": 0,
+     "kind": "field",
+     "x": 10,
+     "z": 1,
+     "others": 0
+    },
+    {
+     "slot": 5,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 5,
+     "z": 5
+    },
+    {
+     "slot": 6,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 6,
+     "z": 5
+    },
+    {
+     "slot": 7,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 7,
+     "z": 5
+    },
+    {
+     "slot": 8,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 2,
+     "z": 6
+    },
+    {
+     "slot": 9,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 4,
+     "z": 6
+    },
+    {
+     "slot": 10,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 8,
+     "z": 6
+    },
+    {
+     "slot": 11,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 10,
+     "z": 6
+    },
+    {
+     "slot": 12,
+     "token": null,
+     "waste": null,
+     "kind": "field",
+     "x": 5,
+     "z": 7
+    }
+   ]
+  },
+  {
+   "id": "m45",
+   "pattern": "bay:kanazawa-matrix-vista#b0",
+   "variant": "hypostyle",
+   "sequence": "primitives",
+   "pool": 73,
+   "filled": 5,
+   "slots": 5,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "diamonds",
+     "waste": 0,
+     "kind": "pair",
+     "x": 7,
+     "z": 4,
+     "others": 57
+    },
+    {
+     "slot": 1,
+     "token": "animatedcubebuilder",
+     "waste": 0,
+     "kind": "field",
+     "x": 1,
+     "z": 1,
+     "others": 47
+    },
+    {
+     "slot": 2,
+     "token": "folded_strip",
+     "waste": 0,
+     "kind": "field",
+     "x": 11,
+     "z": 4,
+     "others": 46
+    },
+    {
+     "slot": 3,
+     "token": "bigframe",
+     "waste": 0,
+     "kind": "field",
+     "x": 9,
+     "z": 1,
+     "others": 39
+    },
+    {
+     "slot": 4,
+     "token": "capsule_radials_rings",
+     "waste": 0,
+     "kind": "field",
+     "x": 5,
+     "z": 4,
+     "others": 38
+    }
+   ]
+  },
+  {
+   "id": "m46",
+   "pattern": "bay:kanazawa-room-matrix#b1",
+   "variant": "crypt",
+   "sequence": "transformation",
+   "pool": 55,
+   "filled": 2,
+   "slots": 2,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "balance_puzzle",
+     "waste": 0,
+     "kind": "alcove",
+     "x": 4,
+     "z": 1,
+     "others": 29
+    },
+    {
+     "slot": 1,
+     "token": "boolean_tunnel",
+     "waste": 0,
+     "kind": "alcove",
+     "x": 4,
+     "z": 3,
+     "others": 28
+    }
+   ]
+  },
+  {
+   "id": "m47",
+   "pattern": "bay:louisiana-pavilion-chain#b2",
+   "variant": "drum",
+   "sequence": "color",
+   "pool": 44,
+   "filled": 1,
+   "slots": 1,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "RotatingLaser",
+     "waste": 7,
+     "kind": "hero",
+     "x": 5,
+     "z": 2,
+     "others": 39
+    }
+   ]
+  },
+  {
+   "id": "m48",
+   "pattern": "bay:louisiana-pavilion-chain#b4",
+   "variant": "enfilade",
+   "sequence": "change",
+   "pool": 2,
+   "filled": 1,
+   "slots": 3,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "riemann_sum_workbench",
+     "waste": 21,
+     "kind": "hero",
+     "x": 4,
+     "z": 2,
+     "others": 1
+    },
+    {
+     "slot": 1,
+     "token": null,
+     "waste": null,
+     "kind": "run",
+     "x": 1,
+     "z": 2
+    },
+    {
+     "slot": 2,
+     "token": null,
+     "waste": null,
+     "kind": "run",
+     "x": 13,
+     "z": 2
+    }
+   ]
+  },
+  {
+   "id": "m49",
+   "pattern": "bay:capuchin-crypt-corridor#b4",
+   "variant": "cabinet",
+   "sequence": "forces",
+   "pool": 135,
+   "filled": 1,
+   "slots": 1,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": "field_room",
+     "waste": 3,
+     "kind": "run",
+     "x": 2,
+     "z": 1,
+     "others": 54
+    }
+   ]
+  },
+  {
+   "id": "m50",
+   "pattern": "bay:bilbao-atrium-radial#b2",
+   "variant": "free_plan",
+   "sequence": "formfinding",
+   "pool": 0,
+   "filled": 0,
+   "slots": 3,
+   "assignments": [
+    {
+     "slot": 0,
+     "token": null,
+     "waste": null,
+     "kind": "hero",
+     "x": 5,
+     "z": 1
+    },
+    {
+     "slot": 1,
+     "token": null,
+     "waste": null,
+     "kind": "plinth",
+     "x": 2,
+     "z": 2
+    },
+    {
+     "slot": 2,
+     "token": null,
+     "waste": null,
+     "kind": "plinth",
+     "x": 12,
+     "z": 2
+    }
+   ]
+  }
+ ]
+}

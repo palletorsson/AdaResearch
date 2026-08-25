@@ -13,7 +13,10 @@ small tool rather than a research project:
                                      squares (hero, plinth, pair, field) and
                                      runs along a wall
 
-    python tools/match_slots.py                      # coverage, both directions
+    python tools/match_slots.py                      if args.fill_all:
+        return fill_all(shapes, museums, args)
+
+    # coverage, both directions
     python tools/match_slots.py --slot=m18#3         # what fits in this slot
     python tools/match_slots.py --artifact=pendulum_hall
     python tools/match_slots.py --fill=m18           # a PROPOSAL for one room
@@ -103,6 +106,10 @@ def main():
     ap.add_argument("--fill", default="", help="a museum id — propose a population")
     ap.add_argument("--sequence", default="", help="restrict --fill to one sequence")
     ap.add_argument("--limit", type=int, default=12)
+    ap.add_argument("--fill-all", action="store_true",
+                    help="every museum, from one spine sequence each, in spine order")
+    ap.add_argument("--svg", default="ada_run/museum_50_fill.svg")
+    ap.add_argument("--md", default="ada_run/museum_50_fill.md")
     args = ap.parse_args()
     shapes, museums = load()
     by_id = {m["id"]: m for m in museums}
@@ -178,6 +185,9 @@ def main():
                   % (kind, slot["x"], slot["z"], t[:38], w, len(cands) - 1))
         return 0
 
+    if args.fill_all:
+        return fill_all(shapes, museums, args)
+
     # coverage, both directions
     homed = {t: 0 for t in shapes}
     for m in museums:
@@ -223,6 +233,142 @@ def main():
         for sid, pat, slot in empty[:6]:
             print("     %-10s %-34s %s" % (sid, pat[:34], slot["kind"]))
     return 0
+
+
+def fill_one(m, pool, shapes):
+    """Greedy, biggest slot first — the hero is chosen before the shelves take
+    everything that could have filled it. No token twice in one room."""
+    used, out = set(), []
+    order = sorted(range(len(m["slots"])), key=lambda i: -slot_area(m["slots"][i]))
+    for i in order:
+        slot = m["slots"][i]
+        cands = sorted((waste(shapes[t], slot), t) for t in pool
+                       if t not in used and fits(shapes[t], slot))
+        if not cands:
+            out.append({"slot": i, "token": None, "waste": None,
+                        "kind": slot["kind"], "x": slot["x"], "z": slot["z"]})
+            continue
+        w, t = cands[0]
+        used.add(t)
+        out.append({"slot": i, "token": t, "waste": w, "kind": slot["kind"],
+                    "x": slot["x"], "z": slot["z"], "others": len(cands) - 1})
+    out.sort(key=lambda r: r["slot"])
+    return out
+
+
+def fill_all(shapes, museums, args):
+    """Fifty rooms, one spine sequence each, cycling in spine order — so the
+    fifty read as a walk through the curriculum, and a sequence that cannot
+    furnish a room says so by failing to."""
+    with open(os.path.join(ROOT, "commons", "maps", "curriculum_spine.json"), encoding="utf-8") as fh:
+        order = [q["name"] for q in json.load(fh)["spine"]["sequences"]]
+    seqs = registry_seq()
+    pools = {q: [t for t in shapes if q in (seqs.get(t) or [])] for q in order}
+    rows = []
+    md = ["# Fifty museums, filled from the spine", "",
+          "One sequence per room, cycling in spine order. A PROPOSAL — nothing is written.", ""]
+    print("FILLING FIFTY — one spine sequence per room, in spine order\n")
+    print("  %-4s %-32s %-22s %5s %s" % ("id", "plan", "sequence", "pool", "filled"))
+    for i, m in enumerate(museums):
+        seq = order[i % len(order)]
+        pool = pools[seq]
+        got = fill_one(m, pool, shapes)
+        filled = sum(1 for r in got if r["token"])
+        rows.append({"id": m["id"], "pattern": m["pattern"], "variant": m["variant"],
+                     "sequence": seq, "pool": len(pool), "filled": filled,
+                     "slots": len(m["slots"]), "assignments": got})
+        flag = "" if filled == len(m["slots"]) else ("   <- EMPTY POOL" if not pool else "   <- short")
+        print("  %-4s %-32s %-22s %5d %3d/%-3d%s" % (m["id"], m["pattern"][:32], seq,
+              len(pool), filled, len(m["slots"]), flag))
+        md.append("## %s · %s · **%s** (%s)" % (m["id"], m["pattern"], seq, m["variant"]))
+        md.append("")
+        md.append("%d of %d slots filled from a pool of %d." % (filled, len(m["slots"]), len(pool)))
+        md.append("")
+        for r in got:
+            md.append("- `%s` at (%d, %d) — %s" % (r["token"] or "(nothing fits)",
+                                                   r["x"], r["z"], r["kind"]))
+        md.append("")
+    tot_f = sum(r["filled"] for r in rows)
+    tot_s = sum(r["slots"] for r in rows)
+    print("\n  %d of %d slots filled (%.0f%%)" % (tot_f, tot_s, 100.0 * tot_f / tot_s))
+    starved = [r for r in rows if r["filled"] < r["slots"]]
+    if starved:
+        print("\n  %d room(s) their sequence could not furnish:" % len(starved))
+        for r in starved:
+            print("     %-4s %-22s pool %-4d %d of %d" % (r["id"], r["sequence"], r["pool"],
+                                                          r["filled"], r["slots"]))
+    with open(os.path.join(ROOT, "commons", "data", "museum_50_fill.json"), "w", encoding="utf-8") as fh:
+        json.dump({"_readme": "A PROPOSAL. One spine sequence per room, cycling in spine order, "
+                   "greedy by tightest fit. Written by tools/match_slots.py --fill-all. Nothing "
+                   "here is placed in any map.", "rooms": rows}, fh, indent=1)
+    with open(os.path.join(ROOT, args.md), "w", encoding="utf-8") as fh:
+        fh.write("\n".join(md))
+    fill_sheet(museums, rows, os.path.join(ROOT, args.svg))
+    print("\n  -> commons/data/museum_50_fill.json")
+    print("  -> %s" % args.md)
+    print("  -> %s" % args.svg)
+    return 0
+
+
+def _cellfill(v):
+    t = str(v).strip()
+    if t == "" or t == "0":
+        return "#0b0b0f"
+    if t.startswith("4") or t == "w":
+        return "#3b3b45"
+    if t.startswith("p") or t.startswith("2") or t.startswith("3"):
+        return "#8a7f6a"
+    return "#d8d4cc"
+
+
+def fill_sheet(museums, rows, dest, cell=6, cols=8):
+    """Green took an artifact, red found none. The reds are the point: they are
+    the rooms a sequence could not furnish."""
+    by = {r["id"]: r for r in rows}
+    colw = 17 * cell + 30
+    rowh = max(m["h"] for m in museums) * cell + 46
+    W = cols * colw + 24
+    H = ((len(museums) + cols - 1) // cols) * rowh + 76
+    out = ['<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d" viewBox="0 0 %d %d">'
+           % (W, H, W, H),
+           '<rect width="100%" height="100%" fill="#101014"/>',
+           '<text x="14" y="26" fill="#e8e6e1" font-family="ui-monospace,monospace" '
+           'font-size="16">fifty museums filled from the spine &#183; green took an artifact, '
+           'red found none</text>',
+           '<text x="14" y="44" fill="#8b8b96" font-family="ui-monospace,monospace" '
+           'font-size="10">one sequence per room, cycling in spine order &#183; a PROPOSAL, '
+           'nothing is written</text>']
+    for i, m in enumerate(museums):
+        r = by[m["id"]]
+        ox = 14 + (i % cols) * colw
+        oy = 68 + (i // cols) * rowh
+        ok = r["filled"] == r["slots"]
+        out.append('<text x="%d" y="%d" fill="#cfcfd6" font-family="ui-monospace,monospace" '
+                   'font-size="9">%s %s</text>'
+                   % (ox, oy, m["id"], m["pattern"].replace("bay:", "")[:22]))
+        out.append('<text x="%d" y="%d" fill="%s" font-family="ui-monospace,monospace" '
+                   'font-size="8">%s &#183; %d/%d</text>'
+                   % (ox, oy + 10, "#34d399" if ok else "#f87171", r["sequence"][:20],
+                      r["filled"], r["slots"]))
+        top = oy + 16
+        for z, row in enumerate(m["tile"]):
+            for x, v in enumerate(row):
+                out.append('<rect x="%d" y="%d" width="%d" height="%d" fill="%s"/>'
+                           % (ox + x * cell, top + z * cell, cell, cell, _cellfill(v)))
+        for a in r["assignments"]:
+            slot = m["slots"][a["slot"]]
+            c = "#34d399" if a["token"] else "#f87171"
+            if slot["kind"] == "run":
+                bw = (slot["len"] if slot["dir"] == "x" else 1) * cell
+                bh = (1 if slot["dir"] == "x" else slot["len"]) * cell
+            else:
+                bw = bh = max(1, int(slot["fp"])) * cell
+            out.append('<rect x="%d" y="%d" width="%d" height="%d" fill="%s" fill-opacity="0.30" '
+                       'stroke="%s" stroke-width="0.9"/>'
+                       % (ox + slot["x"] * cell, top + slot["z"] * cell, bw, bh, c, c))
+    out.append("</svg>")
+    with open(dest, "w", encoding="utf-8") as fh:
+        fh.write("\n".join(out))
 
 
 if __name__ == "__main__":
