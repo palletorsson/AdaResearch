@@ -10652,9 +10652,39 @@ func _follow_resume() -> void:
 	if int(pd.get("gate_open", 0)) == 1 and not _gate.is_empty() and _gate_t < 0.0:
 		print("[em-gate] the door was open when the view turned — it stays open")
 		_open_gate()
+	# THE HALL, THEN THE CELL (2026-08-25, Palle: "when I shift to 3d I always
+	# end up in map one"). resume_eye's z is LOCAL to the hall the eye was
+	# over, and the walk reopens at that hall's PEARL — but a pearl can be
+	# several halls: Point_Line_Grid is a joined page of "point one", so
+	# _start_at_map resolves it to the head and the head is map one. The cursor
+	# was never wrong; the page simply had not been built yet. Build forward
+	# until the named hall exists, and measure the local z from ITS start.
+	# _resume_hall is the toggle's word for it; first_map is the menu's and the
+	# Inspector's. Either names the hall to stand in.
+	var want_map := String(pd.get("_resume_hall", ""))
+	if want_map == "":
+		want_map = String(pd.get("first_map", ""))
+	var base_z: float = 0.0
+	if want_map != "":
+		var found := false
+		for tries in range(12):
+			for sv in _segments:
+				var sd: Dictionary = sv
+				if String(sd.get("map", "")) == want_map:
+					base_z = float(sd["z0"])
+					found = true
+					break
+			if found:
+				break
+			_build_segment()
+		if found:
+			if base_z > 0.5:
+				print("[em-resume] %s opened %.0f m in — the walk builds forward to it" % [want_map, base_z])
+		else:
+			push_warning("[em-resume] %s never opened in 12 halls — standing at the door" % want_map)
 	var re_v: Variant = pd.get("resume_eye")
 	if re_v is Array and (re_v as Array).size() >= 3:
-		var want := Vector3(float(re_v[0]), float(re_v[1]), float(re_v[2]))
+		var want := Vector3(float(re_v[0]), float(re_v[1]), float(re_v[2]) + base_z)
 		var best := Vector2i(-2147483648, 0)
 		var bd: float = 1e18
 		for k in _walk_cells:
@@ -14563,6 +14593,14 @@ func _derive_map_row(map_name: String) -> Dictionary:
 		return {}
 	var layers: Dictionary = (doc_v as Dictionary).get("layers", {})
 	var struct: Array = layers.get("structure", [])
+	# WHERE THIS MAP'S FLOOR IS — map_info.museum.wall_height, default 2.
+	# Trans_Pit walks on height-3 slabs over fire; the default rule read its
+	# whole floor as wall and derived a solid block. Mirrors the same knob in
+	# tools/em_map_halls.py — if the two disagree, the plan row and this live
+	# re-read build different halls, which is the worst class of bug here.
+	var _mi: Dictionary = (doc_v as Dictionary).get("map_info", {}) if (doc_v as Dictionary).get("map_info") is Dictionary else {}
+	var _md: Dictionary = _mi.get("museum", {}) if _mi.get("museum") is Dictionary else {}
+	var _wall_h: int = int(_md.get("wall_height", 2))
 	var inter: Array = layers.get("interactables", [])
 	var r1 := -1
 	var c1 := -1
@@ -14599,7 +14637,10 @@ func _derive_map_row(map_name: String) -> Dictionary:
 					pn = maxi(1, int(str(sv2.split(":")[1])))
 				line.append("p" if pn == 1 else "p%d" % pn)
 			else:
-				line.append("4" if v >= 2 else ("1" if v >= 1 else "0"))
+				# wall_height: see tools/em_map_halls.py. A map whose walk
+				# surface is not 1 says so, and BOTH derivers must agree or
+				# the plan row and the live re-read build different halls.
+				line.append("4" if v >= _wall_h else ("1" if v >= 1 else "0"))
 		tile.append(line)
 	var arts: Array = []
 	for r in range(inter.size()):
