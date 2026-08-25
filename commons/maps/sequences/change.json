@@ -172,10 +172,10 @@
    "deferred_reason": "THE FOLD, 2026-08-25. Eight rooms, seven of them 10x11, held 27 artifact placements between them — two to five each, which is a corridor with a thing in it, not a room. Folded to the four rungs the map names were already spelling. Checkable: python tools/fold_ledger.py --sequence=change --plan=doc/folds/change.json --check",
    "taxonomy": {
     "_readme": "THE LADDER (2026-08-25). FOUR rungs, and the fourth is the loop: reconciliation shows that rate and accumulation were the same operation read in opposite directions, so the walk ends where it started knowing why. The rungs were already in the map names — the fold only stopped spending three rooms on one idea.",
-    "1_rate": "how fast, right here? — tangent, slope, velocity, the partial derivative you read off a terrain with your feet. THE ROOM IS Change_Intro (20x20, 170 floor cells, the only room in the sequence with space to be one), which absorbed Change_Velocity and Change_Slope_Surface.",
+    "1_rate": "how fast, right here? — tangent, slope, velocity, the partial derivative you read off a terrain with your feet, and now what a slope is FOR: gradient_descent_well (a glowing loss basin where marbles fall, settle and begin again) and descent_marble_toy (the same descent small enough to hold). THE ROOM IS Change_Intro, 20x20 and the only room in the sequence with space to be one; it absorbed Change_Velocity and Change_Slope_Surface.",
     "2_accumulation": "what does a rate add up to? — Riemann rectangles, the pump that fills, pi counted out. THE ROOM IS Accumulation_Riemann; Accumulation_Area folded in without a single orphan, because integral_area already stood in both.",
-    "3_flow": "what if the rate is everywhere at once? — the field, and the particles that make it visible. THE ROOM IS Flow_Field, which took particle_flow_swarm from Flow_Particle_Pulse.",
-    "4_reconciliation": "when do the two meet? — the fundamental theorem: differentiation and integration are one operation read in opposite directions. THE ROOM IS Change_Reconciliation (ftc_bridge). The loop closes on rung 1.",
+    "3_flow": "what if the rate is everywhere at once? — the field, the particles that make it visible, the arrows themselves (vector_field_visualizer), agents that navigate by following it (noc_5_04_flow_field), and a brush that paints with it (flow_field_painter). THE ROOM IS Flow_Field, which took particle_flow_swarm from Flow_Particle_Pulse.",
+    "4_reconciliation": "when do the two meet? — the fundamental theorem: differentiation and integration are one operation read in opposite directions. THE ROOM IS Change_Reconciliation, and it now HOLDS BOTH OPERANDS — derivative_pair from rung 1 and integral_area from rung 2 stand beside ftc_bridge, because a room that reconciles two things and contains neither cannot show its claim. The loop closes on rung 1.",
     "_next_door": "forces rung 4 (motion) is this sequence read in a body — velocity is the first derivative and acceleration the second — and forces rung 5 (force) hands the walk back here. The spine has change at 4 and forces at 5 for that reason.",
     "_received_from_forces": {
      "riemann_sum_workbench": "Accumulation_Riemann",
@@ -190,13 +190,13 @@
     "_retired_tokens": {
      "player_trace": "retire furniture, 21 other maps"
     },
-    "_still_thin": "Flow_Field holds 3 and Change_Reconciliation 3 after the fold. The fold made the sequence honest, not full — those two rungs want more artifact, which is a separate job.",
     "_rooms": {
      "1_rate": "Change_Intro",
      "2_accumulation": "Accumulation_Riemann",
      "3_flow": "Flow_Field",
      "4_reconciliation": "Change_Reconciliation"
-    }
+    },
+    "_thickened": "2026-08-25. Seven MIRRORS, nothing moved: the gradient family stays in FormFinding_Descent (12x10, four artifacts — moving three would have gutted it) and the flow family stays in forces' VFM_04_Fields. A second placement is how this corpus works. The consequence is that formfinding and machinelearning now RECALL a slope already descended here, rather than meeting the derivative for the first time in a room about form. gradient_descent itself was refused: it declares a 20-metre footprint. Plan in doc/folds/change_thicken.json."
    }
   }
  }

@@ -1,0 +1,14 @@
+{
+ "_readme": "THICKENING CHANGE (2026-08-25, Palle: 'make the thickening'). Not a fold — nothing moves. Seven MIRRORS: each artifact stays in its host room and also stands in the change room whose argument needs it. FormFinding_Descent is 12x10 with four artifacts, three of them the gradient family, so moving them would gut formfinding's descent room; and a second placement is how this corpus already works (science_screen stands in 212 maps). What changes is that formfinding and machinelearning now RECALL a slope the walker already descended in change, instead of meeting the derivative for the first time in a room about form.",
+ "_dropped": "gradient_descent declares a [20, 14, 20] footprint — twenty metres. It would swallow any change room, so the family arrives through gradient_descent_well (a glowing loss basin, [2,1,2]) and descent_marble_toy (a marble-in-a-bowl you HOLD, 2 cells) instead. weather_vector_field was also dropped: 9 cells of walkable storm chamber does not belong in a 10x11 room, and it already stands in two forces rooms.",
+ "keep": ["Change_Intro", "Accumulation_Riemann", "Flow_Field", "Change_Reconciliation"],
+ "verdicts": {
+  "gradient_descent_well": "rescue Change_Intro",
+  "descent_marble_toy": "rescue Change_Intro",
+  "flow_field_painter": "rescue Flow_Field",
+  "noc_5_04_flow_field": "rescue Flow_Field",
+  "vector_field_visualizer": "rescue Flow_Field",
+  "derivative_pair": "rescue Change_Reconciliation",
+  "integral_area": "rescue Change_Reconciliation"
+ }
+}
