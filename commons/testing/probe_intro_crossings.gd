@@ -20,9 +20,18 @@ func _run() -> void:
 	inst.set("_hand_path", "res://ada_run/_trial_ic_hand.json")
 	inst.set("start_chapter", "transformation")
 	inst.set("start_map", "Trans_Introduction")
+	# THE WALKER'S OWN CONTROL, not the probe's wishes (2026-08-25, Palle:
+	# "what is the difference between when you take a screen and the game?").
+	# Every probe in this file forced grid_pack 1; the live control says 0.
+	# --pack=0 reproduces the game exactly.
+	var pack := 1
+	for a in OS.get_cmdline_user_args():
+		if String(a).begins_with("--pack="):
+			pack = int(String(a).substr(7))
 	var ctl := FileAccess.open("res://ada_run/_trial_ic_control.json", FileAccess.WRITE)
 	ctl.store_string(JSON.stringify({"first_chapter": "transformation",
-		"first_map": "Trans_Introduction", "dollhouse": 0, "grid_pack": 1}, " "))
+		"first_map": "Trans_Introduction", "dollhouse": 0, "grid_pack": pack}, " "))
+	print("[probe] grid_pack = %d" % pack)
 	ctl.close()
 	get_root().add_child(inst)
 	await create_timer(2.5).timeout

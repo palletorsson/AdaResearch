@@ -386,18 +386,22 @@ var _hand_path: String = "res://ada_run/necklace_hand.json"   # a var: probes in
 # taught that lesson ("change between iso and walk does not update": a probe's
 # restore landed between the player's H press and the reload's read).
 var EM_CONTROL := "res://ada_run/em_control.json"
+const LIVE_CONTROL := "res://ada_run/em_control.json"
 # ── THE WHITE CUBE GATE (2026-08-12) ─────────────────────────────────────────
 # OFF by default and gated twice, so a museum that never opted in is untouched:
 #   --em-white-cube          forces every segment of THIS RUN into the mode
 #   "white_cube": true       on a pattern in template_patterns.json opts that
 #                            one building in, in every run
-# Everything it changes is a knob that already existed and was already wired --
-# em_budget's hang licence, em_props' props_per_10m, em_detail's stretch floor
-# and label modulo, and em_materials.gallery_white(), which has been in the
-# library since it was written with no callers while every wall in the corridor
-# was drawn in 0.72 warm plaster. See em_budget.gd's WHITE CUBE block for the
-# measurement that set each number.
+# Everything it changes is a CURATORIAL knob that already existed and was
+# already wired -- em_budget's hang licence, em_props' props_per_10m, and
+# em_detail's stretch floor and label modulo. Architecture is museum white in
+# every mode; this gate now changes density, never the paint. See em_budget.gd's
+# WHITE CUBE block for the measurement that set each number.
 var _white_cube: bool = false
+## The museum's architectural ground: a warm, low-chroma white with enough
+## headroom for the wall wash. Trim, returns, and corner panels use the same
+## painted family; material changes no longer turn every junction into joinery.
+const MUSEUM_OFF_WHITE := Color(0.895, 0.890, 0.875)
 # ── THE WALL-RUN GATE (2026-08-13) ───────────────────────────────────────────
 # OFF by default, gated twice, same shape as the white cube above:
 #   --em-wall-runs           merges every segment's walls in THIS RUN
@@ -1302,19 +1306,18 @@ func _build_surfaces() -> void:
 	# from the start and had never once been passed non-zero by anybody.
 	_surf["deck"] = _mat_of("floor_terrazzo", [Color.WHITE, 0.15])
 	_surf["wall"] = _mat_of("wall_plaster", [])
-	# THE WHITE CUBE'S DEFINING SURFACE, and it was already in the library with
-	# no callers anywhere in the repo: em_materials.gallery_white(), documented
-	# as "Museum-white matt emulsion, 0.885 sRGB. The building's main bounce
-	# surface". Every wall in every proof frame has been drawn in wall_plaster
-	# instead — honed lime at albedo 0.72/0.705/0.675, a warm grey. That is a
-	# 0.165 albedo gap on the surface that is 60-70% of every picture, and no
-	# amount of hanging or unhanging things on it closes it. Resolved per segment
-	# so a per-template opt-in works; absent the gate this role is never read.
+	# THE MUSEUM'S DEFINING SURFACE: a matte 0.885 sRGB emulsion and the main
+	# bounce surface. It is resolved once and used by every hall; templates still
+	# vary room form and curatorial density without repainting the institution.
 	_surf["wall_white"] = _mat_of("gallery_white", [])
 	_surf["podium"] = _mat_of("podium_marble", [])
 	_surf["plinth"] = _mat_of("trim_oak", [])
 	_surf["ceiling"] = _mat_of("ceiling_plaster", [])
-	_surf["trim"] = _mat_of("travertine", [])
+	# MoMA-like restraint: cornices, door linings, arris beads, and corner caps
+	# are painted architecture, not a second decorative material. Travertine's
+	# horizontal bedding read as timber when wrapped around thin members.
+	_surf["trim"] = _surf["wall_white"] if _surf["wall_white"] != null \
+		else _mat_of("ceiling_plaster", [])
 	_surf["brass"] = _mat_of("accent_brass", [0.35])
 	# THE 130 mm CONTACT STRIP. em_materials.skirting() existed with no callers in
 	# the whole repo; it is the library's one real light-reactive edge-darkening
@@ -3850,39 +3853,39 @@ func _build_segment() -> void:
 	# (a fully sealed strip at the very first segment, where nothing is behind).
 	var pw: int = _prev_w if _prev_w > 0 else 1
 	var zbase := int(_next_z)
-	# THE GATE, resolved once per segment. Off, every line below is what it was.
+	# The white-cube gate still controls CURATORIAL DENSITY. The architectural
+	# material is now museum white in every hall; changing curation must not also
+	# repaint the building.
 	var wc: bool = _white_cube or bool(spec.get("white_cube", false))
-	var wall_col := Color(0.86, 0.855, 0.845) if wc else Color(0.32, 0.32, 0.36)
+	var wall_col := MUSEUM_OFF_WHITE
 	# THE WALL-RUN GATE, resolved the same way. Off, every _wall_at below is the
 	# pair of calls it replaced, in the same order, so the segment is untouched.
 	var wr: bool = _wall_runs or bool(spec.get("wall_runs", false))
 	var wcells: Dictionary = {}
 	# the material library replaces the flat albedos role by role; a role the
 	# library never produced stays on its v1 colour
-	var m_wall: Material = _sm("wall_white") if wc else _sm("wall")
-	seg.set_meta("em_wall_mat", m_wall)
-	seg.set_meta("em_wall_col", wall_col)
+	var m_wall: Material = _sm("wall_white")
 	if m_wall == null:
 		m_wall = _sm("wall")
-	# THE CORNER SIDES (2026-08-23, Palle: "change the corner sides shader to
-	# a lighter off white non repeat one"): the vestibule's side walls, the
-	# closing strips and the halls' outer skins wear a FLAT off-white — no
-	# noise texture at all, so nothing can tile or repeat — a shade lighter
-	# than the plaster and the same in both gate modes.
-	if _m_corner == null:
-		_m_corner = StandardMaterial3D.new()
-		(_m_corner as StandardMaterial3D).albedo_color = Color(0.90, 0.895, 0.875)
-		(_m_corner as StandardMaterial3D).roughness = 0.86
-		(_m_corner as StandardMaterial3D).metallic = 0.0
-	var corner_col := Color(0.90, 0.895, 0.875)
-	var m_corner: Material = _m_corner
+	seg.set_meta("em_wall_mat", m_wall)
+	seg.set_meta("em_wall_col", wall_col)
+	# Returns and corner panels belong to the wall plane. Sharing the exact
+	# material instance removes the tan/wood band around every room and also
+	# prevents a subtly different white from exposing the streaming seam.
+	var corner_col := MUSEUM_OFF_WHITE
+	var m_corner: Material = m_wall
+	if m_corner == null:
+		if _m_corner == null:
+			_m_corner = StandardMaterial3D.new()
+			(_m_corner as StandardMaterial3D).albedo_color = MUSEUM_OFF_WHITE
+			(_m_corner as StandardMaterial3D).roughness = 0.93
+			(_m_corner as StandardMaterial3D).metallic = 0.0
+		m_corner = _m_corner
 	# door overpanels are stamped by em_detail in the "wall" role, so the role it
 	# probes has to be the same plaster the segment is actually built from or the
 	# panel over every door is a different colour from the wall around it
-	if wc and _surf.has("wall_white"):
-		_detail_mats["wall"] = _surf["wall_white"]
-	elif _surf.has("wall"):
-		_detail_mats["wall"] = _surf["wall"]
+	if m_wall != null:
+		_detail_mats["wall"] = m_wall
 	var m_deck: Material = _sm("deck")
 	var m_floor: Material = _sm("floor")
 	var m_podium: Material = _sm("podium")
@@ -4564,7 +4567,7 @@ func _build_segment() -> void:
 		_segments[-1]["z0"], _segments[-1]["z1"], n_lights])
 	if wc:
 		var wcb: Dictionary = deal.get("budget", {})
-		print("[white-cube] seg %d: hang licence %d (min wall %d m), 1 card per %d faces, props/10m %.4f, wall = gallery_white" % [
+		print("[white-cube] seg %d: hang licence %d (min wall %d m), 1 card per %d faces, props/10m %.4f" % [
 			_seg_index - 1, int(deal.get("wall_features_max", -1)),
 			int(deal.get("hang_min_stretch", 2)), int(deal.get("label_every", 11)),
 			float(wcb.get("props_per_10m", -1.0))])
@@ -5055,6 +5058,18 @@ func _ruling_for(tok: String, chapter: String, tx: int, tz: int, hand_row: bool 
 
 
 const BUILT_PATH := "res://ada_run/em_built.json"
+
+
+## A PROBE MUST NOT STAMP ON THE WALKER'S RECORD (2026-08-25). Palle asked what
+## differs between a screenshot and the game, and em_boot_last.json could not
+## answer it: my own headless probe had overwritten the line that said when the
+## walker booted, minutes after they asked. Every probe hands this scene a
+## trial control; from now on the reports follow it, so a probe writes beside
+## its own control and the live run's record survives being measured.
+func _report_path(p: String) -> String:
+	if EM_CONTROL == LIVE_CONTROL:
+		return p
+	return p.get_base_dir() + "/_trial_" + p.get_file()
 var _built: Array = []          # one entry per segment built this run
 
 ## Write what THIS segment turned out to be. Cells come from the walk map
@@ -5194,7 +5209,8 @@ func _flush_built_files(seg_no: int) -> void:
 	# headset keeps no as-built at all. After the first refusal the writes go
 	# to user:// instead, which adb can pull from the desk:
 	#   adb pull /sdcard/Android/data/<pkg>/files/em_built_vr.json
-	var paths: Array = [BUILT_PATH, BUILT_PATH.replace(".json", "_%s.json" % _mode_label)]
+	var paths: Array = [_report_path(BUILT_PATH),
+		_report_path(BUILT_PATH.replace(".json", "_%s.json" % _mode_label))]
 	if not _built_res_writable:
 		paths = [("user://" + BUILT_PATH.get_file()), "user://" + BUILT_PATH.get_file().replace(".json", "_%s.json" % _mode_label)]
 	for path in paths:
@@ -8740,7 +8756,7 @@ func _process(_delta: float) -> void:
 		print("[em-boot] %s" % JSON.stringify(_boot_ms))
 		# its own file too — a windowed run's stdout is swallowed on Windows,
 		# and em_built's copy is written before this stamp exists
-		var bf := FileAccess.open("res://ada_run/em_boot_last.json", FileAccess.WRITE)
+		var bf := FileAccess.open(_report_path("res://ada_run/em_boot_last.json"), FileAccess.WRITE)
 		if bf == null:
 			bf = FileAccess.open("user://em_boot_last.json", FileAccess.WRITE)   # the pak refuses; adb pulls this one
 		if bf != null:
