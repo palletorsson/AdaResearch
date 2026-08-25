@@ -34,19 +34,19 @@
    ],
    "content": [
     "VFM_01_Foundations: what an arrow carries — components, basis, a frame to read it in",
-    "Vectors_Act1_WhatAVectorIs: the same, at the scale of a room you walk",
+    "Vectors_Act1_WhatAVectorIs: the same question at the size of a processional hall, four stations and nothing else",
     "VFM_02_Operations: two arrows meet — add, subtract, dot, cross, project, torque",
-    "Vectors_Act2_VectorArithmetic: arithmetic you cross on foot, with the XL lasers",
-    "VFM_04_Fields: an arrow at every point — flow, weather, magnets, vortices",
-    "Vectors_Act3_FieldsAndMotion: standing in the field while it moves you",
-    "VFM_03_Motion: the arrow over time — velocity, acceleration, trajectory",
-    "VFM_05_Launch: aiming it — catapult, turret, mortar, the arc you predict",
-    "Vectors_Act4a_KineticForces: the walk that pushes back — centrifuge, drag, orbit",
+    "Vectors_Act2_VectorArithmetic: every operation twice, once in your hand and once at the size of the room",
+    "VFM_03_Motion: the arrow over time — velocity, acceleration, friction, the bounce",
+    "VFM_05_Launch: aiming it — catapult, turret, mortar, and the arc you have to predict",
+    "Vectors_Act3_FieldsAndMotion: motion at building scale (its flow console belongs to rung 5 and says so)",
     "VFM_06_Springs: the force that returns what it is given",
     "VFM_07_Gravity: attraction, two bodies, three, and the chaos after",
     "VFM_08_Arena: force against force — collision, reflection, targets",
+    "Vectors_Act4a_KineticForces: a park of machines, each one a force bending your walk",
     "Vectors_Act4b_Oscillation: the pendulum hall and the spring tower, at building scale",
-    "Vectors_Act5_ForceAsPlace: a force you stand inside — the loop closes on rung 1"
+    "VFM_04_Fields: an arrow at every point — and the instruction is STAND INSIDE IT",
+    "Vectors_Act5_ForceAsPlace: a chasm with no floor. The arrow from rung 1 is now the room."
    ],
    "demonstration": "See vectors as arrows in space. Add them head-to-tail. Feel dot product measure alignment. Watch cross product create perpendicular vectors. Then feel gravity pull you down. Push objects and feel resistance. Watch attraction and repulsion create orbits and explosions.",
    "description": "The fundamental language of 3D space meets the physics that brings it to life. Vectors encode direction and magnitudeâ€”the building blocks of everything spatial. Forces convert those vectors into motion through Newton's laws. Master vectors, master forces, master the physical world.",
@@ -79,15 +79,15 @@
     "Vectors_Act1_WhatAVectorIs",
     "VFM_02_Operations",
     "Vectors_Act2_VectorArithmetic",
-    "VFM_04_Fields",
-    "Vectors_Act3_FieldsAndMotion",
     "VFM_03_Motion",
     "VFM_05_Launch",
-    "Vectors_Act4a_KineticForces",
+    "Vectors_Act3_FieldsAndMotion",
     "VFM_06_Springs",
     "VFM_07_Gravity",
     "VFM_08_Arena",
+    "Vectors_Act4a_KineticForces",
     "Vectors_Act4b_Oscillation",
+    "VFM_04_Fields",
     "Vectors_Act5_ForceAsPlace"
    ],
    "name": "Vectors & Forces: From Direction to Dynamics",
@@ -266,11 +266,6 @@
    "taxonomy": {
     "_readme": "THE LADDER (2026-08-25), five rungs at TWO SCALES. The Acts and the VFM museum were not rivals — measured, they share only 22 of 169 tokens — so both survive: the museum is the BENCH (an operation at arm's length) and the Acts are the BUILDING (the same operation at the scale of a room you walk through). Folding them into one room each would have flattened the sequence's own claim, the way folding color's hand/set/space would have flattened colour's. Closes as a LOOP: rung 5 is a force you STAND INSIDE, which is rung 1's arrow with the walker put inside it.",
     "0_recalled_unit": "the vector itself is NOT taught here. primitives is sequence 1 — 'points, lines, planes, and basic vectors' — so an arrow with a length and a direction arrives already known. Like color's unit, it is a threshold the walk crosses, not a room it stops in.",
-    "1_quantity": "what does an arrow carry? — magnitude and direction, a basis, a coordinate frame. BENCH VFM_01_Foundations · BUILDING Vectors_Act1_WhatAVectorIs (length_lantern, CoordinateSystem3M, vector_normalize_demo).",
-    "2_operation": "what do two of them do to each other? — add, subtract, dot, cross, project, torque. BENCH VFM_02_Operations · BUILDING Vectors_Act2_VectorArithmetic. The XL exhibits here DELEGATE to the algorithm scenes (vector_dot_product_xl -> VectorDotProduct at 5x), which is why the fold had to follow delegate edges before it could count anything.",
-    "3_field": "what if there is one at every point? — flow, weather, magnets, vortices. BENCH VFM_04_Fields · BUILDING Vectors_Act3_FieldsAndMotion.",
-    "4_motion": "what does an arrow do over time? — velocity, acceleration, trajectory, launch. BENCH VFM_03_Motion + VFM_05_Launch · BUILDING Vectors_Act4a_KineticForces. This is where CHANGE comes back: velocity is the first derivative and acceleration the second, so the rung is the calculus sequence read in a body.",
-    "5_force": "what changes the motion? — F = ma: springs, gravity, collision, oscillation, and finally a force as a PLACE. BENCH VFM_06_Springs + VFM_07_Gravity + VFM_08_Arena · BUILDING Vectors_Act4b_Oscillation + Vectors_Act5_ForceAsPlace. Closes the loop — force is the second derivative of position, so the last rung hands the walk back to change.",
     "_rehomed": {
      "ca_rules_workbench": "rehome cellularautomata CA_Rules_Lab",
      "cantor_diagonal_workbench": "rehome foundationscrisis Limits_Lab",
@@ -344,36 +339,46 @@
        "Vectors_Act2_VectorArithmetic"
       ]
      },
-     "3_field": {
-      "bench": [
-       "VFM_04_Fields"
-      ],
-      "building": [
-       "Vectors_Act3_FieldsAndMotion"
-      ]
-     },
-     "4_motion": {
+     "3_motion": {
       "bench": [
        "VFM_03_Motion",
        "VFM_05_Launch"
       ],
       "building": [
-       "Vectors_Act4a_KineticForces"
+       "Vectors_Act3_FieldsAndMotion"
       ]
      },
-     "5_force": {
+     "4_force": {
       "bench": [
        "VFM_06_Springs",
        "VFM_07_Gravity",
        "VFM_08_Arena"
       ],
       "building": [
-       "Vectors_Act4b_Oscillation",
+       "Vectors_Act4a_KineticForces",
+       "Vectors_Act4b_Oscillation"
+      ]
+     },
+     "5_field": {
+      "bench": [
+       "VFM_04_Fields"
+      ],
+      "building": [
        "Vectors_Act5_ForceAsPlace"
       ]
      }
     },
-    "_scales": "bench = the museum (VFM), building = the walkable Acts"
+    "_scales": "bench = the museum (VFM), building = the walkable Acts",
+    "1_quantity": "what does one arrow carry? — magnitude, direction, a basis, a frame. BENCH VFM_01_Foundations · BUILDING Vectors_Act1_WhatAVectorIs.",
+    "2_operation": "what do two of them do to each other? — add, subtract, dot, cross, project, torque. BENCH VFM_02_Operations · BUILDING Vectors_Act2_VectorArithmetic. The XL exhibits here DELEGATE to the algorithm scenes (vector_dot_product_xl -> VectorDotProduct at 5x).",
+    "3_motion": "what does an arrow do over time? — velocity, acceleration, friction, ballistics. BENCH VFM_03_Motion + VFM_05_Launch · BUILDING Vectors_Act3_FieldsAndMotion. This is where CHANGE comes back: velocity is the first derivative, acceleration the second.",
+    "4_force": "what changes the motion? — F = ma: springs, gravity, collision, oscillation. BENCH VFM_06_Springs + VFM_07_Gravity + VFM_08_Arena · BUILDING Vectors_Act4a_KineticForces + Vectors_Act4b_Oscillation. The largest rung, five rooms, and it earns them.",
+    "5_field": "THE RETURN. An arrow at every point — and both rooms on this rung say the same thing in their own words: VFM_04_Fields is titled 'Stand inside the field', Vectors_Act5_ForceAsPlace is a chasm with no floor. The sequence's truth line is 'A force is a vector you can stand inside', so the last rung is rung 1 with the walker put INSIDE the arrow. That is the loop, and it is the one beat a tutorial cannot make disposable.",
+    "_order_evidence": "MOVED 2026-08-25, field from rung 3 to rung 5. Two independent signals, neither of them taste. (1) The NOC artifacts carry the book's chapter numbers in their token names, and NOC puts flow fields LAST (ch 5): the field rung's only NOC piece is noc_5_04_flow_field while motion and force hold chapters 1-3. Mean chapter per rung ran 1.5 / 3.5 / 5.0 / 1.8 / 1.7 — field was two rungs early. (2) The two 'stand inside' rooms were split across rungs 3 and 5; together they are the return beat. Small sample (14 NOC artifacts) — the blurbs are the stronger evidence.",
+    "_straddles": {
+     "Vectors_Act3_FieldsAndMotion": "its own title says Fields AND Motion, and its blurb says 'two rooms, two ways a vector stops holding still'. Filed on MOTION; its flow console and weather field belong to rung 5. The straddle is declared rather than smoothed — a room that spans two rungs is a fact about the room, not a gap in the ladder."
+    },
+    "_known_weak": "VFM_01 is a LOBBY, not a rung-1 room: 21 tokens including add/subtract (rung 2) and newtons_laws + example_2_1_forces_vr (rung 4), against Act1's deliberate four. That is the whole of rung 1's 5.2x bench/building imbalance. Also misfiled: flocking_controls in VFM_03 belongs to swarmintelligence; work_energy_demo and normal_force_demo in VFM_02 are force material. Five tokens, not an ordering problem — a filling problem, and a separate pass."
    }
   }
  },
