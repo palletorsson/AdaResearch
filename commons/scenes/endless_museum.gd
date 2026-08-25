@@ -2802,6 +2802,150 @@ const PatternSimScript = preload("res://commons/pattern_grammar/pattern_sim.gd")
 ## should be a decision, not a side effect of walking past a wall.
 var _pattern_panels: Array = []
 
+## THE CHOOSING WALL (2026-08-25, Palle: "can we get one room with a wall that
+## has many pattern config then we click and the whole map turn that config.
+## like 50 different configs"). Fifty swatches on one wall — the seventeen
+## groups across three palettes — and a click sends that config through the
+## WHOLE museum: every hall standing, and every hall built after.
+##
+## The swatches render at 64 square and the chosen config at the museum's 192:
+## fifty full-size renders is 1.8 million pixels through a GDScript loop, and
+## a thumbnail does not need them.
+const PATTERN_WALL_COLS := 10
+const PATTERN_WALL_ROWS := 5
+var _pattern_swatches: Array = []          # {node, cfg}
+var _pattern_all: Dictionary = {}          # the config the whole map is wearing
+var _pattern_all_mats: Dictionary = {}     # {wall, floor} — what to swap OUT next time
+
+func _pattern_configs() -> Array:
+	var groups: Array = _pattern_groups()
+	var pals: Array = PatternSimScript.PALETTES.keys()
+	var out: Array = []
+	var n: int = PATTERN_WALL_COLS * PATTERN_WALL_ROWS
+	for i in range(n):
+		out.append({
+			"group": String(groups[i % groups.size()]),
+			"palette": String(pals[int(i / groups.size()) % pals.size()]),
+			"motif": "dot",
+			"tile_size": 32,
+			"motif_seed": 7 + int(i / groups.size())})
+	return out
+
+
+func _pattern_wall(seg: Node3D, zbase: int, w: int) -> void:
+	var cfgs: Array = _pattern_configs()
+	var cell := 0.52
+	var z0: float = float(zbase) + float(VESTIBULE_H) + 2.0
+	var x: float = float(w) - 0.06          # the inner face of the left-hand skin
+	var back := MeshInstance3D.new()
+	back.name = "PatternWall"
+	var bm := BoxMesh.new()
+	bm.size = Vector3(0.06, float(PATTERN_WALL_ROWS) * cell + 0.3,
+		float(PATTERN_WALL_COLS) * cell + 0.3)
+	back.mesh = bm
+	var bmat := StandardMaterial3D.new()
+	bmat.albedo_color = Color(0.09, 0.09, 0.11)
+	back.material_override = bmat
+	back.position = Vector3(x - 0.04, 0.55 + float(PATTERN_WALL_ROWS) * cell * 0.5,
+		z0 + float(PATTERN_WALL_COLS) * cell * 0.5)
+	seg.add_child(back)
+	for i in range(cfgs.size()):
+		var col: int = i % PATTERN_WALL_COLS
+		var row: int = int(i / PATTERN_WALL_COLS)
+		var cfg: Dictionary = (cfgs[i] as Dictionary).duplicate()
+		var thumb: Dictionary = cfg.duplicate()
+		thumb["canvas_size"] = 64
+		var img: Image = PatternSimScript.render_to_image(thumb)
+		var q := MeshInstance3D.new()
+		q.name = "Swatch_%02d" % i
+		var qm := QuadMesh.new()
+		qm.size = Vector2(cell - 0.06, cell - 0.06)
+		q.mesh = qm
+		var sm := StandardMaterial3D.new()
+		sm.albedo_texture = ImageTexture.create_from_image(img)
+		sm.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST_WITH_MIPMAPS
+		sm.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		q.material_override = sm
+		q.rotation_degrees = Vector3(0, -90, 0)
+		q.position = Vector3(x, 0.75 + float(PATTERN_WALL_ROWS - 1 - row) * cell,
+			z0 + float(col) * cell + cell * 0.5)
+		seg.add_child(q)
+		_pattern_swatches.append({"node": q, "cfg": cfg})
+	var lab := Label3D.new()
+	lab.name = "PatternWallLabel"
+	lab.text = "%d configs · click one and the whole museum wears it" % cfgs.size()
+	lab.font_size = 40
+	lab.pixel_size = 0.0016
+	lab.modulate = Color(0.86, 0.85, 0.82)
+	lab.rotation_degrees = Vector3(0, -90, 0)
+	lab.position = Vector3(x, 0.45, z0 + float(PATTERN_WALL_COLS) * cell * 0.5)
+	seg.add_child(lab)
+	print("[em-pattern] a choosing wall: %d configs at z %.1f" % [cfgs.size(), z0])
+
+
+## The swatch the eye is actually pointing at: nearest ANGLE within reach, not
+## merely the first one inside the cone — fifty quads on one wall are all
+## inside any cone wide enough to be clickable.
+func _pattern_pick() -> Dictionary:
+	if _cam == null:
+		return {}
+	var best: Dictionary = {}
+	var best_a := 0.30
+	for sw_v in _pattern_swatches:
+		var sw: Dictionary = sw_v
+		var n: Node3D = sw.get("node")
+		if n == null or not is_instance_valid(n):
+			continue
+		var to: Vector3 = n.global_position - _cam.global_position
+		if to.length() > 4.5:
+			continue
+		var a: float = (-_cam.global_transform.basis.z).angle_to(to.normalized())
+		if a < best_a:
+			best_a = a
+			best = sw
+	return best
+
+
+## One config through the WHOLE museum: every hall standing now, and every hall
+## built after. Halls that never declared a pattern are dressed too — their
+## walls wear the pool's own material, so that is what gets swapped.
+func _pattern_apply_all(cfg: Dictionary) -> void:
+	var wall_old: Material = _pattern_all_mats.get("wall") if _pattern_all_mats.has("wall") else _sm("wall_white")
+	var floor_old: Material = _pattern_all_mats.get("floor") if _pattern_all_mats.has("floor") else _sm("deck")
+	var wall_new: Material = _pattern_material(_sm("wall_white"), cfg, 1.0)
+	var floor_cfg: Dictionary = cfg.duplicate()
+	floor_cfg["motif_seed"] = int(cfg.get("motif_seed", 7)) + 11
+	var floor_new: Material = _pattern_material(_sm("deck"), floor_cfg, 1.0)
+	var halls := 0
+	var boxes := 0
+	for s_v in _segments:
+		var sd: Dictionary = s_v
+		var seg: Node3D = _node_or_null(sd.get("node"))
+		if seg == null:
+			continue
+		var touched := false
+		for mm_v in seg.find_children("*", "MultiMeshInstance3D", true, false):
+			var mmi := mm_v as MultiMeshInstance3D
+			var cur: Material = mmi.material_override
+			if cur == null and mmi.multimesh != null and mmi.multimesh.mesh != null:
+				cur = mmi.multimesh.mesh.surface_get_material(0)
+			var n: int = mmi.multimesh.instance_count if mmi.multimesh != null else 0
+			if cur == wall_old:
+				mmi.material_override = wall_new
+			elif cur == floor_old:
+				mmi.material_override = floor_new
+			else:
+				continue
+			touched = true
+			boxes += n
+		if touched:
+			halls += 1
+	_pattern_all = cfg.duplicate()
+	_pattern_all_mats = {"wall": wall_new, "floor": floor_new}
+	print("[em-pattern] THE WHOLE MUSEUM -> %s · %s (%d hall(s), %d boxes)" % [
+		String(cfg.get("group", "?")), String(cfg.get("palette", "?")), halls, boxes])
+
+
 func _pattern_panel(seg: Node3D, zbase: int, decl: Dictionary,
 		wall_mat: Material, floor_mat: Material) -> void:
 	var z: float = float(zbase) + float(VESTIBULE_H) + 2.5
@@ -4453,6 +4597,16 @@ func _build_segment() -> void:
 	var m_floor: Material = _sm("floor")
 	var m_podium: Material = _sm("podium")
 	var m_plinth: Material = _sm("plinth")
+	# THE MUSEUM-WIDE CHOICE outranks the hall's own declaration: a config
+	# chosen at the wall is meant to be worn everywhere, including by halls
+	# that had not been built when it was picked.
+	if not _pattern_all.is_empty():
+		m_wall = _pattern_material(m_wall, _pattern_all, 1.0)
+		_detail_mats["wall"] = m_wall
+		var fc: Dictionary = _pattern_all.duplicate()
+		fc["motif_seed"] = int(_pattern_all.get("motif_seed", 7)) + 11
+		m_floor = _pattern_material(m_floor, fc, 1.0)
+		m_deck = _pattern_material(m_deck, fc, 1.0)
 	# the hall's own pattern, if it declares one: the role materials are SHARED
 	# across every hall, so this hands back a duplicate and leaves the pool alone
 	if peek.get("pattern") is Dictionary:
@@ -5038,6 +5192,11 @@ func _build_segment() -> void:
 	# the room's panel, once the hall exists to be re-dressed
 	if peek.get("pattern") is Dictionary:
 		_pattern_panel(seg, zbase, peek["pattern"], m_wall, m_deck)
+		# ONE ROOM CARRIES THE CHOICE: museum.pattern.chooser puts the wall of
+		# fifty in this hall. Built once — a second copy would fight the first
+		# over which swatch the eye is pointing at.
+		if bool((peek["pattern"] as Dictionary).get("chooser", false)) and _pattern_swatches.is_empty():
+			_pattern_wall(seg, zbase, w)
 	_segments.append({"node": seg, "z0": _next_z, "z1": _next_z + float(h) + float(VESTIBULE_H) + float(porch_depth) + float(court_depth), "index": _seg_index, "w": w,
 		"snap": stream_snap, "pearl": String(deal.get("pearl", "")) if deal is Dictionary else "",
 		# THE MAP NAME, not only the pearl (2026-08-25): the view toggle rebuilds
@@ -11934,6 +12093,11 @@ func _input(event: InputEvent) -> void:
 			_open_gate()
 	# the room's panel takes the same click, the same reach, the same cone
 	var mb_pat: bool = event is InputEventMouseButton and (event as InputEventMouseButton).pressed
+	if mb_pat and (event as InputEventMouseButton).button_index == MOUSE_BUTTON_LEFT:
+		var pick: Dictionary = _pattern_pick()
+		if not pick.is_empty():
+			_pattern_apply_all(pick.get("cfg", {}))
+			return
 	if mb_pat and (event as InputEventMouseButton).button_index == MOUSE_BUTTON_LEFT and _mod_gate != null:
 		for pr_v in _pattern_panels:
 			var pr: Dictionary = pr_v
