@@ -2791,6 +2791,162 @@ func _mat(color: Color) -> StandardMaterial3D:
 var _pattern_cache: Dictionary = {}
 const PatternSimScript = preload("res://commons/pattern_grammar/pattern_sim.gd")
 
+## THE ROOM'S OWN PANEL (2026-08-25, Palle: "can we put a panel on the wall
+## where i can change the whole room?"). A plate on the right-hand wall of a
+## hall that declares museum.pattern. Click it within reach and the room
+## re-dresses: the wall takes the next of the seventeen groups, the floor takes
+## the one seven along, so the two never agree and the change is unmistakable.
+##
+## It edits the LIVE materials, not the map. The chosen pair is printed so it
+## can be written into museum.pattern when it is worth keeping — a ruling
+## should be a decision, not a side effect of walking past a wall.
+var _pattern_panels: Array = []
+
+func _pattern_panel(seg: Node3D, zbase: int, decl: Dictionary,
+		wall_mat: Material, floor_mat: Material) -> void:
+	var z: float = float(zbase) + float(VESTIBULE_H) + 2.5
+	var plate := MeshInstance3D.new()
+	plate.name = "PatternPanel"
+	var bm := BoxMesh.new()
+	bm.size = Vector3(0.08, 0.62, 1.15)
+	plate.mesh = bm
+	var pm := StandardMaterial3D.new()
+	pm.albedo_color = Color(0.10, 0.10, 0.12)
+	pm.roughness = 0.5
+	plate.material_override = pm
+	plate.position = Vector3(0.05, 1.45, z)
+	seg.add_child(plate)
+	# the swatch: the wall's own pattern, so the panel shows what it does
+	var swatch := MeshInstance3D.new()
+	swatch.name = "PatternSwatch"
+	var qm := QuadMesh.new()
+	qm.size = Vector2(0.42, 0.42)
+	swatch.mesh = qm
+	swatch.rotation_degrees = Vector3(0, 90, 0)
+	swatch.position = Vector3(0.10, 1.62, z)
+	seg.add_child(swatch)
+	var label := Label3D.new()
+	label.name = "PatternLabel"
+	label.font_size = 44
+	label.pixel_size = 0.0016
+	label.modulate = Color(0.88, 0.87, 0.84)
+	label.rotation_degrees = Vector3(0, 90, 0)
+	label.position = Vector3(0.10, 1.30, z)
+	seg.add_child(label)
+	# START AT WHAT THE HALL IS ACTUALLY WEARING (2026-08-25): the first
+	# version began at index 0 and recomputed the "old" material from it, so
+	# the swap looked for p1 in a room built from p6m, found nothing, and
+	# cycled its own label over an unchanged room.
+	var gs: Array = _pattern_groups()
+	var wname := ""
+	var wd: Variant = decl.get("wall")
+	if wd is String:
+		wname = String(wd)
+	elif wd is Dictionary:
+		wname = String((wd as Dictionary).get("group", ""))
+	var gi := 0
+	for k in range(gs.size()):
+		if String(gs[k]) == wname:
+			gi = k
+	# and HOLD the materials rather than deriving them: the floor's declared
+	# group need not be the wall's plus seven, and a derived pair matches
+	# nothing the builder actually used
+	_pattern_panels.append({"plate": plate, "swatch": swatch, "label": label,
+		"seg": seg, "i": gi, "decl": decl, "wall_mat": wall_mat, "floor_mat": floor_mat,
+		"floor_g": _decl_group(decl.get("floor"))})
+	_pattern_panel_show(_pattern_panels[-1])
+	print("[em-pattern] a panel on the wall at z %.1f — click it to re-dress the room" % z)
+
+
+func _pattern_groups() -> Array:
+	return PatternSimScript.GROUPS
+
+
+func _pattern_panel_show(rec: Dictionary) -> void:
+	var groups: Array = _pattern_groups()
+	if groups.is_empty():
+		return
+	var i: int = int(rec.get("i", 0)) % groups.size()
+	var wall_g := String(groups[i])
+	# the DECLARED floor until a click replaces it, or the panel says pmg over
+	# a floor that is p4g
+	var floor_g := String(rec.get("floor_g", ""))
+	if floor_g == "":
+		floor_g = String(groups[(i + 7) % groups.size()])
+	var lab: Label3D = rec.get("label")
+	if lab != null and is_instance_valid(lab):
+		lab.text = "the room
+%s  ·  %s" % [wall_g, floor_g]
+	var sw: MeshInstance3D = rec.get("swatch")
+	var decl: Dictionary = rec.get("decl", {})
+	var wm: Material = _pattern_material(_sm("wall_white"), _pattern_spec(decl.get("wall"), wall_g), 1.0)
+	if sw != null and is_instance_valid(sw) and wm is StandardMaterial3D:
+		var sm := StandardMaterial3D.new()
+		sm.albedo_texture = (wm as StandardMaterial3D).albedo_texture
+		sm.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST_WITH_MIPMAPS
+		sm.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		sw.material_override = sm
+
+
+## the declared config with its group replaced — palette, seed and tile size
+## are the hall's, only the symmetry changes
+## the group a declaration names, whether it is a bare string or a config
+func _decl_group(spec: Variant) -> String:
+	if spec is String:
+		return String(spec)
+	if spec is Dictionary:
+		return String((spec as Dictionary).get("group", ""))
+	return ""
+
+
+func _pattern_spec(base: Variant, group: String) -> Dictionary:
+	var cfg: Dictionary = (base as Dictionary).duplicate(true) if base is Dictionary else {}
+	cfg["group"] = group
+	return cfg
+
+
+## Re-dress every surface in the hall that wears the panel's current pair.
+func _pattern_cycle(rec: Dictionary) -> void:
+	var groups: Array = _pattern_groups()
+	var seg: Node3D = rec.get("seg")
+	if groups.is_empty() or seg == null or not is_instance_valid(seg):
+		return
+	var decl: Dictionary = rec.get("decl", {})
+	var wall_old: Variant = rec.get("wall_mat")
+	var floor_old: Variant = rec.get("floor_mat")
+	rec["i"] = (int(rec.get("i", 0)) + 1) % groups.size()
+	var wg := String(groups[int(rec["i"])])
+	var fg := String(groups[(int(rec["i"]) + 7) % groups.size()])
+	var wall_new: Material = _pattern_material(_sm("wall_white"),
+		_pattern_spec(decl.get("wall"), wg), float(decl.get("wall_tiles", 1.0)))
+	var floor_new: Material = _pattern_material(_sm("deck"),
+		_pattern_spec(decl.get("floor"), fg), float(decl.get("floor_tiles", 1.0)))
+	# THE ARCHITECTURE IS A MULTIMESH: one MultiMeshInstance3D per material, so
+	# re-dressing a whole room is a handful of swaps, not a rebuild
+	var swapped := 0
+	var boxes := 0
+	for mm_v in seg.find_children("*", "MultiMeshInstance3D", true, false):
+		var mmi := mm_v as MultiMeshInstance3D
+		var cur: Material = mmi.material_override
+		if cur == null and mmi.multimesh != null and mmi.multimesh.mesh != null:
+			cur = mmi.multimesh.mesh.surface_get_material(0)
+		var n: int = mmi.multimesh.instance_count if mmi.multimesh != null else 0
+		if wall_old is Material and cur == wall_old:
+			mmi.material_override = wall_new
+			swapped += 1
+			boxes += n
+		elif floor_old is Material and cur == floor_old:
+			mmi.material_override = floor_new
+			swapped += 1
+			boxes += n
+	rec["wall_mat"] = wall_new
+	rec["floor_mat"] = floor_new
+	rec["floor_g"] = fg
+	_pattern_panel_show(rec)
+	print("[em-pattern] the room -> %s / %s (%d surface(s), %d boxes; declare with museum.pattern)" % [
+		wg, fg, swapped, boxes])
+
+
 func _pattern_material(base: Material, spec: Variant, tiles: float) -> Material:
 	var cfg: Dictionary = {}
 	if spec is String and String(spec) != "":
@@ -4879,6 +5035,9 @@ func _build_segment() -> void:
 	if not sp_seen:
 		_save_points.append({"z": sp_z,
 			"pos": Vector3(float(w) / 2.0 + 0.5, 0.25, float(zbase) + float(VESTIBULE_H) - 1.5)})
+	# the room's panel, once the hall exists to be re-dressed
+	if peek.get("pattern") is Dictionary:
+		_pattern_panel(seg, zbase, peek["pattern"], m_wall, m_deck)
 	_segments.append({"node": seg, "z0": _next_z, "z1": _next_z + float(h) + float(VESTIBULE_H) + float(porch_depth) + float(court_depth), "index": _seg_index, "w": w,
 		"snap": stream_snap, "pearl": String(deal.get("pearl", "")) if deal is Dictionary else "",
 		# THE MAP NAME, not only the pearl (2026-08-25): the view toggle rebuilds
@@ -11773,6 +11932,17 @@ func _input(event: InputEvent) -> void:
 		if bool(_mod_gate.call("clicked", _cam, _gate.get("scanner"),
 				float(_gate.get("click_reach_m", 3.2)), float(_gate.get("click_cone_rad", 0.55)))):
 			_open_gate()
+	# the room's panel takes the same click, the same reach, the same cone
+	var mb_pat: bool = event is InputEventMouseButton and (event as InputEventMouseButton).pressed
+	if mb_pat and (event as InputEventMouseButton).button_index == MOUSE_BUTTON_LEFT and _mod_gate != null:
+		for pr_v in _pattern_panels:
+			var pr: Dictionary = pr_v
+			var pl: Node3D = pr.get("plate")
+			if pl == null or not is_instance_valid(pl):
+				continue
+			if bool(_mod_gate.call("clicked", _cam, pl, 3.2, 0.6)):
+				_pattern_cycle(pr)
+				break
 	if Engine.is_editor_hint():
 		return
 	if event is InputEventKey and (event as InputEventKey).pressed and not (event as InputEventKey).echo \
