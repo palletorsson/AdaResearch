@@ -686,7 +686,7 @@ var DOLL_CUT := 2.4                # walls cut at this height — ABOVE the 1.55
 								   # pictures and the artifacts stay whole in
 								   # view (Palle: "higher so I can see the
 								   # artifacts"); em_layout hall.doll_cut_m
-var _doll_zoom: float = 16.0       # orthographic size; wheel zooms 6..60
+var _doll_zoom: float = 16.0       # isometric orthographic size; plan auto-fits its hall
 var _doll_yaw: float = PI * 0.75   # the iso angle; Q/E turn in 45-degree steps
 # THE DOLL'S HANDS (2026-08-21, Palle: "build the mouse drag editing in the
 # doll house"): LMB picks the nearest body on the floor, dragging carries it
@@ -717,6 +717,7 @@ var _doll_insp: CanvasLayer = null        # the inspector — a selected body's 
 var _doll_insp_lbl: Label = null
 var _doll_insp_t: float = 0.0
 var _doll_top: bool = false               # H's second stop: the plan view, straight down
+var _plan_view_size: float = 28.0          # fixed per hall; the wheel navigates, never zooms
 
 ## THE SPINE STRIP (L): the museum's fourth zoom level — the whole spine as a
 ## 1D strip of pearls in walk order, each pearl's lines readable and editable
@@ -3299,7 +3300,7 @@ func _build_segment() -> void:
 				peek["open_roof"] = true
 				var map_h: int = (peek["tile"] as Array).size()
 				var map_w: int = ((peek["tile"] as Array)[0] as Array).size() if map_h > 0 else 0
-				peek["basin"] = {"depth": clampf(float(simd.get("depth", 1.0)), 0.3, 3.0),
+				peek["basin"] = {"depth": clampf(float(simd.get("depth", 1.0)), 0.3, 8.0),
 					"glass": false, "rects": [[0, 0, map_w, map_h]]}
 				peek["sim_margin"] = clampi(int(simd.get("margin", 2)), 1, 4)
 				# grid: true — the REAL GridSystem stands in the basin; the
@@ -3554,7 +3555,7 @@ func _build_segment() -> void:
 	var m_basin_glass: StandardMaterial3D = null
 	if peek.get("basin") is Dictionary:
 		var basin_decl: Dictionary = peek["basin"]
-		basin_depth = clampf(float(basin_decl.get("depth", 1.0)), 0.3, 3.0)
+		basin_depth = clampf(float(basin_decl.get("depth", 1.0)), 0.3, 8.0)
 		basin_cells = _basin_regions(tile)
 		# RECT BASINS (2026-08-24, the transformation series: "put it in the
 		# museum like a simulation"): a declared rect sinks FLOOR cells too —
@@ -3569,6 +3570,17 @@ func _build_segment() -> void:
 				for rx in range(int(ra[0]), int(ra[0]) + int(ra[2])):
 					if rz >= 0 and rz < tile.size() and rx >= 0 and rx < (tile[rz] as Array).size():
 						basin_cells[Vector2i(rx, rz)] = true
+		# PLAN-PAINTED POOLS are individual museum cells. Unlike the legacy
+		# enclosed-void inference, these can sit over ordinary floor cells: the
+		# map remains a useful grid while its museum reading becomes a basin.
+		for cv in (basin_decl.get("cells", []) as Array):
+			var ca: Array = cv
+			if ca.size() < 2:
+				continue
+			var cx := int(ca[0])
+			var cz := int(ca[1])
+			if cz >= 0 and cz < tile.size() and cx >= 0 and cx < (tile[cz] as Array).size():
+				basin_cells[Vector2i(cx, cz)] = true
 		if not basin_cells.is_empty() and bool(basin_decl.get("glass", true)):
 			m_basin_glass = StandardMaterial3D.new()
 			m_basin_glass.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
@@ -5367,7 +5379,7 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 	if mus_g is Dictionary:
 		var sim_g: Variant = (mus_g as Dictionary).get("simulation")
 		if sim_g is Dictionary and bool((sim_g as Dictionary).get("grid", false)):
-			var gdepth: float = clampf(float((sim_g as Dictionary).get("depth", 1.0)), 0.3, 3.0)
+			var gdepth: float = clampf(float((sim_g as Dictionary).get("depth", 1.0)), 0.3, 8.0)
 			# the grid's SCENE, not a bare script node — GridSystem expects
 			# its CubeScene template child ("Base cube reference not found")
 			var gs: Node3D = (load("res://commons/grid/grid_system.tscn") as PackedScene).instantiate() as Node3D
@@ -5455,7 +5467,7 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 	if minfo_pack_v is Dictionary and ((minfo_pack_v as Dictionary).get("museum", {}) is Dictionary) \
 			and (((minfo_pack_v as Dictionary).get("museum", {}) as Dictionary).get("basin") is Dictionary):
 		var basin_pack: Dictionary = ((minfo_pack_v as Dictionary)["museum"] as Dictionary)["basin"]
-		basin_pack_depth = clampf(float(basin_pack.get("depth", 1.0)), 0.3, 3.0)
+		basin_pack_depth = clampf(float(basin_pack.get("depth", 1.0)), 0.3, 8.0)
 		basin_map = _basin_regions(structure)
 		for rv2 in (basin_pack.get("rects", []) as Array):
 			var ra2: Array = rv2
@@ -5463,13 +5475,17 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 				for rz2 in range(int(ra2[1]), int(ra2[1]) + int(ra2[3])):
 					for rx2 in range(int(ra2[0]), int(ra2[0]) + int(ra2[2])):
 						basin_map[Vector2i(rx2, rz2)] = true
+		for cv2 in (basin_pack.get("cells", []) as Array):
+			var ca2: Array = cv2
+			if ca2.size() >= 2:
+				basin_map[Vector2i(int(ca2[0]), int(ca2[1]))] = true
 	# THE SIMULATION DECLARATION sinks the WHOLE map: every body stands on
 	# the pool floor (museum.simulation, the courtyard pattern in one key)
 	if basin_map.is_empty() and minfo_pack_v is Dictionary \
 			and ((minfo_pack_v as Dictionary).get("museum", {}) is Dictionary) \
 			and (((minfo_pack_v as Dictionary).get("museum", {}) as Dictionary).get("simulation") is Dictionary):
 		var sim_pack: Dictionary = ((minfo_pack_v as Dictionary)["museum"] as Dictionary)["simulation"]
-		basin_pack_depth = clampf(float(sim_pack.get("depth", 1.0)), 0.3, 3.0)
+		basin_pack_depth = clampf(float(sim_pack.get("depth", 1.0)), 0.3, 8.0)
 		for gz3 in range(structure.size()):
 			for gx3 in range((structure[gz3] as Array).size()):
 				basin_map[Vector2i(gx3, gz3)] = true
@@ -8252,7 +8268,7 @@ func _open_gate() -> void:
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint() or _studio:
 		return
-	if _paint2d != "" and _paint2d_canvas != null and is_instance_valid(_paint2d_canvas):
+	if _doll_top and _paint2d_canvas != null and is_instance_valid(_paint2d_canvas):
 		_paint2d_canvas.queue_redraw()   # the overlay tracks the camera
 	if not _boot_first_frame:
 		_boot_first_frame = true
@@ -8778,14 +8794,25 @@ func _doll_frame(delta: float) -> void:
 	# podiums push back, the streaming follows its z like any visitor's.
 	# (MMB drag stays the god's hand and glides through everything.)
 	var dir := Vector3.ZERO
-	if Input.is_key_pressed(KEY_W):
-		dir += Vector3(-sin(_doll_yaw_now), 0, -cos(_doll_yaw_now))
-	if Input.is_key_pressed(KEY_S):
-		dir -= Vector3(-sin(_doll_yaw_now), 0, -cos(_doll_yaw_now))
-	if Input.is_key_pressed(KEY_A):
-		dir += Vector3(-cos(_doll_yaw_now), 0, sin(_doll_yaw_now))
-	if Input.is_key_pressed(KEY_D):
-		dir -= Vector3(-cos(_doll_yaw_now), 0, sin(_doll_yaw_now))
+	if _doll_top:
+		# The plan is a drawing, not a rotated model: north (-Z) is always up.
+		if Input.is_key_pressed(KEY_W):
+			dir += Vector3.FORWARD
+		if Input.is_key_pressed(KEY_S):
+			dir += Vector3.BACK
+		if Input.is_key_pressed(KEY_A):
+			dir += Vector3.LEFT
+		if Input.is_key_pressed(KEY_D):
+			dir += Vector3.RIGHT
+	else:
+		if Input.is_key_pressed(KEY_W):
+			dir += Vector3(-sin(_doll_yaw_now), 0, -cos(_doll_yaw_now))
+		if Input.is_key_pressed(KEY_S):
+			dir -= Vector3(-sin(_doll_yaw_now), 0, -cos(_doll_yaw_now))
+		if Input.is_key_pressed(KEY_A):
+			dir += Vector3(-cos(_doll_yaw_now), 0, sin(_doll_yaw_now))
+		if Input.is_key_pressed(KEY_D):
+			dir -= Vector3(-cos(_doll_yaw_now), 0, sin(_doll_yaw_now))
 	if dir.length() > 0.1:
 		_doll_walk_to = Vector3(1e9, 0, 0)   # the hand on the keys outranks the click
 		if _doll_mark != null and is_instance_valid(_doll_mark):
@@ -8817,8 +8844,8 @@ func _doll_frame(delta: float) -> void:
 	# two perches, one butter: the iso shoulder or the plan's noon. The same
 	# exponential lerp carries the camera between them, so H reads as a climb,
 	# not a cut. Straight down cannot use look_at (the pole degenerates its up
-	# vector), so the plan builds its basis by hand: screen-up follows the
-	# house yaw, which keeps Q/E turning the drawing.
+	# vector), so the plan builds its basis by hand. Its up vector is fixed to
+	# world north: turning the isometric doll never rotates the drawing.
 	var perch := Vector3(sin(_doll_yaw_now), 0.0, cos(_doll_yaw_now)) * 42.0 + Vector3(0, 46.0, 0)
 	if _doll_top:
 		perch = Vector3(0, 62.0, 0)
@@ -8826,13 +8853,13 @@ func _doll_frame(delta: float) -> void:
 	_doll_cam_pos = want_pos if _doll_cam_pos == Vector3.ZERO else _doll_cam_pos.lerp(want_pos, kf)
 	_cam.global_position = _doll_cam_pos
 	if _doll_top:
-		var down_basis := Basis.looking_at(Vector3.DOWN, Vector3(-sin(_doll_yaw_now), 0.0, -cos(_doll_yaw_now)))
+		var down_basis := Basis.looking_at(Vector3.DOWN, Vector3.FORWARD)
 		_cam.global_basis = _cam.global_basis.slerp(down_basis, kf).orthonormalized()
 	else:
 		var look_target: Vector3 = _player.position + Vector3(0, 0.5, 0)
 		if (_cam.global_position - look_target).length() > 0.5:
 			_cam.look_at(look_target)
-	_cam.size = lerpf(_cam.size, _doll_zoom, kf)
+	_cam.size = lerpf(_cam.size, _plan_view_size if _doll_top else _doll_zoom, kf)
 	# the patient stamp and the deferred dress deliver bodies AFTER the build's
 	# cut ran — the roof re-entered with them. The cut is idempotent, so it
 	# simply runs again, cheaply, every couple of seconds.
@@ -9039,6 +9066,90 @@ func _doll_floor_point(mouse: Vector2) -> Vector3:
 		return o
 	var t: float = -o.y / d.y
 	return o + d * t
+
+
+func _plan_authored_halls() -> Array:
+	## The scrollable plan is map-per-hall: dealt/procedural vestibules do not
+	## become false editor pages because there is no map for paint to write.
+	var halls: Array = []
+	for sv in _segments:
+		var sd: Dictionary = sv
+		var seg: Node3D = _node_or_null(sd.get("node"))
+		if seg != null and seg.has_meta("em_map") and String(seg.get_meta("em_map")) != "":
+			halls.append(sd)
+	halls.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
+		return float(a.get("z0", 0.0)) < float(b.get("z0", 0.0)))
+	return halls
+
+
+func _plan_hall_center(sd: Dictionary) -> Vector3:
+	var seg: Node3D = _node_or_null(sd.get("node"))
+	var tile: Array = seg.get_meta("em_tile") if seg != null and seg.has_meta("em_tile") else []
+	var width := 1
+	for row_v in tile:
+		width = maxi(width, (row_v as Array).size())
+	return Vector3(float(width) * 0.5, 0.0,
+		float(sd.get("z0", 0.0)) + float(VESTIBULE_H) + float(maxi(1, tile.size())) * 0.5)
+
+
+func _plan_fit_hall(sd: Dictionary) -> void:
+	## One hall fills the plan page. This replaces manual zoom: every wheel
+	## step arrives with the complete editable map in frame.
+	var seg: Node3D = _node_or_null(sd.get("node"))
+	var tile: Array = seg.get_meta("em_tile") if seg != null and seg.has_meta("em_tile") else []
+	var width := 1
+	for row_v in tile:
+		width = maxi(width, (row_v as Array).size())
+	var viewport_size := get_viewport().get_visible_rect().size
+	var aspect := maxf(0.5, viewport_size.x / maxf(1.0, viewport_size.y))
+	_plan_view_size = clampf(maxf(float(maxi(1, tile.size())) + 5.0,
+		(float(width) + 5.0) / aspect), 10.0, 64.0)
+
+
+func _plan_fit_nearest_hall() -> void:
+	var halls := _plan_authored_halls()
+	if halls.is_empty() or _player == null:
+		return
+	var best: Dictionary = halls[0]
+	var best_d := INF
+	for hv in halls:
+		var sd: Dictionary = hv
+		var d := absf(_plan_hall_center(sd).z - _player.position.z)
+		if d < best_d:
+			best_d = d
+			best = sd
+	_plan_fit_hall(best)
+
+
+func _plan_step_hall(direction: int) -> void:
+	var halls := _plan_authored_halls()
+	if halls.is_empty() or _player == null:
+		_doll_toast("no authored hall is loaded under the plan")
+		return
+	var at := 0
+	var best_d := INF
+	for i in range(halls.size()):
+		var d := absf(_plan_hall_center(halls[i]).z - _player.position.z)
+		if d < best_d:
+			best_d = d
+			at = i
+	var target_i := clampi(at + signi(direction), 0, halls.size() - 1)
+	var target: Dictionary = halls[target_i]
+	if target_i == at:
+		_doll_toast("%s authored hall" % ("first" if direction < 0 else "last"))
+		return
+	var center := _plan_hall_center(target)
+	_player.position = center
+	_player.velocity = Vector3.ZERO
+	_last_ground = center
+	_doll_walk_to = Vector3(1e9, 0, 0)
+	_doll_select(-1)
+	_plan_fit_hall(target)
+	if _paint2d_canvas != null and is_instance_valid(_paint2d_canvas):
+		_paint2d_canvas.queue_redraw()
+	var seg: Node3D = _node_or_null(target.get("node"))
+	var map_name := String(seg.get_meta("em_map")) if seg != null and seg.has_meta("em_map") else "hall"
+	_doll_toast("plan %d/%d — %s" % [target_i + 1, halls.size(), map_name])
 
 
 ## The nearest movable body to a floor point. Floor-standing kinds only —
@@ -9756,6 +9867,14 @@ func _input(event: InputEvent) -> void:
 			_doll_menu.queue_free()
 			_doll_menu = null
 		return
+	# The plan configuration panel owns typing (including H/N/G, which are
+	# museum shortcuts elsewhere). GUI buttons still receive the event after
+	# `_input`; this guard only keeps the 3D world underneath from reacting.
+	if _plan_config_panel != null and is_instance_valid(_plan_config_panel):
+		if event is InputEventKey and (event as InputEventKey).pressed \
+				and not (event as InputEventKey).echo and (event as InputEventKey).keycode == KEY_ESCAPE:
+			_plan_config_close()
+		return
 	if event is InputEventKey and (event as InputEventKey).pressed and not (event as InputEventKey).echo \
 			and (event as InputEventKey).keycode == KEY_J and not _vr and not _studio and _autopilot == 0 and _shot_path == "":
 		_jump_toggle()
@@ -9777,10 +9896,16 @@ func _input(event: InputEvent) -> void:
 		# same doll, same cut, same hands; the next H falls through to the exit.
 		if _dollhouse and not _doll_top:
 			_doll_top = true
-			print("[em-doll] plan view — the camera at noon; 0/1/2 arms the 2D painter; H returns to the walk")
+			_doll_orbit = false
+			_plan_fit_nearest_hall()
+			_plan_toolbar_on()
+			_paint2d_canvas_on()
+			print("[em-doll] plan editor — paint wall, floor, pool, or door; drag artifacts; H returns to the walk")
 			return
-		if _paint2d != "":
-			_paint2d_off()   # leaving the plan view closes the painter (rebuilds if dirty)
+		if _doll_top:
+			_plan_config_close()
+			_plan_toolbar_off()
+			_paint2d_off(false)   # _doll_toggle's rebuild picks up every map edit
 		_doll_toggle()
 		_doll_palette_refresh()
 		return
@@ -9795,11 +9920,23 @@ func _input(event: InputEvent) -> void:
 	if _dollhouse and event is InputEventMouseButton:
 		var mbe := event as InputEventMouseButton
 		var mb := mbe.button_index
+		var gui_hover := get_viewport().gui_get_hovered_control()
+		if gui_hover != null and ((_plan_toolbar != null and is_instance_valid(_plan_toolbar) \
+				and (gui_hover == _plan_toolbar or _plan_toolbar.is_ancestor_of(gui_hover))) \
+				or (_plan_config_panel != null and is_instance_valid(_plan_config_panel) \
+				and (gui_hover == _plan_config_panel or _plan_config_panel.is_ancestor_of(gui_hover)))):
+			return
 		if mbe.pressed and mb == MOUSE_BUTTON_WHEEL_UP:
-			_doll_zoom = clampf(_doll_zoom * 0.87, 6.0, 60.0)
+			if _doll_top:
+				_plan_step_hall(-1)
+			else:
+				_doll_zoom = clampf(_doll_zoom * 0.87, 6.0, 60.0)
 			return
 		elif mbe.pressed and mb == MOUSE_BUTTON_WHEEL_DOWN:
-			_doll_zoom = clampf(_doll_zoom / 0.87, 6.0, 60.0)
+			if _doll_top:
+				_plan_step_hall(1)
+			else:
+				_doll_zoom = clampf(_doll_zoom / 0.87, 6.0, 60.0)
 			return
 		elif mb == MOUSE_BUTTON_LEFT and _paint2d != "" and _doll_top and _cam != null:
 			# the 2D painter owns LMB while armed — press starts a stroke,
@@ -9929,7 +10066,9 @@ func _input(event: InputEvent) -> void:
 				_doll_rule_set(int(floor(ptr.x)), int(floor(ptr.z)), "0" if mbe.alt_pressed else "1", true)
 				_doll_orbit = false
 				return
-			_doll_orbit = mbe.pressed          # empty-handed RMB drag turns the house
+			# The plan is north-up and has no orbit. RMB remains the isometric
+			# turn gesture, while plan artifacts use LMB and Q explicitly.
+			_doll_orbit = mbe.pressed and not _doll_top
 			return
 		elif mb == MOUSE_BUTTON_MIDDLE:
 			_doll_pan = mbe.pressed            # MMB drag carries the ground
@@ -9939,9 +10078,9 @@ func _input(event: InputEvent) -> void:
 		if _doll_orbit:
 			_doll_yaw -= mrel.x * 0.008
 		else:
-			var k: float = _doll_zoom * 0.0021
-			var fwd := Vector3(-sin(_doll_yaw), 0, -cos(_doll_yaw))
-			var right := Vector3(-cos(_doll_yaw), 0, sin(_doll_yaw))
+			var k: float = (_plan_view_size if _doll_top else _doll_zoom) * 0.0021
+			var fwd := Vector3.FORWARD if _doll_top else Vector3(-sin(_doll_yaw), 0, -cos(_doll_yaw))
+			var right := Vector3.RIGHT if _doll_top else Vector3(-cos(_doll_yaw), 0, sin(_doll_yaw))
 			_player.position += right * mrel.x * k - fwd * mrel.y * k
 			_player.position.y = 0.0
 			_last_ground = _player.position
@@ -10078,16 +10217,23 @@ func _input(event: InputEvent) -> void:
 				return
 			_rule_undo_pop()
 			return
-		if _doll_top and kc in [KEY_0, KEY_KP_0, KEY_1, KEY_KP_1, KEY_2, KEY_KP_2]:
-			# 2D TOP PAINT: 0 empty · 1 floor · 2 wall — the same key exits
-			var pv2 := "0" if kc in [KEY_0, KEY_KP_0] else ("1" if kc in [KEY_1, KEY_KP_1] else "2")
+		if _doll_top and kc in [KEY_0, KEY_KP_0, KEY_1, KEY_KP_1, KEY_2, KEY_KP_2, KEY_3, KEY_KP_3, KEY_4, KEY_KP_4]:
+			# PLAN shortcuts: 0 void · 1 floor · 2 wall · 3 pool · 4 door.
+			var pv2 := "0" if kc in [KEY_0, KEY_KP_0] else ("1" if kc in [KEY_1, KEY_KP_1] \
+				else ("2" if kc in [KEY_2, KEY_KP_2] else ("pool" if kc in [KEY_3, KEY_KP_3] else "door")))
 			if _paint2d == pv2:
-				_paint2d_off()
+				_paint2d = ""
+				_paint2d_stroke = false
+				_plan_toolbar_refresh()
+				if _paint2d_canvas != null:
+					_paint2d_canvas.queue_redraw()
+				_doll_toast("plan hand — select and drag artifacts")
 				return
 			_paint2d = pv2
 			_paint2d_canvas_on()
-			var vn := {"0": "EMPTY (hole)", "1": "FLOOR", "2": "WALL"}
-			_doll_toast("2D paint: %s — LMB paints the map; same key exits + rebuilds" % String(vn[pv2]))
+			_plan_toolbar_refresh()
+			var vn := {"0": "VOID", "1": "FLOOR", "2": "WALL", "pool": "POOL", "door": "DOOR"}
+			_doll_toast("plan paint: %s — drag with LMB; H rebuilds into the museum" % String(vn[pv2]))
 			return
 		if kc == KEY_B:
 			var order := ["", "R", "D", "O", "2", "4", "0", "1"]
@@ -10116,9 +10262,11 @@ func _input(event: InputEvent) -> void:
 			_doll_select(-1)
 			return
 		if kc == KEY_Q:
-			if _edit_mode and _edit_sel >= 0:
+			if (_edit_mode or _doll_top) and _edit_sel >= 0:
 				_edit_handle_key(KEY_Q)   # rotate the HELD body, not the house
 				return
+			if _doll_top:
+				return                     # the plan itself never rotates
 			_doll_yaw += PI * 0.25
 			return
 		elif kc == KEY_E:
@@ -10137,7 +10285,8 @@ func _input(event: InputEvent) -> void:
 				if _doll_hover_idx < 0:
 					_doll_toast("nothing under the hand — hover a body, then E")
 				return
-			_doll_yaw -= PI * 0.25
+			if not _doll_top:
+				_doll_yaw -= PI * 0.25
 			return
 	if _jump_ui != null and event is InputEventKey and (event as InputEventKey).pressed \
 			and (event as InputEventKey).keycode == KEY_ESCAPE:
@@ -11640,15 +11789,21 @@ var _rule_paint_drag: String = ""            # "4" building / "1" opening / "" i
 
 # ── 2D TOP PAINT (2026-08-23, Palle: "plain 2d top paint cells for editing
 # the floor — 0 1 or 2, empty floor or wall") — armed in PLAN view (H twice)
-# with keys 0/1/2. Paints the MAP only, the one truth; NO live surgery —
+# with toolbar or number keys. Paints the MAP only, the one truth; NO live surgery —
 # leaving paint mode rebuilds the hall from the map, so removal is guaranteed
 # by reconstruction, never by mesh surgery (which the doll cut kept defeating).
-var _paint2d: String = ""                    # "" off, else the armed map value 0/1/2
+var _paint2d: String = ""                    # "" hand, 0/1/2 structure, pool, or door
 var _paint2d_dirty: bool = false
 var _paint2d_stroke: bool = false
 var _paint2d_last := Vector2i(-9999, -9999)
 var _paint2d_canvas: Control = null
 var _paint2d_undo: Array = []
+var _plan_toolbar: HBoxContainer = null
+var _plan_config_panel: PanelContainer = null
+var _plan_config_text: TextEdit = null
+var _plan_config_map: String = ""
+var _plan_config_cell := Vector2i(-1, -1)
+var _plan_marks_cache: Dictionary = {}
 
 # ── THE DRESS SECTION (2026-08-23, Palle: "a section editing tool for
 # artifact dressing — plinth etc; n or p to jump between artifacts; an
@@ -12179,6 +12334,136 @@ func _map_dress(map_name: String, fx: int, fz: int, key: String, val: String) ->
 	return ""
 
 
+func _map_plan_marks(map_name: String) -> Dictionary:
+	## Read the two museum-only marks that structure alone cannot express.
+	if _plan_marks_cache.has(map_name):
+		return _plan_marks_cache[map_name]
+	var out := {"pools": {}, "doors": {}}
+	var path := "res://commons/maps/%s/map_data.json" % map_name
+	if not FileAccess.file_exists(path):
+		return out
+	var doc_v: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+	if not (doc_v is Dictionary):
+		return out
+	var doc: Dictionary = doc_v
+	var museum: Dictionary = (doc.get("map_info", {}) as Dictionary).get("museum", {})
+	var basin: Dictionary = museum.get("basin", {})
+	for cv in (basin.get("cells", []) as Array):
+		var ca: Array = cv
+		if ca.size() >= 2:
+			(out["pools"] as Dictionary)[Vector2i(int(ca[0]), int(ca[1]))] = true
+	var inter: Array = (doc.get("layers", {}) as Dictionary).get("interactables", [])
+	for z in range(inter.size()):
+		for x in range((inter[z] as Array).size()):
+			if str((inter[z] as Array)[x]).strip_edges().begins_with("lab_sliding_door"):
+				(out["doors"] as Dictionary)[Vector2i(x, z)] = true
+	_plan_marks_cache[map_name] = out
+	return out
+
+
+func _map_plan_edit(map_name: String, cx: int, cz: int, tool: String,
+		restore: Dictionary = {}) -> Dictionary:
+	## One atomic plan operation: structure, museum pool metadata, and a door
+	## artifact are written together. Returns the exact previous state for undo.
+	var path := "res://commons/maps/%s/map_data.json" % map_name
+	if not FileAccess.file_exists(path):
+		return {"ok": false, "why": "no map file"}
+	var doc_v: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+	if not (doc_v is Dictionary):
+		return {"ok": false, "why": "bad map json"}
+	var doc: Dictionary = doc_v
+	var layers: Dictionary = doc.get("layers", {})
+	var struct: Array = layers.get("structure", [])
+	var inter: Array = layers.get("interactables", [])
+	if cz < 0 or cz >= struct.size() or cx < 0 or cx >= (struct[cz] as Array).size():
+		return {"ok": false, "why": "past the map's edge"}
+	if cz >= inter.size() or cx >= (inter[cz] as Array).size():
+		return {"ok": false, "why": "the interactables layer does not cover that cell"}
+	var map_info: Dictionary = doc.get("map_info", {})
+	doc["map_info"] = map_info
+	var museum: Dictionary = map_info.get("museum", {})
+	map_info["museum"] = museum
+	var basin: Dictionary = museum.get("basin", {})
+	var pools: Dictionary = {}
+	for cv in (basin.get("cells", []) as Array):
+		var ca: Array = cv
+		if ca.size() >= 2:
+			pools[Vector2i(int(ca[0]), int(ca[1]))] = true
+	var cell := Vector2i(cx, cz)
+	var old_structure := str((struct[cz] as Array)[cx]).strip_edges()
+	var old_token := str((inter[cz] as Array)[cx]).strip_edges()
+	var previous := {"structure": old_structure, "pool": pools.has(cell), "token": old_token}
+	var new_structure := old_structure
+	var new_token := old_token
+	var new_pool := pools.has(cell)
+	if not restore.is_empty():
+		new_structure = String(restore.get("structure", "1"))
+		new_token = String(restore.get("token", ""))
+		new_pool = bool(restore.get("pool", false))
+	else:
+		match tool:
+			"0":
+				new_structure = "0"
+				new_pool = false
+			"1":
+				new_structure = "1"
+				new_pool = false
+			"2":
+				new_structure = "2"
+				new_pool = false
+			"pool":
+				new_structure = "1"
+				new_pool = true
+			"door":
+				new_structure = "1"
+				new_pool = false
+				if old_token.begins_with("lab_sliding_door"):
+					new_token = ""
+				elif old_token != "":
+					return {"ok": false, "why": "move the artifact out of this cell before painting a door"}
+				else:
+					var xwalls := 0
+					var zwalls := 0
+					for nx in [cx - 1, cx + 1]:
+						if nx >= 0 and nx < (struct[cz] as Array).size():
+							var xv := str((struct[cz] as Array)[nx]).strip_edges()
+							if xv in ["2", "3", "4", "5", "w"]:
+								xwalls += 1
+					for nz in [cz - 1, cz + 1]:
+						if nz >= 0 and nz < struct.size() and cx < (struct[nz] as Array).size():
+							var zv := str((struct[nz] as Array)[cx]).strip_edges()
+							if zv in ["2", "3", "4", "5", "w"]:
+								zwalls += 1
+					new_token = "lab_sliding_door:%d#panels_open_amount:0.0" % (0 if xwalls >= zwalls else 90)
+			_:
+				return {"ok": false, "why": "unknown plan tool"}
+	if tool in ["0", "2"] and new_token.begins_with("lab_sliding_door"):
+		new_token = ""
+	if new_pool:
+		pools[cell] = true
+	else:
+		pools.erase(cell)
+	(struct[cz] as Array)[cx] = new_structure
+	(inter[cz] as Array)[cx] = new_token if new_token != "" else " "
+	if not pools.is_empty() or not basin.is_empty():
+		if basin.is_empty():
+			basin = {"depth": 1.0, "glass": true}
+		var pool_cells: Array = []
+		for pk_v in pools.keys():
+			var pk: Vector2i = pk_v
+			pool_cells.append([pk.x, pk.y])
+		if pool_cells.is_empty():
+			basin.erase("cells")
+		else:
+			basin["cells"] = pool_cells
+		museum["basin"] = basin
+	if not _map_store(path, doc):
+		return {"ok": false, "why": "could not write the map"}
+	_plan_marks_cache.erase(map_name)
+	return {"ok": true, "prev": previous, "structure": new_structure,
+		"pool": new_pool, "token": new_token}
+
+
 func _paint2d_apply(wx: int, wz: int) -> void:
 	## Paint ONE map cell to the armed value — MAP ONLY, no live surgery.
 	for sv in _segments:
@@ -12195,24 +12480,19 @@ func _paint2d_apply(wx: int, wz: int) -> void:
 		var cz_t: int = wz - int(sd.get("z0", 0)) - VESTIBULE_H
 		if cz_t < 0 or wx < 0 or wx >= 64 or cz_t >= 64:
 			return
-		var mpath := "res://commons/maps/%s/map_data.json" % pmap
-		var mdoc: Variant = JSON.parse_string(FileAccess.get_file_as_string(mpath))
-		if not (mdoc is Dictionary):
+		var result := _map_plan_edit(pmap, wx, cz_t, _paint2d)
+		if not bool(result.get("ok", false)):
+			_doll_toast("the map refuses: " + String(result.get("why", "write failed")))
 			return
-		var mst: Array = ((mdoc as Dictionary).get("layers", {}) as Dictionary).get("structure", [])
-		if cz_t >= mst.size() or wx >= (mst[cz_t] as Array).size():
-			_doll_toast("past the map's edge")
+		var before: Dictionary = result.get("prev", {})
+		if String(before.get("structure", "")) == String(result.get("structure", "")) \
+				and bool(before.get("pool", false)) == bool(result.get("pool", false)) \
+				and String(before.get("token", "")) == String(result.get("token", "")):
 			return
-		var prev := str((mst[cz_t] as Array)[wx]).strip_edges()
-		if prev == _paint2d:
-			return
-		if not _map_write_cell(pmap, wx, cz_t, _paint2d == "2", _paint2d):
-			_doll_toast("the map refused the write")
-			return
-		_paint2d_undo.append({"map": pmap, "x": wx, "z": cz_t, "prev": prev})
+		_paint2d_undo.append({"map": pmap, "x": wx, "z": cz_t, "prev": before})
 		if _paint2d_undo.size() > 400:
 			_paint2d_undo.pop_front()
-		_paint2d_sync_tile(segn, wx, cz_t, _paint2d)
+		_paint2d_sync_tile(segn, wx, cz_t, String(result.get("structure", "1")))
 		_paint2d_dirty = true
 		if _paint2d_canvas != null and is_instance_valid(_paint2d_canvas):
 			_paint2d_canvas.queue_redraw()
@@ -12238,10 +12518,13 @@ func _paint2d_undo_pop() -> void:
 		_doll_toast("nothing to undo")
 		return
 	var u: Dictionary = _paint2d_undo.pop_back()
-	var pv := String(u.get("prev", "1"))
-	if not (pv.is_valid_int() and int(pv) >= 0 and int(pv) <= 5):
-		pv = "1"
-	_map_write_cell(String(u["map"]), int(u["x"]), int(u["z"]), int(pv) >= 2, pv)
+	var prev_v: Variant = u.get("prev", {"structure": "1", "pool": false, "token": ""})
+	var prev: Dictionary = prev_v if prev_v is Dictionary else {"structure": String(prev_v), "pool": false, "token": ""}
+	var result := _map_plan_edit(String(u["map"]), int(u["x"]), int(u["z"]), "", prev)
+	if not bool(result.get("ok", false)):
+		_doll_toast("undo refused: " + String(result.get("why", "write failed")))
+		return
+	var pv := String(prev.get("structure", "1"))
 	for sv in _segments:
 		var segn: Node3D = _node_or_null((sv as Dictionary).get("node"))
 		if segn != null and segn.has_meta("em_map") and String(segn.get_meta("em_map")) == String(u["map"]):
@@ -12249,7 +12532,7 @@ func _paint2d_undo_pop() -> void:
 	_paint2d_dirty = true
 	if _paint2d_canvas != null and is_instance_valid(_paint2d_canvas):
 		_paint2d_canvas.queue_redraw()
-	_doll_toast("undone — [%d,%d] back to %s" % [int(u["x"]), int(u["z"]), pv])
+	_doll_toast("undone — [%d,%d] restored" % [int(u["x"]), int(u["z"])])
 
 
 func _paint2d_canvas_on() -> void:
@@ -12269,7 +12552,7 @@ func _paint2d_canvas_on() -> void:
 	ctl.draw.connect(_paint2d_draw)
 
 
-func _paint2d_off() -> void:
+func _paint2d_off(rebuild: bool = true) -> void:
 	_paint2d = ""
 	_paint2d_stroke = false
 	if _paint2d_canvas != null and is_instance_valid(_paint2d_canvas):
@@ -12277,10 +12560,12 @@ func _paint2d_off() -> void:
 	_paint2d_canvas = null
 	if _paint2d_dirty:
 		_paint2d_dirty = false
-		_doll_toast("rebuilding the hall from the map…")
-		_follow_reload()
+		if rebuild:
+			_doll_toast("rebuilding the hall from the map…")
+			_follow_reload()
 	else:
-		_doll_toast("2D paint off")
+		if rebuild:
+			_doll_toast("plan paint off")
 
 
 func _paint2d_draw() -> void:
@@ -12299,6 +12584,9 @@ func _paint2d_draw() -> void:
 			continue
 		if not segn.has_meta("em_map") or String(segn.get_meta("em_map")) == "":
 			continue
+		var marks := _map_plan_marks(String(segn.get_meta("em_map")))
+		var pools: Dictionary = marks.get("pools", {})
+		var doors: Dictionary = marks.get("doors", {})
 		var z0: int = int(sd.get("z0", 0))
 		var ptile: Array = segn.get_meta("em_tile")
 		for tz in range(ptile.size()):
@@ -12312,14 +12600,270 @@ func _paint2d_draw() -> void:
 					cam.unproject_position(Vector3(float(tx + 1), 0.05, float(wz))),
 					cam.unproject_position(Vector3(float(tx + 1), 0.05, float(wz + 1))),
 					cam.unproject_position(Vector3(float(tx), 0.05, float(wz + 1)))])
-				ctl.draw_colored_polygon(pts, vcol[key])
+				var mark_cell := Vector2i(tx, tz)
+				var fill: Color = vcol[key]
+				if pools.has(mark_cell):
+					fill = Color(0.08, 0.48, 0.78, 0.68)
+				elif doors.has(mark_cell):
+					fill = Color(0.95, 0.58, 0.12, 0.78)
+				ctl.draw_colored_polygon(pts, fill)
 				var closed := pts.duplicate()
 				closed.append(pts[0])
 				ctl.draw_polyline(closed, Color(0, 0, 0, 0.25), 1.0)
-	var bn := {"0": "0 EMPTY", "1": "1 FLOOR", "2": "2 WALL"}
+	# ARTIFACT PINS: the cell wash must never make the things being curated
+	# disappear. Pins are drawn last and share _doll_pick's eligibility, so
+	# every visible pin can be selected and dragged with the hand tool.
+	var view_rect := Rect2(Vector2.ZERO, ctl.size).grow(24.0)
+	for i in range(_edit_records.size()):
+		var record: Dictionary = _edit_records[i]
+		if String(record.get("kind", "")) in ["variant", "plinth"]:
+			continue
+		var node: Node3D = _node_or_null(record.get("node"))
+		if node == null or not is_instance_valid(node) or node.has_meta("em_hand_removed") \
+				or cam.is_position_behind(node.global_position):
+			continue
+		var pin := cam.unproject_position(node.global_position)
+		if not view_rect.has_point(pin):
+			continue
+		var selected := i == _edit_sel
+		var pin_color := Color(0.22, 0.86, 1.0, 0.98) if String(record.get("kind", "")) == "" \
+			else Color(0.83, 0.62, 1.0, 0.95)
+		ctl.draw_circle(pin, 13.0 if selected else 8.0, Color(0.03, 0.04, 0.06, 0.92))
+		ctl.draw_circle(pin, 9.0 if selected else 5.0, pin_color)
+		if selected:
+			ctl.draw_arc(pin, 16.0, 0.0, TAU, 32, Color.WHITE, 2.0)
+			var token_name := str(record.get("token", "artifact")).split("#")[0]
+			ctl.draw_string(ThemeDB.fallback_font, pin + Vector2(20, 5), token_name,
+				HORIZONTAL_ALIGNMENT_LEFT, -1, 14, Color.WHITE)
+	var bn := {"": "HAND / MOVE", "0": "VOID", "1": "FLOOR", "2": "WALL",
+		"pool": "POOL", "door": "DOOR"}
 	ctl.draw_string(ThemeDB.fallback_font, Vector2(20, 40),
-		"2D PAINT — %s   ·   LMB paints the map   ·   0/1/2 switch   ·   same key exits + rebuilds   ·   ctrl+Z undo" % String(bn.get(_paint2d, _paint2d)),
+		"MUSEUM PLAN — %s   ·   wheel: previous/next hall   ·   MMB drag: pan   ·   north is up" % String(bn.get(_paint2d, _paint2d)),
 		HORIZONTAL_ALIGNMENT_LEFT, -1, 18, Color(1, 1, 1, 0.92))
+	ctl.draw_string(ThemeDB.fallback_font, Vector2(20, 64),
+		"hand: select + drag artifact   ·   Q rotates selected   ·   CONFIG edits it   ·   ctrl+Z undo   ·   H builds + exits",
+		HORIZONTAL_ALIGNMENT_LEFT, -1, 15, Color(1, 1, 1, 0.78))
+
+
+func _plan_toolbar_on() -> void:
+	if _plan_toolbar != null and is_instance_valid(_plan_toolbar):
+		_plan_toolbar_refresh()
+		return
+	_plan_marks_cache.clear()
+	var layer := CanvasLayer.new()
+	layer.name = "MuseumPlanTools"
+	layer.layer = 70
+	add_child(layer)
+	var bar := HBoxContainer.new()
+	bar.name = "Toolbar"
+	bar.add_theme_constant_override("separation", 7)
+	bar.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM)
+	bar.offset_left = -390.0
+	bar.offset_right = 390.0
+	bar.offset_top = -72.0
+	bar.offset_bottom = -24.0
+	layer.add_child(bar)
+	_plan_toolbar = bar
+	var tools := [
+		["HAND / MOVE", ""], ["WALL  2", "2"], ["FLOOR  1", "1"],
+		["POOL  3", "pool"], ["DOOR  4", "door"], ["VOID  0", "0"],
+		["CONFIG", "config"], ["SAVE + BUILD", "build"]]
+	for tv in tools:
+		var t: Array = tv
+		var b := Button.new()
+		b.text = String(t[0])
+		b.set_meta("plan_tool", String(t[1]))
+		b.focus_mode = Control.FOCUS_NONE
+		b.pressed.connect(_plan_toolbar_pressed.bind(b))
+		bar.add_child(b)
+	_plan_toolbar_refresh()
+
+
+func _plan_toolbar_off() -> void:
+	if _plan_toolbar != null and is_instance_valid(_plan_toolbar):
+		_plan_toolbar.get_parent().queue_free()
+	_plan_toolbar = null
+
+
+func _plan_toolbar_refresh() -> void:
+	if _plan_toolbar == null or not is_instance_valid(_plan_toolbar):
+		return
+	for bv in _plan_toolbar.get_children():
+		var b := bv as Button
+		if b == null:
+			continue
+		var tool := String(b.get_meta("plan_tool", ""))
+		b.modulate = Color(1.0, 0.78, 0.25) if tool == _paint2d and tool not in ["config", "build"] \
+			else Color.WHITE
+
+
+func _plan_toolbar_pressed(button: Button) -> void:
+	var tool := String(button.get_meta("plan_tool", ""))
+	if tool == "config":
+		_plan_config_open()
+		return
+	if tool == "build":
+		_plan_config_close()
+		_plan_toolbar_off()
+		_paint2d = ""
+		_paint2d_stroke = false
+		_paint2d_dirty = false
+		_edit_flush()
+		_doll_toast("saved — rebuilding the museum from the plan…")
+		_follow_reload()
+		return
+	_paint2d = tool
+	_paint2d_stroke = false
+	_paint2d_canvas_on()
+	_plan_toolbar_refresh()
+	if _paint2d_canvas != null:
+		_paint2d_canvas.queue_redraw()
+	var names := {"": "hand — click and drag artifacts", "0": "void — removes the deck",
+		"1": "floor", "2": "wall", "pool": "pool — museum basin cell",
+		"door": "door — click to place/remove; Q rotates after selection"}
+	_doll_toast(String(names.get(tool, tool)))
+
+
+func _map_config_replace(map_name: String, cx: int, cz: int, cfg: Dictionary) -> Dictionary:
+	var path := "res://commons/maps/%s/map_data.json" % map_name
+	if not FileAccess.file_exists(path):
+		return {"ok": false, "why": "no map file"}
+	var doc_v: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+	if not (doc_v is Dictionary):
+		return {"ok": false, "why": "bad map json"}
+	var inter: Array = ((doc_v as Dictionary).get("layers", {}) as Dictionary).get("interactables", [])
+	if cz < 0 or cz >= inter.size() or cx < 0 or cx >= (inter[cz] as Array).size():
+		return {"ok": false, "why": "cell off the map"}
+	var old_token := str((inter[cz] as Array)[cx]).strip_edges()
+	if old_token == "":
+		return {"ok": false, "why": "no artifact at the cell"}
+	var new_token := str(old_token.split("#")[0])
+	var keys: Array = cfg.keys()
+	keys.sort()
+	for kv in keys:
+		new_token += "#%s:%s" % [str(kv), str(cfg[kv])]
+	(inter[cz] as Array)[cx] = new_token
+	if not _map_store(path, doc_v):
+		return {"ok": false, "why": "could not write the map"}
+	return {"ok": true, "token": new_token}
+
+
+func _plan_config_open() -> void:
+	if _edit_sel < 0 or _edit_sel >= _edit_records.size():
+		_doll_toast("select an artifact with the hand first")
+		return
+	var record: Dictionary = _edit_records[_edit_sel]
+	if String(record.get("kind", "")) != "":
+		_doll_toast("configuration belongs to a map artifact, not this %s" % String(record.get("kind")))
+		return
+	var seg: Node3D = _node_or_null(record.get("seg"))
+	var map_name := String(seg.get_meta("em_map")) if seg != null and seg.has_meta("em_map") else ""
+	if map_name == "":
+		_doll_toast("this artifact was dealt by the museum; it has no map configuration")
+		return
+	var tc: Array = record.get("tile_cell", [0, 0])
+	var cell := _map_locate(map_name, String(record.get("token", "")), int(tc[0]), int(tc[1]))
+	if cell.x < 0:
+		_doll_toast("the selected artifact is no longer at its map cell")
+		return
+	_plan_config_close()
+	_plan_config_map = map_name
+	_plan_config_cell = cell
+	var cfg := _map_token_config(map_name, cell.x, cell.y)
+	var layer := CanvasLayer.new()
+	layer.name = "PlanArtifactConfig"
+	layer.layer = 90
+	add_child(layer)
+	var panel := PanelContainer.new()
+	panel.name = "Panel"
+	panel.set_anchors_preset(Control.PRESET_CENTER_RIGHT)
+	panel.offset_left = -450.0
+	panel.offset_right = -24.0
+	panel.offset_top = -285.0
+	panel.offset_bottom = 285.0
+	layer.add_child(panel)
+	_plan_config_panel = panel
+	var box := VBoxContainer.new()
+	box.add_theme_constant_override("separation", 8)
+	panel.add_child(box)
+	var title := Label.new()
+	title.text = "ARTIFACT CONFIGURATION\n%s   ·   %s [%d,%d]" % [
+		str(record.get("token", "")).split("#")[0], map_name, cell.x, cell.y]
+	title.add_theme_font_size_override("font_size", 18)
+	box.add_child(title)
+	var help := Label.new()
+	help.text = "One key:value per line. Examples: scale:1.2, welcome:pane, panels_open_amount:0.5"
+	help.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	box.add_child(help)
+	var edit := TextEdit.new()
+	edit.custom_minimum_size = Vector2(395, 390)
+	edit.placeholder_text = "key:value"
+	var keys: Array = cfg.keys()
+	keys.sort()
+	var lines: PackedStringArray = []
+	for key_v in keys:
+		lines.append("%s:%s" % [str(key_v), str(cfg[key_v])])
+	edit.text = "\n".join(lines)
+	box.add_child(edit)
+	_plan_config_text = edit
+	var actions := HBoxContainer.new()
+	box.add_child(actions)
+	var apply := Button.new()
+	apply.text = "APPLY TO MAP"
+	apply.pressed.connect(_plan_config_apply)
+	actions.add_child(apply)
+	var cancel := Button.new()
+	cancel.text = "CANCEL"
+	cancel.pressed.connect(_plan_config_close)
+	actions.add_child(cancel)
+	edit.call_deferred("grab_focus")
+
+
+func _plan_config_apply() -> void:
+	if _plan_config_text == null or not is_instance_valid(_plan_config_text):
+		return
+	var cfg: Dictionary = {}
+	for raw_line in _plan_config_text.text.split("\n"):
+		var line := str(raw_line).strip_edges()
+		if line == "":
+			continue
+		var colon := line.find(":")
+		if colon <= 0:
+			_doll_toast("configuration line needs key:value — %s" % line)
+			return
+		var key := line.substr(0, colon).strip_edges()
+		var value := line.substr(colon + 1).strip_edges()
+		if "#" in key or ":" in key or key == "":
+			_doll_toast("invalid configuration key: %s" % key)
+			return
+		cfg[key] = value
+	var result := _map_config_replace(_plan_config_map, _plan_config_cell.x,
+		_plan_config_cell.y, cfg)
+	if not bool(result.get("ok", false)):
+		_doll_toast("the map refuses: " + String(result.get("why", "write failed")))
+		return
+	if _edit_sel >= 0 and _edit_sel < _edit_records.size():
+		var record: Dictionary = _edit_records[_edit_sel]
+		record["token"] = String(result.get("token", record.get("token", "")))
+		var node: Node3D = _node_or_null(record.get("node"))
+		if node != null and is_instance_valid(node):
+			for meta_v in node.get_meta_list():
+				if str(meta_v).begins_with("config_"):
+					node.remove_meta(str(meta_v))
+			if node.has_method("apply_grid_config"):
+				node.call("apply_grid_config", cfg)
+	_paint2d_dirty = true
+	_plan_config_close()
+	_doll_toast("artifact configuration written — H or SAVE + BUILD reconstructs it")
+
+
+func _plan_config_close() -> void:
+	if _plan_config_panel != null and is_instance_valid(_plan_config_panel):
+		_plan_config_panel.get_parent().queue_free()
+	_plan_config_panel = null
+	_plan_config_text = null
+	_plan_config_map = ""
+	_plan_config_cell = Vector2i(-1, -1)
 
 
 func _doll_rule(wx: int, wz: int, erase: bool) -> void:
@@ -13094,6 +13638,7 @@ func _map_move_token(map_name: String, fx: int, fz: int, tx2: int, tz2: int, tok
 	(inter[tz2] as Array)[tx2] = tok
 	if not _map_store(path, doc_v):
 		return "could not write the map"
+	_plan_marks_cache.erase(map_name)
 	return ""
 
 
@@ -13193,6 +13738,7 @@ func _map_clear_token(map_name: String, fx: int, fz: int) -> String:
 	(inter[fz] as Array)[fx] = " "
 	if not _map_store(path, doc_v):
 		return "could not write the map"
+	_plan_marks_cache.erase(map_name)
 	return ""
 
 
