@@ -3275,6 +3275,8 @@ func _build_segment() -> void:
 			# or sink its void
 			var mm: Dictionary = derived.get("museum", {}) if derived.get("museum") is Dictionary else {}
 			peek["open_roof"] = bool(mm.get("open_roof", peek.get("open_roof", false)))
+			if mm.has("gate"):
+				peek["gate"] = bool(mm["gate"])
 			if mm.get("basin") is Dictionary:
 				peek["basin"] = mm["basin"]
 			# THE HALL OWNS ITS CROSSING (2026-08-24, Palle: "maybe it becomes
@@ -4012,7 +4014,11 @@ func _build_segment() -> void:
 	# is a wall, a guest is whether the pool is wider than the spine.
 	seg.set_meta("em_chapter", seg_seq)
 	# THE GATE, on the opening segment only: the vestibule becomes its own room
-	if _seg_index == 1 and _mod_gate != null and _shot_path == "" and _autopilot == 0 and not _studio:
+	# A HALL MAY REFUSE ITS GATE (2026-08-24, Palle: "remove the sliding door
+	# from the array hall"). map_info.museum.gate = false, carried on the plan
+	# row like open_roof and basin. Silent halls keep the door.
+	var gate_ok: bool = not (peek.has("gate") and not bool(peek["gate"]))
+	if _seg_index == 1 and gate_ok and _mod_gate != null and _shot_path == "" and _autopilot == 0 and not _studio:
 		# the entry wall's opening: the widest run of floor cells in the tile's
 		# first row (the gate module centres its door on it when depth_rows is 0)
 		var dx0: int = -1
