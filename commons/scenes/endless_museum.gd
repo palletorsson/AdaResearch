@@ -717,7 +717,7 @@ var _doll_insp: CanvasLayer = null        # the inspector — a selected body's 
 var _doll_insp_lbl: Label = null
 var _doll_insp_t: float = 0.0
 var _doll_top: bool = false               # H's second stop: the plan view, straight down
-var _plan_view_size: float = 28.0          # fixed per hall; the wheel navigates, never zooms
+var _plan_view_size: float = 28.0          # fixed on entry; the wheel scrolls the map axis
 
 ## THE SPINE STRIP (L): the museum's fourth zoom level — the whole spine as a
 ## 1D strip of pearls in walk order, each pearl's lines readable and editable
@@ -3009,7 +3009,7 @@ func _utility_apply_params(node: Node3D, code: String, params: Array) -> void:
 				if params.size() > 2 and String(params[2]).is_valid_float():
 					node.set("pause_duration", float(params[2]))
 				if params.size() > 3 and String(params[3]).is_valid_float():
-					node.set("y_offset", float(params[3]))
+					node.set("y_offset", _museum_y_offset(float(params[3])))
 		"sc":   # sc:max:min:offset_x:y_offset
 			if params.size() > 0 and String(params[0]).is_valid_float():
 				node.set("max_scale", float(params[0]))
@@ -3018,7 +3018,20 @@ func _utility_apply_params(node: Node3D, code: String, params: Array) -> void:
 			if params.size() > 2 and String(params[2]).is_valid_float():
 				node.set("center_offset", Vector3(float(params[2]), 0, 0))
 			if params.size() > 3 and String(params[3]).is_valid_float():
-				node.set("y_offset", float(params[3]))
+				node.set("y_offset", _museum_y_offset(float(params[3])))
+
+
+## A GRID Y-OFFSET IS NOT A MUSEUM Y-OFFSET (2026-08-24, Palle: "I do not see
+## the scale rotate and transport cube"). They were standing, all six of them,
+## and BURIED: the probe found rc at y -0.6 and sc at y -1.0 while tc sat at
+## 0. The maps carry rc:45:y:4:-0.6 and sc:3:-0.5:1:-1, offsets authored
+## against the GRID's floor — where a cube is centre-origin and its surface
+## sits half a metre above the cell's origin, so a small negative number
+## settles the body onto the floor. The museum's deck top IS 0, so the same
+## number sinks the body through it. Negative offsets are clamped here: a
+## body the hand placed on the floor stands ON the museum's floor.
+func _museum_y_offset(v: float) -> float:
+	return maxf(0.0, v)
 
 
 func _axis_of(a: String) -> Vector3:
@@ -9098,8 +9111,8 @@ func _plan_hall_center(sd: Dictionary) -> Vector3:
 
 
 func _plan_fit_hall(sd: Dictionary) -> void:
-	## One hall fills the plan page. This replaces manual zoom: every wheel
-	## step arrives with the complete editable map in frame.
+	## The nearest hall fills the plan when it opens. After that the size stays
+	## fixed and the wheel moves continuously through the maps.
 	var seg: Node3D = _node_or_null(sd.get("node"))
 	var tile: Array = seg.get_meta("em_tile") if seg != null and seg.has_meta("em_tile") else []
 	var width := 1
@@ -9126,35 +9139,18 @@ func _plan_fit_nearest_hall() -> void:
 	_plan_fit_hall(best)
 
 
-func _plan_step_hall(direction: int) -> void:
-	var halls := _plan_authored_halls()
-	if halls.is_empty() or _player == null:
-		_doll_toast("no authored hall is loaded under the plan")
+func _plan_scroll(direction: int, wheel_factor: float = 1.0) -> void:
+	## The museum is one long drawing. A wheel notch moves a few map cells
+	## north/south — never zooms and never snaps across the space between maps.
+	if _player == null:
 		return
-	var at := 0
-	var best_d := INF
-	for i in range(halls.size()):
-		var d := absf(_plan_hall_center(halls[i]).z - _player.position.z)
-		if d < best_d:
-			best_d = d
-			at = i
-	var target_i := clampi(at + signi(direction), 0, halls.size() - 1)
-	var target: Dictionary = halls[target_i]
-	if target_i == at:
-		_doll_toast("%s authored hall" % ("first" if direction < 0 else "last"))
-		return
-	var center := _plan_hall_center(target)
-	_player.position = center
+	var cells := maxf(2.0, _plan_view_size * 0.14) * maxf(0.25, wheel_factor)
+	_player.position.z += cells * float(signi(direction))
 	_player.velocity = Vector3.ZERO
-	_last_ground = center
+	_last_ground = _player.position
 	_doll_walk_to = Vector3(1e9, 0, 0)
-	_doll_select(-1)
-	_plan_fit_hall(target)
 	if _paint2d_canvas != null and is_instance_valid(_paint2d_canvas):
 		_paint2d_canvas.queue_redraw()
-	var seg: Node3D = _node_or_null(target.get("node"))
-	var map_name := String(seg.get_meta("em_map")) if seg != null and seg.has_meta("em_map") else "hall"
-	_doll_toast("plan %d/%d — %s" % [target_i + 1, halls.size(), map_name])
 
 
 ## The nearest movable body to a floor point. Floor-standing kinds only —
@@ -9174,7 +9170,16 @@ func _doll_pick(pt: Vector3) -> int:
 		var n: Node3D = _node_or_null(r.get("node"))
 		if n == null or not is_instance_valid(n) or n.has_meta("em_hand_removed"):
 			continue
+		# In plan view the REAL top-down silhouette is the hit target. Large
+		# artifacts can be grabbed anywhere inside their visible footprint,
+		# rather than only within 1.6 m of an often-arbitrary scene origin.
 		var d: float = Vector2(n.global_position.x - pt.x, n.global_position.z - pt.z).length()
+		if _doll_top:
+			var box := _extent_of(n)
+			if box.size.length_squared() > 0.0001:
+				var dx := maxf(maxf(box.position.x - pt.x, pt.x - box.end.x), 0.0)
+				var dz := maxf(maxf(box.position.z - pt.z, pt.z - box.end.z), 0.0)
+				d = Vector2(dx, dz).length()
 		if d < bd:
 			bd = d
 			best = i
@@ -9933,13 +9938,13 @@ func _input(event: InputEvent) -> void:
 			return
 		if mbe.pressed and mb == MOUSE_BUTTON_WHEEL_UP:
 			if _doll_top:
-				_plan_step_hall(-1)
+				_plan_scroll(-1, mbe.factor)
 			else:
 				_doll_zoom = clampf(_doll_zoom * 0.87, 6.0, 60.0)
 			return
 		elif mbe.pressed and mb == MOUSE_BUTTON_WHEEL_DOWN:
 			if _doll_top:
-				_plan_step_hall(1)
+				_plan_scroll(1, mbe.factor)
 			else:
 				_doll_zoom = clampf(_doll_zoom / 0.87, 6.0, 60.0)
 			return
@@ -12580,8 +12585,8 @@ func _paint2d_draw() -> void:
 	var cam := get_viewport().get_camera_3d()
 	if cam == null:
 		return
-	var vcol := {"0": Color(0.06, 0.06, 0.09, 0.6), "1": Color(0.28, 0.5, 0.34, 0.38),
-		"4": Color(0.92, 0.9, 0.82, 0.68)}
+	var vcol := {"0": Color(0.06, 0.06, 0.09, 0.38), "1": Color(0.28, 0.5, 0.34, 0.18),
+		"4": Color(0.92, 0.9, 0.82, 0.34)}
 	for sv in _segments:
 		var sd: Dictionary = sv
 		var segn: Node3D = _node_or_null(sd.get("node"))
@@ -12608,42 +12613,40 @@ func _paint2d_draw() -> void:
 				var mark_cell := Vector2i(tx, tz)
 				var fill: Color = vcol[key]
 				if pools.has(mark_cell):
-					fill = Color(0.08, 0.48, 0.78, 0.68)
+					fill = Color(0.08, 0.48, 0.78, 0.34)
 				elif doors.has(mark_cell):
-					fill = Color(0.95, 0.58, 0.12, 0.78)
-				ctl.draw_colored_polygon(pts, fill)
+					fill = Color(0.95, 0.58, 0.12, 0.42)
+				# Hand mode is the real museum seen orthographically: no symbolic
+				# wash sits over its geometry. Paint colors appear only while a
+				# material tool is armed, and remain translucent over artifacts.
+				if _paint2d != "":
+					ctl.draw_colored_polygon(pts, fill)
 				var closed := pts.duplicate()
 				closed.append(pts[0])
-				ctl.draw_polyline(closed, Color(0, 0, 0, 0.25), 1.0)
-	# ARTIFACT PINS: the cell wash must never make the things being curated
-	# disappear. Pins are drawn last and share _doll_pick's eligibility, so
-	# every visible pin can be selected and dragged with the hand tool.
-	var view_rect := Rect2(Vector2.ZERO, ctl.size).grow(24.0)
-	for i in range(_edit_records.size()):
-		var record: Dictionary = _edit_records[i]
-		if String(record.get("kind", "")) in ["variant", "plinth"]:
-			continue
-		var node: Node3D = _node_or_null(record.get("node"))
-		if node == null or not is_instance_valid(node) or node.has_meta("em_hand_removed") \
-				or cam.is_position_behind(node.global_position):
-			continue
-		var pin := cam.unproject_position(node.global_position)
-		if not view_rect.has_point(pin):
-			continue
-		var selected := i == _edit_sel
-		var pin_color := Color(0.22, 0.86, 1.0, 0.98) if String(record.get("kind", "")) == "" \
-			else Color(0.83, 0.62, 1.0, 0.95)
-		ctl.draw_circle(pin, 13.0 if selected else 8.0, Color(0.03, 0.04, 0.06, 0.92))
-		ctl.draw_circle(pin, 9.0 if selected else 5.0, pin_color)
-		if selected:
-			ctl.draw_arc(pin, 16.0, 0.0, TAU, 32, Color.WHITE, 2.0)
-			var token_name := str(record.get("token", "artifact")).split("#")[0]
-			ctl.draw_string(ThemeDB.fallback_font, pin + Vector2(20, 5), token_name,
-				HORIZONTAL_ALIGNMENT_LEFT, -1, 14, Color.WHITE)
+				ctl.draw_polyline(closed, Color(0, 0, 0, 0.3), 1.0)
+	# Selection outlines the REAL artifact's top-down extent. There is no pin
+	# or surrogate sprite: the geometry beneath this line is the artifact.
+	if _edit_sel >= 0 and _edit_sel < _edit_records.size():
+		var selected_record: Dictionary = _edit_records[_edit_sel]
+		var selected_node: Node3D = _node_or_null(selected_record.get("node"))
+		if selected_node != null and is_instance_valid(selected_node) \
+				and not selected_node.has_meta("em_hand_removed"):
+			var box := _extent_of(selected_node)
+			if box.size.length_squared() > 0.0001:
+				var outline := PackedVector2Array([
+					cam.unproject_position(Vector3(box.position.x, box.end.y, box.position.z)),
+					cam.unproject_position(Vector3(box.end.x, box.end.y, box.position.z)),
+					cam.unproject_position(Vector3(box.end.x, box.end.y, box.end.z)),
+					cam.unproject_position(Vector3(box.position.x, box.end.y, box.end.z)),
+					cam.unproject_position(Vector3(box.position.x, box.end.y, box.position.z))])
+				ctl.draw_polyline(outline, Color(0.2, 0.9, 1.0), 3.0)
+				var token_name := str(selected_record.get("token", "artifact")).split("#")[0]
+				ctl.draw_string(ThemeDB.fallback_font, outline[1] + Vector2(8, -5), token_name,
+					HORIZONTAL_ALIGNMENT_LEFT, -1, 14, Color.WHITE)
 	var bn := {"": "HAND / MOVE", "0": "VOID", "1": "FLOOR", "2": "WALL",
 		"pool": "POOL", "door": "DOOR"}
 	ctl.draw_string(ThemeDB.fallback_font, Vector2(20, 40),
-		"MUSEUM PLAN — %s   ·   wheel: previous/next hall   ·   MMB drag: pan   ·   north is up" % String(bn.get(_paint2d, _paint2d)),
+		"MUSEUM PLAN — %s   ·   wheel: scroll along maps   ·   MMB drag: pan   ·   north is up" % String(bn.get(_paint2d, _paint2d)),
 		HORIZONTAL_ALIGNMENT_LEFT, -1, 18, Color(1, 1, 1, 0.92))
 	ctl.draw_string(ThemeDB.fallback_font, Vector2(20, 64),
 		"hand: select + drag artifact   ·   Q rotates selected   ·   CONFIG edits it   ·   ctrl+Z undo   ·   H builds + exits",

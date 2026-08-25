@@ -1,6 +1,6 @@
 {
 	"_readme": "The BAKE: every placement decision the museum makes from a measurement, decided ONCE by a headless --em-bake run and replayed by every later run, desktop or headset. Per chapter|pearl: placed = token, tile cell, the exact cells sealed (x, z-from-segment-base); refused = token, cell, why. Regenerate after editing the plan: python tools/em_bake.py",
-	"at": "2026-08-25 09:16:11",
+	"at": "2026-08-25 09:29:43",
 	"plan": "res://ada_run/em_plan.json",
 	"plan_at": "2026-08-21T14:00:55",
 	"schema": "adaresearch.em_bake.v1",
@@ -43901,20 +43901,36 @@
 				},
 				{
 					"cell": [
-						12.0,
+						2.0,
 						10.0
 					],
 					"seal": [
 						[
-							12.0,
+							2.0,
 							10.0
 						],
 						[
-							13.0,
+							3.0,
+							10.0
+						],
+						[
+							4.0,
+							10.0
+						],
+						[
+							5.0,
 							10.0
 						]
 					],
 					"token": "line_builder_3d"
+				},
+				{
+					"cell": [
+						4.0,
+						10.0
+					],
+					"seal": [],
+					"token": "parallel_line_puzzle"
 				},
 				{
 					"cell": [
@@ -43928,19 +43944,6 @@
 						]
 					],
 					"token": "laser_measure"
-				},
-				{
-					"cell": [
-						5.0,
-						12.0
-					],
-					"seal": [
-						[
-							5.0,
-							12.0
-						]
-					],
-					"token": "parallel_line_puzzle"
 				},
 				{
 					"cell": [
@@ -43959,6 +43962,43 @@
 						[
 							9.0,
 							12.0
+						]
+					],
+					"token": "laser_measure"
+				},
+				{
+					"cell": [
+						5.0,
+						14.0
+					],
+					"seal": [
+						[
+							3.0,
+							14.0
+						],
+						[
+							4.0,
+							14.0
+						],
+						[
+							5.0,
+							14.0
+						],
+						[
+							3.0,
+							15.0
+						],
+						[
+							4.0,
+							15.0
+						],
+						[
+							5.0,
+							15.0
+						],
+						[
+							3.0,
+							16.0
 						]
 					],
 					"token": "laser_measure"
@@ -44000,51 +44040,6 @@
 						]
 					],
 					"token": "science_screen"
-				},
-				{
-					"cell": [
-						9.0,
-						15.0
-					],
-					"seal": [
-						[
-							7.0,
-							15.0
-						],
-						[
-							8.0,
-							15.0
-						],
-						[
-							9.0,
-							15.0
-						],
-						[
-							7.0,
-							16.0
-						],
-						[
-							8.0,
-							16.0
-						],
-						[
-							9.0,
-							16.0
-						],
-						[
-							7.0,
-							17.0
-						],
-						[
-							8.0,
-							17.0
-						],
-						[
-							9.0,
-							17.0
-						]
-					],
-					"token": "laser_measure"
 				},
 				{
 					"cell": [
@@ -44272,7 +44267,23 @@
 						8.0
 					],
 					"token": "do_not_cross_barrier",
-					"why": "baked: baked: sealing would sever the walk route"
+					"why": "baked: baked: baked: sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						4.0,
+						11.0
+					],
+					"token": "parallel_line_puzzle",
+					"why": "sealing would sever the walk route"
+				},
+				{
+					"tile_cell": [
+						3.0,
+						11.0
+					],
+					"token": "parallel_line_puzzle",
+					"why": "sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
@@ -44280,7 +44291,7 @@
 						15.0
 					],
 					"token": "laser_measure",
-					"why": "baked: baked: sealing would sever the walk route"
+					"why": "baked: baked: baked: sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
@@ -44288,7 +44299,7 @@
 						15.0
 					],
 					"token": "line",
-					"why": "baked: baked: sealing would sever the walk route"
+					"why": "baked: baked: baked: sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
@@ -44296,7 +44307,7 @@
 						16.0
 					],
 					"token": "line",
-					"why": "baked: baked: sealing would sever the walk route"
+					"why": "baked: baked: baked: sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
@@ -44304,7 +44315,7 @@
 						22.0
 					],
 					"token": "lightrod",
-					"why": "baked: baked: sealing would sever the walk route"
+					"why": "baked: baked: baked: sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
@@ -44312,7 +44323,7 @@
 						22.0
 					],
 					"token": "lightrod",
-					"why": "baked: baked: sealing would sever the walk route"
+					"why": "baked: baked: baked: sealing would sever the walk route"
 				}
 			]
 		},
@@ -44321,246 +44332,270 @@
 			"placed": [
 				{
 					"cell": [
-						7,
-						5
+						7.0,
+						5.0
 					],
 					"seal": [],
 					"token": "folding_past"
 				},
 				{
 					"cell": [
-						11,
-						5
+						11.0,
+						5.0
 					],
 					"seal": [
 						[
-							11,
-							5
+							11.0,
+							5.0
 						]
 					],
 					"token": "frame_counter_display"
 				},
 				{
 					"cell": [
-						4,
-						6
+						4.0,
+						6.0
 					],
 					"seal": [
 						[
-							4,
-							6
+							4.0,
+							6.0
 						]
 					],
 					"token": "fontana_puncture"
 				},
 				{
 					"cell": [
-						6,
-						7
+						6.0,
+						7.0
 					],
 					"seal": [
 						[
-							6,
-							7
+							6.0,
+							7.0
 						],
 						[
-							7,
-							7
+							7.0,
+							7.0
 						],
 						[
-							6,
-							8
+							6.0,
+							8.0
 						],
 						[
-							7,
-							8
+							7.0,
+							8.0
 						]
 					],
 					"token": "origin"
 				},
 				{
 					"cell": [
-						1,
-						8
+						1.0,
+						8.0
 					],
 					"seal": [
 						[
-							1,
-							8
+							1.0,
+							8.0
 						]
 					],
 					"token": "coordinate_readout"
 				},
 				{
 					"cell": [
-						6,
-						9
+						6.0,
+						9.0
 					],
 					"seal": [
 						[
-							5,
-							8
+							5.0,
+							8.0
 						],
 						[
-							6,
-							8
+							6.0,
+							8.0
 						],
 						[
-							5,
-							9
+							5.0,
+							9.0
 						],
 						[
-							6,
-							9
+							6.0,
+							9.0
 						],
 						[
-							7,
-							9
+							7.0,
+							9.0
 						],
 						[
-							5,
-							10
+							5.0,
+							10.0
 						],
 						[
-							6,
-							10
+							6.0,
+							10.0
 						],
 						[
-							7,
-							10
+							7.0,
+							10.0
 						]
 					],
 					"token": "you_are_here"
 				},
 				{
 					"cell": [
-						12,
-						10
+						12.0,
+						10.0
 					],
 					"seal": [
 						[
-							12,
-							10
+							12.0,
+							10.0
 						]
 					],
 					"token": "interactive_point_origin_force"
 				},
 				{
 					"cell": [
-						13,
-						10
+						13.0,
+						10.0
 					],
 					"seal": [
 						[
-							13,
-							10
+							13.0,
+							10.0
 						]
 					],
 					"token": "interactive_point_origin_force"
 				},
 				{
 					"cell": [
-						1,
-						15
+						2.0,
+						14.0
 					],
 					"seal": [
 						[
-							0,
-							13
+							0.0,
+							12.0
 						],
 						[
-							1,
-							13
+							1.0,
+							12.0
 						],
 						[
-							2,
-							13
+							2.0,
+							12.0
 						],
 						[
-							3,
-							13
+							3.0,
+							12.0
 						],
 						[
-							1,
-							14
+							4.0,
+							12.0
 						],
 						[
-							2,
-							14
+							0.0,
+							13.0
 						],
 						[
-							3,
-							14
+							1.0,
+							13.0
 						],
 						[
-							0,
-							15
+							2.0,
+							13.0
 						],
 						[
-							1,
-							15
+							3.0,
+							13.0
 						],
 						[
-							2,
-							15
+							4.0,
+							13.0
 						],
 						[
-							3,
-							15
+							1.0,
+							14.0
 						],
 						[
-							0,
-							16
+							2.0,
+							14.0
 						],
 						[
-							1,
-							16
+							3.0,
+							14.0
 						],
 						[
-							2,
-							16
+							4.0,
+							14.0
 						],
 						[
-							3,
-							16
+							0.0,
+							15.0
 						],
 						[
-							1,
-							17
+							1.0,
+							15.0
 						],
 						[
-							2,
-							17
+							2.0,
+							15.0
 						],
 						[
-							3,
-							17
+							3.0,
+							15.0
+						],
+						[
+							4.0,
+							15.0
+						],
+						[
+							0.0,
+							16.0
+						],
+						[
+							1.0,
+							16.0
+						],
+						[
+							2.0,
+							16.0
+						],
+						[
+							3.0,
+							16.0
+						],
+						[
+							4.0,
+							16.0
 						]
 					],
 					"token": "CoordinateSystem3M"
 				},
 				{
 					"cell": [
-						7,
-						16
+						7.0,
+						16.0
 					],
 					"seal": [
 						[
-							7,
-							16
+							7.0,
+							16.0
 						]
 					],
 					"token": "floating_sphere_field"
 				},
 				{
 					"cell": [
-						10,
-						16
+						10.0,
+						16.0
 					],
 					"seal": [
 						[
-							10,
-							16
+							10.0,
+							16.0
 						]
 					],
 					"token": "interactive_point_origin_force"
@@ -67402,252 +67437,252 @@
 			"placed": [
 				{
 					"cell": [
-						1.0,
-						5.0
+						1,
+						5
 					],
 					"seal": [
 						[
-							1.0,
-							5.0
+							1,
+							5
 						]
 					],
 					"token": "invariants_demo"
 				},
 				{
 					"cell": [
-						5.0,
-						5.0
+						5,
+						5
 					],
 					"seal": [
 						[
-							4.0,
-							5.0
+							4,
+							5
 						],
 						[
-							5.0,
-							5.0
+							5,
+							5
 						],
 						[
-							6.0,
-							5.0
+							6,
+							5
 						]
 					],
 					"token": "rotation_gimbal"
 				},
 				{
 					"cell": [
-						7.0,
-						6.0
+						7,
+						6
 					],
 					"seal": [
 						[
-							6.0,
-							6.0
+							6,
+							6
 						],
 						[
-							7.0,
-							6.0
+							7,
+							6
 						],
 						[
-							8.0,
-							6.0
+							8,
+							6
 						]
 					],
 					"token": "matrix_4x4_viewer"
 				},
 				{
 					"cell": [
-						9.0,
-						9.0
+						9,
+						9
 					],
 					"seal": [
 						[
-							9.0,
-							9.0
+							9,
+							9
 						]
 					],
 					"token": "balance_puzzle"
 				},
 				{
 					"cell": [
-						3.0,
-						10.0
+						3,
+						10
 					],
 					"seal": [
 						[
-							2.0,
-							10.0
+							2,
+							10
 						]
 					],
 					"token": "homogeneous_coordinates"
 				},
 				{
 					"cell": [
-						2.0,
-						11.0
+						2,
+						11
 					],
 					"seal": [
 						[
-							2.0,
-							11.0
+							2,
+							11
 						],
 						[
-							2.0,
-							12.0
+							2,
+							12
 						]
 					],
 					"token": "x_translation_cube"
 				},
 				{
 					"cell": [
-						8.0,
-						11.0
+						8,
+						11
 					],
 					"seal": [
 						[
-							8.0,
-							11.0
+							8,
+							11
 						],
 						[
-							8.0,
-							12.0
+							8,
+							12
 						],
 						[
-							8.0,
-							10.0
+							8,
+							10
 						],
 						[
-							9.0,
-							10.0
+							9,
+							10
 						],
 						[
-							9.0,
-							11.0
+							9,
+							11
 						],
 						[
-							9.0,
-							12.0
+							9,
+							12
 						]
 					],
 					"token": "z_translation_cube"
 				},
 				{
 					"cell": [
-						9.0,
-						11.0
+						9,
+						11
 					],
 					"seal": [],
 					"token": "dark_sphere"
 				},
 				{
 					"cell": [
-						1.0,
-						12.0
+						1,
+						12
 					],
 					"seal": [
 						[
-							1.0,
-							12.0
+							1,
+							12
 						]
 					],
 					"token": "transform_composition"
 				},
 				{
 					"cell": [
-						2.0,
-						16.0
+						2,
+						16
 					],
 					"seal": [
 						[
-							2.0,
-							16.0
+							2,
+							16
 						]
 					],
 					"token": "scale_me"
 				},
 				{
 					"cell": [
-						8.0,
-						16.0
+						8,
+						16
 					],
 					"seal": [
 						[
-							8.0,
-							16.0
+							8,
+							16
 						],
 						[
-							8.0,
-							17.0
+							8,
+							17
 						]
 					],
 					"token": "y_translation_cube"
 				},
 				{
 					"cell": [
-						1.0,
-						21.0
+						1,
+						21
 					],
 					"seal": [
 						[
-							1.0,
-							21.0
+							1,
+							21
 						],
 						[
-							2.0,
-							21.0
+							2,
+							21
 						],
 						[
-							3.0,
-							21.0
+							3,
+							21
 						],
 						[
-							1.0,
-							20.0
+							1,
+							20
 						],
 						[
-							2.0,
-							20.0
+							2,
+							20
 						],
 						[
-							3.0,
-							20.0
+							3,
+							20
 						],
 						[
-							1.0,
-							22.0
+							1,
+							22
 						],
 						[
-							2.0,
-							22.0
+							2,
+							22
 						],
 						[
-							3.0,
-							22.0
+							3,
+							22
 						],
 						[
-							1.0,
-							23.0
+							1,
+							23
 						],
 						[
-							2.0,
-							23.0
+							2,
+							23
 						],
 						[
-							3.0,
-							23.0
+							3,
+							23
 						]
 					],
 					"token": "spin"
 				},
 				{
 					"cell": [
-						8.0,
-						21.0
+						8,
+						21
 					],
 					"seal": [
 						[
-							8.0,
-							21.0
+							8,
+							21
 						]
 					],
 					"token": "pick_up_cube"
@@ -67656,48 +67691,48 @@
 			"refused": [
 				{
 					"tile_cell": [
-						8.0,
-						6.0
+						8,
+						6
 					],
 					"token": "matrix_4x4_viewer",
 					"why": "sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
-						2.0,
-						10.0
+						2,
+						10
 					],
 					"token": "homogeneous_coordinates",
 					"why": "sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
-						1.0,
-						10.0
+						1,
+						10
 					],
 					"token": "homogeneous_coordinates",
 					"why": "sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
-						2.0,
-						9.0
+						2,
+						9
 					],
 					"token": "homogeneous_coordinates",
 					"why": "sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
-						2.0,
-						11.0
+						2,
+						11
 					],
 					"token": "homogeneous_coordinates",
 					"why": "sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
-						2.0,
-						21.0
+						2,
+						21
 					],
 					"token": "spin",
 					"why": "sealing would sever the walk route"
