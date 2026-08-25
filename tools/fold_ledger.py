@@ -59,7 +59,15 @@ def load_registry():
         if not isinstance(arts, dict):
             continue
         for tok, entry in arts.items():
-            if isinstance(entry, dict) and tok not in reg:
+            if not isinstance(entry, dict):
+                continue
+            # RICHER WINS, not first (2026-08-25). substrate_vectors.json is a
+            # FLAT registry file — no `artifacts` wrapper — so under first-wins
+            # its thin entries shadowed 127 real ones. No delegate_to edge was
+            # affected, so no verdict in this ledger changed, but the loader is
+            # the same one and would have been wrong the moment one was.
+            old = reg.get(tok)
+            if old is None or (len(entry) > len(old) and "delegate_to" not in old):
                 reg[tok] = entry
     return reg
 

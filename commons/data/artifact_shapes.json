@@ -241,6 +241,14 @@
    "square": true,
    "wall_backing": false
   },
+  "entropy_axiom": {
+   "w": 2,
+   "d": 4,
+   "long": 4,
+   "short": 2,
+   "square": false,
+   "wall_backing": false
+  },
   "fetishtorus": {
    "w": 3,
    "d": 3,
@@ -254,6 +262,14 @@
    "d": 1,
    "long": 1,
    "short": 1,
+   "square": true,
+   "wall_backing": false
+  },
+  "fluid_simulation": {
+   "w": 3,
+   "d": 3,
+   "long": 3,
+   "short": 3,
    "square": true,
    "wall_backing": false
   },
@@ -3937,6 +3953,14 @@
    "square": true,
    "wall_backing": false
   },
+  "spring_network": {
+   "w": 3,
+   "d": 3,
+   "long": 3,
+   "short": 3,
+   "square": true,
+   "wall_backing": false
+  },
   "standalone_disco": {
    "w": 3,
    "d": 3,
@@ -4089,6 +4113,30 @@
    "square": true,
    "wall_backing": false
   },
+  "demo_singles": {
+   "w": 4,
+   "d": 1,
+   "long": 4,
+   "short": 1,
+   "square": false,
+   "wall_backing": false
+  },
+  "demo_passive": {
+   "w": 4,
+   "d": 1,
+   "long": 4,
+   "short": 1,
+   "square": false,
+   "wall_backing": false
+  },
+  "demo_compounds": {
+   "w": 4,
+   "d": 1,
+   "long": 4,
+   "short": 1,
+   "square": false,
+   "wall_backing": false
+  },
   "tt": {
    "w": 1,
    "d": 1,
@@ -4119,6 +4167,14 @@
    "long": 3,
    "short": 2,
    "square": false,
+   "wall_backing": false
+  },
+  "grab_cube": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
    "wall_backing": false
   },
   "component_court": {
@@ -9210,6 +9266,14 @@
    "wall_backing": false
   },
   "bouncing_ball": {
+   "w": 3,
+   "d": 3,
+   "long": 3,
+   "short": 3,
+   "square": true,
+   "wall_backing": false
+  },
+  "cloth_simulation": {
    "w": 3,
    "d": 3,
    "long": 3,
@@ -14417,6 +14481,22 @@
    "square": true,
    "wall_backing": false
   },
+  "shader_07_noise": {
+   "w": 3,
+   "d": 3,
+   "long": 3,
+   "short": 3,
+   "square": true,
+   "wall_backing": false
+  },
+  "shader_08_cellularnoise": {
+   "w": 3,
+   "d": 3,
+   "long": 3,
+   "short": 3,
+   "square": true,
+   "wall_backing": false
+  },
   "shader_noise_space": {
    "w": 2,
    "d": 4,
@@ -16295,6 +16375,1046 @@
    "long": 1,
    "short": 1,
    "square": true,
+   "wall_backing": false
+  },
+  "BeatFrequencies": {
+   "w": 5,
+   "d": 2,
+   "long": 5,
+   "short": 2,
+   "square": false,
+   "wall_backing": false
+  },
+  "CircleSpiral": {
+   "w": 3,
+   "d": 3,
+   "long": 3,
+   "short": 3,
+   "square": true,
+   "wall_backing": false
+  },
+  "ColoredLinesVR": {
+   "w": 3,
+   "d": 3,
+   "long": 3,
+   "short": 3,
+   "square": true,
+   "wall_backing": false
+  },
+  "DancingBody": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": false
+  },
+  "DoublePendulum": {
+   "w": 2,
+   "d": 4,
+   "long": 4,
+   "short": 2,
+   "square": false,
+   "wall_backing": false
+  },
+  "DualBallFMController": {
+   "w": 1,
+   "d": 2,
+   "long": 2,
+   "short": 1,
+   "square": false,
+   "wall_backing": false
+  },
+  "ElphabaDemo": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": false
+  },
+  "ElphabaDress": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": false
+  },
+  "GlassRack": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": false
+  },
+  "HarmonicBuilder": {
+   "w": 7,
+   "d": 1,
+   "long": 7,
+   "short": 1,
+   "square": false,
+   "wall_backing": false
+  },
+  "Lissajous3D": {
+   "w": 3,
+   "d": 3,
+   "long": 3,
+   "short": 3,
+   "square": true,
+   "wall_backing": false
+  },
+  "MarioSoundController": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": false
+  },
+  "MelodyChaser3D": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": false
+  },
+  "MelodySoundBoard": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": false
+  },
+  "OscillatingWave": {
+   "w": 3,
+   "d": 3,
+   "long": 3,
+   "short": 3,
+   "square": true,
+   "wall_backing": false
+  },
+  "OscillationCurve": {
+   "w": 3,
+   "d": 3,
+   "long": 3,
+   "short": 3,
+   "square": true,
+   "wall_backing": false
+  },
+  "OscillationDriver": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": false
+  },
+  "PendulumCircle": {
+   "w": 2,
+   "d": 4,
+   "long": 4,
+   "short": 2,
+   "square": false,
+   "wall_backing": false
+  },
+  "PendulumGrid3x3": {
+   "w": 2,
+   "d": 4,
+   "long": 4,
+   "short": 2,
+   "square": false,
+   "wall_backing": false
+  },
+  "PendulumWave": {
+   "w": 3,
+   "d": 3,
+   "long": 3,
+   "short": 3,
+   "square": true,
+   "wall_backing": false
+  },
+  "PhonemeCloud": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": false
+  },
+  "Rack303Acid": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": false
+  },
+  "Rack808Drums": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": false
+  },
+  "RackAmbientDrone": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": true
+  },
+  "RackDX7Piano": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": false
+  },
+  "RackMario": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": false
+  },
+  "RackMoogBass": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": false
+  },
+  "RackSineBasic": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": true
+  },
+  "SimpleOscillatingBridge": {
+   "w": 3,
+   "d": 3,
+   "long": 3,
+   "short": 3,
+   "square": true,
+   "wall_backing": false
+  },
+  "SoundBoxLong": {
+   "w": 2,
+   "d": 1,
+   "long": 2,
+   "short": 1,
+   "square": false,
+   "wall_backing": false
+  },
+  "SoundBoxShort": {
+   "w": 2,
+   "d": 1,
+   "long": 2,
+   "short": 1,
+   "square": false,
+   "wall_backing": false
+  },
+  "SoundscapeRadioRack": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": false
+  },
+  "SphericalHarmonics": {
+   "w": 2,
+   "d": 2,
+   "long": 2,
+   "short": 2,
+   "square": true,
+   "wall_backing": false
+  },
+  "SplineCables": {
+   "w": 2,
+   "d": 2,
+   "long": 2,
+   "short": 2,
+   "square": true,
+   "wall_backing": false
+  },
+  "StaticCables": {
+   "w": 1,
+   "d": 9,
+   "long": 9,
+   "short": 1,
+   "square": false,
+   "wall_backing": false
+  },
+  "SystemsMusicTest": {
+   "w": 1,
+   "d": 9,
+   "long": 9,
+   "short": 1,
+   "square": false,
+   "wall_backing": false
+  },
+  "TrigWalkingPath": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": false
+  },
+  "UnitCircleTrig": {
+   "w": 2,
+   "d": 2,
+   "long": 2,
+   "short": 2,
+   "square": true,
+   "wall_backing": false
+  },
+  "VRAudioMonitor": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": true
+  },
+  "VitruvianMan": {
+   "w": 1,
+   "d": 2,
+   "long": 2,
+   "short": 1,
+   "square": false,
+   "wall_backing": false
+  },
+  "WavePaintings": {
+   "w": 4,
+   "d": 2,
+   "long": 4,
+   "short": 2,
+   "square": false,
+   "wall_backing": true
+  },
+  "WaveRideScene": {
+   "w": 3,
+   "d": 3,
+   "long": 3,
+   "short": 3,
+   "square": true,
+   "wall_backing": false
+  },
+  "air_music_display_case": {
+   "w": 3,
+   "d": 3,
+   "long": 3,
+   "short": 3,
+   "square": true,
+   "wall_backing": true
+  },
+  "atmosphericmonitoring": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": false
+  },
+  "axis_translation_cube": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": false
+  },
+  "ball_dropper": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": false
+  },
+  "basis_vectors_rig": {
+   "w": 2,
+   "d": 2,
+   "long": 2,
+   "short": 2,
+   "square": true,
+   "wall_backing": false
+  },
+  "bernini_columns": {
+   "w": 3,
+   "d": 3,
+   "long": 3,
+   "short": 3,
+   "square": true,
+   "wall_backing": false
+  },
+  "biomagneticresonator": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": false
+  },
+  "boids_aquarium": {
+   "w": 2,
+   "d": 2,
+   "long": 2,
+   "short": 2,
+   "square": true,
+   "wall_backing": false
+  },
+  "boolean_tunnel": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": false
+  },
+  "cable_builder": {
+   "w": 2,
+   "d": 2,
+   "long": 2,
+   "short": 2,
+   "square": true,
+   "wall_backing": false
+  },
+  "chemicalapparatus": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": false
+  },
+  "chladni_plate": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": false
+  },
+  "circle_spiral_scene": {
+   "w": 3,
+   "d": 3,
+   "long": 3,
+   "short": 3,
+   "square": true,
+   "wall_backing": false
+  },
+  "coshlea": {
+   "w": 2,
+   "d": 4,
+   "long": 4,
+   "short": 2,
+   "square": false,
+   "wall_backing": false
+  },
+  "coupled_oscillator_lattice": {
+   "w": 3,
+   "d": 3,
+   "long": 3,
+   "short": 3,
+   "square": true,
+   "wall_backing": false
+  },
+  "cross_product_demo": {
+   "w": 4,
+   "d": 2,
+   "long": 4,
+   "short": 2,
+   "square": false,
+   "wall_backing": false
+  },
+  "dot_product_projector": {
+   "w": 4,
+   "d": 2,
+   "long": 4,
+   "short": 2,
+   "square": false,
+   "wall_backing": false
+  },
+  "double_helix_oscillator": {
+   "w": 3,
+   "d": 3,
+   "long": 3,
+   "short": 3,
+   "square": true,
+   "wall_backing": false
+  },
+  "double_helix_scene": {
+   "w": 3,
+   "d": 3,
+   "long": 3,
+   "short": 3,
+   "square": true,
+   "wall_backing": false
+  },
+  "doublehelix": {
+   "w": 2,
+   "d": 2,
+   "long": 2,
+   "short": 2,
+   "square": true,
+   "wall_backing": false
+  },
+  "dual_display_test": {
+   "w": 5,
+   "d": 1,
+   "long": 5,
+   "short": 1,
+   "square": false,
+   "wall_backing": false
+  },
+  "electronicscales": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": true
+  },
+  "foucault_pendulum": {
+   "w": 3,
+   "d": 3,
+   "long": 3,
+   "short": 3,
+   "square": true,
+   "wall_backing": false
+  },
+  "fourier_transform": {
+   "w": 3,
+   "d": 3,
+   "long": 3,
+   "short": 3,
+   "square": true,
+   "wall_backing": false
+  },
+  "fourier_transform_advanced": {
+   "w": 3,
+   "d": 3,
+   "long": 3,
+   "short": 3,
+   "square": true,
+   "wall_backing": false
+  },
+  "fouriertransformshape": {
+   "w": 1,
+   "d": 9,
+   "long": 9,
+   "short": 1,
+   "square": false,
+   "wall_backing": false
+  },
+  "hallway_scene": {
+   "w": 1,
+   "d": 9,
+   "long": 9,
+   "short": 1,
+   "square": false,
+   "wall_backing": false
+  },
+  "hl_turret_vectors": {
+   "w": 2,
+   "d": 4,
+   "long": 4,
+   "short": 2,
+   "square": false,
+   "wall_backing": false
+  },
+  "holographicdisplay": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": true
+  },
+  "john_cage_tech_noir": {
+   "w": 3,
+   "d": 3,
+   "long": 3,
+   "short": 3,
+   "square": true,
+   "wall_backing": false
+  },
+  "kusama_sine": {
+   "w": 3,
+   "d": 3,
+   "long": 3,
+   "short": 3,
+   "square": true,
+   "wall_backing": false
+  },
+  "laser_turret": {
+   "w": 3,
+   "d": 3,
+   "long": 3,
+   "short": 3,
+   "square": true,
+   "wall_backing": false
+  },
+  "line_builder_3d": {
+   "w": 3,
+   "d": 1,
+   "long": 3,
+   "short": 1,
+   "square": false,
+   "wall_backing": false
+  },
+  "lissajous_curves": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": false
+  },
+  "liturgicalambientgen": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": false
+  },
+  "mario_test_sound_ui": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": false
+  },
+  "math_objects": {
+   "w": 3,
+   "d": 3,
+   "long": 3,
+   "short": 3,
+   "square": true,
+   "wall_backing": false
+  },
+  "multimeter": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": false
+  },
+  "noir_sequencer": {
+   "w": 1,
+   "d": 2,
+   "long": 2,
+   "short": 1,
+   "square": false,
+   "wall_backing": false
+  },
+  "oscillation_controlled_cube": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": false
+  },
+  "parametric_pendulum_waves": {
+   "w": 2,
+   "d": 2,
+   "long": 2,
+   "short": 2,
+   "square": true,
+   "wall_backing": false
+  },
+  "parametric_shapes": {
+   "w": 4,
+   "d": 2,
+   "long": 4,
+   "short": 2,
+   "square": false,
+   "wall_backing": false
+  },
+  "pylon_cables": {
+   "w": 3,
+   "d": 3,
+   "long": 3,
+   "short": 3,
+   "square": true,
+   "wall_backing": false
+  },
+  "rainbow_hallway": {
+   "w": 1,
+   "d": 9,
+   "long": 9,
+   "short": 1,
+   "square": false,
+   "wall_backing": false
+  },
+  "resonance_frequencies": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": false
+  },
+  "resonance_frequencies_visualizer": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": false
+  },
+  "resonating_metallophone": {
+   "w": 1,
+   "d": 2,
+   "long": 2,
+   "short": 1,
+   "square": false,
+   "wall_backing": false
+  },
+  "rotatescalecubes": {
+   "w": 3,
+   "d": 3,
+   "long": 3,
+   "short": 3,
+   "square": true,
+   "wall_backing": false
+  },
+  "rotating_cube_demo": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": true
+  },
+  "rotation_oscillation_cube": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": false
+  },
+  "ruth_asawa_sculpture": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": false
+  },
+  "samplevialrack": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": false
+  },
+  "segment_slide": {
+   "w": 3,
+   "d": 3,
+   "long": 3,
+   "short": 3,
+   "square": true,
+   "wall_backing": false
+  },
+  "seismograph": {
+   "w": 2,
+   "d": 1,
+   "long": 2,
+   "short": 1,
+   "square": false,
+   "wall_backing": false
+  },
+  "sentry_turret": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": false
+  },
+  "sine_art_monitor": {
+   "w": 4,
+   "d": 2,
+   "long": 4,
+   "short": 2,
+   "square": false,
+   "wall_backing": true
+  },
+  "sine_cylinder_staircase": {
+   "w": 2,
+   "d": 4,
+   "long": 4,
+   "short": 2,
+   "square": false,
+   "wall_backing": false
+  },
+  "sine_space_explanation": {
+   "w": 2,
+   "d": 2,
+   "long": 2,
+   "short": 2,
+   "square": true,
+   "wall_backing": true
+  },
+  "sine_wall_corridor": {
+   "w": 3,
+   "d": 3,
+   "long": 3,
+   "short": 3,
+   "square": true,
+   "wall_backing": false
+  },
+  "sine_wall_explanation": {
+   "w": 1,
+   "d": 2,
+   "long": 2,
+   "short": 1,
+   "square": false,
+   "wall_backing": true
+  },
+  "sine_wall_static": {
+   "w": 1,
+   "d": 9,
+   "long": 9,
+   "short": 1,
+   "square": false,
+   "wall_backing": false
+  },
+  "spectral_analyzer": {
+   "w": 1,
+   "d": 3,
+   "long": 3,
+   "short": 1,
+   "square": false,
+   "wall_backing": false
+  },
+  "spectral_sine_wave": {
+   "w": 1,
+   "d": 3,
+   "long": 3,
+   "short": 1,
+   "square": false,
+   "wall_backing": false
+  },
+  "spectrum_display": {
+   "w": 1,
+   "d": 2,
+   "long": 2,
+   "short": 1,
+   "square": false,
+   "wall_backing": true
+  },
+  "standing_waves": {
+   "w": 3,
+   "d": 3,
+   "long": 3,
+   "short": 3,
+   "square": true,
+   "wall_backing": false
+  },
+  "static_reference_cube": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": false
+  },
+  "tech_noir_audio": {
+   "w": 3,
+   "d": 3,
+   "long": 3,
+   "short": 3,
+   "square": true,
+   "wall_backing": false
+  },
+  "transformation_workbench": {
+   "w": 2,
+   "d": 1,
+   "long": 2,
+   "short": 1,
+   "square": false,
+   "wall_backing": false
+  },
+  "translation_cube_demo": {
+   "w": 2,
+   "d": 2,
+   "long": 2,
+   "short": 2,
+   "square": true,
+   "wall_backing": false
+  },
+  "turret_boll_infoboard": {
+   "w": 2,
+   "d": 2,
+   "long": 2,
+   "short": 2,
+   "square": true,
+   "wall_backing": true
+  },
+  "turret_targeting": {
+   "w": 2,
+   "d": 4,
+   "long": 4,
+   "short": 2,
+   "square": false,
+   "wall_backing": false
+  },
+  "unit_circle": {
+   "w": 1,
+   "d": 3,
+   "long": 3,
+   "short": 1,
+   "square": false,
+   "wall_backing": false
+  },
+  "unit_circle_advanced": {
+   "w": 1,
+   "d": 3,
+   "long": 3,
+   "short": 1,
+   "square": false,
+   "wall_backing": false
+  },
+  "vector_addition_demo": {
+   "w": 3,
+   "d": 3,
+   "long": 3,
+   "short": 3,
+   "square": true,
+   "wall_backing": false
+  },
+  "vector_joint_playground": {
+   "w": 3,
+   "d": 3,
+   "long": 3,
+   "short": 3,
+   "square": true,
+   "wall_backing": false
+  },
+  "vector_magnitude_demo": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": false
+  },
+  "vector_normalize_demo": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": false
+  },
+  "vector_projection_demo": {
+   "w": 2,
+   "d": 4,
+   "long": 4,
+   "short": 2,
+   "square": false,
+   "wall_backing": false
+  },
+  "vector_subtraction_demo": {
+   "w": 3,
+   "d": 3,
+   "long": 3,
+   "short": 3,
+   "square": true,
+   "wall_backing": false
+  },
+  "vector_translation_demo": {
+   "w": 2,
+   "d": 2,
+   "long": 2,
+   "short": 2,
+   "square": true,
+   "wall_backing": false
+  },
+  "walkable_sine_bridge": {
+   "w": 3,
+   "d": 3,
+   "long": 3,
+   "short": 3,
+   "square": true,
+   "wall_backing": false
+  },
+  "water_land_ride": {
+   "w": 3,
+   "d": 3,
+   "long": 3,
+   "short": 3,
+   "square": true,
+   "wall_backing": false
+  },
+  "wave_interference": {
+   "w": 2,
+   "d": 4,
+   "long": 4,
+   "short": 2,
+   "square": false,
+   "wall_backing": false
+  },
+  "wave_propagation_3d": {
+   "w": 3,
+   "d": 3,
+   "long": 3,
+   "short": 3,
+   "square": true,
+   "wall_backing": false
+  },
+  "x_translation_cube": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": false
+  },
+  "y_oscillation_cube": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": true
+  },
+  "y_translation_cube": {
+   "w": 1,
+   "d": 1,
+   "long": 1,
+   "short": 1,
+   "square": true,
+   "wall_backing": false
+  },
+  "z_translation_cube": {
+   "w": 1,
+   "d": 2,
+   "long": 2,
+   "short": 1,
+   "square": false,
    "wall_backing": false
   },
   "subtraction_suite": {

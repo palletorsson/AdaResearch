@@ -50,7 +50,15 @@ def registry():
         if not isinstance(arts, dict):
             continue
         for tok, e in arts.items():
-            if isinstance(e, dict) and tok not in reg:
+            if not isinstance(e, dict):
+                continue
+            # RICHER WINS, not first (2026-08-25). substrate_vectors.json is a
+            # FLAT registry — no `artifacts` wrapper — and under first-wins its
+            # thin entries shadowed 127 real ones, stripping their
+            # spatial_needs and with it their footprint. The count fell from
+            # 2342 shapes to 2215 and nothing complained.
+            old = reg.get(tok)
+            if old is None or (("spatial_needs" in e) and ("spatial_needs" not in old))                     or (len(e) > len(old) and "spatial_needs" not in old):
                 reg[tok] = e
     return reg
 
