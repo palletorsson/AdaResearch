@@ -900,6 +900,8 @@ var _live: Dictionary = {}         # lookup -> {scene, fp} for EVERY alive artif
 var _deal_stats: Dictionary = {}   # running totals for the end-of-run print
 
 func _ready() -> void:
+	# every lethal thing in the museum calls this node (a laser, a pool)
+	add_to_group("em_lethal")
 	if Engine.is_editor_hint():
 		return                        # @tool is for the Inspector dropdowns only
 	_boot_t0 = Time.get_ticks_msec()
@@ -2931,12 +2933,9 @@ func _save_point_now() -> Vector3:
 func _hazard_touched(body: Node3D, _entrance: Vector3) -> void:
 	if _player == null or body != _player:
 		return
-	# the SAVE POINT, not the hall entrance: a hall you entered from the far
-	# end would otherwise throw you backwards past the room you were in
-	_player.position = _save_point_now()
-	_player.velocity = Vector3.ZERO
-	_hazard_flash()
-	print("[em-hazard] burned — set down at the last save point %s" % str(_player.position))
+	# one death for the whole museum: splatter, black, the save point. The
+	# hall's entrance is no longer the destination — the save point is.
+	_museum_death("fire")
 
 
 ## FIRE AT THE BOTTOM OF EVERY OPEN POOL (2026-08-24, Palle: "at every basin
@@ -2944,27 +2943,39 @@ func _hazard_touched(body: Node3D, _entrance: Vector3) -> void:
 ## point"). One Area3D per hall with a shape per pool cell, at the pool
 ## floor: the museum's own death, which flashes and returns the walker to the
 ## last threshold instead of reloading the scene the way the grid's h: does.
-func _basin_fire(seg: Node3D, cells: Array, depth: float) -> void:
+func _basin_fire(seg: Node3D, cells: Array, depth: float, top_y: float) -> void:
 	if cells.is_empty() or depth <= 0.0:
 		return
+	var floor_y: float = -depth
+	if top_y <= floor_y + 0.2:
+		return
 	var m_fire := StandardMaterial3D.new()
-	m_fire.albedo_color = Color(0.85, 0.22, 0.05)
+	m_fire.albedo_color = Color(0.62, 0.05, 0.03, 0.94)
+	m_fire.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	m_fire.emission_enabled = true
-	m_fire.emission = Color(1.0, 0.42, 0.08)
-	m_fire.emission_energy_multiplier = 2.4
+	m_fire.emission = Color(0.86, 0.10, 0.02)
+	# LOW energy on purpose: at 1.9 the fill blew out to white-pink and the
+	# crossings standing in it lost their edges. A red cube, lit from inside.
+	m_fire.emission_energy_multiplier = 0.85
 	var area := Area3D.new()
 	area.name = "BasinFire"
 	area.monitoring = true
-	for c_v in cells:
-		var c: Vector2i = c_v
-		# the look: a glowing bed on the pool floor, seen from the rim
-		_box(seg, Vector3(c.x + 0.5, -depth + 0.06, c.y + 0.5), Vector3(0.98, 0.12, 0.98),
-			Color(0.85, 0.22, 0.05), m_fire)
+	# ONE CUBE PER BASIN, not one per cell: the fill is transparent, and a
+	# hundred adjacent transparent boxes draw a hundred internal faces. Greedy
+	# rectangles turn 318 cells into a handful of slabs with no seams inside.
+	var rects: Array = _rect_pack(cells)
+	var hgt: float = top_y - floor_y
+	for r_v in rects:
+		var r: Rect2i = r_v
+		var c := Vector3(float(r.position.x) + float(r.size.x) * 0.5,
+			floor_y + hgt * 0.5, float(r.position.y) + float(r.size.y) * 0.5)
+		var sz := Vector3(float(r.size.x) - 0.04, hgt, float(r.size.y) - 0.04)
+		_box(seg, c, sz, Color(0.78, 0.09, 0.05, 0.86), m_fire)
 		var cs := CollisionShape3D.new()
 		var bs := BoxShape3D.new()
-		bs.size = Vector3(0.96, 1.2, 0.96)
+		bs.size = sz
 		cs.shape = bs
-		cs.position = Vector3(c.x + 0.5, -depth + 0.6, c.y + 0.5)
+		cs.position = c
 		area.add_child(cs)
 	seg.add_child(area)
 	area.body_entered.connect(_basin_burned)
@@ -2972,19 +2983,176 @@ func _basin_fire(seg: Node3D, cells: Array, depth: float) -> void:
 	# the AREA, so it dies when the hall is streamed out — one made on the
 	# museum itself would outlive every hall it lit.
 	var tw := area.create_tween().set_loops()
-	tw.tween_property(m_fire, "emission_energy_multiplier", 3.4, 1.1)
-	tw.tween_property(m_fire, "emission_energy_multiplier", 1.6, 0.9)
-	print("[em-basin] fire on %d pool cell(s), %.1f m down" % [cells.size(), depth])
+	tw.tween_property(m_fire, "emission_energy_multiplier", 1.25, 1.1)
+	tw.tween_property(m_fire, "emission_energy_multiplier", 0.7, 0.9)
+	print("[em-basin] fire: %d cell(s) -> %d cube(s), %.1f m deep, top at %.2f" % [
+		cells.size(), rects.size(), hgt, top_y])
+
+
+## Greedy rectangles over a cell set: widest run first, then grown in z while
+## the whole width holds. Used by the pool fill, where one box per cell would
+## draw an internal face at every shared edge.
+func _rect_pack(cells: Array) -> Array:
+	var live: Dictionary = {}
+	var x0 := 1 << 30
+	var x1 := -(1 << 30)
+	var z0 := 1 << 30
+	var z1 := -(1 << 30)
+	for c_v in cells:
+		var c: Vector2i = c_v
+		live[c] = true
+		x0 = mini(x0, c.x); x1 = maxi(x1, c.x)
+		z0 = mini(z0, c.y); z1 = maxi(z1, c.y)
+	var out: Array = []
+	for z in range(z0, z1 + 1):
+		for x in range(x0, x1 + 1):
+			var k := Vector2i(x, z)
+			if not live.has(k):
+				continue
+			var w := 1
+			while live.has(Vector2i(x + w, z)):
+				w += 1
+			var h := 1
+			while true:
+				var whole := true
+				for xx in range(x, x + w):
+					if not live.has(Vector2i(xx, z + h)):
+						whole = false
+						break
+				if not whole:
+					break
+				h += 1
+			for zz in range(z, z + h):
+				for xx in range(x, x + w):
+					live.erase(Vector2i(xx, zz))
+			out.append(Rect2i(x, z, w, h))
+	return out
+
+
+## ARMING A LASER IS NOT SETTING A PROPERTY ON ITS ROOT (2026-08-24). The
+## script does not live there: grab_laser_measure.tscn roots a grab_stick and
+## hangs LaserMeasure beneath it, so set("lethal") on the root is accepted in
+## silence and reaches nothing. Walk down to whoever actually has the property.
+func _arm_laser(node: Node) -> int:
+	var armed := 0
+	if "lethal" in node:
+		node.set("lethal", true)
+		armed += 1
+	for c in node.find_children("*", "Node3D", true, false):
+		if "lethal" in c:
+			c.set("lethal", true)
+			armed += 1
+	if armed == 0:
+		push_warning("[em-laser] nothing to arm under %s" % node.name)
+	return armed
 
 
 func _basin_burned(body: Node3D) -> void:
 	if _player == null or body != _player:
 		return
-	_player.position = _save_point_now()
+	_museum_death("fire")
+
+
+## THE DEATH (2026-08-24, Palle: "splatter animation on screen, to the
+## endscene, back to the last save point. There should also be a fire splatter
+## as you die"). The grid reloads the map when you die; the museum cannot —
+## the walk is a mile long and a reload would throw away every hall behind
+## you. So the museum has its own: splatter, black, a line, the save point.
+var _dying: bool = false
+var _death_layer: CanvasLayer = null
+var _death_splat: Control = null
+var _death_veil: ColorRect = null
+var _death_line: Label = null
+var _deaths: int = 0
+
+const DEATH_WORDS := {
+	"fire": "the pool was burning",
+	"laser": "you walked into the beam",
+	"fall": "the floor ran out"}
+
+
+## Anything lethal in the museum arrives here — the pools call it directly,
+## a laser calls it through the em_lethal group.
+func on_lethal_touch(kind: String, _at: Vector3 = Vector3.ZERO) -> void:
+	_museum_death(kind)
+
+
+func _museum_death(kind: String) -> void:
+	if _dying or _player == null:
+		return
+	_dying = true
+	_deaths += 1
+	var back: Vector3 = _save_point_now()
+	print("[em-death] %s (#%d) — the end scene, then %s" % [kind, _deaths, str(back)])
+	if _vr:
+		# no canvas in the headset: the fade is the museum's own, and the
+		# splatter would sit on the walker's face
+		_player.position = back
+		_player.velocity = Vector3.ZERO
+		_vy = 0.0
+		_hazard_flash()
+		_dying = false
+		return
+	_death_build()
+	_death_splat.set("kind", kind)
+	_death_splat.set("progress", 0.0)
+	_death_layer.visible = true
+	_death_veil.color.a = 0.0
+	_death_line.modulate.a = 0.0
+	_death_line.text = String(DEATH_WORDS.get(kind, "the museum took you"))
+	# 1. THE SPLATTER — fast, the way being hit is fast
+	var tw := _death_layer.create_tween()
+	tw.tween_property(_death_splat, "progress", 1.0, 0.42).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	await tw.finished
+	await get_tree().create_timer(0.30).timeout
+	# 2. THE END SCENE — black, and one line about what happened
+	var tw2 := _death_layer.create_tween()
+	tw2.tween_property(_death_veil, "color:a", 1.0, 0.45)
+	tw2.parallel().tween_property(_death_line, "modulate:a", 1.0, 0.55)
+	await tw2.finished
+	await get_tree().create_timer(0.85).timeout
+	# 3. THE SAVE POINT — moved behind the black, so the jump is never seen
+	_player.position = back + Vector3(0.0, 0.05, 0.0)
 	_player.velocity = Vector3.ZERO
 	_vy = 0.0
-	_hazard_flash()
-	print("[em-basin] the pool burned — back to the save point")
+	_jumps_left = 2
+	_last_ground = back
+	await get_tree().create_timer(0.20).timeout
+	var tw3 := _death_layer.create_tween()
+	tw3.tween_property(_death_line, "modulate:a", 0.0, 0.30)
+	tw3.parallel().tween_property(_death_veil, "color:a", 0.0, 0.70)
+	tw3.parallel().tween_property(_death_splat, "progress", 0.0, 0.60)
+	await tw3.finished
+	_death_layer.visible = false
+	_dying = false
+
+
+func _death_build() -> void:
+	if _death_layer != null and is_instance_valid(_death_layer):
+		return
+	_death_layer = CanvasLayer.new()
+	_death_layer.name = "DeathScene"
+	_death_layer.layer = 64
+	_death_splat = (load("res://commons/scenes/em/em_splatter.gd") as GDScript).new() as Control
+	_death_splat.name = "Splatter"
+	_death_layer.add_child(_death_splat)
+	_death_veil = ColorRect.new()
+	_death_veil.name = "Veil"
+	_death_veil.color = Color(0, 0, 0, 0)
+	_death_veil.set_anchors_preset(Control.PRESET_FULL_RECT)
+	_death_veil.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_death_layer.add_child(_death_veil)
+	_death_line = Label.new()
+	_death_line.name = "Line"
+	_death_line.set_anchors_preset(Control.PRESET_FULL_RECT)
+	_death_line.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_death_line.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	_death_line.add_theme_font_size_override("font_size", 34)
+	_death_line.add_theme_color_override("font_color", Color(0.86, 0.84, 0.80))
+	_death_line.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_death_line.modulate.a = 0.0
+	_death_layer.add_child(_death_line)
+	add_child(_death_layer)
 
 
 var _hazard_overlay: CanvasLayer = null
@@ -3437,7 +3605,8 @@ func _build_segment() -> void:
 				var map_h: int = (peek["tile"] as Array).size()
 				var map_w: int = ((peek["tile"] as Array)[0] as Array).size() if map_h > 0 else 0
 				peek["basin"] = {"depth": clampf(float(simd.get("depth", 1.0)), 0.3, 8.0),
-					"glass": false, "rects": [[0, 0, map_w, map_h]]}
+					"glass": false, "fire": bool(simd.get("fire", true)),
+					"rects": [[0, 0, map_w, map_h]]}
 				peek["sim_margin"] = clampi(int(simd.get("margin", 2)), 1, 4)
 				# grid: true — the REAL GridSystem stands in the basin; the
 				# museum builds no piers there (the grid stands its own towers)
@@ -3695,11 +3864,16 @@ func _build_segment() -> void:
 	var basin_cells: Dictionary = {}
 	var basin_depth: float = 0.0
 	var m_basin_glass: StandardMaterial3D = null
-	# every cell of open water gets FIRE at the bottom (2026-08-24, Palle)
+	# every cell of open water fills with FIRE (2026-08-24, Palle: "the fire
+	# can be a red cube that fills the basin") — unless the basin refuses it
+	# with museum.basin.fire = false, which Array does: a 1 m display pool in
+	# a teaching hall should not kill you for stumbling
 	var basin_fire: Array = []
+	var basin_burns: bool = true
 	if peek.get("basin") is Dictionary:
 		var basin_decl: Dictionary = peek["basin"]
 		basin_depth = clampf(float(basin_decl.get("depth", 1.0)), 0.3, 8.0)
+		basin_burns = bool(basin_decl.get("fire", true))
 		basin_cells = _basin_regions(tile)
 		# RECT BASINS (2026-08-24, the transformation series: "put it in the
 		# museum like a simulation"): a declared rect sinks FLOOR cells too —
@@ -3997,7 +4171,13 @@ func _build_segment() -> void:
 	# sunken hall hung at deck height over open pool. The dress sees a MASKED
 	# tile where the pool is hollow ("0"); the built hall keeps its own.
 	var dress_tile: Array = tile
-	_basin_fire(seg, basin_fire, basin_depth)
+	# the fill stops short of the deck so a walker standing on the rim is not
+	# in it; in a SIMULATION hall it stops a metre lower still, under the
+	# grid's own cubes (tops flush with the deck, bottoms at -1.0) — a hall
+	# filled to the brim would swallow the simulation it exists to show
+	if basin_burns:
+		_basin_fire(seg, basin_fire, basin_depth,
+			-1.25 if bool(peek.get("sim_grid", false)) else -0.25)
 	if not basin_cells.is_empty():
 		dress_tile = []
 		for dz in range(tile.size()):
@@ -7349,6 +7529,12 @@ func _stamp_inner(seg: Node3D, scene_path: String, lookup: String, cell: Diction
 		_stamp_refusal = "instantiate returned non-Node3D"
 		return false
 	node.set_meta("artifact_lookup_name", lookup)
+	# THE MUSEUM'S LASERS KILL (2026-08-24, Palle: "the laser in laser measure
+	# should also kill you"). The artifact ships lethal = false because it is a
+	# grabbable tool standing in 47 maps; here, where a death has a save point
+	# to return to, the beam bites. A map that says #lethal:0 still wins.
+	if lookup == "laser_measure" and not plan_config.has("lethal"):
+		_arm_laser(node)
 	# A graph branch can be a configured artifact (the five curated synthesis
 	# works are the first users). Match GridInteractablesComponent's handoff:
 	# metadata is present before _ready, and apply_grid_config is called while the

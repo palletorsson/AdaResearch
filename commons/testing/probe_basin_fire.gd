@@ -7,6 +7,12 @@ extends SceneTree
 
 const OUT := "res://ada_run/basin_fire.txt"
 
+var _seen := 0
+
+
+func _saw(_b: Node3D) -> void:
+	_seen += 1
+
 
 func _initialize() -> void:
 	call_deferred("_run")
@@ -88,9 +94,37 @@ func _run() -> void:
 			var target: Vector3 = sh.global_position
 			player.position = target + Vector3(0.0, 0.3, 0.0)
 			rep += "  dropped the walker at %s\n" % str(player.position)
-			for _i in range(30):
+			rep += "  walker: %s  area mask %d  monitoring %s\n" % [
+				player.get_class(), a0.collision_mask, str(a0.monitoring)]
+			var bodies := 0
+			for _k in range(4):
 				await physics_frame
-			rep += "  after 30 physics frames: %s\n" % str(player.position)
+				bodies = maxi(bodies, a0.get_overlapping_bodies().size())
+			rep += "  area sees %d body(ies)\n" % bodies
+			for b_v in a0.get_overlapping_bodies():
+				rep += "    overlapping %s (%s)\n" % [String((b_v as Node).name), (b_v as Node).get_class()]
+			rep += "  _player is %s #%d\n" % [String(player.name), player.get_instance_id()]
+			rep += "  body_entered has %d connection(s)\n" % a0.body_entered.get_connections().size()
+			# LEAVE and RE-ENTER: does the signal fire at all?
+			_seen = 0
+			a0.body_entered.connect(_saw)
+			player.position = Vector3(player.position.x, 3.0, player.position.z - 6.0)
+			for _j in range(6):
+				await physics_frame
+			player.position = target + Vector3(0.0, 0.3, 0.0)
+			for _j2 in range(6):
+				await physics_frame
+			rep += "  re-entry fired the signal %d time(s)\n" % _seen
+			# THE DEATH IS A CINEMATIC — splatter, veil, one line, and the walker
+			# is moved BEHIND the black at about two seconds. Thirty physics
+			# frames is half a second, which reads a working death as a failure.
+			var waited := 0.0
+			for _i in range(28):
+				await create_timer(0.25).timeout
+				waited += 0.25
+				if player.position.distance_to(target) > 2.0:
+					break
+			rep += "  after %.2f s: %s\n" % [waited, str(player.position)]
 			var moved: float = player.position.distance_to(target)
 			rep += "  %s (moved %.1f m from the fire)\n" % ["BURNED — put back" if moved > 2.0 else "FAIL still in the pool", moved]
 	var f := FileAccess.open(OUT, FileAccess.WRITE)

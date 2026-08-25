@@ -30,6 +30,15 @@ const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
 @export var deals_damage: bool = false           ## Enable to make laser hurt the player
 @export var damage_amount: float = 1.0           ## 1% damage per hit
 @export var damage_cooldown: float = 1.0         ## Seconds between damage ticks
+## LETHAL (2026-08-24, Palle: "the laser in laser measure should also kill
+## you. If you walk into it ... back to the last save point"). Opt-in, and it
+## must stay opt-in: this is a GRABBABLE tool standing in 47 maps, and a beam
+## that kills by default would kill the hand that holds it. The museum turns
+## it on for its own halls; a map turns it on with #lethal:1.
+@export var lethal: bool = false
+## A beam you are HOLDING hits your own body at arm's length. Only a hit
+## further out than this is a beam you walked INTO.
+@export var lethal_min_distance: float = 0.8
 
 @export_category("Display Settings")
 @export var text_color: Color = Color(0.2, 1.0, 0.3, 1.0)
@@ -142,6 +151,7 @@ var scan_timer: float = 0.0
 var last_distance: float = 0.0
 var last_target: String = ""
 var is_measuring: bool = false
+var _killed: bool = false
 var _damage_timer: float = 0.0
 
 func _ready():
@@ -452,8 +462,12 @@ func perform_measurement():
 		update_inline_readout(hit_point, distance)
 		update_display(distance, last_target, true)
 
+		# LETHAL first: a kill is not a damage tick, and it must not wait on
+		# the cooldown. Only a hit past arm's length counts — see above.
+		if lethal and _is_player_body(hit_object) and distance >= lethal_min_distance:
+			_kill_player()
 		# Damage: any hit triggers damage when enabled (the laser itself is the hazard)
-		if deals_damage and _damage_timer <= 0.0:
+		elif deals_damage and _damage_timer <= 0.0:
 			var gm = get_node_or_null("/root/GameManager")
 			if gm and gm.has_method("apply_health_damage"):
 				# The laser beam touching anything while player holds it = player in danger
@@ -671,7 +685,30 @@ func set_max_range(new_range: float):
 		raycast.target_position = Vector3(0, 0, -max_range)
 
 
+## The beam killed someone. WHO handles it depends on where we are standing:
+## in the endless museum a listener runs the splatter and the save point; in
+## the grid there is no save point, so the map reloads the way it always has.
+func _kill_player() -> void:
+	if _killed:
+		return
+	_killed = true
+	var tree := get_tree()
+	if tree != null and tree.get_node_count_in_group("em_lethal") > 0:
+		tree.call_group("em_lethal", "on_lethal_touch", "laser", global_position)
+	else:
+		var de = get_node_or_null("/root/DeathEffect")
+		if de != null and de.has_method("play"):
+			de.play(global_position)
+	print("[LaserMeasure] LETHAL — the beam cut the player")
+	# one death per touch: the ray keeps hitting for as long as the body is
+	# in the beam, and five deaths in five frames is one death told badly
+	await get_tree().create_timer(2.5).timeout
+	_killed = false
+
+
 func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data.has("lethal"):
+		lethal = str(config_data["lethal"]).to_lower() in ["true", "1", "yes", "on"]
 	if config_data.has("damage"):
 		deals_damage = str(config_data["damage"]).to_lower() == "true"
 	if config_data.has("damage_amount"):
