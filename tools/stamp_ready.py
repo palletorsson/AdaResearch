@@ -13,9 +13,9 @@ rules that make it one, checked on the map, in the grid, before any stamp:
   WALL   the map's outer border is a complete wall. Measured 2026-08-25:
          exactly ONE of 187 unstamped spine maps had this. 178 had five or
          more gaps, which the museum wraps into a hall with holes in its shell.
-  BAND   the map, INCLUDING that wall, is an EVEN size between 9 and 19 on
-         both axes — so 10, 12, 14, 16 or 18. The corpus spikes at 12 (50
-         maps) and 10 (24), both legal; the 20-wides come down to 18.
+  BAND   the map, INCLUDING that wall, is an ODD size between 9 and 19 on both
+         axes — 9, 11, 13, 15, 17, 19. Odd is what gives a room a TRUE CENTRE
+         COLUMN, without which the spine rule has no line to aim at.
   SPINE  the artifacts stand near the central walk line, so the walker meets
          them instead of hunting for them. Reported, never enforced — where a
          thing stands is a design act and a percentage is not an argument.
@@ -49,27 +49,27 @@ import subprocess
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-# THE BAND (2026-08-25, Palle: "a map can be down to 9 cells but up to 19 but
-# must be even"). 9 and 19 are both odd, so the reachable sizes are 10, 12, 14,
-# 16 and 18 — the floor is 10 and the ceiling 18. This replaced a 13-19 band
-# ruled earlier the same day, and it fits the corpus far better: 12 is its
-# biggest spike (50 maps) and 10 its third (24), and both are now legal.
+# THE BAND (2026-08-25, Palle: "a map can be down to 9 cells but up to 19",
+# then "sorry only odd numbers"). 9, 11, 13, 15, 17, 19 — and the odd ruling is
+# the coherent one, because an odd size has a TRUE CENTRE COLUMN. An even-width
+# room has no centre cell, so the spine rule below would have nothing to aim at:
+# "placing the artifact in the central pathfinding line" needs a line to exist.
 BAND_LO, BAND_HI = 9, 19
-EVEN_LO, EVEN_HI = 10, 18
+ODD_LO, ODD_HI = 9, 19
 WALL = "w"
 
 
 def in_band(n):
-    return BAND_LO <= n <= BAND_HI and n % 2 == 0
+    return BAND_LO <= n <= BAND_HI and n % 2 == 1
 
 
 def target(n):
-    """The nearest legal size: round UP to even, then clamp into [10, 18].
+    """The nearest legal size: round UP to odd, then clamp into [9, 19].
     Rounding up rather than down means a map only ever grows to reach the
     band, and only shrinks when it is genuinely over it — growth is
     origin-safe, shrinking is conditional on the far edge being empty."""
-    t = n + (n % 2)
-    return min(EVEN_HI, max(EVEN_LO, t))
+    t = n if n % 2 == 1 else n + 1
+    return min(ODD_HI, max(ODD_LO, t))
 
 
 def height(v):
@@ -188,7 +188,7 @@ def grow(doc, add_x, add_z):
     return opened
 
 
-def trim(doc, want_w=EVEN_HI, want_h=EVEN_HI):
+def trim(doc, want_w=ODD_HI, want_h=ODD_HI):
     """Drop FAR rows and columns while the map is over the band and the far
     edge carries nothing. Also origin-preserving — (0,0) and every remaining
     cell keep their address — which is why only the far edge is ever dropped.
