@@ -241,10 +241,21 @@ def main():
     ap.add_argument("--sequence", default="")
     ap.add_argument("--apply", action="store_true", help="close border gaps")
     ap.add_argument("--grow", action="store_true", help="also grow up to the band minimum")
+    ap.add_argument("--map", default="",
+                    help="comma-separated map names — score or fix exactly these")
     ap.add_argument("--json", action="store_true")
     args = ap.parse_args()
 
     rows, report = spine_maps(args.sequence or None), []
+    # A NAMED LIST IS A SCOPE. Palle hands over the maps a page told them are
+    # short of museum architecture; fixing the four neighbours that share the
+    # defect would be a different decision from the one being asked for.
+    if args.map:
+        want = {m.strip() for m in args.map.split(",") if m.strip()}
+        rows = [r for r in rows if r[1] in want]
+        missing = want - {r[1] for r in rows}
+        if missing:
+            print("not in the spine: %s" % ", ".join(sorted(missing)))
     ready = 0
     for sid, name in rows:
         doc = json.load(open(map_path(name), encoding="utf-8"))
