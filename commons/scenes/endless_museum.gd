@@ -4368,69 +4368,168 @@ func _page_read() -> Dictionary:
 	return out
 
 
+## THE EDITOR IS THE PAGE IT EDITS (2026-08-24, Palle: "improve text editor and
+## make it look very good"). It wears the clothes of the wall work on the other
+## side of the glass: an off-white frame, a near-black canvas, cream text, the
+## museum's own Roboto. A scrim drops the hall behind it, so while you are
+## writing the page is the only lit thing in the room.
+const PAGE_FRAME := Color(0.925, 0.915, 0.885)     # em_detail's own frame white
+const PAGE_CANVAS := Color(0.055, 0.055, 0.065)    # the black field
+const PAGE_INK := Color(0.93, 0.92, 0.90)
+const PAGE_QUIET := Color(0.52, 0.52, 0.55)
+const PAGE_ACCENT := Color(0.83, 0.62, 0.24)       # the ember at the threshold
+
+
+func _page_font() -> Font:
+	var fp := "res://commons/font/Roboto-VariableFont_wdth,wght.ttf"
+	return load(fp) as Font if ResourceLoader.exists(fp) else null
+
+
+func _page_box(bg: Color, border: Color, bw: int, pad: int) -> StyleBoxFlat:
+	var sb := StyleBoxFlat.new()
+	sb.bg_color = bg
+	sb.border_color = border
+	sb.set_border_width_all(bw)
+	sb.content_margin_left = pad
+	sb.content_margin_right = pad
+	sb.content_margin_top = pad
+	sb.content_margin_bottom = pad
+	return sb
+
+
+func _page_rule(box: VBoxContainer, col: Color) -> void:
+	var r := Panel.new()
+	r.custom_minimum_size = Vector2(0, 1)
+	var sb := StyleBoxFlat.new()
+	sb.bg_color = col
+	r.add_theme_stylebox_override("panel", sb)
+	box.add_child(r)
+
+
+func _page_label(txt: String, size: int, col: Color, fnt: Font) -> Label:
+	var l := Label.new()
+	l.text = txt
+	l.add_theme_color_override("font_color", col)
+	l.add_theme_font_size_override("font_size", size)
+	if fnt != null:
+		l.add_theme_font_override("font", fnt)
+	return l
+
+
+func _page_edit(txt: String, size: int, col: Color, min_h: int, fnt: Font) -> TextEdit:
+	var te := TextEdit.new()
+	te.text = txt
+	te.custom_minimum_size = Vector2(0, min_h)
+	te.wrap_mode = TextEdit.LINE_WRAPPING_BOUNDARY
+	te.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	te.add_theme_color_override("font_color", col)
+	te.add_theme_color_override("caret_color", PAGE_ACCENT)
+	te.add_theme_color_override("selection_color", Color(0.83, 0.62, 0.24, 0.30))
+	te.add_theme_font_size_override("font_size", size)
+	if fnt != null:
+		te.add_theme_font_override("font", fnt)
+	te.add_theme_stylebox_override("normal", _page_box(Color(0.085, 0.085, 0.10), Color(0.20, 0.20, 0.23), 1, 10))
+	te.add_theme_stylebox_override("focus", _page_box(Color(0.085, 0.085, 0.10), PAGE_ACCENT, 1, 10))
+	return te
+
+
 func _page_build(shown: String) -> void:
 	var book: Dictionary = _page_read()
+	var fnt: Font = _page_font()
 	_page_ui = CanvasLayer.new()
 	_page_ui.layer = 90
+
+	# the scrim: the hall dims, the page is the only lit thing
+	var scrim := ColorRect.new()
+	scrim.color = Color(0, 0, 0, 0.58)
+	scrim.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	scrim.mouse_filter = Control.MOUSE_FILTER_STOP
+	_page_ui.add_child(scrim)
+
+	# the page itself. A fresh Control anchored with set_anchors_preset keeps a
+	# ZERO rect and paints nothing, so this one is given an explicit size too
+	# (measured 2026-08-25, and it cost a session).
 	var panel := PanelContainer.new()
-	# explicit rect: a fresh Control anchored with set_anchors_preset keeps a
-	# ZERO size and paints nothing (measured 2026-08-25)
-	panel.position = Vector2(80, 80)
-	panel.custom_minimum_size = Vector2(720, 520)
-	panel.size = Vector2(720, 520)
+	panel.add_theme_stylebox_override("panel", _page_box(PAGE_CANVAS, PAGE_FRAME, 3, 30))
+	panel.custom_minimum_size = Vector2(780, 650)
+	panel.size = Vector2(780, 650)
+	panel.set_anchors_and_offsets_preset(Control.PRESET_CENTER, Control.PRESET_MODE_KEEP_SIZE)
 	_page_ui.add_child(panel)
+
 	var box := VBoxContainer.new()
-	box.add_theme_constant_override("separation", 10)
+	box.add_theme_constant_override("separation", 12)
 	panel.add_child(box)
-	var head := Label.new()
+
+	# the head: the pearl names the work, the rest is catalogue
 	var tok_s: String = String(_page_ctx.get("token", ""))
-	head.text = "%s  -  %s  -  page %02d   %s" % [
-		String(_page_ctx.get("chapter", "")), String(_page_ctx.get("pearl", "")),
-		int(_page_ctx.get("si", 0)) + 1,
-		("[" + tok_s + "]") if tok_s != "" else "(unanchored)"]
-	box.add_child(head)
-	var l1 := Label.new()
-	l1.text = "THE LINE - what the canvas says"
-	box.add_child(l1)
-	_page_line = TextEdit.new()
-	_page_line.custom_minimum_size = Vector2(690, 96)
-	_page_line.wrap_mode = TextEdit.LINE_WRAPPING_BOUNDARY
-	# the BOOK is the truth; the wall may be showing a numbered or upper-cased copy
-	_page_line.text = String(book.get("text", "")) if String(book.get("text", "")) != "" else shown
+	box.add_child(_page_label(String(_page_ctx.get("pearl", "")).to_upper(), 30, PAGE_INK, fnt))
+	var sub := "%s   \u00b7   PAGE %02d" % [String(_page_ctx.get("chapter", "")).to_upper(),
+		int(_page_ctx.get("si", 0)) + 1]
+	sub += ("   \u00b7   " + tok_s) if tok_s != "" else "   \u00b7   UNANCHORED"
+	box.add_child(_page_label(sub, 13, PAGE_QUIET, fnt))
+	_page_rule(box, Color(0.22, 0.22, 0.25))
+
+	# the line: one sentence, at the size the wall says it
+	box.add_child(_page_label("THE LINE   \u2014   what the canvas says", 12, PAGE_QUIET, fnt))
+	var line_now := String(book.get("text", ""))
+	if line_now == "":
+		line_now = shown
+	_page_line = _page_edit(line_now, 21, PAGE_INK, 104, fnt)
 	box.add_child(_page_line)
-	var l2 := Label.new()
-	l2.text = "FIELD NOTES - the detailed part, written standing here"
-	box.add_child(l2)
-	_page_note = TextEdit.new()
-	_page_note.custom_minimum_size = Vector2(690, 260)
-	_page_note.wrap_mode = TextEdit.LINE_WRAPPING_BOUNDARY
-	_page_note.text = String(book.get("note", ""))
+
+	# the field notes: the detailed part, quieter and taller
+	box.add_child(_page_label("FIELD NOTES   \u2014   the detailed part, written standing here", 12, PAGE_QUIET, fnt))
+	_page_note = _page_edit(String(book.get("note", "")), 15, Color(0.80, 0.80, 0.82), 250, fnt)
 	box.add_child(_page_note)
+
+	# what this page shows
 	var vrow := HBoxContainer.new()
+	vrow.add_theme_constant_override("separation", 12)
 	box.add_child(vrow)
-	var vlab := Label.new()
-	vlab.text = "THIS PAGE SHOWS "
-	vrow.add_child(vlab)
+	vrow.add_child(_page_label("THIS PAGE SHOWS", 12, PAGE_QUIET, fnt))
 	_page_viz = OptionButton.new()
-	_page_viz.add_item("the line")            # ""
-	_page_viz.add_item("a plan of this hall") # plan
-	_page_viz.add_item("the wallpaper group") # pattern
-	var vk_now := String(book.get("viz", ""))
-	_page_viz.selected = maxi(0, VIZ_KINDS.find(vk_now))
+	_page_viz.add_item("the line")
+	_page_viz.add_item("a plan of this hall")
+	_page_viz.add_item("the wallpaper group")
+	_page_viz.selected = maxi(0, VIZ_KINDS.find(String(book.get("viz", ""))))
+	_page_viz.add_theme_color_override("font_color", PAGE_INK)
+	_page_viz.add_theme_font_size_override("font_size", 13)
+	if fnt != null:
+		_page_viz.add_theme_font_override("font", fnt)
+	_page_viz.add_theme_stylebox_override("normal", _page_box(Color(0.11, 0.11, 0.13), Color(0.24, 0.24, 0.27), 1, 8))
+	_page_viz.add_theme_stylebox_override("hover", _page_box(Color(0.14, 0.14, 0.17), PAGE_ACCENT, 1, 8))
 	vrow.add_child(_page_viz)
+
+	_page_rule(box, Color(0.22, 0.22, 0.25))
+
+	# the foot: the keys on the left, the writing hand on the right
 	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 14)
 	box.add_child(row)
-	var save := Button.new()
-	save.text = "write to the book   (F5)"
-	save.pressed.connect(_page_save)
-	row.add_child(save)
+	_page_status = _page_label("F5  write      ESC  close", 12, PAGE_QUIET, fnt)
+	_page_status.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	row.add_child(_page_status)
 	var close := Button.new()
-	close.text = "close   (Esc)"
+	close.text = "close"
+	close.add_theme_color_override("font_color", PAGE_QUIET)
+	close.add_theme_font_size_override("font_size", 14)
+	if fnt != null:
+		close.add_theme_font_override("font", fnt)
+	close.add_theme_stylebox_override("normal", _page_box(Color(0.10, 0.10, 0.12), Color(0.26, 0.26, 0.29), 1, 12))
+	close.add_theme_stylebox_override("hover", _page_box(Color(0.14, 0.14, 0.16), Color(0.40, 0.40, 0.44), 1, 12))
 	close.pressed.connect(_page_close)
 	row.add_child(close)
-	_page_status = Label.new()
-	_page_status.text = ""
-	row.add_child(_page_status)
+	var save := Button.new()
+	save.text = "write to the book"
+	save.add_theme_color_override("font_color", Color(0.09, 0.08, 0.06))
+	save.add_theme_font_size_override("font_size", 14)
+	if fnt != null:
+		save.add_theme_font_override("font", fnt)
+	save.add_theme_stylebox_override("normal", _page_box(PAGE_ACCENT, PAGE_ACCENT, 1, 14))
+	save.add_theme_stylebox_override("hover", _page_box(Color(0.92, 0.72, 0.34), Color(0.92, 0.72, 0.34), 1, 14))
+	save.pressed.connect(_page_save)
+	row.add_child(save)
+
 	add_child(_page_ui)
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	_page_line.grab_focus()
@@ -4510,7 +4609,7 @@ func _page_save() -> void:
 
 func _page_say(msg: String) -> void:
 	if _page_status != null and is_instance_valid(_page_status):
-		_page_status.text = "   " + msg
+		_page_status.text = msg
 	print("[em-page] " + msg)
 
 
@@ -13083,6 +13182,14 @@ func _input(event: InputEvent) -> void:
 				_doll_paint(int(floor(ptb.x)), int(floor(ptb.z)), mbe.shift_pressed)
 			return
 		elif mb == MOUSE_BUTTON_LEFT and mbe.pressed and _cam != null:
+			# THE PAGE OPENS IN ISO TOO (2026-08-24, Palle: "continue with the
+			# text integration in iso mode on double click open the text
+			# editor"). The walking lane had this from the start; the doll
+			# house returns before ever reaching that hook, so the gesture is
+			# claimed here — above the empty-floor branch, which would
+			# otherwise take the same double-click and place a palette body.
+			if mbe.double_click and _page_open_at(mbe.position):
+				return
 			var pt := _doll_floor_point(mbe.position)
 			var idx := _edit_pick_screen(mbe.position) if not _doll_top else _doll_pick(pt)
 			if idx < 0:
