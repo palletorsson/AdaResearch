@@ -1,0 +1,138 @@
+extends SceneTree
+## THE ADOPTION (2026-08-26, Palle: "what is a good connection between the pearl
+## text and 3d space and the text and the book?").
+## Closeness is the DEFAULT; the written binding is the hand. Proves:
+##   1. a hall writes a LEDGER of which page speaks for which work
+##   2. a hand `adopt` on the pearl OUTRANKS closeness — that page carries that
+##      work's line even though the nearest body is someone else
+##   3. an empty token pins a wall SILENT
+##   4. everything unadopted still falls to closeness
+## Runs against a TRIAL COPY of the book: the real one is never written.
+const OUT := "res://ada_run/adoption_probe.txt"
+const TRIAL := "res://ada_run/_trial_adopt_book"
+
+func _initialize() -> void: call_deferred("_run")
+
+func _copy_book(adopt_into: String, adopt_rows: Array) -> Dictionary:
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(TRIAL))
+	var src := DirAccess.open("res://commons/data/book")
+	var pearl_used := ""
+	var doc_out: Dictionary = {}
+	for f in src.get_files():
+		if not f.ends_with(".json"):
+			continue
+		var txt := FileAccess.get_file_as_string("res://commons/data/book/" + f)
+		if f == adopt_into + ".json":
+			var d: Variant = JSON.parse_string(txt)
+			if d is Dictionary:
+				var doc: Dictionary = d
+				for pv in (doc.get("pearls", []) as Array):
+					var pl: Dictionary = pv
+					if String(pl.get("map", "")) == "Point_One":
+						pl["adopt"] = adopt_rows
+						pearl_used = String(pl.get("pearl", ""))
+						doc_out = doc
+						break
+				txt = JSON.stringify(doc, " ")
+		var w := FileAccess.open(TRIAL + "/" + f, FileAccess.WRITE)
+		w.store_string(txt); w.close()
+	return {"pearl": pearl_used, "doc": doc_out}
+
+func _run() -> void:
+	var fails: Array = []
+	var notes: Array = []
+	# page 0 adopts a work that is NOT the nearest to it; page 1 is pinned silent
+	var setup: Dictionary = _copy_book("primitives", [
+		{"page": 0, "token": "you_are_here"}, {"page": 1, "token": ""}])
+	if String(setup.get("pearl", "")) == "":
+		fails.append("could not find the Point_One pearl to adopt into")
+
+	var inst: Node3D = (load("res://commons/scenes/endless_museum.tscn") as PackedScene).instantiate() as Node3D
+	inst.set("EM_CONTROL", "res://ada_run/_trial_adopt_control.json")
+	inst.set("_overrides_path", "res://ada_run/_trial_adopt_ov.json")
+	inst.set("_hand_path", "res://ada_run/_trial_adopt_hand.json")
+	inst.set("start_chapter", "primitives")
+	inst.set("start_map", "")
+	var c := FileAccess.open("res://ada_run/_trial_adopt_control.json", FileAccess.WRITE)
+	c.store_string(JSON.stringify({"first_chapter": "primitives", "dollhouse": 0, "grid_pack": 1}, " ")); c.close()
+	get_root().add_child(inst)
+	inst.set("_book_dir", TRIAL)
+	await create_timer(1.2).timeout
+	inst.call("flush_stamps")
+	await create_timer(2.2).timeout
+
+	var seg: Node3D = null
+	for sv in (inst.get("_segments") as Array):
+		var sn: Node3D = (sv as Dictionary).get("node")
+		if sn != null and is_instance_valid(sn) and sn.has_meta("em_pearl"):
+			seg = sn
+			break
+	if seg == null:
+		fails.append("no hall built")
+		_report(fails, notes); return
+	var pearl := String(seg.get_meta("em_pearl"))
+
+	# 2 + 3. the hand's pages
+	var at0 := ""
+	var page1_spoke := false
+	for n in seg.get_children():
+		if not (n is Label3D) or not n.has_meta("em_speak"):
+			continue
+		var pg: int = int(n.get_meta("em_speak"))
+		if pg == 0:
+			at0 = String(n.get_meta("em_speak_token")) if n.has_meta("em_speak_token") else ""
+		elif pg == 1:
+			page1_spoke = true
+	if at0 != "you_are_here":
+		fails.append("page 0 adopted '%s' — the hand said you_are_here" % at0)
+	else:
+		notes.append("the hand's adoption OUTRANKS closeness (page 0 speaks for you_are_here)")
+	if page1_spoke:
+		fails.append("page 1 was pinned silent and still spoke")
+	else:
+		notes.append("an empty token pins a wall SILENT")
+
+	# 4. the rest still fell to closeness
+	var spoke := 0
+	for n2 in seg.get_children():
+		if n2 is Label3D and n2.has_meta("em_speak"):
+			spoke += 1
+	if spoke < 2:
+		fails.append("only %d wall(s) speak — closeness stopped working" % spoke)
+	else:
+		notes.append("%d walls speak in all; the unadopted still fall to closeness" % spoke)
+
+	# 1. the ledger
+	var lp := "res://ada_run/em_adoptions.json"
+	if not FileAccess.file_exists(lp):
+		fails.append("no ledger written at " + lp)
+	else:
+		var lv: Variant = JSON.parse_string(FileAccess.get_file_as_string(lp))
+		var halls: Dictionary = (lv as Dictionary).get("halls", {}) if lv is Dictionary else {}
+		var key := "primitives|" + pearl
+		if not halls.has(key):
+			fails.append("the ledger has no row for %s (has %s)" % [key, str(halls.keys()).substr(0, 90)])
+		else:
+			var rows: Array = halls[key]
+			var first := String((rows[0] as Dictionary).get("token", "")) if rows.size() > 0 else ""
+			if first != "you_are_here":
+				fails.append("the ledger says page 0 speaks for '%s'" % first)
+			else:
+				notes.append("the ledger records what was ACTUALLY hung (%d pages)" % rows.size())
+
+	# the real book is untouched
+	var real := FileAccess.get_file_as_string("res://commons/data/book/primitives.json")
+	if real.contains("\"adopt\""):
+		fails.append("THE PROBE WROTE THE REAL BOOK — isolation broken")
+	else:
+		notes.append("the real book is untouched")
+	_report(fails, notes)
+
+func _report(fails: Array, notes: Array) -> void:
+	var r := "ADOPTION PROBE\n"
+	for n in notes: r += "  ok   %s\n" % n
+	for f in fails: r += "  FAIL %s\n" % f
+	r += "%d fail(s)\n" % fails.size()
+	var fh := FileAccess.open(OUT, FileAccess.WRITE); fh.store_string(r); fh.close()
+	print(r)
+	quit(1 if not fails.is_empty() else 0)

@@ -4423,6 +4423,85 @@ func _insp_page_clear() -> void:
 		old.queue_free()
 
 
+## ── ADOPTION: WHICH WALL SPEAKS FOR WHICH WORK (2026-08-26) ─────────────────
+## Palle asked what the right connection is between the pearl text, 3D space and
+## the book. The answer already half-existed: em_detail hangs each line on the
+## wall field NEAREST that line body, so CLOSENESS is the law — but it was
+## recomputed inside the dresser every build and thrown away, so nothing could
+## ever be edited, and a wall silently changed its sentence whenever a body
+## moved. Three truths, each with an owner:
+##   the BOOK owns the words   keyed by token, so a sentence travels with its work
+##   the MAP owns the bodies   cells
+##   the HALL owns the ADOPTION  page -> token, which wall speaks for which work
+## The third is what was missing. It is DERIVED by closeness on the first build
+## and written to ada_run/em_adoptions.json as a ledger; the hand outranks it by
+## writing `adopt` on the pearl in the book, exactly as em_overrides outranks
+## em_plan. Delete both and the museum still derives itself from nothing.
+const ADOPT_PATH := "res://ada_run/em_adoptions.json"
+var _adopt_ledger: Dictionary = {}
+var _adopt_dirty: bool = false
+
+
+## The hand's binding for this pearl: {page index -> token}. An empty token
+## pins a wall SILENT. Read from the book, where /lines and /wall-texts edit.
+func _speak_adopt(chapter: String, pearl: String) -> Dictionary:
+	var out: Dictionary = {}
+	if chapter == "" or pearl == "":
+		return out
+	var path: String = _book_dir + "/%s.json" % chapter
+	if not FileAccess.file_exists(path):
+		return out
+	var doc_v: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+	if not (doc_v is Dictionary):
+		return out
+	var pl: Dictionary = _page_pearl_row(doc_v as Dictionary, pearl)
+	if pl.is_empty():
+		return out
+	for a_v in (pl.get("adopt", []) as Array):
+		var a: Dictionary = a_v
+		if a.has("page"):
+			out[int(a["page"])] = String(a.get("token", ""))
+	return out
+
+
+## Write down what the walls ended up saying. Read back off the labels, so the
+## ledger records what was ACTUALLY hung rather than what was intended — the
+## same reason the seat is measured rather than assumed.
+func _adopt_note(seg: Node3D, chapter: String, pearl: String) -> void:
+	if seg == null or not is_instance_valid(seg) or chapter == "" or pearl == "":
+		return
+	var rows: Array = []
+	for n in seg.get_children():
+		if not (n is Label3D) or not n.has_meta("em_speak"):
+			continue
+		var tok := String(n.get_meta("em_speak_token")) if n.has_meta("em_speak_token") else ""
+		rows.append({"page": int(n.get_meta("em_speak")), "token": tok})
+	if rows.is_empty():
+		return
+	rows.sort_custom(func(a, b): return int(a["page"]) < int(b["page"]))
+	_adopt_ledger["%s|%s" % [chapter, pearl]] = rows
+	_adopt_dirty = true
+	_adopt_write()
+
+
+func _adopt_write() -> void:
+	if not _adopt_dirty:
+		return
+	var f := FileAccess.open(ADOPT_PATH, FileAccess.WRITE)
+	if f == null:
+		return
+	f.store_string(JSON.stringify({
+		"_readme": "ADOPTION — which wall work speaks for which artifact, per hall. "
+			+ "DERIVED by closeness (em_detail hangs a line on the field nearest its body) and "
+			+ "written here as it was actually hung. The HAND outranks it: put `adopt: "
+			+ "[{page, token}]` on the pearl in commons/data/book/<chapter>.json and that page "
+			+ "keeps that work whatever moves. An empty token pins the wall silent.",
+		"halls": _adopt_ledger}, " ") + "
+")
+	f.close()
+	_adopt_dirty = false
+
+
 ## THE INSTANCES OF ONE SHOWING. em_detail's _hang_one appends, per showing and
 ## in hang order: one FIELD, one MOUNT, then FOUR frame bars. So showing N owns
 ## field[N], mount[N] and frames[N*4 .. N*4+3] — the whole picture, addressable
@@ -6462,10 +6541,6 @@ func _build_segment() -> void:
 			_banner_pos = Vector3(BANNER_X, BANNER_Y, BANNER_Z + _next_z)
 	# THE VISUALIZATION PAGES: after the dress, over the lines it hung — a line
 	# carrying `viz` becomes a drawing on its own field, the sentence its caption.
-	_viz_pages(seg, seg_seq if seg_seq != "" else next_seq,
-		String(peek.get("pearl", "")), tile)
-	# a wall work with no wall behind it is taken back out, before anyone sees it
-	_showing_cull_floating(seg, tile, zbase)
 	# THE PREREQUISITE BOARD hangs in the entry passage — the vestibule, and
 	# every crossing has exactly one, so one board per hall IS one board per
 	# passage. EAST wall: the west wall is the removed gallery banner's place,
@@ -6554,6 +6629,9 @@ func _build_segment() -> void:
 						# textD on the wall works: the pearl's sentences, one per showing
 						"speak_lines": _speak_lines(next_seq, String(deal.get("pearl", "")) if deal is Dictionary else ""),
 						"speak_anchors": _speak_anchors(),     # token -> world: each line hangs on the field nearest its body
+						# the written binding, page -> token: closeness is the
+						# DEFAULT, this is the hand (see _speak_adopt)
+						"speak_adopt": _speak_adopt(next_seq, String(deal.get("pearl", "")) if deal is Dictionary else ""),
 						"speak_caps": _L("speak", "caps", 0.0) > 0.5,
 						# EVERY enter room stays bare (2026-08-23, Palle: "remove
 						# ... other objects on the wall around that info board"):
@@ -6589,6 +6667,19 @@ func _build_segment() -> void:
 								"chapter": next_seq, "seg": seg})
 			else:
 				_mod_detail.call("dress_segment", seg, dress_tile, w, h, _detail_mats, _prev_w)
+			# ── AFTER THE DRESS, NOT BEFORE IT (2026-08-26) ─────────────────
+			# These three read the wall works em_detail has just hung. They
+			# used to sit in _build_segment, which runs BEFORE the dress is
+			# even defined — so in the walking museum all three were silent
+			# no-ops: no visualization page was ever hung, no floating work was
+			# ever culled, and the ledger was never written. Every probe passed
+			# because it called them by hand. They belong here, inside the pass
+			# that makes the thing they read, and they run in both the
+			# immediate and the deferred lane because the pass itself does.
+			var dpearl: String = String(deal.get("pearl", "")) if deal is Dictionary else ""
+			_viz_pages(seg, next_seq, dpearl, tile)
+			_adopt_note(seg, next_seq, dpearl)
+			_showing_cull_floating(seg, tile, zbase)
 		# 1b. FURNITURE. em_detail is contractually forbidden to add collision, and a
 		#     bench you can walk through is worse than no bench — so the one fixture
 		#     family that occupies floor lives here, where the segment's StaticBody3D
@@ -10852,6 +10943,12 @@ func _cells_of_extent(node: Node3D) -> Array:
 	return out
 
 func _hall_plank_repair(seg: Node3D, zbase: int, z_end: int, hall: String) -> int:
+	# A WALL IS ALSO ABSENT FROM THE WALK MAP, and that is the trap this lane
+	# fell into once: treating every unknown cell as a hole, it bridged straight
+	# through walls and left the map promising routes a body cannot take. The
+	# hall's own tile knows the difference — "4" is wall, "0" is the hole a plank
+	# is for — so the tile is asked, never the mere absence.
+	var tile: Array = seg.get_meta("em_tile", []) if seg != null and is_instance_valid(seg) else []
 	var free_c: Dictionary = {}
 	var x_lo: int = 99999
 	var x_hi: int = -99999
@@ -10886,12 +10983,25 @@ func _hall_plank_repair(seg: Node3D, zbase: int, z_end: int, hall: String) -> in
 			if c2b.y == z_first:
 				dist[c2b] = 0
 				dq.append(c2b)
+	# AIM AT THE STRANDED FLOOR, not at the hall's last row. Color_Nails is a
+	# five-wide corridor entered by a two-cell door, and a bench is parked in
+	# it: 29 of its 79 floor cells are cut off, its floor ends at z=707, and a
+	# seal that overhangs a wall put cells in the map as far as 711 — so a goal
+	# on the last row could never be met and the search returned nothing, while
+	# a one-cell hole beside the bench was standing open the whole time.
+	var want: Dictionary = {}
+	for k5 in _walk_cells:
+		var c5: Vector2i = k5
+		if c5.y >= zbase and c5.y <= z_end and not dist.has(c5):
+			want[c5] = true
+	if want.is_empty():
+		return 0
 	var goal := Vector2i(-99999, 0)
 	var head: int = 0
 	while head < dq.size():
 		var cur: Vector2i = dq[head]
 		head += 1
-		if cur.y == z_end:
+		if want.has(cur) and int(dist[cur]) > 0:
 			goal = cur
 			break
 		for d in [Vector2i(0, 1), Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, -1)]:
@@ -10900,7 +11010,17 @@ func _hall_plank_repair(seg: Node3D, zbase: int, z_end: int, hall: String) -> in
 				continue
 			if _walk_erased.has(n):
 				continue                   # a body stands there; that is not a hole
-			var step: int = 0 if free_c.has(n) else 1
+			var step: int = 0
+			if not free_c.has(n):
+				var tz: int = n.y - zbase - VESTIBULE_H
+				if tz < 0 or tz >= tile.size():
+					continue                   # outside the hall's own floor plan
+				var trow: Array = tile[tz]
+				if n.x < 0 or n.x >= trow.size():
+					continue
+				if not String(trow[n.x]).begins_with("0"):
+					continue                   # a wall is not a hole
+				step = 1
 			var nd: int = int(dist[cur]) + step
 			if dist.has(n) and int(dist[n]) <= nd:
 				continue
@@ -10920,15 +11040,32 @@ func _hall_plank_repair(seg: Node3D, zbase: int, z_end: int, hall: String) -> in
 		walk_back = prev[walk_back]
 	if planks.is_empty():
 		return 0
-	var col := seg.get_node_or_null("Collision") as StaticBody3D
+	# THE CATWALK BELONGS TO THE MUSEUM, NOT TO THE HALL (2026-08-26). Parented
+	# to the segment it would be freed with it, while _walk_cells went on calling
+	# those cells floor and the basin fire under them was rebuilt — a walk map
+	# promising ground over an open burning pool, which is worse than the
+	# severance it repaired. A catwalk is infrastructure: a handful of boxes that
+	# outlive the room, so the cells and the floor under them never disagree.
+	var deck: Node3D = get_node_or_null("Catwalks") as Node3D
+	if deck == null:
+		deck = Node3D.new()
+		deck.name = "Catwalks"
+		add_child(deck)
+		var db := StaticBody3D.new()
+		db.name = "Collision"
+		deck.add_child(db)
+	var col := deck.get_node_or_null("Collision") as StaticBody3D
 	var m_deck: Material = _sm("podium")
+	var was_batching: bool = _batch_open
+	_batch_open = false               # one box each, in the museum's own frame
 	for p_v in planks:
 		var pc: Vector2i = p_v
-		var here := Vector3(float(pc.x) + 0.5, -0.06, float(pc.y - zbase) + 0.5)
-		_box(seg, here, Vector3(0.86, 0.12, 1.0), Color(0.26, 0.26, 0.30), m_deck)
+		var here := Vector3(float(pc.x) + 0.5, -0.06, float(pc.y) + 0.5)
+		_box(deck, here, Vector3(0.86, 0.12, 1.0), Color(0.26, 0.26, 0.30), m_deck)
 		if col != null:
 			_add_col(col, here, Vector3(0.86, 0.12, 1.0))
 		_walk_cells[pc] = true
+	_batch_open = was_batching
 	print("[em-walk] %s: laid a catwalk of %d cell(s) — the hole was the wall" % [
 		hall, planks.size()])
 	_walk_planked.append({"hall": hall, "cells": planks.size()})
@@ -17118,7 +17255,6 @@ func _passage_open() -> void:
 	_passage_width = SpinBox.new()
 	_passage_width.min_value = 1
 	_passage_width.max_value = maxi(1, map_w - 2)
-	_passage_width.step = 1
 	_passage_width.value = clampi(int(decl.get("width", 2)), 1, maxi(1, map_w - 2))
 	fields.append(["path width (m)", _passage_width])
 	_passage_offset = SpinBox.new()

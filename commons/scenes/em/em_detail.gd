@@ -862,12 +862,56 @@ static func _add_showing_cards(seg: Node3D, mounts: Array, opts: Dictionary) -> 
 	var free: Array = []
 	for _i in range(mounts.size()):
 		free.append(true)
+	# ── THE ADOPTION (2026-08-26, Palle: "maybe we should use some kind of
+	# closeness principle, so if there is wall work that can consume the text
+	# from the artifacts ... what is a good connection between the pearl text
+	# and 3d space and the text and the book?") ──────────────────────────────
+	# Closeness stays the DEFAULT, not the mechanism. opts.speak_adopt is a
+	# written binding, page index -> token: the hand saying THIS wall speaks
+	# for THAT work. It is honoured before any nearest-anchor search, so an
+	# adopted wall keeps its sentence when the body moves, when the dress
+	# changes, and when the hall is rebuilt from scratch. Everything not
+	# adopted falls to closeness exactly as before.
+	var adopt: Dictionary = opts.get("speak_adopt", {})
+	var by_token: Dictionary = {}
+	for rec_v in speak_in:
+		var rc: Dictionary = rec_v if rec_v is Dictionary else {}
+		var rtok: String = String(rc.get("token", ""))
+		if rtok != "":
+			by_token[rtok] = rc
+	var adopted: Dictionary = {}          # token -> true, so closeness skips it
+	for page_k in adopt.keys():
+		var pi: int = int(page_k)
+		var want_tok: String = String(adopt[page_k])
+		if pi < 0 or pi >= mounts.size() or not free[pi]:
+			continue
+		if want_tok == "":                # pinned SILENT: the wall says nothing
+			free[pi] = false
+			adopted[""] = true
+			continue
+		if not by_token.has(want_tok):
+			continue                      # the hand named a work this pearl has no line for
+		var arec: Dictionary = by_token[want_tok]
+		var atxt: String = String(arec.get("text", ""))
+		if atxt.strip_edges() == "":
+			continue
+		var an: int = int(arec.get("n", 0))
+		if an > 0:
+			atxt = "%02d
+" % an + atxt
+		speak_lines[pi] = atxt
+		speak_tokens[pi] = want_tok
+		free[pi] = false
+		adopted[want_tok] = true
+
 	var rest: Array = []
 	for rec in speak_in:
 		var txt: String = String(rec.get("text", "")) if rec is Dictionary else String(rec)
 		var tok: String = String(rec.get("token", "")) if rec is Dictionary else ""
 		if txt.strip_edges() == "":
 			continue
+		if tok != "" and adopted.has(tok):
+			continue                      # already hung where the hand put it
 		# the book's number leads the line, small, as a catalogue does: "07  You are here"
 		var num: int = int(rec.get("n", 0)) if rec is Dictionary else 0
 		if num > 0:
