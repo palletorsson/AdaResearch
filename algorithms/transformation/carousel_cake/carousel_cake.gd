@@ -91,6 +91,11 @@ func _set_regenerate(value: bool) -> void:
 
 func generate_carousel() -> void:
 	_read_dna()
+	# Same freed-reference story from the other end: rebuild after a teardown and
+	# mm_inst is a ghost, so get_parent() below would throw instead of returning
+	# null. Build a new one rather than dereference the old.
+	if not is_instance_valid(mm_inst):
+		mm_inst = MultiMeshInstance3D.new()
 	# Clear existing multimesh instance
 	if mm_inst.get_parent():
 		mm_inst.get_parent().remove_child(mm_inst)
@@ -184,7 +189,15 @@ func generate_carousel() -> void:
 	_add_stack_anchor()
 
 func update_carousel_rotation() -> void:
-	if not mm_inst.multimesh:
+	# mm_inst is built in code and added as an OWNERLESS child, which is exactly what
+	# _exit_tree queue_frees — so this reference outlives its object every time the
+	# artifact leaves the tree, and _process keeps running until the free lands.
+	#
+	# `not mm_inst.multimesh` read a PROPERTY to decide whether to go on, and that
+	# read is itself the access that throws on a freed instance ("Invalid access to
+	# property or key 'multimesh' on a base object of type 'previously freed'"). The
+	# test has to be on the REFERENCE, before any property is touched.
+	if not is_instance_valid(mm_inst) or mm_inst.multimesh == null:
 		return
 
 	var mm := mm_inst.multimesh
