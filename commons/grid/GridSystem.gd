@@ -77,6 +77,23 @@ var _ecosystem_spawner: Node3D = null
 signal map_loaded(map_name: String, format: String)
 signal map_generation_complete()
 
+## THE TRUE END OF A BUILD, INCLUDING AN EMBEDDED ONE (2026-08-26).
+## map_generation_complete is emitted only downstream of the player spawn, and
+## _handle_player_spawn returns early when skip_player_spawn is set - which the
+## endless museum sets for every grid it embeds. So a museum grid has NEVER
+## said it finished: zero "Grid generation completed successfully" across two
+## full sim-grid builds in ada_run/_vw7.log.
+##
+## That was harmless while the build took one frame and a 2.5 s wall-clock
+## timer always won. It stopped being harmless the moment the placement pass
+## was spread across frames, because the build now takes about 3.1 s and the
+## museum's disarm - the pass that takes the live teleporters and hazards out
+## of an embedded grid - was firing 600 ms before the grid was done.
+##
+## A separate signal on purpose: map_generation_complete wakes SceneNarrator,
+## and narrating a museum hall is not this fix's job.
+signal build_finished()
+
 ## Handed to GridInteractablesComponent before it places. 0 = one blocking
 ## pass, as always. The endless museum sets it for the grid it embeds in a
 ## basin, where a 1281 ms placement pass is a freeze at a threshold.
@@ -752,6 +769,12 @@ var skip_player_spawn: bool = false
 func _handle_player_spawn():
 	if skip_player_spawn:
 		print("GridSystem: skip_player_spawn — the host owns the player")
+		# the host owns the player, so nothing downstream will ever close this
+		# build: say so here instead
+		generation_in_progress = false
+		_phase("to build_finished")
+		print("[grid-phase] TOTAL %s: %d ms" % [map_name, Time.get_ticks_msec() - _phase_t0])
+		emit_signal("build_finished")
 		return
 	print("GridSystem: Handling player spawn positioning...")
 	spawn_component.handle_player_spawn()
@@ -787,6 +810,7 @@ func _on_spawn_complete(spawn_position: Vector3):
 	_phase("to map_generation_complete")
 	print("[grid-phase] TOTAL %s: %d ms" % [map_name, Time.get_ticks_msec() - _phase_t0])
 	emit_signal("map_generation_complete")
+	emit_signal("build_finished")
 
 # Handle ecosystem spawner creation from map settings
 func _handle_ecosystem_spawn():

@@ -589,6 +589,16 @@ func generate_interactables(interactable_data):
 				# ordinary path) instead of one per early continue
 				if place_budget_ms > 0.0 and float(Time.get_ticks_msec() - _budget_t0) >= place_budget_ms:
 					await get_tree().process_frame
+					# THE HALL CAN BE FREED WHILE WE WAIT (2026-08-26). The
+					# museum streams: _stream_free drops a whole segment, and
+					# the shell window frees AHEAD as well - which is exactly
+					# the hall whose grid is still placing. Walk in, the next
+					# shell starts its grid, step back two metres inside three
+					# seconds, and this coroutine resumes inside a freed tree.
+					# Any get_tree() after an await is the same class of fault.
+					if not is_inside_tree():
+						print("GridInteractablesComponent: the hall was freed mid-placement — stopping")
+						return
 					_budget_t0 = Time.get_ticks_msec()
 				# `#` prefix = COMMENT. The token stays in map_data.json
 				# as reference / intent ("I considered putting X here") but
