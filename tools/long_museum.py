@@ -194,6 +194,46 @@ class Problems:
         return bool(self.missing or self.layers or self.rows)
 
 
+def content_extent(st):
+    """The hall's last row and column that hold anything, one past — the crop
+    the engine applies before it builds.
+
+    `_derive_map_row` (endless_museum.gd:16175) walks the structure grid for a
+    cell that is an int above zero, a "w" wall, or a "p"/"p:N" platform, keeps
+    the largest row and column it finds, and builds rows 0..r1 by columns 0..c1.
+    Letters count as content: a map whose far edge ends in a wall must not be
+    cropped at that edge.
+
+    WITHOUT THIS THE STRIP DRAWS THE EMPTY TAIL. Palle, looking at the opening
+    chapter: "their is a gray gap in z in the beginning maps". Point_Trace is
+    stored 20x20 and holds nothing past row 15 or column 7; Primitives_Polythedra
+    is 20x20 and holds nothing past row 10 or column 9. The museum never builds
+    those cells, so drawing them put a grey field beside and below six halls and
+    added 30 m of z the visitor would never walk. Far edges only — a leading
+    crop would move the origin, and every cell coordinate in the map is relative
+    to it.
+    """
+    r1 = c1 = -1
+    for r, row in enumerate(st):
+        for c, v in enumerate(row):
+            sv = str(v).strip()
+            ok = sv == "w" or sv == "p" or sv.startswith("p:")
+            if not ok:
+                try:
+                    ok = int(sv) > 0
+                except (ValueError, TypeError):
+                    ok = False
+            if ok:
+                if r > r1:
+                    r1 = r
+                if c > c1:
+                    c1 = c
+    # the engine's own floor: a tile smaller than 3x3 is not a room
+    if r1 < 2 or c1 < 2:
+        return None
+    return r1 + 1, c1 + 1
+
+
 def read_hall(name, chapter, order, source, probs):
     """One hall as a strip segment, or None if it cannot be read."""
     p = os.path.join(MAPS, name, "map_data.json")
@@ -209,6 +249,8 @@ def read_hall(name, chapter, order, source, probs):
     ut = layers.get("utilities") or []
     it = layers.get("interactables") or []
     w, h = grid_dims(st)
+    raw_w, raw_h = w, h
+    raw_st = st
 
     for lname, rows in (("structure", st), ("utilities", ut), ("interactables", it)):
         widths = {len(r) for r in rows}
@@ -235,6 +277,16 @@ def read_hall(name, chapter, order, source, probs):
               % (name, ", ".join("%s %dx%d" % (k, v[0], v[1]) for k, v in dims.items())),
               file=sys.stderr)
 
+    # CROP ONLY NOW. Cropping before the check above compared a cropped
+    # structure against uncropped utilities and interactables, and turned one
+    # genuine layer disagreement into eighteen invented ones. The layers agree
+    # or they do not as the FILE holds them; the crop is what the engine does
+    # afterwards.
+    ext = content_extent(raw_st)
+    if ext is not None:
+        h, w = ext
+        st = [list(row[:w]) + [""] * max(0, w - len(row)) for row in raw_st[:h]]
+
     arts, strays = [], []
     for z, row in enumerate(it):
         for x, cell in enumerate(row):
@@ -249,9 +301,17 @@ def read_hall(name, chapter, order, source, probs):
         print("       %d artifact(s) outside %s's %dx%d floor: %s"
               % (len(strays), name, w, h, ", ".join(strays)), file=sys.stderr)
 
-    return {"kind": "hall", "name": name, "sequence": chapter, "chapter": order,
-            "z0": 0, "z1": 0, "w": w, "h": h, "x0": -(w // 2),
-            "source": source, "artifacts": arts, "structure": st}
+    seg = {"kind": "hall", "name": name, "sequence": chapter, "chapter": order,
+           "z0": 0, "z1": 0, "w": w, "h": h, "x0": -(w // 2),
+           "source": source, "artifacts": arts, "structure": st}
+    # KEPT SO THE CROP IS AUDITABLE. A hall drawn smaller than the file it came
+    # from invites "is the strip losing cells?", and the honest answer is a
+    # number rather than a reassurance: these two fields are the grid as stored,
+    # and the engine builds the cropped one.
+    if (raw_w, raw_h) != (w, h):
+        seg["raw_w"] = raw_w
+        seg["raw_h"] = raw_h
+    return seg
 
 
 def build():
