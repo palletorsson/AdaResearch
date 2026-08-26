@@ -4442,7 +4442,13 @@ func _speak_hang(chapter: String, pearl: String) -> Array:
 			continue
 		if int(d[0]) == 0 and int(d[1]) == 0:
 			continue                       # no direction is no face
-		out.append({"index": int(h["page"]), "cell": [int(c[0]), int(c[1])],
+		# ONE FRAME IN THE BOOK (2026-08-26). Everything the book rules on —
+		# the mason's `cells`, a line's `lock` — is TILE frame, so the hang is
+		# too, and the vestibule is added HERE, on the way out, exactly as the
+		# pad rules do four hundred lines up. A single key in the segment frame
+		# would have been a trap with a long fuse: it reads correctly for
+		# whoever wrote it and four rows wrong for everybody else.
+		out.append({"index": int(h["page"]), "cell": [int(c[0]), int(c[1]) + VESTIBULE_H],
 			"dir": [int(d[0]), int(d[1])]})
 	return out
 

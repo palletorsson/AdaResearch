@@ -152,9 +152,15 @@ func _run() -> void:
 		notes.append("the real book is untouched")
 	_report(fails, notes)
 
-## page 0 was ruled onto the face of cell (1,5) looking +x; its boxes must sit
-## on that plane. Read from the stash em_detail keeps, never from the MultiMesh
-## buffer — headless returns identity for every instance transform.
+## page 0 was ruled onto the face of TILE cell (1,5) looking +x; its boxes must
+## sit on that plane. Read from the stash em_detail keeps, never from the
+## MultiMesh buffer — headless returns identity for every instance transform.
+##
+## THE Z IS THE POINT OF THIS CHECK (2026-08-26). The first cut tested x alone,
+## and x is the one axis the two candidate frames AGREE on — so a hang written
+## four rows out would have passed green. The book speaks TILE z; the segment
+## puts tile row y at z = y + VESTIBULE_H, and _speak_hang adds it. So tile row
+## 5 must land at 5 + 4 + 0.5 = 9.5, and 5.5 means the vestibule was dropped.
 func _hang_check(seg: Node3D) -> bool:
 	var nd: Node = seg.find_child("WallMounts", true, false)
 	if nd == null or not nd.has_meta("em_xforms"):
@@ -163,6 +169,11 @@ func _hang_check(seg: Node3D) -> bool:
 	if xf.is_empty():
 		return false
 	var o: Vector3 = (xf[0] as Transform3D).origin
+	var want_z: float = 5.0 + 4.0 + 0.5
+	if absf(o.z - want_z) > 0.2:
+		push_error("hang landed at z=%.2f, the tile frame says %.2f (out by %.1f rows)" % [
+			o.z, want_z, (want_z - o.z)])
+		return false
 	return absf(o.x - 2.0) < 0.2
 
 
