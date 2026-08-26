@@ -4416,6 +4416,37 @@ func _speak_adopt(chapter: String, pearl: String) -> Dictionary:
 	return out
 
 
+## WHERE a wall work hangs, as the hand has moved it: `hang: [{page, cell, dir}]`
+## on the pearl, beside `adopt`. Both live in the book so one editor writes one
+## file — adoption is WHICH WORK a wall speaks for, the hang is WHICH WALL FACE
+## it hangs on. Returned in em_detail's showing-rule shape (index/cell/dir), so
+## it joins the rules the studio already writes rather than inventing a lane.
+func _speak_hang(chapter: String, pearl: String) -> Array:
+	var out: Array = []
+	if chapter == "" or pearl == "":
+		return out
+	var path: String = _book_dir + "/%s.json" % chapter
+	if not FileAccess.file_exists(path):
+		return out
+	var doc_v: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+	if not (doc_v is Dictionary):
+		return out
+	var pl: Dictionary = _page_pearl_row(doc_v as Dictionary, pearl)
+	if pl.is_empty():
+		return out
+	for h_v in (pl.get("hang", []) as Array):
+		var h: Dictionary = h_v
+		var c: Array = h.get("cell", [])
+		var d: Array = h.get("dir", [])
+		if not h.has("page") or c.size() < 2 or d.size() < 2:
+			continue
+		if int(d[0]) == 0 and int(d[1]) == 0:
+			continue                       # no direction is no face
+		out.append({"index": int(h["page"]), "cell": [int(c[0]), int(c[1])],
+			"dir": [int(d[0]), int(d[1])]})
+	return out
+
+
 ## Write down what the walls ended up saying. Read back off the labels, so the
 ## ledger records what was ACTUALLY hung rather than what was intended — the
 ## same reason the seat is measured rather than assumed.
@@ -6577,7 +6608,7 @@ func _build_segment() -> void:
 						"label_every": int(deal.get("label_every", 11)),
 						# the hand's rulings on this chapter's showings, and the
 						# selectable proxies the editor picks (desktop only)
-						"showing_rules": _furniture_rules(next_seq, "showing"),
+						"showing_rules": _furniture_rules(next_seq, "showing") + _speak_hang(next_seq, String(deal.get("pearl", "")) if deal is Dictionary else ""),
 						"showing_proxies": true,     # ALWAYS: the same records in both modes
 						# the studio's camera looks down into the hall; a hall
 						# may also declare itself OUTDOOR (2026-08-24, Palle:

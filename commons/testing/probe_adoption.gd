@@ -30,6 +30,7 @@ func _copy_book(adopt_into: String, adopt_rows: Array) -> Dictionary:
 					var pl: Dictionary = pv
 					if String(pl.get("map", "")) == "Point_One":
 						pl["adopt"] = adopt_rows
+						pl["hang"] = [{"page": 0, "cell": [1, 5], "dir": [1, 0]}]
 						pearl_used = String(pl.get("pearl", ""))
 						doc_out = doc
 						break
@@ -48,6 +49,9 @@ func _run() -> void:
 	var setup: Dictionary = _copy_book("primitives", [
 		{"page": 0, "token": "you_are_here"}, {"page": 1, "token": ""},
 		{"page": 2, "token": "origin"}])
+	# and MOVE page 0 to a named wall face — the hang ruling, read from the same
+	# pearl as the adoption, so one editor writes one file
+	var moved_to := Vector2i(0, 0)
 	if String(setup.get("pearl", "")) == "":
 		fails.append("could not find the Point_One pearl to adopt into")
 
@@ -96,6 +100,12 @@ func _run() -> void:
 	else:
 		notes.append("an empty token pins a wall SILENT")
 
+	# THE HANG: page 0 was given a wall face, and its boxes must be there
+	if _hang_check(seg):
+		notes.append("a hand `hang` moves the wall work to the named face")
+	else:
+		fails.append("the hang ruling did not move page 0's boxes")
+
 	# the foyer token the hand adopted
 	var at2 := ""
 	for n3 in seg.get_children():
@@ -141,6 +151,20 @@ func _run() -> void:
 	else:
 		notes.append("the real book is untouched")
 	_report(fails, notes)
+
+## page 0 was ruled onto the face of cell (1,5) looking +x; its boxes must sit
+## on that plane. Read from the stash em_detail keeps, never from the MultiMesh
+## buffer — headless returns identity for every instance transform.
+func _hang_check(seg: Node3D) -> bool:
+	var nd: Node = seg.find_child("WallMounts", true, false)
+	if nd == null or not nd.has_meta("em_xforms"):
+		return false
+	var xf: Array = nd.get_meta("em_xforms")
+	if xf.is_empty():
+		return false
+	var o: Vector3 = (xf[0] as Transform3D).origin
+	return absf(o.x - 2.0) < 0.2
+
 
 func _report(fails: Array, notes: Array) -> void:
 	var r := "ADOPTION PROBE\n"
