@@ -839,7 +839,8 @@
      "gz": 0,
      "plinth": true,
      "pinned": true,
-     "added": false
+     "added": false,
+     "stamp": true
     },
     {
      "token": "matrix_4x4_viewer",
@@ -849,7 +850,8 @@
      "gz": 6,
      "plinth": false,
      "pinned": true,
-     "added": false
+     "added": false,
+     "stamp": true
     },
     {
      "token": "homogeneous_coordinates",
@@ -859,7 +861,8 @@
      "gz": 8,
      "plinth": false,
      "pinned": false,
-     "added": false
+     "added": false,
+     "stamp": true
     },
     {
      "token": "balance_puzzle",
@@ -869,7 +872,8 @@
      "gz": 10,
      "plinth": false,
      "pinned": true,
-     "added": false
+     "added": false,
+     "stamp": true
     },
     {
      "token": "transform_composition",
@@ -879,7 +883,8 @@
      "gz": 12,
      "plinth": false,
      "pinned": true,
-     "added": false
+     "added": false,
+     "stamp": true
     },
     {
      "token": "dark_sphere",
@@ -889,7 +894,8 @@
      "gz": 14,
      "plinth": false,
      "pinned": false,
-     "added": false
+     "added": false,
+     "stamp": true
     },
     {
      "token": "rotation_gimbal",
@@ -899,11 +905,12 @@
      "gz": 8,
      "plinth": false,
      "pinned": true,
-     "added": false
+     "added": false,
+     "stamp": true
     }
    ],
    "at": "2026-08-21T13:42:46.559Z",
-   "stamp": true
+   "stamp": false
   },
   "transformation|trans rotationspectacle": {
    "beads": [
