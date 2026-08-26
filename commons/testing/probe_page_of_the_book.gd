@@ -308,6 +308,60 @@ func _run() -> void:
 			inst.call("_doll_select", -1)
 			inst.call("_insp_page_section")
 
+	# 9. THE PICTURE MOVES (2026-08-24): a wall work is six batched boxes, and
+	#    a drag used to move a magenta ghost standing in for them. The real
+	#    instances must travel — and its sentence with them.
+	var parts: Array = inst.call("_showing_parts", seg, si)
+	if parts.is_empty():
+		fails.append("showing %d owns no MultiMesh instances — the picture cannot move" % si)
+	else:
+		# READ THE STASH, NOT THE BUFFER: MultiMesh instance transforms come back
+		# as identity under the dummy renderer, so this check used to measure
+		# nothing and would have passed a mover that moved everything to the
+		# origin (2026-08-24 — a headless probe measures another game).
+		var nd0: MultiMeshInstance3D = (parts[0] as Array)[3]
+		var i0: int = int((parts[0] as Array)[1])
+		var xf_a: Array = nd0.get_meta("em_xforms")
+		var was_o: Vector3 = (xf_a[i0] as Transform3D).origin
+		var was_l: Vector3 = lbl.position
+		inst.call("_showing_move", seg, si, Vector3(0.25, 0.1, 0.0))
+		var now_o: Vector3 = ((nd0.get_meta("em_xforms") as Array)[i0] as Transform3D).origin
+		if now_o.distance_to(was_o) < 0.2:
+			fails.append("the picture did not move (%.2f m)" % now_o.distance_to(was_o))
+		elif lbl.position.distance_to(was_l) < 0.2:
+			fails.append("the picture moved but its sentence stayed behind")
+		else:
+			notes.append("the wall work itself moves, sentence with it (%d part group(s))" % parts.size())
+		inst.call("_showing_move", seg, si, Vector3(-0.25, -0.1, 0.0))
+
+	# 10. A WALL WORK NEEDS A WALL: nothing may hang over open floor
+	var floating := 0
+	for n3 in seg.get_children():
+		if not n3.has_meta("em_showing") or n3.has_meta("em_hand_removed"):
+			continue
+		var pw: Vector3 = (n3 as Node3D).global_position
+		var cx3: int = int(floor(pw.x))
+		var cz3: int = int(floor(pw.z)) - int(float(segs[0]["z0"])) - 4
+		var backed := false
+		var tl: Array = inst.call("_plan_entry", "", chapter).get("tile", [])
+		if tl.is_empty():
+			break
+		for d3 in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1), Vector2i(0, 0)]:
+			var tx3: int = cx3 + d3.x
+			var tz3: int = cz3 + d3.y
+			if tz3 < 0 or tz3 >= tl.size():
+				continue
+			var rw3: Array = tl[tz3]
+			if tx3 >= 0 and tx3 < rw3.size() and String(rw3[tx3]).begins_with("4"):
+				backed = true
+				break
+		if not backed:
+			floating += 1
+	if floating > 0:
+		fails.append("%d wall work(s) still hang on nothing" % floating)
+	else:
+		notes.append("every standing wall work has a wall behind it")
+
 	inst.call("_page_close")
 	if inst.get("_page_ui") != null:
 		fails.append("the window did not close")

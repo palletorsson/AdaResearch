@@ -4407,6 +4407,115 @@ func _insp_page_clear() -> void:
 		old.queue_free()
 
 
+## THE INSTANCES OF ONE SHOWING. em_detail's _hang_one appends, per showing and
+## in hang order: one FIELD, one MOUNT, then FOUR frame bars. So showing N owns
+## field[N], mount[N] and frames[N*4 .. N*4+3] — the whole picture, addressable
+## without a rebuild. Returns [[MultiMesh, first, count], ...].
+func _showing_parts(seg: Node3D, si: int) -> Array:
+	var out: Array = []
+	if seg == null or not is_instance_valid(seg) or si < 0:
+		return out
+	for spec in [["WallFields", si, 1], ["WallMounts", si, 1], ["WallFrames", si * 4, 4]]:
+		var nm: String = String((spec as Array)[0])
+		var first: int = int((spec as Array)[1])
+		var cnt: int = int((spec as Array)[2])
+		var node: Node = seg.find_child(nm, true, false)
+		if node == null or not (node is MultiMeshInstance3D):
+			continue
+		var mm: MultiMesh = (node as MultiMeshInstance3D).multimesh
+		if mm == null or first + cnt > mm.instance_count:
+			continue
+		out.append([mm, first, cnt, node as MultiMeshInstance3D])
+	return out
+
+
+## Move a wall work for real: its six boxes, its hung sentence, and any picture
+## hanging on its field. The offset ruling is written by the caller, so the next
+## build stands it in the same place.
+func _showing_move(seg: Node3D, si: int, delta: Vector3) -> void:
+	if seg == null or not is_instance_valid(seg) or si < 0:
+		return
+	for part_v in _showing_parts(seg, si):
+		var part: Array = part_v
+		var mm: MultiMesh = part[0]
+		var node: MultiMeshInstance3D = part[3]
+		# read from the STASH em_detail kept, never from the buffer: instance
+		# transforms come back as identity under the dummy renderer, so a
+		# read-modify-write silently moved every box to the origin headless and
+		# could not be verified at all
+		var xf: Array = node.get_meta("em_xforms") if node.has_meta("em_xforms") else []
+		for k in range(int(part[2])):
+			var i: int = int(part[1]) + k
+			if i >= xf.size():
+				continue
+			var t: Transform3D = xf[i]
+			var moved := Transform3D(t.basis, t.origin + delta)
+			xf[i] = moved
+			mm.set_instance_transform(i, moved)
+		node.set_meta("em_xforms", xf)
+	for n in seg.get_children():
+		if n is Node3D and n.has_meta("em_speak") and int(n.get_meta("em_speak")) == si:
+			(n as Node3D).position += delta
+		elif n is Node3D and n.has_meta("em_viz") and int(n.get_meta("em_viz")) == si:
+			(n as Node3D).position += delta
+
+
+## A WALL WORK NEEDS A WALL (2026-08-24, Palle: "there is wall work hanging in
+## the air, remove them"). A showing is hung on a dressed FACE, and a face whose
+## wall the hand later opened — or that the dresser found on a run with nothing
+## behind it — leaves its picture floating over the floor. Anything with no wall
+## cell in any of its four neighbours is taken back out: the instances collapse
+## to zero scale (a MultiMesh cannot lose one), and the sentence goes with it.
+func _showing_cull_floating(seg: Node3D, tile: Array, zbase: int) -> void:
+	if seg == null or not is_instance_valid(seg) or tile.is_empty():
+		return
+	var culled := 0
+	for n in seg.get_children():
+		if not n.has_meta("em_showing"):
+			continue
+		var si: int = int(n.get_meta("em_showing"))
+		var p: Vector3 = (n as Node3D).global_position
+		var cx: int = int(floor(p.x))
+		var cz: int = int(floor(p.z)) - zbase - VESTIBULE_H
+		var backed := false
+		for d in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1), Vector2i(0, 0)]:
+			var tx: int = cx + d.x
+			var tz: int = cz + d.y
+			if tz < 0 or tz >= tile.size():
+				continue
+			var row: Array = tile[tz]
+			if tx < 0 or tx >= row.size():
+				continue
+			if String(row[tx]).begins_with("4"):
+				backed = true
+				break
+		if backed:
+			continue
+		for part_v in _showing_parts(seg, si):
+			var part: Array = part_v
+			var mm: MultiMesh = part[0]
+			var nd: MultiMeshInstance3D = part[3]
+			var xf2: Array = nd.get_meta("em_xforms") if nd.has_meta("em_xforms") else []
+			for k in range(int(part[2])):
+				var i: int = int(part[1]) + k
+				if i >= xf2.size():
+					continue
+				var t: Transform3D = xf2[i]
+				var gone := Transform3D(Basis().scaled(Vector3.ZERO), t.origin)
+				xf2[i] = gone
+				mm.set_instance_transform(i, gone)
+			nd.set_meta("em_xforms", xf2)
+		for m in seg.get_children():
+			if m is Node3D and m.has_meta("em_speak") and int(m.get_meta("em_speak")) == si:
+				(m as Node3D).visible = false
+			elif m is Node3D and m.has_meta("em_viz") and int(m.get_meta("em_viz")) == si:
+				(m as Node3D).visible = false
+		(n as Node3D).set_meta("em_hand_removed", true)
+		culled += 1
+	if culled > 0:
+		print("[em-detail] %d wall work(s) hung on nothing — taken back out" % culled)
+
+
 ## Which wall work is under the cursor, and which line of the book it carries.
 ## Returns false when the tap landed on anything else, so the click falls through.
 func _page_open_at(mouse: Vector2) -> bool:
@@ -6010,10 +6119,22 @@ func _build_segment() -> void:
 	var sim_margin: int = int(peek.get("sim_margin", 0))
 	var doorways: Dictionary = {} if sim_margin > 0 else _side_room_doorways(spec, next_seq, tile.size())
 	var skin_xs: Array = [-1 - sim_margin, w + sim_margin] if sim_margin > 0 else [-1, w]
+	# THE SKIN FOLLOWS THE FLOOR (2026-08-24, Palle: "at first point zero there
+	# are extra wall sides, and the wall round point zero should follow the floor
+	# so there is an open space out in space"). The skin used to run the full
+	# height of the tile whatever the map said, so a row whose edge cell is a
+	# HOLE — the designed void a map opens at its rim — got a wall standing over
+	# nothing, and the room lost the openness the hole was cut for. A row with no
+	# floor at its edge now gets no skin there, and the space stays open.
 	for y_skin in range(tile.size()):
+		var srow: Array = tile[y_skin]
 		for sx2 in skin_xs:
 			if int(sx2) == w and doorways.has(y_skin):
 				continue                    # the doorway: no skin; the room's walls take over
+			# the tile cell this skin would stand beside
+			var near_x: int = 0 if int(sx2) < 0 else srow.size() - 1
+			if near_x >= 0 and near_x < srow.size() and String(srow[near_x]) == "0":
+				continue                    # no floor to hold: leave it open
 			_wall_at(seg, solid, wcells, int(sx2), y_skin + VESTIBULE_H, corner_col, m_corner, wr)
 	# ── THE BASIN (2026-08-24, Palle: "like a basin with walls under the
 	# floor, like a pool, one meter down where the grid lines with the trace
@@ -6304,6 +6425,8 @@ func _build_segment() -> void:
 	# carrying `viz` becomes a drawing on its own field, the sentence its caption.
 	_viz_pages(seg, seg_seq if seg_seq != "" else next_seq,
 		String(peek.get("pearl", "")), tile)
+	# a wall work with no wall behind it is taken back out, before anyone sees it
+	_showing_cull_floating(seg, tile, zbase)
 	# THE PREREQUISITE BOARD hangs in the entry passage — the vestibule, and
 	# every crossing has exactly one, so one board per hall IS one board per
 	# passage. EAST wall: the west wall is the removed gallery banner's place,
@@ -14324,23 +14447,16 @@ func _edit_fine(dx: float, dy: float, dz: float) -> void:
 	if kind in ["showing", "furniture", "plinth", "prop"]:
 		ov = _furniture_override(r)
 		if kind == "showing":
-			# a showing proxy is invisible; the picture it stands for is a
-			# batched MultiMesh that only moves on rebuild. A magenta ghost
-			# rides the proxy so the move can be SEEN live (Palle: "move the
-			# frames on the wall in edit mode").
-			print("[em-edit] showing %d: offset ruled — the picture moves on the next build" % int(r.get("index", -1)))
-			if node != null and node.get_node_or_null("OffsetGhost") == null:
-				var gm := MeshInstance3D.new()
-				gm.name = "OffsetGhost"
-				var gb := BoxMesh.new()
-				gb.size = Vector3(1.2, 0.9, 0.08)
-				gm.mesh = gb
-				var mt2 := StandardMaterial3D.new()
-				mt2.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-				mt2.albedo_color = Color(0.9, 0.2, 0.8, 0.4)
-				mt2.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-				gm.material_override = mt2
-				node.add_child(gm)
+			# THE PICTURE MOVES (2026-08-24, Palle: "instead of moving the wall
+			# work there is a pink mark moving to that spot, we want to move the
+			# wall work"). It used to be a magenta ghost riding an invisible
+			# proxy, because the frame, mount and field are batched into three
+			# MultiMeshes that only re-emit on a rebuild. But the mapping is
+			# exact — em_detail's _hang_one appends one field, one mount and
+			# four frame bars per showing, in hang order — so the instances of
+			# showing N are addressable, and the real thing moves now.
+			_showing_move(_node_or_null(r.get("seg")), int(r.get("index", -1)),
+				Vector3(dx, dy, dz))
 	else:
 		ov = _mod_editor.call("override_for", _edit_records, _edit_sel, _edit_overrides)
 	var off: Array = ov.get("offset", [0.0, 0.0, 0.0])

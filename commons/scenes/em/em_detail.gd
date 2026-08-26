@@ -1419,6 +1419,13 @@ static func _emit(parent: Node3D, node_name: String, xforms: Array, mat: Variant
 	var mmi: MultiMeshInstance3D = MultiMeshInstance3D.new()
 	mmi.name = node_name
 	mmi.multimesh = mm
+	# THE TRANSFORMS STAY READABLE (2026-08-24). MultiMesh instance transforms
+	# cannot be read back under the dummy renderer — every origin returns
+	# identity headless — so a caller that wants to MOVE one instance has
+	# nothing to move from, and no probe can ever check that it did. The array
+	# that built the buffer is kept on the node: cheap, exact, and true in both
+	# lanes. See _showing_move in endless_museum.gd.
+	mmi.set_meta("em_xforms", xforms.duplicate())
 	if mat is Material:
 		mmi.material_override = mat as Material
 	if shadows:
