@@ -205,8 +205,37 @@ def derive_row(pearl: str, map_name: str, museum_key: str, idx: int, total: int,
     }
 
 
+def spine_names() -> list:
+    """The sequences the curriculum actually has, in order."""
+    p = ROOT / "commons" / "maps" / "curriculum_spine.json"
+    doc = json.loads(p.read_text(encoding="utf-8"))
+    rows = doc["spine"]["sequences"]
+    return [str(r["name"]) for r in sorted(rows, key=lambda r: r.get("order", 0))]
+
+
 def build(plan: dict) -> dict:
     out = copy.deepcopy(plan)
+
+    # A CHAPTER THAT LEFT THE SPINE MUST LEAVE THE WALK.
+    #
+    # Dissolving a sequence edits curriculum_spine.json; it does not touch the
+    # plan, and nothing else was checking the two against each other. So the
+    # museum kept walking two chapters that no longer exist: `symmetry` (6
+    # halls) and `array_tutorial` (7), both folded into color on 2026-08-24 —
+    # symmetry into the census room Symmetry_Seventeen, array_tutorial into
+    # color's index and rule rungs. Thirteen halls of it, standing between
+    # transformation and color, dealt from templates because a dissolved
+    # chapter has no map-authored rows and no pool of its own.
+    #
+    # Found from the other end: Palle walked past transformation expecting
+    # colour and got rooms they did not recognise.
+    spine = set(spine_names())
+    ghosts = sorted({str(r.get("sequence", "")) for r in out["plans"]} - spine)
+    if ghosts:
+        for g in ghosts:
+            n = sum(1 for r in out["plans"] if r.get("sequence") == g)
+            print(f"  DROPPED '{g}' — {n} hall(s) in the plan, not in the spine")
+        out["plans"] = [r for r in out["plans"] if str(r.get("sequence", "")) in spine]
     for chapter, pairs in declared().items():
         rows_for = [r for r in plan["plans"] if r.get("sequence") == chapter]
         if not rows_for:
