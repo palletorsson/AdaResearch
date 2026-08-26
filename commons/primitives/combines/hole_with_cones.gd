@@ -16,6 +16,9 @@ extends Node3D
 @export var hole_radius: float = 0.6  # Radius of the hole
 @export var ground_color: Color = Color(0.3, 0.3, 0.35)  # Asphalt gray
 @export var cone_distance: float = 0.9  # Distance of cones from hole center
+## Draw the asphalt slab and its hole at all. OFF since 2026-08-18: the object is
+## its cordon. `hole_with_cones#with_ground:true` restores the full site.
+@export var with_ground: bool = false
 
 # ── STAGE-2 DNA — promoted 2026-08-03 ─────────────────────────────────
 #
@@ -69,14 +72,22 @@ func _build_scene():
 		child.queue_free()
 	_cones.clear()
 
-	# Build ground with hole
-	_build_ground_with_hole()
+	# THE GROUND IS OFF (2026-08-18, Palle: "remove all but the cones").
+	#
+	# The cordon is the whole object now: three cones standing around a hole that
+	# is no longer drawn, so what is left is the gesture of enclosure rather than
+	# the thing enclosed. Kept behind a flag rather than deleted — the slab, its
+	# hole edge and its collision are 200 lines that took a while to get right, and
+	# `#with_ground:true` on a token brings the site back unchanged.
+	if with_ground:
+		_build_ground_with_hole()
 
 	# Declare the hazard — or don't. Default "cones" is the shipped site.
 	_build_cordon()
 
-	# Add collision for ground (not the hole)
-	_create_ground_collision()
+	if with_ground:
+		# Add collision for ground (not the hole)
+		_create_ground_collision()
 	_built = true
 
 func _build_ground_with_hole():
@@ -349,15 +360,34 @@ func _pick_axis(raw: String, allowed: Array[String], fallback: String) -> String
 ## only when it names a different declaration than the one already built. All
 ## ten placements pass no config at all, so none of them moves.
 func apply_grid_config(config_data: Dictionary) -> void:
-	if not config_data.has("cordon"):
+	var rebuild := false
+	# `with_ground` is read here because the header comment promises a token can
+	# turn the slab back on, and a promise the code does not keep is worse than no
+	# promise: the grid only ever sets config_* METADATA, which this artifact does
+	# not read, so the key would have been silently ignored.
+	if config_data.has("with_ground"):
+		var g: bool = _to_bool(config_data["with_ground"])
+		if g != with_ground:
+			with_ground = g
+			rebuild = true
+	if config_data.has("cordon"):
+		var c: String = _pick_axis(str(config_data["cordon"]), CORDON_VALUES, cordon)
+		if c != cordon:
+			cordon = c
+			rebuild = true
+	if not rebuild:
 		return
-	var c: String = _pick_axis(str(config_data["cordon"]), CORDON_VALUES, cordon)
-	if c == cordon:
-		return
-	cordon = c
 	if not _built:
-		return   # _ready has not run yet; it will build with this value.
+		return   # _ready has not run yet; it will build with these values.
 	_build_scene()
+
+
+## A token's value arrives as a STRING, never a bool — `"true" == true` is a
+## runtime error in GDScript, not false.
+func _to_bool(v: Variant) -> bool:
+	if v is bool:
+		return v
+	return str(v).to_lower() in ["true", "1", "yes"]
 
 func _add_traffic_cones():
 	# Load traffic cone scene

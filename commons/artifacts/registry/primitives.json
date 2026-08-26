@@ -10244,7 +10244,7 @@
 			},
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "Ground plane with circular hole and 3 traffic cones around it. Construction site warning setup.",
+			"description": "Three traffic cones standing around a hole that is no longer drawn — the cordon without the site. The asphalt slab and its circular hole are still in the code behind with_ground, off by default since 2026-08-18; hole_with_cones#with_ground:true restores the full construction site.",
 			"dev_themes": [
 				"core",
 				"primitives"
