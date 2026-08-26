@@ -2159,6 +2159,7 @@ func _load_pool() -> void:
 	# scan the whole registry again for them — one pass over ~7 MB of JSON is
 	# cheap, two in one boot is pure waste on the streaming frame.
 	var dna_by_token: Dictionary = {}   # also kept as _dna_axes, for the editor's C key
+	var delegates: Array = []           # entries that borrow another token's scene
 	_guest_registry = {}
 	var dir := DirAccess.open(REGISTRY_DIR)
 	if dir == null:
@@ -2180,6 +2181,17 @@ func _load_pool() -> void:
 				and ResourceLoader.exists(scene)
 			if alive:
 				live[String(lookup)] = {"scene": scene, "fp": _footprint_of(a)}
+			# A DELEGATE HAS NO SCENE OF ITS OWN (2026-08-26, Palle: "force place
+			# the missing artifact for now"). 47 registry entries carry delegate_to
+			# and no scene, and every one of their targets HAS a scene - so the
+			# museum called all 47 not-alive and left them behind, silently,
+			# wherever a map declared one. VFM_01_Foundations is the case that
+			# surfaced it: 18 of 19, the nineteenth being vector_addition_xl,
+			# which delegates to VectorAddition. Deferred to a second pass because
+			# the target usually sits in another file, scanned later.
+			elif scene == "" and String(a.get("delegate_to", "")) != "":
+				delegates.append({"lookup": String(lookup), "to": String(a.get("delegate_to", "")),
+					"entry": a})
 			# em_pool needs liveness, DNA axes, and sequence membership. Preserve
 			# any live duplicate just as its former independent scan did.
 			var token := String(lookup)
@@ -2203,6 +2215,21 @@ func _load_pool() -> void:
 	# a relative is dealt BY NAME out of the relation file, and most of those
 	# names are nowhere in the curriculum order — so the whole living registry
 	# has to stay resolvable, not just the pool.
+	# THE SECOND PASS: a delegate borrows its target's scene and keeps its OWN
+	# footprint, because the whole point of vector_addition_xl is that it is the
+	# extra-large one. One hop only - a delegate pointing at another delegate
+	# stays unresolved rather than risking a cycle, and the count says so.
+	var lent := 0
+	for dv in delegates:
+		var dd: Dictionary = dv
+		var tgt: Variant = live.get(String(dd["to"]), null)
+		if tgt is Dictionary:
+			live[String(dd["lookup"])] = {"scene": String((tgt as Dictionary)["scene"]),
+				"fp": _footprint_of(dd["entry"] as Dictionary)}
+			lent += 1
+	if not delegates.is_empty():
+		print("[endless_museum] %d of %d delegating token(s) resolved through delegate_to" % [
+			lent, delegates.size()])
 	_live = live
 	if _mod_has(_mod_mult, "prime"):
 		_mod_mult.call("prime", dna_by_token)
