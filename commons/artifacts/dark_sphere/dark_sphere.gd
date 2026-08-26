@@ -44,6 +44,16 @@ class_name DarkSphere
 ## "" derives from where this sphere stands. Otherwise: point, line (rungs one
 ## and two), or inert to refuse the gestation for this placement.
 @export var stage: String = ""
+## THE YIELD READS AT EYE LEVEL (2026-08-24, Palle: "the point is too small,
+## make it bigger"). The first try took its size from the project's own points
+## — but those are MARKS, 4 mm and 20 mm, drawn to be looked at closely on a
+## bench. A thing that falls out of an egg onto a museum floor and is meant to
+## be seen from standing height is a different object, and there was no
+## precedent for it in the corpus. 0.22 m radius is a 44 cm body: read from
+## across the hall, still small enough to be a POINT rather than a boulder.
+@export var yield_point_radius: float = 0.22
+## the line's pieces, sized off the same body so the two rungs stay siblings
+@export var yield_line_piece_m: float = 0.30
 ## The catalyst's hit layer. Its projectiles carry collision_mask = 2 and the
 ## receiver contract in this corpus is layer 2 / mask 0 — mask 0 on purpose,
 ## so a hit body never pushes the world's cubes around.
@@ -137,27 +147,29 @@ func _gest_host() -> Node:
 func _gest_point(colour: Color) -> void:
 	var b := RigidBody3D.new()
 	b.name = "YieldPoint"
+	var r: float = maxf(0.02, yield_point_radius)
 	var mi := MeshInstance3D.new()
 	var sm := SphereMesh.new()
-	sm.radius = 0.06
-	sm.height = 0.12
+	sm.radius = r
+	sm.height = r * 2.0
 	mi.mesh = sm
 	mi.material_override = _gest_mat(colour)
 	b.add_child(mi)
 	var cs := CollisionShape3D.new()
 	var sh := SphereShape3D.new()
-	sh.radius = 0.06
+	sh.radius = r
 	cs.shape = sh
 	b.add_child(cs)
 	_gest_host().add_child(b)
-	b.global_position = global_position + Vector3(0, 0.05, 0)
+	# born at the egg's own centre, so it drops OUT of the sphere
+	b.global_position = global_position
 
 
 ## RUNG TWO. A line falls out of the sphere and breaks to pieces — it leaves as
 ## one line and lands as several, which is the whole argument of the rung.
 func _gest_line(colour: Color) -> void:
 	var pieces: int = 5
-	var seg_len: float = 0.13
+	var seg_len: float = maxf(0.04, yield_line_piece_m)
 	var host: Node = _gest_host()
 	var here: Vector3 = global_position
 	var mat: StandardMaterial3D = _gest_mat(colour)
@@ -165,23 +177,26 @@ func _gest_line(colour: Color) -> void:
 		var b := RigidBody3D.new()
 		b.name = "YieldLine%d" % i
 		var mi := MeshInstance3D.new()
+		var thick: float = clampf(seg_len * 0.17, 0.02, 0.09)
 		var bm := BoxMesh.new()
-		bm.size = Vector3(seg_len * 0.86, 0.022, 0.022)
+		bm.size = Vector3(seg_len * 0.86, thick, thick)
 		mi.mesh = bm
 		mi.material_override = mat
 		b.add_child(mi)
 		var cs := CollisionShape3D.new()
 		var sh := BoxShape3D.new()
-		sh.size = Vector3(seg_len * 0.86, 0.022, 0.022)
+		sh.size = Vector3(seg_len * 0.86, thick, thick)
 		cs.shape = sh
 		b.add_child(cs)
 		host.add_child(b)
 		# laid out as ONE line through the sphere, then let go
-		b.global_position = here + Vector3((float(i) - float(pieces - 1) * 0.5) * seg_len, 0.05, 0)
+		b.global_position = here + Vector3((float(i) - float(pieces - 1) * 0.5) * seg_len, 0.0, 0)
 		# the break: each piece leaves with its own small push, so the line
 		# comes apart in the air instead of landing as a rod
+		# the break scales with the body: a bigger line comes apart wider
+		var k: float = seg_len / 0.13
 		b.apply_central_impulse(Vector3(
-			(float(i) - float(pieces - 1) * 0.5) * 0.045, 0.02, randf_range(-0.02, 0.02)))
+			(float(i) - float(pieces - 1) * 0.5) * 0.045 * k, 0.02 * k, randf_range(-0.02, 0.02) * k))
 
 
 ## The body the catalyst can hit. Added late (deferred, after the artifact has
