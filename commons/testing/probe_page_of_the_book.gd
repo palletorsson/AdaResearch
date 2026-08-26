@@ -213,6 +213,36 @@ func _run() -> void:
 	else:
 		fails.append("the editing window has no visualization chooser")
 
+	# 7. THE WALL READER, the same panel both lanes get: aim at the work from
+	#    where it faces and the page opens IN THE WORLD, carrying the field
+	#    notes the canvas has no room for.
+	var aim_from: Vector3 = lbl.global_position + lbl.global_transform.basis.z * 1.6
+	var aim_dir: Vector3 = -lbl.global_transform.basis.z
+	var hit: Dictionary = inst.call("_wall_pick_aim", aim_from, aim_dir, 4.5, 0.45)
+	if hit.is_empty():
+		fails.append("aiming straight at a wall work found nothing to read")
+	else:
+		if not bool(inst.call("_wall_read_toggle", hit)):
+			fails.append("the reader refused to open on a wall work")
+		else:
+			var rp: Node3D = inst.get("_wall_read")
+			if rp == null or not is_instance_valid(rp):
+				fails.append("the reader opened but built no panel")
+			else:
+				var rb := String(rp.get("body"))
+				if not rb.contains(new_line):
+					fails.append("the reader does not show the line (%s)" % rb.substr(0, 40))
+				elif not rb.contains("FIELD NOTE"):
+					fails.append("the reader does not show the field notes")
+				else:
+					notes.append("the reader opens in the WORLD (works in VR) with the line AND the field notes")
+				# a second look puts it away
+				inst.call("_wall_read_toggle", hit)
+				if inst.get("_wall_read") != null:
+					fails.append("a second look did not close the reader")
+				else:
+					notes.append("a second look closes it")
+
 	inst.call("_page_close")
 	if inst.get("_page_ui") != null:
 		fails.append("the window did not close")

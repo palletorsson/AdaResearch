@@ -792,6 +792,14 @@ var _page_line: TextEdit = null
 var _page_note: TextEdit = null
 var _page_status: Label = null
 var _page_viz: OptionButton = null
+## THE WALL READER (2026-08-24, Palle: "I want to see the content of that wall
+## work when I click in desktop and vr"). The canvas carries ONE line; the book
+## carries the field notes under it. The reader is WORLD-SPACE — a panel that
+## stands in front of the work — because a CanvasLayer does not exist for a
+## visitor in a headset, and the same object then serves both lanes.
+var _wall_read: Node3D = null
+var _wall_read_si: int = -1
+var _wall_trigger_was: Dictionary = {}   # controller id -> was the trigger down
 var _page_ctx: Dictionary = {}    # {chapter, pearl, token, si}
 var _doll_walk_to: Vector3 = Vector3(1e9, 0, 0)   # click-to-walk target; 1e9 = none
 var _doll_mark: MeshInstance3D = null              # the little goal disc
@@ -4015,10 +4023,10 @@ func _prereq_board(seg: Node3D, w: int, chapter: String, peek: Dictionary, legen
 	var body := "NEEDS   " + _prereq_words(need_toks, 5)
 	if from_maps.size() > 0:
 		body += "
-              from " + " · ".join(from_maps)
+			  from " + " · ".join(from_maps)
 	elif String(row.get("after", "")) != "":
 		body += "
-              after " + String(row["after"]).replace("_", " ").to_lower()
+			  after " + String(row["after"]).replace("_", " ").to_lower()
 	body += "
 
 ADDS    " + _prereq_words(row.get("adds", []), 8)
@@ -4158,6 +4166,107 @@ func _viz_pages(seg: Node3D, chapter: String, pearl: String, tile: Array) -> voi
 		hung += 1
 	if hung > 0:
 		print("[em-page] %s · %s: %d visualization page(s)" % [chapter, pearl, hung])
+
+
+## The wall work the visitor is AIMING at: nearest hung line inside a cone from
+## `from` along `dir`. The gate's own idiom (reach + cone), because showings
+## carry no collider — em_detail is contractually forbidden to add collision, so
+## there is nothing for a physics ray to hit.
+func _wall_pick_aim(from: Vector3, dir: Vector3, reach: float = 4.5, cone: float = 0.45) -> Dictionary:
+	var best: Dictionary = {}
+	var best_a: float = cone
+	for sv in _segments:
+		var sd: Dictionary = sv
+		var seg: Node3D = _node_or_null(sd.get("node"))
+		if seg == null:
+			continue
+		for n in seg.get_children():
+			if not (n is Label3D) or not n.has_meta("em_speak"):
+				continue
+			var lbl := n as Label3D
+			var to: Vector3 = lbl.global_position - from
+			if to.length() > reach:
+				continue
+			var a: float = dir.angle_to(to.normalized())
+			if a < best_a:
+				best_a = a
+				best = {"seg": seg, "label": lbl, "si": int(lbl.get_meta("em_speak"))}
+	return best
+
+
+## Read the page standing in front of it: the line as the book has it, and the
+## field notes under it. Same panel in both lanes; a second look closes it.
+func _wall_read_toggle(hit: Dictionary) -> bool:
+	if hit.is_empty():
+		return false
+	var lbl: Label3D = hit["label"]
+	var si: int = int(hit["si"])
+	if _wall_read != null and is_instance_valid(_wall_read) and _wall_read_si == si:
+		_wall_read_close()
+		return true
+	_wall_read_close()
+	var seg: Node3D = hit["seg"]
+	var chapter := String(seg.get_meta("em_chapter")) if seg.has_meta("em_chapter") else ""
+	var pearl := String(seg.get_meta("em_pearl")) if seg.has_meta("em_pearl") else ""
+	var token := String(lbl.get_meta("em_speak_token")) if lbl.has_meta("em_speak_token") else ""
+	var was: Dictionary = _page_ctx
+	_page_ctx = {"chapter": chapter, "pearl": pearl, "token": token, "si": si}
+	var book: Dictionary = _page_read()
+	_page_ctx = was
+	var line_txt := String(book.get("text", ""))
+	if line_txt == "":
+		line_txt = lbl.text
+	var note_txt := String(book.get("note", ""))
+	var vk := String(book.get("viz", ""))
+	var body := line_txt
+	if note_txt != "":
+		body += "\n\n" + note_txt
+	elif vk != "":
+		body += "\n\n(this page shows the %s)" % vk
+	var panel: Node3D = TextScreenRes.new()
+	panel.mode = TextScreenRes.Mode.SCREEN
+	panel.title = token if token != "" else pearl
+	panel.body = body
+	panel.width_m = 0.95
+	seg.add_child(panel)
+	# in front of the work, turned the same way: a Label3D and a TextScreen both
+	# face their own local +Z, so the label's basis carries the room direction
+	panel.global_position = lbl.global_position + lbl.global_transform.basis.z * 0.55
+	panel.global_rotation = lbl.global_rotation
+	_wall_read = panel
+	_wall_read_si = si
+	print("[em-page] reading %s · %s · page %02d%s" % [chapter, pearl, si + 1,
+		("  (+%d characters of field notes)" % note_txt.length()) if note_txt != "" else ""])
+	return true
+
+
+func _wall_read_close() -> void:
+	if _wall_read != null and is_instance_valid(_wall_read):
+		_wall_read.queue_free()
+	_wall_read = null
+	_wall_read_si = -1
+
+
+## VR: a trigger pull on either controller reads what it points at. Polled with
+## an edge detector rather than wired to a signal, because controllers come and
+## go with the rig and a stale connection is worse than a cheap per-frame read.
+func _wall_read_vr_tick() -> void:
+	if not _vr:
+		return
+	for c in get_tree().get_nodes_in_group("xr_controllers"):
+		if not (c is Node3D):
+			continue
+		var down := false
+		if c.has_method("is_button_pressed"):
+			down = bool(c.call("is_button_pressed", "trigger_click"))
+		var key: int = (c as Node).get_instance_id()
+		var was: bool = bool(_wall_trigger_was.get(key, false))
+		_wall_trigger_was[key] = down
+		if down and not was:
+			var ct := (c as Node3D).global_transform
+			if not _wall_read_toggle(_wall_pick_aim(ct.origin, -ct.basis.z)):
+				# nothing under the pointer: a pull in open air puts it away
+				_wall_read_close()
 
 
 ## Which wall work is under the cursor, and which line of the book it carries.
@@ -10753,6 +10862,7 @@ func _process(_delta: float) -> void:
 		if _env_ab_t >= _env_ab_s:
 			_env_ab_t = 0.0
 			_env_swap()
+	_wall_read_vr_tick()
 	_drain_stamps()
 	if not _museum_ready and _stamp_queue.is_empty() and _cartridge_pending_nodes.is_empty():
 		_finish_initial_loading()
@@ -13316,12 +13426,17 @@ func _input(event: InputEvent) -> void:
 					return
 				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED if emb.pressed else Input.MOUSE_MODE_VISIBLE
 				return
-	# THE PAGE OPENS ON A DOUBLE TAP. Showing records are collected in both
-	# modes, so this works while simply walking - no editor to arm first.
+	# THE PAGE OPENS ON A DOUBLE TAP, and a SINGLE CLICK reads it where it
+	# hangs. Showing records are collected in both modes, so neither needs an
+	# editor armed: walk up, click to read, double-tap to write.
 	if not _vr and event is InputEventMouseButton:
 		var pmb := event as InputEventMouseButton
 		if pmb.pressed and pmb.button_index == MOUSE_BUTTON_LEFT and pmb.double_click:
 			if _page_open_at(pmb.position):
+				return
+		elif pmb.pressed and pmb.button_index == MOUSE_BUTTON_LEFT and _cam != null:
+			var cf: Vector3 = -_cam.global_transform.basis.z
+			if _wall_read_toggle(_wall_pick_aim(_cam.global_position, cf)):
 				return
 	# desktop: click the scanner to open the threshold door
 	if event is InputEventMouseButton and (event as InputEventMouseButton).pressed \
