@@ -1,215 +1,215 @@
 {
   "sequences": {
-    "color": {
-      "name": "Color and Composition",
-      "v1_3_note": "Renamed from 'Color: Perception, Not Physics'. As of spine v1.3, this sequence absorbs the composition study and is sourced from three auto-research galleries: primitive-stack, pattern, and facade. 2026-08-24 THE FOLD: array_tutorial collapses into this sequence — Color_Arrays is the whole array grammar in one map (1d unit, row, column, 2d grid, 3d grid and the sorting arrays in the last basin), built on the Array map's own three-pool structure. The pattern work of Tutorial_Pattern / Array_Patterns joins Pattern_Foundry.",
-      "composition_sources": [
-        {
-          "gallery": "primitive-stack-gallery",
-          "path": "ada_encyclopedia/public/primitive-stack-gallery/manifest.json",
-          "role": "vertical compositions — stacks of primitives as raw composition vocabulary"
-        },
-        {
-          "gallery": "pattern-gallery",
-          "path": "ada_encyclopedia/public/pattern-gallery/manifest.json",
-          "role": "plane compositions — wallpaper-group repetitions across the grid"
-        },
-        {
-          "gallery": "facade-gallery",
-          "path": "ada_encyclopedia/public/facade-gallery/manifest.json",
-          "role": "architectural compositions — facades as composed parts within a frame"
-        }
-      ],
-      "truth": "Color is perception, not physics. RGB is a lie we agree on. What you see depends on context, not wavelength alone.",
-      "qfep_term": "S",
-      "qfep_connection": "Color is a system stateâ€”part of the S term in QFEP. But unlike vectors, color is fundamentally perceptual: the same wavelength can appear different colors depending on surrounding context. Color reveals the gap between ontology (photons) and experience (qualia).",
-      "formula": "RGB = (r, g, b) âˆˆ [0,1]Â³, HSV = (h, s, v) âˆˆ [0,360)Ã—[0,1]Â²",
-      "demonstration": "Mix RGB to create colors. See how context changes perception. Watch gradients reveal interpolation. Paint and observe.",
-      "description": "The physics and perception of color. Light has wavelength, but color is what brains make of it. Explore RGB, HSV, and the gap between objective light and subjective experience.",
-      "layer": "F_order",
-      "prerequisites": [
+	"color": {
+	  "name": "Color and Composition",
+	  "v1_3_note": "Renamed from 'Color: Perception, Not Physics'. As of spine v1.3, this sequence absorbs the composition study and is sourced from three auto-research galleries: primitive-stack, pattern, and facade. 2026-08-24 THE FOLD: array_tutorial collapses into this sequence — Color_Arrays is the whole array grammar in one map (1d unit, row, column, 2d grid, 3d grid and the sorting arrays in the last basin), built on the Array map's own three-pool structure. The pattern work of Tutorial_Pattern / Array_Patterns joins Pattern_Foundry.",
+	  "composition_sources": [
+		{
+		  "gallery": "primitive-stack-gallery",
+		  "path": "ada_encyclopedia/public/primitive-stack-gallery/manifest.json",
+		  "role": "vertical compositions — stacks of primitives as raw composition vocabulary"
+		},
+		{
+		  "gallery": "pattern-gallery",
+		  "path": "ada_encyclopedia/public/pattern-gallery/manifest.json",
+		  "role": "plane compositions — wallpaper-group repetitions across the grid"
+		},
+		{
+		  "gallery": "facade-gallery",
+		  "path": "ada_encyclopedia/public/facade-gallery/manifest.json",
+		  "role": "architectural compositions — facades as composed parts within a frame"
+		}
+	  ],
+	  "truth": "Color is perception, not physics. RGB is a lie we agree on. What you see depends on context, not wavelength alone.",
+	  "qfep_term": "S",
+	  "qfep_connection": "Color is a system stateâ€”part of the S term in QFEP. But unlike vectors, color is fundamentally perceptual: the same wavelength can appear different colors depending on surrounding context. Color reveals the gap between ontology (photons) and experience (qualia).",
+	  "formula": "RGB = (r, g, b) âˆˆ [0,1]Â³, HSV = (h, s, v) âˆˆ [0,360)Ã—[0,1]Â²",
+	  "demonstration": "Mix RGB to create colors. See how context changes perception. Watch gradients reveal interpolation. Paint and observe.",
+	  "description": "The physics and perception of color. Light has wavelength, but color is what brains make of it. Explore RGB, HSV, and the gap between objective light and subjective experience.",
+	  "layer": "F_order",
+	  "prerequisites": [
         "primitives"
-      ],
-      "unlocks": [
-        "proceduralgeneration",
+	  ],
+	  "unlocks": [
+		"proceduralgeneration",
         "machinelearning"
-      ],
-      "difficulty": "beginner",
-      "estimated_time": "20-25 minutes",
-      "learning_objectives": [
-        "RGB color space: additive mixing of red, green, blue",
-        "HSV color space: hue, saturation, valueâ€”more intuitive",
-        "Color mixing: additive vs subtractive",
-        "Perception theory: color constancy, simultaneous contrast",
-        "Digital materiality: how screens create color",
-        "Gradients: interpolation between colors",
+	  ],
+	  "difficulty": "beginner",
+	  "estimated_time": "20-25 minutes",
+	  "learning_objectives": [
+		"RGB color space: additive mixing of red, green, blue",
+		"HSV color space: hue, saturation, valueâ€”more intuitive",
+		"Color mixing: additive vs subtractive",
+		"Perception theory: color constancy, simultaneous contrast",
+		"Digital materiality: how screens create color",
+		"Gradients: interpolation between colors",
         "Color as function: every gradient is a function from t ∈ [0,1] to a color. Color is your first encounter with a continuous mapping — the move that sets up wavefunctions (functions of time) and forces (vector-valued functions of position) as already-familiar."
-      ],
-      "content": [
-        "Array: One Cube, Then the Same Cube Counted",
-        "Pattern_Foundry: Four Machines, Four Ways to Make a Pattern",
-        "Color_Context_Placed: Where Color Stops Being a Lesson and Becomes a Crowd",
-        "Color_Nails: Nail Salon Color Selection",
-        "Color_Pillar: Pillars as Collection Points for Chromatic Data",
-        "Color_Walls: The Hallway Dissolves into Rainbow",
+	  ],
+	  "content": [
+		"Array: One Cube, Then the Same Cube Counted",
+		"Pattern_Foundry: Four Machines, Four Ways to Make a Pattern",
+		"Color_Context_Placed: Where Color Stops Being a Lesson and Becomes a Crowd",
+		"Color_Nails: Nail Salon Color Selection",
+		"Color_Pillar: Pillars as Collection Points for Chromatic Data",
+		"Color_Walls: The Hallway Dissolves into Rainbow",
         "Symmetry_Seventeen: The Census Closes at Exactly Seventeen"
-      ],
-      "maps": [
-        "Array",
-        "Pattern_Foundry",
-        "Color_Context_Placed",
-        "Color_Nails",
-        "Color_Pillar",
-        "Color_Walls",
+	  ],
+	  "maps": [
+		"Array",
+		"Pattern_Foundry",
+		"Color_Context_Placed",
+		"Color_Nails",
+		"Color_Pillar",
+		"Color_Walls",
         "Symmetry_Seventeen"
-      ],
-      "deferred_maps": [
-        "Color_Context",
-        "Color_Grabbable",
-        "Color_Overlay",
-        "Color_Spectrum",
-        "Color_Sphere",
-        "Color_Flashlight",
-        "Color_Grid_Pallet",
-        "Color_Rainbow",
-        "Color_Paint",
+	  ],
+	  "deferred_maps": [
+		"Color_Context",
+		"Color_Grabbable",
+		"Color_Overlay",
+		"Color_Spectrum",
+		"Color_Sphere",
+		"Color_Flashlight",
+		"Color_Grid_Pallet",
+		"Color_Rainbow",
+		"Color_Paint",
         "Chamber_Color"
-      ],
-      "deferred_reason": "2026-08-24 CONSOLIDATION: Color_Flashlight held zero artifacts; Color_Grid_Pallet, Color_Rainbow and Color_Paint held four to seven, mostly recall and furniture. Their six real pieces moved into the ladder's rooms (spectrum_forest, rainbow, ball_painting_demo -> Color_Walls; gridcolorizer -> Array; pattern_mill -> Pattern_Foundry; albers_wall_gallery -> Color_Context_Placed). The map FILES remain on disk — deferred, not deleted. Chamber_Color leaves too (2026-08-24): its four artifacts were the catalyst's own machinery — proximity_spawner, becoming_catalyst, catalyst_target and a dark sphere — infrastructure rather than a rung of the ladder.",
-      "axiom_files": [
-        "res://commons/context/clipboard/tutorial_text/color_axioms.md",
-        "res://commons/context/clipboard/tutorial_text/rgb_axioms.md",
+	  ],
+	  "deferred_reason": "2026-08-24 CONSOLIDATION: Color_Flashlight held zero artifacts; Color_Grid_Pallet, Color_Rainbow and Color_Paint held four to seven, mostly recall and furniture. Their six real pieces moved into the ladder's rooms (spectrum_forest, rainbow, ball_painting_demo -> Color_Walls; gridcolorizer -> Array; pattern_mill -> Pattern_Foundry; albers_wall_gallery -> Color_Context_Placed). The map FILES remain on disk — deferred, not deleted. Chamber_Color leaves too (2026-08-24): its four artifacts were the catalyst's own machinery — proximity_spawner, becoming_catalyst, catalyst_target and a dark sphere — infrastructure rather than a rung of the ladder.",
+	  "axiom_files": [
+		"res://commons/context/clipboard/tutorial_text/color_axioms.md",
+		"res://commons/context/clipboard/tutorial_text/rgb_axioms.md",
         "res://commons/context/clipboard/tutorial_text/perception_axioms.md"
-      ],
-      "algorithm_paths": {
-        "Color_Paint": "res://algorithms/color/paint/",
-        "Color_Grid_Pallet": "res://algorithms/color/palette/",
-        "Color_Patch_Palette_Overview": "res://algorithms/color/grabcolor/color_sets_overview.tscn"
-      },
-      "return_to": "lab",
-      "lab_map": "Lab/map_data_post_color",
-      "unlock_requirements": [
+	  ],
+	  "algorithm_paths": {
+		"Color_Paint": "res://algorithms/color/paint/",
+		"Color_Grid_Pallet": "res://algorithms/color/palette/",
+		"Color_Patch_Palette_Overview": "res://algorithms/color/grabcolor/color_sets_overview.tscn"
+	  },
+	  "return_to": "lab",
+	  "lab_map": "Lab/map_data_post_color",
+	  "unlock_requirements": [
         "primitives"
-      ],
-      "completion_rewards": [
-        "chromatic_badge",
+	  ],
+	  "completion_rewards": [
+		"chromatic_badge",
         "perception_badge"
-      ],
-      "artifact_groups": [
-        {
-          "map": "Color_Nails",
-          "position": "intro",
-          "artifacts": [
-            "nail_color_controller",
-            "hand_model",
-            "hand_color_controller",
-            "dark_sphere",
-            "dark_side_prism",
-            "grab_stick_scanner",
-            "colorballs",
+	  ],
+	  "artifact_groups": [
+		{
+		  "map": "Color_Nails",
+		  "position": "intro",
+		  "artifacts": [
+			"nail_color_controller",
+			"hand_model",
+			"hand_color_controller",
+			"dark_sphere",
+			"dark_side_prism",
+			"grab_stick_scanner",
+			"colorballs",
             "brick_wall_factory"
-          ],
-          "size_budget": "compact_only",
-          "rationale": "Nail salon studio: precise color selection on a digital body. Introduces color as interaction.",
-          "grammar": "linear"
-        },
-        {
-          "map": "Color_Grid_Pallet",
-          "position": "foundation",
-          "artifacts": [
-            "gridcolorizer",
-            "dark_sphere",
+		  ],
+		  "size_budget": "compact_only",
+		  "rationale": "Nail salon studio: precise color selection on a digital body. Introduces color as interaction.",
+		  "grammar": "linear"
+		},
+		{
+		  "map": "Color_Grid_Pallet",
+		  "position": "foundation",
+		  "artifacts": [
+			"gridcolorizer",
+			"dark_sphere",
             "spectrum_forest"
-          ],
-          "size_budget": "compact_only",
-          "rationale": "Grid becomes canvas: systematic color assignment cell by cell with spectrum visualization.",
-          "grammar": "linear"
-        },
-        {
-          "map": "Color_Rainbow",
-          "position": "foundation",
-          "artifacts": [
-            "mario_cube",
-            "dark_sphere",
-            "rainbow",
+		  ],
+		  "size_budget": "compact_only",
+		  "rationale": "Grid becomes canvas: systematic color assignment cell by cell with spectrum visualization.",
+		  "grammar": "linear"
+		},
+		{
+		  "map": "Color_Rainbow",
+		  "position": "foundation",
+		  "artifacts": [
+			"mario_cube",
+			"dark_sphere",
+			"rainbow",
             "pick_up_cube"
-          ],
-          "size_budget": "compact_only",
-          "rationale": "Walking through light: spectrum progression with animated rainbow emitters along a corridor.",
-          "grammar": "florence"
-        },
-        {
-          "map": "Color_Pillar",
-          "position": "exploration",
-          "artifacts": [
-            "pillarcolorcollection",
-            "visual_color_mixing",
-            "color_sets_overview",
-            "dark_sphere",
-            "grab_rainbow_stick",
+		  ],
+		  "size_budget": "compact_only",
+		  "rationale": "Walking through light: spectrum progression with animated rainbow emitters along a corridor.",
+		  "grammar": "florence"
+		},
+		{
+		  "map": "Color_Pillar",
+		  "position": "exploration",
+		  "artifacts": [
+			"pillarcolorcollection",
+			"visual_color_mixing",
+			"color_sets_overview",
+			"dark_sphere",
+			"grab_rainbow_stick",
             "SpectrumVisualizer"
-          ],
-          "size_budget": "mixed",
-          "rationale": "Pillar gauntlet: color collection, mixing, and spectrum analysis in a columned runway.",
-          "grammar": "zelda"
-        },
-        {
-          "map": "Color_Paint",
-          "position": "exploration",
-          "artifacts": [
-            "ball_painting_demo",
-            "albers_wall_gallery",
+		  ],
+		  "size_budget": "mixed",
+		  "rationale": "Pillar gauntlet: color collection, mixing, and spectrum analysis in a columned runway.",
+		  "grammar": "zelda"
+		},
+		{
+		  "map": "Color_Paint",
+		  "position": "exploration",
+		  "artifacts": [
+			"ball_painting_demo",
+			"albers_wall_gallery",
             "dark_sphere"
-          ],
-          "size_budget": "mixed",
-          "rationale": "Action painting studio: gestural color application meets structured Albers color studies.",
-          "grammar": "zelda"
-        },
-        {
-          "map": "Color_Walls",
-          "position": "integration",
-          "artifacts": [
-            "color_constellation_office",
-            "rainbow_hallway",
+		  ],
+		  "size_budget": "mixed",
+		  "rationale": "Action painting studio: gestural color application meets structured Albers color studies.",
+		  "grammar": "zelda"
+		},
+		{
+		  "map": "Color_Walls",
+		  "position": "integration",
+		  "artifacts": [
+			"color_constellation_office",
+			"rainbow_hallway",
             "dark_sphere"
-          ],
-          "size_budget": "environment",
-          "rationale": "Gradient environment: continuous color transitions dissolving categorical boundaries.",
-          "grammar": "zelda"
-        },
-        {
-          "map": "Color_Flashlight",
-          "position": "synthesis",
-          "artifacts": [
-            "flashlight_demo",
+		  ],
+		  "size_budget": "environment",
+		  "rationale": "Gradient environment: continuous color transitions dissolving categorical boundaries.",
+		  "grammar": "zelda"
+		},
+		{
+		  "map": "Color_Flashlight",
+		  "position": "synthesis",
+		  "artifacts": [
+			"flashlight_demo",
             "dark_sphere"
-          ],
-          "size_budget": "compact_only",
-          "rationale": "MultiMesh color cycling test: pattern progression through flashlight interaction. Synthesis of color systems.",
-          "grammar": "vatican"
-        }
-      ],
-      "taxonomy": {
-        "_readme": "THE LADDER (2026-08-24). FOUR rungs, not five: the UNIT is not taught here. Palle: 'we have worked with them before in earlier sequences and we can go right on the index.' The spine agrees — primitives is sequence 1 (points, lines, planes, 73 artifacts) and color is 4, so the cube, the sphere and the polyhedron arrive already known. The unit is a THRESHOLD the walk crosses, not a room it stops in. Closes as a LOOP: composition returns to the unit and shows it was never neutral (Albers: no two adjacent squares look the way they would alone).",
-        "2_index": "how do I address many? — row, column, 2d grid, 3d grid, bar arrays, sorting. THE ROOM IS Array itself: measured 6 index to 2 unit, index-pure, and the spine already names array_tutorial 'the grid, indexing, addressable repetition'. Color_Arrays (a twin built the same day) is retired into it.",
-        "3_attribute": "what does a unit carry? — THREE rooms, not one, and they must not be folded (Palle, 2026-08-24). Measured, the three meet colour three different ways: Color_Nails is colour IN THE HAND (nail and hand controllers, the scanner stick, colourballs — colour as an act, applied to a point, 7x13); Color_Pillar is colour AS A SET (the pillar collection, spectrum visualiser, colour-sets overview, visual mixing — colour as relation between samples, 12x22); Color_Walls is colour AS SPACE (the colour-space navigator, gradient interpolator, subpixel display, rainbow hallway, spectrum forest — colour walked through, and the only one at architectural scale: 31 deep, height 6). Folding them would flatten the sequence's own claim — that colour is relational — into a single cabinet of swatches. The hand, the comparing eye and the walking body are three different proofs of the same truth.",
-        "4_rule": "how does an attribute REPEAT across an index? — tiles, looms, mills, the wallpaper groups (Pattern_Foundry). REPETITION ONLY.",
-        "5_composition": "when does the rule become a made thing? — THE ROOM IS Color_Context_Placed (measured 73% composition, 22 artifacts): the colour stacks, Albers, Mondrian, Rothko, Kandinsky and the furniture already stand there. The primitive stack is its RECAPITULATION — one config is sequence (index) + colour and scale (attribute) + layout (rule) + artist (composition), the whole ladder folded into one object; 283 configs in /primitive-stack-gallery, one promoted so far (dna_primitive_stack_ps01_bauhaus_totem_green, already in this room).",
-        "_generation_comes_later": "Palle, 2026-08-24: grammar, CA and factories — a rule that MAKES rules — are downstream, not here. crackpropagation_ca -> biological_growth, csg_architecture_cavity -> boolean_surfaces, constraint_sculptor -> gallery, brick_wall_factory -> facade_assembly (Facade_Rustication: the factory that makes the wall belongs with the course that reads its blocks), pattern_tunnel_machine -> proceduralgeneration (PG_Mirrored_Patterns). NOTHING generative is left in the sequence, and no artifact was orphaned.",
-        "0_unit_recalled": "carried from primitives (spine 1) — pick_up_cube, xyz_coordinates and the synthesis stand appear as recall beats inside the index room, never as a rung of their own",
-        "_rooms": {
-          "2_index": "Array",
-          "3_attribute": [
-            "Color_Nails",
-            "Color_Pillar",
+		  ],
+		  "size_budget": "compact_only",
+		  "rationale": "MultiMesh color cycling test: pattern progression through flashlight interaction. Synthesis of color systems.",
+		  "grammar": "vatican"
+		}
+	  ],
+	  "taxonomy": {
+		"_readme": "THE LADDER (2026-08-24). FOUR rungs, not five: the UNIT is not taught here. Palle: 'we have worked with them before in earlier sequences and we can go right on the index.' The spine agrees — primitives is sequence 1 (points, lines, planes, 73 artifacts) and color is 4, so the cube, the sphere and the polyhedron arrive already known. The unit is a THRESHOLD the walk crosses, not a room it stops in. Closes as a LOOP: composition returns to the unit and shows it was never neutral (Albers: no two adjacent squares look the way they would alone).",
+		"2_index": "how do I address many? — row, column, 2d grid, 3d grid, bar arrays, sorting. THE ROOM IS Array itself: measured 6 index to 2 unit, index-pure, and the spine already names array_tutorial 'the grid, indexing, addressable repetition'. Color_Arrays (a twin built the same day) is retired into it.",
+		"3_attribute": "what does a unit carry? — THREE rooms, not one, and they must not be folded (Palle, 2026-08-24). Measured, the three meet colour three different ways: Color_Nails is colour IN THE HAND (nail and hand controllers, the scanner stick, colourballs — colour as an act, applied to a point, 7x13); Color_Pillar is colour AS A SET (the pillar collection, spectrum visualiser, colour-sets overview, visual mixing — colour as relation between samples, 12x22); Color_Walls is colour AS SPACE (the colour-space navigator, gradient interpolator, subpixel display, rainbow hallway, spectrum forest — colour walked through, and the only one at architectural scale: 31 deep, height 6). Folding them would flatten the sequence's own claim — that colour is relational — into a single cabinet of swatches. The hand, the comparing eye and the walking body are three different proofs of the same truth.",
+		"4_rule": "how does an attribute REPEAT across an index? — tiles, looms, mills, the wallpaper groups (Pattern_Foundry). REPETITION ONLY.",
+		"5_composition": "when does the rule become a made thing? — THE ROOM IS Color_Context_Placed (measured 73% composition, 22 artifacts): the colour stacks, Albers, Mondrian, Rothko, Kandinsky and the furniture already stand there. The primitive stack is its RECAPITULATION — one config is sequence (index) + colour and scale (attribute) + layout (rule) + artist (composition), the whole ladder folded into one object; 283 configs in /primitive-stack-gallery, one promoted so far (dna_primitive_stack_ps01_bauhaus_totem_green, already in this room).",
+		"_generation_comes_later": "Palle, 2026-08-24: grammar, CA and factories — a rule that MAKES rules — are downstream, not here. crackpropagation_ca -> biological_growth, csg_architecture_cavity -> boolean_surfaces, constraint_sculptor -> gallery, brick_wall_factory -> facade_assembly (Facade_Rustication: the factory that makes the wall belongs with the course that reads its blocks), pattern_tunnel_machine -> proceduralgeneration (PG_Mirrored_Patterns). NOTHING generative is left in the sequence, and no artifact was orphaned.",
+		"0_unit_recalled": "carried from primitives (spine 1) — pick_up_cube, xyz_coordinates and the synthesis stand appear as recall beats inside the index room, never as a rung of their own",
+		"_rooms": {
+		  "2_index": "Array",
+		  "3_attribute": [
+			"Color_Nails",
+			"Color_Pillar",
             "Color_Walls"
-          ],
-          "4_rule": "Pattern_Foundry",
-          "5_composition": "Color_Context_Placed"
-        },
-        "_weak_rooms": "2026-08-24, after the consolidation: the four thin maps are deferred and their six real artifacts rehoused. Nothing thin remains. Color_Nails and Color_Pillar are NOT thin — they are rung 3's other two rooms (see 3_attribute); a proposal to fold them was measured and refused."
-      }
-    }
+		  ],
+		  "4_rule": "Pattern_Foundry",
+		  "5_composition": "Color_Context_Placed"
+		},
+		"_weak_rooms": "2026-08-24, after the consolidation: the four thin maps are deferred and their six real artifacts rehoused. Nothing thin remains. Color_Nails and Color_Pillar are NOT thin — they are rung 3's other two rooms (see 3_attribute); a proposal to fold them was measured and refused."
+	  }
+	}
   },
   "world_phase": "grid",
   "artifact_groups": []

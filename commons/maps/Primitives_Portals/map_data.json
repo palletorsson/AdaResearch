@@ -1,194 +1,194 @@
 {
-  "map_info": {
-	"description": "A toroidal portal sequence guided by increasing rings approaching pi, staging continuity as asymptotic relation rather than arrival. This map makes approximation and limit visible: discrete rings approximate the circle without ever reaching it. It foregrounds the tension between the countable and the infinite within computational geometry.",
-	"description_2": "2D Array Navigation - explore both X and Y axes in a grid structure",
-	"dimensions": {
-	  "depth": 35,
-	  "max_height": 2,
-	  "width": 7
+	"map_info": {
+		"description": "A toroidal portal sequence guided by increasing rings approaching pi, staging continuity as asymptotic relation rather than arrival. This map makes approximation and limit visible: discrete rings approximate the circle without ever reaching it. It foregrounds the tension between the countable and the infinite within computational geometry.",
+		"description_2": "2D Array Navigation - explore both X and Y axes in a grid structure",
+		"dimensions": {
+			"depth": 35.0,
+			"max_height": 2.0,
+			"width": 7.0
+		},
+		"format": "json",
+		"lookup_name": "Primitives_Portals",
+		"metadata": {
+			"category": "tutorial",
+			"difficulty": "beginner",
+			"estimated_time": "3-4 minutes",
+			"learning_objectives": ["Toroidal forms", "Circular approximation", "Continuity vs discretization", "Zeno's paradox — limits as asymptotic approach"]
+		},
+		"name": "08 Portals",
+		"title": "Circular Approximation and Limits",
+		"version": "1.0",
+		"museum": {
+			"open_roof": true,
+			"basin": {
+				"depth": 3.0,
+				"glass": true
+			},
+			"passage": {
+				"kind": "hall",
+				"width": 3.0,
+				"offset": 4.0
+			}
+		}
 	},
-	"format": "json",
-	"lookup_name": "Primitives_Portals",
-	"metadata": {
-	  "category": "tutorial",
-	  "difficulty": "beginner",
-	  "estimated_time": "3-4 minutes",
-	  "learning_objectives": ["Toroidal forms","Circular approximation","Continuity vs discretization","Zeno's paradox — limits as asymptotic approach"]
+	"utility_definitions": {
+		"s": {
+			"properties": {
+				"height": 5.5
+			}
+		},
+		"t": {
+			"description": "Continue to next step",
+			"name": "Next",
+			"properties": {
+				"action": "next_in_sequence"
+			},
+			"type": "teleporter"
+		}
 	},
-	"name": "08 Portals",
-	"title": "Circular Approximation and Limits",
-	"version": "1.0",
-	"museum": {
-	  "open_roof": true,
-	  "basin": {
-		"depth": 3.0,
-		"glass": true
-	  },
-	  "passage": {
-		"kind": "hall",
-		"width": 3,
-		"offset": 4
-	  }
+	"documentation": {
+		"key_elements": ["`combine_portals` rig at (3,4)", "`achilles_tortoise` at (5,5) — animated Zeno's paradox", "Mid-corridor `dark_sphere` enclosure at (3,18)", "Teleporter `t` at (4,33)"],
+		"layout": "7x35 longitudinal spine with narrowing walkway toward southern exit.",
+		"objective": "Experience circular approximation through toroidal portals; discrete rings approaching continuity.",
+		"summary": "Primitives_Portals - Toroidal Corridor"
+	},
+	"lighting": {
+		"ambient_color": [0.4, 0.4, 0.5],
+		"ambient_energy": 0.6,
+		"directional_light": {
+			"color": [1.0, 0.9, 0.8],
+			"direction": [-0.4, -0.7, -0.4],
+			"enabled": true,
+			"energy": 1.2
+		}
+	},
+	"settings": {
+		"auto_reveal_on_entry": false,
+		"background": {
+			"color": [0.2, 0.3, 0.7],
+			"type": "sky"
+		},
+		"cube_size": 1.0,
+		"enable_physics": true,
+		"gutter": 0.0,
+		"initial_tile_visibility": "hidden_except_corners",
+		"show_grid": true,
+		"disable_biome": true
+	},
+	"layers": {
+		"structure": [
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "0", "0", "1", "0", "0", "1"],
+			["1", "0", "0", "1", "0", "0", "1"],
+			["1", "0", "1", "1", "1", "0", "1"],
+			["1", "0", "1", "1", "1", "0", "1"],
+			["1", "0", "1", "1", "1", "0", "1"],
+			["1", "0", "0", "1", "0", "0", "1"],
+			["1", "0", "0", "1", "0", "0", "1"],
+			["1", "0", "1", "1", "1", "0", "1"],
+			["1", "0", "0", "1", "0", "0", "1"],
+			["1", "0", "0", "1", "0", "0", "1"],
+			["1", "0", "0", "1", "0", "0", "1"],
+			["1", "0", "1", "1", "1", "0", "1"],
+			["1", "0", "1", "1", "1", "0", "1"],
+			["1", "0", "0", "1", "0", "0", "1"],
+			["1", "0", "0", "1", "0", "0", "1"],
+			["1", "0", "0", "1", "0", "0", "1"],
+			["1", "0", "1", "1", "1", "0", "1"],
+			["1", "0", "1", "1", "1", "0", "1"],
+			["1", "0", "0", "1", "0", "0", "1"],
+			["1", "0", "0", "1", "0", "0", "1"],
+			["1", "0", "1", "1", "1", "0", "1"],
+			["1", "0", "1", "1", "1", "0", "1"],
+			["1", "0", "0", "1", "0", "0", "1"],
+			["1", "0", "0", "1", "0", "0", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["0", "0", "0", "1", "0", "1", "0"],
+			["0", "0", "0", "1", "1", "1", "1"]
+		],
+		"utilities": [
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			["an:180", " ", " ", "", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", "sub:limit", " ", " ", " "],
+			[" ", " ", " ", "", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", "t", " ", " "],
+			[" ", " ", " ", " ", " ", "s", " "]
+		],
+		"interactables": [
+			["dark_sphere:0:-0.5", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", "capsule", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", "combine_portals:0:-0.2", " ", " ", " "],
+			[" ", " ", " ", "", " ", "achilles_tortoise:0:1", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", "floating_sphere_field#bounds:4,3,18", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "]
+		]
+	},
+	"subtitles": {
+		"limit": "The circle is the limit no polygon reaches: add a side, add a side, forever, and only the gap grows smaller — approximation is an infinite walk toward a place you never arrive."
 	}
-  },
-  "utility_definitions": {
-	"s": {
-	  "properties": {
-		"height": 5.5
-	  }
-	},
-	"t": {
-	  "description": "Continue to next step",
-	  "name": "Next",
-	  "properties": {
-		"action": "next_in_sequence"
-	  },
-	  "type": "teleporter"
-	}
-  },
-  "documentation": {
-	"key_elements": ["`combine_portals` rig at (3,4)","`achilles_tortoise` at (5,5) — animated Zeno's paradox","Mid-corridor `dark_sphere` enclosure at (3,18)","Teleporter `t` at (4,33)"],
-	"layout": "7x35 longitudinal spine with narrowing walkway toward southern exit.",
-	"objective": "Experience circular approximation through toroidal portals; discrete rings approaching continuity.",
-	"summary": "Primitives_Portals - Toroidal Corridor"
-  },
-  "lighting": {
-	"ambient_color": [0.4,0.4,0.5],
-	"ambient_energy": 0.6,
-	"directional_light": {
-	  "color": [1,0.9,0.8],
-	  "direction": [-0.4,-0.7,-0.4],
-	  "enabled": true,
-	  "energy": 1.2
-	}
-  },
-  "settings": {
-	"auto_reveal_on_entry": false,
-	"background": {
-	  "color": [0.2,0.3,0.7],
-	  "type": "sky"
-	},
-	"cube_size": 1,
-	"enable_physics": true,
-	"gutter": 0,
-	"initial_tile_visibility": "hidden_except_corners",
-	"show_grid": true,
-	"disable_biome": true
-  },
-  "layers": {
-	"structure": [
-	  ["1","1","1","1","1","0","0"],
-	  ["1","1","1","1","0","0","0"],
-	  ["1","1","1","1","0","0","0"],
-	  ["1","1","1","1","0","0","0"],
-	  ["1","1","1","1","1","0","0"],
-	  ["1","1","1","1","1","1","0"],
-	  ["1","1","1","1","1","1","0"],
-	  ["1","1","1","1","1","1","1"],
-	  ["1","0","0","1","0","0","1"],
-	  ["1","0","0","1","0","0","1"],
-	  ["1","0","1","1","1","0","1"],
-	  ["1","0","1","1","1","0","1"],
-	  ["1","0","1","1","1","0","1"],
-	  ["1","0","0","1","0","0","1"],
-	  ["1","0","0","1","0","0","1"],
-	  ["1","0","1","1","1","0","1"],
-	  ["1","0","0","1","0","0","1"],
-	  ["1","0","0","1","0","0","1"],
-	  ["1","0","0","1","0","0","1"],
-	  ["1","0","1","1","1","0","1"],
-	  ["1","0","1","1","1","0","1"],
-	  ["1","0","0","1","0","0","1"],
-	  ["1","0","0","1","0","0","1"],
-	  ["1","0","0","1","0","0","1"],
-	  ["1","0","1","1","1","0","1"],
-	  ["1","0","1","1","1","0","1"],
-	  ["1","0","0","1","0","0","1"],
-	  ["1","0","0","1","0","0","1"],
-	  ["1","0","1","1","1","0","1"],
-	  ["1","0","1","1","1","0","1"],
-	  ["1","0","0","1","0","0","1"],
-	  ["1","0","0","1","0","0","1"],
-	  ["1","1","1","1","1","1","1"],
-	  ["0","0","0","1","0","1","0"],
-	  ["0","0","0","1","1","1","1"]
-	],
-	"utilities": [
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  ["an:180"," "," ",""," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," ","sub:limit"," "," "," "],
-	  [" "," "," ",""," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," ","t"," "," "],
-	  [" "," "," "," "," ","s"," "]
-	],
-	"interactables": [
-	  ["dark_sphere:0:-0.5"," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," ","capsule"," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," ","combine_portals:0:-0.2"," "," "," "],
-	  [" "," "," ",""," ","achilles_tortoise:0:1"," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," ","floating_sphere_field#bounds:4,3,18"," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "]
-	]
-  },
-  "subtitles": {
-	"limit": "The circle is the limit no polygon reaches: add a side, add a side, forever, and only the gap grows smaller — approximation is an infinite walk toward a place you never arrive."
-  }
 }

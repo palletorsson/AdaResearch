@@ -93,6 +93,56 @@ def registry():
     return reg
 
 
+# A TOKEN THAT IS EVERYWHERE IS FURNITURE, NOT A CLASS. Palle, 2026-08-26:
+# "not more than 6 - 10 class artifacts per map (does not include cube, dark
+# sphere or other recurring artifact)". Measured rather than listed by hand:
+# across 2,810 maps, science_screen is placed 256 times, pick_up_cube 173,
+# catalyst_target 134, proximity_spawner 50. Those are the room's fittings —
+# a hall does not become crowded because it has a cube in it.
+RECURRING_AT = 25
+
+
+def corpus_counts(_cache={}):
+    """How many times each token is placed across every map on disk."""
+    if _cache:
+        return _cache
+    for p in glob.glob(os.path.join(ROOT, "commons", "maps", "*", "map_data.json")):
+        try:
+            with open(p, encoding="utf-8") as fh:
+                doc = json.load(fh)
+        except Exception:
+            continue
+        for row in (doc.get("layers", {}) or {}).get("interactables", []) or []:
+            for cell in row:
+                t = str(cell).strip().split("#")[0].split(":")[0]
+                if t:
+                    _cache[t] = _cache.get(t, 0) + 1
+    return _cache
+
+
+def class_weight(tok, shapes, reg, fam_sizes):
+    """What one artifact costs against a hall's 6-to-10 budget.
+
+    Zero for recurring furniture. Half again for a body that needs the room —
+    24 of softbodies' 73 class artifacts are 3x3 "room" pieces, and ten of
+    those in one hall is not a hall. And a fraction for a collation member,
+    because Palle's rule says so and it is the whole point of a collation:
+    "if they are not collations we can have more".
+    """
+    if corpus_counts().get(tok, 0) >= RECURRING_AT:
+        return 0.0
+    sh = shapes.get(tok) or {}
+    area = int(sh.get("w", 1)) * int(sh.get("d", 1))
+    w = 1.5 if area >= 9 else 1.0
+    # heavy is a PROXY — this repo measures no frame times, so it is a guess
+    # and is deliberately gentler than the size term, which is measured.
+    if cost_of(reg.get(tok, {})) >= 1.6:
+        w += 0.25
+    if fam_sizes.get(family_of(tok, reg.get(tok, {})), 0) >= 3:
+        w *= 0.6
+    return w
+
+
 def cost_of(entry):
     """A GUESS at render cost, and labelled as one everywhere it is printed.
     No measurement of frame time exists in this repo, so this reads the three
@@ -314,6 +364,10 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--sequence", default="color")
     ap.add_argument("--apply", action="store_true")
+    ap.add_argument("--per-hall", type=float, default=0.0,
+                    help="weighted CLASS artifacts per hall (Palle's 6-10 rule); "
+                         "recurring furniture is free, a 3x3 body costs 1.5, "
+                         "a collation member 0.6. Derives the cap.")
     ap.add_argument("--cap", type=int, default=0,
                     help="most halls to make (default: the sequence's own map count)")
     ap.add_argument("--free", action="store_true",
@@ -362,7 +416,24 @@ def main():
     # own halls under Palle's "add an extra wall and continue with the new map",
     # which grew softbodies to 35 halls against its 34 maps. The wall still
     # moves; what yields now is the AIR inside the hall, not the hall count.
-    cap = args.cap if args.cap > 0 else (seq_map_count(args.sequence) or len(shape) or 12)
+    # THE CAP CAN COME FROM THE ARTIFACTS INSTEAD OF THE OLD MAP COUNT.
+    # Palle's rule is about what a hall should HOLD, so the hall count is a
+    # consequence of it: weigh the class artifacts and divide by the budget.
+    fam_sizes = {}
+    for _t in order:
+        _f = family_of(_t, reg.get(_t, {}))
+        fam_sizes[_f] = fam_sizes.get(_f, 0) + 1
+    weights = {t: class_weight(t, shapes, reg, fam_sizes) for t in order}
+    load = sum(weights.values())
+    per_hall = float(args.per_hall)
+    if per_hall > 0:
+        cap = max(1, int(math.ceil(load / per_hall)))
+        n_recur = sum(1 for t in order if weights[t] == 0.0)
+        print("  %d artifact(s): %d recurring (free), %d class -> weighted %.1f "
+              "at %.1f per hall = %d hall(s)"
+              % (len(order), n_recur, len(order) - n_recur, load, per_hall, cap))
+    else:
+        cap = args.cap if args.cap > 0 else (seq_map_count(args.sequence) or len(shape) or 12)
     while pending and len(halls) < cap and tries < 200:
         tries += 1
         key, pat = plans[rhythm[plan_i % len(rhythm)] % len(plans)]
@@ -444,7 +515,11 @@ def main():
             avail = set(pending)
             order_of = {t: i for i, t in enumerate(pending)}
             xs, zs = {}, {}
-            while avail and len(placed) < target:
+            # THE BUDGET IS WEIGHT, NOT HEADCOUNT, when Palle's rule is on. A
+            # hall of ten 3x3 rooms and a hall of ten toys are the same number
+            # and are not the same room.
+            spent = 0.0
+            while avail and (spent < per_hall if per_hall > 0 else len(placed) < target):
                 best = None
                 for si, s2, toks in fit_table:
                     if any(q["si"] == si for q in placed):
@@ -544,6 +619,7 @@ def main():
                 zs[s2["z"]] = zs.get(s2["z"], 0) + 1
                 cost += c
                 last_fam = fam
+                spent += weights.get(tok, 1.0)
                 avail.discard(tok)
                 taken.append(tok)
             return placed, cost, taken
