@@ -13387,6 +13387,18 @@ func _input(event: InputEvent) -> void:
 				# the BUNDLE: the plinth ghost-drags with its artifact
 				var plsel: Node3D = _node_or_null((_edit_records[idx] as Dictionary).get("plinth_node"))
 				_doll_plinth_start = plsel.position if plsel != null else Vector3.ZERO
+				# A SINGLE CLICK IS THE GESTURE IN ISO (2026-08-24, Palle: "in
+				# iso view I do not get editing only a pop up text, maybe click
+				# and not double click works?"). _doll_select has already opened
+				# the inspector; if what was picked is a wall work, put the
+				# caret in its line so it is writable the moment it is chosen.
+				if String((_edit_records[idx] as Dictionary).get("kind", "")) == "showing" 						and _page_line != null and is_instance_valid(_page_line):
+					_page_line.grab_focus()
+				# AND THE BRANCH IS DONE. Without this the selecting click fell
+				# out of the doll house entirely and reached the walking lane's
+				# world-space reader, which is why iso answered a click with a
+				# floating panel instead of the editor.
+				return
 			else:
 				# LEFT CLICK WALKS (Palle): empty floor becomes the doll's goal
 				_doll_walk_to = Vector3(pt.x, 0.0, pt.z)
@@ -13735,7 +13747,10 @@ func _input(event: InputEvent) -> void:
 	# THE PAGE OPENS ON A DOUBLE TAP, and a SINGLE CLICK reads it where it
 	# hangs. Showing records are collected in both modes, so neither needs an
 	# editor armed: walk up, click to read, double-tap to write.
-	if not _vr and event is InputEventMouseButton:
+	# ...WHILE WALKING. In the doll house the inspector is the affordance and a
+	# floating world panel is just something else to click past, so the reader
+	# stays out of iso entirely (2026-08-24).
+	if not _vr and not _dollhouse and event is InputEventMouseButton:
 		var pmb := event as InputEventMouseButton
 		if pmb.pressed and pmb.button_index == MOUSE_BUTTON_LEFT and pmb.double_click:
 			if _page_open_at(pmb.position):
