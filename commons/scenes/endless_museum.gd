@@ -6651,7 +6651,15 @@ func _build_segment() -> void:
 							"pearl": String(deal.get("pearl", "")) if deal is Dictionary else "",
 							"index": int(ch_node.get_meta("em_showing_card")) + 1,
 							"id": "%s · %s · %02d" % [next_seq, String(deal.get("pearl", "")) if deal is Dictionary else "-", int(ch_node.get_meta("em_showing_card")) + 1],
-							"world": [snappedf((ch_node as Node3D).global_position.x, 0.1), snappedf((ch_node as Node3D).global_position.y, 0.1), snappedf((ch_node as Node3D).global_position.z, 0.1)]})
+							"world": [snappedf((ch_node as Node3D).global_position.x, 0.1), snappedf((ch_node as Node3D).global_position.y, 0.1), snappedf((ch_node as Node3D).global_position.z, 0.1)],
+							# THE CELL, not just the world point (2026-08-26). Only
+							# the museum knows this hall's zbase, so a reader
+							# outside it could never turn a world z into a tile row
+							# — and every editor that wants to draw a wall work ON
+							# the hall plan needs exactly that. Written where it is
+							# known rather than guessed at downstream.
+							"cell": [int(floor((ch_node as Node3D).global_position.x)),
+								int(floor((ch_node as Node3D).global_position.z)) - zbase - VESTIBULE_H]})
 				_save_showing_cards()
 				# every showing proxy becomes an editor record of kind "showing"
 				if true:   # ALWAYS: showing records in both modes (the editor KEYS stay desktop-only)
