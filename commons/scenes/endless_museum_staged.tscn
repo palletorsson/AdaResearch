@@ -25,3 +25,5 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7.5, 0
 
 [node name="Museum" type="Node3D" parent="."]
 script = ExtResource("2_museum")
+start_chapter = "primitives"
+start_map = "Point_One"
