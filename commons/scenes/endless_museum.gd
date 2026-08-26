@@ -7136,6 +7136,15 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 			gs.set("map_name", map_name)
 			gs.set("bare_world", true)
 			gs.set("skip_player_spawn", true)
+			# THE INTERACTABLES ARRIVE OVER SEVERAL FRAMES (2026-08-26). Timed
+			# per phase: this grid's build is structure 0 ms, utilities 0 ms,
+			# interactables 1281 ms - thirteen artifacts at about 98 ms each,
+			# one blocking pass, at a threshold. The structure IS the floor
+			# here (cube tops flush with the deck over a burning basin) and it
+			# is instant either way, so spreading the exhibits costs the walker
+			# nothing but the sight of them arriving. 8 ms is the museum's own
+			# stamp budget, near enough a frame at 90 Hz.
+			gs.set("interactable_place_budget_ms", 8.0)
 			gs.position = Vector3(0.0, -gdepth, float(VESTIBULE_H))
 			seg.add_child(gs)
 			if is_inside_tree():

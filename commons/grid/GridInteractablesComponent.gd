@@ -135,6 +135,19 @@ var cube_size: float = 1.0
 var gutter: float = 0.0
 var current_palette: String = ""
 var cache_artifact_registry: bool = true
+## PLACE ACROSS FRAMES (2026-08-26, Palle: "fix the grid build itself").
+## Measured with per-phase timing inside GridSystem: a grid standing in the
+## museum spends its whole build here - structure 0 ms, utilities 0 ms,
+## interactables 1281 ms for thirteen of them, about 98 ms each. In a headset
+## that is a one-and-a-half-second freeze at a threshold.
+##
+## 0 keeps the old behaviour EXACTLY - one blocking pass, no await taken, no
+## caller's ordering changed - and every existing map loads as it always did.
+## Above 0 the loop yields whenever it has spent that many milliseconds this
+## frame. Only the endless museum sets it, and only for the grid it embeds in
+## a basin, where the STRUCTURE is the floor and arrives instantly either way,
+## so nothing the walker stands on is ever late.
+@export var place_budget_ms: float = 0.0
 
 # Interactable objects tracking
 var interactable_objects: Dictionary = {}
@@ -564,12 +577,19 @@ func generate_interactables(interactable_data):
 	# Get grid dimensions from structure component
 	var dimensions = structure_component.get_grid_dimensions()
 	
+	var _budget_t0: int = Time.get_ticks_msec()
 	for z in range(min(dimensions.z, interactable_layout.size())):
 		var row = interactable_layout[z]
 		for x in range(min(dimensions.x, row.size())):
 			var token = str(row[x]).strip_edges()
 			
 			if token != " " and not token.is_empty():
+				# the yield sits BEFORE the placement rather than after it, so
+				# one check covers every branch below (mc:, gridagent:, the
+				# ordinary path) instead of one per early continue
+				if place_budget_ms > 0.0 and float(Time.get_ticks_msec() - _budget_t0) >= place_budget_ms:
+					await get_tree().process_frame
+					_budget_t0 = Time.get_ticks_msec()
 				# `#` prefix = COMMENT. The token stays in map_data.json
 				# as reference / intent ("I considered putting X here") but
 				# is skipped at generation time. Strip a single leading `#`

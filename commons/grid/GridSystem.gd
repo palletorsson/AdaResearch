@@ -76,6 +76,11 @@ var _ecosystem_spawner: Node3D = null
 # Signals
 signal map_loaded(map_name: String, format: String)
 signal map_generation_complete()
+
+## Handed to GridInteractablesComponent before it places. 0 = one blocking
+## pass, as always. The endless museum sets it for the grid it embeds in a
+## basin, where a 1281 ms placement pass is a freeze at a threshold.
+@export var interactable_place_budget_ms: float = 0.0
 signal interactable_activated(object_id, position, data)
 signal grid_animation_started()
 signal grid_animation_complete()
@@ -448,7 +453,26 @@ func _on_data_load_failed(failed_map_name: String, error: String):
 	emit_signal("map_generation_complete")  # With error state
 
 # Generate the complete grid using components
+## THE BUILD, PHASE BY PHASE (2026-08-26). A grid standing inside the museum
+## costs 1978 ms for Trans_Translation against 490 for the next grid hall, and
+## which PHASE owns that has never been measured - the first two attempts at
+## this were diagnosed by reading rather than timing, and one of them was
+## wrong. Prints once per build; nothing depends on it.
+var _phase_t0: int = 0
+var _phase_last: int = 0
+
+func _phase(what: String) -> void:
+	var now := Time.get_ticks_msec()
+	if what == "":
+		_phase_t0 = now
+		_phase_last = now
+		return
+	print("[grid-phase] %-26s %5d ms" % [what, now - _phase_last])
+	_phase_last = now
+
+
 func _generate_grid():
+	_phase("")
 	if generation_in_progress:
 		print("GridSystem: Generation already in progress, skipping")
 		return
@@ -467,6 +491,7 @@ func _generate_grid():
 	# Generate structure first
 	var structure_data = data_component.get_structure_data()
 	structure_component.generate_structure(structure_data, dimensions)
+	_phase("structure")
 
 	# Update PlayerBoundsCheck if found
 	_update_player_bounds(dimensions)
@@ -502,6 +527,7 @@ func _on_structure_complete(cube_count: int):
 	var utility_data = data_component.get_utility_data()
 	var utility_definitions = data_component.get_utility_definitions()
 	utilities_component.generate_utilities(utility_data, utility_definitions)
+	_phase("utilities")
 
 # Apply the map's modifier op-stack to the generated structure (additive).
 # Reads map_data.json's top-level `modifiers` array, builds a base cell model
@@ -558,7 +584,12 @@ func _on_utilities_complete(utility_count: int):
 
 	# Generate interactables
 	var interactable_data = data_component.get_interactable_data()
-	interactables_component.generate_interactables(interactable_data)
+	# await: with place_budget_ms 0 this returns synchronously and nothing
+	# changes; above 0 _generate_grid becomes a coroutine, its caller carries
+	# on, and map_generation_complete still fires at the true end of the build
+	interactables_component.place_budget_ms = interactable_place_budget_ms
+	await interactables_component.generate_interactables(interactable_data)
+	_phase("interactables")
 
 # Spawn CatalystVents from editor-painted `e` utility tokens (additive).
 # Translates "e" / "e:RATE:WAVE:DELAY[:KIND]" cells in the utilities layout
@@ -753,6 +784,8 @@ func _on_spawn_complete(spawn_position: Vector3):
 
 	generation_in_progress = false
 	print("GridSystem: ✅ Grid generation completed successfully")
+	_phase("to map_generation_complete")
+	print("[grid-phase] TOTAL %s: %d ms" % [map_name, Time.get_ticks_msec() - _phase_t0])
 	emit_signal("map_generation_complete")
 
 # Handle ecosystem spawner creation from map settings
