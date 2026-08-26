@@ -285,8 +285,15 @@ def build():
     # museum does not have.
     segments, z = [], 0
     for i, hall in enumerate(halls):
-        if i:
-            prev = halls[i - 1]
+        if True:
+            # EVERY SEGMENT HAS A VESTIBULE, INCLUDING THE FIRST. This used to
+            # put a hallway only BETWEEN halls — 243 of them — which reads as
+            # obvious and is wrong: the engine's only z cursor is
+            # `_next_z += h + VESTIBULE_H + porch + court` (endless_museum.gd
+            # :5694), one vestibule per segment, and ada_run/em_built.json's
+            # segment 0 records z0 0, z1 27 for a hall of h 23. So the museum
+            # is entered through a vestibule, not walked into cold.
+            prev = halls[i - 1] if i else hall
             vw = max(LOBBY_W, prev["w"], hall["w"])
             # The hallway carries the chapter of the hall it OPENS, not the one
             # it leaves. That is what makes the chapter bands tile exactly:
@@ -312,11 +319,23 @@ def build():
         srcs = {s["source"] for s in hs}
         source = "authored+ribbon" if len(srcs) > 1 else ("ribbon" if "ribbon" in srcs
                                                           else "authored")
+        # BUILT OR PROPOSED, AND THE PAGE MUST BE ABLE TO SAY WHICH.
+        # endless_museum.gd builds a plan row from its own map ONLY when the
+        # row says authored == "map" (:4858). In ada_run/em_plan.json that is
+        # true of 67 of 223 rows, all in the five chapters map_authored.json
+        # names; the other 156 build from one of 26 templates. And
+        # `grep -c Ribbon endless_museum.gd` is 0 — the engine has never heard
+        # of a ribbon hall. So seventeen of these twenty-two chapters are a
+        # PROPOSAL, and a strip that does not say so is claiming a museum that
+        # does not exist. Roughly two thirds of the length is proposal.
+        built = seq in authored
+        for s2 in own:
+            s2["built"] = built
         chapters.append({"sequence": seq, "order": order,
                          "z0": own[0]["z0"], "z1": hs[-1]["z1"],
                          "halls": len(hs),
                          "artifacts": sum(len(s["artifacts"]) for s in hs),
-                         "source": source})
+                         "source": source, "built": built})
 
     n_halls = sum(1 for s in segments if s["kind"] == "hall")
     doc = {"schema": SCHEMA, "axis": "z", "unit_m": 1.0, "vestibule_h": VESTIBULE_H,
@@ -324,7 +343,19 @@ def build():
                       "vestibules": sum(1 for s in segments if s["kind"] == "vestibule"),
                       "cells_z": z, "metres": float(z),
                       "artifacts": sum(len(s["artifacts"]) for s in segments),
-                      "sequences": len(chapters)},
+                      "sequences": len(chapters),
+                      "built_metres": float(sum(c["z1"] - c["z0"] for c in chapters
+                                                if c["built"])),
+                      "proposed_metres": float(sum(c["z1"] - c["z0"] for c in chapters
+                                                   if not c["built"])),
+                      "built_chapters": sum(1 for c in chapters if c["built"]),
+                      # STATED, NOT IMPLIED. The engine also crops each map to
+                      # its last row of content, appends an exit chicane to an
+                      # authored hall, and can insert a porch or a court between
+                      # buildings. Every one of those makes the museum LONGER
+                      # than this strip, so 4,852 is a floor and not a length.
+                      "courts_counted": False,
+                      "crop_and_chicane_counted": False},
            "chapters": chapters, "segments": segments}
     return doc, probs
 
