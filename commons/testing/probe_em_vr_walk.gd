@@ -1,0 +1,122 @@
+extends SceneTree
+## THE VR WALK, ON THE DESKTOP (2026-08-26, Palle: "can we test simulate the vr
+## on the computer to test loading times and map progression").
+##
+## What this DOES simulate: every millisecond the museum spends in GDScript —
+## opening a hall, draining its exhibit blueprints, promoting and demoting the
+## three-shell window, freeing what falls behind. That is where the museum's
+## own boot and streaming cost lives, and it is the same code on both machines.
+##
+## What it CANNOT simulate, and must not be read as: the Quest's GPU, the XR
+## compositor, shader pipeline compilation on Adreno, or the hand rig. A
+## headless run uses the dummy renderer. A stall reported here is a REAL stall;
+## the absence of one here does not mean the headset is smooth.
+##
+##   godot --headless --path . --xr-mode off --script res://commons/testing/probe_em_vr_walk.gd -- --metres=420 --step=2
+
+var _met: Dictionary = {}
+const OUT := "res://ada_run/vr_walk.txt"
+
+
+func _initialize() -> void:
+	call_deferred("_run")
+
+
+func _arg(n: String, fb: String) -> String:
+	for a in OS.get_cmdline_user_args():
+		if String(a).begins_with("--%s=" % n):
+			return String(a).substr(n.length() + 3)
+	return fb
+
+
+func _run() -> void:
+	var metres := float(_arg("metres", "420"))
+	var step := float(_arg("step", "2"))
+	# THE RIG FIRST. --em-vr sets _vr, but with no XRCamera3D the museum's
+	# _process returns early waiting for one and nothing streams at all. Give
+	# it an origin and an eye and it runs the REAL VR lane — build ahead, free
+	# behind, three-shell ownership, the one-hall render window — with the
+	# probe doing nothing but walking the rig forward.
+	var origin := XROrigin3D.new()
+	origin.name = "ProbeXROrigin"
+	origin.current = true
+	var eye := XRCamera3D.new()
+	eye.name = "ProbeXRCamera"
+	eye.position = Vector3(0, 1.65, 0)
+	origin.add_child(eye)
+	get_root().add_child(origin)
+
+	var inst: Node3D = (load("res://commons/scenes/endless_museum.tscn") as PackedScene).instantiate() as Node3D
+	inst.set("_force_vr", true)
+	inst.set("EM_CONTROL", "res://ada_run/_trial_vw_control.json")
+	inst.set("_overrides_path", "res://ada_run/em_overrides.json")
+	inst.set("_hand_path", "res://ada_run/necklace_hand.json")
+	var ctl := FileAccess.open("res://ada_run/_trial_vw_control.json", FileAccess.WRITE)
+	ctl.store_string(JSON.stringify({"first_chapter": "", "first_map": "",
+		"dollhouse": 0, "grid_pack": 0}, " "))
+	ctl.close()
+	var t_boot := Time.get_ticks_msec()
+	get_root().add_child(inst)
+	await create_timer(3.0).timeout
+	var boot_ms := Time.get_ticks_msec() - t_boot
+
+	var rep := "THE VR WALK — %d m in %.1f m steps (headless: GDScript cost only, no GPU)\n" % [int(metres), step]
+	rep += "  museum stood up in %d ms\n\n" % boot_ms
+	rep += "  the museum reports vr=%s
+
+" % str(inst.get("_vr"))
+	var player: Node3D = inst.get("_player") as Node3D
+	var halls: Array = []          # one row per hall as it opens
+	var stalls: Array = []         # every step over 40 ms
+	var seen := 0
+	var z := 0.0
+	var steps := 0
+	var total_us := 0
+	var vr_us := 0
+	while z < metres:
+		z += step
+		origin.position.z = z              # the rig walks; the museum follows the eye
+		if player != null:
+			player.position.z = z          # keep the desktop body in step, as the death does
+		var t0 := Time.get_ticks_usec()
+		await process_frame
+		await physics_frame
+		var t1 := Time.get_ticks_usec()
+		var t2 := t1                       # the museum ran its own VR pass inside _process
+		steps += 1
+		total_us += t1 - t0
+		vr_us += t2 - t1
+		var segs: Array = inst.get("_segments")
+		for s_v0 in segs:
+			var sd0: Dictionary = s_v0
+			var nm: String = String(sd0.get("map", sd0.get("pearl", "?")))
+			if nm == "" or _met.has(nm):
+				continue
+			_met[nm] = true
+			halls.append({"z": z, "map": nm, "ms": float(t1 - t0) / 1000.0,
+				"resident": segs.size()})
+		seen = segs.size()
+		if (t1 - t0) > 40000:
+			var here := ""
+			for s_v in segs:
+				var sd: Dictionary = s_v
+				if z >= float(sd["z0"]) and z < float(sd["z1"]):
+					here = String(sd.get("map", "?"))
+			stalls.append({"z": z, "ms": float(t1 - t0) / 1000.0, "where": here})
+	rep += "  MAP PROGRESSION — %d hall(s) opened over %d m\n" % [halls.size(), int(metres)]
+	for h_v in halls:
+		var h: Dictionary = h_v
+		rep += "    z %6.1f  %-28s opened in %7.1f ms   %d resident\n" % [
+			h["z"], h["map"], h["ms"], h["resident"]]
+	rep += "\n  LOADING — %d steps, %.1f ms mean, VR ownership pass %.2f ms mean\n" % [
+		steps, float(total_us) / 1000.0 / maxf(1.0, float(steps)), float(vr_us) / 1000.0 / maxf(1.0, float(steps))]
+	stalls.sort_custom(func(a, b): return float(a["ms"]) > float(b["ms"]))
+	rep += "  %d step(s) over 40 ms — in a headset every one of these is a visible hitch:\n" % stalls.size()
+	for k in range(mini(10, stalls.size())):
+		var s2: Dictionary = stalls[k]
+		rep += "    z %6.1f  %8.1f ms  %s\n" % [s2["z"], s2["ms"], s2["where"]]
+	var f := FileAccess.open(OUT, FileAccess.WRITE)
+	f.store_string(rep)
+	f.close()
+	print(rep)
+	quit(0)
