@@ -348,6 +348,19 @@ class MapGraph:
         # layer's raw value which may be 0/void under the spawn marker).
         self.spawn = find_spawn(self.utils)
         self.spawn_raw = find_spawn_raw(self.utils)
+        # NO 's' MEANS THE FLOOR CENTROID, NOT (0, 0). The 's' utility is
+        # optional: GridSpawnComponent places the player at the centroid of the
+        # floor cells when it is absent (UtilityRegistry.gd line 45 and the
+        # SPAWN POLICY block in GridSpawnComponent.gd). Falling back to (0, 0)
+        # started the reachability walk in the wall corner of every map without
+        # an explicit spawn, so "unreachable" was a fact about the corner. It
+        # was never loud, because an unreachable artifact is a WARN — 223
+        # generated halls passed a check that had walked nowhere.
+        if not self.spawn_raw and self.walkable:
+            cz = sum(rc[0] for rc in self.walkable) / float(len(self.walkable))
+            cc = sum(rc[1] for rc in self.walkable) / float(len(self.walkable))
+            self.spawn = min(self.walkable,
+                             key=lambda rc: (rc[0] - cz) ** 2 + (rc[1] - cc) ** 2)
         if self.spawn not in self.walkable:
             self.walkable.add(self.spawn)
         # Infer spawn height from neighbors so BFS can step onto adjacent floor

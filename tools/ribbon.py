@@ -61,6 +61,16 @@ COST_FREE = 1.0
 COST_BUDGET = 3.0
 # how far down the queue to look when the next artifact does not fit this slot
 LOOKAHEAD = 40
+# THE AIR IS A DISTRIBUTION, NOT A FLOOR. GAP was measured as the MEDIAN of the
+# hand-authored spacings and implemented as a minimum, and because a greedy
+# scan takes the first legal cell the minimum became the realised value: 62 per
+# cent of ribbon pairs sat at exactly 3.00 cells against the hand's 20, and 43
+# rooms had every artifact the same distance from its neighbour — a hall ruled
+# off rather than composed. This cycle reproduces the hand's stranger spacings
+# (2:30% 3:40% 4:20% 5:10%, from the histogram 2:21 3:26 4:15 5:7 6:1). It is a
+# fixed sequence rather than a random draw, so a hall is the same hall on every
+# run — this repo has been bitten by unseeded variation before.
+AIR_CYCLE = (4, 3, 4, 4, 3, 3, 6, 5, 3, 4)
 
 EXPENSIVE_CATS = {"physics", "physics_simulation", "shaders", "isosurfaces",
                   "swarmintelligence", "softbodies", "procedural"}
@@ -241,8 +251,48 @@ def ribbon_plans():
         if not (9 <= w <= 19 and w % 2 == 1):
             continue
         out.append((k, v))
-    out.sort(key=lambda t: -(t[1]["w"] * len(t[1]["tile"])))
-    return out
+    # RANKED BY WHERE A VISITOR CAN STAND IN THE OPEN, not by floor area.
+    #
+    # Sorting by w * h picked wide buildings chopped into 3- and 4-deep bands,
+    # and since the rhythm only ever reaches the first five entries, 155 of the
+    # first 186 halls built contained NOT ONE floor cell three or more cells
+    # from a wall. So 92 percent of everything placed ended up hung against a
+    # wall against the hand maps' 43 percent, and the ribbon was BELOW chance
+    # on islanded artifacts — not because the fill preferred walls but because
+    # the halls it was given had no middle.
+    #
+    # The filter matters as much as the sort: ranking by deep FRACTION alone
+    # promotes the degenerate 2-deep bay plan, which is almost all "deep" by
+    # its own measure and collapses the fill to four artifacts a hall. So it
+    # ranks by the deep-cell COUNT among plans with a real floor.
+    def deep_cells(tile):
+        h, w2 = len(tile), len(tile[0])
+        floor = {(x, z) for z in range(h) for x in range(w2)
+                 if str(tile[z][x]).strip() in ("1", "1s")}
+        # deep = a floor cell with two clear cells of floor all round it, so a
+        # visitor standing there is in the open rather than beside something
+        n = 0
+        for (x, z) in floor:
+            near_edge = False
+            for dx in range(-2, 3):
+                for dz in range(-2, 3):
+                    if (x + dx, z + dz) not in floor:
+                        near_edge = True
+                        break
+                if near_edge:
+                    break
+            if not near_edge:
+                n += 1
+        return len(floor), n
+    ranked = []
+    for k, v in out:
+        fl, deep = deep_cells(v["tile"])
+        ranked.append((k, v, fl, deep))
+    roomy = [r for r in ranked if r[2] >= 150]
+    roomy.sort(key=lambda r: (-r[3], -r[2]))
+    rest = [r for r in ranked if r[2] < 150]
+    rest.sort(key=lambda r: -(r[1]["w"] * len(r[1]["tile"])))
+    return [(k, v) for k, v, _f, _d in roomy] + [(k, v) for k, v, _f, _d in rest]
 
 
 def cut_window(tile, want_h):
@@ -350,49 +400,151 @@ def main():
             if k2 not in seen_xy:
                 seen_xy.add(k2)
                 slots.append(s)
-        slots.sort(key=lambda s: (s["z"], s["x"]))
+        # SCARCE FIRST, THEN READING ORDER. A hall stops at its quota, so a
+        # long run sitting late in (z, x) order is never reached — three of
+        # color's seven halls offered a run that fits a 1x9 artifact and all
+        # three filled up with small things before getting there, which is why
+        # rainbow_hallway and spectrum_forest were left over with slots free.
+        # 46 artifacts in the corpus need a run of 7 or more and only 13 of the
+        # 121 plans offer one, so the scarce offer has to be spent first.
+        def _scarce(sl):
+            return 0 if ((sl.get("kind") == "run" and sl.get("len", 1) >= 5)
+                         or MS.slot_area(sl) >= 9) else 1
+        slots.sort(key=lambda s: (_scarce(s), s["z"], s["x"]))
 
         # the hall's own appetite, from the measured density
         floor_n = sum(1 for r in tile for c2 in r if str(c2).strip() in ("1", "1s"))
         target = quota if shape else max(3, int(round(floor_n / PER_ARTIFACT)))
 
+        # WHAT FITS WHERE, ONCE. fits() does not depend on what is already
+        # placed, so the whole slot-by-token table is computed a single time
+        # and the three air settings reuse it.
+        fit_table = []
+        for si, s2 in enumerate(slots):
+            toks = [t for t in pending if shapes.get(t) and MS.fits(shapes[t], s2)]
+            if toks:
+                fit_table.append((si, s2, toks))
+
         def fill(gap, kin_gap):
             """One hall's worth at a given AIR. Touches nothing — returns what
             it would take, so the same hall can be tried at three spacings and
-            the best kept."""
+            the best kept.
+
+            CHOSEN, NOT ENCOUNTERED. This used to walk the slots in order and
+            take the first artifact that fit each one, which made the SORT the
+            composition: slots run in (z, x) reading order, so the halls came
+            out in horizontal bands — 90 percent of ribbon artifacts shared a z
+            with another, against 36 percent in the hand-authored maps, whose
+            bias is the other way (73 percent share an x, a colonnade). A
+            raster is not a composition. Now every remaining (slot, artifact)
+            pair is scored and the best one is taken, so alignment can be
+            asked for instead of falling out of the loop order.
+            """
             placed, cost, last_fam, taken = [], 0.0, None, []
-            avail = list(pending)
-            for s2 in slots:
-                if not avail or len(placed) >= target:
+            avail = set(pending)
+            order_of = {t: i for i, t in enumerate(pending)}
+            xs, zs = {}, {}
+            while avail and len(placed) < target:
+                best = None
+                for si, s2, toks in fit_table:
+                    if any(q["si"] == si for q in placed):
+                        continue
+                    # A SCARCE SLOT IS SEARCHED AGAINST THE WHOLE QUEUE. Only
+                    # 13 of the 121 hall plans offer a run 7 cells or longer
+                    # and 46 artifacts need one, so a 2-long artifact taking
+                    # the single 13-long run means the 9-long artifacts are
+                    # never placed at all — measured on color, where
+                    # rainbow_hallway and spectrum_forest (both 1x9) came out
+                    # left over while three halls held a long run free.
+                    scarce = ((s2.get("kind") == "run" and s2.get("len", 1) >= 5)
+                              or MS.slot_area(s2) >= 9)
+                    # ALIGNMENT: does this position continue a line something
+                    # already standing in this hall is on? Two artifacts on one
+                    # axis read as a decision; scattered ones read as noise.
+                    #
+                    # A HALL WANTS A DIRECTION, NOT A LATTICE. Scoring both
+                    # axes equally took the shared-axis share to 82 percent on
+                    # x AND 75 on z, which is a grid — and a grid is only a
+                    # tidier raster. The hand-authored maps are lopsided: 73
+                    # percent share an x against 36 percent sharing a z, a
+                    # colonnade rather than a mesh. So the axis this hall has
+                    # already committed to is worth double, and x breaks the
+                    # tie because that is the way the hand leans.
+                    # A hall commits to ONE axis. Rewarding both equally gave
+                    # 89 percent sharing an x AND 86 percent sharing a z, which
+                    # is a lattice — and a lattice is only a tidier raster. The
+                    # hand maps are lopsided, 73 percent on x against 36 on z:
+                    # a colonnade, with the cross-axis left ragged. So the axis
+                    # this hall has already committed to is rewarded and the
+                    # other earns nothing. Penalising it took the split to 93/17 —
+                    # past the hand in the other direction — and the size of the
+                    # penalty made no difference, because the +2.0 on the major
+                    # axis already decides. Neutral on the minor axis is enough.
+                    on_x, on_z = s2["x"] in xs, s2["z"] in zs
+                    dom_x = sum(1 for v in xs.values() if v > 1)
+                    dom_z = sum(1 for v in zs.values() if v > 1)
+                    major = "x" if dom_x >= dom_z else "z"
+                    align = 0.0
+                    if on_x:
+                        align += 2.0 if major == "x" else 0.0
+                    if on_z:
+                        align += 2.0 if major == "z" else 0.0
+                    for t in toks:
+                        if t not in avail:
+                            continue
+                        qi = order_of[t]
+                        if not scarce and qi >= LOOKAHEAD + len(placed):
+                            continue
+                        fam = family_of(t, reg.get(t, {}))
+                        # KIN IS JUDGED AGAINST THE NEIGHBOUR, NOT THE CLOCK.
+                        # The rule was "kin of the artifact placed immediately
+                        # before", which is an order relation standing in for a
+                        # spatial one: an artifact could be kin of the thing it
+                        # would end up next to and still be held three cells
+                        # off because something unrelated was placed in
+                        # between. The hand maps put 19 percent of their
+                        # nearest-neighbour pairs at one cell (Color_Nails is a
+                        # whole room of variants); the ribbon managed 8. What
+                        # decides is whether the artifact is kin of whatever it
+                        # would actually STAND BESIDE.
+                        # INDEXED BY THE PICK, NOT THE CANDIDATE. Keying this
+                        # on the queue position too meant every candidate faced
+                        # a different requirement and the loosest one always
+                        # won, so the pitch simply moved from 3 to 2 (123 of
+                        # 237 pairs). All candidates for one pick must face the
+                        # same air for the distribution to mean anything.
+                        want = AIR_CYCLE[len(placed) % len(AIR_CYCLE)]
+                        if gap <= 1:
+                            want = 1
+                        elif gap == 2:
+                            want = max(1, want - 1)
+                        ok = True
+                        for q in placed:
+                            dd = math.hypot(s2["x"] - q["x"], s2["z"] - q["z"])
+                            if dd < (kin_gap if fam == q["fam"] else want):
+                                ok = False
+                                break
+                        if not ok:
+                            continue
+                        w2 = MS.waste(shapes[t], s2)
+                        # scarce spent first, then alignment, then fit, then
+                        # curriculum order, then reading order as a last resort
+                        k2 = (0 if scarce else 1, -align, w2, qi, s2["z"], s2["x"])
+                        if best is None or k2 < best[0]:
+                            best = (k2, si, s2, t, fam)
+                if best is None:
                     break
-                # NOT STRICTLY THE HEAD. Taking only pending[0] meant one
-                # artifact that fits nowhere blocked every artifact behind it:
-                # cellularautomata made ONE hall and left 74 over, because its
-                # fifth token wanted a slot no hall offered. Look a little way
-                # down the queue — curriculum order is a preference, not a lock.
-                tok = None
-                for cand in avail[:LOOKAHEAD]:
-                    cs = shapes.get(cand)
-                    if cs and MS.fits(cs, s2):
-                        tok = cand
-                        break
-                if tok is None:
-                    continue
-                fam = family_of(tok, reg.get(tok, {}))
-                need = kin_gap if fam == last_fam else gap
-                if any(math.hypot(s2["x"] - q["x"], s2["z"] - q["z"]) < need for q in placed):
-                    continue
+                _k, si, s2, tok, fam = best
                 c = max(0.0, cost_of(reg.get(tok, {})) - COST_FREE)
-                # the sequence's quota outranks the load budget: a hall that is
-                # meant to hold twelve does not stop at four because three of
-                # them were expensive. The budget spaces, it no longer walls.
                 if placed and cost + c > COST_BUDGET and not shape:
                     break                  # THE WALL GOES HERE — too much load
-                placed.append({"x": s2["x"], "z": s2["z"], "token": tok,
+                placed.append({"x": s2["x"], "z": s2["z"], "token": tok, "si": si,
                                "kind": s2["kind"], "fam": fam, "cost": c})
+                xs[s2["x"]] = xs.get(s2["x"], 0) + 1
+                zs[s2["z"]] = zs.get(s2["z"], 0) + 1
                 cost += c
                 last_fam = fam
-                avail.remove(tok)
+                avail.discard(tok)
                 taken.append(tok)
             return placed, cost, taken
 
@@ -442,7 +594,22 @@ def main():
         ut = [["" for _ in range(w)] for _ in range(hh)]
         it = [["" for _ in range(w)] for _ in range(hh)]
         for p in h["placed"]:
-            it[p["z"]][p["x"]] = p["token"]
+            # FACE THE ROOM. Not one of the 1442 placements written before this
+            # carried a rotation, while 96 percent of the hand-authored ones do
+            # and a quarter of those are non-zero — an artifact hung on a wall
+            # facing into it is showing the visitor its back. The rotation is
+            # read off the geometry: whichever side has the most open floor
+            # within two cells is the side to face.
+            best_dir, best_open = None, -1
+            for deg, (dx, dz) in ((0, (0, 1)), (90, (1, 0)), (180, (0, -1)), (270, (-1, 0))):
+                openness = 0
+                for k in (1, 2):
+                    nx, nz = p["x"] + dx * k, p["z"] + dz * k
+                    if 0 <= nz < hh and 0 <= nx < w and st[nz][nx] == "1":
+                        openness += 3 - k
+                if openness > best_open:
+                    best_open, best_dir = openness, deg
+            it[p["z"]][p["x"]] = ("%s:%d" % (p["token"], best_dir)) if best_dir else p["token"]
         taken = {(p["x"], p["z"]) for p in h["placed"]}
         sp = tp = None
         for z in range(1, hh - 1):
@@ -455,7 +622,14 @@ def main():
                 if st[z][x] == "1" and (x, z) not in taken and (x, z) != sp:
                     tp = (x, z); break
             if tp: break
-        if sp: ut[sp[1]][sp[0]] = "sp"
+        # "s", NOT "sp". A multi-agent audit reported that ribbon.py wrote the
+        # wrong spawn code and that map_pathfinder was the one at fault for not
+        # matching it. It is the other way round: UtilityRegistry.gd line 64
+        # gives "sp" as SCORE POINTS (score_cube.tscn) and line 45 gives "s" as
+        # the spawn point. So every hall written so far carried a stray score
+        # cube and no spawn override at all — the engine fell back to the floor
+        # centroid, which is its documented default, so nothing looked wrong.
+        if sp: ut[sp[1]][sp[0]] = "s"
         if tp:
             st[tp[1]][tp[0]] = "0"
             ut[tp[1]][tp[0]] = "t"
@@ -467,7 +641,11 @@ def main():
                             "metadata": {"source": "tools/ribbon.py", "sequence": args.sequence,
                                          "plan": h["plan"], "n_artifacts": len(h["placed"]),
                                          "cost_guess": round(h["cost"], 1),
-                                         "gap": GAP, "kin_gap": KIN_GAP}},
+                                         # THE AIR ACTUALLY USED, not the constant.
+                                         # The ladder may have settled at 2 or 1,
+                                         # and recording GAP made the metadata a
+                                         # statement about the source code.
+                                         "gap": h.get("air", GAP), "kin_gap": KIN_GAP}},
                "layers": {"structure": st, "utilities": ut, "interactables": it}}
         d = os.path.join(ROOT, "commons", "maps", name)
         os.makedirs(d, exist_ok=True)
@@ -486,6 +664,45 @@ def main():
         subprocess.run([sys.executable, os.path.join(ROOT, "tools", "compact_map_json.py"), fp],
                        cwd=ROOT, capture_output=True)
         wrote.append(name)
+    # A SHORTER RUN MUST NOT LEAVE THE LONGER ONE BEHIND. The cap can drop a
+    # sequence from 15 halls to 14, and the orphan keeps passing every gate
+    # while holding artifacts nothing else knows are placed. Seven such halls
+    # survived one afternoon's re-runs.
+    pref = "Ribbon_%s_" % args.sequence[:14].title()
+    stale, stuck = [], []
+    for d2 in sorted(os.listdir(os.path.join(ROOT, "commons", "maps"))):
+        if d2.startswith(pref) and d2 not in wrote:
+            try:
+                shutil.rmtree(os.path.join(ROOT, "commons", "maps", d2))
+                stale.append(d2)
+            except OSError as e:
+                # NOT ignore_errors. A silently un-deleted hall is exactly the
+                # orphan this block exists to prevent.
+                stuck.append("%s (%s)" % (d2, e.strerror or "locked"))
+    if stale:
+        print("\nremoved %d hall(s) the shorter run no longer needs: %s"
+              % (len(stale), ", ".join(stale)))
+    if stuck:
+        print("\nCOULD NOT REMOVE %d stale hall(s): %s" % (len(stuck), ", ".join(stuck)))
+
+    # AND THE ROSTER IS PART OF WRITING THE MAP. A map missing from
+    # placed_museums.json is invisible to /placed and to every gate that walks
+    # the roster — 227 halls sat on disk unregistered because this used to be a
+    # separate step somebody had to remember.
+    rp = os.path.join(ROOT, "commons", "maps", "sequences", "placed_museums.json")
+    with open(rp, encoding="utf-8") as fh:
+        roster = json.load(fh)
+    blk = roster["sequences"]["placed_museums"]
+    live = sorted(set([n for n in blk["maps"] if not n.startswith(pref)]) | set(wrote))
+    live = [n for n in live
+            if os.path.exists(os.path.join(ROOT, "commons", "maps", n, "map_data.json"))]
+    blk["maps"] = live
+    blk["map_count"] = len(live)
+    with open(rp, "w", encoding="utf-8") as fh:
+        json.dump(roster, fh, indent=1, ensure_ascii=False)
+        fh.write("\n")
+    print("  roster: %d map(s) in placed_museums.json" % len(live))
+
     print("\n  wrote %d map(s):" % len(wrote))
     for n in wrote:
         print("     %-28s %s" % (n, "pathfinder OK" if SR.check_map(n) else "PATHFINDER FAILED"))
