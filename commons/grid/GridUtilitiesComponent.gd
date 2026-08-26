@@ -560,10 +560,29 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 				var rotation_y = float(parameters[0])
 				utility_object.rotation_degrees.y = rotation_y
 				print("GridUtilitiesComponent: Set walkable prism rotation to: %f degrees" % rotation_y)
-			if parameters.size() > 1:
+			if parameters.size() > 1 and str(parameters[1]).strip_edges() != "":
 				var color_param = parameters[1]
 				_apply_color_to_utility(utility_object, color_param)
 				print("GridUtilitiesComponent: Applied color '%s' to walkable prism" % color_param)
+			# PARAM 2 — a hand lift in cube units, added on top of the half-cube seat
+			# above. That seat is DERIVED (it makes the prism bridge floor to +1);
+			# this is the hand overruling it where the derivation does not fit the
+			# step, and the hand outranks derivation.
+			#
+			# GATED BY DATA. Every wp token in the corpus carries at most ONE
+			# parameter — 681 bare, 290 wp:0, 219 wp:180, 203 wp:90, 92 wp:270, 88
+			# wp:-90 — so not one of them can reach this branch, and a map without a
+			# third parameter builds byte-identically. The teleporter has taken a
+			# height offset by this same route for far longer (see "t" above), so
+			# this is an existing convention reaching one more utility, not a new one.
+			if parameters.size() > 2:
+				var raw_lift: String = str(parameters[2]).strip_edges()
+				if raw_lift.is_valid_float():
+					var lift: float = raw_lift.to_float()
+					utility_object.position.y += cube_size * lift
+					print("GridUtilitiesComponent: Raised walkable prism by %.2f cube(s)" % lift)
+				elif not raw_lift.is_empty():
+					print("GridUtilitiesComponent: WARNING - Invalid wp height offset '%s'" % raw_lift)
 		"el":  # Extra light
 			var energy_value = null
 			if parameters.size() > 0:
