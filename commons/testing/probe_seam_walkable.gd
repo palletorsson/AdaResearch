@@ -39,17 +39,54 @@ func _run() -> void:
 	ctl.close()
 	get_root().add_child(inst)
 	await create_timer(3.0).timeout
-	# walk the eye the length of the museum so every hall builds and stays in
-	# the walk map (streaming frees NODES, not _walk_cells)
+	# FLOOD AS YOU WALK, not once at the end. A repair may lay a catwalk, and a
+	# catwalk's cells are pruned when its hall is freed — the geometry dies with
+	# the hall, so the cells must too, or the walk map promises floor over an open
+	# fire pool. Measured once at the end, every route through a hall the visitor
+	# has already left reads as closed. The honest question is whether the walk
+	# was open WHEN THE VISITOR WAS THERE.
 	var player: Node3D = inst.get("_player") as Node3D
+	var seen: Dictionary = {}
+	var ever: Dictionary = {}
 	var z := 0.0
 	while z < metres:
 		z += 3.0
 		if player != null:
 			player.position.z = z
 		await create_timer(0.16).timeout
+		var now: Dictionary = inst.get("_walk_cells")
+		if now == null:
+			continue
+		var rid: Dictionary = inst.get("_ride_cells")
+		var pass_now: Dictionary = now.duplicate()
+		if rid != null:
+			for r_v in rid:
+				pass_now[r_v] = true
+		for k_v in now:
+			ever[k_v] = true
+		var front: Array = []
+		if seen.is_empty():
+			var lo := Vector2i(0, 99999)
+			for k2 in now:
+				if (k2 as Vector2i).y < lo.y:
+					lo = k2
+			if lo.y == 99999:
+				continue
+			seen[lo] = true
+			front.append(lo)
+		else:
+			front = seen.keys()
+		var h := 0
+		while h < front.size():
+			var cur: Vector2i = front[h]
+			h += 1
+			for d_v in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+				var nx: Vector2i = cur + (d_v as Vector2i)
+				if pass_now.has(nx) and not seen.has(nx):
+					seen[nx] = true
+					front.append(nx)
 
-	var cells: Dictionary = inst.get("_walk_cells")
+	var cells: Dictionary = ever
 	var segs: Array = inst.get("_segments")
 	# A RIDE IS A WAY ACROSS. Trans_Introduction walls both side lanes at its
 	# ninth row: the ferry over the pool IS the crossing, so a flood that only
@@ -74,31 +111,14 @@ func _run() -> void:
 	if bands.size() < 2:
 		rep += "  FAIL fewer than two halls were built\n"
 	else:
-		# flood the walk map once, from a cell in the first hall
-		var start := Vector2i(-99999, 0)
-		for k in cells:
-			var c: Vector2i = k
-			if float(c.y) < float((bands[0] as Dictionary)["z1"]):
-				if start.x == -99999 or c.y < start.y:
-					start = c
-		var seen: Dictionary = {}
-		var queue: Array = [start]
-		seen[start] = true
-		while not queue.is_empty():
-			var cur: Vector2i = queue.pop_back()
-			for d_v in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
-				var nx: Vector2i = cur + (d_v as Vector2i)
-				if passable.has(nx) and not seen.has(nx):
-					seen[nx] = true
-					queue.append(nx)
 		var on_foot: int = 0
 		for k9 in seen:
 			if cells.has(k9):
 				on_foot += 1
-		rep += "  flooded from %s: %d of %d walk cell(s) reachable, %d ferried
+		rep += "  walked, hall by hall: %d of %d walk cell(s) reached, %d ferried
 
 " % [
-			str(start), on_foot, cells.size(), seen.size() - on_foot]
+			on_foot, cells.size(), seen.size() - on_foot]
 		rep += "  %-26s %7s %7s %9s\n" % ["hall", "cells", "reached", ""]
 		var last_ok := true
 		for b_v in bands:
