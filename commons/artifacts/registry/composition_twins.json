@@ -1,0 +1,115 @@
+{
+	"registry_info": {
+		"name": "composition_twins",
+		"description": "A control surface and its consequence: a worktable of small grabbable primitives, and the same primitives at ten times the size standing on the floor of the basin below.",
+		"note": "Per-token registry file so parallel builders never share one JSON. auto_ground MUST stay false — a twin standing on a 4 m pool floor gives the grid's grounding pass a min_y of -4.0, a correction of +4.0, and that is INSIDE its 5.0 m cap, so the whole artifact would be lifted out of the pool with only a print. The museum does not ground at all, so this fault is invisible in the museum and shows in every grid map."
+	},
+	"artifacts": {
+		"composition_twins": {
+			"lookup_name": "composition_twins",
+			"name": "Composition Twins",
+			"class_name": "CompositionTwins",
+			"scene": "res://commons/artifacts/composition_twins/composition_twins.tscn",
+			"category": "primitives",
+			"complexity": "intermediate",
+			"description": "A worktable on the bridge holds three small primitives you can pick up. Four metres down, on the floor of the pool, the same three stand at ten times the size — and they follow the hand exactly: same relative place, same rotation, ten times the offset. The bed the small objects are held in is the pool divided by ten, so nothing a hand can do pushes a twin through a rim wall, and the floor of that bed is the table top, which makes the pool floor the table top ten times over. With no basin declared the twins stand in a row on the floor in front of the table instead, so the token is legible wherever it is dropped.",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"auto_ground": false,
+			"map_sequences": [],
+			"sequence": "primitives",
+			"size_group": "large",
+			"hazard": false,
+			"interactions": [
+				"pick up a small primitive and watch its twin walk the pool",
+				"lift one 2 cm off the table and see the big one rise 20",
+				"turn one in the hand — the rotation carries, one for one",
+				"put two small ones together and read the composition from above, at ten times",
+				"let go: it stays where it was left, and so does the twin"
+			],
+			"parameters": {
+				"object_count": 3,
+				"primitives": "cube,sphere,cone",
+				"body_m": 0.16,
+				"twin_scale": 10.0,
+				"offset_scale": 10.0,
+				"basin_depth": 0.0,
+				"pool_m": 7.0,
+				"tether": "line",
+				"table_cells": 2,
+				"table_depth_cells": 1,
+				"table_height": 0.92,
+				"reach_fit": true,
+				"clamp_reach": true,
+				"layout_seed": 7,
+				"pool_light": true,
+				"size_group": "large"
+			},
+			"default_params": {
+				"basin_depth": 0.0
+			},
+			"token_examples": [
+				"composition_twins",
+				"composition_twins#depth:4#width:7",
+				"composition_twins#depth:4#count:4#shape:cube,sphere,wedge,tetra",
+				"composition_twins#depth:4#size:10#span:10#mode:halo"
+			],
+			"token_note": "Every NUMERIC token key here is a name that already appears in GridInteractablesComponent.CONFIG_PARAM_NAMES, and that is load-bearing: `#key:12` on a key outside that list is read as a tutorial shorthand — the artifact receives `true` and the map silently gains a 12 degree rotation. depth=basin_depth, width=pool_m, size=twin_scale, span=offset_scale, count=object_count, height=table_height, cube_size=body_m, radius=reach_m, columns/rows=table cells, generation_seed=layout_seed. The word-valued keys (shape=primitives, mode=tether, pool_offset, pool_light) are safe under either name because a non-numeric value never triggers the shorthand branch. Do NOT reach for `#scale:` — the grid consumes that itself and clamps it to 5.0.",
+			"map_note": "The hall wants map_info.museum.basin = {\"depth\": 4.0, \"glass\": true, \"fire\": false}. glass true gives the walkable lid you stand on to look down AND produces zero fire cells; fire false is belt-and-braces for anyone who later flips the lid off. Do not exceed depth 5.9: CATCH_Y is -6.0 and _catch_if_fallen runs every physics frame.",
+			"footprint": [
+				7,
+				2,
+				4
+			],
+			"footprint_measured": [
+				7,
+				2,
+				4
+			],
+			"footprint_note": "The 7 x 4 figure is the STANDALONE case, where the twins stand in front of the table on the floor. Over a basin the deck footprint is the bench alone, 2 x 1, because the ten-times bodies are below the walk surface — declared at the larger figure because the placement engines cannot see the basin and must not plan a neighbour into a twin.",
+			"spatial_needs": {
+				"footprint_cells": 9,
+				"footprint_source": "authored_capped",
+				"clearance": "front",
+				"reading_radius": 2
+			},
+			"spatial_profile": {
+				"dir_group": "front",
+				"range": 6,
+				"density": "medium",
+				"reading_radius": 2,
+				"derived_from": "manual"
+			},
+			"tags": [
+				"primitives",
+				"composition",
+				"scale",
+				"grab",
+				"twin",
+				"basin",
+				"bridge",
+				"control_surface",
+				"interactive"
+			],
+			"qfep_connection": "F_scale: a scale is not a property of an object but a relation between two of them. The small set is holdable and the large set is not, and they are the same objects — so the visitor's own hand is the unit, and the pool is what that unit means when it is multiplied. The bounded control bed and the basin are one shape at two sizes, which is the closest this corpus comes to making a similarity transform walkable.",
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "unmeasured — run tools/sync_footprints.py after the first capture"
+			}
+		}
+	}
+}

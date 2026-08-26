@@ -13,7 +13,29 @@
       "source": "editor",
       "n_artifacts": 26
     },
-    "title": "Color Becomes a Crowd"
+    "title": "Color Becomes a Crowd",
+    "museum": {
+      "pattern": {
+        "wall": {
+          "group": "p1",
+          "motif": "random",
+          "density": 0.0,
+          "palette": "pastel",
+          "tile_size": 8,
+          "canvas_size": 16
+        },
+        "floor": {
+          "group": "p1",
+          "motif": "random",
+          "density": 0.0,
+          "palette": "pastel",
+          "tile_size": 8,
+          "canvas_size": 16
+        },
+        "wall_tiles": 1.0,
+        "floor_tiles": 1.0
+      }
+    }
   },
   "layers": {
     "structure": [
@@ -195,5 +217,14 @@
     "t": {
       "type": "teleporter"
     }
-  }
+  },
+  "modifiers": [
+    {
+      "op": "colorize",
+      "params": {
+        "color": "#c2382e"
+      },
+      "target": "all"
+    }
+  ]
 }

@@ -13,7 +13,10 @@
       "source": "editor",
       "n_artifacts": 12
     },
-    "title": "The Hallway Dissolves into Rainbow"
+    "title": "The Hallway Dissolves into Rainbow",
+    "museum": {
+      "open_roof": true
+    }
   },
   "layers": {
     "structure": [
@@ -102,7 +105,7 @@
       [" "," "," "," ","color_constellation_office:0:-1"," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," ","subpixel_display:0:-0.5"," "," "," ","spectrum_forest:0:2"," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," ","subpixel_display:0:-0.5"," "," "," ","spectrum_forest:0:0#forest_width:11#forest_depth:14#ceiling_height:4.2"," "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
@@ -168,5 +171,286 @@
     "t": {
       "type": "teleporter"
     }
-  }
+  },
+  "modifiers": [
+    {
+      "op": "colorize",
+      "params": {
+        "color": "#db3d3d"
+      },
+      "target": {
+        "region": [0,0,0,19]
+      }
+    },
+    {
+      "op": "colorize",
+      "params": {
+        "color": "#db583d"
+      },
+      "target": {
+        "region": [1,0,1,19]
+      }
+    },
+    {
+      "op": "colorize",
+      "params": {
+        "color": "#db723d"
+      },
+      "target": {
+        "region": [2,0,2,19]
+      }
+    },
+    {
+      "op": "colorize",
+      "params": {
+        "color": "#db8c3d"
+      },
+      "target": {
+        "region": [3,0,3,19]
+      }
+    },
+    {
+      "op": "colorize",
+      "params": {
+        "color": "#dba73d"
+      },
+      "target": {
+        "region": [4,0,4,19]
+      }
+    },
+    {
+      "op": "colorize",
+      "params": {
+        "color": "#dbc13d"
+      },
+      "target": {
+        "region": [5,0,5,19]
+      }
+    },
+    {
+      "op": "colorize",
+      "params": {
+        "color": "#dbdb3d"
+      },
+      "target": {
+        "region": [6,0,6,19]
+      }
+    },
+    {
+      "op": "colorize",
+      "params": {
+        "color": "#c1db3d"
+      },
+      "target": {
+        "region": [7,0,7,19]
+      }
+    },
+    {
+      "op": "colorize",
+      "params": {
+        "color": "#a7db3d"
+      },
+      "target": {
+        "region": [8,0,8,19]
+      }
+    },
+    {
+      "op": "colorize",
+      "params": {
+        "color": "#8cdb3d"
+      },
+      "target": {
+        "region": [9,0,9,19]
+      }
+    },
+    {
+      "op": "colorize",
+      "params": {
+        "color": "#72db3d"
+      },
+      "target": {
+        "region": [10,0,10,19]
+      }
+    },
+    {
+      "op": "colorize",
+      "params": {
+        "color": "#58db3d"
+      },
+      "target": {
+        "region": [11,0,11,19]
+      }
+    },
+    {
+      "op": "colorize",
+      "params": {
+        "color": "#3ddb3d"
+      },
+      "target": {
+        "region": [12,0,12,19]
+      }
+    },
+    {
+      "op": "colorize",
+      "params": {
+        "color": "#3ddb58"
+      },
+      "target": {
+        "region": [13,0,13,19]
+      }
+    },
+    {
+      "op": "colorize",
+      "params": {
+        "color": "#3ddb72"
+      },
+      "target": {
+        "region": [14,0,14,19]
+      }
+    },
+    {
+      "op": "colorize",
+      "params": {
+        "color": "#3ddb8c"
+      },
+      "target": {
+        "region": [15,0,15,19]
+      }
+    },
+    {
+      "op": "colorize",
+      "params": {
+        "color": "#3ddba7"
+      },
+      "target": {
+        "region": [16,0,16,19]
+      }
+    },
+    {
+      "op": "colorize",
+      "params": {
+        "color": "#3ddbc1"
+      },
+      "target": {
+        "region": [17,0,17,19]
+      }
+    },
+    {
+      "op": "colorize",
+      "params": {
+        "color": "#3ddbdb"
+      },
+      "target": {
+        "region": [18,0,18,19]
+      }
+    },
+    {
+      "op": "colorize",
+      "params": {
+        "color": "#3dc1db"
+      },
+      "target": {
+        "region": [19,0,19,19]
+      }
+    },
+    {
+      "op": "colorize",
+      "params": {
+        "color": "#3da7db"
+      },
+      "target": {
+        "region": [20,0,20,19]
+      }
+    },
+    {
+      "op": "colorize",
+      "params": {
+        "color": "#3d8cdb"
+      },
+      "target": {
+        "region": [21,0,21,19]
+      }
+    },
+    {
+      "op": "colorize",
+      "params": {
+        "color": "#3d72db"
+      },
+      "target": {
+        "region": [22,0,22,19]
+      }
+    },
+    {
+      "op": "colorize",
+      "params": {
+        "color": "#3d58db"
+      },
+      "target": {
+        "region": [23,0,23,19]
+      }
+    },
+    {
+      "op": "colorize",
+      "params": {
+        "color": "#3d3ddb"
+      },
+      "target": {
+        "region": [24,0,24,19]
+      }
+    },
+    {
+      "op": "colorize",
+      "params": {
+        "color": "#583ddb"
+      },
+      "target": {
+        "region": [25,0,25,19]
+      }
+    },
+    {
+      "op": "colorize",
+      "params": {
+        "color": "#723ddb"
+      },
+      "target": {
+        "region": [26,0,26,19]
+      }
+    },
+    {
+      "op": "colorize",
+      "params": {
+        "color": "#8c3ddb"
+      },
+      "target": {
+        "region": [27,0,27,19]
+      }
+    },
+    {
+      "op": "colorize",
+      "params": {
+        "color": "#a73ddb"
+      },
+      "target": {
+        "region": [28,0,28,19]
+      }
+    },
+    {
+      "op": "colorize",
+      "params": {
+        "color": "#c13ddb"
+      },
+      "target": {
+        "region": [29,0,29,19]
+      }
+    },
+    {
+      "op": "colorize",
+      "params": {
+        "color": "#db3ddb"
+      },
+      "target": {
+        "region": [30,0,30,19]
+      }
+    }
+  ]
 }

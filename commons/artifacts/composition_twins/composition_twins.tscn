@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/composition_twins/composition_twins.gd" id="1"]
+
+[node name="CompositionTwins" type="Node3D"]
+script = ExtResource("1")
