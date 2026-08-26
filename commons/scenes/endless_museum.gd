@@ -1327,21 +1327,39 @@ func _loading_box(parent: Node3D, at: Vector3, size: Vector3, color: Color,
 
 ## `base.tscn/MapInfo` waits for GridSystem.map_generation_complete, a signal
 ## the Endless Museum intentionally does not own. It therefore stayed attached
-## to the headset forever. The physical loading painting replaces it here; later
-## subtitle calls may still make MapInfo visible again normally.
+## to the headset forever, so it is hidden here. (The loading room that used
+## to cover it was removed 2026-08-26; later subtitle calls may still make
+## MapInfo visible again normally.
 func _hide_legacy_loading_text() -> void:
 	if not is_inside_tree():
 		return
 	for nv in get_tree().root.find_children("*", "Label3D", true, false):
 		var label := nv as Label3D
-		if label == _boot_loading_label:
-			continue
 		var low := label.text.to_lower()
 		if label.name == "MapInfo" or label.name == "LevelInfoLabel" \
 				or low.begins_with("loading... portal"):
 			label.visible = false
 			if label.has_method("hide_subtitle"):
 				label.call("hide_subtitle")
+
+
+## THE VISITOR IS NEVER HELD INDEFINITELY (2026-08-26). Release waited on the
+## stamp queue emptying, with no other way out — so a first hall that never
+## finished held the gate sealed for as long as the app ran. Palle sat in the
+## loading room reading LOADING. Whatever is unfinished after this long is
+## better finished around a visitor who can walk than in front of one who
+## cannot: the remaining stamps keep draining, they just stop being a door.
+const BOOT_RELEASE_MS := 15000
+
+
+func _boot_overdue() -> bool:
+	if _bake_mode or _shot_path != "" or _studio:
+		return false                   # a proof frame waits for the real thing
+	if Time.get_ticks_msec() - _boot_t0 < BOOT_RELEASE_MS:
+		return false
+	print("[em-boot] %d ms and the first hall is still building (%d stamp(s) left) — opening anyway" % [
+		Time.get_ticks_msec() - _boot_t0, _stamp_queue.size()])
+	return true
 
 
 func _finish_initial_loading() -> void:
@@ -11826,7 +11844,7 @@ func _process(_delta: float) -> void:
 			# needs to complete the same readiness contract as a headset build;
 			# otherwise the loading cell would be correct on-device but impossible
 			# to verify in automation.
-			if not _museum_ready and _stamp_queue.is_empty() and _cartridge_pending_nodes.is_empty():
+			if not _museum_ready and (_boot_overdue() or (_stamp_queue.is_empty() and _cartridge_pending_nodes.is_empty())):
 				_finish_initial_loading()
 			return
 		_vr_wait = 0.0
@@ -11888,7 +11906,7 @@ func _process(_delta: float) -> void:
 			_env_swap()
 	_wall_read_vr_tick()
 	_drain_stamps()
-	if not _museum_ready and _stamp_queue.is_empty() and _cartridge_pending_nodes.is_empty():
+	if not _museum_ready and (_boot_overdue() or (_stamp_queue.is_empty() and _cartridge_pending_nodes.is_empty())):
 		_finish_initial_loading()
 	_vis_timer += _delta
 	if _vis_timer >= 0.3:
