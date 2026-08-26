@@ -4340,6 +4340,7 @@ func _insp_page_section() -> void:
 	var fnt: Font = _page_font()
 	var sect := VBoxContainer.new()
 	sect.name = "PageSection"
+	sect.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	sect.add_theme_constant_override("separation", 7)
 	_doll_insp_box.add_child(sect)
 	var sub := "%s   \u00b7   %s   \u00b7   PAGE %02d" % [chapter.to_upper(), pearl.to_upper(), si + 1]
@@ -4353,6 +4354,9 @@ func _insp_page_section() -> void:
 	sect.add_child(_page_line)
 	sect.add_child(_page_label("FIELD NOTES", 11, PAGE_QUIET, fnt))
 	_page_note = _page_edit(String(book.get("note", "")), 13, Color(0.80, 0.80, 0.82), 190, fnt)
+	# the notes take whatever height the panel has left — the writing is the
+	# thing the panel is for, so it gets the slack rather than the numbers
+	_page_note.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	sect.add_child(_page_note)
 	var vrow := HBoxContainer.new()
 	vrow.add_theme_constant_override("separation", 8)
@@ -12718,13 +12722,18 @@ func _doll_insp_show() -> void:
 		panel.name = "InspectorPanel"
 		panel.add_theme_stylebox_override("panel", _page_box(PAGE_CANVAS, PAGE_FRAME, 2, 18))
 		# explicit rect: a preset alone leaves a fresh Control at 0x0
-		panel.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+		# FULL HEIGHT (2026-08-24, Palle: "the inspector has to fill the height
+		# now the text editing is cropped"). A fixed 640 px box cut the field
+		# notes and the write button clean off the bottom of the panel. RIGHT_WIDE
+		# spans top to bottom, so the writing column is as tall as the screen.
+		panel.set_anchors_preset(Control.PRESET_RIGHT_WIDE)
 		panel.offset_left = -430
 		panel.offset_top = 16
 		panel.offset_right = -18
-		panel.offset_bottom = 640
+		panel.offset_bottom = -16
 		var sc := ScrollContainer.new()
 		sc.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+		sc.size_flags_vertical = Control.SIZE_EXPAND_FILL
 		panel.add_child(sc)
 		_doll_insp_box = VBoxContainer.new()
 		_doll_insp_box.add_theme_constant_override("separation", 8)
@@ -12745,6 +12754,19 @@ func _doll_insp_show() -> void:
 	_doll_insp.visible = true
 	_doll_insp_fill()
 	_insp_page_section()
+
+
+## "[1.0, 0.0, 1.0]" is eleven characters of mostly nothing. A ruling reads
+## as [1,0,1] — the same fact, a third of the width, and a wrapped paragraph
+## of them fits where a column of six did not.
+func _insp_vec(v: Variant) -> String:
+	if not (v is Array):
+		return str(v)
+	var parts := PackedStringArray()
+	for c in (v as Array):
+		var f := float(c)
+		parts.append("%d" % int(round(f)) if is_equal_approx(f, round(f)) else "%.1f" % f)
+	return "[" + ",".join(parts) + "]"
 
 
 func _doll_insp_fill() -> void:
@@ -12792,26 +12814,33 @@ func _doll_insp_fill() -> void:
 			continue
 		var bits: PackedStringArray = []
 		if bool(ov.get("add", false)):
-			bits.append("added by hand")
+			bits.append("+hand")
 		var to_v: Variant = ov.get("to")
 		if to_v is Array and (to_v as Array).size() >= 2:
-			bits.append("to [%d, %d]" % [int((to_v as Array)[0]), int((to_v as Array)[1])])
+			bits.append("→%d,%d" % [int((to_v as Array)[0]), int((to_v as Array)[1])])
 		if ov.has("rotation") and absf(float(ov.get("rotation", 0.0))) > 0.01:
-			bits.append("rot %.0f°" % float(ov.get("rotation")))
+			bits.append("%.0f°" % float(ov.get("rotation")))
 		if ov.has("offset"):
-			bits.append("offset " + str(ov.get("offset")))
+			bits.append(_insp_vec(ov.get("offset")))
 		if ov.has("scale"):
-			bits.append("scale " + str(ov.get("scale")))
+			bits.append("×" + str(ov.get("scale")).pad_decimals(2))
 		if ov.has("y"):
-			bits.append("y " + str(ov.get("y")))
-		if bool(ov.get("remove", false)):
-			bits.append("REMOVED")
+			bits.append("y" + str(ov.get("y")))
+		
 		if not bits.is_empty():
-			ruled.append("  · " + " · ".join(bits))
+			ruled.append(" ".join(bits) + ("✕" if bool(ov.get("remove", false)) else ""))
 	if not ruled.is_empty():
-		rows.append("rulings")
-		for line in ruled:
-			rows.append(line)
+		# ONE WRAPPED PARAGRAPH, NOT A COLUMN (2026-08-24, Palle: "make ruling
+		# not be on separate lines they take to much space"). Eighteen rulings
+		# were eighteen lines and pushed the writing off the panel; compacted,
+		# the same eighteen are two or three wrapped rows.
+		var n_rem := 0
+		for rr in ruled:
+			if rr.ends_with("✕"):
+				n_rem += 1
+		rows.append("rulings   %d%s" % [ruled.size(),
+			("   (%d removed)" % n_rem) if n_rem > 0 else ""])
+		rows.append("  " + "   ".join(ruled))
 	rows.append("")
 	rows.append("drag X/Y/Z · SHIFT 0.2 m · Q/R turn · +/- scale · X remove")
 	_doll_insp_lbl.text = "\n".join(rows)

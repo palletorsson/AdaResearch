@@ -270,8 +270,12 @@ func _run() -> void:
 				# AT THE TOP: a negative top offset is the old bottom-right pane
 				if pc.offset_top < 0.0:
 					fails.append("the inspector still hangs from the bottom (offset_top %.0f)" % pc.offset_top)
+				elif pc.anchor_bottom < 0.99:
+					# a fixed-height box cropped the field notes and the write
+					# button clean off the panel (measured 2026-08-24)
+					fails.append("the inspector does not fill the height (anchor_bottom %.2f)" % pc.anchor_bottom)
 				else:
-					notes.append("the inspector stands at the TOP (offset_top %.0f)" % pc.offset_top)
+					notes.append("the inspector stands at the TOP and FILLS the height")
 			var sect: Node = insp.find_child("PageSection", true, false)
 			if sect == null:
 				fails.append("the inspector shows no page section for a wall work")
