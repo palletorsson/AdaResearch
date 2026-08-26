@@ -448,6 +448,13 @@ static func dress_segment(seg: Node3D, tile: Array, w: int, h: int, mats, prev_w
 	for rule_v in showing_rules:
 		var rule: Dictionary = rule_v
 		var si: int = int(rule.get("index", -1))
+		# THE HANG comes first: an absolute wall face, then any offset nudges
+		# it from there. A rule may carry either, or both.
+		var cell_a: Array = rule.get("cell", [])
+		var dir_a: Array = rule.get("dir", [])
+		if si >= 0 and si < hang_mount_x.size() and cell_a.size() >= 2 and dir_a.size() >= 2:
+			_hang_retarget(si, Vector2i(int(cell_a[0]), int(cell_a[1])),
+				Vector2i(int(dir_a[0]), int(dir_a[1])), hang_frame_x, hang_mount_x, hang_field_x)
 		var off_a: Array = rule.get("offset", [])
 		if si < 0 or si >= hang_mount_x.size() or off_a.size() < 3:
 			continue
@@ -775,6 +782,49 @@ static func _stretch_candidates(stretch: Array, run: Dictionary, out: Array,
 			"fmt": HANG_FORMATS[idx % HANG_FORMATS.size()],
 		})
 		g += HANG_PITCH_FACES
+
+
+## ── THE HANG (2026-08-26, Palle: "I need to be able to move the wall work,
+## they should stick to the wall") ──────────────────────────────────────────
+## A wall work's place is not a free point and not a metre offset: it is a WALL
+## FACE — the wall cell it hangs on, and the direction that cell looks into the
+## room. That is the same thing this file already derives a face list from
+## (a wall cell plus a step toward an adjacent floor cell), so a moved work
+## lands on real geometry rather than floating near it, and a work that crosses
+## from a north wall to an east one TURNS, which a translation could never do.
+##
+## The ruling is {index, cell:[x,z], dir:[dx,dz]} on a showing rule. It rebuilds
+## that page's six boxes in place, so page indices — and therefore the adoption,
+## the cards and the ledger — all stay put.
+static func _hang_retarget(si: int, cell: Vector2i, dir: Vector2i,
+		frame_out: Array, mount_out: Array, field_out: Array) -> bool:
+	if si < 0 or si >= mount_out.size() or (dir.x == 0 and dir.y == 0):
+		return false
+	# the format this page was already built at: the mount box is scaled to
+	# (wm, hm, depth), so its own basis carries the size back
+	var mb: Basis = (mount_out[si] as Transform3D).basis
+	var fmt := Vector2(mb.x.length(), mb.y.length())
+	if fmt.x <= 0.01 or fmt.y <= 0.01:
+		return false
+	var fx: float = float(cell.x) + 0.5 + float(dir.x) * 0.5
+	var fz: float = float(cell.y) + 0.5 + float(dir.y) * 0.5
+	var along_x: bool = dir.y != 0
+	var centre: float = fx if along_x else fz
+	var fixed: float = fz if along_x else fx
+	var nrm: float = float(dir.y) if along_x else float(dir.x)
+	var f2: Array = []
+	var m2: Array = []
+	var d2: Array = []
+	_hang_one(centre, fixed, along_x, nrm, fmt, f2, m2, d2)
+	if m2.is_empty() or d2.is_empty() or f2.size() < 4:
+		return false
+	mount_out[si] = m2[0]
+	field_out[si] = d2[0]
+	for k in range(4):
+		var fi: int = si * 4 + k
+		if fi < frame_out.size():
+			frame_out[fi] = f2[k]
+	return true
 
 
 ## Six boxes: four frame bars, a light mount, a dark field. All fully PROUD of
