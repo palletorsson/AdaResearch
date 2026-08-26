@@ -173,6 +173,46 @@ func _run() -> void:
 	else:
 		notes.append("the real book is untouched (the trial copy took every write)")
 
+	# 6. THE VISUALIZATION PAGE: turn this line into a plan of the hall, rebuild
+	#    the pictures over the same labels, and check one actually hangs.
+	var viz_ok := false
+	if inst.get("_page_viz") != null:
+		var ob: OptionButton = inst.get("_page_viz")
+		ob.selected = 1                     # "a plan of this hall"
+		inst.call("_page_save")
+		var tile_now: Array = []
+		var pk: Dictionary = inst.call("_plan_entry", "", chapter)
+		if pk.get("tile") is Array:
+			tile_now = pk["tile"]
+		inst.call("_viz_pages", seg, chapter, pearl, tile_now)
+		for n2 in seg.get_children():
+			if n2 is MeshInstance3D and n2.has_meta("em_viz"):
+				var mi := n2 as MeshInstance3D
+				var mat: Material = mi.material_override
+				if mat is StandardMaterial3D and (mat as StandardMaterial3D).albedo_texture != null:
+					viz_ok = true
+					notes.append("a visualization page hangs on the field (%.2f m, textured)" % (mi.mesh as QuadMesh).size.x)
+					break
+		if not viz_ok:
+			fails.append("viz:plan was written but no picture hangs on the wall")
+		# and the book kept the choice
+		var re_v: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+		var saw_viz := ""
+		if re_v is Dictionary:
+			for pv3 in ((re_v as Dictionary).get("pearls", []) as Array):
+				var pl3: Dictionary = pv3
+				if String(pl3.get("pearl", "")) != pearl 						and String(pl3.get("map", "")).replace("_", " ").to_lower() != pearl:
+					continue
+				for lv3 in (pl3.get("lines", []) as Array):
+					if String((lv3 as Dictionary).get("token", "")) == String(lbl.get_meta("em_speak_token")):
+						saw_viz = String((lv3 as Dictionary).get("viz", ""))
+		if saw_viz != "plan":
+			fails.append("the book did not keep viz:plan (got %s)" % saw_viz)
+		else:
+			notes.append("the book keeps the page kind as viz:plan")
+	else:
+		fails.append("the editing window has no visualization chooser")
+
 	inst.call("_page_close")
 	if inst.get("_page_ui") != null:
 		fails.append("the window did not close")

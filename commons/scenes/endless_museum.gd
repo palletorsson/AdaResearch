@@ -791,6 +791,7 @@ var _page_ui: CanvasLayer = null
 var _page_line: TextEdit = null
 var _page_note: TextEdit = null
 var _page_status: Label = null
+var _page_viz: OptionButton = null
 var _page_ctx: Dictionary = {}    # {chapter, pearl, token, si}
 var _doll_walk_to: Vector3 = Vector3(1e9, 0, 0)   # click-to-walk target; 1e9 = none
 var _doll_mark: MeshInstance3D = null              # the little goal disc
@@ -4035,6 +4036,130 @@ ADDS    " + _prereq_words(row.get("adds", []), 8)
 		Vector3(0.09, 2.2 * 0.62 + 0.18, 2.2 + 0.18), Color(0.25, 0.17, 0.10), _sm("plinth"))
 
 
+## ── THE VISUALIZATION PAGE (2026-08-24, Palle: "they should have one line or
+## a visualization ... yes, do the visualization page too") ───────────────────
+## A book line may carry `viz`. When it does, the wall work stops being a
+## sentence and becomes a drawing on the same black field, fitted to the same
+## rectangle the sentence was fitted to (em_detail stamps em_field on the
+## label). Two kinds render today, and both draw the project's own subject:
+##   plan     the hall you are standing in, its map read as a plan
+##   pattern  the wallpaper group as a woven field (PatternSim)
+## The line stays in the book under the picture — the caption.
+const VIZ_KINDS := ["", "plan", "pattern"]
+const PatternSimLib = preload("res://commons/pattern_grammar/pattern_sim.gd")
+
+
+## The hall's own map, drawn as a plan: walls in chalk, floor in slate, holes
+## left black. The book's truest illustration — the room you are standing in.
+func _viz_plan_image(tile: Array, px: int = 384) -> Image:
+	var img := Image.create(px, px, false, Image.FORMAT_RGBA8)
+	img.fill(Color(0.05, 0.05, 0.06))
+	var h: int = tile.size()
+	if h == 0:
+		return img
+	var w: int = (tile[0] as Array).size()
+	if w == 0:
+		return img
+	# one cell, square, centred — a plan is not stretched to fit its frame
+	var cell: float = minf(float(px) / float(w), float(px) / float(h))
+	var ox: float = (float(px) - cell * float(w)) * 0.5
+	var oy: float = (float(px) - cell * float(h)) * 0.5
+	for tz in range(h):
+		var row: Array = tile[tz]
+		for tx in range(mini(w, row.size())):
+			var c := str(row[tx])
+			var col := Color(0.05, 0.05, 0.06)
+			if c.begins_with("4"):
+				col = Color(0.90, 0.89, 0.86)          # wall: chalk
+			elif c.begins_with("p"):
+				col = Color(0.55, 0.54, 0.58)          # platform
+			elif c == "0":
+				col = Color(0.02, 0.02, 0.03)          # a hole stays a hole
+			else:
+				col = Color(0.20, 0.21, 0.24)          # floor: slate
+			var x0: int = int(ox + cell * float(tx))
+			var y0: int = int(oy + cell * float(tz))
+			var x1: int = int(ox + cell * float(tx + 1)) - 1
+			var y1: int = int(oy + cell * float(tz + 1)) - 1
+			for py in range(maxi(y0, 0), mini(y1, px - 1) + 1):
+				for pxx in range(maxi(x0, 0), mini(x1, px - 1) + 1):
+					img.set_pixel(pxx, py, col)
+	return img
+
+
+func _viz_image(kind: String, tile: Array, seed_n: int) -> Image:
+	match kind:
+		"plan":
+			return _viz_plan_image(tile)
+		"pattern":
+			return PatternSimLib.render_to_image({
+				"group": _pattern_groups()[seed_n % maxi(1, _pattern_groups().size())] if not _pattern_groups().is_empty() else "p4m",
+				"canvas_size": 384, "tile_size": 32,
+				"motif_seed": 3 + seed_n, "palette": "bauhaus"})
+	return null
+
+
+## Hang the pictures. Runs after the dress, over the labels em_detail hung: a
+## label whose line carries `viz` keeps its text as the caption and gains a
+## quad, on the field face, at the field's own size.
+func _viz_pages(seg: Node3D, chapter: String, pearl: String, tile: Array) -> void:
+	if seg == null or not is_instance_valid(seg):
+		return
+	var doc_path: String = _book_dir + "/%s.json" % chapter
+	if not FileAccess.file_exists(doc_path):
+		return
+	var doc_v: Variant = JSON.parse_string(FileAccess.get_file_as_string(doc_path))
+	if not (doc_v is Dictionary):
+		return
+	var pl: Dictionary = _page_pearl_row(doc_v as Dictionary, pearl)
+	if pl.is_empty():
+		return
+	var viz_by_token: Dictionary = {}
+	for lv in (pl.get("lines", []) as Array):
+		var ln: Dictionary = lv
+		var vk := String(ln.get("viz", "")).strip_edges().to_lower()
+		if vk != "" and VIZ_KINDS.has(vk):
+			viz_by_token[String(ln.get("token", ""))] = vk
+	if viz_by_token.is_empty():
+		return
+	var hung := 0
+	for n in seg.get_children():
+		if not (n is Label3D) or not n.has_meta("em_speak_token"):
+			continue
+		var tok := String(n.get_meta("em_speak_token"))
+		if not viz_by_token.has(tok):
+			continue
+		var lbl := n as Label3D
+		var si: int = int(n.get_meta("em_speak")) if n.has_meta("em_speak") else 0
+		var img: Image = _viz_image(String(viz_by_token[tok]), tile, si)
+		if img == null:
+			continue
+		var fld: Vector2 = n.get_meta("em_field") if n.has_meta("em_field") else Vector2(0.6, 0.6)
+		var q := MeshInstance3D.new()
+		q.name = "VizPage%d" % si
+		var qm := QuadMesh.new()
+		# a picture is not stretched: the square image keeps its aspect inside
+		# whatever rectangle the field happens to be
+		var side: float = maxf(0.08, minf(fld.x, fld.y) * 0.92)
+		qm.size = Vector2(side, side)
+		q.mesh = qm
+		var m := StandardMaterial3D.new()
+		m.albedo_texture = ImageTexture.create_from_image(img)
+		m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		m.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
+		q.material_override = m
+		q.position = lbl.position
+		q.rotation_degrees = lbl.rotation_degrees
+		q.set_meta("em_viz", si)
+		seg.add_child(q)
+		# the sentence becomes the CAPTION: it drops under the picture, small
+		lbl.font_size = maxi(24, lbl.font_size - 14)
+		lbl.vertical_alignment = VERTICAL_ALIGNMENT_BOTTOM
+		hung += 1
+	if hung > 0:
+		print("[em-page] %s · %s: %d visualization page(s)" % [chapter, pearl, hung])
+
+
 ## Which wall work is under the cursor, and which line of the book it carries.
 ## Returns false when the tap landed on anything else, so the click falls through.
 func _page_open_at(mouse: Vector2) -> bool:
@@ -4086,7 +4211,7 @@ func _page_pearl_row(doc: Dictionary, pearl: String) -> Dictionary:
 ## The book's own record for this line: its text as written, and any field note.
 ## A blank page (a field with no line yet) opens empty and writes a new line.
 func _page_read() -> Dictionary:
-	var out := {"text": "", "note": "", "by": "hand"}
+	var out := {"text": "", "note": "", "by": "hand", "viz": ""}
 	var path: String = _book_dir + "/%s.json" % String(_page_ctx.get("chapter", ""))
 	if not FileAccess.file_exists(path):
 		return out
@@ -4102,6 +4227,7 @@ func _page_read() -> Dictionary:
 			out["text"] = String(ln.get("text", ""))
 			out["note"] = String(ln.get("note", ""))
 			out["by"] = String(ln.get("by", "hand"))
+			out["viz"] = String(ln.get("viz", ""))
 			return out
 	return out
 
@@ -4144,6 +4270,18 @@ func _page_build(shown: String) -> void:
 	_page_note.wrap_mode = TextEdit.LINE_WRAPPING_BOUNDARY
 	_page_note.text = String(book.get("note", ""))
 	box.add_child(_page_note)
+	var vrow := HBoxContainer.new()
+	box.add_child(vrow)
+	var vlab := Label.new()
+	vlab.text = "THIS PAGE SHOWS "
+	vrow.add_child(vlab)
+	_page_viz = OptionButton.new()
+	_page_viz.add_item("the line")            # ""
+	_page_viz.add_item("a plan of this hall") # plan
+	_page_viz.add_item("the wallpaper group") # pattern
+	var vk_now := String(book.get("viz", ""))
+	_page_viz.selected = maxi(0, VIZ_KINDS.find(vk_now))
+	vrow.add_child(_page_viz)
 	var row := HBoxContainer.new()
 	box.add_child(row)
 	var save := Button.new()
@@ -4202,6 +4340,11 @@ func _page_save() -> void:
 		hit["note"] = note_now
 	else:
 		hit.erase("note")
+	var vk_sel: String = VIZ_KINDS[clampi(_page_viz.selected, 0, VIZ_KINDS.size() - 1)] if _page_viz != null else ""
+	if vk_sel != "":
+		hit["viz"] = vk_sel
+	else:
+		hit.erase("viz")
 	pl["lines"] = lines
 	# the live session may hold the file; the book is small, the retry is cheap
 	var wrote := false
@@ -4242,6 +4385,7 @@ func _page_close() -> void:
 	_page_line = null
 	_page_note = null
 	_page_status = null
+	_page_viz = null
 
 
 ## ONE WEDGE, ONE PLACER. The walkableprism (commons/scenes/mapobjects/
@@ -5804,6 +5948,10 @@ func _build_segment() -> void:
 			Color(0.25, 0.17, 0.10), m_plinth)
 		if _banner_pos == Vector3.ZERO:
 			_banner_pos = Vector3(BANNER_X, BANNER_Y, BANNER_Z + _next_z)
+	# THE VISUALIZATION PAGES: after the dress, over the lines it hung — a line
+	# carrying `viz` becomes a drawing on its own field, the sentence its caption.
+	_viz_pages(seg, seg_seq if seg_seq != "" else next_seq,
+		String(peek.get("pearl", "")), tile)
 	# THE PREREQUISITE BOARD hangs in the entry passage — the vestibule, and
 	# every crossing has exactly one, so one board per hall IS one board per
 	# passage. EAST wall: the west wall is the removed gallery banner's place,

@@ -988,6 +988,9 @@ static func _add_showing_cards(seg: Node3D, mounts: Array, opts: Dictionary) -> 
 			else:
 				sl.rotation_degrees.y = 90.0 if nrm > 0.0 else -90.0
 			sl.set_meta("em_speak", si)
+			# the field's own size, so a VISUALIZATION page can be hung on
+			# exactly the rectangle the sentence was fitted to (2026-08-24)
+			sl.set_meta("em_field", Vector2(fieldw, fieldh))
 			if si < speak_tokens.size():
 				sl.set_meta("em_speak_token", String(speak_tokens[si]))
 			seg.add_child(sl)
