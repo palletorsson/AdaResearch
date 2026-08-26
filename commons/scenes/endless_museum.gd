@@ -138,6 +138,13 @@ const CROWNS := "res://commons/data/museum_crowns.json"
 # one axis value. This is what turns one-artifact-per-slot into a SET.
 const RELATIONS := "res://commons/data/artifact_relations.json"
 const TextScreenRes = preload("res://commons/ui/text_screen.gd")
+## THE PREREQUISITE BOARD (2026-08-24, Palle: "put an info board in every
+## passage where we state the prerequisite of the new addition that the map
+## includes"). Derived, never typed: tools/build_map_prerequisites.py reads the
+## spine manifest, so ADDS means "first appearance in the spine IS this map"
+## and NEEDS names the map that introduced each re-used body.
+const PREREQ_PATH := "res://commons/data/map_prerequisites.json"
+var _prereq_doc: Dictionary = {}
 const _TransformGizmo := preload("res://commons/scenes/em/em_transform_gizmo.gd")
 const EYE := 1.65
 # wall height, read from its ONE owner (em_detail.gd) so the stamped walls,
@@ -3943,6 +3950,80 @@ func _stamp_gaps(seg: Node3D, tile: Array, zbase: int) -> void:
 		print("[em-gap] %s: %d x %d cells hollow, crossing %s at (%.1f, %.1f)" % [_cur_stage_pearl, w, d, spec, cx, cz])
 
 
+func _prereq_data() -> Dictionary:
+	if not _prereq_doc.is_empty():
+		return _prereq_doc
+	if FileAccess.file_exists(PREREQ_PATH):
+		var v: Variant = JSON.parse_string(FileAccess.get_file_as_string(PREREQ_PATH))
+		if v is Dictionary:
+			_prereq_doc = v
+	if _prereq_doc.is_empty():
+		_prereq_doc = {"_absent": true}
+	return _prereq_doc
+
+
+## "laser_measure" -> "laser measure": the board is read, not grepped.
+static func _prereq_words(toks: Array, cap: int) -> String:
+	var out := PackedStringArray()
+	for i in range(mini(cap, toks.size())):
+		out.append(str(toks[i]).replace("_", " "))
+	var line := " · ".join(out)
+	if toks.size() > cap:
+		line += "   +%d more" % (toks.size() - cap)
+	return line if line != "" else "— nothing earlier"
+
+
+## The passage board for THIS hall: what it needs, and what it adds. A hall the
+## dealer built has no map, so its CHAPTER speaks for the passage instead.
+func _prereq_board(seg: Node3D, w: int, chapter: String, peek: Dictionary, legend: Color) -> void:
+	var doc: Dictionary = _prereq_data()
+	if doc.has("_absent"):
+		return
+	var map_name := String(peek.get("map", ""))
+	var row: Dictionary = {}
+	var title := ""
+	var maps_d: Dictionary = doc.get("maps", {})
+	var chaps_d: Dictionary = doc.get("chapters", {})
+	if map_name != "" and maps_d.has(map_name):
+		row = maps_d[map_name]
+		title = String(peek.get("pearl", map_name)).to_upper()
+	elif chaps_d.has(chapter):
+		row = chaps_d[chapter]
+		title = chapter.to_upper()
+	if row.is_empty():
+		return
+	var need_toks: Array = []
+	var from_maps := PackedStringArray()
+	for n_v in (row.get("needs", []) as Array):
+		var n: Dictionary = n_v
+		need_toks.append(String(n.get("token", "")))
+		var fm := String(n.get("from_map", "")).replace("_", " ").to_lower()
+		if fm != "" and not from_maps.has(fm) and from_maps.size() < 3:
+			from_maps.append(fm)
+	var body := "NEEDS   " + _prereq_words(need_toks, 5)
+	if from_maps.size() > 0:
+		body += "
+              from " + " · ".join(from_maps)
+	elif String(row.get("after", "")) != "":
+		body += "
+              after " + String(row["after"]).replace("_", " ").to_lower()
+	body += "
+
+ADDS    " + _prereq_words(row.get("adds", []), 8)
+	var board: Node3D = TextScreenRes.new()
+	board.mode = TextScreenRes.Mode.SCREEN
+	board.title = title
+	board.body = body
+	board.title_color = legend.lightened(0.35)
+	board.width_m = 2.2
+	board.position = Vector3(float(w) - 1.06, 1.95, 2.30)
+	board.rotation_degrees = Vector3(0, -90, 0)   # off the EAST wall, into the lobby
+	seg.add_child(board)
+	# the surround: buried in the wall, 50 mm proud, so it sits in a reveal
+	_box(seg, Vector3(float(w) - 1.005, 1.95, 2.30),
+		Vector3(0.09, 2.2 * 0.62 + 0.18, 2.2 + 0.18), Color(0.25, 0.17, 0.10), _sm("plinth"))
+
+
 ## ONE WEDGE, ONE PLACER. The walkableprism (commons/scenes/mapobjects/
 ## walkableprism.tscn) is a PrismMesh 2 x 1 x 1 with a concave collider and NO
 ## script — no autoload, no player detection, no layer gate — which is why it is
@@ -5498,6 +5579,12 @@ func _build_segment() -> void:
 			Color(0.25, 0.17, 0.10), m_plinth)
 		if _banner_pos == Vector3.ZERO:
 			_banner_pos = Vector3(BANNER_X, BANNER_Y, BANNER_Z + _next_z)
+	# THE PREREQUISITE BOARD hangs in the entry passage — the vestibule, and
+	# every crossing has exactly one, so one board per hall IS one board per
+	# passage. EAST wall: the west wall is the removed gallery banner's place,
+	# and this is information rather than a label.
+	if _L("hall", "prereq_board", 1.0) > 0.5:
+		_prereq_board(seg, w, next_seq, peek, legend)
 	var ember := MeshInstance3D.new()
 	var ebm := BoxMesh.new()
 	ebm.size = Vector3(w - 2.0, 0.02, 0.08)
@@ -7147,6 +7234,20 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 			gs.set("interactable_place_budget_ms", 8.0)
 			gs.position = Vector3(0.0, -gdepth, float(VESTIBULE_H))
 			seg.add_child(gs)
+			# THE DISARM WAITS FOR THE BUILD, NOT FOR A CLOCK (2026-08-26).
+			# _sim_grid_disarm takes the live teleporters and hazards out of an
+			# embedded grid - a teleporter switches maps, which severs the
+			# endless walk. It was armed on a 2.5 s timer, which was safely
+			# longer than a one-frame build and stopped being so the moment the
+			# placement pass was spread across frames: measured 763 ms of
+			# structure and utilities plus 2356 ms of interactables, so the
+			# disarm was finishing 600 ms before the grid did and never saw
+			# what landed last. The timer stays as a backstop for a
+			# grid_system.tscn that predates the signal; the disarm re-scans
+			# with find_children and clearing monitoring twice is a no-op, so
+			# both may run.
+			if gs.has_signal("build_finished"):
+				gs.connect("build_finished", _sim_grid_disarm.bind(gs), CONNECT_ONE_SHOT)
 			if is_inside_tree():
 				get_tree().create_timer(2.5).timeout.connect(_sim_grid_disarm.bind(gs))
 			print("[em-sim-grid] %s: the REAL grid builds the simulation (bare_world, player kept)" % map_name)

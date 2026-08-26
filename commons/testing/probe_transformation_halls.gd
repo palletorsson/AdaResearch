@@ -108,6 +108,35 @@ func _run() -> void:
 		else:
 			notes.append("%s: chicane present (h %d -> %d)" % [pearl, int(plan_h[pearl]), want])
 
+	# ── THE PREREQUISITE BOARD in every passage (2026-08-24) ────────────────
+	# Every hall's entry passage carries one board naming what the map NEEDS
+	# and what it ADDS — derived from the spine manifest, so a board that says
+	# ADDS with nothing after it is a real fact, not a missing wire.
+	var boards: int = 0
+	var board_bad: Array = []
+	for s_v2 in segs:
+		var s2: Dictionary = s_v2
+		var sn3: Node3D = s2.get("node")
+		if sn3 == null or not is_instance_valid(sn3):
+			continue
+		var found := false
+		for n in sn3.find_children("*", "Node3D", true, false):
+			var bd: Variant = n.get("body")
+			if bd != null and str(bd).contains("ADDS") and str(bd).contains("NEEDS"):
+				found = true
+				# the board must stand IN the passage (the vestibule, z < 4)
+				if (n as Node3D).position.z > float(V):
+					board_bad.append("%s: board at z %.1f, not in the passage" % [str(s2.get("pearl", "?")), (n as Node3D).position.z])
+				break
+		if found:
+			boards += 1
+		else:
+			board_bad.append("%s: NO prerequisite board in the passage" % str(s2.get("pearl", "?")))
+	for b in board_bad:
+		fails.append(b)
+	if board_bad.is_empty():
+		notes.append("prerequisite board in all %d passages (NEEDS + ADDS, derived)" % boards)
+
 	# helper: map cell -> world (authored halls are origin-pinned, offx 0)
 	var cellw := func(rec: Dictionary, mx: float, mz: float) -> Vector2:
 		return Vector2(mx + 0.5, float(rec["z0"]) + V + mz + 0.5)
@@ -140,24 +169,39 @@ func _run() -> void:
 		# SAMPLE the margin, never one cell: the dress lays props on these
 		# decks, and a single ray measures whatever is standing there rather
 		# than the deck (the floor-not-the-exhibit lesson, twice now).
-		var deck_hits := 0
+		# THE MARGIN IS POOL, NOT WALKWAY (2026-08-24, Palle: "make the pool
+		# a bit more width so we can not walk on the sides, you must take the
+		# way through the simulation"). This probe demanded the OLD ruling —
+		# margins at deck 0 and three connecting wedges — for one run after
+		# the code had already moved on; the wedges were removed the same day
+		# ("remove all wedges from the simulation") because the grid stands at
+		# water level and every ramp led to the height it was already at.
+		# A probe must wear the live rulings.
+		var pool_hits := 0
 		var ymg := -999.0
+		# SAMPLE THE OUTER MARGIN (-2), NOT THE SEAM (-1): measured
+		# 2026-08-24 with probe_sim_section — the embedded GridSystem centres
+		# its cubes on INTEGERS while the museum centres cells on
+		# half-integers, so the grid's west cube overhangs the first margin
+		# cell by half a metre and a ray at -1 reads the GRID at 0.00, not
+		# the pool. The overhang is real and worth closing; until it is, the
+		# probe measures a cell the grid cannot reach.
 		for mz in [3.0, 6.0, 9.0, 12.0]:
-			var mg: Vector2 = cellw.call(rs2, -1.0, mz)
+			var mg: Vector2 = cellw.call(rs2, -2.0, mz)
 			ymg = _ray_y(w3d, mg.x, mg.y)
-			if absf(ymg) <= 0.2:
-				deck_hits += 1
-		if deck_hits < 3:
-			fails.append("%s: only %d/4 margin cells at deck 0 (last read %.2f)" % [pearl_s, deck_hits, ymg])
+			if ymg < -0.3 and ymg > -30.0:
+				pool_hits += 1
+		if pool_hits < 3:
+			fails.append("%s: only %d/4 margin cells are POOL (last read %.2f) — the sides must not be dry walkway" % [pearl_s, pool_hits, ymg])
 		var wedges_s := 0
 		for n2 in sn3.find_children("*", "Node3D", true, false):
-			if str(n2.name).begins_with("Wedge_") and (n2 as Node3D).position.y < 0.2:
+			if str(n2.name).begins_with("Wedge_"):
 				wedges_s += 1
-		if wedges_s < 3:
-			fails.append("%s: %d connecting wedge(s), wanted >=3" % [pearl_s, wedges_s])
-		if grid_ok and cubes >= 20 and deck_hits >= 3 and wedges_s >= 3:
-			notes.append("%s: the REAL grid in the pool (%d meshes) / margin %d/4 at deck / %d wedges" % [
-				pearl_s, cubes, deck_hits, wedges_s])
+		if wedges_s > 0:
+			fails.append("%s: %d wedge(s) still standing — the simulation takes none" % [pearl_s, wedges_s])
+		if grid_ok and cubes >= 20 and pool_hits >= 3 and wedges_s == 0:
+			notes.append("%s: the REAL grid in the pool (%d meshes) / margin %d/4 is pool / no wedges" % [
+				pearl_s, cubes, pool_hits])
 
 	# ── trans rotationspectacle: OPEN ROOF ──────────────────────────────────
 	# ceilings are VISUAL-ONLY (no colliders) — a raycast cannot see them
