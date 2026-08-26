@@ -28,7 +28,14 @@
   "Color_Nails",
   "Color_Pillar",
   "Color_Walls",
-  "Symmetry_Seventeen"
+  "Symmetry_Seventeen",
+  "Placed_Color_02_Louisiana",
+  "Placed_Color_03_Caracalla",
+  "Placed_Color_04_Labrouste",
+  "Placed_Color_05_Mengoni",
+  "Placed_Color_06_Mezquita",
+  "Placed_Color_07_Castelvecchi",
+  "Spine_Color_Louisiana"
  ],
  "forces": [
   "VFM_01_Foundations",
@@ -44,12 +51,55 @@
   "Vectors_Act4a_KineticForces",
   "Vectors_Act4b_Oscillation",
   "VFM_04_Fields",
-  "Vectors_Act5_ForceAsPlace"
+  "Vectors_Act5_ForceAsPlace",
+  "Placed_Forces_02_Castelvecchi",
+  "Placed_Forces_03_Castelvecchi",
+  "Placed_Forces_04_Grande",
+  "Placed_Forces_05_Pompidou",
+  "Placed_Forces_06_Mesdag",
+  "Placed_Forces_07_Uffizi",
+  "Placed_Forces_08_Guggenheim",
+  "Placed_Forces_09_Sainsbury",
+  "Placed_Forces_10_Bilbao",
+  "Placed_Forces_11_Chichu",
+  "Placed_Forces_12_Dia",
+  "Placed_Forces_13_Libeskind",
+  "Spine_Forces_Labrouste"
  ],
  "change": [
   "Change_Intro",
   "Accumulation_Riemann",
   "Flow_Field",
-  "Change_Reconciliation"
- ]
+  "Change_Reconciliation",
+  "Spine_Change_Caracalla"
+ ],
+ "_placed_added": {
+  "change": [
+   "Spine_Change_Caracalla"
+  ],
+  "color": [
+   "Placed_Color_02_Louisiana",
+   "Placed_Color_03_Caracalla",
+   "Placed_Color_04_Labrouste",
+   "Placed_Color_05_Mengoni",
+   "Placed_Color_06_Mezquita",
+   "Placed_Color_07_Castelvecchi",
+   "Spine_Color_Louisiana"
+  ],
+  "forces": [
+   "Placed_Forces_02_Castelvecchi",
+   "Placed_Forces_03_Castelvecchi",
+   "Placed_Forces_04_Grande",
+   "Placed_Forces_05_Pompidou",
+   "Placed_Forces_06_Mesdag",
+   "Placed_Forces_07_Uffizi",
+   "Placed_Forces_08_Guggenheim",
+   "Placed_Forces_09_Sainsbury",
+   "Placed_Forces_10_Bilbao",
+   "Placed_Forces_11_Chichu",
+   "Placed_Forces_12_Dia",
+   "Placed_Forces_13_Libeskind",
+   "Spine_Forces_Labrouste"
+  ]
+ }
 }
