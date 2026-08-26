@@ -2741,20 +2741,32 @@ func _dress_lobby(seg: Node3D, solid: StaticBody3D, w: int, zbase: int, wall_col
 			_wall_at(seg, solid, acells, 2, wz2, wall_col, m_wall, false)
 		for wx2 in range(-3, 0):
 			_wall_at(seg, solid, acells, wx2, 2, wall_col, m_wall, false)
-		# the rail round the well (all four sides), with colliders
-		var rail_mat := StandardMaterial3D.new()
-		rail_mat.albedo_color = Color(0.2, 0.2, 0.22)
-		rail_mat.metallic = 0.6
-		rail_mat.roughness = 0.35
-		for r_box in [[Vector3(-1.0, 0.55, 0.0), Vector3(0.04, 0.04, 2.1)], [Vector3(1.0, 0.55, 0.0), Vector3(0.04, 0.04, 2.1)],
-				[Vector3(0.0, 0.55, -1.0), Vector3(2.1, 0.04, 0.04)], [Vector3(0.0, 0.55, 1.0), Vector3(2.1, 0.04, 0.04)],
-				[Vector3(-1.0, 0.275, -1.0), Vector3(0.04, 0.55, 0.04)], [Vector3(1.0, 0.275, -1.0), Vector3(0.04, 0.55, 0.04)],
-				[Vector3(-1.0, 0.275, 1.0), Vector3(0.04, 0.55, 0.04)], [Vector3(1.0, 0.275, 1.0), Vector3(0.04, 0.55, 0.04)]]:
-			_box(seg, r_box[0], r_box[1], Color(0.2, 0.2, 0.22), rail_mat)
-		_add_col(solid, Vector3(-1.0, 0.5, 0.0), Vector3(0.06, 1.0, 2.1))
-		_add_col(solid, Vector3(1.0, 0.5, 0.0), Vector3(0.06, 1.0, 2.1))
-		_add_col(solid, Vector3(0.0, 0.5, -1.0), Vector3(2.1, 1.0, 0.06))
-		_add_col(solid, Vector3(0.0, 0.5, 1.0), Vector3(2.1, 1.0, 0.06))
+		# THE RAIL IS OFF (2026-08-26, Palle: "remove the fence around the pit pool
+		# basin"). It ringed the well on all four sides at 0.55 m and was the first
+		# thing the eye met on landing - a guard rail around the one object the foyer
+		# exists to show.
+		#
+		# Nothing opens up by removing it: the fall is already closed by the annex
+		# slab above, ONE collider spanning annex AND well, so the visitor walks over
+		# the opening either way. What goes is the rail's own mesh and its four
+		# colliders, which is all it ever was.
+		#
+		# A lever, not a deletion, and defaulted OFF: em_layout.json's
+		# lobby.origin_well_rail at 1.0 brings it back.
+		if _L("lobby", "origin_well_rail", 0.0) > 0.5:
+			var rail_mat := StandardMaterial3D.new()
+			rail_mat.albedo_color = Color(0.2, 0.2, 0.22)
+			rail_mat.metallic = 0.6
+			rail_mat.roughness = 0.35
+			for r_box in [[Vector3(-1.0, 0.55, 0.0), Vector3(0.04, 0.04, 2.1)], [Vector3(1.0, 0.55, 0.0), Vector3(0.04, 0.04, 2.1)],
+					[Vector3(0.0, 0.55, -1.0), Vector3(2.1, 0.04, 0.04)], [Vector3(0.0, 0.55, 1.0), Vector3(2.1, 0.04, 0.04)],
+					[Vector3(-1.0, 0.275, -1.0), Vector3(0.04, 0.55, 0.04)], [Vector3(1.0, 0.275, -1.0), Vector3(0.04, 0.55, 0.04)],
+					[Vector3(-1.0, 0.275, 1.0), Vector3(0.04, 0.55, 0.04)], [Vector3(1.0, 0.275, 1.0), Vector3(0.04, 0.55, 0.04)]]:
+				_box(seg, r_box[0], r_box[1], Color(0.2, 0.2, 0.22), rail_mat)
+			_add_col(solid, Vector3(-1.0, 0.5, 0.0), Vector3(0.06, 1.0, 2.1))
+			_add_col(solid, Vector3(1.0, 0.5, 0.0), Vector3(0.06, 1.0, 2.1))
+			_add_col(solid, Vector3(0.0, 0.5, -1.0), Vector3(2.1, 1.0, 0.06))
+			_add_col(solid, Vector3(0.0, 0.5, 1.0), Vector3(2.1, 1.0, 0.06))
 		# a light in the well, a light over the annex
 		var wl := OmniLight3D.new()
 		wl.light_color = Color(0.95, 0.93, 0.85)
