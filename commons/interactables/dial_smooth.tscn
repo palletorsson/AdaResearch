@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://commons/interactables/dial_smooth.gd" id="1"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/interactables/interactable_hinge.gd" id="2"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/interactables/interactable_handle.gd" id="3"]
-[ext_resource type="Material" uid="uid://ada_panel_white" path="res://commons/ui/materials/panel_white.tres" id="MatPanel"]
-[ext_resource type="Material" uid="uid://ada_metal_dark" path="res://commons/ui/materials/metal_dark.tres" id="MatKnobBase"]
-[ext_resource type="Material" uid="uid://ada_accent_orange" path="res://commons/ui/materials/accent_orange.tres" id="MatIndicator"]
+[ext_resource type="Material" path="res://commons/ui/materials/panel_white.tres" id="MatPanel"]
+[ext_resource type="Material" path="res://commons/ui/materials/metal_dark.tres" id="MatKnobBase"]
+[ext_resource type="Material" path="res://commons/ui/materials/accent_orange.tres" id="MatIndicator"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_Panel"]
 size = Vector3(0.08, 0.08, 0.008)

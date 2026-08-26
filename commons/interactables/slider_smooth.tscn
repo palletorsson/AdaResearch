@@ -1,12 +1,12 @@
 [gd_scene load_steps=11 format=3 uid="uid://cpwdvy41fqdua"]
 
-[ext_resource type="Script" uid="uid://dggc31iasvhym" path="res://addons/godot-xr-tools/interactables/interactable_slider.gd" id="2"]
+[ext_resource type="Script" uid="uid://cloxfr8r3b00u" path="res://addons/godot-xr-tools/interactables/interactable_slider.gd" id="2"]
 [ext_resource type="Script" uid="uid://dlojnwxo25bky" path="res://addons/godot-xr-tools/interactables/interactable_handle.gd" id="4"]
 [ext_resource type="Script" uid="uid://cgk7meitry1a" path="res://commons/interactables/slider_smooth.gd" id="5_wmxoe"]
 [ext_resource type="PackedScene" uid="uid://ca3daqmpo0tua" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.tscn" id="10_boasd"]
-[ext_resource type="Material" uid="uid://ada_panel_white" path="res://commons/ui/materials/panel_white.tres" id="MatPanel"]
-[ext_resource type="Material" uid="uid://ada_track_groove" path="res://commons/ui/materials/track_groove.tres" id="MatTrack"]
-[ext_resource type="Material" uid="uid://ada_handle_glow" path="res://commons/ui/materials/handle_glow.tres" id="MatHandle"]
+[ext_resource type="Material" path="res://commons/ui/materials/panel_white.tres" id="MatPanel"]
+[ext_resource type="Material" path="res://commons/ui/materials/track_groove.tres" id="MatTrack"]
+[ext_resource type="Material" path="res://commons/ui/materials/handle_glow.tres" id="MatHandle"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_Panel"]
 size = Vector3(0.08, 0.22, 0.008)

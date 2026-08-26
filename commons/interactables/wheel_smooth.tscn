@@ -5,9 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://dc5t2qgmhb2nf" path="res://addons/godot-xr-tools/objects/hand_pose_area.tscn" id="4_2vgo6"]
 [ext_resource type="Resource" uid="uid://bd1dxftyxdgup" path="res://commons/interactables/pose_grab_wheel_left.tres" id="5_gt8jj"]
 [ext_resource type="Resource" uid="uid://dsiujx4dllwvd" path="res://commons/interactables/pose_grab_wheel_right.tres" id="6_ss5gc"]
-[ext_resource type="Material" uid="uid://ada_handle_glow" path="res://commons/ui/materials/handle_glow.tres" id="MatAccent"]
-[ext_resource type="Material" uid="uid://ada_metal_dark" path="res://commons/ui/materials/metal_dark.tres" id="MatMetal"]
-[ext_resource type="Material" uid="uid://ada_panel_white" path="res://commons/ui/materials/panel_white.tres" id="MatPanel"]
+[ext_resource type="Material" path="res://commons/ui/materials/handle_glow.tres" id="MatAccent"]
+[ext_resource type="Material" path="res://commons/ui/materials/metal_dark.tres" id="MatMetal"]
+[ext_resource type="Material" path="res://commons/ui/materials/panel_white.tres" id="MatPanel"]
 
 [sub_resource type="CylinderShape3D" id="1"]
 height = 0.02

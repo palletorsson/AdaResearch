@@ -9,8 +9,8 @@
 [ext_resource type="Animation" uid="uid://d1xnpyc08njjx" path="res://addons/godot-xr-tools/hands/animations/right/Grip 4.res" id="8_txsdp"]
 [ext_resource type="PackedScene" uid="uid://ca3daqmpo0tua" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.tscn" id="10_2yftn"]
 [ext_resource type="Material" uid="uid://d3z4x5c6v7b8n" path="res://commons/ui/materials/panel_white.tres" id="MatPanel"]
-[ext_resource type="Material" uid="uid://ada_metal_dark" path="res://commons/ui/materials/metal_dark.tres" id="MatMetal"]
-[ext_resource type="Material" uid="uid://ada_handle_glow" path="res://commons/ui/materials/handle_glow.tres" id="MatAccent"]
+[ext_resource type="Material" path="res://commons/ui/materials/metal_dark.tres" id="MatMetal"]
+[ext_resource type="Material" path="res://commons/ui/materials/handle_glow.tres" id="MatAccent"]
 
 [sub_resource type="BoxShape3D" id="1"]
 size = Vector3(0.08, 0.15, 0.02)

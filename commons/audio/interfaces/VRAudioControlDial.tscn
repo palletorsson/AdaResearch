@@ -4,9 +4,9 @@
 [ext_resource type="Script" uid="uid://ccvkvky7vqx7x" path="res://addons/godot-xr-tools/interactables/interactable_hinge.gd" id="2_v4m4"]
 [ext_resource type="Script" uid="uid://dlojnwxo25bky" path="res://addons/godot-xr-tools/interactables/interactable_handle.gd" id="3_v4m4"]
 [ext_resource type="PackedScene" uid="uid://ca3daqmpo0tua" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.tscn" id="4_v4m4"]
-[ext_resource type="Material" uid="uid://ada_panel_white" path="res://commons/ui/materials/panel_white.tres" id="MatPanel"]
-[ext_resource type="Material" uid="uid://ada_metal_dark" path="res://commons/ui/materials/metal_dark.tres" id="MatKnobBase"]
-[ext_resource type="Material" uid="uid://ada_accent_orange" path="res://commons/ui/materials/accent_orange.tres" id="MatIndicator"]
+[ext_resource type="Material" path="res://commons/ui/materials/panel_white.tres" id="MatPanel"]
+[ext_resource type="Material" path="res://commons/ui/materials/metal_dark.tres" id="MatKnobBase"]
+[ext_resource type="Material" path="res://commons/ui/materials/accent_orange.tres" id="MatIndicator"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_base"]
 top_radius = 0.038

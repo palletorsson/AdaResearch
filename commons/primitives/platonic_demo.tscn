@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://cgw83kmnec5mv"]
 
 [ext_resource type="PackedScene" uid="uid://djkjuy7wct10q" path="res://commons/primitives/cubes/grab_cube.tscn" id="1_grab_cube"]
-[ext_resource type="PackedScene" uid="uid://dgjmmu8itghpj" path="res://commons/primitives/tetrahedron/grab_tetrahedron.tscn" id="2_grab_tetra"]
-[ext_resource type="PackedScene" uid="uid://l0xse04bya00" path="res://commons/primitives/octahedron/grab_octahedron.tscn" id="3_grab_octa"]
+[ext_resource type="PackedScene" path="res://commons/primitives/tetrahedron/grab_tetrahedron.tscn" id="2_grab_tetra"]
+[ext_resource type="PackedScene" path="res://commons/primitives/octahedron/grab_octahedron.tscn" id="3_grab_octa"]
 [ext_resource type="PackedScene" path="res://commons/primitives/icosahedron/grab_icosahedron.tscn" id="4_grab_ico"]
 [ext_resource type="PackedScene" path="res://commons/primitives/dodecahedron/grab_dodecahedron.tscn" id="5_grab_dode"]
 [ext_resource type="PackedScene" uid="uid://cbp11dfeoeb1e" path="res://commons/primitives/trihedron/grab_trihedron.tscn" id="6_grab_tri"]

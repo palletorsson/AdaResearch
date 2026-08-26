@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bwb4du68kaskh" path="res://algorithms/wavefunctions/spectralanalysis/GameSoundMeter.gd" id="1_spectrum"]
 [ext_resource type="Script" path="res://commons/audio/interfaces/VRSpectrumDisplay.gd" id="2_controller"]
-[ext_resource type="Material" uid="uid://ada_screen_bezel" path="res://commons/ui/materials/screen_bezel.tres" id="MatBezel"]
+[ext_resource type="Material" path="res://commons/ui/materials/screen_bezel.tres" id="MatBezel"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_chassis"]
 size = Vector3(0.32, 0.16, 0.02)

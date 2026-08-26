@@ -1064,6 +1064,8 @@ func _boot_museum() -> void:
 	_boot_ms["plan_parsed"] = Time.get_ticks_msec() - _boot_t0
 	_load_bake()
 	_boot_ms["bake_parsed"] = Time.get_ticks_msec() - _boot_t0
+	_warm_grid_catalogue()
+	_boot_ms["grid_warm"] = Time.get_ticks_msec() - _boot_t0
 	if _bake_mode:
 		_bake_total = 0
 		for pk in _plan_pearls:
@@ -1192,6 +1194,42 @@ func _boot_museum() -> void:
 	# FASTER and first_frame LATER — the cost moves, it does not shrink).
 	# So: three stamps instead of one, and the window stops being a rumour.
 	_boot_ms["boot_tail"] = Time.get_ticks_msec() - _boot_t0
+
+
+
+## PAY THE CATALOGUE AT THE DOOR, NOT AT A THRESHOLD (2026-08-26, Palle: "fix
+## the grid simulation halls, they take too long" / "Trans_Translation is
+## loading the grid for the first time?" - yes, and that was the whole of it).
+##
+## A hall that declares museum.simulation.grid stands a live GridSystem in its
+## basin, and GridInteractablesComponent's registry cache is STATIC: the first
+## one to build reads 222 files and 2800 artifacts, every one after is free.
+## Measured on the VR walk, Trans_Translation opened in 2499 ms and the next
+## grid hall in 484 ms. So this is not an expensive hall, it is an expensive
+## FIRST hall, and the fix is to move the scan rather than restructure the
+## build - which also means the walker's floor keeps arriving exactly when it
+## always did, and none of the falling-into-a-burning-basin risk applies.
+##
+## GATED ON THE PLAN, because warming costs the same two seconds it saves: only
+## 3 of 223 plan rows declare simulation.grid, and a walk that never meets one
+## must not pay for it. The plan is parsed by this point, so it is a dict walk.
+func _warm_grid_catalogue() -> void:
+	var wanted := false
+	for pk in _plan_pearls:
+		for row_v in (_plan_pearls[pk] as Array):
+			var row: Dictionary = row_v
+			var sim: Variant = row.get("simulation")
+			if sim is Dictionary and bool((sim as Dictionary).get("grid", false)):
+				wanted = true
+				break
+		if wanted:
+			break
+	if not wanted:
+		return
+	var t0 := Time.get_ticks_msec()
+	var n: int = GridInteractablesComponent.warm_registry_cache()
+	print("[em-sim-grid] catalogue warmed at the door: %d artifacts in %d ms - the first grid hall no longer pays it" % [
+		n, Time.get_ticks_msec() - t0])
 
 
 

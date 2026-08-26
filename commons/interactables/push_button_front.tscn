@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" path="res://commons/interactables/interactable_area_button_pointer.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://dc5t2qgmhb2nf" path="res://addons/godot-xr-tools/objects/hand_pose_area.tscn" id="3_2axcm"]
-[ext_resource type="Script" uid="uid://ckh2svk8ql6xl" path="res://addons/godot-xr-tools/rumble/rumbler.gd" id="3_kg5ep"]
+[ext_resource type="Script" uid="uid://dff408qq7s26e" path="res://addons/godot-xr-tools/rumble/rumbler.gd" id="3_kg5ep"]
 [ext_resource type="Resource" uid="uid://ciw0f7mg4ai0k" path="res://addons/godot-xr-tools/hands/poses/pose_point_left.tres" id="4_sgcw0"]
 [ext_resource type="Resource" uid="uid://brci6umrcd157" path="res://addons/godot-xr-tools/rumble/tap_rumble.tres" id="4_sq4bi"]
 [ext_resource type="Resource" uid="uid://bhvrpfo4ecbub" path="res://addons/godot-xr-tools/hands/poses/pose_point_right.tres" id="5_g2ih4"]
 [ext_resource type="Script" uid="uid://ddrknxyorgm1x" path="res://commons/interactables/push_button.gd" id="6_ntrw0"]
-[ext_resource type="Material" uid="uid://ada_panel_white" path="res://commons/ui/materials/panel_white.tres" id="MatPanel"]
+[ext_resource type="Material" path="res://commons/ui/materials/panel_white.tres" id="MatPanel"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_Base"]
 size = Vector3(0.06, 0.008, 0.06)

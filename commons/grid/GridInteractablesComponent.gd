@@ -151,6 +151,27 @@ func _ready():
 	print("GridInteractablesComponent: Initialized with lookup_name validation")
 	# Artifact registry will be loaded during initialization with map data
 
+## WARM THE CATALOGUE ONCE, EARLY (2026-08-26, Palle: "fix the grid simulation
+## halls, they take too long"). _artifact_registry_cache_by_key is STATIC, so
+## whoever loads it first pays for 222 files and 2800 artifacts and everyone
+## after is free. In the endless museum the first payer was whichever grid
+## simulation hall the walker happened to reach first: Trans_Translation opened
+## in 2499 ms and the next grid hall in 484 ms, the difference being that one
+## scan - a two-second freeze at a threshold 260 metres into a walk, which in a
+## headset is not a delay, it is nausea.
+##
+## A bare instance is enough: _get_artifact_registry_paths guards its
+## map-specific branch on map_data_component, so with no map it returns the
+## plain directory listing - the same cache key all three of the museum's grid
+## halls build, which was checked against their map_data before relying on it.
+static func warm_registry_cache() -> int:
+	var w := GridInteractablesComponent.new()
+	w._load_artifact_registries()
+	var n: int = w.grid_artifact_registry.size()
+	w.free()
+	return n
+
+
 # Load artifact registries based on map configuration
 func _load_artifact_registries() -> void:
 	print("GridInteractablesComponent: ============ LOADING ARTIFACT REGISTRIES ============")

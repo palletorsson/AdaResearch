@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://co0lielaeip03" path="res://commons/audio/interfaces/VRAudioMonitor.gd" id="1_v4m4"]
 [ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="2_viewport"]
 [ext_resource type="PackedScene" uid="uid://d3yq8v5gq2r1" path="res://commons/audio/interfaces/VRAudioMonitorUI.tscn" id="3_ui"]
-[ext_resource type="Material" uid="uid://ada_screen_bezel" path="res://commons/ui/materials/screen_bezel.tres" id="MatBezel"]
+[ext_resource type="Material" path="res://commons/ui/materials/screen_bezel.tres" id="MatBezel"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_chassis"]
 size = Vector3(0.32, 0.24, 0.1)

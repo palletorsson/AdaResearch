@@ -4,9 +4,9 @@
 [ext_resource type="Script" uid="uid://dggc31iasvhym" path="res://addons/godot-xr-tools/interactables/interactable_slider.gd" id="2_v4m4"]
 [ext_resource type="Script" uid="uid://dlojnwxo25bky" path="res://addons/godot-xr-tools/interactables/interactable_handle.gd" id="3_v4m4"]
 [ext_resource type="PackedScene" uid="uid://ca3daqmpo0tua" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.tscn" id="4_v4m4"]
-[ext_resource type="Material" uid="uid://ada_panel_white" path="res://commons/ui/materials/panel_white.tres" id="MatPanel"]
-[ext_resource type="Material" uid="uid://ada_track_groove" path="res://commons/ui/materials/track_groove.tres" id="MatGroove"]
-[ext_resource type="Material" uid="uid://ada_handle_glow" path="res://commons/ui/materials/handle_glow.tres" id="MatHandle"]
+[ext_resource type="Material" path="res://commons/ui/materials/panel_white.tres" id="MatPanel"]
+[ext_resource type="Material" path="res://commons/ui/materials/track_groove.tres" id="MatGroove"]
+[ext_resource type="Material" path="res://commons/ui/materials/handle_glow.tres" id="MatHandle"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_slot"]
 size = Vector3(0.06, 0.24, 0.02)
