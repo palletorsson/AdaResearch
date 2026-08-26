@@ -140,6 +140,41 @@ def sequence_artifacts(seq, reg, shapes):
     return order
 
 
+def sequence_shape(seq, n_artifacts):
+    """(map, quota) per hall, from the sequence's OWN maps — how many halls it
+    is and roughly how full each one runs, scaled to the artifacts on hand."""
+    p = os.path.join(ROOT, "commons", "maps", "sequences", "%s.json" % seq)
+    if not os.path.exists(p):
+        return []
+    with open(p, encoding="utf-8") as fh:
+        doc = json.load(fh)
+    blk = doc["sequences"]
+    blk = blk[0] if isinstance(blk, list) else (blk.get(seq) or list(blk.values())[0])
+    rows = []
+    for m in blk.get("maps", []):
+        mp = os.path.join(ROOT, "commons", "maps", str(m), "map_data.json")
+        if not os.path.exists(mp):
+            continue
+        with open(mp, encoding="utf-8") as fh:
+            md = json.load(fh)
+        n = sum(1 for r in md["layers"].get("interactables", []) for c in r if str(c).strip())
+        if n:
+            rows.append([str(m), n])
+    if not rows:
+        return []
+    total = sum(n for _m, n in rows)
+    # scale the profile to what is actually on hand: color's maps hold 86
+    # PLACEMENTS but only 74 distinct artifacts, and the ribbon places each once
+    scaled, run = [], 0
+    for i, (m, n) in enumerate(rows):
+        q = max(1, int(round(n * n_artifacts / total)))
+        if i == len(rows) - 1:
+            q = max(1, n_artifacts - run)
+        run += q
+        scaled.append([m, q])
+    return scaled
+
+
 def ribbon_plans():
     """The shapes a hall may take, odd and in band. Diverse, WITH repetition —
     a rhythm, not nineteen different buildings."""
@@ -176,6 +211,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--sequence", default="color")
     ap.add_argument("--apply", action="store_true")
+    ap.add_argument("--free", action="store_true",
+                    help="ignore the sequence's own shape and let the walls fall where they may")
     args = ap.parse_args()
 
     reg = registry()
@@ -191,23 +228,64 @@ def main():
     print("  a hall wants one artifact per %.1f floor cells; cost budget %.0f per hall\n"
           % (PER_ARTIFACT, COST_BUDGET))
 
+    # THE SEQUENCE'S OWN SHAPE IS THE TARGET (2026-08-25, Palle: "the Color and
+    # Composition spine sequence should only be like 6 map... here you can see
+    # their approximate artifact layout that should be fitted in the maps").
+    #
+    # Left to itself the ribbon made FIFTEEN halls for color's 74 artifacts,
+    # averaging five each, when color's own seven maps average twelve. The
+    # sequence already knows how many halls it is and roughly how full each one
+    # runs — Array 12, Pattern_Foundry 12, Color_Context_Placed 22, Nails 9,
+    # Pillar 8, Walls 10, Symmetry 13 — so that profile is the target and the
+    # ribbon fits into it rather than inventing its own length.
+    shape = [] if args.free else sequence_shape(args.sequence, len(order))
+    if shape:
+        print("  fitting the sequence's OWN shape: %d hall(s) of %s\n"
+              % (len(shape), ", ".join(str(n) for _m, n in shape)))
+
     halls, pending = [], list(order)
     plan_i = 0
+    # A HALL THAT PLACES NOTHING CONSUMES NOTHING. Without this the loop can
+    # spin forever: `continue` on an empty hall leaves both `pending` and
+    # `halls` unchanged, and the bound is on halls. Caught by a run that never
+    # returned rather than by reading the code.
+    tries = 0
     # A RHYTHM, NOT A CATALOGUE: ABACA — two shapes alternate with a third
     # returning, so the walk repeats without being uniform.
     rhythm = [0, 1, 0, 2, 0, 3, 1, 0, 4, 1]
-    while pending and len(halls) < 40:
+    # The shape is the TARGET, not a cap. Palle's own rule for the remainder:
+    # "if one map of artifact fill does not fill up the full hall we can add an
+    # extra wall and continue with the new map." So the sequence's profile sets
+    # the first halls, and anything left over gets its own — nothing is dropped
+    # to make the count come out.
+    cap = (len(shape) + 6) if shape else 40
+    while pending and len(halls) < cap and tries < 200:
+        tries += 1
         key, pat = plans[rhythm[plan_i % len(rhythm)] % len(plans)]
         plan_i += 1
         # how tall a hall do the remaining artifacts want?
         # size the hall for a READABLE number of things, not for all that are
         # left — a hall holding forty is a warehouse. Ten is what color does.
-        want_cells = min(len(pending), 11) * PER_ARTIFACT
+        quota = (shape[len(halls)][1] if len(halls) < len(shape)
+                 else min(len(pending), 11)) if shape else min(len(pending), 11)
+        quota = min(quota, len(pending))
+        want_cells = quota * PER_ARTIFACT
         want_h = int(round(want_cells / max(4, pat["w"] - 2))) + 4
         tile, z0 = cut_window(pat["tile"], want_h)
         slots_all, grid = M50.slots_for(tile)
         runs = M50.runs_for(grid)
-        pub = M50.thin(slots_all, runs, "field") + M50.thin(slots_all, runs, "enfilade")
+        # EVERY measured position, not a thinned variant list. Thinning is
+        # what a room-first tool does — it publishes a curated set of slots and
+        # fills them. Here the AIR does the thinning: a candidate is rejected
+        # because something is already within three cells of it, not because a
+        # variant declined to publish that spot. Drawing from thinned slots
+        # capped color at 38 of 74 with halls that could not reach their quota.
+        # RUNS FIRST. Dedupe keeps whichever offer reaches a cell first, and a
+        # square can never take an oblong: row_3_x is 6x1 and the biggest square
+        # in the hall was 4, so putting squares first dropped every run and the
+        # ribbon placed NOTHING. A run is the scarcer, more specific offer, so
+        # it wins the cell. (Third time today the oblong currency has bitten.)
+        pub = list(runs) + list(slots_all)
         seen_xy, slots = set(), []
         for s in pub:
             k2 = (s["x"], s["z"])
@@ -218,7 +296,7 @@ def main():
 
         # the hall's own appetite, from the measured density
         floor_n = sum(1 for r in tile for c2 in r if str(c2).strip() in ("1", "1s"))
-        target = max(3, int(round(floor_n / PER_ARTIFACT)))
+        target = quota if shape else max(3, int(round(floor_n / PER_ARTIFACT)))
         placed, cost, last_fam = [], 0.0, None
         for s in list(slots):
             if not pending:
@@ -232,7 +310,10 @@ def main():
             if any(math.hypot(s["x"] - p["x"], s["z"] - p["z"]) < need for p in placed):
                 continue
             c = max(0.0, cost_of(reg.get(tok, {})) - COST_FREE)
-            if placed and cost + c > COST_BUDGET:
+            # the sequence's quota outranks the load budget: a hall that is
+            # meant to hold twelve does not stop at four because three of them
+            # were expensive. The budget still spaces them, it no longer walls.
+            if placed and cost + c > COST_BUDGET and not shape:
                 break                      # THE WALL GOES HERE — too much load
             if placed and len(placed) >= target:
                 break                      # THE WALL GOES HERE — the hall is full
