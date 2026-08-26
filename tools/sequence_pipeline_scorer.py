@@ -11,12 +11,13 @@ Stages:
     3. Artifacts     — every interactable reference has a scene file on disk
     4. Maps          — map_data.json exists with 3 layers
     5. Validation    — pathfinder passes (if available)
-    6. VR Testing    — desktop_feedback.md mentions this sequence
+    6. VR Testing    — desktop_feedback.md NAMES one of this sequence's maps
     7. Polish        — captures exist for maps
 """
 
 import json
 import os
+import re
 import sys
 from collections import Counter
 import subprocess
@@ -31,6 +32,64 @@ FEEDBACK_FILE = ROOT / "ada_run" / "desktop_feedback.md"
 APPDATA = Path(os.environ.get("APPDATA", ""))
 # Godot writes user:// to %APPDATA%/Godot/app_userdata on Windows (Roaming, not Local).
 CAPTURES_DIR = APPDATA / "Godot" / "app_userdata" / "Ada Research Zero One" / "multi_shots"
+
+
+# --- stage 6 evidence -------------------------------------------------------
+# The desktop bridge names a map in exactly three forms. DERIVED from the writer
+# (commons/maps/catalog/DesktopMapSwitcherOverlay.gd), not transcribed from the file:
+#   "## <timestamp> | <map>"  entry title    _append_comment / _append_request
+#   "- Map: `<map>`"          structured field, both writers
+#   "[map:<map>]"             inline token    _on_insert_map_pressed
+_FB_TITLE = re.compile(r"^##[^|\n]*\|\s*(.+?)\s*$", re.M)
+_FB_FIELD = re.compile(r"^-\s*Map:\s*`([^`]+)`", re.M)
+_FB_TOKEN = re.compile(r"\[map:([^\]]+)\]")
+# the writer's placeholder when the user commented with no map loaded
+_FB_NON_MAPS = {"(no map selected)"}
+
+
+def walked_maps_from_feedback(text):
+    """Return the set of map names the feedback file actually NAMES, lowercased.
+
+    Exact names only. A substring test is not a laxer version of this check, it is a
+    different check: it passes a sequence on some OTHER sequence's feedback whenever
+    one map name is a substring of another. Measured 2026-08-26 across all 22 spine
+    sequences -- exactly one diverged, and it was wrong: `Array` (color) passed on a
+    2026-02-18 entry about `Array_Basics` (array_tutorial) whose content asks for that
+    map to be removed from its sequence. See _self_test below; it runs on every scoring
+    run, because a blind detector must not be able to print a verdict.
+    """
+    names = set()
+    for rx in (_FB_TITLE, _FB_FIELD, _FB_TOKEN):
+        for raw in rx.findall(text):
+            name = raw.strip().lower()
+            if name and name not in _FB_NON_MAPS:
+                names.add(name)
+    return names
+
+
+def _self_test():
+    """Prove the stage-6 detector both BITES and does not over-reject.
+
+    Returns a list of failure strings; empty means the detector works.
+    """
+    failures = []
+    # 1. the three real forms are each found (no over-rejection)
+    for label, sample in (
+        ("title", "## 2026-02-13T11:49:19 | Random_Rotate_Random_XYZ\n"),
+        ("field", "- Map: `Random_Rotate_Random_XYZ`\n"),
+        ("token", "walked it [map:Random_Rotate_Random_XYZ] fine\n"),
+    ):
+        if "random_rotate_random_xyz" not in walked_maps_from_feedback(sample):
+            failures.append("stage6 detector misses the %s form" % label)
+    # 2. THE NEGATIVE TEST: the real regression, reproduced. A map whose name is a
+    #    substring of a DIFFERENT sequence's map must not pass on that entry.
+    bystander = "## 2026-02-18T08:50:54 | Array_Basics\n- Sequence: `array_tutorial`\n- Map: `Array_Basics`\n"
+    if "array" in bystander.lower() and "array" in walked_maps_from_feedback(bystander):
+        failures.append("stage6 detector passes `Array` on an `Array_Basics` entry")
+    # 3. the writer's no-map placeholder is not a map
+    if walked_maps_from_feedback("## 2026-01-01T00:00:00 | (no map selected)\n"):
+        failures.append("stage6 detector counts the (no map selected) placeholder")
+    return failures
 
 
 def load_spine():
@@ -225,10 +284,11 @@ def score_sequence(seq_id, maps, registry_scenes):
     s6_total = 1  # binary: has any VR feedback or not
     if FEEDBACK_FILE.exists():
         try:
-            feedback = FEEDBACK_FILE.read_text(encoding="utf-8").lower()
-            # Check if any map name from this sequence appears in feedback
+            walked = walked_maps_from_feedback(FEEDBACK_FILE.read_text(encoding="utf-8"))
+            # Exact names only -- see walked_maps_from_feedback. A substring test here
+            # passed `color` for six months on another sequence's feedback.
             for m in maps:
-                if m.lower() in feedback:
+                if m.lower() in walked:
                     s6_done = 1
                     break
         except Exception:
@@ -269,8 +329,22 @@ def main():
     as_json = "--json" in sys.argv
 
     for arg in sys.argv[1:]:
-        if arg != "--json":
+        if arg not in ("--json", "--self-test"):
             single = arg
+
+    # A detector that cannot see must not be allowed to print a verdict. Pure string
+    # work, microseconds, so it runs on every scoring run rather than on a flag nobody
+    # remembers to pass.
+    failures = _self_test()
+    if failures:
+        for f in failures:
+            print("SELF-TEST FAIL: %s" % f, file=sys.stderr)
+        print("stage 6 detector is broken -- refusing to score", file=sys.stderr)
+        sys.exit(2)
+    if "--self-test" in sys.argv:
+        print("stage 6 detector self-test: PASS (4 cases, 1 negative)")
+        if not single:
+            return
 
     spine = load_spine()
     registry_scenes = load_all_registry_scenes()

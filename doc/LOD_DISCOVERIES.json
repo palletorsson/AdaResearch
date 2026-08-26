@@ -564,6 +564,18 @@
       "topic": "gate chain integrity",
       "insight": "Eight breaths found stranded gate tools one instance at a time; gate H (tools/check_gate_chain.py) asks the general question in 30 lines and caught itself on its first run. A gate runner naming a file the repo does not contain is silent in the only direction that matters: a clone has fewer gates, no row missing.",
       "lod": 3
+    },
+    {
+      "timestamp": "2026-08-25T07:15:29.414789+00:00",
+      "topic": "spine doc debt",
+      "insight": "After 2026-08-25, ZERO of 249 spine maps lack both blurb and intent; the 25 remaining lack intent.md ONLY and every one was born 07-08 or earlier. Newborn-without-docs and old-invisible-debt are two different problems.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-08-26T07:16:09.985582+00:00",
+      "topic": "sequence_pipeline_scorer",
+      "insight": "Stage 6 (vr_testing) tested map name membership with an unanchored substring search over desktop_feedback.md; color passed on 'array' inside an Array_Basics entry from another sequence. Anchored to the three forms the bridge writer emits (## ts | map, - Map: `map`, [map:map]); measured divergence across all 22 spine sequences = exactly 1. The 216 walked.md files are NOT VR evidence -- they say 'ghost-drafted from the working map'.",
+      "lod": 3
     }
   ]
 }

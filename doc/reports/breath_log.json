@@ -5001,6 +5001,183 @@
         "EIGHT INSTANCES FOUND BY HAND IS THE SIGNATURE OF A CLASS NOBODY WATCHES, AND THE CLASS COST ONE AFTERNOON TO CLOSE. Every previous breath that met this fault met an instance of it: a tool stranded outside the repository, found by reading git status, fixed or noted, counted as prop-010's Nth occurrence. Gate H asks the general question instead -- parse both gate runners for the tools they name, require each to exist and to be tracked -- and it is about thirty lines. Its first run returned FAIL 1 and named check_gate_chain.py, itself, referenced by the runner and not yet committed. That is a better demonstration than any synthetic case: the check found the newest instance of its own fault class within a minute of existing. The historical half is exact too -- `git cat-file -e a0aca4e30:tools/check_map_tokens.py` fails at this morning's baseline and succeeds at HEAD, so gate H would have gone red on the day the strand started rather than on the day someone happened to look. It is deliberately narrow: tracked-and-dirty is normal mid-session and is not a fault, and it does not follow imports, because one level named explicitly by a runner is the level at which all eight occurrences happened."
       ],
       "duration_minutes": 52
+    },
+    {
+      "breath_id": "2026-08-24T18:56",
+      "mode": "evolve-only",
+      "head_at_baseline": "fdd41b5f8",
+      "head_at_harvest": "fdd41b5f8",
+      "baseline_avg": 6.083,
+      "post_avg": 5.957,
+      "delta": -0.126,
+      "items_attempted": [
+        "Review today's log: one breath (2026-08-24T09:04, full) against 24 commits since",
+        "Verify that breath's claims on disk rather than trusting its ledger (prop-030)",
+        "Re-measure the pipeline lever unpiped, exit code read directly (prop-017)",
+        "Re-run the two gates born this morning against a day of heavy map authoring",
+        "Locate the regression the re-measurement exposed, in the tree rather than in the commits",
+        "Read the predicate behind the stage that reported it, not just its verdict",
+        "Bound the fault by running the scorer's own logic against its stated contract",
+        "Level-3: test tonight's pattern against the three-occurrence bar and against existing proposals",
+        "Update improvement_trajectory.json"
+      ],
+      "items_succeeded": [
+        "morning-claims-verified-7-of-7-files-present-and-tracked-3-of-3-commits-real",
+        "pipeline-remeasured-5.957-exit-0-unpiped-22-reading-flat-run-broken-downward-again",
+        "gateH-held-46-tools-2-runners-0-unreachable-across-24-commits",
+        "gateG-held-under-a-moving-corpus-268-1517-to-263-1530-0-unresolved-selftest-PASS",
+        "regression-located-Color_Arrays-born-17:50-c20675256-map_data-without-either-doc-file",
+        "docs-never-written-not-written-late-git-log-all-empty-on-both-paths",
+        "scorer-stage-2-predicate-read-in-source-line-142-OR-against-line-10-docstring-AND",
+        "predicate-mismatch-dated-to-first-commit-cdc568298-2026-03-31-not-a-later-loosening",
+        "cost-measured-by-flipping-one-character-in-the-scorer-itself-4.652-vs-5.957-delta-1.305",
+        "eight-sequences-would-sit-at-stage-2-including-randomness-the-only-COMPLETE-one",
+        "20-maps-of-pure-intent-debt-found-formfinding-7-of-7-isosurfaces-13-of-13-both-reading-Doc-OK",
+        "denominator-corrected-mid-pass-456-was-all-83-sequences-27-is-the-spine",
+        "regression-arithmetic-decomposed-6.083-6.087-6.130-5.957-one-advance-one-regression",
+        "second-mechanism-named-sequence-adopts-map-imports-debt-recorded-at-1-not-inflated",
+        "prop-036-written-a-tested-predicate-weaker-than-its-stated-one",
+        "prop-018-clause-1-bounded-by-measurement-a-half-strength-predicate-passes-a-both-directions-bite-test",
+        "prop-006-occurrence-9-and-prop-035-scoped-apart-from-prop-036",
+        "gateF-degraded-further-12.2-against-goal_z-sentinel-minus-1.0-not-repaired-per-08-21-ruling"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "items_not_run": [],
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "files_changed": [
+        "doc/reports/skill_evolution_proposals.json",
+        "doc/reports/breath_log.json",
+        "doc/reports/improvement_trajectory.json"
+      ],
+      "commits_authored": [],
+      "release_gates": {
+        "overall": "FAIL",
+        "passing": 7,
+        "total": 8,
+        "failing": [
+          "F: Museum Walkthrough (autopilot)"
+        ],
+        "note": "A-E, G, H PASS. F reads z_reached 12.2, goal_z -1.0 (sentinel), 8 stalls, no_route -- degraded from this morning's 66.0/66.0 PASS and then 35.7/66.0. Contended builder, not repaired (08-21 ruling)."
+      },
+      "discoveries": [
+        "THE STAGE THAT COUNTS DOCUMENTATION TESTS 'blurb OR intent' WHILE ITS OWN DOCSTRING SAYS 'blurb + intent', AND HAS SINCE ITS FIRST COMMIT. tools/sequence_pipeline_scorer.py line 10 states the contract; line 142 implements a disjunction. git log -L142,142 returns exactly one commit, cdc568298 on 2026-03-31 12:54, the same commit that wrote the docstring -- so this is not drift and not a red row made green, it is a mismatch present at birth and standing 146 days across 90 breaths. Measured, not inferred: 27 of the spine's 263 maps lack a doc file and 26 of the 27 lack intent.md specifically, so they are invisible to the stage built to count them. Two sequences have ZERO intents and read Doc=OK: formfinding 7 of 7, isosurfaces 13 of 13.",
+        "THE COST WAS MEASURED BY FLIPPING ONE CHARACTER IN THE SCORER'S OWN LOGIC RATHER THAN BY REIMPLEMENTING IT. A scratchpad copy with OR changed to AND and ROOT pinned to the repo -- no other edit, same tree, same minute -- reports global_avg 4.652, 8 sequences at stage 2, ZERO complete, against the shipping 5.957 / 1 / 1. Delta -1.305. The eight are color, formfinding, randomness, lsystems, isosurfaces, boolean_surfaces, graphtheory, postfoundationscrisis. randomness is in that list: the one sequence months of harvest notes call COMPLETE is complete only under the disjunction. For scale the 2026-07-20 harvest calls its six-sequence regression prop-006's largest-scale occurrence on record; this is eight, and it is latent rather than new. Written up as prop-036, which deliberately does NOT decide which way to resolve it -- whether a map owes an intent.md is Palle's call, and the evidence points both ways.",
+        "TONIGHT'S REGRESSION IS ONE MAP, AND IT IS NOT THE ONE THAT LOOKED GUILTY. The pipeline read 5.957 against this morning's 6.083, breaking a 22-reading flat run downward for the second time in three days. Two color maps are missing docs, but only Color_Arrays -- born 17:50 today in c20675256 with map_data.json and neither doc file, in that commit or any other -- actually moves the number, because the OR predicate scores Symmetry_Seventeen's missing intent as documented. The arithmetic decomposes exactly: 146/24 = 6.083 this morning; symmetry leaves the spine, 140/23 = 6.087; array_tutorial advances 6 to 7 (a real gain), 141/23 = 6.130; color falls 6 to 2, 137/23 = 5.957. So the day produced one genuine advance and one regression, and the denominator moved underneath both.",
+        "A SEQUENCE CAN IMPORT DOC DEBT WITHOUT TOUCHING A MAP, WHICH IS A MECHANISM prop-006 IS SCOPED PAST. Symmetry_Seventeen has had a blurb and no intent.md since 07-07 -- intent.md is in no commit on any branch -- and that was harmless for 48 days because no sequence listed it. f3a891a09 at 15:32 today adopted it into color. The map did not change; the sequence did. prop-006's rule fires on map-creating commits and no commit today touched that map. Recorded at ONE occurrence as a watch item on prop-006, not inflated to a threshold it has not met.",
+        "THE TWO GATES BORN THIS MORNING BOTH SURVIVED A DAY OF HEAVY AUTHORING, AND THE THIRD ONE FAILED HARDER. Re-run live against 24 commits: gate H reads 46 tools named by 2 runners, 0 unreachable from a clone; gate G reads 263 maps / 1530 placements / 0 unresolved with its detector self-test PASS -- and note the corpus moved under it, 268/1517 this morning to 263/1530 tonight, so it held across a real delta rather than a still tree. All 7 of this morning's claims verify on disk: 7 of 7 files present AND tracked, 3 of 3 commits real. Gate F, which the morning breath explicitly declined to repair as a contended builder, has degraded further: 66.0 of 66.0 PASS at 09:05, then 35.7 of 66.0, and now z_reached 12.2 against goal_z -1.0 with 8 stalls and no_route. goal_z -1.0 is a sentinel, so the ratio it prints is not a ratio; the 08-21 ruling stands and no repair was attempted."
+      ],
+      "duration_minutes": 26
+    },
+    {
+      "breath_id": "2026-08-25T09:04",
+      "mode": "full",
+      "baseline_avg": 5.909,
+      "post_avg": 6.182,
+      "delta": 0.273,
+      "items_attempted": [
+        "Baseline: pipeline + heat map + garden + release gates, run live",
+        "Fix the color regression last night located: the map with data and no docs",
+        "Close the silent doc debt the OR predicate cannot see (Symmetry_Seventeen intent)",
+        "Measure the prop-006 class instead of assuming it: every spine map, docs vs birth date",
+        "Repair the claims yesterday's fold made false in a neighbouring doc"
+      ],
+      "items_succeeded": [
+        "regression-fixed-Array-not-Color_Arrays-renamed-at-5cb5a03d1-blurb-and-intent-written-from-12-registry-entries-and-4-commit-bodies",
+        "color-stage-2-to-COMPLETE-136-over-22-equals-6.182-exit-0-unpiped",
+        "Symmetry_Seventeen-intent.md-written-48-day-old-debt-adopted-into-color-yesterday",
+        "prop-006-class-MEASURED-249-spine-maps-0-now-lack-both-docs-25-lack-intent-only-all-born-07-08-or-earlier",
+        "Pattern_Foundry-intent-corrected-3-false-claims-from-yesterday-fold",
+        "editor-map_info-loss-scoped-5-maps-6-keys-in-worktree-fix-landed-08:31-today-name-residual-found"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "THE REGRESSION WAS REAL AND THE MAP HAD BEEN RENAMED UNDERNEATH THE DIAGNOSIS. Last night named Color_Arrays; commons/maps/Color_Arrays does not exist, because 5cb5a03d1 folded it into Array. Had this breath trusted the ledger's name instead of re-deriving the failing row from the scorer, it would have reported the map missing and fixed nothing. The fix is two files -- blurb.md and intent.md derived from the map's own 12 placements, their registry descriptions and the four commit bodies that authored the fold -- and it moves color 2 -> 8, the whole sequence, 130/22 -> 136/22 = 6.182. That is the highest pipeline reading in the log and the first to come from writing prose rather than from moving a denominator.",
+        "prop-006's CLASS IS NOT WHAT ITS NAME SAYS, MEASURED ACROSS ALL 249 SPINE MAPS. The rule watches map-creating commits for maps born without docs. After this morning's two files, ZERO spine maps lack both docs -- so the newborn-without-docs case is now empty. The 25 that remain all lack intent.md ONLY, and every one was born 2026-07-08 or earlier: 12 ISO_* from 03-19, six FormFinding_* from 07-07, five Chamber_* from 07-19. The standing debt is old and invisible (the OR predicate scores it green); the acute regressions are new and rare (two in three days, both now closed). Those are two different problems and prop-006 currently names only the second.",
+        "verify_sequence ASSERTS A CONTRACT 20 OF 22 SPINE SEQUENCES VIOLATE. Its check 4 requires content[i] to start with maps[i]; measured, 20 of 22 fail it -- forces 17 positional mismatches over 18 entries, isosurfaces 7, color 6, primitives 6, and softbodies carries 9 content entries against 34 maps. This is not drift in the maps: content entries carry ': Title' suffixes that maps[] has no room for, and color's four orphaned entries (Color_Grid_Pallet, Color_Rainbow, Color_Paint, Color_Flashlight) are the ONLY surviving record of rooms 38d5d9c82 consolidated away. So the array is a stale-but-load-bearing archive, not a broken list, and 'fixing' it to match maps[] would delete the record. Deliberately NOT resolved -- same shape as prop-036, and which side is the truth is Palle's call. Written as prop-037.",
+        "THE EDITOR'S map_info LOSS IS SCOPED, ALREADY FIXED, AND HAS ONE RESIDUAL THE FIX CANNOT COVER. Five maps in the working tree lost map_info keys relative to HEAD -- title x4, description x4, eye_shot_adopted x1, all five in the color sequence -- which is where 6 of verify_sequence's 12 color errors ('no title field') actually come from: the titles exist in HEAD and are stripped in the tree. dd667cf5 in ada_encyclopedia fixed it at 08:31 TODAY, 33 minutes before this breath, by spreading loadedMapInfo first. The residual: `name` is a field the editor DOES model, so it is written over the merge, and 2 of the 6 maps checked had a human-readable name collapsed to the lookup ('Symmetry: The Seventeen' -> 'Symmetry_Seventeen', 'Color Pillar' -> 'Color_Pillar'). Post-fix saves still do this. Not repaired: different repo, live tool, Palle's uncommitted edits. Written as prop-038.",
+        "THE BREATH RECORDED A FALSE EXIT CODE IN THE SAME SESSION THAT CARRIES THE PROPOSAL AGAINST IT. The baseline wrote release_gates.exit_code 0; that was `tail`'s exit code, because the run was piped. Re-run redirected it is 2, consistent with gate F failing, and gate F has failed all morning. prop-017 says read the exit code unpiped and it is four days old. Corrected in the baseline file with a note rather than overwritten, because a standing proposal that its own author walks past is evidence about the proposal's reachability, not just about the number."
+      ],
+      "files_changed": [
+        "commons/maps/Array/blurb.md",
+        "commons/maps/Array/intent.md",
+        "commons/maps/Symmetry_Seventeen/intent.md",
+        "commons/maps/Pattern_Foundry/intent.md",
+        "doc/reports/breath_baseline_2026-08-25_09-04.json",
+        "doc/reports/breath_log.json",
+        "doc/reports/improvement_trajectory.json",
+        "doc/reports/skill_evolution_proposals.json"
+      ],
+      "duration_minutes": 38
+    },
+    {
+      "breath_id": "2026-08-26T09:04",
+      "mode": "full",
+      "baseline_avg": 6.182,
+      "post_avg": 6.091,
+      "delta": -0.091,
+      "delta_is_correction": true,
+      "items_attempted": [
+        "Baseline: pipeline + heat map + garden + release gates, run live",
+        "Test whether the pipeline lever is really exhausted, or whether stage 6 is just blind",
+        "Refuse the available big win (216 walked.md files) after reading what they say about themselves",
+        "Bound the substring fault by measuring all 22 spine sequences, not by asserting it",
+        "Anchor the stage-6 predicate to the three forms DERIVED from the bridge writer",
+        "Prove the repair bites with a negative test, and wire it so a blind detector cannot print a verdict",
+        "Correct yesterday's trajectory entry rather than overwrite it"
+      ],
+      "items_succeeded": [
+        "stage6-substring-fault-located",
+        "stage6-predicate-anchored",
+        "stage6-self-test-inline",
+        "negative-test-passes",
+        "trajectory-corrected"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "files_changed": [
+        "tools/sequence_pipeline_scorer.py",
+        "doc/reports/improvement_trajectory.json",
+        "doc/reports/breath_log.json"
+      ],
+      "discoveries": [
+        "THE STAGE THAT DECIDES WHETHER A HUMAN HAS WORN THE HEADSET WAS AN UNANCHORED SUBSTRING SEARCH, AND IT HAD BEEN WRONG ABOUT EXACTLY ONE SEQUENCE SINCE YESTERDAY MORNING. sequence_pipeline_scorer stage 6 read `m.lower() in feedback.lower()` over the whole of ada_run/desktop_feedback.md. color's map `Array` -- renamed from Color_Arrays at 5cb5a03d1 two days ago -- matched the letters 'array' inside a 2026-02-18 entry about `Array_Basics` of array_tutorial, an entry whose CONTENT asks for that map to be removed from its sequence. Anchored predicate measured against all 22 spine sequences: exactly one diverges, and randomness's pass is genuine. Honest global_avg 134/22 = 6.091, not 136/22 = 6.182.",
+        "THE AVAILABLE BIG WIN WAS THE DISHONEST ONE, AND IT TOOK READING TWO FILES TO SEE IT. 216 walked.md files are tracked in commons/maps/*/walked.md and stage 6 reads none of them; wiring them in would have moved the pipeline number further than anything the breather has done in six weeks. Every one opens 'ghost-drafted from the working map ... Palle rules the voice'. They are prose written FROM SOURCE, not walks. Stage 6 names a human in a headset and there is no substitute in the tree for that. The lever is genuinely exhausted; it now says so accurately instead of by accident.",
+        "THE FAULT WAS AN INSTANCE, NOT A CLASS, AND CHECKING THAT COST ONE GREP. Four python tools reference desktop_feedback.md; the other three (vector_check, tweak_flows, generate_flows) use it for mtime and for prose, and none matches a map name against it. Previous breaths in this ledger have found the class behind every instance (floor_anchor -> 2 dead tokens; the OR predicate -> 249 spine maps). This one does not generalise, and saying so is the finding.",
+        "I REPEATED THE 08-23 GATE BUG INSIDE THE MEASUREMENT THAT WAS DIAGNOSING IT. My first sweep across the spine printed nothing at all, because I keyed the sequences on `id`; curriculum_spine.json keys them on `name`. That is verbatim the fault recorded on 2026-08-23 ('the gate read `id`, got nothing') and it produced the same signature: a clean empty result that reads like good news. A measurement returning zero findings needs its denominator printed before it is believed -- the discriminator is always the denominator.",
+        "THE REPAIR IS GUARDED BY THE REGRESSION ITSELF, RUN INLINE RATHER THAN ON A FLAG. _self_test() reproduces the Array/Array_Basics case as a negative assertion plus three positive ones, runs on EVERY scoring run (pure string work), and exits 2 refusing to print a table if the detector is blind. Verified by deliberately breaking a scratchpad copy: 2 failures, exit 2, no green table. This answers the 08-24 finding that 'a green row makes two claims and only one of them was ever tested' -- here the detector's own claim is tested every time it speaks."
+      ],
+      "duration_minutes": 34
     }
   ]
 }

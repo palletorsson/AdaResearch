@@ -318,6 +318,18 @@
         {
           "date": "2026-08-22T18:56",
           "update": "A LIMIT OF THE SCAN AS PROPOSED, found by a regression it would have missed. This proposal's re-scan is commit-based (`git log --since=<last breath> --name-only`). Tonight the spine's global_avg fell 6.083 -> 5.958 because commons/maps/Point_Lines/map_data.json places `floor_anchor`, a token in no registry with no scene on disk; primitives 143/144 = 99% and its HEAD dropped stage 6 -> stage 3. `git log -S\"floor_anchor\" -- commons/maps/Point_Lines/map_data.json` returns NOTHING. The cell was written into the working tree at 13:32 today by a live editor session and never committed, so the re-scan returns clean over all 29 of today's commits and the regression is real. Note also that it is a stage-3 ARTIFACT regression, not the stage-2 doc regression this proposal was built from -- the shape generalises past blurb/intent. Opened as prop-033 (a state gate rather than a change scan) rather than widened here; this note records the boundary, and the two should be applied together."
+        },
+        {
+          "date": "2026-08-24",
+          "breath_ref": "2026-08-24T18:56",
+          "kind": "confirming",
+          "note": "NINTH occurrence, and the first where the map's docs were never written at all rather than written late. Color_Arrays arrived at 17:50 today in c20675256 ('THE FOLD -- array_tutorial collapses into Color and Composition') carrying map_data.json and neither blurb.md nor intent.md, in that commit or any other -- git log --all on both paths is empty. It alone moved color from stage 6 to stage 2 and the spine's global_avg from 6.130 to 5.957. This is exactly the commit hygiene the 2026-07-20 harvest asked for ('commit each new map WITH its blurb/intent in the same commit') going unapplied for a 35th day, and it confirms the asymmetry that makes prop-006 worth applying: the map cost one commit to add and the doc debt is found only by an instrument nobody runs between breaths."
+        },
+        {
+          "date": "2026-08-24",
+          "breath_ref": "2026-08-24T18:56",
+          "kind": "sharpening",
+          "note": "A SECOND MECHANISM, WHICH prop-006 AS WRITTEN IS BLIND TO: a sequence can import doc debt without touching a map. Symmetry_Seventeen has carried a blurb and no intent.md since 8feb9c913 on 07-07 -- intent.md exists in no commit on any branch -- and that was harmless for 48 days because no sequence listed it. At 15:32 today f3a891a09 ('symmetry dissolves into color's census room') adopted it into color. The map did not change; the SEQUENCE changed, and the gap came with it. prop-006's rule is scoped to map-creating commits and would not have fired here, because no commit today touched that map. Recorded as a distinct face at ONE occurrence, deliberately not inflated: it is a watch item, not a threshold. NOTE, and this is the correction that matters -- the adopted gap did NOT move tonight's number. Stage 2 tests blurb OR intent (see prop-036), so Symmetry_Seventeen's missing intent scores as documented. Color_Arrays is the whole of the regression."
         }
       ]
     },
@@ -853,7 +865,15 @@
         "2026-08-07T09:55",
         "no-breath 2026-08-07 afternoon session (commits 04050a256, 7b6aac429)"
       ],
-      "relations": "Generalises prop-017 (the exit code is the verdict) from HOW a verdict is read to WHETHER the instrument producing it was ever proven. Shares a root with the CLAUDE.md rule 'DERIVE the declaration, never transcribe it' and with its 'before you believe an INERT verdict, check the harness' table -- this proposal is that table promoted from the DNA loop to every instrument the breather reads."
+      "relations": "Generalises prop-017 (the exit code is the verdict) from HOW a verdict is read to WHETHER the instrument producing it was ever proven. Shares a root with the CLAUDE.md rule 'DERIVE the declaration, never transcribe it' and with its 'before you believe an INERT verdict, check the harness' table -- this proposal is that table promoted from the DNA loop to every instrument the breather reads.",
+      "evidence_updates": [
+        {
+          "date": "2026-08-24",
+          "breath_ref": "2026-08-24T18:56",
+          "kind": "limiting",
+          "note": "A MEASURED LIMIT ON CLAUSE 1, found by trying it. Clause 1 requires an instrument to bite in both directions before its number counts. The scorer's stage 2 PASSES that test -- inject a map with no docs and it goes red -- and is nonetheless wrong, because it tests 'blurb or intent' while its docstring states 'blurb + intent' (prop-036, measured tonight at -1.305 global_avg and 8 sequences). A known-fault injection proves an instrument RESPONDS; it cannot prove the instrument responds to the RIGHT PREDICATE. Recommend clause 1 be applied with prop-036 clause 3 beside it, or it will keep issuing confident green on half-strength tests. This does not weaken prop-018's five occurrences -- it bounds what applying it will buy."
+        }
+      ]
     },
     {
       "id": "prop-021",
@@ -1223,6 +1243,69 @@
       "breath_refs": [
         "2026-08-22T18:56",
         "2026-08-23T09:04"
+      ],
+      "evidence_updates": [
+        {
+          "date": "2026-08-24",
+          "breath_ref": "2026-08-24T18:56",
+          "kind": "scoping",
+          "note": "Tonight's prop-036 lands on the same file and is NOT the same fault, recorded here so the two are not merged later. prop-035 is stage 3 and arithmetic: a real fault is counted, then rounded out of sight by a large denominator. prop-036 is stage 2 and predicate: the fault is excluded before any arithmetic runs, so no denominator or rounding rule would ever surface it. They want different fixes -- prop-035 wants the raw fraction printed, prop-036 wants the predicate resolved against its own docstring. Applying either leaves the other standing."
+        }
+      ]
+    },
+    {
+      "id": "prop-036",
+      "created": "2026-08-24T18:56",
+      "skill": "tools/sequence_pipeline_scorer.py (stage 2 predicate) + ada-breather (Baseline/Harvest) + a doc-completeness gate",
+      "status": "proposed",
+      "evidence": "THE STAGE CLAIMS A CONJUNCTION AND TESTS A DISJUNCTION, AND HAS DONE SINCE ITS FIRST COMMIT. tools/sequence_pipeline_scorer.py line 10 states the contract: 'Documentation - blurb.md + intent.md per map'. Line 142 tests it: if blurb.exists() OR intent.exists(). A map with a blurb and no intent scores as fully documented. Measured tonight over the live tree, not counted from memory: 27 of the spine's 263 maps are missing a doc file, and 26 of those 27 are missing intent.md while carrying a blurb -- so they are invisible to the stage that exists to count them. Two whole sequences read 0% documentation under the stated contract and Doc=OK under the shipped one: formfinding (7 of 7 maps) and isosurfaces (13 of 13). That is 20 maps of pure intent debt reading green.\n\nTHE COST IS NOT COSMETIC, AND WAS MEASURED BY RUNNING THE SCORER'S OWN LOGIC WITH ONE CHARACTER CHANGED. A copy of the scorer with OR flipped to AND (ROOT pinned to the repo, no other edit, run against the same tree in the same minute) reports global_avg 4.652 with 8 sequences at stage 2 and ZERO complete, against the shipping 5.957 with 1 at stage 2 and 1 complete. Delta -1.305, and the eight are color, formfinding, randomness, lsystems, isosurfaces, boolean_surfaces, graphtheory, postfoundationscrisis. Note which sequence is in that list: randomness, the single sequence the ledger has called COMPLETE (stage 8) for months, is complete only under the disjunction. For scale, the 2026-07-20 harvest calls its six-sequence doc regression 'prop-006's largest-scale occurrence on record'. This is eight, and unlike 07-20 it is not new -- it is latent, and it has been latent the whole time.\n\nIT WAS NEVER LOOSENED; THE TWO HALVES DISAGREED FROM BIRTH. git log -L142,142 returns exactly one commit: cdc568298, 2026-03-31 12:54, 'feat: sequence pipeline scorer + onboarding overhaul' -- the same commit that wrote the docstring. So this is not drift and not somebody making a red row green. It is an original mismatch between the stated predicate and the tested one, standing 146 days across 90 breaths, because every downstream reader (this skill's Baseline and Harvest, the heat map, the dashboard, every harvest note in improvement_trajectory.json) consumes the scorer's VERDICT and none has ever read its PREDICATE.\n\nTHE CLASS IS AT THREE-PLUS AND THE OCCURRENCES ARE INDEPENDENT. (a) Tonight, the scorer's stage 2, above. (b) 2026-08-24 MORNING, the same shape one register up and found independently the same day: gate G's green row claimed both 'the corpus is clean' and 'the detector would have spoken', and only the first was ever tested; that breath closed it with a negative self-test and proved the coupling by re-introducing the blind spot. (c) 2026-07-31, prop-018's occurrence (a): the DNA orphan detector recognised only @export_enum while its own docstring named the broader standard, so the codebase's dominant promotion idiom was invisible to it. (d) The canonical case recorded in CLAUDE.md: science_screen's registry declared none|bezel|hooded|cabinet against a code enum of stand|wall|console|rig, the sweep set an invalid value, the artifact fell back to its default, and sixteen identical frames published green.\n\nWHY prop-018's REMEDY DOES NOT REACH IT, WHICH IS THE REASON THIS IS SEPARATE. prop-018 clause 1 requires an instrument to bite in BOTH directions -- green on a known-good subject, red on an injected known-fault -- before its number is a finding. Stage 2 PASSES that test: inject a map with neither doc file and the stage correctly goes red. The instrument is responsive; the predicate is half strength. A both-directions bite test cannot see the difference between OR and AND, because both bite. prop-035 is also adjacent and also does not reach it: prop-035 is about stage 3 ROUNDING hiding a single fault in a large denominator, a sensitivity problem. Here nothing is rounded away -- the fault is excluded by the predicate before any arithmetic happens.",
+      "proposed_change": "Three clauses. The first is a decision, not a code change, and it belongs to Palle.\n\n(1) RESOLVE THE CONTRACT, IN EITHER DIRECTION, BUT DO NOT LEAVE THE TWO HALVES DISAGREEING. Either intent.md is required, in which case line 142 becomes AND and the eight stage-2 readings are TRUE and become the spine's real doc backlog (26 intent files, of which 20 are formfinding + isosurfaces); or it is not required, in which case delete '+ intent.md' from the docstring at line 10 and from the stage's name, and stop implying a file nobody is expected to write. The evidence leans to the second reading -- two sequences have zero intents and nobody noticed for months, which is what abandonment looks like -- but that is a judgement about what the project owes a map, and this proposal deliberately does not make it.\n\n(2) WHICHEVER WAY IT GOES, PRINT THE PREDICATE'S PARTS. Stage 2 should report the two files separately when they differ, e.g. 'Doc 92% (blurb 11/12, intent 0/12)'. This costs one column and makes the disjunction self-documenting: whatever the rule is, the reader can see which half is carrying it. This clause is worth shipping even if clause 1 is answered 'not required', because it is the thing that would have surfaced 20 empty intents on any of the 90 breaths that read this table.\n\n(3) SKILL -- READ THE PREDICATE ONCE PER INSTRUMENT, NOT THE VERDICT FOREVER. Add to the Baseline phase: when a stage or gate is load-bearing for a verdict this loop will record, open the line that implements it and check the tested predicate against the stated one. Not every run -- once per instrument, recorded in known_tooling_limits, re-checked when the tool's mtime moves. The generalisation of (b), (c) and (d) is that a green row asserts a sentence, and nobody in 90 breaths had read the sentence the code actually asserts.",
+      "expected_improvement": "Closes a 146-day-old gap between what the pipeline says it measures and what it measures, on the single number this entire loop steers by. Concretely: either the spine's doc backlog becomes visible and countable at 26 files (and the 'randomness is COMPLETE' claim in months of harvest notes gets corrected), or the contract shrinks to what is actually enforced and stops generating phantom debt. Clause 2 alone would have shown formfinding and isosurfaces at intent 0/7 and 0/13 on every one of the 90 breaths that printed this table. Clause 3 is the cheap general form: it would have caught (b), (c) and (d) at their source, and none of them were caught by running the instrument harder.",
+      "breath_refs": [
+        "2026-08-24T18:56",
+        "2026-08-24T09:04",
+        "2026-07-31T11:20",
+        "2026-07-20T09:00"
+      ],
+      "evidence_updates": []
+    },
+    {
+      "id": "prop-037",
+      "created": "2026-08-25T09:04",
+      "skill": "tools/verify_sequence.py (check 4: content array matches maps) + commons/maps/sequences/*.json",
+      "status": "proposed",
+      "evidence": "A CHECK THAT 20 OF 22 SPINE SEQUENCES FAIL IS NOT FINDING A FAULT, IT IS DESCRIBING A CONVENTION IT DOES NOT SHARE. verify_sequence.py check 4 requires content[i] to start with maps[i]. Measured this morning over all 22 scored spine sequences: 20 fail. forces has 17 positional mismatches across 18 content entries against 30 maps; isosurfaces 7; color 6; primitives 6; softbodies carries 9 content entries against 34 maps and reports 0 mismatches only because the comparison runs out of entries. This is not drift in maps[]. content entries carry a ': Title' suffix that maps[] has no field for -- 'Color_Nails: Nail Salon Color Selection' -- and color's four entries that name no current map (Color_Grid_Pallet, Color_Rainbow, Color_Paint, Color_Flashlight) are the only surviving record of rooms that 38d5d9c82 consolidated away on 2026-08-24. The two arrays are a live list and a titled archive that have drifted apart on purpose. Rewriting content to match maps would satisfy the check and delete the record. Note the readers already treat maps as truth: spine_auto_research.py:261 and spine_museum.py:89 both read seq.get('maps') or seq.get('content'), a fallback, so content only binds when maps is empty.",
+      "proposed_change": "Do not touch the corpus. Decide what content IS, then make the checker say it. Either (a) content is a titled archive and check 4 becomes a set-membership warning ('content entry names no current map') rather than a positional equality error, or (b) the titles content carries move into a real per-map title field -- which map_info.title already is -- and content is retired. Deliberately not decided here: option (b) is the larger cleanup and it interacts with prop-038, since map_info.title is the field the editor was dropping.",
+      "expected_improvement": "verify_sequence stops reporting 12 errors for color of which 6 are a convention it disagrees with and 6 are a separate live fault (prop-038). A sequence-level verifier whose errors are all real is one a breath can gate on; today's cannot be, and no breath has ever acted on its output.",
+      "breath_refs": [
+        "2026-08-25T09:04"
+      ]
+    },
+    {
+      "id": "prop-038",
+      "created": "2026-08-25T09:04",
+      "skill": "ada_encyclopedia src/app/editor/page.tsx (save: map_info assembly)",
+      "status": "proposed",
+      "evidence": "THE FIX LANDED THIS MORNING AND CLOSED FIVE KEYS OF SIX; THE SIXTH IS STILL OVERWRITTEN BY DESIGN. dd667cf5 (08:31 today) spreads loadedMapInfoRef.current FIRST so museum, description, title and hints survive the round trip -- correct, and it closes the loss 304fe0305 documented. But `name` is a field the editor models, so it is written over the merge as name: mapName.trim(), which is the LOOKUP. Measured against HEAD over the 6 color maps dirty in the working tree: 2 had a human-readable name and both collapsed -- 'Symmetry: The Seventeen' -> 'Symmetry_Seventeen', 'Color Pillar' -> 'Color_Pillar'. Post-fix saves still do this, because the fix cannot cover a key the editor writes on purpose. Scope of the pre-fix loss, measured the same way: 5 maps lost map_info keys relative to HEAD (title x4, description x4, eye_shot_adopted x1), all 5 in the color sequence, and those stripped titles are the source of 6 of the 12 errors verify_sequence reports for color -- the titles are present in HEAD and absent in the tree, so the verifier is reporting a working-tree fault as a corpus fault.",
+      "proposed_change": "In the editor's save, write lookup_name from mapName and leave name to the merge -- name: loadedMapInfoRef.current.name ?? mapName.trim(). A new map still gets a name; an existing one keeps the human one. Separately, Palle's 5 dirty color maps carry the pre-fix loss and re-saving each in the fixed editor restores title/description from disk, but only if the load reads HEAD's file rather than the already-stripped tree copy -- so this needs checking before it is recommended as a repair.",
+      "expected_improvement": "Human-readable map names stop being destroyed by the tool that edits maps. This is not a scoring metric: name is what the museum and the book print, so the loss is invisible to every gate and visible to every reader.",
+      "breath_refs": [
+        "2026-08-25T09:04"
+      ]
+    },
+    {
+      "id": "prop-039",
+      "created": "2026-08-26T09:04",
+      "skill": "tools/sequence_pipeline_scorer.py (all 7 stage predicates) + ada-breather (Baseline phase)",
+      "status": "partially_applied",
+      "shipped": "Clause 2 is SHIPPED for stage 6 only, in this breath: the predicate is anchored and _self_test() runs inline on every scoring run, exiting 2 rather than printing a table if the detector is blind. Clauses 1 and 3 are proposed and unapplied.",
+      "evidence": "THIRD OCCURRENCE OF ONE CLASS, ACROSS THREE DIFFERENT STAGES, IN FOUR DAYS: THE SCORER'S STAGE PREDICATES ARE LOOSER THAN THE STAGE NAMES, AND EVERY LOOSENING INFLATES. (1) 2026-08-23, stages 3/5: a rounded percentage let 143/144 print as 100%, hiding a dead token for 68 days -> prop-035. (2) 2026-08-24, stage 2: the predicate tests 'blurb OR intent' while its own docstring says 'blurb + intent' -> prop-036. (3) 2026-08-26, stage 6: `map.lower() in feedback.lower()`, an unanchored substring over the whole feedback file, while the stage means 'a human wore the headset in this map'. Measured across all 22 spine sequences against a predicate anchored to the three forms the bridge writer emits, exactly one diverged -- color, passing on the letters 'array' inside a 2026-02-18 entry about `Array_Basics` of array_tutorial, an entry asking for that map to be REMOVED. Honest global_avg 6.091, not 6.182. Three occurrences, three stages, same shape: nobody had ever read a stage's predicate against the stage's own name. prop-035 and prop-036 each fix one instance and neither states the rule.",
+      "proposed_change": "Three clauses. (1) AUDIT ALL SEVEN, ONCE: read each stage predicate in score_sequence beside the stage label in the module docstring and record, per stage, whether the test is narrower, equal to, or WIDER than the name. Stages 1, 4 and 7 have not been read this way at all. Where they disagree, either tighten the predicate or rename the stage -- but do not leave the two halves disagreeing, which is prop-036's unresolved half and belongs to Palle in the same way. (2) EVERY PREDICATE CARRIES ITS OWN NEGATIVE TEST, RUN INLINE. A stage predicate must ship with an assertion that reproduces the case it got wrong, running on every scoring run rather than behind a flag, exiting non-zero and REFUSING to print rather than printing a green table from a blind detector. Pattern shipped for stage 6 here; verified by deliberately breaking a scratchpad copy (2 failures, exit 2, no table). (3) BREATHER-SIDE, Baseline phase: when a stage reads 100% or 0% UNIFORMLY across many sequences, treat the uniformity as a question about the predicate before it is treated as a fact about the project. Stage 6 read 0% across 20 sequences for five weeks and that WAS true; the same uniformity is what made the one non-zero row worth opening, and opening it is what found the fault.",
+      "expected_improvement": "Closes the class that produced prop-035, prop-036 and this breath, instead of its third instance. The measurable check is that the next scorer-predicate fault is found BY the scorer's own self-tests rather than by a breath reading the source; if a fourth instance is found by hand, clause 1 was not done.",
+      "breath_refs": [
+        "2026-08-23T09:04",
+        "2026-08-24T18:56",
+        "2026-08-26T09:04"
       ]
     }
   ],
