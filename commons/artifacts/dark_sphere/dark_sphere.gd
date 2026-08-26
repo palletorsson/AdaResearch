@@ -17,6 +17,200 @@ extends Node3D
 
 class_name DarkSphere
 
+# ── THE GESTATION (2026-08-24, Palle: "it could be inert form from the
+# beginning. If we shoot the DS in point a point appears and falls to the
+# ground. If we shoot the DS in line a line falls out and breaks to pieces
+# ... a weaver's logic, before it can take another form") ────────────────────
+#
+# The dark sphere has stood beside the walk since Point_One, 305 of them as
+# bare tokens, decorative. It is an EGG: shoot it with the catalyst and it
+# yields what the walk has taught by the place it stands in — a point where
+# the walk has only learned points, a line where it has learned lines. The
+# creature is assembled out of what the visitor has induced, which is the
+# project's own thesis wearing a body.
+#
+# NOTHING CHANGES UNTIL IT IS SHOT. Every existing placement looks and behaves
+# exactly as before; the sphere gains a hit body on the catalyst's own layer
+# and one duck-typed method. The catalyst dispatches by NAME
+# (catalyst_projectile.gd:107 — `if body.has_method("hit_by_catalyst_mode")`),
+# never by class, so this needs no registration anywhere.
+#
+# THE STAGE IS DERIVED, NOT REMEMBERED. It is read from the hall or map the
+# sphere stands in, so one bare token is gestational everywhere and the ladder
+# follows the spine by itself. Nothing persists: a yield lives in its hall for
+# that visit, and the VISITOR carries the continuity from room to room.
+# `#stage:` overrides the derivation for a placement that wants a specific rung.
+
+## "" derives from where this sphere stands. Otherwise: point, line (rungs one
+## and two), or inert to refuse the gestation for this placement.
+@export var stage: String = ""
+## The catalyst's hit layer. Its projectiles carry collision_mask = 2 and the
+## receiver contract in this corpus is layer 2 / mask 0 — mask 0 on purpose,
+## so a hit body never pushes the world's cubes around.
+const HIT_LAYER := 2
+var _gest_body: StaticBody3D = null
+var _gest_spent: bool = false
+
+
+## Where does this sphere stand? The museum stamps em_pearl / em_chapter on the
+## segment; the grid hands its map name down from GridSystem. Either answers
+## "what has the walk taught here", and the ladder reads the same words.
+func _gest_where() -> String:
+	var n: Node = self
+	for _i in range(24):
+		if n == null:
+			break
+		if n.has_meta("em_pearl") and String(n.get_meta("em_pearl")) != "":
+			return String(n.get_meta("em_pearl")).to_lower()
+		if n.has_meta("em_chapter") and String(n.get_meta("em_chapter")) != "":
+			return String(n.get_meta("em_chapter")).to_lower()
+		var mn: Variant = n.get("map_name")
+		if mn != null and String(mn) != "":
+			return String(mn).replace("_", " ").to_lower()
+		n = n.get_parent()
+	return ""
+
+
+## The rung this place stands on. Only the first two are built; every other
+## place answers "" and the sphere stays what it has always been.
+func _gest_stage() -> String:
+	var want := stage.strip_edges().to_lower()
+	if want != "":
+		return "" if want == "inert" else want
+	var w := _gest_where()
+	if w == "":
+		return ""
+	# "line" is tested FIRST: "point lines" carries both words, and it is a line
+	if w.contains("line"):
+		return "line"
+	if w == "point" or w.contains("point one"):
+		return "point"
+	return ""
+
+
+## The catalyst's own call. Duck-typed by the projectile, so the sphere needs
+## no class, no group and no registration to receive a shot.
+func hit_by_catalyst_mode(colour: Color, _mode_id: String = "") -> void:
+	_gest_yield(colour)
+
+
+func hit_by_projectile(colour: Color) -> void:
+	_gest_yield(colour)
+
+
+func _gest_yield(colour: Color) -> void:
+	if _gest_spent:
+		return
+	var rung := _gest_stage()
+	if rung == "":
+		return                      # this place has taught nothing to yield yet
+	_gest_spent = true
+	match rung:
+		"point":
+			_gest_point(colour)
+		"line":
+			_gest_line(colour)
+		_:
+			_gest_spent = false     # a rung that is not built yet leaves the egg whole
+			return
+	print("[dark_sphere] gestation: %s yielded a %s" % [_gest_where(), rung])
+
+
+func _gest_mat(colour: Color) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = colour
+	m.emission_enabled = true
+	m.emission = colour
+	m.emission_energy_multiplier = 1.4
+	m.roughness = 0.4
+	return m
+
+
+func _gest_host() -> Node:
+	# the yield belongs to the ROOM, not to the egg: a sphere that shrinks or
+	# is freed must not take the thing it produced with it
+	var p: Node = get_parent()
+	return p if p != null else self
+
+
+## RUNG ONE. A point appears and falls to the ground.
+func _gest_point(colour: Color) -> void:
+	var b := RigidBody3D.new()
+	b.name = "YieldPoint"
+	var mi := MeshInstance3D.new()
+	var sm := SphereMesh.new()
+	sm.radius = 0.06
+	sm.height = 0.12
+	mi.mesh = sm
+	mi.material_override = _gest_mat(colour)
+	b.add_child(mi)
+	var cs := CollisionShape3D.new()
+	var sh := SphereShape3D.new()
+	sh.radius = 0.06
+	cs.shape = sh
+	b.add_child(cs)
+	_gest_host().add_child(b)
+	b.global_position = global_position + Vector3(0, 0.05, 0)
+
+
+## RUNG TWO. A line falls out of the sphere and breaks to pieces — it leaves as
+## one line and lands as several, which is the whole argument of the rung.
+func _gest_line(colour: Color) -> void:
+	var pieces: int = 5
+	var seg_len: float = 0.13
+	var host: Node = _gest_host()
+	var here: Vector3 = global_position
+	var mat: StandardMaterial3D = _gest_mat(colour)
+	for i in range(pieces):
+		var b := RigidBody3D.new()
+		b.name = "YieldLine%d" % i
+		var mi := MeshInstance3D.new()
+		var bm := BoxMesh.new()
+		bm.size = Vector3(seg_len * 0.86, 0.022, 0.022)
+		mi.mesh = bm
+		mi.material_override = mat
+		b.add_child(mi)
+		var cs := CollisionShape3D.new()
+		var sh := BoxShape3D.new()
+		sh.size = Vector3(seg_len * 0.86, 0.022, 0.022)
+		cs.shape = sh
+		b.add_child(cs)
+		host.add_child(b)
+		# laid out as ONE line through the sphere, then let go
+		b.global_position = here + Vector3((float(i) - float(pieces - 1) * 0.5) * seg_len, 0.05, 0)
+		# the break: each piece leaves with its own small push, so the line
+		# comes apart in the air instead of landing as a rod
+		b.apply_central_impulse(Vector3(
+			(float(i) - float(pieces - 1) * 0.5) * 0.045, 0.02, randf_range(-0.02, 0.02)))
+
+
+## The body the catalyst can hit. Added late (deferred, after the artifact has
+## built) so it wraps whatever presence/body the DNA chose, and sized to it.
+func _gest_arm() -> void:
+	if _gest_body != null and is_instance_valid(_gest_body):
+		return
+	_gest_body = StaticBody3D.new()
+	_gest_body.name = "GestationHit"
+	_gest_body.collision_layer = HIT_LAYER
+	_gest_body.collision_mask = 0          # never push the world
+	var cs := CollisionShape3D.new()
+	var sh := SphereShape3D.new()
+	sh.radius = 0.42
+	var ab: AABB = AABB()
+	var got := false
+	for m in find_children("*", "MeshInstance3D", true, false):
+		var mi := m as MeshInstance3D
+		var box: AABB = mi.transform * mi.get_aabb()
+		ab = box if not got else ab.merge(box)
+		got = true
+	if got:
+		sh.radius = clampf(maxf(ab.size.x, ab.size.z) * 0.5, 0.12, 2.0)
+		_gest_body.position = ab.get_center()
+	cs.shape = sh
+	_gest_body.add_child(cs)
+	add_child(_gest_body)
+
+
 ## STAGE-2 DNA PROMOTION (2026-07-27). 312 placements across twenty-two sequences,
 ## and until now exactly one appearance: a 0.35 m purple orb, everywhere, forever.
 ##
@@ -171,11 +365,43 @@ func spine_hints() -> Dictionary:
 ##             and the line PbrKit.edge_light warns is a filter when it is on everything.
 ##   rim_tint  0 = the rim carries the light's own colour, 1 = the albedo's
 const PRESENCE: Dictionary = {
-	"hush":    {"radius": 0.55, "emit": 0.20, "alpha": 0.50, "tint": 1.00, "halo_a": 0.35, "halo_r": 0.85, "lamp": "none",  "gloss": 0.46, "rim": 0.20, "rim_tint": 0.40},
-	"witness": {"radius": 1.00, "emit": 1.00, "alpha": 1.00, "tint": 1.00, "halo_a": 1.00, "halo_r": 1.00, "lamp": "none",  "gloss": 0.62, "rim": 0.26, "rim_tint": 0.35},
-	"beacon":  {"radius": 1.15, "emit": 3.60, "alpha": 1.00, "tint": 1.60, "halo_a": 2.60, "halo_r": 1.45, "lamp": "glow",  "gloss": 0.70, "rim": 0.16, "rim_tint": 0.55},
-	"eclipse": {"radius": 1.50, "emit": 0.00, "alpha": 1.00, "tint": 0.30, "halo_a": 2.20, "halo_r": 1.25, "lamp": "drink", "gloss": 0.00, "rim": 0.46, "rim_tint": 0.22},
+	"hush":     {"radius": 0.55, "emit": 0.20, "alpha": 0.50, "tint": 1.00, "halo_a": 0.35, "halo_r": 0.85, "lamp": "none",  "gloss": 0.46, "rim": 0.20, "rim_tint": 0.40},
+	"witness":  {"radius": 1.00, "emit": 1.00, "alpha": 1.00, "tint": 1.00, "halo_a": 1.00, "halo_r": 1.00, "lamp": "none",  "gloss": 0.62, "rim": 0.26, "rim_tint": 0.35},
+	"beacon":   {"radius": 1.15, "emit": 3.60, "alpha": 1.00, "tint": 1.60, "halo_a": 2.60, "halo_r": 1.45, "lamp": "glow",  "gloss": 0.70, "rim": 0.16, "rim_tint": 0.55},
+	"eclipse":  {"radius": 1.50, "emit": 0.00, "alpha": 1.00, "tint": 0.30, "halo_a": 2.20, "halo_r": 1.25, "lamp": "drink", "gloss": 0.00, "rim": 0.46, "rim_tint": 0.22},
+	"becoming": {"radius": 1.20, "emit": 2.40, "alpha": 0.55, "tint": 1.30, "halo_a": 2.00, "halo_r": 1.90, "lamp": "kin",   "gloss": 0.34, "rim": 0.52, "rim_tint": 0.65},
 }
+
+## BECOMING — the fifth value, and the only one that is not a quantity of presence
+## (2026-08-10). The other four answer "how much of the room does it claim". This one
+## answers a different question: what happens when the witness is ATTENDED.
+##
+## The argument is in doc/VR_VR_PT_2023.md and on /the-dark-spot. dark_sphere is the
+## situated witness — present in 748 maps, "sensed, not used, a mood not a lesson",
+## Haraway's partial observer standing in nearly every room and attended by nobody. The
+## catalyst is the project's tool of "transformation, becoming, boundary dissolution",
+## and catalyst_orb states its own nature as "capability-as-relation ... felt before it
+## is seen. No numbers on screen. Ever." Put those two next to each other and the
+## witness is simply the DORMANT catalyst. `becoming` is the hinge where it wakes.
+##
+## So the row reads as a transformation and not as a size:
+##   alpha 0.55   the body gives up its edge — boundary dissolution, the one lineage
+##                whose silhouette is deliberately less certain than witness's
+##   rim 0.52     the highest Fresnel in the table. As the body dissolves the LIMB is
+##                what survives — a thing becoming is brightest where it ends
+##   halo_r 1.90  the widest pool here by a third. Not a bigger shadow: a REACH. This
+##                is the make-kin gesture written in the one channel the floor has
+##   lamp "kin"   it gives light outward, where eclipse drinks it. Kin, not capture
+##
+## It overspills its cell by more than beacon does — see the placement note above; that
+## is the cost of a value whose whole content is relation to what is around it.
+##
+## WHAT IT IS NOT: it is not measured, and it must not become so. There is no score
+## here, no completion, no state that resolves — the ring reaches and fades and reaches
+## again, and nothing anywhere records that it did. That is the point of it, and the
+## reason it is presence and not a new axis: an axis called "state" would be a scoreboard
+## for a thing whose argument is that the un-reconciled remainder is what keeps a system
+## becoming. Reconciliation is death. This value stays hot.
 
 ## GRAIN SIZE, stated the only way that survives a change of radius: how many times the
 ## detail texture repeats ACROSS THE SPHERE'S OWN SILHOUETTE. See the grain note at the
@@ -212,6 +438,12 @@ var _halo_ring: MeshInstance3D
 var _sphere_material: StandardMaterial3D
 var _time_elapsed: float = 0.0
 
+# presence=becoming only. Null for every other lineage, which is what keeps the frame
+# loop's new branch free for the 312 placements that never asked for it.
+var _kin_ring: MeshInstance3D
+var _kin_mat: StandardMaterial3D
+var _kin_base_r: float = 0.4
+
 # Resolved from `presence` at build time and read every frame by _process. Held as
 # plain floats rather than a dictionary lookup because this runs on 312 objects.
 var _radius: float = 0.35
@@ -229,6 +461,7 @@ var _rim_tint: float = 0.35
 
 
 func _ready() -> void:
+	call_deferred("_gest_arm")   # the catalyst can hit it once it has a body
 	_create_sphere()
 	_create_halo_ring()
 
@@ -254,6 +487,15 @@ func _process(delta: float) -> void:
 			albedo_color.b * brightness * _tint_mul,
 			albedo_color.a * _alpha_mul
 		)
+
+	# The reach. Widens out to the pool's rim and thins as it goes, then begins again —
+	# a relation that is never concluded. Alpha never reaches zero (see _add_kin_ring).
+	if _kin_ring and _kin_mat:
+		var reach_t: float = fposmod(_time_elapsed * 0.30, 1.0)
+		var span: float = maxf(_halo_radius, _kin_base_r * 1.2) / _kin_base_r
+		var s: float = lerpf(1.0, span, reach_t)
+		_kin_ring.scale = Vector3(s, 1.0, s)
+		_kin_mat.albedo_color.a = lerpf(0.42, 0.10, reach_t)
 
 	# Halo ring subtle pulse (opacity)
 	if _halo_ring:
@@ -410,6 +652,7 @@ func _create_sphere() -> void:
 			_build_orb()
 
 	_add_presence_lamp()
+	_add_kin_ring()
 	add_child(_sphere_mesh)
 
 
@@ -551,6 +794,14 @@ func _add_presence_lamp() -> void:
 		lamp.light_energy = 2.4
 		lamp.omni_range = 2.6
 		lamp.omni_attenuation = 1.4
+	elif kind == "kin":
+		# Reaches further than beacon and lands softer: attenuation 0.9 is a slower
+		# falloff, so the light is still doing something at the edge of the pool rather
+		# than dying at the ball. A relation extends; a beacon announces.
+		lamp.light_color = emission_color.lerp(Color(0.72, 0.52, 0.95), 0.5)
+		lamp.light_energy = 1.9
+		lamp.omni_range = 3.4
+		lamp.omni_attenuation = 0.9
 	else:
 		# A negative light. Godot subtracts it, so the eclipse literally darkens its
 		# own neighbourhood — the artifact's "witness" turned into a thing that
@@ -561,6 +812,47 @@ func _add_presence_lamp() -> void:
 		lamp.omni_range = 2.2
 		lamp.omni_attenuation = 1.8
 	add_child(lamp)
+
+
+## The make-kin gesture, and the only geometry in this file that exists for one presence
+## value. Guarded on `becoming` and nowhere else, so the other four lineages — and the 312
+## placements that never named a presence — cannot see it: the early return IS the contract.
+##
+## A thin ring lying on the floor that widens outward from the body and thins as it goes.
+## It reaches; it does not enclose. It is unshaded and additive so it reads on a dark floor
+## without lighting the room, and it carries no state — nothing anywhere records that a
+## reach completed, because a completed relation is a measured one.
+##
+## Its alpha floor is 0.10 rather than 0: a still is how this project judges anything, and a
+## gesture that is invisible at one phase of its cycle would be a variant the DNA critic
+## calls INERT for a reason that has nothing to do with the design. It is always mid-reach.
+func _add_kin_ring() -> void:
+	# Cleared FIRST, before the guard. apply_grid_config() rebuilds by queue_free'ing every
+	# child and calling _create_sphere() again, so a placement re-configured from becoming to
+	# any other value would otherwise leave these pointing at a freed node for the frame loop
+	# to write into.
+	_kin_ring = null
+	_kin_mat = null
+	if presence != "becoming":
+		return
+	_kin_base_r = maxf(_radius * 1.15, 0.05)
+	var ring := TorusMesh.new()
+	ring.inner_radius = _kin_base_r - 0.012
+	ring.outer_radius = _kin_base_r + 0.012
+	ring.rings = 6
+	ring.ring_segments = 40
+	_kin_mat = StandardMaterial3D.new()
+	_kin_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	_kin_mat.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
+	_kin_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	_kin_mat.albedo_color = Color(emission_color.r * 1.8, emission_color.g * 1.5, emission_color.b * 1.9, 0.42)
+	_kin_ring = MeshInstance3D.new()
+	_kin_ring.name = "KinReach"
+	_kin_ring.mesh = ring
+	_kin_ring.material_override = _kin_mat
+	# just above the halo disc, below everything else — it belongs to the floor, not the body
+	_kin_ring.position = Vector3(0, 0.02, 0)
+	add_child(_kin_ring)
 
 
 func _create_halo_ring() -> void:
