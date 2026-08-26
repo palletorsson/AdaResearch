@@ -115,6 +115,62 @@ func _run() -> void:
 			notes.append("a line falls out and BREAKS TO PIECES (%d, spread %.3f -> %.3f m)" % [
 				segs.size(), spread0, spread1])
 
+	# ── RUNG THREE: a triangle HOVERS and weaves itself
+	var s_tri: Node3D = _sphere_in("point triangle context")
+	await create_timer(0.8).timeout
+	if String(s_tri.call("_gest_stage")) != "triangle":
+		fails.append("the triangle place derived as '%s'" % String(s_tri.call("_gest_stage")))
+	s_tri.call("hit_by_catalyst_mode", Color(0.72, 0.55, 0.95), "transformation")
+	await create_timer(0.2).timeout
+	var w: Node3D = (s_tri.get_parent() as Node).find_child("YieldTriangleWeaver", true, false) as Node3D
+	if w == null:
+		fails.append("shot in the triangle place and nothing was woven")
+	else:
+		# it HOLDS: unlike the point and the line, it does not fall
+		var y0: float = w.global_position.y
+		var n0: int = int(w.get("_n"))
+		await create_timer(1.6).timeout
+		var y1: float = w.global_position.y
+		if y1 < y0 - 0.05:
+			fails.append("the triangle FELL (%.2f -> %.2f) — it must hold" % [y0, y1])
+		elif y1 <= y0 + 0.2:
+			fails.append("the triangle did not rise (%.2f -> %.2f)" % [y0, y1])
+		else:
+			notes.append("the triangle HOLDS and rises to hover (%.2f -> %.2f m)" % [y0, y1])
+		# the weave GROWS, strand by strand
+		var n1: int = int(w.get("_n"))
+		if n1 <= n0:
+			fails.append("the weave did not grow (%d -> %d strands)" % [n0, n1])
+		else:
+			notes.append("the weaving trace grows over time (%d -> %d segments)" % [n0, n1])
+		# THE INTERLACE, measured rather than trusted: every chord must go
+		# OVER at its start and UNDER at its end, and the three fans must
+		# disagree pairwise on every shared edge or it is overlay, not cloth
+		var zs := []
+		for u in [0.0, 1.0 / 3.0, 2.0 / 3.0, 1.0]:
+			zs.append(float(w.call("_chord_z", u)))
+		if zs[0] <= 0.0 or zs[3] >= 0.0:
+			fails.append("a chord does not go over then under: %s" % str(zs))
+		elif absf(zs[0] + zs[3]) > 0.0001:
+			fails.append("the relief is not complementary: %s" % str(zs))
+		else:
+			notes.append("each chord goes OVER then UNDER, complementary (%.3f / %.3f)" % [zs[0], zs[3]])
+		# it finishes, and then costs nothing
+		await create_timer(6.5).timeout
+		var n2: int = int(w.get("_n"))
+		var cap: int = int(w.get("_cap"))
+		if n2 != cap:
+			fails.append("the cloth stopped at %d of %d segments" % [n2, cap])
+		else:
+			notes.append("the cloth finishes at its cap (%d segments, one draw call)" % cap)
+		if n2 > cap:
+			fails.append("the weave grew PAST instance_count")
+		await create_timer(3.2).timeout
+		if w.is_processing():
+			fails.append("the finished cloth is still ticking — it must cost nothing")
+		else:
+			notes.append("finished, it stops processing entirely")
+
 	# ── 5. a place that has taught nothing leaves the egg whole
 	var s_none: Node3D = _sphere_in("melencolia")
 	await create_timer(0.8).timeout

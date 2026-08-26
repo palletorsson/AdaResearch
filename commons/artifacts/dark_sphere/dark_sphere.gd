@@ -54,6 +54,13 @@ class_name DarkSphere
 @export var yield_point_radius: float = 0.22
 ## the line's pieces, sized off the same body so the two rungs stay siblings
 @export var yield_line_piece_m: float = 0.30
+## rung three's triangle, the third sibling in the size ladder
+@export var yield_tri_m: float = 0.99
+## RUNG THREE lives in its own script because the yield carries its own
+## _process: _gest_host() parents a yield to the ROOM, so the egg cannot tick
+## it. Preloaded by PATH, not class_name — a class_name can fail to resolve on
+## the Quest's loader thread while every local gate is green.
+const GEST_TRI := preload("res://commons/artifacts/dark_sphere/gest_triangle_weaver.gd")
 ## The catalyst's hit layer. Its projectiles carry collision_mask = 2 and the
 ## receiver contract in this corpus is layer 2 / mask 0 — mask 0 on purpose,
 ## so a hit body never pushes the world's cubes around.
@@ -91,6 +98,8 @@ func _gest_stage() -> String:
 	if w == "":
 		return ""
 	# "line" is tested FIRST: "point lines" carries both words, and it is a line
+	if w.contains("triangle"):
+		return "triangle"
 	if w.contains("line"):
 		return "line"
 	if w == "point" or w.contains("point one"):
@@ -120,6 +129,8 @@ func _gest_yield(colour: Color) -> void:
 			_gest_point(colour)
 		"line":
 			_gest_line(colour)
+		"triangle":
+			_gest_triangle(colour)
 		_:
 			_gest_spent = false     # a rung that is not built yet leaves the egg whole
 			return
@@ -197,6 +208,22 @@ func _gest_line(colour: Color) -> void:
 		var k: float = seg_len / 0.13
 		b.apply_central_impulse(Vector3(
 			(float(i) - float(pieces - 1) * 0.5) * 0.045 * k, 0.02 * k, randf_range(-0.02, 0.02) * k))
+
+
+## RUNG THREE. The point fell, because a position has no defence. The line fell
+## and broke, because a relation is fragile. This one HOLDS — a triangle is the
+## first thing with an inside — and then it weaves that inside out of nothing
+## but straight chords. The weaver carries its own tick; see
+## gest_triangle_weaver.gd for the cloth.
+func _gest_triangle(colour: Color) -> void:
+	var w: RigidBody3D = GEST_TRI.new()
+	w.name = "YieldTriangleWeaver"
+	w.tri_m = yield_tri_m
+	w.strand_colour = colour
+	_gest_host().add_child(w)
+	# basis only, never look_at: it inherits the hall's yaw, so a rotated
+	# museum segment carries the yield with it
+	w.global_transform = Transform3D(global_transform.basis.orthonormalized(), global_position)
 
 
 ## The body the catalyst can hit. Added late (deferred, after the artifact has
