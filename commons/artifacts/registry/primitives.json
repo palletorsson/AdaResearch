@@ -9915,6 +9915,91 @@
 			},
 			"qfep_connection": "The wedge as 3D primitive — 4 vertices, three triangular faces on a quad base. The catalyst bracelet's walkable prism in its pure geometric form: the smallest solid that can also be a ramp, where primitive meets architecture."
 		},
+		"primitive_pillar": {
+			"lookup_name": "primitive_pillar",
+			"scene": "res://commons/artifacts/primitive_pillar/primitive_pillar.tscn",
+			"class_name": "PrimitivePillar",
+			"name": "Primitive Pillar (stacked column)",
+			"description": "A column built by stacking primitives course by course - boxes, drums, wedges or balls - to a height the room is told it can hold. columns x rows repeats the stack into a field, so one token is a single shaft in a corridor and a grove of them filling a room.",
+			"category": "primitives",
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive",
+				"pillar",
+				"column",
+				"stack",
+				"colour",
+				"museum",
+				"corridor"
+			],
+			"parameters": {
+				"height_m": "Pillar height in metres from the floor, clamped by clearance (default 4.20)",
+				"clearance": "The room's clear height in metres (default 4.40). The museum ceiling soffit is 4.64 m over a 4.5 m wall, so 4.40 leaves a shadow gap; raise it only in an open_roof hall.",
+				"columns": "Stacks across X (default 1). 1 is a corridor pillar, 3+ is a room.",
+				"rows": "Stacks along Z (default 1)",
+				"footprint": "The field written as 3x5 - an alias that sets columns and rows in one segment",
+				"spacing_x": "Metres between stack centres across X (default 2.0)",
+				"spacing_z": "Metres between stack centres along Z (default 2.0)",
+				"stock": "The primitive vocabulary: box | drum | wedge | ball | mixed",
+				"wash": "The colour treatment: mono | courses | gradient | spectrum",
+				"bond": "How one course meets the next: stacked | staggered | gyre | taper",
+				"girth": "Course width in metres (default 0.80, matching commons/primitives/pillar)",
+				"course_m": "Nominal course height (default 0.55); the real height divides height_m into a whole number of courses so the stack reaches the top exactly",
+				"base_color": "r,g,b or #rrggbb",
+				"accent_color": "r,g,b or #rrggbb - the far end of the courses and gradient washes",
+				"footer": "The 0.4 m footer the pillar family stands on (bool, default true)",
+				"solid": "One box collider per stack, so it is a wall and not a hologram (bool, default true)",
+				"rng_seed": "Seeds every draw (stock=mixed). Same seed, same pillar, forever. (default 7)"
+			},
+			"footprint": [
+				1,
+				5,
+				1
+			],
+			"footprint_note": "footprint below describes the DEFAULT 1x1 register only. A field register needs (columns-1)*spacing_x + girth by (rows-1)*spacing_z + girth metres, which no capped footprint_cells can express - the fault pillarcolorcollection ships with, where a 9 x 15 m body declares 9 cells and the negotiator plans other bodies inside it.",
+			"spatial_needs": {
+				"footprint_cells": 1,
+				"platform": "floor"
+			},
+			"dna": {
+				"promoted": "2026-08-26",
+				"stage": "2 - variation",
+				"axes": {
+				 "stock": [
+				  "box",
+				  "drum",
+				  "wedge",
+				  "ball",
+				  "mixed"
+				 ],
+				 "wash": [
+				  "mono",
+				  "courses",
+				  "gradient",
+				  "spectrum"
+				 ]
+				},
+				"default": "stock=box + wash=mono + bond=stacked is the lineage of commons/primitives/pillar/pillar.tscn: a plain square shaft in one stone colour on a 0.4 m footer. 0 placements exist, so no map changes.",
+				"note": "DERIVED from the @export_enum lines by tools/apply_dna_block.py, never transcribed. bond (stacked|staggered|gyre|taper) is exported and reachable from a map token but deliberately NOT declared as an axis: two declared axes already cross to 20 tiles, and a bite headline is a peak, so a third would hide a dead one. stock and wash are the two the pillar argues: what a column is made of, and whether colour is a property of the whole shaft or of each course. Both are visible in a single still, which a rate or a lag would not be - bond=gyre's turn is, which is why it stays a knob rather than becoming a motion axis. HEIGHT IS THE CRITICAL PARAMETER AND IT IS CLAMPED, not warned about: height_m is clamped to clearance (default 4.40) because the museum builds nothing above the 4.90 m ceiling slab and its soffit is at 4.64, so an unclamped 10 m pillar is a pillar through the ceiling. A large scale cannot arrive from a map token either: #scale: is clamped to 5.0 and token:0:0:10 parses as a three-axis rotation, so size lives in these exports.",
+				"predicted_degeneracy": {
+					"pair": "mono against courses, in the wash reading",
+					"percent": 15.7,
+					"arithmetic": "REGISTERED BEFORE ANY CAPTURE, and by enumerating all 190 pairs of the 5x4 grid rather than reasoning along one axis. THE BUILD BEING PREDICTED is the bench default: columns=1, rows=1, bond=stacked, footer=true, height_m 4.20 clamped by clearance 4.40, girth 0.80, course_m 0.55. So body = 4.20 - 0.40 = 3.80 m, n = round(3.80/0.55) = 7 courses of uh = 0.5429 m, and ONE COURSE IS 1/7 = 14.3% OF THE INK - already three times the critic's hottest-5% window, which is what makes the statistic a peak delta rather than a mean.\n\nTHE TONE TERM. base (0.72,0.68,0.58), accent (0.86,0.28,0.18). mono paints all 7 courses base; courses paints the odd three at base.lerp(accent,0.65) = (0.809,0.420,0.313), a per-channel |delta| of (0.089,0.260,0.267), mean 0.2037. Three courses = 42.9% of the ink overfills the window, so focus = 0.2037 * 0.77 (the lighting-and-tonemap compression the substance_room replica measured) = 15.68%. Registered at 15.7.\n\nWHY IT IS THE FLOOR. Every other wash pair reaches a larger peak because it reaches full base-to-accent or a hue flip: mono/spectrum 22.5, mono/gradient and courses/gradient 24.1 (the top course is pure accent against pure base), courses/spectrum 33.8, gradient/spectrum 34.2. And every stock pair flips silhouette against the corner background, which at a conservative 0.27 albedo contrast is 20.8% wherever the flipped area clears the 5% window - which it always does: the projected silhouette XOR is 24.8% of the subject for the closest stock pair (drum against ball, the ellipses inscribed in the drum's rectangle: 0.760 of 3.067 screen m2 at yaw 0.62 / pitch -0.26, where a circular plan of diameter g projects to width exactly g because the screen basis vector (0.8139, 0.5810) is unit), and 28.0 / 35.7 / 38.0 / 39.1 / 45.9 / 50.0 / 79.0 / 79.3% for the rest.\n\nSo the quietest pair in the whole sheet is a WASH pair, at every one of the five stocks, at the same 15.68 - which is itself a check: if the five mono-against-courses numbers are not equal to within render noise, the stocks are not sharing a silhouette and something is moving that should not.\n\nTHE TWO WAYS THIS CAN BE WRONG. (a) BELOW 15.7: the standing rule says stop and investigate, and the first suspects are the ones that have cost a pass each - check_dna_declarations first, then <out>/_rejects.json (a String enum handed an int is refused in SILENCE), then whether _read_metadata_overrides actually reassigned the property. Every prediction in this corpus that named a pair and a number has UNDER-read by 1.5x to 6.7x, because a flat-shaded proxy models no shadow, no AO and no antialiasing; a result under its own floor has meant a broken artifact, not a subtle one. (b) FAR ABOVE, say past 45: the courses wash is landing somewhere other than alternate courses - most likely i%2 running over the field index instead of the course index, which would recolour whole stacks and read as a much bigger change than the design makes.",
+					"registered": "2026-08-26, before the first capture"
+				}
+			},
+			"footprint_measured": [
+				1,
+				5,
+				1
+			]
+		},
 		"grid_lines": {
 			"category": "unknown",
 			"complexity": "beginner",
