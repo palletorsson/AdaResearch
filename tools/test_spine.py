@@ -83,6 +83,28 @@ def main():
     every = [m for _s, ms in groups for m in ms]
     print("TEST — %d map(s) across %d sequence(s)\n" % (len(every), len(groups)))
 
+    # THE MUSEUM CAN NAME A HALL THAT NO LONGER EXISTS. map_authored.json is a
+    # list of names, and a generator that comes back shorter deletes maps it
+    # named last time — the ribbon cap took color from 9 halls to 7 and left
+    # two dead names behind. The museum reads that file every build, so this
+    # is an error, not a warning.
+    ghosts = []
+    ap_path = os.path.join(ROOT, "commons", "data", "map_authored.json")
+    if os.path.exists(ap_path):
+        with open(ap_path, encoding="utf-8") as fh:
+            authored = json.load(fh)
+        for ch, v in authored.items():
+            if ch.startswith("_") or not isinstance(v, list):
+                continue
+            for m in v:
+                if not os.path.exists(os.path.join(ROOT, "commons", "maps", m, "map_data.json")):
+                    ghosts.append((ch, m))
+    if ghosts:
+        print("  GHOST HALLS — named in map_authored.json, not on disk:")
+        for ch, m in ghosts:
+            print("     %-16s %s" % (ch, m))
+        print("")
+
     # ONE call each, not one per map: the token gate takes every map at once
     # and the pathfinder has its own --all
     tok_bad = set()
@@ -106,7 +128,7 @@ def main():
             if "[FAIL]" in s and cur:
                 path_bad.add(cur)
 
-    fails = 0
+    fails = len(ghosts)
     print("  %-24s %5s %6s %6s %8s  %s" % ("sequence", "maps", "verify", "ready", "notes", ""))
     for sid, maps in groups:
         v = run([os.path.join("tools", "verify_sequence.py"), sid])
