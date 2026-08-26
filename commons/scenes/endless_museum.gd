@@ -281,6 +281,10 @@ const AUTO_IDLE_LIMIT: int = 8
 # its provenance. A cell nobody erased was never stamped, which is a different
 # fault from a cell some fixture took away, and the two want opposite repairs.
 var _walk_erased: Dictionary = {}  # Vector2i -> String provenance
+var _walk_severed: Array = []      # halls the end-to-end test could not reopen
+var _walk_reopened: Array = []     # halls reopened, and what moved to do it
+var _walk_planked: Array = []     # holes the museum bridged to keep the walk whole
+var _repair_owed: Array = []       # halls whose end-to-end test waits on their stamps
 var _auto_reach: Dictionary = {}   # last BFS's reachable set, for the cut
 # Every clamp that took cells off a body and left them in the walk map, tagged
 # `by`: "mesh" (MAX_SEAL_RADIUS, decorative, cannot stall a walker), "collider"
@@ -5447,6 +5451,25 @@ func _stamp_utility(spec: String, cell: Vector2i, seg: Node3D, zbase: int) -> No
 		_walk_cells[gc] = true
 	else:
 		_ride_cells[gc] = code
+		# A RIDE IS A SPAN, NOT A CELL (2026-08-26). Only the cube's start cell
+		# was ever recorded, so nothing in the museum could tell that the far
+		# side of a pool is reachable at all. Trans_Introduction reads as three
+		# rows of void with its side lanes walled at row 9 — the ferry IS the
+		# crossing — and with the span unrecorded the hall measured SEVERED and
+		# every hall of the transformation chapter behind it measured
+		# unreachable. The travel is read back off the node rather than
+		# re-parsed: _utility_apply_params set it before add_child, so this is
+		# the cube's own answer, not a second reading of the same string.
+		if code == "tc":
+			var dv: Variant = node.get("move_direction")
+			var dirv: Vector3 = dv if dv is Vector3 else Vector3(0, 0, 1)
+			var mv: Variant = node.get("move_distance")
+			var distv: float = float(mv) if mv != null else 4.0
+			var sgn: float = 1.0 if distv >= 0.0 else -1.0
+			for s in range(1, int(ceil(absf(distv))) + 1):
+				var step: float = float(s) * sgn
+				_ride_cells[Vector2i(gc.x + int(round(dirv.x * step)),
+					gc.y + int(round(dirv.z * step)))] = code
 	return node
 
 
@@ -6669,6 +6692,13 @@ func _build_segment() -> void:
 		# over which swatch the eye is pointing at.
 		if bool((peek["pattern"] as Dictionary).get("chooser", false)) and _pattern_swatches.is_empty():
 			_pattern_wall(seg, zbase, w)
+	# THE HALL, WALKED END TO END (2026-08-26). Every lane finishes here —
+	# transplant, bench, template — so the question is asked once, in the one
+	# place where the hall is whole — which is not now: a deferred stamp seals
+	var hall_name := String(peek.get("map", "")) if peek is Dictionary else ""
+	if hall_name == "":
+		hall_name = "seg %d" % _seg_index
+	_repair_owed.append({"seg": seg, "zbase": zbase, "hall": hall_name})
 	_segments.append({"node": seg, "z0": _next_z, "z1": _next_z + float(h) + float(VESTIBULE_H) + float(porch_depth) + float(court_depth), "index": _seg_index, "w": w,
 		"snap": stream_snap, "pearl": String(deal.get("pearl", "")) if deal is Dictionary else "",
 		# THE MAP NAME, not only the pearl (2026-08-25): the view toggle rebuilds
@@ -10507,6 +10537,520 @@ static func reaches_origin(pos_z: float, size_z: float, cz: int) -> bool:
 		return false                      # the extent does not start at the origin
 	return size_z >= float(cz) - ORIGIN_REACH_M
 
+## THE HALL MUST BE WALKABLE END TO END (2026-08-26, Palle: "I got stuck between
+## the primitive sequence and transformation in VR").
+##
+## _seal_cells judges ONE body against its own four neighbours, on a probe
+## budget, against ground whose far side may not exist yet — and the replay
+## path skips that test altogether ("the baked seal: exactly these cells, no
+## measurement, no reach probe"), which is the path both desktop and VR run.
+## Five bodies that each pass alone still add up to a wall. Measured in
+## Primitives_Polythedra: a plinth row sealed x=2..6 of a seven-wide hall, the
+## bench took x=7, and the museum walked 980 of its 2254 cells — eight halls
+## downstream with no way in on foot, the whole of transformation among them.
+##
+## So the hall is tested ONCE, whole, when it is finished: flood from its first
+## row to its last over the cells actually left. If the far row has gone, find
+## the body whose seal closed it and SLIDE it — content is kept, which is the
+## standing ruling — and only take it out if nowhere in six rings will hold it.
+func _hall_reach_repair(seg: Node3D, zbase: int, hall: String) -> void:
+	# the hall's band: contiguous z from zbase that the walk map knows at all,
+	# sealed or not. Derived rather than passed, so both lanes can call this
+	# without agreeing on a depth variable.
+	var z_hi: int = zbase
+	while z_hi < zbase + 400 and _band_has_row(z_hi):
+		z_hi += 1
+	if z_hi <= zbase + 2:
+		return
+	var band_free: Array = []
+	for k in _walk_cells:
+		var c: Vector2i = k
+		if c.y >= zbase and c.y < z_hi:
+			band_free.append(c)
+	if band_free.size() < 6:
+		return
+	var z_end: int = z_hi - 1
+	if _hall_arrives(zbase, z_end):
+		return
+	# grouped by the body that took them, nearest-the-wall first: the smallest
+	# body that reopens the hall is the one to move, not the largest.
+	var by_tok: Dictionary = {}
+	for k2 in _walk_erased:
+		var c2: Vector2i = k2
+		if c2.y < zbase - 6 or c2.y >= z_hi:
+			continue
+		var why := String(_walk_erased[c2])
+		if not why.begins_with("seal:"):
+			continue
+		var tok := why.substr(5)
+		if not by_tok.has(tok):
+			by_tok[tok] = []
+		(by_tok[tok] as Array).append(c2)
+	var order: Array = by_tok.keys()
+	order.sort_custom(func(a, b): return (by_tok[a] as Array).size() < (by_tok[b] as Array).size())
+	var moved: Array = []
+	var pulled: Array = []
+	for tok_v in order:
+		var tok2 := String(tok_v)
+		var cells: Array = by_tok[tok2]
+		# does this body's absence reopen the hall? un-seal, ask, put back.
+		for c3 in cells:
+			_walk_cells[c3] = true
+		var free2: Array = band_free.duplicate()
+		for c3b in cells:
+			free2.append(c3b)
+		var opens: bool = _hall_arrives(zbase, z_end)
+		if not opens:
+			for c4 in cells:
+				_walk_cells.erase(c4)
+			continue
+		# it is the blocker. Try to re-home it whole, ring by ring.
+		var delta: Vector2i = _hall_slide_delta(cells, zbase, z_end, free2)
+		if delta != Vector2i.ZERO:
+			for c5 in cells:
+				var nk: Vector2i = (c5 as Vector2i) + delta
+				_walk_cells.erase(nk)
+				_walk_erased[nk] = "seal:%s" % tok2
+				_walk_erased.erase(c5)
+			_hall_move_body(seg, tok2, delta)
+			moved.append("%s by (%d,%d)" % [tok2, delta.x, delta.y])
+			band_free = []
+			for k3 in _walk_cells:
+				var c6: Vector2i = k3
+				if c6.y >= zbase and c6.y < z_hi:
+					band_free.append(c6)
+		else:
+			# nowhere to stand that does not close the hall again. Take it in before
+			# taking it out — a smaller spectacle is still the spectacle.
+			var shrunk: float = _hall_shrink_body(seg, tok2, zbase, z_end)
+			if shrunk > 0.0:
+				moved.append("%s to %d%%" % [tok2, int(round(shrunk * 100.0))])
+			else:
+				for c7 in cells:
+					_walk_erased.erase(c7)
+				_hall_move_body(seg, tok2, Vector2i.ZERO, true)
+				pulled.append(tok2)
+			band_free = free2
+		if _hall_arrives(zbase, z_end):
+			break
+	# no body is in the way: the hole is. Lay a plank over the narrowest part.
+	if moved.is_empty() and pulled.is_empty():
+		if _hall_plank_repair(seg, zbase, z_end, hall) > 0:
+			return
+	if moved.is_empty() and pulled.is_empty():
+		print("[em-walk] %s: SEVERED and nothing reopens it — %d free cell(s) in band z %d..%d" % [
+			hall, band_free.size(), zbase, z_end])
+		# NAME THE WALL. A severance nobody can read is a bug report with no
+		# address, so the hall says which row it dies on and what stands there.
+		var have2: Dictionary = {}
+		for c_v9 in band_free:
+			have2[c_v9] = true
+		for r_v6 in _ride_cells:
+			var r6: Vector2i = r_v6
+			if r6.y >= zbase and r6.y <= z_end:
+				have2[r6] = true
+		var seen9: Dictionary = {}
+		var q9: Array = []
+		for c_v8 in band_free:
+			if (c_v8 as Vector2i).y == zbase:
+				seen9[c_v8] = true
+				q9.append(c_v8)
+		var h9: int = 0
+		var zmax: int = zbase
+		while h9 < q9.size():
+			var cur9: Vector2i = q9[h9]
+			h9 += 1
+			if cur9.y > zmax:
+				zmax = cur9.y
+			for d9 in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+				var n9: Vector2i = cur9 + d9
+				if have2.has(n9) and not seen9.has(n9):
+					seen9[n9] = true
+					q9.append(n9)
+		for zw in range(zmax, mini(zmax + 6, z_end + 1)):
+			var wall: Array = []
+			for x9 in range(-4, 40):
+				var k9 := Vector2i(x9, zw)
+				if _ride_cells.has(k9):
+					wall.append("%d:ride" % x9)
+				elif _walk_cells.has(k9):
+					wall.append("%d:free" % x9)
+				elif _walk_erased.has(k9):
+					wall.append("%d:%s" % [x9, String(_walk_erased[k9])])
+			print("[em-walk]   z=%d %s" % [zw, ", ".join(wall) if not wall.is_empty() else "(nothing at all)"])
+		var rl: Array = []
+		for r_v7 in _ride_cells:
+			var r7: Vector2i = r_v7
+			if r7.y >= zbase and r7.y <= z_end:
+				rl.append("(%d,%d)%s" % [r7.x, r7.y, String(_ride_cells[r7])])
+		print("[em-walk]   rides in this band: %s" % (", ".join(rl) if not rl.is_empty() else "NONE"))
+		_walk_severed.append({"hall": hall, "z0": zbase, "z1": z_end})
+		return
+	print("[em-walk] %s: the walk was severed — reopened it (%s%s)" % [hall,
+		("slid " + ", ".join(moved)) if not moved.is_empty() else "",
+		(("; took out " + ", ".join(pulled)) if not pulled.is_empty() else "")])
+	_walk_reopened.append({"hall": hall, "slid": moved, "pulled": pulled})
+
+
+## does any cell of the band's last row answer a flood from its first row?
+## THE CATWALK (2026-08-26). A body that severs a hall can be moved; a HOLE
+## cannot. Trans_Introduction's third pool is void down the middle with its
+## side lanes walled off at row 15 — in the grid you never walk it, you take
+## the teleporter at row 13, and the museum refuses teleporters ("the museum is
+## one endless map"). So the map is not wrong and the hall is still impassable,
+## and the museum's own standing rule is that the endless walk is never severed.
+##
+## It lays a plank, and the cheapest one: 0-1 BFS over the band with a free or
+## ferried cell costing nothing and a void cell costing one, so the crossing it
+## finds is the NARROWEST — the pool keeps its drama and its fire, and what
+## gets added is a catwalk over the tightest part of it, never a lid.
+## WHAT THE VISITOR CAN ACTUALLY GET TO (2026-08-26). One set, grown as the
+## museum is built, flooded from the first cell of the first hall over floor
+## and ferry alike. A hall tested from its OWN first row answers the wrong
+## question — Trans_Scale measured perfectly connected inside itself while
+## nothing could get in through its seam — so every verdict here is asked of
+## this set, which starts where the visitor starts.
+var _reach: Dictionary = {}
+var _reach_front: Array = []
+
+
+## grow the reachable set into whatever has been built since the last call
+func _reach_extend() -> void:
+	if _walk_cells.is_empty():
+		return
+	if _reach.is_empty():
+		var seed := Vector2i(0, 0)
+		var best: int = 99999
+		for k in _walk_cells:
+			var c: Vector2i = k
+			if c.y < best:
+				best = c.y
+				seed = c
+		_reach[seed] = true
+		_reach_front.append(seed)
+	while not _reach_front.is_empty():
+		var cur: Vector2i = _reach_front.pop_back()
+		for d in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+			var n: Vector2i = cur + d
+			if _reach.has(n):
+				continue
+			if _walk_cells.has(n) or _ride_cells.has(n):
+				_reach[n] = true
+				_reach_front.append(n)
+
+
+## after the walk map changes, the old answer is stale — ask again from scratch
+func _reach_rebuild() -> void:
+	_reach = {}
+	_reach_front = []
+	_reach_extend()
+
+## can the visitor get INTO this hall? Not 'is its far row reachable' — a body
+## that seals the last rows moves the finish line, and carousel_cake seals nine
+## of them. Asking about entry cannot be gamed: the hall behind it either lets
+## the visitor through or it does not, and a hall severed in its middle is
+## caught when the NEXT hall asks the same question.
+func _hall_arrives(zbase: int, z_end: int) -> bool:
+	_reach_rebuild()
+	# THE FINISH LINE IS PINNED. It is the hall's last KNOWN row — sealed cells
+	# counted — because carousel_cake seals the last nine rows of its hall, and
+	# a finish line drawn through free cells only would simply retreat in front
+	# of it and report the walk fine right up to the wall.
+	var z_top: int = zbase
+	for k in _walk_cells:
+		var c: Vector2i = k
+		if c.y >= zbase and c.y <= z_end and c.y > z_top:
+			z_top = c.y
+	for k2 in _walk_erased:
+		var c2: Vector2i = k2
+		if c2.y >= zbase and c2.y <= z_end and c2.y > z_top:
+			z_top = c2.y
+	if z_top <= zbase:
+		return true
+	for k3 in _walk_cells:
+		var c3: Vector2i = k3
+		if c3.y == z_top and _reach.has(c3):
+			return true
+	return false
+
+## THE THIRD RUNG (2026-08-26). Slide, then plank, then SHRINK, and only then
+## take it out. carousel_cake seals 88 cells — ten wide and nine deep, the whole
+## width of Trans_RotationSpectacle's round room — and it drains long after the
+## hall was certified, so a hall that passed is severed by a body that arrived
+## late. It cannot be slid (nowhere in a ten-wide hall for a ten-wide body) and
+## it cannot be planked (it is a body, not a hole), and deleting it would delete
+## the spectacle the room was built for. So the museum takes it in, a step at a
+## time, until the visitor can get past — and says by how much, because a cake at
+## 65% is a fact Palle may want to answer with a wider room instead.
+func _hall_shrink_body(seg: Node3D, tok: String, zbase: int, z_end: int) -> float:
+	var n3: Node3D = _hall_find_body(seg, tok)
+	if n3 == null:
+		return 0.0
+	var base: Vector3 = n3.scale
+	var held: Array = []
+	for k in _walk_erased:
+		var c: Vector2i = k
+		if c.y >= zbase and c.y <= z_end and String(_walk_erased[c]) == "seal:%s" % tok:
+			held.append(c)
+	for s in [0.8, 0.65, 0.5, 0.35]:
+		for c2 in held:
+			_walk_cells[c2] = true
+			_walk_erased.erase(c2)
+		n3.scale = base * float(s)
+		n3.force_update_transform()
+		held = _cells_of_extent(n3)
+		for c3 in held:
+			if _walk_cells.has(c3):
+				_walk_cells.erase(c3)
+			_walk_erased[c3] = "seal:%s" % tok
+		if _hall_arrives(zbase, z_end):
+			return float(s)
+	# even at a third it still walls the hall: put it back and let the caller
+	# reach for the last rung
+	for c4 in held:
+		_walk_cells[c4] = true
+		_walk_erased.erase(c4)
+	n3.scale = base
+	n3.force_update_transform()
+	return 0.0
+
+
+## the body in the tree, by the name a map calls it
+func _hall_find_body(seg: Node3D, tok: String) -> Node3D:
+	if seg == null or not is_instance_valid(seg):
+		return null
+	for child in seg.get_children():
+		if not (child is Node3D):
+			continue
+		var n3: Node3D = child
+		var nm: String = String(n3.get_meta("artifact_lookup_name")) \
+			if n3.has_meta("artifact_lookup_name") else String(n3.name)
+		if nm == tok:
+			return n3
+	return null
+
+
+## which cells a body stands in NOW, straight off its built extent
+func _cells_of_extent(node: Node3D) -> Array:
+	var box: AABB = _extent_of(node)
+	var out: Array = []
+	if box.size.x <= 0.0 and box.size.z <= 0.0:
+		return out
+	var x0: int = int(floor(box.position.x))
+	var x1: int = int(floor(box.position.x + box.size.x - 0.01))
+	var z0: int = int(floor(box.position.z))
+	var z1: int = int(floor(box.position.z + box.size.z - 0.01))
+	if (x1 - x0) > 40 or (z1 - z0) > 40:
+		return out                         # an absurd AABB is a measurement fault
+	for x in range(x0, x1 + 1):
+		for z in range(z0, z1 + 1):
+			out.append(Vector2i(x, z))
+	return out
+
+func _hall_plank_repair(seg: Node3D, zbase: int, z_end: int, hall: String) -> int:
+	var free_c: Dictionary = {}
+	var x_lo: int = 99999
+	var x_hi: int = -99999
+	var z_first: int = z_end
+	for k in _walk_cells:
+		var c: Vector2i = k
+		if c.y < zbase - 3 or c.y > z_end:
+			continue
+		free_c[c] = true
+		x_lo = mini(x_lo, c.x)
+		x_hi = maxi(x_hi, c.x)
+		z_first = mini(z_first, c.y)
+	if free_c.is_empty():
+		return 0
+	for r_v in _ride_cells:
+		var rc: Vector2i = r_v
+		if rc.y >= zbase - 3 and rc.y <= z_end:
+			free_c[rc] = true
+	# 0-1 BFS. cost 0 through floor and ferry, 1 through void, never through a body.
+	var dist: Dictionary = {}
+	var prev: Dictionary = {}
+	var dq: Array = []
+	_reach_extend()
+	for k2 in free_c:
+		var c2: Vector2i = k2
+		if _reach.has(c2):
+			dist[c2] = 0
+			dq.append(c2)
+	if dq.is_empty():
+		for k2b in free_c:
+			var c2b: Vector2i = k2b
+			if c2b.y == z_first:
+				dist[c2b] = 0
+				dq.append(c2b)
+	var goal := Vector2i(-99999, 0)
+	var head: int = 0
+	while head < dq.size():
+		var cur: Vector2i = dq[head]
+		head += 1
+		if cur.y == z_end:
+			goal = cur
+			break
+		for d in [Vector2i(0, 1), Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, -1)]:
+			var n: Vector2i = cur + d
+			if n.x < x_lo or n.x > x_hi or n.y < zbase - 3 or n.y > z_end:
+				continue
+			if _walk_erased.has(n):
+				continue                   # a body stands there; that is not a hole
+			var step: int = 0 if free_c.has(n) else 1
+			var nd: int = int(dist[cur]) + step
+			if dist.has(n) and int(dist[n]) <= nd:
+				continue
+			dist[n] = nd
+			prev[n] = cur
+			if step == 0:
+				dq.insert(head, n)         # 0-1 BFS: free moves go to the front
+			else:
+				dq.append(n)
+	if goal.x == -99999 or int(dist.get(goal, 99)) < 1 or int(dist.get(goal, 99)) > 8:
+		return 0
+	var planks: Array = []
+	var walk_back: Vector2i = goal
+	while prev.has(walk_back):
+		if not free_c.has(walk_back):
+			planks.append(walk_back)
+		walk_back = prev[walk_back]
+	if planks.is_empty():
+		return 0
+	var col := seg.get_node_or_null("Collision") as StaticBody3D
+	var m_deck: Material = _sm("podium")
+	for p_v in planks:
+		var pc: Vector2i = p_v
+		var here := Vector3(float(pc.x) + 0.5, -0.06, float(pc.y - zbase) + 0.5)
+		_box(seg, here, Vector3(0.86, 0.12, 1.0), Color(0.26, 0.26, 0.30), m_deck)
+		if col != null:
+			_add_col(col, here, Vector3(0.86, 0.12, 1.0))
+		_walk_cells[pc] = true
+	print("[em-walk] %s: laid a catwalk of %d cell(s) — the hole was the wall" % [
+		hall, planks.size()])
+	_walk_planked.append({"hall": hall, "cells": planks.size()})
+	return planks.size()
+
+func _hall_reaches(z0: int, z_end: int, free_cells: Array) -> bool:
+	var have: Dictionary = {}
+	for c_v in free_cells:
+		have[c_v] = true
+	# a cell the ferry sweeps is a way across, even though it is never floor
+	for r_v in _ride_cells:
+		var rc: Vector2i = r_v
+		if rc.y >= z0 and rc.y <= z_end:
+			have[rc] = true
+	var start: Array = []
+	var target: Dictionary = {}
+	var z_first: int = z_end
+	for c_v2 in free_cells:
+		var c: Vector2i = c_v2
+		if c.y < z_first:
+			z_first = c.y
+	for c_v3 in free_cells:
+		var c2: Vector2i = c_v3
+		if c2.y == z_first:
+			start.append(c2)
+		elif c2.y == z_end:
+			target[c2] = true
+	if start.is_empty() or target.is_empty():
+		return true                        # nothing to route between: not our call
+	var seen: Dictionary = {}
+	var queue: Array = []
+	for s in start:
+		seen[s] = true
+		queue.append(s)
+	var head: int = 0
+	while head < queue.size():
+		var cur: Vector2i = queue[head]
+		head += 1
+		if target.has(cur):
+			return true
+		for d in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+			var n: Vector2i = cur + d
+			if have.has(n) and not seen.has(n):
+				seen[n] = true
+				queue.append(n)
+	return false
+
+
+## where this body could stand instead: the nearest whole-body offset onto free
+## floor that leaves the hall walkable end to end. Vector2i.ZERO = nowhere.
+func _hall_slide_delta(cells: Array, z0: int, z_end: int, free_cells: Array) -> Vector2i:
+	var free_now: Dictionary = {}
+	for c_v in free_cells:
+		free_now[c_v] = true
+	var tries: Array = []
+	for r in range(1, 7):
+		for dx in range(-r, r + 1):
+			for dz in range(-r, r + 1):
+				if maxi(absi(dx), absi(dz)) == r:
+					tries.append(Vector2i(dx, dz))
+	for d_v in tries:
+		var d: Vector2i = d_v
+		var ok: bool = true
+		var taken: Array = []
+		for c_v2 in cells:
+			var nk: Vector2i = (c_v2 as Vector2i) + d
+			if nk.y < z0 or nk.y > z_end or not free_now.has(nk):
+				ok = false
+				break
+			taken.append(nk)
+		if not ok:
+			continue
+		var left: Array = []
+		for c_v3 in free_cells:
+			if not taken.has(c_v3):
+				left.append(c_v3)
+		if _hall_reaches(z0, z_end, left):
+			return d
+	return Vector2i.ZERO
+
+
+## move (or remove) a stamped body. It may still be a row in the patient queue
+## rather than a node in the tree — the queue is checked first, because a
+## queued body has not been built and moving it costs nothing.
+func _hall_move_body(seg: Node3D, tok: String, delta: Vector2i, pull: bool = false) -> void:
+	for i in range(_stamp_queue.size() - 1, -1, -1):
+		var q: Dictionary = _stamp_queue[i]
+		if String(q.get("lookup", "")) != tok:
+			continue
+		if pull:
+			_stamp_queue.remove_at(i)
+		else:
+			var cq: Dictionary = q.get("cell", {})
+			cq["x"] = int(cq.get("x", 0)) + delta.x
+			cq["y"] = int(cq.get("y", 0)) + delta.y
+			q["cell"] = cq
+		return
+	if seg == null or not is_instance_valid(seg):
+		return
+	for child in seg.get_children():
+		if not (child is Node3D):
+			continue
+		var n3: Node3D = child
+		var name_tok: String = String(n3.get_meta("artifact_lookup_name")) \
+			if n3.has_meta("artifact_lookup_name") else String(n3.name)
+		if name_tok != tok:
+			continue
+		if pull:
+			seg.remove_child(n3)
+			n3.queue_free()
+		else:
+			n3.position += Vector3(float(delta.x), 0.0, float(delta.y))
+		return
+
+
+## is there any cell at all on this row, sealed or free? The band's own edge.
+func _band_has_row(z: int) -> bool:
+	for k in _walk_cells:
+		if (k as Vector2i).y == z:
+			return true
+	for k2 in _walk_erased:
+		if (k2 as Vector2i).y == z:
+			return true
+	return false
+
+
 func _seal_cells(node: Node3D, cell: Dictionary, zbase: int, fp: int,
 		also: Node3D = null) -> bool:
 	var cells: Array = _occupied_cells(node, cell, zbase)
@@ -11739,6 +12283,17 @@ func _run_dress_item(item: Dictionary) -> void:
 ## beyond INSTANTIATE_AHEAD_M waits where it is (its seal is already in the
 ## walk map, so nothing about the route is provisional).
 func _drain_stamps() -> void:
+	# THE DEBT COMES FIRST. A hall is finished when its last stamp has drained,
+	# so this is the only place that knows a hall is whole.
+	for ri in range(_repair_owed.size() - 1, -1, -1):
+		var owed: Dictionary = _repair_owed[ri]
+		if not is_instance_valid(owed["seg"]):
+			_repair_owed.remove_at(ri)
+			continue
+		if _segment_has_pending_stamps(owed["seg"]):
+			continue
+		_repair_owed.remove_at(ri)
+		_hall_reach_repair(owed["seg"], int(owed["zbase"]), String(owed["hall"]))
 	if _stamp_queue.is_empty():
 		return
 	var eye: Vector3 = _eye_pos()
@@ -11796,6 +12351,24 @@ func _drain_stamps() -> void:
 			if not ok:
 				print("[em-stamp] deferred %s failed on drain: %s (the bake had placed it)" % [
 					String(item["lookup"]), _stamp_refusal])
+		# A HALL CAN BE SEVERED AFTER IT PASSED. carousel_cake drained long after
+		# its hall was certified and sealed the whole width of the round room, so
+		# a body that arrives late re-arms the hall's end-to-end test rather than
+		# inheriting a verdict that was true before it existed.
+		var seg_late: Node3D = item["seg"] as Node3D
+		if seg_late != null and is_instance_valid(seg_late):
+			var armed: bool = false
+			for ow in _repair_owed:
+				if (ow as Dictionary)["seg"] == seg_late:
+					armed = true
+					break
+			if not armed:
+				for sg in _segments:
+					var sgd: Dictionary = sg
+					if sgd.get("node") == seg_late:
+						_repair_owed.append({"seg": seg_late, "zbase": int(sgd.get("z0", 0.0)),
+							"hall": String(sgd.get("map", ""))})
+						break
 		built += 1
 
 
