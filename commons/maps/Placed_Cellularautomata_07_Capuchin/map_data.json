@@ -14,13 +14,14 @@
       "gate": false
     },
     "metadata": {
-      "source": "tools/place_museums.py",
+      "source": "tools/map_configs.py --pick",
       "plan": "capuchin-crypt-corridor",
-      "variant": "drum",
+      "variant": "field",
       "sequence": "cellularautomata",
-      "density": 1.0,
-      "n_artifacts": 1,
-      "window": "capuchin-crypt-corridor rows 0..18"
+      "density": 0.35,
+      "n_artifacts": 4,
+      "window": "capuchin-crypt-corridor rows 0..18",
+      "order": "tightest"
     }
   },
   "layers": {
@@ -69,13 +70,13 @@
     "interactables": [
       ["","","","","","","","","","","","",""],
       ["","","","","","","","","","","","",""],
+      ["","","","brians_brain_bench","","","","","","","","",""],
       ["","","","","","","","","","","","",""],
       ["","","","","","","","","","","","",""],
+      ["","","","dark_sphere","","","","","","","","",""],
       ["","","","","","","","","","","","",""],
       ["","","","","","","","","","","","",""],
-      ["","","","","","","","","","","","",""],
-      ["","","ca_texture_bench","","","","","","","","","",""],
-      ["","","","","","","","","","","","",""],
+      ["","","","ca_columns","","","CellularAutomata3DStacked","","","","","",""],
       ["","","","","","","","","","","","",""],
       ["","","","","","","","","","","","",""],
       ["","","","","","","","","","","","",""],

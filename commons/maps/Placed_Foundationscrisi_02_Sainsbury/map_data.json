@@ -14,13 +14,14 @@
       "gate": false
     },
     "metadata": {
-      "source": "tools/place_museums.py",
+      "source": "tools/map_configs.py --pick",
       "plan": "sainsbury-false-perspective-enfilade",
-      "variant": "cabinet",
+      "variant": "hypostyle",
       "sequence": "foundationscrisis",
-      "density": 0.8,
-      "n_artifacts": 14,
-      "window": "sainsbury-false-perspective-enfilade rows 1..19"
+      "density": 0.55,
+      "n_artifacts": 8,
+      "window": "sainsbury-false-perspective-enfilade rows 1..19",
+      "order": "tightest"
     }
   },
   "layers": {
@@ -71,19 +72,19 @@
       ["","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","",""],
-      ["","","","contradiction_engine","","","","","","","","","","",""],
-      ["","","","","","crisis_synthesis_bench","","","","paraconsistent_room","","","","",""],
-      ["","barber_paradox","","","","","","","","","","escher_staircase","","bifurcation_diagram",""],
       ["","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","",""],
-      ["","","","impossible_object_press","","","","","","","","","","",""],
-      ["","","","","","","","","","curvature_bench","","","","",""],
+      ["","","cantor_diagonal_workbench","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","",""],
-      ["","cantor_diagonal_workbench","","qfep_formula_3d","","","","","","","crisis_edge_toy","","","both_true_gate",""],
+      ["","","","","","","","","","","","escher_room","","",""],
+      ["","","complexity_dial_workbench","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","",""],
-      ["","","","","","","","","","","","constructive_staircase","","",""],
       ["","","","","","","","","","","","","","",""],
-      ["","","","godel_sentence_machine","","","","","","","","","","",""],
+      ["","","","","","","","","","contradiction_engine","","","crisis_synthesis_bench","",""],
+      ["","","","","","","","","","","","","","",""],
+      ["","","","curvature_bench","","","","","","","","","","",""],
+      ["","","","","","","","","","","","","escher_staircase","",""],
+      ["","","","","","","bifurcation_diagram","","","","","","","",""],
       ["","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","",""]
     ]

@@ -152,8 +152,19 @@ def configs_for(name, plan_key=""):
                     "variant": variant, "density": dens, "order": how,
                     "why": M50.VARIANTS[variant]["why"],
                     "slots": len(pub), "placed": len(chosen),
+                    # SLOT SIZE RIDES WITH THE ITEM: without it nothing
+                    # downstream can compute waste, and a scorer that cannot
+                    # see the slot ends up rewarding big artifacts instead of
+                    # good fits (measured 2026-08-25, it picked a one-object
+                    # room over a six-object one).
+                    # WASTE AND SLOT AREA RIDE WITH THE ITEM. a["slot"] is an
+                    # INDEX into pub, not a size — reading it as a size gave
+                    # every item an area of 1 and let a scorer prefer a
+                    # one-object room to a six-object one (measured 2026-08-25).
                     "items": [{"x": a["x"], "z": a["z"], "token": a["token"],
-                               "kind": a["kind"]} for a in chosen],
+                               "kind": a["kind"], "waste": a.get("waste", 0),
+                               "area": MS.slot_area(pub[a["slot"]])}
+                              for a in chosen],
                 })
     # the room as it stands today, so a configuration can be compared to it
     current = []

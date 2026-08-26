@@ -14,13 +14,14 @@
       "gate": false
     },
     "metadata": {
-      "source": "tools/place_museums.py",
+      "source": "tools/map_configs.py --pick",
       "plan": "labrouste-stack-hall",
-      "variant": "free_plan",
+      "variant": "enfilade",
       "sequence": "randomness",
-      "density": 0.75,
-      "n_artifacts": 2,
-      "window": "labrouste-stack-hall rows 1..19"
+      "density": 1.0,
+      "n_artifacts": 6,
+      "window": "labrouste-stack-hall rows 1..19",
+      "order": "tightest"
     }
   },
   "layers": {
@@ -68,7 +69,7 @@
     ],
     "interactables": [
       ["","","","","","","","","","","","","","",""],
-      ["","","","","","coin_dice_bench","","","","distribution_bench","","","","",""],
+      ["","bar_array","","","RandomGaussianTexture","","","","random_gaussian_texture","","","","blue_noise_bench","",""],
       ["","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","",""],
@@ -84,7 +85,7 @@
       ["","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","",""],
-      ["","","","","","","","","","","","","","",""],
+      ["","","2d_in_3d_randomness_vis","","","","","","GaussianBlurShader","","","","","",""],
       ["","","","","","","","","","","","","","",""]
     ]
   }

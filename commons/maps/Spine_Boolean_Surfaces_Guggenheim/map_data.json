@@ -14,13 +14,14 @@
       "gate": false
     },
     "metadata": {
-      "source": "tools/place_museums.py",
+      "source": "tools/map_configs.py --pick",
       "plan": "guggenheim-serpentine",
-      "variant": "drum",
+      "variant": "cabinet",
       "sequence": "boolean_surfaces",
-      "density": 1.0,
+      "density": 0.55,
       "n_artifacts": 1,
-      "window": "guggenheim-serpentine rows 0..18"
+      "window": "guggenheim-serpentine rows 0..18",
+      "order": "tightest"
     }
   },
   "layers": {
@@ -68,10 +69,10 @@
     ],
     "interactables": [
       ["","","","","","","","","","","","","","",""],
-      ["","","","","","","","","","","","","csg_difference_demo","",""],
       ["","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","",""],
+      ["","","","","csg_difference_demo","","","","","","","","","",""],
       ["","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","",""],

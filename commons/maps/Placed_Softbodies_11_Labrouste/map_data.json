@@ -14,13 +14,14 @@
       "gate": false
     },
     "metadata": {
-      "source": "tools/place_museums.py",
+      "source": "tools/map_configs.py --pick",
       "plan": "labrouste-stack-hall",
       "variant": "field",
       "sequence": "softbodies",
-      "density": 0.55,
-      "n_artifacts": 1,
-      "window": "labrouste-stack-hall rows 1..19"
+      "density": 0.75,
+      "n_artifacts": 8,
+      "window": "labrouste-stack-hall rows 1..19",
+      "order": "tightest"
     }
   },
   "layers": {
@@ -68,8 +69,8 @@
     ],
     "interactables": [
       ["","","","","","","","","","","","","","",""],
-      ["","","","","","verlet_workbench","","","","","","","","",""],
       ["","","","","","","","","","","","","","",""],
+      ["","","frozen_glass_vessel","grab_jelly_bench","gridagent","jelly_cube","mesh_grammar_detailed_bulge","pick_up_cube","pressure_soft_body","reaction_diffusion","","","","",""],
       ["","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","",""],

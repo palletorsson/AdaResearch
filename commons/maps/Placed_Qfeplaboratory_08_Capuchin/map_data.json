@@ -14,13 +14,14 @@
       "gate": false
     },
     "metadata": {
-      "source": "tools/place_museums.py",
+      "source": "tools/map_configs.py --pick",
       "plan": "capuchin-crypt-corridor",
-      "variant": "enfilade",
+      "variant": "field",
       "sequence": "qfeplaboratory",
-      "density": 0.65,
-      "n_artifacts": 1,
-      "window": "capuchin-crypt-corridor rows 0..18"
+      "density": 0.35,
+      "n_artifacts": 4,
+      "window": "capuchin-crypt-corridor rows 0..18",
+      "order": "tightest"
     }
   },
   "layers": {
@@ -69,13 +70,13 @@
     "interactables": [
       ["","","","","","","","","","","","",""],
       ["","","","","","","","","","","","",""],
+      ["","","","complexity_pattern","","","","","","","","",""],
       ["","","","","","","","","","","","",""],
       ["","","","","","","","","","","","",""],
+      ["","","","dark_sphere","","","","","","","","",""],
       ["","","","","","","","","","","","",""],
       ["","","","","","","","","","","","",""],
-      ["","","","","","","","","","","","",""],
-      ["","","random_cubes","","","","","","","","","",""],
-      ["","","","","","","","","","","","",""],
+      ["","","","chaos_particles","","","edge_of_chaos_unlocked","","","","","",""],
       ["","","","","","","","","","","","",""],
       ["","","","","","","","","","","","",""],
       ["","","","","","","","","","","","",""],

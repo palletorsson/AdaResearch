@@ -14,13 +14,14 @@
       "gate": false
     },
     "metadata": {
-      "source": "tools/place_museums.py",
+      "source": "tools/map_configs.py --pick",
       "plan": "labrouste-stack-hall",
       "variant": "field",
       "sequence": "color",
       "density": 0.55,
-      "n_artifacts": 3,
-      "window": "labrouste-stack-hall rows 1..19"
+      "n_artifacts": 8,
+      "window": "labrouste-stack-hall rows 1..19",
+      "order": "tightest"
     }
   },
   "layers": {
@@ -68,8 +69,8 @@
     ],
     "interactables": [
       ["","","","","","","","","","","","","","",""],
-      ["","","shelf","","","pick_up_cube","","","","","","","","",""],
-      ["","","","strobe_lasers","","","","","","","","","","",""],
+      ["","","","","","","","","","","","","","",""],
+      ["","","SpectrumVisualizer","colorballs","colorsheets","colortrails","dark_sphere","disco_lights","","hand_model","","pick_up_cube","","",""],
       ["","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","",""],

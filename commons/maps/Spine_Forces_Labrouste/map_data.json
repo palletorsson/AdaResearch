@@ -14,13 +14,14 @@
       "gate": false
     },
     "metadata": {
-      "source": "tools/place_museums.py",
+      "source": "tools/map_configs.py --pick",
       "plan": "labrouste-stack-hall",
-      "variant": "free_plan",
+      "variant": "field",
       "sequence": "forces",
-      "density": 0.75,
-      "n_artifacts": 2,
-      "window": "labrouste-stack-hall rows 1..19"
+      "density": 0.35,
+      "n_artifacts": 8,
+      "window": "labrouste-stack-hall rows 1..19",
+      "order": "tightest"
     }
   },
   "layers": {
@@ -68,9 +69,9 @@
     ],
     "interactables": [
       ["","","","","","","","","","","","","","",""],
-      ["","","","","","basis_vectors_rig","","","","bounce_well","","","","",""],
       ["","","","","","","","","","","","","","",""],
-      ["","","","","","","","","","","","","","",""],
+      ["","","ForceMagnitudeDemo","","","centripetal_force_demo","","combined_forces_demo","","dark_sphere","","","example_3_3_pointing_in_the_direction_of_motion_vr","",""],
+      ["","","","","exercise_1_5_solution_accelerate_and_decelerate_vr","","exercise_1_8_solution_attraction_magnitude_vr","","firework_launcher","","","","","",""],
       ["","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","",""],

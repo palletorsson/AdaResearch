@@ -14,13 +14,14 @@
       "gate": false
     },
     "metadata": {
-      "source": "tools/place_museums.py",
+      "source": "tools/map_configs.py --pick",
       "plan": "labrouste-stack-hall",
-      "variant": "field",
+      "variant": "enfilade",
       "sequence": "fractals",
       "density": 0.55,
-      "n_artifacts": 10,
-      "window": "labrouste-stack-hall rows 1..19"
+      "n_artifacts": 3,
+      "window": "labrouste-stack-hall rows 1..19",
+      "order": "tightest"
     }
   },
   "layers": {
@@ -68,9 +69,7 @@
     ],
     "interactables": [
       ["","","","","","","","","","","","","","",""],
-      ["","","dark_sphere","","","dla_bench","","","","dla_grower","","","evolutionary_algorithms","",""],
-      ["","","fibonacci_sequences","fractal_recursion_1","","","","","furniture_recursion_bench","","","living_paper","","",""],
-      ["","","","","living_paper_koch","","mandelbrot_bench","","","","","","","",""],
+      ["","fractal_recursion_2","","","","","","","","","","","fractal_stool_toy","",""],
       ["","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","",""],
@@ -85,6 +84,8 @@
       ["","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","",""],
+      ["","","","","","","","","","","","","","",""],
+      ["","","stochastic_tree_separated","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","",""]
     ]
   }

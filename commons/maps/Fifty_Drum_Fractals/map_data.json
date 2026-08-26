@@ -14,12 +14,13 @@
       "gate": false
     },
     "metadata": {
-      "source": "tools/place_museums.py",
+      "source": "tools/map_configs.py --pick",
       "plan": "bay:mesdag-panorama-drum#b3",
       "variant": "hypostyle",
       "sequence": "fractals",
-      "density": 0.5,
-      "n_artifacts": 7
+      "density": 0.35,
+      "n_artifacts": 5,
+      "order": "tightest"
     }
   },
   "layers": {
@@ -62,8 +63,8 @@
       ["","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","",""],
       ["","","","","cube_cabin","","","","","","","","","",""],
-      ["","","","","cube_desk","","","","","","","","","",""],
-      ["","","","","cube_staircase","cube_subdivision","","","","","","","","",""],
+      ["","","","","","","","","","","","","","",""],
+      ["","","","","","cube_subdivision","","","","","","","","",""],
       ["","","","","","","","attractor_plotter","","","","","","",""],
       ["","","","","","","","","","","","","","",""],
       ["","","","","","","example_8_4_cantor_set_vr","","fractal_koch_curve","","","","","",""],

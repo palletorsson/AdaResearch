@@ -14,13 +14,14 @@
       "gate": false
     },
     "metadata": {
-      "source": "tools/place_museums.py",
+      "source": "tools/map_configs.py --pick",
       "plan": "labrouste-stack-hall",
-      "variant": "hypostyle",
+      "variant": "field",
       "sequence": "machinelearning",
-      "density": 0.5,
-      "n_artifacts": 2,
-      "window": "labrouste-stack-hall rows 1..19"
+      "density": 0.55,
+      "n_artifacts": 8,
+      "window": "labrouste-stack-hall rows 1..19",
+      "order": "tightest"
     }
   },
   "layers": {
@@ -68,8 +69,8 @@
     ],
     "interactables": [
       ["","","","","","","","","","","","","","",""],
-      ["","","shape_learner_2d","","","","","","kmeans_simple","","","","","",""],
       ["","","","","","","","","","","","","","",""],
+      ["","","9_1_ga_shakespeare_vr","9_6_ga_shakespeare_annotated_vr","convolutional_neural_networks","evolving_creatures_ea","gradient_descent_landscape","gradient_descent_visualization","joint_learn_walk","","latent_space_walk","","","",""],
       ["","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","",""],
