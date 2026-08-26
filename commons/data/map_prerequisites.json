@@ -15,24 +15,30 @@
     "CoordinateSystem3M",
     "floating_sphere_field"
    ],
-   "needs": []
+   "needs": [
+    {
+     "token": "dark_sphere",
+     "from_map": "Point_Lines",
+     "from_chapter": "primitives"
+    }
+   ]
   },
   "Point_Lines": {
    "chapter": "primitives",
    "index": 1,
    "after": "Point_One",
    "adds": [
-    "dark_sphere",
     "line",
     "modulor_man_demo",
     "walk_this_line_marking",
-    "do_not_cross_barrier",
-    "station_barrier",
-    "line_builder_3d",
     "parallel_line_puzzle",
+    "do_not_cross_barrier",
+    "line_builder_3d",
     "laser_measure",
+    "dark_sphere",
     "science_screen",
     "laser_exploding_sphere",
+    "station_barrier",
     "grabbable_line",
     "plus_line_puzzle",
     "lightrod",
@@ -661,12 +667,12 @@
    ],
    "needs": [
     {
-     "token": "dark_sphere",
+     "token": "science_screen",
      "from_map": "Point_Lines",
      "from_chapter": "primitives"
     },
     {
-     "token": "science_screen",
+     "token": "dark_sphere",
      "from_map": "Point_Lines",
      "from_chapter": "primitives"
     }
@@ -892,8 +898,8 @@
     "basis_vectors_rig",
     "vector_magnitude_demo",
     "vector_translation_demo",
-    "example_1_4_vector_multiplication_vr",
     "2d_in_3d_vectors_vis",
+    "example_1_4_vector_multiplication_vr",
     "coordinate_system_switcher",
     "graphics_monitor",
     "vector_addition_demo"
@@ -4956,17 +4962,17 @@
     "interactive_point_origin_force",
     "CoordinateSystem3M",
     "floating_sphere_field",
-    "dark_sphere",
     "line",
     "modulor_man_demo",
     "walk_this_line_marking",
-    "do_not_cross_barrier",
-    "station_barrier",
-    "line_builder_3d",
     "parallel_line_puzzle",
+    "do_not_cross_barrier",
+    "line_builder_3d",
     "laser_measure",
+    "dark_sphere",
     "science_screen",
     "laser_exploding_sphere",
+    "station_barrier",
     "grabbable_line",
     "plus_line_puzzle",
     "lightrod",
@@ -5381,8 +5387,8 @@
     "basis_vectors_rig",
     "vector_magnitude_demo",
     "vector_translation_demo",
-    "example_1_4_vector_multiplication_vr",
     "2d_in_3d_vectors_vis",
+    "example_1_4_vector_multiplication_vr",
     "coordinate_system_switcher",
     "graphics_monitor",
     "vector_addition_demo",

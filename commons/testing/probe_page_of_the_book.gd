@@ -243,6 +243,67 @@ func _run() -> void:
 				else:
 					notes.append("a second look closes it")
 
+	# 8. THE INSPECTOR HOLDS THE PAGE (2026-08-24): selecting a wall work grows
+	#    the text edit inside the inspector — one home, at the top — and writing
+	#    from there reaches the same book line.
+	var rec_i := -1
+	var recs: Array = inst.get("_edit_records")
+	for ri in range(recs.size()):
+		var rr: Dictionary = recs[ri]
+		if String(rr.get("kind", "")) == "showing" and int(rr.get("index", -1)) == si 				and rr.get("seg") == seg:
+			rec_i = ri
+			break
+	if rec_i < 0:
+		fails.append("no showing record for this wall work — the inspector cannot reach it")
+	else:
+		inst.call("_doll_select", rec_i)
+		inst.call("_doll_insp_show")
+		var insp: CanvasLayer = inst.get("_doll_insp")
+		if insp == null or not is_instance_valid(insp):
+			fails.append("the inspector did not open on a wall work")
+		else:
+			var panel: Node = insp.find_child("InspectorPanel", true, false)
+			if panel == null:
+				fails.append("the inspector has no styled panel")
+			else:
+				var pc := panel as PanelContainer
+				# AT THE TOP: a negative top offset is the old bottom-right pane
+				if pc.offset_top < 0.0:
+					fails.append("the inspector still hangs from the bottom (offset_top %.0f)" % pc.offset_top)
+				else:
+					notes.append("the inspector stands at the TOP (offset_top %.0f)" % pc.offset_top)
+			var sect: Node = insp.find_child("PageSection", true, false)
+			if sect == null:
+				fails.append("the inspector shows no page section for a wall work")
+			else:
+				notes.append("the inspector holds the page: line, field notes, what it shows")
+			var il: TextEdit = inst.get("_page_line")
+			var ino: TextEdit = inst.get("_page_note")
+			if il == null or ino == null:
+				fails.append("the inspector page has no line or no notes box")
+			else:
+				var from_insp := "written from the inspector at the top"
+				il.text = from_insp
+				ino.text = "a second note, from the inspector"
+				inst.call("_page_save")
+				var back_v: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+				var got := ""
+				if back_v is Dictionary:
+					for pv4 in ((back_v as Dictionary).get("pearls", []) as Array):
+						var pl4: Dictionary = pv4
+						if String(pl4.get("pearl", "")) != pearl 								and String(pl4.get("map", "")).replace("_", " ").to_lower() != pearl:
+							continue
+						for lv4 in (pl4.get("lines", []) as Array):
+							if String((lv4 as Dictionary).get("token", "")) == String(lbl.get_meta("em_speak_token")):
+								got = String((lv4 as Dictionary).get("text", ""))
+				if got != from_insp:
+					fails.append("writing from the inspector did not reach the book (got %s)" % got.substr(0, 30))
+				else:
+					notes.append("writing from the inspector reaches the same book line")
+			# selecting something else puts the page away
+			inst.call("_doll_select", -1)
+			inst.call("_insp_page_section")
+
 	inst.call("_page_close")
 	if inst.get("_page_ui") != null:
 		fails.append("the window did not close")

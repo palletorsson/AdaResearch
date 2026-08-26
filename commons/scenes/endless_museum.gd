@@ -762,6 +762,9 @@ var _doll_menu_filter: LineEdit = null
 var _doll_menu_tokens: Array = []
 var _doll_insp: CanvasLayer = null        # the inspector — a selected body's values, live
 var _doll_insp_lbl: Label = null
+var _doll_insp_box: VBoxContainer = null   # the panel's column, rebuilt per selection
+var _doll_insp_head: Label = null
+var _doll_insp_tok: int = -1               # which record the page section was built for
 var _doll_insp_t: float = 0.0
 var _doll_top: bool = false               # H's second stop: the plan view, straight down
 var _plan_view_size: float = 28.0          # fixed on entry; the wheel scrolls the map axis
@@ -4296,6 +4299,110 @@ func _wall_read_vr_tick() -> void:
 				_wall_read_close()
 
 
+## THE TEXT EDIT LIVES IN THE INSPECTOR (2026-08-24, Palle: "there is already
+## an inspector tab when I click on a wall work so we can put the text edit
+## there"). Selecting a wall work grows the page under its numbers: the line,
+## the field notes, what the page shows, and the hand that writes. Rebuilt only
+## when the SELECTION changes, so typing is never interrupted by the 0.25 s
+## refresh that keeps the numbers live.
+func _insp_page_section() -> void:
+	if _doll_insp_box == null or not is_instance_valid(_doll_insp_box):
+		return
+	if _edit_sel < 0 or _edit_sel >= _edit_records.size():
+		return
+	var r: Dictionary = _edit_records[_edit_sel]
+	if String(r.get("kind", "")) != "showing":
+		if _doll_insp_tok != -1:
+			_insp_page_clear()
+		return
+	if _doll_insp_tok == _edit_sel:
+		return                    # already standing for this one — do not eat the caret
+	_insp_page_clear()
+	var seg: Node3D = _node_or_null(r.get("seg"))
+	if seg == null:
+		return
+	var si: int = int(r.get("index", -1))
+	var token := ""
+	var shown := ""
+	for n in seg.get_children():
+		if n.has_meta("em_speak") and int(n.get_meta("em_speak")) == si:
+			if n.has_meta("em_speak_token"):
+				token = String(n.get_meta("em_speak_token"))
+			if n is Label3D:
+				shown = (n as Label3D).text
+			break
+	var chapter := String(seg.get_meta("em_chapter")) if seg.has_meta("em_chapter") else ""
+	var pearl := String(seg.get_meta("em_pearl")) if seg.has_meta("em_pearl") else ""
+	if pearl == "":
+		return
+	_page_ctx = {"chapter": chapter, "pearl": pearl, "token": token, "si": si}
+	var book: Dictionary = _page_read()
+	var fnt: Font = _page_font()
+	var sect := VBoxContainer.new()
+	sect.name = "PageSection"
+	sect.add_theme_constant_override("separation", 7)
+	_doll_insp_box.add_child(sect)
+	var sub := "%s   \u00b7   %s   \u00b7   PAGE %02d" % [chapter.to_upper(), pearl.to_upper(), si + 1]
+	sect.add_child(_page_label(sub, 11, PAGE_QUIET, fnt))
+	sect.add_child(_page_label(token if token != "" else "UNANCHORED", 12, PAGE_ACCENT, fnt))
+	sect.add_child(_page_label("THE LINE", 11, PAGE_QUIET, fnt))
+	var line_now := String(book.get("text", ""))
+	if line_now == "":
+		line_now = shown
+	_page_line = _page_edit(line_now, 17, PAGE_INK, 88, fnt)
+	sect.add_child(_page_line)
+	sect.add_child(_page_label("FIELD NOTES", 11, PAGE_QUIET, fnt))
+	_page_note = _page_edit(String(book.get("note", "")), 13, Color(0.80, 0.80, 0.82), 190, fnt)
+	sect.add_child(_page_note)
+	var vrow := HBoxContainer.new()
+	vrow.add_theme_constant_override("separation", 8)
+	sect.add_child(vrow)
+	vrow.add_child(_page_label("SHOWS", 11, PAGE_QUIET, fnt))
+	_page_viz = OptionButton.new()
+	_page_viz.add_item("the line")
+	_page_viz.add_item("a plan of this hall")
+	_page_viz.add_item("the wallpaper group")
+	_page_viz.selected = maxi(0, VIZ_KINDS.find(String(book.get("viz", ""))))
+	_page_viz.add_theme_color_override("font_color", PAGE_INK)
+	_page_viz.add_theme_font_size_override("font_size", 12)
+	if fnt != null:
+		_page_viz.add_theme_font_override("font", fnt)
+	_page_viz.add_theme_stylebox_override("normal", _page_box(Color(0.11, 0.11, 0.13), Color(0.24, 0.24, 0.27), 1, 6))
+	_page_viz.add_theme_stylebox_override("hover", _page_box(Color(0.14, 0.14, 0.17), PAGE_ACCENT, 1, 6))
+	vrow.add_child(_page_viz)
+	var frow := HBoxContainer.new()
+	frow.add_theme_constant_override("separation", 10)
+	sect.add_child(frow)
+	_page_status = _page_label("F5  write", 11, PAGE_QUIET, fnt)
+	_page_status.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	frow.add_child(_page_status)
+	var save := Button.new()
+	save.text = "write to the book"
+	save.add_theme_color_override("font_color", Color(0.09, 0.08, 0.06))
+	save.add_theme_font_size_override("font_size", 13)
+	if fnt != null:
+		save.add_theme_font_override("font", fnt)
+	save.add_theme_stylebox_override("normal", _page_box(PAGE_ACCENT, PAGE_ACCENT, 1, 11))
+	save.add_theme_stylebox_override("hover", _page_box(Color(0.92, 0.72, 0.34), Color(0.92, 0.72, 0.34), 1, 11))
+	save.pressed.connect(_page_save)
+	frow.add_child(save)
+	_doll_insp_tok = _edit_sel
+
+
+func _insp_page_clear() -> void:
+	_doll_insp_tok = -1
+	_page_line = null
+	_page_note = null
+	_page_viz = null
+	_page_status = null
+	if _doll_insp_box == null or not is_instance_valid(_doll_insp_box):
+		return
+	var old: Node = _doll_insp_box.find_child("PageSection", false, false)
+	if old != null:
+		_doll_insp_box.remove_child(old)
+		old.queue_free()
+
+
 ## Which wall work is under the cursor, and which line of the book it carries.
 ## Returns false when the tap landed on anything else, so the click falls through.
 func _page_open_at(mouse: Vector2) -> bool:
@@ -4326,8 +4433,14 @@ func _page_open_at(mouse: Vector2) -> bool:
 	if pearl == "":
 		print("[em-page] this hall carries no pearl name - the page needs the book")
 		return false
+	# ONE HOME FOR THE TEXT (2026-08-24): the inspector already appears when a
+	# wall work is clicked, so the double tap selects it and opens the page
+	# THERE, rather than raising a second window over the first.
 	_page_ctx = {"chapter": chapter, "pearl": pearl, "token": token, "si": si}
-	_page_build(shown)
+	_doll_select(idx)
+	_doll_insp_show()
+	if _page_line != null and is_instance_valid(_page_line):
+		_page_line.grab_focus()
 	return true
 
 
@@ -11839,6 +11952,9 @@ func _doll_frame(delta: float) -> void:
 		_doll_insp_t = 0.0
 		if _edit_sel >= 0 and _doll_insp != null and is_instance_valid(_doll_insp) and _doll_insp.visible:
 			_doll_insp_fill()
+			# the page section rebuilds only on a CHANGE of selection — it
+			# guards itself, so the live numbers never eat the caret
+			_insp_page_section()
 
 
 ## THE ADD MENU (2026-08-21, Palle: "iso needs a menu to add new artifact,
@@ -12587,23 +12703,48 @@ func _doll_gag() -> void:
 ## plinth's verdict, and every hand ruling that names it. It refreshes while
 ## held, so a drag or a turn shows its numbers as they change.
 func _doll_insp_show() -> void:
+	# AT THE TOP, AND DRESSED AS THE PAGE (2026-08-24, Palle: "we just have to
+	# make the inspector a lot nicer, now it is in the bottom right corner. It
+	# could be at the top one?"). Bottom-right is where a debug pane goes; this
+	# one is read while writing, so it moves to the top-right and takes the
+	# wall work's own clothes — off-white frame, near-black canvas, the
+	# museum's Roboto. A selected WALL WORK grows the text edit inside it,
+	# which is the whole point: one place, not a second window.
+	var fnt: Font = _page_font()
 	if _doll_insp == null or not is_instance_valid(_doll_insp):
 		_doll_insp = CanvasLayer.new()
 		_doll_insp.layer = 87
 		var panel := PanelContainer.new()
-		panel.set_anchors_preset(Control.PRESET_BOTTOM_RIGHT)
-		panel.offset_left = -348
-		panel.offset_top = -324
-		panel.offset_right = -12
-		panel.offset_bottom = -40
+		panel.name = "InspectorPanel"
+		panel.add_theme_stylebox_override("panel", _page_box(PAGE_CANVAS, PAGE_FRAME, 2, 18))
+		# explicit rect: a preset alone leaves a fresh Control at 0x0
+		panel.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+		panel.offset_left = -430
+		panel.offset_top = 16
+		panel.offset_right = -18
+		panel.offset_bottom = 640
+		var sc := ScrollContainer.new()
+		sc.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+		panel.add_child(sc)
+		_doll_insp_box = VBoxContainer.new()
+		_doll_insp_box.add_theme_constant_override("separation", 8)
+		_doll_insp_box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		sc.add_child(_doll_insp_box)
+		_doll_insp_head = _page_label("", 20, PAGE_INK, fnt)
+		_doll_insp_box.add_child(_doll_insp_head)
+		_page_rule(_doll_insp_box, Color(0.22, 0.22, 0.25))
 		_doll_insp_lbl = Label.new()
-		_doll_insp_lbl.add_theme_font_size_override("font_size", 13)
+		_doll_insp_lbl.add_theme_font_size_override("font_size", 12)
+		_doll_insp_lbl.add_theme_color_override("font_color", PAGE_QUIET)
+		if fnt != null:
+			_doll_insp_lbl.add_theme_font_override("font", fnt)
 		_doll_insp_lbl.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		panel.add_child(_doll_insp_lbl)
+		_doll_insp_box.add_child(_doll_insp_lbl)
 		_doll_insp.add_child(panel)
 		add_child(_doll_insp)
 	_doll_insp.visible = true
 	_doll_insp_fill()
+	_insp_page_section()
 
 
 func _doll_insp_fill() -> void:
@@ -12615,7 +12756,9 @@ func _doll_insp_fill() -> void:
 	var n: Node3D = _node_or_null(r.get("node"))
 	var kind := String(r.get("kind", ""))
 	var rows: PackedStringArray = []
-	rows.append(String(r.get("token", "?")))
+	if _doll_insp_head != null and is_instance_valid(_doll_insp_head):
+		var head_tok := String(r.get("token", "?"))
+		_doll_insp_head.text = ("THE PAGE" if kind == "showing" else head_tok.to_upper())
 	rows.append("kind      " + (kind if kind != "" else "artifact"))
 	var ch := String(r.get("chapter", ""))
 	var sgn: Node = r.get("seg")
