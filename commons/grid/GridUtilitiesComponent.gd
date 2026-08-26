@@ -560,29 +560,30 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 				var rotation_y = float(parameters[0])
 				utility_object.rotation_degrees.y = rotation_y
 				print("GridUtilitiesComponent: Set walkable prism rotation to: %f degrees" % rotation_y)
-			if parameters.size() > 1 and str(parameters[1]).strip_edges() != "":
-				var color_param = parameters[1]
-				_apply_color_to_utility(utility_object, color_param)
-				print("GridUtilitiesComponent: Applied color '%s' to walkable prism" % color_param)
-			# PARAM 2 — a hand lift in cube units, added on top of the half-cube seat
-			# above. That seat is DERIVED (it makes the prism bridge floor to +1);
-			# this is the hand overruling it where the derivation does not fit the
-			# step, and the hand outranks derivation.
+			# PARAM 1 IS DUAL, and it has to be. UtilityRegistry.parse_utility_cell
+			# DROPS empty parts, so `wp:0::0.5` never arrives as ["0","","0.5"]: it
+			# arrives as ["0","0.5"] and the lift lands in the COLOUR slot. Not a
+			# theory — it called _apply_color_to_shader_material, which reaches
+			# Shader.get_shader_params(), a Godot 3 method absent in 4, and the walk
+			# threw "Nonexistent function 'get_shader_params'". A hole in a positional
+			# list is not expressible here, so the one slot carries both meanings.
 			#
-			# GATED BY DATA. Every wp token in the corpus carries at most ONE
-			# parameter — 681 bare, 290 wp:0, 219 wp:180, 203 wp:90, 92 wp:270, 88
-			# wp:-90 — so not one of them can reach this branch, and a map without a
-			# third parameter builds byte-identically. The teleporter has taken a
-			# height offset by this same route for far longer (see "t" above), so
-			# this is an existing convention reaching one more utility, not a new one.
-			if parameters.size() > 2:
-				var raw_lift: String = str(parameters[2]).strip_edges()
-				if raw_lift.is_valid_float():
-					var lift: float = raw_lift.to_float()
+			# A NUMBER is the hand lift in cube units, added to the half-cube seat
+			# above — that seat is DERIVED, this is the hand overruling it, and the
+			# hand outranks derivation. Anything else is a colour, as before.
+			# Unambiguous by construction: a colour is a name or a hex string, never a
+			# bare float. GATED BY DATA either way — every wp token in the corpus
+			# carries at most ONE parameter (681 bare, 290 wp:0, 219 wp:180, 203
+			# wp:90, 92 wp:270, 88 wp:-90), so none of the 1,573 reaches this branch.
+			if parameters.size() > 1:
+				var p1: String = str(parameters[1]).strip_edges()
+				if p1.is_valid_float():
+					var lift: float = p1.to_float()
 					utility_object.position.y += cube_size * lift
 					print("GridUtilitiesComponent: Raised walkable prism by %.2f cube(s)" % lift)
-				elif not raw_lift.is_empty():
-					print("GridUtilitiesComponent: WARNING - Invalid wp height offset '%s'" % raw_lift)
+				elif p1 != "":
+					_apply_color_to_utility(utility_object, p1)
+					print("GridUtilitiesComponent: Applied color '%s' to walkable prism" % p1)
 		"el":  # Extra light
 			var energy_value = null
 			if parameters.size() > 0:
@@ -1052,7 +1053,7 @@ func _apply_color_to_shader_material(shader_material: ShaderMaterial, color: Col
 	var shader_params = ["fill_color", "base_color", "albedo_color", "modelColor", "color"]
 
 	for param_name in shader_params:
-		if shader_material.shader and shader_material.shader.get_shader_params().has(param_name):
+		if shader_material.shader and _shader_has_uniform(shader_material.shader, param_name):
 			shader_material.set_shader_parameter(param_name, color)
 			print("GridUtilitiesComponent: Set shader parameter '%s' to %s" % [param_name, color])
 			break
@@ -1062,10 +1063,27 @@ func _apply_color_to_shader_material(shader_material: ShaderMaterial, color: Col
 	var wireframe_color = Color(1.0 - color.r, 1.0 - color.g, 1.0 - color.b, 1.0)  # Complementary color
 
 	for param_name in wireframe_params:
-		if shader_material.shader and shader_material.shader.get_shader_params().has(param_name):
+		if shader_material.shader and _shader_has_uniform(shader_material.shader, param_name):
 			shader_material.set_shader_parameter(param_name, wireframe_color)
 			print("GridUtilitiesComponent: Set wireframe parameter '%s' to %s" % [param_name, wireframe_color])
 			break
+
+
+## Does this shader declare that uniform?
+##
+## `Shader.get_shader_params()` is GODOT 3. In 4 the method is
+## get_shader_uniform_list(), returning an Array of property dictionaries — so the
+## old call did not fail at parse time, it failed the first time anyone gave a
+## utility a colour, with "Nonexistent function 'get_shader_params' in base
+## 'Shader'". Nobody had, in the whole corpus, until a wp token was written with a
+## numeric parameter in the colour slot and found this waiting.
+func _shader_has_uniform(shader: Shader, uniform_name: String) -> bool:
+	if shader == null:
+		return false
+	for u in shader.get_shader_uniform_list():
+		if str((u as Dictionary).get("name", "")) == uniform_name:
+			return true
+	return false
 
 # Apply color to standard material
 func _apply_color_to_standard_material(standard_material: StandardMaterial3D, color: Color):

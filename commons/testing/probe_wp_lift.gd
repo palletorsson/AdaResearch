@@ -59,9 +59,13 @@ func _initialize() -> void:
 			var yaw := "(none — no rotation applied)"
 			if parts.size() > 1:
 				yaw = parts[1]
+			# parameter 1 is DUAL: a number is the lift, anything else is a colour.
+			# It cannot be parameter 2 with an empty 1 — parse_utility_cell drops
+			# empty parts, so a hole in the list collapses and the lift would land
+			# in the colour slot (which is exactly how this shipped broken once).
 			var lift := 0.0
-			if parts.size() > 3 and str(parts[3]).strip_edges().is_valid_float():
-				lift = str(parts[3]).strip_edges().to_float()
+			if parts.size() > 2 and str(parts[2]).strip_edges().is_valid_float():
+				lift = str(parts[2]).strip_edges().to_float()
 
 			var cell_h := 0
 			if z < (struct as Array).size():
