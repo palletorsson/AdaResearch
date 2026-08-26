@@ -124,6 +124,7 @@ func _gest_yield(colour: Color) -> void:
 	if rung == "":
 		return                      # this place has taught nothing to yield yet
 	_gest_spent = true
+	_gest_break(colour)
 	match rung:
 		"point":
 			_gest_point(colour)
@@ -135,6 +136,56 @@ func _gest_yield(colour: Color) -> void:
 			_gest_spent = false     # a rung that is not built yet leaves the egg whole
 			return
 	print("[dark_sphere] gestation: %s yielded a %s" % [_gest_where(), rung])
+
+
+## THE BREAK (2026-08-26, Palle: "can we simulate the BREAK of the dark
+## sphere"). The first storyboard photographed the fault: the egg stood there
+## whole, in front of the thing it had just produced, occluding its own yield.
+## An egg that yields must open. The shell comes apart into shards that fly and
+## fall, the sphere itself collapses to nothing over a third of a second, and
+## the hit body goes dead so a spent egg cannot be shot again.
+func _gest_break(colour: Color) -> void:
+	var host: Node = _gest_host()
+	var here: Vector3 = global_position
+	# the shell, in pieces — thin curved-ish chips, thrown outward and up
+	for i in range(9):
+		var a: float = TAU * float(i) / 9.0
+		var el: float = randf_range(-0.5, 0.9)
+		var dir := Vector3(cos(a) * cos(el), sin(el), sin(a) * cos(el)).normalized()
+		var sh := RigidBody3D.new()
+		sh.name = "EggShard%d" % i
+		var mi := MeshInstance3D.new()
+		var bm := BoxMesh.new()
+		bm.size = Vector3(randf_range(0.07, 0.13), randf_range(0.05, 0.10), 0.022)
+		mi.mesh = bm
+		var m := StandardMaterial3D.new()
+		# the shell keeps the SPHERE's own colour, not the catalyst's — what
+		# broke is the egg, and only what came out of it is the new thing
+		m.albedo_color = Color(0.13, 0.11, 0.18)
+		m.roughness = 0.35
+		m.emission_enabled = true
+		m.emission = colour
+		m.emission_energy_multiplier = 0.35
+		mi.material_override = m
+		sh.add_child(mi)
+		var cs := CollisionShape3D.new()
+		var bx := BoxShape3D.new()
+		bx.size = bm.size
+		cs.shape = bx
+		sh.add_child(cs)
+		host.add_child(sh)
+		sh.global_position = here + dir * 0.30
+		sh.apply_central_impulse(dir * randf_range(0.5, 1.1) + Vector3(0, 0.35, 0))
+		sh.angular_velocity = Vector3(randf_range(-6, 6), randf_range(-6, 6), randf_range(-6, 6))
+	# the egg itself collapses — tween the NODE, so whatever presence/body the
+	# DNA built goes with it, and nothing has to know what it was made of
+	var tw: Tween = create_tween()
+	tw.tween_property(self, "scale", Vector3.ONE * 0.001, 0.34).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+	tw.tween_callback(func() -> void:
+		visible = false)
+	# a spent egg cannot be shot again
+	if _gest_body != null and is_instance_valid(_gest_body):
+		_gest_body.collision_layer = 0
 
 
 func _gest_mat(colour: Color) -> StandardMaterial3D:
