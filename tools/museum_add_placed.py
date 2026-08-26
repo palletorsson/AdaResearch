@@ -53,8 +53,15 @@ def placed_by_sequence():
         seq = meta.get("sequence", "")
         if seq:
             out.setdefault(seq, []).append(n)
+    # THE RIBBON SUPERSEDES THE ROOM-FIRST ROOMS. Both methods wrote maps into
+    # this roster; the room-first ones sized a room and let the artifacts be
+    # the leftover, which is the thing the ribbon was built to invert. Where a
+    # sequence has ribbon halls they are the whole of its offer, and the
+    # room-first rooms stay on disk and on /placed for comparison without being
+    # walked twice.
     for k in out:
-        out[k].sort()
+        rib = [n for n in out[k] if n.startswith("Ribbon_")]
+        out[k] = sorted(rib) if rib else sorted(out[k])
     return out
 
 
