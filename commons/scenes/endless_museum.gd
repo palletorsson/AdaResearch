@@ -5956,8 +5956,12 @@ func _build_segment() -> void:
 			continue
 		var ccx: int = int(cf[0])
 		var ccz: int = int(cf[1])
-		if hall_is_authored and ccz >= 0:
-			continue   # ONE TRUTH: the map alone authors an authored hall's walls
+		# ONE TRUTH: the map alone authors an authored hall's walls — EXCEPT the
+		# passage rows. Those are appended past the map's last row and belong to
+		# no map at all, which is precisely what makes them the one thing an
+		# authored hall can carry as a ruling without contradicting its map.
+		if hall_is_authored and ccz >= 0 and (passage_start < 0 or ccz < passage_start):
+			continue
 		if ccz < 0:
 			if ccz >= -VESTIBULE_H:
 				vest_rules[Vector2i(ccx, ccz + VESTIBULE_H)] = String(cvd.get("value", "1"))
@@ -16114,6 +16118,13 @@ func _rule_cell(segn: Node3D, zbase: int, wx: int, wz: int, erase: bool, force: 
 	if cz_t < -VESTIBULE_H:
 		return ""
 	var in_hall: bool = cz_t >= 0
+	# THE PASSAGE IS EDITABLE TOO (2026-08-26, Palle: "I feel like I do not have
+	# control over the passages, can you give full edit control over them? Like
+	# the maps?"). The passage rows sit past the map's last row, so the map write
+	# refused them and the painter did nothing at all on the one part of the
+	# museum a visitor crosses every single time. They take a ruling instead.
+	var pass_at: int = int(segn.get_meta("em_passage_start", -1))
+	var in_passage: bool = in_hall and pass_at >= 0 and cz_t >= pass_at
 	var authored_map := String(segn.get_meta("em_map")) if segn.has_meta("em_map") else ""
 	if in_hall and (cz_t >= tile.size() or wx < 0 or wx >= (tile[cz_t] as Array).size()):
 		# AUTHORED halls: the tile is CROPPED to content, but the MAP is the
@@ -16151,7 +16162,7 @@ func _rule_cell(segn: Node3D, zbase: int, wx: int, wz: int, erase: bool, force: 
 	if in_hall:
 		(tile[cz_t] as Array)[wx] = nv
 	var seg_map := String(segn.get_meta("em_map")) if segn.has_meta("em_map") else ""
-	if seg_map != "" and in_hall:
+	if seg_map != "" and in_hall and not in_passage:
 		# ONE TRUTH: the ruling encodes into the map itself, right away —
 		# tile "4"/"1"/"0" is map "2"/"1"/"0"
 		var map_v := "2" if nv == "4" else nv
@@ -16988,7 +16999,10 @@ func _passage_target_segment() -> Node3D:
 		if selected_seg != null and selected_seg.has_meta("em_map") \
 				and String(selected_seg.get_meta("em_map")) != "":
 			return selected_seg
-	var at_z := _player.position.z if _player != null else (_cam.global_position.z if _cam != null else 0.0)
+	# _eye_pos() is the one answer that holds in every lane. _player and _cam are
+	# both null in a headset, so the panel used to fall through to 0.0 and quietly
+	# edit the LOBBY's passage while Palle stood eight halls away.
+	var at_z: float = _eye_pos().z
 	var nearest: Node3D = null
 	var nearest_d := INF
 	for sv in _segments:
