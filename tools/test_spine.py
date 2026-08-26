@@ -33,6 +33,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import subprocess
 import sys
 
@@ -109,7 +110,14 @@ def main():
     print("  %-24s %5s %6s %6s %8s  %s" % ("sequence", "maps", "verify", "ready", "notes", ""))
     for sid, maps in groups:
         v = run([os.path.join("tools", "verify_sequence.py"), sid])
-        v_ok = "ALL CHECKS PASSED" in (v.stdout or "")
+        # ERRORS fail, warnings do not. verify_sequence prints "ALL CHECKS
+        # PASSED" only when both are zero, so keying on that phrase counted a
+        # sequence with four warnings as broken — which it is not, and a gate
+        # that cries wolf on a warning is a gate that gets ignored.
+        out = v.stdout or ""
+        mm = re.search(r"(\d+) errors?, (\d+) warnings?", out)
+        v_ok = ("ALL CHECKS PASSED" in out) or (mm is not None and mm.group(1) == "0")
+        v_warn = int(mm.group(2)) if mm else 0
         ready = notes = 0
         for m in maps:
             with open(os.path.join(ROOT, "commons", "maps", m, "map_data.json"), encoding="utf-8") as fh:
@@ -123,8 +131,10 @@ def main():
             fails += 1
         fails += len(bad_here)
         print("  %-24s %5d %6s %4d/%-3d %8d  %s"
-              % (sid, len(maps), "OK" if v_ok else "FAIL", ready, len(maps), notes,
-                 ("BROKEN: " + ", ".join(bad_here[:3])) if bad_here else ""))
+              % (sid, len(maps), ("OK" if not v_warn else "OK*") if v_ok else "FAIL",
+                 ready, len(maps), notes,
+                 ("BROKEN: " + ", ".join(bad_here[:3])) if bad_here else
+                 ("%d warning(s)" % v_warn if v_warn else "")))
 
     print("\n  tokens: %s" % ("every one resolves" if tokens_ok else "%d unresolved" % len(tok_bad)))
     if not args.quick:
