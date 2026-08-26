@@ -37,6 +37,7 @@ func _run() -> void:
 	# it an origin and an eye and it runs the REAL VR lane — build ahead, free
 	# behind, three-shell ownership, the one-hall render window — with the
 	# probe doing nothing but walking the rig forward.
+	var lane_pre := _arg("lane", "vr")
 	var origin := XROrigin3D.new()
 	origin.name = "ProbeXROrigin"
 	origin.current = true
@@ -44,10 +45,16 @@ func _run() -> void:
 	eye.name = "ProbeXRCamera"
 	eye.position = Vector3(0, 1.65, 0)
 	origin.add_child(eye)
+	if lane_pre != "vr":
+		origin.current = false          # a desktop walk must not find an eye
 	get_root().add_child(origin)
 
 	var inst: Node3D = (load("res://commons/scenes/endless_museum.tscn") as PackedScene).instantiate() as Node3D
-	inst.set("_force_vr", true)
+	# --lane=desktop walks the SAME route with the VR lane off, so the two
+	# as-built records can be diffed: does the headset build the same hall?
+	var lane := _arg("lane", "vr")
+	if lane == "vr":
+		inst.set("_force_vr", true)
 	inst.set("EM_CONTROL", "res://ada_run/_trial_vw_control.json")
 	inst.set("_overrides_path", "res://ada_run/em_overrides.json")
 	inst.set("_hand_path", "res://ada_run/necklace_hand.json")
@@ -62,9 +69,9 @@ func _run() -> void:
 
 	var rep := "THE VR WALK — %d m in %.1f m steps (headless: GDScript cost only, no GPU)\n" % [int(metres), step]
 	rep += "  museum stood up in %d ms\n\n" % boot_ms
-	rep += "  the museum reports vr=%s
+	rep += "  lane=%s, the museum reports vr=%s
 
-" % str(inst.get("_vr"))
+" % [lane, str(inst.get("_vr"))]
 	var player: Node3D = inst.get("_player") as Node3D
 	var halls: Array = []          # one row per hall as it opens
 	var stalls: Array = []         # every step over 40 ms
@@ -76,6 +83,8 @@ func _run() -> void:
 	while z < metres:
 		z += step
 		origin.position.z = z              # the rig walks; the museum follows the eye
+		if lane != "vr" and player != null:
+			player.position.z = z
 		if player != null:
 			player.position.z = z          # keep the desktop body in step, as the death does
 		var t0 := Time.get_ticks_usec()
@@ -108,6 +117,29 @@ func _run() -> void:
 		var h: Dictionary = h_v
 		rep += "    z %6.1f  %-28s opened in %7.1f ms   %d resident\n" % [
 			h["z"], h["map"], h["ms"], h["resident"]]
+	# THE CENSUS AT THE END OF THE WALK (2026-08-26, Palle: "so now in vr is
+	# that the same hall as in desktop?"). The as-built record is written when a
+	# segment FINISHES BUILDING, so a VR shell records zero bodies and then fills
+	# on promotion - the file cannot tell "never drained" from "drained after the
+	# record was written". This asks the live tree instead.
+	rep += "
+  AT THE END OF THE WALK - what is actually in each resident hall
+"
+	for s_v9 in inst.get("_segments"):
+		var sd9: Dictionary = s_v9
+		var sn9: Node3D = sd9.get("node")
+		if sn9 == null or not is_instance_valid(sn9):
+			continue
+		var bodies := 0
+		for n9 in sn9.find_children("*", "Node3D", true, false):
+			if n9.has_meta("artifact_lookup_name"):
+				bodies += 1
+		var here: bool = z >= float(sd9["z0"]) and z < float(sd9["z1"])
+		rep += "    %-26s %3d bodies  shell=%s%s
+" % [
+			String(sd9.get("map", sd9.get("pearl", "?"))), bodies,
+			str(sn9.get_meta("em_vr_shell", false)), "   <- the walker is here" if here else ""]
+
 	rep += "\n  LOADING — %d steps, %.1f ms mean, VR ownership pass %.2f ms mean\n" % [
 		steps, float(total_us) / 1000.0 / maxf(1.0, float(steps)), float(vr_us) / 1000.0 / maxf(1.0, float(steps))]
 	stalls.sort_custom(func(a, b): return float(a["ms"]) > float(b["ms"]))
