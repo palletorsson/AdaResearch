@@ -76,8 +76,23 @@ def main() -> int:
         if now - anchor > window:
             why = "no result in grace window" if not first_result else f"output stalled {stall:.0f}s"
             print(f"watchdog: KILL ({why})")
-            subprocess.run(["taskkill", "/PID", str(proc.pid), "/T", "/F"],
-                           capture_output=True)
+            r = subprocess.run(["taskkill", "/PID", str(proc.pid), "/T", "/F"],
+                               capture_output=True, text=True)
+            # A KILL THAT DID NOT KILL IS WORSE THAN NO WATCHDOG. taskkill was
+            # fired and its result thrown away, so the line above printed
+            # whether or not anything died — and a surviving Godot then holds
+            # the lock and starves every later run. Measured 2026-08-26: an
+            # instance reported KILLed at 22:16 was still up fifteen minutes
+            # later, contending with its own replacement, and neither finished.
+            for _ in range(20):
+                if proc.poll() is not None:
+                    break
+                time.sleep(0.25)
+            if proc.poll() is None:
+                print("watchdog: STILL ALIVE after taskkill — pid %d. rc=%s %s"
+                      % (proc.pid, r.returncode, (r.stderr or r.stdout or "").strip()[:160]))
+                print("watchdog: a surviving Godot holds the lock; kill it before the next run")
+                return 125
             return 124
         time.sleep(1.0)
 
