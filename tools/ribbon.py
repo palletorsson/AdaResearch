@@ -39,6 +39,7 @@ import glob
 import json
 import math
 import os
+import shutil
 import subprocess
 import sys
 
@@ -58,6 +59,8 @@ PER_ARTIFACT = 21.3   # measured floor cells per artifact
 # A cost of 1 is free; the budget is how much EXPENSIVE an eye can take at once.
 COST_FREE = 1.0
 COST_BUDGET = 3.0
+# how far down the queue to look when the next artifact does not fit this slot
+LOOKAHEAD = 40
 
 EXPENSIVE_CATS = {"physics", "physics_simulation", "shaders", "isosurfaces",
                   "swarmintelligence", "softbodies", "procedural"}
@@ -110,6 +113,33 @@ def family_of(tok, entry):
     return "pre:%s" % head if len(head) >= 4 else "solo:%s" % tok
 
 
+def placeable(shapes):
+    """The tokens that can actually STAND in a hall.
+
+    A token can resolve to a scene that exists and still be unplaceable: the
+    museum needs a Node3D, and a scene rooted at Node / Node2D / Control fails
+    at instantiate, silently, in the middle of a hall build — gridcolorizer
+    once cost 117 refusals in one bake, one per ring-search cell. The corpus
+    already carries a few of these (they are mutators and 2D demos placed in
+    hand maps years ago); the ribbon has no reason to propagate them, so they
+    are dropped from the pool rather than placed and refused later.
+    """
+    import check_map_tokens as CMT
+    scenes = CMT.load_all_registry_scenes()
+    out, refused = set(), []
+    for t in shapes:
+        sc = scenes.get(t)
+        if not sc:
+            out.add(t)
+            continue
+        rt = CMT.scene_root_type(sc)
+        if rt is not None and not CMT.SPATIAL_ROOTS.match(rt):
+            refused.append((t, rt))
+        else:
+            out.add(t)
+    return out, refused
+
+
 def sequence_artifacts(seq, reg, shapes):
     """The sequence's artifacts in CURRICULUM order — the order its own maps
     place them, then the rest of the pool. The walk should meet them the way
@@ -137,7 +167,12 @@ def sequence_artifacts(seq, reg, shapes):
         if t not in seen and seq in (seq_of.get(t) or []):
             seen.add(t)
             order.append(t)
-    return order
+    ok, refused = placeable(set(order))
+    bad = [(t, rt) for t, rt in refused if t in seen]
+    if bad:
+        print("  %d token(s) refused — a hall cannot instantiate a non-3D root: %s"
+              % (len(bad), ", ".join("%s(%s)" % b for b in bad)))
+    return [t for t in order if t in ok]
 
 
 def sequence_shape(seq, n_artifacts):
@@ -173,6 +208,24 @@ def sequence_shape(seq, n_artifacts):
         run += q
         scaled.append([m, q])
     return scaled
+
+
+def seq_map_count(seq):
+    """How many maps the sequence has TODAY. This is the ceiling.
+
+    Palle, 2026-08-26: "we should not have more maps then in the current spine
+    map sequence." The ribbon may re-cut the walk however it likes, but it may
+    not make the curriculum longer — a sequence of fourteen maps comes back as
+    at most fourteen halls.
+    """
+    p = os.path.join(ROOT, "commons", "maps", "sequences", "%s.json" % seq)
+    if not os.path.exists(p):
+        return 0
+    with open(p, encoding="utf-8") as fh:
+        doc = json.load(fh)
+    blk = doc["sequences"]
+    blk = blk[0] if isinstance(blk, list) else (blk.get(seq) or list(blk.values())[0])
+    return len(blk.get("maps", []))
 
 
 def ribbon_plans():
@@ -211,6 +264,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--sequence", default="color")
     ap.add_argument("--apply", action="store_true")
+    ap.add_argument("--cap", type=int, default=0,
+                    help="most halls to make (default: the sequence's own map count)")
     ap.add_argument("--free", action="store_true",
                     help="ignore the sequence's own shape and let the walls fall where they may")
     args = ap.parse_args()
@@ -253,21 +308,24 @@ def main():
     # A RHYTHM, NOT A CATALOGUE: ABACA — two shapes alternate with a third
     # returning, so the walk repeats without being uniform.
     rhythm = [0, 1, 0, 2, 0, 3, 1, 0, 4, 1]
-    # The shape is the TARGET, not a cap. Palle's own rule for the remainder:
-    # "if one map of artifact fill does not fill up the full hall we can add an
-    # extra wall and continue with the new map." So the sequence's profile sets
-    # the first halls, and anything left over gets its own — nothing is dropped
-    # to make the count come out.
-    cap = (len(shape) + 6) if shape else 40
+    # THE SHAPE IS NOW A CAP. It used to be only a target — leftovers got their
+    # own halls under Palle's "add an extra wall and continue with the new map",
+    # which grew softbodies to 35 halls against its 34 maps. The wall still
+    # moves; what yields now is the AIR inside the hall, not the hall count.
+    cap = args.cap if args.cap > 0 else (seq_map_count(args.sequence) or len(shape) or 12)
     while pending and len(halls) < cap and tries < 200:
         tries += 1
         key, pat = plans[rhythm[plan_i % len(rhythm)] % len(plans)]
         plan_i += 1
         # how tall a hall do the remaining artifacts want?
-        # size the hall for a READABLE number of things, not for all that are
-        # left — a hall holding forty is a warehouse. Ten is what color does.
-        quota = (shape[len(halls)][1] if len(halls) < len(shape)
-                 else min(len(pending), 11)) if shape else min(len(pending), 11)
+        # EVERY REMAINING HALL CARRIES ITS SHARE. The sequence's own profile
+        # says how full each hall runs, but if that profile would not finish
+        # the pool inside the cap, the even split wins — the last hall must not
+        # inherit a hundred artifacts because the first nine took eleven each.
+        left = cap - len(halls)
+        fair = int(math.ceil(len(pending) / max(1, left)))
+        prof = (shape[len(halls)][1] if len(halls) < len(shape) else 11) if shape else 11
+        quota = max(prof, fair)
         quota = min(quota, len(pending))
         want_cells = quota * PER_ARTIFACT
         want_h = int(round(want_cells / max(4, pat["w"] - 2))) + 4
@@ -297,34 +355,63 @@ def main():
         # the hall's own appetite, from the measured density
         floor_n = sum(1 for r in tile for c2 in r if str(c2).strip() in ("1", "1s"))
         target = quota if shape else max(3, int(round(floor_n / PER_ARTIFACT)))
-        placed, cost, last_fam = [], 0.0, None
-        for s in list(slots):
-            if not pending:
+
+        def fill(gap, kin_gap):
+            """One hall's worth at a given AIR. Touches nothing — returns what
+            it would take, so the same hall can be tried at three spacings and
+            the best kept."""
+            placed, cost, last_fam, taken = [], 0.0, None, []
+            avail = list(pending)
+            for s2 in slots:
+                if not avail or len(placed) >= target:
+                    break
+                # NOT STRICTLY THE HEAD. Taking only pending[0] meant one
+                # artifact that fits nowhere blocked every artifact behind it:
+                # cellularautomata made ONE hall and left 74 over, because its
+                # fifth token wanted a slot no hall offered. Look a little way
+                # down the queue — curriculum order is a preference, not a lock.
+                tok = None
+                for cand in avail[:LOOKAHEAD]:
+                    cs = shapes.get(cand)
+                    if cs and MS.fits(cs, s2):
+                        tok = cand
+                        break
+                if tok is None:
+                    continue
+                fam = family_of(tok, reg.get(tok, {}))
+                need = kin_gap if fam == last_fam else gap
+                if any(math.hypot(s2["x"] - q["x"], s2["z"] - q["z"]) < need for q in placed):
+                    continue
+                c = max(0.0, cost_of(reg.get(tok, {})) - COST_FREE)
+                # the sequence's quota outranks the load budget: a hall that is
+                # meant to hold twelve does not stop at four because three of
+                # them were expensive. The budget spaces, it no longer walls.
+                if placed and cost + c > COST_BUDGET and not shape:
+                    break                  # THE WALL GOES HERE — too much load
+                placed.append({"x": s2["x"], "z": s2["z"], "token": tok,
+                               "kind": s2["kind"], "fam": fam, "cost": c})
+                cost += c
+                last_fam = fam
+                avail.remove(tok)
+                taken.append(tok)
+            return placed, cost, taken
+
+        # THE AIR IS WHAT GIVES. Three cells is the measured stranger distance
+        # in the hand-authored color maps and stays the first offer; a hall that
+        # cannot carry its share of the sequence at three tries two, then one,
+        # rather than spawning a hall the curriculum has no room for.
+        placed, cost, take, air = [], 0.0, [], GAP
+        for g in (GAP, 2, 1):
+            p2, c2, t2 = fill(g, KIN_GAP if g > 1 else 1)
+            if len(p2) > len(placed):
+                placed, cost, take, air = p2, c2, t2, g
+            if len(p2) >= target:
                 break
-            tok = pending[0]
-            sh = shapes.get(tok)
-            if not sh or not MS.fits(sh, s):
-                continue
-            fam = family_of(tok, reg.get(tok, {}))
-            need = KIN_GAP if fam == last_fam else GAP
-            if any(math.hypot(s["x"] - p["x"], s["z"] - p["z"]) < need for p in placed):
-                continue
-            c = max(0.0, cost_of(reg.get(tok, {})) - COST_FREE)
-            # the sequence's quota outranks the load budget: a hall that is
-            # meant to hold twelve does not stop at four because three of them
-            # were expensive. The budget still spaces them, it no longer walls.
-            if placed and cost + c > COST_BUDGET and not shape:
-                break                      # THE WALL GOES HERE — too much load
-            if placed and len(placed) >= target:
-                break                      # THE WALL GOES HERE — the hall is full
-            placed.append({"x": s["x"], "z": s["z"], "token": tok, "kind": s["kind"],
-                           "fam": fam, "cost": c})
-            cost += c
-            last_fam = fam
-            pending.pop(0)
         if not placed:
             continue
-        halls.append({"plan": key, "z0": z0, "tile": tile, "placed": placed,
+        for t in take:
+            pending.remove(t)
+        halls.append({"plan": key, "z0": z0, "tile": tile, "placed": placed, "air": air,
                       "cost": cost, "slots": len(slots)})
 
     print("  %-3s %-32s %-7s %4s %6s  %s" % ("#", "plan window", "size", "n", "cost", "first three"))
