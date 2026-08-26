@@ -52,9 +52,18 @@ func _run() -> void:
 	var inst: Node3D = (load("res://commons/scenes/endless_museum.tscn") as PackedScene).instantiate() as Node3D
 	# --lane=desktop walks the SAME route with the VR lane off, so the two
 	# as-built records can be diffed: does the headset build the same hall?
+	var frames_per_step := maxi(1, int(_arg("frames", "8")))
 	var lane := _arg("lane", "vr")
 	if lane == "vr":
 		inst.set("_force_vr", true)
+	# THE PATIENT STAMP IS OFF HEADLESS (2026-08-26). _stamp defers into the
+	# frame-budgeted queue only when (_force_patient or not _headless) - so a
+	# headless probe measures the ONE-PASS path that no real run takes, and
+	# every transplant number in this file was measured with the museum's own
+	# frame budget switched off. _force_patient exists for exactly this; the
+	# comment on it says "probes set this to measure the deferred path
+	# headless". --patient=0 restores the old, unreal reading.
+	inst.set("_force_patient", _arg("patient", "1") != "0")
 	inst.set("EM_CONTROL", "res://ada_run/_trial_vw_control.json")
 	inst.set("_overrides_path", "res://ada_run/em_overrides.json")
 	inst.set("_hand_path", "res://ada_run/necklace_hand.json")
@@ -69,9 +78,12 @@ func _run() -> void:
 
 	var rep := "THE VR WALK — %d m in %.1f m steps (headless: GDScript cost only, no GPU)\n" % [int(metres), step]
 	rep += "  museum stood up in %d ms\n\n" % boot_ms
-	rep += "  lane=%s, the museum reports vr=%s
+	rep += "  lane=%s, patient=%s, %d frame(s) per step; the museum reports vr=%s
+" % [
+		lane, _arg("patient", "1"), frames_per_step, str(inst.get("_vr"))]
+	rep += "  (times below are the WORST FRAME in each step, not the sum)
 
-" % [lane, str(inst.get("_vr"))]
+"
 	var player: Node3D = inst.get("_player") as Node3D
 	var halls: Array = []          # one row per hall as it opens
 	var stalls: Array = []         # every step over 40 ms
@@ -87,10 +99,20 @@ func _run() -> void:
 			player.position.z = z
 		if player != null:
 			player.position.z = z          # keep the desktop body in step, as the death does
+		# FRAMES PER STEP (2026-08-26). A walker covers 2 m in about a second,
+		# which at 90 Hz is ninety frames for the patient stamp to drain into.
+		# This probe was giving it ONE - so the queue could never show its
+		# benefit and the deferred path measured WORSE than the blocking one.
+		# The worst FRAME is what matters in a headset, so the loop times each
+		# frame separately and keeps the peak rather than the sum.
 		var t0 := Time.get_ticks_usec()
-		await process_frame
-		await physics_frame
-		var t1 := Time.get_ticks_usec()
+		var peak := 0
+		for _fi in range(frames_per_step):
+			var fa := Time.get_ticks_usec()
+			await process_frame
+			await physics_frame
+			peak = maxi(peak, int(Time.get_ticks_usec() - fa))
+		var t1 := t0 + peak
 		var t2 := t1                       # the museum ran its own VR pass inside _process
 		steps += 1
 		total_us += t1 - t0
