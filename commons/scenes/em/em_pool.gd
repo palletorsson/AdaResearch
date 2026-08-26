@@ -190,12 +190,14 @@ static var _spine_loaded: bool = false
 ## a GDScript global, and no other script in this repo overrides it — so if a
 ## future engine version stops allowing the shadow, deleting these two lines and
 ## calling `build()` is the whole repair, and no internal call site moves.
-static func load(live: Dictionary = {}, roots: PackedStringArray = PackedStringArray()) -> Dictionary:
-	return build(live, roots)
+static func load(live: Dictionary = {}, roots: PackedStringArray = PackedStringArray(),
+		prepared_registry: Dictionary = {}) -> Dictionary:
+	return build(live, roots, prepared_registry)
 
 
 ## The pool itself. Same contract as `load`, under a name that cannot collide.
-static func build(live: Dictionary = {}, roots: PackedStringArray = PackedStringArray()) -> Dictionary:
+static func build(live: Dictionary = {}, roots: PackedStringArray = PackedStringArray(),
+		prepared_registry: Dictionary = {}) -> Dictionary:
 	if not _cache.is_empty():
 		return _cache
 	var out: Dictionary = {
@@ -204,7 +206,8 @@ static func build(live: Dictionary = {}, roots: PackedStringArray = PackedString
 		"with_axis": 0, "fabric": 0, "roots": [], "report": "",
 	}
 	# ── 1. the registry: what may be stamped, and what it declares ───────────
-	var reg: Dictionary = _scan_registry(live)
+	var reg: Dictionary = prepared_registry if not prepared_registry.is_empty() \
+		else _scan_registry(live)
 	if reg.is_empty():
 		out["report"] = "no registry read — 0 guests, the corridor deals the spine alone"
 		_cache = out

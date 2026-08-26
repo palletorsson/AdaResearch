@@ -198,10 +198,11 @@ var KEEP_AHEAD_M := 50.0
 ## hall from rebuilding the same frame it was freed).
 var REBUILD_MARGIN_M := 6.0
 var MIN_SEGMENTS := 2          # desktop; forced to one in VR
-## STRICT ONE-MAP VR. `VR_ONE_HALL` now means resident, not merely visible.
-## A temporary passage owns floor and collision during the zero-map frame; the
-## next map is constructed behind its blocking wall and the passage disappears
-## after the visitor crosses. Walking back uses the same sequence in reverse.
+## THREE-SHELL VR. The current hall and its immediate neighbours keep only their
+## lightweight architecture resident, so floor and passage collision never leave
+## the player. Exactly one of those shells — the hall containing the eye — owns
+## exhibit bodies. `VR_ONE_HALL` is retained as the exported/configured switch:
+## it now means one ARTIFACT hall rather than one architecture hall.
 var VR_RENDER_WINDOW_M := 4.0
 var VR_ONE_HALL := true
 var _render_hidden: int = -1
@@ -783,6 +784,8 @@ var _doll_mark: MeshInstance3D = null              # the little goal disc
 # pipelines for everything the opening standpoint can see.
 var _boot_t0: int = 0
 var _boot_ms: Dictionary = {}
+var _boot_entry: int = 1           # 1 = a real boot; 2+ = a reload, not a boot
+var _boot_first_phys: bool = false
 var _boot_first_frame: bool = false
 var _built_res_writable: bool = true   # false once the pak refuses — writes go to user://
 ## The staged loader asks `is_map_ready()` before it reveals a destination. For
@@ -810,6 +813,13 @@ var _vr_passage_old_node: Node3D = null
 var _vr_passage_target: Node3D = null
 var _vr_passage_width: float = 0.0
 var _vr_passage_frame: int = -1
+## The spatial shell is the safety contract; the exhibit set is the memory
+## contract. `_vr_current_node` is the only segment allowed to drain artifact
+## blueprints. `_vr_shell_building` lets `_build_segment` advance the real
+## curriculum cursor and construct walls/floors while recording, not instancing,
+## its exhibits.
+var _vr_current_node: Node3D = null
+var _vr_shell_building: bool = false
 var _vr_last_eye_z: float = 0.0
 var _loading_cell_mats: Dictionary = {}
 # ── THE WAKE-UP RAMP (2026-08-20, Palle: "loading a grid map like Point_One
@@ -942,8 +952,15 @@ var _mod_budget = null
 var _mod_plinths = null
 var _mod_props = null
 var _mod_pool = null
+var _mod_cartridge = null
 var _guest_pool: Dictionary = {}   # em_pool.build()'s own report, for the print
 var _guest_registry: Dictionary = {} # em_pool-ready metadata harvested with _live
+var _cartridge_write: bool = false
+var _cartridge_read_enabled: bool = false # experimental: --em-cartridge
+var _cartridge_hit: bool = false
+var _cartridge_compile_done: bool = false
+var _cartridge_pending_nodes: Array = [] # packaged content admitted over frames
+var _cartridge_prefetch_entry: Dictionary = {}
 var _seg_plinths: int = 0          # plinths stamped in the segment being dealt
 var _seat_rows: Array = []         # [{token, gap}] — measured seat error per lifted artifact
 var _rel_db: Dictionary = {}       # parsed artifact_relations.json
@@ -963,9 +980,21 @@ func _ready() -> void:
 		return                        # @tool is for the Inspector dropdowns only
 	_boot_t0 = Time.get_ticks_msec()
 	_boot_ms["engine_to_ready"] = _boot_t0   # since process start
+	# WHICH STANDING-UP IS THIS? Only the first is a boot; the rest are view
+	# toggles and jumps, and their uptime-based numbers are meaningless.
+	var bce_n: Node = get_node_or_null("/root/BootClockEnd")
+	if bce_n != null and "museum_entries" in bce_n:
+		bce_n.set("museum_entries", int(bce_n.get("museum_entries")) + 1)
+		_boot_entry = int(bce_n.get("museum_entries"))
+	_boot_ms["entry"] = _boot_entry
 	_parse_args()
 	_vr = _is_vr()
 	_headless = DisplayServer.get_name() == "headless"
+	# Start disk/resource work before registry and plan parsing. Those tasks are
+	# CPU-heavy but independent, so a fresh cartridge can arrive behind them
+	# instead of adding its I/O to the end of museum boot.
+	if _vr and _cartridge_read_enabled:
+		_begin_start_cartridge_prefetch()
 	if _vr and not _headless:
 		_create_boot_loading_cell()
 	_loading_shell_ready = true
@@ -1079,15 +1108,19 @@ func _boot_museum() -> void:
 	# needs synchronously — a frame of a museum half-built is not a proof.
 	var preload_n: int = _shot_segments if _shot_path != "" else 1
 	for i in range(preload_n):
-		_build_segment()
+		if i == 0 and _vr and _try_load_start_cartridge():
+			_cartridge_hit = true
+		else:
+			_build_segment()
 	_boot_ms["segment0_built"] = Time.get_ticks_msec() - _boot_t0
 	if _shot_path == "" and not _studio and not _vr:
 		_lazy_pending = 1
-	# VR starts with exactly one map. The passage state machine, not build-ahead,
-	# owns every later handoff.
+	# VR starts with one complete hall. As soon as it is ready, the streaming
+	# tick grows lightweight neighbour shells around it; only this first/current
+	# hall is allowed to own artifact bodies.
 	if _vr:
 		VR_ONE_HALL = true
-		MIN_SEGMENTS = 1
+		MIN_SEGMENTS = 3
 		_lazy_pending = 0
 	_museum_core_ready = true
 	if _edit_mode:
@@ -1147,6 +1180,19 @@ func _boot_museum() -> void:
 					(miss as Array).size(), str((miss as Array).slice(0, 24))])
 	if _shot_path != "":
 		_take_proof_shot()
+	# THE SILENT WINDOW (2026-08-26). Between this line and the first _process
+	# stamp the museum runs NO CODE, and that window is the largest single term
+	# in the boot: 4926-8412 ms on the desktop, and on the Quest 13795 ms of a
+	# 29261 ms boot — 47 per cent, with fourteen seconds of zero log lines
+	# (ada_run/quest_boot_trap.log, seg 0 written at 12:54:36.700, the hand rig
+	# speaking again at 12:54:50.462). Two agents in a row have now diagnosed it
+	# from the outside and been wrong: it is not render-pipeline compilation
+	# (headless dummy-renderer boots measure the same window as windowed Vulkan)
+	# and it is not the layout code (the cartridge replay reaches segment0_built
+	# FASTER and first_frame LATER — the cost moves, it does not shrink).
+	# So: three stamps instead of one, and the window stops being a rumour.
+	_boot_ms["boot_tail"] = Time.get_ticks_msec() - _boot_t0
+
 
 
 # ── THE LOADING CELL ────────────────────────────────────────────────────────
@@ -1310,7 +1356,10 @@ func _finish_initial_loading() -> void:
 	_boot_loading_label = null
 	_hide_legacy_loading_text()
 	museum_ready.emit()
-	print("[em-loading] first hall complete in %d ms — loading cell removed, one map resident" % int(_boot_ms["content_ready"]))
+	print("[em-loading] first hall complete in %d ms — loading cell removed; neighbour shells follow without removing its floor" % int(_boot_ms["content_ready"]))
+	# Authoring views compile only after the visitor has been released. Packing
+	# must never extend the loading cell's lifetime or steal a VR frame.
+	_compile_initial_cartridge.call_deferred()
 
 func _parse_args() -> void:
 	var args := OS.get_cmdline_user_args()
@@ -1360,6 +1409,13 @@ func _parse_args() -> void:
 			_autopilot = int(a.substr(15))
 		elif a == "--em-vr":
 			_force_vr = true
+		elif a == "--em-cartridge-write":
+			_cartridge_write = true
+		elif a == "--em-cartridge":
+			# Packed hall resources remain an authoring/performance experiment.
+			# The procedural builder is the reliable VR default: it cannot leave a
+			# passage sealed behind a stalled threaded content request.
+			_cartridge_read_enabled = true
 		elif a.begins_with("--em-first="):
 			_first_key = a.substr(11)
 		elif a.begins_with("--em-chapter="):
@@ -1401,6 +1457,7 @@ func _load_modules() -> void:
 	_mod_editor = _load_module("em_editor.gd")
 	_mod_props = _load_module("em_props.gd")
 	_mod_gate = _load_module("em_gate.gd")
+	_mod_cartridge = _load_module("em_cartridge.gd")
 	BUILD_AHEAD_M = _L("stream", "build_ahead_m", BUILD_AHEAD_M)
 	KEEP_BEHIND_M = _L("stream", "keep_behind_m", KEEP_BEHIND_M)
 	KEEP_AHEAD_M = _L("stream", "keep_ahead_m", KEEP_AHEAD_M)
@@ -1539,6 +1596,327 @@ func _mod_arity(m, fn: String) -> int:
 				break
 	_mod_arity_cache[key] = n
 	return n
+
+
+# ── HALL CARTRIDGES ─────────────────────────────────────────────────────────
+
+func _begin_start_cartridge_prefetch() -> void:
+	if start_map == "":
+		return
+	if _mod_cartridge == null:
+		_mod_cartridge = load("res://commons/scenes/em/em_cartridge.gd")
+	if _mod_cartridge == null or not _mod_has(_mod_cartridge, "find"):
+		return
+	var entry_v: Variant = _mod_cartridge.call("find", start_map, _cartridge_sources(start_map))
+	if not (entry_v is Dictionary) or (entry_v as Dictionary).is_empty():
+		return
+	_cartridge_prefetch_entry = (entry_v as Dictionary).duplicate(true)
+	var paths: Array = [String(_cartridge_prefetch_entry.get("scene", ""))]
+	paths.append_array(_cartridge_prefetch_entry.get("content", []) as Array)
+	var requested := 0
+	for path_v in paths:
+		var path := String(path_v)
+		if path != "" and ResourceLoader.load_threaded_request(path, "PackedScene", true,
+				ResourceLoader.CACHE_MODE_REUSE) == OK:
+			requested += 1
+	_boot_ms["cartridge_prefetch"] = requested
+
+func _cartridge_sources(map_name: String) -> PackedStringArray:
+	var paths := PackedStringArray([
+		String(_plan_path), BAKE_PATH, _overrides_path, TEMPLATES, LAYOUT_PATH,
+		"res://commons/scenes/endless_museum.gd",
+		"res://commons/scenes/em/em_cartridge.gd",
+		"res://commons/scenes/em/em_detail.gd",
+		"res://commons/scenes/em/em_lighting.gd",
+	])
+	if map_name != "":
+		paths.append("res://commons/maps/%s/map_data.json" % map_name)
+	return paths
+
+
+func _restore_stream_cursor(snap: Dictionary, z_shift: float = 0.0) -> void:
+	if snap.is_empty():
+		return
+	_rot_i = int(snap.get("rot_i", _rot_i))
+	_pool_i = int(snap.get("pool_i", _pool_i))
+	_seg_index = int(snap.get("seg_index", _seg_index))
+	_next_z = float(snap.get("next_z", _next_z)) + z_shift
+	_prev_w = int(snap.get("prev_w", _prev_w))
+	var pearl_v: Variant = snap.get("pearl_cursor", {})
+	if pearl_v is Dictionary:
+		_pearl_cursor = (pearl_v as Dictionary).duplicate(true)
+
+
+func _try_load_start_cartridge() -> bool:
+	if not _cartridge_read_enabled or _mod_cartridge == null or start_map == "" \
+			or not _mod_has(_mod_cartridge, "find") \
+			or not _mod_has(_mod_cartridge, "instantiate"):
+		return false
+	var entry_v: Variant = _cartridge_prefetch_entry
+	if not (entry_v is Dictionary) or (entry_v as Dictionary).is_empty():
+		entry_v = _mod_cartridge.call("find", start_map, _cartridge_sources(start_map))
+	if not (entry_v is Dictionary) or (entry_v as Dictionary).is_empty():
+		print("[em-cartridge] no fresh cartridge for %s — assembling normally" % start_map)
+		return false
+	var entry: Dictionary = entry_v
+	var content_paths: Array = entry.get("content", [])
+	if not _cartridge_prefetch_entry.is_empty():
+		_cartridge_prefetch_entry = {}
+	else:
+		var prefetch_n := 0
+		for content_v in content_paths:
+			var content_path := String(content_v)
+			if content_path != "" and ResourceLoader.load_threaded_request(content_path,
+					"PackedScene", true, ResourceLoader.CACHE_MODE_REUSE) == OK:
+				prefetch_n += 1
+		_boot_ms["cartridge_prefetch"] = prefetch_n
+	var placed := _place_cartridge(entry, start_map, 0.0, {})
+	if placed.is_empty():
+		push_warning("[em-cartridge] %s could not instantiate — assembling normally" % start_map)
+		return false
+	var manifest: Dictionary = placed["manifest"]
+	var source_z0 := float(manifest.get("z0", 0.0))
+	var length := float(placed["length"])
+	var post: Dictionary = manifest.get("post_snap", {})
+	_restore_stream_cursor(post, -source_z0)
+	# A cartridge compiled as an opening hall always advances exactly one
+	# segment. Clamp the geometric frontier to the package rather than trusting
+	# an old absolute coordinate saved by an authoring walk.
+	_seg_index = 1
+	_next_z = length
+	_prev_w = int(manifest.get("w", _prev_w))
+	_boot_ms["cartridge_loaded"] = Time.get_ticks_msec() - _boot_t0
+	_boot_ms["cartridge_bytes"] = int(entry.get("bytes", 0))
+	print("[em-cartridge] HIT %s — %.0f m hall instantiated from %s" % [
+		start_map, length, String(entry.get("scene", ""))])
+	return true
+
+
+func _place_cartridge(entry: Dictionary, map_name: String, target_z: float,
+		stream_snap: Dictionary) -> Dictionary:
+	var seg_v: Variant = null
+	var scene_path := String(entry.get("scene", ""))
+	if scene_path != "" and ResourceLoader.load_threaded_get_status(scene_path) \
+			in [ResourceLoader.THREAD_LOAD_IN_PROGRESS, ResourceLoader.THREAD_LOAD_LOADED]:
+		var threaded_scene := ResourceLoader.load_threaded_get(scene_path) as PackedScene
+		if threaded_scene != null:
+			seg_v = threaded_scene.instantiate()
+	if not (seg_v is Node3D):
+		seg_v = _mod_cartridge.call("instantiate", entry)
+	if not (seg_v is Node3D):
+		return {}
+	var seg: Node3D = seg_v
+	var manifest_v: Variant = seg.get_meta("em_cartridge_manifest", {})
+	if not (manifest_v is Dictionary):
+		seg.free()
+		return {}
+	var manifest: Dictionary = manifest_v
+	var source_z0 := float(manifest.get("z0", 0.0))
+	var source_z1 := float(manifest.get("z1", source_z0))
+	var length := source_z1 - source_z0
+	if length <= 0.0:
+		seg.free()
+		return {}
+	seg.name = "Cartridge_%s" % map_name
+	seg.position.z = target_z - source_z0
+	add_child(seg)
+	var content_paths: Array = entry.get("content", [])
+	for content_v in content_paths:
+		_cartridge_pending_nodes.append({"path": String(content_v), "seg": seg})
+	var pre: Dictionary = stream_snap.duplicate(true)
+	if pre.is_empty():
+		pre = (manifest.get("pre_snap", {}) as Dictionary).duplicate(true)
+	pre["next_z"] = target_z
+	_segments.append({
+		"node": seg, "z0": target_z, "z1": target_z + length,
+		"index": int(pre.get("seg_index", _seg_index)),
+		"w": int(manifest.get("w", 15)), "snap": pre,
+		"pearl": String(manifest.get("pearl", "")), "map": map_name,
+	})
+	for cell_v in (manifest.get("walk", []) as Array):
+		var cell: Array = cell_v
+		if cell.size() >= 2:
+			_walk_cells[Vector2i(int(cell[0]), int(round(target_z)) + int(cell[1]))] = true
+	for erased_v in (manifest.get("erased", []) as Array):
+		var erased: Array = erased_v
+		if erased.size() >= 3:
+			_walk_erased[Vector2i(int(erased[0]), int(round(target_z)) + int(erased[1]))] = String(erased[2])
+	for save_v in (manifest.get("save_points", []) as Array):
+		var save: Dictionary = save_v
+		var pv: Array = save.get("pos", [])
+		if pv.size() >= 3:
+			_save_points.append({"z": target_z + float(save.get("z", 0.0)),
+				"pos": Vector3(float(pv[0]), float(pv[1]), target_z + float(pv[2]))})
+	var stack: Array = [seg]
+	while not stack.is_empty():
+		var node: Node = stack.pop_back()
+		for child in node.get_children():
+			stack.append(child)
+		if node is Node3D and node.has_meta("em_cartridge_token"):
+			var art := node as Node3D
+			_vis_records.append({"node": art, "p": art.global_position})
+	return {"manifest": manifest, "length": length, "seg": seg}
+
+
+func _apply_cartridge_cursor_delta(manifest: Dictionary, target_z: float, length: float) -> void:
+	var pre: Dictionary = manifest.get("pre_snap", {})
+	var post: Dictionary = manifest.get("post_snap", {})
+	_rot_i += int(post.get("rot_i", 0)) - int(pre.get("rot_i", 0))
+	_pool_i += int(post.get("pool_i", 0)) - int(pre.get("pool_i", 0))
+	_seg_index += int(post.get("seg_index", 0)) - int(pre.get("seg_index", 0))
+	_next_z = target_z + length
+	_prev_w = int(manifest.get("w", post.get("prev_w", _prev_w)))
+	var pre_pearls: Dictionary = pre.get("pearl_cursor", {})
+	var post_pearls: Dictionary = post.get("pearl_cursor", {})
+	for key_v in post_pearls:
+		var key := String(key_v)
+		_pearl_cursor[key] = int(_pearl_cursor.get(key, 0)) \
+			+ int(post_pearls.get(key, 0)) - int(pre_pearls.get(key, 0))
+
+
+func _try_load_stream_cartridge(map_name: String, target_z: float,
+		stream_snap: Dictionary, advance_frontier: bool) -> bool:
+	if not _cartridge_read_enabled or map_name == "" or _mod_cartridge == null \
+			or not _mod_has(_mod_cartridge, "find"):
+		return false
+	var entry_v: Variant = _mod_cartridge.call("find", map_name, _cartridge_sources(map_name))
+	if not (entry_v is Dictionary) or (entry_v as Dictionary).is_empty():
+		return false
+	var entry: Dictionary = entry_v
+	for content_v in (entry.get("content", []) as Array):
+		ResourceLoader.load_threaded_request(String(content_v), "PackedScene", true,
+			ResourceLoader.CACHE_MODE_REUSE)
+	var placed := _place_cartridge(entry, map_name, target_z, stream_snap)
+	if placed.is_empty():
+		return false
+	if advance_frontier:
+		_apply_cartridge_cursor_delta(placed["manifest"], target_z, float(placed["length"]))
+	_segments.sort_custom(func(a, b): return float(a["z0"]) < float(b["z0"]))
+	print("[em-cartridge] passage HIT %s at z %.0f" % [map_name, target_z])
+	return true
+
+
+func _peek_next_authored_map() -> String:
+	if _museums.is_empty():
+		return ""
+	var spec: Dictionary = _museums[_rot_i % _museums.size()]
+	var next_seq := ""
+	if not _pool.is_empty():
+		next_seq = String(_pool[_pool_i % _pool.size()].get("sequence", ""))
+	var wanted_key := String(_plan_owner.get(next_seq, ""))
+	if wanted_key == "":
+		wanted_key = String(_crowns.get(next_seq, ""))
+	if wanted_key != "" and (_first_key == "" or _seg_index > 0):
+		for museum_v in _museums:
+			if String((museum_v as Dictionary).get("key", "")) == wanted_key:
+				spec = museum_v
+				break
+	var peek := _plan_entry(String(spec.get("key", "")), next_seq)
+	return String(peek.get("map", "")) if String(peek.get("authored", "")) == "map" else ""
+
+
+func _drain_cartridge_nodes(blocking: bool = false) -> void:
+	if _cartridge_pending_nodes.is_empty():
+		return
+	var started := Time.get_ticks_usec()
+	var admitted := 0
+	while not _cartridge_pending_nodes.is_empty() and admitted < 4:
+		var item: Dictionary = _cartridge_pending_nodes.pop_front()
+		var seg_v: Variant = item.get("seg")
+		if not is_instance_valid(seg_v):
+			continue
+		var seg := seg_v as Node3D
+		var node: Node = null
+		var content_path := String(item.get("path", ""))
+		if content_path != "":
+			var packed: PackedScene = null
+			var status := ResourceLoader.load_threaded_get_status(content_path)
+			if status == ResourceLoader.THREAD_LOAD_IN_PROGRESS:
+				if blocking:
+					packed = ResourceLoader.load_threaded_get(content_path) as PackedScene
+				else:
+					_cartridge_pending_nodes.push_back(item)
+					break
+			elif status == ResourceLoader.THREAD_LOAD_LOADED:
+				packed = ResourceLoader.load_threaded_get(content_path) as PackedScene
+			else:
+				packed = ResourceLoader.load(content_path, "PackedScene",
+					ResourceLoader.CACHE_MODE_REUSE) as PackedScene
+			if packed != null:
+				node = packed.instantiate()
+		else:
+			var node_v: Variant = item.get("node")
+			if is_instance_valid(node_v):
+				node = node_v as Node
+		if node == null:
+			continue
+		seg.add_child(node)
+		var scan: Array = [node]
+		while not scan.is_empty():
+			var found: Node = scan.pop_back()
+			for child in found.get_children():
+				scan.append(child)
+			if found is Node3D and found.has_meta("em_cartridge_token"):
+				var art := found as Node3D
+				_vis_records.append({"node": art, "p": art.global_position})
+		admitted += 1
+		# An authored artifact can build a substantial procedural subtree in
+		# _ready. Give it the whole frame; simple dressing may share four slots.
+		if (content_path != "" and not blocking) \
+				or Time.get_ticks_usec() - started > int(STAMP_BUDGET_MS * 1000.0):
+			break
+
+
+func _compile_initial_cartridge() -> void:
+	if _mod_cartridge == null or not (_cartridge_write or _edit_mode or _dollhouse) \
+			or not _mod_has(_mod_cartridge, "compile") or _segments.is_empty() \
+			or _cartridge_hit or _cartridge_compile_done:
+		return
+	_cartridge_compile_done = true
+	var rec: Dictionary = _segments[0]
+	var seg := _node_or_null(rec.get("node"))
+	var map_name := String(rec.get("map", ""))
+	if seg == null or map_name == "":
+		return
+	var z0 := int(floor(float(rec.get("z0", 0.0))))
+	var z1 := int(ceil(float(rec.get("z1", 0.0))))
+	var walk: Array = []
+	var erased: Array = []
+	for key_v in _walk_cells:
+		var key: Vector2i = key_v
+		if key.y >= z0 and key.y < z1:
+			walk.append([key.x, key.y - z0])
+	for key_v in _walk_erased:
+		var key: Vector2i = key_v
+		if key.y >= z0 and key.y < z1:
+			erased.append([key.x, key.y - z0, String(_walk_erased[key])])
+	var saves: Array = []
+	for save_v in _save_points:
+		var save: Dictionary = save_v
+		var sz := float(save.get("z", -INF))
+		if sz >= z0 and sz < z1:
+			var pos: Vector3 = save.get("pos", Vector3.ZERO)
+			saves.append({"z": sz - z0, "pos": [pos.x, pos.y, pos.z - z0]})
+	var post := {"rot_i": _rot_i, "pool_i": _pool_i, "seg_index": _seg_index,
+		"next_z": _next_z, "prev_w": _prev_w,
+		"pearl_cursor": _pearl_cursor.duplicate(true)}
+	var chapter := String(seg.get_meta("em_chapter", ""))
+	if chapter == "":
+		chapter = _first_chapter if _first_chapter != "" else start_chapter
+	var manifest := {
+		"map": map_name, "chapter": chapter,
+		"pearl": String(rec.get("pearl", "")), "w": int(rec.get("w", 15)),
+		"z0": float(rec.get("z0", 0.0)), "z1": float(rec.get("z1", 0.0)),
+		"pre_snap": (rec.get("snap", {}) as Dictionary).duplicate(true),
+		"post_snap": post, "walk": walk, "erased": erased,
+		"save_points": saves,
+	}
+	var result_v: Variant = _mod_cartridge.call("compile", seg, manifest,
+		_cartridge_sources(map_name))
+	if result_v is Dictionary and bool((result_v as Dictionary).get("ok", false)):
+		print("[em-cartridge] compiled %s -> %s" % [map_name, result_v.get("scene", "")])
+	else:
+		push_warning("[em-cartridge] compile failed for %s: %s" % [map_name, str(result_v)])
 
 ## One material per role, resolved once. A getter that is missing leaves its
 ## role null, and _box() then falls back to the flat v1 colour for that role
@@ -5213,9 +5591,13 @@ func _build_segment() -> void:
 		#     already out of the walk map when the floor rules look for a free pocket.
 		_dress_props(seg, tile, w, h, zbase, deal)
 	if _replay and not _bake_mode and _shot_path == "" and not _studio:
-		_stamp_queue.append({"kind": "dress", "run": dress_pass, "seg": seg,
+		var dress_item := {"kind": "dress", "run": dress_pass, "seg": seg,
 			"seg_no": dress_seg_no,
-			"px": w / 2.0, "pz": float(zbase) + float(VESTIBULE_H) + 2.0})
+			"px": w / 2.0, "pz": float(zbase) + float(VESTIBULE_H) + 2.0}
+		if _vr:
+			_vr_remember_content_item(seg, dress_item)
+		if not (_vr and _vr_shell_building):
+			_stamp_queue.append(dress_item)
 	else:
 		dress_pass.call()
 	# 2. the light rig: ambient floor, north daylight down the axis, keys on the
@@ -6379,11 +6761,21 @@ func _stamp_simulation(seg: Node3D, c: Dictionary, g: int, floor_y: float, zcur:
 	var sim: Dictionary = c.get("simulation", {})
 	var sim_map := String(sim.get("map", ""))
 	var s_scale: float = clampf(float(sim.get("scale", 1.0)), 0.2, 1.0)
+	if _vr:
+		var sim_item := {"kind": "simulation", "seg": seg,
+			"court": c.duplicate(true), "g": g, "floor_y": floor_y,
+			"zcur": zcur, "px": float(g) + 1.0,
+			"pz": seg.global_position.z + float(zcur + g + 1)}
+		_vr_remember_content_item(seg, sim_item)
+		if _vr_shell_building:
+			return
 	if not ResourceLoader.exists("res://commons/grid/grid_system.tscn"):
 		push_warning("endless_museum: grid_system.tscn missing — no simulation")
 		return
 	var grid: Node3D = (load("res://commons/grid/grid_system.tscn") as PackedScene).instantiate() as Node3D
 	grid.name = "Simulation_" + sim_map
+	grid.set_meta("artifact_lookup_name", "simulation:" + sim_map)
+	grid.set_meta("em_vr_content", true)
 	grid.set("map_name", sim_map)
 	grid.set("auto_load_map_on_ready", true)
 	grid.position = Vector3(g + 1.0, floor_y, zcur + g + 1.0)
@@ -7592,7 +7984,7 @@ func _deal_plan_wall_runs(seg: Node3D, entry: Dictionary,
 	# because a run still commits only when its last variant lands. Bake, shot
 	# and studio runs keep the synchronous build — their frames are proofs.
 	var defer_live: bool = _shot_path == "" and not _bake_mode and not _studio \
-			and (_force_patient or not _headless)
+			and (_force_patient or not _headless or _vr_shell_building)
 	for run_v in (entry.get("wall_runs", []) as Array):
 		if not (run_v is Dictionary):
 			continue
@@ -7632,7 +8024,10 @@ func _deal_plan_wall_runs(seg: Node3D, entry: Dictionary,
 			scene_path, lookup, axis, normal)
 		item["sig"] = sig
 		if defer_live:
-			_stamp_queue.append(item)
+			if _vr:
+				_vr_remember_content_item(seg, item)
+			if not (_vr and _vr_shell_building):
+				_stamp_queue.append(item)
 			queued_runs += 1
 			continue
 		while not (item["pending"] as Array).is_empty():
@@ -7846,6 +8241,7 @@ func _stamp_plan_wall_variant(seg: Node3D, scene_path: String, lookup: String,
 	if node == null:
 		return {"ok": false, "why": "scene root is not Node3D"}
 	node.set_meta("artifact_lookup_name", lookup)
+	node.set_meta("em_vr_content", true)
 	node.set_meta("em_relation_role", "dna_variant")
 	node.set_meta("em_wall_run", wall_id)
 	node.set_meta("em_wall_side", wall_side)
@@ -8489,6 +8885,21 @@ func _stamp_inner(seg: Node3D, scene_path: String, lookup: String, cell: Diction
 	if scene_path == "" or cell.is_empty():
 		_stamp_refusal = "no scene path or cell"
 		return false
+	# A neighbour hall is built as a spatial promise, not an exhibit load. Keep
+	# the exact stamp arguments on that segment, so entering it can admit the
+	# same configured artifact without rebuilding or removing its floor.
+	var vr_blueprint: Dictionary = {}
+	if _vr and defer_bk.is_empty():
+		vr_blueprint = {"seg": seg, "scene_path": scene_path, "lookup": lookup,
+			"cell": cell.duplicate(true), "zbase": zbase, "fp": fp,
+			"axis": axis_entry.duplicate(true), "drop": drop_if_unvaried,
+			"span_cap": span_cap, "yaw": yaw_deg,
+			"config": plan_config.duplicate(true), "bk": bk.duplicate(true),
+			"px": float(cell.get("x", 0)) + 0.5,
+			"pz": float(zbase + int(cell.get("y", 0))) + 0.5}
+		_vr_remember_content_item(seg, vr_blueprint)
+		if _vr_shell_building:
+			return true
 	if not _bodies_on:
 		_stamp_refusal = "stream.bodies=0 (the empty-museum experiment)"
 		return false
@@ -8516,12 +8927,14 @@ func _stamp_inner(seg: Node3D, scene_path: String, lookup: String, cell: Diction
 				_walk_cells.erase(dk)
 				_walk_erased[dk] = "seal:%s" % lookup
 			_last_seal_cells.append(dk)
-		_stamp_queue.append({"seg": seg, "scene_path": scene_path, "lookup": lookup,
+		var queued_stamp: Dictionary = vr_blueprint if not vr_blueprint.is_empty() else {
+			"seg": seg, "scene_path": scene_path, "lookup": lookup,
 			"cell": cell, "zbase": zbase, "fp": fp, "axis": axis_entry,
 			"drop": drop_if_unvaried, "span_cap": span_cap, "yaw": yaw_deg,
 			"config": plan_config, "bk": bk,
 			"px": float(cell.get("x", 0)) + 0.5,
-			"pz": float(zbase + int(cell.get("y", 0))) + 0.5})
+			"pz": float(zbase + int(cell.get("y", 0))) + 0.5}
+		_stamp_queue.append(queued_stamp)
 		return true
 	var ps: PackedScene = load(scene_path) as PackedScene
 	if ps == null:
@@ -8532,6 +8945,7 @@ func _stamp_inner(seg: Node3D, scene_path: String, lookup: String, cell: Diction
 		_stamp_refusal = "instantiate returned non-Node3D"
 		return false
 	node.set_meta("artifact_lookup_name", lookup)
+	node.set_meta("em_vr_content", true)
 	# THE MUSEUM'S LASERS KILL (2026-08-24, Palle: "the laser in laser measure
 	# should also kill you"). The artifact ships lethal = false because it is a
 	# grabbable tool standing in 47 maps; here, where a death has a save point
@@ -8633,6 +9047,7 @@ func _stamp_inner(seg: Node3D, scene_path: String, lookup: String, cell: Diction
 					float(cell.get("top", 0.0)), float(cell.get("y", 0)) + 0.5)
 				seg.add_child(pn)
 				plinth_node = pn
+				pn.set_meta("em_vr_artifact_support", true)
 				if true:   # VR too — same records, same museum in both modes
 					var pl_ch: String = String(seg.get_meta("em_chapter")) if seg.has_meta("em_chapter") else ""
 					var pl_from: Array = [int(cell.get("x", 0)), int(cell.get("y", 0)) - VESTIBULE_H]
@@ -8821,6 +9236,12 @@ func _stamp_inner(seg: Node3D, scene_path: String, lookup: String, cell: Diction
 		"cell": Vector2i(int(cell.get("x", 0)), zbase + int(cell.get("y", 0))),
 		"token": lookup,
 	})
+	# The cartridge rehydrates visibility/culling from the packed scene without
+	# reconstructing the dealer's transient dictionaries.
+	node.set_meta("em_cartridge_token", lookup)
+	node.set_meta("em_cartridge_vis_p", [float(cell.get("x", 0)) + 0.5,
+		float(cell.get("top", 0.0)) + lift,
+		float(zbase + int(cell.get("y", 0))) + 0.5])
 	_vis_records.append({"node": node,
 		"p": Vector3(float(cell.get("x", 0)) + 0.5, 0.0,
 			float(zbase + int(cell.get("y", 0))) + 0.5)})
@@ -9633,7 +10054,8 @@ func _process(_delta: float) -> void:
 		print("[em-boot] %s" % JSON.stringify(_boot_ms))
 		# its own file too — a windowed run's stdout is swallowed on Windows,
 		# and em_built's copy is written before this stamp exists
-		var bf := FileAccess.open(_report_path("res://ada_run/em_boot_last.json"), FileAccess.WRITE)
+		var boot_path: String = "res://ada_run/em_boot_last.json" if _boot_entry <= 1 			else "res://ada_run/em_boot_reentry.json"
+		var bf := FileAccess.open(_report_path(boot_path), FileAccess.WRITE)
 		if bf == null:
 			bf = FileAccess.open("user://em_boot_last.json", FileAccess.WRITE)   # the pak refuses; adb pulls this one
 		if bf != null:
@@ -9645,6 +10067,7 @@ func _process(_delta: float) -> void:
 	# letting the painting animate and the true first-frame time be recorded.
 	if not _museum_core_ready:
 		return
+	_drain_cartridge_nodes()
 	# the owed segment: built one frame after the first, so the visitor sees
 	# the vestibule immediately and the hall fills while they cross it
 	if _lazy_pending > 0:
@@ -9745,7 +10168,7 @@ func _process(_delta: float) -> void:
 			# needs to complete the same readiness contract as a headset build;
 			# otherwise the loading cell would be correct on-device but impossible
 			# to verify in automation.
-			if not _museum_ready and _stamp_queue.is_empty():
+			if not _museum_ready and _stamp_queue.is_empty() and _cartridge_pending_nodes.is_empty():
 				_finish_initial_loading()
 			return
 		_vr_wait = 0.0
@@ -9806,7 +10229,7 @@ func _process(_delta: float) -> void:
 			_env_ab_t = 0.0
 			_env_swap()
 	_drain_stamps()
-	if not _museum_ready and _stamp_queue.is_empty():
+	if not _museum_ready and _stamp_queue.is_empty() and _cartridge_pending_nodes.is_empty():
 		_finish_initial_loading()
 	_vis_timer += _delta
 	if _vis_timer >= 0.3:
@@ -9815,80 +10238,204 @@ func _process(_delta: float) -> void:
 	_track_acoustic()
 
 
-## STRICT ONE-MAP VR STREAMING. The state sequence is:
-##   current map + open passage -> sealed passage only -> next map + passage
-##   -> next map only.
-## The old map is queued for deletion on one frame and the new map is not built
-## until a later frame, after deletion has completed. The passage owns its own
-## floor/collision, so the visitor never stands on the subtree being removed.
+## THREE-SHELL / ONE-EXHIBIT VR STREAMING. Architecture is cheap and safety
+## critical, so the previous/current/next hall shells overlap in memory. Exhibit
+## bodies are expensive, so crossing a hall edge demotes the old hall to its
+## shell and promotes the entered shell by draining its remembered blueprints.
+## There is no zero-hall frame and therefore no temporary floor to miss.
 func _vr_single_map_stream(ez: float, _delta: float) -> void:
 	if not _museum_ready:
 		return
-	var eye_step := ez - _vr_last_eye_z
 	_vr_last_eye_z = ez
-	# Defensive migration from the former two-map window: if a saved/live run
-	# reaches this code with two segments, retain only the one containing the eye.
-	if _vr_passage_phase == "" and _segments.size() > 1:
-		var keep := _segment_index_at(ez)
-		for i in range(_segments.size() - 1, -1, -1):
-			if i != keep:
-				_stream_free(i, "strict VR startup prune")
-	if _vr_passage_phase == "":
-		if _segments.is_empty():
-			return
-		var ci := _segment_index_at(ez)
-		if ci < 0:
-			ci = 0
-		var current: Dictionary = _segments[ci]
-		var z0 := float(current.get("z0", 0.0))
-		var z1 := float(current.get("z1", 0.0))
-		var can_back := _freed_index_for_boundary(z0, -1) >= 0
-		if can_back and ez - z0 < 7.0 and eye_step < -0.01:
-			_create_vr_passage(current, -1, z0)
-		elif z1 - ez < 7.0 and eye_step > -0.01:
-			_create_vr_passage(current, 1, z1)
+	if _segments.is_empty():
 		return
+	var eye_i := _segment_index_at(ez)
+	if _vr_current_node == null or not is_instance_valid(_vr_current_node):
+		if eye_i < 0:
+			eye_i = 0
+		var first: Dictionary = _segments[eye_i]
+		_vr_current_node = _node_or_null(first.get("node"))
+		first["shell"] = false
+		if _vr_current_node != null:
+			_vr_current_node.set_meta("em_vr_shell", false)
+		print("[em-stream] VR exhibit owner set; growing neighbour shells")
+	elif eye_i >= 0:
+		var entered: Dictionary = _segments[eye_i]
+		var entered_node := _node_or_null(entered.get("node"))
+		if entered_node != null and entered_node != _vr_current_node:
+			var old_i := _vr_current_segment_index()
+			if old_i >= 0:
+				_vr_demote_segment(_segments[old_i])
+			_vr_promote_segment(entered)
+			_vr_current_node = entered_node
+			print("[em-stream] hall crossing — floor stayed resident; artifact ownership moved to %s" % entered_node.name)
+	_vr_ensure_shell_window()
 
-	if _vr_passage_phase == "armed":
-		var moving_away := ez < _vr_passage_boundary - 8.0 if _vr_passage_dir > 0 \
-			else ez > _vr_passage_boundary + 8.0
-		if moving_away:
-			_remove_vr_passage()
-			return
-		var entered := ez >= _vr_passage_boundary - 1.5 if _vr_passage_dir > 0 \
-			else ez <= _vr_passage_boundary + 1.5
-		if entered:
-			_seal_vr_passage_and_unload(ez)
+
+## Keep a persistent, deduplicated recipe for every expensive child. The recipe
+## lives on the architecture segment, surviving every artifact unload/reload.
+func _vr_remember_content_item(seg: Node3D, item: Dictionary) -> void:
+	if seg == null or not is_instance_valid(seg):
 		return
+	var kind := String(item.get("kind", "stamp"))
+	var ident := kind
+	match kind:
+		"stamp":
+			ident += "|%s|%s|%s" % [String(item.get("lookup", "")),
+				str(item.get("cell", {})), str(item.get("config", {}))]
+		"wallrun":
+			ident += "|%s" % String(item.get("sig", str(item.get("run_index", ""))))
+		"simulation":
+			ident += "|%s|%s" % [str(item.get("court", {})), str(item.get("zcur", 0))]
+		"dress":
+			ident += "|%s" % str(item.get("seg_no", -1))
+	var recipes: Array = seg.get_meta("em_vr_content_blueprints", [])
+	for saved_v in recipes:
+		if String((saved_v as Dictionary).get("em_vr_blueprint_id", "")) == ident:
+			return
+	var saved := item.duplicate(true)
+	saved["seg"] = seg
+	saved["em_vr_blueprint_id"] = ident
+	recipes.append(saved)
+	seg.set_meta("em_vr_content_blueprints", recipes)
 
-	if _vr_passage_phase == "unloading":
-		# queue_free completes at frame end. Do not instantiate a replacement in
-		# the same frame: that one-frame zero-map interval is the memory guarantee.
-		if Engine.get_process_frames() <= _vr_passage_frame:
-			return
-		if _vr_passage_old_node != null and is_instance_valid(_vr_passage_old_node):
-			return
-		_build_vr_passage_target()
+
+func _vr_current_segment_index() -> int:
+	if _vr_current_node == null or not is_instance_valid(_vr_current_node):
+		return -1
+	for i in range(_segments.size()):
+		if _node_or_null((_segments[i] as Dictionary).get("node")) == _vr_current_node:
+			return i
+	return -1
+
+
+func _vr_is_content_root(node: Node) -> bool:
+	if node.name.begins_with("Lobby_"):
+		return false
+	return node.has_meta("em_vr_content") or node.has_meta("em_vr_artifact_support") \
+		or node.has_meta("em_cartridge_deferred") or node.has_meta("em_showing")
+
+
+func _vr_collect_content_roots(parent: Node, out: Array) -> void:
+	for child_v in parent.get_children():
+		var child := child_v as Node
+		if _vr_is_content_root(child):
+			out.append(child)
+		else:
+			_vr_collect_content_roots(child, out)
+
+
+func _vr_demote_segment(rec: Dictionary) -> void:
+	var seg := _node_or_null(rec.get("node"))
+	if seg == null:
 		return
+	# Nothing queued for the old exhibit owner may instantiate after the handoff.
+	for i in range(_stamp_queue.size() - 1, -1, -1):
+		if (_stamp_queue[i] as Dictionary).get("seg") == seg:
+			_stamp_queue.remove_at(i)
+	for i in range(_cartridge_pending_nodes.size() - 1, -1, -1):
+		if (_cartridge_pending_nodes[i] as Dictionary).get("seg") == seg:
+			_cartridge_pending_nodes.remove_at(i)
+	var roots: Array = []
+	_vr_collect_content_roots(seg, roots)
+	for root_v in roots:
+		var root := root_v as Node
+		if is_instance_valid(root):
+			if root is Node3D:
+				(root as Node3D).visible = false
+			root.process_mode = Node.PROCESS_MODE_DISABLED
+			root.queue_free()
+	for i in range(_vis_records.size() - 1, -1, -1):
+		var n_v: Variant = (_vis_records[i] as Dictionary).get("node")
+		if not is_instance_valid(n_v) or (n_v is Node and seg.is_ancestor_of(n_v)):
+			_vis_records.remove_at(i)
+	for i in range(_edit_records.size() - 1, -1, -1):
+		var n_v: Variant = (_edit_records[i] as Dictionary).get("node")
+		if not is_instance_valid(n_v) or (n_v is Node and seg.is_ancestor_of(n_v)):
+			_edit_records.remove_at(i)
+	rec["shell"] = true
+	seg.set_meta("em_vr_shell", true)
 
-	if _vr_passage_phase == "building":
-		if _vr_passage_target == null or not is_instance_valid(_vr_passage_target):
-			return
-		if _segment_has_pending_stamps(_vr_passage_target):
-			return
-		_open_gate()
-		if _vr_passage_far != null and is_instance_valid(_vr_passage_far):
-			_vr_passage_far.queue_free()
-		_vr_passage_far = null
-		_vr_passage_phase = "entering"
-		print("[em-stream] target complete — vestibule opens immediately")
+
+func _vr_promote_segment(rec: Dictionary) -> void:
+	var seg := _node_or_null(rec.get("node"))
+	if seg == null:
 		return
+	rec["shell"] = false
+	seg.set_meta("em_vr_shell", false)
+	var recipes: Array = seg.get_meta("em_vr_content_blueprints", [])
+	for recipe_v in recipes:
+		var item: Dictionary = (recipe_v as Dictionary).duplicate(true)
+		item["seg"] = seg
+		# A live/unbaked stamp originally instantiated synchronously. Giving its
+		# re-entry an explicit non-empty marker sends it through `_stamp_inner`
+		# once instead of treating it as a fresh request and re-queuing forever.
+		if String(item.get("kind", "stamp")) == "stamp" \
+				and (item.get("bk", {}) as Dictionary).is_empty():
+			item["bk"] = {"em_vr_rehydrate": true}
+		_stamp_queue.append(item)
+	print("[em-stream] %s promoted: %d artifact recipe(s) admitted over frames" % [seg.name, recipes.size()])
 
-	if _vr_passage_phase == "entering":
-		var crossed := ez >= _vr_passage_boundary + 2.2 if _vr_passage_dir > 0 \
-			else ez <= _vr_passage_boundary - 2.2
-		if crossed:
-			_remove_vr_passage()
+
+func _vr_build_shell_from_record(rec: Dictionary) -> void:
+	_vr_shell_building = true
+	_stream_rebuild(rec)
+	_vr_shell_building = false
+	for sd_v in _segments:
+		var sd: Dictionary = sd_v
+		if absf(float(sd.get("z0", -99999.0)) - float(rec.get("z0", -88888.0))) < 0.1:
+			sd["shell"] = true
+			var n := _node_or_null(sd.get("node"))
+			if n != null:
+				n.set_meta("em_vr_shell", true)
+			break
+
+
+func _vr_build_forward_shell() -> void:
+	var before := _segments.size()
+	_vr_shell_building = true
+	_build_segment()
+	_vr_shell_building = false
+	if _segments.size() > before:
+		var rec: Dictionary = _segments[-1]
+		rec["shell"] = true
+		var n := _node_or_null(rec.get("node"))
+		if n != null:
+			n.set_meta("em_vr_shell", true)
+
+
+func _vr_ensure_shell_window() -> void:
+	var ci := _vr_current_segment_index()
+	if ci < 0:
+		return
+	# Rehydrate one architecture shell behind when the walk has a rebuild record.
+	if ci == 0:
+		var z0 := float((_segments[ci] as Dictionary).get("z0", 0.0))
+		var pi := _freed_index_for_boundary(z0, -1)
+		if pi >= 0:
+			var prev: Dictionary = _freed[pi]
+			_freed.remove_at(pi)
+			_vr_build_shell_from_record(prev)
+			ci = _vr_current_segment_index()
+	# Keep one shell in front. Prefer a previously freed authored hall; otherwise
+	# advance the curriculum frontier with an architecture-only build.
+	if ci == _segments.size() - 1:
+		var z1 := float((_segments[ci] as Dictionary).get("z1", 0.0))
+		var ni := _freed_index_for_boundary(z1, 1)
+		if ni >= 0:
+			var next: Dictionary = _freed[ni]
+			_freed.remove_at(ni)
+			_vr_build_shell_from_record(next)
+		else:
+			_vr_build_forward_shell()
+		ci = _vr_current_segment_index()
+	# Bound architecture at previous/current/next. Exhibit content has already
+	# been removed before a shell can become an eviction candidate.
+	while ci > 1:
+		_stream_free(0, "VR shell behind")
+		ci -= 1
+	while _segments.size() - ci - 1 > 1:
+		_stream_free(_segments.size() - 1, "VR shell ahead")
 
 
 func _segment_index_at(ez: float) -> int:
@@ -9985,9 +10532,16 @@ func _build_vr_passage_target() -> void:
 	if ri >= 0:
 		var rec: Dictionary = _freed[ri]
 		_freed.remove_at(ri)
-		_stream_rebuild(rec)
+		if not _try_load_stream_cartridge(String(rec.get("map", "")),
+				float(rec.get("z0", 0.0)), rec.get("snap", {}), false):
+			_stream_rebuild(rec)
 	elif _vr_passage_dir > 0:
-		_build_segment()
+		var next_map := _peek_next_authored_map()
+		var snap := {"rot_i": _rot_i, "pool_i": _pool_i, "seg_index": _seg_index,
+			"next_z": _next_z, "prev_w": _prev_w,
+			"pearl_cursor": _pearl_cursor.duplicate(true)}
+		if not _try_load_stream_cartridge(next_map, _next_z, snap, true):
+			_build_segment()
 	else:
 		push_warning("[em-stream] no previous hall record behind passage z %.1f" % _vr_passage_boundary)
 		_remove_vr_passage()
@@ -10004,6 +10558,12 @@ func _segment_has_pending_stamps(seg: Node3D) -> bool:
 		var item: Dictionary = iv
 		var owner: Variant = item.get("seg")
 		if owner != null and is_instance_valid(owner) and owner == seg:
+			return true
+	for cartridge_v in _cartridge_pending_nodes:
+		var cartridge: Dictionary = cartridge_v
+		var cartridge_owner: Variant = cartridge.get("seg")
+		if cartridge_owner != null and is_instance_valid(cartridge_owner) \
+				and cartridge_owner == seg:
 			return true
 	return false
 
@@ -10113,6 +10673,8 @@ func _stream_rebuild(rec: Dictionary) -> void:
 ## moment of its assembly. (The parity gate snapshots two builds at one clock
 ## time — without this, it would be diffing two drain cursors.)
 func flush_stamps() -> void:
+	while not _cartridge_pending_nodes.is_empty():
+		_drain_cartridge_nodes(true)
 	while not _stamp_queue.is_empty():
 		var item: Dictionary = _stamp_queue.pop_at(0)
 		if not is_instance_valid(item.get("seg")):
@@ -10120,6 +10682,9 @@ func flush_stamps() -> void:
 		if String(item.get("kind", "stamp")) == "wallrun":
 			while not (item["pending"] as Array).is_empty():
 				_wallrun_step(item)
+		elif String(item.get("kind", "stamp")) == "simulation":
+			_stamp_simulation(item["seg"], item["court"], int(item["g"]),
+				float(item["floor_y"]), int(item["zcur"]))
 		elif String(item.get("kind", "stamp")) == "dress":
 			# a dress item has run/seg_no, not scene_path/cell — falling into
 			# the stamp branch indexed missing keys and KILLED the flush on
@@ -10132,7 +10697,17 @@ func flush_stamps() -> void:
 				item["cell"], int(item["zbase"]), int(item["fp"]), item["axis"], bool(item["drop"]),
 				float(item["span_cap"]), float(item["yaw"]), item["config"], item["bk"])
 func _run_dress_item(item: Dictionary) -> void:
+	var seg_v: Variant = item.get("seg")
+	var before: Dictionary = {}
+	if is_instance_valid(seg_v):
+		for child_v in (seg_v as Node).get_children():
+			before[(child_v as Node).get_instance_id()] = true
 	(item["run"] as Callable).call()
+	if is_instance_valid(seg_v):
+		for child_v in (seg_v as Node).get_children():
+			var child := child_v as Node
+			if not before.has(child.get_instance_id()):
+				child.set_meta("em_cartridge_deferred", true)
 	var dsn: int = int(item.get("seg_no", -1))
 	for be in _built:
 		if int((be as Dictionary).get("segment", -2)) == dsn:
@@ -10167,6 +10742,12 @@ func _drain_stamps() -> void:
 			if not is_instance_valid(it["seg"]):
 				_stamp_queue.remove_at(qi)
 				continue
+			# VR neighbour shells may hold recipes but never own live exhibit
+			# work. This defensive gate prevents an accidental queue producer
+			# from populating the hall before the eye crosses into it.
+			if _vr and _vr_current_node != null and it["seg"] != _vr_current_node:
+				qi += 1
+				continue
 			var qd: float = Vector2(float(it["px"]) - eye.x, float(it["pz"]) - eye.z).length()
 			if qd < best_d:
 				best_d = qd
@@ -10185,6 +10766,9 @@ func _drain_stamps() -> void:
 			_wallrun_step(item)
 			if not (item["pending"] as Array).is_empty():
 				_stamp_queue.append(item)
+		elif String(item.get("kind", "stamp")) == "simulation":
+			_stamp_simulation(item["seg"], item["court"], int(item["g"]),
+				float(item["floor_y"]), int(item["zcur"]))
 		else:
 			var ok: bool = _stamp_inner(item["seg"], String(item["scene_path"]), String(item["lookup"]),
 				item["cell"], int(item["zbase"]), int(item["fp"]), item["axis"], bool(item["drop"]),
@@ -10321,6 +10905,12 @@ func _track_acoustic() -> void:
 		return
 
 func _physics_process(_delta: float) -> void:
+	# THE FIRST PHYSICS STEP: in Main::iteration physics runs BEFORE idle, so
+	# this splits the silent window into engine flush plus physics on one side
+	# and the deferred-call queue plus render sync on the other (2026-08-26).
+	if not _boot_first_phys:
+		_boot_first_phys = true
+		_boot_ms["first_physics"] = Time.get_ticks_msec() - _boot_t0
 	if Engine.is_editor_hint():
 		return
 	if _player == null or _shot_path != "":
@@ -14037,11 +14627,16 @@ func _seat_extent(root: Node3D) -> AABB:
 	return acc
 
 
-func _seat_late(node: Node3D, seat_y: float, lookup: String) -> void:
+func _seat_late(node_v: Variant, seat_y: float, lookup: String) -> void:
 	## The settle re-seat: procedural bodies finish building a few frames
 	## after _ready, so the stamp's immediate measure can seat a half-built
-	## box (fontana stood IN its plinth). Measured whole, seated once more.
-	if node == null or not is_instance_valid(node) or not node.is_inside_tree():
+	## box (fontana stood IN its plinth). The Variant boundary matters now that
+	## VR legitimately frees an artifact before its 0.45 s timer fires: a typed
+	## Node3D argument rejects the freed Object before this guard can run.
+	if node_v == null or not is_instance_valid(node_v) or not (node_v is Node3D):
+		return
+	var node := node_v as Node3D
+	if not node.is_inside_tree():
 		return
 	var abox: AABB = _seat_extent(node)
 	if abox.size.y <= 0.0:
