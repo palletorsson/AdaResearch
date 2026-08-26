@@ -48,6 +48,17 @@ const RIG := "res://commons/hazards/octapod_crawler/csg_four_leg_walker.tscn"
 @export var step_height_local: float = 1.0
 @export var step_duration: float = 0.15
 @export var step_overshoot_local: float = 0.5
+## POSTURE, exported so a variant can be handed in from outside (2026-08-26,
+## Palle: "iterate and improve with multi agent many different versions").
+## ride_local is the body height in RIG units; stance is how far out the feet
+## plant as a fraction of the authored shoulder ring. Together with the chain
+## length (6 bones, 5.00 units) they decide whether the leg bends or reaches
+## straight — which is the whole open question.
+@export var ride_local: float = 1.35
+@export var stance: float = 0.62
+## forwarded to the CSG rig BEFORE it builds itself, since its _ready reads its
+## own exports once: creature_* and leg_* keys from csg_walker.gd
+@export var csg_params: Dictionary = {}
 
 const LEG_COUNT := 4
 ## the authored shoulder ring: 45/135/225/315 degrees at radius 2.2, body y 2.2
@@ -59,6 +70,21 @@ const SHOULDERS: Array = [
 ]
 
 var _rig: Node3D = null
+## THE RIG'S ROOT IS NOT THE RIG (2026-08-26, found by two independent design
+## agents reading the .tscn while I was tuning numbers against it). In
+## csg_four_leg_walker.tscn the root CSGFourLegWalker is a bare Node3D and
+## EVERYTHING — the script, the four IK chains, the SpringArms and their
+## FootTargets — hangs off a "Body" child. Three consequences, all silent:
+##   the foot paths resolved against the root and returned null four times, so
+##   _update_gait wrote to nothing and every gait number here was inert;
+##   csg_params were set() on a scriptless node, so every creature_/leg_ key
+##   was dropped without a word (the typed/absent set() this repo has been
+##   bitten by before);
+##   set_process(false) stopped the root, not the script, so four_leg_critter
+##   kept walking on its OWN defaults — a 1.5 METRE step threshold against a
+##   57 cm animal, which is exactly why the legs never stepped and the body
+##   dragged them straight. THAT was the stilts, not the posture numbers.
+var _body: Node3D = null
 var _feet: Array = []
 var _planted: Array = []
 var _stepping: Array = []
@@ -104,9 +130,8 @@ func _ready() -> void:
 	# reach their feet dead straight — the crab stands on four rigid stilts.
 	# A crab crouches: the body comes down so the chain has to BEND, which is
 	# what makes a joint read as a joint. Measured by eye against the stilts.
-	_ride = 1.35 * crab_scale
-	# and the stance draws in — a wide sprawl at this scale reads as a spider
-	_stance = 0.62
+	_ride = ride_local * crab_scale
+	_stance = stance
 	_build_rig()
 	set_process(true)
 
@@ -124,11 +149,27 @@ func _build_rig() -> void:
 	# unwanted — that is the one that reads the player's WASD — so it is
 	# switched off the frame after it has built itself.
 	_rig.name = "Rig"
+	# the node that actually carries the script and the legs
+	_body = _rig.get_node_or_null("Body") as Node3D
+	if _body == null:
+		for c in _rig.get_children():
+			if c is Node3D and (c as Node).get_script() != null:
+				_body = c as Node3D
+				break
+	if _body == null:
+		_body = _rig
+	# BEFORE the tree: csg_walker._ready reads its own exports once and builds
+	# the body from them, so a param set handed in afterwards shapes nothing
+	for k in csg_params:
+		_body.set(String(k), csg_params[k])
 	add_child(_rig)
-	_rig.set_process(false)
+	# _ready has run for the rig by now: stop ITS gait, keep its geometry
+	_body.set_process(false)
 	call_deferred("_quiet_rig")
 	for i in range(LEG_COUNT):
-		var foot: Node = _rig.get_node_or_null("SpringArm3D_%d/FootTarget_%d" % [i, i])
+		var foot: Node = _body.get_node_or_null("SpringArm3D_%d/FootTarget_%d" % [i, i])
+		if foot == null:
+			push_warning("head_crab: no FootTarget_%d — the gait has nothing to drive" % i)
 		_feet.append(foot)
 	_planted.resize(LEG_COUNT)
 	_stepping.resize(LEG_COUNT)
@@ -153,6 +194,9 @@ func _quiet_rig() -> void:
 		return
 	_rig.set_process(false)
 	_rig.set_physics_process(false)
+	if _body != null and is_instance_valid(_body):
+		_body.set_process(false)
+		_body.set_physics_process(false)
 	# the rig hangs an orange debug sphere on every foot marker; find them by
 	# their PARENT rather than by a path, so a renamed rig node cannot leave
 	# four glowing dots on the floor
