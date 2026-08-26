@@ -832,8 +832,7 @@ var _loading_shell_ready: bool = false
 var _museum_core_ready: bool = false
 var _museum_ready: bool = false
 var _boot_cell: Node3D = null
-var _boot_loading_label: Label3D = null
-var _loading_anim_t: float = 0.0
+var _loading_cell_mats: Dictionary = {}
 ## A passage is not a map. In strict VR streaming it temporarily owns the floor
 ## while the current map is freed, then the next map is built behind its far
 ## wall. At no point does a hidden second map remain resident.
@@ -855,7 +854,6 @@ var _vr_passage_frame: int = -1
 var _vr_current_node: Node3D = null
 var _vr_shell_building: bool = false
 var _vr_last_eye_z: float = 0.0
-var _loading_cell_mats: Dictionary = {}
 # ── THE WAKE-UP RAMP (2026-08-20, Palle: "loading a grid map like Point_One
 # is shorter") ── Point_One pays the same engine and staging; what it skips
 # is a first frame with ~117 bodies' render pipelines to compile at once.
@@ -1029,8 +1027,15 @@ func _ready() -> void:
 	# instead of adding its I/O to the end of museum boot.
 	if _vr and _cartridge_read_enabled:
 		_begin_start_cartridge_prefetch()
-	if _vr and not _headless:
-		_create_boot_loading_cell()
+	# THE LOADING ROOM IS GONE (2026-08-26, Palle: "the loading room does not
+	# work remove it pls"). Six boxes WITH COLLIDERS around the spawn, freed
+	# only when the first hall reported complete — so on the one occasion the
+	# first hall did not complete, the visitor was walled into a 5x4 m box with
+	# a painting saying LOADING and no way out. It was built under
+	# `if _vr and not _headless`, which is why every headless probe said the
+	# boot cleared in a second and only the headset ever trapped anyone.
+	# The museum now assembles in front of the visitor, which is honest: they
+	# can see it is working, and they can walk while it does.
 	_loading_shell_ready = true
 	_boot_ms["loading_shell"] = Time.get_ticks_msec() - _boot_t0
 	loading_shell_ready.emit()
@@ -1269,45 +1274,20 @@ func _warm_grid_catalogue() -> void:
 
 # ── THE LOADING CELL ────────────────────────────────────────────────────────
 
-## Six boxes, one shadowless light, and one Label3D: this is deliberately much
-## cheaper than even an empty museum segment. It exists before registry parsing
-## or material warm-up, so it uses tiny flat materials and engine primitives.
-func _create_boot_loading_cell() -> void:
-	if _boot_cell != null and is_instance_valid(_boot_cell):
-		return
-	_boot_cell = Node3D.new()
-	_boot_cell.name = "MuseumLoadingCell"
-	add_child(_boot_cell)
-	const CX := 7.5
-	const Z0 := -0.2
-	const Z1 := 4.2
-	const X0 := 5.0
-	const X1 := 10.0
-	var plaster := Color(0.885, 0.88, 0.865)
-	var floor_col := Color(0.52, 0.51, 0.49)
-	_loading_box(_boot_cell, Vector3(CX, -0.10, (Z0 + Z1) * 0.5),
-		Vector3(X1 - X0, 0.20, Z1 - Z0), floor_col, true)
-	_loading_box(_boot_cell, Vector3(X0, 2.25, (Z0 + Z1) * 0.5),
-		Vector3(0.20, 4.5, Z1 - Z0), plaster, true)
-	_loading_box(_boot_cell, Vector3(X1, 2.25, (Z0 + Z1) * 0.5),
-		Vector3(0.20, 4.5, Z1 - Z0), plaster, true)
-	_loading_box(_boot_cell, Vector3(CX, 2.25, Z0),
-		Vector3(X1 - X0, 4.5, 0.20), plaster, true)
-	_loading_box(_boot_cell, Vector3(CX, 4.50, (Z0 + Z1) * 0.5),
-		Vector3(X1 - X0, 0.20, Z1 - Z0), plaster, true)
-	_loading_box(_boot_cell, Vector3(CX, 2.25, Z1),
-		Vector3(X1 - X0, 4.5, 0.20), plaster, true)
-	_loading_painting(_boot_cell, Vector3(CX, 2.15, Z1 - 0.115), -1)
-	var lamp := OmniLight3D.new()
-	lamp.name = "LoadingCellLight"
-	lamp.position = Vector3(CX, 3.55, 1.8)
-	lamp.light_color = Color(1.0, 0.94, 0.84)
-	lamp.light_energy = 0.75
-	lamp.omni_range = 6.0
-	lamp.shadow_enabled = false
-	_boot_cell.add_child(lamp)
-	print("[em-loading] lightweight cell visible; the first hall now builds behind its wall")
 
+
+
+
+
+
+
+
+
+
+# ── PLAIN BOXES ────────────────────────────────────────────────────────────
+
+## Named for the loading room they were written for; the room is gone and
+## the VR passage still builds its walls out of them.
 
 func _loading_material(color: Color) -> StandardMaterial3D:
 	var key := color.to_html(true)
@@ -1345,51 +1325,6 @@ func _loading_box(parent: Node3D, at: Vector3, size: Vector3, color: Color,
 	return holder
 
 
-## The single startup painting. Inter-hall passages deliberately have no
-## loading presentation: they read as ordinary museum vestibules while their
-## far wall protects the one-map handoff.
-func _loading_painting(parent: Node3D, at: Vector3, direction: int) -> void:
-	var dark := Color(0.07, 0.065, 0.06)
-	var frame := Color(0.80, 0.79, 0.76)
-	var panel := _loading_box(parent, at, Vector3(2.6, 1.45, 0.06), dark, false)
-	panel.rotation_degrees.y = 0.0
-	for bar in [
-		[Vector3(0.0, 0.79, 0.0), Vector3(2.86, 0.12, 0.10)],
-		[Vector3(0.0, -0.79, 0.0), Vector3(2.86, 0.12, 0.10)],
-		[Vector3(-1.37, 0.0, 0.0), Vector3(0.12, 1.58, 0.10)],
-		[Vector3(1.37, 0.0, 0.0), Vector3(0.12, 1.58, 0.10)],
-	]:
-		_loading_box(panel, bar[0], bar[1], frame, false)
-	var label := Label3D.new()
-	label.name = "MuseumLoadingPaintingText"
-	label.text = "LOADING."
-	label.font_size = 64
-	label.pixel_size = 0.006
-	label.outline_size = 8
-	label.modulate = Color(0.95, 0.94, 0.90)
-	label.outline_modulate = Color(0.05, 0.045, 0.04)
-	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	# `direction` is the face normal toward the approaching visitor. Keep the
-	# glyphs on that side of the panel; the opposite sign buried them inside the
-	# blocking wall, leaving a blank black painting in the first visual proof.
-	label.position = at + Vector3(0.0, 0.0, 0.055 * float(direction))
-	label.rotation_degrees.y = 180.0 if direction < 0 else 0.0
-	parent.add_child(label)
-	_boot_loading_label = label
-
-
-func _tick_loading_paintings(delta: float) -> void:
-	_loading_anim_t += delta
-	var dots := 1 + int(floor(_loading_anim_t * 2.0)) % 3
-	var pulse := 0.82 + 0.18 * (0.5 + 0.5 * sin(_loading_anim_t * 2.4))
-	for lv in [_boot_loading_label]:
-		var label: Label3D = lv
-		if label != null and is_instance_valid(label):
-			label.text = "LOADING" + ".".repeat(dots)
-			label.modulate.a = pulse
-
-
 ## `base.tscn/MapInfo` waits for GridSystem.map_generation_complete, a signal
 ## the Endless Museum intentionally does not own. It therefore stayed attached
 ## to the headset forever. The physical loading painting replaces it here; later
@@ -1425,7 +1360,6 @@ func _finish_initial_loading() -> void:
 	if _boot_cell != null and is_instance_valid(_boot_cell):
 		_boot_cell.queue_free()
 	_boot_cell = null
-	_boot_loading_label = null
 	_hide_legacy_loading_text()
 	museum_ready.emit()
 	print("[em-loading] first hall complete in %d ms — loading cell removed; neighbour shells follow without removing its floor" % int(_boot_ms["content_ready"]))
@@ -6609,6 +6543,15 @@ func _build_segment() -> void:
 			# than assumed: an older em_detail on disk keeps the 6-arg contract and
 			# degrades to its own derived rate instead of erroring out.
 			if _mod_arity(_mod_detail, "dress_segment") >= 7:
+				# the hand's adoption is read FIRST: its tokens must survive the
+				# closeness filters in _speak_lines, or a ruling is written, saved,
+				# compiled — and quietly does nothing
+				var adopt_now: Dictionary = _speak_adopt(next_seq, String(deal.get("pearl", "")) if deal is Dictionary else "")
+				var adopt_keep: Dictionary = {}
+				for pk in adopt_now.keys():
+					var kt := String(adopt_now[pk])
+					if kt != "":
+						adopt_keep[kt] = true
 				_mod_detail.call("dress_segment", seg, dress_tile, w, h, _detail_mats, _prev_w,
 					{"wall_features_max": int(deal.get("wall_features_max", -1)),
 						"fill_walls": bool(deal.get("fill_walls", true)),
@@ -6627,11 +6570,11 @@ func _build_segment() -> void:
 						# fields) and unroofs the hall
 						"ceiling": (not _studio) and not bool(peek.get("open_roof", false)),
 						# textD on the wall works: the pearl's sentences, one per showing
-						"speak_lines": _speak_lines(next_seq, String(deal.get("pearl", "")) if deal is Dictionary else ""),
+						"speak_lines": _speak_lines(next_seq, String(deal.get("pearl", "")) if deal is Dictionary else "", adopt_keep),
 						"speak_anchors": _speak_anchors(),     # token -> world: each line hangs on the field nearest its body
 						# the written binding, page -> token: closeness is the
 						# DEFAULT, this is the hand (see _speak_adopt)
-						"speak_adopt": _speak_adopt(next_seq, String(deal.get("pearl", "")) if deal is Dictionary else ""),
+						"speak_adopt": adopt_now,
 						"speak_caps": _L("speak", "caps", 0.0) > 0.5,
 						# EVERY enter room stays bare (2026-08-23, Palle: "remove
 						# ... other objects on the wall around that info board"):
@@ -7198,7 +7141,15 @@ func _build_side_rooms(seg: Node3D, solid: StaticBody3D, w: int, tile_h: int,
 func _speak_plaque(_seg: Node3D, _chapter: String, _pearl: String, _w: int) -> void:
 	pass   # retired 2026-08-19: "no labels in space" — the speak lives on the wall works (em_detail speak_lines)
 
-func _speak_lines(chapter: String, pearl: String) -> Array:
+## `keep` are tokens the HAND has adopted onto a wall. The three filters below
+## are CLOSENESS-TIME heuristics — the foyer's lines belong on the foyer wall,
+## a blank line is not a line, a repeated sentence is not said twice — and none
+## of them is a law. An explicit adoption outranks all three: the hand said
+## THIS wall speaks for THAT work, so the line must survive to be hung, or the
+## museum silently ignores a ruling it was given (found 2026-08-26: adopting
+## `origin` in point one would write, save and compile, and change nothing,
+## because origin sits in that pearl's foyer).
+func _speak_lines(chapter: String, pearl: String, keep: Dictionary = {}) -> Array:
 	## THE WALL IS THE PRODUCT OF THE TEXT (Palle, 2026-08-19: "not wall text in the
 	## short speak poem, distribute that to the nearest wall"). Every record is
 	## {text, token}: a body's line carries its token, and em_detail hangs it on
@@ -7216,12 +7167,15 @@ func _speak_lines(chapter: String, pearl: String) -> Array:
 		if not order.has(tok):
 			order.append(tok)
 	for tok in order:
-		if foyer.has(tok) or not says.has(tok):
+		var adopted_tok: bool = keep.has(String(tok))
+		if not says.has(tok):
+			continue
+		if foyer.has(tok) and not adopted_tok:
 			continue                        # the foyer's lines stand on the foyer wall
-		if not show_drafts and String(says_by.get(tok, "hand")) != "hand":
+		if not show_drafts and String(says_by.get(tok, "hand")) != "hand" and not adopted_tok:
 			continue
 		var line: String = String(says[tok]).strip_edges()
-		if line != "" and not seen.has(line.to_lower()):
+		if line != "" and (adopted_tok or not seen.has(line.to_lower())):
 			seen[line.to_lower()] = true
 			out.append({"text": line, "token": String(tok), "n": int((sp.get("numbers", {}) as Dictionary).get(tok, 0))})
 	# the next pages in this hall: their bodies' lines, anchored the same way
@@ -11748,7 +11702,6 @@ func _open_gate() -> void:
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint() or _studio:
 		return
-	_tick_loading_paintings(_delta)
 	if _doll_top and _paint2d_canvas != null and is_instance_valid(_paint2d_canvas):
 		_paint2d_canvas.queue_redraw()   # the overlay tracks the camera
 	_edit_gizmo_frame()

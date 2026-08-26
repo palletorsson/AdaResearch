@@ -42,8 +42,12 @@ func _run() -> void:
 	var fails: Array = []
 	var notes: Array = []
 	# page 0 adopts a work that is NOT the nearest to it; page 1 is pinned silent
+	# page 2 adopts a FOYER token: closeness skips those (their lines stand on
+	# the foyer wall), so before 2026-08-26 this ruling was written, saved,
+	# compiled and silently ignored. The hand outranks the heuristic now.
 	var setup: Dictionary = _copy_book("primitives", [
-		{"page": 0, "token": "you_are_here"}, {"page": 1, "token": ""}])
+		{"page": 0, "token": "you_are_here"}, {"page": 1, "token": ""},
+		{"page": 2, "token": "origin"}])
 	if String(setup.get("pearl", "")) == "":
 		fails.append("could not find the Point_One pearl to adopt into")
 
@@ -91,6 +95,16 @@ func _run() -> void:
 		fails.append("page 1 was pinned silent and still spoke")
 	else:
 		notes.append("an empty token pins a wall SILENT")
+
+	# the foyer token the hand adopted
+	var at2 := ""
+	for n3 in seg.get_children():
+		if n3 is Label3D and n3.has_meta("em_speak") and int(n3.get_meta("em_speak")) == 2:
+			at2 = String(n3.get_meta("em_speak_token")) if n3.has_meta("em_speak_token") else ""
+	if at2 != "origin":
+		fails.append("page 2 adopted a FOYER token and got '%s' — the ruling was ignored" % at2)
+	else:
+		notes.append("an adopted FOYER token is honoured (closeness would have skipped it)")
 
 	# 4. the rest still fell to closeness
 	var spoke := 0
