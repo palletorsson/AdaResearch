@@ -141,8 +141,8 @@ const LOBBY_W := 17
 const WALL_H := 4.5
 
 # ── skirting ────────────────────────────────────────────────────────────────
-const SKIRT_H := 0.13         # 130 mm — a gallery plinth, not a domestic 100 mm
-const SKIRT_T := 0.045        # centred on the wall face: 22.5 mm proud, 22.5 mm buried
+const SKIRT_H := 0.08         # quiet 80 mm painted datum, subordinate to the art wall
+const SKIRT_T := 0.025        # only 12.5 mm proud: enough to catch a line, not a ledge
 
 # ── cornice / wall head ─────────────────────────────────────────────────────
 const CORNICE_H := 0.28       # top lands exactly on the wall head
@@ -180,15 +180,15 @@ const PORTAL_HEAD_LINING := 0.16
 # are built from MultiMesh boxes with no lattice-corner concept, so they keep
 # their naked mitres — see the note at the foot of this file.
 const BEAD_W := 0.10          # rotated 45 deg -> 71 mm proud of the arris
-const BEAD_Y0 := 0.13         # sits on the skirting
-const BEAD_H := 2.59          # dies into the cornice at 2.72
+const BEAD_Y0 := SKIRT_H      # sits on the skirting
+const BEAD_H := CORNICE_BOTTOM - BEAD_Y0  # dies into the actual 4.5 m wall cornice
 
 # ── chamfers / quirk beads on every other arris ──────────────────────────────
 # A joiner's chamfer is 10-25 mm; these are the cross-section SIDE of a square
 # bar rotated 45 degrees, so the facet stands side/sqrt(2) proud of the corner
 # and presents a face of side*sqrt(2)... i.e. a 22 mm bar reads as a 31 mm
 # chamfer standing 16 mm proud. Every number below is inside the joiner's band.
-const SKIRT_TOP_CH := 0.022   # 16 mm proud, at the skirting head (y = 0.13)
+const SKIRT_TOP_CH := 0.016   # 11 mm proud, at the quiet painted skirting head
 const CORNICE_CH := 0.030     # 21 mm proud, cornice drip (2.72) and head (3.00)
 const REVEAL_CH := 0.022      # door jamb quirk and head-soffit drip
 const PORTAL_CH := 0.032      # the monumental threshold gets a monumental arris
@@ -849,8 +849,16 @@ static func _add_showing_cards(seg: Node3D, mounts: Array, opts: Dictionary) -> 
 	# with no body, and plain strings, fill the fields left over in order.
 	var anchors: Dictionary = opts.get("speak_anchors", {})
 	var speak_lines: Array = []
+	# THE PAGE KNOWS ITS LINE (2026-08-24, Palle: "I want the wall works ... to be
+	# the page of the book ... when we double tap we get an editing window").
+	# The distribution below is by NEAREST ANCHOR, so a showing's index is not the
+	# record's index and the binding cannot be recomputed afterwards. Carried here
+	# instead, and stamped on the label as em_speak_token, so an edit in the museum
+	# writes back to the right line of the right pearl.
+	var speak_tokens: Array = []
 	for _i in range(mounts.size()):
 		speak_lines.append("")
+		speak_tokens.append("")
 	var free: Array = []
 	for _i in range(mounts.size()):
 		free.append(true)
@@ -876,13 +884,17 @@ static func _add_showing_cards(seg: Node3D, mounts: Array, opts: Dictionary) -> 
 					best_d = dd; best = mi
 			if best >= 0:
 				speak_lines[best] = txt; free[best] = false
+				speak_tokens[best] = tok
 				continue
-		rest.append(txt)
+		rest.append({"text": txt, "token": tok})
 	for mi in range(mounts.size()):
 		if rest.is_empty():
 			break
 		if free[mi]:
-			speak_lines[mi] = rest.pop_front(); free[mi] = false
+			var nxt: Dictionary = rest.pop_front()
+			speak_lines[mi] = String(nxt.get("text", ""))
+			speak_tokens[mi] = String(nxt.get("token", ""))
+			free[mi] = false
 	var roboto: Font = null
 	if not speak_lines.is_empty() and ResourceLoader.exists("res://commons/font/Roboto-VariableFont_wdth,wght.ttf"):
 		roboto = load("res://commons/font/Roboto-VariableFont_wdth,wght.ttf")
@@ -976,6 +988,8 @@ static func _add_showing_cards(seg: Node3D, mounts: Array, opts: Dictionary) -> 
 			else:
 				sl.rotation_degrees.y = 90.0 if nrm > 0.0 else -90.0
 			sl.set_meta("em_speak", si)
+			if si < speak_tokens.size():
+				sl.set_meta("em_speak_token", String(speak_tokens[si]))
 			seg.add_child(sl)
 
 

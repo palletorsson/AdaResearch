@@ -781,6 +781,17 @@ var _spine_prev_mouse: int = 0
 var _spine_watch_t: float = 0.0           # the web bridge: poll the open page's mtime
 var _spine_mtime: int = 0                 # 0 = no page open / nothing to watch
 var _book_dir: String = "res://commons/data/book"   # a var: probes inject a trial copy
+## THE PAGE (2026-08-24, Palle: "I want the wall works of white frames with black
+## canvas to be the page of the book ... when we double tap we get an editing
+## window where we can change the current text, we can make field notes ... so we
+## can write as we stand there looking at the museum"). Double-tap a wall work and
+## its line opens for editing, with a field-notes box under it. The book is the
+## truth it writes - commons/data/book/<chapter>.json, the same page /lines edits.
+var _page_ui: CanvasLayer = null
+var _page_line: TextEdit = null
+var _page_note: TextEdit = null
+var _page_status: Label = null
+var _page_ctx: Dictionary = {}    # {chapter, pearl, token, si}
 var _doll_walk_to: Vector3 = Vector3(1e9, 0, 0)   # click-to-walk target; 1e9 = none
 var _doll_mark: MeshInstance3D = null              # the little goal disc
 # ── THE BOOT CLOCK (2026-08-20, Palle: "still takes ~10 s to load the first
@@ -4024,6 +4035,215 @@ ADDS    " + _prereq_words(row.get("adds", []), 8)
 		Vector3(0.09, 2.2 * 0.62 + 0.18, 2.2 + 0.18), Color(0.25, 0.17, 0.10), _sm("plinth"))
 
 
+## Which wall work is under the cursor, and which line of the book it carries.
+## Returns false when the tap landed on anything else, so the click falls through.
+func _page_open_at(mouse: Vector2) -> bool:
+	if _cam == null or _page_ui != null:
+		return false
+	var idx: int = _edit_pick_screen(mouse)
+	if idx < 0 or idx >= _edit_records.size():
+		return false
+	var rec: Dictionary = _edit_records[idx]
+	if String(rec.get("kind", "")) != "showing":
+		return false
+	var seg: Node3D = _node_or_null(rec.get("seg"))
+	if seg == null:
+		return false
+	var si: int = int(rec.get("index", -1))
+	var chapter := String(seg.get_meta("em_chapter")) if seg.has_meta("em_chapter") else String(rec.get("chapter", ""))
+	var pearl := String(seg.get_meta("em_pearl")) if seg.has_meta("em_pearl") else ""
+	# the label em_detail hung on THIS showing carries the binding
+	var token := ""
+	var shown := ""
+	for n in seg.get_children():
+		if n.has_meta("em_speak") and int(n.get_meta("em_speak")) == si:
+			if n.has_meta("em_speak_token"):
+				token = String(n.get_meta("em_speak_token"))
+			if n is Label3D:
+				shown = (n as Label3D).text
+			break
+	if pearl == "":
+		print("[em-page] this hall carries no pearl name - the page needs the book")
+		return false
+	_page_ctx = {"chapter": chapter, "pearl": pearl, "token": token, "si": si}
+	_page_build(shown)
+	return true
+
+
+## THE SAME BRIDGE THE WALLS USE: the book names a pearl by its own short name
+## ("point"), a map-authored hall by its map ("point one"). Both carry the map,
+## and an authored pearl name IS the map lowercased, so either name finds the row.
+func _page_pearl_row(doc: Dictionary, pearl: String) -> Dictionary:
+	for pv in (doc.get("pearls", []) as Array):
+		var pl: Dictionary = pv
+		if String(pl.get("pearl", "")) == pearl:
+			return pl
+		if String(pl.get("map", "")).replace("_", " ").to_lower() == pearl:
+			return pl
+	return {}
+
+
+## The book's own record for this line: its text as written, and any field note.
+## A blank page (a field with no line yet) opens empty and writes a new line.
+func _page_read() -> Dictionary:
+	var out := {"text": "", "note": "", "by": "hand"}
+	var path: String = _book_dir + "/%s.json" % String(_page_ctx.get("chapter", ""))
+	if not FileAccess.file_exists(path):
+		return out
+	var doc_v: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+	if not (doc_v is Dictionary):
+		return out
+	var pl: Dictionary = _page_pearl_row(doc_v as Dictionary, String(_page_ctx.get("pearl", "")))
+	if pl.is_empty():
+		return out
+	for lv in (pl.get("lines", []) as Array):
+		var ln: Dictionary = lv
+		if String(ln.get("token", "")) == String(_page_ctx.get("token", "")):
+			out["text"] = String(ln.get("text", ""))
+			out["note"] = String(ln.get("note", ""))
+			out["by"] = String(ln.get("by", "hand"))
+			return out
+	return out
+
+
+func _page_build(shown: String) -> void:
+	var book: Dictionary = _page_read()
+	_page_ui = CanvasLayer.new()
+	_page_ui.layer = 90
+	var panel := PanelContainer.new()
+	# explicit rect: a fresh Control anchored with set_anchors_preset keeps a
+	# ZERO size and paints nothing (measured 2026-08-25)
+	panel.position = Vector2(80, 80)
+	panel.custom_minimum_size = Vector2(720, 520)
+	panel.size = Vector2(720, 520)
+	_page_ui.add_child(panel)
+	var box := VBoxContainer.new()
+	box.add_theme_constant_override("separation", 10)
+	panel.add_child(box)
+	var head := Label.new()
+	var tok_s: String = String(_page_ctx.get("token", ""))
+	head.text = "%s  -  %s  -  page %02d   %s" % [
+		String(_page_ctx.get("chapter", "")), String(_page_ctx.get("pearl", "")),
+		int(_page_ctx.get("si", 0)) + 1,
+		("[" + tok_s + "]") if tok_s != "" else "(unanchored)"]
+	box.add_child(head)
+	var l1 := Label.new()
+	l1.text = "THE LINE - what the canvas says"
+	box.add_child(l1)
+	_page_line = TextEdit.new()
+	_page_line.custom_minimum_size = Vector2(690, 96)
+	_page_line.wrap_mode = TextEdit.LINE_WRAPPING_BOUNDARY
+	# the BOOK is the truth; the wall may be showing a numbered or upper-cased copy
+	_page_line.text = String(book.get("text", "")) if String(book.get("text", "")) != "" else shown
+	box.add_child(_page_line)
+	var l2 := Label.new()
+	l2.text = "FIELD NOTES - the detailed part, written standing here"
+	box.add_child(l2)
+	_page_note = TextEdit.new()
+	_page_note.custom_minimum_size = Vector2(690, 260)
+	_page_note.wrap_mode = TextEdit.LINE_WRAPPING_BOUNDARY
+	_page_note.text = String(book.get("note", ""))
+	box.add_child(_page_note)
+	var row := HBoxContainer.new()
+	box.add_child(row)
+	var save := Button.new()
+	save.text = "write to the book   (F5)"
+	save.pressed.connect(_page_save)
+	row.add_child(save)
+	var close := Button.new()
+	close.text = "close   (Esc)"
+	close.pressed.connect(_page_close)
+	row.add_child(close)
+	_page_status = Label.new()
+	_page_status.text = ""
+	row.add_child(_page_status)
+	add_child(_page_ui)
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	_page_line.grab_focus()
+
+
+## Write the line and its field note back into the pearl's page. The line is
+## CREATED when the page was blank, so a field with no sentence can be given one
+## from inside the museum.
+func _page_save() -> void:
+	if _page_ui == null:
+		return
+	var chapter := String(_page_ctx.get("chapter", ""))
+	var pearl := String(_page_ctx.get("pearl", ""))
+	var token := String(_page_ctx.get("token", ""))
+	var path: String = _book_dir + "/%s.json" % chapter
+	if not FileAccess.file_exists(path):
+		_page_say("no book page for %s" % chapter)
+		return
+	var doc_v: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+	if not (doc_v is Dictionary):
+		_page_say("the book did not parse")
+		return
+	var doc: Dictionary = doc_v
+	var pl: Dictionary = _page_pearl_row(doc, pearl)
+	if pl.is_empty():
+		_page_say("that pearl is not in the %s book" % chapter)
+		return
+	var lines: Array = pl.get("lines", [])
+	var hit: Dictionary = {}
+	for lv in lines:
+		if String((lv as Dictionary).get("token", "")) == token:
+			hit = lv
+			break
+	var text_now: String = _page_line.text.strip_edges()
+	var note_now: String = _page_note.text.strip_edges()
+	if hit.is_empty():
+		hit = {"token": token, "text": text_now, "by": "hand"}
+		lines.append(hit)
+	else:
+		hit["text"] = text_now
+		hit["by"] = "hand"          # edited standing in front of it
+	if note_now != "":
+		hit["note"] = note_now
+	else:
+		hit.erase("note")
+	pl["lines"] = lines
+	# the live session may hold the file; the book is small, the retry is cheap
+	var wrote := false
+	for _try in range(20):
+		var f := FileAccess.open(path, FileAccess.WRITE)
+		if f != null:
+			f.store_string(JSON.stringify(doc, " ") + "\n")
+			f.close()
+			wrote = true
+			break
+	if not wrote:
+		_page_say("the book would not open for writing")
+		return
+	_page_say("written - %d characters, %d of notes" % [text_now.length(), note_now.length()])
+	# the wall follows the book: repaint this showing's sentence in place
+	for sv in _segments:
+		var sd: Dictionary = sv
+		var sn: Node3D = _node_or_null(sd.get("node"))
+		if sn == null or not sn.has_meta("em_pearl") or String(sn.get_meta("em_pearl")) != pearl:
+			continue
+		for n in sn.get_children():
+			if n is Label3D and n.has_meta("em_speak") and int(n.get_meta("em_speak")) == int(_page_ctx.get("si", -1)):
+				(n as Label3D).text = text_now
+				break
+		break
+
+
+func _page_say(msg: String) -> void:
+	if _page_status != null and is_instance_valid(_page_status):
+		_page_status.text = "   " + msg
+	print("[em-page] " + msg)
+
+
+func _page_close() -> void:
+	if _page_ui != null and is_instance_valid(_page_ui):
+		_page_ui.queue_free()
+	_page_ui = null
+	_page_line = null
+	_page_note = null
+	_page_status = null
+
+
 ## ONE WEDGE, ONE PLACER. The walkableprism (commons/scenes/mapobjects/
 ## walkableprism.tscn) is a PrismMesh 2 x 1 x 1 with a concave collider and NO
 ## script — no autoload, no player detection, no layer gate — which is why it is
@@ -5510,7 +5730,12 @@ func _build_segment() -> void:
 	# that owns the building): re-key every record stamped under the early
 	# meta so rulings are keyed by the chapter the deal ACTUALLY used, which
 	# is what the next build will resolve again. One truth, not two.
-	if seg_seq != next_seq:
+	# NEVER RE-KEY TO NOTHING (2026-08-24). A map-authored hall is built by the
+	# transplant, whose return carries no "sequence" — so seg_seq was "" for
+	# every packed hall and this line ERASED the chapter meta set above. The
+	# doll editor's book mason and the page editor both read that meta, so both
+	# answered "no book for " on exactly the halls the book is written about.
+	if seg_seq != "" and seg_seq != next_seq:
 		seg.set_meta("em_chapter", seg_seq)
 		for r_v in _edit_records:
 			var rr: Dictionary = r_v
@@ -5829,7 +6054,11 @@ func _build_segment() -> void:
 	# questions and a single total hides all of them: an artifact is the
 	# curriculum, a plinth is whether you can SEE it, a prop is whether the wall
 	# is a wall, a guest is whether the pool is wider than the spine.
-	seg.set_meta("em_chapter", seg_seq)
+	# the SECOND re-key, same trap as the first: a transplanted hall deals no
+	# sequence, so this wrote "" over the chapter every packed hall was built
+	# under. Guarded (2026-08-24) — the book's own halls kept no chapter name.
+	if seg_seq != "":
+		seg.set_meta("em_chapter", seg_seq)
 	# THE GATE, on the opening segment only: the vestibule becomes its own room
 	# A HALL MAY REFUSE ITS GATE (2026-08-24, Palle: "remove the sliding door
 	# from the array hall"). map_info.museum.gate = false, carried on the plan
@@ -12422,6 +12651,22 @@ func _catch_if_fallen() -> void:
 
 
 func _input(event: InputEvent) -> void:
+	# THE PAGE is modal while it is open: the museum's keys stay off, so typing
+	# a field note cannot toggle the doll house or walk the visitor away from
+	# the wall they are writing about. Esc closes, F5 writes.
+	if _page_ui != null and is_instance_valid(_page_ui):
+		if event is InputEventKey and (event as InputEventKey).pressed and not (event as InputEventKey).echo:
+			var pkc := (event as InputEventKey).keycode
+			if pkc == KEY_ESCAPE:
+				_page_close()
+				get_viewport().set_input_as_handled()
+				return
+			if pkc == KEY_F5:
+				_page_save()
+				get_viewport().set_input_as_handled()
+				return
+		if event is InputEventKey or event is InputEventMouseButton:
+			return          # the panel's own Controls take it from here
 	# THE SPINE STRIP is modal: while it is open the museum's hands stay off
 	# the keys AND the mouse (a click on the list must not walk the doll on
 	# the floor underneath, and typing a poem must not toggle the house).
@@ -12922,6 +13167,13 @@ func _input(event: InputEvent) -> void:
 					_edit_gizmo_cancel()
 					return
 				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED if emb.pressed else Input.MOUSE_MODE_VISIBLE
+				return
+	# THE PAGE OPENS ON A DOUBLE TAP. Showing records are collected in both
+	# modes, so this works while simply walking - no editor to arm first.
+	if not _vr and event is InputEventMouseButton:
+		var pmb := event as InputEventMouseButton
+		if pmb.pressed and pmb.button_index == MOUSE_BUTTON_LEFT and pmb.double_click:
+			if _page_open_at(pmb.position):
 				return
 	# desktop: click the scanner to open the threshold door
 	if event is InputEventMouseButton and (event as InputEventMouseButton).pressed \
@@ -13545,10 +13797,23 @@ func _speak_for(chapter: String, pearl: String) -> Dictionary:
 					continue
 				out["chapter_speak"] = String((t as Dictionary).get("speak", ""))
 				out["chapter_speak_by"] = String((t as Dictionary).get("speak_by", "hand"))
+				# THE BOOK KEYS ITS PEARLS BY ITS OWN SHORT NAME (point, lines,
+				# trace) while a MAP-AUTHORED hall is named for its map (point
+				# one, point lines, point trace). Since the halls became
+				# map-authored, no book line reached any of their walls — every
+				# wall work in primitives and transformation hung EMPTY, and the
+				# lines were sitting in the trunk the whole time (11, 19, 2, 3
+				# of them on the first four pearls alone). Both sides carry the
+				# MAP, and an authored pearl name IS the map lowercased with its
+				# underscores opened, so that is the bridge. The book's own name
+				# still matches first; nothing that resolved before moves.
 				for p in (t as Dictionary).get("pearls", []):
-					if String((p as Dictionary).get("pearl", "")) == pearl:
-						out["first"] = int((p as Dictionary).get("index", 0)) == 0
-					if String((p as Dictionary).get("pearl", "")) == pearl:
+					var pd: Dictionary = p
+					var by_map: String = String(pd.get("map", "")).replace("_", " ").to_lower()
+					var same: bool = String(pd.get("pearl", "")) == pearl or (by_map != "" and by_map == pearl)
+					if same:
+						out["first"] = int(pd.get("index", 0)) == 0
+					if same:
 						out["speak"] = String((p as Dictionary).get("speak", ""))
 						out["speak_by"] = String((p as Dictionary).get("speak_by", "hand"))
 						out["foyer"] = (p as Dictionary).get("foyer", []) if (p as Dictionary).get("foyer") is Array else []
