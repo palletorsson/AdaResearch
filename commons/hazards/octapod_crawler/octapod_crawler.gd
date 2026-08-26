@@ -85,7 +85,20 @@ enum State {
 # are hidden for as long as the default guise is intact, so a leg axis swept against the
 # default fixture returns four identical photographs of an egg, and gait is time-domain
 # besides. See the registry note.
-@export_enum("pod", "stone", "fruit", "husk", "bare") var guise: String = "pod"
+@export_enum("pod", "stone", "fruit", "husk", "bare", "sphere") var guise: String = "pod"
+## THE DARK SPHERE IS THE EGG (2026-08-24, Palle: "the crab should hatch from the
+## dark sphere. It is a lingering object from the start. Like the eggs in Aliens.
+## But they look nice in the museum. It is only later we realize they were there
+## for the potential of algorithmic critters"). guise "sphere" does not MODEL a
+## lookalike — it instances the real res://commons/artifacts/dark_sphere scene as
+## the shell, so a dormant crab is the same object as the 300+ decorative spheres
+## standing across the corpus: same material work, same pulse, same floor halo,
+## and the same presence/body DNA (passed through with #presence: / #body:).
+## Nothing distinguishes an egg from an ornament until it opens.
+const DARK_SPHERE_SCENE := "res://commons/artifacts/dark_sphere/dark_sphere.tscn"
+## the dark_sphere lineage this egg wears; empty = the artifact's own defaults
+@export var sphere_presence: String = ""
+@export var sphere_body: String = ""
 @export var pod_seed: int = 0  ## 0 = the shipped randomized wart scatter; non-zero pins it for a still
 
 @export_group("Dormant")
@@ -134,6 +147,7 @@ var _egg_root: Node3D = null       # Container for egg-plant meshes
 var _egg_mesh: MeshInstance3D = null  # Main bulbous pod
 var _egg_material: StandardMaterial3D = null
 var _leaf_meshes: Array[MeshInstance3D] = []
+var _sphere_shell: Node3D = null   # the instanced dark_sphere, when guise == "sphere"
 var _leaf_material: StandardMaterial3D = null
 var _hatch_progress: float = 0.0   # 0→1 during HATCHING
 var _octapod_built: bool = false   # guards the guise rebuild — _ready has run once
@@ -408,6 +422,11 @@ func _process_hatching(delta: float) -> void:
 		if _egg_mesh:
 			var egg_scale: float = 1.0 - emerge * 0.6
 			_egg_mesh.scale = Vector3(egg_scale, egg_scale, egg_scale)
+		# the instanced sphere is not ours to fade — we do not own its materials,
+		# and dark_sphere drives its own emission every frame. It collapses instead.
+		if _sphere_shell != null and is_instance_valid(_sphere_shell):
+			var sh: float = maxf(0.02, 1.0 - emerge)
+			_sphere_shell.scale = Vector3(sh, sh, sh)
 		# Fade in leaves peeling away
 		for leaf in _leaf_meshes:
 			leaf.rotation.x = -emerge * PI * 0.4
@@ -549,6 +568,22 @@ const GUISE_HUSK: Dictionary = {
 }
 
 
+## THE SPHERE guise builds no pod, no leaves and no bumps — the instanced artifact
+## is the whole disguise. The table exists so every _guise_trait caller still has an
+## answer; the pod/leaf/bump values are never read on this branch.
+const GUISE_SPHERE: Dictionary = {
+	"albedo": Color(0.10, 0.08, 0.14),
+	"roughness": 0.25,
+	"glow": true,
+	"pod_scale": Vector3(1.0, 1.0, 1.0),
+	"leaf_count": 0,
+	"leaf_tilt": 0.0,
+	"leaf_size": 1.0,
+	"bump_count": 0,
+	"bump_scale": 1.0,
+}
+
+
 ## What the dormant creature presents itself AS. guise == "pod" returns the shipped
 ## literal for every key, so the default build is the pre-promotion build.
 func _guise_trait(key: String) -> Variant:
@@ -560,6 +595,8 @@ func _guise_trait(key: String) -> Variant:
 			traits = GUISE_FRUIT
 		"husk":
 			traits = GUISE_HUSK
+		"sphere":
+			traits = GUISE_SPHERE
 	if traits.has(key):
 		return traits[key]
 	return GUISE_POD.get(key, null)
@@ -573,6 +610,12 @@ func _build_egg_plant() -> void:
 	_egg_root = Node3D.new()
 	_egg_root.name = "EggPlantRoot"
 	add_child(_egg_root)
+
+	# THE DARK SPHERE IS THE EGG: instance the artifact itself rather than
+	# imitating it, so the disguise cannot drift from the thing it hides among.
+	if guise == "sphere":
+		_build_sphere_shell()
+		return
 
 	# Egg-plant material: muted green-purple organic, like a real eggplant/seed pod
 	_egg_material = StandardMaterial3D.new()
@@ -677,6 +720,34 @@ func _build_egg_plant() -> void:
 # ═══════════════════════════════════════════════════════════════════════════
 # IK LEGS (octapod_ik.tscn — full scene, beast_demo pattern)
 # ═══════════════════════════════════════════════════════════════════════════
+
+## The instanced dark_sphere shell. Its own config metas are set BEFORE the tree
+## (the artifact reads them in _ready, like every configured artifact in the corpus)
+## and apply_grid_config is called after, matching GridInteractablesComponent's own
+## handoff, so a lineage passed as #presence: / #body: reaches the shell either way.
+func _build_sphere_shell() -> void:
+	if not ResourceLoader.exists(DARK_SPHERE_SCENE):
+		push_warning("octapod_crawler: guise sphere but no dark_sphere scene — standing bare")
+		return
+	var ps: PackedScene = load(DARK_SPHERE_SCENE) as PackedScene
+	if ps == null:
+		return
+	var shell: Node3D = ps.instantiate() as Node3D
+	if shell == null:
+		return
+	shell.name = "DarkSphereShell"
+	var cfg: Dictionary = {}
+	if sphere_presence != "":
+		cfg["presence"] = sphere_presence
+	if sphere_body != "":
+		cfg["body"] = sphere_body
+	for k in cfg:
+		shell.set_meta("config_" + String(k), cfg[k])
+	_egg_root.add_child(shell)
+	if not cfg.is_empty() and shell.has_method("apply_grid_config"):
+		shell.call("apply_grid_config", cfg)
+	_sphere_shell = shell
+
 
 func _build_legs() -> void:
 	## Instance the complete IK rig from octapod_ik.tscn.
@@ -955,6 +1026,10 @@ func _try_damage_target(target: Object, damage: float) -> bool:
 		if not _is_player_node(node):
 			return false
 
+	# the museum walker is hunted but not hurt — see _target_takes_damage
+	if not _target_takes_damage(target):
+		return false
+
 	# Try damage methods
 	if target.has_method("take_damage"):
 		target.take_damage(damage)
@@ -1044,18 +1119,31 @@ func _find_player() -> void:
 		_player_node = null
 		return
 
+	# NO EARLY RETURN ON A NULL current_scene (2026-08-24). The GROUP lookups
+	# below never needed a scene root, but this guard used to skip them along
+	# with the find_child calls — so a museum, a probe or any harness that adds
+	# the world by hand instead of through change_scene left every creature
+	# permanently blind. scene_root is now optional and only the name searches
+	# depend on it.
 	var scene_root: Node = tree.current_scene
-	if scene_root == null:
-		_player_node = null
-		return
 
-	# Same detection pattern as ArmadilloDroideka
-	var candidates: Array = [
-		tree.get_first_node_in_group("player"),
-		scene_root.find_child("XROrigin3D", true, false),
-		scene_root.find_child("Player", true, false),
-		scene_root.find_child("PlayerBody", true, false),
-	]
+	# Same detection pattern as ArmadilloDroideka — the four shipped candidates
+	# come FIRST, so the VR and grid lanes resolve exactly as before.
+	#
+	# THE MUSEUM LANE, APPENDED (2026-08-24). find_child is an EXACT-name match,
+	# so "DesktopPlayer" misses, and the endless museum's walker is named
+	# "Walker" in group em_walker ONLY — deliberately kept out of player_body so
+	# force fields and drag corridors would not grab it. That one omission is
+	# why every creature in this repo stands inert on the lane the museum runs
+	# on. Appended, so the museum walker becomes reachable without being made a
+	# player_body anywhere else.
+	var candidates: Array = [tree.get_first_node_in_group("player")]
+	if scene_root != null:
+		candidates.append(scene_root.find_child("XROrigin3D", true, false))
+		candidates.append(scene_root.find_child("Player", true, false))
+		candidates.append(scene_root.find_child("PlayerBody", true, false))
+	candidates.append(tree.get_first_node_in_group("player_body"))
+	candidates.append(tree.get_first_node_in_group("em_walker"))
 
 	_player_node = null
 	for candidate in candidates:
@@ -1071,11 +1159,23 @@ func _get_distance_to_player() -> float:
 func _is_player_node(node: Node) -> bool:
 	if node is Node3D:
 		var n3d: Node3D = node as Node3D
-		if n3d.is_in_group("player") or n3d.is_in_group("player_body"):
+		if n3d.is_in_group("player") or n3d.is_in_group("player_body") or n3d.is_in_group("em_walker"):
 			return true
 		var lower: String = n3d.name.to_lower()
-		return lower.contains("player") or lower.contains("xrorigin")
+		return lower.contains("player") or lower.contains("xrorigin") or lower.contains("walker")
 	return false
+
+
+## THE MUSEUM WALKER IS NOT A PLAYER BODY (2026-08-24, measured). Damage routes
+## through GameManager.apply_health_damage, which calls DeathEffect.hurt, which
+## REPOSITIONS the walker to the map's spawn point half a second later. The
+## endless museum has no such spawn: one bite would fling the visitor to the
+## origin of a 4.8 km building, or to nowhere. So the crab hatches, hunts,
+## leaps and lands on the museum lane and deals NO health damage there, until
+## the museum owns a hurt of its own. It bites for real in VR and on the grid,
+## where the spawn point exists and the death path is the design.
+func _target_takes_damage(node: Node) -> bool:
+	return not (node is Node3D and (node as Node3D).is_in_group("em_walker"))
 
 func _face_direction(direction: Vector3, delta: float) -> void:
 	if direction.length_squared() < 0.0001:
@@ -1124,13 +1224,19 @@ func configure(config_data: Dictionary) -> void:
 		hatch_radius = _cfg_float(config_data["hatch_radius"], hatch_radius)
 	if config_data.has("hatch_time"):
 		hatch_time = _cfg_float(config_data["hatch_time"], hatch_time)
+	# the dark_sphere lineage this egg wears (#presence: / #body:) — read before
+	# the guise key below, so a token that sets both builds the shell already dressed
+	if config_data.has("presence"):
+		sphere_presence = str(config_data["presence"]).strip_edges().to_lower()
+	if config_data.has("body"):
+		sphere_body = str(config_data["body"]).strip_edges().to_lower()
 	if config_data.has("pod_seed"):
 		var seed_text: String = str(config_data["pod_seed"]).strip_edges()
 		if seed_text.is_valid_int():
 			pod_seed = int(seed_text)
 	if config_data.has("guise"):
 		var want_guise: String = str(config_data["guise"]).strip_edges().to_lower()
-		if want_guise in ["pod", "stone", "fruit", "husk", "bare"] and want_guise != guise:
+		if want_guise in ["pod", "stone", "fruit", "husk", "bare", "sphere"] and want_guise != guise:
 			guise = want_guise
 			# Guarded: only after _ready has built once, and only because the value
 			# changed. A map that passes no guise key never reaches this line, so the
@@ -1149,6 +1255,7 @@ func _rebuild_guise() -> void:
 	_egg_material = null
 	_leaf_material = null
 	_leaf_meshes.clear()
+	_sphere_shell = null   # freed with _egg_root above; the reference must not dangle
 
 	_build_egg_plant()
 
