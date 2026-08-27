@@ -6,6 +6,10 @@
 > Follows [THE_DOUBLE_THREAD.md](THE_DOUBLE_THREAD.md). That one found the project is a
 > curriculum that becomes critical at depth. This one asks what it becomes critical
 > *about*, and the answer is: **limits, and the confusion of one kind for another.**
+>
+> Written up visually as [/blog/2026-08-27-two-thousand-silent-walls](
+> http://localhost:3003/blog/2026-08-27-two-thousand-silent-walls) — five diagrams, including the
+> field of 2,155 dots. Numbers here are re-derived by `python tools/scan_limits.py`.
 
 `lambda_edge` is already a phase name on the spine. "The edge" is not a metaphor imported
 here — it is a load-bearing term in the project's own framework. So this starts by
