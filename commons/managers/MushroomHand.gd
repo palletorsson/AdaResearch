@@ -32,6 +32,22 @@ const DESKTOP_KEYS := [KEY_F]
 @export var spawn_ahead: float = 0.32     ## metres in front of the eye or the hand
 @export var show_desktop_count: bool = true
 
+@export_group("VR hand")
+## SOMETHING IN THE HAND (2026-08-27, Palle: "In VR if I have a mushroom let me
+## hold one in the hand and a number how many"). A mushroom sits at the muzzle,
+## pointing the way it will go, with the count beside it — so the aim is
+## VISIBLE. That matters more than it sounds: a throw that goes somewhere
+## unexpected is impossible to debug from inside a headset, and a held object
+## that points where the throw goes turns a mystery into a glance.
+@export var show_vr_hand: bool = true
+@export var vr_hand_scale: float = 0.55
+## WHICH WAY IS FORWARD. "hand" is the controller's own -Z, which is what the
+## laser pointer and the gravity gun both use in this project. If a throw still
+## goes behind you on your runtime, "flip" is the same axis reversed and "head"
+## throws where you are looking instead of where you point.
+@export_enum("hand", "flip", "head") var vr_aim: String = "hand"
+@export var muzzle: float = 0.5           ## metres of flight before it may land
+
 var _cool: float = 0.0
 var _wired: Array = []          # controllers already connected
 var _hud: CanvasLayer = null
@@ -39,6 +55,7 @@ var _hud_label: Label = null
 var _scan: float = 0.0
 var _key_down: bool = false
 var _mmb_down: bool = false
+var _hands: Array = []          # the holders parented to each controller
 
 
 func _ready() -> void:
@@ -126,8 +143,21 @@ func fire_from_view() -> bool:
 func fire_from_hand(controller: Node3D) -> bool:
 	if controller == null or not is_instance_valid(controller):
 		return false
-	var fwd: Vector3 = -controller.global_transform.basis.z
+	var fwd: Vector3 = _aim_of(controller)
 	return fire(controller.global_position + fwd * spawn_ahead, fwd)
+
+
+## the direction a hand throws, by whichever rule is set
+func _aim_of(controller: Node3D) -> Vector3:
+	match vr_aim:
+		"flip":
+			return controller.global_transform.basis.z
+		"head":
+			var vp := get_viewport()
+			var cam: Camera3D = vp.get_camera_3d() if vp != null else null
+			if cam != null:
+				return -cam.global_transform.basis.z
+	return -controller.global_transform.basis.z
 
 
 func fire(from: Vector3, dir: Vector3) -> bool:
@@ -149,7 +179,7 @@ func fire(from: Vector3, dir: Vector3) -> bool:
 	scene.add_child(m)
 	# a throw is an arc, so the aim carries a little lift
 	var aim: Vector3 = (dir.normalized() + Vector3.UP * throw_lift).normalized()
-	m.call("launch", from, aim, throw_speed)
+	m.call("launch", from, aim, throw_speed, muzzle)
 	_cool = cooldown
 	return true
 
@@ -172,6 +202,8 @@ func _wire_controllers() -> void:
 			continue
 		(n as Node).connect("button_pressed", Callable(self, "_on_vr_button").bind(n))
 		_wired.append(n)
+		if show_vr_hand:
+			_build_vr_hand(n as Node3D)
 		print("[mushroom-hand] wired %s — trigger or A/X throws" % (n as Node).name)
 
 
@@ -192,6 +224,61 @@ func _hand_is_full(controller: Node) -> bool:
 		if held != null and is_instance_valid(held):
 			return true
 	return false
+
+
+# ── the hand, in VR ─────────────────────────────────────────────────────────
+
+## One mushroom held at the muzzle, pointing where a throw will go, with the
+## count beside it. Built as a CHILD OF THE CONTROLLER so it needs no per-frame
+## work at all — the hand carries it, and the aim it shows is the aim that fires
+## because both come from the same transform.
+func _build_vr_hand(controller: Node3D) -> void:
+	if controller.get_node_or_null("MushroomInHand") != null:
+		return
+	var holder := Node3D.new()
+	holder.name = "MushroomInHand"
+	controller.add_child(holder)
+	# at the muzzle, on the throwing axis — flip and head aims move it too, so
+	# what you see is always what you get
+	var fwd := Vector3(0, 0, -1) if vr_aim != "flip" else Vector3(0, 0, 1)
+	holder.position = fwd * spawn_ahead + Vector3(0, -0.03, 0)
+
+	if ResourceLoader.exists(MUSHROOM):
+		var body: Node3D = (load(MUSHROOM) as PackedScene).instantiate() as Node3D
+		body.name = "Held"
+		# it stays in its HELD state: no arc, no floor, never bait
+		holder.add_child(body)
+		body.scale = Vector3.ONE * vr_hand_scale
+
+	var l := Label3D.new()
+	l.name = "Count"
+	l.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	l.no_depth_test = true
+	l.font_size = 96
+	l.pixel_size = 0.0012
+	l.modulate = Color(0.99, 0.80, 0.86)
+	l.outline_size = 26
+	l.outline_modulate = Color(0.10, 0.06, 0.09, 0.85)
+	l.position = Vector3(0.0, 0.085, 0.0)
+	holder.add_child(l)
+	_hands.append(holder)
+	_refresh_vr_hands()
+
+
+func _refresh_vr_hands() -> void:
+	var gm := get_node_or_null("/root/GameManager")
+	var n: int = int(gm.get("mushrooms")) if gm != null else 0
+	for h in _hands:
+		if not is_instance_valid(h):
+			continue
+		var holder: Node3D = h
+		var l := holder.get_node_or_null("Count") as Label3D
+		if l != null:
+			l.text = str(n)
+		var body := holder.get_node_or_null("Held") as Node3D
+		if body != null:
+			# an empty hand holds nothing, and the number says zero
+			body.visible = n > 0
 
 
 # ── the count, on the desktop ───────────────────────────────────────────────
@@ -219,6 +306,7 @@ func _build_hud() -> void:
 
 
 func _on_count(count: int, maximum: int) -> void:
+	_refresh_vr_hands()
 	if _hud_label == null or not is_instance_valid(_hud_label):
 		return
 	_hud_label.text = "mushrooms  %s%s   [F]" % [

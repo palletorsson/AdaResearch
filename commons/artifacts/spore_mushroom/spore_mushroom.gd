@@ -50,6 +50,7 @@ var _state: int = State.HELD
 var _vel: Vector3 = Vector3.ZERO
 var _life: float = 0.0
 var _bob: float = 0.0
+var _muzzle: float = 0.0     # metres of flight before it may land
 var _rest_y: float = 0.0
 var _rng := RandomNumberGenerator.new()
 
@@ -68,12 +69,16 @@ func _ready() -> void:
 
 
 ## Fired from a hand. `dir` need not be normalised; `speed` is metres per second.
-func launch(from: Vector3, dir: Vector3, speed: float = 5.5) -> void:
+## `muzzle` is how far it flies before it is allowed to land on anything — the
+## first half metre out of a hand is the player's own arm, their controller and
+## whatever they are standing against.
+func launch(from: Vector3, dir: Vector3, speed: float = 5.5, muzzle: float = 0.5) -> void:
 	global_position = from
 	var d: Vector3 = dir.normalized() if dir.length() > 0.001 else Vector3.FORWARD
 	_vel = d * speed
 	_state = State.FLYING
 	_life = 0.0
+	_muzzle = maxf(0.0, muzzle)
 
 
 ## Called by whatever eats it. Returns the number of degrees it is worth, which
@@ -98,15 +103,26 @@ func is_bait() -> bool:
 
 func _process(delta: float) -> void:
 	if _state == State.FLYING:
-		_life += delta
-		_vel.y -= gravity * delta
-		var step: Vector3 = _vel * delta
+		# A FRAME HITCH MUST NOT TELEPORT IT (2026-08-27, Palle: "it seems that I
+		# am throwing backwards and the mushroom ends up on the wall"). The step
+		# is velocity times delta and the cast is only as long as the step, so a
+		# 0.3 s hitch on the frame after instantiation — a new scene, a shader,
+		# anything — makes one step nearly two metres and the mushroom plants on
+		# the first wall along that line instead of flying. Capped at a frame of
+		# 30 fps, it can only ever advance a hand's width at a time.
+		var dt: float = minf(delta, 0.033)
+		_life += dt
+		_vel.y -= gravity * dt
+		var step: Vector3 = _vel * dt
 		var hit := _cast(global_position, global_position + step)
+		if _muzzle > 0.0:
+			_muzzle -= step.length()
+			hit = {}                      # nothing lands in the first half metre
 		if hit.is_empty():
 			global_position += step
 			# it tumbles while it flies
-			rotate_x(delta * 5.2)
-			rotate_z(delta * 3.1)
+			rotate_x(dt * 5.2)
+			rotate_z(dt * 3.1)
 		else:
 			_plant(hit["position"] as Vector3)
 		if _life > 8.0:                      # never fall forever
