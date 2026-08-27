@@ -88,6 +88,47 @@ def authored_chapters():
             if not k.startswith("_") and isinstance(v, list)}
 
 
+def planned_chapters():
+    """sequence -> the maps the MUSEUM deals it, in walk order.
+
+    2026-08-27, Palle: "/wall-map must have the same data as /long-museum as all
+    other instance in the web editing like /wall-texts."
+
+    They did not, and the gap was not small. This strip stood 208 halls of which
+    155 were Ribbon_* — placeholder rooms cut to fit a sequence's map count. The
+    editors (/wall-map, /wall-texts, /lines) stand the 196 halls of
+    ada_run/em_plan.json, which is what the museum deals from the trunk's pearls.
+    Only 53 halls were common to both. So a hall you scrolled past in the strip
+    usually had no row in any editor, and a hall you wrote a wall text for was
+    usually not in the strip.
+
+    The plan is the one to follow, for a reason this file already states four
+    hundred lines down: `grep -c Ribbon endless_museum.gd` is 0. The engine has
+    never heard of a ribbon hall, so those 155 were rooms nothing can ever build,
+    while all 196 planned maps exist on disk and every one is addressable in the
+    book.
+
+    THIS DOES NOT MAKE THE STRIP BUILT. An unauthored chapter still builds from
+    one of 26 templates rather than from its map, so its length here remains a
+    proposal and `built` still says so per chapter. What changes is WHICH ROOMS
+    are proposed: the ones the museum names, which you can open in an editor and
+    write a wall text for, instead of stand-ins nobody else has heard of."""
+    plan = os.path.join(ROOT, "ada_run", "em_plan.json")
+    if not os.path.exists(plan):
+        return {}
+    try:
+        with open(plan, encoding="utf-8") as fh:
+            rows = json.load(fh).get("plans", [])
+    except Exception:
+        return {}
+    out = {}
+    for r in rows:
+        seq, m = r.get("sequence"), r.get("map")
+        if seq and m:
+            out.setdefault(seq, []).append(m)
+    return out
+
+
 def ribbon_index():
     """sequence -> its Ribbon halls, sorted by name.
 
@@ -317,22 +358,28 @@ def read_hall(name, chapter, order, source, probs):
 def build():
     probs = Problems()
     authored = authored_chapters()
+    planned = planned_chapters()
     ribbons = ribbon_index()
 
     halls = []
     for order, seq in spine_order():
         if seq in authored:
             names = authored[seq]
+        elif planned.get(seq):
+            # THE MUSEUM'S OWN DEAL, so the strip and the editors name the same
+            # rooms. See planned_chapters().
+            names = planned[seq]
         else:
             names = ribbons.get(seq, [])
             if not names:
-                print("ERROR: %s is dealt and has no Ribbon halls on disk - the "
-                      "chapter is empty" % seq, file=sys.stderr)
+                print("ERROR: %s is dealt, has no plan row and no Ribbon halls "
+                      "on disk - the chapter is empty" % seq, file=sys.stderr)
         for n in names:
             # A hall inside an authored chapter can still be a ribbon hall:
             # color, change and forces each end with theirs. The source says
             # which, and the chapter's source below says both.
-            src = "ribbon" if n.startswith("Ribbon_") else "authored"
+            src = ("ribbon" if n.startswith("Ribbon_")
+                   else "authored" if seq in authored else "plan")
             seg = read_hall(n, seq, order, src, probs)
             if seg is not None:
                 halls.append(seg)
@@ -377,8 +424,7 @@ def build():
             continue
         hs = [s for s in own if s["kind"] == "hall"]
         srcs = {s["source"] for s in hs}
-        source = "authored+ribbon" if len(srcs) > 1 else ("ribbon" if "ribbon" in srcs
-                                                          else "authored")
+        source = "+".join(sorted(srcs)) if len(srcs) > 1 else next(iter(srcs), "authored")
         # BUILT OR PROPOSED, AND THE PAGE MUST BE ABLE TO SAY WHICH.
         # endless_museum.gd builds a plan row from its own map ONLY when the
         # row says authored == "map" (:4858). In ada_run/em_plan.json that is
@@ -554,6 +600,23 @@ def main():
         return 0
 
     summary(doc)
+    # THE DRIFT, NAMED. The strip stands the museum's own deal for every chapter
+    # the hand has not authored, so the two agree by construction there. Where
+    # they can still part is an AUTHORED chapter: map_authored.json is a hand
+    # file and the plan is dealt from the trunk's pearls, so a hall can be
+    # authored and never dealt. That hall appears here and in no editor, which
+    # is exactly the confusion this alignment was meant to end - so it is
+    # printed rather than quietly carried.
+    planned_names = set()
+    for _seq, _maps in planned_chapters().items():
+        planned_names.update(_maps)
+    if planned_names:
+        orphans = [s2["name"] for s2 in doc["segments"]
+                   if s2["kind"] == "hall" and s2["name"] not in planned_names]
+        if orphans:
+            print("\n  %d hall(s) authored but NOT dealt by the museum - they stand "
+                  "in this strip and in no editor: %s"
+                  % (len(orphans), ", ".join(orphans)))
     if probs.any():
         print("\n  %d hall(s) missing from disk, %d with layers that disagree, "
               "%d with ragged rows - see the errors above"
