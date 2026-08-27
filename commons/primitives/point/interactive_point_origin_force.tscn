@@ -9,6 +9,7 @@
 radius = 0.05
 
 [node name="InteractivePointOriginForce" instance=ExtResource("1_base")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 freeze = true
 script = ExtResource("2_script")
 glow_color = Color(1, 0.55, 0.1, 1)
