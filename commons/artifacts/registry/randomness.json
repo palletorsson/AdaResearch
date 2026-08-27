@@ -15469,6 +15469,25 @@
 				1,
 				1
 			]
+		},
+		"replay_casino": {
+			"name": "Replay Casino",
+			"class_name": "ReplayCasino",
+			"scene": "res://commons/artifacts/replay_casino/replay_casino.tscn",
+			"description": "The randomness SUPER OBJECT: a casino where the house always replays - twin same-seed dice piles agreeing beside a seed+1 stranger, a Galton bell computed from 200 seeded balls, a random-walk of footprints, darts announcing the pi they measured, a Markov weather wheel, urns wearing their entropy in bits, white vs blue star ceilings, a 10 PRINT runner, and a genome that becomes a body. Every placard number computed from the draws it describes. 2026-08-27.",
+			"category": "randomness",
+			"tags": [
+				"randomness",
+				"super",
+				"synthesis",
+				"seed",
+				"monte_carlo",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 4,
+				"clearance_m": 0.6
+			}
 		}
 	}
 }
