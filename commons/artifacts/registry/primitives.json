@@ -25915,6 +25915,111 @@
 				"footprint_cells": 3,
 				"clearance_m": 0.6
 			}
+		},
+		"the_invisible_point": {
+			"name": "The Invisible Point",
+			"class_name": "TheInvisiblePoint",
+			"scene": "res://commons/artifacts/the_invisible_point/the_invisible_point.tscn",
+			"description": "A vitrine exhibiting NOTHING: four brass arrows and two crossing lasers mark a Vector3 the engine cannot draw; the stand-in sphere blinks out and the address remains. Primitives taxonomy rung 1, 2026-08-27.",
+			"category": "primitives",
+			"tags": [
+				"primitives",
+				"point",
+				"surreal",
+				"hero"
+			],
+			"spatial_needs": {
+				"footprint_cells": 2,
+				"clearance_m": 0.6
+			}
+		},
+		"first_shadow": {
+			"name": "First Shadow",
+			"class_name": "FirstShadow",
+			"scene": "res://commons/artifacts/first_shadow/first_shadow.tscn",
+			"description": "One hand-built triangle (three vertices, the smallest surface the engine accepts) casting the room's first real shadow, beside a line that casts none. Primitives taxonomy, Triangle rung, 2026-08-27.",
+			"category": "primitives",
+			"tags": [
+				"primitives",
+				"triangle",
+				"shadow",
+				"surreal",
+				"hero"
+			],
+			"spatial_needs": {
+				"footprint_cells": 2,
+				"clearance_m": 0.6
+			}
+		},
+		"seven_words_choir": {
+			"name": "Seven Words Choir",
+			"class_name": "SevenWordsChoir",
+			"scene": "res://commons/artifacts/seven_words_choir/seven_words_choir.tscn",
+			"description": "The engine's whole primitive vocabulary on choir risers - Plane, Box, Sphere, Cylinder, Capsule, Prism, Torus - breathing in turn. Seven words, infinite sentences. Primitives taxonomy, 2026-08-27.",
+			"category": "primitives",
+			"tags": [
+				"primitives",
+				"vocabulary",
+				"surreal",
+				"hero"
+			],
+			"spatial_needs": {
+				"footprint_cells": 3,
+				"clearance_m": 0.6
+			}
+		},
+		"backface_curtain": {
+			"name": "Backface Curtain",
+			"class_name": "BackfaceCurtain",
+			"scene": "res://commons/artifacts/backface_curtain/backface_curtain.tscn",
+			"description": "A theatre curtain sumptuous from the front and UNRENDERED from behind - one-sided faces, honest cull_back, floor arrows inviting the walk. Primitives taxonomy, normal rung, 2026-08-27.",
+			"category": "primitives",
+			"tags": [
+				"primitives",
+				"normal",
+				"backface",
+				"surreal",
+				"hero"
+			],
+			"spatial_needs": {
+				"footprint_cells": 3,
+				"clearance_m": 0.6
+			}
+		},
+		"budget_of_smoothness": {
+			"name": "Budget Of Smoothness",
+			"class_name": "BudgetOfSmoothness",
+			"scene": "res://commons/artifacts/budget_of_smoothness/budget_of_smoothness.tscn",
+			"description": "The same sphere at radial_segments 4, 8, 16, 64 with triangle invoices under each - smoothness as a purchase. Primitives taxonomy, budget rung, 2026-08-27.",
+			"category": "primitives",
+			"tags": [
+				"primitives",
+				"tessellation",
+				"surreal",
+				"hero"
+			],
+			"spatial_needs": {
+				"footprint_cells": 3,
+				"clearance_m": 0.6
+			}
+		},
+		"wireframe_confession": {
+			"name": "Wireframe Confession",
+			"class_name": "WireframeConfession",
+			"scene": "res://commons/artifacts/wireframe_confession/wireframe_confession.tscn",
+			"description": "A torus and its own arrays undressed: every triangle edge extracted at runtime and lit beside the solid. Everything is triangles. Primitives taxonomy, closing rung, 2026-08-27.",
+			"category": "primitives",
+			"tags": [
+				"primitives",
+				"wireframe",
+				"mesh",
+				"surreal",
+				"hero"
+			],
+			"spatial_needs": {
+				"footprint_cells": 2,
+				"clearance_m": 0.6
+			}
 		}
 	},
 	"registry_info": {
