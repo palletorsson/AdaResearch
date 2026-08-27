@@ -122,6 +122,13 @@ const RIG := "res://commons/hazards/octapod_crawler/csg_four_leg_walker.tscn"
 @export var graft_max: int = 5
 @export var bait_range: float = 16.0     ## how far it will notice a mushroom
 @export var feed_radius: float = 1.9     ## once rooted, what it can still reach
+## EATING TAKES TIME (2026-08-27, Palle: "Let the spider look for mushrooms,
+## eat, consume the mushrooms of 2 sec, loop, if no mushroom play is also
+## food"). It stands over the mushroom for two seconds and then it is gone.
+## Without the pause the whole loop is invisible: five mushrooms vanish in the
+## time it takes to walk between them and the visitor never sees an animal
+## FEEDING, only mushrooms disappearing.
+@export var feed_time: float = 2.0
 ## FEWER AND FATTER. The first tuning used a 0.62 step, 0.74 shrink and a
 ## 0.055 width, and five degrees of it came out as a pale flat comb — 243
 ## segments so thin and so short that the eye read one fan per leg instead of a
@@ -235,6 +242,8 @@ var _patrol_angle: float = 0.0
 var _patrol_t: float = 0.0
 var _rng := RandomNumberGenerator.new()
 var _degree: int = 0          # mushrooms eaten; 0 is an animal, 5 is a garden
+var _meal: Node3D = null      # the mushroom under it right now
+var _meal_t: float = 0.0      # seconds left of this meal
 var _rooted: bool = false     # the first mushroom ends the hunt, permanently
 var _sprouts: Array = []      # one MultiMeshInstance3D per leg
 var _bait: Node3D = null      # the mushroom it is walking to
@@ -768,7 +777,7 @@ func _nearest_bait() -> Node3D:
 	if tree == null:
 		return null
 	var best: Node3D = null
-	var best_d: float = bait_range if not _rooted else feed_radius
+	var best_d: float = bait_range
 	for n in tree.get_nodes_in_group("spider_bait"):
 		if not (n is Node3D) or not is_instance_valid(n):
 			continue
@@ -781,20 +790,38 @@ func _nearest_bait() -> Node3D:
 	return best
 
 
-## Eat it. The first mushroom is the metamorphosis; the rest are degrees.
-func _eat(m: Node3D) -> void:
-	if m == null or not is_instance_valid(m) or not m.has_method("consume"):
+## Stand over it and start feeding. Nothing is consumed yet — a mushroom being
+## eaten is still on the floor, and a visitor who is quick can walk over and
+## take it back out from under the animal.
+func _begin_meal(m: Node3D) -> void:
+	if m == null or not is_instance_valid(m):
 		return
+	_meal = m
+	_meal_t = feed_time
+	_lunge_t = 0.0
+
+
+## Two seconds later. THE ROOTING MOVED TO THE END: Palle's earlier ruling was
+## that a mushroom roots it, and the new one is that it eats, loops, and hunts
+## the visitor when there is nothing left — which cannot both be true of the
+## FIRST mushroom, because a rooted animal cannot walk to a second. So it eats
+## its way up the degrees on its feet and roots when it is full. A garden is
+## what a fed spider becomes, not what one mushroom makes.
+func _finish_meal() -> void:
+	var m: Node3D = _meal
+	_meal = null
+	_bait = null
+	if m == null or not is_instance_valid(m) or not m.has_method("consume"):
+		return                       # somebody picked it up while it fed
 	var got: int = int(m.call("consume", self))
 	if got <= 0:
 		return
-	_bait = null
-	if not _rooted:
-		_root()
 	_degree = mini(graft_max, _degree + got)
 	_grow(_degree)
+	if _degree >= graft_max:
+		_root()
 	print("[head_crab] ate a mushroom — degree %d of %d%s" % [
-		_degree, graft_max, " (rooted)" if _rooted else ""])
+		_degree, graft_max, " — rooted, it is a plant now" if _rooted else ""])
 
 
 ## IT STOPS HUNTING, PERMANENTLY. Not a mode it can leave: no path sets these
@@ -978,15 +1005,24 @@ func _process(delta: float) -> void:
 	var speed: float = patrol_speed
 	_bite_t = maxf(0.0, _bite_t - delta)
 
+	# ── A MEAL STOPS EVERYTHING ───────────────────────────────────────────
+	if _meal_t > 0.0:
+		_meal_t -= delta
+		_update_gait(delta)          # the legs keep their stance over the food
+		if _meal_t <= 0.0:
+			_finish_meal()
+		return
+
 	# ── the mushroom outranks the visitor ─────────────────────────────────
-	if eats_mushrooms:
+	if eats_mushrooms and not _rooted:
 		_bait = _nearest_bait()
 		if _bait != null:
 			var bd: Vector3 = _bait.global_position - global_position
 			bd.y = 0.0
-			if bd.length() <= (feed_radius if _rooted else bite_range * 1.6):
-				_eat(_bait)
-			elif not _rooted:
+			if bd.length() <= bite_range * 1.6:
+				_begin_meal(_bait)
+				return
+			else:
 				# break off the hunt and go for it, by whatever way round there is
 				var byaw: float = _path_yaw(_bait.global_position, delta)
 				if byaw == INF:

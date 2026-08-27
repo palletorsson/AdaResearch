@@ -8,7 +8,8 @@ extends SceneTree
 ##   a mushroom is FIRED and lands between them
 ##   the spider breaks off and goes for the mushroom instead — this is the
 ##     claim that matters, and it is a claim about PREFERENCE, not about range
-##   it eats: roots, stops biting, and grows degree 1
+##   it eats: two seconds of feeding, then degree 1 — and it does NOT root,
+##     because the rooting moved to the LAST degree when Palle asked for a loop
 ##   four more land within its reach and it takes them one at a time
 const CRAB := "res://commons/hazards/head_crab/head_crab.tscn"
 const MUSH := "res://commons/artifacts/spore_mushroom/spore_mushroom.tscn"
@@ -109,8 +110,10 @@ func _run() -> void:
 			ate = true
 			break
 	_say("  it ate after %.2f s: %s" % [t, str(ate)])
-	_say("  rooted %s   can_bite %s   degree %d"
-		% [str(c.get("_rooted")), str(c.get("can_bite")), int(c.get("_degree"))])
+	_say("  after the first: rooted %s (expected false), degree %d"
+		% [str(c.get("_rooted")), int(c.get("_degree"))])
+	if bool(c.get("_rooted")):
+		_say("  FAIL it rooted on the first mushroom — that rule was replaced by the loop")
 	var hurt_before: int = int(player.get("hits"))
 	await create_timer(0.6).timeout
 	var p: Vector3 = c.global_position
@@ -127,7 +130,7 @@ func _run() -> void:
 		m.global_position = at
 		m.call("_plant", at)
 		var t2 := 0.0
-		while t2 < 4.0 and int(c.get("_degree")) < i + 2:
+		while t2 < 8.0 and int(c.get("_degree")) < i + 2:
 			await create_timer(0.05).timeout
 			t2 += 0.05
 		_say("  fed %d -> degree %d (%.2f s)" % [i + 2, int(c.get("_degree")), t2])

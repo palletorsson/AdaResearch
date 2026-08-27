@@ -68,6 +68,8 @@ var _life: float = 0.0
 var _bob: float = 0.0
 var _muzzle: float = 0.0     # metres of flight before it may land
 var _look_t: float = 0.0     # throttles the pickup test
+var _from: Vector3 = Vector3.ZERO
+var _from_checked: bool = false
 var _rest_y: float = 0.0
 var _rng := RandomNumberGenerator.new()
 
@@ -101,7 +103,18 @@ func _settle_if_placed() -> void:
 ## first half metre out of a hand is the player's own arm, their controller and
 ## whatever they are standing against.
 func launch(from: Vector3, dir: Vector3, speed: float = 5.5, muzzle: float = 0.5) -> void:
-	global_position = from
+	# THE WHOLE TRANSFORM, IN WORLD SPACE (2026-08-27, Palle: "the positioning of
+	# the mushroom when shooting is related to local global, the mushroom all are
+	# coming out around the zero point"). Writing global_position alone leaves
+	# the node carrying whatever rotation and SCALE its parent has, and it does
+	# nothing at all if the node is not in the tree yet — which is silent.
+	# _from is kept so the first frame can check the write actually took.
+	_from = from
+	if is_inside_tree():
+		global_transform = Transform3D(Basis(), from)
+	else:
+		push_warning("spore_mushroom: launched before entering the tree — position will be its parent's")
+		position = from
 	var d: Vector3 = dir.normalized() if dir.length() > 0.001 else Vector3.FORWARD
 	_vel = d * speed
 	_state = State.FLYING
@@ -131,6 +144,15 @@ func is_bait() -> bool:
 
 func _process(delta: float) -> void:
 	if _state == State.FLYING:
+		# and it says so if the write did not take, rather than appearing at the
+		# origin and leaving somebody to guess why
+		if not _from_checked:
+			_from_checked = true
+			var off: float = global_position.distance_to(_from)
+			if off > 0.05:
+				push_warning("spore_mushroom: launched at %s but stands at %s (%.2f m out) — a parent transform is in the way"
+					% [str(_from), str(global_position), off])
+				global_transform = Transform3D(Basis(), _from)
 		# A FRAME HITCH MUST NOT TELEPORT IT (2026-08-27, Palle: "it seems that I
 		# am throwing backwards and the mushroom ends up on the wall"). The step
 		# is velocity times delta and the cast is only as long as the step, so a
@@ -206,7 +228,11 @@ func _plant(at: Vector3) -> void:
 	if _state == State.EATEN:
 		return
 	global_position = at
-	_rest_y = at.y
+	# LOCAL, because the bob below writes `position`. Storing the global y here
+	# and assigning it as a local one is the mix Palle spotted: under any parent
+	# that is not at the origin it teleports the mushroom on the frame after it
+	# lands.
+	_rest_y = position.y
 	rotation = Vector3(0.0, _rng.randf_range(0.0, TAU), 0.0)   # upright, any facing
 	_vel = Vector3.ZERO
 	_state = State.LANDED
