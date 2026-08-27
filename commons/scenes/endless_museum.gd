@@ -3748,7 +3748,38 @@ func _stamp_scale_figure(seg: Node3D, at: Vector3, zbase: int) -> void:
 		"p": Vector3(at.x, 0.0, float(zbase) + at.z)})
 
 
+
+## Does this box stand on a cell ruled clear? See the note at the ruling's source.
+## XZ OVERLAP, not centre: a skirting run is one long thin box whose middle can sit
+## two cells away from the one being cleared, and leaving half a strip hanging is
+## not clearing anything.
+func _stands_in_cleared(pos: Vector3, size: Vector3) -> bool:
+	if pos.y + size.y * 0.5 <= 0.02:
+		return false                    # the floor itself, and anything sunk below it
+	if size.x > 3.0 or size.z > 3.0:
+		return false                    # the building, not a piece standing in a cell
+	var x0: int = int(floor(pos.x - size.x * 0.5))
+	var x1: int = int(floor(pos.x + size.x * 0.5))
+	var z0: int = int(floor(pos.z - size.z * 0.5))
+	var z1: int = int(floor(pos.z + size.z * 0.5))
+	for cx in range(x0, x1 + 1):
+		for cz in range(z0, z1 + 1):
+			if _clear_cells.has(Vector2i(cx, cz)):
+				return true
+	return false
+
+
 func _box(parent: Node3D, pos: Vector3, size: Vector3, color: Color, mat: Material = null) -> void:
+	# A cell ruled clear takes nothing that STANDS on it. Three conditions, all
+	# needed: inside a ruled cell, rising above the floor plane (so the deck the
+	# visitor walks on survives — it tops out at y 0.0), and small enough to be a
+	# PIECE rather than the building (a ceiling slab or a floor spanning the whole
+	# room is not what "clear this cell" means). Costs one dictionary check per box
+	# when nothing is ruled, which is every museum but the ones Palle has edited.
+	if not _clear_cells.is_empty() and _stands_in_cleared(pos, size):
+		_clear_refused += 1
+		return
+
 	var m: Material = mat if mat != null else _mat(color)
 	if _batch_open:
 		# every _box call site parents to the segment, so the batch needs no
@@ -3806,6 +3837,10 @@ func _flush_boxes(seg: Node3D) -> void:
 	_batch.clear()
 
 func _add_col(body: StaticBody3D, pos: Vector3, size: Vector3) -> void:
+	if not _clear_cells.is_empty() and _stands_in_cleared(pos, size):
+		_clear_refused += 1
+		return                          # no collider for a piece that was not built
+
 	var cs := CollisionShape3D.new()
 	var bs := BoxShape3D.new()
 	bs.size = size
@@ -6420,6 +6455,38 @@ func _build_segment() -> void:
 	# template halls are all ≤ 17, so nothing changes for them.
 	var vest_w: int = maxi(LOBBY_W, maxi(pw, w))
 	seg.set_meta("em_vest_w", vest_w)
+
+	# CLEARING A CELL IN THE ENTER ROOM (2026-08-26, Palle: "remove the extra list
+	# that are part of an old wall ... the editing of passages is still something I
+	# want").
+	#
+	# The vestibule has no tile, so the wall brush could only ADD here: "4" builds a
+	# partition and "1" opens a side doorway. Neither could take anything AWAY, and
+	# what stands in the enter room is procedural — a deck trim, a wall stub, the
+	# skirting of a wall some earlier version removed in code. A brush with nothing
+	# to toggle off is why those strips survived every edit.
+	#
+	# "1" on an INTERIOR cell now means what it means everywhere else in the
+	# vocabulary: this cell is FLOOR. Nothing may stand on it.
+	#
+	# Enforced at the funnel, not by sweeping afterwards: _box batches its boxes
+	# into one merged mesh per material (_flush_boxes), so after the build there are
+	# no individual pieces left to delete — removing one would remove every piece
+	# sharing its material. _box and _add_col are the two calls EVERY piece of this
+	# architecture goes through, whoever built it, so the refusal belongs there.
+	_clear_cells.clear()
+	_clear_refused = 0
+	for vk0_v in vest_rules.keys():
+		var vk0: Vector2i = vk0_v
+		# NOT `x > 0`: the origin annex lives at x -3..1, west of the vestibule's own
+		# grid, and that is exactly where the leftover strips stand. Only the two
+		# side-wall columns are excluded, because "1" already means "open a doorway"
+		# there and that reading is older than this one.
+		if String(vest_rules[vk0]) == "1" and vk0.x != 0 and vk0.x != vest_w - 1:
+			_clear_cells[vk0] = true
+	if not _clear_cells.is_empty():
+		print("[em-clear] %d cell(s) ruled clear in the enter room" % _clear_cells.size())
+		seg.set_meta("em_clear_cells", _clear_cells.keys())
 	for zr in range(VESTIBULE_H):
 		for x in range(vest_w):
 			if foyer_well and x <= 1 and zr <= 1:
@@ -7156,6 +7223,8 @@ func _build_segment() -> void:
 			var moved: int = int(_mod_gate.call("clear_props", seg, sc))
 			print("[em-gate] the first passage stands alone: sealed door + palm scanner on the jamb%s — the next hall loads behind it" % [
 				(", %d prop(s) moved aside" % moved) if moved > 0 else ""])
+	if _clear_refused > 0:
+		print("[em-clear] refused %d piece(s) on %d ruled cell(s)" % [_clear_refused, _clear_cells.size()])
 	_apply_hand_adds(seg, zbase, seg_seq)
 	_number_places(seg, seg_seq, String(deal.get("pearl", "")) if deal is Dictionary else "")
 	# THE AS-BUILT PLAN (2026-08-18). Everything the assembler just decided —
@@ -7693,6 +7762,14 @@ func _report_path(p: String) -> String:
 	if EM_CONTROL == LIVE_CONTROL:
 		return p
 	return p.get_base_dir() + "/_trial_" + p.get_file()
+## Enter-room cells ruled "1": nothing may STAND on them. Read by _box and
+## _add_col, refilled per segment. Empty for every museum that never ruled one.
+var _clear_cells: Dictionary = {}
+## How many pieces the clearing actually refused this segment. A filter that says
+## nothing cannot be shown to work: the probe could not see the refusal because
+## trim is drawn with _box and NO collider, and merged meshes hide the rest.
+var _clear_refused: int = 0
+
 var _built: Array = []          # one entry per segment built this run
 
 ## Write what THIS segment turned out to be. Cells come from the walk map
