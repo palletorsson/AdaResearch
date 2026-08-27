@@ -40,6 +40,22 @@ def is_candidate(reg, lookup):
 
 # concept -> (strong [w3], weak [w1], truth). Order: specific first; ties break to the earlier concept.
 CONCEPTS = [
+ ("The vertex is a body",
+  ["vertex_body", "per_vertex", "soft_body_3d", "softbody3d"],
+  ["vertex", "point mass"],
+  "A rigid body has ONE position. A soft body has a position per vertex - that is the whole ontological shift, and everything else in this sequence is a consequence of it."),
+ ("The constraint that remembers",
+  ["rest_length", "distance_constraint", "edge_constraint", "shape_memory"],
+  ["rest", "constraint", "remember"],
+  "Shape is not a fact, it is a MEMORY held in edges: each spring remembers a rest length and keeps pulling toward it. Cut the edges and the vertices forget what they were."),
+ ("The iteration budget",
+  ["simulation_precision", "iterations", "stiffness_budget", "solver"],
+  ["precision", "iteration", "solver"],
+  "simulation_precision: softness is a BUDGET. More solver passes means stiffer and slower; fewer means it sags. Elasticity you can afford is the only elasticity you have."),
+ ("The anchor",
+  ["pin", "anchor", "attachment", "pinned"],
+  ["pin", "attach", "hang"],
+  "An unpinned soft body falls forever. Something rigid must hold it - the cloth needs its rail, the jelly its plate. Softness is always relative to something that refuses to move."),
  ("Mass-spring networks",
   ["spring_mass_system", "spring_mass_bouncer", "mass_spring_damper", "softmill", "mass_spring"],
   ["spring", "rest length", "node"],

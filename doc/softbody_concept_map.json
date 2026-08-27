@@ -11,6 +11,10 @@
     "Act VII — touch it (native SoftBody3D)"
   ],
   "concepts": [
+    "The vertex is a body",
+    "The constraint that remembers",
+    "The iteration budget",
+    "The anchor",
     "Mass-spring networks",
     "Verlet & the soft-body sim",
     "Strain, pressure & elasticity",
@@ -34,6 +38,92 @@
     "Soft pets & membranes (native)"
   ],
   "concept_meta": {
+    "The vertex is a body": {
+      "count": 1,
+      "map_ready": 1,
+      "has_image": 1,
+      "best": "softbody3d",
+      "truth": "A rigid body has ONE position. A soft body has a position per vertex - that is the whole ontological shift, and everything else in this sequence is a consequence of it.",
+      "act": "",
+      "thin": true,
+      "tiers": {
+        "small": [
+          "softbody3d"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "missing_tiers": [
+        "medium",
+        "large",
+        "applied"
+      ]
+    },
+    "The constraint that remembers": {
+      "count": 0,
+      "map_ready": 0,
+      "has_image": 0,
+      "best": null,
+      "truth": "Shape is not a fact, it is a MEMORY held in edges: each spring remembers a rest length and keeps pulling toward it. Cut the edges and the vertices forget what they were.",
+      "act": "",
+      "thin": true,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "missing_tiers": [
+        "small",
+        "medium",
+        "large",
+        "applied"
+      ]
+    },
+    "The iteration budget": {
+      "count": 0,
+      "map_ready": 0,
+      "has_image": 0,
+      "best": null,
+      "truth": "simulation_precision: softness is a BUDGET. More solver passes means stiffer and slower; fewer means it sags. Elasticity you can afford is the only elasticity you have.",
+      "act": "",
+      "thin": true,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "missing_tiers": [
+        "small",
+        "medium",
+        "large",
+        "applied"
+      ]
+    },
+    "The anchor": {
+      "count": 1,
+      "map_ready": 1,
+      "has_image": 1,
+      "best": "soft_trampoline",
+      "truth": "An unpinned soft body falls forever. Something rigid must hold it - the cloth needs its rail, the jelly its plate. Softness is always relative to something that refuses to move.",
+      "act": "",
+      "thin": true,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [],
+        "applied": [
+          "soft_trampoline"
+        ]
+      },
+      "missing_tiers": [
+        "small",
+        "medium",
+        "large"
+      ]
+    },
     "Mass-spring networks": {
       "count": 6,
       "map_ready": 6,
@@ -61,17 +151,15 @@
       "missing_tiers": []
     },
     "Verlet & the soft-body sim": {
-      "count": 5,
-      "map_ready": 5,
-      "has_image": 5,
+      "count": 4,
+      "map_ready": 4,
+      "has_image": 4,
       "best": "verlet_workbench",
       "truth": "Integrate position from position, not velocity, and the constraints hold without ever being solved — Verlet, the cheap physics of cloth and flesh.",
       "act": "Act I — the spring & the mass",
       "thin": false,
       "tiers": {
-        "small": [
-          "softbody3d"
-        ],
+        "small": [],
         "medium": [
           "soft_bodies"
         ],
@@ -83,11 +171,13 @@
           "verlet_workbench"
         ]
       },
-      "missing_tiers": []
+      "missing_tiers": [
+        "small"
+      ]
     },
     "Strain, pressure & elasticity": {
-      "count": 4,
-      "map_ready": 4,
+      "count": 5,
+      "map_ready": 5,
       "has_image": 4,
       "best": "elasticity_press",
       "truth": "What lets a soft body keep its shape: internal pressure pushing out, strain energy pulling back — a balance held, not a skeleton imposed.",
@@ -98,7 +188,8 @@
           "pressure_soft_body"
         ],
         "medium": [
-          "rounded_softbody_test"
+          "rounded_softbody_test",
+          "rounded_softbody"
         ],
         "large": [
           "pressure_dome_room"
@@ -184,9 +275,9 @@
       "missing_tiers": []
     },
     "Bounce & play": {
-      "count": 6,
-      "map_ready": 6,
-      "has_image": 6,
+      "count": 5,
+      "map_ready": 5,
+      "has_image": 5,
       "best": "bounce_arena_room",
       "truth": "Store the impact in the springs and give it back — the trampoline, the ball pit, the joy of a body that bounces instead of breaking.",
       "act": "Act III — cloth, jelly, flesh",
@@ -202,7 +293,6 @@
           "bounce_arena_room"
         ],
         "applied": [
-          "soft_trampoline",
           "squishy_ball_pit",
           "revolving_joy_ride"
         ]
@@ -210,16 +300,17 @@
       "missing_tiers": []
     },
     "Viscous & flowing": {
-      "count": 5,
-      "map_ready": 5,
-      "has_image": 5,
+      "count": 6,
+      "map_ready": 6,
+      "has_image": 6,
       "best": "lava_lamp_tool",
       "truth": "Turn down the stiffness and the soft body starts to flow — the blob, the mushroom, the edge where soft becomes fluid.",
       "act": "Act III — cloth, jelly, flesh",
       "thin": false,
       "tiers": {
         "small": [
-          "viscous_fluid_blob"
+          "viscous_fluid_blob",
+          "sdf_blob_toy"
         ],
         "medium": [
           "viscous_bench"
@@ -553,11 +644,39 @@
       "missing_tiers": []
     }
   },
-  "total": 98,
-  "map_ready_total": 98,
-  "image_total": 98,
-  "empty_slots": 0,
+  "total": 100,
+  "map_ready_total": 100,
+  "image_total": 99,
+  "empty_slots": 15,
   "groups": {
+    "The vertex is a body": [
+      {
+        "lookup": "softbody3d",
+        "name": "SoftBody 3D",
+        "registry": "soft_bodies.json",
+        "category": "physics",
+        "map_ready": true,
+        "has_image": true,
+        "score": 6,
+        "fp": 1,
+        "tier": "small"
+      }
+    ],
+    "The constraint that remembers": [],
+    "The iteration budget": [],
+    "The anchor": [
+      {
+        "lookup": "soft_trampoline",
+        "name": "Soft Trampoline",
+        "registry": "soft_bodies.json",
+        "category": "physics",
+        "map_ready": true,
+        "has_image": true,
+        "score": 7,
+        "fp": 9,
+        "tier": "applied"
+      }
+    ],
     "Mass-spring networks": [
       {
         "lookup": "mass_spring_bench",
@@ -567,7 +686,7 @@
         "map_ready": true,
         "has_image": true,
         "score": 99,
-        "fp": 4,
+        "fp": 9,
         "tier": "medium"
       },
       {
@@ -661,17 +780,6 @@
         "tier": "medium"
       },
       {
-        "lookup": "softbody3d",
-        "name": "SoftBody 3D",
-        "registry": "soft_bodies.json",
-        "category": "physics",
-        "map_ready": true,
-        "has_image": true,
-        "score": 6,
-        "fp": 1,
-        "tier": "small"
-      },
-      {
         "lookup": "softbodytest",
         "name": "softbodytest",
         "registry": "soft_bodies.json",
@@ -727,6 +835,17 @@
         "score": 7,
         "fp": 4,
         "tier": "medium"
+      },
+      {
+        "lookup": "rounded_softbody",
+        "name": "Rounded SoftBody — Compression Bench",
+        "registry": "soft_bodies.json",
+        "category": "physics",
+        "map_ready": true,
+        "has_image": false,
+        "score": 7,
+        "fp": 4,
+        "tier": "medium"
       }
     ],
     "Settling: gradient descent toward max Q": [
@@ -749,7 +868,7 @@
         "map_ready": true,
         "has_image": true,
         "score": 99,
-        "fp": 4,
+        "fp": 9,
         "tier": "medium"
       },
       {
@@ -848,7 +967,7 @@
         "lookup": "flex_cloth_pad",
         "name": "Flex Cloth Pad",
         "registry": "softbodies.json",
-        "category": "softbodies",
+        "category": "soft_bodies",
         "map_ready": true,
         "has_image": true,
         "score": 10,
@@ -913,17 +1032,6 @@
         "tier": "small"
       },
       {
-        "lookup": "soft_trampoline",
-        "name": "Soft Trampoline",
-        "registry": "soft_bodies.json",
-        "category": "physics",
-        "map_ready": true,
-        "has_image": true,
-        "score": 7,
-        "fp": 9,
-        "tier": "applied"
-      },
-      {
         "lookup": "squishy_ball_pit",
         "name": "Squishy Ball Pit",
         "registry": "soft_bodies.json",
@@ -977,7 +1085,7 @@
         "map_ready": true,
         "has_image": true,
         "score": 99,
-        "fp": 4,
+        "fp": 9,
         "tier": "medium"
       },
       {
@@ -1012,6 +1120,17 @@
         "score": 7,
         "fp": 9,
         "tier": "large"
+      },
+      {
+        "lookup": "sdf_blob_toy",
+        "name": "SDF Blob Toy (the function crosses zero)",
+        "registry": "procedural_generation.json",
+        "category": "procedural",
+        "map_ready": true,
+        "has_image": true,
+        "score": 6,
+        "fp": 2,
+        "tier": "small"
       }
     ],
     "The membrane": [
@@ -1503,7 +1622,7 @@
         "map_ready": true,
         "has_image": true,
         "score": 99,
-        "fp": 4,
+        "fp": 1,
         "tier": "medium"
       },
       {
@@ -1674,7 +1793,7 @@
         "map_ready": true,
         "has_image": true,
         "score": 99,
-        "fp": 4,
+        "fp": 1,
         "tier": "medium"
       }
     ]

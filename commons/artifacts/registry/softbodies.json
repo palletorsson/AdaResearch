@@ -186,6 +186,25 @@
 				1,
 				1
 			]
+		},
+		"the_confessing_body": {
+			"name": "The Confessing Body",
+			"class_name": "TheConfessingBody",
+			"scene": "res://commons/artifacts/the_confessing_body/the_confessing_body.tscn",
+			"description": "The soft bodies SUPER OBJECT: an anatomy theatre for things with insides - a rigid cube with ONE pin beside a soft one pinned at every vertex, springs labelled with the rest length they pull toward, one jelly solved at 1/3/8 iterations, and a cloth genuinely relaxed 60 passes under gravity from two anchors. Plus a Verlet chain, a pressure membrane, a Miura fold and a tentacle. Every drape computed vertex by vertex. 2026-08-27.",
+			"category": "softbodies",
+			"tags": [
+				"softbodies",
+				"super",
+				"synthesis",
+				"verlet",
+				"constraint",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 4,
+				"clearance_m": 0.6
+			}
 		}
 	}
 }
