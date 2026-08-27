@@ -15,9 +15,10 @@
 # body box mesh, floor, camera, lighting, and WASD movement.
 #
 # Run one_leg.tscn with F6 to test standalone.
-extends MeshInstance3D
+extends "res://commons/hazards/octapod_crawler/leg_walker_base.gd"
 
 func _ready() -> void:
+	super._ready()
 	# Body box mesh
 	var box := BoxMesh.new()
 	box.size = Vector3(0.8, 0.4, 0.6)
@@ -39,11 +40,10 @@ func _ready() -> void:
 	print("[OneLeg] WASD to move. Leg should bend to reach ground.")
 
 func _process(delta: float) -> void:
-	# WASD movement (exact beast_controller.gd pattern)
-	var input := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
-	if input.length_squared() > 0.01:
-		position += -basis.z * input.y * delta * 3.0
-		rotation.y += deg_to_rad(-input.x * delta * 40.0)
+	# THE POGO PACES TOO (2026-08-27). It was the only member of the seven with
+	# no patrol at all — a first rung that stands perfectly still while the five
+	# above it walk reads as a broken exhibit, not as an axiom.
+	_walk(delta)
 
 # ═══════════════════════════════════════════════════════════════════════════
 # SKINNED MESH — beast_demo / spine_demo pattern

@@ -1,45 +1,38 @@
-THE SEVEN, ON A DECK WHOSE TOP IS AT y = 0.500
+THE LADDER ON A DECK WHOSE TOP IS AT 0.500 — pace on, no input
 
-one_leg              root Node3D           body none             feet 1
-    footprint  2.75 x 0.60 m   height 7.34
-    moved on its own in 6 s: 0.000 m
-    foot world y: 0.510 .. 0.510   (the deck is at 0.500)
-    -> stands on the deck
+one_leg              body yes              legs 1
+    size      1.80 x 2.59 x 7.34 m
+    walked    1.71 m in 9 s, 1.00 m from home
+    feet at   0.510  (deck 0.500)  OK
 
-two_leg_critter      root Node3D           body none             feet 2
-    footprint  0.34 x 0.34 m   height 0.24
-    moved on its own in 6 s: 0.000 m
-    foot world y: 0.000 .. 0.000   (the deck is at 0.500)
-    -> PLANTS THROUGH THE DECK by 0.50 m
+two_leg_critter      body yes              legs 2
+    size      4.32 x 0.98 x 7.32 m
+    walked    1.80 m in 9 s, 1.09 m from home
+    feet at   0.500  (deck 0.500)  OK
 
-three_leg_critter    root Node3D           body none             feet 3
-    footprint  0.34 x 0.34 m   height 0.24
-    moved on its own in 6 s: 0.000 m
-    foot world y: 0.000 .. 0.000   (the deck is at 0.500)
-    -> PLANTS THROUGH THE DECK by 0.50 m
+three_leg_critter    body yes              legs 3
+    size      3.26 x 4.92 x 7.32 m
+    walked    1.80 m in 9 s, 1.07 m from home
+    feet at   0.500  (deck 0.500)  OK
 
-four_leg_critter     root Node3D           body none             feet 4
-    footprint  3.50 x 3.47 m   height 2.97
-    moved on its own in 6 s: 0.000 m
-    foot world y: 0.000 .. 0.743   (the deck is at 0.500)
-    -> PLANTS THROUGH THE DECK by 0.50 m
+four_leg_critter     body yes              legs 4
+    size      3.62 x 4.69 x 7.32 m
+    walked    1.77 m in 9 s, 1.08 m from home
+    feet at   0.500  (deck 0.500)  OK
 
-five_leg_critter     root Node3D           body none             feet 5
-    footprint  1.71 x 2.23 m   height 0.24
-    moved on its own in 6 s: 0.000 m
-    foot world y: 0.000 .. 0.525   (the deck is at 0.500)
-    -> PLANTS THROUGH THE DECK by 0.50 m
+five_leg_critter     body yes              legs 5
+    size      4.70 x 4.94 x 7.32 m
+    walked    1.81 m in 9 s, 1.05 m from home
+    feet at   0.500  (deck 0.500)  OK
 
-six_leg_critter      root Node3D           body none             feet 6
-    footprint  0.82 x 2.89 m   height 0.24
-    moved on its own in 6 s: 0.000 m
-    foot world y: 0.000 .. 0.562   (the deck is at 0.500)
-    -> PLANTS THROUGH THE DECK by 0.50 m
+six_leg_critter      body yes              legs 6
+    size      4.59 x 5.50 x 7.32 m
+    walked    1.80 m in 9 s, 1.07 m from home
+    feet at   0.500  (deck 0.500)  OK
 
-octapod_ik           root Node3D           body none             feet 8
-    footprint  0.00 x 0.00 m   height 0.00
-    moved on its own in 6 s: 0.000 m
-    foot world y: -1.020 .. -1.020   (the deck is at 0.500)
-    -> PLANTS THROUGH THE DECK by 1.52 m
+octapod_ik           body NO SCRIPT        legs 8
+    size      0.00 x 0.00 x 0.00 m
+    walked    0.00 m in 9 s, no script
+    feet at   -1.020  (deck 0.500)  OFF THE DECK
 
-SUMMARY: 6 of 7 plant through the deck; 7 of 7 never moved without input.
+SUMMARY of 7: 6 scripted, 6 paced on their own, 6 standing on the deck, 7 inside the leash

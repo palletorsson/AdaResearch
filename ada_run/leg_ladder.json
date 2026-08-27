@@ -1,88 +1,95 @@
 {
 	"rows": [
 		{
-			"body": "none",
-			"feet": 1,
-			"foot_y_max": 0.509999990463257,
-			"foot_y_min": 0.509999990463257,
-			"footprint_x": 2.74983024597168,
-			"footprint_z": 0.600000023841858,
-			"height": 7.33982992172241,
+			"drift": 0.997456669807434,
+			"foot_y": 0.509999990463257,
+			"has_script": true,
+			"legs": 1,
 			"name": "one_leg",
-			"root": "Node3D",
-			"travelled_6s": 0.0
+			"size": [
+				1.79947876930237,
+				2.59005212783813,
+				7.33982992172241
+			],
+			"walked_9s": 1.71140944957733
 		},
 		{
-			"body": "none",
-			"feet": 2,
-			"foot_y_max": 0.000000238418579101563,
-			"foot_y_min": 0.0,
-			"footprint_x": 0.339207649230957,
-			"footprint_z": 0.339211463928223,
-			"height": 0.239728167653084,
+			"drift": 1.09451651573181,
+			"foot_y": 0.499999761581421,
+			"has_script": true,
+			"legs": 2,
 			"name": "two_leg_critter",
-			"root": "Node3D",
-			"travelled_6s": 0.0
+			"size": [
+				4.31605339050293,
+				0.97792112827301,
+				7.31986427307129
+			],
+			"walked_9s": 1.79710924625397
 		},
 		{
-			"body": "none",
-			"feet": 3,
-			"foot_y_max": 0.0,
-			"foot_y_min": 0.0,
-			"footprint_x": 0.33610725402832,
-			"footprint_z": 0.33615779876709,
-			"height": 0.239728167653084,
+			"drift": 1.06514489650726,
+			"foot_y": 0.5,
+			"has_script": true,
+			"legs": 3,
 			"name": "three_leg_critter",
-			"root": "Node3D",
-			"travelled_6s": 0.0
+			"size": [
+				3.26316070556641,
+				4.92361545562744,
+				7.31986379623413
+			],
+			"walked_9s": 1.7976655960083
 		},
 		{
-			"body": "none",
-			"feet": 4,
-			"foot_y_max": 0.742715954780579,
-			"foot_y_min": 0.0,
-			"footprint_x": 3.50449752807617,
-			"footprint_z": 3.47355127334595,
-			"height": 2.96986413002014,
+			"drift": 1.08474552631378,
+			"foot_y": 0.5,
+			"has_script": true,
+			"legs": 4,
 			"name": "four_leg_critter",
-			"root": "Node3D",
-			"travelled_6s": 0.0
+			"size": [
+				3.61959075927734,
+				4.68897867202759,
+				7.31986379623413
+			],
+			"walked_9s": 1.77027797698975
 		},
 		{
-			"body": "none",
-			"feet": 5,
-			"foot_y_max": 0.524631023406982,
-			"foot_y_min": 0.0,
-			"footprint_x": 1.71148872375488,
-			"footprint_z": 2.23177933692932,
-			"height": 0.239728406071663,
+			"drift": 1.05434095859528,
+			"foot_y": 0.5,
+			"has_script": true,
+			"legs": 5,
 			"name": "five_leg_critter",
-			"root": "Node3D",
-			"travelled_6s": 0.0
+			"size": [
+				4.70083618164063,
+				4.9356427192688,
+				7.31986379623413
+			],
+			"walked_9s": 1.80859982967377
 		},
 		{
-			"body": "none",
-			"feet": 6,
-			"foot_y_max": 0.561869740486145,
-			"foot_y_min": 0.0,
-			"footprint_x": 0.818931579589844,
-			"footprint_z": 2.88862466812134,
-			"height": 0.239728167653084,
+			"drift": 1.0691579580307,
+			"foot_y": 0.5,
+			"has_script": true,
+			"legs": 6,
 			"name": "six_leg_critter",
-			"root": "Node3D",
-			"travelled_6s": 0.0
+			"size": [
+				4.59275817871094,
+				5.4970235824585,
+				7.31986379623413
+			],
+			"walked_9s": 1.79847633838654
 		},
 		{
-			"body": "none",
-			"feet": 8,
-			"foot_y_max": -1.01999998092651,
-			"foot_y_min": -1.01999998092651,
-			"footprint_x": 0.0,
-			"footprint_z": 0.0,
-			"height": 0.0,
+			"drift": 0.0,
+			"foot_y": -1.01999998092651,
+			"has_script": false,
+			"legs": 8,
 			"name": "octapod_ik",
-			"root": "Node3D",
-			"travelled_6s": 0.0
+			"size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"walked_9s": 0.0
 		}
 	]
 }

@@ -21,22 +21,9 @@
 #
 # Legs at 0°/72°/144°/216°/288° around body center, radius 2.2:
 #   Leg 0 (right), Leg 1 (front-right), Leg 2 (front-left), Leg 3 (back-left), Leg 4 (back-right)
-extends MeshInstance3D
+extends "res://commons/hazards/octapod_crawler/leg_walker_base.gd"
 
-@export var move_speed: float = 2.0
-@export var turn_speed: float = 40.0
-@export var patrol_speed: float = 1.0
 
-## Step gait parameters
-@export_group("Gait")
-@export var step_threshold: float = 1.5   ## How far foot can be from "home" before stepping
-@export var step_height: float = 1.0      ## How high the foot lifts during a step
-@export var step_duration: float = 0.25   ## How long a step takes (seconds)
-@export var step_overshoot: float = 0.5   ## How far ahead of home to place foot
-
-var _patrol_timer: float = 0.0
-var _patrol_angle: float = 0.0
-var _rng := RandomNumberGenerator.new()
 
 const LEG_COUNT: int = 5
 
@@ -65,8 +52,7 @@ var _shoulders: Array[Vector3] = [
 ]
 
 func _ready() -> void:
-	_rng.randomize()
-	_patrol_angle = _rng.randf_range(0, TAU)
+	super._ready()
 
 	# Body mesh
 	var box := BoxMesh.new()
@@ -109,7 +95,7 @@ func _ready() -> void:
 		_leg_step_time[i] = 0.0
 		# Initialize planted positions (feet start directly below shoulders)
 		_leg_planted[i] = global_transform * _shoulders[i]
-		_leg_planted[i].y = 0.0  # on ground
+		_leg_planted[i].y = _ground()  # on ground
 
 	# Scene setup
 	_build_scene()
@@ -119,17 +105,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	# ── Movement ──────────────────────────────────────────────────────────
-	var input := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
-	if input.length_squared() > 0.01:
-		position += -basis.z * input.y * delta * move_speed
-		rotation.y += deg_to_rad(-input.x * delta * turn_speed)
-	else:
-		_patrol_timer += delta
-		if _patrol_timer >= 3.0:
-			_patrol_timer = 0.0
-			_patrol_angle += _rng.randf_range(-PI * 0.5, PI * 0.5)
-		rotation.y = lerp_angle(rotation.y, _patrol_angle, 1.0 * delta)
-		position += -basis.z * delta * patrol_speed
+	_walk(delta)
 
 	# ── Step Gait ─────────────────────────────────────────────────────────
 	_update_gait(delta)
@@ -145,7 +121,7 @@ func _update_gait(delta: float) -> void:
 	homes.resize(LEG_COUNT)
 	for i in range(LEG_COUNT):
 		homes[i] = global_transform * _shoulders[i]
-		homes[i].y = 0.0
+		homes[i].y = _ground()
 
 	# Update any legs that are mid-step (animate the arc)
 	for i in range(LEG_COUNT):
@@ -189,7 +165,7 @@ func _begin_step(leg_index: int, home: Vector3) -> void:
 	# Step target: home position + overshoot in the body's forward direction
 	var forward: Vector3 = -global_transform.basis.z.normalized()
 	_leg_step_to[leg_index] = home + forward * step_overshoot
-	_leg_step_to[leg_index].y = 0.0  # plant on ground
+	_leg_step_to[leg_index].y = _ground()  # plant on ground
 
 func _position_foot(leg_index: int, foot_target: Marker3D, _home: Vector3) -> void:
 	if not is_instance_valid(foot_target):
