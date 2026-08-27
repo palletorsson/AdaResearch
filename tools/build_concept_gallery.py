@@ -94,6 +94,16 @@ def portrait(token: str, seq_id: str) -> str | None:
     # dna_promoted tokens are prefixed registry names over gallery families whose PNGs
     # drop the family prefix: dna_color_stacks_stack_complementary_red_green lives at
     # color-stacks-gallery/stack_complementary_red_green.png. Try each suffix cut.
+    # a NEW artifact's first portrait lives in the capture bench's output, not yet in
+    # the catalog. Adopt it: copy multi_shots/<token>/front_mid.png into scene-catalog,
+    # so the catalog grows with the corpus instead of freezing at its last generation.
+    shot = os.path.join(os.path.expandvars("%APPDATA%"), "Godot", "app_userdata",
+                        "Ada Research Zero One", "multi_shots", token, "front_mid.png")
+    if os.path.exists(shot):
+        import shutil
+        dest = os.path.join(ENC, "scene-catalog", f"{token}.png")
+        shutil.copyfile(shot, dest)
+        return f"/scene-catalog/{token}.png"
     if token.startswith("dna_"):
         parts = token[4:].split("_")
         for i in range(1, len(parts)):

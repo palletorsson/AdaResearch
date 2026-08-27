@@ -3702,6 +3702,154 @@
 				1,
 				1.0
 			]
+		},
+		"one_bulb_room": {
+			"name": "One Bulb Room",
+			"class_name": "OneBulbRoom",
+			"scene": "res://commons/artifacts/one_bulb_room/one_bulb_room.tscn",
+			"description": "A dark chamber, six pure-albedo bodies, ONE swinging bulb on a cord (real damped pendulum + OmniLight3D). No light, no color - albedo is a promise light has to keep. Color taxonomy rung 1, 2026-08-27.",
+			"category": "color",
+			"tags": [
+				"color",
+				"light",
+				"albedo",
+				"surreal",
+				"hero"
+			],
+			"spatial_needs": {
+				"footprint_cells": 4,
+				"clearance_m": 0.6
+			}
+		},
+		"three_taps": {
+			"name": "Three Taps",
+			"class_name": "ThreeTaps",
+			"scene": "res://commons/artifacts/three_taps/three_taps.tscn",
+			"description": "Three faucets R, G, B with sliders pouring channel-light into one brass basin; the water IS Color(r,g,b). Additive mixing as plumbing. Color taxonomy rung 2, 2026-08-27.",
+			"category": "color",
+			"tags": [
+				"color",
+				"rgb",
+				"additive",
+				"interactive",
+				"surreal",
+				"hero"
+			],
+			"spatial_needs": {
+				"footprint_cells": 3,
+				"clearance_m": 0.6
+			}
+		},
+		"hue_carousel": {
+			"name": "Hue Carousel",
+			"class_name": "HueCarousel",
+			"scene": "res://commons/artifacts/hue_carousel/hue_carousel.tscn",
+			"description": "A fairground carousel whose canopy is the hue wheel - twelve from_hsv seats at full saturation on the rim, grey-ish seats near the pole, the pole itself the value dimmer. Color taxonomy rung 3, 2026-08-27.",
+			"category": "color",
+			"tags": [
+				"color",
+				"hsv",
+				"hue",
+				"surreal",
+				"hero"
+			],
+			"spatial_needs": {
+				"footprint_cells": 4,
+				"clearance_m": 0.6
+			}
+		},
+		"neon_garden": {
+			"name": "Neon Garden",
+			"class_name": "NeonGarden",
+			"scene": "res://commons/artifacts/neon_garden/neon_garden.tscn",
+			"description": "Flowers with albedo black and petals of pure emission, breathing on seeded phases under a dark pergola. Emission owes the room nothing. Color taxonomy rung 5, 2026-08-27.",
+			"category": "color",
+			"tags": [
+				"color",
+				"emission",
+				"glow",
+				"surreal",
+				"hero"
+			],
+			"spatial_needs": {
+				"footprint_cells": 3,
+				"clearance_m": 0.6
+			}
+		},
+		"the_dressing_room": {
+			"name": "The Dressing Room",
+			"class_name": "TheDressingRoom",
+			"scene": "res://commons/artifacts/the_dressing_room/the_dressing_room.tscn",
+			"description": "One dress, one albedo, three real SpotLight3Ds taking turns - tungsten, blue, deep red. seen = light x skin; metamerism as drag. Color taxonomy rung 7, 2026-08-27.",
+			"category": "color",
+			"tags": [
+				"color",
+				"light",
+				"metamerism",
+				"multiplication",
+				"surreal",
+				"hero"
+			],
+			"spatial_needs": {
+				"footprint_cells": 3,
+				"clearance_m": 0.6
+			}
+		},
+		"two_roads": {
+			"name": "Two Roads",
+			"class_name": "TwoRoads",
+			"scene": "res://commons/artifacts/two_roads/two_roads.tscn",
+			"description": "Two walkable roads between the same teal and orange: the RGB road greys out mid-way (its exact mud held up on a plinth), the HSV road stays saturated round the wheel. A gradient is a choice of path. Color taxonomy rung 8, 2026-08-27.",
+			"category": "color",
+			"tags": [
+				"color",
+				"gradient",
+				"lerp",
+				"hsv",
+				"surreal",
+				"hero"
+			],
+			"spatial_needs": {
+				"footprint_cells": 4,
+				"clearance_m": 0.6
+			}
+		},
+		"complementary_couple": {
+			"name": "Complementary Couple",
+			"class_name": "ComplementaryCouple",
+			"scene": "res://commons/artifacts/complementary_couple/complementary_couple.tscn",
+			"description": "Two armchairs locked in complement, drifting through every pairing the wheel owns; markers in the rug's hue ring stand always across. The engine has no word for harmony. Color taxonomy rung 9, 2026-08-27.",
+			"category": "color",
+			"tags": [
+				"color",
+				"harmony",
+				"complementary",
+				"surreal",
+				"hero"
+			],
+			"spatial_needs": {
+				"footprint_cells": 3,
+				"clearance_m": 0.6
+			}
+		},
+		"glitch_mirror": {
+			"name": "Glitch Mirror",
+			"class_name": "GlitchMirror",
+			"scene": "res://commons/artifacts/glitch_mirror/glitch_mirror.tscn",
+			"description": "A mirror that shows the screen's flesh instead of your face: subpixel triads, seeded row-tears that hue-rotate, and one gradient twice - smooth and banded. The queer flesh of digital colour. Color taxonomy rung 11, 2026-08-27.",
+			"category": "color",
+			"tags": [
+				"color",
+				"glitch",
+				"subpixel",
+				"banding",
+				"surreal",
+				"hero"
+			],
+			"spatial_needs": {
+				"footprint_cells": 2,
+				"clearance_m": 0.6
+			}
 		}
 	},
 	"registry_info": {

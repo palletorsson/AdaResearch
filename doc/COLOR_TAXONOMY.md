@@ -96,6 +96,14 @@ The two orders compose rather than compete: rooms keep the fold's structure; the
 taxonomy is the CONTENT order for curation, placement and the concept gallery's sections.
 `Off the ladder` holds what neither claims yet (`shelf`, `grab_stick`) — a chip decides.
 
+**The heroes are BUILT (2026-08-27, same day).** All eight to-build rows above stand:
+one_bulb_room, three_taps, hue_carousel, neon_garden, the_dressing_room, two_roads,
+complementary_couple, glitch_mirror - probe-verified (0 broken), captured, registered in
+color.json, and standing in their rungs at /color-concepts (62 tiles). two_roads' top
+capture photographs its own lesson: the RGB road visibly muds mid-way while the HSV road
+stays saturated. banding_gradient finally has a portrait. DNA axes: a later pass, derived
+not typed.
+
 ## The recipe, for every sequence
 
 Three questions produce this taxonomy for any sequence:
