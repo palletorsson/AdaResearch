@@ -31,6 +31,22 @@ def is_candidate(reg, lookup):
     return bool(GATE.search(lookup))
 
 CONCEPTS = [
+ ("The default is an argument",
+  ["default_body_bay", "default_", "inspector_default", "convention"],
+  ["default", "convention", "shipped"],
+  "Every default in the inspector is somebody's opinion shipped as a fact: gravity 9.8, cull_back, white light, scale 1. The engine is not neutral - it arrives already having decided, and the first post-crisis act is learning to read that."),
+ ("The classifier's outside",
+  ["excluded_class", "classifier", "collision_layer", "the_bin_marked_other"],
+  ["outside", "unclassified", "other"],
+  "Collision layers, groups, class_name: every classification has things it cannot say. The bin marked 'other' is where the system keeps what it refuses to be about, and it is always fuller than the labelled bins."),
+ ("The comparator you supply",
+  ["sort_custom", "comparator", "ranking", "order_handed"],
+  ["sort", "rank", "order"],
+  "get_children() hands you an order nobody voted on; sort_custom refuses to sort until YOU supply the rule. That refusal is the good moment - the engine forcing the values to become explicit."),
+ ("The view from somewhere",
+  ["situated", "standpoint", "camera", "from_inside"],
+  ["situated", "position", "body"],
+  "Every render is from a Camera3D, which is to say from a position. There is no view from nowhere in this engine and there never was in any other - the picture always has a body it was taken from."),
  ("Bias as structural incompleteness",
   ["bias_from_inside", "bias_visualiz", "bias_", "excluded_class", "room_shape"],
   ["bias", "what the model can't see", "training data"],

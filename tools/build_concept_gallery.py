@@ -46,7 +46,11 @@ ALIAS = {
     "softbodies": "softbody",
     "proceduralgeneration": "procgen",
     "foundationscrisis": "foundationscrisis",
-    "postfoundationscrisis": "postfoundationscrisis",
+    # SECOND OCCURRENCE of the fractals alias bug (2026-08-27): postcrisis is the
+    # bespoke builder's canon (8 real concepts, 40 tiles); postfoundationscrisis is
+    # a June map-blurb file whose sections are sentences ("A room divided. The left
+    # half"). The gallery read the blurb file from the day it was written.
+    "postfoundationscrisis": "postcrisis",
     # fractal (SINGULAR) is the bespoke builder's output with 19 real concepts;
     # fractals (plural) is a June map-name file whose "concepts" are room labels
     # (MandelbrotSet, Synthesis) and whose truths repeat their own names. The

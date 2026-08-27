@@ -7,6 +7,10 @@
     "Act III — building on the edge"
   ],
   "concepts": [
+    "The default is an argument",
+    "The classifier's outside",
+    "The comparator you supply",
+    "The view from somewhere",
     "Bias as structural incompleteness",
     "Ethical design after incompleteness",
     "Paraconsistent engineering",
@@ -17,10 +21,96 @@
     "The edge is the ground"
   ],
   "concept_meta": {
+    "The default is an argument": {
+      "count": 0,
+      "map_ready": 0,
+      "has_image": 0,
+      "best": null,
+      "truth": "Every default in the inspector is somebody's opinion shipped as a fact: gravity 9.8, cull_back, white light, scale 1. The engine is not neutral - it arrives already having decided, and the first post-crisis act is learning to read that.",
+      "act": "",
+      "thin": true,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "missing_tiers": [
+        "small",
+        "medium",
+        "large",
+        "applied"
+      ]
+    },
+    "The classifier's outside": {
+      "count": 1,
+      "map_ready": 1,
+      "has_image": 1,
+      "best": "excluded_class_visualizer",
+      "truth": "Collision layers, groups, class_name: every classification has things it cannot say. The bin marked 'other' is where the system keeps what it refuses to be about, and it is always fuller than the labelled bins.",
+      "act": "",
+      "thin": true,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [],
+        "applied": [
+          "excluded_class_visualizer"
+        ]
+      },
+      "missing_tiers": [
+        "small",
+        "medium",
+        "large"
+      ]
+    },
+    "The comparator you supply": {
+      "count": 0,
+      "map_ready": 0,
+      "has_image": 0,
+      "best": null,
+      "truth": "get_children() hands you an order nobody voted on; sort_custom refuses to sort until YOU supply the rule. That refusal is the good moment - the engine forcing the values to become explicit.",
+      "act": "",
+      "thin": true,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "missing_tiers": [
+        "small",
+        "medium",
+        "large",
+        "applied"
+      ]
+    },
+    "The view from somewhere": {
+      "count": 1,
+      "map_ready": 1,
+      "has_image": 1,
+      "best": "situated_sensor",
+      "truth": "Every render is from a Camera3D, which is to say from a position. There is no view from nowhere in this engine and there never was in any other - the picture always has a body it was taken from.",
+      "act": "",
+      "thin": true,
+      "tiers": {
+        "small": [
+          "situated_sensor"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "missing_tiers": [
+        "medium",
+        "large",
+        "applied"
+      ]
+    },
     "Bias as structural incompleteness": {
-      "count": 7,
-      "map_ready": 7,
-      "has_image": 7,
+      "count": 6,
+      "map_ready": 6,
+      "has_image": 6,
       "best": "bias_atlas_room",
       "truth": "Every model leaves something out — that's not a fixable bug, it's Gödel in the training data. Bias is the shape of what a system can't see from inside itself; you make it visible, you don't make it vanish.",
       "act": "Act I — critical algorithms",
@@ -38,7 +128,6 @@
         "applied": [
           "bias_visualizer",
           "algorithmic_bias_visualization",
-          "excluded_class_visualizer",
           "room_shape_demonstrator"
         ]
       },
@@ -94,17 +183,15 @@
       "missing_tiers": []
     },
     "Situated computation": {
-      "count": 4,
-      "map_ready": 4,
-      "has_image": 4,
+      "count": 3,
+      "map_ready": 3,
+      "has_image": 3,
       "best": "situated_bench",
       "truth": "There is no view from nowhere. Every computation runs somewhere, on some body, from some angle — and saying so, instead of faking objectivity, is the stronger knowledge.",
       "act": "Act II — speculative computation",
       "thin": false,
       "tiers": {
-        "small": [
-          "situated_sensor"
-        ],
+        "small": [],
         "medium": [
           "situated_bench"
         ],
@@ -115,7 +202,9 @@
           "situated_readout"
         ]
       },
-      "missing_tiers": []
+      "missing_tiers": [
+        "small"
+      ]
     },
     "Collective knowledge / the commons": {
       "count": 5,
@@ -221,8 +310,36 @@
   "total": 40,
   "map_ready_total": 40,
   "image_total": 40,
-  "empty_slots": 0,
+  "empty_slots": 15,
   "groups": {
+    "The default is an argument": [],
+    "The classifier's outside": [
+      {
+        "lookup": "excluded_class_visualizer",
+        "name": "Excluded Class Visualizer",
+        "registry": "postfoundationscrisis.json",
+        "category": "postfoundations",
+        "map_ready": true,
+        "has_image": true,
+        "score": 9,
+        "fp": 1,
+        "tier": "applied"
+      }
+    ],
+    "The comparator you supply": [],
+    "The view from somewhere": [
+      {
+        "lookup": "situated_sensor",
+        "name": "Situated Sensor",
+        "registry": "postfoundationscrisis.json",
+        "category": "postfoundations",
+        "map_ready": true,
+        "has_image": true,
+        "score": 7,
+        "fp": 1,
+        "tier": "small"
+      }
+    ],
     "Bias as structural incompleteness": [
       {
         "lookup": "bias_atlas_room",
@@ -280,21 +397,10 @@
         "tier": "applied"
       },
       {
-        "lookup": "excluded_class_visualizer",
-        "name": "Excluded Class Visualizer",
-        "registry": "postfoundationscrisis.json",
-        "category": "postfoundationscrisis",
-        "map_ready": true,
-        "has_image": true,
-        "score": 7,
-        "fp": 1,
-        "tier": "applied"
-      },
-      {
         "lookup": "room_shape_demonstrator",
         "name": "Room Shape Demonstrator",
         "registry": "postfoundationscrisis.json",
-        "category": "postfoundationscrisis",
+        "category": "postfoundations",
         "map_ready": true,
         "has_image": true,
         "score": 6,
@@ -386,7 +492,7 @@
         "lookup": "merge_conflict_visualizer",
         "name": "Merge Conflict Visualizer",
         "registry": "postfoundationscrisis.json",
-        "category": "postfoundationscrisis",
+        "category": "postfoundations",
         "map_ready": true,
         "has_image": true,
         "score": 7,
@@ -397,7 +503,7 @@
         "lookup": "cap_theorem_walk",
         "name": "CAP Theorem Walk",
         "registry": "postfoundationscrisis.json",
-        "category": "postfoundationscrisis",
+        "category": "postfoundations",
         "map_ready": true,
         "has_image": true,
         "score": 6,
@@ -438,17 +544,6 @@
         "score": 99,
         "fp": 9,
         "tier": "large"
-      },
-      {
-        "lookup": "situated_sensor",
-        "name": "Situated Sensor",
-        "registry": "postfoundationscrisis.json",
-        "category": "postfoundationscrisis",
-        "map_ready": true,
-        "has_image": true,
-        "score": 7,
-        "fp": 1,
-        "tier": "small"
       }
     ],
     "Collective knowledge / the commons": [
@@ -500,7 +595,7 @@
         "lookup": "wiki_fragment_station",
         "name": "Wiki Fragment Station",
         "registry": "postfoundationscrisis.json",
-        "category": "postfoundationscrisis",
+        "category": "postfoundations",
         "map_ready": true,
         "has_image": true,
         "score": 7,
@@ -524,7 +619,7 @@
         "lookup": "rhizome_cave_demo",
         "name": "rhizome_cave_demo",
         "registry": "isosurfaces.json",
-        "category": "proceduralgeneration",
+        "category": "procedural",
         "map_ready": true,
         "has_image": true,
         "score": 99,
