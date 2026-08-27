@@ -4849,7 +4849,21 @@ func _page_build(shown: String) -> void:
 ## CREATED when the page was blank, so a field with no sentence can be given one
 ## from inside the museum.
 func _page_save() -> void:
-	if _page_ui == null:
+	# THE GUARD OUTLIVED THE WINDOW (2026-08-27). This tested `_page_ui`, the
+	# modal page window — but the editor moved INTO the inspector on 08-26 and
+	# `_page_build`, the only thing that ever assigned `_page_ui`, lost its call
+	# site in the same commit. So every write from inside the museum returned on
+	# its first line: the button did nothing, F5 did nothing, and `_page_say` was
+	# never reached, so nothing said so either. Zero notes exist in the whole
+	# corpus — 842 lines, no commit has ever carried one — which is exactly what
+	# a silently dead writer looks like from the outside.
+	#
+	# Guard on the FIELDS the save actually reads, wherever they were built. The
+	# inspector builds them, the old modal built them, and a third surface
+	# tomorrow will build them too.
+	if _page_line == null or not is_instance_valid(_page_line):
+		return
+	if _page_note == null or not is_instance_valid(_page_note):
 		return
 	var chapter := String(_page_ctx.get("chapter", ""))
 	var pearl := String(_page_ctx.get("pearl", ""))
@@ -4868,6 +4882,13 @@ func _page_save() -> void:
 		_page_say("that pearl is not in the %s book" % chapter)
 		return
 	var lines: Array = pl.get("lines", [])
+	# A WALL THAT SPEAKS FOR NOTHING MUST NOT WRITE (2026-08-27). The match below
+	# is on token, and a pearl's own wall text is a line with NO token — so an
+	# unadopted wall, whose token is "", would have matched the pearl's opening
+	# sentence and overwritten it with whatever was in the box.
+	if token == "":
+		_page_say("this wall speaks for nothing yet - give it a work first")
+		return
 	var hit: Dictionary = {}
 	for lv in lines:
 		if String((lv as Dictionary).get("token", "")) == token:
@@ -4891,15 +4912,24 @@ func _page_save() -> void:
 	else:
 		hit.erase("viz")
 	pl["lines"] = lines
-	# the live session may hold the file; the book is small, the retry is cheap
+	# ATOMIC, AND THE RETRY ACTUALLY WAITS. FileAccess.WRITE truncates the book
+	# the moment it opens it, so a crash between open and store leaves a
+	# zero-length chapter — the same shape of loss that emptied a 17,305-line
+	# source file on 2026-08-24. Write a sibling and rename over: a rename is
+	# atomic, and a failure leaves the original whole. The old loop also burned
+	# all 20 attempts inside one frame, which is not a retry, it is a spin.
 	var wrote := false
+	var tmp_path: String = path + ".tmp"
 	for _try in range(20):
-		var f := FileAccess.open(path, FileAccess.WRITE)
+		var f := FileAccess.open(tmp_path, FileAccess.WRITE)
 		if f != null:
 			f.store_string(JSON.stringify(doc, " ") + "\n")
 			f.close()
-			wrote = true
-			break
+			var da := DirAccess.open(_book_dir)
+			if da != null and da.rename(tmp_path.get_file(), path.get_file()) == OK:
+				wrote = true
+				break
+		OS.delay_msec(25)
 	if not wrote:
 		_page_say("the book would not open for writing")
 		return
@@ -14108,6 +14138,20 @@ func _input(event: InputEvent) -> void:
 	# THE PAGE is modal while it is open: the museum's keys stay off, so typing
 	# a field note cannot toggle the doll house or walk the visitor away from
 	# the wall they are writing about. Esc closes, F5 writes.
+	#
+	# THE PAGE IS NOT ALWAYS A WINDOW (2026-08-27). Since the editor moved into
+	# the inspector there is usually no `_page_ui` at all, so this whole branch
+	# was skipped and F5 never reached the save. The page is open whenever its
+	# FIELDS exist. The inspector is not modal, though — it sits beside the
+	# museum rather than over it — so only the two page keys are taken there,
+	# and the rest of the keyboard keeps working.
+	var page_fields: bool = _page_line != null and is_instance_valid(_page_line)
+	if page_fields and (_page_ui == null or not is_instance_valid(_page_ui)):
+		if event is InputEventKey and (event as InputEventKey).pressed and not (event as InputEventKey).echo:
+			if (event as InputEventKey).keycode == KEY_F5:
+				_page_save()
+				get_viewport().set_input_as_handled()
+				return
 	if _page_ui != null and is_instance_valid(_page_ui):
 		if event is InputEventKey and (event as InputEventKey).pressed and not (event as InputEventKey).echo:
 			var pkc := (event as InputEventKey).keycode

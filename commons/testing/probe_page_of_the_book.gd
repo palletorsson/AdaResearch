@@ -281,6 +281,23 @@ func _run() -> void:
 				fails.append("the inspector shows no page section for a wall work")
 			else:
 				notes.append("the inspector holds the page: line, field notes, what it shows")
+			# THE FIXTURE STOOD ON THE HAPPY CELL (2026-08-27). This probe calls
+			# _page_build at its top, which is the ONLY thing that ever assigns
+			# _page_ui — and _page_save guarded on _page_ui. So this check has
+			# always saved through a modal window the museum stopped opening on
+			# 2026-08-26, and reported green while every write a person could
+			# actually make returned on its first line. 842 lines in the book and
+			# not one note in any commit, with a 17-check probe passing over it.
+			#
+			# Put the modal away and rebuild the page the way the inspector does,
+			# so what is measured from here down is the path the hand walks.
+			inst.call("_page_close")
+			inst.call("_insp_page_clear")
+			inst.call("_insp_page_section")
+			if inst.get("_page_ui") != null:
+				fails.append("the modal is still open - this is not the field's path")
+			else:
+				notes.append("the inspector page stands with NO modal window behind it")
 			var il: TextEdit = inst.get("_page_line")
 			var ino: TextEdit = inst.get("_page_note")
 			if il == null or ino == null:
@@ -304,6 +321,25 @@ func _run() -> void:
 					fails.append("writing from the inspector did not reach the book (got %s)" % got.substr(0, 30))
 				else:
 					notes.append("writing from the inspector reaches the same book line")
+				# THE REFLECTION, which is the reason any of this exists: the field
+				# note must survive the same round trip as the line. It is checked
+				# separately because `text` and `note` are written by two different
+				# branches of _page_save, and only one of them was ever asserted.
+				var got_note := ""
+				if back_v is Dictionary:
+					for pv5 in ((back_v as Dictionary).get("pearls", []) as Array):
+						var pl5: Dictionary = pv5
+						if String(pl5.get("pearl", "")) != pearl \
+								and String(pl5.get("map", "")).replace("_", " ").to_lower() != pearl:
+							continue
+						for lv5 in (pl5.get("lines", []) as Array):
+							if String((lv5 as Dictionary).get("token", "")) == String(lbl.get_meta("em_speak_token")):
+								got_note = String((lv5 as Dictionary).get("note", ""))
+				if got_note != "a second note, from the inspector":
+					fails.append("THE REFLECTION did not reach the book (note is %s)" % (
+						"empty" if got_note == "" else got_note.substr(0, 30)))
+				else:
+					notes.append("the FIELD NOTE lands in the book beside its line")
 			# selecting something else puts the page away
 			inst.call("_doll_select", -1)
 			inst.call("_insp_page_section")
