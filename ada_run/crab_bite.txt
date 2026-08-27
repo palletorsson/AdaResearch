@@ -1,0 +1,21 @@
+THE BITE, END TO END
+  player at origin, 100 health; crab 8.00 m away, detect 14 m
+  contact 18   lunge 34   lunge range 1.90 m   bite range 0.62 m   cooldown 0.95 s
+
+   5.45 s  closed to 1.96 m
+   5.80 s  HIT 1 for 34 — health 66  (contact)
+   6.65 s  HIT 2 for 18 — health 48  (contact)
+   7.55 s  HIT 3 for 18 — health 30  (contact)
+   8.40 s  HIT 4 for 18 — health 12  (contact)
+   9.25 s  HIT 5 for 18 — health 0  (contact)
+   9.25 s  DEAD
+
+  travelled to contact in 5.45 s
+  first bite at 5.80 s
+  leaps committed: 1
+  total hits: 5 for 106 damage
+  KILLED THE PLAYER in 9.25 s
+
+  live fallback: /root/GameManager.apply_health_damage present
+
+VERDICT: it walks, it leaps, it bites, it kills

@@ -1,0 +1,27 @@
+{
+ "map": "Point_One",
+ "spawn_scenes": [
+  {
+   "scene": "res://commons/testing/probe_field_player.tscn",
+   "position": [
+    4.0,
+    0.6,
+    0.0
+   ]
+  }
+ ],
+ "camera": {
+  "position": [
+   6.0,
+   3.4,
+   -3.2
+  ],
+  "look_at": [
+   5.5,
+   0.8,
+   5.0
+  ],
+  "fov": 62
+ },
+ "wait": 26.0
+}

@@ -42,6 +42,33 @@ const RIG := "res://commons/hazards/octapod_crawler/csg_four_leg_walker.tscn"
 @export var patrol_speed: float = 0.3
 @export var turn_speed_deg: float = 150.0
 
+@export_group("Bite")
+## IT COULD NOT TOUCH ANYTHING (2026-08-27, Palle: "so I can see it walk, attack
+## and kill the player"). The registry filed this artifact as a hazard and it
+## instantiated no collider, no area and no physics body of any kind: it walked
+## through the visitor and always had. The whole contract already exists one
+## directory up, written and proven on octapod_crawler — proximity damage with
+## a cooldown, a lunge that hits harder, three damage method names tried in
+## order, then GameManager — so head_crab signs THAT rather than inventing one.
+@export var can_bite: bool = true
+@export var contact_damage: float = 18.0
+@export var lunge_damage: float = 34.0
+@export var lunge_range: float = 1.9      ## how close before it commits
+@export var lunge_speed: float = 4.2      ## metres per second during the leap
+@export var lunge_duration: float = 0.42
+@export var lunge_rise: float = 0.22      ## how high the body lifts mid-leap
+@export var bite_range: float = 0.72      ## contact distance, measured FLAT
+## THE BITE IS MEASURED FLAT (2026-08-27, field failure in Point_One). The first
+## version used a 3-D distance and the animal crossed the room, closed to 0.78 m
+## and never bit — because its own root rides BELOW the floor by design
+## (position.y = _floor_y + _ride, and ride is negative), while a player body's
+## origin sits above it. Almost the whole of that 0.78 m was vertical. On a bare
+## bench floor the fixture happened to put both at the same height, so the
+## fixture passed and the map failed. Horizontal distance decides the bite;
+## height only decides whether the target is on the same storey.
+@export var bite_height: float = 2.2      ## vertical reach, so it cannot bite a balcony
+@export var bite_cooldown: float = 0.95
+
 # the gait, in the authored rig's own units — scaled to world in _ready
 @export_group("Gait")
 @export var step_threshold_local: float = 1.25
@@ -137,6 +164,9 @@ var _look_t: float = 0.0
 var _patrol_angle: float = 0.0
 var _patrol_t: float = 0.0
 var _rng := RandomNumberGenerator.new()
+var _bite_t: float = 0.0      # cooldown, counts down
+var _lunge_t: float = 0.0     # >0 while committed to a leap
+var _lunge_dir: Vector3 = Vector3.ZERO
 var _floor_y: float = 0.0     # the height the artifact was PLACED at
 var _floor_learned: bool = false
 var _ride: float = 0.29   # body height above the floor, set from crab_scale
@@ -215,6 +245,11 @@ func apply_grid_config(config: Dictionary) -> void:
 		finish_glow = _cfg_num(config["glow"], finish_glow)
 	if config.has("accent"):
 		finish_accent = _cfg_colour(config["accent"], finish_accent)
+	if config.has("damage"):
+		contact_damage = _cfg_num(config["damage"], contact_damage)
+		lunge_damage = contact_damage * 1.9
+	if config.has("bite"):
+		can_bite = str(config["bite"]).strip_edges().to_lower() not in ["0", "false", "off", "no"]
 	# already built? then re-derive, or the token changed a number nobody reads
 	if is_inside_tree():
 		_apply_scale()
@@ -465,6 +500,53 @@ func _ground_at(p: Vector3) -> float:
 	return _floor_y
 
 
+## THE BITE. Proximity, not a collider: this animal moves by writing position
+## every frame and owns no physics body, so a contact test is a distance test —
+## the same technique octapod_crawler uses for the same reason.
+func _try_bite() -> void:
+	if not can_bite or _bite_t > 0.0:
+		return
+	if _target == null or not is_instance_valid(_target):
+		return
+	if not _bites(_target):
+		return
+	var off: Vector3 = _target.global_position - global_position
+	if absf(off.y) > bite_height:
+		return
+	off.y = 0.0
+	if off.length() > bite_range:
+		return
+	var dmg: float = lunge_damage if _lunge_t > 0.0 else contact_damage
+	if _damage(_target, dmg):
+		_bite_t = bite_cooldown
+		_lunge_t = 0.0
+
+
+## THE MUSEUM WALKER IS HUNTED BUT NOT HURT (octapod_crawler.gd:1169, measured
+## there and true here). Damage routes through GameManager.apply_health_damage,
+## which flashes and REPOSITIONS the target to the map's spawn point. The
+## endless museum has no such spawn: one bite would fling the visitor to the
+## origin of a 4.8 km building. So it lands the leap and deals nothing there,
+## until the museum owns a hurt of its own. On the grid, where a spawn point
+## exists and the death path IS the design, it bites for real.
+func _bites(node: Node) -> bool:
+	if not (node is Node3D):
+		return false
+	return not (node as Node3D).is_in_group("em_walker")
+
+
+func _damage(target: Node, amount: float) -> bool:
+	for m in ["take_damage", "apply_damage", "apply_health_damage"]:
+		if target.has_method(m):
+			target.call(m, amount)
+			return true
+	var gm: Node = get_node_or_null("/root/GameManager")
+	if gm != null and gm.has_method("apply_health_damage"):
+		gm.call("apply_health_damage", amount)
+		return true
+	return false
+
+
 ## The visitor, on whichever lane is running. The museum's walker is in group
 ## em_walker ONLY and is deliberately not a player_body, so it is named here.
 func _find_target() -> void:
@@ -494,14 +576,27 @@ func _process(delta: float) -> void:
 	# ── steer: toward the visitor if it is near, otherwise wander ──────────
 	var want_yaw: float = rotation.y
 	var speed: float = patrol_speed
+	_bite_t = maxf(0.0, _bite_t - delta)
 	if _target != null and is_instance_valid(_target):
 		var to: Vector3 = _target.global_position - global_position
 		to.y = 0.0
-		if to.length() < detect_m and to.length() > 0.35:
+		var d: float = to.length()
+		if d < detect_m and d > 0.30:
 			want_yaw = atan2(-to.x, -to.z)
 			speed = chase_speed
-		elif to.length() <= 0.35:
+			# IT USED TO STOP AT 0.35 m AND STAND THERE. That was the whole
+			# attack: walk up to the visitor and wait. Inside lunge_range it
+			# now commits — a fixed-duration leap along the direction it had
+			# when it decided, so a visitor who steps aside is missed.
+			if can_bite and _lunge_t <= 0.0 and _bite_t <= 0.0 and d <= lunge_range and _bites(_target):
+				_lunge_t = lunge_duration
+				_lunge_dir = to.normalized()
+		elif d <= 0.30:
 			speed = 0.0
+	if _lunge_t > 0.0:
+		_lunge_t = maxf(0.0, _lunge_t - delta)
+		want_yaw = atan2(-_lunge_dir.x, -_lunge_dir.z)
+		speed = lunge_speed
 	if is_equal_approx(speed, patrol_speed):
 		_patrol_t += delta
 		if _patrol_t >= 3.0:
@@ -515,7 +610,13 @@ func _process(delta: float) -> void:
 		# where it should have covered four.
 		position += -basis.z.normalized() * speed * delta
 	position.y = _floor_y + _ride
+	if _lunge_t > 0.0 and lunge_duration > 0.0:
+		# a leap is a rise and a fall, not a hop upward: sin over the whole
+		# duration peaks in the middle and returns the body to its ride height
+		var u: float = 1.0 - (_lunge_t / lunge_duration)
+		position.y += sin(u * PI) * lunge_rise
 	_update_gait(delta)
+	_try_bite()
 
 
 ## PLANT AND STEP — four_leg_critter.gd:137, faithfully. A foot holds its world
