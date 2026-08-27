@@ -37,6 +37,8 @@ var _wired: Array = []          # controllers already connected
 var _hud: CanvasLayer = null
 var _hud_label: Label = null
 var _scan: float = 0.0
+var _key_down: bool = false
+var _mmb_down: bool = false
 
 
 func _ready() -> void:
@@ -49,6 +51,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	_cool = maxf(0.0, _cool - delta)
+	_poll_desktop()
 	# controllers arrive with the rig, which is not up when an autoload readies
 	_scan += delta
 	if _scan > 1.0:
@@ -56,6 +59,39 @@ func _process(delta: float) -> void:
 		_wire_controllers()
 		if show_desktop_count and _hud == null and not _in_vr():
 			_build_hud()
+
+
+## POLLED, NOT LISTENED FOR. _unhandled_input alone passed on a bench and
+## FAILED in a real map: measured in Point_One through the project's own
+## catalog, F and the middle mouse both did nothing, because an event only
+## reaches _unhandled_input if nothing between the OS and here consumed it, and
+## the desktop map catalog consumes its keys. Polling the device cannot be eaten
+## by anybody. The listener below stays as well — it costs nothing and it is the
+## path that fires on the same frame as the press.
+func _poll_desktop() -> void:
+	if _in_vr():
+		return
+	# a key press belongs to a text field while one has focus — the page editor
+	# and the map switcher both put the visitor in one
+	var vp := get_viewport()
+	if vp != null:
+		var focus := vp.gui_get_focus_owner()
+		if focus is LineEdit or focus is TextEdit:
+			_key_down = false
+			_mmb_down = false
+			return
+	var k := false
+	for code in DESKTOP_KEYS:
+		if Input.is_physical_key_pressed(code):
+			k = true
+			break
+	if k and not _key_down:
+		fire_from_view()
+	_key_down = k
+	var m := Input.is_mouse_button_pressed(MOUSE_BUTTON_MIDDLE)
+	if m and not _mmb_down:
+		fire_from_view()
+	_mmb_down = m
 
 
 func _unhandled_input(event: InputEvent) -> void:
