@@ -64,6 +64,42 @@ func _run() -> void:
 	else:
 		notes.append("all four frame bars travelled with the mount")
 
+	# 5. THE SECOND MOVE — the one nobody ever made (2026-08-27, Palle: "frames
+	# in at the walls are pressed together after moving, can that relate to
+	# that they have been rotated?"). It can, and it does. _hang_box puts the
+	# width on local X for a wall running along x and on local Z for a wall
+	# running along z: the box is ROTATED between the two. _hang_retarget
+	# recovered the format as (basis.x, basis.y) unconditionally, so a work
+	# standing on an x-facing wall handed back its DEPTH — 18 mm — as its
+	# width. 0.018 clears the 0.01 guard, so nothing refused: the move rebuilt
+	# a 1.2 m picture 18 mm wide and its two stiles came together.
+	# The work is now on an x-facing wall. Move it again and measure.
+	var w_before: float = maxf((mo[0] as Transform3D).basis.x.length(), (mo[0] as Transform3D).basis.z.length())
+	var h_before: float = (mo[0] as Transform3D).basis.y.length()
+	var ok2: bool = EMD._hang_retarget(0, Vector2i(4, 9), Vector2i(0, 1), fr, mo, fi)
+	if not ok2:
+		fails.append("the second move was refused")
+	else:
+		var b2: Basis = (mo[0] as Transform3D).basis
+		var w_after: float = maxf(b2.x.length(), b2.z.length())
+		var h_after: float = b2.y.length()
+		if absf(w_after - w_before) > 0.02:
+			fails.append("A MOVE RESIZED THE WORK: %.3f m wide before, %.3f m after (%.0f%% of it left)" % [
+				w_before, w_after, 100.0 * w_after / maxf(w_before, 0.001)])
+		else:
+			notes.append("a SECOND move keeps the size (%.2f -> %.2f m wide)" % [w_before, w_after])
+		if absf(h_after - h_before) > 0.02:
+			fails.append("a move resized the HEIGHT: %.3f -> %.3f" % [h_before, h_after])
+		# and the frame must still fit the mount: the two stiles sit one mount
+		# width apart, so a collapsed mount shows up as stiles pressed together
+		var stile_gap: float = (fr[2] as Transform3D).origin.distance_to((fr[3] as Transform3D).origin)
+		if absf(stile_gap - (w_after + EMD.HANG_FRAME_W)) > 0.03:
+			fails.append("the stiles sit %.3f m apart, the mount is %.3f m wide" % [stile_gap, w_after])
+		elif stile_gap < 0.5:
+			fails.append("THE FRAMES ARE PRESSED TOGETHER: the two stiles are %.0f mm apart" % (stile_gap * 1000.0))
+		else:
+			notes.append("the frame still fits the mount (stiles %.2f m apart)" % stile_gap)
+
 	# 4. a nonsense direction is refused
 	var keep: Vector3 = (mo[0] as Transform3D).origin
 	var bad: bool = EMD._hang_retarget(0, Vector2i(2, 2), Vector2i(0, 0), fr, mo, fi)

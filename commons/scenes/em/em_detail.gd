@@ -800,10 +800,25 @@ static func _hang_retarget(si: int, cell: Vector2i, dir: Vector2i,
 		frame_out: Array, mount_out: Array, field_out: Array) -> bool:
 	if si < 0 or si >= mount_out.size() or (dir.x == 0 and dir.y == 0):
 		return false
-	# the format this page was already built at: the mount box is scaled to
-	# (wm, hm, depth), so its own basis carries the size back
+	# THE FORMAT COMES BACK OUT OF A ROTATED BOX (2026-08-27, Palle: "frames in
+	# at the walls are pressed together after moving, can that relate to that
+	# they have been rotated?" — it can, and it did).
+	#
+	# _hang_box scales a box in the WALL's axes, not the world's: a wall running
+	# along x gets (u_len, height, depth) and a wall running along z gets
+	# (depth, height, u_len). The width therefore sits on local X for one and on
+	# local Z for the other — the box is rotated a quarter turn between them.
+	# Reading the format as (basis.x, basis.y) unconditionally handed back the
+	# DEPTH, 18 mm, for every work standing on an x-facing wall. 0.018 clears
+	# the 0.01 guard below, so nothing refused: the move rebuilt a 1.2 m picture
+	# 18 mm wide, and its two stiles came together 93 mm apart. Measured.
+	#
+	# So find the depth axis rather than assuming it: whichever of X and Z is
+	# nearest the mount's own known proudness is the depth, and the other one is
+	# the width. Exact, and it does not assume a picture is wider than it is deep.
 	var mb: Basis = (mount_out[si] as Transform3D).basis
-	var fmt := Vector2(mb.x.length(), mb.y.length())
+	var was_along_x: bool = absf(mb.z.length() - HANG_MOUNT_PROUD) <= absf(mb.x.length() - HANG_MOUNT_PROUD)
+	var fmt := Vector2(mb.x.length() if was_along_x else mb.z.length(), mb.y.length())
 	if fmt.x <= 0.01 or fmt.y <= 0.01:
 		return false
 	var fx: float = float(cell.x) + 0.5 + float(dir.x) * 0.5

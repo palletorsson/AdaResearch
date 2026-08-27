@@ -28,7 +28,7 @@ hand_pearls edits into trunk_branches.json and reseeds, so every tool downstream
 hold keeps whatever hand edit it had.
 """
 from __future__ import annotations
-import argparse, json, subprocess, sys
+import argparse, json, os, subprocess, sys
 from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 TRUNK = REPO / "commons" / "data" / "trunk_branches.json"
@@ -49,10 +49,85 @@ def load_book(chapter: str) -> dict:
 
 
 def save_book(b: dict) -> Path:
+    """Atomic. write_text opens the file for writing — which TRUNCATES it — before
+    it validates its own arguments, so a typo in a keyword empties the file it was
+    meant to write. That cost a 17,305-line source file on 2026-08-24."""
     BOOK_DIR.mkdir(parents=True, exist_ok=True)
     p = book_path(b["chapter"])
-    p.write_text(json.dumps(b, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
+    tmp = p.with_suffix(".json.tmp")
+    tmp.write_text(json.dumps(b, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
+    os.replace(tmp, p)
     return p
+
+
+# The keys MIGRATE ITSELF WRITES — everything the trunk owns and can rebuild.
+# Anything on a line or a pearl that is NOT in these sets belongs to the book
+# alone and must survive a migrate. Stated as an allow-list of what the trunk
+# owns rather than a deny-list of what the book keeps, so a key invented
+# tomorrow is preserved by default instead of quietly dropped until somebody
+# notices it missing.
+TRUNK_OWNS_LINE = {
+    "token", "text", "by", "place", "support_m", "lock", "config", "footprint",
+    "reach", "count", "spread", "gap_cells", "rotation", "offset", "scale",
+    "indent", "gap",
+}
+TRUNK_OWNS_PEARL = {
+    "pearl", "map", "lines", "cells", "simulations", "utilities", "ramps",
+    "gaps", "stages", "rooms", "join", "ordered", "hero",
+}
+
+
+def carry_hand_keys(fresh: dict, old: dict) -> list[str]:
+    """A migrate REBUILDS the book from the trunk, so everything the trunk does
+    not carry was erased by every migrate ever run: a reflection, a
+    visualization, an adoption, a hang, the placed_by stamp, a dropped pearl.
+
+    Measured 2026-08-27, when all 24 chapters already had books: 56 pearls carry
+    `drop` and 67 lines carry `placed_by`, and migrate writes neither. Add the
+    reflections this merge was built for and one documented command — "no book
+    yet for this chapter, run python tools/book.py migrate" — deletes the hand's
+    entire contribution without a word.
+
+    So it merges. Pearls match on `map`, lines on `token`, and text-only lines by
+    their order among themselves. Returns what it carried so the caller can print
+    it: a silent rescue reads exactly like a silent loss."""
+    kept: list[str] = []
+    old_by_map = {p.get("map"): p for p in old.get("pearls", []) if p.get("map")}
+    # A DROPPED PEARL IS NOT IN THE TRUNK AT ALL, so the fresh book has no row to
+    # merge onto and the whole pearl — its lines, its words, its rulings — simply
+    # vanished. Measured 2026-08-27: softbodies would have gone from 34 pearls to
+    # 9, losing the 25 this file's own comment promises are kept "so it can come
+    # back with one click". Reinstate them at the index they held, walking the old
+    # order so their arrangement among themselves survives too.
+    fresh_maps = {p.get("map") for p in fresh.get("pearls", [])}
+    for i, op in enumerate(old.get("pearls", [])):
+        if op.get("map") in fresh_maps:
+            continue
+        fresh.setdefault("pearls", []).insert(min(i, len(fresh["pearls"])), op)
+        kept.append("pearl")
+    for bp in fresh.get("pearls", []):
+        op = old_by_map.get(bp.get("map"))
+        if not op:
+            continue
+        for k, v in op.items():
+            if k not in TRUNK_OWNS_PEARL and k not in bp:
+                bp[k] = v
+                kept.append(k)
+        old_tok = {ln.get("token"): ln for ln in op.get("lines", []) if ln.get("token")}
+        old_free = [ln for ln in op.get("lines", []) if not ln.get("token")]
+        free_i = 0
+        for ln in bp.get("lines", []):
+            src = old_tok.get(ln["token"]) if ln.get("token") else (
+                old_free[free_i] if free_i < len(old_free) else None)
+            if not ln.get("token"):
+                free_i += 1
+            if not src:
+                continue
+            for k, v in src.items():
+                if k not in TRUNK_OWNS_LINE and k not in ln:
+                    ln[k] = v
+                    kept.append(k)
+    return kept
 
 
 # ── migrate: trunk -> book ─────────────────────────────────────────────────
@@ -121,6 +196,13 @@ def migrate(chapter: str) -> dict:
         if p.get("ordered"): bp["ordered"] = True     # composed: the list IS the cast (else the dealer adds relatives)
         if p.get("hero"): bp["hero"] = p["hero"]
         book["pearls"].append(bp)
+    kept = carry_hand_keys(book, load_book(chapter))
+    if kept:
+        tally: dict[str, int] = {}
+        for k in kept:
+            tally[k] = tally.get(k, 0) + 1
+        print("  carried through the migrate: " + ", ".join(
+            "%d %s" % (n, k) for k, n in sorted(tally.items(), key=lambda x: -x[1])))
     return book
 
 
