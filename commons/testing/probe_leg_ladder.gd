@@ -30,10 +30,14 @@ func _say(s: String) -> void: _l.append(s); print(s)
 
 ## the node that actually carries the walker script — never the .tscn root
 func _scripted(n: Node) -> Node3D:
+	# NOT merely "the first scripted node". The roots now carry a config
+	# forwarder, so that rule returns the root — the very trap this probe was
+	# rewritten to avoid, re-armed by the fix that gave the roots a script.
+	# The node that owns the gait is the one that owns the gait's properties.
 	var stack: Array = [n]
 	while not stack.is_empty():
 		var q: Node = stack.pop_back()
-		if q is Node3D and q.get_script() != null:
+		if q is Node3D and q.get_script() != null and q.get("driven_by_player") != null:
 			return q as Node3D
 		for c in q.get_children(): stack.append(c)
 	return null

@@ -197,7 +197,11 @@ func _learn_place() -> void:
 		return
 	_floor_learned = true
 	_pace_home = global_position
-	_floor_y = (global_transform * Vector3(0.0, -2.2, 0.0)).y
+	# NOT the literal 2.2. Five of the six scenes park this node at y = 2.2 with
+	# a five-unit leg under it, but octapod_ik is a rig at a twentieth of that
+	# scale — 0.12 per bone, a 0.6 leg — so the shoulder height has to come from
+	# the scene rather than from a constant that happened to be true five times.
+	_floor_y = (global_transform * Vector3(0.0, -_authored_y, 0.0)).y
 
 
 ## Keep looking for the actual floor for two seconds. The structure's static

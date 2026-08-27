@@ -1,22 +1,36 @@
-[gd_scene format=4]
+[gd_scene load_steps=3 format=4]
 
 ;; Octapod IK rig — 8 legs with FABRIK3D + SpringArm3D ground contact.
 ;; Pattern: each IK_leg (Skeleton3D + FABRIK3D) targets a SpringArm3D child Marker3D.
 ;; Built to match the beast_demo.tscn architecture from ik-demo-4.6.
 ;; Bone chain: 6 bones, spacing 0.12 in +Y. Dual FABRIK chains (magnet + foot).
 
+[ext_resource type="Script" path="res://commons/hazards/octapod_crawler/octapod_ik.gd" id="1_ik"]
+[ext_resource type="Script" path="res://commons/hazards/octapod_crawler/leg_walker_root.gd" id="9_root"]
+
 [node name="OctapodIK" type="Node3D"]
+script = ExtResource("9_root")
+
+;; -- Body (2026-08-27) -------------------------------------------------
+;; The rig shipped without one: eight finished legs and nothing to hang
+;; them on. The legs and their SpringArms move under it, which keeps every
+;; FABRIK target NodePath (../../../../SpringArm3D_N/FootTarget_N) resolving
+;; exactly as before -- four levels up from a Skeleton3D is still the node
+;; the arms are parented to.
+[node name="Body" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+script = ExtResource("1_ik")
 
 ;; ═══════════════════════════════════════════════════════════════════════════
 ;; LEG 0 — angle 0° (positive X)
 ;; ═══════════════════════════════════════════════════════════════════════════
 
-[node name="IK_leg_0" type="Node3D" parent="."]
+[node name="IK_leg_0" type="Node3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="Armature" type="Node3D" parent="IK_leg_0"]
+[node name="Armature" type="Node3D" parent="Body/IK_leg_0"]
 
-[node name="Skeleton3D" type="Skeleton3D" parent="IK_leg_0/Armature"]
+[node name="Skeleton3D" type="Skeleton3D" parent="Body/IK_leg_0/Armature"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.012, 0, 0)
 bones/0/name = "Bone"
 bones/0/parent = -1
@@ -61,7 +75,7 @@ bones/5/position = Vector3(0, 0.12, 0)
 bones/5/rotation = Quaternion(0, 0, 0, 1)
 bones/5/scale = Vector3(1, 1, 1)
 
-[node name="FABRIK3D" type="FABRIK3D" parent="IK_leg_0/Armature/Skeleton3D"]
+[node name="FABRIK3D" type="FABRIK3D" parent="Body/IK_leg_0/Armature/Skeleton3D"]
 angular_delta_limit = 3.141592653589793
 deterministic = true
 setting_count = 2
@@ -100,19 +114,19 @@ settings/1/joints/4/limitation = null
 settings/1/joints/5/rotation_axis = 3
 settings/1/joints/5/limitation = null
 
-[node name="magnet" type="Marker3D" parent="IK_leg_0"]
+[node name="magnet" type="Marker3D" parent="Body/IK_leg_0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33, 0.20, 0)
 
 ;; ═══════════════════════════════════════════════════════════════════════════
 ;; LEG 1 — angle 45°
 ;; ═══════════════════════════════════════════════════════════════════════════
 
-[node name="IK_leg_1" type="Node3D" parent="."]
+[node name="IK_leg_1" type="Node3D" parent="Body"]
 transform = Transform3D(0.70710678, 0, 0.70710678, 0, 1, 0, -0.70710678, 0, 0.70710678, 0, 0, 0)
 
-[node name="Armature" type="Node3D" parent="IK_leg_1"]
+[node name="Armature" type="Node3D" parent="Body/IK_leg_1"]
 
-[node name="Skeleton3D" type="Skeleton3D" parent="IK_leg_1/Armature"]
+[node name="Skeleton3D" type="Skeleton3D" parent="Body/IK_leg_1/Armature"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.012, 0, 0)
 bones/0/name = "Bone"
 bones/0/parent = -1
@@ -157,7 +171,7 @@ bones/5/position = Vector3(0, 0.12, 0)
 bones/5/rotation = Quaternion(0, 0, 0, 1)
 bones/5/scale = Vector3(1, 1, 1)
 
-[node name="FABRIK3D" type="FABRIK3D" parent="IK_leg_1/Armature/Skeleton3D"]
+[node name="FABRIK3D" type="FABRIK3D" parent="Body/IK_leg_1/Armature/Skeleton3D"]
 angular_delta_limit = 3.141592653589793
 deterministic = true
 setting_count = 2
@@ -196,19 +210,19 @@ settings/1/joints/4/limitation = null
 settings/1/joints/5/rotation_axis = 3
 settings/1/joints/5/limitation = null
 
-[node name="magnet" type="Marker3D" parent="IK_leg_1"]
+[node name="magnet" type="Marker3D" parent="Body/IK_leg_1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33, 0.20, 0)
 
 ;; ═══════════════════════════════════════════════════════════════════════════
 ;; LEG 2 — angle 90°
 ;; ═══════════════════════════════════════════════════════════════════════════
 
-[node name="IK_leg_2" type="Node3D" parent="."]
+[node name="IK_leg_2" type="Node3D" parent="Body"]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 0, 0)
 
-[node name="Armature" type="Node3D" parent="IK_leg_2"]
+[node name="Armature" type="Node3D" parent="Body/IK_leg_2"]
 
-[node name="Skeleton3D" type="Skeleton3D" parent="IK_leg_2/Armature"]
+[node name="Skeleton3D" type="Skeleton3D" parent="Body/IK_leg_2/Armature"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.012, 0, 0)
 bones/0/name = "Bone"
 bones/0/parent = -1
@@ -253,7 +267,7 @@ bones/5/position = Vector3(0, 0.12, 0)
 bones/5/rotation = Quaternion(0, 0, 0, 1)
 bones/5/scale = Vector3(1, 1, 1)
 
-[node name="FABRIK3D" type="FABRIK3D" parent="IK_leg_2/Armature/Skeleton3D"]
+[node name="FABRIK3D" type="FABRIK3D" parent="Body/IK_leg_2/Armature/Skeleton3D"]
 angular_delta_limit = 3.141592653589793
 deterministic = true
 setting_count = 2
@@ -292,19 +306,19 @@ settings/1/joints/4/limitation = null
 settings/1/joints/5/rotation_axis = 3
 settings/1/joints/5/limitation = null
 
-[node name="magnet" type="Marker3D" parent="IK_leg_2"]
+[node name="magnet" type="Marker3D" parent="Body/IK_leg_2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33, 0.20, 0)
 
 ;; ═══════════════════════════════════════════════════════════════════════════
 ;; LEG 3 — angle 135°
 ;; ═══════════════════════════════════════════════════════════════════════════
 
-[node name="IK_leg_3" type="Node3D" parent="."]
+[node name="IK_leg_3" type="Node3D" parent="Body"]
 transform = Transform3D(-0.70710678, 0, 0.70710678, 0, 1, 0, -0.70710678, 0, -0.70710678, 0, 0, 0)
 
-[node name="Armature" type="Node3D" parent="IK_leg_3"]
+[node name="Armature" type="Node3D" parent="Body/IK_leg_3"]
 
-[node name="Skeleton3D" type="Skeleton3D" parent="IK_leg_3/Armature"]
+[node name="Skeleton3D" type="Skeleton3D" parent="Body/IK_leg_3/Armature"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.012, 0, 0)
 bones/0/name = "Bone"
 bones/0/parent = -1
@@ -349,7 +363,7 @@ bones/5/position = Vector3(0, 0.12, 0)
 bones/5/rotation = Quaternion(0, 0, 0, 1)
 bones/5/scale = Vector3(1, 1, 1)
 
-[node name="FABRIK3D" type="FABRIK3D" parent="IK_leg_3/Armature/Skeleton3D"]
+[node name="FABRIK3D" type="FABRIK3D" parent="Body/IK_leg_3/Armature/Skeleton3D"]
 angular_delta_limit = 3.141592653589793
 deterministic = true
 setting_count = 2
@@ -388,19 +402,19 @@ settings/1/joints/4/limitation = null
 settings/1/joints/5/rotation_axis = 3
 settings/1/joints/5/limitation = null
 
-[node name="magnet" type="Marker3D" parent="IK_leg_3"]
+[node name="magnet" type="Marker3D" parent="Body/IK_leg_3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33, 0.20, 0)
 
 ;; ═══════════════════════════════════════════════════════════════════════════
 ;; LEG 4 — angle 180°
 ;; ═══════════════════════════════════════════════════════════════════════════
 
-[node name="IK_leg_4" type="Node3D" parent="."]
+[node name="IK_leg_4" type="Node3D" parent="Body"]
 transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
 
-[node name="Armature" type="Node3D" parent="IK_leg_4"]
+[node name="Armature" type="Node3D" parent="Body/IK_leg_4"]
 
-[node name="Skeleton3D" type="Skeleton3D" parent="IK_leg_4/Armature"]
+[node name="Skeleton3D" type="Skeleton3D" parent="Body/IK_leg_4/Armature"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.012, 0, 0)
 bones/0/name = "Bone"
 bones/0/parent = -1
@@ -445,7 +459,7 @@ bones/5/position = Vector3(0, 0.12, 0)
 bones/5/rotation = Quaternion(0, 0, 0, 1)
 bones/5/scale = Vector3(1, 1, 1)
 
-[node name="FABRIK3D" type="FABRIK3D" parent="IK_leg_4/Armature/Skeleton3D"]
+[node name="FABRIK3D" type="FABRIK3D" parent="Body/IK_leg_4/Armature/Skeleton3D"]
 angular_delta_limit = 3.141592653589793
 deterministic = true
 setting_count = 2
@@ -484,19 +498,19 @@ settings/1/joints/4/limitation = null
 settings/1/joints/5/rotation_axis = 3
 settings/1/joints/5/limitation = null
 
-[node name="magnet" type="Marker3D" parent="IK_leg_4"]
+[node name="magnet" type="Marker3D" parent="Body/IK_leg_4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33, 0.20, 0)
 
 ;; ═══════════════════════════════════════════════════════════════════════════
 ;; LEG 5 — angle 225°
 ;; ═══════════════════════════════════════════════════════════════════════════
 
-[node name="IK_leg_5" type="Node3D" parent="."]
+[node name="IK_leg_5" type="Node3D" parent="Body"]
 transform = Transform3D(-0.70710678, 0, -0.70710678, 0, 1, 0, 0.70710678, 0, -0.70710678, 0, 0, 0)
 
-[node name="Armature" type="Node3D" parent="IK_leg_5"]
+[node name="Armature" type="Node3D" parent="Body/IK_leg_5"]
 
-[node name="Skeleton3D" type="Skeleton3D" parent="IK_leg_5/Armature"]
+[node name="Skeleton3D" type="Skeleton3D" parent="Body/IK_leg_5/Armature"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.012, 0, 0)
 bones/0/name = "Bone"
 bones/0/parent = -1
@@ -541,7 +555,7 @@ bones/5/position = Vector3(0, 0.12, 0)
 bones/5/rotation = Quaternion(0, 0, 0, 1)
 bones/5/scale = Vector3(1, 1, 1)
 
-[node name="FABRIK3D" type="FABRIK3D" parent="IK_leg_5/Armature/Skeleton3D"]
+[node name="FABRIK3D" type="FABRIK3D" parent="Body/IK_leg_5/Armature/Skeleton3D"]
 angular_delta_limit = 3.141592653589793
 deterministic = true
 setting_count = 2
@@ -580,19 +594,19 @@ settings/1/joints/4/limitation = null
 settings/1/joints/5/rotation_axis = 3
 settings/1/joints/5/limitation = null
 
-[node name="magnet" type="Marker3D" parent="IK_leg_5"]
+[node name="magnet" type="Marker3D" parent="Body/IK_leg_5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33, 0.20, 0)
 
 ;; ═══════════════════════════════════════════════════════════════════════════
 ;; LEG 6 — angle 270°
 ;; ═══════════════════════════════════════════════════════════════════════════
 
-[node name="IK_leg_6" type="Node3D" parent="."]
+[node name="IK_leg_6" type="Node3D" parent="Body"]
 transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 0, 0, 0)
 
-[node name="Armature" type="Node3D" parent="IK_leg_6"]
+[node name="Armature" type="Node3D" parent="Body/IK_leg_6"]
 
-[node name="Skeleton3D" type="Skeleton3D" parent="IK_leg_6/Armature"]
+[node name="Skeleton3D" type="Skeleton3D" parent="Body/IK_leg_6/Armature"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.012, 0, 0)
 bones/0/name = "Bone"
 bones/0/parent = -1
@@ -637,7 +651,7 @@ bones/5/position = Vector3(0, 0.12, 0)
 bones/5/rotation = Quaternion(0, 0, 0, 1)
 bones/5/scale = Vector3(1, 1, 1)
 
-[node name="FABRIK3D" type="FABRIK3D" parent="IK_leg_6/Armature/Skeleton3D"]
+[node name="FABRIK3D" type="FABRIK3D" parent="Body/IK_leg_6/Armature/Skeleton3D"]
 angular_delta_limit = 3.141592653589793
 deterministic = true
 setting_count = 2
@@ -676,19 +690,19 @@ settings/1/joints/4/limitation = null
 settings/1/joints/5/rotation_axis = 3
 settings/1/joints/5/limitation = null
 
-[node name="magnet" type="Marker3D" parent="IK_leg_6"]
+[node name="magnet" type="Marker3D" parent="Body/IK_leg_6"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33, 0.20, 0)
 
 ;; ═══════════════════════════════════════════════════════════════════════════
 ;; LEG 7 — angle 315°
 ;; ═══════════════════════════════════════════════════════════════════════════
 
-[node name="IK_leg_7" type="Node3D" parent="."]
+[node name="IK_leg_7" type="Node3D" parent="Body"]
 transform = Transform3D(0.70710678, 0, -0.70710678, 0, 1, 0, 0.70710678, 0, 0.70710678, 0, 0, 0)
 
-[node name="Armature" type="Node3D" parent="IK_leg_7"]
+[node name="Armature" type="Node3D" parent="Body/IK_leg_7"]
 
-[node name="Skeleton3D" type="Skeleton3D" parent="IK_leg_7/Armature"]
+[node name="Skeleton3D" type="Skeleton3D" parent="Body/IK_leg_7/Armature"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.012, 0, 0)
 bones/0/name = "Bone"
 bones/0/parent = -1
@@ -733,7 +747,7 @@ bones/5/position = Vector3(0, 0.12, 0)
 bones/5/rotation = Quaternion(0, 0, 0, 1)
 bones/5/scale = Vector3(1, 1, 1)
 
-[node name="FABRIK3D" type="FABRIK3D" parent="IK_leg_7/Armature/Skeleton3D"]
+[node name="FABRIK3D" type="FABRIK3D" parent="Body/IK_leg_7/Armature/Skeleton3D"]
 angular_delta_limit = 3.141592653589793
 deterministic = true
 setting_count = 2
@@ -772,65 +786,65 @@ settings/1/joints/4/limitation = null
 settings/1/joints/5/rotation_axis = 3
 settings/1/joints/5/limitation = null
 
-[node name="magnet" type="Marker3D" parent="IK_leg_7"]
+[node name="magnet" type="Marker3D" parent="Body/IK_leg_7"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33, 0.20, 0)
 
 ;; ═══════════════════════════════════════════════════════════════════════════
 ;; SPRING ARMS — one per leg, pointing straight down, with foot target Marker3D
 ;; ═══════════════════════════════════════════════════════════════════════════
 
-[node name="SpringArm3D_0" type="SpringArm3D" parent="."]
+[node name="SpringArm3D_0" type="SpringArm3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.30, -0.02, 0)
 spring_length = 1.5
 collision_mask = 1
 
-[node name="FootTarget_0" type="Marker3D" parent="SpringArm3D_0"]
+[node name="FootTarget_0" type="Marker3D" parent="Body/SpringArm3D_0"]
 
-[node name="SpringArm3D_1" type="SpringArm3D" parent="."]
+[node name="SpringArm3D_1" type="SpringArm3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.2121, -0.02, 0.2121)
 spring_length = 1.5
 collision_mask = 1
 
-[node name="FootTarget_1" type="Marker3D" parent="SpringArm3D_1"]
+[node name="FootTarget_1" type="Marker3D" parent="Body/SpringArm3D_1"]
 
-[node name="SpringArm3D_2" type="SpringArm3D" parent="."]
+[node name="SpringArm3D_2" type="SpringArm3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -0.02, 0.30)
 spring_length = 1.5
 collision_mask = 1
 
-[node name="FootTarget_2" type="Marker3D" parent="SpringArm3D_2"]
+[node name="FootTarget_2" type="Marker3D" parent="Body/SpringArm3D_2"]
 
-[node name="SpringArm3D_3" type="SpringArm3D" parent="."]
+[node name="SpringArm3D_3" type="SpringArm3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -0.2121, -0.02, 0.2121)
 spring_length = 1.5
 collision_mask = 1
 
-[node name="FootTarget_3" type="Marker3D" parent="SpringArm3D_3"]
+[node name="FootTarget_3" type="Marker3D" parent="Body/SpringArm3D_3"]
 
-[node name="SpringArm3D_4" type="SpringArm3D" parent="."]
+[node name="SpringArm3D_4" type="SpringArm3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -0.30, -0.02, 0)
 spring_length = 1.5
 collision_mask = 1
 
-[node name="FootTarget_4" type="Marker3D" parent="SpringArm3D_4"]
+[node name="FootTarget_4" type="Marker3D" parent="Body/SpringArm3D_4"]
 
-[node name="SpringArm3D_5" type="SpringArm3D" parent="."]
+[node name="SpringArm3D_5" type="SpringArm3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -0.2121, -0.02, -0.2121)
 spring_length = 1.5
 collision_mask = 1
 
-[node name="FootTarget_5" type="Marker3D" parent="SpringArm3D_5"]
+[node name="FootTarget_5" type="Marker3D" parent="Body/SpringArm3D_5"]
 
-[node name="SpringArm3D_6" type="SpringArm3D" parent="."]
+[node name="SpringArm3D_6" type="SpringArm3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -0.02, -0.30)
 spring_length = 1.5
 collision_mask = 1
 
-[node name="FootTarget_6" type="Marker3D" parent="SpringArm3D_6"]
+[node name="FootTarget_6" type="Marker3D" parent="Body/SpringArm3D_6"]
 
-[node name="SpringArm3D_7" type="SpringArm3D" parent="."]
+[node name="SpringArm3D_7" type="SpringArm3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.2121, -0.02, -0.2121)
 spring_length = 1.5
 collision_mask = 1
 
-[node name="FootTarget_7" type="Marker3D" parent="SpringArm3D_7"]
+[node name="FootTarget_7" type="Marker3D" parent="Body/SpringArm3D_7"]
