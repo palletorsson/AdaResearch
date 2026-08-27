@@ -23,6 +23,53 @@ DOC = os.path.join(ROOT, "doc")
 # ── per-domain config ─────────────────────────────────────────────────────────────────────────
 # concept = (key, act, truth, [strong keywords], [weak keywords]). Order = specific first.
 CONFIG = {
+ "boolean_surfaces": {
+  # THE BOOLEAN TAXONOMY (2026-08-27). Cheat-code: CSGShape3D - form by ARGUMENT.
+  # The engine ships the whole vocabulary as an enum on one property: Union,
+  # Intersection, Subtraction. Three words, closed. June's five concepts were already
+  # real (union / intersection / difference / stacking / architecture) but only five
+  # tiles deep; nothing owned the file, so the canon is authored here with the rungs
+  # the operations assume - two solids that OVERLAP, the asymmetry of subtraction,
+  # the tree that nests arguments, the seam that invents geometry, and the debt.
+  # The leanest sequence in the corpus: most rungs start starving, and say so.
+  "title": "Boolean surfaces - form by argument",
+  "registries": ["boolean_surfaces.json"],
+  "applied_kw": ["workbench", "demo", "compose"],
+  "large_kw": ["architecture", "cavity", "chamber", "room"],
+  "concepts": [
+   ("Two solids, overlapping", "I - before the verb",
+    "an operation needs two things AND a shared region. Pull them apart and every boolean returns one of its operands unchanged - the argument needs contested ground.",
+    ["two_solids", "overlap", "operands"], ["pair", "shared"]),
+   ("The three verbs", "I - before the verb",
+    "Union, Intersection, Subtraction: the engine's complete vocabulary, an enum on one property. Three words and the set is closed - everything else is nesting.",
+    ["csg_union_demo", "union", "three_verbs"], ["operation", "enum"]),
+   ("Union", "II - the verbs at work",
+    "every point that belongs to either: the weld with no seam left behind, two solids agreeing to be one.",
+    ["union_demo", "csg_union"], ["weld", "either"]),
+   ("Intersection", "II - the verbs at work",
+    "only what both claim - the joint, the tenon, the agreement. Intersection is the smallest of the three and the only one that cannot grow.",
+    ["csg_intersection_demo", "intersection"], ["both", "joint"]),
+   ("Difference", "II - the verbs at work",
+    "subtract the second from the first: the cavity, the doorway, the bite. Every room you have stood in is a difference operation.",
+    ["csg_difference_demo", "difference", "subtract"], ["cavity", "bite"]),
+   ("Order matters", "III - the asymmetry",
+    "A - B is not B - A, and subtraction is the ONLY one of the three that cares. A building minus its rooms is architecture; the rooms minus the building is nothing at all.",
+    ["order_matters", "asymmetry", "noncommutative"], ["ab_ba", "reversed"]),
+   ("The tree", "III - the asymmetry",
+    "CSGCombiner: the result of one argument becomes an operand in the next. Form as a sentence with clauses, and the whole tree recomputes when any leaf moves.",
+    ["csg_compose_workbench", "combiner", "compose", "tree"], ["nest", "stack"]),
+   ("The seam", "IV - what the cut leaves",
+    "where two surfaces meet, edges are BORN that neither solid had - the boolean does not select geometry, it invents it, and every artifact of the cut lives on that new line.",
+    ["coincident_face", "seam", "z_fight", "coplanar"], ["edge", "born"]),
+   ("The debt", "IV - what the cut leaves",
+    "CSG is recomputed, not stored: a live argument the engine re-runs every time the tree changes. bake_static_mesh exists because at some point you must stop arguing and keep the answer.",
+    ["bake", "debt", "static_mesh"], ["recompute", "cost"]),
+   ("Architecture as difference", "V - inhabiting the cut",
+    "at building scale the verb disappears into the result: a solid block, minus the rooms, minus the doors, minus the windows - and what remains is somewhere to live.",
+    ["csg_architecture_cavity", "architecture", "cavity"], ["building", "room"]),
+  ],
+  "catch_all": ("Off the ladder", "meta", "boolean artifacts the taxonomy does not yet claim. A chip decides their fate."),
+ },
  "isosurfaces": {
   # THE ISOSURFACE TAXONOMY (2026-08-27). Cheat-code: a field sampled, then an
   # ArrayMesh built where it crosses a number you CHOSE. The surface is an OPINION
@@ -510,7 +557,7 @@ def main():
                     # when a config fix empties it, carrying the previous run's
                     # leftovers forward re-imports tokens the new scoring already
                     # rejected (noise, 2026-08-27: 110 stale tokens came back).
-                    if c == cfg["catch_all"][0]:
+                    if c == CONFIG[dm]["catch_all"][0]:
                         continue
                     kept = [x for x in prev.get("groups", {}).get(c, [])
                             if x.get("lookup") not in claimed]

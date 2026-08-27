@@ -1,145 +1,296 @@
 {
-  "title": "boolean_surfaces",
+  "title": "Boolean surfaces - form by argument",
   "domain": "boolean_surfaces",
-  "note": "Ontology derived from the beat score by tools/build_spine_ontology.py (concepts = beats, artifacts = their maps').",
+  "note": "Auto-classified by tools/build_concept_map.py — heuristic keyword scoring, tier by footprint.",
   "acts": [],
   "concepts": [
+    "Two solids, overlapping",
+    "The three verbs",
     "Union",
     "Intersection",
     "Difference",
-    "AND, OR, NOT",
-    "Every room is a difference operation"
+    "Order matters",
+    "The tree",
+    "The seam",
+    "The debt",
+    "Architecture as difference"
   ],
   "concept_meta": {
-    "Union": {
-      "truth": "Union: every cell that belongs to either shape belongs to the result. Two squares overlap; the boundary between them disappears. What was 'one and the other' becomes 'one'.",
-      "role": "INTRODUCE",
-      "id": "B1",
-      "act": "Act I",
+    "Two solids, overlapping": {
+      "act": "I - before the verb",
+      "truth": "an operation needs two things AND a shared region. Pull them apart and every boolean returns one of its operands unchanged - the argument needs contested ground.",
       "tiers": {
-        "small": [
-          "csg_union_demo"
-        ],
+        "small": [],
         "medium": [],
         "large": [],
         "applied": []
       },
-      "count": 1
+      "count": 0,
+      "thin": true
+    },
+    "The three verbs": {
+      "act": "I - before the verb",
+      "truth": "Union, Intersection, Subtraction: the engine's complete vocabulary, an enum on one property. Three words and the set is closed - everything else is nesting.",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [],
+        "applied": [
+          "csg_union_demo"
+        ]
+      },
+      "count": 1,
+      "thin": true
+    },
+    "Union": {
+      "act": "II - the verbs at work",
+      "truth": "every point that belongs to either: the weld with no seam left behind, two solids agreeing to be one.",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "count": 0,
+      "thin": true
     },
     "Intersection": {
-      "truth": "Intersection: a cell belongs to the result only if it belongs to BOTH inputs. Two volumes meet; everything outside their shared region vanishes.",
-      "role": "DEMONSTRATE",
-      "id": "B2",
-      "act": "Act I",
+      "act": "II - the verbs at work",
+      "truth": "only what both claim - the joint, the tenon, the agreement. Intersection is the smallest of the three and the only one that cannot grow.",
       "tiers": {
-        "small": [
-          "csg_intersection_demo"
-        ],
+        "small": [],
         "medium": [],
         "large": [],
-        "applied": []
+        "applied": [
+          "csg_intersection_demo"
+        ]
       },
-      "count": 1
+      "count": 1,
+      "thin": true
     },
     "Difference": {
-      "truth": "Difference: subtract the second volume from the first. Where they met, a cavity opens. The first shape keeps everything except the region it shared with the second.",
-      "role": "DEMONSTRATE",
-      "id": "B3",
-      "act": "Act II",
+      "act": "II - the verbs at work",
+      "truth": "subtract the second from the first: the cavity, the doorway, the bite. Every room you have stood in is a difference operation.",
       "tiers": {
-        "small": [
+        "small": [],
+        "medium": [],
+        "large": [],
+        "applied": [
           "csg_difference_demo"
-        ],
+        ]
+      },
+      "count": 1,
+      "thin": true
+    },
+    "Order matters": {
+      "act": "III - the asymmetry",
+      "truth": "A - B is not B - A, and subtraction is the ONLY one of the three that cares. A building minus its rooms is architecture; the rooms minus the building is nothing at all.",
+      "tiers": {
+        "small": [],
         "medium": [],
         "large": [],
         "applied": []
       },
-      "count": 1
+      "count": 0,
+      "thin": true
     },
-    "AND, OR, NOT": {
-      "truth": "AND, OR, NOT — stack them. Boolean operations compose. A union of two intersections. A difference between two unions. Every complex shape is a sentence in this grammar.",
-      "role": "SYNTHESIZE",
-      "id": "B4",
-      "act": "Act III",
+    "The tree": {
+      "act": "III - the asymmetry",
+      "truth": "CSGCombiner: the result of one argument becomes an operand in the next. Form as a sentence with clauses, and the whole tree recomputes when any leaf moves.",
       "tiers": {
-        "small": [
+        "small": [],
+        "medium": [],
+        "large": [],
+        "applied": [
           "csg_compose_workbench"
+        ]
+      },
+      "count": 1,
+      "thin": true
+    },
+    "The seam": {
+      "act": "IV - what the cut leaves",
+      "truth": "where two surfaces meet, edges are BORN that neither solid had - the boolean does not select geometry, it invents it, and every artifact of the cut lives on that new line.",
+      "tiers": {
+        "small": [],
+        "medium": [
+          "coincident_face"
         ],
+        "large": [],
+        "applied": []
+      },
+      "count": 1,
+      "thin": true
+    },
+    "The debt": {
+      "act": "IV - what the cut leaves",
+      "truth": "CSG is recomputed, not stored: a live argument the engine re-runs every time the tree changes. bake_static_mesh exists because at some point you must stop arguing and keep the answer.",
+      "tiers": {
+        "small": [],
         "medium": [],
         "large": [],
         "applied": []
       },
-      "count": 1
+      "count": 0,
+      "thin": true
     },
-    "Every room is a difference operation": {
-      "truth": "Every room is a difference operation: a solid mass minus the volume of a room. Every window: glass minus a rectangle. Every doorway: wall minus a vertical opening.",
-      "role": "SYNTHESIZE",
-      "id": "B5",
-      "act": "Act IV",
+    "Architecture as difference": {
+      "act": "V - inhabiting the cut",
+      "truth": "at building scale the verb disappears into the result: a solid block, minus the rooms, minus the doors, minus the windows - and what remains is somewhere to live.",
       "tiers": {
-        "small": [
+        "small": [],
+        "medium": [],
+        "large": [
           "csg_architecture_cavity"
         ],
-        "medium": [],
-        "large": [],
         "applied": []
       },
-      "count": 1
+      "count": 1,
+      "thin": true
     }
   },
   "concept_distance": [
     [
       0.0,
-      0.0,
-      0.6025,
-      0.272,
-      0.6852
-    ],
-    [
-      0.0,
-      0.0,
-      0.3615,
-      0.9437,
-      1.0
-    ],
-    [
-      0.6025,
-      0.3615,
-      0.0,
-      0.6745,
-      0.3711
-    ],
-    [
-      0.272,
-      0.9437,
-      0.6745,
-      0.0,
-      0.491
-    ],
-    [
-      0.6852,
       1.0,
-      0.3711,
-      0.491,
+      0.9237,
+      1.0,
+      0.8269,
+      1.0,
+      0.849,
+      0.8813,
+      0.8631,
+      0.9283
+    ],
+    [
+      1.0,
+      0.0,
+      0.9263,
+      0.4948,
+      0.8253,
+      0.8776,
+      0.8818,
+      0.9302,
+      0.8675,
+      0.8848
+    ],
+    [
+      0.9237,
+      0.9263,
+      0.0,
+      1.0,
+      0.9267,
+      1.0,
+      1.0,
+      0.8161,
+      0.7898,
+      0.876
+    ],
+    [
+      1.0,
+      0.4948,
+      1.0,
+      0.0,
+      0.7778,
+      1.0,
+      0.8497,
+      0.8564,
+      0.9396,
+      0.9484
+    ],
+    [
+      0.8269,
+      0.8253,
+      0.9267,
+      0.7778,
+      0.0,
+      0.8043,
+      0.8935,
+      0.9011,
+      0.9143,
+      0.7216
+    ],
+    [
+      1.0,
+      0.8776,
+      1.0,
+      1.0,
+      0.8043,
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      0.0
+    ],
+    [
+      0.849,
+      0.8818,
+      1.0,
+      0.8497,
+      0.8935,
+      1.0,
+      0.0,
+      0.9322,
+      0.8101,
+      0.8882
+    ],
+    [
+      0.8813,
+      0.9302,
+      0.8161,
+      0.8564,
+      0.9011,
+      1.0,
+      0.9322,
+      0.0,
+      0.9191,
+      0.7138
+    ],
+    [
+      0.8631,
+      0.8675,
+      0.7898,
+      0.9396,
+      0.9143,
+      1.0,
+      0.8101,
+      0.9191,
+      0.0,
+      0.9076
+    ],
+    [
+      0.9283,
+      0.8848,
+      0.876,
+      0.9484,
+      0.7216,
+      0.0,
+      0.8882,
+      0.7138,
+      0.9076,
       0.0
     ]
   ],
   "groups": {
-    "Union": [
+    "Two solids, overlapping": [],
+    "The three verbs": [
       {
         "lookup": "csg_union_demo",
         "name": "CSG Union Demo",
-        "tier": "small",
+        "registry": "boolean_surfaces.json",
+        "tier": "applied",
         "fp": 1,
         "has_image": true,
         "recommended": true
       }
     ],
+    "Union": [],
     "Intersection": [
       {
         "lookup": "csg_intersection_demo",
         "name": "CSG Intersection Demo",
-        "tier": "small",
+        "registry": "boolean_surfaces.json",
+        "tier": "applied",
         "fp": 1,
         "has_image": true,
         "recommended": true
@@ -149,35 +300,51 @@
       {
         "lookup": "csg_difference_demo",
         "name": "CSG Difference Demo",
-        "tier": "small",
+        "registry": "boolean_surfaces.json",
+        "tier": "applied",
         "fp": 1,
         "has_image": true,
         "recommended": true
       }
     ],
-    "AND, OR, NOT": [
+    "Order matters": [],
+    "The tree": [
       {
         "lookup": "csg_compose_workbench",
         "name": "CSG Compose Workbench",
-        "tier": "small",
+        "registry": "boolean_surfaces.json",
+        "tier": "applied",
         "fp": 1,
         "has_image": true,
         "recommended": true
       }
     ],
-    "Every room is a difference operation": [
+    "The seam": [
+      {
+        "lookup": "coincident_face",
+        "name": "Coincident Face",
+        "registry": "boolean_surfaces.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": false,
+        "recommended": true
+      }
+    ],
+    "The debt": [],
+    "Architecture as difference": [
       {
         "lookup": "csg_architecture_cavity",
         "name": "CSG Architecture Cavity",
-        "tier": "small",
+        "registry": "boolean_surfaces.json",
+        "tier": "large",
         "fp": 1,
         "has_image": true,
         "recommended": true
       }
     ]
   },
-  "total": 5,
-  "total_concepts": 5,
-  "recommended_total": 5,
-  "map_ready_total": 5
+  "total": 6,
+  "total_concepts": 10,
+  "recommended_total": 6,
+  "map_ready_total": 6
 }

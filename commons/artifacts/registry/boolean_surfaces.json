@@ -521,6 +521,24 @@
 				1,
 				1.0
 			]
+		},
+		"the_argument_of_solids": {
+			"name": "The Argument Of Solids",
+			"class_name": "TheArgumentOfSolids",
+			"scene": "res://commons/artifacts/the_argument_of_solids/the_argument_of_solids.tscn",
+			"description": "The boolean surfaces SUPER OBJECT: a debating chamber where two solids argue and the verdicts stand around them. Contested ground lit as a live intersection; union, intersection and subtraction each a real CSGCombiner3D; A-B beside B-A because subtraction is the only verb that cares about order; a nesting tree, a coincident-face seam where edges are born, the baked debt, and a building that is a block minus its rooms. Nothing modelled - every verdict is live CSG. 2026-08-27.",
+			"category": "boolean_surfaces",
+			"tags": [
+				"boolean",
+				"csg",
+				"super",
+				"synthesis",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 4,
+				"clearance_m": 0.6
+			}
 		}
 	}
 }
