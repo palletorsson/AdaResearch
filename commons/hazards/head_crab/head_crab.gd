@@ -34,31 +34,54 @@ extends MeshInstance3D
 const RIG := "res://commons/hazards/octapod_crawler/csg_four_leg_walker.tscn"
 
 ## the authored rig is 4.4 m across; 0.13 puts the crab at ~57 cm
-@export var crab_scale: float = 0.13
+@export var crab_scale: float = 0.15
 @export var body_colour: Color = Color(0.42, 0.14, 0.20)
 @export var eye_colour: Color = Color(1.0, 0.22, 0.16)
 @export var detect_m: float = 9.0
-@export var chase_speed: float = 0.85
+@export var chase_speed: float = 0.95
 @export var patrol_speed: float = 0.3
 @export var turn_speed_deg: float = 150.0
 
 # the gait, in the authored rig's own units — scaled to world in _ready
 @export_group("Gait")
-@export var step_threshold_local: float = 2.2
-@export var step_height_local: float = 1.0
-@export var step_duration: float = 0.15
-@export var step_overshoot_local: float = 0.5
+@export var step_threshold_local: float = 1.25
+@export var step_height_local: float = 0.85
+@export var step_duration: float = 0.08
+@export var step_overshoot_local: float = 0.55
 ## POSTURE, exported so a variant can be handed in from outside (2026-08-26,
 ## Palle: "iterate and improve with multi agent many different versions").
 ## ride_local is the body height in RIG units; stance is how far out the feet
 ## plant as a fraction of the authored shoulder ring. Together with the chain
 ## length (6 bones, 5.00 units) they decide whether the leg bends or reaches
 ## straight — which is the whole open question.
-@export var ride_local: float = 1.35
-@export var stance: float = 0.62
+@export var ride_local: float = -1.2
+@export var stance: float = 1.25
 ## forwarded to the CSG rig BEFORE it builds itself, since its _ready reads its
 ## own exports once: creature_* and leg_* keys from csg_walker.gd
-@export var csg_params: Dictionary = {}
+## THE CHOSEN ANIMAL (2026-08-26, Palle: "all black spider 3 look good! use
+## that as a start and deploy it in to the game"). Variant 3 of eight —
+## graphite body, brass joints, long fine legs — is the shipped default now.
+## ride_local is NEGATIVE on purpose: the rig bakes a 2.2-unit shoulder height
+## into its .tscn, so the only route to a low-slung body is to sink the root
+## beneath the floor. Nothing is drawn at the root and position.y is re-pinned
+## every frame, so it is safe — and it is what puts the knees above the shell.
+@export var csg_params: Dictionary = {
+	"leg_joint_style": "cylinder",
+	"leg_shaft_radius": 0.075,
+	"leg_hub_radius": 0.15,
+	"leg_foot_radius": 0.115,
+	"leg_taper": 0.62,
+	"creature_atom_radius": 0.3,
+	"creature_bulge_factor": 2.0,
+	"creature_atom_count": 9,
+	"creature_pack": 0.42,
+	"creature_knee_at": 0.3,
+	"creature_post_knee_drop": 2.2,
+	"creature_initial_lift": 0.95,
+	"creature_seed": 7,
+	"creature_base_color": Color("#0f0f10"),
+	"creature_accent_color": Color("#b78e47"),
+}
 ## ── THE FINISH (2026-08-26, Palle: "make them look artificial very beautiful,
 ## other dark color, like fetch object") ─────────────────────────────────────
 ## csg_body_builder hardcodes its materials at metallic 0.15 / roughness 0.6 —
@@ -66,13 +89,13 @@ const RIG := "res://commons/hazards/octapod_crawler/csg_four_leg_walker.tscn"
 ## dark body that is almost a mirror, and joints that are a different metal.
 ## Applied AFTER the rig has built, over every CSG shape it made, because the
 ## builder gives no way to hand a material in.
-@export var finish_on: bool = false
-@export var finish_base: Color = Color(0.055, 0.06, 0.075)      # near-black, blue
-@export var finish_accent: Color = Color(0.62, 0.66, 0.72)      # bright steel
-@export var finish_metallic: float = 0.95
-@export var finish_roughness: float = 0.14
+@export var finish_on: bool = true
+@export var finish_base: Color = Color(0.062, 0.062, 0.065)     # graphite, all but black
+@export var finish_accent: Color = Color(0.72, 0.56, 0.28)      # brass at every joint
+@export var finish_metallic: float = 0.94
+@export var finish_roughness: float = 0.16
 @export var finish_accent_metallic: float = 1.0
-@export var finish_accent_roughness: float = 0.08
+@export var finish_accent_roughness: float = 0.12
 @export var finish_glow: float = 0.0                             # accent emission
 
 const LEG_COUNT := 4
@@ -149,6 +172,22 @@ func _ready() -> void:
 	_stance = stance
 	_build_rig()
 	set_process(true)
+
+
+## Map tokens: `head_crab:0:0#scale:0.18#speed:1.2#detect:12`
+func apply_grid_config(config: Dictionary) -> void:
+	if config.has("scale"):
+		crab_scale = clampf(float(str(config["scale"])), 0.03, 1.0)
+	if config.has("speed"):
+		chase_speed = float(str(config["speed"]))
+	if config.has("detect"):
+		detect_m = float(str(config["detect"]))
+	if config.has("patrol"):
+		patrol_speed = float(str(config["patrol"]))
+	if config.has("accent"):
+		finish_accent = Color(str(config["accent"]))
+	if config.has("glow"):
+		finish_glow = float(str(config["glow"]))
 
 
 func _build_rig() -> void:

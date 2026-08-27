@@ -98,6 +98,12 @@ func _gest_stage() -> String:
 	if w == "":
 		return ""
 	# "line" is tested FIRST: "point lines" carries both words, and it is a line
+	# RUNG SIX, the ladder's destination (2026-08-26): where the walk has
+	# learned FORCES, the egg yields the thing that moves under its own — the
+	# spider. Everything between (transformation, colour, composition) is still
+	# unbuilt, so those places yield nothing and the egg stays whole.
+	if w.contains("force") or w.contains("vfm") or w.contains("arena"):
+		return "spider"
 	if w.contains("triangle"):
 		return "triangle"
 	if w.contains("line"):
@@ -132,6 +138,8 @@ func _gest_yield(colour: Color) -> void:
 			_gest_line(colour)
 		"triangle":
 			_gest_triangle(colour)
+		"spider":
+			_gest_spider(colour)
 		_:
 			_gest_spent = false     # a rung that is not built yet leaves the egg whole
 			return
@@ -275,6 +283,25 @@ func _gest_triangle(colour: Color) -> void:
 	# basis only, never look_at: it inherits the hall's yaw, so a rotated
 	# museum segment carries the yield with it
 	w.global_transform = Transform3D(global_transform.basis.orthonormalized(), global_position)
+
+
+## RUNG SIX. A body given the first force: it walks. The head crab is a whole
+## artifact of its own (commons/hazards/head_crab), so the egg does not build a
+## creature — it hands one over, at the egg's place, already hunting.
+func _gest_spider(colour: Color) -> void:
+	var path := "res://commons/hazards/head_crab/head_crab.tscn"
+	if not ResourceLoader.exists(path):
+		return
+	var ps: PackedScene = load(path) as PackedScene
+	if ps == null:
+		return
+	var sp: Node3D = ps.instantiate() as Node3D
+	sp.name = "YieldSpider"
+	# the catalyst's colour becomes the joints, so the shot that made it is
+	# still readable on the animal afterwards
+	sp.set("finish_accent", colour)
+	_gest_host().add_child(sp)
+	sp.global_position = global_position
 
 
 ## The body the catalyst can hit. Added late (deferred, after the artifact has

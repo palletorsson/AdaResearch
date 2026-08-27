@@ -6850,6 +6850,42 @@
 			},
 			"qfep_connection": "Perlin's trick \u2014 randomness with spatial correlation \u2014 is what makes the danger legible at all: high red tiles announce themselves through their smooth neighborhoods. The field scrolls, so safety is a gradient you surf, not a place you reach."
 		},
+		"head_crab": {
+			"category": "hazard",
+			"complexity": "intermediate",
+			"description": "A small black spider-crab on four long jointed legs, walking a real plant-and-step gait. Graphite body, brass joints, polished like a made object rather than a grown one. It looks for the visitor and follows.",
+			"dev_themes": [
+				"core",
+				"hazards"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "head_crab",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "head_crab",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/hazards/head_crab/head_crab.tscn",
+			"size_group": "compact",
+			"tags": [
+				"creature",
+				"walker",
+				"gait"
+			]
+		},
 		"octapod_crawler": {
 			"dna": {
 				"promoted": "2026-08-04",
