@@ -137,6 +137,8 @@ var _look_t: float = 0.0
 var _patrol_angle: float = 0.0
 var _patrol_t: float = 0.0
 var _rng := RandomNumberGenerator.new()
+var _floor_y: float = 0.0     # the height the artifact was PLACED at
+var _floor_learned: bool = false
 var _ride: float = 0.29   # body height above the floor, set from crab_scale
 var _stance: float = 1.0  # how far out the feet plant, as a fraction of the rig's
 
@@ -174,6 +176,21 @@ func _ready() -> void:
 	set_process(true)
 
 
+## Everything that is DERIVED from crab_scale, in one place so it can be run
+## twice. GridInteractablesComponent calls apply_grid_config AFTER the node is
+## in the tree, so _ready has already run: a token that set crab_scale changed
+## the number and nothing else, and #scale:0.11 shipped an animal of 0.15 with
+## the right accent. Measured before the fix: 0.882 of default size where
+## 0.733 was asked for.
+func _apply_scale() -> void:
+	scale = Vector3.ONE * crab_scale
+	_step_threshold = step_threshold_local * crab_scale
+	_step_height = step_height_local * crab_scale
+	_step_overshoot = step_overshoot_local * crab_scale
+	_ride = ride_local * crab_scale
+	_stance = stance
+
+
 ## Map tokens: `head_crab:0:0#scale:0.18#speed:1.2#detect:12`
 func apply_grid_config(config: Dictionary) -> void:
 	# A map token tunes the animal:
@@ -198,6 +215,11 @@ func apply_grid_config(config: Dictionary) -> void:
 		finish_glow = _cfg_num(config["glow"], finish_glow)
 	if config.has("accent"):
 		finish_accent = _cfg_colour(config["accent"], finish_accent)
+	# already built? then re-derive, or the token changed a number nobody reads
+	if is_inside_tree():
+		_apply_scale()
+		if _body != null and is_instance_valid(_body):
+			_apply_finish()
 
 
 ## a token value is always TEXT, and a valueless key arrives as `true` —
@@ -419,8 +441,28 @@ func _build_carapace() -> void:
 func _home(i: int) -> Vector3:
 	var sh: Vector3 = SHOULDERS[i] as Vector3
 	var h: Vector3 = global_transform * Vector3(sh.x * _stance, sh.y, sh.z * _stance)
-	h.y = 0.0
+	h.y = _ground_at(h)
 	return h
+
+
+## THE FLOOR IS NOT ALWAYS AT ZERO. Every plant used to be written to y = 0.0
+## absolute, which is only correct on a map whose floor happens to sit there.
+## Both arena crabs stand on structure cells of height 1 — seated at 0.5 m by
+## GridCommon.surface_world_y — so their feet planted half a metre THROUGH the
+## deck they were placed on. Four SpringArm3D probes hang under the body,
+## unread, and this is the two-line version of what they were for: cast down,
+## take the hit, fall back to the height the artifact was placed at.
+func _ground_at(p: Vector3) -> float:
+	var space := get_world_3d().direct_space_state if is_inside_tree() else null
+	if space != null:
+		var from := Vector3(p.x, _floor_y + 1.2, p.z)
+		var to := Vector3(p.x, _floor_y - 3.0, p.z)
+		var q := PhysicsRayQueryParameters3D.create(from, to)
+		q.collision_mask = 1
+		var hit: Dictionary = space.intersect_ray(q)
+		if not hit.is_empty():
+			return float((hit["position"] as Vector3).y)
+	return _floor_y
 
 
 ## The visitor, on whichever lane is running. The museum's walker is in group
@@ -438,6 +480,12 @@ func _find_target() -> void:
 
 
 func _process(delta: float) -> void:
+	# THE FLOOR IS LEARNED ON FRAME ONE, NOT IN _ready. Artifacts are seated on
+	# the floor surface by the grid AFTER instantiation (GridCommon.surface_world_y),
+	# so a height read in _ready is the height before placement — zero.
+	if not _floor_learned:
+		_floor_learned = true
+		_floor_y = global_position.y
 	_look_t += delta
 	if _look_t > 0.5:
 		_look_t = 0.0
@@ -466,7 +514,7 @@ func _process(delta: float) -> void:
 		# long and the crab walked at an eighth of its speed — measured: 0.79 m
 		# where it should have covered four.
 		position += -basis.z.normalized() * speed * delta
-	position.y = _ride
+	position.y = _floor_y + _ride
 	_update_gait(delta)
 
 
@@ -520,7 +568,7 @@ func _update_gait(delta: float) -> void:
 				_t[li] = 0.0
 				_from[li] = _planted[li]
 				var tgt: Vector3 = (homes[li] as Vector3) + fwd * _step_overshoot
-				tgt.y = 0.0
+				tgt.y = _ground_at(tgt)
 				_to[li] = tgt
 	for i in range(LEG_COUNT):
 		var foot: Node = _feet[i]

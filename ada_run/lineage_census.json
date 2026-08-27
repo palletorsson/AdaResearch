@@ -1,0 +1,100 @@
+{
+	"rows": [
+		{
+			"lines": 12,
+			"points": 0,
+			"primitives": {
+				"ArrayMesh": 1,
+				"CylinderMesh": 12
+			},
+			"token": "origin"
+		},
+		{
+			"lines": 1,
+			"points": 1,
+			"primitives": {
+				"CylinderMesh": 1,
+				"QuadMesh": 1,
+				"SphereMesh": 1
+			},
+			"token": "interactive_point_origin_force"
+		},
+		{
+			"lines": 1,
+			"points": 2,
+			"primitives": {
+				"CylinderMesh": 1,
+				"QuadMesh": 2,
+				"SphereMesh": 2
+			},
+			"token": "line"
+		},
+		{
+			"lines": 1,
+			"points": 2,
+			"primitives": {
+				"CylinderMesh": 1,
+				"SphereMesh": 2
+			},
+			"token": "grabbable_line"
+		},
+		{
+			"lines": 1,
+			"points": 0,
+			"primitives": {
+				"CylinderMesh": 1
+			},
+			"token": "lightrod"
+		},
+		{
+			"lines": 0,
+			"points": 2,
+			"primitives": {
+				"ImmediateMesh": 2,
+				"QuadMesh": 2,
+				"SphereMesh": 2
+			},
+			"token": "draw_dot"
+		},
+		{
+			"lines": 0,
+			"points": 3,
+			"primitives": {
+				"ArrayMesh": 1,
+				"QuadMesh": 3,
+				"SphereMesh": 3
+			},
+			"token": "triangle"
+		},
+		{
+			"lines": 0,
+			"points": 3,
+			"primitives": {
+				"ArrayMesh": 2,
+				"QuadMesh": 3,
+				"SphereMesh": 3
+			},
+			"token": "interactivetriangle"
+		},
+		{
+			"lines": 1,
+			"points": 1,
+			"primitives": {
+				"CylinderMesh": 1,
+				"SphereMesh": 1
+			},
+			"token": "dark_sphere"
+		},
+		{
+			"lines": 24,
+			"points": 36,
+			"primitives": {
+				"ArrayMesh": 4,
+				"CSGCylinder3D": 24,
+				"CSGSphere3D": 32,
+				"SphereMesh": 4
+			},
+			"token": "head_crab"
+		}
+	]
+}

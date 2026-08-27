@@ -1,0 +1,32 @@
+THE LEG, OPENED
+  skeleton: Skeleton3D   bones: 6
+    bone 0  Bone             rest offset 0.0000  parent -1
+    bone 1  Bone.001         rest offset 1.0000  parent 0
+    bone 2  Bone.002         rest offset 1.0000  parent 1
+    bone 3  Bone.003         rest offset 1.0000  parent 2
+    bone 4  Bone.004         rest offset 1.0000  parent 3
+    bone 5  Bone.005         rest offset 1.0000  parent 4
+  chain length in rig units: 5.000   at crab_scale 0.150 = 0.750 m
+  solver: FABRIK3D
+
+FOURTEEN SECONDS AROUND A CIRCLING VISITOR (280 samples)
+  foot trace vs foot trace:
+    0 x 1 : 1
+    0 x 2 : 1
+    0 x 3 : 1
+    1 x 2 : 2
+    1 x 3 : 1
+    2 x 3 : 1
+  foot trace vs the BODY's own path (a foot crossing the midline):
+    foot 0 x body : 1
+    foot 1 x body : 1
+    foot 2 x body : 1
+    foot 3 x body : 0
+  foot trace vs itself:
+    foot 0 : 64
+    foot 1 : 59
+    foot 2 : 67
+    foot 3 : 63
+
+  TOTALS  pair 7   midline 3   self 253
+  reading: A BRAID: feet cross each other AND the midline

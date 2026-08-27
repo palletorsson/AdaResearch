@@ -1,0 +1,15 @@
+THE LINEAGE, COUNTED THE SAME WAY
+
+origin                            points 0     lines 12      ArrayMesh x1, CylinderMesh x12
+interactive_point_origin_force    points 1     lines 1       CylinderMesh x1, QuadMesh x1, SphereMesh x1
+line                              points 2     lines 1       CylinderMesh x1, QuadMesh x2, SphereMesh x2
+grabbable_line                    points 2     lines 1       CylinderMesh x1, SphereMesh x2
+lightrod                          points 0     lines 1       CylinderMesh x1
+draw_dot                          points 2     lines 0       ImmediateMesh x2, QuadMesh x2, SphereMesh x2
+triangle                          points 3     lines 0       ArrayMesh x1, QuadMesh x3, SphereMesh x3
+interactivetriangle               points 3     lines 0       ArrayMesh x2, QuadMesh x3, SphereMesh x3
+dark_sphere                       points 1     lines 1       CylinderMesh x1, SphereMesh x1
+head_crab                         points 36    lines 24      ArrayMesh x4, CSGCylinder3D x24, CSGSphere3D x32, SphereMesh x4
+
+reading: a POINT in this corpus is a sphere; a LINE is a cylinder or a
+capsule. The spider is 32 of the first and 24 of the second.

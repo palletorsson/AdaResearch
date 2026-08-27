@@ -1,0 +1,15 @@
+A. DOES #scale REACH IT ON THE PATH A MAP ACTUALLY USES
+   default (0.15)            extent 1.6260 m   crab_scale 0.150
+   configured BEFORE tree    extent 1.1853 m   crab_scale 0.110
+   configured AFTER  tree    extent 1.1399 m   crab_scale 0.110
+   ratio to default: before 0.729   after 0.701   (0.11/0.15 = 0.733)
+   ok — the field path resizes it too
+
+B. WHAT CAN IT TOUCH
+   SpringArm3D          4
+   -> it passes through the visitor: no body, no area, no damage
+
+C. WHERE THE FEET GO WHEN THE FLOOR IS NOT AT ZERO
+   deck top at y = 0.500 m
+   foot world y ranged 0.500 .. 0.500
+   ok — the feet found the deck

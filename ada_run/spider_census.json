@@ -1,0 +1,60 @@
+{
+	"classes": {
+		"BoneAttachment3D": 24,
+		"CSGCylinder3D": 24,
+		"CSGSphere3D": 32,
+		"FABRIK3D": 4,
+		"Marker3D": 8,
+		"MeshInstance3D": 10,
+		"Node3D": 10,
+		"Skeleton3D": 4,
+		"SpringArm3D": 4
+	},
+	"crossings": {
+		"0-1": 0,
+		"0-2": 0,
+		"0-3": 0,
+		"1-2": 0,
+		"1-3": 0,
+		"2-3": 0
+	},
+	"csg": {
+		"CSGCylinder3D": 24,
+		"CSGSphere3D": 32
+	},
+	"cylinders_by_size": {
+		"r0.0285 h0.9200": 4,
+		"r0.0378 h0.9200": 4,
+		"r0.0471 h0.9200": 4,
+		"r0.0564 h0.9200": 4,
+		"r0.0657 h0.9200": 4,
+		"r0.0750 h0.9200": 4
+	},
+	"foot_moving_samples": [
+		66,
+		62,
+		66,
+		62
+	],
+	"meshes": {
+		"ArrayMesh": 4,
+		"SphereMesh": 4
+	},
+	"part_count": 64,
+	"spheres_by_radius": {
+		"0.0570": 4,
+		"0.0750": 1,
+		"0.0756": 4,
+		"0.0942": 4,
+		"0.1128": 4,
+		"0.1150": 4,
+		"0.1200": 4,
+		"0.1314": 4,
+		"0.1350": 1,
+		"0.1500": 4,
+		"0.6000": 1,
+		"0.6300": 1
+	},
+	"total_crossings": 0,
+	"travelled_m": 7.80593585968018
+}
