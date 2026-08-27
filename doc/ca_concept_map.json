@@ -11,6 +11,10 @@
     "Act VII — CA as morphogenesis (DNA bridge)"
   ],
   "concepts": [
+    "The grid",
+    "The neighbourhood",
+    "The rule",
+    "The double buffer",
     "Elementary CA (1D rules)",
     "Rule 30 — order to randomness",
     "Rule 90 — Sierpinski",
@@ -34,6 +38,92 @@
     "Morphogenesis (DNA -> pattern)"
   ],
   "concept_meta": {
+    "The grid": {
+      "count": 1,
+      "map_ready": 1,
+      "has_image": 1,
+      "best": "grid_substrate_runner",
+      "truth": "Godot ships no CA primitive. Before a rule can run you must BUILD the world it runs on: an array of arrays, and the decision that space is countable.",
+      "act": "",
+      "thin": true,
+      "tiers": {
+        "small": [
+          "grid_substrate_runner"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "missing_tiers": [
+        "medium",
+        "large",
+        "applied"
+      ]
+    },
+    "The neighbourhood": {
+      "count": 0,
+      "map_ready": 0,
+      "has_image": 0,
+      "best": null,
+      "truth": "Which cells count as 'near' is a CHOICE, not a fact - four neighbours, eight, or six, and the same rule becomes a different universe.",
+      "act": "",
+      "thin": true,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "missing_tiers": [
+        "small",
+        "medium",
+        "large",
+        "applied"
+      ]
+    },
+    "The rule": {
+      "count": 1,
+      "map_ready": 1,
+      "has_image": 1,
+      "best": "ca_rule_comparison",
+      "truth": "A function from neighbourhood to next state - eight bits for the elementary case. The rule is small enough to hold and large enough to be a world.",
+      "act": "",
+      "thin": true,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [],
+        "applied": [
+          "ca_rule_comparison"
+        ]
+      },
+      "missing_tiers": [
+        "small",
+        "medium",
+        "large"
+      ]
+    },
+    "The double buffer": {
+      "count": 0,
+      "map_ready": 0,
+      "has_image": 0,
+      "best": null,
+      "truth": "TIME is the part the engine will not give you. Read the old grid, write a NEW one, then swap - read and write the same array and every cell lies to its neighbour. Every CA bug in history is this bug.",
+      "act": "",
+      "thin": true,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "missing_tiers": [
+        "small",
+        "medium",
+        "large",
+        "applied"
+      ]
+    },
     "Elementary CA (1D rules)": {
       "count": 11,
       "map_ready": 11,
@@ -66,8 +156,8 @@
       "missing_tiers": []
     },
     "Rule 30 — order to randomness": {
-      "count": 6,
-      "map_ready": 6,
+      "count": 7,
+      "map_ready": 7,
       "has_image": 6,
       "best": "rule30_bench",
       "truth": "Pure order, run forward, becomes indistinguishable from chance — determinism no shortcut can outrun. The run is the only oracle.",
@@ -77,7 +167,8 @@
         "small": [
           "living_paper_rule30",
           "rule_30_110",
-          "rule_30_110_gravity"
+          "rule_30_110_gravity",
+          "rule30_random"
         ],
         "medium": [
           "rule30_bench"
@@ -369,9 +460,9 @@
       "missing_tiers": []
     },
     "The four Wolfram classes": {
-      "count": 4,
-      "map_ready": 4,
-      "has_image": 4,
+      "count": 3,
+      "map_ready": 3,
+      "has_image": 3,
       "best": "four_classes_bench",
       "truth": "Frozen, periodic, chaotic, complex — Wolfram's four weathers. The Principle of Computational Equivalence says they are all the same; the queer reading says only the fourth, the edge, is alive.",
       "act": "Act V — the edge of chaos",
@@ -386,11 +477,11 @@
         "large": [
           "four_classes_room"
         ],
-        "applied": [
-          "ca_rule_comparison"
-        ]
+        "applied": []
       },
-      "missing_tiers": []
+      "missing_tiers": [
+        "applied"
+      ]
     },
     "Edge of chaos / self-organisation": {
       "count": 5,
@@ -573,11 +664,39 @@
       "missing_tiers": []
     }
   },
-  "total": 118,
-  "map_ready_total": 117,
-  "image_total": 118,
-  "empty_slots": 0,
+  "total": 120,
+  "map_ready_total": 119,
+  "image_total": 119,
+  "empty_slots": 15,
   "groups": {
+    "The grid": [
+      {
+        "lookup": "grid_substrate_runner",
+        "name": "Grid Substrate Runner",
+        "registry": "cellular_automata.json",
+        "category": "emergence",
+        "map_ready": true,
+        "has_image": true,
+        "score": 7,
+        "fp": 1,
+        "tier": "small"
+      }
+    ],
+    "The neighbourhood": [],
+    "The rule": [
+      {
+        "lookup": "ca_rule_comparison",
+        "name": "CA Rule Comparison Garden",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": true,
+        "score": 7,
+        "fp": 9,
+        "tier": "applied"
+      }
+    ],
+    "The double buffer": [],
     "Elementary CA (1D rules)": [
       {
         "lookup": "elementary_ca_bench",
@@ -594,7 +713,7 @@
         "lookup": "ca_rules_workbench",
         "name": "CA Rules Workbench",
         "registry": "cellular_automata.json",
-        "category": "cellularautomata",
+        "category": "cellular_automata",
         "map_ready": true,
         "has_image": true,
         "score": 11,
@@ -710,7 +829,7 @@
         "map_ready": true,
         "has_image": true,
         "score": 99,
-        "fp": 4,
+        "fp": 9,
         "tier": "medium"
       },
       {
@@ -764,6 +883,17 @@
         "category": "emergence",
         "map_ready": true,
         "has_image": true,
+        "score": 7,
+        "fp": 1,
+        "tier": "small"
+      },
+      {
+        "lookup": "rule30_random",
+        "name": "Rule 30 Random",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": false,
         "score": 7,
         "fp": 1,
         "tier": "small"
@@ -993,7 +1123,7 @@
         "map_ready": true,
         "has_image": true,
         "score": 99,
-        "fp": 4,
+        "fp": 1,
         "tier": "medium"
       },
       {
@@ -1039,7 +1169,7 @@
         "map_ready": true,
         "has_image": true,
         "score": 99,
-        "fp": 4,
+        "fp": 1,
         "tier": "medium"
       },
       {
@@ -1280,14 +1410,14 @@
         "map_ready": true,
         "has_image": true,
         "score": 99,
-        "fp": 4,
+        "fp": 9,
         "tier": "medium"
       },
       {
         "lookup": "reaction_diffusion",
         "name": "Reaction Diffusion",
         "registry": "procgen_extra.json",
-        "category": "proceduralgeneration",
+        "category": "procedural",
         "map_ready": true,
         "has_image": true,
         "score": 19,
@@ -1309,7 +1439,7 @@
         "lookup": "reaction_diffusion_vr",
         "name": "Reaction Diffusion (VR)",
         "registry": "procgen_extra.json",
-        "category": "proceduralgeneration",
+        "category": "procedural",
         "map_ready": true,
         "has_image": true,
         "score": 15,
@@ -1320,7 +1450,7 @@
         "lookup": "gray_scott_comparison",
         "name": "Gray-Scott Comparison Garden",
         "registry": "procgen_extra.json",
-        "category": "procgen",
+        "category": "procedural",
         "map_ready": true,
         "has_image": true,
         "score": 13,
@@ -1451,17 +1581,6 @@
         "score": 99,
         "fp": 2,
         "tier": "small"
-      },
-      {
-        "lookup": "ca_rule_comparison",
-        "name": "CA Rule Comparison Garden",
-        "registry": "cellular_automata.json",
-        "category": "cellular_automata",
-        "map_ready": true,
-        "has_image": true,
-        "score": 7,
-        "fp": 9,
-        "tier": "applied"
       }
     ],
     "Edge of chaos / self-organisation": [
@@ -1473,7 +1592,7 @@
         "map_ready": true,
         "has_image": true,
         "score": 99,
-        "fp": 4,
+        "fp": 9,
         "tier": "medium"
       },
       {
@@ -1699,7 +1818,7 @@
         "map_ready": true,
         "has_image": true,
         "score": 99,
-        "fp": 4,
+        "fp": 9,
         "tier": "medium"
       },
       {
@@ -1824,7 +1943,7 @@
         "map_ready": true,
         "has_image": true,
         "score": 99,
-        "fp": 4,
+        "fp": 9,
         "tier": "medium"
       },
       {

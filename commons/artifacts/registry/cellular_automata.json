@@ -8548,6 +8548,24 @@
 				1,
 				1
 			]
+		},
+		"the_clockmaker_of_rules": {
+			"name": "The Clockmaker Of Rules",
+			"class_name": "TheClockmakerOfRules",
+			"scene": "res://commons/artifacts/the_clockmaker_of_rules/the_clockmaker_of_rules.tscn",
+			"description": "The cellular automata SUPER OBJECT: a clockmaker's bench for worlds the engine refuses to supply - a bare grid, three neighbourhood stencils, a rule drum of eight levers, and the double buffer with its swap crank (time is the part you must build). Around it, genuinely stepped worlds: Rule 30, Rule 90's Sierpinski, a Life glider four generations on, Brian's Brain, Langton's ant with its highway, a Wireworld diode, a Lenia blob. 2026-08-27.",
+			"category": "cellular_automata",
+			"tags": [
+				"ca",
+				"super",
+				"synthesis",
+				"double_buffer",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 4,
+				"clearance_m": 0.6
+			}
 		}
 	}
 }

@@ -39,6 +39,22 @@ def is_candidate(reg, lookup):
 
 # concept -> (strong [w3], weak [w1], truth). Order: specific first; ties break to the earlier concept.
 CONCEPTS = [
+ ("The grid",
+  ["grid_substrate", "grid3d", "lattice_grid", "cell_grid", "graph_paper"],
+  ["grid", "lattice", "cells"],
+  "Godot ships no CA primitive. Before a rule can run you must BUILD the world it runs on: an array of arrays, and the decision that space is countable."),
+ ("The neighbourhood",
+  ["neighbourhood", "neighborhood", "moore", "von_neumann", "hex_ca", "hex_"],
+  ["neighbour", "nearby", "adjacency"],
+  "Which cells count as 'near' is a CHOICE, not a fact - four neighbours, eight, or six, and the same rule becomes a different universe."),
+ ("The rule",
+  ["rule_table", "rule_dial", "ca_rule", "rulebook"],
+  ["rule", "transition", "lookup"],
+  "A function from neighbourhood to next state - eight bits for the elementary case. The rule is small enough to hold and large enough to be a world."),
+ ("The double buffer",
+  ["double_buffer", "tick", "generation", "step_engine"],
+  ["buffer", "generation", "tick"],
+  "TIME is the part the engine will not give you. Read the old grid, write a NEW one, then swap - read and write the same array and every cell lies to its neighbour. Every CA bug in history is this bug."),
  ("Elementary CA (1D rules)",
   ["elementary_ca", "7_1_elementary", "cellular_automata_1d", "ca_rule_explorer", "ca_rules_workbench",
    "ca_showcase", "cellular_automata_basic", "cellular_automata_grabable", "line_network_ca", "wolfram"],
