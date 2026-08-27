@@ -1,931 +1,780 @@
 {
-  "title": "color",
+  "title": "Color - what must exist for a coloured object to exist",
   "domain": "color",
-  "note": "Ontology derived from the beat score by tools/build_spine_ontology.py (concepts = beats, artifacts = their maps').",
+  "note": "Auto-classified by tools/build_concept_map.py — heuristic keyword scoring, tier by footprint.",
   "acts": [],
   "concepts": [
-    "A salon for digital fingers. The nail ",
-    "The grid becomes a canvas. Each cell a",
-    "Walk through light itself. Rainbow emi",
-    "Pillars of color rise along the runway",
-    "Paint meets physics. The ball painting",
-    "The hallway dissolves into rainbow. Co",
-    "· palette (unplaced)"
+    "No light, no color",
+    "The triple",
+    "The second door",
+    "Skin",
+    "Glow",
+    "Through",
+    "Multiplication",
+    "The path",
+    "The chord",
+    "The ground",
+    "The screen's flesh",
+    "The room",
+    "Off the ladder"
   ],
   "concept_meta": {
-    "A salon for digital fingers. The nail ": {
-      "truth": "A salon for digital fingers. The nail color controller offers precise hue selection while color balls scatter like polish bottles on a shelf. Choose a color, apply it to the hand model, watch pigment become identity.",
-      "role": "INTRODUCE",
-      "id": "C1",
-      "act": "Act I",
+    "No light, no color": {
+      "act": "I - before the object",
+      "truth": "Light3D.light_color: the room decides first. Kill the light and every albedo in the scene is the same black.",
       "tiers": {
         "small": [
-          "dark_sphere",
-          "nail_color_controller",
-          "hand_model",
-          "hand_color_controller",
-          "dark_side_prism",
-          "grab_stick_scanner",
-          "brick_wall_factory"
-        ],
-        "medium": [
-          "science_screen",
-          "colorballs"
-        ],
-        "large": [],
-        "applied": []
-      },
-      "count": 9
-    },
-    "The grid becomes a canvas. Each cell a": {
-      "truth": "The grid becomes a canvas. Each cell awaits its color assignment, a pixel in a larger pattern you construct. The gridcolorizer transforms the floor into a palette - systematic, addressable, yours to paint.",
-      "role": "DEMONSTRATE",
-      "id": "C2",
-      "act": "Act I",
-      "tiers": {
-        "small": [
-          "gridcolorizer",
-          "dark_sphere"
-        ],
-        "medium": [
-          "science_screen",
-          "spectrum_forest"
-        ],
-        "large": [],
-        "applied": []
-      },
-      "count": 4
-    },
-    "Walk through light itself. Rainbow emi": {
-      "truth": "Walk through light itself. Rainbow emitters line the corridor, cycling through the spectrum in slow waves. Red fades to orange fades to yellow - the continuous gradient made temporal.",
-      "role": "DEMONSTRATE",
-      "id": "C3",
-      "act": "Act II",
-      "tiers": {
-        "small": [
-          "mario_cube",
-          "dark_sphere",
-          "pick_up_cube"
+          "RotatingLaser",
+          "disco_lights",
+          "strobe_lasers"
         ],
         "medium": [],
-        "large": [
-          "rainbow"
-        ],
+        "large": [],
         "applied": []
       },
-      "count": 4
+      "count": 3,
+      "thin": false
     },
-    "Pillars of color rise along the runway": {
-      "truth": "Pillars of color rise along the runway, each a collection point for chromatic data. Grab the color sticks, watch the flashlight demo reveal how light creates color from darkness.",
-      "role": "DEMONSTRATE",
-      "id": "C4",
-      "act": "Act III",
+    "The triple": {
+      "act": "II - the number",
+      "truth": "Color(r, g, b) - three floats 0..1. Additive mixing: the whole visible world in a trench coat of three numbers.",
       "tiers": {
-        "small": [
-          "pillarcolorcollection",
-          "dark_sphere",
-          "SpectrumVisualizer",
-          "color_mixing"
-        ],
+        "small": [],
         "medium": [
-          "loom_drum_persian_p6",
-          "visual_color_mixing",
-          "color_sets_overview",
-          "grab_rainbow_stick",
-          "colorsheets",
-          "glitchcolor",
-          "k_means_color"
-        ],
-        "large": [
-          "color_scanner"
-        ],
-        "applied": []
-      },
-      "count": 12
-    },
-    "Paint meets physics. The ball painting": {
-      "truth": "Paint meets physics. The ball painting demo turns spheres into canvases, color into gesture. Throw paint, watch it splash, see how color accumulates on curved surfaces.",
-      "role": "DEMONSTRATE",
-      "id": "C5",
-      "act": "Act III",
-      "tiers": {
-        "small": [
-          "dark_sphere",
-          "albers_wall_gallery"
-        ],
-        "medium": [
-          "pattern_mill"
-        ],
-        "large": [
-          "ball_painting_demo"
-        ],
-        "applied": []
-      },
-      "count": 4
-    },
-    "The hallway dissolves into rainbow. Co": {
-      "truth": "The hallway dissolves into rainbow. Color transitions seamlessly from hue to hue, boundary to boundary, without the discrete steps of individual emitters.",
-      "role": "DEMONSTRATE",
-      "id": "C6",
-      "act": "Act IV",
-      "tiers": {
-        "small": [
-          "color_constellation_office",
-          "dark_sphere"
-        ],
-        "medium": [
-          "color_space_navigator",
-          "loom_bolt_memphis_p4g",
-          "gradient_interpolator"
-        ],
-        "large": [
-          "rainbow_hallway"
-        ],
-        "applied": []
-      },
-      "count": 6
-    },
-    "· palette (unplaced)": {
-      "act": "Act IV",
-      "truth": "sequence artifacts available but not yet placed in a map",
-      "tiers": {
-        "small": [
-          "MetamerismLab",
-          "RotatingLaser",
-          "advancedglitch",
-          "colortrails",
-          "disco_lights",
-          "flashlight_demo",
-          "grab_stick",
-          "grabcolorcollection",
-          "path_builder_foe",
-          "path_cube",
-          "path_game_controller",
-          "path_pyramid",
-          "path_watchdog",
-          "path_wedge",
-          "prism",
-          "shelf",
-          "shelf_with_stickers",
-          "strobe_lasers",
-          "textureglitch"
-        ],
-        "medium": [
-          "SimultaneousContrast",
-          "laser_turret",
-          "minimalglitch",
-          "pattern_loom",
-          "pattern_machine_a",
-          "pattern_machine_b",
-          "pattern_machine_d",
-          "primitive_combo_puzzle",
+          "colorballs",
           "spherecolors"
         ],
         "large": [
-          "coloredlines",
-          "pattern_machine_c",
-          "primitive_assembler"
+          "coloredlines"
+        ],
+        "applied": [
+          "color_mixing",
+          "visual_color_mixing"
+        ]
+      },
+      "count": 5,
+      "thin": false
+    },
+    "The second door": {
+      "act": "II - the number",
+      "truth": "Color.from_hsv(h, s, v) - the SAME triple through human knobs: which color, how pure, how bright.",
+      "tiers": {
+        "small": [
+          "SpectrumVisualizer"
+        ],
+        "medium": [],
+        "large": [
+          "spectrum_forest"
+        ],
+        "applied": [
+          "color_space_navigator"
+        ]
+      },
+      "count": 3,
+      "thin": false
+    },
+    "Skin": {
+      "act": "III - the body",
+      "truth": "albedo_color: color as what a surface REFLECTS. Paint, nails, sheets - color applied to a body as an act.",
+      "tiers": {
+        "small": [
+          "gridcolorizer",
+          "shelf_with_stickers"
+        ],
+        "medium": [
+          "colorsheets"
+        ],
+        "large": [],
+        "applied": []
+      },
+      "count": 3,
+      "thin": false
+    },
+    "Glow": {
+      "act": "III - the body",
+      "truth": "emission: color as what a body EMITS. Self-luminous - the neon, the rainbow emitter, color that needs no light.",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "count": 0,
+      "thin": true
+    },
+    "Through": {
+      "act": "III - the body",
+      "truth": "alpha / transparency: color light passes THROUGH - the prism, the fin, the stained pane.",
+      "tiers": {
+        "small": [
+          "dark_side_prism"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "count": 1,
+      "thin": true
+    },
+    "Multiplication": {
+      "act": "IV - the meeting",
+      "truth": "seen = light x albedo. A red dress under blue light is black: metamerism, the stage-light lesson.",
+      "tiers": {
+        "small": [
+          "MetamerismLab"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": [
+          "color_scanner",
+          "grab_stick_scanner"
+        ]
+      },
+      "count": 3,
+      "thin": false
+    },
+    "The path": {
+      "act": "IV - the meeting",
+      "truth": "Color.lerp and Gradient: between two colors there are many roads - the RGB road greys out mid-way, the HSV road stays saturated around the wheel.",
+      "tiers": {
+        "small": [
+          "colortrails"
+        ],
+        "medium": [
+          "banding_gradient"
+        ],
+        "large": [],
+        "applied": [
+          "gradient_interpolator"
+        ]
+      },
+      "count": 3,
+      "thin": false
+    },
+    "The chord": {
+      "act": "V - the relation",
+      "truth": "complementary, triad, temperature - relations BETWEEN triples. The engine has no word for harmony; that silence is culture's rung.",
+      "tiers": {
+        "small": [],
+        "medium": [
+          "color_sets_overview",
+          "k_means_color"
+        ],
+        "large": [
+          "brick_wall_factory"
+        ],
+        "applied": [
+          "grabcolorcollection",
+          "pillarcolorcollection"
+        ]
+      },
+      "count": 5,
+      "thin": false
+    },
+    "The ground": {
+      "act": "V - the relation",
+      "truth": "simultaneous contrast: the same triple reads differently against different grounds. Albers - color is the relation, not the number.",
+      "tiers": {
+        "small": [],
+        "medium": [
+          "SimultaneousContrast"
+        ],
+        "large": [],
+        "applied": []
+      },
+      "count": 1,
+      "thin": true
+    },
+    "The screen's flesh": {
+      "act": "VI - the screen and the room",
+      "truth": "digital materiality: subpixels, banding, glitch. The screen's body showing through the image - the queer flesh of digital color.",
+      "tiers": {
+        "small": [
+          "advancedglitch",
+          "textureglitch"
+        ],
+        "medium": [
+          "glitchcolor",
+          "minimalglitch",
+          "subpixel_display"
+        ],
+        "large": [],
+        "applied": []
+      },
+      "count": 5,
+      "thin": false
+    },
+    "The room": {
+      "act": "VI - the screen and the room",
+      "truth": "Environment: ambient, fog, sky. Color you stand INSIDE - Rothko as weather, Turrell as architecture. The loop closes: color is perception.",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "color_constellation_office"
         ],
         "applied": []
       },
-      "count": 31
+      "count": 1,
+      "thin": true
+    },
+    "Off the ladder": {
+      "act": "meta",
+      "truth": "color-registry artifacts the taxonomy does not yet claim - furniture, sticks, factories. A chip decides their fate.",
+      "tiers": {
+        "small": [
+          "grab_stick",
+          "shelf"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "count": 2,
+      "thin": false
     }
   },
   "concept_distance": [
     [
       0.0,
-      0.6453,
-      0.8363,
-      0.8562,
-      0.607,
-      0.9821
-    ],
-    [
-      0.6453,
       0.0,
-      0.7682,
-      0.7468,
-      0.8995,
-      0.7035
-    ],
-    [
-      0.8363,
-      0.7682,
-      0.0,
-      0.7886,
+      0.8063,
+      0.6778,
+      0.5438,
+      0.7351,
+      0.3307,
+      0.9854,
+      0.581,
       1.0,
-      0.0
+      0.5371,
+      0.9744,
+      0.7753
     ],
     [
-      0.8562,
-      0.7468,
-      0.7886,
       0.0,
-      0.6224,
-      0.6791
+      0.0,
+      0.215,
+      0.5883,
+      0.7436,
+      0.8587,
+      0.7631,
+      0.7667,
+      0.2795,
+      0.5487,
+      0.3337,
+      0.416,
+      0.9683
     ],
     [
-      0.607,
-      0.8995,
+      0.8063,
+      0.215,
+      0.0,
+      0.7247,
+      0.9007,
+      0.7875,
+      0.7753,
+      0.3788,
+      0.7326,
+      0.8532,
+      0.648,
+      0.4988,
+      0.9848
+    ],
+    [
+      0.6778,
+      0.5883,
+      0.7247,
+      0.0,
+      0.6675,
+      0.9294,
+      0.609,
+      0.4921,
+      0.4555,
+      0.947,
+      0.6419,
+      0.8916,
+      0.4726
+    ],
+    [
+      0.5438,
+      0.7436,
+      0.9007,
+      0.6675,
+      0.0,
+      0.7521,
+      0.6949,
+      0.8946,
+      0.9038,
+      0.9318,
+      0.7795,
+      0.8685,
+      0.9543
+    ],
+    [
+      0.7351,
+      0.8587,
+      0.7875,
+      0.9294,
+      0.7521,
+      0.0,
+      0.8289,
+      0.9519,
+      0.8886,
+      0.975,
+      0.8971,
+      0.9354,
+      0.989
+    ],
+    [
+      0.3307,
+      0.7631,
+      0.7753,
+      0.609,
+      0.6949,
+      0.8289,
+      0.0,
+      0.8076,
+      0.8173,
+      0.9927,
+      0.8264,
+      0.9635,
+      0.1626
+    ],
+    [
+      0.9854,
+      0.7667,
+      0.3788,
+      0.4921,
+      0.8946,
+      0.9519,
+      0.8076,
+      0.0,
+      0.8136,
+      0.9665,
+      0.5993,
+      0.8069,
+      0.9817
+    ],
+    [
+      0.581,
+      0.2795,
+      0.7326,
+      0.4555,
+      0.9038,
+      0.8886,
+      0.8173,
+      0.8136,
+      0.0,
+      0.6931,
+      0.5981,
+      0.8678,
+      0.9854
+    ],
+    [
       1.0,
-      0.6224,
+      0.5487,
+      0.8532,
+      0.947,
+      0.9318,
+      0.975,
+      0.9927,
+      0.9665,
+      0.6931,
       0.0,
-      0.8896
+      0.9781,
+      0.9525,
+      0.9976
     ],
     [
-      0.9821,
-      0.7035,
+      0.5371,
+      0.3337,
+      0.648,
+      0.6419,
+      0.7795,
+      0.8971,
+      0.8264,
+      0.5993,
+      0.5981,
+      0.9781,
       0.0,
-      0.6791,
-      0.8896,
+      0.9403,
+      0.9915
+    ],
+    [
+      0.9744,
+      0.416,
+      0.4988,
+      0.8916,
+      0.8685,
+      0.9354,
+      0.9635,
+      0.8069,
+      0.8678,
+      0.9525,
+      0.9403,
+      0.0,
+      0.9708
+    ],
+    [
+      0.7753,
+      0.9683,
+      0.9848,
+      0.4726,
+      0.9543,
+      0.989,
+      0.1626,
+      0.9817,
+      0.9854,
+      0.9976,
+      0.9915,
+      0.9708,
       0.0
     ]
   ],
   "groups": {
-    "A salon for digital fingers. The nail ": [
-      {
-        "lookup": "dark_sphere",
-        "name": "Dark Sphere",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "nail_color_controller",
-        "name": "nail_color_controller",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "hand_model",
-        "name": "hand_model",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "hand_color_controller",
-        "name": "hand_color_controller",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "science_screen",
-        "name": "Science Screen",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "dark_side_prism",
-        "name": "dark_side_prism",
-        "tier": "small",
-        "fp": 2,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "grab_stick_scanner",
-        "name": "grab_stick_scannerk",
-        "tier": "small",
-        "fp": 2,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "colorballs",
-        "name": "colorballs",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "brick_wall_factory",
-        "name": "brick_wall_factory",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      }
-    ],
-    "The grid becomes a canvas. Each cell a": [
-      {
-        "lookup": "gridcolorizer",
-        "name": "gridcolorizer",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "science_screen",
-        "name": "Science Screen",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "dark_sphere",
-        "name": "Dark Sphere",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "spectrum_forest",
-        "name": "spectrum_forest",
-        "tier": "medium",
-        "fp": 6,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      }
-    ],
-    "Walk through light itself. Rainbow emi": [
-      {
-        "lookup": "mario_cube",
-        "name": "Mario Cube",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "dark_sphere",
-        "name": "Dark Sphere",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "rainbow",
-        "name": "rainbow",
-        "tier": "large",
-        "fp": 50,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "pick_up_cube",
-        "name": "Pick Up Cube",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      }
-    ],
-    "Pillars of color rise along the runway": [
-      {
-        "lookup": "pillarcolorcollection",
-        "name": "pillarcolorcollection",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "loom_drum_persian_p6",
-        "name": "Loom: Persian p6 (rotary drum)",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": false,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "visual_color_mixing",
-        "name": "visual_color_mixing",
-        "tier": "medium",
-        "fp": 6,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "color_sets_overview",
-        "name": "Color Sets Overview",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "dark_sphere",
-        "name": "Dark Sphere",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "grab_rainbow_stick",
-        "name": "grab_rainbow_stick",
-        "tier": "medium",
-        "fp": 3,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "SpectrumVisualizer",
-        "name": "SpectrumVisualizer",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "color_mixing",
-        "name": "Color Mixing",
-        "registry": "",
-        "tier": "small",
-        "fp": 2,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "color_scanner",
-        "name": "Color Scanner",
-        "registry": "",
-        "tier": "large",
-        "fp": 140,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "colorsheets",
-        "name": "Color Sheets",
-        "registry": "",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "glitchcolor",
-        "name": "Glitch Color",
-        "registry": "",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "k_means_color",
-        "name": "K-Means Color Clustering",
-        "registry": "",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      }
-    ],
-    "Paint meets physics. The ball painting": [
-      {
-        "lookup": "dark_sphere",
-        "name": "Dark Sphere",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "ball_painting_demo",
-        "name": "ball_painting_demo",
-        "tier": "large",
-        "fp": 20,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "pattern_mill",
-        "name": "Pattern Mill",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "albers_wall_gallery",
-        "name": "albers_wall_gallery",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      }
-    ],
-    "The hallway dissolves into rainbow. Co": [
-      {
-        "lookup": "color_space_navigator",
-        "name": "Color Space Navigator",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "loom_bolt_memphis_p4g",
-        "name": "Loom: Memphis p4g (wall bolt)",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": false,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "color_constellation_office",
-        "name": "color_constellation_office",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "gradient_interpolator",
-        "name": "Gradient Interpolator",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "rainbow_hallway",
-        "name": "rainbow_hallway",
-        "tier": "large",
-        "fp": 13,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "dark_sphere",
-        "name": "Dark Sphere",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      }
-    ],
-    "· palette (unplaced)": [
-      {
-        "lookup": "MetamerismLab",
-        "name": "MetamerismLab",
-        "registry": "",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
+    "No light, no color": [
       {
         "lookup": "RotatingLaser",
         "name": "RotatingLaser",
-        "registry": "",
+        "registry": "color.json",
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "SimultaneousContrast",
-        "name": "SimultaneousContrast",
-        "registry": "",
-        "tier": "medium",
-        "fp": 3,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "advancedglitch",
-        "name": "advancedglitch",
-        "registry": "",
-        "tier": "small",
-        "fp": 2,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "coloredlines",
-        "name": "Colored Lines",
-        "registry": "",
-        "tier": "large",
-        "fp": 700,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "colortrails",
-        "name": "colortrails",
-        "registry": "",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
+        "recommended": true
       },
       {
         "lookup": "disco_lights",
         "name": "disco_lights",
-        "registry": "",
+        "registry": "color.json",
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "flashlight_demo",
-        "name": "flashlight_demo",
-        "registry": "",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "grab_stick",
-        "name": "grab_stick",
-        "registry": "",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "grabcolorcollection",
-        "name": "grabcolorcollection",
-        "registry": "",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "laser_turret",
-        "name": "Laser Turret",
-        "registry": "",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "minimalglitch",
-        "name": "Minimal Glitch",
-        "registry": "",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "path_builder_foe",
-        "name": "Path Builder Foe",
-        "registry": "",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "path_cube",
-        "name": "Path Cube (wall)",
-        "registry": "",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "path_game_controller",
-        "name": "Path Game Controller",
-        "registry": "",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "path_pyramid",
-        "name": "Path Pyramid (mound)",
-        "registry": "",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "path_watchdog",
-        "name": "Path Watchdog",
-        "registry": "",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "path_wedge",
-        "name": "Path Wedge (ramp)",
-        "registry": "",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "pattern_loom",
-        "name": "Pattern Loom",
-        "registry": "",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "pattern_machine_a",
-        "name": "Pattern Machine A — Jacquard Punch-Card Loom",
-        "registry": "",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "pattern_machine_b",
-        "name": "Pattern Printer (Holographic Press)",
-        "registry": "",
-        "tier": "medium",
-        "fp": 6,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "pattern_machine_c",
-        "name": "Kaleidoscope Mill",
-        "registry": "",
-        "tier": "large",
-        "fp": 12,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "pattern_machine_d",
-        "name": "Pattern Machine D — Tile-Stamp Press",
-        "registry": "",
-        "tier": "medium",
-        "fp": 6,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "primitive_assembler",
-        "name": "Primitive Assembler",
-        "registry": "",
-        "tier": "large",
-        "fp": 18,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "primitive_combo_puzzle",
-        "name": "Primitive Combo Puzzle",
-        "registry": "",
-        "tier": "medium",
-        "fp": 6,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "prism",
-        "name": "prism",
-        "registry": "",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "shelf",
-        "name": "shelf",
-        "registry": "",
-        "tier": "small",
-        "fp": 2,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "shelf_with_stickers",
-        "name": "shelf_with_stickers",
-        "registry": "",
-        "tier": "small",
-        "fp": 2,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "spherecolors",
-        "name": "spherecolors",
-        "registry": "",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
+        "recommended": true
       },
       {
         "lookup": "strobe_lasers",
         "name": "strobe_lasers",
-        "registry": "",
+        "registry": "color.json",
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": false,
-        "map_ready": false
+        "recommended": true
+      }
+    ],
+    "The triple": [
+      {
+        "lookup": "color_mixing",
+        "name": "Color Mixing",
+        "registry": "color.json",
+        "tier": "applied",
+        "fp": 2,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "colorballs",
+        "name": "colorballs",
+        "registry": "color.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "coloredlines",
+        "name": "Colored Lines",
+        "registry": "color.json",
+        "tier": "large",
+        "fp": 700,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "spherecolors",
+        "name": "spherecolors",
+        "registry": "color.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "visual_color_mixing",
+        "name": "visual_color_mixing",
+        "registry": "color.json",
+        "tier": "applied",
+        "fp": 6,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "The second door": [
+      {
+        "lookup": "SpectrumVisualizer",
+        "name": "SpectrumVisualizer",
+        "registry": "color.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "color_space_navigator",
+        "name": "Color Space Navigator",
+        "registry": "color.json",
+        "tier": "applied",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "spectrum_forest",
+        "name": "spectrum_forest",
+        "registry": "color.json",
+        "tier": "large",
+        "fp": 6,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "Skin": [
+      {
+        "lookup": "colorsheets",
+        "name": "Color Sheets",
+        "registry": "color.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "gridcolorizer",
+        "name": "gridcolorizer",
+        "registry": "color.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "shelf_with_stickers",
+        "name": "shelf_with_stickers",
+        "registry": "color.json",
+        "tier": "small",
+        "fp": 2,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "Glow": [],
+    "Through": [
+      {
+        "lookup": "dark_side_prism",
+        "name": "dark_side_prism",
+        "registry": "color.json",
+        "tier": "small",
+        "fp": 2,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "Multiplication": [
+      {
+        "lookup": "MetamerismLab",
+        "name": "MetamerismLab",
+        "registry": "color.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "color_scanner",
+        "name": "Color Scanner",
+        "registry": "color.json",
+        "tier": "applied",
+        "fp": 140,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "grab_stick_scanner",
+        "name": "grab_stick_scannerk",
+        "registry": "color.json",
+        "tier": "applied",
+        "fp": 2,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "The path": [
+      {
+        "lookup": "banding_gradient",
+        "name": "Banding Gradient",
+        "registry": "color.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": false,
+        "recommended": true
+      },
+      {
+        "lookup": "colortrails",
+        "name": "colortrails",
+        "registry": "color.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "gradient_interpolator",
+        "name": "Gradient Interpolator",
+        "registry": "color.json",
+        "tier": "applied",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "The chord": [
+      {
+        "lookup": "brick_wall_factory",
+        "name": "brick_wall_factory",
+        "registry": "color.json",
+        "tier": "large",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "color_sets_overview",
+        "name": "Color Sets Overview",
+        "registry": "color.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false
+      },
+      {
+        "lookup": "grabcolorcollection",
+        "name": "grabcolorcollection",
+        "registry": "color.json",
+        "tier": "applied",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "k_means_color",
+        "name": "K-Means Color Clustering",
+        "registry": "color.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "pillarcolorcollection",
+        "name": "pillarcolorcollection",
+        "registry": "color.json",
+        "tier": "applied",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "The ground": [
+      {
+        "lookup": "SimultaneousContrast",
+        "name": "SimultaneousContrast",
+        "registry": "color.json",
+        "tier": "medium",
+        "fp": 3,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "The screen's flesh": [
+      {
+        "lookup": "advancedglitch",
+        "name": "advancedglitch",
+        "registry": "color.json",
+        "tier": "small",
+        "fp": 2,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "glitchcolor",
+        "name": "Glitch Color",
+        "registry": "color.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "minimalglitch",
+        "name": "Minimal Glitch",
+        "registry": "color.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "subpixel_display",
+        "name": "Subpixel Display",
+        "registry": "color.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
       },
       {
         "lookup": "textureglitch",
         "name": "textureglitch",
-        "registry": "",
+        "registry": "color.json",
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": false,
-        "map_ready": false
+        "recommended": true
+      }
+    ],
+    "The room": [
+      {
+        "lookup": "color_constellation_office",
+        "name": "color_constellation_office",
+        "registry": "color.json",
+        "tier": "large",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "Off the ladder": [
+      {
+        "lookup": "grab_stick",
+        "name": "grab_stick",
+        "registry": "color.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "shelf",
+        "name": "shelf",
+        "registry": "color.json",
+        "tier": "small",
+        "fp": 2,
+        "has_image": true,
+        "recommended": true
       }
     ]
   },
-  "total": 70,
-  "total_concepts": 7,
+  "total": 35,
+  "total_concepts": 13,
   "recommended_total": 34,
-  "map_ready_total": 34,
-  "palette_total": 36
+  "map_ready_total": 34
 }

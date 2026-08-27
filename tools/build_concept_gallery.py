@@ -91,6 +91,17 @@ def portrait(token: str, seq_id: str) -> str | None:
         pick = (shipped or hits)[0]
         rel = os.path.relpath(pick, ENC).replace(os.sep, "/")
         return "/" + rel
+    # dna_promoted tokens are prefixed registry names over gallery families whose PNGs
+    # drop the family prefix: dna_color_stacks_stack_complementary_red_green lives at
+    # color-stacks-gallery/stack_complementary_red_green.png. Try each suffix cut.
+    if token.startswith("dna_"):
+        parts = token[4:].split("_")
+        for i in range(1, len(parts)):
+            tail = "_".join(parts[i:])
+            hits = sorted(glob.glob(os.path.join(ENC, "*-gallery", f"{tail}.png")))
+            if hits:
+                rel = os.path.relpath(hits[0], ENC).replace(os.sep, "/")
+                return "/" + rel
     return None
 
 

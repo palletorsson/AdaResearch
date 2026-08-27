@@ -23,6 +23,60 @@ DOC = os.path.join(ROOT, "doc")
 # ── per-domain config ─────────────────────────────────────────────────────────────────────────
 # concept = (key, act, truth, [strong keywords], [weak keywords]). Order = specific first.
 CONFIG = {
+ "color": {
+  # THE COLOR TAXONOMY (2026-08-27, Palle: "color does not teach color... order them
+  # into a taxonomy... what concept we need to introduce to make an object exist. The
+  # cheat code in the godot documentation"). Rungs ordered by EXISTENCE DEPENDENCY in
+  # the engine itself: what must exist before a coloured object can. The engine's own
+  # API is the honest order - Light3D before Color(r,g,b) before albedo before lerp -
+  # and where the engine goes silent (harmony, context) the silence IS the rung.
+  # Acts: I before the object / II the number / III the body / IV the meeting /
+  # V the relation / VI the screen and the room. Closes as a loop: rung 12 is colour
+  # you stand INSIDE, the sequence truth ("color is perception") made walkable.
+  "title": "Color - what must exist for a coloured object to exist",
+  "registries": ["color.json"],
+  "applied_kw": ["controller", "mixing", "scanner", "interpolator", "navigator", "collection"],
+  "large_kw": ["hallway", "forest", "office", "wall", "room", "corridor", "field"],
+  "concepts": [
+   ("No light, no color", "I - before the object",
+    "Light3D.light_color: the room decides first. Kill the light and every albedo in the scene is the same black.",
+    ["laser", "disco", "strobe", "flashlight", "lamp", "bulb"], ["light"]),
+   ("The triple", "II - the number",
+    "Color(r, g, b) - three floats 0..1. Additive mixing: the whole visible world in a trench coat of three numbers.",
+    ["mixing", "colorball", "rgb", "additive", "coloredline", "spherecolor"], ["mix", "triple"]),
+   ("The second door", "II - the number",
+    "Color.from_hsv(h, s, v) - the SAME triple through human knobs: which color, how pure, how bright.",
+    ["hsv", "hue", "spectrum", "saturation", "space_navigator"], ["wheel", "navigator"]),
+   ("Skin", "III - the body",
+    "albedo_color: color as what a surface REFLECTS. Paint, nails, sheets - color applied to a body as an act.",
+    ["nail", "paint", "sheet", "skin", "albedo", "gridcolor", "swatch", "sticker"], ["hand", "apply"]),
+   ("Glow", "III - the body",
+    "emission: color as what a body EMITS. Self-luminous - the neon, the rainbow emitter, color that needs no light.",
+    ["emission", "glow", "neon", "rainbow", "emitter"], ["luminous"]),
+   ("Through", "III - the body",
+    "alpha / transparency: color light passes THROUGH - the prism, the fin, the stained pane.",
+    ["prism", "transparen", "alpha", "glass", "fin", "translucen"], ["through"]),
+   ("Multiplication", "IV - the meeting",
+    "seen = light x albedo. A red dress under blue light is black: metamerism, the stage-light lesson.",
+    ["metameri", "scanner"], ["stage", "match"]),
+   ("The path", "IV - the meeting",
+    "Color.lerp and Gradient: between two colors there are many roads - the RGB road greys out mid-way, the HSV road stays saturated around the wheel.",
+    ["gradient", "interpolat", "lerp", "trail", "transition"], ["between", "ramp"]),
+   ("The chord", "V - the relation",
+    "complementary, triad, temperature - relations BETWEEN triples. The engine has no word for harmony; that silence is culture's rung.",
+    ["sets", "palette", "collection", "pillar", "complementary", "triad", "harmony", "k_means"], ["chord", "scheme"]),
+   ("The ground", "V - the relation",
+    "simultaneous contrast: the same triple reads differently against different grounds. Albers - color is the relation, not the number.",
+    ["contrast", "simultaneous", "albers", "constancy", "context"], ["ground", "relation"]),
+   ("The screen's flesh", "VI - the screen and the room",
+    "digital materiality: subpixels, banding, glitch. The screen's body showing through the image - the queer flesh of digital color.",
+    ["glitch", "subpixel", "banding", "pixel", "artifact_compression"], ["screen", "digital"]),
+   ("The room", "VI - the screen and the room",
+    "Environment: ambient, fog, sky. Color you stand INSIDE - Rothko as weather, Turrell as architecture. The loop closes: color is perception.",
+    ["fog", "ambient", "atmosphere", "constellation", "office", "forest", "room", "rothko", "turrell"], ["environment", "inside"]),
+  ],
+  "catch_all": ("Off the ladder", "meta", "color-registry artifacts the taxonomy does not yet claim - furniture, sticks, factories. A chip decides their fate."),
+ },
  "transformation": {
   "title": "Transformations",
   "registries": ["transforms.json", "alternative_geometries.json"],
@@ -164,7 +218,11 @@ def build(domain):
         meta[k]["count"] = len(groups[k])
         meta[k]["thin"] = len(groups[k]) <= 1
     # drop empty concepts (keep order)
-    concept_keys = [k for k in concept_keys if groups[k]]
+    # Keep DECLARED concepts even when empty: a starving rung is a loud gap the
+    # curation gallery must show (forces' Scaling taught this), and the additions
+    # hand-layer can only fill a concept that exists. Only the catch-all may vanish.
+    concept_keys = [k for k in concept_keys
+                    if groups[k] or k != cfg["catch_all"][0]]
     total = sum(len(groups[k]) for k in concept_keys)
     # concept-level distance: TF-IDF cosine over each concept's accrued text, min-max rescaled
     vecs, _ = T.tfidf([concept_text[k] for k in concept_keys])
