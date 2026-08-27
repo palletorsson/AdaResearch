@@ -57,6 +57,14 @@ adopted by the gallery unchanged; standing = placed survivors after the retire;
 the natural object is one prop at ×½ / ×1 / ×2 on one pedestal row (a matryoshka of
 the same extinguisher). One future artifact closes the census.
 
+**The page (2026-08-27, same day):** localhost:3003/forces-concepts - one tile per
+artifact, its principle underneath, 219 tiles across the 25 concepts. The chips are MAP
+MEMBERSHIP (retire / corpus only / in maps / hero); selections persist to
+public/forces-concepts/evals.json and tools/read_concept_selections.py reads them back,
+so the retire swap runs from clicks, not guesses. Built by
+tools/build_concept_gallery.py forces + doc/forces_concept_additions.json (the hand
+layer naming the seven new objects' concepts).
+
 ## B · The plan: this list, for all 22 sequences
 
 **What already exists (audit 2026-08-27).** 21 of 22 spine sequences have a
