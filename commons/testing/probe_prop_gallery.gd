@@ -13,7 +13,7 @@
 ##     <godot> --headless --path . --xr-mode off --script res://commons/testing/probe_prop_gallery.gd
 extends SceneTree
 
-const TOKENS := ["paused_fountain", "prop_mobile", "prop_spigot"]
+const TOKENS := ["paused_fountain", "prop_mobile", "prop_spigot", "revolving_door", "three_gravities", "parlour_orbits", "umbrella_field"]
 const SETTLE_FRAMES := 30   # ~0.5 s: the probe_aabb_hogs lesson — two frames photographs a half-built artifact
 
 var _report := {}

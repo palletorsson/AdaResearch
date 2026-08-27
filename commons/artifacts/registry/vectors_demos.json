@@ -5548,6 +5548,78 @@
 				"footprint_cells": 4,
 				"clearance_m": 0.6
 			}
+		},
+		"revolving_door": {
+			"name": "Revolving Door",
+			"class_name": "RevolvingDoor",
+			"scene": "res://commons/artifacts/revolving_door/revolving_door.tscn",
+			"description": "A brass revolving door to nowhere that keeps only |F| cos theta of every shove - aligned spins it, perpendicular does nothing. The dot product as a door. Forces prop gallery, 2026-08-27.",
+			"category": "vectors_demos",
+			"tags": [
+				"forces",
+				"dot_product",
+				"alignment",
+				"prop",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 2,
+				"clearance_m": 0.6
+			}
+		},
+		"three_gravities": {
+			"name": "Three Gravities",
+			"class_name": "ThreeGravities",
+			"scene": "res://commons/artifacts/three_gravities/three_gravities.tscn",
+			"description": "The same fire extinguisher falling forever in three glass columns at Moon, Earth and Jupiter gravity - real engine falls, 1.7 / 0.70 / 0.44 s over 2.4 m. Weight is a relationship. Forces prop gallery, 2026-08-27.",
+			"category": "vectors_demos",
+			"tags": [
+				"forces",
+				"gravity",
+				"prop",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 3,
+				"clearance_m": 0.6
+			}
+		},
+		"parlour_orbits": {
+			"name": "Parlour Orbits",
+			"class_name": "ParlourOrbits",
+			"scene": "res://commons/artifacts/parlour_orbits/parlour_orbits.tscn",
+			"description": "A bowling-ball sun on a parlour rug that dips, museum props in live n-body orbit around it - Gmm/r2 integrated each frame, no orbit ever repeats. Forces prop gallery, 2026-08-27.",
+			"category": "vectors_demos",
+			"tags": [
+				"forces",
+				"attraction",
+				"n_body",
+				"orbit",
+				"prop",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 3,
+				"clearance_m": 0.6
+			}
+		},
+		"umbrella_field": {
+			"name": "Umbrella Field",
+			"class_name": "UmbrellaField",
+			"scene": "res://commons/artifacts/umbrella_field/umbrella_field.tscn",
+			"description": "Sixteen open umbrellas straining down-wind, lean azimuth as direction, depth and shiver as magnitude - a vector field made legible as weather you stand inside. Forces prop gallery, 2026-08-27.",
+			"category": "vectors_demos",
+			"tags": [
+				"forces",
+				"vector_field",
+				"wind",
+				"prop",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 5,
+				"clearance_m": 0.6
+			}
 		}
 	}
 }

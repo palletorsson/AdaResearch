@@ -34,7 +34,7 @@ const ROD_KG_PER_M := 0.35             # steel tube; enters the node mass like C
 
 @export var seed: int = 7
 @export_range(2, 4) var depth: int = 3
-@export var span: float = 1.0          # base half-rod length, grows toward the root
+@export var span: float = 1.3          # base half-rod length, grows toward the root
 @export var top_y: float = 3.3
 ## Slow per-arm drift, radians of sway amplitude. 0 freezes the mobile solid.
 @export_range(0.0, 0.6, 0.01) var drift: float = 0.22
@@ -94,8 +94,9 @@ func _build_node(level: int) -> Dictionary:
 
 	var rod := MeshInstance3D.new()
 	var rod_mesh := CylinderMesh.new()
-	rod_mesh.top_radius = 0.012
-	rod_mesh.bottom_radius = 0.012
+	# 0.012 photographed as hairline against the capture sky; 0.02 reads as steel.
+	rod_mesh.top_radius = 0.02
+	rod_mesh.bottom_radius = 0.02
 	rod_mesh.height = rod_len
 	rod.mesh = rod_mesh
 	rod.rotation.z = PI * 0.5
@@ -103,8 +104,10 @@ func _build_node(level: int) -> Dictionary:
 	rod.material_override = _steel_mat(Color(0.16, 0.16, 0.18))
 	node.add_child(rod)
 
-	var drop_l := 0.22 + 0.18 * _rng.randf()
-	var drop_r := 0.22 + 0.18 * _rng.randf()
+	# Deeper drops 0.30-0.55 (was 0.22-0.40): the first capture showed sibling arms
+	# crossing visually because the tiers sat too close.
+	var drop_l := 0.30 + 0.25 * _rng.randf()
+	var drop_r := 0.30 + 0.25 * _rng.randf()
 	node.add_child(left["node"])
 	left["node"].position = Vector3(-d_l, -drop_l, 0.0)
 	_wire(node, Vector3(-d_l, 0.0, 0.0), Vector3(-d_l, -drop_l, 0.0))

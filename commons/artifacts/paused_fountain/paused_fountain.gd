@@ -22,7 +22,9 @@ class_name PausedFountain
 # and marching-cubes props segfault on queue_free mid-generation.
 const CAST := [
 	{"token": "fire_extinguisher", "bead": 0.46, "kg": 5.5},
-	{"token": "crate", "bead": 0.42, "kg": 8.0},
+	# Crate bead shrunk 0.42 -> 0.30 after the first capture: a cube that big on a
+	# steep slow arc overlaps itself and reads as a stack, not a throw.
+	{"token": "crate", "bead": 0.30, "kg": 8.0},
 	{"token": "exit_sign", "bead": 0.40, "kg": 0.6},
 	{"token": "control_pendulum", "bead": 0.44, "kg": 1.1},
 	{"token": "chladni_plate", "bead": 0.38, "kg": 1.4},
