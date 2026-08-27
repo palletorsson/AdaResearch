@@ -1012,6 +1012,9 @@ func _ready() -> void:
 		return                        # @tool is for the Inspector dropdowns only
 	_boot_t0 = Time.get_ticks_msec()
 	_boot_ms["engine_to_ready"] = _boot_t0   # since process start
+	# the layout ledger outlives one walk — a museum built one hall at a time
+	# would otherwise only ever know the hall it is standing in
+	_layout_load()
 	# WHICH STANDING-UP IS THIS? Only the first is a boot; the rest are view
 	# toggles and jumps, and their uptime-based numbers are meaningless.
 	var bce_n: Node = get_node_or_null("/root/BootClockEnd")
@@ -4389,6 +4392,29 @@ func _insp_page_clear() -> void:
 ## and written to ada_run/em_adoptions.json as a ledger; the hand outranks it by
 ## writing `adopt` on the pearl in the book, exactly as em_overrides outranks
 ## em_plan. Delete both and the museum still derives itself from nothing.
+## THE MUSEUM'S OWN LAYOUT, WRITTEN DOWN (2026-08-27, Palle: "wall-map and
+## long-museum and the endless museum godot are not the same. Can we make them
+## one truth?").
+##
+## They could not be, because nobody wrote this down. The engine advances one
+## cursor — `_next_z += h + VESTIBULE_H + porch + court` — and that number lived
+## only in RAM; since one-hall streaming, `em_built.json` holds two segments and
+## no file has ever held the whole building. So tools/long_museum.py had to
+## re-derive the geometry in Python, and a second implementation of one rule
+## drifts: measured on 2026-08-27 the strip gave every hall h20 where the engine
+## builds h23 (the three passage rows) and 20 columns where the engine raises 33,
+## which made a 3,663 m strip of a museum about 16% longer than that.
+##
+## So the engine records what it BUILT, as it builds it. Not absolute z — that
+## depends where the walk started and what streaming freed — but the SPAN and the
+## shape of each hall, which are properties of the hall itself. The strip lays
+## those out cumulatively and gets the engine's own arithmetic. What has not been
+## walked yet is simply absent, and the strip falls back to its own maths and says
+## so, rather than pretending.
+const LAYOUT_WALK_PATH := "res://ada_run/em_layout_walk.json"
+var _layout_walk: Dictionary = {}
+var _layout_dirty: bool = false
+
 const ADOPT_PATH := "res://ada_run/em_adoptions.json"
 var _adopt_ledger: Dictionary = {}
 var _adopt_dirty: bool = false
@@ -4471,6 +4497,73 @@ func _adopt_note(seg: Node3D, chapter: String, pearl: String) -> void:
 	_adopt_ledger["%s|%s" % [chapter, pearl]] = rows
 	_adopt_dirty = true
 	_adopt_write()
+
+
+## One hall's measurements, keyed the way em_bake keys its own rows so the two
+## can be joined without guessing: "<chapter>|<pearl>".
+func _layout_note(deal: Variant, peek: Variant, w: int, h: int,
+		porch_depth: int, court_depth: int, seg: Node3D) -> void:
+	var chapter := ""
+	var pearl := ""
+	if deal is Dictionary:
+		chapter = String((deal as Dictionary).get("chapter", ""))
+		pearl = String((deal as Dictionary).get("pearl", ""))
+	if seg != null and is_instance_valid(seg):
+		if chapter == "" and seg.has_meta("em_chapter"):
+			chapter = String(seg.get_meta("em_chapter"))
+		if pearl == "" and seg.has_meta("em_pearl"):
+			pearl = String(seg.get_meta("em_pearl"))
+	var map_name := String((peek as Dictionary).get("map", "")) if peek is Dictionary else ""
+	if pearl == "" and map_name == "":
+		return                      # a segment nothing can name is not a row
+	# THE SPAN, NOT THE PLACE. z0 depends on where this walk began and on what
+	# streaming had freed; the span is the hall's own.
+	var span: int = h + VESTIBULE_H + porch_depth + court_depth
+	var key := "%s|%s" % [chapter, pearl]
+	_layout_walk[key] = {
+		"chapter": chapter, "pearl": pearl, "map": map_name,
+		"w": w, "h": h, "vestibule": VESTIBULE_H,
+		"porch": porch_depth, "court": court_depth, "span": span,
+		"index": _seg_index,
+	}
+	_layout_dirty = true
+	_layout_write()
+
+
+func _layout_write() -> void:
+	if not _layout_dirty:
+		return
+	# a sibling and a rename: the same reason the book is written that way.
+	var tmp := LAYOUT_WALK_PATH + ".tmp"
+	var f := FileAccess.open(tmp, FileAccess.WRITE)
+	if f == null:
+		return
+	f.store_string(JSON.stringify({
+		"schema": "em_layout_walk/1",
+		"_readme": "THE MUSEUM\u0027S OWN LAYOUT, as built. One row per hall, keyed "
+			+ "<chapter>|<pearl> the way em_bake.json keys its rows. `span` is the "
+			+ "whole segment in cells along z — h + vestibule + porch + court — which "
+			+ "is what the engine\u0027s single cursor advances by, so a strip that adds "
+			+ "these up IS the museum rather than a Python guess at it. Absolute z is "
+			+ "deliberately not here: it depends on where a walk began and on what "
+			+ "streaming had freed. Written by endless_museum.gd as each hall is built, "
+			+ "so a hall nobody has walked is simply absent. Read by tools/long_museum.py, "
+			+ "which falls back to its own arithmetic and says which it used.",
+		"halls": _layout_walk}, " ") + "\n")
+	f.close()
+	var da := DirAccess.open(LAYOUT_WALK_PATH.get_base_dir())
+	if da != null and da.rename(tmp.get_file(), LAYOUT_WALK_PATH.get_file()) == OK:
+		_layout_dirty = false
+
+
+## The ledger outlives one walk: a museum built one hall at a time would
+## otherwise only ever know about the hall it is standing in.
+func _layout_load() -> void:
+	if not FileAccess.file_exists(LAYOUT_WALK_PATH):
+		return
+	var v: Variant = JSON.parse_string(FileAccess.get_file_as_string(LAYOUT_WALK_PATH))
+	if v is Dictionary and (v as Dictionary).get("halls") is Dictionary:
+		_layout_walk = (v as Dictionary)["halls"]
 
 
 func _adopt_write() -> void:
@@ -6870,6 +6963,10 @@ func _build_segment() -> void:
 		# be turned back into a map name — "trans rotationspectacle" does not
 		# reconstruct "Trans_RotationSpectacle" — so it is carried, not derived.
 		"map": String(peek.get("map", "")) if peek is Dictionary else ""})
+	# WRITE DOWN WHAT WAS BUILT, at the one line that knows all of it. See
+	# LAYOUT_WALK_PATH: this is the only place the museum's own geometry has
+	# ever existed, and it used to exist for exactly one statement.
+	_layout_note(deal, peek, w, h, porch_depth, court_depth, seg)
 	_next_z += float(h) + float(VESTIBULE_H) + float(porch_depth) + float(court_depth)
 	_seg_index += 1
 	_prev_w = w

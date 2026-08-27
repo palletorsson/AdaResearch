@@ -18,16 +18,34 @@ is opened for writing anywhere in here.
     python tools/long_museum.py --json     # the document on stdout
     python tools/long_museum.py --check    # gate: file vs the maps on disk
 
-THE STRIP IS NOT THE ENGINE'S OWN SEGMENT MATH, and the difference is worth
-knowing before anyone compares numbers. endless_museum.gd advances one cursor,
-`_next_z += h + VESTIBULE_H + porch + court` (:5694), so there the vestibule is
-the LEADING four rows of a segment — 244 of them, the first being the lobby —
-and a dealt chapter also carries courtyards. This strip is the flat reading Palle
-asked for: hall, hallway, hall, 244 halls and 243 hallways between them, no
-lobby and no courts, every hall's grid exactly as its map holds it. Same halls,
-same order, 4,852 m against the engine's 5,559 m for the same 244 rooms
-(the engine crops each tile to content and appends 3 passage rows). Do not
-average the two: they answer different questions.
+ONE TRUTH, AND WHERE IT COMES FROM (2026-08-27, Palle: "wall-map and
+long-museum and the endless museum godot are not the same. Can we make them one
+truth?"). Three things used to answer differently:
+
+  WHICH HALLS   The editors stand ada_run/em_plan.json — what the museum deals
+                from the trunk's pearls. This file used to stand Ribbon_*
+                placeholders for every unauthored chapter: 208 halls of which
+                155 existed nowhere else, only 53 shared with the editors. It
+                takes the plan now. 196 of 197 shared, and the one that is not
+                is printed by name.
+
+  HOW BIG       endless_museum.gd advances one cursor, `_next_z += h +
+                VESTIBULE_H + porch + court`, and that number lived only in RAM
+                — since one-hall streaming, em_built.json holds two segments and
+                no file ever held the whole building. So this file re-derived the
+                geometry, and a second implementation of one rule drifts: it gave
+                every hall h20 where the engine builds h23 (the three passage
+                rows), describing a museum about 16% longer than the real one.
+                The engine writes down what it builds now, hall by hall, into
+                ada_run/em_layout_walk.json, and those measurements are used
+                wherever they exist. `--check` fails on any disagreement.
+
+  WHAT IT SAYS  commons/data/book/<chapter>.json, read by all of them already.
+
+A hall nobody has walked has no engine row, so the arithmetic here stands in and
+that segment says `layout: "derived"`. The summary prints how many of each. This
+tool still reads maps and writes exactly one file, commons/data/long_museum.json;
+nothing under commons/maps is opened for writing anywhere in here.
 """
 from __future__ import annotations
 
@@ -275,7 +293,42 @@ def content_extent(st):
     return r1 + 1, c1 + 1
 
 
-def read_hall(name, chapter, order, source, probs):
+def engine_layout():
+    """What the ENGINE measured, keyed by map name.
+
+    2026-08-27, Palle: "wall-map and long-museum and the endless museum godot are
+    not the same. Can we make them one truth?"
+
+    They could not be while this file re-derived the museum's geometry in Python.
+    A second implementation of one rule drifts, and this one had: measured that
+    day, the strip gave every hall h20 where the engine builds h23 — the three
+    passage rows it appends — so a 3,663 m strip described a museum about 16%
+    longer than that, and no gate could see it because both numbers were internally
+    consistent.
+
+    endless_museum.gd now writes down what it built, hall by hall, as it builds it
+    (ada_run/em_layout_walk.json). Where a hall has been walked, its measurements
+    come from the engine's own cursor and the strip IS the museum. Where it has
+    not, the arithmetic below stands in and every segment says which it used, so
+    "the strip disagrees with the museum" is a question with an answer rather than
+    a suspicion."""
+    p = os.path.join(ROOT, "ada_run", "em_layout_walk.json")
+    if not os.path.exists(p):
+        return {}
+    try:
+        with open(p, encoding="utf-8") as fh:
+            rows = json.load(fh).get("halls", {})
+    except Exception:
+        return {}
+    out = {}
+    for r in rows.values():
+        m = r.get("map")
+        if m:
+            out[m] = r
+    return out
+
+
+def read_hall(name, chapter, order, source, probs, engine=None):
     """One hall as a strip segment, or None if it cannot be read."""
     p = os.path.join(MAPS, name, "map_data.json")
     if not os.path.exists(p):
@@ -342,9 +395,29 @@ def read_hall(name, chapter, order, source, probs):
         print("       %d artifact(s) outside %s's %dx%d floor: %s"
               % (len(strays), name, w, h, ", ".join(strays)), file=sys.stderr)
 
+    # THE ENGINE'S OWN MEASUREMENTS WHEN IT HAS THEM. `h` becomes the length the
+    # museum's cursor actually advanced by, less its vestibule — so the strip's
+    # hall plus its hallway equals the engine's span exactly. The drawn grid stays
+    # the map's, because that is what a map holds; `passage` names the rows the
+    # engine adds beyond it so the page can show them as what they are rather than
+    # as a hall that does not fit its own floor.
+    e = (engine or {}).get(name)
+    layout = "derived"
+    passage = 0
+    if e:
+        try:
+            eh = int(e["h"]) + int(e.get("porch", 0)) + int(e.get("court", 0))
+            if eh > 0:
+                passage = max(0, eh - h)
+                h = eh
+                w = int(e.get("w", w)) or w
+                layout = "engine"
+        except (KeyError, TypeError, ValueError):
+            layout = "derived"
     seg = {"kind": "hall", "name": name, "sequence": chapter, "chapter": order,
            "z0": 0, "z1": 0, "w": w, "h": h, "x0": -(w // 2),
-           "source": source, "artifacts": arts, "structure": st}
+           "source": source, "layout": layout, "passage": passage,
+           "artifacts": arts, "structure": st}
     # KEPT SO THE CROP IS AUDITABLE. A hall drawn smaller than the file it came
     # from invites "is the strip losing cells?", and the honest answer is a
     # number rather than a reassurance: these two fields are the grid as stored,
@@ -360,6 +433,7 @@ def build():
     authored = authored_chapters()
     planned = planned_chapters()
     ribbons = ribbon_index()
+    engine = engine_layout()
 
     halls = []
     for order, seq in spine_order():
@@ -380,7 +454,7 @@ def build():
             # which, and the chapter's source below says both.
             src = ("ribbon" if n.startswith("Ribbon_")
                    else "authored" if seq in authored else "plan")
-            seg = read_hall(n, seq, order, src, probs)
+            seg = read_hall(n, seq, order, src, probs, engine)
             if seg is not None:
                 halls.append(seg)
 
@@ -548,6 +622,17 @@ def summary(doc):
     print()
     print("  %d sequences, %d segments, %.1f m of Z (%.3f km)"
           % (t["sequences"], len(doc["segments"]), t["metres"], t["metres"] / 1000.0))
+    # WHICH HALLS ARE THE MUSEUM, AND WHICH ARE THIS FILE'S ARITHMETIC. A strip
+    # that does not say cannot be trusted about its own length.
+    halls = [x for x in doc["segments"] if x["kind"] == "hall"]
+    measured = [x for x in halls if x.get("layout") == "engine"]
+    if halls:
+        print("  %d of %d halls carry the ENGINE's own measurements (%.0f%%); "
+              "the rest are derived here"
+              % (len(measured), len(halls), 100.0 * len(measured) / len(halls)))
+        if len(measured) < len(halls):
+            print("     walk the museum to measure more - each hall it builds "
+                  "writes itself into ada_run/em_layout_walk.json")
 
 
 def main():
@@ -574,6 +659,34 @@ def main():
         return 0
 
     if args.check:
+        # THE ONE THAT MATTERS (2026-08-27). The old check compared this file
+        # against the maps, which cannot see the difference that actually bit:
+        # both the file and the maps said h20 while the museum built h23, and
+        # every number was internally consistent. This compares the file against
+        # what the ENGINE recorded building, for every hall it has built.
+        eng = engine_layout()
+        drift = []
+        for s2 in json.load(open(OUT, encoding="utf-8"))["segments"]:
+            if s2["kind"] != "hall":
+                continue
+            e = eng.get(s2["name"])
+            if not e:
+                continue
+            want_h = int(e["h"]) + int(e.get("porch", 0)) + int(e.get("court", 0))
+            if int(s2["h"]) != want_h or int(s2["w"]) != int(e.get("w", s2["w"])):
+                drift.append("%s: strip %dx%d, the museum built %dx%d"
+                             % (s2["name"], s2["w"], s2["h"], int(e.get("w", 0)), want_h))
+        if drift:
+            print("DRIFT: the strip disagrees with what the museum built, in %d hall(s):"
+                  % len(drift), file=sys.stderr)
+            for d in drift:
+                print("  " + d, file=sys.stderr)
+            print("  run: python tools/long_museum.py --apply", file=sys.stderr)
+            return 1
+        if eng:
+            print("engine check OK: %d hall(s) measured by the museum, all matching"
+                  % sum(1 for s3 in json.load(open(OUT, encoding="utf-8"))["segments"]
+                        if s3["kind"] == "hall" and s3["name"] in eng))
         if not os.path.exists(OUT):
             print("MISSING: %s - run `python tools/long_museum.py --apply`" % OUT,
                   file=sys.stderr)
