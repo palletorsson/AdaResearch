@@ -27,14 +27,37 @@ func _world() -> void:
 	var fmat := StandardMaterial3D.new()
 	fmat.albedo_color = Color(0.15, 0.15, 0.18); fmat.roughness = 0.9
 	fm.material_override = fmat; _stage.add_child(fm)
+	# A MIRROR NEEDS SOMETHING TO MIRROR. At metallic 0.95 against a flat colour
+	# background the legs came back matte black: a metal is almost entirely its
+	# reflection, and there was nothing in the world to reflect. A procedural
+	# sky gives the finish a gradient to pick up, which is what makes a polished
+	# dark object read as polished rather than as a silhouette.
 	var env := WorldEnvironment.new(); var e := Environment.new()
-	e.background_mode = Environment.BG_COLOR; e.background_color = Color(0.06, 0.06, 0.08)
-	e.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
-	e.ambient_light_color = Color(0.46, 0.48, 0.56); e.ambient_light_energy = 0.6
+	var sky := Sky.new()
+	var pm := ProceduralSkyMaterial.new()
+	pm.sky_top_color = Color(0.16, 0.19, 0.26)
+	pm.sky_horizon_color = Color(0.42, 0.45, 0.52)
+	pm.ground_bottom_color = Color(0.05, 0.05, 0.07)
+	pm.ground_horizon_color = Color(0.20, 0.21, 0.25)
+	pm.sun_angle_max = 12.0
+	sky.sky_material = pm
+	e.background_mode = Environment.BG_SKY
+	e.sky = sky
+	e.ambient_light_source = Environment.AMBIENT_SOURCE_SKY
+	e.ambient_light_energy = 1.0
+	e.reflected_light_source = Environment.REFLECTION_SOURCE_SKY
+	e.tonemap_mode = Environment.TONE_MAPPER_FILMIC
+	e.tonemap_exposure = 1.05
 	env.environment = e; _stage.add_child(env)
 	var key := DirectionalLight3D.new()
-	key.rotation_degrees = Vector3(-38, -32, 0); key.light_energy = 1.7
+	key.rotation_degrees = Vector3(-38, -32, 0); key.light_energy = 2.0
 	key.shadow_enabled = true; _stage.add_child(key)
+	# a cool rim from behind, so a dark object keeps an edge against a dark floor
+	var rim := DirectionalLight3D.new()
+	rim.rotation_degrees = Vector3(-14, 152, 0)
+	rim.light_energy = 1.5
+	rim.light_color = Color(0.72, 0.82, 1.0)
+	_stage.add_child(rim)
 	_cam = Camera3D.new(); _cam.fov = 40.0; _stage.add_child(_cam); _cam.current = true
 
 func _look(at: Vector3, from: Vector3) -> void:
@@ -66,7 +89,11 @@ func _run() -> void:
 		for k in pr:
 			var key := String(k)
 			if key.begins_with("creature_") or key.begins_with("leg_"):
-				csg[key] = pr[k]
+				var cv: Variant = pr[k]
+				if cv is String and String(cv).begins_with("#"):
+					csg[key] = Color(String(cv))
+				else:
+					csg[key] = cv
 			elif key == "ride_local":
 				c.set("ride_local", float(pr[k]))
 			elif key == "stance":
@@ -74,6 +101,15 @@ func _run() -> void:
 			else:
 				c.set(key, pr[k])
 		c.set("csg_params", csg)
+		# the finish block, if the variant carries one
+		var fin: Dictionary = v.get("finish", {})
+		for fk in fin:
+			var fkey := String(fk)
+			var fv: Variant = fin[fk]
+			if fv is Array and (fv as Array).size() >= 3:
+				c.set(fkey, Color(float(fv[0]), float(fv[1]), float(fv[2])))
+			else:
+				c.set(fkey, fv)
 		_stage.add_child(c)
 		c.global_position = Vector3(float(i) * 8.0, 0, 0)
 		crabs.append(c)
@@ -86,7 +122,7 @@ func _run() -> void:
 	for i in range(crabs.size()):
 		var c: Node3D = crabs[i]
 		var p: Vector3 = c.global_position
-		_look(p + Vector3(0, 0.16, 0), p + Vector3(0.95, 0.60, 1.15))
+		_look(p + Vector3(0, 0.20, 0), p + Vector3(0.62, 0.42, 0.80))
 		await create_timer(0.15).timeout
 		await _shoot("v%d_portrait" % (i + 1))
 	# let them walk, then shoot the same two views again
@@ -97,7 +133,7 @@ func _run() -> void:
 		_look(p2 + Vector3(0, 0.16, 0), p2 + Vector3(1.05, 0.55, 1.25))
 		await create_timer(0.12).timeout
 		await _shoot("v%d_walk" % (i + 1))
-		_look(p2 + Vector3(0, 0.12, 0), p2 + Vector3(1.5, 0.22, 0.1))
+		_look(p2 + Vector3(0, 0.16, 0), p2 + Vector3(0.95, 0.16, 0.08))
 		await create_timer(0.12).timeout
 		await _shoot("v%d_side" % (i + 1))
 

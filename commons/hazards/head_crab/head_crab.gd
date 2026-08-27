@@ -59,6 +59,21 @@ const RIG := "res://commons/hazards/octapod_crawler/csg_four_leg_walker.tscn"
 ## forwarded to the CSG rig BEFORE it builds itself, since its _ready reads its
 ## own exports once: creature_* and leg_* keys from csg_walker.gd
 @export var csg_params: Dictionary = {}
+## ── THE FINISH (2026-08-26, Palle: "make them look artificial very beautiful,
+## other dark color, like fetch object") ─────────────────────────────────────
+## csg_body_builder hardcodes its materials at metallic 0.15 / roughness 0.6 —
+## the numbers of something grown. A manufactured object is the opposite: a
+## dark body that is almost a mirror, and joints that are a different metal.
+## Applied AFTER the rig has built, over every CSG shape it made, because the
+## builder gives no way to hand a material in.
+@export var finish_on: bool = false
+@export var finish_base: Color = Color(0.055, 0.06, 0.075)      # near-black, blue
+@export var finish_accent: Color = Color(0.62, 0.66, 0.72)      # bright steel
+@export var finish_metallic: float = 0.95
+@export var finish_roughness: float = 0.14
+@export var finish_accent_metallic: float = 1.0
+@export var finish_accent_roughness: float = 0.08
+@export var finish_glow: float = 0.0                             # accent emission
 
 const LEG_COUNT := 4
 ## the authored shoulder ring: 45/135/225/315 degrees at radius 2.2, body y 2.2
@@ -189,6 +204,55 @@ func _build_rig() -> void:
 ## for the big critter.
 ## The rig has built itself by now: stop it walking, take its body box (this
 ## crab has a carapace instead) and put out the orange debug foot markers.
+## Every shape the builder made, re-finished. The base and the accent are told
+## apart by the albedo the builder gave them — the accent is whatever is not
+## the base colour — so the joint beads stay joints and the shell stays shell.
+func _apply_finish() -> void:
+	if not finish_on or _rig == null or not is_instance_valid(_rig):
+		return
+	var was_base: Color = csg_params.get("creature_base_color", Color("#d8a878"))
+	var base := StandardMaterial3D.new()
+	base.albedo_color = finish_base
+	base.metallic = finish_metallic
+	base.roughness = finish_roughness
+	base.metallic_specular = 0.85
+	var accent := StandardMaterial3D.new()
+	accent.albedo_color = finish_accent
+	accent.metallic = finish_accent_metallic
+	accent.roughness = finish_accent_roughness
+	accent.metallic_specular = 1.0
+	if finish_glow > 0.001:
+		accent.emission_enabled = true
+		accent.emission = finish_accent
+		accent.emission_energy_multiplier = finish_glow
+	var n_base := 0
+	var n_acc := 0
+	for node in _rig.find_children("*", "", true, false):
+		var cur: Material = null
+		if node is CSGShape3D:
+			cur = (node as CSGShape3D).material
+		elif node is MeshInstance3D:
+			cur = (node as MeshInstance3D).material_override
+		else:
+			continue
+		var is_accent := false
+		if cur is StandardMaterial3D:
+			var a: Color = (cur as StandardMaterial3D).albedo_color
+			# the builder tints accents away from the base; anything that is not
+			# the base colour is a joint, a bead or a mark
+			is_accent = (absf(a.r - was_base.r) + absf(a.g - was_base.g) + absf(a.b - was_base.b)) > 0.12
+		var m: Material = accent if is_accent else base
+		if node is CSGShape3D:
+			(node as CSGShape3D).material = m
+		else:
+			(node as MeshInstance3D).material_override = m
+		if is_accent:
+			n_acc += 1
+		else:
+			n_base += 1
+	print("[head_crab] finish: %d body shape(s), %d joint(s)" % [n_base, n_acc])
+
+
 func _quiet_rig() -> void:
 	if _rig == null or not is_instance_valid(_rig):
 		return
@@ -197,6 +261,7 @@ func _quiet_rig() -> void:
 	if _body != null and is_instance_valid(_body):
 		_body.set_process(false)
 		_body.set_physics_process(false)
+	_apply_finish()
 	# the rig hangs an orange debug sphere on every foot marker; find them by
 	# their PARENT rather than by a path, so a renamed rig node cannot leave
 	# four glowing dots on the floor
