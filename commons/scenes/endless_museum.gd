@@ -5297,7 +5297,37 @@ var _deaths: int = 0
 const DEATH_WORDS := {
 	"fire": "the pool was burning",
 	"laser": "you walked into the beam",
-	"fall": "the floor ran out"}
+	"fall": "the floor ran out",
+	"crab": "something in the hall was hunting"}
+
+
+## A CRAB BIT THE WALKER (2026-08-27, Palle: "we should put the spider in the
+## museum"). Everything else lethal here kills on contact — the pool burns, the
+## beam cuts — and that is a fair contract because you can see them and choose
+## not to walk into them. A hunting animal chooses YOU, so one bite is not the
+## same deal. The first two flash and shove; the third is the museum's own
+## death, back to the save point. The count decays after eight seconds, so a
+## visitor who got away is not carrying a wound through the next three halls.
+var _bite_n: int = 0
+var _bite_at: float = 0.0
+
+func walker_bitten(from: Vector3) -> void:
+	if _player == null or _dying:
+		return
+	var now: float = float(Time.get_ticks_msec()) * 0.001
+	if now - _bite_at > 8.0:
+		_bite_n = 0
+	_bite_at = now
+	_bite_n += 1
+	_hazard_flash()
+	var away: Vector3 = _player.global_position - from
+	away.y = 0.0
+	if away.length() > 0.001:
+		_player.position += away.normalized() * 1.1
+	print("[em-crab] bite %d/3" % _bite_n)
+	if _bite_n >= 3:
+		_bite_n = 0
+		on_lethal_touch("crab", from)
 
 
 ## Anything lethal in the museum arrives here — the pools call it directly,
@@ -5428,7 +5458,10 @@ func _hazard_flash() -> void:
 		var cr := ColorRect.new()
 		cr.name = "Flash"
 		cr.color = Color(1, 0.1, 0.05, 0.0)
-		cr.set_anchors_preset(Control.PRESET_FULL_RECT)
+		# set_anchors_PRESET alone leaves a fresh Control at 0x0 and it paints
+		# NOTHING, with every other property reading correct — the offsets have
+		# to move with the anchors or the flash is a red rectangle of no size.
+		cr.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 		cr.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		_hazard_overlay.add_child(cr)
 		add_child(_hazard_overlay)

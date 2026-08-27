@@ -17,6 +17,7 @@ var _log: Array = []
 var _crab: Node3D = null
 var _written: bool = false
 var _closest: float = 999.0
+var _height_logged: bool = false
 
 func _ready() -> void:
 	add_to_group("player")
@@ -41,12 +42,24 @@ func _process(delta: float) -> void:
 			_crab = _find_crab(get_tree().root)
 		if _crab != null:
 			_log.append("%5.2f s  found the crab at %s, %.2f m away" % [_t, str(_crab.global_position), global_position.distance_to(_crab.global_position)])
+			# the floor in a VFM/primitives room surfaces at 0.5; the body should
+			# ride just under that and the feet should stand ON it
+			var fy := 99.0
+			for f in _crab.get("_feet"):
+				if f != null and is_instance_valid(f): fy = minf(fy, (f as Node3D).global_position.y)
+			_log.append("%5.2f s  body y %.3f   feet y %.3f   floor_y it learned %.3f" % [_t, _crab.global_position.y, fy, float(_crab.get("_floor_y"))])
 	elif is_instance_valid(_crab):
 		var d: float = global_position.distance_to(_crab.global_position)
 		if d < _closest:
 			_closest = d
 			if d < 1.0 and not _log.is_empty() and not String(_log[_log.size() - 1]).contains("closed"):
 				_log.append("%5.2f s  closed to %.2f m" % [_t, d])
+	if _t > 6.0 and not _height_logged and _crab != null and is_instance_valid(_crab):
+		_height_logged = true
+		var fy2 := 99.0
+		for f2 in _crab.get("_feet"):
+			if f2 != null and is_instance_valid(f2): fy2 = minf(fy2, (f2 as Node3D).global_position.y)
+		_log.append("%5.2f s  settled: body y %.3f   feet y %.3f   floor_y %.3f" % [_t, _crab.global_position.y, fy2, float(_crab.get("_floor_y"))])
 	if _t > 30.0:
 		_write()
 

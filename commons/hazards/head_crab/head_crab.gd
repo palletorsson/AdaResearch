@@ -169,6 +169,7 @@ var _lunge_t: float = 0.0     # >0 while committed to a leap
 var _lunge_dir: Vector3 = Vector3.ZERO
 var _floor_y: float = 0.0     # the height the artifact was PLACED at
 var _floor_learned: bool = false
+var _floor_settle: float = 0.0   # keeps probing until the world answers
 var _ride: float = 0.29   # body height above the floor, set from crab_scale
 var _stance: float = 1.0  # how far out the feet plant, as a fraction of the rig's
 
@@ -488,16 +489,27 @@ func _home(i: int) -> Vector3:
 ## unread, and this is the two-line version of what they were for: cast down,
 ## take the hit, fall back to the height the artifact was placed at.
 func _ground_at(p: Vector3) -> float:
-	var space := get_world_3d().direct_space_state if is_inside_tree() else null
-	if space != null:
-		var from := Vector3(p.x, _floor_y + 1.2, p.z)
-		var to := Vector3(p.x, _floor_y - 3.0, p.z)
-		var q := PhysicsRayQueryParameters3D.create(from, to)
-		q.collision_mask = 1
-		var hit: Dictionary = space.intersect_ray(q)
-		if not hit.is_empty():
-			return float((hit["position"] as Vector3).y)
-	return _floor_y
+	return _probe_floor(p, 1.2, 3.0, _floor_y)
+
+
+## cast down through p and report where the world is, or fall back
+func _probe_floor(p: Vector3, up: float, down: float, fallback: float) -> float:
+	if not is_inside_tree():
+		return fallback
+	var w := get_world_3d()
+	if w == null:
+		return fallback
+	var space := w.direct_space_state
+	if space == null:
+		return fallback
+	var base: float = _floor_y if _floor_learned else p.y
+	var q := PhysicsRayQueryParameters3D.create(
+		Vector3(p.x, base + up, p.z), Vector3(p.x, base - down, p.z))
+	q.collision_mask = 1
+	var hit: Dictionary = space.intersect_ray(q)
+	if hit.is_empty():
+		return fallback
+	return float((hit["position"] as Vector3).y)
 
 
 ## THE BITE. Proximity, not a collider: this animal moves by writing position
@@ -522,29 +534,47 @@ func _try_bite() -> void:
 		_lunge_t = 0.0
 
 
-## THE MUSEUM WALKER IS HUNTED BUT NOT HURT (octapod_crawler.gd:1169, measured
-## there and true here). Damage routes through GameManager.apply_health_damage,
-## which flashes and REPOSITIONS the target to the map's spawn point. The
-## endless museum has no such spawn: one bite would fling the visitor to the
-## origin of a 4.8 km building. So it lands the leap and deals nothing there,
-## until the museum owns a hurt of its own. On the grid, where a spawn point
-## exists and the death path IS the design, it bites for real.
+## IT BITES ON BOTH LANES NOW (2026-08-27, Palle: "we should put the spider in
+## the museum"). It used to hunt the museum's walker and deal nothing, because
+## damage routes through GameManager.apply_health_damage, which REPOSITIONS the
+## target to the map's spawn point — and a 4.8 km building has no such spawn.
+## The museum turned out to own a death of its own already (on_lethal_touch,
+## the same one the burning pools call), so the exemption is gone: on the grid
+## it takes health, in the museum it calls the museum.
 func _bites(node: Node) -> bool:
-	if not (node is Node3D):
-		return false
-	return not (node as Node3D).is_in_group("em_walker")
+	return node is Node3D
 
 
 func _damage(target: Node, amount: float) -> bool:
-	for m in ["take_damage", "apply_damage", "apply_health_damage"]:
-		if target.has_method(m):
-			target.call(m, amount)
+	if target is Node3D and (target as Node3D).is_in_group("em_walker"):
+		var m: Node = _museum_over(target)
+		if m != null:
+			m.call("walker_bitten", global_position)
+			return true
+		return false      # a walker with no museum over it is a probe, not a visitor
+	for meth in ["take_damage", "apply_damage", "apply_health_damage"]:
+		if target.has_method(meth):
+			target.call(meth, amount)
 			return true
 	var gm: Node = get_node_or_null("/root/GameManager")
 	if gm != null and gm.has_method("apply_health_damage"):
 		gm.call("apply_health_damage", amount)
 		return true
 	return false
+
+
+## the museum is whichever ancestor of the walker answers to a bite — found by
+## walking up rather than by group, because the walker is parented under it
+func _museum_over(node: Node) -> Node:
+	var cur: Node = node
+	while cur != null:
+		if cur.has_method("walker_bitten"):
+			return cur
+		cur = cur.get_parent()
+	for n in get_tree().root.get_children():
+		if n.has_method("walker_bitten"):
+			return n
+	return null
 
 
 ## The visitor, on whichever lane is running. The museum's walker is in group
@@ -567,7 +597,28 @@ func _process(delta: float) -> void:
 	# so a height read in _ready is the height before placement — zero.
 	if not _floor_learned:
 		_floor_learned = true
+		# LOOK FOR THE FLOOR, do not assume the placed height IS the floor.
+		# Two things defeat that assumption, and both bit. A token written
+		# `head_crab:180:0` sets an explicit y-offset of zero, and the grid's
+		# auto-grounding is gated on the override being ABSENT rather than on
+		# its value — so the artifact is never grounded at all. And even when
+		# it IS grounded, grounding happens on a deferred call while this
+		# _process pins position.y every frame, so the animal overwrites its
+		# own grounding on the next tick. Measured in Point_One: body at
+		# -0.18 on a floor whose surface is 0.5, feet correctly on the floor,
+		# body two thirds of a metre under them.
 		_floor_y = global_position.y
+	# AND KEEP LOOKING, for two seconds. The grid's structure bodies are not in
+	# the physics space on the frame this artifact first runs: a ray cast then
+	# hits nothing and the fallback is the placed height, which in Point_One is
+	# zero against a floor whose surface is 0.5. Measured: body -0.180, feet
+	# 0.000, floor 0.500 — the animal a half metre into the ground it stands on.
+	if _floor_settle < 2.0:
+		_floor_settle += delta
+		var found: float = _probe_floor(global_position, 2.5, 5.0, INF)
+		if found < INF:
+			_floor_y = found
+			_floor_settle = 99.0
 	_look_t += delta
 	if _look_t > 0.5:
 		_look_t = 0.0
