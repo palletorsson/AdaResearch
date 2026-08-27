@@ -1,12 +1,14 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
 ;; SixLegCritter — six FABRIK3D legs at 60deg intervals, walks around.
 ;; Exact beast_demo architecture: body at fixed Y, SpringArm3D finds ground,
 ;; FABRIK3D bends bone chain from body to foot target, magnet sets knee direction.
 
+[ext_resource type="Script" path="res://commons/hazards/octapod_crawler/leg_walker_root.gd" id="9_root"]
 [ext_resource type="Script" path="res://commons/hazards/octapod_crawler/six_leg_critter.gd" id="1_script"]
 
 [node name="SixLegScene" type="Node3D"]
+script = ExtResource("9_root")
 
 ;; ── Body ─────────────────────────────────────────────────────────────────
 [node name="Body" type="MeshInstance3D" parent="."]

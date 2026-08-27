@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
 ;; FourLegCritter — four FABRIK3D legs, walks around.
 ;; Exact beast_demo architecture: body at fixed Y, SpringArm3D finds ground,
@@ -6,9 +6,11 @@
 ;; Legs at 45°/135°/225°/315° around body center, radius 2.2.
 ;; Leg 0 (front-right), Leg 1 (front-left), Leg 2 (back-left), Leg 3 (back-right).
 
+[ext_resource type="Script" path="res://commons/hazards/octapod_crawler/leg_walker_root.gd" id="9_root"]
 [ext_resource type="Script" path="res://commons/hazards/octapod_crawler/four_leg_critter.gd" id="1_script"]
 
 [node name="FourLegScene" type="Node3D"]
+script = ExtResource("9_root")
 
 ;; ── Body ─────────────────────────────────────────────────────────────────
 [node name="Body" type="MeshInstance3D" parent="."]

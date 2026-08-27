@@ -1,388 +1,392 @@
 {
- "sequences": {
-  "forces": {
-   "algorithm_paths": {
-	"Forces_1": "res://algorithms/physics/forces/",
-	"Forces_Destruct": "res://algorithms/physics/destruction/",
-	"VectorAddition": "res://algorithms/vectors/addition/",
-	"VectorBasics": "res://algorithms/vectors/basics/",
-	"VectorFieldFlow": "res://algorithms/vectors/flowfield/",
-	"VectorForces": "res://algorithms/vectors/forces/",
-	"VectorMotion": "res://algorithms/vectors/motion/"
-   },
-   "audio": {
-	"ambient_preset": "industrial_hum",
-	"interactive_sounds": {
-	 "teleport": "AudioSynthesizer.IMPACT_THUD"
-	},
-	"volume": -10.0
-   },
-   "axiom_files": [
-	"res://commons/context/clipboard/tutorial_text/vectors_axioms.md",
-	"res://commons/context/clipboard/tutorial_text/dot_product_axioms.md",
-	"res://commons/context/clipboard/tutorial_text/cross_product_axioms.md",
-	"res://commons/context/clipboard/tutorial_text/forces_axioms.md",
-	"res://commons/context/clipboard/tutorial_text/newtons_laws.md",
-    "res://commons/context/clipboard/tutorial_text/gravity_axioms.md"
-   ],
-   "completion_rewards": [
-	"spatial_architect_badge",
-	"vector_master_badge",
-	"force_master_badge",
-	"newton_badge",
-    "physics_vector_badge"
-   ],
-   "content": [
-	"VFM_01_Foundations: what an arrow carries — components, basis, a frame to read it in",
-	"Vectors_Act1_WhatAVectorIs: the same question at the size of a processional hall, four stations and nothing else",
-	"VFM_02_Operations: two arrows meet — add, subtract, dot, cross, project, torque",
-	"Vectors_Act2_VectorArithmetic: every operation twice, once in your hand and once at the size of the room",
-	"VFM_03_Motion: the arrow over time — velocity, acceleration, friction, the bounce",
-	"VFM_05_Launch: aiming it — catapult, turret, mortar, and the arc you have to predict",
-	"Vectors_Act3_FieldsAndMotion: motion at building scale (its flow console belongs to rung 5 and says so)",
-	"VFM_06_Springs: the force that returns what it is given",
-	"VFM_07_Gravity: attraction, two bodies, three, and the chaos after",
-	"VFM_08_Arena: force against force — collision, reflection, targets",
-	"Vectors_Act4a_KineticForces: a park of machines, each one a force bending your walk",
-	"Vectors_Act4b_Oscillation: the pendulum hall and the spring tower, at building scale",
-	"VFM_04_Fields: an arrow at every point — and the instruction is STAND INSIDE IT",
-    "Vectors_Act5_ForceAsPlace: a chasm with no floor. The arrow from rung 1 is now the room."
-   ],
-   "demonstration": "See vectors as arrows in space. Add them head-to-tail. Feel dot product measure alignment. Watch cross product create perpendicular vectors. Then feel gravity pull you down. Push objects and feel resistance. Watch attraction and repulsion create orbits and explosions.",
-   "description": "The fundamental language of 3D space meets the physics that brings it to life. Vectors encode direction and magnitudeâ€”the building blocks of everything spatial. Forces convert those vectors into motion through Newton's laws. Master vectors, master forces, master the physical world.",
-   "difficulty": "intermediate",
-   "estimated_time": "60-90 minutes",
-   "formula": "v = (x,y,z), |v| = âˆš(xÂ²+yÂ²+zÂ²), F = ma â†’ a = F/m â†’ v += aÂ·dt â†’ p += vÂ·dt",
-   "lab_map": "Lab/map_data_post_forces",
-   "layer": "oscillation",
-   "learning_objectives": [
-	"Coordinate systems and spatial reasoning in 3D",
-	"Vector components: x, y, z as decomposed direction",
-	"Magnitude: length as âˆš(xÂ² + yÂ² + zÂ²)",
-	"Unit vectors: direction without magnitude",
-	"Addition and subtraction: combining and differencing vectors",
-	"Dot product: measuring alignment (aÂ·b = |a||b|cos Î¸)",
-	"Cross product: creating perpendicular vectors, torque, normals",
-	"Projection and reflection: mirrors and collisions",
-	"Vector fields: spatial functions mapping position to direction",
-	"F = ma: Force equals mass times acceleration",
-	"Gravity: constant downward acceleration (9.8 m/sÂ²)",
-	"Friction and drag: resistance to motion",
-	"Attraction and repulsion: inverse square laws",
-	"Springs: Hooke's law (F = -kx)",
-	"Particle systems: many bodies under forces",
-	"N-body dynamics: gravitational chaos from simple rules",
-    "Derivative as instantaneous rate of change: velocity is the rate of position; acceleration is the rate of velocity. F = ma is calculus made physical — the calculus substrate named at change (seq 4.5) carried into the world here."
-   ],
-   "maps": [
-	"VFM_01_Foundations",
-	"Vectors_Act1_WhatAVectorIs",
-	"VFM_02_Operations",
-	"Vectors_Act2_VectorArithmetic",
-	"VFM_03_Motion",
-	"VFM_05_Launch",
-	"Vectors_Act3_FieldsAndMotion",
-	"VFM_06_Springs",
-	"VFM_07_Gravity",
-	"VFM_08_Arena",
-	"Vectors_Act4a_KineticForces",
-	"Vectors_Act4b_Oscillation",
-	"VFM_04_Fields",
-    "Vectors_Act5_ForceAsPlace",
-				"Forces_PropGallery"
-   ],
-   "name": "Vectors & Forces: From Direction to Dynamics",
-   "prerequisites": [
-	"primitives",
-    "transformation"
-   ],
-   "qfep_connection": "Vectors define system statesâ€”the S in QFEP. Forces introduce changeâ€”they drive the temporal evolution Ï†Î”E(S,t). Together, vectors and forces are the complete grammar of physical motion: direction encodes where, magnitude encodes how much, and F=ma encodes why things change.",
-   "qfep_term": "dynamics",
-   "return_to": "lab",
-   "truth": "Direction + magnitude = vector. F = ma. Acceleration is the only thing you feel. Position and velocity are states; force is what changes them.",
-   "unlock_requirements": [],
-   "unlocks": [
-	"physicssimulation",
-	"swarmintelligence",
-    "softbodies"
-   ],
-   "artifact_groups": [
-	{
-	 "map": "VectorFoundations",
-	 "position": "intro",
-	 "artifacts": [
-	  "becoming_catalyst",
-	  "VectorBasics",
-	  "basis_vectors_rig",
-	  "vector_addition_demo",
-	  "ForceMagnitudeDemo",
-	  "dark_sphere",
-	  "vector_subtraction_demo",
-      "coordinate_system_switcher"
-	 ],
-	 "size_budget": "environment",
-	 "rationale": "Three islands of vector fundamentals: components, magnitude, addition and subtraction. Entry point for the combined vectors+forces sequence.",
-	 "grammar": "linear"
-	},
-	{
-	 "map": "VectorOperations",
-	 "position": "foundation",
-	 "artifacts": [
-	  "VectorBasics",
-	  "basis_vectors_rig",
-	  "dot_product_projector",
-	  "dark_sphere",
-	  "vector_projection_demo",
-      "normal_force_demo"
-	 ],
-	 "size_budget": "environment",
-	 "rationale": "Three islands of advanced vector operations: dot product, cross product, projection/reflection. Builds on foundation components.",
-	 "grammar": "linear"
-	},
-	{
-	 "map": "VectorApplied",
-	 "position": "foundation",
-	 "artifacts": [
-	  "VectorFieldFlow",
-	  "force_field_visualizer",
-	  "dark_sphere",
-	  "VectorBasics",
-	  "basis_vectors_rig",
-	  "hl_turret_vectors",
-      "weather_vector_field"
-	 ],
-	 "size_budget": "environment",
-	 "rationale": "Targeting turrets, weather fields, and force vectors across three islands. Applied vector usage in game-like contexts.",
-	 "grammar": "florence"
-	},
-	{
-	 "map": "VectorAdvanced",
-	 "position": "exploration",
-	 "artifacts": [
-	  "dark_sphere",
-	  "exercise_1_3_solution_3_d_bouncing_ball_vr",
-	  "exercise_1_8_solution_attraction_magnitude_vr",
-	  "VectorThrowing",
-      "torque_demo"
-	 ],
-	 "size_budget": "environment",
-	 "rationale": "Four islands of advanced applications: torque, dynamic simulations, steering, projectile throwing.",
-	 "grammar": "florence"
-	},
-	{
-	 "map": "ForcesComposition",
-	 "position": "exploration",
-	 "artifacts": [
-	  "VectorBasics",
-	  "basis_vectors_rig",
-	  "dark_sphere",
-	  "combined_forces_demo",
-	  "work_energy_demo",
-      "momentum_collision"
-	 ],
-	 "size_budget": "mixed",
-	 "rationale": "Force superposition, work-energy theorem, and momentum conservation in one diamond arena. Bridges vectors to forces.",
-	 "grammar": "zelda"
-	},
-	{
-	 "map": "ForcesFoundations",
-	 "position": "exploration",
-	 "artifacts": [
-	  "dark_sphere",
-      "example_2_5_fluid_resistance_vr"
-	 ],
-	 "size_budget": "environment",
-	 "rationale": "Three islands of fundamental forces: Newton's laws, projectile motion, friction. Jump pads as embodied projectile physics.",
-	 "grammar": "zelda"
-	},
-	{
-	 "map": "ForcesSystems",
-	 "position": "integration",
-	 "artifacts": [
-	  "vector_fields",
-	  "force_field_visualizer",
-	  "VectorBasics",
-	  "basis_vectors_rig",
-	  "dark_sphere",
-	  "catalyst_target",
-	  "particle_systems",
-	  "force_fields",
-	  "mass_spring_damper",
-	  "spring_system",
-	  "firework_launcher",
-	  "example_3_2_forces_with_arbitrary_angular_motion_vr",
-      "example_3_3_pointing_in_the_direction_of_motion_vr"
-	 ],
-	 "size_budget": "environment",
-	 "rationale": "Four islands of force systems: attractors, force fields, springs, particles. Clockwise circuit via jump pads. Callbacks to vector basics.",
-	 "grammar": "zelda"
-	},
-	{
-	 "map": "ForcesChaos",
-	 "position": "integration",
-	 "artifacts": [
-	  "three_body_problem",
-	  "nbody_simulation",
-	  "chaos_attractor",
-      "forcedirected3d"
-	 ],
-	 "size_budget": "environment",
-	 "rationale": "N-body dynamics and strange attractors: deterministic chaos from simple rules. Two islands of complexity.",
-	 "grammar": "zelda"
-	},
-	{
-	 "map": "ForcesArena",
-	 "position": "synthesis",
-	 "artifacts": [
-	  "gravity_gun_test_scene",
-	  "vector_drone",
-	  "destructibles_test_scene",
-	  "VectorThrowing",
-      "sphere_splitting_showcase"
-	 ],
-	 "size_budget": "world_scale",
-	 "rationale": "Grand finale: drone combat, physics destruction sandbox, and exhibition gallery. Applied forces across three massive arenas with callbacks to throwing and vectors.",
-	 "grammar": "vatican"
-	}
-   ],
-   "deferred_maps": [
-	"Sky_Climb",
-	"Void_Crossing",
-	"Reformed_Instruments",
-	"Force_Preview",
-	"Console_Test",
-	"Force_Props_Sandbox",
-	"VectorFoundations",
-	"VectorOperations",
-	"VectorAdvanced",
-	"ForcesFoundations",
-	"Chamber_Forces",
-	"ForcesComposition",
-	"VectorApplied",
-	"ForcesSystems",
-	"ForcesChaos",
-    "ForcesArena"
-   ],
-   "deferred_reason": "THE FOLD, 2026-08-25 (Palle: 'too many maps but we do not want to lose any essential artifacts'). forces listed 30 maps because it held THREE rival ladders and a junk drawer. Retired here: the older Vector*/Forces* ladder (9 rooms, superseded by the museum) and 7 bench/test rooms that were never curriculum (Console_Test, Reformed_Instruments, Force_Props_Sandbox, Force_Preview, Sky_Climb, Void_Crossing, Chamber_Forces). Every token they held was judged one by one in doc/folds/forces.json and the verdict is checkable: python tools/fold_ledger.py --sequence=forces --plan=doc/folds/forces.json --check",
-   "taxonomy": {
-	"_readme": "THE LADDER (2026-08-25), five rungs at TWO SCALES. The Acts and the VFM museum were not rivals — measured, they share only 22 of 169 tokens — so both survive: the museum is the BENCH (an operation at arm's length) and the Acts are the BUILDING (the same operation at the scale of a room you walk through). Folding them into one room each would have flattened the sequence's own claim, the way folding color's hand/set/space would have flattened colour's. Closes as a LOOP: rung 5 is a force you STAND INSIDE, which is rung 1's arrow with the walker put inside it.",
-	"0_recalled_unit": "the vector itself is NOT taught here. primitives is sequence 1 — 'points, lines, planes, and basic vectors' — so an arrow with a length and a direction arrives already known. Like color's unit, it is a threshold the walk crosses, not a room it stops in.",
-	"_rehomed": {
-	 "ca_rules_workbench": "rehome cellularautomata CA_Rules_Lab",
-	 "cantor_diagonal_workbench": "rehome foundationscrisis Limits_Lab",
-	 "complexity_dial_workbench": "rehome foundationscrisis Limits_Lab",
-	 "halting_workbench": "rehome foundationscrisis Limits_Lab",
-	 "russell_paradox_workbench": "rehome foundationscrisis Limits_Lab",
-	 "qfep_balance_workbench": "rehome qfeplaboratory",
-	 "shannon_workbench": "rehome qfeplaboratory",
-	 "transform_composition_workbench": "rehome transformation",
-	 "riemann_sum_workbench": "rehome change",
-	 "tangent_slope_workbench": "rehome change",
-	 "synthesis_stand": "rehome change",
-	 "triangle_curvature_workbench": "rehome foundationscrisis NonEuclidean_Spaces",
-	 "becoming_catalyst": "rehome hazards"
-	},
-	"_retired_tokens": {
-	 "3t": "retire a utility code sitting in the interactables layer of ForcesComposition — a map bug, not an artifact",
-	 "catalyst_target": "retire catalyst plumbing, 45 other maps",
-	 "catalyst_vent": "retire catalyst plumbing, 36 other maps",
-	 "catalyst_prompter_box": "retire catalyst plumbing, 10 other maps",
-	 "proximity_spawner": "retire hazard plumbing, 25 other maps",
-	 "dark_sphere": "retire furniture, 308 other maps",
-	 "science_screen": "retire furniture, 212 other maps",
-	 "library_rack": "retire furniture, 67 other maps",
-	 "control_console": "retire bench furniture from Console_Test, which was a bench and not a room",
-	 "death_pylon": "retire a hazard prop from the props sandbox; hazards are declared in the utilities layer now",
-	 "health_display": "retire arena scoreboard furniture; VFM_08_Arena carries its own",
-	 "hits_reset_display": "retire arena scoreboard furniture; VFM_08_Arena carries its own",
-	 "destructibles_test_scene": "retire a test scene",
-	 "gravity_gun_test_scene": "retire a test scene",
-	 "sphere_splitting_showcase": "retire a showcase scene",
-	 "throw_ball": "retire superseded by the launch room's throwables",
-	 "grab_sphere_point": "retire superseded by laser_point on the XL benches (2026)"
-	},
-	"_rescued": {
-	 "VectorSubtraction": "rescue VFM_02_Operations",
-	 "VectorTorque": "rescue VFM_02_Operations",
-	 "vector_projection_demo": "rescue VFM_02_Operations",
-	 "dot_product_projector": "rescue VFM_02_Operations",
-	 "vector_addition_xl_laser": "rescue Vectors_Act2_VectorArithmetic",
-	 "vector_subtraction_xl_laser": "rescue Vectors_Act2_VectorArithmetic",
-	 "vector_drone": "rescue VFM_03_Motion",
-	 "example_1_9_motion_101_velocity_and_random_acceleration_vr": "rescue VFM_03_Motion",
-	 "field_room": "rescue VFM_04_Fields",
-	 "vector_fields": "rescue VFM_04_Fields",
-	 "particle_systems": "rescue VFM_04_Fields",
-	 "foresight_range": "rescue VFM_05_Launch",
-	 "return_launcher": "rescue VFM_05_Launch",
-	 "spring_system": "rescue VFM_06_Springs",
-	 "chaos_attractor": "rescue VFM_07_Gravity",
-	 "nbody_simulation": "rescue VFM_07_Gravity",
-	 "momentum_collision": "rescue VFM_08_Arena",
-	 "calder_object_mobile": "rescue Vectors_Act4b_Oscillation",
-	 "wedge_slide": "rescue Vectors_Act4a_KineticForces",
-	 "vector_addition_demo": "rescue VFM_01_Foundations"
-	},
-	"_rooms": {
-	 "1_quantity": {
-	  "bench": [
-       "VFM_01_Foundations"
-	  ],
-	  "building": [
-       "Vectors_Act1_WhatAVectorIs"
-	  ]
-	 },
-	 "2_operation": {
-	  "bench": [
-       "VFM_02_Operations"
-	  ],
-	  "building": [
-       "Vectors_Act2_VectorArithmetic"
-	  ]
-	 },
-	 "3_motion": {
-	  "bench": [
-	   "VFM_03_Motion",
-       "VFM_05_Launch"
-	  ],
-	  "building": [
-       "Vectors_Act3_FieldsAndMotion"
-	  ]
-	 },
-	 "4_force": {
-	  "bench": [
-	   "VFM_06_Springs",
-	   "VFM_07_Gravity",
-       "VFM_08_Arena"
-	  ],
-	  "building": [
-	   "Vectors_Act4a_KineticForces",
-       "Vectors_Act4b_Oscillation"
-	  ]
-	 },
-	 "5_field": {
-	  "bench": [
-       "VFM_04_Fields"
-	  ],
-	  "building": [
-       "Vectors_Act5_ForceAsPlace"
-	  ]
-	 }
-	},
-	"_scales": "bench = the museum (VFM), building = the walkable Acts",
-	"1_quantity": "what does one arrow carry? — magnitude, direction, a basis, a frame. BENCH VFM_01_Foundations · BUILDING Vectors_Act1_WhatAVectorIs.",
-	"2_operation": "what do two of them do to each other? — add, subtract, dot, cross, project, torque. BENCH VFM_02_Operations · BUILDING Vectors_Act2_VectorArithmetic. The XL exhibits here DELEGATE to the algorithm scenes (vector_dot_product_xl -> VectorDotProduct at 5x).",
-	"3_motion": "what does an arrow do over time? — velocity, acceleration, ballistics, AND the contact forces that shape a real motion: friction_ramp and normal_force_demo stand together, because friction is proportional to the normal force and that pairing is worth more than the rung boundary. Declared, not smuggled. BENCH VFM_03_Motion + VFM_05_Launch · BUILDING Vectors_Act3_FieldsAndMotion. This is where CHANGE comes back: velocity is the first derivative, acceleration the second.",
-	"4_force": "what changes the motion? — F = ma, stated and met: newtons_laws and example_2_1_forces_vr now stand in the Arena beside collision_carts and momentum_cradle, the third law made playable, instead of in the front door where they were read. Springs, gravity, collision, oscillation. BENCH VFM_06_Springs + VFM_07_Gravity + VFM_08_Arena · BUILDING Vectors_Act4a_KineticForces + Vectors_Act4b_Oscillation. The largest rung, five rooms, and it earns them.",
-	"5_field": "THE RETURN. An arrow at every point — and both rooms on this rung say the same thing in their own words: VFM_04_Fields is titled 'Stand inside the field', Vectors_Act5_ForceAsPlace is a chasm with no floor. The sequence's truth line is 'A force is a vector you can stand inside', so the last rung is rung 1 with the walker put INSIDE the arrow. That is the loop, and it is the one beat a tutorial cannot make disposable.",
-	"_order_evidence": "MOVED 2026-08-25, field from rung 3 to rung 5. Two independent signals, neither of them taste. (1) The NOC artifacts carry the book's chapter numbers in their token names, and NOC puts flow fields LAST (ch 5): the field rung's only NOC piece is noc_5_04_flow_field while motion and force hold chapters 1-3. Mean chapter per rung ran 1.5 / 3.5 / 5.0 / 1.8 / 1.7 — field was two rungs early. (2) The two 'stand inside' rooms were split across rungs 3 and 5; together they are the return beat. Small sample (14 NOC artifacts) — the blurbs are the stronger evidence.",
-	"_straddles": {
-	 "Vectors_Act3_FieldsAndMotion": "its own title says Fields AND Motion, and its blurb says 'two rooms, two ways a vector stops holding still'. Filed on MOTION; its flow console and weather field belong to rung 5. The straddle is declared rather than smoothed — a room that spans two rungs is a fact about the room, not a gap in the ladder."
-	},
-	"_known_weak": "FIXED 2026-08-25, the five misfilings named here: newtons_laws and example_2_1_forces_vr left rung 1 for the Arena, work_energy_demo left rung 2 for Springs, normal_force_demo left rung 2 for Motion beside friction_ramp, and flocking_controls left forces entirely for SwarmIntelligence_Boids_Algorithm, where the boids it controls live. Plan and reasons in doc/folds/forces_misfiled.json.\n\nWHAT DID NOT GET FIXED, and an earlier claim corrected: removing two tokens took rung 1 from 5.2x to 4.8x, not 'roughly even' as first written. The imbalance is STRUCTURAL, not a filing error — VFM_01 is a lobby that previews the sequence (19 tokens including the whole add/subtract family) and Vectors_Act1 is four stations by design. Evening the rung would mean moving ~8 operation tokens out of the front door, which is a different decision about what a front door is for, not a cleanup."
-   }
-  }
- },
- "world_phase": "grid",
- "artifact_groups": []
+  "sequences": {
+    "forces": {
+      "algorithm_paths": {
+        "Forces_1": "res://algorithms/physics/forces/",
+        "Forces_Destruct": "res://algorithms/physics/destruction/",
+        "VectorAddition": "res://algorithms/vectors/addition/",
+        "VectorBasics": "res://algorithms/vectors/basics/",
+        "VectorFieldFlow": "res://algorithms/vectors/flowfield/",
+        "VectorForces": "res://algorithms/vectors/forces/",
+        "VectorMotion": "res://algorithms/vectors/motion/"
+      },
+      "audio": {
+        "ambient_preset": "industrial_hum",
+        "interactive_sounds": {
+          "teleport": "AudioSynthesizer.IMPACT_THUD"
+        },
+        "volume": -10.0
+      },
+      "axiom_files": [
+        "res://commons/context/clipboard/tutorial_text/vectors_axioms.md",
+        "res://commons/context/clipboard/tutorial_text/dot_product_axioms.md",
+        "res://commons/context/clipboard/tutorial_text/cross_product_axioms.md",
+        "res://commons/context/clipboard/tutorial_text/forces_axioms.md",
+        "res://commons/context/clipboard/tutorial_text/newtons_laws.md",
+        "res://commons/context/clipboard/tutorial_text/gravity_axioms.md"
+      ],
+      "completion_rewards": [
+        "spatial_architect_badge",
+        "vector_master_badge",
+        "force_master_badge",
+        "newton_badge",
+        "physics_vector_badge"
+      ],
+      "content": [
+        "VFM_01_Foundations: what an arrow carries — components, basis, a frame to read it in",
+        "Vectors_Act1_WhatAVectorIs: the same question at the size of a processional hall, four stations and nothing else",
+        "VFM_02_Operations: two arrows meet — add, subtract, dot, cross, project, torque",
+        "Vectors_Act2_VectorArithmetic: every operation twice, once in your hand and once at the size of the room",
+        "VFM_03_Motion: the arrow over time — velocity, acceleration, friction, the bounce",
+        "VFM_05_Launch: aiming it — catapult, turret, mortar, and the arc you have to predict",
+        "Vectors_Act3_FieldsAndMotion: motion at building scale (its flow console belongs to rung 5 and says so)",
+        "VFM_06_Springs: the force that returns what it is given",
+        "VFM_07_Gravity: attraction, two bodies, three, and the chaos after",
+        "VFM_09_Legs: one leg to eight in a row, everything else held equal — the gait is a consequence of the count",
+        "VFM_08_Arena: force against force — collision, reflection, targets",
+        "Vectors_Act4a_KineticForces: a park of machines, each one a force bending your walk",
+        "Vectors_Act4b_Oscillation: the pendulum hall and the spring tower, at building scale",
+        "VFM_04_Fields: an arrow at every point — and the instruction is STAND INSIDE IT",
+        "Vectors_Act5_ForceAsPlace: a chasm with no floor. The arrow from rung 1 is now the room.",
+        "Forces_PropGallery: no diagrams past this line — every concept in the sequence as one surreal applied object, the force felt in behaviour and drawn nowhere"
+      ],
+      "demonstration": "See vectors as arrows in space. Add them head-to-tail. Feel dot product measure alignment. Watch cross product create perpendicular vectors. Then feel gravity pull you down. Push objects and feel resistance. Watch attraction and repulsion create orbits and explosions.",
+      "description": "The fundamental language of 3D space meets the physics that brings it to life. Vectors encode direction and magnitudeâ€”the building blocks of everything spatial. Forces convert those vectors into motion through Newton's laws. Master vectors, master forces, master the physical world.",
+      "difficulty": "intermediate",
+      "estimated_time": "60-90 minutes",
+      "formula": "v = (x,y,z), |v| = âˆš(xÂ²+yÂ²+zÂ²), F = ma â†’ a = F/m â†’ v += aÂ·dt â†’ p += vÂ·dt",
+      "lab_map": "Lab/map_data_post_forces",
+      "layer": "oscillation",
+      "learning_objectives": [
+        "Coordinate systems and spatial reasoning in 3D",
+        "Vector components: x, y, z as decomposed direction",
+        "Magnitude: length as âˆš(xÂ² + yÂ² + zÂ²)",
+        "Unit vectors: direction without magnitude",
+        "Addition and subtraction: combining and differencing vectors",
+        "Dot product: measuring alignment (aÂ·b = |a||b|cos Î¸)",
+        "Cross product: creating perpendicular vectors, torque, normals",
+        "Projection and reflection: mirrors and collisions",
+        "Vector fields: spatial functions mapping position to direction",
+        "F = ma: Force equals mass times acceleration",
+        "Gravity: constant downward acceleration (9.8 m/sÂ²)",
+        "Friction and drag: resistance to motion",
+        "Attraction and repulsion: inverse square laws",
+        "Springs: Hooke's law (F = -kx)",
+        "Particle systems: many bodies under forces",
+        "N-body dynamics: gravitational chaos from simple rules",
+        "Derivative as instantaneous rate of change: velocity is the rate of position; acceleration is the rate of velocity. F = ma is calculus made physical — the calculus substrate named at change (seq 4.5) carried into the world here."
+      ],
+      "maps": [
+        "VFM_01_Foundations",
+        "Vectors_Act1_WhatAVectorIs",
+        "VFM_02_Operations",
+        "Vectors_Act2_VectorArithmetic",
+        "VFM_03_Motion",
+        "VFM_05_Launch",
+        "Vectors_Act3_FieldsAndMotion",
+        "VFM_06_Springs",
+        "VFM_07_Gravity",
+        "VFM_09_Legs",
+        "VFM_08_Arena",
+        "Vectors_Act4a_KineticForces",
+        "Vectors_Act4b_Oscillation",
+        "VFM_04_Fields",
+        "Vectors_Act5_ForceAsPlace",
+        "Forces_PropGallery"
+      ],
+      "name": "Vectors & Forces: From Direction to Dynamics",
+      "prerequisites": [
+        "primitives",
+        "transformation"
+      ],
+      "qfep_connection": "Vectors define system statesâ€”the S in QFEP. Forces introduce changeâ€”they drive the temporal evolution Ï†Î”E(S,t). Together, vectors and forces are the complete grammar of physical motion: direction encodes where, magnitude encodes how much, and F=ma encodes why things change.",
+      "qfep_term": "dynamics",
+      "return_to": "lab",
+      "truth": "Direction + magnitude = vector. F = ma. Acceleration is the only thing you feel. Position and velocity are states; force is what changes them.",
+      "unlock_requirements": [],
+      "unlocks": [
+        "physicssimulation",
+        "swarmintelligence",
+        "softbodies"
+      ],
+      "artifact_groups": [
+        {
+          "map": "VectorFoundations",
+          "position": "intro",
+          "artifacts": [
+            "becoming_catalyst",
+            "VectorBasics",
+            "basis_vectors_rig",
+            "vector_addition_demo",
+            "ForceMagnitudeDemo",
+            "dark_sphere",
+            "vector_subtraction_demo",
+            "coordinate_system_switcher"
+          ],
+          "size_budget": "environment",
+          "rationale": "Three islands of vector fundamentals: components, magnitude, addition and subtraction. Entry point for the combined vectors+forces sequence.",
+          "grammar": "linear"
+        },
+        {
+          "map": "VectorOperations",
+          "position": "foundation",
+          "artifacts": [
+            "VectorBasics",
+            "basis_vectors_rig",
+            "dot_product_projector",
+            "dark_sphere",
+            "vector_projection_demo",
+            "normal_force_demo"
+          ],
+          "size_budget": "environment",
+          "rationale": "Three islands of advanced vector operations: dot product, cross product, projection/reflection. Builds on foundation components.",
+          "grammar": "linear"
+        },
+        {
+          "map": "VectorApplied",
+          "position": "foundation",
+          "artifacts": [
+            "VectorFieldFlow",
+            "force_field_visualizer",
+            "dark_sphere",
+            "VectorBasics",
+            "basis_vectors_rig",
+            "hl_turret_vectors",
+            "weather_vector_field"
+          ],
+          "size_budget": "environment",
+          "rationale": "Targeting turrets, weather fields, and force vectors across three islands. Applied vector usage in game-like contexts.",
+          "grammar": "florence"
+        },
+        {
+          "map": "VectorAdvanced",
+          "position": "exploration",
+          "artifacts": [
+            "dark_sphere",
+            "exercise_1_3_solution_3_d_bouncing_ball_vr",
+            "exercise_1_8_solution_attraction_magnitude_vr",
+            "VectorThrowing",
+            "torque_demo"
+          ],
+          "size_budget": "environment",
+          "rationale": "Four islands of advanced applications: torque, dynamic simulations, steering, projectile throwing.",
+          "grammar": "florence"
+        },
+        {
+          "map": "ForcesComposition",
+          "position": "exploration",
+          "artifacts": [
+            "VectorBasics",
+            "basis_vectors_rig",
+            "dark_sphere",
+            "combined_forces_demo",
+            "work_energy_demo",
+            "momentum_collision"
+          ],
+          "size_budget": "mixed",
+          "rationale": "Force superposition, work-energy theorem, and momentum conservation in one diamond arena. Bridges vectors to forces.",
+          "grammar": "zelda"
+        },
+        {
+          "map": "ForcesFoundations",
+          "position": "exploration",
+          "artifacts": [
+            "dark_sphere",
+            "example_2_5_fluid_resistance_vr"
+          ],
+          "size_budget": "environment",
+          "rationale": "Three islands of fundamental forces: Newton's laws, projectile motion, friction. Jump pads as embodied projectile physics.",
+          "grammar": "zelda"
+        },
+        {
+          "map": "ForcesSystems",
+          "position": "integration",
+          "artifacts": [
+            "vector_fields",
+            "force_field_visualizer",
+            "VectorBasics",
+            "basis_vectors_rig",
+            "dark_sphere",
+            "catalyst_target",
+            "particle_systems",
+            "force_fields",
+            "mass_spring_damper",
+            "spring_system",
+            "firework_launcher",
+            "example_3_2_forces_with_arbitrary_angular_motion_vr",
+            "example_3_3_pointing_in_the_direction_of_motion_vr"
+          ],
+          "size_budget": "environment",
+          "rationale": "Four islands of force systems: attractors, force fields, springs, particles. Clockwise circuit via jump pads. Callbacks to vector basics.",
+          "grammar": "zelda"
+        },
+        {
+          "map": "ForcesChaos",
+          "position": "integration",
+          "artifacts": [
+            "three_body_problem",
+            "nbody_simulation",
+            "chaos_attractor",
+            "forcedirected3d"
+          ],
+          "size_budget": "environment",
+          "rationale": "N-body dynamics and strange attractors: deterministic chaos from simple rules. Two islands of complexity.",
+          "grammar": "zelda"
+        },
+        {
+          "map": "ForcesArena",
+          "position": "synthesis",
+          "artifacts": [
+            "gravity_gun_test_scene",
+            "vector_drone",
+            "destructibles_test_scene",
+            "VectorThrowing",
+            "sphere_splitting_showcase"
+          ],
+          "size_budget": "world_scale",
+          "rationale": "Grand finale: drone combat, physics destruction sandbox, and exhibition gallery. Applied forces across three massive arenas with callbacks to throwing and vectors.",
+          "grammar": "vatican"
+        }
+      ],
+      "deferred_maps": [
+        "Sky_Climb",
+        "Void_Crossing",
+        "Reformed_Instruments",
+        "Force_Preview",
+        "Console_Test",
+        "Force_Props_Sandbox",
+        "VectorFoundations",
+        "VectorOperations",
+        "VectorAdvanced",
+        "ForcesFoundations",
+        "Chamber_Forces",
+        "ForcesComposition",
+        "VectorApplied",
+        "ForcesSystems",
+        "ForcesChaos",
+        "ForcesArena"
+      ],
+      "deferred_reason": "THE FOLD, 2026-08-25 (Palle: 'too many maps but we do not want to lose any essential artifacts'). forces listed 30 maps because it held THREE rival ladders and a junk drawer. Retired here: the older Vector*/Forces* ladder (9 rooms, superseded by the museum) and 7 bench/test rooms that were never curriculum (Console_Test, Reformed_Instruments, Force_Props_Sandbox, Force_Preview, Sky_Climb, Void_Crossing, Chamber_Forces). Every token they held was judged one by one in doc/folds/forces.json and the verdict is checkable: python tools/fold_ledger.py --sequence=forces --plan=doc/folds/forces.json --check",
+      "taxonomy": {
+        "_readme": "THE LADDER (2026-08-25), five rungs at TWO SCALES. The Acts and the VFM museum were not rivals — measured, they share only 22 of 169 tokens — so both survive: the museum is the BENCH (an operation at arm's length) and the Acts are the BUILDING (the same operation at the scale of a room you walk through). Folding them into one room each would have flattened the sequence's own claim, the way folding color's hand/set/space would have flattened colour's. Closes as a LOOP: rung 5 is a force you STAND INSIDE, which is rung 1's arrow with the walker put inside it.",
+        "0_recalled_unit": "the vector itself is NOT taught here. primitives is sequence 1 — 'points, lines, planes, and basic vectors' — so an arrow with a length and a direction arrives already known. Like color's unit, it is a threshold the walk crosses, not a room it stops in.",
+        "_rehomed": {
+          "ca_rules_workbench": "rehome cellularautomata CA_Rules_Lab",
+          "cantor_diagonal_workbench": "rehome foundationscrisis Limits_Lab",
+          "complexity_dial_workbench": "rehome foundationscrisis Limits_Lab",
+          "halting_workbench": "rehome foundationscrisis Limits_Lab",
+          "russell_paradox_workbench": "rehome foundationscrisis Limits_Lab",
+          "qfep_balance_workbench": "rehome qfeplaboratory",
+          "shannon_workbench": "rehome qfeplaboratory",
+          "transform_composition_workbench": "rehome transformation",
+          "riemann_sum_workbench": "rehome change",
+          "tangent_slope_workbench": "rehome change",
+          "synthesis_stand": "rehome change",
+          "triangle_curvature_workbench": "rehome foundationscrisis NonEuclidean_Spaces",
+          "becoming_catalyst": "rehome hazards"
+        },
+        "_retired_tokens": {
+          "3t": "retire a utility code sitting in the interactables layer of ForcesComposition — a map bug, not an artifact",
+          "catalyst_target": "retire catalyst plumbing, 45 other maps",
+          "catalyst_vent": "retire catalyst plumbing, 36 other maps",
+          "catalyst_prompter_box": "retire catalyst plumbing, 10 other maps",
+          "proximity_spawner": "retire hazard plumbing, 25 other maps",
+          "dark_sphere": "retire furniture, 308 other maps",
+          "science_screen": "retire furniture, 212 other maps",
+          "library_rack": "retire furniture, 67 other maps",
+          "control_console": "retire bench furniture from Console_Test, which was a bench and not a room",
+          "death_pylon": "retire a hazard prop from the props sandbox; hazards are declared in the utilities layer now",
+          "health_display": "retire arena scoreboard furniture; VFM_08_Arena carries its own",
+          "hits_reset_display": "retire arena scoreboard furniture; VFM_08_Arena carries its own",
+          "destructibles_test_scene": "retire a test scene",
+          "gravity_gun_test_scene": "retire a test scene",
+          "sphere_splitting_showcase": "retire a showcase scene",
+          "throw_ball": "retire superseded by the launch room's throwables",
+          "grab_sphere_point": "retire superseded by laser_point on the XL benches (2026)"
+        },
+        "_rescued": {
+          "VectorSubtraction": "rescue VFM_02_Operations",
+          "VectorTorque": "rescue VFM_02_Operations",
+          "vector_projection_demo": "rescue VFM_02_Operations",
+          "dot_product_projector": "rescue VFM_02_Operations",
+          "vector_addition_xl_laser": "rescue Vectors_Act2_VectorArithmetic",
+          "vector_subtraction_xl_laser": "rescue Vectors_Act2_VectorArithmetic",
+          "vector_drone": "rescue VFM_03_Motion",
+          "example_1_9_motion_101_velocity_and_random_acceleration_vr": "rescue VFM_03_Motion",
+          "field_room": "rescue VFM_04_Fields",
+          "vector_fields": "rescue VFM_04_Fields",
+          "particle_systems": "rescue VFM_04_Fields",
+          "foresight_range": "rescue VFM_05_Launch",
+          "return_launcher": "rescue VFM_05_Launch",
+          "spring_system": "rescue VFM_06_Springs",
+          "chaos_attractor": "rescue VFM_07_Gravity",
+          "nbody_simulation": "rescue VFM_07_Gravity",
+          "momentum_collision": "rescue VFM_08_Arena",
+          "calder_object_mobile": "rescue Vectors_Act4b_Oscillation",
+          "wedge_slide": "rescue Vectors_Act4a_KineticForces",
+          "vector_addition_demo": "rescue VFM_01_Foundations"
+        },
+        "_rooms": {
+          "1_quantity": {
+            "bench": [
+              "VFM_01_Foundations"
+            ],
+            "building": [
+              "Vectors_Act1_WhatAVectorIs"
+            ]
+          },
+          "2_operation": {
+            "bench": [
+              "VFM_02_Operations"
+            ],
+            "building": [
+              "Vectors_Act2_VectorArithmetic"
+            ]
+          },
+          "3_motion": {
+            "bench": [
+              "VFM_03_Motion",
+              "VFM_05_Launch"
+            ],
+            "building": [
+              "Vectors_Act3_FieldsAndMotion"
+            ]
+          },
+          "4_force": {
+            "bench": [
+              "VFM_06_Springs",
+              "VFM_07_Gravity",
+              "VFM_09_Legs",
+              "VFM_08_Arena"
+            ],
+            "building": [
+              "Vectors_Act4a_KineticForces",
+              "Vectors_Act4b_Oscillation"
+            ]
+          },
+          "5_field": {
+            "bench": [
+              "VFM_04_Fields"
+            ],
+            "building": [
+              "Vectors_Act5_ForceAsPlace"
+            ]
+          }
+        },
+        "_scales": "bench = the museum (VFM), building = the walkable Acts",
+        "1_quantity": "what does one arrow carry? — magnitude, direction, a basis, a frame. BENCH VFM_01_Foundations · BUILDING Vectors_Act1_WhatAVectorIs.",
+        "2_operation": "what do two of them do to each other? — add, subtract, dot, cross, project, torque. BENCH VFM_02_Operations · BUILDING Vectors_Act2_VectorArithmetic. The XL exhibits here DELEGATE to the algorithm scenes (vector_dot_product_xl -> VectorDotProduct at 5x).",
+        "3_motion": "what does an arrow do over time? — velocity, acceleration, ballistics, AND the contact forces that shape a real motion: friction_ramp and normal_force_demo stand together, because friction is proportional to the normal force and that pairing is worth more than the rung boundary. Declared, not smuggled. BENCH VFM_03_Motion + VFM_05_Launch · BUILDING Vectors_Act3_FieldsAndMotion. This is where CHANGE comes back: velocity is the first derivative, acceleration the second.",
+        "4_force": "what changes the motion? — F = ma, stated and met: newtons_laws and example_2_1_forces_vr now stand in the Arena beside collision_carts and momentum_cradle, the third law made playable, instead of in the front door where they were read. Springs, gravity, collision, oscillation. BENCH VFM_06_Springs + VFM_07_Gravity + VFM_09_Legs + VFM_08_Arena · BUILDING Vectors_Act4a_KineticForces + Vectors_Act4b_Oscillation. VFM_09_Legs joins it 2026-08-27: the leg ladder was built, registered and placed only in a hazards room nobody walks, and a rung about what changes the motion is where a body that has to not fall belongs. The largest rung, six rooms, and it earns them.",
+        "5_field": "THE RETURN. An arrow at every point — and both rooms on this rung say the same thing in their own words: VFM_04_Fields is titled 'Stand inside the field', Vectors_Act5_ForceAsPlace is a chasm with no floor. The sequence's truth line is 'A force is a vector you can stand inside', so the last rung is rung 1 with the walker put INSIDE the arrow. That is the loop, and it is the one beat a tutorial cannot make disposable.",
+        "_order_evidence": "MOVED 2026-08-25, field from rung 3 to rung 5. Two independent signals, neither of them taste. (1) The NOC artifacts carry the book's chapter numbers in their token names, and NOC puts flow fields LAST (ch 5): the field rung's only NOC piece is noc_5_04_flow_field while motion and force hold chapters 1-3. Mean chapter per rung ran 1.5 / 3.5 / 5.0 / 1.8 / 1.7 — field was two rungs early. (2) The two 'stand inside' rooms were split across rungs 3 and 5; together they are the return beat. Small sample (14 NOC artifacts) — the blurbs are the stronger evidence.",
+        "_straddles": {
+          "Vectors_Act3_FieldsAndMotion": "its own title says Fields AND Motion, and its blurb says 'two rooms, two ways a vector stops holding still'. Filed on MOTION; its flow console and weather field belong to rung 5. The straddle is declared rather than smoothed — a room that spans two rungs is a fact about the room, not a gap in the ladder."
+        },
+        "_known_weak": "FIXED 2026-08-25, the five misfilings named here: newtons_laws and example_2_1_forces_vr left rung 1 for the Arena, work_energy_demo left rung 2 for Springs, normal_force_demo left rung 2 for Motion beside friction_ramp, and flocking_controls left forces entirely for SwarmIntelligence_Boids_Algorithm, where the boids it controls live. Plan and reasons in doc/folds/forces_misfiled.json.\n\nWHAT DID NOT GET FIXED, and an earlier claim corrected: removing two tokens took rung 1 from 5.2x to 4.8x, not 'roughly even' as first written. The imbalance is STRUCTURAL, not a filing error — VFM_01 is a lobby that previews the sequence (19 tokens including the whole add/subtract family) and Vectors_Act1 is four stations by design. Evening the rung would mean moving ~8 operation tokens out of the front door, which is a different decision about what a front door is for, not a cleanup."
+      }
+    }
+  },
+  "world_phase": "grid",
+  "artifact_groups": []
 }

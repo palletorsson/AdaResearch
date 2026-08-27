@@ -1,13 +1,15 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
 ;; OneLeg — single FABRIK3D leg test.
 ;; Body (MeshInstance3D) at Y=2.2 with ONE leg + SpringArm3D ground contact.
 ;; Exact beast_demo architecture in smallest possible form.
 ;; Skinned mesh added by one_leg.gd at runtime.
 
+[ext_resource type="Script" path="res://commons/hazards/octapod_crawler/leg_walker_root.gd" id="9_root"]
 [ext_resource type="Script" path="res://commons/hazards/octapod_crawler/one_leg.gd" id="1_script"]
 
 [node name="OneLegScene" type="Node3D"]
+script = ExtResource("9_root")
 
 ;; ── Body ─────────────────────────────────────────────────────────────────
 [node name="Body" type="MeshInstance3D" parent="."]

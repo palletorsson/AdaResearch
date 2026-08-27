@@ -238,7 +238,14 @@ func apply_grid_config(config: Dictionary) -> void:
 		crab_scale = clampf(_cfg_num(config["scale"], crab_scale), 0.03, 1.0)
 	if config.has("speed"):
 		chase_speed = _cfg_num(config["speed"], chase_speed)
-	if config.has("detect"):
+	# BOTH SPELLINGS. `detect` is not in the grid's CONFIG_PARAM_NAMES, so
+	# `#detect:16` is read as a rotation of 16 degrees and the range never
+	# changes — measured on this artifact's own placement in Point_One. `detect`
+	# could not simply be added to that list because six origami_droideka
+	# placements already use it and would change behaviour; `detection` was free.
+	if config.has("detection"):
+		detect_m = _cfg_num(config["detection"], detect_m)
+	elif config.has("detect"):
 		detect_m = _cfg_num(config["detect"], detect_m)
 	if config.has("patrol"):
 		patrol_speed = _cfg_num(config["patrol"], patrol_speed)

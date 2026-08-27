@@ -1,33 +1,33 @@
 THE LADDER ON A DECK WHOSE TOP IS AT 0.500 — pace on, no input
 
 one_leg              body yes              legs 1
-    size      1.80 x 2.59 x 7.34 m
-    walked    1.71 m in 9 s, 1.00 m from home
-    feet at   0.510  (deck 0.500)  OK
+    size      0.43 x 0.25 x 0.90 m
+    walked    0.35 m in 9 s, 0.39 m from home
+    feet at   0.778  (deck 0.500)  OFF THE DECK
 
 two_leg_critter      body yes              legs 2
-    size      4.32 x 0.98 x 7.32 m
-    walked    1.80 m in 9 s, 1.09 m from home
+    size      0.77 x 0.17 x 1.17 m
+    walked    0.34 m in 9 s, 0.43 m from home
     feet at   0.500  (deck 0.500)  OK
 
 three_leg_critter    body yes              legs 3
-    size      3.26 x 4.92 x 7.32 m
-    walked    1.80 m in 9 s, 1.07 m from home
+    size      0.61 x 0.68 x 1.17 m
+    walked    0.27 m in 9 s, 0.32 m from home
     feet at   0.500  (deck 0.500)  OK
 
 four_leg_critter     body yes              legs 4
-    size      3.62 x 4.69 x 7.32 m
-    walked    1.77 m in 9 s, 1.08 m from home
+    size      0.72 x 0.66 x 1.17 m
+    walked    0.35 m in 9 s, 0.42 m from home
     feet at   0.500  (deck 0.500)  OK
 
 five_leg_critter     body yes              legs 5
-    size      4.70 x 4.94 x 7.32 m
-    walked    1.81 m in 9 s, 1.05 m from home
+    size      0.72 x 0.63 x 1.17 m
+    walked    0.36 m in 9 s, 0.40 m from home
     feet at   0.500  (deck 0.500)  OK
 
 six_leg_critter      body yes              legs 6
-    size      4.59 x 5.50 x 7.32 m
-    walked    1.80 m in 9 s, 1.07 m from home
+    size      0.88 x 0.92 x 1.17 m
+    walked    0.34 m in 9 s, 0.32 m from home
     feet at   0.500  (deck 0.500)  OK
 
 octapod_ik           body NO SCRIPT        legs 8
@@ -35,4 +35,4 @@ octapod_ik           body NO SCRIPT        legs 8
     walked    0.00 m in 9 s, no script
     feet at   -1.020  (deck 0.500)  OFF THE DECK
 
-SUMMARY of 7: 6 scripted, 6 paced on their own, 6 standing on the deck, 7 inside the leash
+SUMMARY of 7: 6 scripted, 6 paced on their own, 5 standing on the deck, 7 inside the leash

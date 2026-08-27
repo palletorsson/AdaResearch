@@ -59,10 +59,29 @@ extends MeshInstance3D
 @export var driven_by_player: bool = true
 ## metres from where it was placed before the pace turns it back
 @export var pace_reach: float = 1.5
+## The demos add an orange debug sphere under every foot. They are how you read
+## a gait on a test bench and they are wrong in an exhibit, so a placed specimen
+## turns them off. BOOL on purpose: measured in VFM_09_Legs, the grid's config
+## fallback sets a bool property from a token and silently refuses a float, so
+## a switch reaches this animal and a number does not.
+@export var show_foot_markers: bool = true:
+	set(v):
+		show_foot_markers = v
+		_apply_markers()
 ## THE GAIT NUMBERS ARE DISTANCES, compared in world space by distance_to, so
 ## they have to shrink with the body or a shrunken animal takes a full-size
 ## stride and never plants a foot. head_crab measured exactly that failure.
-@export var walker_scale: float = 1.0
+## A SETTER, because the grid does not call apply_grid_config on this node.
+## Measured in VFM_09_Legs: a token carrying #driven_by_player:false#walker_scale:0.16
+## arrived with the boolean applied and the scale untouched at 1.00 — the grid
+## reaches a scriptless root, fails, and falls back to setting PROPERTIES by
+## name on the child that has them. A plain @export takes the number and nothing
+## re-derives from it. A setter fires on every path there is.
+@export var walker_scale: float = 1.0:
+	set(v):
+		walker_scale = v
+		if _authored_y >= 0.0:        # only once _ready has read the scene's own offset
+			_apply_walker_scale()
 
 var _patrol_timer: float = 0.0
 var _patrol_angle: float = 0.0
@@ -72,6 +91,9 @@ var _floor_y: float = 0.0
 var _floor_learned: bool = false
 var _floor_settle: float = 0.0
 var _pace_home: Vector3 = Vector3.ZERO
+var _authored_y: float = -1.0        # the scene's own shoulder offset, read once
+var _authored_step: Vector3 = Vector3.ZERO
+var _markers_done: bool = false
 
 
 func _ready() -> void:
@@ -85,18 +107,30 @@ func _ready() -> void:
 ## to an artifact AFTER it is in the tree — a token that only set the number
 ## would change nothing anybody reads.
 func _apply_walker_scale() -> void:
-	if is_equal_approx(walker_scale, 1.0):
-		return
+	if _authored_y < 0.0:
+		_authored_y = position.y          # 2.2 in all six scenes
+		_authored_step = Vector3(step_threshold, step_height, step_overshoot)
+	# THE SHOULDER HEIGHT IS IN THE BODY'S OWN TRANSFORM, NOT IN THE MESH.
+	# Every scene parks this node at y = 2.2 above a bare root and hangs the
+	# legs beneath it, reaching down to the root's plane. Scaling the node
+	# scales its children and NOT its own offset, so a body shrunk to a sixth
+	# keeps standing 2.2 m up while its legs only reach 0.37 — it floats, feet
+	# dangling, and every gate still passes. Both numbers scale or neither does.
 	scale = Vector3.ONE * walker_scale
-	step_threshold *= walker_scale
-	step_height *= walker_scale
-	step_overshoot *= walker_scale
+	position.y = _authored_y * walker_scale
+	# and the gait distances, which are compared in WORLD space by distance_to
+	step_threshold = _authored_step.x * walker_scale
+	step_height = _authored_step.y * walker_scale
+	step_overshoot = _authored_step.z * walker_scale
 
 
 ## Map tokens: two_leg_critter#driven_by_player:false#pace_reach:1.2#walker_scale:0.4
 func apply_grid_config(config: Dictionary) -> void:
 	if config.has("driven_by_player"):
 		driven_by_player = _cfg_bool(config["driven_by_player"], driven_by_player)
+	if config.has("show_foot_markers") or config.has("markers"):
+		var raw2: Variant = config.get("show_foot_markers", config.get("markers"))
+		show_foot_markers = _cfg_bool(raw2, show_foot_markers)
 	if config.has("pace_reach"):
 		pace_reach = _cfg_num(config["pace_reach"], pace_reach)
 	if config.has("patrol_speed"):
@@ -141,6 +175,23 @@ func _ground() -> float:
 ## probe) sets the position AFTER add_child. Measured: every critter took its
 ## home as Vector3.ZERO and the leash pulled it toward the world origin, 130 m
 ## away. The base's own comment said not to do this and the code did it anyway.
+## Hide (or restore) the per-foot debug spheres. layers = 0 rather than
+## visible = false: visibility is hierarchical in Godot and would take the foot
+## target's children with it.
+func _apply_markers() -> void:
+	if not is_inside_tree():
+		return
+	var stack: Array = [self]
+	while not stack.is_empty():
+		var q: Node = stack.pop_back()
+		var nm := String(q.name).to_lower()
+		if q is VisualInstance3D and (nm.contains("footvis") or nm.contains("foot_vis") or nm.contains("footdebug")):
+			(q as VisualInstance3D).layers = 1 if show_foot_markers else 0
+		elif q is MeshInstance3D and q.get_parent() != null and String(q.get_parent().name).to_lower().begins_with("foottarget"):
+			(q as VisualInstance3D).layers = 1 if show_foot_markers else 0
+		for c in q.get_children(): stack.append(c)
+
+
 func _learn_place() -> void:
 	if _floor_learned:
 		return
@@ -178,6 +229,9 @@ func _settle_floor(delta: float) -> void:
 ## pace_reach from where it was placed, then turns for home — so a critter on a
 ## plinth stays on its plinth instead of wandering off down the hall.
 func _walk(delta: float) -> void:
+	if not _markers_done:
+		_markers_done = true
+		_apply_markers()      # the subclass adds them in its own _ready, after ours
 	_learn_place()
 	_settle_floor(delta)
 	if driven_by_player:

@@ -90,6 +90,8 @@ func _run() -> void:
 		if body != null and body.get("driven_by_player") != null:
 			body.set("driven_by_player", false)
 			body.set("pace_reach", REACH)
+			# a bench specimen: 7.3 m of critter under a 3 m wall is not an exhibit
+			body.call("apply_grid_config", {"walker_scale": "0.16", "patrol_speed": "0.25"})
 		live.append({"nm": nm, "root": inst, "body": body, "x": x})
 		x += 24.0
 	await create_timer(2.2).timeout

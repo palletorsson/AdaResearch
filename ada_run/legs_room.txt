@@ -1,0 +1,27 @@
+VFM_09_LEGS through the real grid — 7 walker(s) standing
+
+    markers=false  dormant=n/a  detect=n/a  pace_reach=1.40
+    body y 0.290   _floor_y 0.000
+  OneLegScene            driven_by_player=false  walker_scale=1.00   feet y 0.010 OK
+    markers=false  dormant=n/a  detect=n/a  pace_reach=1.40
+    body y 0.260   _floor_y 0.000
+  TwoLegScene            driven_by_player=false  walker_scale=1.00   feet y 0.000 OK
+    markers=false  dormant=n/a  detect=n/a  pace_reach=1.40
+    body y 0.260   _floor_y 0.000
+  ThreeLegScene          driven_by_player=false  walker_scale=1.00   feet y -0.000 OK
+    markers=false  dormant=n/a  detect=n/a  pace_reach=1.40
+    body y 0.260   _floor_y 0.000
+  FourLegScene           driven_by_player=false  walker_scale=1.00   feet y -0.000 OK
+    markers=false  dormant=n/a  detect=n/a  pace_reach=1.40
+    body y 0.260   _floor_y 0.000
+  FiveLegScene           driven_by_player=false  walker_scale=1.00   feet y 0.000 OK
+    markers=false  dormant=n/a  detect=n/a  pace_reach=1.40
+    body y 0.260   _floor_y 0.000
+  SixLegScene            driven_by_player=false  walker_scale=1.00   feet y 0.000 OK
+    markers=n/a  dormant=false  detect=0.0  pace_reach=n/a
+    body y 0.253   _floor_y n/a
+  GridSystem             driven_by_player=n/a    walker_scale=n/a    feet y 0.010 OK
+
+  after six seconds: 6 of 7 moved on their own, 0 strayed more than 3 m
+
+VERDICT: seven on the floor, pacing their own bays
