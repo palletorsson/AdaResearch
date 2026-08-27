@@ -344,14 +344,72 @@ var _inv_counter: Dictionary = {}   # chapter -> next number
 const INVENTORY := "res://ada_run/em_inventory.json"
 const SHOWING_CARDS := "res://ada_run/em_showing_cards.json"
 
+## THE LEDGER IS NOT THE RUN (2026-08-27, Palle: "now wall-map only has two maps").
+##
+## This wrote `_showing_cards` — the cards built THIS RUN — straight over the file,
+## and since one-hall streaming a run only ever holds about two halls. So the file
+## said two, and /wall-map, which offers "only halls the museum has built" and reads
+## exactly this file, offered two of 196. Every other hall was in the plan, in the
+## book and perfectly editable, and simply not on the list.
+##
+## The same shape as em_built.json, and as the layout that had never been written
+## down at all: a LIVE WINDOW read as a RECORD. So the ledger accumulates. It is
+## loaded at boot and grouped by hall; a hall built again REPLACES its own rows
+## rather than doubling them, because a card carries the cell it was last hung at
+## and the last one is the true one. A hall nobody has ever built stays absent —
+## that is the honest state, and it is the whole point of the filter.
+var _cards_seen: Dictionary = {}        # "<chapter>|<pearl>" -> Array of card rows
+var _cards_loaded: bool = false
+
+
+func _load_showing_cards() -> void:
+	if _cards_loaded:
+		return
+	_cards_loaded = true
+	if not FileAccess.file_exists(SHOWING_CARDS):
+		return
+	var v: Variant = JSON.parse_string(FileAccess.get_file_as_string(SHOWING_CARDS))
+	if not (v is Dictionary):
+		return
+	for c_v in ((v as Dictionary).get("cards", []) as Array):
+		var c: Dictionary = c_v
+		var k := "%s|%s" % [String(c.get("chapter", "")), String(c.get("pearl", ""))]
+		if k == "|":
+			continue
+		if not _cards_seen.has(k):
+			_cards_seen[k] = []
+		(_cards_seen[k] as Array).append(c)
+
+
 func _save_showing_cards() -> void:
-	var f: FileAccess = FileAccess.open(SHOWING_CARDS, FileAccess.WRITE)
+	_load_showing_cards()
+	# this run REPLACES the halls it built, and leaves every other hall standing
+	var fresh: Dictionary = {}
+	for c_v in _showing_cards:
+		var c: Dictionary = c_v
+		var k := "%s|%s" % [String(c.get("chapter", "")), String(c.get("pearl", ""))]
+		if k == "|":
+			continue
+		if not fresh.has(k):
+			fresh[k] = []
+		(fresh[k] as Array).append(c)
+	for k2 in fresh:
+		_cards_seen[k2] = fresh[k2]
+	var all_cards: Array = []
+	for k3 in _cards_seen:
+		all_cards.append_array(_cards_seen[k3] as Array)
+	var tmp_path := SHOWING_CARDS + ".tmp"
+	var f: FileAccess = FileAccess.open(tmp_path, FileAccess.WRITE)
 	if f == null:
 		return
 	f.store_string(JSON.stringify({"schema": "adaresearch.em_showing_cards.v1",
-		"_readme": "Every wall showing's card, this run: id = chapter · pearl · number (the number is the showing's index in its segment). Rule on one via em_overrides kind showing (offset) or a `text` field on that rule; a swap for another wall-hanging body is the next rule.",
-		"cards": _showing_cards}, "\t"))
+		"_readme": "Every wall showing's card the museum has EVER built, accumulated across runs — not only this one. id = chapter · pearl · number (the number is the showing's index in its segment). A hall built again replaces its own rows; a hall nobody has walked is absent, which is what /wall-map's built filter reads. Rule on one via em_overrides kind showing (offset) or a `text` field on that rule; a swap for another wall-hanging body is the next rule.",
+		"halls": _cards_seen.size(),
+		"cards": all_cards}, "\t"))
 	f.close()
+	var da := DirAccess.open(SHOWING_CARDS.get_base_dir())
+	if da != null:
+		da.rename(tmp_path.get_file(), SHOWING_CARDS.get_file())
 # THE LIVE FOOTPRINT LEDGER (2026-08-18). The registry's measurement is a
 # STILL — a body that grows at runtime (a builder, a sim, a field) can stand
 # forty metres wide in a corridor the negotiator planned for four. When a
