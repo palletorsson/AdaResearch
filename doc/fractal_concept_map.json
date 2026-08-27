@@ -10,6 +10,9 @@
     "Act VI — useful structures"
   ],
   "concepts": [
+    "The base case",
+    "The self-call",
+    "Depth",
     "Recursion (calls itself)",
     "Recursive trees",
     "Fractal dimension",
@@ -31,6 +34,70 @@
     "Fractal antennas & structures"
   ],
   "concept_meta": {
+    "The base case": {
+      "count": 0,
+      "map_ready": 0,
+      "has_image": 0,
+      "best": null,
+      "truth": "The rung that stops it. A function that calls itself and never stops is not a fractal, it is a crash - the engine's stack limit is the first teacher in this sequence.",
+      "act": "",
+      "thin": true,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "missing_tiers": [
+        "small",
+        "medium",
+        "large",
+        "applied"
+      ]
+    },
+    "The self-call": {
+      "count": 0,
+      "map_ready": 0,
+      "has_image": 0,
+      "best": null,
+      "truth": "func f(): ... f(). The whole of recursion is those four characters, and the engine gives you a stack deep enough to mean it.",
+      "act": "",
+      "thin": true,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "missing_tiers": [
+        "small",
+        "medium",
+        "large",
+        "applied"
+      ]
+    },
+    "Depth": {
+      "count": 1,
+      "map_ready": 1,
+      "has_image": 1,
+      "best": "cube_subdivision",
+      "truth": "How far down before the base case catches you - and each level costs a frame on the stack. Depth is a budget, and infinity is a promise the machine cannot keep.",
+      "act": "",
+      "thin": true,
+      "tiers": {
+        "small": [
+          "cube_subdivision"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "missing_tiers": [
+        "medium",
+        "large",
+        "applied"
+      ]
+    },
     "Recursion (calls itself)": {
       "count": 7,
       "map_ready": 7,
@@ -142,8 +209,8 @@
       "missing_tiers": []
     },
     "Koch curve & snowflake": {
-      "count": 8,
-      "map_ready": 8,
+      "count": 10,
+      "map_ready": 10,
       "has_image": 8,
       "best": "koch_snowflake_press",
       "truth": "Infinite perimeter around a finite area — D ≈ 1.26, the edge that never resolves no matter how close you look.",
@@ -153,7 +220,8 @@
         "small": [
           "fractal_koch_curve",
           "kochsnowflake",
-          "living_paper_koch"
+          "living_paper_koch",
+          "depth_cap"
         ],
         "medium": [
           "koch_curve_3d",
@@ -161,7 +229,8 @@
         ],
         "large": [
           "koch_curve",
-          "koch_curve_1"
+          "koch_curve_1",
+          "recursion_observatory"
         ],
         "applied": [
           "koch_snowflake_press"
@@ -525,11 +594,26 @@
       "missing_tiers": []
     }
   },
-  "total": 113,
-  "map_ready_total": 112,
-  "image_total": 113,
-  "empty_slots": 0,
+  "total": 116,
+  "map_ready_total": 115,
+  "image_total": 114,
+  "empty_slots": 11,
   "groups": {
+    "The base case": [],
+    "The self-call": [],
+    "Depth": [
+      {
+        "lookup": "cube_subdivision",
+        "name": "cube_subdivision",
+        "registry": "procgen_extra.json",
+        "category": "unknown",
+        "map_ready": true,
+        "has_image": true,
+        "score": 3,
+        "fp": 1,
+        "tier": "small"
+      }
+    ],
     "Recursion (calls itself)": [
       {
         "lookup": "recursion_bench",
@@ -763,7 +847,7 @@
         "map_ready": true,
         "has_image": true,
         "score": 99,
-        "fp": 4,
+        "fp": 2,
         "tier": "medium"
       },
       {
@@ -791,12 +875,12 @@
       {
         "lookup": "box_counting_dimension",
         "name": "Box Counting Dimension",
-        "registry": "chaos.json",
+        "registry": "procgen_extra.json",
         "category": "fractals",
         "map_ready": false,
         "has_image": true,
         "score": 7,
-        "fp": 1,
+        "fp": 2,
         "tier": "small"
       }
     ],
@@ -956,6 +1040,28 @@
         "score": 9,
         "fp": 4,
         "tier": "medium"
+      },
+      {
+        "lookup": "depth_cap",
+        "name": "Depth Cap",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": false,
+        "score": 3,
+        "fp": 1,
+        "tier": "small"
+      },
+      {
+        "lookup": "recursion_observatory",
+        "name": "Recursion Observatory",
+        "registry": "recursion_observatory.json",
+        "category": "procedural",
+        "map_ready": true,
+        "has_image": false,
+        "score": 3,
+        "fp": 12,
+        "tier": "large"
       }
     ],
     "Sierpinski": [
@@ -1092,7 +1198,7 @@
         "map_ready": true,
         "has_image": true,
         "score": 99,
-        "fp": 4,
+        "fp": 1,
         "tier": "medium"
       },
       {
@@ -1445,7 +1551,7 @@
         "map_ready": true,
         "has_image": true,
         "score": 99,
-        "fp": 4,
+        "fp": 9,
         "tier": "medium"
       },
       {
@@ -1491,7 +1597,7 @@
         "map_ready": true,
         "has_image": true,
         "score": 99,
-        "fp": 4,
+        "fp": 9,
         "tier": "medium"
       },
       {
@@ -1627,7 +1733,7 @@
         "map_ready": true,
         "has_image": true,
         "score": 99,
-        "fp": 4,
+        "fp": 1,
         "tier": "medium"
       },
       {

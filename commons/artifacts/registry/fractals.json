@@ -2971,6 +2971,25 @@
 				1,
 				1.0
 			]
+		},
+		"the_recursion_cabinet": {
+			"name": "The Recursion Cabinet",
+			"class_name": "TheRecursionCabinet",
+			"scene": "res://commons/artifacts/the_recursion_cabinet/the_recursion_cabinet.tscn",
+			"description": "The fractals SUPER OBJECT: a curiosity cabinet built by a function that calls itself - every shelf holds a smaller copy until the base case draws a SOLID block and returns. In the drawers: Cantor's missing thirds, Koch's endless edge, Sierpinski by chaos game, a level-2 Menger sponge, phi's spiral, a Barnsley fern, and escape-time Mandelbrot. Each genuinely recursed. 2026-08-27.",
+			"category": "fractals",
+			"tags": [
+				"fractals",
+				"super",
+				"synthesis",
+				"recursion",
+				"base_case",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 4,
+				"clearance_m": 0.6
+			}
 		}
 	}
 }

@@ -42,6 +42,18 @@ def is_candidate(reg, lookup):
 
 # concept -> (strong [w3], weak [w1], truth). Order: specific first; ties break to the earlier concept.
 CONCEPTS = [
+ ("The base case",
+  ["base_case", "stop_rule", "depth_limit", "terminator"],
+  ["base", "stop", "halt"],
+  "The rung that stops it. A function that calls itself and never stops is not a fractal, it is a crash - the engine's stack limit is the first teacher in this sequence."),
+ ("The self-call",
+  ["self_call", "recursion_animator", "recursion_bench", "call_stack"],
+  ["recurse", "self"],
+  "func f(): ... f(). The whole of recursion is those four characters, and the engine gives you a stack deep enough to mean it."),
+ ("Depth",
+  ["depth_dial", "level", "iteration_depth", "generations"],
+  ["depth", "levels"],
+  "How far down before the base case catches you - and each level costs a frame on the stack. Depth is a budget, and infinity is a promise the machine cannot keep."),
  ("Recursion (calls itself)",
   ["fractal_recursion", "recursion_spiral", "recursion_circles", "example_8_3_recursion", "recursive_boolean"],
   ["recursion", "base case", "self-call"],

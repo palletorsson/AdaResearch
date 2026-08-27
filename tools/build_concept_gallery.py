@@ -47,7 +47,11 @@ ALIAS = {
     "proceduralgeneration": "procgen",
     "foundationscrisis": "foundationscrisis",
     "postfoundationscrisis": "postfoundationscrisis",
-    "fractals": "fractals",
+    # fractal (SINGULAR) is the bespoke builder's output with 19 real concepts;
+    # fractals (plural) is a June map-name file whose "concepts" are room labels
+    # (MandelbrotSet, Synthesis) and whose truths repeat their own names. The
+    # gallery read the wrong one from the day it was written.
+    "fractals": "fractal",
 }
 
 
