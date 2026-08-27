@@ -23,6 +23,51 @@ DOC = os.path.join(ROOT, "doc")
 # ── per-domain config ─────────────────────────────────────────────────────────────────────────
 # concept = (key, act, truth, [strong keywords], [weak keywords]). Order = specific first.
 CONFIG = {
+ "isosurfaces": {
+  # THE ISOSURFACE TAXONOMY (2026-08-27). Cheat-code: a field sampled, then an
+  # ArrayMesh built where it crosses a number you CHOSE. The surface is an OPINION
+  # about a threshold - move the number and the object is different, though nothing
+  # in the field changed. June's "concepts" were truncated map blurbs (one was
+  # literally named "Two hundred and fifty"); no builder and no alias owned the file,
+  # so the canon is authored here and the generic builder owns it from now on.
+  "title": "Isosurfaces - the surface is an opinion about a threshold",
+  "registries": ["isosurfaces.json"],
+  "applied_kw": ["sculpt", "demo", "explorer", "gallery"],
+  "large_kw": ["landscape", "cave", "world", "terrain", "system"],
+  "concepts": [
+   ("The field", "I - before the surface",
+    "a function from position to number: how 'inside' each point is. No geometry yet - just space with an opinion everywhere, and most of it invisible.",
+    ["noise_field", "scalar_field", "voxel_noise", "animated_noise"], ["field", "density"]),
+   ("The threshold", "I - before the surface",
+    "pick a number and call it the skin. iso = 0.5 is a DECISION, not a discovery: move it and the object changes while the field stays exactly the same.",
+    ["threshold", "isolevel", "iso_value", "cutoff"], ["level", "surface_at"]),
+   ("The sample grid", "II - asking",
+    "you cannot ask every point, so you ask a lattice. Resolution is a budget, and every isosurface you have ever seen was an interview with finitely many places.",
+    ["grid_resolution", "sample_grid", "lattice", "voxel_grid"], ["resolution", "samples"]),
+   ("The fifteen cases", "II - asking",
+    "eight corners, each in or out: 256 configurations, 15 after symmetry. The lookup table is the whole algorithm - the rest is bookkeeping.",
+    ["fifteen_cases", "marching_cubes", "marching_squares", "mc_base", "case_table"], ["cases", "lookup"]),
+   ("The interpolation", "III - the skin",
+    "WHERE between two corners does the surface cross? Snap to the midpoint and it is blocky; interpolate on the field values and it is smooth. Same cases, different world.",
+    ["interpolat", "smooth_shading", "vertex_lerp"], ["between", "blocky"]),
+   ("The normal from the field", "III - the skin",
+    "the gradient of the field IS the surface normal - lighting comes free from the same function that made the shape, because a field knows which way it thickens.",
+    ["normal", "gradient", "shading"], ["lighting", "smooth_normal"]),
+   ("Metaballs & implicit sums", "IV - what fields can be",
+    "sum a few smooth fields and where they cross the threshold they MERGE: two blobs become one skin with no seam, which no mesh operation gives you.",
+    ["metaball", "metaballs", "blob", "raymarched", "nakama"], ["merge", "implicit"]),
+   ("Distance fields (SDF)", "IV - what fields can be",
+    "let the number be distance-to-the-nearest-thing and the field becomes sculptural: add, subtract and blend solids by arithmetic on the value.",
+    ["sdf", "gyroid", "distance_field", "sculpt"], ["signed", "carve"]),
+   ("Landscapes & caves", "V - inhabiting the field",
+    "the same algorithm at world scale: terrain is a threshold read from above, a cave the same threshold read from inside. Overhangs are the proof it is not a heightmap.",
+    ["landscape", "terrain", "cave", "overhang", "portal", "rhizome", "queer_marching"], ["world", "inside"]),
+   ("The field that moves", "V - inhabiting the field",
+    "animate the field and the surface chases it - the skin is recomputed, never deformed, so it can split, merge and heal without anybody managing topology.",
+    ["animated", "fountain", "evolving", "torus_sculpture", "shapes_gallery"], ["chase", "recompute"]),
+  ],
+  "catch_all": ("Off the ladder", "meta", "isosurface artifacts the taxonomy does not yet claim. A chip decides their fate."),
+ },
  "noise": {
   # THE NOISE TAXONOMY (2026-08-27). Cheat-code: FastNoiseLite - randomness with a
   # NEIGHBOURHOOD. And the API is the ladder outright: noise is a FUNCTION, not a
@@ -32,31 +77,34 @@ CONFIG = {
   # was map blurbs ("White noise screams chaos" as a concept name); replaced.
   # Sequence truth kept: "Noise is randomness that remembers its neighbors."
   "title": "Noise - randomness with a neighbourhood",
+  # noise.json ONLY. The sequence's bodies live in randomness.json, but scanning it
+  # wholesale dumped 112 unrelated tokens into Off-the-ladder (the graphtheory
+  # lesson). The 34 that belong arrive by the additions hand layer instead.
   "registries": ["noise.json"],
   "applied_kw": ["sculptor", "painter", "loom"],
   "large_kw": ["terrain", "space", "clouds", "world"],
   "concepts": [
    ("The scream", "I - before the promise",
     "white noise: randomness with NO neighbourhood - every sample a stranger to the last. The static the rest of the ladder tames.",
-    ["white_noise", "static", "scream"], ["tv"]),
+    ["whitenoise", "white_noise", "randompoint", "randompoints"], ["tv"]),
    ("The promise", "I - before the promise",
     "get_noise_2d(x, y): nearby points agree, and the same point answers the same forever. Noise is a FUNCTION wearing weather, not dice.",
-    ["value_noise", "coherent", "promise", "neighbour"], ["smooth"]),
+    ["perlin_noise", "living_paper_perlin", "particle_randomness_perlin", "perlin_noise_clouds"], ["smooth"]),
    ("Frequency", "II - the knobs",
     "noise.frequency: how fast the neighbourhood forgets. Zoom is vocabulary - the same cloud at three magnifications is three moods.",
-    ["frequency", "zoom", "scale_knob"], ["wavelength"]),
+    ["noise_mixer", "profile_noise", "frequency"], ["wavelength"]),
    ("Octaves", "II - the knobs",
     "fractal_octaves, lacunarity, gain: scales stacked into detail. Mountains are a sum - big shapes plus their own gossip.",
-    ["octave", "fractal_layer", "lacunarity", "fbm", "layers"], ["stack"]),
+    ["octaves", "noiselayers", "living_paper_noise_octaves", "profile_noise_octaves"], ["stack"]),
    ("The kinds", "II - the knobs",
     "noise_type: Perlin, Simplex, Cellular, Value - four temperaments of coherence from one seed. Worley's cells against Perlin's hills.",
-    ["perlin", "simplex", "worley", "cellular", "value_type"], ["kind", "temperament"]),
+    ["simplex_noise", "value_noise", "blue_noise", "curl_noise", "worley"], ["kind", "temperament"]),
    ("The field", "III - noise at work",
     "noise as DIRECTION: sample to angle, and space itself acquires a lean. The flow field is a cloud read as a map of wills.",
-    ["flow", "field", "curl", "vane"], ["direction"]),
+    ["noise_space", "shader_noise_space", "noisecolors", "noisesphere", "noisetorus"], ["direction"]),
    ("Displacement", "III - noise at work",
     "noise moving geometry: heights from samples - terrain, melted marble, the surface that remembered a storm.",
-    ["terrain", "displac", "extrud", "sculptor", "melting", "voxel", "height"], ["relief"]),
+    ["noise_terrain", "perlin_noise_terrain", "perlin_terrain_sculptor", "terrain_with_blobs", "pool_hole_noise", "melting", "noise_sculpture"], ["relief"]),
    ("Noise of noise", "III - noise at work",
     "domain_warp: the output of one function bends the input of the next - noise controlling WHERE noise is read. The engine ships the warp.",
     ["warp", "noise_of", "nested", "noisesphere"], ["domain"]),
@@ -457,6 +505,12 @@ def main():
                 claimed = {x["lookup"] for g in out["groups"].values() for x in g}
                 for c in prev.get("concepts", []):
                     if c in out["concepts"]:
+                        continue
+                    # NEVER resurrect the catch-all. It is the builder's own section:
+                    # when a config fix empties it, carrying the previous run's
+                    # leftovers forward re-imports tokens the new scoring already
+                    # rejected (noise, 2026-08-27: 110 stale tokens came back).
+                    if c == cfg["catch_all"][0]:
                         continue
                     kept = [x for x in prev.get("groups", {}).get(c, [])
                             if x.get("lookup") not in claimed]

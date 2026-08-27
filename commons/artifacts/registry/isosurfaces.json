@@ -3057,6 +3057,25 @@
 				1,
 				1
 			]
+		},
+		"the_threshold_opinion": {
+			"name": "The Threshold Opinion",
+			"class_name": "TheThresholdOpinion",
+			"scene": "res://commons/artifacts/the_threshold_opinion/the_threshold_opinion.tscn",
+			"description": "The isosurfaces SUPER OBJECT: a courtroom for a number. ONE field stands as a lattice of rods whose lengths are its own values; five surfaces extracted from it at five thresholds - fat, lean, pinched, thin, broken into islands - prove nothing in the field changed. A resolution row asks the same threshold of 4, 8 and 14 lattices, a brass rack holds the fifteen cases, and two wells are caught mid-merge, seamless. Every skin marched at build time. 2026-08-27.",
+			"category": "isosurfaces",
+			"tags": [
+				"isosurfaces",
+				"super",
+				"synthesis",
+				"threshold",
+				"marching_cubes",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 4,
+				"clearance_m": 0.6
+			}
 		}
 	},
 	"sequence_mapping": {
