@@ -23,6 +23,44 @@ DOC = os.path.join(ROOT, "doc")
 # ── per-domain config ─────────────────────────────────────────────────────────────────────────
 # concept = (key, act, truth, [strong keywords], [weak keywords]). Order = specific first.
 CONFIG = {
+ "change": {
+  # THE CHANGE TAXONOMY (2026-08-27). The cheat-code: the engine does calculus
+  # NUMERICALLY, every frame - _process(delta) is a Riemann sum you live inside.
+  # derivative = (now - before) / delta, integral = x += rate * delta, and the
+  # fundamental theorem is the fact that the engine runs both at once and they
+  # agree. June's four concepts (Rate/Accumulation/Flow/Reconciliation) were
+  # already calculus-true; this grounds them in the frame and closes the loop
+  # toward wavefunctions. Sequence truth kept: "Things change. Change
+  # accumulates. Accumulation flows."
+  "title": "Change - the frame is a Riemann sum you live inside",
+  "registries": ["change.json"],
+  "applied_kw": ["toy", "painter", "marble", "bridge"],
+  "large_kw": ["field", "swarm", "well"],
+  "concepts": [
+   ("The frame", "I - before calculus",
+    "_process(delta): the world is a flipbook, and delta is each page confessing how long it lasted. Nothing changes except per frame.",
+    ["zoetrope", "frame", "flipbook"], ["delta", "tick"]),
+   ("State", "I - before calculus",
+    "a var is memory carried across frames - change needs somewhere to stand between two pages.",
+    ["state", "memory_cell"], ["variable"]),
+   ("The rate", "II - the two motions",
+    "the derivative, as the engine knows it: (now - before) / delta. Slope measured from two frames, steepest-descent when it points downhill.",
+    ["derivative", "descent", "gradient", "slope", "rate"], ["marble"]),
+   ("Accumulation", "II - the two motions",
+    "the integral, as the engine runs it: x += rate * delta, forever. Area under a curve is a heap the frames keep pouring.",
+    ["integral", "accumul", "riemann", "area", "heap"], ["sum"]),
+   ("The reconciliation", "III - the theorem",
+    "the fundamental theorem: rate and accumulation are inverses, and the engine proves it every frame by running both at once.",
+    ["ftc", "reconcil", "bridge", "fundamental"], ["inverse_pair"]),
+   ("Flow", "IV - change with an address",
+    "a rate at every point: the field. Drop anything anywhere and the space itself says which way and how fast.",
+    ["flow", "field", "swarm", "particle"], ["stream"]),
+   ("The loop", "V - the return",
+    "fmod(t, T): change that comes home. The door out of change and into wavefunctions - a rate that repeats is a wave waiting to be named.",
+    ["loop", "fmod", "period", "cycle"], ["return"]),
+  ],
+  "catch_all": ("Off the ladder", "meta", "change-registry artifacts the taxonomy does not yet claim. A chip decides their fate."),
+ },
  "graphtheory": {
   # THE GRAPH TAXONOMY (2026-08-27). The cheat-code is the deepest in the corpus: THE
   # SCENE TREE IS ALREADY A GRAPH. Node/add_child is the engine's home data structure -

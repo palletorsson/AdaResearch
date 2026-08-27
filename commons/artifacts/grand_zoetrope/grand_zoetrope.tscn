@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/grand_zoetrope/grand_zoetrope.gd" id="1"]
+
+[node name="GrandZoetrope" type="Node3D"]
+script = ExtResource("1")

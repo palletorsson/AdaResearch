@@ -1,157 +1,394 @@
 {
- "title": "change - four rungs, from the taxonomy",
- "note": "REGENERATED 2026-08-27 from commons/maps/sequences/change.json taxonomy (the prior file grouped by MAP NAME, not principle). Members = rung-prose mentions intersected with the registry corpus. Replaced again whenever the taxonomy moves.",
- "concepts": [
-  "Rate",
-  "Accumulation",
-  "Flow",
-  "Reconciliation"
- ],
- "concept_meta": {
-  "Rate": {
-   "count": 2,
-   "truth": "how fast, right here? - tangent, slope, velocity: the derivative as the hill's promise about the next instant.",
-   "act": "1_rate",
-   "tiers": {}
-  },
-  "Accumulation": {
-   "count": 1,
-   "truth": "what does a rate add up to? - rectangles becoming the integral by giving up their edges one halving at a time.",
-   "act": "2_accumulation",
-   "tiers": {}
-  },
-  "Flow": {
-   "count": 4,
-   "truth": "what if the rate is everywhere at once? - a velocity assigned to every point; the field is the geography, not the traffic.",
-   "act": "3_flow",
-   "tiers": {}
-  },
-  "Reconciliation": {
-   "count": 3,
-   "truth": "when do the two meet? - differentiation and integration are one operation read in opposite directions (+C is yours to choose).",
-   "act": "4_reconciliation",
-   "tiers": {}
-  }
- },
- "groups": {
-  "Rate": [
-   {
-    "lookup": "descent_marble_toy",
-    "name": "descent_marble_toy",
-    "registry": "",
-    "category": "change",
-    "map_ready": true,
-    "has_image": true,
-    "score": 5,
-    "tier": "medium",
-    "recommended": true
-   },
-   {
-    "lookup": "gradient_descent_well",
-    "name": "gradient_descent_well",
-    "registry": "",
-    "category": "change",
-    "map_ready": true,
-    "has_image": true,
-    "score": 5,
-    "tier": "medium",
-    "recommended": true
-   }
+  "title": "Change - the frame is a Riemann sum you live inside",
+  "domain": "change",
+  "note": "Auto-classified by tools/build_concept_map.py — heuristic keyword scoring, tier by footprint.",
+  "acts": [],
+  "concepts": [
+    "The frame",
+    "State",
+    "The rate",
+    "Accumulation",
+    "The reconciliation",
+    "Flow",
+    "The loop",
+    "Rate"
   ],
-  "Accumulation": [
-   {
-    "lookup": "integral_area",
-    "name": "integral_area",
-    "registry": "",
-    "category": "change",
-    "map_ready": true,
-    "has_image": true,
-    "score": 5,
-    "tier": "medium",
-    "recommended": true
-   }
+  "concept_meta": {
+    "The frame": {
+      "act": "I - before calculus",
+      "truth": "_process(delta): the world is a flipbook, and delta is each page confessing how long it lasted. Nothing changes except per frame.",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "count": 0,
+      "thin": true
+    },
+    "State": {
+      "act": "I - before calculus",
+      "truth": "a var is memory carried across frames - change needs somewhere to stand between two pages.",
+      "tiers": {
+        "small": [
+          "catalyst_sustain_demo"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "count": 1,
+      "thin": true
+    },
+    "The rate": {
+      "act": "II - the two motions",
+      "truth": "the derivative, as the engine knows it: (now - before) / delta. Slope measured from two frames, steepest-descent when it points downhill.",
+      "tiers": {
+        "small": [
+          "derivative_pair",
+          "partial_derivative_terrain",
+          "slope_tangent_demo",
+          "velocity_arrow"
+        ],
+        "medium": [
+          "tangent_slope_workbench",
+          "tangent_toboggan",
+          "zeno_staircase"
+        ],
+        "large": [],
+        "applied": []
+      },
+      "count": 7,
+      "thin": false
+    },
+    "Accumulation": {
+      "act": "II - the two motions",
+      "truth": "the integral, as the engine runs it: x += rate * delta, forever. Area under a curve is a heap the frames keep pouring.",
+      "tiers": {
+        "small": [
+          "integral_area",
+          "riemann_pump"
+        ],
+        "medium": [
+          "riemann_sum_workbench",
+          "staircase_to_curve"
+        ],
+        "large": [],
+        "applied": []
+      },
+      "count": 4,
+      "thin": false
+    },
+    "The reconciliation": {
+      "act": "III - the theorem",
+      "truth": "the fundamental theorem: rate and accumulation are inverses, and the engine proves it every frame by running both at once.",
+      "tiers": {
+        "small": [],
+        "medium": [
+          "undo_door"
+        ],
+        "large": [],
+        "applied": [
+          "ftc_bridge"
+        ]
+      },
+      "count": 2,
+      "thin": false
+    },
+    "Flow": {
+      "act": "IV - change with an address",
+      "truth": "a rate at every point: the field. Drop anything anywhere and the space itself says which way and how fast.",
+      "tiers": {
+        "small": [],
+        "medium": [
+          "paper_regatta"
+        ],
+        "large": [
+          "particle_flow_swarm",
+          "vector_field_grid"
+        ],
+        "applied": []
+      },
+      "count": 3,
+      "thin": false
+    },
+    "The loop": {
+      "act": "V - the return",
+      "truth": "fmod(t, T): change that comes home. The door out of change and into wavefunctions - a rate that repeats is a wave waiting to be named.",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "count": 0,
+      "thin": true
+    },
+    "Rate": {
+      "count": 2,
+      "truth": "how fast, right here? - tangent, slope, velocity: the derivative as the hill's promise about the next instant.",
+      "act": "1_rate",
+      "tiers": {}
+    }
+  },
+  "concept_distance": [
+    [
+      0.0,
+      0.755,
+      0.8499,
+      0.8406,
+      0.9072,
+      1.0,
+      0.8402
+    ],
+    [
+      0.755,
+      0.0,
+      0.7321,
+      0.7936,
+      0.9063,
+      0.894,
+      0.9182
+    ],
+    [
+      0.8499,
+      0.7321,
+      0.0,
+      0.0,
+      0.6524,
+      0.4998,
+      0.9072
+    ],
+    [
+      0.8406,
+      0.7936,
+      0.0,
+      0.0,
+      0.5032,
+      0.9203,
+      0.9178
+    ],
+    [
+      0.9072,
+      0.9063,
+      0.6524,
+      0.5032,
+      0.0,
+      0.7982,
+      0.7427
+    ],
+    [
+      1.0,
+      0.894,
+      0.4998,
+      0.9203,
+      0.7982,
+      0.0,
+      0.9538
+    ],
+    [
+      0.8402,
+      0.9182,
+      0.9072,
+      0.9178,
+      0.7427,
+      0.9538,
+      0.0
+    ]
   ],
-  "Flow": [
-   {
-    "lookup": "flow_field_painter",
-    "name": "flow_field_painter",
-    "registry": "",
-    "category": "change",
-    "map_ready": true,
-    "has_image": true,
-    "score": 5,
-    "tier": "medium",
-    "recommended": true
-   },
-   {
-    "lookup": "noc_5_04_flow_field",
-    "name": "noc_5_04_flow_field",
-    "registry": "",
-    "category": "change",
-    "map_ready": true,
-    "has_image": true,
-    "score": 5,
-    "tier": "medium",
-    "recommended": true
-   },
-   {
-    "lookup": "particle_flow_swarm",
-    "name": "particle_flow_swarm",
-    "registry": "",
-    "category": "change",
-    "map_ready": true,
-    "has_image": true,
-    "score": 5,
-    "tier": "medium",
-    "recommended": true
-   },
-   {
-    "lookup": "vector_field_visualizer",
-    "name": "vector_field_visualizer",
-    "registry": "",
-    "category": "change",
-    "map_ready": true,
-    "has_image": true,
-    "score": 5,
-    "tier": "medium",
-    "recommended": true
-   }
-  ],
-  "Reconciliation": [
-   {
-    "lookup": "derivative_pair",
-    "name": "derivative_pair",
-    "registry": "",
-    "category": "change",
-    "map_ready": true,
-    "has_image": true,
-    "score": 5,
-    "tier": "medium",
-    "recommended": true
-   },
-   {
-    "lookup": "ftc_bridge",
-    "name": "ftc_bridge",
-    "registry": "",
-    "category": "change",
-    "map_ready": true,
-    "has_image": true,
-    "score": 5,
-    "tier": "medium",
-    "recommended": true
-   },
-   {
-    "lookup": "integral_area",
-    "name": "integral_area",
-    "registry": "",
-    "category": "change",
-    "map_ready": true,
-    "has_image": true,
-    "score": 5,
-    "tier": "medium",
-    "recommended": true
-   }
-  ]
- },
- "total": 10
+  "groups": {
+    "The frame": [],
+    "State": [
+      {
+        "lookup": "catalyst_sustain_demo",
+        "name": "Catalyst Sustain Demo",
+        "registry": "change.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "The rate": [
+      {
+        "lookup": "derivative_pair",
+        "name": "Derivative Pair",
+        "registry": "change.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "partial_derivative_terrain",
+        "name": "Partial Derivative Terrain",
+        "registry": "change.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "slope_tangent_demo",
+        "name": "Slope Tangent Demo",
+        "registry": "change.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "tangent_slope_workbench",
+        "name": "Tangent Slope Workbench",
+        "registry": "change.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "tangent_toboggan",
+        "name": "Tangent Toboggan",
+        "registry": "change.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false
+      },
+      {
+        "lookup": "velocity_arrow",
+        "name": "Velocity Arrow",
+        "registry": "change.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "zeno_staircase",
+        "name": "Zeno Staircase",
+        "registry": "change.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": false,
+        "recommended": true
+      }
+    ],
+    "Accumulation": [
+      {
+        "lookup": "integral_area",
+        "name": "Integral Area",
+        "registry": "change.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "riemann_pump",
+        "name": "Riemann Pump",
+        "registry": "change.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "riemann_sum_workbench",
+        "name": "Riemann Sum Workbench",
+        "registry": "change.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "staircase_to_curve",
+        "name": "Staircase To Curve",
+        "registry": "change.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false
+      }
+    ],
+    "The reconciliation": [
+      {
+        "lookup": "ftc_bridge",
+        "name": "FTC Bridge",
+        "registry": "change.json",
+        "tier": "applied",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "undo_door",
+        "name": "Undo Door",
+        "registry": "change.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false
+      }
+    ],
+    "Flow": [
+      {
+        "lookup": "paper_regatta",
+        "name": "Paper Regatta",
+        "registry": "change.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false
+      },
+      {
+        "lookup": "particle_flow_swarm",
+        "name": "Particle Flow Swarm",
+        "registry": "change.json",
+        "tier": "large",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "vector_field_grid",
+        "name": "Vector Field Grid",
+        "registry": "change.json",
+        "tier": "large",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "The loop": [],
+    "Rate": [
+      {
+        "lookup": "descent_marble_toy",
+        "name": "descent_marble_toy",
+        "registry": "",
+        "category": "change",
+        "map_ready": true,
+        "has_image": true,
+        "score": 5,
+        "tier": "medium",
+        "recommended": true
+      },
+      {
+        "lookup": "gradient_descent_well",
+        "name": "gradient_descent_well",
+        "registry": "",
+        "category": "change",
+        "map_ready": true,
+        "has_image": true,
+        "score": 5,
+        "tier": "medium",
+        "recommended": true
+      }
+    ]
+  },
+  "total": 17,
+  "total_concepts": 7,
+  "recommended_total": 13,
+  "map_ready_total": 13
 }

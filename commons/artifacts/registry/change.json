@@ -1139,6 +1139,25 @@
 				"footprint_cells": 2,
 				"clearance_m": 0.6
 			}
+		},
+		"grand_zoetrope": {
+			"name": "Grand Zoetrope",
+			"class_name": "GrandZoetrope",
+			"scene": "res://commons/artifacts/grand_zoetrope/grand_zoetrope.tscn",
+			"description": "The change SUPER OBJECT: a Victorian zoetrope grown into a calculus engine - twelve stillnesses fast enough to bounce, the slope batten (now-before)/delta, sand rising as x += rate*delta with rate and level dials agreeing on the fundamental theorem, a red lane that forgot delta, a flow skirt, and a crown eating its tail. 2026-08-27.",
+			"category": "change",
+			"tags": [
+				"change",
+				"calculus",
+				"super",
+				"synthesis",
+				"zoetrope",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 4,
+				"clearance_m": 0.6
+			}
 		}
 	}
 }
