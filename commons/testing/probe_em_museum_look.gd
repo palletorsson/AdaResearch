@@ -5,6 +5,7 @@ extends SceneTree
 
 const MuseumScript := preload("res://commons/scenes/endless_museum.gd")
 const Materials := preload("res://commons/scenes/em/em_materials.gd")
+const Detail := preload("res://commons/scenes/em/em_detail.gd")
 const Lighting := preload("res://commons/scenes/em/em_lighting.gd")
 
 var _failures: PackedStringArray = []
@@ -14,7 +15,7 @@ func _initialize() -> void:
 	_probe_material_language()
 	_probe_lighting_alignment()
 	if _failures.is_empty():
-		print("[probe-museum-look] PASS — warm white architecture and modular lighting align")
+		print("[probe-museum-look] PASS — quiet floor/base hierarchy, warm white architecture, and modular lighting align")
 		quit(0)
 	else:
 		for failure in _failures:
@@ -29,8 +30,15 @@ func _probe_material_language() -> void:
 	var surfaces: Dictionary = museum.get("_surf")
 	var wall: Material = surfaces.get("wall_white")
 	var trim: Material = surfaces.get("trim")
+	var floor_mat: Material = surfaces.get("floor")
+	var deck: Material = surfaces.get("deck")
+	var joint: Material = surfaces.get("joint")
+	var skirting: Material = surfaces.get("skirting")
 	_expect(wall != null, "museum white wall material resolves")
 	_expect(trim == wall, "corner, door, and cornice trim share the wall finish")
+	_expect(floor_mat != null, "gallery floor material resolves")
+	_expect(deck == floor_mat, "vestibule and hall share one continuous floor finish")
+	_expect(joint == floor_mat, "floor joints read through relief rather than a contrast stripe")
 	if wall is StandardMaterial3D:
 		var painted := wall as StandardMaterial3D
 		_expect(painted.albedo_color.get_luminance() > 0.80,
@@ -39,6 +47,26 @@ func _probe_material_language() -> void:
 			"museum white remains low-chroma rather than beige or timber-like")
 		_expect(painted.roughness >= 0.85,
 			"painted architecture stays matte")
+	if floor_mat is StandardMaterial3D:
+		var floor_surface := floor_mat as StandardMaterial3D
+		_expect(floor_surface.roughness >= 0.80,
+			"terrazzo scalar supports a honed rather than mirror finish")
+		_expect(floor_surface.clearcoat <= 0.10,
+			"floor seal remains subordinate to artifacts and lights")
+	if skirting is StandardMaterial3D and wall is StandardMaterial3D:
+		var base := skirting as StandardMaterial3D
+		var wall_surface := wall as StandardMaterial3D
+		_expect(base.albedo_color.get_luminance() < wall_surface.albedo_color.get_luminance(),
+			"painted base is legible below the wall")
+		_expect(base.albedo_color.get_luminance() > 0.50,
+			"painted base avoids a heavy black band")
+		_expect(base.albedo_color.s < 0.10,
+			"painted base remains neutral")
+	_expect(Detail.SKIRT_H <= 0.09 and Detail.SKIRT_T <= 0.03,
+		"base profile stays visually quiet without adding geometry")
+	var material_stats: Dictionary = Materials.stats()
+	_expect(int(material_stats.get("materials_cached", 99)) <= 9,
+		"museum warm-up does not generate unused catalogue materials")
 	museum.free()
 
 

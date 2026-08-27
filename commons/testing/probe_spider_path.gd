@@ -61,6 +61,7 @@ func _run() -> void:
 	if bool(c.call("_sees", player.global_position)):
 		_say("  FAIL it can see through the back wall")
 
+	var where: Array = []
 	var grinding := 0
 	var inside := 0
 	var samples := 0
@@ -73,14 +74,23 @@ func _run() -> void:
 		# pressed against the back wall, which is the loop
 		if p.x < -0.85 and absf(p.z) < 2.2:
 			grinding += 1
-		if p.x > -1.72 and p.x < -1.28 and absf(p.z) < 2.2:
+		# THE WALL'S ACTUAL EXTENT, not a padded band. -1.72..-1.28 was 2 cm
+		# wider than the wall on each side, so a body resting AGAINST the face
+		# counted as being inside it — which is how a correct animal produced
+		# seven "inside the wall" samples in one run of six.
+		if p.x > -1.70 and p.x < -1.30 and absf(p.z) < 2.20:
 			inside += 1
+			if where.size() < 6:
+				where.append(Vector2(p.x, p.z))
 
 	var pct: float = 100.0 * float(grinding) / float(maxi(1, samples))
 	_say("")
 	_say("  samples %d" % samples)
 	_say("  pressed against the back wall on %d of them (%.1f%%)" % [grinding, pct])
 	_say("  inside the back wall on %d" % inside)
+	for wv in where:
+		var w2: Vector2 = wv
+		_say("      at x %.3f z %.3f   (wall x -1.70..-1.30, arms at z +/-2.2)" % [w2.x, w2.y])
 	_say("  it ended at %s" % str(c.global_position))
 
 	var fails: Array = []

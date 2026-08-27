@@ -150,6 +150,16 @@ const RIG := "res://commons/hazards/octapod_crawler/csg_four_leg_walker.tscn"
 ## from a polite distance.
 @export var feed_reach: float = 0.26     ## how far it stands off before feeding
 @export var mouth_height: float = 0.11   ## where the mushroom disappears into
+## THE FEEDING ITSELF. Standing perfectly still for two seconds reads as a
+## stalled animal, not a busy one — the mushroom moved and nothing else did.
+## Three motions, all on the body and none on the feet, because the legs are
+## planted and should stay planted: it settles DOWN over the food, noses into
+## it, and gulps. The dip and the pitch both run on sin(u*PI), so they return
+## the animal exactly to its walking pose at the end of the meal.
+@export var feed_dip: float = 0.055      ## how far the body settles onto the food
+@export var feed_pitch_deg: float = 11.0 ## how far it noses down
+@export var feed_gulps: float = 3.0      ## swallows per meal
+@export var feed_gulp: float = 0.055     ## how much the body swells on each
 ## IT CANNOT SEE THROUGH A WALL (2026-08-27, Palle: "The spider should not be
 ## able to see through the wall, they are colliders, not the spider trying to
 ## get to a mushroom that is on the other side of the wall but the collider
@@ -174,15 +184,6 @@ const RIG := "res://commons/hazards/octapod_crawler/csg_four_leg_walker.tscn"
 ## thing it grew out of: the leg shaft it erupts from is 0.0564 in rig units at
 ## bone 2, so the sprout starts at 0.11 and keeps four fifths of its width each
 ## level instead of three quarters.
-@export var sprout_rule: String = "F[+F][&-F]"   ## 3^degree: 243 segments at five
-@export var sprout_angle_deg: float = 31.0
-@export var sprout_step: float = 1.05    ## RIG units — a leg bone is exactly 1.0
-@export var sprout_shrink: float = 0.80
-@export var sprout_width: float = 0.11
-@export var sprout_perturb: float = 0.28 ## so four legs are not four copies
-@export var sprout_bone: int = 2         ## which bone the branching erupts from
-@export var trunk_colour: Color = Color(0.16, 0.27, 0.13)
-@export var tip_colour: Color = Color(0.44, 0.71, 0.26)
 
 # the gait, in the authored rig's own units — scaled to world in _ready
 @export_group("Gait")
@@ -292,7 +293,6 @@ var _span_cache: float = 0.0
 var _span_settled: float = 0.0
 var _blocked_t: float = 0.0
 var _rooted: bool = false     # the first mushroom ends the hunt, permanently
-var _sprouts: Array = []      # one MultiMeshInstance3D per leg
 var _bait: Node3D = null      # the mushroom it is walking to
 var _path: Array = []         # world waypoints, nearest first
 var _path_t: float = 0.0      # time until the next rebuild
@@ -1003,6 +1003,16 @@ func _swallow(delta: float) -> void:
 	var left: float = clampf(_meal_t / maxf(0.01, feed_time), 0.0, 1.0)
 	m.scale = Vector3.ONE * maxf(0.04, left * left)
 
+	# and the animal feeds. `u` runs 0 -> 1 across the meal; every motion is
+	# shaped by sin(u*PI) so it begins and ends at the walking pose with no
+	# snap, whatever the meal is interrupted by.
+	var u: float = 1.0 - left
+	var arc: float = sin(u * PI)
+	position.y = _floor_y + _ride - feed_dip * arc
+	rotation.x = -deg_to_rad(feed_pitch_deg) * arc
+	var gulp: float = sin(u * TAU * feed_gulps) * feed_gulp * arc
+	scale = Vector3.ONE * crab_scale * (1.0 + gulp)
+
 
 ## Two seconds later. THE ROOTING MOVED TO THE END: Palle's earlier ruling was
 ## that a mushroom roots it, and the new one is that it eats, loops, and hunts
@@ -1011,6 +1021,10 @@ func _swallow(delta: float) -> void:
 ## its way up the degrees on its feet and roots when it is full. A garden is
 ## what a fed spider becomes, not what one mushroom makes.
 func _finish_meal() -> void:
+	# back to the walking pose, exactly, whatever the meal ended as
+	rotation.x = 0.0
+	scale = Vector3.ONE * crab_scale
+	position.y = _floor_y + _ride
 	var m: Node3D = _meal
 	_meal = null
 	_bait = null
@@ -1020,7 +1034,6 @@ func _finish_meal() -> void:
 	if got <= 0:
 		return
 	_degree = mini(graft_max, _degree + got)
-	_grow(_degree)
 	if _degree >= graft_max:
 		_root()
 	print("[head_crab] ate a mushroom — degree %d of %d%s" % [
@@ -1039,56 +1052,13 @@ func _root() -> void:
 	chase_speed = 0.0
 
 
-## Rebuild the branching at `degree`. The whole sprout is replaced rather than
-## extended, because LSystemSim.rewrite is deterministic: rewriting the same
-## axiom with the same rule N+1 times contains the N-times string, so the plant
-## grows outward rather than rearranging.
-func _grow(degree: int) -> void:
-	if _rig == null or not is_instance_valid(_rig) or degree <= 0:
-		return
-	for old_s in _sprouts:
-		if is_instance_valid(old_s):
-			(old_s as Node).queue_free()
-	_sprouts.clear()
-
-	var Sim = load("res://commons/lsystem_grammar/lsystem_sim.gd")
-	var Turtle = load("res://commons/lsystem_grammar/lsystem_turtle.gd")
-	if Sim == null or Turtle == null:
-		push_warning("head_crab: no lsystem grammar — nothing to grow")
-		return
-	var word: String = Sim.rewrite("F", {"F": sprout_rule}, degree)
-
-	var legs := 0
-	for skel in _rig.find_children("*", "Skeleton3D", true, false):
-		var attaches: Array = []
-		for c in (skel as Node).get_children():
-			if c is BoneAttachment3D:
-				attaches.append(c)
-		if attaches.is_empty():
-			continue
-		# erupt from partway down the leg, so the branching reads as the LEG
-		# becoming plant rather than as a bouquet tied to its foot
-		var host: Node = attaches[clampi(sprout_bone, 0, attaches.size() - 1)]
-		var walked: Dictionary = Turtle.walk(word, {
-			"angle_deg": sprout_angle_deg,
-			"step_len": sprout_step,
-			"step_shrink": sprout_shrink,
-			"base_width": sprout_width,
-			"width_shrink": sprout_shrink * 0.92,
-			"perturb": sprout_perturb,
-			"seed": 11 + legs * 7,
-		})
-		var mmi: MultiMeshInstance3D = Turtle.to_tubes(walked, trunk_colour, tip_colour, 6)
-		# _apply_finish repaints by albedo and reaches every CSGShape3D and
-		# MeshInstance3D under the rig. A MultiMeshInstance3D is neither, so it
-		# falls through — the meta says so out loud rather than relying on it.
-		mmi.set_meta("finish_role", "sprout")
-		mmi.name = "Sprout_%d" % legs
-		host.add_child(mmi)
-		_sprouts.append(mmi)
-		legs += 1
-	print("[head_crab] grew degree %d on %d leg(s) — %d segment(s) each" % [
-		degree, legs, word.count("F")])
+## THE BRANCHES ARE GONE (2026-08-27, Palle: "remove the branches from the
+## spider add eating animation"). The L-system sprouts — one MultiMeshInstance3D
+## per leg, 3^degree segments, rebuilt at every meal — were removed rather than
+## switched off, because an export nobody sets is a way of carrying a feature
+## around without admitting it is not in the game. The degrees themselves stay:
+## they still count the meals and they still decide when it roots. Recovering
+## the branching is one revert of this commit.
 
 
 ## THE BITE. Proximity, not a collider: this animal moves by writing position

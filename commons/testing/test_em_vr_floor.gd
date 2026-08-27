@@ -6,9 +6,9 @@ extends SceneTree
 ## PlayerBody on that deck. The fix stamps floor colliders GATED ON _vr.
 ## This test asserts the gate bites in both directions:
 ##   VR build      → floor-level CollisionShape3D count is large (the deck is a body)
-##   desktop build → the SAME count (2026-08-18, "one museum in both modes": the
-##                   deck collider is stamped always; the desktop walker clamps y
-##                   and never meets it — parity, not a gate, is what is asserted)
+##   desktop build → the SAME CURRENT-HALL count. VR now keeps lightweight
+##                   neighbour shells for spatial safety, so counting the whole
+##                   scene would intentionally count two or three decks.
 ## Floor-level means shape position y < 0.0: floor slabs sit at -0.1 and the
 ## balcony catch slab at -4.1, while every pre-existing collider (walls 1.5,
 ## podiums 0.1, plinths 0.3, parapets 0.55) sits at or above 0.1.
@@ -58,7 +58,23 @@ func _floor_cols(vr: bool) -> int:
 	get_root().add_child(inst)
 	for i in range(5):
 		await create_timer(0.2).timeout
-	var n: int = _count(inst)
+	# Compare one hall to one hall. The VR scene deliberately carries neighbour
+	# architecture shells now; their extra floors are the feature this regression
+	# must not mistake for a desktop/VR parity failure.
+	var count_root: Node = inst
+	if vr:
+		var current_v: Variant = inst.get("_vr_current_node")
+		if current_v != null and is_instance_valid(current_v):
+			count_root = current_v as Node
+		else:
+			var vr_segs: Array = inst.get("_segments")
+			if not vr_segs.is_empty():
+				count_root = (vr_segs[0] as Dictionary).get("node") as Node
+	else:
+		var desk_segs: Array = inst.get("_segments")
+		if not desk_segs.is_empty():
+			count_root = (desk_segs[0] as Dictionary).get("node") as Node
+	var n: int = _count(count_root)
 	get_root().remove_child(inst)
 	inst.queue_free()
 	if rig != null:
