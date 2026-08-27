@@ -65,6 +65,11 @@ so the retire swap runs from clicks, not guesses. Built by
 tools/build_concept_gallery.py forces + doc/forces_concept_additions.json (the hand
 layer naming the seven new objects' concepts).
 
+**Rolled out (2026-08-27, same day): 21 of 22.** localhost:3003/concept-galleries is
+the hub - one curation gallery per sequence, 1,851 tiles total, grouped into
+principle-sections with live per-section click censuses. formfinding waits on its
+concept map (plan step 3). read_concept_selections.py takes any sequence id.
+
 ## B · The plan: this list, for all 22 sequences
 
 **What already exists (audit 2026-08-27).** 21 of 22 spine sequences have a

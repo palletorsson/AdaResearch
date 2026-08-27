@@ -55,9 +55,18 @@ def placed_census(seq_id: str) -> dict[str, int]:
     """Token -> placement count across the sequence's CURRENT maps."""
     seqf = os.path.join(ROOT, "commons", "maps", "sequences", f"{seq_id}.json")
     doc = json.load(open(seqf, encoding="utf-8"))
-    seq = doc["sequences"][seq_id]
+    # sequence files come in two shapes: {"sequences": {id: {...}}} and flat {...};
+    # map entries come as strings or as {"name": ...} dicts. Tolerate all four.
+    seq = doc.get("sequences", {}).get(seq_id) if isinstance(doc.get("sequences"), dict) else None
+    if seq is None and isinstance(doc.get("sequences"), dict) and len(doc["sequences"]) == 1:
+        seq = next(iter(doc["sequences"].values()))
+    if seq is None:
+        seq = doc
     counts: dict[str, int] = {}
-    for name in seq.get("maps", []):
+    map_names = []
+    for m in seq.get("maps", []):
+        map_names.append(m if isinstance(m, str) else (m.get("name") or m.get("map") or ""))
+    for name in map_names:
         mp = os.path.join(ROOT, "commons", "maps", str(name), "map_data.json")
         if not os.path.exists(mp):
             continue
