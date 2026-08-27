@@ -176,18 +176,45 @@ func _ready() -> void:
 
 ## Map tokens: `head_crab:0:0#scale:0.18#speed:1.2#detect:12`
 func apply_grid_config(config: Dictionary) -> void:
+	# A map token tunes the animal:
+	#   head_crab:0:0#scale:0.11#speed:1.2#detect:12#accent:7fd8cf
+	#
+	# THE ACCENT HEX CARRIES NO '#'. That character is the token's own config
+	# separator, so a value written as `accent:#7fd8cf` is split BEFORE the
+	# parser ever sees it and arrives as two junk keys ("accent:" and "7fd8cf",
+	# both true) — the colour is dropped in silence, exactly the failure mode
+	# the typed-set() audit found in 54 artifacts. Bare hex is the only form
+	# that survives the split, and a leading '#' is accepted anyway for a hand
+	# that types one.
 	if config.has("scale"):
-		crab_scale = clampf(float(str(config["scale"])), 0.03, 1.0)
+		crab_scale = clampf(_cfg_num(config["scale"], crab_scale), 0.03, 1.0)
 	if config.has("speed"):
-		chase_speed = float(str(config["speed"]))
+		chase_speed = _cfg_num(config["speed"], chase_speed)
 	if config.has("detect"):
-		detect_m = float(str(config["detect"]))
+		detect_m = _cfg_num(config["detect"], detect_m)
 	if config.has("patrol"):
-		patrol_speed = float(str(config["patrol"]))
-	if config.has("accent"):
-		finish_accent = Color(str(config["accent"]))
+		patrol_speed = _cfg_num(config["patrol"], patrol_speed)
 	if config.has("glow"):
-		finish_glow = float(str(config["glow"]))
+		finish_glow = _cfg_num(config["glow"], finish_glow)
+	if config.has("accent"):
+		finish_accent = _cfg_colour(config["accent"], finish_accent)
+
+
+## a token value is always TEXT, and a valueless key arrives as `true` —
+## float("true") is 0.0, which would silently shrink the animal to nothing
+func _cfg_num(v: Variant, fallback: float) -> float:
+	var s := str(v).strip_edges()
+	return float(s) if s.is_valid_float() else fallback
+
+
+func _cfg_colour(v: Variant, fallback: Color) -> Color:
+	var s := str(v).strip_edges()
+	if s.begins_with("#"):
+		s = s.substr(1)
+	if not Color.html_is_valid(s):
+		push_warning("head_crab: '%s' is not a colour — accent unchanged" % s)
+		return fallback
+	return Color.html(s)
 
 
 func _build_rig() -> void:
