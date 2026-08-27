@@ -3850,6 +3850,77 @@
 				"footprint_cells": 2,
 				"clearance_m": 0.6
 			}
+		},
+		"nail_bar": {
+			"name": "Nail Bar",
+			"class_name": "NailBar",
+			"scene": "res://commons/artifacts/nail_bar/nail_bar.tscn",
+			"description": "The Skin hero: albedo as manicure - a salon rack of giant lacquered nails under one honest white lamp, each bottle below matching its nail. Skin is the colour a thing answers light with, and the salon sells the answer. Category-heroes pass, 2026-08-27.",
+			"category": "color",
+			"tags": [
+				"color",
+				"albedo",
+				"skin",
+				"surreal",
+				"queer"
+			],
+			"spatial_needs": {
+				"footprint_cells": 3,
+				"clearance_m": 0.6
+			}
+		},
+		"stained_curtain": {
+			"name": "Stained Curtain",
+			"class_name": "StainedCurtain",
+			"scene": "res://commons/artifacts/stained_curtain/stained_curtain.tscn",
+			"description": "The Through hero: a bead-curtain of tinted glass strips, alpha graded along the row - overlaps multiply, richer and darker, never brighter, and the floor wears the pooled receipts. Transparency is a toll road. Category-heroes pass, 2026-08-27.",
+			"category": "color",
+			"tags": [
+				"color",
+				"alpha",
+				"transparency",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 2,
+				"clearance_m": 0.6
+			}
+		},
+		"albers_rugs": {
+			"name": "Albers Rugs",
+			"class_name": "AlbersRugs",
+			"scene": "res://commons/artifacts/albers_rugs/albers_rugs.tscn",
+			"description": "The Ground hero: two identical grey vases on red and green rugs, joined by a dead-level balance beam that swears they are the same - the eye files its complaint anyway. Simultaneous contrast as a domestic dispute. Category-heroes pass, 2026-08-27.",
+			"category": "color",
+			"tags": [
+				"color",
+				"contrast",
+				"albers",
+				"ground",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 3,
+				"clearance_m": 0.6
+			}
+		},
+		"bottled_weather": {
+			"name": "Bottled Weather",
+			"class_name": "BottledWeather",
+			"scene": "res://commons/artifacts/bottled_weather/bottled_weather.tscn",
+			"description": "The Room hero: a bell jar of complete miniature weather - painted sky gradient, fog lenses, an amber sun and a tiny bench facing a sunset it will never leave. Environment colour, picked up at last. Category-heroes pass, 2026-08-27.",
+			"category": "color",
+			"tags": [
+				"color",
+				"environment",
+				"fog",
+				"sky",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 2,
+				"clearance_m": 0.6
+			}
 		}
 	},
 	"registry_info": {

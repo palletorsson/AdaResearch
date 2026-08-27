@@ -97,6 +97,26 @@ localhost:3003/transformation-concepts (102 tiles):
 
 Probe 7/7 on first run; registered in `transforms.json` (22 → 29).
 
+## A3 · Color: reconciliation + four (2026-08-27, same day)
+
+Color's heroes largely predated this pass — the morning's taxonomy fold built eight,
+one per rung (one_bulb_room, three_taps, hue_carousel, neon_garden, the_dressing_room,
+two_roads, complementary_couple, glitch_mirror) — but none were wired into the
+13-concept canon. This pass mapped all eight onto their concepts (neon_garden lands on
+Glow, which had ZERO members) and built the four the eight left bare:
+
+| category | hero | move |
+|---|---|---|
+| Skin | **nail_bar** — albedo as manicure: giant lacquered nails under one honest lamp, the bottle sold below (the truth line names paint and nails; taken literally) | NEW |
+| Through | **stained_curtain** — a bead-curtain of tinted glass, alpha graded; overlaps multiply richer and darker, the floor wears the receipts | NEW |
+| The ground | **albers_rugs** — two identical grey vases on red and green rugs, a dead-level beam swearing they match; the eye files its complaint (and the effect photographs) | NEW |
+| The room | **bottled_weather** — a bell jar of miniature weather: painted sky, fog lenses, an amber sun, a bench facing a sunset it will never leave | NEW |
+
+Gallery: localhost:3003/color-concepts, 47 tiles, every section opening on its hero.
+Registered in `color.json` (43 → 47 — note: this registry ends in `registry_info`, so
+the surgical seam is before that key, not at file end; the first append refused
+correctly). Probe 4/4 first run.
+
 ## B · The plan: this list, for all 22 sequences
 
 **What already exists (audit 2026-08-27).** 21 of 22 spine sequences have a

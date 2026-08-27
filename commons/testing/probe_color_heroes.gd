@@ -13,7 +13,7 @@
 ##     <godot> --headless --path . --xr-mode off --script res://commons/testing/probe_color_heroes.gd
 extends SceneTree
 
-const TOKENS := ["one_bulb_room", "three_taps", "hue_carousel", "neon_garden", "the_dressing_room", "two_roads", "complementary_couple", "glitch_mirror"]
+const TOKENS := ["nail_bar", "stained_curtain", "albers_rugs", "bottled_weather"]
 const SETTLE_FRAMES := 30   # ~0.5 s: the probe_aabb_hogs lesson — two frames photographs a half-built artifact
 
 var _report := {}
