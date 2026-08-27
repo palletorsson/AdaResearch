@@ -15551,12 +15551,33 @@ const TRUNK_BRANCHES := "res://commons/data/trunk_branches.json"
 ## The museum says it: the body's line under its number on the standing
 ## plaque, the pearl's line on a plaque at the segment's threshold.
 var _speak_cache: Dictionary = {}     # "chapter|pearl" -> {speak, says}
+var _speak_trunk_at: int = -1         # the trunk's modified time the cache was built from
 func _speak_for(chapter: String, pearl: String) -> Dictionary:
 	var key := "%s|%s" % [chapter, pearl]
+	var path: String = _shipped(TRUNK_BRANCHES)
+	# THE CACHE OUTLIVED ITS SOURCE (2026-08-27, Palle: "if I change wall-map
+	# will it change the godot endless museum?").
+	#
+	# For the adoption and the hang, yes — those are re-read from the book on
+	# every build. For the SENTENCE, no: it comes from the trunk through here,
+	# and this dictionary was filled once per hall and never emptied. So a line
+	# written at the desk reached the book, reached the trunk through
+	# book.py compile, and then sat there while a running museum kept saying the
+	# old one — through a rebuild, through walking away and back, until the
+	# process was restarted. The answer to the question was "only if you quit
+	# first", and nothing said so.
+	#
+	# The trunk's own modified time settles it: newer file, empty cache. One stat
+	# per lookup against a cache that saves parsing an 837 KB document.
+	var at: int = int(FileAccess.get_modified_time(path)) if FileAccess.file_exists(path) else -1
+	if at != _speak_trunk_at:
+		if not _speak_cache.is_empty():
+			print("[em-speak] the trunk changed — %d cached hall(s) dropped, the walls will re-read" % _speak_cache.size())
+		_speak_cache.clear()
+		_speak_trunk_at = at
 	if _speak_cache.has(key):
 		return _speak_cache[key]
 	var out: Dictionary = {"speak": "", "says": {}}
-	var path: String = _shipped(TRUNK_BRANCHES)
 	if FileAccess.file_exists(path):
 		var doc: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
 		if doc is Dictionary:
