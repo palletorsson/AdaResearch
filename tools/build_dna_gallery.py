@@ -21,9 +21,20 @@ Usage:
   python tools/build_dna_gallery.py --slug=exhibits-dna --tokens=dark_sphere,science_screen
   python tools/build_dna_gallery.py --slug=exhibits-dna --tokens=... --max=16
   python tools/build_dna_gallery.py --slug=exhibits-dna --only=dark_sphere   # rebuild one row
+  python tools/build_dna_gallery.py --slug=... --singletons=prop_spigot,...  # portraits, unswept
+
+SINGLETONS (2026-08-27). A gallery is a family portrait as well as an experiment, and a
+family can contain members whose argument is TIME - prop_spigot's rain, parlour_orbits'
+orbits - for which any declared still-axis would manufacture the info_board failure
+(N identical tiles dressed as an experiment). --singletons includes such members as ONE
+frame each, labelled as unswept and unjudged, taken from the artifact's standing
+capture_multi_angle portrait (front_mid) rather than the sweep camera. The critic
+ignores them: no axis, no pairs, no verdict. An artifact WITH declared axes is refused
+here - it belongs in --tokens.
 """
 from __future__ import annotations
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -124,6 +135,7 @@ def main() -> int:
     slug = ""
     tokens: list[str] = []
     only: set[str] = set()
+    singletons: list[str] = []
     # WHY 16 AND NOT 9. The cap bounds the AXIS CROSS PRODUCT, and the corpus's standard
     # shape is two axes of four values - exactly 16. At 9 that shape was silently swept
     # 4x2: the second axis lost half its values, the gallery published a full-looking row,
@@ -142,6 +154,8 @@ def main() -> int:
             tokens = [t.strip() for t in a.split("=", 1)[1].split(",") if t.strip()]
         elif a.startswith("--only="):
             only = {t.strip() for t in a.split("=", 1)[1].split(",") if t.strip()}
+        elif a.startswith("--singletons="):
+            singletons = [t.strip() for t in a.split("=", 1)[1].split(",") if t.strip()]
         elif a.startswith("--max="):
             cap = int(a.split("=", 1)[1])
         elif a.startswith("--title="):
@@ -165,7 +179,9 @@ def main() -> int:
             try:
                 old = json.loads(mf_old.read_text(encoding="utf-8"))
                 kept = old.get("entries", [])
-                entries = [e for e in kept if str(e.get("prop")) not in only]
+                entries = [e for e in kept
+                           if str(e.get("prop")) not in only
+                           and str(e.get("prop")) not in singletons]
                 print(f"  (keeping {len(entries)} variant(s) from artifacts not rebuilt)")
                 # Carry the denominator forward with the frames it belongs to, or an
                 # --only rebuild would silently promote another artifact's partial axis
@@ -239,6 +255,39 @@ def main() -> int:
                 "dna": f["params"],
             })
         print(f"  {token}: {len(frames)} variant(s)")
+
+    for token in singletons:
+        found = reg.get(token)
+        if not found:
+            print(f"  {token}: not in registry - singleton refused")
+            continue
+        e = found[0] if isinstance(found, tuple) else found
+        if ((e.get("dna") or {}).get("axes") or {}):
+            print(f"  {token}: declares dna.axes - belongs in --tokens, singleton refused")
+            continue
+        src_png = (Path(os.path.expandvars("%APPDATA%")) / "Godot" / "app_userdata"
+                   / "Ada Research Zero One" / "multi_shots" / token / "front_mid.png")
+        if not src_png.exists():
+            print(f"  {token}: no standing portrait - run: godot --path . --xr-mode off "
+                  f"--no-window --script res://commons/testing/capture_multi_angle.gd -- "
+                  f"--mode=artifact --target={token}")
+            continue
+        fid = f"{token}__shipped"
+        shutil.copyfile(src_png, out / f"{fid}.png")
+        entries.append({
+            "id": fid,
+            "prop": token,
+            "index": 0,
+            "label": "shipped - no axis declared",
+            "subtitle": str(e.get("name", token)),
+            "notes": (f"{token} - SINGLETON, unswept and unjudged: no dna.axes, because its "
+                      f"argument is TIME and a still-axis would manufacture identical tiles. "
+                      f"Portrait from capture_multi_angle (front_mid), not the sweep camera."
+                      f"  \u00b7  {str(e.get('description', '') or '')[:150]}"),
+            "image": f"/{slug}/{fid}.png",
+            "dna": {},
+        })
+        print(f"  {token}: singleton portrait")
 
     order = {t: i for i, t in enumerate(tokens)}
     entries.sort(key=lambda x: (order.get(str(x.get("prop")), 99), str(x.get("id"))))
