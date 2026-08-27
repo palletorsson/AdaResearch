@@ -1,59 +1,151 @@
 {
-	"version": "1.0",
-	"format": "lab_artifacts",
-	"description": "Graph-theory artifacts.",
 	"artifacts": {
-		"node_snap": {
+		"family_chandelier": {
+			"name": "Family Chandelier",
+			"class_name": "FamilyChandelier",
+			"scene": "res://commons/artifacts/family_chandelier/family_chandelier.tscn",
+			"description": "A chandelier that IS a scene tree: grab the button and one mid node swings - and its whole subtree swings rigidly with it, because children live in their parent's transform. add_child made brass. Graph taxonomy rung 2, 2026-08-27.",
 			"category": "graphtheory",
-			"complexity": "intermediate",
-			"description": "The graph-theory seam. Real space is continuous - stand anywhere, walk any direction. A graph keeps only nodes and edges, a finite skeleton over the continuum. Amber: the desire line, the straight route across open ground. Blue: the route the graph permits - node to node along edges, zigzagging and longer, because the shortcut through the middle was never stored. The graph is the map admitting it kept only the crossings.",
-			"dev_themes": [
-				"digital_bias",
-				"seam"
-			],
-			"include_in_map_data": true,
-			"interaction": "ambient",
-			"lookup_name": "node_snap",
-			"map_ready": true,
-			"map_sequences": [
-				"graphtheory"
-			],
-			"name": "Node Snap",
-			"qfep_connection": "A station in the bias landscape (doc/SEAM_PER_SEQUENCE.md); the digital-bias seam for graphtheory. Bias is conserved; show the seam.",
-			"scene": "res://algorithms/graphtheory/node_snap/node_snap.tscn",
-			"sequence": "graphtheory",
 			"tags": [
 				"graph",
-				"nodes",
-				"edges",
-				"pathfinding",
-				"discretization",
-				"seam",
-				"digital_bias"
+				"tree",
+				"scene_tree",
+				"surreal",
+				"hero"
 			],
-			"measurements": {
-				"aabb_size": [
-					0.86,
-					0.78,
-					0.04
-				],
-				"aabb_center": [
-					0.0,
-					0.1,
-					0.0
-				],
-				"grid_cells": [
-					1,
-					1
-				],
-				"max_dimension_m": 0.86,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				1,
-				1,
-				1
-			]
+			"spatial_needs": {
+				"footprint_cells": 3,
+				"clearance_m": 0.6
+			}
+		},
+		"postman_of_paths": {
+			"name": "Postman Of Paths",
+			"class_name": "PostmanOfPaths",
+			"scene": "res://commons/artifacts/postman_of_paths/postman_of_paths.tscn",
+			"description": "A letter walking a NodePath along glowing ropes between mailboxes - up through '..', down through names, the address printed as it goes. To reach is to traverse. Graph taxonomy rung 3, 2026-08-27.",
+			"category": "graphtheory",
+			"tags": [
+				"graph",
+				"nodepath",
+				"address",
+				"surreal",
+				"hero"
+			],
+			"spatial_needs": {
+				"footprint_cells": 3,
+				"clearance_m": 0.6
+			}
+		},
+		"ouroboros_signals": {
+			"name": "Ouroboros Signals",
+			"class_name": "OuroborosSignals",
+			"scene": "res://commons/artifacts/ouroboros_signals/ouroboros_signals.tscn",
+			"description": "Three telephones in a ring, a call circling forever - connect() permits the cycle the tree refuses, shown beside a small rigid tree with one dashed refused edge. Graph taxonomy rung 4, 2026-08-27.",
+			"category": "graphtheory",
+			"tags": [
+				"graph",
+				"cycle",
+				"signals",
+				"surreal",
+				"hero"
+			],
+			"spatial_needs": {
+				"footprint_cells": 3,
+				"clearance_m": 0.6
+			}
+		},
+		"wallflower_and_star": {
+			"name": "Wallflower And Star",
+			"class_name": "WallflowerAndStar",
+			"scene": "res://commons/artifacts/wallflower_and_star/wallflower_and_star.tscn",
+			"description": "A dance floor: one node holding twelve ribbons, a wallflower holding one. Degree as social gravity, counted at their feet. Graph taxonomy rung 6, 2026-08-27.",
+			"category": "graphtheory",
+			"tags": [
+				"graph",
+				"degree",
+				"surreal",
+				"hero"
+			],
+			"spatial_needs": {
+				"footprint_cells": 3,
+				"clearance_m": 0.6
+			}
+		},
+		"archipelago_wedding": {
+			"name": "Archipelago Wedding",
+			"class_name": "ArchipelagoWedding",
+			"scene": "res://commons/artifacts/archipelago_wedding/archipelago_wedding.tscn",
+			"description": "Two islands of lamps, each glowing its component's colour - press the button and a drawbridge edge marries them into one gold. Union-find as a wedding. Graph taxonomy rung 7, 2026-08-27.",
+			"category": "graphtheory",
+			"tags": [
+				"graph",
+				"components",
+				"connectivity",
+				"interactive",
+				"surreal",
+				"hero"
+			],
+			"spatial_needs": {
+				"footprint_cells": 4,
+				"clearance_m": 0.6
+			}
+		},
+		"two_travelers": {
+			"name": "Two Travelers",
+			"class_name": "TwoTravelers",
+			"scene": "res://commons/artifacts/two_travelers/two_travelers.tscn",
+			"description": "One tree, two visiting orders taking turns: the tide lights it level by level (BFS), the diver commits to a branch and backtracks (DFS). Every algorithm is an itinerary. Graph taxonomy rung 9, 2026-08-27.",
+			"category": "graphtheory",
+			"tags": [
+				"graph",
+				"bfs",
+				"dfs",
+				"traversal",
+				"surreal",
+				"hero"
+			],
+			"spatial_needs": {
+				"footprint_cells": 3,
+				"clearance_m": 0.6
+			}
+		},
+		"impatient_river": {
+			"name": "Impatient River",
+			"class_name": "ImpatientRiver",
+			"scene": "res://commons/artifacts/impatient_river/impatient_river.tscn",
+			"description": "A spark commutes across stepping stones on the live AStar3D shortest path; sink a stone and it visibly learns a new river. Shortest is a fact about the whole graph. Graph taxonomy rung 10, 2026-08-27.",
+			"category": "graphtheory",
+			"tags": [
+				"graph",
+				"astar",
+				"shortest_path",
+				"interactive",
+				"surreal",
+				"hero"
+			],
+			"spatial_needs": {
+				"footprint_cells": 4,
+				"clearance_m": 0.6
+			}
+		},
+		"the_tree_you_are_in": {
+			"name": "The Tree You Are In",
+			"class_name": "TheTreeYouAreIn",
+			"scene": "res://commons/artifacts/the_tree_you_are_in/the_tree_you_are_in.tscn",
+			"description": "A pedestal projecting a live miniature of its OWN runtime subtree, rebuilt every second from get_children() - the mirror contains the projection as one honest ellipsis node. You have been standing in a graph all along. Graph taxonomy rung 13, 2026-08-27.",
+			"category": "graphtheory",
+			"tags": [
+				"graph",
+				"scene_tree",
+				"mirror",
+				"self_reference",
+				"surreal",
+				"hero"
+			],
+			"spatial_needs": {
+				"footprint_cells": 2,
+				"clearance_m": 0.6
+			}
 		}
 	}
 }

@@ -23,6 +23,64 @@ DOC = os.path.join(ROOT, "doc")
 # ── per-domain config ─────────────────────────────────────────────────────────────────────────
 # concept = (key, act, truth, [strong keywords], [weak keywords]). Order = specific first.
 CONFIG = {
+ "graphtheory": {
+  # THE GRAPH TAXONOMY (2026-08-27). The cheat-code is the deepest in the corpus: THE
+  # SCENE TREE IS ALREADY A GRAPH. Node/add_child is the engine's home data structure -
+  # rooted, directed, acyclic BY REFUSAL (reparent under your own descendant and it
+  # errors); NodePath is an address along edges; signals lay a second graph over the
+  # tree and permit the cycles the tree refuses; AStar3D is the engine saying
+  # "shortest path" out loud; GraphEdit means the editor itself ships a graph editor.
+  # Rungs ordered by existence: a pair, then the home tree, then everything the tree
+  # cannot say. Closes on the mirror: the artifact that renders its own subtree.
+  # The June map was algorithm-name soup (one tile per named algorithm); this replaces
+  # filing with teaching. Existing bodies arrive via the additions hand layer.
+  "title": "Graph theory - the scene tree is already a graph",
+  "registries": ["graphtheory.json"],
+  "applied_kw": ["chandelier", "postman", "river", "travelers"],
+  "large_kw": ["archipelago", "room", "basilica"],
+  "concepts": [
+   ("The pair", "I - before everything",
+    "a node and an edge: a thing, and a link between things. Everything else is bookkeeping.",
+    ["graphspace", "pair", "node_edge"], ["node", "edge"]),
+   ("The tree", "II - the engine's home graph",
+    "add_child: rooted, directed, acyclic by refusal. Move a parent and the whole line of descent moves - transform is inherited.",
+    ["chandelier", "family", "tree"], ["parent", "child"]),
+   ("The address", "II - the engine's home graph",
+    "NodePath: '..' climbs, names descend. To reach a node is to WALK the edges - an address is a route, not a location.",
+    ["postman", "path", "address", "nodepath"], ["mail", "route"]),
+   ("The cycle", "III - beyond the tree",
+    "what the tree refuses, connect() permits: signals close rings, and a call can outlive its caller.",
+    ["ouroboros", "cycle", "ring"], ["loop", "signal"]),
+   ("Direction", "III - beyond the tree",
+    "parent to child is one-way. A directed graph without cycles can be SORTED into an order where every arrow points forward.",
+    ["topological", "direction", "sort"], ["dag", "order"]),
+   ("Degree", "IV - shape",
+    "how many edges meet you. The star holds twelve hands, the wallflower one - remove the star and twelve dances end.",
+    ["wallflower", "star", "degree", "hub"], ["dance", "popular"]),
+   ("Components", "IV - shape",
+    "islands until one edge marries them. Connectivity is a fact about the WHOLE graph, recomputed the moment a bridge opens.",
+    ["archipelago", "wedding", "component", "connect"], ["island", "bridge"]),
+   ("The layout", "IV - shape",
+    "a graph has no WHERE until physics gives it one: springs on edges, repulsion on nodes, and shape emerges from relation.",
+    ["force_directed", "layout", "basilica", "spring"], ["embed", "physics"]),
+   ("Traversal", "V - walking",
+    "same tree, two orders: the tide visits by distance (BFS), the diver commits to a branch (DFS). Every algorithm is an itinerary.",
+    ["travelers", "traversal", "bfs", "dfs", "tide", "diver"], ["visit", "walk"]),
+   ("The shortest path", "V - walking",
+    "AStar3D: shortest is a fact about the whole graph. Sink one stone and the spark learns a new river.",
+    ["river", "impatient", "astar", "shortest", "pathfinding"], ["spark", "stone"]),
+   ("The seven bridges", "V - walking",
+    "Konigsberg, 1736: cross every bridge exactly once - impossible, and the proof needed only DEGREES. The founding story.",
+    ["konigsberg", "bridge", "euler"], ["seven"]),
+   ("The skeleton and the pipes", "VI - the economy",
+    "the cheapest tree that still touches everyone (MST), and the most a network can carry (flow, cut, matching) - graphs with prices on their edges.",
+    ["mst", "spanning", "flow", "matching", "karger", "edmonds", "relabel"], ["network", "cost"]),
+   ("The graph you are in", "VII - the mirror",
+    "get_children(): you have been standing in a graph all along. This map, this artifact, you - nodes under one root.",
+    ["tree_you_are_in", "mirror", "self"], ["subtree", "reflection"]),
+  ],
+  "catch_all": ("Off the ladder", "meta", "graph-registry artifacts the taxonomy does not yet claim. A chip decides their fate."),
+ },
  "color": {
   # THE COLOR TAXONOMY (2026-08-27, Palle: "color does not teach color... order them
   # into a taxonomy... what concept we need to introduce to make an object exist. The

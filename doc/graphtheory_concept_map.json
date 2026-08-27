@@ -1,744 +1,491 @@
 {
-  "title": "graphtheory",
+  "title": "Graph theory - the scene tree is already a graph",
   "domain": "graphtheory",
-  "note": "Ontology derived from the sequence's maps (no beat score; each map is a concept).",
+  "note": "Auto-classified by tools/build_concept_map.py — heuristic keyword scoring, tier by footprint.",
   "acts": [],
   "concepts": [
-    "Edmonds Algorithm",
-    "Force Directed 3d",
-    "Force Directed Graph Layout",
-    "Graphspace",
-    "Graphspace 3d",
-    "Karger s Algorithm",
-    "Kosaraju s Algorithm",
-    "Maximum Flow Algorithms",
-    "Minimum Spanning Tree",
-    "Network Analysis",
-    "Path Finding 3d",
-    "Push Relabel Algorithm",
-    "Tarjan s Algorithm",
-    "Topological Sort",
-    "· palette (unplaced)"
+    "The pair",
+    "The tree",
+    "The address",
+    "The cycle",
+    "Direction",
+    "Degree",
+    "Components",
+    "The layout",
+    "Traversal",
+    "The shortest path",
+    "The seven bridges",
+    "The skeleton and the pipes",
+    "The graph you are in"
   ],
   "concept_meta": {
-    "Edmonds Algorithm": {
-      "truth": "Edmonds Algorithm",
-      "map": "GraphTheory_Edmonds_Algorithm",
-      "act": "Act I",
+    "The pair": {
+      "act": "I - before everything",
+      "truth": "a node and an edge: a thing, and a link between things. Everything else is bookkeeping.",
       "tiers": {
         "small": [],
         "medium": [],
-        "large": [
-          "edmonds_algorithm"
-        ],
+        "large": [],
         "applied": []
       },
-      "count": 1
+      "count": 0,
+      "thin": true
     },
-    "Force Directed 3d": {
-      "truth": "Force Directed 3d",
-      "map": "GraphTheory_Force_Directed_3d",
-      "act": "Act I",
+    "The tree": {
+      "act": "II - the engine's home graph",
+      "truth": "add_child: rooted, directed, acyclic by refusal. Move a parent and the whole line of descent moves - transform is inherited.",
       "tiers": {
         "small": [],
         "medium": [],
-        "large": [
-          "forcedirected3d"
-        ],
-        "applied": []
+        "large": [],
+        "applied": [
+          "family_chandelier"
+        ]
       },
-      "count": 1
+      "count": 1,
+      "thin": true
     },
-    "Force Directed Graph Layout": {
-      "truth": "Force Directed Graph Layout",
-      "map": "GraphTheory_Force_Directed_Graph_Layout",
-      "act": "Act I",
+    "The address": {
+      "act": "II - the engine's home graph",
+      "truth": "NodePath: '..' climbs, names descend. To reach a node is to WALK the edges - an address is a route, not a location.",
       "tiers": {
         "small": [],
         "medium": [],
-        "large": [
-          "force_directed_layout",
-          "graph_basilica"
-        ],
-        "applied": []
+        "large": [],
+        "applied": [
+          "postman_of_paths"
+        ]
       },
-      "count": 2
+      "count": 1,
+      "thin": true
     },
-    "Graphspace": {
-      "truth": "Graphspace",
-      "map": "GraphTheory_Graphspace",
-      "act": "Act I",
+    "The cycle": {
+      "act": "III - beyond the tree",
+      "truth": "what the tree refuses, connect() permits: signals close rings, and a call can outlive its caller.",
       "tiers": {
         "small": [],
-        "medium": [],
-        "large": [
-          "graphspace",
-          "KonigsbergBridge"
-        ],
-        "applied": []
-      },
-      "count": 2
-    },
-    "Graphspace 3d": {
-      "truth": "Graphspace 3d",
-      "map": "GraphTheory_Graphspace_3d",
-      "act": "Act II",
-      "tiers": {
-        "small": [],
-        "medium": [],
-        "large": [
-          "graphspace3d"
-        ],
-        "applied": []
-      },
-      "count": 1
-    },
-    "Karger s Algorithm": {
-      "truth": "Karger s Algorithm",
-      "map": "GraphTheory_Karger_s_Algorithm",
-      "act": "Act II",
-      "tiers": {
-        "small": [],
-        "medium": [],
-        "large": [
-          "karger_algorithm"
-        ],
-        "applied": []
-      },
-      "count": 1
-    },
-    "Kosaraju s Algorithm": {
-      "truth": "Kosaraju s Algorithm",
-      "map": "GraphTheory_Kosaraju_s_Algorithm",
-      "act": "Act II",
-      "tiers": {
-        "small": [],
-        "medium": [],
-        "large": [
-          "kosaraju_algorithm"
-        ],
-        "applied": []
-      },
-      "count": 1
-    },
-    "Maximum Flow Algorithms": {
-      "truth": "Maximum Flow Algorithms",
-      "map": "GraphTheory_Maximum_Flow_Algorithms",
-      "act": "Act III",
-      "tiers": {
-        "small": [],
-        "medium": [],
-        "large": [
-          "env_one"
-        ],
-        "applied": []
-      },
-      "count": 1
-    },
-    "Minimum Spanning Tree": {
-      "truth": "Minimum Spanning Tree",
-      "map": "GraphTheory_Minimum_Spanning_Tree",
-      "act": "Act III",
-      "tiers": {
-        "small": [],
-        "medium": [],
-        "large": [
-          "mst_visualization"
-        ],
-        "applied": []
-      },
-      "count": 1
-    },
-    "Network Analysis": {
-      "truth": "Network Analysis",
-      "map": "GraphTheory_Network_Analysis",
-      "act": "Act III",
-      "tiers": {
-        "small": [],
-        "medium": [],
-        "large": [
-          "networkflow3d",
-          "network_analysis"
-        ],
-        "applied": []
-      },
-      "count": 2
-    },
-    "Path Finding 3d": {
-      "truth": "Path Finding 3d",
-      "map": "GraphTheory_Path_Finding_3d",
-      "act": "Act III",
-      "tiers": {
-        "small": [],
-        "medium": [],
-        "large": [
-          "pathfinding3d"
-        ],
-        "applied": []
-      },
-      "count": 1
-    },
-    "Push Relabel Algorithm": {
-      "truth": "Push Relabel Algorithm",
-      "map": "GraphTheory_Push_Relabel_Algorithm",
-      "act": "Act IV",
-      "tiers": {
-        "small": [],
-        "medium": [],
-        "large": [
-          "push_relabel_algorithm"
-        ],
-        "applied": []
-      },
-      "count": 1
-    },
-    "Tarjan s Algorithm": {
-      "truth": "Tarjan s Algorithm",
-      "map": "GraphTheory_Tarjan_s_Algorithm",
-      "act": "Act IV",
-      "tiers": {
-        "small": [],
-        "medium": [],
-        "large": [
-          "tarjan_algorithm"
-        ],
-        "applied": []
-      },
-      "count": 1
-    },
-    "Topological Sort": {
-      "truth": "Topological Sort",
-      "map": "GraphTheory_Topological_Sort",
-      "act": "Act IV",
-      "tiers": {
-        "small": [
-          "topological_sort_algorithm"
-        ],
         "medium": [
-          "topological_sort"
+          "ouroboros_signals"
         ],
         "large": [],
         "applied": []
       },
-      "count": 2
+      "count": 1,
+      "thin": true
     },
-    "· palette (unplaced)": {
-      "act": "Act IV",
-      "truth": "sequence artifacts available but not yet placed in a map",
+    "Direction": {
+      "act": "III - beyond the tree",
+      "truth": "parent to child is one-way. A directed graph without cycles can be SORTED into an order where every arrow points forward.",
       "tiers": {
-        "small": [
-          "grid_substrate_runner"
-        ],
+        "small": [],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "count": 0,
+      "thin": true
+    },
+    "Degree": {
+      "act": "IV - shape",
+      "truth": "how many edges meet you. The star holds twelve hands, the wallflower one - remove the star and twelve dances end.",
+      "tiers": {
+        "small": [],
         "medium": [
-          "grid3d",
-          "grid3d_dfs",
-          "grid3d_prim",
-          "living_paper_bfs",
-          "living_paper_dfs_maze"
+          "wallflower_and_star"
         ],
+        "large": [],
+        "applied": []
+      },
+      "count": 1,
+      "thin": true
+    },
+    "Components": {
+      "act": "IV - shape",
+      "truth": "islands until one edge marries them. Connectivity is a fact about the WHOLE graph, recomputed the moment a bridge opens.",
+      "tiers": {
+        "small": [],
+        "medium": [],
         "large": [
-          "rhizomatic_structure"
+          "archipelago_wedding"
         ],
         "applied": []
       },
-      "count": 7
+      "count": 1,
+      "thin": true
+    },
+    "The layout": {
+      "act": "IV - shape",
+      "truth": "a graph has no WHERE until physics gives it one: springs on edges, repulsion on nodes, and shape emerges from relation.",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "count": 0,
+      "thin": true
+    },
+    "Traversal": {
+      "act": "V - walking",
+      "truth": "same tree, two orders: the tide visits by distance (BFS), the diver commits to a branch (DFS). Every algorithm is an itinerary.",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [],
+        "applied": [
+          "two_travelers"
+        ]
+      },
+      "count": 1,
+      "thin": true
+    },
+    "The shortest path": {
+      "act": "V - walking",
+      "truth": "AStar3D: shortest is a fact about the whole graph. Sink one stone and the spark learns a new river.",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [],
+        "applied": [
+          "impatient_river"
+        ]
+      },
+      "count": 1,
+      "thin": true
+    },
+    "The seven bridges": {
+      "act": "V - walking",
+      "truth": "Konigsberg, 1736: cross every bridge exactly once - impossible, and the proof needed only DEGREES. The founding story.",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "count": 0,
+      "thin": true
+    },
+    "The skeleton and the pipes": {
+      "act": "VI - the economy",
+      "truth": "the cheapest tree that still touches everyone (MST), and the most a network can carry (flow, cut, matching) - graphs with prices on their edges.",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "count": 0,
+      "thin": true
+    },
+    "The graph you are in": {
+      "act": "VII - the mirror",
+      "truth": "get_children(): you have been standing in a graph all along. This map, this artifact, you - nodes under one root.",
+      "tiers": {
+        "small": [],
+        "medium": [
+          "the_tree_you_are_in"
+        ],
+        "large": [],
+        "applied": []
+      },
+      "count": 1,
+      "thin": true
     }
   },
   "concept_distance": [
     [
       0.0,
-      0.212,
-      0.8995,
-      0.1297,
-      0.1663,
-      0.7621,
-      0.9634,
-      0.9769,
-      0.9307,
-      0.9528,
-      0.0,
-      0.8809,
-      0.8335,
-      0.8132
-    ],
-    [
-      0.212,
-      0.0,
-      0.671,
-      0.2793,
-      0.2463,
-      0.8624,
-      0.8944,
-      0.9939,
-      0.8083,
-      0.9276,
-      0.1325,
-      0.8637,
-      0.8291,
-      0.8528
-    ],
-    [
-      0.8995,
-      0.671,
-      0.0,
-      0.9094,
-      0.9515,
-      0.8761,
-      0.8276,
-      0.868,
-      0.8743,
-      0.7801,
-      0.8896,
-      0.8982,
-      0.8507,
-      0.8228
-    ],
-    [
-      0.1297,
-      0.2793,
-      0.9094,
-      0.0,
-      0.2691,
-      0.8662,
-      0.9601,
-      0.9868,
-      0.8847,
-      0.9134,
-      0.063,
-      0.8337,
-      0.8662,
-      0.8601
-    ],
-    [
-      0.1663,
-      0.2463,
-      0.9515,
-      0.2691,
-      0.0,
-      0.818,
-      0.8962,
-      0.9012,
-      0.9342,
-      0.9749,
-      0.3176,
-      0.8901,
-      0.8408,
-      0.92
-    ],
-    [
-      0.7621,
-      0.8624,
-      0.8761,
-      0.8662,
-      0.818,
-      0.0,
-      0.771,
-      0.8682,
-      0.7972,
-      0.7383,
-      0.7794,
-      0.9799,
-      0.9,
-      0.7862
-    ],
-    [
-      0.9634,
-      0.8944,
-      0.8276,
-      0.9601,
-      0.8962,
-      0.771,
-      0.0,
-      0.9744,
-      0.8624,
-      0.9228,
-      0.9543,
-      0.9002,
-      0.5126,
-      0.8309
-    ],
-    [
-      0.9769,
-      0.9939,
-      0.868,
-      0.9868,
-      0.9012,
-      0.8682,
-      0.9744,
-      0.0,
-      0.9716,
-      0.6337,
+      0.8171,
+      0.6283,
+      0.8368,
       1.0,
-      0.8741,
-      0.8903,
-      0.9624
-    ],
-    [
-      0.9307,
-      0.8083,
-      0.8743,
-      0.8847,
-      0.9342,
-      0.7972,
-      0.8624,
-      0.9716,
-      0.0,
-      0.801,
-      0.8619,
-      0.8302,
-      0.8878,
-      0.8558
-    ],
-    [
-      0.9528,
-      0.9276,
-      0.7801,
-      0.9134,
-      0.9749,
-      0.7383,
-      0.9228,
-      0.6337,
-      0.801,
-      0.0,
-      0.9304,
-      0.6608,
-      0.833,
-      0.9195
-    ],
-    [
-      0.0,
-      0.1325,
-      0.8896,
-      0.063,
-      0.3176,
-      0.7794,
-      0.9543,
+      0.6403,
+      0.6949,
+      0.3308,
       1.0,
-      0.8619,
-      0.9304,
-      0.0,
-      0.8916,
-      0.8213,
-      0.8385
+      1.0,
+      1.0,
+      0.7249,
+      0.6381
     ],
     [
-      0.8809,
-      0.8637,
-      0.8982,
-      0.8337,
-      0.8901,
-      0.9799,
-      0.9002,
-      0.8741,
-      0.8302,
-      0.6608,
-      0.8916,
+      0.8171,
       0.0,
-      0.8741,
-      0.9111
+      0.845,
+      0.7751,
+      0.0,
+      0.8499,
+      0.5791,
+      0.8597,
+      0.8139,
+      0.56,
+      1.0,
+      0.8575,
+      0.256
     ],
     [
-      0.8335,
-      0.8291,
-      0.8507,
-      0.8662,
-      0.8408,
-      0.9,
-      0.5126,
-      0.8903,
-      0.8878,
-      0.833,
-      0.8213,
-      0.8741,
+      0.6283,
+      0.845,
       0.0,
-      0.7367
+      0.845,
+      0.9509,
+      0.7871,
+      0.6337,
+      0.7566,
+      0.9007,
+      0.756,
+      1.0,
+      0.8761,
+      0.5071
     ],
     [
-      0.8132,
-      0.8528,
-      0.8228,
-      0.8601,
-      0.92,
-      0.7862,
-      0.8309,
-      0.9624,
-      0.8558,
-      0.9195,
-      0.8385,
-      0.9111,
-      0.7367,
+      0.8368,
+      0.7751,
+      0.845,
+      0.0,
+      0.7238,
+      0.8504,
+      0.7828,
+      0.8674,
+      0.6943,
+      0.8788,
+      1.0,
+      0.655,
+      0.7069
+    ],
+    [
+      1.0,
+      0.0,
+      0.9509,
+      0.7238,
+      0.0,
+      0.9525,
+      0.9116,
+      0.911,
+      0.3668,
+      0.9078,
+      0.7314,
+      0.9203,
+      0.7276
+    ],
+    [
+      0.6403,
+      0.8499,
+      0.7871,
+      0.8504,
+      0.9525,
+      0.0,
+      0.7806,
+      0.7642,
+      0.9039,
+      0.8777,
+      0.7757,
+      0.8799,
+      0.7522
+    ],
+    [
+      0.6949,
+      0.5791,
+      0.6337,
+      0.7828,
+      0.9116,
+      0.7806,
+      0.0,
+      0.5022,
+      0.8772,
+      0.4547,
+      0.7555,
+      0.7784,
+      0.7964
+    ],
+    [
+      0.3308,
+      0.8597,
+      0.7566,
+      0.8674,
+      0.911,
+      0.7642,
+      0.5022,
+      0.0,
+      0.9563,
+      0.9083,
+      1.0,
+      0.7767,
+      0.7014
+    ],
+    [
+      1.0,
+      0.8139,
+      0.9007,
+      0.6943,
+      0.3668,
+      0.9039,
+      0.8772,
+      0.9563,
+      0.0,
+      0.8876,
+      0.7778,
+      0.792,
+      0.6206
+    ],
+    [
+      1.0,
+      0.56,
+      0.756,
+      0.8788,
+      0.9078,
+      0.8777,
+      0.4547,
+      0.9083,
+      0.8876,
+      0.0,
+      1.0,
+      0.9181,
+      0.7085
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      0.7314,
+      0.7757,
+      0.7555,
+      1.0,
+      0.7778,
+      1.0,
+      0.0,
+      1.0,
+      0.8428
+    ],
+    [
+      0.7249,
+      0.8575,
+      0.8761,
+      0.655,
+      0.9203,
+      0.8799,
+      0.7784,
+      0.7767,
+      0.792,
+      0.9181,
+      1.0,
+      0.0,
+      0.7828
+    ],
+    [
+      0.6381,
+      0.256,
+      0.5071,
+      0.7069,
+      0.7276,
+      0.7522,
+      0.7964,
+      0.7014,
+      0.6206,
+      0.7085,
+      0.8428,
+      0.7828,
       0.0
     ]
   ],
   "groups": {
-    "Edmonds Algorithm": [
+    "The pair": [],
+    "The tree": [
       {
-        "lookup": "edmonds_algorithm",
-        "name": "Edmonds' Algorithm",
-        "fp": 49,
-        "recommended": true,
-        "tier": "large",
-        "has_image": true,
-        "map_ready": true
+        "lookup": "family_chandelier",
+        "name": "Family Chandelier",
+        "registry": "graphtheory.json",
+        "tier": "applied",
+        "fp": 4,
+        "has_image": false,
+        "recommended": false
       }
     ],
-    "Force Directed 3d": [
+    "The address": [
       {
-        "lookup": "forcedirected3d",
-        "name": "forcedirected3d",
-        "fp": 483,
-        "recommended": true,
-        "tier": "large",
-        "has_image": true,
-        "map_ready": true
+        "lookup": "postman_of_paths",
+        "name": "Postman Of Paths",
+        "registry": "graphtheory.json",
+        "tier": "applied",
+        "fp": 4,
+        "has_image": false,
+        "recommended": false
       }
     ],
-    "Force Directed Graph Layout": [
+    "The cycle": [
       {
-        "lookup": "force_directed_layout",
-        "name": "force_directed_layout",
-        "fp": 34,
-        "recommended": true,
-        "tier": "large",
-        "has_image": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "graph_basilica",
-        "name": "Graph Basilica",
-        "registry": "",
-        "tier": "large",
-        "fp": 81,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      }
-    ],
-    "Graphspace": [
-      {
-        "lookup": "graphspace",
-        "name": "graphspace",
-        "fp": 6800,
-        "recommended": true,
-        "tier": "large",
-        "has_image": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "KonigsbergBridge",
-        "name": "KonigsbergBridge",
-        "fp": 1600,
-        "recommended": true,
-        "tier": "large",
-        "has_image": true,
-        "map_ready": true
-      }
-    ],
-    "Graphspace 3d": [
-      {
-        "lookup": "graphspace3d",
-        "name": "graphspace3d",
-        "fp": 576,
-        "recommended": true,
-        "tier": "large",
-        "has_image": true,
-        "map_ready": true
-      }
-    ],
-    "Karger s Algorithm": [
-      {
-        "lookup": "karger_algorithm",
-        "name": "Karger's Algorithm",
-        "fp": 16,
-        "recommended": true,
-        "tier": "large",
-        "has_image": true,
-        "map_ready": true
-      }
-    ],
-    "Kosaraju s Algorithm": [
-      {
-        "lookup": "kosaraju_algorithm",
-        "name": "Kosaraju's Algorithm",
-        "fp": 25,
-        "recommended": true,
-        "tier": "large",
-        "has_image": true,
-        "map_ready": true
-      }
-    ],
-    "Maximum Flow Algorithms": [
-      {
-        "lookup": "env_one",
-        "name": "env_one",
-        "fp": 3422,
-        "recommended": true,
-        "tier": "large",
-        "has_image": true,
-        "map_ready": true
-      }
-    ],
-    "Minimum Spanning Tree": [
-      {
-        "lookup": "mst_visualization",
-        "name": "mst_visualization",
-        "fp": 1050,
-        "recommended": true,
-        "tier": "large",
-        "has_image": true,
-        "map_ready": true
-      }
-    ],
-    "Network Analysis": [
-      {
-        "lookup": "networkflow3d",
-        "name": "networkflow3d",
-        "fp": 1024,
-        "recommended": true,
-        "tier": "large",
-        "has_image": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "network_analysis",
-        "name": "network_analysis",
-        "fp": 50,
-        "recommended": true,
-        "tier": "large",
-        "has_image": true,
-        "map_ready": true
-      }
-    ],
-    "Path Finding 3d": [
-      {
-        "lookup": "pathfinding3d",
-        "name": "pathfinding3d",
-        "fp": 100,
-        "recommended": true,
-        "tier": "large",
-        "has_image": true,
-        "map_ready": true
-      }
-    ],
-    "Push Relabel Algorithm": [
-      {
-        "lookup": "push_relabel_algorithm",
-        "name": "Push-Relabel Algorithm",
-        "fp": 20,
-        "recommended": true,
-        "tier": "large",
-        "has_image": true,
-        "map_ready": true
-      }
-    ],
-    "Tarjan s Algorithm": [
-      {
-        "lookup": "tarjan_algorithm",
-        "name": "Tarjan's Algorithm",
-        "fp": 49,
-        "recommended": true,
-        "tier": "large",
-        "has_image": true,
-        "map_ready": true
-      }
-    ],
-    "Topological Sort": [
-      {
-        "lookup": "topological_sort_algorithm",
-        "name": "Topological Sort",
-        "fp": 1,
-        "recommended": true,
-        "tier": "small",
-        "has_image": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "topological_sort",
-        "name": "topological_sort",
-        "registry": "",
+        "lookup": "ouroboros_signals",
+        "name": "Ouroboros Signals",
+        "registry": "graphtheory.json",
         "tier": "medium",
         "fp": 4,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
+        "has_image": false,
+        "recommended": false
       }
     ],
-    "· palette (unplaced)": [
+    "Direction": [],
+    "Degree": [
       {
-        "lookup": "grid3d",
-        "name": "Grid3D Substrate",
-        "registry": "",
+        "lookup": "wallflower_and_star",
+        "name": "Wallflower And Star",
+        "registry": "graphtheory.json",
         "tier": "medium",
         "fp": 4,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
+        "has_image": false,
+        "recommended": false
+      }
+    ],
+    "Components": [
       {
-        "lookup": "grid3d_dfs",
-        "name": "Grid3D — DFS",
-        "registry": "",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "grid3d_prim",
-        "name": "Grid3D — Prim's MST",
-        "registry": "",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "grid_substrate_runner",
-        "name": "Grid Substrate Runner",
-        "registry": "",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "living_paper_bfs",
-        "name": "living_paper_bfs",
-        "registry": "",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "living_paper_dfs_maze",
-        "name": "living_paper_dfs_maze",
-        "registry": "",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "rhizomatic_structure",
-        "name": "Rhizomatic Structure",
-        "registry": "",
+        "lookup": "archipelago_wedding",
+        "name": "Archipelago Wedding",
+        "registry": "graphtheory.json",
         "tier": "large",
-        "fp": 280,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
+        "fp": 4,
+        "has_image": false,
+        "recommended": false
+      }
+    ],
+    "The layout": [],
+    "Traversal": [
+      {
+        "lookup": "two_travelers",
+        "name": "Two Travelers",
+        "registry": "graphtheory.json",
+        "tier": "applied",
+        "fp": 4,
+        "has_image": false,
+        "recommended": false
+      }
+    ],
+    "The shortest path": [
+      {
+        "lookup": "impatient_river",
+        "name": "Impatient River",
+        "registry": "graphtheory.json",
+        "tier": "applied",
+        "fp": 4,
+        "has_image": false,
+        "recommended": false
+      }
+    ],
+    "The seven bridges": [],
+    "The skeleton and the pipes": [],
+    "The graph you are in": [
+      {
+        "lookup": "the_tree_you_are_in",
+        "name": "The Tree You Are In",
+        "registry": "graphtheory.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": false,
+        "recommended": false
       }
     ]
   },
-  "total": 25,
-  "total_concepts": 15,
-  "recommended_total": 16,
-  "map_ready_total": 16,
-  "palette_total": 9
+  "total": 8,
+  "total_concepts": 13,
+  "recommended_total": 0,
+  "map_ready_total": 0
 }
