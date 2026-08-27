@@ -23,6 +23,49 @@ DOC = os.path.join(ROOT, "doc")
 # ── per-domain config ─────────────────────────────────────────────────────────────────────────
 # concept = (key, act, truth, [strong keywords], [weak keywords]). Order = specific first.
 CONFIG = {
+ "noise": {
+  # THE NOISE TAXONOMY (2026-08-27). Cheat-code: FastNoiseLite - randomness with a
+  # NEIGHBOURHOOD. And the API is the ladder outright: noise is a FUNCTION, not a
+  # stream (same x, same answer, forever); frequency is how fast the neighbourhood
+  # forgets; fractal_octaves stacks the scales; noise_type is four temperaments of
+  # coherence; domain_warp is noise controlling where noise is read. June's canon
+  # was map blurbs ("White noise screams chaos" as a concept name); replaced.
+  # Sequence truth kept: "Noise is randomness that remembers its neighbors."
+  "title": "Noise - randomness with a neighbourhood",
+  "registries": ["noise.json"],
+  "applied_kw": ["sculptor", "painter", "loom"],
+  "large_kw": ["terrain", "space", "clouds", "world"],
+  "concepts": [
+   ("The scream", "I - before the promise",
+    "white noise: randomness with NO neighbourhood - every sample a stranger to the last. The static the rest of the ladder tames.",
+    ["white_noise", "static", "scream"], ["tv"]),
+   ("The promise", "I - before the promise",
+    "get_noise_2d(x, y): nearby points agree, and the same point answers the same forever. Noise is a FUNCTION wearing weather, not dice.",
+    ["value_noise", "coherent", "promise", "neighbour"], ["smooth"]),
+   ("Frequency", "II - the knobs",
+    "noise.frequency: how fast the neighbourhood forgets. Zoom is vocabulary - the same cloud at three magnifications is three moods.",
+    ["frequency", "zoom", "scale_knob"], ["wavelength"]),
+   ("Octaves", "II - the knobs",
+    "fractal_octaves, lacunarity, gain: scales stacked into detail. Mountains are a sum - big shapes plus their own gossip.",
+    ["octave", "fractal_layer", "lacunarity", "fbm", "layers"], ["stack"]),
+   ("The kinds", "II - the knobs",
+    "noise_type: Perlin, Simplex, Cellular, Value - four temperaments of coherence from one seed. Worley's cells against Perlin's hills.",
+    ["perlin", "simplex", "worley", "cellular", "value_type"], ["kind", "temperament"]),
+   ("The field", "III - noise at work",
+    "noise as DIRECTION: sample to angle, and space itself acquires a lean. The flow field is a cloud read as a map of wills.",
+    ["flow", "field", "curl", "vane"], ["direction"]),
+   ("Displacement", "III - noise at work",
+    "noise moving geometry: heights from samples - terrain, melted marble, the surface that remembered a storm.",
+    ["terrain", "displac", "extrud", "sculptor", "melting", "voxel", "height"], ["relief"]),
+   ("Noise of noise", "III - noise at work",
+    "domain_warp: the output of one function bends the input of the next - noise controlling WHERE noise is read. The engine ships the warp.",
+    ["warp", "noise_of", "nested", "noisesphere"], ["domain"]),
+   ("The world", "IV - the door",
+    "noise as substrate: give it enough octaves and a threshold and it is a coastline, a cave, a planet. The corridor to proceduralgeneration.",
+    ["world", "planet", "substrate", "noise_space"], ["procgen"]),
+  ],
+  "catch_all": ("Off the ladder", "meta", "noise-registry artifacts the taxonomy does not yet claim. A chip decides their fate."),
+ },
  "wavefunctions": {
   # THE WAVE TAXONOMY (2026-08-27). Cheat-code: sin(t) + AudioStreamPlayer - ONE
   # oscillator wearing two costumes. The unit circle is the engine's only oscillator;

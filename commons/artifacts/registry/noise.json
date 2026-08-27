@@ -55,6 +55,24 @@
 				1,
 				1
 			]
+		},
+		"the_same_cloud": {
+			"name": "The Same Cloud",
+			"class_name": "TheSameCloud",
+			"scene": "res://commons/artifacts/the_same_cloud/the_same_cloud.tscn",
+			"description": "The noise SUPER OBJECT: a weather bureau where every station reads ONE FastNoiseLite (seed 4) and disagrees only about how - white scream vs coherent promise, three frequency zooms, an octave stair, four noise_type temperaments, a vane field of samples-as-angles, a relief bench, a real domain_warp pair, and a thresholded coastline. Noise is a function, not a dice cup. 2026-08-27.",
+			"category": "noise",
+			"tags": [
+				"noise",
+				"super",
+				"synthesis",
+				"fastnoiselite",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 4,
+				"clearance_m": 0.6
+			}
 		}
 	}
 }
