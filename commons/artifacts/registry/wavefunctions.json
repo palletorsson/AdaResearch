@@ -15849,6 +15849,25 @@
 				"derived_at": "2026-04-29T09:39:46.306641Z",
 				"derived_from": "aabb_size + category"
 			}
+		},
+		"two_costumes": {
+			"name": "Two Costumes",
+			"class_name": "TwoCostumes",
+			"scene": "res://commons/artifacts/two_costumes/two_costumes.tscn",
+			"description": "The wavefunctions SUPER OBJECT: one clock, every costume - a brass unit wheel and its yoke-shadow, the walked wave, an epicycle chorus squaring, two waves beating in a pool, a pendulum cut to the wheel's own period, a horn singing the same phase through AudioStreamGenerator, and a true double pendulum where the promise breaks. 2026-08-27.",
+			"category": "wavefunctions",
+			"tags": [
+				"waves",
+				"super",
+				"synthesis",
+				"oscillator",
+				"fourier",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 4,
+				"clearance_m": 0.6
+			}
 		}
 	}
 }

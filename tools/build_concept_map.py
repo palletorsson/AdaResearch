@@ -23,6 +23,51 @@ DOC = os.path.join(ROOT, "doc")
 # ── per-domain config ─────────────────────────────────────────────────────────────────────────
 # concept = (key, act, truth, [strong keywords], [weak keywords]). Order = specific first.
 CONFIG = {
+ "wavefunctions": {
+  # THE WAVE TAXONOMY (2026-08-27). Cheat-code: sin(t) + AudioStreamPlayer - ONE
+  # oscillator wearing two costumes. The unit circle is the engine's only oscillator;
+  # everything else is that rotation dressed differently: shadowed (sine), summed
+  # (Fourier - AudioStreamGenerator fills its buffer one addition at a time), met
+  # (interference), answered (resonance), walked (propagation), HEARD (the same
+  # phase at 44,100 samples a second stops being motion and becomes pitch), and
+  # finally broken (the double pendulum, where the promise of return fails - the
+  # door to randomness). June's canon was half real rungs, half room names; the
+  # room sections survive by carry-forward while this ladder takes the canon.
+  "title": "Wavefunctions - one oscillator wearing two costumes",
+  "registries": ["wavefunctions.json"],
+  "applied_kw": ["synth", "oscillator", "theremin", "sampler"],
+  "large_kw": ["hall", "stairs", "space", "room", "field"],
+  "concepts": [
+   ("The circle", "I - the source",
+    "sin(t) is the vertical shadow of uniform rotation. The unit circle is the engine's only oscillator; everything after is costume.",
+    ["unit_circle", "circle", "rotation_shadow", "crank"], ["yoke"]),
+   ("The three knobs", "I - the source",
+    "A * sin(w*t + phi): amplitude, frequency, phase - everything a wave can be, in three floats.",
+    ["amplitude", "frequency", "phase", "knob"], ["parameter"]),
+   ("The wave in space", "II - the walk",
+    "sin(x - v*t): the same function walked; period becomes wavelength, and the curve is somewhere you can stand.",
+    ["sine_space", "trig_walk", "wavelength", "walkable"], ["trace"]),
+   ("The sum", "III - the chorus",
+    "Fourier: any signal is a sum of sines. Epicycles are the theorem made brass; AudioStreamGenerator fills its buffer one addition at a time.",
+    ["fourier", "synthesis", "harmonic", "additive", "epicycle"], ["sum", "square_wave"]),
+   ("The meeting", "III - the chorus",
+    "interference: two waves add POINTWISE - reinforcing, cancelling, and beating slowly when nearly equal.",
+    ["interfer", "beat", "superpos"], ["cancel", "node"]),
+   ("Resonance", "III - the chorus",
+    "a pendulum answers only its own frequency: gravity + length -> period, and the wave that matches it is the one it amplifies.",
+    ["pendulum", "resonan", "natural_freq"], ["swing", "answer"]),
+   ("Propagation", "IV - leaving home",
+    "the wave leaves its source: fronts in 3D, the medium carrying what no single particle keeps.",
+    ["propagat", "wavefront", "ripple", "chladni"], ["medium"]),
+   ("The second costume", "IV - leaving home",
+    "AudioStreamPlayer: the SAME sin(t), pushed 44,100 times a second, stops being motion and becomes PITCH. Seen and heard are one function.",
+    ["sound", "audio", "tone", "horn", "speaker", "hear"], ["pitch", "sample"]),
+   ("The break", "V - the door out",
+    "the double pendulum: periodic to chaotic - where the promise of return fails. The door out of waves and into randomness.",
+    ["double_pendulum", "chaos", "chaotic"], ["break", "unpredict"]),
+  ],
+  "catch_all": ("Off the ladder", "meta", "wave-registry artifacts the taxonomy does not yet claim. A chip decides their fate."),
+ },
  "change": {
   # THE CHANGE TAXONOMY (2026-08-27). The cheat-code: the engine does calculus
   # NUMERICALLY, every frame - _process(delta) is a Riemann sum you live inside.

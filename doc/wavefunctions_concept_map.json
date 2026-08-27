@@ -1,9 +1,19 @@
 {
-  "title": "wavefunctions",
+  "title": "Wavefunctions - one oscillator wearing two costumes",
   "domain": "wavefunctions",
-  "note": "Ontology derived from the beat score by tools/build_spine_ontology.py (concepts = beats, artifacts = their maps').",
+  "note": "Auto-classified by tools/build_concept_map.py — heuristic keyword scoring, tier by footprint.",
   "acts": [],
   "concepts": [
+    "The circle",
+    "The three knobs",
+    "The wave in space",
+    "The sum",
+    "The meeting",
+    "Resonance",
+    "Propagation",
+    "The second costume",
+    "The break",
+    "Off the ladder",
     "the wave",
     "pendulum",
     "unit circle",
@@ -19,6 +29,293 @@
     "· palette (unplaced)"
   ],
   "concept_meta": {
+    "The circle": {
+      "act": "I - the source",
+      "truth": "sin(t) is the vertical shadow of uniform rotation. The unit circle is the engine's only oscillator; everything after is costume.",
+      "tiers": {
+        "small": [],
+        "medium": [
+          "circle_spiral_scene",
+          "unit_circle",
+          "unit_circle_advanced"
+        ],
+        "large": [
+          "CircleSpiral",
+          "PendulumCircle",
+          "UnitCircleTrig",
+          "VitruvianMan"
+        ],
+        "applied": []
+      },
+      "count": 7,
+      "thin": false
+    },
+    "The three knobs": {
+      "act": "I - the source",
+      "truth": "A * sin(w*t + phi): amplitude, frequency, phase - everything a wave can be, in three floats.",
+      "tiers": {
+        "small": [
+          "RackSineBasic",
+          "double_helix_scene",
+          "oscillation_controlled_cube",
+          "spectral_sine_wave"
+        ],
+        "medium": [
+          "DancingBody",
+          "Rack303Acid",
+          "RackAmbientDrone",
+          "RackMario",
+          "RackMoogBass",
+          "SystemsMusicTest",
+          "biomagneticresonator",
+          "chemicalapparatus",
+          "dual_display_test",
+          "electronicscales",
+          "holographicdisplay",
+          "microscope",
+          "multimeter",
+          "samplevialrack",
+          "sine_wall_explanation",
+          "spectrum_display"
+        ],
+        "large": [
+          "OscillatingWave",
+          "sine_wall_static"
+        ],
+        "applied": [
+          "DualBallFMController"
+        ]
+      },
+      "count": 23,
+      "thin": false
+    },
+    "The wave in space": {
+      "act": "II - the walk",
+      "truth": "sin(x - v*t): the same function walked; period becomes wavelength, and the curve is somewhere you can stand.",
+      "tiers": {
+        "small": [
+          "seismograph"
+        ],
+        "medium": [
+          "SimpleOscillatingBridge",
+          "lissajous_curves",
+          "walkable_sine_bridge"
+        ],
+        "large": [
+          "TrigWalkingPath",
+          "sine_space_explanation",
+          "sine_wall_corridor"
+        ],
+        "applied": []
+      },
+      "count": 7,
+      "thin": false
+    },
+    "The sum": {
+      "act": "III - the chorus",
+      "truth": "Fourier: any signal is a sum of sines. Epicycles are the theorem made brass; AudioStreamGenerator fills its buffer one addition at a time.",
+      "tiers": {
+        "small": [],
+        "medium": [
+          "HarmonicBuilder",
+          "SphericalHarmonics",
+          "timbre_sculptor"
+        ],
+        "large": [
+          "fourier_transform",
+          "fourier_transform_advanced",
+          "fouriertransformshape"
+        ],
+        "applied": []
+      },
+      "count": 6,
+      "thin": false
+    },
+    "The meeting": {
+      "act": "III - the chorus",
+      "truth": "interference: two waves add POINTWISE - reinforcing, cancelling, and beating slowly when nearly equal.",
+      "tiers": {
+        "small": [],
+        "medium": [
+          "BeatFrequencies",
+          "beat_frequency_demo",
+          "wave_interference_3d"
+        ],
+        "large": [
+          "wave_interference"
+        ],
+        "applied": []
+      },
+      "count": 4,
+      "thin": false
+    },
+    "Resonance": {
+      "act": "III - the chorus",
+      "truth": "a pendulum answers only its own frequency: gravity + length -> period, and the wave that matches it is the one it amplifies.",
+      "tiers": {
+        "small": [
+          "rotation_oscillation_cube"
+        ],
+        "medium": [
+          "parametric_pendulum_waves",
+          "pylon_cables",
+          "resonance_frequencies",
+          "resonance_frequencies_visualizer"
+        ],
+        "large": [
+          "DoublePendulum",
+          "PendulumGrid3x3",
+          "PendulumWave",
+          "WavePaintings",
+          "foucault_pendulum"
+        ],
+        "applied": []
+      },
+      "count": 10,
+      "thin": false
+    },
+    "Propagation": {
+      "act": "IV - leaving home",
+      "truth": "the wave leaves its source: fronts in 3D, the medium carrying what no single particle keeps.",
+      "tiers": {
+        "small": [
+          "chladni_plate"
+        ],
+        "medium": [
+          "ElphabaDress"
+        ],
+        "large": [
+          "wave_propagation_3d"
+        ],
+        "applied": []
+      },
+      "count": 3,
+      "thin": false
+    },
+    "The second costume": {
+      "act": "IV - leaving home",
+      "truth": "AudioStreamPlayer: the SAME sin(t), pushed 44,100 times a second, stops being motion and becomes PITCH. Seen and heard are one function.",
+      "tiers": {
+        "small": [
+          "SoundBoxLong",
+          "SoundBoxShort",
+          "VRAudioMonitor",
+          "spectral_analyzer"
+        ],
+        "medium": [
+          "MarioSoundController",
+          "MelodyChaser3D",
+          "MelodySoundBoard",
+          "Rack808Drums",
+          "RackDX7Piano",
+          "SoundscapeRadioRack",
+          "air_music_display_case",
+          "chord_tension_spring",
+          "harmonic_distance_table",
+          "mario_test_sound_ui",
+          "noir_sequencer",
+          "resonating_metallophone",
+          "tech_noir_audio"
+        ],
+        "large": [
+          "sine_art_monitor",
+          "soundboxes"
+        ],
+        "applied": []
+      },
+      "count": 19,
+      "thin": false
+    },
+    "The break": {
+      "act": "V - the door out",
+      "truth": "the double pendulum: periodic to chaotic - where the promise of return fails. The door out of waves and into randomness.",
+      "tiers": {
+        "small": [],
+        "medium": [
+          "GlassRack_BreakingBadCoffee"
+        ],
+        "large": [],
+        "applied": []
+      },
+      "count": 1,
+      "thin": true
+    },
+    "Off the ladder": {
+      "act": "meta",
+      "truth": "wave-registry artifacts the taxonomy does not yet claim. A chip decides their fate.",
+      "tiers": {
+        "small": [
+          "GlassRack",
+          "PhonemeCloud",
+          "WaveRideScene",
+          "demo_compounds",
+          "demo_passive",
+          "demo_singles",
+          "lab_table",
+          "rotatescalecubes"
+        ],
+        "medium": [
+          "BigPipe",
+          "BigPipeSystem",
+          "BigPipe_CrossManifold",
+          "BigPipe_IndustrialBranch",
+          "BigPipe_LBend",
+          "BigPipe_Serpentine",
+          "BigPipe_StraightRun",
+          "BigPipe_TDistribution",
+          "BigPipe_VerticalBypass",
+          "ColoredLinesVR",
+          "ElphabaDemo",
+          "GlassRack_BranchingCondenser",
+          "GlassRack_ComplexApparatus",
+          "GlassRack_DistillationRack",
+          "GlassRack_DistillationY",
+          "GlassRack_FractionalDistillation",
+          "GlassRack_RefluxApparatus",
+          "GlassRack_SbendManifold",
+          "GlassRack_SimpleTube",
+          "GlassRack_SpiralCondenser",
+          "GlassRack_SpiralTube",
+          "atmosphericmonitoring",
+          "bernini_columns",
+          "cable_builder",
+          "doublehelix",
+          "line_builder_3d",
+          "liturgicalambientgen",
+          "math_objects",
+          "modulor_man_demo",
+          "rotating_cube_demo",
+          "ruth_asawa_sculpture",
+          "segment_slide",
+          "spring_network",
+          "static_reference_cube",
+          "vr_map_loader_kiosk",
+          "water_land_ride",
+          "y_oscillation_cube"
+        ],
+        "large": [
+          "Lissajous3D",
+          "OscillationCurve",
+          "OscillationDriver",
+          "SplineCables",
+          "StaticCables",
+          "coshlea",
+          "hallway_scene",
+          "john_cage_tech_noir",
+          "kusama_sine",
+          "parametric_shapes",
+          "rainbow_hallway",
+          "sine_cylinder_staircase",
+          "standing_waves"
+        ],
+        "applied": [
+          "coupled_oscillator_lattice",
+          "double_helix_oscillator"
+        ]
+      },
+      "count": 60,
+      "thin": false
+    },
     "the wave": {
       "truth": "the wave — a function that returns; oscillation as concept",
       "role": "INTRODUCE",
@@ -54,7 +351,7 @@
         "large": [],
         "applied": []
       },
-      "count": 22
+      "count": 17
     },
     "pendulum": {
       "truth": "pendulum — gravity + length → period; the canonical mechanical oscillator",
@@ -80,7 +377,7 @@
         ],
         "applied": []
       },
-      "count": 10
+      "count": 2
     },
     "unit circle": {
       "truth": "unit circle — sine = vertical projection of uniform circular motion",
@@ -102,7 +399,7 @@
         ],
         "applied": []
       },
-      "count": 6
+      "count": 3
     },
     "sine space": {
       "truth": "sine space — walk the wave; the player traces sin(x) underfoot",
@@ -126,7 +423,7 @@
         ],
         "applied": []
       },
-      "count": 8
+      "count": 5
     },
     "3D wave propagation": {
       "truth": "3D wave propagation — the wave is not just a curve; it's a field in space",
@@ -146,7 +443,7 @@
         ],
         "applied": []
       },
-      "count": 4
+      "count": 1
     },
     "sound as wave": {
       "truth": "sound as wave — the player HEARS what they've been seeing",
@@ -186,7 +483,7 @@
         "large": [],
         "applied": []
       },
-      "count": 25
+      "count": 9
     },
     "Bernini": {
       "truth": "Bernini — sculpture as frozen oscillation; the baroque as visual sine",
@@ -205,7 +502,7 @@
         "large": [],
         "applied": []
       },
-      "count": 4
+      "count": 2
     },
     "John Cage": {
       "truth": "John Cage — silence as wave, chance as oscillation; the philosophy of period",
@@ -225,7 +522,7 @@
         ],
         "applied": []
       },
-      "count": 4
+      "count": 1
     },
     "AirMusic": {
       "truth": "AirMusic — modulating air with wave gestures; instrument as oscillator",
@@ -248,7 +545,7 @@
         "large": [],
         "applied": []
       },
-      "count": 8
+      "count": 1
     },
     "Sky Stairs": {
       "truth": "Sky Stairs — frequency as elevation; the wave ascending",
@@ -268,7 +565,7 @@
         ],
         "applied": []
       },
-      "count": 4
+      "count": 2
     },
     "TrigWalkingPath": {
       "truth": "TrigWalkingPath — the player's footsteps trace trigonometry",
@@ -290,7 +587,7 @@
         ],
         "applied": []
       },
-      "count": 6
+      "count": 2
     },
     "Synthesis Lab": {
       "truth": "Synthesis Lab — the player composes their own waves from harmonics",
@@ -330,7 +627,7 @@
         ],
         "applied": []
       },
-      "count": 24
+      "count": 7
     },
     "· palette (unplaced)": {
       "act": "Act IV",
@@ -359,190 +656,1413 @@
         ],
         "applied": []
       },
-      "count": 15
+      "count": 10
     }
   },
   "concept_distance": [
     [
       0.0,
-      0.0921,
+      0.7158,
+      0.7849,
+      0.7478,
+      0.8982,
+      0.7467,
+      0.9268,
+      0.7739,
+      0.9934,
+      0.5669
+    ],
+    [
+      0.7158,
       0.0,
-      0.366,
-      0.6071,
-      0.6968,
-      0.7877,
+      0.4169,
+      0.4349,
+      0.5412,
+      0.4478,
+      0.6607,
+      0.0,
+      0.8559,
+      0.2268
+    ],
+    [
+      0.7849,
+      0.4169,
+      0.0,
+      0.7272,
+      0.7757,
+      0.7599,
+      0.8081,
+      0.6386,
       1.0,
-      0.6142,
-      0.625,
-      0.5861,
-      0.2458
+      0.5143
     ],
     [
-      0.0921,
+      0.7478,
+      0.4349,
+      0.7272,
       0.0,
-      0.2572,
-      0.4611,
-      0.6615,
-      0.7859,
-      0.8122,
-      0.7249,
-      0.5078,
-      0.7811,
-      0.4958,
-      0.0532
+      0.5493,
+      0.7199,
+      0.9588,
+      0.482,
+      0.9779,
+      0.668
     ],
     [
+      0.8982,
+      0.5412,
+      0.7757,
+      0.5493,
       0.0,
-      0.2572,
-      0.0,
-      0.006,
-      0.3469,
-      0.6794,
-      0.8128,
-      0.8756,
-      0.8158,
-      0.3086,
-      0.3248,
-      0.3475
+      0.6699,
+      0.7746,
+      0.6941,
+      0.9857,
+      0.7982
     ],
     [
-      0.366,
-      0.4611,
-      0.006,
+      0.7467,
+      0.4478,
+      0.7599,
+      0.7199,
+      0.6699,
       0.0,
-      0.3325,
-      0.6477,
-      0.4934,
-      0.7213,
-      0.7524,
-      0.247,
-      0.1322,
-      0.485
+      0.7143,
+      0.6276,
+      0.8327,
+      0.5353
     ],
     [
-      0.6071,
-      0.6615,
-      0.3469,
-      0.3325,
+      0.9268,
+      0.6607,
+      0.8081,
+      0.9588,
+      0.7746,
+      0.7143,
       0.0,
-      0.7153,
-      0.7434,
-      0.7482,
-      0.619,
-      0.485,
-      0.7183,
-      0.4922
+      0.7783,
+      0.9382,
+      0.7596
     ],
     [
-      0.6968,
-      0.7859,
-      0.6794,
-      0.6477,
-      0.7153,
+      0.7739,
       0.0,
-      0.7434,
-      0.4121,
-      0.4904,
-      0.9163,
-      0.8768,
-      0.3678
+      0.6386,
+      0.482,
+      0.6941,
+      0.6276,
+      0.7783,
+      0.0,
+      0.9313,
+      0.4849
     ],
     [
-      0.7877,
-      0.8122,
-      0.8128,
-      0.4934,
-      0.7434,
-      0.7434,
-      0.0,
-      0.4623,
-      0.6232,
-      0.7279,
-      0.7273,
-      0.7297
-    ],
-    [
+      0.9934,
+      0.8559,
       1.0,
-      0.7249,
-      0.8756,
-      0.7213,
-      0.7482,
-      0.4121,
-      0.4623,
+      0.9779,
+      0.9857,
+      0.8327,
+      0.9382,
+      0.9313,
       0.0,
-      0.3289,
-      0.9025,
-      0.9085,
-      0.6035
+      0.6945
     ],
     [
-      0.6142,
-      0.5078,
-      0.8158,
-      0.7524,
-      0.619,
-      0.4904,
-      0.6232,
-      0.3289,
-      0.0,
-      0.817,
-      0.6172,
-      0.451
-    ],
-    [
-      0.625,
-      0.7811,
-      0.3086,
-      0.247,
-      0.485,
-      0.9163,
-      0.7279,
-      0.9025,
-      0.817,
-      0.0,
-      0.2321,
-      0.5126
-    ],
-    [
-      0.5861,
-      0.4958,
-      0.3248,
-      0.1322,
-      0.7183,
-      0.8768,
-      0.7273,
-      0.9085,
-      0.6172,
-      0.2321,
-      0.0,
-      0.1621
-    ],
-    [
-      0.2458,
-      0.0532,
-      0.3475,
-      0.485,
-      0.4922,
-      0.3678,
-      0.7297,
-      0.6035,
-      0.451,
-      0.5126,
-      0.1621,
+      0.5669,
+      0.2268,
+      0.5143,
+      0.668,
+      0.7982,
+      0.5353,
+      0.7596,
+      0.4849,
+      0.6945,
       0.0
     ]
   ],
   "groups": {
-    "the wave": [
+    "The circle": [
       {
-        "lookup": "rotatescalecubes",
-        "name": "Rotate Scale Cubes",
+        "lookup": "CircleSpiral",
+        "name": "Circle Spiral",
+        "registry": "wavefunctions.json",
+        "tier": "large",
+        "fp": 25,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "PendulumCircle",
+        "name": "PendulumCircle",
+        "registry": "wavefunctions.json",
+        "tier": "large",
+        "fp": 96,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "UnitCircleTrig",
+        "name": "UnitCircleTrig",
+        "registry": "wavefunctions.json",
+        "tier": "large",
+        "fp": 48,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "VitruvianMan",
+        "name": "Vitruvian Man",
+        "registry": "wavefunctions.json",
+        "tier": "large",
+        "fp": 15,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "circle_spiral_scene",
+        "name": "circle_spiral_scene",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "unit_circle",
+        "name": "Unit Circle",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 6,
+        "has_image": true,
+        "recommended": false
+      },
+      {
+        "lookup": "unit_circle_advanced",
+        "name": "Advanced Unit Circle",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 6,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "The three knobs": [
+      {
+        "lookup": "DancingBody",
+        "name": "Dancing Body",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "DualBallFMController",
+        "name": "Dual Ball FM Synth",
+        "registry": "wavefunctions.json",
+        "tier": "applied",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "OscillatingWave",
+        "name": "Oscillating Wave",
+        "registry": "wavefunctions.json",
+        "tier": "large",
+        "fp": 63,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "Rack303Acid",
+        "name": "303 Acid Rack",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "RackAmbientDrone",
+        "name": "Ambient Drone Rack",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "RackMario",
+        "name": "Mario Pickup Rack",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "RackMoogBass",
+        "name": "Moog Bass Rack",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "RackSineBasic",
+        "name": "Sine Wave Rack",
+        "registry": "wavefunctions.json",
+        "tier": "small",
+        "fp": 2,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "SystemsMusicTest",
+        "name": "Systems Music Test",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 6,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "biomagneticresonator",
+        "name": "Biomagnetic Resonator",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "chemicalapparatus",
+        "name": "Chemical Apparatus",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "double_helix_scene",
+        "name": "double_helix_scene",
+        "registry": "wavefunctions.json",
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true,
-        "map_ready": true
+        "recommended": true
       },
+      {
+        "lookup": "dual_display_test",
+        "name": "dual_display_test",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 3,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "electronicscales",
+        "name": "Electronic Scales",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "holographicdisplay",
+        "name": "Holographic Display",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "microscope",
+        "name": "Microscope",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "multimeter",
+        "name": "Multimeter",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "oscillation_controlled_cube",
+        "name": "Oscillation Controlled Cube",
+        "registry": "wavefunctions.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "samplevialrack",
+        "name": "Sample Vial Rack",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "sine_wall_explanation",
+        "name": "Sine Wall Explanation",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "sine_wall_static",
+        "name": "Sine Wall (Static)",
+        "registry": "wavefunctions.json",
+        "tier": "large",
+        "fp": 10,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "spectral_sine_wave",
+        "name": "Spectral Sine Wave",
+        "registry": "wavefunctions.json",
+        "tier": "small",
+        "fp": 2,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "spectrum_display",
+        "name": "Frequency Spectrum Analyzer",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "The wave in space": [
+      {
+        "lookup": "SimpleOscillatingBridge",
+        "name": "Simple Oscillating Bridge",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "TrigWalkingPath",
+        "name": "TrigWalkingPath",
+        "registry": "wavefunctions.json",
+        "tier": "large",
+        "fp": 156,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "lissajous_curves",
+        "name": "LissajousCurves",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "seismograph",
+        "name": "seismograph",
+        "registry": "wavefunctions.json",
+        "tier": "small",
+        "fp": 2,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "sine_space_explanation",
+        "name": "Sine Space Explanation",
+        "registry": "wavefunctions.json",
+        "tier": "large",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "sine_wall_corridor",
+        "name": "Sine Wall Corridor",
+        "registry": "wavefunctions.json",
+        "tier": "large",
+        "fp": 154,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "walkable_sine_bridge",
+        "name": "walkable_sine_bridge",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "The sum": [
+      {
+        "lookup": "HarmonicBuilder",
+        "name": "Harmonic Builder",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 6,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "SphericalHarmonics",
+        "name": "Spherical Harmonics",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "fourier_transform",
+        "name": "Fourier Transform",
+        "registry": "wavefunctions.json",
+        "tier": "large",
+        "fp": 272,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "fourier_transform_advanced",
+        "name": "Advanced Fourier Transform",
+        "registry": "wavefunctions.json",
+        "tier": "large",
+        "fp": 272,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "fouriertransformshape",
+        "name": "fouriertransformshape",
+        "registry": "wavefunctions.json",
+        "tier": "large",
+        "fp": 9,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "timbre_sculptor",
+        "name": "Timbre Sculptor",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "The meeting": [
+      {
+        "lookup": "BeatFrequencies",
+        "name": "Beat Frequencies",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 3,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "beat_frequency_demo",
+        "name": "Beat Frequency Demo",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "wave_interference",
+        "name": "Wave Interference",
+        "registry": "wavefunctions.json",
+        "tier": "large",
+        "fp": 176,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "wave_interference_3d",
+        "name": "Wave Interference 3D",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "Resonance": [
+      {
+        "lookup": "DoublePendulum",
+        "name": "Double Pendulum",
+        "registry": "wavefunctions.json",
+        "tier": "large",
+        "fp": 96,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "PendulumGrid3x3",
+        "name": "Pendulum Grid 3x3",
+        "registry": "wavefunctions.json",
+        "tier": "large",
+        "fp": 209,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "PendulumWave",
+        "name": "PendulumWave",
+        "registry": "wavefunctions.json",
+        "tier": "large",
+        "fp": 48,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "WavePaintings",
+        "name": "Wave Paintings",
+        "registry": "wavefunctions.json",
+        "tier": "large",
+        "fp": 15,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "foucault_pendulum",
+        "name": "Foucault Pendulum",
+        "registry": "wavefunctions.json",
+        "tier": "large",
+        "fp": 64,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "parametric_pendulum_waves",
+        "name": "ParametricPendulumWaves",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "pylon_cables",
+        "name": "Electric Pylon Cables",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "resonance_frequencies",
+        "name": "Resonance Frequencies",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "resonance_frequencies_visualizer",
+        "name": "Resonance Frequencies Visualizer",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "rotation_oscillation_cube",
+        "name": "Rotation Oscillation Cube",
+        "registry": "wavefunctions.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "Propagation": [
+      {
+        "lookup": "ElphabaDress",
+        "name": "Elphaba Dress",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "chladni_plate",
+        "name": "Chladni Plate",
+        "registry": "wavefunctions.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "wave_propagation_3d",
+        "name": "3D Wave Propagation",
+        "registry": "wavefunctions.json",
+        "tier": "large",
+        "fp": 154,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "The second costume": [
+      {
+        "lookup": "MarioSoundController",
+        "name": "MarioSoundController",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "MelodyChaser3D",
+        "name": "MelodyChaser3D",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "MelodySoundBoard",
+        "name": "MelodySoundBoard",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "Rack808Drums",
+        "name": "808 Kick Rack",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "RackDX7Piano",
+        "name": "DX7 Piano Rack",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "SoundBoxLong",
+        "name": "Sound Box (Long)",
+        "registry": "wavefunctions.json",
+        "tier": "small",
+        "fp": 2,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "SoundBoxShort",
+        "name": "Sound Box (Short)",
+        "registry": "wavefunctions.json",
+        "tier": "small",
+        "fp": 2,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "SoundscapeRadioRack",
+        "name": "SoundscapeRadioRack",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "VRAudioMonitor",
+        "name": "VR Audio Monitor",
+        "registry": "wavefunctions.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "air_music_display_case",
+        "name": "Air Music Display Case",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "chord_tension_spring",
+        "name": "Chord Tension Spring",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "harmonic_distance_table",
+        "name": "Harmonic Distance Table",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "mario_test_sound_ui",
+        "name": "mario_test_sound_ui",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "noir_sequencer",
+        "name": "Noir Sequencer",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "resonating_metallophone",
+        "name": "Resonating Metallophone",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "sine_art_monitor",
+        "name": "Sine Art Monitor",
+        "registry": "wavefunctions.json",
+        "tier": "large",
+        "fp": 126,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "soundboxes",
+        "name": "Dynamic Sound Box",
+        "registry": "wavefunctions.json",
+        "tier": "large",
+        "fp": 100,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "spectral_analyzer",
+        "name": "Spectral Analyzer",
+        "registry": "wavefunctions.json",
+        "tier": "small",
+        "fp": 2,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "tech_noir_audio",
+        "name": "Tech Noir Audio",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "The break": [
+      {
+        "lookup": "GlassRack_BreakingBadCoffee",
+        "name": "Glass Rack: Breaking Bad Coffee",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "Off the ladder": [
+      {
+        "lookup": "BigPipe",
+        "name": "BigPipe",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "BigPipeSystem",
+        "name": "Big Pipe System",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "BigPipe_CrossManifold",
+        "name": "Big Pipe: Cross Manifold",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "BigPipe_IndustrialBranch",
+        "name": "Big Pipe: Industrial Branch",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "BigPipe_LBend",
+        "name": "Big Pipe: L-Bend",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "BigPipe_Serpentine",
+        "name": "Big Pipe: Serpentine",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "BigPipe_StraightRun",
+        "name": "Big Pipe: Straight Run",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "BigPipe_TDistribution",
+        "name": "Big Pipe: T-Distribution",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "BigPipe_VerticalBypass",
+        "name": "Big Pipe: Vertical Bypass",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "ColoredLinesVR",
+        "name": "ColoredLinesVR",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "ElphabaDemo",
+        "name": "Elphaba Demo",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "GlassRack",
+        "name": "Glass Rack",
+        "registry": "wavefunctions.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "GlassRack_BranchingCondenser",
+        "name": "Glass Rack: Branching Condenser",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "GlassRack_ComplexApparatus",
+        "name": "Glass Rack: Complex Apparatus",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "GlassRack_DistillationRack",
+        "name": "Glass Rack: Distillation Rack",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "GlassRack_DistillationY",
+        "name": "Glass Rack: Y-Branch Distillation",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "GlassRack_FractionalDistillation",
+        "name": "Glass Rack: Fractional Distillation",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "GlassRack_RefluxApparatus",
+        "name": "Glass Rack: Reflux Apparatus",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "GlassRack_SbendManifold",
+        "name": "Glass Rack: S-Bend Manifold",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "GlassRack_SimpleTube",
+        "name": "Glass Rack: Simple Tube",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "GlassRack_SpiralCondenser",
+        "name": "Glass Rack: Spiral Condenser",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "GlassRack_SpiralTube",
+        "name": "Glass Rack: Spiral Tube",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "Lissajous3D",
+        "name": "Lissajous3D",
+        "registry": "wavefunctions.json",
+        "tier": "large",
+        "fp": 36,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "OscillationCurve",
+        "name": "OscillationCurve",
+        "registry": "wavefunctions.json",
+        "tier": "large",
+        "fp": 36,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "OscillationDriver",
+        "name": "OscillationDriver",
+        "registry": "wavefunctions.json",
+        "tier": "large",
+        "fp": 36,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "PhonemeCloud",
+        "name": "PhonemeCloud",
+        "registry": "wavefunctions.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "SplineCables",
+        "name": "Spline Cables",
+        "registry": "wavefunctions.json",
+        "tier": "large",
+        "fp": 144,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "StaticCables",
+        "name": "StaticCables",
+        "registry": "wavefunctions.json",
+        "tier": "large",
+        "fp": 16,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "WaveRideScene",
+        "name": "WaveRideScene",
+        "registry": "wavefunctions.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "atmosphericmonitoring",
+        "name": "Atmospheric Monitoring Station",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "bernini_columns",
+        "name": "Bernini Columns",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "cable_builder",
+        "name": "Cable Builder",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "coshlea",
+        "name": "coshlea",
+        "registry": "wavefunctions.json",
+        "tier": "large",
+        "fp": 95,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "coupled_oscillator_lattice",
+        "name": "CoupledOscillatorLattice",
+        "registry": "wavefunctions.json",
+        "tier": "applied",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "demo_compounds",
+        "name": "demo_compounds",
+        "registry": "wavefunctions.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "demo_passive",
+        "name": "demo_passive",
+        "registry": "wavefunctions.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "demo_singles",
+        "name": "demo_singles",
+        "registry": "wavefunctions.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "double_helix_oscillator",
+        "name": "Double Helix Oscillator",
+        "registry": "wavefunctions.json",
+        "tier": "applied",
+        "fp": 42,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "doublehelix",
+        "name": "doublehelix",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "hallway_scene",
+        "name": "hallway_scene",
+        "registry": "wavefunctions.json",
+        "tier": "large",
+        "fp": 26,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "john_cage_tech_noir",
+        "name": "john_cage_tech_noir",
+        "registry": "wavefunctions.json",
+        "tier": "large",
+        "fp": 210,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "kusama_sine",
+        "name": "Kusama Sine",
+        "registry": "wavefunctions.json",
+        "tier": "large",
+        "fp": 81,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "lab_table",
+        "name": "Lab Table",
+        "registry": "wavefunctions.json",
+        "tier": "small",
+        "fp": 2,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "line_builder_3d",
+        "name": "Line Builder 3D",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 3,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "liturgicalambientgen",
+        "name": "liturgicalambientgenera",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 3,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "math_objects",
+        "name": "Mathematical Objects",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "modulor_man_demo",
+        "name": "modulor_man_demo",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 3,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "parametric_shapes",
+        "name": "Parametric Shapes",
+        "registry": "wavefunctions.json",
+        "tier": "large",
+        "fp": 187,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "rainbow_hallway",
+        "name": "rainbow_hallway",
+        "registry": "wavefunctions.json",
+        "tier": "large",
+        "fp": 13,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "rotatescalecubes",
+        "name": "Rotate Scale Cubes",
+        "registry": "wavefunctions.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "rotating_cube_demo",
+        "name": "Rotating Cube Demo",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "ruth_asawa_sculpture",
+        "name": "Ruth Asawa Sculpture",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 7,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "segment_slide",
+        "name": "Segment Slide",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "sine_cylinder_staircase",
+        "name": "sine_cylinder_staircase",
+        "registry": "wavefunctions.json",
+        "tier": "large",
+        "fp": 18,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "spring_network",
+        "name": "SpringNetwork",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "standing_waves",
+        "name": "Standing Waves",
+        "registry": "wavefunctions.json",
+        "tier": "large",
+        "fp": 169,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "static_reference_cube",
+        "name": "Static Reference Cube",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "vr_map_loader_kiosk",
+        "name": "VR Map Loader Kiosk",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "water_land_ride",
+        "name": "water_land_ride",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "y_oscillation_cube",
+        "name": "Y-Oscillation Cube",
+        "registry": "wavefunctions.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "the wave": [
       {
         "lookup": "pickup_cube_static",
         "name": "Static Pickup Cube",
@@ -575,24 +2095,6 @@
         "name": "Rotating Cube",
         "tier": "small",
         "fp": 1,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "y_oscillation_cube",
-        "name": "Y-Oscillation Cube",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "rotating_cube_demo",
-        "name": "Rotating Cube Demo",
-        "tier": "medium",
-        "fp": 4,
         "has_image": true,
         "recommended": true,
         "map_ready": true
@@ -652,28 +2154,10 @@
         "map_ready": true
       },
       {
-        "lookup": "oscillation_controlled_cube",
-        "name": "Oscillation Controlled Cube",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
         "lookup": "mario_cube_time_trace",
         "name": "Mario Cube Time Trace",
         "tier": "small",
         "fp": 1,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "SphericalHarmonics",
-        "name": "Spherical Harmonics",
-        "tier": "medium",
-        "fp": 4,
         "has_image": true,
         "recommended": true,
         "map_ready": true
@@ -741,15 +2225,6 @@
     ],
     "pendulum": [
       {
-        "lookup": "PendulumWave",
-        "name": "PendulumWave",
-        "tier": "large",
-        "fp": 48,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
         "lookup": "draw_dot_time_domain",
         "name": "draw_dot_time_domain",
         "tier": "small",
@@ -766,69 +2241,6 @@
         "has_image": true,
         "recommended": true,
         "map_ready": true
-      },
-      {
-        "lookup": "WavePaintings",
-        "name": "Wave Paintings",
-        "tier": "large",
-        "fp": 15,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "GlassRack",
-        "name": "Glass Rack",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "lab_table",
-        "name": "Lab Table",
-        "tier": "small",
-        "fp": 2,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "foucault_pendulum",
-        "name": "Foucault Pendulum",
-        "tier": "large",
-        "fp": 64,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "BigPipeSystem",
-        "name": "Big Pipe System",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "VRAudioMonitor",
-        "name": "VR Audio Monitor",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "seismograph",
-        "name": "seismograph",
-        "tier": "small",
-        "fp": 2,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
       }
     ],
     "unit circle": [
@@ -842,37 +2254,10 @@
         "map_ready": true
       },
       {
-        "lookup": "unit_circle_advanced",
-        "name": "Advanced Unit Circle",
-        "tier": "medium",
-        "fp": 6,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
         "lookup": "colorballs",
         "name": "colorballs",
         "tier": "medium",
         "fp": 4,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "SimpleOscillatingBridge",
-        "name": "Simple Oscillating Bridge",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "OscillationCurve",
-        "name": "OscillationCurve",
-        "tier": "large",
-        "fp": 36,
         "has_image": true,
         "recommended": true,
         "map_ready": true
@@ -888,33 +2273,6 @@
       }
     ],
     "sine space": [
-      {
-        "lookup": "sine_wall_corridor",
-        "name": "Sine Wall Corridor",
-        "tier": "large",
-        "fp": 154,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "sine_wall_explanation",
-        "name": "Sine Wall Explanation",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "sine_space_explanation",
-        "name": "Sine Space Explanation",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
       {
         "lookup": "colorballs",
         "name": "colorballs",
@@ -972,45 +2330,9 @@
         "has_image": true,
         "recommended": false,
         "map_ready": true
-      },
-      {
-        "lookup": "kusama_sine",
-        "name": "Kusama Sine",
-        "tier": "large",
-        "fp": 81,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": true
-      },
-      {
-        "lookup": "wave_propagation_3d",
-        "name": "3D Wave Propagation",
-        "tier": "large",
-        "fp": 154,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": true
-      },
-      {
-        "lookup": "coupled_oscillator_lattice",
-        "name": "CoupledOscillatorLattice",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": true
       }
     ],
     "sound as wave": [
-      {
-        "lookup": "BigPipeSystem",
-        "name": "Big Pipe System",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": true
-      },
       {
         "lookup": "pick_up_cube",
         "name": "Pick Up Cube",
@@ -1039,73 +2361,10 @@
         "map_ready": true
       },
       {
-        "lookup": "RackSineBasic",
-        "name": "Sine Wave Rack",
-        "tier": "small",
-        "fp": 2,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": true
-      },
-      {
-        "lookup": "cable_builder",
-        "name": "Cable Builder",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": true
-      },
-      {
-        "lookup": "VRAudioMonitor",
-        "name": "VR Audio Monitor",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": true
-      },
-      {
         "lookup": "dark_sphere",
         "name": "Dark Sphere",
         "tier": "small",
         "fp": 1,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": true
-      },
-      {
-        "lookup": "DualBallFMController",
-        "name": "Dual Ball FM Synth",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": true
-      },
-      {
-        "lookup": "Rack303Acid",
-        "name": "303 Acid Rack",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": true
-      },
-      {
-        "lookup": "RackMoogBass",
-        "name": "Moog Bass Rack",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": true
-      },
-      {
-        "lookup": "RackDX7Piano",
-        "name": "DX7 Piano Rack",
-        "tier": "medium",
-        "fp": 4,
         "has_image": true,
         "recommended": false,
         "map_ready": true
@@ -1129,51 +2388,6 @@
         "map_ready": true
       },
       {
-        "lookup": "wave_interference_3d",
-        "name": "Wave Interference 3D",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": true
-      },
-      {
-        "lookup": "harmonic_distance_table",
-        "name": "Harmonic Distance Table",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": true
-      },
-      {
-        "lookup": "chord_tension_spring",
-        "name": "Chord Tension Spring",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": true
-      },
-      {
-        "lookup": "timbre_sculptor",
-        "name": "Timbre Sculptor",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": true
-      },
-      {
-        "lookup": "GlassRack",
-        "name": "Glass Rack",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": true
-      },
-      {
         "lookup": "MarioSoundController#mode",
         "name": "MarioSoundController#mode",
         "tier": "medium",
@@ -1183,37 +2397,10 @@
         "map_ready": true
       },
       {
-        "lookup": "mario_test_sound_ui",
-        "name": "mario_test_sound_ui",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": true
-      },
-      {
-        "lookup": "MelodyChaser3D",
-        "name": "MelodyChaser3D",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": true
-      },
-      {
         "lookup": "interactable_demo",
         "name": "interactable_demo",
         "tier": "small",
         "fp": 1,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": true
-      },
-      {
-        "lookup": "lab_table",
-        "name": "Lab Table",
-        "tier": "small",
-        "fp": 2,
         "has_image": true,
         "recommended": false,
         "map_ready": true
@@ -1231,28 +2418,10 @@
     ],
     "Bernini": [
       {
-        "lookup": "ElphabaDress",
-        "name": "Elphaba Dress",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": true
-      },
-      {
         "lookup": "dark_sphere",
         "name": "Dark Sphere",
         "tier": "small",
         "fp": 1,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": true
-      },
-      {
-        "lookup": "bernini_columns",
-        "name": "Bernini Columns",
-        "tier": "medium",
-        "fp": 4,
         "has_image": true,
         "recommended": false,
         "map_ready": true
@@ -1269,37 +2438,10 @@
     ],
     "John Cage": [
       {
-        "lookup": "dual_display_test",
-        "name": "dual_display_test",
-        "tier": "medium",
-        "fp": 3,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": true
-      },
-      {
-        "lookup": "ruth_asawa_sculpture",
-        "name": "Ruth Asawa Sculpture",
-        "tier": "medium",
-        "fp": 7,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": true
-      },
-      {
         "lookup": "dark_sphere",
         "name": "Dark Sphere",
         "tier": "small",
         "fp": 1,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": true
-      },
-      {
-        "lookup": "john_cage_tech_noir",
-        "name": "john_cage_tech_noir",
-        "tier": "large",
-        "fp": 210,
         "has_image": true,
         "recommended": false,
         "map_ready": true
@@ -1307,73 +2449,10 @@
     ],
     "AirMusic": [
       {
-        "lookup": "GlassRack",
-        "name": "Glass Rack",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "lab_table",
-        "name": "Lab Table",
-        "tier": "small",
-        "fp": 2,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
         "lookup": "dark_sphere",
         "name": "Dark Sphere",
         "tier": "small",
         "fp": 1,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "SystemsMusicTest",
-        "name": "Systems Music Test",
-        "tier": "medium",
-        "fp": 6,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "RackAmbientDrone",
-        "name": "Ambient Drone Rack",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "BigPipeSystem",
-        "name": "Big Pipe System",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "air_music_display_case",
-        "name": "Air Music Display Case",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "resonating_metallophone",
-        "name": "Resonating Metallophone",
-        "tier": "medium",
-        "fp": 4,
         "has_image": true,
         "recommended": true,
         "map_ready": true
@@ -1397,66 +2476,12 @@
         "has_image": true,
         "recommended": false,
         "map_ready": true
-      },
-      {
-        "lookup": "sine_cylinder_staircase",
-        "name": "sine_cylinder_staircase",
-        "tier": "large",
-        "fp": 18,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": true
-      },
-      {
-        "lookup": "math_objects",
-        "name": "Mathematical Objects",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": true
       }
     ],
     "TrigWalkingPath": [
       {
         "lookup": "sine_oscillation",
         "name": "Sine Oscillation",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "lissajous_curves",
-        "name": "LissajousCurves",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "TrigWalkingPath",
-        "name": "TrigWalkingPath",
-        "tier": "large",
-        "fp": 156,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "wave_interference",
-        "name": "Wave Interference",
-        "tier": "large",
-        "fp": 176,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "beat_frequency_demo",
-        "name": "Beat Frequency Demo",
         "tier": "medium",
         "fp": 4,
         "has_image": true,
@@ -1484,51 +2509,6 @@
         "map_ready": true
       },
       {
-        "lookup": "holographicdisplay",
-        "name": "Holographic Display",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "electronicscales",
-        "name": "Electronic Scales",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "air_music_display_case",
-        "name": "Air Music Display Case",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "samplevialrack",
-        "name": "Sample Vial Rack",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "seismograph",
-        "name": "seismograph",
-        "tier": "small",
-        "fp": 2,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
         "lookup": "dark_sphere",
         "name": "Dark Sphere",
         "tier": "small",
@@ -1547,46 +2527,10 @@
         "map_ready": true
       },
       {
-        "lookup": "GlassRack",
-        "name": "Glass Rack",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "biomagneticresonator",
-        "name": "Biomagnetic Resonator",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
         "lookup": "coloredlines",
         "name": "Colored Lines",
         "tier": "large",
         "fp": 700,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "hallway_scene",
-        "name": "hallway_scene",
-        "tier": "large",
-        "fp": 26,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "UnitCircleTrig",
-        "name": "UnitCircleTrig",
-        "tier": "large",
-        "fp": 48,
         "has_image": true,
         "recommended": true,
         "map_ready": true
@@ -1601,37 +2545,10 @@
         "map_ready": true
       },
       {
-        "lookup": "atmosphericmonitoring",
-        "name": "Atmospheric Monitoring Station",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
         "lookup": "additive_wave_demo",
         "name": "Additive Wave Demo",
         "tier": "medium",
         "fp": 3,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "double_helix_scene",
-        "name": "double_helix_scene",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "chladni_plate",
-        "name": "Chladni Plate",
-        "tier": "small",
-        "fp": 1,
         "has_image": true,
         "recommended": true,
         "map_ready": true
@@ -1644,107 +2561,12 @@
         "has_image": true,
         "recommended": true,
         "map_ready": true
-      },
-      {
-        "lookup": "SoundscapeRadioRack",
-        "name": "SoundscapeRadioRack",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "microscope",
-        "name": "Microscope",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "chemicalapparatus",
-        "name": "Chemical Apparatus",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "multimeter",
-        "name": "Multimeter",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "lissajous_curves",
-        "name": "LissajousCurves",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": true,
-        "map_ready": true
       }
     ],
     "· palette (unplaced)": [
       {
-        "lookup": "MarioSoundController",
-        "name": "MarioSoundController",
-        "registry": "",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "coshlea",
-        "name": "Cochlea Model",
-        "registry": "",
-        "tier": "large",
-        "fp": 95,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
         "lookup": "coupled_pendulums",
         "name": "Coupled Pendulums",
-        "registry": "",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "demo_compounds",
-        "name": "demo_compounds",
-        "registry": "",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "demo_passive",
-        "name": "demo_passive",
-        "registry": "",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "demo_singles",
-        "name": "demo_singles",
         "registry": "",
         "tier": "small",
         "fp": 1,
@@ -1845,8 +2667,7 @@
     ]
   },
   "total": 140,
-  "total_concepts": 13,
-  "recommended_total": 76,
-  "map_ready_total": 76,
-  "palette_total": 24
+  "total_concepts": 10,
+  "recommended_total": 139,
+  "map_ready_total": 139
 }
