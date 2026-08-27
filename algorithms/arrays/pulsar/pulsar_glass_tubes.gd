@@ -65,6 +65,15 @@ func _load_data() -> void:
 	pulsar_data = PulsarData.get_pulsar_data(80, 50)
 
 func build_visualization() -> void:
+	# The materials are built in _ready, and this can run BEFORE _ready: the necklace
+	# instantiates a body and configures it on the spot (desktop_necklace.gd:1765 ->
+	# apply_grid_config -> here), and the museum stamps config on a root that is still
+	# outside the tree. Every tube then duplicates a null and the build dies at the
+	# first one. Nothing here can draw without them, so ask before drawing rather
+	# than trusting an ordering this artifact does not control.
+	if glass_material == null or glow_material == null:
+		_setup_materials()
+
 	# Clear existing children (except non-tube nodes)
 	for child in get_children():
 		if child.name.begins_with("Tube") or child.name.begins_with("Row"):
@@ -252,4 +261,3 @@ func _exit_tree() -> void:
 	for child in get_children():
 		if not child.owner:
 			child.queue_free()
-
