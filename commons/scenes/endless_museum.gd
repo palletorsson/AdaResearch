@@ -2728,36 +2728,53 @@ func _dress_lobby(seg: Node3D, solid: StaticBody3D, w: int, zbase: int, wall_col
 	# too (nobody falls in, VR); the walk map gets the ring so the walker can
 	# circle it.
 	if _L("lobby", "origin_well", 1.0) > 0.5:
+		# THE ANNEX IS DATA NOW (2026-08-26, Palle: "give me a small annex editor").
+		# Every number below used to be a literal, which is why the answer to "can I
+		# edit this space" was no. Six of them are keys in em_layout.json -> lobby,
+		# and the editor writes exactly these. Defaults reproduce the annex as built,
+		# so a museum whose layout file says nothing about them is unchanged.
+		var well_m: float = clampf(_L("lobby", "well_m", 2.0), 1.0, 6.0)          # the pit, square
+		var well_dp: float = clampf(_L("lobby", "well_depth_m", 1.0), 0.3, 4.0)   # how far down
+		var walk_m: float = clampf(_L("lobby", "annex_walk_m", 2.0), 1.0, 6.0)    # walkway west and north
+		var ceil_on: bool = _L("lobby", "annex_ceiling", 1.0) > 0.5
+		var well_lit: float = clampf(_L("lobby", "well_light", 1.6), 0.0, 8.0)
+		var wh: float = well_m * 0.5
+		var a_lo: int = int(-round(wh + walk_m))          # first annex cell, west and north
+		var a_hi: int = int(round(wh))                    # last, east and south
 		var well_mat := StandardMaterial3D.new()
 		well_mat.albedo_color = Color(0.09, 0.09, 0.11)
 		well_mat.roughness = 0.9
 		var wall_mat: Material = m_wall
 		# the annex floor: cells x -3..1, z -3..1 (a 2 m walkway west and north, 1 m east
 		# and south), minus the well cells (-1..0, -1..0)
-		for ax in range(-3, 2):
-			for az in range(-3, 2):
-				if ax >= -1 and ax <= 0 and az >= -1 and az <= 0:
+		for ax in range(a_lo, a_hi + 1):
+			for az in range(a_lo, a_hi + 1):
+				if float(ax) >= -wh and float(ax) < wh and float(az) >= -wh and float(az) < wh:
 					continue
 				_box(seg, Vector3(ax + 0.5, -0.1, az + 0.5), Vector3(1, 0.2, 1), Color(0.13, 0.13, 0.16), _sm("deck"))
 				_walk_cells[Vector2i(ax, zbase + az)] = true
-		_add_col(solid, Vector3(-0.5, -0.1, -0.5), Vector3(5.0, 0.2, 5.0))   # one slab under annex AND well
-		# a ceiling over the annex (em_detail's stops at x -1 / z 0): plaster slab at the soffit
-		_box(seg, Vector3(-0.5, WALL_H + 0.14 + 0.13, -0.5), Vector3(5.4, 0.26, 5.4), Color(0.9, 0.89, 0.86), _sm("ceiling"))
-		# the well: floor at -1.0, four faces below grade (x -1..1, z -1..1)
-		_box(seg, Vector3(0.0, -1.1, 0.0), Vector3(2.0, 0.2, 2.0), Color(0.09, 0.09, 0.11), well_mat)
-		for face in [[Vector3(-1.0, -0.5, 0.0), Vector3(0.2, 1.0, 2.2)], [Vector3(1.0, -0.5, 0.0), Vector3(0.2, 1.0, 2.2)],
-				[Vector3(0.0, -0.5, -1.0), Vector3(2.2, 1.0, 0.2)], [Vector3(0.0, -0.5, 1.0), Vector3(2.2, 1.0, 0.2)]]:
+		var a_span: float = float(a_hi - a_lo + 1)
+		var a_mid: float = (float(a_lo) + float(a_hi) + 1.0) * 0.5
+		_add_col(solid, Vector3(a_mid, -0.1, a_mid), Vector3(a_span, 0.2, a_span))   # one slab under annex AND well
+		# a ceiling over the annex (em_detail's stops at the tile edge): plaster slab at the soffit
+		if ceil_on:
+			_box(seg, Vector3(a_mid, WALL_H + 0.14 + 0.13, a_mid), Vector3(a_span + 0.4, 0.26, a_span + 0.4), Color(0.9, 0.89, 0.86), _sm("ceiling"))
+		# the well: floor at -well_dp, four faces below grade
+		_box(seg, Vector3(0.0, -well_dp - 0.1, 0.0), Vector3(well_m, 0.2, well_m), Color(0.09, 0.09, 0.11), well_mat)
+		for face in [[Vector3(-wh, -well_dp * 0.5, 0.0), Vector3(0.2, well_dp, well_m + 0.2)], [Vector3(wh, -well_dp * 0.5, 0.0), Vector3(0.2, well_dp, well_m + 0.2)],
+				[Vector3(0.0, -well_dp * 0.5, -wh), Vector3(well_m + 0.2, well_dp, 0.2)], [Vector3(0.0, -well_dp * 0.5, wh), Vector3(well_m + 0.2, well_dp, 0.2)]]:
 			_box(seg, face[0], face[1], Color(0.12, 0.12, 0.14), well_mat)
 		# the annex walls: west x = -4 (z -4..2), north z = -4 (x -4..2), east x = 2 (z -4..-1), south z = 2 (x -4..-1)
 		var acells: Dictionary = {}
-		for wz in range(-4, 3):
-			_wall_at(seg, solid, acells, -4, wz, wall_col, m_wall, false)
-		for wx in range(-3, 3):
-			_wall_at(seg, solid, acells, wx, -4, wall_col, m_wall, false)
-		for wz2 in range(-3, 0):
-			_wall_at(seg, solid, acells, 2, wz2, wall_col, m_wall, false)
-		for wx2 in range(-3, 0):
-			_wall_at(seg, solid, acells, wx2, 2, wall_col, m_wall, false)
+		var w_lo: int = a_lo - 1                  # the wall line, one cell outside the floor
+		for wz in range(w_lo, a_hi + 2):
+			_wall_at(seg, solid, acells, w_lo, wz, wall_col, m_wall, false)
+		for wx in range(w_lo + 1, a_hi + 2):
+			_wall_at(seg, solid, acells, wx, w_lo, wall_col, m_wall, false)
+		for wz2 in range(w_lo + 1, 0):
+			_wall_at(seg, solid, acells, a_hi + 1, wz2, wall_col, m_wall, false)
+		for wx2 in range(w_lo + 1, 0):
+			_wall_at(seg, solid, acells, wx2, a_hi + 1, wall_col, m_wall, false)
 		# THE RAIL IS OFF (2026-08-26, Palle: "remove the fence around the pit pool
 		# basin"). It ringed the well on all four sides at 0.55 m and was the first
 		# thing the eye met on landing - a guard rail around the one object the foyer
@@ -2787,7 +2804,7 @@ func _dress_lobby(seg: Node3D, solid: StaticBody3D, w: int, zbase: int, wall_col
 		# a light in the well, a light over the annex
 		var wl := OmniLight3D.new()
 		wl.light_color = Color(0.95, 0.93, 0.85)
-		wl.light_energy = 1.6
+		wl.light_energy = well_lit
 		wl.omni_range = 4.0
 		wl.position = Vector3(0.0, 0.6, 0.0)
 		seg.add_child(wl)
@@ -17543,6 +17560,9 @@ func _plan_toolbar_pressed(button: Button) -> void:
 	if tool == "passage":
 		_passage_open()
 		return
+	if tool == "annex":
+		_annex_open()
+		return
 	if tool == "config":
 		_plan_config_open()
 		return
@@ -18039,7 +18059,7 @@ func _doll_palette_refresh() -> void:
 		_doll_palette.offset_top = -64.0
 		_doll_palette.offset_bottom = -20.0
 		var tools := [["🖐 hand", ""], ["🧱 wall/passage", "R"], ["⬛ room", "O"],
-			["↔ hall passage", "passage"], ["🚪 door", "D"], ["💾 save", "!"]]
+			["↔ hall passage", "passage"], ["🕳 annex", "annex"], ["🚪 door", "D"], ["💾 save", "!"]]
 		for t in tools:
 			var b := Button.new()
 			b.text = String((t as Array)[0])
@@ -18066,6 +18086,11 @@ func _doll_palette_pressed(b: Button) -> void:
 		_doll_brush = ""
 		_doll_palette_refresh()
 		_passage_open()
+		return
+	if br == "annex":
+		_doll_brush = ""
+		_doll_palette_refresh()
+		_annex_open()
 		return
 	_doll_brush = br
 	var names := {"": "the hand picks and drags bodies", "R": "wall — LMB builds (drag draws a run) · right-click or SHIFT opens · ALT digs a HOLE (value 0) · ctrl+Z undoes", "O": "room — drag a rectangle; walls rise around it with a door facing you; ctrl+Z takes the whole room back", "D": "door — click where the sliding door should stand"}
@@ -18888,3 +18913,147 @@ func _map_locate(map_name: String, token: String, fx: int, fz: int) -> Vector2i:
 		return Vector2i(-1, -1)
 	var inter: Array = ((doc_v as Dictionary).get("layers", {}) as Dictionary).get("interactables", [])
 	return _map_resolve_token(inter, token, fx, fz)
+
+
+# ── THE ANNEX EDITOR (2026-08-26, Palle: "give me a small annex editor") ──────
+# The foyer's origin well was the one room in the museum with no surface at all:
+# not a tile, so no brush; not config, so no file; just literals in _dress_lobby.
+# Asked how to edit it, the honest answer was "you cannot", which is the answer
+# that means a thing is missing rather than finished.
+#
+# Six numbers, the ones that decide what the space IS. They are written to
+# em_layout.json -> lobby, the museum's own input file, so the panel is a way of
+# writing a file Palle could also open in an editor — not a second truth.
+var _annex_well: SpinBox = null
+var _annex_depth: SpinBox = null
+var _annex_walk: SpinBox = null
+var _annex_light: SpinBox = null
+var _annex_ceil: CheckBox = null
+var _annex_rail: CheckBox = null
+
+
+func _annex_open() -> void:
+	_plan_config_close()
+	var layer := CanvasLayer.new()
+	layer.name = "AnnexEditor"
+	layer.layer = 91
+	add_child(layer)
+	var panel := PanelContainer.new()
+	panel.name = "Panel"
+	panel.set_anchors_preset(Control.PRESET_CENTER_RIGHT)
+	panel.offset_left = -430.0
+	panel.offset_right = -24.0
+	panel.offset_top = -250.0
+	panel.offset_bottom = 250.0
+	layer.add_child(panel)
+	_plan_config_panel = panel
+	var box := VBoxContainer.new()
+	box.add_theme_constant_override("separation", 8)
+	panel.add_child(box)
+	var title := Label.new()
+	title.text = "THE ORIGIN ANNEX"
+	title.add_theme_font_size_override("font_size", 19)
+	box.add_child(title)
+	var help := Label.new()
+	help.text = "The foyer's corner around the world origin: the pit Point Zero stands in, the walkway round it, and what covers it. Written to em_layout.json (lobby); Apply rebuilds."
+	help.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	box.add_child(help)
+
+	var grid := GridContainer.new()
+	grid.columns = 2
+	grid.add_theme_constant_override("h_separation", 16)
+	grid.add_theme_constant_override("v_separation", 7)
+	box.add_child(grid)
+
+	_annex_well = _annex_spin(_L("lobby", "well_m", 2.0), 1.0, 6.0, 0.5)
+	_annex_depth = _annex_spin(_L("lobby", "well_depth_m", 1.0), 0.3, 4.0, 0.1)
+	_annex_walk = _annex_spin(_L("lobby", "annex_walk_m", 2.0), 1.0, 6.0, 1.0)
+	_annex_light = _annex_spin(_L("lobby", "well_light", 1.6), 0.0, 8.0, 0.2)
+	_annex_ceil = CheckBox.new()
+	_annex_ceil.button_pressed = _L("lobby", "annex_ceiling", 1.0) > 0.5
+	_annex_rail = CheckBox.new()
+	_annex_rail.button_pressed = _L("lobby", "origin_well_rail", 0.0) > 0.5
+	for row in [["the pit, square (m)", _annex_well], ["how far down (m)", _annex_depth],
+			["walkway west and north (m)", _annex_walk], ["light in the pit", _annex_light],
+			["ceiling over the annex", _annex_ceil], ["rail round the pit", _annex_rail]]:
+		var lb := Label.new()
+		lb.text = String((row as Array)[0])
+		grid.add_child(lb)
+		grid.add_child((row as Array)[1] as Control)
+
+	var note := Label.new()
+	note.text = "The walkway is whole cells, so it rounds. Turning the annex off entirely is lobby.origin_well = 0 in the same file."
+	note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	note.add_theme_font_size_override("font_size", 12)
+	box.add_child(note)
+
+	var row2 := HBoxContainer.new()
+	row2.add_theme_constant_override("separation", 8)
+	box.add_child(row2)
+	var ok := Button.new()
+	ok.text = "Apply + rebuild"
+	ok.pressed.connect(_annex_apply)
+	row2.add_child(ok)
+	var no := Button.new()
+	no.text = "Close"
+	no.pressed.connect(_plan_config_close)
+	row2.add_child(no)
+
+
+func _annex_spin(v: float, lo: float, hi: float, step: float) -> SpinBox:
+	var s := SpinBox.new()
+	s.min_value = lo
+	s.max_value = hi
+	s.step = step
+	s.value = clampf(v, lo, hi)
+	s.custom_minimum_size = Vector2(120, 0)
+	return s
+
+
+func _annex_apply() -> void:
+	if _annex_well == null or not is_instance_valid(_annex_well):
+		return
+	var vals := {
+		"well_m": float(_annex_well.value),
+		"well_depth_m": float(_annex_depth.value),
+		"annex_walk_m": float(_annex_walk.value),
+		"well_light": float(_annex_light.value),
+		"annex_ceiling": 1.0 if _annex_ceil.button_pressed else 0.0,
+		"origin_well_rail": 1.0 if _annex_rail.button_pressed else 0.0,
+	}
+	if not _lobby_layout_write(vals):
+		_doll_toast("could not write em_layout.json — the annex is unchanged")
+		return
+	_passage_rebuild("annex written: pit %.1f m, %.1f m deep — rebuilding the foyer…"
+		% [float(vals["well_m"]), float(vals["well_depth_m"])])
+
+
+## Merge these keys into em_layout.json's lobby block and forget the cached read.
+##
+## A sibling and a rename, like _layout_write and the book: a half-written layout
+## file is a museum that will not open. Everything not named here is copied
+## through untouched — the readmes especially, which are the only documentation
+## those keys have.
+func _lobby_layout_write(vals: Dictionary) -> bool:
+	var doc: Dictionary = {}
+	if FileAccess.file_exists(LAYOUT_PATH):
+		var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(LAYOUT_PATH))
+		if parsed is Dictionary:
+			doc = parsed
+	if doc.is_empty():
+		return false
+	var lobby: Dictionary = doc.get("lobby", {}) if doc.get("lobby") is Dictionary else {}
+	for k in vals.keys():
+		lobby[k] = vals[k]
+	doc["lobby"] = lobby
+	var tmp := LAYOUT_PATH + ".tmp"
+	var f := FileAccess.open(tmp, FileAccess.WRITE)
+	if f == null:
+		return false
+	f.store_string(JSON.stringify(doc, " ") + "\n")
+	f.close()
+	var da := DirAccess.open(LAYOUT_PATH.get_base_dir())
+	if da == null or da.rename(tmp.get_file(), LAYOUT_PATH.get_file()) != OK:
+		return false
+	_layout.clear()          # the next _L re-reads what was just written
+	return true
