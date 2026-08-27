@@ -80,7 +80,18 @@ def gather(only: str = "") -> dict:
     pearl, the map that pearl is built from, the token it was written about, and
     the line it sits under. `hang` is carried when the hand has ruled where that
     page hangs, because "which wall was I standing at" is the first thing you
-    want to know reading a note back."""
+    want to know reading a note back.
+
+    THE CHAIN TO THE WALL IS TWO LINKS, NOT ONE. `hang.page` and `adopt.page`
+    both count SHOWINGS — the wall works in a segment, numbered by the dresser —
+    while a line is numbered by its position in the pearl, which also counts the
+    text-only lines and every body that hangs nothing. The first cut of this
+    function looked a hang up by line index, which is a different number that
+    happens to be an integer. So: adopt binds page to token, hang binds page to
+    face, and a line reaches its wall through its TOKEN. Closeness supplies most
+    adoptions and is not written down here, so a cell is reported only when the
+    hand has ruled both links — which is honest, and better than a confident
+    wrong cell."""
     chapters: list[dict] = []
     n_notes = n_lines = 0
     for ch in spine_order():
@@ -94,6 +105,12 @@ def gather(only: str = "") -> dict:
         pearls: list[dict] = []
         for p in doc.get("pearls", []):
             hang = {int(h["page"]): h for h in (p.get("hang") or []) if "page" in h}
+            # token -> the face the hand hung its page on, via adopt
+            face_of: dict[str, dict] = {}
+            for ad in (p.get("adopt") or []):
+                tok, pg = str(ad.get("token", "") or ""), ad.get("page")
+                if tok and pg is not None and int(pg) in hang:
+                    face_of[tok] = hang[int(pg)]
             rows: list[dict] = []
             for i, ln in enumerate(p.get("lines", [])):
                 n_lines += 1
@@ -101,7 +118,7 @@ def gather(only: str = "") -> dict:
                 if not note:
                     continue
                 n_notes += 1
-                h = hang.get(i)
+                h = face_of.get(str(ln.get("token", "") or "")) if ln.get("token") else None
                 rows.append({
                     "index": i,
                     "token": str(ln.get("token", "") or ""),
