@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3]
+
+;; SporeMushroom — fired from the hand, lands on the floor, waits to be eaten.
+;; The script is on the ROOT, which is the rule: GridInteractablesComponent
+;; hands configuration to the node it placed, and a scriptless root drops it.
+
+[ext_resource type="Script" path="res://commons/artifacts/spore_mushroom/spore_mushroom.gd" id="1_shroom"]
+
+[node name="SporeMushroom" type="Node3D"]
+script = ExtResource("1_shroom")

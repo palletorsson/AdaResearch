@@ -6850,6 +6850,35 @@
 			},
 			"qfep_connection": "Perlin's trick \u2014 randomness with spatial correlation \u2014 is what makes the danger legible at all: high red tiles announce themselves through their smooth neighborhoods. The field scrolls, so safety is a gradient you surf, not a place you reach."
 		},
+		"spore_mushroom": {
+			"category": "hazard",
+			"complexity": "beginner",
+			"description": "A rose mushroom with a spotted cap, fired from the hand. It arcs, lands on the floor and joins the group spider_bait, where a head_crab finds it more interesting than the visitor. Eaten, it is worth one degree: the first roots the animal into a spider plant, each further one branches its legs once more.",
+			"dev_themes": [
+				"core",
+				"hazards"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "spore_mushroom",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives",
+				"forces"
+			],
+			"name": "spore_mushroom",
+			"scene": "res://commons/artifacts/spore_mushroom/spore_mushroom.tscn",
+			"size_group": "compact",
+			"tags": [
+				"fungus",
+				"bait",
+				"projectile"
+			]
+		},
 		"head_crab": {
 			"category": "hazard",
 			"complexity": "intermediate",

@@ -69,6 +69,41 @@ const RIG := "res://commons/hazards/octapod_crawler/csg_four_leg_walker.tscn"
 @export var bite_height: float = 2.2      ## vertical reach, so it cannot bite a balcony
 @export var bite_cooldown: float = 0.95
 
+@export_group("Graft")
+## THE MUSHROOM (2026-08-27, Palle: "let me throw mushrooms ... that the spider
+## rather eats. And that makes it get metamorphosed in a spider plant where the
+## leg becomes branched" / "it stops hunting and roots, branch by degrees").
+##
+## A landed mushroom outranks the visitor: the animal breaks off the hunt and
+## walks to it. The FIRST one it eats roots it — it stops hunting, stops
+## biting, and never moves again. Every further mushroom that lands within
+## reach of the rooted plant adds ONE DEGREE of branching.
+##
+## The branching is the project's own L-system, not a new one: LSystemSim
+## rewrites the axiom `degree` times and LSystemTurtle walks it into a single
+## MultiMeshInstance3D per leg. `iterations` IS the degree, which is why the
+## mechanic and the instrument fit without an adaptor.
+@export var eats_mushrooms: bool = true
+@export var graft_max: int = 5
+@export var bait_range: float = 16.0     ## how far it will notice a mushroom
+@export var feed_radius: float = 1.9     ## once rooted, what it can still reach
+## FEWER AND FATTER. The first tuning used a 0.62 step, 0.74 shrink and a
+## 0.055 width, and five degrees of it came out as a pale flat comb — 243
+## segments so thin and so short that the eye read one fan per leg instead of a
+## branching limb. A branch is legible when its FIRST fork is as thick as the
+## thing it grew out of: the leg shaft it erupts from is 0.0564 in rig units at
+## bone 2, so the sprout starts at 0.11 and keeps four fifths of its width each
+## level instead of three quarters.
+@export var sprout_rule: String = "F[+F][&-F]"   ## 3^degree: 243 segments at five
+@export var sprout_angle_deg: float = 31.0
+@export var sprout_step: float = 1.05    ## RIG units — a leg bone is exactly 1.0
+@export var sprout_shrink: float = 0.80
+@export var sprout_width: float = 0.11
+@export var sprout_perturb: float = 0.28 ## so four legs are not four copies
+@export var sprout_bone: int = 2         ## which bone the branching erupts from
+@export var trunk_colour: Color = Color(0.16, 0.27, 0.13)
+@export var tip_colour: Color = Color(0.44, 0.71, 0.26)
+
 # the gait, in the authored rig's own units — scaled to world in _ready
 @export_group("Gait")
 @export var step_threshold_local: float = 1.25
@@ -164,6 +199,10 @@ var _look_t: float = 0.0
 var _patrol_angle: float = 0.0
 var _patrol_t: float = 0.0
 var _rng := RandomNumberGenerator.new()
+var _degree: int = 0          # mushrooms eaten; 0 is an animal, 5 is a garden
+var _rooted: bool = false     # the first mushroom ends the hunt, permanently
+var _sprouts: Array = []      # one MultiMeshInstance3D per leg
+var _bait: Node3D = null      # the mushroom it is walking to
 var _bite_t: float = 0.0      # cooldown, counts down
 var _lunge_t: float = 0.0     # >0 while committed to a leap
 var _lunge_dir: Vector3 = Vector3.ZERO
@@ -519,6 +558,106 @@ func _probe_floor(p: Vector3, up: float, down: float, fallback: float) -> float:
 	return float((hit["position"] as Vector3).y)
 
 
+## the nearest landed mushroom, or null. Bait is anything in the group that
+## says it is bait — the mushroom owns that decision, not the animal.
+func _nearest_bait() -> Node3D:
+	var tree := get_tree()
+	if tree == null:
+		return null
+	var best: Node3D = null
+	var best_d: float = bait_range if not _rooted else feed_radius
+	for n in tree.get_nodes_in_group("spider_bait"):
+		if not (n is Node3D) or not is_instance_valid(n):
+			continue
+		if n.has_method("is_bait") and not bool(n.call("is_bait")):
+			continue
+		var d: float = global_position.distance_to((n as Node3D).global_position)
+		if d < best_d:
+			best_d = d
+			best = n as Node3D
+	return best
+
+
+## Eat it. The first mushroom is the metamorphosis; the rest are degrees.
+func _eat(m: Node3D) -> void:
+	if m == null or not is_instance_valid(m) or not m.has_method("consume"):
+		return
+	var got: int = int(m.call("consume", self))
+	if got <= 0:
+		return
+	_bait = null
+	if not _rooted:
+		_root()
+	_degree = mini(graft_max, _degree + got)
+	_grow(_degree)
+	print("[head_crab] ate a mushroom — degree %d of %d%s" % [
+		_degree, graft_max, " (rooted)" if _rooted else ""])
+
+
+## IT STOPS HUNTING, PERMANENTLY. Not a mode it can leave: no path sets these
+## back. can_bite goes first because the bite is a pure distance test and would
+## otherwise keep firing at a visitor who walks up to look at the plant.
+func _root() -> void:
+	_rooted = true
+	can_bite = false
+	_target = null
+	_lunge_t = 0.0
+	patrol_speed = 0.0
+	chase_speed = 0.0
+
+
+## Rebuild the branching at `degree`. The whole sprout is replaced rather than
+## extended, because LSystemSim.rewrite is deterministic: rewriting the same
+## axiom with the same rule N+1 times contains the N-times string, so the plant
+## grows outward rather than rearranging.
+func _grow(degree: int) -> void:
+	if _rig == null or not is_instance_valid(_rig) or degree <= 0:
+		return
+	for old_s in _sprouts:
+		if is_instance_valid(old_s):
+			(old_s as Node).queue_free()
+	_sprouts.clear()
+
+	var Sim = load("res://commons/lsystem_grammar/lsystem_sim.gd")
+	var Turtle = load("res://commons/lsystem_grammar/lsystem_turtle.gd")
+	if Sim == null or Turtle == null:
+		push_warning("head_crab: no lsystem grammar — nothing to grow")
+		return
+	var word: String = Sim.rewrite("F", {"F": sprout_rule}, degree)
+
+	var legs := 0
+	for skel in _rig.find_children("*", "Skeleton3D", true, false):
+		var attaches: Array = []
+		for c in (skel as Node).get_children():
+			if c is BoneAttachment3D:
+				attaches.append(c)
+		if attaches.is_empty():
+			continue
+		# erupt from partway down the leg, so the branching reads as the LEG
+		# becoming plant rather than as a bouquet tied to its foot
+		var host: Node = attaches[clampi(sprout_bone, 0, attaches.size() - 1)]
+		var walked: Dictionary = Turtle.walk(word, {
+			"angle_deg": sprout_angle_deg,
+			"step_len": sprout_step,
+			"step_shrink": sprout_shrink,
+			"base_width": sprout_width,
+			"width_shrink": sprout_shrink * 0.92,
+			"perturb": sprout_perturb,
+			"seed": 11 + legs * 7,
+		})
+		var mmi: MultiMeshInstance3D = Turtle.to_tubes(walked, trunk_colour, tip_colour, 6)
+		# _apply_finish repaints by albedo and reaches every CSGShape3D and
+		# MeshInstance3D under the rig. A MultiMeshInstance3D is neither, so it
+		# falls through — the meta says so out loud rather than relying on it.
+		mmi.set_meta("finish_role", "sprout")
+		mmi.name = "Sprout_%d" % legs
+		host.add_child(mmi)
+		_sprouts.append(mmi)
+		legs += 1
+	print("[head_crab] grew degree %d on %d leg(s) — %d segment(s) each" % [
+		degree, legs, word.count("F")])
+
+
 ## THE BITE. Proximity, not a collider: this animal moves by writing position
 ## every frame and owns no physics body, so a contact test is a distance test —
 ## the same technique octapod_crawler uses for the same reason.
@@ -635,6 +774,30 @@ func _process(delta: float) -> void:
 	var want_yaw: float = rotation.y
 	var speed: float = patrol_speed
 	_bite_t = maxf(0.0, _bite_t - delta)
+
+	# ── the mushroom outranks the visitor ─────────────────────────────────
+	if eats_mushrooms:
+		_bait = _nearest_bait()
+		if _bait != null:
+			var bd: Vector3 = _bait.global_position - global_position
+			bd.y = 0.0
+			if bd.length() <= (feed_radius if _rooted else bite_range * 1.6):
+				_eat(_bait)
+			elif not _rooted:
+				# break off the hunt and go for it
+				rotation.y = lerp_angle(rotation.y, atan2(-bd.x, -bd.z),
+					minf(1.0, deg_to_rad(turn_speed_deg) * delta))
+				position += -basis.z.normalized() * chase_speed * delta
+				position.y = _floor_y + _ride
+				_update_gait(delta)
+				return
+	if _rooted:
+		# A ROOTED PLANT DOES NOT WALK. The gait is left running on purpose:
+		# with no movement no home drifts past the step threshold, so no foot
+		# ever lifts, and the legs hold exactly the stance they rooted in.
+		_update_gait(delta)
+		return
+
 	if _target != null and is_instance_valid(_target):
 		var to: Vector3 = _target.global_position - global_position
 		to.y = 0.0
