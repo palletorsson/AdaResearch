@@ -50,6 +50,22 @@ def is_candidate(reg, lookup):
 
 # concept -> (strong [w3, lookup bonus], weak [w1], truth). Order: specific first; ties break earlier.
 CONCEPTS = [
+ ("The instance",
+  ["instantiate", "packed_scene", "stamp", "spawner", "prefab"],
+  ["instance", "copy", "clone"],
+  "PackedScene.instantiate(): one authored thing, stamped a thousand times. The first procedural act is a copy - and the engine's only built-in help."),
+ ("The seed as authorship",
+  ["seeded_world", "seed_world", "world_seed", "authorship"],
+  ["seed", "reproducible"],
+  "You do not author the world. You author a RULE and a seed, and the world is the consequence - a signature you can hand someone, from which the whole place unfolds again."),
+ ("The constraint",
+  ["constraint", "adjacency", "tile_rule", "wfc_rule", "sockets"],
+  ["legal", "allowed", "fits"],
+  "Generation is not 'anything' - it is anything that SATISFIES. Adjacency rules, socket matching, budgets: the constraint is what makes the output usable rather than merely novel."),
+ ("The contradiction",
+  ["contradiction", "failure", "retry", "backtrack", "validator"],
+  ["fail", "stuck", "unreachable"],
+  "Generation can FAIL - the collapse with no legal tile, the maze with an unreachable room. The engine has no opinion about whether your world is playable; you must check, and be willing to throw the run away."),
  ("Marching cubes",
   ["marching_cubes", "marchingcube", "marchingcave", "mc_base", "mc_cave", "mc_terrain", "mc_flat",
    "mc_overhang", "mc_portal", "mc_inside", "mc_torus", "mc_shapes", "voxel_noise", "fifteen_cases",

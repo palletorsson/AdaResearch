@@ -2430,6 +2430,25 @@
 				1,
 				1
 			]
+		},
+		"the_absent_author": {
+			"name": "The Absent Author",
+			"class_name": "TheAbsentAuthor",
+			"scene": "res://commons/artifacts/the_absent_author/the_absent_author.tscn",
+			"description": "The procedural generation SUPER OBJECT: a workshop whose author left and the work continued - an empty chair, a card bearing only a seed and a rule, and everything unfolding from it. One authored chair stamped nine times, a strip collapsed under adjacency sockets, a maze dug by a real recursive-backtracker walker, a computed Voronoi claim map, Poisson scatter that never clumps, a thresholded field ridge - and THE FAILED RUN kept on the bench with its red mark, because generation can fail and the engine will not tell you. 2026-08-27.",
+			"category": "procedural_generation",
+			"tags": [
+				"procgen",
+				"super",
+				"synthesis",
+				"seed",
+				"constraint",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 4,
+				"clearance_m": 0.6
+			}
 		}
 	}
 }
