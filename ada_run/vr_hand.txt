@@ -1,16 +1,26 @@
 THE HAND
   holder: yes
   a mushroom in it: yes   a number beside it: '5'
-  it sits 0.32 m along the throwing axis
+  it sits 0.06 m along the throwing axis
   after spending one the number reads '4' (count 4)
-  an empty hand holds nothing, and reads '0'
+  an empty hand shows nothing at all — no mushroom, no zero
+  the held mushroom is not bait
+
+THE AIM, with the controller turned to face BEHIND the visitor
+  vr_aim head: (0.0, 0.0, -1.0)
+  vr_aim hand: (0.0, 0.0, 1.0)   (this is the one that threw at the wall)
 
 THE MUZZLE — a wall 0.30 m in front of the hand
-  it came to rest at (0.0, 0.003988, -4.248222)
+  it came to rest at (0.0, 0.003995, -4.248461)
   planted on that wall: false
 
 THE WALL AT THROWING DISTANCE — 3 m away
-  it came to rest at (20.0, 0.743835, -2.9)
+  it came to rest at (20.0, 0.743832, -2.9)
   stopped by it: true
+
+WALKING OVER ONE
+  a mushroom placed by a map, not thrown: bait after settling: true
+  count 2 -> 3, and the mushroom is gone
+  with a full hand: 5 -> 5, mushroom left where it lies
 
 VERDICT: a mushroom and a number in the hand, and nothing lands at the muzzle

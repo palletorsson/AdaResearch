@@ -77,9 +77,39 @@ func _run() -> void:
 			await process_frame
 			if held != null and held.visible:
 				fails.append("an empty hand is still holding a mushroom")
+			if lab.visible:
+				fails.append("an empty hand is showing a zero")
+			if not held.visible and not lab.visible:
+				_say("  an empty hand shows nothing at all — no mushroom, no zero")
+			# and the held one must never become bait in the visitor's hand
+			if held != null and held.is_in_group("spider_bait"):
+				fails.append("the mushroom in the hand joined spider_bait")
 			else:
-				_say("  an empty hand holds nothing, and reads '%s'" % lab.text)
+				_say("  the held mushroom is not bait")
 	gm.call("refill_mushrooms")
+	_say("")
+
+	# ── THE AIM: a hand pointing the WRONG WAY must still throw forward ───
+	var cam := Camera3D.new()
+	st.add_child(cam)
+	cam.global_position = Vector3(0, 1.6, 0)
+	cam.look_at(Vector3(0, 1.6, -10), Vector3.UP)      # the visitor looks down -Z
+	cam.current = true
+	# and the controller points the opposite way, which is the reported fault
+	controller.rotation = Vector3(0, PI, 0)
+	await process_frame
+	var aim_head: Vector3 = hand.call("_aim_of", controller)
+	hand.set("vr_aim", "hand")
+	var aim_hand: Vector3 = hand.call("_aim_of", controller)
+	hand.set("vr_aim", "head")
+	_say("THE AIM, with the controller turned to face BEHIND the visitor")
+	_say("  vr_aim head: %s" % str(aim_head.snapped(Vector3.ONE * 0.01)))
+	_say("  vr_aim hand: %s   (this is the one that threw at the wall)" % str(aim_hand.snapped(Vector3.ONE * 0.01)))
+	var fwd := -cam.global_transform.basis.z
+	if aim_head.dot(fwd) < 0.95:
+		fails.append("the head aim does not follow the camera")
+	if aim_hand.dot(fwd) > -0.5:
+		fails.append("the probe did not actually reverse the controller — it proves nothing")
 	_say("")
 
 	# ── the muzzle: a wall right in front of the hand ─────────────────────
@@ -109,6 +139,46 @@ func _run() -> void:
 	_say("  stopped by it: %s" % str(hit_wall))
 	if not hit_wall:
 		fails.append("a wall 3 m away did not stop it — the muzzle is swallowing real hits")
+
+	# ── WALK OVER ONE AND IT IS YOURS ─────────────────────────────────────
+	gm.set("mushrooms", 2)
+	gm.emit_signal("mushrooms_updated", 2, 5)
+	var lying: Node3D = ps.instantiate() as Node3D
+	st.add_child(lying)
+	lying.global_position = Vector3(-8, 0, 0)
+	await create_timer(0.4).timeout
+	_say("")
+	_say("WALKING OVER ONE")
+	_say("  a mushroom placed by a map, not thrown: bait after settling: %s"
+		% str(lying.is_in_group("spider_bait")))
+	if not lying.is_in_group("spider_bait"):
+		fails.append("a placed mushroom never settled — it is scenery")
+	var walker := Node3D.new()
+	walker.add_to_group("player")
+	st.add_child(walker)
+	walker.global_position = Vector3(-40, 0.5, 0)      # nowhere near it yet
+	await create_timer(1.6).timeout
+	var before_pick: int = int(gm.get("mushrooms"))
+	walker.global_position = Vector3(-8, 0.5, 0)       # stand on it
+	await create_timer(0.8).timeout
+	var after_pick: int = int(gm.get("mushrooms"))
+	_say("  count %d -> %d, and the mushroom is %s"
+		% [before_pick, after_pick, ("gone" if not is_instance_valid(lying) else "still there")])
+	if after_pick != before_pick + 1:
+		fails.append("walking over it did not pick it up")
+	# a full hand must walk straight over one
+	gm.call("refill_mushrooms")
+	var spare: Node3D = ps.instantiate() as Node3D
+	st.add_child(spare)
+	spare.global_position = Vector3(-8, 0, 3)
+	await create_timer(1.8).timeout
+	var full_before: int = int(gm.get("mushrooms"))
+	walker.global_position = Vector3(-8, 0.5, 3)
+	await create_timer(0.8).timeout
+	_say("  with a full hand: %d -> %d, mushroom %s"
+		% [full_before, int(gm.get("mushrooms")), ("taken" if not is_instance_valid(spare) else "left where it lies")])
+	if not is_instance_valid(spare):
+		fails.append("a full hand still picked one up")
 
 	_say("")
 	for f in fails: _say("FAIL %s" % f)

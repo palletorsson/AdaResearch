@@ -41,11 +41,23 @@ const DESKTOP_KEYS := [KEY_F]
 ## that points where the throw goes turns a mystery into a glance.
 @export var show_vr_hand: bool = true
 @export var vr_hand_scale: float = 0.55
-## WHICH WAY IS FORWARD. "hand" is the controller's own -Z, which is what the
-## laser pointer and the gravity gun both use in this project. If a throw still
-## goes behind you on your runtime, "flip" is the same axis reversed and "head"
-## throws where you are looking instead of where you point.
-@export_enum("hand", "flip", "head") var vr_aim: String = "hand"
+## WHICH WAY IS FORWARD — and the answer turned out to be "where you are
+## looking" (2026-08-27, Palle: "they stick on the wall in the back and are not
+## shooting forward, in the menu the mushrooms goes forward", with a screenshot
+## of five mushrooms on a wall and a count reading 0 in both hands).
+##
+## "hand" is the controller's own -Z, which is what this project's laser pointer
+## and its gravity gun both use — and on Palle's runtime it throws BACKWARDS.
+## The controller pose an OpenXR runtime hands back is the GRIP pose unless a
+## node asks for the aim pose, and a grip pose's -Z runs along the handle, not
+## out past the knuckles. Which way along the handle is a fact about the
+## controller, not about this code, so there is no correction to write.
+##
+## "head" cannot be backwards. The camera's -Z is where the visitor is looking
+## by definition, and the desktop lane has thrown that way since the first day
+## — which is the same thing Palle means by "in the menu the mushrooms goes
+## forward". The throw still LEAVES the hand; only the direction is the head's.
+@export_enum("head", "hand", "flip") var vr_aim: String = "head"
 @export var muzzle: float = 0.5           ## metres of flight before it may land
 
 var _cool: float = 0.0
@@ -238,28 +250,34 @@ func _build_vr_hand(controller: Node3D) -> void:
 	var holder := Node3D.new()
 	holder.name = "MushroomInHand"
 	controller.add_child(holder)
-	# at the muzzle, on the throwing axis — flip and head aims move it too, so
-	# what you see is always what you get
-	var fwd := Vector3(0, 0, -1) if vr_aim != "flip" else Vector3(0, 0, 1)
-	holder.position = fwd * spawn_ahead + Vector3(0, -0.03, 0)
+	# IN the hand, a few centimetres off the grip — not out along the throwing
+	# axis. The first version put it at the muzzle so the aim would be visible,
+	# and on a runtime whose grip -Z runs backwards that put a mushroom behind
+	# the visitor's wrist, which read as "stuck to the wall". A held thing
+	# should look held; the aim is the head's now and needs no marker.
+	holder.position = Vector3(0.0, 0.035, -0.045)
 
 	if ResourceLoader.exists(MUSHROOM):
 		var body: Node3D = (load(MUSHROOM) as PackedScene).instantiate() as Node3D
 		body.name = "Held"
-		# it stays in its HELD state: no arc, no floor, never bait
+		# it stays in its HELD state: no arc, no floor, never bait, and never
+		# picked back up off the hand it is sitting in
+		body.set("held_in_hand", true)
 		holder.add_child(body)
 		body.scale = Vector3.ONE * vr_hand_scale
 
 	var l := Label3D.new()
 	l.name = "Count"
 	l.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	l.no_depth_test = true
-	l.font_size = 96
-	l.pixel_size = 0.0012
+	# NOT no_depth_test. Drawing through geometry is what made two counts look
+	# pasted to the far wall in the headset instead of floating over two hands.
+	l.no_depth_test = false
+	l.font_size = 72
+	l.pixel_size = 0.0008
 	l.modulate = Color(0.99, 0.80, 0.86)
 	l.outline_size = 26
 	l.outline_modulate = Color(0.10, 0.06, 0.09, 0.85)
-	l.position = Vector3(0.0, 0.085, 0.0)
+	l.position = Vector3(0.0, 0.055, 0.0)
 	holder.add_child(l)
 	_hands.append(holder)
 	_refresh_vr_hands()
@@ -275,9 +293,12 @@ func _refresh_vr_hands() -> void:
 		var l := holder.get_node_or_null("Count") as Label3D
 		if l != null:
 			l.text = str(n)
+			# NO ZERO (2026-08-27, Palle: "do not show the zero"). An empty hand
+			# shows nothing at all rather than a nought floating in the air —
+			# the absence IS the count, and one fewer glowing digit in a museum.
+			l.visible = n > 0
 		var body := holder.get_node_or_null("Held") as Node3D
 		if body != null:
-			# an empty hand holds nothing, and the number says zero
 			body.visible = n > 0
 
 

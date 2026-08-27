@@ -243,6 +243,16 @@ func spend_mushroom() -> bool:
 	return true
 
 
+## Picked one up off the floor. Refuses when the hand is already full, so a
+## visitor cannot bank more than they can carry.
+func add_mushroom(n: int = 1) -> bool:
+	if mushrooms >= max_mushrooms:
+		return false
+	mushrooms = mini(max_mushrooms, mushrooms + n)
+	emit_signal("mushrooms_updated", mushrooms, max_mushrooms)
+	return true
+
+
 func refill_mushrooms() -> void:
 	if mushrooms == max_mushrooms:
 		return

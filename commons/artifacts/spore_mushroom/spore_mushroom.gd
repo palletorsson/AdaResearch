@@ -41,6 +41,22 @@ const BAIT_GROUP := "spider_bait"
 @export var bounce: float = 0.18
 @export var settle_speed: float = 0.35    ## below this it stops and becomes bait
 
+## WALK OVER IT AND IT IS YOURS (2026-08-27, Palle: "place mushroom i can pick
+## up by work over them"). No button and no aiming: a landed mushroom is picked
+## up by standing on it, which is the only interaction a museum visitor already
+## knows how to do. Whoever gets there first gets it — the spider eats what it
+## reaches, and so do you.
+## TRUE for the one riding in a hand. Without it the deferred settle below
+## would plant the held mushroom where the controller happened to be, and the
+## visitor would spend the whole game carrying a piece of bait the spider was
+## walking toward.
+@export var held_in_hand: bool = false
+@export var can_be_picked_up: bool = true
+@export var pickup_radius: float = 0.62
+## a thrown mushroom that lands at your feet must not jump straight back into
+## your hand, or a throw at close range is a no-op you cannot see
+@export var pickup_delay: float = 1.4
+
 ## a scene to use as the body instead of the built one — set by the placer when
 ## the corpus turns out to own a better mushroom than this file draws
 @export var visual_scene: String = ""
@@ -51,12 +67,17 @@ var _vel: Vector3 = Vector3.ZERO
 var _life: float = 0.0
 var _bob: float = 0.0
 var _muzzle: float = 0.0     # metres of flight before it may land
+var _look_t: float = 0.0     # throttles the pickup test
 var _rest_y: float = 0.0
 var _rng := RandomNumberGenerator.new()
 
 
 func _ready() -> void:
 	_rng.randomize()
+	# PLACED BY A MAP, not thrown: the grid stands it on the floor and nobody
+	# ever calls launch(), so it has to make itself bait on its own or it is
+	# scenery — invisible to the spider and to a visitor walking over it.
+	call_deferred("_settle_if_placed")
 	if visual_scene != "" and ResourceLoader.exists(visual_scene):
 		var ps: PackedScene = load(visual_scene) as PackedScene
 		if ps != null:
@@ -66,6 +87,13 @@ func _ready() -> void:
 	else:
 		_build()
 	set_process(true)
+
+
+func _settle_if_placed() -> void:
+	if held_in_hand:
+		return
+	if _state == State.HELD:
+		_plant(global_position)
 
 
 ## Fired from a hand. `dir` need not be normalised; `speed` is metres per second.
@@ -131,6 +159,47 @@ func _process(delta: float) -> void:
 		# a slow breath, so a landed mushroom reads as alive rather than as debris
 		_bob += delta
 		position.y = _rest_y + sin(_bob * 1.6) * 0.004
+		if can_be_picked_up and _bob > pickup_delay:
+			_look_t += delta
+			if _look_t > 0.15:            # eight times a second is plenty
+				_look_t = 0.0
+				_try_pickup()
+
+
+## Anyone standing on it takes it: the grid's player, the museum's walker, both
+## by group so neither lane needs to know about this artifact.
+func _try_pickup() -> void:
+	var tree := get_tree()
+	if tree == null:
+		return
+	var gm := tree.root.get_node_or_null("GameManager")
+	if gm == null or not gm.has_method("add_mushroom"):
+		return
+	if int(gm.get("mushrooms")) >= int(gm.get("max_mushrooms")):
+		return                            # a full hand walks straight over it
+	for g in ["player", "player_body", "em_walker"]:
+		for n in tree.get_nodes_in_group(g):
+			if not (n is Node3D) or not is_instance_valid(n):
+				continue
+			var off: Vector3 = (n as Node3D).global_position - global_position
+			if absf(off.y) > 2.2:
+				continue                  # a visitor on the floor above is not standing on it
+			off.y = 0.0
+			if off.length() > pickup_radius:
+				continue
+			if bool(gm.call("add_mushroom", 1)):
+				_collect()
+			return
+
+
+func _collect() -> void:
+	_state = State.EATEN
+	remove_from_group(BAIT_GROUP)
+	var tw := create_tween()
+	tw.set_parallel(true)
+	tw.tween_property(self, "position:y", position.y + 0.45, 0.34).set_trans(Tween.TRANS_SINE)
+	tw.tween_property(self, "scale", Vector3.ONE * 0.001, 0.34).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+	tw.chain().tween_callback(queue_free)
 
 
 func _plant(at: Vector3) -> void:
