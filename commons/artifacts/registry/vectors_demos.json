@@ -5491,6 +5491,63 @@
 				1,
 				2
 			]
+		},
+		"paused_fountain": {
+			"name": "Paused Fountain",
+			"class_name": "PausedFountain",
+			"scene": "res://commons/artifacts/paused_fountain/paused_fountain.tscn",
+			"description": "A fountain of museum props frozen along their own parabolas - spacing is speed, the shared bend is g. Press the button and one live throw finishes its sentence under engine gravity. Forces prop gallery, 2026-08-27.",
+			"category": "vectors_demos",
+			"tags": [
+				"forces",
+				"gravity",
+				"velocity",
+				"acceleration",
+				"prop",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 4,
+				"clearance_m": 0.6
+			}
+		},
+		"prop_mobile": {
+			"name": "Prop Mobile",
+			"class_name": "PropMobile",
+			"scene": "res://commons/artifacts/prop_mobile/prop_mobile.tscn",
+			"description": "Calder in drag: museum props hung genuinely balanced, every arm solving w*d = w*d with the heavier prop on the shorter arm. Torque as furniture. Forces prop gallery, 2026-08-27.",
+			"category": "vectors_demos",
+			"tags": [
+				"forces",
+				"torque",
+				"lever",
+				"prop",
+				"surreal",
+				"calder"
+			],
+			"spatial_needs": {
+				"footprint_cells": 3,
+				"clearance_m": 0.6
+			}
+		},
+		"prop_spigot": {
+			"name": "Prop Spigot",
+			"class_name": "PropSpigot",
+			"scene": "res://commons/artifacts/prop_spigot/prop_spigot.tscn",
+			"description": "Garry's Mod 2040: a duct rains pooled crates into a pan, piles slump at friction's angle, and two heavy wedges you can move reroute the fall. The physics engine as the exhibit. Forces prop gallery, 2026-08-27.",
+			"category": "vectors_demos",
+			"tags": [
+				"forces",
+				"gravity",
+				"friction",
+				"collision",
+				"prop",
+				"sandbox"
+			],
+			"spatial_needs": {
+				"footprint_cells": 4,
+				"clearance_m": 0.6
+			}
 		}
 	}
 }
