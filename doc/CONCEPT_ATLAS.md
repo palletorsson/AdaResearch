@@ -163,6 +163,21 @@ Gallery: localhost:3003/formfinding-concepts (20 tiles, 6 sections).
 primitives.json 256 → 259 — an LF registry (the CRLF seam refused correctly; the
 appender now detects the newline style).
 
+**The supers (2026-08-27, Palle: "make one super object for each").** Each finished
+taxonomy now closes with ONE object folding its whole ladder into a single body:
+orrery_of_forces (the forces ladder as a brass machine - true-equation pendulum and
+spring, orrery-honest orbits, a paused parabola, a poised cradle, a crown of field
+vanes), chromatic_organ (twelve colour rungs as one cathedral organ), 
+switchboard_constellation (the graph shift: tree + refused cycles, marrying isles,
+a live-AStar call, the tide, a desk engraving with one honest ellipsis),
+genesis_lathe (the primitives bench from blinking point to wireframe confession),
+and the_choreography (transformation: one dancer, every transform - the dancer is
+the invariant; seated in the new Order-matters rung). Going forward each sequence
+gets its refined canon plus one super: transformation's canon gained Order matters /
+The inverse / Local and global the same day, and build_concept_map now CARRIES
+FORWARD sections it does not own (the June palette sections - dropping one silently
+deleted 52 curation candidates from transformation before the rule existed).
+
 ## B · The plan: this list, for all 22 sequences
 
 **What already exists (audit 2026-08-27).** 21 of 22 spine sequences have a

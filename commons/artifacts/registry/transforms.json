@@ -2728,6 +2728,24 @@
 				"footprint_cells": 4,
 				"clearance_m": 0.6
 			}
+		},
+		"the_choreography": {
+			"name": "The Choreography",
+			"class_name": "TheChoreography",
+			"scene": "res://commons/artifacts/the_choreography/the_choreography.tscn",
+			"description": "The transformation SUPER OBJECT: one dancer, every transform - slid, turned, grown, sheared, composed, her ghost at the origin; the order-matters pair apart on the same two moves; the mirror unwinding home by affine_inverse; footprints tiled; the stage turning every local through the world. The dancer is the invariant. 2026-08-27.",
+			"category": "transforms",
+			"tags": [
+				"transformation",
+				"super",
+				"synthesis",
+				"choreography",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 4,
+				"clearance_m": 0.6
+			}
 		}
 	}
 }

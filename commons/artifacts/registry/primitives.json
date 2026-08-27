@@ -26020,6 +26020,23 @@
 				"footprint_cells": 2,
 				"clearance_m": 0.6
 			}
+		},
+		"genesis_lathe": {
+			"name": "Genesis Lathe",
+			"class_name": "GenesisLathe",
+			"scene": "res://commons/artifacts/genesis_lathe/genesis_lathe.tscn",
+			"description": "The primitives SUPER OBJECT: the whole ladder on one bench, forever - blinking point stand-in, growing line, first face with its shadow, the plane, seven words in procession, a sphere paying its smoothness budget, the torus confessing its triangles. The spark is the reader. 2026-08-27.",
+			"category": "primitives",
+			"tags": [
+				"primitives",
+				"super",
+				"synthesis",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 3,
+				"clearance_m": 0.6
+			}
 		}
 	},
 	"registry_info": {

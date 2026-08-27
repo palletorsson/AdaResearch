@@ -3921,6 +3921,24 @@
 				"footprint_cells": 2,
 				"clearance_m": 0.6
 			}
+		},
+		"chromatic_organ": {
+			"name": "Chromatic Organ",
+			"class_name": "ChromaticOrgan",
+			"scene": "res://commons/artifacts/chromatic_organ/chromatic_organ.tscn",
+			"description": "The color SUPER OBJECT: twelve rungs as one cathedral organ - swinging bulb, R/G/B great pipes over a mix basin, hue-ordered ranks in four dresses, a sweeping stage lamp re-dealing seen-colour, the two roads up the towers, complementary stops, quarrelling grey keys, a halo room. 2026-08-27.",
+			"category": "color",
+			"tags": [
+				"color",
+				"super",
+				"synthesis",
+				"organ",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 4,
+				"clearance_m": 0.6
+			}
 		}
 	},
 	"registry_info": {

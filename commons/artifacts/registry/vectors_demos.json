@@ -5793,6 +5793,24 @@
 				"footprint_cells": 3,
 				"clearance_m": 0.6
 			}
+		},
+		"orrery_of_forces": {
+			"name": "Orrery Of Forces",
+			"class_name": "OrreryOfForces",
+			"scene": "res://commons/artifacts/orrery_of_forces/orrery_of_forces.tscn",
+			"description": "The forces SUPER OBJECT: the whole ladder as one brass machine - mass, orbit and moonlet, a true-equation pendulum and spring, a paused parabola, a poised cradle, and a crown of field vanes. Clockwork that admits it. 2026-08-27.",
+			"category": "vectors_demos",
+			"tags": [
+				"forces",
+				"super",
+				"synthesis",
+				"orrery",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 3,
+				"clearance_m": 0.6
+			}
 		}
 	}
 }

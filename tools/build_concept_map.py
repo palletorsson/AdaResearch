@@ -77,7 +77,7 @@ CONFIG = {
     ["mst", "spanning", "flow", "matching", "karger", "edmonds", "relabel"], ["network", "cost"]),
    ("The graph you are in", "VII - the mirror",
     "get_children(): you have been standing in a graph all along. This map, this artifact, you - nodes under one root.",
-    ["tree_you_are_in", "mirror", "self"], ["subtree", "reflection"]),
+    ["tree_you_are_in", "mirror", "self", "switchboard"], ["subtree", "reflection"]),
   ],
   "catch_all": ("Off the ladder", "meta", "graph-registry artifacts the taxonomy does not yet claim. A chip decides their fate."),
  },
@@ -131,7 +131,7 @@ CONFIG = {
     ["glitch", "subpixel", "banding", "pixel", "artifact_compression"], ["screen", "digital"]),
    ("The room", "VI - the screen and the room",
     "Environment: ambient, fog, sky. Color you stand INSIDE - Rothko as weather, Turrell as architecture. The loop closes: color is perception.",
-    ["fog", "ambient", "atmosphere", "constellation", "office", "forest", "room", "rothko", "turrell"], ["environment", "inside"]),
+    ["fog", "ambient", "atmosphere", "constellation", "office", "forest", "room", "rothko", "turrell", "organ"], ["environment", "inside"]),
   ],
   "catch_all": ("Off the ladder", "meta", "color-registry artifacts the taxonomy does not yet claim - furniture, sticks, factories. A chip decides their fate."),
  },
@@ -147,6 +147,9 @@ CONFIG = {
    ("Scale", "rigid motions", "scale resizes; a shape is a ratio held against a unit.", ["scale", "scaleme", "dilation", "resize", "rotatescale"], ["bigger", "shrink"]),
    ("Shear", "beyond rigid", "shear slides parallel layers past each other.", ["shear", "skew"], ["slant"]),
    ("Composition", "beyond rigid", "transforms compose, and the order is the meaning.", ["composition", "compose", "transform_composition", "carousel_cake"], ["chain", "sequence"]),
+   ("Order matters", "compose", "T after R is not R after T — composition does not commute, and the difference is geometry, not bookkeeping.", ["order_matters", "noncommut", "choreography"], ["ab_ba"]),
+   ("The inverse", "compose", "affine_inverse: every rigid move can be unsaid — the undo is itself a transform, and composing a move with its inverse is the identity.", ["inverse", "undo", "unwind"], ["affine_inverse"]),
+   ("Local and global", "compose", "a child's transform lives INSIDE its parent's — the dancer keeps her pose while the stage turns her through the world.", ["local_global", "stage", "parent_space"], ["inherit"]),
    ("Matrix / homogeneous", "representation", "every transform is a matrix; homogeneous coordinates unify them.", ["matrix_4x4", "homogeneous", "homogeneous_coordinates", "4x4"], ["matrix", "linear"]),
    ("Invariants", "representation", "what a transform leaves unchanged names its kind.", ["invariant", "invariants_demo", "preserve"], ["unchanged"]),
    ("Tiling / pattern", "operations on space", "a transform repeated fills a plane.", ["floor_tiles", "tile", "tiling", "pattern"], ["repeat", "wallpaper"]),
@@ -184,7 +187,7 @@ CONFIG = {
    ("Curve / organic", "structures", "the smooth and the grown — designed and botanical form.", ["vase", "tree", "flower", "tulip", "aalto", "alessi", "bezier", "spline", "lathe", "blob", "leaf", "organic"], ["curve", "smooth"]),
    ("Text / glyph", "meta", "a primitive that carries a symbol.", ["text", "glyph", "letter", "pixel_heart", "icon", "label", "number"], ["font"]),
    ("Assembly / SDF / boolean", "meta", "primitives combined: union, subtraction, the assembler.", ["assembler", "combine", "combo", "boolean", "csg", "sdf", "union", "composite", "merge"], ["assembly"]),
-   ("Everything is triangles", "the confession", "under every solid here, triangles all the way down — the wireframe twin shows the seams.", ["wireframe", "confession"], ["mesh_edges"]),
+   ("Everything is triangles", "the confession", "under every solid here, triangles all the way down — the wireframe twin shows the seams.", ["wireframe", "confession", "lathe"], ["mesh_edges"]),
    ("Interactive tool", "meta", "a primitive you grab, drag, snap or edit.", ["slider", "plate", "drag", "snap", "grab_tetrahedron", "grab_octahedron", "puzzle", "editor", "builder", "xyz_slider", "edit"], ["tool"]),
   ],
   "catch_all": ("Other primitives", "meta", "primitive artifacts not yet sorted."),
@@ -316,6 +319,29 @@ def main():
         if dm not in CONFIG:
             print("no config for", dm); continue
         out = build(dm)
+        # CARRY FORWARD sections this builder does not own. The June maps carried a
+        # "palette (unplaced)" section appended by another tool; a regen that drops it
+        # silently deletes 50+ curation candidates from the concept gallery (measured
+        # on transformation, 2026-08-27). Any concept present in the existing file but
+        # absent from the config survives, minus tokens the new scoring now claims.
+        prev_path = os.path.join(DOC, dm + "_concept_map.json")
+        if os.path.exists(prev_path):
+            try:
+                prev = json.load(open(prev_path, encoding="utf-8"))
+                claimed = {x["lookup"] for g in out["groups"].values() for x in g}
+                for c in prev.get("concepts", []):
+                    if c in out["concepts"]:
+                        continue
+                    kept = [x for x in prev.get("groups", {}).get(c, [])
+                            if x.get("lookup") not in claimed]
+                    if kept:
+                        out["concepts"].append(c)
+                        out["groups"][c] = kept
+                        out["concept_meta"][c] = prev.get("concept_meta", {}).get(c,
+                            {"count": len(kept), "truth": "carried forward"})
+                        out["concept_meta"][c]["count"] = len(kept)
+            except Exception as e:
+                print("  carry-forward skipped:", e)
         json.dump(out, open(os.path.join(DOC, dm + "_concept_map.json"), "w", encoding="utf-8"), indent=2, ensure_ascii=False)
         print("%s: %d artifacts -> %d concepts -> doc/%s_concept_map.json" % (dm, out["total"], out["total_concepts"], dm))
         for k in out["concepts"]:

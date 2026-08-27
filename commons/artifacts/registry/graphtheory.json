@@ -146,6 +146,24 @@
 				"footprint_cells": 2,
 				"clearance_m": 0.6
 			}
+		},
+		"switchboard_constellation": {
+			"name": "Switchboard Constellation",
+			"class_name": "SwitchboardConstellation",
+			"scene": "res://commons/artifacts/switchboard_constellation/switchboard_constellation.tscn",
+			"description": "The graph SUPER OBJECT: an operator's switchboard grown into a constellation - tree plus refused cycles, a five-cord hub, isles married and divorced on the bridge's own clock, a call on the live AStar3D shortest path, the tide, and a desk engraving with one honest ellipsis. 2026-08-27.",
+			"category": "graphtheory",
+			"tags": [
+				"graph",
+				"super",
+				"synthesis",
+				"switchboard",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 3,
+				"clearance_m": 0.6
+			}
 		}
 	}
 }

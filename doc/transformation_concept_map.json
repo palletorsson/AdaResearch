@@ -10,6 +10,9 @@
     "Scale",
     "Shear",
     "Composition",
+    "Order matters",
+    "The inverse",
+    "Local and global",
     "Matrix / homogeneous",
     "Invariants",
     "Tiling / pattern",
@@ -24,14 +27,16 @@
       "truth": "translation, rotation, scale: the grammar of motion.",
       "tiers": {
         "small": [],
-        "medium": [],
+        "medium": [
+          "baggage_grammar"
+        ],
         "large": [],
         "applied": [
           "transformation_workbench"
         ]
       },
-      "count": 1,
-      "thin": true
+      "count": 2,
+      "thin": false
     },
     "Translation": {
       "act": "rigid motions",
@@ -40,6 +45,7 @@
         "small": [],
         "medium": [
           "axis_translation_cube",
+          "sleepwalking_bed",
           "translation_cube_demo",
           "x_translation_cube",
           "y_translation_cube",
@@ -48,7 +54,7 @@
         "large": [],
         "applied": []
       },
-      "count": 5,
+      "count": 6,
       "thin": false
     },
     "Rotation": {
@@ -57,13 +63,15 @@
       "tiers": {
         "small": [],
         "medium": [
+          "furniture_turntable",
           "rotation_gimbal",
-          "spin"
+          "spin",
+          "stepped_transform"
         ],
         "large": [],
         "applied": []
       },
-      "count": 2,
+      "count": 4,
       "thin": false
     },
     "Scale": {
@@ -72,14 +80,13 @@
       "tiers": {
         "small": [
           "rotatescalecubes",
-          "scaleme",
-          "scale_me"
+          "scaleme"
         ],
         "medium": [],
         "large": [],
         "applied": []
       },
-      "count": 3,
+      "count": 2,
       "thin": false
     },
     "Shear": {
@@ -88,13 +95,15 @@
       "tiers": {
         "small": [],
         "medium": [
+          "identity_lineup",
+          "italic_bookcase",
           "shear_matrix_demo"
         ],
         "large": [],
         "applied": []
       },
-      "count": 1,
-      "thin": true
+      "count": 3,
+      "thin": false
     },
     "Composition": {
       "act": "beyond rigid",
@@ -102,7 +111,7 @@
       "tiers": {
         "small": [],
         "medium": [
-          "transform_composition_workbench"
+          "two_cakes"
         ],
         "large": [],
         "applied": [
@@ -113,16 +122,53 @@
       "count": 3,
       "thin": false
     },
+    "Order matters": {
+      "act": "compose",
+      "truth": "T after R is not R after T — composition does not commute, and the difference is geometry, not bookkeeping.",
+      "tiers": {
+        "small": [],
+        "medium": [
+          "the_choreography"
+        ],
+        "large": [],
+        "applied": []
+      },
+      "count": 1,
+      "thin": true
+    },
+    "The inverse": {
+      "act": "compose",
+      "truth": "affine_inverse: every rigid move can be unsaid — the undo is itself a transform, and composing a move with its inverse is the identity.",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "count": 0,
+      "thin": true
+    },
+    "Local and global": {
+      "act": "compose",
+      "truth": "a child's transform lives INSIDE its parent's — the dancer keeps her pose while the stage turns her through the world.",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "count": 0,
+      "thin": true
+    },
     "Matrix / homogeneous": {
       "act": "representation",
       "truth": "every transform is a matrix; homogeneous coordinates unify them.",
       "tiers": {
-        "small": [
-          "transform_matrix_cube"
-        ],
+        "small": [],
         "medium": [
           "homogeneous_coordinates",
-          "matrix_4x4_viewer"
+          "matrix_4x4_viewer",
+          "matrix_stamps"
         ],
         "large": [],
         "applied": []
@@ -149,15 +195,13 @@
       "truth": "a transform repeated fills a plane.",
       "tiers": {
         "small": [],
-        "medium": [
-          "pattern_tile_brick"
-        ],
+        "medium": [],
         "large": [
           "floor_tiles"
         ],
         "applied": []
       },
-      "count": 2,
+      "count": 1,
       "thin": true
     },
     "Field / flow": {
@@ -292,175 +336,271 @@
   "concept_distance": [
     [
       0.0,
-      0.5248,
-      0.686,
-      0.3483,
-      0.5386,
-      0.5599,
-      0.0,
-      0.8026,
+      0.506,
+      0.3613,
+      0.4677,
+      0.5636,
+      0.5136,
+      0.8381,
+      0.8878,
+      0.879,
+      0.1623,
+      0.8235,
       1.0,
-      0.8704,
-      0.8231,
-      0.7892
+      0.8915,
+      0.8068,
+      0.7881
     ],
     [
-      0.5248,
+      0.506,
       0.0,
-      0.6533,
-      0.7809,
-      0.8779,
-      0.5126,
-      0.619,
-      0.8574,
+      0.5757,
+      0.7664,
+      0.7735,
+      0.5002,
+      0.7776,
+      0.7697,
+      0.7301,
+      0.6145,
+      0.844,
       1.0,
-      0.9787,
-      0.6978,
-      0.7096
+      0.9879,
+      0.6888,
+      0.6904
     ],
     [
-      0.686,
-      0.6533,
+      0.3613,
+      0.5757,
       0.0,
-      0.8814,
-      0.764,
-      0.106,
-      0.6103,
-      0.775,
-      1.0,
-      0.9661,
-      0.7084,
-      0.6052
+      0.8582,
+      0.5853,
+      0.1736,
+      0.7055,
+      0.8252,
+      0.524,
+      0.4514,
+      0.7605,
+      0.9537,
+      0.8836,
+      0.763,
+      0.5703
     ],
     [
-      0.3483,
-      0.7809,
-      0.8814,
+      0.4677,
+      0.7664,
+      0.8582,
       0.0,
-      0.5835,
-      0.643,
-      0.5079,
-      0.8042,
-      1.0,
-      1.0,
-      0.8128,
-      0.9078
-    ],
-    [
-      0.5386,
-      0.8779,
-      0.764,
-      0.5835,
-      0.0,
-      0.5946,
-      0.4188,
-      0.6946,
-      1.0,
-      1.0,
-      0.9638,
-      0.8357
-    ],
-    [
-      0.5599,
-      0.5126,
-      0.106,
-      0.643,
-      0.5946,
-      0.0,
-      0.4622,
-      0.6824,
-      0.8861,
-      0.8455,
-      0.6225,
-      0.7474
-    ],
-    [
-      0.0,
-      0.619,
-      0.6103,
-      0.5079,
-      0.4188,
-      0.4622,
-      0.0,
+      0.7509,
       0.6304,
-      0.9429,
-      0.9417,
-      0.8893,
-      0.762
+      0.9399,
+      1.0,
+      1.0,
+      0.5119,
+      0.7747,
+      1.0,
+      1.0,
+      0.7781,
+      0.8882
     ],
     [
-      0.8026,
-      0.8574,
-      0.775,
-      0.8042,
-      0.6946,
-      0.6824,
+      0.5636,
+      0.7735,
+      0.5853,
+      0.7509,
+      0.0,
+      0.5236,
+      0.5378,
+      0.7555,
+      1.0,
+      0.3559,
+      0.7196,
+      1.0,
+      0.9812,
+      0.9741,
+      0.8331
+    ],
+    [
+      0.5136,
+      0.5002,
+      0.1736,
       0.6304,
+      0.5236,
       0.0,
-      0.8676,
-      0.9448,
-      0.972,
-      0.8054
+      0.6312,
+      0.9003,
+      0.7572,
+      0.4447,
+      0.7313,
+      0.9337,
+      0.8819,
+      0.5849,
+      0.7701
+    ],
+    [
+      0.8381,
+      0.7776,
+      0.7055,
+      0.9399,
+      0.5378,
+      0.6312,
+      0.0,
+      0.1677,
+      0.0,
+      0.8586,
+      0.8711,
+      0.9487,
+      0.7935,
+      0.8014,
+      0.854
+    ],
+    [
+      0.8878,
+      0.7697,
+      0.8252,
+      1.0,
+      0.7555,
+      0.9003,
+      0.1677,
+      0.0,
+      0.917,
+      0.9341,
+      0.9178,
+      0.9091,
+      0.912,
+      1.0,
+      0.8874
+    ],
+    [
+      0.879,
+      0.7301,
+      0.524,
+      1.0,
+      1.0,
+      0.7572,
+      0.0,
+      0.917,
+      0.0,
+      0.922,
+      0.9182,
+      0.9099,
+      0.962,
+      0.8385,
+      0.7822
+    ],
+    [
+      0.1623,
+      0.6145,
+      0.4514,
+      0.5119,
+      0.3559,
+      0.4447,
+      0.8586,
+      0.9341,
+      0.922,
+      0.0,
+      0.5786,
+      0.9691,
+      0.97,
+      0.8757,
+      0.7647
+    ],
+    [
+      0.8235,
+      0.844,
+      0.7605,
+      0.7747,
+      0.7196,
+      0.7313,
+      0.8711,
+      0.9178,
+      0.9182,
+      0.5786,
+      0.0,
+      0.9107,
+      0.9625,
+      0.9654,
+      0.8018
     ],
     [
       1.0,
       1.0,
+      0.9537,
       1.0,
       1.0,
-      1.0,
-      0.8861,
-      0.9429,
-      0.8676,
+      0.9337,
+      0.9487,
+      0.9091,
+      0.9099,
+      0.9691,
+      0.9107,
       0.0,
-      0.9389,
-      0.8298,
-      0.8976
+      0.9587,
+      0.8139,
+      0.8995
     ],
     [
-      0.8704,
-      0.9787,
-      0.9661,
+      0.8915,
+      0.9879,
+      0.8836,
       1.0,
-      1.0,
-      0.8455,
-      0.9417,
-      0.9448,
-      0.9389,
+      0.9812,
+      0.8819,
+      0.7935,
+      0.912,
+      0.962,
+      0.97,
+      0.9625,
+      0.9587,
       0.0,
       1.0,
-      0.8688
+      0.8619
     ],
     [
-      0.8231,
-      0.6978,
-      0.7084,
-      0.8128,
-      0.9638,
-      0.6225,
-      0.8893,
-      0.972,
-      0.8298,
+      0.8068,
+      0.6888,
+      0.763,
+      0.7781,
+      0.9741,
+      0.5849,
+      0.8014,
+      1.0,
+      0.8385,
+      0.8757,
+      0.9654,
+      0.8139,
       1.0,
       0.0,
-      0.6269
+      0.5786
     ],
     [
-      0.7892,
-      0.7096,
-      0.6052,
-      0.9078,
-      0.8357,
-      0.7474,
-      0.762,
-      0.8054,
-      0.8976,
-      0.8688,
-      0.6269,
+      0.7881,
+      0.6904,
+      0.5703,
+      0.8882,
+      0.8331,
+      0.7701,
+      0.854,
+      0.8874,
+      0.7822,
+      0.7647,
+      0.8018,
+      0.8995,
+      0.8619,
+      0.5786,
       0.0
     ]
   ],
   "groups": {
     "Three rigid motions": [
+      {
+        "lookup": "baggage_grammar",
+        "name": "Baggage Grammar",
+        "registry": "transforms.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false
+      },
       {
         "lookup": "transformation_workbench",
         "name": "Transformation Workbench",
@@ -468,8 +608,7 @@
         "tier": "applied",
         "fp": 2,
         "has_image": true,
-        "recommended": true,
-        "map_ready": true
+        "recommended": true
       }
     ],
     "Translation": [
@@ -480,8 +619,16 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true,
-        "map_ready": true
+        "recommended": true
+      },
+      {
+        "lookup": "sleepwalking_bed",
+        "name": "Sleepwalking Bed",
+        "registry": "transforms.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false
       },
       {
         "lookup": "translation_cube_demo",
@@ -490,8 +637,7 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": false,
-        "map_ready": true
+        "recommended": false
       },
       {
         "lookup": "x_translation_cube",
@@ -500,8 +646,7 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true,
-        "map_ready": true
+        "recommended": true
       },
       {
         "lookup": "y_translation_cube",
@@ -510,8 +655,7 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true,
-        "map_ready": true
+        "recommended": true
       },
       {
         "lookup": "z_translation_cube",
@@ -520,11 +664,19 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true,
-        "map_ready": true
+        "recommended": true
       }
     ],
     "Rotation": [
+      {
+        "lookup": "furniture_turntable",
+        "name": "Furniture Turntable",
+        "registry": "transforms.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false
+      },
       {
         "lookup": "rotation_gimbal",
         "name": "Rotation Gimbal",
@@ -532,8 +684,7 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true,
-        "map_ready": true
+        "recommended": true
       },
       {
         "lookup": "spin",
@@ -542,8 +693,16 @@
         "tier": "medium",
         "fp": 6,
         "has_image": true,
-        "recommended": true,
-        "map_ready": true
+        "recommended": true
+      },
+      {
+        "lookup": "stepped_transform",
+        "name": "Stepped Transform",
+        "registry": "transforms.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
       }
     ],
     "Scale": [
@@ -554,8 +713,7 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true,
-        "map_ready": true
+        "recommended": true
       },
       {
         "lookup": "scaleme",
@@ -564,21 +722,28 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "scale_me",
-        "name": "scale_me",
-        "registry": "",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
+        "recommended": true
       }
     ],
     "Shear": [
+      {
+        "lookup": "identity_lineup",
+        "name": "Identity Lineup",
+        "registry": "transforms.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false
+      },
+      {
+        "lookup": "italic_bookcase",
+        "name": "Italic Bookcase",
+        "registry": "transforms.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false
+      },
       {
         "lookup": "shear_matrix_demo",
         "name": "Shear Matrix Demo",
@@ -586,8 +751,7 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true,
-        "map_ready": true
+        "recommended": true
       }
     ],
     "Composition": [
@@ -598,8 +762,7 @@
         "tier": "applied",
         "fp": 9,
         "has_image": true,
-        "recommended": true,
-        "map_ready": true
+        "recommended": true
       },
       {
         "lookup": "transform_composition",
@@ -608,20 +771,31 @@
         "tier": "applied",
         "fp": 4,
         "has_image": true,
-        "recommended": true,
-        "map_ready": true
+        "recommended": true
       },
       {
-        "lookup": "transform_composition_workbench",
-        "name": "Transform Composition Workbench",
-        "registry": "",
+        "lookup": "two_cakes",
+        "name": "Two Cakes",
+        "registry": "transforms.json",
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": false,
-        "map_ready": false
+        "recommended": false
       }
     ],
+    "Order matters": [
+      {
+        "lookup": "the_choreography",
+        "name": "The Choreography",
+        "registry": "transforms.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false
+      }
+    ],
+    "The inverse": [],
+    "Local and global": [],
     "Matrix / homogeneous": [
       {
         "lookup": "homogeneous_coordinates",
@@ -630,8 +804,7 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true,
-        "map_ready": true
+        "recommended": true
       },
       {
         "lookup": "matrix_4x4_viewer",
@@ -640,18 +813,16 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true,
-        "map_ready": true
+        "recommended": true
       },
       {
-        "lookup": "transform_matrix_cube",
-        "name": "Transform Matrix Cube",
-        "registry": "",
-        "tier": "small",
-        "fp": 1,
+        "lookup": "matrix_stamps",
+        "name": "Matrix Stamps",
+        "registry": "transforms.json",
+        "tier": "medium",
+        "fp": 4,
         "has_image": true,
-        "recommended": false,
-        "map_ready": false
+        "recommended": false
       }
     ],
     "Invariants": [
@@ -662,8 +833,7 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true,
-        "map_ready": true
+        "recommended": true
       }
     ],
     "Tiling / pattern": [
@@ -674,18 +844,7 @@
         "tier": "large",
         "fp": 54,
         "has_image": true,
-        "recommended": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "pattern_tile_brick",
-        "name": "pattern_tile_brick",
-        "registry": "",
-        "tier": "medium",
-        "fp": 4,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
+        "recommended": true
       }
     ],
     "Field / flow": [
@@ -696,8 +855,7 @@
         "tier": "large",
         "fp": 4,
         "has_image": true,
-        "recommended": true,
-        "map_ready": true
+        "recommended": true
       },
       {
         "lookup": "vector_field",
@@ -706,8 +864,7 @@
         "tier": "large",
         "fp": 1,
         "has_image": true,
-        "recommended": true,
-        "map_ready": true
+        "recommended": true
       }
     ],
     "Boolean / CSG": [
@@ -718,8 +875,7 @@
         "tier": "large",
         "fp": 12,
         "has_image": true,
-        "recommended": true,
-        "map_ready": true
+        "recommended": true
       }
     ],
     "Curved space (non-Euclidean)": [
@@ -730,8 +886,7 @@
         "tier": "large",
         "fp": 30,
         "has_image": true,
-        "recommended": true,
-        "map_ready": true
+        "recommended": true
       },
       {
         "lookup": "curvature_slider",
@@ -740,8 +895,7 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true,
-        "map_ready": true
+        "recommended": true
       },
       {
         "lookup": "elliptic_surface",
@@ -750,8 +904,7 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true,
-        "map_ready": true
+        "recommended": true
       },
       {
         "lookup": "entropy_morphogenesis",
@@ -760,8 +913,7 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true,
-        "map_ready": true
+        "recommended": true
       },
       {
         "lookup": "gyroid_cheese",
@@ -770,8 +922,7 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true,
-        "map_ready": true
+        "recommended": true
       },
       {
         "lookup": "hyperbolic_surface",
@@ -780,8 +931,7 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true,
-        "map_ready": true
+        "recommended": true
       },
       {
         "lookup": "marching_cubes",
@@ -790,8 +940,7 @@
         "tier": "large",
         "fp": 11,
         "has_image": true,
-        "recommended": true,
-        "map_ready": true
+        "recommended": true
       },
       {
         "lookup": "mobius_strip_altgeo",
@@ -800,8 +949,7 @@
         "tier": "large",
         "fp": 9,
         "has_image": true,
-        "recommended": true,
-        "map_ready": true
+        "recommended": true
       },
       {
         "lookup": "mobius_world",
@@ -810,8 +958,7 @@
         "tier": "large",
         "fp": 4968,
         "has_image": true,
-        "recommended": true,
-        "map_ready": true
+        "recommended": true
       },
       {
         "lookup": "non_euclidean_space",
@@ -820,8 +967,7 @@
         "tier": "large",
         "fp": 56,
         "has_image": true,
-        "recommended": true,
-        "map_ready": true
+        "recommended": true
       },
       {
         "lookup": "organic_space",
@@ -830,8 +976,7 @@
         "tier": "large",
         "fp": 13,
         "has_image": true,
-        "recommended": true,
-        "map_ready": true
+        "recommended": true
       },
       {
         "lookup": "rhizomatic_maze_space",
@@ -840,8 +985,7 @@
         "tier": "large",
         "fp": 2500,
         "has_image": true,
-        "recommended": true,
-        "map_ready": true
+        "recommended": true
       },
       {
         "lookup": "rhizomatic_structure",
@@ -850,8 +994,7 @@
         "tier": "large",
         "fp": 280,
         "has_image": true,
-        "recommended": true,
-        "map_ready": true
+        "recommended": true
       },
       {
         "lookup": "riemann_pi",
@@ -860,8 +1003,7 @@
         "tier": "large",
         "fp": 92,
         "has_image": true,
-        "recommended": true,
-        "map_ready": true
+        "recommended": true
       },
       {
         "lookup": "riemann_sphere",
@@ -870,8 +1012,7 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true,
-        "map_ready": true
+        "recommended": true
       },
       {
         "lookup": "riemann_torus",
@@ -880,8 +1021,7 @@
         "tier": "large",
         "fp": 30,
         "has_image": true,
-        "recommended": true,
-        "map_ready": true
+        "recommended": true
       },
       {
         "lookup": "toruscylinder",
@@ -890,8 +1030,7 @@
         "tier": "large",
         "fp": 20,
         "has_image": true,
-        "recommended": true,
-        "map_ready": true
+        "recommended": true
       },
       {
         "lookup": "triangle_curvature_workbench",
@@ -900,8 +1039,7 @@
         "tier": "applied",
         "fp": 4,
         "has_image": true,
-        "recommended": true,
-        "map_ready": true
+        "recommended": true
       }
     ],
     "· palette (unplaced)": [
@@ -1427,9 +1565,8 @@
       }
     ]
   },
-  "total": 94,
-  "total_concepts": 13,
-  "recommended_total": 37,
-  "map_ready_total": 37,
-  "palette_total": 56
+  "total": 47,
+  "total_concepts": 15,
+  "recommended_total": 38,
+  "map_ready_total": 38
 }
