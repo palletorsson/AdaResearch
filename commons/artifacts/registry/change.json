@@ -1068,6 +1068,77 @@
 				1,
 				1
 			]
+		},
+		"tangent_toboggan": {
+			"name": "Tangent Toboggan",
+			"class_name": "TangentToboggan",
+			"scene": "res://commons/artifacts/tangent_toboggan/tangent_toboggan.tscn",
+			"description": "The Rate hero: a cubic toboggan hill with the sled frozen at one point and the tangent built as a brass rail - the exact line the sled would leave along, its ghost already gone down it. The derivative is where you would fly off. Category-heroes pass, 2026-08-27.",
+			"category": "change",
+			"tags": [
+				"change",
+				"derivative",
+				"tangent",
+				"slope",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 4,
+				"clearance_m": 0.6
+			}
+		},
+		"staircase_to_curve": {
+			"name": "Staircase To Curve",
+			"class_name": "StaircaseToCurve",
+			"scene": "res://commons/artifacts/staircase_to_curve/staircase_to_curve.tscn",
+			"description": "The Accumulation hero: the Riemann sum as carpentry - flights of steps with widths halving under one continuous brass handrail, until the staircase IS the ramp. The curve was always what the steps were saving up for. Category-heroes pass, 2026-08-27.",
+			"category": "change",
+			"tags": [
+				"change",
+				"integral",
+				"riemann",
+				"limit",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 4,
+				"clearance_m": 0.6
+			}
+		},
+		"paper_regatta": {
+			"name": "Paper Regatta",
+			"class_name": "PaperRegatta",
+			"scene": "res://commons/artifacts/paper_regatta/paper_regatta.tscn",
+			"description": "The Flow hero: a winding gutter-river with a regatta of engineless paper boats, each reading the field where it floats - a velocity assigned to every point, told as street play after rain. Category-heroes pass, 2026-08-27.",
+			"category": "change",
+			"tags": [
+				"change",
+				"field",
+				"flow",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 3,
+				"clearance_m": 0.6
+			}
+		},
+		"undo_door": {
+			"name": "Undo Door",
+			"class_name": "UndoDoor",
+			"scene": "res://commons/artifacts/undo_door/undo_door.tscn",
+			"description": "The Reconciliation hero (ftc_bridge has been registry-only since June): one doorway, the curve on its west face and its derivative on the east - walk through to differentiate, walk back to integrate, and take the +C tag hanging from the lintel. Category-heroes pass, 2026-08-27.",
+			"category": "change",
+			"tags": [
+				"change",
+				"ftc",
+				"integral",
+				"derivative",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 2,
+				"clearance_m": 0.6
+			}
 		}
 	}
 }

@@ -1,368 +1,157 @@
 {
-  "title": "change",
-  "domain": "change",
-  "note": "Ontology derived from the sequence's maps (no beat score; each map is a concept).",
-  "acts": [],
-  "concepts": [
-    "Bench",
-    "Intro",
-    "Reconciliation",
-    "Slope Surface",
-    "Velocity",
-    "· palette (unplaced)"
-  ],
-  "concept_meta": {
-    "Bench": {
-      "truth": "Bench",
-      "map": "Change_Bench",
-      "act": "Act I",
-      "tiers": {
-        "small": [
-          "ftc_bridge"
-        ],
-        "medium": [
-          "tangent_slope_workbench",
-          "riemann_sum_workbench"
-        ],
-        "large": [],
-        "applied": []
-      },
-      "count": 3
-    },
-    "Intro": {
-      "truth": "Intro",
-      "map": "Change_Intro",
-      "act": "Act I",
-      "tiers": {
-        "small": [
-          "derivative_pair",
-          "code_display",
-          "slope_tangent_demo"
-        ],
-        "medium": [
-          "science_screen"
-        ],
-        "large": [],
-        "applied": []
-      },
-      "count": 4
-    },
-    "Reconciliation": {
-      "truth": "Reconciliation",
-      "map": "Change_Reconciliation",
-      "act": "Act II",
-      "tiers": {
-        "small": [
-          "code_display",
-          "ftc_bridge"
-        ],
-        "medium": [
-          "science_screen"
-        ],
-        "large": [],
-        "applied": []
-      },
-      "count": 3
-    },
-    "Slope Surface": {
-      "truth": "Slope Surface",
-      "map": "Change_Slope_Surface",
-      "act": "Act III",
-      "tiers": {
-        "small": [
-          "partial_derivative_terrain"
-        ],
-        "medium": [
-          "science_screen"
-        ],
-        "large": [],
-        "applied": []
-      },
-      "count": 2
-    },
-    "Velocity": {
-      "truth": "Velocity",
-      "map": "Change_Velocity",
-      "act": "Act IV",
-      "tiers": {
-        "small": [
-          "code_display",
-          "derivative_pair",
-          "player_trace",
-          "velocity_arrow"
-        ],
-        "medium": [],
-        "large": [],
-        "applied": []
-      },
-      "count": 4
-    },
-    "· palette (unplaced)": {
-      "act": "Act IV",
-      "truth": "sequence artifacts available but not yet placed in a map",
-      "tiers": {
-        "small": [
-          "catalyst_sustain_demo",
-          "integral_area",
-          "particle_flow_swarm",
-          "riemann_pump",
-          "vector_field_grid"
-        ],
-        "medium": [],
-        "large": [],
-        "applied": []
-      },
-      "count": 5
-    }
+ "title": "change - four rungs, from the taxonomy",
+ "note": "REGENERATED 2026-08-27 from commons/maps/sequences/change.json taxonomy (the prior file grouped by MAP NAME, not principle). Members = rung-prose mentions intersected with the registry corpus. Replaced again whenever the taxonomy moves.",
+ "concepts": [
+  "Rate",
+  "Accumulation",
+  "Flow",
+  "Reconciliation"
+ ],
+ "concept_meta": {
+  "Rate": {
+   "count": 2,
+   "truth": "how fast, right here? - tangent, slope, velocity: the derivative as the hill's promise about the next instant.",
+   "act": "1_rate",
+   "tiers": {}
   },
-  "concept_distance": [
-    [
-      0.0,
-      1.0,
-      1.0,
-      1.0,
-      1.0
-    ],
-    [
-      1.0,
-      0.0,
-      0.0399,
-      0.0,
-      0.2146
-    ],
-    [
-      1.0,
-      0.0399,
-      0.0,
-      0.2436,
-      0.319
-    ],
-    [
-      1.0,
-      0.0,
-      0.2436,
-      0.0,
-      0.1388
-    ],
-    [
-      1.0,
-      0.2146,
-      0.319,
-      0.1388,
-      0.0
-    ]
-  ],
-  "groups": {
-    "Bench": [
-      {
-        "lookup": "tangent_slope_workbench",
-        "name": "Tangent Slope Workbench",
-        "fp": 4,
-        "recommended": true,
-        "tier": "medium",
-        "has_image": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "ftc_bridge",
-        "name": "FTC Bridge",
-        "fp": 1,
-        "recommended": true,
-        "tier": "small",
-        "has_image": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "riemann_sum_workbench",
-        "name": "Riemann Sum Workbench",
-        "fp": 4,
-        "recommended": true,
-        "tier": "medium",
-        "has_image": true,
-        "map_ready": true
-      }
-    ],
-    "Intro": [
-      {
-        "lookup": "science_screen",
-        "name": "Science Screen",
-        "fp": 4,
-        "recommended": true,
-        "tier": "medium",
-        "has_image": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "derivative_pair",
-        "name": "Derivative Pair",
-        "fp": 1,
-        "recommended": true,
-        "tier": "small",
-        "has_image": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "code_display",
-        "name": "Code Display",
-        "fp": 1,
-        "recommended": true,
-        "tier": "small",
-        "has_image": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "slope_tangent_demo",
-        "name": "Slope Tangent Demo",
-        "fp": 1,
-        "recommended": true,
-        "tier": "small",
-        "has_image": true,
-        "map_ready": true
-      }
-    ],
-    "Reconciliation": [
-      {
-        "lookup": "code_display",
-        "name": "Code Display",
-        "fp": 1,
-        "recommended": true,
-        "tier": "small",
-        "has_image": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "science_screen",
-        "name": "Science Screen",
-        "fp": 4,
-        "recommended": true,
-        "tier": "medium",
-        "has_image": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "ftc_bridge",
-        "name": "FTC Bridge",
-        "fp": 1,
-        "recommended": true,
-        "tier": "small",
-        "has_image": true,
-        "map_ready": true
-      }
-    ],
-    "Slope Surface": [
-      {
-        "lookup": "science_screen",
-        "name": "Science Screen",
-        "fp": 4,
-        "recommended": true,
-        "tier": "medium",
-        "has_image": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "partial_derivative_terrain",
-        "name": "Partial Derivative Terrain",
-        "fp": 1,
-        "recommended": true,
-        "tier": "small",
-        "has_image": true,
-        "map_ready": true
-      }
-    ],
-    "Velocity": [
-      {
-        "lookup": "code_display",
-        "name": "Code Display",
-        "fp": 1,
-        "recommended": true,
-        "tier": "small",
-        "has_image": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "derivative_pair",
-        "name": "Derivative Pair",
-        "fp": 1,
-        "recommended": true,
-        "tier": "small",
-        "has_image": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "player_trace",
-        "name": "player_trace",
-        "fp": 1,
-        "recommended": true,
-        "tier": "small",
-        "has_image": true,
-        "map_ready": true
-      },
-      {
-        "lookup": "velocity_arrow",
-        "name": "Velocity Arrow",
-        "fp": 1,
-        "recommended": true,
-        "tier": "small",
-        "has_image": true,
-        "map_ready": true
-      }
-    ],
-    "· palette (unplaced)": [
-      {
-        "lookup": "catalyst_sustain_demo",
-        "name": "Catalyst Sustain Demo",
-        "registry": "",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "integral_area",
-        "name": "Integral Area",
-        "registry": "",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "particle_flow_swarm",
-        "name": "Particle Flow Swarm",
-        "registry": "",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "riemann_pump",
-        "name": "Riemann Pump",
-        "registry": "",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      },
-      {
-        "lookup": "vector_field_grid",
-        "name": "Vector Field Grid",
-        "registry": "",
-        "tier": "small",
-        "fp": 1,
-        "has_image": true,
-        "recommended": false,
-        "map_ready": false
-      }
-    ]
+  "Accumulation": {
+   "count": 1,
+   "truth": "what does a rate add up to? - rectangles becoming the integral by giving up their edges one halving at a time.",
+   "act": "2_accumulation",
+   "tiers": {}
   },
-  "total": 21,
-  "total_concepts": 6,
-  "recommended_total": 16,
-  "map_ready_total": 16,
-  "palette_total": 5
+  "Flow": {
+   "count": 4,
+   "truth": "what if the rate is everywhere at once? - a velocity assigned to every point; the field is the geography, not the traffic.",
+   "act": "3_flow",
+   "tiers": {}
+  },
+  "Reconciliation": {
+   "count": 3,
+   "truth": "when do the two meet? - differentiation and integration are one operation read in opposite directions (+C is yours to choose).",
+   "act": "4_reconciliation",
+   "tiers": {}
+  }
+ },
+ "groups": {
+  "Rate": [
+   {
+    "lookup": "descent_marble_toy",
+    "name": "descent_marble_toy",
+    "registry": "",
+    "category": "change",
+    "map_ready": true,
+    "has_image": true,
+    "score": 5,
+    "tier": "medium",
+    "recommended": true
+   },
+   {
+    "lookup": "gradient_descent_well",
+    "name": "gradient_descent_well",
+    "registry": "",
+    "category": "change",
+    "map_ready": true,
+    "has_image": true,
+    "score": 5,
+    "tier": "medium",
+    "recommended": true
+   }
+  ],
+  "Accumulation": [
+   {
+    "lookup": "integral_area",
+    "name": "integral_area",
+    "registry": "",
+    "category": "change",
+    "map_ready": true,
+    "has_image": true,
+    "score": 5,
+    "tier": "medium",
+    "recommended": true
+   }
+  ],
+  "Flow": [
+   {
+    "lookup": "flow_field_painter",
+    "name": "flow_field_painter",
+    "registry": "",
+    "category": "change",
+    "map_ready": true,
+    "has_image": true,
+    "score": 5,
+    "tier": "medium",
+    "recommended": true
+   },
+   {
+    "lookup": "noc_5_04_flow_field",
+    "name": "noc_5_04_flow_field",
+    "registry": "",
+    "category": "change",
+    "map_ready": true,
+    "has_image": true,
+    "score": 5,
+    "tier": "medium",
+    "recommended": true
+   },
+   {
+    "lookup": "particle_flow_swarm",
+    "name": "particle_flow_swarm",
+    "registry": "",
+    "category": "change",
+    "map_ready": true,
+    "has_image": true,
+    "score": 5,
+    "tier": "medium",
+    "recommended": true
+   },
+   {
+    "lookup": "vector_field_visualizer",
+    "name": "vector_field_visualizer",
+    "registry": "",
+    "category": "change",
+    "map_ready": true,
+    "has_image": true,
+    "score": 5,
+    "tier": "medium",
+    "recommended": true
+   }
+  ],
+  "Reconciliation": [
+   {
+    "lookup": "derivative_pair",
+    "name": "derivative_pair",
+    "registry": "",
+    "category": "change",
+    "map_ready": true,
+    "has_image": true,
+    "score": 5,
+    "tier": "medium",
+    "recommended": true
+   },
+   {
+    "lookup": "ftc_bridge",
+    "name": "ftc_bridge",
+    "registry": "",
+    "category": "change",
+    "map_ready": true,
+    "has_image": true,
+    "score": 5,
+    "tier": "medium",
+    "recommended": true
+   },
+   {
+    "lookup": "integral_area",
+    "name": "integral_area",
+    "registry": "",
+    "category": "change",
+    "map_ready": true,
+    "has_image": true,
+    "score": 5,
+    "tier": "medium",
+    "recommended": true
+   }
+  ]
+ },
+ "total": 10
 }

@@ -117,6 +117,25 @@ Registered in `color.json` (43 → 47 — note: this registry ends in `registry_
 the surgical seam is before that key, not at file end; the first append refused
 correctly). Probe 4/4 first run.
 
+## A4 · Change: canon rebuilt, four heroes (2026-08-27, same day)
+
+Change's June concept map grouped by MAP NAME (Bench, Intro…) — useless as a principle
+atlas — so the canon was regenerated from the sequence's own taxonomy: four rungs.
+Three of the rungs' anchor tokens (ftc_bridge, riemann_pump, integral_area) turn out to
+be REGISTRY-ONLY — promised since June, never built — so the heroes are those rungs'
+first standing bodies:
+
+| rung | hero |
+|---|---|
+| Rate | **tangent_toboggan** — a cubic hill, the sled frozen at one point, the tangent as a brass rail: the derivative is where you would fly off; the ghost is already gone down it |
+| Accumulation | **staircase_to_curve** — the Riemann sum as carpentry: flights of halving treads under one continuous handrail, until the staircase IS the ramp |
+| Flow | **paper_regatta** — engineless paper boats shipping a gutter-river: a velocity assigned to every point, read as street play after rain |
+| Reconciliation | **undo_door** — one doorway, f on the west face, f′ on the east; walk through to differentiate, walk back to integrate, take the +C tag |
+
+Gallery: localhost:3003/change-concepts (13 tiles, 4 sections). change.json 13 → 17.
+Probe 4/4 first run. Instrument note: a "mushrooms [F]" HUD chip from the live overlay
+leaks into capture corners — bench-side, cosmetic, not the artifacts.
+
 ## B · The plan: this list, for all 22 sequences
 
 **What already exists (audit 2026-08-27).** 21 of 22 spine sequences have a
