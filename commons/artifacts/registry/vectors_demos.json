@@ -5774,6 +5774,25 @@
 				"footprint_cells": 3,
 				"clearance_m": 0.6
 			}
+		},
+		"origin_doormat": {
+			"name": "Origin Doormat",
+			"class_name": "OriginDoormat",
+			"scene": "res://commons/artifacts/origin_doormat/origin_doormat.tscn",
+			"description": "The Coordinate-system hero, honouring the rung-0 ruling by BEING a threshold: a doormat reading WELCOME TO (0,0,0), three brass tape-measures unrolling along x, y, z - the y tape up a pole where a fire extinguisher floats at its address - and every guest wearing a swing tag with coordinates read from its own transform. (0,0,0) is a handshake. Category-heroes pass, 2026-08-27.",
+			"category": "vectors_demos",
+			"tags": [
+				"forces",
+				"coordinates",
+				"origin",
+				"prop",
+				"surreal",
+				"threshold"
+			],
+			"spatial_needs": {
+				"footprint_cells": 3,
+				"clearance_m": 0.6
+			}
 		}
 	}
 }

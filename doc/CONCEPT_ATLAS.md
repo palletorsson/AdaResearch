@@ -26,7 +26,7 @@ adopted by the gallery unchanged; standing = placed survivors after the retire;
 
 | principle | the surreal object | standing bodies | retiring |
 |---|---|---|---|
-| Coordinate system | — rung 0: recalled from primitives, a threshold, not a room | — | –3 |
+| Coordinate system | **origin_doormat** — rung 0 honoured by BEING a threshold: WELCOME TO (0,0,0), tapes down three streets, every guest tagged with its address | — | –3 |
 | Vector basics | force_cube* (your shove draws itself) | — | –1 |
 | Magnitude / length | length_lantern* (light reaches exactly \|v\|) | — | –2 |
 | Unit / normalize | length_lantern* (same lamp, radius 1) | 4 | –1 |
@@ -52,8 +52,9 @@ adopted by the gallery unchanged; standing = placed survivors after the retire;
 | Force field (zone) | **invisible_hill** — trails draw a hill that is only force | force_field_zone +2 | –1 |
 | General force / F = ma | prop_spigot (one gravity, every fate) + force_pad* | 4 | –4 |
 
-**Census closed (2026-08-27, category-heroes pass).** Every category except rung-0
-*Coordinate system* (declared recalled) now carries a surreal applied hero. The last
+**Census closed (2026-08-27, category-heroes pass).** Every category carries a
+surreal applied hero — including rung-0 *Coordinate system*, whose hero keeps the
+threshold ruling by BEING one (origin_doormat). The last
 four — matryoshka_row, sisyphus_mower, prop_carousel, invisible_hill — each elevate
 their category's declared best (the Scaling best was itself retiring; force_mower,
 centrifuge_ring and force_field_zone lend their claims to louder bodies). Sisyphus
