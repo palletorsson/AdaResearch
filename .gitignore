@@ -397,3 +397,9 @@ commons/data/spine_order_effective.json
 commons/data/spine_artifact_order_hand.json
 commons/data/spine_order_ops.json.bak
 commons/data/spine_order_ops.json.tmp
+
+# The museum walk order (tools/museum_necklace.py --apply). Derived from the
+# 207 hall maps and ada_run/em_pack_report.json in 0.16 s, 1.1 MB, and rebuilt
+# by --apply. Same rule as the spine order beside it: the SOURCE is the tool,
+# not its output.
+commons/data/museum_order_effective.json
