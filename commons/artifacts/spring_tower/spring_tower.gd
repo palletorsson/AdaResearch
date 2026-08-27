@@ -19,6 +19,10 @@ class_name SpringTower
 @export var mass_color: Color = Color(0.72, 0.52, 0.95)
 @export var spring_color: Color = Color(0.55, 0.95, 0.58)
 @export var weight_color: Color = Color(0.95, 0.40, 0.38)
+## BOB - WHAT HOOKE IS HOLDING. `weight` is the shipped glow mass; `crate` hangs
+## museum freight on the coil - T = 2*pi*sqrt(m/k) reads the kilograms, not the
+## costume. (Casting pass, 2026-08-27.)
+@export_enum("weight", "crate") var bob: String = "weight"
 
 const NATURAL := 1.8                            # built coil length (scaled at runtime)
 var _coil: Node3D
@@ -75,7 +79,11 @@ func _build() -> void:
 
 	# the mass
 	_mass = Node3D.new(); add_child(_mass)
-	_mass.add_child(_box(Vector3.ZERO, Vector3(1.0, 0.8, 1.0), _glow_mat(mass_color, 0.7)))
+	if bob == "crate":
+		var freight := _cast_prop("crate", 0.95)
+		_mass.add_child(freight)
+	else:
+		_mass.add_child(_box(Vector3.ZERO, Vector3(1.0, 0.8, 1.0), _glow_mat(mass_color, 0.7)))
 	_mass.add_child(_box(Vector3(0, 0.5, 0), Vector3(0.3, 0.2, 0.3), _steel_mat(coil_color)))   # hook
 	_vectors = Node3D.new(); add_child(_vectors)
 
@@ -107,3 +115,49 @@ func _advance() -> void:
 	_vectors.add_child(_arrow(at + Vector3(0.42, 0, 0), at + Vector3(0.42, -1.1, 0), 0.055, _glow_mat(weight_color, 1.4)))   # weight mg
 	var slen: float = clampf(0.7 + (-disp) * 1.3, 0.25, 1.8)
 	_vectors.add_child(_arrow(at - Vector3(0.42, 0, 0), at - Vector3(0.42, 0, 0) + Vector3(0, slen, 0), 0.06, _glow_mat(spring_color, 1.6)))   # spring force up
+
+
+## The casting pass (2026-08-27): load a museum prop, bead-normalised, internal
+## rigids frozen. Returned UNPARENTED - the graft site positions it. Temporarily
+## enters the tree so the prop's _ready builds before it is measured.
+func _cast_prop(token: String, bead: float) -> Node3D:
+	var wrapper := Node3D.new()
+	add_child(wrapper)
+	var packed: PackedScene = load("res://commons/artifacts/%s/%s.tscn" % [token, token])
+	if packed == null:
+		push_warning("%s: cast prop %s missing, bead substituted" % [name, token])
+		var box := MeshInstance3D.new()
+		box.mesh = BoxMesh.new()
+		box.scale = Vector3.ONE * bead * 0.7
+		wrapper.add_child(box)
+		remove_child(wrapper)
+		return wrapper
+	var inst: Node3D = packed.instantiate()
+	wrapper.add_child(inst)
+	var pstack: Array = [inst]
+	while not pstack.is_empty():
+		var pn: Node = pstack.pop_back()
+		if pn is RigidBody3D:
+			(pn as RigidBody3D).freeze = true
+		for pc in pn.get_children():
+			pstack.append(pc)
+	var to_local := inst.global_transform.affine_inverse()
+	var merged := AABB()
+	var first := true
+	var mstack: Array = [inst]
+	while not mstack.is_empty():
+		var mn: Node = mstack.pop_back()
+		if mn is MeshInstance3D:
+			var mi := mn as MeshInstance3D
+			var mbox: AABB = (to_local * mi.global_transform) * mi.get_aabb()
+			merged = mbox if first else merged.merge(mbox)
+			first = false
+		for mc in mn.get_children():
+			mstack.append(mc)
+	var longest: float = maxf(merged.size.x, maxf(merged.size.y, merged.size.z))
+	if longest > 0.001:
+		var s: float = bead / longest
+		inst.scale = Vector3.ONE * s
+		inst.position = -(merged.get_center() * s)
+	remove_child(wrapper)
+	return wrapper

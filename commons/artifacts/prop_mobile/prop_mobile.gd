@@ -33,6 +33,10 @@ const TextScreenScript := preload("res://commons/ui/text_screen.gd")
 const ROD_KG_PER_M := 0.35             # steel tube; enters the node mass like Calder's rods
 
 @export var seed: int = 7
+## CAST - WHAT HANGS. `props` is the museum furniture; `discs` hangs Calder's flat
+## painted discs at the SAME masses, so the tree geometry is identical and the axis
+## argues pure dressing - furniture versus abstraction. (Axis derived 2026-08-27.)
+@export_enum("props", "discs") var cast: String = "props"
 @export_range(2, 4) var depth: int = 3
 @export var span: float = 1.3          # base half-rod length, grows toward the root
 @export var top_y: float = 3.3
@@ -128,10 +132,23 @@ func _build_leaf() -> Dictionary:
 	var cast_row: Dictionary = CAST[_next_cast % CAST.size()]
 	_next_cast += 1
 	var holder := Node3D.new()
-	var wrapper := _spawn_prop(cast_row)
-	holder.add_child(wrapper)
-	wrapper.position = Vector3(0.0, -cast_row["bead"] * 0.55, 0.0)
-	_wire(holder, Vector3.ZERO, wrapper.position)
+	if cast == "discs":
+		var palette := [Color(0.78, 0.16, 0.12), Color(0.92, 0.75, 0.14), Color(0.13, 0.30, 0.62), Color(0.10, 0.10, 0.11), Color(0.88, 0.86, 0.82)]
+		var disc := MeshInstance3D.new()
+		var disc_mesh := CylinderMesh.new()
+		disc_mesh.top_radius = cast_row["bead"] * 0.55
+		disc_mesh.bottom_radius = cast_row["bead"] * 0.55
+		disc_mesh.height = 0.012
+		disc.mesh = disc_mesh
+		disc.position = Vector3(0.0, -cast_row["bead"] * 0.55, 0.0)
+		disc.material_override = _matte_mat(palette[(_next_cast - 1) % palette.size()], 0.6)
+		holder.add_child(disc)
+		_wire(holder, Vector3.ZERO, disc.position)
+	else:
+		var wrapper := _spawn_prop(cast_row)
+		holder.add_child(wrapper)
+		wrapper.position = Vector3(0.0, -cast_row["bead"] * 0.55, 0.0)
+		_wire(holder, Vector3.ZERO, wrapper.position)
 	return {"node": holder, "kg": cast_row["kg"]}
 
 func _wire(parent: Node3D, from: Vector3, to: Vector3) -> void:

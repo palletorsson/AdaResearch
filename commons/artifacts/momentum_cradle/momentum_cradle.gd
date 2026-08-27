@@ -37,6 +37,11 @@ class_name MomentumCradle
 ## on the record: there the swing is integrated in _physics_process and the lifted ball
 ## is at the bottom of its arc before a capture settles. Same claim, opposite condition.
 @export_enum("one", "two", "all") var carried: String = "one"
+## BOBS - WHAT SWINGS. `uniform` is the shipped steel set. `museum` hangs five
+## different props BALLASTED TO EQUAL MASS - unequal bobs would break the 1-in
+## 1-out claim, so the casting keeps the premise and CONFESSES it on the readout.
+## (Casting pass, 2026-08-27.)
+@export_enum("uniform", "museum") var bobs: String = "uniform"
 const CARRIEDS: PackedStringArray = ["one", "two", "all"]
 
 const BALLS := 5
@@ -108,7 +113,13 @@ func _build_demo() -> void:
 			ang = theta             # the far end kicks out
 		var ball_pos: Vector3 = pivot + Vector3(sin(ang) * L, -cos(ang) * L, 0.0)
 		rig.add_child(_cylinder_between(pivot, ball_pos, 0.006, steel))   # string
-		rig.add_child(_sphere(ball_pos, ball_r, ball_mat))
+		if bobs == "museum":
+			var prop_tokens := ["fire_extinguisher", "crate", "chladni_plate", "control_pendulum", "exit_sign"]
+			var bead := _cast_prop(prop_tokens[i % prop_tokens.size()], ball_r * 2.3)
+			rig.add_child(bead)
+			bead.position = ball_pos
+		else:
+			rig.add_child(_sphere(ball_pos, ball_r, ball_mat))
 		# momentum arrows on every ball that is carrying (equal & opposite about the line,
 		# both +X). At "one" that is the two end balls, which is what shipped.
 		if lift > 0.04 and not is_zero_approx(ang):
@@ -116,7 +127,9 @@ func _build_demo() -> void:
 			var base: Vector3 = ball_pos + Vector3(0.0, ball_r + 0.06, 0.0)
 			rig.add_child(_arrow(base, base + Vector3(plen, 0.0, 0.0), 0.02, _glow_mat(accent, 1.8)))
 
-	set_readout("MOMENTUM\n\np = mv  conserved\n%d in  →  %d out" % [n_in, n_out],
+	var cast_note := "" if bobs != "museum" else "
+props ballasted equal - the cradle demands it"
+	set_readout("MOMENTUM\n\np = mv  conserved\n%d in  →  %d out%s" % [n_in, n_out, cast_note],
 		color_b.lerp(Color.WHITE, 0.2))
 	_settle(rig)
 
@@ -136,3 +149,49 @@ func _carried_in() -> int:
 			return BALLS
 		_:
 			return 1
+
+
+## The casting pass (2026-08-27): load a museum prop, bead-normalised, internal
+## rigids frozen. Returned UNPARENTED - the graft site positions it. Temporarily
+## enters the tree so the prop's _ready builds before it is measured.
+func _cast_prop(token: String, bead: float) -> Node3D:
+	var wrapper := Node3D.new()
+	add_child(wrapper)
+	var packed: PackedScene = load("res://commons/artifacts/%s/%s.tscn" % [token, token])
+	if packed == null:
+		push_warning("%s: cast prop %s missing, bead substituted" % [name, token])
+		var box := MeshInstance3D.new()
+		box.mesh = BoxMesh.new()
+		box.scale = Vector3.ONE * bead * 0.7
+		wrapper.add_child(box)
+		remove_child(wrapper)
+		return wrapper
+	var inst: Node3D = packed.instantiate()
+	wrapper.add_child(inst)
+	var pstack: Array = [inst]
+	while not pstack.is_empty():
+		var pn: Node = pstack.pop_back()
+		if pn is RigidBody3D:
+			(pn as RigidBody3D).freeze = true
+		for pc in pn.get_children():
+			pstack.append(pc)
+	var to_local := inst.global_transform.affine_inverse()
+	var merged := AABB()
+	var first := true
+	var mstack: Array = [inst]
+	while not mstack.is_empty():
+		var mn: Node = mstack.pop_back()
+		if mn is MeshInstance3D:
+			var mi := mn as MeshInstance3D
+			var mbox: AABB = (to_local * mi.global_transform) * mi.get_aabb()
+			merged = mbox if first else merged.merge(mbox)
+			first = false
+		for mc in mn.get_children():
+			mstack.append(mc)
+	var longest: float = maxf(merged.size.x, maxf(merged.size.y, merged.size.z))
+	if longest > 0.001:
+		var s: float = bead / longest
+		inst.scale = Vector3.ONE * s
+		inst.position = -(merged.get_center() * s)
+	remove_child(wrapper)
+	return wrapper

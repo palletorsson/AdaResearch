@@ -2318,14 +2318,20 @@
 				"demo_only": "capture mode: drop the console, demo only"
 			},
 			"dna": {
+			"measured": "SWEPT 2026-08-27, both axes read separately as the prediction demanded: bobs 4.59% / 59.6% (predicted 4-5), carried 2.49% / 41.7% (floor 2.0). Neither axis hides the other.",
+			"predicted_degeneracy": "CLOSEST PAIR: carried one vs two, at bobs=uniform, floor 2.0% whole-frame. Arithmetic: the pair moves exactly two end bobs (r 0.12) through ~31 deg on 0.62 m strings inside a 1.54 x 1.4 rig; at subject ~35% of frame each bob is ~0.8%, plus the string sweep, so 2.0%. The bobs axis (uniform vs museum) reskins all five bodies and should read 4-5%. NAMED RISK: this is now a TWO-AXIS sweep, so the headline peak will be the bobs axis - read the per-pair rows or a dead carried pair hides behind a live bobs one (the tier_terrarium failure). Registered 2026-08-27, before the first capture.",
 				"promoted": "2026-08-05",
 				"stage": "2 - variation",
 				"axes": {
-					"carried": [
-						"one",
-						"two",
-						"all"
-					]
+				 "carried": [
+				  "one",
+				  "two",
+				  "all"
+				 ],
+				 "bobs": [
+				  "uniform",
+				  "museum"
+				 ]
 				},
 				"default": "carried=one - _carried_in() returns 1 from the fall-through arm of its match, which makes n_in = 1 and n_out = 1, and the loop's two tests then reduce to exactly the code they replace: `i < 1` is the old `i == 0` and `i >= BALLS - 1` is the old `i == BALLS - 1`. The arrow guard is the same reduction - `lift > 0.04 and not is_zero_approx(ang)` is true on precisely the two end balls when the old `(i == 0 or i == BALLS - 1) and lift > 0.04` was - and the readout's new %d in / %d out substitutes 1 and 1, reproducing the shipped string character for character. BALLS is still 5, the frame, the strings, the spacing and the settle are untouched, so all 4 existing placements (MindMap_VectorForces, VFM_08_Arena, VFM_Forces_Lab, Vectors_Act4b_Oscillation), every one of which carries the bare token, render byte-identically",
 				"was": "seven @exports, six of them a rate, a size or a colour, and the seventh - lift - a swing amplitude. Not one of them changes what the cradle argues, and the runner refused the artifact for NO TURNABLE KNOBS. The demonstration itself was welded into the ball loop as `if i == 0` and `elif i == BALLS - 1`: the console could draw exactly one sentence, one in and one out, and that sentence is only the first line of the lesson",
@@ -3416,6 +3422,16 @@
 			]
 		},
 		"spring_tower": {
+			"dna": {
+			"measured": "SWEPT 2026-08-27: 2.55% / 44.5%, BITES, vs floor 3.0 - 0.85x, an under-floor that was NOT broken: the bob's frame share was overestimated. Direction recorded.",
+			"predicted_degeneracy": "CLOSEST PAIR: bob weight vs crate, floor 3.0% whole-frame (the axis has one pair). Arithmetic: the bob is 1.0 x 0.8 m at eq_y in a 2.9 x 5.8 body; at subject ~35% of frame the bob is ~4%, and box-to-crate changes about three quarters of it - the glow dies, the slats arrive - so 3.0%. Registered 2026-08-27, before the first capture.",
+			 "axes": {
+			 "bob": [
+			 "weight",
+			 "crate"
+			 ]
+			 }
+			},
 			"lookup_name": "spring_tower",
 			"scene": "res://commons/artifacts/spring_tower/spring_tower.tscn",
 			"class_name": "SpringTower",
@@ -3567,6 +3583,16 @@
 			]
 		},
 		"drag_corridor": {
+			"dna": {
+			"measured": "SWEPT 2026-08-27: 0.19% / 3.83%, WEAK, twin dart==extinguisher at the canonical standpoint. The value TAKES - probe_forces_casting: 13 vs 40 meshes, readback correct - and the bead grew 0.30 to 0.45 with no movement, because the probes glide INSIDE the tinted media boxes: the z-stack case, the axis fighting its own glass. Not INERT. Needs a still that sees past the media.",
+			"predicted_degeneracy": "CLOSEST PAIR: swimmer dart vs extinguisher, floor 0.6% whole-frame - and that LOW NUMBER IS THE NAMED RISK, not a surprise: three probes at r 0.14 vs beads 0.30 in a 9.4 m corridor are ~0.5% of frame at canonical framing, one antialiaser away from unmeasurable. A sub-floor return here means REFRAME (dna.framing toward the probes) before any INERT verdict - the axis is real in world space and small in frame, the anamorphic table's exact case. Registered 2026-08-27, before the first capture.",
+			 "axes": {
+			 "swimmer": [
+			 "dart",
+			 "extinguisher"
+			 ]
+			 }
+			},
 			"lookup_name": "drag_corridor",
 			"scene": "res://commons/artifacts/drag_corridor/drag_corridor.tscn",
 			"class_name": "DragCorridor",
@@ -3922,6 +3948,18 @@
 			]
 		},
 		"tug_of_war": {
+			"dna": {
+			"measured": "SWEPT 2026-08-27: 0.74% / 14.8%, LOCAL, vs floor 1.5 - wide-flat dilution at 4.46% subject. framing 0.7 registered; same instrument note as brake_skid.",
+			"framing": 0.7,
+			"framing_why": "Same dilution: 8 x 6 plan, subject 4.46% of frame at 1.0, cargo axis 0.75% frame / 15.0% focus - LOCAL. 0.7 doubles the load's pixels; the rope anchors at the plan's rim may kiss the frame edge, which is acceptable because the axis lives on the load, not the anchors.",
+			"predicted_degeneracy": "CLOSEST PAIR: cargo block vs crate, floor 1.5% whole-frame (one pair). Arithmetic: a 0.7 m load in an 8 x 6 plan seen at yaw 0.62 is ~2% of frame; the swap changes nearly all of it and removes the emissive bloom, so 1.5%. A wide flat subject dilutes everything here - if the sweep lands under this, check dna.framing before the axis. Registered 2026-08-27, before the first capture.",
+			 "axes": {
+			 "cargo": [
+			 "block",
+			 "crate"
+			 ]
+			 }
+			},
 			"lookup_name": "tug_of_war",
 			"scene": "res://commons/artifacts/tug_of_war/tug_of_war.tscn",
 			"class_name": "TugOfWar",
@@ -4128,6 +4166,19 @@
 			]
 		},
 		"brake_skid": {
+			"dna": {
+			"measured": "SWEPT 2026-08-27: 1.22% / 24.4%, LOCAL, vs floor 1.2 for crate-vitrine - on the nose. INSTRUMENT NOTE: dna.framing 0.6 was registered and the re-sweep moved 1.17 to 1.22, so this gallery path did not visibly apply registry framing; verify the sweep honors it before the next pass.",
+			"framing": 0.6,
+			"framing_why": "Fit-by-diagonal dilution, measured: a 6.0 x 1.2 body swept at framing 1.0 put the subject at 2.94% of frame and the sled axis read 1.17% frame / 23.4% focus - LOCAL, decisive where it happens. 0.6 pulls the camera to ~60% distance, roughly 2.8x the subject pixels, and the 0.6 x 0.5 sled berth sits centre so nothing structural crops.",
+			"predicted_degeneracy": "CLOSEST PAIR: sled crate vs vitrine, floor 1.2% whole-frame. Arithmetic: both are boxy props bead-normalised to 0.55/0.62 in the same berth, so the pair differs only in surface detail across the sled's ~0.6 x 0.4 m, which is ~1.5% of frame at subject ~30% for a 6.0 x 1.2 body; ~80% of those pixels change, so 1.2%. block vs crate should read ~2% (glow box loses emission, gains slats). Registered 2026-08-27, before the first capture.",
+			 "axes": {
+			 "sled": [
+			 "block",
+			 "crate",
+			 "vitrine"
+			 ]
+			 }
+			},
 			"lookup_name": "brake_skid",
 			"scene": "res://commons/artifacts/brake_skid/brake_skid.tscn",
 			"class_name": "BrakeSkid",
@@ -5493,6 +5544,17 @@
 			]
 		},
 		"paused_fountain": {
+			"dna": {
+			"measured": "SWEPT 2026-08-27, 3 variants: 3.71% frame / 45.3% focus, BITES. The 5.0% floor was for the closest pair in a fuller frame; subject measured 5.26% (fit-by-diagonal on a round basin), a dilution the floor did not price. Focus 45% is the honest read.",
+			"predicted_degeneracy": "CLOSEST PAIR: time_slice shipped vs coarse, floor 5.0% whole-frame. Arithmetic: 5 arcs x 7 beads = 35 beads occupy ~12% of frame; coarse drops to 20 beads, removing 15 of 35 (~43% of bead pixels), so 5.0%. fine vs shipped adds 20 beads and should read ~6%. The arcs themselves are seeded and identical across values - ONLY bead count varies, which is the axis's whole claim. Registered 2026-08-27, before the first capture.",
+			 "axes": {
+			 "time_slice": [
+			 "shipped",
+			 "fine",
+			 "coarse"
+			 ]
+			 }
+			},
 			"name": "Paused Fountain",
 			"class_name": "PausedFountain",
 			"scene": "res://commons/artifacts/paused_fountain/paused_fountain.tscn",
@@ -5512,6 +5574,16 @@
 			}
 		},
 		"prop_mobile": {
+			"dna": {
+			"measured": "SWEPT 2026-08-27: 3.55% / 47.4%, BITES, one pair, vs predicted 7.0. Subject 0.56% of frame and that is NOT a hog - probe_forces_casting measured the union at 2.7 x 3.1 x 4.0 - a mobile is mostly air, half a percent of ink. The focus number carries the verdict.",
+			"predicted_degeneracy": "CLOSEST PAIR: cast props vs discs - the axis has one pair, predicted 7.0% whole-frame. Arithmetic: six hanging bodies are ~10% of frame; discs at 0.012 m thickness delete most of each body's pixels from the canonical yaw and repaint the rest flat, so ~70% of leaf pixels change: 7.0%. The tree geometry is IDENTICAL by construction (same kg per leaf), so any difference outside the leaves is a fault, not a finding. Registered 2026-08-27, before the first capture.",
+			 "axes": {
+			 "cast": [
+			 "props",
+			 "discs"
+			 ]
+			 }
+			},
 			"name": "Prop Mobile",
 			"class_name": "PropMobile",
 			"scene": "res://commons/artifacts/prop_mobile/prop_mobile.tscn",
@@ -5604,6 +5676,17 @@
 			}
 		},
 		"umbrella_field": {
+			"dna": {
+			"measured": "SWEPT 2026-08-27: 8.23% / 69.4%, BITES. Predicted 8.0. On the nose.",
+			"predicted_degeneracy": "CLOSEST PAIR: wind shipped vs gale, floor 8.0% whole-frame. Arithmetic: sixteen canopies are ~30% of frame; lean deepens 24 to 37 deg, translating each canopy top ~0.5 m sideways so roughly a third of canopy pixels relocate: 8%. whisper vs shipped moves slightly more (10 to 24 deg): ~9%. Nothing is expected near zero - every value moves every umbrella. Registered 2026-08-27, before the first capture.",
+			 "axes": {
+			 "wind": [
+			 "shipped",
+			 "whisper",
+			 "gale"
+			 ]
+			 }
+			},
 			"name": "Umbrella Field",
 			"class_name": "UmbrellaField",
 			"scene": "res://commons/artifacts/umbrella_field/umbrella_field.tscn",

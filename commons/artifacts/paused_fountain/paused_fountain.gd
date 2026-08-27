@@ -40,6 +40,10 @@ const BUTTON_SCENE := preload("res://commons/interactables/push_button.tscn")
 ## the fastest arc (×1.35) reaches ~1.6 m, which still reads under a 3 m hall ceiling.
 @export var speed: float = 4.2
 @export var gravity: float = 9.8
+## TIME_SLICE - HOW FINELY THE HISTORY IS CUT. The zoetrope density: `fine` freezes
+## eleven instants per throw, `shipped` seven, `coarse` four - same physics, different
+## sampling rate of the same curve. (Axis derived 2026-08-27.)
+@export_enum("fine", "shipped", "coarse") var time_slice: String = "shipped"
 ## Frozen copies get a tumble proportional to flight time, so the sculpture also shows
 ## angular velocity as a gradient of pose — a fountain of one object is a zoetrope.
 @export var tumble: float = 1.6
@@ -51,6 +55,13 @@ var _next_arc := 0
 
 func _ready() -> void:
 	_rng.seed = seed
+	match time_slice:
+		"fine":
+			per_arc = 11
+		"coarse":
+			per_arc = 4
+		_:
+			pass                     # shipped: per_arc keeps its export, default 7
 	_build_basin()
 	_build_arcs()
 	_build_button()

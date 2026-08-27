@@ -16,6 +16,10 @@ class_name DragCorridor
 const PLAYER_MASK := 524288
 @export var length: float = 3.0                 # per-zone length (3 zones)
 @export var floor_color: Color = Color(0.16, 0.17, 0.2)
+## SWIMMER - WHAT THE MEDIA ARE CHARGING RENT. `dart` is the shipped glow sphere;
+## `extinguisher` sends the museum's own body gliding through air, water and honey.
+## (Casting pass, 2026-08-27.)
+@export_enum("dart", "extinguisher") var swimmer: String = "dart"
 # [name, drag b, tint]
 const MEDIA := [
 	["AIR",   0.4, Color(0.70, 0.85, 1.0)],
@@ -58,7 +62,10 @@ func _build() -> void:
 		# a probe that glides + decays in this medium
 		var probe := Node3D.new(); add_child(probe)
 		var pm := _glow_mat(tint.lerp(Color.WHITE, 0.3), 1.4)
-		probe.add_child(_sphere(Vector3.ZERO, 0.14, pm))
+		if swimmer == "extinguisher":
+			probe.add_child(_cast_prop("fire_extinguisher", 0.45))
+		else:
+			probe.add_child(_sphere(Vector3.ZERO, 0.14, pm))
 		var vmat := _glow_mat(tint, 1.6)
 		_probes.append({"node": probe, "vmat": vmat, "b": b, "x0": x0, "phase": 0.0})
 		# a drag Area3D for the player
@@ -116,3 +123,49 @@ func _medium(tint: Color, alpha: float) -> StandardMaterial3D:
 	m.emission_energy_multiplier = 0.2 if emissive else 0.0
 	m.cull_mode = BaseMaterial3D.CULL_DISABLED
 	return m
+
+
+## The casting pass (2026-08-27): load a museum prop, bead-normalised, internal
+## rigids frozen. Returned UNPARENTED - the graft site positions it. Temporarily
+## enters the tree so the prop's _ready builds before it is measured.
+func _cast_prop(token: String, bead: float) -> Node3D:
+	var wrapper := Node3D.new()
+	add_child(wrapper)
+	var packed: PackedScene = load("res://commons/artifacts/%s/%s.tscn" % [token, token])
+	if packed == null:
+		push_warning("%s: cast prop %s missing, bead substituted" % [name, token])
+		var box := MeshInstance3D.new()
+		box.mesh = BoxMesh.new()
+		box.scale = Vector3.ONE * bead * 0.7
+		wrapper.add_child(box)
+		remove_child(wrapper)
+		return wrapper
+	var inst: Node3D = packed.instantiate()
+	wrapper.add_child(inst)
+	var pstack: Array = [inst]
+	while not pstack.is_empty():
+		var pn: Node = pstack.pop_back()
+		if pn is RigidBody3D:
+			(pn as RigidBody3D).freeze = true
+		for pc in pn.get_children():
+			pstack.append(pc)
+	var to_local := inst.global_transform.affine_inverse()
+	var merged := AABB()
+	var first := true
+	var mstack: Array = [inst]
+	while not mstack.is_empty():
+		var mn: Node = mstack.pop_back()
+		if mn is MeshInstance3D:
+			var mi := mn as MeshInstance3D
+			var mbox: AABB = (to_local * mi.global_transform) * mi.get_aabb()
+			merged = mbox if first else merged.merge(mbox)
+			first = false
+		for mc in mn.get_children():
+			mstack.append(mc)
+	var longest: float = maxf(merged.size.x, maxf(merged.size.y, merged.size.z))
+	if longest > 0.001:
+		var s: float = bead / longest
+		inst.scale = Vector3.ONE * s
+		inst.position = -(merged.get_center() * s)
+	remove_child(wrapper)
+	return wrapper

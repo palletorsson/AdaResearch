@@ -28,6 +28,10 @@ const PALETTE := [Color(0.78, 0.16, 0.12), Color(0.92, 0.75, 0.14), Color(0.13, 
 @export var lean: float = 0.42
 ## The field itself: one broad rotation across the plot plus a standing wobble. kx/kz
 ## bend the direction with position so neighbouring umbrellas disagree legibly.
+## WIND - HOW LOUD THE FIELD SPEAKS. `whisper` leans 10 deg at full magnitude,
+## `shipped` 24, `gale` 37 - the same field, spoken at three volumes. (Axis derived
+## 2026-08-27.)
+@export_enum("whisper", "shipped", "gale") var wind: String = "shipped"
 @export var field_kx: float = 0.35
 @export var field_kz: float = 0.55
 
@@ -35,6 +39,13 @@ var _umbrellas: Array = []             # {tilt: Node3D, canopy: Node3D, mag: flo
 
 func _ready() -> void:
 	_rng.seed = seed
+	match wind:
+		"whisper":
+			lean = 0.18
+		"gale":
+			lean = 0.65
+		_:
+			pass                     # shipped: lean keeps its export, default 0.42
 	_build_plot()
 	_build_umbrellas()
 	_build_plaque()

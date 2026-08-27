@@ -1,0 +1,135 @@
+{
+ "_note": "Per-axis bite: mean pixel change between variants differing in that axis alone. An axis whose renders are identical is decoration.",
+ "gallery": "forces-props-dna",
+ "thresholds": {
+  "inert_focus": 0.03,
+  "weak_focus": 0.12,
+  "frame_local_ceiling": 0.02
+ },
+ "axes": [
+  {
+   "artifact": "paused_fountain",
+   "axis": "time_slice",
+   "frame": 0.03712,
+   "focus": 0.45265,
+   "verdict": "bites",
+   "partial": null,
+   "conditional": null,
+   "subject": 0.05262,
+   "pairs": 3,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "prop_mobile",
+   "axis": "cast",
+   "frame": 0.03551,
+   "focus": 0.474,
+   "verdict": "bites",
+   "partial": null,
+   "conditional": null,
+   "subject": 0.00555,
+   "pairs": 1,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "umbrella_field",
+   "axis": "wind",
+   "frame": 0.08232,
+   "focus": 0.69364,
+   "verdict": "bites",
+   "partial": null,
+   "conditional": null,
+   "subject": 0.04926,
+   "pairs": 3,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "momentum_cradle",
+   "axis": "bobs",
+   "frame": 0.04585,
+   "focus": 0.59605,
+   "verdict": "bites",
+   "partial": null,
+   "conditional": null,
+   "subject": 0.10977,
+   "pairs": 3,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "momentum_cradle",
+   "axis": "carried",
+   "frame": 0.02492,
+   "focus": 0.41689,
+   "verdict": "bites",
+   "partial": null,
+   "conditional": null,
+   "subject": 0.10977,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "brake_skid",
+   "axis": "sled",
+   "frame": 0.01221,
+   "focus": 0.24417,
+   "verdict": "local",
+   "partial": null,
+   "conditional": null,
+   "subject": 0.08121,
+   "pairs": 3,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "drag_corridor",
+   "axis": "swimmer",
+   "frame": 0.00192,
+   "focus": 0.03831,
+   "verdict": "WEAK",
+   "partial": null,
+   "conditional": null,
+   "subject": 0.06945,
+   "pairs": 1,
+   "twins": [
+    {
+     "a": "dart",
+     "b": "extinguisher",
+     "focus": 0.03831,
+     "rgb": 0.0575
+    }
+   ],
+   "colour_only": []
+  },
+  {
+   "artifact": "spring_tower",
+   "axis": "bob",
+   "frame": 0.02547,
+   "focus": 0.44537,
+   "verdict": "bites",
+   "partial": null,
+   "conditional": null,
+   "subject": 0.03676,
+   "pairs": 1,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "tug_of_war",
+   "axis": "cargo",
+   "frame": 0.00738,
+   "focus": 0.14765,
+   "verdict": "local",
+   "partial": null,
+   "conditional": null,
+   "subject": 0.0943,
+   "pairs": 1,
+   "twins": [],
+   "colour_only": []
+  }
+ ]
+}

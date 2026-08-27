@@ -88,15 +88,51 @@ Registered in `commons/artifacts/registry/vectors_demos.json` (surgical append, 
 preserved). No `dna.axes` declared yet — axes get DERIVED from the code with
 `apply_dna_block.py` after Palle approves the casting (the science_screen rule).
 
-## The gallery map, and the museum
+## The casting pass (done 2026-08-27, same day)
 
-Next steps in order:
-1. Palle walks the three (headless probe first, then `Forces_PropGallery` bench map).
-2. Casting pass on the ELEVATE rows (each needs its `cast` axis derived, then swept).
-3. Build `Forces_PropGallery`: one map, five phases, all 15 on the necklace order.
-4. THEN the retire swap, map by map, reachability diffed per write.
-5. The ribbon re-packs forces from the changed maps (coordinate with the museum session —
-   `map_authored.json` is theirs and uncommitted right now).
+All seven remaining objects built and probed; `Forces_PropGallery` (20×34, sixteen
+objects) is forces' 15th map — own BFS 560/560 reachable, pathfinder OK, token gate 0
+unresolved. Then the elevations, each grafted so value 1 reproduces the shipped body
+EXACTLY (probe re-run: all five match their registry `body_m` to the centimetre):
+
+| token | axis | values |
+|---|---|---|
+| momentum_cradle | `bobs` | uniform · museum — five props **ballasted to equal mass**, and the readout confesses it: unequal bobs would falsify 1-in-1-out |
+| brake_skid | `sled` | block · crate · vitrine |
+| drag_corridor | `swimmer` | dart · extinguisher |
+| spring_tower | `bob` | weight · crate |
+| tug_of_war | `cargo` | block · crate |
+| paused_fountain | `time_slice` | shipped · fine · coarse — the zoetrope density |
+| prop_mobile | `cast` | props · discs — same kg per leaf, so the tree is identical and the axis argues pure dressing |
+| umbrella_field | `wind` | shipped · whisper · gale |
+
+All eight blocks DERIVED (`apply_dna_block.py`), gate exit 0, and every axis carries a
+`predicted_degeneracy` registered before the first capture — closest pair, number,
+arithmetic. Two named risks: drag_corridor's floor is 0.6% (three small probes in a
+9.4 m body — a sub-floor return means REFRAME, not INERT), and the cradle is now a
+two-axis sweep (read per-pair rows; the bobs peak can hide a dead carried pair).
+
+Not axed, with reasons: `prop_spigot` (its rain is motion — a settle-frame still
+photographs the pre-rain duct, the info_board trap), `three_gravities` /
+`parlour_orbits` (their argument is time), `revolving_door` (its cos θ lives in the
+press). These stay singletons until someone designs a still that can see them.
+
+## The sweep (same day): 23 variants, 6 bite / 2 local / 1 weak / 0 inert
+
+Gallery: `ada_encyclopedia/public/forces-props-dna/` (23 PNGs + manifest, GalleryView-
+readable). Critic: `doc/reports/forces_props_dna_critic.json`. Against the registered
+predictions: umbrella 8.23 vs 8.0 predicted, skid 1.22 vs 1.2, cradle bobs 4.59 vs 4-5
+— three on the nose; tower 2.55 vs 3.0 was the corpus's first under-floor that was NOT
+broken (frame-share overestimate, recorded). Two instrument findings, both in the
+registry `measured` notes: this gallery path does not visibly apply `dna.framing`
+(skid re-swept 1.17→1.22 after framing 0.6), and drag_corridor's swimmer axis reads
+twin because the probes glide INSIDE the tinted media boxes — the z-stack case; the
+value provably takes (13 vs 40 meshes) and is not INERT.
+
+Still open:
+1. The retire swap — 56 diagram tokens, map by map, reachability diffed per write.
+2. The ribbon re-pack (museum session's `map_authored.json`, theirs and uncommitted).
+3. Walk the gallery in the headset.
 
 ## Sieve
 
