@@ -260,6 +260,38 @@ See `doc/MAP_EDITING_PIPELINE.md` for detailed documentation.
 | Ecosystem manager | `commons/managers/EcosystemManager.gd` — ecology progression |
 | Soft stages | `commons/maps/soft_stages.json` — ecology density/kingdoms per sequence |
 
+### The endless museum: which file is the truth, and which is a cache
+
+Asked on 2026-08-27 after `/wall-map`, `/long-museum` and the Godot museum gave three
+different answers. **Everything under `ada_run/` is DERIVED.** When two surfaces disagree,
+find which cache is stale — do not pick a winner by eye.
+
+| authored (edit these) | truth for |
+|---|---|
+| `commons/data/book/*.json` | what a wall **says** — `text`, the reflection `note`, `adopt`, `hang` |
+| `commons/data/trunk_branches.json` | which halls are **dealt** (`book.py compile` writes it from the book) |
+| `commons/maps/<Map>/map_data.json` | what a hall **looks like** |
+| `commons/data/map_authored.json` | which chapters build from their real map (5 of 22) |
+| `commons/data/em_layout.json` | museum **config** — despite the name it is input, not output |
+
+| derived (rebuild, never edit) | producer | covers |
+|---|---|---|
+| `ada_run/em_plan.json` | `spine_run` | the deal: 196 halls, the order, which map |
+| `ada_run/em_bake.json` | Godot bake | what **stands** in each hall, keyed `chapter\|pearl` |
+| `ada_run/em_layout_walk.json` | Godot, as it builds | each hall's **span and shape** — the museum's own cursor |
+| `ada_run/em_built.json` | Godot, live | the streaming window only — **2 segments**, never the museum |
+| `commons/data/long_museum.json` | `tools/long_museum.py` | the strip, laid out from the two above |
+
+Consumers: the museum reads plan + bake + maps + book. `/wall-map`, `/wall-texts` and
+`/lines` read plan + book (`halls_get`). `/long-museum` reads `long_museum.json`.
+
+**The trap that cost a session:** `long_museum.py` re-derived the geometry in Python, and a
+second implementation of one rule drifts — it gave every hall h20 where the engine builds
+h23 (three passage rows), a strip 16% longer than the museum, with `--check` green because
+it compared the strip against the *maps*. It compares against `em_layout_walk.json` now and
+exits 1 on disagreement. A hall nobody has walked has no engine row and is marked
+`layout: "derived"`; the summary prints how many of each.
+
 ## AI Skills
 
 | Command | Phase | Description |
