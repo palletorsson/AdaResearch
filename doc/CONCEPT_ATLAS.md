@@ -32,16 +32,16 @@ adopted by the gallery unchanged; standing = placed survivors after the retire;
 | Unit / normalize | length_lantern* (same lamp, radius 1) | 4 | –1 |
 | Addition | tug_of_war (cargo axis: real freight) | — | –6 |
 | Subtraction | tug_of_war (the rope that closes the sum) | — | –4 |
-| Scaling | **GAP** — see below | — | –2 |
+| Scaling | **matryoshka_row** — five sizes, the pedestal bows at s³ | — | –2 |
 | Dot product | revolving_door (keeps only \|F\|·cos θ) | 2 | –4 |
 | Projection / reflection | projection_shadow* | 2 | –1 |
 | Cross product / torque | prop_mobile + calder_mobile | torque_crank | –3 |
 | Vector field / flow | umbrella_field (wind axis: whisper→gale) | weather_vector_field +2 | –4 |
 | Motion / velocity | paused_fountain (time_slice axis) | 3 | –3 |
-| Work F·d | — | work_meter family | 0 |
+| Work F·d | **sisyphus_mower** — banks cos θ of every shove, forever | work_meter family | 0 |
 | Friction / drag | brake_skid (sled axis) + drag_corridor (swimmer axis) | friction_ramp +3 | –1 |
 | Projectile / launch | paused_fountain's live throw + catapult | launch_arc +8 | –1 |
-| Centripetal | — | centrifuge_ring +1 | 0 |
+| Centripetal | **prop_carousel** — chains lean because they pull IN | centrifuge_ring +1 | 0 |
 | Gravity / orbit | three_gravities + parlour_orbits | 6 | –5 |
 | Spring / Hooke | spring_tower (bob axis) | 6 | –1 |
 | Pendulum | pendulum_hall* | 4 | 0 |
@@ -49,13 +49,16 @@ adopted by the gallery unchanged; standing = placed survivors after the retire;
 | Restitution / bounce | bounce_well* | 2 | –1 |
 | Lever / balance | prop_mobile + calder_mobile | lever family | 0 |
 | Wind / weather | umbrella_field + wind_room* | 1 | 0 |
-| Force field (zone) | — | force_field_zone +2 | –1 |
+| Force field (zone) | **invisible_hill** — trails draw a hill that is only force | force_field_zone +2 | –1 |
 | General force / F = ma | prop_spigot (one gravity, every fate) + force_pad* | 4 | –4 |
 
-**The two honest gaps.** *Coordinate system* is declared closed (rung 0, recalled).
-*Scaling* is real: both its representatives retire and nothing surreal replaces them —
-the natural object is one prop at ×½ / ×1 / ×2 on one pedestal row (a matryoshka of
-the same extinguisher). One future artifact closes the census.
+**Census closed (2026-08-27, category-heroes pass).** Every category except rung-0
+*Coordinate system* (declared recalled) now carries a surreal applied hero. The last
+four — matryoshka_row, sisyphus_mower, prop_carousel, invisible_hill — each elevate
+their category's declared best (the Scaling best was itself retiring; force_mower,
+centrifuge_ring and force_field_zone lend their claims to louder bodies). Sisyphus
+note: the corpus force_mower is an EXHIBIT (499 meshes, its own lawn — probe), so the
+mower rides as a distilled silhouette, and the identity block says so.
 
 **The page (2026-08-27, same day):** localhost:3003/forces-concepts - one tile per
 artifact, its principle underneath, 219 tiles across the 25 concepts. The chips are MAP

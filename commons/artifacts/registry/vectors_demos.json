@@ -5703,6 +5703,77 @@
 				"footprint_cells": 5,
 				"clearance_m": 0.6
 			}
+		},
+		"matryoshka_row": {
+			"name": "Matryoshka Row",
+			"class_name": "MatryoshkaRow",
+			"scene": "res://commons/artifacts/matryoshka_row/matryoshka_row.tscn",
+			"description": "The Scaling hero: the same fire extinguisher at five scales on one brass rail, and the pedestal under the x4 BOWS - length scales as s, skin as s2, weight as s3. The pedestal knew before you did. Category-heroes pass, 2026-08-27.",
+			"category": "vectors_demos",
+			"tags": [
+				"forces",
+				"scaling",
+				"prop",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 4,
+				"clearance_m": 0.6
+			}
+		},
+		"sisyphus_mower": {
+			"name": "Sisyphus Mower",
+			"class_name": "SisyphusMower",
+			"scene": "res://commons/artifacts/sisyphus_mower/sisyphus_mower.tscn",
+			"description": "The Work hero, elevating force_mower: a lawn mower pushed forever up a striped hill by ghost hands, handle at 32 degrees - only cos(theta) of every shove banks work, the ledger counts the joules, gravity spends them on the way down. One must imagine the mower happy. Category-heroes pass, 2026-08-27.",
+			"category": "vectors_demos",
+			"tags": [
+				"forces",
+				"work",
+				"energy",
+				"prop",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 4,
+				"clearance_m": 0.6
+			}
+		},
+		"prop_carousel": {
+			"name": "Prop Carousel",
+			"class_name": "PropCarousel",
+			"scene": "res://commons/artifacts/prop_carousel/prop_carousel.tscn",
+			"description": "The Centripetal hero, elevating centrifuge_ring: a fairground carousel of museum props on chains under a Calder-palette canopy - the chains lean outward at exactly tan(phi)=w2r/g because they must pull IN. Nothing pulls outward. Category-heroes pass, 2026-08-27.",
+			"category": "vectors_demos",
+			"tags": [
+				"forces",
+				"centripetal",
+				"circular",
+				"prop",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 3,
+				"clearance_m": 0.6
+			}
+		},
+		"invisible_hill": {
+			"name": "Invisible Hill",
+			"class_name": "InvisibleHill",
+			"scene": "res://commons/artifacts/invisible_hill/invisible_hill.tscn",
+			"description": "The Force-field hero, elevating force_field_zone: a dead-flat green where glowing pucks swerve around a hill that exists only as force (mu/r2, integrated live) - their trails pile up into the invisible summit's portrait. Category-heroes pass, 2026-08-27.",
+			"category": "vectors_demos",
+			"tags": [
+				"forces",
+				"field",
+				"zone",
+				"potential",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 3,
+				"clearance_m": 0.6
+			}
 		}
 	}
 }
