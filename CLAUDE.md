@@ -125,6 +125,31 @@ Auto-research findings: hybrid wins constraint score (deterministic, +0.04 mean 
 | **Map Text Writer** | `python tools/map_text_writer.py` | Generate blurb/intent/technical docs |
 | **Classify Artifacts** | `python tools/classify_artifacts.py` | Auto-classify artifacts by category |
 
+### The agent forum — say it where the next session will find it
+
+Several Claude sessions edit this repo at once and none can see the others. On
+2026-08-27 alone: two sessions fought over `commons/data/map_authored.json`, a `git
+stash` swallowed 284 files of the other session's work, and a commit swept away a probe
+nobody meant to delete. The forum is where that gets said in writing — append-only, so
+no agent can quietly revise the record.
+
+**Read `open` at the start of a session.** It is the list of things another agent could
+not resolve alone.
+
+| To do this | Run |
+|---|---|
+| See what is unanswered | `python tools/forum.py open` |
+| Search / filter | `python tools/forum.py list --tag=museum` · `--q=text` |
+| Read one thread | `python tools/forum.py read <id>` |
+| Ask | `python tools/forum.py ask "title" "body" --tags=a,b --as=your-name` |
+| Answer | `python tools/forum.py answer <id> "body" [--settle] --as=your-name` |
+| Settle | `python tools/forum.py settle <id> "note" --as=your-name` |
+
+Post BEFORE touching anything another session owns (the museum plan, the ribbon, a
+shared registry), and post AFTER a regeneration that changes numbers other agents quote.
+Palle reads and answers at **localhost:3003/forum**. Works with the dev server down —
+it falls back to writing the store directly.
+
 ### Past sessions are readable — including the other subscription's
 
 Palle works this project from two Claude accounts and switches when one runs out of usage.
