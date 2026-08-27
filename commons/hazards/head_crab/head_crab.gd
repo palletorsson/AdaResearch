@@ -54,6 +54,25 @@ const RIG := "res://commons/hazards/octapod_crawler/csg_four_leg_walker.tscn"
 @export var avoid_turn_deg: float = 65.0  ## how hard it steers off a blocked line
 @export var avoid_eye: float = 0.14       ## whisker height above its own floor
 
+## IT PATHS (2026-08-27, Palle: "yes make it path"). Whiskers round an obstacle;
+## they do not get out of a room. A U-shaped alcove traps a whisker-steered
+## animal until it happens to wander out, which is fine for an open hall and
+## wrong for anything with a corner in it.
+##
+## The map is a GRID, so the path is A* over a grid — Godot's own AStarGrid2D,
+## on an occupancy lattice measured by ONE ray per cell. Cast down the cell's
+## column: a hit near the floor is floor, a hit well above it is the top of a
+## wall, and no hit at all is a hole. That single test tells the three apart
+## because a grid wall is three cubes tall.
+##
+## The whiskers stay underneath it. A path says which way to go; the whiskers
+## and the slide keep the body out of what the lattice was too coarse to see.
+@export var path_on: bool = true
+@export var path_cell: float = 0.45       ## lattice pitch, metres
+@export var path_extent: int = 14         ## half-width in cells: 28 x 28 = 784 rays
+@export var path_period: float = 0.8      ## seconds between rebuilds
+@export var path_reach: float = 0.40      ## how near a waypoint counts as reached
+
 @export_group("Bite")
 ## IT COULD NOT TOUCH ANYTHING (2026-08-27, Palle: "so I can see it walk, attack
 ## and kill the player"). The registry filed this artifact as a hazard and it
@@ -219,6 +238,9 @@ var _degree: int = 0          # mushrooms eaten; 0 is an animal, 5 is a garden
 var _rooted: bool = false     # the first mushroom ends the hunt, permanently
 var _sprouts: Array = []      # one MultiMeshInstance3D per leg
 var _bait: Node3D = null      # the mushroom it is walking to
+var _path: Array = []         # world waypoints, nearest first
+var _path_t: float = 0.0      # time until the next rebuild
+var _path_goal: Vector3 = Vector3.INF
 var _bite_t: float = 0.0      # cooldown, counts down
 var _lunge_t: float = 0.0     # >0 while committed to a leap
 var _lunge_dir: Vector3 = Vector3.ZERO
@@ -574,6 +596,84 @@ func _probe_floor(p: Vector3, up: float, down: float, fallback: float) -> float:
 	return float((hit["position"] as Vector3).y)
 
 
+## THE WAY TO A PLACE, as a list of world waypoints. Rebuilt at most every
+## path_period, and immediately when the goal has moved more than one cell.
+## Returns the heading to steer, or INF when it has no opinion and the caller
+## should aim straight at the goal.
+func _path_yaw(goal: Vector3, delta: float) -> float:
+	if not path_on:
+		return INF
+	_path_t -= delta
+	var moved: bool = _path_goal == Vector3.INF or Vector2(goal.x - _path_goal.x, goal.z - _path_goal.z).length() > path_cell
+	if _path_t <= 0.0 or moved:
+		_path_t = path_period
+		_path_goal = goal
+		_repath(goal)
+	# drop waypoints already reached
+	while not _path.is_empty():
+		var wp: Vector3 = _path[0]
+		if Vector2(wp.x - global_position.x, wp.z - global_position.z).length() < path_reach:
+			_path.remove_at(0)
+		else:
+			break
+	if _path.is_empty():
+		return INF
+	var to: Vector3 = _path[0] - global_position
+	to.y = 0.0
+	if to.length() < 0.01:
+		return INF
+	return atan2(-to.x, -to.z)
+
+
+## ONE RAY PER CELL. Down the column from well above the floor to well below it:
+## a hit near the floor is floor, a hit well above is the top of a wall, and no
+## hit is a hole. A grid wall is three cubes tall, which is what makes the three
+## distinguishable by height alone.
+func _repath(goal: Vector3) -> void:
+	_path.clear()
+	if not is_inside_tree():
+		return
+	var w := get_world_3d()
+	if w == null:
+		return
+	var space := w.direct_space_state
+	if space == null:
+		return
+	var here := Vector2i(int(floor(global_position.x / path_cell)), int(floor(global_position.z / path_cell)))
+	var there := Vector2i(int(floor(goal.x / path_cell)), int(floor(goal.z / path_cell)))
+	var half := path_extent
+	var region := Rect2i(here.x - half, here.y - half, half * 2 + 1, half * 2 + 1)
+	if not region.has_point(there):
+		# the goal is outside what it can see; walk toward it and rebuild later
+		return
+	var grid := AStarGrid2D.new()
+	grid.region = region
+	grid.cell_size = Vector2(path_cell, path_cell)
+	grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_ONLY_IF_NO_OBSTACLES
+	grid.update()
+	var solid := 0
+	for cx in range(region.position.x, region.end.x):
+		for cy in range(region.position.y, region.end.y):
+			var wx: float = (float(cx) + 0.5) * path_cell
+			var wz: float = (float(cy) + 0.5) * path_cell
+			var q := PhysicsRayQueryParameters3D.create(
+				Vector3(wx, _floor_y + 1.6, wz), Vector3(wx, _floor_y - 1.0, wz))
+			q.collision_mask = 1
+			var hit: Dictionary = space.intersect_ray(q)
+			var ok: bool = not hit.is_empty() and absf(float((hit["position"] as Vector3).y) - _floor_y) < 0.35
+			if not ok:
+				grid.set_point_solid(Vector2i(cx, cy), true)
+				solid += 1
+	# the cell it is standing in and the one it is going to are never solid,
+	# or A* refuses before it starts — the animal is not the obstacle
+	grid.set_point_solid(here, false)
+	grid.set_point_solid(there, false)
+	var ids: Array = grid.get_id_path(here, there)
+	for i in range(1, ids.size()):
+		var c: Vector2i = ids[i]
+		_path.append(Vector3((float(c.x) + 0.5) * path_cell, _floor_y, (float(c.y) + 0.5) * path_cell))
+
+
 ## THE STEP ITSELF IS REFUSED, not just the heading. Steering alone left the
 ## animal inside the wall on 31 of 218 samples — 14 per cent — because the turn
 ## is a lerp and it keeps walking forward while it comes about, so it clips the
@@ -624,6 +724,13 @@ func _slide(step: Vector3) -> Vector3:
 func _way_round(want_yaw: float) -> float:
 	if not avoid_on or not is_inside_tree():
 		return want_yaw
+	# A PATH OUTRANKS A WHISKER. Measured in the U trap: with A* on, the animal
+	# left the pocket and then never arrived — 40 s of steering against its own
+	# route, because a whisker reading 1.35 m ahead sees the arm it has to hug
+	# and turns off the gap it was heading for. While a path is held the
+	# whiskers are pulled in to near-contact, where they do the job the lattice
+	# is too coarse for and nothing else.
+	var look: float = avoid_range * (0.42 if not _path.is_empty() else 1.0)
 	var w := get_world_3d()
 	if w == null:
 		return want_yaw
@@ -632,25 +739,25 @@ func _way_round(want_yaw: float) -> float:
 		return want_yaw
 	var from := Vector3(global_position.x, _floor_y + avoid_eye, global_position.z)
 	var spread: float = deg_to_rad(avoid_spread_deg)
-	var ahead: float = _free(space, from, want_yaw)
-	if ahead >= avoid_range:
+	var ahead: float = _free(space, from, want_yaw, look)
+	if ahead >= look:
 		return want_yaw
-	var left: float = _free(space, from, want_yaw + spread)
-	var right: float = _free(space, from, want_yaw - spread)
-	if left < avoid_range * 0.5 and right < avoid_range * 0.5:
+	var left: float = _free(space, from, want_yaw + spread, look)
+	var right: float = _free(space, from, want_yaw - spread, look)
+	if left < look * 0.5 and right < look * 0.5:
 		return want_yaw + PI * 0.55        # a corner: come about
 	var turn: float = deg_to_rad(avoid_turn_deg)
 	return want_yaw + (turn if left > right else -turn)
 
 
 ## how far it can see along a heading, capped at avoid_range
-func _free(space: PhysicsDirectSpaceState3D, from: Vector3, yaw: float) -> float:
+func _free(space: PhysicsDirectSpaceState3D, from: Vector3, yaw: float, look: float) -> float:
 	var dir := Vector3(-sin(yaw), 0.0, -cos(yaw))
-	var q := PhysicsRayQueryParameters3D.create(from, from + dir * avoid_range)
+	var q := PhysicsRayQueryParameters3D.create(from, from + dir * look)
 	q.collision_mask = 1
 	var hit: Dictionary = space.intersect_ray(q)
 	if hit.is_empty():
-		return avoid_range
+		return look
 	return from.distance_to(hit["position"] as Vector3)
 
 
@@ -880,10 +987,13 @@ func _process(delta: float) -> void:
 			if bd.length() <= (feed_radius if _rooted else bite_range * 1.6):
 				_eat(_bait)
 			elif not _rooted:
-				# break off the hunt and go for it
-				rotation.y = lerp_angle(rotation.y, atan2(-bd.x, -bd.z),
+				# break off the hunt and go for it, by whatever way round there is
+				var byaw: float = _path_yaw(_bait.global_position, delta)
+				if byaw == INF:
+					byaw = atan2(-bd.x, -bd.z)
+				rotation.y = lerp_angle(rotation.y, _way_round(byaw),
 					minf(1.0, deg_to_rad(turn_speed_deg) * delta))
-				position += -basis.z.normalized() * chase_speed * delta
+				position += _slide(-basis.z.normalized() * chase_speed * delta)
 				position.y = _floor_y + _ride
 				_update_gait(delta)
 				return
@@ -899,7 +1009,10 @@ func _process(delta: float) -> void:
 		to.y = 0.0
 		var d: float = to.length()
 		if d < detect_m and d > 0.30:
-			want_yaw = atan2(-to.x, -to.z)
+			# A PATH FIRST, the straight line only if there is none. The whiskers
+			# still run underneath: a lattice at 0.45 m cannot see a table leg.
+			var pyaw: float = _path_yaw(_target.global_position, delta)
+			want_yaw = pyaw if pyaw != INF else atan2(-to.x, -to.z)
 			speed = chase_speed
 			# IT USED TO STOP AT 0.35 m AND STAND THERE. That was the whole
 			# attack: walk up to the visitor and wait. Inside lunge_range it

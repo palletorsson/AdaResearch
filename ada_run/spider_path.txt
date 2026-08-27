@@ -1,0 +1,14 @@
+A U-SHAPED TRAP — the visitor is beyond the closed side
+  back wall at x -1.5, arms at z +/-2.2 running to x +1.7, mouth at +x
+  spider starts INSIDE at (0.2, 0, 0); visitor at (-4.6, 0.5, 0)
+
+PATHING ON
+  left the pocket: true
+  longest path it held: 20 waypoint(s)
+  reached the visitor: true  in 11.20 s
+
+PATHING OFF — the negative test, whiskers alone
+  left the pocket: false
+  reached the visitor: false (gave up at 40 s)
+
+VERDICT: it paths out of a pocket that whiskers cannot leave
