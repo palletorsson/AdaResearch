@@ -32,6 +32,16 @@ var current_message: String = ""
 var game_started: bool = false
 var game_paused: bool = false
 
+## FIVE MUSHROOMS (2026-08-27, Palle: "we have 5 mushrooms when we start?" /
+## "refill on entering a map"). Held here rather than on a hand, because a hand
+## is per-lane — VR has two of them and the desktop has none — and because this
+## is the only place in the project that holds player state, already with the
+## exact shape needed: a max/current pair, a _updated signal, and a per-level
+## reset. It refills on reset_level_state AND on entering a map, so walking a
+## door is a fresh five and dying is too.
+var max_mushrooms: int = 5
+var mushrooms: int = 5
+
 var max_player_health: float = 100.0
 var player_health: float = 100.0
 
@@ -73,6 +83,7 @@ signal message_updated(message: String)
 signal game_state_changed(is_started: bool, is_paused: bool)
 signal regenerate_requested(origin: Vector3, targets: Array, metadata: Dictionary)
 signal health_updated(new_health: float)
+signal mushrooms_updated(count: int, maximum: int)
 signal player_damaged(amount: float, new_health: float)
 signal player_died(position: Vector3)
 signal current_map_changed(map_name: String)
@@ -218,6 +229,25 @@ func reset_level_state() -> void:
 	player_health = max_player_health
 	_death_sequence_running = false
 	emit_signal("health_updated", player_health)
+	refill_mushrooms()
+
+
+## THE HAND IS EMPTY OR IT IS NOT. Returns false when there is nothing left,
+## which is the whole of the fire gate — no cooldown here, that belongs to the
+## thing doing the firing.
+func spend_mushroom() -> bool:
+	if mushrooms <= 0:
+		return false
+	mushrooms -= 1
+	emit_signal("mushrooms_updated", mushrooms, max_mushrooms)
+	return true
+
+
+func refill_mushrooms() -> void:
+	if mushrooms == max_mushrooms:
+		return
+	mushrooms = max_mushrooms
+	emit_signal("mushrooms_updated", mushrooms, max_mushrooms)
 
 func _reload_scene() -> void:
 	# Try checkpoint respawn first
@@ -640,6 +670,7 @@ func set_current_map(map_name: String) -> void:
 		return
 	current_map_name = normalized_name
 	emit_signal("current_map_changed", current_map_name)
+	refill_mushrooms()      # a new room is a full hand
 	if debug:
 		print("GameManager: Current map set to %s" % current_map_name)
 

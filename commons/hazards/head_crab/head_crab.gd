@@ -42,6 +42,18 @@ const RIG := "res://commons/hazards/octapod_crawler/csg_four_leg_walker.tscn"
 @export var patrol_speed: float = 0.3
 @export var turn_speed_deg: float = 150.0
 
+@export_group("Way round")
+## IT HAS NO COLLIDER AND IT NEVER WILL. This family moves by writing position;
+## giving it a body would put it on a different clock from its own gait. So
+## avoidance is three whiskers rather than a physics response: cast where it
+## means to go, and if that is wall, go the freer way round. A wall it cannot
+## get round is a wall it turns away from, which is what an animal does.
+@export var avoid_on: bool = true
+@export var avoid_range: float = 1.35     ## how far ahead it looks, in metres
+@export var avoid_spread_deg: float = 42.0
+@export var avoid_turn_deg: float = 65.0  ## how hard it steers off a blocked line
+@export var avoid_eye: float = 0.14       ## whisker height above its own floor
+
 @export_group("Bite")
 ## IT COULD NOT TOUCH ANYTHING (2026-08-27, Palle: "so I can see it walk, attack
 ## and kill the player"). The registry filed this artifact as a hazard and it
@@ -56,7 +68,11 @@ const RIG := "res://commons/hazards/octapod_crawler/csg_four_leg_walker.tscn"
 @export var lunge_range: float = 1.9      ## how close before it commits
 @export var lunge_speed: float = 4.2      ## metres per second during the leap
 @export var lunge_duration: float = 0.42
-@export var lunge_rise: float = 0.22      ## how high the body lifts mid-leap
+## IT DOES NOT JUMP (2026-08-27, Palle: "spider most walk around colliders and
+## can not jump (at least not the first spider)"). The lunge stays — it is how
+## the animal commits to a bite — but it is a flat DASH now, not a leap. Left as
+## an export at zero rather than deleted, because a later spider may earn one.
+@export var lunge_rise: float = 0.0       ## body lift mid-lunge; zero is a dash
 @export var bite_range: float = 0.72      ## contact distance, measured FLAT
 ## THE BITE IS MEASURED FLAT (2026-08-27, field failure in Point_One). The first
 ## version used a 3-D distance and the animal crossed the room, closed to 0.78 m
@@ -558,6 +574,86 @@ func _probe_floor(p: Vector3, up: float, down: float, fallback: float) -> float:
 	return float((hit["position"] as Vector3).y)
 
 
+## THE STEP ITSELF IS REFUSED, not just the heading. Steering alone left the
+## animal inside the wall on 31 of 218 samples — 14 per cent — because the turn
+## is a lerp and it keeps walking forward while it comes about, so it clips the
+## corner it is turning away from. This is collide-and-slide without a body:
+## cast the step, and if it would end in a wall, slide ALONG the wall instead of
+## stopping dead, which is what keeps it moving round a corner rather than
+## grinding into it.
+func _slide(step: Vector3) -> Vector3:
+	if not avoid_on or step.length() < 0.0001 or not is_inside_tree():
+		return step
+	var w := get_world_3d()
+	if w == null:
+		return step
+	var space := w.direct_space_state
+	if space == null:
+		return step
+	var from := Vector3(global_position.x, _floor_y + avoid_eye, global_position.z)
+	var skin: float = maxf(0.12, step.length())
+	var dir: Vector3 = step.normalized()
+	var q := PhysicsRayQueryParameters3D.create(from, from + dir * (step.length() + skin))
+	q.collision_mask = 1
+	var hit: Dictionary = space.intersect_ray(q)
+	if hit.is_empty():
+		return step
+	# slide along the surface: drop the component going into it
+	var n: Vector3 = hit["normal"] as Vector3
+	n.y = 0.0
+	if n.length() < 0.001:
+		return Vector3.ZERO
+	n = n.normalized()
+	var along: Vector3 = step - n * step.dot(n)
+	if along.length() < 0.0001:
+		return Vector3.ZERO
+	var q2 := PhysicsRayQueryParameters3D.create(
+		from, from + along.normalized() * (along.length() + skin))
+	q2.collision_mask = 1
+	if not space.intersect_ray(q2).is_empty():
+		return Vector3.ZERO       # an inside corner: hold still and keep turning
+	return along
+
+
+## THREE WHISKERS. Cast along the heading it wants and 42 degrees either side;
+## if the middle is clear it keeps its heading, and if it is not it takes
+## whichever side sees further. Both sides blocked is a corner, and a corner is
+## a turn away rather than a nudge.
+##
+## Returns the yaw it should actually steer to.
+func _way_round(want_yaw: float) -> float:
+	if not avoid_on or not is_inside_tree():
+		return want_yaw
+	var w := get_world_3d()
+	if w == null:
+		return want_yaw
+	var space := w.direct_space_state
+	if space == null:
+		return want_yaw
+	var from := Vector3(global_position.x, _floor_y + avoid_eye, global_position.z)
+	var spread: float = deg_to_rad(avoid_spread_deg)
+	var ahead: float = _free(space, from, want_yaw)
+	if ahead >= avoid_range:
+		return want_yaw
+	var left: float = _free(space, from, want_yaw + spread)
+	var right: float = _free(space, from, want_yaw - spread)
+	if left < avoid_range * 0.5 and right < avoid_range * 0.5:
+		return want_yaw + PI * 0.55        # a corner: come about
+	var turn: float = deg_to_rad(avoid_turn_deg)
+	return want_yaw + (turn if left > right else -turn)
+
+
+## how far it can see along a heading, capped at avoid_range
+func _free(space: PhysicsDirectSpaceState3D, from: Vector3, yaw: float) -> float:
+	var dir := Vector3(-sin(yaw), 0.0, -cos(yaw))
+	var q := PhysicsRayQueryParameters3D.create(from, from + dir * avoid_range)
+	q.collision_mask = 1
+	var hit: Dictionary = space.intersect_ray(q)
+	if hit.is_empty():
+		return avoid_range
+	return from.distance_to(hit["position"] as Vector3)
+
+
 ## the nearest landed mushroom, or null. Bait is anything in the group that
 ## says it is bait — the mushroom owns that decision, not the animal.
 func _nearest_bait() -> Node3D:
@@ -824,16 +920,17 @@ func _process(delta: float) -> void:
 			_patrol_t = 0.0
 			_patrol_angle += _rng.randf_range(-PI * 0.5, PI * 0.5)
 		want_yaw = _patrol_angle
+	want_yaw = _way_round(want_yaw)
 	rotation.y = lerp_angle(rotation.y, want_yaw, minf(1.0, deg_to_rad(turn_speed_deg) * delta))
 	if speed > 0.0:
 		# NORMALIZE. basis carries the root's 0.13 scale, so -basis.z is 0.13
 		# long and the crab walked at an eighth of its speed — measured: 0.79 m
 		# where it should have covered four.
-		position += -basis.z.normalized() * speed * delta
+		position += _slide(-basis.z.normalized() * speed * delta)
 	position.y = _floor_y + _ride
-	if _lunge_t > 0.0 and lunge_duration > 0.0:
-		# a leap is a rise and a fall, not a hop upward: sin over the whole
-		# duration peaks in the middle and returns the body to its ride height
+	if lunge_rise > 0.0 and _lunge_t > 0.0 and lunge_duration > 0.0:
+		# only if something ever sets a rise: sin over the whole duration peaks
+		# in the middle and returns the body to its ride height
 		var u: float = 1.0 - (_lunge_t / lunge_duration)
 		position.y += sin(u * PI) * lunge_rise
 	_update_gait(delta)
