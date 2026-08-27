@@ -43,6 +43,18 @@ def is_candidate(reg, lookup):
 
 # concept -> (strong [w3], weak [w1], truth). Order: specific first; ties break to the earlier concept.
 CONCEPTS = [
+ ("The alphabet",
+  ["alphabet", "symbol_set", "glyph_bank"],
+  ["symbol", "letter", "token"],
+  "F, +, -, [, ]: characters that mean NOTHING yet. Before a rule and long before a plant, the sequence needs a set of marks nobody has interpreted."),
+ ("The two halves",
+  ["two_halves", "interpretation_swap", "same_string", "believing_turtle"],
+  ["interpret", "reader", "believe"],
+  "The string knows no geometry. Rewriting and DRAWING are separate decisions - hand the same sentence to a different turtle and you get a different plant, which is why grammar generalises past botany."),
+ ("The stack",
+  ["stack", "bracket_stack", "push_pop"],
+  ["bracket", "push", "pop"],
+  "[ pushes the turtle's state, ] pops it. Branching is a stack - that one data structure is the whole difference between a curve and a tree."),
  ("Axiom & production rules",
   ["lsystem_artifact", "lsystem_editor", "fractal_lsystem_string", "grammar_provenance", "axiom", "production"],
   ["rewrite", "rule", "lindenmayer"],

@@ -5226,6 +5226,25 @@
 				1,
 				1
 			]
+		},
+		"the_believing_turtle": {
+			"name": "The Believing Turtle",
+			"class_name": "TheBelievingTurtle",
+			"scene": "res://commons/artifacts/the_believing_turtle/the_believing_turtle.tscn",
+			"description": "The L-systems SUPER OBJECT: a scriptorium where one sentence becomes three plants - the alphabet as marks meaning nothing, the rule board, a generation ladder (1, 5, 21, 89 symbols), then THREE turtles believing the SAME final string differently (25 deg, 45 deg, F-means-sidle), a brass column for the bracket stack, and a stochastic pair that are family but not twins. Every plant rewritten and walked symbol by symbol. 2026-08-27.",
+			"category": "lsystems",
+			"tags": [
+				"lsystems",
+				"super",
+				"synthesis",
+				"grammar",
+				"turtle",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 4,
+				"clearance_m": 0.6
+			}
 		}
 	}
 }

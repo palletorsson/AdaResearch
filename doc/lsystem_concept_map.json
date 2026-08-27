@@ -10,6 +10,9 @@
     "Act VI — DNA & biome"
   ],
   "concepts": [
+    "The alphabet",
+    "The two halves",
+    "The stack",
     "Axiom & production rules",
     "Parallel rewriting / generations",
     "Formal grammars (Chomsky)",
@@ -30,9 +33,72 @@
     "Forest & ecology (biome)"
   ],
   "concept_meta": {
+    "The alphabet": {
+      "count": 0,
+      "map_ready": 0,
+      "has_image": 0,
+      "best": null,
+      "truth": "F, +, -, [, ]: characters that mean NOTHING yet. Before a rule and long before a plant, the sequence needs a set of marks nobody has interpreted.",
+      "act": "",
+      "thin": true,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "missing_tiers": [
+        "small",
+        "medium",
+        "large",
+        "applied"
+      ]
+    },
+    "The two halves": {
+      "count": 0,
+      "map_ready": 0,
+      "has_image": 0,
+      "best": null,
+      "truth": "The string knows no geometry. Rewriting and DRAWING are separate decisions - hand the same sentence to a different turtle and you get a different plant, which is why grammar generalises past botany.",
+      "act": "",
+      "thin": true,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "missing_tiers": [
+        "small",
+        "medium",
+        "large",
+        "applied"
+      ]
+    },
+    "The stack": {
+      "count": 0,
+      "map_ready": 0,
+      "has_image": 0,
+      "best": null,
+      "truth": "[ pushes the turtle's state, ] pops it. Branching is a stack - that one data structure is the whole difference between a curve and a tree.",
+      "act": "",
+      "thin": true,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "missing_tiers": [
+        "small",
+        "medium",
+        "large",
+        "applied"
+      ]
+    },
     "Axiom & production rules": {
-      "count": 8,
-      "map_ready": 8,
+      "count": 9,
+      "map_ready": 9,
       "has_image": 8,
       "best": "axiom_bench",
       "truth": "An axiom and a handful of replace-rules; run them and a sentence becomes a forest. The whole plant is in the rules, not the picture.",
@@ -42,7 +108,8 @@
         "small": [
           "lsystem_artifact",
           "fractal_lsystem_string",
-          "exact_meander_floor"
+          "exact_meander_floor",
+          "grammar_seed"
         ],
         "medium": [
           "axiom_bench"
@@ -133,9 +200,9 @@
       "missing_tiers": []
     },
     "Koch & fractal curves": {
-      "count": 7,
-      "map_ready": 7,
-      "has_image": 7,
+      "count": 8,
+      "map_ready": 8,
+      "has_image": 8,
       "best": "koch_loom",
       "truth": "Replace every edge with a smaller copy of the whole — infinite length around a finite area, the coastline that never ends.",
       "act": "Act II — the turtle",
@@ -147,7 +214,8 @@
           "living_paper_koch"
         ],
         "medium": [
-          "koch_curve_3d"
+          "koch_curve_3d",
+          "koch_snowflake_press"
         ],
         "large": [
           "koch_curve",
@@ -184,9 +252,9 @@
       "missing_tiers": []
     },
     "Space-filling curves (Hilbert)": {
-      "count": 5,
-      "map_ready": 5,
-      "has_image": 5,
+      "count": 7,
+      "map_ready": 7,
+      "has_image": 7,
       "best": "hilbert_bench",
       "truth": "A line that visits every point of a square — one dimension reaching, by recursion, to fill two.",
       "act": "Act II — the turtle",
@@ -197,10 +265,12 @@
           "Hilbert3D"
         ],
         "medium": [
-          "hilbert_bench"
+          "hilbert_bench",
+          "space_filling_bench"
         ],
         "large": [
-          "hilbert_room"
+          "hilbert_room",
+          "space_filling_room"
         ],
         "applied": [
           "space_filling_curve_gallery"
@@ -219,7 +289,6 @@
       "tiers": {
         "small": [
           "grammar_negative_space_bracket_pair",
-          "branching_growth_algorithm",
           "branching_growth_algorithm_continued",
           "grammar_recursive_branching_tree_d1",
           "grammar_recursive_branching_tree_d2",
@@ -231,7 +300,8 @@
           "bracket_bench"
         ],
         "large": [
-          "bracket_room"
+          "bracket_room",
+          "branching_growth_algorithm"
         ],
         "applied": [
           "bracket_pruner"
@@ -485,11 +555,14 @@
       "missing_tiers": []
     }
   },
-  "total": 94,
-  "map_ready_total": 94,
-  "image_total": 94,
-  "empty_slots": 0,
+  "total": 98,
+  "map_ready_total": 98,
+  "image_total": 97,
+  "empty_slots": 12,
   "groups": {
+    "The alphabet": [],
+    "The two halves": [],
+    "The stack": [],
     "Axiom & production rules": [
       {
         "lookup": "axiom_bench",
@@ -578,6 +651,17 @@
         "score": 3,
         "fp": 2,
         "tier": "small"
+      },
+      {
+        "lookup": "grammar_seed",
+        "name": "Grammar Seed",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": false,
+        "score": 5,
+        "fp": 1,
+        "tier": "small"
       }
     ],
     "Parallel rewriting / generations": [
@@ -589,7 +673,7 @@
         "map_ready": true,
         "has_image": true,
         "score": 99,
-        "fp": 4,
+        "fp": 9,
         "tier": "medium"
       },
       {
@@ -786,6 +870,17 @@
         "tier": "medium"
       },
       {
+        "lookup": "koch_snowflake_press",
+        "name": "Koch Snowflake Press (infinite perimeter)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 10,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
         "lookup": "kochsnowflake",
         "name": "kochsnowflake",
         "registry": "primitives.json",
@@ -839,7 +934,7 @@
         "map_ready": true,
         "has_image": true,
         "score": 99,
-        "fp": 4,
+        "fp": 9,
         "tier": "medium"
       },
       {
@@ -920,6 +1015,28 @@
         "score": 10,
         "fp": 1,
         "tier": "small"
+      },
+      {
+        "lookup": "space_filling_bench",
+        "name": "Space-Filling Bench (a line fills a square)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 10,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "space_filling_room",
+        "name": "Space-Filling Room (every point, one line)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 10,
+        "fp": 9,
+        "tier": "large"
       }
     ],
     "Bracketed branching": [
@@ -975,8 +1092,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
-        "fp": 1,
-        "tier": "small"
+        "fp": 16,
+        "tier": "large"
       },
       {
         "lookup": "branching_growth_algorithm_continued",
@@ -1282,7 +1399,7 @@
         "map_ready": true,
         "has_image": true,
         "score": 99,
-        "fp": 4,
+        "fp": 16,
         "tier": "medium"
       },
       {
@@ -1374,7 +1491,7 @@
         "map_ready": true,
         "has_image": true,
         "score": 99,
-        "fp": 4,
+        "fp": 9,
         "tier": "medium"
       },
       {
@@ -1420,7 +1537,7 @@
         "map_ready": true,
         "has_image": true,
         "score": 99,
-        "fp": 4,
+        "fp": 6,
         "tier": "medium"
       },
       {
@@ -1523,7 +1640,7 @@
         "map_ready": true,
         "has_image": true,
         "score": 99,
-        "fp": 4,
+        "fp": 12,
         "tier": "medium"
       },
       {
