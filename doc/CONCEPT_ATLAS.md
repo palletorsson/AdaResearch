@@ -74,6 +74,29 @@ the hub - one curation gallery per sequence, 1,851 tiles total, grouped into
 principle-sections with live per-section click censuses. formfinding waits on its
 concept map (plan step 3). read_concept_selections.py takes any sequence id.
 
+## A2 · Transformation: the same pass (2026-08-27, same day)
+
+Sequence truth: *"Identity preserved under transformation. What stays the same when
+everything changes?"* Twelve categories, seven NEW heroes + five adoptions, all live at
+localhost:3003/transformation-concepts (102 tiles):
+
+| category | hero | move |
+|---|---|---|
+| Three rigid motions | **baggage_grammar** — luggage claim as the grammar: translate the straights, rotate the corners, scale through customs | NEW |
+| Translation | **sleepwalking_bed** — a bed drifting its rug, water unspilled; only the address changes | NEW |
+| Rotation | **furniture_turntable** — a crate at 33⅓; the needle holds one radius, the hidden circle | NEW |
+| Scale | **matryoshka_row** | ADOPT (from forces — scale is scale) |
+| Shear | **italic_bookcase** — the bookcase in italics; the plumb line remembers | NEW |
+| Composition | **two_cakes** — R·T ≠ T·R by patisserie; carousel_cake was registry-only, never baked | NEW |
+| Matrix / homogeneous | **matrix_stamps** — the passport office; row four is the legal fiction | NEW |
+| Invariants | **identity_lineup** — one crate, six disguises; identity is the intersection of the tags (the sequence's soul, and the mirrored crate's lettering photographs reversed) | NEW |
+| Tiling / pattern | floor_tiles | ADOPT |
+| Field / flow | quantum_field | ADOPT (interim) |
+| Boolean / CSG | boolean_tunnel | ADOPT |
+| Curved space | gyroid_cheese | ADOPT |
+
+Probe 7/7 on first run; registered in `transforms.json` (22 → 29).
+
 ## B · The plan: this list, for all 22 sequences
 
 **What already exists (audit 2026-08-27).** 21 of 22 spine sequences have a

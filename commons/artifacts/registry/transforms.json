@@ -2612,6 +2612,122 @@
 				1,
 				1
 			]
+		},
+		"baggage_grammar": {
+			"name": "Baggage Grammar",
+			"class_name": "BaggageGrammar",
+			"scene": "res://commons/artifacts/baggage_grammar/baggage_grammar.tscn",
+			"description": "The Three-rigid-motions hero: baggage claim as the grammar of motion - one suitcase forever translating on the straights, rotating at the corners, scaled through a customs arch and restored (nothing to declare). Category-heroes pass, 2026-08-27.",
+			"category": "transforms",
+			"tags": [
+				"transformation",
+				"translate",
+				"rotate",
+				"scale",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 4,
+				"clearance_m": 0.6
+			}
+		},
+		"sleepwalking_bed": {
+			"name": "Sleepwalking Bed",
+			"class_name": "SleepwalkingBed",
+			"scene": "res://commons/artifacts/sleepwalking_bed/sleepwalking_bed.tscn",
+			"description": "The Translation hero: a bed drifting around its rug in a slow Lissajous, nightstand keeping station, water unspilled - translation preserves everything except position, and the sleeper never notices. Category-heroes pass, 2026-08-27.",
+			"category": "transforms",
+			"tags": [
+				"transformation",
+				"translation",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 4,
+				"clearance_m": 0.6
+			}
+		},
+		"furniture_turntable": {
+			"name": "Furniture Turntable",
+			"class_name": "FurnitureTurntable",
+			"scene": "res://commons/artifacts/furniture_turntable/furniture_turntable.tscn",
+			"description": "The Rotation hero: a record deck playing a crate at 33 1/3 - the needle holds one radius forever, tracing the circle hidden in the motion. About 33 homecomings a minute. Category-heroes pass, 2026-08-27.",
+			"category": "transforms",
+			"tags": [
+				"transformation",
+				"rotation",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 3,
+				"clearance_m": 0.6
+			}
+		},
+		"italic_bookcase": {
+			"name": "Italic Bookcase",
+			"class_name": "ItalicBookcase",
+			"scene": "res://commons/artifacts/italic_bookcase/italic_bookcase.tscn",
+			"description": "The Shear hero: a bookcase set in italics - every shelf slid proportionally to height, books leaning as parallelograms, none falling; a plumb line remembers the right angle. x' = x + k*y. Category-heroes pass, 2026-08-27.",
+			"category": "transforms",
+			"tags": [
+				"transformation",
+				"shear",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 2,
+				"clearance_m": 0.6
+			}
+		},
+		"two_cakes": {
+			"name": "Two Cakes",
+			"class_name": "TwoCakes",
+			"scene": "res://commons/artifacts/two_cakes/two_cakes.tscn",
+			"description": "The Composition hero (the registry promised carousel_cake and never baked it): the same three tiers assembled rotate-then-slide and slide-then-rotate - two different cakes, candles at two addresses. R*T != T*R. Category-heroes pass, 2026-08-27.",
+			"category": "transforms",
+			"tags": [
+				"transformation",
+				"composition",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 3,
+				"clearance_m": 0.6
+			}
+		},
+		"matrix_stamps": {
+			"name": "Matrix Stamps",
+			"class_name": "MatrixStamps",
+			"scene": "res://commons/artifacts/matrix_stamps/matrix_stamps.tscn",
+			"description": "The Matrix hero: a passport office for geometry - four brass stamps (translate, rotate, scale, shear) with 4x4 faces, an applicant crate and the same crate stamped T*R*S*shear, ink wet. Row four is the legal fiction that lets translate join the rack. Category-heroes pass, 2026-08-27.",
+			"category": "transforms",
+			"tags": [
+				"transformation",
+				"matrix",
+				"homogeneous",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 3,
+				"clearance_m": 0.6
+			}
+		},
+		"identity_lineup": {
+			"name": "Identity Lineup",
+			"class_name": "IdentityLineup",
+			"scene": "res://commons/artifacts/identity_lineup/identity_lineup.tscn",
+			"description": "The Invariants hero and the sequence's soul: a police lineup of ONE crate - straight, slid, turned, shrunk, mirrored, sheared - each tag listing what the disguise could not take away. Identity is the intersection. Category-heroes pass, 2026-08-27.",
+			"category": "transforms",
+			"tags": [
+				"transformation",
+				"invariants",
+				"identity",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 4,
+				"clearance_m": 0.6
+			}
 		}
 	}
 }
