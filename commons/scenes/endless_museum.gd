@@ -13272,9 +13272,39 @@ func _doll_paint(wx: int, wz: int, erase: bool) -> void:
 		mi.material_override = mat
 		add_child(mi)
 		_doll_brush_meshes[key] = mi
-	print("[em-doll] %s cell (%d,%d) of %s · %s — the book holds it; build makes it real" % [
+	# A WALL WORK NEEDS A WALL, AT THE MOMENT THE WALL GOES (2026-08-27, Palle:
+	# "each time I remove or move a wall can you clean up old wall works, do not
+	# let them hang in the air"). The cull already existed but ran only when a
+	# hall was dressed, so opening a wall by hand left its pictures floating
+	# until the next build — which under streaming might be never.
+	#
+	# The live tile is updated first, because the cull reads the tile and not the
+	# book: a ruling nobody has applied yet would leave it culling against the
+	# wall that is still standing. On an ERASE the cell returns to whatever the
+	# map said, which is not knowable from here, so the tile is left alone and
+	# the next build settles it — an erase is the one case this cannot answer.
+	var culled_now := 0
+	if not erase and seg.has_meta("em_tile"):
+		var live_tile: Array = seg.get_meta("em_tile")
+		if tz >= 0 and tz < live_tile.size():
+			var trow: Array = live_tile[tz]
+			if tx >= 0 and tx < trow.size():
+				trow[tx] = _doll_brush
+				live_tile[tz] = trow
+				seg.set_meta("em_tile", live_tile)
+				var before := 0
+				for ch_n in seg.get_children():
+					if ch_n.has_meta("em_showing") and not ch_n.has_meta("em_hand_removed"):
+						before += 1
+				_showing_cull_floating(seg, live_tile, zbase)
+				for ch_n2 in seg.get_children():
+					if ch_n2.has_meta("em_showing") and not ch_n2.has_meta("em_hand_removed"):
+						culled_now -= 1
+				culled_now += before
+	print("[em-doll] %s cell (%d,%d) of %s · %s — the book holds it; build makes it real%s" % [
 		"cleared" if erase else {"2": "BLOCK on", "4": "WALL on", "0": "HOLE at", "1": "FLOOR at"}.get(_doll_brush, "?"),
-		tx, tz, chapter, pearl])
+		tx, tz, chapter, pearl,
+		("" if culled_now <= 0 else "  ·  %d wall work(s) had nothing left to hang on and were taken down" % culled_now)])
 
 
 ## Where the mouse touches the floor (y = 0), from the iso eye.
