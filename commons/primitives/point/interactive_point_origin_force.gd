@@ -249,9 +249,14 @@ func _install_force_shader() -> void:
 	_force_shader_mat = ShaderMaterial.new()
 	_force_shader_mat.shader = FORCE_SHADER
 	_force_shader_mat.set_shader_parameter("morph_t", 0.0)
-	# Push the base look (white) and the force-field look (warm orange)
-	# into the shader. Tweakable per-instance via export if needed.
-	_force_shader_mat.set_shader_parameter("base_color", Color(0.95, 0.95, 0.92, 1.0))
+	# SHINY BLACK VELVET at rest (Palle, 2026-08-27: "make this point a shiny
+	# black velvet color"). Velvet is a rim phenomenon: near-black base with a
+	# violet depth, emission all but out, and the grazing-edge rim turned UP -
+	# the hard grain floor's tight specular supplies the "shiny". The force-field
+	# look stays warm orange, so the bead rests as velvet and IGNITES under force.
+	_force_shader_mat.set_shader_parameter("base_color", Color(0.030, 0.026, 0.036, 1.0))
+	_force_shader_mat.set_shader_parameter("emission_base", 0.06)
+	_force_shader_mat.set_shader_parameter("rim_amount", 0.85)
 	_force_shader_mat.set_shader_parameter("force_color", Color(1.0, 0.55, 0.10, 1.0))
 	_apply_bead_finish(mi)
 	mi.material_override = _force_shader_mat
