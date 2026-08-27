@@ -109,7 +109,7 @@ const RIG := "res://commons/hazards/octapod_crawler/csg_four_leg_walker.tscn"
 ## THE BITE IS MEASURED FLAT (2026-08-27, field failure in Point_One). The first
 ## version used a 3-D distance and the animal crossed the room, closed to 0.78 m
 ## and never bit — because its own root rides BELOW the floor by design
-## (position.y = _floor_y + _ride, and ride is negative), while a player body's
+## (global_position.y = _floor_y + _ride, ride negative), while a player body's
 ## origin sits above it. Almost the whole of that 0.78 m was vertical. On a bare
 ## bench floor the fixture happened to put both at the same height, so the
 ## fixture passed and the map failed. Horizontal distance decides the bite;
@@ -177,6 +177,13 @@ const RIG := "res://commons/hazards/octapod_crawler/csg_four_leg_walker.tscn"
 ## whichever piece of food is nearest and in sight, mushroom or visitor.
 @export var give_up_after: float = 4.5   ## seconds of not getting closer
 @export var give_up_for: float = 7.0     ## then ignore that one for this long
+## AND A TOTAL BUDGET. Stalling alone is not enough once a dead end turns the
+## animal around: it walks off, wanders back, is "closer than it has been" and
+## the stall timer resets — so it orbits something unreachable forever without
+## ever being stuck at it. This is the other half: however much progress it
+## keeps making, if a piece of food has not been EATEN within this long it is
+## not going to be.
+@export var give_up_total: float = 11.0
 ## FEWER AND FATTER. The first tuning used a 0.62 step, 0.74 shrink and a
 ## 0.055 width, and five degrees of it came out as a pale flat comb — 243
 ## segments so thin and so short that the eye read one fan per leg instead of a
@@ -286,6 +293,7 @@ var _meal_t: float = 0.0      # seconds left of this meal
 var _chase: Node3D = null     # the food it is walking to, whatever kind
 var _chase_best: float = 1e9  # the closest it has got to it
 var _chase_t: float = 0.0     # seconds since it last got closer
+var _chase_total: float = 0.0 # seconds spent on this one, progress or not
 var _ignore: Dictionary = {}  # food it gave up on -> seconds left
 var _seen_t: float = 99.0     # since it last had eyes on anything
 var _sweep_shape: SphereShape3D = null
@@ -334,6 +342,14 @@ func _ready() -> void:
 	# reach their feet dead straight — the crab stands on four rigid stilts.
 	# A crab crouches: the body comes down so the chain has to BEND, which is
 	# what makes a joint read as a joint. Measured by eye against the stilts.
+	# THE RIDE IS A GLOBAL HEIGHT. _floor_y comes from a downward ray, which
+	# answers in world space, so every place it sets the body's height has to
+	# write global_position and not position. It read correct for a day
+	# because Point_One's artifacts hang off a parent at zero; moved to
+	# Trans_Introduction, whose parent sits at -0.5, the animal stood at
+	# -0.68 with its feet on a floor at 0.000 — buried to the shoulders, and
+	# nothing reported it. The same local-for-global mix Palle caught in the
+	# mushroom, in a second artifact.
 	_ride = ride_local * crab_scale
 	_stance = stance
 	_build_rig()
@@ -951,6 +967,16 @@ func _watch_progress(food: Node3D, delta: float) -> void:
 		_chase = food
 		_chase_best = d
 		_chase_t = 0.0
+		_chase_total = 0.0
+		return
+	_chase_total += delta
+	if _chase_total > give_up_total:
+		_ignore[food] = give_up_for
+		print("[head_crab] gave up on %s — %.0f s and never got to eat it"
+			% [food.name, give_up_total])
+		_chase = null
+		_chase_t = 0.0
+		_chase_total = 0.0
 		return
 	if d < _chase_best - 0.30:
 		_chase_best = d
@@ -986,6 +1012,8 @@ func _begin_meal(m: Node3D) -> void:
 	_meal = m
 	_meal_t = feed_time
 	_lunge_t = 0.0
+	_chase = null                # it arrived; the budget is spent, not wasted
+	_chase_total = 0.0
 	if m.has_method("begin_absorb"):
 		m.call("begin_absorb")
 
@@ -1008,7 +1036,7 @@ func _swallow(delta: float) -> void:
 	# snap, whatever the meal is interrupted by.
 	var u: float = 1.0 - left
 	var arc: float = sin(u * PI)
-	position.y = _floor_y + _ride - feed_dip * arc
+	global_position.y = _floor_y + _ride - feed_dip * arc
 	rotation.x = -deg_to_rad(feed_pitch_deg) * arc
 	var gulp: float = sin(u * TAU * feed_gulps) * feed_gulp * arc
 	scale = Vector3.ONE * crab_scale * (1.0 + gulp)
@@ -1024,7 +1052,7 @@ func _finish_meal() -> void:
 	# back to the walking pose, exactly, whatever the meal ended as
 	rotation.x = 0.0
 	scale = Vector3.ONE * crab_scale
-	position.y = _floor_y + _ride
+	global_position.y = _floor_y + _ride
 	var m: Node3D = _meal
 	_meal = null
 	_bait = null
@@ -1214,7 +1242,7 @@ func _process(delta: float) -> void:
 				rotation.y = lerp_angle(rotation.y, _way_round(byaw),
 					minf(1.0, deg_to_rad(turn_speed_deg) * delta))
 				position += _slide(-basis.z.normalized() * chase_speed * delta)
-				position.y = _floor_y + _ride
+				global_position.y = _floor_y + _ride
 				_update_gait(delta)
 				return
 	if _rooted:
@@ -1260,7 +1288,7 @@ func _process(delta: float) -> void:
 		# long and the crab walked at an eighth of its speed — measured: 0.79 m
 		# where it should have covered four.
 		position += _slide(-basis.z.normalized() * speed * delta)
-	position.y = _floor_y + _ride
+	global_position.y = _floor_y + _ride
 	if lunge_rise > 0.0 and _lunge_t > 0.0 and lunge_duration > 0.0:
 		# only if something ever sets a rise: sin over the whole duration peaks
 		# in the middle and returns the body to its ride height
