@@ -319,8 +319,24 @@ const SEAM_PROUD := 0.02      # box straddles y=0: 10 mm proud of the floor plan
 ## opts    optional: {wall_features_max: int, fill_walls: bool} straight off
 ##         em_budget.for_segment(). Omit it and the walls are hung at a derived
 ##         rate anyway — a blank wall is the defect, not the safe default.
+## Rectangles this pass must not draw trim into, in segment-local metres, as
+## Rect2(x, z, w, d). Set from opts.skip_rects at the top of every dress_segment,
+## so it never carries from one segment to the next, and empty means every museum
+## that asks for nothing is drawn exactly as before.
+##
+## WHY A KEEP-OUT AND NOT A TILE EDIT: the trim is derived from the tile's own
+## edges, and the foyer's tile edge is real — it is the hall boundary. What is not
+## real is the floor under it, because the origin annex opened a well straight
+## through x 0 / z 0. Measured before it was written: 7 instances stood over that
+## well — Skirting 1 at y 0.04, ArrisSkirting 1 at 0.08, Trim 3 between 2.15 and
+## 4.36, ArrisTrim 2 at 4.22..4.50 — which is exactly "hanging in the air and
+## following the floor from an old wall".
+static var _skip_rects: Array = []
+
+
 static func dress_segment(seg: Node3D, tile: Array, w: int, h: int, mats, prev_w: int = -1,
 		opts: Dictionary = {}) -> void:
+	_skip_rects = opts.get("skip_rects", []) if opts.get("skip_rects") is Array else []
 	if seg == null:
 		return
 	if w <= 0:
@@ -1516,6 +1532,25 @@ static func _add_seams(floors: Dictionary, w: int, h: int, out: Array) -> void:
 static func _emit(parent: Node3D, node_name: String, xforms: Array, mat: Variant, shadows: bool) -> void:
 	if xforms.is_empty():
 		return
+	# ONE choke point for every bucket — skirting, trim, arrises, seams, ceiling —
+	# because they all arrive here and nowhere else. A piece is dropped by where it
+	# STANDS, not by which bucket carried it, so nothing has to be enumerated.
+	if not _skip_rects.is_empty():
+		var kept: Array = []
+		for xf in xforms:
+			var o: Vector3 = (xf as Transform3D).origin
+			var drop := false
+			for r_v in _skip_rects:
+				var r: Rect2 = r_v
+				if r.has_point(Vector2(o.x, o.z)):
+					drop = true
+					break
+			if not drop:
+				kept.append(xf)
+		if kept.size() != xforms.size():
+			xforms = kept
+		if xforms.is_empty():
+			return
 	var box: BoxMesh = BoxMesh.new()
 	box.size = Vector3.ONE
 	var mm: MultiMesh = MultiMesh.new()

@@ -6951,7 +6951,8 @@ func _build_segment() -> void:
 					if kt != "":
 						adopt_keep[kt] = true
 				_mod_detail.call("dress_segment", seg, dress_tile, w, h, _detail_mats, _prev_w,
-					{"wall_features_max": int(deal.get("wall_features_max", -1)),
+					{"skip_rects": _trim_keep_out(seg),
+						"wall_features_max": int(deal.get("wall_features_max", -1)),
 						"fill_walls": bool(deal.get("fill_walls", true)),
 						"hang_min_stretch": int(deal.get("hang_min_stretch", 2)),
 						"label_every": int(deal.get("label_every", 11)),
@@ -19057,3 +19058,29 @@ func _lobby_layout_write(vals: Dictionary) -> bool:
 		return false
 	_layout.clear()          # the next _L re-reads what was just written
 	return true
+
+
+## Where em_detail must draw no trim.
+##
+## The foyer's origin annex opens a well straight through the tile's own corner —
+## the tile starts at x 0, z 0 and the well spans -well/2..+well/2 around it — so
+## the museum was drawing skirting and cornice for a room boundary with no floor
+## under it: trim following the floor across the pit, and cornice hanging in the
+## air above it. Palle reported it four times before it was measured; the count was
+## 7 instances across Skirting, ArrisSkirting, Trim and ArrisTrim.
+##
+## Only the foyer, only when the annex is actually built, and half a metre proud of
+## the pit so the pieces that overhang its lip go too. Every other segment gets an
+## empty array and is drawn exactly as before.
+func _trim_keep_out(segn: Node3D) -> Array:
+	# THE SEGMENT, not _seg_index. The dress is a QUEUED pass (dress_item, run
+	# later), so by the time it executes the build cursor has moved on and
+	# `_seg_index == 0` is false for the very segment being dressed — which is
+	# exactly why the first version of this returned an empty array and the strips
+	# measured unchanged. The node knows what it is; the cursor does not.
+	if segn == null or not String(segn.name).begins_with("Seg0"):
+		return []
+	if _L("lobby", "enabled", 1.0) <= 0.5 or _L("lobby", "origin_well", 1.0) <= 0.5:
+		return []
+	var wh: float = clampf(_L("lobby", "well_m", 2.0), 1.0, 6.0) * 0.5 + 0.5
+	return [Rect2(-wh, -wh, wh * 2.0, wh * 2.0)]
