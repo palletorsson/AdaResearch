@@ -833,6 +833,25 @@
 				4
 			]
 		},
+		"the_fourth_limit": {
+			"name": "The Fourth Limit",
+			"class_name": "TheFourthLimit",
+			"scene": "res://commons/artifacts/the_fourth_limit/the_fourth_limit.tscn",
+			"description": "Four gates in one rank, built to one standard so the eye compares them without being asked. I is solid brass with the Konigsberg graph in relief - four banks, seven bridges - and it will not open because it CANNOT. II has a peephole that is dark: you may look, and looking tells you nothing. III stands ajar at 45 degrees with three fading ghosts of itself at 67.5, 78.75 and 84.4, each push taking half of what remains. IV is GLASS, locked, with a small screw beside the plate and a warm lamp burning behind it. Three limits you accept, live or approach; the fourth you can SEE THROUGH. A default has no image of its own - the only way to picture one is to stand it in the rank beside real limits. No plaques. Roman numerals cut into the sill and nothing else. 2026-08-27.",
+			"category": "postfoundationscrisis",
+			"tags": [
+				"postcrisis",
+				"limits",
+				"the-edge",
+				"default",
+				"desire",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 6,
+				"clearance_m": 1.2
+			}
+		},
 		"the_commons_table": {
 			"name": "The Commons Table",
 			"class_name": "TheCommonsTable",

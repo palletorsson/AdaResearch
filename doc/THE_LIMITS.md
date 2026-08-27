@@ -156,7 +156,68 @@ is sometimes the only livable room in the building.
 
 ---
 
-## Part 4 — Limits worth importing, and where each would land
+## Part 4 — The visual desire, and why the default has no image
+
+> Palle, reading Part 3: *"and the visual desire."*
+
+Parts 2 and 3 are an **epistemology**. They sort limits by what it is correct to *know*
+about them — accept, live it, declare it, unscrew it. There is no wanting anywhere in that,
+and this is an artwork. The measured state of the project says the same thing from the
+other side: 62 of 75 objects built this month stand in no map and nobody has walked any of
+them. That is not a knowledge failure. **Nothing pulls.**
+
+Re-sort the same nine by visual force and they split hard.
+
+**Strong.** The **horizon** (3) is the erotics of landscape painting — visible, receding,
+never arrived at; Muñoz's *not yet here* is explicitly a theory of wanting. The
+**resolution** limit (6) is seductive in a treacherous way: the moiré, the shimmer, the
+aliased floor that grows *more beautiful as it lies to you*. The **standpoint** (7) is the
+most bodily of all — anamorphosis is a limit that makes you contort yourself into an
+undignified posture to see the skull. The **claimed limit** (9) is the veil, which is the
+oldest desire-object there is: covering does not conceal a prior wanting, it *manufactures*
+it.
+
+**Zero.** The **default** (5) has no image at all.
+
+That is the artistic problem of the entire project, and it is worth stating plainly: **you
+cannot photograph a decision that was never announced.** A default's whole nature is not to
+appear — that is what makes it a default rather than a choice. Every other kind can be
+drawn. The one the curriculum is actually about is constitutively invisible.
+
+### The three ways to image it anyway
+
+- **contrast** — stand it in a rank beside real limits, so the borrowed authority shows
+- **the moment of noticing** — stage the instant it stops being furniture
+- **drag** — overperform it until the construction shows
+
+The grant already said the third one: *"Klee's Sketchbook in drag in VR."* And
+`three_gravities` works for exactly that reason — it is drag, not argument. Gravity
+performed at 1.6, 9.8 and 24.8 until you see that 9.8 was a performance all along. Nothing
+is explained. The exaggeration does it.
+
+**So the visual desire is not decoration on the taxonomy. It is the only access to kind 5.**
+The other eight can be stated. The default can only be seduced into view.
+
+### What this cost the first design, twice
+
+`the_fourth_limit` was first specified as four gates with four explanatory plaques. That is
+**a diagram you can walk through** — it argues well and wants nothing, and plaques are the
+abstract, on a wall, at eye height. It was rebuilt on one change: **gate IV is the only one
+you can see through.** Three honest brass walls, and one glass, locked, with a lamp burning
+behind it. You do not read that the fourth limit differs in kind. You want past it.
+
+Then the build made the same mistake again in a way only the capture caught. Gates face
++Z, so *behind* is −Z — and the lamp was placed at +1.15, standing on the **viewer's** side
+of the glass. The argument was intact in the code and destroyed in the staging: the thing
+you are being denied was in the room with you. One sign, and the piece works.
+
+The general lesson, and the reason this part exists: **desire is a staging problem, not a
+content problem.** No amount of correct taxonomy puts the lamp on the right side of the
+door. Only looking at the picture does.
+
+---
+
+## Part 5 — Limits worth importing, and where each would land
 
 | limit | teaches | lands in |
 |---|---|---|
@@ -179,12 +240,14 @@ is sometimes the only livable room in the building.
 
 ---
 
-## Part 5 — Objects
+## Part 6 — Objects
 
-**`the_fourth_limit`** — the corridor. Four gates, identical brass, identical plaques.
-**I** will not open, and shows you the proof. **II** will not tell you whether it opens; you
-may only try. **III** opens further each push and never fully. **IV** is locked, and there
-is a small screw. The whole taxonomy as a walk, with no moral spoken.
+**`the_fourth_limit`** — BUILT 2026-08-27, and the corridor is a rank: four gates side by
+side so the eye compares them unasked.
+**I** is solid, with the Konigsberg graph in relief. **II** is solid, with a peephole that
+is dark. **III** stands ajar at 45 degrees trailing three fading ghosts of itself at 67.5,
+78.75 and 84.4. **IV** is glass, locked, a small screw beside the plate and a lamp burning
+behind it. No plaques: roman numerals cut into the sill and nothing else.
 
 **`the_audible_clamp`** — the finding above, made into a room. A hall of dials that each go
 to ten. Turn one past ten and, for the first time in 2,113 attempts, **the wall makes a
