@@ -136,6 +136,33 @@ Gallery: localhost:3003/change-concepts (13 tiles, 4 sections). change.json 13 �
 Probe 4/4 first run. Instrument note: a "mushrooms [F]" HUD chip from the live overlay
 leaks into capture corners — bench-side, cosmetic, not the artifacts.
 
+## A5 · Primitives: the vocabulary curates itself (2026-08-27)
+
+Spine sequence 1 is body-rich by nature — 20 real categories, most already carrying
+applied bodies (you_are_here for Point, laser_sword for Arrow, the solids for
+themselves). One category held only bare solids: Prism/extrusion, and it got
+**cookie_press** — a bakery extruder with a brass star die and a star-profile dough
+bar in cut lengths: every slice the same section, extrusion as commitment. Gallery:
+localhost:3003/primitives-concepts, 280 tiles across 22 sections — the curation is
+the clicking.
+
+## A6 · Formfinding: first canon + two heroes (2026-08-27)
+
+The one spine sequence with NO concept map got its first: six rungs from its
+learning objectives (Minimum · Descent · Catenary · Relaxation · Equilibrium ·
+Annealing), members from the placed census of its seven maps — a rich standing cast
+(catenoid, helicoid, gradient_descent_well, tensegrity_triangle, verlet_workbench,
+simulated_annealing). Two rungs lacked surreal applied bodies:
+
+| rung | hero |
+|---|---|
+| Catenary | **laundry_line_cathedral** — three true cosh washing lines, towels pegged plumb, and above each its mirrored ghost arch: Gaudí's method as laundry. (First probe caught the cosh sign flipped — sag ran UP, arches at 7.5 m.) |
+| Equilibrium | **impossible_end_table** — tensegrity as furniture: the top never touches the base, one cable hangs it, three stop the sway, the teacup is unbothered |
+
+Gallery: localhost:3003/formfinding-concepts (20 tiles, 6 sections).
+primitives.json 256 → 259 — an LF registry (the CRLF seam refused correctly; the
+appender now detects the newline style).
+
 ## B · The plan: this list, for all 22 sequences
 
 **What already exists (audit 2026-08-27).** 21 of 22 spine sequences have a

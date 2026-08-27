@@ -1,0 +1,263 @@
+{
+ "title": "formfinding - six rungs, first canon",
+ "note": "CREATED 2026-08-27 (the one spine sequence with no concept map). Rungs from the sequence's learning_objectives; members from the placed census of its seven maps. Replaced whenever a real builder takes over.",
+ "concepts": [
+  "Minimum",
+  "Descent",
+  "Catenary / minimal surface",
+  "Relaxation",
+  "Equilibrium",
+  "Annealing"
+ ],
+ "concept_meta": {
+  "Minimum": {
+   "count": 3,
+   "truth": "nature is lazy: a form is the answer to a minimization problem - the cheapest shape that still answers.",
+   "act": "",
+   "tiers": {}
+  },
+  "Descent": {
+   "count": 4,
+   "truth": "roll downhill toward lower cost: the gradient is the only compass the landscape hands you.",
+   "act": "",
+   "tiers": {}
+  },
+  "Catenary / minimal surface": {
+   "count": 2,
+   "truth": "chains and soap films: hang it and it solves itself - y = a cosh(x/a); flip the sag and the arch stands.",
+   "act": "",
+   "tiers": {}
+  },
+  "Relaxation": {
+   "count": 3,
+   "truth": "a mesh settles to rest length: iterate the small local easings and the global shape emerges.",
+   "act": "",
+   "tiers": {}
+  },
+  "Equilibrium": {
+   "count": 4,
+   "truth": "the balance, the truss, the tensegrity: pulls in conversation that happen to stand still.",
+   "act": "",
+   "tiers": {}
+  },
+  "Annealing": {
+   "count": 2,
+   "truth": "escape the local minimum: heat, wander, cool - and stop short of the dead-perfect bottom.",
+   "act": "",
+   "tiers": {}
+  }
+ },
+ "groups": {
+  "Minimum": [
+   {
+    "lookup": "energy_landscape_bench",
+    "name": "energy_landscape_bench",
+    "registry": "",
+    "category": "formfinding",
+    "map_ready": true,
+    "has_image": true,
+    "score": 5,
+    "tier": "medium",
+    "recommended": true
+   },
+   {
+    "lookup": "max_q_basin_room",
+    "name": "max_q_basin_room",
+    "registry": "",
+    "category": "formfinding",
+    "map_ready": true,
+    "has_image": true,
+    "score": 5,
+    "tier": "medium",
+    "recommended": true
+   },
+   {
+    "lookup": "frozen_glass_vessel",
+    "name": "frozen_glass_vessel",
+    "registry": "",
+    "category": "formfinding",
+    "map_ready": true,
+    "has_image": true,
+    "score": 5,
+    "tier": "medium",
+    "recommended": true
+   }
+  ],
+  "Descent": [
+   {
+    "lookup": "gradient_descent_well",
+    "name": "gradient_descent_well",
+    "registry": "",
+    "category": "formfinding",
+    "map_ready": true,
+    "has_image": true,
+    "score": 5,
+    "tier": "medium",
+    "recommended": true
+   },
+   {
+    "lookup": "gradient_descent",
+    "name": "gradient_descent",
+    "registry": "",
+    "category": "formfinding",
+    "map_ready": true,
+    "has_image": true,
+    "score": 5,
+    "tier": "medium",
+    "recommended": true
+   },
+   {
+    "lookup": "gradient_descent_optimizer",
+    "name": "gradient_descent_optimizer",
+    "registry": "",
+    "category": "formfinding",
+    "map_ready": true,
+    "has_image": true,
+    "score": 5,
+    "tier": "medium",
+    "recommended": true
+   },
+   {
+    "lookup": "descent_marble_toy",
+    "name": "descent_marble_toy",
+    "registry": "",
+    "category": "formfinding",
+    "map_ready": true,
+    "has_image": true,
+    "score": 5,
+    "tier": "medium",
+    "recommended": true
+   }
+  ],
+  "Catenary / minimal surface": [
+   {
+    "lookup": "catenoid",
+    "name": "catenoid",
+    "registry": "",
+    "category": "formfinding",
+    "map_ready": true,
+    "has_image": true,
+    "score": 5,
+    "tier": "medium",
+    "recommended": true
+   },
+   {
+    "lookup": "helicoid",
+    "name": "helicoid",
+    "registry": "",
+    "category": "formfinding",
+    "map_ready": true,
+    "has_image": true,
+    "score": 5,
+    "tier": "medium",
+    "recommended": true
+   }
+  ],
+  "Relaxation": [
+   {
+    "lookup": "mass_spring_bench",
+    "name": "mass_spring_bench",
+    "registry": "",
+    "category": "formfinding",
+    "map_ready": true,
+    "has_image": true,
+    "score": 5,
+    "tier": "medium",
+    "recommended": true
+   },
+   {
+    "lookup": "verlet_workbench",
+    "name": "verlet_workbench",
+    "registry": "",
+    "category": "formfinding",
+    "map_ready": true,
+    "has_image": true,
+    "score": 5,
+    "tier": "medium",
+    "recommended": true
+   },
+   {
+    "lookup": "cable_builder",
+    "name": "cable_builder",
+    "registry": "",
+    "category": "formfinding",
+    "map_ready": true,
+    "has_image": true,
+    "score": 5,
+    "tier": "medium",
+    "recommended": true
+   }
+  ],
+  "Equilibrium": [
+   {
+    "lookup": "tensegrity_triangle",
+    "name": "tensegrity_triangle",
+    "registry": "",
+    "category": "formfinding",
+    "map_ready": true,
+    "has_image": true,
+    "score": 5,
+    "tier": "medium",
+    "recommended": true
+   },
+   {
+    "lookup": "balance_puzzle",
+    "name": "balance_puzzle",
+    "registry": "",
+    "category": "formfinding",
+    "map_ready": true,
+    "has_image": true,
+    "score": 5,
+    "tier": "medium",
+    "recommended": true
+   },
+   {
+    "lookup": "calder_mobile",
+    "name": "calder_mobile",
+    "registry": "",
+    "category": "formfinding",
+    "map_ready": true,
+    "has_image": true,
+    "score": 5,
+    "tier": "medium",
+    "recommended": true
+   },
+   {
+    "lookup": "fractal_truss_tower",
+    "name": "fractal_truss_tower",
+    "registry": "",
+    "category": "formfinding",
+    "map_ready": true,
+    "has_image": true,
+    "score": 5,
+    "tier": "medium",
+    "recommended": true
+   }
+  ],
+  "Annealing": [
+   {
+    "lookup": "simulated_annealing",
+    "name": "simulated_annealing",
+    "registry": "",
+    "category": "formfinding",
+    "map_ready": true,
+    "has_image": true,
+    "score": 5,
+    "tier": "medium",
+    "recommended": true
+   },
+   {
+    "lookup": "self_shaping_forge",
+    "name": "self_shaping_forge",
+    "registry": "",
+    "category": "formfinding",
+    "map_ready": true,
+    "has_image": true,
+    "score": 5,
+    "tier": "medium",
+    "recommended": true
+   }
+  ]
+ },
+ "total": 18
+}

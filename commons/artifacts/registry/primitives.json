@@ -25864,6 +25864,57 @@
 				"max_dimension_m": 1.26,
 				"measured_at": "2026-08-12T04:39:51.280397Z"
 			}
+		},
+		"laundry_line_cathedral": {
+			"name": "Laundry Line Cathedral",
+			"class_name": "LaundryLineCathedral",
+			"scene": "res://commons/artifacts/laundry_line_cathedral/laundry_line_cathedral.tscn",
+			"description": "The Catenary hero (formfinding): three washing lines sagging as true cosh curves, towels pegged plumb - and above each line its mirrored ghost arch, because a hanging chain flipped is a standing vault. Gaudi's method as laundry. Category-heroes pass, 2026-08-27.",
+			"category": "primitives",
+			"tags": [
+				"formfinding",
+				"catenary",
+				"minimum",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 4,
+				"clearance_m": 0.6
+			}
+		},
+		"impossible_end_table": {
+			"name": "Impossible End Table",
+			"class_name": "ImpossibleEndTable",
+			"scene": "res://commons/artifacts/impossible_end_table/impossible_end_table.tscn",
+			"description": "The Equilibrium hero (formfinding), elevating tensegrity_triangle to furniture: an end table whose top never touches its base - one cable hangs it, three stop the sway, a teacup sits unbothered. Islands of compression in a sea of tension. Category-heroes pass, 2026-08-27.",
+			"category": "primitives",
+			"tags": [
+				"formfinding",
+				"tensegrity",
+				"equilibrium",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 2,
+				"clearance_m": 0.6
+			}
+		},
+		"cookie_press": {
+			"name": "Cookie Press",
+			"class_name": "CookiePress",
+			"scene": "res://commons/artifacts/cookie_press/cookie_press.tscn",
+			"description": "The Prism hero (primitives): a bakery extruder - a brass star die and a star-profile dough bar in cut lengths, every slice the same section. Extrusion is commitment: choose a profile once, then travel. Category-heroes pass, 2026-08-27.",
+			"category": "primitives",
+			"tags": [
+				"primitives",
+				"prism",
+				"extrusion",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 3,
+				"clearance_m": 0.6
+			}
 		}
 	},
 	"registry_info": {
