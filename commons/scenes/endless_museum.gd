@@ -4557,6 +4557,39 @@ func _adopt_note(seg: Node3D, chapter: String, pearl: String) -> void:
 	_adopt_write()
 
 
+## WHAT THE HALL ACTUALLY LOOKS LIKE, folded into the same row as its
+## measurements. The walk grid the museum built (27 x 33 where the map is 20 x 20
+## — the cropped tile, the three passage rows, the outer skin) and the bodies at
+## the cells the negotiator gave them, not the cells the plan asked for.
+##
+## This is what makes /wall-map and /long-museum draw the museum instead of the
+## plan. Called from _write_built, which already assembled all of it and, until
+## now, wrote it only for the two halls a streamed run happens to hold.
+func _layout_built(chapter: String, pearl: String, cells: Array, bodies: Array,
+		cards: Array, w: int, h: int, porch_depth: int, court_depth: int) -> void:
+	if pearl == "" and chapter == "":
+		return
+	var key := "%s|%s" % [chapter, pearl]
+	var row: Dictionary = _layout_walk.get(key, {})
+	if row.is_empty():
+		# a hall whose measurements were never noted still gets a row here — the
+		# two writers meet in one place rather than depending on each other
+		row = {"chapter": chapter, "pearl": pearl, "map": "", "vestibule": VESTIBULE_H}
+	row["w"] = w
+	row["h"] = h
+	row["porch"] = porch_depth
+	row["court"] = court_depth
+	row["span"] = h + VESTIBULE_H + porch_depth + court_depth
+	row["cells"] = cells
+	row["cell_x0"] = -1
+	row["bodies"] = bodies
+	row["cards"] = cards
+	row["built_at"] = Time.get_datetime_string_from_system()
+	_layout_walk[key] = row
+	_layout_dirty = true
+	_layout_write()
+
+
 ## One hall's measurements, keyed the way em_bake keys its own rows so the two
 ## can be joined without guessing: "<chapter>|<pearl>".
 func _layout_note(deal: Variant, peek: Variant, w: int, h: int,
@@ -4578,12 +4611,24 @@ func _layout_note(deal: Variant, peek: Variant, w: int, h: int,
 	# streaming had freed; the span is the hall's own.
 	var span: int = h + VESTIBULE_H + porch_depth + court_depth
 	var key := "%s|%s" % [chapter, pearl]
-	_layout_walk[key] = {
-		"chapter": chapter, "pearl": pearl, "map": map_name,
-		"w": w, "h": h, "vestibule": VESTIBULE_H,
-		"porch": porch_depth, "court": court_depth, "span": span,
-		"index": _seg_index,
-	}
+	# MERGE, NEVER REPLACE. Two writers fill one row: this one at segment finish,
+	# _layout_built a moment later with the grid and the bodies. Assigning a fresh
+	# dictionary here would drop everything the other one had put there on the
+	# previous build of the same hall, and the loss would look like a hall that
+	# had simply never been walked.
+	var row: Dictionary = _layout_walk.get(key, {})
+	row["chapter"] = chapter
+	row["pearl"] = pearl
+	if map_name != "":
+		row["map"] = map_name
+	row["w"] = w
+	row["h"] = h
+	row["vestibule"] = VESTIBULE_H
+	row["porch"] = porch_depth
+	row["court"] = court_depth
+	row["span"] = span
+	row["index"] = _seg_index
+	_layout_walk[key] = row
 	_layout_dirty = true
 	_layout_write()
 
@@ -7751,6 +7796,25 @@ func _write_built(seg: Node3D, chapter: String, deal: Variant, zbase: int, w: in
 		"replay": _replay,
 		"bake_stale": _bake_stale,
 	})
+	# AND INTO THE LEDGER THAT LASTS (2026-08-27, Palle: "I want it to be the same
+	# as long-museum that has the same layout and placement as godot endless
+	# museum"). Everything above is exactly what the editors need to draw the
+	# museum rather than the plan — the built walk grid, which is 27 x 33 for a
+	# hall whose map is 20 x 20, and the bodies at the cells the negotiator
+	# actually gave them. It has only ever been written per RUN, so it described
+	# the two halls currently streamed and nothing else. The layout ledger keeps
+	# it per hall, across runs, and /wall-map and /long-museum both read that.
+	# THE CHAPTER ARRIVES EMPTY HERE and has for a long time — em_built.json's own
+	# rows read "chapter": "". Left alone it keys the ledger "|point one", which
+	# never joins the row _layout_note wrote under "primitives|point one", and the
+	# hall appears twice with half its facts each. Ask the segment, which knows.
+	var built_ch := chapter
+	if built_ch == "" and seg != null and is_instance_valid(seg) and seg.has_meta("em_chapter"):
+		built_ch = String(seg.get_meta("em_chapter"))
+	if built_ch == "":
+		built_ch = String(d.get("chapter", ""))
+	_layout_built(built_ch, String(d.get("pearl", "")), rows, bodies, cards, w, h,
+		porch_depth, court_depth)
 	if _bake_key != "":
 		_bake_out[_bake_key] = {"museum": String(seg.get_meta("em_key")) if seg.has_meta("em_key") else "",
 			"placed": _seg_placed.duplicate(true), "refused": _seg_refused.duplicate(true)}
