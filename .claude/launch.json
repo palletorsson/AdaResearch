@@ -9,6 +9,11 @@
       "autoPort": false
     },
     {
+      "name": "encyclopedia-attach",
+      "url": "http://localhost:3003",
+      "port": 3003
+    },
+    {
       "name": "encyclopedia-alt",
       "runtimeExecutable": "cmd",
       "runtimeArgs": ["/c", "cd /d C:\\Users\\palle\\Documents\\GitHub\\ada_encyclopedia && set NEXT_DIST_DIR=.next-alt&& npx next dev --webpack -p 3013"],
