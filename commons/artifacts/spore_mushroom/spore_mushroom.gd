@@ -70,6 +70,7 @@ var _muzzle: float = 0.0     # metres of flight before it may land
 var _look_t: float = 0.0     # throttles the pickup test
 var _from: Vector3 = Vector3.ZERO
 var _from_checked: bool = false
+var _absorbing: bool = false
 var _rest_y: float = 0.0
 var _rng := RandomNumberGenerator.new()
 
@@ -178,6 +179,8 @@ func _process(delta: float) -> void:
 		if _life > 8.0:                      # never fall forever
 			_plant(Vector3(global_position.x, _find_floor(), global_position.z))
 	elif _state == State.LANDED:
+		if _absorbing:
+			return       # whatever is eating it owns its transform now
 		# a slow breath, so a landed mushroom reads as alive rather than as debris
 		_bob += delta
 		position.y = _rest_y + sin(_bob * 1.6) * 0.004
@@ -190,7 +193,19 @@ func _process(delta: float) -> void:
 
 ## Anyone standing on it takes it: the grid's player, the museum's walker, both
 ## by group so neither lane needs to know about this artifact.
+## SOMETHING IS DRAWING IT IN (2026-08-27, Palle: "the spider should walk over
+## the mush a suck up the mushroom though this body"). The mushroom stops
+## breathing, stops being pick-up-able, and hands its transform to whatever is
+## taking it — otherwise the resting bob writes position.y every frame and
+## fights the lift, and the visitor could pluck it out mid-swallow.
+func begin_absorb() -> void:
+	_absorbing = true
+	remove_from_group(BAIT_GROUP)
+
+
 func _try_pickup() -> void:
+	if _absorbing:
+		return
 	var tree := get_tree()
 	if tree == null:
 		return

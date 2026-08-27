@@ -53,6 +53,19 @@ const RIG := "res://commons/hazards/octapod_crawler/csg_four_leg_walker.tscn"
 @export var avoid_spread_deg: float = 42.0
 @export var avoid_turn_deg: float = 65.0  ## how hard it steers off a blocked line
 @export var avoid_eye: float = 0.14       ## whisker height above its own floor
+## AS BIG AS THE LEG (2026-08-27, Palle: "add a collider to the spider that is
+## as big as the leg, now it walk into to the walls"). The step test was ONE ray
+## from the body's centre, so the body cleared a wall while half a metre of leg
+## went through it. The animal is a DISC now, as wide as its own feet reach, and
+## a step is a shape cast rather than a line — which is what a collider would
+## have bought, without putting a position-driven animal on the physics clock
+## where its own gait would fight it.
+##
+## Zero means MEASURE IT: the widest a foot ever stands from the body, taken
+## from the rig once it is up, so a rescaled or re-legged spider is right
+## without anybody editing a number.
+@export var body_radius: float = 0.0
+@export var body_radius_min: float = 0.14  ## never so fat it cannot enter a room
 
 ## IT PATHS (2026-08-27, Palle: "yes make it path"). Whiskers round an obstacle;
 ## they do not get out of a room. A U-shaped alcove traps a whisker-steered
@@ -129,6 +142,31 @@ const RIG := "res://commons/hazards/octapod_crawler/csg_four_leg_walker.tscn"
 ## time it takes to walk between them and the visitor never sees an animal
 ## FEEDING, only mushrooms disappearing.
 @export var feed_time: float = 2.0
+## IT WALKS OVER THE MUSHROOM (2026-08-27, Palle: "the spider should walk over
+## the mush a suck up the mushroom though this body"). It used to stop a metre
+## short and stand there, which read as an animal ignoring its dinner. It closes
+## until the mushroom is UNDER it, and then the mushroom rises into the body
+## over the two seconds — swallowed through the underside rather than nibbled
+## from a polite distance.
+@export var feed_reach: float = 0.26     ## how far it stands off before feeding
+@export var mouth_height: float = 0.11   ## where the mushroom disappears into
+## IT CANNOT SEE THROUGH A WALL (2026-08-27, Palle: "The spider should not be
+## able to see through the wall, they are colliders, not the spider trying to
+## get to a mushroom that is on the other side of the wall but the collider
+## blocks the spider and the spider is stuck in a loop"). Food is only food if
+## there is a clear line to it. A mushroom behind a wall is not a target, so
+## the animal never sets off toward one it cannot reach.
+@export var needs_line_of_sight: bool = true
+@export var sight_eye: float = 0.20      ## eye height above its own floor
+## IT DOES NOT FORGET INSTANTLY. Walking round a pillar breaks the line for a
+## moment; without a memory the animal would drop its food and re-choose every
+## few frames, which reads as dithering rather than as hunting.
+@export var sight_memory: float = 1.6
+## AND THE VISITOR IS FOOD LIKE ANY OTHER ("Also the player is equally
+## interesting for the spider, the nearest food object"). No ranking: it goes to
+## whichever piece of food is nearest and in sight, mushroom or visitor.
+@export var give_up_after: float = 4.5   ## seconds of not getting closer
+@export var give_up_for: float = 7.0     ## then ignore that one for this long
 ## FEWER AND FATTER. The first tuning used a 0.62 step, 0.74 shrink and a
 ## 0.055 width, and five degrees of it came out as a pale flat comb — 243
 ## segments so thin and so short that the eye read one fan per leg instead of a
@@ -244,6 +282,15 @@ var _rng := RandomNumberGenerator.new()
 var _degree: int = 0          # mushrooms eaten; 0 is an animal, 5 is a garden
 var _meal: Node3D = null      # the mushroom under it right now
 var _meal_t: float = 0.0      # seconds left of this meal
+var _chase: Node3D = null     # the food it is walking to, whatever kind
+var _chase_best: float = 1e9  # the closest it has got to it
+var _chase_t: float = 0.0     # seconds since it last got closer
+var _ignore: Dictionary = {}  # food it gave up on -> seconds left
+var _seen_t: float = 99.0     # since it last had eyes on anything
+var _sweep_shape: SphereShape3D = null
+var _span_cache: float = 0.0
+var _span_settled: float = 0.0
+var _blocked_t: float = 0.0
 var _rooted: bool = false     # the first mushroom ends the hunt, permanently
 var _sprouts: Array = []      # one MultiMeshInstance3D per leg
 var _bait: Node3D = null      # the mushroom it is walking to
@@ -699,29 +746,81 @@ func _slide(step: Vector3) -> Vector3:
 	var space := w.direct_space_state
 	if space == null:
 		return step
-	var from := Vector3(global_position.x, _floor_y + avoid_eye, global_position.z)
-	var skin: float = maxf(0.12, step.length())
-	var dir: Vector3 = step.normalized()
-	var q := PhysicsRayQueryParameters3D.create(from, from + dir * (step.length() + skin))
-	q.collision_mask = 1
-	var hit: Dictionary = space.intersect_ray(q)
-	if hit.is_empty():
+	var r: float = _span()
+	if r <= 0.0:
 		return step
-	# slide along the surface: drop the component going into it
-	var n: Vector3 = hit["normal"] as Vector3
-	n.y = 0.0
-	if n.length() < 0.001:
-		return Vector3.ZERO
-	n = n.normalized()
-	var along: Vector3 = step - n * step.dot(n)
-	if along.length() < 0.0001:
-		return Vector3.ZERO
-	var q2 := PhysicsRayQueryParameters3D.create(
-		from, from + along.normalized() * (along.length() + skin))
-	q2.collision_mask = 1
-	if not space.intersect_ray(q2).is_empty():
-		return Vector3.ZERO       # an inside corner: hold still and keep turning
-	return along
+	# THE BALL MUST CLEAR THE FLOOR. Centred at avoid_eye + r/2 a 0.40 m sphere
+	# reaches from -0.06 to 0.74 — it starts INSIDE the ground, and cast_motion
+	# on a shape that already overlaps returns zero every time. The animal read
+	# as blocked in every direction and spent its life crab-walking sideways: it
+	# stopped getting round a plain wall and started passing THROUGH one, which
+	# is how a fix for walking into walls became a fix for walking through them.
+	var from := Vector3(global_position.x, _floor_y + r + 0.03, global_position.z)
+	var free: float = _sweep(space, from, step, r)
+	# HUGGING IS ITS OWN LOOP. Sliding along a wall is right for getting round a
+	# corner and wrong as a way of life: measured in a pocket, the animal spent
+	# 55.8% of its samples pressed against the back wall, sliding one way then
+	# the other. If it has not been able to go where it is pointing for a couple
+	# of seconds it turns around, which is what an animal does at a dead end.
+	if free >= 0.999:
+		_blocked_t = 0.0
+		return step
+	_blocked_t += get_process_delta_time()
+	if _blocked_t > 1.8:
+		_blocked_t = 0.0
+		_patrol_angle = rotation.y + PI * _rng.randf_range(0.6, 1.4)
+		_path.clear()
+	# most of the way is still forward, and forward is what makes progress
+	if free > 0.35:
+		return step * free * 0.9
+	# properly blocked: take whichever way along the wall gets further, which is
+	# what carries it round a corner instead of grinding into one
+	var side := Vector3(-step.z, 0.0, step.x).normalized() * step.length()
+	var l: float = _sweep(space, from, side, r)
+	var rgt: float = _sweep(space, from, -side, r)
+	var best: float = maxf(l, rgt)
+	if best <= free:
+		return step * free        # an inside corner: creep, and keep turning
+	return (side if l > rgt else -side) * best * 0.9
+
+
+## How far along `motion` the animal's own disc can go, as a fraction. A sphere
+## the width of its stance, swept — the whole point being that the LEGS are what
+## hits a wall first, not the body.
+func _sweep(space: PhysicsDirectSpaceState3D, from: Vector3, motion: Vector3, r: float) -> float:
+	if _sweep_shape == null:
+		_sweep_shape = SphereShape3D.new()
+	_sweep_shape.radius = r
+	var q := PhysicsShapeQueryParameters3D.new()
+	q.shape = _sweep_shape
+	q.transform = Transform3D(Basis(), from)
+	q.motion = motion
+	q.collision_mask = 1
+	var res: Array = space.cast_motion(q)
+	if res.size() < 2:
+		return 1.0
+	return float(res[0])
+
+
+## HOW WIDE THE ANIMAL IS, from the shoulders rather than from the feet.
+##
+## The first version measured the live feet and kept the widest it had seen —
+## which grows. For the first seconds after a spawn the legs are still folding
+## out, so the disc was the 0.14 minimum, the animal walked to within 0.14 m of
+## a wall, and THEN the disc inflated to 0.40 around it. It was inside the wall
+## without ever having moved into one, and a sweep from inside reports blocked
+## in every direction, so it could only crab sideways along the face. Seven
+## samples in a pocket, and no way to explain them from the movement code.
+##
+## The shoulder ring is a constant of the rig — 1.5556 in x and z, so 2.2 out
+## from the middle — and the feet plant under it. Scale it and it is right from
+## the first frame and never changes.
+const SHOULDER_R: float = 2.2
+
+func _span() -> float:
+	if body_radius > 0.0:
+		return body_radius
+	return maxf(body_radius_min, SHOULDER_R * _stance * crab_scale)
 
 
 ## THREE WHISKERS. Cast along the heading it wants and 42 degrees either side;
@@ -770,24 +869,112 @@ func _free(space: PhysicsDirectSpaceState3D, from: Vector3, yaw: float, look: fl
 	return from.distance_to(hit["position"] as Vector3)
 
 
-## the nearest landed mushroom, or null. Bait is anything in the group that
-## says it is bait — the mushroom owns that decision, not the animal.
-func _nearest_bait() -> Node3D:
+## CAN IT SEE THAT. One ray, eye height to eye height, against the world only.
+## A wall between the animal and a thing means the thing is not there as far as
+## the animal is concerned — which is the whole of the fix for walking into a
+## wall forever because a mushroom was visible through it.
+func _sees(at: Vector3) -> bool:
+	if not needs_line_of_sight or not is_inside_tree():
+		return true
+	var w := get_world_3d()
+	if w == null:
+		return true
+	var space := w.direct_space_state
+	if space == null:
+		return true
+	var from := Vector3(global_position.x, _floor_y + sight_eye, global_position.z)
+	var to := Vector3(at.x, _floor_y + sight_eye, at.z)
+	var q := PhysicsRayQueryParameters3D.create(from, to)
+	q.collision_mask = 1
+	return space.intersect_ray(q).is_empty()
+
+
+## THE NEAREST FOOD IN SIGHT, of any kind. Returns {node, bait}.
+##
+## The visitor sits at the same table as the mushrooms now: there is no ranking
+## left, only distance and line of sight. That is a smaller rule than the one it
+## replaced and it says the same thing about the animal — it is not choosing
+## between a meal and a hunt, it is going to the nearest thing it can eat.
+func _nearest_food() -> Dictionary:
 	var tree := get_tree()
 	if tree == null:
-		return null
+		return {}
+	_seen_t += get_process_delta_time()
+	var reach: float = maxf(detect_m, bait_range)
 	var best: Node3D = null
-	var best_d: float = bait_range
-	for n in tree.get_nodes_in_group("spider_bait"):
-		if not (n is Node3D) or not is_instance_valid(n):
+	var best_d: float = reach
+	var best_bait := false
+	if eats_mushrooms and not _rooted:
+		for n in tree.get_nodes_in_group("spider_bait"):
+			if not (n is Node3D) or not is_instance_valid(n) or _ignore.has(n):
+				continue
+			if n.has_method("is_bait") and not bool(n.call("is_bait")):
+				continue
+			var p: Vector3 = (n as Node3D).global_position
+			var d: float = global_position.distance_to(p)
+			if d < best_d and _sees(p):
+				best_d = d
+				best = n as Node3D
+				best_bait = true
+	if not _rooted:
+		for g in ["player", "player_body", "em_walker"]:
+			for n2 in tree.get_nodes_in_group(g):
+				if not (n2 is Node3D) or not is_instance_valid(n2) or _ignore.has(n2):
+					continue
+				var p2: Vector3 = (n2 as Node3D).global_position
+				var d2: float = global_position.distance_to(p2)
+				if d2 < best_d and _sees(p2):
+					best_d = d2
+					best = n2 as Node3D
+					best_bait = false
+	if best != null:
+		_seen_t = 0.0
+		return {"node": best, "bait": best_bait, "dist": best_d}
+	# nothing in sight: hold what it was already going to, briefly
+	if _chase != null and is_instance_valid(_chase) and _seen_t < sight_memory:
+		if global_position.distance_to(_chase.global_position) < reach:
+			return {"node": _chase, "bait": _chase.is_in_group("spider_bait"), "dist": 0.0}
+	return {}
+
+
+## GIVE UP ON WHAT IT CANNOT REACH. Line of sight stops it setting off toward a
+## mushroom through a wall; this stops it grinding at one it CAN see and cannot
+## get to — across a pit, behind glass, up a step. If it has not got closer for
+## give_up_after seconds it ignores that one for a while and looks elsewhere,
+## which is what breaks the loop Palle watched.
+func _watch_progress(food: Node3D, delta: float) -> void:
+	if food == null:
+		_chase = null
+		return
+	var d: float = global_position.distance_to(food.global_position)
+	if food != _chase:
+		_chase = food
+		_chase_best = d
+		_chase_t = 0.0
+		return
+	if d < _chase_best - 0.30:
+		_chase_best = d
+		_chase_t = 0.0
+		return
+	_chase_t += delta
+	if _chase_t > give_up_after:
+		_ignore[food] = give_up_for
+		print("[head_crab] gave up on %s — no closer than %.2f m in %.1f s"
+			% [food.name, _chase_best, give_up_after])
+		_chase = null
+		_chase_t = 0.0
+
+
+func _age_grudges(delta: float) -> void:
+	if _ignore.is_empty():
+		return
+	for k in _ignore.keys():
+		if not is_instance_valid(k):
+			_ignore.erase(k)
 			continue
-		if n.has_method("is_bait") and not bool(n.call("is_bait")):
-			continue
-		var d: float = global_position.distance_to((n as Node3D).global_position)
-		if d < best_d:
-			best_d = d
-			best = n as Node3D
-	return best
+		_ignore[k] = float(_ignore[k]) - delta
+		if float(_ignore[k]) <= 0.0:
+			_ignore.erase(k)
 
 
 ## Stand over it and start feeding. Nothing is consumed yet — a mushroom being
@@ -799,6 +986,22 @@ func _begin_meal(m: Node3D) -> void:
 	_meal = m
 	_meal_t = feed_time
 	_lunge_t = 0.0
+	if m.has_method("begin_absorb"):
+		m.call("begin_absorb")
+
+
+## Draw it up through the underside. Not a tween: the animal is still standing
+## on its own gait and may shuffle, and a tween to a fixed point would leave the
+## mushroom hanging in the air behind it.
+func _swallow(delta: float) -> void:
+	var m: Node3D = _meal
+	if m == null or not is_instance_valid(m):
+		return
+	var mouth := Vector3(global_position.x, _floor_y + mouth_height, global_position.z)
+	var k: float = 1.0 - exp(-5.0 * delta)
+	m.global_position = m.global_position.lerp(mouth, k)
+	var left: float = clampf(_meal_t / maxf(0.01, feed_time), 0.0, 1.0)
+	m.scale = Vector3.ONE * maxf(0.04, left * left)
 
 
 ## Two seconds later. THE ROOTING MOVED TO THE END: Palle's earlier ruling was
@@ -959,11 +1162,13 @@ func _find_target() -> void:
 	var tree := get_tree()
 	if tree == null:
 		return
+	# only what it can actually see — _nearest_food is the usual route in, and
+	# this stays as the fallback for a frame where nothing was chosen
 	for g in ["player", "player_body", "em_walker"]:
-		var n: Node = tree.get_first_node_in_group(g)
-		if n is Node3D:
-			_target = n as Node3D
-			return
+		for n in tree.get_nodes_in_group(g):
+			if n is Node3D and _sees((n as Node3D).global_position):
+				_target = n as Node3D
+				return
 	_target = null
 
 
@@ -1008,18 +1213,27 @@ func _process(delta: float) -> void:
 	# ── A MEAL STOPS EVERYTHING ───────────────────────────────────────────
 	if _meal_t > 0.0:
 		_meal_t -= delta
-		_update_gait(delta)          # the legs keep their stance over the food
+		_swallow(delta)              # the mushroom rises into the body
+		_update_gait(delta)          # and the legs keep their stance over it
 		if _meal_t <= 0.0:
 			_finish_meal()
 		return
 
-	# ── the mushroom outranks the visitor ─────────────────────────────────
-	if eats_mushrooms and not _rooted:
-		_bait = _nearest_bait()
-		if _bait != null:
+	# ── ONE TABLE. A mushroom and a visitor are both food, and the nearest one
+	# in sight wins — no ranking, and nothing behind a wall is on the table.
+	_age_grudges(delta)
+	var pick: Dictionary = _nearest_food()
+	var food: Node3D = pick.get("node")
+	var is_bait: bool = bool(pick.get("bait", false))
+	_watch_progress(food, delta)
+	if food != null and not is_bait:
+		_target = food            # the visitor: the hunt below takes it from here
+	if food != null and is_bait and not _rooted:
+		_bait = food
+		if true:
 			var bd: Vector3 = _bait.global_position - global_position
 			bd.y = 0.0
-			if bd.length() <= bite_range * 1.6:
+			if bd.length() <= feed_reach:
 				_begin_meal(_bait)
 				return
 			else:

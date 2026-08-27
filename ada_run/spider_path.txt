@@ -1,14 +1,8 @@
-A U-SHAPED TRAP — the visitor is beyond the closed side
-  back wall at x -1.5, arms at z +/-2.2 running to x +1.7, mouth at +x
-  spider starts INSIDE at (0.2, 0, 0); visitor at (-4.6, 0.5, 0)
+A U-SHAPED POCKET, WITH FOOD IT CANNOT SEE BEYOND THE BACK WALL
+  can it see the visitor through the back wall: false
 
-PATHING ON
-  left the pocket: true
-  longest path it held: 20 waypoint(s)
-  reached the visitor: true  in 11.20 s
-
-PATHING OFF — the negative test, whiskers alone
-  left the pocket: false
-  reached the visitor: false (gave up at 40 s)
-
-VERDICT: it paths out of a pocket that whiskers cannot leave
+  samples 520
+  pressed against the back wall on 0 of them (0.0%)
+  inside the back wall on 0
+  it ended at (0.003465, -0.18, -2.880993)
+VERDICT: it does not grind at a wall with food it cannot see behind it

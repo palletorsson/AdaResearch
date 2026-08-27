@@ -1,0 +1,16 @@
+A — A MUSHROOM BEHIND A WALL
+  mushroom 4.28 m away (through a wall), visitor 5.14 m away (in the open)
+  can it see the mushroom: false
+  can it see the visitor:  true
+  it walked into the wall: false
+  it reached the visitor: true (3.40 s)
+
+B — BOTH IN THE OPEN, THE MUSHROOM NEARER
+  mushroom 2.60 m, visitor 9.00 m
+  it ate the mushroom: true   it bit the visitor: false
+
+C — VISIBLE THROUGH A SLIT, UNREACHABLE
+  can it see it: true
+  it gave up after 5.85 s: true
+
+VERDICT: it sees no walls through, takes the nearest food of either kind, and gives up on what it cannot reach

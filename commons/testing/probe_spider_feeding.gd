@@ -17,6 +17,8 @@ var _l: Array = []
 func _initialize() -> void: call_deferred("_run")
 func _say(s: String) -> void: _l.append(s); print(s)
 
+var fails_setup := false
+
 func _run() -> void:
 	var st := Node3D.new(); get_root().add_child(st)
 	current_scene = st
@@ -28,7 +30,12 @@ func _run() -> void:
 	player.name = "PlayerBody"
 	player.add_to_group("player")
 	player.set_script(preload("res://commons/testing/probe_crab_bite_dummy.gd"))
-	st.add_child(player); player.global_position = Vector3(0, 0.5, 0)
+	# FAR AWAY ON PURPOSE. The visitor sits at the same table as the mushrooms
+	# now — "the nearest food object" — so a visitor standing 1.4 m away while
+	# the food is 5 m away is eaten FIRST, correctly. This probe is about the
+	# feeding loop, so the mushrooms are made the nearest thing; that the
+	# visitor wins when THEY are nearest is probe_spider_sight's B.
+	st.add_child(player); player.global_position = Vector3(0, 0.5, 15.0)
 
 	# five mushrooms in a line, all further from the spider than the visitor is,
 	# so going for one is a CHOICE and never an accident of distance
@@ -37,7 +44,7 @@ func _run() -> void:
 	for i in range(5):
 		var m: Node3D = ps.instantiate() as Node3D
 		st.add_child(m)
-		var at := Vector3(-4.0 - float(i) * 2.0, 0.0, 0.0)
+		var at := Vector3(-2.0 - float(i) * 1.8, 0.0, 0.0)
 		m.global_position = at
 		shrooms.append(m)
 
@@ -49,17 +56,24 @@ func _run() -> void:
 	var to_player: float = c.global_position.distance_to(player.global_position)
 	var to_first: float = c.global_position.distance_to((shrooms[0] as Node3D).global_position)
 	_say("FIVE MUSHROOMS AND A VISITOR")
-	_say("  spider to visitor %.2f m, to the nearest mushroom %.2f m — the food is %s"
-		% [to_player, to_first, "FURTHER" if to_first > to_player else "nearer"])
+	_say("  spider to visitor %.2f m, to the nearest mushroom %.2f m — the mushroom is %s"
+		% [to_player, to_first, "nearer" if to_first < to_player else "FURTHER"])
+	if to_first > to_player:
+		fails_setup = true
 	_say("  feed_time %.1f s" % float(c.get("feed_time")))
 	_say("")
 
+	if fails_setup:
+		_say("  the setup is wrong: the visitor is nearer than the food")
 	var meals: Array = []
 	var meal_start := -1.0
 	var was_eating := false
 	var last_degree := 0
 	var t := 0.0
 	var bait_present_during_meal := true
+	var over_max := 0.0
+	var rose := -9.0
+	var shrank := 9.0
 	while t < 60.0:
 		await create_timer(0.05).timeout
 		t += 0.05
@@ -71,6 +85,14 @@ func _run() -> void:
 			var meal = c.get("_meal")
 			if meal == null or not is_instance_valid(meal):
 				bait_present_during_meal = false
+			else:
+				# and it must be UNDER the animal, rising — not a metre away
+				var m3: Node3D = meal
+				var off: Vector3 = m3.global_position - c.global_position
+				off.y = 0.0
+				over_max = maxf(over_max, off.length())
+				rose = maxf(rose, m3.global_position.y - float(c.get("_floor_y")))
+				shrank = minf(shrank, m3.scale.x)
 		if was_eating and not eating:
 			var d: int = int(c.get("_degree"))
 			if d > last_degree:
@@ -90,6 +112,8 @@ func _run() -> void:
 	_say("  degree %d, rooted %s" % [int(c.get("_degree")), str(c.get("_rooted"))])
 	var bites_while_feeding: int = int(player.get("hits"))
 	_say("  the visitor was bitten %d time(s) while there was food" % bites_while_feeding)
+	_say("  while swallowing: the mushroom stayed within %.2f m of the body, rose to %.3f m, shrank to %.2f"
+		% [over_max, rose, shrank])
 
 	# ── no food left: the visitor IS the food ─────────────────────────────
 	_say("")
@@ -97,6 +121,7 @@ func _run() -> void:
 	var c2: Node3D = (load(CRAB) as PackedScene).instantiate() as Node3D
 	st.add_child(c2); c2.global_position = Vector3(0, 0, -6.0)
 	c2.set("detect_m", 24.0)
+	player.global_position = Vector3(0, 0.5, -4.0)     # now within reach of it
 	await create_timer(1.4).timeout
 	var t2 := 0.0
 	var bit := false
@@ -116,6 +141,9 @@ func _run() -> void:
 	if not bait_present_during_meal:
 		fails.append("the mushroom vanished at the START of a meal instead of the end")
 	if bites_while_feeding != 0: fails.append("it bit the visitor while there was food")
+	if over_max > 0.45: fails.append("it fed from %.2f m away instead of standing over it" % over_max)
+	if rose < 0.04: fails.append("the mushroom never rose into the body (highest %.3f m)" % rose)
+	if shrank > 0.4: fails.append("the mushroom never shrank as it was swallowed (%.2f)" % shrank)
 	if int(c.get("_degree")) != 5: fails.append("it did not reach the last degree")
 	if not bool(c.get("_rooted")): fails.append("it never rooted")
 	if not bit: fails.append("with no food left it still did not hunt the visitor")

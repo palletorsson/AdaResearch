@@ -1,18 +1,13 @@
 extends SceneTree
-## OUT OF A ROOM, NOT JUST ROUND A CORNER (2026-08-27, Palle: "yes make it path").
+## NOT STUCK AT A WALL (2026-08-27, Palle: "the collider blocks the spider and
+## the spider is stuck in a loop").
 ##
-## Whiskers get an animal round an obstacle. They do not get it out of a pocket:
-## a U-shaped alcove holds a whisker-steered body until it happens to wander
-## out, because every local reading says "turn a bit" and none of them says
-## "the way out is behind you".
+## A U-shaped pocket with the visitor beyond its CLOSED side. Since the animal
+## cannot see through a collider, that visitor is not food and not a target —
+## so the only thing worth measuring here is the failure Palle reported: an
+## animal pressed against a wall because something it wants is on the far side.
 ##
-## So: build a U, stand the spider INSIDE it, and put the visitor beyond the
-## CLOSED side. The straight line to the visitor is a wall. The only way there
-## is out of the mouth, along the outside, and back — which no local rule finds.
-##
-## Two runs, one instrument: path_on true, then false. The second is the
-## negative test — if the animal escapes either way, the U is not a trap and
-## the probe proves nothing.
+## It must not grind, and it must never be inside the wall.
 const CRAB := "res://commons/hazards/head_crab/head_crab.tscn"
 const TXT := "res://ada_run/spider_path.txt"
 
@@ -29,17 +24,27 @@ func _wall(st: Node3D, centre: Vector3, size: Vector3) -> void:
 	bm.size = size; mi.mesh = bm; mi.position = centre
 	st.add_child(mi)
 
-## one run; returns [reached, seconds, max_path_len]
-func _trial(with_path: bool) -> Array:
+func _run() -> void:
+	# WHAT THIS PROBE NOW ASKS (rewritten 2026-08-27). It used to stand the
+	# spider in a U with the visitor beyond the closed side and check that A*
+	# got it out. Line of sight made that premise false: a visitor behind a wall
+	# is not a target at all, so the animal correctly stays put, and the trial
+	# started passing by ACCIDENT — it wandered out on patrol and bit them at
+	# 12.85 s while reporting it had never left the pocket.
+	#
+	# The claim worth keeping is Palle's actual complaint: "the collider blocks
+	# the spider and the spider is stuck in a loop". So: put food it cannot see
+	# beyond the wall, and measure whether it spends its life pressed against
+	# that wall. It must not.
+	_say("A U-SHAPED POCKET, WITH FOOD IT CANNOT SEE BEYOND THE BACK WALL")
 	var st := Node3D.new(); get_root().add_child(st)
+	current_scene = st
 	var fb := StaticBody3D.new(); var cs := CollisionShape3D.new(); var bx := BoxShape3D.new()
 	bx.size = Vector3(60, 1.0, 60); cs.shape = bx; cs.position = Vector3(0, -0.5, 0)
 	fb.add_child(cs); st.add_child(fb)
-
-	# THE U: closed on -x, arms running out to +x, mouth at +x
-	_wall(st, Vector3(-1.5, 0.7, 0.0), Vector3(0.4, 1.4, 4.4))     # back
-	_wall(st, Vector3(0.0, 0.7, 2.2), Vector3(3.4, 1.4, 0.4))      # north arm
-	_wall(st, Vector3(0.0, 0.7, -2.2), Vector3(3.4, 1.4, 0.4))     # south arm
+	_wall(st, Vector3(-1.5, 0.7, 0.0), Vector3(0.4, 1.4, 4.4))
+	_wall(st, Vector3(0.0, 0.7, 2.2), Vector3(3.4, 1.4, 0.4))
+	_wall(st, Vector3(0.0, 0.7, -2.2), Vector3(3.4, 1.4, 0.4))
 
 	var player := Node3D.new()
 	player.name = "PlayerBody"
@@ -50,55 +55,41 @@ func _trial(with_path: bool) -> Array:
 	var c: Node3D = (load(CRAB) as PackedScene).instantiate() as Node3D
 	st.add_child(c); c.global_position = Vector3(0.2, 0.0, 0.0)
 	c.set("detect_m", 22.0)
-	c.set("path_on", with_path)
 	await create_timer(1.5).timeout
+	_say("  can it see the visitor through the back wall: %s"
+		% str(c.call("_sees", player.global_position)))
+	if bool(c.call("_sees", player.global_position)):
+		_say("  FAIL it can see through the back wall")
 
-	var reached := false
+	var grinding := 0
+	var inside := 0
+	var samples := 0
 	var t := 0.0
-	var longest := 0
-	var got_out := false
-	while t < 40.0:
+	while t < 26.0:
 		await create_timer(0.05).timeout
 		t += 0.05
-		var pth: Array = c.get("_path")
-		longest = maxi(longest, pth.size())
-		if not got_out and c.global_position.x > 1.8:
-			got_out = true
-		if int(player.get("hits")) > 0:
-			reached = true
-			break
-	st.queue_free()
-	await process_frame
-	return [reached, t, longest, got_out]
+		samples += 1
+		var p: Vector3 = c.global_position
+		# pressed against the back wall, which is the loop
+		if p.x < -0.85 and absf(p.z) < 2.2:
+			grinding += 1
+		if p.x > -1.72 and p.x < -1.28 and absf(p.z) < 2.2:
+			inside += 1
 
-func _run() -> void:
-	_say("A U-SHAPED TRAP — the visitor is beyond the closed side")
-	_say("  back wall at x -1.5, arms at z +/-2.2 running to x +1.7, mouth at +x")
-	_say("  spider starts INSIDE at (0.2, 0, 0); visitor at (-4.6, 0.5, 0)")
+	var pct: float = 100.0 * float(grinding) / float(maxi(1, samples))
 	_say("")
-
-	var on: Array = await _trial(true)
-	_say("PATHING ON")
-	_say("  left the pocket: %s" % str(on[3]))
-	_say("  longest path it held: %d waypoint(s)" % int(on[2]))
-	_say("  reached the visitor: %s%s" % [str(on[0]), ("  in %.2f s" % float(on[1])) if on[0] else " (gave up at 40 s)"])
-	_say("")
-
-	var off: Array = await _trial(false)
-	_say("PATHING OFF — the negative test, whiskers alone")
-	_say("  left the pocket: %s" % str(off[3]))
-	_say("  reached the visitor: %s%s" % [str(off[0]), ("  in %.2f s" % float(off[1])) if off[0] else " (gave up at 40 s)"])
-	_say("")
+	_say("  samples %d" % samples)
+	_say("  pressed against the back wall on %d of them (%.1f%%)" % [grinding, pct])
+	_say("  inside the back wall on %d" % inside)
+	_say("  it ended at %s" % str(c.global_position))
 
 	var fails: Array = []
-	if not on[0]:
-		fails.append("with pathing on it never reached the visitor")
-	if int(on[2]) < 3:
-		fails.append("it never held a path longer than %d waypoints — A* is not running" % int(on[2]))
-	if off[0] and float(off[1]) < float(on[1]):
-		fails.append("whiskers alone were FASTER — the U is not a trap and this proves nothing")
+	if inside > 0:
+		fails.append("it got inside the wall on %d samples" % inside)
+	if pct > 45.0:
+		fails.append("it spent %.1f%% of its life against the wall — that is the loop" % pct)
 	for f in fails: _say("FAIL %s" % f)
-	_say("VERDICT: %s" % ("it paths out of a pocket that whiskers cannot leave"
+	_say("VERDICT: %s" % ("it does not grind at a wall with food it cannot see behind it"
 		if fails.is_empty() else "%d fault(s)" % fails.size()))
 	var fh := FileAccess.open(TXT, FileAccess.WRITE)
 	fh.store_string("\n".join(PackedStringArray(_l)) + "\n"); fh.close()

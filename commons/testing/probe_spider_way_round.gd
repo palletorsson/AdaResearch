@@ -46,7 +46,12 @@ func _run() -> void:
 	player.name = "PlayerBody"
 	player.add_to_group("player")
 	player.set_script(preload("res://commons/testing/probe_crab_bite_dummy.gd"))
-	st.add_child(player); player.global_position = Vector3(-2.0, 0.5, 4.0)
+	# PAST THE END OF THE WALL, not behind its middle. The spider cannot see
+	# through a collider any more, so a visitor directly behind the wall is not
+	# a target at all and it correctly stays where it is — this probe used to
+	# test hunting through a wall and calling it pathfinding. From here the line
+	# clears the wall's +x end, so it can SEE them and still has to walk round.
+	st.add_child(player); player.global_position = Vector3(6.0, 0.5, 4.0)
 
 	var c: Node3D = (load(CRAB) as PackedScene).instantiate() as Node3D
 	st.add_child(c); c.global_position = Vector3(-2.0, 0.0, -4.0)
