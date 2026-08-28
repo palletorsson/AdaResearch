@@ -87,6 +87,28 @@ def main() -> int:
     else:
         notes.append("with no adoption it reports no wall, rather than a wrong one")
 
+    # A CLAIM WITH NOTHING WRITTEN ON IT IS STILL A ROW. That is the whole
+    # point of claiming — it is the thing you meant to say and have not — and
+    # the easy bug is to filter on `note` and lose every one of them silently.
+    p3 = json.loads(json.dumps(pearl))
+    p3["lines"][6].pop("note")
+    p3["lines"][6]["claimed"] = True
+    g3 = gather_one({"chapter": "primitives", "pearls": [p3]})
+    r3 = (g3["chapters"][0]["pearls"][0]["notes"] if g3["chapters"] else [])
+    if len(r3) != 1:
+        fails.append("a claimed line with no note was dropped (%d row(s))" % len(r3))
+    elif not r3[0]["claimed"] or r3[0]["note"]:
+        fails.append("the claimed row came back wrong: claimed=%s note=%r" % (r3[0]["claimed"], r3[0]["note"]))
+    elif g3["totals"]["claimed_unwritten"] != 1 or g3["totals"]["notes"] != 0:
+        fails.append("the totals miscount a blank claim: %s" % g3["totals"])
+    else:
+        notes.append("a claim with nothing written is carried, and counted apart from the written")
+    doc3 = F.render(g3)
+    if "claimed, not yet written" not in doc3:
+        fails.append("the document does not mark a blank claim as outstanding")
+    else:
+        notes.append("the document marks a blank claim as outstanding, not as an entry")
+
     # and the render must not fall over on either shape
     try:
         out = F.render(g)

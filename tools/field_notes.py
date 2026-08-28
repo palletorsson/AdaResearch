@@ -93,7 +93,7 @@ def gather(only: str = "") -> dict:
     hand has ruled both links — which is honest, and better than a confident
     wrong cell."""
     chapters: list[dict] = []
-    n_notes = n_lines = 0
+    n_notes = n_lines = n_claims = 0
     for ch in spine_order():
         if only and ch != only:
             continue
@@ -115,9 +115,20 @@ def gather(only: str = "") -> dict:
             for i, ln in enumerate(p.get("lines", [])):
                 n_lines += 1
                 note = str(ln.get("note", "") or "").strip()
-                if not note:
+                # A CLAIM IS A PROMISE, and belongs on the list before it is kept
+                # (2026-08-27, Palle: "make it possible for me to claim the wall
+                # works for field notes"). A wall claimed at the desk and not yet
+                # written on is the most useful row this document can carry: it
+                # is the thing you meant to say and have not. Without it the only
+                # visible state is "written", and an empty claim is indis-
+                # tinguishable from a wall nobody ever looked at.
+                claimed = bool(ln.get("claimed"))
+                if not note and not claimed:
                     continue
-                n_notes += 1
+                if note:
+                    n_notes += 1
+                else:
+                    n_claims += 1
                 h = face_of.get(str(ln.get("token", "") or "")) if ln.get("token") else None
                 rows.append({
                     "index": i,
@@ -126,6 +137,7 @@ def gather(only: str = "") -> dict:
                     "by": str(ln.get("by", "") or ""),
                     "viz": str(ln.get("viz", "") or ""),
                     "note": note,
+                    "claimed": claimed,
                     "hang": ({"cell": list(h.get("cell", [])), "dir": list(h.get("dir", []))} if h else None),
                 })
             if rows:
@@ -144,6 +156,7 @@ def gather(only: str = "") -> dict:
             "chapters": len(chapters),
             "pearls": sum(len(c["pearls"]) for c in chapters),
             "notes": n_notes,
+            "claimed_unwritten": n_claims,
             "lines_read": n_lines,
             "characters": sum(len(r["note"]) for c in chapters for p in c["pearls"] for r in p["notes"]),
         },
@@ -177,7 +190,9 @@ def render(doc: dict) -> str:
         "",
         f"**{t['notes']} {plural(t['notes'], 'reflection')}** across {t['pearls']} "
         f"{plural(t['pearls'], 'hall')} in {t['chapters']} {plural(t['chapters'], 'chapter')} — "
-        f"{t['characters']:,} characters, out of {t['lines_read']} lines in the book.",
+        f"{t['characters']:,} characters, out of {t['lines_read']} lines in the book."
+        + (f" **{t['claimed_unwritten']} more {plural(t['claimed_unwritten'], 'wall')} claimed and still blank.**"
+           if t.get("claimed_unwritten") else ""),
         "",
     ]
     if not doc["chapters"]:
@@ -207,9 +222,12 @@ def render(doc: dict) -> str:
                 out += [f"{who}{at}", ""]
                 if r["text"]:
                     out += [f"> *{r['text']}*", ""]
-                else:
+                elif r["note"]:
                     out += ["> *(no line yet — the reflection came first)*", ""]
-                out += [r["note"], ""]
+                if r["note"]:
+                    out += [r["note"], ""]
+                else:
+                    out += ["*claimed, not yet written.*", ""]
     return "\n".join(out) + "\n"
 
 
@@ -226,11 +244,14 @@ def main() -> int:
         return 0
 
     t = doc["totals"]
-    print(f"THE FIELD NOTES — {t['notes']} reflection(s), {t['characters']:,} characters")
+    print(f"THE FIELD NOTES — {t['notes']} reflection(s), {t['characters']:,} characters"
+          + (f", {t['claimed_unwritten']} claimed and blank" if t["claimed_unwritten"] else ""))
     print(f"  read {t['lines_read']} lines across the book")
     for c in doc["chapters"]:
-        n = sum(len(p["notes"]) for p in c["pearls"])
-        print(f"  {c['chapter']:24s} {n:3d} in {len(c['pearls'])} hall(s)")
+        n = sum(1 for p in c["pearls"] for r in p["notes"] if r["note"])
+        k = sum(1 for p in c["pearls"] for r in p["notes"] if not r["note"])
+        print(f"  {c['chapter']:24s} {n:3d} written" + (f", {k} claimed and blank" if k else "")
+              + f"  in {len(c['pearls'])} hall(s)")
     if not doc["chapters"]:
         print("  nothing written yet — the register is empty, which is not the same as absent")
 
