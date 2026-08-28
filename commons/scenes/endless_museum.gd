@@ -804,6 +804,11 @@ var _plan_mtime: int = 0
 # editing lane is the same museum's. Desktop only; F8 toggles (reload, the
 # eye resumed), --em-dollhouse or em_control {"dollhouse": 1} opens into it.
 var _dollhouse: bool = false
+## Asked for ON THE COMMAND LINE, as opposed to resumed from em_control. A proof
+## shot stands the walker up out of a RESUMED doll house — state that the flag
+## did not choose photographs a different building than the one asked for — but
+## the flag itself must win, or there is no way to photograph the plan at all.
+var _dollhouse_asked: bool = false
 var DOLL_CUT := 2.4                # walls cut at this height — ABOVE the 1.55 m
 								   # hanging line, so the galleries keep their
 								   # pictures and the artifacts stay whole in
@@ -1540,6 +1545,7 @@ func _parse_args() -> void:
 			_shot_segments = int(a.substr(14))
 		elif a == "--em-dollhouse":
 			_dollhouse = true
+			_dollhouse_asked = true
 		elif a == "--em-test-collision":
 			_test_collision = true
 		elif a.begins_with("--em-autopilot="):
@@ -2446,7 +2452,7 @@ func _start_at_chapter() -> void:
 			# back a cutaway from above. Same class as "a resume outranks
 			# --em-map": the mode is state, and state that the flag does not
 			# override photographs a different building than the one asked for.
-			if _shot_path != "" and (_dollhouse or _edit_mode):
+			if _shot_path != "" and (_dollhouse or _edit_mode) and not _dollhouse_asked:
 				print("[em-shot] the resumed session was in %s — standing back up to walk, because a shot is taken from the eye" % ("the doll house" if _dollhouse else "edit mode"))
 				_dollhouse = false
 				_edit_mode = false
@@ -7102,6 +7108,7 @@ func _build_segment() -> void:
 	# build it, and the returns fall out of comparing neighbours.
 	var skin_at: Dictionary = {}          # Vector2i(side, row) -> x, absent = open
 	var skin_nat: Dictionary = {}         # the same rows, before any step
+	var skin_glass: Dictionary = {}       # rows the floor does not reach: glazed, not open
 	for y_skin in range(-VESTIBULE_H, tile.size()):
 		var srow: Array = tile[y_skin] if y_skin >= 0 else []
 		# AN ANNEX ROW HAS ITS OWN EDGES. vest_w is maxi(LOBBY_W, pw, w), so the
@@ -7115,7 +7122,17 @@ func _build_segment() -> void:
 			# the tile cell this skin would stand beside
 			var near_x: int = 0 if sx2 < 0 else srow.size() - 1
 			if y_skin >= 0 and near_x >= 0 and near_x < srow.size() and String(srow[near_x]) == "0":
-				continue                    # no floor to hold: leave it open
+				# NO FLOOR TO HOLD: A WINDOW, NOT A HOLE (2026-08-28, Palle, with two
+				# red rectangles: "We need walls or windows on the outside of the
+				# minus z x and on minus x and plus z").
+				#
+				# The older ruling stands and is why these rows exist at all — 08-24,
+				# "the wall round point zero should follow the floor so there is an
+				# open space out in space": a row whose edge cell is a designed void
+				# gets no wall, and the room keeps the openness the hole was cut for.
+				# What it did not say was that the building should therefore be OPEN
+				# THERE. Glass is both: the envelope closes, and you still see out.
+				skin_glass[Vector2i(si, y_skin)] = true
 			# AND THE SKIN STEPS PAST THE POOL. Same ruling as "the skin follows the
 			# floor", one case further out: a basin reaching beyond the tile put water
 			# at x -1 and -2 and the skin went on standing at -1, so the museum walled
@@ -7159,6 +7176,13 @@ func _build_segment() -> void:
 		var st: int = absi(int(skin_at[k]) - int(skin_nat[k]))
 		if st > int(side_step.get(k.x, 0)):
 			side_step[k.x] = st
+	var skin_glazed: int = 0
+	var m_skin_glass := StandardMaterial3D.new()
+	m_skin_glass.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	m_skin_glass.albedo_color = Color(0.72, 0.84, 0.87, 0.14)
+	m_skin_glass.roughness = 0.04
+	m_skin_glass.metallic = 0.15
+	m_skin_glass.cull_mode = BaseMaterial3D.CULL_DISABLED
 	var skin_filled: int = 0
 	var aisle_cells: Array = []
 	for k2_v in skin_at.keys():
@@ -7167,7 +7191,22 @@ func _build_segment() -> void:
 		var outw: int = -1 if nat < 0 else 1
 		var step: int = int(side_step.get(k2.x, 0))
 		var zloc: int = k2.y + VESTIBULE_H
-		_wall_at(seg, solid, wcells, nat + outw * step, zloc, corner_col, m_corner, wr)
+		if skin_glass.has(k2):
+			var gx: float = float(nat + outw * step) + 0.5
+			_box(seg, Vector3(gx, WALL_H / 2.0, float(zloc) + 0.5), Vector3(0.06, WALL_H, 1.0),
+				Color(0.72, 0.84, 0.87, 0.14), m_skin_glass)
+			_add_col(solid, Vector3(gx, WALL_H / 2.0, float(zloc) + 0.5), Vector3(0.06, WALL_H, 1.0))
+			skin_glazed += 1
+		else:
+			_wall_at(seg, solid, wcells, nat + outw * step, zloc, corner_col, m_corner, wr)
+		# NO AISLE ON A GLAZED ROW. The aisle exists to give the pool room where
+		# the floor already reached the rim. A row whose rim cell is a designed
+		# VOID is open on purpose — Palle, 2026-08-24, "so there is an open space
+		# out in space" — and running two metres of floor out to the glass would
+		# bridge exactly the opening the void was cut for. Glass at the line, and
+		# the void still under it.
+		if skin_glass.has(k2):
+			continue
 		for j in range(0, step):
 			var fx: int = nat + outw * j
 			if pool_all.has(Vector2i(fx, zloc)):
@@ -7181,6 +7220,38 @@ func _build_segment() -> void:
 	# THE DRESS PASS DERIVES ITS OWN WALLS, so it has to be told. em_detail puts
 	# the outer skin at x -1 and x w; both moved, and everything it hangs on them
 	# moved with them or should have.
+	# AND THE AISLE HAS TWO ENDS. 2026-08-28, Palle, with two red rectangles on a
+	# plan: "We need walls or windows on the outside of the minus z x and on minus
+	# x and plus z."
+	#
+	# Flooring the notch turned a wall into a room, and a room has four sides. The
+	# west side is the skin, and the two cells of new floor ran straight off the
+	# north and south ends of the building with nothing across them — open to the
+	# sky in exactly the way the pool was before the skin learned to step. The
+	# same fault one move later: I fixed where a wall STANDS and forgot that
+	# moving it makes new edges.
+	#
+	# Derived from the aisle itself rather than from where its ends ought to be: a
+	# row whose skin was skipped (a map that opens a hole at its own rim) leaves a
+	# gap mid-run, and that gap is an end too. Only cells OUTSIDE the room proper
+	# (x < 0) are sealed — the room's own walls own everything from x 0 in.
+	var aisle_set: Dictionary = {}
+	for a0_v in aisle_cells:
+		aisle_set[a0_v] = true
+	var aisle_sealed: Dictionary = {}
+	for a_v in aisle_cells:
+		var a: Vector2i = a_v
+		for d_v in [Vector2i(0, -1), Vector2i(0, 1)]:
+			var nb: Vector2i = a + (d_v as Vector2i)
+			if aisle_set.has(nb) or pool_all.has(nb) or aisle_sealed.has(nb):
+				continue
+			if nb.x >= 0:
+				continue                   # inside the room; its own walls close it
+			_wall_at(seg, solid, wcells, nb.x, nb.y, corner_col, m_corner, wr)
+			aisle_sealed[nb] = true
+	_skin_note = "aisle: %d cell(s) floored, %d wall cell(s) closing its ends, %d row(s) glazed where no floor reaches" % [skin_filled, aisle_sealed.size(), skin_glazed]
+	if not aisle_sealed.is_empty():
+		print("[em-basin] the aisle is closed at both ends: %d wall cell(s)" % aisle_sealed.size())
 	seg.set_meta("em_skin_step", [int(side_step.get(0, 0)), int(side_step.get(1, 0))])
 	seg.set_meta("em_aisle_cells", aisle_cells)
 	if skin_stepped > 0:
@@ -8413,6 +8484,7 @@ var _clear_refused: int = 0
 ## file prints it. Three proof shots went on guessing which of a dozen placers
 ## owned one pale slab standing in the pool; get_stack() answers it in one boot.
 ## Off unless a basin asked for it — get_stack() is not free.
+var _skin_note: String = ""          # what the skin did, for the basin plan file
 var _stand_probe: bool = false
 var _stand_probe_z: int = 0          # rows 0 .. _stand_probe_z are watched
 var _stand_log: Dictionary = {}      # Vector2i -> Dictionary of caller -> count
@@ -20147,6 +20219,8 @@ func _write_basin_plan(spec: Dictionary, tile: Array, w: int,
 	lines.append("%s — %d pool cell(s): %d inside the hall tile, %d in the minus domain." % [
 		String(spec.get("map", spec.get("name", "?"))), pool_in + pool_out, pool_in, pool_out])
 	lines.append("the outer skin stepped past the water on %d row(s)." % skin_stepped)
+	if _skin_note != "":
+		lines.append(_skin_note)
 	lines.append("%d cell(s) ruled clear; %d piece(s) refused on them." % [clear_cells.size(), _clear_refused])
 	if not _stand_log.is_empty():
 		lines.append("")
