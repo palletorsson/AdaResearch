@@ -2693,7 +2693,14 @@ func _dress_lobby(seg: Node3D, solid: StaticBody3D, w: int, zbase: int, wall_col
 	var back_m: float = _L("lobby", "view_behind_m", 12.0)
 	var yard_w: float = float(win_x1 - win_x0 + 1) + 8.0
 	_box(seg, Vector3(cx, -0.1, -back_m * 0.5), Vector3(yard_w, 0.2, back_m + 2.0), Color(0.06, 0.06, 0.07), null)
-	var view: Node3D = _lobby_piece(seg, "view", Vector3(cx, _L("lobby", "view_y", 1.7), 2.0), 0.0)
+	# WHERE THE PAST STANDS (2026-08-26, Palle: "folding_past should be at 8, -4").
+	# Those are ENTER-ROOM cell coordinates, the frame the editor rules in, where z
+	# runs -VESTIBULE_H..-1 — so z -4 is the vestibule's first row and a map cannot
+	# name it at all. Segment-local metres are the cell centre: x + 0.5, and
+	# z + VESTIBULE_H + 0.5. Defaults reproduce where it stood (cx, 2.0).
+	var view_cx: float = _L("lobby", "view_cell_x", cx - 0.5) + 0.5
+	var view_cz: float = _L("lobby", "view_cell_z", 2.0 - VESTIBULE_H - 0.5) + VESTIBULE_H + 0.5
+	var view: Node3D = _lobby_piece(seg, "view", Vector3(view_cx, _L("lobby", "view_y", 1.7), view_cz), 0.0)
 	var wash := OmniLight3D.new()
 	wash.light_color = Color(0.85, 0.9, 1.0)
 	wash.light_energy = _L("lobby", "view_light", 2.0)
