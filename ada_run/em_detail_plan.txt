@@ -1,15 +1,20 @@
 what em_detail put in the enter room and the first hall rows
-void_cells: 16 asked, 4 floors erased, 4 walls erased
+void_cells: 16 asked, 4 floors erased, 2 walls erased
 (segment-local cells; annex is z 0..3, the map begins at 4)
 
+  ( -2, -4)  DROPPED ArrisTrim 0.03 x 0.03 x 1.00 at y4.22 x1, DROPPED ArrisTrim 0.03 x 0.03 x 1.00 at y4.50 x1, DROPPED ArrisSkirting 0.02 x 0.02 x 1.00 at y0.08 x1
+  ( -1, -4)  DROPPED Trim 0.12 x 0.28 x 1.00 at y4.36 x1, DROPPED Trim 0.10 x 4.14 x 0.10 at y2.15 x1, DROPPED Skirting 0.03 x 0.08 x 1.00 at y0.04 x1
   (  0, -4)  DROPPED Trim 0.12 x 0.28 x 1.00 at y4.36 x1, DROPPED Trim 0.10 x 4.14 x 0.10 at y2.15 x1, DROPPED Skirting 0.03 x 0.08 x 1.00 at y0.04 x1, DROPPED ArrisTrim 0.03 x 0.03 x 1.00 at y4.22 x1, DROPPED ArrisTrim 0.03 x 0.03 x 1.00 at y4.50 x1, DROPPED ArrisSkirting 0.02 x 0.02 x 1.00 at y0.08 x1
   ( 11, -4)  Ceiling 24.00 x 0.18 x 0.20 at y4.55 x1, ArrisCeiling 24.00 x 0.02 x 0.02 at y4.46 x1
   ( 16, -4)  DROPPED ArrisTrim 0.03 x 0.03 x 1.00 at y4.22 x1, DROPPED ArrisTrim 0.03 x 0.03 x 1.00 at y4.50 x1, DROPPED ArrisSkirting 0.02 x 0.02 x 1.00 at y0.08 x1
   ( 17, -4)  DROPPED Trim 0.12 x 0.28 x 1.00 at y4.36 x1, DROPPED Trim 0.10 x 4.14 x 0.10 at y2.15 x1, DROPPED Skirting 0.03 x 0.08 x 1.00 at y0.04 x1
+  ( -2, -3)  DROPPED ArrisTrim 0.03 x 0.03 x 1.00 at y4.22 x1, DROPPED ArrisTrim 0.03 x 0.03 x 1.00 at y4.50 x1, DROPPED ArrisSkirting 0.02 x 0.02 x 1.00 at y0.08 x1
+  ( -1, -3)  DROPPED Trim 0.12 x 0.28 x 1.00 at y4.36 x1, DROPPED Skirting 0.03 x 0.08 x 1.00 at y0.04 x1
   (  0, -3)  DROPPED Trim 0.12 x 0.28 x 1.00 at y4.36 x1, DROPPED Skirting 0.03 x 0.08 x 1.00 at y0.04 x1, DROPPED ArrisTrim 0.03 x 0.03 x 1.00 at y4.22 x1, DROPPED ArrisTrim 0.03 x 0.03 x 1.00 at y4.50 x1, DROPPED ArrisSkirting 0.02 x 0.02 x 1.00 at y0.08 x1
   ( 11, -3)  Ceiling 24.00 x 0.26 x 2.45 at y4.77 x1
   ( 16, -3)  DROPPED ArrisTrim 0.03 x 0.03 x 1.00 at y4.22 x1, DROPPED ArrisTrim 0.03 x 0.03 x 1.00 at y4.50 x1, DROPPED ArrisSkirting 0.02 x 0.02 x 1.00 at y0.08 x1
   ( 17, -3)  DROPPED Trim 0.12 x 0.28 x 1.00 at y4.36 x1, DROPPED Skirting 0.03 x 0.08 x 1.00 at y0.04 x1
+  ( -1, -2)  DROPPED Trim 0.10 x 4.14 x 0.10 at y2.15 x1
   (  0, -2)  DROPPED Trim 0.10 x 4.14 x 0.10 at y2.15 x1
   ( 11, -2)  Ceiling 24.00 x 0.18 x 0.20 at y4.55 x1, ArrisCeiling 24.00 x 0.02 x 0.02 at y4.46 x3
   ( 16, -2)  DROPPED ArrisTrim 0.03 x 0.03 x 1.00 at y4.22 x1, DROPPED ArrisTrim 0.03 x 0.03 x 1.00 at y4.50 x1, DROPPED ArrisSkirting 0.02 x 0.02 x 1.00 at y0.08 x1
@@ -21,20 +26,20 @@ void_cells: 16 asked, 4 floors erased, 4 walls erased
   ( 16, -1)  DROPPED ArrisTrim 0.03 x 0.03 x 1.00 at y4.22 x1, DROPPED ArrisTrim 0.03 x 0.03 x 1.00 at y4.50 x1, DROPPED ArrisSkirting 0.02 x 0.02 x 1.00 at y0.08 x1
   ( 17, -1)  DROPPED Trim 0.12 x 0.28 x 1.00 at y4.36 x1, DROPPED Skirting 0.03 x 0.08 x 1.00 at y0.04 x1
   ( 20, -1)  DROPPED Trim 0.08 x 3.20 x 1.00 at y1.60 x1, DROPPED ArrisTrim 0.03 x 3.20 x 0.03 at y1.60 x1
-  (  1,  0)  ArrisTrim 0.03 x 3.20 x 0.03 at y1.60 x1
+  (  1,  0)  DROPPED ArrisTrim 0.03 x 3.20 x 0.03 at y1.60 x1
   ( 10,  0)  ArrisTrim 0.03 x 0.03 x 1.00 at y4.22 x1, ArrisTrim 0.03 x 0.03 x 1.00 at y4.50 x1, ArrisSkirting 0.02 x 0.02 x 1.00 at y0.08 x1
-  ( 11,  0)  Trim 0.12 x 0.28 x 1.00 at y4.36 x1, DROPPED Trim 1.00 x 0.28 x 0.12 at y4.36 x1, DROPPED Trim 0.10 x 4.14 x 0.10 at y2.15 x1, Skirting 0.03 x 0.08 x 1.00 at y0.04 x1, Skirting 1.00 x 0.08 x 0.03 at y0.04 x1, DROPPED Ceiling 24.00 x 0.26 x 2.45 at y4.77 x1, ArrisTrim 20.00 x 0.03 x 0.03 at y3.20 x1
-  ( 12,  0)  DROPPED Trim 1.00 x 0.28 x 0.12 at y4.36 x1, Trim 0.30 x 0.42 x 0.03 at y1.40 x1, Skirting 1.00 x 0.08 x 0.03 at y0.04 x1
+  ( 11,  0)  Trim 0.12 x 0.28 x 1.00 at y4.36 x1, DROPPED Trim 1.00 x 0.28 x 0.12 at y4.36 x1, DROPPED Trim 0.10 x 4.14 x 0.10 at y2.15 x1, Trim 0.30 x 0.42 x 0.03 at y1.40 x1, Skirting 0.03 x 0.08 x 1.00 at y0.04 x1, Skirting 1.00 x 0.08 x 0.03 at y0.04 x1, DROPPED Ceiling 24.00 x 0.26 x 2.45 at y4.77 x1, DROPPED ArrisTrim 20.00 x 0.03 x 0.03 at y3.20 x1
+  ( 12,  0)  DROPPED Trim 1.00 x 0.28 x 0.12 at y4.36 x1, Skirting 1.00 x 0.08 x 0.03 at y0.04 x1
   ( 13,  0)  DROPPED Trim 1.00 x 0.28 x 0.12 at y4.36 x1, Skirting 1.00 x 0.08 x 0.03 at y0.04 x1
   ( 14,  0)  DROPPED Trim 0.10 x 4.14 x 0.10 at y2.15 x1
   ( 17,  0)  DROPPED Trim 0.10 x 4.14 x 0.10 at y2.15 x1
   ( 20,  0)  ArrisTrim 0.03 x 3.20 x 0.03 at y1.60 x1
-  ( -3,  1)  WallFrames 0.07 x 0.58 x 0.08 at y1.58 x1
+  ( -5,  1)  WallFrames 0.07 x 0.86 x 0.08 at y1.58 x1
   ( 11,  1)  Trim 1.00 x 0.28 x 0.12 at y4.36 x1, Trim 0.10 x 4.14 x 0.10 at y2.15 x1, Skirting 1.00 x 0.08 x 0.03 at y0.04 x1, DROPPED Ceiling 24.00 x 0.18 x 0.20 at y4.55 x1, ArrisTrim 1.00 x 0.03 x 0.03 at y4.22 x1, ArrisTrim 1.00 x 0.03 x 0.03 at y4.50 x1, ArrisSkirting 1.00 x 0.02 x 0.02 at y0.08 x1, DROPPED ArrisCeiling 24.00 x 0.02 x 0.02 at y4.46 x3, WallFrames 0.08 x 0.86 x 0.07 at y1.58 x1
   ( 12,  1)  Trim 1.00 x 0.28 x 0.12 at y4.36 x1, Skirting 1.00 x 0.08 x 0.03 at y0.04 x1, ArrisTrim 1.00 x 0.03 x 0.03 at y4.22 x1, ArrisTrim 1.00 x 0.03 x 0.03 at y4.50 x1, ArrisTrim 0.03 x 0.03 x 1.00 at y4.22 x1, ArrisTrim 0.03 x 0.03 x 1.00 at y4.50 x1, ArrisSkirting 1.00 x 0.02 x 0.02 at y0.08 x1, ArrisSkirting 0.02 x 0.02 x 1.00 at y0.08 x1, WallFrames 1.47 x 0.08 x 0.07 at y2.05 x1, WallFrames 1.47 x 0.08 x 0.07 at y1.11 x1, WallFrames 0.08 x 0.86 x 0.07 at y1.58 x1, WallMounts 1.32 x 0.86 x 0.02 at y1.58 x1, WallFields 1.14 x 0.68 x 0.03 at y1.58 x1
   ( 13,  1)  Trim 0.12 x 0.28 x 1.00 at y4.36 x1, Skirting 0.03 x 0.08 x 1.00 at y0.04 x1
-  ( -3,  2)  WallFrames 0.07 x 0.08 x 0.73 at y1.91 x1, WallFrames 0.07 x 0.08 x 0.73 at y1.25 x1, WallFrames 0.07 x 0.58 x 0.08 at y1.58 x1, WallMounts 0.02 x 0.58 x 0.58 at y1.58 x1, WallFields 0.03 x 0.40 x 0.40 at y1.58 x1
-  (  0,  2)  Trim 0.12 x 0.28 x 1.00 at y4.36 x1, DROPPED Trim 0.10 x 4.14 x 0.10 at y2.15 x1, Skirting 0.03 x 0.08 x 1.00 at y0.04 x1, ArrisTrim 0.03 x 0.03 x 1.00 at y4.22 x1, ArrisTrim 0.03 x 0.03 x 1.00 at y4.50 x1, ArrisSkirting 0.02 x 0.02 x 1.00 at y0.08 x1
+  ( -5,  2)  WallFrames 0.07 x 0.08 x 1.47 at y2.05 x1, WallFrames 0.07 x 0.08 x 1.47 at y1.11 x1, WallFrames 0.07 x 0.86 x 0.08 at y1.58 x1, WallMounts 0.02 x 0.86 x 1.32 at y1.58 x1, WallFields 0.03 x 0.68 x 1.14 at y1.58 x1
+  ( -2,  2)  Trim 0.12 x 0.28 x 1.00 at y4.36 x1, Skirting 0.03 x 0.08 x 1.00 at y0.04 x1, ArrisTrim 0.03 x 0.03 x 1.00 at y4.22 x1, ArrisTrim 0.03 x 0.03 x 1.00 at y4.50 x1, ArrisSkirting 0.02 x 0.02 x 1.00 at y0.08 x1
   ( 11,  2)  DROPPED Ceiling 24.00 x 0.18 x 0.20 at y4.55 x1, DROPPED ArrisCeiling 24.00 x 0.02 x 0.02 at y4.46 x1
   ( 12,  2)  ArrisTrim 0.03 x 0.03 x 1.00 at y4.22 x1, ArrisTrim 0.03 x 0.03 x 1.00 at y4.50 x1, ArrisSkirting 0.02 x 0.02 x 1.00 at y0.08 x1
   ( 13,  2)  Trim 0.12 x 0.28 x 1.00 at y4.36 x1, Skirting 0.03 x 0.08 x 1.00 at y0.04 x1

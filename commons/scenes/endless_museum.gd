@@ -7160,6 +7160,7 @@ func _build_segment() -> void:
 		if st > int(side_step.get(k.x, 0)):
 			side_step[k.x] = st
 	var skin_filled: int = 0
+	var aisle_cells: Array = []
 	for k2_v in skin_at.keys():
 		var k2: Vector2i = k2_v
 		var nat: int = int(skin_nat[k2])
@@ -7176,6 +7177,12 @@ func _build_segment() -> void:
 			_add_col(solid, Vector3(fx + 0.5, -0.1, float(zloc) + 0.5), Vector3(1, 0.2, 1))
 			_walk_cells[Vector2i(fx, zbase + zloc)] = true
 			skin_filled += 1
+			aisle_cells.append(Vector2i(fx, zloc))
+	# THE DRESS PASS DERIVES ITS OWN WALLS, so it has to be told. em_detail puts
+	# the outer skin at x -1 and x w; both moved, and everything it hangs on them
+	# moved with them or should have.
+	seg.set_meta("em_skin_step", [int(side_step.get(0, 0)), int(side_step.get(1, 0))])
+	seg.set_meta("em_aisle_cells", aisle_cells)
 	if skin_stepped > 0:
 		print("[em-basin] the pool pushed a side out %s; every row on it moved too, and %d cell(s) of aisle were floored — no jog, no return" % [
 			str(side_step), skin_filled])
@@ -7552,6 +7559,8 @@ func _build_segment() -> void:
 						# _void_rects. Inset a hair so a rect does not claim its neighbour by
 						# touching: Rect2.intersects counts a shared edge.
 						"void_rects": _dress_keep_out(seg),
+						"skin_step": seg.get_meta("em_skin_step", [0, 0]),
+						"extra_floors": seg.get_meta("em_aisle_cells", []),
 						"wall_features_max": int(deal.get("wall_features_max", -1)),
 						"fill_walls": bool(deal.get("fill_walls", true)),
 						"hang_min_stretch": int(deal.get("hang_min_stretch", 2)),
@@ -20227,7 +20236,11 @@ func _dress_keep_out(segn: Node3D) -> Array:
 		var c: Vector2i = c_v
 		# inset a hair: Rect2.intersects counts a shared edge, so a flush rect
 		# would claim the dry cell next door as well
-		out.append(Rect2(float(c.x) + 0.02, float(c.y) + 0.02, 0.96, 0.96))
+		# 1 mm, not 2 cm. Rect2.intersects excludes a shared edge, so a hair is
+		# enough to stop a rect claiming its dry neighbour — while 2 cm left a gap
+		# wide enough for a 3 cm door bead standing exactly on the cell line to
+		# slip through it and go on standing in the water.
+		out.append(Rect2(float(c.x) + 0.001, float(c.y) + 0.001, 0.998, 0.998))
 	var vw: float = float(segn.get_meta("em_vest_w", 17))
 	out.append(Rect2(-2.0, 0.02, vw + 4.0, float(VESTIBULE_H) - 0.04))
 	return out

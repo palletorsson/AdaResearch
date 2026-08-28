@@ -367,7 +367,13 @@ static func dress_segment(seg: Node3D, tile: Array, w: int, h: int, mats, prev_w
 	var walls: Dictionary = {}
 	var floors: Dictionary = {}
 	_map_vestibule(walls, floors, w, prev_w)
-	_map_tile(walls, floors, tile, w)
+	var skin_step: Array = opts.get("skin_step", []) if opts.get("skin_step") is Array else []
+	var west_step: int = int(skin_step[0]) if skin_step.size() > 0 else 0
+	var east_step: int = int(skin_step[1]) if skin_step.size() > 1 else 0
+	_map_tile(walls, floors, tile, w, west_step, east_step)
+	# the aisle the step left: real floor, and it wants its own skirting
+	for f_v in (opts.get("extra_floors", []) if opts.get("extra_floors") is Array else []):
+		floors[f_v] = true
 	# WHAT THE SCENE ACTUALLY LEFT OUT (2026-08-28, Palle: "you must still remove
 	# the floor lists and remaining wall!"). The two maps above are this file's
 	# OWN idea of the room, derived from the tile and a hardcoded lobby — and it
@@ -621,14 +627,21 @@ static func _map_vestibule(walls: Dictionary, floors: Dictionary, w: int, prev_w
 ## The template rows, plus the outer skin walls the scene stamps at x = -1 and
 ## x = w. Only "1"/"1s" carry a floor box — podium, plinth and void cells do not,
 ## so they must not receive skirting or seams.
-static func _map_tile(walls: Dictionary, floors: Dictionary, tile: Array, w: int) -> void:
+static func _map_tile(walls: Dictionary, floors: Dictionary, tile: Array, w: int,
+		west_step: int = 0, east_step: int = 0) -> void:
 	for y in range(tile.size()):
 		if not (tile[y] is Array):
 			continue
 		var row: Array = tile[y]
 		var z: int = y + VESTIBULE_H
-		walls[Vector2i(-1, z)] = true
-		walls[Vector2i(w, z)] = true
+		# WHERE THE SKIN ACTUALLY IS. -1 and w are where it USED to be. A pool that
+		# reaches past the tile pushes the whole side out (endless_museum runs one
+		# straight line per side and floors the cells the step opens), and this file
+		# went on dressing the old line: cornice, skirting and beads two cells away
+		# from any wall, hanging in the air over the origin. Palle photographed it
+		# three times before it had a name.
+		walls[Vector2i(-1 - west_step, z)] = true
+		walls[Vector2i(w + east_step, z)] = true
 		for x in range(row.size()):
 			var c: String = str(row[x])
 			if c == "4":
