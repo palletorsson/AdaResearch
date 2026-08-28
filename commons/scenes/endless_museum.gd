@@ -2629,6 +2629,13 @@ const LOBBY_PIECES := {
 	"point_zero": "res://commons/primitives/origin/origin.tscn",
 }
 func _lobby_piece(seg: Node3D, key: String, pos: Vector3, yaw_deg: float, config: Dictionary = {}) -> Node3D:
+	# EVERY PIECE IS SWITCHABLE (2026-08-26, Palle: "the only thing before 0,0,0 is
+	# the window out to the maps and the folding past animation artifact"). One gate
+	# at the one funnel, so no call site had to be restructured and none can be
+	# forgotten. Default 1: a museum whose layout says nothing keeps every piece.
+	if _L("lobby", "with_" + key, 1.0) <= 0.5:
+		return null
+	_lobby_built.append(key)
 	var path: String = String(LOBBY_PIECES.get(key, ""))
 	if path == "" or not ResourceLoader.exists(path):
 		push_warning("[em-lobby] no scene for %s (%s)" % [key, path])
@@ -2669,6 +2676,7 @@ func _lobby_piece(seg: Node3D, key: String, pos: Vector3, yaw_deg: float, config
 
 func _dress_lobby(seg: Node3D, solid: StaticBody3D, w: int, zbase: int, wall_col: Color,
 		m_wall: Material, win_x0: int, win_x1: int) -> void:
+	_lobby_built.clear()
 	var cx: float = (win_x0 + win_x1 + 1) * 0.5
 	var sill_h: float = _L("lobby", "window_sill_m", 0.9)
 	var head_y: float = _L("lobby", "window_head_m", 2.5)
@@ -2710,8 +2718,10 @@ func _dress_lobby(seg: Node3D, solid: StaticBody3D, w: int, zbase: int, wall_col
 		solid.add_child(cs)
 	_lobby_piece(seg, "pallet", Vector3(ex - _L("lobby", "pallet_off_m", 0.9), 0.0, ez), _L("lobby", "pallet_yaw", 20.0),
 		{"box_arrangement": "pyramid"})
-	# the pallet is an obstacle: take its cells out of the walk map
-	for dz in [-1, 0]:
+	# the pallet is an obstacle: take its cells out of the walk map — but only when
+	# there IS a pallet, or the foyer keeps a hole in its walk map for a prop that
+	# was switched off.
+	for dz in ([-1, 0] if _L("lobby", "with_pallet", 1.0) > 0.5 else []):
 		var k := Vector2i(LOBBY_W - 2, zbase + int(floor(ez)) + dz)
 		if _walk_cells.has(k):
 			_walk_cells.erase(k)
@@ -2863,8 +2873,19 @@ func _dress_lobby(seg: Node3D, solid: StaticBody3D, w: int, zbase: int, wall_col
 		it.rotation_degrees.y = 0.0
 		it.name = "FoyerIntro"
 		seg.add_child(it)
-	print("[em-lobby] window %s (x %d..%d) · view %s · counter · extinguisher · lift + pallet" % [
-		"ok" if win != null else "MISSING", win_x0, win_x1, "ok" if view != null else "MISSING"])
+	# WHAT WAS BUILT, not what the code once built. This line named counter,
+	# extinguisher, lift and pallet unconditionally, so it went on naming them after
+	# they were switched off — a summary that cannot be wrong tells you nothing, and
+	# this museum has been bitten by one of those before.
+	var off: Array = []
+	for k in LOBBY_PIECES.keys():
+		if not _lobby_built.has(k):
+			off.append(String(k))
+	off.sort()
+	print("[em-lobby] window %s (x %d..%d) · built: %s%s" % [
+		"ok" if win != null else "MISSING", win_x0, win_x1,
+		", ".join(PackedStringArray(_lobby_built)) if not _lobby_built.is_empty() else "nothing",
+		("  ·  off: " + ", ".join(PackedStringArray(off))) if not off.is_empty() else ""])
 
 ## The museum's name on the threshold door's header — 2D text in 3D.
 func _sign_door(door: Node3D) -> void:
@@ -7782,6 +7803,9 @@ func _report_path(p: String) -> String:
 	return p.get_base_dir() + "/_trial_" + p.get_file()
 ## Enter-room cells ruled "1": nothing may STAND on them. Read by _box and
 ## _add_col, refilled per segment. Empty for every museum that never ruled one.
+## Which LOBBY_PIECES this dress actually made, so the summary line can be true.
+var _lobby_built: Array = []
+
 var _clear_cells: Dictionary = {}
 ## How many pieces the clearing actually refused this segment. A filter that says
 ## nothing cannot be shown to work: the probe could not see the refusal because
