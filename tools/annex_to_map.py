@@ -107,7 +107,12 @@ def main() -> int:
     # write the block into map_info.museum, surgically: the map is compact-rows
     # and a json.dumps round trip reflows it (130 lines -> 1870, measured today)
     lit = ",\n".join('\t\t\t\t"%s"' % "".join(r) for r in rows)
-    block = '\n\t\t\t"annex": [\n%s\n\t\t\t],' % lit
+    # AN EMPTY BLOCK TAKES NO COMMA. `"museum": {}` is common — Point_Lines has
+    # one — and appending `"annex": [...],` straight after the brace makes a
+    # trailing comma and a map that will not parse. Caught before any write,
+    # because this tool re-parses what it built, but better not to write it.
+    tail = "," if re.search(r'"museum"\s*:\s*\{\s*[^}\s]', body) else "\n\t\t"
+    block = '\n\t\t\t"annex": [\n%s\n\t\t\t]%s' % (lit, tail)
     m = re.search(r'("museum"\s*:\s*\{)', body)
     if not m:
         print("no map_info.museum block to write into", file=sys.stderr)
