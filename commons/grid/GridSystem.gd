@@ -513,6 +513,10 @@ func _generate_grid():
 	# Update PlayerBoundsCheck if found
 	_update_player_bounds(dimensions)
 
+## Past this, a PlayerBoundsCheck limit describes a CORRIDOR, not a map. The
+## deepest single map in the corpus is 64 cells; the museum sets 1e12.
+const CORRIDOR_BOUND_M: float = 1000.0
+
 func _update_player_bounds(dimensions: Vector3i):
 	var bounds_check = get_tree().current_scene.find_child("PlayerBoundsCheck", true, false)
 	if bounds_check:
@@ -526,7 +530,29 @@ func _update_player_bounds(dimensions: Vector3i):
 		
 		# If height is small (flat map), give minimum vertical headroom
 		if bounds_y < 5.0: bounds_y = 5.0
-		
+
+		# A CORRIDOR-SCALE BOUND IS NOT OURS TO SHRINK.
+		#
+		# This runs on EVERY map load, and it used to overwrite whatever was
+		# there. The endless museum reshapes the same node once at boot — x ±20,
+		# y ±10, z 1e12, because the corridor is 4,270 m long and one hall is
+		# not the world. The first hall streamed after that put the limit back
+		# to this map's own depth, about 22 m, so a VR player past z 22 was
+		# "out of bounds" and got reset. Reported from the walk between
+		# primitives and transformation, which is z 230: the chapter could not
+		# be left at all.
+		#
+		# Gated on the VALUE, so it needs no cooperation from the museum and no
+		# new field anywhere: a grid map's own bound is never more than a few
+		# hundred metres, so a z limit past CORRIDOR_BOUND_M can only have been
+		# set deliberately by something that knows better than this function.
+		# A map that has not met such a bound is untouched, which is every map
+		# in the grid game.
+		var prior: Vector3 = bounds_check.box_bounds
+		if prior.z > CORRIDOR_BOUND_M:
+			print("GridSystem: PlayerBoundsCheck left alone — z %.0f is corridor-scale, not this map's %.0f" % [prior.z, bounds_z])
+			return
+
 		bounds_check.box_bounds = Vector3(bounds_x, bounds_y, bounds_z)
 		print("GridSystem: Updated PlayerBoundsCheck limits to %s" % bounds_check.box_bounds)
 	else:
