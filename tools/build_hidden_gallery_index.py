@@ -14,10 +14,12 @@ WHY IT IS GENERATED. The hardcoded list is exactly how 87 pages got lost - a rou
 added, nobody remembers to touch the index, and the page is invisible from that day on.
 A generated index cannot drift that way. Re-run it after adding a gallery route.
 
-TWO TIERS, AND THE DIFFERENCE IS DELIBERATE. A gallery in this file has no blurb. The
-written-up galleries on /dna-galleries have one because a person looked at them and wrote
-it. Inventing prose for the rest would erase the only honest distinction on that page, so
-they get a NAME and a SEQUENCE and nothing else.
+TWO TIERS, AND THE DIFFERENCE IS DELIBERATE. This file first shipped with names and no
+blurbs, on the grounds that inventing prose would put an unread gallery on equal footing
+with one somebody had looked at. The 21 cross-cutting ones have blurbs now because they
+were then READ - manifest description, entry count, sample entries and page source, one at
+a time - so the prose is reporting rather than invention. The 50 placed by slug cue still
+have none, and that is the same rule still running: a blurb means somebody looked.
 
 NAMES ARE AUTHORED, NOT DERIVED, and the first pass proves why. Slug cues placed 50 of
 137 and left 37 with nothing - and the 37 were not obscure, they were badly named:
@@ -80,27 +82,48 @@ PLACED = {
                                      "Concept Architecture — four engulfing structures"),
 
     # --- cross-cutting: the subject is the collection or the rig, not a rung ----------
-    "sequence-cards-gallery": ("", "Sequence Picker Cards — 22 chamber icons"),
-    "cabinet-gallery": ("", "The Cabinet Family — one grammar, sixteen bodies"),
-    "crates-boxes-gallery": ("", "Crates & Boxes"),
-    "props-dna-gallery": ("", "Lab & Facility Props DNA"),
-    "props-shape-gallery": ("", "Lab Props Shape Sweep"),
-    "installation-stands-gallery": ("", "Installation Stands"),
-    "interactable-demos-gallery": ("", "Interactable Demos"),
-    "interactable-layouts-gallery": ("", "Interactable Layouts"),
-    "interactable-scenes-gallery": ("", "Interactable Scenes"),
-    "grid-editor-gallery": ("", "Grid Layouts"),
-    "rack-gallery": ("", "Rack Configurations"),
-    "interface-presets-gallery": ("", "Principal Interface Setups — the 17 canonical types"),
-    "template-gallery": ("", "Templates"),
-    "principal-gallery": ("", "Principal Artifacts"),
-    "dna-best": ("", "DNA Best Of — three expressions per artifact"),
-    "dna-triptych": ("", "One Knob, Three Meanings"),
-    "gallery-dna": ("", "Gallery DNA — evolved empty architecture"),
-    "artifact-dna": ("", "Artifact DNA"),
-    "map-dna": ("", "Map DNA"),
-    "synthesis-gallery": ("", "The Synthesis Passes — one frame per wave"),
-    "collations-dna": ("", "Collations — laser_measure at hand scale"),
+    "sequence-cards-gallery": ("", "Sequence Picker Cards — 22 chamber icons",
+     "Each of the 22 spine sequences as a picker card - number, name, qfep_role, phase colour, map count, and a procedural Portal-2-style chamber glyph drawn live in GDScript. The same SequenceGlyph Control runs the main-menu picker, so this is not a mock-up of the menu; it is the menu's own catalogue, published side by side."),
+    "cabinet-gallery": ("", "The Cabinet Family — one grammar, sixteen bodies",
+     "Sixteen artifacts that used to scatter their readouts, titles and keypads into the air, rebuilt as single appliances in one shared grammar: an interface is part of a body, and the body's shape follows what it does. Thirteen body types across two dialects - vertical, which you face, and horizontal, which you look down at. The first nine carry three views each, the seven hero-wave members a single front. All compose HangarKit."),
+    "crates-boxes-gallery": ("", "Crates & Boxes",
+     "Scored DNA variants of crate.gd and cardboard_box.gd, swept across five families: raw, weathered and dark wooden crates, white-painted, and cardboard. The humblest artifacts in the corpus and the ones most likely to be placed by the hundred, which is exactly why they were worth researching instead of guessing."),
+    "props-dna-gallery": ("", "Lab & Facility Props DNA",
+     "The lab_room substrate ships empty; the chamber needs its furniture. Eight prop artifacts - exit_sign, sliding_door, whiteboard, large_table, large_window, info_screen, ceiling_vent, cable_tray - in three DNA configurations each, same .gd and same .tscn every time. Every row exercises the prop's declared critical_parameter, so sliding_door runs shut / mid-gesture / fully open rather than three colours of the same door."),
+    "props-shape-gallery": ("", "Lab Props Shape Sweep",
+     "Sister to the props DNA gallery, sweeping the other axis. Where that one varies colour, count and state, this varies DIMENSION - width, length, height, slat_count, cable_count - eight props at five sizes each. Camera distance scales with each cell's AABB, so a 5 m table really does read bigger than a 1 m one instead of being normalised back into the same picture."),
+    "installation-stands-gallery": ("", "Installation Stands",
+     "Large-scale modular infrastructure for installing technology. The grammar starts from a 1 m cube, a 2 m frame and a 0.5 m shelf, then composes screens, speakers, light bars, equipment boxes and telescopic masts. Auto-researched rather than authored: the manifest is generated from whatever the sweep produced."),
+    "interactable-demos-gallery": ("", "Interactable Demos",
+     "Four composite demo scenes - every control in one view, then singles, compounds and passives apart. This is where the procedural module types get photographed together: touch_grid, rotary_selector, needle_meter, patch bay."),
+    "interactable-layouts-gallery": ("", "Interactable Layouts",
+     "JSON-configured composite boards built from the InteractableDemo vocabulary - scene controls, procedural buttons, passive monitors, compound slider packs, prototype modules. The layout layer above the atoms: same parts, arranged."),
+    "interactable-scenes-gallery": ("", "Interactable Scenes",
+     "The atoms themselves - seventeen .tscn files from commons/interactables: a dial, three joysticks, three levers, two push buttons, seven sliders and a wheel, each shot with perfect_shot in scene mode. The DNA here is the scene file rather than a parameter, which is why the count is exactly the number of files."),
+    "grid-editor-gallery": ("", "Grid Layouts",
+     "VR glass-rack, audio-rack and grid-editor layouts, shared by three builder surfaces. The axis is subset stride x alignment x clearance x element placement. Pre-rendered in Godot rather than in the browser, because the rack is the thing being designed and a Three.js approximation would be designing something else."),
+    "rack-gallery": ("", "Rack Configurations",
+     "Every eurorack preset in the project, exported from Godot and re-rendered in Three.js so the cards are interactive - click one and turn its controls. The only gallery here you can operate rather than only look at."),
+    "interface-presets-gallery": ("", "Principal Interface Setups — the 17 canonical types",
+     "Over a thousand interface artifacts are being unified onto one board/console system, and these are the principal configs: workbench, machine, console and fourteen more, each a single source of truth in commons rather than a per-artifact improvisation. The reference sheet the unification is being carried out against."),
+    "template-gallery": ("", "Templates",
+     "Every placement contract in the project, shown as what it does to a 14x10 zone - heights shaded, green rings where an artifact may stand. Not pictures of maps but pictures of the RULES maps are built from. Click a card to paint with it in /template-maps."),
+    "principal-gallery": ("", "Principal Artifacts",
+     "Every artifact family - shared-scene principals and interface-kin - as its own DNA gallery, up to ten examples each with verdicts enabled. An index of the FAMILIES rather than of the galleries, and the surface where you find out that one scene answers to four registry names."),
+    "dna-best": ("", "DNA Best Of — three expressions per artifact",
+     "The three best expressions of every DNA-researched artifact in the project, drawn from every sweep gallery at once. Ranking is Palle's star evals first, curated picks second, authored order last - so the sheet records what was actually judged good rather than what happened to render. Rebuilt by tools/build_dna_best.py."),
+    "dna-triptych": ("", "One Knob, Three Meanings",
+     "One knob, three meanings. Each machine at three values of a single parameter, side by side, so the axis reads as a sentence instead of a slider. The most compressed argument the DNA work makes."),
+    "gallery-dna": ("", "Gallery DNA — evolved empty architecture",
+     "Twelve champion rooms evolved from three taste-profiles - empty architecture bred rather than authored - with the learning curve kept alongside, so you can see which taste converged and which wandered."),
+    "artifact-dna": ("", "Artifact DNA",
+     "Stage 2 of the DNA programme: variation, measured by REACH - how many map placements a family actually has, not how many artifacts exist. The dashboard that decides where promotion effort goes, and the reason the corpus's largest families are not its most promoted ones."),
+    "map-dna": ("", "Map DNA",
+     "One DNA gallery per map: every artifact in a map's cast promoted to an entry carrying its current genome - registry plus dressing room plus map token. Sorted weakest-coverage first, so the table IS the auto-research queue rather than a report about one."),
+    "synthesis-gallery": ("", "The Synthesis Passes — one frame per wave",
+     "One frame from each synthesis wave - boundary_tank, removal_room, rack_room and the rest. An artifact in this corpus is a family rather than one object: it declares axes, and each value of an axis is a photograph from a fixed camera. This is the shortest route to seeing what that has produced."),
+    "collations-dna": ("", "Collations — laser_measure at hand scale",
+     "A collation is multiples of one object, each with its own config. laser_measure rebuilt at hand scale with the LCD housing saddled OVER the barrel instead of floating tangent to it, and draw_dot crossed ink x retention so a collation of them can each write in a different colour, addressable from a map token (#ink:cyan). Five inks; magenta is byte-for-byte the legacy default."),
 }
 
 # Slug cues for everything not hand-named. Specific first; the slug decides and prose
@@ -189,16 +212,19 @@ def main() -> int:
             except Exception:
                 pass
         if slug in PLACED:
-            seq, name = PLACED[slug]
+            spec = PLACED[slug]
+            seq, name = spec[0], spec[1]
+            blurb = spec[2] if len(spec) > 2 else ""
             how = "named"
         else:
             seq, cue = cue_for(slug)
             name = titleise(slug)
+            blurb = ""
             how = ("cue:" + cue) if cue else "unnamed"
             if not seq:
                 unnamed.append(slug)
         rows.append({"slug": slug, "name": name, "sequence": seq, "how": how,
-                     "tiles": tiles, "description": desc})
+                     "blurb": blurb, "tiles": tiles, "description": desc})
 
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     json.dump({"generated_by": "tools/build_hidden_gallery_index.py",
@@ -206,12 +232,14 @@ def main() -> int:
                "count": len(rows), "galleries": rows},
               open(OUT, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 
+    blurbed = sum(1 for r in rows if r.get("blurb"))
     named = sum(1 for r in rows if r["how"] == "named")
     cued = sum(1 for r in rows if r["how"].startswith("cue:"))
     cross = sum(1 for r in rows if r["how"] == "named" and not r["sequence"])
     print("hidden gallery routes : %d" % len(rows))
     print("  hand-named          : %d  (%d of them cross-cutting)" % (named, cross))
     print("  placed by slug cue  : %d" % cued)
+    print("  with a blurb        : %d" % blurbed)
     print("  still unnamed       : %d" % len(unnamed))
     for s in unnamed:
         print("      " + s)
