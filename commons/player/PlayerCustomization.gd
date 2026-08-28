@@ -85,6 +85,10 @@ func _initialize():
 	# unlock_feature except one hand-placed walk-into trigger. The wardrobe is
 	# the door — it ties the costume to the walk instead of to a doorway.
 	if costume_on_progress:
+		# THE TWO ARMS YOU DRIVE, AND THE FOUR THAT FOLLOW. body_arms is the IK arm
+		# rig that has been sitting in commons/body/ik_arms/ unreached; the costume
+		# is the garment, the trophies and the extra limbs.
+		unlock_and_activate("body_arms")
 		unlock_and_activate("costume")
 
 func _find_xr_origin() -> XROrigin3D:

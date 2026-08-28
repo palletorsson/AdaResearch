@@ -295,6 +295,46 @@ func _run() -> void:
 		if "lsystems" in worn:
 			_fail("it wore a sequence that was never finished")
 
+	# ── H. the whole door, as the game opens it ─────────────────────────────
+	# PlayerCustomization is what actually runs in base.tscn, so the last thing
+	# to test is the real path: mount it and let it activate what it activates.
+	_say("")
+	_say("AS THE GAME ACTUALLY OPENS IT")
+	var origin2 := XROrigin3D.new()
+	origin2.name = "XROrigin3D2"
+	st.add_child(origin2)
+	var cam2 := XRCamera3D.new()
+	cam2.name = "XRCamera3D"
+	cam2.position = Vector3(0, 1.65, 0)
+	origin2.add_child(cam2)
+	for hn in ["LeftHand", "RightHand"]:
+		var hh := Node3D.new()
+		hh.name = hn
+		hh.position = Vector3(-0.25 if hn == "LeftHand" else 0.25, 1.25, -0.28)
+		origin2.add_child(hh)
+	var pc: Node = (load("res://commons/player/PlayerCustomization.gd") as GDScript).new()
+	pc.name = "PlayerCustomization"
+	origin2.add_child(pc)
+	await create_timer(0.8).timeout
+	_say("  unlocked: %s" % str(pc.call("get_unlocked_features")))
+	for feat in ["costume", "body_arms"]:
+		var live: bool = bool(pc.call("is_active", feat))
+		var node = pc.get("_active_features").get(feat)
+		# WHERE THE GEOMETRY ACTUALLY IS. The wardrobe is a bare Node that hangs the
+		# costume on the ORIGIN, so counting the wardrobe's own children measures
+		# nothing and reports zero — the third time this session a probe has looked
+		# at the wrong node and called a working thing broken.
+		var built: Node = node as Node
+		if feat == "costume" and built != null:
+			built = built.get("costume") as Node
+		var kids: int = built.get_child_count() if built != null else -1
+		_say("  %-10s active %-5s  built %s"
+			% [feat, str(live), ("%d child node(s)" % kids) if kids >= 0 else "nothing"])
+		if not live:
+			_fail("PlayerCustomization did not activate '%s'" % feat)
+		elif kids <= 0:
+			_fail("'%s' activated but built nothing" % feat)
+
 	_say("")
 	for f in fails: _say("FAIL %s" % f)
 	_say("VERDICT: %s" % ("the limbs are solved, the garment only grows, and the walk reaches the body"
