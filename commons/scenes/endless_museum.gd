@@ -6363,6 +6363,23 @@ func _build_segment() -> void:
 			# to one — the only lever was a hand ruling keyed by dress index, which
 			# moves whenever the dressing does. map_info.museum.props_deny is a list
 			# of tokens this hall will not host.
+			# THE ANNEX, IN THE MAP (2026-08-28, Palle: "Can we consolidate the
+			# different json files so we can keep one truth, or at least not have
+			# different truths we can disagree on?").
+			#
+			# The four rows in front of a hall lived ONLY in em_overrides.json,
+			# keyed by pearl, in a value vocabulary of their own where "4" is a
+			# wall and the map's own "2" does nothing. So a hall's space was two
+			# files that could disagree, in two alphabets that already had.
+			# map_info.museum.annex is those rows IN THE MAP, in the MAP's
+			# vocabulary: "1" floor, "2".."5"/"w" wall, "0" untouched. One file
+			# holds a hall's whole space now. Hand rulings still apply on top —
+			# they are read after this — so the in-museum T key keeps working and
+			# the precedence is stated rather than accidental.
+			if mm.get("annex") is Array:
+				peek["annex"] = mm["annex"]
+			elif peek.has("annex"):
+				peek.erase("annex")
 			if mm.get("props_deny") is Array:
 				peek["props_deny"] = mm["props_deny"]
 			elif peek.has("props_deny"):
@@ -6460,6 +6477,35 @@ func _build_segment() -> void:
 	# -VESTIBULE_H..-1) — Palle: "there is a space before the hall … it is
 	# not defined or I can not move stuff or door there".
 	var vest_rules: Dictionary = {}
+	# THE MAP SPEAKS FIRST. Its annex rows seed the enter room; a hand ruling
+	# below overwrites the same key, so the hand still outranks the file — the
+	# same order every other surface in this museum uses.
+	#
+	# ONE VOCABULARY. The vestibule builds a wall only for "4" (:6692) and
+	# clears only for "1" (:6660), while a map writes "2".."5" for wall
+	# heights. That mismatch cost a painting session: nine cells ruled "2"
+	# saved, drew nothing, and said nothing. Anything wall-shaped is
+	# translated here, so the map's own alphabet works in its own annex.
+	var annex_rows: Array = peek.get("annex", []) if peek.get("annex") is Array else []
+	for az in range(mini(annex_rows.size(), VESTIBULE_H)):
+		var arow: Variant = annex_rows[az]
+		var acells: Array = []
+		if arow is Array:
+			acells = arow
+		elif arow is String:
+			for ch in String(arow):
+				acells.append(ch)
+		for ax in range(acells.size()):
+			var av := String(acells[ax]).strip_edges()
+			if av == "" or av == "0":
+				continue                      # "0" = say nothing about this cell
+			if av == "1" or av == "1s":
+				vest_rules[Vector2i(ax, az)] = "1"
+			else:
+				vest_rules[Vector2i(ax, az)] = "4"   # any wall the map can spell
+	if not annex_rows.is_empty():
+		print("[em-annex] %d row(s) from the map -> %d cell(s) in the enter room" % [
+			mini(annex_rows.size(), VESTIBULE_H), vest_rules.size()])
 	var hall_is_authored := String(peek.get("authored", "")) == "map"
 	for cv_v in _edit_overrides:
 		var cvd: Dictionary = cv_v
@@ -6485,7 +6531,9 @@ func _build_segment() -> void:
 			continue
 		if ccz < 0:
 			if ccz >= -VESTIBULE_H:
-				vest_rules[Vector2i(ccx, ccz + VESTIBULE_H)] = String(cvd.get("value", "1"))
+				var rv := String(cvd.get("value", "1"))
+				# the same translation the map gets, so a ruling written "2" builds
+				vest_rules[Vector2i(ccx, ccz + VESTIBULE_H)] = rv if (rv == "1" or rv == "4") else ("1" if rv == "1s" else "4")
 			continue
 		if ccz < tile.size() and ccx >= 0 and ccx < (tile[ccz] as Array).size():
 			(tile[ccz] as Array)[ccx] = String(cvd.get("value", "1"))

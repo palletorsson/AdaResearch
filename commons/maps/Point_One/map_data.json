@@ -95,10 +95,16 @@
 			"source": "editor"
 		},
 		"museum": {
+			"annex": [
+				"2222211111122220210000",
+				"2220010100000020222220",
+				"2220000000000020222220",
+				"2220111110122220222220"
+			],
 			"props_deny": ["wall_clock", "electrical_panel", "floor_grate"],
 			"basin": {
-				"rects": [[0, 0, 5, 5]],
-				"depth": 3.0,
+				"rects": [[0, 0, 3, 3]],
+				"depth": 2.0,
 				"glass": true
 			},
 			"gate": false
