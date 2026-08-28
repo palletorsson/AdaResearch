@@ -1,6 +1,6 @@
 {
 	"_readme": "The BAKE: every placement decision the museum makes from a measurement, decided ONCE by a headless --em-bake run and replayed by every later run, desktop or headset. Per chapter|pearl: placed = token, tile cell, the exact cells sealed (x, z-from-segment-base); refused = token, cell, why. Regenerate after editing the plan: python tools/em_bake.py",
-	"at": "2026-08-28 14:35:24",
+	"at": "2026-08-28 15:28:34",
 	"plan": "res://ada_run/em_plan.json",
 	"plan_at": "2026-08-21T14:00:55",
 	"schema": "adaresearch.em_bake.v1",
@@ -44380,24 +44380,7 @@
 						6,
 						10
 					],
-					"seal": [
-						[
-							6,
-							11
-						],
-						[
-							7,
-							11
-						],
-						[
-							8,
-							11
-						],
-						[
-							9,
-							11
-						]
-					],
+					"seal": [],
 					"token": "line_builder_3d"
 				},
 				{
@@ -44432,20 +44415,20 @@
 				},
 				{
 					"cell": [
-						8,
+						9,
 						12
 					],
 					"seal": [
-						[
-							6,
-							12
-						],
 						[
 							7,
 							12
 						],
 						[
 							8,
+							12
+						],
+						[
+							9,
 							12
 						]
 					],
@@ -44699,14 +44682,6 @@
 				}
 			],
 			"refused": [
-				{
-					"tile_cell": [
-						9,
-						12
-					],
-					"token": "laser_measure",
-					"why": "sealing would sever the walk route"
-				},
 				{
 					"tile_cell": [
 						2,
@@ -45187,17 +45162,17 @@
 				},
 				{
 					"cell": [
-						9,
-						12
+						8,
+						13
 					],
 					"seal": [
 						[
-							10,
-							12
+							8,
+							14
 						],
 						[
-							10,
-							13
+							9,
+							14
 						]
 					],
 					"token": "origin"
@@ -45311,7 +45286,7 @@
 				{
 					"cell": [
 						7,
-						14
+						15
 					],
 					"seal": [
 						[
@@ -45319,16 +45294,32 @@
 							14
 						],
 						[
-							8,
-							14
-						],
-						[
 							7,
 							15
 						],
 						[
 							8,
 							15
+						],
+						[
+							9,
+							15
+						],
+						[
+							6,
+							16
+						],
+						[
+							7,
+							16
+						],
+						[
+							8,
+							16
+						],
+						[
+							9,
+							16
 						]
 					],
 					"token": "you_are_here"

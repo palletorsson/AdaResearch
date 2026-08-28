@@ -394,8 +394,13 @@ def plan_museum(key: str, tokens: list[str],
         "artifacts": placed,
         "rejected": rejected,
         "wall_runs": wall_runs,
-        "dna_spatial_demand": dna_spatial_demand,
-        "pending_synthesis": pending_synthesis,
+        # dna_spatial_demand and pending_synthesis are NOT written into the plan
+        # (2026-08-28). They were write-only: 1,448 + 84 rows, 276,469 bytes,
+        # 3.9% of a 6.7 MB file, and `grep -rl` across commons/**/*.gd,
+        # tools/*.py and the encyclopedia's src/ finds this file and nothing
+        # else. The COUNTS stay in `relational` below, so the demand is still
+        # reported and re-emitting the rows is a one-line revert rather than an
+        # archaeology problem.
         "relational": {
             "anchors": len(seen_anchors),
             "wall_runs_requested": len(wall_runs),
