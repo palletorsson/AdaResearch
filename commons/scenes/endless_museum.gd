@@ -2899,7 +2899,7 @@ func _dress_lobby(seg: Node3D, solid: StaticBody3D, w: int, zbase: int, wall_col
 		if not _lobby_built.has(k):
 			off.append(String(k))
 	off.sort()
-	_drop_slide(seg, solid)
+	_drop_hole(seg, solid)
 	print("[em-lobby] window %s (x %d..%d) · built: %s%s" % [
 		"ok" if win != null else "MISSING", win_x0, win_x1,
 		", ".join(PackedStringArray(_lobby_built)) if not _lobby_built.is_empty() else "nothing",
@@ -19137,82 +19137,56 @@ func _trim_keep_out(segn: Node3D) -> Array:
 	# ceiling is an em_detail bucket like the skirting, and every bucket leaves
 	# through _emit — so the keep-out that stops trim over a hole stops the ceiling
 	# over the slide, with no second mechanism and nothing to keep in step.
-	if _L("lobby", "drop_slide", 0.0) > 0.5:
-		var dx: float = _L("lobby", "drop_x", 5.0)
-		var dw: float = clampf(_L("lobby", "drop_w", 2.0), 0.5, 10.0)
-		var z0: float = _L("lobby", "drop_z0", 0.0)
-		var z1: float = _L("lobby", "drop_end_z", 5.0)
-		out.append(Rect2(dx + 0.5 - dw, z0, dw * 2.0, maxf(1.0, z1 - z0 + 1.0)))
+	if _L("lobby", "drop_hole", 0.0) > 0.5:
+		var hx: float = _L("lobby", "drop_x", 6.0)
+		var hz: float = _L("lobby", "drop_z", 1.0)
+		out.append(Rect2(hx - 0.1, hz - 0.1, 1.2, 1.2))
 	return out
 
 
-# ── THE SLIDE (2026-08-26) ────────────────────────────────────────────────────
-# Palle: "Drop the player on a wedge, like a roof went. The player slides down
-# over the fence. Keeping the sky clear over up to 5,5 is like we were actually
-# dropped into the museum (throwinness). We are dropped at x:5, y:7, z:0 we slide
-# and into x:5, y:1 z:5" — and then: "make the change in endless museum the slide
-# down it a architecture."
+# ── THE ROOF AND THE HOLE (2026-08-26) ──────────────────────────────────────
+# Palle: "The sliding wedge is turned the wrong way and there is no hole in the
+# ceiling. But actually I think it is better if we start at the roof like in Duke
+# Nukem 3d. So no wedge, just a hole in the ceiling/roof and we jump in the hole
+# ... It is the way into the museum, the drop, we jump down in at around 6, 1."
 #
-# ARCHITECTURE, which is why it is here and not a map token. The building's own
-# surface, like the vestibule deck and the walls: a map cell cannot hold a plane
-# tilted fifty degrees through six metres of air, and an artifact standing on a
-# cell would be a prop of a roof rather than a roof.
+# The wedge is gone rather than fixed. It was turned the wrong way because a
+# fifty-degree plane has a facing and the map has no way to say which — and a
+# chute you are fired down is a different arrival than a roof you step off.
 #
-# It is also the only way INTO this hall that the design allows. The glass line
-# seals row 0, so the visitor cannot walk in from the enter room; they arrive over
-# it, once, and the past is behind them from the first second.
-func _drop_slide(seg: Node3D, solid: StaticBody3D) -> void:
-	if _L("lobby", "drop_slide", 0.0) <= 0.5:
+# So: a deck ABOVE the foyer with one cell missing, and the visitor standing on
+# it. You look down through the hole into the museum and jump. The building is
+# entered through its own roof, which is exactly the Duke Nukem 3D opening and,
+# less flippantly, the only arrival that makes the enter room behind glass read as
+# past rather than as a corridor someone forgot to open.
+func _drop_hole(seg: Node3D, solid: StaticBody3D) -> void:
+	if _L("lobby", "drop_hole", 0.0) <= 0.5:
 		return
-	var x: float = _L("lobby", "drop_x", 5.0) + 0.5
-	var z0: float = _L("lobby", "drop_z0", 0.0) + 0.5
-	var y0: float = _L("lobby", "drop_top_m", 7.0)
-	var z1: float = _L("lobby", "drop_end_z", 5.0) + 0.5
-	var y1: float = _L("lobby", "drop_end_m", 1.0)
-	var w: float = clampf(_L("lobby", "drop_w", 2.0), 0.5, 10.0)
-	var thick: float = 0.18
-	var dz: float = z1 - z0
-	var dy: float = y1 - y0
-	var run: float = sqrt(dz * dz + dy * dy)
-	if run < 0.5 or dz <= 0.0:
-		print("[em-slide] refused: the slide must run forward in z (dz %.2f, run %.2f)" % [dz, run])
-		return
-	var ang: float = atan2(dy, dz)          # dy is negative going down, so +Z tips down
-	var mid := Vector3(x, (y0 + y1) * 0.5, (z0 + z1) * 0.5)
-	var basis := Basis(Vector3(1.0, 0.0, 0.0), ang)
-
+	var hx: int = int(_L("lobby", "drop_x", 6.0))
+	var hz: int = int(_L("lobby", "drop_z", 1.0))
+	var pad: int = int(clampf(_L("lobby", "roof_pad", 3.0), 1.0, 8.0))
+	var y: float = WALL_H + clampf(_L("lobby", "roof_rise_m", 0.35), 0.0, 6.0)
 	var mat := StandardMaterial3D.new()
-	mat.albedo_color = Color(0.80, 0.79, 0.76)
-	mat.roughness = 0.35            # smooth: it is meant to be slid on
-	mat.metallic = 0.05
-	var slab := MeshInstance3D.new()
-	slab.name = "DropSlide"
-	var bm := BoxMesh.new()
-	bm.size = Vector3(w, thick, run)
-	slab.mesh = bm
-	slab.material_override = mat
-	slab.transform = Transform3D(basis, mid)
-	seg.add_child(slab)
+	mat.albedo_color = Color(0.42, 0.42, 0.45)
+	mat.roughness = 0.85
+	var laid: int = 0
+	for cx in range(hx - pad, hx + pad + 1):
+		for cz in range(hz - pad, hz + pad + 1):
+			if cx == hx and cz == hz:
+				continue                      # THE HOLE
+			_box(seg, Vector3(cx + 0.5, y, cz + 0.5), Vector3(1.0, 0.2, 1.0), Color(0.42, 0.42, 0.45), mat)
+			if solid != null:
+				_add_col(solid, Vector3(cx + 0.5, y, cz + 0.5), Vector3(1.0, 0.2, 1.0))
+			laid += 1
+	# a lip round the opening, so the hole reads as an opening rather than as a
+	# missing tile — and so a foot finds an edge before it finds air
+	for e in [[Vector3(hx - 0.05, y + 0.12, hz + 0.5), Vector3(0.1, 0.24, 1.1)],
+			[Vector3(hx + 1.05, y + 0.12, hz + 0.5), Vector3(0.1, 0.24, 1.1)],
+			[Vector3(hx + 0.5, y + 0.12, hz - 0.05), Vector3(1.1, 0.24, 0.1)],
+			[Vector3(hx + 0.5, y + 0.12, hz + 1.05), Vector3(1.1, 0.24, 0.1)]]:
+		_box(seg, e[0], e[1], Color(0.86, 0.62, 0.16), null)
+	print("[em-roof] a roof at y %.2f, %d cell(s), and a hole at (%d, %d) — the way in" % [y, laid, hx, hz])
 
-	# the collider carries the same tilt — _add_col is axis-aligned and cannot
-	if solid != null:
-		var cs := CollisionShape3D.new()
-		var bs := BoxShape3D.new()
-		bs.size = Vector3(w, thick, run)
-		cs.shape = bs
-		cs.transform = Transform3D(basis, mid)
-		solid.add_child(cs)
-
-	# NOT WALKABLE, and that is the point: the walk map must not route anyone UP
-	# the slide, or the museum will plan a path no body can climb.
-	for cz in range(int(floor(z0)), int(ceil(z1)) + 1):
-		for cx in range(int(floor(x - w * 0.5)), int(ceil(x + w * 0.5))):
-			var k := Vector2i(cx, cz)
-			if _walk_cells.has(k):
-				_walk_cells.erase(k)
-				_walk_erased[k] = "arch:drop_slide"
-	print("[em-slide] a roof from (%.1f, %.1f, %.1f) to (%.1f, %.1f) — %.1f m at %.0f degrees" % [
-		x, y0, z0, y1, z1, run, rad_to_deg(-ang)])
 
 
 
@@ -19229,7 +19203,7 @@ func _drop_slide(seg: Node3D, solid: StaticBody3D) -> void:
 ## and putting the origin on the target would leave the headset that far off the
 ## roof, which at seven metres up is a miss rather than a landing.
 func _vr_drop_in() -> void:
-	if not _vr or _L("lobby", "enabled", 1.0) <= 0.5 or _L("lobby", "drop_slide", 0.0) <= 0.5:
+	if not _vr or _L("lobby", "enabled", 1.0) <= 0.5 or _L("lobby", "drop_hole", 0.0) <= 0.5:
 		return
 	var target: Vector3 = _drop_point()
 	for attempt in range(30):
@@ -19255,10 +19229,14 @@ func _vr_drop_in() -> void:
 ## drop that only the first hall wants has no business being a rule every map can
 ## assert. It lives with the roof it lands on.
 func _drop_point() -> Vector3:
-	if _L("lobby", "enabled", 1.0) <= 0.5 or _L("lobby", "drop_slide", 0.0) <= 0.5:
+	if _L("lobby", "enabled", 1.0) <= 0.5 or _L("lobby", "drop_hole", 0.0) <= 0.5:
 		return Vector3(7.5, 0.0, 1.5)
-	var p := Vector3(_L("lobby", "drop_x", 5.0) + 0.5,
-		_L("lobby", "drop_top_m", 7.0),
-		_L("lobby", "drop_z0", 0.0) + 0.5)
-	print("[em-slide] the visitor is dropped at (%.1f, %.1f, %.1f) — not stood at 7.5, 0.0, 1.5" % [p.x, p.y, p.z])
+	# ON the roof, one cell back from the hole, facing it. Not IN the hole: the
+	# jump is the visitor's, not the building's — that is the whole difference
+	# between being dropped through a floor and choosing to go in.
+	var hx: float = _L("lobby", "drop_x", 6.0)
+	var hz: float = _L("lobby", "drop_z", 1.0)
+	var y: float = WALL_H + clampf(_L("lobby", "roof_rise_m", 0.35), 0.0, 6.0) + 0.2
+	var p := Vector3(hx + 0.5, y, hz - 1.0 + 0.5)
+	print("[em-roof] the visitor starts ON the roof at (%.1f, %.1f, %.1f), the hole one cell ahead" % [p.x, p.y, p.z])
 	return p

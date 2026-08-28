@@ -14,7 +14,9 @@ extends SceneTree
 ##   godot --headless --path . --xr-mode off \
 ##       --script res://commons/testing/probe_well_trim.gd
 
-const R := 1.2      # the well is x -1..1, z -1..1
+var R := 1.2        # the well is x -1..1, z -1..1
+var CX := 0.0       # --at=x,z moves the probe: the roof hole is not at the origin
+var CZ := 0.0
 
 
 func _initialize() -> void:
@@ -22,6 +24,14 @@ func _initialize() -> void:
 
 
 func _run() -> void:
+	for a in OS.get_cmdline_user_args():
+		if a.begins_with("--at="):
+			var parts := a.split("=", 1)[1].split(",")
+			if parts.size() >= 2:
+				CX = float(parts[0])
+				CZ = float(parts[1])
+		elif a.begins_with("--r="):
+			R = float(a.split("=", 1)[1])
 	var ps: PackedScene = load("res://commons/scenes/endless_museum.tscn")
 	var inst: Node3D = ps.instantiate() as Node3D
 	inst.set("EM_CONTROL", "res://ada_run/_trial_well_trim_control.json")
@@ -59,7 +69,7 @@ func _walk(n: Node, out: Dictionary) -> void:
 		for i in range(xf.size()):
 			var t: Transform3D = g * (xf[i] as Transform3D)
 			var p: Vector3 = t.origin
-			if abs(p.x) <= R and abs(p.z) <= R:
+			if abs(p.x - CX) <= R and abs(p.z - CZ) <= R:
 				var key := String(mmi.name)
 				if not out.has(key):
 					out[key] = {"n": 0, "y0": 999.0, "y1": -999.0}
