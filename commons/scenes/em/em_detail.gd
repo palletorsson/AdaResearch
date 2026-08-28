@@ -430,7 +430,22 @@ static func dress_segment(seg: Node3D, tile: Array, w: int, h: int, mats, prev_w
 	_add_cornice_chamfers(faces, ch_trim_x, tally)
 	if bool(opts.get("ceiling", true)):      # the studio looks down INTO the hall
 		_add_ceiling(w, h, ceil_x, ch_ceil_x, tally)
-	_add_seams(floors, w, h, seam_x)
+	# THE 3 M LATTICE IS PAINTED NOW, not built (2026-08-28, Palle: "we could
+	# solve the floor lists in the whole museum with a shader instead?"). See
+	# commons/scenes/em/floor_seams.gdshader, hung as a next_pass on the
+	# circulation material by endless_museum._setup_surfaces.
+	#
+	# seam_x still fills, and FloorSeams is still emitted below: _stamp_door_x and
+	# _stamp_door_z put a 14 cm strip across each DOORWAY, and that is a different
+	# object with a different argument. A threshold marks a thing you cross; the
+	# lattice marked a module. Only the module moved into the shader.
+	#
+	# WHAT CHANGED ON THE FLOOR, so nobody has to rediscover it: the x-lines are
+	# where they were — segment-local x IS world x, segments are offset in z only
+	# — while the z-lines used to restart at each hall and now run continuously
+	# through the museum. Halls have different lengths, so the old restart put a
+	# line at an arbitrary distance from the last one at every threshold anyway.
+	# _add_seams is kept below, unused, as the record of what the lattice was.
 
 	if int(tally.get("over", 0)) > 0:
 		push_warning("em_detail: chamfer budget %d reached, %d arrises left naked"

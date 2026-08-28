@@ -2104,10 +2104,25 @@ func _build_surfaces() -> void:
 	# the wall/floor junction legible without the heavy dark band of the earlier
 	# 130 mm plinth. It retains the existing shared AO field and draw family.
 	_surf["skirting"] = _mat_of("wall_plaster", [Color.WHITE, 0.25])
-	# A JOINT IS A SHADOW, NOT A SECOND FLOOR COLOUR. The 5 mm seam geometry still
-	# catches a fine highlight and contact shadow, but sharing the floor material
-	# stops the 3 m planning module from overpowering artifacts and room form.
+	# A JOINT IS A SHADOW, NOT A SECOND FLOOR COLOUR — and since 2026-08-28 it is
+	# not geometry either. It was 5 cm wide and 2 cm proud, walked out cell by
+	# cell on the 3 m module and rebuilt for every segment; it is a next_pass on
+	# the circulation material now, painted in world XZ. See floor_seams.gdshader
+	# for why, in three measured reasons. The role stays for the door thresholds,
+	# which em_detail still emits as real strips: a threshold is a thing you
+	# cross, not a module line, and it belongs to the door rather than the grid.
 	_surf["joint"] = circulation
+	var seam_sh: Shader = load("res://commons/scenes/em/floor_seams.gdshader")
+	if seam_sh != null and circulation != null:
+		var seam_mat := ShaderMaterial.new()
+		seam_mat.shader = seam_sh
+		seam_mat.set_shader_parameter("bay", 3.0)
+		seam_mat.set_shader_parameter("seam_w", 0.05)
+		seam_mat.set_shader_parameter("darken", 0.30)
+		circulation.next_pass = seam_mat
+		print("[endless_museum] floor joints: painted on the 3.0 m module, no geometry")
+	else:
+		push_warning("endless_museum: floor_seams.gdshader missing — floors will have no joints")
 	for k in _surf.keys():
 		if _surf[k] == null:
 			_surf.erase(k)
