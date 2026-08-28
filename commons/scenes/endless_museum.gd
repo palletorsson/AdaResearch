@@ -2895,6 +2895,7 @@ func _dress_lobby(seg: Node3D, solid: StaticBody3D, w: int, zbase: int, wall_col
 		if not _lobby_built.has(k):
 			off.append(String(k))
 	off.sort()
+	_drop_slide(seg, solid)
 	print("[em-lobby] window %s (x %d..%d) · built: %s%s" % [
 		"ok" if win != null else "MISSING", win_x0, win_x1,
 		", ".join(PackedStringArray(_lobby_built)) if not _lobby_built.is_empty() else "nothing",
@@ -19117,7 +19118,89 @@ func _trim_keep_out(segn: Node3D) -> Array:
 	# measured unchanged. The node knows what it is; the cursor does not.
 	if segn == null or not String(segn.name).begins_with("Seg0"):
 		return []
-	if _L("lobby", "enabled", 1.0) <= 0.5 or _L("lobby", "origin_well", 1.0) <= 0.5:
+	if _L("lobby", "enabled", 1.0) <= 0.5:
 		return []
-	var wh: float = clampf(_L("lobby", "well_m", 2.0), 1.0, 6.0) * 0.5 + 0.5
-	return [Rect2(-wh, -wh, wh * 2.0, wh * 2.0)]
+	var out: Array = []
+	if _L("lobby", "origin_well", 1.0) > 0.5:
+		var wh: float = clampf(_L("lobby", "well_m", 2.0), 1.0, 6.0) * 0.5 + 0.5
+		out.append(Rect2(-wh, -wh, wh * 2.0, wh * 2.0))
+	# THE SKY OVER THE DROP (Palle: "Keeping the sky clear over up to 5,5"). The
+	# ceiling is an em_detail bucket like the skirting, and every bucket leaves
+	# through _emit — so the keep-out that stops trim over a hole stops the ceiling
+	# over the slide, with no second mechanism and nothing to keep in step.
+	if _L("lobby", "drop_slide", 0.0) > 0.5:
+		var dx: float = _L("lobby", "drop_x", 5.0)
+		var dw: float = clampf(_L("lobby", "drop_w", 2.0), 0.5, 10.0)
+		var z0: float = _L("lobby", "drop_z0", 0.0)
+		var z1: float = _L("lobby", "drop_end_z", 5.0)
+		out.append(Rect2(dx + 0.5 - dw, z0, dw * 2.0, maxf(1.0, z1 - z0 + 1.0)))
+	return out
+
+
+# ── THE SLIDE (2026-08-26) ────────────────────────────────────────────────────
+# Palle: "Drop the player on a wedge, like a roof went. The player slides down
+# over the fence. Keeping the sky clear over up to 5,5 is like we were actually
+# dropped into the museum (throwinness). We are dropped at x:5, y:7, z:0 we slide
+# and into x:5, y:1 z:5" — and then: "make the change in endless museum the slide
+# down it a architecture."
+#
+# ARCHITECTURE, which is why it is here and not a map token. The building's own
+# surface, like the vestibule deck and the walls: a map cell cannot hold a plane
+# tilted fifty degrees through six metres of air, and an artifact standing on a
+# cell would be a prop of a roof rather than a roof.
+#
+# It is also the only way INTO this hall that the design allows. The glass line
+# seals row 0, so the visitor cannot walk in from the enter room; they arrive over
+# it, once, and the past is behind them from the first second.
+func _drop_slide(seg: Node3D, solid: StaticBody3D) -> void:
+	if _L("lobby", "drop_slide", 0.0) <= 0.5:
+		return
+	var x: float = _L("lobby", "drop_x", 5.0) + 0.5
+	var z0: float = _L("lobby", "drop_z0", 0.0) + 0.5
+	var y0: float = _L("lobby", "drop_top_m", 7.0)
+	var z1: float = _L("lobby", "drop_end_z", 5.0) + 0.5
+	var y1: float = _L("lobby", "drop_end_m", 1.0)
+	var w: float = clampf(_L("lobby", "drop_w", 2.0), 0.5, 10.0)
+	var thick: float = 0.18
+	var dz: float = z1 - z0
+	var dy: float = y1 - y0
+	var run: float = sqrt(dz * dz + dy * dy)
+	if run < 0.5 or dz <= 0.0:
+		print("[em-slide] refused: the slide must run forward in z (dz %.2f, run %.2f)" % [dz, run])
+		return
+	var ang: float = atan2(dy, dz)          # dy is negative going down, so +Z tips down
+	var mid := Vector3(x, (y0 + y1) * 0.5, (z0 + z1) * 0.5)
+	var basis := Basis(Vector3(1.0, 0.0, 0.0), ang)
+
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.80, 0.79, 0.76)
+	mat.roughness = 0.35            # smooth: it is meant to be slid on
+	mat.metallic = 0.05
+	var slab := MeshInstance3D.new()
+	slab.name = "DropSlide"
+	var bm := BoxMesh.new()
+	bm.size = Vector3(w, thick, run)
+	slab.mesh = bm
+	slab.material_override = mat
+	slab.transform = Transform3D(basis, mid)
+	seg.add_child(slab)
+
+	# the collider carries the same tilt — _add_col is axis-aligned and cannot
+	if solid != null:
+		var cs := CollisionShape3D.new()
+		var bs := BoxShape3D.new()
+		bs.size = Vector3(w, thick, run)
+		cs.shape = bs
+		cs.transform = Transform3D(basis, mid)
+		solid.add_child(cs)
+
+	# NOT WALKABLE, and that is the point: the walk map must not route anyone UP
+	# the slide, or the museum will plan a path no body can climb.
+	for cz in range(int(floor(z0)), int(ceil(z1)) + 1):
+		for cx in range(int(floor(x - w * 0.5)), int(ceil(x + w * 0.5))):
+			var k := Vector2i(cx, cz)
+			if _walk_cells.has(k):
+				_walk_cells.erase(k)
+				_walk_erased[k] = "arch:drop_slide"
+	print("[em-slide] a roof from (%.1f, %.1f, %.1f) to (%.1f, %.1f) — %.1f m at %.0f degrees" % [
+		x, y0, z0, y1, z1, run, rad_to_deg(-ang)])
