@@ -1,6 +1,6 @@
 {
 	"_readme": "The BAKE: every placement decision the museum makes from a measurement, decided ONCE by a headless --em-bake run and replayed by every later run, desktop or headset. Per chapter|pearl: placed = token, tile cell, the exact cells sealed (x, z-from-segment-base); refused = token, cell, why. Regenerate after editing the plan: python tools/em_bake.py",
-	"at": "2026-08-28 17:57:19",
+	"at": "2026-08-28 18:05:40",
 	"plan": "res://ada_run/em_plan.json",
 	"plan_at": "2026-08-21T14:00:55",
 	"schema": "adaresearch.em_bake.v1",
@@ -42707,23 +42707,10 @@
 			"placed": [
 				{
 					"cell": [
-						1,
-						7
+						0,
+						4
 					],
-					"seal": [
-						[
-							0,
-							5
-						],
-						[
-							0,
-							6
-						],
-						[
-							1,
-							7
-						]
-					],
+					"seal": [],
 					"token": "origin"
 				},
 				{
@@ -43075,38 +43062,6 @@
 				}
 			],
 			"refused": [
-				{
-					"tile_cell": [
-						1,
-						5
-					],
-					"token": "origin",
-					"why": "sealing would sever the walk route"
-				},
-				{
-					"tile_cell": [
-						1,
-						6
-					],
-					"token": "origin",
-					"why": "sealing would sever the walk route"
-				},
-				{
-					"tile_cell": [
-						2,
-						5
-					],
-					"token": "origin",
-					"why": "sealing would sever the walk route"
-				},
-				{
-					"tile_cell": [
-						2,
-						6
-					],
-					"token": "origin",
-					"why": "sealing would sever the walk route"
-				},
 				{
 					"tile_cell": [
 						4,

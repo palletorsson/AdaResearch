@@ -9032,8 +9032,15 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 			print("[em-pack]   %s has no living scene — left behind" % b["token"])
 			continue
 		var scene := String((lv as Dictionary).get("scene", ""))
-		var base_x: int = clampi(int(b["gx"]) + offx, bx0, bx1)
-		var base_z: int = clampi(int(b["gz"]) + offz, bz0, bz1)
+		# THE PIN IS READ HERE, not with the rest of the config below, because the
+		# clamp happens on this line. `#pin:1` means the map named the cell and the
+		# map is right — no inset to [1, VESTIBULE_H+1], no ring search, and a
+		# refusal if it cannot stand there rather than a silent walk to somewhere
+		# else. Without it a token at map (0,0) is out of bounds on both axes and
+		# lands wherever the rings find room, which moved between builds.
+		var att_pin: bool = String(b.get("att", "")).findn("pin:") >= 0
+		var base_x: int = (int(b["gx"]) + offx) if att_pin else clampi(int(b["gx"]) + offx, bx0, bx1)
+		var base_z: int = (int(b["gz"]) + offz) if att_pin else clampi(int(b["gz"]) + offz, bz0, bz1)
 		var claimed_plinth := bool(b["plinth"])
 		if bead_claims.has(b["token"]) and not (bead_claims[b["token"]] as Array).is_empty():
 			var cb: Dictionary = (bead_claims[b["token"]] as Array).pop_front()
@@ -9068,11 +9075,24 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 			b["plinth"] = true
 		var done := false
 		var first_refusal := ""
-		for ring in range(0, 7):
+		# THE MAP'S CELL IS FINAL (2026-08-28). Every transplanted body is held one
+		# cell inside the walls — bx0 = 1, bz0 = VESTIBULE_H + 1 — which is right for
+		# an exhibit and cannot say "stand at the corner". A token at map (0,0) is out
+		# of bounds on BOTH axes, so the ring below relocated it, and WHERE it landed
+		# depended on what else was free: (1,1) one build, (1,2) the next, with
+		# nothing logged either time. Palle spent three turns asking for the origin at
+		# 0,0,0 while it walked.
+		#
+		# `#pin:1` on the token means the map said where, and the map is right: no
+		# inset, no ring, no silent move. A pinned body that cannot stand is REFUSED
+		# and says so, which is the honest failure — a relocation nobody asked for is
+		# not.
+		var pinned: bool = att_pin
+		for ring in range(0, 1 if pinned else 7):
 			if done:
 				break
 			for d in _pack_ring(ring):
-				if base_x + d.x < bx0 or base_x + d.x > bx1 or base_z + d.y < bz0 or base_z + d.y > bz1:
+				if not pinned and (base_x + d.x < bx0 or base_x + d.x > bx1 or base_z + d.y < bz0 or base_z + d.y > bz1):
 					continue   # never past the walls — _stamp would not stop us
 				var cell := {"x": base_x + d.x, "y": base_z + d.y, "rank": 2, "top": 0.0}
 				# a basin cell: the body stands on the pool floor, under glass
