@@ -6710,10 +6710,52 @@ func _build_segment() -> void:
 	if not _clear_cells.is_empty():
 		print("[em-clear] %d cell(s) ruled clear in the enter room" % _clear_cells.size())
 		seg.set_meta("em_clear_cells", _clear_cells.keys())
+	# A POOL MAY CROSS INTO THE ANNEX (2026-08-28, Palle: "The basin has the
+	# quarters, 3/4 in the annex and 1/4 in the hall... that is kind of over
+	# complicateding").
+	#
+	# It could not, and the reason was an accident of ORDER: the basin is read
+	# further down, after the vestibule is already laid, and its rect loop then
+	# throws away any row with rz < 0. So a pit asked to sit around the origin —
+	# which stands exactly ON the boundary — was pushed wholly into the hall,
+	# and the quartering was the geometry apologising for that.
+	#
+	# The annex side is worked out HERE, before the deck goes down, so those
+	# cells are simply left out of it and given a pool instead. Same decl, same
+	# depth, same glass: one basin that happens to cross a boundary, rather than
+	# two ideas about what a basin is.
+	var vest_basin: Dictionary = {}
+	var vest_basin_depth: float = 0.0
+	if peek.get("basin") is Dictionary:
+		var vbd: Dictionary = peek["basin"]
+		vest_basin_depth = clampf(float(vbd.get("depth", 1.0)), 0.3, 8.0)
+		for vr_v in (vbd.get("rects", []) as Array):
+			var vra: Array = vr_v
+			if vra.size() < 4:
+				continue
+			for vz in range(int(vra[1]), int(vra[1]) + int(vra[3])):
+				if vz >= 0 or vz < -VESTIBULE_H:
+					continue
+				for vx in range(int(vra[0]), int(vra[0]) + int(vra[2])):
+					if vx >= 0 and vx < vest_w:
+						vest_basin[Vector2i(vx, vz + VESTIBULE_H)] = true
+		for vc_v in (vbd.get("cells", []) as Array):
+			var vca: Array = vc_v
+			if vca.size() < 2:
+				continue
+			var vcz: int = int(vca[1])
+			var vcx: int = int(vca[0])
+			if vcz < 0 and vcz >= -VESTIBULE_H and vcx >= 0 and vcx < vest_w:
+				vest_basin[Vector2i(vcx, vcz + VESTIBULE_H)] = true
+	if not vest_basin.is_empty():
+		print("[em-basin] %d cell(s) of the pool cross into the annex, %.1f m down" % [
+			vest_basin.size(), vest_basin_depth])
 	for zr in range(VESTIBULE_H):
 		for x in range(vest_w):
 			if foyer_well and x <= 1 and zr <= 1:
 				continue                   # THE ORIGIN WELL: the corner cells open onto (0,0,0)
+			if vest_basin.has(Vector2i(x, zr)):
+				continue                   # the pool takes this cell; its floor is laid below
 			_box(seg, Vector3(x + 0.5, -0.1, zr + 0.5), Vector3(1, 0.2, 1), Color(0.13, 0.13, 0.16), m_deck)
 			if x > 0 and x < vest_w - 1 and not (zr == 0 and x >= pw - 1) and not (zr == VESTIBULE_H - 1 and x >= w - 1):
 				_walk_cells[Vector2i(x, zbase + zr)] = true
@@ -6723,6 +6765,20 @@ func _build_segment() -> void:
 	# a collider under the deck the headset falls through on frame one.
 	# One merged slab for the rectangular vestibule; per-cell below where
 	# the tile is sparse. Gated on _vr: the desktop segment is untouched.
+	for vb_v in vest_basin.keys():
+		var vb: Vector2i = vb_v
+		_box(seg, Vector3(vb.x + 0.5, -vest_basin_depth - 0.1, vb.y + 0.5), Vector3(1, 0.2, 1),
+			Color(0.10, 0.10, 0.13), m_deck)
+		_add_col(solid, Vector3(vb.x + 0.5, -vest_basin_depth - 0.1, vb.y + 0.5), Vector3(1, 0.2, 1))
+		for vd_v in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+			var vd: Vector2i = vd_v
+			if vest_basin.has(vb + vd):
+				continue
+			var vwc := Vector3(vb.x + 0.5 + vd.x * 0.45, -vest_basin_depth / 2.0, vb.y + 0.5 + vd.y * 0.45)
+			var vws := Vector3(0.1 if vd.x != 0 else 1.0, vest_basin_depth, 0.1 if vd.y != 0 else 1.0)
+			_box(seg, vwc, vws, Color(0.14, 0.14, 0.17), m_wall)
+			_add_col(solid, vwc, vws)
+		_walk_cells[Vector2i(vb.x, zbase + vb.y)] = true
 	_add_col(solid, Vector3(vest_w / 2.0, -0.1, VESTIBULE_H / 2.0),
 		Vector3(vest_w, 0.2, VESTIBULE_H))
 	# the scale figure stands clear of the origin well in the foyer (it stood on its rail)
