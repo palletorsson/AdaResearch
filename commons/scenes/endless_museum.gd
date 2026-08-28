@@ -6764,6 +6764,14 @@ func _build_segment() -> void:
 			var vcx: int = int(vca[0])
 			if vcz < 0 and vcz >= -VESTIBULE_H and vcx >= 0 and vcx < vest_w:
 				vest_basin[Vector2i(vcx, vcz + VESTIBULE_H)] = true
+	var vest_drowned: int = 0    # annex walls the basin claimed
+	var vest_glass: StandardMaterial3D = null
+	if not vest_basin.is_empty() and bool((peek.get("basin", {}) as Dictionary).get("glass", true)):
+		vest_glass = StandardMaterial3D.new()
+		vest_glass.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		vest_glass.albedo_color = Color(0.72, 0.84, 0.87, 0.14)
+		vest_glass.roughness = 0.04
+		vest_glass.metallic = 0.15
 	if not vest_basin.is_empty():
 		print("[em-basin] %d cell(s) of the pool cross into the annex, %.1f m down" % [
 			vest_basin.size(), vest_basin_depth])
@@ -6796,8 +6804,28 @@ func _build_segment() -> void:
 			_box(seg, vwc, vws, Color(0.14, 0.14, 0.17), m_wall)
 			_add_col(solid, vwc, vws)
 		_walk_cells[Vector2i(vb.x, zbase + vb.y)] = true
-	_add_col(solid, Vector3(vest_w / 2.0, -0.1, VESTIBULE_H / 2.0),
-		Vector3(vest_w, 0.2, VESTIBULE_H))
+		# THE GLASS LID, which the hall side of a basin has always had and this side
+		# did not. Without it the pool was a hole you could not see into and could
+		# not fall into: the deck box was skipped, so there was nothing to look at,
+		# and the merged collider below still capped it. The engine reported "3
+		# cell(s) of the pool cross into the annex" and Palle saw no basin there.
+		if vest_glass != null:
+			_box(seg, Vector3(vb.x + 0.5, -0.02, vb.y + 0.5), Vector3(1, 0.04, 1),
+				Color(0.72, 0.84, 0.87, 0.14), vest_glass)
+			_add_col(solid, Vector3(vb.x + 0.5, -0.02, vb.y + 0.5), Vector3(1, 0.04, 1))
+	# THE DECK COLLIDER, and it may not span the pool. One merged slab across the
+	# whole vestibule sealed every pool cell from above at deck level — an
+	# invisible floor over the water. Per cell where a pool crosses; the merged
+	# slab is kept when none does, because it is one collider instead of dozens.
+	if vest_basin.is_empty():
+		_add_col(solid, Vector3(vest_w / 2.0, -0.1, VESTIBULE_H / 2.0),
+			Vector3(vest_w, 0.2, VESTIBULE_H))
+	else:
+		for zc in range(VESTIBULE_H):
+			for xc in range(vest_w):
+				if vest_basin.has(Vector2i(xc, zc)):
+					continue                   # the water is open to the room above it
+				_add_col(solid, Vector3(xc + 0.5, -0.1, zc + 0.5), Vector3(1, 0.2, 1))
 	# the scale figure stands clear of the origin well in the foyer (it stood on its rail)
 	_stamp_scale_figure(seg, Vector3(2.0 if not foyer_well else 13.2, 0.0, VESTIBULE_H * 0.5 + (1.3 if foyer_well else 0.0)), zbase)
 	for zr in range(VESTIBULE_H):
@@ -6811,8 +6839,19 @@ func _build_segment() -> void:
 	for vk_v in vest_rules.keys():
 		var vk: Vector2i = vk_v
 		if String(vest_rules[vk]) == "4" and vk.x > 0 and vk.x < vest_w - 1:
+			# A POOL AND A WALL CANNOT SHARE A CELL. The annex rows describe the
+			# room's shape; a basin rect is a specific instruction about specific
+			# cells, so the basin wins — and it says so, because a hand-painted
+			# wall quietly not appearing is exactly the kind of silence this
+			# museum has too much of. Palle painted x0..2 of z -1 as wall and
+			# then asked why the basin was not in the annex; it was the wall.
+			if vest_basin.has(vk):
+				vest_drowned += 1
+				continue
 			_wall_at(seg, solid, wcells, vk.x, vk.y, wall_col, m_wall, wr)
 			_walk_cells.erase(Vector2i(vk.x, zbase + vk.y))
+	if vest_drowned > 0:
+		print("[em-basin] %d annex wall(s) give way to the pool that claims their cell" % vest_drowned)
 	var lobby_on: bool = _seg_index == 0 and _L("lobby", "enabled", 1.0) > 0.5
 	var win_x0: int = int(_L("lobby", "window_x0", 6.0))
 	var win_x1: int = int(_L("lobby", "window_x1", 8.0))
