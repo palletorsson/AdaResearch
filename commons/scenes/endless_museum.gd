@@ -2730,6 +2730,18 @@ func _lobby_piece(seg: Node3D, key: String, pos: Vector3, yaw_deg: float, config
 	n.position = pos
 	n.rotation_degrees.y = yaw_deg
 	seg.add_child(n)
+	# A FITTING IS A SCENE, AND THE PROBE READS BOXES. Everything else in the
+	# annex goes through _box, so the standing-body probe named it in one boot;
+	# these load a .tscn and were invisible to it, which is a hole in an
+	# instrument built precisely to stop the guessing.
+	if _stand_probe:
+		var lk := Vector2i(int(floor(pos.x)), int(floor(pos.z)))
+		if lk.y >= 0 and lk.y <= _stand_probe_z:
+			if not _stand_log.has(lk):
+				_stand_log[lk] = {}
+			var ld: Dictionary = _stand_log[lk]
+			var lkey := "FITTING %s (scene)" % key
+			ld[lkey] = int(ld.get(lkey, 0)) + 1
 	if key in ["pallet", "extinguisher"]:
 		_plain_hands_disarm(n, key)          # furniture, not a pickup
 	# the lobby's furniture is the curator's too (Palle: "edit transform
@@ -3890,10 +3902,18 @@ func _stands_in_cleared(pos: Vector3, size: Vector3) -> bool:
 		return false                    # the floor itself, and anything sunk below it
 	if size.x > 3.0 or size.z > 3.0:
 		return false                    # the building, not a piece standing in a cell
-	var x0: int = int(floor(pos.x - size.x * 0.5))
-	var x1: int = int(floor(pos.x + size.x * 0.5))
-	var z0: int = int(floor(pos.z - size.z * 0.5))
-	var z1: int = int(floor(pos.z + size.z * 0.5))
+	# THE FAR EDGE IS A TOUCH, NOT AN OCCUPANCY. floor() of the maximum corner
+	# counts the cell the box only ABUTS: a 1 m wall centred at x -2.5 spans
+	# exactly [-3, -2] and was read as standing on cell -2 as well. Harmless
+	# while clear cells were a handful painted by hand; the moment the pool
+	# started clearing its own cells it deleted the outer skin standing beside
+	# the water, and the museum opened to the sky again one cell further out.
+	# A hair off the far edge, so a box owns its own cells and no more.
+	const EDGE := 0.001
+	var x0: int = int(floor(pos.x - size.x * 0.5 + EDGE))
+	var x1: int = int(floor(pos.x + size.x * 0.5 - EDGE))
+	var z0: int = int(floor(pos.z - size.z * 0.5 + EDGE))
+	var z1: int = int(floor(pos.z + size.z * 0.5 - EDGE))
 	for cx in range(x0, x1 + 1):
 		for cz in range(z0, z1 + 1):
 			if _clear_cells.has(Vector2i(cx, cz)):
@@ -3911,6 +3931,8 @@ func _box(parent: Node3D, pos: Vector3, size: Vector3, color: Color, mat: Materi
 	if not _clear_cells.is_empty() and _stands_in_cleared(pos, size):
 		_clear_refused += 1
 		return
+	if _stand_probe:
+		_note_standing(pos, size)
 
 	var m: Material = mat if mat != null else _mat(color)
 	if _batch_open:
@@ -6763,9 +6785,7 @@ func _build_segment() -> void:
 		# there and that reading is older than this one.
 		if String(vest_rules[vk0]) == "1" and vk0.x != 0 and vk0.x != vest_w - 1:
 			_clear_cells[vk0] = true
-	if not _clear_cells.is_empty():
-		print("[em-clear] %d cell(s) ruled clear in the enter room" % _clear_cells.size())
-		seg.set_meta("em_clear_cells", _clear_cells.keys())
+	var clear_ruled: int = _clear_cells.size()
 	# A POOL MAY CROSS INTO THE ANNEX (2026-08-28, Palle: "The basin has the
 	# quarters, 3/4 in the annex and 1/4 in the hall... that is kind of over
 	# complicateding").
@@ -6847,6 +6867,35 @@ func _build_segment() -> void:
 		print("[em-basin] %d pool cell(s) outside the hall tile, x %d..%d z %d..%d, %.1f m down%s" % [
 			vest_basin.size(), vmin.x, vmax.x, vmin.y, vmax.y, vest_basin_depth,
 			"" if vest_basin_lost == 0 else " — %d REFUSED, further back than the annex reaches (z < %d)" % [vest_basin_lost, -VESTIBULE_H]])
+	# AND A POOL CELL CLEARS ITSELF. 2026-08-28, Palle: "the wall in annex that
+	# stands on the besin". A cell the basin has taken is two metres of air, and
+	# a wall stub, a deck trim or a leftover skirting standing in it stands on
+	# nothing at all.
+	#
+	# Ruled at the FUNNEL rather than in each builder, for the reason the ruling
+	# above gives and today keeps proving: every fault in this pool was in a
+	# placer nobody had thought to check — a bench from a second prop placer, a
+	# rim from a builder that could not see the other builder's water, a skin
+	# that had never heard of a basin. _box and _add_col are the two calls every
+	# piece of this architecture goes through, whoever built it.
+	#
+	# ANNEX CELLS ONLY. _stands_in_cleared already spares anything topping out at
+	# or below y 0.02, so the pool's own floor, rim walls and glass lid pass
+	# through untouched — but a hall-side basin cell may legitimately carry a
+	# PIER, a podium column rising from the pool floor, and that is a body the
+	# map asked for rather than a leftover.
+	_stand_probe = not vest_basin.is_empty()
+	_stand_probe_z = VESTIBULE_H + 2   # the annex and the first hall rows: a threshold strip lies across the seam
+	_stand_log.clear()
+	var clear_drowned: int = 0
+	for pk_v in vest_basin.keys():
+		if not _clear_cells.has(pk_v):
+			_clear_cells[pk_v] = true
+			clear_drowned += 1
+	if not _clear_cells.is_empty():
+		print("[em-clear] %d cell(s) clear in the enter room: %d ruled by hand, %d taken by the pool" % [
+			_clear_cells.size(), clear_ruled, clear_drowned])
+		seg.set_meta("em_clear_cells", _clear_cells.keys())
 	for zr in range(VESTIBULE_H):
 		for x in range(vest_w):
 			if foyer_well and x <= 1 and zr <= 1:
@@ -6900,17 +6949,37 @@ func _build_segment() -> void:
 				_add_col(solid, Vector3(xc + 0.5, -0.1, zc + 0.5), Vector3(1, 0.2, 1))
 	# the scale figure stands clear of the origin well in the foyer (it stood on its rail)
 	_stamp_scale_figure(seg, Vector3(2.0 if not foyer_well else 13.2, 0.0, VESTIBULE_H * 0.5 + (1.3 if foyer_well else 0.0)), zbase)
+	# THE ANNEX'S SIDE WALLS ARE THE SKIN'S JOB NOW (2026-08-28, Palle: "the
+	# remaining wall is the old outside wall from the annex"). The enter room
+	# used to wall its own first and last floor columns, because the outer skin
+	# ran the hall tile only and the annex had no outside. It has one now — the
+	# skin runs these four rows at x -1 and x vest_w, a cell further out — so
+	# every annex had TWO walls a metre apart on each side, and the inner one
+	# stood free on the floor. Beside a pool that had eaten the cells behind it,
+	# it read as a slab standing in the water.
+	#
+	# The walk map is unchanged: x 0 and x vest_w - 1 were never walkable cells
+	# (the deck loop excludes them), so this takes away a wall and gives back
+	# no floor. Widening the room is a separate ruling and not this one.
+	var vest_side_walls: int = 0
 	for zr in range(VESTIBULE_H):
 		for sx in [0, vest_w - 1]:
-			if foyer_well and sx == 0 and zr <= 1:
-				continue                   # the well's corner: the wall steps out a metre (built by _dress_lobby)
-			if String(vest_rules.get(Vector2i(int(sx), zr), "")) == "1":
-				continue                   # ruled OPEN — a side doorway in the enter room
-			_wall_at(seg, solid, wcells, int(sx), zr, corner_col, m_corner, wr)
+			if String(vest_rules.get(Vector2i(int(sx), zr), "")) == "4":
+				# still buildable BY HAND: a ruling asked for a wall here
+				if vest_basin.has(Vector2i(int(sx), zr)):
+					vest_drowned += 1
+					continue
+				_wall_at(seg, solid, wcells, int(sx), zr, corner_col, m_corner, wr)
+				vest_side_walls += 1
+	if vest_side_walls > 0:
+		print("[em-lobby] %d side-wall cell(s) kept because a ruling asked for them" % vest_side_walls)
 	# ruled WALLS inside the enter room (partitions, a narrowed mouth…)
 	for vk_v in vest_rules.keys():
 		var vk: Vector2i = vk_v
 		if vk.x <= 0 or vk.x >= vest_w - 1:
+			# HANDING THESE ON is how a wall got into the water: every branch below
+			# asks the basin first, and the loop that owns these two columns did not.
+			# It asks now (see the seal loop above).
 			continue                       # the side columns are the room's own walls
 		var vv := String(vest_rules[vk])
 		# THE HALL'S OWN VOCABULARY, cell for cell (:7054). "1" floor, "2"/"2s" a
@@ -6958,6 +7027,16 @@ func _build_segment() -> void:
 	for x in range(pw - 1, vest_w):        # seal beyond the previous tile's width
 		if foyer_well and x <= 1:
 			continue                       # the well's corner, see _dress_lobby
+		# THIS LOOP OWNS THE SIDE COLUMNS, AND IT NEVER ASKED THE BASIN. The
+		# ruled-cell loop below checks the pool in all four of its branches and
+		# then hands x = 0 and x = vest_w - 1 to this one, which did not — and
+		# x = 0 is exactly the column a pool centred on the origin reaches. Two
+		# full-height slabs stood from y 0 to 4.5 over a pool floor at -2.1.
+		# The clear ruling at the funnel refuses them anyway, but a body refused
+		# there is a body nobody counted; refused here it is reported.
+		if vest_basin.has(Vector2i(x, 0)):
+			vest_drowned += 1
+			continue
 		if lobby_on and x >= win_x0 and x <= win_x1:
 			# THE LOBBY WINDOW (2026-08-18): the back wall keeps a sill and a
 			# header here and the pane between them looks BACKWARD, out of the
@@ -7511,7 +7590,7 @@ func _build_segment() -> void:
 		# it did, in cells, in the map's own coordinates, including the minus
 		# domain no map row can name.
 		if not basin_cells.is_empty() or not vest_basin.is_empty():
-			_write_basin_plan(spec, tile, w, basin_cells, vest_basin, skin_stepped)
+			_write_basin_plan(spec, tile, w, basin_cells, vest_basin, skin_stepped, _clear_cells)
 		_dress_fixtures(seg, solid, tile, w, zbase, basin_cells)
 		# 1c. SERVICE FURNITURE. A critic measured a 420x360 crop of this museum's
 		#     wall — about 2 m2 of plaster — and found exactly one feature in it, a
@@ -8268,6 +8347,14 @@ var _clear_cells: Dictionary = {}
 ## nothing cannot be shown to work: the probe could not see the refusal because
 ## trim is drawn with _box and NO collider, and merged meshes hide the rest.
 var _clear_refused: int = 0
+## WHO PUT THAT THERE. When a segment carries a basin, _box names the function
+## that stands anything above the floor plane on an annex cell, and the plan
+## file prints it. Three proof shots went on guessing which of a dozen placers
+## owned one pale slab standing in the pool; get_stack() answers it in one boot.
+## Off unless a basin asked for it — get_stack() is not free.
+var _stand_probe: bool = false
+var _stand_probe_z: int = 0          # rows 0 .. _stand_probe_z are watched
+var _stand_log: Dictionary = {}      # Vector2i -> Dictionary of caller -> count
 
 var _built: Array = []          # one entry per segment built this run
 
@@ -19965,7 +20052,8 @@ func _drop_point() -> Vector3:
 ## x runs -4 .. w+2 so the MINUS DOMAIN is on the page; z runs -VESTIBULE_H ..
 ## the tile's end, so the annex is above the hall the way it is on the ground.
 func _write_basin_plan(spec: Dictionary, tile: Array, w: int,
-		basin_cells: Dictionary, vest_basin: Dictionary, skin_stepped: int) -> void:
+		basin_cells: Dictionary, vest_basin: Dictionary, skin_stepped: int,
+		clear_cells: Dictionary) -> void:
 	var x0: int = -4
 	var x1: int = w + 2
 	var lines: Array = []
@@ -19998,7 +20086,68 @@ func _write_basin_plan(spec: Dictionary, tile: Array, w: int,
 	lines.append("%s — %d pool cell(s): %d inside the hall tile, %d in the minus domain." % [
 		String(spec.get("map", spec.get("name", "?"))), pool_in + pool_out, pool_in, pool_out])
 	lines.append("the outer skin stepped past the water on %d row(s)." % skin_stepped)
+	lines.append("%d cell(s) ruled clear; %d piece(s) refused on them." % [clear_cells.size(), _clear_refused])
+	if not _stand_log.is_empty():
+		lines.append("")
+		lines.append("WHAT STANDS IN THE ANNEX, by the cell it stands on and the function that built it:")
+		var keys: Array = _stand_log.keys()
+		keys.sort_custom(func(a, b): return a.y * 1000 + a.x < b.y * 1000 + b.x)
+		for k_v in keys:
+			var k: Vector2i = k_v
+			var wet: bool = vest_basin.has(k)
+			var who: Dictionary = _stand_log[k]
+			var parts: Array = []
+			for wk in who.keys():
+				parts.append("%s x%d" % [wk, int(who[wk])])
+			lines.append("  (%3d,%3d)%s  %s" % [k.x, k.y - VESTIBULE_H,
+				"  <-- ON THE POOL" if wet else "               ", ", ".join(PackedStringArray(parts))])
 	var f := FileAccess.open("res://ada_run/em_basin_plan.txt", FileAccess.WRITE)
 	if f != null:
 		f.store_string(String.chr(10).join(PackedStringArray(lines)) + String.chr(10))
 		f.close()
+
+
+## Record which function stood this box on which annex cell. Same three tests as
+## _stands_in_cleared, so the probe watches exactly the class of body that a
+## clear ruling would refuse — no more, no less.
+func _note_standing(pos: Vector3, size: Vector3) -> void:
+	# 0.002, not the clear ruling's 0.02: a floor list is a strip laid ALMOST
+	# flush, and the whole point of the probe is to see the things that are
+	# too flat to argue about from a screenshot.
+	if pos.y + size.y * 0.5 <= -0.25:
+		return
+	# NO "not a piece" GUARD HERE. _stands_in_cleared skips anything over 3 m as
+	# the building rather than a body, and the probe copied it — so a floor list
+	# is invisible to BOTH: it is a strip 0.25 m across and the length of the
+	# room, and the length is what excused it. Four screenshots went looking for
+	# something the instrument was built not to see.
+	var z0: int = int(floor(pos.z - size.z * 0.5 + 0.001))
+	var z1: int = int(floor(pos.z + size.z * 0.5 - 0.001))
+	if z1 < 0 or z0 > _stand_probe_z:
+		return
+	var who := "?"
+	var st: Array = get_stack()
+	for fr_v in st:
+		var fr: Dictionary = fr_v
+		var fn := String(fr.get("function", ""))
+		if fn == "_box" or fn == "_note_standing" or fn == "_wall_at":
+			continue
+		who = "%s:%d" % [fn, int(fr.get("line", 0))]
+		break
+	if st.is_empty():
+		who = "(no stack - release build)"
+	# the TOP and the THINNESS go in the key: a 3 m wall slab and a 0.06 m
+	# leftover skirting are different complaints, and telling them apart by
+	# eye in a perspective screenshot is what has been costing shots.
+	var top: float = pos.y + size.y * 0.5
+	var thin: float = minf(size.x, size.z)
+	who = "%s top%.2fm %.2f x %.2f x %.2f" % [who, top, size.x, size.y, size.z]
+	var x0: int = int(floor(pos.x - size.x * 0.5 + 0.001))
+	var x1: int = int(floor(pos.x + size.x * 0.5 - 0.001))
+	for cx in range(x0, x1 + 1):
+		for cz in range(maxi(z0, 0), mini(z1, _stand_probe_z) + 1):
+			var k := Vector2i(cx, cz)
+			if not _stand_log.has(k):
+				_stand_log[k] = {}
+			var d: Dictionary = _stand_log[k]
+			d[who] = int(d.get(who, 0)) + 1

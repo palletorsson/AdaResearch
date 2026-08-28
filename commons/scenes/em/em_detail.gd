@@ -1494,11 +1494,24 @@ static func _add_ceiling(w: int, h: int, out: Array, ch_out: Array, tally: Dicti
 static func _add_seams(floors: Dictionary, w: int, h: int, out: Array) -> void:
 	var z_max: int = VESTIBULE_H + h
 	var x_max: int = maxi(LOBBY_W, w + 1)
+	# THE ANNEX IS A PLAIN FLOOR (2026-08-28, Palle: "remove the list in the
+	# annex, just a plane floor"). The seam lattice ran from segment row 0,
+	# which is the first row of the enter room, and _map_vestibule claims every
+	# annex cell as floor UNCONDITIONALLY — so the joints were laid across the
+	# foyer and, once a basin reached into it, straight over open water. The
+	# guard above ("emitted only over cells that actually carry a floor box")
+	# could not catch that, because the occupancy map it trusts had already
+	# said the water was floor.
+	#
+	# The enter room is not the museum: it is the room you arrive in, and its
+	# floor is the one surface in the building with nothing to say. Joints
+	# start at the threshold.
+	var z_from: int = VESTIBULE_H
 
 	# joints running in z, on lattice lines x = 0, 3, 6 ...
 	for sx in range(0, x_max + 1, SEAM_M):
 		var start: int = -1
-		for z in range(0, z_max + 2):
+		for z in range(z_from, z_max + 2):
 			var present: bool = z <= z_max and (floors.has(Vector2i(sx, z)) or floors.has(Vector2i(sx - 1, z)))
 			if present and start < 0:
 				start = z
@@ -1510,6 +1523,8 @@ static func _add_seams(floors: Dictionary, w: int, h: int, out: Array) -> void:
 
 	# joints running in x, on lattice lines z = 0, 3, 6 ...
 	for sz in range(0, z_max + 1, SEAM_M):
+		if sz < z_from:
+			continue                  # no cross joint inside the enter room
 		var start2: int = -1
 		for x in range(-1, x_max + 2):
 			var present2: bool = x <= x_max and (floors.has(Vector2i(x, sz)) or floors.has(Vector2i(x, sz - 1)))
