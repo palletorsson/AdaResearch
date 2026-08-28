@@ -71,6 +71,26 @@ CUES = [
 
 TOKEN_RE = re.compile(r"[a-z][a-z0-9_]{4,48}")
 
+# Not galleries. These are sweep outputs, promotion batches and probe runs that happen to
+# write a manifest into public/. They were quietly poisoning the table: `promoted-wave1`,
+# `synthesis_wave2` and `wave10` are DNA promotion WAVES - project process vocabulary -
+# and every one of them was being proposed into the WAVEFUNCTIONS sequence on the word
+# "wave", which alone accounted for 28 of that sequence's 36 galleries.
+RUN_RE = re.compile(r"""
+      ^aaa-                    # rig baselines
+    | ^promoted[-_]?wave       # promotion batches
+    | ^synthesis[-_]w          # synthesis waves
+    | ^wave\d                  # wave7, wave10
+    | ^batch\d
+    | ^never-swept
+    | ^hosttest
+    | -runs$
+    | _recheck$
+    | -smoke$
+    | -probe$ | ^.*-w\d-probe$
+    | -check$
+""", re.X)
+
 
 def load_spine_sequences() -> list:
     d = json.load(open(SPINE, encoding="utf-8"))
@@ -203,6 +223,11 @@ def scan() -> list:
             doc = json.loads(raw)
         except (OSError, ValueError):
             continue
+        if RUN_RE.search(slug):
+            rows.append({"slug": slug, "verdict": "RUN", "tokens": 0, "placed": 0,
+                         "home": "", "margin": 0,
+                         "why": "sweep/probe output, not a gallery", "hist": {}})
+            continue
         toks = tokens_in(doc, registry)
         hist = collections.Counter(placed[t] for t in toks if t in placed)
         n_placed = sum(hist.values())
@@ -260,9 +285,12 @@ def main() -> int:
 
     v = collections.Counter(r["verdict"] for r in rows)
     print()
-    print("%d galleries — PLACED %d (home derived) · ORPHAN %d (bodies exist, spine has "
-          "never met them) · STUDY %d (generative catalogue, home PROPOSED)"
-          % (len(rows), v["PLACED"], v["ORPHAN"], v["STUDY"]))
+    homed = sum(1 for r in rows if r["home"])
+    print("%d manifests — PLACED %d (home derived) · ORPHAN %d (bodies exist, spine has "
+          "never met them) · STUDY %d (catalogue) · RUN %d (sweep output, not a gallery)"
+          % (len(rows), v["PLACED"], v["ORPHAN"], v["STUDY"], v["RUN"]))
+    print("%d have a derived or slug-backed home; %d have neither."
+          % (homed, len(rows) - homed))
     return 0
 
 
