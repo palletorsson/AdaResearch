@@ -3001,7 +3001,12 @@ func _setup_world() -> void:
 	# force_field_zone, drag_corridor and artifact_runner, and being pushed
 	# around by every field in the corpus is not what was asked for.
 	_player.add_to_group("em_walker")
-	_player.position = Vector3(7.5, 0.0, 1.5)
+	# THE DROP (2026-08-26). Standing the visitor on the floor at (7.5, 0, 1.5) is
+	# arriving; being put in the air over the roof is being THROWN, which is the
+	# thing Palle asked for. The numbers are the slide's own — one definition, so
+	# the drop point cannot drift from the roof it is meant to land on — and with
+	# drop_slide off the walker starts exactly where it always did.
+	_player.position = _drop_point()
 	_yaw = PI  # segments extend along +z; face into the museum
 	_player.rotation = Vector3(0.0, _yaw, 0.0)
 	var col := CollisionShape3D.new()
@@ -19204,3 +19209,22 @@ func _drop_slide(seg: Node3D, solid: StaticBody3D) -> void:
 				_walk_erased[k] = "arch:drop_slide"
 	print("[em-slide] a roof from (%.1f, %.1f, %.1f) to (%.1f, %.1f) — %.1f m at %.0f degrees" % [
 		x, y0, z0, y1, z1, run, rad_to_deg(-ang)])
+
+
+## Where the visitor begins. The top of the slide when there is one, and the old
+## standing spot when there is not.
+##
+## NOT the map's spawn token, though Point_One carries `s:5:7:0` and that token is
+## exactly right for opening that map on its own. Inside the museum a map is an
+## installation rather than a level: spawns, teleporters and movers are stripped on
+## purpose ("a teleporter leaves the map; the museum is one endless map"), and a
+## drop that only the first hall wants has no business being a rule every map can
+## assert. It lives with the roof it lands on.
+func _drop_point() -> Vector3:
+	if _L("lobby", "enabled", 1.0) <= 0.5 or _L("lobby", "drop_slide", 0.0) <= 0.5:
+		return Vector3(7.5, 0.0, 1.5)
+	var p := Vector3(_L("lobby", "drop_x", 5.0) + 0.5,
+		_L("lobby", "drop_top_m", 7.0),
+		_L("lobby", "drop_z0", 0.0) + 0.5)
+	print("[em-slide] the visitor is dropped at (%.1f, %.1f, %.1f) — not stood at 7.5, 0.0, 1.5" % [p.x, p.y, p.z])
+	return p
