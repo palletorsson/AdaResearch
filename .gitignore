@@ -35,6 +35,12 @@
 /ada_run/*.progress.txt
 /ada_run/*.skip_list.txt
 /ada_run/capture_daemon.pid
+# THE MUSEUM'S OWN LAYOUT RECORD — 5.4 MB, and endless_museum.gd rewrites it
+# every time it builds a hall, so tracking it would churn the repo on every walk.
+# It is not lost: tools/long_museum.py folds it into commons/data/long_museum.json,
+# which IS tracked and is what /wall-map and /long-museum read. Regenerate the raw
+# record with `python tools/em_bake.py` (~6 min, 196 halls).
+/ada_run/em_layout_walk.json
 
 # Claude Code worktree leftovers — disposable session dirs.
 /commons/maps/tmpclaude-*

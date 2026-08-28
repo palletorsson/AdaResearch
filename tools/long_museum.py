@@ -328,6 +328,55 @@ def engine_layout():
     return out
 
 
+def built_tile(e):
+    """The hall AS BUILT, cut into the frame the book writes in.
+
+    2026-08-28, Palle: "can we have the wall-map, the long-museum and the desktop
+    museum read from the same file when they create the space."
+
+    They could not, because the crop below existed only inside the encyclopedia's
+    halls_get and nowhere else. The engine's record holds the whole segment: four
+    vestibule rows first, one skin column left of the hall (`cell_x0` -1), then the
+    hall and its gallery. Every page that wants to draw the room has to cut that
+    the same way, and a rule implemented twice is a rule that will disagree with
+    itself — the same fault that gave this file h20 where the engine builds h23.
+
+    So it is cut once, here, and written into the strip. A page reads a field.
+
+    The walk grid says only floor (".", or s/b/p/x for floor under something) and
+    not-floor ("#"), which lumps the wall you can hang on together with the empty
+    space beyond the building. A not-floor cell touching floor is a WALL ("4");
+    everything further out is void ("0"). Drawing the difference away would wrap
+    every hall in a solid slab and offer faces on its outside.
+    """
+    cells = e.get("cells") or []
+    if not cells:
+        return None
+    vest = int(e.get("vestibule", 4))
+    skin = -int(e.get("cell_x0", -1))               # -1: one column left of the hall
+    rows = [str(r)[skin:] for r in cells[vest:]]
+    if not rows or not rows[0]:
+        return None
+
+    def floor(rr, cc):
+        if rr < 0 or rr >= len(rows) or cc < 0 or cc >= len(rows[rr]):
+            return False
+        return rows[rr][cc] != "#"
+
+    out = []
+    for rr, row in enumerate(rows):
+        line = []
+        for cc, ch in enumerate(row):
+            if ch != "#":
+                line.append("1")
+            elif floor(rr - 1, cc) or floor(rr + 1, cc) or floor(rr, cc - 1) or floor(rr, cc + 1):
+                line.append("4")
+            else:
+                line.append("0")
+        out.append(line)
+    return out
+
+
 def read_hall(name, chapter, order, source, probs, engine=None):
     """One hall as a strip segment, or None if it cannot be read."""
     p = os.path.join(MAPS, name, "map_data.json")
@@ -418,6 +467,18 @@ def read_hall(name, chapter, order, source, probs, engine=None):
            "z0": 0, "z1": 0, "w": w, "h": h, "x0": -(w // 2),
            "source": source, "layout": layout, "passage": passage,
            "artifacts": arts, "structure": st}
+    # THE ROOM AS BUILT, beside the room as authored. `structure` is the map's own
+    # grid — what a map holds, and what the brush edits. `tile` is what the museum
+    # raised from it: cropped to content, passage rows appended, a skin and a
+    # gallery. They are different rooms and both are wanted, so both are named.
+    # A hall nobody has walked has no `tile` at all rather than a plausible guess.
+    if e:
+        bt = built_tile(e)
+        if bt:
+            seg["tile"] = bt
+            seg["tile_source"] = "engine"
+            seg["tile_w"] = len(bt[0])
+            seg["tile_h"] = len(bt)
     # KEPT SO THE CROP IS AUDITABLE. A hall drawn smaller than the file it came
     # from invites "is the strip losing cells?", and the honest answer is a
     # number rather than a reassurance: these two fields are the grid as stored,
@@ -511,11 +572,23 @@ def build():
         built = seq in authored
         for s2 in own:
             s2["built"] = built
+        # AND A SECOND, DIFFERENT QUESTION (2026-08-28). `built` above is about
+        # PROVENANCE — does this hall rise from its own map, or from one of the 26
+        # templates. It says nothing about whether the museum has ever stood the
+        # room up, and the page was reading it as if it did: "9,771 m proposed —
+        # halls the museum has never built", of halls the engine builds every time
+        # anyone walks past them. After a full bake it has a measured row for 195
+        # of 197. Both facts are worth having and neither is the other, so both are
+        # written down: `built` is where the room comes from, `walked` is whether
+        # the engine has ever raised it and written down what it raised.
+        walked_h = [s for s in hs if s.get("layout") == "engine"]
+        walked_m = float(sum(s["z1"] - s["z0"] for s in walked_h))
         chapters.append({"sequence": seq, "order": order,
                          "z0": own[0]["z0"], "z1": hs[-1]["z1"],
                          "halls": len(hs),
                          "artifacts": sum(len(s["artifacts"]) for s in hs),
-                         "source": source, "built": built})
+                         "source": source, "built": built,
+                         "walked": len(walked_h), "walked_metres": walked_m})
 
     n_halls = sum(1 for s in segments if s["kind"] == "hall")
     doc = {"schema": SCHEMA, "axis": "z", "unit_m": 1.0, "vestibule_h": VESTIBULE_H,
@@ -529,6 +602,8 @@ def build():
                       "proposed_metres": float(sum(c["z1"] - c["z0"] for c in chapters
                                                    if not c["built"])),
                       "built_chapters": sum(1 for c in chapters if c["built"]),
+                      "walked_halls": sum(c["walked"] for c in chapters),
+                      "walked_metres": float(sum(c["walked_metres"] for c in chapters)),
                       # STATED, NOT IMPLIED. The engine also crops each map to
                       # its last row of content, appends an exit chicane to an
                       # authored hall, and can insert a porch or a court between
@@ -676,6 +751,24 @@ def main():
             if int(s2["h"]) != want_h or int(s2["w"]) != int(e.get("w", s2["w"])):
                 drift.append("%s: strip %dx%d, the museum built %dx%d"
                              % (s2["name"], s2["w"], s2["h"], int(e.get("w", 0)), want_h))
+            # AND THE ROOM ITSELF, not only its measurements. `tile` is the field
+            # the editors draw from, so a hall the engine has built and this file
+            # gave no tile is a hall /wall-map renders blank while the museum has
+            # it standing — the exact silence Palle asked about. Its size is
+            # checked against the record's OWN arithmetic rather than against the
+            # crop that produced it, so a wrong crop cannot vouch for itself.
+            cells = e.get("cells") or []
+            if cells:
+                th = len(cells) - int(e.get("vestibule", 4))
+                tw = len(str(cells[-1])) - (-int(e.get("cell_x0", -1)))
+                if not s2.get("tile"):
+                    drift.append("%s: the museum built a %dx%d room and the strip "
+                                 "carries no tile — the editors draw it blank"
+                                 % (s2["name"], tw, th))
+                elif int(s2.get("tile_h", 0)) != th or int(s2.get("tile_w", 0)) != tw:
+                    drift.append("%s: tile %dx%d, the museum's own grid is %dx%d"
+                                 % (s2["name"], int(s2.get("tile_w", 0)),
+                                    int(s2.get("tile_h", 0)), tw, th))
         if drift:
             print("DRIFT: the strip disagrees with what the museum built, in %d hall(s):"
                   % len(drift), file=sys.stderr)
