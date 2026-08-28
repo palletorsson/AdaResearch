@@ -2700,7 +2700,13 @@ func _dress_lobby(seg: Node3D, solid: StaticBody3D, w: int, zbase: int, wall_col
 	# z + VESTIBULE_H + 0.5. Defaults reproduce where it stood (cx, 2.0).
 	var view_cx: float = _L("lobby", "view_cell_x", cx - 0.5) + 0.5
 	var view_cz: float = _L("lobby", "view_cell_z", 2.0 - VESTIBULE_H - 0.5) + VESTIBULE_H + 0.5
-	var view: Node3D = _lobby_piece(seg, "view", Vector3(view_cx, _L("lobby", "view_y", 1.7), view_cz), 0.0)
+	# HOW FAR BACK THE PAST STANDS. Folding Past's own z_base_offset is -8.0, and its
+	# nested frames run out to about -12.5 from there — so the room's depth was never
+	# what put it far away, the artifact was. Palle, 2026-08-26: "the window and the
+	# folding past should be more near the 0,0". A negative number, metres behind the
+	# piece's own origin; the default reproduces the artifact's shipped -8.
+	var view: Node3D = _lobby_piece(seg, "view", Vector3(view_cx, _L("lobby", "view_y", 1.7), view_cz), 0.0,
+		{"z_base_offset": _L("lobby", "view_depth_m", -8.0)})
 	var wash := OmniLight3D.new()
 	wash.light_color = Color(0.85, 0.9, 1.0)
 	wash.light_energy = _L("lobby", "view_light", 2.0)
