@@ -843,7 +843,16 @@ var _spine_rows: Array = []               # {chapter, map, pearl} per strip row
 var _spine_cur: Dictionary = {}           # the open pearl {chapter, pearl}
 var _spine_snapshot: Array = []           # lines as shown (their tokens aim the web jump)
 var _spine_prev_mouse: int = 0
-var _spine_watch_t: float = 0.0           # the web bridge: poll the open page's mtime
+## THE EDIT BRIDGE (2026-08-26, Palle: "they are not shared or synced"). The FILES
+## always were — the desktop museum and /api/museum-editor write the same
+## em_overrides.json, and the strip rebuilds within a second of a map write. What
+## was never shared is the SESSION: a museum already running had no reason to
+## re-read a file somebody else changed, so an edit made on the web reached the
+## disk and stopped there. This polls the two files an editor actually writes and
+## reloads the hall when either moves, the way _spine_watch already does for the
+## book.
+var _edit_watch_t: float = 0.0
+var _edit_watch_mt: Dictionary = {}
 var _spine_mtime: int = 0                 # 0 = no page open / nothing to watch
 var _book_dir: String = "res://commons/data/book"   # a var: probes inject a trial copy
 ## THE PAGE (2026-08-24, Palle: "I want the wall works of white frames with black
@@ -13088,9 +13097,9 @@ func _physics_process(_delta: float) -> void:
 	if _autopilot > 0:
 		_run_autopilot(_delta)
 		return
+	_edit_watch(_delta)                   # the map or the rulings may have changed elsewhere
 	if _spine_ui != null and is_instance_valid(_spine_ui):
 		_player.velocity = Vector3.ZERO   # the strip is open: typing is typing
-		_spine_watch(_delta)              # …and the web editor may be speaking
 		return
 	if _dollhouse:
 		_doll_frame(_delta)
@@ -13961,21 +13970,62 @@ func _web_open_focus() -> void:
 	print("[em-web] %s -> the web editor (%s · %s)" % [r.get("token"), ch, pearl])
 
 
-func _spine_watch(delta: float) -> void:
-	if _spine_cur.is_empty() or _spine_mtime == 0:
+## THE ONE WATCHER (2026-08-26, Palle: "they are not shared or synced" and "can we
+## scrip the _spine_watch").
+##
+## The FILES were always shared: the desktop museum and /api/museum-editor write
+## the same em_overrides.json, and the strip rebuilds within a second of a map
+## write. What was never shared is the SESSION — a museum already running had no
+## reason to re-read a file somebody else changed, so a web edit reached the disk
+## and stopped there.
+##
+## There were two pollers for a moment, this one and _spine_watch for the book.
+## Two clocks, two mtime caches and two ideas of what counts as a change is how
+## surfaces drift apart in the first place, so there is one: rulings, the map of
+## the hall the visitor stands in, and the open book page. Geometry rebuilds the
+## hall; the book only refreshes the page it is written on.
+func _edit_watch(delta: float) -> void:
+	if _edit_dirty:
+		return                    # our own unsaved work outranks a reload
+	_edit_watch_t += delta
+	if _edit_watch_t < 1.0:
 		return
-	_spine_watch_t += delta
-	if _spine_watch_t < 1.0:
+	_edit_watch_t = 0.0
+	var watched: Array = [_overrides_path]
+	if not _spine_cur.is_empty():
+		watched.append(_book_dir + ("/%s.json" % String(_spine_cur.get("chapter", ""))))
+	var ez: float = _eye_pos().z
+	for sv in _segments:
+		var srec: Dictionary = sv
+		if ez < float(srec.get("z0", 0)) or ez >= float(srec.get("z1", 0)):
+			continue
+		var sn: Node3D = _node_or_null(srec.get("node"))
+		if sn != null and sn.has_meta("em_map"):
+			watched.append("res://commons/maps/%s/map_data.json" % String(sn.get_meta("em_map")))
+		break
+	for path_v in watched:
+		var path: String = path_v
+		var mt: int = int(FileAccess.get_modified_time(path))
+		if mt == 0:
+			continue
+		if not _edit_watch_mt.has(path):
+			_edit_watch_mt[path] = mt          # first sight is not a change
+			continue
+		if mt == int(_edit_watch_mt[path]):
+			continue
+		_edit_watch_mt[path] = mt
+		if path.begins_with(_book_dir):
+			# the book is text, not geometry: refresh the open page, build nothing
+			if _spine_ui != null and is_instance_valid(_spine_ui):
+				var psel := _spine_list.get_selected_items()
+				_spine_show_pearl(psel[0] if psel.size() > 0 else 0)
+				_spine_status.text = "reloaded — the book changed in the web editor"
+			print("[em-bridge] %s changed — the open page reloaded" % path.get_file())
+			continue
+		print("[em-bridge] %s changed on disk — rebuilding the hall" % path.get_file())
+		_doll_toast("%s changed in another editor — rebuilt" % path.get_file())
+		_follow_reload()
 		return
-	_spine_watch_t = 0.0
-	var path := _book_dir + ("/%s.json" % String(_spine_cur.get("chapter", "")))
-	var mt: int = int(FileAccess.get_modified_time(path))
-	if mt == 0 or mt == _spine_mtime:
-		return
-	_spine_mtime = mt
-	var psel := _spine_list.get_selected_items()
-	_spine_show_pearl(psel[0] if psel.size() > 0 else 0)
-	_spine_status.text = "reloaded — the book changed in the web editor"
 
 
 func _spine_travel(idx: int) -> void:
