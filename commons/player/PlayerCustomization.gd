@@ -21,6 +21,7 @@ enum Feature {
 	BODY_TORSO,      # Visible torso
 	BODY_LEGS,       # Visible legs
 	ACCESSORIES,     # Hats, jewelry, etc.
+	COSTUME,         # The growing garment + extra limbs (queer_costume.gd)
 }
 
 # Scenes for loadable features
@@ -35,6 +36,14 @@ const BODY_IK_SCENE = preload("res://commons/body/ik_arms/player_body_ik.tscn")
 @export var skin_color: Color = Color(0.87, 0.72, 0.53)  # Default skin tone
 @export var nail_color: Color = Color(0.8, 0.6, 0.6)     # Default nail color
 @export var dress_color: Color = Color(0.0, 0.3, 0.1)    # Elphaba green
+
+@export_group("The costume")
+## THE GROWING GARMENT (2026-08-27). Gated on purpose: switched off, this file
+## behaves exactly as it did before the costume existed, and the rig is untouched.
+## Switched on, a CostumeWardrobe is mounted at startup and the garment is
+## rebuilt from MapProgressionManager — so it costs nothing until a sequence
+## has actually been finished.
+@export var costume_on_progress: bool = true
 
 @export_group("Debug")
 @export var debug_mode: bool = false
@@ -70,6 +79,13 @@ func _initialize():
 	_active_features["hands"] = true
 
 	_log("Initialized with features: %s" % _unlocked.keys())
+
+	# THE ONE THING THIS FILE NEVER HAD: A CALLER. Every feature here has worked
+	# since it was written, and across the whole repository nothing ever called
+	# unlock_feature except one hand-placed walk-into trigger. The wardrobe is
+	# the door — it ties the costume to the walk instead of to a doorway.
+	if costume_on_progress:
+		unlock_and_activate("costume")
 
 func _find_xr_origin() -> XROrigin3D:
 	# Check if we're a child of XROrigin
@@ -138,6 +154,8 @@ func activate_feature(feature_name: String) -> bool:
 			_active_features[key] = true
 			feature_activated.emit(feature_name)
 			return true
+		"costume":
+			return _activate_costume(key)
 		_:
 			_log("Unknown feature: %s" % feature_name)
 			return false
@@ -227,6 +245,25 @@ func _activate_body_ik(key: String) -> bool:
 
 	_active_features[key] = body_ik
 	_log("Activated body IK arms")
+	feature_activated.emit(key)
+	return true
+
+
+## ============ THE COSTUME ============
+
+func _activate_costume(key: String) -> bool:
+	if not _xr_origin:
+		push_error("PlayerCustomization: No XROrigin3D found for the costume!")
+		return false
+
+	var wardrobe = load("res://commons/player/costume_wardrobe.gd").new()
+	wardrobe.name = "CostumeWardrobe"
+	# It hangs the costume on the origin and grows it from the progression; this
+	# node only owns the decision to have one at all.
+	_xr_origin.add_child(wardrobe)
+
+	_active_features[key] = wardrobe
+	_log("Activated the costume — it will grow with the sequences")
 	feature_activated.emit(key)
 	return true
 
