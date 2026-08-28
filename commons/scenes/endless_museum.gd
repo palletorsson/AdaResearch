@@ -523,6 +523,12 @@ static func _shipped(path: String) -> String:
 	return alt if FileAccess.file_exists(alt) else path
 var _bake_mode: bool = false            # --em-bake: build every pearl, write the bake, quit
 var _bake_only: bool = false            # --em-bake-only: bake the start pearl only, merge into the file
+## --em-bake-n=N: bake the first N pearls from the start chapter, merged into the
+## existing bake the way --em-bake-only does. 2026-08-28, Palle: "do not make all
+## the maps now just the primitives if we can make that the rest will work too."
+## A full bake is ~500 s and primitives is 10 of 196 halls, so iterating on one
+## chapter cost eight minutes a turn to learn about ten rooms. 0 = every pearl.
+var _bake_n: int = 0
 ## THE STUDIO (2026-08-19). museum_studio.tscn hosts this scene as an editor:
 ## one pearl built exactly as the walk builds it, no walker, no streaming, no
 ## gate; the studio owns the camera and the input. Palle: "we need a more
@@ -1183,7 +1189,10 @@ func _boot_museum() -> void:
 			_bake_total = _plan_by_chapter.size()
 		if _bake_only:
 			_bake_total = 1
-			# start from the existing bake, so one pearl's re-bake keeps the other 218
+		elif _bake_n > 0:
+			_bake_total = mini(_bake_n, _bake_total)
+		if _bake_only or _bake_n > 0:
+			# start from the existing bake, so a partial re-bake keeps the rest
 			if FileAccess.file_exists(BAKE_PATH):
 				var prev_v: Variant = JSON.parse_string(FileAccess.get_file_as_string(BAKE_PATH))
 				if prev_v is Dictionary and (prev_v as Dictionary).get("segments") is Dictionary:
@@ -1487,6 +1496,9 @@ func _parse_args() -> void:
 		elif a == "--em-bake-only":
 			_bake_mode = true
 			_bake_only = true          # one pearl (the start chapter/map), merged into the existing bake
+		elif a.begins_with("--em-bake-n="):
+			_bake_mode = true
+			_bake_n = maxi(1, int(a.substr(12)))
 		elif a.begins_with("--em-map="):
 			start_map = a.substr(9)    # the pearl's MAP, as the Inspector's start_map
 		elif a.begins_with("--em-shot-at="):
@@ -18828,6 +18840,22 @@ func _authored_passages(tile_in: Array, decl: Dictionary = {}, next_first: Array
 	if tile.size() < 4:
 		return tile
 	var w: int = (tile[0] as Array).size()
+	# A CROSSING CANNOT REACH A DOOR IT IS NOT WIDE ENOUGH TO HOLD. Halls are
+	# laid from x 0 (`_box(seg, Vector3(x + 0.5, ...))`), so column 8 of an
+	# 11-wide hall is world x 8, and a 7-wide passage simply does not extend
+	# that far — measured on primitives, point trace (7) opens into point line
+	# grid (11) whose door is at 7,8, and the seam came back solid wall and was
+	# dropped. So the tile widens to the wider of the two, padded with VOID: a
+	# void column draws nothing and walks nowhere, so the hall it belongs to is
+	# unchanged, and the crossing gains the columns it needs to meet the door.
+	# Only ever wider, never narrower — a narrower hall would lose cells.
+	if not next_first.is_empty() and next_first.size() > w:
+		var nw: int = next_first.size()
+		for r in tile:
+			var rr: Array = r
+			while rr.size() < nw:
+				rr.append("0")
+		w = nw
 	var kind: String = String(decl.get("kind", "chicane")).to_lower()
 	var pw: int = clampi(int(decl.get("width", 2)), 1, maxi(1, w - 2))
 	if not _edge_has_open(tile, 0):
