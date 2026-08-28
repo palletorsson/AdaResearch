@@ -95,6 +95,7 @@
 			"source": "editor"
 		},
 		"museum": {
+			"props_deny": ["wall_clock", "electrical_panel"],
 			"basin": {
 				"rects": [[0, 0, 3, 3]],
 				"depth": 3.0,

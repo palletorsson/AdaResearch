@@ -6357,6 +6357,16 @@ func _build_segment() -> void:
 			peek["open_roof"] = bool(mm.get("open_roof", peek.get("open_roof", false)))
 			if mm.has("gate"):
 				peek["gate"] = bool(mm["gate"])
+			# A HALL MAY REFUSE A PROP BY NAME (2026-08-28, Palle: "try to find the
+			# props to remove them"). The dresser picks wall props from a rotation
+			# (em_props.gd: pick = i % 4) and there was no way for a map to say no
+			# to one — the only lever was a hand ruling keyed by dress index, which
+			# moves whenever the dressing does. map_info.museum.props_deny is a list
+			# of tokens this hall will not host.
+			if mm.get("props_deny") is Array:
+				peek["props_deny"] = mm["props_deny"]
+			elif peek.has("props_deny"):
+				peek.erase("props_deny")
 			if mm.get("basin") is Dictionary:
 				peek["basin"] = mm["basin"]
 			# THE PATTERN BASE ON THE ARCHITECTURE (2026-08-25, Palle: "many
@@ -6528,6 +6538,7 @@ func _build_segment() -> void:
 	seg.position = Vector3(0, 0, _next_z - VESTIBULE_H)
 	add_child(seg)
 	seg.set_meta("em_tile", tile)
+	seg.set_meta("em_props_deny", peek.get("props_deny", []))
 	seg.set_meta("em_pearl", cur_pearl)
 	seg.set_meta("em_chapter", next_seq)
 	seg.set_meta("em_map", String(peek.get("map", "")) if String(peek.get("authored", "")) == "map" else "")
@@ -12222,6 +12233,9 @@ func _dress_props(seg: Node3D, tile: Array, w: int, h: int, zbase: int,
 		var r: Dictionary = r0
 		var tok: String = String(r.get("token", ""))
 		if tok == "":
+			continue
+		if seg.has_meta("em_props_deny") and (seg.get_meta("em_props_deny") as Array).has(tok):
+			print("[em-props] %s refused by the map's props_deny" % tok)
 			continue
 		var lv: Variant = _live.get(tok, null)
 		if not (lv is Dictionary):
