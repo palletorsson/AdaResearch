@@ -9191,6 +9191,27 @@ func _pack_ring(r: int) -> Array:
 	return out
 
 
+## One hand ruling over a courtyard, or an empty dictionary.
+##
+## Keyed (chapter, token); a ruling that names a `pearl` binds to that hall only,
+## one without it binds to every hall of the chapter that hosts the token. Last
+## row wins, which is what makes the editor's "save again" mean "change my mind"
+## rather than "add a second opinion".
+func _court_rule(chapter: String, pearl: String, token: String) -> Dictionary:
+	var found: Dictionary = {}
+	for ov_v in _edit_overrides:
+		var ov: Dictionary = ov_v
+		if String(ov.get("kind", "")) != "court":
+			continue
+		if String(ov.get("chapter", "")) != chapter or String(ov.get("token", "")) != token:
+			continue
+		var rp := String(ov.get("pearl", ""))
+		if rp != "" and rp != pearl:
+			continue
+		found = ov
+	return found
+
+
 func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 		w: int, h: int, chapter: String = "") -> Dictionary:
 	# RESOLUTION ORDER: the chapter's own row first, the v1 building dict
@@ -9280,11 +9301,38 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 			if cscene == "":
 				missing.append(ctok)
 				continue
+			# THE HAND RULES THE COURT (2026-08-28, Palle: "can I get a courtyard
+			# and annex editor" - "skip the spatial negotiation I can do the edit").
+			# Until now a courtyard existed in NO map and in no editor: the
+			# negotiator sized it from the body's footprint and that was the end of
+			# it, which is why /long-museum had never heard of a court and guessed
+			# the museum a third of its real length.
+			#
+			# A `kind: "court"` ruling replaces the negotiated size and access
+			# OUTRIGHT - no re-negotiation, no fitting pass, no second opinion. The
+			# same authorship rule as every other ruling here: the plan places, the
+			# hand rules. Keyed (chapter, token) and optionally pearl, so a token
+			# standing in four halls of a chapter can be ruled once or four times.
+			var crule: Dictionary = _court_rule(String(entry.get("sequence", "")),
+				String(entry.get("pearl", "")), ctok)
+			if bool(crule.get("remove", false)):
+				continue                # ruled out of the open air; the joint never sees it
+			var csize: Array = row.get("court", [])
+			var caccess := String(row.get("court_access", ""))
+			var crot: float = float(row.get("rotation", 0.0))
+			if not crule.is_empty():
+				if (crule.get("court", []) as Array).size() >= 2:
+					csize = crule["court"]
+				if crule.has("access"):
+					caccess = String(crule["access"])
+				if crule.has("rotation"):
+					crot = float(crule["rotation"])
 			courts.append({"token": ctok, "scene": cscene,
-				"court": row.get("court", []),
-				"access": String(row.get("court_access", "")),
-				"rotation": float(row.get("rotation", 0.0)),
+				"court": csize,
+				"access": caccess,
+				"rotation": crot,
 				"venue": venue,
+				"ruled": not crule.is_empty(),
 				"chapter": String(entry.get("sequence", ""))})
 			continue
 		if String(((row.get("relation", {}) as Dictionary).get("walk_space", ""))) == "room" \
