@@ -1731,7 +1731,7 @@
   {
    "anchor": "transformation",
    "kind": "extends",
-   "pearl": "trans rotation",
+   "pearl": "trans introduction",
    "provenance": "derived",
    "space": "wall",
    "space_by": "heuristic",
@@ -8573,7 +8573,7 @@
   {
    "anchor": "transformation",
    "kind": "synthesizes",
-   "pearl": "trans axisdecomposition",
+   "pearl": "trans introduction",
    "provenance": "derived",
    "space": "alcove",
    "space_by": "heuristic",
@@ -12493,7 +12493,7 @@
   {
    "anchor": "transformation",
    "kind": "varies",
-   "pearl": "trans translation",
+   "pearl": "trans introduction",
    "provenance": "derived",
    "space": "wall",
    "space_by": "heuristic",
@@ -12504,7 +12504,7 @@
   {
    "anchor": "transformation",
    "kind": "varies",
-   "pearl": "trans translation",
+   "pearl": "trans introduction",
    "provenance": "derived",
    "space": "wall",
    "space_by": "heuristic",
@@ -12515,7 +12515,7 @@
   {
    "anchor": "transformation",
    "kind": "varies",
-   "pearl": "trans translation",
+   "pearl": "trans introduction",
    "provenance": "derived",
    "space": "wall",
    "space_by": "heuristic",
@@ -12548,7 +12548,7 @@
   {
    "anchor": "transformation",
    "kind": "varies",
-   "pearl": "trans axisdecomposition",
+   "pearl": "trans introduction",
    "provenance": "derived",
    "space": "wall",
    "space_by": "heuristic",
@@ -16991,7 +16991,7 @@
   }
  ],
  "counts": {
-  "branches_on_pearls": 1425,
+  "branches_on_pearls": 1376,
   "by_kind": {
    "contradicts": 0,
    "edge": 149,
@@ -17002,7 +17002,7 @@
   },
   "derived": 1544,
   "hand": 1,
-  "pearls": 213,
+  "pearls": 216,
   "pending": 2,
   "trunk": 24
  },
@@ -17048,12 +17048,16 @@
      "interactive_point_origin",
      "science_screen",
      "CoordinateSystem3M",
-     "grab_sphere_point_snap"
+     "fontana_puncture",
+     "floating_sphere_field",
+     "grab_sphere_point_snap",
+     "interactive_point_origin_force",
+     "lab_room"
     ],
     "tokens_remove": [
+     "coordinate_readout",
      "do_not_cross_barrier",
      "klee_walking_point",
-     "lab_room",
      "point",
      "walk_this_line_marking"
     ],
@@ -17068,7 +17072,8 @@
      "fontana_puncture",
      "floating_sphere_field",
      "grab_sphere_point_snap",
-     "interactive_point_origin_force"
+     "interactive_point_origin_force",
+     "lab_room"
     ],
     "verse": {
      "floating_sphere_field": {
@@ -17085,9 +17090,17 @@
      "interactive_point_origin": 0.95
     },
     "locks": {
+     "folding_past": [
+      2,
+      0
+     ],
      "frame_counter_display": [
       1,
       14
+     ],
+     "origin": [
+      0,
+      0
      ],
      "you_are_here": [
       7,
@@ -17108,18 +17121,39 @@
      "fontana_puncture": [
       7,
       8
+     ],
+     "floating_sphere_field": [
+      5,
+      12
+     ],
+     "interactive_point_origin_force": [
+      1,
+      11
+     ],
+     "lab_room": [
+      1,
+      0
      ]
     },
     "configs": {
      "science_screen": {
       "support": "stand",
-      "scan_radius": 8
+      "scan_radius": 8.0
      },
      "CoordinateSystem3M": {
       "floating_point": 1
+     },
+     "interactive_point_origin_force": {
+      "mode": "transformation"
+     },
+     "lab_room": {
+      "mounted_lab_json": "res://commons/labs/point_one.lab.json"
      }
     },
     "poses": {
+     "folding_past": {
+      "rotation": 1
+     },
      "frame_counter_display": {
       "rotation": 90
      },
@@ -17173,7 +17207,16 @@
       ],
       "kind": "4"
      }
-    ]
+    ],
+    "counts": {
+     "interactive_point_origin_force": {
+      "count": 3,
+      "spread": "square",
+      "gap": 1
+     }
+    },
+    "speak": "queer melancholia, rythm and melancolia",
+    "speak_by": "hand"
    },
    {
     "map": "Point_Lines",
@@ -17227,7 +17270,16 @@
      "klee_walking_point",
      "dgrid",
      "walk_this_line_marking",
-     "science_screen"
+     "perspective_lines",
+     "laser_sword",
+     "scale_lines",
+     "science_screen",
+     "cube_scene",
+     "dark_sphere",
+     "lab_room",
+     "floating_sphere_field",
+     "fontana_puncture",
+     "synthesis_stand"
     ],
     "tokens_order": [
      "do_not_cross_barrier",
@@ -17248,20 +17300,42 @@
      "cube_scene",
      "dark_sphere",
      "plus_line_puzzle",
-     "modulor_man_demo"
-    ],
-    "tokens_remove": [
+     "modulor_man_demo",
+     "lab_room",
+     "floating_sphere_field",
+     "fontana_puncture",
      "synthesis_stand"
     ],
+    "tokens_remove": [],
     "hero": "klee_walking_point",
     "locks": {
      "do_not_cross_barrier": [
       7,
       11
      ],
+     "klee_walking_point": [
+      2,
+      24
+     ],
+     "dgrid": [
+      6,
+      26
+     ],
+     "walk_this_line_marking": [
+      3,
+      6
+     ],
      "line": [
       7,
       16
+     ],
+     "perspective_lines": [
+      1,
+      23
+     ],
+     "parallel_line_puzzle": [
+      4,
+      10
      ],
      "laser_sword": [
       6,
@@ -17275,14 +17349,65 @@
       1,
       25
      ],
+     "grabbable_line": [
+      2,
+      15
+     ],
+     "line_builder_3d": [
+      5,
+      4
+     ],
+     "lightrod": [
+      1,
+      19
+     ],
+     "scale_lines": [
+      3,
+      23
+     ],
      "science_screen": [
       5,
       24
+     ],
+     "cube_scene": [
+      2,
+      11
+     ],
+     "dark_sphere": [
+      0,
+      0
+     ],
+     "plus_line_puzzle": [
+      2,
+      10
+     ],
+     "modulor_man_demo": [
+      1,
+      4
+     ],
+     "lab_room": [
+      1,
+      0
+     ],
+     "floating_sphere_field": [
+      3,
+      13
+     ],
+     "fontana_puncture": [
+      1,
+      21
+     ],
+     "synthesis_stand": [
+      4,
+      23
      ]
     },
     "poses": {
      "do_not_cross_barrier": {
-      "rotation": 0
+      "rotation": 90
+     },
+     "dgrid": {
+      "rotation": 90
      },
      "laser_measure": {
       "offset": [
@@ -17290,6 +17415,9 @@
        1.0,
        0.0
       ]
+     },
+     "lightrod": {
+      "rotation": 90
      }
     },
     "footprints": {
@@ -17325,6 +17453,11 @@
      }
     },
     "counts": {
+     "perspective_lines": {
+      "count": 2,
+      "spread": "x",
+      "gap": 4
+     },
      "laser_measure": {
       "count": 3,
       "spread": "row",
@@ -17334,12 +17467,46 @@
       "count": 3,
       "spread": "row",
       "gap": 3
+     },
+     "lightrod": {
+      "count": 2,
+      "spread": "x",
+      "gap": 4
+     },
+     "cube_scene": {
+      "count": 5,
+      "spread": "square",
+      "gap": 1
      }
     },
     "configs": {
+     "dgrid": {
+      "config": "5:5"
+     },
+     "parallel_line_puzzle": {
+      "fillhole": "remove"
+     },
+     "lightrod": {
+      "config": "4"
+     },
      "science_screen": {
       "support": "stand",
-      "scan_radius": 8
+      "scan_radius": 8.0
+     },
+     "cube_scene": {
+      "group": "plusfillhole"
+     },
+     "plus_line_puzzle": {
+      "plusfillhole": "remove"
+     },
+     "lab_room": {
+      "mounted_lab_json": "res://commons/labs/point_line.lab.json"
+     },
+     "floating_sphere_field": {
+      "bounds": "4,3,14"
+     },
+     "synthesis_stand": {
+      "subject": "dark_sphere#mode:hero"
      }
     }
    },
@@ -17376,11 +17543,14 @@
      "quad_line_puzzle": "claude"
     },
     "tokens_add": [
-     "catalyst_pedestal"
+     "catalyst_pedestal",
+     "catalyst_vent",
+     "lab_room",
+     "dark_sphere",
+     "floating_sphere_field",
+     "science_screen"
     ],
-    "tokens_remove": [
-     "catalyst_prompter_box"
-    ],
+    "tokens_remove": [],
     "hero": "catalyst_pedestal",
     "tokens_order": [
      "catalyst_pedestal",
@@ -17394,7 +17564,12 @@
      "pythagorean_triangle_angles",
      "quad",
      "interactivetriangle",
-     "quad_line_puzzle"
+     "quad_line_puzzle",
+     "lab_room",
+     "catalyst_prompter_box",
+     "dark_sphere",
+     "floating_sphere_field",
+     "science_screen"
     ],
     "stages": [
      {
@@ -17426,7 +17601,127 @@
       "rise": 0.4
      }
     ],
-    "join": true
+    "join": true,
+    "locks": {
+     "parasol_triangle": [
+      5,
+      6
+     ],
+     "triangle_line_puzzle": [
+      3,
+      7
+     ],
+     "catalyst_vent": [
+      0,
+      8
+     ],
+     "triangleprofiles": [
+      2,
+      10
+     ],
+     "folded_strip": [
+      5,
+      12
+     ],
+     "draw_triangle_faces": [
+      1,
+      13
+     ],
+     "triangle": [
+      2,
+      14
+     ],
+     "pythagorean_triangle_angles": [
+      4,
+      14
+     ],
+     "quad": [
+      6,
+      15
+     ],
+     "interactivetriangle": [
+      0,
+      16
+     ],
+     "quad_line_puzzle": [
+      3,
+      17
+     ],
+     "lab_room": [
+      0,
+      0
+     ],
+     "catalyst_prompter_box": [
+      2,
+      1
+     ],
+     "dark_sphere": [
+      0,
+      10
+     ],
+     "floating_sphere_field": [
+      3,
+      11
+     ],
+     "science_screen": [
+      0,
+      14
+     ]
+    },
+    "poses": {
+     "parasol_triangle": {
+      "rotation": 90
+     },
+     "triangle_line_puzzle": {
+      "rotation": 90
+     },
+     "folded_strip": {
+      "rotation": 270
+     },
+     "draw_triangle_faces": {
+      "rotation": 90
+     },
+     "triangle": {
+      "rotation": 90
+     },
+     "pythagorean_triangle_angles": {
+      "rotation": 90
+     },
+     "quad": {
+      "rotation": 90
+     },
+     "interactivetriangle": {
+      "rotation": 180
+     },
+     "quad_line_puzzle": {
+      "rotation": 90
+     },
+     "science_screen": {
+      "rotation": 90
+     }
+    },
+    "configs": {
+     "catalyst_vent": {
+      "emit_interval_s": "2.5#wave_size:3#start_delay_s:5.0#sequence:auto"
+     },
+     "lab_room": {
+      "mounted_lab_json": "res://commons/labs/trace.lab.json"
+     },
+     "catalyst_prompter_box": {
+      "emergence": "hatch#sequence:auto#lease_s:45"
+     },
+     "floating_sphere_field": {
+      "bounds": "4,3,12"
+     }
+    },
+    "supports": {
+     "draw_triangle_faces": 1.0,
+     "triangle": 1.0,
+     "pythagorean_triangle_angles": 1.0,
+     "quad": 1.0,
+     "interactivetriangle": 1.0,
+     "science_screen": 1.0
+    }
    },
    {
     "map": "Point_Trace",
@@ -17436,9 +17731,15 @@
      "draw_dot": "all life is encoded — that is enough"
     },
     "tokens_add": [
-     "draw_dot"
+     "mystic_writing_pad",
+     "draw_dot",
+     "lab_room",
+     "floating_sphere_field",
+     "science_screen"
     ],
-    "tokens_remove": [],
+    "tokens_remove": [
+     "whiteboard"
+    ],
     "says_by": {
      "mystic_writing_pad": "hand",
      "draw_dot": "hand"
@@ -17446,9 +17747,50 @@
     "hero": "mystic_writing_pad",
     "tokens_order": [
      "mystic_writing_pad",
-     "draw_dot"
+     "draw_dot",
+     "lab_room",
+     "floating_sphere_field",
+     "science_screen"
     ],
-    "join": true
+    "join": true,
+    "locks": {
+     "mystic_writing_pad": [
+      4,
+      5
+     ],
+     "draw_dot": [
+      3,
+      8
+     ],
+     "lab_room": [
+      0,
+      0
+     ],
+     "floating_sphere_field": [
+      3,
+      7
+     ],
+     "science_screen": [
+      2,
+      12
+     ]
+    },
+    "poses": {
+     "mystic_writing_pad": {
+      "rotation": 180
+     },
+     "science_screen": {
+      "rotation": 180
+     }
+    },
+    "configs": {
+     "lab_room": {
+      "mounted_lab_json": "res://commons/labs/trace.lab.json"
+     },
+     "floating_sphere_field": {
+      "bounds": "4,3,10"
+     }
+    }
    },
    {
     "map": "Point_Line_Grid",
@@ -17463,13 +17805,52 @@
      "player_trace": "claude",
      "grid_lines": "hand"
     },
-    "tokens_add": [],
-    "tokens_remove": [
+    "tokens_add": [
+     "floating_sphere_field",
+     "grab_sphere_point_snap",
      "ConeTwistBag",
-     "ConnectedTriangles",
-     "grab_sphere_point_snap"
+     "ConnectedTriangles"
     ],
-    "hero": "player_trace"
+    "tokens_remove": [],
+    "hero": "player_trace",
+    "locks": {
+     "room_grammar": [
+      7,
+      13
+     ],
+     "player_trace": [
+      0,
+      0
+     ],
+     "grid_lines": [
+      4,
+      3
+     ],
+     "floating_sphere_field": [
+      4,
+      7
+     ],
+     "grab_sphere_point_snap": [
+      2,
+      8
+     ],
+     "ConeTwistBag": [
+      0,
+      9
+     ],
+     "ConnectedTriangles": [
+      6,
+      10
+     ]
+    },
+    "configs": {
+     "floating_sphere_field": {
+      "bounds": "5,3,8"
+     }
+    },
+    "supports": {
+     "grab_sphere_point_snap": 1.0
+    }
    },
    {
     "map": "Primitives_Polythedra",
@@ -17490,9 +17871,73 @@
      "pyramid_edit": "hand",
      "tentacle_placer": "draft"
     },
-    "tokens_add": [],
-    "tokens_remove": [],
-    "hero": "grab_trihedron"
+    "tokens_add": [
+     "becoming_catalyst",
+     "lab_room",
+     "cube_scene",
+     "interactive_point_origin_force"
+    ],
+    "tokens_remove": [
+     "grab_tetrahedron"
+    ],
+    "hero": "grab_trihedron",
+    "locks": {
+     "grab_trihedron": [
+      2,
+      0
+     ],
+     "path_game_controller": [
+      4,
+      0
+     ],
+     "path_watchdog": [
+      4,
+      1
+     ],
+     "becoming_catalyst": [
+      3,
+      8
+     ],
+     "pyramid_edit": [
+      2,
+      9
+     ],
+     "tentacle_placer": [
+      3,
+      9
+     ],
+     "lab_room": [
+      0,
+      2
+     ],
+     "cube_scene": [
+      2,
+      8
+     ],
+     "interactive_point_origin_force": [
+      4,
+      8
+     ]
+    },
+    "poses": {
+     "grab_trihedron": {
+      "rotation": 90
+     }
+    },
+    "configs": {
+     "tentacle_placer": {
+      "place_positions": "-1.5,0,0;0,0,0;1.5,0,0#sky_height:7.0#travel_speed:0.6#dwell_seconds:1.5#pyramid_size:1.0#pyramid_height:-0.5#debug_log:true"
+     },
+     "lab_room": {
+      "mounted_lab_json": "res://commons/labs/trace.lab.json"
+     },
+     "cube_scene": {
+      "group": "fillhole"
+     },
+     "interactive_point_origin_force": {
+      "mode": "transformation"
+     }
+    }
    },
    {
     "map": "Point_Animatedcube",
@@ -17505,12 +17950,19 @@
      "animatedcubebuilder": "claude",
      "polyhedron_nets_cube": "claude"
     },
-    "tokens_add": [],
+    "tokens_add": [
+     "dark_sphere",
+     "science_screen",
+     "floating_sphere_field"
+    ],
     "tokens_remove": [],
     "hero": "animatedcubebuilder",
     "tokens_order": [
      "animatedcubebuilder",
-     "polyhedron_nets_cube"
+     "polyhedron_nets_cube",
+     "dark_sphere",
+     "science_screen",
+     "floating_sphere_field"
     ],
     "counts": {
      "animatedcubebuilder": {
@@ -17519,7 +17971,44 @@
       "gap": 1
      }
     },
-    "join": true
+    "join": true,
+    "locks": {
+     "polyhedron_nets_cube": [
+      3,
+      10
+     ],
+     "dark_sphere": [
+      0,
+      0
+     ],
+     "science_screen": [
+      5,
+      6
+     ],
+     "floating_sphere_field": [
+      3,
+      7
+     ]
+    },
+    "poses": {
+     "science_screen": {
+      "rotation": 180
+     }
+    },
+    "configs": {
+     "polyhedron_nets_cube": {
+      "loop_fold": "true"
+     },
+     "science_screen": {
+      "mode": "net"
+     },
+     "floating_sphere_field": {
+      "bounds": "4,3,8"
+     }
+    },
+    "supports": {
+     "polyhedron_nets_cube": 1.0
+    }
    },
    {
     "map": "Chamber_Primitives",
@@ -17530,10 +18019,49 @@
     "says_by": {
      "catalyst_target": "claude"
     },
-    "tokens_add": [],
+    "tokens_add": [
+     "catalyst_target",
+     "catalyst_vent",
+     "becoming_catalyst",
+     "science_screen"
+    ],
     "tokens_remove": [],
     "hero": "catalyst_target",
-    "join": true
+    "join": true,
+    "locks": {
+     "catalyst_target": [
+      1,
+      2
+     ],
+     "catalyst_vent": [
+      9,
+      1
+     ],
+     "becoming_catalyst": [
+      7,
+      3
+     ],
+     "science_screen": [
+      3,
+      5
+     ]
+    },
+    "poses": {
+     "science_screen": {
+      "rotation": 180
+     }
+    },
+    "configs": {
+     "catalyst_vent": {
+      "emit_interval_s": "3.0#wave_size:3#start_delay_s:5.0#initial_state:foe"
+     },
+     "becoming_catalyst": {
+      "start_mode": "primitives"
+     },
+     "science_screen": {
+      "mode": "point"
+     }
+    }
    },
    {
     "map": "Primitives_Ignorance",
@@ -17582,7 +18110,19 @@
      "capsule_radials_rings": "draft",
      "prism_block": "draft"
     },
-    "tokens_add": [],
+    "tokens_add": [
+     "library_rack",
+     "diamonds",
+     "plus",
+     "lshape",
+     "capsule",
+     "torus_radials_rings",
+     "capsule_radials_rings",
+     "prism_block",
+     "dark_sphere",
+     "cube_scene",
+     "floating_sphere_field"
+    ],
     "tokens_remove": [],
     "hero": "righttriangle",
     "tokens_order": [
@@ -17605,9 +18145,80 @@
      "roughrock",
      "snap_octahedron_puzzle",
      "capsule_radials_rings",
-     "prism_block"
+     "prism_block",
+     "dark_sphere",
+     "cube_scene",
+     "floating_sphere_field"
     ],
     "locks": {
+     "sphere": [
+      2,
+      0
+     ],
+     "library_rack": [
+      8,
+      22
+     ],
+     "diamonds": [
+      4,
+      25
+     ],
+     "platonic_grabbables": [
+      3,
+      4
+     ],
+     "plus": [
+      1,
+      25
+     ],
+     "grab_octahedron": [
+      2,
+      17
+     ],
+     "sphere_mid": [
+      3,
+      13
+     ],
+     "star_primitive": [
+      7,
+      11
+     ],
+     "lshape": [
+      3,
+      20
+     ],
+     "hole_with_cones": [
+      1,
+      11
+     ],
+     "truncatedtetrahedron": [
+      7,
+      13
+     ],
+     "sphere_high": [
+      3,
+      11
+     ],
+     "righttriangle": [
+      1,
+      13
+     ],
+     "sphere_low": [
+      3,
+      15
+     ],
+     "capsule": [
+      7,
+      15
+     ],
+     "torus_radials_rings": [
+      0,
+      23
+     ],
+     "roughrock": [
+      1,
+      15
+     ],
      "snap_octahedron_puzzle": [
       12,
       25
@@ -17619,7 +18230,82 @@
      "prism_block": [
       11,
       25
+     ],
+     "dark_sphere": [
+      0,
+      0
+     ],
+     "cube_scene": [
+      1,
+      0
+     ],
+     "floating_sphere_field": [
+      4,
+      13
      ]
+    },
+    "poses": {
+     "hole_with_cones": {
+      "rotation": 30
+     }
+    },
+    "counts": {
+     "plus": {
+      "count": 2,
+      "spread": "x",
+      "gap": 6
+     },
+     "grab_octahedron": {
+      "count": 2,
+      "spread": "x",
+      "gap": 4
+     },
+     "sphere_mid": {
+      "count": 2,
+      "spread": "x",
+      "gap": 2
+     },
+     "lshape": {
+      "count": 2,
+      "spread": "x",
+      "gap": 2
+     },
+     "sphere_high": {
+      "count": 2,
+      "spread": "x",
+      "gap": 2
+     },
+     "sphere_low": {
+      "count": 2,
+      "spread": "x",
+      "gap": 2
+     },
+     "torus_radials_rings": {
+      "count": 2,
+      "spread": "x",
+      "gap": 8
+     }
+    },
+    "configs": {
+     "library_rack": {
+      "collection": "primitives#layout:rack_torus.json"
+     },
+     "torus_radials_rings": {
+      "config": "8:4"
+     },
+     "floating_sphere_field": {
+      "bounds": "5,3,14"
+     }
+    },
+    "supports": {
+     "platonic_grabbables": 1.0,
+     "grab_octahedron": 1.0,
+     "star_primitive": 1.0,
+     "truncatedtetrahedron": 1.0,
+     "sphere_high": 1.0,
+     "righttriangle": 1.0,
+     "capsule": 1.0,
+     "roughrock": 1.0
     }
    },
    {
@@ -17633,9 +18319,40 @@
      "achilles_tortoise": "claude",
      "combine_portals": "claude"
     },
-    "tokens_add": [],
+    "tokens_add": [
+     "dark_sphere",
+     "capsule",
+     "floating_sphere_field"
+    ],
     "tokens_remove": [],
-    "hero": "achilles_tortoise"
+    "hero": "achilles_tortoise",
+    "locks": {
+     "achilles_tortoise": [
+      5,
+      5
+     ],
+     "combine_portals": [
+      3,
+      4
+     ],
+     "dark_sphere": [
+      0,
+      0
+     ],
+     "capsule": [
+      5,
+      2
+     ],
+     "floating_sphere_field": [
+      3,
+      17
+     ]
+    },
+    "configs": {
+     "floating_sphere_field": {
+      "bounds": "4,3,18"
+     }
+    }
    },
    {
     "map": "Primitives_Melencolia",
@@ -17658,10 +18375,95 @@
      "diamondtoruscollection": "draft",
      "pyramidlong": "draft"
     },
-    "tokens_add": [],
+    "tokens_add": [
+     "prism_block",
+     "dark_sphere",
+     "floating_sphere_field",
+     "cube_scene"
+    ],
     "tokens_remove": [],
     "hero": "durer_scene",
-    "join": true
+    "join": true,
+    "locks": {
+     "durer_scene": [
+      3,
+      0
+     ],
+     "snap_pyramid_puzzle": [
+      2,
+      1
+     ],
+     "code_display": [
+      2,
+      2
+     ],
+     "pyramid": [
+      3,
+      3
+     ],
+     "bigframe": [
+      4,
+      3
+     ],
+     "diamondtoruscollection": [
+      2,
+      4
+     ],
+     "pyramidlong": [
+      3,
+      7
+     ],
+     "prism_block": [
+      2,
+      0
+     ],
+     "dark_sphere": [
+      2,
+      3
+     ],
+     "floating_sphere_field": [
+      2,
+      7
+     ],
+     "cube_scene": [
+      4,
+      7
+     ]
+    },
+    "poses": {
+     "durer_scene": {
+      "rotation": 180
+     },
+     "snap_pyramid_puzzle": {
+      "rotation": 180
+     },
+     "code_display": {
+      "rotation": 180
+     },
+     "bigframe": {
+      "rotation": 90
+     },
+     "prism_block": {
+      "rotation": 90
+     }
+    },
+    "configs": {
+     "code_display": {
+      "tutorial": "melencolia_axioms"
+     },
+     "floating_sphere_field": {
+      "bounds": "4,3,8"
+     }
+    },
+    "supports": {
+     "snap_pyramid_puzzle": 1.0,
+     "code_display": 1.0,
+     "pyramid": 1.0,
+     "bigframe": 1.0,
+     "diamondtoruscollection": 1.0,
+     "pyramidlong": 1.0,
+     "dark_sphere": 1.0
+    }
    }
   ],
   "transformation": [
@@ -21677,7 +22479,8 @@
       "fontana_puncture",
       "floating_sphere_field",
       "grab_sphere_point_snap",
-      "interactive_point_origin_force"
+      "interactive_point_origin_force",
+      "lab_room"
      ],
      "blurb": "Before the point, infrastructure.",
      "cells": [
@@ -21730,7 +22533,17 @@
       "frame_counter_display",
       "origin"
      ],
+     "counts": {
+      "interactive_point_origin_force": {
+       "count": 3,
+       "spread": "square",
+       "gap": 1
+      }
+     },
      "poses": {
+      "folding_past": {
+       "rotation": 1
+      },
       "frame_counter_display": {
        "rotation": 90
       },
@@ -21744,16 +22557,30 @@
      "configs": {
       "science_screen": {
        "support": "stand",
-       "scan_radius": 8
+       "scan_radius": 8.0
       },
       "CoordinateSystem3M": {
        "floating_point": 1
+      },
+      "interactive_point_origin_force": {
+       "mode": "transformation"
+      },
+      "lab_room": {
+       "mounted_lab_json": "res://commons/labs/point_one.lab.json"
       }
      },
      "locks": {
+      "folding_past": [
+       2,
+       0
+      ],
       "frame_counter_display": [
        1,
        14
+      ],
+      "origin": [
+       0,
+       0
       ],
       "you_are_here": [
        7,
@@ -21774,6 +22601,18 @@
       "fontana_puncture": [
        7,
        8
+      ],
+      "floating_sphere_field": [
+       5,
+       12
+      ],
+      "interactive_point_origin_force": [
+       1,
+       11
+      ],
+      "lab_room": [
+       1,
+       0
       ]
      },
      "supports": {
@@ -21784,6 +22623,8 @@
        "gap": 1
       }
      },
+     "speak": "queer melancholia, rythm and melancolia",
+     "speak_by": "hand",
      "says": {
       "folding_past": "You arrive late. No reboot, always restart.\nThe folding past keeps running.",
       "frame_counter_display": "The internal clock is running,\nthe frame counter update cycle.",
@@ -21811,9 +22652,9 @@
       "interactive_point_origin_force": "hand"
      },
      "excluded": [
+      "coordinate_readout",
       "do_not_cross_barrier",
       "klee_walking_point",
-      "lab_room",
       "point",
       "walk_this_line_marking"
      ],
@@ -21844,7 +22685,11 @@
       "cube_scene",
       "dark_sphere",
       "plus_line_puzzle",
-      "modulor_man_demo"
+      "modulor_man_demo",
+      "lab_room",
+      "floating_sphere_field",
+      "fontana_puncture",
+      "synthesis_stand"
      ],
      "blurb": "A line connects two points.",
      "rooms": 6,
@@ -21882,6 +22727,11 @@
       }
      },
      "counts": {
+      "perspective_lines": {
+       "count": 2,
+       "spread": "x",
+       "gap": 4
+      },
       "laser_measure": {
        "count": 3,
        "spread": "row",
@@ -21891,11 +22741,24 @@
        "count": 3,
        "spread": "row",
        "gap": 3
+      },
+      "lightrod": {
+       "count": 2,
+       "spread": "x",
+       "gap": 4
+      },
+      "cube_scene": {
+       "count": 5,
+       "spread": "square",
+       "gap": 1
       }
      },
      "poses": {
       "do_not_cross_barrier": {
-       "rotation": 0
+       "rotation": 90
+      },
+      "dgrid": {
+       "rotation": 90
       },
       "laser_measure": {
        "offset": [
@@ -21903,12 +22766,39 @@
         1.0,
         0.0
        ]
+      },
+      "lightrod": {
+       "rotation": 90
       }
      },
      "configs": {
+      "dgrid": {
+       "config": "5:5"
+      },
+      "parallel_line_puzzle": {
+       "fillhole": "remove"
+      },
+      "lightrod": {
+       "config": "4"
+      },
       "science_screen": {
        "support": "stand",
-       "scan_radius": 8
+       "scan_radius": 8.0
+      },
+      "cube_scene": {
+       "group": "plusfillhole"
+      },
+      "plus_line_puzzle": {
+       "plusfillhole": "remove"
+      },
+      "lab_room": {
+       "mounted_lab_json": "res://commons/labs/point_line.lab.json"
+      },
+      "floating_sphere_field": {
+       "bounds": "4,3,14"
+      },
+      "synthesis_stand": {
+       "subject": "dark_sphere#mode:hero"
       }
      },
      "locks": {
@@ -21916,9 +22806,29 @@
        7,
        11
       ],
+      "klee_walking_point": [
+       2,
+       24
+      ],
+      "dgrid": [
+       6,
+       26
+      ],
+      "walk_this_line_marking": [
+       3,
+       6
+      ],
       "line": [
        7,
        16
+      ],
+      "perspective_lines": [
+       1,
+       23
+      ],
+      "parallel_line_puzzle": [
+       4,
+       10
       ],
       "laser_sword": [
        6,
@@ -21932,9 +22842,57 @@
        1,
        25
       ],
+      "grabbable_line": [
+       2,
+       15
+      ],
+      "line_builder_3d": [
+       5,
+       4
+      ],
+      "lightrod": [
+       1,
+       19
+      ],
+      "scale_lines": [
+       3,
+       23
+      ],
       "science_screen": [
        5,
        24
+      ],
+      "cube_scene": [
+       2,
+       11
+      ],
+      "dark_sphere": [
+       0,
+       0
+      ],
+      "plus_line_puzzle": [
+       2,
+       10
+      ],
+      "modulor_man_demo": [
+       1,
+       4
+      ],
+      "lab_room": [
+       1,
+       0
+      ],
+      "floating_sphere_field": [
+       3,
+       13
+      ],
+      "fontana_puncture": [
+       1,
+       21
+      ],
+      "synthesis_stand": [
+       4,
+       23
       ]
      },
      "says": {
@@ -21979,9 +22937,6 @@
       "plus_line_puzzle": "draft",
       "modulor_man_demo": "draft"
      },
-     "excluded": [
-      "synthesis_stand"
-     ],
      "ordered": true
     },
     {
@@ -21992,10 +22947,51 @@
      "hero_by": "hand",
      "tokens": [
       "mystic_writing_pad",
-      "draw_dot"
+      "draw_dot",
+      "lab_room",
+      "floating_sphere_field",
+      "science_screen"
      ],
      "blurb": "Now: duration.",
      "join": true,
+     "poses": {
+      "mystic_writing_pad": {
+       "rotation": 180
+      },
+      "science_screen": {
+       "rotation": 180
+      }
+     },
+     "configs": {
+      "lab_room": {
+       "mounted_lab_json": "res://commons/labs/trace.lab.json"
+      },
+      "floating_sphere_field": {
+       "bounds": "4,3,10"
+      }
+     },
+     "locks": {
+      "mystic_writing_pad": [
+       4,
+       5
+      ],
+      "draw_dot": [
+       3,
+       8
+      ],
+      "lab_room": [
+       0,
+       0
+      ],
+      "floating_sphere_field": [
+       3,
+       7
+      ],
+      "science_screen": [
+       2,
+       12
+      ]
+     },
      "says": {
       "mystic_writing_pad": "there is no origin of a trace",
       "draw_dot": "all life is encoded — that is enough"
@@ -22004,6 +23000,9 @@
       "mystic_writing_pad": "hand",
       "draw_dot": "hand"
      },
+     "excluded": [
+      "whiteboard"
+     ],
      "ordered": true
     },
     {
@@ -22015,9 +23014,51 @@
      "tokens": [
       "player_trace",
       "grid_lines",
-      "room_grammar"
+      "grab_sphere_point_snap",
+      "room_grammar",
+      "floating_sphere_field",
+      "ConeTwistBag",
+      "ConnectedTriangles"
      ],
      "blurb": "The grid quantizes.",
+     "configs": {
+      "floating_sphere_field": {
+       "bounds": "5,3,8"
+      }
+     },
+     "locks": {
+      "room_grammar": [
+       7,
+       13
+      ],
+      "player_trace": [
+       0,
+       0
+      ],
+      "grid_lines": [
+       4,
+       3
+      ],
+      "floating_sphere_field": [
+       4,
+       7
+      ],
+      "grab_sphere_point_snap": [
+       2,
+       8
+      ],
+      "ConeTwistBag": [
+       0,
+       9
+      ],
+      "ConnectedTriangles": [
+       6,
+       10
+      ]
+     },
+     "supports": {
+      "grab_sphere_point_snap": 1.0
+     },
      "says": {
       "room_grammar": "space filling",
       "player_trace": "the trace, gridded",
@@ -22027,12 +23068,7 @@
       "room_grammar": "hand",
       "player_trace": "claude",
       "grid_lines": "hand"
-     },
-     "excluded": [
-      "ConeTwistBag",
-      "ConnectedTriangles",
-      "grab_sphere_point_snap"
-     ]
+     }
     },
     {
      "pearl": "triangle context",
@@ -22052,7 +23088,12 @@
       "pythagorean_triangle_angles",
       "quad",
       "interactivetriangle",
-      "quad_line_puzzle"
+      "quad_line_puzzle",
+      "lab_room",
+      "catalyst_prompter_box",
+      "dark_sphere",
+      "floating_sphere_field",
+      "science_screen"
      ],
      "blurb": "Three points close a boundary, and now: rigidity.",
      "ramps": [
@@ -22087,6 +23128,126 @@
      ],
      "rooms": 8,
      "join": true,
+     "poses": {
+      "parasol_triangle": {
+       "rotation": 90
+      },
+      "triangle_line_puzzle": {
+       "rotation": 90
+      },
+      "folded_strip": {
+       "rotation": 270
+      },
+      "draw_triangle_faces": {
+       "rotation": 90
+      },
+      "triangle": {
+       "rotation": 90
+      },
+      "pythagorean_triangle_angles": {
+       "rotation": 90
+      },
+      "quad": {
+       "rotation": 90
+      },
+      "interactivetriangle": {
+       "rotation": 180
+      },
+      "quad_line_puzzle": {
+       "rotation": 90
+      },
+      "science_screen": {
+       "rotation": 90
+      }
+     },
+     "configs": {
+      "catalyst_vent": {
+       "emit_interval_s": "2.5#wave_size:3#start_delay_s:5.0#sequence:auto"
+      },
+      "lab_room": {
+       "mounted_lab_json": "res://commons/labs/trace.lab.json"
+      },
+      "catalyst_prompter_box": {
+       "emergence": "hatch#sequence:auto#lease_s:45"
+      },
+      "floating_sphere_field": {
+       "bounds": "4,3,12"
+      }
+     },
+     "locks": {
+      "parasol_triangle": [
+       5,
+       6
+      ],
+      "triangle_line_puzzle": [
+       3,
+       7
+      ],
+      "catalyst_vent": [
+       0,
+       8
+      ],
+      "triangleprofiles": [
+       2,
+       10
+      ],
+      "folded_strip": [
+       5,
+       12
+      ],
+      "draw_triangle_faces": [
+       1,
+       13
+      ],
+      "triangle": [
+       2,
+       14
+      ],
+      "pythagorean_triangle_angles": [
+       4,
+       14
+      ],
+      "quad": [
+       6,
+       15
+      ],
+      "interactivetriangle": [
+       0,
+       16
+      ],
+      "quad_line_puzzle": [
+       3,
+       17
+      ],
+      "lab_room": [
+       0,
+       0
+      ],
+      "catalyst_prompter_box": [
+       2,
+       1
+      ],
+      "dark_sphere": [
+       0,
+       10
+      ],
+      "floating_sphere_field": [
+       3,
+       11
+      ],
+      "science_screen": [
+       0,
+       14
+      ]
+     },
+     "supports": {
+      "draw_triangle_faces": 1.0,
+      "triangle": 1.0,
+      "pythagorean_triangle_angles": 1.0,
+      "quad": 1.0,
+      "interactivetriangle": 1.0,
+      "science_screen": 1.0
+     },
      "says": {
       "catalyst_pedestal": "the triangle. everything is made of triangles. the quad, the simplest mesh. the pyramid mesh.",
       "parasol_triangle": "everything is made of triangles",
@@ -22115,9 +23276,6 @@
       "interactivetriangle": "claude",
       "quad_line_puzzle": "claude"
      },
-     "excluded": [
-      "catalyst_prompter_box"
-     ],
      "ordered": true
     },
     {
@@ -22127,14 +23285,74 @@
      "hero": "grab_trihedron",
      "hero_by": "hand",
      "tokens": [
-      "grab_trihedron",
-      "path_game_controller",
       "path_watchdog",
-      "becoming_catalyst",
+      "path_game_controller",
       "pyramid_edit",
-      "tentacle_placer"
+      "grab_trihedron",
+      "becoming_catalyst",
+      "tentacle_placer",
+      "lab_room",
+      "cube_scene",
+      "interactive_point_origin_force"
      ],
      "blurb": "A trihedron is a geometric configuration where three triangular faces meet at a single vertex, forming a corner of space.",
+     "poses": {
+      "grab_trihedron": {
+       "rotation": 90
+      }
+     },
+     "configs": {
+      "tentacle_placer": {
+       "place_positions": "-1.5,0,0;0,0,0;1.5,0,0#sky_height:7.0#travel_speed:0.6#dwell_seconds:1.5#pyramid_size:1.0#pyramid_height:-0.5#debug_log:true"
+      },
+      "lab_room": {
+       "mounted_lab_json": "res://commons/labs/trace.lab.json"
+      },
+      "cube_scene": {
+       "group": "fillhole"
+      },
+      "interactive_point_origin_force": {
+       "mode": "transformation"
+      }
+     },
+     "locks": {
+      "grab_trihedron": [
+       2,
+       0
+      ],
+      "path_game_controller": [
+       4,
+       0
+      ],
+      "path_watchdog": [
+       4,
+       1
+      ],
+      "becoming_catalyst": [
+       3,
+       8
+      ],
+      "pyramid_edit": [
+       2,
+       9
+      ],
+      "tentacle_placer": [
+       3,
+       9
+      ],
+      "lab_room": [
+       0,
+       2
+      ],
+      "cube_scene": [
+       2,
+       8
+      ],
+      "interactive_point_origin_force": [
+       4,
+       8
+      ]
+     },
      "says": {
       "grab_trihedron": "three faces in the hand",
       "path_game_controller": "a game is two truths and a verdict — can you still cross",
@@ -22150,7 +23368,10 @@
       "becoming_catalyst": "claude",
       "pyramid_edit": "hand",
       "tentacle_placer": "draft"
-     }
+     },
+     "excluded": [
+      "grab_tetrahedron"
+     ]
     },
     {
      "pearl": "animatedcube",
@@ -22160,7 +23381,10 @@
      "hero_by": "hand",
      "tokens": [
       "animatedcubebuilder",
-      "polyhedron_nets_cube"
+      "polyhedron_nets_cube",
+      "dark_sphere",
+      "science_screen",
+      "floating_sphere_field"
      ],
      "blurb": "A manipulable quad-based object where you can drag cube corners.",
      "join": true,
@@ -22170,6 +23394,43 @@
        "spread": "square",
        "gap": 1
       }
+     },
+     "poses": {
+      "science_screen": {
+       "rotation": 180
+      }
+     },
+     "configs": {
+      "polyhedron_nets_cube": {
+       "loop_fold": "true"
+      },
+      "science_screen": {
+       "mode": "net"
+      },
+      "floating_sphere_field": {
+       "bounds": "4,3,8"
+      }
+     },
+     "locks": {
+      "polyhedron_nets_cube": [
+       3,
+       10
+      ],
+      "dark_sphere": [
+       0,
+       0
+      ],
+      "science_screen": [
+       5,
+       6
+      ],
+      "floating_sphere_field": [
+       3,
+       7
+      ]
+     },
+     "supports": {
+      "polyhedron_nets_cube": 1.0
      },
      "says": {
       "animatedcubebuilder": "the cube world, built",
@@ -22182,27 +23443,9 @@
      "ordered": true
     },
     {
-     "pearl": "primitives",
-     "map": "Chamber_Primitives",
-     "index": 7,
-     "hero": "catalyst_target",
-     "hero_by": "hand",
-     "tokens": [
-      "catalyst_target"
-     ],
-     "blurb": "The first mark.",
-     "join": true,
-     "says": {
-      "catalyst_target": "primitives — and so on"
-     },
-     "says_by": {
-      "catalyst_target": "claude"
-     }
-    },
-    {
      "pearl": "ignorance",
      "map": "Primitives_Ignorance",
-     "index": 8,
+     "index": 7,
      "hero": "righttriangle",
      "hero_by": "hand",
      "tokens": [
@@ -22225,10 +23468,134 @@
       "roughrock",
       "snap_octahedron_puzzle",
       "capsule_radials_rings",
-      "prism_block"
+      "prism_block",
+      "dark_sphere",
+      "cube_scene",
+      "floating_sphere_field"
      ],
      "blurb": "Ignorance is not the absence of knowledge but a structural limit.",
+     "counts": {
+      "plus": {
+       "count": 2,
+       "spread": "x",
+       "gap": 6
+      },
+      "grab_octahedron": {
+       "count": 2,
+       "spread": "x",
+       "gap": 4
+      },
+      "sphere_mid": {
+       "count": 2,
+       "spread": "x",
+       "gap": 2
+      },
+      "lshape": {
+       "count": 2,
+       "spread": "x",
+       "gap": 2
+      },
+      "sphere_high": {
+       "count": 2,
+       "spread": "x",
+       "gap": 2
+      },
+      "sphere_low": {
+       "count": 2,
+       "spread": "x",
+       "gap": 2
+      },
+      "torus_radials_rings": {
+       "count": 2,
+       "spread": "x",
+       "gap": 8
+      }
+     },
+     "poses": {
+      "hole_with_cones": {
+       "rotation": 30
+      }
+     },
+     "configs": {
+      "library_rack": {
+       "collection": "primitives#layout:rack_torus.json"
+      },
+      "torus_radials_rings": {
+       "config": "8:4"
+      },
+      "floating_sphere_field": {
+       "bounds": "5,3,14"
+      }
+     },
      "locks": {
+      "sphere": [
+       2,
+       0
+      ],
+      "library_rack": [
+       8,
+       22
+      ],
+      "diamonds": [
+       4,
+       25
+      ],
+      "platonic_grabbables": [
+       3,
+       4
+      ],
+      "plus": [
+       1,
+       25
+      ],
+      "grab_octahedron": [
+       2,
+       17
+      ],
+      "sphere_mid": [
+       3,
+       13
+      ],
+      "star_primitive": [
+       7,
+       11
+      ],
+      "lshape": [
+       3,
+       20
+      ],
+      "hole_with_cones": [
+       1,
+       11
+      ],
+      "truncatedtetrahedron": [
+       7,
+       13
+      ],
+      "sphere_high": [
+       3,
+       11
+      ],
+      "righttriangle": [
+       1,
+       13
+      ],
+      "sphere_low": [
+       3,
+       15
+      ],
+      "capsule": [
+       7,
+       15
+      ],
+      "torus_radials_rings": [
+       0,
+       23
+      ],
+      "roughrock": [
+       1,
+       15
+      ],
       "snap_octahedron_puzzle": [
        12,
        25
@@ -22240,7 +23607,29 @@
       "prism_block": [
        11,
        25
+      ],
+      "dark_sphere": [
+       0,
+       0
+      ],
+      "cube_scene": [
+       1,
+       0
+      ],
+      "floating_sphere_field": [
+       4,
+       13
       ]
+     },
+     "supports": {
+      "platonic_grabbables": 1.0,
+      "grab_octahedron": 1.0,
+      "star_primitive": 1.0,
+      "truncatedtetrahedron": 1.0,
+      "sphere_high": 1.0,
+      "righttriangle": 1.0,
+      "capsule": 1.0,
+      "roughrock": 1.0
      },
      "says": {
       "sphere": "the point, grown in every direction — and still not pi",
@@ -22291,14 +23680,44 @@
     {
      "pearl": "portals",
      "map": "Primitives_Portals",
-     "index": 9,
+     "index": 8,
      "hero": "achilles_tortoise",
      "hero_by": "hand",
      "tokens": [
       "combine_portals",
-      "achilles_tortoise"
+      "achilles_tortoise",
+      "dark_sphere",
+      "capsule",
+      "floating_sphere_field"
      ],
      "blurb": "A toroidal portal sequence guided by increasing rings approaching π, staging continuity as asymptotic relation rather than arrival.",
+     "configs": {
+      "floating_sphere_field": {
+       "bounds": "4,3,18"
+      }
+     },
+     "locks": {
+      "achilles_tortoise": [
+       5,
+       5
+      ],
+      "combine_portals": [
+       3,
+       4
+      ],
+      "dark_sphere": [
+       0,
+       0
+      ],
+      "capsule": [
+       5,
+       2
+      ],
+      "floating_sphere_field": [
+       3,
+       17
+      ]
+     },
      "says": {
       "achilles_tortoise": "Achilles and the tortoise: the endlessness of pi in a footrace",
       "combine_portals": "a portal: the edge, walked through"
@@ -22311,20 +23730,104 @@
     {
      "pearl": "melencolia",
      "map": "Primitives_Melencolia",
-     "index": 10,
+     "index": 9,
      "hero": "durer_scene",
      "hero_by": "hand",
      "tokens": [
-      "durer_scene",
-      "snap_pyramid_puzzle",
       "code_display",
-      "pyramid",
       "bigframe",
+      "snap_pyramid_puzzle",
       "diamondtoruscollection",
-      "pyramidlong"
+      "pyramid",
+      "prism_block",
+      "pyramidlong",
+      "durer_scene",
+      "dark_sphere",
+      "floating_sphere_field",
+      "cube_scene"
      ],
      "blurb": "Inspired by the Herzog August Bibliothek and Melencolia I, this scene embodies the limit point of geometric aspiration and existential constraint.",
      "join": true,
+     "poses": {
+      "durer_scene": {
+       "rotation": 180
+      },
+      "snap_pyramid_puzzle": {
+       "rotation": 180
+      },
+      "code_display": {
+       "rotation": 180
+      },
+      "bigframe": {
+       "rotation": 90
+      },
+      "prism_block": {
+       "rotation": 90
+      }
+     },
+     "configs": {
+      "code_display": {
+       "tutorial": "melencolia_axioms"
+      },
+      "floating_sphere_field": {
+       "bounds": "4,3,8"
+      }
+     },
+     "locks": {
+      "durer_scene": [
+       3,
+       0
+      ],
+      "snap_pyramid_puzzle": [
+       2,
+       1
+      ],
+      "code_display": [
+       2,
+       2
+      ],
+      "pyramid": [
+       3,
+       3
+      ],
+      "bigframe": [
+       4,
+       3
+      ],
+      "diamondtoruscollection": [
+       2,
+       4
+      ],
+      "pyramidlong": [
+       3,
+       7
+      ],
+      "prism_block": [
+       2,
+       0
+      ],
+      "dark_sphere": [
+       2,
+       3
+      ],
+      "floating_sphere_field": [
+       2,
+       7
+      ],
+      "cube_scene": [
+       4,
+       7
+      ]
+     },
+     "supports": {
+      "snap_pyramid_puzzle": 1.0,
+      "code_display": 1.0,
+      "pyramid": 1.0,
+      "bigframe": 1.0,
+      "diamondtoruscollection": 1.0,
+      "pyramidlong": 1.0,
+      "dark_sphere": 1.0
+     },
      "says": {
       "durer_scene": "Dürer's polyhedron — the solid no taxonomy names, and the angel who keeps it",
       "snap_pyramid_puzzle": "the pyramid, snapped — held by the grid",
@@ -22370,11 +23873,17 @@
      "hero_by": "hand",
      "tokens": [
       "invariants_demo",
-      "matrix_4x4_viewer",
-      "homogeneous_coordinates",
       "rotation_gimbal",
+      "matrix_4x4_viewer",
       "balance_puzzle",
-      "transform_composition"
+      "homogeneous_coordinates",
+      "x_translation_cube",
+      "z_translation_cube",
+      "transform_composition",
+      "scale_me",
+      "y_translation_cube",
+      "spin",
+      "pick_up_cube"
      ],
      "blurb": "Three cubes.",
      "simulations": [
@@ -22410,9 +23919,7 @@
      "hero_by": "hand",
      "tokens": [
       "transform_composition_workbench",
-      "z_translation_cube",
-      "pick_up_cube",
-      "y_translation_cube",
+      "synthesis_stand",
       "pickup_gate"
      ],
      "blurb": "Walkways extend over void.",
@@ -22442,8 +23949,7 @@
      "hero_by": "hand",
      "tokens": [
       "toruscylinder",
-      "translation_cube_demo",
-      "x_translation_cube"
+      "translation_cube_demo"
      ],
      "blurb": "Translation produces space as navigable extent.",
      "utilities": [
@@ -22502,8 +24008,7 @@
      "hero": "rotate_grid_cubes",
      "hero_by": "hand",
      "tokens": [
-      "rotate_grid_cubes",
-      "spin"
+      "rotate_grid_cubes"
      ],
      "blurb": "Rotation produces space as anisotropic.",
      "join": true,
@@ -22548,8 +24053,7 @@
      "hero_by": "hand",
      "tokens": [
       "chair_assembly_puzzle",
-      "clipboard",
-      "scale_me"
+      "clipboard"
      ],
      "blurb": "Scale me.",
      "join": true,
@@ -22567,29 +24071,9 @@
      }
     },
     {
-     "pearl": "transformation",
-     "map": "Chamber_Transformation",
-     "index": 6,
-     "hero": "proximity_spawner",
-     "hero_by": "hand",
-     "tokens": [
-      "proximity_spawner"
-     ],
-     "blurb": "The crawler folds flat when your shrink ray hits it.",
-     "join": true,
-     "speak": "transformation: one matrix, three moves.",
-     "speak_by": "claude",
-     "says": {
-      "proximity_spawner": "come close — something appears"
-     },
-     "says_by": {
-      "proximity_spawner": "claude"
-     }
-    },
-    {
      "pearl": "trans pit",
      "map": "Trans_Pit",
-     "index": 7,
+     "index": 6,
      "hero": "pusher_block",
      "hero_by": "hand",
      "tokens": [
@@ -22636,11 +24120,7 @@
      "index": 0,
      "hero": "pattern_tile_4x4",
      "hero_by": "hand",
-     "tokens": [
-      "pattern_tile_4x4",
-      "pattern_tile_cube",
-      "tile_meander_floor"
-     ],
+     "tokens": [],
      "blurb": "One painted cell.",
      "says": {
       "pattern_tile_4x4": "every repeating pattern in the world — from Islamic tiles to woven textiles to crystal structures",
@@ -22659,11 +24139,7 @@
      "index": 1,
      "hero": "ten_print_textile",
      "hero_by": "hand",
-     "tokens": [
-      "pattern_tile_puzzle",
-      "pattern_loom",
-      "ten_print_textile"
-     ],
+     "tokens": [],
      "blurb": "The tile repeats.",
      "says": {
       "ten_print_textile": "A tool: 10 PRINT as a textile loom, weaving an endless bolt of slash/backslash fabric - the pattern doing a design …",
@@ -22682,11 +24158,7 @@
      "index": 2,
      "hero": "kaleidoscope",
      "hero_by": "hand",
-     "tokens": [
-      "pattern_tile_mirror",
-      "mill_persian_p4",
-      "kaleidoscope"
-     ],
+     "tokens": [],
      "blurb": "Two new moves.",
      "says": {
       "mill_persian_p4": "Pattern mill milling a Persian-palette p4 tiling — 4-fold rotors, pure rotation",
@@ -22705,12 +24177,7 @@
      "index": 3,
      "hero": "mill_escher_p4g",
      "hero_by": "hand",
-     "tokens": [
-      "mill_escher_p4g",
-      "loom_escher_mirror",
-      "pattern_tile_brick",
-      "pattern_tile_herringbone"
-     ],
+     "tokens": [],
      "blurb": "The sneaky symmetry: reflect, then slide.",
      "says": {
       "mill_escher_p4g": "Pattern mill milling a monochrome Escher-palette p4g tiling — 4-fold off-center rotors",
@@ -22731,11 +24198,7 @@
      "index": 4,
      "hero": "pattern_maker_station",
      "hero_by": "hand",
-     "tokens": [
-      "pattern_maker_station",
-      "loom_bolt_memphis_p4g",
-      "pattern_artifact"
-     ],
+     "tokens": [],
      "blurb": "Closure.",
      "says": {
       "loom_bolt_memphis_p4g": "Wall dispenser unrolling a Memphis p4g wallpaper bolt",
@@ -22754,13 +24217,7 @@
      "index": 5,
      "hero": "wall_pattern_gallery",
      "hero_by": "hand",
-     "tokens": [
-      "wall_pattern_gallery",
-      "loom_alhambra_p6m",
-      "vr_tile_editor",
-      "mill_alhambra_p6m",
-      "pattern_atlas_gallery"
-     ],
+     "tokens": [],
      "blurb": "The census closes.",
      "says": {
       "wall_pattern_gallery": "symmetry is not decoration — it is the mathematical structure that determines how a small truth propagates through …",
@@ -22789,9 +24246,18 @@
    "node": "array_tutorial",
    "pearls": [
     {
+     "pearl": "array",
+     "map": "Array",
+     "index": 0,
+     "hero": "",
+     "hero_by": "",
+     "tokens": [],
+     "blurb": "One cube you can lift, and then the same cube counted."
+    },
+    {
      "pearl": "tutorial single",
      "map": "Tutorial_Single",
-     "index": 0,
+     "index": 1,
      "hero": "xyz_coordinates",
      "hero_by": "hand",
      "tokens": [
@@ -22808,13 +24274,16 @@
     {
      "pearl": "tutorial pattern",
      "map": "Tutorial_Pattern",
-     "index": 1,
+     "index": 2,
      "hero": "panel_bridge_loom",
      "hero_by": "hand",
      "tokens": [
       "grid_model",
       "pattern_studio_plate",
       "pattern_tile_plate",
+      "pattern_tile_mirror",
+      "pattern_tile_puzzle",
+      "pattern_maker_station",
       "panel_bridge_loom",
       "script_runner",
       "pulsar_compact"
@@ -22840,14 +24309,17 @@
     {
      "pearl": "array patterns",
      "map": "Array_Patterns",
-     "index": 2,
+     "index": 3,
      "hero": "tiling_demo",
      "hero_by": "hand",
      "tokens": [
+      "pattern_tile_4x4",
       "vr_tile_editor_mirror",
       "tiling_demo",
       "pattern_tunnel_machine",
-      "facade_grammar_demo"
+      "facade_grammar_demo",
+      "pattern_tile_brick",
+      "pattern_tile_herringbone"
      ],
      "blurb": "Every carpet is an algorithm.",
      "says": {
@@ -22866,7 +24338,7 @@
     {
      "pearl": "tutorial row",
      "map": "Tutorial_Row",
-     "index": 3,
+     "index": 4,
      "hero": "column_3_z",
      "hero_by": "hand",
      "tokens": [
@@ -22883,7 +24355,7 @@
     {
      "pearl": "tutorial 2d build",
      "map": "Tutorial_2D_Build",
-     "index": 4,
+     "index": 5,
      "hero": "pulsar_visualizer",
      "hero_by": "hand",
      "tokens": [
@@ -22909,7 +24381,7 @@
     {
      "pearl": "tutorial 3d",
      "map": "Tutorial_3D",
-     "index": 5,
+     "index": 6,
      "hero": "grid_3d_4x4x4",
      "hero_by": "hand",
      "tokens": [
@@ -22938,7 +24410,7 @@
     {
      "pearl": "tutorial disco",
      "map": "Tutorial_Disco",
-     "index": 6,
+     "index": 7,
      "hero": "step_sequencer",
      "hero_by": "hand",
      "tokens": [
@@ -22973,9 +24445,18 @@
    "node": "color",
    "pearls": [
     {
+     "pearl": "array",
+     "map": "Array",
+     "index": 0,
+     "hero": "",
+     "hero_by": "",
+     "tokens": [],
+     "blurb": "One cube you can lift, and then the same cube counted."
+    },
+    {
      "pearl": "pattern foundry",
      "map": "Pattern_Foundry",
-     "index": 0,
+     "index": 1,
      "hero": "pattern_machine_d",
      "hero_by": "hand",
      "tokens": [
@@ -23001,7 +24482,7 @@
     {
      "pearl": "context placed",
      "map": "Color_Context_Placed",
-     "index": 1,
+     "index": 2,
      "hero": "csg_architecture_cavity",
      "hero_by": "hand",
      "tokens": [
@@ -23022,6 +24503,7 @@
       "loom_drum_bauhaus_p4m",
       "dna_color_furniture_furniture_lamp_warm_glow",
       "dna_modern_art_kandinsky_bauhaus_triad",
+      "loom_bolt_memphis_p4g",
       "dna_modern_art_rothko_chromatic_field",
       "dna_primitive_stack_ps01_bauhaus_totem_green",
       "loom_fountain_pastel_p4",
@@ -23084,7 +24566,7 @@
     {
      "pearl": "nails",
      "map": "Color_Nails",
-     "index": 2,
+     "index": 3,
      "hero": "brick_wall_factory",
      "hero_by": "hand",
      "tokens": [
@@ -23096,7 +24578,7 @@
       "colorballs",
       "brick_wall_factory"
      ],
-     "blurb": "A salon for digital fingers.",
+     "blurb": "A salon for digital fingers, and then the floor opens.",
      "says": {
       "colorballs": "a color only becomes real when it has mass — palette theory means nothing until you can throw …",
       "hand_model": "Static hand-model reference for VR scale and positioning",
@@ -23113,49 +24595,9 @@
      }
     },
     {
-     "pearl": "grid pallet",
-     "map": "Color_Grid_Pallet",
-     "index": 3,
-     "hero": "spectrum_forest",
-     "hero_by": "hand",
-     "tokens": [
-      "gridcolorizer",
-      "spectrum_forest"
-     ],
-     "blurb": "The grid becomes a canvas.",
-     "says": {
-      "gridcolorizer": "the name moved, the behaviour didn't",
-      "spectrum_forest": "the spectrum is continuous but we discretize it into lines"
-     },
-     "says_by": {
-      "gridcolorizer": "draft",
-      "spectrum_forest": "draft"
-     }
-    },
-    {
-     "pearl": "rainbow",
-     "map": "Color_Rainbow",
-     "index": 4,
-     "hero": "rainbow",
-     "hero_by": "hand",
-     "tokens": [
-      "mario_cube",
-      "rainbow"
-     ],
-     "blurb": "Walk through light itself.",
-     "says": {
-      "mario_cube": "joy is not the presence of color — it is the moment darkness becomes color",
-      "rainbow": "a rainbow has no location — it exists only in the geometry between sun, water, and eye"
-     },
-     "says_by": {
-      "mario_cube": "draft",
-      "rainbow": "draft"
-     }
-    },
-    {
      "pearl": "pillar",
      "map": "Color_Pillar",
-     "index": 5,
+     "index": 4,
      "hero": "color_sets_overview",
      "hero_by": "hand",
      "tokens": [
@@ -23185,32 +24627,9 @@
      }
     },
     {
-     "pearl": "paint",
-     "map": "Color_Paint",
-     "index": 6,
-     "hero": "pattern_mill",
-     "hero_by": "hand",
-     "tokens": [
-      "ball_painting_demo",
-      "pattern_mill",
-      "albers_wall_gallery"
-     ],
-     "blurb": "Paint meets physics.",
-     "says": {
-      "pattern_mill": "a pattern is a program plus a fragment. Hand someone the fragment and the",
-      "albers_wall_gallery": "a square inside a square is not decoration — it is an experiment in how context changes the perception of every color it …",
-      "ball_painting_demo": "ball_painting_demo"
-     },
-     "says_by": {
-      "pattern_mill": "draft",
-      "albers_wall_gallery": "draft",
-      "ball_painting_demo": "draft"
-     }
-    },
-    {
      "pearl": "walls",
      "map": "Color_Walls",
-     "index": 7,
+     "index": 5,
      "hero": "color_space_navigator",
      "hero_by": "hand",
      "tokens": [
@@ -23232,6 +24651,91 @@
       "color_constellation_office": "draft",
       "subpixel_display": "draft",
       "gradient_interpolator": "draft"
+     }
+    },
+    {
+     "pearl": "symmetry seventeen",
+     "map": "Symmetry_Seventeen",
+     "index": 6,
+     "hero": "wall_pattern_gallery",
+     "hero_by": "first in spine order",
+     "tokens": [
+      "wall_pattern_gallery",
+      "pattern_loom",
+      "loom_escher_mirror",
+      "loom_alhambra_p6m",
+      "vr_tile_editor",
+      "mill_alhambra_p6m",
+      "mill_persian_p4",
+      "mill_escher_p4g",
+      "kaleidoscope",
+      "pattern_artifact",
+      "pattern_atlas_gallery",
+      "tile_meander_floor"
+     ],
+     "blurb": "The census closes."
+    },
+    {
+     "pearl": "grid pallet",
+     "map": "Color_Grid_Pallet",
+     "index": 7,
+     "hero": "spectrum_forest",
+     "hero_by": "hand",
+     "tokens": [
+      "gridcolorizer",
+      "spectrum_forest"
+     ],
+     "blurb": "The grid becomes a canvas.",
+     "says": {
+      "gridcolorizer": "the name moved, the behaviour didn't",
+      "spectrum_forest": "the spectrum is continuous but we discretize it into lines"
+     },
+     "says_by": {
+      "gridcolorizer": "draft",
+      "spectrum_forest": "draft"
+     }
+    },
+    {
+     "pearl": "rainbow",
+     "map": "Color_Rainbow",
+     "index": 8,
+     "hero": "rainbow",
+     "hero_by": "hand",
+     "tokens": [
+      "mario_cube",
+      "rainbow"
+     ],
+     "blurb": "Walk through light itself.",
+     "says": {
+      "mario_cube": "joy is not the presence of color — it is the moment darkness becomes color",
+      "rainbow": "a rainbow has no location — it exists only in the geometry between sun, water, and eye"
+     },
+     "says_by": {
+      "mario_cube": "draft",
+      "rainbow": "draft"
+     }
+    },
+    {
+     "pearl": "paint",
+     "map": "Color_Paint",
+     "index": 9,
+     "hero": "pattern_mill",
+     "hero_by": "hand",
+     "tokens": [
+      "ball_painting_demo",
+      "pattern_mill",
+      "albers_wall_gallery"
+     ],
+     "blurb": "Paint meets physics.",
+     "says": {
+      "pattern_mill": "a pattern is a program plus a fragment. Hand someone the fragment and the",
+      "albers_wall_gallery": "a square inside a square is not decoration — it is an experiment in how context changes the perception of every color it …",
+      "ball_painting_demo": "ball_painting_demo"
+     },
+     "says_by": {
+      "pattern_mill": "draft",
+      "albers_wall_gallery": "draft",
+      "ball_painting_demo": "draft"
      }
     }
    ],
@@ -23274,60 +24778,9 @@
      }
     },
     {
-     "pearl": "velocity",
-     "map": "Change_Velocity",
-     "index": 1,
-     "hero": "velocity_arrow",
-     "hero_by": "hand",
-     "tokens": [
-      "velocity_arrow"
-     ],
-     "blurb": "A particle moves.",
-     "says": {
-      "velocity_arrow": "velocity is the derivative of position — motion is the visible rate at which where-you-are becomes …"
-     },
-     "says_by": {
-      "velocity_arrow": "draft"
-     }
-    },
-    {
-     "pearl": "slope surface",
-     "map": "Change_Slope_Surface",
-     "index": 2,
-     "hero": "partial_derivative_terrain",
-     "hero_by": "hand",
-     "tokens": [
-      "partial_derivative_terrain"
-     ],
-     "blurb": "The curve becomes a surface.",
-     "says": {
-      "partial_derivative_terrain": "a derivative in more than one dimension is not one number but a choice of direction"
-     },
-     "says_by": {
-      "partial_derivative_terrain": "draft"
-     }
-    },
-    {
-     "pearl": "accumulation area",
-     "map": "Accumulation_Area",
-     "index": 3,
-     "hero": "integral_area",
-     "hero_by": "hand",
-     "tokens": [
-      "integral_area"
-     ],
-     "blurb": "Here the question turns around.",
-     "says": {
-      "integral_area": "the integral is accumulation — where the derivative asks how fast"
-     },
-     "says_by": {
-      "integral_area": "draft"
-     }
-    },
-    {
      "pearl": "accumulation riemann",
      "map": "Accumulation_Riemann",
-     "index": 4,
+     "index": 1,
      "hero": "riemann_pump",
      "hero_by": "hand",
      "tokens": [
@@ -23348,7 +24801,7 @@
     {
      "pearl": "flow field",
      "map": "Flow_Field",
-     "index": 5,
+     "index": 2,
      "hero": "vector_field_grid",
      "hero_by": "hand",
      "tokens": [
@@ -23363,26 +24816,9 @@
      }
     },
     {
-     "pearl": "flow particle pulse",
-     "map": "Flow_Particle_Pulse",
-     "index": 6,
-     "hero": "particle_flow_swarm",
-     "hero_by": "hand",
-     "tokens": [
-      "particle_flow_swarm"
-     ],
-     "blurb": "The field was a room full of instructions with nothing to obey them.",
-     "says": {
-      "particle_flow_swarm": "a field is invisible until a body moves through it — the particle is how the field speaks"
-     },
-     "says_by": {
-      "particle_flow_swarm": "draft"
-     }
-    },
-    {
      "pearl": "reconciliation",
      "map": "Change_Reconciliation",
-     "index": 7,
+     "index": 3,
      "hero": "ftc_bridge",
      "hero_by": "hand",
      "tokens": [
@@ -23394,6 +24830,74 @@
      },
      "says_by": {
       "ftc_bridge": "draft"
+     }
+    },
+    {
+     "pearl": "velocity",
+     "map": "Change_Velocity",
+     "index": 4,
+     "hero": "velocity_arrow",
+     "hero_by": "hand",
+     "tokens": [
+      "velocity_arrow"
+     ],
+     "blurb": "A particle moves.",
+     "says": {
+      "velocity_arrow": "velocity is the derivative of position — motion is the visible rate at which where-you-are becomes …"
+     },
+     "says_by": {
+      "velocity_arrow": "draft"
+     }
+    },
+    {
+     "pearl": "slope surface",
+     "map": "Change_Slope_Surface",
+     "index": 5,
+     "hero": "partial_derivative_terrain",
+     "hero_by": "hand",
+     "tokens": [
+      "partial_derivative_terrain"
+     ],
+     "blurb": "The curve becomes a surface.",
+     "says": {
+      "partial_derivative_terrain": "a derivative in more than one dimension is not one number but a choice of direction"
+     },
+     "says_by": {
+      "partial_derivative_terrain": "draft"
+     }
+    },
+    {
+     "pearl": "accumulation area",
+     "map": "Accumulation_Area",
+     "index": 6,
+     "hero": "integral_area",
+     "hero_by": "hand",
+     "tokens": [
+      "integral_area"
+     ],
+     "blurb": "Here the question turns around.",
+     "says": {
+      "integral_area": "the integral is accumulation — where the derivative asks how fast"
+     },
+     "says_by": {
+      "integral_area": "draft"
+     }
+    },
+    {
+     "pearl": "flow particle pulse",
+     "map": "Flow_Particle_Pulse",
+     "index": 7,
+     "hero": "particle_flow_swarm",
+     "hero_by": "hand",
+     "tokens": [
+      "particle_flow_swarm"
+     ],
+     "blurb": "The field was a room full of instructions with nothing to obey them.",
+     "says": {
+      "particle_flow_swarm": "a field is invisible until a body moves through it — the particle is how the field speaks"
+     },
+     "says_by": {
+      "particle_flow_swarm": "draft"
      }
     }
    ],
@@ -23416,77 +24920,9 @@
    "node": "forces",
    "pearls": [
     {
-     "pearl": "sky climb",
-     "map": "Sky_Climb",
-     "index": 0,
-     "hero": "calder_object_mobile",
-     "hero_by": "hand",
-     "tokens": [
-      "calder_object_mobile",
-      "force_pad",
-      "calder_mobile",
-      "calder_mobile_primaries",
-      "return_launcher"
-     ],
-     "blurb": "A tower of empty air with launch pads for floors.",
-     "says": {
-      "calder_object_mobile": "The balanced Calder mobile (τ = w·d at every arm) but hung with the project's own ordinary objects - point",
-      "force_pad": "a launch is just a velocity you're given; gravity does the rest",
-      "calder_mobile": "A large hanging Calder mobile that is actually balanced",
-      "return_launcher": "The catapult made sci-fi and made personal: instead of flinging a stone toward +Z it flings YOU on a ballistic arc back to where you started"
-     },
-     "says_by": {
-      "calder_object_mobile": "draft",
-      "force_pad": "draft",
-      "calder_mobile": "draft",
-      "return_launcher": "draft"
-     }
-    },
-    {
-     "pearl": "void crossing",
-     "map": "Void_Crossing",
-     "index": 1,
-     "hero": "force_cube",
-     "hero_by": "hand",
-     "tokens": [
-      "force_cube",
-      "vector_machine",
-      "force_field_zone"
-     ],
-     "blurb": "A floor that stops, a gap of nothing, and a far ledge you have to reach.",
-     "says": {
-      "force_cube": "A grabbable cube that draws the force you apply as an arrow out of its centre",
-      "vector_machine": "A console that aims and sizes the one vector ruling every force_field in the room",
-      "force_field_zone": "A 4 m cube of space where one vector replaces gravity"
-     },
-     "says_by": {
-      "force_cube": "draft",
-      "vector_machine": "draft",
-      "force_field_zone": "draft"
-     }
-    },
-    {
-     "pearl": "vectors act1 whatavectoris",
-     "map": "Vectors_Act1_WhatAVectorIs",
-     "index": 2,
-     "hero": "vector_normalize_demo",
-     "hero_by": "hand",
-     "tokens": [
-      "VectorBasics",
-      "vector_normalize_demo"
-     ],
-     "blurb": "A processional hall with four stations and one question: what is a vector, before it is any particular arrow?",
-     "says": {
-      "VectorBasics": "A vector is not a number and not a point. It is a displacement"
-     },
-     "says_by": {
-      "VectorBasics": "draft"
-     }
-    },
-    {
      "pearl": "vfm 01 foundations",
      "map": "VFM_01_Foundations",
-     "index": 3,
+     "index": 0,
      "hero": "example_2_1_forces_vr",
      "hero_by": "hand",
      "tokens": [
@@ -23524,40 +24960,54 @@
      }
     },
     {
-     "pearl": "vectoroperations",
-     "map": "VectorOperations",
-     "index": 4,
-     "hero": "vector_dot_product_xl",
+     "pearl": "vectors act1 whatavectoris",
+     "map": "Vectors_Act1_WhatAVectorIs",
+     "index": 1,
+     "hero": "vector_normalize_demo",
      "hero_by": "hand",
      "tokens": [
-      "VectorDotProduct",
-      "VectorCrossProduct",
-      "dot_product_projector",
-      "vector_dot_product_xl",
-      "vector_cross_product_xl",
-      "vector_projection_demo",
-      "normal_force_demo"
+      "VectorBasics",
+      "vector_normalize_demo"
      ],
-     "blurb": "Dot product, cross product, and projection — the three operations that make vectors useful beyond addition.",
+     "blurb": "A processional hall with four stations and one question: what is a vector, before it is any particular arrow?",
      "says": {
-      "vector_dot_product_xl": "The walk-inside dot product exhibit at ~5x5 m",
-      "vector_cross_product_xl": "The walk-inside cross product exhibit at ~5x5 m",
-      "VectorCrossProduct": "The cross product does not live in the plane of its inputs",
-      "normal_force_demo": "Vector projection and reflection — decompose velocity into normal and tangent components",
-      "VectorDotProduct": "The dot product does not measure length — it measures how much two directions agree"
+      "VectorBasics": "A vector is not a number and not a point. It is a displacement"
      },
      "says_by": {
-      "vector_dot_product_xl": "draft",
-      "vector_cross_product_xl": "draft",
-      "VectorCrossProduct": "draft",
-      "normal_force_demo": "draft",
-      "VectorDotProduct": "draft"
+      "VectorBasics": "draft"
+     }
+    },
+    {
+     "pearl": "vfm 02 operations",
+     "map": "VFM_02_Operations",
+     "index": 2,
+     "hero": "VectorWorkbench",
+     "hero_by": "hand",
+     "tokens": [
+      "VectorWorkbench",
+      "work_energy_demo",
+      "opening_pair",
+      "torque_demo",
+      "exercise_5_9_angle_between"
+     ],
+     "blurb": "Dot, cross, projection — the operations, walk-around scale.",
+     "says": {
+      "VectorWorkbench": "a vector is not a number — it is a direction with commitment",
+      "exercise_5_9_angle_between": "Two thin arrows rise from a common centre in the XY plane with a pink figure drawn between them and a live degree readout above",
+      "work_energy_demo": "Dot product as physical work — force dotted with displacement gives energy transfer",
+      "torque_demo": "Cross product as torque — force applied at a lever arm produces rotation perpendicular to both"
+     },
+     "says_by": {
+      "VectorWorkbench": "draft",
+      "exercise_5_9_angle_between": "draft",
+      "work_energy_demo": "draft",
+      "torque_demo": "draft"
      }
     },
     {
      "pearl": "vectors act2 vectorarithmetic",
      "map": "Vectors_Act2_VectorArithmetic",
-     "index": 5,
+     "index": 3,
      "hero": "vector_addition_walk",
      "hero_by": "hand",
      "tokens": [
@@ -23584,91 +25034,9 @@
      }
     },
     {
-     "pearl": "vfm 02 operations",
-     "map": "VFM_02_Operations",
-     "index": 6,
-     "hero": "VectorWorkbench",
-     "hero_by": "hand",
-     "tokens": [
-      "VectorWorkbench",
-      "work_energy_demo",
-      "opening_pair",
-      "torque_demo",
-      "exercise_5_9_angle_between"
-     ],
-     "blurb": "Dot, cross, projection — the operations, walk-around scale.",
-     "says": {
-      "VectorWorkbench": "a vector is not a number — it is a direction with commitment",
-      "exercise_5_9_angle_between": "Two thin arrows rise from a common centre in the XY plane with a pink figure drawn between them and a live degree readout above",
-      "work_energy_demo": "Dot product as physical work — force dotted with displacement gives energy transfer",
-      "torque_demo": "Cross product as torque — force applied at a lever arm produces rotation perpendicular to both"
-     },
-     "says_by": {
-      "VectorWorkbench": "draft",
-      "exercise_5_9_angle_between": "draft",
-      "work_energy_demo": "draft",
-      "torque_demo": "draft"
-     }
-    },
-    {
-     "pearl": "vectoradvanced",
-     "map": "VectorAdvanced",
-     "index": 7,
-     "hero": "VectorFieldFlow",
-     "hero_by": "hand",
-     "tokens": [
-      "VectorFieldFlow",
-      "VectorTorque",
-      "exercise_1_3_solution_3_d_bouncing_ball_vr",
-      "example_1_9_motion_101_velocity_and_random_acceleration_vr",
-      "exercise_1_5_solution_accelerate_and_decelerate_vr",
-      "exercise_1_8_solution_attraction_magnitude_vr",
-      "VectorThrowing"
-     ],
-     "blurb": "Torque, acceleration, steering, and throwing — four islands connected by bridges across the void.",
-     "says": {
-      "VectorFieldFlow": "A vector field is a set of instructions written in space",
-      "exercise_1_8_solution_attraction_magnitude_vr": "An orbit is a perpetual fall that always misses the ground",
-      "exercise_1_3_solution_3_d_bouncing_ball_vr": "A bouncing ball is a clock that runs down. Each bounce measures how much the universe …",
-      "VectorTorque": "Torque is leverage made mathematical — the cross product measures how much of your force is wasted pushing toward the pivot",
-      "example_1_9_motion_101_velocity_and_random_acceleration_vr": "The walk is not random. The DRAW is random; the walk is the only thing the law could have done with …",
-      "exercise_1_5_solution_accelerate_and_decelerate_vr": "smooth arrival is not a decision — it is a feedback loop",
-      "VectorThrowing": "A throw is an initial condition. After release"
-     },
-     "says_by": {
-      "VectorFieldFlow": "draft",
-      "exercise_1_8_solution_attraction_magnitude_vr": "draft",
-      "exercise_1_3_solution_3_d_bouncing_ball_vr": "draft",
-      "VectorTorque": "draft",
-      "example_1_9_motion_101_velocity_and_random_acceleration_vr": "draft",
-      "exercise_1_5_solution_accelerate_and_decelerate_vr": "draft",
-      "VectorThrowing": "draft"
-     }
-    },
-    {
-     "pearl": "vectors act3 fieldsandmotion",
-     "map": "Vectors_Act3_FieldsAndMotion",
-     "index": 8,
-     "hero": "VectorMotion",
-     "hero_by": "hand",
-     "tokens": [
-      "launch_arc",
-      "VectorMotion"
-     ],
-     "blurb": "Two rooms, two ways a vector stops holding still.",
-     "says": {
-      "VectorMotion": "Position, velocity, and acceleration are one quantity seen at three depths of change",
-      "launch_arc": "Projectile motion made playable - the launch / F=ma toy for the embodied vectors-forces arc (the pad that throws you)"
-     },
-     "says_by": {
-      "VectorMotion": "draft",
-      "launch_arc": "draft"
-     }
-    },
-    {
      "pearl": "vfm 03 motion",
      "map": "VFM_03_Motion",
-     "index": 9,
+     "index": 4,
      "hero": "example_3_3_pointing_in_the_direction_of_motion_vr",
      "hero_by": "hand",
      "tokens": [
@@ -23716,129 +25084,9 @@
      }
     },
     {
-     "pearl": "vectors act4a kineticforces",
-     "map": "Vectors_Act4a_KineticForces",
-     "index": 10,
-     "hero": "drag_corridor",
-     "hero_by": "hand",
-     "tokens": [
-      "centrifuge_ring",
-      "orbit_walk",
-      "drag_corridor"
-     ],
-     "blurb": "The forces, at the size of your body.",
-     "says": {
-      "drag_corridor": "The body-scale, walk-in twin of drag_lane: a corridor of three media (air",
-      "orbit_walk": "The body-scale, walk-in twin of orbit_pair: stand at the barycenter while a heavy star and a lighter planet wheel around you on opposite …",
-      "centrifuge_ring": "The body-scale, walk-in twin of circle_train: a pod laps a big neon ring while the velocity (tangent) and centripetal force (inward"
-     },
-     "says_by": {
-      "drag_corridor": "draft",
-      "orbit_walk": "draft",
-      "centrifuge_ring": "draft"
-     }
-    },
-    {
-     "pearl": "vectors act4b oscillation",
-     "map": "Vectors_Act4b_Oscillation",
-     "index": 11,
-     "hero": "bounce_well",
-     "hero_by": "hand",
-     "tokens": [
-      "pendulum_hall",
-      "spring_tower",
-      "weather_vane",
-      "lever_balance",
-      "momentum_cradle",
-      "bounce_well"
-     ],
-     "blurb": "The forces that return what they are given.",
-     "says": {
-      "bounce_well": "Restitution made playable - a console toy for the embodied vectors-forces arc (the clean rebuild of the bouncing-ball sim)",
-      "momentum_cradle": "Momentum conservation made playable - Newton's cradle",
-      "weather_vane": "Wind made playable - F_drag = ½ρv²C_dA. A ToyConsole",
-      "lever_balance": "The law of the lever made playable - τ = F·d, balanced when F₁d₁ = F₂d₂",
-      "pendulum_hall": "The body-scale, walk-in twin of pendulum_swing",
-      "spring_tower": "The body-scale, walk-in twin of spring_bob: a heavy mass bobs on a giant coil at its real period T = 2π√(m/k)"
-     },
-     "says_by": {
-      "bounce_well": "draft",
-      "momentum_cradle": "draft",
-      "weather_vane": "draft",
-      "lever_balance": "draft",
-      "pendulum_hall": "draft",
-      "spring_tower": "draft"
-     }
-    },
-    {
-     "pearl": "composition",
-     "map": "ForcesComposition",
-     "index": 12,
-     "hero": "force_field_visualizer",
-     "hero_by": "hand",
-     "tokens": [
-      "3t",
-      "momentum_collision",
-      "force_field_visualizer"
-     ],
-     "blurb": "Forces combine.",
-     "says": {
-      "momentum_collision": "What one body loses, the other gains. Momentum is the bookkeeping of physics",
-      "force_field_visualizer": "Motion is reading, not deciding. The field tells the particle where to go"
-     },
-     "says_by": {
-      "momentum_collision": "draft",
-      "force_field_visualizer": "draft"
-     }
-    },
-    {
-     "pearl": "vectorapplied",
-     "map": "VectorApplied",
-     "index": 13,
-     "hero": "hl_turret_vectors",
-     "hero_by": "hand",
-     "tokens": [
-      "hl_turret_vectors",
-      "field_room"
-     ],
-     "blurb": "Vectors aim turrets."
-    },
-    {
-     "pearl": "vfm 04 fields",
-     "map": "VFM_04_Fields",
-     "index": 14,
-     "hero": "magnetic_simulation",
-     "hero_by": "hand",
-     "tokens": [
-      "magnetic_simulation",
-      "vector_field",
-      "force_fields",
-      "flow_field_painter",
-      "vector_field_visualizer",
-      "noc_5_04_flow_field"
-     ],
-     "blurb": "Stand inside the field.",
-     "says": {
-      "magnetic_simulation": "Magnetic field simulation with dipoles, field line visualization",
-      "vector_field": "A field is a decision made everywhere at once",
-      "force_fields": "A force field is a region with different rules",
-      "flow_field_painter": "noise is not the absence of order but order at a length scale you have",
-      "vector_field_visualizer": "3D arrow field showing flow — vortex, source, sink",
-      "noc_5_04_flow_field": "Agents navigate by following a vector flow field"
-     },
-     "says_by": {
-      "magnetic_simulation": "draft",
-      "vector_field": "draft",
-      "force_fields": "draft",
-      "flow_field_painter": "draft",
-      "vector_field_visualizer": "draft",
-      "noc_5_04_flow_field": "draft"
-     }
-    },
-    {
      "pearl": "vfm 05 launch",
      "map": "VFM_05_Launch",
-     "index": 15,
+     "index": 5,
      "hero": "catapult",
      "hero_by": "hand",
      "tokens": [
@@ -23866,35 +25114,29 @@
      }
     },
     {
-     "pearl": "systems",
-     "map": "ForcesSystems",
-     "index": 16,
-     "hero": "particle_systems",
+     "pearl": "vectors act3 fieldsandmotion",
+     "map": "Vectors_Act3_FieldsAndMotion",
+     "index": 6,
+     "hero": "VectorMotion",
      "hero_by": "hand",
      "tokens": [
-      "vector_fields",
-      "particle_systems",
-      "mass_spring_damper",
-      "spring_system"
+      "launch_arc",
+      "VectorMotion"
      ],
-     "blurb": "Four islands arranged in a clockwise circuit, each built around a different force system.",
+     "blurb": "Two rooms, two ways a vector stops holding still.",
      "says": {
-      "particle_systems": "Particle emitters spawning thousands of particles with configurable lifetimes",
-      "vector_fields": "3D vector field visualization with arrow glyphs showing direction and magnitude at grid points",
-      "mass_spring_damper": "Every vibrating system is a mass-spring-damper in disguise",
-      "spring_system": "A spring network is a medium. Perturbation at one point travels through connections"
+      "VectorMotion": "Position, velocity, and acceleration are one quantity seen at three depths of change",
+      "launch_arc": "Projectile motion made playable - the launch / F=ma toy for the embodied vectors-forces arc (the pad that throws you)"
      },
      "says_by": {
-      "particle_systems": "draft",
-      "vector_fields": "draft",
-      "mass_spring_damper": "draft",
-      "spring_system": "draft"
+      "VectorMotion": "draft",
+      "launch_arc": "draft"
      }
     },
     {
      "pearl": "vfm 06 springs",
      "map": "VFM_06_Springs",
-     "index": 17,
+     "index": 7,
      "hero": "ChainSwing",
      "hero_by": "hand",
      "tokens": [
@@ -23903,6 +25145,7 @@
       "ChainSwing",
       "surreal_kinetic_sculpture",
       "vector_joint_playground",
+      "ConeTwistBag",
       "HingeCrank",
       "SliderPress",
       "spring_demo",
@@ -23936,9 +25179,340 @@
      }
     },
     {
+     "pearl": "vfm 07 gravity",
+     "map": "VFM_07_Gravity",
+     "index": 8,
+     "hero": "orbital_mechanics_demo",
+     "hero_by": "hand",
+     "tokens": [
+      "orbit_pair",
+      "gravity_well",
+      "orbital_mechanics_demo",
+      "grid3d_force_directed"
+     ],
+     "blurb": "Attraction at every scale.",
+     "says": {
+      "orbital_mechanics_demo": "Interactive orbital mechanics simulation — launch satellites",
+      "orbit_pair": "Gravity and orbits made playable - the clean rebuild of the old two-body sim",
+      "grid3d_force_directed": "Force-directed graph layout. Nodes repel, edges attract",
+      "gravity_well": "Gravity is not a force reaching across space — it is the shape of space"
+     },
+     "says_by": {
+      "orbital_mechanics_demo": "draft",
+      "orbit_pair": "draft",
+      "grid3d_force_directed": "draft",
+      "gravity_well": "draft"
+     }
+    },
+    {
+     "pearl": "vfm 09 legs",
+     "map": "VFM_09_Legs",
+     "index": 9,
+     "hero": "",
+     "hero_by": "",
+     "tokens": [],
+     "blurb": "Count the legs; the walk follows."
+    },
+    {
+     "pearl": "vfm 08 arena",
+     "map": "VFM_08_Arena",
+     "index": 10,
+     "hero": "collision_carts",
+     "hero_by": "hand",
+     "tokens": [
+      "turret_targeting",
+      "queer_cylinder_target",
+      "vector_arena",
+      "collision_carts",
+      "sentry_turret"
+     ],
+     "blurb": "Vectors you play against.",
+     "says": {
+      "collision_carts": "Rigid-body collision made playable - a heavy cart meets a light one and momentum before equals momentum after",
+      "vector_arena": "A vector is the difference between two points. Once you can hold both",
+      "queer_cylinder_target": "A target does not have an inside and an outside"
+     },
+     "says_by": {
+      "collision_carts": "draft",
+      "vector_arena": "draft",
+      "queer_cylinder_target": "draft"
+     }
+    },
+    {
+     "pearl": "vectors act4a kineticforces",
+     "map": "Vectors_Act4a_KineticForces",
+     "index": 11,
+     "hero": "drag_corridor",
+     "hero_by": "hand",
+     "tokens": [
+      "centrifuge_ring",
+      "orbit_walk",
+      "drag_corridor"
+     ],
+     "blurb": "The forces, at the size of your body.",
+     "says": {
+      "drag_corridor": "The body-scale, walk-in twin of drag_lane: a corridor of three media (air",
+      "orbit_walk": "The body-scale, walk-in twin of orbit_pair: stand at the barycenter while a heavy star and a lighter planet wheel around you on opposite …",
+      "centrifuge_ring": "The body-scale, walk-in twin of circle_train: a pod laps a big neon ring while the velocity (tangent) and centripetal force (inward"
+     },
+     "says_by": {
+      "drag_corridor": "draft",
+      "orbit_walk": "draft",
+      "centrifuge_ring": "draft"
+     }
+    },
+    {
+     "pearl": "vectors act4b oscillation",
+     "map": "Vectors_Act4b_Oscillation",
+     "index": 12,
+     "hero": "bounce_well",
+     "hero_by": "hand",
+     "tokens": [
+      "pendulum_hall",
+      "spring_tower",
+      "weather_vane",
+      "lever_balance",
+      "momentum_cradle",
+      "bounce_well"
+     ],
+     "blurb": "The forces that return what they are given.",
+     "says": {
+      "bounce_well": "Restitution made playable - a console toy for the embodied vectors-forces arc (the clean rebuild of the bouncing-ball sim)",
+      "momentum_cradle": "Momentum conservation made playable - Newton's cradle",
+      "weather_vane": "Wind made playable - F_drag = ½ρv²C_dA. A ToyConsole",
+      "lever_balance": "The law of the lever made playable - τ = F·d, balanced when F₁d₁ = F₂d₂",
+      "pendulum_hall": "The body-scale, walk-in twin of pendulum_swing",
+      "spring_tower": "The body-scale, walk-in twin of spring_bob: a heavy mass bobs on a giant coil at its real period T = 2π√(m/k)"
+     },
+     "says_by": {
+      "bounce_well": "draft",
+      "momentum_cradle": "draft",
+      "weather_vane": "draft",
+      "lever_balance": "draft",
+      "pendulum_hall": "draft",
+      "spring_tower": "draft"
+     }
+    },
+    {
+     "pearl": "vfm 04 fields",
+     "map": "VFM_04_Fields",
+     "index": 13,
+     "hero": "magnetic_simulation",
+     "hero_by": "hand",
+     "tokens": [
+      "magnetic_simulation",
+      "vector_field",
+      "force_fields",
+      "flow_field_painter",
+      "vector_field_visualizer",
+      "noc_5_04_flow_field"
+     ],
+     "blurb": "Stand inside the field.",
+     "says": {
+      "magnetic_simulation": "Magnetic field simulation with dipoles, field line visualization",
+      "vector_field": "A field is a decision made everywhere at once",
+      "force_fields": "A force field is a region with different rules",
+      "flow_field_painter": "noise is not the absence of order but order at a length scale you have",
+      "vector_field_visualizer": "3D arrow field showing flow — vortex, source, sink",
+      "noc_5_04_flow_field": "Agents navigate by following a vector flow field"
+     },
+     "says_by": {
+      "magnetic_simulation": "draft",
+      "vector_field": "draft",
+      "force_fields": "draft",
+      "flow_field_painter": "draft",
+      "vector_field_visualizer": "draft",
+      "noc_5_04_flow_field": "draft"
+     }
+    },
+    {
+     "pearl": "propgallery",
+     "map": "Forces_PropGallery",
+     "index": 14,
+     "hero": "",
+     "hero_by": "",
+     "tokens": [],
+     "blurb": "# The Prop Gallery\n\nNo diagrams past this line."
+    },
+    {
+     "pearl": "sky climb",
+     "map": "Sky_Climb",
+     "index": 15,
+     "hero": "calder_object_mobile",
+     "hero_by": "hand",
+     "tokens": [
+      "calder_object_mobile",
+      "force_pad",
+      "calder_mobile",
+      "return_launcher"
+     ],
+     "blurb": "A tower of empty air with launch pads for floors.",
+     "says": {
+      "calder_object_mobile": "The balanced Calder mobile (τ = w·d at every arm) but hung with the project's own ordinary objects - point",
+      "force_pad": "a launch is just a velocity you're given; gravity does the rest",
+      "calder_mobile": "A large hanging Calder mobile that is actually balanced",
+      "return_launcher": "The catapult made sci-fi and made personal: instead of flinging a stone toward +Z it flings YOU on a ballistic arc back to where you started"
+     },
+     "says_by": {
+      "calder_object_mobile": "draft",
+      "force_pad": "draft",
+      "calder_mobile": "draft",
+      "return_launcher": "draft"
+     }
+    },
+    {
+     "pearl": "void crossing",
+     "map": "Void_Crossing",
+     "index": 16,
+     "hero": "force_cube",
+     "hero_by": "hand",
+     "tokens": [
+      "force_cube",
+      "vector_machine",
+      "force_field_zone"
+     ],
+     "blurb": "A floor that stops, a gap of nothing, and a far ledge you have to reach.",
+     "says": {
+      "force_cube": "A grabbable cube that draws the force you apply as an arrow out of its centre",
+      "vector_machine": "A console that aims and sizes the one vector ruling every force_field in the room",
+      "force_field_zone": "A 4 m cube of space where one vector replaces gravity"
+     },
+     "says_by": {
+      "force_cube": "draft",
+      "vector_machine": "draft",
+      "force_field_zone": "draft"
+     }
+    },
+    {
+     "pearl": "vectoroperations",
+     "map": "VectorOperations",
+     "index": 17,
+     "hero": "vector_dot_product_xl",
+     "hero_by": "hand",
+     "tokens": [
+      "VectorDotProduct",
+      "VectorCrossProduct",
+      "dot_product_projector",
+      "vector_dot_product_xl",
+      "vector_cross_product_xl",
+      "vector_projection_demo",
+      "normal_force_demo"
+     ],
+     "blurb": "Dot product, cross product, and projection — the three operations that make vectors useful beyond addition.",
+     "says": {
+      "vector_dot_product_xl": "The walk-inside dot product exhibit at ~5x5 m",
+      "vector_cross_product_xl": "The walk-inside cross product exhibit at ~5x5 m",
+      "VectorCrossProduct": "The cross product does not live in the plane of its inputs",
+      "normal_force_demo": "Vector projection and reflection — decompose velocity into normal and tangent components",
+      "VectorDotProduct": "The dot product does not measure length — it measures how much two directions agree"
+     },
+     "says_by": {
+      "vector_dot_product_xl": "draft",
+      "vector_cross_product_xl": "draft",
+      "VectorCrossProduct": "draft",
+      "normal_force_demo": "draft",
+      "VectorDotProduct": "draft"
+     }
+    },
+    {
+     "pearl": "vectoradvanced",
+     "map": "VectorAdvanced",
+     "index": 18,
+     "hero": "VectorFieldFlow",
+     "hero_by": "hand",
+     "tokens": [
+      "VectorFieldFlow",
+      "VectorTorque",
+      "exercise_1_3_solution_3_d_bouncing_ball_vr",
+      "example_1_9_motion_101_velocity_and_random_acceleration_vr",
+      "exercise_1_5_solution_accelerate_and_decelerate_vr",
+      "exercise_1_8_solution_attraction_magnitude_vr",
+      "VectorThrowing"
+     ],
+     "blurb": "Torque, acceleration, steering, and throwing — four islands connected by bridges across the void.",
+     "says": {
+      "VectorFieldFlow": "A vector field is a set of instructions written in space",
+      "exercise_1_8_solution_attraction_magnitude_vr": "An orbit is a perpetual fall that always misses the ground",
+      "exercise_1_3_solution_3_d_bouncing_ball_vr": "A bouncing ball is a clock that runs down. Each bounce measures how much the universe …",
+      "VectorTorque": "Torque is leverage made mathematical — the cross product measures how much of your force is wasted pushing toward the pivot",
+      "example_1_9_motion_101_velocity_and_random_acceleration_vr": "The walk is not random. The DRAW is random; the walk is the only thing the law could have done with …",
+      "exercise_1_5_solution_accelerate_and_decelerate_vr": "smooth arrival is not a decision — it is a feedback loop",
+      "VectorThrowing": "A throw is an initial condition. After release"
+     },
+     "says_by": {
+      "VectorFieldFlow": "draft",
+      "exercise_1_8_solution_attraction_magnitude_vr": "draft",
+      "exercise_1_3_solution_3_d_bouncing_ball_vr": "draft",
+      "VectorTorque": "draft",
+      "example_1_9_motion_101_velocity_and_random_acceleration_vr": "draft",
+      "exercise_1_5_solution_accelerate_and_decelerate_vr": "draft",
+      "VectorThrowing": "draft"
+     }
+    },
+    {
+     "pearl": "composition",
+     "map": "ForcesComposition",
+     "index": 19,
+     "hero": "force_field_visualizer",
+     "hero_by": "hand",
+     "tokens": [
+      "3t",
+      "momentum_collision",
+      "force_field_visualizer"
+     ],
+     "blurb": "Forces combine.",
+     "says": {
+      "momentum_collision": "What one body loses, the other gains. Momentum is the bookkeeping of physics",
+      "force_field_visualizer": "Motion is reading, not deciding. The field tells the particle where to go"
+     },
+     "says_by": {
+      "momentum_collision": "draft",
+      "force_field_visualizer": "draft"
+     }
+    },
+    {
+     "pearl": "vectorapplied",
+     "map": "VectorApplied",
+     "index": 20,
+     "hero": "hl_turret_vectors",
+     "hero_by": "hand",
+     "tokens": [
+      "hl_turret_vectors",
+      "field_room"
+     ],
+     "blurb": "Vectors aim turrets."
+    },
+    {
+     "pearl": "systems",
+     "map": "ForcesSystems",
+     "index": 21,
+     "hero": "particle_systems",
+     "hero_by": "hand",
+     "tokens": [
+      "library_rack",
+      "vector_fields",
+      "particle_systems",
+      "mass_spring_damper",
+      "spring_system"
+     ],
+     "blurb": "Four islands arranged in a clockwise circuit, each built around a different force system.",
+     "says": {
+      "particle_systems": "Particle emitters spawning thousands of particles with configurable lifetimes",
+      "vector_fields": "3D vector field visualization with arrow glyphs showing direction and magnitude at grid points",
+      "mass_spring_damper": "Every vibrating system is a mass-spring-damper in disguise",
+      "spring_system": "A spring network is a medium. Perturbation at one point travels through connections"
+     },
+     "says_by": {
+      "particle_systems": "draft",
+      "vector_fields": "draft",
+      "mass_spring_damper": "draft",
+      "spring_system": "draft"
+     }
+    },
+    {
      "pearl": "chaos",
      "map": "ForcesChaos",
-     "index": 18,
+     "index": 22,
      "hero": "three_body_problem",
      "hero_by": "hand",
      "tokens": [
@@ -23968,60 +25542,9 @@
      }
     },
     {
-     "pearl": "vfm 07 gravity",
-     "map": "VFM_07_Gravity",
-     "index": 19,
-     "hero": "orbital_mechanics_demo",
-     "hero_by": "hand",
-     "tokens": [
-      "orbit_pair",
-      "gravity_well",
-      "orbital_mechanics_demo",
-      "grid3d_force_directed"
-     ],
-     "blurb": "Attraction at every scale.",
-     "says": {
-      "orbital_mechanics_demo": "Interactive orbital mechanics simulation — launch satellites",
-      "orbit_pair": "Gravity and orbits made playable - the clean rebuild of the old two-body sim",
-      "grid3d_force_directed": "Force-directed graph layout. Nodes repel, edges attract",
-      "gravity_well": "Gravity is not a force reaching across space — it is the shape of space"
-     },
-     "says_by": {
-      "orbital_mechanics_demo": "draft",
-      "orbit_pair": "draft",
-      "grid3d_force_directed": "draft",
-      "gravity_well": "draft"
-     }
-    },
-    {
-     "pearl": "vfm 08 arena",
-     "map": "VFM_08_Arena",
-     "index": 20,
-     "hero": "collision_carts",
-     "hero_by": "hand",
-     "tokens": [
-      "turret_targeting",
-      "queer_cylinder_target",
-      "vector_arena",
-      "collision_carts",
-      "sentry_turret"
-     ],
-     "blurb": "Vectors you play against.",
-     "says": {
-      "collision_carts": "Rigid-body collision made playable - a heavy cart meets a light one and momentum before equals momentum after",
-      "vector_arena": "A vector is the difference between two points. Once you can hold both",
-      "queer_cylinder_target": "A target does not have an inside and an outside"
-     },
-     "says_by": {
-      "collision_carts": "draft",
-      "vector_arena": "draft",
-      "queer_cylinder_target": "draft"
-     }
-    },
-    {
      "pearl": "arena",
      "map": "ForcesArena",
-     "index": 21,
+     "index": 23,
      "hero": "hits_reset_display",
      "hero_by": "hand",
      "tokens": [
@@ -24702,6 +26225,7 @@
       "random_walk_terrarium",
       "random_walk_collection",
       "pixel_cloud",
+      "lab_room",
       "random_walk_128",
       "random_walk_leash"
      ],
@@ -25745,6 +27269,7 @@
      "hero": "godel_statement_plaque",
      "hero_by": "hand",
      "tokens": [
+      "ten_print_textile",
       "mamma_monster_gallery",
       "godel_statement_plaque",
       "incompleteness_scale"
