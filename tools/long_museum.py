@@ -503,7 +503,19 @@ def read_hall(name, chapter, order, source, probs, engine=None):
     # gallery. They are different rooms and both are wanted, so both are named.
     # A hall nobody has walked has no `tile` at all rather than a plausible guess.
     if e:
-        bt = built_tile(e)
+        # THE PASSAGE ROWS THEMSELVES (2026-08-28, Palle: "I want to see it in
+        # /long-museum"). The strip draws `structure`, which is the MAP — and a
+        # passage is not in any map, it is rows the engine appends. So the page
+        # could not show one however the seam was built, and the hall it drew was
+        # also SHORTER than the z it claimed: h counts the passage, `structure`
+        # does not. These are the engine's own carved rows, in the map's own
+        # vocabulary, for the page to draw after the hall.
+        bt_all = built_tile(e)
+        if bt_all and passage:
+            tail = bt_all[map_h:map_h + passage]
+            if tail:
+                seg["passage_rows"] = tail
+        bt = bt_all
         if bt:
             seg["tile"] = bt
             seg["tile_source"] = "engine"

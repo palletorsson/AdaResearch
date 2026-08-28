@@ -4838,9 +4838,16 @@ func _layout_write() -> void:
 ## The ledger outlives one walk: a museum built one hall at a time would
 ## otherwise only ever know about the hall it is standing in.
 func _layout_load() -> void:
-	if not FileAccess.file_exists(LAYOUT_WALK_PATH):
+	# THE SHIPPED COPY, or the headset has no memory. ada_run/ is authoring-side
+	# and an export does not carry it, so on the Quest this returned early, the
+	# record was empty, and every crossing fell back to the old chicane —
+	# the seam existed on the desktop and nowhere else. Palle, 2026-08-28:
+	# "I want to see it in VR". Every other runtime file already reads through
+	# _shipped(); this one was the exception because it was born a diagnostic.
+	var path: String = _shipped(LAYOUT_WALK_PATH)
+	if not FileAccess.file_exists(path):
 		return
-	var v: Variant = JSON.parse_string(FileAccess.get_file_as_string(LAYOUT_WALK_PATH))
+	var v: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
 	if v is Dictionary and (v as Dictionary).get("halls") is Dictionary:
 		_layout_walk = (v as Dictionary)["halls"]
 
