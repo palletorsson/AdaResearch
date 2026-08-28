@@ -1,6 +1,6 @@
 {
 	"_readme": "The BAKE: every placement decision the museum makes from a measurement, decided ONCE by a headless --em-bake run and replayed by every later run, desktop or headset. Per chapter|pearl: placed = token, tile cell, the exact cells sealed (x, z-from-segment-base); refused = token, cell, why. Regenerate after editing the plan: python tools/em_bake.py",
-	"at": "2026-08-28 17:49:18",
+	"at": "2026-08-28 17:57:19",
 	"plan": "res://ada_run/em_plan.json",
 	"plan_at": "2026-08-21T14:00:55",
 	"schema": "adaresearch.em_bake.v1",
@@ -63643,20 +63643,15 @@
 			"placed": [
 				{
 					"cell": [
-						9.0,
+						13.0,
 						5.0
 					],
-					"seal": [
-						[
-							9.0,
-							5.0
-						]
-					],
+					"seal": [],
 					"token": "invariants_demo"
 				},
 				{
 					"cell": [
-						9.0,
+						12.0,
 						28.0
 					],
 					"seal": [],
@@ -63698,15 +63693,10 @@
 				},
 				{
 					"cell": [
-						9.0,
+						12.0,
 						11.0
 					],
-					"seal": [
-						[
-							9.0,
-							11.0
-						]
-					],
+					"seal": [],
 					"token": "balance_puzzle"
 				},
 				{
@@ -63774,28 +63764,18 @@
 				},
 				{
 					"cell": [
-						9.0,
+						12.0,
 						21.0
 					],
-					"seal": [
-						[
-							9.0,
-							21.0
-						]
-					],
+					"seal": [],
 					"token": "dark_sphere"
 				},
 				{
 					"cell": [
-						9.0,
+						12.0,
 						16.0
 					],
-					"seal": [
-						[
-							9.0,
-							16.0
-						]
-					],
+					"seal": [],
 					"token": "transform_composition"
 				},
 				{
@@ -63906,7 +63886,7 @@
 						21.0
 					],
 					"token": "spin",
-					"why": "sealing would sever the walk route"
+					"why": "baked: sealing would sever the walk route"
 				}
 			]
 		},
@@ -64098,15 +64078,10 @@
 				},
 				{
 					"cell": [
-						8.0,
+						12.0,
 						17.0
 					],
-					"seal": [
-						[
-							8.0,
-							17.0
-						]
-					],
+					"seal": [],
 					"token": "pick_up_cube"
 				},
 				{
@@ -64498,7 +64473,7 @@
 						54.0
 					],
 					"token": "carousel_cake",
-					"why": "sealing would sever the walk route"
+					"why": "baked: sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
@@ -64506,7 +64481,7 @@
 						54.0
 					],
 					"token": "carousel_cake",
-					"why": "sealing would sever the walk route"
+					"why": "baked: sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
@@ -64514,7 +64489,7 @@
 						53.0
 					],
 					"token": "carousel_cake",
-					"why": "sealing would sever the walk route"
+					"why": "baked: sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
@@ -64522,7 +64497,7 @@
 						55.0
 					],
 					"token": "carousel_cake",
-					"why": "sealing would sever the walk route"
+					"why": "baked: sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
@@ -64530,7 +64505,7 @@
 						54.0
 					],
 					"token": "carousel_cake",
-					"why": "sealing would sever the walk route"
+					"why": "baked: sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
@@ -64538,7 +64513,7 @@
 						53.0
 					],
 					"token": "carousel_cake",
-					"why": "sealing would sever the walk route"
+					"why": "baked: sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
@@ -64546,7 +64521,7 @@
 						55.0
 					],
 					"token": "carousel_cake",
-					"why": "sealing would sever the walk route"
+					"why": "baked: sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
@@ -64554,7 +64529,7 @@
 						53.0
 					],
 					"token": "carousel_cake",
-					"why": "sealing would sever the walk route"
+					"why": "baked: sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
@@ -64562,7 +64537,7 @@
 						55.0
 					],
 					"token": "carousel_cake",
-					"why": "sealing would sever the walk route"
+					"why": "baked: sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
@@ -64570,7 +64545,7 @@
 						54.0
 					],
 					"token": "carousel_cake",
-					"why": "sealing would sever the walk route"
+					"why": "baked: sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
@@ -64578,7 +64553,7 @@
 						52.0
 					],
 					"token": "carousel_cake",
-					"why": "sealing would sever the walk route"
+					"why": "baked: sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
@@ -64586,7 +64561,7 @@
 						56.0
 					],
 					"token": "carousel_cake",
-					"why": "sealing would sever the walk route"
+					"why": "baked: sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
@@ -64594,7 +64569,7 @@
 						54.0
 					],
 					"token": "carousel_cake",
-					"why": "sealing would sever the walk route"
+					"why": "baked: sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
@@ -64602,7 +64577,7 @@
 						53.0
 					],
 					"token": "carousel_cake",
-					"why": "sealing would sever the walk route"
+					"why": "baked: sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
@@ -64610,7 +64585,7 @@
 						55.0
 					],
 					"token": "carousel_cake",
-					"why": "sealing would sever the walk route"
+					"why": "baked: sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
@@ -64618,7 +64593,7 @@
 						52.0
 					],
 					"token": "carousel_cake",
-					"why": "sealing would sever the walk route"
+					"why": "baked: sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
@@ -64626,7 +64601,7 @@
 						56.0
 					],
 					"token": "carousel_cake",
-					"why": "sealing would sever the walk route"
+					"why": "baked: sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
@@ -64634,7 +64609,7 @@
 						52.0
 					],
 					"token": "carousel_cake",
-					"why": "sealing would sever the walk route"
+					"why": "baked: sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
@@ -64642,7 +64617,7 @@
 						56.0
 					],
 					"token": "carousel_cake",
-					"why": "sealing would sever the walk route"
+					"why": "baked: sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
@@ -64650,7 +64625,7 @@
 						53.0
 					],
 					"token": "carousel_cake",
-					"why": "sealing would sever the walk route"
+					"why": "baked: sealing would sever the walk route"
 				},
 				{
 					"tile_cell": [
@@ -64658,7 +64633,7 @@
 						55.0
 					],
 					"token": "carousel_cake",
-					"why": "sealing would sever the walk route"
+					"why": "baked: sealing would sever the walk route"
 				}
 			]
 		},

@@ -3,24 +3,25 @@
 
 2026-08-28, Palle: "can I get a courtyard and annex editor".
 
-The annex is the museum's one room that no map holds. A map cannot name a negative
-row, and the annex runs z -4..-1, so the window out to the maps, Folding Past
-standing behind its glass, the roof you drop in through and the hole you drop
-through are all config — the `lobby` block of commons/data/em_layout.json. That
-file is READ by endless_museum.gd at boot and by the web editor, so editing it is
-how the annex is edited, and both surfaces see the same change.
+The annex is the four rows in front of a hall — z -4..-1, which no map cell can
+name — and its FITTINGS are the window out to the maps, Folding Past behind the
+glass, the roof you drop in through and the hole you drop through.
 
-WHY THIS IS A LINE EDITOR AND NOT json.dumps. em_layout.json is written by hand
-and carries its own reasoning: every key has a sibling `_key` explaining what it
-is for and what went wrong before it got that value. A round trip through
-json.dumps keeps the data and destroys the arrangement — it reflowed 93 lines of
-this very file earlier today, and once reformatted a 15,121-line registry. So a
-value is replaced in place, on its own line, and every other byte of the file is
-the byte it was.
+THEY LIVE IN THE MAP (2026-08-28, Palle: "move the lobby fittings into the map
+too"). They used to be the `lobby` block of commons/data/em_layout.json, a
+museum-wide config file — but the lobby IS segment 0's vestibule and nothing else
+(`lobby_on` is `_seg_index == 0`), so it belongs to the hall standing behind it.
+endless_museum.gd reads map_info.museum.lobby ahead of the file; the file keeps
+its `_key` prose as documentation of what each default means.
+
+WHY THIS IS A LINE EDITOR AND NOT json.dumps. A map is compact-rows and carries
+its own arrangement; a round trip keeps the data and destroys it — 130 lines to
+1870, measured today, and once a 15,121-line registry. A value is replaced in
+place, on its own line, and every other byte of the file is the byte it was.
 
     python tools/annex_edit.py --show
     python tools/annex_edit.py --set drop_x=7 --set roof_wall_m=1.4
-    python tools/annex_edit.py --set with_counter=1
+    python tools/annex_edit.py --map=Point_Lines --set with_counter=1
 """
 from __future__ import annotations
 
@@ -31,7 +32,18 @@ import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-LAYOUT = os.path.join(ROOT, "commons", "data", "em_layout.json")
+
+#: THE LOBBY LIVES IN THE MAP (2026-08-28, Palle: "move the lobby fittings into
+#: the map too"). It used to be the `lobby` block of commons/data/em_layout.json,
+#: a museum-wide config file — but the lobby IS segment 0's vestibule and nothing
+#: else (`lobby_on` is `_seg_index == 0`), so it belongs to the hall standing
+#: behind it. endless_museum.gd reads map_info.museum.lobby ahead of the file.
+#: The file keeps its `_key` prose as documentation of the defaults.
+DEFAULT_MAP = "Point_One"
+
+
+def layout_path(map_name: str) -> str:
+    return os.path.join(ROOT, "commons", "maps", map_name, "map_data.json")
 
 #: Keys the annex editor may set, and what each one is. Anything not named here
 #: is refused: the lobby block also holds strings and prose, and a typo that
@@ -68,9 +80,10 @@ FIELDS: dict[str, tuple[str, str, float, float]] = {
 }
 
 
-def read_doc() -> dict:
-    with open(LAYOUT, encoding="utf-8") as fh:
-        return json.load(fh)
+def read_doc(map_name: str) -> dict:
+    with open(layout_path(map_name), encoding="utf-8") as fh:
+        doc = json.load(fh)
+    return {"lobby": ((doc.get("map_info") or {}).get("museum") or {}).get("lobby") or {}}
 
 
 def lobby_span(text: str) -> tuple[int, int]:
@@ -80,7 +93,7 @@ def lobby_span(text: str) -> tuple[int, int]:
     search to the block is what stops an annex edit from setting somebody else's
     key that happens to share a name.
     """
-    i = text.index('\n\t"lobby": {')
+    i = text.index('"lobby": {')
     depth = 0
     j = text.index("{", i)
     k = j
@@ -107,7 +120,7 @@ def fmt(key: str, value: float) -> str:
     return s + "0" if s.endswith(".") else s
 
 
-def set_keys(pairs: list[tuple[str, float]]) -> list[str]:
+def set_keys(pairs: list[tuple[str, float]], map_name: str) -> list[str]:
     # READ THE BYTES AND PUT THE SAME ONES BACK. Reading in text mode turns CRLF
     # into \n and writing with newline="" puts \n back, so the first run of this
     # tool silently converted all 154 lines of a Windows-checkout file — a change
@@ -115,6 +128,7 @@ def set_keys(pairs: list[tuple[str, float]]) -> list[str]:
     # changed", which is a terrible thing to be looking at while hunting a real
     # one-value edit somebody else made. The whole point of this tool is that it
     # touches one line; the line endings are part of that promise.
+    LAYOUT = layout_path(map_name)
     raw = open(LAYOUT, "rb").read()
     text = raw.decode("utf-8")
     crlf = "\r\n" in text
@@ -164,6 +178,7 @@ def set_keys(pairs: list[tuple[str, float]]) -> list[str]:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="edit the museum's annex (em_layout.lobby)")
+    ap.add_argument("--map", default=DEFAULT_MAP, help="the hall whose lobby to edit")
     ap.add_argument("--set", action="append", default=[], metavar="key=value")
     ap.add_argument("--show", action="store_true", help="print every editable key and its value")
     ap.add_argument("--json", action="store_true", help="print the editable block as JSON")
@@ -173,7 +188,7 @@ def main() -> int:
                          "written down a second time somewhere they can drift")
     a = ap.parse_args()
 
-    lobby = read_doc().get("lobby", {})
+    lobby = read_doc(a.map).get("lobby", {})
     if a.fields:
         json.dump({"fields": [{"key": k, "kind": kind, "unit": unit, "min": lo, "max": hi,
                                "value": lobby.get(k), "default": k not in lobby,
@@ -188,7 +203,7 @@ def main() -> int:
         sys.stdout.write("\n")
         return 0
     if a.show or not a.set:
-        print("the annex — commons/data/em_layout.json, block `lobby`\n")
+        print("the annex — %s, map_info.museum.lobby\n" % a.map)
         for k, (kind, unit, lo, hi) in FIELDS.items():
             v = lobby.get(k, "(default)")
             print("  %-20s %-10s %-8s %s" % (k, v, unit, "%s..%s" % (lo, hi)))
@@ -206,10 +221,10 @@ def main() -> int:
             pairs.append((k, float(v)))
         except ValueError:
             raise SystemExit("%s wants a number, got %r" % (k, v))
-    for n in set_keys(pairs):
+    for n in set_keys(pairs, a.map):
         print("  " + n)
     print("\nwrote %s — the museum reads it at boot; a running one reloads within a second."
-          % os.path.relpath(LAYOUT, ROOT))
+          % os.path.relpath(layout_path(a.map), ROOT))
     return 0
 
 

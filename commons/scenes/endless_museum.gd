@@ -1539,6 +1539,17 @@ func _parse_args() -> void:
 ## Six render modules, six independent failure domains. Anything that does not
 ## load is simply absent for the rest of the run.
 ## One number from commons/data/em_layout.json, or the fallback.
+## The FIRST hall's own lobby settings, when its map declares them.
+##
+## 2026-08-28, Palle: "move the lobby fittings into the map too". The lobby is
+## segment 0's vestibule and nothing else — `lobby_on` is `_seg_index == 0` — so
+## its window, its view onto Folding Past, its drop hole and its roof belong to
+## the hall standing behind it, not to a museum-wide config file. A map that
+## declares map_info.museum.lobby answers every _L("lobby", ...) in this file;
+## commons/data/em_layout.json stays the default for a hall that says nothing.
+var _lobby_map: Dictionary = {}
+
+
 func _L(section: String, key: String, fallback: float) -> float:
 	if _layout.is_empty():
 		if FileAccess.file_exists(LAYOUT_PATH):
@@ -1547,6 +1558,8 @@ func _L(section: String, key: String, fallback: float) -> float:
 				_layout = parsed
 		if _layout.is_empty():
 			_layout = {"_absent": true}
+	if section == "lobby" and _lobby_map.has(key):
+		return float(_lobby_map[key])   # the hall's own map outranks the file
 	var sec: Variant = _layout.get(section)
 	if sec is Dictionary and (sec as Dictionary).has(key):
 		return float((sec as Dictionary)[key])
@@ -6376,6 +6389,10 @@ func _build_segment() -> void:
 			# holds a hall's whole space now. Hand rulings still apply on top —
 			# they are read after this — so the in-museum T key keeps working and
 			# the precedence is stated rather than accidental.
+			if mm.get("lobby") is Dictionary:
+				_lobby_map = mm["lobby"]
+			else:
+				_lobby_map = {}
 			if mm.get("annex") is Array:
 				peek["annex"] = mm["annex"]
 			elif peek.has("annex"):
