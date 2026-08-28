@@ -331,12 +331,29 @@ const SEAM_PROUD := 0.02      # box straddles y=0: 10 mm proud of the floor plan
 ## well — Skirting 1 at y 0.04, ArrisSkirting 1 at 0.08, Trim 3 between 2.15 and
 ## 4.36, ArrisTrim 2 at 4.22..4.50 — which is exactly "hanging in the air and
 ## following the floor from an old wall".
+## THE VOID, as rectangles. void_cells stops a face being GENERATED, which is
+## the cheap and correct half; but a door reveal, a corner post and an arris are
+## derived from doors and corners rather than from the floor map, so four of
+## them still stood in two metres of open water — a 4.14 m post among them,
+## which is the pale column Palle has been photographing since long before the
+## pool existed. This is the other half: the same extent test skip_rects uses,
+## at the same choke point every bucket leaves through, so nothing has to be
+## enumerated and no future bucket can forget.
+##
+## The CEILING is exempt. skip_rects deliberately drops it — that is how the
+## drop hole keeps its sky — but a pool wants its roof, and punching the hall
+## ceiling out over a basin would be a hole nobody asked for.
+static var _void_rects: Array = []
+const _VOID_EXEMPT := ["Ceiling", "ArrisCeiling"]
+static var _report: Dictionary = {}
+static var _report_head: String = ""
 static var _skip_rects: Array = []
 
 
 static func dress_segment(seg: Node3D, tile: Array, w: int, h: int, mats, prev_w: int = -1,
 		opts: Dictionary = {}) -> void:
 	_skip_rects = opts.get("skip_rects", []) if opts.get("skip_rects") is Array else []
+	_void_rects = opts.get("void_rects", []) if opts.get("void_rects") is Array else []
 	if seg == null:
 		return
 	if w <= 0:
@@ -351,6 +368,33 @@ static func dress_segment(seg: Node3D, tile: Array, w: int, h: int, mats, prev_w
 	var floors: Dictionary = {}
 	_map_vestibule(walls, floors, w, prev_w)
 	_map_tile(walls, floors, tile, w)
+	# WHAT THE SCENE ACTUALLY LEFT OUT (2026-08-28, Palle: "you must still remove
+	# the floor lists and remaining wall!"). The two maps above are this file's
+	# OWN idea of the room, derived from the tile and a hardcoded lobby — and it
+	# is an idea the scene can contradict. A basin sinks cells the tile still
+	# calls floor, so the dress went on laying skirting and joints across two
+	# metres of open water, and no amount of correcting endless_museum.gd could
+	# reach it: the strips were never built there.
+	#
+	# void_cells is the scene saying so, in the same segment-local cells this
+	# file counts in. Erased from BOTH maps, so a cell stops being a floor to
+	# dress and stops being a wall to dress against. The ceiling is untouched:
+	# it comes off w and h, not off occupancy, so a pool keeps its roof — which
+	# is why this is not done with skip_rects, whose choke point drops every
+	# bucket including that one.
+	var voids: Array = opts.get("void_cells", []) if opts.get("void_cells") is Array else []
+	var voided_f: int = 0
+	var voided_w: int = 0
+	for v_v in voids:
+		var v: Vector2i = v_v
+		if floors.erase(v):
+			voided_f += 1
+		if walls.erase(v):
+			voided_w += 1
+	_report_head = "void_cells: %d asked, %d floors erased, %d walls erased" % [voids.size(), voided_f, voided_w]
+	if voided_f > 0 or voided_w > 0:
+		print("[em_detail] the scene declares %d cell(s) void: %d floor, %d wall — nothing dressed there" % [
+			voids.size(), voided_f, voided_w])
 
 	# ── transform buckets, one draw call each ───────────────────────────────
 	var trim_x: Array = []    # cornice, jambs, head linings, arris beads, labels
@@ -502,6 +546,29 @@ static func dress_segment(seg: Node3D, tile: Array, w: int, h: int, mats, prev_w
 	_emit(seg, "WallFrames", hang_frame_x, _hang_frame_mat(), true)
 	_emit(seg, "WallMounts", hang_mount_x, _hang_mount_mat(), false)
 	_emit(seg, "WallFields", hang_field_x, _hang_field_mat(), false)
+	# ONLY THE HALL THAT DECLARED VOIDS. The museum streams two segments and
+	# every dress overwrote this file, so the report on disk was the LAST hall
+	# dressed — one with no pool — and it duly showed skirting standing where a
+	# hall with no pool should have skirting. The instrument was right and it was
+	# answering about somebody else. Same fault class as the thing it was built
+	# to find.
+	if not _report.is_empty() and not voids.is_empty():
+		var rl: Array = ["what em_detail put in the enter room and the first hall rows",
+			_report_head,
+			"(segment-local cells; annex is z 0..%d, the map begins at %d)" % [VESTIBULE_H - 1, VESTIBULE_H], ""]
+		var rk: Array = _report.keys()
+		rk.sort_custom(func(a, b): return a.y * 1000 + a.x < b.y * 1000 + b.x)
+		for r_k in rk:
+			var rc: Vector2i = r_k
+			var parts: Array = []
+			for pk2 in (_report[rc] as Dictionary).keys():
+				parts.append("%s x%d" % [pk2, int((_report[rc] as Dictionary)[pk2])])
+			rl.append("  (%3d,%3d)  %s" % [rc.x, rc.y - VESTIBULE_H, ", ".join(PackedStringArray(parts))])
+		var rf := FileAccess.open("res://ada_run/em_detail_plan.txt", FileAccess.WRITE)
+		if rf != null:
+			rf.store_string(String.chr(10).join(PackedStringArray(rl)) + String.chr(10))
+			rf.close()
+		_report.clear()
 	# THE CARD. Every showing gets a small 2D-in-3D museum card under its
 	# lower-right corner: a NUMBER first (the place — "07"), the chapter ·
 	# pearl under it, and any TEXT the hand ruled for that index (showing_rules
@@ -532,8 +599,16 @@ static func _map_vestibule(walls: Dictionary, floors: Dictionary, w: int, prev_w
 	for zr in range(VESTIBULE_H):
 		for x in range(LOBBY_W):
 			floors[Vector2i(x, zr)] = true
-		walls[Vector2i(0, zr)] = true
-		walls[Vector2i(LOBBY_W - 1, zr)] = true
+		# THE ANNEX'S WALLS ARE ITS SKIN, one cell OUTSIDE the floor — the same
+		# relation the hall has. They used to be its first and last floor
+		# columns, because the scene walled those columns itself; since
+		# 2026-08-28 the outer skin runs the annex rows at x -1 and x LOBBY_W
+		# and the scene builds no inner pair. Dressing the old pair meant
+		# skirting standing against a wall that is not there, a metre inside
+		# the room — a free strip on the floor, which is exactly what was
+		# still crossing the pool after the seams were painted.
+		walls[Vector2i(-1, zr)] = true
+		walls[Vector2i(LOBBY_W, zr)] = true
 	# far seal: everything at or beyond this museum's width
 	for x1 in range(maxi(w - 1, 0), LOBBY_W):
 		walls[Vector2i(x1, VESTIBULE_H - 1)] = true
@@ -1562,10 +1637,40 @@ static func _add_seams(floors: Dictionary, w: int, h: int, out: Array) -> void:
 static func _emit(parent: Node3D, node_name: String, xforms: Array, mat: Variant, shadows: bool) -> void:
 	if xforms.is_empty():
 		return
+	# the record, before any culling, so a bucket that is dropped is still known
+	# to have been asked for
+	for xf0 in xforms:
+		var t0: Transform3D = xf0
+		var s0: Vector3 = t0.basis.get_scale()
+		var cz0: int = int(floor(t0.origin.z))
+		if cz0 < 0 or cz0 > VESTIBULE_H + 2:
+			continue
+		var kk := Vector2i(int(floor(t0.origin.x)), cz0)
+		if not _report.has(kk):
+			_report[kk] = {}
+		var dd: Dictionary = _report[kk]
+			# CULLED OR NOT — the whole question. Recording before the cull was right
+		# for "was this ever asked for", and useless for "is it still there",
+		# which is what a proof needs. Both, now, and labelled.
+		var dropped0 := false
+		var cull0: Array = _skip_rects
+		if not _void_rects.is_empty() and not _VOID_EXEMPT.has(node_name):
+			cull0 = cull0 + _void_rects
+		var bx0 := Rect2(t0.origin.x - absf(s0.x) * 0.5, t0.origin.z - absf(s0.z) * 0.5, absf(s0.x), absf(s0.z))
+		for rr in cull0:
+			var rr2: Rect2 = rr
+			if rr2.intersects(bx0) or rr2.has_point(Vector2(t0.origin.x, t0.origin.z)):
+				dropped0 = true
+				break
+		var nn := "%s%s %.2f x %.2f x %.2f at y%.2f" % ["DROPPED " if dropped0 else "", node_name, absf(s0.x), absf(s0.y), absf(s0.z), t0.origin.y]
+		dd[nn] = int(dd.get(nn, 0)) + 1
 	# ONE choke point for every bucket — skirting, trim, arrises, seams, ceiling —
 	# because they all arrive here and nowhere else. A piece is dropped by where it
 	# STANDS, not by which bucket carried it, so nothing has to be enumerated.
-	if not _skip_rects.is_empty():
+	var cull: Array = _skip_rects
+	if not _void_rects.is_empty() and not _VOID_EXEMPT.has(node_name):
+		cull = cull + _void_rects
+	if not cull.is_empty():
 		var kept: Array = []
 		for xf in xforms:
 			var tf: Transform3D = xf
@@ -1579,7 +1684,7 @@ static func _emit(parent: Node3D, node_name: String, xforms: Array, mat: Variant
 			var sc: Vector3 = tf.basis.get_scale()
 			var box := Rect2(o.x - absf(sc.x) * 0.5, o.z - absf(sc.z) * 0.5, absf(sc.x), absf(sc.z))
 			var drop := false
-			for r_v in _skip_rects:
+			for r_v in cull:
 				var r: Rect2 = r_v
 				if r.intersects(box) or r.has_point(Vector2(o.x, o.z)):
 					drop = true

@@ -6771,6 +6771,10 @@ func _build_segment() -> void:
 	# template halls are all ≤ 17, so nothing changes for them.
 	var vest_w: int = maxi(LOBBY_W, maxi(pw, w))
 	seg.set_meta("em_vest_w", vest_w)
+	# the pool, recorded for the dress pass — see the void_cells note there.
+	# Set empty here and filled once the basin is read, so a segment with no
+	# basin still answers the question rather than leaving the key absent.
+	seg.set_meta("em_pool_cells", [])
 
 	# CLEARING A CELL IN THE ENTER ROOM (2026-08-26, Palle: "remove the extra list
 	# that are part of an old wall ... the editing of passages is still something I
@@ -6902,6 +6906,7 @@ func _build_segment() -> void:
 	_stand_probe = not vest_basin.is_empty()
 	_stand_probe_z = VESTIBULE_H + 2   # the annex and the first hall rows: a threshold strip lies across the seam
 	_stand_log.clear()
+	seg.set_meta("em_pool_cells", pool_all.keys())
 	var clear_drowned: int = 0
 	for pk_v in vest_basin.keys():
 		if not _clear_cells.has(pk_v):
@@ -7096,6 +7101,7 @@ func _build_segment() -> void:
 	# 2 m slit open to the sky at each jog. Decide the whole line first, then
 	# build it, and the returns fall out of comparing neighbours.
 	var skin_at: Dictionary = {}          # Vector2i(side, row) -> x, absent = open
+	var skin_nat: Dictionary = {}         # the same rows, before any step
 	for y_skin in range(-VESTIBULE_H, tile.size()):
 		var srow: Array = tile[y_skin] if y_skin >= 0 else []
 		# AN ANNEX ROW HAS ITS OWN EDGES. vest_w is maxi(LOBBY_W, pw, w), so the
@@ -7124,29 +7130,55 @@ func _build_segment() -> void:
 			if sguard > 0:
 				skin_stepped += 1
 			skin_at[Vector2i(si, y_skin)] = sxi
-	var skin_returns: int = 0
+			skin_nat[Vector2i(si, y_skin)] = sx2
+	# ONE STRAIGHT LINE PER SIDE, AND THE NOTCH IS FLOORED. 2026-08-28, Palle:
+	# "you must still remove the floor lists and remaining wall!"
+	#
+	# The wall was mine, from this morning. The skin stepped out two cells to
+	# clear a pool that reaches past the tile and stepped back again, and a
+	# jogging wall needs a RETURN to close the step — which landed as a
+	# three-cell full-height stub at (-3,2), (-2,2), (-1,2), standing into the
+	# room at the pool's far end, and another at row -3. A better return is not
+	# the fix; a wall that jogs is.
+	#
+	# So: take the furthest step any row on this side needed, give EVERY row on
+	# that side the same line, and FLOOR the cells the step opened rather than
+	# walling them. The hall gains an aisle on that side, the pool sits in it,
+	# and there is no stub because there is no step. This is the crossing ruling
+	# again (Palle, 2026-08-28: "It is nice that the hallway kind of is bigger
+	# than some maps, like a service corridor") — the museum widens to meet what
+	# it is asked to hold, rather than growing a bay around it.
+	#
+	# Measured from each row's OWN natural line, never from an absolute x: the
+	# annex is often wider than the hall (vest_w vs w), so a shared maximum would
+	# drag every narrow hall's east wall out to LOBBY_W. A side with no pool has
+	# step 0 and is built exactly as before.
+	var side_step: Dictionary = {}        # side index -> cells past its own line
 	for k_v in skin_at.keys():
 		var k: Vector2i = k_v
-		var sx0: int = int(skin_at[k])
-		var out: int = -1 if sx0 < 0 else 1
-		# the return: this row is walled out to whatever its neighbours reached,
-		# skipping the water, so a step closes across instead of standing open
-		var far: int = sx0
-		for dy in [-1, 1]:
-			var nk := Vector2i(k.x, k.y + dy)
-			if skin_at.has(nk) and (int(skin_at[nk]) - sx0) * out > 0:
-				far = int(skin_at[nk])
-		var xx: int = sx0
-		while true:
-			if not pool_all.has(Vector2i(xx, k.y + VESTIBULE_H)):
-				_wall_at(seg, solid, wcells, xx, k.y + VESTIBULE_H, corner_col, m_corner, wr)
-				if xx != sx0:
-					skin_returns += 1
-			if xx == far:
-				break
-			xx += out
+		var st: int = absi(int(skin_at[k]) - int(skin_nat[k]))
+		if st > int(side_step.get(k.x, 0)):
+			side_step[k.x] = st
+	var skin_filled: int = 0
+	for k2_v in skin_at.keys():
+		var k2: Vector2i = k2_v
+		var nat: int = int(skin_nat[k2])
+		var outw: int = -1 if nat < 0 else 1
+		var step: int = int(side_step.get(k2.x, 0))
+		var zloc: int = k2.y + VESTIBULE_H
+		_wall_at(seg, solid, wcells, nat + outw * step, zloc, corner_col, m_corner, wr)
+		for j in range(0, step):
+			var fx: int = nat + outw * j
+			if pool_all.has(Vector2i(fx, zloc)):
+				continue                   # the water has this one; its own floor is 2 m down
+			_box(seg, Vector3(fx + 0.5, -0.1, float(zloc) + 0.5), Vector3(1, 0.2, 1),
+				Color(0.16, 0.16, 0.19), m_floor)
+			_add_col(solid, Vector3(fx + 0.5, -0.1, float(zloc) + 0.5), Vector3(1, 0.2, 1))
+			_walk_cells[Vector2i(fx, zbase + zloc)] = true
+			skin_filled += 1
 	if skin_stepped > 0:
-		print("[em-basin] the outer skin stepped out past the pool on %d row(s), %d return cell(s) closing the jogs" % [skin_stepped, skin_returns])
+		print("[em-basin] the pool pushed a side out %s; every row on it moved too, and %d cell(s) of aisle were floored — no jog, no return" % [
+			str(side_step), skin_filled])
 	# ── THE BASIN (2026-08-24, Palle: "like a basin with walls under the
 	# floor, like a pool, one meter down where the grid lines with the trace
 	# sit ... covered with transparent glass so we can walk over it") ────────
@@ -7442,24 +7474,19 @@ func _build_segment() -> void:
 	# and this is information rather than a label.
 	if _L("hall", "prereq_board", 1.0) > 0.5:
 		_prereq_board(seg, w, next_seq, peek, legend)
-	var ember := MeshInstance3D.new()
-	var ebm := BoxMesh.new()
-	ebm.size = Vector3(w - 2.0, 0.02, 0.08)
-	ember.mesh = ebm
-	# 1.1, down from 1.8. The strip runs edge to edge at the exact horizontal
-	# centre of every axial shot; at 1.8 it was the brightest line in the frame
-	# and it bisected the composition. It is an ember, not a light fitting.
-	var emat: Material = _mat_of("emissive_accent", [accent, 1.1])
-	if emat == null:
-		var fallback := StandardMaterial3D.new()
-		fallback.albedo_color = accent
-		fallback.emission_enabled = true
-		fallback.emission = accent
-		fallback.emission_energy_multiplier = 1.6
-		emat = fallback
-	ember.material_override = emat
-	ember.position = Vector3(w / 2.0, 0.02, VESTIBULE_H - 0.15)
-	seg.add_child(ember)
+	# THE EMBER IS OFF BY DEFAULT (2026-08-28, Palle: "there is a brown red floor
+	# list"). A w-2 m strip, 8 cm wide and 2 cm proud, laid across the threshold
+	# floor at z 3.85 and tinted with the museum's accent — which is to say a
+	# floor list, in the enter room, of exactly the kind everything else in this
+	# pass has just been clearing out. It never went through em_detail, so the
+	# keep-out that emptied the annex could not see it: it is a MeshInstance3D
+	# added straight to the segment.
+	#
+	# Same fate as the gallery banner two lines up and for the same reason — it
+	# is a graphic device on the one floor that should say nothing. Set
+	# hall.ember to bring it back.
+	if _L("hall", "ember", 0.0) > 0.5:
+		_threshold_ember(seg, w, accent)
 	# ── the AAA passes, in the order they depend on each other ───────────────
 	# 1. architectural detail: skirting, cornice, shadow gap, door reveals, a
 	#    coffered ceiling with open daylight slots, floor seams. Adds NO
@@ -7515,6 +7542,16 @@ func _build_segment() -> void:
 						adopt_keep[kt] = true
 				_mod_detail.call("dress_segment", seg, dress_tile, w, h, _detail_mats, _prev_w,
 					{"skip_rects": _trim_keep_out(seg),
+						# EVERY CELL THIS SEGMENT SANK. em_detail derives its own occupancy
+						# from the tile, which still calls a basin cell floor, so it dressed
+						# skirting and joints over open water. The segment wrote down what it
+						# actually built; this hands it over.
+						"void_cells": seg.get_meta("em_pool_cells", []),
+						# and the same cells as rectangles, for the pieces that are derived from
+						# doors and corners rather than from the floor map — see the note on
+						# _void_rects. Inset a hair so a rect does not claim its neighbour by
+						# touching: Rect2.intersects counts a shared edge.
+						"void_rects": _dress_keep_out(seg),
 						"wall_features_max": int(deal.get("wall_features_max", -1)),
 						"fill_walls": bool(deal.get("fill_walls", true)),
 						"hang_min_stretch": int(deal.get("hang_min_stretch", 2)),
@@ -20166,3 +20203,55 @@ func _note_standing(pos: Vector3, size: Vector3) -> void:
 				_stand_log[k] = {}
 			var d: Dictionary = _stand_log[k]
 			d[who] = int(d.get(who, 0)) + 1
+
+
+## Where em_detail must dress NOTHING — the pool, and the whole enter room.
+##
+## 2026-08-28, Palle: "remove the list in the annex, just a plane floor", then
+## "the wall is gone but list from walls and floor lists are there". A list is a
+## moulding — golvlist, vägglist — and the enter room had both: skirting and its
+## arris at the foot of every wall, cornice and its two arrises at the head, and
+## the 3 m floor lattice between them. In a gallery that is architecture. In the
+## room you arrive in, before the museum has said anything, it is decoration on
+## a threshold — and it was being drawn against walls the scene no longer builds
+## and across two metres of open water.
+##
+## The annex is plain now: floor, walls, ceiling, and nothing applied to them.
+## The CEILING is exempt from this cull (see _VOID_EXEMPT in em_detail) so the
+## enter room keeps its lid.
+func _dress_keep_out(segn: Node3D) -> Array:
+	var out: Array = []
+	if segn == null:
+		return out
+	for c_v in (segn.get_meta("em_pool_cells", []) as Array):
+		var c: Vector2i = c_v
+		# inset a hair: Rect2.intersects counts a shared edge, so a flush rect
+		# would claim the dry cell next door as well
+		out.append(Rect2(float(c.x) + 0.02, float(c.y) + 0.02, 0.96, 0.96))
+	var vw: float = float(segn.get_meta("em_vest_w", 17))
+	out.append(Rect2(-2.0, 0.02, vw + 4.0, float(VESTIBULE_H) - 0.04))
+	return out
+
+
+## The threshold ember: a lit strip laid across the floor where the enter room
+## meets the museum, in the museum's own accent. Off by default since
+## 2026-08-28 — see the note at its call site.
+func _threshold_ember(seg: Node3D, w: int, accent: Color) -> void:
+	var ember := MeshInstance3D.new()
+	var ebm := BoxMesh.new()
+	ebm.size = Vector3(w - 2.0, 0.02, 0.08)
+	ember.mesh = ebm
+	# 1.1, down from 1.8. The strip runs edge to edge at the exact horizontal
+	# centre of every axial shot; at 1.8 it was the brightest line in the frame
+	# and it bisected the composition. It is an ember, not a light fitting.
+	var emat: Material = _mat_of("emissive_accent", [accent, 1.1])
+	if emat == null:
+		var fallback := StandardMaterial3D.new()
+		fallback.albedo_color = accent
+		fallback.emission_enabled = true
+		fallback.emission = accent
+		fallback.emission_energy_multiplier = 1.6
+		emat = fallback
+	ember.material_override = emat
+	ember.position = Vector3(w / 2.0, 0.02, VESTIBULE_H - 0.15)
+	seg.add_child(ember)

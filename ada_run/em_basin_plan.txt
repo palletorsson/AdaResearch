@@ -8,8 +8,8 @@ z1    ::====...........#:::::::::::
 z2    ::::.............####::::::::
 z3    ::::................#::::::::
 z4    ::::................#::::::::
-z5    :::::##.........#...#::::::::
-z6    :::::##.........#..##::::::::
+z5    ::::.##.........#...#::::::::
+z6    ::::###.........#..##::::::::
 z7    :::::##..#####..#...#::::::::
 z8    :::::#..........#...#::::::::
 z9    :::::#..........#...#::::::::
@@ -40,162 +40,164 @@ z33   ::::#..###################:::
 
 ? — 16 pool cell(s): 4 inside the hall tile, 12 in the minus domain.
 the outer skin stepped past the water on 4 row(s).
-13 cell(s) ruled clear; 2 piece(s) refused on them.
+15 cell(s) ruled clear; 2 piece(s) refused on them.
 
 WHAT STANDS IN THE ANNEX, by the cell it stands on and the function that built it:
-  ( -1, -4)                 _build_segment:7127 top4.50m 1.00 x 4.50 x 1.00 x1
-  (  0, -4)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7053 top4.50m 1.00 x 4.50 x 1.00 x1
-  (  1, -4)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:6993 top0.40m 1.00 x 0.60 x 1.00 x1, _build_segment:7053 top4.50m 1.00 x 4.50 x 1.00 x1
-  (  2, -4)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:6993 top0.40m 1.00 x 0.60 x 1.00 x1, _build_segment:7053 top4.50m 1.00 x 4.50 x 1.00 x1, _dress_lobby:2782 top0.00m 11.00 x 0.20 x 8.00 x1
-  (  3, -4)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:6993 top0.40m 1.00 x 0.60 x 1.00 x1, _build_segment:7053 top4.50m 1.00 x 4.50 x 1.00 x1, _dress_lobby:2782 top0.00m 11.00 x 0.20 x 8.00 x1
-  (  4, -4)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:6993 top0.40m 1.00 x 0.60 x 1.00 x1, _build_segment:7053 top4.50m 1.00 x 4.50 x 1.00 x1, _dress_lobby:2782 top0.00m 11.00 x 0.20 x 8.00 x1
-  (  5, -4)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7053 top4.50m 1.00 x 4.50 x 1.00 x1, _dress_lobby:2782 top0.00m 11.00 x 0.20 x 8.00 x1
-  (  6, -4)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7046 top0.90m 1.00 x 0.90 x 1.00 x1, _build_segment:7048 top4.50m 1.00 x 2.00 x 1.00 x1, _dress_lobby:2782 top0.00m 11.00 x 0.20 x 8.00 x1
-  (  7, -4)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7046 top0.90m 1.00 x 0.90 x 1.00 x1, _build_segment:7048 top4.50m 1.00 x 2.00 x 1.00 x1, FITTING window (scene) x1, _dress_lobby:2782 top0.00m 11.00 x 0.20 x 8.00 x1
-  (  8, -4)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7046 top0.90m 1.00 x 0.90 x 1.00 x1, _build_segment:7048 top4.50m 1.00 x 2.00 x 1.00 x1, _dress_lobby:2782 top0.00m 11.00 x 0.20 x 8.00 x1, FITTING view (scene) x1
-  (  9, -4)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7053 top4.50m 1.00 x 4.50 x 1.00 x1, _dress_lobby:2782 top0.00m 11.00 x 0.20 x 8.00 x1
-  ( 10, -4)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7053 top4.50m 1.00 x 4.50 x 1.00 x1, _dress_lobby:2782 top0.00m 11.00 x 0.20 x 8.00 x1
-  ( 11, -4)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:6993 top0.40m 1.00 x 0.60 x 1.00 x1, _build_segment:7053 top4.50m 1.00 x 4.50 x 1.00 x1, _dress_lobby:2782 top0.00m 11.00 x 0.20 x 8.00 x1
-  ( 12, -4)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:6993 top0.40m 1.00 x 0.60 x 1.00 x1, _build_segment:7053 top4.50m 1.00 x 4.50 x 1.00 x1, _dress_lobby:2782 top0.00m 11.00 x 0.20 x 8.00 x1
-  ( 13, -4)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:6993 top0.40m 1.00 x 0.60 x 1.00 x1, _build_segment:7053 top4.50m 1.00 x 4.50 x 1.00 x1
-  ( 14, -4)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:6993 top0.40m 1.00 x 0.60 x 1.00 x1, _build_segment:7053 top4.50m 1.00 x 4.50 x 1.00 x1
-  ( 15, -4)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7053 top4.50m 1.00 x 4.50 x 1.00 x1
-  ( 16, -4)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:6993 top0.40m 1.00 x 0.60 x 1.00 x1, _build_segment:7053 top4.50m 1.00 x 4.50 x 1.00 x1
-  ( 17, -4)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1
-  ( 18, -4)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7053 top4.50m 1.00 x 4.50 x 1.00 x1
-  ( 19, -4)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7053 top4.50m 1.00 x 4.50 x 1.00 x1
-  ( 20, -4)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7053 top4.50m 1.00 x 4.50 x 1.00 x1
-  ( 21, -4)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7053 top4.50m 1.00 x 4.50 x 1.00 x1
-  ( 22, -4)                 _build_segment:7127 top4.50m 1.00 x 4.50 x 1.00 x1
-  ( -3, -3)                 _build_segment:7127 top4.50m 1.00 x 4.50 x 1.00 x1
-  ( -2, -3)                 _build_segment:7127 top4.50m 1.00 x 4.50 x 1.00 x1
-  ( -1, -3)                 _build_segment:7127 top4.50m 1.00 x 4.50 x 1.00 x1
-  (  0, -3)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1
-  (  1, -3)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:6993 top0.40m 1.00 x 0.60 x 1.00 x1
-  (  2, -3)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:6993 top0.40m 1.00 x 0.60 x 1.00 x1
-  (  3, -3)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:19986 top5.95m 7.00 x 1.10 x 0.16 x1
-  (  4, -3)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:19986 top5.95m 7.00 x 1.10 x 0.16 x1
-  (  5, -3)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:19986 top5.95m 7.00 x 1.10 x 0.16 x1
-  (  6, -3)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:19986 top5.95m 7.00 x 1.10 x 0.16 x1
-  (  7, -3)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:19986 top5.95m 7.00 x 1.10 x 0.16 x1
-  (  8, -3)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:19986 top5.95m 7.00 x 1.10 x 0.16 x1
-  (  9, -3)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:19986 top5.95m 7.00 x 1.10 x 0.16 x1
-  ( 10, -3)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1
-  ( 11, -3)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1
-  ( 12, -3)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1
-  ( 13, -3)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1
-  ( 14, -3)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:6993 top0.40m 1.00 x 0.60 x 1.00 x1
-  ( 15, -3)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1
-  ( 16, -3)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:6993 top0.40m 1.00 x 0.60 x 1.00 x1
-  ( 17, -3)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:6993 top0.40m 1.00 x 0.60 x 1.00 x1
-  ( 18, -3)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:6993 top0.40m 1.00 x 0.60 x 1.00 x1
-  ( 19, -3)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:6993 top0.40m 1.00 x 0.60 x 1.00 x1
-  ( 20, -3)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:6993 top0.40m 1.00 x 0.60 x 1.00 x1, _prereq_board:4291 top2.72m 0.09 x 1.54 x 2.38 x1
-  ( 21, -3)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _prereq_board:4291 top2.72m 0.09 x 1.54 x 2.38 x1
-  ( 22, -3)                 _build_segment:7127 top4.50m 1.00 x 4.50 x 1.00 x1
-  ( -3, -2)                 _build_segment:7127 top4.50m 1.00 x 4.50 x 1.00 x1
-  ( -2, -2)  <-- ON THE POOL  _build_segment:6925 top0.00m 0.10 x 2.00 x 1.00 x1, _build_segment:6925 top0.00m 1.00 x 2.00 x 0.10 x1, _build_segment:6934 top0.00m 1.00 x 0.04 x 1.00 x1
-  ( -1, -2)  <-- ON THE POOL  _build_segment:6925 top0.00m 1.00 x 2.00 x 0.10 x1, _build_segment:6934 top0.00m 1.00 x 0.04 x 1.00 x1
-  (  0, -2)  <-- ON THE POOL  _build_segment:6925 top0.00m 1.00 x 2.00 x 0.10 x1, _build_segment:6934 top0.00m 1.00 x 0.04 x 1.00 x1
-  (  1, -2)  <-- ON THE POOL  _build_segment:6925 top0.00m 0.10 x 2.00 x 1.00 x1, _build_segment:6925 top0.00m 1.00 x 2.00 x 0.10 x1, _build_segment:6934 top0.00m 1.00 x 0.04 x 1.00 x1
-  (  2, -2)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:19986 top5.95m 0.16 x 1.10 x 7.00 x1
-  (  3, -2)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:19961 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:19986 top5.95m 7.00 x 1.10 x 0.16 x1, _drop_hole:19986 top5.95m 0.16 x 1.10 x 7.00 x1
-  (  4, -2)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:19961 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:19986 top5.95m 7.00 x 1.10 x 0.16 x1
-  (  5, -2)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:19961 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:19986 top5.95m 7.00 x 1.10 x 0.16 x1
-  (  6, -2)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:19961 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:19986 top5.95m 7.00 x 1.10 x 0.16 x1
-  (  7, -2)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:19961 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:19986 top5.95m 7.00 x 1.10 x 0.16 x1
-  (  8, -2)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:19961 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:19986 top5.95m 7.00 x 1.10 x 0.16 x1
-  (  9, -2)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:19961 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:19986 top5.95m 7.00 x 1.10 x 0.16 x1, _drop_hole:19986 top5.95m 0.16 x 1.10 x 7.00 x1
-  ( 10, -2)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:19986 top5.95m 0.16 x 1.10 x 7.00 x1
-  ( 11, -2)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1
-  ( 12, -2)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1
-  ( 13, -2)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1
-  ( 14, -2)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:6993 top0.40m 1.00 x 0.60 x 1.00 x1
-  ( 15, -2)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1
-  ( 16, -2)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:6993 top0.40m 1.00 x 0.60 x 1.00 x1
-  ( 17, -2)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:6993 top0.40m 1.00 x 0.60 x 1.00 x1
-  ( 18, -2)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:6993 top0.40m 1.00 x 0.60 x 1.00 x1
-  ( 19, -2)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:6993 top0.40m 1.00 x 0.60 x 1.00 x1
-  ( 20, -2)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:6993 top0.40m 1.00 x 0.60 x 1.00 x1, _prereq_board:4291 top2.72m 0.09 x 1.54 x 2.38 x1
-  ( 21, -2)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _prereq_board:4291 top2.72m 0.09 x 1.54 x 2.38 x1
-  ( 22, -2)                 _build_segment:7127 top4.50m 1.00 x 4.50 x 1.00 x1
-  ( -3, -1)                 _build_segment:7127 top4.50m 1.00 x 4.50 x 1.00 x1
-  ( -2, -1)  <-- ON THE POOL  _build_segment:6925 top0.00m 0.10 x 2.00 x 1.00 x1, _build_segment:6934 top0.00m 1.00 x 0.04 x 1.00 x1
-  ( -1, -1)  <-- ON THE POOL  _build_segment:6934 top0.00m 1.00 x 0.04 x 1.00 x1
-  (  0, -1)  <-- ON THE POOL  _build_segment:6934 top0.00m 1.00 x 0.04 x 1.00 x1
-  (  1, -1)  <-- ON THE POOL  _build_segment:6925 top0.00m 0.10 x 2.00 x 1.00 x1, _build_segment:6934 top0.00m 1.00 x 0.04 x 1.00 x1
-  (  2, -1)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:19986 top5.95m 0.16 x 1.10 x 7.00 x1
-  (  3, -1)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:19961 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:19986 top5.95m 0.16 x 1.10 x 7.00 x1
-  (  4, -1)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:19961 top4.95m 1.00 x 0.20 x 1.00 x1
-  (  5, -1)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:19961 top4.95m 1.00 x 0.20 x 1.00 x1
-  (  6, -1)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:19961 top4.95m 1.00 x 0.20 x 1.00 x1
-  (  7, -1)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:19961 top4.95m 1.00 x 0.20 x 1.00 x1
-  (  8, -1)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:19961 top4.95m 1.00 x 0.20 x 1.00 x1
-  (  9, -1)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:19961 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:19986 top5.95m 0.16 x 1.10 x 7.00 x1
-  ( 10, -1)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:19986 top5.95m 0.16 x 1.10 x 7.00 x1
-  ( 11, -1)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:6993 top0.40m 1.00 x 0.60 x 1.00 x1
-  ( 12, -1)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:6993 top0.40m 1.00 x 0.60 x 1.00 x1
-  ( 13, -1)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:6993 top0.40m 1.00 x 0.60 x 1.00 x1
-  ( 14, -1)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:6993 top0.40m 1.00 x 0.60 x 1.00 x1
-  ( 15, -1)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1
-  ( 16, -1)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:6993 top0.40m 1.00 x 0.60 x 1.00 x1
-  ( 17, -1)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:6993 top0.40m 1.00 x 0.60 x 1.00 x1
-  ( 18, -1)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:6993 top0.40m 1.00 x 0.60 x 1.00 x1
-  ( 19, -1)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:6993 top0.40m 1.00 x 0.60 x 1.00 x1
-  ( 20, -1)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:6993 top0.40m 1.00 x 0.60 x 1.00 x1, _prereq_board:4291 top2.72m 0.09 x 1.54 x 2.38 x1
-  ( 21, -1)                 _build_segment:6905 top0.00m 1.00 x 0.20 x 1.00 x1, _prereq_board:4291 top2.72m 0.09 x 1.54 x 2.38 x1
-  ( 22, -1)                 _build_segment:7127 top4.50m 1.00 x 4.50 x 1.00 x1
-  ( -3,  0)                 _build_segment:7127 top4.50m 1.00 x 4.50 x 1.00 x1
-  ( -2,  0)  <-- ON THE POOL  _build_segment:6925 top0.00m 0.10 x 2.00 x 1.00 x1, _build_segment:6934 top0.00m 1.00 x 0.04 x 1.00 x1
-  ( -1,  0)  <-- ON THE POOL  _build_segment:6934 top0.00m 1.00 x 0.04 x 1.00 x1
-  (  0,  0)                 _build_segment:7275 top0.00m 1.00 x 0.06 x 1.00 x1
-  (  1,  0)                 _build_segment:7254 top0.00m 0.10 x 2.00 x 1.00 x1, _build_segment:7275 top0.00m 1.00 x 0.06 x 1.00 x1
-  (  2,  0)                 _drop_hole:19986 top5.95m 0.16 x 1.10 x 7.00 x1, _build_segment:7286 top0.00m 1.00 x 0.20 x 1.00 x1
-  (  3,  0)                 _drop_hole:19961 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:19986 top5.95m 0.16 x 1.10 x 7.00 x1, _build_segment:7286 top0.00m 1.00 x 0.20 x 1.00 x1
-  (  4,  0)                 _drop_hole:19961 top4.95m 1.00 x 0.20 x 1.00 x1, _build_segment:7286 top0.00m 1.00 x 0.20 x 1.00 x1
-  (  5,  0)                 _drop_hole:19961 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:19971 top5.09m 0.10 x 0.24 x 1.10 x1, _drop_hole:19971 top5.09m 1.10 x 0.24 x 0.10 x1, _build_segment:7286 top0.00m 1.00 x 0.20 x 1.00 x1
-  (  6,  0)                 _drop_hole:19961 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:19971 top5.09m 1.10 x 0.24 x 0.10 x1, _build_segment:7286 top0.00m 1.00 x 0.20 x 1.00 x1
-  (  7,  0)                 _drop_hole:19961 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:19971 top5.09m 0.10 x 0.24 x 1.10 x1, _drop_hole:19971 top5.09m 1.10 x 0.24 x 0.10 x1, _build_segment:7286 top0.00m 1.00 x 0.20 x 1.00 x1
-  (  8,  0)                 _drop_hole:19961 top4.95m 1.00 x 0.20 x 1.00 x1, _build_segment:7286 top0.00m 1.00 x 0.20 x 1.00 x1
-  (  9,  0)                 _drop_hole:19961 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:19986 top5.95m 0.16 x 1.10 x 7.00 x1, _build_segment:7286 top0.00m 1.00 x 0.20 x 1.00 x1
-  ( 10,  0)                 _drop_hole:19986 top5.95m 0.16 x 1.10 x 7.00 x1, _build_segment:7286 top0.00m 1.00 x 0.20 x 1.00 x1
-  ( 11,  0)                 _build_segment:7297 top4.50m 1.00 x 4.50 x 1.00 x1
-  ( 12,  0)                 _build_segment:7297 top4.50m 1.00 x 4.50 x 1.00 x1
-  ( 13,  0)                 _build_segment:7297 top4.50m 1.00 x 4.50 x 1.00 x1
-  ( -3,  1)                 _build_segment:7127 top4.50m 1.00 x 4.50 x 1.00 x1
-  ( -2,  1)  <-- ON THE POOL  _build_segment:6925 top0.00m 0.10 x 2.00 x 1.00 x1, _build_segment:6925 top0.00m 1.00 x 2.00 x 0.10 x1, _build_segment:6934 top0.00m 1.00 x 0.04 x 1.00 x1
-  ( -1,  1)  <-- ON THE POOL  _build_segment:6925 top0.00m 1.00 x 2.00 x 0.10 x1, _build_segment:6934 top0.00m 1.00 x 0.04 x 1.00 x1
-  (  0,  1)                 _build_segment:7254 top0.00m 1.00 x 2.00 x 0.10 x1, _build_segment:7275 top0.00m 1.00 x 0.06 x 1.00 x1
-  (  1,  1)                 _build_segment:7254 top0.00m 0.10 x 2.00 x 1.00 x1, _build_segment:7254 top0.00m 1.00 x 2.00 x 0.10 x1, _build_segment:7275 top0.00m 1.00 x 0.06 x 1.00 x1
-  (  2,  1)                 _drop_hole:19986 top5.95m 0.16 x 1.10 x 7.00 x1, _build_segment:7286 top0.00m 1.00 x 0.20 x 1.00 x1
-  (  3,  1)                 _drop_hole:19961 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:19986 top5.95m 0.16 x 1.10 x 7.00 x1, _build_segment:7286 top0.00m 1.00 x 0.20 x 1.00 x1
-  (  4,  1)                 _drop_hole:19961 top4.95m 1.00 x 0.20 x 1.00 x1, _build_segment:7286 top0.00m 1.00 x 0.20 x 1.00 x1
-  (  5,  1)                 _drop_hole:19961 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:19971 top5.09m 0.10 x 0.24 x 1.10 x1, _build_segment:7286 top0.00m 1.00 x 0.20 x 1.00 x1
-  (  6,  1)                 _build_segment:7286 top0.00m 1.00 x 0.20 x 1.00 x1
-  (  7,  1)                 _drop_hole:19961 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:19971 top5.09m 0.10 x 0.24 x 1.10 x1, _build_segment:7286 top0.00m 1.00 x 0.20 x 1.00 x1
-  (  8,  1)                 _drop_hole:19961 top4.95m 1.00 x 0.20 x 1.00 x1, _build_segment:7286 top0.00m 1.00 x 0.20 x 1.00 x1
-  (  9,  1)                 _drop_hole:19961 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:19986 top5.95m 0.16 x 1.10 x 7.00 x1, _build_segment:7286 top0.00m 1.00 x 0.20 x 1.00 x1
-  ( 10,  1)                 _drop_hole:19986 top5.95m 0.16 x 1.10 x 7.00 x1, _build_segment:7286 top0.00m 1.00 x 0.20 x 1.00 x1
-  ( 11,  1)                 _build_segment:7286 top0.00m 1.00 x 0.20 x 1.00 x1
-  ( 12,  1)                 _build_segment:7286 top0.00m 1.00 x 0.20 x 1.00 x1
-  ( 13,  1)                 _build_segment:7297 top4.50m 1.00 x 4.50 x 1.00 x1
-  ( -3,  2)                 _build_segment:7127 top4.50m 1.00 x 4.50 x 1.00 x1
-  ( -2,  2)                 _build_segment:7127 top4.50m 1.00 x 4.50 x 1.00 x1
-  ( -1,  2)                 _build_segment:7127 top4.50m 1.00 x 4.50 x 1.00 x1
-  (  0,  2)                 _build_segment:7286 top0.00m 1.00 x 0.20 x 1.00 x1
-  (  1,  2)                 _build_segment:7286 top0.00m 1.00 x 0.20 x 1.00 x1
-  (  2,  2)                 _drop_hole:19986 top5.95m 0.16 x 1.10 x 7.00 x1, _build_segment:7286 top0.00m 1.00 x 0.20 x 1.00 x1
-  (  3,  2)                 _drop_hole:19961 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:19986 top5.95m 0.16 x 1.10 x 7.00 x1, _build_segment:7286 top0.00m 1.00 x 0.20 x 1.00 x1
-  (  4,  2)                 _drop_hole:19961 top4.95m 1.00 x 0.20 x 1.00 x1, _build_segment:7286 top0.00m 1.00 x 0.20 x 1.00 x1
-  (  5,  2)                 _drop_hole:19961 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:19971 top5.09m 0.10 x 0.24 x 1.10 x1, _drop_hole:19971 top5.09m 1.10 x 0.24 x 0.10 x1, _build_segment:7286 top0.00m 1.00 x 0.20 x 1.00 x1
-  (  6,  2)                 _drop_hole:19961 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:19971 top5.09m 1.10 x 0.24 x 0.10 x1, _build_segment:7286 top0.00m 1.00 x 0.20 x 1.00 x1
-  (  7,  2)                 _drop_hole:19961 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:19971 top5.09m 0.10 x 0.24 x 1.10 x1, _drop_hole:19971 top5.09m 1.10 x 0.24 x 0.10 x1, _build_segment:7286 top0.00m 1.00 x 0.20 x 1.00 x1
-  (  8,  2)                 _drop_hole:19961 top4.95m 1.00 x 0.20 x 1.00 x1, _build_segment:7286 top0.00m 1.00 x 0.20 x 1.00 x1
-  (  9,  2)                 _drop_hole:19961 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:19986 top5.95m 0.16 x 1.10 x 7.00 x1, _build_segment:7286 top0.00m 1.00 x 0.20 x 1.00 x1
-  ( 10,  2)                 _drop_hole:19986 top5.95m 0.16 x 1.10 x 7.00 x1, _build_segment:7286 top0.00m 1.00 x 0.20 x 1.00 x1
-  ( 11,  2)                 _build_segment:7286 top0.00m 1.00 x 0.20 x 1.00 x1
-  ( 12,  2)                 _build_segment:7286 top0.00m 1.00 x 0.20 x 1.00 x1
-  ( 13,  2)                 _build_segment:7297 top4.50m 1.00 x 4.50 x 1.00 x1
-  ( 14,  2)                 _build_segment:7297 top4.50m 1.00 x 4.50 x 1.00 x1
-  ( 15,  2)                 _build_segment:7297 top4.50m 1.00 x 4.50 x 1.00 x1
-  ( 16,  2)                 _build_segment:7297 top4.50m 1.00 x 4.50 x 1.00 x1
+  ( -3, -4)                 _build_segment:7169 top4.50m 1.00 x 4.50 x 1.00 x1
+  ( -2, -4)                 _build_segment:7174 top0.00m 1.00 x 0.20 x 1.00 x1
+  ( -1, -4)                 _build_segment:7174 top0.00m 1.00 x 0.20 x 1.00 x1
+  (  0, -4)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7073 top4.50m 1.00 x 4.50 x 1.00 x1
+  (  1, -4)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7013 top0.40m 1.00 x 0.60 x 1.00 x1, _build_segment:7073 top4.50m 1.00 x 4.50 x 1.00 x1
+  (  2, -4)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7013 top0.40m 1.00 x 0.60 x 1.00 x1, _build_segment:7073 top4.50m 1.00 x 4.50 x 1.00 x1, _dress_lobby:2797 top0.00m 11.00 x 0.20 x 8.00 x1
+  (  3, -4)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7013 top0.40m 1.00 x 0.60 x 1.00 x1, _build_segment:7073 top4.50m 1.00 x 4.50 x 1.00 x1, _dress_lobby:2797 top0.00m 11.00 x 0.20 x 8.00 x1
+  (  4, -4)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7013 top0.40m 1.00 x 0.60 x 1.00 x1, _build_segment:7073 top4.50m 1.00 x 4.50 x 1.00 x1, _dress_lobby:2797 top0.00m 11.00 x 0.20 x 8.00 x1
+  (  5, -4)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7073 top4.50m 1.00 x 4.50 x 1.00 x1, _dress_lobby:2797 top0.00m 11.00 x 0.20 x 8.00 x1
+  (  6, -4)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7066 top0.90m 1.00 x 0.90 x 1.00 x1, _build_segment:7068 top4.50m 1.00 x 2.00 x 1.00 x1, _dress_lobby:2797 top0.00m 11.00 x 0.20 x 8.00 x1
+  (  7, -4)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7066 top0.90m 1.00 x 0.90 x 1.00 x1, _build_segment:7068 top4.50m 1.00 x 2.00 x 1.00 x1, FITTING window (scene) x1, _dress_lobby:2797 top0.00m 11.00 x 0.20 x 8.00 x1
+  (  8, -4)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7066 top0.90m 1.00 x 0.90 x 1.00 x1, _build_segment:7068 top4.50m 1.00 x 2.00 x 1.00 x1, _dress_lobby:2797 top0.00m 11.00 x 0.20 x 8.00 x1, FITTING view (scene) x1
+  (  9, -4)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7073 top4.50m 1.00 x 4.50 x 1.00 x1, _dress_lobby:2797 top0.00m 11.00 x 0.20 x 8.00 x1
+  ( 10, -4)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7073 top4.50m 1.00 x 4.50 x 1.00 x1, _dress_lobby:2797 top0.00m 11.00 x 0.20 x 8.00 x1
+  ( 11, -4)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7013 top0.40m 1.00 x 0.60 x 1.00 x1, _build_segment:7073 top4.50m 1.00 x 4.50 x 1.00 x1, _dress_lobby:2797 top0.00m 11.00 x 0.20 x 8.00 x1
+  ( 12, -4)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7013 top0.40m 1.00 x 0.60 x 1.00 x1, _build_segment:7073 top4.50m 1.00 x 4.50 x 1.00 x1, _dress_lobby:2797 top0.00m 11.00 x 0.20 x 8.00 x1
+  ( 13, -4)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7013 top0.40m 1.00 x 0.60 x 1.00 x1, _build_segment:7073 top4.50m 1.00 x 4.50 x 1.00 x1
+  ( 14, -4)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7013 top0.40m 1.00 x 0.60 x 1.00 x1, _build_segment:7073 top4.50m 1.00 x 4.50 x 1.00 x1
+  ( 15, -4)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7073 top4.50m 1.00 x 4.50 x 1.00 x1
+  ( 16, -4)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7013 top0.40m 1.00 x 0.60 x 1.00 x1, _build_segment:7073 top4.50m 1.00 x 4.50 x 1.00 x1
+  ( 17, -4)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1
+  ( 18, -4)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7073 top4.50m 1.00 x 4.50 x 1.00 x1
+  ( 19, -4)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7073 top4.50m 1.00 x 4.50 x 1.00 x1
+  ( 20, -4)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7073 top4.50m 1.00 x 4.50 x 1.00 x1
+  ( 21, -4)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7073 top4.50m 1.00 x 4.50 x 1.00 x1
+  ( 22, -4)                 _build_segment:7169 top4.50m 1.00 x 4.50 x 1.00 x1
+  ( -3, -3)                 _build_segment:7169 top4.50m 1.00 x 4.50 x 1.00 x1
+  ( -2, -3)                 _build_segment:7174 top0.00m 1.00 x 0.20 x 1.00 x1
+  ( -1, -3)                 _build_segment:7174 top0.00m 1.00 x 0.20 x 1.00 x1
+  (  0, -3)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1
+  (  1, -3)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1
+  (  2, -3)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1
+  (  3, -3)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:20038 top5.95m 7.00 x 1.10 x 0.16 x1
+  (  4, -3)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:20038 top5.95m 7.00 x 1.10 x 0.16 x1
+  (  5, -3)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:20038 top5.95m 7.00 x 1.10 x 0.16 x1
+  (  6, -3)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:20038 top5.95m 7.00 x 1.10 x 0.16 x1
+  (  7, -3)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:20038 top5.95m 7.00 x 1.10 x 0.16 x1
+  (  8, -3)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:20038 top5.95m 7.00 x 1.10 x 0.16 x1
+  (  9, -3)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:20038 top5.95m 7.00 x 1.10 x 0.16 x1
+  ( 10, -3)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1
+  ( 11, -3)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1
+  ( 12, -3)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1
+  ( 13, -3)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1
+  ( 14, -3)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7013 top0.40m 1.00 x 0.60 x 1.00 x1
+  ( 15, -3)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1
+  ( 16, -3)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7013 top0.40m 1.00 x 0.60 x 1.00 x1
+  ( 17, -3)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7013 top0.40m 1.00 x 0.60 x 1.00 x1
+  ( 18, -3)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7013 top0.40m 1.00 x 0.60 x 1.00 x1
+  ( 19, -3)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7013 top0.40m 1.00 x 0.60 x 1.00 x1
+  ( 20, -3)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7013 top0.40m 1.00 x 0.60 x 1.00 x1, _prereq_board:4306 top2.72m 0.09 x 1.54 x 2.38 x1
+  ( 21, -3)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _prereq_board:4306 top2.72m 0.09 x 1.54 x 2.38 x1
+  ( 22, -3)                 _build_segment:7169 top4.50m 1.00 x 4.50 x 1.00 x1
+  ( -3, -2)                 _build_segment:7169 top4.50m 1.00 x 4.50 x 1.00 x1
+  ( -2, -2)  <-- ON THE POOL  _build_segment:6945 top0.00m 0.10 x 2.00 x 1.00 x1, _build_segment:6945 top0.00m 1.00 x 2.00 x 0.10 x1, _build_segment:6954 top0.00m 1.00 x 0.04 x 1.00 x1
+  ( -1, -2)  <-- ON THE POOL  _build_segment:6945 top0.00m 1.00 x 2.00 x 0.10 x1, _build_segment:6954 top0.00m 1.00 x 0.04 x 1.00 x1
+  (  0, -2)  <-- ON THE POOL  _build_segment:6945 top0.00m 1.00 x 2.00 x 0.10 x1, _build_segment:6954 top0.00m 1.00 x 0.04 x 1.00 x1
+  (  1, -2)  <-- ON THE POOL  _build_segment:6945 top0.00m 0.10 x 2.00 x 1.00 x1, _build_segment:6945 top0.00m 1.00 x 2.00 x 0.10 x1, _build_segment:6954 top0.00m 1.00 x 0.04 x 1.00 x1
+  (  2, -2)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:20038 top5.95m 0.16 x 1.10 x 7.00 x1
+  (  3, -2)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:20013 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:20038 top5.95m 7.00 x 1.10 x 0.16 x1, _drop_hole:20038 top5.95m 0.16 x 1.10 x 7.00 x1
+  (  4, -2)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:20013 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:20038 top5.95m 7.00 x 1.10 x 0.16 x1
+  (  5, -2)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:20013 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:20038 top5.95m 7.00 x 1.10 x 0.16 x1
+  (  6, -2)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:20013 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:20038 top5.95m 7.00 x 1.10 x 0.16 x1
+  (  7, -2)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:20013 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:20038 top5.95m 7.00 x 1.10 x 0.16 x1
+  (  8, -2)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:20013 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:20038 top5.95m 7.00 x 1.10 x 0.16 x1
+  (  9, -2)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:20013 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:20038 top5.95m 7.00 x 1.10 x 0.16 x1, _drop_hole:20038 top5.95m 0.16 x 1.10 x 7.00 x1
+  ( 10, -2)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:20038 top5.95m 0.16 x 1.10 x 7.00 x1
+  ( 11, -2)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1
+  ( 12, -2)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1
+  ( 13, -2)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1
+  ( 14, -2)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7013 top0.40m 1.00 x 0.60 x 1.00 x1
+  ( 15, -2)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1
+  ( 16, -2)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7013 top0.40m 1.00 x 0.60 x 1.00 x1
+  ( 17, -2)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7013 top0.40m 1.00 x 0.60 x 1.00 x1
+  ( 18, -2)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7013 top0.40m 1.00 x 0.60 x 1.00 x1
+  ( 19, -2)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7013 top0.40m 1.00 x 0.60 x 1.00 x1
+  ( 20, -2)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7013 top0.40m 1.00 x 0.60 x 1.00 x1, _prereq_board:4306 top2.72m 0.09 x 1.54 x 2.38 x1
+  ( 21, -2)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _prereq_board:4306 top2.72m 0.09 x 1.54 x 2.38 x1
+  ( 22, -2)                 _build_segment:7169 top4.50m 1.00 x 4.50 x 1.00 x1
+  ( -3, -1)                 _build_segment:7169 top4.50m 1.00 x 4.50 x 1.00 x1
+  ( -2, -1)  <-- ON THE POOL  _build_segment:6945 top0.00m 0.10 x 2.00 x 1.00 x1, _build_segment:6954 top0.00m 1.00 x 0.04 x 1.00 x1
+  ( -1, -1)  <-- ON THE POOL  _build_segment:6954 top0.00m 1.00 x 0.04 x 1.00 x1
+  (  0, -1)  <-- ON THE POOL  _build_segment:6954 top0.00m 1.00 x 0.04 x 1.00 x1
+  (  1, -1)  <-- ON THE POOL  _build_segment:6945 top0.00m 0.10 x 2.00 x 1.00 x1, _build_segment:6954 top0.00m 1.00 x 0.04 x 1.00 x1
+  (  2, -1)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:20038 top5.95m 0.16 x 1.10 x 7.00 x1
+  (  3, -1)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:20013 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:20038 top5.95m 0.16 x 1.10 x 7.00 x1
+  (  4, -1)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:20013 top4.95m 1.00 x 0.20 x 1.00 x1
+  (  5, -1)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:20013 top4.95m 1.00 x 0.20 x 1.00 x1
+  (  6, -1)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:20013 top4.95m 1.00 x 0.20 x 1.00 x1
+  (  7, -1)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:20013 top4.95m 1.00 x 0.20 x 1.00 x1
+  (  8, -1)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:20013 top4.95m 1.00 x 0.20 x 1.00 x1
+  (  9, -1)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:20013 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:20038 top5.95m 0.16 x 1.10 x 7.00 x1
+  ( 10, -1)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _drop_hole:20038 top5.95m 0.16 x 1.10 x 7.00 x1
+  ( 11, -1)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7013 top0.40m 1.00 x 0.60 x 1.00 x1
+  ( 12, -1)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7013 top0.40m 1.00 x 0.60 x 1.00 x1
+  ( 13, -1)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7013 top0.40m 1.00 x 0.60 x 1.00 x1
+  ( 14, -1)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7013 top0.40m 1.00 x 0.60 x 1.00 x1
+  ( 15, -1)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1
+  ( 16, -1)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7013 top0.40m 1.00 x 0.60 x 1.00 x1
+  ( 17, -1)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7013 top0.40m 1.00 x 0.60 x 1.00 x1
+  ( 18, -1)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7013 top0.40m 1.00 x 0.60 x 1.00 x1
+  ( 19, -1)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7013 top0.40m 1.00 x 0.60 x 1.00 x1
+  ( 20, -1)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _build_segment:7013 top0.40m 1.00 x 0.60 x 1.00 x1, _prereq_board:4306 top2.72m 0.09 x 1.54 x 2.38 x1
+  ( 21, -1)                 _build_segment:6925 top0.00m 1.00 x 0.20 x 1.00 x1, _prereq_board:4306 top2.72m 0.09 x 1.54 x 2.38 x1
+  ( 22, -1)                 _build_segment:7169 top4.50m 1.00 x 4.50 x 1.00 x1
+  ( -3,  0)                 _build_segment:7169 top4.50m 1.00 x 4.50 x 1.00 x1
+  ( -2,  0)  <-- ON THE POOL  _build_segment:6945 top0.00m 0.10 x 2.00 x 1.00 x1, _build_segment:6954 top0.00m 1.00 x 0.04 x 1.00 x1
+  ( -1,  0)  <-- ON THE POOL  _build_segment:6954 top0.00m 1.00 x 0.04 x 1.00 x1
+  (  0,  0)                 _build_segment:7322 top0.00m 1.00 x 0.06 x 1.00 x1
+  (  1,  0)                 _build_segment:7301 top0.00m 0.10 x 2.00 x 1.00 x1, _build_segment:7322 top0.00m 1.00 x 0.06 x 1.00 x1
+  (  2,  0)                 _drop_hole:20038 top5.95m 0.16 x 1.10 x 7.00 x1, _build_segment:7333 top0.00m 1.00 x 0.20 x 1.00 x1
+  (  3,  0)                 _drop_hole:20013 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:20038 top5.95m 0.16 x 1.10 x 7.00 x1, _build_segment:7333 top0.00m 1.00 x 0.20 x 1.00 x1
+  (  4,  0)                 _drop_hole:20013 top4.95m 1.00 x 0.20 x 1.00 x1, _build_segment:7333 top0.00m 1.00 x 0.20 x 1.00 x1
+  (  5,  0)                 _drop_hole:20013 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:20023 top5.09m 0.10 x 0.24 x 1.10 x1, _drop_hole:20023 top5.09m 1.10 x 0.24 x 0.10 x1, _build_segment:7333 top0.00m 1.00 x 0.20 x 1.00 x1
+  (  6,  0)                 _drop_hole:20013 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:20023 top5.09m 1.10 x 0.24 x 0.10 x1, _build_segment:7333 top0.00m 1.00 x 0.20 x 1.00 x1
+  (  7,  0)                 _drop_hole:20013 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:20023 top5.09m 0.10 x 0.24 x 1.10 x1, _drop_hole:20023 top5.09m 1.10 x 0.24 x 0.10 x1, _build_segment:7333 top0.00m 1.00 x 0.20 x 1.00 x1
+  (  8,  0)                 _drop_hole:20013 top4.95m 1.00 x 0.20 x 1.00 x1, _build_segment:7333 top0.00m 1.00 x 0.20 x 1.00 x1
+  (  9,  0)                 _drop_hole:20013 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:20038 top5.95m 0.16 x 1.10 x 7.00 x1, _build_segment:7333 top0.00m 1.00 x 0.20 x 1.00 x1
+  ( 10,  0)                 _drop_hole:20038 top5.95m 0.16 x 1.10 x 7.00 x1, _build_segment:7333 top0.00m 1.00 x 0.20 x 1.00 x1
+  ( 11,  0)                 _build_segment:7344 top4.50m 1.00 x 4.50 x 1.00 x1
+  ( 12,  0)                 _build_segment:7344 top4.50m 1.00 x 4.50 x 1.00 x1
+  ( 13,  0)                 _build_segment:7344 top4.50m 1.00 x 4.50 x 1.00 x1
+  ( -3,  1)                 _build_segment:7169 top4.50m 1.00 x 4.50 x 1.00 x1
+  ( -2,  1)  <-- ON THE POOL  _build_segment:6945 top0.00m 0.10 x 2.00 x 1.00 x1, _build_segment:6945 top0.00m 1.00 x 2.00 x 0.10 x1, _build_segment:6954 top0.00m 1.00 x 0.04 x 1.00 x1
+  ( -1,  1)  <-- ON THE POOL  _build_segment:6945 top0.00m 1.00 x 2.00 x 0.10 x1, _build_segment:6954 top0.00m 1.00 x 0.04 x 1.00 x1
+  (  0,  1)                 _build_segment:7301 top0.00m 1.00 x 2.00 x 0.10 x1, _build_segment:7322 top0.00m 1.00 x 0.06 x 1.00 x1
+  (  1,  1)                 _build_segment:7301 top0.00m 0.10 x 2.00 x 1.00 x1, _build_segment:7301 top0.00m 1.00 x 2.00 x 0.10 x1, _build_segment:7322 top0.00m 1.00 x 0.06 x 1.00 x1
+  (  2,  1)                 _drop_hole:20038 top5.95m 0.16 x 1.10 x 7.00 x1, _build_segment:7333 top0.00m 1.00 x 0.20 x 1.00 x1
+  (  3,  1)                 _drop_hole:20013 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:20038 top5.95m 0.16 x 1.10 x 7.00 x1, _build_segment:7333 top0.00m 1.00 x 0.20 x 1.00 x1
+  (  4,  1)                 _drop_hole:20013 top4.95m 1.00 x 0.20 x 1.00 x1, _build_segment:7333 top0.00m 1.00 x 0.20 x 1.00 x1
+  (  5,  1)                 _drop_hole:20013 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:20023 top5.09m 0.10 x 0.24 x 1.10 x1, _build_segment:7333 top0.00m 1.00 x 0.20 x 1.00 x1
+  (  6,  1)                 _build_segment:7333 top0.00m 1.00 x 0.20 x 1.00 x1
+  (  7,  1)                 _drop_hole:20013 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:20023 top5.09m 0.10 x 0.24 x 1.10 x1, _build_segment:7333 top0.00m 1.00 x 0.20 x 1.00 x1
+  (  8,  1)                 _drop_hole:20013 top4.95m 1.00 x 0.20 x 1.00 x1, _build_segment:7333 top0.00m 1.00 x 0.20 x 1.00 x1
+  (  9,  1)                 _drop_hole:20013 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:20038 top5.95m 0.16 x 1.10 x 7.00 x1, _build_segment:7333 top0.00m 1.00 x 0.20 x 1.00 x1
+  ( 10,  1)                 _drop_hole:20038 top5.95m 0.16 x 1.10 x 7.00 x1, _build_segment:7333 top0.00m 1.00 x 0.20 x 1.00 x1
+  ( 11,  1)                 _build_segment:7333 top0.00m 1.00 x 0.20 x 1.00 x1
+  ( 12,  1)                 _build_segment:7333 top0.00m 1.00 x 0.20 x 1.00 x1
+  ( 13,  1)                 _build_segment:7344 top4.50m 1.00 x 4.50 x 1.00 x1
+  ( -3,  2)                 _build_segment:7169 top4.50m 1.00 x 4.50 x 1.00 x1
+  ( -2,  2)                 _build_segment:7174 top0.00m 1.00 x 0.20 x 1.00 x1
+  ( -1,  2)                 _build_segment:7174 top0.00m 1.00 x 0.20 x 1.00 x1
+  (  0,  2)                 _build_segment:7333 top0.00m 1.00 x 0.20 x 1.00 x1
+  (  1,  2)                 _build_segment:7333 top0.00m 1.00 x 0.20 x 1.00 x1
+  (  2,  2)                 _drop_hole:20038 top5.95m 0.16 x 1.10 x 7.00 x1, _build_segment:7333 top0.00m 1.00 x 0.20 x 1.00 x1
+  (  3,  2)                 _drop_hole:20013 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:20038 top5.95m 0.16 x 1.10 x 7.00 x1, _build_segment:7333 top0.00m 1.00 x 0.20 x 1.00 x1
+  (  4,  2)                 _drop_hole:20013 top4.95m 1.00 x 0.20 x 1.00 x1, _build_segment:7333 top0.00m 1.00 x 0.20 x 1.00 x1
+  (  5,  2)                 _drop_hole:20013 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:20023 top5.09m 0.10 x 0.24 x 1.10 x1, _drop_hole:20023 top5.09m 1.10 x 0.24 x 0.10 x1, _build_segment:7333 top0.00m 1.00 x 0.20 x 1.00 x1
+  (  6,  2)                 _drop_hole:20013 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:20023 top5.09m 1.10 x 0.24 x 0.10 x1, _build_segment:7333 top0.00m 1.00 x 0.20 x 1.00 x1
+  (  7,  2)                 _drop_hole:20013 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:20023 top5.09m 0.10 x 0.24 x 1.10 x1, _drop_hole:20023 top5.09m 1.10 x 0.24 x 0.10 x1, _build_segment:7333 top0.00m 1.00 x 0.20 x 1.00 x1
+  (  8,  2)                 _drop_hole:20013 top4.95m 1.00 x 0.20 x 1.00 x1, _build_segment:7333 top0.00m 1.00 x 0.20 x 1.00 x1
+  (  9,  2)                 _drop_hole:20013 top4.95m 1.00 x 0.20 x 1.00 x1, _drop_hole:20038 top5.95m 0.16 x 1.10 x 7.00 x1, _build_segment:7333 top0.00m 1.00 x 0.20 x 1.00 x1
+  ( 10,  2)                 _drop_hole:20038 top5.95m 0.16 x 1.10 x 7.00 x1, _build_segment:7333 top0.00m 1.00 x 0.20 x 1.00 x1
+  ( 11,  2)                 _build_segment:7333 top0.00m 1.00 x 0.20 x 1.00 x1
+  ( 12,  2)                 _build_segment:7333 top0.00m 1.00 x 0.20 x 1.00 x1
+  ( 13,  2)                 _build_segment:7344 top4.50m 1.00 x 4.50 x 1.00 x1
+  ( 14,  2)                 _build_segment:7344 top4.50m 1.00 x 4.50 x 1.00 x1
+  ( 15,  2)                 _build_segment:7344 top4.50m 1.00 x 4.50 x 1.00 x1
+  ( 16,  2)                 _build_segment:7344 top4.50m 1.00 x 4.50 x 1.00 x1
