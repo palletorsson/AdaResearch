@@ -460,7 +460,8 @@ def read_hall(name, chapter, order, source, probs, engine=None):
     # separately is what lets a page slice the right ones.
     e = (engine or {}).get(name)
     layout = "derived"
-    passage = porch = court = 0
+    passage = None          # None = the engine has not counted this one yet
+    porch = court = 0
     map_h = h
     if e:
         try:
@@ -475,13 +476,21 @@ def read_hall(name, chapter, order, source, probs, engine=None):
                 # there, and the subtraction returned 20 and 22 for crossings
                 # three rows deep. endless_museum.gd writes `passage` from
                 # em_passage_start now, so this is a read, not a guess.
-                passage = int(e["passage"]) if "passage" in e else max(0, tile_h - map_h)
+                # NO FALLBACK. Deriving it as tile_h - map_h is only true for a
+                # hall that builds from its own map, and it does not fail loudly:
+                # measured on 36 rows left over from an earlier bake, it returned
+                # 18, 20, 22, 26 and 27 for crossings that are 0, 3 or 4 rows deep,
+                # and nothing downstream could tell those from real counts. A hall
+                # the engine has not counted says so — the page then asks for a
+                # walk instead of drawing a number nobody measured.
+                passage = int(e["passage"]) if "passage" in e else None
                 h = eh
                 w = int(e.get("w", w)) or w
                 layout = "engine"
         except (KeyError, TypeError, ValueError):
             layout = "derived"
-            passage = porch = court = 0
+            passage = None
+            porch = court = 0
     seg = {"kind": "hall", "name": name, "sequence": chapter, "chapter": order,
            "z0": 0, "z1": 0, "w": w, "h": h, "x0": -(w // 2),
            "source": source, "layout": layout, "passage": passage,
