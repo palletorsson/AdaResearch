@@ -479,7 +479,7 @@ static func dress_segment(seg: Node3D, tile: Array, w: int, h: int, mats, prev_w
 	_add_skirt_chamfers(faces, ch_skirt_x, tally)
 	_add_cornice_chamfers(faces, ch_trim_x, tally)
 	if bool(opts.get("ceiling", true)):      # the studio looks down INTO the hall
-		_add_ceiling(w, h, ceil_x, ch_ceil_x, tally)
+		_add_ceiling(w, h, ceil_x, ch_ceil_x, tally, float(opts.get("z0", 0.0)))
 	# THE 3 M LATTICE IS PAINTED NOW, not built (2026-08-28, Palle: "we could
 	# solve the floor lists in the whole museum with a shader instead?"). See
 	# commons/scenes/em/floor_seams.gdshader, hung as a next_pass on the
@@ -1545,7 +1545,8 @@ static func _add_portal(w: int, trim_out: Array, solid_out: Array, seam_out: Arr
 ## between them, ribs crossing both ways to give the soffit a grain. The slots are
 ## real holes: the directional sun lands in bands, which is the whole point — a
 ## sealed ceiling would flatten every room the lighting rig just modelled.
-static func _add_ceiling(w: int, h: int, out: Array, ch_out: Array, tally: Dictionary) -> void:
+static func _add_ceiling(w: int, h: int, out: Array, ch_out: Array, tally: Dictionary,
+		world_z0: float = 0.0) -> void:
 	var rib_bottom: float = CEIL_SOFFIT - RIB_DROP
 	var x0: float = -1.0
 	var x1: float = float(maxi(LOBBY_W, w + 1))
@@ -1555,22 +1556,42 @@ static func _add_ceiling(w: int, h: int, out: Array, ch_out: Array, tally: Dicti
 	var cx: float = (x0 + x1) * 0.5
 	var panel_len: float = BAY - SLOT_W
 
-	var zc: float = z0
+	# THE BAYS ARE ON WORLD Z (2026-08-29). They used to start at SEGMENT-LOCAL
+	# zero, which was invisible for as long as the floor joints were geometry
+	# walked from the same local zero — the two planes shared a module because
+	# they shared an origin. On 2026-08-28 the floor lattice became a shader
+	# painted on world XZ, and the shared origin quietly went away: segment
+	# z-bases are not multiples of BAY, and across the museum zbase %% 3 is 0 in
+	# 73 halls, 1 in 62 and 2 in 51. So floor joint and ceiling rib lined up in
+	# 73 halls of 186 and nowhere else, and the commit that did it called the
+	# change "more coherent" without checking the other plane.
+	#
+	# Starting at the last world-aligned bay AT OR BEFORE the segment, and
+	# clipping the first panel to the segment, puts both planes back on one
+	# module. A hall whose zbase is already a multiple of 3 is byte-identical.
+	var zc: float = z0 - fposmod(world_z0, BAY)
 	while zc < z1 - 0.01:
-		var plen: float = minf(panel_len, z1 - zc)
+		# the panel, clipped to the segment: an aligned bay may open before it
+		var pz0: float = maxf(zc, z0)
+		var pz1: float = minf(zc + panel_len, z1)
+		var plen: float = pz1 - pz0
 		if plen > 0.05:
-			out.append(_xf(Vector3(cx, CEIL_SOFFIT + CEIL_THICK * 0.5, zc + plen * 0.5),
+			out.append(_xf(Vector3(cx, CEIL_SOFFIT + CEIL_THICK * 0.5, (pz0 + pz1) * 0.5),
 				Vector3(span_x, CEIL_THICK, plen)))
 			# ribs frame the slot: one at the panel's near edge, one at its far edge
-			out.append(_xf(Vector3(cx, CEIL_SOFFIT - RIB_DROP * 0.5, zc),
-				Vector3(span_x, RIB_DROP, RIB_W)))
-			out.append(_xf(Vector3(cx, CEIL_SOFFIT - RIB_DROP * 0.5, zc + plen),
-				Vector3(span_x, RIB_DROP, RIB_W)))
+			for zrb_v in [zc, zc + panel_len]:
+				var zrb: float = zrb_v
+				if zrb < z0 - 0.01 or zrb > z1 + 0.01:
+					continue        # that bay line stands in the neighbouring segment
+				out.append(_xf(Vector3(cx, CEIL_SOFFIT - RIB_DROP * 0.5, zrb),
+					Vector3(span_x, RIB_DROP, RIB_W)))
 			# a rib's two lower arrises are the edges the daylight slot rakes
 			# across; they are also the ones every frame shows in silhouette
 			# against a lit soffit, which is the worst place for a hard step.
-			for zr2 in [zc, zc + plen]:
+			for zr2 in [zc, zc + panel_len]:
 				var zrv: float = zr2
+				if zrv < z0 - 0.01 or zrv > z1 + 0.01:
+					continue
 				_ch(ch_out, tally, Vector3(cx, rib_bottom, zrv - RIB_W * 0.5),
 					Vector3.RIGHT, span_x, RIB_CH)
 				_ch(ch_out, tally, Vector3(cx, rib_bottom, zrv + RIB_W * 0.5),

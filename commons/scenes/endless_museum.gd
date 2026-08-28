@@ -1039,6 +1039,13 @@ var _order_file: String = ""
 var _banner_pos: Vector3 = Vector3.ZERO   # where the first segment hung its sign
 var _player: CharacterBody3D
 var _cam: Camera3D
+# THE COSTUME (2026-08-29, Palle: "put the costume in the museum so I can walk
+# in it"). In VR the visitor drives base.tscn's rig, so PlayerCustomization has
+# already dressed them; on the desktop the walker is a bare CharacterBody3D with
+# no XR rig anywhere in the tree, so the costume has to be handed a head.
+var _costume_on: bool = true
+var _wardrobe: Node = null
+var _costume_hall: String = ""
 var _yaw: float = 0.0
 var _pitch: float = 0.0
 
@@ -1546,6 +1553,8 @@ func _parse_args() -> void:
 		elif a == "--em-dollhouse":
 			_dollhouse = true
 			_dollhouse_asked = true
+		elif a == "--em-no-costume":
+			_costume_on = false
 		elif a == "--em-test-collision":
 			_test_collision = true
 		elif a.begins_with("--em-autopilot="):
@@ -3161,6 +3170,7 @@ func _setup_world() -> void:
 			_cam.make_current()
 			print("[em-cam] the view drifted to another camera — reclaimed for the walker"))
 	_cam.add_child(cam_guard)
+	_wear_the_costume()
 	if _dollhouse:
 		# the doll house eye: orthographic, high and oblique, re-aimed every
 		# frame at the walker — who remains in the house as the doll
@@ -7631,6 +7641,9 @@ func _build_segment() -> void:
 						# touching: Rect2.intersects counts a shared edge.
 						"void_rects": _dress_keep_out(seg),
 						"skin_step": seg.get_meta("em_skin_step", [0, 0]),
+						# where this segment starts in WORLD z, so the ceiling bays land on the
+						# same 3 m module the floor joints are painted on
+						"z0": zbase,
 						"extra_floors": seg.get_meta("em_aisle_cells", []),
 						"wall_features_max": int(deal.get("wall_features_max", -1)),
 						"fill_walls": bool(deal.get("fill_walls", true)),
@@ -12920,12 +12933,69 @@ func _open_gate() -> void:
 	print("[em-gate] ACCESS GRANTED — the door parts, the first hall is open")
 
 
+## ── THE COSTUME, WORN THROUGH THE MUSEUM ────────────────────────────────────
+##
+## 2026-08-29, Palle: "put the costume in the museum so I can walk in it".
+##
+## In VR nothing is needed here: the visitor drives base.tscn's rig and
+## PlayerCustomization has already dressed them. The desktop walker is a bare
+## CharacterBody3D with a Camera3D and no XROrigin3D anywhere in the tree, so
+## the costume is handed that camera as its head — see queer_costume.mount_on.
+##
+## AND THE MUSEUM DRESSES YOU AS YOU GO. The wardrobe's own source is
+## MapProgressionManager, which asks whether every map of a sequence is
+## finished — true for none of the twenty-two today, so on that source alone a
+## visitor would walk two hundred halls in an empty harness. The museum knows
+## something the progression does not: which chapter the hall you are STANDING
+## IN belongs to. Walking into a hall dealt from `forces` is meeting forces, so
+## it hangs the forces trophy and grows the garment a tier. Both sources feed
+## the same wardrobe, and give() is idempotent, so they cannot double-count.
+func _wear_the_costume() -> void:
+	if not _costume_on or _vr or _player == null or _cam == null:
+		return
+	var gd: GDScript = load("res://commons/player/costume_wardrobe.gd") as GDScript
+	if gd == null:
+		return
+	_wardrobe = gd.new()
+	_wardrobe.name = "CostumeWardrobe"
+	# ABSOLUTE PATHS, SET BEFORE THE NODE ENTERS THE TREE. add_child fires _ready,
+	# which defers _start — so writing the paths afterwards happens to work and
+	# depends on that ordering holding. It costs nothing to not depend on it.
+	_wardrobe.set("mount_path", get_path())              # hung on the museum, world-space
+	_wardrobe.set("head_path", _cam.get_path())
+	add_child(_wardrobe)
+	print("[em-costume] the walker is dressed — halls will hang their own trophies")
+
+
+## Which chapter the walker is standing in, by the segment spans the museum
+## already keeps. Cheap: a handful of float compares, and only on a change does
+## anything happen.
+func _costume_walk() -> void:
+	if _wardrobe == null or not is_instance_valid(_wardrobe) or _player == null:
+		return
+	var z: float = _player.global_position.z
+	var here: String = ""
+	for sv in _segments:
+		var sd: Dictionary = sv
+		if z >= float(sd.get("z0", 0.0)) and z <= float(sd.get("z1", 0.0)):
+			var seg: Node3D = _node_or_null(sd.get("node"))
+			if seg != null and seg.has_meta("em_chapter"):
+				here = String(seg.get_meta("em_chapter"))
+			break
+	if here == "" or here == _costume_hall:
+		return
+	_costume_hall = here
+	if _wardrobe.call("give", here):
+		print("[em-costume] walked into %s — it is on the body now" % here)
+
+
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint() or _studio:
 		return
 	if _doll_top and _paint2d_canvas != null and is_instance_valid(_paint2d_canvas):
 		_paint2d_canvas.queue_redraw()   # the overlay tracks the camera
 	_edit_gizmo_frame()
+	_costume_walk()
 	if not _boot_first_frame:
 		_boot_first_frame = true
 		_wake_until_ms = Time.get_ticks_msec() + int(WAKE_S * 1000.0)
