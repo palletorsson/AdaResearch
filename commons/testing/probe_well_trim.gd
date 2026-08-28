@@ -32,6 +32,8 @@ func _run() -> void:
 				CZ = float(parts[1])
 		elif a.begins_with("--r="):
 			R = float(a.split("=", 1)[1])
+		elif a == "--all":
+			R = 9999.0        # every instance, so a bucket's real extent is visible
 	var ps: PackedScene = load("res://commons/scenes/endless_museum.tscn")
 	var inst: Node3D = ps.instantiate() as Node3D
 	inst.set("EM_CONTROL", "res://ada_run/_trial_well_trim_control.json")
@@ -50,7 +52,8 @@ func _run() -> void:
 	names.sort()
 	for k in names:
 		var d: Dictionary = buckets[k]
-		print("  %-26s %3d instance(s)   y %.2f .. %.2f" % [k, int(d["n"]), float(d["y0"]), float(d["y1"])])
+		print("  %-26s %4d   y %.2f..%.2f   z %.1f..%.1f" % [k, int(d["n"]), float(d["y0"]), float(d["y1"]),
+			float(d.get("z0", 0.0)), float(d.get("z1", 0.0))])
 	print("\n%d bucket(s) reach the well." % buckets.size())
 	quit(0)
 
@@ -75,6 +78,8 @@ func _walk(n: Node, out: Dictionary) -> void:
 					out[key] = {"n": 0, "y0": 999.0, "y1": -999.0}
 				var d: Dictionary = out[key]
 				d["n"] = int(d["n"]) + 1
+				d["z0"] = minf(float(d.get("z0", 9999.0)), p.z)
+				d["z1"] = maxf(float(d.get("z1", -9999.0)), p.z)
 				d["y0"] = minf(float(d["y0"]), p.y)
 				d["y1"] = maxf(float(d["y1"]), p.y)
 	for c in n.get_children():

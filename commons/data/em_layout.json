@@ -80,6 +80,8 @@
 		"drop_z": 1,
 		"roof_pad": 3,
 		"roof_rise_m": 0.35,
+		"roof_wall_m": 1.1,
+		"_drop_z": "a MAP row, not a segment-local one — the map begins at VESTIBULE_H, so drop_z 1 is local z 5, past the glass and inside the museum. As a local row it was 1, which is inside the enter room, and the visitor dropped into the annex.",
 		"_drop_hole": "THE WAY IN (Palle, 2026-08-26): 'I think it is better if we start at the roof like in Duke Nukem 3d. So no wedge, just a hole in the ceiling/roof and we jump in the hole ... we jump down in at around 6, 1.' A deck above the foyer with one cell missing, the visitor standing on it, and the ceiling opened under the hole by the same _emit keep-out that stops trim over a void. The wedge it replaces was turned the wrong way, and a chute you are fired down is a different arrival than a roof you step off. drop_hole 0 puts the visitor back on the floor at 7.5, 0.0, 1.5.",
 		"origin_well": 0,
 		"_origin_well": "RETIRED 2026-08-26, and the code is intact behind this 0. It opened the lobby's NW corner around the WORLD ORIGIN: a well a metre deep, Point Zero standing at exactly (0,0,0), a rail, a light (Palle, 2026-08-19). It was the one space in the museum nothing could edit — not a tile, so no brush; not config, so no file — and a day of trying to remove trim left over from an old wall ended with Palle's ruling: 'nothing before 0,0,0 can be editable ... shift the map back so we can edit from 0,0,0 ... the other part of the map becomes the pre annex.' Point_One now carries a 2-cell pre-annex margin with Point Zero at map cell (2,2), so that space is walled, dug and moved with the ordinary brush. Set back to 1 to build the procedural annex again; the six numbers beside it still drive it.",

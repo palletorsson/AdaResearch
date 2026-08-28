@@ -19139,8 +19139,12 @@ func _trim_keep_out(segn: Node3D) -> Array:
 	# over the slide, with no second mechanism and nothing to keep in step.
 	if _L("lobby", "drop_hole", 0.0) > 0.5:
 		var hx: float = _L("lobby", "drop_x", 6.0)
-		var hz: float = _L("lobby", "drop_z", 1.0)
-		out.append(Rect2(hx - 0.1, hz - 0.1, 1.2, 1.2))
+		# + VESTIBULE_H for the same reason the roof converts: em_detail's ceiling
+		# stands over the MAP, so a rect in enter-room rows covers empty air. That
+		# is why the first hole opened nothing and the probe agreed — it measured
+		# the place the ceiling is not.
+		var hz: float = _L("lobby", "drop_z", 1.0) + float(VESTIBULE_H)
+		out.append(Rect2(hx - 0.2, hz - 0.2, 1.4, 1.4))
 	return out
 
 
@@ -19163,7 +19167,11 @@ func _drop_hole(seg: Node3D, solid: StaticBody3D) -> void:
 	if _L("lobby", "drop_hole", 0.0) <= 0.5:
 		return
 	var hx: int = int(_L("lobby", "drop_x", 6.0))
-	var hz: int = int(_L("lobby", "drop_z", 1.0))
+	# A MAP ROW, converted here. drop_z 1 as a segment-local row is z 1, which is
+	# INSIDE the enter room — Palle: "now we drop down into the annex". The map
+	# begins at VESTIBULE_H, so map row 1 is local 5, past the glass and in the
+	# museum. Every reader of this key does the same conversion.
+	var hz: int = int(_L("lobby", "drop_z", 1.0)) + VESTIBULE_H
 	var pad: int = int(clampf(_L("lobby", "roof_pad", 3.0), 1.0, 8.0))
 	var y: float = WALL_H + clampf(_L("lobby", "roof_rise_m", 0.35), 0.0, 6.0)
 	var mat := StandardMaterial3D.new()
@@ -19185,7 +19193,25 @@ func _drop_hole(seg: Node3D, solid: StaticBody3D) -> void:
 			[Vector3(hx + 0.5, y + 0.12, hz - 0.05), Vector3(1.1, 0.24, 0.1)],
 			[Vector3(hx + 0.5, y + 0.12, hz + 1.05), Vector3(1.1, 0.24, 0.1)]]:
 		_box(seg, e[0], e[1], Color(0.86, 0.62, 0.16), null)
-	print("[em-roof] a roof at y %.2f, %d cell(s), and a hole at (%d, %d) — the way in" % [y, laid, hx, hz])
+	# ENCLOSED (Palle: "enclose the roof top space so we can not walk pass it").
+	# A roof you can walk off is a fall, and the museum's catch would put the
+	# visitor back on the floor having missed the entrance entirely. Waist-high, so
+	# it reads as a parapet and not as a second room.
+	var ph: float = clampf(_L("lobby", "roof_wall_m", 1.1), 0.0, 4.0)
+	if ph > 0.0:
+		var x0: float = float(hx - pad)
+		var x1: float = float(hx + pad + 1)
+		var z0: float = float(hz - pad)
+		var z1: float = float(hz + pad + 1)
+		for w in [[Vector3((x0 + x1) * 0.5, y + ph * 0.5, z0), Vector3(x1 - x0, ph, 0.16)],
+				[Vector3((x0 + x1) * 0.5, y + ph * 0.5, z1), Vector3(x1 - x0, ph, 0.16)],
+				[Vector3(x0, y + ph * 0.5, (z0 + z1) * 0.5), Vector3(0.16, ph, z1 - z0)],
+				[Vector3(x1, y + ph * 0.5, (z0 + z1) * 0.5), Vector3(0.16, ph, z1 - z0)]]:
+			_box(seg, w[0], w[1], Color(0.38, 0.38, 0.41), mat)
+			if solid != null:
+				_add_col(solid, w[0], w[1])
+	print("[em-roof] a roof at y %.2f, %d cell(s), a %.1f m parapet, and a hole at map (%d, %d) — local z %d" % [
+		y, laid, ph, hx, hz - VESTIBULE_H, hz])
 
 
 
@@ -19235,7 +19261,7 @@ func _drop_point() -> Vector3:
 	# jump is the visitor's, not the building's — that is the whole difference
 	# between being dropped through a floor and choosing to go in.
 	var hx: float = _L("lobby", "drop_x", 6.0)
-	var hz: float = _L("lobby", "drop_z", 1.0)
+	var hz: float = _L("lobby", "drop_z", 1.0) + float(VESTIBULE_H)
 	var y: float = WALL_H + clampf(_L("lobby", "roof_rise_m", 0.35), 0.0, 6.0) + 0.2
 	var p := Vector3(hx + 0.5, y, hz - 1.0 + 0.5)
 	print("[em-roof] the visitor starts ON the roof at (%.1f, %.1f, %.1f), the hole one cell ahead" % [p.x, p.y, p.z])

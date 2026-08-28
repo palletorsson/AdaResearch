@@ -1538,11 +1538,20 @@ static func _emit(parent: Node3D, node_name: String, xforms: Array, mat: Variant
 	if not _skip_rects.is_empty():
 		var kept: Array = []
 		for xf in xforms:
-			var o: Vector3 = (xf as Transform3D).origin
+			var tf: Transform3D = xf
+			var o: Vector3 = tf.origin
+			# EXTENT, not origin. The mesh is a unit box scaled by the basis, so an
+			# instance knows how big it is — and a ceiling panel lying ACROSS the
+			# opening has its origin somewhere else entirely. Testing the origin
+			# dropped nothing and left the hole roofed, while a probe that tested
+			# origins the same way agreed there was nothing there. Two instruments,
+			# one wrong assumption, and they confirmed each other.
+			var sc: Vector3 = tf.basis.get_scale()
+			var box := Rect2(o.x - absf(sc.x) * 0.5, o.z - absf(sc.z) * 0.5, absf(sc.x), absf(sc.z))
 			var drop := false
 			for r_v in _skip_rects:
 				var r: Rect2 = r_v
-				if r.has_point(Vector2(o.x, o.z)):
+				if r.intersects(box) or r.has_point(Vector2(o.x, o.z)):
 					drop = true
 					break
 			if not drop:
