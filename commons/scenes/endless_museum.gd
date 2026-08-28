@@ -1225,6 +1225,10 @@ func _boot_museum() -> void:
 		MIN_SEGMENTS = 3
 		_lazy_pending = 0
 	_museum_core_ready = true
+	# the headset is thrown in like the walker — deferred because the rig is
+	# staging's, not ours, and may not exist for another frame or thirty
+	if _vr:
+		_vr_drop_in()
 	if _edit_mode:
 		_arm_editor()
 	_follow_resume()
@@ -19210,6 +19214,36 @@ func _drop_slide(seg: Node3D, solid: StaticBody3D) -> void:
 	print("[em-slide] a roof from (%.1f, %.1f, %.1f) to (%.1f, %.1f) — %.1f m at %.0f degrees" % [
 		x, y0, z0, y1, z1, run, rad_to_deg(-ang)])
 
+
+
+## THE HEADSET IS DROPPED TOO (2026-08-26, Palle: "do the same for VR").
+##
+## The desktop walker is a node this scene builds, so its start is one assignment.
+## The XR rig is not: staging owns it, it arrives when it arrives, and _vr_eye may
+## be null for several frames after the museum is otherwise up. So this waits for
+## the rig rather than assuming it, and gives up out loud instead of silently
+## leaving the visitor standing.
+##
+## It moves the rig by the CAMERA'S OFFSET, through the same _vr_drop the death
+## respawn uses — a room-scale player can stand two metres from their own origin,
+## and putting the origin on the target would leave the headset that far off the
+## roof, which at seven metres up is a miss rather than a landing.
+func _vr_drop_in() -> void:
+	if not _vr or _L("lobby", "enabled", 1.0) <= 0.5 or _L("lobby", "drop_slide", 0.0) <= 0.5:
+		return
+	var target: Vector3 = _drop_point()
+	for attempt in range(30):
+		if not is_inside_tree():
+			await tree_entered
+		var rig: Node3D = _vr_rig()
+		var eye: Camera3D = _vr_eye()
+		if rig != null and eye != null:
+			rig.global_position = _vr_drop(rig.global_position, eye.global_position, target)
+			print("[em-slide] the headset is dropped: rig to %s so the eye lands on %s (after %d frame(s))" % [
+				str(rig.global_position), str(target), attempt])
+			return
+		await get_tree().process_frame
+	push_warning("[em-slide] no XR rig after 30 frames — the headset arrives standing, not thrown")
 
 ## Where the visitor begins. The top of the slide when there is one, and the old
 ## standing spot when there is not.
