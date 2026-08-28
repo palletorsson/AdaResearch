@@ -4733,6 +4733,19 @@ func _layout_note(deal: Variant, peek: Variant, w: int, h: int,
 	row["court"] = court_depth
 	row["span"] = span
 	row["index"] = _seg_index
+	# THE PASSAGE ROWS, counted where they are known (2026-08-28). A tool asking
+	# "which rows are the passage" had to derive it as engine_h - map_h, which is
+	# only true for the 5 chapters that build from their own map; for a TEMPLATE
+	# hall the map is not what stands there at all, and the subtraction returned 20
+	# and 22 for crossings that are three rows deep. _authored_passages appended
+	# them and _build_segment already wrote down where they start, so the count is
+	# a fact the museum has and nobody else can recover.
+	if seg != null and is_instance_valid(seg) and seg.has_meta("em_passage_start"):
+		var ps: int = int(seg.get_meta("em_passage_start"))
+		row["passage"] = maxi(0, h - ps) if ps >= 0 else 0
+		var pdecl: Variant = seg.get_meta("em_passage_decl") if seg.has_meta("em_passage_decl") else null
+		if pdecl is Dictionary:
+			row["passage_kind"] = String((pdecl as Dictionary).get("kind", "chicane"))
 	_layout_walk[key] = row
 	_layout_dirty = true
 	_layout_write()

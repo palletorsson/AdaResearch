@@ -450,22 +450,43 @@ def read_hall(name, chapter, order, source, probs, engine=None):
     # the map's, because that is what a map holds; `passage` names the rows the
     # engine adds beyond it so the page can show them as what they are rather than
     # as a hall that does not fit its own floor.
+    # THREE DIFFERENT THINGS, NOT ONE (2026-08-28). `passage` used to be
+    # `engine_h + porch + court - map_h`, which is every row the engine adds
+    # beyond the map lumped into one number. That reads fine as a total and is
+    # useless the moment anything wants the rows themselves: an editor asking
+    # "show me the passage" got the last 58 rows of a hall whose court is 48 deep.
+    # They are laid in a fixed order — tile (with its passage rows appended by
+    # _authored_passages), then the forecourt, then the court — so naming them
+    # separately is what lets a page slice the right ones.
     e = (engine or {}).get(name)
     layout = "derived"
-    passage = 0
+    passage = porch = court = 0
+    map_h = h
     if e:
         try:
-            eh = int(e["h"]) + int(e.get("porch", 0)) + int(e.get("court", 0))
+            tile_h = int(e["h"])                    # the tile INCLUDING its passage rows
+            porch = int(e.get("porch", 0))
+            court = int(e.get("court", 0))
+            eh = tile_h + porch + court
             if eh > 0:
-                passage = max(0, eh - h)
+                # THE ENGINE'S OWN COUNT when it has one. Deriving it as
+                # tile_h - map_h is only true for the five chapters that build
+                # from their own map; a TEMPLATE hall's map is not what stands
+                # there, and the subtraction returned 20 and 22 for crossings
+                # three rows deep. endless_museum.gd writes `passage` from
+                # em_passage_start now, so this is a read, not a guess.
+                passage = int(e["passage"]) if "passage" in e else max(0, tile_h - map_h)
                 h = eh
                 w = int(e.get("w", w)) or w
                 layout = "engine"
         except (KeyError, TypeError, ValueError):
             layout = "derived"
+            passage = porch = court = 0
     seg = {"kind": "hall", "name": name, "sequence": chapter, "chapter": order,
            "z0": 0, "z1": 0, "w": w, "h": h, "x0": -(w // 2),
            "source": source, "layout": layout, "passage": passage,
+           "porch": porch, "court": court, "map_h": map_h,
+           "passage_kind": str((e or {}).get("passage_kind", "")) if e else "",
            "artifacts": arts, "structure": st}
     # THE ROOM AS BUILT, beside the room as authored. `structure` is the map's own
     # grid — what a map holds, and what the brush edits. `tile` is what the museum
