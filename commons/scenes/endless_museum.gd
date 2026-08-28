@@ -4576,6 +4576,10 @@ func _insp_page_clear() -> void:
 ## so, rather than pretending.
 const LAYOUT_WALK_PATH := "res://ada_run/em_layout_walk.json"
 var _layout_walk: Dictionary = {}
+## The hall noted immediately before this one, so a crossing can be written down
+## as it is walked. See _layout_note: the museum is the only thing that knows its
+## own order, and the plan file disagrees about the successor on 9 of 134.
+var _layout_prev_key: String = ""
 var _layout_dirty: bool = false
 
 const ADOPT_PATH := "res://ada_run/em_adoptions.json"
@@ -4695,6 +4699,25 @@ func _layout_built(chapter: String, pearl: String, cells: Array, bodies: Array,
 	_layout_write()
 
 
+## The first row of the hall this one opens into, or [] when the museum has
+## never walked past here.
+##
+## Read out of the museum's own walk record, never derived: em_plan.json's file
+## order disagrees with the engine about the successor on 9 of 134 crossings, so
+## a seam built from the plan would be sewn to the wrong room one time in fifteen
+## — and it would look completely fine, which is the dangerous part.
+func _next_hall_first_row(chapter: String, pearl: String) -> Array:
+	var key := "%s|%s" % [chapter, pearl]
+	if not _layout_walk.has(key):
+		return []
+	var here: Dictionary = _layout_walk[key]
+	var nk := String(here.get("next", ""))
+	if nk == "" or not _layout_walk.has(nk):
+		return []
+	var fr: Variant = (_layout_walk[nk] as Dictionary).get("first_row", [])
+	return fr if fr is Array else []
+
+
 ## One hall's measurements, keyed the way em_bake keys its own rows so the two
 ## can be joined without guessing: "<chapter>|<pearl>".
 func _layout_note(deal: Variant, peek: Variant, w: int, h: int,
@@ -4740,6 +4763,29 @@ func _layout_note(deal: Variant, peek: Variant, w: int, h: int,
 	# and 22 for crossings that are three rows deep. _authored_passages appended
 	# them and _build_segment already wrote down where they start, so the count is
 	# a fact the museum has and nobody else can recover.
+	# THE SEAM'S TWO HALVES. `first_row` is what the hall BEGINS with, copied by
+	# the previous crossing so its last metre already looks like this room;
+	# `next` is the hall this one opens into, written when that hall is noted.
+	# Both are the museum's own memory of its own walk — the only source that
+	# has never been wrong about the order.
+	if seg != null and is_instance_valid(seg) and seg.has_meta("em_tile"):
+		var t0: Array = seg.get_meta("em_tile")
+		if t0.size() > 0:
+			# AN ARRAY OF CELLS, not a joined string. A tile cell is not always one
+			# character — this file tests for "1s" in six places — so joining a row
+			# would put every column after the first such cell one place to the
+			# right, and a seam sewn from it would open its door into a wall. No
+			# map on disk holds one today (191,563 cells scanned, zero), which is
+			# exactly the kind of true-for-now that this would break on quietly.
+			var fr: Array = []
+			for c in (t0[0] as Array):
+				fr.append(str(c))
+			row["first_row"] = fr
+	if _layout_prev_key != "" and _layout_prev_key != key and _layout_walk.has(_layout_prev_key):
+		var prev: Dictionary = _layout_walk[_layout_prev_key]
+		prev["next"] = key
+		_layout_walk[_layout_prev_key] = prev
+	_layout_prev_key = key
 	if seg != null and is_instance_valid(seg) and seg.has_meta("em_passage_start"):
 		var ps: int = int(seg.get_meta("em_passage_start"))
 		row["passage"] = maxi(0, h - ps) if ps >= 0 else 0
@@ -6355,7 +6401,8 @@ func _build_segment() -> void:
 		if String(peek.get("authored", "")) == "map":
 			passage_start = tile.size()
 			passage_decl = peek.get("passage", {}) if peek.get("passage") is Dictionary else {}
-			tile = _authored_passages(tile, passage_decl)
+			tile = _authored_passages(tile, passage_decl,
+				_next_hall_first_row(next_seq, String(peek.get("pearl", ""))))
 		h = tile.size()
 		# the WIDTH follows the tile too: rooms-per-pearl crops only rows (no
 		# change), but a map-authored tile can be wider than the template —
@@ -18746,7 +18793,35 @@ func _derive_map_row(map_name: String) -> Dictionary:
 ##   offset how far the second door slides across (default 3; 0 = straight)
 ##   side   "left" | "right" (default: whichever fits the tile)
 ## A hall that says nothing builds exactly as before.
-func _authored_passages(tile_in: Array, decl: Dictionary = {}) -> Array:
+## THE SEAM RULE (2026-08-28, Palle: "the passage should copy the last row of the
+## last map to its first row and then the passage for like now or 7 m in z and
+## then copy the first row in the next map. In this way I can ensure we do not
+## see the map shift.")
+##
+## A crossing used to begin and end as a corridor of its own invention: it carved
+## a door where it liked and laid three rows of chicane between them, so walking
+## out of a 22-wide hall into a 15-wide one, the wall line JUMPED at both ends.
+## The passage is a seam now:
+##
+##     row 0        a copy of THIS hall's last row      — the wall line continues
+##     rows 1..N    the crossing proper (N = depth, 7)  — where the turn happens
+##     row N+1      a copy of the NEXT hall's first row — the next wall has begun
+##
+## so both ends of the crossing are already the room they touch, and the shift
+## happens inside the passage where the eye is on the turn rather than at a
+## threshold where it is on the wall.
+##
+## WHERE THE NEXT HALL COMES FROM, AND WHY NOT THE PLAN. This function is called
+## while the CURRENT hall is being shaped, when every deal cursor still points at
+## it — the museum has no look-ahead. The obvious source is the next row of
+## em_plan.json, and it is wrong: measured against the engine's own walk, the
+## plan's file order disagrees about the successor on 9 of 134 crossings, so one
+## crossing in fifteen would have been seamed against a hall it does not open
+## into. So the museum reads its OWN memory: _layout_note writes `next` onto the
+## hall it just built, and `first_row` for every hall, and this looks the seam up
+## there. The first walk after a change has no memory and falls back to the old
+## chicane; the walk after it is seamed. That is the same shape as the bake.
+func _authored_passages(tile_in: Array, decl: Dictionary = {}, next_first: Array = []) -> Array:
 	var tile: Array = []
 	for row in tile_in:
 		tile.append((row as Array).duplicate())
@@ -18762,21 +18837,72 @@ func _authored_passages(tile_in: Array, decl: Dictionary = {}) -> Array:
 	if kind == "none":
 		return tile        # the halls meet at their own doors; no added rows
 	var cl: int = _open_col(tile, tile.size() - 1)
-	var off: int = int(decl.get("offset", 3)) if kind != "straight" else 0
-	var side: String = String(decl.get("side", "")).to_lower()
-	if side == "left":
-		off = -absi(off)
-	elif side == "right":
-		off = absi(off)
-	var cr: int = cl + off
-	if cr + pw > w - 1 or cr < 1:
-		cr = cl - off      # the other side, when the asked one runs off the tile
-	cr = clampi(cr, 1, maxi(1, w - 1 - pw))
-	# a HALL passage is a room between the halls: the whole span walks, and
-	# it is deeper (4 rows) — for crossings that deserve air, not a corridor
-	var depth: int = 4 if kind == "hall" else 3
+	# THE SEAM ROW, fitted to this hall's width. The next hall is laid from x 0
+	# like every hall, so the copy is left-aligned; a narrower one is padded with
+	# WALL rather than void, because void at the tile edge is a hole in the
+	# building and wall is the honest thing to meet.
+	var seam: Array = []
+	if not next_first.is_empty():
+		for x in range(w):
+			seam.append(str(next_first[x]) if x < next_first.size() else "4")
+		# a seam nothing can walk through is a sealed museum: if the next hall's
+		# first row happens to be solid at this width, carve this crossing's door
+		# into the copy rather than shipping a wall
+		# A NEXT HALL WIDER THAN THIS ONE loses its far columns to the fit, and
+		# with them, sometimes, its door. A seam that arrives as a solid wall is
+		# worse than no seam: it would seal the crossing. Dropped, and the
+		# crossing falls back to the declared chicane, which is honest.
+		var open_any := false
+		for x in range(w):
+			if String(seam[x]) == "1" or String(seam[x]) == "1s":
+				open_any = true
+				break
+		if not open_any:
+			seam = []
+	# WHERE THE CROSSING TURNS TO. With a seam it is the next hall's own door, so
+	# the offset is DERIVED from the two rooms instead of declared — which is what
+	# makes the walls line up. Without one, the declared offset stands as before.
+	var cr: int = cl
+	if not seam.is_empty():
+		var found := -1
+		for x in range(seam.size()):
+			if String(seam[x]) == "1" or String(seam[x]) == "1s":
+				found = x
+				break
+		if found >= 0:
+			cr = found
+	else:
+		var off: int = int(decl.get("offset", 3)) if kind != "straight" else 0
+		var side: String = String(decl.get("side", "")).to_lower()
+		if side == "left":
+			off = -absi(off)
+		elif side == "right":
+			off = absi(off)
+		cr = cl + off
+		if cr + pw > w - 1 or cr < 1:
+			cr = cl - off      # the other side, when the asked one runs off the tile
+	# THE CLAMP BELONGS TO THE DECLARED OFFSET, NOT TO THE SEAM. `w - 1 - pw`
+	# keeps a carved door of width pw inside the tile, which is right for an
+	# offset somebody typed and wrong for a column read off the next hall: the
+	# engine's own print caught it — w=8, the next hall's door at 6, cr clamped
+	# to 5 — so the crossing turned toward a column one short of the door and
+	# the seam it was supposed to meet. A seam column is already a real column
+	# in this tile; it only needs to leave room for its own width.
+	if seam.is_empty():
+		cr = clampi(cr, 1, maxi(1, w - 1 - pw))
+	else:
+		cr = clampi(cr, 0, maxi(0, w - pw))
+	# a HALL passage is a room between the halls: the whole span walks, and it is
+	# deeper — for crossings that deserve air, not a corridor. `depth` is the
+	# CROSSING, not the whole seam: the two copied rows ride on top of it.
+	var depth: int = int(decl.get("depth", 7 if not seam.is_empty() else (4 if kind == "hall" else 3)))
+	depth = clampi(depth, 1, 40)
 	var lo: int = mini(cl, cr)
 	var hi: int = maxi(cl, cr) + pw - 1
+	# ROW 0 — this hall's last row, copied. The wall line does not break at the
+	# threshold; it walks one row into the crossing and turns there instead.
+	if not seam.is_empty():
+		tile.append((tile[tile.size() - 1] as Array).duplicate())
 	for r in range(depth):
 		var row: Array = []
 		var first: bool = r == 0
@@ -18793,8 +18919,16 @@ func _authored_passages(tile_in: Array, decl: Dictionary = {}) -> Array:
 				open = x >= lo and x <= hi
 			row.append("1" if open else "4")
 		tile.append(row)
+	# ROW N+1 — the next hall's first row, copied. Walking the last metre of the
+	# crossing you are already looking at the room you are entering.
+	if not seam.is_empty():
+		tile.append(seam)
+		# WRITTEN DOWN, not inferred. The clamp bug below was invisible from the
+		# built grid — it looked like an ordinary chicane — and took one line of
+		# print to find: w=8, the next hall's door at 6, cr clamped to 5.
+		print("[em-seam] %d wide, depth %d, %d -> %d (next hall's door), %d of %d cells fit" % [
+			w, depth, cl, cr, mini(next_first.size(), w), next_first.size()])
 	return tile
-
 
 func _edge_has_open(tile: Array, y: int) -> bool:
 	var row: Array = tile[y]
