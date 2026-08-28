@@ -246,6 +246,21 @@ var _shot_segments: int = 3
 # --em-shot-at can still ask for; unset, the shot is composed inside the tile.
 var _shot_z: float = 1.0
 var _shot_z_set: bool = false
+## --em-shot-yaw=<deg> and --em-shot-x=<m>: point the proof shot by hand.
+## 2026-08-28, Palle: "screen shot loop until you solve it". Every composed
+## shot looks +z down the corridor from cx + 1.7, which cannot photograph the
+## ANNEX at all — it is behind the camera by construction. A loop that cannot
+## see the thing it is fixing is not a loop.
+var _shot_yaw: float = 0.0
+var _shot_yaw_set: bool = false
+var _shot_x: float = 0.0
+var _shot_x_set: bool = false
+## --em-shot-pitch=<deg> and --em-shot-y=<m>: the plan view. The desktop exe is
+## non-console, so a scene booted directly prints into nothing — the only thing
+## a proof run can hand back is the PICTURE. So the picture has to be able to
+## show a footprint, which means standing above it and looking down.
+var _shot_pitch: float = -0.25
+var _shot_y: float = 0.0
 var _test_collision: bool = false
 var _test_frames: int = 0
 # autopilot: walk through N museums end-to-end under real physics. The plan
@@ -1501,6 +1516,18 @@ func _parse_args() -> void:
 			_bake_n = maxi(1, int(a.substr(12)))
 		elif a.begins_with("--em-map="):
 			start_map = a.substr(9)    # the pearl's MAP, as the Inspector's start_map
+		elif a.begins_with("--em-shot-pitch="):
+			_shot_pitch = deg_to_rad(float(a.substr(16)))
+			_shot_yaw_set = true
+		elif a.begins_with("--em-shot-y="):
+			_shot_y = float(a.substr(12))
+			_shot_yaw_set = true
+		elif a.begins_with("--em-shot-yaw="):
+			_shot_yaw = deg_to_rad(float(a.substr(14)))
+			_shot_yaw_set = true
+		elif a.begins_with("--em-shot-x="):
+			_shot_x = float(a.substr(12))
+			_shot_x_set = true
 		elif a.begins_with("--em-shot-at="):
 			_shot_z = float(a.substr(13))
 			_shot_z_set = true
@@ -2398,6 +2425,16 @@ func _start_at_chapter() -> void:
 				print("[em-pack] GRID PACK — every hall with a named map is transplanted from it")
 			if int((parsed as Dictionary).get("dollhouse", 0)) == 1:
 				_dollhouse = true
+			# A PROOF SHOT IS TAKEN ON FOOT. 2026-08-28: the desktop scene
+			# resumed Palle's live session, which was in the doll house — so
+			# --em-shot-yaw was obeyed and then thrown away, and the frame came
+			# back a cutaway from above. Same class as "a resume outranks
+			# --em-map": the mode is state, and state that the flag does not
+			# override photographs a different building than the one asked for.
+			if _shot_path != "" and (_dollhouse or _edit_mode):
+				print("[em-shot] the resumed session was in %s — standing back up to walk, because a shot is taken from the eye" % ("the doll house" if _dollhouse else "edit mode"))
+				_dollhouse = false
+				_edit_mode = false
 			if _first_chapter == "":
 				_first_chapter = String((parsed as Dictionary).get("first_chapter", ""))
 				if start_map == "":
@@ -6516,10 +6553,13 @@ func _build_segment() -> void:
 			var av := String(acells[ax]).strip_edges()
 			if av == "" or av == "0":
 				continue                      # "0" = say nothing about this cell
-			if av == "1" or av == "1s":
-				vest_rules[Vector2i(ax, az)] = "1"
-			else:
-				vest_rules[Vector2i(ax, az)] = "4"   # any wall the map can spell
+			# THE VALUE IS KEPT AS THE MAP WROTE IT (2026-08-28, Palle: "the easiest
+			# way is to give the vestibule the same possibilities as the hall"). It
+			# used to be flattened here — "1" through and everything else to "4" — so
+			# a "2" that is a 0.6 m block in the hall became a full wall in the annex.
+			# Two rooms, one map, two readings of the same character. The annex runs
+			# the hall's own match below instead.
+			vest_rules[Vector2i(ax, az)] = "1" if av == "1s" else av
 	if not annex_rows.is_empty():
 		print("[em-annex] %d row(s) from the map -> %d cell(s) in the enter room" % [
 			mini(annex_rows.size(), VESTIBULE_H), vest_rules.size()])
@@ -6549,8 +6589,7 @@ func _build_segment() -> void:
 		if ccz < 0:
 			if ccz >= -VESTIBULE_H:
 				var rv := String(cvd.get("value", "1"))
-				# the same translation the map gets, so a ruling written "2" builds
-				vest_rules[Vector2i(ccx, ccz + VESTIBULE_H)] = rv if (rv == "1" or rv == "4") else ("1" if rv == "1s" else "4")
+				vest_rules[Vector2i(ccx, ccz + VESTIBULE_H)] = "1" if rv == "1s" else rv
 			continue
 		if ccz < tile.size() and ccx >= 0 and ccx < (tile[ccz] as Array).size():
 			(tile[ccz] as Array)[ccx] = String(cvd.get("value", "1"))
@@ -6741,29 +6780,55 @@ func _build_segment() -> void:
 	# cells are simply left out of it and given a pool instead. Same decl, same
 	# depth, same glass: one basin that happens to cross a boundary, rather than
 	# two ideas about what a basin is.
-	var vest_basin: Dictionary = {}
+	# EVERY CELL THE HALL TILE DOES NOT OWN. 2026-08-28, Palle, with a plan
+	# sketch: "it is easy if we use 4 or 8 then we can put. blue plus is
+	# negative numbers". The origin stands at a grid CORNER — the point where
+	# (-1,-1), (0,-1), (-1,0) and (0,0) meet — so no ODD basin can ever be
+	# centred on it: a 3x3 has a middle CELL, and a corner is not a cell. An
+	# even one can. 4x4 is x -2..1, z -2..1, and three of its four quadrants
+	# lie in the minus domain.
+	#
+	# Which is why this reads the whole declaration and keeps what the hall
+	# throws away. Both readers used to clamp — the hall one to the tile, this
+	# one to 0..vest_w and the four annex rows — so a rect asked for at x -2
+	# was dropped twice, by two different guards, and NEITHER said so. That is
+	# the difficulty in one line: the pool was never hard to place, it was hard
+	# to place somewhere nobody had written down a refusal for.
+	var vest_basin: Dictionary = {}      # seg-local (x, z + VESTIBULE_H)
+	# AND ONE SET OF THE WHOLE POOL. The hall sinks the cells inside its tile
+	# and the annex sinks the rest, and each asked only ITS OWN dictionary
+	# "is my neighbour water?" — so at the boundary between them both answered
+	# no and both built a rim. A 4x4 pool came out as two 2x4 pools with a
+	# 2 m wall down the middle, standing exactly on the origin. Two builders
+	# is fine; two ideas of where the water is, is not.
+	var pool_all: Dictionary = {}        # seg-local, every declared cell
 	var vest_basin_depth: float = 0.0
+	var vest_basin_lost: int = 0         # asked for, too far back to build
 	if peek.get("basin") is Dictionary:
 		var vbd: Dictionary = peek["basin"]
 		vest_basin_depth = clampf(float(vbd.get("depth", 1.0)), 0.3, 8.0)
+		var vpts: Array = []
 		for vr_v in (vbd.get("rects", []) as Array):
 			var vra: Array = vr_v
 			if vra.size() < 4:
 				continue
 			for vz in range(int(vra[1]), int(vra[1]) + int(vra[3])):
-				if vz >= 0 or vz < -VESTIBULE_H:
-					continue
 				for vx in range(int(vra[0]), int(vra[0]) + int(vra[2])):
-					if vx >= 0 and vx < vest_w:
-						vest_basin[Vector2i(vx, vz + VESTIBULE_H)] = true
+					vpts.append(Vector2i(vx, vz))
 		for vc_v in (vbd.get("cells", []) as Array):
 			var vca: Array = vc_v
-			if vca.size() < 2:
+			if vca.size() >= 2:
+				vpts.append(Vector2i(int(vca[0]), int(vca[1])))
+		for vp_v in vpts:
+			var vp: Vector2i = vp_v
+			if vp.y >= -VESTIBULE_H:
+				pool_all[Vector2i(vp.x, vp.y + VESTIBULE_H)] = true
+			if vp.y >= 0 and vp.y < tile.size() and vp.x >= 0 and vp.x < w:
+				continue                   # the hall tile owns this cell and sinks it itself
+			if vp.y < -VESTIBULE_H:
+				vest_basin_lost += 1       # further back than the annex reaches
 				continue
-			var vcz: int = int(vca[1])
-			var vcx: int = int(vca[0])
-			if vcz < 0 and vcz >= -VESTIBULE_H and vcx >= 0 and vcx < vest_w:
-				vest_basin[Vector2i(vcx, vcz + VESTIBULE_H)] = true
+			vest_basin[Vector2i(vp.x, vp.y + VESTIBULE_H)] = true
 	var vest_drowned: int = 0    # annex walls the basin claimed
 	var vest_glass: StandardMaterial3D = null
 	if not vest_basin.is_empty() and bool((peek.get("basin", {}) as Dictionary).get("glass", true)):
@@ -6772,9 +6837,16 @@ func _build_segment() -> void:
 		vest_glass.albedo_color = Color(0.72, 0.84, 0.87, 0.14)
 		vest_glass.roughness = 0.04
 		vest_glass.metallic = 0.15
-	if not vest_basin.is_empty():
-		print("[em-basin] %d cell(s) of the pool cross into the annex, %.1f m down" % [
-			vest_basin.size(), vest_basin_depth])
+	if not vest_basin.is_empty() or vest_basin_lost > 0:
+		var vmin := Vector2i(9999, 9999)
+		var vmax := Vector2i(-9999, -9999)
+		for vk2_v in vest_basin.keys():
+			var vk2: Vector2i = vk2_v
+			vmin = Vector2i(mini(vmin.x, vk2.x), mini(vmin.y, vk2.y - VESTIBULE_H))
+			vmax = Vector2i(maxi(vmax.x, vk2.x), maxi(vmax.y, vk2.y - VESTIBULE_H))
+		print("[em-basin] %d pool cell(s) outside the hall tile, x %d..%d z %d..%d, %.1f m down%s" % [
+			vest_basin.size(), vmin.x, vmax.x, vmin.y, vmax.y, vest_basin_depth,
+			"" if vest_basin_lost == 0 else " — %d REFUSED, further back than the annex reaches (z < %d)" % [vest_basin_lost, -VESTIBULE_H]])
 	for zr in range(VESTIBULE_H):
 		for x in range(vest_w):
 			if foyer_well and x <= 1 and zr <= 1:
@@ -6797,7 +6869,7 @@ func _build_segment() -> void:
 		_add_col(solid, Vector3(vb.x + 0.5, -vest_basin_depth - 0.1, vb.y + 0.5), Vector3(1, 0.2, 1))
 		for vd_v in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
 			var vd: Vector2i = vd_v
-			if vest_basin.has(vb + vd):
+			if pool_all.has(vb + vd):
 				continue
 			var vwc := Vector3(vb.x + 0.5 + vd.x * 0.45, -vest_basin_depth / 2.0, vb.y + 0.5 + vd.y * 0.45)
 			var vws := Vector3(0.1 if vd.x != 0 else 1.0, vest_basin_depth, 0.1 if vd.y != 0 else 1.0)
@@ -6838,7 +6910,35 @@ func _build_segment() -> void:
 	# ruled WALLS inside the enter room (partitions, a narrowed mouth…)
 	for vk_v in vest_rules.keys():
 		var vk: Vector2i = vk_v
-		if String(vest_rules[vk]) == "4" and vk.x > 0 and vk.x < vest_w - 1:
+		if vk.x <= 0 or vk.x >= vest_w - 1:
+			continue                       # the side columns are the room's own walls
+		var vv := String(vest_rules[vk])
+		# THE HALL'S OWN VOCABULARY, cell for cell (:7054). "1" floor, "2"/"2s" a
+		# 0.6 m block, "3s" a 1 m plinth, "4" a wall, "pN" an N-metre platform.
+		# The annex reads them the same way the hall does, so one character means
+		# one thing wherever it is written.
+		if vv == "2" or vv == "2s":
+			if vest_basin.has(vk):
+				vest_drowned += 1
+			else:
+				_box(seg, Vector3(vk.x + 0.5, 0.1, vk.y + 0.5), Vector3(1, 0.6, 1), Color(0.23, 0.23, 0.28), _sm("podium"))
+				_add_col(solid, Vector3(vk.x + 0.5, 0.1, vk.y + 0.5), Vector3(1, 0.6, 1))
+		elif vv == "3s":
+			if vest_basin.has(vk):
+				vest_drowned += 1
+			else:
+				_box(seg, Vector3(vk.x + 0.5, 0.3, vk.y + 0.5), Vector3(1, 1.0, 1), Color(0.35, 0.27, 0.16), _sm("plinth"))
+				_add_col(solid, Vector3(vk.x + 0.5, 0.3, vk.y + 0.5), Vector3(1, 1.0, 1))
+		elif vv.begins_with("p"):
+			var vpn: int = 1
+			if vv.length() > 1 and str(vv.substr(1)).is_valid_int():
+				vpn = maxi(1, int(str(vv.substr(1))))
+			if vest_basin.has(vk):
+				vest_drowned += 1
+			else:
+				_box(seg, Vector3(vk.x + 0.5, float(vpn) / 2.0, vk.y + 0.5), Vector3(1, float(vpn), 1), Color(0.21, 0.21, 0.25), _sm("podium"))
+				_add_col(solid, Vector3(vk.x + 0.5, float(vpn) / 2.0, vk.y + 0.5), Vector3(1, float(vpn), 1))
+		elif vv == "4":
 			# A POOL AND A WALL CANNOT SHARE A CELL. The annex rows describe the
 			# room's shape; a basin rect is a specific instruction about specific
 			# cells, so the basin wins — and it says so, because a hand-painted
@@ -6894,16 +6994,65 @@ func _build_segment() -> void:
 	# HOLE — the designed void a map opens at its rim — got a wall standing over
 	# nothing, and the room lost the openness the hole was cut for. A row with no
 	# floor at its edge now gets no skin there, and the space stays open.
-	for y_skin in range(tile.size()):
-		var srow: Array = tile[y_skin]
-		for sx2 in skin_xs:
-			if int(sx2) == w and doorways.has(y_skin):
-				continue                    # the doorway: no skin; the room's walls take over
+	var skin_stepped: int = 0
+	# WHERE THE SKIN STANDS, ROW BY ROW, BEFORE ANY OF IT IS BUILT. A wall line
+	# that steps needs a RETURN at the step, and a loop that builds each row as
+	# it decides it cannot know a step is coming: the pool pushed two rows out
+	# to x -3, the rows either side stayed at -1, and the museum was left with a
+	# 2 m slit open to the sky at each jog. Decide the whole line first, then
+	# build it, and the returns fall out of comparing neighbours.
+	var skin_at: Dictionary = {}          # Vector2i(side, row) -> x, absent = open
+	for y_skin in range(-VESTIBULE_H, tile.size()):
+		var srow: Array = tile[y_skin] if y_skin >= 0 else []
+		# AN ANNEX ROW HAS ITS OWN EDGES. vest_w is maxi(LOBBY_W, pw, w), so the
+		# annex is often WIDER than the hall behind it — putting the hall lines
+		# through it would wall the foyer in half down the middle of its floor.
+		var row_xs: Array = skin_xs if y_skin >= 0 else [-1 - sim_margin, vest_w + sim_margin]
+		for si in range(row_xs.size()):
+			var sx2: int = int(row_xs[si])
+			if y_skin >= 0 and sx2 == w and doorways.has(y_skin):
+				continue                    # the doorway: no skin; the room walls take over
 			# the tile cell this skin would stand beside
-			var near_x: int = 0 if int(sx2) < 0 else srow.size() - 1
-			if near_x >= 0 and near_x < srow.size() and String(srow[near_x]) == "0":
+			var near_x: int = 0 if sx2 < 0 else srow.size() - 1
+			if y_skin >= 0 and near_x >= 0 and near_x < srow.size() and String(srow[near_x]) == "0":
 				continue                    # no floor to hold: leave it open
-			_wall_at(seg, solid, wcells, int(sx2), y_skin + VESTIBULE_H, corner_col, m_corner, wr)
+			# AND THE SKIN STEPS PAST THE POOL. Same ruling as "the skin follows the
+			# floor", one case further out: a basin reaching beyond the tile put water
+			# at x -1 and -2 and the skin went on standing at -1, so the museum walled
+			# off half its own pool. The skin is the outside of the building, so it
+			# belongs outside everything the building has.
+			var sxi: int = sx2
+			var sstep: int = -1 if sxi < 0 else 1
+			var sguard: int = 0
+			while pool_all.has(Vector2i(sxi, y_skin + VESTIBULE_H)) and sguard < 16:
+				sxi += sstep
+				sguard += 1
+			if sguard > 0:
+				skin_stepped += 1
+			skin_at[Vector2i(si, y_skin)] = sxi
+	var skin_returns: int = 0
+	for k_v in skin_at.keys():
+		var k: Vector2i = k_v
+		var sx0: int = int(skin_at[k])
+		var out: int = -1 if sx0 < 0 else 1
+		# the return: this row is walled out to whatever its neighbours reached,
+		# skipping the water, so a step closes across instead of standing open
+		var far: int = sx0
+		for dy in [-1, 1]:
+			var nk := Vector2i(k.x, k.y + dy)
+			if skin_at.has(nk) and (int(skin_at[nk]) - sx0) * out > 0:
+				far = int(skin_at[nk])
+		var xx: int = sx0
+		while true:
+			if not pool_all.has(Vector2i(xx, k.y + VESTIBULE_H)):
+				_wall_at(seg, solid, wcells, xx, k.y + VESTIBULE_H, corner_col, m_corner, wr)
+				if xx != sx0:
+					skin_returns += 1
+			if xx == far:
+				break
+			xx += out
+	if skin_stepped > 0:
+		print("[em-basin] the outer skin stepped out past the pool on %d row(s), %d return cell(s) closing the jogs" % [skin_stepped, skin_returns])
 	# ── THE BASIN (2026-08-24, Palle: "like a basin with walls under the
 	# floor, like a pool, one meter down where the grid lines with the trace
 	# sit ... covered with transparent glass so we can walk over it") ────────
@@ -6972,6 +7121,8 @@ func _build_segment() -> void:
 			for mxo0 in range(1, sim_margin + 1):
 				basin_cells[Vector2i(-mxo0, zz0)] = true
 				basin_cells[Vector2i(w - 1 + mxo0, zz0)] = true
+				pool_all[Vector2i(-mxo0, zz0 + VESTIBULE_H)] = true
+				pool_all[Vector2i(w - 1 + mxo0, zz0 + VESTIBULE_H)] = true
 		for zz in range(tile.size()):
 			var z2: int = zz + VESTIBULE_H
 			for mxo in range(1, sim_margin + 1):
@@ -7017,7 +7168,7 @@ func _build_segment() -> void:
 				# pool side walls on every edge where the basin meets ground
 				for bd_v in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
 					var bd: Vector2i = bd_v
-					if basin_cells.has(Vector2i(x, y) + bd):
+					if basin_cells.has(Vector2i(x, y) + bd) or pool_all.has(Vector2i(x, y + VESTIBULE_H) + bd):
 						continue
 					var bwc := Vector3(x + 0.5 + bd.x * 0.45, -basin_depth / 2.0, z + 0.5 + bd.y * 0.45)
 					var bws := Vector3(0.1 if bd.x != 0 else 1.0, basin_depth, 0.1 if bd.y != 0 else 1.0)
@@ -7352,7 +7503,16 @@ func _build_segment() -> void:
 		#     bench you can walk through is worse than no bench — so the one fixture
 		#     family that occupies floor lives here, where the segment's StaticBody3D
 		#     and the walk map are both in scope.
-		_dress_fixtures(seg, solid, tile, w, zbase)
+		# THE POOL WRITES DOWN ITS OWN PLAN. The desktop exe is non-console, so a
+		# scene booted directly prints into nothing and the only thing a proof run
+		# hands back is a photograph — and a photograph of a 4x4 pit read from
+		# above, in perspective, through glass, is not evidence about which CELLS
+		# sank. Three shots were spent squinting at one. So the builder says what
+		# it did, in cells, in the map's own coordinates, including the minus
+		# domain no map row can name.
+		if not basin_cells.is_empty() or not vest_basin.is_empty():
+			_write_basin_plan(spec, tile, w, basin_cells, vest_basin, skin_stepped)
+		_dress_fixtures(seg, solid, tile, w, zbase, basin_cells)
 		# 1c. SERVICE FURNITURE. A critic measured a 420x360 crop of this museum's
 		#     wall — about 2 m2 of plaster — and found exactly one feature in it, a
 		#     light blob: no socket, no vent, no seam, no signage. em_props answers
@@ -12325,8 +12485,18 @@ const BENCH_H := 0.44
 const BENCH_D := 0.42
 const BENCH_L := 0.95
 
-func _dress_fixtures(seg: Node3D, solid: StaticBody3D, tile: Array, w: int, zbase: int) -> void:
+func _dress_fixtures(seg: Node3D, solid: StaticBody3D, tile: Array, w: int, zbase: int,
+		basin_cells: Dictionary = {}) -> void:
+	# A BENCH IS A PROP, AND IT MAY BE REFUSED. 2026-08-28: Palle asked twice
+	# for "the bench" to go, museum.props_deny was given the tokens, and the
+	# bench kept coming back — because props_deny is read by _lobby_piece and
+	# this is a different placer that had never heard of it. Two ways to put a
+	# body in a room, one way to refuse one.
+	if seg.has_meta("em_props_deny") and (seg.get_meta("em_props_deny") as Array).has("bench"):
+		print("[endless_museum]   fixtures: no benches — the map denies them")
+		return
 	var m_bench: Material = _sm("plinth")
+	var drowned := 0
 	var placed := 0
 	var last_z: int = -99
 	for y in range(tile.size()):
@@ -12355,6 +12525,12 @@ func _dress_fixtures(seg: Node3D, solid: StaticBody3D, tile: Array, w: int, zbas
 				continue
 			if String(_tile_at(tile, x - side, y)) != "1":
 				continue
+			# NOT OVER WATER. The basin sinks its cells 2 m and the bench knew
+			# nothing about it, so one stood in the pool at the origin with its
+			# feet in the air — visible in every proof shot of that hall.
+			if basin_cells.has(Vector2i(x, y)):
+				drowned += 1
+				continue
 			var face: float = float(x) + (0.0 if side < 0 else 1.0)
 			var cx: float = face + float(-side) * BENCH_D * 0.5
 			_box(seg, Vector3(cx, BENCH_H * 0.5, float(z) + 0.5),
@@ -12366,8 +12542,9 @@ func _dress_fixtures(seg: Node3D, solid: StaticBody3D, tile: Array, w: int, zbas
 			placed += 1
 			last_z = y
 			break
-	if placed > 0:
-		print("[endless_museum]   fixtures: %d benches" % placed)
+	if placed > 0 or drowned > 0:
+		print("[endless_museum]   fixtures: %d benches%s" % [placed,
+			"" if drowned == 0 else ", %d refused a cell the pool had taken" % drowned])
 
 
 ## ── THE SERVICE FURNITURE ────────────────────────────────────────────────────
@@ -16706,6 +16883,22 @@ func _take_proof_shot() -> void:
 			_shoot_deferred()
 			return
 		push_warning("endless_museum: --em-look=%s — no such body built; composing the usual shot" % _look_token)
+	# BY HAND, AND FIRST. --em-shot-yaw says where to point and --em-shot-x
+	# where to stand; both auto-composing branches below aim +z down the
+	# corridor and cannot photograph the ANNEX at all, which lies behind
+	# the camera by construction. This ran after them once and both fired
+	# — the hand aim was set and then thrown away, and the frame came back
+	# identical to the composed one. A branch that does not return is not
+	# an override.
+	if _shot_yaw_set or _shot_x_set:
+		var hz: float = _shot_z if _shot_z_set else 6.0
+		var hstand: Vector3 = _stand_near(_shot_x if _shot_x_set else float(spec["w"]) / 2.0, hz)
+		_player.position = Vector3(hstand.x, _shot_y, hstand.z)
+		_player.rotation = Vector3(0.0, _shot_yaw, 0.0)
+		_cam.rotation = Vector3(_shot_pitch, 0.0, 0.0)
+		print("[em-shot] by hand: standing %.1f,%.1f,%.1f (asked %.1f,%.1f), yaw %.0f pitch %.0f" % [hstand.x, _shot_y, hstand.z, _shot_x, hz, rad_to_deg(_shot_yaw), rad_to_deg(_shot_pitch)])
+		_shoot_deferred()
+		return
 	if _shot_z >= 0.0 or not _shot_z_set:
 		# COMPOSE ON THE EVIDENCE. A frame containing 100% architecture cannot
 		# corroborate a claim of "3 works dealt" — it cannot even distinguish a
@@ -19762,3 +19955,50 @@ func _drop_point() -> Vector3:
 	var p := Vector3(hx + 0.5, y, hz - 1.0 + 0.5)
 	print("[em-roof] the visitor starts ON the roof at (%.1f, %.1f, %.1f), the hole one cell ahead" % [p.x, p.y, p.z])
 	return p
+
+
+## THE POOL'S OWN PLAN, in map cells, written to ada_run/em_basin_plan.txt.
+##
+##   ~  pool floor        =  pool under glass      #  wall
+##   .  floor             ,  annex deck            :  nothing built here
+##
+## x runs -4 .. w+2 so the MINUS DOMAIN is on the page; z runs -VESTIBULE_H ..
+## the tile's end, so the annex is above the hall the way it is on the ground.
+func _write_basin_plan(spec: Dictionary, tile: Array, w: int,
+		basin_cells: Dictionary, vest_basin: Dictionary, skin_stepped: int) -> void:
+	var x0: int = -4
+	var x1: int = w + 2
+	var lines: Array = []
+	var head := "      "
+	for x in range(x0, x1 + 1):
+		head += "%d" % absi(x % 10)
+	lines.append(head)
+	var pool_in := 0
+	var pool_out := 0
+	for z in range(-VESTIBULE_H, tile.size()):
+		var line := "z%-5d" % z
+		for x in range(x0, x1 + 1):
+			var wet: bool = basin_cells.has(Vector2i(x, z)) or vest_basin.has(Vector2i(x, z + VESTIBULE_H))
+			var inside: bool = z >= 0 and z < tile.size() and x >= 0 and x < w
+			if wet:
+				if inside:
+					pool_in += 1
+				else:
+					pool_out += 1
+				line += "="
+			elif inside:
+				var c := String((tile[z] as Array)[x])
+				line += "." if c == "1" or c == "1s" else ("#" if c.begins_with("4") else (":" if c == "0" else c.substr(0, 1)))
+			elif z < 0:
+				line += ","
+			else:
+				line += ":"
+		lines.append(line)
+	lines.append("")
+	lines.append("%s — %d pool cell(s): %d inside the hall tile, %d in the minus domain." % [
+		String(spec.get("map", spec.get("name", "?"))), pool_in + pool_out, pool_in, pool_out])
+	lines.append("the outer skin stepped past the water on %d row(s)." % skin_stepped)
+	var f := FileAccess.open("res://ada_run/em_basin_plan.txt", FileAccess.WRITE)
+	if f != null:
+		f.store_string(String.chr(10).join(PackedStringArray(lines)) + String.chr(10))
+		f.close()

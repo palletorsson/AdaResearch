@@ -137,10 +137,15 @@
 				"with_extinguisher": 0.0,
 				"with_pallet": 0.0
 			},
-			"annex": ["2222211111122220210000", "2220010100000020222220", "2220000000000020222220", "2220111110122220222220"],
-			"props_deny": ["wall_clock", "electrical_panel", "floor_grate"],
+			"annex": [
+				"2222200000022220210000",
+				"2220000000000020222220",
+				"2220000000000020222220",
+				"1110000000022220222220"
+			],
+			"props_deny": ["wall_clock", "electrical_panel", "floor_grate", "bench"],
 			"basin": {
-				"rects": [[0, -1, 3, 3]],
+				"rects": [[-2, -2, 4, 4]],
 				"depth": 2.0,
 				"glass": true
 			},
