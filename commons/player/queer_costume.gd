@@ -49,6 +49,17 @@ const SLOTS := {
 	"hip_right": Vector3(0.15, -0.58, 0.00),
 }
 
+@export_group("Mounting")
+## POINT IT AT A HEAD. Left empty it hunts for an XROrigin3D and its XRCamera3D,
+## which is right in the game and useless in the endless museum: the desktop
+## walker there is a bare CharacterBody3D with a Camera3D and no XR rig anywhere
+## in the tree, so the costume would find nothing to wear and stand silently at
+## the origin. A plain Camera3D is a perfectly good head.
+@export var head_path: NodePath
+## optional — with no hands the torso simply faces where the head faces
+@export var hand_left_path: NodePath
+@export var hand_right_path: NodePath
+
 @export_group("Extra limbs")
 ## Four beyond the two you drive. They hang off the shoulder line and the hips.
 @export var limb_count: int = 4
@@ -108,7 +119,28 @@ func attach_to(origin: Node3D) -> void:
 	_build()
 
 
+## Wear it on any head at all — no XROrigin required. Works before or after the
+## costume has built itself, so a caller does not have to think about order.
+func mount_on(head: Node3D, left: Node3D = null, right: Node3D = null) -> void:
+	_head = head
+	if left != null:
+		_hand_l = left
+	if right != null:
+		_hand_r = right
+	if not _built:
+		_build()
+
+
 func _find_rig() -> void:
+	# an explicit head outranks everything — and once it is set, no XR hunt runs
+	if not head_path.is_empty():
+		_head = get_node_or_null(head_path) as Node3D
+	if not hand_left_path.is_empty():
+		_hand_l = get_node_or_null(hand_left_path) as Node3D
+	if not hand_right_path.is_empty():
+		_hand_r = get_node_or_null(hand_right_path) as Node3D
+	if _head != null:
+		return
 	if _origin == null:
 		var n: Node = self
 		while n != null and not (n is XROrigin3D):

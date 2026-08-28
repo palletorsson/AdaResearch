@@ -53,6 +53,10 @@ signal costume_grew(sequence: String, stage: int)
 ## completions into the real save to see the restore work, and this repo has
 ## already learned what happens when a probe wears the player's shoes.
 @export var manager_path: NodePath
+## WHOSE HEAD TO WEAR IT ON. Empty means "find the XR rig", which is right in the
+## game; the endless museum's desktop walker has no XR rig, so it passes its own
+## camera here. Resolved relative to this node.
+@export var head_path: NodePath
 
 var costume: Node3D = null
 var _given: Dictionary = {}          # sequence -> true, so a re-emit cannot double-pin
@@ -76,7 +80,10 @@ func _start() -> void:
 	costume = Costume.new() as Node3D
 	costume.name = "QueerCostume"
 	_mount.add_child(costume)
-	if costume.has_method("attach_to"):
+	var head: Node3D = get_node_or_null(head_path) as Node3D if not head_path.is_empty() else null
+	if head != null:
+		costume.call("mount_on", head)
+	elif costume.has_method("attach_to"):
 		costume.call("attach_to", _mount)
 
 	# THE SIGNAL FIRST, THEN THE CATCH-UP. The other order drops any completion
@@ -104,8 +111,6 @@ func _find_origin() -> Node3D:
 	return null
 
 
-## Everything already finished, in spine order, silently — this is a restore,
-## not twenty-two celebrations.
 func _manager() -> Node:
 	if not manager_path.is_empty():
 		var m: Node = get_node_or_null(manager_path)
@@ -114,6 +119,8 @@ func _manager() -> Node:
 	return get_node_or_null("/root/MapProgressionManager")
 
 
+## Everything already finished, in spine order, silently — this is a restore,
+## not twenty-two celebrations.
 func catch_up() -> int:
 	var mgr: Node = _manager()
 	if mgr == null or not mgr.has_method("is_sequence_completed"):
