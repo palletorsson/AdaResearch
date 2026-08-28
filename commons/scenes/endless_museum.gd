@@ -6510,7 +6510,22 @@ func _build_segment() -> void:
 				next_seq, String(peek.get("pearl", "")), opened])
 	var seg := Node3D.new()
 	seg.name = "Seg%d_%s" % [_seg_index, spec["key"]]
-	seg.position = Vector3(0, 0, _next_z)
+	# THE MAP STARTS AT 0,0 (2026-08-28, Palle: "put origin at 0,0,0 by moving
+	# the vestibule into the minus domain and let the map start at 0,0. This
+	# means we need to control what is in the minus domain.")
+	#
+	# The segment is laid [vestibule][tile][porch][court] and that has not
+	# changed — 104 sites do local arithmetic against VESTIBULE_H and every one
+	# of them still reads the same. What moved is where the segment SITS: back
+	# by its own vestibule, so local z 4 — the map's first row — lands on the
+	# world z the segment used to start at. For segment 0 that is world 0, so
+	# map cell (0,0) is the world origin and the vestibule is the minus domain
+	# in front of it, which is where the annex already lived.
+	#
+	# One shift, not 104 rewrites: zbase moves with it (below) and the segment
+	# record's z0 moves with it (the streaming window), so every world<->local
+	# conversion in the file is arithmetic that was already correct.
+	seg.position = Vector3(0, 0, _next_z - VESTIBULE_H)
 	add_child(seg)
 	seg.set_meta("em_tile", tile)
 	seg.set_meta("em_pearl", cur_pearl)
@@ -6528,7 +6543,7 @@ func _build_segment() -> void:
 	# this one's entry gap. Closing strips seal the width jump on both edges
 	# (a fully sealed strip at the very first segment, where nothing is behind).
 	var pw: int = _prev_w if _prev_w > 0 else 1
-	var zbase := int(_next_z)
+	var zbase := int(_next_z) - VESTIBULE_H   # the segment starts at its vestibule, now behind the map
 	# The white-cube gate still controls CURATORIAL DENSITY. The architectural
 	# material is now museum white in every hall; changing curation must not also
 	# repaint the building.
@@ -7276,7 +7291,7 @@ func _build_segment() -> void:
 	if hall_name == "":
 		hall_name = "seg %d" % _seg_index
 	_repair_owed.append({"seg": seg, "zbase": zbase, "hall": hall_name})
-	_segments.append({"node": seg, "z0": _next_z, "z1": _next_z + float(h) + float(VESTIBULE_H) + float(porch_depth) + float(court_depth), "index": _seg_index, "w": w,
+	_segments.append({"node": seg, "z0": _next_z - float(VESTIBULE_H), "z1": _next_z + float(h) + float(porch_depth) + float(court_depth), "index": _seg_index, "w": w,
 		"snap": stream_snap, "pearl": String(deal.get("pearl", "")) if deal is Dictionary else "",
 		# THE MAP NAME, not only the pearl (2026-08-25): the view toggle rebuilds
 		# around the eye and needs to name the hall it was over. A pearl cannot
