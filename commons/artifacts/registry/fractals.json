@@ -1,2995 +1,3037 @@
 {
-	"registry_info": {
-		"name": "fractals",
-		"description": "Fractal artifacts - recursion, classic sets, escape-time, IFS, chaos, and useful structures (the /fractal-map chapter).",
-		"created": "2026-06-20"
-	},
-	"artifacts": {
-		"fractal_antenna_toy": {
-			"lookup_name": "fractal_antenna_toy",
-			"scene": "res://commons/artifacts/fractal_antenna_toy/fractal_antenna_toy.tscn",
-			"class_name": "FractalAntennaToy",
-			"name": "Fractal Antenna Toy (hears every band)",
-			"description": "A held Sierpinski-gasket antenna: a self-similar conductor that resonates at many frequencies at once. A fractal hears every band.",
-			"category": "fractals",
-			"complexity": "beginner",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"small",
-				"fractal"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 2,
-				"footprint_source": "designed"
-			},
-			"measurements": {
-				"aabb_size": [
-					0.4,
-					0.35,
-					0.05
-				],
-				"aabb_center": [
-					0.0,
-					0.15,
-					0.0
-				],
-				"grid_cells": [
-					1,
-					1
-				],
-				"max_dimension_m": 0.4,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				1,
-				1,
-				1
-			]
-		},
-		"fractal_heat_exchanger": {
-			"lookup_name": "fractal_heat_exchanger",
-			"scene": "res://commons/artifacts/fractal_heat_exchanger/fractal_heat_exchanger.tscn",
-			"class_name": "FractalHeatExchanger",
-			"name": "Fractal Heat Exchanger (all surface)",
-			"description": "A bench heat-exchanger of recursive branching fins - self-similarity maximises surface area in a finite volume. All surface, no volume.",
-			"category": "fractals",
-			"complexity": "beginner",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"medium",
-				"fractal"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 4,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 4,
-				"footprint_source": "designed"
-			},
-			"measurements": {
-				"aabb_size": [
-					1.1,
-					1.4,
-					0.55
-				],
-				"aabb_center": [
-					0.0,
-					0.7,
-					0.0
-				],
-				"grid_cells": [
-					2,
-					1
-				],
-				"max_dimension_m": 1.4,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				2,
-				1,
-				1
-			]
-		},
-		"fractal_truss_tower": {
-			"lookup_name": "fractal_truss_tower",
-			"scene": "res://commons/artifacts/fractal_truss_tower/fractal_truss_tower.tscn",
-			"class_name": "FractalTrussTower",
-			"name": "Fractal Truss Tower (max strength, min material)",
-			"description": "A room-scale branching truss whose struts split into thinner struts - the Eiffel trick: span the most with the least.",
-			"category": "fractals",
-			"complexity": "intermediate",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"large",
-				"fractal"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 9,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 9,
-				"footprint_source": "designed"
-			},
-			"measurements": {
-				"aabb_size": [
-					7.0,
-					4.16,
-					7.0
-				],
-				"aabb_center": [
-					0.0,
-					1.98,
-					0.0
-				],
-				"grid_cells": [
-					7,
-					7
-				],
-				"max_dimension_m": 7.0,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				7,
-				1,
-				7
-			]
-		},
-		"fractal_antenna": {
-			"lookup_name": "fractal_antenna",
-			"scene": "res://commons/artifacts/fractal_antenna/fractal_antenna.tscn",
-			"class_name": "FractalAntenna",
-			"name": "Fractal Antenna (multi-band)",
-			"description": "A working multi-band Koch/Sierpinski antenna with a frequency-response readout - the engineering payoff of self-similarity.",
-			"category": "fractals",
-			"complexity": "intermediate",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"applied",
-				"fractal"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 4,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 4,
-				"footprint_source": "designed"
-			},
-			"measurements": {
-				"aabb_size": [
-					0.69,
-					0.81,
-					0.48
-				],
-				"aabb_center": [
-					0.04,
-					0.4,
-					0.01
-				],
-				"grid_cells": [
-					1,
-					1
-				],
-				"max_dimension_m": 0.81,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				1,
-				1,
-				1
-			]
-		},
-		"fractal_stool_toy": {
-			"lookup_name": "fractal_stool_toy",
-			"scene": "res://commons/artifacts/fractal_stool_toy/fractal_stool_toy.tscn",
-			"class_name": "FractalStoolToy",
-			"name": "Fractal Stool Toy (legs of legs)",
-			"description": "A held stool whose leg recursively forks into legs - the branching that holds a tree up holds a seat up too.",
-			"category": "fractals",
-			"complexity": "beginner",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"small",
-				"fractal"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 2,
-				"footprint_source": "designed"
-			},
-			"measurements": {
-				"aabb_size": [
-					0.42,
-					0.4,
-					0.42
-				],
-				"aabb_center": [
-					0.0,
-					0.2,
-					0.0
-				],
-				"grid_cells": [
-					1,
-					1
-				],
-				"max_dimension_m": 0.42,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				1,
-				1,
-				1
-			]
-		},
-		"furniture_recursion_bench": {
-			"lookup_name": "furniture_recursion_bench",
-			"scene": "res://commons/artifacts/furniture_recursion_bench/furniture_recursion_bench.tscn",
-			"class_name": "FurnitureRecursionBench",
-			"name": "Furniture Recursion Bench (a chair that is chairs)",
-			"description": "A bench showing a chair assembled by recursion: a frame whose corners are smaller frames, down to a real seat.",
-			"category": "fractals",
-			"complexity": "beginner",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"medium",
-				"fractal"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 1,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 4,
-				"footprint_source": "designed"
-			},
-			"measurements": {
-				"aabb_size": [
-					1.1,
-					1.59,
-					0.72
-				],
-				"aabb_center": [
-					0.0,
-					0.79,
-					0.0
-				],
-				"grid_cells": [
-					2,
-					1
-				],
-				"max_dimension_m": 1.59,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				2,
-				1,
-				1
-			]
-		},
-		"fractal_furniture_room": {
-			"lookup_name": "fractal_furniture_room",
-			"scene": "res://commons/artifacts/fractal_furniture_room/fractal_furniture_room.tscn",
-			"class_name": "FractalFurnitureRoom",
-			"name": "Fractal Furniture Room (recurse a strut)",
-			"description": "A room of fractal furniture - a recursive chair, a recursive table, a branching shelf. Recurse a strut and you get a chair.",
-			"category": "fractals",
-			"complexity": "intermediate",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"large",
-				"fractal"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 9,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 9,
-				"footprint_source": "designed"
-			},
-			"measurements": {
-				"aabb_size": [
-					7.0,
-					2.22,
-					7.0
-				],
-				"aabb_center": [
-					0.0,
-					1.01,
-					0.0
-				],
-				"grid_cells": [
-					7,
-					7
-				],
-				"max_dimension_m": 7.0,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				7,
-				1,
-				7
-			]
-		},
-		"fractal_facade_toy": {
-			"lookup_name": "fractal_facade_toy",
-			"scene": "res://commons/artifacts/fractal_facade_toy/fractal_facade_toy.tscn",
-			"class_name": "FractalFacadeToy",
-			"name": "Fractal Facade Toy (tracery)",
-			"description": "A held Gothic facade panel: an arch filled with smaller arches filled with smaller still. The whole is in the part.",
-			"category": "fractals",
-			"complexity": "beginner",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"small",
-				"fractal"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 2,
-				"footprint_source": "designed"
-			},
-			"measurements": {
-				"aabb_size": [
-					0.58,
-					0.48,
-					0.07
-				],
-				"aabb_center": [
-					0.0,
-					0.2,
-					0.0
-				],
-				"grid_cells": [
-					1,
-					1
-				],
-				"max_dimension_m": 0.58,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				1,
-				1,
-				1
-			]
-		},
-		"fractal_arch_bench": {
-			"dna": {
-				"axes": {
-					"ladder": [
-						"figure",
-						"series",
-						"seed",
-						"relief",
-						"section"
-					]
-				}
-			},
-			"lookup_name": "fractal_arch_bench",
-			"scene": "res://commons/artifacts/fractal_arch_bench/fractal_arch_bench.tscn",
-			"class_name": "FractalArchBench",
-			"name": "Fractal Arch Bench (span the most)",
-			"description": "A recursive arch built of smaller arches - self-similar structure spans the most with the least.",
-			"category": "fractals",
-			"complexity": "beginner",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"medium",
-				"fractal"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 4,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 4,
-				"footprint_source": "designed"
-			},
-			"measurements": {
-				"aabb_size": [
-					1.1,
-					1.6,
-					0.7
-				],
-				"aabb_center": [
-					0.0,
-					0.8,
-					0.0
-				],
-				"grid_cells": [
-					2,
-					1
-				],
-				"max_dimension_m": 1.6,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				2,
-				1,
-				1
-			]
-		},
-		"fractal_skyline_room": {
-			"lookup_name": "fractal_skyline_room",
-			"scene": "res://commons/artifacts/fractal_skyline_room/fractal_skyline_room.tscn",
-			"class_name": "FractalSkylineRoom",
-			"name": "Fractal Skyline Room (self-similar structure)",
-			"description": "A room-scale fractal skyline of recursive branching towers and spires - the Eiffel structure at city scale.",
-			"category": "fractals",
-			"complexity": "intermediate",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"large",
-				"fractal"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 9,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 9,
-				"footprint_source": "designed"
-			},
-			"measurements": {
-				"aabb_size": [
-					8.83,
-					7.89,
-					7.79
-				],
-				"aabb_center": [
-					-0.13,
-					3.85,
-					0.33
-				],
-				"grid_cells": [
-					9,
-					8
-				],
-				"max_dimension_m": 8.83,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				9,
-				1,
-				8
-			]
-		},
-		"recursion_bench": {
-			"lookup_name": "recursion_bench",
-			"scene": "res://commons/artifacts/recursion_bench/recursion_bench.tscn",
-			"class_name": "RecursionBench",
-			"name": "Recursion Bench (contains itself)",
-			"description": "A bench of recursion: rings within rings within rings, the call happening before each is drawn. A rule that contains itself.",
-			"category": "fractals",
-			"complexity": "beginner",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"medium",
-				"recursion"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 4,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 4,
-				"footprint_source": "designed"
-			},
-			"measurements": {
-				"aabb_size": [
-					1.1,
-					1.38,
-					0.7
-				],
-				"aabb_center": [
-					0.0,
-					0.69,
-					0.0
-				],
-				"grid_cells": [
-					2,
-					1
-				],
-				"max_dimension_m": 1.38,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				2,
-				1,
-				1
-			]
-		},
-		"recursive_tree_bench": {
-			"lookup_name": "recursive_tree_bench",
-			"scene": "res://commons/artifacts/recursive_tree_bench/recursive_tree_bench.tscn",
-			"class_name": "RecursiveTreeBench",
-			"name": "Recursive Tree Bench (two smaller trees)",
-			"description": "A bench recursive tree: split, rotate, recurse - a trunk that is two smaller trees, forever, down to the base case.",
-			"category": "fractals",
-			"complexity": "beginner",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"medium",
-				"recursive"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 4,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 4,
-				"footprint_source": "designed"
-			},
-			"measurements": {
-				"aabb_size": [
-					1.1,
-					1.78,
-					0.79
-				],
-				"aabb_center": [
-					0.0,
-					0.89,
-					0.0
-				],
-				"grid_cells": [
-					2,
-					1
-				],
-				"max_dimension_m": 1.78,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				2,
-				1,
-				1
-			]
-		},
-		"recursion_animator": {
-			"lookup_name": "recursion_animator",
-			"scene": "res://commons/artifacts/recursion_animator/recursion_animator.tscn",
-			"class_name": "RecursionAnimator",
-			"name": "Recursion Animator (watch the depth)",
-			"description": "A device that grows the tree one recursion level deeper each tick, with a depth readout - recursion made watchable.",
-			"category": "fractals",
-			"complexity": "intermediate",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"applied",
-				"recursive"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 4,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 4,
-				"footprint_source": "designed"
-			},
-			"measurements": {
-				"aabb_size": [
-					0.5,
-					0.37,
-					0.42
-				],
-				"aabb_center": [
-					0.0,
-					0.18,
-					0.01
-				],
-				"grid_cells": [
-					1,
-					1
-				],
-				"max_dimension_m": 0.5,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				1,
-				1,
-				1
-			]
-		},
-		"dimension_bench": {
-			"lookup_name": "dimension_bench",
-			"scene": "res://commons/artifacts/dimension_bench/dimension_bench.tscn",
-			"class_name": "DimensionBench",
-			"name": "Dimension Bench (box-counting)",
-			"description": "A fractal under a covering grid: count the filled boxes at a scale and read D = log N / log S. The coastline between 1D and 2D.",
-			"category": "fractals",
-			"complexity": "beginner",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"medium",
-				"fractal"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 4,
-				"footprint_source": "designed"
-			},
-			"measurements": {
-				"aabb_size": [
-					1.1,
-					1.53,
-					0.7
-				],
-				"aabb_center": [
-					0.0,
-					0.76,
-					0.0
-				],
-				"grid_cells": [
-					2.0,
-					1.0
-				],
-				"max_dimension_m": 1.53,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				2.0,
-				1,
-				1.0
-			]
-		},
-		"dimension_room": {
-			"lookup_name": "dimension_room",
-			"scene": "res://commons/artifacts/dimension_room/dimension_room.tscn",
-			"class_name": "DimensionRoom",
-			"name": "Dimension Room (between 1D and 2D)",
-			"description": "A room measuring a coastline by box grids at finer and finer scales - the dimension that refuses to be an integer.",
-			"category": "fractals",
-			"complexity": "intermediate",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"large",
-				"fractal"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 9,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 9,
-				"footprint_source": "designed"
-			},
-			"measurements": {
-				"aabb_size": [
-					7.0,
-					0.19,
-					15.69
-				],
-				"aabb_center": [
-					0.0,
-					0.0,
-					4.34
-				],
-				"grid_cells": [
-					7.0,
-					16.0
-				],
-				"max_dimension_m": 15.69,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				7.0,
-				1,
-				16.0
-			]
-		},
-		"dimension_meter": {
-			"lookup_name": "dimension_meter",
-			"scene": "res://commons/artifacts/dimension_meter/dimension_meter.tscn",
-			"class_name": "DimensionMeter",
-			"name": "Dimension Meter (scan a shape)",
-			"description": "A scanner device that measures a shape's fractal dimension - point it at a fractal, read the D.",
-			"category": "fractals",
-			"complexity": "intermediate",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"applied",
-				"fractal"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 4,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 4,
-				"footprint_source": "designed"
-			},
-			"measurements": {
-				"aabb_size": [
-					0.9,
-					0.62,
-					0.6
-				],
-				"aabb_center": [
-					0.0,
-					0.31,
-					0.0
-				],
-				"grid_cells": [
-					1.0,
-					1.0
-				],
-				"max_dimension_m": 0.9,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				1.0,
-				1,
-				1.0
-			]
-		},
-		"cantor_bench": {
-			"lookup_name": "cantor_bench",
-			"scene": "res://commons/artifacts/cantor_bench/cantor_bench.tscn",
-			"class_name": "CantorBench",
-			"name": "Cantor Bench (remove the middle third)",
-			"description": "The Cantor set on a bench: remove the middle third, recurse, generations stacked - a dust of zero length, uncountably many points.",
-			"category": "fractals",
-			"complexity": "beginner",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"medium",
-				"cantor"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 4,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 4,
-				"footprint_source": "designed"
-			},
-			"measurements": {
-				"aabb_size": [
-					1.1,
-					1.47,
-					0.7
-				],
-				"aabb_center": [
-					0.0,
-					0.74,
-					0.0
-				],
-				"grid_cells": [
-					2.0,
-					1.0
-				],
-				"max_dimension_m": 1.47,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				2.0,
-				1,
-				1.0
-			]
-		},
-		"koch_snowflake_press": {
-			"lookup_name": "koch_snowflake_press",
-			"scene": "res://commons/artifacts/koch_snowflake_press/koch_snowflake_press.tscn",
-			"class_name": "KochSnowflakePress",
-			"name": "Koch Snowflake Press (infinite perimeter)",
-			"description": "A press stamping out Koch snowflakes - infinite perimeter around a finite area, made on demand.",
-			"category": "fractals",
-			"complexity": "intermediate",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"applied",
-				"koch"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 4,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 4,
-				"footprint_source": "designed"
-			},
-			"measurements": {
-				"aabb_size": [
-					0.9,
-					1.06,
-					0.85
-				],
-				"aabb_center": [
-					0.0,
-					0.53,
-					0.13
-				],
-				"grid_cells": [
-					1,
-					1
-				],
-				"max_dimension_m": 1.06,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				1,
-				1,
-				1
-			]
-		},
-		"sierpinski_bench": {
-			"dna": {
-				"axes": {
-					"ladder": [
-						"figure",
-						"series",
-						"seed",
-						"relief",
-						"section"
-					]
-				}
-			},
-			"lookup_name": "sierpinski_bench",
-			"scene": "res://commons/artifacts/sierpinski_bench/sierpinski_bench.tscn",
-			"class_name": "SierpinskiBench",
-			"name": "Sierpinski Bench (the same hole)",
-			"description": "The Sierpinski triangle recursed on a bench - D ~ 1.585, the same hole at every scale, exactly what Rule 90 draws.",
-			"category": "fractals",
-			"complexity": "beginner",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"medium",
-				"sierpinski"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 4,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 4,
-				"footprint_source": "designed"
-			},
-			"measurements": {
-				"aabb_size": [
-					1.1,
-					1.57,
-					0.7
-				],
-				"aabb_center": [
-					0.0,
-					0.78,
-					0.0
-				],
-				"grid_cells": [
-					2,
-					1
-				],
-				"max_dimension_m": 1.57,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				2,
-				1,
-				1
-			]
-		},
-		"sierpinski_stamp": {
-			"lookup_name": "sierpinski_stamp",
-			"scene": "res://commons/artifacts/sierpinski_stamp/sierpinski_stamp.tscn",
-			"class_name": "SierpinskiStamp",
-			"name": "Sierpinski Stamp (triangle of triangles)",
-			"description": "A stamp device tiling Sierpinski gaskets onto a surface - the triangle of triangles of triangles, as a pattern tool.",
-			"category": "fractals",
-			"complexity": "intermediate",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"applied",
-				"sierpinski"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 4,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 4,
-				"footprint_source": "designed"
-			},
-			"measurements": {
-				"aabb_size": [
-					0.9,
-					0.9,
-					0.61
-				],
-				"aabb_center": [
-					0.0,
-					0.45,
-					0.0
-				],
-				"grid_cells": [
-					1,
-					1
-				],
-				"max_dimension_m": 0.9,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				1,
-				1,
-				1
-			]
-		},
-		"menger_toy": {
-			"lookup_name": "menger_toy",
-			"scene": "res://commons/artifacts/menger_toy/menger_toy.tscn",
-			"class_name": "MengerToy",
-			"name": "Menger Toy (held sponge)",
-			"description": "A held Menger sponge: a cube with its middles removed, recursively. Infinite surface around vanishing volume.",
-			"category": "fractals",
-			"complexity": "beginner",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"small",
-				"menger"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 2,
-				"footprint_source": "designed"
-			},
-			"qfep_connection": "Depth-3 in the hand: each pass discards seven of twenty-seven cells and recurses on the remainder, so you hold a cube that is mostly its own absence. Infinite surface closing over vanishing volume, at pocket scale.",
-			"measurements": {
-				"aabb_size": [
-					0.53,
-					0.42,
-					0.54
-				],
-				"aabb_center": [
-					0.0,
-					0.0,
-					0.0
-				],
-				"grid_cells": [
-					1,
-					1
-				],
-				"max_dimension_m": 0.54,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				1,
-				1,
-				1
-			]
-		},
-		"menger_bench": {
-			"lookup_name": "menger_bench",
-			"scene": "res://commons/artifacts/menger_bench/menger_bench.tscn",
-			"class_name": "MengerBench",
-			"name": "Menger Bench (zero volume)",
-			"description": "The Menger sponge forming through its iterations on a bench - D ~ 2.73, infinite surface, zero volume.",
-			"category": "fractals",
-			"complexity": "beginner",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"medium",
-				"menger"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 4,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 4,
-				"footprint_source": "designed"
-			},
-			"qfep_connection": "The carving shown as a sequence: iterations 0 through 3 sit in a row, volume draining toward zero while surface area climbs without bound. The rule never changes between steps, only its patience.",
-			"measurements": {
-				"aabb_size": [
-					1.57,
-					1.37,
-					0.45
-				],
-				"aabb_center": [
-					0.0,
-					0.68,
-					0.0
-				],
-				"grid_cells": [
-					2,
-					1
-				],
-				"max_dimension_m": 1.57,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				2,
-				1,
-				1
-			]
-		},
-		"menger_filter": {
-			"lookup_name": "menger_filter",
-			"scene": "res://commons/artifacts/menger_filter/menger_filter.tscn",
-			"class_name": "MengerFilter",
-			"name": "Menger Filter (all surface)",
-			"description": "A Menger sponge as a 3D filter/scaffold in a housing - the useful side of all-surface, zero-volume.",
-			"category": "fractals",
-			"complexity": "intermediate",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"applied",
-				"menger"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 4,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 4,
-				"footprint_source": "designed"
-			},
-			"qfep_connection": "Depth by depth the carving trades body for passage until the solid is mostly openings \u2014 then a duct housing clamps it and a shaft of fluid pours through, renaming the loss a function. The pathology fractals are famous for, area unbounded and volume gone, is exactly what a filter orders.",
-			"measurements": {
-				"aabb_size": [
-					0.92,
-					0.72,
-					1.64
-				],
-				"aabb_center": [
-					0.0,
-					0.36,
-					0.0
-				],
-				"grid_cells": [
-					1,
-					2
-				],
-				"max_dimension_m": 1.64,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				1,
-				1,
-				2
-			]
-		},
-		"mandelbrot_bench": {
-			"dna": {
-				"axes": {
-					"ladder": [
-						"figure",
-						"series",
-						"seed",
-						"relief",
-						"section"
-					]
-				}
-			},
-			"lookup_name": "mandelbrot_bench",
-			"scene": "res://commons/artifacts/mandelbrot_bench/mandelbrot_bench.tscn",
-			"class_name": "MandelbrotBench",
-			"name": "Mandelbrot Bench (z -> z^2 + c)",
-			"description": "The Mandelbrot set on a bench: z -> z^2 + c asked of every point, the master fractal's infinitely intricate boundary.",
-			"category": "fractals",
-			"complexity": "beginner",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"medium",
-				"mandelbrot"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 1,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 4,
-				"footprint_source": "designed"
-			},
-			"qfep_connection": "Each cell of the panel answers a single yes/no \u2014 does z\u00b2 + c stay bounded? \u2014 and the black interior is every point whose answer never arrives. The infinitely intricate edge sits at furniture height: the catalogue of all Julia fates, parked on a lab bench.",
-			"measurements": {
-				"aabb_size": [
-					1.1,
-					1.63,
-					0.45
-				],
-				"aabb_center": [
-					0.0,
-					0.81,
-					0.0
-				],
-				"grid_cells": [
-					2,
-					1
-				],
-				"max_dimension_m": 1.63,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				2,
-				1,
-				1
-			]
-		},
-		"julia_bench": {
-			"dna": {
-				"axes": {
-					"ladder": [
-						"figure",
-						"series",
-						"seed",
-						"relief",
-						"section"
-					]
-				},
-				"framing": 0.55,
-				"framing_why": "DERIVED FROM THE MEASURED AABB, and the fault it fixes was hidden behind a worse one. Body 1.10 x 1.63 x 0.45 m, diagonal 2.0173, radius 1.0086, projecting 1.157 m wide and 1.834 m TALL at yaw 0.62 / pitch -0.26 - a height-dominant subject fitted by its DIAGONAL, so at framing 1.0 the visible frame is 3.83 m and the body fills 30.2% of width and 47.8% of height. verify_batch measured the real subject at 28% x 42% and said so: suspect the framing, not the axis. At 0.55 the camera stands 3.45 m out, the frame is 2.11 m, the body fills 54.9% of width and 87.0% of height, and the scale rises from 198 to 361 px/m - 1.8x more resolution on an escape-time boundary, which is all fine detail. 0.50 reaches 95.7% of height and 0.45 clips at 106%, so 0.55 is the last framing with real margin. THIS WAS ONLY VISIBLE ONCE THE DUPLICATE WAS REMOVED. While the registry declared `figure` twice the sweep compared a frame against itself, the closest pair was a fabricated 0.00%, and no framing advice could be given for an axis that already read as perfectly degenerate. The real closest pair is section vs seed at 0.74%.",
-				"fixture": {
-					"animate_c": false
-				},
-				"still_note": "ONE VALUE OF THIS AXIS MOVES AND THE OTHER FOUR DO NOT, so without the fixture the axis is measured against a moving target. _process animates c - c_re = _base_re + 0.12*sin(t*0.35), c_im = 0.6 + 0.08*cos(t*0.3) (julia_bench.gd:227-228) - and the animation is gated at :221 to run ONLY at ladder = figure. Every other value holds c at the export default. The tell is in the sheet itself: the figure tile's own readout says c = -0.35 +0.67i while the other four all say c = -0.40 +0.60i, which is c after roughly 1.2 s of drift, i.e. after the bench's settle. Two captures of `figure` taken at different moments are different pictures, and every pair involving it is confounded - it differs from the others in the PARAMETER as well as in the presentation. THE CURE WAS ALREADY WRITTEN AND NEVER DECLARED. `@export var animate_c: bool = true` exists at :14 and :223 returns early when it is false. Nothing pointed the bench at it, so the shipped default kept breathing through every capture this artifact has ever had. Declaring dna.fixture animate_c=false pins it; the map default is untouched, and the breathing is the point of the artifact in a room - its own sign reads MOVE c, THE SET BREATHES.",
-				"measured": "MEASURED 2026-08-13, THREE FAULTS DEEP, and each one was hiding the next. (1) The registry declared `figure` TWICE, so the sweep compared a frame against itself and the archived bite report literally carries the row {ladder: figure} vs {ladder: figure} -> 0.0%. The published closest pair was a fabricated 0.00%. Fixed in c00e666f0, and the gate now reports repeated values. (2) With five real frames the closest pair came back 0.74% at section vs seed - and verify_batch immediately said the box was only 28% x 42% of frame: suspect the framing, not the axis. A 1.10 x 1.63 x 0.45 m body is HEIGHT-dominant and was being fitted by its diagonal. framing 0.55 puts it at 54.9% x 87.0% and raises the scale 198 -> 361 px/m. Closest pair 0.74% -> 2.39%, subject 5.1% -> 17.6%. (3) One value of the axis MOVES and the other four do not - see still_note. The cure was already in the code and never declared. dna.fixture animate_c=false pins it, and the sheet proves it took: the figure tile's readout now says c = -0.40 +0.60i like the other four, where it previously said -0.35 +0.67i, i.e. c after the settle. The headline is unchanged at 2.39% because the closest pair is section vs seed, both of which were already pinned - but every pair involving `figure` was confounded before this, differing in the PARAMETER as well as the presentation. 0.00% -> 0.74% -> 2.39%: none of those three numbers was about the axis until the last one."
-			},
-			"lookup_name": "julia_bench",
-			"scene": "res://commons/artifacts/julia_bench/julia_bench.tscn",
-			"class_name": "JuliaBench",
-			"name": "Julia Bench (move c, it breathes)",
-			"description": "A Julia set on a bench: one c, a whole set; move c and it breathes between connected and dust.",
-			"category": "fractals",
-			"complexity": "beginner",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"medium",
-				"julia"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 4,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 4,
-				"footprint_source": "designed"
-			},
-			"qfep_connection": "One complex number holds the whole figure hostage: the bench drifts c by a hair and thousands of multimesh cells reorganise between connected body and scattered dust. Identity as sensitivity \u2014 who z becomes depends on a parameter it never chose.",
-			"measurements": {
-				"aabb_size": [
-					1.1,
-					1.63,
-					0.45
-				],
-				"aabb_center": [
-					0.0,
-					0.81,
-					0.0
-				],
-				"grid_cells": [
-					2,
-					1
-				],
-				"max_dimension_m": 1.63,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				2,
-				1,
-				1
-			]
-		},
-		"lyapunov_bench": {
-			"lookup_name": "lyapunov_bench",
-			"scene": "res://commons/artifacts/lyapunov_bench/lyapunov_bench.tscn",
-			"class_name": "LyapunovBench",
-			"name": "Lyapunov Bench (stability landscape)",
-			"description": "A Lyapunov fractal: colour by how fast nearby paths diverge, and stability itself becomes a fractal landscape.",
-			"category": "fractals",
-			"complexity": "beginner",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"medium",
-				"lyapunov"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 4,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 4,
-				"footprint_source": "designed"
-			},
-			"measurements": {
-				"aabb_size": [
-					1.1,
-					1.63,
-					0.45
-				],
-				"aabb_center": [
-					0.0,
-					0.81,
-					0.0
-				],
-				"grid_cells": [
-					2,
-					1
-				],
-				"max_dimension_m": 1.63,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				2,
-				1,
-				1
-			]
-		},
-		"escape_time_room": {
-			"lookup_name": "escape_time_room",
-			"scene": "res://commons/artifacts/escape_time_room/escape_time_room.tscn",
-			"class_name": "EscapeTimeRoom",
-			"name": "Escape-Time Room (edge of chaos)",
-			"description": "A room of escape-time fractals - Mandelbrot, Julia, Newton on the walls - the edge between staying and escaping.",
-			"category": "fractals",
-			"complexity": "intermediate",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"large",
-				"lyapunov"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 9,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 9,
-				"footprint_source": "designed"
-			},
-			"measurements": {
-				"aabb_size": [
-					7.1,
-					5.95,
-					7.05
-				],
-				"aabb_center": [
-					0.0,
-					1.65,
-					-0.02
-				],
-				"grid_cells": [
-					8,
-					8
-				],
-				"max_dimension_m": 7.1,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				8,
-				1,
-				8
-			]
-		},
-		"newton_fractal_tool": {
-			"lookup_name": "newton_fractal_tool",
-			"scene": "res://commons/artifacts/newton_fractal_tool/newton_fractal_tool.tscn",
-			"class_name": "NewtonFractalTool",
-			"name": "Newton Fractal Tool (root basins)",
-			"description": "A Newton's-method fractal device: z^3-1 basins coloured by which root they fall to - root-finding made visible.",
-			"category": "fractals",
-			"complexity": "intermediate",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"applied",
-				"lyapunov"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 4,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 4,
-				"footprint_source": "designed"
-			},
-			"qfep_connection": "Every cell runs the same deterministic descent and lands in one of three certainties, yet the map of which certainty is fractal at the seams \u2014 prediction fails precisely where the answers meet. Determinism keeps its promise pointwise and breaks it as a border.",
-			"measurements": {
-				"aabb_size": [
-					1.0,
-					0.95,
-					0.63
-				],
-				"aabb_center": [
-					0.0,
-					0.48,
-					0.01
-				],
-				"grid_cells": [
-					1,
-					1
-				],
-				"max_dimension_m": 1.0,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				1,
-				1,
-				1
-			]
-		},
-		"ifs_bench": {
-			"lookup_name": "ifs_bench",
-			"scene": "res://commons/artifacts/ifs_bench/ifs_bench.tscn",
-			"class_name": "IfsBench",
-			"name": "IFS Bench (four maps, a fern)",
-			"description": "The chaos game on a bench: four affine maps, a point thrown thousands of times, and a Barnsley fern with no fern ever drawn.",
-			"category": "fractals",
-			"complexity": "beginner",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"medium",
-				"iterated"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 4,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 4,
-				"footprint_source": "designed"
-			},
-			"measurements": {
-				"aabb_size": [
-					1.1,
-					1.7,
-					0.7
-				],
-				"aabb_center": [
-					0.0,
-					0.85,
-					0.0
-				],
-				"grid_cells": [
-					2,
-					1
-				],
-				"max_dimension_m": 1.7,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				2,
-				1,
-				1
-			]
-		},
-		"ifs_room": {
-			"lookup_name": "ifs_room",
-			"scene": "res://commons/artifacts/ifs_room/ifs_room.tscn",
-			"class_name": "IfsRoom",
-			"name": "IFS Room (a point, folded)",
-			"description": "A room of IFS attractors - fern, Sierpinski, tree - each a point folded by affine maps, forever.",
-			"category": "fractals",
-			"complexity": "intermediate",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"large",
-				"iterated"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 9,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 9,
-				"footprint_source": "designed"
-			},
-			"measurements": {
-				"aabb_size": [
-					7.0,
-					4.65,
-					7.0
-				],
-				"aabb_center": [
-					0.0,
-					2.23,
-					0.0
-				],
-				"grid_cells": [
-					7,
-					7
-				],
-				"max_dimension_m": 7.0,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				7,
-				1,
-				7
-			]
-		},
-		"chaos_game_tool": {
-			"lookup_name": "chaos_game_tool",
-			"scene": "res://commons/artifacts/chaos_game_tool/chaos_game_tool.tscn",
-			"class_name": "ChaosGameTool",
-			"name": "Chaos Game Tool (throw, fold, repeat)",
-			"description": "A chaos-game device: a die picks a map, a point bounces, and the attractor accumulates out of pure repetition.",
-			"category": "fractals",
-			"complexity": "intermediate",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"applied",
-				"iterated"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 4,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 4,
-				"footprint_source": "designed"
-			},
-			"qfep_connection": "Whatever the spinner shows, the bright point only ever halves its distance to a vertex \u2014 and the same Sierpinski gauze condenses out of every reset. The dice choose the itinerary, never the destination: E_flux runs errands for an F_order already written into the three maps.",
-			"measurements": {
-				"aabb_size": [
-					1.02,
-					1.53,
-					0.72
-				],
-				"aabb_center": [
-					-0.01,
-					0.76,
-					0.01
-				],
-				"grid_cells": [
-					2.0,
-					1.0
-				],
-				"max_dimension_m": 1.53,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				2.0,
-				1,
-				1.0
-			]
-		},
-		"golden_spiral_bench": {
-			"lookup_name": "golden_spiral_bench",
-			"scene": "res://commons/artifacts/golden_spiral_bench/golden_spiral_bench.tscn",
-			"class_name": "GoldenSpiralBench",
-			"name": "Golden Spiral Bench (137.5 degrees)",
-			"description": "Sunflower seeds packed at the 137.5 degree golden angle - how a plant packs the most seeds, the fractal that grows.",
-			"category": "fractals",
-			"complexity": "beginner",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"medium",
-				"golden"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 4,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 4,
-				"footprint_source": "designed"
-			},
-			"measurements": {
-				"aabb_size": [
-					1.1,
-					0.98,
-					0.79
-				],
-				"aabb_center": [
-					0.0,
-					0.49,
-					0.0
-				],
-				"grid_cells": [
-					2,
-					1
-				],
-				"max_dimension_m": 1.1,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				2,
-				1,
-				1
-			]
-		},
-		"dla_bench": {
-			"lookup_name": "dla_bench",
-			"scene": "res://commons/artifacts/dla_bench/dla_bench.tscn",
-			"class_name": "DlaBench",
-			"name": "DLA Bench (stick where you land)",
-			"description": "Diffusion-limited aggregation: random walkers stick where they land and grow a coral, a frost - fractal branching from pure chance.",
-			"category": "fractals",
-			"complexity": "beginner",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"medium",
-				"diffusion-limited"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 4,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 4,
-				"footprint_source": "designed"
-			},
-			"measurements": {
-				"aabb_size": [
-					1.1,
-					0.98,
-					0.7
-				],
-				"aabb_center": [
-					0.0,
-					0.49,
-					0.0
-				],
-				"grid_cells": [
-					2,
-					1
-				],
-				"max_dimension_m": 1.1,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				2,
-				1,
-				1
-			]
-		},
-		"dla_grower": {
-			"lookup_name": "dla_grower",
-			"scene": "res://commons/artifacts/dla_grower/dla_grower.tscn",
-			"class_name": "DlaGrower",
-			"name": "DLA Frost Generator",
-			"description": "A frost/lightning generator: walkers accrete a branching crystal over time - DLA as a growth device.",
-			"category": "fractals",
-			"complexity": "intermediate",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"applied",
-				"diffusion-limited"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 4,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 4,
-				"footprint_source": "designed"
-			},
-			"qfep_connection": "Each walker wanders until it touches the crystal, freezes, and is never consulted again \u2014 and the tips screen the interior, so the fern's gaps are held open by the same rule that grows its edges. Frost as a record of arrivals wearing the costume of design.",
-			"measurements": {
-				"aabb_size": [
-					1.0,
-					1.05,
-					0.81
-				],
-				"aabb_center": [
-					0.0,
-					0.53,
-					0.0
-				],
-				"grid_cells": [
-					1,
-					1
-				],
-				"max_dimension_m": 1.05,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				1,
-				1,
-				1
-			]
-		},
-		"attractor_bench": {
-			"lookup_name": "attractor_bench",
-			"scene": "res://commons/artifacts/attractor_bench/attractor_bench.tscn",
-			"class_name": "AttractorBench",
-			"name": "Attractor Bench (chaos with a shape)",
-			"description": "A Lorenz attractor on a bench: a deterministic path that never repeats and never escapes - chaos given a fractal shape.",
-			"category": "fractals",
-			"complexity": "beginner",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"medium",
-				"strange"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 9,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 4,
-				"footprint_source": "designed"
-			},
-			"measurements": {
-				"aabb_size": [
-					2.27,
-					2.78,
-					2.82
-				],
-				"aabb_center": [
-					0.19,
-					1.39,
-					0.05
-				],
-				"grid_cells": [
-					3.0,
-					3.0
-				],
-				"max_dimension_m": 2.82,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				3.0,
-				1,
-				3.0
-			]
-		},
-		"attractor_room": {
-			"lookup_name": "attractor_room",
-			"scene": "res://commons/artifacts/attractor_room/attractor_room.tscn",
-			"class_name": "AttractorRoom",
-			"name": "Attractor Room (never repeats)",
-			"description": "A room-scale Lorenz butterfly you walk around - the strange attractor that never repeats and never escapes.",
-			"category": "fractals",
-			"complexity": "intermediate",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"large",
-				"strange"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 9,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 9,
-				"footprint_source": "designed"
-			},
-			"measurements": {
-				"aabb_size": [
-					7.0,
-					3.94,
-					7.0
-				],
-				"aabb_center": [
-					0.0,
-					1.87,
-					0.0
-				],
-				"grid_cells": [
-					7.0,
-					7.0
-				],
-				"max_dimension_m": 7.0,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				7.0,
-				1,
-				7.0
-			]
-		},
-		"attractor_plotter": {
-			"lookup_name": "attractor_plotter",
-			"scene": "res://commons/artifacts/attractor_plotter/attractor_plotter.tscn",
-			"class_name": "AttractorPlotter",
-			"name": "Lorenz Plotter",
-			"description": "A plotter tracing the Lorenz path with the equations beside it - the butterfly drawn by its own dynamics.",
-			"category": "fractals",
-			"complexity": "intermediate",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"applied",
-				"strange"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 4,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 4,
-				"footprint_source": "designed"
-			},
-			"measurements": {
-				"aabb_size": [
-					0.9,
-					0.95,
-					0.72
-				],
-				"aabb_center": [
-					0.0,
-					0.47,
-					-0.01
-				],
-				"grid_cells": [
-					1.0,
-					1.0
-				],
-				"max_dimension_m": 0.95,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				1.0,
-				1,
-				1.0
-			]
-		},
-		"terrain_toy": {
-			"lookup_name": "terrain_toy",
-			"scene": "res://commons/artifacts/terrain_toy/terrain_toy.tscn",
-			"class_name": "TerrainToy",
-			"name": "Terrain Toy (held mountain)",
-			"description": "A held fractal terrain tile: noise stacked at every scale (fBm) becomes a little mountain in the hand.",
-			"category": "fractals",
-			"complexity": "beginner",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"small",
-				"fractal"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 2,
-				"footprint_source": "designed"
-			},
-			"measurements": {
-				"aabb_size": [
-					0.42,
-					0.12,
-					0.42
-				],
-				"aabb_center": [
-					0.0,
-					0.06,
-					0.0
-				],
-				"grid_cells": [
-					1,
-					1
-				],
-				"max_dimension_m": 0.42,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				1,
-				1,
-				1
-			]
-		},
-		"terrain_bench": {
-			"lookup_name": "terrain_bench",
-			"scene": "res://commons/artifacts/terrain_bench/terrain_bench.tscn",
-			"class_name": "TerrainBench",
-			"name": "Terrain Bench (noise at every scale)",
-			"description": "A fractal landscape on a bench: stack noise octave on octave and randomness becomes a mountain, a coastline.",
-			"category": "fractals",
-			"complexity": "beginner",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"medium",
-				"fractal"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 9,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 4,
-				"footprint_source": "designed"
-			},
-			"measurements": {
-				"aabb_size": [
-					1.14,
-					1.15,
-					0.81
-				],
-				"aabb_center": [
-					0.01,
-					0.58,
-					0.0
-				],
-				"grid_cells": [
-					2,
-					1
-				],
-				"max_dimension_m": 1.15,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				2,
-				1,
-				1
-			]
-		},
-		"terrain_forge": {
-			"lookup_name": "terrain_forge",
-			"scene": "res://commons/artifacts/terrain_forge/terrain_forge.tscn",
-			"class_name": "TerrainForge",
-			"name": "Terrain Forge (stamp a landscape)",
-			"description": "A terrain forge that stamps a fresh fBm landscape patch on demand - the fractal as a level-generation tool.",
-			"category": "fractals",
-			"complexity": "intermediate",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"applied",
-				"fractal"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 4,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 4,
-				"footprint_source": "designed"
-			},
-			"measurements": {
-				"aabb_size": [
-					1.0,
-					1.2,
-					0.9
-				],
-				"aabb_center": [
-					0.0,
-					0.6,
-					0.0
-				],
-				"grid_cells": [
-					1,
-					1
-				],
-				"max_dimension_m": 1.2,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				1,
-				1,
-				1
-			]
-		},
-		"space_filling_bench": {
-			"lookup_name": "space_filling_bench",
-			"scene": "res://commons/artifacts/space_filling_bench/space_filling_bench.tscn",
-			"class_name": "SpaceFillingBench",
-			"name": "Space-Filling Bench (a line fills a square)",
-			"description": "A Hilbert curve filling a square on a bench - one dimension reaching, by recursion, to fill two.",
-			"category": "fractals",
-			"complexity": "beginner",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"medium",
-				"space-filling"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 4,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 4,
-				"footprint_source": "designed"
-			},
-			"measurements": {
-				"aabb_size": [
-					1.12,
-					0.9,
-					0.72
-				],
-				"aabb_center": [
-					0.0,
-					0.45,
-					0.0
-				],
-				"grid_cells": [
-					2,
-					1
-				],
-				"max_dimension_m": 1.12,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				2,
-				1,
-				1
-			]
-		},
-		"space_filling_room": {
-			"lookup_name": "space_filling_room",
-			"scene": "res://commons/artifacts/space_filling_room/space_filling_room.tscn",
-			"class_name": "SpaceFillingRoom",
-			"name": "Space-Filling Room (every point, one line)",
-			"description": "A room-scale 3D Hilbert curve you walk around - a single line that visits every point of a volume.",
-			"category": "fractals",
-			"complexity": "intermediate",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"tags": [
-				"fractal",
-				"large",
-				"space-filling"
-			],
-			"parameters": {
-				"emissive": "Bool"
-			},
-			"dev_themes": [
-				"fractals",
-				"recursion",
-				"applications"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 9,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "front",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 9,
-				"footprint_source": "designed"
-			},
-			"measurements": {
-				"aabb_size": [
-					7.0,
-					4.15,
-					7.0
-				],
-				"aabb_center": [
-					0.0,
-					1.33,
-					0.0
-				],
-				"grid_cells": [
-					7,
-					7
-				],
-				"max_dimension_m": 7.0,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				7,
-				1,
-				7
-			]
-		},
-		"depth_cap": {
-			"category": "fractals",
-			"complexity": "intermediate",
-			"description": "The fractals seam. A Koch curve is infinitely deep; the machine renders to iteration N and stops. Magnify one smallest segment and the endless detail is gone \u2014 a straight line. Infinity faked to a budget.",
-			"dev_themes": [
-				"digital_bias",
-				"seam"
-			],
-			"include_in_map_data": true,
-			"interaction": "ambient",
-			"lookup_name": "depth_cap",
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"name": "Depth Cap",
-			"qfep_connection": "A station in the bias landscape (doc/SEAM_PER_SEQUENCE.md); the digital-bias seam for fractals. Bias is conserved; show the seam.",
-			"scene": "res://algorithms/fractals/depth_cap/depth_cap.tscn",
-			"sequence": "fractals",
-			"tags": [
-				"fractals",
-				"koch",
-				"depth",
-				"recursion",
-				"infinity",
-				"seam",
-				"digital_bias"
-			],
-			"measurements": {
-				"aabb_size": [
-					0.95,
-					0.76,
-					0.03
-				],
-				"aabb_center": [
-					0.0,
-					-0.02,
-					0.01
-				],
-				"grid_cells": [
-					1.0,
-					1.0
-				],
-				"max_dimension_m": 0.95,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				1.0,
-				1,
-				1.0
-			]
-		},
-		"the_recursion_cabinet": {
-			"name": "The Recursion Cabinet",
-			"class_name": "TheRecursionCabinet",
-			"scene": "res://commons/artifacts/the_recursion_cabinet/the_recursion_cabinet.tscn",
-			"description": "The fractals SUPER OBJECT: a curiosity cabinet built by a function that calls itself - every shelf holds a smaller copy until the base case draws a SOLID block and returns. In the drawers: Cantor's missing thirds, Koch's endless edge, Sierpinski by chaos game, a level-2 Menger sponge, phi's spiral, a Barnsley fern, and escape-time Mandelbrot. Each genuinely recursed. 2026-08-27.",
-			"category": "fractals",
-			"tags": [
-				"fractals",
-				"super",
-				"synthesis",
-				"recursion",
-				"base_case",
-				"surreal"
-			],
-			"spatial_needs": {
-				"footprint_cells": 4,
-				"clearance_m": 0.6
-			}
-		}
-	}
+ "registry_info": {
+  "name": "fractals",
+  "description": "Fractal artifacts - recursion, classic sets, escape-time, IFS, chaos, and useful structures (the /fractal-map chapter).",
+  "created": "2026-06-20"
+ },
+ "artifacts": {
+  "where_the_machine_stops": {
+   "dna": {
+    "axes": {
+     "depth": [
+      "d4",
+      "d1",
+      "d2",
+      "d3",
+      "d5",
+      "d6",
+      "refused"
+     ]
+    },
+    "framing": 0.72,
+    "predicted_degeneracy": {
+     "pair": [
+      "d5",
+      "d6"
+     ],
+     "predicted_pct": 2.0,
+     "measured_pct": 2.43,
+     "arithmetic": "Cell edge halves each depth, so a d6 cell is 2.6/64 = 4.1 cm and lands near one pixel at this framing; the silhouette is already converged by d4. Predicted the top pair to twin, and it does - d5==d6 at 2.43%, d4==d5 at 3.65%. The convergence is the sequence's own argument: you pay four times as much and the picture stops changing."
+    }
+   },
+   "name": "Where the Machine Stops",
+   "class_name": "WhereTheMachineStops",
+   "scene": "res://commons/artifacts/where_the_machine_stops/where_the_machine_stops.tscn",
+   "description": "A Sierpinski tetrahedron at depths one through six - 4, 16, 64, 256, 1024, 4096 cells, the count etched on the sill of every frame - and a seventh value, `refused`: the root tetrahedron's six edges in wire and nothing inside, because depth seven is 16,384 cells and the machine declines. The refusal is a VALUE of the axis, not a failure of it, which is the only way a limit gets photographed. Every other fractal gallery here shows the promise of infinity; this one shows it being broken. 2026-08-27.",
+   "category": "fractals",
+   "tags": [
+    "fractals",
+    "recursion",
+    "budget",
+    "refusal",
+    "limits",
+    "dna"
+   ],
+   "spatial_needs": {
+    "footprint_cells": 6,
+    "clearance_m": 1.0
+   }
+  },
+  "fractal_antenna_toy": {
+   "lookup_name": "fractal_antenna_toy",
+   "scene": "res://commons/artifacts/fractal_antenna_toy/fractal_antenna_toy.tscn",
+   "class_name": "FractalAntennaToy",
+   "name": "Fractal Antenna Toy (hears every band)",
+   "description": "A held Sierpinski-gasket antenna: a self-similar conductor that resonates at many frequencies at once. A fractal hears every band.",
+   "category": "fractals",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "small",
+    "fractal"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 2,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 2,
+    "footprint_source": "designed"
+   },
+   "measurements": {
+    "aabb_size": [
+     0.4,
+     0.35,
+     0.05
+    ],
+    "aabb_center": [
+     0.0,
+     0.15,
+     0.0
+    ],
+    "grid_cells": [
+     1,
+     1
+    ],
+    "max_dimension_m": 0.4,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    1,
+    1,
+    1
+   ]
+  },
+  "fractal_heat_exchanger": {
+   "lookup_name": "fractal_heat_exchanger",
+   "scene": "res://commons/artifacts/fractal_heat_exchanger/fractal_heat_exchanger.tscn",
+   "class_name": "FractalHeatExchanger",
+   "name": "Fractal Heat Exchanger (all surface)",
+   "description": "A bench heat-exchanger of recursive branching fins - self-similarity maximises surface area in a finite volume. All surface, no volume.",
+   "category": "fractals",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "medium",
+    "fractal"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   },
+   "measurements": {
+    "aabb_size": [
+     1.1,
+     1.4,
+     0.55
+    ],
+    "aabb_center": [
+     0.0,
+     0.7,
+     0.0
+    ],
+    "grid_cells": [
+     2,
+     1
+    ],
+    "max_dimension_m": 1.4,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    2,
+    1,
+    1
+   ]
+  },
+  "fractal_truss_tower": {
+   "lookup_name": "fractal_truss_tower",
+   "scene": "res://commons/artifacts/fractal_truss_tower/fractal_truss_tower.tscn",
+   "class_name": "FractalTrussTower",
+   "name": "Fractal Truss Tower (max strength, min material)",
+   "description": "A room-scale branching truss whose struts split into thinner struts - the Eiffel trick: span the most with the least.",
+   "category": "fractals",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "large",
+    "fractal"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 9,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 9,
+    "footprint_source": "designed"
+   },
+   "measurements": {
+    "aabb_size": [
+     7.0,
+     4.16,
+     7.0
+    ],
+    "aabb_center": [
+     0.0,
+     1.98,
+     0.0
+    ],
+    "grid_cells": [
+     7,
+     7
+    ],
+    "max_dimension_m": 7.0,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    7,
+    1,
+    7
+   ]
+  },
+  "fractal_antenna": {
+   "lookup_name": "fractal_antenna",
+   "scene": "res://commons/artifacts/fractal_antenna/fractal_antenna.tscn",
+   "class_name": "FractalAntenna",
+   "name": "Fractal Antenna (multi-band)",
+   "description": "A working multi-band Koch/Sierpinski antenna with a frequency-response readout - the engineering payoff of self-similarity.",
+   "category": "fractals",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "applied",
+    "fractal"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   },
+   "measurements": {
+    "aabb_size": [
+     0.69,
+     0.81,
+     0.48
+    ],
+    "aabb_center": [
+     0.04,
+     0.4,
+     0.01
+    ],
+    "grid_cells": [
+     1,
+     1
+    ],
+    "max_dimension_m": 0.81,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    1,
+    1,
+    1
+   ]
+  },
+  "fractal_stool_toy": {
+   "lookup_name": "fractal_stool_toy",
+   "scene": "res://commons/artifacts/fractal_stool_toy/fractal_stool_toy.tscn",
+   "class_name": "FractalStoolToy",
+   "name": "Fractal Stool Toy (legs of legs)",
+   "description": "A held stool whose leg recursively forks into legs - the branching that holds a tree up holds a seat up too.",
+   "category": "fractals",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "small",
+    "fractal"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 2,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 2,
+    "footprint_source": "designed"
+   },
+   "measurements": {
+    "aabb_size": [
+     0.42,
+     0.4,
+     0.42
+    ],
+    "aabb_center": [
+     0.0,
+     0.2,
+     0.0
+    ],
+    "grid_cells": [
+     1,
+     1
+    ],
+    "max_dimension_m": 0.42,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    1,
+    1,
+    1
+   ]
+  },
+  "furniture_recursion_bench": {
+   "lookup_name": "furniture_recursion_bench",
+   "scene": "res://commons/artifacts/furniture_recursion_bench/furniture_recursion_bench.tscn",
+   "class_name": "FurnitureRecursionBench",
+   "name": "Furniture Recursion Bench (a chair that is chairs)",
+   "description": "A bench showing a chair assembled by recursion: a frame whose corners are smaller frames, down to a real seat.",
+   "category": "fractals",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "medium",
+    "fractal"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 1,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   },
+   "measurements": {
+    "aabb_size": [
+     1.1,
+     1.59,
+     0.72
+    ],
+    "aabb_center": [
+     0.0,
+     0.79,
+     0.0
+    ],
+    "grid_cells": [
+     2,
+     1
+    ],
+    "max_dimension_m": 1.59,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    2,
+    1,
+    1
+   ]
+  },
+  "fractal_furniture_room": {
+   "lookup_name": "fractal_furniture_room",
+   "scene": "res://commons/artifacts/fractal_furniture_room/fractal_furniture_room.tscn",
+   "class_name": "FractalFurnitureRoom",
+   "name": "Fractal Furniture Room (recurse a strut)",
+   "description": "A room of fractal furniture - a recursive chair, a recursive table, a branching shelf. Recurse a strut and you get a chair.",
+   "category": "fractals",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "large",
+    "fractal"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 9,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 9,
+    "footprint_source": "designed"
+   },
+   "measurements": {
+    "aabb_size": [
+     7.0,
+     2.22,
+     7.0
+    ],
+    "aabb_center": [
+     0.0,
+     1.01,
+     0.0
+    ],
+    "grid_cells": [
+     7,
+     7
+    ],
+    "max_dimension_m": 7.0,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    7,
+    1,
+    7
+   ]
+  },
+  "fractal_facade_toy": {
+   "lookup_name": "fractal_facade_toy",
+   "scene": "res://commons/artifacts/fractal_facade_toy/fractal_facade_toy.tscn",
+   "class_name": "FractalFacadeToy",
+   "name": "Fractal Facade Toy (tracery)",
+   "description": "A held Gothic facade panel: an arch filled with smaller arches filled with smaller still. The whole is in the part.",
+   "category": "fractals",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "small",
+    "fractal"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 2,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 2,
+    "footprint_source": "designed"
+   },
+   "measurements": {
+    "aabb_size": [
+     0.58,
+     0.48,
+     0.07
+    ],
+    "aabb_center": [
+     0.0,
+     0.2,
+     0.0
+    ],
+    "grid_cells": [
+     1,
+     1
+    ],
+    "max_dimension_m": 0.58,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    1,
+    1,
+    1
+   ]
+  },
+  "fractal_arch_bench": {
+   "dna": {
+    "axes": {
+     "ladder": [
+      "figure",
+      "series",
+      "seed",
+      "relief",
+      "section"
+     ]
+    }
+   },
+   "lookup_name": "fractal_arch_bench",
+   "scene": "res://commons/artifacts/fractal_arch_bench/fractal_arch_bench.tscn",
+   "class_name": "FractalArchBench",
+   "name": "Fractal Arch Bench (span the most)",
+   "description": "A recursive arch built of smaller arches - self-similar structure spans the most with the least.",
+   "category": "fractals",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "medium",
+    "fractal"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   },
+   "measurements": {
+    "aabb_size": [
+     1.1,
+     1.6,
+     0.7
+    ],
+    "aabb_center": [
+     0.0,
+     0.8,
+     0.0
+    ],
+    "grid_cells": [
+     2,
+     1
+    ],
+    "max_dimension_m": 1.6,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    2,
+    1,
+    1
+   ]
+  },
+  "fractal_skyline_room": {
+   "lookup_name": "fractal_skyline_room",
+   "scene": "res://commons/artifacts/fractal_skyline_room/fractal_skyline_room.tscn",
+   "class_name": "FractalSkylineRoom",
+   "name": "Fractal Skyline Room (self-similar structure)",
+   "description": "A room-scale fractal skyline of recursive branching towers and spires - the Eiffel structure at city scale.",
+   "category": "fractals",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "large",
+    "fractal"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 9,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 9,
+    "footprint_source": "designed"
+   },
+   "measurements": {
+    "aabb_size": [
+     8.83,
+     7.89,
+     7.79
+    ],
+    "aabb_center": [
+     -0.13,
+     3.85,
+     0.33
+    ],
+    "grid_cells": [
+     9,
+     8
+    ],
+    "max_dimension_m": 8.83,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    9,
+    1,
+    8
+   ]
+  },
+  "recursion_bench": {
+   "lookup_name": "recursion_bench",
+   "scene": "res://commons/artifacts/recursion_bench/recursion_bench.tscn",
+   "class_name": "RecursionBench",
+   "name": "Recursion Bench (contains itself)",
+   "description": "A bench of recursion: rings within rings within rings, the call happening before each is drawn. A rule that contains itself.",
+   "category": "fractals",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "medium",
+    "recursion"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   },
+   "measurements": {
+    "aabb_size": [
+     1.1,
+     1.38,
+     0.7
+    ],
+    "aabb_center": [
+     0.0,
+     0.69,
+     0.0
+    ],
+    "grid_cells": [
+     2,
+     1
+    ],
+    "max_dimension_m": 1.38,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    2,
+    1,
+    1
+   ]
+  },
+  "recursive_tree_bench": {
+   "lookup_name": "recursive_tree_bench",
+   "scene": "res://commons/artifacts/recursive_tree_bench/recursive_tree_bench.tscn",
+   "class_name": "RecursiveTreeBench",
+   "name": "Recursive Tree Bench (two smaller trees)",
+   "description": "A bench recursive tree: split, rotate, recurse - a trunk that is two smaller trees, forever, down to the base case.",
+   "category": "fractals",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "medium",
+    "recursive"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   },
+   "measurements": {
+    "aabb_size": [
+     1.1,
+     1.78,
+     0.79
+    ],
+    "aabb_center": [
+     0.0,
+     0.89,
+     0.0
+    ],
+    "grid_cells": [
+     2,
+     1
+    ],
+    "max_dimension_m": 1.78,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    2,
+    1,
+    1
+   ]
+  },
+  "recursion_animator": {
+   "lookup_name": "recursion_animator",
+   "scene": "res://commons/artifacts/recursion_animator/recursion_animator.tscn",
+   "class_name": "RecursionAnimator",
+   "name": "Recursion Animator (watch the depth)",
+   "description": "A device that grows the tree one recursion level deeper each tick, with a depth readout - recursion made watchable.",
+   "category": "fractals",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "applied",
+    "recursive"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   },
+   "measurements": {
+    "aabb_size": [
+     0.5,
+     0.37,
+     0.42
+    ],
+    "aabb_center": [
+     0.0,
+     0.18,
+     0.01
+    ],
+    "grid_cells": [
+     1,
+     1
+    ],
+    "max_dimension_m": 0.5,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    1,
+    1,
+    1
+   ]
+  },
+  "dimension_bench": {
+   "lookup_name": "dimension_bench",
+   "scene": "res://commons/artifacts/dimension_bench/dimension_bench.tscn",
+   "class_name": "DimensionBench",
+   "name": "Dimension Bench (box-counting)",
+   "description": "A fractal under a covering grid: count the filled boxes at a scale and read D = log N / log S. The coastline between 1D and 2D.",
+   "category": "fractals",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "medium",
+    "fractal"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 2,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   },
+   "measurements": {
+    "aabb_size": [
+     1.1,
+     1.53,
+     0.7
+    ],
+    "aabb_center": [
+     0.0,
+     0.76,
+     0.0
+    ],
+    "grid_cells": [
+     2.0,
+     1.0
+    ],
+    "max_dimension_m": 1.53,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    2.0,
+    1,
+    1.0
+   ]
+  },
+  "dimension_room": {
+   "lookup_name": "dimension_room",
+   "scene": "res://commons/artifacts/dimension_room/dimension_room.tscn",
+   "class_name": "DimensionRoom",
+   "name": "Dimension Room (between 1D and 2D)",
+   "description": "A room measuring a coastline by box grids at finer and finer scales - the dimension that refuses to be an integer.",
+   "category": "fractals",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "large",
+    "fractal"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 9,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 9,
+    "footprint_source": "designed"
+   },
+   "measurements": {
+    "aabb_size": [
+     7.0,
+     0.19,
+     15.69
+    ],
+    "aabb_center": [
+     0.0,
+     0.0,
+     4.34
+    ],
+    "grid_cells": [
+     7.0,
+     16.0
+    ],
+    "max_dimension_m": 15.69,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    7.0,
+    1,
+    16.0
+   ]
+  },
+  "dimension_meter": {
+   "lookup_name": "dimension_meter",
+   "scene": "res://commons/artifacts/dimension_meter/dimension_meter.tscn",
+   "class_name": "DimensionMeter",
+   "name": "Dimension Meter (scan a shape)",
+   "description": "A scanner device that measures a shape's fractal dimension - point it at a fractal, read the D.",
+   "category": "fractals",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "applied",
+    "fractal"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   },
+   "measurements": {
+    "aabb_size": [
+     0.9,
+     0.62,
+     0.6
+    ],
+    "aabb_center": [
+     0.0,
+     0.31,
+     0.0
+    ],
+    "grid_cells": [
+     1.0,
+     1.0
+    ],
+    "max_dimension_m": 0.9,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    1.0,
+    1,
+    1.0
+   ]
+  },
+  "cantor_bench": {
+   "lookup_name": "cantor_bench",
+   "scene": "res://commons/artifacts/cantor_bench/cantor_bench.tscn",
+   "class_name": "CantorBench",
+   "name": "Cantor Bench (remove the middle third)",
+   "description": "The Cantor set on a bench: remove the middle third, recurse, generations stacked - a dust of zero length, uncountably many points.",
+   "category": "fractals",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "medium",
+    "cantor"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   },
+   "measurements": {
+    "aabb_size": [
+     1.1,
+     1.47,
+     0.7
+    ],
+    "aabb_center": [
+     0.0,
+     0.74,
+     0.0
+    ],
+    "grid_cells": [
+     2.0,
+     1.0
+    ],
+    "max_dimension_m": 1.47,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    2.0,
+    1,
+    1.0
+   ]
+  },
+  "koch_snowflake_press": {
+   "lookup_name": "koch_snowflake_press",
+   "scene": "res://commons/artifacts/koch_snowflake_press/koch_snowflake_press.tscn",
+   "class_name": "KochSnowflakePress",
+   "name": "Koch Snowflake Press (infinite perimeter)",
+   "description": "A press stamping out Koch snowflakes - infinite perimeter around a finite area, made on demand.",
+   "category": "fractals",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "applied",
+    "koch"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   },
+   "measurements": {
+    "aabb_size": [
+     0.9,
+     1.06,
+     0.85
+    ],
+    "aabb_center": [
+     0.0,
+     0.53,
+     0.13
+    ],
+    "grid_cells": [
+     1,
+     1
+    ],
+    "max_dimension_m": 1.06,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    1,
+    1,
+    1
+   ]
+  },
+  "sierpinski_bench": {
+   "dna": {
+    "axes": {
+     "ladder": [
+      "figure",
+      "series",
+      "seed",
+      "relief",
+      "section"
+     ]
+    }
+   },
+   "lookup_name": "sierpinski_bench",
+   "scene": "res://commons/artifacts/sierpinski_bench/sierpinski_bench.tscn",
+   "class_name": "SierpinskiBench",
+   "name": "Sierpinski Bench (the same hole)",
+   "description": "The Sierpinski triangle recursed on a bench - D ~ 1.585, the same hole at every scale, exactly what Rule 90 draws.",
+   "category": "fractals",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "medium",
+    "sierpinski"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   },
+   "measurements": {
+    "aabb_size": [
+     1.1,
+     1.57,
+     0.7
+    ],
+    "aabb_center": [
+     0.0,
+     0.78,
+     0.0
+    ],
+    "grid_cells": [
+     2,
+     1
+    ],
+    "max_dimension_m": 1.57,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    2,
+    1,
+    1
+   ]
+  },
+  "sierpinski_stamp": {
+   "lookup_name": "sierpinski_stamp",
+   "scene": "res://commons/artifacts/sierpinski_stamp/sierpinski_stamp.tscn",
+   "class_name": "SierpinskiStamp",
+   "name": "Sierpinski Stamp (triangle of triangles)",
+   "description": "A stamp device tiling Sierpinski gaskets onto a surface - the triangle of triangles of triangles, as a pattern tool.",
+   "category": "fractals",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "applied",
+    "sierpinski"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   },
+   "measurements": {
+    "aabb_size": [
+     0.9,
+     0.9,
+     0.61
+    ],
+    "aabb_center": [
+     0.0,
+     0.45,
+     0.0
+    ],
+    "grid_cells": [
+     1,
+     1
+    ],
+    "max_dimension_m": 0.9,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    1,
+    1,
+    1
+   ]
+  },
+  "menger_toy": {
+   "lookup_name": "menger_toy",
+   "scene": "res://commons/artifacts/menger_toy/menger_toy.tscn",
+   "class_name": "MengerToy",
+   "name": "Menger Toy (held sponge)",
+   "description": "A held Menger sponge: a cube with its middles removed, recursively. Infinite surface around vanishing volume.",
+   "category": "fractals",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "small",
+    "menger"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 2,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 2,
+    "footprint_source": "designed"
+   },
+   "qfep_connection": "Depth-3 in the hand: each pass discards seven of twenty-seven cells and recurses on the remainder, so you hold a cube that is mostly its own absence. Infinite surface closing over vanishing volume, at pocket scale.",
+   "measurements": {
+    "aabb_size": [
+     0.53,
+     0.42,
+     0.54
+    ],
+    "aabb_center": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grid_cells": [
+     1,
+     1
+    ],
+    "max_dimension_m": 0.54,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    1,
+    1,
+    1
+   ]
+  },
+  "menger_bench": {
+   "lookup_name": "menger_bench",
+   "scene": "res://commons/artifacts/menger_bench/menger_bench.tscn",
+   "class_name": "MengerBench",
+   "name": "Menger Bench (zero volume)",
+   "description": "The Menger sponge forming through its iterations on a bench - D ~ 2.73, infinite surface, zero volume.",
+   "category": "fractals",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "medium",
+    "menger"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   },
+   "qfep_connection": "The carving shown as a sequence: iterations 0 through 3 sit in a row, volume draining toward zero while surface area climbs without bound. The rule never changes between steps, only its patience.",
+   "measurements": {
+    "aabb_size": [
+     1.57,
+     1.37,
+     0.45
+    ],
+    "aabb_center": [
+     0.0,
+     0.68,
+     0.0
+    ],
+    "grid_cells": [
+     2,
+     1
+    ],
+    "max_dimension_m": 1.57,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    2,
+    1,
+    1
+   ]
+  },
+  "menger_filter": {
+   "lookup_name": "menger_filter",
+   "scene": "res://commons/artifacts/menger_filter/menger_filter.tscn",
+   "class_name": "MengerFilter",
+   "name": "Menger Filter (all surface)",
+   "description": "A Menger sponge as a 3D filter/scaffold in a housing - the useful side of all-surface, zero-volume.",
+   "category": "fractals",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "applied",
+    "menger"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   },
+   "qfep_connection": "Depth by depth the carving trades body for passage until the solid is mostly openings — then a duct housing clamps it and a shaft of fluid pours through, renaming the loss a function. The pathology fractals are famous for, area unbounded and volume gone, is exactly what a filter orders.",
+   "measurements": {
+    "aabb_size": [
+     0.92,
+     0.72,
+     1.64
+    ],
+    "aabb_center": [
+     0.0,
+     0.36,
+     0.0
+    ],
+    "grid_cells": [
+     1,
+     2
+    ],
+    "max_dimension_m": 1.64,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    1,
+    1,
+    2
+   ]
+  },
+  "mandelbrot_bench": {
+   "dna": {
+    "axes": {
+     "ladder": [
+      "figure",
+      "series",
+      "seed",
+      "relief",
+      "section"
+     ]
+    }
+   },
+   "lookup_name": "mandelbrot_bench",
+   "scene": "res://commons/artifacts/mandelbrot_bench/mandelbrot_bench.tscn",
+   "class_name": "MandelbrotBench",
+   "name": "Mandelbrot Bench (z -> z^2 + c)",
+   "description": "The Mandelbrot set on a bench: z -> z^2 + c asked of every point, the master fractal's infinitely intricate boundary.",
+   "category": "fractals",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "medium",
+    "mandelbrot"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 1,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   },
+   "qfep_connection": "Each cell of the panel answers a single yes/no — does z² + c stay bounded? — and the black interior is every point whose answer never arrives. The infinitely intricate edge sits at furniture height: the catalogue of all Julia fates, parked on a lab bench.",
+   "measurements": {
+    "aabb_size": [
+     1.1,
+     1.63,
+     0.45
+    ],
+    "aabb_center": [
+     0.0,
+     0.81,
+     0.0
+    ],
+    "grid_cells": [
+     2,
+     1
+    ],
+    "max_dimension_m": 1.63,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    2,
+    1,
+    1
+   ]
+  },
+  "julia_bench": {
+   "dna": {
+    "axes": {
+     "ladder": [
+      "figure",
+      "series",
+      "seed",
+      "relief",
+      "section"
+     ]
+    },
+    "framing": 0.55,
+    "framing_why": "DERIVED FROM THE MEASURED AABB, and the fault it fixes was hidden behind a worse one. Body 1.10 x 1.63 x 0.45 m, diagonal 2.0173, radius 1.0086, projecting 1.157 m wide and 1.834 m TALL at yaw 0.62 / pitch -0.26 - a height-dominant subject fitted by its DIAGONAL, so at framing 1.0 the visible frame is 3.83 m and the body fills 30.2% of width and 47.8% of height. verify_batch measured the real subject at 28% x 42% and said so: suspect the framing, not the axis. At 0.55 the camera stands 3.45 m out, the frame is 2.11 m, the body fills 54.9% of width and 87.0% of height, and the scale rises from 198 to 361 px/m - 1.8x more resolution on an escape-time boundary, which is all fine detail. 0.50 reaches 95.7% of height and 0.45 clips at 106%, so 0.55 is the last framing with real margin. THIS WAS ONLY VISIBLE ONCE THE DUPLICATE WAS REMOVED. While the registry declared `figure` twice the sweep compared a frame against itself, the closest pair was a fabricated 0.00%, and no framing advice could be given for an axis that already read as perfectly degenerate. The real closest pair is section vs seed at 0.74%.",
+    "fixture": {
+     "animate_c": false
+    },
+    "still_note": "ONE VALUE OF THIS AXIS MOVES AND THE OTHER FOUR DO NOT, so without the fixture the axis is measured against a moving target. _process animates c - c_re = _base_re + 0.12*sin(t*0.35), c_im = 0.6 + 0.08*cos(t*0.3) (julia_bench.gd:227-228) - and the animation is gated at :221 to run ONLY at ladder = figure. Every other value holds c at the export default. The tell is in the sheet itself: the figure tile's own readout says c = -0.35 +0.67i while the other four all say c = -0.40 +0.60i, which is c after roughly 1.2 s of drift, i.e. after the bench's settle. Two captures of `figure` taken at different moments are different pictures, and every pair involving it is confounded - it differs from the others in the PARAMETER as well as in the presentation. THE CURE WAS ALREADY WRITTEN AND NEVER DECLARED. `@export var animate_c: bool = true` exists at :14 and :223 returns early when it is false. Nothing pointed the bench at it, so the shipped default kept breathing through every capture this artifact has ever had. Declaring dna.fixture animate_c=false pins it; the map default is untouched, and the breathing is the point of the artifact in a room - its own sign reads MOVE c, THE SET BREATHES.",
+    "measured": "MEASURED 2026-08-13, THREE FAULTS DEEP, and each one was hiding the next. (1) The registry declared `figure` TWICE, so the sweep compared a frame against itself and the archived bite report literally carries the row {ladder: figure} vs {ladder: figure} -> 0.0%. The published closest pair was a fabricated 0.00%. Fixed in c00e666f0, and the gate now reports repeated values. (2) With five real frames the closest pair came back 0.74% at section vs seed - and verify_batch immediately said the box was only 28% x 42% of frame: suspect the framing, not the axis. A 1.10 x 1.63 x 0.45 m body is HEIGHT-dominant and was being fitted by its diagonal. framing 0.55 puts it at 54.9% x 87.0% and raises the scale 198 -> 361 px/m. Closest pair 0.74% -> 2.39%, subject 5.1% -> 17.6%. (3) One value of the axis MOVES and the other four do not - see still_note. The cure was already in the code and never declared. dna.fixture animate_c=false pins it, and the sheet proves it took: the figure tile's readout now says c = -0.40 +0.60i like the other four, where it previously said -0.35 +0.67i, i.e. c after the settle. The headline is unchanged at 2.39% because the closest pair is section vs seed, both of which were already pinned - but every pair involving `figure` was confounded before this, differing in the PARAMETER as well as the presentation. 0.00% -> 0.74% -> 2.39%: none of those three numbers was about the axis until the last one."
+   },
+   "lookup_name": "julia_bench",
+   "scene": "res://commons/artifacts/julia_bench/julia_bench.tscn",
+   "class_name": "JuliaBench",
+   "name": "Julia Bench (move c, it breathes)",
+   "description": "A Julia set on a bench: one c, a whole set; move c and it breathes between connected and dust.",
+   "category": "fractals",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "medium",
+    "julia"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   },
+   "qfep_connection": "One complex number holds the whole figure hostage: the bench drifts c by a hair and thousands of multimesh cells reorganise between connected body and scattered dust. Identity as sensitivity — who z becomes depends on a parameter it never chose.",
+   "measurements": {
+    "aabb_size": [
+     1.1,
+     1.63,
+     0.45
+    ],
+    "aabb_center": [
+     0.0,
+     0.81,
+     0.0
+    ],
+    "grid_cells": [
+     2,
+     1
+    ],
+    "max_dimension_m": 1.63,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    2,
+    1,
+    1
+   ]
+  },
+  "lyapunov_bench": {
+   "lookup_name": "lyapunov_bench",
+   "scene": "res://commons/artifacts/lyapunov_bench/lyapunov_bench.tscn",
+   "class_name": "LyapunovBench",
+   "name": "Lyapunov Bench (stability landscape)",
+   "description": "A Lyapunov fractal: colour by how fast nearby paths diverge, and stability itself becomes a fractal landscape.",
+   "category": "fractals",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "medium",
+    "lyapunov"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   },
+   "measurements": {
+    "aabb_size": [
+     1.1,
+     1.63,
+     0.45
+    ],
+    "aabb_center": [
+     0.0,
+     0.81,
+     0.0
+    ],
+    "grid_cells": [
+     2,
+     1
+    ],
+    "max_dimension_m": 1.63,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    2,
+    1,
+    1
+   ]
+  },
+  "escape_time_room": {
+   "lookup_name": "escape_time_room",
+   "scene": "res://commons/artifacts/escape_time_room/escape_time_room.tscn",
+   "class_name": "EscapeTimeRoom",
+   "name": "Escape-Time Room (edge of chaos)",
+   "description": "A room of escape-time fractals - Mandelbrot, Julia, Newton on the walls - the edge between staying and escaping.",
+   "category": "fractals",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "large",
+    "lyapunov"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 9,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 9,
+    "footprint_source": "designed"
+   },
+   "measurements": {
+    "aabb_size": [
+     7.1,
+     5.95,
+     7.05
+    ],
+    "aabb_center": [
+     0.0,
+     1.65,
+     -0.02
+    ],
+    "grid_cells": [
+     8,
+     8
+    ],
+    "max_dimension_m": 7.1,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    8,
+    1,
+    8
+   ]
+  },
+  "newton_fractal_tool": {
+   "lookup_name": "newton_fractal_tool",
+   "scene": "res://commons/artifacts/newton_fractal_tool/newton_fractal_tool.tscn",
+   "class_name": "NewtonFractalTool",
+   "name": "Newton Fractal Tool (root basins)",
+   "description": "A Newton's-method fractal device: z^3-1 basins coloured by which root they fall to - root-finding made visible.",
+   "category": "fractals",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "applied",
+    "lyapunov"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   },
+   "qfep_connection": "Every cell runs the same deterministic descent and lands in one of three certainties, yet the map of which certainty is fractal at the seams — prediction fails precisely where the answers meet. Determinism keeps its promise pointwise and breaks it as a border.",
+   "measurements": {
+    "aabb_size": [
+     1.0,
+     0.95,
+     0.63
+    ],
+    "aabb_center": [
+     0.0,
+     0.48,
+     0.01
+    ],
+    "grid_cells": [
+     1,
+     1
+    ],
+    "max_dimension_m": 1.0,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    1,
+    1,
+    1
+   ]
+  },
+  "ifs_bench": {
+   "lookup_name": "ifs_bench",
+   "scene": "res://commons/artifacts/ifs_bench/ifs_bench.tscn",
+   "class_name": "IfsBench",
+   "name": "IFS Bench (four maps, a fern)",
+   "description": "The chaos game on a bench: four affine maps, a point thrown thousands of times, and a Barnsley fern with no fern ever drawn.",
+   "category": "fractals",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "medium",
+    "iterated"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   },
+   "measurements": {
+    "aabb_size": [
+     1.1,
+     1.7,
+     0.7
+    ],
+    "aabb_center": [
+     0.0,
+     0.85,
+     0.0
+    ],
+    "grid_cells": [
+     2,
+     1
+    ],
+    "max_dimension_m": 1.7,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    2,
+    1,
+    1
+   ]
+  },
+  "ifs_room": {
+   "lookup_name": "ifs_room",
+   "scene": "res://commons/artifacts/ifs_room/ifs_room.tscn",
+   "class_name": "IfsRoom",
+   "name": "IFS Room (a point, folded)",
+   "description": "A room of IFS attractors - fern, Sierpinski, tree - each a point folded by affine maps, forever.",
+   "category": "fractals",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "large",
+    "iterated"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 9,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 9,
+    "footprint_source": "designed"
+   },
+   "measurements": {
+    "aabb_size": [
+     7.0,
+     4.65,
+     7.0
+    ],
+    "aabb_center": [
+     0.0,
+     2.23,
+     0.0
+    ],
+    "grid_cells": [
+     7,
+     7
+    ],
+    "max_dimension_m": 7.0,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    7,
+    1,
+    7
+   ]
+  },
+  "chaos_game_tool": {
+   "lookup_name": "chaos_game_tool",
+   "scene": "res://commons/artifacts/chaos_game_tool/chaos_game_tool.tscn",
+   "class_name": "ChaosGameTool",
+   "name": "Chaos Game Tool (throw, fold, repeat)",
+   "description": "A chaos-game device: a die picks a map, a point bounces, and the attractor accumulates out of pure repetition.",
+   "category": "fractals",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "applied",
+    "iterated"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   },
+   "qfep_connection": "Whatever the spinner shows, the bright point only ever halves its distance to a vertex — and the same Sierpinski gauze condenses out of every reset. The dice choose the itinerary, never the destination: E_flux runs errands for an F_order already written into the three maps.",
+   "measurements": {
+    "aabb_size": [
+     1.02,
+     1.53,
+     0.72
+    ],
+    "aabb_center": [
+     -0.01,
+     0.76,
+     0.01
+    ],
+    "grid_cells": [
+     2.0,
+     1.0
+    ],
+    "max_dimension_m": 1.53,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    2.0,
+    1,
+    1.0
+   ]
+  },
+  "golden_spiral_bench": {
+   "lookup_name": "golden_spiral_bench",
+   "scene": "res://commons/artifacts/golden_spiral_bench/golden_spiral_bench.tscn",
+   "class_name": "GoldenSpiralBench",
+   "name": "Golden Spiral Bench (137.5 degrees)",
+   "description": "Sunflower seeds packed at the 137.5 degree golden angle - how a plant packs the most seeds, the fractal that grows.",
+   "category": "fractals",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "medium",
+    "golden"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   },
+   "measurements": {
+    "aabb_size": [
+     1.1,
+     0.98,
+     0.79
+    ],
+    "aabb_center": [
+     0.0,
+     0.49,
+     0.0
+    ],
+    "grid_cells": [
+     2,
+     1
+    ],
+    "max_dimension_m": 1.1,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    2,
+    1,
+    1
+   ]
+  },
+  "dla_bench": {
+   "lookup_name": "dla_bench",
+   "scene": "res://commons/artifacts/dla_bench/dla_bench.tscn",
+   "class_name": "DlaBench",
+   "name": "DLA Bench (stick where you land)",
+   "description": "Diffusion-limited aggregation: random walkers stick where they land and grow a coral, a frost - fractal branching from pure chance.",
+   "category": "fractals",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "medium",
+    "diffusion-limited"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   },
+   "measurements": {
+    "aabb_size": [
+     1.1,
+     0.98,
+     0.7
+    ],
+    "aabb_center": [
+     0.0,
+     0.49,
+     0.0
+    ],
+    "grid_cells": [
+     2,
+     1
+    ],
+    "max_dimension_m": 1.1,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    2,
+    1,
+    1
+   ]
+  },
+  "dla_grower": {
+   "lookup_name": "dla_grower",
+   "scene": "res://commons/artifacts/dla_grower/dla_grower.tscn",
+   "class_name": "DlaGrower",
+   "name": "DLA Frost Generator",
+   "description": "A frost/lightning generator: walkers accrete a branching crystal over time - DLA as a growth device.",
+   "category": "fractals",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "applied",
+    "diffusion-limited"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   },
+   "qfep_connection": "Each walker wanders until it touches the crystal, freezes, and is never consulted again — and the tips screen the interior, so the fern's gaps are held open by the same rule that grows its edges. Frost as a record of arrivals wearing the costume of design.",
+   "measurements": {
+    "aabb_size": [
+     1.0,
+     1.05,
+     0.81
+    ],
+    "aabb_center": [
+     0.0,
+     0.53,
+     0.0
+    ],
+    "grid_cells": [
+     1,
+     1
+    ],
+    "max_dimension_m": 1.05,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    1,
+    1,
+    1
+   ]
+  },
+  "attractor_bench": {
+   "lookup_name": "attractor_bench",
+   "scene": "res://commons/artifacts/attractor_bench/attractor_bench.tscn",
+   "class_name": "AttractorBench",
+   "name": "Attractor Bench (chaos with a shape)",
+   "description": "A Lorenz attractor on a bench: a deterministic path that never repeats and never escapes - chaos given a fractal shape.",
+   "category": "fractals",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "medium",
+    "strange"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 9,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   },
+   "measurements": {
+    "aabb_size": [
+     2.27,
+     2.78,
+     2.82
+    ],
+    "aabb_center": [
+     0.19,
+     1.39,
+     0.05
+    ],
+    "grid_cells": [
+     3.0,
+     3.0
+    ],
+    "max_dimension_m": 2.82,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    3.0,
+    1,
+    3.0
+   ]
+  },
+  "attractor_room": {
+   "lookup_name": "attractor_room",
+   "scene": "res://commons/artifacts/attractor_room/attractor_room.tscn",
+   "class_name": "AttractorRoom",
+   "name": "Attractor Room (never repeats)",
+   "description": "A room-scale Lorenz butterfly you walk around - the strange attractor that never repeats and never escapes.",
+   "category": "fractals",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "large",
+    "strange"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 9,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 9,
+    "footprint_source": "designed"
+   },
+   "measurements": {
+    "aabb_size": [
+     7.0,
+     3.94,
+     7.0
+    ],
+    "aabb_center": [
+     0.0,
+     1.87,
+     0.0
+    ],
+    "grid_cells": [
+     7.0,
+     7.0
+    ],
+    "max_dimension_m": 7.0,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    7.0,
+    1,
+    7.0
+   ]
+  },
+  "attractor_plotter": {
+   "lookup_name": "attractor_plotter",
+   "scene": "res://commons/artifacts/attractor_plotter/attractor_plotter.tscn",
+   "class_name": "AttractorPlotter",
+   "name": "Lorenz Plotter",
+   "description": "A plotter tracing the Lorenz path with the equations beside it - the butterfly drawn by its own dynamics.",
+   "category": "fractals",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "applied",
+    "strange"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   },
+   "measurements": {
+    "aabb_size": [
+     0.9,
+     0.95,
+     0.72
+    ],
+    "aabb_center": [
+     0.0,
+     0.47,
+     -0.01
+    ],
+    "grid_cells": [
+     1.0,
+     1.0
+    ],
+    "max_dimension_m": 0.95,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    1.0,
+    1,
+    1.0
+   ]
+  },
+  "terrain_toy": {
+   "lookup_name": "terrain_toy",
+   "scene": "res://commons/artifacts/terrain_toy/terrain_toy.tscn",
+   "class_name": "TerrainToy",
+   "name": "Terrain Toy (held mountain)",
+   "description": "A held fractal terrain tile: noise stacked at every scale (fBm) becomes a little mountain in the hand.",
+   "category": "fractals",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "small",
+    "fractal"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 2,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 2,
+    "footprint_source": "designed"
+   },
+   "measurements": {
+    "aabb_size": [
+     0.42,
+     0.12,
+     0.42
+    ],
+    "aabb_center": [
+     0.0,
+     0.06,
+     0.0
+    ],
+    "grid_cells": [
+     1,
+     1
+    ],
+    "max_dimension_m": 0.42,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    1,
+    1,
+    1
+   ]
+  },
+  "terrain_bench": {
+   "lookup_name": "terrain_bench",
+   "scene": "res://commons/artifacts/terrain_bench/terrain_bench.tscn",
+   "class_name": "TerrainBench",
+   "name": "Terrain Bench (noise at every scale)",
+   "description": "A fractal landscape on a bench: stack noise octave on octave and randomness becomes a mountain, a coastline.",
+   "category": "fractals",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "medium",
+    "fractal"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 9,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   },
+   "measurements": {
+    "aabb_size": [
+     1.14,
+     1.15,
+     0.81
+    ],
+    "aabb_center": [
+     0.01,
+     0.58,
+     0.0
+    ],
+    "grid_cells": [
+     2,
+     1
+    ],
+    "max_dimension_m": 1.15,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    2,
+    1,
+    1
+   ]
+  },
+  "terrain_forge": {
+   "lookup_name": "terrain_forge",
+   "scene": "res://commons/artifacts/terrain_forge/terrain_forge.tscn",
+   "class_name": "TerrainForge",
+   "name": "Terrain Forge (stamp a landscape)",
+   "description": "A terrain forge that stamps a fresh fBm landscape patch on demand - the fractal as a level-generation tool.",
+   "category": "fractals",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "applied",
+    "fractal"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   },
+   "measurements": {
+    "aabb_size": [
+     1.0,
+     1.2,
+     0.9
+    ],
+    "aabb_center": [
+     0.0,
+     0.6,
+     0.0
+    ],
+    "grid_cells": [
+     1,
+     1
+    ],
+    "max_dimension_m": 1.2,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    1,
+    1,
+    1
+   ]
+  },
+  "space_filling_bench": {
+   "lookup_name": "space_filling_bench",
+   "scene": "res://commons/artifacts/space_filling_bench/space_filling_bench.tscn",
+   "class_name": "SpaceFillingBench",
+   "name": "Space-Filling Bench (a line fills a square)",
+   "description": "A Hilbert curve filling a square on a bench - one dimension reaching, by recursion, to fill two.",
+   "category": "fractals",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "medium",
+    "space-filling"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   },
+   "measurements": {
+    "aabb_size": [
+     1.12,
+     0.9,
+     0.72
+    ],
+    "aabb_center": [
+     0.0,
+     0.45,
+     0.0
+    ],
+    "grid_cells": [
+     2,
+     1
+    ],
+    "max_dimension_m": 1.12,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    2,
+    1,
+    1
+   ]
+  },
+  "space_filling_room": {
+   "lookup_name": "space_filling_room",
+   "scene": "res://commons/artifacts/space_filling_room/space_filling_room.tscn",
+   "class_name": "SpaceFillingRoom",
+   "name": "Space-Filling Room (every point, one line)",
+   "description": "A room-scale 3D Hilbert curve you walk around - a single line that visits every point of a volume.",
+   "category": "fractals",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "tags": [
+    "fractal",
+    "large",
+    "space-filling"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "fractals",
+    "recursion",
+    "applications"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 9,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 9,
+    "footprint_source": "designed"
+   },
+   "measurements": {
+    "aabb_size": [
+     7.0,
+     4.15,
+     7.0
+    ],
+    "aabb_center": [
+     0.0,
+     1.33,
+     0.0
+    ],
+    "grid_cells": [
+     7,
+     7
+    ],
+    "max_dimension_m": 7.0,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    7,
+    1,
+    7
+   ]
+  },
+  "depth_cap": {
+   "category": "fractals",
+   "complexity": "intermediate",
+   "description": "The fractals seam. A Koch curve is infinitely deep; the machine renders to iteration N and stops. Magnify one smallest segment and the endless detail is gone — a straight line. Infinity faked to a budget.",
+   "dev_themes": [
+    "digital_bias",
+    "seam"
+   ],
+   "include_in_map_data": true,
+   "interaction": "ambient",
+   "lookup_name": "depth_cap",
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "name": "Depth Cap",
+   "qfep_connection": "A station in the bias landscape (doc/SEAM_PER_SEQUENCE.md); the digital-bias seam for fractals. Bias is conserved; show the seam.",
+   "scene": "res://algorithms/fractals/depth_cap/depth_cap.tscn",
+   "sequence": "fractals",
+   "tags": [
+    "fractals",
+    "koch",
+    "depth",
+    "recursion",
+    "infinity",
+    "seam",
+    "digital_bias"
+   ],
+   "measurements": {
+    "aabb_size": [
+     0.95,
+     0.76,
+     0.03
+    ],
+    "aabb_center": [
+     0.0,
+     -0.02,
+     0.01
+    ],
+    "grid_cells": [
+     1.0,
+     1.0
+    ],
+    "max_dimension_m": 0.95,
+    "measured_at": "2026-08-12T04:39:51.280397Z"
+   },
+   "footprint_measured": [
+    1.0,
+    1,
+    1.0
+   ]
+  },
+  "the_recursion_cabinet": {
+   "name": "The Recursion Cabinet",
+   "class_name": "TheRecursionCabinet",
+   "scene": "res://commons/artifacts/the_recursion_cabinet/the_recursion_cabinet.tscn",
+   "description": "The fractals SUPER OBJECT: a curiosity cabinet built by a function that calls itself - every shelf holds a smaller copy until the base case draws a SOLID block and returns. In the drawers: Cantor's missing thirds, Koch's endless edge, Sierpinski by chaos game, a level-2 Menger sponge, phi's spiral, a Barnsley fern, and escape-time Mandelbrot. Each genuinely recursed. 2026-08-27.",
+   "category": "fractals",
+   "tags": [
+    "fractals",
+    "super",
+    "synthesis",
+    "recursion",
+    "base_case",
+    "surreal"
+   ],
+   "spatial_needs": {
+    "footprint_cells": 4,
+    "clearance_m": 0.6
+   }
+  }
+ }
 }

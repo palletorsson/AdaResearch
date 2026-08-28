@@ -1,5 +1,34 @@
 {
 	"artifacts": {
+		"the_frame_you_were_given": {
+			"dna": {
+			 "axes": {
+			 "cut": [
+			 "sixteen",
+			 "one",
+			 "four",
+			 "sixty_four",
+			 "two_five_six"
+			 ]
+			 }
+			},
+			"name": "The Frame You Were Given",
+			"class_name": "TheFrameYouWereGiven",
+			"scene": "res://commons/artifacts/the_frame_you_were_given/the_frame_you_were_given.tscn",
+			"description": "One curve and the left-endpoint Riemann sum beneath it at five grains - 1, 4, 16, 64, 256 slices - each frame printing the area it reports and the percent it is off. `_process(delta)` IS this sum, so the staircase is not an illustration of the engine, it is the engine drawn. The true area is computed at 20,000 samples and etched on the sill, so every frame reads against the same number. The last frame looks smooth and is still wrong. Export values are WORDS, not numerals, because a numeric-looking String export gets coerced to int and then refused in silence by Object.set(). 2026-08-27.",
+			"category": "change",
+			"tags": [
+			 "change",
+			 "riemann",
+			 "integral",
+			 "discretisation",
+			 "dna"
+			],
+			"spatial_needs": {
+			 "footprint_cells": 4,
+			 "clearance_m": 0.8
+			}
+		},
 		"catalyst_sustain_demo": {
 			"name": "Catalyst Sustain Demo",
 			"lookup_name": "catalyst_sustain_demo",
