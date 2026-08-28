@@ -10223,6 +10223,32 @@
 			},
 			"qfep_connection": "A cube stripped to four walls with corners mitred at 45° like picture framing, then rotated so the missing faces point sideways: enclosure along one axis, invitation along the other. A frame doesn't contain — it nominates a direction as the view."
 		},
+		"glass_wall": {
+			"lookup_name": "glass_wall",
+			"name": "Glass Wall",
+			"scene": "res://commons/artifacts/glass_wall/glass_wall.tscn",
+			"category": "structure",
+			"description": "A cell-filling transparent pane with a lit edge and a collider — you see through it and cannot pass. Built for the endless museum's enter room, where Folding Past stands and the visitor is dropped past it: a boundary that stays visible is a past rather than a locked door. Keys: height, width, thickness, alpha, tint, edge, edge_color, solid.",
+			"complexity": "simple",
+			"size_group": "medium",
+			"footprint": [1, 1, 3],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["primitives"],
+			"tags": ["glass", "barrier", "transparent", "museum", "boundary"],
+			"parameters": {
+				"height": "pane height in metres (default 2.8)",
+				"width": "pane width in metres (default 1.0, one cell)",
+				"thickness": "pane thickness in metres (default 0.06)",
+				"alpha": "0..1 — the whole character: 0.06 reads as a force field, 0.35 as architecture",
+				"tint": "pane colour by name or hex",
+				"edge": "edge emission energy, 0 = no lit edge",
+				"edge_color": "the lit edge's colour",
+				"solid": "false makes it an image the visitor walks straight through"
+			},
+			"qfep_connection": "A boundary you can see through is not the boundary you cannot. The museum's enter room is only PAST because it stays visible — sealed with a wall it would merely be gone.",
+			"dev_themes": ["boundary", "transparency", "time"]
+		},
 		"hole_with_cones": {
 			"dna": {
 				"promoted": "2026-08-03",
