@@ -12,6 +12,7 @@ the comparison is the only thing the rule actually claims: the crossing begins
 with this hall's floor line and ends with the next hall's.
 """
 import json, pathlib, sys
+from collections import deque
 R = pathlib.Path(r'C:\Users\palle\Documents\GitHub\AdaResearch_46')
 walk = json.loads((R / 'ada_run/em_layout_walk.json').read_text())['halls']
 
@@ -57,6 +58,36 @@ for key, v in walk.items():
                      walk_floor(tile[-int(p) - 1]), walk_floor(tile[-int(p)]),
                      walk_floor(tile[-1]), tile_floor(nfr, w)))
 
+# AND THE CORRIDOR MUST STILL BE WALKABLE. The seam widens a crossing past the
+# hall it leaves — Palle's service corridor — and a corridor that reads well and
+# seals is the worst of both. Every hall is flooded from its first row; every open
+# cell of its last row must be reachable.
+sealed = []
+for key, v in walk.items():
+    cells = v.get('cells') or []
+    if not cells:
+        continue
+    vest = int(v.get('vestibule', 4)); skin = -int(v.get('cell_x0', -1))
+    porch, court = int(v.get('porch', 0)), int(v.get('court', 0))
+    g = [str(r)[skin:] for r in cells[vest:]]
+    if court or porch:
+        g = g[:len(g) - court - porch]
+    if not g:
+        continue
+    H = len(g)
+    free = lambda z, x: 0 <= z < H and 0 <= x < len(g[z]) and g[z][x] != '#'
+    seen = set((0, x) for x in range(len(g[0])) if free(0, x))
+    q = deque(seen)
+    while q:
+        z, x = q.popleft()
+        for dz, dx in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+            n = (z + dz, x + dx)
+            if n not in seen and free(*n):
+                seen.add(n); q.append(n)
+    ex = [x for x in range(len(g[-1])) if free(H - 1, x)]
+    if ex and any((H - 1, x) not in seen for x in ex):
+        sealed.append(key)
+
 print("crossings carrying a seam: %d" % (ok + bad))
 print("  BOTH ends match the rooms they touch : %d" % ok)
 print("  mismatch                             : %d" % bad)
@@ -67,4 +98,8 @@ for k, p, l, t, hl, sf, sl, nf in rows[:6]:
     print("     seam's first row : %s" % sf)
     print("     seam's last row  : %s" % sl)
     print("     next hall's first: %s" % nf)
-sys.exit(1 if bad else 0)
+print()
+print("halls sealed between their first and last row: %d" % len(sealed))
+for s in sealed[:8]:
+    print("   %s" % s)
+sys.exit(1 if (bad or sealed) else 0)

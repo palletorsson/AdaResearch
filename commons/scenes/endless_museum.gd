@@ -18840,7 +18840,14 @@ func _authored_passages(tile_in: Array, decl: Dictionary = {}, next_first: Array
 	if tile.size() < 4:
 		return tile
 	var w: int = (tile[0] as Array).size()
-	# A CROSSING CANNOT REACH A DOOR IT IS NOT WIDE ENOUGH TO HOLD. Halls are
+	# THE SERVICE CORRIDOR (2026-08-28). Palle, on seeing this: "It is nice that
+	# the hallway kind of is bigger than some maps, like a service corridor that
+	# can lead to other places. This is how it has been now." So a crossing wider
+	# than the room it leaves is WANTED, not tolerated — the museum reads as a
+	# building with back-of-house between its galleries rather than a string of
+	# rooms butted together. Do not "tidy" the padding away.
+	#
+	# It began as a fix. A CROSSING CANNOT REACH A DOOR IT IS NOT WIDE ENOUGH TO HOLD. Halls are
 	# laid from x 0 (`_box(seg, Vector3(x + 0.5, ...))`), so column 8 of an
 	# 11-wide hall is world x 8, and a 7-wide passage simply does not extend
 	# that far — measured on primitives, point trace (7) opens into point line
