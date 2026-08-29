@@ -1,0 +1,116 @@
+{
+ "_note": "One proposed ACTIVATION per spine sequence: the verb a visitor does and the answer the algorithm gives back. These are PROPOSALS, not measurements — tools/activation.py supplies the numbers, this file supplies the intentions, and /activation keeps them visibly apart. Each was checked against whether the parts it is built from exist in the repo; the ones that failed that check were cut.",
+ "_source": "survey 2026-08-29, verified against source; see the blog post of the same date",
+ "proposals": {
+  "primitives": {
+   "verb": "VERB: you draw a line with the hand-held dot and let go. ANSWER: the Mystic Writing Pad lifts its sheet — the surface goes blank — and YOUR line is still there, sunk into the wax as a warm ghost among the earlier ones, dimming by age. The algorithm answers with the thing you could not supply: proof that 'clear' did not delete. Freud's Wunderblock made into a receipt for your own gesture.",
+   "built_from": "",
+   "cost": "small"
+  },
+  "transformation": {
+   "verb": "transform_composition_workbench: one slider, four detents. Each detent is a pair (T1,T2); the bench shows BOTH orderings side by side with a ghost of the base between them, and lights a badge reading 'commutes' or 'non-commutative' by comparing the two centroids.",
+   "built_from": "Palle is right that transformation FEELS activated, and this is why — but the mechanism is not depth, it is that the answer is a COMPUTED CLAIM rather than a redraw. The visitor turns a knob and the room says something TRUE that they can be surprised by (pair 2 commutes; the other three do not). A rung-2 control plus a verdict beats a rung-3 control plus a picture. That is the cheapest upgrade available to every othe",
+   "cost": "small"
+  },
+  "color": {
+   "verb": "VERB: carry the scanner stick and put its beam on the same swatch twice — once on the dark ground, once on the light one, where your eye insists you are looking at two different colours. ANSWER: the readout prints the identical RGB both times, and then the stick draws a bar of that exact colour joining the two hit points, so the two 'different' squares visibly collapse into one continuous field. The sequence's own truth — RGB is a lie we agree on — proved against your eye, by your hand, in one gesture.",
+   "built_from": "",
+   "cost": "medium"
+  },
+  "change": {
+   "verb": "VERB: walk the length of the hall at whatever pace you like, then stop and look at the panel. ANSWER: the Riemann pump partitions YOUR OWN speed record into strips and sums them — and as the partition refines from 4 strips to 32 you watch the estimate converge on the distance your legs actually covered. You supply the rate; it hands back the accumulation, and the convergence is the lesson. Coarse strips lie about you; fine strips agree with your body.",
+   "built_from": "",
+   "cost": "medium"
+  },
+  "forces": {
+   "verb": "VERB: pick up the force bead and walk it through the lattice of arrows in VFM_04_Fields. ANSWER: every arrow in the grid re-aims at your hand as you move, and under the dipole law a NULL POINT — a place where your pull exactly cancels the fixed charge — appears in the air and slides as you walk. You supply one position; the field answers with superposition, which is not a thing you can point at until the algorithm draws it.",
+   "built_from": "",
+   "cost": "small"
+  },
+  "formfinding": {
+   "verb": "VERB: drag the chain's control spheres until you like the curve it hangs in, then pull the lever. ANSWER: the room mirrors your curve about the horizontal and builds it as a standing truss — and it HOLDS when the load comes on, while an arch you shaped freehand with the same handles, never hung, buckles under the same load. Gaudí's hanging model as a gesture: you supply a shape in tension, the algorithm answers with the claim that its mirror is in pure compression, and proves it by not falling down.",
+   "built_from": "",
+   "cost": "medium"
+  },
+  "wavefunctions": {
+   "verb": "VERB: grab the middle pendulum's bob, swing it with your arm, let go. ANSWER: a painting. The double pendulum takes your release velocity as its initial condition and paints a trajectory on the canvas below that neither you nor anyone can predict, and that no second release will repeat. You supply an arm gesture; it answers with sensitivity to initial conditions — the sequence's own closing claim ('watch the double pendulum transition from periodic to chaotic'), performed rather than watched. The code even has the label ready: `_on_bob_picked_up` sets the GrabLabel to 'SWING IT!'.",
+   "built_from": "",
+   "cost": "small"
+  },
+  "randomness": {
+   "verb": "VERB: walk across the hall. Nothing to press. ANSWER: the room measures you. player_trace's seam_grid snaps your path to a lattice, and those lattice steps become a symbol stream; the wall meter histograms them and prints H = -sum p log2 p against the ceiling log2(4). Then it lays a machine random walk of the same step count on the floor beside your green one, in a colour you did not choose. Two paths, two numbers. Your walk comes back at maybe 1.3 bits against the machine's 2.0 — you thought you wandered, and the room shows you the corridor you kept returning to. That is the sequence's declared objectives ('random walk: non-teleological movement' and 'Shannon entropy: H = -sum p log p') collapsed into one act, and it is the only artifact in the sequence whose input the map author cannot pre-choose.",
+   "built_from": "",
+   "cost": "medium"
+  },
+  "noise": {
+   "verb": "VERB: plant stones. The visitor picks up three or four grab spheres and drops them anywhere on the voxel plain. ANSWER: the terrain re-grows so its surface passes exactly through every stone you planted, and the whole landscape between them re-flows to meet them. Then the answer you could not have supplied: the RADIUS. Nudge one stone ten centimetres and a hill two metres wide moves with it — and the white-noise panel standing beside it, given the identical gesture, changes one voxel and nothing else. You gave it neighbours; it showed you how far a neighbour reaches. 'Noise is randomness that remembers its neighbors' stops being a wall text and becomes something the visitor's own hand proves in one move.",
+   "built_from": "",
+   "cost": "medium"
+  },
+  "cellularautomata": {
+   "verb": "VERB: draw the first row with your fingertip. A hand-width strip along the top edge of the board flips cells on and off as you brush it; the automaton just starts running downward from whatever you drew — no button, no confirm. ANSWER: the global pattern. Five scattered cells under Rule 90 collide into interfering Sierpinski triangles; the same five under Rule 110 grow gliders that walk off the edge and come back; under Rule 30 they dissolve into noise. Change one cell of your seed and Rule 30's whole future changes; change one cell under Rule 90 and it barely notices. You supply the initial condition (a datum, not a parameter); the rule answers with an attractor you could not read off your own drawing. That IS the sequence's truth line — 'each cell knows only its neighbors, yet worlds emerge' — and it is currently the one thing the visitor is not allowed to touch.",
+   "built_from": "",
+   "cost": "small"
+  },
+  "fractals": {
+   "verb": "VERB: bend the generator. Koch's rule is a base segment plus a four-point polyline that replaces it; `koch_curve` already DRAWS that polyline on its evidence:axiom panel. Put a grab sphere on each interior vertex. Pull one. ANSWER: every one of the 768 segments at iteration 4 re-substitutes live into YOUR shape — and then the box counter, standing beside it, covers your curve with grids at 2/4/8/16/32/64, plots log(count) against log(1/box), and prints the slope. Push the peak up and D climbs past 1.5; flatten it and D falls toward 1.0. You supply a four-point doodle; the algorithm answers with a fractal dimension — a number between the integers that is a true fact about the thing you just made and that you cannot compute in your head. It is transformation's commutes/non-commutative verdict badge, one dimension up, on the sequence whose own formula is D = log(N)/log(S).",
+   "built_from": "",
+   "cost": "medium"
+  },
+  "lsystems": {
+   "verb": "VERB: pick up letter-cubes — F, +, −, [, ] — and drop them into a rail of snap slots. That string IS the rewrite rule for X. Every cube you seat re-expands the grammar and re-walks the turtle, so the plant on the pedestal regrows live, from your sentence. ANSWER: the plant, which is not in the sentence. Six characters produce a shape nobody could read off the rail. And the room returns a verdict you can be surprised by, the way transform_composition_workbench returns 'commutes / non-commutative': drop a '[' without its ']' and the badge reads UNBALANCED and the turtle walks off and never comes home — a rule with no push/pop is a path, not a tree. Then the tree you grew is handed forward: TraceData.add_trace(turtle_path), and one hall later in LSystems_Living your grammar is standing there as a tree.",
+   "built_from": "Built from grammar_seed.gd, which is 121 lines of finished generator — _expand() at line 35 and _draw_turtle() at line 52 — whose header already says 'THE WHOLE TREE IS A FEW BYTES, RUN' while hard-coding the bytes as a string literal at line 41. Making the rules a variable is not new code: lsystem_editor.gd line 368 already has set_rules(axiom, rules, angle, generations). The rail is grab_sphere_point_snap.tscn (sna",
+   "cost": "medium"
+  },
+  "proceduralgeneration": {
+   "verb": "VERB: take glowing seed-points from a bowl and place them in the air by hand — a handful here, a scatter there, a gap left deliberately empty. ANSWER: the tree grows to REACH them, and hands back the thing you could not place: the branching. Two seeds you set close together do not make two branches, they make one thicker branch that consumes both — because branches compete for attractors and the nearest node wins. Leave a void and the tree will not enter it, ever. You supply a point cloud; the algorithm returns a vascular topology you did not draw. This is Palle's example, literally: plant, the rule runs, the plant is the output.",
+   "built_from": "Built from SpaceColonizationAlgorithm.gd (620 lines) which ALREADY declares this exact gap in its own @identity at line 10: 'needs: attraction point display [has]; cube guide [has]; step/animate toggle [has]; VR attractor placement [missing]'. The rung-3 SINK is written four times over — attraction_points.append(point) at lines 188, 208, 225, 246 across shell/volume/surface/corner distributions — and generate_structu",
+   "cost": "small"
+  },
+  "softbodies": {
+   "verb": "VERB: squeeze, punch, or sit on the jelly. ANSWER: the cube springs back — but a wire ghost freezes at your deepest indentation and STAYS. The room fills up with the shapes of hands that were here. What the algorithm hands back is the strain envelope: the deepest shape you ever made, which never existed as a pose at any single instant and which you could not have held still long enough to see. And the stiffness slider that is already on the plinth finally does something permanent — at low stiffness your ghost is a crater, at high stiffness the same shove leaves a dimple. Same push, two materials, two fossils, side by side.",
+   "built_from": "The artifact diagnosed itself. jelly_cube.gd lines 24-26: 'A soft body RELAXES — five cubes started five different ways settle into the same shape and photograph as one object five times.' That is the whole sequence's problem: its subject erases the visitor's touch. The fix is already named in the same comment block as a declared axis value — assay:control, 'an empty wire cage at the size the cube had before anything",
+   "cost": "small"
+  },
+  "isosurfaces": {
+   "verb": "VERB: pick up a glowing ball and carry it toward another one. ANSWER: the two surfaces never touch — they MERGE. Two spheres approaching become a peanut becomes one blob, and the moment of merge is a topology change you caused but did not command. Then carry a third ball in near one of them and the pair that had merged SPLITS, because you raised the field where the surface was thinnest. The claim the algorithm returns: the surface is not on the balls. It is the level set of a sum, and it lives wherever the sum crosses the isolevel — which is why holding two things close makes one thing.",
+   "built_from": "Both halves already ship inside this sequence. The SINK is implicit_surface_modeling / metaballs.tscn (rung 2), and ISO_Metaballs already places FOUR field-sum artifacts side by side (metaball_world, raymarched_metaballs, nakama_metaballs, metaballs). The SOURCE is eleven lines that already exist one map earlier: MarchingCubesSculptVR.gd lines 585-593, _paint_at_controller() reading controller.global_position through",
+   "cost": "small"
+  },
+  "boolean_surfaces": {
+   "verb": "VERB: the two operands stop being one diorama. The box stays on the bench; the sphere is an object you pick up and carry. Wherever you hold it is the operand's transform, and the combiner re-solves in your hands — push the sphere through the block and A−B opens a tunnel you can then put your head into. Three floor plates read UNION, INTERSECTION, DIFFERENCE; step onto one and the same two solids resolve under a different operator. ANSWER: stand on the difference plate and swap which solid you are holding. The leftover is a different object. A−B is not B−A, and you found that out with your hands, not from a label. That is the sequence's own truth statement — 'Composition is not addition' — returned as a verdict rather than printed on a plaque.",
+   "built_from": "boolean_surfaces is the emptiest sequence in my block and the measurement is stark: 6 maps, 10 resolved placements — 6 configured (60%), and after correcting a scorer false positive only 2 touched, BOTH of which are borrowed museum furniture (catalyst_target, science_screen in Chamber_Boolean). ZERO activated artifacts of its own. Boolean_Union, Boolean_Intersection, Boolean_Difference and Boolean_Architecture_Cavity",
+   "cost": "medium"
+  },
+  "swarmintelligence": {
+   "verb": "VERB: drop a block onto the flow-field floor (bracelet or carried cube). ANSWER: the cell's cost goes to 255, Dijkstra re-propagates from the target, and EVERY arrow in the 50x50 field flips at once while the agents already mid-walk swing around the new wall. The visitor supplies one cell; the algorithm hands back the entire downstream field — which is precisely what a flow field IS and what no visitor could compute by hand.",
+   "built_from": "",
+   "cost": "small"
+  },
+  "machinelearning": {
+   "verb": "VERB: walk the garden and touch the three flowers you like. ANSWER: those become the parents — evolve_population() breeds from the visitor's choice instead of the built-in formula, and across five generations the whole plot visibly drifts toward their taste, growing L-system branches nobody drew. The visitor supplies preference; the algorithm hands back a population they caused but never designed. This is Palle's 'grow an l-system flower from seeds' — except the L-system is already written and the only thing missing is that the visitor doesn't choose.",
+   "built_from": "",
+   "cost": "small"
+  },
+  "graphtheory": {
+   "verb": "VERB: carry a wooden plank and drop it between two landmasses. ANSWER: the degree table recomputes, odd-degree platforms flip red to green, and the theorem label states the verdict — 'no walk', 'open walk', or 'closed circuit'. Then the visitor tries to walk it and finds the city either lets them or refuses. Position of one plank in; Euler's parity theorem out.",
+   "built_from": "",
+   "cost": "medium"
+  },
+  "foundationscrisis": {
+   "verb": "VERB: drop three points onto the surface with the grab sphere and close the loop — the draw_triangle_faces gesture, where laying a point on an existing point completes the figure. ANSWER: the room measures the three interior angles ON THAT SURFACE and announces the sum: 180 degrees on the flat grid, 231 on the sphere, 142 on the Poincare disk. Then the visitor turns the K slider and watches THEIR OWN triangle's sum move. Three hand positions in; Gauss-Bonnet out.",
+   "built_from": "",
+   "cost": "medium"
+  },
+  "qfeplaboratory": {
+   "verb": "VERB: pick up the four term-spheres — F, E, lambda, phi — and set each on the balance plate; how far out from the fulcrum you place it is its value. ANSWER: QFE = F - lambda*E(S) + phi*deltaE(S,t) recomputes live, the four-axis radar redraws to the quadrilateral your two hands just made, and the console NAMES which of the seven phases you landed in and retints the plate, the radar fill and the halo to that phase's color. Four carried objects in; a phase name out.",
+   "built_from": "",
+   "cost": "small"
+  },
+  "postfoundationscrisis": {
+   "verb": "VERB: plant a shoot — drop a node anywhere into the cloud with the grab sphere. ANSWER: it wires itself to its three nearest neighbours, and the instrument states what the visitor CANNOT make happen — wherever they plant, the graph has no root, every node still reaches every other, and cutting any single node disconnects nothing; delete one and the mesh re-heals in front of them. The visitor supplies a position; the algorithm answers with a structural impossibility they tried and failed to create.",
+   "built_from": "",
+   "cost": "small"
+  }
+ }
+}
