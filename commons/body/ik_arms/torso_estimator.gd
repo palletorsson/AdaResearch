@@ -17,6 +17,15 @@ extends Node3D
 ## Vertical offset from camera to estimated neck pivot (meters downward).
 @export var neck_offset: float = 0.15
 
+## How far BEHIND the eyes the neck sits, in metres, along head-forward.
+## 2026-08-29, Palle: "the arms are too forward compared with hands and the
+## axel could be further back". The neck was taken as straight down from the
+## camera, but a camera is at the EYES and a neck is roughly a head's depth
+## behind them — so every shoulder sat that far forward and the sleeves came at
+## the face nearly end-on. 0.10 is a small adult head; raise it to pull the
+## shoulders further back.
+@export var neck_back: float = 0.10
+
 ## Blend weight for head forward vs hand-midpoint forward (0-1).
 ## Higher = torso follows head gaze more; lower = follows hand direction.
 @export var head_weight: float = 0.7
@@ -54,6 +63,11 @@ func _physics_process(delta: float) -> void:
 
 	## Step 1 — Neck position: camera lowered by neck_offset
 	var neck_pos: Vector3 = camera.global_position - Vector3(0.0, neck_offset, 0.0)
+	## ...and back behind the eyes. Done here rather than at the shoulders so the
+	## torso node, the debug visual and both shoulders all move together.
+	var back_dir: Vector3 = Vector3(camera.global_basis.z.x, 0.0, camera.global_basis.z.z)
+	if back_dir.length_squared() > 0.001:
+		neck_pos += back_dir.normalized() * neck_back
 
 	## Step 2 — Head forward projected onto XZ plane
 	var head_fwd_raw: Vector3 = -camera.global_basis.z
