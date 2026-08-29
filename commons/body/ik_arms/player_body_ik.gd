@@ -14,9 +14,23 @@ extends Node3D
 ## Internal references
 ## ————————————————————————————————————————————————————————————————————
 
-var _torso: TorsoEstimator
-var _left_arm: IKArmRig
-var _right_arm: IKArmRig
+## PRELOAD, NOT class_name — 2026-08-29, and this cost a live VR session.
+##
+## These were TorsoEstimator.new() and IKArmRig.new(), resolved through Godot's
+## global class cache. That cache went stale (a class_name added and removed in
+## the same session, in a namespace that already held TartanBoxes3D), and the
+## names then resolved to plain GDScript RESOURCES — so `.new()` failed with
+## "Nonexistent function 'new' in base 'GDScript'" and the arms never built.
+##
+## A preload is resolved by PATH at parse time and cannot go stale. The typed
+## vars drop to Node3D for the same reason: a `: TorsoEstimator` annotation needs
+## the same cache the constructor did.
+const TorsoEstimatorScript = preload("res://commons/body/ik_arms/torso_estimator.gd")
+const IKArmRigScript = preload("res://commons/body/ik_arms/ik_arm_rig.gd")
+
+var _torso: Node3D
+var _left_arm: Node3D
+var _right_arm: Node3D
 
 ## ————————————————————————————————————————————————————————————————————
 ## Lifecycle
@@ -45,21 +59,21 @@ func _ready() -> void:
 		push_error("[PlayerBodyIK] Right hand controller not found under XROrigin3D")
 
 	## Step 3 — Create TorsoEstimator
-	_torso = TorsoEstimator.new()
+	_torso = TorsoEstimatorScript.new()
 	_torso.name = "TorsoEstimator"
 	add_child(_torso)
 	if left_hand and right_hand:
 		_torso.set_tracking_refs(camera, left_hand, right_hand)
 
 	## Step 4 — Create arm rigs
-	_left_arm = IKArmRig.new()
+	_left_arm = IKArmRigScript.new()
 	_left_arm.name = "LeftArmRig"
 	_left_arm.is_left = true
 	add_child(_left_arm)
 	if left_hand:
 		_left_arm.set_controller(left_hand)
 
-	_right_arm = IKArmRig.new()
+	_right_arm = IKArmRigScript.new()
 	_right_arm.name = "RightArmRig"
 	_right_arm.is_left = false
 	add_child(_right_arm)
