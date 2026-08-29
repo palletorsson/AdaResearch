@@ -111,15 +111,87 @@ func _run() -> void:
 	# ── the beam takes out what it crosses ───────────────────────────────
 	_say("")
 	_say("A BEAM THROUGH IT")
+	# read the field while it is still hanging — after the cut it is unreadable,
+	# which is the whole reason the burst has to be built before the hide
+	var mat0: Material = (inst.call("_showing_field", seg, si) as Dictionary).get("mat")
+	_say("  the picture's material before the cut: %s" % ("none" if mat0 == null else mat0.get_class()))
 	var from: Vector3 = at + Vector3(0, 0, 2.5)
 	inst.call("on_beam_swept", from, (at - from).normalized(), 6.0)
 	await create_timer(0.1).timeout
 	var gone: bool = not _still_hung(inst, seg, si)
+	# _showing_field returns {} once the field is scaled to zero, so if the burst
+	# were read AFTER the hide it would size its shards off nothing at all
+	_say("  the field is unreadable once it is taken out: %s" % str(gone))
 	_say("  wall work %d still hanging: %s" % [si, str(not gone)])
 	if not gone:
 		_fail("a beam straight through wall work %d left it hanging" % si)
 	if not target.has_meta("em_hand_removed"):
 		_fail("the work was hidden but never marked taken out — the cull will not agree with the beam")
+
+	# ── and what the hit LOOKED like ─────────────────────────────────────
+	_say("")
+	_say("SMOKE, A BANG, AND SHARDS")
+	var sparks := 0
+	var smokes := 0
+	var lights := 0
+	for n in seg.get_children():
+		if n is GPUParticles3D:
+			if String(n.name).begins_with("BeamSpark"): sparks += 1
+			elif String(n.name).begins_with("BeamSmoke"): smokes += 1
+		elif n is OmniLight3D and String(n.name).begins_with("BeamFlash"):
+			lights += 1
+	var shards: Array = inst.get("_debris")
+	_say("  flash %d, explosion %d, smoke plume %d, shards %d" % [lights, sparks, smokes, shards.size()])
+	if sparks < 1: _fail("the hit made no explosion")
+	if smokes < 1: _fail("the hit made no smoke")
+	if lights < 1: _fail("the hit made no flash")
+	if shards.size() < 1:
+		_fail("the hit threw no debris")
+	else:
+		var sh: Node3D = shards[0]
+		var sh_layer: int = int((sh as CollisionObject3D).collision_layer)
+		var sh_mask: int = int((sh as CollisionObject3D).collision_mask)
+		# BY CLASS, NEVER BY NAME. A node added with no name of its own gets an
+		# auto one — the shard's mesh is "@MeshInstance3D@2409" — so
+		# get_node_or_null("MeshInstance3D") returns null and the probe reports a
+		# blank shard for a shard that is painted correctly. That reading cost a
+		# boot and a wrong diagnosis before the child list was printed.
+		var kids: PackedStringArray = []
+		for k in sh.get_children():
+			kids.append("%s(%s)" % [k.name, k.get_class()])
+		_say("  the shard contains: %s" % ", ".join(kids))
+		var sh_mi: MeshInstance3D = null
+		for k in sh.get_children():
+			if k is MeshInstance3D:
+				sh_mi = k as MeshInstance3D
+		var sh_mat: Material = null
+		if sh_mi != null:
+			sh_mat = sh_mi.material_override
+			if sh_mat == null:
+				sh_mat = sh_mi.get_active_material(0)
+			_say("  its mesh is %s, override %s, active %s"
+				% [str(sh_mi.mesh != null), str(sh_mi.material_override != null),
+					str(sh_mi.get_active_material(0) != null)])
+		var near: float = sh.global_position.distance_to(at)
+		_say("  a shard is a %s on layer %d masking %d, %.2f m from the cut"
+			% [sh.get_class(), sh_layer, sh_mask, near])
+		_say("  it carries the picture's OWN material (not merely some material): %s"
+			% str(sh_mat != null and sh_mat == mat0))
+		if not (sh is RigidBody3D):
+			_fail("the debris is a %s, so it will never fall or tumble" % sh.get_class())
+		if sh_mat == null:
+			_fail("the shards carry no material — the work broke into blank boxes")
+		elif mat0 != null and sh_mat != mat0:
+			_fail("the shards carry a different material than the picture did")
+		# THE WALKER MUST BE ABLE TO WALK THROUGH IT. Debris that a body collides
+		# with can wedge a visitor into a corner, and the autopilot would unlearn
+		# a floor cell because a shard happened to land on it.
+		if sh_mask != 1:
+			_fail("debris masks %d — it should collide with the world and nothing else" % sh_mask)
+		if sh_layer == 1:
+			_fail("debris sits on the world layer, so the walker will bump into it")
+		if near > 3.0:
+			_fail("a shard spawned %.2f m from the cut" % near)
 
 	# ── and the negative: a beam that misses must miss ───────────────────
 	_say("")

@@ -5214,10 +5214,20 @@ func _showing_field(seg: Node3D, si: int) -> Dictionary:
 		var local: Transform3D = xf[i]
 		if local.basis.get_scale().length() < 0.001:
 			return {}                       # already taken out
+		# THE MATERIAL IS NOT AN OVERRIDE. em_detail paints the wall fields on the
+		# MESH SURFACE, so material_override is null and shards cut from it broke
+		# into blank boxes — which looked like a working effect and was a fact
+		# about where a material happens to be stored. Ask in the order Godot
+		# resolves it: override, then the surface, then whatever is active.
+		var msh: Mesh = nd.multimesh.mesh if nd.multimesh != null else null
+		var mat: Material = nd.material_override
+		if mat == null and msh != null and msh.get_surface_count() > 0:
+			mat = msh.surface_get_material(0)
+		if mat == null:
+			mat = nd.get_active_material(0)
 		return {"world": nd.global_transform * local,
 			"size": local.basis.get_scale(),
-			"mesh": (nd.multimesh.mesh if nd.multimesh != null else null),
-			"mat": nd.material_override}
+			"mesh": msh, "mat": mat}
 	return {}
 
 
@@ -5304,6 +5314,201 @@ func _wall_pick_beam(from: Vector3, dir: Vector3, reach: float, radius: float) -
 	return best
 
 
+## WHAT A HIT LOOKS LIKE (2026-08-29, Palle: "when laser hits make a smoke and
+## explosion effect throw around debris").
+##
+## Four things, in the order the eye reads them: a flash, a fast bright burst, a
+## slow grey plume that outlives both, and shards that fall and stay fallen.
+##
+## THE SHARDS ARE CUT FROM THE PICTURE'S OWN MATERIAL, not from a debris kit.
+## The field's material is already in hand from _showing_field, so a work breaks
+## into pieces of ITSELF — which is the difference between a painting being
+## destroyed and a generic explosion happening near a wall.
+const DEBRIS_PER_HIT := 7
+## Across the whole museum, not per hit: a visitor sweeping a beam along a wall
+## can cut a dozen works in as many seconds, and unbounded rigid bodies in a
+## streamed hall is how a frame budget dies.
+const DEBRIS_MAX := 56
+## Debris falls and piles and is not in anyone's way. Its own layer, masking the
+## world only: the walker passes through it, so a shard can never wedge a visitor
+## into a corner or teach the autopilot's planner that a floor is impassable.
+const DEBRIS_LAYER := 1 << 8
+var _debris: Array = []
+
+
+func _burst_particles(parent: Node3D, at: Vector3, dir: Vector3, tint: Color) -> void:
+	# 1. THE FLASH. Brief and over before the eye finds it, which is what makes
+	#    the smoke afterwards read as aftermath.
+	var flash := OmniLight3D.new()
+	flash.name = "BeamFlash"
+	flash.global_position = at
+	flash.light_color = Color(1.0, 0.86, 0.62)
+	flash.light_energy = 9.0
+	flash.omni_range = 4.5
+	parent.add_child(flash)
+	var tw := flash.create_tween()
+	tw.tween_property(flash, "light_energy", 0.0, 0.28)
+	tw.tween_callback(flash.queue_free)
+
+	# 2. THE EXPLOSION — fast, hot, out along the wall's normal
+	var spark := GPUParticles3D.new()
+	spark.name = "BeamSpark"
+	spark.amount = 34
+	spark.lifetime = 0.7
+	spark.one_shot = true
+	spark.explosiveness = 1.0
+	spark.global_position = at
+	var sm := ParticleProcessMaterial.new()
+	sm.direction = dir
+	sm.spread = 65.0
+	sm.initial_velocity_min = 3.5
+	sm.initial_velocity_max = 9.0
+	sm.gravity = Vector3(0, -6.0, 0)
+	sm.damping_min = 2.0
+	sm.damping_max = 6.0
+	sm.scale_min = 0.02
+	sm.scale_max = 0.07
+	var g := Gradient.new()
+	g.set_color(0, Color(1.0, 0.92, 0.62, 1.0))
+	g.add_point(0.35, Color(1.0, 0.52, 0.16, 0.95))
+	g.add_point(1.0, Color(0.35, 0.10, 0.04, 0.0))
+	var gt := GradientTexture1D.new()
+	gt.gradient = g
+	sm.color_ramp = gt
+	spark.process_material = sm
+	var sbox := BoxMesh.new()
+	sbox.size = Vector3(0.05, 0.03, 0.03)
+	spark.draw_pass_1 = sbox
+	var sdm := StandardMaterial3D.new()
+	sdm.vertex_color_use_as_albedo = true
+	sdm.emission_enabled = true
+	sdm.emission = Color(1.0, 0.6, 0.2)
+	sdm.emission_energy_multiplier = 3.0
+	spark.material_override = sdm
+	parent.add_child(spark)
+	spark.emitting = true
+
+	# 3. THE SMOKE — slow, grey, rising, and it outlasts the bang. Tinted a
+	#    little toward the work that was cut, so a hall of red paintings smokes
+	#    differently from a hall of blue ones.
+	var smoke := GPUParticles3D.new()
+	smoke.name = "BeamSmoke"
+	smoke.amount = 26
+	smoke.lifetime = 2.6
+	smoke.one_shot = true
+	smoke.explosiveness = 0.55
+	smoke.global_position = at
+	var mm := ParticleProcessMaterial.new()
+	mm.direction = Vector3(0, 1, 0)
+	mm.spread = 55.0
+	mm.initial_velocity_min = 0.4
+	mm.initial_velocity_max = 1.5
+	mm.gravity = Vector3(0, 0.35, 0)        # smoke rises; it does not fall
+	mm.damping_min = 0.6
+	mm.damping_max = 1.6
+	mm.scale_min = 0.18
+	mm.scale_max = 0.55
+	var g2 := Gradient.new()
+	var pale: Color = Color(0.72, 0.70, 0.68).lerp(tint, 0.25)
+	g2.set_color(0, Color(pale.r, pale.g, pale.b, 0.75))
+	g2.add_point(0.5, Color(pale.r * 0.6, pale.g * 0.6, pale.b * 0.6, 0.45))
+	g2.add_point(1.0, Color(0.18, 0.17, 0.17, 0.0))
+	var gt2 := GradientTexture1D.new()
+	gt2.gradient = g2
+	mm.color_ramp = gt2
+	smoke.process_material = mm
+	var puff := SphereMesh.new()
+	puff.radius = 0.12
+	puff.height = 0.24
+	puff.radial_segments = 6
+	puff.rings = 4
+	smoke.draw_pass_1 = puff
+	var pdm := StandardMaterial3D.new()
+	pdm.vertex_color_use_as_albedo = true
+	pdm.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	pdm.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	pdm.billboard_mode = BaseMaterial3D.BILLBOARD_PARTICLES
+	smoke.material_override = pdm
+	parent.add_child(smoke)
+	smoke.emitting = true
+
+	# the emitters free themselves; nothing here is anyone else's to clean up
+	for n in [spark, smoke]:
+		var life: float = float((n as GPUParticles3D).lifetime) + 1.0
+		get_tree().create_timer(life).timeout.connect(func():
+			if is_instance_valid(n):
+				n.queue_free())
+
+
+## Shards of the work itself, thrown off the wall and left where they land.
+func _burst_debris(parent: Node3D, at: Vector3, dir: Vector3, f: Dictionary) -> void:
+	for i in range(_debris.size() - 1, -1, -1):
+		if not is_instance_valid(_debris[i]):
+			_debris.remove_at(i)
+	var size: Vector3 = f.get("size", Vector3.ONE)
+	var mat: Material = f.get("mat")
+	# A SEEDED RNG, so a hall cut twice throws the same shards twice. The museum
+	# rebuilds halls constantly and a burst that differs on every rebuild is a
+	# thing nobody can photograph or argue about.
+	var rng := RandomNumberGenerator.new()
+	rng.seed = hash(at.snapped(Vector3.ONE * 0.01))
+	for i in range(DEBRIS_PER_HIT):
+		if _debris.size() >= DEBRIS_MAX:
+			break
+		var rb := RigidBody3D.new()
+		rb.name = "Shard%d" % i
+		rb.collision_layer = DEBRIS_LAYER
+		rb.collision_mask = 1                        # the world, and nothing else
+		rb.mass = 0.25
+		var s := Vector3(
+			size.x * rng.randf_range(0.14, 0.34),
+			size.y * rng.randf_range(0.14, 0.34),
+			maxf(size.z, 0.012) * rng.randf_range(0.8, 1.4))
+		var mi := MeshInstance3D.new()
+		var bm := BoxMesh.new()
+		bm.size = s
+		mi.mesh = bm
+		if mat != null:
+			mi.material_override = mat
+		rb.add_child(mi)
+		var cs := CollisionShape3D.new()
+		var bx := BoxShape3D.new()
+		bx.size = s
+		cs.shape = bx
+		rb.add_child(cs)
+		parent.add_child(rb)
+		rb.global_position = at + Vector3(
+			rng.randf_range(-0.5, 0.5) * size.x,
+			rng.randf_range(-0.5, 0.5) * size.y,
+			0.0)
+		# out along the beam, up, and scattered — a picture coming off a wall
+		var kick: Vector3 = (dir * rng.randf_range(1.6, 3.4)
+			+ Vector3.UP * rng.randf_range(1.2, 3.0)
+			+ Vector3(rng.randf_range(-1.4, 1.4), 0.0, rng.randf_range(-1.4, 1.4)))
+		rb.apply_impulse(kick * rb.mass)
+		rb.angular_velocity = Vector3(rng.randf_range(-9, 9),
+			rng.randf_range(-9, 9), rng.randf_range(-9, 9))
+		_debris.append(rb)
+		# they lie where they fall for a while, then go. A museum knee-deep in
+		# shards after twenty minutes is not the effect that was asked for.
+		get_tree().create_timer(26.0).timeout.connect(func():
+			if is_instance_valid(rb):
+				rb.queue_free())
+
+
+## The whole hit, in one call: what it looked like and what came off it.
+func _showing_burst(parent: Node3D, at: Vector3, dir: Vector3, f: Dictionary) -> void:
+	if parent == null or not is_instance_valid(parent):
+		return
+	var d: Vector3 = dir.normalized() if dir.length() > 0.001 else Vector3.UP
+	var tint := Color(0.8, 0.78, 0.74)
+	var mat: Material = f.get("mat")
+	if mat is StandardMaterial3D:
+		tint = (mat as StandardMaterial3D).albedo_color
+	_burst_particles(parent, at, d, tint)
+	_burst_debris(parent, at, d, f)
+
+
 ## THE BEAM ANSWERS FOR WHAT PHYSICS CANNOT SEE. laser_measure reports where its
 ## beam went and how far; the museum owns the wall works and takes out whatever
 ## it crossed. The laser never learns what a wall work is.
@@ -5319,8 +5524,15 @@ func on_beam_swept(from: Vector3, dir: Vector3, reach: float) -> void:
 	var key: String = "%d|%d" % [seg.get_instance_id(), si]
 	if _showing_bodies.has(key) and is_instance_valid(_showing_bodies[key]):
 		return
+	# THE LOOK OF IT IS READ BEFORE THE WORK IS TAKEN OUT. _showing_field returns
+	# {} once the field is scaled to zero, so asking after _showing_hide gives
+	# shards of nothing at all — sized Vector3.ONE, untinted, no material.
+	var f: Dictionary = _showing_field(seg, si)
+	var at: Vector3 = (hit["proxy"] as Node3D).global_position
 	_showing_hide(seg, si)
 	(hit["proxy"] as Node3D).set_meta("em_hand_removed", true)
+	if not f.is_empty():
+		_showing_burst(seg, at, -dir.normalized(), f)
 	_beam_cuts += 1
 	print("[em-beam] the laser cut wall work %d out of %s — %.2f m along the beam, %.2f m off it"
 		% [si, String(seg.get_meta("em_chapter")) if seg.has_meta("em_chapter") else "a hall",
