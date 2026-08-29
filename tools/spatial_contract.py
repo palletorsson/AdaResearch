@@ -454,7 +454,40 @@ def _num(value: Any, default: float = 0.0) -> float:
 LIVE_LEDGER = REPO / "ada_run" / "em_live_footprints.json"
 LIVE_LINE_ASPECT = 8.0     # longer than this many times its width: a line, not a body
 LIVE_ADOPT_MAX_M = 40.0    # the bridge court's ceiling — wider than this no venue holds
+# THE HOMESICK EXTENT (2026-08-22). A ledger entry whose live_aabb.z equals the
+# world z of the cell it was measured at is not a size: it is the distance the
+# artifact was carried from the origin, because one member of it never made the
+# trip. endless_museum.gd refuses to write these now (see reaches_origin), but
+# 21 of the 213 bodies in the ledger were written before it did, up to 11767.7 m
+# for 9_3_smart_rockets_vr at cell z 11767. The two guards below DO catch them —
+# as a LINE and as a body no venue holds — which is the problem: both verdicts
+# say "still kept, a hand call", so the ledger hands the negotiation twenty-one
+# measurement questions that are really one build fault. Name it instead.
+LIVE_ORIGIN_REACH_M = 2.0
+LIVE_ORIGIN_MIN_Z = 40.0
 _live_cache: dict | None = None
+
+
+def live_reaches_origin(live: dict) -> bool:
+    """Does this entry's z extent run from the world origin out to its own cell?
+
+    Mirrors endless_museum.gd `reaches_origin`, but WEAKER, and the difference is
+    worth saying: the museum has the AABB's position and can require that the
+    extent actually starts at the origin; the ledger stores only a size and a
+    cell, so all this can ask is whether the size covers the whole distance. A
+    body genuinely 100 m deep, standing at cell z 100 but spanning z 50..150,
+    would be named here and is not a fault. The cost of that is a differently
+    worded note and nothing else — the venue guard below already refuses to adopt
+    anything this large, so the contract is identical either way. What changes is
+    what a hand is told to go and look at."""
+    la = live.get("live_aabb")
+    cell = live.get("cell")
+    if not (isinstance(la, list) and len(la) >= 3 and isinstance(cell, list) and len(cell) >= 2):
+        return False
+    size_z, cell_z = _num(la[2]), _num(cell[1])
+    if cell_z < LIVE_ORIGIN_MIN_Z:
+        return False               # near the origin the two pictures are the same
+    return size_z >= cell_z - LIVE_ORIGIN_REACH_M
 
 
 def live_footprint(lookup: str) -> dict:
@@ -508,7 +541,13 @@ def resolve(lookup: str) -> SpatialContract:
         # 40 m). Both are said in provenance and left to the hand; adopting them
         # would refuse a drawing as a world.
         long_side = max(la[0], la[2]); short_side = max(0.05, min(la[0], la[2]))
-        if long_side / short_side > LIVE_LINE_ASPECT:
+        if live_reaches_origin(live):
+            prov["body.live_note"] = (
+                f"live ledger {la[0]:.1f}x{la[2]:.1f} m REACHES THE ORIGIN from cell z "
+                f"{_num(live.get('cell', [0, 0])[1]):.0f} — a member of this body never left "
+                "(0,0,0), so the reading is a distance and not a size; still kept")
+            live = {}
+        elif long_side / short_side > LIVE_LINE_ASPECT:
             prov["body.live_note"] = f"live ledger {la[0]:.1f}x{la[2]:.1f} m is a LINE (aspect {long_side / short_side:.0f}); still kept"
             live = {}
         elif long_side > LIVE_ADOPT_MAX_M:

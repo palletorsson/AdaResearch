@@ -288,6 +288,15 @@ def build_report(
         # disagreement. Runs Godot headless under the watchdog (~60 s); the
         # wrapper judges by the verdict file, not the exit code. Serialize:
         # nothing else may hold the Godot user:// lock while gates run.
+        #
+        # "Serialize" was advice until 2026-08-28, and advice does not gate. That
+        # morning this row read `no_route, frontier_z 7` against 21/37/44 in the
+        # three breaths before it — measured while the editor had been open since
+        # 07:44 and Point_One/map_data.json was saved at 09:08:43, mid-walk. The
+        # autopilot now enumerates Godot processes bound to this repo and refuses,
+        # so a contended run reports `reason: contended_builder` with every
+        # corridor field at -1. A -1 row here is NOT a short walk; it is no walk.
+        # Read `reason` before reading `frontier_z`.
         rc_walk, out_walk = run_cmd([sys.executable, "tools/em_autopilot.py"])
         walk_verdict: dict[str, Any] = {}
         walk_verdict_path = REPO / "ada_run" / "em_autopilot.json"

@@ -107,13 +107,20 @@ def scene_root_type(scene_path):
 def is_empty_cell(raw):
     """True for a cell that means 'nothing here'.
 
-    The corpus carries three empty-cell conventions, not one: "" / " "
-    (the documented form), ", " (every MindMap_* map, 1988 cells) and "0"
-    (the Particles_* and Grid_Subset_* maps, 599 cells). The scorer's own
-    test -- `if c and c != " "` -- passes the last two through, so they
-    are counted as placements and then fail to resolve. Reporting 2587
-    punctuation marks as dead artifacts would bury the two real ones, so
-    they are separated here and counted as a data-hygiene finding instead.
+    There is ONE empty-cell convention -- "" or " " -- and both engine
+    components test exactly it:
+
+        GridUtilitiesComponent.gd:192     if utility_cell.is_empty() or utility_cell == " "
+        GridInteractablesComponent.gd:586 if token != " " and not token.is_empty()
+
+    ", " and "0" are NOT a second and third convention. This docstring used
+    to call them that, and the gate downgraded them to a printed note and
+    exited 0 -- which is how 664 phantom cells in Forces_PropGallery cost the
+    forces sequence three pipeline stages (6 -> 3) and the project average
+    0.136, overnight and unnoticed, on 2026-08-26. They are a fault, they
+    are counted, and as of 2026-08-27 they FAIL this gate.
+
+    Remedy: python tools/normalize_map_fillers.py --apply
     """
     return raw == "" or not any(ch.isalpha() for ch in raw)
 
@@ -175,6 +182,7 @@ def scan_map(map_name, registry_scenes, check_scenes=False):
             if is_empty_cell(raw):
                 malformed += 1
                 continue
+
             placements += 1
             token = raw.split(":")[0].split("#")[0]
             if token in ALWAYS_OK:
@@ -209,6 +217,22 @@ def scan_map(map_name, registry_scenes, check_scenes=False):
                 ).exists():
                     bad.append({"token": token, "row": r, "col": c, "cell": raw,
                                 "reason": "embedded scene_path missing: " + embedded})
+
+    # The same fault lives in the UTILITIES layer, which this gate read past for
+    # its whole life. GridUtilitiesComponent applies the identical empty test, so
+    # a "0" there is a utility code the engine tries to honour. Measured on the
+    # day the gate was hardened: 2037 such cells in utilities against 2649 in
+    # interactables -- so scanning one layer under-counted the class by 43%.
+    for r, row in enumerate(mdata.get("layers", {}).get("utilities", []) or []):
+        if not isinstance(row, list):
+            continue
+        for cell in row:
+            raw = (cell or "").strip() if isinstance(cell, str) else ""
+            if not raw or raw == " " or raw.startswith("#"):
+                continue
+            if is_empty_cell(raw):
+                malformed += 1
+
     return placements, bad, malformed, True
 
 
@@ -321,13 +345,17 @@ def main():
               % (len(unscanned), len(names), ", ".join(sorted(unscanned)[:6])
                  + (", ..." if len(unscanned) > 6 else "")))
     if total_malformed:
-        print("note: %d non-standard empty cells in %d map(s) -- not counted as "
-              "placements here, but the pipeline scorer DOES count them "
-              "(top: %s)"
-              % (total_malformed, len(malformed_maps),
-                 ", ".join("%s x%d" % (m, n) for m, n in
-                           sorted(malformed_maps.items(),
-                                  key=lambda kv: -kv[1])[:3])))
+        print()
+        print("NON-STANDARD EMPTY CELLS: %d cell(s) in %d map(s). Neither engine "
+              "component treats these as blank -- GridUtilitiesComponent tests "
+              "`is_empty() or == \" \"` and GridInteractablesComponent tests "
+              "`!= \" \" and not is_empty()` -- so each one is a token the grid "
+              "tries to place, and the pipeline scorer counts each as an "
+              "unresolved artifact:"
+              % (total_malformed, len(malformed_maps)))
+        for m, n in sorted(malformed_maps.items(), key=lambda kv: (-kv[1], kv[0])):
+            print("  %-34s %d cell(s)" % (m, n))
+        print("  remedy: python tools/normalize_map_fillers.py --apply")
     if unplaceable:
         print()
         print("UNPLACEABLE ROOTS: %d token(s) resolve to a scene whose root is "
@@ -340,9 +368,14 @@ def main():
             print("  %-28s root=%-12s in %s%s"
                   % (_t, _u["root"], ", ".join(_ms[:4]),
                      " ..." if len(_ms) > 4 else ""))
-    if not unresolved:
-        print("\nOK: every interactable token resolves to a scene on disk.")
+    if not unresolved and not total_malformed:
+        print("\nOK: every interactable token resolves to a scene on disk, and "
+              "every empty cell is empty.")
         return 0
+
+    if not unresolved:
+        print("\nFAIL: %d non-standard empty cell(s)." % total_malformed)
+        return total_malformed
 
     print()
     for token in sorted(by_token, key=lambda t: (-len(by_token[t]), t)):
@@ -355,8 +388,10 @@ def main():
                           if b["token"] == token})
         for reason in reasons:
             print("      %s" % reason)
-    print("\nFAIL: %d unresolved placement(s)." % unresolved)
-    return unresolved
+    print("\nFAIL: %d unresolved placement(s)%s."
+          % (unresolved,
+             ", %d non-standard empty cell(s)" % total_malformed if total_malformed else ""))
+    return unresolved + total_malformed
 
 
 if __name__ == "__main__":
