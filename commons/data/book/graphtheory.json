@@ -11,7 +11,11 @@
      "token": "graphspace",
      "text": "a graph is not a diagram — it is a set of relationships",
      "by": "draft",
-     "note": "a graph cannot supply its own abstraction — someone must rule first that the stone, the toll and the river are not part of a crossing; Euler's impossibility is exact only because everything that made the walk hard was already thrown away."
+     "note": "a graph cannot supply its own abstraction — someone must rule first that the stone, the toll and the river are not part of a crossing; Euler's impossibility is exact only because everything that made the walk hard was already thrown away.",
+     "note_src": {
+      "file": "commons/maps/GT_Foundations/critical.md",
+      "quote": "The graph is what remains when you subtract the world."
+     }
     },
     {
      "token": "KonigsbergBridge",
@@ -29,7 +33,11 @@
      "token": "force_directed_layout",
      "text": "Watch a tangled graph draw itself. Springs pull linked nodes together while repulsion pushes every pair apart",
      "by": "draft",
-     "note": "a graph has no coordinates, so it must borrow a body — Coulomb's repulsion, Hooke's springs — from a physics that has never heard of the relation it is drawing; change the seed and the centre moves."
+     "note": "a graph has no coordinates, so it must borrow a body — Coulomb's repulsion, Hooke's springs — from a physics that has never heard of the relation it is drawing; change the seed and the centre moves.",
+     "note_src": {
+      "file": "commons/maps/GT_Layout/critical.md",
+      "quote": "the layout is not a property of the graph; it is a property of the algorithm's trajectory through configuration space"
+     }
     }
    ],
    "hero": "force_directed_layout"
@@ -42,7 +50,11 @@
      "token": "pathfinding3d",
      "text": "pathfinding does not move through space — it moves through a graph that happens to be embedded in space",
      "by": "draft",
-     "note": "A* beats exhaustive search only because someone hands it a distance the graph does not contain — h(n) is imported from the embedding, and when the embedding lies the confident path is the wrong one."
+     "note": "A* beats exhaustive search only because someone hands it a distance the graph does not contain — h(n) is imported from the embedding, and when the embedding lies the confident path is the wrong one.",
+     "note_src": {
+      "file": "algorithms/graphtheory/pathfinding3d/pathfinding3d.gd",
+      "quote": "the heuristic is the algorithm's guess about geometry"
+     }
     }
    ],
    "hero": "pathfinding3d"
@@ -55,7 +67,11 @@
      "token": "rhizomatic_structure",
      "text": "a rhizome has no beginning and no end — only middles",
      "by": "draft",
-     "note": "the rhizome that refuses every root must still be grown from one — each node buds from a random parent, and lateral edges only hide the tree afterwards; at connection_probability 0 the anti-hierarchy is a hierarchy."
+     "note": "the rhizome that refuses every root must still be grown from one — each node buds from a random parent, and lateral edges only hide the tree afterwards; at connection_probability 0 the anti-hierarchy is a hierarchy.",
+     "note_src": {
+      "file": "algorithms/alternativegeometries/rhizomaticstructure/rhizomatic_structure.gd",
+      "quote": "at 0 the structure is a tree (hierarchical), at 1.0 every nearby node reconnects (rhizomatic)"
+     }
     },
     {
      "token": "network_analysis",
@@ -78,7 +94,11 @@
      "token": "topological_sort",
      "text": "Topological sort — linear ordering of vertices in a directed acyclic graph",
      "by": "draft",
-     "note": "an order exists only where nothing loops back — the cycles must be contracted to points before the sort can run, so a sequence costs every mutual reachability inside it, and the snarl that will not condense stands aside, unsorted."
+     "note": "an order exists only where nothing loops back — the cycles must be contracted to points before the sort can run, so a sequence costs every mutual reachability inside it, and the snarl that will not condense stands aside, unsorted.",
+     "note_src": {
+      "file": "commons/maps/GT_Connectivity/critical.md",
+      "quote": "The condensation takes a graph with rich internal circulation and reduces it to a pipeline."
+     }
     },
     {
      "token": "tarjan_algorithm",
@@ -98,7 +118,11 @@
    "map": "Chamber_GraphTheory",
    "lines": [],
    "drop": true,
-   "edge": "you place the nodes and believe you drew the graph, but an edge needs a threshold — the room holds a radius for what counts as near, never shows it, and every relation you think you made was already ruled."
+   "edge": "you place the nodes and believe you drew the graph, but an edge needs a threshold — the room holds a radius for what counts as near, never shows it, and every relation you think you made was already ruled.",
+   "edge_src": {
+    "file": "commons/maps/Chamber_GraphTheory/walked.md",
+    "quote": "To connect is to decide what counts as near"
+   }
   },
   {
    "pearl": "gt spanning trees",
@@ -108,7 +132,11 @@
      "token": "mst_visualization",
      "text": "the minimum spanning tree is the cheapest way to keep everyone connected",
      "by": "draft",
-     "note": "minimum needs a number the graph never had: weight comes from outside, and a different cost function grows a different tree from the same nodes — the cycles it rejects were the only alternative route anything had."
+     "note": "minimum needs a number the graph never had: weight comes from outside, and a different cost function grows a different tree from the same nodes — the cycles it rejects were the only alternative route anything had.",
+     "note_src": {
+      "file": "commons/maps/GT_Spanning_Trees/critical.md",
+      "quote": "The spanning tree does not reveal the graph's essential structure; it reveals the structure that a particular cost function privileges."
+     }
     }
    ],
    "hero": "mst_visualization"
@@ -126,7 +154,11 @@
      "token": "push_relabel_algorithm",
      "text": "push-relabel proves that maximum flow can be found without ever finding a complete path",
      "by": "draft",
-     "note": "flow only runs downhill and a graph has no down — push-relabel must invent an altitude, seeding the source at |V| and raising any node that gets stuck, so the gradient carrying everything is a bookkeeping number."
+     "note": "flow only runs downhill and a graph has no down — push-relabel must invent an altitude, seeding the source at |V| and raising any node that gets stuck, so the gradient carrying everything is a bookkeeping number.",
+     "note_src": {
+      "file": "algorithms/graphtheory/push_relabel/push_relabel.gd",
+      "quote": "Push-relabel is named for a height function. Flow moves because one node is above another."
+     }
     }
    ],
    "hero": "push_relabel_algorithm"
@@ -139,7 +171,11 @@
      "token": "edmonds_algorithm",
      "text": "matching is the mathematics of pairing — who connects with whom",
      "by": "draft",
-     "note": "an odd cycle cannot pair itself — match any two and a third is stranded, so the blossom's completion must come from outside it; the greedy pass shipped here never looks outside, and calls its leftovers structural."
+     "note": "an odd cycle cannot pair itself — match any two and a third is stranded, so the blossom's completion must come from outside it; the greedy pass shipped here never looks outside, and calls its leftovers structural.",
+     "note_src": {
+      "file": "commons/maps/GT_Matching/critical.md",
+      "quote": "The blossom is the structure that says: this group cannot pair itself. It needs something from outside."
+     }
     }
    ],
    "hero": "edmonds_algorithm"

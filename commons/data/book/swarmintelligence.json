@@ -11,7 +11,11 @@
      "token": "PhysarumColony",
      "text": "intelligence is a property of the medium, not the agent",
      "by": "draft",
-     "note": "the brainless network still needs a brain to place the emission centers: the attractor geometry decides every network the colony could possibly grow, so the mold never solves the maze — it answers the question the anchors asked."
+     "note": "the brainless network still needs a brain to place the emission centers: the attractor geometry decides every network the colony could possibly grow, so the mold never solves the maze — it answers the question the anchors asked.",
+     "note_src": {
+      "file": "algorithms/swarmintelligence/physarum/PhysarumColony.gd",
+      "quote": "critical_parameter: emission_centers layout — the attractor geometry determines every possible network the colony can grow"
+     }
     }
    ],
    "hero": "PhysarumColony"
@@ -24,7 +28,11 @@
      "token": "FlowFieldMain",
      "text": "purpose is not inside the agent — it lives in the field the agent inhabits",
      "by": "draft",
-     "note": "the whole decision is a lookup — one arrow at one grid cell — so purpose sits wherever the drawing puts it: arrows shown, a diagram of a cause; arrows hidden, the same agents look like they want something."
+     "note": "the whole decision is a lookup — one arrow at one grid cell — so purpose sits wherever the drawing puts it: arrows shown, a diagram of a cause; arrows hidden, the same agents look like they want something.",
+     "note_src": {
+      "file": "algorithms/pathfinding/flow_field/FlowFieldMain.gd",
+      "quote": "With arrows the piece is a diagram of a cause; with them hidden the agents look like they want something. Same simulation, opposite claim about where purpose lives."
+     }
     }
    ],
    "hero": "FlowFieldMain"
@@ -37,7 +45,11 @@
      "token": "boid_flocking",
      "text": "Emergent flocking behavior simulation using Craig Reynolds' boids algorithm",
      "by": "draft",
-     "note": "three rules make the school and a fourth holds it — the glass: separation, alignment and cohesion bound no volume, so the tank is the only truly external rule and the flock you can watch is a captivity effect."
+     "note": "three rules make the school and a fourth holds it — the glass: separation, alignment and cohesion bound no volume, so the tank is the only truly external rule and the flock you can watch is a captivity effect.",
+     "note_src": {
+      "file": "commons/artifacts/boids_aquarium/boids_aquarium.gd",
+      "quote": "the boundary of the tank is the only rule that is truly external — every other behavior is the boids talking to each other"
+     }
     },
     {
      "token": "boids_aquarium"
@@ -63,7 +75,11 @@
      "token": "ant_colony_optimization",
      "text": "Ant colony optimization with pheromone evaporation gradient heatmap",
      "by": "draft",
-     "note": "the crowd surprises only because each agent was made legible first — exploring, gathering, fleeing, returning — since a match on agent state cannot branch unless a life compresses to a label, so the whole's opacity is bought with the part's."
+     "note": "the crowd surprises only because each agent was made legible first — exploring, gathering, fleeing, returning — since a match on agent state cannot branch unless a life compresses to a label, so the whole's opacity is bought with the part's.",
+     "note_src": {
+      "file": "commons/maps/SwarmIntelligence_Agent_Based_Modeling_ABM/critical.md",
+      "quote": "The `match agent[\"state\"]` block requires that the agent's condition be compressible into a label."
+     }
     }
    ],
    "hero": "ant_colony_optimization"
@@ -76,7 +92,11 @@
      "token": "AntColonyV2",
      "text": "the map is written by the travelers — the territory and the route emerge together",
      "by": "draft",
-     "note": "the colony writes its own map but cannot choose the paper: the emission centers stand before the first ant walks, so every trail it finds is an answer to a geometry no traveler set."
+     "note": "the colony writes its own map but cannot choose the paper: the emission centers stand before the first ant walks, so every trail it finds is an answer to a geometry no traveler set.",
+     "note_src": {
+      "file": "algorithms/swarmintelligence/ants_v2/AntColonyV2.gd",
+      "quote": "The colony writes its own map. What it CANNOT choose is the shape of the problem: where the fixed points are."
+     }
     }
    ],
    "hero": "AntColonyV2"
@@ -86,7 +106,11 @@
    "map": "Chamber_Swarm",
    "lines": [],
    "drop": true,
-   "edge": "the meeting stays a meeting only because the room forces reynolds on both sides: neither flock can overwrite the other, only respond — let one side be a point target and the chamber becomes a hunt."
+   "edge": "the meeting stays a meeting only because the room forces reynolds on both sides: neither flock can overwrite the other, only respond — let one side be a point target and the chamber becomes a hunt.",
+   "edge_src": {
+    "file": "commons/maps/Chamber_Swarm/critical.md",
+    "quote": "a chamber that let one side be a swarm and the other be a point target would be a chamber about hunting a swarm"
+   }
   },
   {
    "pearl": "particle swarm optimization",
@@ -96,7 +120,11 @@
      "token": "self_organizing_patterns",
      "text": "order is not imposed from outside — it falls into existence when local interactions exceed the noise …",
      "by": "draft",
-     "note": "self-organised order still descends a valley someone built: the fitness function was picked by a programmer who knew the minimum before the first particle moved — the swarm is scored against an answer it cannot question."
+     "note": "self-organised order still descends a valley someone built: the fitness function was picked by a programmer who knew the minimum before the first particle moved — the swarm is scored against an answer it cannot question.",
+     "note_src": {
+      "file": "commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/critical.md",
+      "quote": "But the valley was constructed. The fitness function was chosen — Rastrigin, Ackley, Rosenbrock — by a programmer who knew the answer before the particles started searching."
+     }
     },
     {
      "token": "fitness_landscape_politics",
@@ -114,7 +142,11 @@
      "token": "ecosystem_simulation",
      "text": "evolution has no goal — only the dead are wrong, and only the living get to try again",
      "by": "draft",
-     "note": "the gallery of leaderless systems closes on one with a referee — balance_ecosystem respawns prey under ten and weakens predators at two-to-one — so take the hidden stabiliser out and the closed box collapses in minutes."
+     "note": "the gallery of leaderless systems closes on one with a referee — balance_ecosystem respawns prey under ten and weakens predators at two-to-one — so take the hidden stabiliser out and the closed box collapses in minutes.",
+     "note_src": {
+      "file": "algorithms/emergentsystems/ecosystemsimulation/ecosystem.gd",
+      "quote": "balance_ecosystem() acts as a hidden stabilizer that respawns prey below 10 and weakens predators when they outnumber prey by 2:1 — remove it and the system collapses in minutes"
+     }
     }
    ],
    "hero": "ecosystem_simulation"

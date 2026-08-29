@@ -21,7 +21,11 @@
      "token": "WhiteNoiseGallery",
      "text": "A gallery showcasing pure white noise — uniform random values with no correlation between samples",
      "by": "draft",
-     "note": "white noise cannot certify its own randomness — it needs an eye to rule the clumps accidental, and that eye prefers blue noise, which is less random by every measure the field itself can compute."
+     "note": "white noise cannot certify its own randomness — it needs an eye to rule the clumps accidental, and that eye prefers blue noise, which is less random by every measure the field itself can compute.",
+     "note_src": {
+      "file": "commons/maps/Random_Noise_Types/critical.md",
+      "quote": "White noise is mathematically ideal but perceptually patterned. Blue noise is mathematically constrained but perceptually pure."
+     }
     }
    ],
    "hero": "WhiteNoiseGallery"
@@ -34,7 +38,11 @@
      "token": "MeltingBerniniScene",
      "text": "Noise-based vertex displacement applied to classical column geometry",
      "by": "draft",
-     "note": "noise has no form of its own, only one to displace: the melt borrows the monument's claim to permanence to be legible at all — take the column away and the same field deforms nothing anyone would notice."
+     "note": "noise has no form of its own, only one to displace: the melt borrows the monument's claim to permanence to be legible at all — take the column away and the same field deforms nothing anyone would notice.",
+     "note_src": {
+      "file": "commons/maps/Noise_Columns/critical.md",
+      "quote": "Classical columns are monuments. They claim permanence and stability."
+     }
     }
    ],
    "hero": "MeltingBerniniScene"
@@ -47,7 +55,11 @@
      "token": "noisetorus",
      "text": "the ring is not made of noise. It is a shape that has been left out in it",
      "by": "draft",
-     "note": "one call to get_noise_2d has nowhere to put a neighbour, so no evaluation carries the continuity the chapter is named for — the ring has to be dipped in and dragged across the field for coherence to appear at all."
+     "note": "one call to get_noise_2d has nowhere to put a neighbour, so no evaluation carries the continuity the chapter is named for — the ring has to be dipped in and dragged across the field for coherence to appear at all.",
+     "note_src": {
+      "file": "commons/maps/Noise_One/critical.md",
+      "quote": "There is nowhere to put a neighbor list, a field state, or an environmental variable."
+     }
     },
     {
      "token": "noiselayers",
@@ -65,7 +77,11 @@
      "token": "perlin_terrain_sculptor",
      "text": "noise-based sculpting inverts the usual creative act",
      "by": "draft",
-     "note": "a continuous field cannot say where stone stops: the world needs a threshold imported from outside the mathematics, and everything habitable in this one is squeezed into the band between -0.3 and 0.3."
+     "note": "a continuous field cannot say where stone stops: the world needs a threshold imported from outside the mathematics, and everything habitable in this one is squeezed into the band between -0.3 and 0.3.",
+     "note_src": {
+      "file": "commons/artifacts/perlin_terrain_sculptor/perlin_terrain_sculptor.gd",
+      "quote": "interesting terrain lives between -0.3 and 0.3"
+     }
     },
     {
      "token": "voxelnoise",
@@ -83,7 +99,11 @@
      "token": "shader_noise_space",
      "text": "GPU noise is not one calculation but millions happening simultaneously",
      "by": "draft",
-     "note": "the wall owns nothing it shows: every frame the six octaves are recomputed from scratch, so the texture is a lease on parallel hardware rather than an asset — stop paying and the wall is not dim, it is absent."
+     "note": "the wall owns nothing it shows: every frame the six octaves are recomputed from scratch, so the texture is a lease on parallel hardware rather than an asset — stop paying and the wall is not dim, it is absent.",
+     "note_src": {
+      "file": "commons/maps/Noise_6_Wall/critical.md",
+      "quote": "The wall redraws itself at every frame from scratch; there is no baked texture, no precomputed asset."
+     }
     }
    ],
    "hero": "shader_noise_space"
@@ -96,7 +116,11 @@
      "token": "noisesphere",
      "text": "the sphere is not made of noise. It is a shape that has been left out in it",
      "by": "draft",
-     "note": "warping spends the coordinate system it borrows: the base field is read at displaced addresses, so no point on the slab can say where it came from — the two source fields shown beside it do not add back up."
+     "note": "warping spends the coordinate system it borrows: the base field is read at displaced addresses, so no point on the slab can say where it came from — the two source fields shown beside it do not add back up.",
+     "note_src": {
+      "file": "commons/maps/Noise_Inside_Noise/critical.md",
+      "quote": "running the base noise on an undistorted grid and the warp noise on its own grid does not add up to the warped slab"
+     }
     }
    ],
    "hero": "noisesphere"
@@ -109,7 +133,11 @@
      "token": "noise_space",
      "text": "Interactive 3D noise exploration space. Walk through a procedurally generated environment driven by configurable noise …",
      "by": "draft",
-     "note": "navigation needs continuity, and the tenth axis has none: nine sliders are gradients you can walk, the seed only teleports — so most of the ten-dimensional space has never been evaluated and the presets are its only addresses."
+     "note": "navigation needs continuity, and the tenth axis has none: nine sliders are gradients you can walk, the seed only teleports — so most of the ten-dimensional space has never been evaluated and the presets are its only addresses.",
+     "note_src": {
+      "file": "commons/maps/Noise_Space_10/critical.md",
+      "quote": "shifting the seed replaces the noise with a different sample of the same distribution"
+     }
     }
    ],
    "hero": "noise_space"
@@ -122,7 +150,11 @@
      "token": "simplex_noise",
      "text": "Simplex noise solved Perlin's axis-alignment problem by changing the grid",
      "by": "draft",
-     "note": "coherence needs a lattice to hang gradients on, and the lattice signs everything: Perlin's bias rotates with the grid, not the geometry — simplex does not remove the scaffold, it swaps squares for triangles and pays a different bill."
+     "note": "coherence needs a lattice to hang gradients on, and the lattice signs everything: Perlin's bias rotates with the grid, not the geometry — simplex does not remove the scaffold, it swaps squares for triangles and pays a different bill.",
+     "note_src": {
+      "file": "commons/maps/Noise_Perlin_Simplex/critical.md",
+      "quote": "the artifacts travel with the grid, not with the geometry"
+     }
     },
     {
      "token": "perlin_noise",
@@ -152,14 +184,22 @@
    "map": "Chamber_Noise",
    "lines": [],
    "drop": true,
-   "edge": "a chamber is shaped by the creature it stages, and this one has none: with nothing to defeat, nothing ends the room — the save gallery stands in for a finish, and the learner leaves rather than wins."
+   "edge": "a chamber is shaped by the creature it stages, and this one has none: with nothing to defeat, nothing ends the room — the save gallery stands in for a finish, and the learner leaves rather than wins.",
+   "edge_src": {
+    "file": "commons/maps/Chamber_Noise/critical.md",
+    "quote": "Chamber_Noise is the only catalyst chamber in the curriculum without a creature."
+   }
   },
   {
    "pearl": "lab path",
    "map": "Lab_Path",
    "lines": [],
    "drop": true,
-   "edge": "the corridor is the same corridor in every chapter: nothing in its geometry is noise, so it can only mean the noise sequence by borrowing what the learner still carries — walk it first and it is an empty hallway."
+   "edge": "the corridor is the same corridor in every chapter: nothing in its geometry is noise, so it can only mean the noise sequence by borrowing what the learner still carries — walk it first and it is an empty hallway.",
+   "edge_src": {
+    "file": "commons/maps/Lab_Path/critical.md",
+    "quote": "What makes this particular Lab_Path specific to Noise is the reading the learner carries through it."
+   }
   }
  ]
 }

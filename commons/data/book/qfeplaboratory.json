@@ -11,7 +11,11 @@
      "token": "tt",
      "text": "A tutorial is a placement-of-words. The library holds the words",
      "by": "draft",
-     "note": "nothing in this room is its own: the placard holds the placement and a library holds the words, and the formula reads as recognition only for a body that already walked the sequences it claims to unify"
+     "note": "nothing in this room is its own: the placard holds the placement and a library holds the words, and the formula reads as recognition only for a body that already walked the sequences it claims to unify",
+     "note_src": {
+      "file": "commons/context/clipboard/codeDisplay.gd",
+      "quote": "The library holds the words, the placard holds the placement"
+     }
     },
     {
      "token": "grab_sphere_F",
@@ -39,7 +43,11 @@
      "token": "snap_cube_puzzle",
      "text": "the octahedron is the cube's dual — swap faces and vertices and you get the other",
      "by": "draft",
-     "note": "the puzzle needs the cube it is the dual of, and the cube is never drawn: the `dual` axis ships off and this map never sets it, so order's founding relation is asserted rather than shown"
+     "note": "the puzzle needs the cube it is the dual of, and the cube is never drawn: the `dual` axis ships off and this map never sets it, so order's founding relation is asserted rather than shown",
+     "note_src": {
+      "file": "commons/primitives/snappoint/puzzles/snap_octahedron_puzzle.gd",
+      "quote": "the cube this thing is the dual OF, visible rather than asserted"
+     }
     },
     {
      "token": "snap_tetra_puzzle",
@@ -62,7 +70,11 @@
      "token": "microstate_counter",
      "text": "Entropy counts the ways: S = k log W - one macrostate, astronomically many microstates",
      "by": "draft",
-     "note": "S = k log W needs a box before a number: W is cells^N with the cells chosen by hand, and unsealing the jar makes the ledger print nothing — the seal is what made the count mean anything"
+     "note": "S = k log W needs a box before a number: W is cells^N with the cells chosen by hand, and unsealing the jar makes the ledger print nothing — the seal is what made the count mean anything",
+     "note_src": {
+      "file": "commons/artifacts/microstate_counter/microstate_counter.gd",
+      "quote": "the seal is what made the count mean anything"
+     }
     },
     {
      "token": "entropy_fan",
@@ -105,7 +117,11 @@
      "token": "bifurcation_walkway",
      "text": "A corridor where your position = r parameter in the logistic map",
      "by": "draft",
-     "note": "your position is the parameter, so r 2.5 to 4.0 is twelve metres and lambda's resolution is your stride — and the cascade hangs at head height, so the body reading the diagram walks through and displaces it"
+     "note": "your position is the parameter, so r 2.5 to 4.0 is twelve metres and lambda's resolution is your stride — and the cascade hangs at head height, so the body reading the diagram walks through and displaces it",
+     "note_src": {
+      "file": "commons/interfaces/qfep/bifurcation_walkway.gd",
+      "quote": "the cloud hangs in the air at your own head height, so you walk through it and displace it"
+     }
     },
     {
      "token": "dissolving_form",
@@ -138,7 +154,11 @@
      "token": "rigid_sculpture",
      "text": "negative phi crystallizes form into monument — the rigid sculpture is beautiful and dead",
      "by": "draft",
-     "note": "phi weights a rate and the monument has no clock: rigid_sculpture ships with no _process at all, so negative phi is argued by deleting time — and resistance becomes indistinguishable from being dead"
+     "note": "phi weights a rate and the monument has no clock: rigid_sculpture ships with no _process at all, so negative phi is argued by deleting time — and resistance becomes indistinguishable from being dead",
+     "note_src": {
+      "file": "commons/interfaces/qfep/rigid_sculpture.gd",
+      "quote": "it is not a parameter: there is no _process to turn off"
+     }
     },
     {
      "token": "fluid_form",
@@ -181,7 +201,11 @@
      "token": "edge_of_chaos_unlocked",
      "text": "when you control lambda, you understand the parameter space",
      "by": "draft",
-     "note": "the argument is made by withholding — lambda locked at 0.4 so criticality arrives as a condition, not a choice — and the unlocked companion stands in the same room, which makes the withholding a stage direction"
+     "note": "the argument is made by withholding — lambda locked at 0.4 so criticality arrives as a condition, not a choice — and the unlocked companion stands in the same room, which makes the withholding a stage direction",
+     "note_src": {
+      "file": "commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.gd",
+      "quote": "the map withholds what this artifact gives"
+     }
     }
    ],
    "hero": "edge_of_chaos_unlocked"
@@ -191,7 +215,11 @@
    "map": "Chamber_QFEP",
    "lines": [],
    "drop": true,
-   "edge": "the reunion is furnished from outside itself: every creature here was befriended in another chamber, and a mode fired alone lights its term on the screen and moves nothing — coherence is all the calibrator can read"
+   "edge": "the reunion is furnished from outside itself: every creature here was befriended in another chamber, and a mode fired alone lights its term on the screen and moves nothing — coherence is all the calibrator can read",
+   "edge_src": {
+    "file": "commons/maps/Chamber_QFEP/critical.md",
+    "quote": "A learner who has not befriended the kaleidocycle would find it absent from this chamber."
+   }
   },
   {
    "pearl": "qfep sandbox",
@@ -201,7 +229,11 @@
      "token": "reactive_particles",
      "text": "Alias for reactive_particle_field. Particles that respond to λ and φ parameters",
      "by": "draft",
-     "note": "you get every slider but the one that decides: lambda buys how much order, never what order looks like — a single line of geometry lays the cubic lattice the field falls into, and no control reaches it"
+     "note": "you get every slider but the one that decides: lambda buys how much order, never what order looks like — a single line of geometry lays the cubic lattice the field falls into, and no control reaches it",
+     "note_src": {
+      "file": "commons/interfaces/qfep/reactive_particle_field.gd",
+      "quote": "λ decides how much order the system buys. It never decides what order LOOKS like"
+     }
     },
     {
      "token": "qfep_reactor",
@@ -220,7 +252,11 @@
      "token": "queer_morphology_specimen",
      "text": "queer morphology is not a fixed form but a process of becoming",
      "by": "draft",
-     "note": "the form that refuses to be one thing needs the vitrine to read as a specimen at all: jar sealed, lid seated, pedestal under it, shipped at quarter scale — becoming is legible here only as something collected"
+     "note": "the form that refuses to be one thing needs the vitrine to read as a specimen at all: jar sealed, lid seated, pedestal under it, shipped at quarter scale — becoming is legible here only as something collected",
+     "note_src": {
+      "file": "commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.gd",
+      "quote": "the jar is the claim the artifact exists to argue against"
+     }
     },
     {
      "token": "grab_sphere_phi",

@@ -11,7 +11,11 @@
      "token": "pattern_tile_4x4",
      "text": "every repeating pattern in the world — from Islamic tiles to woven textiles to crystal structures",
      "by": "draft",
-     "note": "the domain cell cannot say what it is: pattern_tile_4x4 and its mirror, brick and herringbone siblings are one scene at tile_size 4, differing only by a repeat_mode integer held in the registry, outside the square you painted."
+     "note": "the domain cell cannot say what it is: pattern_tile_4x4 and its mirror, brick and herringbone siblings are one scene at tile_size 4, differing only by a repeat_mode integer held in the registry, outside the square you painted.",
+     "note_src": {
+      "file": "commons/artifacts/registry/arrays.json",
+      "quote": "\"scene\": \"res://commons/primitives/arrays/pattern_tile_puzzle.tscn\", \"config\": {\"tile_size\": 4, \"repeat_mode\": 0}"
+     }
     },
     {
      "token": "pattern_tile_cube",
@@ -34,7 +38,11 @@
      "token": "ten_print_textile",
      "text": "A tool: 10 PRINT as a textile loom, weaving an endless bolt of slash/backslash fabric - the pattern doing a design …",
      "by": "draft",
-     "note": "the lattice cannot supply the difference that turns repetition into cloth — it borrows that from a coin, and the coin has a seed: pin weave_seed and the endless bolt repeats exactly."
+     "note": "the lattice cannot supply the difference that turns repetition into cloth — it borrows that from a coin, and the coin has a seed: pin weave_seed and the endless bolt repeats exactly.",
+     "note_src": {
+      "file": "commons/artifacts/ten_print_textile/ten_print_textile.gd",
+      "quote": "`weave_seed` 0 keeps the shipped `_rng.randomize()`; any positive value pins the bolt"
+     }
     },
     {
      "token": "pattern_loom",
@@ -67,7 +75,11 @@
      "token": "kaleidoscope",
      "text": "a dihedral symmetry group is closure under N rotations and N",
      "by": "draft",
-     "note": "the restriction is a law about filling a plane, and the kaleidoscope never fills one: mirror_count runs 2 to 8, so the map's hero builds the forbidden fivefold rosette without complaint — a disc owes the lattice nothing."
+     "note": "the restriction is a law about filling a plane, and the kaleidoscope never fills one: mirror_count runs 2 to 8, so the map's hero builds the forbidden fivefold rosette without complaint — a disc owes the lattice nothing.",
+     "note_src": {
+      "file": "commons/artifacts/kaleidoscope/kaleidoscope.gd",
+      "quote": "@export_range(2, 8) var mirror_count: int = 3"
+     }
     }
    ],
    "hero": "kaleidoscope"
@@ -80,7 +92,11 @@
      "token": "mill_escher_p4g",
      "text": "Pattern mill milling a monochrome Escher-palette p4g tiling — 4-fold off-center rotors",
      "by": "draft",
-     "note": "a glide only shows when the motif has a handedness — reflect something already symmetric and the slide is indistinguishable from plain translation; here that handedness comes from motif_seed 9, drawn at random and never checked."
+     "note": "a glide only shows when the motif has a handedness — reflect something already symmetric and the slide is indistinguishable from plain translation; here that handedness comes from motif_seed 9, drawn at random and never checked.",
+     "note_src": {
+      "file": "commons/artifacts/registry/pattern_mill.json",
+      "quote": "\"group\": \"p4g\", \"palette\": \"escher\", \"motif_seed\": 9, \"density\": 0.6"
+     }
     },
     {
      "token": "loom_escher_mirror",
@@ -118,7 +134,11 @@
      "token": "pattern_maker_station",
      "text": "structure does not emerge from complexity — it emerges from constraint applied to the …",
      "by": "draft",
-     "note": "closure needs a set of moves you can pick two of, and the station has none: each group is one hard-coded index formula, so the set closes because the table names it, not because anything here composed."
+     "note": "closure needs a set of moves you can pick two of, and the station has none: each group is one hard-coded index formula, so the set closes because the table names it, not because anything here composed.",
+     "note_src": {
+      "file": "commons/artifacts/pattern_maker_station/pattern_maker_station.gd",
+      "quote": "Reuses WallpaperGroups.get_symmetric_color() for tiling."
+     }
     }
    ],
    "hero": "pattern_maker_station"
@@ -128,7 +148,11 @@
    "map": "Chamber_Symmetry",
    "lines": [],
    "drop": true,
-   "edge": "the chamber's verb is to repeat, and nothing in it repeats: the bracelet sets one cube on one cardinal neighbour, and no group engine stands in the room to carry the motif out."
+   "edge": "the chamber's verb is to repeat, and nothing in it repeats: the bracelet sets one cube on one cardinal neighbour, and no group engine stands in the room to carry the motif out.",
+   "edge_src": {
+    "file": "commons/maps/Chamber_Symmetry/map_data.json",
+    "quote": "becoming_catalyst#start_mode:primitives"
+   }
   },
   {
    "pearl": "seventeen",
@@ -138,7 +162,11 @@
      "token": "wall_pattern_gallery",
      "text": "symmetry is not decoration — it is the mathematical structure that determines how a small truth propagates through …",
      "by": "draft",
-     "note": "the closed census needs a lattice that can hold it, and this one is square: twelve groups run exact, and the five hexagonal ones — p6m, the Alhambra's, among them — are float rotations rounded back into square cells."
+     "note": "the closed census needs a lattice that can hold it, and this one is square: twelve groups run exact, and the five hexagonal ones — p6m, the Alhambra's, among them — are float rotations rounded back into square cells.",
+     "note_src": {
+      "file": "commons/primitives/arrays/wallpaper_groups.gd",
+      "quote": "Simplified: use modular arithmetic to approximate"
+     }
     },
     {
      "token": "loom_alhambra_p6m",

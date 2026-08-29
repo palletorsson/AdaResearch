@@ -11,7 +11,11 @@
      "token": "evolved_creatures",
      "text": "Physics-based creature evolution inspired by Karl Sims",
      "by": "draft",
-     "note": "selection needs a fitness function and a mutation rate the population cannot itself evolve — the creatures reach every gene except the two set from outside the arena, and can only converge on what was already scored."
+     "note": "selection needs a fitness function and a mutation rate the population cannot itself evolve — the creatures reach every gene except the two set from outside the arena, and can only converge on what was already scored.",
+     "note_src": {
+      "file": "commons/maps/ML_Evolution/critical.md",
+      "quote": "The creatures cannot evolve their own evolvability. The meta-parameter is the one thing the evolutionary system cannot reach, the frame outside the frame."
+     }
     },
     {
      "token": "gradient_descent_visualization",
@@ -39,7 +43,11 @@
      "token": "pca_visualization",
      "text": "PCA reveals that high-dimensional data is a conspiracy of a few directions pretending to be …",
      "by": "draft",
-     "note": "the walkable terrain needs a loss function to shape it, and the map moves only eta: you descend into whichever valley someone else's definition of error dug, and call the bottom understanding."
+     "note": "the walkable terrain needs a loss function to shape it, and the map moves only eta: you descend into whichever valley someone else's definition of error dug, and call the bottom understanding.",
+     "note_src": {
+      "file": "commons/maps/ML_Gradient_Landscape/critical.md",
+      "quote": "The slider moves eta. Nothing moves the landscape."
+     }
     },
     {
      "token": "loss_function_comparator",
@@ -62,7 +70,11 @@
      "token": "svm_visualization",
      "text": "the decision boundary depends on only a few points",
      "by": "draft",
-     "note": "a boundary needs axes: k-means, svm and the forest each argue about how to draw the line and none of them picks the features — what was never made a coordinate is not misclassified, it is simply absent."
+     "note": "a boundary needs axes: k-means, svm and the forest each argue about how to draw the line and none of them picks the features — what was never made a coordinate is not misclassified, it is simply absent.",
+     "note_src": {
+      "file": "commons/maps/ML_Classification/critical.md",
+      "quote": "The decision boundary depends entirely on which features are measured, and the choice of features is the act of deciding what matters about a thing before asking what kind of thing it is."
+     }
     },
     {
      "token": "random_forest_visualization",
@@ -80,7 +92,11 @@
      "token": "neural_network_visualization",
      "text": "a neural network does not learn rules — it learns a continuous function that happens to approximate …",
      "by": "draft",
-     "note": "the corridor shows every weight and every activation and still cannot show the thing that matters: generalisation lives in the gap between training error and test error, which is statistical, not spatial, and no chamber holds it."
+     "note": "the corridor shows every weight and every activation and still cannot show the thing that matters: generalisation lives in the gap between training error and test error, which is statistical, not spatial, and no chamber holds it.",
+     "note_src": {
+      "file": "commons/maps/ML_Neural_Networks/critical.md",
+      "quote": "The map cannot show you this corridor because it is not spatial but statistical — it lives in the gap between training error and test error"
+     }
     },
     {
      "token": "neural_networks_vr",
@@ -98,7 +114,11 @@
      "token": "computer_vision_vr",
      "text": "every act of perception is a convolution — a commitment to which local patterns matter",
      "by": "draft",
-     "note": "perception needs a standpoint it cannot itself supply: the gallery seats you outside the alcoves as though seeing were something to watch, and the empty third alcove is where the machine's own chosen gaze should hang."
+     "note": "perception needs a standpoint it cannot itself supply: the gallery seats you outside the alcoves as though seeing were something to watch, and the empty third alcove is where the machine's own chosen gaze should hang.",
+     "note_src": {
+      "file": "commons/maps/ML_Perception/critical.md",
+      "quote": "perception is the one thing you cannot observe from a distance, because observation is already perception"
+     }
     },
     {
      "token": "convolutional_neural_networks_cnns_vr",
@@ -116,7 +136,11 @@
      "token": "transformers_vr",
      "text": "attention is all you need — the transformer proves that explicit memory gates are unnecessary when every token can directly query every …",
      "by": "draft",
-     "note": "attention needs the whole sequence at once and a body cannot have it: you walk the corridor one cell at a time, so the map teaches recurrence with your feet while the artifact inside abolishes it."
+     "note": "attention needs the whole sequence at once and a body cannot have it: you walk the corridor one cell at a time, so the map teaches recurrence with your feet while the artifact inside abolishes it.",
+     "note_src": {
+      "file": "commons/maps/ML_Sequence_Memory/critical.md",
+      "quote": "The map's body-logic is recurrent even when its content is attentional."
+     }
     },
     {
      "token": "lstms_vr",
@@ -131,7 +155,11 @@
    "map": "Chamber_ML",
    "lines": [],
    "drop": true,
-   "edge": "the hunter cannot supply its own training data: it improves only as far as you are legible, so your one defence is to move unpredictably — and staying unpredictable is more tiring than being learned."
+   "edge": "the hunter cannot supply its own training data: it improves only as far as you are legible, so your one defence is to move unpredictably — and staying unpredictable is more tiring than being learned.",
+   "edge_src": {
+    "file": "commons/maps/Chamber_ML/critical.md",
+    "quote": "the creature's policy refines only to the extent that the learner is legible"
+   }
   },
   {
    "pearl": "ml generative",
@@ -141,7 +169,11 @@
      "token": "generative_adversarial_networks_gans_vr",
      "text": "creation can emerge from opposition — the generator learns to create precisely because the discriminator learns to …",
      "by": "draft",
-     "note": "the generator never sees the world: everything it learns about real arrives through one doorway as the discriminator's gradient, and the discriminator only ever saw a dataset someone collected — so the room dreams what it was shown."
+     "note": "the generator never sees the world: everything it learns about real arrives through one doorway as the discriminator's gradient, and the discriminator only ever saw a dataset someone collected — so the room dreams what it was shown.",
+     "note_src": {
+      "file": "commons/maps/ML_Generative/critical.md",
+      "quote": "The system that learns to produce reality has no access to reality."
+     }
     }
    ],
    "hero": "generative_adversarial_networks_gans_vr"
@@ -154,7 +186,11 @@
      "token": "anomaly_detection",
      "text": "Outlier detection algorithms — isolation forests",
      "by": "draft",
-     "note": "synthesis needs bridges its parts cannot supply: three islands over h0 void, the anomaly detector exiled furthest out, and the walkways hold only because someone built them — connection or rationalisation, the teleporter does not say."
+     "note": "synthesis needs bridges its parts cannot supply: three islands over h0 void, the anomaly detector exiled furthest out, and the walkways hold only because someone built them — connection or rationalisation, the teleporter does not say.",
+     "note_src": {
+      "file": "commons/maps/ML_Synthesis/critical.md",
+      "quote": "The synthesis of machine learning rests on nothing. It floats because the walkways hold, and the walkways hold because someone built them"
+     }
     },
     {
      "token": "joint_learn_walk",

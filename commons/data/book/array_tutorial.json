@@ -11,7 +11,11 @@
      "token": "xyz_coordinates",
      "text": "Cartesian coordinate system, x y z godot",
      "by": "draft",
-     "note": "a single cube has no index: one object cannot say where it is, so the map lends it a frame — and the gadget's right angles and unit lengths get read as properties of space rather than one convention."
+     "note": "a single cube has no index: one object cannot say where it is, so the map lends it a frame — and the gadget's right angles and unit lengths get read as properties of space rather than one convention.",
+     "note_src": {
+      "file": "commons/context/XYZcoordinates/pickable_xyz.gd",
+      "quote": "coordinate systems are conventions about shared directions, not properties of space itself"
+     }
     }
    ],
    "hero": "xyz_coordinates"
@@ -24,7 +28,11 @@
      "token": "panel_bridge_loom",
      "text": "Three interactive VR panels displaying a weaving draft",
      "by": "draft",
-     "note": "the drawdown is the one panel you cannot edit: no thread in the cloth is addressable, only the two orders above it, so the diagonal you want has to be argued for upstream and never placed."
+     "note": "the drawdown is the one panel you cannot edit: no thread in the cloth is addressable, only the two orders above it, so the diagonal you want has to be argued for upstream and never placed.",
+     "note_src": {
+      "file": "commons/ui/panel_bridge/test_panel_bridge.gd",
+      "quote": "the diagonal is not IN the tie-up, it is in the order of the draw"
+     }
     },
     {
      "token": "script_runner",
@@ -62,7 +70,11 @@
      "token": "tiling_demo",
      "text": "a tiling motif is a function from grid index to visual element",
      "by": "draft",
-     "note": "a repeat needs a plane that will accept it, and the plane accepts exactly seventeen grammars — no eighteenth, no five-fold rosette; Casa del Fauno and the Cosmatesque floors are instances, never additions."
+     "note": "a repeat needs a plane that will accept it, and the plane accepts exactly seventeen grammars — no eighteenth, no five-fold rosette; Casa del Fauno and the Cosmatesque floors are instances, never additions.",
+     "note_src": {
+      "file": "commons/maps/Array_Patterns/critical.md",
+      "quote": "exactly 17 distinct ways to tile a 2D plane with a repeating pattern. No more, no less."
+     }
     },
     {
      "token": "pattern_tunnel_machine",
@@ -90,7 +102,11 @@
      "token": "column_3_z",
      "text": "an array is space made countable — column_3_z makes the abstract concept of an index into a physical position you can walk …",
      "by": "draft",
-     "note": "the row cannot say which cube is [0] — an index is a count from an end somebody chose, so the pink tags are borrowed, and lifting a cube leaves a hole that keeps counting."
+     "note": "the row cannot say which cube is [0] — an index is a count from an end somebody chose, so the pink tags are borrowed, and lifting a cube leaves a hole that keeps counting.",
+     "note_src": {
+      "file": "algorithms/arrays/column_3_z.gd",
+      "quote": "an index is nothing but POSITION, and you get it by counting from the end you started at"
+     }
     }
    ],
    "hero": "column_3_z"
@@ -103,7 +119,11 @@
      "token": "pulsar_visualizer",
      "text": "the first discovered pulsar was initially called LGM-1 (Little Green Men) because the signal's regularity seemed artificial",
      "by": "draft",
-     "note": "the grid can address any cell but cannot decide what belongs in one: the pulsar arrives continuous and is cut at 0.25 — below the line the star stops existing, and the remainder reads as engineered."
+     "note": "the grid can address any cell but cannot decide what belongs in one: the pulsar arrives continuous and is cut at 0.25 — below the line the star stops existing, and the remainder reads as engineered.",
+     "note_src": {
+      "file": "algorithms/arrays/pulsar/pulsar_visualizer.gd",
+      "quote": "binary representation requires a decision about where to draw the line"
+     }
     },
     {
      "token": "grid_2d_4x4",
@@ -131,7 +151,11 @@
      "token": "grid_3d_4x4x4",
      "text": "a three-dimensional array is the minimum structure needed to represent volumetric space",
      "by": "draft",
-     "note": "a filled 4×4×4 has no readable inside: the inner indices reach the eye only because every label is drawn with depth testing off, through the cubes in front of it, and reach the hand only by emptying them."
+     "note": "a filled 4×4×4 has no readable inside: the inner indices reach the eye only because every label is drawn with depth testing off, through the cubes in front of it, and reach the hand only by emptying them.",
+     "note_src": {
+      "file": "commons/maps/Tutorial_3D/critical.md",
+      "quote": "The transparency is a conceit: real stacked data does not visually announce its neighbours."
+     }
     },
     {
      "token": "sorting_algorithm_race",
@@ -161,7 +185,11 @@
    "map": "Chamber_Arrays",
    "lines": [],
    "drop": true,
-   "edge": "arrangement is not authorship until something else must route around it: the chamber fires nothing, so it borrows the agent's plan to make a placed block mean anything, and the meaning arrives as extra steps."
+   "edge": "arrangement is not authorship until something else must route around it: the chamber fires nothing, so it borrows the agent's plan to make a placed block mean anything, and the meaning arrives as extra steps.",
+   "edge_src": {
+    "file": "commons/maps/Chamber_Arrays/critical.md",
+    "quote": "A second display tracks how many extra steps each new obstacle costs."
+   }
   },
   {
    "pearl": "tutorial disco",
@@ -171,7 +199,11 @@
      "token": "step_sequencer",
      "text": "a step sequencer is a for-loop over time — the array of steps is executed rhythmically",
      "by": "draft",
-     "note": "a boolean array knows which, never when: the floor stays silent until a clock is lent at 120 BPM, and whatever you walked between two of its sixteen columns never happened."
+     "note": "a boolean array knows which, never when: the floor stays silent until a clock is lent at 120 BPM, and whatever you walked between two of its sixteen columns never happened.",
+     "note_src": {
+      "file": "commons/audio/sequencer/step_sequencer.gd",
+      "quote": "BPM controls the column-advance rate"
+     }
     },
     {
      "token": "standalone_disco",

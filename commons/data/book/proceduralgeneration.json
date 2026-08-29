@@ -11,7 +11,11 @@
      "token": "GeneticProgramming",
      "text": "evolution does not design — it accumulates accidents that happen to survive",
      "by": "draft",
-     "note": "evolution without a designer still needs a fitness function it cannot evolve: the author moves from the geometry to the gradient, and the ninety percent culled each generation vanish without a name."
+     "note": "evolution without a designer still needs a fitness function it cannot evolve: the author moves from the geometry to the gradient, and the ninety percent culled each generation vanish without a name.",
+     "note_src": {
+      "file": "commons/maps/PG_Genetic_Evolution/critical.md",
+      "quote": "The author did not leave. The author moved from the geometry to the gradient."
+     }
     }
    ],
    "hero": "GeneticProgramming"
@@ -24,7 +28,11 @@
      "token": "space_colonization_algorithm",
      "text": "a tree does not know its shape — it only knows which direction has light",
      "by": "draft",
-     "note": "a tree that only knows which direction has light cannot supply the light: the attractor cloud poses the shape from outside and dies on contact, so the branch is a record of what it consumed."
+     "note": "a tree that only knows which direction has light cannot supply the light: the attractor cloud poses the shape from outside and dies on contact, so the branch is a record of what it consumed.",
+     "note_src": {
+      "file": "commons/maps/PG_Space_Colonization/critical.md",
+      "quote": "The tree grows by devouring what drew it forward."
+     }
     }
    ],
    "hero": "space_colonization_algorithm"
@@ -37,7 +45,11 @@
      "token": "percolationnetwork_ca",
      "text": "connectivity is not gradual — below the threshold nothing connects",
      "by": "draft",
-     "note": "the lattice cannot set its own density: p is a const at 0.4, comfortably past p_c, so the map built to show a system deciding has only ever shown it deciding one way."
+     "note": "the lattice cannot set its own density: p is a const at 0.4, comfortably past p_c, so the map built to show a system deciding has only ever shown it deciding one way.",
+     "note_src": {
+      "file": "algorithms/proceduralgeneration/growth_systems/percolationnetwork_ca/percolationnetwork_ca.gd",
+      "quote": "every player who ever met this lattice met a lattice that was always going to connect"
+     }
     }
    ],
    "hero": "percolationnetwork_ca"
@@ -55,7 +67,11 @@
      "token": "branching_growth_algorithm",
      "text": "Interactive visualization of branching growth patterns and algorithmic plant generation",
      "by": "draft",
-     "note": "the comparison needs rules and noise to be one spectrum, and the map can only build two wings: the tree readable fork by fork, the terrain with no genealogy, the hybrid a missing ontology rather than a missing artifact."
+     "note": "the comparison needs rules and noise to be one spectrum, and the map can only build two wings: the tree readable fork by fork, the terrain with no genealogy, the hybrid a missing ontology rather than a missing artifact.",
+     "note_src": {
+      "file": "commons/maps/PG_Branching_Growth/critical.md",
+      "quote": "The hybrid that the intent.md identifies as a gap is not just a missing artifact — it is a missing ontology."
+     }
     }
    ],
    "hero": "branching_growth_algorithm"
@@ -65,7 +81,11 @@
    "map": "Chamber_ProcGen",
    "lines": [],
    "drop": true,
-   "edge": "the bricoleur cannot supply its own material: every rebuild is made of what your strikes knocked loose, so its morphology is a function of your attention and the loop has no termination condition."
+   "edge": "the bricoleur cannot supply its own material: every rebuild is made of what your strikes knocked loose, so its morphology is a function of your attention and the loop has no termination condition.",
+   "edge_src": {
+    "file": "commons/maps/Chamber_ProcGen/critical.md",
+    "quote": "A learner who keeps striking the golem's legs produces a golem that rebuilds more legs"
+   }
   },
   {
    "pearl": "pg caves mazes",
@@ -75,7 +95,11 @@
      "token": "maze_generation",
      "text": "VR-scale walkable maze with recursive backtracking generation",
      "by": "draft",
-     "note": "the contrast needs a dividing wall neither algorithm carved — the one frankly authored thing in the room — and from inside either side the difference it exists to show is gone: the body cannot tell rule from accident."
+     "note": "the contrast needs a dividing wall neither algorithm carved — the one frankly authored thing in the room — and from inside either side the difference it exists to show is gone: the body cannot tell rule from accident.",
+     "note_src": {
+      "file": "commons/maps/PG_Caves_Mazes/critical.md",
+      "quote": "the dividing wall is pure intention: a curatorial gesture that organizes two algorithms into an exhibit"
+     }
     },
     {
      "token": "caverandomwalk",
@@ -93,7 +117,11 @@
      "token": "layered_membrane",
      "text": "a membrane is a boundary that is also a surface",
      "by": "draft",
-     "note": "accumulation gives the shape and cannot give the milieu: the mound is no landform, the dome a surface and not a shelter, the membrane's fifty shells have never borne load — architecture with the architecture removed."
+     "note": "accumulation gives the shape and cannot give the milieu: the mound is no landform, the dome a surface and not a shelter, the membrane's fifty shells have never borne load — architecture with the architecture removed.",
+     "note_src": {
+      "file": "commons/maps/PG_Sculpted_Forms/critical.md",
+      "quote": "architecture with the architecture removed — geometry that resembles built form but has never borne load, shed rain, or sheltered a body"
+     }
     },
     {
      "token": "cube_mound_scene",
@@ -116,7 +144,11 @@
      "token": "mirror_cellular_texture_for_3d",
      "text": "the mandala is not emergent. A fragment is computed and the rest is copied — and this",
      "by": "draft",
-     "note": "the mandala needs a stencil it did not compute: twenty-five cells drawn and tiled four hundred times, so each reflection axis subtracts entropy and the intricacy is borrowed from the viewer, not earned by the rule."
+     "note": "the mandala needs a stencil it did not compute: twenty-five cells drawn and tiled four hundred times, so each reflection axis subtracts entropy and the intricacy is borrowed from the viewer, not earned by the rule.",
+     "note_src": {
+      "file": "algorithms/proceduralgeneration/growth_systems/mirroredcellularautomata/mirror_cellular_texture_for_3d.gd",
+      "quote": "A stencil is cut, and the rest is repetition."
+     }
     },
     {
      "token": "rhizomatic_maze_space",

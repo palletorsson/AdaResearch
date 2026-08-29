@@ -16,7 +16,11 @@
      "token": "jelly_cube",
      "text": "elasticity is not a property of the object — it is a negotiation between the object's internal forces and whatever touches …",
      "by": "draft",
-     "note": "a spring cannot supply its own rest length — the norm is written in before the first frame, so what the cube calls equilibrium is obedience to a shape it can never inspect."
+     "note": "a spring cannot supply its own rest length — the norm is written in before the first frame, so what the cube calls equilibrium is obedience to a shape it can never inspect.",
+     "note_src": {
+      "file": "commons/maps/SoftBodies_Soft_Body_Deformation/critical.md",
+      "quote": "The cube's rest shape was chosen by a designer."
+     }
     }
    ],
    "hero": "jelly_cube"
@@ -29,7 +33,11 @@
      "token": "revolving_joy_ride",
      "text": "a carousel is a centrifuge for compliance — the soft bodies do not choose their shape",
      "by": "draft",
-     "note": "compliance cannot rotate itself: every hanging body needs a rigid hub and a pin it did not choose, so the shape it finds is an answer to a question the arm asked first."
+     "note": "compliance cannot rotate itself: every hanging body needs a rigid hub and a pin it did not choose, so the shape it finds is an answer to a question the arm asked first.",
+     "note_src": {
+      "file": "commons/maps/SoftBodies_Carusell/critical.md",
+      "quote": "The soft body did not ask to spin."
+     }
     },
     {
      "token": "cloth_straps",
@@ -57,7 +65,11 @@
      "token": "breathing_room",
      "text": "a room that breathes is no longer a container — it is a body, and you are inside it",
      "by": "draft",
-     "note": "a wall can only breathe against something that does not — the floor, the obstacle, the sine driving it — and the whole cost of every meeting is paid by the side built to yield."
+     "note": "a wall can only breathe against something that does not — the floor, the obstacle, the sine driving it — and the whole cost of every meeting is paid by the side built to yield.",
+     "note_src": {
+      "file": "commons/maps/SoftBodies_Obsticals/critical.md",
+      "quote": "The entire cost of the encounter is borne by the material that gives."
+     }
     },
     {
      "token": "flagdancer",
@@ -75,7 +87,11 @@
      "token": "softbody_gallery_part2",
      "text": "Part 2 of the soft body test gallery",
      "by": "draft",
-     "note": "the gallery cannot deduce what a soft body will do, only stage it — and these twelve cells are one slice of a rack chosen by an index, so what nobody racked is not merely unseen but unaskable."
+     "note": "the gallery cannot deduce what a soft body will do, only stage it — and these twelve cells are one slice of a rack chosen by an index, so what nobody racked is not merely unseen but unaskable.",
+     "note_src": {
+      "file": "commons/maps/SoftBodies_Obsticals_Part2/critical.md",
+      "quote": "The body is not deducible. It must be encountered."
+     }
     }
    ],
    "hero": "softbody_gallery_part2"
@@ -88,7 +104,11 @@
      "token": "softstopscene",
      "text": "the softbodies chapter says form is not imposed",
      "by": "draft",
-     "note": "the cloth cannot choose its own clock: the CFL step shrinks as stiffness rises, so rigidity costs compute — and the four sculptures in the room are four seconds a timer picked, not four shapes."
+     "note": "the cloth cannot choose its own clock: the CFL step shrinks as stiffness rises, so rigidity costs compute — and the four sculptures in the room are four seconds a timer picked, not four shapes.",
+     "note_src": {
+      "file": "commons/maps/SoftBodies_Cloth_Physics/critical.md",
+      "quote": "You cannot negotiate with the CFL condition. You can only obey it."
+     }
     }
    ],
    "hero": "softstopscene"
@@ -99,7 +119,11 @@
    "lines": [],
    "hero": "rounded_softbody_test",
    "drop": true,
-   "edge": "a room with no instructions teaches nothing on its own — it can only spend intuition five earlier maps deposited, so a body arriving here first finds objects, not a playground."
+   "edge": "a room with no instructions teaches nothing on its own — it can only spend intuition five earlier maps deposited, so a body arriving here first finds objects, not a playground.",
+   "edge_src": {
+    "file": "commons/maps/SoftBodies_Playground_of_Joy/critical.md",
+    "quote": "The learner arrives with five maps worth of accumulated intuition"
+   }
   },
   {
    "pearl": "affect theory visualization",
@@ -109,7 +133,11 @@
      "token": "radiolaria",
      "text": "Procedural radiolarian skeleton generation — the impossibly intricate silica structures of single-celled organisms",
      "by": "draft",
-     "note": "the skeleton cannot show the softness that made it: the protoplasm has withdrawn and the map hands you only the residue, so the process must be imported or the beauty reads as design."
+     "note": "the skeleton cannot show the softness that made it: the protoplasm has withdrawn and the map hands you only the residue, so the process must be imported or the beauty reads as design.",
+     "note_src": {
+      "file": "commons/maps/SoftBodies_Affect_Theory_Visualization/critical.md",
+      "quote": "It shows the result, not the making."
+     }
     }
    ],
    "hero": "radiolaria"
@@ -127,7 +155,11 @@
      "token": "reaction_diffusion",
      "text": "identical cells under identical rules stay identical forever. Every pattern here is the",
      "by": "draft",
-     "note": "form without former still needs a former for its two numbers: feed and kill are typed in from outside, and the symmetry only breaks because someone seeded noise the chemistry cannot make."
+     "note": "form without former still needs a former for its two numbers: feed and kill are typed in from outside, and the symmetry only breaks because someone seeded noise the chemistry cannot make.",
+     "note_src": {
+      "file": "commons/maps/ProceduralGeneration_Reaction_Diffusion_Systems/critical.md",
+      "quote": "Who sets the parameters?"
+     }
     }
    ],
    "hero": "reaction_diffusion"
@@ -140,7 +172,11 @@
      "token": "entropy_morphogenesis",
      "text": "morphogenesis is not construction — it is what happens when entropy finds a threshold where disorder crystallizes into …",
      "by": "draft",
-     "note": "the gyroid is continuous and the room is not: marching cubes touches the field only at grid vertices and guesses between them, so every passage finer than the sample spacing was never built and cannot be missed."
+     "note": "the gyroid is continuous and the room is not: marching cubes touches the field only at grid vertices and guesses between them, so every passage finer than the sample spacing was never built and cannot be missed.",
+     "note_src": {
+      "file": "commons/maps/Topology_Entropy_Morphogenesis/critical.md",
+      "quote": "Between sample points, the surface is interpolated, not known."
+     }
     }
    ],
    "hero": "entropy_morphogenesis"
@@ -150,7 +186,11 @@
    "map": "Chamber_SoftBodies",
    "lines": [],
    "drop": true,
-   "edge": "the empty catalyst slot only reads as a refusal to someone who arrives expecting one — the chamber cannot supply the habit it withholds, so the argument is lost on anyone who came here first."
+   "edge": "the empty catalyst slot only reads as a refusal to someone who arrives expecting one — the chamber cannot supply the habit it withholds, so the argument is lost on anyone who came here first.",
+   "edge_src": {
+    "file": "commons/maps/Chamber_SoftBodies/critical.md",
+    "quote": "The chamber's empty catalyst slot is itself part of the teaching."
+   }
   },
   {
    "pearl": "softbody sb01 cloth drape corners",
@@ -160,7 +200,11 @@
      "token": "gallery_marker_soft-body",
      "text": "Small bronze pedestal + glowing stake + Label3D reading SOFT BODY",
      "by": "draft",
-     "note": "the catenary is not the cloth's — hand the same curve to a chain or a cable and it appears unchanged, so what the room shows belongs to the two pins, and the fabric is interchangeable."
+     "note": "the catenary is not the cloth's — hand the same curve to a chain or a cable and it appears unchanged, so what the room shows belongs to the two pins, and the fabric is interchangeable.",
+     "note_src": {
+      "file": "commons/maps/SoftBody_sb01_cloth_drape_corners/intent.md",
+      "quote": "Material specificity collapses into mathematical universality"
+     }
     }
    ],
    "hero": "gallery_marker_soft-body"
@@ -170,161 +214,253 @@
    "map": "SoftBody_sb02_cloth_drape_top_row",
    "lines": [],
    "drop": true,
-   "edge": "pin the whole top and there is nothing left to emerge; the one thing that still curls is the outermost column, and it curls because the lattice ran out of neighbours, not because cloth does that."
+   "edge": "pin the whole top and there is nothing left to emerge; the one thing that still curls is the outermost column, and it curls because the lattice ran out of neighbours, not because cloth does that.",
+   "edge_src": {
+    "file": "commons/maps/SoftBody_sb02_cloth_drape_top_row/intent.md",
+    "quote": "Slight side curl at the edges is a finite-grid artifact"
+   }
   },
   {
    "pearl": "softbody sb03 cloth flag sideways",
    "map": "SoftBody_sb03_cloth_flag_sideways",
    "lines": [],
    "drop": true,
-   "edge": "there is no air in this room — wind is a constant vector dotted with each face normal, so the flag is pushed and never pushes back: no wake, no shelter behind it, no gust it caused."
+   "edge": "there is no air in this room — wind is a constant vector dotted with each face normal, so the flag is pushed and never pushes back: no wake, no shelter behind it, no gust it caused.",
+   "edge_src": {
+    "file": "commons/maps/SoftBody_sb03_cloth_flag_sideways/intent.md",
+    "quote": "a constant world-space velocity dotted with each triangle's normal"
+   }
   },
   {
    "pearl": "softbody sb04 cloth tablecloth",
    "map": "SoftBody_sb04_cloth_tablecloth",
    "lines": [],
    "drop": true,
-   "edge": "the dome hangs over a table that is not there — the four pins supply every symmetry in it and the cloth supplies none, so pull one pin and the surface being shown stops existing."
+   "edge": "the dome hangs over a table that is not there — the four pins supply every symmetry in it and the cloth supplies none, so pull one pin and the surface being shown stops existing.",
+   "edge_src": {
+    "file": "commons/maps/SoftBody_sb04_cloth_tablecloth/blurb.md",
+    "quote": "the belly of a tablecloth thrown over a table that isn't there"
+   }
   },
   {
    "pearl": "softbody sb05 jelly box bounce",
    "map": "SoftBody_sb05_jelly_box_bounce",
    "lines": [],
    "drop": true,
-   "edge": "cube-ness lives in twenty-eight springs and nowhere in the cube: pull one and the solid becomes a sheet or a string, so the shape is a count, and the count has no margin."
+   "edge": "cube-ness lives in twenty-eight springs and nowhere in the cube: pull one and the solid becomes a sheet or a string, so the shape is a count, and the count has no margin.",
+   "edge_src": {
+    "file": "commons/maps/SoftBody_sb05_jelly_box_bounce/blurb.md",
+    "quote": "Take away any one spring and the cube collapses into a sheet or a string."
+   }
   },
   {
    "pearl": "softbody sb06 jelly grid settle",
    "map": "SoftBody_sb06_jelly_grid_settle",
    "lines": [],
    "drop": true,
-   "edge": "the collapse is one number, not a material: topology says what could happen and stiffness says which of those does, and the room can only show the consequence, never the value that chose it."
+   "edge": "the collapse is one number, not a material: topology says what could happen and stiffness says which of those does, and the room can only show the consequence, never the value that chose it.",
+   "edge_src": {
+    "file": "commons/maps/SoftBody_sb06_jelly_grid_settle/intent.md",
+    "quote": "Topology fixes what can happen; stiffness fixes which of the possible behaviors actually happens."
+   }
   },
   {
    "pearl": "softbody sb07 jelly grid tall stiff",
    "map": "SoftBody_sb07_jelly_grid_tall_stiff",
    "lines": [],
    "drop": true,
-   "edge": "standing costs stiffness, and stiffness is what the integrator cannot afford: push k high enough for the column to hold and the same number that keeps it upright is the one that detonates the timestep."
+   "edge": "standing costs stiffness, and stiffness is what the integrator cannot afford: push k high enough for the column to hold and the same number that keeps it upright is the one that detonates the timestep.",
+   "edge_src": {
+    "file": "doc/SEAM_PER_SEQUENCE.md",
+    "quote": "stiffen it and it detonates (the timestep instability)"
+   }
   },
   {
    "pearl": "softbody sb08 jelly grid floppy",
    "map": "SoftBody_sb08_jelly_grid_floppy",
    "lines": [],
    "drop": true,
-   "edge": "the phase change this room claims is a band, and the band is between the rooms: sb07 stands, sb08 flows, and the settling-but-misshapen middle where the transition actually happens is in no map at all."
+   "edge": "the phase change this room claims is a band, and the band is between the rooms: sb07 stands, sb08 flows, and the settling-but-misshapen middle where the transition actually happens is in no map at all.",
+   "edge_src": {
+    "file": "commons/maps/SoftBody_sb08_jelly_grid_floppy/intent.md",
+    "quote": "between the two regimes is a third behavior (settling-but-misshapen) that the gallery does not exhibit"
+   }
   },
   {
    "pearl": "softbody sb ls01 plant skeleton",
    "map": "SoftBody_sb_ls01_plant_skeleton",
    "lines": [],
    "drop": true,
-   "edge": "the plant's shape is a word borrowed from another gallery; this room can only add what the grammar never said — stiffness, gravity, sixty steps — so the standing posture is made entirely of what the rule left out."
+   "edge": "the plant's shape is a word borrowed from another gallery; this room can only add what the grammar never said — stiffness, gravity, sixty steps — so the standing posture is made entirely of what the rule left out.",
+   "edge_src": {
+    "file": "commons/maps/SoftBody_sb_ls01_plant_skeleton/blurb.md",
+    "quote": "Same DNA as ls03 in the L-system gallery."
+   }
   },
   {
    "pearl": "softbody sb ls02 plant wind collapse",
    "map": "SoftBody_sb_ls02_plant_wind_collapse",
    "lines": [],
    "drop": true,
-   "edge": "the same word stands in the drawing and falls here: a grammar cannot supply weather, so what killed this plant was never in its letters — the genotype survives intact in the wreckage and explains none of it."
+   "edge": "the same word stands in the drawing and falls here: a grammar cannot supply weather, so what killed this plant was never in its letters — the genotype survives intact in the wreckage and explains none of it.",
+   "edge_src": {
+    "file": "commons/maps/SoftBody_sb_ls02_plant_wind_collapse/blurb.md",
+    "quote": "The grammar wrote the shape; the dynamics wrote what happened to the shape."
+   }
   },
   {
    "pearl": "softbody sb ca01 conway cloth",
    "map": "SoftBody_sb_ca01_conway_cloth",
    "lines": [],
    "drop": true,
-   "edge": "conway never had a body in mind, so nothing in the rule guarantees the graph stays connected — whether this cloth hangs or tears is decided by a seed, and the rule takes no credit either way."
+   "edge": "conway never had a body in mind, so nothing in the rule guarantees the graph stays connected — whether this cloth hangs or tears is decided by a seed, and the rule takes no credit either way.",
+   "edge_src": {
+    "file": "commons/maps/SoftBody_sb_ca01_conway_cloth/blurb.md",
+    "quote": "Conway's rule never had a body in mind."
+   }
   },
   {
    "pearl": "softbody sb ca02 life without death cloth",
    "map": "SoftBody_sb_ca02_life_without_death_cloth",
    "lines": [],
    "drop": true,
-   "edge": "this fabric is strong because nothing in it is allowed to die — density here is not weaving but the absence of an eraser, and run the rule far enough and the grid fills solid and stops being a pattern."
+   "edge": "this fabric is strong because nothing in it is allowed to die — density here is not weaving but the absence of an eraser, and run the rule far enough and the grid fills solid and stops being a pattern.",
+   "edge_src": {
+    "file": "commons/maps/SoftBody_sb_ca02_life_without_death_cloth/blurb.md",
+    "quote": "Every birth is permanent."
+   }
   },
   {
    "pearl": "softbody sb noise01 jelly crystal",
    "map": "SoftBody_sb_noise01_jelly_crystal",
    "lines": [],
    "drop": true,
-   "edge": "the cracks are painted, not computed — the springs settled and a noise field was sampled over them afterwards, so nothing broke; the gemstone lives only in an eye that reads voronoi as fracture."
+   "edge": "the cracks are painted, not computed — the springs settled and a noise field was sampled over them afterwards, so nothing broke; the gemstone lives only in an eye that reads voronoi as fracture.",
+   "edge_src": {
+    "file": "commons/maps/SoftBody_sb_noise01_jelly_crystal/intent.md",
+    "quote": "The fracture has no physical meaning"
+   }
   },
   {
    "pearl": "softbody sb rd01 coral cloth",
    "map": "SoftBody_sb_rd01_coral_cloth",
    "lines": [],
    "drop": true,
-   "edge": "the room claims pattern and material are one thing, then couples them in one direction only: chemistry stiffens the cloth, the cloth never bends the chemistry back, because closing the loop is what costs."
+   "edge": "the room claims pattern and material are one thing, then couples them in one direction only: chemistry stiffens the cloth, the cloth never bends the chemistry back, because closing the loop is what costs.",
+   "edge_src": {
+    "file": "commons/maps/SoftBody_sb_rd01_coral_cloth/intent.md",
+    "quote": "The coupling is one-way: chemistry influences mechanics, mechanics does not feed back"
+   }
   },
   {
    "pearl": "softbody sb rd02 stripes flag",
    "map": "SoftBody_sb_rd02_stripes_flag",
    "lines": [],
    "drop": true,
-   "edge": "the chemistry runs on the cloth's own vertices, so no stripe can be finer than one spring is long: the pattern's resolution is welded to the fabric's, and a mark needs a spring to be drawn on."
+   "edge": "the chemistry runs on the cloth's own vertices, so no stripe can be finer than one spring is long: the pattern's resolution is welded to the fabric's, and a mark needs a spring to be drawn on.",
+   "edge_src": {
+    "file": "commons/maps/SoftBody_sb_rd02_stripes_flag/intent.md",
+    "quote": "Two-field Gray-Scott reaction-diffusion solved on the cloth grid each frame"
+   }
   },
   {
    "pearl": "softbody gl01 classic bulb",
    "map": "SoftBody_gl01_classic_bulb",
    "lines": [],
    "drop": true,
-   "edge": "the bulb is blown by nothing: pressure is a scalar pushed along face normals, so there is no gas inside, no cooling, no breath — the vessel records three numbers and the record is mistaken for craft."
+   "edge": "the bulb is blown by nothing: pressure is a scalar pushed along face normals, so there is no gas inside, no cooling, no breath — the vessel records three numbers and the record is mistaken for craft.",
+   "edge_src": {
+    "file": "commons/maps/SoftBody_gl01_classic_bulb/intent.md",
+    "quote": "internal pressure modeled as a force normal to each face proportional to enclosed volume"
+   }
   },
   {
    "pearl": "softbody gl02 long bottle",
    "map": "SoftBody_gl02_long_bottle",
    "lines": [],
    "drop": true,
-   "edge": "this bottle has no rest state to reach — at step 380 it is still falling, so the vessel is a number someone typed, and there is no shape the simulation was heading toward to be right about."
+   "edge": "this bottle has no rest state to reach — at step 380 it is still falling, so the vessel is a number someone typed, and there is no shape the simulation was heading toward to be right about.",
+   "edge_src": {
+    "file": "commons/maps/SoftBody_gl02_long_bottle/blurb.md",
+    "quote": "Time, here, has units of shape."
+   }
   },
   {
    "pearl": "softbody gl03 wide bowl",
    "map": "SoftBody_gl03_wide_bowl",
    "lines": [],
    "drop": true,
-   "edge": "nothing forms this bowl's rim: it is the ring the world held fast, and the vessel is only the leftover below it — widen the pin and there is less body to shape, not more bowl."
+   "edge": "nothing forms this bowl's rim: it is the ring the world held fast, and the vessel is only the leftover below it — widen the pin and there is less body to shape, not more bowl.",
+   "edge_src": {
+    "file": "commons/maps/SoftBody_gl03_wide_bowl/blurb.md",
+    "quote": "As the pinned ring grows, the unpinned portion shrinks"
+   }
   },
   {
    "pearl": "softbody gl04 lopsided vase",
    "map": "SoftBody_gl04_lopsided_vase",
    "lines": [],
    "drop": true,
-   "edge": "the vase is not leaning — down was moved. the tilt lives in the gravity vector and not in the body, and nothing in the finished shape can tell you which of the two was rotated."
+   "edge": "the vase is not leaning — down was moved. the tilt lives in the gravity vector and not in the body, and nothing in the finished shape can tell you which of the two was rotated.",
+   "edge_src": {
+    "file": "commons/maps/SoftBody_gl04_lopsided_vase/blurb.md",
+    "quote": "gravity no longer points straight down"
+   }
   },
   {
    "pearl": "softbody gl05 collapsed sag",
    "map": "SoftBody_gl05_collapsed_sag",
    "lines": [],
    "drop": true,
-   "edge": "the other four become a family only because this one fails, and the physics has no opinion about which is which: the word broken comes from the eye, and the simulation records the same kind of fact either way."
+   "edge": "the other four become a family only because this one fails, and the physics has no opinion about which is which: the word broken comes from the eye, and the simulation records the same kind of fact either way.",
+   "edge_src": {
+    "file": "commons/maps/SoftBody_gl05_collapsed_sag/intent.md",
+    "quote": "the simulation does not distinguish \"good vessel\" from \"broken vessel\""
+   }
   },
   {
    "pearl": "softbody gm01 bottle in cylinder mould",
    "map": "SoftBody_gm01_bottle_in_cylinder_mould",
    "lines": [],
    "drop": true,
-   "edge": "the cavity has already decided the bottle and the body only has to arrive: no glass, no heat, no surface tension, no release from the wall — just a projection step doing the work of a factory."
+   "edge": "the cavity has already decided the bottle and the body only has to arrive: no glass, no heat, no surface tension, no release from the wall — just a projection step doing the work of a factory.",
+   "edge_src": {
+    "file": "commons/maps/SoftBody_gm01_bottle_in_cylinder_mould/intent.md",
+    "quote": "there is no glass, no thermal conduction, no surface tension, no wall release"
+   }
   },
   {
    "pearl": "softbody gm02 vase in tapered mould",
    "map": "SoftBody_gm02_vase_in_tapered_mould",
    "lines": [],
    "drop": true,
-   "edge": "the amphora exists in the cavity before any body enters it, and any body would do: the taper is the design, softness is only a delivery mechanism, and the vessel says nothing about what it was made of."
+   "edge": "the amphora exists in the cavity before any body enters it, and any body would do: the taper is the design, softness is only a delivery mechanism, and the vessel says nothing about what it was made of.",
+   "edge_src": {
+    "file": "commons/maps/SoftBody_gm02_vase_in_tapered_mould/intent.md",
+    "quote": "the cavity's geometry encodes the vessel's silhouette before any body enters"
+   }
   },
   {
    "pearl": "softbody gm03 box in cube mould",
    "map": "SoftBody_gm03_box_in_cube_mould",
    "lines": [],
    "drop": true,
-   "edge": "the mould gives this box every flat face and not one corner — the corner radius is bending stiffness made visible, so the only part the body authored is the part where it failed to comply."
+   "edge": "the mould gives this box every flat face and not one corner — the corner radius is bending stiffness made visible, so the only part the body authored is the part where it failed to comply.",
+   "edge_src": {
+    "file": "commons/maps/SoftBody_gm03_box_in_cube_mould/intent.md",
+    "quote": "the cavity does not fully determine the vessel"
+   }
   },
   {
    "pearl": "softbody gm04 pressed onto sphere",
    "map": "SoftBody_gm04_pressed_onto_sphere",
    "lines": [],
    "drop": true,
-   "edge": "turn the mould inside out and nothing changes — cavity or obstacle, the sheet only records a geometry it did not author, and here even the pins are gone, so it holds on to nothing at all."
+   "edge": "turn the mould inside out and nothing changes — cavity or obstacle, the sheet only records a geometry it did not author, and here even the pins are gone, so it holds on to nothing at all.",
+   "edge_src": {
+    "file": "commons/maps/SoftBody_gm04_pressed_onto_sphere/blurb.md",
+    "quote": "the body is computing equilibrium against a geometry it did not author"
+   }
   }
  ]
 }

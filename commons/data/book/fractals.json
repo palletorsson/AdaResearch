@@ -11,7 +11,11 @@
      "token": "fractal_recursion_2",
      "text": "A square inside a square is not decoration — it is the first evidence that a function can call …",
      "by": "draft",
-     "note": "The first evidence that a function calls itself depends on containment, and this recursion makes exactly one call — a tail call, a loop — so nothing is inside anything: 3 mm of z-offset per layer does the nesting."
+     "note": "The first evidence that a function calls itself depends on containment, and this recursion makes exactly one call — a tail call, a loop — so nothing is inside anything: 3 mm of z-offset per layer does the nesting.",
+     "note_src": {
+      "file": "algorithms/fractals/example_8_2_recursion_vr.gd",
+      "quote": "THE BRANCHING FACTOR HERE IS ONE. _draw_recursive_pattern makes exactly one recursive call, so the population at every level is a single square and a \"generation\" is a term, not a set."
+     }
     },
     {
      "token": "recursive_table",
@@ -54,7 +58,11 @@
      "token": "inverted_tree_cloud",
      "text": "An inverted tree is not wrong — it is a root system",
      "by": "draft",
-     "note": "Same grammar, different individuals — that argument depends on draws nobody can repeat, and the tree ships random_seed = 42, so every placement grows the identical trunk and uniqueness is demonstrated by one tree shown twice."
+     "note": "Same grammar, different individuals — that argument depends on draws nobody can repeat, and the tree ships random_seed = 42, so every placement grows the identical trunk and uniqueness is demonstrated by one tree shown twice.",
+     "note_src": {
+      "file": "algorithms/fractals/recursive_tree/inverted_tree_cloud.gd",
+      "quote": "@export var random_seed: int = 42"
+     }
     },
     {
      "token": "recursive_tree",
@@ -112,7 +120,11 @@
      "token": "example_8_4_cantor_set_vr",
      "text": "The Cantor set teaches subtraction as a creative act",
      "by": "draft",
-     "note": "Uncountably many points depend on removal without end, and the drawing stops where a segment falls under a centimetre — 0.8/3⁴ = 0.0099, three removals, four rows — while the label above it still reads Depth: 6."
+     "note": "Uncountably many points depend on removal without end, and the drawing stops where a segment falls under a centimetre — 0.8/3⁴ = 0.0099, three removals, four rows — while the label above it still reads Depth: 6.",
+     "note_src": {
+      "file": "algorithms/fractals/example_8_4_cantor_set_vr.gd",
+      "quote": "max_depth = 6 has never been reached: the recursion also stops when a segment falls under MIN_SEGMENT_WIDTH, and 0.8 / 3^4 = 0.0099 is under 0.01, so every placement since this file was written has drawn FOUR rows"
+     }
     },
     {
      "token": "example_8_4_cantor_pagoda_vr",
@@ -140,7 +152,11 @@
      "token": "box_counting_dimension",
      "text": "Fractal dimension is not a property of the shape",
      "by": "draft",
-     "note": "Dimension between integers depends on how a shape fills space at every scale; the instrument owns six — grids of 2 to 64 over 8,000 sampled points, shown one at a time — so the room holds the answer, never the ladder."
+     "note": "Dimension between integers depends on how a shape fills space at every scale; the instrument owns six — grids of 2 to 64 over 8,000 sampled points, shown one at a time — so the room holds the answer, never the ladder.",
+     "note_src": {
+      "file": "algorithms/fractals/box_counting_dimension/box_counting_dimension.gd",
+      "quote": "the shipped build shows ONE RUNG AT A TIME, on a two-second timer. So the still frame a room ever actually holds is a single grid over a cloud plus an answer — the procedure asserted rather than performed."
+     }
     },
     {
      "token": "fractal_koch_curve",
@@ -173,7 +189,11 @@
      "token": "diffusion_limited_aggregation",
      "text": "diffusion_limited_aggregation",
      "by": "draft",
-     "note": "Zero volume depends on iterating without end, and the 20 that makes the sponge 2.727-dimensional is the same 20 that prices the next tick — 20, 400, 8,000 bodies, then 160,000 — so D = log(20)/log(3) is also the invoice."
+     "note": "Zero volume depends on iterating without end, and the 20 that makes the sponge 2.727-dimensional is the same 20 that prices the next tick — 20, 400, 8,000 bodies, then 160,000 — so D = log(20)/log(3) is also the invoice.",
+     "note_src": {
+      "file": "algorithms/fractals/mengersponge/menger_sponge.gd",
+      "quote": "each Menger tick multiplies the cube count by 20, so once/coarse/fine are 20/400/8000 bodies and a fourth rung would be 160,000 ... D = log(20)/log(3) is exactly why this ladder stops early"
+     }
     },
     {
      "token": "menger_sponge",
@@ -191,7 +211,11 @@
      "token": "fibonacci_sequences",
      "text": "Recursive mathematical sequences and spiral visualizations",
      "by": "draft",
-     "note": "Phyllotaxis depends on phi resisting every rational approximation, and the float holding it is a rational — so the seed head that must never repeat is laid out from a number that already does."
+     "note": "Phyllotaxis depends on phi resisting every rational approximation, and the float holding it is a rational — so the seed head that must never repeat is laid out from a number that already does.",
+     "note_src": {
+      "file": "commons/maps/Fractal_GoldenSpiral/intent.md",
+      "quote": "The golden ratio is the most irrational number — its continued fraction is all 1s, making it the slowest to converge and the hardest to approximate by rationals."
+     }
     },
     {
      "token": "golden_rectangle",
@@ -224,7 +248,11 @@
      "token": "lyapunov_fractal",
      "text": "The Lyapunov fractal does not show space — it shows the stability of time",
      "by": "draft",
-     "note": "A boundary is where the orbit neither settles nor escapes, and this floor decides in 200 iterations after 50 of warmup — so its black calligraphy is not a curve but the pixels the cutoff could not resolve."
+     "note": "A boundary is where the orbit neither settles nor escapes, and this floor decides in 200 iterations after 50 of warmup — so its black calligraphy is not a curve but the pixels the cutoff could not resolve.",
+     "note_src": {
+      "file": "commons/artifacts/lyapunov_fractal/lyapunov_fractal.gd",
+      "quote": "Stable (λ<0) = blue, chaotic (λ>0) = yellow/red, boundary (λ≈0) = black."
+     }
     },
     {
      "token": "julia_set_explorer",
@@ -247,7 +275,11 @@
      "token": "mandelbrot_dive",
      "text": "The simplest equation in complex dynamics produces the most complex object in mathematics",
      "by": "draft",
-     "note": "Never ending depends on a zoom with no floor, and the header promises copies of yourself at 10^15 while the slider stops at 10^6 with escape decided inside 500 iterations — the infinite regress ends in a constant."
+     "note": "Never ending depends on a zoom with no floor, and the header promises copies of yourself at 10^15 while the slider stops at 10^6 with escape decided inside 500 iterations — the infinite regress ends in a constant.",
+     "note_src": {
+      "file": "commons/artifacts/mandelbrot_dive/mandelbrot_dive.gd",
+      "quote": "critical_parameter: Zoom depth. At 10x you see the cardioid. At 10000x you see seahorses. At 10^15 you see copies of yourself."
+     }
     }
    ],
    "hero": "mandelbrot_dive"
@@ -257,7 +289,11 @@
    "map": "Chamber_Fractals",
    "lines": [],
    "drop": true,
-   "edge": "Two recursions with no base case depend on a stopping condition neither side owns, so the chamber borrows the learner's body — walking out is the room's only termination, and quitting has to be read as the answer."
+   "edge": "Two recursions with no base case depend on a stopping condition neither side owns, so the chamber borrows the learner's body — walking out is the room's only termination, and quitting has to be read as the answer.",
+   "edge_src": {
+    "file": "commons/maps/Chamber_Fractals/critical.md",
+    "quote": "The chamber ends when the learner chooses to leave, and the choice is itself part of the chamber's argument"
+   }
   },
   {
    "pearl": "fractal synthesis",
@@ -267,7 +303,11 @@
      "token": "fractal_clouds",
      "text": "A cloud is not a thing — it is a threshold. The same noise field with different cutoff is sky",
      "by": "draft",
-     "note": "A cloud is only a cutoff, and this cutoff is asked 32 times per axis across twenty metres — one question every 0.625 m, five octaves — so the gallery of all scales owns the five it can afford."
+     "note": "A cloud is only a cutoff, and this cutoff is asked 32 times per axis across twenty metres — one question every 0.625 m, five octaves — so the gallery of all scales owns the five it can afford.",
+     "note_src": {
+      "file": "algorithms/fractals/fractal_clouds/fractal_clouds.gd",
+      "quote": "A cloud is not a thing — it is a threshold. The same noise field with different cutoff is sky, cloud, or fog. Only the cutoff decides."
+     }
     },
     {
      "token": "strange_attractors",
@@ -305,7 +345,11 @@
      "token": "space_filling_curve_gallery",
      "text": "Three grammars, one goal — every point touched",
      "by": "draft",
-     "note": "Filling every point without crossing depends on the drawing still reading as a line, and one rung past standard the 3-pixel stroke closes its own gaps into a solid block — the curve disappears exactly when it succeeds."
+     "note": "Filling every point without crossing depends on the drawing still reading as a line, and one rung past standard the 3-pixel stroke closes its own gaps into a solid block — the curve disappears exactly when it succeeds.",
+     "note_src": {
+      "file": "commons/artifacts/space_filling_curve_gallery/space_filling_curve_gallery.gd",
+      "quote": "At `fine` the cells get small enough that a 3px stroke closes the gaps and the curve reads as a filled block, so it thins to 1."
+     }
     },
     {
      "token": "fractal_stochastic_tree",
