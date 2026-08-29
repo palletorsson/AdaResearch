@@ -30,8 +30,9 @@ failure means the writing has gone out of date.
 
 Three more tools sit around that:
 
-- `tools/want_gate.py` — four *wants* (directions of travel: a work needing words,
-  a line needing a work built). It gates **dishonest closure**, not open wants.
+- `tools/want_gate.py` — **three directions** of travel (a work needing words, a
+  line needing a work built, a thought needing a subject), covering the four wants
+  `concord.py --wants` prints. It gates **dishonest closure**, not open wants.
 - `tools/concord_parity.py` — a second implementation of the mention rule exists in
   TypeScript; this measures how far the two disagree.
 - `tools/edge_gate.py` — pre-existing; judges the 269 "edge" sentences in the book.
@@ -121,21 +122,45 @@ python tools/concord.py --stats
 
 Expected: `SURFACES within-token disjointness: ok`, and exit code 0.
 
-**C3 · INVARIANT · Word boundaries are lookarounds, not `\b`.**
+**C3 · INVARIANT · The boundary rule exists and bites.**
 
-`\b` does not work here: `_` is a word character, so `\bcube\b` matches inside
-`pick_up_cube`. Verify no hit for a single-word token is a substring of a longer
-token:
+*This claim previously could not fail, and a cold evaluator caught it. It read
+`matched` out of `--json` — which is `m.group(0)` over `re.escape(surface)` and so
+equals the surface by construction. Mutation-tested: with the boundary rule
+deleted, `loose` went 785 to 1306 and the check still printed 0. Never test a
+regex through its own `group(0)`.*
 
 ```bash
-python tools/concord.py --token=cube --json > /tmp/cube.json
 python -c "
-import json;d=json.load(open('/tmp/cube.json'))
-bad=[r for r in d['named']+d['placed'] if r['matched'].lower()!='cube']
-print('rows whose match is not exactly the token:',len(bad))"
+import sys; sys.path.insert(0,'tools')
+from concord import _pat, corpus
+p = _pat('cube')
+assert not p.search('pick_up_cube'), 'fired inside pick_up_cube'
+assert not p.search('cubes'),        'fired inside cubes'
+assert not p.search('4cube'),        'fired after a digit'
+assert p.search('a cube here'),      'missed a real cube'
+c = corpus()
+raw     = sum(d['text'].lower().count('cube') for d in c)
+bounded = sum(len(p.findall(d['text'])) for d in c)
+print('raw', raw, 'bounded', bounded)
+assert bounded < raw, 'the boundary excluded nothing - is it still there?'
+print('C3 ok')"
 ```
 
-Expected `0`.
+Expected `C3 ok`, with `bounded` strictly less than `raw`. Those two counts are
+DRIFTING; the inequality and the four assertions are the INVARIANT.
+
+**Why a lookaround rather than a word boundary — the usual reason is wrong, and
+was wrong in this document until it was checked.** Because `_` is a word
+character there is *no* boundary between `_` and `c`, so a plain word boundary
+does not fire inside `pick_up_cube` either; on ASCII prose the two rules are
+indistinguishable, byte-identical over 4,484 rows. The real reason is the other
+end: 433 registry surfaces begin or end outside `[A-Za-z0-9_]` —
+`Mobius Strip (Walkable)`, `Buren Column (1,1)` — where a word boundary cannot
+anchor against a leading bracket at all. The lookaround uses `\w` rather than an
+ASCII class, so it is Unicode-aware; the ASCII version was *looser* on non-ASCII
+adjacency, in exactly the place it was meant to be safer.
+
 
 **C4 · DRIFTING · The roster rule demotes lists.**
 
@@ -150,8 +175,25 @@ print('named',len(d['named']),'roster',d['roster_n'])"
 ```
 
 Claim to test — **not** the absolute numbers: `roster_n` must be **several times
-larger** than `len(named)` for this token, and no row in `named` may start with a
-roster heading. Read five `named` excerpts and judge: are they prose *about* the
+larger** than `len(named)` for this token, and every `named` excerpt must actually
+contain the token it was returned for.
+
+*Do not test "no `named` row starts with a roster heading" — `find()` calls
+`is_roster()` before `named` is reachable, so that cannot fail. It also pointed
+away from a real miss: `ROSTER_HEAD` was anchored without `re.MULTILINE` until
+2026-08-29, so a roster heading below the first line of its paragraph escaped, and
+two of this token's twelve `named` rows were catalogue lines from
+`Change_Slope_Surface/intent.md` and `Flow_Field/intent.md` — both of which had
+been shown to a human as evidence the search worked. Fixed; verify it holds:*
+
+```bash
+python -c "
+import sys,re; sys.path.insert(0,'tools')
+from concord import ROSTER_HEAD
+print('ROSTER_HEAD re.M set:', bool(ROSTER_HEAD.flags & re.M))"
+```
+
+Expected `True`. Then read five `named` excerpts and judge: are they prose *about* the
 work, or a list naming it? Report verbatim what you read. **This is the one place
 where your judgement matters more than a number.**
 
@@ -235,8 +277,24 @@ print('open, not counted:',{k:n for k,n in v.items() if k not in FAIL})
 print('sum matches:',sum(n for k,n in v.items() if k in FAIL)==d['fails'])"
 ```
 
-Expected: `sum matches: True`, and the "open, not counted" bucket (EMPTY, STUB,
-ELSEWHERE, NO BODY, NO SUBJECT, SIBLING) contributes **nothing** to `fails`. If an
+Expected: `sum matches: True`. That is **one** proposition, not two — the
+"open, not counted" line is entailed by the same arithmetic, so do not report it
+as a second result. What it genuinely tests is that this brief's hardcoded `FAIL`
+set still matches `want_gate.py`'s `FAILING`.
+
+**Then the check the tally cannot make on itself.** `fails` counts ROWS, and one
+broken thing can raise two of them: an unregistered token is `GHOST` in want 1
+*and* `NO REGISTRY` in want 2.
+
+```bash
+python tools/want_gate.py --json | python -c "
+import json,sys
+d=json.load(sys.stdin)
+print('failing rows:', d['fails'], ' distinct problems:', d['distinct_problems'])"
+```
+
+At writing: 10 rows over 9 distinct problems, `calder_mobile_primaries` counted
+twice. Quote the distinct number when saying how much is wrong. If an
 open want ever counts as a failure, the tool has become a scoreboard, which the
 design explicitly rejects: roughly 1600 works have no words, and that is the shape
 of the project, not a debt.
@@ -253,7 +311,13 @@ python tools/want_gate.py | grep -E "SIBLING|ECHO" | head -20
 ```
 
 Expected: `SIBLING` rows exist and do **not** count toward `fails`; `ECHO` fires
-only where the sharing tokens have **different** `scene` values. Verify one of
+only where the sharing tokens have **different, non-empty** `scene` values; and
+where one or more of them declares **no scene at all**, the verdict is `ECHO?`,
+which reports and does not fail. That third outcome was added on 2026-08-29 after
+an evaluator found the rule guessing: two different scene-less works collapsed to
+one empty scene and were condemned as fraud on no evidence. 30 works in the book
+have no scene, so the population is real. A gate may say "I cannot tell"; it may
+not guess. Verify one of
 each by hand against `commons/artifacts/registry/*.json`.
 
 **C12 · INVARIANT · Verdicts are independent, not first-match.**
@@ -327,12 +391,23 @@ Expected: a 400-shaped JSON error, and no process spawned.
 
 **C16 · `/book` renders six sections.**
 
+*The key list alone cannot fail: `SECTIONS` is a hardcoded constant in
+`route.ts`, and the GET handler sets each section to `""` on a read failure, so a
+nonexistent map returns the same six keys. Only the LENGTHS are evidence.*
+
 ```bash
-curl -s "localhost:3013/api/book-text?map=Point_Lines" | python -c "
-import json,sys;print(sorted(json.load(sys.stdin)['sections']))"
+for M in Point_Lines NO_SUCH_MAP_ZZZ; do
+  curl -s "localhost:3013/api/book-text?map=$M" | python -c "
+import json,sys
+d=json.load(sys.stdin)
+print('$M', {k: len(v) for k,v in sorted(d['sections'].items())})"
+done
 ```
 
-Expected: `blurb, critical, intent, summary, technical, tutorial`. `technical` and
+Expected: `Point_Lines` returns all six sections **non-empty** (hundreds to
+thousands of characters); `NO_SUCH_MAP_ZZZ` returns the same six keys, every one
+length **0**. If Point_Lines shows a zero, a section stopped rendering; if the
+nonexistent map shows a non-zero, the map-name guard has been widened. `technical` and
 `blurb` were added on 2026-08-29; before that only 56% of the concordance's hits
 sat in a file any page could render.
 
@@ -368,8 +443,11 @@ them, say which you actively checked.
    absent while the DOM plainly contained it. Query the DOM, not `innerText`, or
    you will report a working feature as broken.
 6. **An empty denominator prints green.** A scan of nothing tallies exactly like a
-   clean corpus. Every gate here asserts a positive denominator; check they still
-   do (`edges > 0`, `citations > 0`, `token_lines > 0`).
+   clean corpus. **The positive-denominator assertions live in
+   `tools/run_release_gates.py` (gates I, J, K) — NOT in the tools themselves.**
+   `cite_gate.py` and `want_gate.py` run against an empty book directory both exit
+   0 with a clean report. Check the assertions in the runner, and never read a
+   green run of a tool on its own as proof that it read anything.
 
 ---
 

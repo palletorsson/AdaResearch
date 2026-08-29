@@ -38,12 +38,23 @@ It would have been wrong on twelve of them. `pattern_tile_4x4`, `_brick`,
 `_herringbone`, `_mirror` and `_puzzle` all resolve to the SAME .tscn: one scene
 under five registry names, which CLAUDE.md calls the corpus's most common hidden
 family. Five names for one object honestly share one sentence. So ECHO fires only
-when the sharing works resolve to DIFFERENT scenes — four cases, and one of them
+when the sharing works resolve to DIFFERENT scenes, and one of those cases
 (`laser_sword` / `laser_measure`) shares the single word "laser,".
 
 That is the standing lesson arriving in a new place: when a shared vocabulary is
 honest the siblings measure alike, and a gate that cannot tell a family from a
 copy-paste will condemn the family.
+
+AND THERE IS A THIRD OUTCOME, added after an evaluator found the rule guessing.
+Two DIFFERENT works that both declare no scene are not decidable either way: the
+evidence for "one body" is a shared .tscn, and neither has one. The first draft
+collapsed them to {""}, failed all(), and condemned both as ECHO — inventing
+fraud from an absence. 30 works in the book have no scene, so the population is
+real and waiting. Undecidable cases are ECHO? and do not fail, the way edge_gate
+says INERT? when nobody has looked from a second standpoint. A gate may say "I
+cannot tell". It may not guess.
+
+The counts in this file move; do not quote them as fixed. Run it.
 """
 from __future__ import annotations
 
@@ -87,13 +98,32 @@ def want_1(reg: dict, place: dict, bl: list) -> list:
         if len(toks) < 2:
             continue
         scenes = {scene_of(reg.get(t, {})) for t in toks}
-        one_body = len(scenes) == 1 and all(scenes)
+        # THREE OUTCOMES, NOT TWO. The first draft asked `len(scenes) == 1 and
+        # all(scenes)` and called everything else ECHO. That silently condemned a
+        # case it cannot actually judge: two DIFFERENT works that both declare no
+        # scene collapse to {""}, all("") is False, and both are marked a cheat.
+        # There are 30 such scene-less works in the book right now, so the day
+        # somebody writes one line for a pair of unbuilt siblings the gate calls
+        # it fraud on no evidence — the family-condemning failure this rule exists
+        # to prevent, displaced onto works that are merely unbuilt.
+        #
+        # So an undecidable case gets its own verdict and does NOT fail, the way
+        # edge_gate says INERT? rather than INERT when nobody has looked from a
+        # second standpoint. A gate may say "I cannot tell"; it may not guess.
+        known = {s for s in scenes if s}
+        if len(scenes) == 1 and known:
+            v = "SIBLING"
+            why = "%d names for one scene — an honest shared vocabulary" % len(toks)
+        elif len(known) < len(toks):
+            v = "ECHO?"
+            why = ("%d works share one sentence and %d of them declare no scene, "
+                   "so whether they are one body cannot be decided: %s"
+                   % (len(toks), len(toks) - len(known), ", ".join(toks)))
+        else:
+            v = "ECHO"
+            why = "%d works with DIFFERENT scenes given one sentence: %s" % (len(toks), ", ".join(toks))
         for l in grp:
-            rows.append({**l, "verdict": "SIBLING" if one_body else "ECHO",
-                         "why": ("%d names for one scene — an honest shared vocabulary" % len(toks)
-                                 if one_body else
-                                 "%d works with DIFFERENT scenes given one sentence: %s"
-                                 % (len(toks), ", ".join(toks)))})
+            rows.append({**l, "verdict": v, "why": why})
 
     # Every rule is tested independently, and a line trips as many as it trips.
     # An earlier draft short-circuited — first verdict wins — and a line that was
@@ -189,7 +219,14 @@ def main() -> int:
     reg, place, bl = registry(), placements(), book_lines()
     sets = {1: want_1(reg, place, bl), 2: want_2(reg, place, bl), 3: want_3(reg, place)}
     pick = [a.want] if a.want else [1, 2, 3]
-    fails = sum(1 for w in pick for r in sets[w] if r["verdict"] in FAILING)
+    failing_rows = [r for w in pick for r in sets[w] if r["verdict"] in FAILING]
+    fails = len(failing_rows)
+    # fails COUNTS ROWS, and one broken thing can raise two of them: an
+    # unregistered token is GHOST in want 1 and NO REGISTRY in want 2, so a single
+    # ghost reads as 2. Report both numbers — a row count is what the gate acts
+    # on, a distinct count is how many things are actually wrong, and quoting the
+    # first as the second overstates the damage.
+    distinct = len({r.get("token") or (r["chapter"] + "|" + r["pearl"]) for r in failing_rows})
 
     if a.json:
         # `checked` is the denominator the release gate asserts is non-zero. A run
@@ -197,7 +234,7 @@ def main() -> int:
         # a clean book reports; without a size the gate cannot tell them apart, and
         # gate G in this repo went green on a scan of nothing for a day.
         tally = collections.Counter(r["verdict"] for w in pick for r in sets[w])
-        print(json.dumps({"fails": fails,
+        print(json.dumps({"fails": fails, "distinct_problems": distinct,
                           "checked": {"book_lines": len(bl),
                                       "token_lines": sum(1 for l in bl if l["token"]),
                                       "registry": len(reg), "placed": len(place)},
@@ -230,7 +267,9 @@ def main() -> int:
 
     print()
     if fails:
-        print("  %d want(s) look closed and are not. A GHOST or a NO REGISTRY means the book" % fails)
+        print("  %d failing row(s) over %d distinct problem(s) — one unregistered token raises" % (fails, distinct))
+        print("  both GHOST in want 1 and NO REGISTRY in want 2, so the row count overstates it.")
+        print("  A GHOST or a NO REGISTRY means the book")
         print("  speaks about something that does not exist. An ECHO means one sentence was")
         print("  asked to be about two different objects. A HERO GHOST means a hall is named")
         print("  for nothing. None of these are open wants — they are wants marked done.")

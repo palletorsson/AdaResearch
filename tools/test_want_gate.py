@@ -11,9 +11,14 @@ set, every stage green. So each verdict gets a synthetic case built to trip it,
 and one built NOT to.
 
 The pair matters more than the trip. ECHO must fire on two works with different
-scenes and stay silent on two names for one scene — twelve honest shared
+scenes and stay silent on two names for one scene — a dozen honest shared
 vocabularies in the real book depend on exactly that distinction, and a gate that
-cannot tell a family from a copy-paste would condemn all twelve.
+cannot tell a family from a copy-paste would condemn them all.
+
+And ECHO? must fire where neither work declares a scene, because there the gate
+has no evidence either way. That case had zero instances on the corpus and was
+being silently condemned as ECHO; it is exactly the kind of rule a real-data run
+can never exercise, which is what this file is for.
 """
 from __future__ import annotations
 
@@ -70,6 +75,16 @@ ech = want_1(reg, place, [line("a", "the same words for two objects", li=0),
                           line("c", "the same words for two objects", li=1)])
 check("ECHO fires on different scenes", verdicts(ech, "a"), "ECHO")
 
+# THE UNDECIDABLE CASE. Two different works that both declare no scene: the
+# evidence for "one body" is a shared scene and neither has one. The gate must
+# say so rather than pick, and must NOT fail — an evaluator found the first draft
+# condemning exactly this as fraud.
+noscene = {"x": {"name": "X"}, "y": {"name": "Y"}}
+und = want_1(noscene, {"x": {"TestMap"}, "y": {"TestMap"}},
+             [line("x", "one sentence for both", li=0), line("y", "one sentence for both", li=1)])
+check("ECHO? fires when neither work declares a scene", verdicts(und, "x"), "ECHO?")
+check_not("...and it does NOT become ECHO", verdicts(und, "x"), "ECHO")
+
 check("GHOST fires on an unregistered token",
       verdicts(want_1(reg, place, [line("zzz", "words about nothing")]), "zzz"), "GHOST")
 check("EMPTY fires on a name with no words",
@@ -102,7 +117,8 @@ check_not("...and a placed, built work is clean",
 print()
 print("THE FAILING SET is what decides exit 1:")
 print("  " + ", ".join(sorted(FAILING)))
-for v in ("EMPTY", "STUB", "ELSEWHERE", "SIBLING", "NO BODY", "UNPLACED", "NO SUBJECT", "HERO ABSENT"):
+for v in ("EMPTY", "STUB", "ELSEWHERE", "SIBLING", "ECHO?", "NO BODY", "UNPLACED",
+          "NO SUBJECT", "HERO ABSENT"):
     if v in FAILING:
         FAILS.append("%s must NOT fail — an open want is not a debt" % v)
         print("  FAIL  %s is in FAILING and should not be" % v)

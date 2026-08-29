@@ -227,10 +227,23 @@ def surfaces(tok: str, meta: dict) -> list:
 
 
 def _pat(s: str) -> re.Pattern:
-    r"""Word boundary as a lookaround, so `cube` does not fire inside
-    pick_up_cube. \b will not do it: an underscore is a word character, so
-    \bcube\b matches happily inside pick_up_cube and the junk problem doubles."""
-    return re.compile(r"(?<![A-Za-z0-9_])" + re.escape(s) + r"(?![A-Za-z0-9_])", re.I)
+    r"""Word boundary as a lookaround.
+
+    THE USUAL REASON GIVEN FOR THIS IS WRONG, and it was written down wrong here
+    until an evaluator checked it. "\b will not do, because _ is a word character
+    so \bcube\b matches inside pick_up_cube" is backwards: _ being a word
+    character is precisely why there is NO boundary between _ and c, so \bcube\b
+    does not match there. Measured over 4484 rows across seven tokens, the two
+    rules disagreed zero times on this corpus.
+
+    The real reason is the other end. 433 registry surfaces begin or end outside
+    [A-Za-z0-9_] — "Mobius Strip (Walkable)", "Buren Column (1,1)" — and \b
+    cannot anchor against a leading "(" at all.
+
+    \w rather than [A-Za-z0-9_], so the rule is Unicode-aware. The ASCII class
+    matched a token inside a word ending in a non-ASCII letter, which made the
+    lookaround LOOSER than \b in exactly the place it was meant to be safer."""
+    return re.compile(r"(?<!\w)" + re.escape(s) + r"(?!\w)", re.I)
 
 
 def paragraphs(text: str) -> list:
@@ -242,9 +255,17 @@ def paragraphs(text: str) -> list:
     return out
 
 
+# re.M is LOAD-BEARING and was missing until an evaluator checked. Without it "^"
+# anchors only at the start of the whole paragraph, and paragraphs() splits on
+# blank lines only — intent.md files are written as a few large blocks. A roster
+# heading on the fifth line of a block was therefore invisible, and
+# "Key artifacts: ... the science_screen mirrors the two partial values in 2D"
+# reached the `named` tier from commons/maps/Change_Slope_Surface/intent.md.
+# Two of that token's twelve named rows were catalogue lines, and both had been
+# shown to a human as evidence that the search worked.
 ROSTER_HEAD = re.compile(
     r"^\s*(?:[#>*\-\d.]+\s*)?(?:key artifacts|artifacts|the cast|placeholders|"
-    r"contents|inventory|what it holds|in the order you meet them)\b", re.I)
+    r"contents|inventory|what it holds|in the order you meet them)\b", re.I | re.M)
 
 
 def is_roster(para: str, regset: set) -> bool:
