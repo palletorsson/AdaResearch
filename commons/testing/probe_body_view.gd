@@ -94,13 +94,29 @@ func _ready() -> void:
 	_right.name = "RightHand"
 	_origin.add_child(_right)
 
+	# THE REAL HANDS, so the wrist binding is tested rather than assumed. IKArmRig
+	# now ends the sleeve at the hand skeleton's Wrist bone instead of at the
+	# controller; with bare controllers that path is never exercised and the probe
+	# would happily pass on the fallback.
+	for spec in [["res://commons/body/hands/left_hand.tscn", _left],
+				 ["res://commons/body/hands/right_hand.tscn", _right]]:
+		var hs: PackedScene = load(String(spec[0]))
+		if hs != null:
+			var hn: Node = hs.instantiate()
+			(spec[1] as Node3D).add_child(hn)
+		else:
+			print("[body-view] no hand scene at %s — the sleeve will fall back to the controller" % spec[0])
+
+	# THE BODY GOES ON AFTER THE HANDS, so set_controller can see a wrist to bind
+	# to. The rig retries if it cannot, but a probe that exercises the fallback is
+	# not testing the thing that was just changed.
 	var scene: PackedScene = load("res://commons/body/ik_arms/player_body_ik.tscn")
 	_body = scene.instantiate()
 	_body.name = "PlayerBodyIK"
 	_origin.add_child(_body)
 
-	# THE HANDS, DRAWN. Without something at the controller you cannot tell whether
-	# the sleeve ends at the hand or short of it — which is the whole question.
+	# and a small ball at the controller itself, so the gap between the controller
+	# and the wrist the sleeve now uses is VISIBLE rather than argued about
 	for c in [_left, _right]:
 		var ball := MeshInstance3D.new()
 		var sm := SphereMesh.new()

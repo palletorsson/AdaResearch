@@ -41,6 +41,10 @@ var _ik_target: Marker3D
 var _pole_target: Marker3D
 var _controller: Node3D
 var _mesh_instance: MeshInstance3D
+## THE HAND'S OWN WRIST BONE, when there is one. See _find_wrist().
+var _hand_skel: Skeleton3D = null
+var _wrist_bone: int = -1
+var _wrist_retry: int = 0
 
 ## Bone indices
 var _idx_upper: int = -1
@@ -75,9 +79,23 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	## 1. IK target follows the XR controller
+	## 1. The IK target follows the HAND'S WRIST, falling back to the controller
+	## when the hand has no skeleton. See _find_wrist.
 	if is_instance_valid(_controller):
-		_ik_target.global_position = _controller.global_position
+		## KEEP LOOKING UNTIL IT IS THERE. set_controller runs when PlayerBodyIK
+		## enters the tree, and the hand model may be mounted after that — in the
+		## probe it certainly is, and on the live rig the order is nobody's
+		## guarantee. Binding once meant silently falling back to the controller
+		## and looking exactly like the bug it was meant to fix. Retried about
+		## twice a second until found, then never again.
+		if _hand_skel == null:
+			_wrist_retry += 1
+			if _wrist_retry % 30 == 0:
+				_find_wrist(_controller)
+				if _hand_skel != null:
+					print("[IKArmRig] %s sleeve ends at %s (found late)" % [
+						("Left" if is_left else "Right"), _hand_skel.get_bone_name(_wrist_bone)])
+		_ik_target.global_position = _wrist_xform().origin
 
 	## 2. Pole target (elbow hint): forward 0.3 + down 0.2 from shoulder
 	var shoulder_pos: Vector3 = global_position
@@ -90,7 +108,10 @@ func _physics_process(_delta: float) -> void:
 	if is_instance_valid(_controller) and _idx_hand >= 0:
 		var hand_global_xform: Transform3D = _skeleton.global_transform * _skeleton.get_bone_global_pose(_idx_hand)
 		var parent_global: Transform3D = _skeleton.global_transform * _skeleton.get_bone_global_pose(_idx_lower)
-		var desired_local_basis: Basis = parent_global.basis.inverse() * _controller.global_basis
+		## the cuff takes the WRIST's roll, not the controller's — they differ by
+		## whatever the hand model's rest applies, and using the controller twists
+		## the sleeve against the hand it is supposed to meet.
+		var desired_local_basis: Basis = parent_global.basis.inverse() * _wrist_xform().basis.orthonormalized()
 		var current_pose: Transform3D = _skeleton.get_bone_pose(_idx_hand)
 		current_pose.basis = desired_local_basis
 		_skeleton.set_bone_pose(_idx_hand, current_pose)
@@ -103,6 +124,50 @@ func _physics_process(_delta: float) -> void:
 ## Assign the XR controller this arm should track.
 func set_controller(node: Node3D) -> void:
 	_controller = node
+	_hand_skel = null
+	_wrist_bone = -1
+	if node != null:
+		_find_wrist(node)
+	if _hand_skel != null:
+		print("[IKArmRig] %s sleeve ends at %s" % [
+			("Left" if is_left else "Right"), _hand_skel.get_bone_name(_wrist_bone)])
+
+
+## THE CONTROLLER IS NOT THE WRIST (2026-08-29, Palle, from inside the headset:
+## "there is still a mismatch, the hand has many bones — can you attach the arms
+## to the last bone in the hand?").
+##
+## An XRController3D sits at the grip pose the runtime reports, which is inside
+## the fist and rotated to the device. The visible hand is a SKINNED MODEL hung
+## off it — commons/body/hands/left_hand.tscn, whose Skeleton3D carries 16 bones
+## with `Wrist_L` at index 0, parent -1. Targeting the controller therefore lands
+## the sleeve near the hand and never ON it, however the numbers are tuned; the
+## offset is whatever that model happens to apply, and it is not ours to guess.
+##
+## So the arm ends where the hand BEGINS: the wrist bone's own transform. Found
+## once and cached — walking the subtree every frame to ask the same question is
+## how a rig gets slow for no reason.
+func _find_wrist(from: Node) -> void:
+	var skel := from as Skeleton3D
+	if skel != null:
+		for b in range(skel.get_bone_count()):
+			var nm := String(skel.get_bone_name(b))
+			# the hand's root: named Wrist, or whatever bone has no parent
+			if nm.begins_with("Wrist") or skel.get_bone_parent(b) == -1:
+				_hand_skel = skel
+				_wrist_bone = b
+				return
+	for c in from.get_children():
+		if _hand_skel == null:
+			_find_wrist(c)
+
+
+## Where the sleeve should end, in world space: the hand's wrist if the hand has
+## one, the controller if it does not.
+func _wrist_xform() -> Transform3D:
+	if _hand_skel != null and is_instance_valid(_hand_skel) and _wrist_bone >= 0:
+		return _hand_skel.global_transform * _hand_skel.get_bone_global_pose(_wrist_bone)
+	return _controller.global_transform
 
 
 ## Update the shoulder pivot (called by PlayerBodyIK from TorsoEstimator).
