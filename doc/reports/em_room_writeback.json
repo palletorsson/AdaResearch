@@ -1,0 +1,7242 @@
+{
+  "schema": "em_room_writeback/1",
+  "halls": [
+    {
+      "chapter": "formfinding",
+      "map": "FormFinding_Descent",
+      "pearl": "descent",
+      "authored": false,
+      "map_rows": 10,
+      "map_cols": 12,
+      "map_cells": 120,
+      "walked": true,
+      "room_rows": 32,
+      "room_cols": 15,
+      "room_cells": 480,
+      "passage_rows": 0,
+      "court": 26,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:41",
+      "interactables": 4,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 0,
+      "lost_examples": []
+    },
+    {
+      "chapter": "formfinding",
+      "map": "FormFinding_Catenary",
+      "pearl": "catenary",
+      "authored": false,
+      "map_rows": 10,
+      "map_cols": 12,
+      "map_cells": 120,
+      "walked": true,
+      "room_rows": 32,
+      "room_cols": 15,
+      "room_cells": 480,
+      "passage_rows": 0,
+      "court": 35,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:43",
+      "interactables": 4,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 0,
+      "lost_examples": []
+    },
+    {
+      "chapter": "formfinding",
+      "map": "FormFinding_Relaxation",
+      "pearl": "relaxation",
+      "authored": false,
+      "map_rows": 10,
+      "map_cols": 12,
+      "map_cells": 120,
+      "walked": true,
+      "room_rows": 32,
+      "room_cols": 15,
+      "room_cells": 480,
+      "passage_rows": 0,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:44",
+      "interactables": 4,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 0,
+      "lost_examples": []
+    },
+    {
+      "chapter": "formfinding",
+      "map": "FormFinding_Equilibrium",
+      "pearl": "equilibrium",
+      "authored": false,
+      "map_rows": 10,
+      "map_cols": 12,
+      "map_cells": 120,
+      "walked": true,
+      "room_rows": 32,
+      "room_cols": 15,
+      "room_cells": 480,
+      "passage_rows": 0,
+      "court": 13,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:45",
+      "interactables": 4,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 0,
+      "lost_examples": []
+    },
+    {
+      "chapter": "formfinding",
+      "map": "FormFinding_Annealing",
+      "pearl": "annealing",
+      "authored": false,
+      "map_rows": 10,
+      "map_cols": 12,
+      "map_cells": 120,
+      "walked": true,
+      "room_rows": 32,
+      "room_cols": 15,
+      "room_cells": 480,
+      "passage_rows": 0,
+      "court": 40,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:46",
+      "interactables": 4,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 0,
+      "lost_examples": []
+    },
+    {
+      "chapter": "formfinding",
+      "map": "FormFinding_Forge",
+      "pearl": "forge",
+      "authored": false,
+      "map_rows": 10,
+      "map_cols": 12,
+      "map_cells": 120,
+      "walked": true,
+      "room_rows": 32,
+      "room_cols": 15,
+      "room_cells": 480,
+      "passage_rows": 0,
+      "court": 23,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:47",
+      "interactables": 4,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 0,
+      "lost_examples": []
+    },
+    {
+      "chapter": "wavefunctions",
+      "map": "WaveFunctions_Intro",
+      "pearl": "intro",
+      "authored": false,
+      "map_rows": 22,
+      "map_cols": 9,
+      "map_cells": 198,
+      "walked": true,
+      "room_rows": 34,
+      "room_cols": 15,
+      "room_cells": 510,
+      "passage_rows": 0,
+      "court": 25,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:50",
+      "interactables": 21,
+      "utilities": 3,
+      "interactables_on_a_wall": 4,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            4,
+            7
+          ],
+          "token": "pickup_cube_transforming"
+        },
+        {
+          "cell": [
+            4,
+            9
+          ],
+          "token": "dark_sphere"
+        },
+        {
+          "cell": [
+            1,
+            18
+          ],
+          "token": "SphericalHarmonics:0:4"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        },
+        {
+          "cell": [
+            4,
+            9
+          ],
+          "token": "wp"
+        }
+      ]
+    },
+    {
+      "chapter": "wavefunctions",
+      "map": "WaveFunctions_Pendulum",
+      "pearl": "pendulum",
+      "authored": false,
+      "map_rows": 19,
+      "map_cols": 11,
+      "map_cells": 209,
+      "walked": true,
+      "room_rows": 34,
+      "room_cols": 15,
+      "room_cells": 510,
+      "passage_rows": 0,
+      "court": 16,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:51",
+      "interactables": 10,
+      "utilities": 5,
+      "interactables_on_a_wall": 2,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            1,
+            0
+          ],
+          "token": "WavePaintings:180:1:0.2"
+        },
+        {
+          "cell": [
+            0,
+            6
+          ],
+          "token": "PendulumWave:90"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        },
+        {
+          "cell": [
+            9,
+            7
+          ],
+          "token": "tc:3:y"
+        }
+      ]
+    },
+    {
+      "chapter": "wavefunctions",
+      "map": "WaveFunctions_Unit_Circle",
+      "pearl": "unit circle",
+      "authored": false,
+      "map_rows": 17,
+      "map_cols": 13,
+      "map_cells": 221,
+      "walked": true,
+      "room_rows": 34,
+      "room_cols": 15,
+      "room_cells": 510,
+      "passage_rows": 0,
+      "court": 28,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:52",
+      "interactables": 6,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        }
+      ]
+    },
+    {
+      "chapter": "wavefunctions",
+      "map": "WaveFunctions_Sine_Space",
+      "pearl": "sine space",
+      "authored": false,
+      "map_rows": 28,
+      "map_cols": 12,
+      "map_cells": 336,
+      "walked": true,
+      "room_rows": 34,
+      "room_cols": 15,
+      "room_cells": 510,
+      "passage_rows": 0,
+      "court": 36,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:54",
+      "interactables": 8,
+      "utilities": 3,
+      "interactables_on_a_wall": 2,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            5,
+            7
+          ],
+          "token": "colorballs"
+        },
+        {
+          "cell": [
+            5,
+            15
+          ],
+          "token": "sine_space"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        },
+        {
+          "cell": [
+            10,
+            26
+          ],
+          "token": "t"
+        }
+      ]
+    },
+    {
+      "chapter": "wavefunctions",
+      "map": "WaveFunctions_3D_Wave_Propagation",
+      "pearl": "3d wave propagation",
+      "authored": false,
+      "map_rows": 18,
+      "map_cols": 16,
+      "map_cells": 288,
+      "walked": true,
+      "room_rows": 34,
+      "room_cols": 15,
+      "room_cells": 510,
+      "passage_rows": 0,
+      "court": 20,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:55",
+      "interactables": 4,
+      "utilities": 5,
+      "interactables_on_a_wall": 1,
+      "utilities_on_a_wall": 3,
+      "lost_examples": [
+        {
+          "cell": [
+            5,
+            6
+          ],
+          "token": "kusama_sine:0:3"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        },
+        {
+          "cell": [
+            1,
+            0
+          ],
+          "token": "s"
+        },
+        {
+          "cell": [
+            13,
+            16
+          ],
+          "token": "t"
+        }
+      ]
+    },
+    {
+      "chapter": "wavefunctions",
+      "map": "WaveFunctions_Effect_Sound",
+      "pearl": "effect sound",
+      "authored": false,
+      "map_rows": 14,
+      "map_cols": 12,
+      "map_cells": 168,
+      "walked": true,
+      "room_rows": 34,
+      "room_cols": 15,
+      "room_cells": 510,
+      "passage_rows": 0,
+      "court": 46,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:57",
+      "interactables": 37,
+      "utilities": 4,
+      "interactables_on_a_wall": 4,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "BigPipeSystem:0:-0.5"
+        },
+        {
+          "cell": [
+            0,
+            3
+          ],
+          "token": "catalyst_prompter_box:0:0#emergence:vent"
+        },
+        {
+          "cell": [
+            4,
+            7
+          ],
+          "token": "chord_tension_spring"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        }
+      ]
+    },
+    {
+      "chapter": "wavefunctions",
+      "map": "Wavefunctions_Bernini",
+      "pearl": "bernini",
+      "authored": false,
+      "map_rows": 15,
+      "map_cols": 15,
+      "map_cells": 225,
+      "walked": true,
+      "room_rows": 34,
+      "room_cols": 15,
+      "room_cells": 510,
+      "passage_rows": 0,
+      "court": 39,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:59",
+      "interactables": 4,
+      "utilities": 4,
+      "interactables_on_a_wall": 2,
+      "utilities_on_a_wall": 3,
+      "lost_examples": [
+        {
+          "cell": [
+            6,
+            6
+          ],
+          "token": "dark_sphere"
+        },
+        {
+          "cell": [
+            7,
+            6
+          ],
+          "token": "bernini_columns"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "m:1:4:1:0.1"
+        },
+        {
+          "cell": [
+            1,
+            0
+          ],
+          "token": "sp"
+        },
+        {
+          "cell": [
+            0,
+            1
+          ],
+          "token": "pb:dress"
+        }
+      ]
+    },
+    {
+      "chapter": "wavefunctions",
+      "map": "WaveFunctions_John_Cage",
+      "pearl": "john cage",
+      "authored": false,
+      "map_rows": 14,
+      "map_cols": 12,
+      "map_cells": 168,
+      "walked": true,
+      "room_rows": 34,
+      "room_cols": 15,
+      "room_cells": 510,
+      "passage_rows": 0,
+      "court": 29,
+      "porch": 0,
+      "built_at": "2026-08-28T15:39:00",
+      "interactables": 4,
+      "utilities": 3,
+      "interactables_on_a_wall": 2,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            6,
+            6
+          ],
+          "token": "ruth_asawa_sculpture"
+        },
+        {
+          "cell": [
+            5,
+            7
+          ],
+          "token": "dark_sphere"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        }
+      ]
+    },
+    {
+      "chapter": "wavefunctions",
+      "map": "WaveFunctions_AirMusic",
+      "pearl": "airmusic",
+      "authored": false,
+      "map_rows": 12,
+      "map_cols": 11,
+      "map_cells": 132,
+      "walked": true,
+      "room_rows": 34,
+      "room_cols": 15,
+      "room_cells": 510,
+      "passage_rows": 0,
+      "court": 31,
+      "porch": 0,
+      "built_at": "2026-08-28T15:39:03",
+      "interactables": 10,
+      "utilities": 2,
+      "interactables_on_a_wall": 2,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            1,
+            8
+          ],
+          "token": "RackAmbientDrone:0:1"
+        },
+        {
+          "cell": [
+            3,
+            9
+          ],
+          "token": "air_music_display_case:0:1"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        }
+      ]
+    },
+    {
+      "chapter": "wavefunctions",
+      "map": "Wavefunctions_Sky_Stairs",
+      "pearl": "sky stairs",
+      "authored": false,
+      "map_rows": 13,
+      "map_cols": 12,
+      "map_cells": 156,
+      "walked": true,
+      "room_rows": 34,
+      "room_cols": 15,
+      "room_cells": 510,
+      "passage_rows": 0,
+      "court": 40,
+      "porch": 0,
+      "built_at": "2026-08-28T15:39:04",
+      "interactables": 4,
+      "utilities": 3,
+      "interactables_on_a_wall": 1,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            1,
+            9
+          ],
+          "token": "cube_scene:0:8"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        }
+      ]
+    },
+    {
+      "chapter": "wavefunctions",
+      "map": "WaveFunctions_TrigWalkingPath",
+      "pearl": "trigwalkingpath",
+      "authored": false,
+      "map_rows": 14,
+      "map_cols": 14,
+      "map_cells": 196,
+      "walked": true,
+      "room_rows": 34,
+      "room_cols": 15,
+      "room_cells": 510,
+      "passage_rows": 0,
+      "court": 37,
+      "porch": 0,
+      "built_at": "2026-08-28T15:39:07",
+      "interactables": 6,
+      "utilities": 2,
+      "interactables_on_a_wall": 1,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            4,
+            7
+          ],
+          "token": "dark_sphere"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        }
+      ]
+    },
+    {
+      "chapter": "wavefunctions",
+      "map": "WaveFunctions_Synthesis_Lab",
+      "pearl": "synthesis lab",
+      "authored": false,
+      "map_rows": 12,
+      "map_cols": 11,
+      "map_cells": 132,
+      "walked": true,
+      "room_rows": 34,
+      "room_cols": 15,
+      "room_cells": 510,
+      "passage_rows": 0,
+      "court": 109,
+      "porch": 0,
+      "built_at": "2026-08-28T15:39:09",
+      "interactables": 26,
+      "utilities": 2,
+      "interactables_on_a_wall": 5,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            1,
+            0
+          ],
+          "token": "dna_specimen:0:0.4"
+        },
+        {
+          "cell": [
+            2,
+            0
+          ],
+          "token": "holographicdisplay:0:1"
+        },
+        {
+          "cell": [
+            3,
+            0
+          ],
+          "token": "electronicscales:0:1"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        }
+      ]
+    },
+    {
+      "chapter": "randomness",
+      "map": "Random_Definition",
+      "pearl": "random definition",
+      "authored": false,
+      "map_rows": 20,
+      "map_cols": 5,
+      "map_cells": 100,
+      "walked": true,
+      "room_rows": 28,
+      "room_cols": 13,
+      "room_cells": 364,
+      "passage_rows": 0,
+      "court": 68,
+      "porch": 0,
+      "built_at": "2026-08-28T15:39:12",
+      "interactables": 15,
+      "utilities": 4,
+      "interactables_on_a_wall": 3,
+      "utilities_on_a_wall": 3,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            2
+          ],
+          "token": "slot_machine:-90:-0.5"
+        },
+        {
+          "cell": [
+            0,
+            13
+          ],
+          "token": "synthesis_stand#subject:catalyst_pickup#"
+        },
+        {
+          "cell": [
+            0,
+            15
+          ],
+          "token": "digital_materiality_glitch:90:-0.4:0.1"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        },
+        {
+          "cell": [
+            4,
+            0
+          ],
+          "token": "an:-90"
+        },
+        {
+          "cell": [
+            0,
+            19
+          ],
+          "token": "sr:18:19:10"
+        }
+      ]
+    },
+    {
+      "chapter": "randomness",
+      "map": "Random_Entropy",
+      "pearl": "random entropy",
+      "authored": false,
+      "map_rows": 10,
+      "map_cols": 16,
+      "map_cells": 160,
+      "walked": true,
+      "room_rows": 28,
+      "room_cols": 13,
+      "room_cells": 364,
+      "passage_rows": 0,
+      "court": 86,
+      "porch": 3,
+      "built_at": "2026-08-28T15:39:14",
+      "interactables": 8,
+      "utilities": 2,
+      "interactables_on_a_wall": 3,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            12,
+            2
+          ],
+          "token": "trng_vs_prng"
+        },
+        {
+          "cell": [
+            12,
+            5
+          ],
+          "token": "dark_sphere"
+        },
+        {
+          "cell": [
+            12,
+            7
+          ],
+          "token": "random_butterflies"
+        },
+        {
+          "cell": [
+            14,
+            8
+          ],
+          "token": "t"
+        }
+      ]
+    },
+    {
+      "chapter": "randomness",
+      "map": "Random_Remove",
+      "pearl": "random remove",
+      "authored": false,
+      "map_rows": 18,
+      "map_cols": 13,
+      "map_cells": 234,
+      "walked": true,
+      "room_rows": 28,
+      "room_cols": 13,
+      "room_cells": 364,
+      "passage_rows": 0,
+      "court": 13,
+      "porch": 0,
+      "built_at": "2026-08-28T15:39:16",
+      "interactables": 3,
+      "utilities": 8,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 5,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        },
+        {
+          "cell": [
+            12,
+            0
+          ],
+          "token": "an:-90"
+        },
+        {
+          "cell": [
+            1,
+            4
+          ],
+          "token": "t"
+        }
+      ]
+    },
+    {
+      "chapter": "randomness",
+      "map": "Randomness_10_PRINT_Algorithm",
+      "pearl": "10 print algorithm",
+      "authored": false,
+      "map_rows": 14,
+      "map_cols": 13,
+      "map_cells": 182,
+      "walked": true,
+      "room_rows": 28,
+      "room_cols": 13,
+      "room_cells": 364,
+      "passage_rows": 0,
+      "court": 35,
+      "porch": 0,
+      "built_at": "2026-08-28T15:39:17",
+      "interactables": 9,
+      "utilities": 4,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 3,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        },
+        {
+          "cell": [
+            2,
+            0
+          ],
+          "token": "wp:90"
+        },
+        {
+          "cell": [
+            12,
+            0
+          ],
+          "token": "an:-90"
+        }
+      ]
+    },
+    {
+      "chapter": "randomness",
+      "map": "Random_Cubes",
+      "pearl": "random cubes",
+      "authored": false,
+      "map_rows": 20,
+      "map_cols": 12,
+      "map_cells": 240,
+      "walked": true,
+      "room_rows": 28,
+      "room_cols": 13,
+      "room_cells": 364,
+      "passage_rows": 0,
+      "court": 76,
+      "porch": 0,
+      "built_at": "2026-08-28T15:39:19",
+      "interactables": 53,
+      "utilities": 3,
+      "interactables_on_a_wall": 7,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            8,
+            2
+          ],
+          "token": "coin_toss"
+        },
+        {
+          "cell": [
+            4,
+            10
+          ],
+          "token": "random_edge_profile:0"
+        },
+        {
+          "cell": [
+            8,
+            10
+          ],
+          "token": "random_edge_profile:0"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        },
+        {
+          "cell": [
+            11,
+            0
+          ],
+          "token": "an:-90"
+        }
+      ]
+    },
+    {
+      "chapter": "randomness",
+      "map": "Random_Rotate_Random_XYZ",
+      "pearl": "random rotate random xyz",
+      "authored": false,
+      "map_rows": 16,
+      "map_cols": 13,
+      "map_cells": 208,
+      "walked": true,
+      "room_rows": 28,
+      "room_cols": 13,
+      "room_cells": 364,
+      "passage_rows": 0,
+      "court": 36,
+      "porch": 0,
+      "built_at": "2026-08-28T15:39:20",
+      "interactables": 5,
+      "utilities": 3,
+      "interactables_on_a_wall": 1,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            1
+          ],
+          "token": "hardware_entropy_decay"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        },
+        {
+          "cell": [
+            12,
+            0
+          ],
+          "token": "an:-90"
+        }
+      ]
+    },
+    {
+      "chapter": "randomness",
+      "map": "Random_Walk",
+      "pearl": "random walk",
+      "authored": false,
+      "map_rows": 14,
+      "map_cols": 13,
+      "map_cells": 182,
+      "walked": true,
+      "room_rows": 28,
+      "room_cols": 13,
+      "room_cells": 364,
+      "passage_rows": 0,
+      "court": 36,
+      "porch": 0,
+      "built_at": "2026-08-28T15:39:22",
+      "interactables": 12,
+      "utilities": 4,
+      "interactables_on_a_wall": 5,
+      "utilities_on_a_wall": 3,
+      "lost_examples": [
+        {
+          "cell": [
+            2,
+            0
+          ],
+          "token": "catalyst_prompter_box:0:0#emergence:hatc"
+        },
+        {
+          "cell": [
+            9,
+            0
+          ],
+          "token": "catalyst_vent:0:0#emit_interval_s:2.5#wa"
+        },
+        {
+          "cell": [
+            12,
+            1
+          ],
+          "token": "pixel_cloud:90"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        },
+        {
+          "cell": [
+            12,
+            0
+          ],
+          "token": "an:-90"
+        },
+        {
+          "cell": [
+            0,
+            4
+          ],
+          "token": "t"
+        }
+      ]
+    },
+    {
+      "chapter": "randomness",
+      "map": "Random_Gaussian",
+      "pearl": "random gaussian",
+      "authored": false,
+      "map_rows": 21,
+      "map_cols": 12,
+      "map_cells": 252,
+      "walked": true,
+      "room_rows": 28,
+      "room_cols": 13,
+      "room_cells": 364,
+      "passage_rows": 0,
+      "court": 32,
+      "porch": 0,
+      "built_at": "2026-08-28T15:39:24",
+      "interactables": 9,
+      "utilities": 4,
+      "interactables_on_a_wall": 1,
+      "utilities_on_a_wall": 3,
+      "lost_examples": [
+        {
+          "cell": [
+            4,
+            17
+          ],
+          "token": "distribution_comparator:0:-0.5"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        },
+        {
+          "cell": [
+            11,
+            0
+          ],
+          "token": "an:-90"
+        },
+        {
+          "cell": [
+            9,
+            11
+          ],
+          "token": "wp"
+        }
+      ]
+    },
+    {
+      "chapter": "randomness",
+      "map": "Random_Mushrooms",
+      "pearl": "random mushrooms",
+      "authored": false,
+      "map_rows": 13,
+      "map_cols": 12,
+      "map_cells": 156,
+      "walked": true,
+      "room_rows": 28,
+      "room_cols": 13,
+      "room_cells": 364,
+      "passage_rows": 0,
+      "court": 27,
+      "porch": 3,
+      "built_at": "2026-08-28T15:39:26",
+      "interactables": 6,
+      "utilities": 4,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        },
+        {
+          "cell": [
+            11,
+            0
+          ],
+          "token": "an:-90"
+        }
+      ]
+    },
+    {
+      "chapter": "randomness",
+      "map": "Random_Space_Geometry",
+      "pearl": "random space geometry",
+      "authored": false,
+      "map_rows": 24,
+      "map_cols": 12,
+      "map_cells": 288,
+      "walked": true,
+      "room_rows": 28,
+      "room_cols": 13,
+      "room_cells": 364,
+      "passage_rows": 0,
+      "court": 27,
+      "porch": 3,
+      "built_at": "2026-08-28T15:39:28",
+      "interactables": 6,
+      "utilities": 5,
+      "interactables_on_a_wall": 1,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            6,
+            27
+          ],
+          "token": "dark_sphere"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        },
+        {
+          "cell": [
+            11,
+            0
+          ],
+          "token": "an:-90"
+        }
+      ]
+    },
+    {
+      "chapter": "randomness",
+      "map": "Randomness_Examples_of_Randomness",
+      "pearl": "examples of randomness",
+      "authored": false,
+      "map_rows": 17,
+      "map_cols": 12,
+      "map_cells": 204,
+      "walked": true,
+      "room_rows": 28,
+      "room_cols": 13,
+      "room_cells": 364,
+      "passage_rows": 0,
+      "court": 27,
+      "porch": 0,
+      "built_at": "2026-08-28T15:39:30",
+      "interactables": 5,
+      "utilities": 4,
+      "interactables_on_a_wall": 1,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            9,
+            16
+          ],
+          "token": "pipe_dream:0:8"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        },
+        {
+          "cell": [
+            11,
+            0
+          ],
+          "token": "an:-90"
+        }
+      ]
+    },
+    {
+      "chapter": "randomness",
+      "map": "Random_Pheromone",
+      "pearl": "random pheromone",
+      "authored": false,
+      "map_rows": 14,
+      "map_cols": 13,
+      "map_cells": 182,
+      "walked": true,
+      "room_rows": 28,
+      "room_cols": 13,
+      "room_cells": 364,
+      "passage_rows": 0,
+      "court": 36,
+      "porch": 0,
+      "built_at": "2026-08-28T15:39:31",
+      "interactables": 4,
+      "utilities": 4,
+      "interactables_on_a_wall": 2,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            4,
+            5
+          ],
+          "token": "dark_sphere"
+        },
+        {
+          "cell": [
+            2,
+            6
+          ],
+          "token": "clipboard#pheromone_axioms:194:1.0"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        },
+        {
+          "cell": [
+            12,
+            0
+          ],
+          "token": "an:-90"
+        }
+      ]
+    },
+    {
+      "chapter": "randomness",
+      "map": "Random_Space",
+      "pearl": "random space",
+      "authored": false,
+      "map_rows": 15,
+      "map_cols": 13,
+      "map_cells": 195,
+      "walked": true,
+      "room_rows": 28,
+      "room_cols": 13,
+      "room_cells": 364,
+      "passage_rows": 0,
+      "court": 76,
+      "porch": 0,
+      "built_at": "2026-08-28T15:39:34",
+      "interactables": 5,
+      "utilities": 3,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        },
+        {
+          "cell": [
+            12,
+            0
+          ],
+          "token": "an:-90"
+        }
+      ]
+    },
+    {
+      "chapter": "randomness",
+      "map": "Random_Game",
+      "pearl": "random game",
+      "authored": false,
+      "map_rows": 16,
+      "map_cols": 13,
+      "map_cells": 208,
+      "walked": true,
+      "room_rows": 28,
+      "room_cols": 13,
+      "room_cells": 364,
+      "passage_rows": 0,
+      "court": 25,
+      "porch": 3,
+      "built_at": "2026-08-28T15:39:36",
+      "interactables": 8,
+      "utilities": 4,
+      "interactables_on_a_wall": 4,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            2,
+            0
+          ],
+          "token": "miura_crawler:90"
+        },
+        {
+          "cell": [
+            0,
+            2
+          ],
+          "token": "scissor_stalker:0"
+        },
+        {
+          "cell": [
+            4,
+            2
+          ],
+          "token": "kaleidocycle_enemy:0"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        },
+        {
+          "cell": [
+            12,
+            0
+          ],
+          "token": "an:-90"
+        }
+      ]
+    },
+    {
+      "chapter": "noise",
+      "map": "Random_Noise_Types",
+      "pearl": "random noise types",
+      "authored": false,
+      "map_rows": 9,
+      "map_cols": 7,
+      "map_cells": 63,
+      "walked": true,
+      "room_rows": 27,
+      "room_cols": 15,
+      "room_cells": 405,
+      "passage_rows": 0,
+      "court": 66,
+      "porch": 0,
+      "built_at": "2026-08-28T15:39:38",
+      "interactables": 4,
+      "utilities": 3,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        },
+        {
+          "cell": [
+            5,
+            6
+          ],
+          "token": "t"
+        }
+      ]
+    },
+    {
+      "chapter": "noise",
+      "map": "Noise_Columns",
+      "pearl": "columns",
+      "authored": false,
+      "map_rows": 14,
+      "map_cols": 12,
+      "map_cells": 168,
+      "walked": true,
+      "room_rows": 27,
+      "room_cols": 15,
+      "room_cells": 405,
+      "passage_rows": 0,
+      "court": 28,
+      "porch": 0,
+      "built_at": "2026-08-28T15:39:40",
+      "interactables": 3,
+      "utilities": 3,
+      "interactables_on_a_wall": 1,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            5,
+            6
+          ],
+          "token": "MeltingBerniniScene"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        }
+      ]
+    },
+    {
+      "chapter": "noise",
+      "map": "Noise_One",
+      "pearl": "point",
+      "authored": false,
+      "map_rows": 11,
+      "map_cols": 11,
+      "map_cells": 121,
+      "walked": true,
+      "room_rows": 27,
+      "room_cols": 15,
+      "room_cells": 405,
+      "passage_rows": 0,
+      "court": 39,
+      "porch": 0,
+      "built_at": "2026-08-28T15:39:41",
+      "interactables": 3,
+      "utilities": 3,
+      "interactables_on_a_wall": 1,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            5,
+            6
+          ],
+          "token": "noiselayers:0:20"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        }
+      ]
+    },
+    {
+      "chapter": "noise",
+      "map": "Noise_Voxel",
+      "pearl": "voxel",
+      "authored": false,
+      "map_rows": 14,
+      "map_cols": 13,
+      "map_cells": 182,
+      "walked": true,
+      "room_rows": 27,
+      "room_cols": 15,
+      "room_cells": 405,
+      "passage_rows": 0,
+      "court": 39,
+      "porch": 0,
+      "built_at": "2026-08-28T15:39:43",
+      "interactables": 4,
+      "utilities": 7,
+      "interactables_on_a_wall": 1,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            5,
+            6
+          ],
+          "token": "dark_sphere"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        },
+        {
+          "cell": [
+            11,
+            10
+          ],
+          "token": "tc:10:y"
+        }
+      ]
+    },
+    {
+      "chapter": "noise",
+      "map": "Noise_6_Wall",
+      "pearl": "6 wall",
+      "authored": false,
+      "map_rows": 11,
+      "map_cols": 11,
+      "map_cells": 121,
+      "walked": true,
+      "room_rows": 27,
+      "room_cols": 15,
+      "room_cells": 405,
+      "passage_rows": 0,
+      "court": 30,
+      "porch": 0,
+      "built_at": "2026-08-28T15:39:44",
+      "interactables": 2,
+      "utilities": 3,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        }
+      ]
+    },
+    {
+      "chapter": "noise",
+      "map": "Noise_Inside_Noise",
+      "pearl": "inside noise",
+      "authored": false,
+      "map_rows": 13,
+      "map_cols": 12,
+      "map_cells": 156,
+      "walked": true,
+      "room_rows": 27,
+      "room_cols": 15,
+      "room_cells": 405,
+      "passage_rows": 0,
+      "court": 38,
+      "porch": 0,
+      "built_at": "2026-08-28T15:39:46",
+      "interactables": 2,
+      "utilities": 4,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 0,
+      "lost_examples": []
+    },
+    {
+      "chapter": "noise",
+      "map": "Noise_Space_10",
+      "pearl": "space 10",
+      "authored": false,
+      "map_rows": 15,
+      "map_cols": 13,
+      "map_cells": 195,
+      "walked": true,
+      "room_rows": 27,
+      "room_cols": 15,
+      "room_cells": 405,
+      "passage_rows": 0,
+      "court": 14,
+      "porch": 0,
+      "built_at": "2026-08-28T15:39:48",
+      "interactables": 2,
+      "utilities": 3,
+      "interactables_on_a_wall": 1,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            5,
+            6
+          ],
+          "token": "noise_space"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        }
+      ]
+    },
+    {
+      "chapter": "noise",
+      "map": "Noise_Perlin_Simplex",
+      "pearl": "perlin simplex",
+      "authored": false,
+      "map_rows": 13,
+      "map_cols": 12,
+      "map_cells": 156,
+      "walked": true,
+      "room_rows": 27,
+      "room_cols": 15,
+      "room_cells": 405,
+      "passage_rows": 0,
+      "court": 34,
+      "porch": 0,
+      "built_at": "2026-08-28T15:39:49",
+      "interactables": 6,
+      "utilities": 3,
+      "interactables_on_a_wall": 1,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            5,
+            6
+          ],
+          "token": "noise_terrain"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        },
+        {
+          "cell": [
+            11,
+            12
+          ],
+          "token": "t"
+        }
+      ]
+    },
+    {
+      "chapter": "cellularautomata",
+      "map": "CA_Introduction",
+      "pearl": "ca introduction",
+      "authored": false,
+      "map_rows": 17,
+      "map_cols": 7,
+      "map_cells": 119,
+      "walked": true,
+      "room_rows": 27,
+      "room_cols": 15,
+      "room_cells": 405,
+      "passage_rows": 0,
+      "court": 31,
+      "porch": 0,
+      "built_at": "2026-08-28T15:39:51",
+      "interactables": 5,
+      "utilities": 3,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 0,
+      "lost_examples": []
+    },
+    {
+      "chapter": "cellularautomata",
+      "map": "CA_ElementaryRules",
+      "pearl": "ca elementaryrules",
+      "authored": false,
+      "map_rows": 10,
+      "map_cols": 7,
+      "map_cells": 70,
+      "walked": true,
+      "room_rows": 27,
+      "room_cols": 15,
+      "room_cells": 405,
+      "passage_rows": 0,
+      "court": 36,
+      "porch": 0,
+      "built_at": "2026-08-28T15:39:52",
+      "interactables": 2,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 0,
+      "lost_examples": []
+    },
+    {
+      "chapter": "cellularautomata",
+      "map": "CA_GameOfLife",
+      "pearl": "ca gameoflife",
+      "authored": false,
+      "map_rows": 16,
+      "map_cols": 10,
+      "map_cells": 160,
+      "walked": true,
+      "room_rows": 27,
+      "room_cols": 15,
+      "room_cells": 405,
+      "passage_rows": 0,
+      "court": 75,
+      "porch": 0,
+      "built_at": "2026-08-28T15:39:55",
+      "interactables": 5,
+      "utilities": 3,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 0,
+      "lost_examples": []
+    },
+    {
+      "chapter": "cellularautomata",
+      "map": "CA_BeyondBinary",
+      "pearl": "ca beyondbinary",
+      "authored": false,
+      "map_rows": 8,
+      "map_cols": 7,
+      "map_cells": 56,
+      "walked": true,
+      "room_rows": 27,
+      "room_cols": 15,
+      "room_cells": 405,
+      "passage_rows": 0,
+      "court": 37,
+      "porch": 0,
+      "built_at": "2026-08-28T15:39:57",
+      "interactables": 6,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 0,
+      "lost_examples": []
+    },
+    {
+      "chapter": "cellularautomata",
+      "map": "CA_ExpandingSpace",
+      "pearl": "ca expandingspace",
+      "authored": false,
+      "map_rows": 8,
+      "map_cols": 7,
+      "map_cells": 56,
+      "walked": true,
+      "room_rows": 27,
+      "room_cols": 15,
+      "room_cells": 405,
+      "passage_rows": 0,
+      "court": 37,
+      "porch": 0,
+      "built_at": "2026-08-28T15:39:58",
+      "interactables": 7,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 0,
+      "lost_examples": []
+    },
+    {
+      "chapter": "cellularautomata",
+      "map": "CA_SoftRules",
+      "pearl": "ca softrules",
+      "authored": false,
+      "map_rows": 8,
+      "map_cols": 7,
+      "map_cells": 56,
+      "walked": true,
+      "room_rows": 27,
+      "room_cols": 15,
+      "room_cells": 405,
+      "passage_rows": 0,
+      "court": 36,
+      "porch": 0,
+      "built_at": "2026-08-28T15:40:00",
+      "interactables": 2,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 0,
+      "lost_examples": []
+    },
+    {
+      "chapter": "cellularautomata",
+      "map": "CA_AgentsCircuits",
+      "pearl": "ca agentscircuits",
+      "authored": false,
+      "map_rows": 8,
+      "map_cols": 7,
+      "map_cells": 56,
+      "walked": true,
+      "room_rows": 27,
+      "room_cols": 15,
+      "room_cells": 405,
+      "passage_rows": 0,
+      "court": 32,
+      "porch": 0,
+      "built_at": "2026-08-28T15:40:01",
+      "interactables": 2,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 0,
+      "lost_examples": []
+    },
+    {
+      "chapter": "cellularautomata",
+      "map": "CA_EdgeOfChaos",
+      "pearl": "ca edgeofchaos",
+      "authored": false,
+      "map_rows": 9,
+      "map_cols": 7,
+      "map_cells": 63,
+      "walked": true,
+      "room_rows": 27,
+      "room_cols": 15,
+      "room_cells": 405,
+      "passage_rows": 0,
+      "court": 15,
+      "porch": 0,
+      "built_at": "2026-08-28T15:40:03",
+      "interactables": 4,
+      "utilities": 3,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 0,
+      "lost_examples": []
+    },
+    {
+      "chapter": "fractals",
+      "map": "Fractal_Recursion",
+      "pearl": "fractal recursion",
+      "authored": false,
+      "map_rows": 13,
+      "map_cols": 9,
+      "map_cells": 117,
+      "walked": true,
+      "room_rows": 36,
+      "room_cols": 13,
+      "room_cells": 468,
+      "passage_rows": 0,
+      "court": 38,
+      "porch": 0,
+      "built_at": "2026-08-28T15:40:04",
+      "interactables": 10,
+      "utilities": 4,
+      "interactables_on_a_wall": 6,
+      "utilities_on_a_wall": 3,
+      "lost_examples": [
+        {
+          "cell": [
+            1,
+            0
+          ],
+          "token": "fractal_recursion_2:-90:2"
+        },
+        {
+          "cell": [
+            3,
+            0
+          ],
+          "token": "recursive_table:0:-0.5:0.2"
+        },
+        {
+          "cell": [
+            0,
+            1
+          ],
+          "token": "science_screen:180:1.5#mode:bars"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        },
+        {
+          "cell": [
+            8,
+            0
+          ],
+          "token": "an:-90"
+        },
+        {
+          "cell": [
+            1,
+            7
+          ],
+          "token": "wp:180"
+        }
+      ]
+    },
+    {
+      "chapter": "fractals",
+      "map": "Fractal_RecursiveTrees",
+      "pearl": "fractal recursivetrees",
+      "authored": false,
+      "map_rows": 12,
+      "map_cols": 15,
+      "map_cells": 180,
+      "walked": true,
+      "room_rows": 36,
+      "room_cols": 13,
+      "room_cells": 468,
+      "passage_rows": 0,
+      "court": 26,
+      "porch": 0,
+      "built_at": "2026-08-28T15:40:13",
+      "interactables": 12,
+      "utilities": 3,
+      "interactables_on_a_wall": 2,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            10,
+            0
+          ],
+          "token": "fractal_lsystem_tree"
+        },
+        {
+          "cell": [
+            12,
+            4
+          ],
+          "token": "recursive_tree:0:0:0.7"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        },
+        {
+          "cell": [
+            13,
+            11
+          ],
+          "token": "t"
+        }
+      ]
+    },
+    {
+      "chapter": "fractals",
+      "map": "Fractal_CantorSet",
+      "pearl": "fractal cantorset",
+      "authored": false,
+      "map_rows": 21,
+      "map_cols": 17,
+      "map_cells": 357,
+      "walked": true,
+      "room_rows": 36,
+      "room_cols": 13,
+      "room_cells": 468,
+      "passage_rows": 0,
+      "court": 43,
+      "porch": 0,
+      "built_at": "2026-08-28T15:40:21",
+      "interactables": 7,
+      "utilities": 4,
+      "interactables_on_a_wall": 1,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            12,
+            17
+          ],
+          "token": "stochastic_tree_separated:0:-0.5"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        },
+        {
+          "cell": [
+            13,
+            19
+          ],
+          "token": "t"
+        }
+      ]
+    },
+    {
+      "chapter": "fractals",
+      "map": "Fractal_KochSierpinski",
+      "pearl": "fractal kochsierpinski",
+      "authored": false,
+      "map_rows": 9,
+      "map_cols": 11,
+      "map_cells": 99,
+      "walked": true,
+      "room_rows": 36,
+      "room_cols": 13,
+      "room_cells": 468,
+      "passage_rows": 0,
+      "court": 88,
+      "porch": 0,
+      "built_at": "2026-08-28T15:40:23",
+      "interactables": 10,
+      "utilities": 2,
+      "interactables_on_a_wall": 2,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            2
+          ],
+          "token": "cube_cabin"
+        },
+        {
+          "cell": [
+            9,
+            5
+          ],
+          "token": "sierpinski_triangle:180:2"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        }
+      ]
+    },
+    {
+      "chapter": "fractals",
+      "map": "Fractal_MengerSponge",
+      "pearl": "fractal mengersponge",
+      "authored": false,
+      "map_rows": 13,
+      "map_cols": 13,
+      "map_cells": 169,
+      "walked": true,
+      "room_rows": 36,
+      "room_cols": 13,
+      "room_cells": 468,
+      "passage_rows": 0,
+      "court": 75,
+      "porch": 0,
+      "built_at": "2026-08-28T15:40:25",
+      "interactables": 5,
+      "utilities": 4,
+      "interactables_on_a_wall": 3,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            3,
+            0
+          ],
+          "token": "diffusion_limited_aggregation"
+        },
+        {
+          "cell": [
+            0,
+            2
+          ],
+          "token": "catalyst_prompter_box:0:0#emergence:slid"
+        },
+        {
+          "cell": [
+            0,
+            9
+          ],
+          "token": "catalyst_vent:0:0#emit_interval_s:2.5#wa"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "m:4:16:4:0.1"
+        },
+        {
+          "cell": [
+            1,
+            0
+          ],
+          "token": "sp"
+        }
+      ]
+    },
+    {
+      "chapter": "fractals",
+      "map": "Fractal_GoldenSpiral",
+      "pearl": "fractal goldenspiral",
+      "authored": false,
+      "map_rows": 13,
+      "map_cols": 15,
+      "map_cells": 195,
+      "walked": true,
+      "room_rows": 36,
+      "room_cols": 13,
+      "room_cells": 468,
+      "passage_rows": 0,
+      "court": 39,
+      "porch": 0,
+      "built_at": "2026-08-28T15:40:27",
+      "interactables": 5,
+      "utilities": 2,
+      "interactables_on_a_wall": 1,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            1,
+            5
+          ],
+          "token": "golden_rectangle#preset:rainbow"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        },
+        {
+          "cell": [
+            13,
+            11
+          ],
+          "token": "t"
+        }
+      ]
+    },
+    {
+      "chapter": "fractals",
+      "map": "Fractal_JuliaSet",
+      "pearl": "fractal juliaset",
+      "authored": false,
+      "map_rows": 9,
+      "map_cols": 9,
+      "map_cells": 81,
+      "walked": true,
+      "room_rows": 36,
+      "room_cols": 13,
+      "room_cells": 468,
+      "passage_rows": 0,
+      "court": 31,
+      "porch": 0,
+      "built_at": "2026-08-28T15:40:29",
+      "interactables": 4,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        }
+      ]
+    },
+    {
+      "chapter": "fractals",
+      "map": "Fractal_MandelbrotSet",
+      "pearl": "fractal mandelbrotset",
+      "authored": false,
+      "map_rows": 9,
+      "map_cols": 9,
+      "map_cells": 81,
+      "walked": true,
+      "room_rows": 36,
+      "room_cols": 13,
+      "room_cells": 468,
+      "passage_rows": 0,
+      "court": 36,
+      "porch": 0,
+      "built_at": "2026-08-28T15:40:31",
+      "interactables": 3,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        }
+      ]
+    },
+    {
+      "chapter": "fractals",
+      "map": "Fractal_Synthesis",
+      "pearl": "fractal synthesis",
+      "authored": false,
+      "map_rows": 19,
+      "map_cols": 21,
+      "map_cells": 399,
+      "walked": true,
+      "room_rows": 36,
+      "room_cols": 13,
+      "room_cells": 468,
+      "passage_rows": 0,
+      "court": 37,
+      "porch": 0,
+      "built_at": "2026-08-28T15:40:32",
+      "interactables": 10,
+      "utilities": 2,
+      "interactables_on_a_wall": 2,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            15,
+            8
+          ],
+          "token": "fibonacci_sequences"
+        },
+        {
+          "cell": [
+            15,
+            14
+          ],
+          "token": "romanesco"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        },
+        {
+          "cell": [
+            19,
+            17
+          ],
+          "token": "t"
+        }
+      ]
+    },
+    {
+      "chapter": "fractals",
+      "map": "Fractal_CrossSequence",
+      "pearl": "fractal crosssequence",
+      "authored": false,
+      "map_rows": 8,
+      "map_cols": 7,
+      "map_cells": 56,
+      "walked": true,
+      "room_rows": 36,
+      "room_cols": 13,
+      "room_cells": 468,
+      "passage_rows": 0,
+      "court": 47,
+      "porch": 0,
+      "built_at": "2026-08-28T15:40:34",
+      "interactables": 5,
+      "utilities": 2,
+      "interactables_on_a_wall": 1,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            1,
+            0
+          ],
+          "token": "cellular_automata_3d_stacked"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        }
+      ]
+    },
+    {
+      "chapter": "lsystems",
+      "map": "LSystems_Grammar_Lab",
+      "pearl": "grammar lab",
+      "authored": false,
+      "map_rows": 10,
+      "map_cols": 8,
+      "map_cells": 80,
+      "walked": true,
+      "room_rows": 36,
+      "room_cols": 13,
+      "room_cells": 468,
+      "passage_rows": 0,
+      "court": 39,
+      "porch": 0,
+      "built_at": "2026-08-28T15:40:36",
+      "interactables": 6,
+      "utilities": 3,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 0,
+      "lost_examples": []
+    },
+    {
+      "chapter": "lsystems",
+      "map": "LSystems_Growth",
+      "pearl": "growth",
+      "authored": false,
+      "map_rows": 10,
+      "map_cols": 8,
+      "map_cells": 80,
+      "walked": true,
+      "room_rows": 36,
+      "room_cols": 13,
+      "room_cells": 468,
+      "passage_rows": 0,
+      "court": 34,
+      "porch": 0,
+      "built_at": "2026-08-28T15:40:38",
+      "interactables": 4,
+      "utilities": 3,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 0,
+      "lost_examples": []
+    },
+    {
+      "chapter": "lsystems",
+      "map": "LSystems_Grammars_And_Curves",
+      "pearl": "grammars and curves",
+      "authored": false,
+      "map_rows": 10,
+      "map_cols": 8,
+      "map_cells": 80,
+      "walked": true,
+      "room_rows": 36,
+      "room_cols": 13,
+      "room_cells": 468,
+      "passage_rows": 0,
+      "court": 34,
+      "porch": 0,
+      "built_at": "2026-08-28T15:40:40",
+      "interactables": 3,
+      "utilities": 3,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 0,
+      "lost_examples": []
+    },
+    {
+      "chapter": "lsystems",
+      "map": "LSystems_Architecture",
+      "pearl": "architecture",
+      "authored": false,
+      "map_rows": 10,
+      "map_cols": 8,
+      "map_cells": 80,
+      "walked": true,
+      "room_rows": 36,
+      "room_cols": 13,
+      "room_cells": 468,
+      "passage_rows": 0,
+      "court": 24,
+      "porch": 0,
+      "built_at": "2026-08-28T15:40:42",
+      "interactables": 5,
+      "utilities": 3,
+      "interactables_on_a_wall": 1,
+      "utilities_on_a_wall": 0,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "catalyst_vent:0:0#emit_interval_s:2.5#wa"
+        }
+      ]
+    },
+    {
+      "chapter": "lsystems",
+      "map": "LSystems_Competition",
+      "pearl": "competition",
+      "authored": false,
+      "map_rows": 10,
+      "map_cols": 8,
+      "map_cells": 80,
+      "walked": true,
+      "room_rows": 36,
+      "room_cols": 13,
+      "room_cells": 468,
+      "passage_rows": 0,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:40:43",
+      "interactables": 3,
+      "utilities": 3,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 0,
+      "lost_examples": []
+    },
+    {
+      "chapter": "lsystems",
+      "map": "LSystems_Living",
+      "pearl": "living",
+      "authored": false,
+      "map_rows": 10,
+      "map_cols": 10,
+      "map_cells": 100,
+      "walked": true,
+      "room_rows": 36,
+      "room_cols": 13,
+      "room_cells": 468,
+      "passage_rows": 0,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:40:45",
+      "interactables": 3,
+      "utilities": 3,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 0,
+      "lost_examples": []
+    },
+    {
+      "chapter": "lsystems",
+      "map": "Assemblage_Same_Desire",
+      "pearl": "assemblage same desire",
+      "authored": false,
+      "map_rows": 12,
+      "map_cols": 14,
+      "map_cells": 168,
+      "walked": true,
+      "room_rows": 36,
+      "room_cols": 13,
+      "room_cells": 468,
+      "passage_rows": 0,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:40:46",
+      "interactables": 7,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            12,
+            10
+          ],
+          "token": "t"
+        }
+      ]
+    },
+    {
+      "chapter": "proceduralgeneration",
+      "map": "PG_Genetic_Evolution",
+      "pearl": "pg genetic evolution",
+      "authored": false,
+      "map_rows": 12,
+      "map_cols": 10,
+      "map_cells": 120,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 0,
+      "court": 30,
+      "porch": 0,
+      "built_at": "2026-08-28T15:40:48",
+      "interactables": 2,
+      "utilities": 8,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        },
+        {
+          "cell": [
+            0,
+            9
+          ],
+          "token": "wp:180"
+        }
+      ]
+    },
+    {
+      "chapter": "proceduralgeneration",
+      "map": "PG_Space_Colonization",
+      "pearl": "pg space colonization",
+      "authored": false,
+      "map_rows": 14,
+      "map_cols": 8,
+      "map_cells": 112,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 0,
+      "court": 14,
+      "porch": 0,
+      "built_at": "2026-08-28T15:40:49",
+      "interactables": 1,
+      "utilities": 5,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        }
+      ]
+    },
+    {
+      "chapter": "proceduralgeneration",
+      "map": "PG_Percolation_Network",
+      "pearl": "pg percolation network",
+      "authored": false,
+      "map_rows": 15,
+      "map_cols": 12,
+      "map_cells": 180,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 0,
+      "court": 31,
+      "porch": 0,
+      "built_at": "2026-08-28T15:40:51",
+      "interactables": 3,
+      "utilities": 4,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        },
+        {
+          "cell": [
+            11,
+            0
+          ],
+          "token": "an:-90"
+        }
+      ]
+    },
+    {
+      "chapter": "proceduralgeneration",
+      "map": "PG_Branching_Growth",
+      "pearl": "pg branching growth",
+      "authored": false,
+      "map_rows": 10,
+      "map_cols": 12,
+      "map_cells": 120,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 0,
+      "court": 27,
+      "porch": 0,
+      "built_at": "2026-08-28T15:40:52",
+      "interactables": 2,
+      "utilities": 5,
+      "interactables_on_a_wall": 1,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            3,
+            0
+          ],
+          "token": "branching_growth_algorithm:0:2:2"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        }
+      ]
+    },
+    {
+      "chapter": "proceduralgeneration",
+      "map": "PG_Caves_Mazes",
+      "pearl": "pg caves mazes",
+      "authored": false,
+      "map_rows": 10,
+      "map_cols": 14,
+      "map_cells": 140,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 0,
+      "court": 33,
+      "porch": 0,
+      "built_at": "2026-08-28T15:40:54",
+      "interactables": 2,
+      "utilities": 4,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        }
+      ]
+    },
+    {
+      "chapter": "proceduralgeneration",
+      "map": "PG_Sculpted_Forms",
+      "pearl": "pg sculpted forms",
+      "authored": false,
+      "map_rows": 12,
+      "map_cols": 12,
+      "map_cells": 144,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 0,
+      "court": 40,
+      "porch": 0,
+      "built_at": "2026-08-28T15:40:56",
+      "interactables": 3,
+      "utilities": 4,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        }
+      ]
+    },
+    {
+      "chapter": "proceduralgeneration",
+      "map": "PG_Mirrored_Patterns",
+      "pearl": "pg mirrored patterns",
+      "authored": false,
+      "map_rows": 9,
+      "map_cols": 11,
+      "map_cells": 99,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 0,
+      "court": 26,
+      "porch": 3,
+      "built_at": "2026-08-28T15:40:58",
+      "interactables": 3,
+      "utilities": 4,
+      "interactables_on_a_wall": 1,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            3
+          ],
+          "token": "mirror_cellular_texture_for_3d:0:2"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        }
+      ]
+    },
+    {
+      "chapter": "softbodies",
+      "map": "SoftBodies_Soft_Body_Deformation",
+      "pearl": "soft body deformation",
+      "authored": false,
+      "map_rows": 9,
+      "map_cols": 8,
+      "map_cells": 72,
+      "walked": true,
+      "room_rows": 29,
+      "room_cols": 17,
+      "room_cells": 493,
+      "passage_rows": 0,
+      "court": 38,
+      "porch": 0,
+      "built_at": "2026-08-28T15:41:03",
+      "interactables": 3,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        }
+      ]
+    },
+    {
+      "chapter": "softbodies",
+      "map": "SoftBodies_Carusell",
+      "pearl": "carusell",
+      "authored": false,
+      "map_rows": 20,
+      "map_cols": 20,
+      "map_cells": 400,
+      "walked": true,
+      "room_rows": 29,
+      "room_cols": 17,
+      "room_cells": 493,
+      "passage_rows": 0,
+      "court": 26,
+      "porch": 0,
+      "built_at": "2026-08-28T15:41:08",
+      "interactables": 10,
+      "utilities": 3,
+      "interactables_on_a_wall": 7,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            3,
+            0
+          ],
+          "token": "synthesis_stand#subject:pick_up_cube#mod"
+        },
+        {
+          "cell": [
+            0,
+            3
+          ],
+          "token": "pick_up_cube"
+        },
+        {
+          "cell": [
+            0,
+            4
+          ],
+          "token": "grab_long_stick"
+        },
+        {
+          "cell": [
+            8,
+            12
+          ],
+          "token": "t"
+        }
+      ]
+    },
+    {
+      "chapter": "softbodies",
+      "map": "SoftBodies_Obsticals",
+      "pearl": "obsticals",
+      "authored": false,
+      "map_rows": 20,
+      "map_cols": 20,
+      "map_cells": 400,
+      "walked": true,
+      "room_rows": 29,
+      "room_cols": 17,
+      "room_cells": 493,
+      "passage_rows": 0,
+      "court": 67,
+      "porch": 0,
+      "built_at": "2026-08-28T15:41:13",
+      "interactables": 4,
+      "utilities": 3,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            8,
+            12
+          ],
+          "token": "t"
+        },
+        {
+          "cell": [
+            10,
+            12
+          ],
+          "token": "sp"
+        }
+      ]
+    },
+    {
+      "chapter": "softbodies",
+      "map": "SoftBodies_Obsticals_Part2",
+      "pearl": "obsticals part2",
+      "authored": false,
+      "map_rows": 11,
+      "map_cols": 30,
+      "map_cells": 330,
+      "walked": true,
+      "room_rows": 29,
+      "room_cols": 17,
+      "room_cells": 493,
+      "passage_rows": 0,
+      "court": 28,
+      "porch": 0,
+      "built_at": "2026-08-28T15:41:19",
+      "interactables": 6,
+      "utilities": 2,
+      "interactables_on_a_wall": 5,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            3
+          ],
+          "token": "pick_up_cube:0"
+        },
+        {
+          "cell": [
+            0,
+            4
+          ],
+          "token": "grab_long_stick"
+        },
+        {
+          "cell": [
+            0,
+            5
+          ],
+          "token": "pick_up_cube:0"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        }
+      ]
+    },
+    {
+      "chapter": "softbodies",
+      "map": "SoftBodies_Cloth_Physics",
+      "pearl": "cloth physics",
+      "authored": false,
+      "map_rows": 11,
+      "map_cols": 6,
+      "map_cells": 66,
+      "walked": true,
+      "room_rows": 29,
+      "room_cols": 17,
+      "room_cells": 493,
+      "passage_rows": 0,
+      "court": 16,
+      "porch": 0,
+      "built_at": "2026-08-28T15:41:23",
+      "interactables": 1,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        }
+      ]
+    },
+    {
+      "chapter": "softbodies",
+      "map": "SoftBodies_Affect_Theory_Visualization",
+      "pearl": "affect theory visualization",
+      "authored": false,
+      "map_rows": 9,
+      "map_cols": 7,
+      "map_cells": 63,
+      "walked": true,
+      "room_rows": 29,
+      "room_cols": 17,
+      "room_cells": 493,
+      "passage_rows": 0,
+      "court": 28,
+      "porch": 3,
+      "built_at": "2026-08-28T15:41:28",
+      "interactables": 1,
+      "utilities": 3,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            1,
+            0
+          ],
+          "token": "an:softbodies"
+        }
+      ]
+    },
+    {
+      "chapter": "softbodies",
+      "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+      "pearl": "proceduralgeneration reaction diffusion systems",
+      "authored": false,
+      "map_rows": 14,
+      "map_cols": 13,
+      "map_cells": 182,
+      "walked": true,
+      "room_rows": 29,
+      "room_cols": 17,
+      "room_cells": 493,
+      "passage_rows": 0,
+      "court": 38,
+      "porch": 0,
+      "built_at": "2026-08-28T15:41:33",
+      "interactables": 2,
+      "utilities": 5,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 3,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        },
+        {
+          "cell": [
+            11,
+            0
+          ],
+          "token": "an:-90"
+        },
+        {
+          "cell": [
+            10,
+            12
+          ],
+          "token": "sp"
+        }
+      ]
+    },
+    {
+      "chapter": "softbodies",
+      "map": "Topology_Entropy_Morphogenesis",
+      "pearl": "topology entropy morphogenesis",
+      "authored": false,
+      "map_rows": 12,
+      "map_cols": 9,
+      "map_cells": 108,
+      "walked": true,
+      "room_rows": 29,
+      "room_cols": 17,
+      "room_cells": 493,
+      "passage_rows": 0,
+      "court": 32,
+      "porch": 0,
+      "built_at": "2026-08-28T15:41:38",
+      "interactables": 1,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        }
+      ]
+    },
+    {
+      "chapter": "softbodies",
+      "map": "SoftBody_sb01_cloth_drape_corners",
+      "pearl": "softbody sb01 cloth drape corners",
+      "authored": false,
+      "map_rows": 12,
+      "map_cols": 12,
+      "map_cells": 144,
+      "walked": true,
+      "room_rows": 29,
+      "room_cols": 17,
+      "room_cells": 493,
+      "passage_rows": 0,
+      "court": 30,
+      "porch": 0,
+      "built_at": "2026-08-28T15:41:45",
+      "interactables": 1,
+      "utilities": 3,
+      "interactables_on_a_wall": 1,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            6,
+            6
+          ],
+          "token": "gallery_marker_soft-body:0:0.5"
+        },
+        {
+          "cell": [
+            10,
+            10
+          ],
+          "token": "t"
+        }
+      ]
+    },
+    {
+      "chapter": "isosurfaces",
+      "map": "ISO_Introduction",
+      "pearl": "iso introduction",
+      "authored": false,
+      "map_rows": 10,
+      "map_cols": 14,
+      "map_cells": 140,
+      "walked": true,
+      "room_rows": 32,
+      "room_cols": 15,
+      "room_cells": 480,
+      "passage_rows": 0,
+      "court": 22,
+      "porch": 0,
+      "built_at": "2026-08-28T15:41:50",
+      "interactables": 2,
+      "utilities": 5,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 3,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        },
+        {
+          "cell": [
+            2,
+            0
+          ],
+          "token": "t"
+        },
+        {
+          "cell": [
+            13,
+            0
+          ],
+          "token": "an:-90"
+        }
+      ]
+    },
+    {
+      "chapter": "isosurfaces",
+      "map": "ISO_LookupTable",
+      "pearl": "iso lookuptable",
+      "authored": false,
+      "map_rows": 10,
+      "map_cols": 14,
+      "map_cells": 140,
+      "walked": true,
+      "room_rows": 32,
+      "room_cols": 15,
+      "room_cells": 480,
+      "passage_rows": 0,
+      "court": 38,
+      "porch": 0,
+      "built_at": "2026-08-28T15:41:52",
+      "interactables": 2,
+      "utilities": 3,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        },
+        {
+          "cell": [
+            13,
+            0
+          ],
+          "token": "an:-90"
+        }
+      ]
+    },
+    {
+      "chapter": "isosurfaces",
+      "map": "ISO_ShapesGallery",
+      "pearl": "iso shapesgallery",
+      "authored": false,
+      "map_rows": 10,
+      "map_cols": 14,
+      "map_cells": 140,
+      "walked": true,
+      "room_rows": 32,
+      "room_cols": 15,
+      "room_cells": 480,
+      "passage_rows": 0,
+      "court": 11,
+      "porch": 0,
+      "built_at": "2026-08-28T15:41:54",
+      "interactables": 3,
+      "utilities": 3,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        },
+        {
+          "cell": [
+            13,
+            0
+          ],
+          "token": "an:-90"
+        }
+      ]
+    },
+    {
+      "chapter": "isosurfaces",
+      "map": "ISO_TorusGyroid",
+      "pearl": "iso torusgyroid",
+      "authored": false,
+      "map_rows": 14,
+      "map_cols": 16,
+      "map_cells": 224,
+      "walked": true,
+      "room_rows": 32,
+      "room_cols": 15,
+      "room_cells": 480,
+      "passage_rows": 0,
+      "court": 90,
+      "porch": 0,
+      "built_at": "2026-08-28T15:41:56",
+      "interactables": 2,
+      "utilities": 3,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        },
+        {
+          "cell": [
+            15,
+            0
+          ],
+          "token": "an:-90"
+        }
+      ]
+    },
+    {
+      "chapter": "isosurfaces",
+      "map": "ISO_Sculpting",
+      "pearl": "iso sculpting",
+      "authored": false,
+      "map_rows": 10,
+      "map_cols": 14,
+      "map_cells": 140,
+      "walked": true,
+      "room_rows": 32,
+      "room_cols": 15,
+      "room_cells": 480,
+      "passage_rows": 0,
+      "court": 37,
+      "porch": 0,
+      "built_at": "2026-08-28T15:41:58",
+      "interactables": 2,
+      "utilities": 3,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        },
+        {
+          "cell": [
+            13,
+            0
+          ],
+          "token": "an:-90"
+        }
+      ]
+    },
+    {
+      "chapter": "isosurfaces",
+      "map": "ISO_FlatTerrain",
+      "pearl": "iso flatterrain",
+      "authored": false,
+      "map_rows": 10,
+      "map_cols": 14,
+      "map_cells": 140,
+      "walked": true,
+      "room_rows": 32,
+      "room_cols": 15,
+      "room_cells": 480,
+      "passage_rows": 0,
+      "court": 26,
+      "porch": 0,
+      "built_at": "2026-08-28T15:42:00",
+      "interactables": 3,
+      "utilities": 3,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        },
+        {
+          "cell": [
+            13,
+            0
+          ],
+          "token": "an:-90"
+        }
+      ]
+    },
+    {
+      "chapter": "isosurfaces",
+      "map": "ISO_PortalLandscape",
+      "pearl": "iso portallandscape",
+      "authored": false,
+      "map_rows": 20,
+      "map_cols": 20,
+      "map_cells": 400,
+      "walked": true,
+      "room_rows": 32,
+      "room_cols": 15,
+      "room_cells": 480,
+      "passage_rows": 0,
+      "court": 16,
+      "porch": 0,
+      "built_at": "2026-08-28T15:42:02",
+      "interactables": 1,
+      "utilities": 3,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        },
+        {
+          "cell": [
+            15,
+            0
+          ],
+          "token": "an:-90"
+        }
+      ]
+    },
+    {
+      "chapter": "isosurfaces",
+      "map": "ISO_Caves",
+      "pearl": "iso caves",
+      "authored": false,
+      "map_rows": 10,
+      "map_cols": 14,
+      "map_cells": 140,
+      "walked": true,
+      "room_rows": 32,
+      "room_cols": 15,
+      "room_cells": 480,
+      "passage_rows": 0,
+      "court": 90,
+      "porch": 0,
+      "built_at": "2026-08-28T15:42:03",
+      "interactables": 3,
+      "utilities": 3,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        },
+        {
+          "cell": [
+            13,
+            0
+          ],
+          "token": "an:-90"
+        }
+      ]
+    },
+    {
+      "chapter": "isosurfaces",
+      "map": "ISO_CaveGeneration",
+      "pearl": "iso cavegeneration",
+      "authored": false,
+      "map_rows": 14,
+      "map_cols": 13,
+      "map_cells": 182,
+      "walked": true,
+      "room_rows": 32,
+      "room_cols": 15,
+      "room_cells": 480,
+      "passage_rows": 0,
+      "court": 26,
+      "porch": 0,
+      "built_at": "2026-08-28T15:42:06",
+      "interactables": 2,
+      "utilities": 3,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        },
+        {
+          "cell": [
+            15,
+            0
+          ],
+          "token": "an:-90"
+        }
+      ]
+    },
+    {
+      "chapter": "isosurfaces",
+      "map": "ISO_AnimatedNoise",
+      "pearl": "iso animatednoise",
+      "authored": false,
+      "map_rows": 10,
+      "map_cols": 14,
+      "map_cells": 140,
+      "walked": true,
+      "room_rows": 32,
+      "room_cols": 15,
+      "room_cells": 480,
+      "passage_rows": 0,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:42:08",
+      "interactables": 2,
+      "utilities": 3,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        },
+        {
+          "cell": [
+            13,
+            0
+          ],
+          "token": "an:-90"
+        }
+      ]
+    },
+    {
+      "chapter": "isosurfaces",
+      "map": "ISO_Metaballs",
+      "pearl": "iso metaballs",
+      "authored": false,
+      "map_rows": 14,
+      "map_cols": 16,
+      "map_cells": 224,
+      "walked": true,
+      "room_rows": 32,
+      "room_cols": 15,
+      "room_cells": 480,
+      "passage_rows": 0,
+      "court": 39,
+      "porch": 0,
+      "built_at": "2026-08-28T15:42:09",
+      "interactables": 4,
+      "utilities": 3,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        },
+        {
+          "cell": [
+            15,
+            0
+          ],
+          "token": "an:-90"
+        }
+      ]
+    },
+    {
+      "chapter": "isosurfaces",
+      "map": "ISO_ImplicitModeling",
+      "pearl": "iso implicitmodeling",
+      "authored": false,
+      "map_rows": 14,
+      "map_cols": 16,
+      "map_cells": 224,
+      "walked": true,
+      "room_rows": 32,
+      "room_cols": 15,
+      "room_cells": 480,
+      "passage_rows": 0,
+      "court": 36,
+      "porch": 0,
+      "built_at": "2026-08-28T15:42:11",
+      "interactables": 1,
+      "utilities": 3,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        },
+        {
+          "cell": [
+            15,
+            0
+          ],
+          "token": "an:-90"
+        }
+      ]
+    },
+    {
+      "chapter": "boolean_surfaces",
+      "map": "Boolean_Union",
+      "pearl": "boolean union",
+      "authored": false,
+      "map_rows": 10,
+      "map_cols": 10,
+      "map_cells": 100,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 0,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:42:13",
+      "interactables": 1,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        }
+      ]
+    },
+    {
+      "chapter": "boolean_surfaces",
+      "map": "Boolean_Intersection",
+      "pearl": "boolean intersection",
+      "authored": false,
+      "map_rows": 10,
+      "map_cols": 10,
+      "map_cells": 100,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 0,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:42:15",
+      "interactables": 1,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        }
+      ]
+    },
+    {
+      "chapter": "boolean_surfaces",
+      "map": "Boolean_Difference",
+      "pearl": "boolean difference",
+      "authored": false,
+      "map_rows": 10,
+      "map_cols": 10,
+      "map_cells": 100,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 0,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:42:16",
+      "interactables": 1,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        }
+      ]
+    },
+    {
+      "chapter": "boolean_surfaces",
+      "map": "Boolean_Compose_Workbench",
+      "pearl": "boolean compose workbench",
+      "authored": false,
+      "map_rows": 10,
+      "map_cols": 10,
+      "map_cells": 100,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 0,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:42:18",
+      "interactables": 2,
+      "utilities": 2,
+      "interactables_on_a_wall": 1,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            4,
+            4
+          ],
+          "token": "subtraction_suite:0:0"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        }
+      ]
+    },
+    {
+      "chapter": "swarmintelligence",
+      "map": "SwarmIntelligence_PhysarumColony",
+      "pearl": "physarumcolony",
+      "authored": false,
+      "map_rows": 9,
+      "map_cols": 9,
+      "map_cells": 81,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 0,
+      "court": 66,
+      "porch": 0,
+      "built_at": "2026-08-28T15:42:19",
+      "interactables": 2,
+      "utilities": 4,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            5,
+            7
+          ],
+          "token": "t"
+        }
+      ]
+    },
+    {
+      "chapter": "swarmintelligence",
+      "map": "SwarmIntelligence_FlowFields",
+      "pearl": "flowfields",
+      "authored": false,
+      "map_rows": 8,
+      "map_cols": 10,
+      "map_cells": 80,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 0,
+      "court": 66,
+      "porch": 0,
+      "built_at": "2026-08-28T15:42:22",
+      "interactables": 1,
+      "utilities": 5,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            8,
+            7
+          ],
+          "token": "sp"
+        }
+      ]
+    },
+    {
+      "chapter": "swarmintelligence",
+      "map": "SwarmIntelligence_Boids_Algorithm",
+      "pearl": "boids algorithm",
+      "authored": false,
+      "map_rows": 11,
+      "map_cols": 11,
+      "map_cells": 121,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 0,
+      "court": 30,
+      "porch": 0,
+      "built_at": "2026-08-28T15:42:24",
+      "interactables": 6,
+      "utilities": 5,
+      "interactables_on_a_wall": 1,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            4,
+            7
+          ],
+          "token": "boid_manager"
+        },
+        {
+          "cell": [
+            7,
+            7
+          ],
+          "token": "wp"
+        }
+      ]
+    },
+    {
+      "chapter": "swarmintelligence",
+      "map": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+      "pearl": "agent based modeling abm",
+      "authored": false,
+      "map_rows": 8,
+      "map_cols": 8,
+      "map_cells": 64,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 0,
+      "court": 7,
+      "porch": 0,
+      "built_at": "2026-08-28T15:42:26",
+      "interactables": 3,
+      "utilities": 4,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            6,
+            7
+          ],
+          "token": "sp"
+        }
+      ]
+    },
+    {
+      "chapter": "swarmintelligence",
+      "map": "SwarmIntelligence_Ant_Colony_Optimization",
+      "pearl": "ant colony optimization",
+      "authored": false,
+      "map_rows": 7,
+      "map_cols": 10,
+      "map_cells": 70,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 0,
+      "court": 66,
+      "porch": 0,
+      "built_at": "2026-08-28T15:42:28",
+      "interactables": 1,
+      "utilities": 4,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 0,
+      "lost_examples": []
+    },
+    {
+      "chapter": "swarmintelligence",
+      "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+      "pearl": "particle swarm optimization",
+      "authored": false,
+      "map_rows": 9,
+      "map_cols": 9,
+      "map_cells": 81,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 0,
+      "court": 29,
+      "porch": 0,
+      "built_at": "2026-08-28T15:42:31",
+      "interactables": 2,
+      "utilities": 8,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 0,
+      "lost_examples": []
+    },
+    {
+      "chapter": "swarmintelligence",
+      "map": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+      "pearl": "swarm intelligence algorithms",
+      "authored": false,
+      "map_rows": 10,
+      "map_cols": 10,
+      "map_cells": 100,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 0,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:42:34",
+      "interactables": 1,
+      "utilities": 4,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 0,
+      "lost_examples": []
+    },
+    {
+      "chapter": "machinelearning",
+      "map": "ML_Evolution",
+      "pearl": "ml evolution",
+      "authored": false,
+      "map_rows": 10,
+      "map_cols": 12,
+      "map_cells": 120,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 0,
+      "court": 69,
+      "porch": 0,
+      "built_at": "2026-08-28T15:42:36",
+      "interactables": 5,
+      "utilities": 3,
+      "interactables_on_a_wall": 3,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            1,
+            1
+          ],
+          "token": "evolved_creatures:0:2:0.6"
+        },
+        {
+          "cell": [
+            5,
+            1
+          ],
+          "token": "gradient_descent_visualization:0:2:0.6"
+        },
+        {
+          "cell": [
+            5,
+            2
+          ],
+          "token": "non_teleological_evolution:0:2:0.6"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        },
+        {
+          "cell": [
+            2,
+            2
+          ],
+          "token": "wp:90"
+        }
+      ]
+    },
+    {
+      "chapter": "machinelearning",
+      "map": "ML_Gradient_Landscape",
+      "pearl": "ml gradient landscape",
+      "authored": false,
+      "map_rows": 10,
+      "map_cols": 9,
+      "map_cells": 90,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 0,
+      "court": 26,
+      "porch": 0,
+      "built_at": "2026-08-28T15:42:38",
+      "interactables": 3,
+      "utilities": 4,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        }
+      ]
+    },
+    {
+      "chapter": "machinelearning",
+      "map": "ML_Classification",
+      "pearl": "ml classification",
+      "authored": false,
+      "map_rows": 8,
+      "map_cols": 10,
+      "map_cells": 80,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 0,
+      "court": 73,
+      "porch": 0,
+      "built_at": "2026-08-28T15:42:41",
+      "interactables": 3,
+      "utilities": 6,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 3,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        },
+        {
+          "cell": [
+            8,
+            6
+          ],
+          "token": "t"
+        },
+        {
+          "cell": [
+            8,
+            7
+          ],
+          "token": "sp"
+        }
+      ]
+    },
+    {
+      "chapter": "machinelearning",
+      "map": "ML_Neural_Networks",
+      "pearl": "ml neural networks",
+      "authored": false,
+      "map_rows": 14,
+      "map_cols": 5,
+      "map_cells": 70,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 0,
+      "court": 26,
+      "porch": 0,
+      "built_at": "2026-08-28T15:42:43",
+      "interactables": 2,
+      "utilities": 5,
+      "interactables_on_a_wall": 2,
+      "utilities_on_a_wall": 4,
+      "lost_examples": [
+        {
+          "cell": [
+            1,
+            2
+          ],
+          "token": "neural_network_visualization:0:0:0.6"
+        },
+        {
+          "cell": [
+            1,
+            7
+          ],
+          "token": "neural_networks_vr:0:0:0.6"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        },
+        {
+          "cell": [
+            1,
+            1
+          ],
+          "token": "an"
+        },
+        {
+          "cell": [
+            1,
+            2
+          ],
+          "token": "wp"
+        }
+      ]
+    },
+    {
+      "chapter": "machinelearning",
+      "map": "ML_Perception",
+      "pearl": "ml perception",
+      "authored": false,
+      "map_rows": 8,
+      "map_cols": 8,
+      "map_cells": 64,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 0,
+      "court": 82,
+      "porch": 0,
+      "built_at": "2026-08-28T15:42:45",
+      "interactables": 2,
+      "utilities": 5,
+      "interactables_on_a_wall": 2,
+      "utilities_on_a_wall": 3,
+      "lost_examples": [
+        {
+          "cell": [
+            2,
+            2
+          ],
+          "token": "computer_vision_vr:0:0:0.6"
+        },
+        {
+          "cell": [
+            0,
+            5
+          ],
+          "token": "convolutional_neural_networks_cnns_vr:18"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        },
+        {
+          "cell": [
+            1,
+            1
+          ],
+          "token": "an"
+        },
+        {
+          "cell": [
+            2,
+            2
+          ],
+          "token": "wp"
+        }
+      ]
+    },
+    {
+      "chapter": "machinelearning",
+      "map": "ML_Sequence_Memory",
+      "pearl": "ml sequence memory",
+      "authored": false,
+      "map_rows": 12,
+      "map_cols": 4,
+      "map_cells": 48,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 0,
+      "court": 79,
+      "porch": 0,
+      "built_at": "2026-08-28T15:42:49",
+      "interactables": 2,
+      "utilities": 5,
+      "interactables_on_a_wall": 1,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            8
+          ],
+          "token": "lstms_vr:0:0:0.6"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        },
+        {
+          "cell": [
+            2,
+            10
+          ],
+          "token": "t"
+        }
+      ]
+    },
+    {
+      "chapter": "machinelearning",
+      "map": "ML_Generative",
+      "pearl": "ml generative",
+      "authored": false,
+      "map_rows": 8,
+      "map_cols": 8,
+      "map_cells": 64,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 0,
+      "court": 31,
+      "porch": 0,
+      "built_at": "2026-08-28T15:42:51",
+      "interactables": 1,
+      "utilities": 5,
+      "interactables_on_a_wall": 1,
+      "utilities_on_a_wall": 5,
+      "lost_examples": [
+        {
+          "cell": [
+            2,
+            2
+          ],
+          "token": "generative_adversarial_networks_gans_vr:"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        },
+        {
+          "cell": [
+            1,
+            1
+          ],
+          "token": "an"
+        },
+        {
+          "cell": [
+            0,
+            3
+          ],
+          "token": "wp"
+        }
+      ]
+    },
+    {
+      "chapter": "machinelearning",
+      "map": "ML_Synthesis",
+      "pearl": "ml synthesis",
+      "authored": false,
+      "map_rows": 10,
+      "map_cols": 10,
+      "map_cells": 100,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 0,
+      "court": 79,
+      "porch": 0,
+      "built_at": "2026-08-28T15:42:54",
+      "interactables": 3,
+      "utilities": 7,
+      "interactables_on_a_wall": 1,
+      "utilities_on_a_wall": 3,
+      "lost_examples": [
+        {
+          "cell": [
+            1,
+            6
+          ],
+          "token": "explainable_ai_xai_vr:0:2:0.6"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        },
+        {
+          "cell": [
+            0,
+            8
+          ],
+          "token": "wp"
+        },
+        {
+          "cell": [
+            8,
+            8
+          ],
+          "token": "t"
+        }
+      ]
+    },
+    {
+      "chapter": "graphtheory",
+      "map": "GT_Foundations",
+      "pearl": "gt foundations",
+      "authored": false,
+      "map_rows": 10,
+      "map_cols": 10,
+      "map_cells": 100,
+      "walked": true,
+      "room_rows": 36,
+      "room_cols": 13,
+      "room_cells": 468,
+      "passage_rows": 0,
+      "court": 17,
+      "porch": 0,
+      "built_at": "2026-08-28T15:42:57",
+      "interactables": 3,
+      "utilities": 7,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        }
+      ]
+    },
+    {
+      "chapter": "graphtheory",
+      "map": "GT_Layout",
+      "pearl": "gt layout",
+      "authored": false,
+      "map_rows": 9,
+      "map_cols": 9,
+      "map_cells": 81,
+      "walked": true,
+      "room_rows": 36,
+      "room_cols": 13,
+      "room_cells": 468,
+      "passage_rows": 0,
+      "court": 25,
+      "porch": 0,
+      "built_at": "2026-08-28T15:42:59",
+      "interactables": 1,
+      "utilities": 4,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        }
+      ]
+    },
+    {
+      "chapter": "graphtheory",
+      "map": "GT_Pathfinding",
+      "pearl": "gt pathfinding",
+      "authored": false,
+      "map_rows": 12,
+      "map_cols": 7,
+      "map_cells": 84,
+      "walked": true,
+      "room_rows": 36,
+      "room_cols": 13,
+      "room_cells": 468,
+      "passage_rows": 0,
+      "court": 24,
+      "porch": 0,
+      "built_at": "2026-08-28T15:43:01",
+      "interactables": 1,
+      "utilities": 4,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        }
+      ]
+    },
+    {
+      "chapter": "graphtheory",
+      "map": "GT_Network_Analysis",
+      "pearl": "gt network analysis",
+      "authored": false,
+      "map_rows": 11,
+      "map_cols": 11,
+      "map_cells": 121,
+      "walked": true,
+      "room_rows": 36,
+      "room_cols": 13,
+      "room_cells": 468,
+      "passage_rows": 0,
+      "court": 96,
+      "porch": 0,
+      "built_at": "2026-08-28T15:43:03",
+      "interactables": 3,
+      "utilities": 8,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        }
+      ]
+    },
+    {
+      "chapter": "graphtheory",
+      "map": "GT_Connectivity",
+      "pearl": "gt connectivity",
+      "authored": false,
+      "map_rows": 8,
+      "map_cols": 12,
+      "map_cells": 96,
+      "walked": true,
+      "room_rows": 36,
+      "room_cols": 13,
+      "room_cells": 468,
+      "passage_rows": 0,
+      "court": 84,
+      "porch": 0,
+      "built_at": "2026-08-28T15:43:08",
+      "interactables": 3,
+      "utilities": 8,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        }
+      ]
+    },
+    {
+      "chapter": "graphtheory",
+      "map": "GT_Spanning_Trees",
+      "pearl": "gt spanning trees",
+      "authored": false,
+      "map_rows": 9,
+      "map_cols": 9,
+      "map_cells": 81,
+      "walked": true,
+      "room_rows": 36,
+      "room_cols": 13,
+      "room_cells": 468,
+      "passage_rows": 0,
+      "court": 61,
+      "porch": 0,
+      "built_at": "2026-08-28T15:43:11",
+      "interactables": 1,
+      "utilities": 6,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        }
+      ]
+    },
+    {
+      "chapter": "graphtheory",
+      "map": "GT_Flow",
+      "pearl": "gt flow",
+      "authored": false,
+      "map_rows": 10,
+      "map_cols": 10,
+      "map_cells": 100,
+      "walked": true,
+      "room_rows": 36,
+      "room_cols": 13,
+      "room_cells": 468,
+      "passage_rows": 0,
+      "court": 23,
+      "porch": 0,
+      "built_at": "2026-08-28T15:43:13",
+      "interactables": 2,
+      "utilities": 4,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        }
+      ]
+    },
+    {
+      "chapter": "graphtheory",
+      "map": "GT_Matching",
+      "pearl": "gt matching",
+      "authored": false,
+      "map_rows": 8,
+      "map_cols": 8,
+      "map_cells": 64,
+      "walked": true,
+      "room_rows": 36,
+      "room_cols": 13,
+      "room_cells": 468,
+      "passage_rows": 0,
+      "court": 26,
+      "porch": 0,
+      "built_at": "2026-08-28T15:43:16",
+      "interactables": 1,
+      "utilities": 4,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        }
+      ]
+    },
+    {
+      "chapter": "foundationscrisis",
+      "map": "Euclid_Parallel",
+      "pearl": "euclid parallel",
+      "authored": false,
+      "map_rows": 15,
+      "map_cols": 11,
+      "map_cells": 165,
+      "walked": true,
+      "room_rows": 36,
+      "room_cols": 13,
+      "room_cells": 468,
+      "passage_rows": 0,
+      "court": 38,
+      "porch": 0,
+      "built_at": "2026-08-28T15:43:18",
+      "interactables": 4,
+      "utilities": 5,
+      "interactables_on_a_wall": 1,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            1
+          ],
+          "token": "science_screen:180:1.5#mode:grid"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        }
+      ]
+    },
+    {
+      "chapter": "foundationscrisis",
+      "map": "NonEuclidean_Spaces",
+      "pearl": "noneuclidean spaces",
+      "authored": false,
+      "map_rows": 13,
+      "map_cols": 15,
+      "map_cells": 195,
+      "walked": true,
+      "room_rows": 36,
+      "room_cols": 13,
+      "room_cells": 468,
+      "passage_rows": 0,
+      "court": 24,
+      "porch": 0,
+      "built_at": "2026-08-28T15:43:21",
+      "interactables": 6,
+      "utilities": 9,
+      "interactables_on_a_wall": 1,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            13,
+            1
+          ],
+          "token": "triangle_curvature_workbench"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        }
+      ]
+    },
+    {
+      "chapter": "foundationscrisis",
+      "map": "Russell_Paradox",
+      "pearl": "russell paradox",
+      "authored": false,
+      "map_rows": 12,
+      "map_cols": 11,
+      "map_cells": 132,
+      "walked": true,
+      "room_rows": 36,
+      "room_cols": 13,
+      "room_cells": 468,
+      "passage_rows": 0,
+      "court": 41,
+      "porch": 0,
+      "built_at": "2026-08-28T15:43:24",
+      "interactables": 4,
+      "utilities": 11,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        }
+      ]
+    },
+    {
+      "chapter": "foundationscrisis",
+      "map": "Godel_Incompleteness",
+      "pearl": "godel incompleteness",
+      "authored": false,
+      "map_rows": 14,
+      "map_cols": 13,
+      "map_cells": 182,
+      "walked": true,
+      "room_rows": 36,
+      "room_cols": 13,
+      "room_cells": 468,
+      "passage_rows": 0,
+      "court": 36,
+      "porch": 0,
+      "built_at": "2026-08-28T15:43:27",
+      "interactables": 9,
+      "utilities": 10,
+      "interactables_on_a_wall": 1,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            10,
+            8
+          ],
+          "token": "fluency_seam:0:1:1"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        }
+      ]
+    },
+    {
+      "chapter": "foundationscrisis",
+      "map": "Escher_Impossible",
+      "pearl": "escher impossible",
+      "authored": false,
+      "map_rows": 12,
+      "map_cols": 11,
+      "map_cells": 132,
+      "walked": true,
+      "room_rows": 36,
+      "room_cols": 13,
+      "room_cells": 468,
+      "passage_rows": 0,
+      "court": 14,
+      "porch": 0,
+      "built_at": "2026-08-28T15:43:29",
+      "interactables": 4,
+      "utilities": 6,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        }
+      ]
+    },
+    {
+      "chapter": "foundationscrisis",
+      "map": "Brouwer_Intuitionism",
+      "pearl": "brouwer intuitionism",
+      "authored": false,
+      "map_rows": 14,
+      "map_cols": 11,
+      "map_cells": 154,
+      "walked": true,
+      "room_rows": 36,
+      "room_cols": 13,
+      "room_cells": 468,
+      "passage_rows": 0,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:43:31",
+      "interactables": 4,
+      "utilities": 11,
+      "interactables_on_a_wall": 1,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            2,
+            12
+          ],
+          "token": "excluded_middle_demo:0:0.8"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        }
+      ]
+    },
+    {
+      "chapter": "foundationscrisis",
+      "map": "Florensky_Paraconsistent",
+      "pearl": "florensky paraconsistent",
+      "authored": false,
+      "map_rows": 12,
+      "map_cols": 13,
+      "map_cells": 156,
+      "walked": true,
+      "room_rows": 36,
+      "room_cols": 13,
+      "room_cells": 468,
+      "passage_rows": 0,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:43:33",
+      "interactables": 4,
+      "utilities": 6,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        }
+      ]
+    },
+    {
+      "chapter": "foundationscrisis",
+      "map": "Crisis_Synthesis",
+      "pearl": "crisis synthesis",
+      "authored": false,
+      "map_rows": 18,
+      "map_cols": 17,
+      "map_cells": 306,
+      "walked": true,
+      "room_rows": 36,
+      "room_cols": 13,
+      "room_cells": 468,
+      "passage_rows": 0,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T14:14:40",
+      "interactables": 8,
+      "utilities": 8,
+      "interactables_on_a_wall": 1,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            2
+          ],
+          "token": "lambda_slider:0:0.5"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        }
+      ]
+    },
+    {
+      "chapter": "qfeplaboratory",
+      "map": "QFEP_Introduction",
+      "pearl": "qfep introduction",
+      "authored": false,
+      "map_rows": 10,
+      "map_cols": 9,
+      "map_cells": 90,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 0,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T14:14:44",
+      "interactables": 10,
+      "utilities": 8,
+      "interactables_on_a_wall": 3,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            1,
+            0
+          ],
+          "token": "tt:180:qfep_introduction:180:0.5"
+        },
+        {
+          "cell": [
+            0,
+            3
+          ],
+          "token": "synthesis_stand#subject:tt#mode:hero"
+        },
+        {
+          "cell": [
+            2,
+            8
+          ],
+          "token": "grab_sphere_lambda:0:0.3"
+        },
+        {
+          "cell": [
+            1,
+            7
+          ],
+          "token": "3t:GRAB THE TERMS"
+        }
+      ]
+    },
+    {
+      "chapter": "qfeplaboratory",
+      "map": "QFEP_F_Term",
+      "pearl": "qfep f term",
+      "authored": false,
+      "map_rows": 12,
+      "map_cols": 10,
+      "map_cells": 120,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 0,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T14:14:48",
+      "interactables": 8,
+      "utilities": 7,
+      "interactables_on_a_wall": 1,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            1,
+            0
+          ],
+          "token": "tt:180:free_energy:180:0.5"
+        },
+        {
+          "cell": [
+            1,
+            7
+          ],
+          "token": "3t:PATTERNS SATISFY"
+        },
+        {
+          "cell": [
+            4,
+            11
+          ],
+          "token": "t"
+        }
+      ]
+    },
+    {
+      "chapter": "qfeplaboratory",
+      "map": "QFEP_E_Term",
+      "pearl": "qfep e term",
+      "authored": false,
+      "map_rows": 12,
+      "map_cols": 12,
+      "map_cells": 144,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 0,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T14:14:51",
+      "interactables": 7,
+      "utilities": 7,
+      "interactables_on_a_wall": 1,
+      "utilities_on_a_wall": 0,
+      "lost_examples": [
+        {
+          "cell": [
+            1,
+            0
+          ],
+          "token": "tt:180:entropy_axioms:180:0.5"
+        }
+      ]
+    },
+    {
+      "chapter": "qfeplaboratory",
+      "map": "QFEP_Lambda_Spectrum",
+      "pearl": "qfep lambda spectrum",
+      "authored": false,
+      "map_rows": 18,
+      "map_cols": 5,
+      "map_cells": 90,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 0,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T14:14:55",
+      "interactables": 7,
+      "utilities": 9,
+      "interactables_on_a_wall": 7,
+      "utilities_on_a_wall": 4,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            10
+          ],
+          "token": "edge_particles:0:0.8"
+        },
+        {
+          "cell": [
+            0,
+            13
+          ],
+          "token": "chaos_particles:0:0.8"
+        },
+        {
+          "cell": [
+            0,
+            16
+          ],
+          "token": "bifurcation_walkway:90:0:0.8"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        },
+        {
+          "cell": [
+            1,
+            8
+          ],
+          "token": "3t:EDGE OF CHAOS"
+        },
+        {
+          "cell": [
+            1,
+            16
+          ],
+          "token": "3t:\u03bb=1.0 CHAOS"
+        }
+      ]
+    },
+    {
+      "chapter": "qfeplaboratory",
+      "map": "QFEP_Phi_Term",
+      "pearl": "qfep phi term",
+      "authored": false,
+      "map_rows": 10,
+      "map_cols": 10,
+      "map_cells": 100,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 0,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T14:14:59",
+      "interactables": 8,
+      "utilities": 7,
+      "interactables_on_a_wall": 2,
+      "utilities_on_a_wall": 0,
+      "lost_examples": [
+        {
+          "cell": [
+            2,
+            8
+          ],
+          "token": "tt:90:phi_conservative:180:0.5"
+        },
+        {
+          "cell": [
+            6,
+            8
+          ],
+          "token": "tt:90:phi_queer:180:0.5"
+        }
+      ]
+    },
+    {
+      "chapter": "qfeplaboratory",
+      "map": "QFEP_Edge_Of_Chaos",
+      "pearl": "qfep edge of chaos",
+      "authored": false,
+      "map_rows": 13,
+      "map_cols": 14,
+      "map_cells": 182,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 0,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T14:15:02",
+      "interactables": 6,
+      "utilities": 4,
+      "interactables_on_a_wall": 1,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            1,
+            0
+          ],
+          "token": "tt:180:edge_of_chaos:180:0.5"
+        },
+        {
+          "cell": [
+            6,
+            12
+          ],
+          "token": "t"
+        }
+      ]
+    },
+    {
+      "chapter": "qfeplaboratory",
+      "map": "QFEP_Synthesis",
+      "pearl": "qfep synthesis",
+      "authored": false,
+      "map_rows": 12,
+      "map_cols": 12,
+      "map_cells": 144,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 0,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T14:15:06",
+      "interactables": 8,
+      "utilities": 12,
+      "interactables_on_a_wall": 3,
+      "utilities_on_a_wall": 4,
+      "lost_examples": [
+        {
+          "cell": [
+            1,
+            0
+          ],
+          "token": "tt:270:qfep_synthesis:180:0.5"
+        },
+        {
+          "cell": [
+            2,
+            0
+          ],
+          "token": "queer_morphology_specimen:0:0.05:0.25"
+        },
+        {
+          "cell": [
+            2,
+            7
+          ],
+          "token": "grasp_cabinet:0:0"
+        },
+        {
+          "cell": [
+            8,
+            3
+          ],
+          "token": "3t:E(S)"
+        },
+        {
+          "cell": [
+            5,
+            4
+          ],
+          "token": "3t:THE PLINTH OF BECOMIN"
+        },
+        {
+          "cell": [
+            5,
+            7
+          ],
+          "token": "3t:FORMULA UNFOLDS"
+        }
+      ]
+    },
+    {
+      "chapter": "postfoundationscrisis",
+      "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+      "pearl": "criticalalgorithms algorithmic bias visualization",
+      "authored": false,
+      "map_rows": 9,
+      "map_cols": 8,
+      "map_cells": 72,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 0,
+      "court": 23,
+      "porch": 0,
+      "built_at": "2026-08-28T14:15:08",
+      "interactables": 3,
+      "utilities": 5,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 3,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        },
+        {
+          "cell": [
+            1,
+            0
+          ],
+          "token": "an"
+        },
+        {
+          "cell": [
+            6,
+            8
+          ],
+          "token": "sp"
+        }
+      ]
+    },
+    {
+      "chapter": "postfoundationscrisis",
+      "map": "CriticalAlgorithms_Applied_Ethics",
+      "pearl": "criticalalgorithms applied ethics",
+      "authored": false,
+      "map_rows": 10,
+      "map_cols": 9,
+      "map_cells": 90,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 0,
+      "court": 23,
+      "porch": 0,
+      "built_at": "2026-08-28T14:15:11",
+      "interactables": 6,
+      "utilities": 5,
+      "interactables_on_a_wall": 2,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            1,
+            0
+          ],
+          "token": "tt:90:qfep_critical:180:0.5"
+        },
+        {
+          "cell": [
+            0,
+            2
+          ],
+          "token": "synthesis_stand#subject:tt#mode:hero"
+        },
+        {
+          "cell": [
+            1,
+            8
+          ],
+          "token": "3t:ETHICS IS ARCHITECTUR"
+        }
+      ]
+    },
+    {
+      "chapter": "postfoundationscrisis",
+      "map": "SpeculativeComputation_Paraconsistent_Engineering",
+      "pearl": "speculativecomputation paraconsistent engineering",
+      "authored": false,
+      "map_rows": 10,
+      "map_cols": 10,
+      "map_cells": 100,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 0,
+      "court": 90,
+      "porch": 0,
+      "built_at": "2026-08-28T14:15:13",
+      "interactables": 6,
+      "utilities": 5,
+      "interactables_on_a_wall": 1,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            5,
+            8
+          ],
+          "token": "tt:90:qfep_application:180:0.5"
+        },
+        {
+          "cell": [
+            1,
+            8
+          ],
+          "token": "3t:BRANCH, DO NOT BREAK"
+        }
+      ]
+    },
+    {
+      "chapter": "postfoundationscrisis",
+      "map": "SpeculativeComputation_Situated_Computation",
+      "pearl": "speculativecomputation situated computation",
+      "authored": false,
+      "map_rows": 10,
+      "map_cols": 10,
+      "map_cells": 100,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 0,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T14:15:17",
+      "interactables": 4,
+      "utilities": 4,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 0,
+      "lost_examples": []
+    },
+    {
+      "chapter": "postfoundationscrisis",
+      "map": "SpeculativeComputation_Collective_Knowledge",
+      "pearl": "speculativecomputation collective knowledge",
+      "authored": false,
+      "map_rows": 11,
+      "map_cols": 11,
+      "map_cells": 121,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 0,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T14:15:19",
+      "interactables": 2,
+      "utilities": 4,
+      "interactables_on_a_wall": 1,
+      "utilities_on_a_wall": 0,
+      "lost_examples": [
+        {
+          "cell": [
+            5,
+            4
+          ],
+          "token": "peer_production_tool:90"
+        }
+      ]
+    },
+    {
+      "chapter": "postfoundationscrisis",
+      "map": "SpeculativeComputation_Rhizome_Network",
+      "pearl": "speculativecomputation rhizome network",
+      "authored": false,
+      "map_rows": 10,
+      "map_cols": 10,
+      "map_cells": 100,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 0,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T14:15:21",
+      "interactables": 2,
+      "utilities": 8,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 3,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        },
+        {
+          "cell": [
+            1,
+            0
+          ],
+          "token": "an"
+        },
+        {
+          "cell": [
+            1,
+            8
+          ],
+          "token": "t"
+        }
+      ]
+    },
+    {
+      "chapter": "postfoundationscrisis",
+      "map": "AdvancedLaboratory_Lab_Equipment_Simulation",
+      "pearl": "advancedlaboratory lab equipment simulation",
+      "authored": false,
+      "map_rows": 8,
+      "map_cols": 9,
+      "map_cells": 72,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 0,
+      "court": 30,
+      "porch": 0,
+      "built_at": "2026-08-28T14:15:23",
+      "interactables": 1,
+      "utilities": 9,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "s"
+        },
+        {
+          "cell": [
+            1,
+            0
+          ],
+          "token": "an"
+        }
+      ]
+    },
+    {
+      "chapter": "postfoundationscrisis",
+      "map": "PostCrisis_Synthesis",
+      "pearl": "postcrisis synthesis",
+      "authored": false,
+      "map_rows": 14,
+      "map_cols": 14,
+      "map_cells": 196,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 0,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T14:15:26",
+      "interactables": 6,
+      "utilities": 11,
+      "interactables_on_a_wall": 1,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            1,
+            0
+          ],
+          "token": "tt:90:qfep_synthesis:180:0.5"
+        },
+        {
+          "cell": [
+            4,
+            8
+          ],
+          "token": "3t:COMMONS"
+        },
+        {
+          "cell": [
+            9,
+            8
+          ],
+          "token": "3t:RHIZOME"
+        }
+      ]
+    },
+    {
+      "chapter": "primitives",
+      "map": "Point_One",
+      "pearl": "point one",
+      "authored": true,
+      "map_rows": 25,
+      "map_cols": 22,
+      "map_cells": 550,
+      "walked": true,
+      "room_rows": 25,
+      "room_cols": 22,
+      "room_cells": 550,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-29T09:59:17",
+      "interactables": 18,
+      "utilities": 10,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 0,
+      "lost_examples": []
+    },
+    {
+      "chapter": "primitives",
+      "map": "Point_Lines",
+      "pearl": "point lines",
+      "authored": true,
+      "map_rows": 20,
+      "map_cols": 20,
+      "map_cells": 400,
+      "walked": true,
+      "room_rows": 20,
+      "room_cols": 15,
+      "room_cells": 300,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-29T09:59:23",
+      "interactables": 30,
+      "utilities": 8,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        },
+        {
+          "cell": [
+            6,
+            0
+          ],
+          "token": "an:-90"
+        }
+      ]
+    },
+    {
+      "chapter": "primitives",
+      "map": "Point_Trace",
+      "pearl": "point trace",
+      "authored": true,
+      "map_rows": 20,
+      "map_cols": 20,
+      "map_cells": 400,
+      "walked": true,
+      "room_rows": 20,
+      "room_cols": 15,
+      "room_cells": 300,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-29T09:59:24",
+      "interactables": 8,
+      "utilities": 6,
+      "interactables_on_a_wall": 1,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            11,
+            5
+          ],
+          "token": "origin"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "m:0:3:-1:0.1"
+        },
+        {
+          "cell": [
+            6,
+            0
+          ],
+          "token": "an:-90"
+        }
+      ]
+    },
+    {
+      "chapter": "primitives",
+      "map": "Point_Line_Grid",
+      "pearl": "point line grid",
+      "authored": true,
+      "map_rows": 15,
+      "map_cols": 20,
+      "map_cells": 300,
+      "walked": true,
+      "room_rows": 15,
+      "room_cols": 13,
+      "room_cells": 195,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-29T09:59:24",
+      "interactables": 5,
+      "utilities": 7,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 3,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "m:0:3:-0.5:0.1"
+        },
+        {
+          "cell": [
+            0,
+            1
+          ],
+          "token": "sp"
+        },
+        {
+          "cell": [
+            0,
+            2
+          ],
+          "token": "sub:grid"
+        }
+      ]
+    },
+    {
+      "chapter": "primitives",
+      "map": "Point_Triangle_Context",
+      "pearl": "point triangle context",
+      "authored": true,
+      "map_rows": 20,
+      "map_cols": 20,
+      "map_cells": 400,
+      "walked": true,
+      "room_rows": 20,
+      "room_cols": 13,
+      "room_cells": 260,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-29T09:02:54",
+      "interactables": 15,
+      "utilities": 3,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        }
+      ]
+    },
+    {
+      "chapter": "primitives",
+      "map": "Primitives_Polythedra",
+      "pearl": "primitives polythedra",
+      "authored": true,
+      "map_rows": 20,
+      "map_cols": 20,
+      "map_cells": 400,
+      "walked": true,
+      "room_rows": 10,
+      "room_cols": 11,
+      "room_cells": 110,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-29T09:02:55",
+      "interactables": 10,
+      "utilities": 7,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        },
+        {
+          "cell": [
+            3,
+            10
+          ],
+          "token": "3t:polythedra"
+        }
+      ]
+    },
+    {
+      "chapter": "primitives",
+      "map": "Point_Animatedcube",
+      "pearl": "point animatedcube",
+      "authored": true,
+      "map_rows": 20,
+      "map_cols": 20,
+      "map_cells": 400,
+      "walked": true,
+      "room_rows": 14,
+      "room_cols": 11,
+      "room_cells": 154,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-29T09:02:58",
+      "interactables": 4,
+      "utilities": 4,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        }
+      ]
+    },
+    {
+      "chapter": "primitives",
+      "map": "Primitives_Ignorance",
+      "pearl": "primitives ignorance",
+      "authored": true,
+      "map_rows": 20,
+      "map_cols": 20,
+      "map_cells": 400,
+      "walked": true,
+      "room_rows": 20,
+      "room_cols": 11,
+      "room_cells": 220,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-29T09:02:59",
+      "interactables": 19,
+      "utilities": 4,
+      "interactables_on_a_wall": 1,
+      "utilities_on_a_wall": 3,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            14
+          ],
+          "token": "truncatedtetrahedron:0:0#plinth:0.90"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        },
+        {
+          "cell": [
+            1,
+            8
+          ],
+          "token": "an"
+        },
+        {
+          "cell": [
+            4,
+            8
+          ],
+          "token": "3t:Let_no_one_ignorant_o"
+        }
+      ]
+    },
+    {
+      "chapter": "primitives",
+      "map": "Primitives_Portals",
+      "pearl": "primitives portals",
+      "authored": true,
+      "map_rows": 35,
+      "map_cols": 7,
+      "map_cells": 245,
+      "walked": true,
+      "room_rows": 35,
+      "room_cols": 11,
+      "room_cells": 385,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T17:51:34",
+      "interactables": 5,
+      "utilities": 4,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            4,
+            33
+          ],
+          "token": "t"
+        }
+      ]
+    },
+    {
+      "chapter": "primitives",
+      "map": "Primitives_Melencolia",
+      "pearl": "primitives melencolia",
+      "authored": true,
+      "map_rows": 22,
+      "map_cols": 20,
+      "map_cells": 440,
+      "walked": true,
+      "room_rows": 22,
+      "room_cols": 11,
+      "room_cells": 242,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T17:51:38",
+      "interactables": 12,
+      "utilities": 5,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 3,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        },
+        {
+          "cell": [
+            1,
+            8
+          ],
+          "token": "t"
+        },
+        {
+          "cell": [
+            3,
+            10
+          ],
+          "token": "sub:finitude"
+        }
+      ]
+    },
+    {
+      "chapter": "transformation",
+      "map": "Trans_Introduction",
+      "pearl": "trans introduction",
+      "authored": true,
+      "map_rows": 20,
+      "map_cols": 20,
+      "map_cells": 400,
+      "walked": true,
+      "room_rows": 20,
+      "room_cols": 15,
+      "room_cells": 300,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T17:56:46",
+      "interactables": 14,
+      "utilities": 6,
+      "interactables_on_a_wall": 1,
+      "utilities_on_a_wall": 3,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "invariants_demo:0:-0.5#pose:rotate"
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        },
+        {
+          "cell": [
+            4,
+            12
+          ],
+          "token": "sc:3:-0.5:1:0"
+        },
+        {
+          "cell": [
+            5,
+            17
+          ],
+          "token": "rc:90:y:4:-0.6"
+        }
+      ]
+    },
+    {
+      "chapter": "transformation",
+      "map": "Trans_Translation",
+      "pearl": "trans translation",
+      "authored": true,
+      "map_rows": 24,
+      "map_cols": 20,
+      "map_cells": 480,
+      "walked": true,
+      "room_rows": 24,
+      "room_cols": 10,
+      "room_cells": 240,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T17:56:47",
+      "interactables": 13,
+      "utilities": 11,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 0,
+      "lost_examples": []
+    },
+    {
+      "chapter": "transformation",
+      "map": "Trans_AxisDecomposition",
+      "pearl": "trans axisdecomposition",
+      "authored": true,
+      "map_rows": 16,
+      "map_cols": 9,
+      "map_cells": 144,
+      "walked": true,
+      "room_rows": 16,
+      "room_cols": 10,
+      "room_cells": 160,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T17:56:50",
+      "interactables": 8,
+      "utilities": 9,
+      "interactables_on_a_wall": 5,
+      "utilities_on_a_wall": 0,
+      "lost_examples": [
+        {
+          "cell": [
+            12,
+            1
+          ],
+          "token": "pickup_gate#pickups:6"
+        },
+        {
+          "cell": [
+            2,
+            16
+          ],
+          "token": "cube_scene:0:3"
+        },
+        {
+          "cell": [
+            8,
+            16
+          ],
+          "token": "translation_cube_demo:180:0.5"
+        }
+      ]
+    },
+    {
+      "chapter": "transformation",
+      "map": "Trans_Rotation",
+      "pearl": "trans rotation",
+      "authored": true,
+      "map_rows": 40,
+      "map_cols": 7,
+      "map_cells": 280,
+      "walked": true,
+      "room_rows": 40,
+      "room_cols": 10,
+      "room_cells": 400,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T17:51:45",
+      "interactables": 9,
+      "utilities": 6,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 0,
+      "lost_examples": []
+    },
+    {
+      "chapter": "transformation",
+      "map": "Trans_RotationSpectacle",
+      "pearl": "trans rotationspectacle",
+      "authored": true,
+      "map_rows": 54,
+      "map_cols": 10,
+      "map_cells": 540,
+      "walked": true,
+      "room_rows": 54,
+      "room_cols": 15,
+      "room_cells": 810,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T17:51:47",
+      "interactables": 5,
+      "utilities": 4,
+      "interactables_on_a_wall": 1,
+      "utilities_on_a_wall": 0,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            4
+          ],
+          "token": "righttriangle:90:0:1.5"
+        }
+      ]
+    },
+    {
+      "chapter": "transformation",
+      "map": "Trans_Scale",
+      "pearl": "trans scale",
+      "authored": true,
+      "map_rows": 20,
+      "map_cols": 20,
+      "map_cells": 400,
+      "walked": true,
+      "room_rows": 20,
+      "room_cols": 15,
+      "room_cells": 300,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T17:51:48",
+      "interactables": 15,
+      "utilities": 5,
+      "interactables_on_a_wall": 2,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            3,
+            4
+          ],
+          "token": "chair_assembly_puzzle:180:-0.5#furniture"
+        },
+        {
+          "cell": [
+            4,
+            4
+          ],
+          "token": "clipboard:0:0#vr_scale_controls:180:0:0."
+        },
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        },
+        {
+          "cell": [
+            3,
+            15
+          ],
+          "token": "t"
+        }
+      ]
+    },
+    {
+      "chapter": "transformation",
+      "map": "Trans_Pit",
+      "pearl": "trans pit",
+      "authored": true,
+      "map_rows": 25,
+      "map_cols": 15,
+      "map_cells": 375,
+      "walked": true,
+      "room_rows": 25,
+      "room_cols": 15,
+      "room_cells": 375,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T17:55:27",
+      "interactables": 6,
+      "utilities": 32,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            7,
+            23
+          ],
+          "token": "t"
+        }
+      ]
+    },
+    {
+      "chapter": "color",
+      "map": "Array",
+      "pearl": "array",
+      "authored": true,
+      "map_rows": 24,
+      "map_cols": 20,
+      "map_cells": 480,
+      "walked": true,
+      "room_rows": 24,
+      "room_cols": 15,
+      "room_cells": 360,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T17:55:23",
+      "interactables": 12,
+      "utilities": 3,
+      "interactables_on_a_wall": 7,
+      "utilities_on_a_wall": 2,
+      "lost_examples": [
+        {
+          "cell": [
+            6,
+            2
+          ],
+          "token": "row_3_x:0:0"
+        },
+        {
+          "cell": [
+            4,
+            3
+          ],
+          "token": "pick_up_cube:0:1"
+        },
+        {
+          "cell": [
+            10,
+            4
+          ],
+          "token": "column_3_z:0:0"
+        },
+        {
+          "cell": [
+            5,
+            14
+          ],
+          "token": "t"
+        },
+        {
+          "cell": [
+            6,
+            21
+          ],
+          "token": "wp:0"
+        }
+      ]
+    },
+    {
+      "chapter": "color",
+      "map": "Pattern_Foundry",
+      "pearl": "pattern foundry",
+      "authored": true,
+      "map_rows": 30,
+      "map_cols": 20,
+      "map_cells": 600,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T17:51:52",
+      "interactables": 12,
+      "utilities": 5,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            18,
+            5
+          ],
+          "token": "t"
+        }
+      ]
+    },
+    {
+      "chapter": "color",
+      "map": "Color_Context_Placed",
+      "pearl": "color context placed",
+      "authored": true,
+      "map_rows": 38,
+      "map_cols": 20,
+      "map_cells": 760,
+      "walked": true,
+      "room_rows": 36,
+      "room_cols": 15,
+      "room_cells": 540,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:00",
+      "interactables": 22,
+      "utilities": 22,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            13,
+            32
+          ],
+          "token": "t"
+        }
+      ]
+    },
+    {
+      "chapter": "color",
+      "map": "Color_Nails",
+      "pearl": "color nails",
+      "authored": true,
+      "map_rows": 13,
+      "map_cols": 7,
+      "map_cells": 91,
+      "walked": true,
+      "room_rows": 13,
+      "room_cols": 12,
+      "room_cells": 156,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:01",
+      "interactables": 9,
+      "utilities": 5,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            5,
+            11
+          ],
+          "token": "t"
+        }
+      ]
+    },
+    {
+      "chapter": "color",
+      "map": "Color_Pillar",
+      "pearl": "color pillar",
+      "authored": true,
+      "map_rows": 22,
+      "map_cols": 20,
+      "map_cells": 440,
+      "walked": true,
+      "room_rows": 22,
+      "room_cols": 15,
+      "room_cells": 330,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:03",
+      "interactables": 9,
+      "utilities": 24,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 5,
+      "lost_examples": [
+        {
+          "cell": [
+            2,
+            11
+          ],
+          "token": "el"
+        },
+        {
+          "cell": [
+            4,
+            11
+          ],
+          "token": "el"
+        },
+        {
+          "cell": [
+            3,
+            15
+          ],
+          "token": "wp"
+        }
+      ]
+    },
+    {
+      "chapter": "color",
+      "map": "Color_Walls",
+      "pearl": "color walls",
+      "authored": true,
+      "map_rows": 31,
+      "map_cols": 20,
+      "map_cells": 620,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 15,
+      "room_cells": 450,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:04",
+      "interactables": 10,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "token": "sp"
+        }
+      ]
+    },
+    {
+      "chapter": "color",
+      "map": "Symmetry_Seventeen",
+      "pearl": "symmetry seventeen",
+      "authored": true,
+      "map_rows": 22,
+      "map_cols": 20,
+      "map_cells": 440,
+      "walked": true,
+      "room_rows": 22,
+      "room_cols": 13,
+      "room_cells": 286,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:06",
+      "interactables": 13,
+      "utilities": 2,
+      "interactables_on_a_wall": 1,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            2,
+            3
+          ],
+          "token": "loom_escher_mirror:0:0"
+        },
+        {
+          "cell": [
+            10,
+            12
+          ],
+          "token": "t"
+        }
+      ]
+    },
+    {
+      "chapter": "color",
+      "map": "Ribbon_Color_01",
+      "pearl": "ribbon color 01",
+      "authored": true,
+      "map_rows": 19,
+      "map_cols": 13,
+      "map_cells": 247,
+      "walked": true,
+      "room_rows": 19,
+      "room_cols": 13,
+      "room_cells": 247,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:08",
+      "interactables": 11,
+      "utilities": 2,
+      "interactables_on_a_wall": 2,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            3,
+            1
+          ],
+          "token": "grid_2d_4x4"
+        },
+        {
+          "cell": [
+            8,
+            5
+          ],
+          "token": "pillarcolorcollection"
+        },
+        {
+          "cell": [
+            10,
+            17
+          ],
+          "token": "t"
+        }
+      ]
+    },
+    {
+      "chapter": "color",
+      "map": "Ribbon_Color_02",
+      "pearl": "ribbon color 02",
+      "authored": true,
+      "map_rows": 19,
+      "map_cols": 13,
+      "map_cells": 247,
+      "walked": true,
+      "room_rows": 19,
+      "room_cols": 13,
+      "room_cells": 247,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:09",
+      "interactables": 10,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            11,
+            17
+          ],
+          "token": "t"
+        }
+      ]
+    },
+    {
+      "chapter": "color",
+      "map": "Ribbon_Color_03",
+      "pearl": "ribbon color 03",
+      "authored": true,
+      "map_rows": 19,
+      "map_cols": 13,
+      "map_cells": 247,
+      "walked": true,
+      "room_rows": 19,
+      "room_cols": 15,
+      "room_cells": 285,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:11",
+      "interactables": 18,
+      "utilities": 2,
+      "interactables_on_a_wall": 2,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            3,
+            1
+          ],
+          "token": "flashlight_demo"
+        },
+        {
+          "cell": [
+            8,
+            5
+          ],
+          "token": "bar_array"
+        },
+        {
+          "cell": [
+            11,
+            17
+          ],
+          "token": "t"
+        }
+      ]
+    },
+    {
+      "chapter": "color",
+      "map": "Ribbon_Color_04",
+      "pearl": "ribbon color 04",
+      "authored": true,
+      "map_rows": 17,
+      "map_cols": 15,
+      "map_cells": 255,
+      "walked": true,
+      "room_rows": 17,
+      "room_cols": 15,
+      "room_cells": 255,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:13",
+      "interactables": 8,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            13,
+            15
+          ],
+          "token": "t"
+        }
+      ]
+    },
+    {
+      "chapter": "color",
+      "map": "Ribbon_Color_05",
+      "pearl": "ribbon color 05",
+      "authored": true,
+      "map_rows": 19,
+      "map_cols": 13,
+      "map_cells": 247,
+      "walked": true,
+      "room_rows": 19,
+      "room_cols": 15,
+      "room_cells": 285,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:13",
+      "interactables": 8,
+      "utilities": 2,
+      "interactables_on_a_wall": 1,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            3,
+            1
+          ],
+          "token": "grabcolorcollection"
+        },
+        {
+          "cell": [
+            11,
+            17
+          ],
+          "token": "t"
+        }
+      ]
+    },
+    {
+      "chapter": "color",
+      "map": "Ribbon_Color_06",
+      "pearl": "ribbon color 06",
+      "authored": true,
+      "map_rows": 17,
+      "map_cols": 15,
+      "map_cells": 255,
+      "walked": true,
+      "room_rows": 17,
+      "room_cols": 15,
+      "room_cells": 255,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:14",
+      "interactables": 8,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            13,
+            15
+          ],
+          "token": "t"
+        }
+      ]
+    },
+    {
+      "chapter": "color",
+      "map": "Ribbon_Color_07",
+      "pearl": "ribbon color 07",
+      "authored": true,
+      "map_rows": 19,
+      "map_cols": 13,
+      "map_cells": 247,
+      "walked": true,
+      "room_rows": 19,
+      "room_cols": 19,
+      "room_cells": 361,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:15",
+      "interactables": 8,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            11,
+            17
+          ],
+          "token": "t"
+        }
+      ]
+    },
+    {
+      "chapter": "forces",
+      "map": "VFM_01_Foundations",
+      "pearl": "vfm 01 foundations",
+      "authored": true,
+      "map_rows": 16,
+      "map_cols": 22,
+      "map_cells": 352,
+      "walked": true,
+      "room_rows": 16,
+      "room_cols": 24,
+      "room_cells": 384,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-29T08:11:53",
+      "interactables": 19,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            10,
+            14
+          ],
+          "token": "t:VFM_02_Operations"
+        }
+      ]
+    },
+    {
+      "chapter": "forces",
+      "map": "Vectors_Act1_WhatAVectorIs",
+      "pearl": "vectors act1 whatavectoris",
+      "authored": true,
+      "map_rows": 22,
+      "map_cols": 14,
+      "map_cells": 308,
+      "walked": true,
+      "room_rows": 22,
+      "room_cols": 24,
+      "room_cells": 528,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-29T08:12:00",
+      "interactables": 5,
+      "utilities": 9,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            7,
+            20
+          ],
+          "token": "t:Vectors_Act2_VectorAri"
+        }
+      ]
+    },
+    {
+      "chapter": "forces",
+      "map": "VFM_02_Operations",
+      "pearl": "vfm 02 operations",
+      "authored": true,
+      "map_rows": 16,
+      "map_cols": 24,
+      "map_cells": 384,
+      "walked": true,
+      "room_rows": 16,
+      "room_cols": 24,
+      "room_cells": 384,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:25",
+      "interactables": 15,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            11,
+            14
+          ],
+          "token": "t:VFM_03_Motion"
+        }
+      ]
+    },
+    {
+      "chapter": "forces",
+      "map": "Vectors_Act2_VectorArithmetic",
+      "pearl": "vectors act2 vectorarithmetic",
+      "authored": true,
+      "map_rows": 38,
+      "map_cols": 20,
+      "map_cells": 760,
+      "walked": true,
+      "room_rows": 38,
+      "room_cols": 24,
+      "room_cells": 912,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:26",
+      "interactables": 12,
+      "utilities": 11,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            9,
+            36
+          ],
+          "token": "t:Vectors_Act3_FieldsAnd"
+        }
+      ]
+    },
+    {
+      "chapter": "forces",
+      "map": "VFM_03_Motion",
+      "pearl": "vfm 03 motion",
+      "authored": true,
+      "map_rows": 18,
+      "map_cols": 24,
+      "map_cells": 432,
+      "walked": true,
+      "room_rows": 18,
+      "room_cols": 34,
+      "room_cells": 612,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:27",
+      "interactables": 17,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            11,
+            16
+          ],
+          "token": "t:VFM_04_Fields"
+        }
+      ]
+    },
+    {
+      "chapter": "forces",
+      "map": "VFM_05_Launch",
+      "pearl": "vfm 05 launch",
+      "authored": true,
+      "map_rows": 24,
+      "map_cols": 34,
+      "map_cells": 816,
+      "walked": true,
+      "room_rows": 24,
+      "room_cols": 34,
+      "room_cells": 816,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:28",
+      "interactables": 15,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            32,
+            12
+          ],
+          "token": "t:VFM_06_Springs"
+        }
+      ]
+    },
+    {
+      "chapter": "forces",
+      "map": "Vectors_Act3_FieldsAndMotion",
+      "pearl": "vectors act3 fieldsandmotion",
+      "authored": true,
+      "map_rows": 30,
+      "map_cols": 18,
+      "map_cells": 540,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 26,
+      "room_cells": 780,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:30",
+      "interactables": 5,
+      "utilities": 7,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            9,
+            28
+          ],
+          "token": "t:Vectors_Act4a_KineticF"
+        }
+      ]
+    },
+    {
+      "chapter": "forces",
+      "map": "VFM_06_Springs",
+      "pearl": "vfm 06 springs",
+      "authored": true,
+      "map_rows": 20,
+      "map_cols": 26,
+      "map_cells": 520,
+      "walked": true,
+      "room_rows": 20,
+      "room_cols": 26,
+      "room_cells": 520,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:34",
+      "interactables": 15,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            12,
+            18
+          ],
+          "token": "t:VFM_07_Gravity"
+        }
+      ]
+    },
+    {
+      "chapter": "forces",
+      "map": "VFM_07_Gravity",
+      "pearl": "vfm 07 gravity",
+      "authored": true,
+      "map_rows": 16,
+      "map_cols": 22,
+      "map_cells": 352,
+      "walked": true,
+      "room_rows": 16,
+      "room_cols": 26,
+      "room_cells": 416,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:36",
+      "interactables": 11,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            18,
+            13
+          ],
+          "token": "t:VFM_09_Legs"
+        }
+      ]
+    },
+    {
+      "chapter": "forces",
+      "map": "VFM_08_Arena",
+      "pearl": "vfm 08 arena",
+      "authored": true,
+      "map_rows": 20,
+      "map_cols": 26,
+      "map_cells": 520,
+      "walked": true,
+      "room_rows": 20,
+      "room_cols": 30,
+      "room_cells": 600,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:37",
+      "interactables": 12,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            5,
+            17
+          ],
+          "token": "t:VFM_01_Foundations"
+        }
+      ]
+    },
+    {
+      "chapter": "forces",
+      "map": "Vectors_Act4a_KineticForces",
+      "pearl": "vectors act4a kineticforces",
+      "authored": true,
+      "map_rows": 30,
+      "map_cols": 30,
+      "map_cells": 900,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 30,
+      "room_cells": 900,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:38",
+      "interactables": 6,
+      "utilities": 10,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            15,
+            2
+          ],
+          "token": "t:Vectors_Act4b_Oscillat"
+        }
+      ]
+    },
+    {
+      "chapter": "forces",
+      "map": "Vectors_Act4b_Oscillation",
+      "pearl": "vectors act4b oscillation",
+      "authored": true,
+      "map_rows": 30,
+      "map_cols": 30,
+      "map_cells": 900,
+      "walked": true,
+      "room_rows": 30,
+      "room_cols": 30,
+      "room_cells": 900,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:38",
+      "interactables": 8,
+      "utilities": 11,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            15,
+            2
+          ],
+          "token": "t:Vectors_Act5_ForceAsPl"
+        }
+      ]
+    },
+    {
+      "chapter": "forces",
+      "map": "VFM_04_Fields",
+      "pearl": "vfm 04 fields",
+      "authored": true,
+      "map_rows": 22,
+      "map_cols": 30,
+      "map_cells": 660,
+      "walked": true,
+      "room_rows": 22,
+      "room_cols": 30,
+      "room_cells": 660,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:39",
+      "interactables": 14,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            15,
+            20
+          ],
+          "token": "t:VFM_05_Launch"
+        }
+      ]
+    },
+    {
+      "chapter": "forces",
+      "map": "Vectors_Act5_ForceAsPlace",
+      "pearl": "vectors act5 forceasplace",
+      "authored": true,
+      "map_rows": 24,
+      "map_cols": 16,
+      "map_cells": 384,
+      "walked": true,
+      "room_rows": 24,
+      "room_cols": 16,
+      "room_cells": 384,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:40",
+      "interactables": 5,
+      "utilities": 7,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            8,
+            3
+          ],
+          "token": "t:Vectors_Act1_WhatAVect"
+        }
+      ]
+    },
+    {
+      "chapter": "change",
+      "map": "Change_Intro",
+      "pearl": "change intro",
+      "authored": true,
+      "map_rows": 19,
+      "map_cols": 19,
+      "map_cells": 361,
+      "walked": true,
+      "room_rows": 19,
+      "room_cols": 19,
+      "room_cells": 361,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:16",
+      "interactables": 9,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 0,
+      "lost_examples": []
+    },
+    {
+      "chapter": "change",
+      "map": "Accumulation_Riemann",
+      "pearl": "accumulation riemann",
+      "authored": true,
+      "map_rows": 15,
+      "map_cols": 15,
+      "map_cells": 225,
+      "walked": true,
+      "room_rows": 15,
+      "room_cols": 15,
+      "room_cells": 225,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:17",
+      "interactables": 4,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 0,
+      "lost_examples": []
+    },
+    {
+      "chapter": "change",
+      "map": "Flow_Field",
+      "pearl": "flow field",
+      "authored": true,
+      "map_rows": 15,
+      "map_cols": 15,
+      "map_cells": 225,
+      "walked": true,
+      "room_rows": 15,
+      "room_cols": 15,
+      "room_cells": 225,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:17",
+      "interactables": 6,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 0,
+      "lost_examples": []
+    },
+    {
+      "chapter": "change",
+      "map": "Change_Reconciliation",
+      "pearl": "change reconciliation",
+      "authored": true,
+      "map_rows": 15,
+      "map_cols": 15,
+      "map_cells": 225,
+      "walked": true,
+      "room_rows": 15,
+      "room_cols": 15,
+      "room_cells": 225,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:18",
+      "interactables": 5,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 0,
+      "lost_examples": []
+    },
+    {
+      "chapter": "change",
+      "map": "Ribbon_Change_01",
+      "pearl": "ribbon change 01",
+      "authored": true,
+      "map_rows": 11,
+      "map_cols": 13,
+      "map_cells": 143,
+      "walked": true,
+      "room_rows": 11,
+      "room_cols": 13,
+      "room_cells": 143,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:19",
+      "interactables": 3,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            11,
+            9
+          ],
+          "token": "t"
+        }
+      ]
+    },
+    {
+      "chapter": "change",
+      "map": "Ribbon_Change_02",
+      "pearl": "ribbon change 02",
+      "authored": true,
+      "map_rows": 9,
+      "map_cols": 13,
+      "map_cells": 117,
+      "walked": true,
+      "room_rows": 9,
+      "room_cols": 13,
+      "room_cells": 117,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:20",
+      "interactables": 2,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            11,
+            7
+          ],
+          "token": "t"
+        }
+      ]
+    },
+    {
+      "chapter": "change",
+      "map": "Ribbon_Change_03",
+      "pearl": "ribbon change 03",
+      "authored": true,
+      "map_rows": 9,
+      "map_cols": 13,
+      "map_cells": 117,
+      "walked": true,
+      "room_rows": 9,
+      "room_cols": 15,
+      "room_cells": 135,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:20",
+      "interactables": 2,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            11,
+            7
+          ],
+          "token": "t"
+        }
+      ]
+    },
+    {
+      "chapter": "change",
+      "map": "Ribbon_Change_04",
+      "pearl": "ribbon change 04",
+      "authored": true,
+      "map_rows": 9,
+      "map_cols": 15,
+      "map_cells": 135,
+      "walked": true,
+      "room_rows": 9,
+      "room_cols": 22,
+      "room_cells": 198,
+      "passage_rows": 9,
+      "court": 0,
+      "porch": 0,
+      "built_at": "2026-08-28T15:38:21",
+      "interactables": 2,
+      "utilities": 2,
+      "interactables_on_a_wall": 0,
+      "utilities_on_a_wall": 1,
+      "lost_examples": [
+        {
+          "cell": [
+            13,
+            7
+          ],
+          "token": "t"
+        }
+      ]
+    }
+  ],
+  "by_chapter": {
+    "formfinding": {
+      "n": 6,
+      "gain": 2160,
+      "risk": 0,
+      "court": 137,
+      "walked": 6
+    },
+    "wavefunctions": {
+      "n": 12,
+      "gain": 3691,
+      "risk": 45,
+      "court": 456,
+      "walked": 12
+    },
+    "randomness": {
+      "n": 14,
+      "gain": 2305,
+      "risk": 62,
+      "court": 600,
+      "walked": 14
+    },
+    "noise": {
+      "n": 8,
+      "gain": 2078,
+      "risk": 15,
+      "court": 288,
+      "walked": 8
+    },
+    "cellularautomata": {
+      "n": 8,
+      "gain": 2604,
+      "risk": 0,
+      "court": 299,
+      "walked": 8
+    },
+    "fractals": {
+      "n": 10,
+      "gain": 2946,
+      "risk": 35,
+      "court": 460,
+      "walked": 10
+    },
+    "lsystems": {
+      "n": 7,
+      "gain": 2608,
+      "risk": 2,
+      "court": 131,
+      "walked": 7
+    },
+    "proceduralgeneration": {
+      "n": 7,
+      "gain": 2235,
+      "risk": 11,
+      "court": 201,
+      "walked": 7
+    },
+    "softbodies": {
+      "n": 9,
+      "gain": 2672,
+      "risk": 25,
+      "court": 303,
+      "walked": 9
+    },
+    "isosurfaces": {
+      "n": 12,
+      "gain": 3526,
+      "risk": 25,
+      "court": 431,
+      "walked": 12
+    },
+    "boolean_surfaces": {
+      "n": 4,
+      "gain": 1400,
+      "risk": 5,
+      "court": 0,
+      "walked": 4
+    },
+    "swarmintelligence": {
+      "n": 7,
+      "gain": 2553,
+      "risk": 5,
+      "court": 264,
+      "walked": 7
+    },
+    "machinelearning": {
+      "n": 8,
+      "gain": 2964,
+      "risk": 33,
+      "court": 465,
+      "walked": 8
+    },
+    "graphtheory": {
+      "n": 8,
+      "gain": 3017,
+      "risk": 8,
+      "court": 356,
+      "walked": 8
+    },
+    "foundationscrisis": {
+      "n": 8,
+      "gain": 2322,
+      "risk": 13,
+      "court": 153,
+      "walked": 8
+    },
+    "qfeplaboratory": {
+      "n": 7,
+      "gain": 2280,
+      "risk": 30,
+      "court": 0,
+      "walked": 7
+    },
+    "postfoundationscrisis": {
+      "n": 8,
+      "gain": 2749,
+      "risk": 17,
+      "court": 166,
+      "walked": 8
+    }
+  }
+}
