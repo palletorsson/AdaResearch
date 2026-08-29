@@ -301,7 +301,13 @@ def find(tok: str, meta: dict, corp: list, placed: set, regset: set) -> dict:
                 hits[tier].append({"file": doc["rel"], "kind": doc["kind"], "map": doc["map"],
                                    "para": pn, "surface": kind, "matched": m.group(0),
                                    "own": in_own, "why": why,
-                                   "excerpt": re.sub(r"\s+", " ", para)[:400]})
+                                   # 1000, not 400. Measured: only 56% of named
+                                   # hits live in a file /book can render — the
+                                   # rest are blog, doc essays, technical.md and
+                                   # blurb.md. For those the excerpt IS the
+                                   # reading, so it has to carry the paragraph
+                                   # rather than a taste of it.
+                                   "excerpt": re.sub(r"\s+", " ", para)[:1000]})
                 break
     return hits
 
