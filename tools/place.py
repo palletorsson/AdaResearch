@@ -52,6 +52,9 @@ from placement_research import (    # type: ignore
     strategy_hybrid, strategy_simulated_annealing, strategy_humanoid_walker,
     strategy_focal_composition, strategy_pacing_arc, strategy_alexander,
     strategy_promenade, strategy_tile_wfc,
+    strategy_crystallization,
+    strategy_stickiness,
+    strategy_colonization,
 )
 from place_artifacts import (
     existing_placements, room_from_map, parse_lookup_name, artifact_from_registry,
@@ -72,6 +75,11 @@ ENGINES = {
     "alexander":           strategy_alexander,
     "promenade":           strategy_promenade,
     "tile_wfc":            strategy_tile_wfc,
+    # The nature engines (2026-08-27): the museum places by the algorithms it
+    # teaches - nucleation, aggregation, growth toward resources.
+    "crystallization":     strategy_crystallization,
+    "stickiness":          strategy_stickiness,
+    "colonization":        strategy_colonization,
 }
 
 
