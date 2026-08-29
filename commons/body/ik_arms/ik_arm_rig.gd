@@ -7,6 +7,11 @@ extends Node3D
 ## Each arm extends the boundary between self and world —
 ## the reach is not fixed but negotiated frame by frame.
 
+## PRELOAD, NOT class_name. A headless run has no editor class cache, so a
+## global class_name resolves in the editor and fails at the command line —
+## which is where every gate in this project runs.
+const Tartan = preload("res://commons/body/tartan.gd")
+
 ## ————————————————————————————————————————————————————————————————————
 ## Exports
 ## ————————————————————————————————————————————————————————————————————
@@ -14,8 +19,8 @@ extends Node3D
 ## True for left arm, false for right.
 @export var is_left: bool = false
 
-## Base color for the procedural arm mesh.
-@export var arm_color: Color = Color(0.85, 0.75, 0.65)
+## Tint over the tartan. White shows the cloth as woven; a colour shades it.
+@export var arm_color: Color = Color(1.0, 1.0, 1.0)
 
 ## Bone lengths (meters).
 @export var upper_arm_length: float = 0.28
@@ -109,7 +114,11 @@ func set_shoulder_position(pos: Vector3) -> void:
 func set_arm_color(color: Color) -> void:
 	arm_color = color
 	if is_instance_valid(_mesh_instance):
+		# retint, never replace: assigning a flat albedo here would throw the cloth
+		# away the first time anything set a skin colour.
 		var mat := _mesh_instance.get_surface_override_material(0) as StandardMaterial3D
+		if mat == null and _mesh_instance.mesh != null:
+			mat = _mesh_instance.mesh.surface_get_material(0) as StandardMaterial3D
 		if mat:
 			mat.albedo_color = arm_color
 
@@ -271,10 +280,12 @@ func _build_procedural_mesh() -> void:
 	var arm_mesh := ArrayMesh.new()
 	arm_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 
-	## Material
-	var mat := StandardMaterial3D.new()
-	mat.albedo_color = arm_color
-	mat.roughness = 0.7
+	## THE SLEEVE IS CLOTH (2026-08-29, Palle: "arms and torso should have pink
+	## Tartan pattern"). Triplanar, because this mesh is built by hand and never
+	## writes ARRAY_TEX_UV — and on a limb a world-mapped check reads as cloth cut
+	## from a bolt, which is what a sleeve is. arm_color survives as a tint, so
+	## set_arm_color still shades the whole garment rather than being ignored.
+	var mat := Tartan.material(0.42, arm_color)
 	arm_mesh.surface_set_material(0, mat)
 
 	## Skin resource with bind poses

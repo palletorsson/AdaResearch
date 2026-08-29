@@ -68,6 +68,9 @@ const SLOTS := {
 ## view while judging whether two driven arms sit on the wrists correctly.
 ## Nothing is deleted: set this back to 4 and they return exactly as they were.
 @export var limb_count: int = 0
+
+## The cloth. Preloaded, not class_name — see tartan.gd.
+const Tartan = preload("res://commons/body/tartan.gd")
 @export var limb_segments: int = 4
 @export var limb_length: float = 0.22       ## metres per segment
 @export var limb_lag: float = 0.16          ## how slowly a target follows
@@ -452,9 +455,20 @@ func _dress(n: int) -> void:
 		cm.cap_top = false
 		cm.cap_bottom = false
 		ring.mesh = cm
-		# the hem is the bright edge; the body of it stays deep
-		var rm: StandardMaterial3D = _mat(cloth.lerp(edge, t * 0.6), 0.55, 0.05,
-			0.0 if i < tiers - 1 else 0.7)
+		# THE GARMENT IS TARTAN (2026-08-29, Palle: "arms and torso should have pink
+		# Tartan pattern"). The same cloth the sleeves are cut from, so the body
+		# reads as one garment rather than as an arm and a separate skirt — and
+		# triplanar, so all twenty-two tiers share one continuous bolt instead of
+		# each cylinder wrapping its own copy of the check.
+		#
+		# The tier tint SURVIVES as the texture's tint, so the hem still lights up
+		# toward the edge exactly as before; the growth is still legible, it is just
+		# legible in cloth now.
+		var rm: StandardMaterial3D = Tartan.material(0.42, cloth.lerp(edge, t * 0.6))
+		if i == tiers - 1:
+			rm.emission_enabled = true
+			rm.emission = edge
+			rm.emission_energy_multiplier = 0.7
 		rm.cull_mode = BaseMaterial3D.CULL_DISABLED    # the wearer sees the inside
 		ring.material_override = rm
 		ring.position = Vector3(0, waist - h * (float(i) + 0.5), 0)

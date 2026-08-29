@@ -23,6 +23,8 @@ extends Node3D
 ## Writes ada_run/body_shots/<pose>_<view>.png and prints the shoulder, elbow and
 ## wrist of each arm so a picture that looks wrong has numbers beside it.
 
+const Tartan = preload("res://commons/body/tartan.gd")
+
 const OUT_DIR := "res://ada_run/body_shots"
 
 ## Hand poses in XROrigin-local metres: [left, right, label]
@@ -136,9 +138,7 @@ func _ready() -> void:
 		bm.size = Vector3(0.34, 0.52, 0.20)
 		chest.mesh = bm
 		chest.position = Vector3(0.0, -0.30, 0.0)   # hangs from the neck
-		var cmat := StandardMaterial3D.new()
-		cmat.albedo_color = Color(0.42, 0.46, 0.58)
-		chest.material_override = cmat
+		chest.material_override = Tartan.material(0.42)
 		(torso_node as Node3D).add_child(chest)
 
 		# and a nose, so "which way is the torso facing" is answerable from a still
