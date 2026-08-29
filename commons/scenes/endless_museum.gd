@@ -5115,29 +5115,52 @@ func _showing_cull_floating(seg: Node3D, tile: Array, zbase: int) -> void:
 				break
 		if backed:
 			continue
-		for part_v in _showing_parts(seg, si):
-			var part: Array = part_v
-			var mm: MultiMesh = part[0]
-			var nd: MultiMeshInstance3D = part[3]
-			var xf2: Array = nd.get_meta("em_xforms") if nd.has_meta("em_xforms") else []
-			for k in range(int(part[2])):
-				var i: int = int(part[1]) + k
-				if i >= xf2.size():
-					continue
-				var t: Transform3D = xf2[i]
-				var gone := Transform3D(Basis().scaled(Vector3.ZERO), t.origin)
-				xf2[i] = gone
-				mm.set_instance_transform(i, gone)
-			nd.set_meta("em_xforms", xf2)
-		for m in seg.get_children():
-			if m is Node3D and m.has_meta("em_speak") and int(m.get_meta("em_speak")) == si:
-				(m as Node3D).visible = false
-			elif m is Node3D and m.has_meta("em_viz") and int(m.get_meta("em_viz")) == si:
-				(m as Node3D).visible = false
+		_showing_hide(seg, si)
 		(n as Node3D).set_meta("em_hand_removed", true)
 		culled += 1
 	if culled > 0:
 		print("[em-detail] %d wall work(s) hung on nothing — taken back out" % culled)
+
+
+## TAKE ONE WALL WORK BACK OUT. Lifted out of _showing_cull_floating on
+## 2026-08-29 so that something other than the automatic cull can call it —
+## Palle: "the catalyst projectile destroys the wall works".
+##
+## It does not delete anything, because a MultiMesh cannot lose one instance.
+## The six boxes are scaled to ZERO in place, in the buffer AND in the em_xforms
+## stash — the stash because MultiMesh.get_instance_transform reads back identity
+## under the dummy renderer, so the stash is the only readable record. The slot
+## stays occupied, which is what keeps every index and every hand ruling valid;
+## compacting the buffer would silently reassign them to the wrong picture.
+##
+## AND THE CARD GOES TOO. The cull hid em_speak and em_viz and left the numbered
+## plaque hanging — measured across 29 logged runs, the cull fires constantly and
+## most often takes 8 works at once, so a typical hall carried eight little
+## numbers with nothing above them. Found while answering "are all wall works
+## destructible", which is the usual way.
+func _showing_hide(seg: Node3D, si: int) -> void:
+	if seg == null or not is_instance_valid(seg) or si < 0:
+		return
+	for part_v in _showing_parts(seg, si):
+		var part: Array = part_v
+		var mm: MultiMesh = part[0]
+		var nd: MultiMeshInstance3D = part[3]
+		var xf2: Array = nd.get_meta("em_xforms") if nd.has_meta("em_xforms") else []
+		for k in range(int(part[2])):
+			var i: int = int(part[1]) + k
+			if i >= xf2.size():
+				continue
+			var tf: Transform3D = xf2[i]
+			var gone := Transform3D(Basis().scaled(Vector3.ZERO), tf.origin)
+			xf2[i] = gone
+			mm.set_instance_transform(i, gone)
+		nd.set_meta("em_xforms", xf2)
+	for m in seg.get_children():
+		if not (m is Node3D):
+			continue
+		for tag in ["em_speak", "em_viz", "em_showing_card"]:
+			if m.has_meta(tag) and int(m.get_meta(tag)) == si:
+				(m as Node3D).visible = false
 
 
 ## Which wall work is under the cursor, and which line of the book it carries.
