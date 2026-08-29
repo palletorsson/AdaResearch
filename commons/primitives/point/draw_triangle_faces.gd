@@ -37,6 +37,23 @@ extends Node3D
 @export var snap_indicator_color: Color = Color(1.0, 0.3, 0.3, 1.0)
 @export var editable_points: bool = true  # Allow grabbing and moving points
 
+## HOLD TO DRAW (2026-08-29, Palle: "define a point every second when you hold it
+## so it create meches faster").
+##
+## Until now a point cost a whole grab: pick up, move, RELEASE — one point per
+## release, and a twelve-point outline is twelve grabs. Held, the tool now lays a
+## point on a timer, so you draw a path the way you would draw a line, by moving
+## your hand. Set to 0 to get the old release-per-point behaviour back.
+@export var hold_place_seconds: float = 1.0
+## AND THE HAND MUST HAVE MOVED. A timer alone lays a point on top of the last
+## one every second while you stand still, and the snap logic then refuses each
+## of them in silence (a point cannot snap to the point just placed) — a tool
+## that looks broken because it is politely doing nothing. A point is laid only
+## once the hand has travelled this far from the last one, so a still hand draws
+## nothing and a moving hand draws a trail. Default is the snap radius, which is
+## already this artifact's idea of "the same place".
+@export var hold_place_min_travel: float = 0.15
+
 # Preload grab sphere scene for editable points (same as animatedcubebuilder)
 const GRAB_SPHERE_SCENE = preload("res://commons/primitives/point/grab_sphere_point.tscn")
 
@@ -95,6 +112,8 @@ var snap_target_index: int = -1
 var _draw_ring: MeshInstance3D
 var _ring_pulse_time: float = 0.0
 var _previous_snap_target: int = -1
+var _hold_timer: float = 0.0            # seconds held since the last auto point
+var _auto_placed: int = 0               # how many this grab laid without a release
 
 func _ready() -> void:
 	_grab_point = get_node_or_null(grab_point_path)
@@ -220,8 +239,28 @@ func _process(delta: float) -> void:
 	else:
 		snap_indicator.visible = false
 
+	# HOLD TO DRAW: a point on the timer, once the hand has moved off the last one.
+	# Placed here rather than in a separate tick because this is where the snapped
+	# position and the snap target have already been worked out for this frame —
+	# a second opinion about where the hand is would be a second implementation.
+	if hold_place_seconds > 0.0:
+		_hold_timer += delta
+		if _hold_timer >= hold_place_seconds and _travelled_enough(snapped_pos):
+			_place_or_snap(snapped_pos)
+			_auto_placed += 1
+			_trigger_haptic(haptic_snap_intensity, haptic_snap_duration)
+
 	# Update active line preview
 	_update_active_line_preview(snapped_pos)
+
+## Has the hand left the last point behind? An empty path always has, so the
+## first point of a drawing lands the moment the timer comes round.
+func _travelled_enough(pos: Vector3) -> bool:
+	var last := _get_last_point_in_path()
+	if last < 0 or last >= placed_points.size():
+		return true
+	return pos.distance_to(placed_points[last]) >= maxf(hold_place_min_travel, 0.001)
+
 
 func _update_active_line_preview(current_pos: Vector3) -> void:
 	active_line_mesh.clear_surfaces()
@@ -245,6 +284,8 @@ func _update_active_line_preview(current_pos: Vector3) -> void:
 
 func _on_grab_point_picked_up(_pickable) -> void:
 	_is_grabbed = true
+	_hold_timer = 0.0
+	_auto_placed = 0
 
 	# If path is empty but we have points, allow starting from any existing point
 	if current_path.is_empty() and not placed_points.is_empty():
@@ -258,32 +299,31 @@ func _on_grab_point_picked_up(_pickable) -> void:
 	else:
 		print("DrawTriangleFaces: Grabbed! Continue drawing.")
 
+## Lay a point here, or close onto the one already here. The single path both a
+## RELEASE and the hold timer go through, so the two cannot drift apart.
+func _place_or_snap(snapped_pos: Vector3) -> void:
+	var nearby_index := _find_nearby_point(snapped_pos)
+	if nearby_index >= 0:
+		_handle_snap_to_point(nearby_index)
+	else:
+		_create_new_point(snapped_pos)
+	_rebuild_lines()
+	_hold_timer = 0.0
+
+
 func _on_grab_point_dropped(_pickable) -> void:
 	if not _is_grabbed:
 		return
 
 	var drop_pos = _draw_sphere.global_position
-	var snapped_pos = snap_position_to_grid(drop_pos)
-
-	# Check if we're snapping to an existing point
-	var nearby_index = _find_nearby_point(snapped_pos)
-
-	if nearby_index >= 0:
-		# Snapping to existing point
-		_handle_snap_to_point(nearby_index)
-	else:
-		# Create new point
-		_create_new_point(snapped_pos)
-
-	# Rebuild line visualization
-	_rebuild_lines()
+	_place_or_snap(snap_position_to_grid(drop_pos))
 
 	# In continuous mode, keep drawing active
 	if continuous_drawing:
 		# Stay in grabbed state - drawing continues
 		# Just clear the snap indicator, keep active line showing
 		snap_indicator.visible = false
-		print("DrawTriangleFaces: Point placed, continue drawing...")
+		print("DrawTriangleFaces: point placed (%d laid by holding this grab), continue drawing..." % _auto_placed)
 	else:
 		# Standard mode - stop drawing until next pickup
 		_is_grabbed = false
