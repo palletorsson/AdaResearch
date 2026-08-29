@@ -128,6 +128,15 @@ func _build_skeleton() -> void:
 	_skeleton.set_bone_parent(_idx_hand, _idx_lower)
 	_skeleton.set_bone_rest(_idx_hand, Transform3D(Basis.IDENTITY, Vector3(0, -lower_arm_length, 0)))
 
+	## A REST IS NOT A POSE. add_bone() starts every bone at IDENTITY and
+	## set_bone_rest() does not move it — so without this the three bones all sit
+	## on the shoulder, the chain has ZERO LENGTH, and TwoBoneIK3D has nothing to
+	## solve. Measured before the fix (commons/testing/probe_ik_arms.tscn): the
+	## wrist sat exactly on the shoulder at all four targets, gap equal to the
+	## shoulder-to-hand distance to four decimals, and it never moved. The arm has
+	## been in the tree since May and has never bent.
+	_skeleton.reset_bone_poses()
+
 
 func _build_ik_targets() -> void:
 	## IK target — tracks controller position
@@ -146,12 +155,29 @@ func _build_ik_targets() -> void:
 func _build_two_bone_ik() -> void:
 	_two_bone_ik = TwoBoneIK3D.new()
 	_two_bone_ik.name = "TwoBoneIK"
-	_two_bone_ik.root_bone = "UpperArm"
-	_two_bone_ik.tip_bone = "Hand"
-	_two_bone_ik.target_node = _ik_target.get_path()
-	_two_bone_ik.pole_node = _pole_target.get_path()
-	_two_bone_ik.use_pole_node = true
 	_skeleton.add_child(_two_bone_ik)
+	## THE SETTINGS ARRAY, NOT FOUR FLAT PROPERTIES. Godot 4.6 TwoBoneIK3D exposes
+	## "setting_count" and then "settings/N/..."; the flat root_bone / tip_bone /
+	## target_node / use_pole_node this was written against in May are not on
+	## the class. They ASSIGN WITHOUT ERROR and read back null, so the modifier has
+	## been standing in the tree, active, with no chain and no target — measured by
+	## commons/testing/probe_ik_arms.tscn, which asked the object for its property
+	## list rather than guessing again.
+	##
+	## Note the three-bone naming: root / MIDDLE / end, and the paths must resolve
+	## FROM THE MODIFIER, so they are made relative to it rather than absolute.
+	## The three bone rests are all IDENTITY basis, so the solver has no bone axis
+	## to swing around unless it is allowed to derive one. NOTE: turning this on
+	## did NOT by itself make the arm bend — it is kept because an identity-rest
+	## chain needs it, not because it was the fix. See the probe: the modifier
+	## still does not move the bones with the chain and target both correct.
+	_two_bone_ik.set("mutable_bone_axes", true)
+	_two_bone_ik.set("setting_count", 1)
+	_two_bone_ik.set("settings/0/root_bone_name", "UpperArm")
+	_two_bone_ik.set("settings/0/middle_bone_name", "LowerArm")
+	_two_bone_ik.set("settings/0/end_bone_name", "Hand")
+	_two_bone_ik.set("settings/0/target_node", _two_bone_ik.get_path_to(_ik_target))
+	_two_bone_ik.set("settings/0/pole_node", _two_bone_ik.get_path_to(_pole_target))
 
 
 func _build_procedural_mesh() -> void:

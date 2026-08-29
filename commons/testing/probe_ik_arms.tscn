@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1kprobeikarms01"]
+
+[ext_resource type="Script" path="res://commons/testing/probe_ik_arms.gd" id="1_ikprobe"]
+
+[node name="ProbeIKArms" type="Node3D"]
+script = ExtResource("1_ikprobe")
