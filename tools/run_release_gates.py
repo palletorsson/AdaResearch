@@ -413,6 +413,117 @@ def build_report(
             }
         )
 
+        # Gates I, J, K: the book's claims about the world, and whether they still
+        # hold. Everything above this line checks that the game is BUILDABLE. These
+        # check that what has been WRITTEN about it is still true — a different
+        # failure, and until 2026-08-29 nothing watched it. edge_gate.py had been
+        # sitting at 3 LOST with no row anywhere and nobody told.
+        #
+        # I and J share three underlying anchors today, so one repair clears both.
+        # They are not redundant: I judges all 269 edge sentences including the 50
+        # on pearls with no hero, J judges only the 219 that have a SUBJECT and can
+        # therefore also ask whether that subject exists and stands where the book
+        # says. Neither question contains the other.
+        rc_edge, out_edge = run_cmd([sys.executable, "tools/edge_gate.py", "--json"])
+        edge = {}
+        if out_edge.strip():
+            try:
+                edge = json.loads(out_edge)
+            except json.JSONDecodeError:
+                edge = {}
+        gates.append(
+            {
+                "id": "I",
+                "name": "Edge Anchors",
+                "pass": rc_edge == 0
+                and int(edge.get("LOST", 999999)) == 0
+                # A book that failed to parse tallies zero LOST, which is what a
+                # clean book tallies. An empty denominator is a broken gate.
+                and int(edge.get("edges", 0)) > 0,
+                "metrics": {
+                    "edges": int(edge.get("edges", -1)),
+                    "held": int(edge.get("HELD", -1)),
+                    "near": int(edge.get("NEAR", -1)),
+                    "lost": int(edge.get("LOST", -1)),
+                    "ungrounded": int(edge.get("UNGROUNDED", -1)),
+                    "lost_rooms": ", ".join(
+                        r.get("map", "") for r in (edge.get("lost") or [])) or "none",
+                },
+            }
+        )
+
+        rc_cite, out_cite = run_cmd([sys.executable, "tools/cite_gate.py", "--json"])
+        cite = {}
+        if out_cite.strip():
+            try:
+                cite = json.loads(out_cite).get("totals", {})
+            except json.JSONDecodeError:
+                cite = {}
+        gates.append(
+            {
+                "id": "J",
+                "name": "Artifact Citations",
+                "pass": rc_cite == 0
+                and int(cite.get("LOST", 999999)) == 0
+                and int(cite.get("NO SUCH WORK", 999999)) == 0
+                and int(cite.get("citations", 0)) > 0,
+                "metrics": {
+                    "citations": int(cite.get("citations", -1)),
+                    "held": int(cite.get("HELD", -1)),
+                    "near": int(cite.get("NEAR", -1)),
+                    "lost": int(cite.get("LOST", -1)),
+                    # ELSEWHERE passes on purpose: a work discussed where it does
+                    # not stand is a finding, not a fault. All three today are the
+                    # hall's own declared hero.
+                    "elsewhere": int(cite.get("ELSEWHERE", -1)),
+                    "no_such_work": int(cite.get("NO SUCH WORK", -1)),
+                },
+            }
+        )
+
+        rc_want, out_want = run_cmd([sys.executable, "tools/want_gate.py", "--json"])
+        want: dict[str, Any] = {}
+        if out_want.strip():
+            try:
+                want = json.loads(out_want)
+            except json.JSONDecodeError:
+                want = {}
+        want_checked = want.get("checked", {}) if isinstance(want.get("checked"), dict) else {}
+        want_v = want.get("verdicts", {}) if isinstance(want.get("verdicts"), dict) else {}
+        rc_wantneg, _ = run_cmd([sys.executable, "tools/test_want_gate.py"])
+        gates.append(
+            {
+                "id": "K",
+                "name": "Wants Closed Honestly",
+                # This gate does NOT count open wants. 1638 works with no words is
+                # the shape of the project; counting it as debt builds a scoreboard
+                # that rewards thin filling. It counts wants marked DONE that are
+                # not: a line naming nothing, one sentence given to two different
+                # works, a hall named for a work that does not exist.
+                "pass": rc_want == 0
+                and int(want.get("fails", 999999)) == 0
+                and int(want_checked.get("token_lines", 0)) > 0
+                # Three of this gate's failing verdicts are at zero on the real
+                # corpus, and a rule at zero is indistinguishable from a rule that
+                # never runs. The self-test trips each one deliberately.
+                and rc_wantneg == 0,
+                "metrics": {
+                    "detector_selftest": "PASS" if rc_wantneg == 0 else "FAIL rc=%d" % rc_wantneg,
+                    "token_lines": int(want_checked.get("token_lines", -1)),
+                    "closed_dishonestly": int(want.get("fails", -1)),
+                    "ghost": int(want_v.get("GHOST", 0)),
+                    "echo": int(want_v.get("ECHO", 0)),
+                    "no_registry": int(want_v.get("NO REGISTRY", 0)),
+                    "broken_body": int(want_v.get("BROKEN BODY", 0)),
+                    "hero_ghost": int(want_v.get("HERO GHOST", 0)),
+                    "open_not_counted": "empty %d · stub %d · elsewhere %d · no_body %d · no_subject %d"
+                    % (int(want_v.get("EMPTY", 0)), int(want_v.get("STUB", 0)),
+                       int(want_v.get("ELSEWHERE", 0)), int(want_v.get("NO BODY", 0)),
+                       int(want_v.get("NO SUBJECT", 0))),
+                },
+            }
+        )
+
         pass_count, enabled_count, overall_pass, overall_status = apply_gate_toggles(
             gates, gate_enabled
         )

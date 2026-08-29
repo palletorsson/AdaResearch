@@ -192,7 +192,16 @@ def main() -> int:
     fails = sum(1 for w in pick for r in sets[w] if r["verdict"] in FAILING)
 
     if a.json:
+        # `checked` is the denominator the release gate asserts is non-zero. A run
+        # over an empty book reports zero dishonest closures, which is exactly what
+        # a clean book reports; without a size the gate cannot tell them apart, and
+        # gate G in this repo went green on a scan of nothing for a day.
+        tally = collections.Counter(r["verdict"] for w in pick for r in sets[w])
         print(json.dumps({"fails": fails,
+                          "checked": {"book_lines": len(bl),
+                                      "token_lines": sum(1 for l in bl if l["token"]),
+                                      "registry": len(reg), "placed": len(place)},
+                          "verdicts": dict(tally),
                           "wants": {str(w): {"direction": TITLES[w][0], "rows": sets[w]} for w in pick}},
                          ensure_ascii=False, indent=1))
         return 1 if fails else 0

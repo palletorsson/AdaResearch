@@ -156,11 +156,25 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="does each edge still stand on the line it was read from")
     ap.add_argument("--chapter", default="")
     ap.add_argument("--quiet", action="store_true")
+    ap.add_argument("--json", action="store_true",
+                    help="machine-readable, for tools/run_release_gates.py gate I")
     a = ap.parse_args()
 
     rows = [(e, *verdict(e)) for e in edges(a.chapter)]
     tally = {k: sum(1 for _, v, _ in rows if v == k) for k in ("HELD", "NEAR", "LOST", "UNGROUNDED")}
     tot = max(1, len(rows))
+
+    if a.json:
+        # `edges` is the denominator the release gate checks is non-zero. A scan
+        # of nothing tallies identically to a clean corpus, and a gate cannot
+        # tell those apart without being told the size of what was read.
+        print(json.dumps({"edges": len(rows), **tally,
+                          "lost": [{"chapter": e["chapter"], "map": e["map"], "why": w}
+                                   for e, v, w in rows if v == "LOST"],
+                          "near": [{"chapter": e["chapter"], "map": e["map"]}
+                                   for e, v, _ in rows if v == "NEAR"]},
+                         ensure_ascii=False, indent=1))
+        return 1 if tally["LOST"] else 0
 
     print("THE EDGE GATE — %d edge(s)" % len(rows))
     for k in ("HELD", "NEAR", "LOST", "UNGROUNDED"):
