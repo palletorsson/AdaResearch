@@ -180,7 +180,7 @@ func validate() -> Dictionary:
 	
 	if structure.size() > 0:
 		if structure.size() != dimensions.get("depth", 0):
-			validation.warnings.append("Structure depth (%d) doesn't match declared depth (%d)" % [structure.size(), dimensions.depth])
+			validation.warnings.append("Structure depth (%d) doesn't match declared depth (%d)" % [structure.size(), dimensions.get("depth", 0)])
 		
 		var max_width = 0
 		for row in structure:
@@ -188,7 +188,7 @@ func validate() -> Dictionary:
 				max_width = row.size()
 		
 		if max_width != dimensions.get("width", 0):
-			validation.warnings.append("Structure width (%d) doesn't match declared width (%d)" % [max_width, dimensions.width])
+			validation.warnings.append("Structure width (%d) doesn't match declared width (%d)" % [max_width, dimensions.get("width", 0)])
 	
 	# Validate utility data if utility layer exists
 	var utilities = get_utilities_layer()
@@ -213,7 +213,9 @@ func generate_report() -> String:
 	report.append("Version: %s" % get_map_version())
 	
 	var dims = get_dimensions()
-	report.append("Dimensions: %dx%dx%d" % [dims.width, dims.depth, dims.max_height])
+	# .get() so a map missing a dimension key degrades to a wrong number in a
+	# report line instead of a SCRIPT ERROR mid-load (Walker_Warren, 2026-08-29)
+	report.append("Dimensions: %dx%dx%d" % [dims.get("width", 0), dims.get("depth", 0), dims.get("max_height", 0)])
 	
 	var metadata = get_metadata()
 	if metadata.has("difficulty"):
