@@ -476,11 +476,13 @@ func perform_measurement():
 					gm.apply_health_damage(damage_amount)
 					_damage_timer = damage_cooldown
 					print("[LaserMeasure] LASER HIT PLAYER! dmg=%.1f target=%s" % [damage_amount, hit_object.name])
+		_report_beam(distance)
 	else:
 		is_measuring = false
 		last_distance = 0.0
 		last_target = ""
 
+		_report_beam(max_range)
 		update_laser_miss()
 		hide_hit_dot()
 		hide_inline_readout()
@@ -688,6 +690,33 @@ func set_max_range(new_range: float):
 ## The beam killed someone. WHO handles it depends on where we are standing:
 ## in the endless museum a listener runs the splatter and the save point; in
 ## the grid there is no save point, so the map reloads the way it always has.
+## THE BEAM ALSO CROSSES THINGS PHYSICS CANNOT SEE (2026-08-29, Palle: "in VR
+## the laser does not destroy the wall art").
+##
+## The endless museum hangs its wall works as instances of a MultiMesh with no
+## collider at all — em_detail is contractually forbidden to add collision — so
+## the raycast passes straight through a picture the beam visibly cuts across.
+## Nothing was broken here; there was simply nothing for a ray to hit.
+##
+## The laser does not learn what a wall work is. It says where its beam went and
+## how far, and whatever owns things a ray cannot see answers. In a grid map no
+## one is listening and this costs a group count.
+var _beam_t: float = 0.0
+
+func _report_beam(reach: float) -> void:
+	if not lethal:
+		return                                  # an unarmed instrument burns nothing
+	_beam_t -= get_process_delta_time()
+	if _beam_t > 0.0:
+		return
+	_beam_t = 0.15                              # ~7 Hz: a beam is not an event
+	var tree := get_tree()
+	if tree == null or tree.get_node_count_in_group("em_lethal") == 0:
+		return
+	tree.call_group("em_lethal", "on_beam_swept",
+		global_position, -global_transform.basis.z, reach)
+
+
 func _kill_player() -> void:
 	if _killed:
 		return

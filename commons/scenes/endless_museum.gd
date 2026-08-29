@@ -5163,6 +5163,212 @@ func _showing_hide(seg: Node3D, si: int) -> void:
 				(m as Node3D).visible = false
 
 
+# ═══════════════════════════════════════════════════════════════════════════
+# WALL WORKS YOU CAN CUT AND CARRY
+# ═══════════════════════════════════════════════════════════════════════════
+#
+# 2026-08-29, Palle: "in VR the laser does not destroy the wall art and the wall
+# art is not grabable". Both are one fact: a showing is instances of a MultiMesh
+# with NO COLLIDER — em_detail is contractually forbidden to add collision — so
+# a raycast passes straight through it and a hand has nothing to close on.
+# Neither was broken. There was nothing there to touch.
+#
+# The contract stays. Wall dressing that carried collision would seal walk cells
+# and stand in the walker's way, which is what the contract is for. Instead the
+# two things that want to touch a picture are given the reach they need:
+#
+#   the beam reports itself, and the museum answers for what physics cannot see
+#   a hand that comes within arm's reach makes ONE work real, and only then
+#
+# So nothing is a body until somebody is actually reaching for it.
+
+## how close a hand must come before a picture is worth making real
+const SHOWING_TAKE_M := 0.42
+## how far off the beam's line a work can be and still be cut. PERPENDICULAR
+## distance to the ray, not a cone: a cone opened from the emitter takes works
+## metres away that the beam misses by a wide margin, and calls it a hit.
+const BEAM_CUT_R := 0.33
+## a ceiling, so running a hand along a wall cannot fill a hall with rigid bodies
+const SHOWING_BODIES_MAX := 12
+const GRAB_SCENE := "res://commons/primitives/cubes/grab_cube.tscn"
+
+var _showing_bodies: Dictionary = {}    # "<seg id>|<si>" -> body
+var _hand_reach_t: float = 0.0
+var _beam_cuts: int = 0
+
+
+## A showing's field — the picture itself — in world space, read from the STASH
+## em_detail keeps rather than from the buffer: MultiMesh.get_instance_transform
+## reads back identity under the dummy renderer, so the stash is the only
+## readable record. _showing_move documents the same trap.
+func _showing_field(seg: Node3D, si: int) -> Dictionary:
+	for part_v in _showing_parts(seg, si):
+		var part: Array = part_v
+		var nd: MultiMeshInstance3D = part[3]
+		if nd.name != "WallFields":
+			continue
+		var xf: Array = nd.get_meta("em_xforms") if nd.has_meta("em_xforms") else []
+		var i: int = int(part[1])
+		if i >= xf.size():
+			continue
+		var local: Transform3D = xf[i]
+		if local.basis.get_scale().length() < 0.001:
+			return {}                       # already taken out
+		return {"world": nd.global_transform * local,
+			"size": local.basis.get_scale(),
+			"mesh": (nd.multimesh.mesh if nd.multimesh != null else null),
+			"mat": nd.material_override}
+	return {}
+
+
+## Take one wall work off the wall and hand it over as a real body. The picture
+## leaves the MultiMesh — which cannot lose an instance, so it is scaled to zero
+## the way the cull does it — and a pickable stands in its place carrying the
+## same mesh and material, so the thing in your hands is the thing that hung
+## there. The body reuses grab_cube.tscn: the grab, the highlight ring and the
+## hand points all come from it unchanged, which is how the rest of the corpus
+## makes something liftable.
+func _showing_embody(seg: Node3D, si: int) -> Node3D:
+	var key: String = "%d|%d" % [seg.get_instance_id(), si]
+	if _showing_bodies.has(key) and is_instance_valid(_showing_bodies[key]):
+		return _showing_bodies[key]
+	# PRUNE FIRST. The bodies are children of their segment, so the streamer
+	# frees them behind you — and a dictionary that keeps counting the freed
+	# ones would reach the cap after twelve pictures in a whole museum and then
+	# refuse silently for ever.
+	for k in _showing_bodies.keys():
+		if not is_instance_valid(_showing_bodies[k]):
+			_showing_bodies.erase(k)
+	if _showing_bodies.size() >= SHOWING_BODIES_MAX:
+		return null
+	var f: Dictionary = _showing_field(seg, si)
+	if f.is_empty() or not ResourceLoader.exists(GRAB_SCENE):
+		return null
+	var packed: PackedScene = load(GRAB_SCENE)
+	if packed == null:
+		return null
+	var body: Node3D = packed.instantiate() as Node3D
+	if body == null:
+		return null
+	var size: Vector3 = f["size"]
+	size.z = maxf(size.z, 0.02)      # a canvas only visible edge-on is not liftable
+	var mi := body.get_node_or_null("MeshInstance3D") as MeshInstance3D
+	if mi != null:
+		mi.mesh = f["mesh"] if f["mesh"] != null else BoxMesh.new()
+		if f["mat"] != null:
+			mi.material_override = f["mat"]
+		mi.scale = size
+	var cs := body.get_node_or_null("CollisionShape3D") as CollisionShape3D
+	if cs != null:
+		var bx := BoxShape3D.new()
+		bx.size = size
+		cs.shape = bx
+	# UNFROZEN release, or it hangs in mid-air the moment you let go — the same
+	# line found_object_assembler needs, for the same reason.
+	body.set("release_mode", 0)
+	body.set("snap_to_shelf", false)
+	body.set("mass", 0.6)
+	body.name = "WallWork%d" % si
+	seg.add_child(body)
+	var w: Transform3D = f["world"]
+	body.global_transform = Transform3D(w.basis.orthonormalized(), w.origin)
+	_showing_hide(seg, si)
+	_showing_bodies[key] = body
+	return body
+
+
+## Which wall work a beam actually passes through: perpendicular distance to the
+## ray, inside its reach, in front of the emitter.
+func _wall_pick_beam(from: Vector3, dir: Vector3, reach: float, radius: float) -> Dictionary:
+	var best: Dictionary = {}
+	var best_d: float = radius
+	for sv in _segments:
+		var sd: Dictionary = sv
+		var seg: Node3D = _node_or_null(sd.get("node"))
+		if seg == null:
+			continue
+		for n in seg.get_children():
+			if not (n is Node3D) or not n.has_meta("em_showing"):
+				continue
+			if n.has_meta("em_hand_removed"):
+				continue
+			var to: Vector3 = (n as Node3D).global_position - from
+			var along: float = to.dot(dir)
+			if along < 0.0 or along > reach:
+				continue
+			var off: float = (to - dir * along).length()
+			if off < best_d:
+				best_d = off
+				best = {"seg": seg, "proxy": n, "si": int(n.get_meta("em_showing")),
+					"along": along, "off": off}
+	return best
+
+
+## THE BEAM ANSWERS FOR WHAT PHYSICS CANNOT SEE. laser_measure reports where its
+## beam went and how far; the museum owns the wall works and takes out whatever
+## it crossed. The laser never learns what a wall work is.
+func on_beam_swept(from: Vector3, dir: Vector3, reach: float) -> void:
+	if dir.length() < 0.001 or reach <= 0.0:
+		return
+	var hit: Dictionary = _wall_pick_beam(from, dir.normalized(), reach, BEAM_CUT_R)
+	if hit.is_empty():
+		return
+	var seg: Node3D = hit["seg"]
+	var si: int = int(hit["si"])
+	# a work already carried away is not on the wall to be cut
+	var key: String = "%d|%d" % [seg.get_instance_id(), si]
+	if _showing_bodies.has(key) and is_instance_valid(_showing_bodies[key]):
+		return
+	_showing_hide(seg, si)
+	(hit["proxy"] as Node3D).set_meta("em_hand_removed", true)
+	_beam_cuts += 1
+	print("[em-beam] the laser cut wall work %d out of %s — %.2f m along the beam, %.2f m off it"
+		% [si, String(seg.get_meta("em_chapter")) if seg.has_meta("em_chapter") else "a hall",
+			float(hit["along"]), float(hit["off"])])
+
+
+## A HAND THAT REACHES GETS SOMETHING TO HOLD. Nothing on a wall is a body until
+## a hand is within SHOWING_TAKE_M of it, so a hall costs no physics until
+## somebody actually goes for a picture — and the no-collision contract holds
+## everywhere nobody is reaching. VR only: the desktop lifts wall works through
+## the editor already, and the desktop walker would shoulder them off the wall
+## simply by walking past.
+func _showing_hand_tick(delta: float) -> void:
+	if not _vr:
+		return
+	_hand_reach_t -= delta
+	if _hand_reach_t > 0.0:
+		return
+	_hand_reach_t = 0.12
+	for c in get_tree().get_nodes_in_group("xr_controllers"):
+		if not (c is Node3D):
+			continue
+		var at: Vector3 = (c as Node3D).global_position
+		var best: Node3D = null
+		var best_seg: Node3D = null
+		var best_d: float = SHOWING_TAKE_M
+		for sv in _segments:
+			var sd: Dictionary = sv
+			var seg: Node3D = _node_or_null(sd.get("node"))
+			if seg == null:
+				continue
+			for n in seg.get_children():
+				if not (n is Node3D) or not n.has_meta("em_showing"):
+					continue
+				if n.has_meta("em_hand_removed"):
+					continue
+				var d: float = (n as Node3D).global_position.distance_to(at)
+				if d < best_d:
+					best_d = d
+					best = n as Node3D
+					best_seg = seg
+		if best != null and best_seg != null:
+			var si2: int = int(best.get_meta("em_showing"))
+			if _showing_embody(best_seg, si2) != null:
+				print("[em-hand] a hand reached within %.2f m of wall work %d — it is a body now"
+					% [best_d, si2])
+
+
 ## Which wall work is under the cursor, and which line of the book it carries.
 ## Returns false when the tap landed on anything else, so the click falls through.
 func _page_open_at(mouse: Vector2) -> bool:
@@ -13144,6 +13350,7 @@ func _process(_delta: float) -> void:
 		_paint2d_canvas.queue_redraw()   # the overlay tracks the camera
 	_edit_gizmo_frame()
 	_costume_walk()
+	_showing_hand_tick(_delta)
 	if not _boot_first_frame:
 		_boot_first_frame = true
 		_wake_until_ms = Time.get_ticks_msec() + int(WAKE_S * 1000.0)
