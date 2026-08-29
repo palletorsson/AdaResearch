@@ -5521,13 +5521,49 @@ func _save_point_now() -> Vector3:
 		return _last_ground
 	var best: Vector3 = _last_ground
 	var best_z: float = -1.0e9
+	# the shallowest threshold of all is the way in, and the way in is safe —
+	# but a burned one is never the answer, so two fall-backs are kept: the
+	# shallowest UNBURNED, and only then the shallowest at all
+	var clean: Vector3 = _last_ground
+	var clean_z: float = 1.0e9
+	var any: Vector3 = _last_ground
+	var any_z: float = 1.0e9
 	for sp_v in _save_points:
 		var sp: Dictionary = sp_v
 		var z: float = float(sp.get("z", 0.0))
+		var pos: Vector3 = sp.get("pos", _last_ground)
+		if z < any_z:
+			any_z = z
+			any = pos
+		if _burned_saves.has(_save_key(z)):
+			continue
+		if z < clean_z:
+			clean_z = z
+			clean = pos
 		if z <= pz + 1.0 and z > best_z:
 			best_z = z
-			best = sp.get("pos", _last_ground)
-	return best
+			best = pos
+	if best_z > -1.0e8:
+		_last_save_z = best_z
+		return best
+	if clean_z < 1.0e8:
+		# nothing behind them is both near and safe: go all the way back to the
+		# shallowest threshold that has not killed anyone
+		_last_save_z = clean_z
+		return clean
+	# EVERY threshold in the museum has killed them. There is nowhere left that
+	# is known good, so the way in is the least bad — and saying so out loud
+	# beats returning them silently to a place already proven lethal.
+	push_warning("[em-death] every save point has proven lethal — falling back to the entrance at z %.1f" % any_z)
+	_last_save_z = any_z
+	return any
+
+
+## Save points are floats out of the same arithmetic every time, so rounding to
+## the decimetre is exact enough to match one to itself and loose enough that a
+## rebuilt hall's threshold is recognised as the one already struck off.
+func _save_key(z: float) -> int:
+	return int(round(z * 10.0))
 
 
 func _hazard_touched(body: Node3D, _entrance: Vector3) -> void:
@@ -5805,6 +5841,19 @@ var _death_splat: Control = null
 var _death_veil: ColorRect = null
 var _death_line: Label = null
 var _deaths: int = 0
+## A SAVE POINT THAT KILLS YOU IS NOT A SAVE POINT (2026-08-29). The museum puts
+## you back on the threshold of the hall you had reached — and a hall whose
+## threshold stands in a lethal beam returns you into the beam, which kills you,
+## which returns you into the beam. Sixty-one deaths at (8.0, 0.25, 36.5) in one
+## autopilot run, all identical. So a save point that kills you again within
+## SAVE_BURN_S of putting you there is struck off, and the next one back is used.
+## Deliberately blind to WHAT killed you: it works the same for the pools, the
+## fire and the crab, and it needs no way to ask a raycast where its beam is.
+const SAVE_BURN_S := 9.0
+var _burned_saves: Dictionary = {}   # rounded save z -> true
+var _put_back_z: float = -1.0e9      # the save point we were last returned to
+var _put_back_t: float = -1.0e9
+var _last_save_z: float = -1.0e9     # which one _save_point_now chose
 
 const DEATH_WORDS := {
 	"fire": "the pool was burning",
@@ -5879,7 +5928,20 @@ func _museum_death(kind: String) -> void:
 		return
 	_dying = true
 	_deaths += 1
+	var now: float = float(Time.get_ticks_msec()) * 0.001
+	# Killed again moments after being stood somewhere: it was that somewhere.
+	if _put_back_z > -1.0e8 and now - _put_back_t < SAVE_BURN_S:
+		var k: int = _save_key(_put_back_z)
+		if not _burned_saves.has(k):
+			_burned_saves[k] = true
+			print("[em-death] the save point at z %.1f killed you again %.1f s after putting you there — struck off"
+				% [_put_back_z, now - _put_back_t])
+	if _autopilot > 0:
+		_autopilot_died()
+		if _auto_deaths >= AUTO_DEATH_LIMIT:
+			return                      # the verdict is written and the tree is quitting
 	var back: Vector3 = _save_point_now()
+	_put_back_z = _last_save_z
 	print("[em-death] %s (#%d) — the end scene, then %s" % [kind, _deaths, str(back)])
 	if _vr:
 		# no canvas in the headset: the fade is the museum's own, and the
@@ -5895,6 +5957,7 @@ func _museum_death(kind: String) -> void:
 		if _player != null:
 			_player.position = back          # the walker keeps step with the rig
 			_player.velocity = Vector3.ZERO
+		_put_back_t = float(Time.get_ticks_msec()) * 0.001
 		_vy = 0.0
 		_hazard_flash()
 		_dying = false
@@ -5920,6 +5983,10 @@ func _museum_death(kind: String) -> void:
 	# 3. THE SAVE POINT — moved behind the black, so the jump is never seen
 	_player.position = back + Vector3(0.0, 0.05, 0.0)
 	_player.velocity = Vector3.ZERO
+	# THE CLOCK STARTS WHEN THE FEET LAND, not when the beam cut. The end scene
+	# is nearly three seconds of tweens, and measuring the burn window from the
+	# death would spend most of it on the fade.
+	_put_back_t = float(Time.get_ticks_msec()) * 0.001
 	_vy = 0.0
 	_jumps_left = 2
 	_last_ground = back
@@ -16855,6 +16922,42 @@ func _run_collision_test() -> void:
 ## where the data says floor, a sealed lobby, an artifact's own collision — the
 ## walker stalls and the verdict names the coordinates. Heartbeats rewrite the
 ## verdict file every second so the 16-second watchdog sees a live run.
+## A DEATH TEACHES THE PLANNER, EXACTLY AS A STALL DOES. The BFS plans over
+## stamped cells, and a lethal beam is a RayCast3D with no collider — so nothing
+## the planner can see marks it, and the walk routes back through whatever just
+## killed it, for ever. The stall handler already has the right idiom for this
+## ("physics teaches the planner: the cell ahead is not actually passable"); a
+## death is the same lesson in a louder voice, so it is unlearned the same way.
+##
+## AND A WALK THAT DIES FOR EVER IS NOT A WALK. The stall detector could never
+## catch this: being returned to a save point and walking forward again IS
+## movement, so `distance_to(_auto_last_pos) > 0.4` reset the timer on every
+## lap and the gate ran until something outside it gave up. A death budget is
+## what makes the run terminate with a verdict instead of a log file.
+const AUTO_DEATH_LIMIT: int = 6
+var _auto_deaths: int = 0
+
+func _autopilot_died() -> void:
+	_auto_deaths += 1
+	var cell := Vector2i(int(floor(_player.position.x)), int(floor(_player.position.z)))
+	if _walk_cells.erase(cell):
+		_walk_erased[cell] = "death"
+		_auto_learned += 1
+		print("[em-auto] death %d/%d on cell %s — unlearned, routing around it"
+			% [_auto_deaths, AUTO_DEATH_LIMIT, str(cell)])
+	else:
+		print("[em-auto] death %d/%d at (%.1f, %.1f) — no cell to unlearn"
+			% [_auto_deaths, AUTO_DEATH_LIMIT, _player.position.x, _player.position.z])
+	_auto_replan = true
+	if _auto_deaths >= AUTO_DEATH_LIMIT:
+		_auto_reason = "died"
+		_auto_write(true, false)
+		print("[endless_museum] AUTOPILOT FAIL (died %dx): killed repeatedly at (%.1f, %.1f), %.1f m short of goal %.1f — the route runs through something lethal"
+			% [_auto_deaths, _player.position.x, _player.position.z,
+				_auto_goal_z - _player.position.z, _auto_goal_z])
+		get_tree().quit(1)
+
+
 func _run_autopilot(delta: float) -> void:
 	_auto_t += delta
 	_auto_beat_t += delta
