@@ -4452,6 +4452,20 @@ func _viz_pages(seg: Node3D, chapter: String, pearl: String, tile: Array) -> voi
 ## carry no collider — em_detail is contractually forbidden to add collision, so
 ## there is nothing for a physics ray to hit.
 func _wall_pick_aim(from: Vector3, dir: Vector3, reach: float = 4.5, cone: float = 0.45) -> Dictionary:
+	# EVERY WALL WORK, NOT THE TENTH THAT SPEAKS (2026-08-29, Palle: "can we
+	# make the world more actionable by moving around the wall work").
+	#
+	# This used to iterate Label3D carrying em_speak — a showing that has a book
+	# line bound to it. Measured: 2.7 book lines per pearl against 25.9 showings
+	# per hall, so roughly nine wall works in ten were invisible to VR input
+	# ENTIRELY. Not hard to reach: unreachable, and silently, because a pull in
+	# open air and a pull at an unbound picture did the same nothing.
+	#
+	# The proxies are the honest target: em_detail builds one Node3D per showing
+	# at its mount centre carrying em_showing, ALWAYS, bound line or not — "a
+	# handle, not a body". The label is now looked up FOR the showing rather
+	# than being the thing looked for, so `label` may be null and a caller must
+	# say what it does about a work with nothing written on it.
 	var best: Dictionary = {}
 	var best_a: float = cone
 	for sv in _segments:
@@ -4459,17 +4473,24 @@ func _wall_pick_aim(from: Vector3, dir: Vector3, reach: float = 4.5, cone: float
 		var seg: Node3D = _node_or_null(sd.get("node"))
 		if seg == null:
 			continue
+		# the bound lines of this segment, by showing index
+		var said: Dictionary = {}
+		for n0 in seg.get_children():
+			if n0 is Label3D and n0.has_meta("em_speak"):
+				said[int((n0 as Label3D).get_meta("em_speak"))] = n0
 		for n in seg.get_children():
-			if not (n is Label3D) or not n.has_meta("em_speak"):
+			if not (n is Node3D) or not n.has_meta("em_showing"):
 				continue
-			var lbl := n as Label3D
-			var to: Vector3 = lbl.global_position - from
+			var px := n as Node3D
+			var si: int = int(px.get_meta("em_showing"))
+			var to: Vector3 = px.global_position - from
 			if to.length() > reach:
 				continue
 			var a: float = dir.angle_to(to.normalized())
 			if a < best_a:
 				best_a = a
-				best = {"seg": seg, "label": lbl, "si": int(lbl.get_meta("em_speak"))}
+				best = {"seg": seg, "proxy": px, "si": si,
+					"label": said.get(si), "at": px.global_position}
 	return best
 
 
@@ -4478,8 +4499,16 @@ func _wall_pick_aim(from: Vector3, dir: Vector3, reach: float = 4.5, cone: float
 func _wall_read_toggle(hit: Dictionary) -> bool:
 	if hit.is_empty():
 		return false
-	var lbl: Label3D = hit["label"]
+	var lbl: Label3D = hit.get("label") as Label3D
 	var si: int = int(hit["si"])
+	# A WORK WITH NOTHING WRITTEN ON IT SAYS SO. Nine in ten are in this state,
+	# and the old aim could not even reach them; opening an empty panel at one
+	# would be the same silence in a nicer frame. /unwritten is the same fact
+	# on the web — 841 of 842 book lines carry no field note — and this is that
+	# view from inside the room, at the picture it is about.
+	if lbl == null:
+		_wall_read_unbound(hit)
+		return true
 	if _wall_read != null and is_instance_valid(_wall_read) and _wall_read_si == si:
 		_wall_read_close()
 		return true
@@ -4517,6 +4546,35 @@ func _wall_read_toggle(hit: Dictionary) -> bool:
 	print("[em-page] reading %s · %s · page %02d%s" % [chapter, pearl, si + 1,
 		("  (+%d characters of field notes)" % note_txt.length()) if note_txt != "" else ""])
 	return true
+
+
+## A wall work with no book line: name it, and say it is unwritten. The panel is
+## the same TextScreen the bound ones use, so the two read as one gesture — you
+## point at a picture and the building tells you what it has to say, including
+## when the answer is nothing yet.
+func _wall_read_unbound(hit: Dictionary) -> void:
+	var si: int = int(hit.get("si", -1))
+	if _wall_read != null and is_instance_valid(_wall_read) and _wall_read_si == si:
+		_wall_read_close()
+		return
+	_wall_read_close()
+	var seg: Node3D = hit.get("seg")
+	var px: Node3D = hit.get("proxy")
+	if seg == null or px == null:
+		return
+	var chapter := String(seg.get_meta("em_chapter")) if seg.has_meta("em_chapter") else ""
+	var pearl := String(seg.get_meta("em_pearl")) if seg.has_meta("em_pearl") else ""
+	var panel: Node3D = TextScreenRes.new()
+	panel.mode = TextScreenRes.Mode.SCREEN
+	panel.title = "no line yet"
+	panel.body = "showing %d of %s · %s
+
+Nothing in the book is bound to this work. Write one at /lines or /unwritten, or on the page editor here." % [si, chapter, pearl]
+	seg.add_child(panel)
+	panel.global_position = px.global_position + Vector3(0.0, 0.35, 0.0)
+	panel.global_rotation = px.global_rotation
+	_wall_read = panel
+	_wall_read_si = si
 
 
 func _wall_read_close() -> void:
