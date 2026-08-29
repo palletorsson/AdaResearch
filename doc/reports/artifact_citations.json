@@ -1,0 +1,3080 @@
+{
+ "schema": "artifact_citations/1",
+ "generated": "2026-08-29T18:41:42",
+ "totals": {
+  "citations": 219,
+  "works": 219,
+  "HELD": 203,
+  "NEAR": 10,
+  "ELSEWHERE": 3,
+  "LOST": 3
+ },
+ "by_token": {
+  "xyz_coordinates": [
+   {
+    "chapter": "array_tutorial",
+    "pearl": "tutorial single",
+    "map": "Tutorial_Single",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/context/XYZcoordinates/pickable_xyz.gd",
+    "said": "a single cube has no index: one object cannot say where it is, so the map lends it a frame — and the gadget's right angles and unit lengths get read as properties of space rather than one convention.",
+    "file": "commons/context/XYZcoordinates/pickable_xyz.gd",
+    "quote": "coordinate systems are conventions about shared directions, not properties of space itself"
+   }
+  ],
+  "panel_bridge_loom": [
+   {
+    "chapter": "array_tutorial",
+    "pearl": "tutorial pattern",
+    "map": "Tutorial_Pattern",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/ui/panel_bridge/test_panel_bridge.gd",
+    "said": "the drawdown is the one panel you cannot edit: no thread in the cloth is addressable, only the two orders above it, so the diagonal you want has to be argued for upstream and never placed.",
+    "file": "commons/ui/panel_bridge/test_panel_bridge.gd",
+    "quote": "the diagonal is not IN the tie-up, it is in the order of the draw"
+   }
+  ],
+  "tiling_demo": [
+   {
+    "chapter": "array_tutorial",
+    "pearl": "array patterns",
+    "map": "Array_Patterns",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Array_Patterns/critical.md",
+    "said": "a repeat needs a plane that will accept it, and the plane accepts exactly seventeen grammars — no eighteenth, no five-fold rosette; Casa del Fauno and the Cosmatesque floors are instances, never additions.",
+    "file": "commons/maps/Array_Patterns/critical.md",
+    "quote": "exactly 17 distinct ways to tile a 2D plane with a repeating pattern. No more, no less."
+   }
+  ],
+  "column_3_z": [
+   {
+    "chapter": "array_tutorial",
+    "pearl": "tutorial row",
+    "map": "Tutorial_Row",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/arrays/column_3_z.gd",
+    "said": "the row cannot say which cube is [0] — an index is a count from an end somebody chose, so the pink tags are borrowed, and lifting a cube leaves a hole that keeps counting.",
+    "file": "algorithms/arrays/column_3_z.gd",
+    "quote": "an index is nothing but POSITION, and you get it by counting from the end you started at"
+   }
+  ],
+  "pulsar_visualizer": [
+   {
+    "chapter": "array_tutorial",
+    "pearl": "tutorial 2d build",
+    "map": "Tutorial_2D_Build",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/arrays/pulsar/pulsar_visualizer.gd",
+    "said": "the grid can address any cell but cannot decide what belongs in one: the pulsar arrives continuous and is cut at 0.25 — below the line the star stops existing, and the remainder reads as engineered.",
+    "file": "algorithms/arrays/pulsar/pulsar_visualizer.gd",
+    "quote": "binary representation requires a decision about where to draw the line"
+   }
+  ],
+  "grid_3d_4x4x4": [
+   {
+    "chapter": "array_tutorial",
+    "pearl": "tutorial 3d",
+    "map": "Tutorial_3D",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Tutorial_3D/critical.md",
+    "said": "a filled 4×4×4 has no readable inside: the inner indices reach the eye only because every label is drawn with depth testing off, through the cubes in front of it, and reach the hand only by emptying them.",
+    "file": "commons/maps/Tutorial_3D/critical.md",
+    "quote": "The transparency is a conceit: real stacked data does not visually announce its neighbours."
+   }
+  ],
+  "step_sequencer": [
+   {
+    "chapter": "array_tutorial",
+    "pearl": "tutorial disco",
+    "map": "Tutorial_Disco",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/audio/sequencer/step_sequencer.gd",
+    "said": "a boolean array knows which, never when: the floor stays silent until a clock is lent at 120 BPM, and whatever you walked between two of its sixteen columns never happened.",
+    "file": "commons/audio/sequencer/step_sequencer.gd",
+    "quote": "BPM controls the column-advance rate"
+   }
+  ],
+  "csg_union_demo": [
+   {
+    "chapter": "boolean_surfaces",
+    "pearl": "boolean union",
+    "map": "Boolean_Union",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/boolean_surfaces/csg_union_demo.gd",
+    "said": "union depends on a yes/no crossing test with no middle: at one float the solids are two, at the next they are one — and the seam it advertises as dissolved is the curve it had to compute first.",
+    "file": "algorithms/boolean_surfaces/csg_union_demo.gd",
+    "quote": "CSG union has no k: it fuses absolutely"
+   }
+  ],
+  "csg_intersection_demo": [
+   {
+    "chapter": "boolean_surfaces",
+    "pearl": "boolean intersection",
+    "map": "Boolean_Intersection",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Boolean_Intersection/tutorial.md",
+    "said": "intersection depends on an interior the renderer never draws, and it is the one operator whose lawful answer can be nothing: two solids that miss return the empty solid, indistinguishable from a build that failed.",
+    "file": "commons/maps/Boolean_Intersection/tutorial.md",
+    "quote": "the boundary was just the only part that ever got rendered"
+   }
+  ],
+  "csg_difference_demo": [
+   {
+    "chapter": "boolean_surfaces",
+    "pearl": "boolean difference",
+    "map": "Boolean_Difference",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Boolean_Difference/tutorial.md",
+    "said": "difference depends on a face neither solid brought: the cavity wall is B inverted, and it can only be dressed in A's outer skin — a boundary model stores no interior, so the carved inside is the outside, relabelled.",
+    "file": "commons/maps/Boolean_Difference/tutorial.md",
+    "quote": "That wall belongs to neither input; it is B's shape, inverted, wearing A's material."
+   }
+  ],
+  "csg_compose_workbench": [
+   {
+    "chapter": "boolean_surfaces",
+    "pearl": "boolean compose workbench",
+    "map": "Boolean_Compose_Workbench",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/boolean_surfaces/csg_compose_workbench.gd",
+    "said": "the bench calls three operators an algebra, but the three are an enum on a Godot property: the set is what the engine exposes, not what the algebra holds — no complement, no XOR, closure bought by leaving them out.",
+    "file": "algorithms/boolean_surfaces/csg_compose_workbench.gd",
+    "quote": "The set as tooling defines it."
+   }
+  ],
+  "grid_substrate_runner": [
+   {
+    "chapter": "cellularautomata",
+    "pearl": "ca introduction",
+    "map": "CA_Introduction",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/grid/mutators/grid_substrate_runner.gd",
+    "said": "the floor is the automaton, and a floor must be crossable: a BFS refills whatever the pattern killed between spawn and teleporter, so the first rule the learner meets has already been overruled by the need to carry them.",
+    "file": "commons/grid/mutators/grid_substrate_runner.gd",
+    "quote": "it BFS-fills the cheapest cubes needed so the player can walk from spawn to teleporter regardless of which pattern is active"
+   }
+  ],
+  "structure_growth": [
+   {
+    "chapter": "cellularautomata",
+    "pearl": "ca elementaryrules",
+    "map": "CA_ElementaryRules",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/CA_ElementaryRules/intent.md",
+    "said": "the argument is that 256 is small enough to walk: eight bits enumerate every rule, and a room cannot hold 256 walls, so one 26-neighbour 3D automaton stands where the enumeration should be and completeness stays a claim.",
+    "file": "commons/maps/CA_ElementaryRules/intent.md",
+    "quote": "Needs a rule-comparison wall — a side-by-side display of all 256 elementary rules"
+   }
+  ],
+  "ca_bridge": [
+   {
+    "chapter": "cellularautomata",
+    "pearl": "ca gameoflife",
+    "map": "CA_GameOfLife",
+    "li": 2,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/cellularautomata/ca_bridge/ca_bridge.gd",
+    "said": "you walk on computation, and no three-cell rule knows it owes you a floor: rule 110 computes and fills 49.7% of the deck, rule 250 fills 87.5% and computes nothing — the crossing costs the argument.",
+    "file": "algorithms/cellularautomata/ca_bridge/ca_bridge.gd",
+    "quote": "87.5% full  class 1/2, near-solid — the control, a ramp that computes nothing"
+   }
+  ],
+  "ca_growth_network": [
+   {
+    "chapter": "cellularautomata",
+    "pearl": "ca beyondbinary",
+    "map": "CA_BeyondBinary",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/cellularautomata/ca_growth_network/ca_growth_network.gd",
+    "said": "the vascular claim needs somewhere to grow toward: eight attractors are placed before the first tip moves, so the growth stays local only because the global information was smuggled in ahead of it as goals nobody grew.",
+    "file": "algorithms/cellularautomata/ca_growth_network/ca_growth_network.gd",
+    "quote": "@export var attractor_count: int = 8  # Number of attractor points"
+   }
+  ],
+  "decaying_bridge": [
+   {
+    "chapter": "cellularautomata",
+    "pearl": "ca expandingspace",
+    "map": "CA_ExpandingSpace",
+    "li": 2,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/cellularautomata/living_architecture/decaying_bridge.gd",
+    "said": "reacting to presence is not a local rule: every tick the bridge asks the whole scene tree for a node in group \"player\" and decays within two cells of the answer — the reach that matters is a lookup, not a neighbourhood.",
+    "file": "algorithms/cellularautomata/living_architecture/decaying_bridge.gd",
+    "quote": "var player = get_tree().get_first_node_in_group(\"player\")"
+   }
+  ],
+  "ca_sphere": [
+   {
+    "chapter": "cellularautomata",
+    "pearl": "ca softrules",
+    "map": "CA_SoftRules",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/cellularautomata/CA_sphere/CA_sphere.gd",
+    "said": "\"the same rules\" needs the same neighbourhood everywhere, and a sphere has none to give: this one is a 64-by-32 lat-long mesh, crowded at the poles and thin at the equator, so the automaton's world is the mesher's.",
+    "file": "algorithms/cellularautomata/CA_sphere/CA_sphere.gd",
+    "quote": "sphere_mesh.radial_segments = int(pow(2, sphere_subdivisions)) * 8"
+   }
+  ],
+  "sierpinski_pyramid": [
+   {
+    "chapter": "cellularautomata",
+    "pearl": "ca agentscircuits",
+    "map": "CA_AgentsCircuits",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/CA_AgentsCircuits/critical.md",
+    "said": "authorship over the rule is the payoff and no procedure comes with it: nothing runs from a wanted behaviour back to a rule number, so writing a rule here is searching 256 of them and looking.",
+    "file": "commons/maps/CA_AgentsCircuits/critical.md",
+    "quote": "The 256-rule space is navigable but not designable."
+   }
+  ],
+  "self_organization_ca": [
+   {
+    "chapter": "cellularautomata",
+    "pearl": "ca edgeofchaos",
+    "map": "CA_EdgeOfChaos",
+    "li": 1,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/cellularautomata/ca_showcase/self_organization_ca.gd",
+    "said": "narrowness can only be shown by leaving the band, and nothing here can leave: lambda is a constant 0.5 with no slider in the map, so the edge of chaos is walked from inside it and the two deaths stay named, not met.",
+    "file": "algorithms/cellularautomata/ca_showcase/self_organization_ca.gd",
+    "quote": "needs: VR lambda slider [missing — see set_lambda()]"
+   }
+  ],
+  "slope_tangent_demo": [
+   {
+    "chapter": "change",
+    "pearl": "intro",
+    "map": "Change_Intro",
+    "li": 1,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/change/slope_tangent_demo.gd",
+    "said": "the slope is quoted, not measured: it reads cos(x) because the curve was chosen as sin — so this room shows a rate only for functions already differentiated on paper, and never takes the limit it is named for.",
+    "file": "algorithms/change/slope_tangent_demo.gd",
+    "quote": "var slope: float = cos(x_curve) * amplitude  # dy/dx = cos(x) * amplitude (in curve units)"
+   }
+  ],
+  "velocity_arrow": [
+   {
+    "chapter": "change",
+    "pearl": "velocity",
+    "map": "Change_Velocity",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "NEAR",
+    "why": "algorithms/change/velocity_arrow.gd — the words are there, the wording moved",
+    "said": "the arrow points along a chord to a point 0.05 radians ahead: the puck must be read where it has not arrived, and the chord cuts the corner hardest at the bend the artifact exists to show.",
+    "file": "algorithms/change/velocity_arrow.gd",
+    "quote": "# Finite-difference velocity: tangent via a small angular step. ... var v := (p_ahead - p) / 0.05  # approximate dP/da"
+   }
+  ],
+  "partial_derivative_terrain": [
+   {
+    "chapter": "change",
+    "pearl": "slope surface",
+    "map": "Change_Slope_Surface",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/change/partial_derivative_terrain.gd",
+    "said": "the two arrows measure the hill only along axes someone laid over it — rotate the grid and both numbers change while the ground does not: a partial derivative is a property of the question, not the surface.",
+    "file": "algorithms/change/partial_derivative_terrain.gd",
+    "quote": "a derivative in more than one dimension is not one number but a choice of direction — you differentiate with respect to whichever axis you think to ask about"
+   }
+  ],
+  "integral_area": [
+   {
+    "chapter": "change",
+    "pearl": "accumulation area",
+    "map": "Accumulation_Area",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/change/integral_area.gd",
+    "said": "the smooth fill is eighty strips: the room promises a boundary swept continuously and ships a comb fine enough to pass for one, so its continuity is an integer anyone can raise or lower.",
+    "file": "algorithms/change/integral_area.gd",
+    "quote": "the continuous limit is reachable by raising `samples` instead"
+   }
+  ],
+  "riemann_pump": [
+   {
+    "chapter": "change",
+    "pearl": "accumulation riemann",
+    "map": "Accumulation_Riemann",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Accumulation_Riemann/walked.md",
+    "said": "the exact area is a limit no pump can reach — this hall runs four strips to thirty-two and asserts where infinitely many would land, so every integral downstream is a promise nobody here audits.",
+    "file": "commons/maps/Accumulation_Riemann/walked.md",
+    "quote": "Here the chapter admits its method: the exact is approached, not possessed."
+   }
+  ],
+  "vector_field_grid": [
+   {
+    "chapter": "change",
+    "pearl": "flow field",
+    "map": "Flow_Field",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Flow_Field/walked.md",
+    "said": "a field owes a vector to every point and can afford ninety-six arrows: between them the rule is taken on trust, from a stream function chosen by someone the room never names.",
+    "file": "commons/maps/Flow_Field/walked.md",
+    "quote": "Every cell's arrow was authored, and the author is nowhere visible."
+   }
+  ],
+  "particle_flow_swarm": [
+   {
+    "chapter": "change",
+    "pearl": "flow particle pulse",
+    "map": "Flow_Particle_Pulse",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/change/particle_flow_swarm.gd",
+    "said": "the trails are not memory: each is the field integrated backwards from where the particle stands now, so under the scrolling field the room hands every body a past it never had.",
+    "file": "algorithms/change/particle_flow_swarm.gd",
+    "quote": "It is therefore a streamline of the instantaneous field, not a pathline — the two differ under `cells`, which scrolls"
+   }
+  ],
+  "ftc_bridge": [
+   {
+    "chapter": "change",
+    "pearl": "reconciliation",
+    "map": "Change_Reconciliation",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/change/ftc_bridge.gd",
+    "said": "the beam reads f(b) − f(a) over a deck that is a symmetric parabola, so the ends sit level and the theorem the chapter closes on says 0 = 0 in twenty-six rooms.",
+    "file": "algorithms/change/ftc_bridge.gd",
+    "quote": "This bridge has been labelled with a theorem that, on its own geometry, reads 0 = 0."
+   }
+  ],
+  "pattern_machine_d": [
+   {
+    "chapter": "color",
+    "pearl": "pattern foundry",
+    "map": "Pattern_Foundry",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/artifacts/pattern_machine_d/pattern_machine_d.gd",
+    "said": "the press stamps its own carpet but not its own law: the symmetry group is engraved into the forme before a single cell is painted, so the machine prints seventeen universes and cannot ask for an eighteenth.",
+    "file": "commons/artifacts/pattern_machine_d/pattern_machine_d.gd",
+    "quote": "the symmetry group is the forme, and the carpet is the impression"
+   }
+  ],
+  "csg_architecture_cavity": [
+   {
+    "chapter": "color",
+    "pearl": "context placed",
+    "map": "Color_Context_Placed",
+    "li": 1,
+    "host": "note_src",
+    "verdict": "ELSEWHERE",
+    "why": "discussed in Color_Context_Placed, where it does not stand — and it is this hall's declared hero",
+    "said": "a placed colour cannot supply its own neighbour, and the gallery cannot hang the neighbour without also hanging a distortion: mis-place the contrast stack and the swatch reads as another colour, and nothing in the hall reports it.",
+    "file": "commons/maps/Color_Context_Placed/intent.md",
+    "quote": "nothing here means anything by itself"
+   }
+  ],
+  "brick_wall_factory": [
+   {
+    "chapter": "color",
+    "pearl": "nails",
+    "map": "Color_Nails",
+    "li": 2,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/color/brick_wall_factory/brick_wall_factory.gd",
+    "said": "a brick wall is a colour sequence made solid, but the factory does not choose the sequence — it reads one of twenty named palettes, so the room that sells colour as self-authorship hands you a vocabulary already written.",
+    "file": "algorithms/color/brick_wall_factory/brick_wall_factory.gd",
+    "quote": "critical_parameter: palette — selects from 20 named palettes"
+   }
+  ],
+  "spectrum_forest": [
+   {
+    "chapter": "color",
+    "pearl": "grid pallet",
+    "map": "Color_Grid_Pallet",
+    "li": 1,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/color/spectrumforest/spectrum_forest.gd",
+    "said": "the forest is a spectrum only while its gaps stay too fine to see: continuity is rented from line_count, and lowering the density does not blur the colour, it shows there was never anything between the lines.",
+    "file": "algorithms/color/spectrumforest/spectrum_forest.gd",
+    "quote": "the spectrum is continuous but we discretize it into lines — the gaps between lines are the same lie as RGB"
+   }
+  ],
+  "rainbow": [
+   {
+    "chapter": "color",
+    "pearl": "rainbow",
+    "map": "Color_Rainbow",
+    "li": 1,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/primitives/rainbow/rainbow.gd",
+    "said": "a rainbow has no location, but a map must place it — the arc is a mesh at a fixed radius, so the corridor can show a rainbow only by making it what a rainbow is not: a thing standing somewhere.",
+    "file": "algorithms/primitives/rainbow/rainbow.gd",
+    "quote": "a rainbow has no location — it exists only in the geometry between sun, water, and eye"
+   }
+  ],
+  "color_sets_overview": [
+   {
+    "chapter": "color",
+    "pearl": "pillar",
+    "map": "Color_Pillar",
+    "li": 4,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/color/grabcolor/color_sets_overview.gd",
+    "said": "to be carried a colour must be named, and the rig can only name the nearest one — every sticker you pick up is labelled with a web colour it is not, so portability is paid for in a rounding.",
+    "file": "algorithms/color/grabcolor/color_sets_overview.gd",
+    "quote": "closest_web_color_name bridges digital hex to human language"
+   }
+  ],
+  "pattern_mill": [
+   {
+    "chapter": "color",
+    "pearl": "paint",
+    "map": "Color_Paint",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Color_Paint/critical.md",
+    "said": "where two splats land on each other the room must decide whether paint is pigment or light — an action-painting studio running on a display inherits a mixing rule from neither, and ships one nobody in the room can check.",
+    "file": "commons/maps/Color_Paint/critical.md",
+    "quote": "It simulates paint (physical, subtractive) using digital systems (light-emitting, additive)."
+   }
+  ],
+  "color_space_navigator": [
+   {
+    "chapter": "color",
+    "pearl": "walls",
+    "map": "Color_Walls",
+    "li": 1,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/artifacts/color_space_navigator/color_space_navigator.gd",
+    "said": "colour becomes a place you can walk only if it has walls: the cube holds every hue three channels can reach and has no coordinate for the rest, so what the gamut clipped cannot even be pointed at from inside.",
+    "file": "commons/artifacts/color_space_navigator/color_space_navigator.gd",
+    "quote": "placing every achievable hue at its exact coordinate in a cube you can inhabit"
+   }
+  ],
+  "calder_object_mobile": [
+   {
+    "chapter": "forces",
+    "pearl": "sky climb",
+    "map": "Sky_Climb",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/artifacts/registry/vectors_demos.json",
+    "said": "the mobile balances the curriculum's own shapes by tau = w*d, but a point and an arch have no weight - each is handed a plausible mass, so a real equilibrium is computed over invented quantities.",
+    "file": "commons/artifacts/registry/vectors_demos.json",
+    "quote": "Each primitive carries a plausible mass and the arms balance those masses by the lever law, so the foundational shapes of the curriculum drift in equilibrium."
+   }
+  ],
+  "force_cube": [
+   {
+    "chapter": "forces",
+    "pearl": "void crossing",
+    "map": "Void_Crossing",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "NEAR",
+    "why": "commons/maps/Void_Crossing/intent.md — the words are there, the wording moved",
+    "said": "the bridge is a vector only because the floor was deleted: the void is height-0 cells someone authored, so what gives a chosen direction its stakes is not physics but a hole in the structure layer.",
+    "file": "commons/maps/Void_Crossing/intent.md",
+    "quote": "Dimensions are 14x18 with the void carved as height-0 cells through the centre rows."
+   }
+  ],
+  "ca_rules_workbench": [
+   {
+    "chapter": "forces",
+    "pearl": "reformed instruments",
+    "map": "Reformed_Instruments",
+    "li": 2,
+    "host": "note_src",
+    "verdict": "NEAR",
+    "why": "commons/maps/Reformed_Instruments/intent.md — the words are there, the wording moved",
+    "said": "six incommensurable problems depend on one console to be legible, and the console can only offer a dial - so halting, paradox and matrix algebra arrive looking like one question asked at six settings.",
+    "file": "commons/maps/Reformed_Instruments/intent.md",
+    "quote": "It also quietly flattens domains: halting, paradox, and matrix algebra all become \"things you turn a dial on\""
+   }
+  ],
+  "reflection_hall": [
+   {
+    "chapter": "forces",
+    "pearl": "force preview",
+    "map": "Force_Preview",
+    "li": 5,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Force_Preview/intent.md",
+    "said": "a trailer depends on the film: the storm, the mortar and the bounce hall borrow their meaning from maps not yet walked, so until then the room is spectacle with nothing to point at.",
+    "file": "commons/maps/Force_Preview/intent.md",
+    "quote": "The risk is the trailer problem: spectacle without structure can leave the learner entertained but ungrounded"
+   }
+  ],
+  "triangle_curvature_workbench": [
+   {
+    "chapter": "forces",
+    "pearl": "console test",
+    "map": "Console_Test",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Console_Test/intent.md",
+    "said": "the harness needs payload it does not care about - Cantor's diagonal and a triangle's curvature ride the slider as load, and a room validating its own interface can prove nothing about what it carries.",
+    "file": "commons/maps/Console_Test/intent.md",
+    "quote": "here that flattening is appropriate because the subject is the console, not the math"
+   }
+  ],
+  "bubble_blaster": [
+   {
+    "chapter": "forces",
+    "pearl": "force props sandbox",
+    "map": "Force_Props_Sandbox",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Force_Props_Sandbox/intent.md",
+    "said": "every prop here works and none of them means anything yet - a working artifact depends on an arrangement it cannot make for itself, and this is the room that admits it has none.",
+    "file": "commons/maps/Force_Props_Sandbox/intent.md",
+    "quote": "a working artifact is not yet a meaning; meaning is what arranging them into a narrated map produces"
+   }
+  ],
+  "VectorBasics": [
+   {
+    "chapter": "forces",
+    "pearl": "vectors act1 whatavectoris",
+    "map": "Vectors_Act1_WhatAVectorIs",
+    "li": 1,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/artifacts/vector_normalize_demo/vector_normalize_demo.gd",
+    "said": "keeping only which-way requires dividing by how-far, so the one arrow this hall cannot show is the one with no length: direction is separable everywhere except at zero, where the operation quietly fails.",
+    "file": "commons/artifacts/vector_normalize_demo/vector_normalize_demo.gd",
+    "quote": "Any direction reads, only magnitude is removed; zero vector is the singular case where normalization fails"
+   }
+  ],
+  "example_2_1_forces_vr": [
+   {
+    "chapter": "forces",
+    "pearl": "vfm 01 foundations",
+    "map": "VFM_01_Foundations",
+    "li": 1,
+    "host": "note_src",
+    "verdict": "NEAR",
+    "why": "commons/maps/sequences/forces.json — the words are there, the wording moved · that map has no map_data.json",
+    "said": "the front door teaches the vocabulary every later hall assumes, but the arrow itself arrives already known from primitives - the room can name a vector's parts and cannot supply the thing they are parts of.",
+    "file": "commons/maps/sequences/forces.json",
+    "quote": "the vector itself is NOT taught here. primitives is sequence 1 ... so an arrow with a length and a direction arrives already known."
+   }
+  ],
+  "vector_dot_product_xl": [
+   {
+    "chapter": "forces",
+    "pearl": "vectoroperations",
+    "map": "VectorOperations",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/VectorOperations/critical.md",
+    "said": "an arrow alone is a drawing: it becomes an object only against a second one - and the cross product needs more than that, since which side of the plane counts as up is a handedness the room can only inherit.",
+    "file": "commons/maps/VectorOperations/critical.md",
+    "quote": "the cross product's sign depends on which side of the plane the learner is willing to call positive, and that willingness is a convention"
+   }
+  ],
+  "vector_addition_walk": [
+   {
+    "chapter": "forces",
+    "pearl": "vectors act2 vectorarithmetic",
+    "map": "Vectors_Act2_VectorArithmetic",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/artifacts/vector_addition_walk/vector_addition_walk.gd",
+    "said": "standing inside addition requires the sum to fit indoors - the walk-in twin caps every arrow at the room's reach, so an operation true at any magnitude is walkable only at small ones.",
+    "file": "commons/artifacts/vector_addition_walk/vector_addition_walk.gd",
+    "quote": "critical_parameter: Grid size vs vector length - vectors must fit inside the walkable volume."
+   }
+  ],
+  "VectorWorkbench": [
+   {
+    "chapter": "forces",
+    "pearl": "vfm 02 operations",
+    "map": "VFM_02_Operations",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/vectors/vector_workbench/VectorWorkbench.gd",
+    "said": "the bench computes all five operations every frame and cannot show them at once - the focused modes exist to hide four results so one becomes legible; clarity here is subtraction.",
+    "file": "algorithms/vectors/vector_workbench/VectorWorkbench.gd",
+    "quote": "ALL shows every result vector simultaneously, focused modes hide the others so the learner sees one relationship clearly"
+   }
+  ],
+  "VectorFieldFlow": [
+   {
+    "chapter": "forces",
+    "pearl": "vectoradvanced",
+    "map": "VectorAdvanced",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/VectorAdvanced/critical.md",
+    "said": "the throw is the datum and the arrow is only its transcript, so this map depends on a body it cannot ship: a learner who does not throw gets the formalisation with nothing underneath it.",
+    "file": "commons/maps/VectorAdvanced/critical.md",
+    "quote": "The body's throw is not a noisy approximation of an equation; the equation is a formalisation of the body's throw."
+   }
+  ],
+  "VectorMotion": [
+   {
+    "chapter": "forces",
+    "pearl": "vectors act3 fieldsandmotion",
+    "map": "Vectors_Act3_FieldsAndMotion",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/sequences/forces.json · that map has no map_data.json",
+    "said": "a vector that stops holding still needs both extent and history, and the ladder has one slot per room - so the map is filed on motion while half of it belongs to rung five.",
+    "file": "commons/maps/sequences/forces.json",
+    "quote": "Filed on MOTION; its flow console and weather field belong to rung 5. The straddle is declared rather than smoothed"
+   }
+  ],
+  "example_3_3_pointing_in_the_direction_of_motion_vr": [
+   {
+    "chapter": "forces",
+    "pearl": "vfm 03 motion",
+    "map": "VFM_03_Motion",
+    "li": 1,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/oscillation/noc_ch03/example_3_3_pointing_in_the_direction_of_motion_vr.gd",
+    "said": "the cone's heading is look_at(position + velocity), its orientation on loan from its motion - so stop it and there is nothing to point at; a body that faces only where it goes has no face at rest.",
+    "file": "algorithms/oscillation/noc_ch03/example_3_3_pointing_in_the_direction_of_motion_vr.gd",
+    "quote": "look_at(position + velocity). A cone that always points where it is going. Orientation derived from velocity, not set independently."
+   }
+  ],
+  "drag_corridor": [
+   {
+    "chapter": "forces",
+    "pearl": "vectors act4a kineticforces",
+    "map": "Vectors_Act4a_KineticForces",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/artifacts/drag_corridor/drag_corridor.gd",
+    "said": "nothing here resists on its own: drag is b times your velocity and b belongs to the medium, so the corridor slows you by deciding what the air is made of, not by anything about you.",
+    "file": "commons/artifacts/drag_corridor/drag_corridor.gd",
+    "quote": "drag is proportional to velocity and against it; the denser the medium the bigger b, so the same launch goes far in air, less in water, barely a lunge in honey."
+   }
+  ],
+  "bounce_well": [
+   {
+    "chapter": "forces",
+    "pearl": "vectors act4b oscillation",
+    "map": "Vectors_Act4b_Oscillation",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "LOST",
+    "why": "commons/maps/Vectors_Act4b_Oscillation/intent.md no longer says it",
+    "said": "a pendulum keeps time as T = 2pi*sqrt(L/g), so the hall's clocks are calibrated by the planet beneath them - the steadiest instruments in the sequence cannot name a second without borrowing a constant the room does not hold.",
+    "file": "commons/maps/Vectors_Act4b_Oscillation/intent.md",
+    "quote": "pendulum_hall (lengthen the string and the swing slows - T = 2pi*sqrt(L/g), restoring force mg sin theta)"
+   }
+  ],
+  "force_field_visualizer": [
+   {
+    "chapter": "forces",
+    "pearl": "composition",
+    "map": "ForcesComposition",
+    "li": 1,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/ForcesComposition/critical.md",
+    "said": "the resultant is a description of the result, not a cause of it - the body meets only the sum, and superposition gives it no way to decline a contributor: every pull counts, and the count is addition.",
+    "file": "commons/maps/ForcesComposition/critical.md",
+    "quote": "A body experiences the net of every force acting on it, not the net of the forces it would have chosen."
+   }
+  ],
+  "hl_turret_vectors": [
+   {
+    "chapter": "forces",
+    "pearl": "vectorapplied",
+    "map": "VectorApplied",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/VectorApplied/critical.md",
+    "said": "the turret's arithmetic is complete and decides nothing - where \"acquired\" begins is a dot-product threshold someone set, so the neutral part is the maths and the chosen part is the number it is compared to.",
+    "file": "commons/maps/VectorApplied/critical.md",
+    "quote": "the arithmetic is the part that feels neutral while the decisions do not"
+   }
+  ],
+  "magnetic_simulation": [
+   {
+    "chapter": "forces",
+    "pearl": "vfm 04 fields",
+    "map": "VFM_04_Fields",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "NEAR",
+    "why": "commons/maps/VFM_04_Fields/tutorial.md — the words are there, the wording moved",
+    "said": "a field claims an arrow at every point, but field_at() rounds your position to a cell and hands back that cell's vector - between the samples there is no field, only the nearest one already stored.",
+    "file": "commons/maps/VFM_04_Fields/tutorial.md",
+    "quote": "var cell := field_grid.world_to_cell(pos) / return field_grid.vectors[cell]"
+   }
+  ],
+  "catapult": [
+   {
+    "chapter": "forces",
+    "pearl": "vfm 05 launch",
+    "map": "VFM_05_Launch",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/VFM_05_Launch/tutorial.md",
+    "said": "the whole range is one assignment - linear_velocity = aim * power - and everything after it is consequence; an arc cannot be corrected, only re-aimed and fired again.",
+    "file": "commons/maps/VFM_05_Launch/tutorial.md",
+    "quote": "Everything about the flight is decided in this one line. The rest is consequence."
+   }
+  ],
+  "particle_systems": [
+   {
+    "chapter": "forces",
+    "pearl": "systems",
+    "map": "ForcesSystems",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/ForcesSystems/critical.md",
+    "said": "population behaviour depends on a mechanism that does not travel - the loop holds four aggregations and no rule for getting from one to the next; the incompatibility is what teaches.",
+    "file": "commons/maps/ForcesSystems/critical.md",
+    "quote": "it proposes four incompatible examples and lets the incompatibility do the teaching"
+   }
+  ],
+  "ChainSwing": [
+   {
+    "chapter": "forces",
+    "pearl": "vfm 06 springs",
+    "map": "VFM_06_Springs",
+    "li": 2,
+    "host": "note_src",
+    "verdict": "NEAR",
+    "why": "algorithms/joint/07_chain_swing/ChainSwing.gd — the words are there, the wording moved",
+    "said": "a chain that swings needs one link that cannot: the anchor is the only part held rigid, so a hall about compliance hangs entirely from the one thing that refuses to give.",
+    "file": "algorithms/joint/07_chain_swing/ChainSwing.gd",
+    "quote": "anchor -> pin -> link -> pin -> link -> pin -> seat. A chain of rigid bodies connected by pin joints, driven by periodic force."
+   }
+  ],
+  "three_body_problem": [
+   {
+    "chapter": "forces",
+    "pearl": "chaos",
+    "map": "ForcesChaos",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/artifacts/registry/physics_simulation.json",
+    "said": "three bodies have no formula, so the room can only be watched - and the one thing in it still predictable is the barycentre, which travels in a straight line and belongs to none of them.",
+    "file": "commons/artifacts/registry/physics_simulation.json",
+    "quote": "axiom (the law on a slate, plus the barycentre and its straight track, the one predictable thing in the room)"
+   }
+  ],
+  "orbital_mechanics_demo": [
+   {
+    "chapter": "forces",
+    "pearl": "vfm 07 gravity",
+    "map": "VFM_07_Gravity",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "NEAR",
+    "why": "commons/maps/VFM_07_Gravity/tutorial.md — the words are there, the wording moved",
+    "said": "the inverse square divides by distance, so the law has no answer when two bodies meet - the room clamps r to at least one metre, and that clamp is all that stands between Newton and infinity.",
+    "file": "commons/maps/VFM_07_Gravity/tutorial.md",
+    "quote": "var d := clamp(arm.length(), 1.0, 25.0) ... The clamp is honest engineering - without it, close encounters explode."
+   }
+  ],
+  "collision_carts": [
+   {
+    "chapter": "forces",
+    "pearl": "vfm 08 arena",
+    "map": "VFM_08_Arena",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "NEAR",
+    "why": "commons/artifacts/reflection_hall/reflection_hall.gd — the words are there, the wording moved",
+    "said": "a bounce is computed from the wall's inward normal, not from the ball - reflection needs a surface that has already declared which way it faces, and the ball supplies only the half that gets flipped.",
+    "file": "commons/artifacts/reflection_hall/reflection_hall.gd",
+    "quote": "critical_parameter: The dot product d.n - the slice of the throw that points into the wall."
+   }
+  ],
+  "hits_reset_display": [
+   {
+    "chapter": "forces",
+    "pearl": "arena",
+    "map": "ForcesArena",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/ForcesArena/critical.md",
+    "said": "both sides run the same arithmetic, so the arena cannot test understanding, only speed - the drone knows exactly what the learner knows, and the reflex is all that is left to grade.",
+    "file": "commons/maps/ForcesArena/critical.md",
+    "quote": "Both sides are running the same operations. The question is which side has developed the faster habitus."
+   }
+  ],
+  "gradient_descent_well": [
+   {
+    "chapter": "formfinding",
+    "pearl": "descent",
+    "map": "FormFinding_Descent",
+    "li": 2,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/artifacts/gradient_descent_well/gradient_descent_well.gd",
+    "said": "the marble solves a minimization it did not pose: the bowl is authored — seed 46, one deep well, two shallow dips — so descent supplies the rule and never the surface, and the placer it dissolves only moves up a level.",
+    "file": "commons/artifacts/gradient_descent_well/gradient_descent_well.gd",
+    "quote": "Gradient descent never sees the landscape — only the slope underfoot"
+   }
+  ],
+  "catenoid": [
+   {
+    "chapter": "formfinding",
+    "pearl": "catenary",
+    "map": "FormFinding_Catenary",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/wavefunctions/line_builder_3d/cable_builder.gd",
+    "said": "the chain solves for its curve but not for its anchors, and this one does not solve at all — a cubic spline sagged by a hand-set 0.5, so the map's proof that shape is computed rather than drawn is itself drawn.",
+    "file": "algorithms/wavefunctions/line_builder_3d/cable_builder.gd",
+    "quote": "catenary(x) approximated by cubic spline through grabbable control points"
+   }
+  ],
+  "mass_spring_bench": [
+   {
+    "chapter": "formfinding",
+    "pearl": "relaxation",
+    "map": "FormFinding_Relaxation",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/artifacts/mass_spring_bench/mass_spring_bench.gd",
+    "said": "nobody modelled the slump but somebody wired the net — 4 by 3 by 4, cell 0.16 — and somebody set 80 pre-steps, deciding when settled counts as settled, so the fossil records the forces and the clock equally.",
+    "file": "commons/artifacts/mass_spring_bench/mass_spring_bench.gd",
+    "quote": "NOBODY MODELLED THIS SHAPE — THE SPRINGS DID"
+   }
+  ],
+  "fractal_truss_tower": [
+   {
+    "chapter": "formfinding",
+    "pearl": "equilibrium",
+    "map": "FormFinding_Equilibrium",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/artifacts/fractal_truss_tower/fractal_truss_tower.gd",
+    "said": "strength from geometry needs somewhere to stop recursing and the principle does not say where: depth is 3, clamped to 4 from outside, and below the last split the strut is solid again and the material comes back.",
+    "file": "commons/artifacts/fractal_truss_tower/fractal_truss_tower.gd",
+    "quote": "max strength, min material — a strut that is struts"
+   }
+  ],
+  "max_q_basin_room": [
+   {
+    "chapter": "formfinding",
+    "pearl": "annealing",
+    "map": "FormFinding_Annealing",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/artifacts/max_q_basin_room/max_q_basin_room.gd",
+    "said": "energy has no opinion about which minimum is alive, so the room supplies the verdict the landscape cannot — dead well grey at x −2, alive well green at x +2 — then reads it back off the floor as physics.",
+    "file": "commons/artifacts/max_q_basin_room/max_q_basin_room.gd",
+    "quote": "MAX Q IS THE LIVELIEST MINIMUM, NOT THE DEEPEST"
+   }
+  ],
+  "self_shaping_forge": [
+   {
+    "chapter": "formfinding",
+    "pearl": "forge",
+    "map": "FormFinding_Forge",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/artifacts/self_shaping_forge/self_shaping_forge.gd",
+    "said": "found not imposed, except the form is imposed — _build_form_targets writes the answer before the run and Q is a sine rather than a measurement, so the forge stages the descent whose whole claim is that it cannot be staged.",
+    "file": "commons/artifacts/self_shaping_forge/self_shaping_forge.gd",
+    "quote": "GRADIENT DESCENT TOWARD MAX Q — STRUCTURE THAT PERSISTS BY MOVING, FOUND NOT IMPOSED"
+   }
+  ],
+  "angle_sum_triangle": [
+   {
+    "chapter": "foundationscrisis",
+    "pearl": "euclid parallel",
+    "map": "Euclid_Parallel",
+    "li": 2,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Euclid_Parallel/critical.md",
+    "said": "the triangle cannot supply its own angle sum — 180° is a fact about the space, and the space arrives as a postulate every proof uses and no proof produces: certainty standing on a decision, not a truth.",
+    "file": "commons/maps/Euclid_Parallel/critical.md",
+    "quote": "Inside, because every proof uses it. Outside, because no proof produces it."
+   }
+  ],
+  "poincare_disk": [
+   {
+    "chapter": "foundationscrisis",
+    "pearl": "noneuclidean spaces",
+    "map": "NonEuclidean_Spaces",
+    "li": 2,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/NonEuclidean_Spaces/critical.md",
+    "said": "hyperbolic space cannot be drawn honestly: the disk buys a finite picture of infinity by crushing the metric toward the rim, so every equal step outward is drawn smaller and the boundary is infinity rendered as a wall.",
+    "file": "commons/maps/NonEuclidean_Spaces/critical.md",
+    "quote": "The Poincare disk shows an infinite plane compressed into a finite circle — boundlessness contained, but never tamed."
+   }
+  ],
+  "self_membership_set": [
+   {
+    "chapter": "foundationscrisis",
+    "pearl": "russell paradox",
+    "map": "Russell_Paradox",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/artifacts/self_membership_set/self_membership_set.gd",
+    "said": "a set that contains itself cannot supply its own bottom: the nest is only legible because someone cut it at five, and that cut — foundation, types, a levels export — is the restriction the paradox extorted.",
+    "file": "commons/artifacts/self_membership_set/self_membership_set.gd",
+    "quote": "the axiom of foundation is precisely a bound on the chain, and letting the map lengthen it would un-draw the axiom"
+   }
+  ],
+  "godel_sentence_machine": [
+   {
+    "chapter": "foundationscrisis",
+    "pearl": "godel incompleteness",
+    "map": "Godel_Incompleteness",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/artifacts/godel_sentence_machine/godel_sentence_machine.gd",
+    "said": "the machine builds G out of its own rules but cannot supply the standpoint from which G reads true — the gold verdict is spoken from outside, on a soundness no arm inside can reach.",
+    "file": "commons/artifacts/godel_sentence_machine/godel_sentence_machine.gd",
+    "quote": "a sound system proves no falsehoods, so G is not provable — and therefore G is true"
+   }
+  ],
+  "escher_staircase": [
+   {
+    "chapter": "foundationscrisis",
+    "pearl": "escher impossible",
+    "map": "Escher_Impossible",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/interfaces/foundations/escher_staircase.gd",
+    "said": "an impossible figure cannot supply its own coherence: it depends on the one standpoint where the loop appears to close, and pays by hiding the joint — the fourth side quietly eased to zero where nobody looks.",
+    "file": "commons/interfaces/foundations/escher_staircase.gd",
+    "quote": "it only works from one place. The trick has to fail somewhere"
+   }
+  ],
+  "constructive_proof": [
+   {
+    "chapter": "foundationscrisis",
+    "pearl": "brouwer intuitionism",
+    "map": "Brouwer_Intuitionism",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Brouwer_Intuitionism/critical.md",
+    "said": "existence here cannot be asserted, only produced: the proof depends on somebody building the witness in time, and pays in everything true but unbuilt — the platforms that trail off are not false, they are unconstructed.",
+    "file": "commons/maps/Brouwer_Intuitionism/critical.md",
+    "quote": "The unreachable platforms are not false. They are unconstructed."
+   }
+  ],
+  "schrodinger_box": [
+   {
+    "chapter": "foundationscrisis",
+    "pearl": "florensky paraconsistent",
+    "map": "Florensky_Paraconsistent",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/artifacts/schrodinger_box/schrodinger_box.gd",
+    "said": "the box cannot show what it holds — superposition needs the lid shut — so its only freedom is where to put the part it cannot display: sealed in the core, split to a twin, smeared into haze.",
+    "file": "commons/artifacts/schrodinger_box/schrodinger_box.gd",
+    "quote": "the one thing a box can actually argue about: WHAT IT DOES WITH THE FACT THAT YOU ARE OUTSIDE IT"
+   }
+  ],
+  "lambda_slider": [
+   {
+    "chapter": "foundationscrisis",
+    "pearl": "crisis synthesis",
+    "map": "Crisis_Synthesis",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/interfaces/qfep/lambda_slider.gd",
+    "said": "the dial depends on a calibration chain that ends nowhere — there is no metre bar for how much a system should value disorder — so the instrument covers the gap by painting the right answer on in green.",
+    "file": "commons/interfaces/qfep/lambda_slider.gd",
+    "quote": "An instrument's authority comes from its calibration chain; this one's chain ends nowhere"
+   }
+  ],
+  "fractal_recursion_2": [
+   {
+    "chapter": "fractals",
+    "pearl": "fractal recursion",
+    "map": "Fractal_Recursion",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/fractals/example_8_2_recursion_vr.gd",
+    "said": "The first evidence that a function calls itself depends on containment, and this recursion makes exactly one call — a tail call, a loop — so nothing is inside anything: 3 mm of z-offset per layer does the nesting.",
+    "file": "algorithms/fractals/example_8_2_recursion_vr.gd",
+    "quote": "THE BRANCHING FACTOR HERE IS ONE. _draw_recursive_pattern makes exactly one recursive call, so the population at every level is a single square and a \"generation\" is a term, not a set."
+   }
+  ],
+  "inverted_tree_cloud": [
+   {
+    "chapter": "fractals",
+    "pearl": "fractal recursivetrees",
+    "map": "Fractal_RecursiveTrees",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/fractals/recursive_tree/inverted_tree_cloud.gd",
+    "said": "Same grammar, different individuals — that argument depends on draws nobody can repeat, and the tree ships random_seed = 42, so every placement grows the identical trunk and uniqueness is demonstrated by one tree shown twice.",
+    "file": "algorithms/fractals/recursive_tree/inverted_tree_cloud.gd",
+    "quote": "@export var random_seed: int = 42"
+   }
+  ],
+  "example_8_4_cantor_set_vr": [
+   {
+    "chapter": "fractals",
+    "pearl": "fractal cantorset",
+    "map": "Fractal_CantorSet",
+    "li": 1,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/fractals/example_8_4_cantor_set_vr.gd",
+    "said": "Uncountably many points depend on removal without end, and the drawing stops where a segment falls under a centimetre — 0.8/3⁴ = 0.0099, three removals, four rows — while the label above it still reads Depth: 6.",
+    "file": "algorithms/fractals/example_8_4_cantor_set_vr.gd",
+    "quote": "max_depth = 6 has never been reached: the recursion also stops when a segment falls under MIN_SEGMENT_WIDTH, and 0.8 / 3^4 = 0.0099 is under 0.01, so every placement since this file was written has drawn FOUR rows"
+   }
+  ],
+  "box_counting_dimension": [
+   {
+    "chapter": "fractals",
+    "pearl": "fractal kochsierpinski",
+    "map": "Fractal_KochSierpinski",
+    "li": 1,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/fractals/box_counting_dimension/box_counting_dimension.gd",
+    "said": "Dimension between integers depends on how a shape fills space at every scale; the instrument owns six — grids of 2 to 64 over 8,000 sampled points, shown one at a time — so the room holds the answer, never the ladder.",
+    "file": "algorithms/fractals/box_counting_dimension/box_counting_dimension.gd",
+    "quote": "the shipped build shows ONE RUNG AT A TIME, on a two-second timer. So the still frame a room ever actually holds is a single grid over a cloud plus an answer — the procedure asserted rather than performed."
+   }
+  ],
+  "diffusion_limited_aggregation": [
+   {
+    "chapter": "fractals",
+    "pearl": "fractal mengersponge",
+    "map": "Fractal_MengerSponge",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "NEAR",
+    "why": "algorithms/fractals/mengersponge/menger_sponge.gd — the words are there, the wording moved",
+    "said": "Zero volume depends on iterating without end, and the 20 that makes the sponge 2.727-dimensional is the same 20 that prices the next tick — 20, 400, 8,000 bodies, then 160,000 — so D = log(20)/log(3) is also the invoice.",
+    "file": "algorithms/fractals/mengersponge/menger_sponge.gd",
+    "quote": "each Menger tick multiplies the cube count by 20, so once/coarse/fine are 20/400/8000 bodies and a fourth rung would be 160,000 ... D = log(20)/log(3) is exactly why this ladder stops early"
+   }
+  ],
+  "fibonacci_sequences": [
+   {
+    "chapter": "fractals",
+    "pearl": "fractal goldenspiral",
+    "map": "Fractal_GoldenSpiral",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Fractal_GoldenSpiral/intent.md",
+    "said": "Phyllotaxis depends on phi resisting every rational approximation, and the float holding it is a rational — so the seed head that must never repeat is laid out from a number that already does.",
+    "file": "commons/maps/Fractal_GoldenSpiral/intent.md",
+    "quote": "The golden ratio is the most irrational number — its continued fraction is all 1s, making it the slowest to converge and the hardest to approximate by rationals."
+   }
+  ],
+  "lyapunov_fractal": [
+   {
+    "chapter": "fractals",
+    "pearl": "fractal juliaset",
+    "map": "Fractal_JuliaSet",
+    "li": 1,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/artifacts/lyapunov_fractal/lyapunov_fractal.gd",
+    "said": "A boundary is where the orbit neither settles nor escapes, and this floor decides in 200 iterations after 50 of warmup — so its black calligraphy is not a curve but the pixels the cutoff could not resolve.",
+    "file": "commons/artifacts/lyapunov_fractal/lyapunov_fractal.gd",
+    "quote": "Stable (λ<0) = blue, chaotic (λ>0) = yellow/red, boundary (λ≈0) = black."
+   }
+  ],
+  "mandelbrot_dive": [
+   {
+    "chapter": "fractals",
+    "pearl": "fractal mandelbrotset",
+    "map": "Fractal_MandelbrotSet",
+    "li": 1,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/artifacts/mandelbrot_dive/mandelbrot_dive.gd",
+    "said": "Never ending depends on a zoom with no floor, and the header promises copies of yourself at 10^15 while the slider stops at 10^6 with escape decided inside 500 iterations — the infinite regress ends in a constant.",
+    "file": "commons/artifacts/mandelbrot_dive/mandelbrot_dive.gd",
+    "quote": "critical_parameter: Zoom depth. At 10x you see the cardioid. At 10000x you see seahorses. At 10^15 you see copies of yourself."
+   }
+  ],
+  "fractal_clouds": [
+   {
+    "chapter": "fractals",
+    "pearl": "fractal synthesis",
+    "map": "Fractal_Synthesis",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/fractals/fractal_clouds/fractal_clouds.gd",
+    "said": "A cloud is only a cutoff, and this cutoff is asked 32 times per axis across twenty metres — one question every 0.625 m, five octaves — so the gallery of all scales owns the five it can afford.",
+    "file": "algorithms/fractals/fractal_clouds/fractal_clouds.gd",
+    "quote": "A cloud is not a thing — it is a threshold. The same noise field with different cutoff is sky, cloud, or fog. Only the cutoff decides."
+   }
+  ],
+  "space_filling_curve_gallery": [
+   {
+    "chapter": "fractals",
+    "pearl": "fractal crosssequence",
+    "map": "Fractal_CrossSequence",
+    "li": 2,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/artifacts/space_filling_curve_gallery/space_filling_curve_gallery.gd",
+    "said": "Filling every point without crossing depends on the drawing still reading as a line, and one rung past standard the 3-pixel stroke closes its own gaps into a solid block — the curve disappears exactly when it succeeds.",
+    "file": "commons/artifacts/space_filling_curve_gallery/space_filling_curve_gallery.gd",
+    "quote": "At `fine` the cells get small enough that a 3px stroke closes the gaps and the curve reads as a filled block, so it thins to 1."
+   }
+  ],
+  "graphspace": [
+   {
+    "chapter": "graphtheory",
+    "pearl": "gt foundations",
+    "map": "GT_Foundations",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/GT_Foundations/critical.md",
+    "said": "a graph cannot supply its own abstraction — someone must rule first that the stone, the toll and the river are not part of a crossing; Euler's impossibility is exact only because everything that made the walk hard was already thrown away.",
+    "file": "commons/maps/GT_Foundations/critical.md",
+    "quote": "The graph is what remains when you subtract the world."
+   }
+  ],
+  "force_directed_layout": [
+   {
+    "chapter": "graphtheory",
+    "pearl": "gt layout",
+    "map": "GT_Layout",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/GT_Layout/critical.md",
+    "said": "a graph has no coordinates, so it must borrow a body — Coulomb's repulsion, Hooke's springs — from a physics that has never heard of the relation it is drawing; change the seed and the centre moves.",
+    "file": "commons/maps/GT_Layout/critical.md",
+    "quote": "the layout is not a property of the graph; it is a property of the algorithm's trajectory through configuration space"
+   }
+  ],
+  "pathfinding3d": [
+   {
+    "chapter": "graphtheory",
+    "pearl": "gt pathfinding",
+    "map": "GT_Pathfinding",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/graphtheory/pathfinding3d/pathfinding3d.gd",
+    "said": "A* beats exhaustive search only because someone hands it a distance the graph does not contain — h(n) is imported from the embedding, and when the embedding lies the confident path is the wrong one.",
+    "file": "algorithms/graphtheory/pathfinding3d/pathfinding3d.gd",
+    "quote": "the heuristic is the algorithm's guess about geometry"
+   }
+  ],
+  "rhizomatic_structure": [
+   {
+    "chapter": "graphtheory",
+    "pearl": "gt network analysis",
+    "map": "GT_Network_Analysis",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/alternativegeometries/rhizomaticstructure/rhizomatic_structure.gd",
+    "said": "the rhizome that refuses every root must still be grown from one — each node buds from a random parent, and lateral edges only hide the tree afterwards; at connection_probability 0 the anti-hierarchy is a hierarchy.",
+    "file": "algorithms/alternativegeometries/rhizomaticstructure/rhizomatic_structure.gd",
+    "quote": "at 0 the structure is a tree (hierarchical), at 1.0 every nearby node reconnects (rhizomatic)"
+   }
+  ],
+  "topological_sort": [
+   {
+    "chapter": "graphtheory",
+    "pearl": "gt connectivity",
+    "map": "GT_Connectivity",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/GT_Connectivity/critical.md",
+    "said": "an order exists only where nothing loops back — the cycles must be contracted to points before the sort can run, so a sequence costs every mutual reachability inside it, and the snarl that will not condense stands aside, unsorted.",
+    "file": "commons/maps/GT_Connectivity/critical.md",
+    "quote": "The condensation takes a graph with rich internal circulation and reduces it to a pipeline."
+   }
+  ],
+  "mst_visualization": [
+   {
+    "chapter": "graphtheory",
+    "pearl": "gt spanning trees",
+    "map": "GT_Spanning_Trees",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/GT_Spanning_Trees/critical.md",
+    "said": "minimum needs a number the graph never had: weight comes from outside, and a different cost function grows a different tree from the same nodes — the cycles it rejects were the only alternative route anything had.",
+    "file": "commons/maps/GT_Spanning_Trees/critical.md",
+    "quote": "The spanning tree does not reveal the graph's essential structure; it reveals the structure that a particular cost function privileges."
+   }
+  ],
+  "push_relabel_algorithm": [
+   {
+    "chapter": "graphtheory",
+    "pearl": "gt flow",
+    "map": "GT_Flow",
+    "li": 1,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/graphtheory/push_relabel/push_relabel.gd",
+    "said": "flow only runs downhill and a graph has no down — push-relabel must invent an altitude, seeding the source at |V| and raising any node that gets stuck, so the gradient carrying everything is a bookkeeping number.",
+    "file": "algorithms/graphtheory/push_relabel/push_relabel.gd",
+    "quote": "Push-relabel is named for a height function. Flow moves because one node is above another."
+   }
+  ],
+  "edmonds_algorithm": [
+   {
+    "chapter": "graphtheory",
+    "pearl": "gt matching",
+    "map": "GT_Matching",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/GT_Matching/critical.md",
+    "said": "an odd cycle cannot pair itself — match any two and a third is stranded, so the blossom's completion must come from outside it; the greedy pass shipped here never looks outside, and calls its leftovers structural.",
+    "file": "commons/maps/GT_Matching/critical.md",
+    "quote": "The blossom is the structure that says: this group cannot pair itself. It needs something from outside."
+   }
+  ],
+  "voxel_noise_demo": [
+   {
+    "chapter": "isosurfaces",
+    "pearl": "iso introduction",
+    "map": "ISO_Introduction",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/spacetopology/marchingcubes/VoxelNoiseMarchingCubes.gd",
+    "said": "The field it shows before any surface is a 32-cubed lattice sampled about a metre apart, and its cutoff of 0.5 is reachable from no map token: the room that opens the movable line has fixed it.",
+    "file": "algorithms/spacetopology/marchingcubes/VoxelNoiseMarchingCubes.gd",
+    "quote": "a token naming noise_scale or iso_level still changes nothing"
+   }
+  ],
+  "mc_cave": [
+   {
+    "chapter": "isosurfaces",
+    "pearl": "iso lookuptable",
+    "map": "ISO_LookupTable",
+    "li": 1,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGenerator.gd",
+    "said": "The table exhausts every corner configuration and nothing else: the cave beside it runs six octaves of ridged noise into a lattice sampling at 4.69 m, so four of those scales never reach a triangle.",
+    "file": "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGenerator.gd",
+    "quote": "octaves — HOW MANY SCALES OF ROCK SURVIVE THE LATTICE. The ridged loop runs a fixed six times."
+   }
+  ],
+  "mc_torus_sculpture": [
+   {
+    "chapter": "isosurfaces",
+    "pearl": "iso shapesgallery",
+    "map": "ISO_ShapesGallery",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorTorus.gd",
+    "said": "The hole topology calls the torus's invariant is nowhere in the field: it is an offset on the number you compare against, and moving that number by 35 closes genus one to genus zero, no term touched.",
+    "file": "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorTorus.gd",
+    "quote": "GENUS 1 BECOMES GENUS 0 over most of the ring, with no change to a single term of the field."
+   }
+  ],
+  "GyroidDemo": [
+   {
+    "chapter": "isosurfaces",
+    "pearl": "iso torusgyroid",
+    "map": "ISO_TorusGyroid",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorGyroid.gd",
+    "said": "A minimal surface has no thickness and cannot be seen, so this one is given a body made of noise — a threshold varying through space — and what ships is 2,859 separate solids with no period readable.",
+    "file": "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorGyroid.gd",
+    "quote": "2,859 separate bodies, no period readable anywhere in the box."
+   }
+  ],
+  "fountain_demo": [
+   {
+    "chapter": "isosurfaces",
+    "pearl": "iso sculpting",
+    "map": "ISO_Sculpting",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/ISO_Sculpting/walked.md",
+    "said": "Water needs something that travels; the fountain has nothing that moves — its surface is re-extracted every frame, so what reads as falling water is a run of unrelated solids, motion borrowed from recomputation.",
+    "file": "commons/maps/ISO_Sculpting/walked.md",
+    "quote": "geometry flowing like water because it *is* recomputation, not motion; nothing travels, everything is re-decided"
+   }
+  ],
+  "mc_flat_landscape": [
+   {
+    "chapter": "isosurfaces",
+    "pearl": "iso flatterrain",
+    "map": "ISO_FlatTerrain",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorFlat.gd",
+    "said": "The turn from graph to level set costs one literal, and the shipped 0.4 spends it thinly: fifty of 4,225 columns have an inside, so the heightmap era ends across 1.18% of the floor.",
+    "file": "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorFlat.gd",
+    "quote": "The whole difference between a plot and a level set is that one literal."
+   }
+  ],
+  "marchingcubes_portal_landscape": [
+   {
+    "chapter": "isosurfaces",
+    "pearl": "iso portallandscape",
+    "map": "ISO_PortalLandscape",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/artifacts/registry/procgen_extra.json",
+    "said": "A threshold on noise yields no doorway — an arch must be written in as its own masked term — and this map's one token resolves to the overhang scene: the portal it is named for stands next door.",
+    "file": "commons/artifacts/registry/procgen_extra.json",
+    "quote": "\"scene\": \"res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_overhang_landscape.tscn\""
+   }
+  ],
+  "mc_portal_landscape": [
+   {
+    "chapter": "isosurfaces",
+    "pearl": "iso caves",
+    "map": "ISO_Caves",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorUnifiedPortals.gd",
+    "said": "The room asks who set the iso-value, and its own passages do not answer: the doorway is max(terrainDensity, -portalsDensity), seven torus fields placed by hand — a threshold argument standing on geometry no threshold found.",
+    "file": "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorUnifiedPortals.gd",
+    "quote": "float density = max(terrainDensity, -portalsDensity);"
+   }
+  ],
+  "marchingcave": [
+   {
+    "chapter": "isosurfaces",
+    "pearl": "iso cavegeneration",
+    "map": "ISO_CaveGeneration",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGenerator.gd",
+    "said": "The room insists no designer placed these corridors; its hero sets use_fallback = true, so the shader never loads and what you walk is a hand-written 200-metre sine tunnel.",
+    "file": "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGenerator.gd",
+    "quote": "MarchingCubes.glsl is never loaded, and what renders is _create_simple_cave_mesh()'s hand-written 200 m sine tunnel below."
+   }
+  ],
+  "animated_noise_explorer": [
+   {
+    "chapter": "isosurfaces",
+    "pearl": "iso animatednoise",
+    "map": "ISO_AnimatedNoise",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/AnimatedNoiseExplorer.gd",
+    "said": "Nothing here extracts the moving surface: the explorer only marks which cells straddle the iso-level and fills each with a solid cube, so what breathes on screen is the scaffold marching cubes consumes and discards.",
+    "file": "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/AnimatedNoiseExplorer.gd",
+    "quote": "What it draws is therefore NOT the surface. It is the set of cells in which the field changes its mind"
+   }
+  ],
+  "nakama_metaballs": [
+   {
+    "chapter": "isosurfaces",
+    "pearl": "iso metaballs",
+    "map": "ISO_Metaballs",
+    "li": 2,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/proceduralgeneration/isosurfaces/metaballs/nakama_metaballs.gd",
+    "said": "The map's whole claim is that bodies merge and come apart; its hero displaces a fixed sphere by the field instead of extracting one, so the genus is pinned at zero and nothing in it can ever open.",
+    "file": "algorithms/proceduralgeneration/isosurfaces/metaballs/nakama_metaballs.gd",
+    "quote": "The genus is PINNED AT 0 by the proxy: this surface can never split, never merge and never open a hole, whatever the field does."
+   }
+  ],
+  "implicit_surface_modeling": [
+   {
+    "chapter": "isosurfaces",
+    "pearl": "iso implicitmodeling",
+    "map": "ISO_ImplicitModeling",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "LOST",
+    "why": "algorithms/proceduralgeneration/isosurfaces/implicitsurfacemodeling/metaballs/metaball.gd is not in the repo",
+    "said": "The close is written up as union, intersection and subtraction, but its shader folds nine spheres with smin and nothing else: the room that promises an algebra can perform exactly one of its operators.",
+    "file": "algorithms/proceduralgeneration/isosurfaces/implicitsurfacemodeling/metaballs/metaball.gd",
+    "quote": "dist = smin(dist, sphere_dist, blend_factor);"
+   }
+  ],
+  "lsystem_editor": [
+   {
+    "chapter": "lsystems",
+    "pearl": "grammar lab",
+    "map": "LSystems_Grammar_Lab",
+    "li": 1,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/LSystems_Grammar_Lab/critical.md",
+    "said": "the editor rewrites every rule but never the turtle — F has no meaning any production can supply — and by the depth where the drawing finally reads as a plant, the rule has disappeared inside its own output.",
+    "file": "commons/maps/LSystems_Grammar_Lab/critical.md",
+    "quote": "A different interpreter could read the same string and produce a different geometry."
+   }
+  ],
+  "ContextSensitiveTree": [
+   {
+    "chapter": "lsystems",
+    "pearl": "growth",
+    "map": "LSystems_Growth",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/LSystems_Growth/critical.md",
+    "said": "the grammar has no symbol for the wall: the tree must grow a branch into the obstacle before it can prune it, so the shape that records the corridor is paid for in branches attempted and clipped.",
+    "file": "commons/maps/LSystems_Growth/critical.md",
+    "quote": "You can only clip a branch that the grammar prescribed."
+   }
+  ],
+  "ContextFreeGrammars": [
+   {
+    "chapter": "lsystems",
+    "pearl": "grammars and curves",
+    "map": "LSystems_Grammars_And_Curves",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/LSystems_Grammars_And_Curves/critical.md",
+    "said": "the rule does not fill a given space, it constitutes the grid it visits — so every point exactly once holds only in a limit with no final generation, and the floor can exhibit only the resolution where you stopped.",
+    "file": "commons/maps/LSystems_Grammars_And_Curves/critical.md",
+    "quote": "There is no final generation."
+   }
+  ],
+  "CityGenerator": [
+   {
+    "chapter": "lsystems",
+    "pearl": "architecture",
+    "map": "LSystems_Architecture",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/LSystems_Architecture/critical.md",
+    "said": "the grammar writes streets and nothing else: the blocks, the lots, everything a city is lived in is the space the rules failed to reach — the inhabited part is a remainder no production can name.",
+    "file": "commons/maps/LSystems_Architecture/critical.md",
+    "quote": "The lots are the regions the streets failed to reach."
+   }
+  ],
+  "branching_coral": [
+   {
+    "chapter": "lsystems",
+    "pearl": "competition",
+    "map": "LSystems_Competition",
+    "li": 1,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/LSystems_Competition/critical.md",
+    "said": "scarcity appears in no grammar: light, soil, the coral's shared rock are state the rules never mention, so a losing tree is not a wrong grammar but a silenced one — shaded out by whoever reached the canopy first.",
+    "file": "commons/maps/LSystems_Competition/critical.md",
+    "quote": "The grammar still exists — the rules have not been erased — but they have been functionally silenced."
+   }
+  ],
+  "genetic_tree_sculptor": [
+   {
+    "chapter": "lsystems",
+    "pearl": "living",
+    "map": "LSystems_Living",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/LSystems_Living/critical.md",
+    "said": "the sculptor has eight genes and no fitness function — selection needs a value neither the grammar nor the forest can supply — so the learner's taste is the unstated term, and the world then judges it by light alone.",
+    "file": "commons/maps/LSystems_Living/critical.md",
+    "quote": "The values come from somewhere the code cannot see."
+   }
+  ],
+  "godel_statement_plaque": [
+   {
+    "chapter": "lsystems",
+    "pearl": "assemblage same desire",
+    "map": "Assemblage_Same_Desire",
+    "li": 2,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Assemblage_Same_Desire/walked.md",
+    "said": "that the weaver and the logician want the same thing is a claim about both systems and provable inside neither, so the room carries it as an axis between cloth and proof — an argument only a walking body collects.",
+    "file": "commons/maps/Assemblage_Same_Desire/walked.md",
+    "quote": "The room is arranged so the weave and the proof have to look at each other."
+   }
+  ],
+  "evolved_creatures": [
+   {
+    "chapter": "machinelearning",
+    "pearl": "ml evolution",
+    "map": "ML_Evolution",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/ML_Evolution/critical.md",
+    "said": "selection needs a fitness function and a mutation rate the population cannot itself evolve — the creatures reach every gene except the two set from outside the arena, and can only converge on what was already scored.",
+    "file": "commons/maps/ML_Evolution/critical.md",
+    "quote": "The creatures cannot evolve their own evolvability. The meta-parameter is the one thing the evolutionary system cannot reach, the frame outside the frame."
+   }
+  ],
+  "pca_visualization": [
+   {
+    "chapter": "machinelearning",
+    "pearl": "ml gradient landscape",
+    "map": "ML_Gradient_Landscape",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/ML_Gradient_Landscape/critical.md",
+    "said": "the walkable terrain needs a loss function to shape it, and the map moves only eta: you descend into whichever valley someone else's definition of error dug, and call the bottom understanding.",
+    "file": "commons/maps/ML_Gradient_Landscape/critical.md",
+    "quote": "The slider moves eta. Nothing moves the landscape."
+   }
+  ],
+  "svm_visualization": [
+   {
+    "chapter": "machinelearning",
+    "pearl": "ml classification",
+    "map": "ML_Classification",
+    "li": 1,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/ML_Classification/critical.md",
+    "said": "a boundary needs axes: k-means, svm and the forest each argue about how to draw the line and none of them picks the features — what was never made a coordinate is not misclassified, it is simply absent.",
+    "file": "commons/maps/ML_Classification/critical.md",
+    "quote": "The decision boundary depends entirely on which features are measured, and the choice of features is the act of deciding what matters about a thing before asking what kind of thing it is."
+   }
+  ],
+  "neural_network_visualization": [
+   {
+    "chapter": "machinelearning",
+    "pearl": "ml neural networks",
+    "map": "ML_Neural_Networks",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/ML_Neural_Networks/critical.md",
+    "said": "the corridor shows every weight and every activation and still cannot show the thing that matters: generalisation lives in the gap between training error and test error, which is statistical, not spatial, and no chamber holds it.",
+    "file": "commons/maps/ML_Neural_Networks/critical.md",
+    "quote": "The map cannot show you this corridor because it is not spatial but statistical — it lives in the gap between training error and test error"
+   }
+  ],
+  "computer_vision_vr": [
+   {
+    "chapter": "machinelearning",
+    "pearl": "ml perception",
+    "map": "ML_Perception",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/ML_Perception/critical.md",
+    "said": "perception needs a standpoint it cannot itself supply: the gallery seats you outside the alcoves as though seeing were something to watch, and the empty third alcove is where the machine's own chosen gaze should hang.",
+    "file": "commons/maps/ML_Perception/critical.md",
+    "quote": "perception is the one thing you cannot observe from a distance, because observation is already perception"
+   }
+  ],
+  "transformers_vr": [
+   {
+    "chapter": "machinelearning",
+    "pearl": "ml sequence memory",
+    "map": "ML_Sequence_Memory",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/ML_Sequence_Memory/critical.md",
+    "said": "attention needs the whole sequence at once and a body cannot have it: you walk the corridor one cell at a time, so the map teaches recurrence with your feet while the artifact inside abolishes it.",
+    "file": "commons/maps/ML_Sequence_Memory/critical.md",
+    "quote": "The map's body-logic is recurrent even when its content is attentional."
+   }
+  ],
+  "generative_adversarial_networks_gans_vr": [
+   {
+    "chapter": "machinelearning",
+    "pearl": "ml generative",
+    "map": "ML_Generative",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/ML_Generative/critical.md",
+    "said": "the generator never sees the world: everything it learns about real arrives through one doorway as the discriminator's gradient, and the discriminator only ever saw a dataset someone collected — so the room dreams what it was shown.",
+    "file": "commons/maps/ML_Generative/critical.md",
+    "quote": "The system that learns to produce reality has no access to reality."
+   }
+  ],
+  "anomaly_detection": [
+   {
+    "chapter": "machinelearning",
+    "pearl": "ml synthesis",
+    "map": "ML_Synthesis",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/ML_Synthesis/critical.md",
+    "said": "synthesis needs bridges its parts cannot supply: three islands over h0 void, the anomaly detector exiled furthest out, and the walkways hold only because someone built them — connection or rationalisation, the teleporter does not say.",
+    "file": "commons/maps/ML_Synthesis/critical.md",
+    "quote": "The synthesis of machine learning rests on nothing. It floats because the walkways hold, and the walkways hold because someone built them"
+   }
+  ],
+  "WhiteNoiseGallery": [
+   {
+    "chapter": "noise",
+    "pearl": "random noise types",
+    "map": "Random_Noise_Types",
+    "li": 2,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Random_Noise_Types/critical.md",
+    "said": "white noise cannot certify its own randomness — it needs an eye to rule the clumps accidental, and that eye prefers blue noise, which is less random by every measure the field itself can compute.",
+    "file": "commons/maps/Random_Noise_Types/critical.md",
+    "quote": "White noise is mathematically ideal but perceptually patterned. Blue noise is mathematically constrained but perceptually pure."
+   }
+  ],
+  "MeltingBerniniScene": [
+   {
+    "chapter": "noise",
+    "pearl": "columns",
+    "map": "Noise_Columns",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Noise_Columns/critical.md",
+    "said": "noise has no form of its own, only one to displace: the melt borrows the monument's claim to permanence to be legible at all — take the column away and the same field deforms nothing anyone would notice.",
+    "file": "commons/maps/Noise_Columns/critical.md",
+    "quote": "Classical columns are monuments. They claim permanence and stability."
+   }
+  ],
+  "noisetorus": [
+   {
+    "chapter": "noise",
+    "pearl": "point",
+    "map": "Noise_One",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Noise_One/critical.md",
+    "said": "one call to get_noise_2d has nowhere to put a neighbour, so no evaluation carries the continuity the chapter is named for — the ring has to be dipped in and dragged across the field for coherence to appear at all.",
+    "file": "commons/maps/Noise_One/critical.md",
+    "quote": "There is nowhere to put a neighbor list, a field state, or an environmental variable."
+   }
+  ],
+  "perlin_terrain_sculptor": [
+   {
+    "chapter": "noise",
+    "pearl": "voxel",
+    "map": "Noise_Voxel",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/artifacts/perlin_terrain_sculptor/perlin_terrain_sculptor.gd",
+    "said": "a continuous field cannot say where stone stops: the world needs a threshold imported from outside the mathematics, and everything habitable in this one is squeezed into the band between -0.3 and 0.3.",
+    "file": "commons/artifacts/perlin_terrain_sculptor/perlin_terrain_sculptor.gd",
+    "quote": "interesting terrain lives between -0.3 and 0.3"
+   }
+  ],
+  "shader_noise_space": [
+   {
+    "chapter": "noise",
+    "pearl": "6 wall",
+    "map": "Noise_6_Wall",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Noise_6_Wall/critical.md",
+    "said": "the wall owns nothing it shows: every frame the six octaves are recomputed from scratch, so the texture is a lease on parallel hardware rather than an asset — stop paying and the wall is not dim, it is absent.",
+    "file": "commons/maps/Noise_6_Wall/critical.md",
+    "quote": "The wall redraws itself at every frame from scratch; there is no baked texture, no precomputed asset."
+   }
+  ],
+  "noisesphere": [
+   {
+    "chapter": "noise",
+    "pearl": "inside noise",
+    "map": "Noise_Inside_Noise",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Noise_Inside_Noise/critical.md",
+    "said": "warping spends the coordinate system it borrows: the base field is read at displaced addresses, so no point on the slab can say where it came from — the two source fields shown beside it do not add back up.",
+    "file": "commons/maps/Noise_Inside_Noise/critical.md",
+    "quote": "running the base noise on an undistorted grid and the warp noise on its own grid does not add up to the warped slab"
+   }
+  ],
+  "noise_space": [
+   {
+    "chapter": "noise",
+    "pearl": "space 10",
+    "map": "Noise_Space_10",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Noise_Space_10/critical.md",
+    "said": "navigation needs continuity, and the tenth axis has none: nine sliders are gradients you can walk, the seed only teleports — so most of the ten-dimensional space has never been evaluated and the presets are its only addresses.",
+    "file": "commons/maps/Noise_Space_10/critical.md",
+    "quote": "shifting the seed replaces the noise with a different sample of the same distribution"
+   }
+  ],
+  "simplex_noise": [
+   {
+    "chapter": "noise",
+    "pearl": "perlin simplex",
+    "map": "Noise_Perlin_Simplex",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Noise_Perlin_Simplex/critical.md",
+    "said": "coherence needs a lattice to hang gradients on, and the lattice signs everything: Perlin's bias rotates with the grid, not the geometry — simplex does not remove the scaffold, it swaps squares for triangles and pays a different bill.",
+    "file": "commons/maps/Noise_Perlin_Simplex/critical.md",
+    "quote": "the artifacts travel with the grid, not with the geometry"
+   }
+  ],
+  "bias_visualizer": [
+   {
+    "chapter": "postfoundationscrisis",
+    "pearl": "criticalalgorithms algorithmic bias visualization",
+    "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/artifacts/bias_visualizer/bias_visualizer.gd",
+    "said": "there is no corpus behind the cloud — twenty words at hand-typed coordinates, man at -0.4 and woman at +0.4 — so the learned bias is authored, and the room needs you to already know it is real.",
+    "file": "commons/artifacts/bias_visualizer/bias_visualizer.gd",
+    "quote": "\"man\": {\"pos\": Vector3(-0.4, 0.0, 0.0), \"category\": \"gender_m\"}"
+   }
+  ],
+  "room_shape_demonstrator": [
+   {
+    "chapter": "postfoundationscrisis",
+    "pearl": "criticalalgorithms applied ethics",
+    "map": "CriticalAlgorithms_Applied_Ethics",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/postfoundationscrisis/room_shape_demonstrator.gd",
+    "said": "who speaks first is a fact about occupants, and the model has none — so the two plans are ranked for you in advance by colour, red for the head of the table, green for the circle.",
+    "file": "algorithms/postfoundationscrisis/room_shape_demonstrator.gd",
+    "quote": "which makes the moral argument for the viewer before they have looked at anything"
+   }
+  ],
+  "merge_conflict_visualizer": [
+   {
+    "chapter": "postfoundationscrisis",
+    "pearl": "speculativecomputation paraconsistent engineering",
+    "map": "SpeculativeComputation_Paraconsistent_Engineering",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/postfoundationscrisis/merge_conflict_visualizer.gd",
+    "said": "holding both branches costs nothing until something downstream must act — this room has no downstream, so the two posts can stand apart for ever, and the deadline is the load the junction never carries.",
+    "file": "algorithms/postfoundationscrisis/merge_conflict_visualizer.gd",
+    "quote": "a merge conflict is paraconsistency with a deadline"
+   }
+  ],
+  "situated_readout": [
+   {
+    "chapter": "postfoundationscrisis",
+    "pearl": "speculativecomputation situated computation",
+    "map": "SpeculativeComputation_Situated_Computation",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/SpeculativeComputation_Situated_Computation/map_data.json",
+    "said": "the coordinate is supposed to be the classification, but all four panels are pinned by hand with #verdict — the disagreement has to be authored from outside the room, which is the view from nowhere the map denies.",
+    "file": "commons/maps/SpeculativeComputation_Situated_Computation/map_data.json",
+    "quote": "situated_readout:0:0.3#verdict:NW"
+   }
+  ],
+  "wiki_fragment": [
+   {
+    "chapter": "postfoundationscrisis",
+    "pearl": "speculativecomputation collective knowledge",
+    "map": "SpeculativeComputation_Collective_Knowledge",
+    "li": 1,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/SpeculativeComputation_Collective_Knowledge/map_data.json",
+    "said": "a fragment is built to be incomplete and to hand you on — the room places one, NORTH, whose footer cites an EAST panel that was never placed, so the commons ships as a pointer with no peer.",
+    "file": "commons/maps/SpeculativeComputation_Collective_Knowledge/map_data.json",
+    "quote": "wiki_fragment:0:0.3#fragment:NORTH"
+   }
+  ],
+  "rhizome_cave_demo": [
+   {
+    "chapter": "postfoundationscrisis",
+    "pearl": "speculativecomputation rhizome network",
+    "map": "SpeculativeComputation_Rhizome_Network",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/SpeculativeComputation_Rhizome_Network/critical.md",
+    "said": "a cave with no root is grown from parent and children arrays — the anti-hierarchy is produced by a hierarchy, and the marching-cubes surface only hides which node came first.",
+    "file": "commons/maps/SpeculativeComputation_Rhizome_Network/critical.md",
+    "quote": "the language of trees wearing rhizomatic clothing"
+   }
+  ],
+  "MolecularDesigner": [
+   {
+    "chapter": "postfoundationscrisis",
+    "pearl": "advancedlaboratory lab equipment simulation",
+    "map": "AdvancedLaboratory_Lab_Equipment_Simulation",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/computationalbiology/molecular_framework/MolecularDesigner.gd",
+    "said": "the conversation between catalog and constraint reaches exactly twelve endings — VRBody, Chair, Lamp, Shelf — because assemblies.json lists the bonds and positions in advance; the lab supplies the snapping, never the form.",
+    "file": "algorithms/computationalbiology/molecular_framework/MolecularDesigner.gd",
+    "quote": "form is not imposed on matter — it is a conversation between catalog and constraint"
+   }
+  ],
+  "accountability_ledger": [
+   {
+    "chapter": "postfoundationscrisis",
+    "pearl": "postcrisis synthesis",
+    "map": "PostCrisis_Synthesis",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/artifacts/accountability_ledger/accountability_ledger.gd",
+    "said": "the arc closes on a ledger of who you left out that draws from a fixed ten-name array of the left-out — the one exclusion it cannot stamp is the one nobody thought to type.",
+    "file": "commons/artifacts/accountability_ledger/accountability_ledger.gd",
+    "quote": "Stay answerable for what you leave out."
+   }
+  ],
+  "CoordinateSystem3M": [
+   {
+    "chapter": "primitives",
+    "pearl": "point",
+    "map": "Point_One",
+    "li": 6,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Point_One/critical.md",
+    "said": "A point is that which has no part, so it has no place either: it borrows its whole existence from a coordinate system that is not itself a point.",
+    "file": "commons/maps/Point_One/critical.md",
+    "quote": "Euclid's definition: \"A point is that which has no part.\""
+   }
+  ],
+  "klee_walking_point": [
+   {
+    "chapter": "primitives",
+    "pearl": "lines",
+    "map": "Point_Lines",
+    "li": 1,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Point_Lines/critical.md",
+    "said": "A line cannot be drawn without two points it did not make, and the instant it measures them it becomes the instrument that makes space addressable.",
+    "file": "commons/maps/Point_Lines/critical.md",
+    "quote": "The grid transforms space from lived experience into **administrative territory**."
+   }
+  ],
+  "mystic_writing_pad": [
+   {
+    "chapter": "primitives",
+    "pearl": "trace",
+    "map": "Point_Trace",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "ELSEWHERE",
+    "why": "discussed in Point_Trace, where it does not stand — and it is this hall's declared hero",
+    "said": "The trace is everything the line throws away — duration, hesitation, texture — and it is jagged because a resolution is always already there; it has no origin, only a sampling rate.",
+    "file": "commons/maps/Point_Trace/critical.md",
+    "quote": "the **entire lived experience of movement** - is discarded as irrelevant"
+   }
+  ],
+  "player_trace": [
+   {
+    "chapter": "primitives",
+    "pearl": "line grid",
+    "map": "Point_Line_Grid",
+    "li": 1,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Point_Line_Grid/critical.md",
+    "said": "The grid arrives promising neutrality and already owning the ground: every cell is an address, and an address is a claim.",
+    "file": "commons/maps/Point_Line_Grid/critical.md",
+    "quote": "**Cadastre**: From Latin *capitastrum* - a register for the poll tax."
+   }
+  ],
+  "catalyst_pedestal": [
+   {
+    "chapter": "primitives",
+    "pearl": "triangle context",
+    "map": "Point_Triangle_Context",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "ELSEWHERE",
+    "why": "discussed in Point_Triangle_Context, where it does not stand — and it is this hall's declared hero",
+    "said": "The triangle is the smallest figure that cannot be deformed without breaking, so everything is built from it and nothing built from it can bend.",
+    "file": "commons/maps/Point_Triangle_Context/critical.md",
+    "quote": "The triangle's rigidity is not just geometric - it's **political**."
+   }
+  ],
+  "grab_trihedron": [
+   {
+    "chapter": "primitives",
+    "pearl": "polythedra",
+    "map": "Primitives_Polythedra",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Primitives_Polythedra/critical.md",
+    "said": "Five solids and the taxonomy closes; the Platonic set is complete, which is precisely why it cannot hold anything that arrives after it.",
+    "file": "commons/maps/Primitives_Polythedra/critical.md",
+    "quote": "This is geometry without remainder."
+   }
+  ],
+  "animatedcubebuilder": [
+   {
+    "chapter": "primitives",
+    "pearl": "animatedcube",
+    "map": "Point_Animatedcube",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Point_Animatedcube/critical.md",
+    "said": "The cube is the first form that fills space rather than describing it, so it eats the world it was meant to measure — and until it is folded it is only a flat net.",
+    "file": "commons/maps/Point_Animatedcube/critical.md",
+    "quote": "The cube is the first geometry that occupies volume."
+   }
+  ],
+  "catalyst_target": [
+   {
+    "chapter": "primitives",
+    "pearl": "primitives",
+    "map": "Chamber_Primitives",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Chamber_Primitives/intent.md",
+    "said": "The chamber is where the taxonomy stops being looked at and starts looking back, and the boundary between the one who counts and the thing counted is the first primitive to dissolve.",
+    "file": "commons/maps/Chamber_Primitives/intent.md",
+    "quote": "The chamber is where mathematics becomes relationship."
+   }
+  ],
+  "righttriangle": [
+   {
+    "chapter": "primitives",
+    "pearl": "ignorance",
+    "map": "Primitives_Ignorance",
+    "li": 12,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Primitives_Ignorance/critical.md",
+    "said": "The sphere is the question the triangle cannot answer — how many faces — and the answer is a budget, so ignorance here is not missing knowledge but a resolution someone chose.",
+    "file": "commons/maps/Primitives_Ignorance/critical.md",
+    "quote": "'Primitive' here names not a lowest form but a stage of unknowing."
+   }
+  ],
+  "achilles_tortoise": [
+   {
+    "chapter": "primitives",
+    "pearl": "portals",
+    "map": "Primitives_Portals",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Primitives_Portals/critical.md",
+    "said": "The portal is the edge made walkable: you step through it and arrive at another approach, because pi does not finish and neither does the corridor.",
+    "file": "commons/maps/Primitives_Portals/critical.md",
+    "quote": "staging continuity as asymptotic relation rather than arrival"
+   }
+  ],
+  "durer_scene": [
+   {
+    "chapter": "primitives",
+    "pearl": "melencolia",
+    "map": "Primitives_Melencolia",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Primitives_Melencolia/critical.md",
+    "said": "Every instrument is present and the set is finished, and still nothing is answered — melancholia is the correct response to a taxonomy that is complete and insufficient at once.",
+    "file": "commons/maps/Primitives_Melencolia/critical.md",
+    "quote": "**technically complete** and **existentially insufficient**"
+   }
+  ],
+  "GeneticProgramming": [
+   {
+    "chapter": "proceduralgeneration",
+    "pearl": "pg genetic evolution",
+    "map": "PG_Genetic_Evolution",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/PG_Genetic_Evolution/critical.md",
+    "said": "evolution without a designer still needs a fitness function it cannot evolve: the author moves from the geometry to the gradient, and the ninety percent culled each generation vanish without a name.",
+    "file": "commons/maps/PG_Genetic_Evolution/critical.md",
+    "quote": "The author did not leave. The author moved from the geometry to the gradient."
+   }
+  ],
+  "space_colonization_algorithm": [
+   {
+    "chapter": "proceduralgeneration",
+    "pearl": "pg space colonization",
+    "map": "PG_Space_Colonization",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/PG_Space_Colonization/critical.md",
+    "said": "a tree that only knows which direction has light cannot supply the light: the attractor cloud poses the shape from outside and dies on contact, so the branch is a record of what it consumed.",
+    "file": "commons/maps/PG_Space_Colonization/critical.md",
+    "quote": "The tree grows by devouring what drew it forward."
+   }
+  ],
+  "percolationnetwork_ca": [
+   {
+    "chapter": "proceduralgeneration",
+    "pearl": "pg percolation network",
+    "map": "PG_Percolation_Network",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/proceduralgeneration/growth_systems/percolationnetwork_ca/percolationnetwork_ca.gd",
+    "said": "the lattice cannot set its own density: p is a const at 0.4, comfortably past p_c, so the map built to show a system deciding has only ever shown it deciding one way.",
+    "file": "algorithms/proceduralgeneration/growth_systems/percolationnetwork_ca/percolationnetwork_ca.gd",
+    "quote": "every player who ever met this lattice met a lattice that was always going to connect"
+   }
+  ],
+  "branching_growth_algorithm": [
+   {
+    "chapter": "proceduralgeneration",
+    "pearl": "pg branching growth",
+    "map": "PG_Branching_Growth",
+    "li": 1,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/PG_Branching_Growth/critical.md",
+    "said": "the comparison needs rules and noise to be one spectrum, and the map can only build two wings: the tree readable fork by fork, the terrain with no genealogy, the hybrid a missing ontology rather than a missing artifact.",
+    "file": "commons/maps/PG_Branching_Growth/critical.md",
+    "quote": "The hybrid that the intent.md identifies as a gap is not just a missing artifact — it is a missing ontology."
+   }
+  ],
+  "maze_generation": [
+   {
+    "chapter": "proceduralgeneration",
+    "pearl": "pg caves mazes",
+    "map": "PG_Caves_Mazes",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/PG_Caves_Mazes/critical.md",
+    "said": "the contrast needs a dividing wall neither algorithm carved — the one frankly authored thing in the room — and from inside either side the difference it exists to show is gone: the body cannot tell rule from accident.",
+    "file": "commons/maps/PG_Caves_Mazes/critical.md",
+    "quote": "the dividing wall is pure intention: a curatorial gesture that organizes two algorithms into an exhibit"
+   }
+  ],
+  "layered_membrane": [
+   {
+    "chapter": "proceduralgeneration",
+    "pearl": "pg sculpted forms",
+    "map": "PG_Sculpted_Forms",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/PG_Sculpted_Forms/critical.md",
+    "said": "accumulation gives the shape and cannot give the milieu: the mound is no landform, the dome a surface and not a shelter, the membrane's fifty shells have never borne load — architecture with the architecture removed.",
+    "file": "commons/maps/PG_Sculpted_Forms/critical.md",
+    "quote": "architecture with the architecture removed — geometry that resembles built form but has never borne load, shed rain, or sheltered a body"
+   }
+  ],
+  "mirror_cellular_texture_for_3d": [
+   {
+    "chapter": "proceduralgeneration",
+    "pearl": "pg mirrored patterns",
+    "map": "PG_Mirrored_Patterns",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/proceduralgeneration/growth_systems/mirroredcellularautomata/mirror_cellular_texture_for_3d.gd",
+    "said": "the mandala needs a stencil it did not compute: twenty-five cells drawn and tiled four hundred times, so each reflection axis subtracts entropy and the intricacy is borrowed from the viewer, not earned by the rule.",
+    "file": "algorithms/proceduralgeneration/growth_systems/mirroredcellularautomata/mirror_cellular_texture_for_3d.gd",
+    "quote": "A stencil is cut, and the rest is repetition."
+   }
+  ],
+  "tt": [
+   {
+    "chapter": "qfeplaboratory",
+    "pearl": "qfep introduction",
+    "map": "QFEP_Introduction",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/context/clipboard/codeDisplay.gd",
+    "said": "nothing in this room is its own: the placard holds the placement and a library holds the words, and the formula reads as recognition only for a body that already walked the sequences it claims to unify",
+    "file": "commons/context/clipboard/codeDisplay.gd",
+    "quote": "The library holds the words, the placard holds the placement"
+   }
+  ],
+  "snap_cube_puzzle": [
+   {
+    "chapter": "qfeplaboratory",
+    "pearl": "qfep f term",
+    "map": "QFEP_F_Term",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/primitives/snappoint/puzzles/snap_octahedron_puzzle.gd",
+    "said": "the puzzle needs the cube it is the dual of, and the cube is never drawn: the `dual` axis ships off and this map never sets it, so order's founding relation is asserted rather than shown",
+    "file": "commons/primitives/snappoint/puzzles/snap_octahedron_puzzle.gd",
+    "quote": "the cube this thing is the dual OF, visible rather than asserted"
+   }
+  ],
+  "microstate_counter": [
+   {
+    "chapter": "qfeplaboratory",
+    "pearl": "qfep e term",
+    "map": "QFEP_E_Term",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/artifacts/microstate_counter/microstate_counter.gd",
+    "said": "S = k log W needs a box before a number: W is cells^N with the cells chosen by hand, and unsealing the jar makes the ledger print nothing — the seal is what made the count mean anything",
+    "file": "commons/artifacts/microstate_counter/microstate_counter.gd",
+    "quote": "the seal is what made the count mean anything"
+   }
+  ],
+  "bifurcation_walkway": [
+   {
+    "chapter": "qfeplaboratory",
+    "pearl": "qfep lambda spectrum",
+    "map": "QFEP_Lambda_Spectrum",
+    "li": 2,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/interfaces/qfep/bifurcation_walkway.gd",
+    "said": "your position is the parameter, so r 2.5 to 4.0 is twelve metres and lambda's resolution is your stride — and the cascade hangs at head height, so the body reading the diagram walks through and displaces it",
+    "file": "commons/interfaces/qfep/bifurcation_walkway.gd",
+    "quote": "the cloud hangs in the air at your own head height, so you walk through it and displace it"
+   }
+  ],
+  "rigid_sculpture": [
+   {
+    "chapter": "qfeplaboratory",
+    "pearl": "qfep phi term",
+    "map": "QFEP_Phi_Term",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/interfaces/qfep/rigid_sculpture.gd",
+    "said": "phi weights a rate and the monument has no clock: rigid_sculpture ships with no _process at all, so negative phi is argued by deleting time — and resistance becomes indistinguishable from being dead",
+    "file": "commons/interfaces/qfep/rigid_sculpture.gd",
+    "quote": "it is not a parameter: there is no _process to turn off"
+   }
+  ],
+  "edge_of_chaos_unlocked": [
+   {
+    "chapter": "qfeplaboratory",
+    "pearl": "qfep edge of chaos",
+    "map": "QFEP_Edge_Of_Chaos",
+    "li": 3,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.gd",
+    "said": "the argument is made by withholding — lambda locked at 0.4 so criticality arrives as a condition, not a choice — and the unlocked companion stands in the same room, which makes the withholding a stage direction",
+    "file": "commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.gd",
+    "quote": "the map withholds what this artifact gives"
+   }
+  ],
+  "reactive_particles": [
+   {
+    "chapter": "qfeplaboratory",
+    "pearl": "qfep sandbox",
+    "map": "QFEP_Sandbox",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/interfaces/qfep/reactive_particle_field.gd",
+    "said": "you get every slider but the one that decides: lambda buys how much order, never what order looks like — a single line of geometry lays the cubic lattice the field falls into, and no control reaches it",
+    "file": "commons/interfaces/qfep/reactive_particle_field.gd",
+    "quote": "λ decides how much order the system buys. It never decides what order LOOKS like"
+   }
+  ],
+  "queer_morphology_specimen": [
+   {
+    "chapter": "qfeplaboratory",
+    "pearl": "qfep synthesis",
+    "map": "QFEP_Synthesis",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.gd",
+    "said": "the form that refuses to be one thing needs the vitrine to read as a specimen at all: jar sealed, lid seated, pedestal under it, shipped at quarter scale — becoming is legible here only as something collected",
+    "file": "commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.gd",
+    "quote": "the jar is the claim the artifact exists to argue against"
+   }
+  ],
+  "entropy_axiom": [
+   {
+    "chapter": "randomness",
+    "pearl": "random definition",
+    "map": "Random_Definition",
+    "li": 2,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/randomness/entropy_axiom/entropy_axiom.gd",
+    "said": "Freedom from the lattice needs the lattice: every point in the corridor keeps its anchor so the drift can be read against something, and max_randomness caps how far the wilderness is permitted to go.",
+    "file": "algorithms/randomness/entropy_axiom/entropy_axiom.gd",
+    "quote": "critical_parameter: max_randomness — how far points can drift from their lattice anchor at the chaos end"
+   }
+  ],
+  "hardware_entropy_decay": [
+   {
+    "chapter": "randomness",
+    "pearl": "random entropy",
+    "map": "Random_Entropy",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Random_Entropy/blurb.md",
+    "said": "Shannon's count reads outputs, never sources — so the harvested and the seeded weigh the same on the meter, and the only entropy this room can prove is the one it takes off the visitor's own hands.",
+    "file": "commons/maps/Random_Entropy/blurb.md",
+    "quote": "true and pseudo, side by side, and the meter cannot always tell them apart. That inability is the lesson."
+   }
+  ],
+  "remove_random": [
+   {
+    "chapter": "randomness",
+    "pearl": "random remove",
+    "map": "Random_Remove",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/artifacts/registry/randomness.json",
+    "said": "The eraser has no body of its own: it hunts its parent's grid and rewrites it, so someone must first stack a full lattice for it to take from — and nothing in the map can put a cell back.",
+    "file": "commons/artifacts/registry/randomness.json",
+    "quote": "this artifact IS an operation on the host map grid, not an object"
+   }
+  ],
+  "ten_print_maze_3d": [
+   {
+    "chapter": "randomness",
+    "pearl": "10 print algorithm",
+    "map": "Randomness_10_PRINT_Algorithm",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/randomness/generative/tenprintantmaze/ten_print_maze.gd",
+    "said": "One random bit per cell decides nothing about mazes: the corridors come from two C64 glyphs whose diagonals happen to meet at the cell corners, so the program borrows its structure from a character ROM and from the eye.",
+    "file": "algorithms/randomness/generative/tenprintantmaze/ten_print_maze.gd",
+    "quote": "the maze was never in the program. It is in the eye that refuses to see a grid of unrelated marks."
+   }
+  ],
+  "random_object_spawner": [
+   {
+    "chapter": "randomness",
+    "pearl": "random cubes",
+    "map": "Random_Cubes",
+    "li": 1,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/randomness/random_object_spawner.gd",
+    "said": "Nothing is placed at random: every cube enters at one fixed spigot and the scatter you read as chance was made by collision — the spawner rents its randomness from the physics solver, and pays each arrival with a death.",
+    "file": "algorithms/randomness/random_object_spawner.gd",
+    "quote": "every cube in the artifact's life enters the world at exactly `spawn_position`, one fixed spigot, and whatever spread you see afterwards was made by collision, not by the spawner"
+   }
+  ],
+  "RotateGridCubes": [
+   {
+    "chapter": "randomness",
+    "pearl": "random rotate random xyz",
+    "map": "Random_Rotate_Random_XYZ",
+    "li": 2,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Random_Rotate_Random_XYZ/critical.md",
+    "said": "There is no random orientation, only numbers poured into a chosen decomposition: X then Y then Z, in an order somebody picked — and the tilts sweeping this grid are a written score no frame can distinguish from a draw.",
+    "file": "commons/maps/Random_Rotate_Random_XYZ/critical.md",
+    "quote": "To decompose rotation into Euler angles (rotation around X, then Y, then Z) imposes this historical grid onto the object."
+   }
+  ],
+  "random_walk_terrarium": [
+   {
+    "chapter": "randomness",
+    "pearl": "random walk",
+    "map": "Random_Walk",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/artifacts/random_walk_terrarium/random_walk_terrarium.gd",
+    "said": "A walk with no destination cannot be exhibited: the terrarium's glass is what keeps it in frame, and every reflection off that wall bends the sqrt(N) spreading the box was built to show.",
+    "file": "commons/artifacts/random_walk_terrarium/random_walk_terrarium.gd",
+    "quote": "boundary reflection keeps walkers contained"
+   }
+  ],
+  "distribution_comparator": [
+   {
+    "chapter": "randomness",
+    "pearl": "random gaussian",
+    "map": "Random_Gaussian",
+    "li": 5,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Random_Gaussian/critical.md",
+    "said": "The bell is not in the source but in the rule laid over it, and the rule holds only where draws are independent with finite variance — conditions the generator feeding these three columns can never be caught breaking.",
+    "file": "commons/maps/Random_Gaussian/critical.md",
+    "quote": "The Central Limit Theorem requires independence."
+   }
+  ],
+  "reaction_diffusion_intro": [
+   {
+    "chapter": "randomness",
+    "pearl": "random mushrooms",
+    "map": "Random_Mushrooms",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/randomness/reaction_diffusion_intro/reaction_diffusion_intro.gd",
+    "said": "The spots cost nothing to draw and everything to permit: feed and kill are set by hand into a narrow window, and a step outside it gives not a different pattern but a dead grey field.",
+    "file": "algorithms/randomness/reaction_diffusion_intro/reaction_diffusion_intro.gd",
+    "quote": "feed_rate (f) and kill_rate (k) — tiny changes switch between spots, stripes, coral, and extinction"
+   }
+  ],
+  "env_one": [
+   {
+    "chapter": "randomness",
+    "pearl": "random space geometry",
+    "map": "Random_Space_Geometry",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/randomness/envOne.gd",
+    "said": "A world made entirely of draws — thirty positions, thirty scales, fifteen connections — arrives with none of them on its face, and it stands inside a 12x24 grid nobody rolled: the randomness is furniture in an authored room.",
+    "file": "algorithms/randomness/envOne.gd",
+    "quote": "It shows you the result of all of that and not one thing about it."
+   }
+  ],
+  "pollock_painting_in_3d": [
+   {
+    "chapter": "randomness",
+    "pearl": "examples of randomness",
+    "map": "Randomness_Examples_of_Randomness",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/randomness/proceduralrandomness/movementbased/scenes/pollock2d/pollock_painting_in_3d.gd",
+    "said": "the drips can be regenerated and the posture cannot: what made this a Pollock was a body walking around a canvas on the floor, and the map can lay the canvas down but has to tween a brush across it.",
+    "file": "algorithms/randomness/proceduralrandomness/movementbased/scenes/pollock2d/pollock_painting_in_3d.gd",
+    "quote": "A Pollock painting is not random — it is the trace of a body moving through a random field with intention."
+   }
+  ],
+  "pheromone_terrain": [
+   {
+    "chapter": "randomness",
+    "pearl": "random pheromone",
+    "map": "Random_Pheromone",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Random_Pheromone/critical.md",
+    "said": "Memory without a brain still needs somewhere to be kept, and here it is a decay constant: what the walkers can collectively remember is decided by an evaporation rate none of them set and none of them can change.",
+    "file": "commons/maps/Random_Pheromone/critical.md",
+    "quote": "the evaporation rate is a design choice"
+   }
+  ],
+  "random_space": [
+   {
+    "chapter": "randomness",
+    "pearl": "random space",
+    "map": "Random_Space",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "LOST",
+    "why": "commons/context/walkgrids/random_space.tscn no longer says it",
+    "said": "A floor has to hold still to be stood on: this finale's chaos ships with the animation off and the seed set to 1, so the world randomness built is the same world on every visit, down to the vertex.",
+    "file": "commons/context/walkgrids/random_space.tscn",
+    "quote": "seed_value = 1 ... enable_animation = false"
+   }
+  ],
+  "miura_crawler": [
+   {
+    "chapter": "randomness",
+    "pearl": "random game",
+    "map": "Random_Game",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Random_Game/critical.md",
+    "said": "Play needs a floor it can stop looking at, and this map spends that: tiles are drawn from a distribution and the crawler lies flat in the ground until it folds, so attention never leaves the surface.",
+    "file": "commons/maps/Random_Game/critical.md",
+    "quote": "A solid floor is an infrastructure the learner can trust without attending to it."
+   }
+  ],
+  "jelly_cube": [
+   {
+    "chapter": "softbodies",
+    "pearl": "soft body deformation",
+    "map": "SoftBodies_Soft_Body_Deformation",
+    "li": 1,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/SoftBodies_Soft_Body_Deformation/critical.md",
+    "said": "a spring cannot supply its own rest length — the norm is written in before the first frame, so what the cube calls equilibrium is obedience to a shape it can never inspect.",
+    "file": "commons/maps/SoftBodies_Soft_Body_Deformation/critical.md",
+    "quote": "The cube's rest shape was chosen by a designer."
+   }
+  ],
+  "revolving_joy_ride": [
+   {
+    "chapter": "softbodies",
+    "pearl": "carusell",
+    "map": "SoftBodies_Carusell",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/SoftBodies_Carusell/critical.md",
+    "said": "compliance cannot rotate itself: every hanging body needs a rigid hub and a pin it did not choose, so the shape it finds is an answer to a question the arm asked first.",
+    "file": "commons/maps/SoftBodies_Carusell/critical.md",
+    "quote": "The soft body did not ask to spin."
+   }
+  ],
+  "breathing_room": [
+   {
+    "chapter": "softbodies",
+    "pearl": "obsticals",
+    "map": "SoftBodies_Obsticals",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/SoftBodies_Obsticals/critical.md",
+    "said": "a wall can only breathe against something that does not — the floor, the obstacle, the sine driving it — and the whole cost of every meeting is paid by the side built to yield.",
+    "file": "commons/maps/SoftBodies_Obsticals/critical.md",
+    "quote": "The entire cost of the encounter is borne by the material that gives."
+   }
+  ],
+  "softbody_gallery_part2": [
+   {
+    "chapter": "softbodies",
+    "pearl": "obsticals part2",
+    "map": "SoftBodies_Obsticals_Part2",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/SoftBodies_Obsticals_Part2/critical.md",
+    "said": "the gallery cannot deduce what a soft body will do, only stage it — and these twelve cells are one slice of a rack chosen by an index, so what nobody racked is not merely unseen but unaskable.",
+    "file": "commons/maps/SoftBodies_Obsticals_Part2/critical.md",
+    "quote": "The body is not deducible. It must be encountered."
+   }
+  ],
+  "softstopscene": [
+   {
+    "chapter": "softbodies",
+    "pearl": "cloth physics",
+    "map": "SoftBodies_Cloth_Physics",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/SoftBodies_Cloth_Physics/critical.md",
+    "said": "the cloth cannot choose its own clock: the CFL step shrinks as stiffness rises, so rigidity costs compute — and the four sculptures in the room are four seconds a timer picked, not four shapes.",
+    "file": "commons/maps/SoftBodies_Cloth_Physics/critical.md",
+    "quote": "You cannot negotiate with the CFL condition. You can only obey it."
+   }
+  ],
+  "rounded_softbody_test": [
+   {
+    "chapter": "softbodies",
+    "pearl": "playground of joy",
+    "map": "SoftBodies_Playground_of_Joy",
+    "li": -1,
+    "host": "edge_src",
+    "verdict": "HELD",
+    "why": "commons/maps/SoftBodies_Playground_of_Joy/critical.md",
+    "said": "a room with no instructions teaches nothing on its own — it can only spend intuition five earlier maps deposited, so a body arriving here first finds objects, not a playground.",
+    "file": "commons/maps/SoftBodies_Playground_of_Joy/critical.md",
+    "quote": "The learner arrives with five maps worth of accumulated intuition"
+   }
+  ],
+  "radiolaria": [
+   {
+    "chapter": "softbodies",
+    "pearl": "affect theory visualization",
+    "map": "SoftBodies_Affect_Theory_Visualization",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/SoftBodies_Affect_Theory_Visualization/critical.md",
+    "said": "the skeleton cannot show the softness that made it: the protoplasm has withdrawn and the map hands you only the residue, so the process must be imported or the beauty reads as design.",
+    "file": "commons/maps/SoftBodies_Affect_Theory_Visualization/critical.md",
+    "quote": "It shows the result, not the making."
+   }
+  ],
+  "reaction_diffusion": [
+   {
+    "chapter": "softbodies",
+    "pearl": "proceduralgeneration reaction diffusion systems",
+    "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+    "li": 1,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/ProceduralGeneration_Reaction_Diffusion_Systems/critical.md",
+    "said": "form without former still needs a former for its two numbers: feed and kill are typed in from outside, and the symmetry only breaks because someone seeded noise the chemistry cannot make.",
+    "file": "commons/maps/ProceduralGeneration_Reaction_Diffusion_Systems/critical.md",
+    "quote": "Who sets the parameters?"
+   }
+  ],
+  "entropy_morphogenesis": [
+   {
+    "chapter": "softbodies",
+    "pearl": "topology entropy morphogenesis",
+    "map": "Topology_Entropy_Morphogenesis",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Topology_Entropy_Morphogenesis/critical.md",
+    "said": "the gyroid is continuous and the room is not: marching cubes touches the field only at grid vertices and guesses between them, so every passage finer than the sample spacing was never built and cannot be missed.",
+    "file": "commons/maps/Topology_Entropy_Morphogenesis/critical.md",
+    "quote": "Between sample points, the surface is interpolated, not known."
+   }
+  ],
+  "gallery_marker_soft-body": [
+   {
+    "chapter": "softbodies",
+    "pearl": "softbody sb01 cloth drape corners",
+    "map": "SoftBody_sb01_cloth_drape_corners",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/SoftBody_sb01_cloth_drape_corners/intent.md",
+    "said": "the catenary is not the cloth's — hand the same curve to a chain or a cable and it appears unchanged, so what the room shows belongs to the two pins, and the fabric is interchangeable.",
+    "file": "commons/maps/SoftBody_sb01_cloth_drape_corners/intent.md",
+    "quote": "Material specificity collapses into mathematical universality"
+   }
+  ],
+  "PhysarumColony": [
+   {
+    "chapter": "swarmintelligence",
+    "pearl": "physarumcolony",
+    "map": "SwarmIntelligence_PhysarumColony",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/swarmintelligence/physarum/PhysarumColony.gd",
+    "said": "the brainless network still needs a brain to place the emission centers: the attractor geometry decides every network the colony could possibly grow, so the mold never solves the maze — it answers the question the anchors asked.",
+    "file": "algorithms/swarmintelligence/physarum/PhysarumColony.gd",
+    "quote": "critical_parameter: emission_centers layout — the attractor geometry determines every possible network the colony can grow"
+   }
+  ],
+  "FlowFieldMain": [
+   {
+    "chapter": "swarmintelligence",
+    "pearl": "flowfields",
+    "map": "SwarmIntelligence_FlowFields",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/pathfinding/flow_field/FlowFieldMain.gd",
+    "said": "the whole decision is a lookup — one arrow at one grid cell — so purpose sits wherever the drawing puts it: arrows shown, a diagram of a cause; arrows hidden, the same agents look like they want something.",
+    "file": "algorithms/pathfinding/flow_field/FlowFieldMain.gd",
+    "quote": "With arrows the piece is a diagram of a cause; with them hidden the agents look like they want something. Same simulation, opposite claim about where purpose lives."
+   }
+  ],
+  "boid_flocking": [
+   {
+    "chapter": "swarmintelligence",
+    "pearl": "boids algorithm",
+    "map": "SwarmIntelligence_Boids_Algorithm",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/artifacts/boids_aquarium/boids_aquarium.gd",
+    "said": "three rules make the school and a fourth holds it — the glass: separation, alignment and cohesion bound no volume, so the tank is the only truly external rule and the flock you can watch is a captivity effect.",
+    "file": "commons/artifacts/boids_aquarium/boids_aquarium.gd",
+    "quote": "the boundary of the tank is the only rule that is truly external — every other behavior is the boids talking to each other"
+   }
+  ],
+  "ant_colony_optimization": [
+   {
+    "chapter": "swarmintelligence",
+    "pearl": "agent based modeling abm",
+    "map": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/SwarmIntelligence_Agent_Based_Modeling_ABM/critical.md",
+    "said": "the crowd surprises only because each agent was made legible first — exploring, gathering, fleeing, returning — since a match on agent state cannot branch unless a life compresses to a label, so the whole's opacity is bought with the part's.",
+    "file": "commons/maps/SwarmIntelligence_Agent_Based_Modeling_ABM/critical.md",
+    "quote": "The `match agent[\"state\"]` block requires that the agent's condition be compressible into a label."
+   }
+  ],
+  "AntColonyV2": [
+   {
+    "chapter": "swarmintelligence",
+    "pearl": "ant colony optimization",
+    "map": "SwarmIntelligence_Ant_Colony_Optimization",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/swarmintelligence/ants_v2/AntColonyV2.gd",
+    "said": "the colony writes its own map but cannot choose the paper: the emission centers stand before the first ant walks, so every trail it finds is an answer to a geometry no traveler set.",
+    "file": "algorithms/swarmintelligence/ants_v2/AntColonyV2.gd",
+    "quote": "The colony writes its own map. What it CANNOT choose is the shape of the problem: where the fixed points are."
+   }
+  ],
+  "self_organizing_patterns": [
+   {
+    "chapter": "swarmintelligence",
+    "pearl": "particle swarm optimization",
+    "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/critical.md",
+    "said": "self-organised order still descends a valley someone built: the fitness function was picked by a programmer who knew the minimum before the first particle moved — the swarm is scored against an answer it cannot question.",
+    "file": "commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/critical.md",
+    "quote": "But the valley was constructed. The fitness function was chosen — Rastrigin, Ackley, Rosenbrock — by a programmer who knew the answer before the particles started searching."
+   }
+  ],
+  "ecosystem_simulation": [
+   {
+    "chapter": "swarmintelligence",
+    "pearl": "swarm intelligence algorithms",
+    "map": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/emergentsystems/ecosystemsimulation/ecosystem.gd",
+    "said": "the gallery of leaderless systems closes on one with a referee — balance_ecosystem respawns prey under ten and weakens predators at two-to-one — so take the hidden stabiliser out and the closed box collapses in minutes.",
+    "file": "algorithms/emergentsystems/ecosystemsimulation/ecosystem.gd",
+    "quote": "balance_ecosystem() acts as a hidden stabilizer that respawns prey below 10 and weakens predators when they outnumber prey by 2:1 — remove it and the system collapses in minutes"
+   }
+  ],
+  "pattern_tile_4x4": [
+   {
+    "chapter": "symmetry",
+    "pearl": "motif",
+    "map": "Symmetry_Motif",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "NEAR",
+    "why": "commons/artifacts/registry/arrays.json — the words are there, the wording moved",
+    "said": "the domain cell cannot say what it is: pattern_tile_4x4 and its mirror, brick and herringbone siblings are one scene at tile_size 4, differing only by a repeat_mode integer held in the registry, outside the square you painted.",
+    "file": "commons/artifacts/registry/arrays.json",
+    "quote": "\"scene\": \"res://commons/primitives/arrays/pattern_tile_puzzle.tscn\", \"config\": {\"tile_size\": 4, \"repeat_mode\": 0}"
+   }
+  ],
+  "ten_print_textile": [
+   {
+    "chapter": "symmetry",
+    "pearl": "translation",
+    "map": "Symmetry_Translation",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/artifacts/ten_print_textile/ten_print_textile.gd",
+    "said": "the lattice cannot supply the difference that turns repetition into cloth — it borrows that from a coin, and the coin has a seed: pin weave_seed and the endless bolt repeats exactly.",
+    "file": "commons/artifacts/ten_print_textile/ten_print_textile.gd",
+    "quote": "`weave_seed` 0 keeps the shipped `_rng.randomize()`; any positive value pins the bolt"
+   }
+  ],
+  "kaleidoscope": [
+   {
+    "chapter": "symmetry",
+    "pearl": "mirror rotor",
+    "map": "Symmetry_Mirror_Rotor",
+    "li": 2,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/artifacts/kaleidoscope/kaleidoscope.gd",
+    "said": "the restriction is a law about filling a plane, and the kaleidoscope never fills one: mirror_count runs 2 to 8, so the map's hero builds the forbidden fivefold rosette without complaint — a disc owes the lattice nothing.",
+    "file": "commons/artifacts/kaleidoscope/kaleidoscope.gd",
+    "quote": "@export_range(2, 8) var mirror_count: int = 3"
+   }
+  ],
+  "mill_escher_p4g": [
+   {
+    "chapter": "symmetry",
+    "pearl": "glide",
+    "map": "Symmetry_Glide",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/artifacts/registry/pattern_mill.json",
+    "said": "a glide only shows when the motif has a handedness — reflect something already symmetric and the slide is indistinguishable from plain translation; here that handedness comes from motif_seed 9, drawn at random and never checked.",
+    "file": "commons/artifacts/registry/pattern_mill.json",
+    "quote": "\"group\": \"p4g\", \"palette\": \"escher\", \"motif_seed\": 9, \"density\": 0.6"
+   }
+  ],
+  "pattern_maker_station": [
+   {
+    "chapter": "symmetry",
+    "pearl": "group",
+    "map": "Symmetry_Group",
+    "li": 2,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/artifacts/pattern_maker_station/pattern_maker_station.gd",
+    "said": "closure needs a set of moves you can pick two of, and the station has none: each group is one hard-coded index formula, so the set closes because the table names it, not because anything here composed.",
+    "file": "commons/artifacts/pattern_maker_station/pattern_maker_station.gd",
+    "quote": "Reuses WallpaperGroups.get_symmetric_color() for tiling."
+   }
+  ],
+  "wall_pattern_gallery": [
+   {
+    "chapter": "symmetry",
+    "pearl": "seventeen",
+    "map": "Symmetry_Seventeen",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/primitives/arrays/wallpaper_groups.gd",
+    "said": "the closed census needs a lattice that can hold it, and this one is square: twelve groups run exact, and the five hexagonal ones — p6m, the Alhambra's, among them — are float rotations rounded back into square cells.",
+    "file": "commons/primitives/arrays/wallpaper_groups.gd",
+    "quote": "Simplified: use modular arithmetic to approximate"
+   }
+  ],
+  "transform_composition": [
+   {
+    "chapter": "transformation",
+    "pearl": "trans introduction",
+    "map": "Trans_Introduction",
+    "li": 5,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Trans_Introduction/critical.md",
+    "said": "One matrix holds every move, but only because a fourth coordinate was added to carry what three could not: the point's 1 against the direction's 0, a whole ontology smuggled in as bookkeeping.",
+    "file": "commons/maps/Trans_Introduction/critical.md",
+    "quote": "Translation assumes space is a container through which objects move."
+   }
+  ],
+  "transform_composition_workbench": [
+   {
+    "chapter": "transformation",
+    "pearl": "trans translation",
+    "map": "Trans_Translation",
+    "li": 1,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Trans_Translation/critical.md",
+    "said": "To move is only to add, so the thing arrives as it left — but the void is not filled, only spanned, and the crossing is infrastructure that asks you to stand still and trust it.",
+    "file": "commons/maps/Trans_Translation/critical.md",
+    "quote": "The void remains void; the bridge does not fill it but spans it."
+   }
+  ],
+  "toruscylinder": [
+   {
+    "chapter": "transformation",
+    "pearl": "trans axisdecomposition",
+    "map": "Trans_AxisDecomposition",
+    "li": 1,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Trans_AxisDecomposition/critical.md",
+    "said": "One move is three moves and the order does not matter — but only here, and the distance is not there at all until a body has walked it into being.",
+    "file": "commons/maps/Trans_AxisDecomposition/critical.md",
+    "quote": "\"Translation produces space as navigable extent.\""
+   }
+  ],
+  "rotate_grid_cubes": [
+   {
+    "chapter": "transformation",
+    "pearl": "trans rotation",
+    "map": "Trans_Rotation",
+    "li": 1,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Trans_Rotation/critical.md",
+    "said": "A turn needs something to turn around, and the moment it happens space stops being the same in all directions: rotation manufactures facing, and now order matters.",
+    "file": "commons/maps/Trans_Rotation/critical.md",
+    "quote": "Rotation produces anisotropy by creating **facing**"
+   }
+  ],
+  "boolean_tunnel": [
+   {
+    "chapter": "transformation",
+    "pearl": "trans rotationspectacle",
+    "map": "Trans_RotationSpectacle",
+    "li": 1,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Trans_RotationSpectacle/critical.md",
+    "said": "Everything turns and the centre does not, and the long approach makes you pay for the arrival — the eye is the part that actually moved.",
+    "file": "commons/maps/Trans_RotationSpectacle/critical.md",
+    "quote": "This is processional architecture"
+   }
+  ],
+  "chair_assembly_puzzle": [
+   {
+    "chapter": "transformation",
+    "pearl": "trans scale",
+    "map": "Trans_Scale",
+    "li": 1,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Trans_Scale/critical.md",
+    "said": "Scaling multiplies and adds nothing, so bigger is not more — and an object that asks to be scaled has been given a desire in order to make your hand feel invited.",
+    "file": "commons/maps/Trans_Scale/critical.md",
+    "quote": "Objects do not usually ask to be changed."
+   }
+  ],
+  "proximity_spawner": [
+   {
+    "chapter": "transformation",
+    "pearl": "transformation",
+    "map": "Chamber_Transformation",
+    "li": 1,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Chamber_Transformation/critical.md",
+    "said": "The catalyst does not damage the creature, it changes its state, and the whole argument of the chamber is that folded is not less: a transformation done to a body is contact, not harm.",
+    "file": "commons/maps/Chamber_Transformation/critical.md",
+    "quote": "the catalyst's effect on the creature is a state transition rather than damage"
+   }
+  ],
+  "pusher_block": [
+   {
+    "chapter": "transformation",
+    "pearl": "trans pit",
+    "map": "Trans_Pit",
+    "li": 1,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Trans_Pit/critical.md",
+    "said": "Here the transform is done to you, and the arithmetic that was neutral while it acted on objects is not neutral once the space it acts on is inhabited.",
+    "file": "commons/maps/Trans_Pit/critical.md",
+    "quote": "Trans_Pit refuses the neutrality."
+   }
+  ],
+  "control_pendulum": [
+   {
+    "chapter": "wavefunctions",
+    "pearl": "intro",
+    "map": "WaveFunctions_Intro",
+    "li": 8,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/WaveFunctions_Intro/critical.md",
+    "said": "the oscillator cannot supply its own time: it reads a frame clock it did not set, and that clock hands it the phase as given and, past its Nyquist rate, flattens the swing into jumping.",
+    "file": "commons/maps/WaveFunctions_Intro/critical.md",
+    "quote": "The oscillator does not choose φ. It receives it."
+   }
+  ],
+  "draw_dot_time_domain": [
+   {
+    "chapter": "wavefunctions",
+    "pearl": "pendulum",
+    "map": "WaveFunctions_Pendulum",
+    "li": 2,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/WaveFunctions_Pendulum/critical.md",
+    "said": "gravity gives the bob its period for free, but the second bob's trace is a fact about the last bit of the release angle — the map cannot supply that bit twice, so no canvas here is repeatable.",
+    "file": "commons/maps/WaveFunctions_Pendulum/critical.md",
+    "quote": "The equations are deterministic; the behaviour is not predictable."
+   }
+  ],
+  "unit_circle_advanced": [
+   {
+    "chapter": "wavefunctions",
+    "pearl": "unit circle",
+    "map": "WaveFunctions_Unit_Circle",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/WaveFunctions_Unit_Circle/critical.md",
+    "said": "sine cannot be read off a circle: it needs an origin, a zero angle and a direction of turn, none of which the circle carries — and the projection that survives costs the radius, discarded to keep the function tractable.",
+    "file": "commons/maps/WaveFunctions_Unit_Circle/critical.md",
+    "quote": "Sin and cos are not properties of the circle. They are properties of a circle with a chosen frame."
+   }
+  ],
+  "sine_space": [
+   {
+    "chapter": "wavefunctions",
+    "pearl": "sine space",
+    "map": "WaveFunctions_Sine_Space",
+    "li": 1,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/WaveFunctions_Sine_Space/critical.md",
+    "said": "the corridor's smoothness is not sin(x)'s: it is a sample spacing bought from the frame budget, and the wave reads as stairs if you take too few, or the room stops if you take too many.",
+    "file": "commons/maps/WaveFunctions_Sine_Space/critical.md",
+    "quote": "The smoothness the learner feels under their feet is an achievement rather than a property"
+   }
+  ],
+  "kusama_sine": [
+   {
+    "chapter": "wavefunctions",
+    "pearl": "3d wave propagation",
+    "map": "WaveFunctions_3D_Wave_Propagation",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/WaveFunctions_3D_Wave_Propagation/critical.md",
+    "said": "interference is only where a marker stands: the map rents a lattice to make the field visible, and its spacing and dimmest lit step fence the commons at a boundary neither source chose and neither can move.",
+    "file": "commons/maps/WaveFunctions_3D_Wave_Propagation/critical.md",
+    "quote": "The lattice of small markers pulses in step with the local phase"
+   }
+  ],
+  "timbre_sculptor": [
+   {
+    "chapter": "wavefunctions",
+    "pearl": "effect sound",
+    "map": "WaveFunctions_Effect_Sound",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/artifacts/timbre_sculptor/timbre_sculptor.gd",
+    "said": "the sculptor stacks only integer multiples of one fundamental, so no bell is reachable from its eight sliders — and beneath them the buffer, the DAC and a metre of air charge a delay that never reaches zero.",
+    "file": "commons/artifacts/timbre_sculptor/timbre_sculptor.gd",
+    "quote": "Real acoustic instruments produce INHARMONIC partials (bells, drums, piano strings have stretched harmonics)"
+   }
+  ],
+  "vowel_sound_board": [
+   {
+    "chapter": "wavefunctions",
+    "pearl": "bernini",
+    "map": "Wavefunctions_Bernini",
+    "li": 1,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "algorithms/wavefunctions/dancing_body/ElphabaDress.gd",
+    "said": "a garment cannot supply its own body: this one hangs on nobody, so every sine that runs the hem is a claim about flesh the map has removed — the fold argues, and there is no one inside it.",
+    "file": "algorithms/wavefunctions/dancing_body/ElphabaDress.gd",
+    "quote": "the dress floats empty, worn by nobody, mathematics wearing itself"
+   }
+  ],
+  "ruth_asawa_sculpture": [
+   {
+    "chapter": "wavefunctions",
+    "pearl": "john cage",
+    "map": "WaveFunctions_John_Cage",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/WaveFunctions_John_Cage/critical.md",
+    "said": "4'33\" cannot supply its own content: it borrows the ventilation, the lights and the rig's own hum, so the piece runs only while the infrastructure does — and the panes measuring it keep nothing when it stops.",
+    "file": "commons/maps/WaveFunctions_John_Cage/critical.md",
+    "quote": "it can never reach zero because reaching zero would mean the infrastructure had stopped"
+   }
+  ],
+  "RackAmbientDrone": [
+   {
+    "chapter": "wavefunctions",
+    "pearl": "airmusic",
+    "map": "WaveFunctions_AirMusic",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/WaveFunctions_AirMusic/critical.md",
+    "said": "phasing has no score to fall back on: the room depends on a duration only a visitor can spend and cannot store one, so walking through quickly makes the piece genuinely flatter, with nothing kept to prove otherwise.",
+    "file": "commons/maps/WaveFunctions_AirMusic/critical.md",
+    "quote": "punishes impatient traversal with a flatter experience"
+   }
+  ],
+  "sine_cylinder_staircase": [
+   {
+    "chapter": "wavefunctions",
+    "pearl": "sky stairs",
+    "map": "Wavefunctions_Sky_Stairs",
+    "li": 0,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/Wavefunctions_Sky_Stairs/critical.md",
+    "said": "a curve you climb must be cut into treads a foot can hold: eighty steps, none shallower than a stride, so the sine is quantised by the body and its smooth stretches are exactly the ones no climber reaches.",
+    "file": "commons/maps/Wavefunctions_Sky_Stairs/critical.md",
+    "quote": "Each step is a sample; the tread is the period; the rise is the amplitude."
+   }
+  ],
+  "beat_frequency_demo": [
+   {
+    "chapter": "wavefunctions",
+    "pearl": "trigwalkingpath",
+    "map": "WaveFunctions_TrigWalkingPath",
+    "li": 1,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/maps/WaveFunctions_TrigWalkingPath/critical.md",
+    "said": "the lanes are computed a few steps ahead of the foot and never further: the map depends on a horizon it makes as you approach, so it can hand you the sin-cos offset but never the whole curve.",
+    "file": "commons/maps/WaveFunctions_TrigWalkingPath/critical.md",
+    "quote": "The path generates itself a few steps ahead of the walker, so the learner always sees a short runway of coming terrain."
+   }
+  ],
+  "oscilloscope": [
+   {
+    "chapter": "wavefunctions",
+    "pearl": "synthesis lab",
+    "map": "WaveFunctions_Synthesis_Lab",
+    "li": 9,
+    "host": "note_src",
+    "verdict": "HELD",
+    "why": "commons/artifacts/oscilloscope/oscilloscope.gd",
+    "said": "a square is an infinite sum and the bench has sixteen sliders, the scope three: the lab borrows a basis it did not pick and must cut the series somewhere — the ripple on the trace is the cut.",
+    "file": "commons/artifacts/oscilloscope/oscilloscope.gd",
+    "quote": "\"composite\" sums sin(f) + sin(3f)/2 + sin(5f)/3 (the textbook square-wave Fourier series, truncated)"
+   }
+  ]
+ }
+}
