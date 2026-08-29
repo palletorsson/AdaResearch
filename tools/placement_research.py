@@ -2353,6 +2353,332 @@ def strategy_tile_wfc(room: Room, artifacts: list[Artifact],
     return placements
 
 
+# ─────────────────────────────────────────────────────────────────────
+# THE GROWTH STRATEGIES — the museum places bodies by the algorithms it teaches
+# ─────────────────────────────────────────────────────────────────────
+# 2026-08-29, Palle: "explore other algorithms for placement of artifact like
+# crystallization, stickyness, colonization, etc etc"
+#
+# None of the three existed as a placement strategy. All three already exist in
+# this repo AS CURRICULUM — diffusion-limited aggregation under
+# algorithms/patterngeneration/, space colonization as the generator behind the
+# mycelium substrate, lattice growth in the crystal artifacts. They were taught
+# and never used. So these are ports across a layer, not inventions: the museum
+# arranges itself by the rules it exists to explain, which is the most on-theme
+# thing a placement engine in this project can do.
+#
+# All three share the harness's contract exactly — (room, artifacts, rng) ->
+# list[Placement], scored by the same score_placement and walk_evaluator as the
+# other seventeen — so they are comparable rather than special.
+#
+# WHAT THEY ACTUALLY DIFFER ON is the question each asks about a candidate cell:
+#
+#   crystallization  is this cell ON THE LATTICE, and touching what is already grown?
+#   stickiness       did a random walker ARRIVE here and find a neighbour to stick to?
+#   colonization     which unclaimed ATTRACTOR is this cell nearest, and is it still hungry?
+#
+# The first makes order, the second makes dendrites, the third makes reach.
+
+
+def _occupied(placements: list) -> set:
+    """Every cell any placed body already eats, footprint not just origin."""
+    out: set = set()
+    for p in placements:
+        for cell in p.footprint_cells_occupied():
+            out.add(cell)
+    return out
+
+
+def _fits(room, art, r: int, c: int, taken: set) -> bool:
+    """The body's whole footprint is in bounds and free — and on the wall only if
+    it wants to be.
+
+    THE PERIMETER IS NOT OFF LIMITS, it is where a wall-backed body BELONGS.
+    The first version of these three refused `room.on_wall` for everything, on
+    the reasoning that a body on the perimeter is half outside the room. That
+    cost all three the entire wall metric — measured 0.00 against a corpus mean
+    near 1.0, because score_placement asks for a footprint cell ON row 0, row
+    depth-1, col 0 or col width-1 (the metric at :285). Refusing it is not
+    caution; it is failing the requirement and calling it a rule.
+    """
+    w, d = art.footprint_dim()
+    for dr in range(d):
+        for dc in range(w):
+            rr, cc = r + dr, c + dc
+            if not room.in_bounds(rr, cc):
+                return False
+            if room.on_wall(rr, cc) and not art.wall_backing:
+                return False
+            if (rr, cc) in taken:
+                return False
+    return True
+
+
+def _on_wall(room, art, r: int, c: int) -> bool:
+    """Does this placement actually touch the perimeter — the wall metric's question."""
+    w, d = art.footprint_dim()
+    for dr in range(d):
+        for dc in range(w):
+            if room.on_wall(r + dr, c + dc):
+                return True
+    return False
+
+
+def _clear_of(taken: set, room, art, r: int, c: int, gap: int) -> bool:
+    """A ring of `gap` empty cells around the body — the artifact's isolation."""
+    if gap <= 0:
+        return True
+    w, d = art.footprint_dim()
+    for dr in range(-gap, d + gap):
+        for dc in range(-gap, w + gap):
+            rr, cc = r + dr, c + dc
+            if room.in_bounds(rr, cc) and (rr, cc) in taken:
+                return False
+    return True
+
+
+def strategy_crystallization(room, artifacts: list, rng,
+                             trace=None) -> list:
+    """Nucleate, then grow on the lattice — bodies land on a repeating pitch.
+
+    A crystal is not a heap: it has a UNIT CELL and everything sits on it. So a
+    pitch is chosen from the largest body in the cast (its footprint plus one
+    cell of air), a seed is nucleated near the room's centre, and every later
+    body takes the free lattice site that is closest to the growing mass —
+    contact-preferring, which is what makes a crystal compact rather than a
+    scatter.
+
+    The result reads as deliberate rather than arranged, and it is the only one
+    of the three that is fully deterministic given the cast order.
+    """
+    placements: list = []
+    taken: set = set()
+    if not artifacts:
+        return placements
+
+    pitch = 1
+    for a in artifacts:
+        w, d = a.footprint_dim()
+        pitch = max(pitch, max(w, d) + 1)
+
+    # the seed: centre of the room, snapped to the lattice it will grow on
+    seed_r = max(1, (room.depth // 2) - ((room.depth // 2 - 1) % pitch))
+    seed_c = max(1, (room.width // 2) - ((room.width // 2 - 1) % pitch))
+
+    sites: list = []
+    r = 1 + ((seed_r - 1) % pitch)
+    while r < room.depth - 1:
+        c = 1 + ((seed_c - 1) % pitch)
+        while c < room.width - 1:
+            sites.append((r, c))
+            c += pitch
+        r += pitch
+
+    def contact(site) -> int:
+        """How much of the grown mass this site touches — higher is more crystal."""
+        rr, cc = site
+        n = 0
+        for dr in range(-1, pitch + 1):
+            for dc in range(-1, pitch + 1):
+                if (rr + dr, cc + dc) in taken:
+                    n += 1
+        return n
+
+    order = sorted(artifacts, key=lambda a: -a.footprint_cells)
+    for art in order:
+        free = [s for s in sites
+                if _fits(room, art, s[0], s[1], taken)
+                and _clear_of(taken, room, art, s[0], s[1], min(1, art.isolation))]
+        if not free:
+            free = [s for s in sites if _fits(room, art, s[0], s[1], taken)]
+        if not free:
+            continue
+        # NOT forced to a wall. Measured: adding the perimeter to the lattice so
+        # wall-backed bodies could reach it took crystallization from 0.8364 to
+        # 0.8012 — the wall metric gained less than compactness and isolation lost.
+        # A crystal that breaks its own lattice to touch a face is not a better
+        # crystal, and this is the one strategy whose whole argument is the lattice.
+        if not placements:
+            # nucleation — nearest lattice site to the room's centre
+            best = min(free, key=lambda s: abs(s[0] - room.depth // 2) + abs(s[1] - room.width // 2))
+        else:
+            best = max(free, key=lambda s: (contact(s),
+                                            -(abs(s[0] - seed_r) + abs(s[1] - seed_c))))
+        p = Placement(artifact=art, row=best[0], col=best[1])
+        placements.append(p)
+        for cell in p.footprint_cells_occupied():
+            taken.add(cell)
+        if trace is not None:
+            trace.append({"event": "crystallise", "token": art.lookup_name,
+                          "cell": [best[0], best[1]], "contact": contact(best),
+                          "pitch": pitch})
+    return placements
+
+
+def strategy_stickiness(room, artifacts: list, rng,
+                        trace=None) -> list:
+    """Diffusion-limited aggregation: a body wanders until it touches, then stops.
+
+    The museum already teaches DLA under algorithms/patterngeneration/. Here the
+    walker IS the body being placed: it starts at a random cell on the room's
+    edge, takes a random walk, and freezes the first time it is adjacent to
+    something already placed. The seed is the first body, put where the visitor
+    enters, so the cluster grows AWAY from the door and the room opens as you
+    walk into it.
+
+    DLA makes dendrites, not blobs — the result is branchy and open, with sight
+    lines between the arms. That is the opposite of crystallization on purpose,
+    and the two are worth comparing on the same cast.
+    """
+    placements: list = []
+    taken: set = set()
+    if not artifacts:
+        return placements
+
+    order = sorted(artifacts, key=lambda a: -a.footprint_cells)
+    # the seed sits at the entry, so the aggregate grows into the room
+    first = order[0]
+    sr = max(1, min(room.depth - 2, room.spawn_row - 1 if room.spawn_row > 1 else 1))
+    sc = max(1, min(room.width - 2, room.spawn_col))
+    for rr in range(sr, 0, -1):
+        if _fits(room, first, rr, sc, taken):
+            sr = rr
+            break
+    if _fits(room, first, sr, sc, taken):
+        p = Placement(artifact=first, row=sr, col=sc)
+        placements.append(p)
+        for cell in p.footprint_cells_occupied():
+            taken.add(cell)
+        order = order[1:]
+
+    def touching(art, r: int, c: int) -> bool:
+        w, d = art.footprint_dim()
+        for dr in range(-1, d + 1):
+            for dc in range(-1, w + 1):
+                if (r + dr, c + dc) in taken:
+                    return True
+        return False
+
+    MAX_STEPS = 400
+    for art in order:
+        stuck = False
+        for _attempt in range(6):
+            # released from a random point on the perimeter, as DLA does
+            side = rng.randrange(4)
+            if side == 0:
+                r, c = 1, rng.randrange(1, max(2, room.width - 1))
+            elif side == 1:
+                r, c = room.depth - 2, rng.randrange(1, max(2, room.width - 1))
+            elif side == 2:
+                r, c = rng.randrange(1, max(2, room.depth - 1)), 1
+            else:
+                r, c = rng.randrange(1, max(2, room.depth - 1)), room.width - 2
+            for _step in range(MAX_STEPS):
+                if _fits(room, art, r, c, taken) and touching(art, r, c):
+                    p = Placement(artifact=art, row=r, col=c)
+                    placements.append(p)
+                    for cell in p.footprint_cells_occupied():
+                        taken.add(cell)
+                    if trace is not None:
+                        trace.append({"event": "stick", "token": art.lookup_name,
+                                      "cell": [r, c], "steps": _step})
+                    stuck = True
+                    break
+                dr, dc = rng.choice([(-1, 0), (1, 0), (0, -1), (0, 1)])
+                nr, nc = r + dr, c + dc
+                if room.in_bounds(nr, nc) and not room.on_wall(nr, nc):
+                    r, c = nr, nc
+            if stuck:
+                break
+        if not stuck:
+            # THE WALK FAILED, AND THAT IS REPORTED RATHER THAN HIDDEN. A body
+            # that never found a neighbour is dropped where it fits at all —
+            # otherwise a stochastic strategy silently loses cast members and
+            # scores well for having placed fewer things.
+            for (r, c) in room.cells():
+                if _fits(room, art, r, c, taken):
+                    p = Placement(artifact=art, row=r, col=c)
+                    placements.append(p)
+                    for cell in p.footprint_cells_occupied():
+                        taken.add(cell)
+                    if trace is not None:
+                        trace.append({"event": "stick_failed_fallback",
+                                      "token": art.lookup_name, "cell": [r, c]})
+                    break
+    return placements
+
+
+def strategy_colonization(room, artifacts: list, rng,
+                          trace=None) -> list:
+    """Space colonization: bodies grow toward attractors and consume them.
+
+    This is the generator behind the mycelium substrate, ported from growing
+    BRANCHES to placing BODIES. Attractors are scattered through the room; each
+    body takes the free cell nearest an unclaimed attractor, and claims every
+    attractor within its kill radius. The cast therefore spreads to FILL the
+    room rather than clustering, and the spacing comes out of the attractor
+    density instead of a rule somebody typed.
+
+    Its signature is reach: no corner is left empty while another is crowded,
+    which is exactly what the walk evaluator rewards and what a heap does badly.
+    """
+    placements: list = []
+    taken: set = set()
+    if not artifacts:
+        return placements
+
+    interior = [(r, c) for (r, c) in room.cells() if not room.on_wall(r, c)]
+    if not interior:
+        return placements
+
+    # one attractor per body plus a margin, so there is always somewhere to reach
+    n_attract = max(len(artifacts) * 3, 12)
+    attractors = [interior[rng.randrange(len(interior))] for _ in range(n_attract)]
+    kill = max(2, int((len(interior) / max(1, len(artifacts))) ** 0.5))
+
+    order = sorted(artifacts, key=lambda a: -a.footprint_cells)
+    for art in order:
+        live = [a for a in attractors if a is not None]
+        if not live:
+            attractors = [interior[rng.randrange(len(interior))] for _ in range(n_attract)]
+            live = attractors
+        best = None
+        best_d = None
+        pool = room.cells() if art.wall_backing else interior
+        for (r, c) in pool:
+            if not _fits(room, art, r, c, taken):
+                continue
+            if not _clear_of(taken, room, art, r, c, min(1, art.isolation)):
+                continue
+            d = min(abs(r - a[0]) + abs(c - a[1]) for a in live)
+            if art.wall_backing and not _on_wall(room, art, r, c):
+                d += 1000          # a wall body reaches its wall first
+            if best_d is None or d < best_d:
+                best, best_d = (r, c), d
+        if best is None:
+            for (r, c) in interior:
+                if _fits(room, art, r, c, taken):
+                    best = (r, c)
+                    break
+        if best is None:
+            continue
+        p = Placement(artifact=art, row=best[0], col=best[1])
+        placements.append(p)
+        for cell in p.footprint_cells_occupied():
+            taken.add(cell)
+        # consume every attractor this body has reached
+        eaten = 0
+        for i, a in enumerate(attractors):
+            if a is not None and abs(a[0] - best[0]) + abs(a[1] - best[1]) <= kill:
+                attractors[i] = None
+                eaten += 1
+        if trace is not None:
+            trace.append({"event": "colonise", "token": art.lookup_name,
+                          "cell": [best[0], best[1]], "attractors_eaten": eaten,
+                          "kill_radius": kill})
+    return placements
+
+
 STRATEGIES = {
     "random":              strategy_random,
     "rule_based":          strategy_rule_based,
@@ -2371,6 +2697,9 @@ STRATEGIES = {
     "alexander":           strategy_alexander,
     "promenade":           strategy_promenade,
     "tile_wfc":            strategy_tile_wfc,
+    "crystallization":     strategy_crystallization,
+    "stickiness":          strategy_stickiness,
+    "colonization":        strategy_colonization,
 }
 
 
