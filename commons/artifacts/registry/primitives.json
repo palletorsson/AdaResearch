@@ -26063,6 +26063,25 @@
 				"footprint_cells": 3,
 				"clearance_m": 0.6
 			}
+		},
+		"first_phosphor": {
+			"name": "First Phosphor",
+			"class_name": "FirstPhosphor",
+			"scene": "res://commons/artifacts/first_phosphor/first_phosphor.tscn",
+			"description": "The medium's nativity as an altar piece: one oscilloscope on a lab cart, black velvet shroud, and on the dark glass ONE green phosphor dot - breathing with persistence, blinking at the cursor's 530 ms cadence. Tennis for Two 1958, Spacewar 1962: here 'let there be light' and 'first there was a point' are one event. From the 2026-08-27 conversation on beginnings.",
+			"category": "primitives",
+			"tags": [
+				"primitives",
+				"point",
+				"origin",
+				"genesis",
+				"crt",
+				"surreal"
+			],
+			"spatial_needs": {
+				"footprint_cells": 2,
+				"clearance_m": 0.6
+			}
 		}
 	},
 	"registry_info": {
