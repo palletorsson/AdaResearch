@@ -89,7 +89,8 @@
       3,
       3
      ],
-     "scale": 0.8
+     "scale": 0.8,
+     "note": "A point is that which has no part, so it has no place either: it borrows its whole existence from a coordinate system that is not itself a point."
     },
     {
      "token": "fontana_puncture",
@@ -143,7 +144,10 @@
       "mounted_lab_json": "res://commons/labs/point_one.lab.json"
      }
     },
-    {"text": "queer melancholia, rythm and melancolia", "by": "hand"}
+    {
+     "text": "queer melancholia, rythm and melancolia",
+     "by": "hand"
+    }
    ],
    "rooms": 5,
    "ordered": true,
@@ -215,7 +219,8 @@
       2,
       24
      ],
-     "placed_by": "grid"
+     "placed_by": "grid",
+     "note": "A line cannot be drawn without two points it did not make, and the instant it measures them it becomes the instrument that makes space addressable."
     },
     {
      "token": "dgrid",
@@ -511,7 +516,8 @@
       5
      ],
      "rotation": 180,
-     "placed_by": "grid"
+     "placed_by": "grid",
+     "note": "The trace is everything the line throws away — duration, hesitation, texture — and it is jagged because a resolution is always already there; it has no origin, only a sampling rate."
     },
     {
      "token": "draw_dot",
@@ -581,7 +587,8 @@
       0,
       0
      ],
-     "placed_by": "grid"
+     "placed_by": "grid",
+     "note": "The grid arrives promising neutrality and already owning the ground: every cell is an address, and an address is a claim."
     },
     {
      "token": "grid_lines",
@@ -639,7 +646,8 @@
     {
      "token": "catalyst_pedestal",
      "text": "the triangle. everything is made of triangles. the quad, the simplest mesh. the pyramid mesh.",
-     "by": "hand"
+     "by": "hand",
+     "note": "The triangle is the smallest figure that cannot be deformed without breaking, so everything is built from it and nothing built from it can bend."
     },
     {
      "token": "parasol_triangle",
@@ -868,7 +876,8 @@
       0
      ],
      "rotation": 90,
-     "placed_by": "grid"
+     "placed_by": "grid",
+     "note": "Five solids and the taxonomy closes; the Platonic set is complete, which is precisely why it cannot hold anything that arrives after it."
     },
     {
      "token": "path_game_controller",
@@ -968,7 +977,8 @@
      "text": "the cube world, built",
      "by": "claude",
      "count": 4,
-     "spread": "square"
+     "spread": "square",
+     "note": "The cube is the first form that fills space rather than describing it, so it eats the world it was meant to measure — and until it is folded it is only a flat net."
     },
     {
      "token": "polyhedron_nets_cube",
@@ -1032,7 +1042,8 @@
       1,
       2
      ],
-     "placed_by": "grid"
+     "placed_by": "grid",
+     "note": "The chamber is where the taxonomy stops being looked at and starts looking back, and the boundary between the one who counts and the thing counted is the first primitive to dissolve."
     },
     {
      "token": "catalyst_vent",
@@ -1229,7 +1240,8 @@
       13
      ],
      "support_m": 1.0,
-     "placed_by": "grid"
+     "placed_by": "grid",
+     "note": "The sphere is the question the triangle cannot answer — how many faces — and the answer is a budget, so ignorance here is not missing knowledge but a resolution someone chose."
     },
     {
      "token": "sphere_low",
@@ -1352,7 +1364,8 @@
       5,
       5
      ],
-     "placed_by": "grid"
+     "placed_by": "grid",
+     "note": "The portal is the edge made walkable: you step through it and arrive at another approach, because pi does not finish and neither does the corridor."
     },
     {
      "token": "combine_portals",
@@ -1407,7 +1420,8 @@
       0
      ],
      "rotation": 180,
-     "placed_by": "grid"
+     "placed_by": "grid",
+     "note": "Every instrument is present and the set is finished, and still nothing is answered — melancholia is the correct response to a taxonomy that is complete and insufficient at once."
     },
     {
      "token": "snap_pyramid_puzzle",
