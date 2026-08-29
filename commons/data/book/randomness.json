@@ -20,7 +20,8 @@
     {
      "token": "entropy_axiom",
      "text": "entropy is not decay — it is freedom from the lattice",
-     "by": "draft"
+     "by": "draft",
+     "note": "Freedom from the lattice needs the lattice: every point in the corridor keeps its anchor so the drift can be read against something, and max_randomness caps how far the wilderness is permitted to go."
     },
     {
      "token": "2d_in_3d_randomness_vis",
@@ -72,7 +73,8 @@
     {
      "token": "hardware_entropy_decay",
      "text": "The observer is not separate from the system — every measurement is an intervention",
-     "by": "draft"
+     "by": "draft",
+     "note": "Shannon's count reads outputs, never sources — so the harvested and the seeded weigh the same on the meter, and the only entropy this room can prove is the one it takes off the visitor's own hands."
     },
     {
      "token": "shannon_entropy_meter",
@@ -89,7 +91,8 @@
     {
      "token": "remove_random",
      "text": "A demolition algorithm that randomly removes cubes from the grid",
-     "by": "draft"
+     "by": "draft",
+     "note": "The eraser has no body of its own: it hunts its parent's grid and rewrites it, so someone must first stack a full lattice for it to take from — and nothing in the map can put a cell back."
     },
     {
      "token": "hazards_demo",
@@ -106,7 +109,8 @@
     {
      "token": "ten_print_maze_3d",
      "text": "Extrudes the classic 10 PRINT pattern into a standing maze and animates an ant pathfinder through …",
-     "by": "draft"
+     "by": "draft",
+     "note": "One random bit per cell decides nothing about mazes: the corridors come from two C64 glyphs whose diagonals happen to meet at the cell corners, so the program borrows its structure from a character ROM and from the eye."
     },
     {
      "token": "pickup_cube_placer",
@@ -133,7 +137,8 @@
     {
      "token": "random_object_spawner",
      "text": "A spawning algorithm that randomly generates and places objects in the environment",
-     "by": "draft"
+     "by": "draft",
+     "note": "Nothing is placed at random: every cube enters at one fixed spigot and the scatter you read as chance was made by collision — the spawner rents its randomness from the physics solver, and pays each arrival with a death."
     },
     {
      "token": "coin_toss",
@@ -165,7 +170,8 @@
     {
      "token": "RotateGridCubes",
      "text": "Gradient slope test with animated rotation for walkability check",
-     "by": "draft"
+     "by": "draft",
+     "note": "There is no random orientation, only numbers poured into a chosen decomposition: X then Y then Z, in an order somebody picked — and the tilts sweeping this grid are a written score no frame can distinguish from a draw."
     }
    ],
    "hero": "RotateGridCubes"
@@ -177,7 +183,8 @@
     {
      "token": "random_walk_terrarium",
      "text": "A random walk has no destination — yet it explores space more honestly than any planned …",
-     "by": "draft"
+     "by": "draft",
+     "note": "A walk with no destination cannot be exhibited: the terrarium's glass is what keeps it in frame, and every reflection off that wall bends the sqrt(N) spreading the box was built to show."
     },
     {
      "token": "random_walk_collection",
@@ -234,7 +241,8 @@
     {
      "token": "distribution_comparator",
      "text": "The same random source produces radically different shapes depending on the rule that channels …",
-     "by": "draft"
+     "by": "draft",
+     "note": "The bell is not in the source but in the rule laid over it, and the rule holds only where draws are independent with finite variance — conditions the generator feeding these three columns can never be caught breaking."
     },
     {
      "token": "distribution_sampler",
@@ -253,7 +261,8 @@
    "pearl": "random",
    "map": "Chamber_Random",
    "lines": [],
-   "drop": true
+   "drop": true,
+   "edge": "Mutual illegibility is not achieved by either body — it is issued: the chamber reseeds both sides every frame, so the levelling depends on a referee neither the learner nor the octapod can see, and no shot teaches the next."
   },
   {
    "pearl": "random mushrooms",
@@ -262,7 +271,8 @@
     {
      "token": "reaction_diffusion_intro",
      "text": "A leopard does not design its spots — two chemicals racing at different speeds do it for …",
-     "by": "draft"
+     "by": "draft",
+     "note": "The spots cost nothing to draw and everything to permit: feed and kill are set by hand into a narrow window, and a step outside it gives not a different pattern but a dead grey field."
     },
     {
      "token": "bubbles_random",
@@ -294,7 +304,8 @@
     {
      "token": "env_one",
      "text": "A procedural environment generation algorithm using randomness for kitbashing",
-     "by": "draft"
+     "by": "draft",
+     "note": "A world made entirely of draws — thirty positions, thirty scales, fifteen connections — arrives with none of them on its face, and it stands inside a 12x24 grid nobody rolled: the randomness is furniture in an authored room."
     },
     {
      "token": "random_transformations_geometric",
@@ -326,7 +337,8 @@
     {
      "token": "pollock_painting_in_3d",
      "text": "Interactive 3D Jackson Pollock-inspired painting using movement-based procedural …",
-     "by": "draft"
+     "by": "draft",
+     "note": "the drips can be regenerated and the posture cannot: what made this a Pollock was a body walking around a canvas on the floor, and the map can lay the canvas down but has to tween a brush across it."
     },
     {
      "token": "monte_carlo_dartboard",
@@ -353,7 +365,8 @@
     {
      "token": "pheromone_terrain",
      "text": "Stigmergy is memory without a brain — the environment itself becomes the communication …",
-     "by": "draft"
+     "by": "draft",
+     "note": "Memory without a brain still needs somewhere to be kept, and here it is a decay constant: what the walkers can collectively remember is decided by an evaporation rate none of them set and none of them can change."
     }
    ],
    "hero": "pheromone_terrain"
@@ -365,7 +378,8 @@
     {
      "token": "random_space",
      "text": "A crystal that contains mathematical chaos algorithms",
-     "by": "draft"
+     "by": "draft",
+     "note": "A floor has to hold still to be stood on: this finale's chaos ships with the animation off and the seed set to 1, so the world randomness built is the same world on every visit, down to the vertex."
     },
     {
      "token": "noise_mixer",
@@ -387,7 +401,8 @@
     {
      "token": "miura_crawler",
      "text": "Miura-ori proves that a single degree of freedom",
-     "by": "draft"
+     "by": "draft",
+     "note": "Play needs a floor it can stop looking at, and this map spends that: tiles are drawn from a distribution and the crawler lies flat in the ground until it folds, so attention never leaves the surface."
     },
     {
      "token": "scissor_stalker",

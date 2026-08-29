@@ -44,7 +44,8 @@
     {
      "token": "control_pendulum",
      "text": "A pendulum is gravity's metronome — length alone determines the tempo",
-     "by": "draft"
+     "by": "draft",
+     "note": "the oscillator cannot supply its own time: it reads a frame clock it did not set, and that clock hands it the phase as given and, past its Nyquist rate, flattens the swing into jumping."
     },
     {
      "token": "oscillation_controlled_cube"
@@ -73,7 +74,8 @@
     {
      "token": "draw_dot_time_domain",
      "text": "Every motion is a signal; recording it in time reveals the wave hidden in movement",
-     "by": "draft"
+     "by": "draft",
+     "note": "gravity gives the bob its period for free, but the second bob's trace is a fact about the last bit of the release angle — the map cannot supply that bit twice, so no canvas here is repeatable."
     },
     {
      "token": "BigPipeSystem",
@@ -105,7 +107,8 @@
    "map": "WaveFunctions_Unit_Circle",
    "lines": [
     {
-     "token": "unit_circle_advanced"
+     "token": "unit_circle_advanced",
+     "note": "sine cannot be read off a circle: it needs an origin, a zero angle and a direction of turn, none of which the circle carries — and the projection that survives costs the radius, discarded to keep the function tractable."
     },
     {
      "token": "SimpleOscillatingBridge"
@@ -126,7 +129,8 @@
     {
      "token": "sine_space",
      "text": "3D space defined by sine waves — walls, floors",
-     "by": "draft"
+     "by": "draft",
+     "note": "the corridor's smoothness is not sin(x)'s: it is a sample spacing bought from the frame budget, and the wave reads as stairs if you take too few, or the room stops if you take too many."
     },
     {
      "token": "sine_wall_corridor"
@@ -142,7 +146,8 @@
    "map": "WaveFunctions_3D_Wave_Propagation",
    "lines": [
     {
-     "token": "kusama_sine"
+     "token": "kusama_sine",
+     "note": "interference is only where a marker stands: the map rents a lattice to make the field visible, and its spacing and dimmest lit step fence the commons at a boundary neither source chose and neither can move."
     },
     {
      "token": "wave_propagation_3d"
@@ -160,7 +165,8 @@
     {
      "token": "timbre_sculptor",
      "text": "Timbre is the harmonic fingerprint of a sound",
-     "by": "draft"
+     "by": "draft",
+     "note": "the sculptor stacks only integer multiples of one fundamental, so no bell is reachable from its eight sliders — and beneath them the buffer, the DAC and a metre of air charge a delay that never reaches zero."
     },
     {
      "token": "RackMoogBass"
@@ -229,7 +235,8 @@
     {
      "token": "vowel_sound_board",
      "text": "Every vowel is a pair of resonant frequencies — the mouth is a tunable resonator",
-     "by": "draft"
+     "by": "draft",
+     "note": "a garment cannot supply its own body: this one hangs on nobody, so every sine that runs the hem is a claim about flesh the map has removed — the fold argues, and there is no one inside it."
     },
     {
      "token": "bernini_columns"
@@ -242,7 +249,8 @@
    "map": "WaveFunctions_John_Cage",
    "lines": [
     {
-     "token": "ruth_asawa_sculpture"
+     "token": "ruth_asawa_sculpture",
+     "note": "4'33\" cannot supply its own content: it borrows the ventilation, the lights and the rig's own hum, so the piece runs only while the infrastructure does — and the panes measuring it keep nothing when it stops."
     },
     {
      "token": "john_cage_tech_noir"
@@ -255,7 +263,8 @@
    "map": "WaveFunctions_AirMusic",
    "lines": [
     {
-     "token": "RackAmbientDrone"
+     "token": "RackAmbientDrone",
+     "note": "phasing has no score to fall back on: the room depends on a duration only a visitor can spend and cannot store one, so walking through quickly makes the piece genuinely flatter, with nothing kept to prove otherwise."
     },
     {
      "token": "air_music_display_case"
@@ -274,7 +283,8 @@
    "map": "Wavefunctions_Sky_Stairs",
    "lines": [
     {
-     "token": "sine_cylinder_staircase"
+     "token": "sine_cylinder_staircase",
+     "note": "a curve you climb must be cut into treads a foot can hold: eighty steps, none shallower than a stride, so the sine is quantised by the body and its smooth stretches are exactly the ones no climber reaches."
     },
     {
      "token": "math_objects"
@@ -292,7 +302,8 @@
     {
      "token": "beat_frequency_demo",
      "text": "When two nearly identical things interfere, their tiny difference becomes the loudest …",
-     "by": "draft"
+     "by": "draft",
+     "note": "the lanes are computed a few steps ahead of the foot and never further: the map depends on a horizon it makes as you approach, so it can hand you the sin-cos offset but never the whole curve."
     },
     {
      "token": "lissajous_curves"
@@ -312,7 +323,8 @@
    "pearl": "waves",
    "map": "Chamber_Waves",
    "lines": [],
-   "drop": true
+   "drop": true,
+   "edge": "resonance needs a rhythm the learner does not own: the creature keeps its own frequency and will not meet you halfway, so the chamber can measure a match but never produce one — most of the encounter is beating."
   },
   {
    "pearl": "synthesis lab",
@@ -354,7 +366,8 @@
     {
      "token": "oscilloscope",
      "text": "Multi-mode oscilloscope with VR sliders. Shows waveform",
-     "by": "draft"
+     "by": "draft",
+     "note": "a square is an infinite sum and the bench has sixteen sliders, the scope three: the lab borrows a basis it did not pick and must cut the series somewhere — the ripple on the trace is the cut."
     },
     {
      "token": "double_helix_scene"

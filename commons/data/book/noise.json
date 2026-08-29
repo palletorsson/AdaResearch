@@ -20,7 +20,8 @@
     {
      "token": "WhiteNoiseGallery",
      "text": "A gallery showcasing pure white noise — uniform random values with no correlation between samples",
-     "by": "draft"
+     "by": "draft",
+     "note": "white noise cannot certify its own randomness — it needs an eye to rule the clumps accidental, and that eye prefers blue noise, which is less random by every measure the field itself can compute."
     }
    ],
    "hero": "WhiteNoiseGallery"
@@ -32,7 +33,8 @@
     {
      "token": "MeltingBerniniScene",
      "text": "Noise-based vertex displacement applied to classical column geometry",
-     "by": "draft"
+     "by": "draft",
+     "note": "noise has no form of its own, only one to displace: the melt borrows the monument's claim to permanence to be legible at all — take the column away and the same field deforms nothing anyone would notice."
     }
    ],
    "hero": "MeltingBerniniScene"
@@ -44,7 +46,8 @@
     {
      "token": "noisetorus",
      "text": "the ring is not made of noise. It is a shape that has been left out in it",
-     "by": "draft"
+     "by": "draft",
+     "note": "one call to get_noise_2d has nowhere to put a neighbour, so no evaluation carries the continuity the chapter is named for — the ring has to be dipped in and dragged across the field for coherence to appear at all."
     },
     {
      "token": "noiselayers",
@@ -61,7 +64,8 @@
     {
      "token": "perlin_terrain_sculptor",
      "text": "noise-based sculpting inverts the usual creative act",
-     "by": "draft"
+     "by": "draft",
+     "note": "a continuous field cannot say where stone stops: the world needs a threshold imported from outside the mathematics, and everything habitable in this one is squeezed into the band between -0.3 and 0.3."
     },
     {
      "token": "voxelnoise",
@@ -78,7 +82,8 @@
     {
      "token": "shader_noise_space",
      "text": "GPU noise is not one calculation but millions happening simultaneously",
-     "by": "draft"
+     "by": "draft",
+     "note": "the wall owns nothing it shows: every frame the six octaves are recomputed from scratch, so the texture is a lease on parallel hardware rather than an asset — stop paying and the wall is not dim, it is absent."
     }
    ],
    "hero": "shader_noise_space"
@@ -90,7 +95,8 @@
     {
      "token": "noisesphere",
      "text": "the sphere is not made of noise. It is a shape that has been left out in it",
-     "by": "draft"
+     "by": "draft",
+     "note": "warping spends the coordinate system it borrows: the base field is read at displaced addresses, so no point on the slab can say where it came from — the two source fields shown beside it do not add back up."
     }
    ],
    "hero": "noisesphere"
@@ -102,7 +108,8 @@
     {
      "token": "noise_space",
      "text": "Interactive 3D noise exploration space. Walk through a procedurally generated environment driven by configurable noise …",
-     "by": "draft"
+     "by": "draft",
+     "note": "navigation needs continuity, and the tenth axis has none: nine sliders are gradients you can walk, the seed only teleports — so most of the ten-dimensional space has never been evaluated and the presets are its only addresses."
     }
    ],
    "hero": "noise_space"
@@ -114,7 +121,8 @@
     {
      "token": "simplex_noise",
      "text": "Simplex noise solved Perlin's axis-alignment problem by changing the grid",
-     "by": "draft"
+     "by": "draft",
+     "note": "coherence needs a lattice to hang gradients on, and the lattice signs everything: Perlin's bias rotates with the grid, not the geometry — simplex does not remove the scaffold, it swaps squares for triangles and pays a different bill."
     },
     {
      "token": "perlin_noise",
@@ -143,13 +151,15 @@
    "pearl": "noise",
    "map": "Chamber_Noise",
    "lines": [],
-   "drop": true
+   "drop": true,
+   "edge": "a chamber is shaped by the creature it stages, and this one has none: with nothing to defeat, nothing ends the room — the save gallery stands in for a finish, and the learner leaves rather than wins."
   },
   {
    "pearl": "lab path",
    "map": "Lab_Path",
    "lines": [],
-   "drop": true
+   "drop": true,
+   "edge": "the corridor is the same corridor in every chapter: nothing in its geometry is noise, so it can only mean the noise sequence by borrowing what the learner still carries — walk it first and it is an empty hallway."
   }
  ]
 }

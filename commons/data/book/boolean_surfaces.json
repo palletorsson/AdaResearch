@@ -10,7 +10,8 @@
     {
      "token": "csg_union_demo",
      "text": "Union is the generous operator. It keeps everything either shape claims",
-     "by": "draft"
+     "by": "draft",
+     "note": "union depends on a yes/no crossing test with no middle: at one float the solids are two, at the next they are one — and the seam it advertises as dissolved is the curve it had to compute first."
     }
    ],
    "hero": "csg_union_demo"
@@ -22,7 +23,8 @@
     {
      "token": "csg_intersection_demo",
      "text": "Intersection is the shape of consensus. What both shapes agree on is always less than either …",
-     "by": "draft"
+     "by": "draft",
+     "note": "intersection depends on an interior the renderer never draws, and it is the one operator whose lawful answer can be nothing: two solids that miss return the empty solid, indistinguishable from a build that failed."
     }
    ],
    "hero": "csg_intersection_demo"
@@ -34,7 +36,8 @@
     {
      "token": "csg_difference_demo",
      "text": "To make a room, subtract a void from a solid. Architecture is difference",
-     "by": "draft"
+     "by": "draft",
+     "note": "difference depends on a face neither solid brought: the cavity wall is B inverted, and it can only be dressed in A's outer skin — a boundary model stores no interior, so the carved inside is the outside, relabelled."
     }
    ],
    "hero": "csg_difference_demo"
@@ -46,7 +49,8 @@
     {
      "token": "csg_compose_workbench",
      "text": "Three operators, one algebra. Composition is a choice",
-     "by": "draft"
+     "by": "draft",
+     "note": "the bench calls three operators an algebra, but the three are an enum on a Godot property: the set is what the engine exposes, not what the algebra holds — no complement, no XOR, closure bought by leaving them out."
     }
    ],
    "hero": "csg_compose_workbench"
@@ -55,13 +59,15 @@
    "pearl": "boolean",
    "map": "Chamber_Boolean",
    "lines": [],
-   "drop": true
+   "drop": true,
+   "edge": "the chamber's verb is to compose, and composition needs an order the finished solid cannot keep: the block handed back has no memory of which verb came first, so the room depends on you remembering."
   },
   {
    "pearl": "boolean architecture cavity",
    "map": "Boolean_Architecture_Cavity",
    "lines": [],
-   "drop": true
+   "drop": true,
+   "edge": "the map claims a room is a wall subtracted from, but one difference makes a hole, not an inside: an interior needs three more runs of solid the map never places — the payoff is read from outside."
   }
  ]
 }

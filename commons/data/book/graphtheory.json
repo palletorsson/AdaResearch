@@ -10,7 +10,8 @@
     {
      "token": "graphspace",
      "text": "a graph is not a diagram — it is a set of relationships",
-     "by": "draft"
+     "by": "draft",
+     "note": "a graph cannot supply its own abstraction — someone must rule first that the stone, the toll and the river are not part of a crossing; Euler's impossibility is exact only because everything that made the walk hard was already thrown away."
     },
     {
      "token": "KonigsbergBridge",
@@ -27,7 +28,8 @@
     {
      "token": "force_directed_layout",
      "text": "Watch a tangled graph draw itself. Springs pull linked nodes together while repulsion pushes every pair apart",
-     "by": "draft"
+     "by": "draft",
+     "note": "a graph has no coordinates, so it must borrow a body — Coulomb's repulsion, Hooke's springs — from a physics that has never heard of the relation it is drawing; change the seed and the centre moves."
     }
    ],
    "hero": "force_directed_layout"
@@ -39,7 +41,8 @@
     {
      "token": "pathfinding3d",
      "text": "pathfinding does not move through space — it moves through a graph that happens to be embedded in space",
-     "by": "draft"
+     "by": "draft",
+     "note": "A* beats exhaustive search only because someone hands it a distance the graph does not contain — h(n) is imported from the embedding, and when the embedding lies the confident path is the wrong one."
     }
    ],
    "hero": "pathfinding3d"
@@ -51,7 +54,8 @@
     {
      "token": "rhizomatic_structure",
      "text": "a rhizome has no beginning and no end — only middles",
-     "by": "draft"
+     "by": "draft",
+     "note": "the rhizome that refuses every root must still be grown from one — each node buds from a random parent, and lateral edges only hide the tree afterwards; at connection_probability 0 the anti-hierarchy is a hierarchy."
     },
     {
      "token": "network_analysis",
@@ -73,7 +77,8 @@
     {
      "token": "topological_sort",
      "text": "Topological sort — linear ordering of vertices in a directed acyclic graph",
-     "by": "draft"
+     "by": "draft",
+     "note": "an order exists only where nothing loops back — the cycles must be contracted to points before the sort can run, so a sequence costs every mutual reachability inside it, and the snarl that will not condense stands aside, unsorted."
     },
     {
      "token": "tarjan_algorithm",
@@ -92,7 +97,8 @@
    "pearl": "graphtheory",
    "map": "Chamber_GraphTheory",
    "lines": [],
-   "drop": true
+   "drop": true,
+   "edge": "you place the nodes and believe you drew the graph, but an edge needs a threshold — the room holds a radius for what counts as near, never shows it, and every relation you think you made was already ruled."
   },
   {
    "pearl": "gt spanning trees",
@@ -101,7 +107,8 @@
     {
      "token": "mst_visualization",
      "text": "the minimum spanning tree is the cheapest way to keep everyone connected",
-     "by": "draft"
+     "by": "draft",
+     "note": "minimum needs a number the graph never had: weight comes from outside, and a different cost function grows a different tree from the same nodes — the cycles it rejects were the only alternative route anything had."
     }
    ],
    "hero": "mst_visualization"
@@ -118,7 +125,8 @@
     {
      "token": "push_relabel_algorithm",
      "text": "push-relabel proves that maximum flow can be found without ever finding a complete path",
-     "by": "draft"
+     "by": "draft",
+     "note": "flow only runs downhill and a graph has no down — push-relabel must invent an altitude, seeding the source at |V| and raising any node that gets stuck, so the gradient carrying everything is a bookkeeping number."
     }
    ],
    "hero": "push_relabel_algorithm"
@@ -130,7 +138,8 @@
     {
      "token": "edmonds_algorithm",
      "text": "matching is the mathematics of pairing — who connects with whom",
-     "by": "draft"
+     "by": "draft",
+     "note": "an odd cycle cannot pair itself — match any two and a third is stranded, so the blossom's completion must come from outside it; the greedy pass shipped here never looks outside, and calls its leftovers structural."
     }
    ],
    "hero": "edmonds_algorithm"

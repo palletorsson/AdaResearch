@@ -10,7 +10,8 @@
     {
      "token": "grid_substrate_runner",
      "text": "an integrated substrate edits the floor that's already there",
-     "by": "draft"
+     "by": "draft",
+     "note": "the floor is the automaton, and a floor must be crossable: a BFS refills whatever the pattern killed between spawn and teleporter, so the first rule the learner meets has already been overruled by the need to carry them."
     },
     {
      "token": "line_network_ca",
@@ -32,7 +33,8 @@
     {
      "token": "structure_growth",
      "text": "3D structure growth simulation",
-     "by": "draft"
+     "by": "draft",
+     "note": "the argument is that 256 is small enough to walk: eight bits enumerate every rule, and a room cannot hold 256 walls, so one 26-neighbour 3D automaton stands where the enumeration should be and completeness stays a claim."
     }
    ],
    "hero": "structure_growth"
@@ -54,7 +56,8 @@
     {
      "token": "ca_bridge",
      "text": "A bridge built by a rule — you walk on computation",
-     "by": "draft"
+     "by": "draft",
+     "note": "you walk on computation, and no three-cell rule knows it owes you a floor: rule 110 computes and fills 49.7% of the deck, rule 250 fills 87.5% and computes nothing — the crossing costs the argument."
     }
    ],
    "hero": "ca_bridge"
@@ -66,7 +69,8 @@
     {
      "token": "ca_growth_network",
      "text": "Growth toward a goal, with noise, is enough to produce every vascular pattern in nature",
-     "by": "draft"
+     "by": "draft",
+     "note": "the vascular claim needs somewhere to grow toward: eight attractors are placed before the first tip moves, so the growth stays local only because the global information was smuggled in ahead of it as goals nobody grew."
     },
     {
      "token": "mold_network",
@@ -103,7 +107,8 @@
     {
      "token": "decaying_bridge",
      "text": "Architecture that reacts to presence is architecture that is alive",
-     "by": "draft"
+     "by": "draft",
+     "note": "reacting to presence is not a local rule: every tick the bridge asks the whole scene tree for a node in group \"player\" and decays within two cells of the answer — the reach that matters is a lookup, not a neighbourhood."
     }
    ],
    "hero": "decaying_bridge"
@@ -115,7 +120,8 @@
     {
      "token": "ca_sphere",
      "text": "The same rules on a sphere produce forms no flat grid ever could",
-     "by": "draft"
+     "by": "draft",
+     "note": "\"the same rules\" needs the same neighbourhood everywhere, and a sphere has none to give: this one is a 64-by-32 lat-long mesh, crowded at the poles and thin at the equator, so the automaton's world is the mesher's."
     },
     {
      "token": "rule_30_110_gravity",
@@ -132,7 +138,8 @@
     {
      "token": "sierpinski_pyramid",
      "text": "Five copies of yourself, arranged just so, and you contain yourself forever",
-     "by": "draft"
+     "by": "draft",
+     "note": "authorship over the rule is the payoff and no procedure comes with it: nothing runs from a wanted behaviour back to a rule number, so writing a rule here is searching 256 of them and looking."
     },
     {
      "token": "ca_rule_explorer",
@@ -146,7 +153,8 @@
    "pearl": "ca",
    "map": "Chamber_CA",
    "lines": [],
-   "drop": true
+   "drop": true,
+   "edge": "two rule systems meet and neither can say who won: Conway keeps no score, so the chamber imports one — a perturbation that outlives a few ticks counts as a contribution, and the clock does the judging."
   },
   {
    "pearl": "ca edgeofchaos",
@@ -160,7 +168,8 @@
     {
      "token": "self_organization_ca",
      "text": "There are two ways to die — freeze into one thing",
-     "by": "draft"
+     "by": "draft",
+     "note": "narrowness can only be shown by leaving the band, and nothing here can leave: lambda is a constant 0.5 with no slider in the map, so the edge of chaos is walked from inside it and the two deaths stay named, not met."
     },
     {
      "token": "disease_spread_ca",

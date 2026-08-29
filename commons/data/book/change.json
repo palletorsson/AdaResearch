@@ -15,7 +15,8 @@
     {
      "token": "slope_tangent_demo",
      "text": "the slope at a point is the rate of change there",
-     "by": "draft"
+     "by": "draft",
+     "note": "the slope is quoted, not measured: it reads cos(x) because the curve was chosen as sin — so this room shows a rate only for functions already differentiated on paper, and never takes the limit it is named for."
     }
    ],
    "hero": "slope_tangent_demo"
@@ -27,7 +28,8 @@
     {
      "token": "velocity_arrow",
      "text": "velocity is the derivative of position — motion is the visible rate at which where-you-are becomes …",
-     "by": "draft"
+     "by": "draft",
+     "note": "the arrow points along a chord to a point 0.05 radians ahead: the puck must be read where it has not arrived, and the chord cuts the corner hardest at the bend the artifact exists to show."
     }
    ],
    "hero": "velocity_arrow"
@@ -39,7 +41,8 @@
     {
      "token": "partial_derivative_terrain",
      "text": "a derivative in more than one dimension is not one number but a choice of direction",
-     "by": "draft"
+     "by": "draft",
+     "note": "the two arrows measure the hill only along axes someone laid over it — rotate the grid and both numbers change while the ground does not: a partial derivative is a property of the question, not the surface."
     }
    ],
    "hero": "partial_derivative_terrain"
@@ -51,7 +54,8 @@
     {
      "token": "integral_area",
      "text": "the integral is accumulation — where the derivative asks how fast",
-     "by": "draft"
+     "by": "draft",
+     "note": "the smooth fill is eighty strips: the room promises a boundary swept continuously and ships a comb fine enough to pass for one, so its continuity is an integer anyone can raise or lower."
     }
    ],
    "hero": "integral_area"
@@ -63,7 +67,8 @@
     {
      "token": "riemann_pump",
      "text": "area under a curve has no single recipe — left",
-     "by": "draft"
+     "by": "draft",
+     "note": "the exact area is a limit no pump can reach — this hall runs four strips to thirty-two and asserts where infinitely many would land, so every integral downstream is a promise nobody here audits."
     },
     {
      "token": "riemann_pi",
@@ -80,7 +85,8 @@
     {
      "token": "vector_field_grid",
      "text": "a field is not one arrow but a rule that hands you an arrow wherever you stand",
-     "by": "draft"
+     "by": "draft",
+     "note": "a field owes a vector to every point and can afford ninety-six arrows: between them the rule is taken on trust, from a stream function chosen by someone the room never names."
     }
    ],
    "hero": "vector_field_grid"
@@ -92,7 +98,8 @@
     {
      "token": "particle_flow_swarm",
      "text": "a field is invisible until a body moves through it — the particle is how the field speaks",
-     "by": "draft"
+     "by": "draft",
+     "note": "the trails are not memory: each is the field integrated backwards from where the particle stands now, so under the scrolling field the room hands every body a past it never had."
     }
    ],
    "hero": "particle_flow_swarm"
@@ -104,7 +111,8 @@
     {
      "token": "ftc_bridge",
      "text": "differentiation and integration are the same bridge walked in opposite directions",
-     "by": "draft"
+     "by": "draft",
+     "note": "the beam reads f(b) − f(a) over a deck that is a symmetric parabola, so the ends sit level and the theorem the chapter closes on says 0 = 0 in twenty-six rooms."
     }
    ],
    "hero": "ftc_bridge"

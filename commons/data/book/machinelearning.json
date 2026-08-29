@@ -10,7 +10,8 @@
     {
      "token": "evolved_creatures",
      "text": "Physics-based creature evolution inspired by Karl Sims",
-     "by": "draft"
+     "by": "draft",
+     "note": "selection needs a fitness function and a mutation rate the population cannot itself evolve — the creatures reach every gene except the two set from outside the arena, and can only converge on what was already scored."
     },
     {
      "token": "gradient_descent_visualization",
@@ -37,7 +38,8 @@
     {
      "token": "pca_visualization",
      "text": "PCA reveals that high-dimensional data is a conspiracy of a few directions pretending to be …",
-     "by": "draft"
+     "by": "draft",
+     "note": "the walkable terrain needs a loss function to shape it, and the map moves only eta: you descend into whichever valley someone else's definition of error dug, and call the bottom understanding."
     },
     {
      "token": "loss_function_comparator",
@@ -59,7 +61,8 @@
     {
      "token": "svm_visualization",
      "text": "the decision boundary depends on only a few points",
-     "by": "draft"
+     "by": "draft",
+     "note": "a boundary needs axes: k-means, svm and the forest each argue about how to draw the line and none of them picks the features — what was never made a coordinate is not misclassified, it is simply absent."
     },
     {
      "token": "random_forest_visualization",
@@ -76,7 +79,8 @@
     {
      "token": "neural_network_visualization",
      "text": "a neural network does not learn rules — it learns a continuous function that happens to approximate …",
-     "by": "draft"
+     "by": "draft",
+     "note": "the corridor shows every weight and every activation and still cannot show the thing that matters: generalisation lives in the gap between training error and test error, which is statistical, not spatial, and no chamber holds it."
     },
     {
      "token": "neural_networks_vr",
@@ -93,7 +97,8 @@
     {
      "token": "computer_vision_vr",
      "text": "every act of perception is a convolution — a commitment to which local patterns matter",
-     "by": "draft"
+     "by": "draft",
+     "note": "perception needs a standpoint it cannot itself supply: the gallery seats you outside the alcoves as though seeing were something to watch, and the empty third alcove is where the machine's own chosen gaze should hang."
     },
     {
      "token": "convolutional_neural_networks_cnns_vr",
@@ -110,7 +115,8 @@
     {
      "token": "transformers_vr",
      "text": "attention is all you need — the transformer proves that explicit memory gates are unnecessary when every token can directly query every …",
-     "by": "draft"
+     "by": "draft",
+     "note": "attention needs the whole sequence at once and a body cannot have it: you walk the corridor one cell at a time, so the map teaches recurrence with your feet while the artifact inside abolishes it."
     },
     {
      "token": "lstms_vr",
@@ -124,7 +130,8 @@
    "pearl": "ml",
    "map": "Chamber_ML",
    "lines": [],
-   "drop": true
+   "drop": true,
+   "edge": "the hunter cannot supply its own training data: it improves only as far as you are legible, so your one defence is to move unpredictably — and staying unpredictable is more tiring than being learned."
   },
   {
    "pearl": "ml generative",
@@ -133,7 +140,8 @@
     {
      "token": "generative_adversarial_networks_gans_vr",
      "text": "creation can emerge from opposition — the generator learns to create precisely because the discriminator learns to …",
-     "by": "draft"
+     "by": "draft",
+     "note": "the generator never sees the world: everything it learns about real arrives through one doorway as the discriminator's gradient, and the discriminator only ever saw a dataset someone collected — so the room dreams what it was shown."
     }
    ],
    "hero": "generative_adversarial_networks_gans_vr"
@@ -145,7 +153,8 @@
     {
      "token": "anomaly_detection",
      "text": "Outlier detection algorithms — isolation forests",
-     "by": "draft"
+     "by": "draft",
+     "note": "synthesis needs bridges its parts cannot supply: three islands over h0 void, the anomaly detector exiled furthest out, and the walkways hold only because someone built them — connection or rationalisation, the teleporter does not say."
     },
     {
      "token": "joint_learn_walk",

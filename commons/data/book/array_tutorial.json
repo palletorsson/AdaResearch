@@ -10,7 +10,8 @@
     {
      "token": "xyz_coordinates",
      "text": "Cartesian coordinate system, x y z godot",
-     "by": "draft"
+     "by": "draft",
+     "note": "a single cube has no index: one object cannot say where it is, so the map lends it a frame — and the gadget's right angles and unit lengths get read as properties of space rather than one convention."
     }
    ],
    "hero": "xyz_coordinates"
@@ -22,7 +23,8 @@
     {
      "token": "panel_bridge_loom",
      "text": "Three interactive VR panels displaying a weaving draft",
-     "by": "draft"
+     "by": "draft",
+     "note": "the drawdown is the one panel you cannot edit: no thread in the cloth is addressable, only the two orders above it, so the diagonal you want has to be argued for upstream and never placed."
     },
     {
      "token": "script_runner",
@@ -59,7 +61,8 @@
     {
      "token": "tiling_demo",
      "text": "a tiling motif is a function from grid index to visual element",
-     "by": "draft"
+     "by": "draft",
+     "note": "a repeat needs a plane that will accept it, and the plane accepts exactly seventeen grammars — no eighteenth, no five-fold rosette; Casa del Fauno and the Cosmatesque floors are instances, never additions."
     },
     {
      "token": "pattern_tunnel_machine",
@@ -86,7 +89,8 @@
     {
      "token": "column_3_z",
      "text": "an array is space made countable — column_3_z makes the abstract concept of an index into a physical position you can walk …",
-     "by": "draft"
+     "by": "draft",
+     "note": "the row cannot say which cube is [0] — an index is a count from an end somebody chose, so the pink tags are borrowed, and lifting a cube leaves a hole that keeps counting."
     }
    ],
    "hero": "column_3_z"
@@ -98,7 +102,8 @@
     {
      "token": "pulsar_visualizer",
      "text": "the first discovered pulsar was initially called LGM-1 (Little Green Men) because the signal's regularity seemed artificial",
-     "by": "draft"
+     "by": "draft",
+     "note": "the grid can address any cell but cannot decide what belongs in one: the pulsar arrives continuous and is cut at 0.25 — below the line the star stops existing, and the remainder reads as engineered."
     },
     {
      "token": "grid_2d_4x4",
@@ -125,7 +130,8 @@
     {
      "token": "grid_3d_4x4x4",
      "text": "a three-dimensional array is the minimum structure needed to represent volumetric space",
-     "by": "draft"
+     "by": "draft",
+     "note": "a filled 4×4×4 has no readable inside: the inner indices reach the eye only because every label is drawn with depth testing off, through the cubes in front of it, and reach the hand only by emptying them."
     },
     {
      "token": "sorting_algorithm_race",
@@ -154,7 +160,8 @@
    "pearl": "arrays",
    "map": "Chamber_Arrays",
    "lines": [],
-   "drop": true
+   "drop": true,
+   "edge": "arrangement is not authorship until something else must route around it: the chamber fires nothing, so it borrows the agent's plan to make a placed block mean anything, and the meaning arrives as extra steps."
   },
   {
    "pearl": "tutorial disco",
@@ -163,7 +170,8 @@
     {
      "token": "step_sequencer",
      "text": "a step sequencer is a for-loop over time — the array of steps is executed rhythmically",
-     "by": "draft"
+     "by": "draft",
+     "note": "a boolean array knows which, never when: the floor stays silent until a clock is lent at 120 BPM, and whatever you walked between two of its sixteen columns never happened."
     },
     {
      "token": "standalone_disco",

@@ -20,7 +20,8 @@
     {
      "token": "angle_sum_triangle",
      "text": "the angle sum of a triangle is not a fact about triangles but a fact about the space they …",
-     "by": "draft"
+     "by": "draft",
+     "note": "the triangle cannot supply its own angle sum — 180° is a fact about the space, and the space arrives as a postulate every proof uses and no proof produces: certainty standing on a decision, not a truth."
     }
    ],
    "hero": "angle_sum_triangle"
@@ -42,7 +43,8 @@
     {
      "token": "poincare_disk",
      "text": "infinity can be contained in a finite disk — the Poincare model proves that hyperbolic geometry is as consistent as …",
-     "by": "draft"
+     "by": "draft",
+     "note": "hyperbolic space cannot be drawn honestly: the disk buys a finite picture of infinity by crushing the metric toward the rim, so every equal step outward is drawn smaller and the boundary is infinity rendered as a wall."
     },
     {
      "token": "hyperbolic_surface",
@@ -64,7 +66,8 @@
     {
      "token": "self_membership_set",
      "text": "The set that contains itself, all the way down - R = {x : x not-in x}, is R in R?",
-     "by": "draft"
+     "by": "draft",
+     "note": "a set that contains itself cannot supply its own bottom: the nest is only legible because someone cut it at five, and that cut — foundation, types, a levels export — is the restriction the paradox extorted."
     },
     {
      "token": "barber_paradox",
@@ -91,7 +94,8 @@
     {
      "token": "godel_sentence_machine",
      "text": "if G were provable it would be false (it asserts its own unprovability)",
-     "by": "draft"
+     "by": "draft",
+     "note": "the machine builds G out of its own rules but cannot supply the standpoint from which G reads true — the gold verdict is spoken from outside, on a soundness no arm inside can reach."
     },
     {
      "token": "provability_sorter",
@@ -113,7 +117,8 @@
     {
      "token": "escher_staircase",
      "text": "locally coherent does not mean globally possible",
-     "by": "draft"
+     "by": "draft",
+     "note": "an impossible figure cannot supply its own coherence: it depends on the one standpoint where the loop appears to close, and pays by hiding the joint — the fourth side quietly eased to zero where nobody looks."
     },
     {
      "token": "magritte_pipe",
@@ -140,7 +145,8 @@
     {
      "token": "constructive_proof",
      "text": "existence without construction is an article of faith, not a proof",
-     "by": "draft"
+     "by": "draft",
+     "note": "existence here cannot be asserted, only produced: the proof depends on somebody building the witness in time, and pays in everything true but unbuilt — the platforms that trail off are not false, they are unconstructed."
     },
     {
      "token": "brouwer_choice_sequence",
@@ -164,7 +170,8 @@
    "pearl": "foundations",
    "map": "Chamber_Foundations",
    "lines": [],
-   "drop": true
+   "drop": true,
+   "edge": "no test inside the chamber tells the two ghosts apart, so undecidability only becomes legible on a screen bolted to the wall: the lesson needs the outside view the fight forbids, or it reads as bad aim."
   },
   {
    "pearl": "florensky paraconsistent",
@@ -173,7 +180,8 @@
     {
      "token": "schrodinger_box",
      "text": "observation does not reveal a pre-existing state — it creates one",
-     "by": "draft"
+     "by": "draft",
+     "note": "the box cannot show what it holds — superposition needs the lid shut — so its only freedom is where to put the part it cannot display: sealed in the core, split to a twin, smeared into haze."
     },
     {
      "token": "both_true_gate",
@@ -200,7 +208,8 @@
     {
      "token": "lambda_slider",
      "text": "lambda is the entropy drive — the dial between crystallization and dissolution that every living system must …",
-     "by": "draft"
+     "by": "draft",
+     "note": "the dial depends on a calibration chain that ends nowhere — there is no metre bar for how much a system should value disorder — so the instrument covers the gap by painting the right answer on in green."
     },
     {
      "token": "phi_slider",

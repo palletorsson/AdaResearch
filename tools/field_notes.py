@@ -140,6 +140,18 @@ def gather(only: str = "") -> dict:
                     "claimed": claimed,
                     "hang": ({"cell": list(h.get("cell", [])), "dir": list(h.get("dir", []))} if h else None),
                 })
+            # A PEARL WITH NO LINES STILL HAS AN EDGE (2026-08-28). 51 of the
+            # 250 maps are chambers and stubs whose pearl carries no lines at
+            # all, so there is nothing to hang a `note` on. Their edge sits on
+            # the PEARL as `edge`, which the trunk does not own and a migrate
+            # therefore keeps. Reported here as a row with no line, because a
+            # map's edge is worth reading whether or not the hall has words yet.
+            pearl_edge = str(p.get("edge", "") or "").strip()
+            if pearl_edge:
+                n_notes += 1
+                rows.append({"index": -1, "token": "", "text": "", "by": "",
+                             "viz": "", "note": pearl_edge, "claimed": False,
+                             "hang": None, "pearl_level": True})
             if rows:
                 pearls.append({
                     "pearl": str(p.get("pearl", "") or ""),
@@ -214,7 +226,9 @@ def render(doc: dict) -> str:
             for r in p["notes"]:
                 # bold the token, but never wrap the italic fallback in bold too —
                 # ***three stars*** is a different mark and renders as neither
-                who = f"**`{r['token']}`**" if r["token"] else "*the hall's own wall text*"
+                who = (f"**`{r['token']}`**" if r["token"]
+                       else "*the hall itself*" if r.get("pearl_level")
+                       else "*the hall's own wall text*")
                 at = ""
                 if r["hang"] and len(r["hang"]["cell"]) >= 2:
                     cx, cz = r["hang"]["cell"][0], r["hang"]["cell"][1]
@@ -222,6 +236,8 @@ def render(doc: dict) -> str:
                 out += [f"{who}{at}", ""]
                 if r["text"]:
                     out += [f"> *{r['text']}*", ""]
+                elif r.get("pearl_level"):
+                    pass                      # no line yet; the edge stands alone
                 elif r["note"]:
                     out += ["> *(no line yet — the reflection came first)*", ""]
                 if r["note"]:
