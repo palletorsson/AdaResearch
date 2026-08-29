@@ -21,7 +21,9 @@ extends Node3D
 @export var upper_arm_length: float = 0.28
 @export var lower_arm_length: float = 0.25
 
-## Hand bone length (cosmetic, not part of IK chain solve).
+## Nominal hand length. NOT drawn since 2026-08-29 and not part of the IK
+## solve — the Hand bone ends the chain and carries the wrist orientation,
+## and the visible hand past the wrist is xr-tools own.
 var hand_length: float = 0.08
 
 ## ————————————————————————————————————————————————————————————————————
@@ -40,8 +42,14 @@ var _idx_upper: int = -1
 var _idx_lower: int = -1
 var _idx_hand: int = -1
 
-## Ring radii for the tapered procedural mesh (shoulder → elbow → wrist → tip)
-const RING_RADII: Array[float] = [0.04, 0.035, 0.03, 0.02]
+## Ring radii for the tapered procedural mesh: shoulder → elbow → WRIST, and it
+## stops there. Palle, 2026-08-29: "3 parts might be one too many. I feel like
+## the hand should be the 3rd part." There was a fourth ring at
+## wrist + hand_length, which drew a third tapered tube past the wrist — so the
+## arm read as upper, fore and a second small forearm where a hand should be.
+## The third part is the VR hand itself, which xr-tools already draws and which
+## the wrist now meets exactly.
+const RING_RADII: Array[float] = [0.04, 0.035, 0.03]
 const RING_SEGMENTS: int = 8
 
 ## ————————————————————————————————————————————————————————————————————
@@ -55,9 +63,10 @@ func _ready() -> void:
 	_build_procedural_mesh()
 
 	var side_label: String = "Left" if is_left else "Right"
-	print("[IKArmRig] %s arm rig built — bones: %.2f + %.2f + %.2f m" % [
-		side_label, upper_arm_length, lower_arm_length, hand_length
-	])
+	print("[IKArmRig] %s arm: upper %.2f + fore %.2f = %.2f m to the wrist, "
+		% [side_label, upper_arm_length, lower_arm_length,
+		   upper_arm_length + lower_arm_length]
+		+ "then the VR hand")
 
 
 func _physics_process(_delta: float) -> void:
@@ -199,16 +208,18 @@ func _build_procedural_mesh() -> void:
 	var ring_y_positions: Array[float] = [
 		0.0,                                           # shoulder (UpperArm origin)
 		-upper_arm_length,                             # elbow (LowerArm origin)
-		-(upper_arm_length + lower_arm_length),        # wrist (Hand origin)
-		-(upper_arm_length + lower_arm_length + hand_length) # hand tip
+		-(upper_arm_length + lower_arm_length),        # wrist (Hand origin) — the end
 	]
 
 	## Which bone owns each ring (100% weight to nearest bone)
+	## The cuff still rides the HAND bone, not the forearm: where the sleeve meets
+	## the real hand it should turn with the wrist, or the two part company on a
+	## roll. The Hand bone stays in the skeleton — the IK chain needs an end bone
+	## and it carries the wrist orientation — it is simply no longer drawn.
 	var ring_bone_index: Array[int] = [
 		_idx_upper,  # shoulder ring → UpperArm
 		_idx_lower,  # elbow ring → LowerArm
-		_idx_hand,   # wrist ring → Hand
-		_idx_hand    # tip ring → Hand
+		_idx_hand,   # wrist ring → Hand — the sleeve's cuff
 	]
 
 	## Generate ring vertices
