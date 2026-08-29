@@ -167,10 +167,14 @@ func _build_two_bone_ik() -> void:
 	## Note the three-bone naming: root / MIDDLE / end, and the paths must resolve
 	## FROM THE MODIFIER, so they are made relative to it rather than absolute.
 	## The three bone rests are all IDENTITY basis, so the solver has no bone axis
-	## to swing around unless it is allowed to derive one. NOTE: turning this on
-	## did NOT by itself make the arm bend — it is kept because an identity-rest
-	## chain needs it, not because it was the fix. See the probe: the modifier
-	## still does not move the bones with the chain and target both correct.
+	## to swing around unless it is allowed to derive one.
+	##
+	## THE KINEMATICS DO WORK — confirmed in a headset, 2026-08-29. An earlier note
+	## here said the modifier never moved the bones; that was a fact about the probe,
+	## which framed the arm off-camera in a 320x200 window while Skeleton3D skips its
+	## update when nothing is looking. Two separate ways to measure nothing and call
+	## it a broken rig, in one afternoon: read the note in probe_ik_arms.gd before
+	## trusting a null reading from it.
 	_two_bone_ik.set("mutable_bone_axes", true)
 	_two_bone_ik.set("setting_count", 1)
 	_two_bone_ik.set("settings/0/root_bone_name", "UpperArm")
@@ -267,7 +271,15 @@ func _build_procedural_mesh() -> void:
 	skin.set_bind_count(_skeleton.get_bone_count())
 	for bone_i in range(_skeleton.get_bone_count()):
 		skin.set_bind_bone(bone_i, bone_i)
-		skin.set_bind_pose(bone_i, _skeleton.get_bone_rest(bone_i).affine_inverse())
+		## THE BIND POSE IS GLOBAL, NOT LOCAL — and this is the 50 cm.
+		## get_bone_rest() is the bone's rest RELATIVE TO ITS PARENT; a bind pose
+		## must invert the bone's rest in SKELETON space. Using the local rest
+		## binds every bone as if its parents were at the origin, so the mesh is
+		## displaced by exactly the offsets it skipped: for the Hand bone that is
+		## upper 0.28 + lower 0.25 = 0.53 m. Palle, 2026-08-29: "the arm wrist is
+		## attached in front like 50 cm of the hands". The skeleton was solving
+		## correctly the whole time; only the skin was hung wrong.
+		skin.set_bind_pose(bone_i, _skeleton.get_bone_global_rest(bone_i).affine_inverse())
 
 	## MeshInstance3D
 	_mesh_instance = MeshInstance3D.new()

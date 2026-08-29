@@ -62,7 +62,12 @@ const SLOTS := {
 
 @export_group("Extra limbs")
 ## Four beyond the two you drive. They hang off the shoulder line and the hips.
-@export var limb_count: int = 4
+## THE SPIDER BODY IS OFF WHILE THE ARMS ARE REBUILT (2026-08-29, Palle:
+## "remove the spider body for now"). The four reaching limbs are the most
+## finished part of the costume and the most distracting thing to have in
+## view while judging whether two driven arms sit on the wrists correctly.
+## Nothing is deleted: set this back to 4 and they return exactly as they were.
+@export var limb_count: int = 0
 @export var limb_segments: int = 4
 @export var limb_length: float = 0.22       ## metres per segment
 @export var limb_lag: float = 0.16          ## how slowly a target follows
