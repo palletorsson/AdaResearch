@@ -204,6 +204,44 @@ def book_lines() -> list:
     return out
 
 
+_SPINE_META: dict = {}
+
+
+def spine_meta() -> dict:
+    """chapter -> {phase, qfep_role, order}, straight from the spine.
+
+    Memoised. The first version called this once per chapter inside a loop and
+    then again per artifact, so one panel re-read and re-parsed the spine file
+    dozens of times; --token went from 1.8s to 14s and the browser gave up before
+    it answered. A cheap function called in a loop is not cheap.
+
+    THE ARC IS ALREADY WRITTEN DOWN. Palle, 2026-08-30: "ada research is a
+    tutorial gone strange... starting in the point ending up somewhere in
+    non-Euclidean space irreducibility qfep." That is not a mood, it is
+    curriculum_spine.json: 22 sequences carrying a phase in the order F_order,
+    oscillation, E_entropy, lambda_edge, integration, relation, synthesis — and a
+    qfep_role that runs from "Foundation - points, lines, planes" to "Godel,
+    Russell - limits of formal systems" and "The complete QFEP formula embodied".
+
+    So a work's place in the book is not only an ordinal. It is a position on
+    that arc, and the arc can be named rather than counted."""
+    if _SPINE_META:
+        return _SPINE_META
+    try:
+        d = json.loads((REPO / "commons" / "maps" / "curriculum_spine.json").read_text(encoding="utf-8"))
+        seq = ((d.get("spine") or {}).get("sequences")) or []
+    except Exception:
+        return {}
+    out = {}
+    for s in seq:
+        if isinstance(s, dict) and s.get("name"):
+            out[str(s["name"])] = {"phase": str(s.get("phase", "")),
+                                   "qfep_role": str(s.get("qfep_role", "")),
+                                   "order": s.get("order")}
+    _SPINE_META.update(out)
+    return out
+
+
 def spine_order() -> list:
     """The chapter order the book actually runs in.
 
@@ -233,6 +271,9 @@ def spine_order() -> list:
 PARAS_PER_PAGE = 4
 
 
+_POS_CACHE: dict = {}
+
+
 def book_position(tok: str) -> dict:
     """Where this work falls in the book, walking chapters in spine order.
 
@@ -240,6 +281,8 @@ def book_position(tok: str) -> dict:
     the works in them — so a work's ordinal among the token lines is its
     approximate place in the finished text. A work that appears in several halls
     gets its FIRST appearance; that is where a reader meets it."""
+    if tok in _POS_CACHE:
+        return _POS_CACHE[tok]
     order = spine_order()
     n = 0
     first = None
@@ -263,14 +306,30 @@ def book_position(tok: str) -> dict:
                              "ordinal": n}
         per_chapter[ch] = n
     if first is None:
-        return {"found": False, "total": n,
-                "why": "this work has no line anywhere in the book"}
+        _POS_CACHE[tok] = {"found": False, "total": n,
+                           "why": "this work has no line anywhere in the book"}
+        return _POS_CACHE[tok]
     first["total"] = n
     first["percent"] = round(100.0 * first["ordinal"] / max(1, n), 1)
     first["approx_page"] = max(1, round(first["ordinal"] / PARAS_PER_PAGE))
     first["approx_pages"] = max(1, round(n / PARAS_PER_PAGE))
     first["paras_per_page"] = PARAS_PER_PAGE
     first["found"] = True
+    # where on the arc, named. The phases run F_order -> oscillation -> E_entropy
+    # -> lambda_edge -> integration -> relation -> synthesis; a reader who wants
+    # to know whether a work sits near the point or near the irreducible is asking
+    # about this, not about a page number.
+    meta = spine_meta().get(first["chapter"], {})
+    first["phase"] = meta.get("phase", "")
+    first["qfep_role"] = meta.get("qfep_role", "")
+    phases = []
+    for ch in order:
+        ph = spine_meta().get(ch, {}).get("phase", "")
+        if ph and ph not in phases:
+            phases.append(ph)
+    first["phases"] = phases
+    first["phase_i"] = (phases.index(first["phase"]) + 1) if first["phase"] in phases else 0
+    _POS_CACHE[tok] = first
     return first
 
 
