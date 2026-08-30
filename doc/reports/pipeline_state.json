@@ -1,0 +1,459 @@
+{
+ "generated": "2026-08-30T10:49:10",
+ "took_s": 28.2,
+ "arc": [
+  {
+   "chapter": "primitives",
+   "order": 1,
+   "phase": "F_order",
+   "qfep_role": "Foundation - points, lines, planes, and basic vectors",
+   "halls": 11,
+   "works": 121,
+   "said": 85,
+   "noted": 12,
+   "tutorials": 10,
+   "with_header": 111
+  },
+  {
+   "chapter": "transformation",
+   "order": 2,
+   "phase": "F_order",
+   "qfep_role": "Invariants - dot/cross products enable rotation",
+   "halls": 8,
+   "works": 24,
+   "said": 24,
+   "noted": 8,
+   "tutorials": 8,
+   "with_header": 22
+  },
+  {
+   "chapter": "color",
+   "order": 3,
+   "phase": "F_order",
+   "qfep_role": "Foundation - colour systems become composition systems, on an index the arrays supply: address, then attribute, then rule, then the made thing",
+   "halls": 8,
+   "works": 50,
+   "said": 49,
+   "noted": 8,
+   "tutorials": 8,
+   "with_header": 27
+  },
+  {
+   "chapter": "change",
+   "order": 4,
+   "phase": "F_order",
+   "qfep_role": "Foundation - the calculus substrate. Derivative as instantaneous rate, integral as accumulation, vector field as flow. The vocabulary forces / wavefunctions / randomness / noise will all use.",
+   "halls": 8,
+   "works": 10,
+   "said": 10,
+   "noted": 8,
+   "tutorials": 8,
+   "with_header": 10
+  },
+  {
+   "chapter": "forces",
+   "order": 5,
+   "phase": "oscillation",
+   "qfep_role": "Newton's laws - vectors become physics",
+   "halls": 22,
+   "works": 120,
+   "said": 107,
+   "noted": 22,
+   "tutorials": 16,
+   "with_header": 108
+  },
+  {
+   "chapter": "formfinding",
+   "order": 6,
+   "phase": "F_order",
+   "qfep_role": "Foundation - the F term made physical; free-energy minimization as the shape matter settles into, stopping short of the dead-perfect bottom",
+   "halls": 6,
+   "works": 16,
+   "said": 15,
+   "noted": 6,
+   "tutorials": 0,
+   "with_header": 16
+  },
+  {
+   "chapter": "wavefunctions",
+   "order": 7,
+   "phase": "oscillation",
+   "qfep_role": "F ↔ E oscillation - sine creates curves",
+   "halls": 12,
+   "works": 80,
+   "said": 27,
+   "noted": 12,
+   "tutorials": 12,
+   "with_header": 71
+  },
+  {
+   "chapter": "randomness",
+   "order": 8,
+   "phase": "E_entropy",
+   "qfep_role": "Disorder as creative force",
+   "halls": 14,
+   "works": 64,
+   "said": 64,
+   "noted": 14,
+   "tutorials": 14,
+   "with_header": 53
+  },
+  {
+   "chapter": "noise",
+   "order": 9,
+   "phase": "E_entropy",
+   "qfep_role": "Structured randomness - Perlin, flow fields",
+   "halls": 8,
+   "works": 16,
+   "said": 16,
+   "noted": 8,
+   "tutorials": 8,
+   "with_header": 16
+  },
+  {
+   "chapter": "cellularautomata",
+   "order": 10,
+   "phase": "lambda_edge",
+   "qfep_role": "Simple rules → complex behavior. Rule 110 is Turing complete — the λ_edge thesis.",
+   "halls": 8,
+   "works": 22,
+   "said": 22,
+   "noted": 8,
+   "tutorials": 8,
+   "with_header": 17
+  },
+  {
+   "chapter": "fractals",
+   "order": 11,
+   "phase": "lambda_edge",
+   "qfep_role": "Self-similarity, infinite detail",
+   "halls": 10,
+   "works": 45,
+   "said": 45,
+   "noted": 10,
+   "tutorials": 10,
+   "with_header": 43
+  },
+  {
+   "chapter": "lsystems",
+   "order": 12,
+   "phase": "lambda_edge",
+   "qfep_role": "Generative grammars",
+   "halls": 7,
+   "works": 16,
+   "said": 16,
+   "noted": 7,
+   "tutorials": 6,
+   "with_header": 13
+  },
+  {
+   "chapter": "proceduralgeneration",
+   "order": 13,
+   "phase": "lambda_edge",
+   "qfep_role": "WFC, Markov, emergence from rules",
+   "halls": 7,
+   "works": 12,
+   "said": 12,
+   "noted": 7,
+   "tutorials": 7,
+   "with_header": 10
+  },
+  {
+   "chapter": "softbodies",
+   "order": 14,
+   "phase": "integration",
+   "qfep_role": "Deformable matter, cloth, fluid + Turing morphogenesis. Cloth descends an energy landscape under gravity + spring constraints.",
+   "halls": 9,
+   "works": 15,
+   "said": 15,
+   "noted": 9,
+   "tutorials": 8,
+   "with_header": 14
+  },
+  {
+   "chapter": "isosurfaces",
+   "order": 15,
+   "phase": "F_order",
+   "qfep_role": "Implicit fields → explicit surfaces. Marching cubes as the bridge from continuous fields to walkable mesh.",
+   "halls": 12,
+   "works": 25,
+   "said": 25,
+   "noted": 12,
+   "tutorials": 10,
+   "with_header": 22
+  },
+  {
+   "chapter": "boolean_surfaces",
+   "order": 16,
+   "phase": "F_order",
+   "qfep_role": "CSG operations as composition logic — union, intersection, difference of solids.",
+   "halls": 4,
+   "works": 4,
+   "said": 4,
+   "noted": 4,
+   "tutorials": 4,
+   "with_header": 4
+  },
+  {
+   "chapter": "swarmintelligence",
+   "order": 17,
+   "phase": "lambda_edge",
+   "qfep_role": "Collective behavior, stigmergy — local rules + memory of rules → emergent global pattern. Swarm's qfep_term is self-declared λ.",
+   "halls": 7,
+   "works": 11,
+   "said": 10,
+   "noted": 7,
+   "tutorials": 7,
+   "with_header": 11
+  },
+  {
+   "chapter": "machinelearning",
+   "order": 18,
+   "phase": "integration",
+   "qfep_role": "Learning systems, neural networks",
+   "halls": 8,
+   "works": 19,
+   "said": 19,
+   "noted": 8,
+   "tutorials": 8,
+   "with_header": 16
+  },
+  {
+   "chapter": "graphtheory",
+   "order": 19,
+   "phase": "relation",
+   "qfep_role": "Connections define structure. The substrate that was always under it all — every cell, force, agent, neuron was a node; every adjacency, attraction, message, weight was an edge.",
+   "halls": 8,
+   "works": 14,
+   "said": 14,
+   "noted": 8,
+   "tutorials": 8,
+   "with_header": 14
+  },
+  {
+   "chapter": "foundationscrisis",
+   "order": 20,
+   "phase": "synthesis",
+   "qfep_role": "Gödel, Russell - limits of formal systems",
+   "halls": 8,
+   "works": 31,
+   "said": 31,
+   "noted": 8,
+   "tutorials": 8,
+   "with_header": 28
+  },
+  {
+   "chapter": "qfeplaboratory",
+   "order": 21,
+   "phase": "synthesis",
+   "qfep_role": "The complete QFEP formula embodied",
+   "halls": 7,
+   "works": 29,
+   "said": 29,
+   "noted": 7,
+   "tutorials": 7,
+   "with_header": 27
+  },
+  {
+   "chapter": "postfoundationscrisis",
+   "order": 22,
+   "phase": "synthesis",
+   "qfep_role": "Applied limits — bias, rhizomes, molecular design as post-crisis practice",
+   "halls": 8,
+   "works": 15,
+   "said": 15,
+   "noted": 8,
+   "tutorials": 8,
+   "with_header": 14
+  },
+  {
+   "chapter": "array_tutorial",
+   "order": null,
+   "phase": "",
+   "qfep_role": "",
+   "halls": 7,
+   "works": 23,
+   "said": 23,
+   "noted": 7,
+   "tutorials": 7,
+   "with_header": 22
+  },
+  {
+   "chapter": "symmetry",
+   "order": null,
+   "phase": "",
+   "qfep_role": "",
+   "halls": 6,
+   "works": 21,
+   "said": 21,
+   "noted": 6,
+   "tutorials": 0,
+   "with_header": 14
+  }
+ ],
+ "phases": [
+  "F_order",
+  "oscillation",
+  "E_entropy",
+  "lambda_edge",
+  "integration",
+  "relation",
+  "synthesis"
+ ],
+ "layers": [
+  {
+   "id": "header",
+   "label": "what each work explains",
+   "where": "its own .gd header",
+   "kb": 1539.0,
+   "have": 670,
+   "of": 770,
+   "base": true
+  },
+  {
+   "id": "tutorial",
+   "label": "what the room teaches",
+   "where": "commons/maps/*/tutorial.md",
+   "kb": 680.5,
+   "have": 190,
+   "of": 213,
+   "base": true
+  },
+  {
+   "id": "critical",
+   "label": "the critical registers",
+   "where": "commons/maps/*/critical.md",
+   "kb": 1151.5,
+   "have": 241,
+   "of": 213,
+   "base": false
+  },
+  {
+   "id": "wall",
+   "label": "the sentence on the wall",
+   "where": "commons/data/book/*.json",
+   "kb": 50.4,
+   "have": 698,
+   "of": 803,
+   "base": false
+  },
+  {
+   "id": "note",
+   "label": "the reflection",
+   "where": "line.note in the book",
+   "kb": 42.8,
+   "have": 214,
+   "of": 803,
+   "base": false
+  }
+ ],
+ "book": {
+  "chapters": 24,
+  "halls": 213,
+  "works": 803,
+  "said": 698,
+  "noted": 214,
+  "approx_pages": 201
+ },
+ "corpus": {
+  "registry": 2878,
+  "placed": 2453,
+  "in_book": 801
+ },
+ "wants": {
+  "work_no_words": 1649,
+  "slot_no_words": 105,
+  "line_no_work": 4
+ },
+ "surfaces": [
+  {
+   "path": "/studio",
+   "does": "make the book, one chapter at a time",
+   "writes": true
+  },
+  {
+   "path": "/wall-texts",
+   "does": "every sentence, and what each work explains",
+   "writes": true
+  },
+  {
+   "path": "/wall-map",
+   "does": "one hall, and this work in the text",
+   "writes": true
+  },
+  {
+   "path": "/lines",
+   "does": "the book as rows, order and locks",
+   "writes": true
+  },
+  {
+   "path": "/book",
+   "does": "the six prose sections of a map",
+   "writes": true
+  },
+  {
+   "path": "/edges",
+   "does": "the 269 edge sentences",
+   "writes": true
+  },
+  {
+   "path": "the museum",
+   "does": "walk it, read the wall, write a reflection",
+   "writes": true
+  }
+ ],
+ "gates": [
+  {
+   "id": "edge",
+   "name": "edge anchors",
+   "tool": "tools/edge_gate.py",
+   "asks": "does each edge sentence still stand on the words it was read from",
+   "exit": 0,
+   "tally": {
+    "edges": 269,
+    "HELD": 264,
+    "NEAR": 5,
+    "LOST": 0,
+    "UNGROUNDED": 0
+   }
+  },
+  {
+   "id": "cite",
+   "name": "artifact citations",
+   "tool": "tools/cite_gate.py",
+   "asks": "is the passage still where the book says it is",
+   "exit": 0,
+   "tally": {
+    "citations": 219,
+    "HELD": 212,
+    "NEAR": 4,
+    "ELSEWHERE": 3,
+    "LOST": 0,
+    "NO SUCH WORK": 0,
+    "UNGROUNDED": 0
+   }
+  },
+  {
+   "id": "want",
+   "name": "wants closed honestly",
+   "tool": "tools/want_gate.py",
+   "asks": "when a want closes, did it close honestly",
+   "exit": 1,
+   "tally": {
+    "SIBLING": 20,
+    "ECHO": 8,
+    "STUB": 32,
+    "ELSEWHERE": 36,
+    "EMPTY": 105,
+    "GHOST": 1,
+    "NO REGISTRY": 1,
+    "NO BODY": 30,
+    "UNPLACED": 2,
+    "NO SUBJECT": 50,
+    "HERO ABSENT": 5
+   },
+   "fails": 10,
+   "distinct": 9
+  }
+ ]
+}
