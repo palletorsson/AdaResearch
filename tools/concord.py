@@ -204,6 +204,234 @@ def book_lines() -> list:
     return out
 
 
+def spine_order() -> list:
+    """The chapter order the book actually runs in.
+
+    Read from commons/maps/curriculum_spine.json — `spine.sequences`, each
+    {name, phase, order}. NOT hardcoded: the 24-chapter order is already written
+    out by hand in five places in this project (edge_gate.SPINE, route.ts twice,
+    lines/page.tsx, wall-map/page.tsx) and a sixth copy is a sixth thing to drift.
+    Chapters the spine does not name fall to the end, alphabetically, so a new
+    chapter appears rather than vanishing."""
+    try:
+        d = json.loads((REPO / "commons" / "maps" / "curriculum_spine.json").read_text(encoding="utf-8"))
+        seq = ((d.get("spine") or {}).get("sequences")) or []
+        named = [str(s.get("name", "")) for s in seq if isinstance(s, dict) and s.get("name")]
+    except Exception:
+        named = []
+    have = [p.stem for p in sorted(BOOK.glob("*.json"))]
+    ordered = [c for c in named if c in have]
+    return ordered + [c for c in have if c not in ordered]
+
+
+# A page of the finished book, in paragraphs. Palle: "In the book every artifact
+# has a paragraph (more or less)." So the ordinal among token lines IS the
+# paragraph number, and pages follow from how many paragraphs sit on one. This is
+# a stated assumption, not a measurement — the book has never been laid out — so
+# every page number derived from it is printed as approximate and the assumption
+# travels with it.
+PARAS_PER_PAGE = 4
+
+
+def book_position(tok: str) -> dict:
+    """Where this work falls in the book, walking chapters in spine order.
+
+    The book follows the spine and, inside a chapter, the order of the halls and
+    the works in them — so a work's ordinal among the token lines is its
+    approximate place in the finished text. A work that appears in several halls
+    gets its FIRST appearance; that is where a reader meets it."""
+    order = spine_order()
+    n = 0
+    first = None
+    per_chapter: dict = {}
+    for ci, ch in enumerate(order):
+        try:
+            doc = json.loads((BOOK / (ch + ".json")).read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        pearls = [p for p in doc.get("pearls", []) if not p.get("drop")]
+        for pi, p in enumerate(pearls):
+            for li, l in enumerate(p.get("lines", [])):
+                if not str(l.get("token", "")).strip():
+                    continue
+                n += 1
+                if first is None and str(l.get("token")) == tok:
+                    first = {"chapter": ch, "chapter_i": ci + 1, "chapters": len(order),
+                             "pearl": str(p.get("pearl", "")), "pearl_i": pi + 1,
+                             "pearls": len(pearls), "map": str(p.get("map", "")),
+                             "line_i": li + 1, "lines": len(p.get("lines", [])),
+                             "ordinal": n}
+        per_chapter[ch] = n
+    if first is None:
+        return {"found": False, "total": n,
+                "why": "this work has no line anywhere in the book"}
+    first["total"] = n
+    first["percent"] = round(100.0 * first["ordinal"] / max(1, n), 1)
+    first["approx_page"] = max(1, round(first["ordinal"] / PARAS_PER_PAGE))
+    first["approx_pages"] = max(1, round(n / PARAS_PER_PAGE))
+    first["paras_per_page"] = PARAS_PER_PAGE
+    first["found"] = True
+    return first
+
+
+SCRIPT_IN_TSCN = re.compile(r'path="res://([^"]+\.gd)"')
+
+
+def header_of(meta: dict) -> str:
+    """The prose the artifact writes about itself: the leading # comment block of
+    its script, reached scene -> .tscn -> script path.
+
+    This is the artifact's own voice, and it overlaps the wall note often enough
+    that seeing them together is the whole point of showing it. Stops at the first
+    non-comment line that is not blank, and drops the declaration noise
+    (extends/class_name/@tool/@export) that sits above real prose in some files."""
+    scene = str((meta or {}).get("scene", "")).replace("res://", "").strip()
+    if not scene:
+        return ""
+    t = REPO / scene
+    if not t.exists():
+        return ""
+    try:
+        m = SCRIPT_IN_TSCN.search(t.read_text(encoding="utf-8", errors="replace"))
+    except Exception:
+        return ""
+    if not m:
+        return ""
+    gd = REPO / m.group(1)
+    if not gd.exists():
+        return ""
+    out = []
+    try:
+        for raw in gd.read_text(encoding="utf-8", errors="replace").split("\n"):
+            s = raw.strip()
+            if s.startswith("#"):
+                out.append(re.sub(r"^#+\s?", "", s))
+            elif not s or s.startswith(("extends", "class_name", "@tool", "@icon", "@export")):
+                if out and not s:
+                    out.append("")
+                continue
+            else:
+                break
+    except Exception:
+        return ""
+    return "\n".join(out).strip()
+
+
+def versions_of(tok: str, meta: dict, reg: dict) -> list:
+    """The other registry names that resolve to this work's own scene.
+
+    Palle: "some artifacts take on the same learning, they are versions." They
+    are not a metaphor — 81 scenes carry more than one registry name and 332
+    artifacts are a version of something. living_paper has 34 names for one
+    .tscn, mesh_grammar 21.
+
+    This is the same fact want_gate's SIBLING rule rests on: names sharing a
+    scene may honestly share a sentence, because they are one body dressed
+    differently. Shown here so the person writing can see the family before
+    writing the same thing 34 times."""
+    scene = str((meta or {}).get("scene", "")).strip()
+    if not scene:
+        return []
+    return sorted(t for t, m in reg.items()
+                  if t != tok and str((m or {}).get("scene", "")).strip() == scene)
+
+
+HEADING = re.compile(r"^##+\s+(.+?)\s*$", re.M)
+
+
+def sections_of(rel: Path, kind: str, tok: str, name: str) -> list:
+    """One prose file cut at its own headings.
+
+    critical.md is not undifferentiated criticism — it is written in named
+    registers, and the corpus uses the same ones over and over: "What This
+    Concept Cannot Hold" (the edge), "The Core Tension", "Questions That Remain
+    Open", "Queer Readings", "QFEP Connection", "Politics and Assumptions". So a
+    section IS the critical aspect Palle asks for, and it can be handed over
+    whole rather than paraphrased. tutorial.md is cut the same way and is what
+    the work teaches as programming."""
+    if not rel.exists():
+        return []
+    try:
+        body = rel.read_text(encoding="utf-8", errors="replace")
+    except Exception:
+        return []
+    marks = list(HEADING.finditer(body))
+    if not marks:
+        # NOT EVERY FILE IS SECTIONED, and assuming so returned nothing at all.
+        # critical.md is written in named registers and cuts cleanly at "##";
+        # tutorial.md often is not — Point_One/tutorial.md is a single "# Point
+        # One" and then flat prose. Cutting on "##" found zero sections there and
+        # the panel reported the room teaches nothing, which is a fact about the
+        # regex. A file with no inner headings is one section: its own title.
+        title = re.match(r"^#\s+(.+)", body.strip())
+        text = re.sub(r"^#\s+.+\n", "", body.strip(), count=1).strip()
+        if not text:
+            return []
+        low = text.lower()
+        return [{"kind": kind, "heading": (title.group(1) if title else rel.stem),
+                 "text": text[:1400], "whole_file": True,
+                 "names_token": (tok.lower() in low) or bool(name and len(name) > 3 and name.lower() in low)}]
+    out = []
+    for i, m in enumerate(marks):
+        end = marks[i + 1].start() if i + 1 < len(marks) else len(body)
+        text = body[m.end():end].strip()
+        if not text:
+            continue
+        low = text.lower()
+        out.append({"kind": kind, "heading": m.group(1), "text": text[:1400],
+                    "names_token": (tok.lower() in low) or bool(name and len(name) > 3 and name.lower() in low)})
+    return out
+
+
+def aspects(tok: str, meta: dict, place: dict) -> dict:
+    """What this work TEACHES and what is said CRITICALLY about it, from the
+    rooms it actually stands in.
+
+    Capped at three maps. A work in 234 halls would otherwise return the same
+    argument two hundred times, and the point is to read one."""
+    # WHICH ROOMS TO READ, and the first attempt got this wrong in a way worth
+    # recording. Taking the first three maps alphabetically gave science_screen
+    # Accumulation_Area and two Archetype_* halls — none of which has any prose,
+    # so a work standing in 234 rooms reported nothing to teach and nothing said
+    # about it. Only about a third of maps carry prose at all, so the ordering
+    # has to be by EVIDENCE, not by name: the hall the book itself puts this work
+    # in comes first, then any room that actually has a tutorial or a criticism.
+    everywhere = place.get(tok, set())
+    pos = book_position(tok)
+    home = str(pos.get("map", "")) if pos.get("found") else ""
+
+    def has_prose(m: str) -> int:
+        if ".bak." in m:      # a timestamped backup hall is not a room anyone walks
+            return 0
+        d = REPO / "commons" / "maps" / m
+        return int((d / "critical.md").exists()) + int((d / "tutorial.md").exists())
+
+    # The book's own hall is read WHETHER OR NOT the work stands in it. 36 book
+    # lines speak for a work that is not in the hall they name — the gate calls
+    # that ELSEWHERE and passes it, because it is a finding rather than a fault.
+    # science_screen is one: the book puts it in Point_One and the map does not.
+    # Dropping the home hall because the placement disagrees would hide the
+    # room's argument from exactly the works that most need reading.
+    ranked = sorted(everywhere, key=lambda m: (m != home, -has_prose(m), m))
+    maps = [m for m in ranked if m == home or has_prose(m)]
+    if home and home not in maps and (REPO / "commons" / "maps" / home).is_dir():
+        maps.insert(0, home)
+    maps = maps[:3]
+    name = str((meta or {}).get("name", ""))
+    teaches, critical = [], []
+    for m in maps:
+        d = REPO / "commons" / "maps" / m
+        for s in sections_of(d / "tutorial.md", "tutorial", tok, name):
+            teaches.append({**s, "map": m})
+        for s in sections_of(d / "critical.md", "critical", tok, name):
+            critical.append({**s, "map": m})
+    # A section that NAMES the work comes first; the rest are the room's argument
+    # around it, which is usually still the nearest thing to criticism of it.
+    teaches.sort(key=lambda s: not s["names_token"])
+    critical.sort(key=lambda s: not s["names_token"])
+    return {"maps_read": maps, "teaches": teaches[:8], "critical": critical[:10]}
+
+
 def surfaces(tok: str, meta: dict) -> list:
     """The three ways a text can name a work, kept mutually distinct.
 
@@ -484,6 +712,16 @@ def cmd_token(tok: str, as_json: bool) -> int:
     hits = find(tok, meta, corpus(), place.get(tok, set()), set(reg))
     bl = [l for l in book_lines() if l["token"] == tok]
     out = {"token": tok, "name": meta.get("name", ""),
+           # What the work says about ITSELF, beside where others speak of it.
+           # Palle: "sometimes artifacts and wallnote content overlap" — so these
+           # travel together and the overlap is visible rather than hidden.
+           "header": header_of(meta),
+           "description": str(meta.get("description", "") or ""),
+           "tags": [str(t) for t in (meta.get("tags") or []) if t],
+           "position": book_position(tok),
+           # the family, and what the rooms teach and argue about it
+           "versions": versions_of(tok, meta, reg),
+           **aspects(tok, meta, place),
            "placed_in": sorted(place.get(tok, set())),
            "book": [{"chapter": l["chapter"], "pearl": l["pearl"], "map": l["map"],
                      "pi": l["pi"], "li": l["li"], "text": l["text"], "note": l["note"],
