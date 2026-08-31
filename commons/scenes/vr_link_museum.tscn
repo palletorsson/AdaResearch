@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cvrlnkmuseum01"]
+
+[ext_resource type="Script" path="res://commons/scenes/vr_link_museum.gd" id="1_vrlinkmus"]
+
+[node name="VRLinkMuseum" type="Node3D"]
+script = ExtResource("1_vrlinkmus")
