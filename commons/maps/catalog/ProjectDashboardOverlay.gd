@@ -668,27 +668,58 @@ func _extract_release_gates() -> Array[Dictionary]:
 
 func _sync_release_gate_toggles_with_report() -> void:
 	var gates: Array[Dictionary] = _extract_release_gates()
-	var valid_ids: Dictionary = {}
 	var changed: bool = false
 
 	for gate in gates:
 		var gate_id: String = str(gate.get("id", ""))
 		if gate_id == "":
 			continue
-		valid_ids[gate_id] = true
 		if not _release_gate_enabled.has(gate_id):
 			_release_gate_enabled[gate_id] = true
 			changed = true
 
-	var existing_keys: Array = _release_gate_enabled.keys()
-	for key in existing_keys:
-		var gate_key: String = str(key)
-		if not valid_ids.has(gate_key):
-			_release_gate_enabled.erase(gate_key)
-			changed = true
+	# We do NOT erase toggles for gate IDs the report does not mention.
+	#
+	# It used to, and _save_release_gate_toggles() writes back over the TRACKED
+	# doc/reports/RELEASE_GATES_TOGGLES.json that tools/run_release_gates.py reads
+	# for --gate-toggles. On 2026-08-30 the report on disk was 81 days old and knew
+	# only gates A-D, while the toggles file listed A-K. Opening this overlay would
+	# therefore have deleted E, F, G, H, I, J and K from that file -- and the next
+	# release-gate run would have printed "Enabled gates: 4/4 passing / Overall:
+	# PASS" with four gates red, because the four it still knew about were green.
+	# A viewer must not be able to silently switch off the gates it is viewing.
+	#
+	# An unknown ID left in the file is harmless: _is_release_gate_enabled()
+	# defaults to true, so a gate that comes back is watched again.
 
 	if changed:
 		_save_release_gate_toggles()
+
+
+func _release_gates_measured_line() -> String:
+	var stamp_value: Variant = _release_gates.get("measurement", {})
+	if not (stamp_value is Dictionary):
+		return "Measured: UNSTAMPED report — run tools/run_release_gates.py to refresh"
+	var stamp: Dictionary = stamp_value as Dictionary
+	var measured_at: String = str(stamp.get("measured_at", ""))
+	if measured_at == "":
+		return "Measured: UNSTAMPED report — run tools/run_release_gates.py to refresh"
+
+	var age_text: String = ""
+	# The stamp is local time with an offset ("...T09:04:12+02:00"). Godot's
+	# parser wants a bare YYYY-MM-DDTHH:MM:SS, so cut the offset. Reading a
+	# local clock as UTC skews the age by at most a couple of hours, which
+	# cannot move a day count that only matters at 1 and above.
+	var taken: int = int(Time.get_unix_time_from_datetime_string(measured_at.substr(0, 19)))
+	if taken > 0:
+		var days: int = int((Time.get_unix_time_from_system() - float(taken)) / 86400.0)
+		if days >= 1:
+			age_text = " — %d day%s old" % [days, "" if days == 1 else "s"]
+	return "Measured: %s at %s%s" % [
+		measured_at,
+		str(stamp.get("head", "?")).substr(0, 9),
+		age_text,
+	]
 
 
 func _is_release_gate_enabled(gate_id: String) -> bool:
@@ -2369,6 +2400,16 @@ func _add_release_gates_section(parent: VBoxContainer) -> void:
 	summary_row.add_child(summary_metrics)
 
 	parent.add_child(summary_row)
+
+	# When was this verdict taken? The report is a FILE, and a file keeps saying
+	# PASS long after the project stops passing -- this one sat at 2026-06-10 for
+	# 81 days. Show the stamp, and say plainly when there isn't one.
+	var stamp_label := Label.new()
+	stamp_label.text = _release_gates_measured_line()
+	stamp_label.add_theme_font_size_override("font_size", 10)
+	stamp_label.add_theme_color_override("font_color", COLOR_TEXT_DIM)
+	stamp_label.clip_text = true
+	parent.add_child(stamp_label)
 
 	var hint_label := Label.new()
 	hint_label.text = "Toggle gates ON/OFF. Disabled gates are excluded from overall release status."

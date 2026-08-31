@@ -139,10 +139,12 @@
    "sequence": "primitives",
    "pearl": "point animatedcube",
    "map": "Point_Animatedcube",
-   "hero": "animatedcubebuilder",
-   "hero_by": "applied",
-   "hero_df": 10,
+   "hero": "first_shadow",
+   "hero_by": "category",
+   "hero_df": 1,
    "cast": [
+    "first_phosphor",
+    "animatedcubebuilder",
     "polyhedron_nets_cube"
    ],
    "furniture": [
@@ -280,10 +282,11 @@
    "sequence": "transformation",
    "pearl": "trans rotation",
    "map": "Trans_Rotation",
-   "hero": "rotate_grid_cubes",
-   "hero_by": "promoted",
-   "hero_df": 7,
+   "hero": "furniture_turntable",
+   "hero_by": "category",
+   "hero_df": 1,
    "cast": [
+    "rotate_grid_cubes",
     "catalyst_prompter_box",
     "pickup_gate",
     "spin"
@@ -299,10 +302,12 @@
    "sequence": "transformation",
    "pearl": "trans rotationspectacle",
    "map": "Trans_RotationSpectacle",
-   "hero": "carousel_cake",
-   "hero_by": "applied",
-   "hero_df": 9,
+   "hero": "baggage_grammar",
+   "hero_by": "category",
+   "hero_df": 1,
    "cast": [
+    "two_cakes",
+    "carousel_cake",
     "boolean_tunnel",
     "righttriangle"
    ],
@@ -576,10 +581,11 @@
    "sequence": "color",
    "pearl": "ribbon color 04",
    "map": "Ribbon_Color_04",
-   "hero": "color_space_navigator",
-   "hero_by": "applied",
-   "hero_df": 4,
+   "hero": "hue_carousel",
+   "hero_by": "category",
+   "hero_df": 1,
    "cast": [
+    "color_space_navigator",
     "bar_array_bubble_sort",
     "column_3_z",
     "grab_rainbow_stick",
@@ -594,11 +600,12 @@
    "sequence": "color",
    "pearl": "ribbon color 05",
    "map": "Ribbon_Color_05",
-   "hero": "grabcolorcollection",
-   "hero_by": "applied",
-   "hero_df": 5,
+   "hero": "neon_garden",
+   "hero_by": "category",
+   "hero_df": 1,
    "cast": [
     "grid3d",
+    "grabcolorcollection",
     "pattern_tile_herringbone",
     "pattern_tile_4x4",
     "pattern_tile_brick",
@@ -613,11 +620,12 @@
    "sequence": "color",
    "pearl": "ribbon color 06",
    "map": "Ribbon_Color_06",
-   "hero": "rainbow",
-   "hero_by": "promoted",
-   "hero_df": 9,
+   "hero": "two_roads",
+   "hero_by": "category",
+   "hero_df": 1,
    "cast": [
     "gradient_interpolator",
+    "rainbow",
     "wall_pattern_gallery",
     "subpixel_display",
     "kaleidoscope",
@@ -632,10 +640,11 @@
    "sequence": "color",
    "pearl": "ribbon color 07",
    "map": "Ribbon_Color_07",
-   "hero": "shelf",
-   "hero_by": "rarest",
-   "hero_df": 2,
+   "hero": "one_bulb_room",
+   "hero_by": "category",
+   "hero_df": 1,
    "cast": [
+    "shelf",
     "shelf_with_stickers",
     "strobe_lasers",
     "prism",
@@ -655,10 +664,12 @@
    "hero_df": 3,
    "cast": [
     "descent_marble_toy",
+    "zeno_staircase",
     "partial_derivative_terrain",
     "derivative_pair",
     "slope_tangent_demo",
     "velocity_arrow",
+    "paper_regatta",
     "tangent_slope_workbench"
    ],
    "furniture": [
@@ -684,12 +695,12 @@
    "sequence": "change",
    "pearl": "flow field",
    "map": "Flow_Field",
-   "hero": "flow_field_painter",
+   "hero": "vector_field_visualizer",
    "hero_by": "category",
    "hero_df": 5,
    "cast": [
+    "flow_field_painter",
     "noc_5_04_flow_field",
-    "vector_field_visualizer",
     "particle_flow_swarm",
     "vector_field_grid"
    ],
@@ -732,7 +743,7 @@
    "map": "Ribbon_Change_02",
    "hero": "noc_5_04_flow_field",
    "hero_by": "category",
-   "hero_df": 5,
+   "hero_df": 6,
    "cast": [
     "riemann_pi"
    ],
@@ -742,11 +753,11 @@
    "sequence": "change",
    "pearl": "ribbon change 03",
    "map": "Ribbon_Change_03",
-   "hero": "vector_field_visualizer",
+   "hero": "flow_field_painter",
    "hero_by": "category",
-   "hero_df": 5,
+   "hero_df": 6,
    "cast": [
-    "flow_field_painter"
+    "vector_field_visualizer"
    ],
    "furniture": []
   },
@@ -754,10 +765,13 @@
    "sequence": "change",
    "pearl": "ribbon change 04",
    "map": "Ribbon_Change_04",
-   "hero": null,
-   "hero_by": "",
-   "hero_df": 0,
-   "cast": [],
+   "hero": "grand_zoetrope",
+   "hero_by": "category",
+   "hero_df": 1,
+   "cast": [
+    "flow_field_painter",
+    "noc_5_04_flow_field"
+   ],
    "furniture": [
     "science_screen",
     "code_display"
@@ -797,10 +811,11 @@
    "sequence": "forces",
    "pearl": "vectors act1 whatavectoris",
    "map": "Vectors_Act1_WhatAVectorIs",
-   "hero": "length_lantern",
-   "hero_by": "promoted",
-   "hero_df": 5,
+   "hero": "route_vector",
+   "hero_by": "applied",
+   "hero_df": 3,
    "cast": [
+    "length_lantern",
     "vector_normalize_demo",
     "3t"
    ],
@@ -955,7 +970,7 @@
    "map": "VFM_07_Gravity",
    "hero": "forcedirected3d",
    "hero_by": "category",
-   "hero_df": 7,
+   "hero_df": 8,
    "cast": [
     "nbody_simulation",
     "three_body_problem",
@@ -1012,10 +1027,12 @@
    "sequence": "forces",
    "pearl": "vectors act4a kineticforces",
    "map": "Vectors_Act4a_KineticForces",
-   "hero": "force_mower",
-   "hero_by": "applied",
-   "hero_df": 4,
+   "hero": "sisyphus_mower",
+   "hero_by": "category",
+   "hero_df": 1,
    "cast": [
+    "prop_carousel",
+    "force_mower",
     "force_pad",
     "drag_corridor",
     "centrifuge_ring",
@@ -1028,10 +1045,11 @@
    "sequence": "forces",
    "pearl": "vectors act4b oscillation",
    "map": "Vectors_Act4b_Oscillation",
-   "hero": "weather_vane",
+   "hero": "example_6_4_windmill_vr",
    "hero_by": "applied",
-   "hero_df": 3,
+   "hero_df": 2,
    "cast": [
+    "weather_vane",
     "calder_object_mobile",
     "momentum_cradle",
     "bounce_well",
@@ -1050,9 +1068,9 @@
    "hero_by": "applied",
    "hero_df": 5,
    "cast": [
+    "vector_field_visualizer",
     "flow_field_painter",
     "noc_5_04_flow_field",
-    "vector_field_visualizer",
     "field_room",
     "force_field_visualizer",
     "vector_fields",
@@ -1071,11 +1089,13 @@
    "sequence": "forces",
    "pearl": "vectors act5 forceasplace",
    "map": "Vectors_Act5_ForceAsPlace",
-   "hero": "force_field_zone",
-   "hero_by": "applied",
-   "hero_df": 10,
+   "hero": "invisible_hill",
+   "hero_by": "category",
+   "hero_df": 1,
    "cast": [
+    "force_field_zone",
     "force_cube",
+    "force_field",
     "vector_machine"
    ],
    "furniture": []
@@ -1084,12 +1104,13 @@
    "sequence": "formfinding",
    "pearl": "formfinding descent",
    "map": "FormFinding_Descent",
-   "hero": "gradient_descent",
-   "hero_by": "rarest",
-   "hero_df": 4,
+   "hero": "settling_tremble",
+   "hero_by": "signature",
+   "hero_df": 1,
    "cast": [
     "gradient_descent_well",
-    "descent_marble_toy"
+    "descent_marble_toy",
+    "gradient_descent"
    ],
    "furniture": [
     "science_screen"
@@ -1099,10 +1120,11 @@
    "sequence": "formfinding",
    "pearl": "formfinding catenary",
    "map": "FormFinding_Catenary",
-   "hero": "cable_builder",
-   "hero_by": "promoted",
-   "hero_df": 14,
+   "hero": "laundry_line_cathedral",
+   "hero_by": "category",
+   "hero_df": 2,
    "cast": [
+    "cable_builder",
     "catenoid"
    ],
    "furniture": [
@@ -1144,10 +1166,11 @@
    "sequence": "formfinding",
    "pearl": "formfinding annealing",
    "map": "FormFinding_Annealing",
-   "hero": "simulated_annealing",
-   "hero_by": "promoted",
-   "hero_df": 6,
+   "hero": "impossible_end_table",
+   "hero_by": "category",
+   "hero_df": 1,
    "cast": [
+    "simulated_annealing",
     "energy_landscape_bench",
     "max_q_basin_room"
    ],
@@ -1357,10 +1380,11 @@
    "sequence": "randomness",
    "pearl": "random entropy",
    "map": "Random_Entropy",
-   "hero": "hardware_entropy_decay",
-   "hero_by": "applied",
-   "hero_df": 9,
+   "hero": "replay_casino",
+   "hero_by": "category",
+   "hero_df": 1,
    "cast": [
+    "hardware_entropy_decay",
     "trng_vs_prng",
     "shannon_entropy_meter",
     "entropy_jar",
@@ -1434,10 +1458,11 @@
    "sequence": "randomness",
    "pearl": "random game",
    "map": "Random_Game",
-   "hero": "miura_crawler",
+   "hero": "monte_carlo",
    "hero_by": "applied",
-   "hero_df": 10,
+   "hero_df": 2,
    "cast": [
+    "miura_crawler",
     "r_c",
     "kresling_spire",
     "armadillo_eggling",
@@ -1539,8 +1564,11 @@
    "map": "CA_Introduction",
    "hero": "grid_substrate_runner",
    "hero_by": "category",
-   "hero_df": 2,
+   "hero_df": 4,
    "cast": [
+    "ca_showcase",
+    "rule110_computer",
+    "langton_swarm",
     "persian_rug",
     "line_network_ca"
    ],
@@ -1604,10 +1632,14 @@
    "sequence": "cellularautomata",
    "pearl": "ca softrules",
    "map": "CA_SoftRules",
-   "hero": "rule_30_110_gravity",
-   "hero_by": "rarest",
-   "hero_df": 3,
+   "hero": "the_clockmaker_of_rules",
+   "hero_by": "category",
+   "hero_df": 1,
    "cast": [
+    "crack_propagation_ca",
+    "rd_artifact",
+    "lattice_gas_pump",
+    "rule_30_110_gravity",
     "ca_sphere"
    ],
    "furniture": []
@@ -1616,10 +1648,11 @@
    "sequence": "cellularautomata",
    "pearl": "ca edgeofchaos",
    "map": "CA_EdgeOfChaos",
-   "hero": "disease_spread_ca",
+   "hero": "crackpropagation_ca",
    "hero_by": "applied",
    "hero_df": 2,
    "cast": [
+    "disease_spread_ca",
     "volumetric_fog_ca",
     "ca_screen",
     "self_organization_ca"
@@ -1678,7 +1711,8 @@
    "cast": [
     "stochastic_tree_separated",
     "example_8_4_cantor_set_vr",
-    "cantor_set"
+    "cantor_set",
+    "fractal_clouds"
    ],
    "furniture": [
     "dark_sphere"
@@ -1709,10 +1743,12 @@
    "sequence": "fractals",
    "pearl": "fractal goldenspiral",
    "map": "Fractal_GoldenSpiral",
-   "hero": "fibonacci_sequences",
-   "hero_by": "promoted",
-   "hero_df": 11,
+   "hero": "the_recursion_cabinet",
+   "hero_by": "category",
+   "hero_df": 1,
    "cast": [
+    "fibonacci_sequences",
+    "diffusion_limited_aggregation",
     "golden_rectangle",
     "romanesco",
     "fibonacci_terrain"
@@ -1733,9 +1769,9 @@
     "fibonacci_sequences",
     "cantor_set",
     "koch_curve",
-    "fractal_clouds",
     "fractal_recursion_1",
     "strange_attractors",
+    "fractal_clouds",
     "romanesco"
    ],
    "furniture": [
@@ -1752,7 +1788,9 @@
    "cast": [
     "lsystem_editor",
     "lsystem_tree",
-    "fractal_lsystem_string"
+    "city_bench",
+    "fractal_lsystem_string",
+    "mesh_grammar_lsystem_tree"
    ],
    "furniture": [
     "science_screen",
@@ -1767,6 +1805,7 @@
    "hero_by": "promoted",
    "hero_df": 10,
    "cast": [
+    "modulor_cypress",
     "parametric_lsystem",
     "AnimatedTree",
     "ContextSensitiveTree"
@@ -1777,11 +1816,13 @@
    "sequence": "lsystems",
    "pearl": "lsystems grammars and curves",
    "map": "LSystems_Grammars_And_Curves",
-   "hero": "space_filling_curve_gallery",
-   "hero_by": "applied",
-   "hero_df": 5,
+   "hero": "the_believing_turtle",
+   "hero_by": "category",
+   "hero_df": 1,
    "cast": [
+    "space_filling_curve_gallery",
     "ContextFreeGrammars",
+    "lindenmayer_tube_tree",
     "Hilbert3D"
    ],
    "furniture": []
@@ -1795,7 +1836,11 @@
    "hero_df": 2,
    "cast": [
     "CityGenerator",
-    "catalyst_prompter_box"
+    "catalyst_prompter_box",
+    "grammar_seed",
+    "dragon_room",
+    "mesh_grammar_petal_flower",
+    "mesh_grammar_coral_fingers"
    ],
    "furniture": [
     "catalyst_vent",
@@ -1811,7 +1856,10 @@
    "hero_df": 4,
    "cast": [
     "branching_coral",
-    "lsystem_tree"
+    "lsystem_tree",
+    "living_paper_dragon",
+    "living_paper_fern",
+    "living_paper_tree"
    ],
    "furniture": []
   },
@@ -1823,10 +1871,12 @@
    "hero_by": "applied",
    "hero_df": 3,
    "cast": [
+    "grid_substrate_runner",
     "ten_print_textile",
     "panel_bridge_loom",
     "pattern_atlas_gallery",
     "godel_statement_plaque",
+    "dragon_bench",
     "mamma_monster_gallery"
    ],
    "furniture": [
@@ -1878,6 +1928,7 @@
    "hero_by": "applied",
    "hero_df": 6,
    "cast": [
+    "binary_space_partitioning",
     "caverandomwalk"
    ],
    "furniture": []
@@ -1916,7 +1967,9 @@
    "hero_by": "applied",
    "hero_df": 7,
    "cast": [
-    "jelly_cube"
+    "jelly_variants",
+    "jelly_cube",
+    "radiolaria"
    ],
    "furniture": [
     "science_screen"
@@ -1932,7 +1985,8 @@
    "cast": [
     "soft_mushroom",
     "cloth_straps",
-    "grab_long_stick"
+    "grab_long_stick",
+    "flex_cloth_pad"
    ],
    "furniture": [
     "synthesis_stand",
@@ -1948,6 +2002,7 @@
    "hero_df": 6,
    "cast": [
     "flagdancer",
+    "softbody_gallery_part2",
     "grab_long_stick"
    ],
    "furniture": [
@@ -1960,7 +2015,7 @@
    "map": "SoftBodies_Obsticals_Part2",
    "hero": "softbody_gallery_part2",
    "hero_by": "promoted",
-   "hero_df": 7,
+   "hero_df": 8,
    "cast": [
     "grab_long_stick"
    ],
@@ -1972,10 +2027,12 @@
    "sequence": "softbodies",
    "pearl": "softbodies playground of joy",
    "map": "SoftBodies_Playground_of_Joy",
-   "hero": "rounded_softbody_test",
+   "hero": "entropy_morphogenesis",
    "hero_by": "promoted",
    "hero_df": 9,
    "cast": [
+    "rounded_softbody_test",
+    "frozen_glass_vessel",
     "gridagent"
    ],
    "furniture": [
@@ -1986,11 +2043,14 @@
    "sequence": "softbodies",
    "pearl": "proceduralgeneration reaction diffusion systems",
    "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
-   "hero": "turing_pattern_generator",
-   "hero_by": "applied",
-   "hero_df": 6,
+   "hero": "the_confessing_body",
+   "hero_by": "category",
+   "hero_df": 1,
    "cast": [
-    "reaction_diffusion"
+    "turing_pattern_generator",
+    "softstopscene",
+    "reaction_diffusion",
+    "mesh_grammar_detailed_bulge"
    ],
    "furniture": []
   },
@@ -1998,11 +2058,13 @@
    "sequence": "isosurfaces",
    "pearl": "iso lookuptable",
    "map": "ISO_LookupTable",
-   "hero": "fifteen_cases_demo",
-   "hero_by": "applied",
-   "hero_df": 3,
+   "hero": "the_threshold_opinion",
+   "hero_by": "category",
+   "hero_df": 1,
    "cast": [
-    "mc_cave"
+    "fifteen_cases_demo",
+    "mc_cave",
+    "metaball_world"
    ],
    "furniture": []
   },
@@ -2010,10 +2072,11 @@
    "sequence": "isosurfaces",
    "pearl": "iso shapesgallery",
    "map": "ISO_ShapesGallery",
-   "hero": "mc_shapes_gallery",
+   "hero": "mc_sculpt_vr",
    "hero_by": "applied",
    "hero_df": 3,
    "cast": [
+    "mc_shapes_gallery",
     "mc_torus_sculpture",
     "gyroid_demo"
    ],
@@ -2027,6 +2090,7 @@
    "hero_by": "applied",
    "hero_df": 3,
    "cast": [
+    "voxel_noise_demo",
     "GyroidDemo"
    ],
    "furniture": []
@@ -2039,6 +2103,7 @@
    "hero_by": "applied",
    "hero_df": 3,
    "cast": [
+    "rhizome_cave_system",
     "mc_overhang_landscape",
     "mc_flat_landscape"
    ],
@@ -2052,8 +2117,10 @@
    "hero_by": "category",
    "hero_df": 5,
    "cast": [
+    "rhizome_cave_demo",
     "mc_portal_landscape",
-    "mc_inside_cave"
+    "mc_inside_cave",
+    "raymarched_metaballs"
    ],
    "furniture": []
   },
@@ -2075,10 +2142,12 @@
    "sequence": "boolean_surfaces",
    "pearl": "boolean union",
    "map": "Boolean_Union",
-   "hero": "csg_union_demo",
-   "hero_by": "applied",
-   "hero_df": 2,
-   "cast": [],
+   "hero": "the_argument_of_solids",
+   "hero_by": "category",
+   "hero_df": 1,
+   "cast": [
+    "csg_union_demo"
+   ],
    "furniture": []
   },
   {
@@ -2134,10 +2203,12 @@
    "sequence": "boolean_surfaces",
    "pearl": "boolean architecture cavity",
    "map": "Boolean_Architecture_Cavity",
-   "hero": "csg_architecture_cavity",
+   "hero": "coincident_face",
    "hero_by": "promoted",
    "hero_df": 1,
-   "cast": [],
+   "cast": [
+    "csg_architecture_cavity"
+   ],
    "furniture": []
   },
   {
@@ -2147,7 +2218,10 @@
    "hero": "PhysarumColony",
    "hero_by": "promoted",
    "hero_df": 2,
-   "cast": [],
+   "cast": [
+    "ant_agent",
+    "particle_swarm_optimization_legacy"
+   ],
    "furniture": [
     "science_screen"
    ]
@@ -2156,10 +2230,13 @@
    "sequence": "swarmintelligence",
    "pearl": "swarmintelligence flowfields",
    "map": "SwarmIntelligence_FlowFields",
-   "hero": "FlowFieldMain",
+   "hero": "AntColonyV2",
    "hero_by": "promoted",
-   "hero_df": 13,
-   "cast": [],
+   "hero_df": 5,
+   "cast": [
+    "ecosystem_simulation",
+    "FlowFieldMain"
+   ],
    "furniture": []
   },
   {
@@ -2183,10 +2260,12 @@
    "sequence": "swarmintelligence",
    "pearl": "swarmintelligence agent based modeling abm",
    "map": "SwarmIntelligence_Agent_Based_Modeling_ABM",
-   "hero": "catalyst_prompter_box",
+   "hero": "physarum_colony",
    "hero_by": "promoted",
-   "hero_df": 19,
+   "hero_df": 2,
    "cast": [
+    "catalyst_foe",
+    "catalyst_prompter_box",
     "ant_colony_optimization"
    ],
    "furniture": [
@@ -2213,11 +2292,13 @@
    "sequence": "swarmintelligence",
    "pearl": "swarmintelligence particle swarm optimization",
    "map": "SwarmIntelligence_Particle_Swarm_Optimization",
-   "hero": "fitness_landscape_politics",
+   "hero": "ant_colony_v2",
    "hero_by": "promoted",
-   "hero_df": 4,
+   "hero_df": 2,
    "cast": [
-    "self_organizing_patterns"
+    "fitness_landscape_politics",
+    "self_organizing_patterns",
+    "tick_flock"
    ],
    "furniture": []
   },
@@ -2229,8 +2310,8 @@
    "hero_by": "promoted",
    "hero_df": 3,
    "cast": [
-    "evolved_creatures",
     "evolvingflowers",
+    "evolved_creatures",
     "gradient_descent_visualization"
    ],
    "furniture": [
@@ -2245,6 +2326,7 @@
    "hero_by": "promoted",
    "hero_df": 3,
    "cast": [
+    "evolved_creatures",
     "loss_function_comparator",
     "gradient_descent_visualization"
    ],
@@ -2271,7 +2353,8 @@
    "hero_by": "promoted",
    "hero_df": 5,
    "cast": [
-    "neural_network_visualization"
+    "neural_network_visualization",
+    "fine_tuning_vr"
    ],
    "furniture": []
   },
@@ -2304,11 +2387,13 @@
    "sequence": "graphtheory",
    "pearl": "gt foundations",
    "map": "GT_Foundations",
-   "hero": "KonigsbergBridge",
+   "hero": "graphspace3d",
    "hero_by": "category",
-   "hero_df": 5,
+   "hero_df": 3,
    "cast": [
-    "graphspace"
+    "KonigsbergBridge",
+    "graphspace",
+    "two_travelers"
    ],
    "furniture": [
     "synthesis_stand"
@@ -2318,20 +2403,29 @@
    "sequence": "graphtheory",
    "pearl": "gt layout",
    "map": "GT_Layout",
-   "hero": "force_directed_layout",
+   "hero": "graph_basilica",
    "hero_by": "category",
-   "hero_df": 4,
-   "cast": [],
+   "hero_df": 1,
+   "cast": [
+    "force_directed_layout",
+    "living_paper_bfs",
+    "forcedirected3d"
+   ],
    "furniture": []
   },
   {
    "sequence": "graphtheory",
    "pearl": "gt pathfinding",
    "map": "GT_Pathfinding",
-   "hero": "pathfinding3d",
+   "hero": "living_paper_dfs_maze",
    "hero_by": "category",
-   "hero_df": 10,
-   "cast": [],
+   "hero_df": 5,
+   "cast": [
+    "grid_substrate_runner",
+    "pathfinding3d",
+    "family_chandelier",
+    "impatient_river"
+   ],
    "furniture": []
   },
   {
@@ -2368,6 +2462,8 @@
    "hero_by": "category",
    "hero_df": 4,
    "cast": [
+    "grid3d_dfs",
+    "grid3d_prim",
     "push_relabel_algorithm"
    ],
    "furniture": []
@@ -2398,7 +2494,9 @@
    "cast": [
     "self_membership_set",
     "liar_loop",
-    "russell_set_box"
+    "russell_set_box",
+    "hilbert_hotel",
+    "euclid_postulates_plaque"
    ],
    "furniture": []
   },
@@ -2444,9 +2542,12 @@
    "hero_by": "applied",
    "hero_df": 4,
    "cast": [
+    "cantor_diagonal_workbench",
     "brouwer_choice_sequence",
     "constructive_proof",
-    "constructive_staircase"
+    "angle_sum_triangle",
+    "constructive_staircase",
+    "parallel_lines"
    ],
    "furniture": []
   },
@@ -2454,15 +2555,17 @@
    "sequence": "foundationscrisis",
    "pearl": "crisis synthesis",
    "map": "Crisis_Synthesis",
-   "hero": "phi_slider",
+   "hero": "russell_paradox_workbench",
    "hero_by": "applied",
-   "hero_df": 19,
+   "hero_df": 6,
    "cast": [
+    "phi_slider",
     "escher_staircase",
     "florensky_sphere",
     "godel_statement_plaque",
     "bifurcation_diagram",
-    "russell_set_box"
+    "russell_set_box",
+    "goedel_atrium"
    ],
    "furniture": [
     "lambda_slider",
@@ -2518,9 +2621,12 @@
    "cast": [
     "edge_particles",
     "complexity_pattern",
+    "lambda_hall",
+    "qfep_chalkboard",
     "ordered_grid",
     "crystal_formation",
     "dissolving_form",
+    "phase_cube",
     "chaos_particles"
    ],
    "furniture": []
@@ -2564,10 +2670,12 @@
    "sequence": "qfeplaboratory",
    "pearl": "qfep synthesis",
    "map": "QFEP_Synthesis",
-   "hero": "queer_morphology_specimen",
+   "hero": "entropy_meter",
    "hero_by": "applied",
    "hero_df": 3,
    "cast": [
+    "queer_morphology_specimen",
+    "entropy_ceiling",
     "grasp_cabinet",
     "grab_sphere_phi",
     "grab_sphere_E",
@@ -2583,10 +2691,11 @@
    "sequence": "postfoundationscrisis",
    "pearl": "criticalalgorithms algorithmic bias visualization",
    "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
-   "hero": "bias_visualizer",
+   "hero": "situated_readout",
    "hero_by": "applied",
-   "hero_df": 8,
+   "hero_df": 3,
    "cast": [
+    "bias_visualizer",
     "bias_from_inside"
    ],
    "furniture": [
@@ -2619,9 +2728,11 @@
    "hero_df": 2,
    "cast": [
     "merge_conflict_visualizer",
+    "shannon_workbench",
     "schrodinger_box",
     "superposition_display",
-    "florensky_sphere"
+    "florensky_sphere",
+    "rhizome_vault"
    ],
    "furniture": [
     "tt"
@@ -2631,10 +2742,12 @@
    "sequence": "postfoundationscrisis",
    "pearl": "speculativecomputation collective knowledge",
    "map": "SpeculativeComputation_Collective_Knowledge",
-   "hero": "peer_production_tool",
-   "hero_by": "applied",
-   "hero_df": 3,
+   "hero": "the_commons_table",
+   "hero_by": "category",
+   "hero_df": 1,
    "cast": [
+    "peer_production_tool",
+    "the_fourth_limit",
     "wiki_fragment"
    ],
    "furniture": []
@@ -2645,7 +2758,7 @@
    "map": "SpeculativeComputation_Rhizome_Network",
    "hero": "rhizome_cave_demo",
    "hero_by": "category",
-   "hero_df": 7,
+   "hero_df": 8,
    "cast": [
     "rhizome_grower"
    ],
@@ -2671,16 +2784,16 @@
  ],
  "stats": {
   "halls": 156,
-  "heroes_assigned": 152,
-  "distinct_heroes": 152,
+  "heroes_assigned": 153,
+  "distinct_heroes": 153,
   "hero_by": {
-   "signature": 1,
-   "applied": 75,
-   "promoted": 48,
-   "rarest": 6,
-   "category": 22
+   "signature": 2,
+   "applied": 64,
+   "promoted": 42,
+   "category": 42,
+   "rarest": 3
   },
-  "halls_without_hero": 4,
+  "halls_without_hero": 3,
   "furniture_pressure_top": [
    [
     "dark_sphere",

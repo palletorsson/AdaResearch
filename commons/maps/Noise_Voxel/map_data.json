@@ -24,12 +24,12 @@
    "name": "Next Lesson",
    "description": "Continue to the next algorithm demonstration",
    "properties": {
-    "action": "next_in_sequence"
+	"action": "next_in_sequence"
    }
   },
   "s": {
    "properties": {
-    "height": 5.5
+	"height": 5.5
    }
   }
  },
@@ -43,14 +43,14 @@
   "directional_light": {
    "enabled": true,
    "direction": [
-    -0.4,
-    -0.7,
-    -0.4
+	-0.4,
+	-0.7,
+	-0.4
    ],
    "color": [
-    1,
-    0.9,
-    0.8
+	1,
+	0.9,
+	0.8
    ],
    "energy": 1.2
   }
@@ -65,9 +65,9 @@
   "background": {
    "type": "sky",
    "color": [
-    0.2,
-    0.3,
-    0.7
+	0.2,
+	0.3,
+	0.7
    ]
   }
  },

@@ -1,0 +1,271 @@
+{
+ "primitives": {
+  "Point_Animatedcube": [
+   "first_shadow",
+   "first_phosphor"
+  ]
+ },
+ "transformation": {
+  "Trans_Rotation": [
+   "furniture_turntable"
+  ],
+  "Trans_RotationSpectacle": [
+   "baggage_grammar",
+   "two_cakes"
+  ]
+ },
+ "color": {
+  "Ribbon_Color_04": [
+   "hue_carousel"
+  ],
+  "Ribbon_Color_05": [
+   "neon_garden"
+  ],
+  "Ribbon_Color_06": [
+   "two_roads"
+  ],
+  "Ribbon_Color_07": [
+   "one_bulb_room"
+  ]
+ },
+ "change": {
+  "Change_Intro": [
+   "zeno_staircase",
+   "paper_regatta"
+  ],
+  "Ribbon_Change_04": [
+   "grand_zoetrope",
+   "flow_field_painter",
+   "noc_5_04_flow_field"
+  ]
+ },
+ "forces": {
+  "Vectors_Act1_WhatAVectorIs": [
+   "route_vector"
+  ],
+  "Vectors_Act4a_KineticForces": [
+   "sisyphus_mower",
+   "prop_carousel"
+  ],
+  "Vectors_Act4b_Oscillation": [
+   "example_6_4_windmill_vr"
+  ],
+  "Vectors_Act5_ForceAsPlace": [
+   "invisible_hill",
+   "force_field"
+  ]
+ },
+ "formfinding": {
+  "FormFinding_Descent": [
+   "settling_tremble"
+  ],
+  "FormFinding_Catenary": [
+   "laundry_line_cathedral"
+  ],
+  "FormFinding_Annealing": [
+   "impossible_end_table"
+  ]
+ },
+ "wavefunctions": {},
+ "randomness": {
+  "Random_Entropy": [
+   "replay_casino"
+  ],
+  "Random_Game": [
+   "monte_carlo"
+  ]
+ },
+ "noise": {},
+ "cellularautomata": {
+  "CA_Introduction": [
+   "ca_showcase",
+   "rule110_computer",
+   "langton_swarm"
+  ],
+  "CA_SoftRules": [
+   "the_clockmaker_of_rules",
+   "crack_propagation_ca",
+   "rd_artifact",
+   "lattice_gas_pump"
+  ],
+  "CA_EdgeOfChaos": [
+   "crackpropagation_ca"
+  ]
+ },
+ "fractals": {
+  "Fractal_CantorSet": [
+   "fractal_clouds"
+  ],
+  "Fractal_GoldenSpiral": [
+   "the_recursion_cabinet",
+   "diffusion_limited_aggregation"
+  ]
+ },
+ "lsystems": {
+  "LSystems_Grammar_Lab": [
+   "mesh_grammar_lsystem_tree",
+   "city_bench"
+  ],
+  "LSystems_Growth": [
+   "modulor_cypress"
+  ],
+  "LSystems_Grammars_And_Curves": [
+   "the_believing_turtle",
+   "lindenmayer_tube_tree"
+  ],
+  "LSystems_Architecture": [
+   "mesh_grammar_petal_flower",
+   "mesh_grammar_coral_fingers",
+   "grammar_seed",
+   "dragon_room"
+  ],
+  "LSystems_Living": [
+   "living_paper_dragon",
+   "living_paper_fern",
+   "living_paper_tree"
+  ],
+  "Assemblage_Same_Desire": [
+   "grid_substrate_runner",
+   "dragon_bench"
+  ]
+ },
+ "proceduralgeneration": {
+  "PG_Caves_Mazes": [
+   "binary_space_partitioning"
+  ]
+ },
+ "softbodies": {
+  "SoftBodies_Soft_Body_Deformation": [
+   "jelly_variants",
+   "radiolaria"
+  ],
+  "SoftBodies_Carusell": [
+   "flex_cloth_pad"
+  ],
+  "SoftBodies_Obsticals": [
+   "softbody_gallery_part2"
+  ],
+  "SoftBodies_Playground_of_Joy": [
+   "frozen_glass_vessel",
+   "entropy_morphogenesis"
+  ],
+  "ProceduralGeneration_Reaction_Diffusion_Systems": [
+   "the_confessing_body",
+   "mesh_grammar_detailed_bulge",
+   "softstopscene"
+  ]
+ },
+ "isosurfaces": {
+  "ISO_LookupTable": [
+   "the_threshold_opinion",
+   "metaball_world"
+  ],
+  "ISO_ShapesGallery": [
+   "mc_sculpt_vr"
+  ],
+  "ISO_TorusGyroid": [
+   "voxel_noise_demo"
+  ],
+  "ISO_FlatTerrain": [
+   "rhizome_cave_system"
+  ],
+  "ISO_Caves": [
+   "rhizome_cave_demo",
+   "raymarched_metaballs"
+  ]
+ },
+ "boolean_surfaces": {
+  "Boolean_Union": [
+   "the_argument_of_solids"
+  ],
+  "Boolean_Architecture_Cavity": [
+   "coincident_face"
+  ]
+ },
+ "swarmintelligence": {
+  "SwarmIntelligence_PhysarumColony": [
+   "ant_agent",
+   "particle_swarm_optimization_legacy"
+  ],
+  "SwarmIntelligence_FlowFields": [
+   "AntColonyV2",
+   "ecosystem_simulation"
+  ],
+  "SwarmIntelligence_Agent_Based_Modeling_ABM": [
+   "catalyst_foe",
+   "physarum_colony"
+  ],
+  "SwarmIntelligence_Particle_Swarm_Optimization": [
+   "tick_flock",
+   "ant_colony_v2"
+  ]
+ },
+ "machinelearning": {
+  "ML_Gradient_Landscape": [
+   "evolved_creatures"
+  ],
+  "ML_Neural_Networks": [
+   "fine_tuning_vr"
+  ]
+ },
+ "graphtheory": {
+  "GT_Foundations": [
+   "graphspace3d",
+   "two_travelers"
+  ],
+  "GT_Layout": [
+   "graph_basilica",
+   "living_paper_bfs",
+   "forcedirected3d"
+  ],
+  "GT_Pathfinding": [
+   "grid_substrate_runner",
+   "living_paper_dfs_maze",
+   "family_chandelier",
+   "impatient_river"
+  ],
+  "GT_Flow": [
+   "grid3d_dfs",
+   "grid3d_prim"
+  ]
+ },
+ "foundationscrisis": {
+  "Russell_Paradox": [
+   "hilbert_hotel",
+   "euclid_postulates_plaque"
+  ],
+  "Brouwer_Intuitionism": [
+   "parallel_lines",
+   "cantor_diagonal_workbench",
+   "angle_sum_triangle"
+  ],
+  "Crisis_Synthesis": [
+   "goedel_atrium",
+   "russell_paradox_workbench"
+  ]
+ },
+ "qfeplaboratory": {
+  "QFEP_Lambda_Spectrum": [
+   "lambda_hall",
+   "qfep_chalkboard",
+   "phase_cube"
+  ],
+  "QFEP_Synthesis": [
+   "entropy_meter",
+   "entropy_ceiling"
+  ]
+ },
+ "postfoundationscrisis": {
+  "CriticalAlgorithms_Algorithmic_Bias_Visualization": [
+   "situated_readout"
+  ],
+  "SpeculativeComputation_Paraconsistent_Engineering": [
+   "rhizome_vault",
+   "shannon_workbench"
+  ],
+  "SpeculativeComputation_Collective_Knowledge": [
+   "the_commons_table",
+   "the_fourth_limit"
+  ]
+ }
+}
