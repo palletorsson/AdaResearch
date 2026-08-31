@@ -27,6 +27,19 @@ extends Node3D
 ## the distance you can read it from changes. One map places this artifact, so the
 ## default IS the change. `#display_scale:1.0` restores the old plaque.
 @export var display_scale: float = 2.4
+## WHICH SPACE THIS CARD SPEAKS (2026-08-31, Palle: "the text on the point speaks
+## local ... can we show the local and the global point in two different displays").
+##
+## They are not rival answers. They are two true addresses for one point, and the
+## DIFFERENCE between them is the frame's own position: move the frame and the
+## local reading holds still while the world reading slides; move the point and
+## both change. One card each makes that a thing you can watch instead of a flag
+## somebody set.
+##
+## `frame` follows whatever the CoordinateSystem3M is set to, which is what every
+## existing placement gets. `world` and `local` pin this card to one of them and
+## caption it, so two cards side by side cannot be confused for each other.
+@export_enum("frame", "world", "local") var space: String = "frame"
 
 var _label: Label3D = null
 
@@ -73,6 +86,16 @@ func _build() -> void:
 	_label.no_depth_test = false
 	_label.position = Vector3(0, 0, 0.022 * ds)
 	add_child(_label)
+	if space != "frame":
+		var cap := Label3D.new()
+		cap.name = "SpaceCaption"
+		cap.text = space.to_upper()
+		cap.font_size = 30
+		cap.pixel_size = 0.0016 * ds
+		cap.modulate = Color(0.42, 0.44, 0.48)
+		cap.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		cap.position = Vector3(0, (frame_height * 0.5 - 0.085) * ds, 0.022 * ds)
+		add_child(cap)
 	_reset_text()
 
 
@@ -110,6 +133,14 @@ func apply_grid_config(config: Dictionary) -> void:
 			c.queue_free()
 		_label = null
 		_build()
+	if config.has("space"):
+		var sp := str(config["space"]).strip_edges().to_lower()
+		if sp in ["frame", "world", "local"]:
+			space = sp
+			for c in get_children():
+				c.queue_free()
+			_label = null
+			_build()
 	if config.has("axis"):
 		var a := str(config["axis"]).strip_edges().to_lower()
 		if a in ["xyz", "x", "y", "z"]:

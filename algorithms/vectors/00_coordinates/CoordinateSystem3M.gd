@@ -494,10 +494,20 @@ func _process(_delta: float) -> void:
 	# the x,y,z TEXT lives on the hall's wall works — in WORLD units by default,
 	# measured from Vector3.ZERO rather than from this frame's own origin.
 	if is_inside_tree():
-		var reported: Vector3 = pt.global_position if readout_space == "world" else lp
+		var world_p: Vector3 = pt.global_position
+		var reported: Vector3 = world_p if readout_space == "world" else lp
 		for rd in get_tree().get_nodes_in_group("ada_coordinate_readout"):
-			if rd.has_method("show_coordinates"):
-				rd.show_coordinates(reported)
+			if not rd.has_method("show_coordinates"):
+				continue
+			# a card that names its own space wins; one that does not follows the
+			# frame, which is every placement that existed before today
+			var sp: Variant = rd.get("space")
+			var want: Vector3 = reported
+			if typeof(sp) == TYPE_STRING and String(sp) == "world":
+				want = world_p
+			elif typeof(sp) == TYPE_STRING and String(sp) == "local":
+				want = lp
+			rd.show_coordinates(want)
 
 
 func apply_grid_config(config: Dictionary) -> void:

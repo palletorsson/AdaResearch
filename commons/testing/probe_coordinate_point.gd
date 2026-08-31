@@ -121,12 +121,27 @@ func _run() -> void:
 	await process_frame          # let the fence actually lift before section 3 moves it
 
 	# --- 3. the readout is measured from Vector3.ZERO --------------------------
+	# A FRESH frame: section 2 leaves its point fenced at the axis corner, and
+	# reusing it here read that leftover twice while looking like a world-space
+	# bug. A test that inherits another test's end state is not measuring what its
+	# name says.
 	_check(str(frame.get("readout_space")) == "world", "readout_space defaults to world")
-	_shove(pt, frame.to_global(Vector3(1.0, 1.0, 1.0)))
+	var f2: Node3D = ps.instantiate() as Node3D
+	f2.set("floating_point", true)
+	holder.add_child(f2)
+	f2.global_position = origin
 	await process_frame
 	await process_frame
-	var world: Vector3 = pt.global_position
-	var local: Vector3 = frame.to_local(pt.global_position)
+	var pt2: Node3D = f2.get_node_or_null("FloatingPoint") as Node3D
+	_check(pt2 != null, "the fresh frame built its own point")
+	if pt2 == null:
+		_finish()
+		return
+	_shove(pt2, f2.to_global(Vector3(1.0, 1.0, 1.0)))
+	await process_frame
+	await process_frame
+	var world: Vector3 = pt2.global_position
+	var local: Vector3 = f2.to_local(pt2.global_position)
 	_say("  point one unit out on each axis:")
 	_say("     world (from Vector3.ZERO) = (%.2f, %.2f, %.2f)" % [world.x, world.y, world.z])
 	_say("     local (from the frame)    = (%.2f, %.2f, %.2f)" % [local.x, local.y, local.z])
@@ -183,6 +198,31 @@ func _run() -> void:
 		_say("     point world = (%.2f, %.2f, %.2f)  (asked for 8.00, 1.20, 11.00)" % [w.x, w.y, w.z])
 		_check(w.is_equal_approx(Vector3(8.0, 1.2, 11.0)),
 			"it resolved against the FINAL transform, not the one at _ready")
+	# --- 6. two cards, two true addresses for one point ------------------------
+	var rd_scene := "res://commons/primitives/point/coordinate_readout.tscn"
+	var card_w: Node3D = (load(rd_scene) as PackedScene).instantiate() as Node3D
+	card_w.set("space", "world")
+	var card_l: Node3D = (load(rd_scene) as PackedScene).instantiate() as Node3D
+	card_l.set("space", "local")
+	holder.add_child(card_w)
+	holder.add_child(card_l)
+	await process_frame
+	await process_frame
+	_say("")
+	_say("two cards fed by one frame:")
+	var lw: Label3D = card_w.get_node_or_null("Value") as Label3D
+	var ll: Label3D = card_l.get_node_or_null("Value") as Label3D
+	_check(lw != null and ll != null, "both cards built a value label")
+	if lw != null and ll != null:
+		_say("     WORLD card: %s" % lw.text.replace("
+", "  "))
+		_say("     LOCAL card: %s" % ll.text.replace("
+", "  "))
+		_check(lw.text != ll.text, "the two cards disagree — which is the whole point")
+		_check(lw.text.contains("8.00") or lw.text.contains("28.00"),
+			"the world card carries a world number")
+	_check(card_w.get_node_or_null("SpaceCaption") != null, "the world card is captioned")
+	_check(card_l.get_node_or_null("SpaceCaption") != null, "the local card is captioned")
 	_finish()
 
 
