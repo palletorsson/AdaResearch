@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cvrlnkviewer01"]
+
+[ext_resource type="Script" path="res://commons/scenes/vr_link_viewer.gd" id="1_vrlinkview"]
+
+[node name="VRLinkViewer" type="Node3D"]
+script = ExtResource("1_vrlinkview")

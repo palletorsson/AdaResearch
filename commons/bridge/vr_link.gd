@@ -43,6 +43,11 @@ var _retry := 0.0
 var _rx := ""
 var _seq := 0
 
+## The endless museum, when we are in it. Cached — resolving it every pose frame
+## would walk the scene root 20 times a second for an answer that changes once
+## per map load.
+var _museum_node: Node = null
+
 ## The ghost the python walker drives. Built on first use, never before.
 var _ghost: Node3D = null
 var _ghost_path: Array = []
@@ -179,9 +184,83 @@ func _pose() -> Dictionary:
 		d["hands"] = hands
 
 	d["map"] = _map_name()
+	var hall: Dictionary = _hall()
+	if not hall.is_empty():
+		d["hall"] = hall
 	if _ghost != null:
 		d["ghost"] = _v3(_ghost.global_position)
 	return d
+
+
+## ————————————————————————————————————————————————————————————————————
+## THE MUSEUM IS NOT A MAP
+## ————————————————————————————————————————————————————————————————————
+##
+## 196 halls stream past a single cursor, so there is no map_data.json to look
+## up and no one room to draw — which is why the browser views show "no authored
+## map" the moment you walk into it. What there IS is the engine's own segment
+## list, [{node, z0, z1, index, w, pearl, map}], and the hall you are standing in
+## is simply the one whose z-range contains you.
+##
+## READ FROM THE OUTSIDE, NEVER EDITED IN. endless_museum.gd is nineteen
+## thousand lines that another session commits to constantly; adding a reporting
+## hook inside it would collide. GDScript privacy is a convention, so `get()`
+## reads _segments perfectly well from here, and if the museum is refactored
+## this returns an empty dictionary instead of breaking anything.
+func _museum() -> Node:
+	if _museum_node != null and is_instance_valid(_museum_node):
+		return _museum_node
+	var cur: Node = get_tree().current_scene
+	if cur == null:
+		return null
+	# by capability, not by name: endless_museum.tscn, _vr and _staged all wrap
+	# the same script, and only one of them is called EndlessMuseum
+	if cur.get("_segments") != null:
+		_museum_node = cur
+		return cur
+	for c in cur.get_children():
+		if c.get("_segments") != null:
+			_museum_node = c
+			return c
+	return null
+
+
+func _hall() -> Dictionary:
+	var mus: Node = _museum()
+	if mus == null:
+		return {}
+	var segs_v: Variant = mus.get("_segments")
+	if not (segs_v is Array):
+		return {}
+	var z: float = 0.0
+	var body: Node3D = _player_body()
+	if body == null:
+		var o: Node3D = _xr_origin()
+		if o == null:
+			return {}
+		z = o.global_position.z
+	else:
+		z = body.global_position.z
+	for s_v in (segs_v as Array):
+		if not (s_v is Dictionary):
+			continue
+		var s: Dictionary = s_v
+		var z0: float = float(s.get("z0", 0.0))
+		var z1: float = float(s.get("z1", 0.0))
+		if z >= z0 and z <= z1:
+			return {
+				"pearl": String(s.get("pearl", "")),
+				"map": String(s.get("map", "")),
+				"index": int(s.get("index", -1)),
+				"z0": snappedf(z0, 0.01), "z1": snappedf(z1, 0.01),
+				"w": int(s.get("w", 0)),
+				# how far through this hall, 0..1 — the one number a strip view
+				# needs that a raw z cannot give
+				"through": snappedf((z - z0) / maxf(0.001, z1 - z0), 0.001),
+			}
+	# between segments, or ahead of the stream window (only 2 are ever live)
+	return {"pearl": "", "map": "", "index": -1, "z0": 0.0, "z1": 0.0, "w": 0,
+		"through": 0.0}
 
 
 func _v3(v: Vector3) -> Array:
@@ -225,7 +304,18 @@ func _camera() -> Node3D:
 	return vp.get_camera_3d() if vp != null else null
 
 
+## THE MUSEUM WALKER IS NOT A "PLAYER" — the standing lesson, and it bit here
+## exactly as recorded: in the endless museum this reported no position at all,
+## silently, for twenty polls. The museum builds its own `_player:
+## CharacterBody3D` and puts it in NO group, so both group lookups miss and the
+## XROrigin3D fallback misses too (desktop museum has no XR rig). Ask the museum
+## for its walker before falling back to the conventions.
 func _player_body() -> Node3D:
+	var mus: Node = _museum()
+	if mus != null:
+		var mp: Variant = mus.get("_player")
+		if mp is Node3D and is_instance_valid(mp):
+			return mp as Node3D
 	for g in ["player_body", "player"]:
 		var l: Array = get_tree().get_nodes_in_group(g)
 		for n in l:

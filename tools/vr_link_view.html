@@ -69,6 +69,7 @@
     <h1>VR Link</h1>
     <span class="pill"><span class="dot" id="dot"></span><span id="conn">waiting</span></span>
     <span class="pill">map <b id="map">—</b></span>
+    <span class="pill">hall <b id="hall">—</b></span>
     <span class="pill">xyz <b id="xyz">—</b></span>
     <span class="pill">yaw <b id="yaw">—</b></span>
     <span class="pill"><b id="hz">0</b> Hz</span>
@@ -148,6 +149,19 @@ function onPose(d) {
   }
   if (d.yaw != null) $("yaw").textContent = (d.yaw * 180 / Math.PI).toFixed(0) + "°";
   if (d.map && d.map !== mapName) { mapName = d.map; $("map").textContent = d.map; loadMap(d.map); trail = []; }
+  // THE MUSEUM IS NOT A MAP. 196 halls stream past one cursor, so there is no
+  // map_data.json and these canvases have nothing to draw — which is why the
+  // Godot viewer exists (commons/scenes/vr_link_viewer.tscn), reading the
+  // engine's own em_layout_walk.json record. The hall is NOT redrawn here on
+  // purpose: a second implementation of one geometry rule drifts, which is
+  // exactly how long_museum.py came to report h20 where the engine builds h23.
+  // So the browser reports the hall and defers the picture.
+  if (d.hall && d.hall.pearl) {
+    $("map").textContent = d.hall.map + "  [" + d.hall.pearl + "]";
+    $("hall").textContent = Math.round((d.hall.through || 0) * 100) + "% through #" + d.hall.index;
+  } else if (d.hall) {
+    $("hall").textContent = "between segments";
+  }
   // the text view: readable, not a firehose
   if (now - lastLog > 500 && d.pos) {
     lastLog = now;

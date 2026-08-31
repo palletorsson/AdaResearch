@@ -69,6 +69,19 @@ ADB = os.environ.get(
 # Shared state
 # ─────────────────────────────────────────────────────────────────────────────
 
+class Client:
+    """One socket. A `game` sends pose and takes commands; a `viewer` only
+    watches. The role arrives in a `hello` line; anything that starts sending
+    pose is treated as the game regardless, because a client that forgets to
+    introduce itself should still work."""
+
+    def __init__(self, conn, addr) -> None:
+        self.conn = conn
+        self.addr = f"{addr[0]}:{addr[1]}"
+        self.role = "unknown"
+        self.q: queue.Queue = queue.Queue(maxsize=400)
+
+
 class Link:
     """What the game last said, who is listening, and what to say back."""
 
@@ -78,10 +91,27 @@ class Link:
         self.log: deque = deque(maxlen=400)
         self.subs: list[queue.Queue] = []
         self.out: queue.Queue = queue.Queue()
+        self.clients: list[Client] = []
         self.connected = False
         self.peer = ""
         self.rate = 0.0
         self._stamps: deque = deque(maxlen=40)
+
+    def viewers(self) -> int:
+        with self.lock:
+            return sum(1 for c in self.clients if c.role == "viewer")
+
+    ## Pose goes to every viewer as well as to every browser. A Godot viewer is
+    ## just another client on the same socket — it reads the museum's geometry
+    ## off disk itself (same machine) and only needs the moving part.
+    def to_viewers(self, d: dict) -> None:
+        with self.lock:
+            vs = [c for c in self.clients if c.role == "viewer"]
+        for c in vs:
+            try:
+                c.q.put_nowait(d)
+            except queue.Full:
+                pass
 
     # fan out one event to every open browser
     def publish(self, ev: dict) -> None:
@@ -109,6 +139,7 @@ class Link:
                 span = self._stamps[-1] - self._stamps[0]
                 self.rate = (len(self._stamps) - 1) / span if span > 0 else 0.0
         self.publish(d)
+        self.to_viewers(d)
 
     def send(self, cmd: dict) -> None:
         self.out.put(cmd)
@@ -137,32 +168,33 @@ def game_server(link: Link) -> None:
 
     while True:
         conn, addr = srv.accept()
-        conn.settimeout(0.05)
-        # A NEW GAME INHERITS NOTHING. Commands queued while nothing was
-        # connected used to sit in `out` and fire at whoever turned up next —
-        # measured: a goto sent to a game that had already quit teleported the
-        # NEXT launch on arrival, which reads as the map spawning you in the
-        # wrong place. The rate window is dropped for the same reason: stamps
-        # from the previous session made the first Hz reading meaningless (0.3).
-        dropped = 0
+        threading.Thread(target=serve_client, args=(link, conn, addr),
+                         daemon=True).start()
+
+
+def serve_client(link: Link, conn, addr) -> None:
+    """One connection, whatever it turns out to be.
+
+    Threaded per client so a Godot viewer and the game can be attached at the
+    same time — the whole point of the viewer is to watch while someone plays.
+    """
+    conn.settimeout(0.05)
+    c = Client(conn, addr)
+    with link.lock:
+        link.clients.append(c)
+    buf = ""
+    became_game = False
+    try:
         while True:
-            try:
-                link.out.get_nowait()
-                dropped += 1
-            except queue.Empty:
-                break
-        with link.lock:
-            link.connected = True
-            link.peer = f"{addr[0]}:{addr[1]}"
-            link._stamps.clear()
-        if dropped:
-            link.note(f"dropped {dropped} command(s) queued before this game connected")
-        link.note(f"game connected from {addr[0]}:{addr[1]}")
-        link.publish({"k": "status", "connected": True})
-        buf = ""
-        try:
+            # anything queued for this client (viewers get pose; the game gets
+            # commands) goes out first
             while True:
-                # drain anything the browser queued for the game
+                try:
+                    msg = c.q.get_nowait()
+                except queue.Empty:
+                    break
+                conn.sendall((json.dumps(msg) + "\n").encode("utf-8"))
+            if c.role == "game":
                 while True:
                     try:
                         cmd = link.out.get_nowait()
@@ -170,37 +202,82 @@ def game_server(link: Link) -> None:
                         break
                     conn.sendall((json.dumps(cmd) + "\n").encode("utf-8"))
 
-                try:
-                    chunk = conn.recv(65536)
-                except socket.timeout:
+            try:
+                chunk = conn.recv(65536)
+            except socket.timeout:
+                continue
+            if not chunk:
+                break
+            buf += chunk.decode("utf-8", "replace")
+            while "\n" in buf:
+                line, buf = buf.split("\n", 1)
+                line = line.strip()
+                if not line:
                     continue
-                if not chunk:
-                    break
-                buf += chunk.decode("utf-8", "replace")
-                while "\n" in buf:
-                    line, buf = buf.split("\n", 1)
-                    line = line.strip()
-                    if not line:
-                        continue
-                    try:
-                        d = json.loads(line)
-                    except json.JSONDecodeError:
-                        continue
-                    kind = d.get("k")
-                    if kind == "pose":
-                        link.on_pose(d)
-                    elif kind == "log":
-                        link.note(f"game: {d.get('msg','')}")
-                    else:
-                        link.publish(d)
-        except OSError:
-            pass
-        finally:
-            conn.close()
-            with link.lock:
+                try:
+                    d = json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+                kind = d.get("k")
+
+                if kind == "hello":
+                    c.role = str(d.get("role", "viewer"))
+                    link.note(f"{c.role} connected from {c.addr}")
+                    if c.role == "viewer" and link.pose:
+                        c.q.put_nowait(link.pose)   # so it draws immediately
+                    continue
+
+                if kind == "pose":
+                    if not became_game:
+                        became_game = True
+                        c.role = "game"
+                        # A NEW GAME INHERITS NOTHING. Commands queued while
+                        # nothing was attached used to sit in `out` and fire at
+                        # whoever turned up next — measured: a goto sent to a
+                        # game that had already quit teleported the NEXT launch
+                        # on arrival, which reads as the map spawning you in the
+                        # wrong place. The rate window goes for the same reason:
+                        # stamps from the previous session made the first Hz
+                        # reading meaningless (0.3).
+                        dropped = 0
+                        while True:
+                            try:
+                                link.out.get_nowait()
+                                dropped += 1
+                            except queue.Empty:
+                                break
+                        with link.lock:
+                            link.connected = True
+                            link.peer = c.addr
+                            link._stamps.clear()
+                        if dropped:
+                            link.note(f"dropped {dropped} command(s) queued "
+                                      "before this game connected")
+                        link.note(f"game is {c.addr}")
+                        link.publish({"k": "status", "connected": True})
+                    link.on_pose(d)
+                elif kind == "log":
+                    link.note(f"game: {d.get('msg','')}")
+                elif kind == "cmd" or d.get("cmd"):
+                    # a viewer driving the game (click-to-teleport from Godot)
+                    link.send(d)
+                    link.note(f"{c.role} -> game: {json.dumps(d)[:100]}")
+                else:
+                    link.publish(d)
+    except OSError:
+        pass
+    finally:
+        conn.close()
+        with link.lock:
+            if c in link.clients:
+                link.clients.remove(c)
+            if became_game:
                 link.connected = False
+        if became_game:
             link.note("game disconnected")
             link.publish({"k": "status", "connected": False})
+        else:
+            link.note(f"{c.role} disconnected ({c.addr})")
 
 
 # ─────────────────────────────────────────────────────────────────────────────
