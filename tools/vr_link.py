@@ -95,6 +95,7 @@ class Link:
         self.connected = False
         self.peer = ""
         self.rate = 0.0
+        self.last_pose_at = 0.0
         self._stamps: deque = deque(maxlen=40)
 
     def viewers(self) -> int:
@@ -134,6 +135,7 @@ class Link:
         now = time.time()
         with self.lock:
             self.pose = d
+            self.last_pose_at = now
             self._stamps.append(now)
             if len(self._stamps) > 2:
                 span = self._stamps[-1] - self._stamps[0]
@@ -223,8 +225,15 @@ def serve_client(link: Link, conn, addr) -> None:
                 if kind == "hello":
                     c.role = str(d.get("role", "viewer"))
                     link.note(f"{c.role} connected from {c.addr}")
-                    if c.role == "viewer" and link.pose:
-                        c.q.put_nowait(link.pose)   # so it draws immediately
+                    # PRIME A VIEWER ONLY FROM A LIVE GAME. This used to hand
+                    # every new viewer `link.pose` unconditionally so it "draws
+                    # immediately" — which meant a viewer opened with no game
+                    # attached drew a pose from a previous session and sat
+                    # there, still, on a hall nobody was in. That is exactly the
+                    # "no movement, wrong map" it was reported as: not a dead
+                    # link, a CONFIDENTLY STALE one.
+                    if c.role == "viewer" and link.pose and link.connected:
+                        c.q.put_nowait(link.pose)
                     continue
 
                 if kind == "pose":
@@ -559,8 +568,12 @@ class Handler(BaseHTTPRequestHandler):
 
         if u.path == "/state":
             with LINK.lock:
+                age = (time.time() - LINK.last_pose_at) if LINK.last_pose_at else None
                 self._json({"connected": LINK.connected, "peer": LINK.peer,
                             "hz": round(LINK.rate, 1), "pose": LINK.pose,
+                            # HOW OLD IS THAT POSE. Without this every consumer
+                            # has to guess, and they all guessed "current".
+                            "pose_age": round(age, 2) if age is not None else None,
                             "log": list(LINK.log)[-60:]})
             return
 
@@ -728,7 +741,13 @@ def main() -> int:
     if not args.no_adb:
         setup_reverse()
     if args.arm:
-        arm_headset()
+        # ARM AND STOP. This used to arm and then fall through into the serve
+        # loop, so `--arm` looked like it had hung — you arm a headset once,
+        # ever, and almost never at the moment you want a server.
+        ok_arm = arm_headset()
+        print("\n  Now RESTART the app on the headset — the link is read at boot.")
+        print("  Then: python tools/vr_link.py\n")
+        return 0 if ok_arm else 1
 
     threading.Thread(target=game_server, args=(LINK,), daemon=True).start()
 

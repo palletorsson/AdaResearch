@@ -37,6 +37,10 @@ var _retry := 0.0
 
 var _halls: Dictionary = {}          # "chapter|pearl" -> as-built row
 var _pose: Dictionary = {}
+## See vr_link_museum.gd: a pose with no age reads as current forever, and a
+## frozen view is indistinguishable from a stationary player.
+var _last_pose_ms := 0
+const STALE_MS := 2000
 var _trail: PackedVector3Array = PackedVector3Array()
 var _drawn_key := ""                 # which hall the geometry currently shows
 var _drawn_z0 := 0.0
@@ -305,6 +309,7 @@ func _say(d: Dictionary) -> void:
 
 func _on_pose(d: Dictionary) -> void:
 	_pose = d
+	_last_pose_ms = Time.get_ticks_msec()
 	var p: Vector3 = _vec(d.get("pos", []))
 	_player_mark.global_position = p
 	if _trail.is_empty() or _trail[_trail.size() - 1].distance_to(p) > 0.25:
@@ -476,10 +481,19 @@ func _paint() -> void:
 		_trail_line.mesh = im
 
 	var lines: Array = []
-	lines.append("VR LINK VIEWER    %s" % ("connected" if _peer != null and _peer.get_status() == StreamPeerTCP.STATUS_CONNECTED else "waiting for the server"))
+	var live: bool = _peer != null and _peer.get_status() == StreamPeerTCP.STATUS_CONNECTED
+	var age: int = Time.get_ticks_msec() - _last_pose_ms
+	var stale: bool = (not _pose.is_empty()) and age > STALE_MS
+	var state: String = "waiting for the server"
+	if live:
+		state = "server ok — no game attached" if _pose.is_empty() \
+			else ("STALE %.1fs" % (age / 1000.0) if stale else "live from the headset")
+	lines.append("VR LINK VIEWER    %s" % state)
 	if _pose.is_empty():
-		lines.append("no pose yet — start the game with --vr-link")
+		lines.append("no pose yet — is the headset armed?  python tools/vr_link.py --headset")
 	else:
+		if stale:
+			lines.append("!! LAST known position, not a current one")
 		var p: Vector3 = _vec(_pose.get("pos", []))
 		lines.append("map    %s" % String(_pose.get("map", "?")))
 		var hall: Variant = _pose.get("hall")

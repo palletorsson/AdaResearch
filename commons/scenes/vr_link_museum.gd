@@ -45,6 +45,12 @@ var _museum: Node = null
 var _mus_player: Node3D = null
 var _pose: Dictionary = {}
 var _have_pose := false
+## WHEN the last pose arrived. A pose with no age is the whole bug: this scene
+## once sat perfectly still on a hall nobody was in, captioned "connected",
+## because the server primed it with a pose from a previous session. Silence and
+## stillness look identical unless something is counting.
+var _last_pose_ms := 0
+const STALE_MS := 2000
 
 var _vp_eye: SubViewport
 var _vp_plan: SubViewport
@@ -342,11 +348,23 @@ func _pump(delta: float) -> void:
 		if v is Dictionary and String((v as Dictionary).get("k", "")) == "pose":
 			_pose = v as Dictionary
 			_have_pose = true
+			_last_pose_ms = Time.get_ticks_msec()
 
 
 ## THE ONE LINE THAT MAKES THE MUSEUM FOLLOW. Everything else here is a camera.
+func _stale_ms() -> int:
+	if not _have_pose:
+		return -1
+	return Time.get_ticks_msec() - _last_pose_ms
+
+
 func _drive() -> void:
 	if not _have_pose:
+		return
+	# DO NOT DRIVE THE MUSEUM FROM A CORPSE. Writing a stale coordinate every
+	# frame pins the local museum to a hall the player left long ago and fights
+	# nothing, so it looks exactly like a working link showing a still person.
+	if _stale_ms() > STALE_MS:
 		return
 	var p: Vector3 = _vec(_pose.get("pos", []))
 	_mark.global_position = p
@@ -408,10 +426,22 @@ func _aim() -> void:
 func _paint() -> void:
 	var lines: Array = []
 	var live: bool = _peer != null and _peer.get_status() == StreamPeerTCP.STATUS_CONNECTED
-	lines.append("VR LINK — REAL MUSEUM        %s" % ("connected" if live else "waiting for the server"))
+	# "connected" means connected TO THE SERVER, which is not the same as
+	# hearing from a game — say which, because conflating them is what made a
+	# frozen view look healthy.
+	var age: int = _stale_ms()
+	var stale: bool = age > STALE_MS
+	var state: String = "waiting for the server"
+	if live:
+		state = "server ok — no game attached" if not _have_pose \
+			else ("STALE %.1fs — the headset has stopped sending" % (age / 1000.0) if stale
+				  else "live from the headset")
+	lines.append("VR LINK — REAL MUSEUM        %s" % state)
 	if not _have_pose:
-		lines.append("no pose yet — start the game with --vr-link")
+		lines.append("no pose yet — is the headset armed?  python tools/vr_link.py --headset")
 	else:
+		if stale:
+			lines.append("!! the position below is the LAST one received, not where anyone is now")
 		var p: Vector3 = _vec(_pose.get("pos", []))
 		var hall: Variant = _pose.get("hall")
 		if hall is Dictionary and String((hall as Dictionary).get("pearl", "")) != "":
