@@ -1,0 +1,404 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>VR Link</title>
+<!--
+  The desktop end of the USB link. Three views of one moving body:
+  a 3D room, a top-down plan, and the text of what is happening.
+
+  No libraries. The 3D view is a hand-rolled perspective projection with a
+  painter's sort — about 60 lines — because a CDN cannot be reached from a
+  page served by a python script on a machine that may well be offline, and
+  a wireframe room with a marker in it does not need a scene graph.
+-->
+<style>
+  :root {
+    --bg:#14161a; --panel:#1c1f25; --line:#2b3038; --ink:#e6e9ef;
+    --dim:#8b93a1; --accent:#4fd1c5; --warm:#f0a868; --ghost:#4ade80;
+    --bad:#f06565;
+  }
+  * { box-sizing:border-box; }
+  html,body { margin:0; height:100%; background:var(--bg); color:var(--ink);
+    font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
+  /* minmax(0,1fr), not 1fr. A bare `1fr` row is minmax(AUTO,1fr) and may grow
+     past the viewport to fit its content — which with a height:100% canvas
+     inside is a feedback loop: the canvas reads the height it set last frame,
+     sets a bigger one, and doubles every frame. Measured before this fix:
+     clientHeight 8196 inside a 720px page, both views blank, no console error
+     because nothing actually throws. */
+  #app { display:grid; height:100%;
+    grid-template-columns:1fr 420px; grid-template-rows:auto minmax(0,1fr); gap:1px;
+    background:var(--line); }
+  header { grid-column:1/-1; background:var(--panel); padding:10px 14px;
+    display:flex; align-items:center; gap:18px; flex-wrap:wrap; }
+  h1 { font-size:13px; margin:0; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--dim); font-weight:600; }
+  .pill { padding:3px 9px; border-radius:999px; background:#262a31;
+    border:1px solid var(--line); font-size:11px; }
+  .pill b { color:var(--accent); font-weight:600; }
+  .dot { width:8px; height:8px; border-radius:50%; background:var(--bad);
+    display:inline-block; margin-right:6px; vertical-align:middle; }
+  .dot.on { background:var(--ghost); box-shadow:0 0 8px var(--ghost); }
+  .panel { background:var(--panel); position:relative; overflow:hidden; min-height:0; }
+  .label { position:absolute; top:8px; left:10px; z-index:2; font-size:10px;
+    letter-spacing:.14em; text-transform:uppercase; color:var(--dim);
+    pointer-events:none; }
+  /* absolutely positioned so the canvas can never feed its size back into the
+     panel that sizes it — the belt to the minmax braces above */
+  canvas { display:block; position:absolute; inset:0; width:100%; height:100%; }
+  aside { display:grid; grid-template-rows:minmax(0,1fr) minmax(0,1fr); gap:1px;
+    background:var(--line); min-height:0; }
+  #log { overflow-y:auto; padding:26px 12px 12px; font-size:11.5px; }
+  #log div { padding:2px 0; border-bottom:1px solid #23262c; white-space:pre-wrap;
+    word-break:break-word; }
+  #log .t { color:var(--dim); }
+  #log .pose { color:var(--accent); }
+  #log .cmd { color:var(--warm); }
+  .bar { position:absolute; bottom:0; left:0; right:0; padding:8px 10px;
+    background:linear-gradient(transparent,#1c1f25 40%); display:flex; gap:6px;
+    flex-wrap:wrap; z-index:3; }
+  button { background:#262a31; color:var(--ink); border:1px solid var(--line);
+    border-radius:5px; padding:5px 10px; font:inherit; font-size:11px;
+    cursor:pointer; }
+  button:hover { border-color:var(--accent); color:var(--accent); }
+  .hint { position:absolute; bottom:8px; right:10px; font-size:10px;
+    color:var(--dim); z-index:2; pointer-events:none; }
+</style>
+
+<div id="app">
+  <header>
+    <h1>VR Link</h1>
+    <span class="pill"><span class="dot" id="dot"></span><span id="conn">waiting</span></span>
+    <span class="pill">map <b id="map">—</b></span>
+    <span class="pill">xyz <b id="xyz">—</b></span>
+    <span class="pill">yaw <b id="yaw">—</b></span>
+    <span class="pill"><b id="hz">0</b> Hz</span>
+  </header>
+
+  <div class="panel">
+    <div class="label">3D</div>
+    <canvas id="c3"></canvas>
+    <div class="hint">drag to orbit · wheel to zoom</div>
+    <div class="bar">
+      <button onclick="walker()">send walker into VR</button>
+      <button onclick="cmd({cmd:'walker_stop'})">clear walker</button>
+      <button onclick="cmd({cmd:'ping'})">ping</button>
+    </div>
+  </div>
+
+  <aside>
+    <div class="panel">
+      <div class="label">Top-down</div>
+      <canvas id="c2"></canvas>
+      <div class="hint">click a cell to teleport the player</div>
+    </div>
+    <div class="panel">
+      <div class="label">Text</div>
+      <div id="log"></div>
+    </div>
+  </aside>
+</div>
+
+<script>
+// ── state ────────────────────────────────────────────────────────────────────
+let pose = null, mapData = null, mapName = "", trail = [], walkPath = [];
+let cam = { yaw: -0.7, pitch: 0.62, dist: 26 };
+
+const $ = id => document.getElementById(id);
+
+function log(msg, cls) {
+  const el = $("log"), d = document.createElement("div");
+  const t = new Date().toLocaleTimeString();
+  d.innerHTML = `<span class="t">${t}</span>  <span class="${cls||''}">${msg}</span>`;
+  el.appendChild(d);
+  while (el.children.length > 300) el.removeChild(el.firstChild);
+  el.scrollTop = el.scrollHeight;
+}
+
+// ── the wire ─────────────────────────────────────────────────────────────────
+const es = new EventSource("/events");
+es.onmessage = e => {
+  const d = JSON.parse(e.data);
+  if (d.k === "pose") onPose(d);
+  else if (d.k === "status") setConn(d.connected, d.hz);
+  else if (d.k === "log") log(d.msg, "cmd");
+  else if (d.k === "pong") log("pong from the headset", "cmd");
+};
+es.onerror = () => setConn(false);
+
+function setConn(on, hz) {
+  $("dot").className = "dot" + (on ? " on" : "");
+  $("conn").textContent = on ? "game connected" : "waiting for the game";
+  if (hz != null) $("hz").textContent = hz;
+}
+
+let lastLog = 0, frames = 0, tFrames = performance.now();
+function onPose(d) {
+  pose = d;
+  setConn(true);
+  frames++;
+  const now = performance.now();
+  if (now - tFrames > 1000) {
+    $("hz").textContent = (frames * 1000 / (now - tFrames)).toFixed(0);
+    frames = 0; tFrames = now;
+  }
+  if (d.pos) {
+    $("xyz").textContent = d.pos.map(v => v.toFixed(2)).join("  ");
+    trail.push(d.pos);
+    if (trail.length > 600) trail.shift();
+  }
+  if (d.yaw != null) $("yaw").textContent = (d.yaw * 180 / Math.PI).toFixed(0) + "°";
+  if (d.map && d.map !== mapName) { mapName = d.map; $("map").textContent = d.map; loadMap(d.map); trail = []; }
+  // the text view: readable, not a firehose
+  if (now - lastLog > 500 && d.pos) {
+    lastLog = now;
+    log(`pos ${d.pos.map(v=>v.toFixed(2)).join(" ")}` +
+        (d.yaw != null ? `  yaw ${(d.yaw*180/Math.PI).toFixed(0)}°` : "") +
+        (d.ghost ? `   walker ${d.ghost.map(v=>v.toFixed(1)).join(" ")}` : ""), "pose");
+  }
+}
+
+async function loadMap(name) {
+  try {
+    const r = await fetch("/map?name=" + encodeURIComponent(name));
+    mapData = r.ok ? await r.json() : null;
+    log(mapData ? `loaded map ${name} (${mapData.structure.length} rows)`
+               : `no authored map_data.json for "${name}"`, "cmd");
+  } catch (e) { mapData = null; }
+}
+
+async function cmd(o) {
+  await fetch("/cmd", {method:"POST", headers:{"Content-Type":"application/json"},
+                       body: JSON.stringify(o)});
+}
+
+async function walker() {
+  log("running humanoid_walker...", "cmd");
+  const r = await fetch("/walker", {method:"POST", headers:{"Content-Type":"application/json"},
+                                    body: JSON.stringify({map: mapName, loop:true})});
+  const d = await r.json();
+  if (d.error) { log("walker: " + d.error, "cmd"); return; }
+  walkPath = d.decisions.filter(x => x.action==="start"||x.action==="move").map(x => x.world);
+  const placed = d.decisions.filter(x => x.action === "place");
+  log(`walker: ${d.steps} steps, ${placed.length} placements`, "cmd");
+  placed.forEach(p => log(`   place ${p.artifact} @ cell ${p.cell} score ${p.score}`, "cmd"));
+}
+
+// ── geometry helpers ─────────────────────────────────────────────────────────
+function total() { return mapData ? (mapData.cube + mapData.gutter) : 1; }
+function dims() {
+  if (!mapData) return {rows:0, cols:0};
+  return {rows: mapData.structure.length, cols: mapData.structure[0]?.length || 0};
+}
+function height(r, c) {
+  if (!mapData) return 0;
+  const row = mapData.structure[r];
+  if (!row) return 0;
+  return parseInt(row[c], 10) || 0;
+}
+
+// Size the backing store only when it actually changed. Assigning canvas.width
+// every frame both clears it and — with any percentage-height ancestor — invites
+// the growth loop the CSS above now blocks. Two guards, because this failure is
+// silent: no exception, just two blank panes and a header that keeps updating.
+function fit(cv) {
+  const w = Math.max(1, Math.round(cv.clientWidth  * devicePixelRatio));
+  const h = Math.max(1, Math.round(cv.clientHeight * devicePixelRatio));
+  if (cv.width  !== w) cv.width  = w;
+  if (cv.height !== h) cv.height = h;
+  return [w, h];
+}
+
+// ── 3D view ──────────────────────────────────────────────────────────────────
+const c3 = $("c3"), g3 = c3.getContext("2d");
+
+function project(p, w, h) {
+  const {rows, cols} = dims(), t = total();
+  const cx = cols * t / 2, cz = rows * t / 2;
+  let x = p[0] - cx, y = p[1], z = p[2] - cz;
+  // yaw then pitch, then a fixed dolly back
+  const cy = Math.cos(cam.yaw), sy = Math.sin(cam.yaw);
+  let X = x * cy - z * sy, Z = x * sy + z * cy;
+  const cp = Math.cos(cam.pitch), sp = Math.sin(cam.pitch);
+  let Y = y * cp - Z * sp, Z2 = y * sp + Z * cp + cam.dist;
+  if (Z2 < 0.1) return null;
+  const f = Math.min(w, h) * 0.9;
+  return { x: w/2 + X * f / Z2, y: h/2 - Y * f / Z2, z: Z2 };
+}
+
+function box(faces, x, z, s, h, fill, stroke) {
+  const v = [[x,0,z],[x+s,0,z],[x+s,0,z+s],[x,0,z+s],
+             [x,h,z],[x+s,h,z],[x+s,h,z+s],[x,h,z+s]];
+  const quads = [[4,5,6,7],[0,1,5,4],[1,2,6,5],[2,3,7,6],[3,0,4,7]];
+  for (const q of quads) faces.push({ pts: q.map(i => v[i]), fill, stroke });
+}
+
+function draw3() {
+  const [w, h] = fit(c3);
+  g3.setTransform(1,0,0,1,0,0);
+  g3.fillStyle = "#1c1f25"; g3.fillRect(0,0,w,h);
+  if (!mapData) {
+    g3.fillStyle = "#8b93a1"; g3.font = `${14*devicePixelRatio}px monospace`;
+    g3.textAlign = "center";
+    g3.fillText(mapName ? `no authored map for "${mapName}"` : "waiting for the game", w/2, h/2);
+    return;
+  }
+  const {rows, cols} = dims(), t = total();
+  const faces = [];
+  for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
+    const hh = height(r, c);
+    if (hh <= 0) continue;
+    const wall = hh > 1;
+    box(faces, c*t, r*t, t, hh*t,
+        wall ? "#343a44" : "#252a31", wall ? "#454d5a" : "#313842");
+  }
+  // painter's algorithm — far faces first
+  const proj = faces.map(f => {
+    const ps = f.pts.map(p => project(p, w, h));
+    if (ps.some(p => !p)) return null;
+    return { ps, d: ps.reduce((a,p) => a + p.z, 0) / ps.length, fill: f.fill, stroke: f.stroke };
+  }).filter(Boolean).sort((a,b) => b.d - a.d);
+
+  g3.lineWidth = devicePixelRatio;
+  for (const f of proj) {
+    g3.beginPath();
+    f.ps.forEach((p,i) => i ? g3.lineTo(p.x,p.y) : g3.moveTo(p.x,p.y));
+    g3.closePath();
+    g3.fillStyle = f.fill; g3.fill();
+    g3.strokeStyle = f.stroke; g3.stroke();
+  }
+
+  polyline(g3, walkPath, w, h, "#4ade8055", 2);
+  polyline(g3, trail, w, h, "#4fd1c5aa", 2);
+
+  if (pose && pose.ghost) marker(g3, pose.ghost, w, h, "#4ade80", 1.7, null);
+  if (pose && pose.pos)  marker(g3, pose.pos,  w, h, "#4fd1c5", 1.7, pose.yaw);
+}
+
+function polyline(g, pts, w, h, color, lw) {
+  if (!pts || pts.length < 2) return;
+  g.beginPath(); let started = false;
+  for (const p of pts) {
+    const q = project([p[0], 0.05, p[2]], w, h);
+    if (!q) { started = false; continue; }
+    started ? g.lineTo(q.x, q.y) : g.moveTo(q.x, q.y);
+    started = true;
+  }
+  g.strokeStyle = color; g.lineWidth = lw * devicePixelRatio; g.stroke();
+}
+
+function marker(g, p, w, h, color, tall, yaw) {
+  const base = project([p[0], 0, p[2]], w, h);
+  const top  = project([p[0], tall, p[2]], w, h);
+  if (!base || !top) return;
+  g.strokeStyle = color; g.lineWidth = 3 * devicePixelRatio;
+  g.beginPath(); g.moveTo(base.x, base.y); g.lineTo(top.x, top.y); g.stroke();
+  g.fillStyle = color;
+  g.beginPath(); g.arc(top.x, top.y, 5*devicePixelRatio, 0, 7); g.fill();
+  if (yaw != null) {
+    const n = project([p[0] + Math.sin(yaw)*1.2, 0.05, p[2] + Math.cos(yaw)*1.2], w, h);
+    if (n) { g.beginPath(); g.moveTo(base.x, base.y); g.lineTo(n.x, n.y);
+             g.lineWidth = 2*devicePixelRatio; g.stroke(); }
+  }
+}
+
+// orbit
+let drag = null;
+c3.addEventListener("mousedown", e => drag = {x:e.clientX, y:e.clientY, ...cam});
+addEventListener("mouseup", () => drag = null);
+addEventListener("mousemove", e => {
+  if (!drag) return;
+  cam.yaw   = drag.yaw   + (e.clientX - drag.x) * 0.008;
+  cam.pitch = Math.max(-0.2, Math.min(1.45, drag.pitch + (e.clientY - drag.y) * 0.006));
+});
+c3.addEventListener("wheel", e => {
+  e.preventDefault();
+  cam.dist = Math.max(4, Math.min(120, cam.dist * (1 + Math.sign(e.deltaY)*0.12)));
+}, {passive:false});
+
+// ── top-down view ────────────────────────────────────────────────────────────
+const c2 = $("c2"), g2 = c2.getContext("2d");
+let plan = null;   // {ox, oy, cell} — kept so clicks can be inverted
+
+function draw2() {
+  const [w, h] = fit(c2);
+  g2.setTransform(1,0,0,1,0,0);
+  g2.fillStyle = "#1c1f25"; g2.fillRect(0,0,w,h);
+  if (!mapData) return;
+  const {rows, cols} = dims(), t = total();
+  const pad = 34 * devicePixelRatio;
+  const cell = Math.min((w - pad*2) / cols, (h - pad*2) / rows);
+  // A pane can be zero-height for a frame (hidden, mid-resize), which makes
+  // this NEGATIVE — and a negative radius makes arc() throw, which used to kill
+  // the animation loop for good: two blank views, a header still ticking, and
+  // nothing in the console because the exception happened once, frames ago.
+  if (!(cell > 0)) return;
+  const ox = (w - cell*cols)/2, oy = (h - cell*rows)/2;
+  plan = {ox, oy, cell, t};
+
+  for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
+    const hh = height(r, c);
+    g2.fillStyle = hh <= 0 ? "#191c21" : hh > 1 ? "#3a424e" : "#262b33";
+    g2.fillRect(ox + c*cell, oy + r*cell, cell-1, cell-1);
+    const u = mapData.utilities?.[r]?.[c];
+    if (u && String(u).trim()) {
+      g2.fillStyle = "#f0a868"; g2.font = `${cell*0.42}px monospace`;
+      g2.textAlign = "center"; g2.textBaseline = "middle";
+      g2.fillText(String(u).slice(0,2), ox + c*cell + cell/2, oy + r*cell + cell/2);
+    }
+    const a = mapData.interactables?.[r]?.[c];
+    if (a && String(a).trim()) {
+      g2.fillStyle = "#9b7ede";
+      g2.beginPath(); g2.arc(ox+c*cell+cell/2, oy+r*cell+cell/2, cell*0.16, 0, 7); g2.fill();
+    }
+  }
+
+  const toPx = p => [ox + (p[0]/t)*cell, oy + (p[2]/t)*cell];
+  if (walkPath.length > 1) {
+    g2.beginPath(); walkPath.forEach((p,i) => { const [x,y]=toPx(p); i?g2.lineTo(x,y):g2.moveTo(x,y); });
+    g2.strokeStyle = "#4ade8088"; g2.lineWidth = 2*devicePixelRatio; g2.stroke();
+  }
+  if (trail.length > 1) {
+    g2.beginPath(); trail.forEach((p,i) => { const [x,y]=toPx(p); i?g2.lineTo(x,y):g2.moveTo(x,y); });
+    g2.strokeStyle = "#4fd1c5aa"; g2.lineWidth = 2*devicePixelRatio; g2.stroke();
+  }
+  if (pose?.ghost) {
+    const [x,y] = toPx(pose.ghost);
+    g2.fillStyle = "#4ade80"; g2.beginPath(); g2.arc(x,y,cell*0.2,0,7); g2.fill();
+  }
+  if (pose?.pos) {
+    const [x,y] = toPx(pose.pos);
+    g2.fillStyle = "#4fd1c5"; g2.beginPath(); g2.arc(x,y,cell*0.26,0,7); g2.fill();
+    if (pose.yaw != null) {
+      g2.beginPath(); g2.moveTo(x,y);
+      g2.lineTo(x + Math.sin(pose.yaw)*cell*0.8, y + Math.cos(pose.yaw)*cell*0.8);
+      g2.strokeStyle = "#4fd1c5"; g2.lineWidth = 2.5*devicePixelRatio; g2.stroke();
+    }
+  }
+}
+
+c2.addEventListener("click", e => {
+  if (!plan || !mapData) return;
+  const r = c2.getBoundingClientRect();
+  const px = (e.clientX - r.left) * devicePixelRatio;
+  const py = (e.clientY - r.top)  * devicePixelRatio;
+  const col = Math.floor((px - plan.ox) / plan.cell);
+  const row = Math.floor((py - plan.oy) / plan.cell);
+  const {rows, cols} = dims();
+  if (col < 0 || row < 0 || col >= cols || row >= rows) return;
+  const world = [col * plan.t, 0, row * plan.t];
+  cmd({cmd:"goto", pos: world});
+  log(`goto cell [${row},${col}] -> ${world.map(v=>v.toFixed(1)).join(" ")}`, "cmd");
+});
+
+// ── loop ─────────────────────────────────────────────────────────────────────
+// ONE BAD FRAME MUST NOT END THE VIEW. requestAnimationFrame is re-armed in a
+// finally, so a throw costs a frame instead of the session; the first such throw
+// is reported once rather than every 16ms.
+let toldOnce = false;
+(function frame() {
+  try { draw3(); draw2(); }
+  catch (e) { if (!toldOnce) { toldOnce = true; log("draw error: " + e.message, "cmd"); } }
+  finally { requestAnimationFrame(frame); }
+})();
+log("view ready — start the game with --vr-link, or arm the headset", "cmd");
+</script>
