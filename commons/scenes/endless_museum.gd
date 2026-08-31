@@ -4732,6 +4732,137 @@ func _insp_page_clear() -> void:
 		old.queue_free()
 
 
+## ── DRESS, IN THE INSPECTOR (2026-08-31) ───────────────────────────────────
+##
+## Palle: "Q for plinth seems conflicting with other interactions. Can I have
+## these values in the inspector as drop down and values check boxes and what
+## not instead".
+##
+## The conflict is real. In the doll house Q turns the house and rotates the
+## held body; the section view took Q for the plinth and A for its opposite. One
+## key with two meanings is not a shortcut, it is a trap that fires while you are
+## doing the other thing.
+##
+## So the same four values get widgets in the panel that is already open beside
+## the body: a DROPDOWN of plinth heights, a CHECKBOX for the micropod cap, and
+## spinners for scale and lift. The keys still work — this takes nothing away —
+## but nothing has to be memorised or held.
+##
+## Every control writes the MAP TOKEN's dress keys through _dress_write, the same
+## path the section view uses, and then _dress_replinth rebuilds the pedestal on
+## the spot. One writer, so the panel and the section cannot drift.
+const DRESS_HEIGHTS := [0.0, 0.30, 0.45, 0.60, 0.75, 0.90, 1.00, 1.20]
+
+func _dress_section_clear() -> void:
+	if _doll_insp_box == null or not is_instance_valid(_doll_insp_box):
+		return
+	var old: Node = _doll_insp_box.find_child("DressPanel", false, false)
+	if old != null:
+		_doll_insp_box.remove_child(old)
+		old.queue_free()
+
+
+func _dress_section_build() -> void:
+	_dress_section_clear()
+	if _doll_insp_box == null or not is_instance_valid(_doll_insp_box):
+		return
+	if _edit_sel < 0 or _edit_sel >= _edit_records.size():
+		return
+	var r: Dictionary = _edit_records[_edit_sel]
+	# quiet: the inspector asks about every selection, and most halls are dealt
+	if not _dress_bind(r, true):
+		return
+
+	var fnt: Font = _page_font()
+	var sect := VBoxContainer.new()
+	sect.name = "DressPanel"
+	sect.add_theme_constant_override("separation", 6)
+	_doll_insp_box.add_child(sect)
+	sect.add_child(_page_label("DRESS   ·   %s  [%d, %d]" % [_dress_map, _dress_cell.x, _dress_cell.y],
+		11, PAGE_QUIET, fnt))
+
+	# PLINTH — a dropdown, because the height is a choice from a short list and
+	# not a number anyone wants to nudge 0.1 at a time against a rotating house.
+	var pl_row := HBoxContainer.new()
+	pl_row.add_theme_constant_override("separation", 8)
+	sect.add_child(pl_row)
+	pl_row.add_child(_page_label("PLINTH", 11, PAGE_QUIET, fnt))
+	var pl := OptionButton.new()
+	pl.name = "PlinthPick"
+	for h in DRESS_HEIGHTS:
+		pl.add_item("none" if float(h) < 0.05 else "%.2f m" % float(h))
+	var sel_i: int = 0
+	for i in range(DRESS_HEIGHTS.size()):
+		if absf(float(DRESS_HEIGHTS[i]) - _dress_plinth) < 0.03:
+			sel_i = i
+	# a height the list does not carry is still shown, rather than snapped away
+	if absf(float(DRESS_HEIGHTS[sel_i]) - _dress_plinth) >= 0.03:
+		pl.add_item("%.2f m" % _dress_plinth)
+		sel_i = pl.item_count - 1
+	pl.selected = sel_i
+	pl.item_selected.connect(_dress_pick_height)
+	pl_row.add_child(pl)
+
+	# MICROPOD — the shorter cap. A checkbox: it is on or it is not.
+	var mp := CheckBox.new()
+	mp.name = "MicropodBox"
+	mp.text = "micropod cap"
+	mp.button_pressed = _dress_plinth_kind != ""
+	mp.toggled.connect(_dress_set_micropod)
+	sect.add_child(mp)
+
+	sect.add_child(_dress_spin_row("SCALE", _dress_scale, 0.1, 4.0, 0.05, _dress_set_scale, fnt))
+	sect.add_child(_dress_spin_row("LIFT  Y", _dress_off.y, -2.0, 4.0, 0.05, _dress_set_lift, fnt))
+	sect.add_child(_page_label("written to the map on change  ·  G opens the section",
+		10, PAGE_QUIET, fnt))
+
+
+func _dress_spin_row(label: String, value: float, lo: float, hi: float, step: float,
+		cb: Callable, fnt: Font) -> HBoxContainer:
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 8)
+	row.add_child(_page_label(label, 11, PAGE_QUIET, fnt))
+	var sp := SpinBox.new()
+	sp.min_value = lo
+	sp.max_value = hi
+	sp.step = step
+	sp.value = value
+	sp.custom_minimum_size = Vector2(96, 0)
+	sp.value_changed.connect(cb)
+	row.add_child(sp)
+	return row
+
+
+func _dress_pick_height(idx: int) -> void:
+	if idx < 0 or idx >= DRESS_HEIGHTS.size():
+		return                                    # the appended odd height: leave it alone
+	_dress_plinth = float(DRESS_HEIGHTS[idx])
+	_dress_write("plinth", "" if _dress_plinth < 0.05 else "%.2f%s" % [_dress_plinth, _dress_plinth_kind])
+	_dress_replinth()
+
+
+func _dress_set_micropod(on: bool) -> void:
+	_dress_plinth_kind = ",micropod" if on else ""
+	if _dress_plinth >= 0.05:
+		_dress_write("plinth", "%.2f%s" % [_dress_plinth, _dress_plinth_kind])
+		_dress_replinth()
+
+
+func _dress_set_scale(v: float) -> void:
+	_dress_scale = v
+	_dress_write("scale", "" if absf(_dress_scale - 1.0) < 0.02 else "%.2f" % _dress_scale)
+	if _edit_sel >= 0 and _edit_sel < _edit_records.size():
+		var n: Node3D = _node_or_null(_edit_records[_edit_sel].get("node"))
+		if n != null:
+			n.scale = Vector3.ONE * _dress_scale
+
+
+func _dress_set_lift(v: float) -> void:
+	_dress_off.y = v
+	_dress_write("offset", "%.2f,%.2f,%.2f" % [_dress_off.x, _dress_off.y, _dress_off.z])
+	_dress_replinth()
+
+
 ## ── ADOPTION: WHICH WALL SPEAKS FOR WHICH WORK (2026-08-26) ─────────────────
 ## Palle asked what the right connection is between the pearl text, 3D space and
 ## the book. The answer already half-existed: em_detail hangs each line on the
@@ -14695,6 +14826,7 @@ func _doll_frame(delta: float) -> void:
 			# the page section rebuilds only on a CHANGE of selection — it
 			# guards itself, so the live numbers never eat the caret
 			_insp_page_section()
+			_dress_section_build()
 
 
 ## THE ADD MENU (2026-08-21, Palle: "iso needs a menu to add new artifact,
@@ -15561,6 +15693,10 @@ func _doll_insp_show() -> void:
 	_doll_insp.visible = true
 	_doll_insp_fill()
 	_insp_page_section()
+	# a wall work gets the page section; a BODY gets its dress. Both are built
+	# per selection and both clear themselves first, so a selection that is
+	# neither leaves the panel with just its values.
+	_dress_section_build()
 
 
 ## "[1.0, 0.0, 1.0]" is eleven characters of mostly nothing. A ruling reads
@@ -18440,26 +18576,39 @@ func _dress_cycle(dir: int) -> void:
 		idxs.find(nxt) + 1, idxs.size(), str(rr.get("token"))])
 
 
-func _dress_toggle() -> void:
-	if _dress_on:
-		_dress_close()
-		return
-	if _edit_sel < 0 or _edit_sel >= _edit_records.size():
-		return
-	var r: Dictionary = _edit_records[_edit_sel]
+## FIND THE SELECTED BODY IN THE MAP AND READ ITS DRESS KEYS.
+##
+## 2026-08-31, Palle: "Q for plinth seems conflicting with other interactions.
+## Can I have these values in the inspector as drop down and values check boxes
+## and what not instead". He is right about the conflict: in the doll house Q
+## turns the house and rotates the held body, and the section view took it for
+## the plinth. Two meanings for one key is not a shortcut, it is a trap.
+##
+## This was inline in _dress_toggle, which meant the only way to read a body's
+## dress was to open the section view — and therefore to be inside the keyboard
+## mode that has the conflict. The inspector needs the same three facts (the map,
+## the cell, the values) and none of the drawing, so it is a function.
+##
+## `quiet` suppresses the toasts: the inspector asks about EVERY selection,
+## including the many that are dealt rather than authored, and a toast on each
+## would shout at a user who has not asked for anything.
+func _dress_bind(r: Dictionary, quiet: bool = false) -> bool:
 	if String(r.get("kind", "")) != "":
-		_doll_toast("dress belongs to artifacts — this is a %s" % String(r.get("kind")))
-		return
+		if not quiet:
+			_doll_toast("dress belongs to artifacts — this is a %s" % String(r.get("kind")))
+		return false
 	var seg: Node3D = _node_or_null(r.get("seg"))
 	var dmap := String(seg.get_meta("em_map")) if seg != null and seg.has_meta("em_map") else ""
 	if dmap == "":
-		_doll_toast("this hall's bodies are dealt, not authored — dress lives in the map")
-		return
+		if not quiet:
+			_doll_toast("this hall's bodies are dealt, not authored — dress lives in the map")
+		return false
 	var tc: Array = r.get("tile_cell", [0, 0])
 	var cell := _map_locate(dmap, String(r.get("token", "")), int(tc[0]), int(tc[1]))
 	if cell.x < 0:
-		_doll_toast("%s is not in the map near its record" % str(r.get("token")))
-		return
+		if not quiet:
+			_doll_toast("%s is not in the map near its record" % str(r.get("token")))
+		return false
 	var cfg := _map_token_config(dmap, cell.x, cell.y)
 	_dress_map = dmap
 	_dress_cell = cell
@@ -18472,6 +18621,18 @@ func _dress_toggle() -> void:
 	if ov.size() >= 3 and str(ov[0]).strip_edges().is_valid_float():
 		_dress_off = Vector3(float(ov[0]), float(ov[1]), float(ov[2]))
 	_dress_off0 = _dress_off
+	return true
+
+
+func _dress_toggle() -> void:
+	if _dress_on:
+		_dress_close()
+		return
+	if _edit_sel < 0 or _edit_sel >= _edit_records.size():
+		return
+	var r: Dictionary = _edit_records[_edit_sel]
+	if not _dress_bind(r):
+		return
 	var node: Node3D = _node_or_null(r.get("node"))
 	_dress_pos0 = node.position if node != null else Vector3.ZERO
 	_dress_rebuild = false
