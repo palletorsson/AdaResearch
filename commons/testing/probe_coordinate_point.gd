@@ -33,6 +33,18 @@ func _check(ok: bool, s: String) -> void:
 		_fails.append(s)
 
 
+## The point is a RigidBody3D: a plain global_position write is reverted by the
+## physics server, so the probe has to teleport it the same way the artifact does
+## or it is testing its own inability to move it.
+func _shove(pt: Node3D, world: Vector3) -> void:
+	pt.global_position = world
+	var rb := pt as RigidBody3D
+	if rb != null:
+		rb.linear_velocity = Vector3.ZERO
+		PhysicsServer3D.body_set_state(
+			rb.get_rid(), PhysicsServer3D.BODY_STATE_TRANSFORM, rb.global_transform)
+
+
 func _run() -> void:
 	var ps: PackedScene = load(SCENE)
 	if ps == null:
@@ -76,7 +88,7 @@ func _run() -> void:
 	# that refuses to read past its own arrow is not reading anything, so the
 	# default is free movement and the fence is a knob.
 	var beyond := Vector3(axis_len + 5.0, -4.0, -6.0)   # behind the blue line
-	pt.global_position = frame.to_global(beyond)
+	_shove(pt, frame.to_global(beyond))
 	await process_frame
 	await process_frame
 	var lp: Vector3 = frame.to_local(pt.global_position)
@@ -85,10 +97,20 @@ func _run() -> void:
 	_check(not bool(frame.get("confine_point")), "confine_point is off by default")
 	_check(lp.is_equal_approx(beyond), "the point STAYED where it was put — no fence")
 	_check(lp.z < 0.0, "and it can go behind the blue line: local z = %.2f" % lp.z)
+	# and the INDICATOR follows it there
+	var mk: Node3D = frame.get_node_or_null("AxisMarker2") as Node3D
+	_check(mk != null, "the z marker exists")
+	if mk != null:
+		_check(is_equal_approx(mk.position.z, lp.z),
+			"the z marker rode to %.2f with the point, not stopped at 0" % mk.position.z)
+	var mx: Node3D = frame.get_node_or_null("AxisMarker0") as Node3D
+	if mx != null:
+		_check(is_equal_approx(mx.position.x, lp.x),
+			"the x marker rode past axis_length to %.2f" % mx.position.x)
 
 	# turning the fence on still works, for a map that wants a contained demo
 	frame.set("confine_point", true)
-	pt.global_position = frame.to_global(beyond)
+	_shove(pt, frame.to_global(beyond))
 	await process_frame
 	await process_frame
 	await process_frame
@@ -96,10 +118,12 @@ func _run() -> void:
 	_check(fenced.x <= axis_len + 0.001 and fenced.z >= -0.001,
 		"with confine_point on it clamps again: (%.2f, %.2f, %.2f)" % [fenced.x, fenced.y, fenced.z])
 	frame.set("confine_point", false)
+	await process_frame          # let the fence actually lift before section 3 moves it
 
 	# --- 3. the readout is measured from Vector3.ZERO --------------------------
 	_check(str(frame.get("readout_space")) == "world", "readout_space defaults to world")
-	pt.global_position = frame.to_global(Vector3(1.0, 1.0, 1.0))
+	_shove(pt, frame.to_global(Vector3(1.0, 1.0, 1.0)))
+	await process_frame
 	await process_frame
 	var world: Vector3 = pt.global_position
 	var local: Vector3 = frame.to_local(pt.global_position)
@@ -121,7 +145,7 @@ func _run() -> void:
 	holder.add_child(loose)
 	# well outside the frame's 3-unit box, and BEHIND it in z — the case that could
 	# not be reached while the point had to live inside its own axes
-	loose.global_position = Vector3(28.0, 1.2, 11.0)
+	_shove(loose, Vector3(28.0, 1.2, 11.0))
 	await process_frame
 	await process_frame
 	_say("")

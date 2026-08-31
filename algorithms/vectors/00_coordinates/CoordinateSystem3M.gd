@@ -147,13 +147,37 @@ func _add_floating_point() -> void:
 	# _ready immediately — setting the energy afterwards paints nothing.
 	pt.set("glow_emission_energy", point_energy)
 	add_child(pt)
-	pt.position = _start_local()
+	_place(pt, _start_local())
 	# a world target is re-resolved once the frame has its final transform
 	_start_pending = (floating_point_space == "world")
 	pt.scale = Vector3.ONE / maxf(0.01, display_scale) * maxf(0.05, point_scale)
 	# its origin is THIS frame's origin, and it reads its coordinates in this frame
 	pt.set("origin_point", global_position if is_inside_tree() else Vector3.ZERO)
 	pt.set("frame_path", pt.get_path_to(self))
+
+## THE POINT IS A RIGID BODY, so writing its transform is not moving it.
+##
+## interactive_point_origin extends XRToolsPickable, off godot-xr-tools'
+## pickable.tscn — a RigidBody3D. The physics server owns its transform, and a
+## ONE-SHOT write is reverted on the next physics step; only a write repeated
+## every frame appears to hold, which is exactly why the runtime clamp looked
+## like it worked while the placement did not. The point sat at its spawn local
+## (1,1,1) in the museum through three rounds of fixes upstream of this.
+##
+## So a placement teleports through the physics server and clears the velocity
+## it would otherwise carry out of the old position.
+func _place(pt: Node3D, local_pos: Vector3) -> void:
+	pt.position = local_pos
+	var rb := pt as RigidBody3D
+	if rb == null:
+		return
+	rb.linear_velocity = Vector3.ZERO
+	rb.angular_velocity = Vector3.ZERO
+	PhysicsServer3D.body_set_state(
+		rb.get_rid(), PhysicsServer3D.BODY_STATE_TRANSFORM, rb.global_transform)
+	PhysicsServer3D.body_set_state(
+		rb.get_rid(), PhysicsServer3D.BODY_STATE_LINEAR_VELOCITY, Vector3.ZERO)
+
 
 ## floating_point_at resolved into this frame's own units, clamped to the axes.
 func _start_local() -> Vector3:
@@ -414,7 +438,7 @@ func _process(_delta: float) -> void:
 		else:
 			_settle_xf = global_transform
 			_settle_n = 0
-		pt.position = _start_local()
+		_place(pt, _start_local())
 		if _settle_n >= 2:
 			_start_pending = false
 			print("[CoordinateSystem3M] point placed at world %s (frame %s, %s space)"
@@ -424,6 +448,15 @@ func _process(_delta: float) -> void:
 	# position back through this frame (to_local includes the display scale)
 	var lp: Vector3 = to_local(pt.global_position)
 	var cl := Vector3(clampf(lp.x, 0.0, axis_length), clampf(lp.y, 0.0, axis_length), clampf(lp.z, 0.0, axis_length))
+	# THE INDICATOR FOLLOWS (2026-08-31, Palle: "now I can move the point beyond
+	# minus z local but the indicator does not follow after z:0 local minus. but I
+	# want it to"). The markers were pinned to the drawn arrows, so past the end of
+	# an axis — or behind its origin — they stopped and the reading stopped with
+	# them. A coordinate system that only indicates the interval it happens to have
+	# drawn is not indicating the point; it is indicating its own furniture. The
+	# markers ride the TRUE component now, and where that falls off the drawn arrow
+	# the axis is extended to meet it, so the marker always sits on a line.
+	var ride: Vector3 = lp if not confine_point else cl
 	# THE POINT STAYS INSIDE THE LINES (2026-08-31, Palle: "the point is not inside
 	# the x,y,z lines"). Only the MARKERS were clamped; the point and its guide
 	# lines were drawn at the raw position, so a drag past the end of an axis left
@@ -431,19 +464,32 @@ func _process(_delta: float) -> void:
 	# lines running off to a dot in mid-air. Clamping the body itself makes the
 	# axis ends what they look like: walls. A held point stops there and stays held.
 	if confine_point and not lp.is_equal_approx(cl):
-		pt.global_position = to_global(cl)
+		_place(pt, cl)
 		lp = cl
-	(_axis_markers[0] as Node3D).position = Vector3(cl.x, 0, 0)
-	(_axis_markers[1] as Node3D).position = Vector3(0, cl.y, 0)
-	(_axis_markers[2] as Node3D).position = Vector3(0, 0, cl.z)
+	(_axis_markers[0] as Node3D).position = Vector3(ride.x, 0, 0)
+	(_axis_markers[1] as Node3D).position = Vector3(0, ride.y, 0)
+	(_axis_markers[2] as Node3D).position = Vector3(0, 0, ride.z)
 	for mk in _axis_markers:
 		(mk as Node3D).visible = true
 	_proj_lines.visible = true
 	_proj_mesh.clear_surfaces()
 	_proj_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
-	for tgt_v in [Vector3(cl.x, 0, 0), Vector3(0, cl.y, 0), Vector3(0, 0, cl.z)]:
+	var marks: Array[Vector3] = [
+		Vector3(ride.x, 0, 0), Vector3(0, ride.y, 0), Vector3(0, 0, ride.z)]
+	for tgt_v in marks:
 		_proj_mesh.surface_add_vertex(lp)
 		_proj_mesh.surface_add_vertex(tgt_v as Vector3)
+	# where a marker has left the drawn arrow, run the axis out to it: from
+	# whichever end it departed (0 going negative, axis_length going long).
+	for i in range(3):
+		var v: float = ride[i]
+		if v >= 0.0 and v <= axis_length:
+			continue
+		var from_v := Vector3.ZERO
+		if v > axis_length:
+			from_v[i] = axis_length
+		_proj_mesh.surface_add_vertex(from_v)
+		_proj_mesh.surface_add_vertex(marks[i])
 	_proj_mesh.surface_end()
 	# the x,y,z TEXT lives on the hall's wall works — in WORLD units by default,
 	# measured from Vector3.ZERO rather than from this frame's own origin.
