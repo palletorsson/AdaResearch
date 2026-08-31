@@ -26029,6 +26029,24 @@
 				"clearance_m": 0.6
 			}
 		},
+		"wireframe_threshold": {
+			"name": "Wireframe Threshold",
+			"class_name": "WireframeThreshold",
+			"scene": "res://commons/artifacts/wireframe_threshold/wireframe_threshold.tscn",
+			"description": "A wireframe ring on the floor. Stand inside and every surface in the room drops to its triangles; step out and it dresses again. The room-scale answer to wireframe_confession, which undresses one torus and leaves the world solid around it. 2026-08-31.",
+			"category": "primitives",
+			"tags": [
+				"primitives",
+				"wireframe",
+				"mesh",
+				"threshold",
+				"interactive"
+			],
+			"spatial_needs": {
+				"footprint_cells": 1,
+				"clearance_m": 0.9
+			}
+		},
 		"wireframe_confession": {
 			"name": "Wireframe Confession",
 			"class_name": "WireframeConfession",
