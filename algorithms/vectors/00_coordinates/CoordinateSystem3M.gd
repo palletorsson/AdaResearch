@@ -63,9 +63,19 @@ const FloatingPointScene := "res://commons/primitives/point/interactive_point_or
 ## than left at the scene's shelf defaults.
 @export var point_scale: float = 1.45
 @export var point_energy: float = 3.4
+## WHERE THE POINT STARTS, AND IN WHOSE UNITS (2026-08-31, Palle: "move point to
+## x: 8 y: same z:10"). Asking for a world position and getting axis units is the
+## same confusion the readout had, so `floating_point_at` can now be read in
+## either space. `world` converts through this frame and CLAMPS into the axis box,
+## and says so if the target was out of reach — a frame three units long standing
+## at x=4 cannot put its point at x=40, and should not pretend it did.
+@export_enum("local", "world") var floating_point_space: String = "local"
 
 var gyroscope: Node3D
 var _fp_ref: Node3D = null              # the grab point (survives re-parenting by a grab)
+## Which components of floating_point_at were given in world units (1) and which
+## were left as `same` (0). Only the named ones are converted through the frame.
+var _axis_from_world: Vector3 = Vector3.ONE
 var _axis_markers: Array = []           # projection markers riding the three axes
 var _proj_lines: MeshInstance3D = null  # thin guide lines, point -> each marker
 var _proj_mesh: ImmediateMesh = null
@@ -105,11 +115,31 @@ func _add_floating_point() -> void:
 	# _ready immediately — setting the energy afterwards paints nothing.
 	pt.set("glow_emission_energy", point_energy)
 	add_child(pt)
-	pt.position = floating_point_at
+	pt.position = _start_local()
 	pt.scale = Vector3.ONE / maxf(0.01, display_scale) * maxf(0.05, point_scale)
 	# its origin is THIS frame's origin, and it reads its coordinates in this frame
 	pt.set("origin_point", global_position if is_inside_tree() else Vector3.ZERO)
 	pt.set("frame_path", pt.get_path_to(self))
+
+## floating_point_at resolved into this frame's own units, clamped to the axes.
+func _start_local() -> Vector3:
+	var want: Vector3 = floating_point_at
+	if floating_point_space == "world" and is_inside_tree():
+		var conv: Vector3 = to_local(floating_point_at)
+		# an axis marked `same` keeps the local value it already had
+		want = Vector3(
+			conv.x if _axis_from_world.x > 0.5 else floating_point_at.x,
+			conv.y if _axis_from_world.y > 0.5 else floating_point_at.y,
+			conv.z if _axis_from_world.z > 0.5 else floating_point_at.z)
+	var cl := Vector3(
+		clampf(want.x, 0.0, axis_length),
+		clampf(want.y, 0.0, axis_length),
+		clampf(want.z, 0.0, axis_length))
+	if not want.is_equal_approx(cl):
+		push_warning("[CoordinateSystem3M] point start %s is outside the %.1f-unit frame at %s — clamped to %s"
+			% [str(floating_point_at), axis_length, str(global_position), str(cl)])
+	return cl
+
 
 func _add_info_frame() -> void:
 	var sc := 0.33  # Match SCENE_SCALE from VectorSceneBase
@@ -373,10 +403,32 @@ func apply_grid_config(config: Dictionary) -> void:
 	if config.has("display_scale"):
 		display_scale = float(config["display_scale"])
 		scale = Vector3(display_scale, display_scale, display_scale)
+	if config.has("floating_point_space"):
+		var sp: String = str(config["floating_point_space"]).to_lower().strip_edges()
+		if sp in ["local", "world"]:
+			floating_point_space = sp
 	if config.has("floating_point_at"):
 		var v: Variant = config["floating_point_at"]
 		if v is Array and (v as Array).size() >= 3:
 			floating_point_at = Vector3(float(v[0]), float(v[1]), float(v[2]))
+		elif v is String:
+			# a map token cannot carry an Array: `#floating_point_at:8,1.7,10`.
+			# `same` on any axis KEEPS the value already in force, so a token can
+			# move the point across the floor without also deciding its height —
+			# Palle asked for "x: 8 y: same z:10", and the frame's own y offset is
+			# edited from elsewhere, so a hardcoded world y would go stale the next
+			# time somebody nudges the plinth.
+			var parts: PackedStringArray = str(v).split(",", false)
+			if parts.size() >= 3:
+				var cur: Vector3 = floating_point_at
+				floating_point_at = Vector3(
+					cur.x if parts[0].strip_edges().to_lower() == "same" else float(parts[0]),
+					cur.y if parts[1].strip_edges().to_lower() == "same" else float(parts[1]),
+					cur.z if parts[2].strip_edges().to_lower() == "same" else float(parts[2]))
+				_axis_from_world = Vector3(
+					0.0 if parts[0].strip_edges().to_lower() == "same" else 1.0,
+					0.0 if parts[1].strip_edges().to_lower() == "same" else 1.0,
+					0.0 if parts[2].strip_edges().to_lower() == "same" else 1.0)
 	if config.has("floating_point"):
 		var fv: String = str(config["floating_point"])
 		floating_point = (float(fv) != 0.0) if fv.is_valid_float() else (fv.to_lower() in ["true", "yes", "on"])

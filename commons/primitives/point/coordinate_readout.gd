@@ -19,6 +19,14 @@ extends Node3D
 @export var axis: String = "xyz"        # "xyz" | "x" | "y" | "z"
 @export var frame_width: float = 0.72
 @export var frame_height: float = 0.6
+## A LOT BIGGER (2026-08-31, Palle: "also make the related display a lot bigger").
+## The card was sized for a hand-held plaque and reads as a postage stamp across a
+## hall — see the screenshot where the three numbers are smaller than the mushroom
+## beside them. Everything the card is made of scales together (frame, card, text,
+## the text's stand-off) so the proportions are the ones that were designed; only
+## the distance you can read it from changes. One map places this artifact, so the
+## default IS the change. `#display_scale:1.0` restores the old plaque.
+@export var display_scale: float = 2.4
 
 var _label: Label3D = null
 
@@ -33,7 +41,8 @@ func _build() -> void:
 	var frame := MeshInstance3D.new()
 	frame.name = "Frame"
 	var fb := BoxMesh.new()
-	fb.size = Vector3(frame_width, frame_height, 0.03)
+	var ds: float = maxf(0.05, display_scale)
+	fb.size = Vector3(frame_width * ds, frame_height * ds, 0.03 * ds)
 	frame.mesh = fb
 	var fm := StandardMaterial3D.new()
 	fm.albedo_color = Color(0.09, 0.09, 0.1)
@@ -44,7 +53,7 @@ func _build() -> void:
 	var card := MeshInstance3D.new()
 	card.name = "Card"
 	var cb := BoxMesh.new()
-	cb.size = Vector3(frame_width - 0.06, frame_height - 0.06, 0.034)
+	cb.size = Vector3((frame_width - 0.06) * ds, (frame_height - 0.06) * ds, 0.034 * ds)
 	card.mesh = cb
 	var cm := StandardMaterial3D.new()
 	cm.albedo_color = Color(0.93, 0.925, 0.91)
@@ -54,13 +63,15 @@ func _build() -> void:
 	# black text on the card
 	_label = Label3D.new()
 	_label.name = "Value"
+	# font_size is the glyph RASTER; pixel_size is metres-per-pixel, which is what
+	# actually makes it big in the room. Raising both keeps the letters crisp.
 	_label.font_size = 44
-	_label.pixel_size = 0.0016
+	_label.pixel_size = 0.0016 * ds
 	_label.modulate = Color(0.1, 0.1, 0.12)
 	_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	_label.no_depth_test = false
-	_label.position = Vector3(0, 0, 0.022)
+	_label.position = Vector3(0, 0, 0.022 * ds)
 	add_child(_label)
 	_reset_text()
 
@@ -93,6 +104,12 @@ func show_coordinates(p: Vector3) -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
+	if config.has("display_scale"):
+		display_scale = maxf(0.05, float(config["display_scale"]))
+		for c in get_children():
+			c.queue_free()
+		_label = null
+		_build()
 	if config.has("axis"):
 		var a := str(config["axis"]).strip_edges().to_lower()
 		if a in ["xyz", "x", "y", "z"]:
