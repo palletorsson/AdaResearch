@@ -47,7 +47,7 @@ TS_LIB = REPO.parent / "ada_encyclopedia" / "src" / "lib" / "artifact-tags.ts"
 if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
     sys.stdout.reconfigure(encoding="utf-8")
 
-MARKER = re.compile(r"^[ \t]*<!--[ \t]*@([a-z0-9_]*)[ \t]*-->[ \t]*$")
+MARKER = re.compile(r"^[ \t]*<!--[ \t]*@([A-Za-z0-9_]*)[ \t]*-->[ \t]*$")
 
 
 def marker(token: str) -> str:
@@ -121,7 +121,8 @@ FIXTURES = [
     "<!-- @a -->\n<!-- @b -->\nB\n",                         # an empty region between markers
     "text with <!-- @inline --> in the middle of a line\n",  # NOT a marker: not alone on its line
     "<!-- from critical.md -->\nA\n",                        # /studio's provenance comment is not a tag
-    "<!-- @A_Token -->\nA\n",                                # uppercase is not a token: not a marker
+    "<!-- @CoordinateSystem3M -->\nA\n",                     # MIXED CASE IS A REAL TOKEN
+    "<!-- @has-a-dash -->\nA\n",                             # a dash is not: not a marker
     "A\n\n<!-- @x -->\n\nB\n\n<!-- @x -->\n\nC\n",           # the same token twice
 ]
 
@@ -151,8 +152,19 @@ def check() -> int:
         fail("inline comment", "an <!-- @x --> inside a line opened a region")
     if tokens_of(parse(FIXTURES[9])):
         fail("provenance comment", "<!-- from critical.md --> was read as a tag")
-    if tokens_of(parse(FIXTURES[10])):
-        fail("uppercase token", "<!-- @A_Token --> was read as a tag")
+    # 2026-08-31. This shipped as `[a-z0-9_]` with a fixture asserting uppercase
+    # was NOT a token — a rule invented here and contradicted by the corpus: 136
+    # of 2899 registry tokens carry uppercase, and the trunk API's own token_text
+    # validates /^[A-Za-z0-9_]+$/. It was found in the field, not by this gate.
+    # Palle tagged a region <!-- @CoordinateSystem3M --> and the parser silently
+    # swallowed the marker AND its paragraph into the region above, so pushing
+    # that region to a wall would have written two works' text onto one label.
+    # A wrong negative fixture is worse than no fixture: this one made the
+    # mutation test agree with the bug.
+    if tokens_of(parse(FIXTURES[10])) != ["CoordinateSystem3M"]:
+        fail("mixed-case token", "<!-- @CoordinateSystem3M --> was not read as a tag")
+    if tokens_of(parse(FIXTURES[11])):
+        fail("dash in token", "<!-- @has-a-dash --> was read as a tag")
 
     # 3. an untagged document must be written back byte-identical, or /compose
     #    would rewrite 215 files the first time anyone opened them
