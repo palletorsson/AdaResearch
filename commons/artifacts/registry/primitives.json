@@ -18165,7 +18165,7 @@
 			},
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "A mysterious rotating cube that triggers the first learning sequence",
+			"description": "Chapter 2 of the cube animation series: the base cube spinning in place. RotationTween.gd turns CubeBaseStaticBody3D about Y at 2.0 rad/s in _process — no tween despite the name, the same rotate_y a held pick_up_cube uses, so a cube on the floor and a cube in your hand turn at one rate. Set axis away from Y and it falls through to rotate_object_local about any line you name. Its sibling transformation_cube is the SAME base cube with the rotation component swapped for a bob: the pair is the lesson, one transformation each.",
 			"dev_themes": [
 				"core",
 				"education",
@@ -21938,7 +21938,7 @@
 			},
 			"category": "unknown",
 			"complexity": "intermediate",
-			"description": "A mysterious rotating cube that triggers the first learning sequence",
+			"description": "Chapter 1 of the cube animation series: the base cube bobbing. This cube DOES NOT ROTATE — TransformationTween.gd drives CubeBaseStaticBody3D on a sine, sin(t * 3.0) * 0.4 m about its start height, the same bob a held pick_up_cube runs so the two stay in phase. Translation is the one transformation it teaches. Its sibling rotating_cube is the SAME base cube with the bob component swapped for a spin: the pair is the lesson, one transformation each.",
 			"dev_themes": [
 				"core",
 				"education",
