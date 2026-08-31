@@ -4753,6 +4753,22 @@ func _insp_page_clear() -> void:
 ## the spot. One writer, so the panel and the section cannot drift.
 const DRESS_HEIGHTS := [0.0, 0.30, 0.45, 0.60, 0.75, 0.90, 1.00, 1.20]
 
+## Raise or lower the selected body's plinth by one step and write it, without
+## the section view. Same writer as the dropdown and the section — _dress_write
+## then _dress_replinth — and it rebuilds the inspector row so the dropdown shows
+## what the letter just did rather than a stale number.
+func _dress_nudge_plinth(by: float) -> void:
+	if _edit_sel < 0 or _edit_sel >= _edit_records.size():
+		return
+	if not _dress_bind(_edit_records[_edit_sel]):
+		return
+	_dress_plinth = maxf(0.0, snappedf(_dress_plinth + by, 0.05))
+	_dress_write("plinth", "" if _dress_plinth < 0.05 else "%.2f%s" % [_dress_plinth, _dress_plinth_kind])
+	_dress_replinth()
+	_dress_section_build()
+	_doll_toast("plinth %s" % ("none" if _dress_plinth < 0.05 else "%.2f m" % _dress_plinth))
+
+
 func _dress_section_clear() -> void:
 	if _doll_insp_box == null or not is_instance_valid(_doll_insp_box):
 		return
@@ -4801,6 +4817,10 @@ func _dress_section_build() -> void:
 		sel_i = pl.item_count - 1
 	pl.selected = sel_i
 	pl.item_selected.connect(_dress_pick_height)
+	# say when the list is up, so _edit_mouse_over_ui stops the hall taking the
+	# click that is meant for it
+	pl.get_popup().about_to_popup.connect(func(): _ui_popup_open = true)
+	pl.get_popup().popup_hide.connect(func(): _ui_popup_open = false)
 	pl_row.add_child(pl)
 
 	# MICROPOD — the shorter cap. A checkbox: it is on or it is not.
@@ -15194,7 +15214,40 @@ func _edit_pick_screen(mouse: Vector2) -> int:
 	return best
 
 
+## A POPUP IS NOT A CHILD OF THE PANEL THAT OWNS IT.
+##
+## 2026-08-31, Palle: "the drop down does not let me choose". The guard below
+## asks whether the hovered Control is inside one of the museum's panels, and
+## _doll_insp is in that list — so the panel itself was fine. An OptionButton's
+## list is a separate Window, and a Window is not a descendant of anything in
+## that list, so the moment the list opened the guard said "not over UI", the
+## museum took the click as a click in the hall, and the choice never landed.
+##
+## The flag is set from the OptionButton's own about_to_popup / popup_hide, so
+## it cannot go stale: whatever opens a list is the thing that says a list is
+## open. It costs one bool and it fixes every popup the panels ever grow.
+var _ui_popup_open: bool = false
+
+## Does a Control inside one of the museum's own panels hold the keyboard? The
+## hover test above answers the mouse's question; this answers the keyboard's,
+## and they are not the same — a spinner keeps focus after the pointer leaves it.
+func _edit_focus_in_panel() -> bool:
+	var f := get_viewport().gui_get_focus_owner()
+	if f == null:
+		return false
+	for owner_v in [_plan_toolbar, _plan_config_panel, _doll_menu, _doll_insp,
+			_doll_palette, _edit_hud]:
+		if owner_v == null or not is_instance_valid(owner_v):
+			continue
+		var owner := owner_v as Node
+		if f == owner or owner.is_ancestor_of(f):
+			return true
+	return false
+
+
 func _edit_mouse_over_ui() -> bool:
+	if _ui_popup_open:
+		return true
 	var hovered := get_viewport().gui_get_hovered_control()
 	if hovered == null:
 		return false
@@ -16558,6 +16611,14 @@ func _input(event: InputEvent) -> void:
 	if _dollhouse and event is InputEventKey and (event as InputEventKey).pressed and not (event as InputEventKey).echo:
 		var kc := (event as InputEventKey).keycode
 		_edit_shift = (event as InputEventKey).shift_pressed
+		# A FIELD WITH FOCUS OWNS THE KEYBOARD. The inspector now carries
+		# spinners, and this handler runs BEFORE gui input — so typing 1.20 into
+		# the plinth would have turned the house on its 2 and added a body on its
+		# n. The doll menu's filter already had this guard for the same reason;
+		# every Control in the panel needs it, not just that one.
+		# ESC still belongs to the museum, so a focused field can always be left.
+		if kc != KEY_ESCAPE and _edit_focus_in_panel():
+			return
 		if _dress_on:
 			_dress_key(kc)
 			return
@@ -16566,6 +16627,17 @@ func _input(event: InputEvent) -> void:
 			return
 		if kc == KEY_G and _edit_sel >= 0:
 			_dress_toggle()
+			return
+		# THE PLINTH, ON A LETTER OF ITS OWN (2026-08-31, Palle: "give me another
+		# letter to set the plinth"). Q was the section view's, and Q also turns
+		# the house and rotates the held body — one key, three jobs.
+		#
+		# K and I are two of the five letters this museum had never bound (F, I,
+		# K, U, Y), and they work HERE, on the selected body, without opening the
+		# section view first. That is the difference that matters: the plinth was
+		# only reachable from inside the mode that had the conflict.
+		if (kc == KEY_K or kc == KEY_I) and _edit_sel >= 0 and not _dress_on:
+			_dress_nudge_plinth(0.1 if kc == KEY_K else -0.1)
 			return
 		if _doll_menu != null and is_instance_valid(_doll_menu):
 			# the menu is open and the museum's _input runs BEFORE gui input:
