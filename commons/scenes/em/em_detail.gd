@@ -553,9 +553,27 @@ static func dress_segment(seg: Node3D, tile: Array, w: int, h: int, mats, prev_w
 	# FRAMES ARE OFF-WHITE (Palle, 2026-08-18, walking primitives): the dark
 	# oak read as furniture; a museum frame around a field is pale, and the
 	# off-white sits between the 0.78 mount and the wall without competing.
-	_emit(seg, "WallFrames", hang_frame_x, _hang_frame_mat(), true)
-	_emit(seg, "WallMounts", hang_mount_x, _hang_mount_mat(), false)
-	_emit(seg, "WallFields", hang_field_x, _hang_field_mat(), false)
+	# A SHOWING IS ONE OBJECT, SO IT IS CULLED AS ONE.
+	#
+	# 2026-08-31, Palle: "in the museum there should be no text like this without
+	# the frame, the problem is that 16 has not frame, it should look like 11."
+	#
+	# _emit culls by EXTENT — an instance whose footprint touches a skip or void
+	# rect is dropped — and it did that per instance, across three separate calls.
+	# A frame is BIGGER than the mount it surrounds: _hang_one puts the four bars
+	# at centre +- wm/2 + HANG_FRAME_W/2, so they stand 75 mm proud of it on every
+	# side. A showing hung beside an opening therefore kept its mount, its field
+	# and its sentence and lost its frame — six boxes judged one at a time, and
+	# four of them fell. What came out was TEXT ON A BARE WALL, which the museum
+	# has no other way of producing and which reads as a different kind of object.
+	#
+	# The mount decides for all six now, and the three buckets are then emitted
+	# WITHOUT a second cull that could take a survivor's bars. Which showings
+	# survive is unchanged; that a survivor is whole is the change.
+	_cull_showings_whole(hang_frame_x, hang_mount_x, hang_field_x)
+	_emit(seg, "WallFrames", hang_frame_x, _hang_frame_mat(), true, false)
+	_emit(seg, "WallMounts", hang_mount_x, _hang_mount_mat(), false, false)
+	_emit(seg, "WallFields", hang_field_x, _hang_field_mat(), false, false)
 	# ONLY THE HALL THAT DECLARED VOIDS. The museum streams two segments and
 	# every dress overwrote this file, so the report on disk was the LAST hall
 	# dressed — one with no pool — and it duly showed skirting standing where a
@@ -963,6 +981,45 @@ static func _hang_retarget(si: int, cell: Vector2i, dir: Vector2i,
 		if fi < frame_out.size():
 			frame_out[fi] = f2[k]
 	return true
+
+
+## Make every showing whose MOUNT the cull would take draw nothing — by ZEROING
+## its six boxes, never by removing them.
+##
+## Removing would renumber every showing above the one dropped, and the cards,
+## the adoption and the hang all address a showing BY INDEX. That is the same
+## fault as the page-keyed label ruling that silently governed the wrong wall,
+## and it would be worse here: a stale index moves a picture, not a setting.
+## A zero-scale instance is drawn as nothing and holds its place in the array.
+##
+## Four frame bars per showing at si * 4 + k, the arithmetic _hang_retarget uses.
+static func _cull_showings_whole(frames: Array, mounts: Array, fields: Array) -> void:
+	var cull: Array = _skip_rects
+	if not _void_rects.is_empty():
+		cull = cull + _void_rects
+	if cull.is_empty() or mounts.is_empty():
+		return
+	var gone := Transform3D(Basis().scaled(Vector3.ZERO), Vector3.ZERO)
+	for si in range(mounts.size()):
+		var t: Transform3D = mounts[si]
+		var sc: Vector3 = t.basis.get_scale()
+		var box := Rect2(t.origin.x - absf(sc.x) * 0.5, t.origin.z - absf(sc.z) * 0.5,
+			absf(sc.x), absf(sc.z))
+		var doomed: bool = false
+		for rr in cull:
+			var r: Rect2 = rr
+			if r.intersects(box) or r.has_point(Vector2(t.origin.x, t.origin.z)):
+				doomed = true
+				break
+		if not doomed:
+			continue
+		mounts[si] = gone
+		if si < fields.size():
+			fields[si] = gone
+		for k in range(4):
+			var fi: int = si * 4 + k
+			if fi < frames.size():
+				frames[fi] = gone
 
 
 ## HOW BIG A SENTENCE HAS TO BE DRAWN TO SIT INSIDE A FIELD — one implementation.
@@ -1828,7 +1885,11 @@ static func _add_seams(floors: Dictionary, w: int, h: int, out: Array) -> void:
 ## One MultiMeshInstance3D per material role. Every box in the family is the same
 ## unit BoxMesh with its size carried in the per-instance basis, so a family of
 ## 900 boxes is one mesh, one material and one draw call.
-static func _emit(parent: Node3D, node_name: String, xforms: Array, mat: Variant, shadows: bool) -> void:
+## `cull` false hands the culling decision to the caller. Only the hang buckets
+## use it, and only because a showing has to stand or fall whole — see
+## _cull_showings_whole. Everything else keeps the per-instance rule.
+static func _emit(parent: Node3D, node_name: String, xforms: Array, mat: Variant,
+		shadows: bool, cull_here: bool = true) -> void:
 	if xforms.is_empty():
 		return
 	# the record, before any culling, so a bucket that is dropped is still known
@@ -1847,8 +1908,11 @@ static func _emit(parent: Node3D, node_name: String, xforms: Array, mat: Variant
 		# for "was this ever asked for", and useless for "is it still there",
 		# which is what a proof needs. Both, now, and labelled.
 		var dropped0 := false
-		var cull0: Array = _skip_rects
-		if not _void_rects.is_empty() and not _VOID_EXEMPT.has(node_name):
+		# the record has to obey the same rule the emit does, or it reports a
+		# drop that no longer happens — an instrument that disagrees with the
+		# thing it measures is worse than no instrument
+		var cull0: Array = [] if not cull_here else _skip_rects
+		if cull_here and not _void_rects.is_empty() and not _VOID_EXEMPT.has(node_name):
 			cull0 = cull0 + _void_rects
 		var bx0 := Rect2(t0.origin.x - absf(s0.x) * 0.5, t0.origin.z - absf(s0.z) * 0.5, absf(s0.x), absf(s0.z))
 		for rr in cull0:
@@ -1861,8 +1925,8 @@ static func _emit(parent: Node3D, node_name: String, xforms: Array, mat: Variant
 	# ONE choke point for every bucket — skirting, trim, arrises, seams, ceiling —
 	# because they all arrive here and nowhere else. A piece is dropped by where it
 	# STANDS, not by which bucket carried it, so nothing has to be enumerated.
-	var cull: Array = _skip_rects
-	if not _void_rects.is_empty() and not _VOID_EXEMPT.has(node_name):
+	var cull: Array = [] if not cull_here else _skip_rects
+	if cull_here and not _void_rects.is_empty() and not _VOID_EXEMPT.has(node_name):
 		cull = cull + _void_rects
 	if not cull.is_empty():
 		var kept: Array = []
