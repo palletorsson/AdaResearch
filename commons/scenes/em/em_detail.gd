@@ -961,6 +961,57 @@ static func _hang_retarget(si: int, cell: Vector2i, dir: Vector2i,
 	return true
 
 
+## HOW BIG A SENTENCE HAS TO BE DRAWN TO SIT INSIDE A FIELD — one implementation.
+##
+## 2026-08-31. This was seven lines inline in _hang_pages, which was fine until
+## something else needed to ask the same question. It is extracted rather than
+## copied because a second copy of a fitting rule is how two surfaces come to
+## disagree about whether a wall can hold a sentence, and this project has paid
+## for that lesson twice already.
+##
+## The rule itself is unchanged, character for character: a 400 px box wrapped at
+## the field width, starting at 52 px and shrinking by 4 until the estimated
+## block of lines fits the field height less a 6 cm margin — with a FLOOR of 28.
+## The floor is why `fits` can come back false: below it the label is simply
+## drawn too big and runs off the frame, which is what the museum does today.
+##
+##   size      -> the field, in metres, the sentence has to sit in
+##   font_size -> where the shrink loop stopped
+##   lines     -> the estimate it stopped on
+##   needs     -> metres of height that estimate wants
+##   fits      -> whether `needs` is inside the field
+static func speak_fit(chars: int, wm: float, hm: float) -> Dictionary:
+	var fieldw: float = maxf(wm - 2.0 * HANG_MOUNT_W, 0.12)
+	var fieldh: float = maxf(hm - 2.0 * HANG_MOUNT_W, 0.12)
+	var ps: float = clampf((fieldw - 0.08) / 400.0, 0.0006, 0.0024)
+	var font: int = 52
+	var est_lines: int = int(ceil(float(chars) * 26.0 / 400.0))
+	while est_lines * 65.0 * ps > fieldh - 0.06 and font > 28:
+		font -= 4
+		est_lines = int(ceil(float(chars) * (float(font) * 0.5) / 400.0))
+	var needs: float = float(est_lines) * 65.0 * ps
+	return {
+		"pixel_size": ps, "font_size": font, "lines": est_lines,
+		"needs": needs, "have": fieldh - 0.06, "fits": needs <= fieldh - 0.06,
+		"field": Vector2(fieldw, fieldh),
+	}
+
+
+## The longest sentence this format can hold before the shrink loop hits its
+## floor and the text starts running off the frame. Measured by asking speak_fit,
+## not by a formula of its own — same reason as above.
+static func speak_budget(wm: float, hm: float) -> int:
+	var lo: int = 1
+	var hi: int = 4000
+	while lo < hi:
+		var mid: int = (lo + hi + 1) / 2
+		if bool(speak_fit(mid, wm, hm)["fits"]):
+			lo = mid
+		else:
+			hi = mid - 1
+	return lo
+
+
 ## Six boxes: four frame bars, a light mount, a dark field. All fully PROUD of
 ## the wall plane (offset along the outward normal by half their own depth), not
 ## straddling it the way the skirting does — a picture is on a wall, not in it.
@@ -1188,20 +1239,18 @@ static func _add_showing_cards(seg: Node3D, mounts: Array, opts: Dictionary) -> 
 			# pixel size is derived from the field's width so a 400 px box is the
 			# field less a margin, whatever the format; the sentence is centred in
 			# it and wraps inside it — nothing runs under the frame.
-			var fieldw: float = maxf(wm - 2.0 * HANG_MOUNT_W, 0.12)
-			var fieldh: float = maxf(hm - 2.0 * HANG_MOUNT_W, 0.12)
-			var ps: float = clampf((fieldw - 0.08) / 400.0, 0.0006, 0.0024)
-			sl.pixel_size = ps
-			sl.font_size = 52
+			var fit: Dictionary = speak_fit(sentence.length(), wm, hm)
+			# the field the sentence was fitted to — still needed below, where it
+			# is stamped on the label so a viz page can be hung on exactly it
+			var fieldv: Vector2 = fit["field"]
+			var fieldw: float = fieldv.x
+			var fieldh: float = fieldv.y
+			sl.pixel_size = float(fit["pixel_size"])
+			sl.font_size = int(fit["font_size"])
 			sl.width = 400.0
 			sl.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 			sl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 			sl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-			# a tall sentence in a short field: shrink until it fits ~ (lines x 1.25 x 52 px)
-			var est_lines: int = int(ceil(float(sentence.length()) * 26.0 / 400.0))
-			while est_lines * 65.0 * ps > fieldh - 0.06 and sl.font_size > 28:
-				sl.font_size -= 4
-				est_lines = int(ceil(float(sentence.length()) * (sl.font_size * 0.5) / 400.0))
 			sl.modulate = Color(0.93, 0.92, 0.9)
 			sl.outline_size = 0
 			sl.no_depth_test = false
