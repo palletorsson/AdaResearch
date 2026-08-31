@@ -92,6 +92,14 @@ var _fp_ref: Node3D = null              # the grab point (survives re-parenting 
 ## Which components of floating_point_at were given in world units (1) and which
 ## were left as `same` (0). Only the named ones are converted through the frame.
 var _axis_from_world: Vector3 = Vector3.ONE
+## A WORLD START CANNOT BE RESOLVED IN _ready (2026-08-31). endless_museum.gd says
+## it plainly: "apply_grid_config is called while the root is still outside the
+## tree" — and the frame is moved into its hall AFTER that. So `to_local` at build
+## time converts against a transform the frame does not have yet, and the point
+## lands wherever the stale transform put it, which is exactly "not at the right
+## location but the old one". The conversion is therefore deferred to the first
+## _process tick, by which time the frame stands where it is going to stand.
+var _start_pending: bool = false
 var _axis_markers: Array = []           # projection markers riding the three axes
 var _proj_lines: MeshInstance3D = null  # thin guide lines, point -> each marker
 var _proj_mesh: ImmediateMesh = null
@@ -132,6 +140,8 @@ func _add_floating_point() -> void:
 	pt.set("glow_emission_energy", point_energy)
 	add_child(pt)
 	pt.position = _start_local()
+	# a world target is re-resolved once the frame has its final transform
+	_start_pending = (floating_point_space == "world")
 	pt.scale = Vector3.ONE / maxf(0.01, display_scale) * maxf(0.05, point_scale)
 	# its origin is THIS frame's origin, and it reads its coordinates in this frame
 	pt.set("origin_point", global_position if is_inside_tree() else Vector3.ZERO)
@@ -147,6 +157,11 @@ func _start_local() -> Vector3:
 			conv.x if _axis_from_world.x > 0.5 else floating_point_at.x,
 			conv.y if _axis_from_world.y > 0.5 else floating_point_at.y,
 			conv.z if _axis_from_world.z > 0.5 else floating_point_at.z)
+	if not confine_point:
+		# the frame INDICATES the point; it does not own it. A start outside the
+		# axes is a legitimate place to stand, and fencing it here was the last
+		# thing still pinning z to the frame's own origin.
+		return want
 	var cl := Vector3(
 		clampf(want.x, 0.0, axis_length),
 		clampf(want.y, 0.0, axis_length),
@@ -384,6 +399,10 @@ func _process(_delta: float) -> void:
 			for mk in _axis_markers:
 				(mk as Node3D).visible = false
 		return
+	if _start_pending:
+		# now the frame is where the hall put it, so world -> local means something
+		_start_pending = false
+		pt.position = _start_local()
 	_ensure_projection()
 	# frame-local coordinates survive a grab's re-parenting: read the GLOBAL
 	# position back through this frame (to_local includes the display scale)

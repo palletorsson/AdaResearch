@@ -131,6 +131,28 @@ func _run() -> void:
 	_check(loose.global_position.is_equal_approx(Vector3(28.0, 1.2, 11.0)),
 		"it was NOT dragged back into the axis box — still at %s" % str(loose.global_position))
 	_check(not bool(frame2.get("confine_point")), "confine_point is off by default")
+	# --- 5. the museum's ORDERING: config before the tree, position after ------
+	# endless_museum.gd configures the root while it is still OUTSIDE the tree and
+	# moves it into the hall afterwards. Reproduced exactly, because resolving a
+	# world start at _ready reads a transform the frame does not have yet.
+	var f3: Node3D = ps.instantiate() as Node3D
+	f3.set("floating_point", true)
+	f3.set("floating_point_space", "world")
+	f3.call("apply_grid_config", {
+		"floating_point_space": "world", "floating_point_at": "8,1.2,11"})
+	holder.add_child(f3)                      # _ready runs HERE, frame still at origin
+	f3.global_position = Vector3(4.5, -2.1, 12.5)   # the hall places it AFTER
+	await process_frame
+	await process_frame
+	var p3: Node3D = f3.get_node_or_null("FloatingPoint") as Node3D
+	_say("")
+	_say("museum ordering — config outside the tree, hall position after _ready:")
+	_check(p3 != null, "the point was built")
+	if p3 != null:
+		var w: Vector3 = p3.global_position
+		_say("     point world = (%.2f, %.2f, %.2f)  (asked for 8.00, 1.20, 11.00)" % [w.x, w.y, w.z])
+		_check(w.is_equal_approx(Vector3(8.0, 1.2, 11.0)),
+			"it resolved against the FINAL transform, not the one at _ready")
 	_finish()
 
 
