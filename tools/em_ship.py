@@ -9,6 +9,19 @@ ground and exports have excluded it; the Quest 3 walked a plan-less v1 museum
 for a day because of that). endless_museum.gd reads ada_run first and falls
 back to the shipped copy. em_bake.py runs this at the end; the plan editor
 runs it after a save. commons/data/museum/ is gitignored — generated.
+
+BELT AND BRACES NOW, NOT THE PATH (checked 2026-08-31). The exclusion this was
+written for is gone: it was ada_run/*,ada_run/** wholesale, and commit 8c6ea0c00
+narrowed it to specific subdirectories and non-json extensions. export_presets
+.cfg now reads include_filter="*.md,*.json" with nothing excluding
+ada_run/*.json, so every file in FILES and EXTRA is ALREADY inside the .pck and
+_shipped returns the original before it ever looks here. Tested file by file
+against the live filters.
+
+It is kept because it costs nothing and a headset running a build older than
+8c6ea0c00 still needs it. It is NOT the way a text change reaches VR — that is
+tools/say_it.py, and on a running headset an adb-pushed override_data/ copy,
+which _shipped now reads before either of these.
 """
 import json, shutil, sys
 from pathlib import Path

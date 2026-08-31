@@ -5,25 +5,40 @@
     python tools/say_it.py --chapter=primitives
     python tools/say_it.py --quest            # ...and push it to a connected Quest
     python tools/say_it.py --check            # say what is stale, change nothing
+    python tools/say_it.py --ship             # also refresh commons/data/museum/
+                                              #   (belt and braces — see below)
 
 2026-08-31, Palle: "the new texts are not updated in VR. How does it work, I
 rather have it be automatic?"
 
-HOW IT WORKED, which is the reason this exists. A wall sentence is written in
-/compose, /wall-texts, /lines or the museum itself, and lands in
-commons/data/book/<chapter>.json. Nothing downstream watches that file:
+ONE TRANSLATION, NOT THREE. 2026-08-31, Palle: "Can we skip any extra layer or
+translation between the editing tool and vr to keep it more simple? Use the same
+principle as for the desktop endless museum?"
+
+Yes, and one of the layers was already dead. The desktop principle is that the
+museum reads the file WHERE IT LIVES — res://commons/data/trunk_branches.json,
+no copy. VR could not do that once, so em_ship.py copied the generated files into
+commons/data/museum/ and _shipped fell back to them: exports excluded
+ada_run/*,ada_run/** wholesale, and the Quest walked a plan-less museum for a day
+because of it.
+
+That exclusion is gone. Commit 8c6ea0c00 narrowed it to specific subdirectories
+and non-json extensions, and export_presets.cfg now reads
+include_filter="*.md,*.json" with nothing excluding ada_run/*.json. Checked file
+by file against the live filters: em_plan, em_bake, em_control, em_overrides,
+em_layout_walk and trunk_branches are ALL in the export already. The copy has
+been copying files the .pck was carrying anyway.
+
+So the chain is what the desktop's always was, plus one arm for the headset:
 
     book/<chapter>.json
-      -> book.py compile          writes commons/data/trunk_branches.json
-      -> the desktop museum         reads the trunk (NOT the book) for wall text
-      -> em_ship.py               copies the trunk into commons/data/museum/
-      -> the export                carries commons/, so the headset sees it
-      -> adb push (--quest)        an override the museum reads BEFORE the export
+      -> book.py compile        writes commons/data/trunk_branches.json
+      -> the museum               reads it directly, desktop AND export
+      -> adb push (--quest)     an override read BEFORE the export, no rebuild
 
-Two of those steps were manual and neither announced itself, so a sentence could
-be correct in the book, correct on the web, and three days old on the wall. That
-happened: the trunk was stamped 2026-08-28 against a book touched 2026-08-31, and
-the museum went on saying "Show me what you can do with those hands".
+That step was manual and did not announce itself, so a sentence could be correct
+in the book, correct on the web, and three days old on the wall. It was: the
+trunk was stamped 2026-08-28 against a book touched 2026-08-31.
 
 WHAT MAKES IT SAFE TO RUN OFTEN. It compiles only chapters whose book is NEWER
 than the trunk, so the default run on an unchanged tree does nothing and says so.
@@ -91,6 +106,8 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="book -> trunk -> export -> headset")
     ap.add_argument("--chapter", default="", help="one chapter, whether or not it is stale")
     ap.add_argument("--quest", action="store_true", help="also adb-push the trunk as an override")
+    ap.add_argument("--ship", action="store_true",
+                    help="also run em_ship.py — redundant since 8c6ea0c00, kept for an old build")
     ap.add_argument("--check", action="store_true", help="report staleness, write nothing")
     a = ap.parse_args()
 
@@ -104,23 +121,21 @@ def main() -> int:
         print("  trunk written  : %s" % __import__("datetime").datetime.fromtimestamp(
             TRUNK.stat().st_mtime).isoformat(timespec="seconds"))
     print("  chapters stale : %d%s" % (len(todo), ("  " + ", ".join(todo)) if todo else ""))
+    # the fallback copy is reported, not required: the export carries the real
+    # file, so a stale or absent copy here is not a fault
     if SHIPPED.exists():
         drift = TRUNK.stat().st_mtime - SHIPPED.stat().st_mtime if TRUNK.exists() else 0
-        print("  shipped copy   : %s" % ("BEHIND the trunk" if drift > 1 else "current"))
-    else:
-        print("  shipped copy   : ABSENT — the export would carry no trunk at all")
+        print("  fallback copy  : %s (unused — the export carries the real file)"
+              % ("behind" if drift > 1 else "current"))
 
     if a.check:
         print()
         print("  --check: nothing written.")
         return 1 if todo else 0
-    if not todo:
+    if not todo and not a.quest and not a.ship:
         print()
         print("  Nothing to compile. The trunk is newer than every book file.")
-        # the ship is still worth doing: the trunk can be newer than the copy
-        if SHIPPED.exists() and TRUNK.exists() and TRUNK.stat().st_mtime <= SHIPPED.stat().st_mtime:
-            if not a.quest:
-                return 0
+        return 0
 
     print()
     for ch in todo:
@@ -131,9 +146,13 @@ def main() -> int:
         if not run([sys.executable, "tools/book.py", "compile", "--chapter", ch], "book.py compile " + ch):
             return 1
 
-    print("  shipping into commons/data/museum/")
-    if not run([sys.executable, "tools/em_ship.py"], "em_ship.py"):
-        return 1
+    if a.ship:
+        # NOT the path any more: _shipped reads res://commons/data/trunk_branches
+        # .json first and the export carries it, so this only feeds the fallback.
+        # Kept behind a flag for a headset running a build older than 8c6ea0c00.
+        print("  also shipping into commons/data/museum/ (fallback copy)")
+        if not run([sys.executable, "tools/em_ship.py"], "em_ship.py"):
+            return 1
 
     if a.quest:
         print("  pushing to the headset")
@@ -145,7 +164,8 @@ def main() -> int:
     print("  drops its cache when the file's mtime changes — but a hall keeps the")
     print("  labels it was BUILT with, so walk out and back, or relaunch.")
     if not a.quest:
-        print("  For VR: --quest pushes an override, or export as usual.")
+        print("  For VR: --quest pushes an override (no rebuild), or export as usual —")
+        print("  the export carries commons/data/trunk_branches.json itself.")
     return 0
 
 
