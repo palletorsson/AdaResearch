@@ -70,6 +70,22 @@ const FloatingPointScene := "res://commons/primitives/point/interactive_point_or
 ## and says so if the target was out of reach — a frame three units long standing
 ## at x=4 cannot put its point at x=40, and should not pretend it did.
 @export_enum("local", "world") var floating_point_space: String = "local"
+## ADOPT A POINT PLACED SEPARATELY (2026-08-31, Palle: "it seems hard to place these
+## objects as one object. Can we place them individually ... and then have the
+## coordinate system indicate it wherever the point is").
+##
+## With `floating_point` off, the frame looks for the nearest `interactive_point_origin`
+## in the group `ada_coordinate_point` and measures THAT. The two become two map
+## tokens: the point goes wherever it belongs in the hall, the frame indicates it.
+@export var adopt_external_point: bool = true
+## CONFINE, now OFF by default. The clamp was added the same day to stop a drifting
+## point sitting outside its own axes — and immediately became the thing in the way:
+## "now we can not move the point beyond its local z 0, the blue line." A point that
+## is PLACED deliberately does not need to be fenced, and a coordinate system whose
+## reading stops at its own arrow is not reading anything. The markers still ride the
+## axes and the guide lines still reach the point, so the frame indicates a point it
+## does not contain.
+@export var confine_point: bool = false
 
 var gyroscope: Node3D
 var _fp_ref: Node3D = null              # the grab point (survives re-parenting by a grab)
@@ -310,6 +326,20 @@ func _find_point() -> Node3D:
 	if _fp_ref != null and is_instance_valid(_fp_ref):
 		return _fp_ref
 	_fp_ref = get_node_or_null("FloatingPoint") as Node3D
+	if _fp_ref == null and adopt_external_point and is_inside_tree():
+		# nearest wins: a hall may hold several points, and the one this frame is
+		# about is the one standing in it.
+		var best: Node3D = null
+		var best_d: float = INF
+		for n in get_tree().get_nodes_in_group("ada_coordinate_point"):
+			var n3: Node3D = n as Node3D
+			if n3 == null or not n3.is_inside_tree():
+				continue
+			var d: float = global_position.distance_squared_to(n3.global_position)
+			if d < best_d:
+				best_d = d
+				best = n3
+		_fp_ref = best
 	return _fp_ref
 
 
@@ -365,7 +395,7 @@ func _process(_delta: float) -> void:
 	# the point outside the frame with its markers pinned at the corners — three
 	# lines running off to a dot in mid-air. Clamping the body itself makes the
 	# axis ends what they look like: walls. A held point stops there and stays held.
-	if not lp.is_equal_approx(cl):
+	if confine_point and not lp.is_equal_approx(cl):
 		pt.global_position = to_global(cl)
 		lp = cl
 	(_axis_markers[0] as Node3D).position = Vector3(cl.x, 0, 0)
@@ -403,6 +433,10 @@ func apply_grid_config(config: Dictionary) -> void:
 	if config.has("display_scale"):
 		display_scale = float(config["display_scale"])
 		scale = Vector3(display_scale, display_scale, display_scale)
+	if config.has("adopt_external_point"):
+		adopt_external_point = str(config["adopt_external_point"]) not in ["0", "false", "no", "off"]
+	if config.has("confine_point"):
+		confine_point = str(config["confine_point"]) not in ["0", "false", "no", "off"]
 	if config.has("floating_point_space"):
 		var sp: String = str(config["floating_point_space"]).to_lower().strip_edges()
 		if sp in ["local", "world"]:

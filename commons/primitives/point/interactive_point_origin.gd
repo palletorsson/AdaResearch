@@ -146,6 +146,12 @@ var _display_format_index: int = 2 # Start at 2 so first pickup cycles to 0 (def
 var _mark_built := false
 
 func _ready() -> void:
+	# ADOPTABLE (2026-08-31, Palle: "can we place them individually at the point
+	# and then have the coordinate system indicate it wherever the point is").
+	# A CoordinateSystem3M with no point of its own adopts the nearest member of
+	# this group, so the two can be placed as separate map tokens instead of one
+	# compound object whose point can only live inside its own axis box.
+	add_to_group("ada_coordinate_point")
 	super()
 
 	# Get mesh and materials — start glowing so point is visible in dark scenes

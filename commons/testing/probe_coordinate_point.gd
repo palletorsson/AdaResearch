@@ -70,18 +70,31 @@ func _run() -> void:
 		"the point wears it: scale %.3f = 1/%.2f x %.2f" % [pt.scale.x, scl, ps_mult])
 	_check(energy > 2.0, "glow_emission_energy reached the point BEFORE _ready (%.2f > 2.0 default)" % energy)
 
-	# --- 2. the point cannot leave the frame -----------------------------------
-	# shove it far outside the positive octant, both directions, and let a frame run
-	pt.global_position = frame.to_global(Vector3(axis_len + 5.0, -4.0, axis_len + 9.0))
+	# --- 2. the fence is OPT-IN, and it is off ---------------------------------
+	# It shipped ON for a few hours and was immediately the thing in the way:
+	# "now we can not move the point beyond its local z 0, the blue line." A frame
+	# that refuses to read past its own arrow is not reading anything, so the
+	# default is free movement and the fence is a knob.
+	var beyond := Vector3(axis_len + 5.0, -4.0, -6.0)   # behind the blue line
+	pt.global_position = frame.to_global(beyond)
 	await process_frame
 	await process_frame
 	var lp: Vector3 = frame.to_local(pt.global_position)
-	_say("  after a shove to (+%.0f, -4, +%.0f) beyond the axes, local = (%.2f, %.2f, %.2f)"
-		% [axis_len + 5.0, axis_len + 9.0, lp.x, lp.y, lp.z])
-	_check(lp.x <= axis_len + 0.001 and lp.y <= axis_len + 0.001 and lp.z <= axis_len + 0.001,
-		"no axis overrun — every component within axis_length %.2f" % axis_len)
-	_check(lp.x >= -0.001 and lp.y >= -0.001 and lp.z >= -0.001,
-		"no negative overrun — the point stayed in the positive octant")
+	_say("  shoved to local (+%.0f, -4, %.0f), outside the box and behind z=0:" % [beyond.x, beyond.z])
+	_say("     it sits at (%.2f, %.2f, %.2f)" % [lp.x, lp.y, lp.z])
+	_check(not bool(frame.get("confine_point")), "confine_point is off by default")
+	_check(lp.is_equal_approx(beyond), "the point STAYED where it was put — no fence")
+	_check(lp.z < 0.0, "and it can go behind the blue line: local z = %.2f" % lp.z)
+
+	# turning the fence on still works, for a map that wants a contained demo
+	frame.set("confine_point", true)
+	pt.global_position = frame.to_global(beyond)
+	await process_frame
+	await process_frame
+	var fenced: Vector3 = frame.to_local(pt.global_position)
+	_check(fenced.x <= axis_len + 0.001 and fenced.z >= -0.001,
+		"with confine_point on it clamps again: (%.2f, %.2f, %.2f)" % [fenced.x, fenced.y, fenced.z])
+	frame.set("confine_point", false)
 
 	# --- 3. the readout is measured from Vector3.ZERO --------------------------
 	_check(str(frame.get("readout_space")) == "world", "readout_space defaults to world")
@@ -97,6 +110,27 @@ func _run() -> void:
 	_check(absf(world.x - origin.x) < scl * 2.0 and absf(world.z - origin.z) < scl * 2.0,
 		"the world reading carries the frame's own place in the map (x near %.0f, z near %.0f)"
 			% [origin.x, origin.z])
+	# --- 4. a point placed SEPARATELY is adopted, and is NOT fenced ------------
+	var ext_scene := "res://commons/primitives/point/interactive_point_origin.tscn"
+	var frame2: Node3D = ps.instantiate() as Node3D
+	frame2.set("floating_point", false)        # no point of its own
+	holder.add_child(frame2)
+	frame2.global_position = Vector3(20.0, 0.0, 20.0)
+	var loose: Node3D = (load(ext_scene) as PackedScene).instantiate() as Node3D
+	holder.add_child(loose)
+	# well outside the frame's 3-unit box, and BEHIND it in z — the case that could
+	# not be reached while the point had to live inside its own axes
+	loose.global_position = Vector3(28.0, 1.2, 11.0)
+	await process_frame
+	await process_frame
+	_say("")
+	_say("a point placed on its own at (28.0, 1.2, 11.0), frame at (20, 0, 20):")
+	var adopted: Variant = frame2.call("_find_point")
+	_check(adopted == loose, "the frame adopted the separately placed point")
+	await process_frame
+	_check(loose.global_position.is_equal_approx(Vector3(28.0, 1.2, 11.0)),
+		"it was NOT dragged back into the axis box — still at %s" % str(loose.global_position))
+	_check(not bool(frame2.get("confine_point")), "confine_point is off by default")
 	_finish()
 
 
