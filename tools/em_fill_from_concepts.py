@@ -141,7 +141,7 @@ def placed_tokens(md):
     return out
 
 
-def fill_map(md, queue, reg, rng):
+def fill_map(md, queue, reg, rng, ignore_caps=False):
     """Place queued tokens into floor cells. Mutates md. Returns placed list."""
     st = md["layers"]["structure"]
     H = len(st)
@@ -187,7 +187,7 @@ def fill_map(md, queue, reg, rng):
     cover = sum(reg.get(t, {}).get("fp", 1) for t in placed_tokens(md))
     for tok in queue:
         n_arts = len(occupied)
-        if n_arts >= CAP_ARTS or 100.0 * cover / max(1, floor_count) >= CAP_COV:
+        if not ignore_caps and (n_arts >= CAP_ARTS or 100.0 * cover / max(1, floor_count) >= CAP_COV):
             break
         fp = reg.get(tok, {}).get("fp", 1)
         side = max(1, math.ceil(math.sqrt(fp)))
@@ -216,12 +216,99 @@ def fill_map(md, queue, reg, rng):
     return placed
 
 
+def placement_status(chapter: str) -> dict:
+    """token -> [maps of this chapter that contain it], over the declared maps."""
+    ma = json.load(open(ROOT / "commons" / "data" / "map_authored.json", encoding="utf-8"))
+    out = defaultdict(list)
+    for m in ma.get(chapter, []):
+        md = map_layers(m)
+        if md is None:
+            continue
+        for t in set(placed_tokens(md)):
+            out[t].append(m)
+    return dict(out)
+
+
+def add_single(chapter: str, token: str) -> dict:
+    """Place ONE token into the chapter map that most speaks its concept.
+    The gallery's 'add to map' button. Ignores density caps - an explicit
+    human add always tries. Writes the map. Returns a JSON-able verdict."""
+    reg = load_registry_index()
+    if not scene_on_disk(reg.get(token)):
+        return {"ok": False, "error": "no scene on disk for '%s'" % token}
+    status = placement_status(chapter)
+    if token in status:
+        return {"ok": True, "already": True, "maps": status[token]}
+    ma = json.load(open(ROOT / "commons" / "data" / "map_authored.json", encoding="utf-8"))
+    r = subprocess.run(["git", "status", "--porcelain", "--", "commons/maps/"],
+                       capture_output=True, text=True, cwd=ROOT)
+    dirty = {pathlib.Path(l[3:]).parts[-2] for l in r.stdout.splitlines() if l.strip()}
+    doc = concept_doc(chapter)
+    tok_concept = {}
+    if doc:
+        for cname, meta in (doc.get("concept_meta") or {}).items():
+            for toks in (meta.get("tiers") or {}).values():
+                for t in toks:
+                    tok_concept.setdefault(str(t), cname)
+    for t, cn in additions(chapter).items():
+        tok_concept[t] = cn
+    cn = tok_concept.get(token, "")
+    best = None
+    mds = {}
+    for m in ma.get(chapter, []):
+        md = map_layers(m)
+        if md is None:
+            continue
+        mds[m] = md
+        votes = Counter()
+        for t in placed_tokens(md):
+            c2 = tok_concept.get(t)
+            if c2:
+                votes[c2] += 1
+        aff = votes.get(cn, 0) if cn else 0
+        key = (0 if m not in dirty else 1, -aff, len(placed_tokens(md)), m)
+        if best is None or key < best[0]:
+            best = (key, m)
+    if best is None:
+        return {"ok": False, "error": "chapter '%s' has no declared maps" % chapter}
+    m = best[1]
+    if m in dirty:
+        # every map dirty (mid-session): still allowed for an explicit add,
+        # but say so - the human clicked, the human owns the tree
+        pass
+    md = mds[m]
+    got = fill_map(md, [token], reg, random.Random(11), ignore_caps=True)
+    if not got:
+        return {"ok": False, "error": "no clear floor block in '%s' for footprint" % m}
+    p = ROOT / "commons" / "maps" / m / "map_data.json"
+    raw = p.read_text(encoding="utf-8")
+    nl = "\r\n" if "\r\n" in raw else "\n"
+    txt = json.dumps(md, indent=1, ensure_ascii=False)
+    txt = re.sub(r"\[((?:\s+\"[^\]]*?)+)\s+\]",
+                 lambda mm: "[ " + re.sub(r"\s+", " ", mm.group(1)).strip() + " ]", txt)
+    p.write_text((txt + "\n").replace("\n", nl), encoding="utf-8", newline="")
+    tok2, rr, cc = got[0]
+    return {"ok": True, "map": m, "cell": [cc, rr], "concept": cn}
+
+
 def main() -> int:
     apply = "--apply" in sys.argv
     only = None
+    add_tok = None
+    status_ch = None
     for a in sys.argv[1:]:
         if a.startswith("--chapter="):
             only = a.split("=", 1)[1]
+        if a.startswith("--add-token="):
+            add_tok = a.split("=", 1)[1]
+        if a.startswith("--status="):
+            status_ch = a.split("=", 1)[1]
+    if status_ch:
+        print(json.dumps({"ok": True, "placed": placement_status(status_ch)}, ensure_ascii=False))
+        return 0
+    if add_tok:
+        print(json.dumps(add_single(only or "", add_tok), ensure_ascii=False))
+        return 0
     reg = load_registry_index()
     df = corpus_df()
     ma = json.load(open(ROOT / "commons" / "data" / "map_authored.json", encoding="utf-8"))
