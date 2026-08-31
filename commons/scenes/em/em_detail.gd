@@ -1156,8 +1156,11 @@ static func _add_showing_cards(seg: Node3D, mounts: Array, opts: Dictionary) -> 
 	# opts.speak_lines: the pearl's sentences in string order; showing si gets
 	# sentence si, written across its field in Roboto, light on the dark field.
 	# opts.speak_caps: 1 = CAPS. A showing past the last sentence stays a field.
-	# today | measured | lead — endless_museum passes it from --em-label
+	# today | measured | lead — endless_museum passes it from --em-label, and
+	# `speak_label_by_page` carries the pearl's own per-wall rulings, which
+	# outrank it exactly as `adopt` outranks closeness
 	var label_mode: String = String(opts.get("speak_label", "today"))
+	var label_by_page: Dictionary = opts.get("speak_label_by_page", {})
 	var speak_in: Array = opts.get("speak_lines", [])
 	var speak_caps: bool = bool(opts.get("speak_caps", false))
 	# THE WALL IS THE PRODUCT OF THE TEXT (2026-08-19): a record {text, token} hangs
@@ -1324,7 +1327,11 @@ static func _add_showing_cards(seg: Node3D, mounts: Array, opts: Dictionary) -> 
 			# `today` is the shipped estimate and the default, so a museum
 			# launched without the flag is byte-for-byte the museum of yesterday.
 			var fit: Dictionary = {}
-			match label_mode:
+			# the pearl's ruling is keyed by TOKEN — a page index moves when the
+			# hall re-deals, a token does not
+			var tok_here: String = String(speak_tokens[si]) if si < speak_tokens.size() else ""
+			var mode_here: String = String(label_by_page.get(tok_here, label_mode))
+			match mode_here:
 				"measured":
 					fit = speak_fit_measured(roboto, sentence, wm, hm)
 				"lead":

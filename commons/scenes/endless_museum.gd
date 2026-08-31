@@ -4800,6 +4800,52 @@ func _speak_adopt(chapter: String, pearl: String) -> Dictionary:
 	return out
 
 
+## HOW a wall work is fitted, as the hand has ruled it: `label: [{token, mode}]`
+## on the pearl, beside `adopt` and `hang`.
+##
+## BY TOKEN, NOT BY PAGE, and the first version of this was by page and did not
+## work. The number printed on a wall is its PLACE number in walking order, not
+## its showing index, so "wall 11" is not page 10 and a ruling written against it
+## silently addressed a different wall. line_save had already learned this and
+## says so in its own comment: address a line by chapter + pearl + token, never
+## by index, because indices move when the trunk reorders and a stale index
+## writes the right words onto the wrong work. A token does not move.
+##
+## 2026-08-31, Palle: "maybe we can set the type of text we want in /wall-map for
+## that wall work." The three rulings answer three different questions and are
+## deliberately separate — adopt says WHICH work a wall speaks for, hang says
+## WHERE it is, and this says HOW MUCH of its sentence is on the wall:
+##
+##   today     the shipped estimate, whatever --em-label says elsewhere
+##   measured  the whole line, as big as it truly fits
+##   lead      as much as reads well, then an ellipsis; the rest one click away
+##
+## A page with no row here falls back to --em-label, which falls back to `today`.
+## An unknown mode falls back the same way rather than guessing.
+func _speak_label(chapter: String, pearl: String) -> Dictionary:
+	var out: Dictionary = {}
+	if chapter == "" or pearl == "":
+		return out
+	var path: String = _book_dir + "/%s.json" % chapter
+	if not FileAccess.file_exists(path):
+		return out
+	var doc_v: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+	if not (doc_v is Dictionary):
+		return out
+	var pl: Dictionary = _page_pearl_row(doc_v as Dictionary, pearl)
+	if pl.is_empty():
+		return out
+	for a_v in (pl.get("label", []) as Array):
+		var a: Dictionary = a_v
+		var tok: String = String(a.get("token", "")).strip_edges()
+		if tok == "":
+			continue
+		var m: String = String(a.get("mode", "")).strip_edges().to_lower()
+		if m == "today" or m == "measured" or m == "lead":
+			out[tok] = m
+	return out
+
+
 ## WHERE a wall work hangs, as the hand has moved it: `hang: [{page, cell, dir}]`
 ## on the pearl, beside `adopt`. Both live in the book so one editor writes one
 ## file — adoption is WHICH WORK a wall speaks for, the hang is WHICH WALL FACE
@@ -8252,10 +8298,10 @@ func _build_segment() -> void:
 						# DEFAULT, this is the hand (see _speak_adopt)
 						"speak_adopt": adopt_now,
 						"speak_caps": _L("speak", "caps", 0.0) > 0.5,
-						# today | measured | lead — see --em-label. The counter on
-						# the other side is read back below: a flag whose effect
-						# cannot be seen from outside is a flag nobody can test.
+						# today | measured | lead — see --em-label
 						"speak_label": _label_mode,
+						# and the pearl's own per-wall rulings, which outrank it
+						"speak_label_by_page": _speak_label(next_seq, String(deal.get("pearl", "")) if deal is Dictionary else ""),
 						# EVERY enter room stays bare (2026-08-23, Palle: "remove
 						# ... other objects on the wall around that info board"):
 						# no showings, mounts or cards hang below the threshold —

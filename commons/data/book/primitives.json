@@ -9,7 +9,7 @@
    "lines": [
     {
      "token": "folding_past",
-     "text": "You arrive late. No reboot, always restart.\nThe folding past keeps running.",
+     "text": "You arrive late to class. That past is folding, all prerequisites are in, stack away in the past. \nThe folding past keeps running, you did not accept the challenge, you were thrown into the game. And so is everything around you, everything arrived late. The important thing is that you are here now.",
      "by": "hand",
      "place": "foyer",
      "lock": [
@@ -21,7 +21,7 @@
     },
     {
      "token": "frame_counter_display",
-     "text": "The internal clock is running,\nthe frame counter update cycle.",
+     "text": "The internal clock is running, The frame counter updates with the cycle.",
      "by": "hand",
      "place": "foyer",
      "lock": [
@@ -32,7 +32,7 @@
     },
     {
      "token": "origin",
-     "text": "Standing at Vector.ZERO,\n\nPoint zero, * ,\nVector(0,0,0)\nThe root of all vectors.\n\nThe origin, No turning back.",
+     "text": "The Origin. Point zero is the first point but already surrounded so you have somewhere to stand.\nPoint zero, the being of space and the museum runs forward. No turning back. This is the root of all vectors. Vector(0,0,0) and any positive number change is where we place the other thing in the world.  Vector.ZERO",
      "by": "hand",
      "place": "foyer",
      "lock": [
@@ -75,12 +75,12 @@
      ],
      "config": {
       "support": "stand",
-      "scan_radius": 8.0
+      "scan_radius": 8
      }
     },
     {
      "token": "CoordinateSystem3M",
-     "text": "Point one, position,\nno point without the coordinate system.\n\n3D Space.",
+     "text": "You are in 3D Space, Accept it! A minimal upper desire museum, wall hosts all these things. It is not raining but we need somewhere to focus on the objects.",
      "by": "hand",
      "config": {
       "floating_point": 1
@@ -123,7 +123,7 @@
     },
     {
      "token": "interactive_point_origin_force",
-     "text": "“Show me what you can do with those hands”\n\nGrab the ball.",
+     "text": "Point One. The first point keeps escalating, inviting your hands. - “Show me what you can do with those hands” but really the hands are no different from the ball, they just code. It is us  that sit with the perspective from here to that dark shiny thing. - Grab the ball. This is the first point but it has already broken the promise of taking it one step at the time. We are already Alice in wonderland.",
      "by": "hand",
      "lock": [
       1,
@@ -198,6 +198,12 @@
       18
      ],
      "kind": "4"
+    }
+   ],
+   "label": [
+    {
+     "token": "interactive_point_origin_force",
+     "mode": "lead"
     }
    ]
   },
@@ -327,7 +333,7 @@
      ],
      "offset": [
       0,
-      1.0,
+      1,
       0
      ]
     },
@@ -412,7 +418,7 @@
      ],
      "config": {
       "support": "stand",
-      "scan_radius": 8.0
+      "scan_radius": 8
      }
     },
     {
@@ -634,7 +640,7 @@
       2,
       8
      ],
-     "support_m": 1.0
+     "support_m": 1
     },
     {
      "token": "ConeTwistBag",
@@ -733,7 +739,7 @@
       1,
       13
      ],
-     "support_m": 1.0,
+     "support_m": 1,
      "rotation": 90,
      "placed_by": "grid"
     },
@@ -745,7 +751,7 @@
       2,
       14
      ],
-     "support_m": 1.0,
+     "support_m": 1,
      "rotation": 90,
      "placed_by": "grid"
     },
@@ -757,7 +763,7 @@
       4,
       14
      ],
-     "support_m": 1.0,
+     "support_m": 1,
      "rotation": 90,
      "placed_by": "grid"
     },
@@ -769,7 +775,7 @@
       6,
       15
      ],
-     "support_m": 1.0,
+     "support_m": 1,
      "rotation": 90,
      "placed_by": "grid"
     },
@@ -781,7 +787,7 @@
       0,
       16
      ],
-     "support_m": 1.0,
+     "support_m": 1,
      "rotation": 180,
      "placed_by": "grid"
     },
@@ -844,7 +850,7 @@
       0,
       14
      ],
-     "support_m": 1.0,
+     "support_m": 1,
      "rotation": 90
     }
    ],
@@ -1016,7 +1022,7 @@
       3,
       10
      ],
-     "support_m": 1.0,
+     "support_m": 1,
      "config": {
       "loop_fold": "true"
      },
@@ -1160,7 +1166,7 @@
       3,
       4
      ],
-     "support_m": 1.0,
+     "support_m": 1,
      "placed_by": "grid"
     },
     {
@@ -1184,7 +1190,7 @@
       2,
       17
      ],
-     "support_m": 1.0,
+     "support_m": 1,
      "count": 2,
      "spread": "x",
      "gap_cells": 4,
@@ -1211,7 +1217,7 @@
       7,
       11
      ],
-     "support_m": 1.0,
+     "support_m": 1,
      "placed_by": "grid"
     },
     {
@@ -1246,7 +1252,7 @@
       7,
       13
      ],
-     "support_m": 1.0,
+     "support_m": 1,
      "placed_by": "grid"
     },
     {
@@ -1257,7 +1263,7 @@
       3,
       11
      ],
-     "support_m": 1.0,
+     "support_m": 1,
      "count": 2,
      "spread": "x",
      "gap_cells": 2,
@@ -1271,7 +1277,7 @@
       1,
       13
      ],
-     "support_m": 1.0,
+     "support_m": 1,
      "placed_by": "grid",
      "note": "The sphere is the question the triangle cannot answer — how many faces — and the answer is a budget, so ignorance here is not missing knowledge but a resolution someone chose.",
      "note_src": {
@@ -1300,7 +1306,7 @@
       7,
       15
      ],
-     "support_m": 1.0,
+     "support_m": 1,
      "placed_by": "grid"
     },
     {
@@ -1327,7 +1333,7 @@
       1,
       15
      ],
-     "support_m": 1.0,
+     "support_m": 1,
      "placed_by": "grid"
     },
     {
@@ -1475,7 +1481,7 @@
       2,
       1
      ],
-     "support_m": 1.0,
+     "support_m": 1,
      "rotation": 180,
      "placed_by": "grid"
     },
@@ -1487,7 +1493,7 @@
       2,
       2
      ],
-     "support_m": 1.0,
+     "support_m": 1,
      "rotation": 180,
      "config": {
       "tutorial": "melencolia_axioms"
@@ -1502,7 +1508,7 @@
       3,
       3
      ],
-     "support_m": 1.0,
+     "support_m": 1,
      "placed_by": "grid"
     },
     {
@@ -1513,7 +1519,7 @@
       4,
       3
      ],
-     "support_m": 1.0,
+     "support_m": 1,
      "rotation": 90,
      "placed_by": "grid"
     },
@@ -1525,7 +1531,7 @@
       2,
       4
      ],
-     "support_m": 1.0,
+     "support_m": 1,
      "placed_by": "grid"
     },
     {
@@ -1536,7 +1542,7 @@
       3,
       7
      ],
-     "support_m": 1.0,
+     "support_m": 1,
      "placed_by": "grid"
     },
     {
@@ -1555,7 +1561,7 @@
       2,
       3
      ],
-     "support_m": 1.0
+     "support_m": 1
     },
     {
      "token": "floating_sphere_field",
