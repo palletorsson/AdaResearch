@@ -344,6 +344,89 @@ def arm_headset() -> bool:
     return False
 
 
+def headset_doctor() -> int:
+    """Why is the headset not showing up? Answer it with evidence, not memory.
+
+    The one genuinely confusing failure in this whole feature is a headset that
+    connects to nothing because the APK it is running predates the autoload —
+    push_map_to_quest.ps1 ships map LAYOUT only, so a build can be hours old in
+    code while its maps are current. That is invisible from the headset and
+    invisible from here unless something checks.
+    """
+    print("\n  VR LINK — headset check\n  " + "-" * 46)
+    ok = True
+
+    if not Path(ADB).exists():
+        print("  adb            NOT FOUND at %s" % ADB)
+        return 1
+    if not device_present():
+        print("  device         none attached")
+        print("\n  Plug the Quest in over USB and accept the debugging prompt.")
+        return 1
+    print("  device         attached")
+
+    rc, out = adb("shell", f"dumpsys package {PKG}", quiet=True)
+    if rc != 0 or "versionName" not in out:
+        print("  app            NOT INSTALLED (%s)" % PKG)
+        return 1
+    installed = ""
+    debuggable = False
+    for line in out.splitlines():
+        s = line.strip()
+        if s.startswith("lastUpdateTime="):
+            installed = s.split("=", 1)[1].strip()
+        if "DEBUGGABLE" in s:
+            debuggable = True
+    print("  app            installed %s%s" % (installed,
+          "  (debuggable)" if debuggable else "  (NOT debuggable — --arm will fail)"))
+
+    # Is the build older than the code it would need? git first, mtime as a
+    # fallback so this still answers in a dirty tree.
+    src = ROOT / "commons" / "bridge" / "vr_link.gd"
+    code_when = ""
+    try:
+        p = subprocess.run(["git", "log", "-1", "--format=%ai", "--", str(src)],
+                           cwd=str(ROOT), capture_output=True, text=True, timeout=10)
+        code_when = p.stdout.strip()
+    except Exception:
+        pass
+    if not code_when and src.exists():
+        code_when = time.strftime("%Y-%m-%d %H:%M:%S",
+                                  time.localtime(src.stat().st_mtime))
+    if installed and code_when:
+        stale = installed[:19] < code_when[:19]
+        print("  vr_link.gd     %s" % code_when[:19])
+        if stale:
+            ok = False
+            print("  BUILD          STALE — the headset is running code from before VR Link.")
+            print("                 push_map_to_quest.ps1 ships map LAYOUT only; a new")
+            print("                 autoload needs a full export + install.")
+        else:
+            print("  BUILD          newer than vr_link.gd — the autoload should be present")
+
+    rc, out = adb("shell", f"run-as {PKG} ls files/vr_link.on", quiet=True)
+    armed = rc == 0 and "vr_link.on" in out and "No such file" not in out
+    print("  armed          %s" % ("yes (user://vr_link.on)" if armed
+                                   else "no — run: python tools/vr_link.py --arm"))
+    if not armed:
+        ok = False
+
+    rc, out = adb("reverse", "--list", quiet=True)
+    tunnelled = f"tcp:{GAME_PORT}" in out
+    print("  usb tunnel     %s" % ("tcp:%d reversed" % GAME_PORT if tunnelled
+                                   else "not set (vr_link.py sets it on start)"))
+
+    print("  " + "-" * 46)
+    if ok:
+        print("  Looks ready. Start the app on the headset; it dials in on boot.\n")
+    else:
+        print("  Next: export + install a fresh APK, then --arm, then launch the app.")
+        print("    godot --headless --path . --export-debug \"adaresearchonexy\" <out.apk>")
+        print("    adb install -r <out.apk>")
+        print("    python tools/vr_link.py --arm\n")
+    return 0 if ok else 1
+
+
 def disarm_headset() -> None:
     if device_present():
         adb("shell", f"run-as {PKG} rm -f files/vr_link.on", quiet=True)
@@ -624,6 +707,8 @@ def main() -> int:
     ap.add_argument("--arm", action="store_true",
                     help="write user://vr_link.on to the headset (needs an app restart)")
     ap.add_argument("--disarm", action="store_true", help="remove it again")
+    ap.add_argument("--headset", action="store_true",
+                    help="why is the headset not showing up? checks build age, arming, tunnel")
     ap.add_argument("--walker", metavar="MAP",
                     help="send the humanoid_walker's path into VR on startup")
     ap.add_argument("--seed", type=int, default=0)
@@ -632,6 +717,9 @@ def main() -> int:
                     help="check the cell-to-world rule against the live player")
     ap.add_argument("--no-adb", action="store_true", help="skip adb entirely")
     args = ap.parse_args()
+
+    if args.headset:
+        return headset_doctor()
 
     if args.disarm:
         disarm_headset()
