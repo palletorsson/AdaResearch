@@ -178,6 +178,30 @@ The inverse / Local and global the same day, and build_concept_map now CARRIES
 FORWARD sections it does not own (the June palette sections - dropping one silently
 deleted 52 curation candidates from transformation before the rule existed).
 
+## A7 · Wavefunctions: six acts, six applied heroes (2026-08-29)
+
+The taxonomy ("one oscillator wearing two costumes", 56f865d0f) already carried ten
+act-concepts and a super object (`two_costumes`), but eight of nine categories had an
+EMPTY applied tier — the sequence's 140 artifacts are racks, demos and corridors, and
+only DualBallFMController stood as an applied body. The heroes pass gave six bare acts
+one surreal applied prop each; The meeting and Propagation keep their standing large
+exhibits (wave_interference fp176, wave_propagation_3d fp154) as anchors instead.
+
+| act | concept | hero | the object |
+|---|---|---|---|
+| I | The circle | `shadow_carousel` | a carousel, a lamp, a dark screen: the horses go round, the wall sees only their height, and one revolution of shadow is the sine |
+| II | The wave in space | `bleacher_wave` | nine stadium fold-up seats doing the mexican wave with nobody in them — nothing in the row travels, the standing does |
+| III | The sum | `epicycle_desk` | brass circles riding circles (1, 3, 5), pen at the last rim, and the paper showing what three terms buy: a square wave with honest wobble |
+| III | Resonance | `aria_glass` | a wine glass frozen mid-shatter in a ring of shards, a gramophone horn that is not loud but CORRECT, and the one note on the stand |
+| IV | The second costume | `groove_lens` | a turntable with a loupe over the stylus, and what the lens sees built full-size: the groove as a vinyl wall you can stand next to |
+| V | The break | `unreliable_clock` | a grandfather clock with a second pendulum hinged to the first — the integrated path beads the air and never repeats; the numerals have left their posts |
+
+All six probed (45–96 meshes, sane AABBs — the clock's bead count proves the
+double-pendulum integrator ran), captured, seated in `doc/wavefunctions_concept_additions.json`,
+and standing in `/wavefunctions-concepts` (191 tiles, 23 sections). Footprints written
+from measured AABBs, not guessed (carousel 15, bleachers 10, lens 9). The break was the
+thinnest category in the whole canon (one artifact); it now owns the sequence's exit door.
+
 ## B · The plan: this list, for all 22 sequences
 
 **What already exists (audit 2026-08-27).** 21 of 22 spine sequences have a

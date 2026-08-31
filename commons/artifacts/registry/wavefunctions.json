@@ -15868,6 +15868,127 @@
 				"footprint_cells": 4,
 				"clearance_m": 0.6
 			}
+		},
+		"shadow_carousel": {
+			"name": "Shadow Carousel",
+			"class_name": "ShadowCarousel",
+			"scene": "res://commons/artifacts/shadow_carousel/shadow_carousel.tscn",
+			"description": "The Circle hero: a fairground carousel, one lamp, one dark screen. The horses go round in the only motion the engine owns; the wall sees only their height, and the trace of one revolution is the sine. The circle is offstage; the wave is its shadow. 2026-08-29.",
+			"category": "wavefunctions",
+			"tags": [
+				"waves",
+				"circle",
+				"sine",
+				"projection",
+				"surreal",
+				"applied",
+				"hero"
+			],
+			"spatial_needs": {
+				"footprint_cells": 15,
+				"clearance_m": 0.6
+			}
+		},
+		"bleacher_wave": {
+			"name": "Bleacher Wave",
+			"class_name": "BleacherWave",
+			"scene": "res://commons/artifacts/bleacher_wave/bleacher_wave.tscn",
+			"description": "The Wave-in-space hero: a row of stadium fold-up seats doing the mexican wave with nobody in them. Each seat only stands and sits a moment later than its neighbour; nothing in the row travels, and yet something does. sin(x - vt) performed by furniture. 2026-08-29.",
+			"category": "wavefunctions",
+			"tags": [
+				"waves",
+				"propagation",
+				"phase",
+				"travelling-wave",
+				"surreal",
+				"applied",
+				"hero"
+			],
+			"spatial_needs": {
+				"footprint_cells": 10,
+				"clearance_m": 0.6
+			}
+		},
+		"epicycle_desk": {
+			"name": "Epicycle Desk",
+			"class_name": "EpicycleDesk",
+			"scene": "res://commons/artifacts/epicycle_desk/epicycle_desk.tscn",
+			"description": "The Sum hero: a draughtsman's desk with a brass machine of circles riding circles (harmonics 1, 3, 5), a pen at the last rim, and the paper carrying what three terms actually buy: a square wave with rounded shoulders and an honest wobble. Corners cost infinity. 2026-08-29.",
+			"category": "wavefunctions",
+			"tags": [
+				"waves",
+				"fourier",
+				"harmonics",
+				"epicycle",
+				"surreal",
+				"applied",
+				"hero"
+			],
+			"spatial_needs": {
+				"footprint_cells": 4,
+				"clearance_m": 0.6
+			}
+		},
+		"aria_glass": {
+			"name": "Aria Glass",
+			"class_name": "AriaGlass",
+			"scene": "res://commons/artifacts/aria_glass/aria_glass.tscn",
+			"description": "The Resonance hero: a wine glass on a plinth, a gramophone horn aimed at it, and the moment held forever - the bowl bursting into a ring of suspended shards. On the music stand, the only note that could do it. The horn is not loud, it is CORRECT. 2026-08-29.",
+			"category": "wavefunctions",
+			"tags": [
+				"waves",
+				"resonance",
+				"frequency",
+				"shatter",
+				"surreal",
+				"applied",
+				"hero"
+			],
+			"spatial_needs": {
+				"footprint_cells": 4,
+				"clearance_m": 0.6
+			}
+		},
+		"groove_lens": {
+			"name": "Groove Lens",
+			"class_name": "GrooveLens",
+			"scene": "res://commons/artifacts/groove_lens/groove_lens.tscn",
+			"description": "The Second-costume hero: a turntable with a giant loupe over the stylus, and what the lens sees built full-size beside the deck - the groove as a vinyl wall, a sine you can stand next to, a boot-sized stylus riding one crest. Shape in, note out. 2026-08-29.",
+			"category": "wavefunctions",
+			"tags": [
+				"waves",
+				"sound",
+				"vinyl",
+				"groove",
+				"pitch",
+				"surreal",
+				"applied",
+				"hero"
+			],
+			"spatial_needs": {
+				"footprint_cells": 9,
+				"clearance_m": 0.6
+			}
+		},
+		"unreliable_clock": {
+			"name": "Unreliable Clock",
+			"class_name": "UnreliableClock",
+			"scene": "res://commons/artifacts/unreliable_clock/unreliable_clock.tscn",
+			"description": "The Break hero: a grandfather clock whose maker hinged a second pendulum to the first. The door stands open on the tangle; the tip's real integrated path hangs behind the bobs as a beaded ribbon that never repeats; the numerals have left their posts. The door out of waves. 2026-08-29.",
+			"category": "wavefunctions",
+			"tags": [
+				"waves",
+				"chaos",
+				"double-pendulum",
+				"break",
+				"surreal",
+				"applied",
+				"hero"
+			],
+			"spatial_needs": {
+				"footprint_cells": 4,
+				"clearance_m": 0.6
+			}
 		}
 	}
 }
