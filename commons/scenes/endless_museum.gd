@@ -532,8 +532,44 @@ const BAKE_PATH := "res://ada_run/em_bake.json"
 ## commons/data/museum/, a folder every export carries. A read tries the
 ## authoring path first (desktop, editor) and falls back to the shipped copy.
 const SHIPPED_DIR := "res://commons/data/museum/"
+## WHERE A GENERATED FILE ACTUALLY IS, in the three places it can be.
+##
+## ada_run first (authoring ground), then the shipped copy the export carries —
+## and now, on Android, an adb-PUSHED override before either.
+##
+## 2026-08-31, Palle: "the new texts are not updated in VR. How does it work, I
+## rather have it be automatic?"
+##
+## Here is how it worked, and why the texts stopped at the desktop. A wall
+## sentence goes book -> book.py compile -> trunk_branches.json -> em_ship.py ->
+## commons/data/museum/ -> and then INTO THE .PCK, because that is the only way
+## commons/ reaches a headset. Every text change needed a full export and
+## install. Maps had been spared this since GridDataComponent._map_override_path
+## learned to read an adb-pushed copy out of the app's own files dir; the trunk
+## never got the same arm, so the one file carrying every wall's words was the
+## one file that could only travel by APK.
+##
+## Same convention as the map override, deliberately: user:// first (internal
+## files/, where adb run-as writes), then the app-private external dir that adb
+## can reach without root. NO-OP on desktop, so the editor and PCVR flow are
+## untouched.
 static func _shipped(path: String) -> String:
-	if path == "" or FileAccess.file_exists(path):
+	if path == "":
+		return path
+	if OS.has_feature("android"):
+		var rel: String = "override_data/" + path.get_file()
+		var candidates: Array = ["user://" + rel]
+		var udir: String = OS.get_user_data_dir().replace("\\", "/")
+		var segs: PackedStringArray = udir.split("/", false)
+		var fi: int = segs.find("files")
+		if fi > 0:
+			candidates.append("/storage/emulated/0/Android/data/%s/files/%s" % [segs[fi - 1], rel])
+		for c in candidates:
+			var cs: String = c
+			if FileAccess.file_exists(cs):
+				print("[em] PUSHED override → %s" % cs)
+				return cs
+	if FileAccess.file_exists(path):
 		return path
 	var alt: String = SHIPPED_DIR + path.get_file()
 	return alt if FileAccess.file_exists(alt) else path
