@@ -1,14 +1,14 @@
-# AnimatedFoldingPast.gd - Frame-in-frame animation representing time collapsing into the present
+﻿# AnimatedFoldingPast.gd - Frame-in-frame animation representing time collapsing into the present
 #
 # @identity
-# essence: nested wireframe frames march inward, each 0.85 the size of the last — time collapsing toward the present
+# essence: nested wireframe frames march inward, each 0.85 the size of the last â€” time collapsing toward the present
 # desire: learner watches the past recede frame-by-frame and feels duration as a spatial nesting, not a line
-# critical_parameter: recession — what shape the past takes behind the present (nested / collapsed / abreast / strata); under it scale_ratio (0.85) and cycle_duration (4s) set how tightly and how fast the nesting folds inward
+# critical_parameter: recession â€” what shape the past takes behind the present (nested / collapsed / abreast / strata); under it scale_ratio (0.85) and cycle_duration (4s) set how tightly and how fast the nesting folds inward
 # triggers: animates automatically every _process frame; no interaction, it is a standing meditation on time
 # emerges: the intuition that "the present" is only the innermost frame of an endless regress of prior moments
 # needs: [renders and animates on ready [has], missing a way for the learner to scrub or freeze the fold]
-# relationships: a temporal sibling of the static point — where Point_One fixes a place, this fixes a now
-# truth: the past does not vanish — it recedes, each moment nesting inside the one that follows
+# relationships: a temporal sibling of the static point â€” where Point_One fixes a place, this fixes a now
+# truth: the past does not vanish â€” it recedes, each moment nesting inside the one that follows
 extends Node3D
 
 ## Frame Configuration
@@ -26,28 +26,57 @@ extends Node3D
 @export var frame_color: Color = Color(0.7, 0.8, 0.9, 0.8)
 @export var wireframe_only: bool = true
 
-## STAGE-2 DNA — promoted 2026-08-03.
+## GLOW â€” 2026-08-31, Palle: "can we use some shader on the lines on folding
+## past so that they glow more."
 ##
-## `recession` — what shape the past takes behind the present.
+## The edges were PRIMITIVE_LINES. A line rasterises one pixel wide whatever a
+## shader says, so no material could put light beside one; the usual source of
+## that light is screen-space bloom, and this project has none â€”
+## commons/scenes/vr_staging.tscn sets `glow_intensity = 1.67` and never sets
+## `glow_enabled`, so the effect is configured and off. Switching it on is one
+## line and it would change every artifact in every map, which is not this
+## artifact's call.
 ##
-## The file's own truth line is "the past does not vanish — it recedes, each
+## So each edge is a quad instead, widened into a band by
+## folding_past_glow.gdshader, with a hot core down its middle falling off to
+## the sides and blend_add so the nested frames accumulate. Set `glow` false to
+## get the shipped one-pixel lines and the old material back, unchanged.
+@export var glow: bool = true
+## Half-width of the band in WORLD metres. Held constant across the nest by the
+## shader, so the deep frames recede by getting smaller and dimmer rather than
+## thinner.
+@export var glow_width: float = 0.04
+## One knob over the shader's core and halo together. The energies it scales are
+## calibrated against ACES at `tonemap_exposure = 0.16`, which is what both
+## commons/scenes/vr_staging.tscn and grid.tscn tonemap with â€” it is why the old
+## `emission_energy_multiplier = 0.8` read as a grey scratch. Raise the room's
+## exposure and this comes down.
+@export var glow_energy: float = 1.0
+
+const GLOW_SHADER: Shader = preload("res://commons/primitives/temporal/folding_past_glow.gdshader")
+
+## STAGE-2 DNA â€” promoted 2026-08-03.
+##
+## `recession` â€” what shape the past takes behind the present.
+##
+## The file's own truth line is "the past does not vanish â€” it recedes, each
 ## moment nesting inside the one that follows". That nesting is a CLAIM about
 ## time, and until now it was the only claim this object could make: every one
 ## of its seven exports was a rate, a size or a colour, so a map could make the
 ## fold faster or bluer but never make it argue anything else. Each value here
 ## is a different figure of time, and each is legible in one still frame:
 ##
-##   nested    — the shipped arrangement. Each frame `scale_ratio` of the one
+##   nested    â€” the shipped arrangement. Each frame `scale_ratio` of the one
 ##               before, marching inward: the present contains everything that
 ##               came before it. Containment.
-##   collapsed — the whole nest driven to its innermost term. The past folded
-##               completely into the present — one small dim frame where ten
+##   collapsed â€” the whole nest driven to its innermost term. The past folded
+##               completely into the present â€” one small dim frame where ten
 ##               were, with nothing behind it left to read. Compression.
-##   abreast   — the moments laid side by side at equal size. Succession
+##   abreast   â€” the moments laid side by side at equal size. Succession
 ##               WITHOUT containment: the timeline, which is precisely the
 ##               figure this artifact's nesting was built to refuse. No moment
 ##               sits inside another and none is smaller than another.
-##   strata    — the moments stacked one above the next at equal size. The past
+##   strata    â€” the moments stacked one above the next at equal size. The past
 ##               underneath rather than behind: deposition, read as sediment.
 ##
 ## Age still fades in every value (alpha 0.9 -> 0.3 by index), so the four stay
@@ -83,7 +112,7 @@ func _ready():
 
 ## Contract: this runs AFTER _ready(), via call_deferred from
 ## GridInteractablesComponent. A config that does not name `recession`, or names
-## the value already in force, must touch nothing — the 51 maps that place this
+## the value already in force, must touch nothing â€” the 51 maps that place this
 ## artifact pass no config at all, and curation_station passes framing keys that
 ## have no business restarting the fold.
 func apply_grid_config(config_data: Dictionary) -> void:
@@ -97,7 +126,7 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return   # _ready has not run yet; it will lay the frames out with this value.
 	set_process(recession == "nested")
 	_animation_time = 0.0
-	# Arrangement is per-instance transform only — no mesh and no MultiMesh to
+	# Arrangement is per-instance transform only â€” no mesh and no MultiMesh to
 	# rebuild, so there is nothing here that can strand a grounded placement.
 	_update_frames()
 
@@ -111,31 +140,68 @@ func _process(delta: float) -> void:
 	_update_frames()
 
 func _create_frame_mesh() -> ArrayMesh:
-	# Create a single frame (rectangle outline) mesh
-	var st = SurfaceTool.new()
-	st.begin(Mesh.PRIMITIVE_LINES)
+	# One frame: the same four edges either way â€” a closed rectangle. The old
+	# path lists them as separate segments (top, bottom, left, right); walking
+	# the corners as a loop is the same four edges in a different order.
+	var st := SurfaceTool.new()
+	var hw: float = frame_width / 2.0
+	var hh: float = frame_height / 2.0
+	var corners: Array[Vector3] = [
+		Vector3(-hw, hh, 0.0),
+		Vector3(hw, hh, 0.0),
+		Vector3(hw, -hh, 0.0),
+		Vector3(-hw, -hh, 0.0),
+	]
 
-	var hw = frame_width / 2.0  # half width
-	var hh = frame_height / 2.0  # half height
-
-	# Top edge
-	st.add_vertex(Vector3(-hw, hh, 0))
-	st.add_vertex(Vector3(hw, hh, 0))
-
-	# Bottom edge
-	st.add_vertex(Vector3(-hw, -hh, 0))
-	st.add_vertex(Vector3(hw, -hh, 0))
-
-	# Left edge
-	st.add_vertex(Vector3(-hw, -hh, 0))
-	st.add_vertex(Vector3(-hw, hh, 0))
-
-	# Right edge
-	st.add_vertex(Vector3(hw, -hh, 0))
-	st.add_vertex(Vector3(hw, hh, 0))
+	if glow:
+		st.begin(Mesh.PRIMITIVE_TRIANGLES)
+		for i in range(4):
+			_add_ring_quad(st, corners[i], corners[(i + 1) % 4])
+	else:
+		st.begin(Mesh.PRIMITIVE_LINES)
+		for i in range(4):
+			st.add_vertex(corners[i])
+			st.add_vertex(corners[(i + 1) % 4])
 
 	_frame_mesh = st.commit()
 	return _frame_mesh
+
+
+## One SIDE of the closed band, carrying no thickness of its own. Each vertex
+## sits on a corner and gets that corner's MITRE â€” NORMAL along the bisector,
+## UV.y the distance out along it where the band's edge falls, UV.x which side
+## (+1 outer, -1 inner). The shader widens it from there, so glow_width stays
+## tunable without rebuilding the mesh and the band keeps the same width in the
+## room however far the instance transform shrinks the frame.
+##
+## THE MITRE IS THE POINT. Four separate quads, one per edge, is the obvious
+## build and it was the first one; under blend_add the overlap at each corner
+## adds to itself and photographs as a bright cross. A closed ring has no
+## overlap, so a corner is exactly as bright as the edge running into it.
+##
+## Why UV.y and not a longer NORMAL: SurfaceTool compresses normals, which
+## normalises them, so a vector's LENGTH cannot carry a number through. UV
+## survives, and putting the mitre length there keeps this general â€” a non-right
+## corner would just carry a different one.
+func _add_ring_quad(st: SurfaceTool, a: Vector3, b: Vector3) -> void:
+	var na: Vector3 = _mitre(a)
+	var nb: Vector3 = _mitre(b)
+	var pts: Array[Vector3] = [a, a, b, b]
+	var nrm: Array[Vector3] = [na, na, nb, nb]
+	var side: Array[float] = [1.0, -1.0, -1.0, 1.0]
+	var tris: Array[int] = [0, 1, 2, 0, 2, 3]
+	for k in tris:
+		st.set_normal(nrm[k])
+		# UV.y = sqrt(2): on a right-angled corner the bisector has to run that
+		# much further out for the two edges to meet flush.
+		st.set_uv(Vector2(side[k], sqrt(2.0)))
+		st.add_vertex(pts[k])
+
+
+## The outward bisector at a rectangle corner, from the sign of the corner
+## itself. The rectangle is centred on the origin, so that is all it takes.
+func _mitre(c: Vector3) -> Vector3:
+	return Vector3(signf(c.x), signf(c.y), 0.0).normalized()
 
 func _setup_multimesh() -> void:
 	_multimesh = MultiMesh.new()
@@ -148,8 +214,24 @@ func _setup_multimesh() -> void:
 	_multimesh_instance.name = "FrameMultiMesh"
 	_multimesh_instance.multimesh = _multimesh
 
-	# Create material
-	var material = StandardMaterial3D.new()
+	_multimesh_instance.material_override = _build_material()
+	add_child(_multimesh_instance)
+
+
+## The glow shader, or the shipped material untouched when `glow` is false.
+## Only two of the shader's uniforms are set from here; the rest keep their
+## declared defaults, so the core/halo ratio lives in exactly one file. Writing
+## it in both would be two copies of one number, which is how a ratio drifts the
+## first time either half is tuned.
+func _build_material() -> Material:
+	if glow:
+		var sm := ShaderMaterial.new()
+		sm.shader = GLOW_SHADER
+		sm.set_shader_parameter("line_width", glow_width)
+		sm.set_shader_parameter("energy", glow_energy)
+		return sm
+
+	var material := StandardMaterial3D.new()
 	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	material.albedo_color = frame_color
 	material.emission_enabled = true
@@ -157,9 +239,7 @@ func _setup_multimesh() -> void:
 	material.emission_energy_multiplier = 0.8
 	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	material.vertex_color_use_as_albedo = true
-
-	_multimesh_instance.material_override = material
-	add_child(_multimesh_instance)
+	return material
 
 func _update_frames() -> void:
 	if not _multimesh:
@@ -173,7 +253,7 @@ func _update_frames() -> void:
 		var frame_progress = fmod(cycle_progress + float(i) / float(frame_count), 1.0)
 		if recession != "nested":
 			# The static arrangements read age off the instance index, not off
-			# the clock — otherwise the whole row would breathe in place, which
+			# the clock â€” otherwise the whole row would breathe in place, which
 			# is a motion no still can photograph.
 			frame_progress = float(i) / float(frame_count)
 
