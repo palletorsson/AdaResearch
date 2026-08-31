@@ -92,13 +92,22 @@ def derive_row(pearl: str, map_name: str, museum_key: str, idx: int, total: int,
     # walls, artifact moves, all of them. Only the FAR edges trim now.
     rows = [r for r, row in enumerate(struct) if any(v > 0 for v in row)]
     cols = [c for row in struct for c, v in enumerate(row) if v > 0]
+    # artifacts can stand BEYOND the structure's content (interactables grid
+    # larger than the built floor) — cropping to structure alone stranded 20
+    # of them outside their own halls (measured 2026-08-29). The tile covers
+    # every artifact cell too.
+    for r, irow in enumerate(inter):
+        for c, v in enumerate(irow):
+            if str(v).strip() and str(v).strip() != "0":
+                rows.append(r)
+                cols.append(c)
     r0, r1 = 0, max(rows)
     c0, c1 = 0, max(cols)
     tile = []
     for r in range(r0, r1 + 1):
         line = []
         for c in range(c0, c1 + 1):
-            v = struct[r][c] if c < len(struct[r]) else 0
+            v = struct[r][c] if r < len(struct) and c < len(struct[r]) else 0
             # EVERY interior cell is FLOOR (Palle: "there is a gap in the
             # floor between segments"): the grid's height-0 cells (teleporter
             # zones, designed voids) are pits in a museum — the hall floors
@@ -213,6 +222,186 @@ def spine_names() -> list:
     return [str(r["name"]) for r in sorted(rows, key=lambda r: r.get("order", 0))]
 
 
+# --- THE WIDTH-AND-WALLS RULING (2026-08-29, Palle: "all maps use be between
+# 13 - 19 wide, all after color must have outer walls and if they have lit
+# [little] structure give them museum structure") ---------------------------
+#
+# Derivation-side only: the SOURCE maps are untouched; the ruling normalizes
+# the derived hall. Post-color chapters (change onward) additionally get an
+# outer wall ring — with centred 3-cell door gaps on the walk axis, exactly
+# the idiom TemplateMap_Promenade13's own walls use ("#####...#####"), so a
+# ring never seals a hall. Bare halls (zero interior walls) get the museum's
+# pier colonnade from the same templates ("..#...#...#.." every 4th row).
+
+def _rotate_cw(tile: list, arts: list) -> list:
+    h = len(tile)
+    new = [[tile[h - 1 - r2][c2] for r2 in range(h)] for c2 in range(len(tile[0]))]
+    for a in arts:
+        x, y = a["tile_cell"]
+        a["tile_cell"] = [h - 1 - y, x]
+        a["cell"] = list(a["tile_cell"])
+        a["rotation"] = (int(a.get("rotation", 0)) + 90) % 360
+    return new
+
+
+def normalize_row(row: dict, post_color: bool, dirlocked: bool) -> None:
+    tile = row["tile"]
+    arts = row["artifacts"]
+    W = len(tile[0]) if tile else 0
+    H = len(tile)
+
+    # rotate a fresh post-color hall when its depth CAN be a legal width but
+    # its width cannot — landing anywhere in 11..19 works (<=17 gets the
+    # expanding ring, 18-19 the in-place one)
+    if post_color and not dirlocked and W > 19 and 11 <= H <= 19:
+        tile = _rotate_cw(tile, arts)
+        W, H = H, W
+
+    def _walled() -> bool:
+        walls = 0
+        border = 0
+        for r in range(H):
+            for c in range(W):
+                if r in (0, H - 1) or c in (0, W - 1):
+                    border += 1
+                    if tile[r][c] == "4":
+                        walls += 1
+        return walls >= 0.9 * border
+
+    ring_needed = post_color and not _walled()
+    # pad RIGHT with floor — right-only, so cell (0,0) stays cell (0,0) and
+    # nothing is re-addressed by the padding itself. The target depends on
+    # whether a ring is coming: an expanding ring adds 2 to the width.
+    lo = 11 if (ring_needed and W <= 17) else 13
+    if W < lo:
+        pad = lo - W
+        for r, line in enumerate(tile):
+            if post_color and not ring_needed:
+                # an ALREADY-WALLED narrow hall grows a closed shelf: floor
+                # strip, walled on its outer edge and its ends
+                fill = "4" if r in (0, H - 1) else "1"
+                line.extend([fill] * (pad - 1) + ["4"])
+            else:
+                line.extend(["1"] * pad)
+        W = lo
+
+    art_cells = {tuple(a["tile_cell"]) for a in arts}
+    if post_color:
+        gap = set(range((W - 3) // 2, (W - 3) // 2 + 3))
+        if ring_needed:
+            if W <= 17:
+                # EXPAND: wrap the ring outside; the door gaps north and south
+                # are FLOOR thresholds (the templates' "#####...#####" idiom),
+                # never holes
+                top = ["4" if c not in {g + 1 for g in gap} else "1" for c in range(W + 2)]
+                bot = list(top)
+                tile = [top] + [["4"] + line + ["4"] for line in tile] + [bot]
+                for a in arts:
+                    a["tile_cell"] = [a["tile_cell"][0] + 1, a["tile_cell"][1] + 1]
+                    a["cell"] = list(a["tile_cell"])
+                W += 2
+                H += 2
+            else:
+                # IN-PLACE: the band has no room to grow — border floor
+                # becomes wall, artifact cells and the door gaps spared
+                for r in range(H):
+                    for c in range(W):
+                        if r not in (0, H - 1) and c not in (0, W - 1):
+                            continue
+                        if (c, r) in art_cells:
+                            continue
+                        if r in (0, H - 1) and c in gap:
+                            continue
+                        tile[r][c] = "4"
+        art_cells = {tuple(a["tile_cell"]) for a in arts}
+        # MUSEUM STRUCTURE for bare halls: the templates' pier colonnade —
+        # piers on the 4-beat inside the ring, never on or beside a body
+        interior_walls = sum(1 for r in range(1, H - 1) for c in range(1, W - 1) if tile[r][c] == "4")
+        if interior_walls == 0 and H >= 8:
+            near = set()
+            for (x, y) in art_cells:
+                for dx in (-1, 0, 1):
+                    for dy in (-1, 0, 1):
+                        near.add((x + dx, y + dy))
+            stamped = 0
+            for r in range(3, H - 2, 4):
+                for c in range(2, W - 2, 4):
+                    if tile[r][c] == "1" and (c, r) not in near:
+                        tile[r][c] = "4"
+                        stamped += 1
+            if stamped:
+                row["dressing"] = "piers: template colonnade x%d (bare map)" % stamped
+
+    if post_color:
+        # NO SEALED HALLS: the walk axis runs north-south, and a hall whose
+        # first or last row is solid wall is a box (the walkable-end-to-end
+        # scar). Carve the templates' centred 3-cell door, up to two rows
+        # deep where the map's own wall is thick.
+        gap = range((W - 3) // 2, (W - 3) // 2 + 3)
+        for edge, step in ((0, 1), (H - 1, -1)):
+            if all(tile[edge][c] == "4" for c in range(W)):
+                for c in gap:
+                    for depth in (0, 1):
+                        rr = edge + step * depth
+                        if 0 <= rr < H and tile[rr][c] == "4":
+                            tile[rr][c] = "1"
+        # AND A WAY THROUGH: a door onto a blocked interior is still a box.
+        # Dijkstra from the north door to the south door, floor nearly free,
+        # holes cheap to bridge, walls dear to breach, artifact cells never —
+        # then carve the minimal path to floor. Measured before this existed:
+        # 48 of the new halls had doors and no way between them.
+        import heapq
+        def cost(rr, cc):
+            v = tile[rr][cc]
+            if (cc, rr) in art_cells:
+                return 100000
+            if v == "4":
+                return 60
+            if v == "0":
+                return 25
+            return 1
+        start = (0, W // 2)
+        goal = (H - 1, W // 2)
+        best = {start: cost(*start)}
+        prev = {}
+        pq = [(best[start], start)]
+        while pq:
+            d, (rr, cc) = heapq.heappop(pq)
+            if (rr, cc) == goal:
+                break
+            if d > best.get((rr, cc), 1 << 30):
+                continue
+            for dr, dc in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+                n = (rr + dr, cc + dc)
+                if 0 <= n[0] < H and 0 <= n[1] < W:
+                    nd = d + cost(*n)
+                    if nd < best.get(n, 1 << 30):
+                        best[n] = nd
+                        prev[n] = (rr, cc)
+                        heapq.heappush(pq, (nd, n))
+        carved = 0
+        node = goal
+        while node in prev or node == start:
+            rr, cc = node
+            if tile[rr][cc] in ("4", "0") and (cc, rr) not in art_cells:
+                tile[rr][cc] = "1"
+                carved += 1
+            if node == start:
+                break
+            node = prev[node]
+        if carved:
+            row["dressing"] = (row.get("dressing", "") + (" | " if "dressing" in row else "")
+                               + "channel: %d cell(s) carved for the walk" % carved)
+
+    if W > 19 or W < 13:
+        print(f"    RULING VIOLATION {row['map']}: final width {W} outside 13-19 (content too large to conform)")
+
+    row["tile"] = tile
+    row["h"] = H
+    row["room"] = {"w": W, "h": H}
+    row["interior_count"] = sum(1 for line in tile for v in line if v == "1")
+
+
 def build(plan: dict) -> dict:
     out = copy.deepcopy(plan)
 
@@ -244,6 +433,13 @@ def build(plan: dict) -> dict:
         museum_key = rows_for[0]["museum"]
         new_rows = [derive_row(p, m, museum_key, i, len(pairs), chapter)
                     for i, (p, m) in enumerate(pairs)]
+        # the width-and-walls ruling: 13-19 wide everywhere; ring + piers
+        # for every chapter after color (the ruling's own boundary)
+        order = spine_names()
+        post = chapter in order and order.index(chapter) > order.index("color")
+        for row in new_rows:
+            dirlocked = any(k in row for k in ("basin", "passage", "simulation"))
+            normalize_row(row, post, dirlocked)
         out["plans"] = [r for r in out["plans"] if r.get("sequence") != chapter] + new_rows
         print(f"  {chapter}: {len(new_rows)} map-authored hall(s) replace {len(rows_for)} dealt row(s)")
         for row in new_rows:
