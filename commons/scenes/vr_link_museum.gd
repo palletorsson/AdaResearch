@@ -352,6 +352,14 @@ func _pump(delta: float) -> void:
 
 
 ## THE ONE LINE THAT MAKES THE MUSEUM FOLLOW. Everything else here is a camera.
+## Is the headset actually IN the endless museum? The pose carries a `hall` only
+## when the museum's segment list claims the player's z, so this is the museum's
+## own answer rather than a guess from the scene name.
+func _in_museum() -> bool:
+	var h: Variant = _pose.get("hall")
+	return h is Dictionary and String((h as Dictionary).get("pearl", "")) != ""
+
+
 func _stale_ms() -> int:
 	if not _have_pose:
 		return -1
@@ -359,12 +367,22 @@ func _stale_ms() -> int:
 
 
 func _drive() -> void:
+	# the body is only shown when it is somewhere this view can honestly place it
+	_mark.visible = _have_pose and _stale_ms() <= STALE_MS and _in_museum()
 	if not _have_pose:
 		return
 	# DO NOT DRIVE THE MUSEUM FROM A CORPSE. Writing a stale coordinate every
 	# frame pins the local museum to a hall the player left long ago and fights
 	# nothing, so it looks exactly like a working link showing a still person.
 	if _stale_ms() > STALE_MS:
+		return
+	# AND NOT FROM A FOREIGN COORDINATE SPACE. If the headset is not in the
+	# museum, its position is in some other map's frame and means NOTHING here.
+	# Driving the local museum to it streams the walker to an arbitrary z and
+	# drops the marker into a hall chosen by coincidence — which is how this
+	# looked "like nothing was happening" while the link was in fact perfect,
+	# at 14.6 Hz, with the headset sitting in VRStaging.
+	if not _in_museum():
 		return
 	var p: Vector3 = _vec(_pose.get("pos", []))
 	_mark.global_position = p
@@ -444,14 +462,26 @@ func _paint() -> void:
 			lines.append("!! the position below is the LAST one received, not where anyone is now")
 		var p: Vector3 = _vec(_pose.get("pos", []))
 		var hall: Variant = _pose.get("hall")
-		if hall is Dictionary and String((hall as Dictionary).get("pearl", "")) != "":
+		if _in_museum():
 			var h: Dictionary = hall
 			lines.append("hall   %s   [%s]  #%d   %.0f%% through" % [
 				String(h.get("map", "")), String(h.get("pearl", "")),
 				int(h.get("index", -1)), float(h.get("through", 0.0)) * 100.0])
-		lines.append("pos    %7.2f %6.2f %8.2f" % [p.x, p.y, p.z])
-		lines.append("local  %s" % ("driving the museum's walker"
-			if _find_player() != null else "no museum player yet"))
+			lines.append("pos    %7.2f %6.2f %8.2f" % [p.x, p.y, p.z])
+			lines.append("local  %s" % ("driving the museum's walker"
+				if _find_player() != null else "no museum player yet"))
+		else:
+			# SAY WHERE THEY ACTUALLY ARE. Silently drawing a marker in the wrong
+			# frame is worse than drawing nothing.
+			lines.append("")
+			lines.append("!!  the headset is in  %s" % String(_pose.get("map", "?")))
+			lines.append("!!  that is NOT the endless museum, so its coordinates")
+			lines.append("!!  mean nothing in this view. Walk into the museum in VR.")
+			lines.append("!!  For an authored map, use instead:")
+			lines.append("!!     res://commons/scenes/vr_link_viewer.tscn")
+			lines.append("")
+			lines.append("headset pos %7.2f %6.2f %8.2f   (in %s's own frame)"
+				% [p.x, p.y, p.z, String(_pose.get("map", "?"))])
 	lines.append("")
 	lines.append("[1] follow  [2] eye  [3] orbit   wheel zoom   [P]/[O] plan zoom     mode %d" % _mode)
 	_text.text = "\n".join(lines)
