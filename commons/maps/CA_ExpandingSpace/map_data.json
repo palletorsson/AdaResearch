@@ -1,85 +1,107 @@
 {
-  "map_info": {
-    "title": "Expanding Space",
-    "name": "CA_ExpandingSpace",
-    "lookup_name": "CA_ExpandingSpace",
-    "description": "Expanding into space â€” 3D tree growth, crossway patterns, decaying bridge, and fractal chair exploration",
-    "version": "1.0",
-    "format": "json",
-    "dimensions": {
-      "width": 7,
-      "depth": 9,
-      "max_height": 2
-    },
-    "metadata": {
-      "difficulty": "intermediate",
-      "category": "cellular_automata",
-      "estimated_time": "5 minutes",
-      "learning_objectives": ["Growth algorithms","Traffic simulation","3D structures"]
-    }
+ "map_info": {
+  "title": "Expanding Space",
+  "name": "CA_ExpandingSpace",
+  "lookup_name": "CA_ExpandingSpace",
+  "description": "Expanding into space â€” 3D tree growth, crossway patterns, decaying bridge, and fractal chair exploration",
+  "version": "1.0",
+  "format": "json",
+  "dimensions": {
+   "width": 13,
+   "depth": 10,
+   "max_height": 3
   },
-  "utility_definitions": {
-    "t": {
-      "type": "teleporter",
-      "name": "Next",
-      "description": "Continue to next step",
-      "properties": {
-        "action": "next_in_sequence"
-      }
-    }
-  },
-  "lighting": {
-    "ambient_color": [0.4,0.4,0.5],
-    "ambient_energy": 0.6,
-    "directional_light": {
-      "enabled": true,
-      "direction": [-0.4,-0.7,-0.4],
-      "color": [1.0,0.9,0.8],
-      "energy": 1.2
-    }
-  },
-  "settings": {
-    "cube_size": 1.0,
-    "gutter": 0.0,
-    "show_grid": true,
-    "enable_physics": true,
-    "auto_reveal_on_entry": false,
-    "initial_tile_visibility": "hidden_except_corners",
-    "background": {
-      "type": "sky",
-      "color": [0.2,0.3,0.7]
-    }
-  },
-  "layers": {
-    "structure": [
-      ["1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1"],
-      ["1","1","1","0","0","1","1"],
-      ["1","1","1","1","1","1","1"],
-      ["1","1","0","0","0","1","1"],
-      ["1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","0","1"],
-      ["0","0","1","0","1","1","1"]
-    ],
-    "utilities": [
-      ["sp"," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," ","t"," "],
-      [" "," "," "," "," "," "," "]
-    ],
-    "interactables": [
-      [" "," "," "," "," "," "," "],
-      [" "," "," ","ca_chair_test:90"," ","catalyst_vent:0:0#emit_interval_s:2.5#wave_size:3#start_delay_s:5.0#sequence:auto"," "],
-      ["catalyst_prompter_box:0:0#emergence:doors#sequence:auto#lease_s:45"," ","dark_sphere"," "," "," "," "],
-      [" "," "," ","cellular_automata_3d_tree:90"," ",""," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," ","crossway_ca:0"," "," ","decaying_bridge:90"," "]
-    ]
+  "metadata": {
+   "difficulty": "intermediate",
+   "category": "cellular_automata",
+   "estimated_time": "5 minutes",
+   "learning_objectives": [ "Growth algorithms", "Traffic simulation", "3D structures" ]
   }
+ },
+ "utility_definitions": {
+  "t": {
+   "type": "teleporter",
+   "name": "Next",
+   "description": "Continue to next step",
+   "properties": {
+    "action": "next_in_sequence"
+   }
+  }
+ },
+ "lighting": {
+  "ambient_color": [
+   0.4,
+   0.4,
+   0.5
+  ],
+  "ambient_energy": 0.6,
+  "directional_light": {
+   "enabled": true,
+   "direction": [
+    -0.4,
+    -0.7,
+    -0.4
+   ],
+   "color": [
+    1.0,
+    0.9,
+    0.8
+   ],
+   "energy": 1.2
+  }
+ },
+ "settings": {
+  "cube_size": 1.0,
+  "gutter": 0.0,
+  "show_grid": true,
+  "enable_physics": true,
+  "auto_reveal_on_entry": false,
+  "initial_tile_visibility": "hidden_except_corners",
+  "background": {
+   "type": "sky",
+   "color": [
+    0.2,
+    0.3,
+    0.7
+   ]
+  }
+ },
+ "layers": {
+  "structure": [
+   [ "w", "w", "w", "w", "w", "1", "1", "1", "w", "w", "w", "w", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "0", "0", "1", "1", "1", "1", "w", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "0", "0", "0", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "0", "1", "1", "1", "w", "1", "w" ],
+   [ "w", "0", "0", "1", "0", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "w", "w", "w", "w", "1", "1", "1", "w", "w", "w", "w", "w" ]
+  ],
+  "utilities": [
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "sp", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "t", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ]
+  ],
+  "interactables": [
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "ca_chair_test:90", "", "catalyst_vent:0:0#emit_interval_s:2.5#wave_size:3#start_delay_s:5.0#sequence:auto", "", "", "", "", "", "" ],
+   [ "", "catalyst_prompter_box:0:0#emergence:doors#sequence:auto#lease_s:45", "", "dark_sphere", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "cellular_automata_3d_tree:90", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "crossway_ca:0", "", "", "decaying_bridge:90", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ]
+  ]
+ }
 }

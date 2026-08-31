@@ -1,399 +1,75 @@
 {
-	"map_info": {
-		"name": "Rhizome Network",
-		"lookup_name": "SpeculativeComputation_Rhizome_Network",
-		"description": "An organic cave with four interconnected chambers separated by wall bridges. No hierarchy \u2014 multiple paths connect every chamber. Rhizomatic.\n\n[Placement applied hybrid engine \u2014 constraint 0.960\u21920.960, walkability 0.399\u21920.722]",
-		"version": "placed-hybrid",
-		"format": "json",
-		"dimensions": {
-			"width": 10,
-			"depth": 10,
-			"max_height": 5
-		},
-		"metadata": {
-			"difficulty": "advanced",
-			"category": "speculative_computation",
-			"spatial_temperature": 0.75,
-			"design_notes": "Four chambers in corners connected by narrow passages. Central void. No single path dominates \u2014 Deleuze/Guattari spatial."
-		},
-		"title": "Networks Without Hierarchy"
-	},
-	"utility_definitions": {
-		"t": {
-			"type": "teleporter",
-			"name": "Next",
-			"description": "Continue to next step",
-			"properties": {
-				"action": "next_in_sequence"
-			}
-		}
-	},
-	"layers": {
-		"structure": [
-			[
-				"1",
-				"1",
-				"5",
-				"5",
-				"0",
-				"0",
-				"5",
-				"5",
-				"1",
-				"1"
-			],
-			[
-				"1",
-				"1",
-				"1",
-				"5",
-				"5",
-				"5",
-				"5",
-				"1",
-				"1",
-				"1"
-			],
-			[
-				"5",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"5"
-			],
-			[
-				"5",
-				"5",
-				"1",
-				"1",
-				"5",
-				"5",
-				"1",
-				"1",
-				"5",
-				"5"
-			],
-			[
-				"0",
-				"5",
-				"1",
-				"5",
-				"0",
-				"0",
-				"5",
-				"1",
-				"5",
-				"0"
-			],
-			[
-				"0",
-				"5",
-				"1",
-				"5",
-				"0",
-				"0",
-				"5",
-				"1",
-				"5",
-				"0"
-			],
-			[
-				"5",
-				"5",
-				"1",
-				"1",
-				"5",
-				"5",
-				"1",
-				"1",
-				"5",
-				"5"
-			],
-			[
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"5"
-			],
-			[
-				"1",
-				"0",
-				"1",
-				"5",
-				"5",
-				"5",
-				"5",
-				"1",
-				"1",
-				"1"
-			],
-			[
-				"1",
-				"1",
-				"1",
-				"5",
-				"0",
-				"0",
-				"5",
-				"5",
-				"1",
-				"1"
-			]
-		],
-		"utilities": [
-			[
-				"s",
-				"an",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				"3t:ANY POINT CONNECTS TO ANY OTHER",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				"3t:NO CENTER",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				"3t:NO HIERARCHY",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				"3t:THE MAP IS NOT THE TERRITORY",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				"t",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				"sp",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			]
-		],
-		"interactables": [
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				"rhizome_cave_demo",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				"rhizome_grower",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			]
-		]
-	}
+ "map_info": {
+  "name": "Rhizome Network",
+  "lookup_name": "SpeculativeComputation_Rhizome_Network",
+  "description": "An organic cave with four interconnected chambers separated by wall bridges. No hierarchy — multiple paths connect every chamber. Rhizomatic.\n\n[Placement applied hybrid engine — constraint 0.960→0.960, walkability 0.399→0.722]",
+  "version": "placed-hybrid",
+  "format": "json",
+  "dimensions": {
+   "width": 13,
+   "depth": 12,
+   "max_height": 5
+  },
+  "metadata": {
+   "difficulty": "advanced",
+   "category": "speculative_computation",
+   "spatial_temperature": 0.75,
+   "design_notes": "Four chambers in corners connected by narrow passages. Central void. No single path dominates — Deleuze/Guattari spatial."
+  },
+  "title": "Networks Without Hierarchy"
+ },
+ "utility_definitions": {
+  "t": {
+   "type": "teleporter",
+   "name": "Next",
+   "description": "Continue to next step",
+   "properties": {
+    "action": "next_in_sequence"
+   }
+  }
+ },
+ "layers": {
+  "structure": [
+   [ "w", "w", "w", "w", "w", "1", "1", "1", "w", "w", "w", "w", "w" ],
+   [ "w", "1", "1", "5", "5", "0", "1", "5", "5", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "5", "5", "1", "5", "1", "1", "1", "1", "w" ],
+   [ "w", "5", "1", "1", "1", "1", "1", "1", "1", "1", "5", "1", "w" ],
+   [ "w", "5", "5", "1", "1", "5", "5", "1", "1", "5", "5", "1", "w" ],
+   [ "w", "0", "5", "1", "5", "0", "0", "5", "1", "5", "0", "1", "w" ],
+   [ "w", "0", "5", "1", "5", "0", "0", "5", "1", "5", "0", "1", "w" ],
+   [ "w", "5", "5", "1", "1", "5", "5", "1", "1", "5", "5", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "5", "1", "w" ],
+   [ "w", "1", "0", "1", "5", "5", "1", "5", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "5", "0", "1", "5", "5", "1", "1", "1", "w" ],
+   [ "w", "w", "w", "w", "w", "1", "1", "1", "w", "w", "w", "w", "w" ]
+  ],
+  "utilities": [
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "s", "an", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "3t:ANY POINT CONNECTS TO ANY OTHER", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "3t:NO CENTER", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "3t:NO HIERARCHY", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "3t:THE MAP IS NOT THE TERRITORY", "", "", "", "", "", "" ],
+   [ "", "", "t", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "sp", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ]
+  ],
+  "interactables": [
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "rhizome_cave_demo", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "rhizome_grower", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ]
+  ]
+ }
 }

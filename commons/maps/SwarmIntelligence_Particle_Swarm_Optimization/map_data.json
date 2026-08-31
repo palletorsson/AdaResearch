@@ -1,66 +1,72 @@
 {
-  "map_info": {
-    "name": "Particle Swarm Optimization",
-    "lookup_name": "SwarmIntelligence_Particle_Swarm_Optimization",
-    "description": "A landscape descending to a central valley optimum. Heights represent the fitness landscape that particles explore.\n\n[Placement applied hybrid engine — constraint 0.905→0.960, walkability 0.610→0.657]",
-    "version": "placed-hybrid",
-    "format": "json",
-    "dimensions": {
-      "width": 9,
-      "depth": 9,
-      "max_height": 1
-    },
-    "metadata": {
-      "difficulty": "intermediate",
-      "category": "swarm_intelligence",
-      "spatial_temperature": 0.6,
-      "design_notes": "Concentric height rings descend from h4 rim to h1 center. The optimum is the valley floor."
-    },
-    "title": "Particle Swarm Optimization"
+ "map_info": {
+  "name": "Particle Swarm Optimization",
+  "lookup_name": "SwarmIntelligence_Particle_Swarm_Optimization",
+  "description": "A landscape descending to a central valley optimum. Heights represent the fitness landscape that particles explore.\n\n[Placement applied hybrid engine — constraint 0.905→0.960, walkability 0.610→0.657]",
+  "version": "placed-hybrid",
+  "format": "json",
+  "dimensions": {
+   "width": 13,
+   "depth": 11,
+   "max_height": 3
   },
-  "utility_definitions": {
-    "t": {
-      "type": "teleporter",
-      "name": "Next",
-      "description": "Continue to next step",
-      "properties": {
-        "action": "next_in_sequence"
-      }
-    }
+  "metadata": {
+   "difficulty": "intermediate",
+   "category": "swarm_intelligence",
+   "spatial_temperature": 0.6,
+   "design_notes": "Concentric height rings descend from h4 rim to h1 center. The optimum is the valley floor."
   },
-  "layers": {
-    "structure": [
-      ["1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","0","1"],
-      ["1","1","1","1","1","1","1","1","1"]
-    ],
-    "utilities": [
-      ["s"," "," "," "," "," "," "," "," "],
-      ["an"," ","wp"," ","wp"," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," ","wp","t"," "],
-      [" "," "," "," "," "," ","wp:90","sp"," "]
-    ],
-    "interactables": [
-      [" "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "],
-      [" "," ","self_organizing_patterns:90"," "," "," "," "," "," "],
-      [" "," "," ","fitness_landscape_politics"," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "]
-    ]
+  "title": "Particle Swarm Optimization"
+ },
+ "utility_definitions": {
+  "t": {
+   "type": "teleporter",
+   "name": "Next",
+   "description": "Continue to next step",
+   "properties": {
+    "action": "next_in_sequence"
+   }
   }
+ },
+ "layers": {
+  "structure": [
+   [ "w", "w", "w", "w", "w", "1", "1", "1", "w", "w", "w", "w", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "w", "1", "1", "1", "w", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "w", "1", "1", "1", "w", "1", "1", "1", "w", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "0", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "w", "w", "w", "w", "1", "1", "1", "w", "w", "w", "w", "w" ]
+  ],
+  "utilities": [
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "s", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "an", "", "wp", "", "wp", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "wp", "t", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "wp:90", "sp", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ]
+  ],
+  "interactables": [
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "self_organizing_patterns:90", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "fitness_landscape_politics", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ]
+  ]
+ }
 }

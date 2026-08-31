@@ -1,102 +1,124 @@
 {
-  "map_info": {
-    "name": "01 Grammar Lab",
-    "lookup_name": "LSystems_Grammar_Lab",
-    "description": "The entire L-Systems concept in miniature. Axiom becomes rules, rules become string, string becomes tree. A small lab previewing everything that follows: growth, grammar, architecture, competition, and the living world.",
-    "version": "1.0",
-    "format": "json",
-    "dimensions": {
-      "width": 8,
-      "depth": 10,
-      "max_height": 2
-    },
-    "metadata": {
-      "difficulty": "beginner",
-      "category": "lsystems",
-      "estimated_time": "4-6 minutes",
-      "learning_objectives": ["String rewriting as generative process","Axiom → rules → generations → shape","Turtle graphics interpretation","L-system presets: Koch, Sierpinski, Dragon, Plant"]
-    },
-    "title": "Grammar Lab"
+ "map_info": {
+  "name": "01 Grammar Lab",
+  "lookup_name": "LSystems_Grammar_Lab",
+  "description": "The entire L-Systems concept in miniature. Axiom becomes rules, rules become string, string becomes tree. A small lab previewing everything that follows: growth, grammar, architecture, competition, and the living world.",
+  "version": "1.0",
+  "format": "json",
+  "dimensions": {
+   "width": 13,
+   "depth": 12,
+   "max_height": 3
   },
-  "utility_definitions": {
-    "t": {
-      "type": "teleporter",
-      "name": "Growth",
-      "description": "Continue to watch trees grow",
-      "properties": {
-        "action": "next_in_sequence"
-      }
-    },
-    "s": {
-      "properties": {
-        "height": 5.5
-      }
-    }
+  "metadata": {
+   "difficulty": "beginner",
+   "category": "lsystems",
+   "estimated_time": "4-6 minutes",
+   "learning_objectives": [ "String rewriting as generative process", "Axiom → rules → generations → shape", "Turtle graphics interpretation", "L-system presets: Koch, Sierpinski, Dragon, Plant" ]
   },
-  "documentation": {
-    "summary": "LSystems_Grammar_Lab — The whole concept in one room",
-    "layout": "8x10 compact lab. Raised teaching platform (h2) at north, demonstration floor at south.",
-    "objective": "Understand the L-system pipeline: axiom string → production rules → iterated rewriting → turtle graphics → tree/curve.",
-    "key_elements": ["`lsystem_editor` at (4,3) — interactive editor with 7 presets","`lsystem_tree` at (2,5) — generated tree to observe","`fractal_lsystem_string` at (6,5) — the string itself, visible","`dark_sphere` at (4,7) — visual anchor"]
+  "title": "Grammar Lab"
+ },
+ "utility_definitions": {
+  "t": {
+   "type": "teleporter",
+   "name": "Growth",
+   "description": "Continue to watch trees grow",
+   "properties": {
+    "action": "next_in_sequence"
+   }
   },
-  "lighting": {
-    "ambient_color": [0.35,0.4,0.45],
-    "ambient_energy": 0.7,
-    "directional_light": {
-      "enabled": true,
-      "direction": [-0.3,-0.8,-0.3],
-      "color": [0.95,0.95,0.9],
-      "energy": 1.0
-    }
-  },
-  "settings": {
-    "cube_size": 1.0,
-    "gutter": 0.0,
-    "show_grid": true,
-    "enable_physics": true,
-    "auto_reveal_on_entry": false,
-    "initial_tile_visibility": "hidden_except_corners",
-    "background": {
-      "type": "sky",
-      "color": [0.15,0.25,0.5]
-    }
-  },
-  "layers": {
-    "structure": [
-      ["2","2","2","2","2","2","2","2"],
-      ["2","2","2","2","2","2","2","2"],
-      ["1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","0","1","1","1"],
-      ["1","1","1","1","1","1","1","1"]
-    ],
-    "utilities": [
-      [" "," "," "," "," "," "," "," "],
-      [" "," "," ","an"," "," "," "," "],
-      [" "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "],
-      [" "," "," "," ","t"," "," "," "],
-      [" "," "," "," "," ","s"," "," "]
-    ],
-    "interactables": [
-      [" "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," ","science_screen:180:1.5#mode:trace"],
-      [" "," "," "," ","lsystem_editor:0:0.5#grammar:koch"," "," "," "],
-      [" ","grammar_provenance"," "," "," "," "," "," "],
-      [" "," ","lsystem_tree"," "," "," ","fractal_lsystem_string"," "],
-      [" "," "," "," "," "," "," "," "],
-      [" "," "," "," ","dark_sphere"," "," "," "],
-      [" "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "]
-    ]
+  "s": {
+   "properties": {
+    "height": 5.5
+   }
   }
+ },
+ "documentation": {
+  "summary": "LSystems_Grammar_Lab — The whole concept in one room",
+  "layout": "8x10 compact lab. Raised teaching platform (h2) at north, demonstration floor at south.",
+  "objective": "Understand the L-system pipeline: axiom string → production rules → iterated rewriting → turtle graphics → tree/curve.",
+  "key_elements": [ "`lsystem_editor` at (4,3) — interactive editor with 7 presets", "`lsystem_tree` at (2,5) — generated tree to observe", "`fractal_lsystem_string` at (6,5) — the string itself, visible", "`dark_sphere` at (4,7) — visual anchor" ]
+ },
+ "lighting": {
+  "ambient_color": [
+   0.35,
+   0.4,
+   0.45
+  ],
+  "ambient_energy": 0.7,
+  "directional_light": {
+   "enabled": true,
+   "direction": [
+    -0.3,
+    -0.8,
+    -0.3
+   ],
+   "color": [
+    0.95,
+    0.95,
+    0.9
+   ],
+   "energy": 1.0
+  }
+ },
+ "settings": {
+  "cube_size": 1.0,
+  "gutter": 0.0,
+  "show_grid": true,
+  "enable_physics": true,
+  "auto_reveal_on_entry": false,
+  "initial_tile_visibility": "hidden_except_corners",
+  "background": {
+   "type": "sky",
+   "color": [
+    0.15,
+    0.25,
+    0.5
+   ]
+  }
+ },
+ "layers": {
+  "structure": [
+   [ "w", "w", "w", "w", "w", "1", "1", "1", "w", "w", "w", "w", "w" ],
+   [ "w", "2", "2", "2", "2", "2", "1", "2", "2", "1", "1", "1", "w" ],
+   [ "w", "2", "2", "2", "2", "2", "1", "2", "2", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "0", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "w", "w", "w", "w", "1", "1", "1", "w", "w", "w", "w", "w" ]
+  ],
+  "utilities": [
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "an", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "t", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "s", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ]
+  ],
+  "interactables": [
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "science_screen:180:1.5#mode:trace", "", "", "", "" ],
+   [ "", "", "", "", "", "lsystem_editor:0:0.5#grammar:koch", "", "", "", "", "", "", "" ],
+   [ "", "", "grammar_provenance", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "lsystem_tree", "", "", "", "fractal_lsystem_string", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "dark_sphere", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ]
+  ]
+ }
 }

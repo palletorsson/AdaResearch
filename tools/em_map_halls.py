@@ -244,18 +244,27 @@ def _rotate_cw(tile: list, arts: list) -> list:
     return new
 
 
-def normalize_row(row: dict, post_color: bool, dirlocked: bool) -> None:
+def normalize_row(row: dict, post_color: bool, dirlocked: bool,
+                  width_exempt: bool = False) -> None:
     tile = row["tile"]
     arts = row["artifacts"]
     W = len(tile[0]) if tile else 0
     H = len(tile)
+    # the ruling's ledger: everything done to this hall, so a writer can
+    # replay the SAME transforms onto the source map (one implementation,
+    # the long_museum drift scar) — em_ruling_to_maps.py reads it
+    ruling = {"src_w": W, "src_h": H, "rotated": False, "pad": 0,
+              "pad_closed": False, "ring": None}
+    row["_ruling"] = ruling
 
     # rotate a fresh post-color hall when its depth CAN be a legal width but
     # its width cannot — landing anywhere in 11..19 works (<=17 gets the
-    # expanding ring, 18-19 the in-place one)
-    if post_color and not dirlocked and W > 19 and 11 <= H <= 19:
+    # expanding ring, 18-19 the in-place one). Width-exempt chapters (forces,
+    # 2026-08-29: "force are not 13 to 19") keep their native orientation.
+    if post_color and not dirlocked and not width_exempt and W > 19 and 11 <= H <= 19:
         tile = _rotate_cw(tile, arts)
         W, H = H, W
+        ruling["rotated"] = True
 
     def _walled() -> bool:
         walls = 0
@@ -266,13 +275,19 @@ def normalize_row(row: dict, post_color: bool, dirlocked: bool) -> None:
                     border += 1
                     if tile[r][c] == "4":
                         walls += 1
-        return walls >= 0.9 * border
+        # absolute allowance, not a fraction: a ring this pass built carries
+        # two 3-cell doors, which is 12.5%% of a small hall's border — the
+        # old 0.9 fraction re-ringed our own rings (the idempotence gate
+        # caught 85 double-ringed halls, 2026-08-29)
+        return walls >= border - 8
 
     ring_needed = post_color and not _walled()
     # pad RIGHT with floor — right-only, so cell (0,0) stays cell (0,0) and
     # nothing is re-addressed by the padding itself. The target depends on
     # whether a ring is coming: an expanding ring adds 2 to the width.
     lo = 11 if (ring_needed and W <= 17) else 13
+    if width_exempt:
+        lo = 0
     if W < lo:
         pad = lo - W
         for r, line in enumerate(tile):
@@ -283,13 +298,15 @@ def normalize_row(row: dict, post_color: bool, dirlocked: bool) -> None:
                 line.extend([fill] * (pad - 1) + ["4"])
             else:
                 line.extend(["1"] * pad)
+        ruling["pad"] = pad
+        ruling["pad_closed"] = post_color and not ring_needed
         W = lo
 
     art_cells = {tuple(a["tile_cell"]) for a in arts}
     if post_color:
         gap = set(range((W - 3) // 2, (W - 3) // 2 + 3))
         if ring_needed:
-            if W <= 17:
+            if W <= 17 and not width_exempt:
                 # EXPAND: wrap the ring outside; the door gaps north and south
                 # are FLOOR thresholds (the templates' "#####...#####" idiom),
                 # never holes
@@ -301,6 +318,7 @@ def normalize_row(row: dict, post_color: bool, dirlocked: bool) -> None:
                     a["cell"] = list(a["tile_cell"])
                 W += 2
                 H += 2
+                ruling["ring"] = "expand"
             else:
                 # IN-PLACE: the band has no room to grow — border floor
                 # becomes wall, artifact cells and the door gaps spared
@@ -313,6 +331,7 @@ def normalize_row(row: dict, post_color: bool, dirlocked: bool) -> None:
                         if r in (0, H - 1) and c in gap:
                             continue
                         tile[r][c] = "4"
+                ruling["ring"] = "inplace"
         art_cells = {tuple(a["tile_cell"]) for a in arts}
         # MUSEUM STRUCTURE for bare halls: the templates' pier colonnade —
         # piers on the 4-beat inside the ring, never on or beside a body
@@ -393,7 +412,7 @@ def normalize_row(row: dict, post_color: bool, dirlocked: bool) -> None:
             row["dressing"] = (row.get("dressing", "") + (" | " if "dressing" in row else "")
                                + "channel: %d cell(s) carved for the walk" % carved)
 
-    if W > 19 or W < 13:
+    if (W > 19 or W < 13) and not width_exempt:
         print(f"    RULING VIOLATION {row['map']}: final width {W} outside 13-19 (content too large to conform)")
 
     row["tile"] = tile
@@ -439,7 +458,7 @@ def build(plan: dict) -> dict:
         post = chapter in order and order.index(chapter) > order.index("color")
         for row in new_rows:
             dirlocked = any(k in row for k in ("basin", "passage", "simulation"))
-            normalize_row(row, post, dirlocked)
+            normalize_row(row, post, dirlocked, width_exempt=(chapter == "forces"))
         out["plans"] = [r for r in out["plans"] if r.get("sequence") != chapter] + new_rows
         print(f"  {chapter}: {len(new_rows)} map-authored hall(s) replace {len(rows_for)} dealt row(s)")
         for row in new_rows:

@@ -1,93 +1,112 @@
 {
-  "layers": {
-    "interactables": [
-      [" "," "," "," ","randompoint:90:0:1"," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" ","randompoints:-90:0:1"," ","WhiteNoiseGallery:180:-0.500:0.050"," ","NoiseColors3D:180:-0.500:0.100"," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "]
-    ],
-    "structure": [
-      ["1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","2"],
-      ["1","1","1","1","1","1","1"],
-      ["1","2","1","2","1","2","1"],
-      ["1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1"],
-      ["1","1","1","6","6","0","6"],
-      ["0","0","0","0","6","6","6"],
-      ["0","0","0","0","0","0","0"]
-    ],
-    "utilities": [
-      ["sp"," "," "," "," "," ","an:-90"],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," ","t"," "],
-      [" "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "]
-    ]
-  },
-  "lighting": {
-    "ambient_color": [0.4,0.4,0.5],
-    "ambient_energy": 0.6,
-    "directional_light": {
-      "color": [1.0,0.9,0.8],
-      "direction": [-0.4,-0.7,-0.4],
-      "enabled": true,
-      "energy": 1.2
-    }
-  },
-  "map_info": {
-    "description": "White noise vs blue noise — compare uniform random points with structured randomness. Gallery of noise color types with interactive specimens.",
-    "dimensions": {
-      "depth": 9.0,
-      "max_height": 2.0,
-      "width": 7.0
-    },
-    "format": "json",
-    "lookup_name": "Random_Noise_Types",
-    "metadata": {
-      "category": "noise",
-      "difficulty": "beginner",
-      "estimated_time": "3-4 minutes",
-      "learning_objectives": ["White noise characteristics","Blue noise and structured randomness","Noise color spectrum","Visual comparison of noise types"]
-    },
-    "name": "Random Noise Types",
-    "title": "White Noise vs Blue Noise",
-    "version": "1.0"
-  },
-  "settings": {
-    "auto_reveal_on_entry": false,
-    "background": {
-      "color": [0.2,0.3,0.7],
-      "type": "sky"
-    },
-    "cube_size": 1.0,
-    "enable_physics": true,
-    "gutter": 0.0,
-    "initial_tile_visibility": "hidden_except_corners",
-    "show_grid": true
-  },
-  "utility_definitions": {
-    "s": {
-      "properties": {
-        "height": 5.5
-      }
-    },
-    "t": {
-      "description": "Continue to next step",
-      "name": "Next",
-      "properties": {
-        "action": "next_in_sequence"
-      },
-      "type": "teleporter"
-    }
+ "layers": {
+  "interactables": [
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "randompoint:90:0:1", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "randompoints:-90:0:1", "", "WhiteNoiseGallery:180:-0.500:0.050", "", "NoiseColors3D:180:-0.500:0.100", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ]
+  ],
+  "structure": [
+   [ "w", "w", "w", "w", "w", "1", "1", "1", "w", "w", "w", "w", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "2", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "2", "1", "2", "1", "2", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "6", "6", "0", "6", "1", "1", "1", "1", "w" ],
+   [ "w", "0", "0", "0", "0", "6", "6", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "w", "w", "w", "w", "1", "1", "1", "w", "w", "w", "w", "w" ]
+  ],
+  "utilities": [
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "sp", "", "", "", "", "", "an:-90", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "t", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ]
+  ]
+ },
+ "lighting": {
+  "ambient_color": [
+   0.4,
+   0.4,
+   0.5
+  ],
+  "ambient_energy": 0.6,
+  "directional_light": {
+   "color": [
+    1.0,
+    0.9,
+    0.8
+   ],
+   "direction": [
+    -0.4,
+    -0.7,
+    -0.4
+   ],
+   "enabled": true,
+   "energy": 1.2
   }
+ },
+ "map_info": {
+  "description": "White noise vs blue noise — compare uniform random points with structured randomness. Gallery of noise color types with interactive specimens.",
+  "dimensions": {
+   "width": 13,
+   "depth": 10,
+   "max_height": 6
+  },
+  "format": "json",
+  "lookup_name": "Random_Noise_Types",
+  "metadata": {
+   "category": "noise",
+   "difficulty": "beginner",
+   "estimated_time": "3-4 minutes",
+   "learning_objectives": [ "White noise characteristics", "Blue noise and structured randomness", "Noise color spectrum", "Visual comparison of noise types" ]
+  },
+  "name": "Random Noise Types",
+  "title": "White Noise vs Blue Noise",
+  "version": "1.0"
+ },
+ "settings": {
+  "auto_reveal_on_entry": false,
+  "background": {
+   "color": [
+    0.2,
+    0.3,
+    0.7
+   ],
+   "type": "sky"
+  },
+  "cube_size": 1.0,
+  "enable_physics": true,
+  "gutter": 0.0,
+  "initial_tile_visibility": "hidden_except_corners",
+  "show_grid": true
+ },
+ "utility_definitions": {
+  "s": {
+   "properties": {
+    "height": 5.5
+   }
+  },
+  "t": {
+   "description": "Continue to next step",
+   "name": "Next",
+   "properties": {
+    "action": "next_in_sequence"
+   },
+   "type": "teleporter"
+  }
+ }
 }

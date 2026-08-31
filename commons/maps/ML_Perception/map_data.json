@@ -1,280 +1,70 @@
 {
-	"map_info": {
-		"name": "Perception Gallery",
-		"lookup_name": "ML_Perception",
-		"description": "A gallery of machine perception \u00e2\u20ac\u201d computer vision, convolutional networks, and attention mechanisms. Stand back and see how machines learn to see.\n\n[Placement applied hybrid engine \u2014 constraint 0.920\u21920.948, walkability 0.340\u21920.365]",
-		"version": "placed-hybrid",
-		"format": "json",
-		"dimensions": {
-			"width": 8,
-			"depth": 8,
-			"max_height": 3
-		},
-		"metadata": {
-			"difficulty": "advanced",
-			"category": "machinelearning",
-			"estimated_time": "5-7 minutes",
-			"spatial_temperature": 0.6,
-			"design_notes": "Gallery layout \u00e2\u20ac\u201d open floor (h1) with three alcoves cut into walls (h5). Each alcove frames an artifact like a painting in a museum. Central viewing space gives distance for appreciation."
-		},
-		"title": "How Machines Learn to See"
-	},
-	"utility_definitions": {
-		"t": {
-			"type": "teleporter",
-			"name": "Next",
-			"description": "Continue to next step",
-			"properties": {
-				"action": "next_in_sequence"
-			}
-		}
-	},
-	"layers": {
-		"structure": [
-			[
-				"1",
-				"1",
-				"1",
-				"3",
-				"3",
-				"2",
-				"2",
-				"2"
-			],
-			[
-				"1",
-				"1",
-				"1",
-				"3",
-				"3",
-				"2",
-				"2",
-				"2"
-			],
-			[
-				"3",
-				"3",
-				"2",
-				"2",
-				"2",
-				"2",
-				"3",
-				"3"
-			],
-			[
-				"3",
-				"2",
-				"2",
-				"2",
-				"2",
-				"2",
-				"2",
-				"3"
-			],
-			[
-				"3",
-				"2",
-				"2",
-				"2",
-				"2",
-				"2",
-				"2",
-				"3"
-			],
-			[
-				"3",
-				"3",
-				"2",
-				"2",
-				"2",
-				"2",
-				"3",
-				"3"
-			],
-			[
-				"2",
-				"2",
-				"2",
-				"2",
-				"0",
-				"1",
-				"1",
-				"1"
-			],
-			[
-				"3",
-				"3",
-				"3",
-				"1",
-				"1",
-				"1",
-				"3",
-				"3"
-			]
-		],
-		"utilities": [
-			[
-				"s",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				"an",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				"wp",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				"t",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				"sp",
-				" ",
-				" ",
-				" "
-			]
-		],
-		"interactables": [
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				"computer_vision_vr:0:0:0.6",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				"convolutional_neural_networks_cnns_vr:180:0:0.6",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			]
-		]
-	}
+ "map_info": {
+  "name": "Perception Gallery",
+  "lookup_name": "ML_Perception",
+  "description": "A gallery of machine perception â€” computer vision, convolutional networks, and attention mechanisms. Stand back and see how machines learn to see.\n\n[Placement applied hybrid engine — constraint 0.920→0.948, walkability 0.340→0.365]",
+  "version": "placed-hybrid",
+  "format": "json",
+  "dimensions": {
+   "width": 13,
+   "depth": 10,
+   "max_height": 3
+  },
+  "metadata": {
+   "difficulty": "advanced",
+   "category": "machinelearning",
+   "estimated_time": "5-7 minutes",
+   "spatial_temperature": 0.6,
+   "design_notes": "Gallery layout â€” open floor (h1) with three alcoves cut into walls (h5). Each alcove frames an artifact like a painting in a museum. Central viewing space gives distance for appreciation."
+  },
+  "title": "How Machines Learn to See"
+ },
+ "utility_definitions": {
+  "t": {
+   "type": "teleporter",
+   "name": "Next",
+   "description": "Continue to next step",
+   "properties": {
+    "action": "next_in_sequence"
+   }
+  }
+ },
+ "layers": {
+  "structure": [
+   [ "w", "w", "w", "w", "w", "1", "1", "1", "1", "1", "w", "w", "w" ],
+   [ "w", "1", "1", "1", "3", "3", "2", "2", "2", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "3", "3", "2", "2", "2", "1", "1", "1", "w" ],
+   [ "w", "3", "3", "2", "2", "2", "2", "3", "3", "1", "1", "1", "w" ],
+   [ "w", "3", "2", "2", "2", "2", "2", "2", "3", "1", "1", "1", "w" ],
+   [ "w", "3", "2", "2", "2", "2", "2", "2", "3", "1", "1", "1", "w" ],
+   [ "w", "3", "3", "2", "2", "2", "2", "3", "3", "1", "1", "1", "w" ],
+   [ "w", "2", "2", "2", "2", "0", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "3", "3", "3", "1", "1", "1", "3", "3", "1", "1", "1", "w" ],
+   [ "w", "w", "w", "w", "w", "1", "1", "1", "w", "w", "w", "w", "w" ]
+  ],
+  "utilities": [
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "s", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "an", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "wp", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "t", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "sp", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ]
+  ],
+  "interactables": [
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "computer_vision_vr:0:0:0.6", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "convolutional_neural_networks_cnns_vr:180:0:0.6", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ]
+  ]
+ }
 }

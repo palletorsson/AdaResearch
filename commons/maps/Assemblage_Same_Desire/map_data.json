@@ -1,94 +1,112 @@
 {
-  "map_info": {
-    "name": "Assemblage: The Same Desire",
-    "title": "Assemblage: The Same Desire",
-    "lookup_name": "Assemblage_Same_Desire",
-    "description": "Midway through the spine, the long tradition of math and craft assembles in one room: the loom (an array with rules), the world's pattern makers, the origin patterns of Kristina Torsson, and Godel's sentence — because the desire in the Kente strips and the desire in the incompleteness proof are the same desire: to reach, by rule, past what the rule can hold.",
-    "version": "0.1",
-    "format": "json",
-    "dimensions": {
-      "width": 14,
-      "depth": 12,
-      "max_height": 1
-    },
-    "metadata": {
-      "difficulty": "intermediate",
-      "category": "algorithms",
-      "estimated_time": "5-8 minutes",
-      "learning_objectives": ["The loom is an array with rules","Craft traditions and formal mathematics share one desire","Pattern as reaching past what the rule can hold"]
-    }
+ "map_info": {
+  "name": "Assemblage: The Same Desire",
+  "title": "Assemblage: The Same Desire",
+  "lookup_name": "Assemblage_Same_Desire",
+  "description": "Midway through the spine, the long tradition of math and craft assembles in one room: the loom (an array with rules), the world's pattern makers, the origin patterns of Kristina Torsson, and Godel's sentence — because the desire in the Kente strips and the desire in the incompleteness proof are the same desire: to reach, by rule, past what the rule can hold.",
+  "version": "0.1",
+  "format": "json",
+  "dimensions": {
+   "width": 16,
+   "depth": 14,
+   "max_height": 3
   },
-  "utility_definitions": {
-    "s": {
-      "type": "spawn",
-      "description": "spawn"
-    },
-    "t": {
-      "type": "teleporter",
-      "description": "exit"
-    }
-  },
-  "lighting": {
-    "ambient_color": [0.38,0.36,0.42],
-    "ambient_energy": 0.55,
-    "directional_light": {
-      "enabled": true,
-      "direction": [-0.35,-0.7,-0.45],
-      "color": [1,0.93,0.85],
-      "energy": 1.1
-    }
-  },
-  "settings": {
-    "cube_size": 1.0,
-    "gutter": 0.05,
-    "show_grid": true,
-    "enable_physics": true,
-    "auto_reveal_on_entry": false,
-    "initial_tile_visibility": "all",
-    "background": "dark"
-  },
-  "layers": {
-    "structure": [
-      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"]
-    ],
-    "utilities": [
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" ","s"," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," ","t"," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "]
-    ],
-    "interactables": [
-      [" "," "," "," "," "," "," "," "," ","synthesis_stand#subject:godel_statement_plaque#mode:hero"," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," ","panel_bridge_loom"," "," "," "," ","ten_print_textile"," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," ","pattern_atlas_gallery"," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," ","mamma_monster_gallery"," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," ","godel_statement_plaque"," "," "," "," ","incompleteness_scale"," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "]
-    ]
+  "metadata": {
+   "difficulty": "intermediate",
+   "category": "algorithms",
+   "estimated_time": "5-8 minutes",
+   "learning_objectives": [ "The loom is an array with rules", "Craft traditions and formal mathematics share one desire", "Pattern as reaching past what the rule can hold" ]
   }
+ },
+ "utility_definitions": {
+  "s": {
+   "type": "spawn",
+   "description": "spawn"
+  },
+  "t": {
+   "type": "teleporter",
+   "description": "exit"
+  }
+ },
+ "lighting": {
+  "ambient_color": [
+   0.38,
+   0.36,
+   0.42
+  ],
+  "ambient_energy": 0.55,
+  "directional_light": {
+   "enabled": true,
+   "direction": [
+    -0.35,
+    -0.7,
+    -0.45
+   ],
+   "color": [
+    1,
+    0.93,
+    0.85
+   ],
+   "energy": 1.1
+  }
+ },
+ "settings": {
+  "cube_size": 1.0,
+  "gutter": 0.05,
+  "show_grid": true,
+  "enable_physics": true,
+  "auto_reveal_on_entry": false,
+  "initial_tile_visibility": "all",
+  "background": "dark"
+ },
+ "layers": {
+  "structure": [
+   [ "w", "w", "w", "w", "w", "w", "1", "1", "1", "w", "w", "w", "w", "w", "w", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "w", "1", "1", "1", "w", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "w", "1", "1", "1", "1", "1", "1", "1", "w", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "w", "1", "1", "1", "w", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "w", "w", "w", "w", "w", "1", "1", "1", "w", "w", "w", "w", "w", "w", "w" ]
+  ],
+  "utilities": [
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "s", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "t", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ]
+  ],
+  "interactables": [
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "synthesis_stand#subject:godel_statement_plaque#mode:hero", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "panel_bridge_loom", "", "", "", "", "ten_print_textile", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "pattern_atlas_gallery", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "mamma_monster_gallery", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "godel_statement_plaque", "", "", "", "", "incompleteness_scale", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ]
+  ]
+ }
 }

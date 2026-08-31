@@ -1,89 +1,107 @@
 {
-  "map_info": {
-    "name": "FormFinding_Annealing",
-    "title": "FormFinding_Annealing",
-    "lookup_name": "FormFinding_Annealing",
-    "description": "The first stable shape is rarely the best — you land in a local minimum and stick. Annealing shakes the system with heat so it can climb out and find deeper rest. But the deepest well is a dead-perfect crystal; the alive form stops short.\n\n[Placement applied humanoid_walker engine — constraint 0.827→0.983, walkability 0.526→0.590]",
-    "version": "placed-humanoid_walker",
-    "format": "json",
-    "dimensions": {
-      "width": 12,
-      "depth": 10,
-      "max_height": 1
-    },
-    "metadata": {
-      "difficulty": "intermediate",
-      "category": "algorithms",
-      "estimated_time": "3-5 minutes",
-      "learning_objectives": ["Local minima: getting stuck in a good-enough shape","Annealing: heat to escape; and where to STOP"]
-    },
-    "eye_shot_adopted": "Trial_eye_FormFinding_Annealing"
+ "map_info": {
+  "name": "FormFinding_Annealing",
+  "title": "FormFinding_Annealing",
+  "lookup_name": "FormFinding_Annealing",
+  "description": "The first stable shape is rarely the best — you land in a local minimum and stick. Annealing shakes the system with heat so it can climb out and find deeper rest. But the deepest well is a dead-perfect crystal; the alive form stops short.\n\n[Placement applied humanoid_walker engine — constraint 0.827→0.983, walkability 0.526→0.590]",
+  "version": "placed-humanoid_walker",
+  "format": "json",
+  "dimensions": {
+   "width": 14,
+   "depth": 12,
+   "max_height": 3
   },
-  "utility_definitions": {
-    "s": {
-      "type": "spawn",
-      "description": "spawn point"
-    },
-    "t": {
-      "type": "teleporter",
-      "description": "exit teleporter"
-    }
+  "metadata": {
+   "difficulty": "intermediate",
+   "category": "algorithms",
+   "estimated_time": "3-5 minutes",
+   "learning_objectives": [ "Local minima: getting stuck in a good-enough shape", "Annealing: heat to escape; and where to STOP" ]
   },
-  "lighting": {
-    "ambient_color": [0.4,0.4,0.5],
-    "ambient_energy": 0.6,
-    "directional_light": {
-      "enabled": true,
-      "direction": [-0.4,-0.7,-0.4],
-      "color": [1,0.9,0.8],
-      "energy": 1.2
-    }
+  "eye_shot_adopted": "Trial_eye_FormFinding_Annealing"
+ },
+ "utility_definitions": {
+  "s": {
+   "type": "spawn",
+   "description": "spawn point"
   },
-  "settings": {
-    "cube_size": 1.0,
-    "gutter": 0.05,
-    "show_grid": true,
-    "enable_physics": true,
-    "auto_reveal_on_entry": false,
-    "initial_tile_visibility": "all",
-    "background": "dark"
-  },
-  "layers": {
-    "structure": [
-      ["1","1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1","1"]
-    ],
-    "utilities": [
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" ","s"," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," ","t"," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "]
-    ],
-    "interactables": [
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" ","max_q_basin_room:270"," "," "," ","energy_landscape_bench:90"," "," "," ","simulated_annealing:90"," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," ","science_screen:90"," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "]
-    ]
+  "t": {
+   "type": "teleporter",
+   "description": "exit teleporter"
   }
+ },
+ "lighting": {
+  "ambient_color": [
+   0.4,
+   0.4,
+   0.5
+  ],
+  "ambient_energy": 0.6,
+  "directional_light": {
+   "enabled": true,
+   "direction": [
+    -0.4,
+    -0.7,
+    -0.4
+   ],
+   "color": [
+    1,
+    0.9,
+    0.8
+   ],
+   "energy": 1.2
+  }
+ },
+ "settings": {
+  "cube_size": 1.0,
+  "gutter": 0.05,
+  "show_grid": true,
+  "enable_physics": true,
+  "auto_reveal_on_entry": false,
+  "initial_tile_visibility": "all",
+  "background": "dark"
+ },
+ "layers": {
+  "structure": [
+   [ "w", "w", "w", "w", "w", "1", "1", "1", "w", "w", "w", "w", "w", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "w", "1", "1", "1", "w", "1", "1", "1", "w", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "w", "w", "w", "w", "1", "1", "1", "w", "w", "w", "w", "w", "w" ]
+  ],
+  "utilities": [
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "s", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "t", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ]
+  ],
+  "interactables": [
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "max_q_basin_room:270", "", "", "", "energy_landscape_bench:90", "", "", "", "simulated_annealing:90", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "science_screen:90", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ]
+  ]
+ }
 }

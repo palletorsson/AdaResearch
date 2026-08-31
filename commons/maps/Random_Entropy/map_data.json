@@ -1,88 +1,106 @@
 {
-  "map_info": {
-    "name": "Random: Entropy",
-    "title": "Random_Entropy",
-    "lookup_name": "Random_Entropy",
-    "description": "The entropy pocket gets its own room. Surprise, measured: the Shannon meter reads disorder in bits at the center; a jar of order decays in your hand; hardware entropy leaks; true and pseudo randomness stand side by side for comparison. At the dark end, a sphere you cannot predict and butterflies that will not repeat. Entropy is not mess - it is how much you do not know yet.",
-    "version": "0.1",
-    "format": "json",
-    "dimensions": {
-      "width": 16,
-      "depth": 10,
-      "max_height": 1
-    },
-    "metadata": {
-      "difficulty": "intermediate",
-      "category": "algorithms",
-      "estimated_time": "4-6 minutes",
-      "learning_objectives": ["Entropy measures surprise in bits, not messiness","Order decays without work; the jar and the hardware agree","True randomness is harvested, pseudo randomness is grown from a seed"]
-    }
+ "map_info": {
+  "name": "Random: Entropy",
+  "title": "Random_Entropy",
+  "lookup_name": "Random_Entropy",
+  "description": "The entropy pocket gets its own room. Surprise, measured: the Shannon meter reads disorder in bits at the center; a jar of order decays in your hand; hardware entropy leaks; true and pseudo randomness stand side by side for comparison. At the dark end, a sphere you cannot predict and butterflies that will not repeat. Entropy is not mess - it is how much you do not know yet.",
+  "version": "0.1",
+  "format": "json",
+  "dimensions": {
+   "width": 18,
+   "depth": 12,
+   "max_height": 3
   },
-  "utility_definitions": {
-    "s": {
-      "type": "spawn",
-      "description": "enter at low entropy"
-    },
-    "t": {
-      "type": "teleporter",
-      "description": "exit - past the dark end"
-    }
-  },
-  "lighting": {
-    "ambient_color": [0.24,0.24,0.3],
-    "ambient_energy": 0.4,
-    "directional_light": {
-      "enabled": true,
-      "direction": [-0.4,-0.75,-0.25],
-      "color": [0.95,0.92,0.85],
-      "energy": 0.7
-    }
-  },
-  "settings": {
-    "cube_size": 1.0,
-    "gutter": 0.05,
-    "show_grid": true,
-    "enable_physics": true,
-    "auto_reveal_on_entry": false,
-    "initial_tile_visibility": "all",
-    "background": "dark"
-  },
-  "layers": {
-    "structure": [
-      ["0","0","1","1","1","1","1","1","1","1","1","1","1","1","1","0"],
-      ["0","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","0","1"],
-      ["0","0","1","1","1","1","1","1","1","1","1","1","1","1","1","0"]
-    ],
-    "utilities": [
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" ","s"," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," ","t"," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "]
-    ],
-    "interactables": [
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," ","entropy_jar"," "," ","hardware_entropy_decay"," "," ","trng_vs_prng"," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," ","shannon_entropy_meter"," "," "," "," "," "," "," ","dark_sphere"," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," ","random_butterflies"," "," "," "],
-      [" "," "," "," "," "," ","entropy_axiom"," "," ","science_screen:180"," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "]
-    ]
+  "metadata": {
+   "difficulty": "intermediate",
+   "category": "algorithms",
+   "estimated_time": "4-6 minutes",
+   "learning_objectives": [ "Entropy measures surprise in bits, not messiness", "Order decays without work; the jar and the hardware agree", "True randomness is harvested, pseudo randomness is grown from a seed" ]
   }
+ },
+ "utility_definitions": {
+  "s": {
+   "type": "spawn",
+   "description": "enter at low entropy"
+  },
+  "t": {
+   "type": "teleporter",
+   "description": "exit - past the dark end"
+  }
+ },
+ "lighting": {
+  "ambient_color": [
+   0.24,
+   0.24,
+   0.3
+  ],
+  "ambient_energy": 0.4,
+  "directional_light": {
+   "enabled": true,
+   "direction": [
+    -0.4,
+    -0.75,
+    -0.25
+   ],
+   "color": [
+    0.95,
+    0.92,
+    0.85
+   ],
+   "energy": 0.7
+  }
+ },
+ "settings": {
+  "cube_size": 1.0,
+  "gutter": 0.05,
+  "show_grid": true,
+  "enable_physics": true,
+  "auto_reveal_on_entry": false,
+  "initial_tile_visibility": "all",
+  "background": "dark"
+ },
+ "layers": {
+  "structure": [
+   [ "w", "w", "w", "w", "w", "w", "w", "1", "1", "1", "w", "w", "w", "w", "w", "w", "w", "w" ],
+   [ "w", "0", "0", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "0", "w" ],
+   [ "w", "0", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "w", "1", "1", "1", "1", "1", "1", "1", "w", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "0", "1", "w" ],
+   [ "w", "0", "0", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "0", "w" ],
+   [ "w", "w", "w", "w", "w", "w", "w", "1", "1", "1", "w", "w", "w", "w", "w", "w", "w", "w" ]
+  ],
+  "utilities": [
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "s", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "t", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ]
+  ],
+  "interactables": [
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "entropy_jar", "", "", "hardware_entropy_decay", "", "", "trng_vs_prng", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "shannon_entropy_meter", "", "", "", "", "", "", "", "dark_sphere", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "random_butterflies", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "entropy_axiom", "", "", "science_screen:180", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ]
+  ]
+ }
 }

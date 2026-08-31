@@ -1,1 +1,135 @@
-{"audio": {"ambient_preset": "noise_wash", "volume": -8.0}, "documentation": {"key_elements": ["Particle systems (chaotic)", "Random distribution objects", "Lambda slider at \u03bb=1 (pure chaos mode)", "Noise terrain \u2014 immersive chaos"], "layout": "Expansive chaotic space. Random particles. Noise terrain.", "objective": "Experience entropy as freedom. Walk through randomness. Then encounter the dissolution at \u03bb=1.", "summary": "QFEP_E_Term - Understanding Entropy"}, "layers": {"interactables": [[" ", "tt:180:entropy_axioms:180:0.5", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", "microstate_counter:0:1:1", " ", "entropy_fan:0:1:1", "possibility_space_cloud:0:1:1", "particle_chaos:0:1", " ", " ", " ", "lambda_slider:0:0.5#value:1.0", " ", " "], [" ", "random_cubes:0:0.5", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]], "structure": [["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], ["1", "1", "1", "1", "2", "2", "2", "2", "1", "1", "1", "1"], ["1", "1", "1", "2", "3", "3", "3", "3", "2", "1", "1", "1"], ["1", "1", "2", "3", "3", "3", "3", "3", "3", "2", "1", "1"], ["1", "1", "2", "3", "3", "3", "3", "3", "3", "2", "1", "1"], ["1", "1", "2", "3", "3", "3", "3", "3", "3", "2", "1", "1"], ["1", "1", "1", "2", "3", "3", "3", "3", "2", "1", "1", "1"], ["1", "1", "1", "1", "2", "2", "2", "2", "1", "1", "1", "1"], ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], ["1", "1", "1", "1", "0", "0", "0", "0", "1", "1", "1", "1"]], "utilities": [[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", "s", " ", " ", "sub:map", " ", " ", " ", " ", " ", " ", " "], [" ", "3t:E \u2014 ENTROPY", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", "el:1:1", " ", " ", " ", " ", " ", " "], [" ", "3t:POSSIBILITY SPACE", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", "3t:\u03bb=1 DISSOLUTION", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", "t", " ", " ", " ", " ", " ", " "]]}, "lighting": {"ambient_color": [0.3, 0.15, 0.15], "ambient_energy": 0.6, "directional_light": {"color": [1.0, 0.7, 0.6], "direction": [-0.4, -0.6, -0.4], "enabled": true, "energy": 0.7}}, "map_info": {"description": "E(S) is Entropy \u2014 the space of possibilities. High entropy means freedom from pattern, openness to becoming. But pure chaos dissolves.\n\n[Placement applied humanoid_walker engine \u2014 constraint 0.867\u21920.900, walkability 0.407\u21920.373]", "dimensions": {"depth": 14.0, "max_height": 4.0, "width": 12.0}, "format": "json", "lookup_name": "QFEP_E_Term", "metadata": {"category": "qfep", "difficulty": "advanced", "estimated_time": "4-5 minutes", "learning_objectives": ["E(S) = entropy, possibility space", "High entropy = freedom, randomness", "\u03bbE(S) = the entropy drive in the formula", "Pure chaos also fails \u2014 dissolution"]}, "name": "E(S) Term: Entropy as Freedom", "title": "Entropy as Possibility Space", "version": "placed-humanoid_walker"}, "settings": {"background": {"color": [0.15, 0.05, 0.1], "type": "sky"}, "cube_size": 1.0, "enable_physics": true, "grid_animation": {"delay_between": 0.01, "duration": 0.5, "easing": "elastic_out", "enabled": true, "order": "random", "type": "random_pop"}, "gutter": 0.0, "show_grid": true}, "utility_definitions": {"t": {"description": "Neither pure order nor pure chaos. Continue to the spectrum.", "name": "Find the Balance", "properties": {"action": "next_in_sequence"}, "type": "teleporter"}}}
+{
+ "audio": {
+  "ambient_preset": "noise_wash",
+  "volume": -8.0
+ },
+ "documentation": {
+  "key_elements": [ "Particle systems (chaotic)", "Random distribution objects", "Lambda slider at λ=1 (pure chaos mode)", "Noise terrain — immersive chaos" ],
+  "layout": "Expansive chaotic space. Random particles. Noise terrain.",
+  "objective": "Experience entropy as freedom. Walk through randomness. Then encounter the dissolution at λ=1.",
+  "summary": "QFEP_E_Term - Understanding Entropy"
+ },
+ "layers": {
+  "interactables": [
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "tt:180:entropy_axioms:180:0.5", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "microstate_counter:0:1:1", "", "entropy_fan:0:1:1", "possibility_space_cloud:0:1:1", "particle_chaos:0:1", "", "", "", "lambda_slider:0:0.5#value:1.0", "", "", "" ],
+   [ "", "", "random_cubes:0:0.5", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ]
+  ],
+  "structure": [
+   [ "w", "w", "w", "w", "w", "1", "1", "1", "w", "w", "w", "w", "w", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "2", "2", "2", "2", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "2", "3", "3", "3", "3", "2", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "2", "3", "3", "3", "3", "3", "3", "2", "1", "1", "w" ],
+   [ "w", "1", "1", "2", "3", "3", "3", "3", "3", "3", "2", "1", "1", "w" ],
+   [ "w", "1", "1", "2", "3", "3", "3", "3", "3", "3", "2", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "2", "3", "3", "3", "3", "2", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "2", "2", "2", "2", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "0", "0", "1", "0", "1", "1", "1", "1", "w" ],
+   [ "w", "w", "w", "w", "w", "1", "1", "1", "w", "w", "w", "w", "w", "w" ]
+  ],
+  "utilities": [
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "s", "", "", "sub:map", "", "", "", "", "", "", "", "" ],
+   [ "", "", "3t:E — ENTROPY", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "el:1:1", "", "", "", "", "", "", "" ],
+   [ "", "", "3t:POSSIBILITY SPACE", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "3t:λ=1 DISSOLUTION", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "t", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ]
+  ]
+ },
+ "lighting": {
+  "ambient_color": [
+   0.3,
+   0.15,
+   0.15
+  ],
+  "ambient_energy": 0.6,
+  "directional_light": {
+   "color": [
+    1.0,
+    0.7,
+    0.6
+   ],
+   "direction": [
+    -0.4,
+    -0.6,
+    -0.4
+   ],
+   "enabled": true,
+   "energy": 0.7
+  }
+ },
+ "map_info": {
+  "description": "E(S) is Entropy — the space of possibilities. High entropy means freedom from pattern, openness to becoming. But pure chaos dissolves.\n\n[Placement applied humanoid_walker engine — constraint 0.867→0.900, walkability 0.407→0.373]",
+  "dimensions": {
+   "width": 14,
+   "depth": 14,
+   "max_height": 3
+  },
+  "format": "json",
+  "lookup_name": "QFEP_E_Term",
+  "metadata": {
+   "category": "qfep",
+   "difficulty": "advanced",
+   "estimated_time": "4-5 minutes",
+   "learning_objectives": [ "E(S) = entropy, possibility space", "High entropy = freedom, randomness", "λE(S) = the entropy drive in the formula", "Pure chaos also fails — dissolution" ]
+  },
+  "name": "E(S) Term: Entropy as Freedom",
+  "title": "Entropy as Possibility Space",
+  "version": "placed-humanoid_walker"
+ },
+ "settings": {
+  "background": {
+   "color": [
+    0.15,
+    0.05,
+    0.1
+   ],
+   "type": "sky"
+  },
+  "cube_size": 1.0,
+  "enable_physics": true,
+  "grid_animation": {
+   "delay_between": 0.01,
+   "duration": 0.5,
+   "easing": "elastic_out",
+   "enabled": true,
+   "order": "random",
+   "type": "random_pop"
+  },
+  "gutter": 0.0,
+  "show_grid": true
+ },
+ "utility_definitions": {
+  "t": {
+   "description": "Neither pure order nor pure chaos. Continue to the spectrum.",
+   "name": "Find the Balance",
+   "properties": {
+    "action": "next_in_sequence"
+   },
+   "type": "teleporter"
+  }
+ }
+}

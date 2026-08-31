@@ -1,63 +1,69 @@
 {
-  "map_info": {
-    "name": "Agent-Based Modeling",
-    "lookup_name": "SwarmIntelligence_Agent_Based_Modeling_ABM",
-    "description": "A grid of corridors and pillars where agents navigate pathways. The regularity mirrors grid-based ABM simulations.",
-    "version": "1.0",
-    "format": "json",
-    "dimensions": {
-      "width": 8,
-      "depth": 8,
-      "max_height": 1
-    },
-    "metadata": {
-      "difficulty": "intermediate",
-      "category": "swarm_intelligence",
-      "spatial_temperature": 0.5,
-      "design_notes": "Periodic wall pillars create a grid of corridors. Agents navigate intersection choices."
-    },
-    "title": "Agent-Based Modeling"
+ "map_info": {
+  "name": "Agent-Based Modeling",
+  "lookup_name": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+  "description": "A grid of corridors and pillars where agents navigate pathways. The regularity mirrors grid-based ABM simulations.",
+  "version": "1.0",
+  "format": "json",
+  "dimensions": {
+   "width": 13,
+   "depth": 10,
+   "max_height": 3
   },
-  "utility_definitions": {
-    "t": {
-      "type": "teleporter",
-      "name": "Next",
-      "description": "Continue to next step",
-      "properties": {
-        "action": "next_in_sequence"
-      }
-    }
+  "metadata": {
+   "difficulty": "intermediate",
+   "category": "swarm_intelligence",
+   "spatial_temperature": 0.5,
+   "design_notes": "Periodic wall pillars create a grid of corridors. Agents navigate intersection choices."
   },
-  "layers": {
-    "structure": [
-      ["1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","0","1"],
-      ["1","1","1","1","1","1","1","1"]
-    ],
-    "utilities": [
-      ["s","an"," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," ","t"," "],
-      [" "," "," "," "," "," ","sp"," "]
-    ],
-    "interactables": [
-      [" "," ","catalyst_prompter_box:0:0#emergence:vent#sequence:auto#lease_s:45"," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "],
-      [" "," "," ","ant_colony_optimization"," "," "," "," "],
-      [" "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "],
-      ["catalyst_vent:0:0#emit_interval_s:2.5#wave_size:3#start_delay_s:5.0#sequence:auto"," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "]
-    ]
+  "title": "Agent-Based Modeling"
+ },
+ "utility_definitions": {
+  "t": {
+   "type": "teleporter",
+   "name": "Next",
+   "description": "Continue to next step",
+   "properties": {
+    "action": "next_in_sequence"
+   }
   }
+ },
+ "layers": {
+  "structure": [
+   [ "w", "w", "w", "w", "w", "1", "1", "1", "w", "w", "w", "w", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "w", "1", "1", "1", "w", "1", "1", "1", "w", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "w", "0", "1", "1", "w", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "w", "w", "w", "w", "1", "1", "1", "w", "w", "w", "w", "w" ]
+  ],
+  "utilities": [
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "s", "an", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "t", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "sp", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ]
+  ],
+  "interactables": [
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "catalyst_prompter_box:0:0#emergence:vent#sequence:auto#lease_s:45", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "ant_colony_optimization", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "catalyst_vent:0:0#emit_interval_s:2.5#wave_size:3#start_delay_s:5.0#sequence:auto", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ]
+  ]
+ }
 }
