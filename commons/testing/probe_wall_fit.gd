@@ -27,6 +27,7 @@ extends SceneTree
 
 const EmDetailRes := preload("res://commons/scenes/em/em_detail.gd")
 const OUT := "user://wall_fit"
+const ROBOTO := "res://commons/font/Roboto-VariableFont_wdth,wght.ttf"
 
 # the museum's own numbers, read off em_detail so the picture is to scale
 const MOUNT_W := 0.090
@@ -47,36 +48,38 @@ func _run() -> void:
 	DirAccess.make_dir_recursive_absolute(OUT)
 
 	var n: int = SENTENCE.length()
+	var font: Font = load(ROBOTO) if ResourceLoader.exists(ROBOTO) else null
 	var budget: int = EmDetailRes.speak_budget(LANDSCAPE.x, LANDSCAPE.y)
 	var a_fit: Dictionary = EmDetailRes.speak_fit(n, LANDSCAPE.x, LANDSCAPE.y)
 
-	# B — grow the frame, keeping the format's ratio, until the sentence fits
-	var grow: float = 1.0
-	while grow < 6.0 and not bool(EmDetailRes.speak_fit(n, LANDSCAPE.x * grow, LANDSCAPE.y * grow)["fits"]):
-		grow += 0.05
-	var b_fmt := Vector2(LANDSCAPE.x * grow, LANDSCAPE.y * grow)
-	var b_fit: Dictionary = EmDetailRes.speak_fit(n, b_fmt.x, b_fmt.y)
+	# B — Palle's note 2: the same frame, but the text as big as it TRULY fits
+	var b_fit: Dictionary = EmDetailRes.speak_fit_measured(font, SENTENCE, LANDSCAPE.x, LANDSCAPE.y)
 
-	# C — as much as fits at the same frame, cut at a word, then an ellipsis
+	# C — Palle's note 1: a bigger canvas, measured, wrap following the field
+	var big := Vector2(LANDSCAPE.x * 2.0, LANDSCAPE.y * 2.0)
+	var c_fit: Dictionary = EmDetailRes.speak_fit_measured(font, SENTENCE, big.x, big.y)
+
+	# D — the lead, for comparison
 	var lead: String = _lead(SENTENCE, budget)
-	var c_fit: Dictionary = EmDetailRes.speak_fit(lead.length(), LANDSCAPE.x, LANDSCAPE.y)
+	var d_fit: Dictionary = EmDetailRes.speak_fit(lead.length(), LANDSCAPE.x, LANDSCAPE.y)
 
 	print("")
-	print("WALL FIT — a %d-character line on a %.2f x %.2f m landscape wall" % [n, LANDSCAPE.x, LANDSCAPE.y])
-	print("  that format holds %d characters before the shrink loop bottoms out" % budget)
+	print("WALL FIT — a %d-character line, measured against the font" % n)
 	print("")
-	print("  A today   font %2d  %d lines  needs %.2f m of %.2f m   %s"
-		% [int(a_fit["font_size"]), int(a_fit["lines"]), float(a_fit["needs"]), float(a_fit["have"]),
+	print("  A today (estimated)   font %2d  needs %.2f m of %.2f m   %s"
+		% [int(a_fit["font_size"]), float(a_fit["needs"]), float(a_fit["have"]),
 		   "fits" if bool(a_fit["fits"]) else "OVERFLOWS %.1fx" % (float(a_fit["needs"]) / float(a_fit["have"]))])
-	print("  B sized   frame x%.2f -> %.2f x %.2f m   font %2d  %d lines  %s"
-		% [grow, b_fmt.x, b_fmt.y, int(b_fit["font_size"]), int(b_fit["lines"]),
-		   "fits" if bool(b_fit["fits"]) else "STILL OVERFLOWS"])
-	print("  C lead    %d of %d characters  font %2d  %d lines  %s"
-		% [lead.length(), n, int(c_fit["font_size"]), int(c_fit["lines"]),
-		   "fits" if bool(c_fit["fits"]) else "OVERFLOWS"])
+	print("  B same frame, MEASURED font %2d  needs %.2f m of %.2f m   %s"
+		% [int(b_fit["font_size"]), float(b_fit["needs"]), float(b_fit["have"]),
+		   "fits" if bool(b_fit["fits"]) else "OVERFLOWS"])
+	print("  C bigger canvas x2    font %2d  needs %.2f m of %.2f m   %s   wrap %.0f px"
+		% [int(c_fit["font_size"]), float(c_fit["needs"]), float(c_fit["have"]),
+		   "fits" if bool(c_fit["fits"]) else "OVERFLOWS", float(c_fit["width_px"])])
+	print("  D lead + ellipsis     font %2d  %d of %d characters"
+		% [int(d_fit["font_size"]), lead.length(), n])
 	print("")
 
-	_scene(a_fit, b_fmt, b_fit, lead, c_fit, grow)
+	_scene(a_fit, b_fit, big, c_fit, lead, d_fit)
 	await _settle()
 	await _shot("wall_fit")
 	print("  PNG in %s" % ProjectSettings.globalize_path(OUT))
@@ -97,30 +100,31 @@ func _lead(s: String, budget: int) -> String:
 	return slice.strip_edges() + " …"
 
 
-func _scene(a_fit: Dictionary, b_fmt: Vector2, b_fit: Dictionary,
-		lead: String, c_fit: Dictionary, grow: float) -> void:
+func _scene(a_fit: Dictionary, b_fit: Dictionary, big: Vector2,
+		c_fit: Dictionary, lead: String, d_fit: Dictionary) -> void:
 	var root := Node3D.new()
 	_root.add_child(root)
 
 	var env := WorldEnvironment.new()
 	var e := Environment.new()
 	e.background_mode = Environment.BG_COLOR
-	e.background_color = Color(0.80, 0.77, 0.73)          # the museum's warm wall
+	e.background_color = Color(0.80, 0.77, 0.73)
 	e.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	e.ambient_light_color = Color(1, 1, 1)
 	e.ambient_light_energy = 1.1
 	env.environment = e
 	root.add_child(env)
 
-	# three bays, spaced by the widest frame so nothing collides
-	var span: float = maxf(b_fmt.x, LANDSCAPE.x) + 0.9
-	_panel(root, Vector3(-span, 0, 0), LANDSCAPE, SENTENCE, a_fit,
-		"A  TODAY — %d ch, font %d, %.1fx too tall" % [SENTENCE.length(), int(a_fit["font_size"]),
+	var step: float = big.x * 0.62 + 1.3
+	_panel(root, Vector3(-step * 1.6, 0, 0), LANDSCAPE, SENTENCE, a_fit,
+		"A  TODAY — font %d, %.1fx too tall" % [int(a_fit["font_size"]),
 		float(a_fit["needs"]) / float(a_fit["have"])])
-	_panel(root, Vector3(0, 0, 0), b_fmt, SENTENCE, b_fit,
-		"B  SIZED — frame x%.2f (%.2f x %.2f m), font %d" % [grow, b_fmt.x, b_fmt.y, int(b_fit["font_size"])])
-	_panel(root, Vector3(span, 0, 0), LANDSCAPE, lead, c_fit,
-		"C  LEAD — %d of %d ch, font %d, rest on click" % [lead.length(), SENTENCE.length(), int(c_fit["font_size"])])
+	_panel(root, Vector3(-step * 0.55, 0, 0), LANDSCAPE, SENTENCE, b_fit,
+		"B  SAME FRAME, MEASURED — font %d, fits" % int(b_fit["font_size"]))
+	_panel(root, Vector3(step * 0.62, 0, 0), big, SENTENCE, c_fit,
+		"C  BIGGER CANVAS %.1f x %.1f m, MEASURED — font %d" % [big.x, big.y, int(c_fit["font_size"])])
+	_panel(root, Vector3(step * 1.75, 0, 0), LANDSCAPE, lead, d_fit,
+		"D  LEAD — %d of %d ch, font %d" % [lead.length(), SENTENCE.length(), int(d_fit["font_size"])])
 
 	var key := DirectionalLight3D.new()
 	key.rotation = Vector3(-0.7, -0.5, 0.0)
@@ -129,7 +133,7 @@ func _scene(a_fit: Dictionary, b_fmt: Vector2, b_fit: Dictionary,
 
 	var cam := Camera3D.new()
 	root.add_child(cam)
-	cam.position = Vector3(0.0, 1.58, maxf(span * 1.15, 3.2))
+	cam.position = Vector3(0.0, 1.58, 7.6)
 	cam.look_at_from_position(cam.position, Vector3(0.0, 1.58, 0.0), Vector3.UP)
 	cam.current = true
 
@@ -151,11 +155,14 @@ func _panel(parent: Node3D, at: Vector3, fmt: Vector2, text: String,
 	sl.text = text
 	sl.pixel_size = float(fit["pixel_size"])
 	sl.font_size = int(fit["font_size"])
-	sl.width = 400.0
+	sl.width = float(fit["width_px"]) if fit.has("width_px") else 400.0
 	sl.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	sl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	sl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	sl.modulate = Color(0.93, 0.92, 0.9)
+	var rf: Font = load(ROBOTO) if ResourceLoader.exists(ROBOTO) else null
+	if rf != null:
+		sl.font = rf
 	sl.position = Vector3(0, 0, 0.04)
 	bay.add_child(sl)
 

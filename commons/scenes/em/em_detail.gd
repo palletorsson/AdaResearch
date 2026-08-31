@@ -1012,6 +1012,65 @@ static func speak_budget(wm: float, hm: float) -> int:
 	return lo
 
 
+## THE SAME QUESTION, ASKED OF THE FONT INSTEAD OF A CONSTANT.
+##
+## 2026-08-31, Palle on the rendered comparison: "one need bigger canvas and the
+## second needs bigger text." The second turned out to be a fault, not a taste.
+##
+## speak_fit estimates a block as `lines * 65.0` pixels. The 65 is fixed, and
+## measured against the real font (probe_label_height.gd) it is true at font 52
+## and over-states everything below it — 1.60x at 36, 2.27x at 28, 2.98x at 20.
+## So the shrink loop keeps shrinking long after the text already fitted, and
+## every long label in the museum is drawn smaller than its frame requires.
+##
+## This asks Font.get_multiline_string_size for the real wrapped height, and it
+## fixes the second half of the same fault: the wrap width was hard-coded to 400
+## px whatever the frame, so a wide field held a narrow column with the text
+## shrunk to fit a width it did not have. Here the wrap follows the FIELD, which
+## is why a bigger canvas now buys bigger type instead of more margin.
+##
+## speak_fit is left exactly as it was. Switching the museum over is one line in
+## _hang_pages, and it is a visible change to every wall in the building, so it
+## is offered rather than taken.
+static func speak_fit_measured(font: Font, text: String, wm: float, hm: float,
+		floor_size: int = 12) -> Dictionary:
+	var fieldw: float = maxf(wm - 2.0 * HANG_MOUNT_W, 0.12)
+	var fieldh: float = maxf(hm - 2.0 * HANG_MOUNT_W, 0.12)
+	var ps: float = clampf((fieldw - 0.08) / 400.0, 0.0006, 0.0024)
+	# the wrap follows the field: as many pixels across as the field has, less
+	# the same 8 cm the pixel size was derived with
+	var width_px: float = maxf((fieldw - 0.08) / ps, 80.0)
+	var have_px: float = maxf((fieldh - 0.06) / ps, 1.0)
+	var font_size: int = 52
+	var size := Vector2.ZERO
+	while font_size > floor_size:
+		size = font.get_multiline_string_size(text, HORIZONTAL_ALIGNMENT_CENTER, width_px, font_size)
+		if size.y <= have_px:
+			break
+		font_size -= 2
+	if size == Vector2.ZERO:
+		size = font.get_multiline_string_size(text, HORIZONTAL_ALIGNMENT_CENTER, width_px, font_size)
+	return {
+		"pixel_size": ps, "font_size": font_size, "width_px": width_px,
+		"needs": size.y * ps, "have": fieldh - 0.06, "fits": size.y <= have_px,
+		"field": Vector2(fieldw, fieldh),
+	}
+
+
+## The longest prefix of `text` this format can hold, measured the same way.
+static func speak_budget_measured(font: Font, text: String, wm: float, hm: float,
+		floor_size: int = 12) -> int:
+	var lo: int = 1
+	var hi: int = text.length()
+	while lo < hi:
+		var mid: int = (lo + hi + 1) / 2
+		if bool(speak_fit_measured(font, text.substr(0, mid), wm, hm, floor_size)["fits"]):
+			lo = mid
+		else:
+			hi = mid - 1
+	return lo
+
+
 ## Six boxes: four frame bars, a light mount, a dark field. All fully PROUD of
 ## the wall plane (offset along the outward normal by half their own depth), not
 ## straddling it the way the skirting does — a picture is on a wall, not in it.
