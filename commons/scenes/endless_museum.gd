@@ -554,9 +554,20 @@ const SHIPPED_DIR := "res://commons/data/museum/"
 ## can reach without root. NO-OP on desktop, so the editor and PCVR flow are
 ## untouched.
 static func _shipped(path: String) -> String:
+	return _shipped_on(path, OS.has_feature("android"))
+
+
+## The body of _shipped with the platform as an ARGUMENT, so it can be tested.
+##
+## An adb-pushed override only exists on a headset, and a rule that can only be
+## exercised on the far side of a forty-minute APK build is a rule nobody checks.
+## probe_trunk_override.gd calls this with android=true on the desktop, writes a
+## file into user://override_data/, and reads the answer back. Palle is about to
+## spend an export on this arm; it should be known to work before he does.
+static func _shipped_on(path: String, android: bool) -> String:
 	if path == "":
 		return path
-	if OS.has_feature("android"):
+	if android:
 		var rel: String = "override_data/" + path.get_file()
 		var candidates: Array = ["user://" + rel]
 		var udir: String = OS.get_user_data_dir().replace("\\", "/")
