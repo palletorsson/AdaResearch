@@ -37,6 +37,16 @@
   "Ribbon_Color_06",
   "Ribbon_Color_07"
  ],
+ "change": [
+  "Change_Intro",
+  "Accumulation_Riemann",
+  "Flow_Field",
+  "Change_Reconciliation",
+  "Ribbon_Change_01",
+  "Ribbon_Change_02",
+  "Ribbon_Change_03",
+  "Ribbon_Change_04"
+ ],
  "forces": [
   "VFM_01_Foundations",
   "Vectors_Act1_WhatAVectorIs",
@@ -54,15 +64,141 @@
   "VFM_04_Fields",
   "Vectors_Act5_ForceAsPlace"
  ],
- "change": [
-  "Change_Intro",
-  "Accumulation_Riemann",
-  "Flow_Field",
-  "Change_Reconciliation",
-  "Ribbon_Change_01",
-  "Ribbon_Change_02",
-  "Ribbon_Change_03",
-  "Ribbon_Change_04"
+ "formfinding": [
+  "FormFinding_Descent",
+  "FormFinding_Catenary",
+  "FormFinding_Relaxation",
+  "FormFinding_Equilibrium",
+  "FormFinding_Annealing",
+  "FormFinding_Forge"
+ ],
+ "wavefunctions": [
+  "WaveFunctions_Intro",
+  "WaveFunctions_Pendulum",
+  "WaveFunctions_Sine_Space",
+  "WaveFunctions_Effect_Sound",
+  "WaveFunctions_AirMusic",
+  "WaveFunctions_Synthesis_Lab"
+ ],
+ "randomness": [
+  "Random_Definition",
+  "Random_Entropy",
+  "Random_Walk",
+  "Random_Gaussian",
+  "Random_Mushrooms",
+  "Random_Game"
+ ],
+ "noise": [
+  "Random_Noise_Types",
+  "Noise_Columns",
+  "Noise_One",
+  "Noise_Voxel",
+  "Noise_6_Wall",
+  "Noise_Perlin_Simplex"
+ ],
+ "cellularautomata": [
+  "CA_Introduction",
+  "CA_GameOfLife",
+  "CA_BeyondBinary",
+  "CA_ExpandingSpace",
+  "CA_SoftRules",
+  "CA_EdgeOfChaos"
+ ],
+ "fractals": [
+  "Fractal_Recursion",
+  "Fractal_RecursiveTrees",
+  "Fractal_CantorSet",
+  "Fractal_KochSierpinski",
+  "Fractal_GoldenSpiral",
+  "Fractal_Synthesis"
+ ],
+ "lsystems": [
+  "LSystems_Grammar_Lab",
+  "LSystems_Growth",
+  "LSystems_Grammars_And_Curves",
+  "LSystems_Architecture",
+  "LSystems_Living",
+  "Assemblage_Same_Desire"
+ ],
+ "proceduralgeneration": [
+  "PG_Genetic_Evolution",
+  "PG_Percolation_Network",
+  "PG_Branching_Growth",
+  "PG_Caves_Mazes",
+  "PG_Sculpted_Forms",
+  "PG_Mirrored_Patterns"
+ ],
+ "softbodies": [
+  "SoftBodies_Soft_Body_Deformation",
+  "SoftBodies_Carusell",
+  "SoftBodies_Obsticals",
+  "SoftBodies_Obsticals_Part2",
+  "SoftBodies_Playground_of_Joy",
+  "ProceduralGeneration_Reaction_Diffusion_Systems"
+ ],
+ "isosurfaces": [
+  "ISO_LookupTable",
+  "ISO_ShapesGallery",
+  "ISO_TorusGyroid",
+  "ISO_FlatTerrain",
+  "ISO_Caves",
+  "ISO_Metaballs"
+ ],
+ "boolean_surfaces": [
+  "Boolean_Union",
+  "Boolean_Intersection",
+  "Boolean_Difference",
+  "Boolean_Compose_Workbench",
+  "Chamber_Boolean",
+  "Boolean_Architecture_Cavity"
+ ],
+ "swarmintelligence": [
+  "SwarmIntelligence_PhysarumColony",
+  "SwarmIntelligence_FlowFields",
+  "SwarmIntelligence_Boids_Algorithm",
+  "SwarmIntelligence_Agent_Based_Modeling_ABM",
+  "Chamber_Swarm",
+  "SwarmIntelligence_Particle_Swarm_Optimization"
+ ],
+ "machinelearning": [
+  "ML_Evolution",
+  "ML_Gradient_Landscape",
+  "ML_Classification",
+  "ML_Neural_Networks",
+  "ML_Perception",
+  "ML_Synthesis"
+ ],
+ "graphtheory": [
+  "GT_Foundations",
+  "GT_Layout",
+  "GT_Pathfinding",
+  "GT_Network_Analysis",
+  "GT_Connectivity",
+  "GT_Flow"
+ ],
+ "foundationscrisis": [
+  "NonEuclidean_Spaces",
+  "Russell_Paradox",
+  "Godel_Incompleteness",
+  "Escher_Impossible",
+  "Brouwer_Intuitionism",
+  "Crisis_Synthesis"
+ ],
+ "qfeplaboratory": [
+  "QFEP_Introduction",
+  "QFEP_E_Term",
+  "QFEP_Lambda_Spectrum",
+  "QFEP_Phi_Term",
+  "QFEP_Edge_Of_Chaos",
+  "QFEP_Synthesis"
+ ],
+ "postfoundationscrisis": [
+  "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+  "CriticalAlgorithms_Applied_Ethics",
+  "SpeculativeComputation_Paraconsistent_Engineering",
+  "SpeculativeComputation_Collective_Knowledge",
+  "SpeculativeComputation_Rhizome_Network",
+  "PostCrisis_Synthesis"
  ],
  "_placed_added": {
   "change": [

@@ -1,0 +1,2728 @@
+{
+ "_generated_by": "tools/em_best_of.py (report only, mutates nothing)",
+ "halls": [
+  {
+   "sequence": "primitives",
+   "pearl": "point one",
+   "map": "Point_One",
+   "hero": "coordinate_readout",
+   "hero_by": "signature",
+   "hero_df": 1,
+   "cast": [
+    "spore_mushroom",
+    "wireframe_threshold",
+    "3t",
+    "line_demo"
+   ],
+   "furniture": [
+    "origin",
+    "you_are_here",
+    "interactive_point_origin_force",
+    "CoordinateSystem3M",
+    "fontana_puncture",
+    "floating_sphere_field",
+    "dark_sphere"
+   ]
+  },
+  {
+   "sequence": "primitives",
+   "pearl": "point lines",
+   "map": "Point_Lines",
+   "hero": "plus_line_puzzle",
+   "hero_by": "applied",
+   "hero_df": 13,
+   "cast": [
+    "parallel_line_puzzle",
+    "do_not_cross_barrier",
+    "laser_exploding_sphere",
+    "modulor_man_demo",
+    "scale_lines",
+    "two_points_line",
+    "walk_this_line_marking",
+    "line_demo",
+    "lightrod"
+   ],
+   "furniture": [
+    "klee_walking_point",
+    "floating_sphere_field",
+    "line",
+    "laser_measure",
+    "line_builder_3d",
+    "dark_sphere",
+    "perspective_lines",
+    "fontana_puncture",
+    "science_screen",
+    "dgrid",
+    "grabbable_line",
+    "cube_scene"
+   ]
+  },
+  {
+   "sequence": "primitives",
+   "pearl": "point trace",
+   "map": "Point_Trace",
+   "hero": "draw_dot",
+   "hero_by": "promoted",
+   "hero_df": 11,
+   "cast": [
+    "whiteboard"
+   ],
+   "furniture": [
+    "origin",
+    "floating_sphere_field",
+    "science_screen"
+   ]
+  },
+  {
+   "sequence": "primitives",
+   "pearl": "point line grid",
+   "map": "Point_Line_Grid",
+   "hero": "grab_sphere_point_snap",
+   "hero_by": "applied",
+   "hero_df": 12,
+   "cast": [
+    "room_grammar",
+    "grid_lines"
+   ],
+   "furniture": [
+    "player_trace",
+    "floating_sphere_field"
+   ]
+  },
+  {
+   "sequence": "primitives",
+   "pearl": "point triangle context",
+   "map": "Point_Triangle_Context",
+   "hero": "quad_line_puzzle",
+   "hero_by": "applied",
+   "hero_df": 11,
+   "cast": [
+    "triangle_line_puzzle",
+    "pythagorean_triangle_angles",
+    "draw_triangle_faces",
+    "folded_strip",
+    "parasol_triangle",
+    "triangleprofiles",
+    "catalyst_prompter_box",
+    "quad",
+    "interactivetriangle",
+    "triangle"
+   ],
+   "furniture": [
+    "dark_sphere",
+    "floating_sphere_field",
+    "catalyst_vent",
+    "science_screen"
+   ]
+  },
+  {
+   "sequence": "primitives",
+   "pearl": "primitives polythedra",
+   "map": "Primitives_Polythedra",
+   "hero": "tentacle_placer",
+   "hero_by": "applied",
+   "hero_df": 8,
+   "cast": [
+    "pyramid_edit",
+    "grab_trihedron",
+    "grab_tetrahedron",
+    "path_game_controller",
+    "path_watchdog"
+   ],
+   "furniture": [
+    "cube_scene",
+    "interactive_point_origin_force",
+    "becoming_catalyst"
+   ]
+  },
+  {
+   "sequence": "primitives",
+   "pearl": "point animatedcube",
+   "map": "Point_Animatedcube",
+   "hero": "animatedcubebuilder",
+   "hero_by": "applied",
+   "hero_df": 10,
+   "cast": [
+    "polyhedron_nets_cube"
+   ],
+   "furniture": [
+    "floating_sphere_field"
+   ]
+  },
+  {
+   "sequence": "primitives",
+   "pearl": "primitives ignorance",
+   "map": "Primitives_Ignorance",
+   "hero": "snap_octahedron_puzzle",
+   "hero_by": "applied",
+   "hero_df": 10,
+   "cast": [
+    "grab_octahedron",
+    "hole_with_cones",
+    "roughrock",
+    "sphere_low",
+    "sphere_mid",
+    "star_primitive",
+    "platonic_grabbables",
+    "sphere_high",
+    "truncatedtetrahedron",
+    "capsule",
+    "righttriangle",
+    "sphere"
+   ],
+   "furniture": [
+    "dark_sphere",
+    "cube_scene",
+    "floating_sphere_field"
+   ]
+  },
+  {
+   "sequence": "primitives",
+   "pearl": "primitives portals",
+   "map": "Primitives_Portals",
+   "hero": "combine_portals",
+   "hero_by": "promoted",
+   "hero_df": 5,
+   "cast": [
+    "capsule",
+    "achilles_tortoise"
+   ],
+   "furniture": [
+    "dark_sphere",
+    "floating_sphere_field"
+   ]
+  },
+  {
+   "sequence": "primitives",
+   "pearl": "primitives melencolia",
+   "map": "Primitives_Melencolia",
+   "hero": "snap_pyramid_puzzle",
+   "hero_by": "applied",
+   "hero_df": 18,
+   "cast": [
+    "pyramidlong",
+    "durer_scene",
+    "pyramid",
+    "diamondtoruscollection",
+    "bigframe"
+   ],
+   "furniture": [
+    "code_display",
+    "prism_block",
+    "dark_sphere"
+   ]
+  },
+  {
+   "sequence": "transformation",
+   "pearl": "trans introduction",
+   "map": "Trans_Introduction",
+   "hero": "transform_composition",
+   "hero_by": "applied",
+   "hero_df": 7,
+   "cast": [
+    "homogeneous_coordinates",
+    "matrix_4x4_viewer",
+    "x_translation_cube",
+    "balance_puzzle",
+    "rotation_gimbal",
+    "y_translation_cube",
+    "invariants_demo",
+    "z_translation_cube",
+    "head_crab",
+    "scale_me",
+    "spin"
+   ],
+   "furniture": [
+    "dark_sphere",
+    "pick_up_cube"
+   ]
+  },
+  {
+   "sequence": "transformation",
+   "pearl": "trans translation",
+   "map": "Trans_Translation",
+   "hero": "y_translation_cube",
+   "hero_by": "promoted",
+   "hero_df": 10,
+   "cast": [
+    "transform_composition_workbench",
+    "z_translation_cube",
+    "pickup_gate"
+   ],
+   "furniture": [
+    "player_trace",
+    "synthesis_stand",
+    "pick_up_cube",
+    "science_screen",
+    "dark_sphere"
+   ]
+  },
+  {
+   "sequence": "transformation",
+   "pearl": "trans axisdecomposition",
+   "map": "Trans_AxisDecomposition",
+   "hero": "translation_cube_demo",
+   "hero_by": "promoted",
+   "hero_df": 6,
+   "cast": [
+    "x_translation_cube",
+    "z_translation_cube",
+    "pickup_gate",
+    "toruscylinder"
+   ],
+   "furniture": [
+    "dark_sphere",
+    "cube_scene",
+    "pick_up_cube"
+   ]
+  },
+  {
+   "sequence": "transformation",
+   "pearl": "trans rotation",
+   "map": "Trans_Rotation",
+   "hero": "rotate_grid_cubes",
+   "hero_by": "promoted",
+   "hero_df": 7,
+   "cast": [
+    "catalyst_prompter_box",
+    "pickup_gate",
+    "spin"
+   ],
+   "furniture": [
+    "science_screen",
+    "dark_sphere",
+    "catalyst_vent",
+    "pick_up_cube"
+   ]
+  },
+  {
+   "sequence": "transformation",
+   "pearl": "trans rotationspectacle",
+   "map": "Trans_RotationSpectacle",
+   "hero": "carousel_cake",
+   "hero_by": "applied",
+   "hero_df": 9,
+   "cast": [
+    "boolean_tunnel",
+    "righttriangle"
+   ],
+   "furniture": [
+    "dark_sphere",
+    "pick_up_cube"
+   ]
+  },
+  {
+   "sequence": "transformation",
+   "pearl": "trans scale",
+   "map": "Trans_Scale",
+   "hero": "chair_assembly_puzzle",
+   "hero_by": "promoted",
+   "hero_df": 15,
+   "cast": [
+    "scale_me"
+   ],
+   "furniture": [
+    "clipboard",
+    "science_screen",
+    "prism_block",
+    "cube_scene",
+    "dark_sphere"
+   ]
+  },
+  {
+   "sequence": "transformation",
+   "pearl": "trans pit",
+   "map": "Trans_Pit",
+   "hero": "grower_block",
+   "hero_by": "rarest",
+   "hero_df": 6,
+   "cast": [
+    "pusher_block"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "color",
+   "pearl": "array",
+   "map": "Array",
+   "hero": "grid3d",
+   "hero_by": "category",
+   "hero_df": 9,
+   "cast": [
+    "bar_array_bubble_sort",
+    "column_3_z",
+    "grid_2d_4x4",
+    "bar_array",
+    "xyz_coordinates",
+    "pulsar_visualizer",
+    "sorting_algorithm_race",
+    "grid_3d_4x4x4",
+    "row_3_x"
+   ],
+   "furniture": [
+    "pick_up_cube",
+    "dark_sphere"
+   ]
+  },
+  {
+   "sequence": "color",
+   "pearl": "pattern foundry",
+   "map": "Pattern_Foundry",
+   "hero": "pattern_mill",
+   "hero_by": "promoted",
+   "hero_df": 4,
+   "cast": [
+    "pattern_machine_c",
+    "pattern_tile_herringbone",
+    "pattern_maker_station",
+    "pattern_tile_4x4",
+    "pattern_tile_brick",
+    "pattern_machine_d",
+    "pattern_machine_a",
+    "pattern_studio_plate",
+    "pattern_tile_plate",
+    "tiling_demo"
+   ],
+   "furniture": [
+    "pattern_tile_mirror"
+   ]
+  },
+  {
+   "sequence": "color",
+   "pearl": "color context placed",
+   "map": "Color_Context_Placed",
+   "hero": "primitive_combo_puzzle",
+   "hero_by": "applied",
+   "hero_df": 1,
+   "cast": [
+    "dna_color_furniture_furniture_becker_utensilo_bauhaus",
+    "dna_color_furniture_furniture_coco_pendant_warm",
+    "dna_color_furniture_furniture_lamp_warm_glow",
+    "dna_color_furniture_furniture_vignelli_metafora_primary",
+    "dna_color_stacks_stack_complementary_red_green",
+    "dna_color_stacks_stack_monochrome_blue",
+    "dna_color_stacks_stack_simultaneous_contrast",
+    "dna_color_stacks_stack_triadic_primary",
+    "dna_color_stacks_stack_value_steps_warm",
+    "dna_modern_art_albers_homage_warm",
+    "dna_modern_art_kandinsky_bauhaus_triad",
+    "dna_modern_art_rothko_chromatic_field",
+    "dna_primitive_stack_ps01_bauhaus_totem_green",
+    "loom_fountain_pastel_p4",
+    "mill_memphis_p3",
+    "primitive_assembler",
+    "loom_drum_bauhaus_p4m",
+    "grid_model",
+    "standalone_disco",
+    "albers_wall_gallery",
+    "loom_bolt_memphis_p4g"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "color",
+   "pearl": "color nails",
+   "map": "Color_Nails",
+   "hero": "grab_stick_scanner",
+   "hero_by": "applied",
+   "hero_df": 3,
+   "cast": [
+    "dark_side_prism",
+    "hand_color_controller",
+    "hand_model",
+    "nail_color_controller",
+    "colorballs"
+   ],
+   "furniture": [
+    "science_screen",
+    "dark_sphere"
+   ]
+  },
+  {
+   "sequence": "color",
+   "pearl": "color pillar",
+   "map": "Color_Pillar",
+   "hero": "pillarcolorcollection",
+   "hero_by": "applied",
+   "hero_df": 12,
+   "cast": [
+    "visual_color_mixing",
+    "color_sets_overview",
+    "grab_rainbow_stick",
+    "composition_twins",
+    "loom_drum_persian_p6",
+    "SpectrumVisualizer"
+   ],
+   "furniture": [
+    "dark_sphere"
+   ]
+  },
+  {
+   "sequence": "color",
+   "pearl": "color walls",
+   "map": "Color_Walls",
+   "hero": "gradient_interpolator",
+   "hero_by": "applied",
+   "hero_df": 2,
+   "cast": [
+    "color_space_navigator",
+    "rainbow_hallway",
+    "color_constellation_office",
+    "ball_painting_demo",
+    "rainbow",
+    "subpixel_display",
+    "spectrum_forest",
+    "loom_bolt_memphis_p4g"
+   ],
+   "furniture": [
+    "dark_sphere"
+   ]
+  },
+  {
+   "sequence": "color",
+   "pearl": "symmetry seventeen",
+   "map": "Symmetry_Seventeen",
+   "hero": "pattern_artifact",
+   "hero_by": "promoted",
+   "hero_df": 7,
+   "cast": [
+    "pattern_atlas_gallery",
+    "vr_tile_editor",
+    "wall_pattern_gallery",
+    "pattern_loom",
+    "mill_alhambra_p6m",
+    "loom_alhambra_p6m",
+    "mill_escher_p4g",
+    "mill_persian_p4",
+    "kaleidoscope",
+    "loom_escher_mirror",
+    "tile_meander_floor"
+   ],
+   "furniture": [
+    "pattern_tile_puzzle"
+   ]
+  },
+  {
+   "sequence": "color",
+   "pearl": "ribbon color 01",
+   "map": "Ribbon_Color_01",
+   "hero": "grid_2d_4x4",
+   "hero_by": "promoted",
+   "hero_df": 6,
+   "cast": [
+    "pillarcolorcollection",
+    "color_sets_overview",
+    "pattern_studio_plate",
+    "grid_3d_4x4x4",
+    "grid_model",
+    "pattern_tile_plate",
+    "standalone_disco",
+    "albers_wall_gallery"
+   ],
+   "furniture": [
+    "pick_up_cube",
+    "dark_sphere"
+   ]
+  },
+  {
+   "sequence": "color",
+   "pearl": "ribbon color 02",
+   "map": "Ribbon_Color_02",
+   "hero": "rainbow_hallway",
+   "hero_by": "promoted",
+   "hero_df": 4,
+   "cast": [
+    "color_constellation_office",
+    "ball_painting_demo",
+    "vr_tile_editor",
+    "pattern_maker_station",
+    "spectrum_forest",
+    "tiling_demo",
+    "RotatingLaser",
+    "brick_wall_factory",
+    "coloredlines"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "color",
+   "pearl": "ribbon color 03",
+   "map": "Ribbon_Color_03",
+   "hero": "color_scanner",
+   "hero_by": "applied",
+   "hero_df": 1,
+   "cast": [
+    "color_mixing",
+    "grab_stick_scanner",
+    "visual_color_mixing",
+    "dark_side_prism",
+    "flashlight_demo",
+    "bar_array",
+    "xyz_coordinates",
+    "laser_turret",
+    "spherecolors",
+    "textureglitch",
+    "advancedglitch",
+    "glitchcolor",
+    "minimalglitch",
+    "mario_cube",
+    "pulsar_visualizer",
+    "MetamerismLab",
+    "grab_stick"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "color",
+   "pearl": "ribbon color 04",
+   "map": "Ribbon_Color_04",
+   "hero": "color_space_navigator",
+   "hero_by": "applied",
+   "hero_df": 4,
+   "cast": [
+    "bar_array_bubble_sort",
+    "column_3_z",
+    "grab_rainbow_stick",
+    "SimultaneousContrast",
+    "hand_color_controller",
+    "hand_model",
+    "nail_color_controller"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "color",
+   "pearl": "ribbon color 05",
+   "map": "Ribbon_Color_05",
+   "hero": "grabcolorcollection",
+   "hero_by": "applied",
+   "hero_df": 5,
+   "cast": [
+    "grid3d",
+    "pattern_tile_herringbone",
+    "pattern_tile_4x4",
+    "pattern_tile_brick",
+    "sorting_algorithm_race",
+    "colorballs"
+   ],
+   "furniture": [
+    "pattern_tile_mirror"
+   ]
+  },
+  {
+   "sequence": "color",
+   "pearl": "ribbon color 06",
+   "map": "Ribbon_Color_06",
+   "hero": "rainbow",
+   "hero_by": "promoted",
+   "hero_df": 9,
+   "cast": [
+    "gradient_interpolator",
+    "wall_pattern_gallery",
+    "subpixel_display",
+    "kaleidoscope",
+    "SpectrumVisualizer"
+   ],
+   "furniture": [
+    "pattern_tile_puzzle",
+    "science_screen"
+   ]
+  },
+  {
+   "sequence": "color",
+   "pearl": "ribbon color 07",
+   "map": "Ribbon_Color_07",
+   "hero": "shelf",
+   "hero_by": "rarest",
+   "hero_df": 2,
+   "cast": [
+    "shelf_with_stickers",
+    "strobe_lasers",
+    "prism",
+    "disco_lights",
+    "row_3_x",
+    "colortrails",
+    "tile_meander_floor"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "change",
+   "pearl": "change intro",
+   "map": "Change_Intro",
+   "hero": "gradient_descent_well",
+   "hero_by": "category",
+   "hero_df": 3,
+   "cast": [
+    "descent_marble_toy",
+    "partial_derivative_terrain",
+    "derivative_pair",
+    "slope_tangent_demo",
+    "velocity_arrow",
+    "tangent_slope_workbench"
+   ],
+   "furniture": [
+    "synthesis_stand",
+    "code_display"
+   ]
+  },
+  {
+   "sequence": "change",
+   "pearl": "accumulation riemann",
+   "map": "Accumulation_Riemann",
+   "hero": "riemann_pump",
+   "hero_by": "promoted",
+   "hero_df": 3,
+   "cast": [
+    "riemann_pi",
+    "integral_area",
+    "riemann_sum_workbench"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "change",
+   "pearl": "flow field",
+   "map": "Flow_Field",
+   "hero": "flow_field_painter",
+   "hero_by": "category",
+   "hero_df": 5,
+   "cast": [
+    "noc_5_04_flow_field",
+    "vector_field_visualizer",
+    "particle_flow_swarm",
+    "vector_field_grid"
+   ],
+   "furniture": [
+    "science_screen"
+   ]
+  },
+  {
+   "sequence": "change",
+   "pearl": "change reconciliation",
+   "map": "Change_Reconciliation",
+   "hero": "ftc_bridge",
+   "hero_by": "applied",
+   "hero_df": 4,
+   "cast": [
+    "derivative_pair",
+    "integral_area"
+   ],
+   "furniture": [
+    "science_screen",
+    "code_display"
+   ]
+  },
+  {
+   "sequence": "change",
+   "pearl": "ribbon change 01",
+   "map": "Ribbon_Change_01",
+   "hero": "descent_marble_toy",
+   "hero_by": "category",
+   "hero_df": 5,
+   "cast": [
+    "riemann_sum_workbench",
+    "tangent_slope_workbench"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "change",
+   "pearl": "ribbon change 02",
+   "map": "Ribbon_Change_02",
+   "hero": "noc_5_04_flow_field",
+   "hero_by": "category",
+   "hero_df": 5,
+   "cast": [
+    "riemann_pi"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "change",
+   "pearl": "ribbon change 03",
+   "map": "Ribbon_Change_03",
+   "hero": "vector_field_visualizer",
+   "hero_by": "category",
+   "hero_df": 5,
+   "cast": [
+    "flow_field_painter"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "change",
+   "pearl": "ribbon change 04",
+   "map": "Ribbon_Change_04",
+   "hero": null,
+   "hero_by": "",
+   "hero_df": 0,
+   "cast": [],
+   "furniture": [
+    "science_screen",
+    "code_display"
+   ]
+  },
+  {
+   "sequence": "forces",
+   "pearl": "vfm 01 foundations",
+   "map": "VFM_01_Foundations",
+   "hero": "adder_board",
+   "hero_by": "promoted",
+   "hero_df": 3,
+   "cast": [
+    "stretch_bench",
+    "length_lantern",
+    "vector_addition_demo",
+    "vector_subtraction_demo",
+    "example_1_4_vector_multiplication_vr",
+    "vector_add",
+    "vector_sub",
+    "vector_magnitude_demo",
+    "vector_normalize_demo",
+    "coordinate_system_switcher",
+    "graphics_monitor",
+    "script_runner",
+    "vector_addition_xl",
+    "2d_in_3d_vectors_vis",
+    "vector_translation_demo"
+   ],
+   "furniture": [
+    "CoordinateSystem3M",
+    "VectorBasics",
+    "basis_vectors_rig"
+   ]
+  },
+  {
+   "sequence": "forces",
+   "pearl": "vectors act1 whatavectoris",
+   "map": "Vectors_Act1_WhatAVectorIs",
+   "hero": "length_lantern",
+   "hero_by": "promoted",
+   "hero_df": 5,
+   "cast": [
+    "vector_normalize_demo",
+    "3t"
+   ],
+   "furniture": [
+    "CoordinateSystem3M",
+    "VectorBasics"
+   ]
+  },
+  {
+   "sequence": "forces",
+   "pearl": "vfm 02 operations",
+   "map": "VFM_02_Operations",
+   "hero": "torque_crank",
+   "hero_by": "applied",
+   "hero_df": 5,
+   "cast": [
+    "dot_aligner",
+    "projection_shadow",
+    "opening_pair",
+    "agreement_gauge",
+    "exercise_5_9_angle_between",
+    "torque_demo",
+    "dot_product_projector",
+    "VectorSubtraction",
+    "VectorWorkbench",
+    "vector_projection_demo",
+    "vector_dot_product_xl",
+    "vector_projection_reflection_xl",
+    "vector_cross_product_xl",
+    "VectorTorque"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "forces",
+   "pearl": "vectors act2 vectorarithmetic",
+   "map": "Vectors_Act2_VectorArithmetic",
+   "hero": "dot_aligner",
+   "hero_by": "applied",
+   "hero_df": 6,
+   "cast": [
+    "torque_crank",
+    "projection_shadow",
+    "vector_add",
+    "vector_sub",
+    "example_2_3_gravity_scaled_by_mass_vr",
+    "vector_addition_xl_laser",
+    "vector_subtraction_xl_laser",
+    "vector_addition_walk",
+    "vector_dot_product_xl",
+    "vector_projection_reflection_xl",
+    "vector_cross_product_xl"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "forces",
+   "pearl": "vfm 03 motion",
+   "map": "VFM_03_Motion",
+   "hero": "vector_drone",
+   "hero_by": "applied",
+   "hero_df": 4,
+   "cast": [
+    "newton_cradle",
+    "collision_crasher",
+    "friction_ramp",
+    "VectorMotion",
+    "example_3_2_forces_with_arbitrary_angular_motion_vr",
+    "VectorForces",
+    "example_3_3_pointing_in_the_direction_of_motion_vr",
+    "normal_force_demo",
+    "bouncing_ball",
+    "combined_forces_demo",
+    "example_1_9_motion_101_velocity_and_random_acceleration_vr",
+    "example_2_5_fluid_resistance_vr",
+    "exercise_1_3_solution_3_d_bouncing_ball_vr",
+    "exercise_1_5_solution_accelerate_and_decelerate_vr",
+    "ForceMagnitudeDemo",
+    "trajectory_artifact"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "forces",
+   "pearl": "vfm 05 launch",
+   "map": "VFM_05_Launch",
+   "hero": "human_catapult",
+   "hero_by": "applied",
+   "hero_df": 3,
+   "cast": [
+    "mortar_vector_siege",
+    "return_launcher",
+    "slingshot_launcher",
+    "catapult",
+    "firework_launcher",
+    "force_pad",
+    "circle_train",
+    "foresight_range",
+    "launch_arc",
+    "turret_boll_infoboard",
+    "firework_burst",
+    "hl_turret_vectors",
+    "drag_lane",
+    "VectorThrowing"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "forces",
+   "pearl": "vectors act3 fieldsandmotion",
+   "map": "Vectors_Act3_FieldsAndMotion",
+   "hero": "bubble_blaster",
+   "hero_by": "applied",
+   "hero_df": 14,
+   "cast": [
+    "VectorMotion",
+    "launch_arc",
+    "weather_vector_field"
+   ],
+   "furniture": [
+    "VectorFieldFlow"
+   ]
+  },
+  {
+   "sequence": "forces",
+   "pearl": "vfm 06 springs",
+   "map": "VFM_06_Springs",
+   "hero": "HingeCrank",
+   "hero_by": "applied",
+   "hero_df": 3,
+   "cast": [
+    "slingshot_pull",
+    "surreal_kinetic_sculpture",
+    "bounce_well",
+    "harmonic_motion_demo",
+    "spring_system",
+    "mass_spring_damper",
+    "spring_demo",
+    "ChainSwing",
+    "ConeTwistBag",
+    "SliderPress",
+    "vector_joint_playground",
+    "spring_network",
+    "work_energy_demo",
+    "coupled_pendulums"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "forces",
+   "pearl": "vfm 07 gravity",
+   "map": "VFM_07_Gravity",
+   "hero": "forcedirected3d",
+   "hero_by": "category",
+   "hero_df": 7,
+   "cast": [
+    "nbody_simulation",
+    "three_body_problem",
+    "example_2_8_two_body_attraction_vr",
+    "example_2_9_n_body_attraction_vr",
+    "exercise_1_8_solution_attraction_magnitude_vr",
+    "orbit_pair",
+    "orbital_mechanics_demo",
+    "gravity_well",
+    "chaos_attractor",
+    "grid3d_force_directed"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "forces",
+   "pearl": "vfm 09 legs",
+   "map": "VFM_09_Legs",
+   "hero": "five_leg_critter",
+   "hero_by": "rarest",
+   "hero_df": 2,
+   "cast": [
+    "four_leg_critter",
+    "octapod_ik",
+    "one_leg",
+    "six_leg_critter",
+    "three_leg_critter",
+    "two_leg_critter"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "forces",
+   "pearl": "vfm 08 arena",
+   "map": "VFM_08_Arena",
+   "hero": "vector_arena",
+   "hero_by": "applied",
+   "hero_df": 3,
+   "cast": [
+    "momentum_cradle",
+    "queer_cylinder_target",
+    "newtons_laws",
+    "head_crab",
+    "reflection_hall",
+    "example_2_1_forces_vr",
+    "turret_targeting",
+    "momentum_collision",
+    "sentry_turret",
+    "collision_carts"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "forces",
+   "pearl": "vectors act4a kineticforces",
+   "map": "Vectors_Act4a_KineticForces",
+   "hero": "force_mower",
+   "hero_by": "applied",
+   "hero_df": 4,
+   "cast": [
+    "force_pad",
+    "drag_corridor",
+    "centrifuge_ring",
+    "orbit_walk",
+    "wedge_slide"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "forces",
+   "pearl": "vectors act4b oscillation",
+   "map": "Vectors_Act4b_Oscillation",
+   "hero": "weather_vane",
+   "hero_by": "applied",
+   "hero_df": 3,
+   "cast": [
+    "calder_object_mobile",
+    "momentum_cradle",
+    "bounce_well",
+    "calder_mobile",
+    "spring_tower",
+    "pendulum_hall",
+    "lever_balance"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "forces",
+   "pearl": "vfm 04 fields",
+   "map": "VFM_04_Fields",
+   "hero": "force_vortex",
+   "hero_by": "applied",
+   "hero_df": 5,
+   "cast": [
+    "flow_field_painter",
+    "noc_5_04_flow_field",
+    "vector_field_visualizer",
+    "field_room",
+    "force_field_visualizer",
+    "vector_fields",
+    "weather_vector_field",
+    "particle_systems",
+    "magnetic_simulation",
+    "vector_field",
+    "force_fields"
+   ],
+   "furniture": [
+    "VectorFieldFlow",
+    "interactive_point_origin_force"
+   ]
+  },
+  {
+   "sequence": "forces",
+   "pearl": "vectors act5 forceasplace",
+   "map": "Vectors_Act5_ForceAsPlace",
+   "hero": "force_field_zone",
+   "hero_by": "applied",
+   "hero_df": 10,
+   "cast": [
+    "force_cube",
+    "vector_machine"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "formfinding",
+   "pearl": "formfinding descent",
+   "map": "FormFinding_Descent",
+   "hero": "gradient_descent",
+   "hero_by": "rarest",
+   "hero_df": 4,
+   "cast": [
+    "gradient_descent_well",
+    "descent_marble_toy"
+   ],
+   "furniture": [
+    "science_screen"
+   ]
+  },
+  {
+   "sequence": "formfinding",
+   "pearl": "formfinding catenary",
+   "map": "FormFinding_Catenary",
+   "hero": "cable_builder",
+   "hero_by": "promoted",
+   "hero_df": 14,
+   "cast": [
+    "catenoid"
+   ],
+   "furniture": [
+    "helicoid",
+    "science_screen"
+   ]
+  },
+  {
+   "sequence": "formfinding",
+   "pearl": "formfinding relaxation",
+   "map": "FormFinding_Relaxation",
+   "hero": "verlet_workbench",
+   "hero_by": "applied",
+   "hero_df": 3,
+   "cast": [
+    "mass_spring_bench",
+    "frozen_glass_vessel"
+   ],
+   "furniture": [
+    "science_screen"
+   ]
+  },
+  {
+   "sequence": "formfinding",
+   "pearl": "formfinding equilibrium",
+   "map": "FormFinding_Equilibrium",
+   "hero": "calder_mobile",
+   "hero_by": "applied",
+   "hero_df": 13,
+   "cast": [
+    "tensegrity_triangle",
+    "fractal_truss_tower"
+   ],
+   "furniture": [
+    "science_screen"
+   ]
+  },
+  {
+   "sequence": "formfinding",
+   "pearl": "formfinding annealing",
+   "map": "FormFinding_Annealing",
+   "hero": "simulated_annealing",
+   "hero_by": "promoted",
+   "hero_df": 6,
+   "cast": [
+    "energy_landscape_bench",
+    "max_q_basin_room"
+   ],
+   "furniture": [
+    "science_screen"
+   ]
+  },
+  {
+   "sequence": "formfinding",
+   "pearl": "formfinding forge",
+   "map": "FormFinding_Forge",
+   "hero": "self_shaping_forge",
+   "hero_by": "applied",
+   "hero_df": 3,
+   "cast": [
+    "gradient_descent_optimizer",
+    "balance_puzzle"
+   ],
+   "furniture": [
+    "science_screen"
+   ]
+  },
+  {
+   "sequence": "wavefunctions",
+   "pearl": "wavefunctions intro",
+   "map": "WaveFunctions_Intro",
+   "hero": "mario_cube_time_trace",
+   "hero_by": "promoted",
+   "hero_df": 5,
+   "cast": [
+    "rotating_cube_demo",
+    "y_oscillation_cube",
+    "oscillation_controlled_cube",
+    "pickup_cube_rotating",
+    "pickup_cube_static",
+    "pickup_cube_transforming",
+    "control_pendulum",
+    "transformation_cube",
+    "SphericalHarmonics",
+    "rotating_cube",
+    "rotatescalecubes"
+   ],
+   "furniture": [
+    "cube_scene",
+    "science_screen",
+    "dark_sphere",
+    "pick_up_cube"
+   ]
+  },
+  {
+   "sequence": "wavefunctions",
+   "pearl": "wavefunctions pendulum",
+   "map": "WaveFunctions_Pendulum",
+   "hero": "foucault_pendulum",
+   "hero_by": "applied",
+   "hero_df": 8,
+   "cast": [
+    "draw_dot_time_domain",
+    "WavePaintings",
+    "VRAudioMonitor",
+    "seismograph",
+    "lab_table",
+    "BigPipeSystem",
+    "PendulumWave"
+   ],
+   "furniture": [
+    "dark_sphere",
+    "GlassRack"
+   ]
+  },
+  {
+   "sequence": "wavefunctions",
+   "pearl": "wavefunctions sine space",
+   "map": "WaveFunctions_Sine_Space",
+   "hero": "sine_space_explanation",
+   "hero_by": "promoted",
+   "hero_df": 5,
+   "cast": [
+    "sine_wall_explanation",
+    "sine_space",
+    "sine_wall_corridor",
+    "colorballs"
+   ],
+   "furniture": [
+    "dark_sphere"
+   ]
+  },
+  {
+   "sequence": "wavefunctions",
+   "pearl": "wavefunctions effect sound",
+   "map": "WaveFunctions_Effect_Sound",
+   "hero": "timbre_sculptor",
+   "hero_by": "applied",
+   "hero_df": 5,
+   "cast": [
+    "DualBallFMController",
+    "rack_room",
+    "wave_interference_3d",
+    "RackMoogBass",
+    "RackSineBasic",
+    "chord_tension_spring",
+    "RackDX7Piano",
+    "harmonic_distance_table",
+    "Rack303Acid",
+    "MarioSoundController",
+    "VRAudioMonitor",
+    "lab_table",
+    "cable_builder",
+    "BigPipeSystem",
+    "catalyst_prompter_box",
+    "audio_catalog_tablet",
+    "MelodyChaser3D",
+    "mario_test_sound_ui",
+    "interactable_demo",
+    "AudioContr"
+   ],
+   "furniture": [
+    "pick_up_cube",
+    "GlassRack",
+    "dark_sphere",
+    "catalyst_vent"
+   ]
+  },
+  {
+   "sequence": "wavefunctions",
+   "pearl": "wavefunctions airmusic",
+   "map": "WaveFunctions_AirMusic",
+   "hero": "resonating_metallophone",
+   "hero_by": "promoted",
+   "hero_df": 6,
+   "cast": [
+    "RackAmbientDrone",
+    "air_music_display_case",
+    "lab_table",
+    "BigPipeSystem",
+    "SystemsMusicTest"
+   ],
+   "furniture": [
+    "GlassRack",
+    "dark_sphere"
+   ]
+  },
+  {
+   "sequence": "wavefunctions",
+   "pearl": "wavefunctions synthesis lab",
+   "map": "WaveFunctions_Synthesis_Lab",
+   "hero": "record_room",
+   "hero_by": "promoted",
+   "hero_df": 2,
+   "cast": [
+    "SoundscapeRadioRack",
+    "dna_specimen",
+    "petri_dish_worms",
+    "atmosphericmonitoring",
+    "biomagneticresonator",
+    "chemicalapparatus",
+    "holographicdisplay",
+    "multimeter",
+    "chladni_plate",
+    "samplevialrack",
+    "additive_wave_demo",
+    "hallway_scene",
+    "air_music_display_case",
+    "double_helix_scene",
+    "spring_demo",
+    "seismograph",
+    "lissajous_curves",
+    "electronicscales",
+    "microscope",
+    "oscilloscope",
+    "UnitCircleTrig",
+    "coloredlines"
+   ],
+   "furniture": [
+    "dark_sphere",
+    "GlassRack",
+    "synthesis_stand"
+   ]
+  },
+  {
+   "sequence": "randomness",
+   "pearl": "random definition",
+   "map": "Random_Definition",
+   "hero": "seed_replay_demo",
+   "hero_by": "applied",
+   "hero_df": 7,
+   "cast": [
+    "trng_vs_prng",
+    "slot_machine",
+    "entropy_jar",
+    "digital_materiality_glitch",
+    "catalyst_pickup",
+    "entropy_axiom",
+    "random_butterflies",
+    "random_number_book_page_1955"
+   ],
+   "furniture": [
+    "prng_crank_machine",
+    "2d_in_3d_randomness_vis",
+    "science_screen",
+    "dark_sphere",
+    "synthesis_stand",
+    "clipboard"
+   ]
+  },
+  {
+   "sequence": "randomness",
+   "pearl": "random entropy",
+   "map": "Random_Entropy",
+   "hero": "hardware_entropy_decay",
+   "hero_by": "applied",
+   "hero_df": 9,
+   "cast": [
+    "trng_vs_prng",
+    "shannon_entropy_meter",
+    "entropy_jar",
+    "entropy_axiom",
+    "random_butterflies"
+   ],
+   "furniture": [
+    "dark_sphere",
+    "science_screen"
+   ]
+  },
+  {
+   "sequence": "randomness",
+   "pearl": "random walk",
+   "map": "Random_Walk",
+   "hero": "random_walk_terrarium",
+   "hero_by": "applied",
+   "hero_df": 17,
+   "cast": [
+    "catalyst_pickup",
+    "pixel_cloud",
+    "random_walk_128",
+    "random_walk_collection",
+    "random_walk_leash",
+    "catalyst_prompter_box"
+   ],
+   "furniture": [
+    "catalyst_vent",
+    "lab_room",
+    "dark_sphere"
+   ]
+  },
+  {
+   "sequence": "randomness",
+   "pearl": "random gaussian",
+   "map": "Random_Gaussian",
+   "hero": "distribution_comparator",
+   "hero_by": "applied",
+   "hero_df": 12,
+   "cast": [
+    "distribution_sampler",
+    "random_bell_curve",
+    "GaussianPaintSplatter",
+    "GaussianBlurCircle",
+    "gaussian_random"
+   ],
+   "furniture": [
+    "GaussianBlurShader",
+    "dark_sphere",
+    "galton_board"
+   ]
+  },
+  {
+   "sequence": "randomness",
+   "pearl": "random mushrooms",
+   "map": "Random_Mushrooms",
+   "hero": "bubbles_random",
+   "hero_by": "promoted",
+   "hero_df": 12,
+   "cast": [
+    "random_number_book_page_collection",
+    "reaction_diffusion_intro",
+    "mushrooms",
+    "bubble_particles"
+   ],
+   "furniture": [
+    "dark_sphere"
+   ]
+  },
+  {
+   "sequence": "randomness",
+   "pearl": "random game",
+   "map": "Random_Game",
+   "hero": "miura_crawler",
+   "hero_by": "applied",
+   "hero_df": 10,
+   "cast": [
+    "r_c",
+    "kresling_spire",
+    "armadillo_eggling",
+    "cube_projectile_spawner",
+    "kaleidocycle_enemy",
+    "scissor_stalker",
+    "origami_droideka"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "noise",
+   "pearl": "random noise types",
+   "map": "Random_Noise_Types",
+   "hero": "randompoints",
+   "hero_by": "category",
+   "hero_df": 2,
+   "cast": [
+    "randompoint",
+    "NoiseColors3D",
+    "WhiteNoiseGallery"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "noise",
+   "pearl": "noise columns",
+   "map": "Noise_Columns",
+   "hero": "MeltingBerniniScene",
+   "hero_by": "category",
+   "hero_df": 6,
+   "cast": [],
+   "furniture": [
+    "dark_sphere",
+    "synthesis_stand"
+   ]
+  },
+  {
+   "sequence": "noise",
+   "pearl": "noise one",
+   "map": "Noise_One",
+   "hero": "noiselayers",
+   "hero_by": "category",
+   "hero_df": 3,
+   "cast": [
+    "noisetorus"
+   ],
+   "furniture": [
+    "dark_sphere"
+   ]
+  },
+  {
+   "sequence": "noise",
+   "pearl": "noise voxel",
+   "map": "Noise_Voxel",
+   "hero": "voxelnoise",
+   "hero_by": "category",
+   "hero_df": 6,
+   "cast": [
+    "perlin_terrain_sculptor"
+   ],
+   "furniture": [
+    "science_screen",
+    "dark_sphere"
+   ]
+  },
+  {
+   "sequence": "noise",
+   "pearl": "noise 6 wall",
+   "map": "Noise_6_Wall",
+   "hero": "shader_noise_space",
+   "hero_by": "category",
+   "hero_df": 6,
+   "cast": [],
+   "furniture": [
+    "dark_sphere"
+   ]
+  },
+  {
+   "sequence": "noise",
+   "pearl": "noise perlin simplex",
+   "map": "Noise_Perlin_Simplex",
+   "hero": "noise_terrain",
+   "hero_by": "category",
+   "hero_df": 8,
+   "cast": [
+    "perlin_noise",
+    "simplex_noise",
+    "perlin_noise_terrain",
+    "configurable_portal"
+   ],
+   "furniture": [
+    "dark_sphere"
+   ]
+  },
+  {
+   "sequence": "cellularautomata",
+   "pearl": "ca introduction",
+   "map": "CA_Introduction",
+   "hero": "grid_substrate_runner",
+   "hero_by": "category",
+   "hero_df": 2,
+   "cast": [
+    "persian_rug",
+    "line_network_ca"
+   ],
+   "furniture": [
+    "synthesis_stand",
+    "dark_sphere"
+   ]
+  },
+  {
+   "sequence": "cellularautomata",
+   "pearl": "ca gameoflife",
+   "map": "CA_GameOfLife",
+   "hero": "ca_bridge",
+   "hero_by": "applied",
+   "hero_df": 6,
+   "cast": [
+    "ca_columns",
+    "mirrored_cellular_automata"
+   ],
+   "furniture": [
+    "lab_room",
+    "dark_sphere"
+   ]
+  },
+  {
+   "sequence": "cellularautomata",
+   "pearl": "ca beyondbinary",
+   "map": "CA_BeyondBinary",
+   "hero": "ca_growth_network",
+   "hero_by": "applied",
+   "hero_df": 6,
+   "cast": [
+    "game_of_life_petri",
+    "hexagon_ca_vr"
+   ],
+   "furniture": [
+    "mold_network",
+    "science_screen",
+    "dark_sphere"
+   ]
+  },
+  {
+   "sequence": "cellularautomata",
+   "pearl": "ca expandingspace",
+   "map": "CA_ExpandingSpace",
+   "hero": "ca_chair_test",
+   "hero_by": "applied",
+   "hero_df": 2,
+   "cast": [
+    "decaying_bridge",
+    "catalyst_prompter_box",
+    "crossway_ca",
+    "cellular_automata_3d_tree"
+   ],
+   "furniture": [
+    "catalyst_vent",
+    "dark_sphere"
+   ]
+  },
+  {
+   "sequence": "cellularautomata",
+   "pearl": "ca softrules",
+   "map": "CA_SoftRules",
+   "hero": "rule_30_110_gravity",
+   "hero_by": "rarest",
+   "hero_df": 3,
+   "cast": [
+    "ca_sphere"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "cellularautomata",
+   "pearl": "ca edgeofchaos",
+   "map": "CA_EdgeOfChaos",
+   "hero": "disease_spread_ca",
+   "hero_by": "applied",
+   "hero_df": 2,
+   "cast": [
+    "volumetric_fog_ca",
+    "ca_screen",
+    "self_organization_ca"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "fractals",
+   "pearl": "fractal recursion",
+   "map": "Fractal_Recursion",
+   "hero": "recursive_chair",
+   "hero_by": "applied",
+   "hero_df": 4,
+   "cast": [
+    "recursive_table",
+    "fibonacci_pagoda",
+    "cube_staircase",
+    "fractal_recursion_2",
+    "example_8_3_recursion_circles_vr",
+    "cube_subdivision"
+   ],
+   "furniture": [
+    "science_screen",
+    "synthesis_stand",
+    "dark_sphere"
+   ]
+  },
+  {
+   "sequence": "fractals",
+   "pearl": "fractal recursivetrees",
+   "map": "Fractal_RecursiveTrees",
+   "hero": "fractal_scene",
+   "hero_by": "applied",
+   "hero_df": 3,
+   "cast": [
+    "cube_desk",
+    "inverted_tree_cloud",
+    "recursive_tree",
+    "living_paper",
+    "mobius_world",
+    "recursive_tree_2",
+    "fractal_lsystem_tree",
+    "small_subdivision_cube"
+   ],
+   "furniture": [
+    "dark_sphere"
+   ]
+  },
+  {
+   "sequence": "fractals",
+   "pearl": "fractal cantorset",
+   "map": "Fractal_CantorSet",
+   "hero": "example_8_4_cantor_pagoda_vr",
+   "hero_by": "applied",
+   "hero_df": 4,
+   "cast": [
+    "stochastic_tree_separated",
+    "example_8_4_cantor_set_vr",
+    "cantor_set"
+   ],
+   "furniture": [
+    "dark_sphere"
+   ]
+  },
+  {
+   "sequence": "fractals",
+   "pearl": "fractal kochsierpinski",
+   "map": "Fractal_KochSierpinski",
+   "hero": "cube_bookshelf",
+   "hero_by": "applied",
+   "hero_df": 4,
+   "cast": [
+    "cube_cabin",
+    "recursion_observatory",
+    "koch_curve_3d",
+    "box_counting_dimension",
+    "sierpinski_triangle",
+    "sierpinski_pyramid",
+    "fractal_koch_curve"
+   ],
+   "furniture": [
+    "dark_sphere",
+    "science_screen"
+   ]
+  },
+  {
+   "sequence": "fractals",
+   "pearl": "fractal goldenspiral",
+   "map": "Fractal_GoldenSpiral",
+   "hero": "fibonacci_sequences",
+   "hero_by": "promoted",
+   "hero_df": 11,
+   "cast": [
+    "golden_rectangle",
+    "romanesco",
+    "fibonacci_terrain"
+   ],
+   "furniture": [
+    "dark_sphere"
+   ]
+  },
+  {
+   "sequence": "fractals",
+   "pearl": "fractal synthesis",
+   "map": "Fractal_Synthesis",
+   "hero": "sierpinski_triangle",
+   "hero_by": "promoted",
+   "hero_df": 6,
+   "cast": [
+    "recursive_tree",
+    "fibonacci_sequences",
+    "cantor_set",
+    "koch_curve",
+    "fractal_clouds",
+    "fractal_recursion_1",
+    "strange_attractors",
+    "romanesco"
+   ],
+   "furniture": [
+    "dark_sphere"
+   ]
+  },
+  {
+   "sequence": "lsystems",
+   "pearl": "lsystems grammar lab",
+   "map": "LSystems_Grammar_Lab",
+   "hero": "grammar_provenance",
+   "hero_by": "applied",
+   "hero_df": 2,
+   "cast": [
+    "lsystem_editor",
+    "lsystem_tree",
+    "fractal_lsystem_string"
+   ],
+   "furniture": [
+    "science_screen",
+    "dark_sphere"
+   ]
+  },
+  {
+   "sequence": "lsystems",
+   "pearl": "lsystems growth",
+   "map": "LSystems_Growth",
+   "hero": "lsystem_tree",
+   "hero_by": "promoted",
+   "hero_df": 10,
+   "cast": [
+    "parametric_lsystem",
+    "AnimatedTree",
+    "ContextSensitiveTree"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "lsystems",
+   "pearl": "lsystems grammars and curves",
+   "map": "LSystems_Grammars_And_Curves",
+   "hero": "space_filling_curve_gallery",
+   "hero_by": "applied",
+   "hero_df": 5,
+   "cast": [
+    "ContextFreeGrammars",
+    "Hilbert3D"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "lsystems",
+   "pearl": "lsystems architecture",
+   "map": "LSystems_Architecture",
+   "hero": "lsystem_dungeon",
+   "hero_by": "applied",
+   "hero_df": 2,
+   "cast": [
+    "CityGenerator",
+    "catalyst_prompter_box"
+   ],
+   "furniture": [
+    "catalyst_vent",
+    "dark_sphere"
+   ]
+  },
+  {
+   "sequence": "lsystems",
+   "pearl": "lsystems living",
+   "map": "LSystems_Living",
+   "hero": "genetic_tree_sculptor",
+   "hero_by": "applied",
+   "hero_df": 4,
+   "cast": [
+    "branching_coral",
+    "lsystem_tree"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "lsystems",
+   "pearl": "assemblage same desire",
+   "map": "Assemblage_Same_Desire",
+   "hero": "incompleteness_scale",
+   "hero_by": "applied",
+   "hero_df": 3,
+   "cast": [
+    "ten_print_textile",
+    "panel_bridge_loom",
+    "pattern_atlas_gallery",
+    "godel_statement_plaque",
+    "mamma_monster_gallery"
+   ],
+   "furniture": [
+    "synthesis_stand"
+   ]
+  },
+  {
+   "sequence": "proceduralgeneration",
+   "pearl": "pg genetic evolution",
+   "map": "PG_Genetic_Evolution",
+   "hero": "GeneticProgramming",
+   "hero_by": "promoted",
+   "hero_df": 8,
+   "cast": [],
+   "furniture": [
+    "science_screen"
+   ]
+  },
+  {
+   "sequence": "proceduralgeneration",
+   "pearl": "pg percolation network",
+   "map": "PG_Percolation_Network",
+   "hero": "percolationnetwork_ca",
+   "hero_by": "promoted",
+   "hero_df": 6,
+   "cast": [],
+   "furniture": [
+    "synthesis_stand",
+    "dark_sphere"
+   ]
+  },
+  {
+   "sequence": "proceduralgeneration",
+   "pearl": "pg branching growth",
+   "map": "PG_Branching_Growth",
+   "hero": "organic_space",
+   "hero_by": "promoted",
+   "hero_df": 8,
+   "cast": [],
+   "furniture": [
+    "branching_growth_algorithm"
+   ]
+  },
+  {
+   "sequence": "proceduralgeneration",
+   "pearl": "pg caves mazes",
+   "map": "PG_Caves_Mazes",
+   "hero": "maze_generation",
+   "hero_by": "applied",
+   "hero_df": 6,
+   "cast": [
+    "caverandomwalk"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "proceduralgeneration",
+   "pearl": "pg sculpted forms",
+   "map": "PG_Sculpted_Forms",
+   "hero": "dome",
+   "hero_by": "promoted",
+   "hero_df": 8,
+   "cast": [
+    "layered_membrane",
+    "cube_mound_scene"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "proceduralgeneration",
+   "pearl": "pg mirrored patterns",
+   "map": "PG_Mirrored_Patterns",
+   "hero": "pattern_tunnel_machine",
+   "hero_by": "applied",
+   "hero_df": 4,
+   "cast": [
+    "mirror_cellular_texture_for_3d",
+    "rhizomatic_maze_space"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "softbodies",
+   "pearl": "softbodies soft body deformation",
+   "map": "SoftBodies_Soft_Body_Deformation",
+   "hero": "softmill",
+   "hero_by": "applied",
+   "hero_df": 7,
+   "cast": [
+    "jelly_cube"
+   ],
+   "furniture": [
+    "science_screen"
+   ]
+  },
+  {
+   "sequence": "softbodies",
+   "pearl": "softbodies carusell",
+   "map": "SoftBodies_Carusell",
+   "hero": "revolving_joy_ride",
+   "hero_by": "applied",
+   "hero_df": 7,
+   "cast": [
+    "soft_mushroom",
+    "cloth_straps",
+    "grab_long_stick"
+   ],
+   "furniture": [
+    "synthesis_stand",
+    "pick_up_cube"
+   ]
+  },
+  {
+   "sequence": "softbodies",
+   "pearl": "softbodies obsticals",
+   "map": "SoftBodies_Obsticals",
+   "hero": "breathing_room",
+   "hero_by": "promoted",
+   "hero_df": 6,
+   "cast": [
+    "flagdancer",
+    "grab_long_stick"
+   ],
+   "furniture": [
+    "pick_up_cube"
+   ]
+  },
+  {
+   "sequence": "softbodies",
+   "pearl": "softbodies obsticals part2",
+   "map": "SoftBodies_Obsticals_Part2",
+   "hero": "softbody_gallery_part2",
+   "hero_by": "promoted",
+   "hero_df": 7,
+   "cast": [
+    "grab_long_stick"
+   ],
+   "furniture": [
+    "pick_up_cube"
+   ]
+  },
+  {
+   "sequence": "softbodies",
+   "pearl": "softbodies playground of joy",
+   "map": "SoftBodies_Playground_of_Joy",
+   "hero": "rounded_softbody_test",
+   "hero_by": "promoted",
+   "hero_df": 9,
+   "cast": [
+    "gridagent"
+   ],
+   "furniture": [
+    "branching_growth_algorithm"
+   ]
+  },
+  {
+   "sequence": "softbodies",
+   "pearl": "proceduralgeneration reaction diffusion systems",
+   "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+   "hero": "turing_pattern_generator",
+   "hero_by": "applied",
+   "hero_df": 6,
+   "cast": [
+    "reaction_diffusion"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "isosurfaces",
+   "pearl": "iso lookuptable",
+   "map": "ISO_LookupTable",
+   "hero": "fifteen_cases_demo",
+   "hero_by": "applied",
+   "hero_df": 3,
+   "cast": [
+    "mc_cave"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "isosurfaces",
+   "pearl": "iso shapesgallery",
+   "map": "ISO_ShapesGallery",
+   "hero": "mc_shapes_gallery",
+   "hero_by": "applied",
+   "hero_df": 3,
+   "cast": [
+    "mc_torus_sculpture",
+    "gyroid_demo"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "isosurfaces",
+   "pearl": "iso torusgyroid",
+   "map": "ISO_TorusGyroid",
+   "hero": "mc_torus_sculpture",
+   "hero_by": "applied",
+   "hero_df": 3,
+   "cast": [
+    "GyroidDemo"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "isosurfaces",
+   "pearl": "iso flatterrain",
+   "map": "ISO_FlatTerrain",
+   "hero": "mc_terrain_demo",
+   "hero_by": "applied",
+   "hero_df": 3,
+   "cast": [
+    "mc_overhang_landscape",
+    "mc_flat_landscape"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "isosurfaces",
+   "pearl": "iso caves",
+   "map": "ISO_Caves",
+   "hero": "queer_marching_cave",
+   "hero_by": "category",
+   "hero_df": 5,
+   "cast": [
+    "mc_portal_landscape",
+    "mc_inside_cave"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "isosurfaces",
+   "pearl": "iso metaballs",
+   "map": "ISO_Metaballs",
+   "hero": "nakama_metaballs",
+   "hero_by": "promoted",
+   "hero_df": 2,
+   "cast": [
+    "raymarched_metaballs",
+    "metaball_world",
+    "metaballs"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "boolean_surfaces",
+   "pearl": "boolean union",
+   "map": "Boolean_Union",
+   "hero": "csg_union_demo",
+   "hero_by": "applied",
+   "hero_df": 2,
+   "cast": [],
+   "furniture": []
+  },
+  {
+   "sequence": "boolean_surfaces",
+   "pearl": "boolean intersection",
+   "map": "Boolean_Intersection",
+   "hero": "csg_intersection_demo",
+   "hero_by": "applied",
+   "hero_df": 1,
+   "cast": [],
+   "furniture": []
+  },
+  {
+   "sequence": "boolean_surfaces",
+   "pearl": "boolean difference",
+   "map": "Boolean_Difference",
+   "hero": null,
+   "hero_by": "",
+   "hero_df": 0,
+   "cast": [],
+   "furniture": [
+    "csg_difference_demo"
+   ]
+  },
+  {
+   "sequence": "boolean_surfaces",
+   "pearl": "boolean compose workbench",
+   "map": "Boolean_Compose_Workbench",
+   "hero": "csg_compose_workbench",
+   "hero_by": "applied",
+   "hero_df": 8,
+   "cast": [
+    "subtraction_suite"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "boolean_surfaces",
+   "pearl": "chamber boolean",
+   "map": "Chamber_Boolean",
+   "hero": null,
+   "hero_by": "",
+   "hero_df": 0,
+   "cast": [],
+   "furniture": [
+    "synthesis_stand",
+    "catalyst_target",
+    "becoming_catalyst",
+    "science_screen"
+   ]
+  },
+  {
+   "sequence": "boolean_surfaces",
+   "pearl": "boolean architecture cavity",
+   "map": "Boolean_Architecture_Cavity",
+   "hero": "csg_architecture_cavity",
+   "hero_by": "promoted",
+   "hero_df": 1,
+   "cast": [],
+   "furniture": []
+  },
+  {
+   "sequence": "swarmintelligence",
+   "pearl": "swarmintelligence physarumcolony",
+   "map": "SwarmIntelligence_PhysarumColony",
+   "hero": "PhysarumColony",
+   "hero_by": "promoted",
+   "hero_df": 2,
+   "cast": [],
+   "furniture": [
+    "science_screen"
+   ]
+  },
+  {
+   "sequence": "swarmintelligence",
+   "pearl": "swarmintelligence flowfields",
+   "map": "SwarmIntelligence_FlowFields",
+   "hero": "FlowFieldMain",
+   "hero_by": "promoted",
+   "hero_df": 13,
+   "cast": [],
+   "furniture": []
+  },
+  {
+   "sequence": "swarmintelligence",
+   "pearl": "swarmintelligence boids algorithm",
+   "map": "SwarmIntelligence_Boids_Algorithm",
+   "hero": "boid_manager",
+   "hero_by": "promoted",
+   "hero_df": 5,
+   "cast": [
+    "boids_aquarium",
+    "boids_2d_in_3d",
+    "flocking_controls",
+    "boid_flocking"
+   ],
+   "furniture": [
+    "science_screen"
+   ]
+  },
+  {
+   "sequence": "swarmintelligence",
+   "pearl": "swarmintelligence agent based modeling abm",
+   "map": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+   "hero": "catalyst_prompter_box",
+   "hero_by": "promoted",
+   "hero_df": 19,
+   "cast": [
+    "ant_colony_optimization"
+   ],
+   "furniture": [
+    "catalyst_vent"
+   ]
+  },
+  {
+   "sequence": "swarmintelligence",
+   "pearl": "chamber swarm",
+   "map": "Chamber_Swarm",
+   "hero": null,
+   "hero_by": "",
+   "hero_df": 0,
+   "cast": [],
+   "furniture": [
+    "synthesis_stand",
+    "proximity_spawner",
+    "catalyst_target",
+    "becoming_catalyst",
+    "science_screen"
+   ]
+  },
+  {
+   "sequence": "swarmintelligence",
+   "pearl": "swarmintelligence particle swarm optimization",
+   "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+   "hero": "fitness_landscape_politics",
+   "hero_by": "promoted",
+   "hero_df": 4,
+   "cast": [
+    "self_organizing_patterns"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "machinelearning",
+   "pearl": "ml evolution",
+   "map": "ML_Evolution",
+   "hero": "non_teleological_evolution",
+   "hero_by": "promoted",
+   "hero_df": 3,
+   "cast": [
+    "evolved_creatures",
+    "evolvingflowers",
+    "gradient_descent_visualization"
+   ],
+   "furniture": [
+    "science_screen"
+   ]
+  },
+  {
+   "sequence": "machinelearning",
+   "pearl": "ml gradient landscape",
+   "map": "ML_Gradient_Landscape",
+   "hero": "pca_visualization",
+   "hero_by": "promoted",
+   "hero_df": 3,
+   "cast": [
+    "loss_function_comparator",
+    "gradient_descent_visualization"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "machinelearning",
+   "pearl": "ml classification",
+   "map": "ML_Classification",
+   "hero": "random_forest_visualization",
+   "hero_by": "promoted",
+   "hero_df": 3,
+   "cast": [
+    "svm_visualization",
+    "enhanced_kmeans"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "machinelearning",
+   "pearl": "ml neural networks",
+   "map": "ML_Neural_Networks",
+   "hero": "neural_networks_vr",
+   "hero_by": "promoted",
+   "hero_df": 5,
+   "cast": [
+    "neural_network_visualization"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "machinelearning",
+   "pearl": "ml perception",
+   "map": "ML_Perception",
+   "hero": "computer_vision_vr",
+   "hero_by": "promoted",
+   "hero_df": 5,
+   "cast": [
+    "convolutional_neural_networks_cnns_vr"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "machinelearning",
+   "pearl": "ml synthesis",
+   "map": "ML_Synthesis",
+   "hero": "explainable_ai_xai_vr",
+   "hero_by": "rarest",
+   "hero_df": 3,
+   "cast": [
+    "anomaly_detection",
+    "joint_learn_walk"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "graphtheory",
+   "pearl": "gt foundations",
+   "map": "GT_Foundations",
+   "hero": "KonigsbergBridge",
+   "hero_by": "category",
+   "hero_df": 5,
+   "cast": [
+    "graphspace"
+   ],
+   "furniture": [
+    "synthesis_stand"
+   ]
+  },
+  {
+   "sequence": "graphtheory",
+   "pearl": "gt layout",
+   "map": "GT_Layout",
+   "hero": "force_directed_layout",
+   "hero_by": "category",
+   "hero_df": 4,
+   "cast": [],
+   "furniture": []
+  },
+  {
+   "sequence": "graphtheory",
+   "pearl": "gt pathfinding",
+   "map": "GT_Pathfinding",
+   "hero": "pathfinding3d",
+   "hero_by": "category",
+   "hero_df": 10,
+   "cast": [],
+   "furniture": []
+  },
+  {
+   "sequence": "graphtheory",
+   "pearl": "gt network analysis",
+   "map": "GT_Network_Analysis",
+   "hero": "networkflow3d",
+   "hero_by": "category",
+   "hero_df": 7,
+   "cast": [
+    "network_analysis",
+    "rhizomatic_structure"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "graphtheory",
+   "pearl": "gt connectivity",
+   "map": "GT_Connectivity",
+   "hero": "topological_sort",
+   "hero_by": "category",
+   "hero_df": 1,
+   "cast": [
+    "tarjan_algorithm",
+    "kosaraju_algorithm"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "graphtheory",
+   "pearl": "gt flow",
+   "map": "GT_Flow",
+   "hero": "karger_algorithm",
+   "hero_by": "category",
+   "hero_df": 4,
+   "cast": [
+    "push_relabel_algorithm"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "foundationscrisis",
+   "pearl": "noneuclidean spaces",
+   "map": "NonEuclidean_Spaces",
+   "hero": "triangle_curvature_workbench",
+   "hero_by": "applied",
+   "hero_df": 3,
+   "cast": [
+    "curvature_slider",
+    "hyperbolic_surface",
+    "riemann_sphere",
+    "elliptic_surface",
+    "poincare_disk"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "foundationscrisis",
+   "pearl": "russell paradox",
+   "map": "Russell_Paradox",
+   "hero": "barber_paradox",
+   "hero_by": "promoted",
+   "hero_df": 2,
+   "cast": [
+    "self_membership_set",
+    "liar_loop",
+    "russell_set_box"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "foundationscrisis",
+   "pearl": "godel incompleteness",
+   "map": "Godel_Incompleteness",
+   "hero": "provability_sorter",
+   "hero_by": "applied",
+   "hero_df": 2,
+   "cast": [
+    "godel_sentence_machine",
+    "negative_control_fixture",
+    "rice_verifier_booth",
+    "incompleteness_tower",
+    "critic_regress_stack",
+    "fluency_seam",
+    "godel_statement_plaque"
+   ],
+   "furniture": [
+    "synthesis_stand"
+   ]
+  },
+  {
+   "sequence": "foundationscrisis",
+   "pearl": "escher impossible",
+   "map": "Escher_Impossible",
+   "hero": "impossible_trident",
+   "hero_by": "promoted",
+   "hero_df": 3,
+   "cast": [
+    "penrose_triangle",
+    "magritte_pipe",
+    "escher_staircase"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "foundationscrisis",
+   "pearl": "brouwer intuitionism",
+   "map": "Brouwer_Intuitionism",
+   "hero": "excluded_middle_demo",
+   "hero_by": "applied",
+   "hero_df": 4,
+   "cast": [
+    "brouwer_choice_sequence",
+    "constructive_proof",
+    "constructive_staircase"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "foundationscrisis",
+   "pearl": "crisis synthesis",
+   "map": "Crisis_Synthesis",
+   "hero": "phi_slider",
+   "hero_by": "applied",
+   "hero_df": 19,
+   "cast": [
+    "escher_staircase",
+    "florensky_sphere",
+    "godel_statement_plaque",
+    "bifurcation_diagram",
+    "russell_set_box"
+   ],
+   "furniture": [
+    "lambda_slider",
+    "qfep_formula_3d"
+   ]
+  },
+  {
+   "sequence": "qfeplaboratory",
+   "pearl": "qfep introduction",
+   "map": "QFEP_Introduction",
+   "hero": "qfep_balance_workbench",
+   "hero_by": "applied",
+   "hero_df": 10,
+   "cast": [
+    "phi_slider",
+    "grab_sphere_E",
+    "grab_sphere_F",
+    "grab_sphere_lambda"
+   ],
+   "furniture": [
+    "tt",
+    "lambda_slider",
+    "science_screen",
+    "synthesis_stand",
+    "qfep_formula_3d"
+   ]
+  },
+  {
+   "sequence": "qfeplaboratory",
+   "pearl": "qfep e term",
+   "map": "QFEP_E_Term",
+   "hero": "entropy_fan",
+   "hero_by": "promoted",
+   "hero_df": 2,
+   "cast": [
+    "random_cubes",
+    "microstate_counter",
+    "particle_chaos",
+    "possibility_space_cloud"
+   ],
+   "furniture": [
+    "tt",
+    "lambda_slider"
+   ]
+  },
+  {
+   "sequence": "qfeplaboratory",
+   "pearl": "qfep lambda spectrum",
+   "map": "QFEP_Lambda_Spectrum",
+   "hero": "bifurcation_walkway",
+   "hero_by": "promoted",
+   "hero_df": 3,
+   "cast": [
+    "edge_particles",
+    "complexity_pattern",
+    "ordered_grid",
+    "crystal_formation",
+    "dissolving_form",
+    "chaos_particles"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "qfeplaboratory",
+   "pearl": "qfep phi term",
+   "map": "QFEP_Phi_Term",
+   "hero": "rigid_sculpture",
+   "hero_by": "applied",
+   "hero_df": 2,
+   "cast": [
+    "phi_slider",
+    "lambda_promenade",
+    "preserved_pattern",
+    "transforming_pattern",
+    "fluid_form"
+   ],
+   "furniture": [
+    "tt"
+   ]
+  },
+  {
+   "sequence": "qfeplaboratory",
+   "pearl": "qfep edge of chaos",
+   "map": "QFEP_Edge_Of_Chaos",
+   "hero": "edge_core",
+   "hero_by": "promoted",
+   "hero_df": 4,
+   "cast": [
+    "edge_of_chaos_unlocked",
+    "emergence_zone",
+    "turing_pattern"
+   ],
+   "furniture": [
+    "tt",
+    "lambda_slider"
+   ]
+  },
+  {
+   "sequence": "qfeplaboratory",
+   "pearl": "qfep synthesis",
+   "map": "QFEP_Synthesis",
+   "hero": "queer_morphology_specimen",
+   "hero_by": "applied",
+   "hero_df": 3,
+   "cast": [
+    "grasp_cabinet",
+    "grab_sphere_phi",
+    "grab_sphere_E",
+    "grab_sphere_F",
+    "grab_sphere_lambda"
+   ],
+   "furniture": [
+    "tt",
+    "qfep_formula_3d"
+   ]
+  },
+  {
+   "sequence": "postfoundationscrisis",
+   "pearl": "criticalalgorithms algorithmic bias visualization",
+   "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+   "hero": "bias_visualizer",
+   "hero_by": "applied",
+   "hero_df": 8,
+   "cast": [
+    "bias_from_inside"
+   ],
+   "furniture": [
+    "science_screen"
+   ]
+  },
+  {
+   "sequence": "postfoundationscrisis",
+   "pearl": "criticalalgorithms applied ethics",
+   "map": "CriticalAlgorithms_Applied_Ethics",
+   "hero": "room_shape_demonstrator",
+   "hero_by": "applied",
+   "hero_df": 2,
+   "cast": [
+    "excluded_class_visualizer",
+    "bias_from_inside",
+    "godel_statement_plaque"
+   ],
+   "furniture": [
+    "tt",
+    "synthesis_stand"
+   ]
+  },
+  {
+   "sequence": "postfoundationscrisis",
+   "pearl": "speculativecomputation paraconsistent engineering",
+   "map": "SpeculativeComputation_Paraconsistent_Engineering",
+   "hero": "cap_theorem_walk",
+   "hero_by": "applied",
+   "hero_df": 2,
+   "cast": [
+    "merge_conflict_visualizer",
+    "schrodinger_box",
+    "superposition_display",
+    "florensky_sphere"
+   ],
+   "furniture": [
+    "tt"
+   ]
+  },
+  {
+   "sequence": "postfoundationscrisis",
+   "pearl": "speculativecomputation collective knowledge",
+   "map": "SpeculativeComputation_Collective_Knowledge",
+   "hero": "peer_production_tool",
+   "hero_by": "applied",
+   "hero_df": 3,
+   "cast": [
+    "wiki_fragment"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "postfoundationscrisis",
+   "pearl": "speculativecomputation rhizome network",
+   "map": "SpeculativeComputation_Rhizome_Network",
+   "hero": "rhizome_cave_demo",
+   "hero_by": "category",
+   "hero_df": 7,
+   "cast": [
+    "rhizome_grower"
+   ],
+   "furniture": []
+  },
+  {
+   "sequence": "postfoundationscrisis",
+   "pearl": "postcrisis synthesis",
+   "map": "PostCrisis_Synthesis",
+   "hero": "edge_ground_synthesis",
+   "hero_by": "applied",
+   "hero_df": 4,
+   "cast": [
+    "accountability_ledger",
+    "bias_from_inside",
+    "florensky_sphere"
+   ],
+   "furniture": [
+    "tt",
+    "qfep_formula_3d"
+   ]
+  }
+ ],
+ "stats": {
+  "halls": 156,
+  "heroes_assigned": 152,
+  "distinct_heroes": 152,
+  "hero_by": {
+   "signature": 1,
+   "applied": 75,
+   "promoted": 48,
+   "rarest": 6,
+   "category": 22
+  },
+  "halls_without_hero": 4,
+  "furniture_pressure_top": [
+   [
+    "dark_sphere",
+    46
+   ],
+   [
+    "science_screen",
+    34
+   ],
+   [
+    "synthesis_stand",
+    16
+   ],
+   [
+    "pick_up_cube",
+    12
+   ],
+   [
+    "floating_sphere_field",
+    8
+   ],
+   [
+    "tt",
+    8
+   ],
+   [
+    "catalyst_vent",
+    7
+   ],
+   [
+    "cube_scene",
+    6
+   ],
+   [
+    "code_display",
+    4
+   ],
+   [
+    "GlassRack",
+    4
+   ]
+  ],
+  "clicked_available": 0
+ }
+}
