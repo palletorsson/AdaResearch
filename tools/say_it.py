@@ -9,6 +9,8 @@
                                               #   (belt and braces — see below)
     python tools/say_it.py --pack=<file>      # does that .pck/.apk carry today's
                                               #   sentences? (see WAS IT BUILT AFTER)
+    python tools/say_it.py --quest-overrides  # what a pushed copy is hiding
+    python tools/say_it.py --quest-clear      # drop them, let the export be read
 
 2026-08-31, Palle: "the new texts are not updated in VR. How does it work, I
 rather have it be automatic?"
@@ -57,6 +59,18 @@ a photograph taken this morning does not show this afternoon. --pack reads a
 built .pck or .apk and says whether the sentences in it are the ones on disk now.
 It greps rather than parses, because a pack is a container and the sentence is
 the evidence: if the words are in there, they shipped.
+
+A PUSHED MAP OUTRANKS EVERY EXPORT AFTER IT. Found 2026-08-31, and it is the
+reason a fresh build still read the wrong wall. endless_museum._derive_map_row
+prefers user://maps/<Map>/map_data.json over the pack's copy, and did so
+silently. Once push_map_to_quest.ps1 has run for a hall, that hall is built from
+the pushed copy for ever — a different map is a different perimeter, a different
+wall licence and a different number of showings, so the same wall ends up
+carrying a different WORK. The text was current the whole time and hanging
+somewhere else.
+
+--quest-overrides lists what is pushed and how old it is. --quest-clear removes
+them, so the export is read again.
 
 WHAT MAKES IT SAFE TO RUN OFTEN. It compiles only chapters whose book is NEWER
 than the trunk, so the default run on an unchanged tree does nothing and says so.
@@ -210,6 +224,39 @@ def check_pack(pack: Path) -> int:
     return 0
 
 
+def quest_overrides(clear: bool) -> int:
+    """What is pushed onto the headset, and optionally drop it.
+
+    A pushed map is read INSTEAD of the export's copy, so a stale one silently
+    survives every rebuild. Listing is the point: the museum could not say what
+    was overriding it until today, and on an older build it still cannot."""
+    pkg = "com.adaresearch.zeroone"
+    print("SAY IT — what the headset is reading instead of the export")
+    print()
+    r = subprocess.run(["adb", "shell", "run-as %s ls -la files/maps files/override_map files/override_data 2>/dev/null" % pkg],
+                       capture_output=True, text=True)
+    out = (r.stdout or "").strip()
+    if r.returncode != 0 and not out:
+        print("  no answer from adb — is a Quest connected and authorised?")
+        return 2
+    if not out:
+        print("  nothing pushed. The headset is reading the export, as it should.")
+        return 0
+    for line in out.split("\n"):
+        print("  " + line.rstrip())
+    if not clear:
+        print()
+        print("  These OUTRANK the export. --quest-clear removes them.")
+        return 1
+    print()
+    for d in ["files/maps", "files/override_map"]:
+        subprocess.run(["adb", "shell", "run-as %s rm -rf %s" % (pkg, d)], capture_output=True, text=True)
+        print("  removed %s" % d)
+    print("  override_data KEPT — that one is the text push, and it is meant to win.")
+    print("  Restart the museum on the headset; it will read the export's maps now.")
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="book -> trunk -> export -> headset")
     ap.add_argument("--chapter", default="", help="one chapter, whether or not it is stale")
@@ -218,10 +265,16 @@ def main() -> int:
                     help="also run em_ship.py — redundant since 8c6ea0c00, kept for an old build")
     ap.add_argument("--check", action="store_true", help="report staleness, write nothing")
     ap.add_argument("--pack", default="", help="a built .pck or .apk: does it carry today's sentences?")
+    ap.add_argument("--quest-overrides", action="store_true",
+                    help="list the map/data copies pushed to the headset, which outrank the export")
+    ap.add_argument("--quest-clear", action="store_true",
+                    help="remove those pushed copies so the export is read again")
     a = ap.parse_args()
 
     if a.pack:
         return check_pack(Path(a.pack))
+    if a.quest_overrides or a.quest_clear:
+        return quest_overrides(a.quest_clear)
 
     todo = [a.chapter] if a.chapter else stale_chapters()
 

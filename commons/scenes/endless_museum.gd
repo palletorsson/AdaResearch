@@ -20330,7 +20330,22 @@ func _derive_map_row(map_name: String) -> Dictionary:
 	# falls back to the plan row's --apply-time snapshot — the museum
 	# degrades to slightly stale, never to broken.
 	var path := "user://maps/%s/map_data.json" % map_name
-	if not FileAccess.file_exists(path):
+	if FileAccess.file_exists(path):
+		# SAY SO. 2026-08-31: Palle exported a fresh build, saw the artifact move
+		# — so the export had landed — and still read the wrong sentence on the
+		# wall. The reason was this line, taken silently: a map pushed to the
+		# headset once OUTRANKS every export after it, forever. A different map
+		# is a different perimeter, a different wall licence and a different
+		# number of showings, so the same wall carries a different WORK; the text
+		# was current all along and hung somewhere else.
+		#
+		# GridDataComponent has announced its own override since August. This one
+		# only spoke when NEITHER copy read, which is the one case where nothing
+		# is being overridden.
+		var when: int = int(FileAccess.get_modified_time(path))
+		print("[em-map] %s: PUSHED override in use (user://, %s) — the export's copy is NOT being read"
+			% [map_name, Time.get_datetime_string_from_unix_time(when)])
+	else:
 		path = "res://commons/maps/%s/map_data.json" % map_name
 	if not FileAccess.file_exists(path):
 		print("[em-map] %s: no map file (user:// or res://) — the plan snapshot stands" % map_name)
