@@ -91,6 +91,7 @@ func _run() -> void:
 	pt.global_position = frame.to_global(beyond)
 	await process_frame
 	await process_frame
+	await process_frame
 	var fenced: Vector3 = frame.to_local(pt.global_position)
 	_check(fenced.x <= axis_len + 0.001 and fenced.z >= -0.001,
 		"with confine_point on it clamps again: (%.2f, %.2f, %.2f)" % [fenced.x, fenced.y, fenced.z])
@@ -142,6 +143,11 @@ func _run() -> void:
 		"floating_point_space": "world", "floating_point_at": "8,1.2,11"})
 	holder.add_child(f3)                      # _ready runs HERE, frame still at origin
 	f3.global_position = Vector3(4.5, -2.1, 12.5)   # the hall places it AFTER
+	await process_frame
+	# ...and the plan's `offset` nudges it again a frame later, which a one-shot
+	# resolve would miss entirely
+	f3.global_position += Vector3(0.0, 0.20, 0.0)
+	await process_frame
 	await process_frame
 	await process_frame
 	var p3: Node3D = f3.get_node_or_null("FloatingPoint") as Node3D

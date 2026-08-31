@@ -100,6 +100,14 @@ var _axis_from_world: Vector3 = Vector3.ONE
 ## location but the old one". The conversion is therefore deferred to the first
 ## _process tick, by which time the frame stands where it is going to stand.
 var _start_pending: bool = false
+## The frame is not done moving when _ready ends. The hall places it, and the
+## plan's own `offset` is applied after that again — so a ONE-SHOT resolve on the
+## first tick lands the point against a transform that is still changing, and the
+## point rides the frame afterwards as a child. The world target is therefore
+## re-applied every frame until the frame's transform has been still for two
+## consecutive frames, and then once more, finally.
+var _settle_xf: Transform3D = Transform3D.IDENTITY
+var _settle_n: int = 0
 var _axis_markers: Array = []           # projection markers riding the three axes
 var _proj_lines: MeshInstance3D = null  # thin guide lines, point -> each marker
 var _proj_mesh: ImmediateMesh = null
@@ -400,9 +408,17 @@ func _process(_delta: float) -> void:
 				(mk as Node3D).visible = false
 		return
 	if _start_pending:
-		# now the frame is where the hall put it, so world -> local means something
-		_start_pending = false
+		# hold the world target until the frame stops moving under us
+		if global_transform.is_equal_approx(_settle_xf):
+			_settle_n += 1
+		else:
+			_settle_xf = global_transform
+			_settle_n = 0
 		pt.position = _start_local()
+		if _settle_n >= 2:
+			_start_pending = false
+			print("[CoordinateSystem3M] point placed at world %s (frame %s, %s space)"
+				% [str(pt.global_position), str(global_position), floating_point_space])
 	_ensure_projection()
 	# frame-local coordinates survive a grab's re-parenting: read the GLOBAL
 	# position back through this frame (to_local includes the display scale)
