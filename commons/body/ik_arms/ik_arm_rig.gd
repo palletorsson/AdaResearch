@@ -32,6 +32,60 @@ const Tartan = preload("res://commons/body/tartan.gd")
 var hand_length: float = 0.08
 
 ## ————————————————————————————————————————————————————————————————————
+## WHERE THE ELBOW IS ASKED TO GO
+## ————————————————————————————————————————————————————————————————————
+## 2026-08-31, Palle: "the arms elbows point inwards. It's like they need more
+## space to point down, mostly."
+##
+## These three are a DIRECTION in torso space, not a place: outboard, down, and
+## back, which is where a human elbow hangs. Only the ratio matters — the vector
+## is projected onto the plane perpendicular to the shoulder-to-wrist line before
+## the pole is placed, so it can never come out parallel to the chain.
+##
+## The old pole was `shoulder + forward*0.3 + down*0.2`, and it was wrong three
+## ways at once. It had no left/right term, so it was IDENTICAL for both arms and
+## could not ask an elbow to go outboard at all. It pointed FORWARD, which is in
+## front of the elbow rather than behind it. And with a hand held out in front —
+## the ordinary VR pose — forward is nearly ALONG the shoulder-to-wrist line, so
+## the pole was degenerate: almost no component perpendicular to the chain for the
+## solver to swing around, leaving the bend plane to fall out of rounding. That is
+## what "points inwards" was.
+
+## Outboard, away from the body's midline. Mirrored by is_left.
+@export var elbow_out: float = 1.0
+## Down. The dominant term — an elbow mostly hangs.
+@export var elbow_down: float = 1.4
+## Back, behind the shoulder-wrist plane, which is the other half of not
+## chicken-winging.
+@export var elbow_back: float = 0.55
+
+## ————————————————————————————————————————————————————————————————————
+## THE SHOULDER GIRDLE — how far the axle itself may travel
+## ————————————————————————————————————————————————————————————————————
+## Palle, same message: "Maybe the axle joint needs to have some movement?"
+##
+## Yes, and it is not a tweak — a shoulder is not where the arm is bolted to the
+## body. The humerus hangs off a scapula that SLIDES across the ribs and a
+## clavicle that swings, and between them the socket itself travels five to ten
+## centimetres: it rises when you reach up, rolls forward when you reach across
+## your chest, slides outboard when you go wide. Pin it and every one of those
+## reaches has to be paid for at the elbow instead — the arm runs out of room and
+## the bend has to go somewhere ugly. Which is the second half of what was wrong.
+##
+## Set all four to 0.0 to get the old bolted shoulder back.
+
+## Rise, when the hand goes up (metres).
+@export var girdle_lift: float = 0.07
+## Roll forward, when the hand reaches out in front or across (metres).
+@export var girdle_protract: float = 0.05
+## Slide outboard when the hand goes wide, inboard when it crosses the midline.
+@export var girdle_slide: float = 0.04
+## Extra lean toward a hand that is at or beyond the arm's reach (metres).
+@export var girdle_stretch: float = 0.06
+## How fast the girdle catches up. Low is soft, high is rigid.
+@export var girdle_speed: float = 8.0
+
+## ————————————————————————————————————————————————————————————————————
 ## Internal references
 ## ————————————————————————————————————————————————————————————————————
 
@@ -45,6 +99,17 @@ var _mesh_instance: MeshInstance3D
 var _hand_skel: Skeleton3D = null
 var _wrist_bone: int = -1
 var _wrist_retry: int = 0
+
+## The anatomical shoulder the torso hands us, and the girdle's travel away from
+## it. global_position is the sum, so the axle is _anchor + _girdle.
+var _anchor: Vector3 = Vector3.ZERO
+var _have_anchor: bool = false
+var _girdle: Vector3 = Vector3.ZERO
+
+## The torso's axes, fed by PlayerBodyIK. Defaults are the identity frame so a
+## rig standing alone in a probe still has a sane notion of outboard.
+var _torso_right: Vector3 = Vector3.RIGHT
+var _torso_fwd: Vector3 = Vector3.FORWARD
 
 ## Bone indices
 var _idx_upper: int = -1
@@ -78,7 +143,7 @@ func _ready() -> void:
 		+ "then the VR hand")
 
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	## 1. The IK target follows the HAND'S WRIST, falling back to the controller
 	## when the hand has no skeleton. See _find_wrist.
 	if is_instance_valid(_controller):
@@ -97,10 +162,12 @@ func _physics_process(_delta: float) -> void:
 						("Left" if is_left else "Right"), _hand_skel.get_bone_name(_wrist_bone)])
 		_ik_target.global_position = _wrist_xform().origin
 
-	## 2. Pole target (elbow hint): forward 0.3 + down 0.2 from shoulder
-	var shoulder_pos: Vector3 = global_position
-	var fwd: Vector3 = -global_basis.z if global_basis.z.length_squared() > 0.001 else Vector3.FORWARD
-	_pole_target.global_position = shoulder_pos + fwd.normalized() * 0.3 + Vector3.DOWN * 0.2
+	## 2. Let the axle travel, then aim the elbow from wherever it ended up. The
+	## order matters: the pole is measured off the shoulder, so moving the shoulder
+	## afterwards would aim last frame's elbow.
+	var wrist_now: Vector3 = _ik_target.global_position
+	_drive_girdle(wrist_now, delta)
+	_aim_elbow(wrist_now)
 
 	## 3. After TwoBoneIK3D solves, override Hand bone rotation to match controller
 	##    This is a workaround for the known TwoBoneIK3D bug where the tip bone
@@ -170,9 +237,92 @@ func _wrist_xform() -> Transform3D:
 	return _controller.global_transform
 
 
-## Update the shoulder pivot (called by PlayerBodyIK from TorsoEstimator).
+## Update the shoulder pivot (called by PlayerBodyIK from TorsoEstimator). This
+## is the ANATOMICAL shoulder — where the girdle rests when the arm hangs. The
+## axle the skeleton actually stands on is this plus _girdle, and it is written
+## every frame by _drive_girdle; the sum is set here too so a rig with no
+## controller still stands in the right place.
 func set_shoulder_position(pos: Vector3) -> void:
-	global_position = pos
+	_anchor = pos
+	_have_anchor = true
+	global_position = pos + _girdle
+
+
+## Which way the BODY faces, from TorsoEstimator. Both vectors are horizontal
+## unit vectors; `outboard` for this arm is right mirrored by is_left.
+func set_torso_frame(right: Vector3, forward: Vector3) -> void:
+	if right.length_squared() > 0.001:
+		_torso_right = right.normalized()
+	if forward.length_squared() > 0.001:
+		_torso_fwd = forward.normalized()
+
+
+## Which way is away from the body's midline, for this arm.
+func _outboard() -> Vector3:
+	return _torso_right * (-1.0 if is_left else 1.0)
+
+
+## THE AXLE MOVES. Four small travels, each driven by where the hand has gone,
+## summed and smoothed. None of them is large — the whole budget is about 12 cm —
+## but a pinned shoulder makes the elbow pay for every reach, and 12 cm at the
+## shoulder is a lot of room at the elbow.
+func _drive_girdle(wrist: Vector3, delta: float) -> void:
+	if not _have_anchor:
+		return
+	var reach: float = maxf(0.01, upper_arm_length + lower_arm_length)
+	var out_axis: Vector3 = _outboard()
+	var to_hand: Vector3 = wrist - _anchor
+	var want := Vector3.ZERO
+
+	## up, when the hand goes up. The scapula rides the ribs — it rises freely and
+	## barely drops, so this term is clamped at zero rather than allowed to sink.
+	want += Vector3.UP * clampf(to_hand.dot(Vector3.UP) / reach, 0.0, 1.0) * girdle_lift
+	## forward, when the hand reaches out in front or across the chest
+	want += _torso_fwd * clampf(to_hand.dot(_torso_fwd) / reach, 0.0, 1.0) * girdle_protract
+	## outboard when the hand goes wide; inboard, signed, when it crosses the midline
+	want += out_axis * clampf(to_hand.dot(out_axis) / reach, -1.0, 1.0) * girdle_slide
+
+	## AND THE LEAN. Past about 90% of reach a real body stops solving with the arm
+	## and starts following with the shoulder. Without this the arm simply stops at
+	## full extension and the elbow locks straight, which is the pose that reads as
+	## a mannequin.
+	var dist: float = to_hand.length()
+	if dist > reach * 0.9:
+		var over: float = clampf((dist - reach * 0.9) / (reach * 0.3), 0.0, 1.0)
+		want += (to_hand / dist) * over * girdle_stretch
+
+	_girdle = _girdle.lerp(want, clampf(girdle_speed * delta, 0.0, 1.0))
+	global_position = _anchor + _girdle
+
+
+## POINT THE ELBOW SOMEWHERE IT CAN ACTUALLY GO.
+##
+## The wanted direction is outboard + down + back, in torso space. That vector on
+## its own is not usable as a pole: whenever it happens to lie near the
+## shoulder-to-wrist line the solver has almost nothing perpendicular to swing
+## around, and the bend plane becomes noise. So the axial component is REMOVED
+## first — what is left is by construction perpendicular to the chain, which is
+## the only kind of pole that means anything. The pole then sits half a metre off
+## the middle of the chord, so it stays sane as the arm bends.
+func _aim_elbow(wrist: Vector3) -> void:
+	var shoulder: Vector3 = global_position
+	var chord: Vector3 = wrist - shoulder
+	var out_axis: Vector3 = _outboard()
+	var want: Vector3 = out_axis * elbow_out + Vector3.DOWN * elbow_down + (-_torso_fwd) * elbow_back
+
+	if chord.length_squared() > 0.000001:
+		var axis: Vector3 = chord.normalized()
+		want -= axis * want.dot(axis)
+		## degenerate only if the wanted direction was exactly along the arm; take
+		## anything perpendicular rather than handing the solver a zero vector.
+		if want.length_squared() < 0.000001:
+			want = axis.cross(Vector3.UP)
+		if want.length_squared() < 0.000001:
+			want = axis.cross(out_axis)
+	if want.length_squared() < 0.000001:
+		want = Vector3.DOWN
+
+	_pole_target.global_position = shoulder + chord * 0.5 + want.normalized() * 0.5
 
 
 ## Change the arm mesh color at runtime.

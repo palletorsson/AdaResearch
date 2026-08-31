@@ -46,6 +46,15 @@ var right_hand: Node3D
 var left_shoulder_pos: Vector3
 var right_shoulder_pos: Vector3
 
+## THE TORSO'S OWN AXES, published rather than left implicit. global_basis below
+## already carries them, but reading them back off a Basis means re-deriving a
+## sign convention at every call site — and the arm rig got that wrong for months
+## by using its INHERITED basis (the play space's forward) as though it were the
+## body's. These two are what "outboard" and "in front of me" mean, and they turn
+## when the player turns.
+var torso_right: Vector3 = Vector3.RIGHT
+var torso_forward: Vector3 = Vector3.FORWARD
+
 ## Current smoothed torso yaw (radians).
 var _torso_yaw: float = 0.0
 
@@ -92,7 +101,8 @@ func _physics_process(delta: float) -> void:
 
 	## Derive torso basis vectors
 	var torso_fwd_final: Vector3 = Vector3(sin(_torso_yaw), 0.0, cos(_torso_yaw))
-	var torso_right: Vector3 = torso_fwd_final.cross(Vector3.UP).normalized()
+	torso_right = torso_fwd_final.cross(Vector3.UP).normalized()
+	torso_forward = torso_fwd_final
 
 	## Step 6 — Shoulder positions
 	var shoulder_half: float = shoulder_width * 0.5

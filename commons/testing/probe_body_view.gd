@@ -48,6 +48,23 @@ var _pose := 0
 var _phase := 0
 var _wait := 0
 
+## READ THE BONES THROUGH BoneAttachment3D, NOT get_bone_global_pose().
+##
+## 2026-08-31. The first version of the elbow measurement below reported the arm
+## hanging dead straight — shoulder 1.40, elbow 1.12, wrist 0.87, the rest pose to
+## the centimetre — for all five poses, while the same run's PNGs showed the
+## sleeves bent and meeting the hands. That is the standing trap in this rig
+## written down again: get_bone_global_pose() does not reflect the modifier, so a
+## probe that reads it measures the pose the solver was HANDED, not the one it
+## produced, and calls a working arm frozen.
+##
+## BoneAttachment3D is the sanctioned way out. It is driven off the skeleton's
+## own skeleton_updated signal, which fires AFTER the modifier stack, so its
+## global_position is the bone where it actually ended up. Each one also carries a
+## small ball, so the elbow is a thing you can see in the shot as well as a number
+## in the log — the render stays the evidence, the number is just easier to quote.
+var _joints: Dictionary = {}
+
 
 func _ready() -> void:
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(OUT_DIR))
@@ -183,6 +200,34 @@ func _ready() -> void:
 			pin.material_override = pmat
 			(arm2 as Node3D).add_child(pin)
 
+	## Hook a BoneAttachment3D onto each joint of each arm. See _joints above for
+	## why this and not get_bone_global_pose().
+	for side in ["LeftArmRig", "RightArmRig"]:
+		var arm3: Node = _body.get_node_or_null(side)
+		if arm3 == null:
+			continue
+		var skel3: Skeleton3D = _find_skeleton(arm3)
+		if skel3 == null or skel3.get_bone_count() < 3:
+			continue
+		for b in range(3):
+			var att := BoneAttachment3D.new()
+			att.name = "%s_j%d" % [side, b]
+			skel3.add_child(att)
+			att.bone_idx = b
+			_joints["%s:%d" % [side, b]] = att
+			# a ball, so the joint is visible in the render too — the elbow is the
+			# whole question and a sleeve hides it
+			var jb := MeshInstance3D.new()
+			var jsm := SphereMesh.new()
+			jsm.radius = 0.028
+			jsm.height = 0.056
+			jb.mesh = jsm
+			var jmat := StandardMaterial3D.new()
+			# shoulder green, ELBOW BLUE, wrist white
+			jmat.albedo_color = [Color(0.25, 0.85, 0.45), Color(0.30, 0.55, 1.0), Color(0.95, 0.95, 0.95)][b]
+			jb.material_override = jmat
+			att.add_child(jb)
+
 	_shot_cam = Camera3D.new()
 	_shot_cam.current = true
 	add_child(_shot_cam)
@@ -254,22 +299,54 @@ func _shoot(pose: String, view: String) -> void:
 ## The numbers beside the picture: where each joint actually is. A pose that looks
 ## wrong is much easier to fix when the shoulder's z is on the same line as the
 ## screenshot that shows it in the wrong place.
+##
+## WHICH WAY IS THE ELBOW POINTING? (2026-08-31, Palle: "the arms elbows point
+## inwards. It's like they need more space to point down, mostly.")
+##
+## "Inwards" is not a matter of taste, it is a length. Take the chord from
+## shoulder to wrist, drop the elbow onto it, and read the offset that is left:
+## that vector IS where the elbow is pointing, because a two-bone chain has no
+## other freedom. Split it outboard and down and you have the complaint as two
+## signed numbers — out POSITIVE is away from the body's midline, which is where a
+## human elbow lives; out NEGATIVE is tucked across the chest, the chicken-wing.
+##
+## The probe's body never turns (the camera sits at yaw 0 facing -Z), so world +X
+## is torso right here. Do not copy that assumption anywhere the player can turn.
 func _report(i: int) -> void:
 	for side in ["LeftArmRig", "RightArmRig"]:
-		var arm: Node = _body.get_node_or_null(side)
-		if arm == null:
+		var j0: Node3D = _joints.get("%s:0" % side, null)
+		var j1: Node3D = _joints.get("%s:1" % side, null)
+		var j2: Node3D = _joints.get("%s:2" % side, null)
+		if j0 == null or j1 == null or j2 == null:
 			continue
-		var skel: Skeleton3D = _find_skeleton(arm)
-		if skel == null or skel.get_bone_count() < 3:
-			continue
-		var g := skel.global_transform
-		var sh: Vector3 = (g * skel.get_bone_global_pose(0)).origin
-		var el: Vector3 = (g * skel.get_bone_global_pose(1)).origin
-		var wr: Vector3 = (g * skel.get_bone_global_pose(2)).origin
+		var sh: Vector3 = j0.global_position
+		var el: Vector3 = j1.global_position
+		var wr: Vector3 = j2.global_position
 		var hand: Vector3 = (_left if side.begins_with("Left") else _right).global_position
-		print("  %-6s %-9s shoulder(%.2f, %.2f, %.2f)  elbow(%.2f, %.2f, %.2f)  wrist(%.2f, %.2f, %.2f)  hand gap %.3f m"
+
+		var chord: Vector3 = wr - sh
+		var off := Vector3.ZERO
+		if chord.length_squared() > 0.000001:
+			var t: float = clampf((el - sh).dot(chord) / chord.length_squared(), 0.0, 1.0)
+			off = el - (sh + chord * t)
+		var out_axis: Vector3 = Vector3.LEFT if side.begins_with("Left") else Vector3.RIGHT
+		var out_m: float = off.dot(out_axis)
+		var down_m: float = off.dot(Vector3.DOWN)
+
+		print("  %-9s %-5s sh(%.2f,%.2f,%.2f) el(%.2f,%.2f,%.2f) wr(%.2f,%.2f,%.2f)  gap %.3f  elbow out %+.3f down %+.3f  %s"
 			% [POSES[i][2], side.replace("ArmRig", ""), sh.x, sh.y, sh.z,
-			   el.x, el.y, el.z, wr.x, wr.y, wr.z, wr.distance_to(hand)])
+			   el.x, el.y, el.z, wr.x, wr.y, wr.z, wr.distance_to(hand),
+			   out_m, down_m, _elbow_verdict(off, out_m)])
+
+
+## An elbow within 5 mm of the chord is not "outboard" — it is STRAIGHT, which is
+## the other failure and reads as a mannequin. The first version of this label
+## called those rows outboard and they were the arm at full extension with no bend
+## at all; a verdict that cannot tell a good elbow from no elbow is not a verdict.
+func _elbow_verdict(off: Vector3, out_m: float) -> String:
+	if off.length() < 0.005:
+		return "STRAIGHT (no bend)"
+	return "INWARD" if out_m < 0.0 else "outboard"
 
 
 func _find_skeleton(n: Node) -> Skeleton3D:

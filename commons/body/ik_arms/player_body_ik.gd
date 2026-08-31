@@ -87,10 +87,17 @@ func _physics_process(_delta: float) -> void:
 	if not is_instance_valid(_torso):
 		return
 
-	## Feed shoulder positions from torso estimator into arm rigs
+	## Feed shoulder positions AND THE TORSO'S AXES from the estimator into the arm
+	## rigs. The axes are what let an arm know which way "outboard" is — without
+	## them the elbow pole was placed against the play space's forward, so it did
+	## not turn when the player did, and it could not be mirrored per side.
+	var t_right: Vector3 = _torso.torso_right
+	var t_fwd: Vector3 = _torso.torso_forward
 	if is_instance_valid(_left_arm):
+		_left_arm.set_torso_frame(t_right, t_fwd)
 		_left_arm.set_shoulder_position(_torso.left_shoulder_pos)
 	if is_instance_valid(_right_arm):
+		_right_arm.set_torso_frame(t_right, t_fwd)
 		_right_arm.set_shoulder_position(_torso.right_shoulder_pos)
 
 
