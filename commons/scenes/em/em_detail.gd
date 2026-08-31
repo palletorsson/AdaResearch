@@ -233,6 +233,10 @@ const HANG_FORMATS := [
 	Vector2(0.58, 0.58),   # square
 ]
 const HANG_HARD_MAX := 80     # mirrors em_budget.MAX_WALL_FEATURES
+## The smallest type `lead` mode will use before it starts cutting words instead
+## of shrinking them. 32 is a little over half the 52 a short label gets, and is
+## the size at which the sample paragraph still reads across a hall.
+const LEAD_MIN_FONT := 32
 
 # ── the legend-to-architecture translator ───────────────────────────────────
 # Twelve 30-degree bins of the legend hue wheel, each landing on one named
@@ -1071,6 +1075,22 @@ static func speak_budget_measured(font: Font, text: String, wm: float, hm: float
 	return lo
 
 
+## As much of a sentence as `budget` allows, cut at a WORD, ending in an ellipsis.
+##
+## The cut is at a space and never mid-word: a label that stops in the middle of
+## a word reads as a rendering fault, and the whole point of the lead is that it
+## reads as an invitation to come closer and click.
+static func speak_lead(text: String, budget: int) -> String:
+	if text.length() <= budget:
+		return text
+	var cut: int = maxi(0, budget - 2)
+	var slice: String = text.substr(0, cut)
+	var sp: int = slice.rfind(" ")
+	if sp > cut / 2:
+		slice = slice.substr(0, sp)
+	return slice.strip_edges() + " …"
+
+
 ## Six boxes: four frame bars, a light mount, a dark field. All fully PROUD of
 ## the wall plane (offset along the outward normal by half their own depth), not
 ## straddling it the way the skirting does — a picture is on a wall, not in it.
@@ -1136,6 +1156,8 @@ static func _add_showing_cards(seg: Node3D, mounts: Array, opts: Dictionary) -> 
 	# opts.speak_lines: the pearl's sentences in string order; showing si gets
 	# sentence si, written across its field in Roboto, light on the dark field.
 	# opts.speak_caps: 1 = CAPS. A showing past the last sentence stays a field.
+	# today | measured | lead — endless_museum passes it from --em-label
+	var label_mode: String = String(opts.get("speak_label", "today"))
 	var speak_in: Array = opts.get("speak_lines", [])
 	var speak_caps: bool = bool(opts.get("speak_caps", false))
 	# THE WALL IS THE PRODUCT OF THE TEXT (2026-08-19): a record {text, token} hangs
@@ -1298,7 +1320,28 @@ static func _add_showing_cards(seg: Node3D, mounts: Array, opts: Dictionary) -> 
 			# pixel size is derived from the field's width so a 400 px box is the
 			# field less a margin, whatever the format; the sentence is centred in
 			# it and wraps inside it — nothing runs under the frame.
-			var fit: Dictionary = speak_fit(sentence.length(), wm, hm)
+			# HOW THIS LABEL IS FITTED — see --em-label in endless_museum.gd.
+			# `today` is the shipped estimate and the default, so a museum
+			# launched without the flag is byte-for-byte the museum of yesterday.
+			var fit: Dictionary = {}
+			match label_mode:
+				"measured":
+					fit = speak_fit_measured(roboto, sentence, wm, hm)
+				"lead":
+					# a FLOOR, not a target: the budget is how much of the
+					# sentence still fits while the type stays readable, and the
+					# rest is one click away — _page_read reads the book, so the
+					# reader panel shows the whole line however little is hung.
+					var was: int = sentence.length()
+					var budget: int = speak_budget_measured(roboto, sentence, wm, hm, LEAD_MIN_FONT)
+					sentence = speak_lead(sentence, budget)
+					sl.text = sentence
+					fit = speak_fit_measured(roboto, sentence, wm, hm, LEAD_MIN_FONT)
+					if was != sentence.length():
+						print("[em-label] cut %d ch -> %d ch (budget %d at min font %d), drawn at %d"
+							% [was, sentence.length(), budget, LEAD_MIN_FONT, int(fit["font_size"])])
+				_:
+					fit = speak_fit(sentence.length(), wm, hm)
 			# the field the sentence was fitted to — still needed below, where it
 			# is stamped on the label so a viz page can be hung on exactly it
 			var fieldv: Vector2 = fit["field"]
@@ -1306,7 +1349,9 @@ static func _add_showing_cards(seg: Node3D, mounts: Array, opts: Dictionary) -> 
 			var fieldh: float = fieldv.y
 			sl.pixel_size = float(fit["pixel_size"])
 			sl.font_size = int(fit["font_size"])
-			sl.width = 400.0
+			# the measured fitter wraps at the FIELD; the estimate always wrapped
+			# at 400 px whatever the frame was
+			sl.width = float(fit["width_px"]) if fit.has("width_px") else 400.0
 			sl.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 			sl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 			sl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER

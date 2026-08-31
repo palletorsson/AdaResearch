@@ -445,6 +445,7 @@ var _live_ledger: Dictionary = {}     # token -> entry, loaded once, saved when 
 var _live_ledger_loaded: bool = false
 var _live_dirty: bool = false
 var _walk_inside: Dictionary = {}     # token -> true, this run
+var _label_mode: String = "today"   # --em-label: today | measured | lead
 var _segments: Array = []         # [{node, z0, z1, index, w, snap, pearl}] — snap rebuilds a freed hall
 var _next_z: float = 0.0
 var _seg_index: int = 0
@@ -1497,6 +1498,7 @@ func _finish_initial_loading() -> void:
 
 func _parse_args() -> void:
 	var args := OS.get_cmdline_user_args()
+	# default "today": a museum launched with no flag is the museum of yesterday
 	if args.is_empty():
 		args = OS.get_cmdline_args()
 	for a in args:
@@ -1504,6 +1506,22 @@ func _parse_args() -> void:
 			_plan_path = EM_PLAN if a == "--em-plan" else a.substr(10)
 		elif a == "--em-edit":
 			_edit_mode = true
+		elif a.begins_with("--em-label="):
+			# HOW WALL LABELS ARE FITTED, for testing one against another in the
+			# building rather than in a still. 2026-08-31, Palle: "3 and 4 works
+			# can I test 4 in the museum?"
+			#
+			#   today     the shipped estimate — the default, nothing changes
+			#   measured  the real wrapped height from the font, wrap follows the
+			#             field. Every long label gets bigger; none get smaller.
+			#   lead      as much as fits while the type stays readable, then an
+			#             ellipsis. The whole line is one click away — the reader
+			#             panel reads the book, not the label.
+			_label_mode = a.substr(11)
+			# say it out loud. The flag two below this one shipped with an
+			# off-by-one substr and silently never worked until somebody used it;
+			# a flag that cannot be seen to have been read is the same trap.
+			print("[em] label mode: %s" % _label_mode)
 		elif a.begins_with("--em-seed="):
 			_seed = int(a.substr(10))
 		elif a.begins_with("--em-order-file="):
@@ -8234,6 +8252,10 @@ func _build_segment() -> void:
 						# DEFAULT, this is the hand (see _speak_adopt)
 						"speak_adopt": adopt_now,
 						"speak_caps": _L("speak", "caps", 0.0) > 0.5,
+						# today | measured | lead — see --em-label. The counter on
+						# the other side is read back below: a flag whose effect
+						# cannot be seen from outside is a flag nobody can test.
+						"speak_label": _label_mode,
 						# EVERY enter room stays bare (2026-08-23, Palle: "remove
 						# ... other objects on the wall around that info board"):
 						# no showings, mounts or cards hang below the threshold —
