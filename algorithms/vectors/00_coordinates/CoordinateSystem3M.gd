@@ -43,6 +43,26 @@ const FloatingPointScene := "res://commons/primitives/point/interactive_point_or
 ## "ada_coordinate_readout" group while the grab point moves.
 @export var show_labels: bool = true
 @export var show_panel: bool = true
+## THE NUMBERS ARE THE WORLD'S, NOT THE FRAME'S (2026-08-31, Palle: "do not think
+## about CoordinateSystem3M as local but the global values from vector.zero").
+##
+## The readout used to report `to_local(point.global_position)` — the point's
+## offset from THIS FRAME. So a frame standing at world (5, 0, 8) with the point
+## one metre out along each axis said 1.00 / 1.00 / 1.00, and said exactly that in
+## all 47 halls that place it, wherever they stood. The number described the
+## gadget, not the room, and there is nothing to learn from a coordinate system
+## whose origin follows it around.
+##
+## `world` measures from Vector3.ZERO, so the point reads its real position in the
+## map — x:6, y:1, z:10 — and two frames in different halls disagree, which is the
+## whole use of a coordinate. `local` keeps the old behaviour for a map that wants
+## a self-contained demonstration frame: `#readout_space:local`.
+@export_enum("world", "local") var readout_space: String = "world"
+## The point is the thing you are meant to look at (2026-08-31, Palle: "make the
+## point a bit bigger and more bright"), so it is sized and lit from here rather
+## than left at the scene's shelf defaults.
+@export var point_scale: float = 1.45
+@export var point_energy: float = 3.4
 
 var gyroscope: Node3D
 var _fp_ref: Node3D = null              # the grab point (survives re-parenting by a grab)
@@ -81,9 +101,12 @@ func _add_floating_point() -> void:
 	_fp_ref = pt
 	# the point is a body: it does not inherit this frame's display scale
 	pt.top_level = false
+	# BEFORE add_child: the point builds its material in _ready, and add_child runs
+	# _ready immediately — setting the energy afterwards paints nothing.
+	pt.set("glow_emission_energy", point_energy)
 	add_child(pt)
 	pt.position = floating_point_at
-	pt.scale = Vector3.ONE / maxf(0.01, display_scale)
+	pt.scale = Vector3.ONE / maxf(0.01, display_scale) * maxf(0.05, point_scale)
 	# its origin is THIS frame's origin, and it reads its coordinates in this frame
 	pt.set("origin_point", global_position if is_inside_tree() else Vector3.ZERO)
 	pt.set("frame_path", pt.get_path_to(self))
@@ -306,6 +329,15 @@ func _process(_delta: float) -> void:
 	# position back through this frame (to_local includes the display scale)
 	var lp: Vector3 = to_local(pt.global_position)
 	var cl := Vector3(clampf(lp.x, 0.0, axis_length), clampf(lp.y, 0.0, axis_length), clampf(lp.z, 0.0, axis_length))
+	# THE POINT STAYS INSIDE THE LINES (2026-08-31, Palle: "the point is not inside
+	# the x,y,z lines"). Only the MARKERS were clamped; the point and its guide
+	# lines were drawn at the raw position, so a drag past the end of an axis left
+	# the point outside the frame with its markers pinned at the corners — three
+	# lines running off to a dot in mid-air. Clamping the body itself makes the
+	# axis ends what they look like: walls. A held point stops there and stays held.
+	if not lp.is_equal_approx(cl):
+		pt.global_position = to_global(cl)
+		lp = cl
 	(_axis_markers[0] as Node3D).position = Vector3(cl.x, 0, 0)
 	(_axis_markers[1] as Node3D).position = Vector3(0, cl.y, 0)
 	(_axis_markers[2] as Node3D).position = Vector3(0, 0, cl.z)
@@ -318,15 +350,26 @@ func _process(_delta: float) -> void:
 		_proj_mesh.surface_add_vertex(lp)
 		_proj_mesh.surface_add_vertex(tgt_v as Vector3)
 	_proj_mesh.surface_end()
-	# the x,y,z TEXT lives on the hall's wall works
+	# the x,y,z TEXT lives on the hall's wall works — in WORLD units by default,
+	# measured from Vector3.ZERO rather than from this frame's own origin.
 	if is_inside_tree():
+		var reported: Vector3 = pt.global_position if readout_space == "world" else lp
 		for rd in get_tree().get_nodes_in_group("ada_coordinate_readout"):
 			if rd.has_method("show_coordinates"):
-				rd.show_coordinates(lp)
+				rd.show_coordinates(reported)
 
 
 func apply_grid_config(config: Dictionary) -> void:
 	# map_data tokens: CoordinateSystem3M:0:0#display_scale:1.5#tick_step:0.0
+	#                  #readout_space:local  #point_scale:1.8  #point_energy:5.0
+	if config.has("readout_space"):
+		var rs: String = str(config["readout_space"]).to_lower().strip_edges()
+		if rs in ["world", "local"]:
+			readout_space = rs
+	if config.has("point_scale"):
+		point_scale = maxf(0.05, float(config["point_scale"]))
+	if config.has("point_energy"):
+		point_energy = maxf(0.0, float(config["point_energy"]))
 	if config.has("display_scale"):
 		display_scale = float(config["display_scale"])
 		scale = Vector3(display_scale, display_scale, display_scale)
