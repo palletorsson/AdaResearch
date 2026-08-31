@@ -46,6 +46,7 @@ var _chapter_opt: OptionButton
 var _pearl_opt: OptionButton
 var _status: Label
 var _sel_label: Label
+var _insp_box: VBoxContainer
 var _refused_label: Label
 var _palette: ItemList
 var _search: LineEdit
@@ -197,6 +198,20 @@ func _build_hud() -> void:
 	var pl := Label.new(); pl.text = "PALETTE — click, then click a cell"; pl.add_theme_font_size_override("font_size", 12); left.add_child(pl)
 	_search = LineEdit.new(); _search.placeholder_text = "search every token…"; _search.text_changed.connect(_fill_palette); left.add_child(_search)
 	_palette = ItemList.new(); _palette.custom_minimum_size = Vector2(240, 360); _palette.item_selected.connect(_on_palette_pick); left.add_child(_palette)
+	# THE INSPECTOR (2026-08-31, Palle: "I like museum studio can I get a new
+	# inspector panel where I can set plinth , offset etc etc"). Under the
+	# palette, because that is the column already reserved for choosing rather
+	# than for reading. It rebuilds on every selection and writes through
+	# _edit_row like every key does — one writer, so a widget and a key cannot
+	# disagree about what a plan row says.
+	var ih := Label.new()
+	ih.text = "DRESS — the selected body"
+	ih.add_theme_font_size_override("font_size", 12)
+	ih.add_theme_color_override("font_color", Color(1, 0.85, 0.4))
+	left.add_child(ih)
+	_insp_box = VBoxContainer.new()
+	_insp_box.add_theme_constant_override("separation", 3)
+	left.add_child(_insp_box)
 
 	_sel_label = Label.new(); _sel_label.position = Vector2(260, 40); _sel_label.add_theme_color_override("font_color", Color(0.9, 0.95, 1.0)); _hud.add_child(_sel_label)
 	_config_edit = LineEdit.new(); _config_edit.position = Vector2(260, 64); _config_edit.custom_minimum_size = Vector2(520, 0)
@@ -218,7 +233,7 @@ func _build_hud() -> void:
 	get_viewport().size_changed.connect(func(): right.position = Vector2(get_viewport().get_visible_rect().size.x - 436, 40))
 	_refused_label = Label.new(); _refused_label.position = Vector2(260, 100); _refused_label.add_theme_color_override("font_color", Color(1.0, 0.55, 0.5)); _hud.add_child(_refused_label)
 	_hint = Label.new()
-	_hint.text = "click select · drag move (Ctrl fine) · left-drag on ground: turn iso · R rotate · +/- scale · P/[ ] plinth · C axis · K config · S speak / Shift+S pearl · PgUp/PgDn · Del · Home · Z/Y undo · G overlay · I iso · F frame · B bake · W walk"
+	_hint.text = "click select · drag move (Ctrl fine) · left-drag on ground: turn iso · R rotate · +/- scale · P/[ ] plinth (or the DRESS panel, left) · C axis · K config · S speak / Shift+S pearl · PgUp/PgDn · Del · Home · Z/Y undo · G overlay · I iso · F frame · B bake · W walk"
 	_hint.add_theme_font_size_override("font_size", 12)
 	_hint.add_theme_color_override("font_color", Color(0.75, 0.75, 0.8))
 	_hud.add_child(_hint)
@@ -558,10 +573,104 @@ func _refresh_marks() -> void:
 		ring.position = Vector3(n.global_position.x, 0.06 if kind in ["body", "plinth", "furniture"] else n.global_position.y, n.global_position.z)
 		_marks.add_child(ring)
 
+## PLINTH HEIGHTS the studio offers. 0.95 is what P has always toggled to and is
+## the negotiator's own default (endless_museum.gd:10775 writes it on 660 rows),
+## so it stays in the list and stays the one P uses.
+const STUDIO_SUPPORTS := [0.0, 0.30, 0.45, 0.60, 0.75, 0.95, 1.20]
+
+
+## The dress of the selected body as widgets. Every control writes the SAME plan
+## row field the keyboard writes — support_height_m, rotation, scale — through
+## _edit_row, which is the only door to em_plan_write.py. Nothing here is a
+## second opinion about what a row means.
+##
+## It is rebuilt from scratch on each selection rather than updated in place: a
+## row that gains a field between builds would otherwise leave a stale widget
+## showing a value nothing holds any more.
+func _studio_insp_build() -> void:
+	if _insp_box == null or not is_instance_valid(_insp_box):
+		return
+	for c in _insp_box.get_children():
+		_insp_box.remove_child(c)
+		c.queue_free()
+	if _sel.is_empty() or _kind(_sel) != "body":
+		var idle := Label.new()
+		idle.add_theme_font_size_override("font_size", 11)
+		idle.add_theme_color_override("font_color", Color(0.6, 0.62, 0.66))
+		idle.text = "select a body" if _sel.is_empty() else "%s — dressing rules, not a plan row" % _kind(_sel)
+		_insp_box.add_child(idle)
+		return
+
+	var pr: Dictionary = _plan_row_for(_sel)
+	_insp_box.add_child(_studio_row_label("%s   ·   cell %s" % [
+		String(_sel.get("token", "")), str(_sel.get("tile_cell", []))]))
+
+	# PLINTH — a dropdown. A height the list does not carry is appended rather
+	# than snapped away, so opening the panel cannot quietly change a value.
+	var plr := HBoxContainer.new()
+	plr.add_child(_studio_row_label("plinth"))
+	var pl := OptionButton.new()
+	var have: float = float(pr.get("support_height_m", 0.0))
+	var at: int = -1
+	for i in range(STUDIO_SUPPORTS.size()):
+		var h: float = float(STUDIO_SUPPORTS[i])
+		pl.add_item("none" if h < 0.05 else "%.2f m" % h)
+		if absf(h - have) < 0.03:
+			at = i
+	if at < 0:
+		pl.add_item("%.2f m" % have)
+		at = pl.item_count - 1
+	pl.selected = at
+	pl.item_selected.connect(_studio_pick_support)
+	plr.add_child(pl)
+	_insp_box.add_child(plr)
+
+	_insp_box.add_child(_studio_spin("rotation", float(pr.get("rotation", 0.0)), -180.0, 360.0, 15.0,
+		func(v: float): _edit_row({"rotation": v})))
+	_insp_box.add_child(_studio_spin("scale", float(pr.get("scale", 1.0)), 0.1, 5.0, 0.05,
+		func(v: float): _edit_row({"scale": v})))
+
+	# WHAT THE ROW IS, read-only: the three fields that decide whether a plinth is
+	# even legal here, and the slot it was dealt into.
+	_insp_box.add_child(_studio_row_label("%s · %s" % [
+		String(pr.get("mode", "?")), String(pr.get("venue", "?"))], Color(0.55, 0.58, 0.62), 10))
+	if pr.has("slot"):
+		_insp_box.add_child(_studio_row_label(String(pr.get("slot", "")), Color(0.45, 0.48, 0.52), 9))
+
+
+func _studio_row_label(t: String, col: Color = Color(0.85, 0.88, 0.92), sz: int = 11) -> Label:
+	var l := Label.new()
+	l.text = t
+	l.add_theme_font_size_override("font_size", sz)
+	l.add_theme_color_override("font_color", col)
+	return l
+
+
+func _studio_spin(name_s: String, value: float, lo: float, hi: float, step: float, cb: Callable) -> HBoxContainer:
+	var row := HBoxContainer.new()
+	row.add_child(_studio_row_label(name_s))
+	var sp := SpinBox.new()
+	sp.min_value = lo
+	sp.max_value = hi
+	sp.step = step
+	sp.value = value
+	sp.custom_minimum_size = Vector2(88, 0)
+	sp.value_changed.connect(cb)
+	row.add_child(sp)
+	return row
+
+
+func _studio_pick_support(idx: int) -> void:
+	if idx < 0 or idx >= STUDIO_SUPPORTS.size():
+		return                    # the appended odd height: leave the row alone
+	_edit_row({"support_height_m": float(STUDIO_SUPPORTS[idx])})
+
+
 func _show_selection() -> void:
 	if _sel.is_empty() or not is_instance_valid(_sel.get("node")):
 		_sel_label.text = "" if _placing == "" else ("placing %s — click a cell" % _placing)
 		return
+	_studio_insp_build()
 	var nv0: Variant = _sel.get("node")
 	var n: Node3D = nv0 as Node3D
 	var kind: String = _kind(_sel)
