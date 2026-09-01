@@ -11,7 +11,11 @@ extends Node3D
 # truth: a curve has no intrinsic form — it is just the limit of increasingly dense point samples
 
 @export var grab_point_path: NodePath = NodePath("GrabPoint")
-@export var draw_sphere_path: NodePath = NodePath("GrabPoint/DrawSphere")
+## Where the pen tip is. It USED to be a second sphere 0.12 m in front of the
+## one you hold — so the artifact was two balls, and the one that drew was not
+## the one in your hand. It is the grab point itself now: you hold the ball,
+## the ball draws. Scenes that want an offset tip (draw_stick) still set this.
+@export var draw_sphere_path: NodePath = NodePath("GrabPoint")
 @export var trail_color: Color = Color(1.0, 0.4, 0.9, 1.0)
 @export var trail_max_points: int = 1024
 @export var min_segment_distance: float = 0.01
@@ -19,7 +23,15 @@ extends Node3D
 @export var auto_clear_on_drop: bool = false
 @export var reference_frame_position: Vector3 = Vector3(0, 0, 0.2)
 @export var reference_frame_size: float = 0.5
-@export var show_reference_frame: bool = true
+## The wireframe square that stood 0.2 m in front of the dot. OFF now: it read
+## as a picture frame the drawing hung inside, which is the opposite of what
+## this artifact is about — a hand writing points in space, with nothing
+## bounding where. #show_reference_frame:1 brings it back.
+##
+## It is only the DRAWN square that goes. reference_frame_position and
+## reference_frame_size still place and size every retention record, which is
+## built at that plane whether or not the outline is visible.
+@export var show_reference_frame: bool = false
 
 ## AXIS — WHAT A MARK PERSISTS AS once the hand that made it has gone. The word is adopted
 ## from [[mystic_writing_pad]] and shared with [[grab_sphere_point_snap]],

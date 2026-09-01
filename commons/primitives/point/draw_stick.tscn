@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" uid="uid://cj383sgq8j7b0" path="res://commons/primitives/point/draw_dot.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://c7r5upmpm2rrm" path="res://commons/primitives/cubes/grab_long_stick.tscn" id="2_stick"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_shortblade"]
+top_radius = 0.01
+bottom_radius = 0.011
+height = 0.95
+
+[node name="DrawStick" type="Node3D"]
+script = ExtResource("1_script")
+grab_point_path = NodePath("GrabStick")
+draw_sphere_path = NodePath("GrabStick/Blade/Top/TrackBall")
+trail_max_points = 4096
+min_segment_distance = 0.005
+
+[node name="GrabStick" parent="." instance=ExtResource("2_stick")]
+
+[node name="Top" parent="GrabStick/Blade" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.553, 0, 0)
+
+[node name="Blade" parent="GrabStick/Blade" index="1"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -0.054, 0, 0)
+mesh = SubResource("CylinderMesh_shortblade")
+
+[node name="MesmerizingTrail" parent="GrabStick" index="4"]
+visible = false
+
+[node name="Displayobjectposition" parent="GrabStick/Blade/Top" index="0"]
+visible = false
