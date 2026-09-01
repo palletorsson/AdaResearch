@@ -4,17 +4,33 @@ extends SceneTree
 ## 2026-09-01, Palle: "After two seconds the line is turned into a big
 ## sledgehammer ... You can use the sledgehammer to break the cross barrier."
 ##
-## Seven checks, and FOUR are negatives, because every interesting failure here
+## NINE checks, FIVE of them negatives, because every interesting failure here
 ## is a false positive: a hammer that breaks things it is merely resting against
 ## is a wand, and a wand makes the opposite argument to the one the room is for.
 ##
-##   1  the barrier starts solid and unbroken
-##   2  a SLOW touch does nothing                       <- negative
-##   3  a swung strike breaks it
-##   4  the collider is actually gone (you can cross)
-##   5  a SECOND strike is refused                      <- negative
-##   6  the laser's contract reaches the same barrier
-##   7  line_demo does NOT transform by default         <- negative, 3 other maps
+##   1   the barrier starts solid and unbroken
+##   2a  the swing memory decays after the probe moves the hammer into place
+##   2b  RESTING against it for 12 frames does nothing   <- negative
+##   3   ONE swing takes exactly ONE hit point
+##   3b  the very next frames are rationed by cooldown   <- negative
+##   4   the collider is actually gone (you can cross)
+##   5   a SECOND strike is refused                      <- negative
+##   6   the laser's contract reaches the same barrier
+##   7   line_demo does NOT transform by default         <- negative, 3 other maps
+##
+## Two things this file learned the hard way, 2026-09-01:
+##
+## The barrier carries hit_points now, so ONE SWING IS ONE BLOW, not one kill.
+## The old check 3 swept the head through and waited for is_broken(), which
+## STRIKE_COOLDOWN makes impossible inside one sweep. probe_three_blows.gd owns
+## the three-blow kill; this file owns the per-swing contract.
+##
+## And the old check 2 passed by ACCIDENT. Moving the hammer into position is a
+## 0.4 m jump in one frame -- about 24 m/s -- which the old HEAD_SPEED_MAX of 14
+## discarded as a teleport. Raising that cap to 45 (a real VR swing clears 14)
+## turned the probe's own setup into a landed blow, and the resting negative was
+## scoring a hit before the swing test began. It now waits for the memory to
+## decay and checks hp across a still interval, which is what it always claimed.
 
 func _init() -> void:
 	var fails := 0
@@ -36,89 +52,102 @@ func _init() -> void:
 		print("   FAIL not on the laser's layer — the beam cannot reach it"); fails += 1
 
 	# ---- 2. THE NEGATIVE THAT MATTERS: a slow lean does nothing ---------
+	#
+	# NO TELEPORT NEAR THE BARRIER. Getting the hammer into place is itself a
+	# movement and the artifact can only tell it from a swing by speed -- and
+	# `freeze` does NOT guarantee a jump lands in a single frame. If physics
+	# splits a 0.4 m hop across two, one frame reads ~12 m/s, which is a
+	# perfectly good swing, and this check scores a hit while claiming to prove
+	# the opposite. It did exactly that, intermittently, which is worse than
+	# failing: the same file passed and then failed with only comments changed.
+	#
+	# So the hammer is parked FAR (nothing to hit there, whatever the jump reads)
+	# and then CREEPS in at 0.01 m per physics frame -- 0.6 m/s, below
+	# HEAD_SPEED_MIN 1.15. That is a slow lean, which is the thing being tested.
 	var h = Hammer.instantiate()
 	get_root().add_child(h)
 	await process_frame
 	await process_frame
-	# Park the head inside the barrier and let two frames pass WITHOUT moving it:
-	# overlapping is not striking.
-	h.global_position = b.global_position + Vector3(0, -0.4, 0)
-	await process_frame
-	await process_frame
-	await process_frame
-	print("2  resting against it, barrier broken = %s (must be false)" % b.is_broken())
-	if b.is_broken():
-		print("   FAIL the hammer is a wand: contact alone destroyed it"); fails += 1
-
-	# ---- 3 + 4. a swung strike --------------------------------------
-	# Speed is measured at the head per physics frame, so a real displacement
-	# between frames is what a swing IS as far as this artifact is concerned.
-	# A pickable is a RigidBody3D, and the physics server fights a teleport: the
-	# body is put back where IT thinks it belongs on the next step, so the head
-	# never accumulates the displacement the strike test is looking for. Freezing
-	# makes the transform authoritative, which is what a hand holding it does too.
 	h.freeze = true
-	h.global_position = b.global_position + Vector3(0, -0.4, 0.6)
-	await physics_frame
-	await physics_frame
-	print("   [where] hammer=%s head=%s barrier=%s body=%s"
-		% [h.global_position, h._head.global_position, b.global_position,
-		   body0.global_position if body0 else "-"])
-	print("   [masks] strike radius=%.2f body.layer=%d"
-		% [h._strike_shape.radius, body0.collision_layer if body0 else -1])
-	# Ask the SPACE, not the Area3D. If the space knows the barrier is at the
-	# head's position and the Area3D does not, the fault is the Area; if neither
-	# does, the barrier's collider is not where its node says it is.
-	var st: PhysicsDirectSpaceState3D = h.get_world_3d().direct_space_state
-	var q := PhysicsShapeQueryParameters3D.new()
-	var probe_shape := SphereShape3D.new()
-	probe_shape.radius = 0.2
-	q.shape = probe_shape
-	q.collision_mask = 1048577
-	q.transform = Transform3D(Basis(), b.global_position + Vector3(0, 0.46, 0.0))
-	var hits: Array = st.intersect_shape(q, 8)
-	print("   [space] direct query at the barrier centre found %d collider(s)" % hits.size())
-	for hit in hits:
-		print("           %s  layer=%d" % [hit.collider, hit.collider.collision_layer])
-	# ONE SWING IS ONE BLOW, not one kill. The barrier carries hit_points now,
-	# so this loop asks whether a swing LANDS -- it cannot ask whether it breaks,
-	# because STRIKE_COOLDOWN deliberately rations one hit per 0.45 s and this
-	# sweep lasts a fraction of that. probe_three_blows.gd owns the kill.
-	var hp_before: int = b.hit_points_left()
-	var ok := false
-	for i in 14:
-		h.global_position = b.global_position + Vector3(0, -0.4, 0.9 - 0.14 * i)
+	var rest_y := Vector3(0, -0.4, 0)
+	h.global_position = b.global_position + rest_y + Vector3(0, 0, 1.2)
+	for _i in 30:
 		await physics_frame
-		print("      z=%+.2f head_y=%.2f speed=%.2f recent=%.2f"
-			% [0.9 - 0.14 * i, h._head.global_position.y, h._head_speed, h._recent_speed])
+	print("2a parked clear: recent=%.2f m/s cool=%.2f hp=%d"
+		% [h._recent_speed, h._cool, b.hit_points_left()])
+	if b.hit_points_left() != 3:
+		print("   FAIL parking the hammer already damaged it"); fails += 1
+
+	var hp_rest: int = b.hit_points_left()
+	var creep_peak := 0.0
+	for i in 130:
+		h.global_position = b.global_position + rest_y + Vector3(0, 0, 1.2 - 0.01 * i)
+		await physics_frame
+		creep_peak = maxf(creep_peak, h._head_speed)
+	print("2b crept in at %.2f m/s peak and rested: hp %d -> %d, broken = %s"
+		% [creep_peak, hp_rest, b.hit_points_left(), b.is_broken()])
+	if creep_peak >= 1.15:
+		print("   FAIL the creep was not slow — this is not testing a lean"); fails += 1
+	if b.hit_points_left() != hp_rest or b.is_broken():
+		print("   FAIL the hammer is a wand: a slow lean damaged it"); fails += 1
+
+	# ---- 3. ONE SWING IS ONE BLOW ---------------------------------------
+	# Back out slowly (still under the threshold), then come in at 0.10 m per
+	# frame: ~6 m/s at 60 Hz, well over HEAD_SPEED_MIN and nowhere near
+	# HEAD_SPEED_MAX 45, so it reads as a swing rather than a jump.
+	for i in 100:
+		h.global_position = b.global_position + rest_y + Vector3(0, 0, -0.1 + 0.01 * i)
+		await physics_frame
+	var hp_before: int = b.hit_points_left()
+	var landed := false
+	for i in 16:
+		h.global_position = b.global_position + rest_y + Vector3(0, 0, 0.9 - 0.10 * i)
 		await physics_frame
 		if b.hit_points_left() < hp_before:
-			ok = true
+			landed = true
 			break
-	print("3  swung: hp %d -> %d   (head %.2f m/s)"
+	print("3  swung: hp %d -> %d  (head %.2f m/s)"
 		% [hp_before, b.hit_points_left(), h._head_speed])
-	if not ok:
+	if not landed:
 		print("   FAIL the hammer never landed"); fails += 1
+	elif b.hit_points_left() != hp_before - 1:
+		print("   FAIL one swing took %d hp, not 1"
+			% (hp_before - b.hit_points_left())); fails += 1
 
-	# and now take it down, so the collider check below has something to check.
-	# BOUNDED: an unbounded drain loop here hung the probe for five minutes.
+	# ---- 3b. NEGATIVE: the cooldown rations the very next frames --------
+	var hp_after: int = b.hit_points_left()
+	for i in 6:
+		h.global_position = b.global_position + Vector3(0, -0.4, 0.3 - 0.10 * i)
+		await physics_frame
+	print("3b immediately swinging again: hp %d -> %d (cooldown must hold)"
+		% [hp_after, b.hit_points_left()])
+	if b.hit_points_left() != hp_after:
+		print("   FAIL STRIKE_COOLDOWN did not ration the swing"); fails += 1
+
+	# ---- 4. take it down, and the way must open -------------------------
+	# Hold the collider NOW: the barrier queue_free()s itself when it breaks, so
+	# walking its children afterwards reads a freed node -- which is what used to
+	# stall this probe for five minutes at exactly this line.
+	var body_ref := body0
 	for _i in 4:
 		if not is_instance_valid(b) or b.is_broken():
 			break
 		b.strike(Vector3.ZERO, h)
 	await process_frame
 	await process_frame
-	var body1 := _find_static(b)
-	print("4  collider after the break: %s (must be null — you can cross)" % [body1])
-	if body1 != null:
+	var still_there: bool = is_instance_valid(body_ref)
+	print("4  collider after the break: %s (must be false — you can cross)"
+		% still_there)
+	if still_there:
 		print("   FAIL it broke but still blocks the way"); fails += 1
 
 	# ---- 5. NEGATIVE: one barrier is one event --------------------------
-	var again: bool = b.strike(Vector3.ZERO, null)
+	var again: bool = false
+	if is_instance_valid(b):
+		again = b.strike(Vector3.ZERO, null)
 	print("5  second strike returns %s (must be false)" % again)
 	if again:
 		print("   FAIL a broken barrier broke again"); fails += 1
-
 	# ---- 6. the laser's contract reaches the same target ----------------
 	var b2 = Barrier.instantiate()
 	get_root().add_child(b2)
