@@ -119,11 +119,23 @@ const DEPTH_GLYPH := "⌈"
 var grid_system: Node = null
 
 func _ready():
-	# Connect to XP signal for updates
-	if get_node_or_null("/root/GameManager") != null:
-		GameManager.connect("xp_updated", Callable(self, "_update_xp_display"))
-		_update_xp_display(GameManager.get_xp())
-		_update_health_display(100)  # Assuming full health at start
+	# XP WAS RENAMED TO SCORE. GameManager.get_xp() is a legacy alias for
+	# get_score() (GameManager.gd:319-323) and the signal became score_updated;
+	# this connect was left behind at the rename. It named a signal that does
+	# not exist, so every board load pushed an error AND the label never
+	# updated again after the first frame -- the initial value was right, which
+	# is why nobody noticed. Health was worse: hardcoded to 100.
+	#
+	# Reached by PATH, not by the autoload name: naming GameManager here is what
+	# stopped a SceneTree probe from ever loading this script.
+	var gm := get_node_or_null("/root/GameManager")
+	if gm != null:
+		if gm.has_signal("score_updated"):
+			gm.connect("score_updated", Callable(self, "_update_xp_display"))
+		if gm.has_signal("health_updated"):
+			gm.connect("health_updated", Callable(self, "_update_health_display"))
+		_update_xp_display(gm.call("get_xp"))
+		_update_health_display(gm.call("get_health"))
 	
 	# Defer loading until grid system is ready
 	call_deferred("_initialize_info_board")

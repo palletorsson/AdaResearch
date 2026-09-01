@@ -96,6 +96,32 @@ func _init() -> void:
 	else:
 		print("info_board script would not load in a SceneTree probe -- source check only")
 
+	# ---------- info_board: the XP signal it connects to must EXIST ----------
+	var gm := get_root().get_node_or_null("GameManager")
+	if gm != null and IB != null:
+		print("")
+		print("GameManager has score_updated=%s  health_updated=%s  xp_updated=%s"
+			% [gm.has_signal("score_updated"), gm.has_signal("health_updated"),
+			   gm.has_signal("xp_updated")])
+		if gm.has_signal("xp_updated"):
+			print("  NOTE xp_updated exists after all -- revisit the fix"); fails += 1
+		var board = IB.new()
+		var holder := Node3D.new()
+		get_root().add_child(holder)
+		holder.add_child(board)
+		await process_frame
+		var c1: bool = gm.is_connected("score_updated",
+			Callable(board, "_update_xp_display"))
+		var c2: bool = gm.is_connected("health_updated",
+			Callable(board, "_update_health_display"))
+		print("board connected to score_updated=%s health_updated=%s" % [c1, c2])
+		if not c1:
+			print("  FAIL the XP label is still wired to nothing"); fails += 1
+		if not c2:
+			print("  FAIL health is still hardcoded"); fails += 1
+	else:
+		print("no GameManager in this probe -- skipped the signal check")
+
 	var checks := {
 		"has the helper": ib.contains("func _resolve_map_from_tree"),
 		"helper reads em_map": ib.contains("\"map_name\", \"em_map\""),
