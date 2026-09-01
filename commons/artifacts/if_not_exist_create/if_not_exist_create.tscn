@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/if_not_exist_create/if_not_exist_create.gd" id="1_ifnec"]
+
+[node name="IfNotExistCreate" type="Node3D"]
+script = ExtResource("1_ifnec")

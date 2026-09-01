@@ -15872,6 +15872,25 @@
    "content": "text",
    "qfep_connection": "The plate that speaks — in-world tutorial text as a framed 2D-in-3D board rather than a floating label. The project's chosen way for a room to say something and stay a room: text seated in the world on a surface, the humble carrier of nearly every explanation the curriculum offers."
   },
+  "if_not_exist_create": {
+   "name": "If Not Exist, Create",
+   "lookup_name": "if_not_exist_create",
+   "description": "An instruction left at the coordinate that wants it: a cage at the footprint the gap actually is, captioned with what should be built there. Read by tools/if_not_exist.py, which lists every wish in the corpus and says which are already fulfilled. Tail syntax, never the head: #make:token#why:one_line#like:existing_token#cells:WxD.",
+   "scene": "res://commons/artifacts/if_not_exist_create/if_not_exist_create.tscn",
+   "category": "tools",
+   "interaction": "read",
+   "artifact_type": "instruction",
+   "map_ready": true,
+   "include_in_map_data": true,
+   "dna": {
+    "fixture": {
+     "make": "tip_to_tail_bench",
+     "why": "the_hall_teaches_six_operations_and_never_adds_two_vectors",
+     "like": "vector_add",
+     "cells": "2x2"
+    }
+   }
+  },
   "3t": {
    "name": "3D Text Display",
    "lookup_name": "3t",
