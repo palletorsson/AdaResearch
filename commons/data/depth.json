@@ -1,0 +1,124 @@
+{
+ "_producer": "tools/depth.py --apply",
+ "_what": "the dependency gradient: what each room says, and at which rung",
+ "_note": "DERIVED from commons/data/depth_rulings.json (authored). Do not edit.",
+ "_rule": "Explain a dependency when ignorance of it prevents the learner from forming the intended mental model. Do not explain it merely because it exists.",
+ "_thrownness": "The learner arrives late. There is no point at which they have arrived early enough to hold all the prerequisites — that is the condition of learning, not a defect to be repaired. So the question is never 'what must be taught before this?' (there is always one more) but 'what must become visible now for the next action to be intelligible?'",
+ "ladder": [
+  {
+   "status": "background",
+   "gloss": "in the building, never on the path",
+   "shows": "nowhere — the basement. Listed once in the book, so the museum is honest about having one, and never on a wall.",
+   "why": "The museum should be allowed to have a basement full of explanations the visitor never visits. That does not make it dishonest; it makes it navigable."
+  },
+  {
+   "status": "used",
+   "gloss": "the learner acts through it and need not know it exists",
+   "shows": "nothing at all",
+   "why": "THIS IS THE DEFAULT, and the default is silence. A child meets sentences containing words they do not know without every unknown word becoming a prerequisite. The code is allowed to be more sophisticated than the learner's current vocabulary."
+  },
+  {
+   "status": "named",
+   "gloss": "it has a name here, one line, no theory",
+   "shows": "a plaque line beside the thing",
+   "why": "Naming is not teaching. 'This is the instruction that makes a point appear' is a name; 'here we define a function whose parameter has type Vector3' is a lesson nobody asked for."
+  },
+  {
+   "status": "glimpsed",
+   "gloss": "a small optional inscription says what KIND of thing it is",
+   "shows": "the plaque line, plus a descent the learner may decline",
+   "why": "Enough to stop it being magic. Not so much that the learner is asked to carry the abstraction yet."
+  },
+  {
+   "status": "understood",
+   "gloss": "the room teaches it; it is the room's subject",
+   "shows": "the entrance board, and the room itself",
+   "why": "What the learner needs in order to act. The museum can put these in their hands."
+  },
+  {
+   "status": "mastered",
+   "gloss": "carried across rooms",
+   "shows": "nowhere — not a property of any one room",
+   "why": "A fact about a learner's path, which no single room can know."
+  }
+ ],
+ "speaks_at": "named",
+ "rooms": {
+  "Point_One": {
+   "says": [
+    {
+     "thing": "X / Y / Z",
+     "status": "understood",
+     "say": "Three directions. They name where, not what."
+    },
+    {
+     "thing": "Vector3",
+     "status": "understood",
+     "say": "Three numbers describe where something is.",
+     "link": "https://docs.godotengine.org/en/stable/classes/class_vector3.html"
+    },
+    {
+     "thing": "position",
+     "status": "understood",
+     "say": "Where the thing is, as against what it is."
+    },
+    {
+     "thing": "a point has no extent",
+     "status": "understood",
+     "explore": true,
+     "say": "You can see a sphere. What is there is three numbers. The visible thing is scaffolding for the invisible one."
+    },
+    {
+     "thing": "round()",
+     "status": "glimpsed",
+     "say": "The computer chooses the nearest allowed position.",
+     "descend": "round() is one way a program asks for the nearest whole number.",
+     "link": "https://docs.godotengine.org/en/stable/classes/class_%40globalscope.html"
+    },
+    {
+     "thing": "collision shapes",
+     "status": "glimpsed",
+     "say": "The ball knows when your hand is inside it.",
+     "note": "Later. Glimpse only — the grab works whether or not this is understood."
+    },
+    {
+     "thing": "MeshInstance3D",
+     "status": "named",
+     "say": "The thing that makes it visible.",
+     "link": "https://docs.godotengine.org/en/stable/classes/class_meshinstance3d.html"
+    },
+    {
+     "thing": "SphereMesh",
+     "status": "named",
+     "say": "A ball, standing in for a point that has no size.",
+     "link": "https://docs.godotengine.org/en/stable/classes/class_spheremesh.html"
+    }
+   ],
+   "basement": [
+    {
+     "thing": "the XR runtime",
+     "status": "background",
+     "note": "Museum infrastructure. It is why you have hands."
+    },
+    {
+     "thing": "the rendering pipeline",
+     "status": "background",
+     "note": "Deep background. It is why you can see."
+    },
+    {
+     "thing": "CPU instructions",
+     "status": "background",
+     "note": "Very deep background."
+    },
+    {
+     "thing": "electricity",
+     "status": "background",
+     "note": "Cosmological basement."
+    }
+   ],
+   "silent": [
+    "function"
+   ]
+  }
+ }
+}

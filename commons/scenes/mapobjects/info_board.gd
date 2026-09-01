@@ -90,6 +90,31 @@ var icon_textures = {
 	"xp": preload("res://commons/icons/xp-icon.png")
 }
 
+## THE DEPENDENCY GRADIENT — what should become visible, here, now.
+##
+## This board used to print everything a room's code assumed and did not teach
+## ("stands on functions, .new(), add_child"). Palle's ruling, 2026-09-01:
+## that is a dependency wall, and the wall has no bottom — before Vector3,
+## floats; before floats, binary; before binary, electricity.
+##
+##     Explain a dependency when ignorance of it prevents the learner from
+##     forming the intended mental model. Don't explain it merely because
+##     it exists.
+##
+## So the board names the room's SUBJECT — what you will be able to do — and
+## offers a descent in one line for anything ruled 'glimpsed'. The machinery
+## the learner acts through is ruled 'used' and the board is silent about it.
+## An unruled room says nothing here at all.
+##
+## preload, not the global class name: a fresh headless boot has not
+## necessarily reimported the class cache, and this file must compile in one.
+const DepthReader := preload("res://commons/scenes/mapobjects/Depth.gd")
+##
+## The threshold mark. A character rather than an icon because it sits INSIDE a
+## line of text, at the head of the one section addressed to the person arriving
+## rather than to the room.
+const DEPTH_GLYPH := "⌈"
+
 # Reference to the grid system - will be found dynamically
 var grid_system: Node = null
 
@@ -284,6 +309,12 @@ func _update_info_board_with_map_data():
 # Get appropriate icons for a map based on category and difficulty
 func _get_icons_for_map(category: String, difficulty: String) -> Array:
 	var icons = []
+
+	# The threshold mark. A room that assumes something wears the cube — the
+	# museum's own building-block sign — so the notice is visible from across the
+	# room, before any of the text is legible.
+	if DepthReader.subject(map_name).size() > 0:
+		icons.append("cube")
 	
 	# Add difficulty-based icons
 	match difficulty:
@@ -349,7 +380,29 @@ func _create_summary_from_map_data(map_info: Dictionary, metadata: Dictionary):
 	metadata_text += "ESTIMATED TIME: %s" % estimated_time
 	summary_sections.append(metadata_text)
 	
-	# Section 4: Map dimensions (if available)
+	# Section 4: WHAT YOU WILL BE ABLE TO DO  (2026-09-01)
+	#
+	# Not an inventory of what the room assumes. The subject only — the things
+	# ruled 'understood' in commons/data/depth_rulings.json, which is authored,
+	# because explanatory relevance is a judgment about a learner and no
+	# measurement can make it.
+	#
+	# Then, if anything in the room is ruled 'glimpsed', ONE line offering the
+	# descent. Not the descent itself: the learner is not being asked to carry
+	# the abstraction yet, only told the stair is there.
+	var subject = DepthReader.subject(map_name)
+	if subject.size() > 0:
+		var subject_text = "%s HERE:\n" % DEPTH_GLYPH
+		for t in subject:
+			subject_text += "· " + str(t.get("thing", "")) + "\n"
+			if str(t.get("say", "")) != "":
+				subject_text += "    " + str(t["say"]) + "\n"
+		var deeper = DepthReader.descents(map_name)
+		if deeper.size() > 0:
+			subject_text += "\n%d thing(s) here go deeper if you want them." % deeper.size()
+		summary_sections.append(subject_text.strip_edges())
+
+	# Section 5: Map dimensions (if available)
 	var dimensions = map_info.get("dimensions", {})
 	if not dimensions.is_empty():
 		var width = dimensions.get("width", 0)

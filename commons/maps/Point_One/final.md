@@ -4,7 +4,7 @@ The prerequisites are in, stacked away behind you, and the fold keeps running wh
 
 <!-- @folding_past -->
 
-Nested frames march inward, each 0.85 the size of the one before it. That is what a past looks like when you give it a geometry: not a line behind you but a nesting, the present as the innermost term of a regress that does not end. You did not join it. You were thrown into it.
+Nested frames march inward, each 0.85 the size of the one before it. That is what a past looks like when you give it a geometry: not a line behind you but a nesting, the present as the innermost term of a regress that does not end — an inward fall with no floor to arrive at. You did not join it. You were thrown into it.
 
 <!-- @ -->
 
@@ -38,7 +38,7 @@ The origin is a convention, not a point. It is the reference against which other
 
 Zero is already surrounded, so you have somewhere to stand. This is the root of all vectors, and there is no turning back from it: every other position in the museum is written as a departure from here.
 
-It was not placed but excavated — two metres down, under glass — because a corner is not a cell. Four cells meet at the origin and none of them contains it. Three of its four quadrants lie in coordinates no map row can name. The building can stand there; the language cannot.
+It was not placed but excavated — two metres down, under glass — because a corner is not a cell. The grid names cells by row and column, counting from zero. The origin is not a cell at all: it is the corner where four of them meet, and to write down the other three you would need row −1, column −1. The map file has no row −1. The building can stand there; the language cannot.
 
 <!-- @ -->
 
@@ -71,7 +71,7 @@ Three floats. One position. No extent.
 
 <!-- @you_are_here -->
 
-A point is that which has no part, so it has no place either: it borrows its whole existence from a coordinate system that is not itself a point. The plaque says *you are here*. It is lying in the same way every map lies, and usefully.
+A point is that which has no part; its place is entirely borrowed from a coordinate system that is not itself a point. The plaque says *you are here*. It is lying in the same way every map lies, and usefully.
 
 <!-- @ -->
 

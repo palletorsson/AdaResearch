@@ -271,12 +271,141 @@ def work_names():
     return names
 
 
+# ── THE DEPENDENCY GRADIENT (2026-09-01) ───────────────────────────────────
+#
+# Palle asked for the room's assumptions on a board and in the book, with links.
+# The first build did that literally: it measured every construct a room's code
+# used and printed the lot as "Stands on: functions, .new(), add_child — not
+# taught here." Accurate, and a DEPENDENCY WALL. Their ruling:
+#
+#     Explain a dependency when ignorance of it prevents the learner from
+#     forming the intended mental model. Don't explain it merely because
+#     it exists.
+#
+# Follow the other way and there is no bottom: before Vector3, floats; before
+# floats, binary; before binary, electricity; and the learner has learned nothing
+# about points. The opposite failure — "here is Vector3(1, 0.5, 0), don't worry
+# about the rest" — leaves them in unexplained magic. So: a gradient, whose lower
+# rungs SHOW NOTHING, and whose default is 'used', which is to say silence.
+#
+# What the book can do that the headset cannot is make the descent one click. So
+# the room prints its subject, and every thing ruled 'glimpsed' prints its
+# descent — the small optional inscription, not a lesson. The basement is listed
+# once, at the back, so the museum is honest about having one.
+#
+# Source: commons/data/depth.json, derived by tools/depth.py from the AUTHORED
+# commons/data/depth_rulings.json. Unruled rooms print nothing, and 243 of 244
+# are unruled, which for most of them is the right answer rather than a backlog.
+
+def depth_doc():
+    try:
+        with open(os.path.join(REPO, "commons", "data", "depth.json"),
+                  encoding="utf-8") as fh:
+            return json.load(fh)
+    except Exception:
+        return {}
+
+
+def _linked(t):
+    """A thing's name, linked if it has somewhere honest to point."""
+    nm = str(t.get("thing", ""))
+    url = t.get("link")
+    return f"[{nm}]({url})" if url else nm
+
+
+def render_room_depth(map_name, doc, lines):
+    """What this room makes you able to do — and the stairs, for those who want.
+
+    Empty prints NOTHING. A room nobody has ruled says nothing, and that silence
+    is the ruling."""
+    room = (doc.get("rooms") or {}).get(map_name) or {}
+    says = room.get("says") or []
+    if not says:
+        return
+    subject = [t for t in says if t.get("status") == "understood"]
+    named = [t for t in says if t.get("status") == "named"]
+    glimpsed = [t for t in says if t.get("status") == "glimpsed"]
+
+    if subject:
+        lines.append("> **Here you can:**")
+        for t in subject:
+            lines.append(f"> - {_linked(t)} — {t['say']}" if t.get("say")
+                         else f"> - {_linked(t)}")
+        lines.append("")
+    if named:
+        # Named, not taught. One line, no theory.
+        lines.append("> **Also in the room:** " + ", ".join(
+            f"{_linked(t)} ({t['say']})" if t.get("say") else _linked(t)
+            for t in named))
+        lines.append("")
+    for t in glimpsed:
+        # The plaque, then the descent the reader may decline. In the book the
+        # decline is free, which is the one thing print does better than VR.
+        lines.append(f"> {t.get('say', '')}")
+        lines.append(f"> <small>{_linked(t)} — {t.get('descend', '')}</small>"
+                     if t.get("descend") else f"> <small>{_linked(t)}</small>")
+        lines.append("")
+
+
+def render_thrownness(lines):
+    """Said once, at the front. Not a syllabus — a place to stand."""
+    doc = depth_doc()
+    th = doc.get("_thrownness")
+    if not th:
+        return
+    lines.append("### You arrive late")
+    lines.append("")
+    lines.append(th)
+    lines.append("")
+    ladder = doc.get("ladder") or []
+    if ladder:
+        lines.append("So a thing in this book is not either taught or hidden. It has "
+                     "a rung, and the lower rungs are silent on purpose:")
+        lines.append("")
+        for rung in ladder:
+            lines.append(f"- **{rung['status']}** — {rung['gloss']}")
+        lines.append("")
+    if doc.get("_rule"):
+        lines.append(f"> {doc['_rule']}")
+        lines.append("")
+
+
+def render_basement(lines):
+    """Everything the museum runs on and never puts on the path.
+
+    Printed once, at the back, and never on a wall. The building is allowed a
+    basement the visitor never visits; saying so is what keeps it navigable
+    rather than magic."""
+    doc = depth_doc()
+    seen, rows = set(), []
+    for mp, room in (doc.get("rooms") or {}).items():
+        for t in room.get("basement") or []:
+            k = str(t.get("thing", ""))
+            if k and k not in seen:
+                seen.add(k)
+                rows.append((k, t.get("note", "")))
+    if not rows:
+        return
+    lines.append("## The basement")
+    lines.append("")
+    lines.append("Everything below is why the rest of this is possible. None of it is "
+                 "on the path, and nothing in the museum will ask you for it. It is "
+                 "written down so that the building is known to have a basement — a "
+                 "museum with one it never mentions is a museum of magic.")
+    lines.append("")
+    for name, note in rows:
+        lines.append(f"- **{name}** — {note}" if note else f"- **{name}**")
+    lines.append("")
+
+
+
 def render_walk_prose(seq, lines):
     """Print every written room of this chapter. Returns (written, silent)."""
     maps = chapter_maps(seq)
     if not maps or _parse_regions is None:
         return 0, len(maps)
     names = work_names()
+    _doc = depth_doc()
     written = 0
     for m in maps:
         f = os.path.join(REPO, "commons", "maps", m, "final.md")
@@ -292,6 +421,7 @@ def render_walk_prose(seq, lines):
         written += 1
         lines.append(f"#### {m.replace('_', ' ')}")
         lines.append("")
+        render_room_depth(m, _doc, lines)
         for block in _parse_regions(raw):
             tok = str(block.get("token") or "")
             body = str(block.get("text") or "").strip()
@@ -533,6 +663,11 @@ def main() -> int:
         body = re.sub(r"^#\s*Ada and its ancestors\s*\n+(\*\(.*?\)\*\s*\n+)?", "", body, flags=re.S)
         lines += ["## Ada and its ancestors", "", body.strip(), ""]
 
+    # The reader meets the condition before the chapters — the only place it can
+    # do any work. Not a list of prerequisites: a place to stand inside a system
+    # that is already running.
+    render_thrownness(lines)
+
     # Table of contents.
     lines += ["## Contents", ""]
     num = 0
@@ -574,6 +709,11 @@ def main() -> int:
                 render_interlude(il, lines)
                 part_toc["chapters"].append({"interlude": il["title"]})
         toc_entries.append(part_toc)
+
+    # The basement, at the back: what the museum runs on and never puts on the
+    # path. A building is allowed one; a building that never mentions it is a
+    # building of magic.
+    render_basement(lines)
 
     md = "\n".join(lines)
     with open(OUT_MD, "w", encoding="utf-8") as f:
