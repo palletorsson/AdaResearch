@@ -835,19 +835,35 @@ func _ret_wax() -> void:
 	root.add_child(sheet)
 
 
-## One dot-stroke in the record plane. `step` > 0 quantises it onto the ruling.
+## One stroke in the record plane. `step` > 0 quantises it onto the ruling.
+##
+## A LINE, for the reason the live trail is one (_setup_trail, 2026-08-23, Palle:
+## "it should be a line since that is where we see the resolution of the line").
+## The record was a chain of 54 spheres while the trail it records was a line
+## strip, so the same hand drew a line in the air and left beads behind it — and
+## on a coarse resolution a bead chain hides the very thing the quantisation is
+## there to show, because overlapping spheres round off the corner the stair-step
+## makes. The line stair-steps corner to corner through the grid.
+##
+## Only the STROKE changes. lattice's ruling is still a MultiMesh of dots
+## (_ret_mm): a regular field of pinpricks is not a line and was never drawn as
+## one — it is the thing the stroke is admitted onto.
 func _ret_stroke(phase: float, z: float, c: Color, energy: float, step: float) -> void:
 	var span: float = reference_frame_size * 0.42
-	var mmi := _ret_mm("Stroke", _ret_emissive(c, energy))
-	var mm: MultiMesh = mmi.multimesh
-	mm.instance_count = RET_SAMPLES
+	var mesh := ImmediateMesh.new()
+	var mi := MeshInstance3D.new()
+	mi.name = "Stroke"
+	mi.mesh = mesh
+	mi.material_override = _ret_emissive(c, energy)
+	mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
 	for i in range(RET_SAMPLES):
 		var p: Vector3 = _ret_curve(float(i) / float(RET_SAMPLES - 1), phase, span)
 		if step > 0.0:
 			p = Vector3(round(p.x / step) * step, round(p.y / step) * step, 0.0)
 		p.z = z
-		mm.set_instance_transform(i, Transform3D(Basis(), p))
-	_ret_root().add_child(mmi)
+		mesh.surface_add_vertex(p)
+	mesh.surface_end()
+	_ret_root().add_child(mi)
 
 
 ## A deterministic hand — no randf anywhere in the record path, so five variants differ by

@@ -6019,6 +6019,11 @@
 			"qfep_connection": "oscillation: a dot that draws its own history — motion smeared into a time-domain trace; the simplest possible oscilloscope."
 		},
 		"draw_stick": {
+			"dna": {
+				"fixture": {
+					"retention": "trace"
+				}
+			},
 			"category": "unknown",
 			"complexity": "medium",
 			"description": "sample(hand_position) -> ImmediateMesh trail, but the hand holds a ROD. The same recorder as draw_dot with the pen tip moved to the end of a shortened grab_long_stick (blade 1.5 m -> 0.95 m, tip at 0.45 m instead of 1.0 m): the mark is made half a metre from the fist, so the wrist's small error is a large one at the tip and the drawn line carries the lever arm. Drawing with a stick is not drawing with a finger.",
