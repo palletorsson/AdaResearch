@@ -17016,17 +17016,17 @@
     "pearl": "point",
     "rooms": 5,
     "says": {
-     "folding_past": "You arrive late to class. That past is folding, all prerequisites are in, stack away in the past. \nThe folding past keeps running, you did not accept the challenge, you were thrown into the game. And so is everything around you, everything arrived late. The important thing is that you are here now.",
+     "folding_past": "You arrive late.\nThe prerequisites are in, stacked away behind you, and the fold keeps running whether or not you accepted the challenge. Everything here arrived late.\nYou are here now.",
      "frame_counter_display": "The internal clock is running, The frame counter updates with the cycle.",
-     "origin": "The Origin. Point zero is the first point but already surrounded so you have somewhere to stand.\nPoint zero, the being of space and the museum runs forward. No turning back. This is the root of all vectors. Vector(0,0,0) and any positive number change is where we place the other thing in the world.  Vector.ZERO",
+     "origin": "Mark the origin.\nIt is a convention, not a point: the reference every other point is measured from. Zero is already surrounded, so you have somewhere to stand.\nNo turning back.\n\nvar origin := Vector3.ZERO",
      "you_are_here": "You are here",
-     "interactive_point_origin": "Point Zero, now as an object in the exhibition",
+     "interactive_point_origin": "Point zero, now an object in the exhibition.\nThe sphere is rendering help. The point is the Vector3 that was passed in.\n\npoint.mesh = SphereMesh.new()",
      "science_screen": "the map is not the territory — move the point, watch its shadow",
-     "CoordinateSystem3M": "You are in 3D Space, Accept it! A minimal upper desire museum, wall hosts all these things. It is not raining but we need somewhere to focus on the objects.",
+     "CoordinateSystem3M": "Declare the three axes.\nRed, green, blue. They are unit vectors — they name directions, not places.\nNothing is here yet, and you are already in it.\n\nconst AXIS_X := Vector3(1, 0, 0)",
      "fontana_puncture": "the one point, pierced",
      "floating_sphere_field": "floating spheres all around me",
      "grab_sphere_point_snap": "A point you can take; it snaps.",
-     "interactive_point_origin_force": "Point One. The first point keeps escalating, inviting your hands. - “Show me what you can do with those hands” but really the hands are no different from the ball, they just code. It is us  that sit with the perspective from here to that dark shiny thing. - Grab the ball. This is the first point but it has already broken the promise of taking it one step at the time. We are already Alice in wonderland."
+     "interactive_point_origin_force": "Grab the ball.\n“Show me what you can do with those hands” — but the hands are no different from the ball. Both are code. What sits between them is you.\nOne step at a time was the promise. We are already Alice.\n\narea.add_to_group(\"grabbable\")"
     },
     "says_by": {
      "folding_past": "hand",
@@ -22626,17 +22626,17 @@
      "speak": "queer melancholia, rythm and melancolia",
      "speak_by": "hand",
      "says": {
-      "folding_past": "You arrive late to class. That past is folding, all prerequisites are in, stack away in the past. \nThe folding past keeps running, you did not accept the challenge, you were thrown into the game. And so is everything around you, everything arrived late. The important thing is that you are here now.",
+      "folding_past": "You arrive late.\nThe prerequisites are in, stacked away behind you, and the fold keeps running whether or not you accepted the challenge. Everything here arrived late.\nYou are here now.",
       "frame_counter_display": "The internal clock is running, The frame counter updates with the cycle.",
-      "origin": "The Origin. Point zero is the first point but already surrounded so you have somewhere to stand.\nPoint zero, the being of space and the museum runs forward. No turning back. This is the root of all vectors. Vector(0,0,0) and any positive number change is where we place the other thing in the world.  Vector.ZERO",
+      "origin": "Mark the origin.\nIt is a convention, not a point: the reference every other point is measured from. Zero is already surrounded, so you have somewhere to stand.\nNo turning back.\n\nvar origin := Vector3.ZERO",
       "you_are_here": "You are here",
-      "interactive_point_origin": "Point Zero, now as an object in the exhibition",
+      "interactive_point_origin": "Point zero, now an object in the exhibition.\nThe sphere is rendering help. The point is the Vector3 that was passed in.\n\npoint.mesh = SphereMesh.new()",
       "science_screen": "the map is not the territory — move the point, watch its shadow",
-      "CoordinateSystem3M": "You are in 3D Space, Accept it! A minimal upper desire museum, wall hosts all these things. It is not raining but we need somewhere to focus on the objects.",
+      "CoordinateSystem3M": "Declare the three axes.\nRed, green, blue. They are unit vectors — they name directions, not places.\nNothing is here yet, and you are already in it.\n\nconst AXIS_X := Vector3(1, 0, 0)",
       "fontana_puncture": "the one point, pierced",
       "floating_sphere_field": "floating spheres all around me",
       "grab_sphere_point_snap": "A point you can take; it snaps.",
-      "interactive_point_origin_force": "Point One. The first point keeps escalating, inviting your hands. - “Show me what you can do with those hands” but really the hands are no different from the ball, they just code. It is us  that sit with the perspective from here to that dark shiny thing. - Grab the ball. This is the first point but it has already broken the promise of taking it one step at the time. We are already Alice in wonderland."
+      "interactive_point_origin_force": "Grab the ball.\n“Show me what you can do with those hands” — but the hands are no different from the ball. Both are code. What sits between them is you.\nOne step at a time was the promise. We are already Alice.\n\narea.add_to_group(\"grabbable\")"
      },
      "says_by": {
       "folding_past": "hand",

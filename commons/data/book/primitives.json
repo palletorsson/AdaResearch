@@ -9,7 +9,7 @@
    "lines": [
     {
      "token": "folding_past",
-     "text": "You arrive late to class. That past is folding, all prerequisites are in, stack away in the past. \nThe folding past keeps running, you did not accept the challenge, you were thrown into the game. And so is everything around you, everything arrived late. The important thing is that you are here now.",
+     "text": "You arrive late.\nThe prerequisites are in, stacked away behind you, and the fold keeps running whether or not you accepted the challenge. Everything here arrived late.\nYou are here now.",
      "by": "hand",
      "place": "foyer",
      "lock": [
@@ -32,7 +32,7 @@
     },
     {
      "token": "origin",
-     "text": "The Origin. Point zero is the first point but already surrounded so you have somewhere to stand.\nPoint zero, the being of space and the museum runs forward. No turning back. This is the root of all vectors. Vector(0,0,0) and any positive number change is where we place the other thing in the world.  Vector.ZERO",
+     "text": "Mark the origin.\nIt is a convention, not a point: the reference every other point is measured from. Zero is already surrounded, so you have somewhere to stand.\nNo turning back.\n\nvar origin := Vector3.ZERO",
      "by": "hand",
      "place": "foyer",
      "lock": [
@@ -57,13 +57,14 @@
     },
     {
      "token": "interactive_point_origin",
-     "text": "Point Zero, now as an object in the exhibition",
+     "text": "Point zero, now an object in the exhibition.\nThe sphere is rendering help. The point is the Vector3 that was passed in.\n\npoint.mesh = SphereMesh.new()",
      "by": "hand",
      "support_m": 0.95,
      "lock": [
       7,
       6
-     ]
+     ],
+     "note": "Three floats. One position. No extent."
     },
     {
      "token": "science_screen",
@@ -80,7 +81,7 @@
     },
     {
      "token": "CoordinateSystem3M",
-     "text": "You are in 3D Space, Accept it! A minimal upper desire museum, wall hosts all these things. It is not raining but we need somewhere to focus on the objects.",
+     "text": "Declare the three axes.\nRed, green, blue. They are unit vectors — they name directions, not places.\nNothing is here yet, and you are already in it.\n\nconst AXIS_X := Vector3(1, 0, 0)",
      "by": "hand",
      "config": {
       "floating_point": 1
@@ -123,7 +124,7 @@
     },
     {
      "token": "interactive_point_origin_force",
-     "text": "Point One. The first point keeps escalating, inviting your hands. - “Show me what you can do with those hands” but really the hands are no different from the ball, they just code. It is us  that sit with the perspective from here to that dark shiny thing. - Grab the ball. This is the first point but it has already broken the promise of taking it one step at the time. We are already Alice in wonderland.",
+     "text": "Grab the ball.\n“Show me what you can do with those hands” — but the hands are no different from the ball. Both are code. What sits between them is you.\nOne step at a time was the promise. We are already Alice.\n\narea.add_to_group(\"grabbable\")",
      "by": "hand",
      "lock": [
       1,
@@ -135,7 +136,8 @@
      "count": 3,
      "spread": "square",
      "gap_cells": 1,
-     "placed_by": "grid"
+     "placed_by": "grid",
+     "note": "The coordinates change as the point moves. The point's identity does not."
     },
     {
      "token": "lab_room",
@@ -203,7 +205,52 @@
    "label": [
     {
      "token": "interactive_point_origin_force",
-     "mode": "lead"
+     "mode": "measured"
+    },
+    {
+     "token": "origin",
+     "mode": "measured"
+    }
+   ],
+   "adopt": [
+    {
+     "page": 15,
+     "token": "origin"
+    }
+   ],
+   "hang": [
+    {
+     "page": 0,
+     "cell": [
+      7,
+      7
+     ],
+     "dir": [
+      0,
+      -1
+     ]
+    },
+    {
+     "page": 15,
+     "cell": [
+      1,
+      5
+     ],
+     "dir": [
+      0,
+      -1
+     ]
+    },
+    {
+     "page": 31,
+     "cell": [
+      1,
+      8
+     ],
+     "dir": [
+      1,
+      0
+     ]
     }
    ]
   },
