@@ -4,7 +4,7 @@
 			"lookup_name": "walk_this_line_marking",
 			"name": "Walk This Line — Floor Marking",
 			"class_name": "WalkThisLineMarking",
-			"description": "A legend painted on the floor reading WALK THIS LINE (the words are a parameter, legend_text), with a guide stripe - rebuilt PROCEDURALLY, no glb: a matte quad and a stencil, white by default because a floor marking is white in the world. The line as INSTRUCTION: nothing about paint prevents anything, it works by being read and obeyed. Pairs with do_not_cross_barrier - perpendicular relations to one line: the tape forbids crossing it, this commands following it.",
+			"description": "A legend stencilled on the floor reading WALK THIS LINE (the words are a parameter, legend_text) standing off toward the approach, and the mark itself - rebuilt PROCEDURALLY, no glb, white because a floor marking is white in the world. The mark is a RAISED KERB (height_m 0.28) carrying a box collider, so it is met as well as read: at 6 mm of paint it was invisible from standing height in a hall. That is a different claim from the one it started with - #height_m:0 or #solid:0 returns it to flat paint, where nothing about the line prevents anything and it works by being read and obeyed. Pairs with do_not_cross_barrier - perpendicular relations to one line: the tape forbids crossing it, this commands following it.",
 			"scene": "res://commons/artifacts/walk_this_line_marking/walk_this_line_marking.tscn",
 			"category": "environment",
 			"artifact_type": "prop",
@@ -21,7 +21,7 @@
 			"include_in_map_data": true,
 			"size_group": "medium",
 			"spatial_needs": {
-				"footprint_cells": 3,
+				"footprint_cells": 2,
 				"clearance": "none"
 			},
 			"measurements": {

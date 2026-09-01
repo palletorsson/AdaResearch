@@ -20,8 +20,24 @@ const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 
 ## The words painted on the floor. Empty means stripe only.
 @export var legend_text: String = "WALK THIS LINE"
-## Stripe length, metres.
-@export var stripe_len_m: float = 2.9
+## Stripe length, metres. Was 2.9 — three cells of floor for one instruction,
+## which read as a runway rather than a mark. Shorter is also more like the
+## thing it imitates: real floor markings are read at the feet, not down a hall.
+@export var stripe_len_m: float = 1.6
+## Stripe height, metres. Paint at 6 mm is invisible from standing height in a
+## museum hall — the whole artifact vanished into the floor at eye level. This
+## raises the mark into a kerb you can actually see approaching. 0 keeps it flat
+## paint, which is what it was.
+@export var height_m: float = 0.28
+## A body in the kerb.
+##
+## THIS CHANGES WHAT THE ARTIFACT ARGUES, so it is a switch and not a constant.
+## The line was paint: "nothing about paint prevents anything, it works by being
+## read and obeyed", and it paired with do_not_cross_barrier as the obligatory
+## line against the forbidden one — two rules that hold by being read. A kerb
+## with a collider HOLDS BY BEING SOLID, which is a different claim about how a
+## rule works. #solid:0 restores the paint that only asks.
+@export var solid: bool = true
 ## Stripe width, metres.
 @export var stripe_w_m: float = 0.075
 ## Metres the legend sits behind the stripe (toward the reader), so the words
@@ -54,6 +70,10 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		stripe_len_m = clampf(float(config_data["stripe_len_m"]), 0.4, 12.0)
 	if config_data.has("stripe_w_m"):
 		stripe_w_m = clampf(float(config_data["stripe_w_m"]), 0.02, 0.5)
+	if config_data.has("height_m"):
+		height_m = clampf(float(config_data["height_m"]), 0.0, 1.2)
+	if config_data.has("solid"):
+		solid = _flag(config_data["solid"], solid)
 	if config_data.has("standoff_m"):
 		standoff_m = float(config_data["standoff_m"])
 	if config_data.has("show_stripe"):
@@ -70,6 +90,18 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if _built:
 		_built = false
 		_build()
+
+
+func _flag(v: Variant, fallback: bool) -> bool:
+	# `#solid:0` arrives as the STRING "0", and bool("0") in GDScript is true.
+	if typeof(v) == TYPE_BOOL:
+		return bool(v)
+	var t: String = str(v).strip_edges().to_lower()
+	if t in ["0", "false", "no", "off"]:
+		return false
+	if t in ["1", "true", "yes", "on"]:
+		return true
+	return fallback
 
 
 func _build() -> void:
@@ -94,14 +126,34 @@ func _build() -> void:
 	mount.name = "Marking"
 	add_child(mount)
 
+	# The top face of the mark — where the legend now lies, whether the mark is
+	# paint (0) or a kerb.
+	var top: float = maxf(0.0, height_m) + LIFT
+
 	if show_stripe:
 		var stripe := MeshInstance3D.new()
-		var quad := PlaneMesh.new()
-		quad.size = Vector2(stripe_len_m, stripe_w_m)
-		stripe.mesh = quad
+		if height_m > 0.0:
+			var bar := BoxMesh.new()
+			bar.size = Vector3(stripe_len_m, height_m, stripe_w_m)
+			stripe.mesh = bar
+			stripe.position = Vector3(0, height_m * 0.5 + LIFT, 0)
+		else:
+			var quad := PlaneMesh.new()
+			quad.size = Vector2(stripe_len_m, stripe_w_m)
+			stripe.mesh = quad
+			stripe.position = Vector3(0, LIFT, 0)
 		stripe.material_override = mat
-		stripe.position = Vector3(0, LIFT, 0)
 		mount.add_child(stripe)
+
+		if solid and height_m > 0.0:
+			var body := StaticBody3D.new()
+			var col := CollisionShape3D.new()
+			var box := BoxShape3D.new()
+			box.size = Vector3(stripe_len_m, height_m, stripe_w_m)
+			col.shape = box
+			col.position = Vector3(0, height_m * 0.5 + LIFT, 0)
+			body.add_child(col)
+			mount.add_child(body)
 
 	if legend_text.strip_edges() != "":
 		var label: MeshInstance3D = HangarKit.stencil(legend_text,
@@ -109,7 +161,16 @@ func _build() -> void:
 		if label:
 			# Lying flat, reading from above, standing off toward the approach.
 			label.rotation_degrees.x = -90.0
-			label.position = Vector3(0, LIFT, standoff_m)
+			# STAYS ON THE FLOOR. Moving it onto the kerb's top face put white
+			# letters on a white bar and they vanished — the legend has always
+			# needed the dark floor to read against, and standoff_m already
+			# holds it clear of the mark, "so the words announce the line
+			# before the feet reach it". It only needs lifting if the standoff
+			# is inside the bar's own width.
+			var legend_y: float = LIFT
+			if standoff_m < stripe_w_m * 0.5:
+				legend_y = top
+			label.position = Vector3(0, legend_y, standoff_m)
 			if rgba.a < 0.999 and label.material_override is StandardMaterial3D:
 				(label.material_override as StandardMaterial3D).transparency = \
 					BaseMaterial3D.TRANSPARENCY_ALPHA
