@@ -38,7 +38,11 @@ func _init() -> void:
 
 	# 3. THE SECOND NEGATIVE. An unruled room says NOTHING — it does not fall
 	#    back to a measured list. 243 of 244 rooms are unruled today.
-	var quiet = D.says("Point_Lines")
+	# A NAME NO ROOM WILL EVER HAVE. This check used to name Point_Lines, which
+	# was unruled at the time — and the moment somebody ruled it (the same day),
+	# the negative silently became a positive and stopped testing anything. A
+	# negative keyed to a real subject rots as soon as the subject changes.
+	var quiet = D.says("Unruled_Room_That_Does_Not_Exist")
 	print("unruled room says: %d (must be 0)" % quiet.size())
 	if quiet.size() != 0:
 		print("  FAIL an unruled room invented something to say"); fails += 1

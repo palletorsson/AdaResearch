@@ -119,6 +119,76 @@
    "silent": [
     "function"
    ]
+  },
+  "Point_Lines": {
+   "says": [
+    {
+     "thing": "two points",
+     "status": "understood",
+     "say": "One point was a position. Two are a relation, and a relation can be written down."
+    },
+    {
+     "thing": "a distance",
+     "status": "understood",
+     "say": "A single number. It has no direction and no parts, and it is not the line."
+    },
+    {
+     "thing": "a segment",
+     "status": "understood",
+     "explore": true,
+     "say": "Two points determine an infinite line. Keeping only what lies between them is already a decision."
+    },
+    {
+     "thing": "a direction",
+     "status": "understood",
+     "say": "Give the segment an order — from here to there — and it points. Normalise it and only the pointing is left."
+    },
+    {
+     "thing": "the drag",
+     "status": "glimpsed",
+     "say": "You measure by pulling. The hand is inside the instrument.",
+     "descend": "The same gesture at one scale reads a length, and at another changes the thing it is reading. Nothing in the gesture tells you which you are doing."
+    },
+    {
+     "thing": "the laser",
+     "status": "glimpsed",
+     "say": "A line you can aim is a line that can be aimed at something.",
+     "descend": "It is the same object as the measuring beam. Pointing and destroying differ in what is at the far end, not in the line."
+    },
+    {
+     "thing": "the swing",
+     "status": "glimpsed",
+     "say": "The line you measured with, two seconds later, with a mass on the end.",
+     "descend": "Nothing was added to it but a body. It has to be swung: resting it against something does nothing, because the damage is not in the object."
+    },
+    {
+     "thing": "loops",
+     "status": "glimpsed",
+     "say": "The computer walks the same instruction along the line.",
+     "descend": "A `for` loop repeats an instruction a fixed number of times — once per step of the walk.",
+     "link": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#if-else-elif"
+    },
+    {
+     "thing": "vertical, horizontal, parallel",
+     "status": "named",
+     "say": "Lines that agree never to meet, and the two that everything else is squared against."
+    },
+    {
+     "thing": "perspective",
+     "status": "named",
+     "say": "Parallels that meet after all, because you are standing somewhere."
+    },
+    {
+     "thing": "the Modulor",
+     "status": "named",
+     "say": "One man's body, turned into everybody's measure."
+    }
+   ],
+   "basement": [],
+   "silent": [
+    "function",
+    "branching"
+   ]
   }
  }
 }

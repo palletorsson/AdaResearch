@@ -464,7 +464,13 @@ func perform_measurement():
 
 		# LETHAL first: a kill is not a damage tick, and it must not wait on
 		# the cooldown. Only a hit past arm's length counts — see above.
-		if lethal and _is_player_body(hit_object) and distance >= lethal_min_distance:
+		#
+		# TWO WAYS TO BE HIT, because the raycast alone was never enough.
+		# _beam_victim() is the one that works in VR; see it for why.
+		var victim: Node = hit_object if _is_player_body(hit_object) and distance >= lethal_min_distance else null
+		if victim == null:
+			victim = _beam_victim(hit_point)
+		if lethal and victim != null:
 			_kill_player()
 		# Damage: any hit triggers damage when enabled (the laser itself is the hazard)
 		elif deals_damage and _damage_timer <= 0.0:
@@ -472,10 +478,14 @@ func perform_measurement():
 			if gm and gm.has_method("apply_health_damage"):
 				# The laser beam touching anything while player holds it = player in danger
 				# For static placed lasers: hitting the player body specifically
-				if _is_player_body(hit_object):
+				if victim != null:
 					gm.apply_health_damage(damage_amount)
 					_damage_timer = damage_cooldown
-					print("[LaserMeasure] LASER HIT PLAYER! dmg=%.1f target=%s" % [damage_amount, hit_object.name])
+					var fx := get_node_or_null("/root/DeathEffect")
+					if fx != null and fx.has_method("damage_flash"):
+						fx.call("damage_flash")
+					print("[LaserMeasure] LASER HIT PLAYER! dmg=%.1f target=%s"
+						% [damage_amount, victim.name])
 		_report_beam(distance)
 	else:
 		is_measuring = false
@@ -762,6 +772,65 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		max_range = maxf(0.05, float(config_data["max_range"]))
 	if config_data.has("tick_interval_m"):
 		tick_interval_m = maxf(0.005, float(config_data["tick_interval_m"]))
+
+
+## HOW WIDE THE BEAM IS, for the purpose of being in it. A raycast is a line of
+## zero thickness; a body standing in a visible beam expects to be hit.
+@export var beam_radius_m: float = 0.28
+
+
+## ARE YOU STANDING IN THE BEAM?
+##
+## 2026-09-01, Palle: "The player dies by the laser in desktop but not in VR ...
+## can we also only deal damage when we hit the laser? and fix so the laser deals
+## damage in VR too?"
+##
+## Both halves are the same fix. The beam has always been a RayCast3D, and a
+## raycast reports ONLY the thing it terminates on — so:
+##
+##   - in VR the player HOLDS the laser. The ray starts at the emitter, which is
+##     in their hand and inside or against their own capsule, and a ray that
+##     begins inside a shape does not report that shape. The one body that could
+##     be killed was the one body the ray could never see. That is the VR bug.
+##   - and a raycast is a line of zero thickness, so "hit" meant "the ray ended
+##     exactly on you" rather than "you are standing in the beam", which is what
+##     a person means by it.
+##
+## So the test is now geometric: the closest distance from the body to the beam
+## SEGMENT, checked at feet and at head height, against beam_radius_m. It needs
+## no collider on the right layer, no raycast luck, and it behaves identically in
+## VR and on the desktop because it asks about positions rather than about
+## physics reporting.
+##
+## The arm's-length floor still holds — measured ALONG the beam, so you are not
+## killed by the emitter you are carrying.
+func _beam_victim(beam_end: Vector3) -> Node:
+	if not (lethal or deals_damage) or not is_inside_tree():
+		return null
+	var origin: Vector3 = global_position
+	var seg: Vector3 = beam_end - origin
+	var seg_len: float = seg.length()
+	if seg_len < 0.001:
+		return null
+	var dir: Vector3 = seg / seg_len
+
+	var seen: Array = []
+	for g in ["player_body", "player", "em_walker"]:
+		for n in get_tree().get_nodes_in_group(g):
+			if n is Node3D and not seen.has(n):
+				seen.append(n)
+	for n in seen:
+		var base: Vector3 = (n as Node3D).global_position
+		# feet and head, because a body is not a point and the beam is at chest
+		# height for one of them and over the head of the other.
+		for probe_point in [base, base + Vector3(0, 1.2, 0), base + Vector3(0, 0.6, 0)]:
+			var along: float = clampf((probe_point - origin).dot(dir), 0.0, seg_len)
+			if along < lethal_min_distance:
+				continue                      # the emitter in your own hand
+			var closest: Vector3 = origin + dir * along
+			if probe_point.distance_to(closest) <= beam_radius_m:
+				return n
+	return null
 
 
 func _is_player_body(obj: Node) -> bool:

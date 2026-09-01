@@ -11977,9 +11977,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1,
-				1,
-				1
+				3,
+				4,
+				2
 			],
 			"include_in_map_data": true,
 			"lookup_name": "line_demo",
@@ -12028,7 +12028,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 6,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -12051,21 +12051,22 @@
 			},
 			"measurements": {
 				"aabb_size": [
-					1,
-					0.57,
-					0.1
+					2.9,
+					2.33,
+					1.2
 				],
 				"aabb_center": [
 					0,
-					1.77,
-					0
+					2.48,
+					-0.15
 				],
 				"grid_cells": [
-					1,
-					1
+					3,
+					2
 				],
-				"max_dimension_m": 1,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
+				"max_dimension_m": 2.9,
+				"measured_at": "2026-09-01T15:00:00.000000Z",
+				"measured_why": "STALE BY THREE WEEKS AND BY EVERY CHANGE MADE TODAY. The 2026-08-12 measurement said 1 x 0.57 x 0.1 m and one grid cell; the artifact now builds a 2.9 m ceiling rail on two drops, a 1.02 m screen at 2.94 m, and two 75 mm points 0.52 m apart. Measured by capture_multi_angle on 2026-09-01: AABB size (2.8968, 2.33175, 1.196766), centre (0.0, 2.482125, -0.149617). The gap is why the editor drew a one-cell footprint box around a three-cell body, and why the museum's live-footprint ledger (LIVE_OVERSHOOT_CELLS = 2) was on the edge of recording it as overgrown and re-negotiating its venue on the next build - which moves the artifact without anyone asking it to."
 			},
 			"spatial_profile": {
 				"dir_group": "panel",
@@ -26140,7 +26141,258 @@
 				"footprint_cells": 2,
 				"clearance_m": 0.6
 			}
-		}
+		},
+			"street_talker": {
+				"lookup_name": "street_talker",
+				"name": "Street Talker",
+				"description": "Two leaning planks (scuffed dark wood) hinged at the top on a brass-grey bar, standing on two feet. Each face carries a TextScreen in SCREEN mode, so wrapping, truncation and the minimum legible glyph are the screen component's problem and not this artifact's. Front: 'HERE YOU CAN' over the room's subject, plus a line counting the descents on the back. Back: 'GOES DEEPER' over each glimpsed thing's plaque line with its optional inscription indented beneath. Knobs: board_height, board_width, lean_degrees, frame_color, hinge_color, map_name (else the hall is found by walking up the tree).",
+				"category": "signage",
+				"complexity": "beginner",
+				"scene": "res://commons/artifacts/street_talker/street_talker.tscn",
+				"include_in_map_data": true,
+				"map_ready": true,
+				"map_sequences": [
+					"primitives"
+				],
+				"footprint": [
+					1,
+					2,
+					1
+				],
+				"tags": [
+					"signage",
+					"threshold",
+					"entrance",
+					"text",
+					"depth",
+					"gradient",
+					"placeable",
+					"vr"
+				],
+				"dna": {
+					"fixture": {
+						"map": "Point_One"
+					},
+					"fixture_why": "This artifact builds NOTHING until it knows which hall it stands in, because an empty A-frame in the 243 rooms with no depth ruling would advertise, in every one of them, that somebody meant to say something and did not. That gate is the design, so the capture bench has to be told which hall to photograph it in rather than the gate being loosened for the bench's convenience. Point_One is the one ruled room, so it is the only hall where a photograph of this sign shows anything at all."
+				},
+				"theoreticalGrounding": "A learner is thrown into a running system — computer, OS, engine, scene, node, coordinate space — and there is no arriving early enough to hold all of it. Treating every dependency as a prerequisite has no bottom (before Vector3, floats; before floats, binary; before binary, electricity) and leaves nothing taught about points; hiding every dependency leaves unexplained magic. The gradient is the third option: explain a dependency when ignorance of it prevents the intended mental model, and not merely because it exists. THE A-FRAME MAKES THAT PHYSICAL. It stands on public ground on the visitor's side of the threshold, provisional and moveable, so what it says reads as a judgment someone made rather than the building's settled account. And its two faces separate the offer from the demand: the front is met by walking in, the back only by walking round, so the descent is genuinely declinable and declining costs nothing and looks like nothing. A single panel cannot do this — it either shows both, making the descent compulsory, or hides it, making it a secret."
+			},
+			"line_sledgehammer": {
+				"lookup_name": "line_sledgehammer",
+				"name": "Line Sledgehammer",
+				"description": "Pickable RigidBody3D built on res://addons/godot-xr-tools/objects/pickable.tscn. Cylindrical haft (0.86 m, wood) with a steel box head (0.28 m) carrying a spherical Area3D strike volume that masks bit 21 and bit 1, monitoring both bodies and areas — areas because a wall showing has no collider by contract and would otherwise be unhittable. Head speed is measured per physics frame; below HEAD_SPEED_MIN (1.15 m/s) nothing happens, and a landed strike sets a 0.45 s cooldown so one swing is one strike. Emits struck(target, speed). Knobs: haft_m, head_len_m, head_color, haft_color, was_a_line.",
+				"category": "primitives",
+				"complexity": "beginner",
+				"scene": "res://commons/artifacts/line_sledgehammer/line_sledgehammer.tscn",
+				"include_in_map_data": true,
+				"map_ready": true,
+				"map_sequences": [
+					"primitives"
+				],
+				"footprint": [
+					1,
+					2,
+					1
+				],
+				"tags": [
+					"line",
+					"tool",
+					"grabbable",
+					"pickable",
+					"destroy",
+					"strike",
+					"measure",
+					"placeable",
+					"vr"
+				],
+				"dna": {
+					"fixture": {
+						"freeze": 1
+					},
+					"fixture_why": "A RigidBody3D under gravity. capture_multi_angle measured the AABB correctly (0.28 x 0.925 x 0.13) and then photographed empty grass, because the multi-angle run spans enough frames for the hammer to fall out of shot. The fixture holds it still for the bench. It is not a lie about the object: a hammer in a hand is not falling either."
+				},
+				"theoreticalGrounding": "Point_Lines argues that a line which measures and a line which destroys are one technique in two situations: 'Pointing and destroying are not two techniques; they are one technique and two situations, and the line cannot tell them apart. Nothing in the vector records the difference.' A wall label can assert that. This is the assertion becoming a mechanic — the same line you adjusted the length of, ninety seconds later, in your hand, in front of a police barrier. The escalation the room describes (two points, a distance, a segment, a direction, pointing, the drag, scale, destroy) has its last two rungs here rather than in prose. Crucially the hammer invents NO private way to break things: it reuses laser_exploding_sphere's existing contract, so a target never knows which instrument arrived, which is the claim restated as an implementation fact."
+			},
+			"two_point_ruler": {
+				"lookup_name": "two_point_ruler",
+				"name": "Two Point Ruler",
+				"description": "Two brass marks 0.5 m apart on a thin bar at reading height, a TextScreen readout above, and two blocks on the floor: Subject (pale, measured, never altered) and Witness (blue, unmeasured, scaled by every reading, labelled 'the other block'). measure() returns the reading in metres and tweens the witness; the witness clamps to [0.18, 2.4] so it can never leave — a witness scaled to nothing is one that has gone, and the argument needs it present to be watched. Signals measured(reading_m, witness_scale). Knobs: unit_m, spread_m, subject_color, witness_color, rule_color.",
+				"category": "primitives",
+				"complexity": "beginner",
+				"scene": "res://commons/artifacts/two_point_ruler/two_point_ruler.tscn",
+				"include_in_map_data": true,
+				"map_ready": true,
+				"map_sequences": [
+					"primitives"
+				],
+				"footprint": [
+					2,
+					2,
+					2
+				],
+				"tags": [
+					"line",
+					"measure",
+					"ruler",
+					"scale",
+					"observer",
+					"placeable",
+					"vr"
+				],
+				"theoreticalGrounding": "Point_Lines' escalation runs two points -> a distance -> a segment -> a direction -> pointing -> the drag -> scale -> destroy, and its wall text already claims that the same gesture at one scale reads a length and at another changes the thing it is reading. This artifact is that claim you can hold. Fixing a distance and carrying it around is the whole of metrology in one gesture. Displacing the effect onto a block you are not looking at is an observer effect you can walk around: you cannot see the change while you are causing it, because watching the witness means taking the rule off the subject, and the subject stays honest throughout so nothing about the reading is wrong. The only way to catch it is to look away from your own instrument."
+			},
+			"anamorphic_cross": {
+				"lookup_name": "anamorphic_cross",
+				"name": "Anamorphic Cross",
+				"category": "primitives",
+				"complexity": "beginner",
+				"description": "Two emissive bars, orthogonal, separated along -Z by depth_gap_m (2.6). An Area3D at the midpoint charges the player once on entry via arrive(), fading both bars to 0.85 transparency rather than deleting them - they stop pretending rather than vanish. Health is reached BY CAPABILITY (/root/GameManager, else the 'health_provider' group, else nothing) and never by class name, so the artifact compiles under a SceneTree probe. Signals crossed(cost), dissolved(). Knobs: depth_gap_m, bar_len_m, cross_height_m, damage, trigger_radius_m, bar_color.",
+				"scene": "res://commons/artifacts/anamorphic_cross/anamorphic_cross.tscn",
+				"include_in_map_data": true,
+				"map_ready": true,
+				"map_sequences": [
+					"primitives"
+				],
+				"footprint": [
+					2,
+					2,
+					3
+				],
+				"tags": [
+					"line",
+					"cross",
+					"perspective",
+					"anamorphic",
+					"standpoint",
+					"hazard",
+					"placeable",
+					"vr"
+				],
+				"theoreticalGrounding": "Point_Lines' perspective paragraph as an object you can walk around: 'here parallels meet after all - not because they stopped being parallel, but because you are standing somewhere.' The corridor IS the standpoint, which is what makes this more than a trick - you cannot fail to see the cross, and walking, the only thing a corridor asks of you, is exactly what destroys it. The instrument is used up by being used. The room does not take the cross away; geometry does. What the room adds is that arriving COSTS something, so the thing that existed only at a distance charges you for closing it. One rung past the barrier and the laser: measure, point, strike, and now a shape that is only a shape from where you were told to stand."
+			},
+			"wall_health_station": {
+				"lookup_name": "wall_health_station",
+				"name": "Wall Health Station",
+				"category": "primitives",
+				"complexity": "beginner",
+				"description": "Wall box (0.34 x 0.44 x 0.14) with a red cross and a TextScreen face showing remaining charge or EMPTY. An Area3D of reach_m counts occupants and draws rate_per_sec while anyone stands there. draw_from(want) asks the provider back after setting, because set_health CLAMPS - so charge is debited by what ACTUALLY arrived, and a full body costs the wall nothing. Health by capability, never by class name. Signals drew(amount, charge_left), emptied(). Knobs: charge, rate_per_sec, reach_m, body_color, trim_color.",
+				"scene": "res://commons/artifacts/wall_health_station/wall_health_station.tscn",
+				"include_in_map_data": true,
+				"map_ready": true,
+				"map_sequences": [
+					"primitives"
+				],
+				"footprint": [
+					1,
+					2,
+					1
+				],
+				"tags": [
+					"health",
+					"station",
+					"charger",
+					"medkit",
+					"wall",
+					"placeable",
+					"vr"
+				],
+				"theoreticalGrounding": "The citation matters and is kept exact. Half-Life's wall charger is not a floor pickup: you stand at a fixed place, it drains while it fills you, and its supply runs out. That makes the room decide what your body is worth, which is the reason a corridor is a corridor and not a scoreboard. Paired with anamorphic_cross, which takes 15 for walking into a shape that was never there, this station holds exactly five arrivals - after which the corridor still charges and there is nothing on the wall. That is the only honest ending for a machine that dispenses relief."
+			},
+			"axis_line": {
+				"lookup_name": "axis_line",
+				"name": "Axis Line",
+				"category": "primitives",
+				"complexity": "beginner",
+				"description": "A single emissive bar of length_m x thickness_m, positioned at cross_height_m and rotated about Z by the orientation axis: horizontal 0, vertical 90, diagonal +45, diagonal_2 -45. Knobs: orientation, length_m, thickness_m, cross_height_m, line_color, glow.",
+				"scene": "res://commons/artifacts/axis_line/axis_line.tscn",
+				"include_in_map_data": true,
+				"map_ready": true,
+				"map_sequences": [
+					"primitives"
+				],
+				"footprint": [
+					2,
+					2,
+					1
+				],
+				"tags": [
+					"line",
+					"orientation",
+					"cross",
+					"diagonal",
+					"composition",
+					"placeable",
+					"vr"
+				],
+				"dna": {
+					"promoted": "2026-09-01",
+					"stage": "2 - variation",
+					"axes": {
+						"orientation": [
+							"horizontal",
+							"vertical",
+							"diagonal",
+							"diagonal_2"
+						]
+					},
+					"predicted_degeneracy": "The closest pair will be diagonal against diagonal_2: the same bar mirrored, so from the canonical camera at yaw 0.62 they differ only by which way the slash leans. Two bars of 1.6 x 0.055 crossing the frame at +/-45 overlap over their central region and diverge at the ends; by area that is roughly 2 x (half the bar drawn in a different place) over the frame, call it 5 percent. A LOWER BOUND, as every prediction in this corpus has been - the rasteriser has one light and no shadows. If the sweep comes back BELOW 5 percent, something is wrong with the harness, not the axis."
+				},
+				"theoreticalGrounding": "Palle left four wishes standing in Point_Lines - horizontal line, vertical line, diagonal line, diagonal line 2 - and they are not four artifacts. They are one artifact and one axis, which is the room's own argument: a line has a direction, the direction is a CHOICE, and horizontal and vertical are two picks out of infinitely many that a culture happens to have named and squared its buildings against. Shipping them as four tokens would say the opposite, that `vertical` is a kind of thing rather than a value. Point_Lines' text already makes the claim in words - 'Horizontal and vertical are the same function with the indices swapped. Space does not have a preferred axis; the code does, and only because someone wrote y first' - and this is the same sentence as geometry."
+			},
+			"wall_abstract": {
+				"lookup_name": "wall_abstract",
+				"name": "Wall Abstract",
+				"category": "primitives",
+				"complexity": "beginner",
+				"description": "Fifteen framed abstract works for a wall. Four hard divisions (horizontal, vertical, diagonal, off-centre) and one soft one (horizon_soft, a vertex-colour gradient with no edge at all). Three states of the corpus's first argument: point_one, two_points, segment_drawn. The chapter's fork as a pair: grid_regular against trace_once. corner_square for asymmetry. Three live SubViewport windows - cube_isometric, cube_wire, sphere_raking. And chalk, the blackboard principle at painting scale.",
+				"scene": "res://commons/artifacts/wall_abstract/wall_abstract.tscn",
+				"include_in_map_data": true,
+				"map_ready": true,
+				"map_sequences": [
+					"primitives"
+				],
+				"footprint": [
+					1,
+					2,
+					1
+				],
+				"tags": [
+					"wall",
+					"abstract",
+					"painting",
+					"frame",
+					"viewport",
+					"chalkboard",
+					"placeable",
+					"vr"
+				],
+				"dna": {
+					"promoted": "2026-09-01",
+					"stage": "2 - variation",
+					"axes": {
+						"work": [
+							"divide_horizontal",
+							"divide_vertical",
+							"divide_diagonal",
+							"divide_off_centre",
+							"horizon_soft",
+							"point_one",
+							"two_points",
+							"segment_drawn",
+							"grid_regular",
+							"trace_once",
+							"corner_square",
+							"cube_isometric",
+							"cube_wire",
+							"sphere_raking",
+							"chalk"
+						]
+					},
+					"predicted_degeneracy": "The closest pair will be point_one against corner_square: the same pale ground with one small dark mark on it, differing only in where the mark sits and that one is 0.055 of the width and the other 0.15. Both marks together cover well under 3 percent of the face, and the face is about 60 percent of frame, so the differing pixels are roughly 1.5 percent. Runner-up is two_points against segment_drawn, which differ by one thin bar of 0.42 x 0.008 - about 0.35 percent of the face. A LOWER BOUND like every prediction here: if the sweep returns BELOW these, suspect the harness, not the axis. The set is deliberately built to contain near-twins, because point_one / two_points / segment_drawn are one artifact in three states and the corpus's first argument is that the difference between them is small to look at and total to think about.",
+					"bench_caveat": "THE GALLERY TILE FOR cube_isometric IS A FALSE NEGATIVE. build_dna_gallery waits about 3 frames and a nested SubViewport has not drawn by then, so that variant photographs as a flat grey panel there. It is not inert and the value is not dead: probe_wall_window.gd found 15 distinct colours in the render target at frame 12, and probe_wall_abstract_sheet.gd at frame 22 photographs the cube plainly. Anyone reading a low bite on this axis should shoot it with a settle before concluding anything - the same class of error as the MultiMesh readback that reported queer_confetti static when it was moving."
+				},
+				"theoreticalGrounding": "Palle, 2026-09-01: 'I think 3d in 2d and 2d in 3d ... on the wall works panel where there now is text I also want abstract works.' The recursion is the system. The FRAME is 3D - real moulding with depth casting a real shadow. The WORK is 2D - a flat face, no depth, the oldest lie in painting. And one work is 3D AGAIN inside its own 2D: cube_isometric is a live camera on a cube that exists, just not in this room. A visitor walking past sees a picture; closer, sees that one of the pictures is a window; walking round, sees the cube is not there. That is 3d-in-2d and 2d-in-3d as one object rather than two, and the museum needs no new machinery to hang it. The orthographic camera matters: perspective would make it a photograph of a cube, orthographic makes it a DRAWING of one, which is the register the rest of the wall is in."
+			}
 	},
 	"registry_info": {
 		"category": "primitives",

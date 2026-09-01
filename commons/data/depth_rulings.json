@@ -3,74 +3,201 @@
  "_authored": "This file is a CLAIM, not a finding. tools/depth.py can measure what a room's code contains; it cannot measure explanatory relevance, and a measurement that guessed at it would be a wall wearing a gradient's clothes. Nothing here is derived. Edit it by hand.",
  "_rule": "Explain a dependency when ignorance of it prevents the learner from forming the intended mental model. Do not explain it merely because it exists.",
  "_thrownness": "The learner arrives late. There is no point at which they have arrived early enough to hold all the prerequisites — that is the condition of learning, not a defect to be repaired. So the question is never 'what must be taught before this?' (there is always one more) but 'what must become visible now for the next action to be intelligible?'",
-
  "ladder": [
-  {"status": "background", "gloss": "in the building, never on the path",
+  {
+   "status": "background",
+   "gloss": "in the building, never on the path",
    "shows": "nowhere — the basement. Listed once in the book, so the museum is honest about having one, and never on a wall.",
-   "why": "The museum should be allowed to have a basement full of explanations the visitor never visits. That does not make it dishonest; it makes it navigable."},
-  {"status": "used", "gloss": "the learner acts through it and need not know it exists",
+   "why": "The museum should be allowed to have a basement full of explanations the visitor never visits. That does not make it dishonest; it makes it navigable."
+  },
+  {
+   "status": "used",
+   "gloss": "the learner acts through it and need not know it exists",
    "shows": "nothing at all",
-   "why": "THIS IS THE DEFAULT, and the default is silence. A child meets sentences containing words they do not know without every unknown word becoming a prerequisite. The code is allowed to be more sophisticated than the learner's current vocabulary."},
-  {"status": "named", "gloss": "it has a name here, one line, no theory",
+   "why": "THIS IS THE DEFAULT, and the default is silence. A child meets sentences containing words they do not know without every unknown word becoming a prerequisite. The code is allowed to be more sophisticated than the learner's current vocabulary."
+  },
+  {
+   "status": "named",
+   "gloss": "it has a name here, one line, no theory",
    "shows": "a plaque line beside the thing",
-   "why": "Naming is not teaching. 'This is the instruction that makes a point appear' is a name; 'here we define a function whose parameter has type Vector3' is a lesson nobody asked for."},
-  {"status": "glimpsed", "gloss": "a small optional inscription says what KIND of thing it is",
+   "why": "Naming is not teaching. 'This is the instruction that makes a point appear' is a name; 'here we define a function whose parameter has type Vector3' is a lesson nobody asked for."
+  },
+  {
+   "status": "glimpsed",
+   "gloss": "a small optional inscription says what KIND of thing it is",
    "shows": "the plaque line, plus a descent the learner may decline",
-   "why": "Enough to stop it being magic. Not so much that the learner is asked to carry the abstraction yet."},
-  {"status": "understood", "gloss": "the room teaches it; it is the room's subject",
+   "why": "Enough to stop it being magic. Not so much that the learner is asked to carry the abstraction yet."
+  },
+  {
+   "status": "understood",
+   "gloss": "the room teaches it; it is the room's subject",
    "shows": "the entrance board, and the room itself",
-   "why": "What the learner needs in order to act. The museum can put these in their hands."},
-  {"status": "mastered", "gloss": "carried across rooms",
+   "why": "What the learner needs in order to act. The museum can put these in their hands."
+  },
+  {
+   "status": "mastered",
+   "gloss": "carried across rooms",
    "shows": "nowhere — not a property of any one room",
-   "why": "A fact about a learner's path, which no single room can know."}
+   "why": "A fact about a learner's path, which no single room can know."
+  }
  ],
-
  "rooms": {
   "Point_One": {
    "_source": "Palle, 2026-09-01, verbatim from the table in their ruling.",
    "things": [
-    {"thing": "X / Y / Z", "status": "understood",
-     "say": "Three directions. They name where, not what."},
-
-    {"thing": "Vector3", "status": "understood",
+    {
+     "thing": "X / Y / Z",
+     "status": "understood",
+     "say": "Three directions. They name where, not what."
+    },
+    {
+     "thing": "Vector3",
+     "status": "understood",
      "say": "Three numbers describe where something is.",
-     "link": "https://docs.godotengine.org/en/stable/classes/class_vector3.html"},
-
-    {"thing": "position", "status": "understood",
-     "say": "Where the thing is, as against what it is."},
-
-    {"thing": "a point has no extent", "status": "understood",
+     "link": "https://docs.godotengine.org/en/stable/classes/class_vector3.html"
+    },
+    {
+     "thing": "position",
+     "status": "understood",
+     "say": "Where the thing is, as against what it is."
+    },
+    {
+     "thing": "a point has no extent",
+     "status": "understood",
      "explore": true,
-     "say": "You can see a sphere. What is there is three numbers. The visible thing is scaffolding for the invisible one."},
-
-    {"thing": "MeshInstance3D", "status": "named",
+     "say": "You can see a sphere. What is there is three numbers. The visible thing is scaffolding for the invisible one."
+    },
+    {
+     "thing": "MeshInstance3D",
+     "status": "named",
      "say": "The thing that makes it visible.",
-     "link": "https://docs.godotengine.org/en/stable/classes/class_meshinstance3d.html"},
-
-    {"thing": "SphereMesh", "status": "named",
+     "link": "https://docs.godotengine.org/en/stable/classes/class_meshinstance3d.html"
+    },
+    {
+     "thing": "SphereMesh",
+     "status": "named",
      "say": "A ball, standing in for a point that has no size.",
-     "link": "https://docs.godotengine.org/en/stable/classes/class_spheremesh.html"},
-
-    {"thing": "round()", "status": "glimpsed",
+     "link": "https://docs.godotengine.org/en/stable/classes/class_spheremesh.html"
+    },
+    {
+     "thing": "round()",
+     "status": "glimpsed",
      "say": "The computer chooses the nearest allowed position.",
      "descend": "round() is one way a program asks for the nearest whole number.",
-     "link": "https://docs.godotengine.org/en/stable/classes/class_%40globalscope.html"},
-
-    {"thing": "function", "status": "used",
-     "note": "Use without teaching. The narration says 'this is the instruction that makes a point appear', not 'here we define a function whose parameter has type Vector3 and whose return type is MeshInstance3D.'"},
-
-    {"thing": "collision shapes", "status": "glimpsed",
+     "link": "https://docs.godotengine.org/en/stable/classes/class_%40globalscope.html"
+    },
+    {
+     "thing": "function",
+     "status": "used",
+     "note": "Use without teaching. The narration says 'this is the instruction that makes a point appear', not 'here we define a function whose parameter has type Vector3 and whose return type is MeshInstance3D.'"
+    },
+    {
+     "thing": "collision shapes",
+     "status": "glimpsed",
      "say": "The ball knows when your hand is inside it.",
-     "note": "Later. Glimpse only — the grab works whether or not this is understood."},
-
-    {"thing": "the XR runtime", "status": "background",
-     "note": "Museum infrastructure. It is why you have hands."},
-    {"thing": "the rendering pipeline", "status": "background",
-     "note": "Deep background. It is why you can see."},
-    {"thing": "CPU instructions", "status": "background",
-     "note": "Very deep background."},
-    {"thing": "electricity", "status": "background",
-     "note": "Cosmological basement."}
+     "note": "Later. Glimpse only — the grab works whether or not this is understood."
+    },
+    {
+     "thing": "the XR runtime",
+     "status": "background",
+     "note": "Museum infrastructure. It is why you have hands."
+    },
+    {
+     "thing": "the rendering pipeline",
+     "status": "background",
+     "note": "Deep background. It is why you can see."
+    },
+    {
+     "thing": "CPU instructions",
+     "status": "background",
+     "note": "Very deep background."
+    },
+    {
+     "thing": "electricity",
+     "status": "background",
+     "note": "Cosmological basement."
+    }
+   ]
+  },
+  "Point_Lines": {
+   "_source": "Palle, 2026-09-01, stating the room's argument: 'the main argument of the line is that it is always measure — a line is the distance between two points but it also HAS a length, and length is length, we can start to measure, there is a metric system. The line also creates direction, that is, creating something we can point with, the laser. Like when we add a bodily desire we can drag the line to measure — but what if dragging the line at one scale measures, and at another scales an object; the laser points and destroys. The line is also vertical and horizontal, parallel and perspective. It leads into the grid and into the trace, two opposites that are the next maps.' The first ruling here was mine and was thinner: it listed properties of lines. This one has a spine.",
+   "_the_escalation": "two points -> a distance -> a segment -> a direction -> pointing -> drag -> scale -> destroy. Each step is the previous one plus a body, and the last two are no longer only described: line_demo becomes line_sledgehammer after two seconds, and the sledgehammer breaks do_not_cross_barrier through the same contract the laser uses. That is why the room's fourth sub-section is called `violence` in its own utilities layer.",
+   "_four_things_not_one": "Palle, 2026-09-01, correcting the first version of this ruling, which called all of them 'line': 'at the moment line, segment, distance and vector collapse into one another. Separating them would make the room better, because the differences are exactly the conceptual escalation you are trying to describe.' They are not the same object. A DISTANCE is a scalar — no direction, no parts. An infinite LINE has no finite length at all. A SEGMENT has length because someone chose two ends. A VECTOR has magnitude and direction, and NORMALISING it throws the magnitude away and keeps only the pointing. The board now announces that mutation instead of asserting a run-on claim, and the three lines of code in the room (b - a, .length(), .normalized()) are the same distinction written twice — once philosophically and once operationally.",
+   "_the_fork": "The room does not lead to one room, it forks into two opposites, and they are the next two maps in the sequence (Point_One -> Point_Lines -> Point_Trace -> Point_Line_Grid). The GRID is the line made regular, repeatable, and indifferent to you. The TRACE is the line made once, by a body, and unrepeatable. The room ends by asking which kind of line you were making.",
+   "_code_gap": "MEASURED, not assumed: the tutorial's eight code fences are ALL the grid arm — spawn_grid, connect_horizontal, connect_vertical, connect_diagonal, graph_stats. There is no code for measure, for drag, or for the laser. So one of this room's two exits is taught in code and the other only in the body, and no fence should be invented to hide that.",
+   "_no_basement": "Deliberately empty. The XR runtime, the rendering pipeline, CPU instructions and electricity are already declared under Point_One and the book dedupes them by name — but that is the corpus's basement, not this room's, and storing it per-room means every ruled room is tempted to copy it. Noted as friction, not fixed here.",
+   "things": [
+    {
+     "thing": "two points",
+     "status": "understood",
+     "say": "One point was a position. Two are a relation, and a relation can be written down."
+    },
+    {
+     "thing": "a distance",
+     "status": "understood",
+     "say": "A single number. It has no direction and no parts, and it is not the line."
+    },
+    {
+     "thing": "a segment",
+     "status": "understood",
+     "explore": true,
+     "say": "Two points determine an infinite line. Keeping only what lies between them is already a decision."
+    },
+    {
+     "thing": "a direction",
+     "status": "understood",
+     "say": "Give the segment an order — from here to there — and it points. Normalise it and only the pointing is left."
+    },
+    {
+     "thing": "vertical, horizontal, parallel",
+     "status": "named",
+     "say": "Lines that agree never to meet, and the two that everything else is squared against."
+    },
+    {
+     "thing": "perspective",
+     "status": "named",
+     "say": "Parallels that meet after all, because you are standing somewhere."
+    },
+    {
+     "thing": "the Modulor",
+     "status": "named",
+     "say": "One man's body, turned into everybody's measure."
+    },
+    {
+     "thing": "the drag",
+     "status": "glimpsed",
+     "say": "You measure by pulling. The hand is inside the instrument.",
+     "descend": "The same gesture at one scale reads a length, and at another changes the thing it is reading. Nothing in the gesture tells you which you are doing."
+    },
+    {
+     "thing": "the laser",
+     "status": "glimpsed",
+     "say": "A line you can aim is a line that can be aimed at something.",
+     "descend": "It is the same object as the measuring beam. Pointing and destroying differ in what is at the far end, not in the line."
+    },
+    {
+     "thing": "the swing",
+     "status": "glimpsed",
+     "say": "The line you measured with, two seconds later, with a mass on the end.",
+     "descend": "Nothing was added to it but a body. It has to be swung: resting it against something does nothing, because the damage is not in the object."
+    },
+    {
+     "thing": "loops",
+     "status": "glimpsed",
+     "say": "The computer walks the same instruction along the line.",
+     "descend": "A `for` loop repeats an instruction a fixed number of times — once per step of the walk.",
+     "link": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#if-else-elif"
+    },
+    {
+     "thing": "function",
+     "status": "used",
+     "note": "Use without teaching, same as Point_One. The room says 'this draws the line', not 'this defines a function with a typed parameter'."
+    },
+    {
+     "thing": "branching",
+     "status": "used",
+     "note": "Present five times in the tutorial and load-bearing nowhere the learner acts. Ignorance of `if` does not stop anyone walking a line."
+    }
    ]
   }
  }

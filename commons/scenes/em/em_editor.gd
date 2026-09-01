@@ -55,6 +55,26 @@ static func pick(cam: Camera3D, records: Array, max_dist: float = 24.0) -> int:
 	var best_score: float = 0.25          # ~14° cone; outside it, nothing selects
 	for i in range(records.size()):
 		var r: Dictionary = records[i]
+		# A PLINTH IS NOT SELECTABLE — the filter the other two pickers already had.
+		#
+		# 2026-09-01. Palle: "when I move the line demo I drag the plinth and then
+		# the line demo moves and the plinth thinks move another step."
+		#
+		# There are three selectors. endless_museum.gd's _doll_pick (15269) and
+		# _edit_pick_screen (15300) both skip ["variant", "plinth"]; this one, the
+		# function KEY_E reaches, had no kind filter at all. And it scores by ANGLE
+		# to node.global_position, so a plinth — floor-level, directly under the
+		# body it carries — frequently wins the crosshair over the artifact
+		# standing on it. _edit_sel then lands on the plinth record, whose
+		# override is keyed by its ORIGINAL cell rather than by index, and the
+		# move is written against a cell the artifact has since left.
+		#
+		# _edit_nudge now refuses to move a plinth, which stops the bad write. It
+		# does not stop the bad SELECTION: without this line, E on a plinthed body
+		# still targets the wrong record and the arrows then appear to do nothing.
+		# Two of three pickers agreeing was never the rule — it was the bug.
+		if String(r.get("kind", "")) in ["variant", "plinth"]:
+			continue
 		var node: Node3D = _node_or_null(r.get("node"))
 		if node == null:
 			continue
@@ -210,7 +230,7 @@ static func hud(root: Node) -> Label:
 
 static func hud_text(records: Array, sel: int, overrides: Array, dirty: bool,
 		pal: Array = [], pal_i: int = -1) -> String:
-	var head := "[EDIT]  E select · arrows move (SHIFT 0.2 m) · PGUP/PGDN 0.2 m · Q/R turn 15° (SHIFT 90°) · +/- scale · T wall/passage · DEL · [ ] palette · ENTER add · F5 save"
+	var head := "[EDIT]  click select · drag X/Y/Z (SHIFT 0.2 m) · RMB look · E crosshair · arrows move · Q/R turn · V hall passage · T wall/cell · +/- scale · DEL · F5 save"
 	if pal_i >= 0 and pal_i < pal.size():
 		head += "
 add: %s  (%d/%d) — ENTER places it 2.5 m ahead" % [

@@ -399,8 +399,44 @@ static func prime(sizes: Dictionary) -> void:
 ##                            that wants to assert the band held
 ##   height_m/base_m float  — what the decision was made from
 ##   source         String  — "table" | "measured" | "none"
+## THE HANDS-OFF REGISTER — tokens this curator must not touch.
+##
+## 2026-09-01, Palle: "remove the em_plinths is automatic, can we say to not
+## touch the line demo?"
+##
+## _decide() raises or marks a body from its NAME and its MEASURED SIZE, without
+## reference to the map. That was right when there was no other way to say what a
+## thing stands on. There now are four — #plinth:H on the token, #plinth:0 to
+## refuse, a structure-2 cell, the dress panel — and an automatic curator running
+## underneath them is a second author whose opinion does not appear in the map.
+##
+## Naming a token is the smaller of the two fixes, chosen on purpose: inverting
+## the default would change 660 freestanding rows at once, while a list is
+## reversible and visible. If it grows past a couple of dozen names, that is the
+## evidence for inverting the default rather than an argument for a longer list.
+const HANDS_OFF_FILE := "res://commons/data/plinth_hands_off.json"
+static var _hands_off: Dictionary = {}
+static var _hands_off_loaded: bool = false
+
+
+static func _hands_off_has(token: String) -> bool:
+	if not _hands_off_loaded:
+		_hands_off_loaded = true                 # a missing file is read ONCE
+		if FileAccess.file_exists(HANDS_OFF_FILE):
+			var f := FileAccess.open(HANDS_OFF_FILE, FileAccess.READ)
+			if f != null:
+				var j := JSON.new()
+				if j.parse(f.get_as_text()) == OK and j.data is Dictionary:
+					for t in (j.data as Dictionary).get("tokens", []):
+						_hands_off[str(t)] = true
+				f.close()
+	return _hands_off.has(token)
+
+
 static func plan(token: String, cell: Dictionary) -> Dictionary:
 	_ensure_loaded()
+	if _hands_off_has(token):
+		return _no(token, "hands off - named in plinth_hands_off.json; the map decides what this stands on", "none")
 	var rec: Dictionary = _record(token)
 	if rec.is_empty():
 		if not _misses.has(token):
@@ -423,6 +459,8 @@ static func plan(token: String, cell: Dictionary) -> Dictionary:
 ## to one cell.
 static func plan_measured(token: String, cell: Dictionary, height_m: float,
 		base_m: float, thin_m: float = -1.0) -> Dictionary:
+	if _hands_off_has(token):
+		return _no(token, "hands off - named in plinth_hands_off.json; the map decides what this stands on", "none")
 	var b: float = maxf(base_m, 0.0)
 	if b <= 0.005:
 		b = 1.0

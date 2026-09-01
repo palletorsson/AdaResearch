@@ -106,6 +106,18 @@ func hurt(damage_pos: Vector3) -> void:
 	print("[DeathEffect] HURT at %s" % damage_pos)
 
 
+## FLASH ONLY — no teleport, no health change.
+##
+## 2026-09-01, Palle: "indicate that we are losing health flash red screen, rest
+## when we are out." The existing public entry is hurt(), and hurt() ALSO sends
+## the player back to spawn, which is right for a laser and absurd for a hazard
+## that ticks four times a second while you stand in it. There was no way to say
+## "show them it hurt" without also moving them, so hazards said nothing at all
+## and health drained invisibly.
+func damage_flash() -> void:
+	_trigger_damage_flash()
+
+
 ## Use MushroomEffect (proven to work in VR) to show red damage flash.
 func _trigger_damage_flash() -> void:
 	var shader_path := "res://commons/resourses/shaders/damage_flash_spatial.gdshader"

@@ -5801,6 +5801,88 @@ func on_beam_swept(from: Vector3, dir: Vector3, reach: float) -> void:
 			float(hit["along"]), float(hit["off"])])
 
 
+## A SWUNG HAMMER TAKES A PICTURE OFF THE WALL — and needs three goes at it.
+##
+## 2026-09-01, Palle: "The hammer does not destroy the wall works with the text
+## in VR" and, earlier, "like in Half-Life the object has some health so we need
+## to hit like two or three times for it to be destroyed."
+##
+## Same shape as on_beam_swept and for the same reason: a showing is instances of
+## a MultiMesh with NO COLLIDER, so nothing the hammer can query with physics
+## will ever find one. The hammer says where its head was and how far it reaches;
+## the museum owns the wall works and decides what that touched. The hammer never
+## learns what a wall work is, exactly as the laser never did.
+##
+## THREE BLOWS, and the count is kept HERE rather than on the picture, because a
+## showing is not a node with state — it is an index into a MultiMesh. Keyed by
+## segment and index, the same key _showing_bodies uses.
+const STRIKE_TAKE_M := 0.55
+const SHOWING_HP := 3
+var _showing_hits: Dictionary = {}
+var _hammer_cuts: int = 0
+
+func on_strike_swung(at: Vector3, radius: float = STRIKE_TAKE_M) -> bool:
+	var best: Node3D = null
+	var best_seg: Node3D = null
+	var best_d: float = maxf(0.05, radius)
+	for sv in _segments:
+		var sd: Dictionary = sv
+		var seg: Node3D = _node_or_null(sd.get("node"))
+		if seg == null:
+			continue
+		for n in seg.get_children():
+			if not (n is Node3D) or not n.has_meta("em_showing"):
+				continue
+			if n.has_meta("em_hand_removed"):
+				continue
+			var d: float = (n as Node3D).global_position.distance_to(at)
+			if d < best_d:
+				best_d = d
+				best = n as Node3D
+				best_seg = seg
+	if best == null or best_seg == null:
+		return false
+
+	var si: int = int(best.get_meta("em_showing"))
+	var key: String = "%d|%d" % [best_seg.get_instance_id(), si]
+	# a work already carried away is not on the wall to be hit
+	if _showing_bodies.has(key) and is_instance_valid(_showing_bodies[key]):
+		return false
+
+	var left: int = int(_showing_hits.get(key, SHOWING_HP)) - 1
+	_showing_hits[key] = left
+	var at_work: Vector3 = best.global_position
+
+	if left > 0:
+		# still hanging. A small burst, so the second swing is aimed at something
+		# that has visibly been hit once.
+		_queer_confetti(best_seg, at_work, 20, 0.8)
+		print("[em-hammer] wall work %d took a blow — %d left" % [si, left])
+		return true
+
+	# THE LOOK IS READ BEFORE THE WORK IS TAKEN OUT. _showing_field returns {}
+	# once the field is scaled to zero, so asking after _showing_hide gives
+	# shards of nothing — the same trap on_beam_swept documents.
+	var f: Dictionary = _showing_field(best_seg, si)
+	_showing_hide(best_seg, si)
+	best.set_meta("em_hand_removed", true)
+	if not f.is_empty():
+		_showing_burst(best_seg, at_work, Vector3.UP, f)
+	_queer_confetti(best_seg, at_work, 110, 1.5)
+	_hammer_cuts += 1
+	print("[em-hammer] wall work %d knocked off the wall — %.2f m from the head"
+		% [si, best_d])
+	return true
+
+
+## The burst that says something queer just happened. Loaded by path: a class
+## name would not resolve in a fresh headless boot.
+func _queer_confetti(parent: Node, at: Vector3, n: int, scale_up: float) -> void:
+	var C = load("res://commons/artifacts/queer_confetti/queer_confetti.gd")
+	if C != null and C.has_method("burst"):
+		C.burst(parent, at, n, scale_up)
+
+
 ## A HAND THAT REACHES GETS SOMETHING TO HOLD. Nothing on a wall is a body until
 ## a hand is within SHOWING_TAKE_M of it, so a hall costs no physics until
 ## somebody actually goes for a picture — and the no-collision contract holds
@@ -12181,6 +12263,23 @@ func _stamp_inner(seg: Node3D, scene_path: String, lookup: String, cell: Diction
 		# not also hover above it (the y-offset would stack on the deck)
 		cell.erase("hover_m")
 	var pscene: String = String(plan_d.get("scene", ""))
+
+	# SAY WHAT STOOD THIS BODY UP, AND WHO DECIDED.
+	#
+	# 2026-09-01. A pedestal under one artifact took six rounds to trace, because
+	# SIX independent things can raise a body and none of them says so: the token
+	# tag (#plinth:H), a structure-2 cell, a p/p:N platform, the hall tile char
+	# (2 -> 0.4 m, 3 -> 0.8 m), the plan's support_height_m, and em_plinths'
+	# own automatic decision. Every one was checked by hand and reported nothing,
+	# which is the shape of a system that knows the answer and will not say it.
+	#
+	# One line, only when something is actually raised, naming the source.
+	if bool(plan_d.get("needs", false)) or dress_plinth > 0.05:
+		print("[em-support] %-24s deck=%.2f asked=%.2f dress=%.2f -> %s (%s) | why: %s"
+			% [lookup, float(cell.get("top", 0.0)), support_m, dress_plinth,
+			   String(plan_d.get("plinth", "-")), String(plan_d.get("source", "-")),
+			   String(plan_d.get("why", "-")).substr(0, 90)])
+
 	if bool(plan_d.get("needs", false)) and pscene != "" and ResourceLoader.exists(pscene):
 		var pps: PackedScene = load(pscene) as PackedScene
 		if pps != null:
@@ -17357,6 +17456,13 @@ func _furniture_override(r: Dictionary) -> Dictionary:
 ## live node previews it. For an authored map body the same value is written
 ## into its token's #offset:x,y,z dress, keeping the map as the single truth.
 func _edit_fine(dx: float, dy: float, dz: float) -> void:
+	var _fine_ok: bool = _edit_sel >= 0 and _edit_sel < _edit_records.size()
+	var _fine_kind: String = String((_edit_records[_edit_sel] as Dictionary).get("kind", "")) if _fine_ok else ""
+	if _fine_kind == "plinth":
+		# same rule as _edit_nudge and DELETE: the plinth is not a thing you move.
+		print("[em-edit] a plinth belongs to its artifact - move the artifact instead")
+		_doll_toast("a plinth belongs to its artifact - move the artifact")
+		return
 	if _edit_sel < 0 or _edit_sel >= _edit_records.size():
 		return
 	var r: Dictionary = _edit_records[_edit_sel]
@@ -17598,6 +17704,28 @@ func _edit_nudge(dx: int, dz: int) -> void:
 	if _edit_sel < 0 or _edit_sel >= _edit_records.size():
 		return
 	var r: Dictionary = _edit_records[_edit_sel]
+	# A PLINTH BELONGS TO ITS ARTIFACT — the same rule DELETE already enforces
+	# eleven hundred lines up, now enforced for MOVE.
+	#
+	# 2026-09-01, Palle: "when I move the line demo I drag the plinth and then
+	# the line demo moves and the plinth thinks move another step, very strange
+	# indeed."
+	#
+	# Exactly that. A plinth is its own _edit_record (kind "plinth", added at
+	# ~12281) and its override is keyed by `from` — its ORIGINAL cell — while a
+	# prop's is keyed by `index`. So nudging a plinth writes a ruling anchored to
+	# the cell the plinth started in; move the artifact afterwards and the plinth
+	# is pinned to a cell that no longer holds anything, and every further move
+	# compounds the mismatch. There was no way for that to feel sane, because the
+	# editor was letting one thing be moved as two.
+	#
+	# DELETE has said "move the artifact instead" since it was written. Move now
+	# says it too, in the same words, rather than silently recording a ruling that
+	# cannot stay true.
+	if String(r.get("kind", "")) == "plinth":
+		print("[em-edit] a plinth belongs to its artifact - move the artifact instead")
+		_doll_toast("a plinth belongs to its artifact - move the artifact")
+		return
 	if String(r.get("kind", "")) == "gate":
 		# the sliding door slides along its wall: LEFT/RIGHT, one cell a step
 		if dx == 0:

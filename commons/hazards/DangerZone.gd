@@ -22,6 +22,8 @@ enum Type {
 const FIRE_DAMAGE_PER_TICK := 10.0
 const FIRE_TICK_INTERVAL := 2.0
 @export var instant_kill: bool = false  ## Dumb ways to die
+## Flash the screen red on every damage tick. See _flash_screen.
+@export var flash_on_damage: bool = true
 
 # Type-specific configuration
 const TYPE_CONFIG = {
@@ -558,7 +560,13 @@ func _deal_damage(amount: float) -> void:
 	var game_manager = get_node_or_null("/root/GameManager")
 	if game_manager and game_manager.has_method("apply_health_damage"):
 		game_manager.apply_health_damage(amount)
-	
+
+	# SAY SO. A hazard that drains health invisibly is a bug in every hazard, not
+	# just this one, so the flash is on by default rather than opt-in — but it is
+	# an export, because a designer may want one zone to take from you quietly.
+	if flash_on_damage:
+		_flash_screen(Color.RED)
+
 	_play_pain_sound()
 	damage_dealt.emit(amount, danger_type)
 
@@ -635,9 +643,17 @@ func _effective_radius() -> float:
 			return max(cyl.radius, cyl.height * 0.5)
 	return 1.0
 
+## THE STUB THAT MADE EVERY HAZARD SILENT.
+##
+## This was `# TODO: Add screen flash effect / pass` and had been since the file
+## was written, so nothing in the game ever indicated damage: health fell and the
+## screen did not move. DeathEffect owns the VR-proven overlay (MushroomEffect +
+## damage_flash_spatial.gdshader) and now exposes it flash-only, without hurt()'s
+## teleport-to-spawn, which is why this can finally be honoured.
 func _flash_screen(_color: Color) -> void:
-	# TODO: Add screen flash effect
-	pass
+	var fx := get_node_or_null("/root/DeathEffect")
+	if fx != null and fx.has_method("damage_flash"):
+		fx.call("damage_flash")
 
 func _play_pain_sound() -> void:
 	# TODO: Play pain sound from pool based on danger_type

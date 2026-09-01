@@ -10,7 +10,9 @@ come from the maps themselves —
               h==1 floor "1", else "0") — shorter z than the template halls,
               so the lobby spacing negotiates itself (everything reads tile/h)
   artifacts : the map's interactables at their cells (tile_cell = cropped),
-              plinth = structure 2 under the anchor -> support 0.95
+              plinth = `#plinth:H` on the token (travels WITH the artifact;
+              `#plinth:0` opts out), else a `p`/`p:N` platform, else the
+              legacy structure-2-under-the-anchor rule -> support 0.95
   pearls    : point / lines / trace (Point_One keeps its live pearl name, so
               origin + folding_past land exactly where the hand has them)
 
@@ -163,12 +165,52 @@ def derive_row(pearl: str, map_name: str, museum_key: str, idx: int, total: int,
             plat_h = 0.0
             if raw_under == "p" or raw_under.startswith("p:"):
                 plat_h = float(under)
+
+            # THE PLINTH IS A TAG ON THE ARTIFACT, NOT A HEIGHT UNDER IT.
+            #
+            # 2026-09-01, Palle: "when I move the line demo I drag the plinth and
+            # then the line demo moves and the plinth thinks move another step,
+            # very strange indeed. Can we move to a plinth system not based on
+            # height but on plinth tag?"
+            #
+            # The bug is structural and the diagnosis is exactly right. A plinth
+            # was `structure[r][c] >= 2` — a cell in the STRUCTURE layer — while
+            # the artifact is a cell in INTERACTABLES. Two layers, two cells, and
+            # a drag in the editor moves one of them. So the pedestal stays where
+            # it was, or the artifact steps off it, and moving either one again
+            # compounds the mismatch. Nothing was going to make that feel sane,
+            # because the two things were never one thing.
+            #
+            # `#plinth:H` on the token makes them one thing: it travels with the
+            # artifact because it IS the artifact's token. It is also the grid's
+            # own existing spelling (`#plinth:0.66`, `#plinth:1.05,micropod`,
+            # `#plinth:0` to opt out), so this teaches the museum a convention
+            # the maps already use rather than inventing a second one.
+            #
+            # PRECEDENCE, and the legacy path is kept because 269 maps rely on it:
+            #   1  #plinth:H   the tag wins, including #plinth:0 meaning NONE
+            #   2  p / p:N     a platform in the utilities layer
+            #   3  structure>=2  the old rule, still honoured where no tag says
+            tag_h = None
+            if "plinth" in config:
+                head = str(config["plinth"]).split(",")[0].strip()
+                try:
+                    tag_h = float(head)
+                except ValueError:
+                    tag_h = 0.95          # `#plinth:micropod` etc — on, default
+                if tag_h > 0.0 and tag_h < 0.25:
+                    # em_plinths: the deck is max(top_height, 0.25) EXACTLY, so
+                    # asking for less silently gets 0.25 and the artifact then
+                    # sits higher than the plan says. Ask for what will be given.
+                    tag_h = 0.25
             tc = [c - c0, r - r0]
             arts.append({
                 "token": name, "cell": list(tc), "tile_cell": list(tc),
                 "rotation": ((rot % 360) + 360) % 360,
                 "mode": "freestanding", "venue": "interior",
-                "support_height_m": plat_h if plat_h > 0.0 else (0.95 if under >= 2 else 0.0),
+                "support_height_m": (tag_h if tag_h is not None
+                                     else (plat_h if plat_h > 0.0
+                                           else (0.95 if under >= 2 else 0.0))),
                 # hand stays FALSE: the curator's rulings may rebind by
                 # nearest when the plan re-derives (hand:true blocks rebind —
                 # that is bake_rulings' contract, not the map's)

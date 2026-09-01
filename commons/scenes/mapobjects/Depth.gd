@@ -79,8 +79,22 @@ static func subject(map_name: String) -> Array:
 	return out
 
 
-## Things with a descent the learner may decline. The board offers it in one
-## line; it does not print it.
+## The whole 'glimpsed' rung: things the room shows a plaque line for and MAY
+## offer a descent from. Not every glimpsed thing has a descent written yet —
+## `collision shapes` in Point_One has its line ("The ball knows when your hand
+## is inside it") and no inscription under it — and filtering on the inscription
+## dropped it off the sign entirely, which silently demoted it to 'used'. A rung
+## is a ruling; a missing sentence is a to-do.
+static func glimpsed(map_name: String) -> Array:
+	var out: Array = []
+	for t in says(map_name):
+		if str(t.get("status", "")) == "glimpsed":
+			out.append(t)
+	return out
+
+
+## Only those that actually carry the optional inscription. Use this to COUNT
+## what is written, never to decide what is shown.
 static func descents(map_name: String) -> Array:
 	var out: Array = []
 	for t in says(map_name):

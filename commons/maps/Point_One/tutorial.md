@@ -18,7 +18,7 @@ Mark the origin.
 var origin := Vector3.ZERO  # (0, 0, 0)
 ```
 
-The origin is a convention, not a point. It is the reference against which other points are measured.
+The origin is a point made special by convention. What is chosen is not that it exists, but that this one is called zero and everything else is measured from it.
 
 Instantiate your first point.
 
@@ -65,16 +65,14 @@ The gyroscope's axes align with yours. Move relative to it and the relationship 
 Make the point grabbable.
 
 ```gdscript
-func make_interactive(point: MeshInstance3D) -> void:
-    var area := Area3D.new()
-    var shape := CollisionShape3D.new()
-    shape.shape = SphereShape3D.new()
-    point.add_child(area)
-    area.add_child(shape)
-    area.add_to_group("grabbable")
+func make_interactive(pickable: XRToolsPickable) -> void:
+    pickable.picked_up.connect(_on_picked_up)
+    pickable.dropped.connect(_on_dropped)
 ```
 
-The Area3D detects the controller's collision shape. Godot's XR plugin handles the grab-and-release contract.
+Grabbing is not a Godot feature. It comes from XR Tools, an add-on this project carries: a thing can be picked up because it is an `XRToolsPickable`, and it reports `picked_up` and `dropped` when it is. `grab_sphere_point_snap` in this room connects those two signals and nothing else.
+
+The previous version of this step built an `Area3D` and added it to a group called `grabbable`. That compiles, and no code in this project reads that group.
 
 Read the point's current coordinates.
 

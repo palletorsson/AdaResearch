@@ -553,16 +553,25 @@ func _try_discover_evolution() -> void:
 				_load_evolution()
 				return
 
-	# Method 2: Walk up the scene tree to find MapRoot or similar
+	# Method 2: Walk up the scene tree to find MapRoot or similar.
+	#
+	# TWO KEYS, one fact. A grid map stamps map_name; the endless museum stamps
+	# em_map on the hall segment (endless_museum.gd:7611) and never map_name, so
+	# a walk that asks only for map_name finds nothing in the museum -- which is
+	# where these halls are actually walked. The failure is silent: it falls
+	# through to Method 3 and picks up whatever evolution.json it meets first.
 	var node := get_parent()
 	while node:
-		if node.has_meta("map_name"):
-			var map_name: String = node.get_meta("map_name")
-			var p := "res://commons/maps/%s/evolution.json" % map_name
-			if FileAccess.file_exists(p):
-				evolution_path = p
-				_load_evolution()
-				return
+		for key in ["map_name", "em_map"]:
+			if node.has_meta(key):
+				var map_name: String = str(node.get_meta(key))
+				if map_name.is_empty():
+					continue
+				var p := "res://commons/maps/%s/evolution.json" % map_name
+				if FileAccess.file_exists(p):
+					evolution_path = p
+					_load_evolution()
+					return
 		node = node.get_parent() if node.get_parent() != node else null
 
 	# Method 3: Scan all map directories for any evolution.json

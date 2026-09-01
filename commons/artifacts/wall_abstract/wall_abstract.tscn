@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/wall_abstract/wall_abstract.gd" id="1_wa"]
+
+[node name="WallAbstract" type="Node3D"]
+script = ExtResource("1_wa")

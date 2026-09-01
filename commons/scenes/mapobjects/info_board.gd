@@ -201,13 +201,21 @@ func _load_map_data():
 	# Find the grid system dynamically
 	grid_system = _find_grid_system()
 	
-	if not grid_system:
-		push_error("InfoBoard: No grid system found!")
-		_show_fallback_info()
-		return
-	
-	# Get the map_name from the grid system
-	map_name = grid_system.map_name
+	if grid_system:
+		map_name = grid_system.map_name
+	else:
+		# NO GRID SYSTEM IS NOT AN ERROR ANY MORE. The endless museum builds its
+		# halls itself and there is no GridSystem anywhere above this board, so
+		# the old push_error + fallback fired in the one place the board is most
+		# often read. The museum stamps em_map on the hall segment
+		# (endless_museum.gd:7611); ask the TREE for it, the same way the street
+		# talker does, before giving up.
+		map_name = _resolve_map_from_tree()
+		if map_name.is_empty():
+			push_error("InfoBoard: no grid system and no em_map above me")
+			_show_fallback_info()
+			return
+		print("InfoBoard: no grid system; resolved from the tree: " + map_name)
 	print("InfoBoard: Found grid system: " + str(grid_system.name))
 	print("InfoBoard: Loading map data for: " + map_name)
 	
@@ -241,6 +249,20 @@ func _load_map_data():
 	print("InfoBoard: Successfully loaded map data for: " + map_name)
 	print("InfoBoard: Map data keys: " + str(map_data.keys()))
 	_update_info_board_with_map_data()
+
+## Which hall am I standing in, when nobody has handed me a GridSystem?
+## Two keys for one fact: a grid map stamps map_name, the museum stamps em_map.
+func _resolve_map_from_tree() -> String:
+	var n: Node = self
+	while n:
+		for key in ["map_name", "em_map"]:
+			if n.has_meta(key) and str(n.get_meta(key)) != "":
+				return str(n.get_meta(key))
+		if "map_name" in n and str(n.get("map_name")) != "":
+			return str(n.get("map_name"))
+		n = n.get_parent()
+	return ""
+
 
 # Show fallback info when map data cannot be loaded
 func _show_fallback_info():

@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_pick"]
+[ext_resource type="Script" path="res://commons/artifacts/line_sledgehammer/line_sledgehammer.gd" id="2_sledge"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_grip"]
+size = Vector3(0.12, 1.0, 0.12)
+
+[node name="LineSledgehammer" instance=ExtResource("1_pick")]
+script = ExtResource("2_sledge")
+
+[node name="GripShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_grip")

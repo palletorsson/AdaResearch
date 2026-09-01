@@ -2,6 +2,12 @@ You arrive late.
 
 The prerequisites are in, stacked away behind you, and the fold keeps running whether or not you accepted the challenge. Everything here arrived late. You are here now.
 
+<!-- @street_talker -->
+
+A board on the pavement, hinged and leaning, the kind a shop puts out in the morning and takes in at night. It lists what you can do here and explains none of it: three directions, a Vector3, a position, a point with no extent. Four things, no sentences. Two of them go deeper, and to find out which you have to walk round the back — which you may not want to, and that is exactly why it has a back.
+
+It is not the building talking. Nothing here is engraved. What this room decided to raise into the light was decided by somebody, and could have been decided otherwise, and a sign you can pick up and move says that better than a plaque ever will.
+
 <!-- @folding_past -->
 
 Nested frames march inward, each 0.85 the size of the one before it. That is what a past looks like when you give it a geometry: not a line behind you but a nesting, the present as the innermost term of a regress that does not end — an inward fall with no floor to arrive at. You did not join it. You were thrown into it.
@@ -32,7 +38,7 @@ Red, green, blue — X, Y, Z. The convention is shared across Godot, OpenGL and 
 var origin := Vector3.ZERO  # (0, 0, 0)
 ```
 
-The origin is a convention, not a point. It is the reference against which other points are measured.
+The origin is a point made special by convention. What is chosen is not that it exists but that *this* one is called zero, and that everything else is measured from it.
 
 <!-- @origin -->
 
@@ -78,16 +84,14 @@ A point is that which has no part; its place is entirely borrowed from a coordin
 ## Make the point grabbable
 
 ```gdscript
-func make_interactive(point: MeshInstance3D) -> void:
-    var area := Area3D.new()
-    var shape := CollisionShape3D.new()
-    shape.shape = SphereShape3D.new()
-    point.add_child(area)
-    area.add_child(shape)
-    area.add_to_group("grabbable")
+func make_interactive(pickable: XRToolsPickable) -> void:
+    pickable.picked_up.connect(_on_picked_up)
+    pickable.dropped.connect(_on_dropped)
 ```
 
-The Area3D detects the controller's collision shape. Godot's XR plugin handles the grab-and-release contract.
+Nothing in Godot makes a thing grabbable. The hands come from XR Tools, an add-on this project carries, and a thing is grabbable because it *is* an `XRToolsPickable` — a body that has agreed to that contract and emits `picked_up` and `dropped` when the agreement is honoured. `grab_sphere_point_snap` in this room connects exactly those two signals.
+
+Worth knowing, because it is the sort of thing this room is about: an earlier draft of these lines built an `Area3D` and put it in a group called `grabbable`. It would have compiled. Nothing in this project reads that group.
 
 <!-- @interactive_point_origin_force -->
 
@@ -109,7 +113,7 @@ The coordinates change as the point moves. The point's identity does not.
 
 <!-- @frame_counter_display -->
 
-The internal clock is running. The frame counter updates with the cycle, and the position is re-read every one of them — sixty answers a second to a question about where something is, none of them the thing itself.
+The internal clock is running. The frame counter updates with the cycle, and the position is re-read every one of them — perhaps sixty answers a second, perhaps ninety, perhaps eleven while something else is loading. The counter on the wall knows which. None of the answers is the thing itself.
 
 <!-- @ -->
 
@@ -128,7 +132,7 @@ Snapping trades precision for discreteness.
 
 <!-- @grab_sphere_point_snap -->
 
-A point you can take; it snaps. The continuous position was always a fiction of the float, and the grid says so out loud: here are the places you are allowed to be. Every level editor in the world is built on this small violence, and it is the first time in the walk that the room decides something on your behalf.
+A point you can take; it snaps. The float was never continuous either — it has always been a finite set of positions with gaps between them, and the smoothness was a matter of the gaps being too small to see. Snapping does not introduce the quantisation. It coarsens it until you can feel it, and then says out loud: here are the places you are allowed to be. Every level editor in the world is built on this small violence, and it is the first time in the walk that the room decides something on your behalf.
 
 <!-- @ -->
 

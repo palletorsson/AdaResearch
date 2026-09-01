@@ -66,7 +66,20 @@ const STEEL := Color(0.62, 0.64, 0.67)
 const TAPE_YELLOW := Color(0.89, 0.65, 0.08)
 const INK := Color(0.09, 0.08, 0.07)
 
+## HOW MANY BLOWS. 2026-09-01, Palle: "like in Half-Life the object has some
+## health so we need to hit like two or three times for it to be destroyed."
+##
+## One-hit destruction says the barrier was never really holding. Three says it
+## was, and that you decided twice more to keep going — which is the whole
+## difference between a thing falling over and somebody knocking it down. Each
+## landed blow is answered (confetti, a shove off vertical) so the second swing
+## is aimed at something visibly already hurt.
+@export var hit_points: int = 3
+
+const Confetti := preload("res://commons/artifacts/queer_confetti/queer_confetti.gd")
+
 var _built: bool = false
+var _hp: int = 0
 var _body: StaticBody3D = null
 var _mount: Node3D = null
 var _broken: bool = false
@@ -75,6 +88,8 @@ var _broken: bool = false
 ## that has been broken is the one event in Point_Lines that cannot be undone by
 ## walking away from it.
 signal broken(by: Node)
+## Emitted on a blow that did NOT finish it, carrying what is left.
+signal hit(hit_points_left: int)
 
 
 func _ready() -> void:
@@ -94,29 +109,50 @@ func _ready() -> void:
 ## Called by line_sledgehammer through its `strike` contract, and by anything
 ## else that finds this artifact and means it. Returns false if it is already
 ## broken, so one barrier is one event and a second swing is not a second break.
-func strike(_from: Vector3 = Vector3.ZERO, by: Node = null) -> bool:
+func strike(from: Vector3 = Vector3.ZERO, by: Node = null) -> bool:
 	if _broken or not _built:
 		return false
+
+	_hp -= 1
+	var at: Vector3 = from if from != Vector3.ZERO else global_position + Vector3(0, _bar_h(), 0)
+
+	if _hp > 0:
+		# STILL STANDING. A smaller burst, and it takes the blow visibly: shoved
+		# further off vertical each time, so the next swing is aimed at something
+		# that is already losing.
+		Confetti.burst(get_tree().current_scene if get_tree() else self, at, 22, 0.8)
+		var lean := create_tween()
+		var tgt: Node3D = _mount if _mount != null and is_instance_valid(_mount) else self
+		lean.tween_property(tgt, "rotation_degrees:z",
+			tgt.rotation_degrees.z + 7.0, 0.18).set_trans(Tween.TRANS_ELASTIC)
+		hit.emit(_hp)
+		print("do_not_cross_barrier: hit, %d left" % _hp)
+		return true
+
 	_broken = true
+	# THE BREAKING BURST — bigger, because this one is the event.
+	Confetti.burst(get_tree().current_scene if get_tree() else self, at, 110, 1.5)
 
 	# The collider goes first — the point of breaking it is being able to cross.
 	if _body != null and is_instance_valid(_body):
 		_body.queue_free()
 		_body = null
 
-	# It does not vanish. A barrier that disappears when hit was never really
-	# there; one lying on the floor, still legible, is evidence.
+	# AND IT GOES TO PIECES.
 	#
-	# The reference is held, not looked up by name. The first version of this
-	# asked for "Mount"; _build names it "Barrier", so it found nothing, fell
-	# back to `self`, and would have tilted the whole artifact including the
-	# grid's own placement transform — a silent wrong answer that compiles.
-	var target: Node3D = _mount if _mount != null and is_instance_valid(_mount) else self
-	var tw := create_tween()
-	tw.set_parallel(true)
-	tw.tween_property(target, "rotation_degrees:z",
-		target.rotation_degrees.z + 74.0, 0.55).set_trans(Tween.TRANS_BOUNCE)
-	tw.tween_property(target, "position:y", target.position.y - 0.28, 0.5)
+	# 2026-09-01, Palle: "when I hit the do not cross line with the hammer it must
+	# break into shreds after some hits, also remove collider so I can get past."
+	#
+	# The version before this tilted the whole barrier over and shrank it to
+	# nothing in a third of a second. That reads as a prop being switched off. A
+	# thing you hit three times should come apart into the pieces it was made of,
+	# and those pieces should outlive it — which is the one structural point here:
+	# the shreds are parented to the barrier's PARENT, not to the barrier, and
+	# each carries its own tween. If they were children of this node they would
+	# vanish the instant it frees, and the barrier would appear to blink out with
+	# a single frame of debris nobody could see.
+	_shred(at)
+	queue_free()
 
 	broken.emit(by)
 	print("do_not_cross_barrier: broken by %s" % [by.name if by else "something"])
@@ -127,11 +163,21 @@ func strike(_from: Vector3 = Vector3.ZERO, by: Node = null) -> bool:
 ## can also take this down. Same target, two instruments — which is the claim the
 ## room makes in words three paragraphs earlier.
 func trigger_explosion() -> void:
+	## Takes it DOWN, not down a notch. This returns void, so a caller cannot
+	## read an hp count back -- which is exactly why it must not leave the
+	## barrier standing at 2 of 3 with no way to say so. Adding hit_points put
+	## these two instruments into contradiction without either one failing
+	## loudly: the beam quietly stopped being able to clear the way at all.
+	_hp = 1
 	strike()
 
 
 func is_broken() -> bool:
 	return _broken
+
+
+func hit_points_left() -> int:
+	return _hp
 
 
 func apply_grid_config(config_data: Dictionary) -> void:
@@ -216,6 +262,7 @@ func _build() -> void:
 
 	mount.rotation_degrees.z = shove_deg
 	_broken = false
+	_hp = maxi(1, hit_points)
 
 
 # ── the New York form: straight wood, painted blue ───────────────────────────
@@ -364,3 +411,86 @@ func _build_tape(mount: Node3D) -> void:
 					if facing < 0.0:
 						label.rotation_degrees.y = 180.0
 					mount.add_child(label)
+
+
+## Pull every mesh apart into pieces cut from its own bounding box.
+##
+## Generic on purpose: the sawhorse builds through HangarKit and the tape builds
+## a catenary ribbon, so there is no fixed list of parts to name. Whatever meshes
+## the barrier turned out to have, each becomes FRAG_PER_MESH boxes carrying that
+## mesh's own material, thrown outward from the blow.
+const FRAG_PER_MESH := 7
+const FRAG_LIFE := 1.6
+
+
+func _shred(at: Vector3) -> void:
+	var host: Node = get_parent()
+	if host == null or not host.is_inside_tree():
+		host = get_tree().current_scene if get_tree() else null
+	if host == null:
+		return
+	var rng := RandomNumberGenerator.new()
+	rng.seed = hash(str(global_position))
+
+	for mi in _all_meshes(self):
+		if mi.mesh == null:
+			continue
+		var ab: AABB = mi.mesh.get_aabb()
+		var gx: Transform3D = mi.global_transform
+		var mat: Material = mi.material_override
+		if mat == null and mi.mesh.get_surface_count() > 0:
+			mat = mi.get_active_material(0)
+		# a piece is a fraction of the part it came off, never a uniform crumb
+		var piece: Vector3 = Vector3(
+			maxf(0.03, ab.size.x / 3.0), maxf(0.03, ab.size.y / 2.0),
+			maxf(0.03, ab.size.z / 2.0))
+		for i in FRAG_PER_MESH:
+			var f := MeshInstance3D.new()
+			var bm := BoxMesh.new()
+			bm.size = piece * rng.randf_range(0.55, 1.15)
+			f.mesh = bm
+			if mat != null:
+				f.material_override = mat.duplicate()
+				if f.material_override is StandardMaterial3D:
+					var sm: StandardMaterial3D = f.material_override
+					sm.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+			host.add_child(f)
+			# sampled from inside the part it broke off, in world space
+			var local := Vector3(
+				rng.randf_range(ab.position.x, ab.end.x),
+				rng.randf_range(ab.position.y, ab.end.y),
+				rng.randf_range(ab.position.z, ab.end.z))
+			var from: Vector3 = gx * local
+			f.global_position = from
+			f.rotation = Vector3(rng.randf_range(-3, 3), rng.randf_range(-3, 3),
+					rng.randf_range(-3, 3))
+
+			var away: Vector3 = (from - at)
+			away.y = 0.0
+			if away.length() < 0.05:
+				away = Vector3(rng.randfn(0, 1), 0, rng.randfn(0, 1))
+			away = away.normalized() * rng.randf_range(0.9, 2.4)
+			away.y = rng.randf_range(1.2, 3.0)
+			var land: Vector3 = from + away * 0.55 + Vector3(0, -1.1, 0)
+			land.y = maxf(land.y, from.y - 1.6)
+
+			# THE TWEEN IS THE FRAGMENT'S OWN. create_tween() on `self` would die
+			# with this node one line from now.
+			var tw := f.create_tween()
+			tw.set_parallel(true)
+			tw.tween_property(f, "global_position", land, FRAG_LIFE) 				.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+			tw.tween_property(f, "rotation",
+				f.rotation + Vector3(rng.randf_range(-6, 6), rng.randf_range(-6, 6),
+					rng.randf_range(-6, 6)), FRAG_LIFE)
+			tw.tween_property(f, "transparency", 1.0, FRAG_LIFE) 				.set_delay(FRAG_LIFE * 0.45)
+			tw.chain().tween_callback(f.queue_free)
+		mi.visible = false
+
+
+func _all_meshes(n: Node) -> Array:
+	var out: Array = []
+	for c in n.get_children():
+		if c is MeshInstance3D:
+			out.append(c)
+		out.append_array(_all_meshes(c))
+	return out

@@ -27,6 +27,16 @@ func spawn_grid() -> void:
 
 Each point is a small mesh at a grid coordinate. The 2D array `points[y][x]` holds them by row.
 
+Separate the four things two points give you.
+
+```gdscript
+var displacement := b - a
+var distance := displacement.length()
+var direction := displacement.normalized()
+```
+
+Four different objects, not four names for one. Two points determine an infinite line — keeping only what lies between them is a decision, and the result is a **segment**. `b - a` is a **displacement**: a size and a way round. `.length()` discards the way round and returns a **distance**, a single number with no direction. `.normalized()` discards the number and returns a **direction**. Neither result can be turned back into the segment on its own.
+
 Connect horizontal neighbours.
 
 ```gdscript
