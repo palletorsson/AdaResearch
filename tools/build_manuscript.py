@@ -200,6 +200,111 @@ def render_artifact(a: dict, lines: list, heading: str | None = None) -> None:
         lines.append("")
 
 
+# ── THE WALK PAGES READ THE ROOMS (2026-08-31) ─────────────────────────────
+#
+# Palle: "but how do I compile the cross references this into the final book?"
+#
+# They could not, and the reason was a seam nobody had crossed. This manuscript
+# is built from ada_encyclopedia/public/tutorial/*.json — 25 chapters of 8 pages
+# — while the rooms are written in commons/maps/<Map>/final.md, artifact-tagged,
+# and the two had never met. 48 walk pages across the corpus, every one empty,
+# and the walk is precisely where a room belongs.
+#
+# So a walk page now reads the halls of its own chapter and prints the ones that
+# have been written. The artifact tag is what COMPILES: `<!-- @origin -->` in
+# final.md becomes the work's name in the book, so a cross-reference made while
+# writing survives into the printed page instead of being a comment nobody reads.
+#
+# It uses tools/final_tags.parse — the same grammar /compose writes and
+# tools/final_tags.py --check gates across both implementations. A third parser
+# for the same markers is how the marker would come to mean three things.
+#
+# WHAT IT DOES NOT DO: it does not invent. A chapter with no final.md anywhere
+# prints the count of rooms still unwritten rather than an empty heading, because
+# 48 silent pages already looked like a finished book once.
+
+import sys as _sys
+_sys.path.insert(0, os.path.join(REPO, "tools"))
+try:
+    from final_tags import parse as _parse_regions       # one grammar, not a copy
+except Exception:                                        # the tool is not importable
+    _parse_regions = None
+
+
+def chapter_maps(seq):
+    """The chapter's halls, in the order the museum walks them."""
+    out = []
+    try:
+        with open(os.path.join(ENC, "public", "base_layer.json"), encoding="utf-8") as fh:
+            bl = json.load(fh)
+    except Exception:
+        return out
+    for c in bl.get("chapters", []):
+        if str(c.get("chapter", "")) != str(seq):
+            continue
+        for h in c.get("halls", []):
+            m = str(h.get("map", ""))
+            if m and m not in out:
+                out.append(m)
+    return out
+
+
+def work_names():
+    """token -> display name, so a tag prints as a work rather than a slug."""
+    names = {}
+    reg = os.path.join(REPO, "commons", "artifacts", "registry")
+    if not os.path.isdir(reg):
+        return names
+    for fn in sorted(os.listdir(reg)):
+        if not fn.endswith(".json"):
+            continue
+        try:
+            with open(os.path.join(reg, fn), encoding="utf-8") as fh:
+                d = json.load(fh)
+        except Exception:
+            continue
+        arts = d.get("artifacts", d) if isinstance(d, dict) else {}
+        if isinstance(arts, dict):
+            for k, v in arts.items():
+                if isinstance(v, dict):
+                    names[k] = str(v.get("name") or k)
+    return names
+
+
+def render_walk_prose(seq, lines):
+    """Print every written room of this chapter. Returns (written, silent)."""
+    maps = chapter_maps(seq)
+    if not maps or _parse_regions is None:
+        return 0, len(maps)
+    names = work_names()
+    written = 0
+    for m in maps:
+        f = os.path.join(REPO, "commons", "maps", m, "final.md")
+        if not os.path.exists(f):
+            continue
+        try:
+            with open(f, encoding="utf-8") as fh:
+                raw = fh.read()
+        except Exception:
+            continue
+        if not raw.strip():
+            continue
+        written += 1
+        lines.append(f"#### {m.replace('_', ' ')}")
+        lines.append("")
+        for block in _parse_regions(raw):
+            tok = str(block.get("token") or "")
+            body = str(block.get("text") or "").strip()
+            if tok:
+                # THE CROSS-REFERENCE, COMPILED: the tag becomes the work
+                lines.append(f"**{names.get(tok, tok)}** — `{tok}`")
+                lines.append("")
+            if body:
+                lines.append(body)
+                lines.append("")
+    return written, len(maps) - written
+
+
 def render_chapter(t: dict, number: int, lines: list) -> dict:
     """Render one tutorial (8 pages) as a chapter; return its TOC entry."""
     name = t.get("name") or t["seq"]
@@ -249,6 +354,18 @@ def render_chapter(t: dict, number: int, lines: list) -> dict:
             if p.get("lead"):
                 lines.append(f"*{p['lead']}*")
                 lines.append("")
+            # the rooms themselves, once per chapter — on the FIRST walk page, so
+            # a chapter with two of them does not print its halls twice
+            if walk_count == 1:
+                wrote, silent = render_walk_prose(t["seq"], lines)
+                stats["rooms_written"] = wrote
+                stats["rooms_silent"] = silent
+                if wrote == 0 and silent:
+                    lines.append(f"*{silent} room(s) in this chapter; none written yet.*")
+                    lines.append("")
+                elif silent:
+                    lines.append(f"*{silent} further room(s) in this chapter, not yet written.*")
+                    lines.append("")
             for a in p.get("artifacts") or []:
                 render_artifact(a, lines)
         elif kind == "turn":
