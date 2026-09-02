@@ -1,0 +1,34 @@
+{
+	"id": "dream_bodies",
+	"name": "Dream Bodies",
+	"description": "Six sculptural families recreated in Godot from Palle's Stable Diffusion panoramas (2026-08-29, 'any chance you can recreate some of these bodies in godot?'): glazed Rocaille figurines with patterned skins, De Stijl slab robots, panelled robots, a Frank Stella wall tangle, pastel ceramic dragons, and a chorus of patterned beasts. One artifact, one axis: figure picks the family, seed picks the individual. Every builder works from primitives and SurfaceTool alone, with its patterns painted into textures in code, so a body is a recipe and not a mesh on disk.",
+	"category": "dream_bodies",
+	"theoreticalGrounding": "The diffusion model dreamed these bodies from prompts that name painters, styles and desires in one breath; the museum answers by rebuilding them as procedures - a body as a seed and a rule rather than a picture. What survives the translation (a lean, a pattern, a palette) and what does not (the glaze, the dream's confusion of limbs) is the argument: compression keeps the queer remainder or it does not.",
+	"artifacts": {
+		"dream_bodies": {
+			"lookup_name": "dream_bodies",
+			"scene": "res://commons/artifacts/dream_bodies/dream_bodies.tscn",
+			"class_name": "DreamBodies",
+			"name": "Dream Bodies",
+			"description": "A statue from one of six families, chosen by figure and grown from a seed: rocaille (glazed entwined figurines with wave-stripe and scale-lattice skins), stijl_robot (Rietveld slab robot in white, saffron, pink and red with a domed helmet), panel_robot (armour-panelled robot in one saturated colour with chrome joints), stella_wall (a 2.4 m wall relief of layered flat cut-outs in mauve, teal and mustard), dragon (a rearing pastel ceramic dragon with scales and translucent wings), sea_forms (an upright patterned beast with zebra, giraffe, wave or bead skin and tentacle limbs).",
+			"category": "dream_bodies",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [1, 2, 1],
+			"tags": ["sculpture", "figure", "procedural", "stable-diffusion", "queer", "museum"],
+			"dev_themes": ["sculpture", "queer", "museum"],
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"figure": ["rocaille", "stijl_robot", "panel_robot", "stella_wall", "dragon", "sea_forms"]
+				},
+				"default": "figure=rocaille",
+				"predicted_degeneracy": "stijl_robot vs panel_robot, ~9%: both upright humanoids of about the same height and stance; they differ in slab-versus-panel skin and palette, which is a large share of frame but not the silhouette. stella_wall is the far value from everything: a 2.4 m relief where the others are 1.5 m statues.",
+				"note": "seed is not an axis: it is the individual. The builders live in commons/artifacts/dream_bodies/bodies/<figure>.gd, one file each, static build(root, seed) and describe()."
+			}
+		}
+	}
+}
