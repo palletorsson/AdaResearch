@@ -33,7 +33,7 @@ A clipboard at half size, turned to face you. Walk within a metre and a half and
 
 <!-- @science_screen -->
 
-A screen on the wall, and it is the one thing here that is not looking at the room. Its token locks it to a bar chart before it can scan, and nothing in this hall feeds a bar chart, so it draws twenty bars from a fixed seed. Take the sphere and it will not notice. A measuring instrument that has been told what to measure is not measuring.
+A screen on the wall, and it is the one thing here that is not looking at the room. It was set to a bar chart before it could scan, and nothing in this hall feeds a bar chart, so it draws twenty bars from a fixed seed. Take the sphere and it will not notice. A measuring instrument that has been told what to measure is not measuring.
 
 <!-- @dark_sphere -->
 

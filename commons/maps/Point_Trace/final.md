@@ -28,7 +28,7 @@ Derrida's word is nearby. Here, unusually, the machine makes the metaphor litera
 
 ## The same gesture, on four different grids
 
-Four of them in a row, coarsening as you walk. They are not four artifacts — they are one artifact told, four times, where a reading is allowed to stand.
+Four of them in a row, coarsening as you walk. They are not four objects — they are one object told, four times, where a reading is allowed to stand.
 
 ```gdscript
 @export var resolution_mm: float = 0.0

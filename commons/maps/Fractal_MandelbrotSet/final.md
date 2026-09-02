@@ -22,7 +22,7 @@ Do not jump while you are looking at it. The jump key is bound to the same actio
 
 The instrument, on a table that floats a little off the floor: the same computation as a shader, live, with two sliders and four buttons. Zoom in anywhere on the boundary and there is more boundary, at every magnification, forever, and small complete copies of the whole shape appear inside the filaments, each one slightly distorted and unmistakably the same object.
 
-There is a catch worth knowing before you use it. The pan controls are bound to the same keys as walking, so on a desktop, crossing the room drags the fractal with you. The instrument and the visitor are wired to the same hands.
+There is a catch worth knowing before you use it. The pan controls answer to the same keys as walking, so on a desktop, crossing the room drags the fractal along with you. The instrument and the visitor are wired to the same hands.
 
 <!-- @dark_sphere -->
 

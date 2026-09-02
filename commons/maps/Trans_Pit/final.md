@@ -27,7 +27,7 @@ The middle room has two turning slabs, orange and wireframed, each a little over
 
 <!-- @grower_block -->
 
-The last room has three cubes in a row, a metre each, and they do not move. Their tokens ask for a swelling that runs from a third of a metre to three and a half, and the grid does not pass those two words through, so nothing arrives and nothing grows. Scale is the one transformation this hall never performs on you, and you will walk past it without noticing, which is very nearly what scale does anyway.
+The last room has three cubes in a row, a metre each, and they do not move. Each was placed asking for a swelling that runs from a third of a metre to three and a half, and the grid does not pass those two words through, so nothing arrives and nothing grows. Scale is the one transformation this hall never performs on you, and you will walk past it without noticing, which is very nearly what scale does anyway.
 
 <!-- @ -->
 

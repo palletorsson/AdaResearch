@@ -16,7 +16,7 @@ Output becomes input. The function calls itself with a smaller argument and the 
 
 <!-- @fractal_recursion_2 -->
 
-Six squares inside each other, each half the last, hanging edge-on above head height. Read the code behind it and there is exactly one self-call, which makes this a tail call: one square per level, a straight line down. It is recursion in the strict sense and it is not branching, so nothing here multiplies. The registry's own note is blunter than the label on the wall: a loop wearing recursion's clothes.
+Six squares inside each other, each half the last, hanging edge-on above head height. Read the code behind it and there is exactly one self-call, which makes this a tail call: one square per level, a straight line down. It is recursion in the strict sense and it is not branching, so nothing here multiplies. The corpus keeps a blunter description of it than the label on the wall does: a loop wearing recursion's clothes.
 
 Keep it in mind for the next object, which is what happens when the call is made four times instead of once.
 
@@ -36,7 +36,7 @@ The only thing in this room you cannot walk through. A cube splits into eight at
 
 <!-- @recursive_chair -->
 
-A table and a chair, each assembled from a subdivided cube in five timed steps: split, keep the top layer and four corners, flatten the top, stretch the legs. Both are here and neither can be seen. Their tokens shrink them to a fifth and drop them half a metre, which puts the whole of each object inside the solid cube of the floor. The chair finishes building about two and a half seconds after the room loads, underneath you.
+A table and a chair, each assembled from a subdivided cube in five timed steps: split, keep the top layer and four corners, flatten the top, stretch the legs. Both are here and neither can be seen. Each was placed at a fifth of its size and dropped half a metre, which puts the whole of both inside the solid cube of the floor. The chair finishes building about two and a half seconds after the room loads, underneath you.
 
 They are the chapter's best argument about what recursion is for, which is that a chair is not a special shape but a cube with the right cells kept, and you cannot look at either of them.
 

@@ -15,7 +15,7 @@ Three turns about three axes, and the order is in the body, not the name: up fir
 
 <!-- @rotate_grid_cubes -->
 
-Look down. The field of cubes in rows is the floor of this hall. The token has no geometry of its own; it reaches into the grid the room is built from and turns that. The rows turn to a score. Six tip about one axis, four stay flat, six about the next axis, four flat, six about the third, four flat, and then six that tip about all three at once, thirty-five degrees on two of the axes and twenty-five on the third. The score runs forty-four rows and the hall is forty long, so you meet it once and walk off the end of it before it can come round. The collision cubes turn with the picture, so a tilted band is tilted underfoot.
+Look down. The field of cubes in rows is the floor of this hall. It has no geometry of its own. It reaches into the grid the room is built from and turns that. The rows turn to a score. Six tip about one axis, four stay flat, six about the next axis, four flat, six about the third, four flat, and then six that tip about all three at once, thirty-five degrees on two of the axes and twenty-five on the third. The score runs forty-four rows and the hall is forty long, so you meet it once and walk off the end of it before it can come round. The collision cubes turn with the picture, so a tilted band is tilted underfoot.
 
 <!-- @science_screen -->
 
