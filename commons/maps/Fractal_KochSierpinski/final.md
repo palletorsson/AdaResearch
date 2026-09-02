@@ -14,7 +14,7 @@ Count how many copies of itself a shape contains, count how many times smaller e
 
 The first move is replace. Take a segment, take out its middle third, and put two sides of a triangle there instead: four segments where there was one, each a third as long, so the length goes up by a third at every step and never stops going up. Four copies at one third: the dimension is about 1.26.
 
-This is also the only thing in this room you can operate. There is a slider on it, and turning it walks the depth up and down while you watch. Watch the size, though, not just the shape. At depth four this drawing measures the same bounding box as at depth zero, to the millimetre, because its spikes are built pointing inward. Infinite perimeter inside a finite box is the honest headline of the Koch curve, and this object demonstrates it by accident, in the wrong direction, which is a better demonstration than the intended one.
+It is also the one thing here a hand can change. There is a slider on it, and turning it walks the depth up and down while you watch. Watch the size, though, not just the shape. At depth four this drawing measures the same bounding box as at depth zero, to the millimetre, because its spikes are built pointing inward. Infinite perimeter inside a finite box is the honest headline of the Koch curve, and this object demonstrates it by accident, in the wrong direction, which is a better demonstration than the intended one.
 
 <!-- @koch_curve_3d -->
 

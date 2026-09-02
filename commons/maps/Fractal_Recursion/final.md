@@ -72,4 +72,4 @@ Everything in this room is one line calling itself. The squares call once and ma
 
 What stops any of them is the same thing: a counter, checked at the top, that eventually says no. Without it the engine does not make an infinitely detailed object; it makes nothing, because it never returns. The base case is not a safety rail bolted on afterwards. It is the half of the rule that makes the other half mean anything.
 
-Next: what these rules make, measured — and the two moves that make all of it.
+Next: what these rules make, measured, and the two moves that make all of it.

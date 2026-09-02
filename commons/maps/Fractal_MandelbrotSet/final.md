@@ -16,7 +16,7 @@ Ten thousand cubes in a field nine and a half metres square, hanging about four 
 
 You are standing under a map, and each pixel of the map is an entire world from the previous hall. Look up long enough and the shape resolves: a cardioid with a disc stuck to it, and smaller discs on that, and filaments running out. The filaments are where the two behaviours meet, and every one of them is a place where a hair's difference in c is the difference between a connected Julia set and a cloud of dust.
 
-Do not jump while you are looking at it. The jump key is bound to the same action that resets this artifact's zoom, so the whole field re-rolls under your feet.
+Do not jump while you are looking at it. The jump key is bound to the same action that resets the field's zoom, so the whole thing re-rolls over your head.
 
 <!-- @mandelbrot_dive -->
 
