@@ -39,7 +39,7 @@ Change the stiffness and you get a different vessel. Tilt the gravity and you ge
 
 <!-- @science_screen -->
 
-The screen sweeps eight metres for something whose name it knows. The bench matches, because its name contains the word spring, and the bench is nine and three quarter metres away. So the screen finds nothing and prints a position of zero, in a room whose entire subject is a process that already finished before anyone arrived. It cannot show duration, and here it does not even manage to show an object.
+A screen, and the thing this room is about is the one thing no screen can hold. Every shape here is a duration: eighty steps, two hundred steps, one integration per frame. A picture of a vessel contains none of the falling that made it, which is exactly what a fossil is and exactly what the vessel is.
 
 <!-- @ -->
 

@@ -44,7 +44,7 @@ Islands of compression in a sea of tension. Nothing here is resting on anything.
 
 <!-- @science_screen -->
 
-The screen sweeps the room for a name it knows and finds none, so about a second in it locks to its fallback and prints a position of zero, with a green lamp washing the wall beside it. Between the dead well and the alive one it would have drawn two basins and drawn the deeper one deeper, because depth is the only thing a diagram of this kind measures. It draws neither. Whatever Q is, it was never going to be on the screen.
+A screen, washing the wall green. Had it looked up it would have drawn two basins and drawn the deeper one deeper, because depth is the only quantity a diagram of this kind carries. Q is the difference between those two wells, and depth is precisely the axis on which the shallow one loses.
 
 <!-- @ -->
 

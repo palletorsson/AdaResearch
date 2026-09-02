@@ -61,3 +61,38 @@ all now fixed in the text:
 ## Open
 
 - The 20 m terrain in a 14 m room is a real placement fault, not just a writing problem. Worth a ruling: shrink `grid_size`, or give the room to the artifact.
+
+## The arc reader's verdict on the chapter (2026-09-02)
+
+An eleventh agent read all six rooms together and found repetitions I had
+written in without noticing. Acted on:
+
+- **The science-screen joke was told five times.** Every room ended on a screen
+  paragraph making the same observation. Descent keeps the full version, because
+  an instrument that can only read what is directly under it is this room's own
+  emblem; the other four now say four different things.
+
+Recorded and not acted on:
+
+- **Gaudí is argued twice** (Catenary has the object, Equilibrium has the
+  closing section). Defensible: the object is in one room and the principle
+  generalises in the other, but if one has to go it is Equilibrium's.
+- **"It ran once at load and what stands is the result" appears in three rooms**,
+  and is available to four. It is the chapter's real subject, so the repetition
+  is arguably the argument; worth watching if a sixth room is ever added.
+- **Descent silently repeats Change_Intro**: two of its four stations are already
+  placed there, so writing Descent as a first encounter with the marble is false
+  to the walk. This is a curriculum ordering fact, not a text fault, and the fix
+  belongs in the sequence rather than in this file.
+
+## The Forge: DEFER
+
+The arc reader recommends deferring `FormFinding_Forge` (the sixth map, rated
+THIN) and letting Annealing close the chapter, with a code-level reason worth
+keeping: `self_shaping_forge.gd:170-171` computes its Q as
+`sin(_t * TAU * cycle_rate) * 0.5 + 0.5` passed through a smoothstep. The
+chapter's whole claim is that a form is *found* by a process; the Forge's hero
+animates the found quantity on a sine. That is the subject faked at the code
+level, and it is the last thing a visitor would meet.
+
+Not applied — deferring a map is a fold, and a fold is Palle's ruling.

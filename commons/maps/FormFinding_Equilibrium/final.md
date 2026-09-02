@@ -37,7 +37,7 @@ The recursion is not the one the label implies. It halves the tower vertically a
 
 <!-- @science_screen -->
 
-The screen hunts for something it can draw. It matches the triangle, by name, and then refuses it, because the triangle's parts are not named the way the screen needs them to be named. So it falls back to a radar scope and a count of the tower's children. That is nearly a joke at the room's expense: a diagram of a mobile would be a picture of a tree, and the one property that matters here, two products being equal at every node, is not a thing a picture can hold. You have to be told, or you have to read the nameplates.
+The screen ends up drawing a radar scope and counting the tower's children, having matched the triangle by name and then declined it. Fair enough: a diagram of a mobile is a picture of a tree, and the property that matters here is two products being equal at every node, which no picture holds. You have to be told, or you have to read the nameplates.
 
 <!-- @ -->
 

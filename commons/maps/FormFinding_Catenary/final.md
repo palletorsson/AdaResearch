@@ -43,7 +43,7 @@ Apart from a flat plane, the helicoid and the catenoid are the only ruled minima
 
 <!-- @science_screen -->
 
-The screen looks for something within eight metres whose name it recognises, and finds the laundry line, whose name contains the word it is hunting for. It misses. The washing lines stand eight and two thirds metres away, sixty-six centimetres outside its reach, so the screen settles for its fallback and prints a position of zero. It is the only thing in this room that would draw a curve rather than be one, and it is standing just too far off to draw anything at all.
+One thing in this room would draw a curve rather than be one, and it misses by sixty-six centimetres. The screen looks eight metres for a name it knows; the washing lines are the only match and they stand eight and two thirds metres off. A record-keeper just out of range of the thing worth recording.
 
 <!-- @ -->
 
