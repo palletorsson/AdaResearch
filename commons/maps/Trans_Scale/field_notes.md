@@ -29,13 +29,14 @@ before anyone takes the sphere in VR.
   it" from the token.
 - Volume ×8 at factor 2: probe item 7.
 
-## Verified critique (2026-09-02) — NOT YET APPLIED
+## Verified critique (2026-09-02) — APPLIED
 
 A ten-agent panel (seven room critics, an arc reader, an exactness sweep, one
 adversarial editor) judged this text against the primitives rooms and against the
 artifact scripts. **12 findings survived the editor, 11 of them factually wrong.**
-Twenty-two findings across the chapter were rejected as taste. Nothing below is
-applied yet; the rewrite is a whole-chapter job in one scope.
+Twenty-two findings across the chapter were rejected as taste. Every finding below
+was applied in the whole-chapter rewrite of 2026-09-02; the quotes are what the
+text used to say.
 
 The chapter-wide error: **a `pick_up_cube` cannot be carried.** No pickable, no
 rigid body, no grab. An `Area3D` whose `body_entered` fires `collect()`, adds a

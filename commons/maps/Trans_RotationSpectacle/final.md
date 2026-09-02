@@ -1,28 +1,26 @@
-Rotation is the transformation that happens in time: the same small angular rule, repeated, accrues into a twist you can walk through and a spectacle you cannot stop watching.
+One angular rule, repeated, is a building if you repeat it in space and a spectacle if you repeat it in time.
 
-The last hall taught that order matters. This one teaches that speed and direction compound. It is a long hall, a procession, with a tunnel along one wall and a carousel at the far end, and everything in it is one rule applied again and again until the rule has become architecture.
+The last hall taught that order matters. This one teaches that a speed compounds. It is a long hall, a procession, with a corridor along one wall and a carousel at the far end, and everything in it is one rule applied again and again until the rule has become architecture.
 
 ```gdscript
-func attach_ring(frame: Node3D, count: int, radius: float) -> void:
-    for i in count:
-        var angle: float = i * TAU / count
-        var obj := MeshInstance3D.new()
-        obj.mesh = BoxMesh.new()
-        obj.position = Vector3(cos(angle), 0, sin(angle)) * radius
-        frame.add_child(obj)
+func tunnel_angle(i: int) -> float:
+    return i * rotation_per_segment        # ten degrees, added
+
+func layer_speed(i: int) -> float:
+    return base_rotation_speed * pow(1.2, i)   # a fifth, multiplied
 ```
 
-Eight objects at even angles round a circle, hung from one frame. Turn the frame and the whole ring sweeps. Stack frames, give each its own speed, and the stack diverges and realigns over time. That is the whole machinery of this hall: a parent that turns, and children that inherit the turn.
+Two rules and one counter. The corridor adds ten degrees for every segment you pass; the cake multiplies its speed by a fifth for every layer you look up. That is the whole machinery of this hall: an index, and something that reads it.
 
-## Still things first
+## What you can trust
 
 <!-- @righttriangle -->
 
-A right triangle, on its own by the entrance. Move it anywhere, turn it any way, and the ninety degrees between its two short sides is still ninety. It is here as a diagnostic: with everything in this hall turning, you need one thing whose angle you can trust.
+A right triangle, on its own by the entrance, with no moving part anywhere in it. Move it, turn it, and the ninety degrees between its two short sides is still ninety. It is here as a diagnostic: with everything in this hall turning, you need one thing whose angle you can trust.
 
 <!-- @dark_sphere -->
 
-The dark sphere, still, as it has been in every hall. The spectacle needs a witness that does not spin.
+The dark sphere, which is not still either. It turns once in about forty seconds, slowly enough that you have to look away and back to catch it doing anything. In this hall even the witness is spinning, and the only thing that is not is the triangle.
 
 <!-- @ -->
 
@@ -30,7 +28,7 @@ The dark sphere, still, as it has been in every hall. The spectacle needs a witn
 
 <!-- @boolean_tunnel -->
 
-Along the east wall, a corridor built from eighteen hollowed cubes, three metres apart, and every one of them turned ten degrees more than the one before. Ten degrees is nothing. Eighteen times ten is a half turn, and over fifty-one metres it is a twist you walk through with your whole body leaning into it. Nobody designed the twist. A local rule about one segment and its neighbour was repeated, and the repetition became a building. This is rotation as navigable structure, and it is the argument of the hall in one object.
+Along the east wall, a corridor of eighteen hollowed cubes set end to end, each three metres deep, each rolled ten degrees further about the corridor's own axis than the one before. Ten degrees is nothing. Seventeen of them is a hundred and seventy, and the corridor spends fifty-one metres rolling that far about the line you walk along. The ground stays flat. Everything round it does not. Nobody designed the twist: a local rule about one segment and its neighbour was repeated, and the repetition became a building.
 
 <!-- @baggage_grammar -->
 
@@ -42,16 +40,16 @@ Two cakes of three tiers each, assembled from the same tiers. One was turned and
 
 <!-- @pick_up_cube -->
 
-A cube to carry through the procession, so that something in the hall moves because you moved it.
+A cube near the end, bobbing and turning once every three seconds on its own axis, which makes it the fastest thing turning in this hall: quicker than the carousel's top layer, and the only turn here you can end. Walk into it and it is gone.
 
 <!-- @carousel_cake -->
 
-At the end, the carousel itself: eight circular layers stacked into a cake, and every layer obeys one rule, turn a fifth faster than the layer below. The bottom layer turns slowly. The top turns three and a half times as fast, and between them the layers slide past each other in patterns that repeat and interfere and repeat. The rule is the same at every level. Only the multiplier compounds, and it compounds until the object reads as rhythm rather than as a spin. Stand close. Watch the layers turn, and forget which way you were going.
+At the end, the carousel itself, and it is bigger than it sounds: three thin plates at your ankles, a three-metre column above them, then four slabs widening to a brim ten metres across, six metres up, spanning most of the hall. Eight layers, one rule, each turning a fifth faster than the one below. The bottom takes twelve seconds to come round. The top takes three and a half. Between them the layers slide past each other in patterns that repeat and interfere and repeat. The rule is the same at every level; only the multiplier compounds, and it compounds until the object reads as rhythm rather than as a spin. Stand close, and forget which way you were going.
 
 <!-- @ -->
 
 ## Perpetual return
 
-Translation goes somewhere and stops. Rotation goes round and comes back, and if you let it run it never has to stop, which is why a carousel is a spectacle and a walkway is not. What this hall adds to the chapter is time. A rule repeated in space gave you a twisted tunnel; a rule repeated in time gives you a cake that never settles. Both are the same ten degrees, and the difference between a building and a performance is only whether the repetition has finished.
+Translation goes somewhere and stops. Rotation goes round and comes back, and if you let it run it never has to stop, which is why a carousel is a spectacle and a walkway is not. What this hall adds to the chapter is time. One is added and one is multiplied: ten degrees per segment down the corridor, a fifth per layer up the cake. The difference between a building and a performance is only whether the repetition has finished.
 
-Next: the last of the three moves, and the one that changes you.
+Next: the last of the three moves, and the one that changes what everything else is worth.

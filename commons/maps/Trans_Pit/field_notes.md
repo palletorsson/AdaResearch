@@ -21,13 +21,14 @@
   35 dmg per 0.3 s tick).
 - Structure heights: 5 walls, 3 floor, lower cells around the hazards.
 
-## Verified critique (2026-09-02) — NOT YET APPLIED
+## Verified critique (2026-09-02) — APPLIED
 
 A ten-agent panel (seven room critics, an arc reader, an exactness sweep, one
 adversarial editor) judged this text against the primitives rooms and against the
 artifact scripts. **8 findings survived the editor, 5 of them factually wrong.**
-Twenty-two findings across the chapter were rejected as taste. Nothing below is
-applied yet; the rewrite is a whole-chapter job in one scope.
+Twenty-two findings across the chapter were rejected as taste. Every finding below
+was applied in the whole-chapter rewrite of 2026-09-02; the quotes are what the
+text used to say.
 
 The chapter-wide error: **a `pick_up_cube` cannot be carried.** No pickable, no
 rigid body, no grab. An `Area3D` whose `body_entered` fires `collect()`, adds a
@@ -99,3 +100,13 @@ without opening the scene produced wrong numbers twice in this chapter.
 **Fix.** The pit is two cells along the block's line, and the block crosses it. Not every hole in this corridor burns, and the ones that do not are the same distance down.
 
 **Evidence.** Verified: structure height-1 cells at (3,5), (3,9), (4,3), (4,7), (4,8), (5,9), (6,6), (6,8), against h:fire only at (3,5), (3,9), (5,3), (5,9). Five height-1 holes carry no fire.
+
+## Open after the rewrite
+
+- **The grower blocks are inert and the text now says so.** Their tokens carry
+  `#min:0.3#max:3.5#speed:0.3`, but `min` and `max` are not in
+  `CONFIG_PARAM_NAMES`, so the grid's shorthand branch stores them as `true`
+  and the block keeps its defaults. The one-line repair is to add both keys to
+  that list, which changes how every map in the corpus parses those words, so
+  it is a ruling and not a text fix. Make it and the swelling sentence becomes
+  true again, with "a third of a metre" corrected to three tenths.
