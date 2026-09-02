@@ -7,8 +7,11 @@
 ## A figure is a stack of parts on a 64x128 canvas — head, neck, torso, hips,
 ## two legs, up to two arms, and sometimes one thing too many (a second head, a
 ## horn, a long neck) — every proportion drawn from a seeded RNG, so a seed IS a
-## body and the same seed is the same body on every machine. Grey with a darker
-## foot and a faint vertical grain; alpha one inside, zero outside, one pixel of
+## body and the same seed is the same body on every machine. Light grey to white
+## (2026-08-29, Palle: "can you make the silhouettes white or light grey?" —
+## they began black, and against the museum's plaster a black figure read as a
+## hole in the wall rather than a body in the room), a slightly darker foot so it
+## stands on something, a faint grain; alpha one inside, zero outside, one pixel of
 ## soft edge so it does not shimmer at a grazing angle. Mirrored across x seven
 ## times in ten, which is what makes it read as a Doom sprite and not a blot.
 ##
@@ -37,7 +40,7 @@ static func make_image(seed: int) -> Image:
 
 	# ── the body plan, in canvas units (x 0..1 across, y 0 top .. 1 feet) ──
 	var mirror: bool = rng.randf() < 0.7
-	var grey: float = rng.randf_range(0.04, 0.30)          # the whole figure's value
+	var grey: float = rng.randf_range(0.78, 0.97)          # the whole figure's value: light grey to white
 	var head_r: float = rng.randf_range(0.055, 0.11)
 	var neck_h: float = rng.randf_range(0.0, 0.09)
 	var torso_w: float = rng.randf_range(0.14, 0.30)
@@ -97,9 +100,11 @@ static func make_image(seed: int) -> Image:
 		_:
 			pass
 
-	# the darker foot: value falls off toward the ground so it stands ON something
+	# the darker foot: value falls off toward the ground so it stands ON something.
+	# Gentle, now that the figure is light — a white body with a black foot is a
+	# chess piece, not a person
 	for py in range(H):
-		var fall: float = 1.0 - 0.45 * pow(float(py) / float(H - 1), 3.0)
+		var fall: float = 1.0 - 0.22 * pow(float(py) / float(H - 1), 3.0)
 		for px in range(W):
 			var c := img.get_pixel(px, py)
 			if c.a > 0.0:
@@ -202,5 +207,5 @@ static func _soften(img: Image) -> void:
 						n += 1
 			if n > 0:
 				var near: Color = src.get_pixel(clampi(px, 1, W - 2), clampi(py, 1, H - 2))
-				var v: float = near.r if near.a > 0.0 else 0.12
+				var v: float = near.r if near.a > 0.0 else 0.85
 				img.set_pixel(px, py, Color(v, v, v, float(n) / 8.0 * 0.6))

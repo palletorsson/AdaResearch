@@ -699,19 +699,21 @@ func hit_by_catalyst_mode(color: Color, mode_id: String) -> void:
 
 func _apply_state_visuals_for_personality(p: String) -> void:
 	if body == "silhouette" and _sil_mat != null:
-		# grey until it is not. The figure is drawn grey and the material is a
-		# multiplier over it: a foe is exactly the drawing; wary reddens it; a
-		# friend is the same silhouette gone PINK — the one-dimensional man
-		# colours in, which is the whole arc in one tint.
+		# white until it is not. The figure is drawn light grey to white and the
+		# material is a multiplier over it: a foe is exactly the drawing; wary
+		# reddens it; a friend is the same silhouette gone PINK — the one-
+		# dimensional man colours in, which is the whole arc in one tint. These
+		# multiply a ~0.9 grey, so none of them exceed 1: the first version was
+		# tuned for a 0.2 grey and would have blown a white figure out to white.
 		match p:
 			"wary":
-				_sil_mat.albedo_color = Color(1.9, 0.9, 0.85)
+				_sil_mat.albedo_color = Color(1.0, 0.62, 0.55)
 			"neutral":
-				_sil_mat.albedo_color = Color(1.8, 1.5, 1.4)
+				_sil_mat.albedo_color = Color(1.0, 0.86, 0.80)
 			"curious":
-				_sil_mat.albedo_color = Color(2.4, 1.6, 2.0)
+				_sil_mat.albedo_color = Color(1.0, 0.72, 0.90)
 			"friend":
-				_sil_mat.albedo_color = Color(4.2, 1.5, 2.9)   # grey x this = hot pink
+				_sil_mat.albedo_color = Color(1.0, 0.36, 0.72)   # white x this = hot pink
 			_:
 				_sil_mat.albedo_color = Color(1, 1, 1, 1)
 		return
