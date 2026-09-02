@@ -1,113 +1,76 @@
 # Point Triangle Context
 
-Place a triangle among other shapes. Relationships emerge.
+Everything the machine draws, it draws in triangles. This room is about why.
 
-Spawn a triangle and a square.
-
-```gdscript
-func spawn_triangle_and_square() -> void:
-    spawn_triangle(Vector3(-2, 0, 0))
-    spawn_square(Vector3(2, 0, 0))
-```
-
-Two shapes at different positions. Their relationship becomes a feature of the map.
-
-Measure the shortest distance between them.
+Three points always share a plane. Find it.
 
 ```gdscript
-func shortest_distance(shape_a: Array, shape_b: Array) -> float:
-    var min_dist: float = INF
-    for va in shape_a:
-        for vb in shape_b:
-            min_dist = min(min_dist, va.distance_to(vb))
-    return min_dist
+func triangle_normal(a: Vector3, b: Vector3, c: Vector3) -> Vector3:
+    return (b - a).cross(c - a).normalized()
 ```
 
-Brute-force vertex-to-vertex check. For shapes with few vertices (triangles, squares), this is fast.
+Two edges out of one corner, crossed, give the direction the face looks in. There is no fourth point to disagree, so a triangle is flat by necessity, and a flat face is something a renderer can shade with one number.
 
-Detect whether two shapes overlap.
+Measure the face.
 
 ```gdscript
-func shapes_overlap(a: Array, b: Array) -> bool:
-    var a_bounds := compute_aabb(a)
-    var b_bounds := compute_aabb(b)
-    return a_bounds.intersects(b_bounds)
+func triangle_area(a: Vector3, b: Vector3, c: Vector3) -> float:
+    return (b - a).cross(c - a).length() * 0.5
 ```
 
-The axis-aligned bounding box test is conservative — it may return true when shapes are close but not touching. For exact overlap, use separating-axis theorem.
+The same cross product, before normalising, has a length: twice the area. Direction and size out of one operation, the way the vector room split them.
 
-Render shapes with different colours by type.
+Fill any closed loop with triangles.
 
 ```gdscript
-func color_by_type(shape_type: String) -> Color:
-    match shape_type:
-        "triangle": return Color.RED
-        "square": return Color.BLUE
-        "pentagon": return Color.GREEN
-    return Color.WHITE
+func fan_triangulate(loop: Array[Vector3]) -> Array:
+    var tris: Array = []
+    for i in range(1, loop.size() - 1):
+        tris.append([loop[0], loop[i], loop[i + 1]])
+    return tris
 ```
 
-A visual legend emerges from the colour assignment. Shape type is readable at a glance.
+Pick one corner and fan out from it. A loop of n points becomes n - 2 triangles, and that is what every surface in this museum is underneath: a closed outline, fanned.
 
-Group shapes into scenes.
+Place a triangle from three lengths alone.
 
 ```gdscript
-func group_into_scene(shapes: Array) -> Node3D:
-    var scene := Node3D.new()
-    for s in shapes:
-        scene.add_child(s)
-    return scene
+func third_vertex(a: float, b: float, c: float) -> Vector2:
+    # first side laid along x, from (0, 0) to (a, 0)
+    var x := (a * a + b * b - c * c) / (2.0 * a)
+    var y := sqrt(maxf(b * b - x * x, 0.0))
+    return Vector2(x, y)   # Vector2(x, -y) is the same triangle, mirrored
 ```
 
-Grouping enables uniform transformations. Move the scene and every shape moves with it.
+Nothing but Pythagoras twice. Three numbers, and the third corner has exactly one place to be, plus its reflection. Lengths fix the shape, and the shape fixes every angle without anyone measuring one.
 
-Compute the convex hull of combined vertex sets.
+Now try four rods.
 
 ```gdscript
-func convex_hull(points: Array) -> Array:
-    # Graham scan (simplified for 2D)
-    points.sort_custom(func(a, b): return a.x < b.x or (a.x == b.x and a.y < b.y))
-    var lower: Array = []
-    for p in points:
-        while lower.size() >= 2 and cross2d(lower[-2], lower[-1], p) <= 0:
-            lower.pop_back()
-        lower.append(p)
-    return lower
+func quad_from_rods(a: float, b: float, lean: Vector2) -> Array[Vector2]:
+    lean = lean.normalized() * b   # any direction at all: the rods do not care
+    return [Vector2.ZERO, Vector2(a, 0.0), Vector2(a, 0.0) + lean, lean]
 ```
 
-The convex hull wraps all the points as tightly as possible. Shapes' relationships become visible as the hull's shape.
+Four lengths and a free direction. Every value of `lean` is a different quad with the same four sides. Four rods with hinges lean; three rods with hinges hold. That difference is why a truss is triangles.
 
-Define proximity as a relationship.
+Ask whether four points are flat.
 
 ```gdscript
-func are_neighbours(shape_a: Array, shape_b: Array, threshold: float = 0.5) -> bool:
-    return shortest_distance(shape_a, shape_b) < threshold
+func is_planar(p: Array[Vector3], tol: float = 0.001) -> bool:
+    var n := (p[1] - p[0]).cross(p[2] - p[0]).normalized()
+    return absf((p[3] - p[0]).dot(n)) < tol
 ```
 
-Shapes within the threshold distance are neighbours. The map's spatial relationships are now queryable.
+Three points pass by construction. The fourth may sit off the plane, and when it does the machine has no face to draw, so it splits the quad into two triangles and the split is a fold.
 
-You can now place shapes in space, measure their proximity, test overlap, and compute the hull containing them all. Primitives_Polythedra will next lift the 2D polygons into 3D polyhedra.
-
-Measure a shape's centroid.
+Ask which side you are on.
 
 ```gdscript
-func centroid(vertices: Array) -> Vector3:
-    var sum := Vector3.ZERO
-    for v in vertices:
-        sum += v
-    return sum / vertices.size()
+func faces_you(a: Vector3, b: Vector3, c: Vector3, eye: Vector3) -> bool:
+    return triangle_normal(a, b, c).dot(eye - a) > 0.0
 ```
 
-The arithmetic mean of the vertices. The centroid is the shape's balance point.
+Swap `b` and `c` and the same three points face the other way. A triangle has a front, decided by the order its corners are listed in, and the renderer draws only the front unless told otherwise.
 
-Rotate all shapes around a shared centre.
-
-```gdscript
-func rotate_group(shapes: Array, centre: Vector3, axis: Vector3, angle: float) -> void:
-    for shape in shapes:
-        var offset: Vector3 = shape.global_position - centre
-        var rotated: Vector3 = offset.rotated(axis, angle)
-        shape.global_position = centre + rotated
-```
-
-Every shape pivots around the same point. The group rotates as a rigid body.
+You can now find the plane three points share, fill a loop with triangles, place a triangle from its lengths, show why a quad leans where a triangle holds, and tell a face's front from its back. Primitives_Polythedra will next meet three faces at a corner.
