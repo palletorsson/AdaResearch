@@ -1,101 +1,64 @@
 # Primitives Portals
 
-A portal links two points. Enter one, exit the other, regardless of the distance between them.
+The number goes up, and the circle does not arrive.
 
-Define a portal pair.
-
-```gdscript
-class_name Portal extends Area3D
-
-@export var linked_portal: Portal
-
-func _on_body_entered(body: Node3D) -> void:
-    if linked_portal:
-        body.global_position = linked_portal.global_position
-```
-
-Two portals reference each other. Entering one moves the body to the other.
-
-Preserve the entry orientation.
+Draw a circle the only way the machine can.
 
 ```gdscript
-func _on_body_entered(body: Node3D) -> void:
-    if linked_portal == null: return
-    var entry_offset: Vector3 = body.global_position - global_position
-    var entry_rotation: Basis = body.global_transform.basis
-    body.global_position = linked_portal.global_position + entry_offset
-    body.global_transform.basis = entry_rotation
+func polygon_perimeter(n: int, r: float) -> float:
+    var total := 0.0
+    for i in n:
+        var a := Vector2.RIGHT.rotated(TAU * i / n) * r
+        var b := Vector2.RIGHT.rotated(TAU * (i + 1) / n) * r
+        total += a.distance_to(b)
+    return total
 ```
 
-The offset relative to the entry portal is preserved. The body arrives at the exit with the same orientation it entered.
+n points evenly round, joined by n straight edges. That is every ring, torus and portal in this hall.
 
-Handle velocity transfer.
+Measure what is missing.
 
 ```gdscript
-func _on_body_entered(body: RigidBody3D) -> void:
-    if linked_portal == null: return
-    body.global_position = linked_portal.global_position
-    # Velocity reorients if portals face different directions
-    var in_to_out_rotation: Basis = linked_portal.global_transform.basis * global_transform.basis.inverse()
-    body.linear_velocity = in_to_out_rotation * body.linear_velocity
+func gap_to_circle(n: int, r: float) -> float:
+    return TAU * r - polygon_perimeter(n, r)
 ```
 
-When the two portals face different directions, the body's velocity rotates through the difference. The direction is preserved relative to each portal's local frame.
+The true circumference is TAU times the radius. The polygon's is always less, and the gap is positive for every n you can name. Archimedes doubled from a hexagon to a 96-gon and boxed the ratio between 3.1408 and 3.1429. The 96-gon gives 3.1410. It is close. It is not there, and no finite doubling gets there.
 
-Prevent immediate re-entry.
+Walk toward the far end the way Achilles does.
 
 ```gdscript
-var cooldown_for_bodies: Dictionary = {}  # body -> time_last_teleported
-const COOLDOWN_MS := 100
-
-func can_teleport(body: Node) -> bool:
-    var now: int = Time.get_ticks_msec()
-    if body in cooldown_for_bodies and now - cooldown_for_bodies[body] < COOLDOWN_MS:
-        return false
-    cooldown_for_bodies[body] = now
-    return true
+func achilles(steps: int) -> float:
+    # each step covers half of what remains of one unit of track
+    var covered := 0.0
+    for i in steps:
+        covered += (1.0 - covered) * 0.5
+    return covered
 ```
 
-Without the cooldown, a body might teleport, land inside the exit portal, and teleport back immediately. The cooldown ensures one-way passage.
+Ten steps cover 0.999 of the track. A hundred would cover more. In mathematics no number of steps covers all of it, because every step leaves half of what was left. Run the code and watch what the machine does instead: at fifty-four steps `covered` becomes exactly `1.0`, because the remaining half is smaller than a float can hold next to one. The last number a float can hold below one is one minus two to the fifty-third, and the next halving rounds away. The machine arrives. It arrives by running out of digits, and that arrival is exactly as honest as the sphere in the last room.
 
-Visualise the portal mouth.
+Count a surface with a hole in it.
 
 ```gdscript
-func _ready() -> void:
-    var mouth := MeshInstance3D.new()
-    mouth.mesh = QuadMesh.new()
-    mouth.mesh.size = Vector2(1.5, 2.0)
-    var mat := StandardMaterial3D.new()
-    mat.emission_enabled = true
-    mat.emission = Color.CYAN
-    mouth.material_override = mat
-    add_child(mouth)
+func torus_counts(rings: int, segments: int) -> Dictionary:
+    # a torus mesh of rings x segments quads
+    var v := rings * segments
+    var f := rings * segments
+    var e := 2 * rings * segments
+    return {"vertices": v, "edges": e, "faces": f, "euler": v - e + f}
 ```
 
-A glowing quad marks the portal's location. The colour of each portal matches its pair.
+For every closed solid so far, vertices minus edges plus faces was two. For a torus it is zero, at any resolution. The hole is not a feature of the surface; it is a change in the number the surface cannot help giving you.
 
-Render what lies beyond the portal.
+Cross a portal.
 
 ```gdscript
-func setup_portal_camera() -> void:
-    var cam := Camera3D.new()
-    cam.position = linked_portal.global_position
-    var viewport := SubViewport.new()
-    viewport.add_child(cam)
-    # Render to texture, apply as portal surface material
+func through_portal(entry: Transform3D, exit: Transform3D, velocity: Vector3) -> Vector3:
+    var turn := exit.basis * entry.basis.inverse()
+    return turn * velocity
 ```
 
-A SubViewport renders the scene from the linked portal's position. The rendered image maps onto the entry portal's surface, showing the destination as seen from the other side.
+A portal does not cover the distance between its two mouths. It changes the frame: whatever direction you carried in is rotated by the difference between the mouths and handed back at the same speed. Crossing is a transformation, not a transport.
 
-Test for a valid portal pair.
-
-```gdscript
-func is_valid_pair() -> bool:
-    if linked_portal == null: return false
-    if linked_portal.linked_portal != self: return false
-    return true
-```
-
-Both portals must reference each other. One-way links would allow entry but not return.
-
-You can now link two points in space, preserving orientation and velocity through the passage, with correct cooldown and visualisation. Primitives_Melencolia will next place geometric primitives in a Dürer-referenced still-life scene.
+You can now draw the machine's circle and measure how far it falls short, watch a halving sequence fail to arrive in mathematics and arrive in a float, count the hole in a torus, and cross a portal by rotating a frame. Primitives_Melencolia will next stand inside the limit and not reach it either.
