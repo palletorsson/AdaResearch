@@ -30,6 +30,32 @@ or truth, the aesthetic mind."
   and it is the thesis's irreducible remainder turned into an appetite.
 - Do not resolve it. The room ends the chapter on "might or might not."
 
+## Written (2026-09-02)
+
+- **Not resolved, as ruled.** The closing section is titled "Might or might
+  not" and holds both directions: the universe closed under every operation
+  (`go_anywhere` returns a `Vector3`, always), and the abstract wanted for
+  itself (the square that sums for no reason). "Whether that wanting is the way
+  out or the thing itself, escape or truth, is the question the engraving has
+  kept open for five hundred years."
+- **The tableau is read as the chapter.** Compass = Point_Lines, hourglass =
+  Point_Trace, magic square = the grid with numbers in every cell, ladder =
+  the walk, cut cube = the corner room. "This is not a picture of melancholy.
+  It is a picture of mastery, and mastery is what she is melancholy about."
+- **Every number checked.** Dürer's square: sixteen lines all 34, 15 and 14 in
+  the bottom row, a permutation of 1..16; a swapped pair breaks it (the
+  negative). The cut cube: 12, 18, 8, Euler 2. `probe_melencolia_tutorial.gd`.
+- **The pyramid ×4 at four scales is given a meaning, not dressed:** the same
+  count four times at four sizes is "the doodle of someone who could build
+  anything," and scale is the transformation chapter knocking.
+- **The puzzle's honesty is the KEEP line made literal.** Its own description
+  says the detector checks the 4-cycle and never the squareness; a rhombus
+  passes and the prism spawns anyway. "Master the tools. Recognise their
+  limits. Build anyway."
+- The tutorial kept its scene-composition register and gained the square,
+  the solid and the closure function. `melencolia_chalkboard` exists and is
+  not placed; its line "finite, exact, complete" is used in prose.
+
 ## The assessment, recorded
 
 Asked on 2026-09-02 whether the whole primitives thread is unique, good and of

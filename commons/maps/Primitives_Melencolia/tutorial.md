@@ -125,3 +125,64 @@ func compose_melencolia() -> void:
 Each artifact is a primitive from the sequence made ornamental. The sequence's geometric vocabulary furnishes a 16th-century still life.
 
 You can now compose a scene from the sequence's geometric primitives, animated via particle systems and orchestrated into a Dürer-referenced tableau. The sequence closes here; the next sequence begins in the adjacent corridor.
+
+Check the square the angel is not looking at.
+
+```gdscript
+func durer_square() -> Array:
+    return [[16, 3, 2, 13],
+            [5, 10, 11, 8],
+            [9, 6, 7, 12],
+            [4, 15, 14, 1]]
+
+func line_sums(sq: Array) -> Array:
+    var sums: Array = []
+    for r in 4:
+        sums.append(sq[r][0] + sq[r][1] + sq[r][2] + sq[r][3])
+    for c in 4:
+        sums.append(sq[0][c] + sq[1][c] + sq[2][c] + sq[3][c])
+    sums.append(sq[0][0] + sq[1][1] + sq[2][2] + sq[3][3])
+    sums.append(sq[0][3] + sq[1][2] + sq[2][1] + sq[3][0])
+    sums.append(sq[0][0] + sq[0][3] + sq[3][0] + sq[3][3])   # the corners
+    sums.append(sq[1][1] + sq[1][2] + sq[2][1] + sq[2][2])   # the centre
+    for qr in [0, 2]:
+        for qc in [0, 2]:
+            sums.append(sq[qr][qc] + sq[qr][qc + 1] + sq[qr + 1][qc] + sq[qr + 1][qc + 1])
+    return sums
+```
+
+Sixteen lines, and every one of them is 34: four rows, four columns, two diagonals, the corners, the centre, the four quarters. The bottom row reads 4, 15, 14, 1, and the middle two are the year. It uses every number from one to sixteen exactly once, so nothing is left over and nothing is missing. It is for nothing. It is finite, exact and complete.
+
+```gdscript
+func is_complete(sq: Array) -> bool:
+    var seen: Array = []
+    for row in sq:
+        for v in row:
+            seen.append(v)
+    seen.sort()
+    return seen == range(1, 17)
+```
+
+Count the solid at her feet.
+
+```gdscript
+func cut_cube_counts() -> Dictionary:
+    # a cube with two opposite corners sliced off
+    var v := 8 - 2 + 6      # each cut removes a corner and leaves a triangle of three
+    var e := 12 + 6         # each cut adds three edges
+    var f := 6 + 2          # each cut adds one face
+    return {"vertices": v, "edges": e, "faces": f, "euler": v - e + f}
+```
+
+Twelve, eighteen, eight. Two. The number the chapter has been giving you since the corner, once more, on the last solid.
+
+Try to leave.
+
+```gdscript
+func go_anywhere(from: Vector3, by: Transform3D) -> Vector3:
+    return by * from
+```
+
+Every transformation of a position is a position. There is no function that takes a `Vector3` and returns somewhere that is not one. The universe you have built in this chapter is closed under everything you can do in it, and the next chapter is the whole of what you can do.
+
+You can now check that a finite object is exact and complete, count the last solid, and see that no operation leads out. Transformation is next, and it is about the one thing this chapter never did: moving.
