@@ -13,7 +13,9 @@ extends SceneTree
 const BODIES := "res://commons/artifacts/dream_bodies/dream_bodies.tscn"
 const FIGURES := ["rocaille", "stijl_robot", "panel_robot", "stella_wall", "dragon", "sea_forms",
 	"coral_polyp", "tube_reef", "david_drape", "dubuffet", "garet_still", "kruger_suit",
-	"oni_dragon", "lava_bloom"]
+	"oni_dragon", "lava_bloom", "asawa_wire", "nana_gloss", "hicks_fiber", "vasarely_beast",
+	"panton_pop", "hokusai_kimono", "tatlin_red", "hadid_shell", "mosaic_body",
+	"paik_light", "batik_beast", "gehry_metal", "griffin_plume", "brass_stamen"]
 const REPORT := "res://ada_run/dream_bodies_probe.txt"
 
 var _lines: Array[String] = []
@@ -52,7 +54,16 @@ func _run() -> void:
 					first = false
 				else:
 					box = box.merge(a)
-			stats.append({"n": meshes.size(), "no_mat": no_mat, "box": box})
+			# A FINGERPRINT, not a bounding box. batik_beast draws its whole pose
+			# from the seed and still measured "identical" to a 2 cm box test: a
+			# body whose silhouette is nearly normalised moves its parts without
+			# moving its extents. So: the sum of every mesh origin, weighted by
+			# its index, which a millimetre anywhere changes.
+			var fp: float = 0.0
+			for mi_i in range(meshes.size()):
+				var mo: Vector3 = (meshes[mi_i] as MeshInstance3D).global_transform.origin
+				fp += (mo.x * 1.7 + mo.y * 2.3 + mo.z * 3.1) * float(mi_i + 1)
+			stats.append({"n": meshes.size(), "no_mat": no_mat, "box": box, "fp": fp})
 			b.queue_free()
 			await process_frame
 		var s1: Dictionary = stats[0]
@@ -72,7 +83,8 @@ func _run() -> void:
 			"%s: base y %.2f, %.2f m tall, %.2f m across (limits %.1f..%.2f tall, %.1f across)" % [fig, box.position.y, h, w, min_h, max_h, max_w],
 			"%s: off the floor or out of size" % fig)
 		var b2: AABB = s2["box"]
-		var differs: bool = int(s2["n"]) != n or (b2.size - box.size).length() > 0.02 or (b2.position - box.position).length() > 0.02
+		var differs: bool = int(s2["n"]) != n or absf(float(s2["fp"]) - float(s1["fp"])) > 0.001 \
+			or (b2.size - box.size).length() > 0.002 or (b2.position - box.position).length() > 0.002
 		_check(differs, "%s: seed 2 differs from seed 1: %s" % [fig, str(differs)], "%s: seed ignored" % fig)
 	var ok: bool = _fails.is_empty()
 	_lines.append("[probe] %s%s" % ["PASS" if ok else "FAIL", "" if ok else " — " + ", ".join(_fails)])

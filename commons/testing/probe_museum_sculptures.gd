@@ -18,9 +18,11 @@ extends SceneTree
 const MUSEUM := "res://commons/scenes/endless_museum.tscn"
 const TRIAL := "res://ada_run/_trial_art_control.json"
 const REPORT := "res://ada_run/museum_sculptures_probe.txt"
-const FIGURES := ["rocaille", "stijl_robot", "panel_robot", "dragon", "sea_forms",
-	"coral_polyp", "tube_reef", "david_drape", "dubuffet", "garet_still", "kruger_suit",
-	"oni_dragon", "lava_bloom", "stella_wall"]
+const FIGURES := ["rocaille", "stijl_robot", "panel_robot", "dragon", "sea_forms", "coral_polyp",
+	"tube_reef", "david_drape", "dubuffet", "garet_still", "kruger_suit", "oni_dragon",
+	"lava_bloom", "asawa_wire", "nana_gloss", "hicks_fiber", "vasarely_beast", "panton_pop",
+	"hokusai_kimono", "tatlin_red", "hadid_shell", "mosaic_body", "paik_light",
+	"batik_beast", "gehry_metal", "griffin_plume", "brass_stamen", "stella_wall"]
 
 var _lines: Array[String] = []
 var _fails: Array[String] = []

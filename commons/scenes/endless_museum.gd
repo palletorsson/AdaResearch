@@ -392,7 +392,7 @@ func _load_showing_cards() -> void:
 		if k == "|":
 			continue
 		if not _cards_seen.has(k):
-			_cards_seen[k] = []
+			_cards_seen[k]
 		(_cards_seen[k] as Array).append(c)
 
 
@@ -13795,9 +13795,11 @@ func _dress_fixtures(seg: Node3D, solid: StaticBody3D, tile: Array, w: int, zbas
 ## and a map edit would be undone on the next rebuild, so a body that belongs to
 ## the building rather than to the curriculum belongs here, beside the benches
 ## and the props, where the walk map is already in scope.
-const SCULPT_FIGURES: Array[String] = ["rocaille", "stijl_robot", "panel_robot", "dragon", "sea_forms",
-	"coral_polyp", "tube_reef", "david_drape", "dubuffet", "garet_still", "kruger_suit",
-	"oni_dragon", "lava_bloom", "stella_wall"]
+const SCULPT_FIGURES: Array[String] = ["rocaille", "stijl_robot", "panel_robot", "dragon", "sea_forms", "coral_polyp",
+	"tube_reef", "david_drape", "dubuffet", "garet_still", "kruger_suit", "oni_dragon",
+	"lava_bloom", "asawa_wire", "nana_gloss", "hicks_fiber", "vasarely_beast", "panton_pop",
+	"hokusai_kimono", "tatlin_red", "hadid_shell", "mosaic_body", "paik_light",
+	"batik_beast", "gehry_metal", "griffin_plume", "brass_stamen", "stella_wall"]
 
 func _dress_sculptures(seg: Node3D, _tile: Array, w: int, h: int, zbase: int, _deal: Dictionary) -> void:
 	if seg == null or not is_instance_valid(seg):

@@ -21,13 +21,17 @@ class_name DreamBodies
 ## the museum gives it; it is looked at.
 
 const BODY_DIR := "res://commons/artifacts/dream_bodies/bodies/"
-const FIGURES: Array[String] = ["rocaille", "stijl_robot", "panel_robot", "stella_wall", "dragon",
-	"sea_forms", "coral_polyp", "tube_reef", "david_drape", "dubuffet", "garet_still",
-	"kruger_suit", "oni_dragon", "lava_bloom"]
+const FIGURES: Array[String] = ["rocaille", "stijl_robot", "panel_robot", "stella_wall", "dragon", "sea_forms",
+	"coral_polyp", "tube_reef", "david_drape", "dubuffet", "garet_still", "kruger_suit",
+	"oni_dragon", "lava_bloom", "asawa_wire", "nana_gloss", "hicks_fiber", "vasarely_beast",
+	"panton_pop", "hokusai_kimono", "tatlin_red", "hadid_shell", "mosaic_body",
+	"paik_light", "batik_beast", "gehry_metal", "griffin_plume", "brass_stamen"]
 
-@export_enum("rocaille", "stijl_robot", "panel_robot", "stella_wall", "dragon",
-	"sea_forms", "coral_polyp", "tube_reef", "david_drape", "dubuffet", "garet_still",
-	"kruger_suit", "oni_dragon", "lava_bloom") var figure: String = "rocaille"
+@export_enum("rocaille", "stijl_robot", "panel_robot", "stella_wall", "dragon", "sea_forms",
+	"coral_polyp", "tube_reef", "david_drape", "dubuffet", "garet_still", "kruger_suit",
+	"oni_dragon", "lava_bloom", "asawa_wire", "nana_gloss", "hicks_fiber", "vasarely_beast",
+	"panton_pop", "hokusai_kimono", "tatlin_red", "hadid_shell", "mosaic_body",
+	"paik_light", "batik_beast", "gehry_metal", "griffin_plume", "brass_stamen") var figure: String = "rocaille"
 @export var seed: int = 1
 
 var _built_figure: String = ""
