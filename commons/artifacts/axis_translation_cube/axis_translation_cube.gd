@@ -371,6 +371,13 @@ func _on_speed_changed():
 
 
 func _process(delta):
+	# NOTHING TO MOVE, NOTHING TO DO. queue_free() is deferred, so between a
+	# rebuild (or a teardown) and the end of that frame this runs against nodes
+	# that are already gone — which is how `_cube_mesh.position = …` came to be
+	# assigned on "previously freed". The cube is the artifact: if it is not
+	# there, no updater below has anything to say either.
+	if not is_instance_valid(_cube_mesh):
+		return
 	_update_state(delta)
 	_update_cube_position()
 	_update_trail()
@@ -493,7 +500,39 @@ func _exit_tree():
 	for node in _created_nodes:
 		if is_instance_valid(node):
 			node.queue_free()
+	_forget_built()
+
+
+## Drop every handle to what the _create_* calls built.
+##
+##     Invalid assignment of property 'position' with value of type 'Vector3'
+##     on a base object of type 'previously freed'.
+##
+## This nulls ALL ten on purpose. The rebuild in apply_grid_config used to null
+## four by hand — _trail_mm, _trail_mmi, _label, _formula_label — immediately
+## after `for c in get_children(): c.queue_free()`, leaving _cube_mesh, _rail,
+## _start_marker, _end_marker and _speed_slider pointing at children it had just
+## killed. _exit_tree nulled none of them at all. A hand-written list of what to
+## forget is a list somebody will not finish, and the half of it that was missing
+## is exactly the half that crashed.
+##
+## Note what this protects that is NOT obvious: _update_trail, _update_labels and
+## _update_color_feedback guard themselves with `if not _trail_mm` / `if _label`,
+## and A FREED OBJECT IS TRUTHY. Those guards are not checks, they are the same
+## null-test mistake one line further on; they have only ever worked because
+## something nulled the handle first. This is that something.
+func _forget_built() -> void:
 	_created_nodes.clear()
+	_cube_mesh = null
+	_cube_material = null
+	_label = null
+	_formula_label = null
+	_rail = null
+	_start_marker = null
+	_end_marker = null
+	_trail_mm = null
+	_trail_mmi = null
+	_speed_slider = null
 
 
 # Public API
@@ -545,13 +584,9 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	for node in _created_nodes:
 		if is_instance_valid(node):
 			node.queue_free()
-	_created_nodes.clear()
 	for c in get_children():
 		c.queue_free()
-	_trail_mm = null
-	_trail_mmi = null
-	_label = null
-	_formula_label = null
+	_forget_built()      # all ten, not the four this used to remember
 	reset()
 	_create_cube()
 	_create_rail()
