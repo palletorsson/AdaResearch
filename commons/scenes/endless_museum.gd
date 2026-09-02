@@ -8717,6 +8717,9 @@ func _build_segment() -> void:
 		#     floor and a pink gun in the vestibule to meet them. Last, so the walk
 		#     map already knows every bench, prop and sealed cell.
 		_dress_foes(seg, tile, w, h, zbase, deal)
+		# 1e. THE DREAM BODIES. One statue on a plinth in every hall, from the six
+		#     families recreated out of Palle's diffusion panoramas.
+		_dress_sculptures(seg, tile, w, h, zbase, deal)
 	if _replay and not _bake_mode and _shot_path == "" and not _studio:
 		var dress_item := {"kind": "dress", "run": dress_pass, "seg": seg,
 			"seg_no": dress_seg_no,
@@ -13780,6 +13783,188 @@ func _dress_fixtures(seg: Node3D, solid: StaticBody3D, tile: Array, w: int, zbas
 ## 2.72 m, a vent in a coffer, a tray at 2.86 m and a floor grate flush with the
 ## deck are all walked under or over; erasing their cells would starve the
 ## autopilot's plan of the corridor it is supposed to use.
+## THE DREAM BODIES IN THE HALLS (2026-08-29, Palle: "put them in the museum").
+## Six sculpture families recreated from his Stable Diffusion panoramas; the
+## museum stands one on a plinth in every hall it dresses, the family chosen by
+## the hall's own key so a chapter reads as a room of related bodies and the next
+## chapter reads as another, and the SEED chosen by the same key so no two halls
+## carry the same individual. The relief hangs on the west wall instead of
+## standing on a plinth — it is a wall work, and it says so by its size.
+##
+## This is a DRESS, not a plan row: the museum stamps artifacts from em_plan.json
+## and a map edit would be undone on the next rebuild, so a body that belongs to
+## the building rather than to the curriculum belongs here, beside the benches
+## and the props, where the walk map is already in scope.
+const SCULPT_FIGURES: Array[String] = ["rocaille", "stijl_robot", "panel_robot", "dragon", "sea_forms", "stella_wall"]
+
+func _dress_sculptures(seg: Node3D, _tile: Array, w: int, h: int, zbase: int, _deal: Dictionary) -> void:
+	if seg == null or not is_instance_valid(seg):
+		return
+	if _L("sculptures", "on", 1.0) <= 0.5 or not _bodies_on:
+		return
+	var lv: Variant = _live.get("dream_bodies", null)
+	var scene_path: String = String((lv as Dictionary).get("scene", "")) if lv is Dictionary else ""
+	if scene_path == "" or not ResourceLoader.exists(scene_path):
+		push_warning("[em-art] dream_bodies is not alive in the registry — no statues")
+		return
+	var ch: String = String(seg.get_meta("em_chapter")) if seg.has_meta("em_chapter") else ""
+	var pearl: String = str(seg.get_meta("em_pearl")) if seg.has_meta("em_pearl") else ""
+	var key: String = "%s|%s" % [ch, pearl]
+	# a chapter's own family, and this hall's own individual
+	var allowed: Array = _layout_list("sculptures", "figures", SCULPT_FIGURES)
+	if allowed.is_empty():
+		allowed = SCULPT_FIGURES
+	var fig: String = String(allowed[absi(hash(ch)) % allowed.size()])
+	var body_seed: int = absi(hash(key)) % 2147483646 + 1
+	var rng := RandomNumberGenerator.new()
+	rng.seed = hash(key + "|art")
+	var ps: PackedScene = load(scene_path) as PackedScene
+	if ps == null:
+		return
+	var want: int = maxi(1, int(_L("sculptures", "per_hall", 1.0)))
+	var clear_m: float = _L("sculptures", "clear_m", 3.0)
+	var save := Vector2(float(w) / 2.0 + 0.5, float(zbase) + float(VESTIBULE_H) - 1.5)
+	var stood: Array = []
+	# THE RELIEF IS A WALL WORK. It is 2.4 m across and its shapes come off one
+	# face; on a plinth in the middle of a room it would be a billboard. It waits
+	# for the wall ray, like the weapon cabinets.
+	if fig == "stella_wall":
+		var vest_w: int = int(seg.get_meta("em_vest_w")) if seg.has_meta("em_vest_w") else LOBBY_W
+		_stand_relief_async(seg, zbase, key, ch, pearl, body_seed, vest_w)
+		return
+	var pool: Array = []
+	for k_v in _walk_cells:
+		var k: Vector2i = k_v
+		if k.y < zbase + VESTIBULE_H + 2 or k.y >= zbase + VESTIBULE_H + h - 2:
+			continue
+		if k.x < 2 or k.x >= w - 2:
+			continue
+		if Vector2(float(k.x) + 0.5, float(k.y) + 0.5).distance_to(save) < clear_m:
+			continue
+		pool.append(k)
+	pool.sort_custom(func(a: Vector2i, b: Vector2i) -> bool: return a.y < b.y or (a.y == b.y and a.x < b.x))
+	if pool.is_empty():
+		print("[em-art] %s: no open cell for a statue" % key)
+		return
+	for i in range(want):
+		var c: Vector2i = pool[rng.randi_range(0, pool.size() - 1)]
+		var lz: int = c.y - zbase
+		var at := Vector3(float(c.x) + 0.5, _stage_top_at(c.x, lz - VESTIBULE_H), float(lz) + 0.5)
+		var plinth_h: float = _L("sculptures", "plinth_m", 0.42)
+		# the plinth: the museum's own station plinth, as the gun's is
+		var plinth_scene: String = "res://commons/artifacts/station/station_plinth.tscn"
+		if ResourceLoader.exists(plinth_scene):
+			var pl: Node3D = (load(plinth_scene) as PackedScene).instantiate() as Node3D
+			if pl != null:
+				var pcfg: Dictionary = {"top_height": plinth_h, "cap_meters": 0.85, "width_cells": 1,
+					"depth_cells": 1, "top_style": "flat", "glow_light": false}
+				pl.name = "ArtPlinth%d" % i
+				pl.set_meta("artifact_lookup_name", "station_plinth")
+				for pk in pcfg:
+					pl.set_meta("config_" + String(pk), pcfg[pk])
+				if pl.has_method("apply_grid_config"):
+					pl.call("apply_grid_config", pcfg)
+				pl.position = at
+				seg.add_child(pl)
+		var solid: Node = seg.get_node_or_null("Collision")
+		if solid is StaticBody3D:
+			_add_col(solid as StaticBody3D, at + Vector3(0, plinth_h * 0.5, 0), Vector3(0.85, plinth_h, 0.85))
+		var n: Node3D = ps.instantiate() as Node3D
+		if n == null:
+			continue
+		var cfg: Dictionary = {"figure": fig, "seed": body_seed + i}
+		n.name = "DreamBody%d" % i
+		n.set_meta("artifact_lookup_name", "dream_bodies")
+		n.set_meta("em_sculpture", true)
+		for ck in cfg:
+			n.set_meta("config_" + String(ck), cfg[ck])
+			if String(ck) in n:
+				n.set(String(ck), cfg[ck])
+		if n.has_method("apply_grid_config"):
+			n.call("apply_grid_config", cfg)
+		n.position = at + Vector3(0, plinth_h, 0)
+		n.rotation_degrees = Vector3(0, rng.randf_range(-40.0, 40.0) + 180.0, 0)   # facing the way in
+		if _dressing_removed(ch, "furniture", "dream_bodies", i):
+			n.queue_free()
+			continue
+		for fr_v in _furniture_rules(ch, "furniture"):
+			var fr: Dictionary = fr_v
+			if String(fr.get("token", "")) == "dream_bodies" and int(fr.get("index", -1)) == i:
+				var o: Array = fr.get("offset", [])
+				if o.size() >= 3:
+					n.position += Vector3(float(o[0]), float(o[1]), float(o[2]))
+				if fr.has("rotation"):
+					n.rotation_degrees.y = float(fr["rotation"])
+		seg.add_child(n)
+		_edit_records.append({"node": n, "token": "dream_bodies", "kind": "furniture",
+			"from": [], "tile_cell": [], "rotation": n.rotation_degrees.y, "chapter": ch, "seg": seg, "index": i})
+		_inventory.append({"id": "%s|dream:%s" % [key, fig], "chapter": ch, "pearl": pearl,
+			"kind": "artifact", "token": "dream_bodies", "segment": _seg_no(seg),
+			"world": [snappedf(n.global_position.x, 0.1), snappedf(n.global_position.y, 0.1),
+				snappedf(n.global_position.z, 0.1)], "cell": [c.x, lz - VESTIBULE_H]})
+		_walk_cells.erase(c)
+		_walk_erased[c] = "art:dream_bodies"
+		stood.append({"figure": fig, "seed": body_seed + i, "cell": [c.x, c.y]})
+		pool.erase(c)
+		if pool.is_empty():
+			break
+	print("[em-art] %s: %s" % [key, str(stood)])
+
+
+## The relief on the hall's west wall, a frame later, once the walls are in the
+## physics world — the same ray the weapon cabinets ask.
+func _stand_relief_async(seg: Node3D, zbase: int, key: String, ch: String, pearl: String,
+		body_seed: int, vest_w: int) -> void:
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	if seg == null or not is_instance_valid(seg) or not is_inside_tree():
+		return
+	var lv: Variant = _live.get("dream_bodies", null)
+	var scene_path: String = String((lv as Dictionary).get("scene", "")) if lv is Dictionary else ""
+	if scene_path == "":
+		return
+	var lz: float = float(VESTIBULE_H) + 5.5
+	var y: float = 1.15
+	var face_x: float = 0.0
+	var w3d := get_world_3d()
+	var space := w3d.direct_space_state if w3d != null else null
+	if space != null:
+		var from := Vector3(float(vest_w) * 0.5, y, float(zbase) + lz)
+		var q := PhysicsRayQueryParameters3D.create(from, from + Vector3(-40.0, 0.0, 0.0))
+		q.collision_mask = 1
+		if _player != null and is_instance_valid(_player):
+			q.exclude = [_player.get_rid()]
+		var hit: Dictionary = space.intersect_ray(q)
+		if hit.is_empty():
+			print("[em-art] %s: no west wall for the relief" % key)
+			return
+		face_x = float((hit["position"] as Vector3).x)
+	var n: Node3D = (load(scene_path) as PackedScene).instantiate() as Node3D
+	if n == null:
+		return
+	var cfg: Dictionary = {"figure": "stella_wall", "seed": body_seed}
+	n.name = "DreamRelief"
+	n.set_meta("artifact_lookup_name", "dream_bodies")
+	n.set_meta("em_sculpture", true)
+	for ck in cfg:
+		n.set_meta("config_" + String(ck), cfg[ck])
+		if String(ck) in n:
+			n.set(String(ck), cfg[ck])
+	if n.has_method("apply_grid_config"):
+		n.call("apply_grid_config", cfg)
+	# its shapes come off its own -z face, so it turns to look east into the room
+	n.position = Vector3(face_x + 0.02, 0.35, lz)
+	n.rotation_degrees = Vector3(0, -90.0, 0)
+	seg.add_child(n)
+	_edit_records.append({"node": n, "token": "dream_bodies", "kind": "furniture",
+		"from": [], "tile_cell": [], "rotation": -90.0, "chapter": ch, "seg": seg, "index": 0})
+	_inventory.append({"id": "%s|dream:stella_wall" % key, "chapter": ch, "pearl": pearl,
+		"kind": "artifact", "token": "dream_bodies", "segment": _seg_no(seg),
+		"world": [snappedf(n.global_position.x, 0.1), snappedf(n.global_position.y, 0.1),
+			snappedf(n.global_position.z, 0.1)], "cell": [int(face_x), int(lz) - VESTIBULE_H]})
+	print("[em-art] %s: [{ \"figure\": \"stella_wall\", \"seed\": %d, \"x\": %.2f }]" % [key, body_seed, n.global_position.x])
+
+
 ## THE ONE-DIMENSIONAL MEN IN THE GREY HALLS (2026-08-29, Palle: "put silhouettes
 ## in the museum by default in the grey sequences ... but also give me a gun there
 ## so I defend myself"). A grey sequence is what soft_stages.json calls grey: no
@@ -18938,7 +19123,14 @@ func _compose_look(token: String) -> Dictionary:
 	if best_score >= 1e9:
 		return {}
 	var eye: Vector3 = best + Vector3(0.0, EYE, 0.0)
-	var to: Vector3 = Vector3(at.x, maxf(0.6, at.y), at.z) - eye       # aim at the body itself (a floor mark: its floor)
+	# AIM AT THE MIDDLE OF A TALL BODY, not its feet. The inventory stores where a
+	# body STANDS, which for a 1.6 m statue on a plinth is its base: aiming there
+	# cut the head off every dream body. Only the tall families lift the aim, so
+	# every other look shot is the shot it was.
+	var aim_y: float = maxf(0.6, at.y)
+	if token == "dream_bodies":
+		aim_y = at.y + 0.75
+	var to: Vector3 = Vector3(at.x, aim_y, at.z) - eye       # aim at the body itself (a floor mark: its floor)
 	var yaw: float = atan2(-to.x, -to.z)
 	var pitch: float = atan2(to.y, Vector2(to.x, to.z).length())
 	return {"stand": best, "yaw": yaw, "pitch": pitch, "at": at}

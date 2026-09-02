@@ -76,6 +76,19 @@
 			"catalyst_sustain_demo"
 		]
 	},
+	"sculptures": {
+		"_readme": "THE DREAM BODIES (2026-08-29, Palle: 'put them in the museum'). Six sculpture families recreated in Godot from his Stable Diffusion panoramas; the museum stands one on a plinth in every hall, the FAMILY chosen by the chapter (so a chapter reads as a room of related bodies) and the SEED by the hall, so no two halls carry the same individual. The Frank Stella relief is a wall work: it hangs on the hall's west wall instead, found by the same ray the weapon cabinets ask.",
+		"on": 1,
+		"_on": "0 = no statues anywhere",
+		"per_hall": 1,
+		"_per_hall": "statues per hall, on open interior cells at least clear_m from the save point (the relief is always one)",
+		"clear_m": 3.0,
+		"_clear_m": "no statue stands closer than this to the hall's save point",
+		"plinth_m": 0.42,
+		"_plinth_m": "the station plinth's top height under a standing body",
+		"figures": [],
+		"_figures": "empty = all six (rocaille, stijl_robot, panel_robot, dragon, sea_forms, stella_wall). A list narrows which families the museum deals"
+	},
 	"foes": {
 		"_readme": "THE ONE-DIMENSIONAL MEN (2026-08-29, Palle: 'put silhouettes in the museum by default in the grey sequences ... but also give me a gun there so I defend myself'). A hall whose chapter is a GREY sequence - soft_stages.json says no nature kingdoms and zero vegetation: primitives, transformation, isosurfaces, boolean_surfaces - is dressed with a few silhouette foes on its open floor, standing until you come within their detection radius, then walking the grid at you one metre a step; and a very pink gun on a plinth in its vestibule. Shot, a silhouette stops for good and stands on a small plinth of its own colour (a Giacometti). The museum writes what it did to ada_run/em_foes.json.",
 		"on": 1,
