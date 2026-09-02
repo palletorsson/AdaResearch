@@ -6716,7 +6716,9 @@ var _bite_n: int = 0
 var _bite_at: float = 0.0
 
 func walker_bitten(from: Vector3) -> void:
-	if _player == null or _dying:
+	if _dying:
+		return
+	if _player == null and not _vr:
 		return
 	var now: float = float(Time.get_ticks_msec()) * 0.001
 	if now - _bite_at > 8.0:
@@ -6724,14 +6726,63 @@ func walker_bitten(from: Vector3) -> void:
 	_bite_at = now
 	_bite_n += 1
 	_hazard_flash()
-	var away: Vector3 = _player.global_position - from
-	away.y = 0.0
-	if away.length() > 0.001:
-		_player.position += away.normalized() * 1.1
+	if _vr:
+		# THE HEADSET IS SHOVED (2026-08-29, Palle: "we should have silhouettes in
+		# vr"). Nothing rides the walker there, so the RIG moves, by the eye's own
+		# horizontal offset from the biter, as the death moves it; and the flash
+		# is a veil at the eye, since no canvas reaches a headset. Until today
+		# this returned at the null walker and a silhouette in VR could never
+		# touch anyone.
+		var rig: Node3D = _vr_rig()
+		var eye: Camera3D = _vr_eye()
+		if rig != null and eye != null:
+			var vaway: Vector3 = eye.global_position - from
+			vaway.y = 0.0
+			if vaway.length() > 0.001:
+				rig.global_position += vaway.normalized() * 1.1
+		_vr_veil(Color(1.0, 0.1, 0.05), 0.5, 0.45)
+	else:
+		var away: Vector3 = _player.global_position - from
+		away.y = 0.0
+		if away.length() > 0.001:
+			_player.position += away.normalized() * 1.1
 	print("[em-crab] bite %d/3" % _bite_n)
 	if _bite_n >= 3:
 		_bite_n = 0
 		on_lethal_touch("crab", from)
+
+
+## A VEIL AT THE EYE: the headset's flash. A canvas overlay never reaches a
+## headset, so the red is a quad a third of a metre in front of the XR camera,
+## unshaded, drawn over everything, fading out over `seconds`. Scene work only,
+## so a probe wearing a fake rig sees the same node the visitor would.
+var _vr_veil_node: MeshInstance3D = null
+func _vr_veil(color: Color, alpha: float, seconds: float) -> void:
+	var eye: Camera3D = _vr_eye()
+	if eye == null:
+		return
+	if _vr_veil_node == null or not is_instance_valid(_vr_veil_node) or _vr_veil_node.get_parent() != eye:
+		if _vr_veil_node != null and is_instance_valid(_vr_veil_node):
+			_vr_veil_node.queue_free()
+		_vr_veil_node = MeshInstance3D.new()
+		_vr_veil_node.name = "EmVeil"
+		var q := QuadMesh.new()
+		q.size = Vector2(3.0, 3.0)
+		_vr_veil_node.mesh = q
+		var m := StandardMaterial3D.new()
+		m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		m.no_depth_test = true
+		m.render_priority = 120
+		m.albedo_color = Color(color.r, color.g, color.b, 0.0)
+		_vr_veil_node.material_override = m
+		_vr_veil_node.position = Vector3(0, 0, -0.35)
+		_vr_veil_node.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		eye.add_child(_vr_veil_node)
+	var mat := _vr_veil_node.material_override as StandardMaterial3D
+	mat.albedo_color = Color(color.r, color.g, color.b, alpha)
+	var tw := _vr_veil_node.create_tween()
+	tw.tween_property(mat, "albedo_color:a", 0.0, seconds)
 
 
 ## Anything lethal in the museum arrives here — the pools call it directly,
@@ -6767,7 +6818,9 @@ func _vr_rig() -> Node3D:
 
 
 func _museum_death(kind: String) -> void:
-	if _dying or _player == null:
+	# the VR branch below moves the RIG and needs no walker; the guard that
+	# demanded one made it unreachable, so a headset death was a no-op
+	if _dying or (_player == null and not _vr):
 		return
 	_dying = true
 	_deaths += 1
@@ -6802,6 +6855,7 @@ func _museum_death(kind: String) -> void:
 			_player.velocity = Vector3.ZERO
 		_put_back_t = float(Time.get_ticks_msec()) * 0.001
 		_vy = 0.0
+		_vr_veil(Color(0.9, 0.05, 0.02), 0.9, 0.9)   # the end scene, as much of it as a headset can carry
 		_hazard_flash()
 		_dying = false
 		return

@@ -896,6 +896,9 @@ func _sil_contact_tick() -> void:
 		museum.call("walker_bitten", global_position)
 		caught_player.emit()
 		_contact_timer = contact_cooldown
+		# the bite is SEEN on the biter: a red pulse at the chest, which reaches a
+		# headset where no canvas overlay can (2026-08-29, "silhouettes in vr")
+		_spawn_light_pulse(Color(1.0, 0.15, 0.1), Vector3(0, silhouette_height_m * 0.5, 0))
 		return
 	if _try_damage_target(_player_node):
 		_contact_timer = contact_cooldown
