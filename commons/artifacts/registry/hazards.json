@@ -10553,6 +10553,48 @@
 				"note": "the projectile is CatalystProjectile itself with pink colours, not a new mode — the hit contract (hit_by_catalyst_mode / hit_by_projectile) is untouched, and a hit on a silhouette runs the same foe-to-friend arc every other hit runs"
 			}
 		},
+		"weapon_cabinet": {
+			"name": "Weapon Cabinet",
+			"lookup_name": "weapon_cabinet",
+			"scene": "res://commons/artifacts/weapon_cabinet/weapon_cabinet.tscn",
+			"class_name": "WeaponCabinet",
+			"category": "hazards",
+			"artifact_type": "furniture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"interaction": "grab",
+			"description": "A wall box with a glass door that swings open when a hand comes near, and one weapon inside, hung the way the photographs hang theirs. Two styles: the red IN CASE OF EMERGENCY steel cabinet over black-and-yellow hazard stripes, with the pink sledgehammer diagonal like the axe; and the black case lined in red velvet with a chrome lock and its key, the pink gun level on two pegs. The weapon is the registry's own scene, frozen and grabbable; taking it leaves the box open and empty. The grey halls of the museum hang one of each on the vestibule walls.",
+			"dev_themes": [
+				"gameplay",
+				"hazards",
+				"museum",
+				"queer"
+			],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"style": [
+						"emergency",
+						"velvet"
+					],
+					"weapon": [
+						"none",
+						"pink_gun",
+						"line_sledgehammer"
+					]
+				},
+				"default": "style=emergency, weapon=none",
+				"predicted_degeneracy": "weapon none vs pink_gun inside the velvet case, ~4%: the gun is a small pink object on a large red field; the two styles are the far pair (different box, different height, different lining), and the sledgehammer crosses the whole emergency door diagonally so it is the loudest weapon value",
+				"note": "the weapon inside is the registry scene of that token, frozen; the hand inventory adopts it on the grab, and the cabinet stays open once its weapon is gone"
+			}
+		},
 		"catalyst_foe": {
 			"dna": {
 				"promoted": "2026-08-03",

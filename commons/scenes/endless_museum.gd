@@ -13925,9 +13925,26 @@ func _dress_foes(seg: Node3D, _tile: Array, w: int, h: int, zbase: int, _deal: D
 				"kind": "foe", "token": "catalyst_foe", "segment": _seg_no(seg),
 				"world": [snappedf(f.global_position.x, 0.1), snappedf(f.global_position.y, 0.1),
 					snappedf(f.global_position.z, 0.1)], "cell": [c.x, lz - VESTIBULE_H]})
-	# the gun: a vestibule cell off the centre line, nearest (w/2 + 2.5, row 2)
+	# THE WALL BOXES (2026-08-29, Palle: "make very very nice wall box for it and
+	# another one for the pink gun"): two weapon cabinets on the vestibule's side
+	# walls. The annex floor runs x 0..vest_w-1 and the scene stamps its skin one
+	# cell outside, so the inner wall faces are exactly x 0 and x vest_w — the
+	# velvet pistol case east, the red EMERGENCY cabinet with the sledgehammer
+	# west, both at the annex's middle row, facing in. foes.cabinets = 0 is the
+	# older lane: the gun alone, on a plinth.
 	var gun_cell: Variant = null
-	if _L("foes", "gun", 1.0) > 0.5:
+	var cabinets: Array = []
+	if _L("foes", "cabinets", 1.0) > 0.5:
+		var vest_w: int = int(seg.get_meta("em_vest_w")) if seg.has_meta("em_vest_w") else LOBBY_W
+		if _L("foes", "gun", 1.0) > 0.5:
+			var cg: Dictionary = _stand_cabinet(seg, zbase, key, ch, pearl, "pink_gun", "velvet", float(vest_w), -1.0, 0)
+			if not cg.is_empty():
+				cabinets.append(cg)
+		if _L("foes", "hammer", 1.0) > 0.5:
+			var chm: Dictionary = _stand_cabinet(seg, zbase, key, ch, pearl, "line_sledgehammer", "emergency", 0.0, 1.0, 1)
+			if not chm.is_empty():
+				cabinets.append(chm)
+	elif _L("foes", "gun", 1.0) > 0.5:
 		var gl: Variant = _live.get("pink_gun", null)
 		var gun_scene: String = String((gl as Dictionary).get("scene", "")) if gl is Dictionary else ""
 		var gps: PackedScene = null
@@ -14000,9 +14017,62 @@ func _dress_foes(seg: Node3D, _tile: Array, w: int, h: int, zbase: int, _deal: D
 			_walk_cells.erase(best)
 			_walk_erased[best] = "prop:pink_gun"
 			gun_cell = [best.x, best.y]
-	print("[em-foes] %s: %d silhouette(s) %s, gun %s" % [key, placed.size(), str(placed), str(gun_cell)])
+	print("[em-foes] %s: %d silhouette(s) %s, gun %s, %d cabinet(s) %s" % [key, placed.size(), str(placed), str(gun_cell), cabinets.size(), str(cabinets)])
 	_foes_note(key, {"chapter": ch, "pearl": pearl, "map": map_name, "grey": true,
-		"silhouettes": placed, "gun": gun_cell, "seg": _seg_no(seg), "zbase": zbase, "w": w, "h": h})
+		"silhouettes": placed, "gun": gun_cell, "cabinets": cabinets, "seg": _seg_no(seg), "zbase": zbase, "w": w, "h": h})
+
+
+## One wall box on one side wall of the vestibule. `face_x` is the wall's inner
+## face (0 or vest_w), `facing` the way the box's front points into the room
+## (+1 from the west wall, -1 from the east). The box's local front is -z, so a
+## yaw of -90 * facing turns it to face the room. Its back sits a centimetre off
+## the plaster, its centre at the annex's middle row; the emergency cabinet is
+## tall and hangs lower, the pistol case is short and hangs at eye height.
+func _stand_cabinet(seg: Node3D, zbase: int, key: String, ch: String, pearl: String,
+		weapon: String, style: String, face_x: float, facing: float, index: int) -> Dictionary:
+	var lv: Variant = _live.get("weapon_cabinet", null)
+	var scene_path: String = String((lv as Dictionary).get("scene", "")) if lv is Dictionary else ""
+	if scene_path == "" or not ResourceLoader.exists(scene_path):
+		push_warning("[em-foes] weapon_cabinet is not alive in the registry — no wall box for %s" % weapon)
+		return {}
+	var c: Node3D = (load(scene_path) as PackedScene).instantiate() as Node3D
+	if c == null:
+		return {}
+	var depth: float = 0.14 if style == "velvet" else 0.16
+	var cfg: Dictionary = {"style": style, "weapon": weapon}
+	c.name = "Cabinet_%s" % weapon
+	c.set_meta("artifact_lookup_name", "weapon_cabinet")
+	c.set_meta("em_foe_cabinet", true)
+	for k in cfg:
+		c.set_meta("config_" + String(k), cfg[k])
+		if String(k) in c:
+			c.set(String(k), cfg[k])
+	if c.has_method("apply_grid_config"):
+		c.call("apply_grid_config", cfg)
+	var lz: float = 2.5
+	var y: float = 1.42 if style == "velvet" else 1.22
+	c.position = Vector3(face_x + facing * (depth * 0.5 + 0.012), y, lz)
+	c.rotation_degrees = Vector3(0, -90.0 * facing, 0)
+	if _dressing_removed(ch, "furniture", "weapon_cabinet", index):
+		c.queue_free()
+		return {}
+	for fr_v in _furniture_rules(ch, "furniture"):
+		var fr: Dictionary = fr_v
+		if String(fr.get("token", "")) == "weapon_cabinet" and int(fr.get("index", -1)) == index:
+			var o: Array = fr.get("offset", [])
+			if o.size() >= 3:
+				c.position += Vector3(float(o[0]), float(o[1]), float(o[2]))
+			if fr.has("rotation"):
+				c.rotation_degrees.y = float(fr["rotation"])
+	seg.add_child(c)
+	_edit_records.append({"node": c, "token": "weapon_cabinet", "kind": "furniture",
+		"from": [], "tile_cell": [], "rotation": -90.0 * facing, "chapter": ch, "seg": seg, "index": index})
+	_inventory.append({"id": "%s|cabinet:%s" % [key, weapon], "chapter": ch, "pearl": pearl,
+		"kind": "furniture", "token": "weapon_cabinet", "segment": _seg_no(seg),
+		"world": [snappedf(c.global_position.x, 0.1), snappedf(c.global_position.y, 0.1),
+			snappedf(c.global_position.z, 0.1)], "cell": [int(floor(c.position.x)), int(floor(lz)) - VESTIBULE_H]})
+	return {"x": snappedf(c.global_position.x, 0.01), "z": snappedf(c.global_position.z, 0.01),
+		"style": style, "weapon": weapon}
 
 
 ## The segment's own number, from its name (Seg<n>_<key>): _seg_index has moved

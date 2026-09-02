@@ -96,8 +96,16 @@ func _boot(chapter: String) -> Dictionary:
 		var rec := {"chapter": String(node.get_meta("em_chapter")) if node.has_meta("em_chapter") else "",
 			"pearl": str(node.get_meta("em_pearl")) if node.has_meta("em_pearl") else "",
 			"z0": float(s.get("z0", 0.0)), "w": int(s.get("w", 0)),
-			"foes": [], "gun": null, "plinth": null, "gun_cell_walkable": false, "gun_cell_prov": ""}
+			"vest_w": int(node.get_meta("em_vest_w")) if node.has_meta("em_vest_w") else 17,
+			"foes": [], "gun": null, "plinth": null, "gun_cell_walkable": false, "gun_cell_prov": "", "cabinets": []}
 		for c in node.get_children():
+			if c.has_meta("em_foe_cabinet") and c is Node3D:
+				var wn: Node = c.get_node_or_null("Weapon")
+				rec["cabinets"].append({"style": str(c.get("style")), "weapon": str(c.get("weapon")),
+					"x": (c as Node3D).global_position.x, "z": (c as Node3D).global_position.z,
+					"has_weapon": wn != null and wn.has_meta("artifact_lookup_name") and str(wn.get_meta("artifact_lookup_name")) == str(c.get("weapon")),
+					"frozen": wn != null and bool(wn.get("freeze")),
+					"door": c.get_node_or_null("Door") != null})
 			if c.has_meta("em_foe") and c is Node3D:
 				var p: Vector3 = (c as Node3D).global_position
 				var cell := Vector2i(int(floor(p.x)), int(floor(p.z)))
@@ -140,8 +148,8 @@ func _judge(run: Dictionary, expect_grey: bool) -> void:
 			_lines.append("[probe]   %s: another chapter's hall, skipped" % tag)
 			continue
 		if not expect_grey:
-			_check(foes.is_empty() and rec["gun"] == null and rec["plinth"] == null,
-				"%s: %d silhouette(s), gun %s" % [tag, foes.size(), "present" if rec["gun"] != null else "none"],
+			_check(foes.is_empty() and rec["gun"] == null and rec["plinth"] == null and (rec["cabinets"] as Array).is_empty(),
+				"%s: %d silhouette(s), gun %s, %d cabinet(s)" % [tag, foes.size(), "present" if rec["gun"] != null else "none", (rec["cabinets"] as Array).size()],
 				"a hall that is not grey got dressed")
 			continue
 		# map one is gentler: the first hall (vestibule at z -4) deals first_hall
@@ -179,13 +187,22 @@ func _judge(run: Dictionary, expect_grey: bool) -> void:
 			_check(min_d >= float(run["clear_m"]) - 0.01, "%s: nearest spawn %.2f m from the save point (clear_m %.1f)" % [tag, min_d, float(run["clear_m"])], "a foe spawned on the visitor")
 		else:
 			_check(false, "%s: no row in em_foes.json" % tag, "hall missing from the report")
-		# the gun
-		var gun: Variant = rec["gun"]
-		_check(gun is Dictionary and rec["plinth"] != null, "%s: gun %s, plinth %s" % [tag, "present" if gun is Dictionary else "MISSING", "present" if rec["plinth"] != null else "MISSING"], "no gun")
-		if gun is Dictionary:
-			_check(bool((gun as Dictionary)["frozen"]), "%s: gun frozen %s at y %.2f" % [tag, str((gun as Dictionary)["frozen"]), float((gun as Dictionary)["y"])], "an unfrozen gun over a plinth with no collider")
-			_check(not bool(rec["gun_cell_walkable"]) and String(rec["gun_cell_prov"]) == "prop:pink_gun",
-				"%s: gun cell %s out of the walk map (%s)" % [tag, str((gun as Dictionary)["cell"]), String(rec["gun_cell_prov"])], "the gun's cell is still walkable")
+		# the wall boxes: the velvet pistol case on the east wall (x vest_w), the
+		# EMERGENCY cabinet with the sledgehammer on the west wall (x 0), each with
+		# its weapon hung frozen inside and a door to swing
+		var cabs: Array = rec["cabinets"]
+		var vest_w: float = float(rec["vest_w"])
+		_check(cabs.size() == 2, "%s: %d cabinet(s)" % [tag, cabs.size()], "not two wall boxes")
+		for cb_v in cabs:
+			var cb: Dictionary = cb_v
+			var want_x: float = vest_w if String(cb["style"]) == "velvet" else 0.0
+			var want_w: String = "pink_gun" if String(cb["style"]) == "velvet" else "line_sledgehammer"
+			var on_wall: bool = absf(float(cb["x"]) - want_x) < 0.25
+			var z_ok: bool = absf(float(cb["z"]) - (float(rec["z0"]) + 2.5)) < 0.01
+			_check(on_wall and z_ok, "%s: %s case at x %.2f (wall face %.0f), z %.1f" % [tag, String(cb["style"]), float(cb["x"]), want_x, float(cb["z"])], "a box off its wall")
+			_check(String(cb["weapon"]) == want_w and bool(cb["has_weapon"]) and bool(cb["frozen"]) and bool(cb["door"]),
+				"%s: %s case holds %s (frozen %s, door %s)" % [tag, String(cb["style"]), String(cb["weapon"]), str(cb["frozen"]), str(cb["door"])], "a box without its weapon")
+		_check(rec["gun"] == null, "%s: no plinth gun beside the cases: %s" % [tag, str(rec["gun"] == null)], "the old plinth lane ran too")
 
 
 func _check(ok: bool, line: String, why: String) -> void:

@@ -26,6 +26,7 @@ extends SceneTree
 ##   godot --headless --path . --xr-mode off --script res://commons/testing/probe_hand_inventory.gd
 
 const GUN := "res://commons/artifacts/pink_gun/pink_gun.tscn"
+const HAMMER := "res://commons/artifacts/line_sledgehammer/line_sledgehammer.tscn"
 const PICKUP := "res://addons/godot-xr-tools/functions/function_pickup.tscn"
 const INV := "res://commons/player/hand_inventory.gd"
 const REPORT := "res://ada_run/hand_inventory_probe.txt"
@@ -129,6 +130,42 @@ func _run() -> void:
 	await process_frame
 	_check(String(inv.call("get_state", "right")) == "bare" and gun.get_parent() == null, "let go: state %s, gun %s" % [String(inv.call("get_state", "right")), "holstered" if gun.get_parent() == null else "IN THE AIR"], "a released gun litters")
 
+	# ── the sledgehammer, taken with the LEFT hand from a second hall ──
+	var seg2 := Node3D.new()
+	seg2.name = "Seg1_test"
+	get_root().add_child(seg2)
+	var hammer: Node3D = (load(HAMMER) as PackedScene).instantiate() as Node3D
+	hammer.set_meta("artifact_lookup_name", "line_sledgehammer")
+	hammer.set_meta("em_cabinet_weapon", true)
+	hammer.set("freeze", true)
+	hammer.position = Vector3(-0.3, 1.0, -0.3)
+	seg2.add_child(hammer)
+	await process_frame
+	pickups["left"].call("_pick_up_object", hammer)
+	await process_frame
+	await process_frame
+	_check(is_instance_valid(hammer) and hammer.get_parent() == holster and bool(hammer.call("is_picked_up")),
+		"the hammer is adopted into the left hand: %s" % str(is_instance_valid(hammer) and hammer.get_parent() == holster), "hammer not adopted")
+	_check(String(inv.call("get_state", "left")) == "weapons" and (inv.call("get_weapons") as Array).size() == 2,
+		"left state %s, %d weapon(s) in the inventory" % [String(inv.call("get_state", "left")), (inv.call("get_weapons") as Array).size()], "two weapons expected")
+	seg2.queue_free()
+	await process_frame
+	# the right hand cycles: bare -> gun -> hammer (taken from the left) -> bare
+	(ctrls["right"] as XRController3D).button_pressed.emit("primary_click")
+	await process_frame
+	await process_frame
+	_check(inv.call("get_weapon", "right") == gun, "right click: holds %s" % ("the gun" if inv.call("get_weapon", "right") == gun else "SOMETHING ELSE"), "slot order wrong")
+	(ctrls["right"] as XRController3D).button_pressed.emit("primary_click")
+	await process_frame
+	await process_frame
+	_check(inv.call("get_weapon", "right") == hammer and String(inv.call("get_state", "left")) == "bare",
+		"right click: holds the hammer %s, left went bare %s" % [str(inv.call("get_weapon", "right") == hammer), str(String(inv.call("get_state", "left")) == "bare")], "the hammer did not change hands")
+	(ctrls["right"] as XRController3D).button_pressed.emit("primary_click")
+	await process_frame
+	await process_frame
+	_check(String(inv.call("get_state", "right")) == "bare" and gun.get_parent() == null and hammer.get_parent() == null,
+		"right click: bare, both weapons holstered: %s" % str(gun.get_parent() == null and hammer.get_parent() == null), "a weapon left out")
+
 	# ── catalysts ─────────────────────────────────────────────────────
 	var mgr: Node = get_root().get_node_or_null("CatalystCapabilityManager")
 	var snap_act: Variant = null
@@ -137,9 +174,11 @@ func _run() -> void:
 		snap_act = mgr.get("_bracelet_activated")
 		snap_trk = mgr.get("_bracelet_tracker")
 	inv.set("_has_catalyst", true)
-	(ctrls["right"] as XRController3D).button_pressed.emit("primary_click")   # bare -> weapons
+	(ctrls["right"] as XRController3D).button_pressed.emit("primary_click")   # bare -> gun
 	await process_frame
-	(ctrls["right"] as XRController3D).button_pressed.emit("primary_click")   # weapons -> catalysts
+	(ctrls["right"] as XRController3D).button_pressed.emit("primary_click")   # gun -> hammer
+	await process_frame
+	(ctrls["right"] as XRController3D).button_pressed.emit("primary_click")   # hammer -> catalysts
 	await create_timer(0.6).timeout
 	_check(String(inv.call("get_state", "right")) == "catalysts", "click, click: right state %s" % String(inv.call("get_state", "right")), "did not reach catalysts")
 	var cat_on: bool = false
