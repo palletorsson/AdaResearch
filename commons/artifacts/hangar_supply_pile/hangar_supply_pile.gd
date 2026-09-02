@@ -20,6 +20,12 @@ const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 @export var palette: String = "cardboard"
 ## Stencilled warning labels (FRAGILE / KEEP DRY) on a couple of crate front faces.
 @export var hazard_labels: bool = true
+## What the stencils SAY. Empty = the warehouse defaults (FRAGILE / KEEP DRY).
+## Palle, 2026-09-02, for Point_Animatedcube: "instead of fragile it say
+## something from the text." Words separated by ';', underscores read as
+## spaces (a map token cannot carry a space), cycled across the labelled crates.
+## Config key stencil_words, e.g. #stencil_words:WITHOUT_COMPOSITION;YET
+@export var stencil_words: String = ""
 
 @export_group("Contents")
 ## A red gas cylinder beside the pile — vertical body + dome top + a draping hose.
@@ -81,6 +87,7 @@ func _read_metadata_overrides() -> void:
 	if has_meta("config_crate_count"): crate_count = int(float(str(get_meta("config_crate_count"))))
 	if has_meta("config_palette"): palette = str(get_meta("config_palette")).to_lower()
 	if has_meta("config_hazard_labels"): hazard_labels = str(get_meta("config_hazard_labels")).to_lower() in ["true", "1", "yes", "on"]
+	if has_meta("config_stencil_words"): stencil_words = str(get_meta("config_stencil_words"))
 	if has_meta("config_with_cylinder"): with_cylinder = str(get_meta("config_with_cylinder")).to_lower() in ["true", "1", "yes", "on"]
 	if has_meta("config_with_cone"): with_cone = str(get_meta("config_with_cone")).to_lower() in ["true", "1", "yes", "on"]
 	if has_meta("config_cylinder_color"): cylinder_color = _pc(str(get_meta("config_cylinder_color")), cylinder_color)
@@ -132,9 +139,22 @@ func _add_crate_band(off: Vector2, base_y: float, s: Vector3, mat: Material) -> 
 	add_child(band)
 
 
+## The configured words, split on ';', underscores to spaces, blanks dropped.
+func stencil_word_list() -> Array:
+	var out: Array = []
+	for w in stencil_words.split(";"):
+		var s: String = w.replace("_", " ").strip_edges()
+		if s != "":
+			out.append(s)
+	return out
+
+
 # Stencilled warning text painted proud of a crate's front (+Z) face.
 func _add_crate_label(index: int, off: Vector2, base_y: float, s: Vector3) -> void:
 	var text: String = "FRAGILE" if index == 0 else "KEEP DRY"
+	var words: Array = stencil_word_list()
+	if not words.is_empty():
+		text = str(words[index % words.size()])
 	var q: MeshInstance3D = HangarKit.stencil(text, Vector2(s.x * 0.7, s.y * 0.26), Color(0.16, 0.16, 0.18))
 	if q == null:
 		return

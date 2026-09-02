@@ -94,7 +94,7 @@ func _read_metadata_overrides() -> void:
 		var s2: String = str(get_meta("config_show_stamp")).to_lower()
 		show_stamp = s2 == "true" or s2 == "1" or s2 == "yes"
 	if has_meta("config_stamp_label"):
-		stamp_label = str(get_meta("config_stamp_label"))
+		stamp_label = str(get_meta("config_stamp_label")).replace("_", " ")   # a token cannot carry a space
 	if has_meta("config_plank_color"):
 		plank_color = _parse_color(str(get_meta("config_plank_color")), plank_color)
 	if has_meta("config_plank_color_alt"):

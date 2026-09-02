@@ -42,6 +42,11 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 @export var tape_color: Color = Color(0.85, 0.18, 0.18)
 @export var label_color: Color = Color(0.95, 0.90, 0.55)
 @export var show_decals: bool = true
+## Words stencilled on the cartons' front faces, one per box in build order
+## (base left, base right, top). Empty = no words, the pallet as it always was.
+## ';'-separated, underscores read as spaces. Config key stencil_words.
+@export var stencil_words: String = ""
+var _box_index: int = 0
 
 # ── Constants ─────────────────────────────────────────────────────────
 
@@ -100,6 +105,8 @@ func _read_metadata_overrides() -> void:
 		wood_color = _parse_color(str(get_meta("config_wood_color")), wood_color)
 	if has_meta("config_box_arrangement"):
 		box_arrangement = str(get_meta("config_box_arrangement"))
+	if has_meta("config_stencil_words"):
+		stencil_words = str(get_meta("config_stencil_words"))
 	if has_meta("config_box_w"):
 		box_w = float(str(get_meta("config_box_w")))
 	if has_meta("config_box_h"):
@@ -256,6 +263,7 @@ func _build_boxes() -> void:
 	var base_gap: float = 0.02
 	var base_off: float = (box_w + base_gap) * 0.5
 
+	_box_index = 0
 	match box_arrangement:
 		"single":
 			_make_box(root, Vector3(0.0, deck_y + box_h * 0.5, 0.0), true)
@@ -310,6 +318,26 @@ func _make_box(parent: Node3D, center: Vector3, decorate: bool) -> void:
 
 	if decorate and show_decals:
 		_decorate_front(box_root)
+	_stencil_word(box_root)
+	_box_index += 1
+
+
+## One word from stencil_words on this carton's front face, proud of the card.
+func _stencil_word(box_root: Node3D) -> void:
+	var words: Array = []
+	for w in stencil_words.split(";"):
+		var s: String = w.replace("_", " ").strip_edges()
+		if s != "":
+			words.append(s)
+	if words.is_empty():
+		return
+	var text: String = str(words[_box_index % words.size()])
+	var q: MeshInstance3D = HangarKit.stencil(text, Vector2(box_w * 0.72, box_h * 0.26), Color(0.16, 0.16, 0.18))
+	if q == null:
+		return
+	q.name = "StencilWord"
+	q.position = Vector3(0.0, 0.0, box_d * 0.5 + 0.004)
+	box_root.add_child(q)
 
 
 func _decorate_front(box_root: Node3D) -> void:
