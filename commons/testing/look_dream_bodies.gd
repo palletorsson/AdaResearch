@@ -8,11 +8,13 @@ extends Node3D
 ##   godot --path . --xr-mode off res://commons/testing/look_dream_bodies.tscn -- --out=<png> [--figure=<key>] [--seed=N]
 
 const BODIES := preload("res://commons/artifacts/dream_bodies/dream_bodies.tscn")
-const FIGURES := ["rocaille", "stijl_robot", "panel_robot", "dragon", "sea_forms", "coral_polyp",
-	"tube_reef", "david_drape", "dubuffet", "garet_still", "kruger_suit", "oni_dragon",
-	"lava_bloom", "asawa_wire", "nana_gloss", "hicks_fiber", "vasarely_beast", "panton_pop",
-	"hokusai_kimono", "tatlin_red", "hadid_shell", "mosaic_body", "paik_light",
-	"batik_beast", "gehry_metal", "griffin_plume", "brass_stamen", "stella_wall"]
+const FIGURES := ["asawa_wire", "batik_beast", "brass_stamen", "ceramic_puppet", "coral_polyp",
+	"couch_lounge", "crackle_peak", "david_drape", "dragon", "dubuffet", "food_table",
+	"garet_still", "gehry_metal", "griffin_plume", "hadid_shell", "hicks_fiber",
+	"hokusai_kimono", "horse_hybrid", "kruger_suit", "lava_bloom", "masked_dancer",
+	"mosaic_body", "nana_gloss", "oni_dragon", "paik_light", "panel_robot", "panton_pop",
+	"pink_scaffold", "piped_icing", "porcelain_doll", "rocaille", "sea_forms",
+	"stijl_robot", "tatlin_red", "tube_reef", "vasarely_beast", "stella_wall"]
 
 var _out: String = "user://look_dream_bodies.png"
 var _only: String = ""

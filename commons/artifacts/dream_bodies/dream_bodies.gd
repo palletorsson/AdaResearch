@@ -21,17 +21,21 @@ class_name DreamBodies
 ## the museum gives it; it is looked at.
 
 const BODY_DIR := "res://commons/artifacts/dream_bodies/bodies/"
-const FIGURES: Array[String] = ["rocaille", "stijl_robot", "panel_robot", "stella_wall", "dragon", "sea_forms",
-	"coral_polyp", "tube_reef", "david_drape", "dubuffet", "garet_still", "kruger_suit",
-	"oni_dragon", "lava_bloom", "asawa_wire", "nana_gloss", "hicks_fiber", "vasarely_beast",
-	"panton_pop", "hokusai_kimono", "tatlin_red", "hadid_shell", "mosaic_body",
-	"paik_light", "batik_beast", "gehry_metal", "griffin_plume", "brass_stamen"]
+const FIGURES: Array[String] = ["asawa_wire", "batik_beast", "brass_stamen", "ceramic_puppet", "coral_polyp",
+	"couch_lounge", "crackle_peak", "david_drape", "dragon", "dubuffet", "food_table",
+	"garet_still", "gehry_metal", "griffin_plume", "hadid_shell", "hicks_fiber",
+	"hokusai_kimono", "horse_hybrid", "kruger_suit", "lava_bloom", "masked_dancer",
+	"mosaic_body", "nana_gloss", "oni_dragon", "paik_light", "panel_robot", "panton_pop",
+	"pink_scaffold", "piped_icing", "porcelain_doll", "rocaille", "sea_forms",
+	"stella_wall", "stijl_robot", "tatlin_red", "tube_reef", "vasarely_beast"]
 
-@export_enum("rocaille", "stijl_robot", "panel_robot", "stella_wall", "dragon", "sea_forms",
-	"coral_polyp", "tube_reef", "david_drape", "dubuffet", "garet_still", "kruger_suit",
-	"oni_dragon", "lava_bloom", "asawa_wire", "nana_gloss", "hicks_fiber", "vasarely_beast",
-	"panton_pop", "hokusai_kimono", "tatlin_red", "hadid_shell", "mosaic_body",
-	"paik_light", "batik_beast", "gehry_metal", "griffin_plume", "brass_stamen") var figure: String = "rocaille"
+@export_enum("asawa_wire", "batik_beast", "brass_stamen", "ceramic_puppet", "coral_polyp",
+	"couch_lounge", "crackle_peak", "david_drape", "dragon", "dubuffet", "food_table",
+	"garet_still", "gehry_metal", "griffin_plume", "hadid_shell", "hicks_fiber",
+	"hokusai_kimono", "horse_hybrid", "kruger_suit", "lava_bloom", "masked_dancer",
+	"mosaic_body", "nana_gloss", "oni_dragon", "paik_light", "panel_robot", "panton_pop",
+	"pink_scaffold", "piped_icing", "porcelain_doll", "rocaille", "sea_forms",
+	"stella_wall", "stijl_robot", "tatlin_red", "tube_reef", "vasarely_beast") var figure: String = "rocaille"
 @export var seed: int = 1
 
 var _built_figure: String = ""
