@@ -241,7 +241,7 @@ func _walk(delta: float) -> void:
 	if driven_by_player:
 		var input := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 		if input.length_squared() > 0.01:
-			position += -basis.z * input.y * delta * move_speed
+			position += -basis.z.normalized() * input.y * delta * move_speed
 			rotation.y += deg_to_rad(-input.x * delta * turn_speed)
 			return
 	var away: Vector3 = global_position - _pace_home
@@ -262,4 +262,7 @@ func _walk(delta: float) -> void:
 			_patrol_timer = 0.0
 			_patrol_angle += _rng.randf_range(-PI * 0.5, PI * 0.5)
 	rotation.y = lerp_angle(rotation.y, _patrol_angle, minf(1.0, turn * delta))
-	position += -basis.z * delta * patrol_speed
+	# NORMALISED: this node's basis carries walker_scale (set in _apply_walker_scale),
+	# so a bare -basis.z advanced a scale-4 body four times faster than the token said.
+	# VFM_09_Legs found it: 'same pace' broke on the eighth rung (2026-09-02).
+	position += -basis.z.normalized() * delta * patrol_speed
