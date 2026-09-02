@@ -437,8 +437,30 @@ func _run_artifact_capture() -> void:
 
 	# Delegated entries configure the host scene after _ready(), the same
 	# deferred contract the grid honours (delegate_params → apply_grid_config).
-	if not delegate_params.is_empty() and artifact.has_method("apply_grid_config"):
-		artifact.call_deferred("apply_grid_config", delegate_params.duplicate(true))
+	#
+	# `dna.fixture` is the same idea for an entry that carries its own scene:
+	# the state the artifact SAYS it should be measured in. capture_dressing_room
+	# has honoured it since the laser_measure case (a fixture nobody read got that
+	# artifact carried at 50.13 m for two months); this bench did not, so a gated
+	# artifact photographed as an empty frame here and looked like a broken build.
+	#
+	# street_talker is the case that found it: it builds nothing until it knows
+	# which hall it stands in, because an empty A-frame in the 243 rooms with no
+	# ruling would advertise, everywhere, that someone meant to speak and didn't.
+	# That gate is correct and the bench has to be told, not the artifact loosened.
+	#
+	# Delegate params win — they are this entry's own configuration, while the
+	# fixture is the target artifact's default request. Same order the sweep uses.
+	var fixture_cfg: Dictionary = {}
+	var dna_v: Variant = artifact_info.get("dna", null)
+	if dna_v is Dictionary:
+		var fx: Variant = (dna_v as Dictionary).get("fixture", null)
+		if fx is Dictionary:
+			fixture_cfg = (fx as Dictionary).duplicate(true)
+	fixture_cfg.merge(delegate_params, true)
+	if not fixture_cfg.is_empty() and artifact.has_method("apply_grid_config"):
+		artifact.call_deferred("apply_grid_config", fixture_cfg)
+		print("capture_multi_angle [artifact]: config %s" % [fixture_cfg])
 
 	# Let the artifact run _ready()
 	await process_frame

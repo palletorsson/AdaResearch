@@ -361,6 +361,20 @@ func _exit_tree() -> void:
 	for child in get_children():
 		if not child.owner:
 			child.queue_free()
+	# THE HANDLES GO WITH THE THINGS. This sweep is what frees the projection
+	# markers (built at runtime, so no owner) — and leaving _axis_markers holding
+	# them is what put a freed cast in _process. A reference that outlives its
+	# node is not a cache, it is a trap set for the next frame.
+	_forget_projection()
+
+
+## Drop every handle to the projection so it will be rebuilt from scratch.
+## Does NOT free anything: it is called both when the nodes have already gone
+## and when they are about to, and freeing a freed node is its own crash.
+func _forget_projection() -> void:
+	_axis_markers.clear()
+	_proj_lines = null
+	_proj_mesh = null
 
 
 ## ── THE PROJECTION (2026-08-24, Palle: "add a grab point and indicate the
@@ -391,8 +405,30 @@ func _find_point() -> Node3D:
 
 
 func _ensure_projection() -> void:
-	if not _axis_markers.is_empty():
+	# AN ARRAY OF FREED NODES IS NOT EMPTY (2026-09-01).
+	#
+	#     E _process: Trying to cast a freed object.
+	#     CoordinateSystem3M.gd:469 @ _process()
+	#
+	# The markers are built at runtime and have no `owner`, so _exit_tree()'s
+	# sweep frees them — but _axis_markers goes on holding the three references,
+	# and `not _axis_markers.is_empty()` is still true of an array of corpses. So
+	# this returned early, never rebuilt, and _process cast a freed object every
+	# frame from then on. `_proj_lines != null` was the same mistake in the other
+	# direction: a freed object is not null either.
+	#
+	# Validity, not count. Any stale entry throws the whole set away and rebuilds,
+	# which makes this self-healing no matter WHO freed them — and something will,
+	# again, because a runtime-built child of a node that gets reparented or
+	# streamed out is exactly the thing that goes away without telling anyone.
+	var live := not _axis_markers.is_empty()
+	for mk in _axis_markers:
+		if not is_instance_valid(mk):
+			live = false
+			break
+	if live and is_instance_valid(_proj_lines):
 		return
+	_forget_projection()
 	var cols: Array = [Color.RED, Color.GREEN, Color.BLUE]
 	for i in range(3):
 		var m := MeshInstance3D.new()
@@ -426,10 +462,15 @@ func _process(_delta: float) -> void:
 		return
 	var pt := _find_point()
 	if pt == null:
-		if _proj_lines != null:
+		# is_instance_valid, not `!= null` — a freed object passes a null check,
+		# and this hide-the-projection path reached the markers a frame EARLIER
+		# than the draw path did, so it is the same crash waiting on a different
+		# line. Fixing only the line the error named would have moved the bug.
+		if is_instance_valid(_proj_lines):
 			_proj_lines.visible = false
 			for mk in _axis_markers:
-				(mk as Node3D).visible = false
+				if is_instance_valid(mk):
+					(mk as Node3D).visible = false
 		return
 	if _start_pending:
 		# hold the world target until the frame stops moving under us
