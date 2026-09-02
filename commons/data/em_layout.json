@@ -76,6 +76,19 @@
 			"catalyst_sustain_demo"
 		]
 	},
+	"foes": {
+		"_readme": "THE ONE-DIMENSIONAL MEN (2026-08-29, Palle: 'put silhouettes in the museum by default in the grey sequences ... but also give me a gun there so I defend myself'). A hall whose chapter is a GREY sequence - soft_stages.json says no nature kingdoms and zero vegetation: primitives, transformation, isosurfaces, boolean_surfaces - is dressed with a few silhouette foes on its open floor, standing until you come within their detection radius, then walking the grid at you one metre a step; and a very pink gun on a plinth in its vestibule. Shot, a silhouette stops for good and stands on a small plinth of its own colour (a Giacometti). The museum writes what it did to ada_run/em_foes.json.",
+		"on": 1,
+		"_on": "0 = no silhouettes and no gun anywhere; the hall is the hall of yesterday",
+		"per_hall": 3,
+		"_per_hall": "silhouettes per grey hall, on distinct open cells at least 3 cells apart and clear_m from the door",
+		"gun": 1,
+		"_gun": "1 = a pink_gun on a 0.95 m plinth in the vestibule of every grey hall, off the centre line; 0 = no gun (the silhouettes still come)",
+		"clear_m": 5.0,
+		"_clear_m": "no silhouette stands closer than this to the hall's save point, so a visitor is never dropped into a touch",
+		"chapters": [],
+		"_chapters": "empty = derive the grey chapters from soft_stages.json (no kingdoms, zero vegetation). A non-empty list REPLACES that rule with these chapter names"
+	},
 	"stream": {
 		"build_ahead_m": 6.0,
 		"_build_ahead_m": "open the next segment when the eye is this close to the built edge. 6 = the build happens in the EXIT PASSAGE - the passages must turn a corner, or the doorway shows the unbuilt beyond (the one-hall contract, 2026-08-24)",

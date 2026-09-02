@@ -885,6 +885,18 @@ func _sil_contact_tick() -> void:
 	d.y = 0.0
 	if d.length() > 0.95:
 		return
+	# IN THE MUSEUM THE MUSEUM DECIDES (the head_crab precedent). Its walker is
+	# in no player group and has no health, and the GameManager's death path
+	# replaces the whole scene tree — the one thing an endless walk must never
+	# do. So while a museum stands in the tree, every touch goes to its own
+	# lane: walker_bitten flashes and shoves, and the third bite in eight
+	# seconds is the museum's death, back to the save point.
+	var museum: Node = get_tree().get_first_node_in_group("em_lethal")
+	if museum != null and museum.has_method("walker_bitten"):
+		museum.call("walker_bitten", global_position)
+		caught_player.emit()
+		_contact_timer = contact_cooldown
+		return
 	if _try_damage_target(_player_node):
 		_contact_timer = contact_cooldown
 		return
@@ -893,6 +905,20 @@ func _sil_contact_tick() -> void:
 		gm.call("apply_health_damage", contact_damage)
 		caught_player.emit()
 		_contact_timer = contact_cooldown
+
+
+## THE MUSEUM'S WALKER IS NOT A PLAYER (a standing trap: it joins only
+## em_walker, on purpose, so every player-detector in the game ignores it in
+## silence). The base looks for group player, then an XROrigin3D — and on the
+## desktop museum finds nothing, so a silhouette there would stand forever at
+## distance INF. A silhouette, and only a silhouette, looks for the walker too.
+## The museum may still hand it a better target after add_child (in VR, the eye).
+func _find_player() -> void:
+	super._find_player()
+	if _player_node == null and body == "silhouette" and is_inside_tree():
+		var w: Node = get_tree().get_first_node_in_group("em_walker")
+		if w is Node3D:
+			_player_node = w as Node3D
 
 
 ## SHOT, IT STOPS (2026-08-29, Palle: "when we shoot them they become static.

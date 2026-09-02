@@ -8659,6 +8659,10 @@ func _build_segment() -> void:
 		#     walker's own BFS route). It runs AFTER the benches, so a bench cell is
 		#     already out of the walk map when the floor rules look for a free pocket.
 		_dress_props(seg, tile, w, h, zbase, deal)
+		# 1d. THE ONE-DIMENSIONAL MEN. In a grey hall, a few silhouettes on the open
+		#     floor and a pink gun in the vestibule to meet them. Last, so the walk
+		#     map already knows every bench, prop and sealed cell.
+		_dress_foes(seg, tile, w, h, zbase, deal)
 	if _replay and not _bake_mode and _shot_path == "" and not _studio:
 		var dress_item := {"kind": "dress", "run": dress_pass, "seg": seg,
 			"seg_no": dress_seg_no,
@@ -13722,6 +13726,240 @@ func _dress_fixtures(seg: Node3D, solid: StaticBody3D, tile: Array, w: int, zbas
 ## 2.72 m, a vent in a coffer, a tray at 2.86 m and a floor grate flush with the
 ## deck are all walked under or over; erasing their cells would starve the
 ## autopilot's plan of the corridor it is supposed to use.
+## THE ONE-DIMENSIONAL MEN IN THE GREY HALLS (2026-08-29, Palle: "put silhouettes
+## in the museum by default in the grey sequences ... but also give me a gun there
+## so I defend myself"). A grey sequence is what soft_stages.json calls grey: no
+## nature kingdoms and zero vegetation — primitives, transformation, isosurfaces
+## and boolean_surfaces under the current plan (resourcemanagement is grey too,
+## and has no hall). The rule is READ from the data, not typed here, so a stage
+## that grows its first flower stops getting silhouettes the same day; em_layout
+## foes.chapters replaces the rule with a list when a hand wants one.
+##
+## The dress runs where the props run — last in the dress pass, so the walk map
+## already knows every bench, prop and sealed cell — and stands foes.per_hall
+## silhouettes on open interior cells, clear_m from the save point and three
+## cells from each other, seeded by chapter|pearl so a hall deals the same bodies
+## on every visit. They are children of the segment: freed with it, rebuilt with
+## it (a statue does not survive a rebuild yet). On the desktop a silhouette finds
+## the walker by itself; in the headset the museum hands it the eye. The gun
+## stands on a 0.95 m plinth in the vestibule off the centre line, frozen (an
+## unfrozen pickable is a rigid body over a plinth with no collider), with a
+## collider of its own so the visitor meets it, and it takes a furniture ruling
+## like any dressed prop. Everything the pass did goes to ada_run/em_foes.json.
+const FOES_REPORT := "res://ada_run/em_foes.json"
+const STAGES_PATH := "res://commons/maps/soft_stages.json"
+const GUN_PLINTH_M := 0.95
+var _soft_stages: Dictionary = {}
+var _grey_cache: Dictionary = {}
+var _foes_report: Dictionary = {}
+
+
+func _chapter_is_grey(ch: String) -> bool:
+	if ch == "":
+		return false
+	if _grey_cache.has(ch):
+		return bool(_grey_cache[ch])
+	var listed: Array = _layout_list("foes", "chapters", [])
+	var grey: bool = false
+	if not listed.is_empty():
+		grey = listed.has(ch)
+	else:
+		if _soft_stages.is_empty() and FileAccess.file_exists(STAGES_PATH):
+			var pv: Variant = JSON.parse_string(FileAccess.get_file_as_string(STAGES_PATH))
+			if pv is Dictionary:
+				_soft_stages = pv
+		var stages: Variant = _soft_stages.get("stages", {})
+		if stages is Dictionary and (stages as Dictionary).has(ch) and (stages as Dictionary)[ch] is Dictionary:
+			var eco: Variant = ((stages as Dictionary)[ch] as Dictionary).get("ecosystem", {})
+			if eco is Dictionary:
+				var kingdoms: Variant = (eco as Dictionary).get("nature_kingdoms", [])
+				var dens: float = float((eco as Dictionary).get("vegetation_density", 1.0))
+				grey = (kingdoms is Array) and (kingdoms as Array).is_empty() and dens <= 0.0
+	_grey_cache[ch] = grey
+	return grey
+
+
+func _dress_foes(seg: Node3D, _tile: Array, w: int, h: int, zbase: int, _deal: Dictionary) -> void:
+	if seg == null or not is_instance_valid(seg):
+		return
+	if _L("foes", "on", 1.0) <= 0.5 or not _bodies_on:
+		return
+	var ch: String = String(seg.get_meta("em_chapter")) if seg.has_meta("em_chapter") else ""
+	var pearl: String = str(seg.get_meta("em_pearl")) if seg.has_meta("em_pearl") else ""
+	var map_name: String = str(seg.get_meta("em_map")) if seg.has_meta("em_map") else ""
+	var key: String = "%s|%s" % [ch, pearl]
+	if not _chapter_is_grey(ch):
+		_foes_note(key, {"chapter": ch, "pearl": pearl, "map": map_name, "grey": false,
+			"silhouettes": [], "gun": null, "seg": int(_seg_index)})
+		return
+	var rng := RandomNumberGenerator.new()
+	rng.seed = hash(key)
+	var clear_m: float = _L("foes", "clear_m", 5.0)
+	var save := Vector2(float(w) / 2.0 + 0.5, float(zbase) + float(VESTIBULE_H) - 1.5)
+	# every open interior cell of THIS hall, clear of the door and the save point
+	var pool: Array = []
+	for k_v in _walk_cells:
+		var k: Vector2i = k_v
+		if k.y < zbase + VESTIBULE_H + 2 or k.y >= zbase + VESTIBULE_H + h - 1:
+			continue
+		if k.x < 1 or k.x >= w - 1:
+			continue
+		if Vector2(float(k.x) + 0.5, float(k.y) + 0.5).distance_to(save) < clear_m:
+			continue
+		pool.append(k)
+	pool.sort_custom(func(a: Vector2i, b: Vector2i) -> bool: return a.y < b.y or (a.y == b.y and a.x < b.x))
+	var want: int = int(_L("foes", "per_hall", 3.0))
+	var picks: Array = []
+	var tries: int = 0
+	while picks.size() < want and tries < 200 and not pool.is_empty():
+		tries += 1
+		var c: Vector2i = pool[rng.randi_range(0, pool.size() - 1)]
+		var apart: bool = true
+		for p_v in picks:
+			var p: Vector2i = p_v
+			if absi(p.x - c.x) + absi(p.y - c.y) < 3:
+				apart = false
+				break
+		if apart:
+			picks.append(c)
+	# the target: the walker on the desktop, the eye in the headset. A silhouette
+	# finds the walker by itself (catalyst_foe._find_player); the eye it cannot.
+	var target: Node3D = null
+	if _vr:
+		target = _vr_eye()
+	elif _player != null:
+		target = _player
+	var lv: Variant = _live.get("catalyst_foe", null)
+	var scene_path: String = String((lv as Dictionary).get("scene", "")) if lv is Dictionary else ""
+	var ps: PackedScene = null
+	if scene_path != "":
+		ps = load(scene_path) as PackedScene
+	var placed: Array = []
+	if ps == null:
+		push_warning("[em-foes] catalyst_foe is not alive in the registry — no silhouettes")
+	else:
+		for i in range(picks.size()):
+			var c: Vector2i = picks[i]
+			var f: Node3D = ps.instantiate() as Node3D
+			if f == null:
+				continue
+			f.name = "Silhouette%d" % i
+			f.set_meta("artifact_lookup_name", "catalyst_foe")
+			f.set_meta("em_foe", true)
+			var cfg: Dictionary = {"body": "silhouette", "phase": "foe",
+				"silhouette_seed": int(rng.randi_range(1, 2147483646))}
+			for ck in cfg:
+				f.set_meta("config_" + String(ck), cfg[ck])
+				if String(ck) in f:
+					f.set(String(ck), cfg[ck])
+			if f.has_method("apply_grid_config"):
+				f.call("apply_grid_config", cfg)
+			var lz: int = c.y - zbase
+			f.position = Vector3(float(c.x) + 0.5, _stage_top_at(c.x, lz - VESTIBULE_H), float(lz) + 0.5)
+			seg.add_child(f)
+			if target != null:
+				f.set("_player_node", target)
+			placed.append([c.x, c.y])
+			# in the inventory, so --em-look=catalyst_foe can photograph one and
+			# em_inventory.json says the hall had them
+			_inventory.append({"id": "%s|silhouette%d" % [key, i], "chapter": ch, "pearl": pearl,
+				"kind": "foe", "token": "catalyst_foe", "segment": _seg_index,
+				"world": [snappedf(f.global_position.x, 0.1), snappedf(f.global_position.y, 0.1),
+					snappedf(f.global_position.z, 0.1)], "cell": [c.x, lz - VESTIBULE_H]})
+	# the gun: a vestibule cell off the centre line, nearest (w/2 + 2.5, row 2)
+	var gun_cell: Variant = null
+	if _L("foes", "gun", 1.0) > 0.5:
+		var gl: Variant = _live.get("pink_gun", null)
+		var gun_scene: String = String((gl as Dictionary).get("scene", "")) if gl is Dictionary else ""
+		var gps: PackedScene = null
+		if gun_scene != "":
+			gps = load(gun_scene) as PackedScene
+		var want_at := Vector2(float(w) / 2.0 + 2.5, float(zbase) + 2.0)
+		var best: Vector2i = Vector2i(-1, -1)
+		var best_d: float = 1.0e9
+		for k_v in _walk_cells:
+			var k: Vector2i = k_v
+			if k.y < zbase + 1 or k.y >= zbase + VESTIBULE_H - 1:
+				continue
+			if absf(float(k.x) + 0.5 - float(w) / 2.0) < 1.5:
+				continue   # not on the way in
+			var d: float = Vector2(float(k.x) + 0.5, float(k.y) + 0.5).distance_to(want_at)
+			if d < best_d:
+				best_d = d
+				best = k
+		if gps == null:
+			push_warning("[em-foes] pink_gun is not alive in the registry — no gun")
+		elif best.x < 0:
+			push_warning("[em-foes] no open vestibule cell for the gun in %s" % key)
+		else:
+			var glz: int = best.y - zbase
+			var at := Vector3(float(best.x) + 0.5, 0.0, float(glz) + 0.5)
+			var plinth_scene: String = "res://commons/artifacts/station/station_plinth.tscn"
+			if ResourceLoader.exists(plinth_scene):
+				var pl: Node3D = (load(plinth_scene) as PackedScene).instantiate() as Node3D
+				if pl != null:
+					var pcfg: Dictionary = {"top_height": GUN_PLINTH_M, "cap_meters": 0.9, "width_cells": 1,
+						"depth_cells": 1, "top_style": "flat", "glow_light": false}
+					pl.name = "GunPlinth"
+					pl.set_meta("artifact_lookup_name", "station_plinth")
+					for pk in pcfg:
+						pl.set_meta("config_" + String(pk), pcfg[pk])
+					if pl.has_method("apply_grid_config"):
+						pl.call("apply_grid_config", pcfg)
+					pl.position = at
+					seg.add_child(pl)
+			var solid: Node = seg.get_node_or_null("Collision")
+			if solid is StaticBody3D:
+				_add_col(solid as StaticBody3D, at + Vector3(0, GUN_PLINTH_M * 0.5, 0), Vector3(0.6, GUN_PLINTH_M, 0.6))
+			var g: Node3D = gps.instantiate() as Node3D
+			if g != null:
+				g.name = "PinkGun"
+				g.set_meta("artifact_lookup_name", "pink_gun")
+				g.set_meta("em_foe_gun", true)
+				g.set("freeze", true)
+				g.position = at + Vector3(0, GUN_PLINTH_M + 0.06, 0)
+				g.rotation_degrees = Vector3(0, 35.0, 0)
+				# a furniture record, so the hand can nudge it and a ruling moves it
+				if _dressing_removed(ch, "furniture", "pink_gun", 0):
+					g.queue_free()
+				else:
+					for fr_v in _furniture_rules(ch, "furniture"):
+						var fr: Dictionary = fr_v
+						if String(fr.get("token", "")) == "pink_gun" and int(fr.get("index", -1)) == 0:
+							var o: Array = fr.get("offset", [])
+							if o.size() >= 3:
+								g.position += Vector3(float(o[0]), float(o[1]), float(o[2]))
+							if fr.has("rotation"):
+								g.rotation_degrees.y = float(fr["rotation"])
+					seg.add_child(g)
+					_edit_records.append({"node": g, "token": "pink_gun", "kind": "furniture",
+						"from": [], "tile_cell": [], "rotation": 35.0, "chapter": ch, "seg": seg, "index": 0})
+					_inventory.append({"id": "%s|pink_gun" % key, "chapter": ch, "pearl": pearl,
+						"kind": "furniture", "token": "pink_gun", "segment": _seg_index,
+						"world": [snappedf(g.global_position.x, 0.1), snappedf(g.global_position.y, 0.1),
+							snappedf(g.global_position.z, 0.1)], "cell": [best.x, glz - VESTIBULE_H]})
+			_walk_cells.erase(best)
+			_walk_erased[best] = "prop:pink_gun"
+			gun_cell = [best.x, best.y]
+	print("[em-foes] %s: %d silhouette(s) %s, gun %s" % [key, placed.size(), str(placed), str(gun_cell)])
+	_foes_note(key, {"chapter": ch, "pearl": pearl, "map": map_name, "grey": true,
+		"silhouettes": placed, "gun": gun_cell, "seg": int(_seg_index), "zbase": zbase, "w": w, "h": h})
+
+
+func _foes_note(key: String, rec: Dictionary) -> void:
+	_foes_report[key] = rec
+	var doc: Dictionary = {"schema": "adaresearch.em_foes.v1",
+		"_readme": "DERIVED, never edit: what _dress_foes did per hall, keyed chapter|pearl. grey = the chapter passed the grey rule; silhouettes = WORLD cells [x, z] the bodies were stood on; gun = the vestibule cell of the pink gun's plinth, or null.",
+		"at": Time.get_datetime_string_from_system(false, true),
+		"halls": _foes_report}
+	var f := FileAccess.open(_report_path(FOES_REPORT), FileAccess.WRITE)
+	if f == null:
+		f = FileAccess.open("user://em_foes.json", FileAccess.WRITE)
+	if f != null:
+		f.store_string(JSON.stringify(doc, "\t"))
+		f.close()
+
+
 func _dress_props(seg: Node3D, tile: Array, w: int, h: int, zbase: int,
 		deal: Dictionary) -> void:
 	if not _mod_has(_mod_props, "dress"):
@@ -18238,6 +18476,8 @@ func _take_proof_shot() -> void:
 		var hz: float = _shot_z if _shot_z_set else 6.0
 		var hstand: Vector3 = _stand_near(_shot_x if _shot_x_set else float(spec["w"]) / 2.0, hz)
 		_player.position = Vector3(hstand.x, _shot_y, hstand.z)
+		_yaw = _shot_yaw       # the look state too, or the next drain of the look
+		_pitch = _shot_pitch   # buffer turns the eye back to where it was
 		_player.rotation = Vector3(0.0, _shot_yaw, 0.0)
 		_cam.rotation = Vector3(_shot_pitch, 0.0, 0.0)
 		print("[em-shot] by hand: standing %.1f,%.1f,%.1f (asked %.1f,%.1f), yaw %.0f pitch %.0f" % [hstand.x, _shot_y, hstand.z, _shot_x, hz, rad_to_deg(_shot_yaw), rad_to_deg(_shot_pitch)])
