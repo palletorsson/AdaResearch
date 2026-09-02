@@ -13,6 +13,8 @@ const GUN := preload("res://commons/artifacts/pink_gun/pink_gun.tscn")
 var _out: String = "user://look_silhouettes.png"
 var _t: float = 0.0
 var _shot: bool = false
+var _statue: Node3D = null
+var _statue_shot: bool = false
 
 
 func _ready() -> void:
@@ -49,7 +51,8 @@ func _ready() -> void:
 	env.environment = e
 	add_child(env)
 
-	# five silhouettes in a loose rank, mid-step, one already a friend (pink)
+	# five silhouettes in a loose rank, mid-step; the fourth is SHOT before the
+	# frame and stands as a Giacometti on its small plinth
 	var seeds := [7919, 15838, 23757, 31676, 39595]
 	var xs := [-4.5, -2.5, -0.5, 1.5, 3.5]
 	var zs := [-3.5, -2.5, -3.5, -2.5, -3.5]
@@ -57,9 +60,12 @@ func _ready() -> void:
 		var f: Node3D = FOE.instantiate() as Node3D
 		f.set("body", "silhouette")
 		f.set("silhouette_seed", seeds[i])
-		f.set("phase", "friend" if i == 3 else "foe")
+		f.set("phase", "foe")
+		f.set("detection_radius", 0.0)   # posed, not hunting the camera
 		f.position = Vector3(xs[i], 0.0, zs[i])
 		add_child(f)
+		if i == 3:
+			_statue = f
 
 	# the gun, three forms, on plinths in the foreground
 	var plinth_mat := StandardMaterial3D.new()
@@ -109,6 +115,9 @@ func _slab(at: Vector3, size: Vector3, m: Material, layer: int) -> void:
 
 func _process(delta: float) -> void:
 	_t += delta
+	if _statue != null and _t >= 0.3 and not _statue_shot:
+		_statue_shot = true
+		_statue.call("hit_by_projectile", Color(1.0, 0.24, 0.66))
 	if _t < 1.4 or _shot:
 		return
 	_shot = true

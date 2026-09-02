@@ -119,8 +119,9 @@ const BODY_ORDER: Dictionary = {
 ## grid only walking one m, 1 snap"). A flat grey figure drawn from a seed onto a
 ## quad that turns to face you around Y and never shows a side; it does not
 ## glide, it steps one cell at a time on the lattice. It is a body, not a stage:
-## it takes the whole arc — foe, wary, friend — and the projectile hit, and the
-## vent, and the comic words, because it is the same creature in a flatter coat.
+## it takes the arc a map pins it to, and the vent, and the comic words, because
+## it is the same creature in a flatter coat — with one exception, below: shot,
+## it does not colour in. It stops (_sil_become_statue).
 @export var silhouette_seed: int = 0          # 0 = from the instance id
 @export var silhouette_step_s: float = 0.55   # seconds between one-metre steps
 @export var silhouette_height_m: float = 1.7
@@ -130,6 +131,12 @@ var _sil_step_t: float = 0.0        # time until the next step
 var _sil_squash: float = 0.0        # seconds left of the landing squash
 var _sil_floor_y: float = NAN       # learned from the first down-ray
 var _sil_last_dir: Vector3 = Vector3.ZERO
+var _sil_value: float = 0.9          # the drawing's mean opaque value — the plinth's colour
+var _sil_statue: bool = false        # shot: it has stopped for good
+var _sil_shuffle_t: float = 0.0      # seconds until an unalerted figure shifts one cell
+var _sil_plinth: MeshInstance3D = null
+const SIL_PLINTH_SIZE := Vector3(0.46, 0.09, 0.46)
+signal turned_to_statue
 
 ## Where on the phase-shift arc this foe is MET. The artifact's own truth line
 ## is "the catalyst doesn't kill — it phase-shifts"; until now the whole arc was
@@ -239,7 +246,9 @@ func _critter_stage() -> Dictionary:
 		# DNA axis `body` — a named stage stands in for the order number. The
 		# explicit `critter_stage` float still wins: it is finer-grained, and the
 		# vents that carry it were tuned against exact orders.
-		if order < 0.0 and BODY_ORDER.has(body):
+		if body == "silhouette":
+			order = 0.0   # a sprite is not a critter stage: no pop, no hover, no molt
+		elif order < 0.0 and BODY_ORDER.has(body):
 			order = float(BODY_ORDER[body])
 		if order < 0.0:
 			var hm: Node = get_node_or_null("/root/HazardManager")
@@ -321,7 +330,18 @@ func _build_silhouette() -> void:
 	var quad := QuadMesh.new()
 	quad.size = Vector2(silhouette_height_m * 0.5, silhouette_height_m)
 	_sil_mat = StandardMaterial3D.new()
-	_sil_mat.albedo_texture = SilhouetteSprite.make_texture(seed)
+	var img: Image = SilhouetteSprite.make_image(seed)
+	# the drawing's own value, for the plinth it may one day stand on
+	var vsum: float = 0.0
+	var vn: int = 0
+	for py in range(img.get_height()):
+		for px in range(img.get_width()):
+			var pc: Color = img.get_pixel(px, py)
+			if pc.a > 0.5:
+				vsum += pc.r
+				vn += 1
+	_sil_value = vsum / float(vn) if vn > 0 else 0.9
+	_sil_mat.albedo_texture = ImageTexture.create_from_image(img)
 	_sil_mat.albedo_color = Color(1, 1, 1, 1)
 	_sil_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	_sil_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA_SCISSOR
@@ -333,6 +353,7 @@ func _build_silhouette() -> void:
 	mi.name = "Silhouette"
 	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_ON   # a flat thing with a real shadow: the one 3D fact it has
 	_sil_step_t = silhouette_step_s * randf_range(0.2, 1.0)   # not all in lockstep
+	_sil_shuffle_t = silhouette_step_s * randf_range(3.0, 9.0)   # and not all shifting on the first frame
 
 
 ## Critter life: hover-bob, air-serpent weave, leg gait, chaos twitch.
@@ -567,6 +588,8 @@ func _on_ready() -> void:
 # gap or parked as a platform bypasses the state machine entirely.
 
 func _physics_process(delta: float) -> void:
+	if body == "silhouette" and not _sil_statue:
+		_sil_contact_tick()
 	if _personality == "friend" and _porter_state != PorterState.IDLE:
 		_porter_physics(delta)
 		return
@@ -629,6 +652,9 @@ func hit_by_catalyst_mode(color: Color, mode_id: String) -> void:
 	if DEBUG_LOG:
 		print("[CatalystFoe] hit_by_catalyst_mode mode_id='%s', personality='%s'" % [
 			mode_id, _personality])
+	if body == "silhouette":
+		_sil_become_statue(color)
+		return
 	if _personality == "friend":
 		return  # already friend
 	# Advance ONE step along the arc, not all the way to friend.
@@ -781,6 +807,143 @@ func _process_chase(delta: float) -> void:
 		_process_friend_chase(delta)
 	else:
 		super._process_chase(delta)
+
+
+func _process_patrol(delta: float) -> void:
+	if body == "silhouette":
+		_process_silhouette_wait(delta)
+		return
+	super._process_patrol(delta)
+
+
+func _process_idle(delta: float) -> void:
+	if body == "silhouette":
+		_process_silhouette_wait(delta)
+		return
+	super._process_idle(delta)
+
+
+func _process_detect(delta: float) -> void:
+	if body == "silhouette":
+		velocity = Vector3.ZERO
+	super._process_detect(delta)
+
+
+## UNALERTED, IT STANDS. The base patrol walks a rectangle at a velocity, which a
+## sprite must not do — and the first probe never saw it glide, because it forced
+## every figure straight into CHASE. A silhouette that has not noticed you waits
+## on its cell and now and then shifts to a random open neighbour, the Doom
+## monster's idle shuffle, so a room of them is still, not dead. The triggers out
+## of waiting are the base's own: detection radius, then DETECT, then the walk.
+## A statue does not even shuffle.
+func _process_silhouette_wait(delta: float) -> void:
+	velocity = Vector3.ZERO
+	if _sil_statue:
+		return
+	if is_instance_valid(_player_node) and _get_player_distance() <= detection_radius:
+		if _flee_from_player or _follow_player or _orbit_player:
+			_set_state(BaseState.CHASE)
+		elif _can_chase:
+			_set_state(BaseState.DETECT)
+		return
+	_sil_shuffle_t -= delta
+	if _sil_shuffle_t > 0.0:
+		return
+	_sil_shuffle_t = silhouette_step_s * randf_range(4.0, 9.0)
+	var here := Vector2i(int(floor(global_position.x)), int(floor(global_position.z)))
+	var centre := Vector3(float(here.x) + 0.5, global_position.y, float(here.y) + 0.5)
+	if Vector2(global_position.x - centre.x, global_position.z - centre.z).length() > 0.002:
+		global_position = centre
+		return
+	var dirs: Array = [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]
+	dirs.shuffle()
+	for d in dirs:
+		var c: Vector2i = here + d
+		if not _sil_cell_open(c):
+			continue
+		var fy: float = _sil_floor_y if not is_nan(_sil_floor_y) else global_position.y
+		global_position = Vector3(float(c.x) + 0.5, fy, float(c.y) + 0.5)
+		_sil_last_dir = Vector3(float(d.x), 0.0, float(d.y))
+		_sil_squash = 0.12
+		return
+
+
+## THE TOUCH. A body that is placed and never slides reports no slide collisions,
+## and the base contact damage reads nothing else — so a silhouette standing on
+## the player's cell landed no hit at all (the first probe's three foes closed to
+## 0.00 m and nothing was ever damaged, because nothing counted). Doom's melee is
+## a distance: within one cell, on the contact cooldown, the hit lands. Through
+## the base's own _try_damage_target, so the drainfriend drag and caught_player
+## ride along, and with the GameManager as the fallback when the player node the
+## base found (an XROrigin3D, say) is not itself in the group.
+func _sil_contact_tick() -> void:
+	if _contact_timer > 0.0 or contact_damage <= 0.0 or not _can_damage:
+		return
+	if not is_instance_valid(_player_node):
+		return
+	var d: Vector3 = _player_node.global_position - global_position
+	d.y = 0.0
+	if d.length() > 0.95:
+		return
+	if _try_damage_target(_player_node):
+		_contact_timer = contact_cooldown
+		return
+	var gm: Node = get_node_or_null("/root/GameManager")
+	if gm != null and gm.has_method("apply_health_damage"):
+		gm.call("apply_health_damage", contact_damage)
+		caught_player.emit()
+		_contact_timer = contact_cooldown
+
+
+## SHOT, IT STOPS (2026-08-29, Palle: "when we shoot them they become static.
+## Giacometti figures, like the Giacomettis work when shot, give them a small
+## same color plinth"). The pink gun does not colour a silhouette in; it ends
+## its walk. The figure keeps the tint it had, the landing squash is cancelled
+## mid-step, chase and contact damage go, and a small block appears under its
+## feet in the drawing's own value — the base is the same bronze as the figure,
+## as on a Giacometti — with the figure lifted onto it. The billboard stays: a
+## statue that turns to face you is still the Doom cheat, and still has no side.
+func _sil_become_statue(color: Color) -> void:
+	if _sil_statue:
+		return
+	_sil_statue = true
+	velocity = Vector3.ZERO
+	_sil_squash = 0.0
+	if _mesh_root != null:
+		_mesh_root.scale = Vector3.ONE
+	contact_damage = 0.0
+	_can_damage = false
+	_can_chase = false
+	_flee_from_player = false
+	_orbit_player = false
+	_follow_player = false
+	_set_state(BaseState.IDLE)
+	if is_in_group("enemy"):
+		remove_from_group("enemy")
+	add_to_group("statue")
+	set_meta("silhouette_statue", true)
+	# onto the lattice, then onto the plinth
+	var here := Vector2i(int(floor(global_position.x)), int(floor(global_position.z)))
+	var fy: float = _sil_floor_y if not is_nan(_sil_floor_y) else global_position.y
+	global_position = Vector3(float(here.x) + 0.5, fy + SIL_PLINTH_SIZE.y, float(here.y) + 0.5)
+	var tint: Color = _sil_mat.albedo_color if _sil_mat != null else Color(1, 1, 1)
+	var base_c := Color(_sil_value * tint.r, _sil_value * tint.g, _sil_value * tint.b, 1.0)
+	var box := BoxMesh.new()
+	box.size = SIL_PLINTH_SIZE
+	var pm := StandardMaterial3D.new()
+	pm.albedo_color = base_c
+	pm.roughness = 0.95
+	_sil_plinth = MeshInstance3D.new()
+	_sil_plinth.name = "Plinth"
+	_sil_plinth.mesh = box
+	_sil_plinth.material_override = pm
+	_sil_plinth.position = Vector3(0, -SIL_PLINTH_SIZE.y * 0.5, 0)
+	add_child(_sil_plinth)
+	var flash: Color = color if color.a > 0.0 else base_c
+	if is_inside_tree():
+		_spawn_hit_burst(flash, Vector3(0, silhouette_height_m * 0.5, 0), 0.8)
+		_spawn_light_pulse(flash, Vector3(0, silhouette_height_m * 0.5, 0))
+	turned_to_statue.emit()
 
 
 ## ONE METRE, ONE SNAP. The one-dimensional man does not glide across a room;
