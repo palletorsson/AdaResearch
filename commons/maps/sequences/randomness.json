@@ -42,7 +42,6 @@
 	"Random_Rotate_Random_XYZ",
 	"Random_Walk",
 	"Random_Gaussian",
-	"Chamber_Random",
 	"Random_Mushrooms",
 	"Random_Space_Geometry",
 	"Randomness_Examples_of_Randomness",
@@ -50,6 +49,12 @@
 	"Random_Space",
     "Random_Game"
    ],
+   "deferred_maps": [
+   	"Chamber_Random"
+   ],
+   "deferred_reason": {
+   	"Chamber_Random": "chambers removed from the spine (Palle, 2026-09-02): the catalyst chambers leave the walk; the map stays on disk"
+   },
    "audio": {
 	"ambient_preset": "white_noise_drift",
 	"interactive_sounds": {

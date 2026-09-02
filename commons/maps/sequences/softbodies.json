@@ -46,7 +46,6 @@
 				"SoftBodies_Affect_Theory_Visualization",
 				"ProceduralGeneration_Reaction_Diffusion_Systems",
 				"Topology_Entropy_Morphogenesis",
-				"Chamber_SoftBodies",
 				"SoftBody_sb01_cloth_drape_corners",
 				"SoftBody_sb02_cloth_drape_top_row",
 				"SoftBody_sb03_cloth_flag_sideways",
@@ -72,6 +71,12 @@
 				"SoftBody_gm03_box_in_cube_mould",
 				"SoftBody_gm04_pressed_onto_sphere"
 			],
+			"deferred_maps": [
+				"Chamber_SoftBodies"
+			],
+			"deferred_reason": {
+				"Chamber_SoftBodies": "chambers removed from the spine (Palle, 2026-09-02): the catalyst chambers leave the walk; the map stays on disk"
+			},
 			"name": "Soft Bodies & Morphogenesis: Matter That Finds Its Shape",
 			"prerequisites": [
 				"forces",

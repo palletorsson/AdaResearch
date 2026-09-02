@@ -37,7 +37,6 @@
 	"GT_Pathfinding",
 	"GT_Network_Analysis",
 	"GT_Connectivity",
-	"Chamber_GraphTheory",
 	"GT_Spanning_Trees",
 	"GT_Flow",
     "GT_Matching"
@@ -84,8 +83,12 @@
 	]
    },
    "deferred_maps": [
-    "GraphTheory_Maximum_Flow_Algorithms"
+    "GraphTheory_Maximum_Flow_Algorithms",
+   	"Chamber_GraphTheory"
    ],
+   "deferred_reason": {
+   	"Chamber_GraphTheory": "chambers removed from the spine (Palle, 2026-09-02): the catalyst chambers leave the walk; the map stays on disk"
+   },
    "artifact_groups": [
 	{
 	 "map": "GT_Foundations",

@@ -29,9 +29,14 @@
     "FormFinding_Relaxation",
     "FormFinding_Equilibrium",
     "FormFinding_Annealing",
-    "Chamber_FormFinding",
     "FormFinding_Forge"
    ],
+   "deferred_maps": [
+   	"Chamber_FormFinding"
+   ],
+   "deferred_reason": {
+   	"Chamber_FormFinding": "chambers removed from the spine (Palle, 2026-09-02): the catalyst chambers leave the walk; the map stays on disk"
+   },
    "content": [
     "FormFinding_Descent: why does matter take THIS shape? — the marble in the bowl, the gradient",
     "FormFinding_Catenary: the hanging chain and the soap film — the two oldest solved minimizations",

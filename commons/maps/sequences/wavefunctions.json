@@ -54,9 +54,14 @@
 		"WaveFunctions_AirMusic",
 		"Wavefunctions_Sky_Stairs",
 		"WaveFunctions_TrigWalkingPath",
-		"Chamber_Waves",
         "WaveFunctions_Synthesis_Lab"
 	  ],
+	  "deferred_maps": [
+	  	"Chamber_Waves"
+	  ],
+	  "deferred_reason": {
+	  	"Chamber_Waves": "chambers removed from the spine (Palle, 2026-09-02): the catalyst chambers leave the walk; the map stays on disk"
+	  },
 	  "axiom_files": [
 		"res://commons/context/clipboard/tutorial_text/wavefunction_axioms.md",
 		"res://commons/context/clipboard/tutorial_text/fourier_axioms.md",

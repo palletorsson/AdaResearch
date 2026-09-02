@@ -35,7 +35,6 @@
 	"PG_Space_Colonization",
 	"PG_Percolation_Network",
 	"PG_Branching_Growth",
-	"Chamber_ProcGen",
 	"PG_Caves_Mazes",
 	"PG_Sculpted_Forms",
     "PG_Mirrored_Patterns"
@@ -192,8 +191,12 @@
 	"ProceduralGeneration_Eight",
 	"ProceduralGeneration_Ten",
 	"ProceduralGeneration_Eleven",
-    "ProceduralGeneration_21"
+    "ProceduralGeneration_21",
+   	"Chamber_ProcGen"
    ],
+   "deferred_reason": {
+   	"Chamber_ProcGen": "chambers removed from the spine (Palle, 2026-09-02): the catalyst chambers leave the walk; the map stays on disk"
+   },
    "sub_sequences": {
 	"_note": "Focused sub-sequences in branch tracks â€” see their own sequence JSONs",
 	"grammar_systems": "3 maps â€” Markov, N-grams, Voxel Grammar",

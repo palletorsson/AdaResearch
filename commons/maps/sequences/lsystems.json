@@ -41,7 +41,6 @@
 	"LSystems_Architecture",
 	"LSystems_Competition",
 	"LSystems_Living",
-	"Chamber_LSystems",
     "Assemblage_Same_Desire"
    ],
    "audio": {
@@ -64,8 +63,12 @@
 	"LSystems_Different_Grammar_Types",
 	"LSystems_Shape_Grammars",
 	"LSystems_Stochastic_L_Systems",
-    "LSystems_Backus_Naur_Form_BNF"
+    "LSystems_Backus_Naur_Form_BNF",
+   	"Chamber_LSystems"
    ],
+   "deferred_reason": {
+   	"Chamber_LSystems": "chambers removed from the spine (Palle, 2026-09-02): the catalyst chambers leave the walk; the map stays on disk"
+   },
    "references": {
 	"key_texts": [
      "Prusinkiewicz & Lindenmayer: The Algorithmic Beauty of Plants"

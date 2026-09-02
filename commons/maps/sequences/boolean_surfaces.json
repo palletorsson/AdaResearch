@@ -36,9 +36,14 @@
     "Boolean_Intersection",
     "Boolean_Difference",
     "Boolean_Compose_Workbench",
-    "Chamber_Boolean",
     "Boolean_Architecture_Cavity"
    ],
+   "deferred_maps": [
+   	"Chamber_Boolean"
+   ],
+   "deferred_reason": {
+   	"Chamber_Boolean": "chambers removed from the spine (Palle, 2026-09-02): the catalyst chambers leave the walk; the map stays on disk"
+   },
    "artifact_groups": [
     {
      "map": "Boolean_Union",

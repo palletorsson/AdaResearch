@@ -45,10 +45,15 @@
     "QFEP_Lambda_Spectrum",
     "QFEP_Phi_Term",
     "QFEP_Edge_Of_Chaos",
-    "Chamber_QFEP",
     "QFEP_Sandbox",
     "QFEP_Synthesis"
    ],
+   "deferred_maps": [
+   	"Chamber_QFEP"
+   ],
+   "deferred_reason": {
+   	"Chamber_QFEP": "chambers removed from the spine (Palle, 2026-09-02): the catalyst chambers leave the walk; the map stays on disk"
+   },
    "audio": {
     "ambient_preset": "laboratory_hum",
     "volume": -12.0

@@ -45,9 +45,14 @@
 		"CA_ExpandingSpace",
 		"CA_SoftRules",
 		"CA_AgentsCircuits",
-		"Chamber_CA",
         "CA_EdgeOfChaos"
 	  ],
+	  "deferred_maps": [
+	  	"Chamber_CA"
+	  ],
+	  "deferred_reason": {
+	  	"Chamber_CA": "chambers removed from the spine (Palle, 2026-09-02): the catalyst chambers leave the walk; the map stays on disk"
+	  },
 	  "axiom_files": [
 		"res://commons/context/clipboard/tutorial_text/cellularautomata_axioms.md",
 		"res://commons/context/clipboard/tutorial_text/wolfram_rules.md",

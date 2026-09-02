@@ -41,7 +41,6 @@
 	"ISO_ShapesGallery",
 	"ISO_TorusGyroid",
 	"ISO_Sculpting",
-	"Chamber_Isosurfaces",
 	"ISO_FlatTerrain",
 	"ISO_PortalLandscape",
 	"ISO_Caves",
@@ -94,8 +93,12 @@
 	"ProceduralGenerationMarchingCubesInsideCave",
 	"ProceduralGenerationMarchingcubesTorusSculpture",
 	"ProceduralGenerationMarchingCubesVovelNoise",
-    "ProceduralGeneration_MarchingGallery"
+    "ProceduralGeneration_MarchingGallery",
+   	"Chamber_Isosurfaces"
    ],
+   "deferred_reason": {
+   	"Chamber_Isosurfaces": "chambers removed from the spine (Palle, 2026-09-02): the catalyst chambers leave the walk; the map stays on disk"
+   },
    "algorithm_paths": {
 	"marching_cubes": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/",
 	"marching_squares": "res://algorithms/proceduralgeneration/isosurfaces/marchingsquares/",

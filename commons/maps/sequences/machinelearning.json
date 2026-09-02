@@ -41,7 +41,6 @@
 	"ML_Neural_Networks",
 	"ML_Perception",
 	"ML_Sequence_Memory",
-	"Chamber_ML",
 	"ML_Generative",
     "ML_Synthesis"
    ],
@@ -64,8 +63,12 @@
 	"MachineLearning_Fine_tuning",
 	"MachineLearning_Recommendation_Systems",
 	"MachineLearning_Classification_Algorithms",
-    "MachineLearning_Attention_Mechanisms"
+    "MachineLearning_Attention_Mechanisms",
+   	"Chamber_ML"
    ],
+   "deferred_reason": {
+   	"Chamber_ML": "chambers removed from the spine (Palle, 2026-09-02): the catalyst chambers leave the walk; the map stays on disk"
+   },
    "algorithm_sources": {
 	"_note": "Mapping from new maps to algorithms/machinelearning/ folders",
 	"ML_Evolution": [

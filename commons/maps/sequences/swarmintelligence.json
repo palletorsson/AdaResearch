@@ -44,10 +44,15 @@
     "SwarmIntelligence_Boids_Algorithm",
     "SwarmIntelligence_Agent_Based_Modeling_ABM",
     "SwarmIntelligence_Ant_Colony_Optimization",
-    "Chamber_Swarm",
     "SwarmIntelligence_Particle_Swarm_Optimization",
     "SwarmIntelligence_Swarm_Intelligence_Algorithms"
    ],
+   "deferred_maps": [
+   	"Chamber_Swarm"
+   ],
+   "deferred_reason": {
+   	"Chamber_Swarm": "chambers removed from the spine (Palle, 2026-09-02): the catalyst chambers leave the walk; the map stays on disk"
+   },
    "axiom_files": [
     "res://commons/context/clipboard/tutorial_text/swarm_axioms.md",
     "res://commons/context/clipboard/tutorial_text/boids_axioms.md",

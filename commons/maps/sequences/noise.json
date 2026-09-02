@@ -46,14 +46,17 @@
 	"Noise_Inside_Noise",
 	"Noise_Space_10",
 	"Noise_Perlin_Simplex",
-	"Chamber_Noise",
     "Lab_Path"
    ],
    "deferred_maps": [
 	"Noise_Blue",
 	"Noise_Functions",
-    "Noise_Volume"
+    "Noise_Volume",
+   	"Chamber_Noise"
    ],
+   "deferred_reason": {
+   	"Chamber_Noise": "chambers removed from the spine (Palle, 2026-09-02): the catalyst chambers leave the walk; the map stays on disk"
+   },
    "axiom_files": [
 	"res://commons/context/clipboard/tutorial_text/noise_axioms.md",
     "res://commons/context/clipboard/tutorial_text/perlin_axioms.md"

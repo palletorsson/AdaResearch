@@ -41,10 +41,15 @@
 	"SpeculativeComputation_Situated_Computation",
 	"SpeculativeComputation_Collective_Knowledge",
 	"SpeculativeComputation_Rhizome_Network",
-	"Chamber_PostFoundations",
 	"AdvancedLaboratory_Lab_Equipment_Simulation",
     "PostCrisis_Synthesis"
    ],
+   "deferred_maps": [
+   	"Chamber_PostFoundations"
+   ],
+   "deferred_reason": {
+   	"Chamber_PostFoundations": "chambers removed from the spine (Palle, 2026-09-02): the catalyst chambers leave the walk; the map stays on disk"
+   },
    "audio": {
 	"ambient_preset": "minimal_drone",
 	"volume": -10.0

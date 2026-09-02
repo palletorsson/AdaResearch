@@ -42,10 +42,15 @@
 	"Godel_Incompleteness",
 	"Escher_Impossible",
 	"Brouwer_Intuitionism",
-	"Chamber_Foundations",
 	"Florensky_Paraconsistent",
     "Crisis_Synthesis"
    ],
+   "deferred_maps": [
+   	"Chamber_Foundations"
+   ],
+   "deferred_reason": {
+   	"Chamber_Foundations": "chambers removed from the spine (Palle, 2026-09-02): the catalyst chambers leave the walk; the map stays on disk"
+   },
    "audio": {
 	"ambient_preset": "minimal_drone",
 	"volume": -10.0
