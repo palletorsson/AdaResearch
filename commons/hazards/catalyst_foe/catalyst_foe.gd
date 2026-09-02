@@ -112,7 +112,24 @@ const BODY_ORDER: Dictionary = {
 	"octapod": 7.0,   # randomness — lands, grows 8 legs, the spider silhouette
 	"grand":  10.0,   # fractals onward — the same critter, 2.8x
 }
-@export_enum("curriculum", "cube", "mote", "serpent", "octapod", "grand") var body: String = "curriculum"
+@export_enum("curriculum", "cube", "mote", "serpent", "octapod", "grand", "silhouette") var body: String = "curriculum"
+## THE SILHOUETTE (2026-08-29, Palle: "the enemies should be silhouettes in the
+## beginning like in doom but more abstract ... black and gray ... 2.5 billboard
+## sprite cheats that are procedurally generated ... they will path find in the
+## grid only walking one m, 1 snap"). A flat grey figure drawn from a seed onto a
+## quad that turns to face you around Y and never shows a side; it does not
+## glide, it steps one cell at a time on the lattice. It is a body, not a stage:
+## it takes the whole arc — foe, wary, friend — and the projectile hit, and the
+## vent, and the comic words, because it is the same creature in a flatter coat.
+@export var silhouette_seed: int = 0          # 0 = from the instance id
+@export var silhouette_step_s: float = 0.55   # seconds between one-metre steps
+@export var silhouette_height_m: float = 1.7
+const SilhouetteSprite := preload("res://commons/hazards/catalyst_foe/silhouette_sprite.gd")
+var _sil_mat: StandardMaterial3D = null
+var _sil_step_t: float = 0.0        # time until the next step
+var _sil_squash: float = 0.0        # seconds left of the landing squash
+var _sil_floor_y: float = NAN       # learned from the first down-ray
+var _sil_last_dir: Vector3 = Vector3.ZERO
 
 ## Where on the phase-shift arc this foe is MET. The artifact's own truth line
 ## is "the catalyst doesn't kill — it phase-shifts"; until now the whole arc was
@@ -270,12 +287,20 @@ func _build_collision() -> void:
 	# by catalyst projectiles, no mask so we don't push world cubes).
 	var col := CollisionShape3D.new()
 	var shape := BoxShape3D.new()
-	shape.size = Vector3(0.3, 0.3, 0.3)
+	if body == "silhouette":
+		# a standing figure: the projectile has to be able to hit the chest
+		shape.size = Vector3(0.6, silhouette_height_m, 0.3)
+		col.position = Vector3(0, silhouette_height_m * 0.5, 0)
+	else:
+		shape.size = Vector3(0.3, 0.3, 0.3)
 	col.shape = shape
 	add_child(col)
 
 
 func _build_mesh() -> void:
+	if body == "silhouette":
+		_build_silhouette()
+		return
 	var stage: Dictionary = _critter_stage()
 	if String(stage.get("name", "cube")) == "cube":
 		# Pre-color world (soft_stages order <= 4): the legacy grey lab cube.
@@ -287,9 +312,42 @@ func _build_mesh() -> void:
 	_critter_refs = CritterMorphology.build(_mesh_root, _custom_mat, stage)
 
 
+## A quad with a seeded figure on it. Unshaded and upright: BILLBOARD_FIXED_Y is
+## the Doom cheat — it turns to face you around Y and never shows a side, because
+## it has none. The seed defaults to the instance id, so a vent that emits eight
+## gets eight different bodies without anyone choosing them.
+func _build_silhouette() -> void:
+	var seed: int = silhouette_seed if silhouette_seed != 0 else int(get_instance_id() % 2147483647)
+	var quad := QuadMesh.new()
+	quad.size = Vector2(silhouette_height_m * 0.5, silhouette_height_m)
+	_sil_mat = StandardMaterial3D.new()
+	_sil_mat.albedo_texture = SilhouetteSprite.make_texture(seed)
+	_sil_mat.albedo_color = Color(1, 1, 1, 1)
+	_sil_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	_sil_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA_SCISSOR
+	_sil_mat.alpha_scissor_threshold = 0.35
+	_sil_mat.billboard_mode = BaseMaterial3D.BILLBOARD_FIXED_Y
+	_sil_mat.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST   # it is a sprite; let it be pixels
+	_sil_mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	var mi := _add_mesh(quad, _sil_mat, Vector3(0, silhouette_height_m * 0.5, 0))
+	mi.name = "Silhouette"
+	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_ON   # a flat thing with a real shadow: the one 3D fact it has
+	_sil_step_t = silhouette_step_s * randf_range(0.2, 1.0)   # not all in lockstep
+
+
 ## Critter life: hover-bob, air-serpent weave, leg gait, chaos twitch.
 ## All offsets live on _mesh_root — physics stays grounded.
 func _process_visual(delta: float) -> void:
+	if body == "silhouette" and _mesh_root != null and not _blown_up:
+		# a sprite does not breathe. It lands: one frame of squash when it steps,
+		# which is all the animation a Doom sprite ever had between its cells.
+		if _sil_squash > 0.0:
+			_sil_squash = maxf(0.0, _sil_squash - delta)
+			var k: float = _sil_squash / 0.12
+			_mesh_root.scale = Vector3(1.0 + 0.12 * k, 1.0 - 0.14 * k, 1.0)
+		else:
+			_mesh_root.scale = Vector3.ONE
+		return
 	if _mesh_root == null or not _critter_active() or _blown_up:
 		return
 	_critter_time += delta
@@ -640,6 +698,23 @@ func hit_by_catalyst_mode(color: Color, mode_id: String) -> void:
 # legible at a glance.
 
 func _apply_state_visuals_for_personality(p: String) -> void:
+	if body == "silhouette" and _sil_mat != null:
+		# grey until it is not. The figure is drawn grey and the material is a
+		# multiplier over it: a foe is exactly the drawing; wary reddens it; a
+		# friend is the same silhouette gone PINK — the one-dimensional man
+		# colours in, which is the whole arc in one tint.
+		match p:
+			"wary":
+				_sil_mat.albedo_color = Color(1.9, 0.9, 0.85)
+			"neutral":
+				_sil_mat.albedo_color = Color(1.8, 1.5, 1.4)
+			"curious":
+				_sil_mat.albedo_color = Color(2.4, 1.6, 2.0)
+			"friend":
+				_sil_mat.albedo_color = Color(4.2, 1.5, 2.9)   # grey x this = hot pink
+			_:
+				_sil_mat.albedo_color = Color(1, 1, 1, 1)
+		return
 	if _custom_mat == null:
 		return
 	# The critter stays PINK through the hostile half of the arc — the cute
@@ -697,10 +772,108 @@ func _apply_state_visuals_for_personality(p: String) -> void:
 # FRIEND is unique to catalyst_foe — chase nearest non-friend foe.
 
 func _process_chase(delta: float) -> void:
+	if body == "silhouette":
+		_process_silhouette_step(delta)
+		return
 	if _personality == "friend":
 		_process_friend_chase(delta)
 	else:
 		super._process_chase(delta)
+
+
+## ONE METRE, ONE SNAP. The one-dimensional man does not glide across a room;
+## he moves cell to cell, four-connected, and arrives all at once. Every
+## silhouette_step_s it asks the floor which of its four neighbours it can stand
+## on — a down-ray that must find floor within a step of its own, and a chest-
+## height ray to the next cell centre that must find nothing — and takes the
+## one that shortens the Manhattan distance to the player. A friend steps away
+## from the nearest foe toward it, as the round ones do; a wary one steps back.
+## No velocity: the body is placed. move_and_slide gets zero and stays out of it.
+func _process_silhouette_step(delta: float) -> void:
+	velocity = Vector3.ZERO
+	var dist: float = _get_player_distance()
+	if dist > disengage_radius:
+		_set_state(BaseState.PATROL)
+		return
+	if not is_instance_valid(_player_node):
+		return
+	_sil_step_t -= delta
+	if _sil_step_t > 0.0:
+		return
+	_sil_step_t = silhouette_step_s
+	# the goal: the player's cell, or — as a friend — the nearest foe's
+	var goal: Vector3 = _player_node.global_position
+	if _personality == "friend":
+		var f: CatalystFoe = _nearest_non_friend()
+		if f != null and is_instance_valid(f):
+			goal = f.global_position
+	var here := Vector2i(int(floor(global_position.x)), int(floor(global_position.z)))
+	# ONTO THE LATTICE FIRST. A spawned body settles a few centimetres off its
+	# cell centre in the first physics frames, and the probe caught the first
+	# step of every silhouette at 0.975 m: a snap that was also a correction.
+	# Centre it, and let that be this tick; every step after is exactly one.
+	var centre := Vector3(float(here.x) + 0.5, global_position.y, float(here.y) + 0.5)
+	if Vector2(global_position.x - centre.x, global_position.z - centre.z).length() > 0.002:
+		global_position = centre
+		return
+	var there := Vector2i(int(floor(goal.x)), int(floor(goal.z)))
+	if here == there:
+		return
+	var away: bool = _flee_from_player and _personality != "friend"
+	var best: Vector2i = here
+	var best_d: int = absi(there.x - here.x) + absi(there.y - here.y)
+	if away:
+		best_d = -1
+	for d in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+		var c: Vector2i = here + d
+		var md: int = absi(there.x - c.x) + absi(there.y - c.y)
+		var better: bool = (md > best_d) if away else (md < best_d)
+		if not better:
+			continue
+		if not _sil_cell_open(c):
+			continue
+		best = c
+		best_d = md
+	if best == here:
+		return                        # boxed in: it waits, as a sprite does
+	var fy: float = _sil_floor_y if not is_nan(_sil_floor_y) else global_position.y
+	global_position = Vector3(float(best.x) + 0.5, fy, float(best.y) + 0.5)
+	_sil_last_dir = Vector3(float(best.x - here.x), 0.0, float(best.y - here.y))
+	_sil_squash = 0.12
+
+
+## Can it stand on this cell, and get there from here? Two rays on layer 1, the
+## world: down through the cell centre for a floor within a step of the one it
+## stands on, and level at chest height from here to there for a wall. The
+## floor it learns on the first probe is the floor it snaps to thereafter, so a
+## body never drifts up or down by the thickness of its own collider.
+func _sil_cell_open(c: Vector2i) -> bool:
+	if not is_inside_tree():
+		return false
+	var w := get_world_3d()
+	if w == null or w.direct_space_state == null:
+		return false
+	var space := w.direct_space_state
+	var base: float = _sil_floor_y if not is_nan(_sil_floor_y) else global_position.y
+	var cx: float = float(c.x) + 0.5
+	var cz: float = float(c.y) + 0.5
+	var down := PhysicsRayQueryParameters3D.create(Vector3(cx, base + 1.2, cz), Vector3(cx, base - 1.2, cz))
+	down.collision_mask = 1
+	down.exclude = [get_rid()]
+	var hit: Dictionary = space.intersect_ray(down)
+	if hit.is_empty():
+		return false
+	var fy: float = float((hit["position"] as Vector3).y)
+	if absf(fy - base) > 0.6:
+		return false                  # a drop or a climb; the grid is level or it is a wall
+	if is_nan(_sil_floor_y):
+		_sil_floor_y = fy
+	var chest: float = fy + silhouette_height_m * 0.45
+	var level := PhysicsRayQueryParameters3D.create(
+		Vector3(global_position.x, chest, global_position.z), Vector3(cx, chest, cz))
+	level.collision_mask = 1
+	level.exclude = [get_rid()]
+	return space.intersect_ray(level).is_empty()
 
 
 func _process_friend_chase(delta: float) -> void:
@@ -1431,6 +1604,15 @@ func apply_grid_config(config: Dictionary) -> void:
 	# critter (maps/vents pin a stage; unseeded foes ask HazardManager).
 	if config.has("critter_stage"):
 		_critter_stage_order = float(config.get("critter_stage", -1.0))
+	# `body` and the silhouette knobs from a map token: catalyst_foe#body:silhouette
+	if config.has("body"):
+		var bv := String(config.get("body", "")).to_lower()
+		if bv in ["curriculum", "cube", "mote", "serpent", "octapod", "grand", "silhouette"]:
+			body = bv
+	if config.has("silhouette_seed"):
+		silhouette_seed = int(config.get("silhouette_seed", 0))
+	if config.has("silhouette_step_s"):
+		silhouette_step_s = maxf(0.1, float(config.get("silhouette_step_s", 0.55)))
 		_critter_stage_cache = {}
 		if _mesh_root != null:
 			_rebuild_critter_visuals()

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" uid="uid://bnfmsrmelyuhq" path="res://commons/primitives/cubes/grab_stick.tscn" id="1_grab_stick"]
+[ext_resource type="Script" path="res://commons/artifacts/pink_gun/pink_gun.gd" id="2_pink_gun"]
+
+[node name="PinkGunPickable" instance=ExtResource("1_grab_stick")]
+
+[node name="PinkGun" type="Node3D" parent="." index="1"]
+script = ExtResource("2_pink_gun")

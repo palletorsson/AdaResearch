@@ -10520,6 +10520,39 @@
 			},
 			"qfep_connection": "Twenty segments sampling one sine \u2014 no segment is the creature, the phase relation is. Being detected ramps its frequency toward resonance, and at the peak the wave discharges: attention literally raises its energy state."
 		},
+		"pink_gun": {
+			"name": "Pink Gun",
+			"lookup_name": "pink_gun",
+			"scene": "res://commons/artifacts/pink_gun/pink_gun.tscn",
+			"class_name": "PinkGun",
+			"category": "hazards",
+			"artifact_type": "tool",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"interaction": "grab",
+			"description": "A very, very pink gun. Held like the laser measure, it fires the museum's own catalyst projectile from every muzzle, so what it hits it does not kill: a grey silhouette shot with it goes pink and walks with you. Glossy, clearcoated, lit from inside, with a heart for a sight. The gun is the argument.",
+			"dev_themes": [
+				"gameplay",
+				"hazards",
+				"catalyst",
+				"queer"
+			],
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"form": [
+						"stub",
+						"long",
+						"cluster"
+					]
+				},
+				"default": "form=stub",
+				"predicted_degeneracy": "long vs stub, ~6%: same grip, same rings, the barrel twice the length; cluster differs from both by three muzzles and two wide rings, so it is the far pair",
+				"note": "the projectile is CatalystProjectile itself with pink colours, not a new mode — the hit contract (hit_by_catalyst_mode / hit_by_projectile) is untouched, and a hit on a silhouette runs the same foe-to-friend arc every other hit runs"
+			}
+		},
 		"catalyst_foe": {
 			"dna": {
 				"promoted": "2026-08-03",
@@ -10531,7 +10564,8 @@
 						"mote",
 						"serpent",
 						"octapod",
-						"grand"
+						"grand",
+						"silhouette"
 					],
 					"phase": [
 						"curriculum",
