@@ -1,0 +1,42 @@
+{
+ "_readme": "SOFTBODIES 33 -> 9 (2026-09-02, Palle: 'can we try to reduce the number of maps in softbodies by thinking the red thread in that sequence?'). Twenty-four of the thirty-three live maps are the SAME ROOM: a 12x12 tile with a 10x10 floor, spawn two cells from the teleporter, and one token, gallery_marker_soft-body:0:0.5, byte for byte identical in all twenty-four. That token is a bronze pedestal with a stake and a Label3D reading SOFT BODY; its own registry entry calls it a 'single-cell sub-gallery anchor used 24x across softbodies maps'. So the sequence currently walks a visitor through twenty-four identical empty rooms, each holding one signpost naming the thing that is not there. The ledger agrees: dropping all twenty-four orphans exactly one token, the signpost.",
+
+ "keep": [
+  "SoftBodies_Soft_Body_Deformation",
+  "SoftBodies_Cloth_Physics",
+  "SoftBodies_Carusell",
+  "SoftBodies_Obsticals",
+  "SoftBodies_Obsticals_Part2",
+  "SoftBodies_Playground_of_Joy",
+  "SoftBodies_Affect_Theory_Visualization",
+  "ProceduralGeneration_Reaction_Diffusion_Systems",
+  "Topology_Entropy_Morphogenesis"
+ ],
+
+ "verdicts": {
+  "gallery_marker_soft-body": "retire a signpost, not an exhibit — a pedestal whose Label3D reads SOFT BODY, placed 24x as a sub-gallery anchor for simulations that were never built. Nothing supersedes it because nothing was ever there; what survives is the writing, and that moves into the kept rooms (see _thread)."
+ },
+
+ "_thread": {
+  "truth": "Form is not imposed — it emerges from the material's own dynamics (the sequence's own truth line).",
+  "the_question": "The whole sequence asks one question of a deformable body: WHO DECIDES THE FORM? The answer walks outward, from the material to the world, and every dropped map is one beat of that walk with nothing built in it.",
+  "beats": [
+   "1. THE MATERIAL ITSELF. A shape is only a rest configuration the springs keep renegotiating. Cloth thinks with its whole body, in three spring families. — SoftBodies_Soft_Body_Deformation, SoftBodies_Cloth_Physics (kept).",
+   "2. WHERE YOU HOLD IT. The catenary is never drawn; it is what 256 points and their springs agree on once gravity is on. Pin a line instead of two corners and emergence goes flat; four corners give a dome. — sb01..sb04, dropped: this argument belongs in Soft_Body_Deformation, which is the room about what the springs settle to.",
+   "3. ONE NUMBER. Twenty-eight springs is the smallest set that holds a 3D shape. Turn stiffness down and settling replaces bouncing; one value of k stands a column up and another lets it flow. A continuous parameter with categorical effects. — sb05..sb08, dropped: belongs in Cloth_Physics beside the spring families, or in Soft_Body_Deformation.",
+   "4. WHAT IT MEETS. Collision is not an instant but a negotiation that unfolds over time, and resistance is morphology: an obstacle does not stop a soft body, it reshapes it. — SoftBodies_Obsticals, SoftBodies_Obsticals_Part2 (kept). Rotation makes the force field legible through softness — SoftBodies_Carusell (kept).",
+   "5. A RULE BORROWED FROM ANOTHER CHAPTER. The same L-system word rendered as springs instead of lines; Conway's final state read as a spring topology; a Turing pattern written into stiffness so decoration becomes structure. sb_noise01 states the thread itself: 'the gallery is not about soft bodies but about which layer of the body a rule writes onto'. — sb_ls01, sb_ls02, sb_ca01, sb_ca02, sb_noise01, sb_rd01, sb_rd02, dropped: the reaction-diffusion pair belongs in ProceduralGeneration_Reaction_Diffusion_Systems, which is kept and is exactly that argument.",
+   "6. A CAVITY. In the mould family form is what the cavity leaves room for, not what force-balance leaves; a taper function is a silhouette written before any body enters. gm04 says it plainly: 'cavity or obstruction, inside or outside, the body records an encounter with a geometry'. — gm01..gm04, dropped: that sentence IS the obstacle room's argument, so the mould family folds into SoftBodies_Obsticals_Part2 (resistance is morphology).",
+   "7. A CLOCK. A vessel is a record of three forces and a clock; stop it at a different step and a different vessel exists; widen the pin ring and the flask becomes a saucer. And gl05, the collapsed sag, is the failure case that names the parameter window — without it you would not know the family had edges. — gl01..gl05, dropped: the strongest writing in the whole gallery, and it has no built home yet.",
+   "8. NOTHING AT ALL. Pattern needs no blueprint: two chemicals diffusing at different speeds compute spots and stripes with no designer. And softness is the capacity to be affected, with the radiolarian's hard skeleton as the frozen record of it. — ProceduralGeneration_Reaction_Diffusion_Systems, SoftBodies_Affect_Theory_Visualization, Topology_Entropy_Morphogenesis (kept, the close)."
+  ],
+  "why_fold_rather_than_group": "The obvious alternative was to group the twenty-four into four gallery rooms, one per family (drape, stiffness, borrowed rule, vessels and moulds). That was rejected because it would ADD four maps that still hold nothing: every one of the twenty-four contains the same signpost, so a grouped room is four signposts instead of one. A beat with nothing built is a section in a room that exists, not a room of its own. The maps stay on disk with their blurbs and intents intact, exactly as the seventeen catalyst chambers did on the same day, and any of them can be rescued the moment a simulation is actually built."
+ },
+
+ "_why": {
+  "the 24 are one room": "Verified cell by cell: identical structure (12x12, void border, 10x10 floor), identical utilities (sp at r1c1, s at r1c2, t at r10c10), identical single token gallery_marker_soft-body:0:0.5. The spawn is two cells from the teleporter, so a visitor can leave without passing the marker.",
+  "nothing essential is lost": "python tools/fold_ledger.py --sequence=softbodies --keep=<the nine> reports: keep 9, drop 24, kept maps cover 25 tokens, orphans 1 — and that one is the signpost.",
+  "SoftBodies_Playground_of_Joy is kept despite THIN": "Its argument, that haptic intuition precedes formal understanding, is the sequence's only claim about how the visitor should approach the rest, and it holds five real tokens. It needs a text, not a deferral.",
+  "Topology_Entropy_Morphogenesis is kept, not rehomed": "One number, entropy, deciding whether a minimal surface is legible is the morphogenesis end of the arc, and the sequence description names morphogenesis explicitly. It could be rehomed to isosurfaces later; it is not orphaning anything here."
+ }
+}
