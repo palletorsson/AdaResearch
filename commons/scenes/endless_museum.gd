@@ -13844,7 +13844,7 @@ func _dress_foes(seg: Node3D, _tile: Array, w: int, h: int, zbase: int, _deal: D
 	var key: String = "%s|%s" % [ch, pearl]
 	if not _chapter_is_grey(ch):
 		_foes_note(key, {"chapter": ch, "pearl": pearl, "map": map_name, "grey": false,
-			"silhouettes": [], "gun": null, "seg": int(_seg_index)})
+			"silhouettes": [], "gun": null, "seg": _seg_no(seg)})
 		return
 	var rng := RandomNumberGenerator.new()
 	rng.seed = hash(key)
@@ -13862,7 +13862,12 @@ func _dress_foes(seg: Node3D, _tile: Array, w: int, h: int, zbase: int, _deal: D
 			continue
 		pool.append(k)
 	pool.sort_custom(func(a: Vector2i, b: Vector2i) -> bool: return a.y < b.y or (a.y == b.y and a.x < b.x))
-	var want: int = int(_L("foes", "per_hall", 3.0))
+	# MAP ONE IS GENTLER (2026-08-29, Palle: "only send one silhouette in map
+	# one"): the first hall of the visit — the one whose vestibule starts at
+	# -VESTIBULE_H, so its map cell (0,0) is world (0,0) — deals foes.first_hall;
+	# every grey hall after it deals foes.per_hall.
+	var first_hall: bool = zbase == -VESTIBULE_H
+	var want: int = int(_L("foes", "first_hall", 1.0)) if first_hall else int(_L("foes", "per_hall", 3.0))
 	var picks: Array = []
 	var tries: int = 0
 	while picks.size() < want and tries < 200 and not pool.is_empty():
@@ -13917,7 +13922,7 @@ func _dress_foes(seg: Node3D, _tile: Array, w: int, h: int, zbase: int, _deal: D
 			# in the inventory, so --em-look=catalyst_foe can photograph one and
 			# em_inventory.json says the hall had them
 			_inventory.append({"id": "%s|silhouette%d" % [key, i], "chapter": ch, "pearl": pearl,
-				"kind": "foe", "token": "catalyst_foe", "segment": _seg_index,
+				"kind": "foe", "token": "catalyst_foe", "segment": _seg_no(seg),
 				"world": [snappedf(f.global_position.x, 0.1), snappedf(f.global_position.y, 0.1),
 					snappedf(f.global_position.z, 0.1)], "cell": [c.x, lz - VESTIBULE_H]})
 	# the gun: a vestibule cell off the centre line, nearest (w/2 + 2.5, row 2)
@@ -13989,7 +13994,7 @@ func _dress_foes(seg: Node3D, _tile: Array, w: int, h: int, zbase: int, _deal: D
 					_edit_records.append({"node": g, "token": "pink_gun", "kind": "furniture",
 						"from": [], "tile_cell": [], "rotation": 35.0, "chapter": ch, "seg": seg, "index": 0})
 					_inventory.append({"id": "%s|pink_gun" % key, "chapter": ch, "pearl": pearl,
-						"kind": "furniture", "token": "pink_gun", "segment": _seg_index,
+						"kind": "furniture", "token": "pink_gun", "segment": _seg_no(seg),
 						"world": [snappedf(g.global_position.x, 0.1), snappedf(g.global_position.y, 0.1),
 							snappedf(g.global_position.z, 0.1)], "cell": [best.x, glz - VESTIBULE_H]})
 			_walk_cells.erase(best)
@@ -13997,7 +14002,18 @@ func _dress_foes(seg: Node3D, _tile: Array, w: int, h: int, zbase: int, _deal: D
 			gun_cell = [best.x, best.y]
 	print("[em-foes] %s: %d silhouette(s) %s, gun %s" % [key, placed.size(), str(placed), str(gun_cell)])
 	_foes_note(key, {"chapter": ch, "pearl": pearl, "map": map_name, "grey": true,
-		"silhouettes": placed, "gun": gun_cell, "seg": int(_seg_index), "zbase": zbase, "w": w, "h": h})
+		"silhouettes": placed, "gun": gun_cell, "seg": _seg_no(seg), "zbase": zbase, "w": w, "h": h})
+
+
+## The segment's own number, from its name (Seg<n>_<key>): _seg_index has moved
+## on by the time a deferred dress pass runs in the walking museum.
+func _seg_no(seg: Node3D) -> int:
+	var nm: String = String(seg.name)
+	if nm.begins_with("Seg"):
+		var head: String = nm.substr(3).split("_", true, 1)[0]
+		if head.is_valid_int():
+			return int(head)
+	return -1
 
 
 func _foes_note(key: String, rec: Dictionary) -> void:

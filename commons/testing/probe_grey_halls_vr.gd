@@ -84,7 +84,8 @@ func _run() -> void:
 		for c in node.get_children():
 			if c.has_meta("em_foe"):
 				foes.append(c)
-	_check(foes.size() >= 3, "%d silhouette(s) standing in the built halls" % foes.size(), "no silhouettes")
+	# map one deals foes.first_hall (1); the second hall may be a VR shell
+	_check(foes.size() >= 1, "%d silhouette(s) standing in the built halls" % foes.size(), "no silhouettes")
 	var n_eye := 0
 	for f in foes:
 		if f.get("_player_node") == cam:

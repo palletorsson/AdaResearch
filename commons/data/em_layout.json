@@ -82,6 +82,8 @@
 		"_on": "0 = no silhouettes and no gun anywhere; the hall is the hall of yesterday",
 		"per_hall": 3,
 		"_per_hall": "silhouettes per grey hall, on distinct open cells at least 3 cells apart and clear_m from the door",
+		"first_hall": 1,
+		"_first_hall": "silhouettes in the FIRST hall of the visit only (Palle, 2026-08-29: 'only send one silhouette in map one'); the hall whose vestibule starts at -4, so its map cell (0,0) is world (0,0)",
 		"gun": 1,
 		"_gun": "1 = a pink_gun on a 0.95 m plinth in the vestibule of every grey hall, off the centre line; 0 = no gun (the silhouettes still come)",
 		"clear_m": 5.0,

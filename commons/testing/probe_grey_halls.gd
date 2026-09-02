@@ -86,6 +86,7 @@ func _boot(chapter: String) -> Dictionary:
 	var erased: Dictionary = inst.get("_walk_erased")
 	var clear_m: float = float(inst.call("_L", "foes", "clear_m", 5.0))
 	var per_hall: int = int(inst.call("_L", "foes", "per_hall", 3.0))
+	var first_hall: int = int(inst.call("_L", "foes", "first_hall", 1.0))
 	var halls: Array = []
 	for s_v in (inst.get("_segments") as Array):
 		var s: Dictionary = s_v
@@ -121,7 +122,8 @@ func _boot(chapter: String) -> Dictionary:
 			spawned = (pv as Dictionary)["halls"]
 	inst.queue_free()
 	await create_timer(0.5).timeout
-	return {"chapter": chapter, "halls": halls, "clear_m": clear_m, "per_hall": per_hall, "spawned": spawned}
+	return {"chapter": chapter, "halls": halls, "clear_m": clear_m, "per_hall": per_hall,
+		"first_hall": first_hall, "spawned": spawned}
 
 
 func _judge(run: Dictionary, expect_grey: bool) -> void:
@@ -142,8 +144,10 @@ func _judge(run: Dictionary, expect_grey: bool) -> void:
 				"%s: %d silhouette(s), gun %s" % [tag, foes.size(), "present" if rec["gun"] != null else "none"],
 				"a hall that is not grey got dressed")
 			continue
-		var per_hall: int = int(run["per_hall"])
-		_check(foes.size() == per_hall, "%s: %d silhouette(s) (want %d)" % [tag, foes.size(), per_hall], "wrong count")
+		# map one is gentler: the first hall (vestibule at z -4) deals first_hall
+		var is_first: bool = absf(float(rec["z0"]) + 4.0) < 0.01
+		var per_hall: int = int(run["first_hall"]) if is_first else int(run["per_hall"])
+		_check(foes.size() == per_hall, "%s: %d silhouette(s) (want %d%s)" % [tag, foes.size(), per_hall, ", map one" if is_first else ""], "wrong count")
 		var n_sil := 0
 		var n_walk := 0
 		var n_centred := 0

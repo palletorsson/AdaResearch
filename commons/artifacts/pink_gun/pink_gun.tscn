@@ -1,9 +1,38 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="PackedScene" uid="uid://bnfmsrmelyuhq" path="res://commons/primitives/cubes/grab_stick.tscn" id="1_grab_stick"]
 [ext_resource type="Script" path="res://commons/artifacts/pink_gun/pink_gun.gd" id="2_pink_gun"]
+[ext_resource type="Script" path="res://addons/godot-xr-tools/hands/poses/hand_pose_settings.gd" id="3_pose_settings"]
+[ext_resource type="Animation" path="res://addons/godot-xr-tools/hands/animations/left/Pistol.res" id="4_pistol_left"]
+[ext_resource type="Animation" path="res://addons/godot-xr-tools/hands/animations/right/Pistol.res" id="5_pistol_right"]
+
+[sub_resource type="Resource" id="Resource_pose_left"]
+script = ExtResource("3_pose_settings")
+open_pose = ExtResource("4_pistol_left")
+closed_pose = ExtResource("4_pistol_left")
+
+[sub_resource type="Resource" id="Resource_pose_right"]
+script = ExtResource("3_pose_settings")
+open_pose = ExtResource("5_pistol_right")
+closed_pose = ExtResource("5_pistol_right")
 
 [node name="PinkGunPickable" instance=ExtResource("1_grab_stick")]
 
 [node name="PinkGun" type="Node3D" parent="." index="1"]
 script = ExtResource("2_pink_gun")
+
+[node name="GrabPointHandLeft" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02, -0.005, -0.08)
+mode = 1
+hand_pose = SubResource("Resource_pose_left")
+
+[node name="GrabPointHandRight" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02, -0.005, -0.08)
+mode = 1
+hand_pose = SubResource("Resource_pose_right")
+
+[node name="GrabPointGripLeft" parent="."]
+enabled = false
+
+[node name="GrabPointGripRight" parent="."]
+enabled = false
