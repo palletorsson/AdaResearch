@@ -33,23 +33,18 @@
         "physics_vector_badge"
 	  ],
 	  "content": [
-		"VFM_01_Foundations: what an arrow carries — components, basis, a frame to read it in",
 		"Vectors_Act1_WhatAVectorIs: the same question at the size of a processional hall, four stations and nothing else",
 		"VFM_02_Operations: two arrows meet — add, subtract, dot, cross, project, torque",
 		"Vectors_Act2_VectorArithmetic: every operation twice, once in your hand and once at the size of the room",
-		"VFM_03_Motion: the arrow over time — velocity, acceleration, friction, the bounce",
 		"VFM_05_Launch: aiming it — catapult, turret, mortar, and the arc you have to predict",
 		"Vectors_Act3_FieldsAndMotion: motion at building scale (its flow console belongs to rung 5 and says so)",
-		"VFM_06_Springs: the force that returns what it is given",
 		"VFM_07_Gravity: attraction, two bodies, three, and the chaos after",
 		"VFM_09_Legs: one leg to eight in a row, everything else held equal — the gait is a consequence of the count",
 		"VFM_08_Arena: force against force — collision, reflection, targets",
 		"Vectors_Act4a_KineticForces: a park of machines, each one a force bending your walk",
 		"Vectors_Act4b_Oscillation: the pendulum hall and the spring tower, at building scale",
-		"VFM_04_Fields: an arrow at every point — and the instruction is STAND INSIDE IT",
-		"Vectors_Act5_ForceAsPlace: a chasm with no floor. The arrow from rung 1 is now the room.",
-        "Forces_PropGallery: no diagrams past this line — every concept in the sequence as one surreal applied object, the force felt in behaviour and drawn nowhere"
-	  ],
+		"Vectors_Act5_ForceAsPlace: a chasm with no floor. The arrow from rung 1 is now the room."
+	],
 	  "demonstration": "See vectors as arrows in space. Add them head-to-tail. Feel dot product measure alignment. Watch cross product create perpendicular vectors. Then feel gravity pull you down. Push objects and feel resistance. Watch attraction and repulsion create orbits and explosions.",
 	  "description": "The fundamental language of 3D space meets the physics that brings it to life. Vectors encode direction and magnitudeâ€”the building blocks of everything spatial. Forces convert those vectors into motion through Newton's laws. Master vectors, master forces, master the physical world.",
 	  "difficulty": "intermediate",
@@ -77,23 +72,18 @@
         "Derivative as instantaneous rate of change: velocity is the rate of position; acceleration is the rate of velocity. F = ma is calculus made physical — the calculus substrate named at change (seq 4.5) carried into the world here."
 	  ],
 	  "maps": [
-		"VFM_01_Foundations",
 		"Vectors_Act1_WhatAVectorIs",
 		"VFM_02_Operations",
 		"Vectors_Act2_VectorArithmetic",
-		"VFM_03_Motion",
 		"VFM_05_Launch",
 		"Vectors_Act3_FieldsAndMotion",
-		"VFM_06_Springs",
+		"Vectors_Act4a_KineticForces",
+		"Vectors_Act4b_Oscillation",
 		"VFM_07_Gravity",
 		"VFM_09_Legs",
 		"VFM_08_Arena",
-		"Vectors_Act4a_KineticForces",
-		"Vectors_Act4b_Oscillation",
-		"VFM_04_Fields",
-		"Vectors_Act5_ForceAsPlace",
-        "Forces_PropGallery"
-	  ],
+		"Vectors_Act5_ForceAsPlace"
+	],
 	  "name": "Vectors & Forces: From Direction to Dynamics",
 	  "prerequisites": [
 		"primitives",
@@ -264,9 +254,14 @@
 		"VectorApplied",
 		"ForcesSystems",
 		"ForcesChaos",
-        "ForcesArena"
-	  ],
-	  "deferred_reason": "THE FOLD, 2026-08-25 (Palle: 'too many maps but we do not want to lose any essential artifacts'). forces listed 30 maps because it held THREE rival ladders and a junk drawer. Retired here: the older Vector*/Forces* ladder (9 rooms, superseded by the museum) and 7 bench/test rooms that were never curriculum (Console_Test, Reformed_Instruments, Force_Props_Sandbox, Force_Preview, Sky_Climb, Void_Crossing, Chamber_Forces). Every token they held was judged one by one in doc/folds/forces.json and the verdict is checkable: python tools/fold_ledger.py --sequence=forces --plan=doc/folds/forces.json --check",
+		"ForcesArena",
+		"VFM_01_Foundations",
+		"VFM_03_Motion",
+		"VFM_06_Springs",
+		"VFM_04_Fields",
+		"Forces_PropGallery"
+	],
+	  "deferred_reason": "THE FOLD, 2026-08-25 (Palle: 'too many maps but we do not want to lose any essential artifacts'). forces listed 30 maps because it held THREE rival ladders and a junk drawer. Retired here: the older Vector*/Forces* ladder (9 rooms, superseded by the museum) and 7 bench/test rooms that were never curriculum (Console_Test, Reformed_Instruments, Force_Props_Sandbox, Force_Preview, Sky_Climb, Void_Crossing, Chamber_Forces). Every token they held was judged one by one in doc/folds/forces.json and the verdict is checkable: python tools/fold_ledger.py --sequence=forces --plan=doc/folds/forces.json --check || THE SECOND FOLD, 2026-09-02 (Palle: 'forces are 16 maps, can we compress them'; ruled: Arena is the F = ma exam). Measured first: the ten bench rooms held 137 tokens and the six Acts 44, sharing 23, so benches below rung 2 are not duplicates and could not be deleted without losing artifacts. Folded BY RUNG, every token with a verdict in doc/folds/forces_2026-09-02.json: VFM_01 -> VFM_02 (one operations bench), VFM_03 -> VFM_05, VFM_06 -> Vectors_Act4b (springs are oscillation), VFM_04 -> Vectors_Act3's field half (the field idea is no longer stated at room 7 and dropped for six), Forces_PropGallery -> VFM_08_Arena (the exam is where forces are felt). 57 tokens rescued and placed, 21 retired as duplicates of live spine rooms, 2 retired as plumbing. 16 -> 11. Check: python tools/fold_ledger.py --sequence=forces --plan=doc/folds/forces_2026-09-02.json --check",
 	  "taxonomy": {
 		"_readme": "THE LADDER (2026-08-25), five rungs at TWO SCALES. The Acts and the VFM museum were not rivals — measured, they share only 22 of 169 tokens — so both survive: the museum is the BENCH (an operation at arm's length) and the Acts are the BUILDING (the same operation at the scale of a room you walk through). Folding them into one room each would have flattened the sequence's own claim, the way folding color's hand/set/space would have flattened colour's. Closes as a LOOP: rung 5 is a force you STAND INSIDE, which is rung 1's arrow with the walker put inside it.",
 		"0_recalled_unit": "the vector itself is NOT taught here. primitives is sequence 1 — 'points, lines, planes, and basic vectors' — so an arrow with a length and a direction arrives already known. Like color's unit, it is a threshold the walk crosses, not a room it stops in.",

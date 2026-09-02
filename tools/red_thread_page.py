@@ -83,6 +83,41 @@ def build(out: Path) -> dict:
     if RULINGS.exists():
         rulings = json.loads(RULINGS.read_text(encoding="utf-8")).get("rooms", {})
 
+    # A ROOM CAN BE FOLDED OUT OF ITS SEQUENCE after the triage read it (forces went
+    # 16 -> 11 on 2026-09-02). The page shows the live sequence, so a room that is no
+    # longer in its sequence's map list is dropped from the strip and named in meta.
+    live: dict[str, set[str]] = {}
+    for sp in (ROOT / "commons" / "maps" / "sequences").glob("*.json"):
+        try:
+            d = json.loads(sp.read_text(encoding="utf-8")).get("sequences", {})
+        except Exception:  # noqa: BLE001
+            continue
+        # two shapes in the corpus: {"sequences": {id: {...}}} and {"sequences": [{name, ...}]}
+        entries = d.items() if isinstance(d, dict) else [(s.get("name", ""), s) for s in d if isinstance(s, dict)]
+        for seq_id, seq in entries:
+            if seq_id:
+                live[seq_id] = set(seq.get("maps", []))
+    folded = [m["map"] for m in data["maps"] if m["seq"] in live and m["map"] not in live[m["seq"]]]
+    data["maps"] = [m for m in data["maps"] if not (m["seq"] in live and m["map"] not in live[m["seq"]])]
+    # and the strip walks the LIVE order, not the order the triage happened to read
+    order: dict[str, list[str]] = {}
+    for sp in (ROOT / "commons" / "maps" / "sequences").glob("*.json"):
+        try:
+            d = json.loads(sp.read_text(encoding="utf-8")).get("sequences", {})
+        except Exception:  # noqa: BLE001
+            continue
+        entries = d.items() if isinstance(d, dict) else [(s.get("name", ""), s) for s in d if isinstance(s, dict)]
+        for seq_id, seq in entries:
+            if seq_id:
+                order[seq_id] = list(seq.get("maps", []))
+    def _rank(m: dict) -> tuple:
+        seq_order = order.get(m["seq"], [])
+        return (0, seq_order.index(m["map"])) if m["map"] in seq_order else (1, 0)
+    by_seq: dict[str, list[dict]] = {}
+    for m in data["maps"]:
+        by_seq.setdefault(m["seq"], []).append(m)
+    data["maps"] = [m for s in data["sequences"] for m in sorted(by_seq.get(s["seq"], []), key=_rank)]
+
     written = 0
     decided = 0
     for m in data["maps"]:
@@ -107,6 +142,7 @@ def build(out: Path) -> dict:
         written=written,
         split_decided=decided,
         stale_tags=stale,
+        folded=folded,
         generated=date.today().isoformat(),
     )
 
