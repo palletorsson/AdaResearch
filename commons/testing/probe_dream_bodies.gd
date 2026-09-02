@@ -11,7 +11,8 @@ extends SceneTree
 ##   godot --headless --path . --xr-mode off --script res://commons/testing/probe_dream_bodies.gd
 
 const BODIES := "res://commons/artifacts/dream_bodies/dream_bodies.tscn"
-const FIGURES := ["rocaille", "stijl_robot", "panel_robot", "stella_wall", "dragon", "sea_forms"]
+const FIGURES := ["rocaille", "stijl_robot", "panel_robot", "stella_wall", "dragon", "sea_forms",
+	"coral_polyp", "tube_reef"]
 const REPORT := "res://ada_run/dream_bodies_probe.txt"
 
 var _lines: Array[String] = []

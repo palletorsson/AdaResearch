@@ -8,7 +8,8 @@ extends Node3D
 ##   godot --path . --xr-mode off res://commons/testing/look_dream_bodies.tscn -- --out=<png> [--figure=<key>] [--seed=N]
 
 const BODIES := preload("res://commons/artifacts/dream_bodies/dream_bodies.tscn")
-const FIGURES := ["rocaille", "stijl_robot", "panel_robot", "dragon", "sea_forms", "stella_wall"]
+const FIGURES := ["rocaille", "stijl_robot", "panel_robot", "dragon", "sea_forms",
+	"coral_polyp", "tube_reef", "stella_wall"]
 
 var _out: String = "user://look_dream_bodies.png"
 var _only: String = ""

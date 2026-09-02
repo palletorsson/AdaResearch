@@ -13795,7 +13795,8 @@ func _dress_fixtures(seg: Node3D, solid: StaticBody3D, tile: Array, w: int, zbas
 ## and a map edit would be undone on the next rebuild, so a body that belongs to
 ## the building rather than to the curriculum belongs here, beside the benches
 ## and the props, where the walk map is already in scope.
-const SCULPT_FIGURES: Array[String] = ["rocaille", "stijl_robot", "panel_robot", "dragon", "sea_forms", "stella_wall"]
+const SCULPT_FIGURES: Array[String] = ["rocaille", "stijl_robot", "panel_robot", "dragon", "sea_forms",
+	"coral_polyp", "tube_reef", "stella_wall"]
 
 func _dress_sculptures(seg: Node3D, _tile: Array, w: int, h: int, zbase: int, _deal: Dictionary) -> void:
 	if seg == null or not is_instance_valid(seg):

@@ -2,10 +2,12 @@ extends Node3D
 class_name DreamBodies
 
 ## THE DREAM BODIES (2026-08-29, Palle: "any chance you can recreate some of
-## these bodies in godot?" — six AI-generated panoramas of sculptural groups
-## from his Stable Diffusion runs: glazed Rocaille figurines with patterned
-## skins, two families of De Stijl robots, a Frank Stella wall tangle, pastel
-## ceramic dragons, and Haeckel sea forms intertwined).
+## these bodies in godot?" — AI-generated panoramas of sculptural groups from
+## his Stable Diffusion runs: glazed Rocaille figurines with patterned skins,
+## two families of De Stijl robots, a Frank Stella wall tangle, pastel ceramic
+## dragons, and three from one sea-life prompt — striding monochrome creatures,
+## pebble-scaled reef bodies sprouting branching coral, and a knot of winding
+## tubes with spotted eels in it).
 ##
 ## One artifact, one DNA axis: `figure` picks which body the plinth carries,
 ## and `seed` picks which individual — every builder draws its proportions,
@@ -19,9 +21,11 @@ class_name DreamBodies
 ## the museum gives it; it is looked at.
 
 const BODY_DIR := "res://commons/artifacts/dream_bodies/bodies/"
-const FIGURES: Array[String] = ["rocaille", "stijl_robot", "panel_robot", "stella_wall", "dragon", "sea_forms"]
+const FIGURES: Array[String] = ["rocaille", "stijl_robot", "panel_robot", "stella_wall", "dragon",
+	"sea_forms", "coral_polyp", "tube_reef"]
 
-@export_enum("rocaille", "stijl_robot", "panel_robot", "stella_wall", "dragon", "sea_forms") var figure: String = "rocaille"
+@export_enum("rocaille", "stijl_robot", "panel_robot", "stella_wall", "dragon",
+	"sea_forms", "coral_polyp", "tube_reef") var figure: String = "rocaille"
 @export var seed: int = 1
 
 var _built_figure: String = ""
