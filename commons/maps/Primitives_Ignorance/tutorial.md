@@ -87,6 +87,54 @@ func teach(fact: String, value) -> void:
 
 When an object learns something, it broadcasts. Listeners that care can update their own state.
 
+Count what the menu offers, and why it is five.
+
+```gdscript
+func regular_corner_defect(face_sides: int, faces_at_vertex: int) -> float:
+    var interior := 180.0 * (face_sides - 2) / face_sides
+    return 360.0 - interior * faces_at_vertex
+
+func platonic_candidates() -> Array:
+    # every (polygon, faces per corner) that leaves a positive defect
+    var out: Array = []
+    for sides in [3, 4, 5, 6]:
+        for k in [3, 4, 5, 6]:
+            if regular_corner_defect(sides, k) > 0.0:
+                out.append([sides, k])
+    return out
+```
+
+Regular faces, the same number meeting at every corner, and the corner room's rule that a corner must be missing something. Only five combinations survive: three, four or five triangles, three squares, three pentagons. Six triangles lie flat; four squares lie flat; three hexagons lie flat. And 720 divided by each corner's defect is the solid's vertex count: 4, 6, 12, 8, 20. The ideal set is not a list somebody chose. It is what the arithmetic leaves.
+
+Ask what a round thing with n sides is.
+
+```gdscript
+func prism_from_segments(n: int) -> Dictionary:
+    # a "round" body drawn with n sides is a prism: n side faces, two n-gon caps
+    return {"faces": n + 2, "vertices": 2 * n, "edges": 3 * n}
+```
+
+The machine has no circle. Every cylinder, capsule and sphere it draws is built from a number of segments, and at any finite number the body is a prism with n side faces. Vertices minus edges plus faces is two, as always. Resolution is not detail added to a form. It is the form.
+
+Ask whether a body has a centre.
+
+```gdscript
+func has_centre_of_symmetry(n: int) -> bool:
+    # rotate the regular n-gon by half a turn: does it land on itself?
+    for i in n:
+        var p := Vector2.RIGHT.rotated(TAU * i / n)
+        var back := -p
+        var hit := false
+        for j in n:
+            if back.distance_to(Vector2.RIGHT.rotated(TAU * j / n)) < 0.0001:
+                hit = true
+        if not hit:
+            return false
+    return true
+```
+
+An even number of segments has a centre of symmetry: turn it half round and it lands on itself, so the far side is the near side turned. An odd number has none. A vertex faces you and an edge faces away, and the back cannot be derived from the front. Five segments is a body that does not equal itself, shipping in the same menu as the five that do.
+
 You can now build local-state objects that communicate by signal rather than by shared memory. Primitives_Portals will next connect two such objects through a single teleporter.
 
 Forget a known fact.

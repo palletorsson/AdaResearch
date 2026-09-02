@@ -48,6 +48,30 @@ Form is a parameter of resolution, and the three spheres on their plinths are
 that sentence as objects. This connects back to Point_Trace's lattice and
 forward to Portals' circle that is never reached.
 
+## Written (2026-09-02)
+
+- **The plain `capsule` IS the five-segment pill.** Its authored mesh is
+  5 radial segments, 5 rings, radius 0.25, height 1.0, spinning at 45°/s; the
+  `facture` axis makes the bands pointable. Palle's "this artifact is just
+  called capsule" was literal. No second capsule was placed.
+- **The five are derived, not listed.** `regular_corner_defect` +
+  `platonic_candidates` in the tutorial: regular faces, same count per corner,
+  positive defect → exactly (3,3) (3,4) (3,5) (4,3) (5,3), and 720/defect gives
+  4, 6, 12, 8, 20 vertices. This completes the corner room's Descartes law.
+  Proven by `probe_ignorance_tutorial.gd`.
+- **Resolution as form, exactly.** `prism_from_segments`: a round body at n
+  segments is a prism (n+2 faces, 2n vertices, 3n edges), Euler holds. The
+  ladder is 32 → 16 → 8 walking south; the text says 8 is "a different solid
+  with eight-fold symmetry and no name in the menu," not "a rougher sphere."
+- **The symmetry claim uses `rotated()`**, not `cos`/`sin`, so no trig is
+  named in primitives; the method hides it the way `length()` hides Pythagoras.
+- **The tutorial's encapsulation register was kept** and given the closing
+  section: a primitive is the most enclosed thing, "an interface that shows you
+  a sphere and keeps thirty-two integers behind it."
+- **Curriculum honesty:** `roughrock` is noise-perturbed, and noise is not
+  taught before sequence 8. The text calls it "corners pushed off their ideal
+  places" and does not teach the noise.
+
 ## The tutorial that is currently in Polythedra
 
 The five-solids enumeration (`face_count`, `interior_angle_sum`, `euler_check`,
