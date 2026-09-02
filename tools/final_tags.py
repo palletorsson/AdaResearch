@@ -106,6 +106,35 @@ def finals() -> list[tuple[str, str]]:
     return rows
 
 
+def placed_tokens(map_name: str) -> set[str]:
+    """Everything a map can stand behind a tag: interactables by artifact name,
+    utilities by code (a <!-- @3t --> tag names the 3t utility, not an artifact)."""
+    p = MAPS / map_name / "map_data.json"
+    if not p.exists():
+        return set()
+    try:
+        layers = json.loads(p.read_text(encoding="utf-8")).get("layers", {})
+    except Exception:                                       # noqa: BLE001
+        return set()
+    out: set[str] = set()
+    for row in layers.get("interactables", []):
+        for c in row:
+            tok = str(c).strip()
+            if tok and tok != "-":
+                out.add(tok.split(":")[0].split("#")[0])
+    for row in layers.get("utilities", []):
+        for c in row:
+            tok = str(c).strip()
+            if tok and tok != "-":
+                out.add(tok.split(":")[0].lstrip("@#"))
+    return out
+
+
+def stale_tags(src: str, placed: set[str]) -> list[str]:
+    """Tags in a final.md that name something its map does not hold."""
+    return [tok for tok in tokens_of(parse(src)) if tok not in placed]
+
+
 # ---------------------------------------------------------------- fixtures
 
 # Deliberately awkward. Each one is a way the grammar could be got wrong, and
@@ -173,6 +202,29 @@ def check() -> int:
         fail("plain passthrough", "%r -> %r" % (plain, serialize(parse(plain))))
 
     print("  %d fixture(s), %d grammar failure(s)" % (len(FIXTURES), bad))
+
+    # 3b. PLACEMENT. A tag is a promise that the artifact STANDS IN THE ROOM.
+    #     2026-09-02: Point_One and Point_Lines shipped with four tags each naming
+    #     artifacts their maps no longer held -- the maps moved the same day the
+    #     text was written -- and this gate was green, because grammar and
+    #     parity say nothing about whether the thing is there. Now it does.
+    #     Negative first: a rule that cannot fail cannot be told from no rule.
+    #     (built from chr(10), not an escape: a heredoc once turned the escape
+    #     into a real newline and this literal into a SyntaxError.)
+    nl = chr(10)
+    neg = stale_tags("<!-- @here -->" + nl + "x" + nl + "<!-- @gone -->" + nl + "y" + nl,
+                     {"here"})
+    if neg != ["gone"]:
+        fail("placement negative", "expected ['gone'], got %r" % neg)
+    rows = finals()
+    stale_total = 0
+    for name, src in rows:
+        s = stale_tags(src, placed_tokens(name))
+        if s:
+            stale_total += len(s)
+            fail("placement %s" % name,
+                 "tag(s) with no artifact in map_data.json: %s" % ", ".join(s))
+    print("  placement: %d final.md checked, %d stale tag(s)" % (len(rows), stale_total))
 
     # 4. THE PARITY. The same fixtures through the editor's own parser.
     if not TS_LIB.exists():
