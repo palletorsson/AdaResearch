@@ -61,7 +61,7 @@ func place_point(position: Vector3) -> MeshInstance3D:
 
 The sphere mesh is rendering help. The point itself is the Vector3 that was passed in.
 
-<!-- @interactive_point_origin -->
+<!-- @interactive_point_origin_force -->
 
 That sentence is the whole argument of this room, and it is worth staying with. What you can see is a sphere. What is actually there is three floats. The visible thing is scaffolding for the invisible one, and the museum is built entirely out of that trade.
 
