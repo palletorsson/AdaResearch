@@ -406,22 +406,51 @@ def render_walk_prose(seq, lines):
         return 0, len(maps)
     names = work_names()
     _doc = depth_doc()
+    _rul = red_thread_rulings()
     written = 0
     for m in maps:
         f = os.path.join(REPO, "commons", "maps", m, "final.md")
-        if not os.path.exists(f):
+        raw = ""
+        if os.path.exists(f):
+            try:
+                with open(f, encoding="utf-8") as fh:
+                    raw = fh.read()
+            except Exception:
+                raw = ""
+
+        # A ROOM CAN BE RULED WITHOUT BEING WRITTEN, and this used to drop it.
+        #
+        # Found by running the whole process on Point_Lines as a stranger would:
+        # propose, author the ruling, apply, place the sign. The sign built, the
+        # museum plan carried it — and the book showed nothing at all, because
+        # this loop `continue`d on a missing final.md. The gate was about PROSE
+        # and the thing being gated was DEPTH, which are not the same thing and
+        # do not arrive together: 243 rooms have no ruling, and most rooms have
+        # no final.md, and the two sets barely overlap.
+        #
+        # So a ruled room now prints its gradient whether or not anyone has
+        # written it up. What it does not do is pretend: it says the prose is
+        # missing, because a heading with only a depth block under it would
+        # otherwise read as a finished room that had nothing to say.
+        has_prose = raw.strip() != ""
+        has_depth = bool(((_doc.get("rooms") or {}).get(m) or {}).get("says"))
+        has_ruling = m in _rul
+        if not has_prose and not has_depth and not has_ruling:
             continue
-        try:
-            with open(f, encoding="utf-8") as fh:
-                raw = fh.read()
-        except Exception:
-            continue
-        if not raw.strip():
-            continue
-        written += 1
+        if has_prose:
+            written += 1
         lines.append(f"#### {m.replace('_', ' ')}")
         lines.append("")
         render_room_depth(m, _doc, lines)
+        if not has_prose:
+            # Say it plainly. A heading carrying only a depth block, with no
+            # admission, reads as a room that was written and had nothing to say.
+            lines.append("*This room has been ruled but not yet written.*")
+            lines.append("")
+            if has_ruling:
+                r = _rul[m]
+                lines.append("*Ruled " + str(r.get("date", "")) + ": " + str(r.get("argument", "")) + "*")
+                lines.append("")
         for block in _parse_regions(raw):
             tok = str(block.get("token") or "")
             body = str(block.get("text") or "").strip()
@@ -432,7 +461,71 @@ def render_walk_prose(seq, lines):
             if body:
                 lines.append(body)
                 lines.append("")
+        render_field_notes(m, lines)
     return written, len(maps) - written
+
+
+def red_thread_rulings():
+    """Palle's one-line rulings on a room's argument, from
+    commons/data/red_thread_rulings.json -> {map: {argument, date}}. A room with
+    a ruling prints in the book even before it is written, like a depth ruling."""
+    p = os.path.join(REPO, "commons", "data", "red_thread_rulings.json")
+    try:
+        with open(p, encoding="utf-8") as fh:
+            return json.load(fh).get("rooms", {}) or {}
+    except Exception:
+        return {}
+
+
+def render_field_notes(map_name, lines):
+    """The room's field notes, as the book's footnotes.
+
+    Palle, 2026-09-02: "field notes can be footnotes in the book." Each `##`
+    section of commons/maps/<Map>/field_notes.md becomes one GFM footnote: a
+    marker line under the room lists the note titles with their references, and
+    the definitions follow (remark-gfm collects them at the end of the document,
+    the way a book keeps its notes). The H1 and the convention blockquote are
+    dropped; they are for the file, not the reader. Returns the note count.
+    """
+    f = os.path.join(REPO, "commons", "maps", map_name, "field_notes.md")
+    if not os.path.exists(f):
+        return 0
+    try:
+        with open(f, encoding="utf-8") as fh:
+            raw = fh.read().replace(chr(13), "")
+    except Exception:
+        return 0
+    NL = chr(10)
+    kept = []
+    for ln in raw.split(NL):
+        if ln.startswith("# ") or ln.startswith("> ") or ln.strip() == ">":
+            continue
+        kept.append(ln)
+    text = NL.join(kept).strip()
+    notes = []
+    for part in re.split(r"(?m)^## +", text):
+        part = part.strip()
+        if not part:
+            continue
+        head, _, rest = part.partition(NL)
+        notes.append((head.strip(), rest.strip()))
+    if not notes:
+        return 0
+    slug = re.sub(r"[^a-z0-9]+", "-", map_name.lower()).strip("-")
+    refs, defs = [], []
+    for i, (head, rest) in enumerate(notes, 1):
+        fid = slug + "-" + str(i)
+        refs.append(head + "[^" + fid + "]")
+        block = ["[^" + fid + "]: **" + head + ".**"]
+        for ln in rest.split(NL):
+            block.append(("    " + ln) if ln.strip() else "")
+        defs.append(NL.join(block))
+    lines.append("*Field notes: " + " · ".join(refs) + "*")
+    lines.append("")
+    for d in defs:
+        lines.append(d)
+        lines.append("")
+    return len(notes)
 
 
 def render_chapter(t: dict, number: int, lines: list) -> dict:
