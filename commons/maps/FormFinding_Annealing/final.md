@@ -18,27 +18,33 @@ A better move is always taken. A worse move is taken with a probability that dep
 
 <!-- @energy_landscape_bench -->
 
-A soft body on a wrinkled surface where height is energy, so the low places are the stable ones. It descends into whichever basin it was dropped above and stays there. This is the first hall's marble again, on a surface with more than one bottom, and it is here as the thing that needs fixing.
+A bench with a wrinkled tabletop: four hundred and eighty-four little boxes standing at the height of an energy field, three sine waves crossed, coloured from blue in the troughs to violet on the ridges. A soft yellow blob sits in one of the hollows. It descends into whichever basin it was dropped above and stays there, which is the first hall's marble again on a surface with more than one bottom, and it is here as the thing that needs fixing.
 
 <!-- @simulated_annealing -->
 
-The cabinet that fixes it. A survey table with an energy landscape drawn across it, a temperature that starts at a hundred and cools toward a tenth, sliders for the temperature and the cooling rate, and a gauge showing how often a worse move is being accepted. Run it hot and it wanders almost anywhere, uphill as readily as down. Run it cold and it is gradient descent again, refusing every backward step. Cool it in between and it explores first and commits later.
+The cabinet that fixes it: a dark survey table, waist high, with a milled basin holding a metre and a half of glowing relief. The surface is the Rastrigin function, which is the standard cruelty of this field, a smooth bowl with a cosine corrugation laid over it so that it has one true bottom and a regular grid of decoys all the way out. A temperature starts at a hundred and cools toward a tenth. A gauge along the rail shows how often a worse move is being accepted.
+
+Run it hot and the search wanders almost anywhere, uphill as readily as down. Run it cold and it is gradient descent again, refusing every backward step. Cool it in between and it explores first and commits later.
 
 The numbers behind the gauge are worth a moment. A move costing five hundredths of an energy unit is accepted about four times in five at a temperature of a fifth, and never at all at two thousandths. And when the search stops improving for long enough, the cabinet does not wait: it hops the whole solution to a new basin and starts again from there. This is a machine built around the admission that its own best rule gets stuck.
 
 <!-- @max_q_basin_room -->
 
-And then the turn. Two wells in one floor, seven metres across. On one side a deep narrow pit holding a single rigid shape: it is at the lowest energy in the room, it is perfectly settled, and it will never be anything else. On the other, a broad shallow basin with something soft in it that keeps moving, finding a shape and losing it and finding it again. That one is higher up. By the arithmetic of the previous four halls it is worse.
+And then the turn, and you will have to look up to find it. Two wells cut into one seven-metre plate, and the plate is hanging three and a third metres over your head: it shares its cell with the spawn and got bumped, then the grounding pass lifted it clear of the walls, so the room's argument is on the ceiling and the frozen cube in its dead well dangles at about your eye level.
+
+On one side a narrow pit two and a fifth metres deep with steep walls, holding a single rigid half-metre cube. It is at the lowest energy here, it is perfectly settled, and it will never be anything else. On the other a broad shallow basin with something soft in it that keeps moving, finding a shape and losing it and finding it again. That one is higher up. By the arithmetic of the previous four halls it is worse.
 
 The claim on the floor is that it is the better minimum, and the room calls the difference Q. The deepest well is a dead-perfect crystal, finished. A form that can still be moved has to be resting somewhere shallow enough to be moved out of, which means the liveliest place in an energy landscape is never the bottom of it.
 
 <!-- @impossible_end_table -->
 
-The proof that this is not a metaphor, standing in the room as furniture. An end table whose top never touches its base: two rigid brackets with sixteen centimetres of daylight between them, one central cable holding the top down against three perimeter cables that stop it swaying. Islands of compression in a sea of tension, and a teacup on top, unbothered. Nothing here is resting on anything. Every part is being pulled, hard, in a direction that exactly cancels, and the stillness of the teacup is the sum of forces that never stop.
+The proof that this is not a metaphor, standing in the room as furniture, and the tensegrity the last hall promised and did not deliver. An end table whose top never touches its base: two steel Y-brackets whose arms overlap in plan with sixteen centimetres of daylight between them, one central cable holding the top down against three perimeter cables that stop it swaying. A teacup on top, unbothered.
+
+Islands of compression in a sea of tension. Nothing here is resting on anything. Every part is being pulled, hard, in a direction that exactly cancels, and the stillness of the teacup is the sum of forces that never stop.
 
 <!-- @science_screen -->
 
-The screen sweeps the room and flattens it once a second. Between the dead well and the alive one it will draw two basins, and it will draw the deeper one as deeper, because depth is the only thing the diagram measures. Whatever Q is, it is not on the screen.
+The screen sweeps the room for a name it knows and finds none, so about a second in it locks to its fallback and prints a position of zero, with a green lamp washing the wall beside it. Between the dead well and the alive one it would have drawn two basins and drawn the deeper one deeper, because depth is the only thing a diagram of this kind measures. It draws neither. Whatever Q is, it was never going to be on the screen.
 
 <!-- @ -->
 

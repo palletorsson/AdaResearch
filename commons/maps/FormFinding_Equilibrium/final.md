@@ -17,21 +17,27 @@ Read the crossover. The left-hand distance is computed from the right-hand weigh
 
 <!-- @calder_mobile -->
 
-A mobile four levels deep, hanging from one point in the ceiling three and a half metres up. It is genuinely balanced, not balanced-looking: each leaf is a disc of three-millimetre aluminium and its mass is computed from the real thing, area times thickness times the density of aluminium. Then every rod is built from the bottom up, its two children weighed, and its pivot placed where the moments cancel.
+A curtain of painted aluminium discs on hair-thin wires, nearly six metres wide and three and a half tall, filling the north half of the room. Each disc carries a small dark nameplate reading its own weight in grams, which is the room telling you what to check.
 
-You can ask it to fail. Set the lever to halved and the rods are cut in the middle instead of at the balance point, and the arms tilt by exactly the angle the imbalance demands. With the masses on any given rod that is a visible lean of a dozen degrees or so, and the whole tree hangs wrong beneath it. Calder's mobiles look like play and are an engineering claim: the shape in the air is the solution to a system of equations, and there is only one.
+It is genuinely balanced, not balanced-looking. Each leaf's mass is computed from the real thing, its area times three millimetres of sheet times the density of aluminium, and then every rod is built from the bottom up: weigh the two children, place the pivot where the moments cancel, report the total upward. The heavier disc always rides the shorter arm because the arithmetic gives it no choice.
+
+And it does not move. There is no process loop anywhere in it: for all the wire and the counterweighting, this is frozen sculpture, and the room's own older notes claiming it turns on a breath are describing something else. What hangs here is the solution to a system of equations, held still because it was never going to do anything else.
 
 <!-- @tensegrity_triangle -->
 
-Three struts, three joints, and a rhythmic compression pulse arriving every couple of seconds that the frame absorbs and springs back from. Fuller's lesson in one object: the triangle is the only rigid polygon. Four bars of the same stock, hinged, fold flat under a load like this. Three do not, and nothing was added to make that true; it is a fact about three.
+Three struts and three orange joints, with a rhythmic squeeze arriving every few seconds that the frame takes and springs back from. Fuller's lesson: the triangle is the only rigid polygon. Four bars of the same stock, hinged, fold flat under a load like this. Three do not, and nothing was added to make that true; it is a fact about three.
+
+One correction the object will not make for you. Its name promises a tensegrity, and this is not one. A tensegrity is compression members that never touch, held apart by tension; here the three struts meet at the joints and there is not a cable in it. What you are looking at is the rigid triangle that a tensegrity is built out of, and the thing itself is in the last hall of this chapter, holding a teacup.
 
 <!-- @fractal_truss_tower -->
 
-A tower three and a half metres high whose every strut is a smaller truss, braced and rebraced three levels down. Eiffel's trick, recursed: span the most with the least, by never asking a single long member to do a job that a triangulated cluster of short ones can do lighter. The tower is mostly air, and the air is load-bearing in the sense that matters, which is that removing it would not help.
+A steel tower three and a half metres tall standing on a seven-metre plate, four fat corner legs and four stacked panels of cross-bracing, an orange beacon at the top and the words MAX STRENGTH, MIN MATERIAL on a board. Eiffel's trick: span the most with the least, by never asking one long member to do a job a triangulated cluster of short ones can do lighter.
+
+The recursion is not the one the label implies. It halves the tower vertically and braces each half again, so what recurses is the storey and not the strut, and the finer legs it adds lie along the same corner lines as the coarse ones, hidden inside them. A beam made of beams is the idea. Stacked bracing, three deep, is the building.
 
 <!-- @science_screen -->
 
-The screen redraws the room as a diagram once a second. Here that is nearly a joke at its own expense, because a diagram of a mobile is a picture of a tree, and the one property the mobile has that matters, the equality of two products at every node, is not a thing a picture can hold. You have to be told, or you have to weigh it.
+The screen hunts for something it can draw. It matches the triangle, by name, and then refuses it, because the triangle's parts are not named the way the screen needs them to be named. So it falls back to a radar scope and a count of the tower's children. That is nearly a joke at the room's expense: a diagram of a mobile would be a picture of a tree, and the one property that matters here, two products being equal at every node, is not a thing a picture can hold. You have to be told, or you have to read the nameplates.
 
 <!-- @ -->
 

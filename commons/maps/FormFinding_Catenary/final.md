@@ -17,11 +17,13 @@ One function does both. `cosh` is the hanging chain, and a hanging chain spun ab
 
 <!-- @cable_builder -->
 
-Four control points you can take hold of, and a cable four metres long strung through them. Move one and the whole curve recomputes and re-skins in front of you. This is the room's honest object, so read it carefully: the cable is a spline sagged by a fixed fraction between its handles, not a chain solving its own equation. It is a very good drawing of a catenary, made by somebody who knew what one looks like. The difference between that and the real curve is small, and the chapter cares about it enormously, because everything else in this room got its shape without anybody knowing what the shape would be.
+Four cyan beads at ankle height, and a four-metre cable glowing magenta into blue slung through them with its belly grazing the floor. The beads are the only thing in this room you can actually take hold of. Move one and the whole curve recomputes and re-skins in your hands, every frame.
+
+Read it carefully, because it is the room's honest object. The cable is not a chain solving its own equation. It is a spline whose sag is two Bezier handles per span, each pulled down by a fixed fraction of that span's length, so the depth is drafted rather than found. It is a very good drawing of a catenary made by somebody who knew what one looks like, and the difference matters enormously here, because everything else in this room got its shape without anybody knowing in advance what the shape would be.
 
 <!-- @laundry_line_cathedral -->
 
-Three washing lines between poles, pegged with towels and shirts, and these are true `cosh` curves rather than good drawings. Then look up. Above each line hangs its ghost: the same curve mirrored upward as a pale arch. That is Gaudí's trick, and it is the reason this is the hero of the room. He hung chains from a ceiling, photographed them, and turned the photograph upside down, because a chain in pure tension inverted is an arch in pure compression, and the curve that costs least to hang is the curve that costs least to stand. He let gravity do the drawing and then read the drawing the other way up.
+Three washing lines pegged with towels and shirts, and these are true `cosh` curves rather than good drawings. Only one of the three has a pole under either end; the other two simply begin and end in the air, which nothing in the room admits. Then look up. Above each line hangs its ghost: the same curve mirrored upward as a pale arch. That is Gaudí's trick, and it is the reason this is the hero of the room. He hung chains from a ceiling, photographed them, and turned the photograph upside down, because a chain in pure tension inverted is an arch in pure compression, and the curve that costs least to hang is the curve that costs least to stand. He let gravity do the drawing and then read the drawing the other way up.
 
 <!-- @ -->
 
@@ -29,15 +31,19 @@ Three washing lines between poles, pegged with towels and shirts, and these are 
 
 <!-- @catenoid -->
 
-The chain, spun. A soap film between two rings makes this surface and no other, because surface tension is a cost per unit area and this is the least area that will reach both rings. You can pick it up. It is the same `cosh` as the laundry line, rotated about the axis, with its waist set to half a metre at the scale on the plinth.
+The chain, spun. A soap film between two rings makes this surface and no other, because surface tension is a cost per unit area and this is the least area that will reach both rings. It lies low and wide on the floor, a cyan wireframe hourglass about a metre and a fifth across and only a third of a metre tall, and it is the same `cosh` as the laundry line, revolved.
+
+It looks as though you could pick it up, and you cannot. It is built as a physics body on the layer the world's static geometry uses, which is the one layer a hand is told to ignore, so it carries a collider that no grab will ever find. Three separate documents in this project say you can lift it.
 
 <!-- @helicoid -->
 
-Beside it, the other one. A plane rotating as it rises, a spiral staircase with infinitely many steps, rising three tenths of a turn's height per turn and making two full turns on its stand. Apart from a flat plane, the helicoid and the catenoid are the only ruled minimal surfaces there are, and here is the fact worth carrying out of the room: one bends continuously into the other without a single point of the surface ever stretching. They are the same film in two poses.
+In a slot between two pillars, the other one, and you will step over it before you notice it: a green wireframe corkscrew twenty centimetres across and a third of a metre high, six thousand triangles in a thing the size of a mug. A plane rotating as it rises, two full turns, three tenths of a turn's height gained per turn.
+
+Apart from a flat plane, the helicoid and the catenoid are the only ruled minimal surfaces there are, and one bends continuously into the other without a single point of either ever stretching. They are the same film in two poses. Nothing in this room performs that bend. Both surfaces are computed once when the hall loads and then never touched again, so the deformation is a fact you are told and not a thing you can watch.
 
 <!-- @science_screen -->
 
-The screen redraws what stands near it as a flat diagram, once a second. It is the only thing in this room that draws a curve rather than being one, and next to a chain that computes itself, a picture of a chain looks like what it is: a record, made afterwards, by something that had to be told.
+The screen looks for something within eight metres whose name it recognises, and finds the laundry line, whose name contains the word it is hunting for. It misses. The washing lines stand eight and two thirds metres away, sixty-six centimetres outside its reach, so the screen settles for its fallback and prints a position of zero. It is the only thing in this room that would draw a curve rather than be one, and it is standing just too far off to draw anything at all.
 
 <!-- @ -->
 

@@ -17,23 +17,29 @@ There is no velocity in that code. Loup Verlet's idea, from 1967, is that you do
 
 <!-- @verlet_workbench -->
 
-A cloth of ten by eight points on a bench, with a dial on the panel reading nudged, worked, pressed or held. Those are one, four, eight and twelve constraint passes per frame, and the bench ships on four. Each pass walks the springs in order and moves the two ends of each a little closer to its rest length. Turn the dial up and the cloth hangs tauter, because more of the error got worked out before the frame ended.
+A magenta cloth of ten by eight points hanging from its two top corners, and this is the only thing in the chapter that is still solving while you watch it: sixty steps before you arrive, and then one more integration every frame you are in the room.
 
-Two things about that are worth more than the dial. The first is that a pass never finishes the job; it takes half the error off each spring and moves on. The second is stranger, and you can see it if you watch one bad fold rather than the whole sheet: going from one pass to four can make the single worst spring in the cloth *worse* while the cloth as a whole gets better, because fixing a spring pulls its neighbour out of true. Relaxation improves the total and is under no obligation to improve any particular part of it.
+On the panel below it there is a dial reading nudged, worked, pressed or held. Those are one, four, eight and twelve constraint passes per frame, and the bench runs on four. You cannot turn it. It is a cylinder with a lit notch that rotates itself on a slow sine, and there is no collider, no grab and no input handler anywhere in the file. The setting is real and the control is furniture.
+
+Two things about the number are worth more than the dial. The first is that a pass never finishes the job; it takes half the error off each spring and moves on to the next. The second is stranger, and it is measurable: going from one pass to four makes the whole cloth tauter and makes the single worst spring in it *worse*, because a sweep fixes each spring in turn and every fixed spring pulls its neighbour out of true. Relaxation improves the total and is under no obligation to improve any particular part of it.
 
 <!-- @mass_spring_bench -->
 
-The lattice version, about sixty centimetres of jelly on a pillar: a four by three by four grid of masses with a spring on every edge, stiffness a little over half, given eighty steps before you ever see it. No shape was authored. There is a grid, a rest length per spring and gravity, and the slumped block on the bench is what those three agree on.
+The lattice version, and it is over your head: it shares a cell with the spawn point, so the grid bumped it up a level and its slab hangs a metre above where you land. Forty-eight pink masses, a hundred and seventy-nine cyan wires, rocking eight degrees either side on an eighteen-second cycle.
+
+It is not settling. All eighty of its solver steps ran before the room finished loading, and what sways above you is the frozen result, tilted by a random hundredth of a metre per particle and then baked. No shape was authored: there is a grid, a rest length per spring and gravity, and the slumped block is what those three agreed on, once, in a moment nobody saw.
 
 <!-- @frozen_glass_vessel -->
 
-And here is where it stops being a demonstration. A sphere of glass, fourteen rings by twenty-two segments, pinned around the top eighth as if on a blowpipe, given a pressure pulse of a fifth and then released into gravity for a fixed number of steps. The simulation runs once, when the room loads, and then it stops: the pose it happens to be in at that moment is the vessel, and you can walk inside it.
+And here is where it stops being a demonstration. A sphere of glass, fifteen rings by twenty-two segments, three hundred and thirty particles, of which the eighty-eight above the top eighth are pinned as if gripped by a blowpipe. Every free vertex is pushed out by a fifth, a pressure pulse, and then the whole thing is dropped into gravity for two hundred steps of the same solver the cloth is running.
+
+It runs once, when the room loads, and stops. The pose it happens to be in at that moment is the vessel. You cannot go inside it, whatever the label says: it has no collider at all, and you will walk through the glass.
 
 Change the stiffness and you get a different vessel. Tilt the gravity and you get a lopsided one. Stop the clock earlier and you get a bottle instead of a bowl. The clock is part of the genome here, which is a real claim about glass and about D'Arcy Thompson's whole argument: the form is not a design, it is a record of the forces that acted and how long they were allowed to act.
 
 <!-- @science_screen -->
 
-The screen sweeps the room once a second and flattens what it finds. What it cannot show is the only thing this room is about, which is duration: the vessel it draws is a still, and the vessel is a still, and neither of them contains the eighty steps that made it.
+The screen sweeps eight metres for something whose name it knows. The bench matches, because its name contains the word spring, and the bench is nine and three quarter metres away. So the screen finds nothing and prints a position of zero, in a room whose entire subject is a process that already finished before anyone arrived. It cannot show duration, and here it does not even manage to show an object.
 
 <!-- @ -->
 

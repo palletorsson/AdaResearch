@@ -36,6 +36,25 @@ a sweep fixes each link in turn and every fixed link pulls its neighbour out.
 Relaxation is not locally monotone.
 
 
+## Corrected by its reader
+
+- **The mobile does not move.** No `_process` and no `_physics_process` in 248
+  lines. `blurb.md` and `walked.md` both have it turning on a breath. It is
+  5.93 m wide and 3.52 m tall, and each disc carries a nameplate in grams.
+- **All four tokens are bare**, no registry entry declares `default_params`, so
+  `apply_grid_config` is never called. The `lever:halved` variant is real in the
+  code and unreachable from this map, so the first draft's "you can ask it to
+  fail" was wrong and is cut.
+- **The tensegrity has no cables and is not a tensegrity.** Three struts meet at
+  three joints: a plain rigid triangle. The load pulse scales the whole node.
+- **The truss is not a strut made of struts.** The recursion halves the tower
+  vertically, and 24 of its 28 leg cylinders are drawn inside the four visible
+  legs.
+- All four `.tscn` files are bare script roots with no overrides, so here the
+  `@export` defaults really are the effective values — checked, not assumed.
+- The screen matches the triangle by name, refuses it because its children are
+  not named the way the scan needs, and falls back to a radar scope.
+
 ## Open
 
-- Written before its reader returned. The lever crossover and the aluminium mass formula are read from the tutorial and the identity header; confirm `lever:halved` is reachable from a map token and what the tilt actually looks like.
+- Reader landed and its findings are applied. Originally written before it returned: The lever crossover and the aluminium mass formula are read from the tutorial and the identity header; confirm `lever:halved` is reachable from a map token and what the tilt actually looks like.

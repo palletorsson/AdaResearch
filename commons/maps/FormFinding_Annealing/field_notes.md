@@ -36,6 +36,26 @@ a sweep fixes each link in turn and every fixed link pulls its neighbour out.
 Relaxation is not locally monotone.
 
 
+## Corrected by its reader
+
+- **The room's hero is on the ceiling.** `max_q_basin_room` shares its cell with
+  the spawn, so it was bumped a level, and the grounding pass then lifted it
+  clear of the walls: the 7 m plate hangs 3.30 m up and the frozen cube in the
+  dead well dangles at about eye level. You cannot walk it, whatever the
+  description and `eye_shot.md` say.
+- **Its wells**: dead at local x −2.0, rim 0.9, depth 2.2, steep `sqrt` profile,
+  one rigid 0.5 m cube at the bottom; alive at +2.0, broad and shallow.
+- **The annealing table's relief is the Rastrigin function**, 2A + Σ(x² − A·cos
+  τx) with A = 10, on a 1.4 m ImmediateMesh in a milled basin at deck height
+  0.90 m.
+- **The bench is a 22 × 22 = 484-instance MultiMesh** of the field
+  amp·(sin 9x·0.6 + cos 7z·0.5 + sin 5(x+z)·0.4).
+- **Nothing in the room is solid.** `HangarKit.box_collider` is never called by
+  any of the five.
+- The registry overstates the annealing table's footprint about ninefold
+  (declared [1, 18, 13] against a measured 1.86 × 1.00 × 1.92 m).
+- The screen locks to its fallback about a second in and prints zeros.
+
 ## Open
 
-- Written before its reader returned. Confirm the TEMP and RATE sliders are real UI, and that `max_q_basin_room` builds both wells with a live body in the shallow one.
+- Reader landed and its findings are applied. Originally written before it returned: Confirm the TEMP and RATE sliders are real UI, and that `max_q_basin_room` builds both wells with a live body in the shallow one.
