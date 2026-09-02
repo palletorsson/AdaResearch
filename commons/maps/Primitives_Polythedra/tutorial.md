@@ -1,95 +1,69 @@
 # Primitives Polyhedra
 
-Five regular polyhedra exist in 3D. The constraint that produces them is angular.
+Volume does not begin as a container. It begins where three faces meet.
 
-Define a regular polyhedron by its face count.
-
-```gdscript
-enum Solid { TETRAHEDRON, CUBE, OCTAHEDRON, DODECAHEDRON, ICOSAHEDRON }
-
-func face_count(solid: Solid) -> int:
-    match solid:
-        Solid.TETRAHEDRON: return 4
-        Solid.CUBE: return 6
-        Solid.OCTAHEDRON: return 8
-        Solid.DODECAHEDRON: return 12
-        Solid.ICOSAHEDRON: return 20
-    return 0
-```
-
-Five solids. Four, six, eight, twelve, twenty faces respectively. Nothing between or beyond.
-
-Spawn a tetrahedron via four vertices.
+Build a corner from an apex and three points.
 
 ```gdscript
-func tetrahedron_vertices() -> Array:
-    return [
-        Vector3(1, 1, 1),
-        Vector3(1, -1, -1),
-        Vector3(-1, 1, -1),
-        Vector3(-1, -1, 1),
-    ]
+func trihedron(apex: Vector3, a: Vector3, b: Vector3, c: Vector3) -> Array:
+    return [[apex, a, b], [apex, b, c], [apex, c, a]]
 ```
 
-Alternating corners of a cube form a regular tetrahedron. Every pair of vertices is the same distance apart — the tetrahedron's edge length.
+Three triangles, one shared vertex. Nothing is enclosed yet, but for the first time in this chapter there is a side of the faces that is *in*.
 
-Check the angular constraint.
+Measure the angle between two edges at the apex.
 
 ```gdscript
-func interior_angle_sum(solid: Solid) -> float:
-    # Triangles: 60°, squares: 90°, pentagons: 108°
-    # Meeting at a vertex: interior_angle × faces_per_vertex < 360°
-    match solid:
-        Solid.TETRAHEDRON: return 60 * 3  # 180
-        Solid.CUBE: return 90 * 3         # 270
-        Solid.OCTAHEDRON: return 60 * 4   # 240
-        Solid.DODECAHEDRON: return 108 * 3 # 324
-        Solid.ICOSAHEDRON: return 60 * 5  # 300
-    return 0
+func face_angle_at(apex: Vector3, p: Vector3, q: Vector3) -> float:
+    return rad_to_deg((p - apex).angle_to(q - apex))
 ```
 
-Every regular solid's interior-angle sum at a vertex is less than 360°. Six equilateral triangles (360°) collapse into a plane; five or fewer rise into a point.
+Each face contributes one angle at the corner. What matters is what they add up to.
 
-Compute Euler's formula.
+Ask how much of a full turn the corner is missing.
+
+```gdscript
+func corner_defect(apex: Vector3, ring: Array) -> float:
+    # ring: the neighbours of the apex, in order around it
+    var total := 0.0
+    for i in ring.size():
+        total += face_angle_at(apex, ring[i], ring[(i + 1) % ring.size()])
+    return 360.0 - total
+```
+
+Six equilateral triangles around a point sum to 360 and lie flat: defect zero, no corner. Five sum to 300 and the point rises: defect 60. A cube's corner is three right angles, defect 90. The defect is how much the faces had to give up to meet in a point instead of a plane.
+
+Close the corner with one more face.
+
+```gdscript
+func close_corner(apex: Vector3, a: Vector3, b: Vector3, c: Vector3) -> Array:
+    var faces := trihedron(apex, a, b, c)
+    faces.append([a, c, b])   # the base, wound to face outward
+    return faces
+```
+
+A trihedron plus its base is a tetrahedron: four vertices, four faces, the first closed solid. Every one of its corners is a trihedron.
+
+Add up every corner of a closed solid.
+
+```gdscript
+func total_defect(corners: Dictionary) -> float:
+    # corners: apex -> ring of neighbours in order
+    var sum := 0.0
+    for apex in corners:
+        sum += corner_defect(apex, corners[apex])
+    return sum
+```
+
+The answer is 720, for every closed convex solid there is. A tetrahedron spends it as four corners of 180. A cube spends it as eight corners of 90. Move a vertex and the corners change individually and the total does not. This is Descartes' theorem, and it says where a solid keeps its volume: not in its faces, at its corners, and in a fixed amount.
+
+Count the parts.
 
 ```gdscript
 func euler_check(V: int, E: int, F: int) -> bool:
     return V - E + F == 2
 ```
 
-Every convex polyhedron satisfies V - E + F = 2. For a cube: 8 - 12 + 6 = 2. For an icosahedron: 12 - 30 + 20 = 2.
+Vertices minus edges plus faces is two, for the tetrahedron (4 − 6 + 4) and the cube (8 − 12 + 6) alike. Two conserved numbers now, 720 and 2, and neither cares which solid you built.
 
-Spawn a polyhedron mesh.
-
-```gdscript
-func spawn_polyhedron(solid: Solid) -> MeshInstance3D:
-    var mesh := MeshInstance3D.new()
-    match solid:
-        Solid.CUBE:
-            mesh.mesh = BoxMesh.new()
-        Solid.TETRAHEDRON:
-            mesh.mesh = build_tetrahedron_mesh()
-        # ... etc
-    add_child(mesh)
-    return mesh
-```
-
-Godot provides BoxMesh directly. The other four solids need custom SurfaceTool construction.
-
-Compute a polyhedron's volume.
-
-```gdscript
-func solid_volume(solid: Solid, edge_length: float) -> float:
-    var a := edge_length
-    match solid:
-        Solid.TETRAHEDRON: return a * a * a / (6.0 * sqrt(2))
-        Solid.CUBE: return a * a * a
-        Solid.OCTAHEDRON: return a * a * a * sqrt(2) / 3.0
-        Solid.DODECAHEDRON: return a * a * a * (15 + 7 * sqrt(5)) / 4.0
-        Solid.ICOSAHEDRON: return a * a * a * 5 * (3 + sqrt(5)) / 12.0
-    return 0.0
-```
-
-Closed-form volumes from the edge length. The constants are irrational — these are continuous 3D objects, not grid artifacts.
-
-You can now spawn any of the five regular polyhedra, verify the angular constraint that produces them, and compute their volumes. Point_Animatedcube will next animate a cube through a deliberate transformation.
+You can now build a corner, measure what it is missing, close it into the first solid, and show that every closed solid carries the same 720 degrees of corner however it spends them. Point_Animatedcube will next take the solid that spends it eight ways and show what it is made of.
