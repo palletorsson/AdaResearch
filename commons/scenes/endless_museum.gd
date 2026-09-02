@@ -13936,14 +13936,10 @@ func _dress_foes(seg: Node3D, _tile: Array, w: int, h: int, zbase: int, _deal: D
 	var cabinets: Array = []
 	if _L("foes", "cabinets", 1.0) > 0.5:
 		var vest_w: int = int(seg.get_meta("em_vest_w")) if seg.has_meta("em_vest_w") else LOBBY_W
-		if _L("foes", "gun", 1.0) > 0.5:
-			var cg: Dictionary = _stand_cabinet(seg, zbase, key, ch, pearl, "pink_gun", "velvet", float(vest_w), -1.0, 0)
-			if not cg.is_empty():
-				cabinets.append(cg)
-		if _L("foes", "hammer", 1.0) > 0.5:
-			var chm: Dictionary = _stand_cabinet(seg, zbase, key, ch, pearl, "line_sledgehammer", "emergency", 0.0, 1.0, 1)
-			if not chm.is_empty():
-				cabinets.append(chm)
+		# a frame later, once the walls are in the physics world: the boxes ask a
+		# ray where the wall actually is (the lobby's west wall stands at x -2, not
+		# 0, and the constants did not know)
+		_stand_cabinets_async(seg, zbase, key, ch, pearl, map_name, placed, vest_w)
 	elif _L("foes", "gun", 1.0) > 0.5:
 		var gl: Variant = _live.get("pink_gun", null)
 		var gun_scene: String = String((gl as Dictionary).get("scene", "")) if gl is Dictionary else ""
@@ -14022,6 +14018,59 @@ func _dress_foes(seg: Node3D, _tile: Array, w: int, h: int, zbase: int, _deal: D
 		"silhouettes": placed, "gun": gun_cell, "cabinets": cabinets, "seg": _seg_no(seg), "zbase": zbase, "w": w, "h": h})
 
 
+## THE BOXES ASK THE WALL WHERE IT IS. One physics frame after the dress, a ray
+## from the annex's centre east and west at cabinet height finds the first
+## solid face on layer 1 — the annex skin, or the lobby's own pushed-out wall —
+## and each box hangs a centimetre off that. The rows are chosen clear of what
+## the annex already carries (see the specs below). The report row is rewritten
+## once they stand.
+func _stand_cabinets_async(seg: Node3D, zbase: int, key: String, ch: String, pearl: String,
+		map_name: String, placed: Array, vest_w: int) -> void:
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	if seg == null or not is_instance_valid(seg) or not is_inside_tree():
+		return
+	var w3d := get_world_3d()
+	var space := w3d.direct_space_state if w3d != null else null
+	var cabinets: Array = []
+	var specs: Array = []
+	# BOTH ON THE WEST WALL. The east side of every annex carries the passage
+	# board (NEEDS / ADDS, 2.2 m across local z 1.1..3.5) and row 0 is the seal
+	# to the previous hall, so the east has no free stretch a box fits. The west
+	# has the lobby's extinguisher at z 2.6 and nothing else: the EMERGENCY
+	# cabinet takes z 1.5, the pistol case z 3.5.
+	if _L("foes", "hammer", 1.0) > 0.5:
+		specs.append({"weapon": "line_sledgehammer", "style": "emergency", "facing": 1.0, "fallback": 0.0, "lz": 1.5, "y": 1.22, "index": 1})
+	if _L("foes", "gun", 1.0) > 0.5:
+		specs.append({"weapon": "pink_gun", "style": "velvet", "facing": 1.0, "fallback": 0.0, "lz": 3.5, "y": 1.42, "index": 0})
+	for sp_v in specs:
+		var sp: Dictionary = sp_v
+		var facing: float = float(sp["facing"])
+		var face_x: float = float(sp["fallback"])
+		if space != null:
+			var from := Vector3(float(vest_w) * 0.5, float(sp["y"]), float(zbase) + float(sp["lz"]))
+			var to := from + Vector3(-facing * 40.0, 0.0, 0.0)   # toward the wall the box faces away from
+			var q := PhysicsRayQueryParameters3D.create(from, to)
+			q.collision_mask = 1
+			if _player != null and is_instance_valid(_player):
+				q.exclude = [_player.get_rid()]
+			var hit: Dictionary = space.intersect_ray(q)
+			if not hit.is_empty():
+				face_x = float((hit["position"] as Vector3).x)
+			else:
+				print("[em-foes] %s: no wall found %s of the annex — the %s box takes x %.1f" % [key, "east" if facing < 0.0 else "west", String(sp["style"]), face_x])
+		var rec: Dictionary = _stand_cabinet(seg, zbase, key, ch, pearl, String(sp["weapon"]), String(sp["style"]),
+			face_x, facing, int(sp["index"]), float(sp["lz"]))
+		if not rec.is_empty():
+			cabinets.append(rec)
+	print("[em-foes] %s: %d cabinet(s) %s" % [key, cabinets.size(), str(cabinets)])
+	var row: Dictionary = (_foes_report.get(key, {}) as Dictionary).duplicate()
+	if row.is_empty():
+		row = {"chapter": ch, "pearl": pearl, "map": map_name, "grey": true, "silhouettes": placed, "gun": null, "seg": _seg_no(seg)}
+	row["cabinets"] = cabinets
+	_foes_note(key, row)
+
+
 ## One wall box on one side wall of the vestibule. `face_x` is the wall's inner
 ## face (0 or vest_w), `facing` the way the box's front points into the room
 ## (+1 from the west wall, -1 from the east). The box's local front is -z, so a
@@ -14029,7 +14078,7 @@ func _dress_foes(seg: Node3D, _tile: Array, w: int, h: int, zbase: int, _deal: D
 ## the plaster, its centre at the annex's middle row; the emergency cabinet is
 ## tall and hangs lower, the pistol case is short and hangs at eye height.
 func _stand_cabinet(seg: Node3D, zbase: int, key: String, ch: String, pearl: String,
-		weapon: String, style: String, face_x: float, facing: float, index: int) -> Dictionary:
+		weapon: String, style: String, face_x: float, facing: float, index: int, lz: float) -> Dictionary:
 	var lv: Variant = _live.get("weapon_cabinet", null)
 	var scene_path: String = String((lv as Dictionary).get("scene", "")) if lv is Dictionary else ""
 	if scene_path == "" or not ResourceLoader.exists(scene_path):
@@ -14049,7 +14098,6 @@ func _stand_cabinet(seg: Node3D, zbase: int, key: String, ch: String, pearl: Str
 			c.set(String(k), cfg[k])
 	if c.has_method("apply_grid_config"):
 		c.call("apply_grid_config", cfg)
-	var lz: float = 2.5
 	var y: float = 1.42 if style == "velvet" else 1.22
 	c.position = Vector3(face_x + facing * (depth * 0.5 + 0.012), y, lz)
 	c.rotation_degrees = Vector3(0, -90.0 * facing, 0)
@@ -18597,10 +18645,18 @@ func _take_proof_shot() -> void:
 	_cam.fov = 70.0
 	if _look_token != "":
 		var look: Dictionary = _compose_look(_look_token)
+		if look.is_empty():
+			# a body that stands a frame after the dress (the wall boxes ask
+			# physics where the wall is) is not in the inventory yet: wait, ask again
+			for _i in range(4):
+				await get_tree().physics_frame
+			look = _compose_look(_look_token)
 		if not look.is_empty():
 			_player.position = look["stand"]
 			_player.rotation = Vector3(0.0, float(look["yaw"]), 0.0)
 			_cam.rotation = Vector3(float(look["pitch"]), 0.0, 0.0)
+			if _feel != null and is_instance_valid(_feel) and _feel.has_method("resync_view"):
+				_feel.call("resync_view", float(look["yaw"]), float(look["pitch"]))
 			print("[endless_museum] LOOK at %s: body %s, standing %s" % [_look_token, str(look["at"]), str(look["stand"])])
 			_shoot_deferred()
 			return
@@ -18620,6 +18676,10 @@ func _take_proof_shot() -> void:
 		_pitch = _shot_pitch   # buffer turns the eye back to where it was
 		_player.rotation = Vector3(0.0, _shot_yaw, 0.0)
 		_cam.rotation = Vector3(_shot_pitch, 0.0, 0.0)
+		# em_feel keeps its OWN yaw and writes it onto the player every frame:
+		# three hand shots in a row faced +z whatever this asked for
+		if _feel != null and is_instance_valid(_feel) and _feel.has_method("resync_view"):
+			_feel.call("resync_view", _shot_yaw, _shot_pitch)
 		print("[em-shot] by hand: standing %.1f,%.1f,%.1f (asked %.1f,%.1f), yaw %.0f pitch %.0f" % [hstand.x, _shot_y, hstand.z, _shot_x, hz, rad_to_deg(_shot_yaw), rad_to_deg(_shot_pitch)])
 		_shoot_deferred()
 		return

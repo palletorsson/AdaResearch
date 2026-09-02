@@ -80,7 +80,7 @@ func _boot(chapter: String) -> Dictionary:
 		inst.call("_build_segment")
 		await create_timer(0.3).timeout
 	inst.call("flush_stamps")
-	await create_timer(0.8).timeout
+	await create_timer(0.8).timeout   # the boxes hang one physics frame after the dress
 	var walker: Node = inst.get("_player")
 	var walk: Dictionary = inst.get("_walk_cells")
 	var erased: Dictionary = inst.get("_walk_erased")
@@ -101,8 +101,25 @@ func _boot(chapter: String) -> Dictionary:
 		for c in node.get_children():
 			if c.has_meta("em_foe_cabinet") and c is Node3D:
 				var wn: Node = c.get_node_or_null("Weapon")
+				var body: Node = c.get_node_or_null("Body")
+				# the wall face, asked of physics NOW while the museum stands, the way
+				# the museum asks it: a ray from the annex centre westward at the box's
+				# height and row, past the box's own body
+				var cp: Vector3 = (c as Node3D).global_position
+				var face: float = 0.0
+				var wall_hit: bool = false
+				var space: PhysicsDirectSpaceState3D = (c as Node3D).get_world_3d().direct_space_state
+				if space != null:
+					var q := PhysicsRayQueryParameters3D.create(Vector3(float(rec["vest_w"]) * 0.5, cp.y, cp.z), Vector3(-40.0, cp.y, cp.z))
+					q.collision_mask = 1
+					if body is StaticBody3D:
+						q.exclude = [(body as StaticBody3D).get_rid()]
+					var hit: Dictionary = space.intersect_ray(q)
+					if not hit.is_empty():
+						face = (hit["position"] as Vector3).x
+						wall_hit = true
 				rec["cabinets"].append({"style": str(c.get("style")), "weapon": str(c.get("weapon")),
-					"x": (c as Node3D).global_position.x, "z": (c as Node3D).global_position.z,
+					"x": cp.x, "y": cp.y, "z": cp.z, "face": face, "wall_hit": wall_hit,
 					"has_weapon": wn != null and wn.has_meta("artifact_lookup_name") and str(wn.get_meta("artifact_lookup_name")) == str(c.get("weapon")),
 					"frozen": wn != null and bool(wn.get("freeze")),
 					"door": c.get_node_or_null("Door") != null})
@@ -195,11 +212,14 @@ func _judge(run: Dictionary, expect_grey: bool) -> void:
 		_check(cabs.size() == 2, "%s: %d cabinet(s)" % [tag, cabs.size()], "not two wall boxes")
 		for cb_v in cabs:
 			var cb: Dictionary = cb_v
-			var want_x: float = vest_w if String(cb["style"]) == "velvet" else 0.0
-			var want_w: String = "pink_gun" if String(cb["style"]) == "velvet" else "line_sledgehammer"
-			var on_wall: bool = absf(float(cb["x"]) - want_x) < 0.25
-			var z_ok: bool = absf(float(cb["z"]) - (float(rec["z0"]) + 2.5)) < 0.01
-			_check(on_wall and z_ok, "%s: %s case at x %.2f (wall face %.0f), z %.1f" % [tag, String(cb["style"]), float(cb["x"]), want_x, float(cb["z"])], "a box off its wall")
+			var velvet: bool = String(cb["style"]) == "velvet"
+			var want_w: String = "pink_gun" if velvet else "line_sledgehammer"
+			var face: float = float(cb["face"])
+			var wall_hit: bool = bool(cb["wall_hit"])
+			var on_wall: bool = absf(float(cb["x"]) - face) < 0.25
+			var want_z: float = float(rec["z0"]) + (3.5 if velvet else 1.5)
+			var z_ok: bool = absf(float(cb["z"]) - want_z) < 0.01
+			_check(on_wall and z_ok and wall_hit, "%s: %s case at x %.2f (wall face by ray %.2f), z %.1f" % [tag, String(cb["style"]), float(cb["x"]), face, float(cb["z"])], "a box off its wall")
 			_check(String(cb["weapon"]) == want_w and bool(cb["has_weapon"]) and bool(cb["frozen"]) and bool(cb["door"]),
 				"%s: %s case holds %s (frozen %s, door %s)" % [tag, String(cb["style"]), String(cb["weapon"]), str(cb["frozen"]), str(cb["door"])], "a box without its weapon")
 		_check(rec["gun"] == null, "%s: no plinth gun beside the cases: %s" % [tag, str(rec["gun"] == null)], "the old plinth lane ran too")
