@@ -4268,7 +4268,9 @@ func _stamp_gaps(seg: Node3D, tile: Array, zbase: int) -> void:
 			continue
 		var x0: int = int(r[0]); var z0: int = int(r[1])
 		var w: int = maxi(1, int(r[2])); var d: int = maxi(1, int(r[3]))
-		var spec: String = String(g.get("crossing", ""))
+		var lf_gap: Dictionary = _spec_lift(String(g.get("crossing", "")))
+		var spec: String = String(lf_gap["spec"])
+		var lift_gap: float = float(lf_gap["lift"])
 		if spec == "":
 			print("[em-gap] %s: %d x %d cells hollow, no crossing asked" % [_cur_stage_pearl, w, d])
 			continue
@@ -4318,6 +4320,12 @@ func _stamp_gaps(seg: Node3D, tile: Array, zbase: int) -> void:
 			if widened_gap > 0:
 				print("[em-gap] %s carries the walker (%d area(s) widened to layer 1)" % [
 					node.name, widened_gap])
+		# and its top belongs on the deck, measured after the settle, exactly as
+		# the utility door does it — these scenes build in _ready and the cube's
+		# visible mesh is 1.8 m against a 1 m collider, so the thing to lay flush
+		# is the body you stand on and not the picture.
+		if is_inside_tree():
+			get_tree().create_timer(0.45).timeout.connect(_gap_seat.bind(node, lift_gap))
 		# THE CROSSING IS THE ROUTE — but only a STATIC one is floor. A bridge is
 		# always there, so its cells are walk cells like any other. A transport
 		# cube or a jump pad is there only sometimes, and promising the walk map
@@ -6980,15 +6988,9 @@ func _stamp_utility(spec: String, cell: Vector2i, seg: Node3D, zbase: int) -> No
 	# you. A trailing #lift:<metres> raises the seated body, and is stripped
 	# before the registry sees the cell so the grid's own grammar is untouched
 	# and the same map still loads in the grid.
-	var lift := 0.0
-	var spec_clean := spec
-	if "#" in spec:
-		var hp := spec.split("#", true, 1)
-		spec_clean = String(hp[0])
-		for part in String(hp[1]).split("#"):
-			var kv := String(part).split(":", true, 1)
-			if kv.size() == 2 and String(kv[0]).strip_edges() == "lift" 					and String(kv[1]).strip_edges().is_valid_float():
-				lift = float(String(kv[1]).strip_edges())
+	var lf: Dictionary = _spec_lift(spec)
+	var lift: float = float(lf["lift"])
+	var spec_clean: String = String(lf["spec"])
 	var parsed: Dictionary = UtilityRegistry.parse_utility_cell(spec_clean)
 	# (the carrier's areas are widened after instantiation, below)
 	var code: String = String(parsed.get("type", " ")).strip_edges()
@@ -7135,6 +7137,41 @@ func _utility_apply_params(node: Node3D, code: String, params: Array) -> void:
 ## Offsets pass through unchanged now; the seat below does the work.
 func _museum_y_offset(v: float) -> float:
 	return v
+
+
+## A trailing #lift:<metres> raises a seated body above the deck. Stripped
+## before the registry or the crossing table sees the cell, so the grid's own
+## grammar is untouched and the same map still loads in the grid. BOTH stamping
+## doors read it here: the tc parity pass of 2026-09-02 was one rule with two
+## readers, and this was the same shape waiting to happen.
+func _spec_lift(spec: String) -> Dictionary:
+	var out := {"spec": spec, "lift": 0.0}
+	if not ("#" in spec):
+		return out
+	var hp := spec.split("#", true, 1)
+	out["spec"] = String(hp[0])
+	for part in String(hp[1]).split("#"):
+		var kv := String(part).split(":", true, 1)
+		if kv.size() == 2 and String(kv[0]).strip_edges() == "lift" and String(kv[1]).strip_edges().is_valid_float():
+			out["lift"] = float(String(kv[1]).strip_edges())
+	return out
+
+
+## The gap door's seat, which says what it moved. The utility door has seated
+## its bodies since 2026-08-25 and this one never did (2026-09-02, Palle: "fix
+## the seat on the gap crossing too"), so a crossing built for a pearl's hollow
+## stood with its collider top half a metre proud of the floor you step off it
+## onto — the cube filled the hole and then made a step of itself.
+func _gap_seat(node: Node3D, deck_y: float) -> void:
+	if node == null or not is_instance_valid(node):
+		return
+	var before: float = node.position.y
+	_utility_seat(node, deck_y)
+	if absf(node.position.y - before) > 0.0005:
+		print("[em-gap] %s seated: y %.3f -> %.3f (top on the deck at %.2f)" % [
+			node.name, before, node.position.y, deck_y])
+	else:
+		print("[em-gap] %s already flush with the deck at %.2f" % [node.name, deck_y])
 
 
 ## Seat one utility body so the top of its FULL extent lies on the cell's
