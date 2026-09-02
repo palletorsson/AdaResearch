@@ -22,10 +22,12 @@ class_name DreamBodies
 
 const BODY_DIR := "res://commons/artifacts/dream_bodies/bodies/"
 const FIGURES: Array[String] = ["rocaille", "stijl_robot", "panel_robot", "stella_wall", "dragon",
-	"sea_forms", "coral_polyp", "tube_reef"]
+	"sea_forms", "coral_polyp", "tube_reef", "david_drape", "dubuffet", "garet_still",
+	"kruger_suit", "oni_dragon", "lava_bloom"]
 
 @export_enum("rocaille", "stijl_robot", "panel_robot", "stella_wall", "dragon",
-	"sea_forms", "coral_polyp", "tube_reef") var figure: String = "rocaille"
+	"sea_forms", "coral_polyp", "tube_reef", "david_drape", "dubuffet", "garet_still",
+	"kruger_suit", "oni_dragon", "lava_bloom") var figure: String = "rocaille"
 @export var seed: int = 1
 
 var _built_figure: String = ""

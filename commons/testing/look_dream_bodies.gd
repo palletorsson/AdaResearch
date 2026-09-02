@@ -9,7 +9,8 @@ extends Node3D
 
 const BODIES := preload("res://commons/artifacts/dream_bodies/dream_bodies.tscn")
 const FIGURES := ["rocaille", "stijl_robot", "panel_robot", "dragon", "sea_forms",
-	"coral_polyp", "tube_reef", "stella_wall"]
+	"coral_polyp", "tube_reef", "david_drape", "dubuffet", "garet_still", "kruger_suit",
+	"oni_dragon", "lava_bloom", "stella_wall"]
 
 var _out: String = "user://look_dream_bodies.png"
 var _only: String = ""

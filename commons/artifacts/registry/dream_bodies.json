@@ -10,7 +10,7 @@
 			"scene": "res://commons/artifacts/dream_bodies/dream_bodies.tscn",
 			"class_name": "DreamBodies",
 			"name": "Dream Bodies",
-			"description": "A statue from one of six families, chosen by figure and grown from a seed: rocaille (glazed entwined figurines with wave-stripe and scale-lattice skins), stijl_robot (Rietveld slab robot in white, saffron, pink and red with a domed helmet), panel_robot (armour-panelled robot in one saturated colour with chrome joints), stella_wall (a 2.4 m wall relief of layered flat cut-outs in mauve, teal and mustard), dragon (a rearing pastel ceramic dragon with scales and translucent wings), sea_forms (an upright patterned beast with zebra, giraffe, wave or bead skin and tentacle limbs), coral_polyp (a standing reef body under dense pebble scales, branching coral fronds growing from its back), tube_reef (a woven column of thick tubes in white, lemon and magenta with a spotted eel rising through it).",
+			"description": "A statue from one of six families, chosen by figure and grown from a seed: rocaille (glazed entwined figurines with wave-stripe and scale-lattice skins), stijl_robot (Rietveld slab robot in white, saffron, pink and red with a domed helmet), panel_robot (armour-panelled robot in one saturated colour with chrome joints), stella_wall (a 2.4 m wall relief of layered flat cut-outs in mauve, teal and mustard), dragon (a rearing pastel ceramic dragon with scales and translucent wings), sea_forms (an upright patterned beast with zebra, giraffe, wave or bead skin and tentacle limbs), coral_polyp (a standing reef body under dense pebble scales, branching coral fronds growing from its back), tube_reef (a woven column of thick tubes in white, lemon and magenta with a spotted eel rising through it), david_drape (a neoclassical figure inside heavy swinging robes), dubuffet (a standing body hacked out of chalky blocks), garet_still (a glossy figurine with a fishnet or wave skin over a still life of fruit and leaves), kruger_suit (a hooded body in a suit printed with letters, stripes or a maze, beside a flat cut-out), oni_dragon (a kabuki dragon-demon with scale skin, fin crests and fangs), lava_bloom (a black twisted bough smothered in flat blossoms).",
 			"category": "dream_bodies",
 			"complexity": "intermediate",
 			"include_in_map_data": true,
@@ -23,11 +23,11 @@
 				"promoted": "2026-08-29",
 				"stage": "2 - variation",
 				"axes": {
-					"figure": ["rocaille", "stijl_robot", "panel_robot", "stella_wall", "dragon", "sea_forms", "coral_polyp", "tube_reef"]
+					"figure": ["rocaille", "stijl_robot", "panel_robot", "stella_wall", "dragon", "sea_forms", "coral_polyp", "tube_reef", "david_drape", "dubuffet", "garet_still", "kruger_suit", "oni_dragon", "lava_bloom"]
 				},
 				"default": "figure=rocaille",
 				"predicted_degeneracy": "stijl_robot vs panel_robot, ~9%: both upright humanoids of about the same height and stance; they differ in slab-versus-panel skin and palette, which is a large share of frame but not the silhouette. stella_wall is the far value from everything: a 2.4 m relief where the others are 1.5 m statues.",
-				"note": "coral_polyp and tube_reef joined 2026-08-29 from two more panoramas of the same sea-life prompt. seed is not an axis: it is the individual. The builders live in commons/artifacts/dream_bodies/bodies/<figure>.gd, one file each, static build(root, seed) and describe()."
+				"note": "fourteen figures by 2026-08-29 evening, from three batches of panoramas. coral_polyp and tube_reef joined from two more panoramas of the same sea-life prompt. seed is not an axis: it is the individual. The builders live in commons/artifacts/dream_bodies/bodies/<figure>.gd, one file each, static build(root, seed) and describe()."
 			}
 		}
 	}

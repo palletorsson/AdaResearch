@@ -18,7 +18,7 @@ extends RefCounted
 ##      punching side so the thrust shoulder leads, the hips shifted the other way.
 ##      One arm reaches straight out to a closed fist; the other hangs heavy and
 ##      slightly back. Side, lean, twist and reach all come from the seed.
-##   2. Pebble skin — a 160x160 ImageTexture painted in code: a staggered jittered
+##   2. Pebble skin — a 144x144 ImageTexture painted in code: a staggered jittered
 ##      lattice where every cell is shaded as a lit dome with a dark groove between,
 ##      applied with WORLD triplanar so the pebble field runs unbroken across the
 ##      whole chain of spheres and capsules instead of restarting on each mesh.
@@ -41,15 +41,17 @@ extends RefCounted
 ##      shoulder chain of 9 tiny beads sagging across the chest, and a TorusMesh
 ##      wrist cuff with its own stud on the punching arm. The white scheme adds
 ##      two filigree curls of 7 beads each over chest and shoulder.
-##   8. A short tapering tail of 6..9 segments sweeping back and down as a
-##      counterweight to the punch, with three small spikes along its ridge.
+##   8. A short tapering tail of 6..9 segments raked back and steeply down as a
+##      counterweight to the punch, with two or three spikes along its ridge. It
+##      is kept stubby on purpose: a long tail plus the punch would overrun the
+##      1.25 m depth case and the fit pass would shrink the whole figure.
 ##
 ## Given up: the crowd (this is one body, not the group), the pink scaled dragon
 ## coils behind them, the trees and the black ground, the spear, the fabric straps
 ## and buckles round the wrist, the true moulded relief of the white one's filigree
 ## (beads stand in for engraved line), and the ridged pink interior of the mouth.
 
-const TEX_SIZE: int = 160
+const TEX_SIZE: int = 144
 
 # scheme: [body upper, body lower, belly, plate, horn/claw, mouth]
 const SCHEMES: Array = [
@@ -110,7 +112,7 @@ static func build(root: Node3D, seed: int) -> void:
 	var stance: float = rng.randf_range(0.205, 0.255)
 	var lean: float = rng.randf_range(0.020, 0.070)
 	var twist: float = deg_to_rad(rng.randf_range(12.0, 20.0)) * arm_side
-	var reach: float = rng.randf_range(0.235, 0.275)
+	var reach: float = rng.randf_range(0.225, 0.262)
 	var jaw_open: float = deg_to_rad(rng.randf_range(24.0, 38.0))
 	var head_yaw: float = twist * 0.45 + deg_to_rad(rng.randf_range(-7.0, 7.0))
 	var head_pitch: float = deg_to_rad(rng.randf_range(-6.0, 5.0))
@@ -146,8 +148,13 @@ static func build(root: Node3D, seed: int) -> void:
 
 	for i in range(n_spine):
 		var t: float = float(i) / float(n_spine - 1)
+		var q: Vector3 = pts[i]
+		var bf: Basis = frames[i]
+		var r: float = radii[i]
+		var wx: float = widths[i]
+		var wz: float = depths[i]
 		var mat_body: StandardMaterial3D = _skin(col_low.lerp(col_up, clampf(t * 1.15, 0.0, 1.0)), skin_tex, 0.55, 4.0)
-		_ellipsoid(root, pts[i], frames[i], radii[i], widths[i], 1.0, depths[i], mat_body)
+		_ellipsoid(root, q, bf, r, wx, 1.0, wz, mat_body)
 
 	var i_chest: int = n_spine - 2
 	var p_chest: Vector3 = pts[i_chest]
@@ -158,10 +165,12 @@ static func build(root: Node3D, seed: int) -> void:
 	for i in range(6):
 		var t: float = lerpf(0.06, 0.72, float(i) / 5.0)
 		var idx: int = int(floor(t * float(n_spine - 1)))
+		var q: Vector3 = pts[idx]
 		var bf: Basis = frames[idx]
+		var r: float = radii[idx]
+		var wz: float = depths[idx]
 		var front: Vector3 = bf * Vector3(0.0, 0.0, -1.0)
-		var rb: float = radii[idx] * 0.70
-		_ellipsoid(root, pts[idx] + front * (radii[idx] * depths[idx] * 0.46), bf, rb, 0.95, 1.05, 0.70, mat_belly)
+		_ellipsoid(root, q + front * (r * wz * 0.46), bf, r * 0.70, 0.95, 1.05, 0.70, mat_belly)
 	for side_i in range(2):
 		var sd: float = -1.0 if side_i == 0 else 1.0
 		var pec: Vector3 = p_chest + b_chest * Vector3(sd * r_chest * 0.52, 0.012, -r_chest * 0.74)
@@ -171,12 +180,15 @@ static func build(root: Node3D, seed: int) -> void:
 		var kc: int = k % 3
 		var tl: float = lerpf(0.58, 0.16, float(kr) / 3.0)
 		var idx: int = int(floor(tl * float(n_spine - 1)))
+		var q: Vector3 = pts[idx]
 		var bf: Basis = frames[idx]
+		var r: float = radii[idx]
+		var wz: float = depths[idx]
 		var front: Vector3 = bf * Vector3(0.0, 0.0, -1.0)
-		var offx: float = (float(kc) - 1.0) * radii[idx] * 0.46
+		var offx: float = (float(kc) - 1.0) * r * 0.46
 		var lump: float = lerpf(0.038, 0.024, float(kr) / 3.0) * girth
-		var pos: Vector3 = pts[idx] + front * (radii[idx] * depths[idx] * 0.72) + bf * Vector3(offx, 0.0, 0.0)
-		_ellipsoid(root, pos, bf, lump, 1.25, 0.85, 0.55, mat_plate)
+		var at: Vector3 = q + front * (r * wz * 0.72) + bf * Vector3(offx, 0.0, 0.0)
+		_ellipsoid(root, at, bf, lump, 1.25, 0.85, 0.55, mat_plate)
 
 	# --- legs ----------------------------------------------------------------
 	var mat_leg: StandardMaterial3D = _skin(col_low, skin_tex, 0.55, 4.0)
@@ -363,16 +375,20 @@ static func build(root: Node3D, seed: int) -> void:
 		var fk: float = float(k) / float(maxi(n_studs - 1, 1))
 		var tl: float = lerpf(0.80, 0.24, fk)
 		var idx: int = int(floor(tl * float(n_spine - 1)))
+		var q: Vector3 = pts[idx]
 		var bf: Basis = frames[idx]
+		var r: float = radii[idx]
+		var wz: float = depths[idx]
 		var front: Vector3 = bf * Vector3(0.0, 0.0, -1.0)
-		var sp: Vector3 = pts[idx] + front * (radii[idx] * depths[idx] * 0.95) + bf * Vector3(arm_side * 0.014, 0.0, 0.0)
+		var sp: Vector3 = q + front * (r * wz * 0.95) + bf * Vector3(arm_side * 0.014, 0.0, 0.0)
 		var sph := SphereMesh.new()
 		sph.radius = lerpf(0.026, 0.018, fk)
 		sph.height = sph.radius * 2.0
 		var mi: MeshInstance3D = _add(root, sph, mat_silver)
 		mi.transform = Transform3D(Basis(), sp)
 	var chain_a: Vector3 = p_chest + b_chest * Vector3(arm_side * 0.190, 0.076, -0.060)
-	var chain_b: Vector3 = pts[maxi(i_chest - 4, 0)] + b_chest * Vector3(-arm_side * 0.150, 0.0, -0.100)
+	var p_underarm: Vector3 = pts[maxi(i_chest - 4, 0)]
+	var chain_b: Vector3 = p_underarm + b_chest * Vector3(-arm_side * 0.150, 0.0, -0.100)
 	for k in range(9):
 		var fk: float = float(k) / 8.0
 		var sag: float = sin(PI * fk)
@@ -398,17 +414,20 @@ static func build(root: Node3D, seed: int) -> void:
 				mi.transform = Transform3D(Basis(), cp)
 
 	# --- tail ----------------------------------------------------------------
+	# short and raked steeply down: a long tail would eat the 1.25 m depth case
+	# and force the fit pass to shrink the whole figure under 1.55 m.
 	var mat_tail: StandardMaterial3D = _skin(col_low, skin_tex, 0.55, 4.0)
-	var tp2: Vector3 = pts[0] + Vector3(0.0, -0.060, 0.135)
-	var seg: float = 0.545 / float(n_tail)
+	var p_pelvis: Vector3 = pts[0]
+	var tp2: Vector3 = p_pelvis + Vector3(0.0, -0.070, 0.100)
+	var seg: float = 0.330 / float(n_tail)
 	var last_dir := Vector3(0.0, 0.0, 1.0)
 	for i in range(n_tail):
 		var s: float = float(i + 1) / float(n_tail)
-		var ang: float = -0.22 - 1.20 * pow(s, 1.15)
-		var td: Vector3 = Vector3(tail_side * 0.34 * sin(PI * s), sin(ang), cos(ang)).normalized()
+		var ang: float = -0.55 - 1.05 * pow(s, 1.05)
+		var td: Vector3 = Vector3(tail_side * 0.30 * sin(PI * s), sin(ang), cos(ang)).normalized()
 		last_dir = td
 		tp2 = tp2 + td * seg
-		var tr: float = lerpf(0.098, 0.021, pow(s, 0.90)) * girth
+		var tr: float = lerpf(0.094, 0.021, pow(s, 0.90)) * girth
 		var ty: float = maxf(tp2.y, tr + 0.006)
 		tp2 = Vector3(tp2.x, ty, tp2.z)
 		_ellipsoid(root, tp2, _frame(td, Vector3.UP), tr, 1.0, 1.0, 1.0, mat_tail)
@@ -420,8 +439,8 @@ static func build(root: Node3D, seed: int) -> void:
 	# --- fit to the case, then a measured settle onto the floor ---------------
 	var box: AABB = _union_aabb(root)
 	var ky: float = target_h / maxf(box.size.y, 0.01)
-	var kx: float = 1.200 / maxf(box.size.x, 0.01)
-	var kz: float = 1.200 / maxf(box.size.z, 0.01)
+	var kx: float = 1.210 / maxf(box.size.x, 0.01)
+	var kz: float = 1.210 / maxf(box.size.z, 0.01)
 	var kfit: float = minf(ky, minf(kx, kz))
 	if absf(kfit - 1.0) > 0.001:
 		for ch in root.get_children():

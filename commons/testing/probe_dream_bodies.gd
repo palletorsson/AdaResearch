@@ -12,7 +12,8 @@ extends SceneTree
 
 const BODIES := "res://commons/artifacts/dream_bodies/dream_bodies.tscn"
 const FIGURES := ["rocaille", "stijl_robot", "panel_robot", "stella_wall", "dragon", "sea_forms",
-	"coral_polyp", "tube_reef"]
+	"coral_polyp", "tube_reef", "david_drape", "dubuffet", "garet_still", "kruger_suit",
+	"oni_dragon", "lava_bloom"]
 const REPORT := "res://ada_run/dream_bodies_probe.txt"
 
 var _lines: Array[String] = []

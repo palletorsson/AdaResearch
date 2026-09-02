@@ -122,9 +122,9 @@ static func build(root: Node3D, seed: int) -> void:
 	var n_spine: int = rng.randi_range(11, 14)
 	var cut_kind: int = rng.randi_range(0, 1)
 	var cut_h: float = rng.randf_range(1.12, 1.34)
-	var cut_yaw: float = deg_to_rad(rng.randf_range(-17.0, 17.0))
-	var cut_tilt: float = deg_to_rad(rng.randf_range(3.0, 9.0))
-	var cut_x: float = rng.randf_range(-0.13, 0.13)
+	var cut_yaw: float = deg_to_rad(rng.randf_range(-13.0, 13.0))
+	var cut_tilt: float = deg_to_rad(rng.randf_range(3.0, 7.0))
+	var cut_x: float = rng.randf_range(-0.10, 0.10)
 
 	# --- spine ---------------------------------------------------------------
 	var p_hip := Vector3(0.0, 0.50 * body_k, 0.12)
@@ -168,7 +168,6 @@ static func build(root: Node3D, seed: int) -> void:
 		var t: float = 0.24 + fi * 0.19
 		var w: Vector2 = _torso_w(t)
 		var q: Vector3 = _curve_at(pts, t)
-		var tang: Vector3 = Vector3(0.0, 1.0, 0.0)
 		var side_a: Vector3 = q + Vector3(-w.x * 0.55, 0.0, w.y * 0.86)
 		var side_b: Vector3 = q + Vector3(w.x * 0.55, 0.012, w.y * 0.80)
 		_limb(root, side_a, side_b, 0.019, 0.40, mat_fold)
@@ -211,27 +210,27 @@ static func build(root: Node3D, seed: int) -> void:
 	# --- legs: one knee down and forward, one planted with the knee up -------
 	var sd: float = braced
 	var hip_a: Vector3 = p_hip + Vector3(sd * 0.135, -0.02, 0.02)
-	var knee_a := Vector3(sd * 0.158, 0.098, -0.155)
-	var ank_a := Vector3(sd * 0.168, 0.078, 0.205)
-	var toe_a := Vector3(sd * 0.168, 0.058, 0.330)
+	var knee_a := Vector3(sd * 0.158, 0.105, -0.155)
+	var ank_a := Vector3(sd * 0.168, 0.078, 0.165)
+	var toe_a := Vector3(sd * 0.168, 0.058, 0.260)
 	var hip_b: Vector3 = p_hip + Vector3(-sd * 0.135, -0.02, 0.02)
 	var knee_b := Vector3(-sd * 0.212, 0.470 * body_k, -0.255)
-	var ank_b := Vector3(-sd * 0.212, 0.090, -0.295)
-	var toe_b := Vector3(-sd * 0.212, 0.058, -0.415)
+	var ank_b := Vector3(-sd * 0.212, 0.090, -0.285)
+	var toe_b := Vector3(-sd * 0.212, 0.058, -0.395)
 
-	_limb(root, hip_a, knee_a, 0.088 * body_k, 0.92, mat_suit)
+	_limb(root, hip_a, knee_a, 0.085 * body_k, 0.92, mat_suit)
 	_ball(root, knee_a, Vector3(0.078, 0.074, 0.082), Basis(), mat_suit)
-	_limb(root, knee_a, ank_a, 0.072 * body_k, 0.92, mat_suit)
+	_limb(root, knee_a, ank_a, 0.070 * body_k, 0.92, mat_suit)
 	_ball(root, ank_a, Vector3(0.062, 0.055, 0.062), Basis(), mat_suit)
-	_ball(root, (ank_a + toe_a) * 0.5 + Vector3(0.0, -0.008, 0.0), Vector3(0.055, 0.033, 0.082), Basis(), mat_shoe)
-	_ball(root, toe_a + Vector3(0.0, -0.004, 0.01), Vector3(0.050, 0.028, 0.036), Basis(), mat_shoe)
+	_ball(root, (ank_a + toe_a) * 0.5 + Vector3(0.0, -0.028, 0.0), Vector3(0.055, 0.033, 0.082), Basis(), mat_shoe)
+	_ball(root, toe_a + Vector3(0.0, -0.020, 0.01), Vector3(0.050, 0.028, 0.036), Basis(), mat_shoe)
 
 	_limb(root, hip_b, knee_b, 0.090 * body_k, 0.92, mat_suit)
 	_ball(root, knee_b, Vector3(0.082, 0.080, 0.084), Basis(), mat_suit)
 	_limb(root, knee_b, ank_b, 0.070 * body_k, 0.92, mat_suit)
 	_ball(root, ank_b, Vector3(0.060, 0.055, 0.060), Basis(), mat_suit)
-	_ball(root, (ank_b + toe_b) * 0.5 + Vector3(0.0, -0.018, 0.0), Vector3(0.056, 0.032, 0.086), Basis(), mat_shoe)
-	_ball(root, toe_b + Vector3(0.0, -0.012, -0.012), Vector3(0.050, 0.026, 0.038), Basis(), mat_shoe)
+	_ball(root, (ank_b + toe_b) * 0.5 + Vector3(0.0, -0.040, 0.0), Vector3(0.056, 0.032, 0.086), Basis(), mat_shoe)
+	_ball(root, toe_b + Vector3(0.0, -0.028, -0.012), Vector3(0.050, 0.026, 0.038), Basis(), mat_shoe)
 
 	# knee and lap creases
 	_limb(root, knee_a + Vector3(-0.06, 0.03, -0.03), knee_a + Vector3(0.06, 0.04, -0.04), 0.016, 0.40, mat_fold)
@@ -248,14 +247,14 @@ static func build(root: Node3D, seed: int) -> void:
 	# --- arms ----------------------------------------------------------------
 	var b_sh: Vector3 = p_top + Vector3(sd * sh_off, 0.0, 0.005)
 	var b_el: Vector3 = b_sh + Vector3(sd * 0.105, -0.275, -0.115)
-	var b_ha := Vector3(sd * (0.295 + rng.randf_range(-0.02, 0.04)), 0.062, -0.245 + rng.randf_range(-0.05, 0.04))
+	var b_ha := Vector3(sd * (0.295 + rng.randf_range(-0.02, 0.04)), 0.048, -0.245 + rng.randf_range(-0.05, 0.04))
 	_limb(root, b_sh, b_el, 0.062 * body_k, 0.94, mat_suit)
 	_ball(root, b_el, Vector3(0.058, 0.058, 0.060), Basis(), mat_suit)
-	_limb(root, b_el, b_ha, 0.050 * body_k, 0.94, mat_suit)
-	_ball(root, b_ha, Vector3(0.046, 0.044, 0.046), Basis(), mat_suit)
+	_limb(root, b_el, b_ha, 0.044 * body_k, 0.94, mat_suit)
+	_ball(root, b_ha, Vector3(0.044, 0.040, 0.044), Basis(), mat_suit)
 	_limb(root, b_el + Vector3(-0.04, 0.035, -0.02), b_el + Vector3(0.04, 0.045, -0.02), 0.014, 0.40, mat_fold)
 	var b_dir := Vector3(sd * 0.20, -0.12, -1.0).normalized()
-	_hand(root, b_ha, b_dir, Vector3(1.0, 0.0, 0.0), 0.16, mat_suit)
+	_hand(root, b_ha, b_dir, Vector3(1.0, 0.0, 0.0), -0.20, mat_suit)
 
 	var f_sh: Vector3 = p_top + Vector3(-sd * sh_off, 0.0, 0.005)
 	var f_el: Vector3 = f_sh + Vector3(-sd * 0.085, -0.235, -0.115)
@@ -266,14 +265,14 @@ static func build(root: Node3D, seed: int) -> void:
 	_ball(root, f_ha, Vector3(0.044, 0.042, 0.044), Basis(), mat_suit)
 	_limb(root, f_el + Vector3(-0.04, 0.03, -0.025), f_el + Vector3(0.04, 0.04, -0.025), 0.014, 0.40, mat_fold)
 	var f_dir := Vector3(-sd * 0.10, -0.55, -0.83).normalized()
-	_hand(root, f_ha, f_dir, Vector3(1.0, 0.0, 0.0), 0.62, mat_suit)
+	_hand(root, f_ha, f_dir, Vector3(1.0, 0.0, 0.0), 0.18, mat_suit)
 
 	# --- the cut-out standing behind -----------------------------------------
 	var cut_thick: float = rng.randf_range(0.028, 0.044)
 	var cut_mesh: ArrayMesh = _cutout_mesh(rng, cut_kind, cut_h, cut_thick)
 	var cut_bs: Basis = Basis(Vector3.UP, cut_yaw) * Basis(Vector3.RIGHT, cut_tilt)
 	var cut_mi: MeshInstance3D = _add(root, cut_mesh, mat_cut)
-	cut_mi.transform = Transform3D(cut_bs, Vector3(cut_x, cut_h * 0.5, 0.455))
+	cut_mi.transform = Transform3D(cut_bs, Vector3(cut_x, cut_h * 0.5, 0.480))
 	var cut_box: AABB = cut_mi.transform * cut_mesh.get_aabb()
 	cut_mi.transform = Transform3D(cut_bs, cut_mi.transform.origin + Vector3(0.0, -cut_box.position.y, 0.0))
 
@@ -363,11 +362,13 @@ static func _curve_at(pts: Array, t: float) -> Vector3:
 	var f: float = clampf(t, 0.0, 1.0) * float(n - 1)
 	var i: int = int(floor(f))
 	if i >= n - 1:
-		return pts[n - 1]
+		var tail: Vector3 = pts[n - 1]
+		return tail
 	var u: float = f - float(i)
 	var a: Vector3 = pts[i]
 	var b: Vector3 = pts[i + 1]
-	return a.lerp(b, u)
+	var q: Vector3 = a.lerp(b, u)
+	return q
 
 
 static func _torso_w(t: float) -> Vector2:
@@ -440,9 +441,9 @@ static func _cutout_mesh(rng: RandomNumberGenerator, kind: int, h: float, thick:
 		var p1: float = rng.randf_range(0.0, TAU)
 		var p2: float = rng.randf_range(0.0, TAU)
 		var p3: float = rng.randf_range(0.0, TAU)
-		var a1: float = rng.randf_range(0.10, 0.21)
-		var a2: float = rng.randf_range(0.08, 0.17)
-		var a3: float = rng.randf_range(0.04, 0.11)
+		var a1: float = rng.randf_range(0.10, 0.18)
+		var a2: float = rng.randf_range(0.07, 0.14)
+		var a3: float = rng.randf_range(0.04, 0.09)
 		for i in range(n):
 			var th: float = TAU * float(i) / float(n)
 			var rr: float = 1.0 + a1 * sin(th + p1) + a2 * sin(2.0 * th + p2) + a3 * sin(3.0 * th + p3)
@@ -457,7 +458,7 @@ static func _cutout_mesh(rng: RandomNumberGenerator, kind: int, h: float, thick:
 			var rr: float = pow(maxf(den, 0.0001), -1.0 / e)
 			outline.append(Vector2(cth * rr * a_w, sth * rr * a_h))
 		var n_clip: int = rng.randi_range(1, 2)
-		for c in range(n_clip):
+		for _c in range(n_clip):
 			var ca: float = rng.randf_range(0.0, TAU)
 			var cd := Vector2(cos(ca), sin(ca))
 			var far: float = 0.0
@@ -498,6 +499,7 @@ static func _cutout_mesh(rng: RandomNumberGenerator, kind: int, h: float, thick:
 
 	var st := SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	st.set_smooth_group(-1)
 	var mid_z: float = _fold_z(0.0, a_w, kind, fold_d, crease) + thick * 0.5
 	var core := Vector3(0.0, 0.0, mid_z)
 	for k in range(rings.size() - 1):
@@ -619,7 +621,7 @@ static func _tex_letters(rng: RandomNumberGenerator) -> ImageTexture:
 			img.set_pixel(x, y, Color(clampf(ground.r + weave, 0.0, 1.0), clampf(ground.g + weave, 0.0, 1.0), clampf(ground.b + weave * 1.2, 0.0, 1.0)))
 	var ink := Color("#EFEDE3")
 	var n: int = rng.randi_range(17, 23)
-	for k in range(n):
+	for _k in range(n):
 		var gi: int = rng.randi_range(0, GLYPHS.size() - 1)
 		var strokes: Array = GLYPHS[gi]
 		var s: float = rng.randf_range(48.0, 102.0)
@@ -694,7 +696,7 @@ static func _tex_slashes(rng: RandomNumberGenerator) -> ImageTexture:
 	var chalk := Color("#F6F3E8")
 	var base_a: float = rng.randf_range(0.0, PI)
 	var n: int = rng.randi_range(13, 19)
-	for k in range(n):
+	for _k in range(n):
 		var cx: float = rng.randf_range(0.0, float(TEX))
 		var cy: float = rng.randf_range(0.0, float(TEX))
 		var ang: float = base_a + rng.randf_range(-0.45, 0.45)
@@ -738,22 +740,22 @@ static func _tex_maze(rng: RandomNumberGenerator) -> ImageTexture:
 	var pale := Color("#F1EFE8")
 	var ink := Color("#232429")
 	var cells: int = 8
-	var cell: int = TEX / cells
+	var cell: int = int(float(TEX) / float(cells))
 	var motif: Array = []
 	var turn: Array = []
-	for c in range(cells * cells):
+	for _c in range(cells * cells):
 		motif.append(rng.randi_range(0, MAZE_MOTIFS.size() - 1))
 		turn.append(rng.randi_range(0, 3))
 	for y in range(TEX):
 		for x in range(TEX):
-			var cxi: int = x / cell
-			var cyi: int = y / cell
+			var cxi: int = int(floor(float(x) / float(cell)))
+			var cyi: int = int(floor(float(y) / float(cell)))
 			var idx: int = cyi * cells + cxi
 			var mi: int = motif[idx]
 			var rt: int = turn[idx]
 			var u: float = float(x - cxi * cell) / float(cell)
 			var v: float = float(y - cyi * cell) / float(cell)
-			for r in range(rt):
+			for _r in range(rt):
 				var nu: float = v
 				var nv: float = 1.0 - u
 				u = nu
