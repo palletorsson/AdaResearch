@@ -392,7 +392,17 @@ func _load_showing_cards() -> void:
 		if k == "|":
 			continue
 		if not _cards_seen.has(k):
-			_cards_seen[k]
+			# `_cards_seen[k]` alone stood here — a READ whose value is thrown
+			# away, the `= []` lost at some point. On a missing key that throws
+			#
+			#     Invalid access to property or key 'transformation|trans
+			#     introduction' on a base object of type 'Dictionary'
+			#
+			# twice per card (once here, once on the append below), and the key
+			# is never created — so the seen-filter never loaded from disk AT
+			# ALL and every hall the museum had already shown read as unshown.
+			# _save_showing_cards, twelve lines down, has always done it right.
+			_cards_seen[k] = []
 		(_cards_seen[k] as Array).append(c)
 
 
@@ -4296,6 +4306,18 @@ func _stamp_gaps(seg: Node3D, tile: Array, zbase: int) -> void:
 			xparams = [str(d), "z"]
 		_utility_apply_params(node, kind, xparams)
 		seg.add_child(node)
+		# THE SECOND DOOR (2026-09-02). A crossing built for a pearl's hollow came
+		# through here and never through _stamp_utility, so it never got the one
+		# line that lets a transport cube see the walker: its DetectionArea masks
+		# layer 20, the grid's player layer, and the museum's walker is a bare
+		# CharacterBody3D on the default layer. Trans_AxisDecomposition is the
+		# hall that showed it — `tc:4:z:auto` over a six-by-four hollow, a ferry
+		# that ran its cycle for a month with nobody aboard.
+		if kind == "tc":
+			var widened_gap: int = UtilityRegistry.make_carriable(node)
+			if widened_gap > 0:
+				print("[em-gap] %s carries the walker (%d area(s) widened to layer 1)" % [
+					node.name, widened_gap])
 		# THE CROSSING IS THE ROUTE — but only a STATIC one is floor. A bridge is
 		# always there, so its cells are walk cells like any other. A transport
 		# cube or a jump pad is there only sometimes, and promising the walk map
@@ -7013,12 +7035,7 @@ func _stamp_utility(spec: String, cell: Vector2i, seg: Node3D, zbase: int) -> No
 	# by danger_zone, next_cube and every pick-up in the corpus, and being
 	# seen by all of them is not what was asked for.
 	if code == "tc":
-		var widened := 0
-		for a_v in node.find_children("*", "Area3D", true, false):
-			var ar := a_v as Area3D
-			if (ar.collision_mask & 1) == 0:
-				ar.collision_mask |= 1
-				widened += 1
+		var widened: int = UtilityRegistry.make_carriable(node)
 		if widened > 0:
 			print("[em-utility] %s carries the walker (%d area(s) widened to layer 1)" % [
 				node.name, widened])
@@ -7056,12 +7073,20 @@ func _stamp_utility(spec: String, cell: Vector2i, seg: Node3D, zbase: int) -> No
 ## typed export takes it or the value was wrong in the grid too.
 func _utility_apply_params(node: Node3D, code: String, params: Array) -> void:
 	match code:
-		"tc":   # tc:distance:axis[:auto]
-			var dist: float = float(params[0]) if params.size() > 0 and String(params[0]).is_valid_float() else 4.0
-			var axis: String = String(params[1]) if params.size() > 1 else "z"
-			node.set("move_distance", dist)
-			node.set("move_direction", Vector3(1, 0, 0) if axis == "x" else (Vector3(0, 1, 0) if axis == "y" else Vector3(0, 0, 1)))
-			node.set("auto_start", true if params.size() <= 2 else String(params[2]) == "auto")
+		"tc":   # tc:distance:axis[:auto] — the grid's rule, from the grid's own file
+			# TWO READINGS OF ONE CELL DRIFT (2026-09-02, Palle: "make sure that
+			# the transport cube work the same way in the endless museum as in the
+			# grid"). What stood here knew only "x" and "y" and sent every other
+			# word along +Z, so `tc:1:auto:auto` — 425 cells, and its second field
+			# is the word "auto", not an axis — crossed +X in the grid and +Z here;
+			# and it forced auto_start on for any two-parameter cell, where the
+			# grid leaves the cube waiting for a body. Both callers now ask
+			# UtilityRegistry.transport_params, which is the grid's branch moved.
+			var tcfg: Dictionary = UtilityRegistry.transport_params(params)
+			if bool(tcfg["applied"]):
+				node.set("move_distance", float(tcfg["distance"]))
+				node.set("move_direction", tcfg["direction"])
+				node.set("auto_start", bool(tcfg["auto"]))
 		"br":   # br:axis:length
 			var axis2: String = String(params[0]) if params.size() > 0 else "z"
 			node.set("bridge_axis", axis2.trim_prefix("-"))

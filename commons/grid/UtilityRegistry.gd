@@ -571,6 +571,68 @@ static func parse_utility_cell(cell_value: String) -> Dictionary:
 	
 	return result
 
+
+## ONE RULE FOR ONE CELL (2026-09-02, Palle: "make sure that the transport cube
+## work the same way in the endless museum as in the grid, they only work in the
+## grid"). The grid read a `tc` cell in GridUtilitiesComponent and the endless
+## museum read it again in its own _utility_apply_params, and a second
+## implementation of one rule drifts. It had: the museum's axis test knew only
+## "x" and "y" and sent everything else along +Z, so the corpus's most-placed
+## form, `tc:1:auto:auto` (425 cells, whose second field is not an axis at all),
+## crossed +X in the grid and +Z in the museum; and the museum turned auto_start
+## ON for any two-parameter cell, where the grid leaves the cube waiting for a
+## body unless the word `auto` is written. Both callers now ask this function.
+##
+## The grammar, unchanged: tc:DISTANCE:DIRECTION[:auto]
+##   DIRECTION is x, y, z, -x, -y, -z, or three comma-separated numbers.
+##   Anything else leaves the cube's own default, +X — which is what the grid
+##   has always done with it, and what those 425 cells were laid against.
+## `applied` is false when there are fewer than two parameters: the grid sets
+## nothing at all in that case, and the cube keeps every exported default.
+static func transport_params(parameters: Array) -> Dictionary:
+	var out := {"distance": 4.0, "direction": Vector3(1, 0, 0), "auto": false, "applied": false}
+	if parameters.size() < 2:
+		return out
+	out["applied"] = true
+	out["distance"] = float(parameters[0])
+	var dp := String(parameters[1]).strip_edges().to_lower()
+	match dp:
+		"x":  out["direction"] = Vector3(1, 0, 0)
+		"y":  out["direction"] = Vector3(0, 1, 0)
+		"z":  out["direction"] = Vector3(0, 0, 1)
+		"-x": out["direction"] = Vector3(-1, 0, 0)
+		"-y": out["direction"] = Vector3(0, -1, 0)
+		"-z": out["direction"] = Vector3(0, 0, -1)
+		_:
+			var coords := dp.split(",")
+			if coords.size() >= 3:
+				out["direction"] = Vector3(coords[0].to_float(), coords[1].to_float(), coords[2].to_float())
+	if parameters.size() >= 3:
+		out["auto"] = String(parameters[2]).strip_edges().to_lower() == "auto"
+	return out
+
+
+## WHO THE CUBE CAN SEE. transport_cube ships with its DetectionArea masking
+## layer 20 alone — the grid's player layer — and it is that area, not the
+## unused CarryArea beside it, that sets `carried_player` and starts the ride.
+## The endless museum's walker is a bare CharacterBody3D on the default layer,
+## so a cube stamped into a hall watched a body stand on it and did nothing.
+## Widen the carrier rather than moving the walker onto layer 20: that layer is
+## also read by danger_zone, next_cube and every pick-up in the corpus, and
+## being seen by all of them is not what was asked for. Returns how many areas
+## were widened, so a caller can say so rather than assume it.
+static func make_carriable(node: Node3D) -> int:
+	if node == null:
+		return 0
+	var widened := 0
+	for a_v in node.find_children("*", "Area3D", true, false):
+		var ar := a_v as Area3D
+		if ar != null and (ar.collision_mask & 1) == 0:
+			ar.collision_mask |= 1
+			widened += 1
+	return widened
+
+
 # Generate utility type mapping comment for data files
 static func generate_utility_mapping_comment() -> String:
 	var comment_lines = [

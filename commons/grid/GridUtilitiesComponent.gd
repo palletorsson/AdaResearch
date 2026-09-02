@@ -704,42 +704,21 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 				utility_object.rotation_degrees.y = rot_y
 				print("GridUtilitiesComponent: Set 'an' board rotation to %.1f degrees" % rot_y)
 		"tc":  # Transport Cube
-			if parameters.size() >= 2:
-				var distance = float(parameters[0])
-				var direction_param = parameters[1]
-				var direction = Vector3(1, 0, 0)
-				match direction_param.to_lower():
-					"x":
-						direction = Vector3(1, 0, 0)
-					"y":
-						direction = Vector3(0, 1, 0)
-					"z":
-						direction = Vector3(0, 0, 1)
-					"-x":
-						direction = Vector3(-1, 0, 0)
-					"-y":
-						direction = Vector3(0, -1, 0)
-					"-z":
-						direction = Vector3(0, 0, -1)
-					_:
-						var coords = direction_param.split(",")
-						if coords.size() >= 3:
-							direction = Vector3(
-								coords[0].to_float(),
-								coords[1].to_float(),
-								coords[2].to_float()
-							)
+			# THE RULE MOVED, THE BEHAVIOUR DID NOT (2026-09-02). The six named
+			# axes, the comma triple, the +X fallback and the `auto` word are all
+			# UtilityRegistry.transport_params now, because the endless museum was
+			# reading the same cell with a second copy of this logic and the copy
+			# had drifted. Verified against every tc form in the corpus by
+			# commons/testing/probe_transport_cube_parity.gd.
+			var tcfg: Dictionary = UtilityRegistry.transport_params(parameters)
+			if bool(tcfg["applied"]):
+				var distance: float = float(tcfg["distance"])
+				var direction: Vector3 = tcfg["direction"]
 				if "set_transport_parameters" in utility_object:
 					utility_object.set_transport_parameters(distance, direction)
-
-				# Check for optional third parameter: "auto"
-				if parameters.size() >= 3:
-					var auto_param = parameters[2].strip_edges().to_lower()
-					if auto_param == "auto" and "set_auto_start" in utility_object:
-						utility_object.set_auto_start(true)
-						print("GridUtilitiesComponent: Set transport cube to move %.1f units in direction %s (AUTO-START)" % [distance, direction])
-					else:
-						print("GridUtilitiesComponent: Set transport cube to move %.1f units in direction %s" % [distance, direction])
+				if bool(tcfg["auto"]) and "set_auto_start" in utility_object:
+					utility_object.set_auto_start(true)
+					print("GridUtilitiesComponent: Set transport cube to move %.1f units in direction %s (AUTO-START)" % [distance, direction])
 				else:
 					print("GridUtilitiesComponent: Set transport cube to move %.1f units in direction %s" % [distance, direction])
 		"br":  # Bridge Path
