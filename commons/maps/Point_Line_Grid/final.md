@@ -6,7 +6,9 @@ The last room ended on a question it could not answer for you: two losses, and w
 
 <!-- @player_trace -->
 
-The recorder is at the door, the same instrument as before, a centimetre between points and a thousand and twenty-four of them before the oldest goes. But it is standing in a different room, and the room has changed what it writes.
+The recorder is at the door, the same instrument as before, a centimetre between points and a thousand and twenty-four of them before the oldest goes. But it is standing in a different room, and here it writes two lines from one walk.
+
+The faint one is where you were, every frame, unquantised. The bright one is the cell the grid gave each of those positions, one metre to a side, and it comes out as a staircase. The gap between the two lines is not an error in either. It is what was thrown away, made visible for once, and the room keeps both so you can see the discard beside the thing it was discarded from.
 
 `player_trace` writes your position into the cell it falls inside, not where it actually was.
 

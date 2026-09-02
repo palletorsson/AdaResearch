@@ -133,11 +133,10 @@ var _gate_last_pos: Vector3 = Vector3.ZERO
 var _gate_has_last: bool = false
 
 func _ready() -> void:
-	# Find XR Origin
+	# Find XR Origin -- the LIVE one. The exported path is honoured only if what
+	# it names is actually the rig the visitor drives (see _origin_is_live).
 	_xr_origin = get_node_or_null(xr_origin_path)
-	if not _xr_origin:
-		push_warning("PlayerTrace: XROrigin3D not found at path: %s" % xr_origin_path)
-		# Try to find it automatically
+	if _xr_origin == null or not _origin_is_live(_xr_origin):
 		_xr_origin = _find_xr_origin()
 
 	# BUILT BEFORE THE ORIGIN IS RESOLVED, and that ordering is the point. The old code
@@ -155,10 +154,15 @@ func _ready() -> void:
 	_ret_read_config()
 	_ret_build()
 
+	_seam_read_config()
+
 	if not _xr_origin:
-		push_warning("PlayerTrace: no XROrigin3D found — the recorder stands with its "
-			+ "frame and records nothing.")
-		set_process(false)
+		# KEEP LOOKING. The old code switched itself off here for good. A rig can
+		# arrive after the artifact (a map builds its artifacts before the player
+		# is spawned) and the museum can hand us the wrong one (see below), so
+		# _process re-resolves on a timer until it holds a rig that moves.
+		push_warning("PlayerTrace: no live XROrigin3D yet; will keep looking.")
+		set_process(true)
 		return
 
 	_last_global_position = _xr_origin.global_position
@@ -166,15 +170,49 @@ func _ready() -> void:
 
 	print("PlayerTrace: Tracking player at %s" % _xr_origin.get_path())
 
+## THE LIVE RIG, NOT THE FIRST ONE MET. Mirrors endless_museum._vr_eye
+## (2026-08-18): under the shipped game loop there are TWO XROrigin3D in the
+## tree -- the staging's menu rig, which never moves, and the loaded scene's,
+## which the visitor drives. The old search took the first it met and cached
+## it forever, so in the museum this recorder shadowed a rig standing still in
+## the lobby and drew nothing. Palle, 2026-09-02: "in VR I do not see the
+## trace in museum." XR Tools flips `current` to the driven rig; prefer that,
+## else the most recently added one.
+const ORIGIN_RECHECK_S := 0.5
+var _origin_recheck := 0.0
+
 func _find_xr_origin() -> Node3D:
-	"""Try to find XROrigin3D in the scene tree"""
-	var root = get_tree().root
-	if root:
-		for child in root.get_children():
-			var found = _search_for_xr_origin(child)
-			if found:
-				return found
+	var origins: Array = []
+	_pt_collect(get_tree().root, "XROrigin3D", origins)
+	for og in origins:
+		if bool(og.get("current")):
+			return og as Node3D
+	if not origins.is_empty():
+		return origins[origins.size() - 1] as Node3D
 	return null
+
+func _origin_is_live(o: Node) -> bool:
+	if o == null or not is_instance_valid(o):
+		return false
+	if not o.is_class("XROrigin3D"):
+		return true                       # an exported path to a plain node: trust it
+	if bool(o.get("current")):
+		return true
+	# not current -- live only if NO rig is current (a single-rig scene never sets it)
+	var origins: Array = []
+	_pt_collect(get_tree().root, "XROrigin3D", origins)
+	for og in origins:
+		if og != o and bool(og.get("current")):
+			return false
+	return true
+
+func _pt_collect(n: Node, cls: String, out: Array) -> void:
+	if n == null:
+		return
+	if n.is_class(cls):
+		out.append(n)
+	for c in n.get_children():
+		_pt_collect(c, cls, out)
 
 func _search_for_xr_origin(node: Node) -> Node3D:
 	"""Recursively search for XROrigin3D"""
@@ -267,6 +305,25 @@ func _setup_endpoints() -> void:
 	add_child(_now_marker)
 
 func _process(delta: float) -> void:
+	_origin_recheck += delta
+	if _origin_recheck >= ORIGIN_RECHECK_S:
+		_origin_recheck = 0.0
+		if _xr_origin == null or not _origin_is_live(_xr_origin):
+			var o: Node3D = _find_xr_origin()
+			if o != null and o != _xr_origin:
+				# A NEW RIG IS A NEW WALK. Keeping the old points would draw one
+				# segment from wherever the dead rig stood to wherever the live
+				# one is -- a phantom line across the room.
+				_xr_origin = o
+				_trail_points.clear()
+				_trail_times.clear()
+				_trail_speeds.clear()
+				_truth_points.clear()
+				_truth_length = 0.0
+				_gate_has_last = false
+				_last_global_position = o.global_position
+				_rebuild_trail()
+				print("PlayerTrace: now tracking live origin %s" % o.get_path())
 	if not _xr_origin:
 		return
 
@@ -541,7 +598,40 @@ func _ret_read_config() -> void:
 ## Gated on the key AND on the value actually changing: a map that says nothing about
 ## retention gets no rebuild at all, so a config carrying only other keys — or the same
 ## value the artifact already has — cannot disturb the legacy path.
+## THE SEAM KNOBS WERE UNREACHABLE. seam_grid, seam_sample_hz and show_discarded
+## are exports, but apply_grid_config read only `retention`, and the museum's
+## stamp does n.set("seam_grid", "1.0") with a STRING from the token, which a
+## typed float refuses in silence. So no map token could ever switch the second
+## line on. Coerced here, from meta at _ready and from the dict on apply.
+func _seam_coerce_bool(v: Variant) -> bool:
+	if v is bool:
+		return v
+	var s: String = str(v).strip_edges().to_lower()
+	return s in ["1", "true", "yes", "on"]
+
+func _seam_apply(d: Dictionary) -> void:
+	if d.has("seam_grid"):
+		seam_grid = clampf(str(d["seam_grid"]).to_float(), 0.0, 10.0)
+	if d.has("seam_sample_hz"):
+		seam_sample_hz = clampf(str(d["seam_sample_hz"]).to_float(), 0.0, 240.0)
+	if d.has("show_discarded"):
+		show_discarded = _seam_coerce_bool(d["show_discarded"])
+		if not show_discarded and is_instance_valid(_ghost_instance):
+			_ghost_instance.visible = false
+		elif show_discarded and is_instance_valid(_ghost_instance):
+			_ghost_instance.visible = true
+
+func _seam_read_config() -> void:
+	var d: Dictionary = {}
+	for k in ["seam_grid", "seam_sample_hz", "show_discarded"]:
+		if has_meta("config_" + k):
+			d[k] = get_meta("config_" + k)
+	if not d.is_empty():
+		_seam_apply(d)
+
+
 func apply_grid_config(config_data: Dictionary) -> void:
+	_seam_apply(config_data)          # additive: absent keys change nothing
 	if not config_data.has("retention"):
 		return
 	var r: String = str(config_data["retention"]).strip_edges().to_lower()
