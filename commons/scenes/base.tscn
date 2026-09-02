@@ -32,6 +32,7 @@
 [ext_resource type="Script" uid="uid://qlvmq6ji5udp" path="res://commons/player/WristStatsDisplay.gd" id="31_wrist_stats"]
 [ext_resource type="Script" uid="uid://cb6ip8nxoqb78" path="res://commons/tools/OversightVoiceBridge.gd" id="32_voice_bridge"]
 [ext_resource type="Script" uid="uid://bd3rk0iph2m2k" path="res://commons/managers/MovementCapabilityGate.gd" id="33_move_cap_gate"]
+[ext_resource type="Script" path="res://commons/player/hand_inventory.gd" id="34_hand_inventory"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_upvej"]
 size = Vector3(0.096401334, 0.121734604, 0.16770938)
@@ -77,9 +78,7 @@ mode = 1
 strafe = true
 
 [node name="FunctionPickup" parent="XROrigin3D/LeftHand/XRToolsCollisionHand" index="1" unique_id=1366509493 instance=ExtResource("8_5nlub")]
-grab_distance = 0.3
-ranged_distance = 5.0
-ranged_angle = 5.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02, -0.05, 0.1)
 
 [node name="FunctionPointer" parent="XROrigin3D/LeftHand/XRToolsCollisionHand" index="2" unique_id=391032211 instance=ExtResource("13_c1k2x")]
 show_laser = 2
@@ -119,9 +118,7 @@ mode = 1
 jump_button_action = "_disabled"
 
 [node name="FunctionPickup" parent="XROrigin3D/RightHand/XRToolsCollisionHand" index="3" unique_id=1831217974 instance=ExtResource("8_5nlub")]
-grab_distance = 0.3
-ranged_distance = 5.0
-ranged_angle = 5.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02, -0.05, 0.1)
 
 [node name="FunctionPointer" parent="XROrigin3D/RightHand/XRToolsCollisionHand" index="4" unique_id=339200772 instance=ExtResource("13_c1k2x")]
 show_laser = 2
@@ -190,6 +187,9 @@ debug_mode = true
 
 [node name="MovementCapabilityGate" type="Node" parent="XROrigin3D" index="10" unique_id=1874132729]
 script = ExtResource("33_move_cap_gate")
+
+[node name="HandInventory" type="Node" parent="XROrigin3D" index="11"]
+script = ExtResource("34_hand_inventory")
 
 [node name="Label3D" type="Label3D" parent="." index="2" unique_id=645111340]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.82028, -1.89971)
