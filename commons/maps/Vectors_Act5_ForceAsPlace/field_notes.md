@@ -72,16 +72,48 @@ needs a ruling rather than a fix.
 One consequence the commit could not have foreseen: raising that cell **lifted
 the field out of a standing player's reach.**
 
-## 4. The museum walks the room backwards
+## 3b. And a visitor who did everything right would still miss, by 5 cm
 
-The map spawns at r20 and exits at r3. The museum enters every hall at row 0 and
-leaves at row H−1. So the four spoken truths arrive in exactly reverse order:
+Found by the cross-check, not by me, and it is the decisive one.
+
+`GridInteractablesComponent.gd:2164` grounds a body by `correction = -min_y`.
+The zone's corner spheres (`force_field_zone.gd:163`) hang 5 cm below its own
+origin, so the grid lifts the whole volume by 5 cm: the field runs from y 0.55
+to 5.55 over a catwalk deck at y 0.50. Containment is `_point_inside` on the
+player's FEET, strict `< 2.5` (`gd:239-242`).
+
+**A player standing on the catwalk is five centimetres below the field.** One on
+the ledge is further below it. The crossing this hall is named for cannot be
+taken on foot in the shipped map, by anyone, from either side, with the machine
+aimed perfectly.
+
+The zone's own named `crossing` preset compounds it. `gd:42` sets it to
+`(7, 7, 0)`. Grid columns are X and rows are Z, and the chasm spans rows, so +X
+runs **along** the trench. The vocabulary's own word for crossing would sail you
+down the length of the gap.
+
+## 4. The museum does not walk the room backwards. It deletes the words
+
+I reported this as a reversal. **It is worse than that, and the cross-check was
+right to correct me.** `endless_museum.gd:660` allows six utility codes
+(`rc sc tc br jp wp`). `sub` is in neither the allowed nor the refused table, so
+`_stamp_utility` prints a refusal and returns null for all four subtitle cells.
+The `an` info board goes the same way, and `t` is refused explicitly at `:667`.
+`ada_run/em_plan.json` plans[49] carries **seven bodies and no text**.
+
+In the museum this hall says nothing at all. The reversal is a deletion, and
+**the wall text is not one voice among several here. It is the only one.**
+
+The reversal is still real for a player in the standalone map, where the
+subtitles do fire, and there it arrives like this:
 
     authored : intro → truth_machine → truth_void → truth_complete
-    museum   : truth_complete → truth_void → truth_machine → intro
+    walked   : truth_complete → truth_void → truth_machine → intro
 
-A museum visitor is congratulated on the crossing at step 5, told what the void
-is at step 14 after walking over it, and given the instructions at step 19.
+One thing survives whichever end you come in from, and it is the part to fix
+first: `truth_complete` reads *"You crossed on a field you set."* Anyone who
+took the catwalk did not. The subtitle ORDER is the smaller problem; the
+subtitle CONTENT is false as shipped.
 
 This is **not** the corpus convention: of the 185 live halls, 81 agree with the
 museum and only 6 go against it — and three of the six are Vectors_Act4a,
@@ -130,6 +162,9 @@ singularity guard beneath it dead code.
 walker learns to be carried — which is a change in `em_walker`, not in this map
 — or this hall keeps its catwalk and the text says so. Everything else waits on
 that, because the text cannot be honest until it is settled.
+
+**The 5 cm is the first fix and the cheapest.** Until the field can be entered,
+nothing else in this hall matters.
 
 **Three one-line changes would restore the teaching loop** without touching the
 argument: centre the pitch slider so yaw is live on arrival, mark −Z on the yaw
