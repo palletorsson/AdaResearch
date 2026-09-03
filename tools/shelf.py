@@ -114,6 +114,7 @@ def build() -> dict:
             "placements": len(where.get(k, [])),
             "seen": k in seen,
             "footprint_cells": sn.get("footprint_cells"),
+            "wall_backing": sn.get("wall_backing"),
             "platform": sn.get("platform"),
             "aabb": meas.get("aabb_size"),
             "search": _text_of(v),

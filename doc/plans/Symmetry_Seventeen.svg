@@ -397,6 +397,7 @@
 <rect x="182.0" y="138.0" width="26" height="26" fill="url(#hatch)" stroke="#c07a12" stroke-width="1.4"/>
 <circle cx="195.0" cy="151.0" r="2.4" fill="#141820"/>
 <text x="200.0" y="147.0" font-size="8" fill="#141820">loom_escher_mirror</text>
+<rect x="182.0" y="138.0" width="26" height="26" fill="none" stroke="#d1344b" stroke-width="2.4" stroke-dasharray="3 2"/>
 <rect x="138.2" y="164.0" width="113.6" height="78.0" fill="#2f6bd8" fill-opacity="0.13" stroke="#2f6bd8" stroke-width="1.4"/>
 <circle cx="195.0" cy="203.0" r="2.4" fill="#141820"/>
 <text x="200.0" y="199.0" font-size="8" fill="#141820">vr_tile_editor</text>
@@ -428,9 +429,10 @@
 <text x="130" y="670" font-size="10" fill="#c07a12">UNMEASURED  loom_alhambra_p6m at r1 c10 — no aabb, so no guard on its size</text>
 <text x="130" y="683" font-size="10" fill="#c07a12">UNMEASURED  wall_pattern_gallery at r2 c4 — no aabb, so no guard on its size</text>
 <text x="130" y="696" font-size="10" fill="#c07a12">UNMEASURED  loom_escher_mirror at r3 c2 — no aabb, so no guard on its size</text>
-<text x="130" y="709" font-size="10" fill="#c07a12">UNMEASURED  mill_alhambra_p6m at r5 c10 — no aabb, so no guard on its size</text>
-<text x="130" y="722" font-size="10" fill="#c07a12">UNMEASURED  mill_persian_p4 at r9 c1 — no aabb, so no guard on its size</text>
-<text x="130" y="735" font-size="10" fill="#c07a12">UNMEASURED  mill_escher_p4g at r9 c7 — no aabb, so no guard on its size</text>
-<text x="130" y="748" font-size="10" fill="#d1344b">OVERRUN  pattern_atlas_gallery: 10.3 x 4.7 m at r14 c4 leaves the room</text>
-<text x="130" y="761" font-size="10" fill="#c07a12">UNMEASURED  pattern_artifact at r17 c2 — no aabb, so no guard on its size</text>
+<text x="130" y="709" font-size="10" fill="#c07a12">IN WALL    loom_escher_mirror at r3 c2 on structure '2' — declares no wall backing; carve the cell to floor</text>
+<text x="130" y="722" font-size="10" fill="#c07a12">UNMEASURED  mill_alhambra_p6m at r5 c10 — no aabb, so no guard on its size</text>
+<text x="130" y="735" font-size="10" fill="#c07a12">UNMEASURED  mill_persian_p4 at r9 c1 — no aabb, so no guard on its size</text>
+<text x="130" y="748" font-size="10" fill="#c07a12">UNMEASURED  mill_escher_p4g at r9 c7 — no aabb, so no guard on its size</text>
+<text x="130" y="761" font-size="10" fill="#d1344b">OVERRUN  pattern_atlas_gallery: 10.3 x 4.7 m at r14 c4 leaves the room</text>
+<text x="130" y="774" font-size="10" fill="#c07a12">UNMEASURED  pattern_artifact at r17 c2 — no aabb, so no guard on its size</text>
 </svg>

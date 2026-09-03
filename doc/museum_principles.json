@@ -56,6 +56,20 @@
    "principle": "To judge placement, draw the plan. Shoot the render only to judge what it LOOKS like.",
    "why": "A capture is a photograph of a world: biome, sky, grass, lighting, and a camera angle that decides what you can see. None of that helps you judge whether a body is where it should be. tools/map_plan.py draws the same room as an architectural plan from map_data.json plus the measured footprints in doc/shelf.json - walls solid, void dashed, every body at its real size, red where the footprint leaves the room, hatched where the artifact has no measurement. It runs in a second, needs no Godot and no agents, and on its first three rooms it independently reproduced findings that had cost a full reader wave: Descent's 20 m terrain in a 14 m room, four overruns in KochSierpinski, seven unmeasured bodies in Symmetry_Seventeen. The two views answer different questions and the plan is the cheaper one, so it goes first.",
    "test": "map_plan.py --seq=<chapter> prints overrun / unmeasured / over-void counts per room."
+  },
+  {
+   "id": "the-join-is-the-tool",
+   "won": "2026-09-03, answering 'what tool lifts concept, book, museum and curation together'",
+   "principle": "When four things need improving, look for the key they already share. The tool is the join, not a fifth thing.",
+   "why": "Concept, book, museum and curation all key on ROOM x ARTIFACT x CLAIM and no tool read them together. coherence.py is one row per room and one column per modality, and every gap is a fact about a DIFFERENT layer with a named next action. Every tool built today came from the same move: two files knowing different halves of one fact, joined for the first time. The registry knew what an artifact measured and the map knew where it stood - nobody multiplied them, and 82 rooms hold a body bigger than the room. The registry knew which bodies want a wall and the map knew which stood in one - nobody subtracted them, and 123 are embedded against their own declaration. None of it needed a model.",
+   "test": "coherence.py: 185 rooms, 1 clear, and every non-clear row names its next action and the tool that does it."
+  },
+  {
+   "id": "when-a-number-flatters-you-re-derive-it",
+   "won": "2026-09-03, the variant column",
+   "principle": "A measurement that makes the corpus look good is the one to re-derive.",
+   "why": "The variant column first counted any '#key:value' in a placement and reported 72 rooms using a non-default. Most of those keys are modes and sizes, not declared DNA axes. Counting only declared axes gives 26 of 185. The flattering version would have shipped into a blog post. An old note in the other direction said 'exactly ONE map' - also wrong, and stale. Both errors were cheap to fix and expensive to believe.",
+   "test": "coherence.py's vary column matches a key against that artifact's declared dna_axes, not against the presence of a '#'."
   }
  ]
 }

@@ -150,6 +150,23 @@ def plan(map_name: str, shelf: dict) -> tuple[str, list[str]]:
             under = str(st[r][c]).strip() if r < H and c < W else ""
             if under in ("0", ""):
                 notes.append(f"OVER VOID  {tok} at r{r} c{c} stands on a cell with no floor")
+            elif under != "1":
+                # IN A WALL. 2026-09-03, Palle reading the Symmetry_Seventeen plan:
+                # "we have to change the wall around the artifacts... they have to be
+                # stamped into the floor to remove the wall?" Yes, for most of them.
+                # The registry already knows which: spatial_needs.wall_backing says
+                # whether a body WANTS a wall behind it. Corpus-wide, 150 artifacts
+                # stand on a wall cell and 123 of them declare wall_backing false --
+                # embedded against their own declaration. The other 21 belong there.
+                wb = e.get("wall_backing")
+                if wb is True:
+                    notes.append(f"IN WALL    {tok} at r{r} c{c} — declares wall_backing, so this is by design")
+                else:
+                    notes.append(f"IN WALL    {tok} at r{r} c{c} on structure '{under}' — "
+                                 f"declares no wall backing; carve the cell to floor")
+                out.append(f'<rect x="{cx - CELL / 2:.1f}" y="{cy - CELL / 2:.1f}" width="{CELL}" '
+                           f'height="{CELL}" fill="none" stroke="{RED}" stroke-width="2.4" '
+                           f'stroke-dasharray="3 2"/>')
             if y_off is not None and abs(y_off) > 0.01:
                 notes.append(f"Y OFFSET   {tok} at r{r} c{c} is {y_off:+.2f} m — auto-grounding is cancelled")
 
