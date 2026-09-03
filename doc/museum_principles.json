@@ -70,6 +70,20 @@
    "principle": "A measurement that makes the corpus look good is the one to re-derive.",
    "why": "The variant column first counted any '#key:value' in a placement and reported 72 rooms using a non-default. Most of those keys are modes and sizes, not declared DNA axes. Counting only declared axes gives 26 of 185. The flattering version would have shipped into a blog post. An old note in the other direction said 'exactly ONE map' - also wrong, and stale. Both errors were cheap to fix and expensive to believe.",
    "test": "coherence.py's vary column matches a key against that artifact's declared dna_axes, not against the presence of a '#'."
+  },
+  {
+   "id": "form-and-body-are-independent-axes",
+   "won": "2026-09-03, the first generate-and-compare, Symmetry_Seventeen vs _alt",
+   "principle": "Fixing a room's FORM never fixes its BODIES, and the plan tool tells you so before you build.",
+   "why": "The census claim failed its form test - aspect 1.69 with 58 interior walls, so the list arrives in installments. The alternative at 17 x 13 with zero interior walls passes: the panels now stand in one line you take in at a glance, and that part of the comparison is a clean win. But the giant tiled plane still runs out past the map edge in BOTH shots, and in the alternative it is proportionally worse because the room is smaller. map_plan.py reported the same '1 overrun, 7 unmeasured' for both versions before either was shot, and it was right: the overrun was never a fact about the room. This is why coherence.py keeps SPACE and BODIES in separate columns - they are independent axes and a fix on one is not evidence about the other.",
+   "test": "map_plan.py on the two versions returns identical overrun and unmeasured counts; argument_shape.py returns NO for one and FITS for the other."
+  },
+  {
+   "id": "the-classifier-is-a-prompt-not-a-verdict",
+   "won": "2026-09-03, building argument_shape.py",
+   "principle": "Read the classifier's cues, not just its answer. It is right often enough to be useful and wrong often enough to be checked.",
+   "why": "Symmetry_Seventeen classified CENSUS on four cues (census, exactly, exhaust, seventeen) and that is plainly right. Fractal_MandelbrotSet classified ACCRETION on ONE cue, 'iterat', when its claim is an atlas - a census of Julia sets - so the verdict 'accrual wants a run' is advice about the wrong kind. The tool prints its cues for exactly this reason. A one-cue classification is a question; a four-cue one is close to a finding. Corpus-wide: 185 rooms, 38 unclassified, form fights claim in 46.",
+   "test": "argument_shape.py --why prints the cues that fired; treat a single cue as unclassified."
   }
  ]
 }
