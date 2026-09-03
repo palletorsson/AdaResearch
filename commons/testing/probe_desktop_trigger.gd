@@ -208,6 +208,73 @@ func _init() -> void:
 			% peak + " 45.0 cutoff, and the peak is a snap rather than the strike")
 		fails += 1
 
+	# ── 10. SWITCHING. Two weapons, the wheel picks one. ─────────────────
+	# Palle: "yes add switching between the weapons".
+	ptr.call("_drop_held")
+	var g2 := _Trigger.new()
+	get_root().add_child(g2)
+	ptr.call("_grab_held", sledge)      # hammer first
+	ptr.call("_grab_held", g2)          # then the gun — both stay
+	var arsenal: Array = ptr.get("_arsenal")
+	print("")
+	print("arsenal holds %d, drawn index %d" % [arsenal.size(), ptr.get("_drawn_i")])
+	if arsenal.size() != 2:
+		print("  FAIL picking a second weapon dropped the first"); fails += 1
+
+	# THE STOWED ONE MUST BE DISABLED, not merely hidden. A stowed sledgehammer
+	# that keeps processing keeps striking: its rule is the speed of its own head,
+	# and the holster moves whenever the player does.
+	var stowed_ok := true
+	for w in arsenal:
+		var drawn: bool = w == ptr.get("_held")
+		if drawn:
+			continue
+		if w.visible or w.process_mode != Node.PROCESS_MODE_DISABLED:
+			stowed_ok = false
+	print("stowed weapon hidden AND disabled: %s" % stowed_ok)
+	if not stowed_ok:
+		print("  FAIL a stowed hammer would go on breaking things you never aimed at")
+		fails += 1
+
+	var first = ptr.get("_held")
+	ptr.call("_draw_weapon", int(ptr.get("_drawn_i")) + 1)
+	var second = ptr.get("_held")
+	print("wheel switched: %s -> %s" % [first.name, second.name])
+	if first == second:
+		print("  FAIL the wheel did not change weapon"); fails += 1
+	if second.transform.origin != ptr.get("weapon_offset"):
+		print("  FAIL the drawn weapon is not parked at the viewmodel offset"); fails += 1
+
+	# ── 11. RMB puts down ONE, and the other comes to hand ───────────────
+	ptr.call("_drop_held")
+	var left: Array = ptr.get("_arsenal")
+	print("")
+	print("after dropping one: arsenal %d, in hand %s"
+		% [left.size(), str(ptr.get("_held") != null)])
+	if left.size() != 1:
+		print("  FAIL RMB emptied the whole arsenal"); fails += 1
+	if ptr.get("_held") == null:
+		print("  FAIL the remaining weapon vanished into an unreachable holster")
+		fails += 1
+
+	# ── 12. THE HAND MUST NOT LOCK SHUT ──────────────────────────────────
+	# A weapon can be destroyed while held. If _held keeps pointing at the corpse
+	# and _is_weapon stays true, every later right-click runs _drop_held on
+	# nothing and the hand can never pick anything up again.
+	var doomed := _Trigger.new()
+	get_root().add_child(doomed)
+	ptr.call("_grab_held", doomed)
+	doomed.queue_free()
+	await process_frame
+	await process_frame
+	ptr.call("_process", 0.016)
+	var hand_open: bool = ptr.get("_held") == null or is_instance_valid(ptr.get("_held"))
+	print("")
+	print("weapon destroyed in hand — hand still open: %s" % hand_open)
+	if not hand_open:
+		print("  FAIL the hand is holding a corpse and will refuse every grab")
+		fails += 1
+
 	print("")
 	print("PROBE OK" if fails == 0 else "PROBE FAILED (%d)" % fails)
 	quit(fails)

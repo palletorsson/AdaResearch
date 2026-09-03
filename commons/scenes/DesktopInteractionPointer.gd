@@ -50,6 +50,17 @@ var _holster: Node3D = null
 var _weapon_home: Node = null        # where it hung before we took it
 var _is_weapon: bool = false         # this hold is a viewmodel, not a carry
 
+## THE ARSENAL (2026-09-02, Palle: "yes add switching between the weapons").
+##
+## Every weapon picked up stays in the holster; the wheel draws a different one.
+## Stowed means DISABLED AND HIDDEN, not merely invisible — the sledgehammer runs
+## a _physics_process that measures its own head speed and strikes what it sweeps
+## through, so a stowed hammer riding the holster while you swing a gun would go
+## on breaking things you never aimed at. VR stows by taking the weapon out of
+## the tree for the same reason.
+var _arsenal: Array[Node3D] = []
+var _drawn_i: int = -1
+
 
 ## ONE LIST OF WEAPONS, NOT TWO. HandInventory.is_weapon is the VR rig's own test
 ## (token meta, then a PinkGun child, then a name containing Sledgehammer), so
@@ -135,6 +146,18 @@ func _process(delta: float) -> void:
 	# a child of this pointer, which mirrors the camera — so it is already exactly
 	# where it should be, every frame, with no lag. Lerping it here would fight
 	# its own parent and reintroduce the wobble a viewmodel must not have.
+	# A FREED HELD THING IS CLEARED FIRST, WHATEVER KIND IT WAS. The stale-check
+	# used to sit in an `elif` after the weapon branch, so a weapon that died
+	# while held was never forgotten: _held stayed pointing at a corpse, _is_weapon
+	# stayed true, and every later right-click ran _drop_held on nothing — the
+	# hand locked shut and could never pick anything up again. Same shape as the
+	# three freed-reference crashes fixed elsewhere today, reached by a different
+	# door.
+	if _held != null and not is_instance_valid(_held):
+		_held = null
+		if _is_weapon:
+			_is_weapon = false
+			_draw_weapon(_drawn_i)      # fall to the next live weapon, or empty
 	if _is_weapon:
 		pass
 	elif _held and is_instance_valid(_held) and _camera:
@@ -173,7 +196,24 @@ func _process(delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
+	# THE PRESS THAT ENABLES CAPTURE WAS ALWAYS EATEN (2026-09-02, Palle: "RMB
+	# does not pick the gun up").
+	#
+	# The museum captures the mouse on the first mouse-button press
+	# (endless_museum.gd: `if event is InputEventMouseButton and event.pressed:
+	# Input.mouse_mode = MOUSE_MODE_CAPTURED`). Godot delivers _input BOTTOM-UP,
+	# so this hand — a descendant of the walker — sees that press while the mode
+	# is still VISIBLE, returned here, and the museum captured a frame later. The
+	# click that turns looking on is therefore never a click at anything, and in
+	# edit mode, where RMB release sets VISIBLE again, EVERY right-click arrived
+	# uncaptured and the grab never fired once.
+	#
+	# Motion still needs the guard — a free cursor must not drag sliders across
+	# the room. A BUTTON does not: if the player clicked in the 3D view, they
+	# meant to click something in it.
+	if event is InputEventMouseButton:
+		pass
+	elif Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
 		return
 
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
@@ -201,12 +241,29 @@ func _input(event: InputEvent) -> void:
 			var p := _find_grabbable()
 			if p:
 				_grab_held(p)
+			else:
+				# SAY WHY NOTHING HAPPENED. "RMB does not pick the gun up" cost a
+				# round trip of guessing; a reach that finds nothing should name
+				# what it looked with, so the next report is a fact. Only on the
+				# miss — a working grab stays silent.
+				print("[desktop-grab] nothing under the crosshair on layers 3/18/19"
+					+ " within %.1f m (camera %s, mouse_mode %d)"
+					% [distance, "ok" if _camera != null else "MISSING",
+						Input.mouse_mode])
 		get_viewport().set_input_as_handled()
-	elif _held and event is InputEventMouseButton and event.pressed:
-		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			_hold_distance = clampf(_hold_distance - 0.25, 1.0, 5.0)
-		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-			_hold_distance = clampf(_hold_distance + 0.25, 1.0, 5.0)
+	elif event is InputEventMouseButton and event.pressed and (
+			event.button_index == MOUSE_BUTTON_WHEEL_UP
+			or event.button_index == MOUSE_BUTTON_WHEEL_DOWN):
+		var up: bool = event.button_index == MOUSE_BUTTON_WHEEL_UP
+		# THE WHEEL MEANS TWO THINGS, AND NEITHER NEEDED A NEW KEY. Armed, it
+		# switches weapons (which is where a Half-Life hand reaches anyway);
+		# carrying a plain object, it pushes that object nearer or further. The
+		# two can never be wanted at once, because you cannot hold both.
+		if _arsenal.size() > 1 and _is_weapon:
+			_draw_weapon(_drawn_i + (1 if up else -1))
+			get_viewport().set_input_as_handled()
+		elif _held:
+			_hold_distance = clampf(_hold_distance + (-0.25 if up else 0.25), 1.0, 5.0)
 
 
 ## THE TRIGGER A CARRIED OBJECT NEVER HAD ON DESKTOP.
@@ -266,6 +323,43 @@ func _try_held_action(pressed: bool) -> bool:
 		_action_held.call("action_release")
 	_action_held = null
 	return true
+
+
+## Draw the i-th weapon, wrapping. Anything freed since it was taken is forgotten
+## first — a weapon can be destroyed while stowed, and a list of the dead is the
+## bug this session has now fixed three times in other files.
+func _draw_weapon(i: int) -> void:
+	var live: Array[Node3D] = []
+	for w in _arsenal:
+		if is_instance_valid(w):
+			live.append(w)
+	_arsenal = live
+	if _arsenal.is_empty():
+		_drawn_i = -1
+		_held = null
+		_is_weapon = false
+		return
+	_drawn_i = wrapi(i, 0, _arsenal.size())
+	_held = _arsenal[_drawn_i]
+	_is_weapon = true
+	_swing_t = -1.0                       # a switch cancels a swing in progress
+	if _holster != null and is_instance_valid(_holster):
+		_holster.rotation = Vector3.ZERO
+	_held.transform = Transform3D(Basis.IDENTITY, weapon_offset)
+	_show_only_drawn()
+
+
+## Stowed = disabled and hidden. See the note on _arsenal: a stowed sledgehammer
+## that keeps processing keeps striking, because its rule is the speed of its own
+## head and the holster is moving whenever you are.
+func _show_only_drawn() -> void:
+	for j in range(_arsenal.size()):
+		var w: Node3D = _arsenal[j]
+		if not is_instance_valid(w):
+			continue
+		var drawn: bool = (j == _drawn_i)
+		w.visible = drawn
+		w.process_mode = Node.PROCESS_MODE_INHERIT if drawn else Node.PROCESS_MODE_DISABLED
 
 
 ## Turn the holster through the swing arc. The weapon rides it as a child, so the
@@ -425,6 +519,9 @@ func _grab_held(p: Node3D) -> void:
 	_is_weapon = _is_weapon_node(p)
 	if not _is_weapon:
 		return
+	if not _arsenal.has(p):
+		_arsenal.append(p)
+	_drawn_i = _arsenal.find(p)
 	# THE HOLSTER HANGS OFF THE CAMERA, not off this pointer. The camera IS the
 	# view; the pointer only usually agrees with it. Under the museum's walker
 	# they match, because em_desktop_pointer mirrors the camera every frame — but
@@ -445,6 +542,7 @@ func _grab_held(p: Node3D) -> void:
 		p.reparent(_holster, false)
 	# Parked, not lerped: a viewmodel that lags the view reads as a bug.
 	p.transform = Transform3D(Basis.IDENTITY, weapon_offset)
+	_show_only_drawn()
 
 
 func _drop_held() -> void:
@@ -465,6 +563,19 @@ func _drop_held() -> void:
 		if _held is CollisionObject3D:
 			(_held as CollisionObject3D).collision_layer = _held_layer
 			(_held as CollisionObject3D).collision_mask = _held_mask
+		if _is_weapon:
+			# It leaves the arsenal visible and running, whatever it was while
+			# stowed — a weapon put down disabled would lie on the floor inert.
+			_held.visible = true
+			_held.process_mode = Node.PROCESS_MODE_INHERIT
+			_arsenal.erase(_held)
+	var was_weapon := _is_weapon
 	_held = null
 	_weapon_home = null
 	_is_weapon = false
+	# RMB PUTS DOWN ONE WEAPON, NOT THE WHOLE ARSENAL. Whatever else you were
+	# carrying comes to hand instead of vanishing into a holster nobody can reach.
+	if was_weapon and not _arsenal.is_empty():
+		_draw_weapon(_drawn_i)
+	elif was_weapon:
+		_drawn_i = -1
