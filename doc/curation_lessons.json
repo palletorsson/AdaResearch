@@ -1,138 +1,157 @@
 {
-  "_readme": "The museum loop's memory. One entry per turn, appended, never rewritten. A loop that does not accumulate is a checklist run repeatedly; this file is what makes turn N+1 cheaper than turn N. Read it before starting a turn. See doc/MUSEUM_LOOP.md for the loop itself.",
-  "principles": [
+  "_readme": "Lessons from running the museum curation loop, newest last. RENAMED from doc/museum_principles.json on 2026-09-03: that name already belonged to commons/data/museum_principles.json, which holds the operational spatial constants (corridor_width_cells, cell_meters, vitruvian) and has nothing to do with this file. Two files, one name, different subjects. A lesson is REVISABLE. Every new entry carries: id, won, principle, why, use, plus evidence (what was measured), scope (where it applies), confidence (measured | argued | suspected), test (a command that would falsify it, or null), status (standing | superseded | retired) and supersedes (an id, or null). The nineteen written before this contract carry status only; fill the rest in when one is next touched, rather than backfilling them all at once and inventing the evidence.",
+  "lessons": [
     {
       "id": "query-the-claim-not-the-title",
       "won": "2026-09-03, turn 1, Symmetry_Seventeen",
       "principle": "Query the shelf with the room's KEEP line, not its title.",
       "why": "The title names a subject and returns everything in the chapter. The KEEP line makes a CLAIM, and a claim has a premise, and the premise is often an artifact nobody has placed. Symmetry_Seventeen claims the census closes at seventeen. Searching 'symmetry' returns its own looms and mills. Searching the claim - rotation, invariant, closed - returned wallpaper_cage at the top: 'five-fold never closes', the crystallographic restriction, which is the REASON the census is finite. The room asserted a closed list and held nothing that explained the closing. Placed at r1 c3, beside the spawn, so the premise is met before the seventeen examples.",
-      "test": "shelf.py with the KEEP line's nouns beats shelf.py with the map name."
+      "test": "shelf.py with the KEEP line's nouns beats shelf.py with the map name.",
+      "status": "standing"
     },
     {
       "id": "the-unplaced-are-the-unspent-value",
       "won": "2026-09-03, turn 1, from the shelf build",
       "principle": "Read the never-placed candidates first.",
       "why": "2007 of 2899 artifacts have never stood in the live spine. A room improved by re-using something already in the chapter adds a repetition; a room improved by an unplaced artifact adds a body the museum has never met. The shelf marks these with a star for exactly this reason.",
-      "test": "shelf.py marks unplaced rows '*'; prefer them when scores are close."
+      "test": "shelf.py marks unplaced rows '*'; prefer them when scores are close.",
+      "status": "standing"
     },
     {
       "id": "seen-beats-clever",
       "won": "2026-09-03, turn 1, from the shelf build",
       "principle": "Prefer a candidate you can look at. If the best one is blind, shoot it first.",
       "why": "1750 artifacts have no capture, so more than half of every candidate list is a description you are trusting. Every wrong claim shipped in this project came from reasoning about an object instead of looking at it. A blind candidate is not disqualified, it is just a capture away from being usable, and 403 artifacts are ALREADY standing in live maps with no capture at all - that list is the shoot queue and shelf.py --blind prints it.",
-      "test": "shelf.py marks each row seen or BLIND."
+      "test": "shelf.py marks each row seen or BLIND.",
+      "status": "standing"
     },
     {
       "id": "agents-read-one-hand-writes",
       "won": "2026-09-02 and 03, measured across four waves",
       "principle": "Agents read and check. One hand writes.",
       "why": "Reading every placed artifact's script and scene is expensive, parallel and high-yield: a ten-agent panel found 80 faults in seven rooms, 51 factual. Drafting is neither: three drafters plus three judges for one room produced nothing usable, and the transformation chapter only holds together because one hand carried its arc across seven rooms. Vision is the exception - one agent per capture, because looking is reading.",
-      "test": "Five rooms written before their readers landed were each wrong about something a visitor would notice. Five written after were not."
+      "test": "Five rooms written before their readers landed were each wrong about something a visitor would notice. Five written after were not.",
+      "status": "standing"
     },
     {
       "id": "the-fault-is-often-the-argument",
       "won": "2026-09-03, writing softbodies and fractals",
       "principle": "When an object is broken, check whether the breakage IS the room's claim before fixing or hiding it.",
       "why": "The softmill's arm is on a collision layer its specimen cannot see, so it passes straight through: that became the chapter's timetable, since the encounter is two rooms away and here the body is still alone with itself. The flag with no physics became the control against the rack that genuinely negotiates. The Koch curve's spikes fold inward so depth 4 measures the same box as depth 0, which demonstrates infinite perimeter in a finite box better than the intended demonstration would have. This is also where the queer content lives: the part that refuses to be the diagram of itself.",
-      "test": "Ask of every fault: is this a lie the text must avoid, or a truth the text can use?"
+      "test": "Ask of every fault: is this a lie the text must avoid, or a truth the text can use?",
+      "status": "standing"
     },
     {
       "id": "placement-faults-outnumber-writing-faults",
       "won": "2026-09-03, formfinding wave",
       "principle": "Before improving a room's text, check whether its objects are where they claim to be.",
       "why": "Four of the five formfinding faults were placement, not authorship: an artifact sharing a cell with the spawn is bumped a level, the grounding pass then lifts it clear of the walls, and a 20 m artifact goes into a 14 m room. Rooms are more often badly seated than badly written. The tells are: an explicit y in a token (cancels auto-grounding), a utility sharing the cell (bumps a level), and a measured aabb larger than the map.",
-      "test": "Compare each artifact's measured aabb against the map's metres before reading a word of its prose."
+      "test": "Compare each artifact's measured aabb against the map's metres before reading a word of its prose.",
+      "status": "standing"
     },
     {
       "id": "an-unmeasured-artifact-is-an-unbounded-one",
       "won": "2026-09-03, turn 1, Symmetry_Seventeen, from the capture",
       "principle": "Before placing anything, check how many artifacts already in the room have NO measured aabb. An unmeasured artifact is an unbounded one.",
       "why": "The capture of Symmetry_Seventeen shows a tiled plane running out past the map edge into the dark, far larger than the 13 x 22 m room. Nothing in the measured list is bigger than the room - because the offender is not measured at all. Five of the room's fourteen artifacts have no aabb in the registry (loom_alhambra_p6m, loom_escher_mirror, mill_alhambra_p6m, mill_persian_p4, mill_escher_p4g) and two more measure 0 x 0 x 0 (wall_pattern_gallery, pattern_artifact). The registry's measurement is the only guard the grid has against a room-swallowing object, and for half this room there is no guard. This is why step 5 cannot be skipped: the data said the room was fine.",
-      "test": "shelf.py carries each aabb; count the None and the [0,0,0] before trusting a room's footprint."
+      "test": "shelf.py carries each aabb; count the None and the [0,0,0] before trusting a room's footprint.",
+      "status": "standing"
     },
     {
       "id": "draw-the-plan-before-you-shoot-the-room",
       "won": "2026-09-03, from Palle looking at the Symmetry_Seventeen iso capture",
       "principle": "To judge placement, draw the plan. Shoot the render only to judge what it LOOKS like.",
       "why": "A capture is a photograph of a world: biome, sky, grass, lighting, and a camera angle that decides what you can see. None of that helps you judge whether a body is where it should be. tools/map_plan.py draws the same room as an architectural plan from map_data.json plus the measured footprints in doc/shelf.json - walls solid, void dashed, every body at its real size, red where the footprint leaves the room, hatched where the artifact has no measurement. It runs in a second, needs no Godot and no agents, and on its first three rooms it independently reproduced findings that had cost a full reader wave: Descent's 20 m terrain in a 14 m room, four overruns in KochSierpinski, seven unmeasured bodies in Symmetry_Seventeen. The two views answer different questions and the plan is the cheaper one, so it goes first.",
-      "test": "map_plan.py --seq=<chapter> prints overrun / unmeasured / over-void counts per room."
+      "test": "map_plan.py --seq=<chapter> prints overrun / unmeasured / over-void counts per room.",
+      "status": "standing"
     },
     {
       "id": "the-join-is-the-tool",
       "won": "2026-09-03, answering 'what tool lifts concept, book, museum and curation together'",
       "principle": "When four things need improving, look for the key they already share. The tool is the join, not a fifth thing.",
       "why": "Concept, book, museum and curation all key on ROOM x ARTIFACT x CLAIM and no tool read them together. coherence.py is one row per room and one column per modality, and every gap is a fact about a DIFFERENT layer with a named next action. Every tool built today came from the same move: two files knowing different halves of one fact, joined for the first time. The registry knew what an artifact measured and the map knew where it stood - nobody multiplied them, and 82 rooms hold a body bigger than the room. The registry knew which bodies want a wall and the map knew which stood in one - nobody subtracted them, and 123 are embedded against their own declaration. None of it needed a model.",
-      "test": "coherence.py: 185 rooms, 1 clear, and every non-clear row names its next action and the tool that does it."
+      "test": "coherence.py: 185 rooms, 1 clear, and every non-clear row names its next action and the tool that does it.",
+      "status": "standing"
     },
     {
       "id": "when-a-number-flatters-you-re-derive-it",
       "won": "2026-09-03, the variant column",
       "principle": "A measurement that makes the corpus look good is the one to re-derive.",
       "why": "The variant column first counted any '#key:value' in a placement and reported 72 rooms using a non-default. Most of those keys are modes and sizes, not declared DNA axes. Counting only declared axes gives 26 of 185. The flattering version would have shipped into a blog post. An old note in the other direction said 'exactly ONE map' - also wrong, and stale. Both errors were cheap to fix and expensive to believe.",
-      "test": "coherence.py's vary column matches a key against that artifact's declared dna_axes, not against the presence of a '#'."
+      "test": "coherence.py's vary column matches a key against that artifact's declared dna_axes, not against the presence of a '#'.",
+      "status": "standing"
     },
     {
       "id": "form-and-body-are-independent-axes",
       "won": "2026-09-03, the first generate-and-compare, Symmetry_Seventeen vs _alt",
       "principle": "Fixing a room's FORM never fixes its BODIES, and the plan tool tells you so before you build.",
       "why": "The census claim failed its form test - aspect 1.69 with 58 interior walls, so the list arrives in installments. The alternative at 17 x 13 with zero interior walls passes: the panels now stand in one line you take in at a glance, and that part of the comparison is a clean win. But the giant tiled plane still runs out past the map edge in BOTH shots, and in the alternative it is proportionally worse because the room is smaller. map_plan.py reported the same '1 overrun, 7 unmeasured' for both versions before either was shot, and it was right: the overrun was never a fact about the room. This is why coherence.py keeps SPACE and BODIES in separate columns - they are independent axes and a fix on one is not evidence about the other.",
-      "test": "map_plan.py on the two versions returns identical overrun and unmeasured counts; argument_shape.py returns NO for one and FITS for the other."
+      "test": "map_plan.py on the two versions returns identical overrun and unmeasured counts; argument_shape.py returns NO for one and FITS for the other.",
+      "status": "standing"
     },
     {
       "id": "the-classifier-is-a-prompt-not-a-verdict",
       "won": "2026-09-03, building argument_shape.py",
       "principle": "Read the classifier's cues, not just its answer. It is right often enough to be useful and wrong often enough to be checked.",
       "why": "Symmetry_Seventeen classified CENSUS on four cues (census, exactly, exhaust, seventeen) and that is plainly right. Fractal_MandelbrotSet classified ACCRETION on ONE cue, 'iterat', when its claim is an atlas - a census of Julia sets - so the verdict 'accrual wants a run' is advice about the wrong kind. The tool prints its cues for exactly this reason. A one-cue classification is a question; a four-cue one is close to a finding. Corpus-wide: 185 rooms, 38 unclassified, form fights claim in 46.",
-      "test": "argument_shape.py --why prints the cues that fired; treat a single cue as unclassified."
+      "test": "argument_shape.py --why prints the cues that fired; treat a single cue as unclassified.",
+      "status": "standing"
     },
     {
       "id": "conserve-the-literal-not-the-count",
       "won": "2026-09-03, stamp.py",
       "principle": "When you move a thing, move THE thing. A displaced wall keeps its own literal, so conservation is a multiset, not a count.",
       "why": "Three shipped answers existed for what token a displaced wall should get - 'w' unconditionally, '4', and a threshold against map_info.museum.wall_height - and all three are answers to a question nobody asked. The instruction was to MOVE the wall that is there. Keeping its literal makes the invariant exact and checkable, and it sidesteps the max_height truncation trap for free: 487 maps use 'w' and every one already declares max_height >= 3, so moving a 'w' within its own map is always legal where writing a fresh one might not be.",
-      "use": "Before inventing a canonical form for a moved value, ask whether the move needs a canonical form at all."
+      "use": "Before inventing a canonical form for a moved value, ask whether the move needs a canonical form at all.",
+      "status": "standing"
     },
     {
       "id": "measure-the-guarantee-do-not-promise-it",
       "won": "2026-09-03, stamp.py",
       "principle": "A gate with a fixed threshold either passes everything or refuses the corpus. Report the number before and after, and require only that it not get worse.",
       "why": "'The corridor must be 3 cells' would have refused most of the museum, and the existing route machinery could not have proved it anyway: it DILATES a path by a 3x3 kernel and intersects with the walkable set, so a route squeezing through a one-cell gap still reports three. Only erosion proves a width. Measuring the narrowest lane before and after turns an unmeetable promise into a contract every honest stamp can keep.",
-      "use": "Whenever a tool is asked to guarantee a property, check first whether the corpus already has it. If it does not, the deliverable is a ratchet, not a threshold."
+      "use": "Whenever a tool is asked to guarantee a property, check first whether the corpus already has it. If it does not, the deliverable is a ratchet, not a threshold.",
+      "status": "standing"
     },
     {
       "id": "the-fix-and-the-bug-in-one-file",
       "won": "2026-09-03, stamp.py's write path",
       "principle": "A careful byte-splice followed by a json.dumps of the whole document is just a json.dumps of the whole document.",
       "why": "stamp.py spliced eight cells perfectly and then wrote its journal by re-serialising the map, producing a 492-line diff for four changed rows - the exact reformat hazard a survey had warned about in the same hour, in a tool written to avoid it. The lesson is not 'splice carefully'; it is that an output path is only as safe as its LAST write.",
-      "use": "Check the diff SIZE after any tool that edits a file in place. It is one command and it catches this whole class."
+      "use": "Check the diff SIZE after any tool that edits a file in place. It is one command and it catches this whole class.",
+      "status": "standing"
     },
     {
       "id": "a-moved-wall-must-join-a-wall",
       "won": "2026-09-03, AdvancedLaboratory_Lab_Equipment_Simulation",
       "principle": "Displacing an obstacle to the nearest free cell does not move it, it duplicates the problem somewhere less expected.",
       "why": "The first displacement rule put four carved walls on the nearest floor cells, which were in the walkway: reachable floor fell from 20 cells to 8 and the teleporter went dark. Ranking candidates by how many wall neighbours they already have - filling a notch rather than making an island - fixed it, and the gate caught the fault before a single byte was written.",
-      "use": "A relocation rule needs a notion of where the thing BELONGS, not just where there is room."
+      "use": "A relocation rule needs a notion of where the thing BELONGS, not just where there is room.",
+      "status": "standing"
     },
     {
       "id": "an-older-idea-stated-precisely",
       "won": "2026-09-03, the min-cut gate",
       "principle": "When a measurement cannot tell apart two situations you care about, do not reach for a better heuristic. Look for the older idea that answers the question exactly.",
       "why": "Erosion measured corridor width by sampling one route, and could not distinguish a hall as wide as its own doorway - correct - from a hall choking to one cell in the middle - a fault. Both read 'lane 1', for 91 halls. Menger's theorem, 1927, counts vertex-disjoint routes AND names the cells that limit them, in one computation. It turned a score into a cell reference, and the corpus reading from 'most halls are tight' into '121 of 185 are narrower than their own doors, and here is where'.",
-      "use": "Ask what the exact question is before improving the approximate answer."
+      "use": "Ask what the exact question is before improving the approximate answer.",
+      "status": "standing"
     },
     {
       "id": "never-classify-on-a-non-unique-witness",
       "won": "2026-09-03, cross-checking against networkx",
       "principle": "If two correct implementations can return different witnesses for the same answer, never build a verdict on the witness.",
       "why": "A minimum cut is not unique. Checked on eleven halls, the flow VALUE agreed 11 of 11 and the cut CELLS agreed on none - mine returns the cut nearest the source, networkx one nearest the sink. My first classifier asked 'is the cut at a doorway?' and was therefore quietly wrong about every hall it happened to see from the wrong end. The fix was to classify on the COUNT against the doorway width, which no choice of cut can move.",
-      "use": "Cross-check a new algorithm against a reference and compare more than the headline number. Agreement on the answer with disagreement on the witness is the signal."
+      "use": "Cross-check a new algorithm against a reference and compare more than the headline number. Agreement on the answer with disagreement on the witness is the signal.",
+      "status": "standing"
     },
     {
       "id": "a-tool-is-answerable-for-what-it-changes",
       "won": "2026-09-03, --width on the forces run",
       "principle": "Gate on the delta, not on the absolute. A threshold refuses the world as it is.",
       "why": "--width=2 as a hard floor refused three of three test maps for a pinch that predated the stamp, and would have refused most of the museum: 67 halls already admit exactly one route. As a ratchet - it may not get worse - the same flag lets 8 of 11 forces halls through while still catching every regression.",
-      "use": "Before writing an absolute gate, measure how much of the corpus already fails it."
+      "use": "Before writing an absolute gate, measure how much of the corpus already fails it.",
+      "status": "standing"
     }
   ]
 }

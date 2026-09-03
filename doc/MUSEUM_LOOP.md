@@ -1,97 +1,120 @@
 # The museum loop
 
 2026-09-03, Palle: *"is this the perfect space room to express the essence of
-this concept... see what I mean with this auto research loop? The thing is that
-I think we can lean on the different modalities and aspects to let them lift up
-each other."*
+this concept... The thing is that I think we can lean on the different
+modalities and aspects to let them lift up each other."*
 
-Yes. The lift is the design. Every step of this loop hands its output to the
-next step **in a different medium**, because each medium catches what the last
-one cannot: code catches what is true, space catches what is reachable, an image
-catches what is legible, text catches what is meant, and a gate catches what
-repeats. A loop that stayed in one medium would only ever polish that medium.
+Yes. The lift is the design. Every step hands its output to the next **in a
+different medium**, because each medium **fails differently**: code cannot see
+space, space cannot see order, order cannot see what a thing looks like, a
+picture cannot see behaviour, behaviour cannot see a claim, and a claim cannot
+check itself. A loop that stayed in one medium would only ever polish that
+medium.
 
-```
-   registry + .gd  ──build──▶  shelf.json        code becomes DATA
-   shelf + essence ──query──▶  a candidate       data becomes CHOICE
-   candidate       ──place──▶  map_data.json     choice becomes SPACE
-   map             ──shoot──▶  a capture         space becomes IMAGE
-   capture         ──read───▶  what is seen      image becomes JUDGEMENT
-   judgement+code  ──write──▶  final.md          judgement becomes TEXT
-   text            ──gate───▶  wall_voice.py     text becomes DATA again
-   the whole turn  ──learn──▶  a principle       and the next turn is faster
-```
+Below is the protocol. The reasoning behind every line of it, and the mistakes
+that produced it, are in **Rationale** further down. Read the protocol to work;
+read the rationale to change the protocol.
 
-## Step 0 — the shelf, once
+---
 
-Measured 2026-09-03 before anything else, because the loop cannot start without
-it: **2899 artifacts, 892 placed in the live spine, 2007 never placed. 1750 have
-no capture. 619 are category "unknown", among 119 category values.** Two thirds
-of the shelf is unsearchable and unseen.
+# THE PROTOCOL
 
-    python tools/shelf.py --build          rebuild doc/shelf.json
-    python tools/shelf.py rotation closed  what could express this concept
-    python tools/shelf.py --blind          standing in a live map, never shot
-    python tools/shelf.py --unseen         on the shelf, never placed
+## Two loops, at two speeds
 
-The search is a deterministic scored substring match over name, description,
-tags, category, qfep connection and dna axes. It is the fast lookup, not the
-judgement. The judgement is what the loop spends its agents on.
+They are not one pipeline and drawing them as one was the original mistake.
 
-## The turn
+    FAST SURVEY   every hall, ~3 seconds      -> WHERE TO LOOK. Fixes nothing.
+    SLOW TURN     one hall, most of a day     -> WHAT CHANGES. Does not scale.
 
-**1. Essence.** One sentence: what does this room claim? Take it from the
-triage argument and the KEEP line, not from the title. Titles name subjects;
-KEEP lines make claims, and a claim is what an object can support or fail.
+## FAST SURVEY
 
-**2. Fit.** Is this space right for that claim? Read the floor plan as a walk:
-where you arrive, what you meet, in what order, and what the walls do. A room
-whose argument is a sequence needs a route; a room whose argument is a census
-needs a hall you can sweep with your eyes.
+    1  REFRESH     rebuild the derived caches, or declare them stale.
+                   shelf.json is a CACHE, not a step-zero. It has read 2899,
+                   3367 and 2939 in one document; if the count moved, so did
+                   the answers built on it.
 
-**3. Candidates.** `shelf.py` with the terms of the KEEP line. Read the ones
-marked `*` first — never placed — because the museum has not met them and they
-are where the unspent value is. Prefer `seen` over `BLIND`: you cannot judge
-what you cannot look at, and shooting it first is a legitimate move.
+    2  MEASURE     one row per hall, one column per modality:
+                   CLAIM · BODY · SEEN · TEXT · SPACE · ROUTE · ORDER · ACT
+                   (ACT is behaviour: does the thing do what it says.)
 
-**4. Place.** What, where, how. Footprint against free cells, height against
-wall height, and above all RELATION: an object is placed against the objects
-already there, not into an empty coordinate. Write through
-`POST /api/maps/cell-edit`, which is the one write lane. Then
-`map_pathfinder.py check`.
+    3  DISCREPANCY form the explicit disagreements rather than the totals.
+                   A gap is two sources contradicting each other, and it is
+                   the contradiction that carries the information.
 
-**5. Shoot.** `capture_multi_angle.gd --mode=map`. One Godot at a time, wrapped
-in the watchdog. This is the step that cannot be skipped and cannot be faked:
-every wrong claim this project has shipped came from reasoning about a room
-instead of looking at it.
+    4  RANK        by consequence x uncertainty x value-of-the-next-test.
+                   NOT by count of todos. A hall nobody can walk through and a
+                   hall with no wall text are not the same size of problem, and
+                   tools/coherence.py currently sorts them as if they were.
 
-**6. See.** Open the image. What is actually legible? Is the new object visible
-at all, at the size and distance a visitor meets it? Does it read as part of the
-argument or as furniture? Nine of the faults found on 2026-09-02 and 03 were
-objects taller than their rooms, buried in floors, or floating over spawns, and
-every one was invisible in the data and obvious in a picture.
+    5  SELECT      one falsifiable question, about one hall.
 
-**7. Write, in three registers.** The same room, three ways, and the three
-disagree productively:
-  - *tutorial* — how it works, in numbers a visitor can check
-  - *critical* — what this encoding forecloses, what the dark spot hides
-  - *poetic* — what it is like to stand there
-The wall text is not the average of the three. It is what survives all three.
+## SLOW TURN
 
-**8. The queer question.** Not decoration and not a tag. In this project queer
-means the irreducible: the part of the thing that the encoding cannot compress
-without losing it. So ask of the room: *what here refuses to be the diagram of
-itself?* A room where everything is legible has no queer content and is usually
-also a boring room. The best rooms so far kept a fault as an argument rather
-than hiding it, which is the same move.
+    1  CONTRACT    the hall's claim, plus the lessons that already apply.
+    2  HYPOTHESIS  what you believe is wrong, stated so it can be disproved.
+    3  READ        agents on every placed artifact, .gd AND .tscn, to the
+                   checklist below. This is the expensive, parallel half.
+    4  CROSS-CHECK one adversarial agent over all the readings. Worth more
+                   than any single reader and costs one agent.
+    5  DRY RUN     plan, route, order and candidate, without writing.
+    6  MUTATE      journalled, reversible, one write lane.
+    7  VERIFY      in FOUR media, because they fail differently:
+                     plan        tools/map_plan.py, tools/stamp.py
+                     exterior    capture_multi_angle.gd
+                     visitor eye capture_eye_stations.gd  (INSIDE, at eye
+                                 height. An exterior shot cannot answer
+                                 "legible at the distance a visitor meets it".)
+                     behaviour   a probe with a known answer and a negative case
+    8  ACCEPT OR REVERT. Three outcomes, all legitimate:
+                     supported     -> keep
+                     counterexample-> revert, and record the counterevidence
+                     no change     -> the hypothesis was wrong. Also a result.
+    9  WRITE       three registers, one hand, AFTER the readers land, with the
+                   checklist. Do not average the registers; keep what survives
+                   all three, and do not erase the disagreement between them.
+    10 GATE        text (wall_voice, final_tags), space (stamp), access
+                   (pathfinder + the museum walk), behaviour (the probe).
+    11 LESSON      into doc/curation_lessons.json, with evidence and a test.
+    12 REFRESH     re-run the fast survey; the turn changed its inputs.
 
-**9. Gate.** `wall_voice.py` for the mechanical half (forbidden words, em
-dashes, repeated openings, and across-room repetition, which no single room
-critic can see). `final_tags.py --check` for the region grammar.
+**PROBE is a verb, not a step.** Any step whose output another step will trust
+must be probed before that trust is extended. It ran three times on Act5, in
+three different positions, doing three different jobs.
 
-**10. Principle.** Before looping, write down the one thing this turn taught
-that would make the next turn faster, into `doc/museum_principles.json`. A loop
-that does not accumulate is just a checklist run repeatedly.
+## The reader's checklist
+
+An earlier draft of this document said *code catches what is true*. It does not.
+**Code catches what the implementation actually does**, which is a different and
+smaller claim, and the difference was the whole of 2026-09-03: the code said a
+test cube could not fall, that a yaw fader moved nothing, and that a field
+began five centimetres out of reach. All three were what the implementation did.
+None was true of what the room meant.
+
+So the read is not a search for truth. It is a search for disagreement, and it
+is one sentence with four worked examples: **find every place this artifact's
+declarations and its running code disagree, and say which one ships.**
+
+  - the .tscn OVERRIDES the .gd's exports
+  - a `#key:value` reaches the artifact only if the key is in the config
+    allow-list; otherwise it silently becomes a yaw
+  - config arrives DEFERRED, after `_ready`, so whatever `_ready` bakes ignores
+    the token
+  - how a visitor MEETS a thing is a fact about its code, not its registry entry
+
+## The visitor's loop, which is not this one
+
+The protocol above is for the curator. It must never be exposed to a player.
+The loop a visitor runs, and the thing all of the above exists to produce:
+
+    notice -> predict -> act -> the algorithm answers -> compare
+           -> leave a trace, or leave
+
+A hall works when that loop closes. Everything in the curator's protocol is
+instrumentation for finding out whether it does.
+
+---
+
+# RATIONALE
 
 ## Where the agents go
 
@@ -148,9 +171,18 @@ differently**: code cannot see space, space cannot see order, order cannot see
 what a thing looks like, a picture cannot see a number, a number cannot see a
 claim, and a claim cannot check itself.
 
-The corollary is the useful part. **A step that agrees with the step before it
-taught you nothing.** Budget the expensive steps for where two cheap ones
-already disagree.
+The corollary went out wrong the first time. It read *"a step that agrees with
+the step before it taught you nothing"*, and the sharper version is
+**unexpected disagreement and unexpected CONVERGENCE both update confidence.**
+
+The day's most informative result was a convergence. Greedy and Hungarian placed
+exactly the same 350 walls and left exactly the same 158 homeless, which refuted
+a prediction written into a forum post an hour earlier and relocated the
+constraint from scheduling to feasibility. The first wording would have called
+that worthless.
+
+What remains true is the budgeting rule: spend the expensive steps where two
+cheap ones already disagree, or where their agreeing would surprise you.
 
 ### The step that was missing was FIX
 
@@ -267,6 +299,19 @@ baseline, and this project's record with derived files is poor enough that the
 tool regenerate it**, or the delta becomes one more cache that drifts and is
 believed.
 
+
+## Open faults in the loop's own instruments
+
+Found 2026-09-03 by a third session reviewing this document. Each is checked.
+
+| instrument | fault | evidence |
+|---|---|---|
+| `tools/coherence.py` | ranks by COUNT of todos, so no-wall-text ties with nobody-can-reach-it | `:181` `rows.sort(key=lambda r: (-len(r["todo"]), r["map"]))` |
+| `tools/walk_evaluator.py` | loads the existing placement and DISCARDS it, then scores hypothetical strategies; and models spawn-to-teleporter, not the museum's row 0 to row H-1 | `:385`. The correct traversal already exists at `tools/stamp.py` `walk_doors`; extract it into one shared evaluator rather than keeping two |
+| the whole fast survey | reads the MAP and never the museum. `coherence.py`, `stamp.py`, `argument_shape.py` contain ZERO references to `em_plan`, `em_bake`, `endless_museum`, `em_layout` | so "121 of 185 halls are narrower than their own doorways" is a fact about maps, unknown for the 152 dealt halls |
+| `doc/shelf.json` | treated as step-zero, is a cache with no invalidation. This document has said 2899, 3367 and 2939 | needs source hashes over registries, maps, code and captures |
+| `doc/curation_lessons.json` | was `doc/museum_principles.json`, colliding with `commons/data/museum_principles.json`, which is the operational spatial constants and unrelated. Renamed. Nothing consumes it programmatically | 19 lessons, append-only, now carrying a `status` and a schema for revision |
+
 ## The toolchain — what each step actually runs
 
 Every step of the loop has a command. Where a step has no command it is either
@@ -327,8 +372,13 @@ entrance entirely.
 | `tools/fold_ledger.py` | `--check` | a fold balances by **artifact**, not by map — and `--check` must run *before* the sequence file changes |
 | `tools/sieve.py` | `<target>` | the three questions |
 
-## The cost of skipping step 5
+## The cost of writing before the readers land
 
 Rooms written before their readers landed were wrong about something a visitor
 would notice, every time, in five out of five cases. Rooms written after were
-not. That is the whole argument for the loop having an order.
+not. That is the whole argument for the turn having an order, and it is the
+measurement behind **one hand writes, AFTER the readers land, with the
+checklist**.
+
+It is also the only number in this document that argues for a SEQUENCE rather
+than for an instrument, which is why the protocol above is a list and not a bag.
