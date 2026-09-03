@@ -34,17 +34,22 @@ They are not one pipeline and drawing them as one was the original mistake.
                    the answers built on it.
 
     2  MEASURE     one row per hall, one column per modality:
-                   CLAIM · BODY · SEEN · TEXT · SPACE · ROUTE · ORDER · ACT
-                   (ACT is behaviour: does the thing do what it says.)
+                   CLAIM · BODY · SEEN · TEXT · SPACE · ROUTE · ORDER
+                   ACT - does the thing DO what it says - is deliberately NOT
+                   in the survey and will not be: behaviour cannot be read from
+                   a map, only from a probe. The survey is static by design and
+                   says so in its own header.
 
     3  DISCREPANCY form the explicit disagreements rather than the totals.
                    A gap is two sources contradicting each other, and it is
                    the contradiction that carries the information.
 
     4  RANK        by consequence x uncertainty x value-of-the-next-test.
-                   NOT by count of todos. A hall nobody can walk through and a
-                   hall with no wall text are not the same size of problem, and
-                   tools/coherence.py currently sorts them as if they were.
+                   NOT by count of todos. A hall nobody can walk through and
+                   a hall with no wall text are not the same size of problem.
+                   The weights are written down in coherence.py's FAULT_WEIGHTS
+                   so a disagreement about priority is a disagreement about a
+                   number rather than about taste.
 
     5  SELECT      one falsifiable question, about one hall.
 
@@ -65,21 +70,45 @@ They are not one pipeline and drawing them as one was the original mistake.
                                  height. An exterior shot cannot answer
                                  "legible at the distance a visitor meets it".)
                      behaviour   a probe with a known answer and a negative case
-    8  ACCEPT OR REVERT. Three outcomes, all legitimate:
-                     supported     -> keep
-                     counterexample-> revert, and record the counterevidence
-                     no change     -> the hypothesis was wrong. Also a result.
+    8  EVALUATE    against the hypothesis. Do not commit yet: writing and
+                   gating still change the thing you just verified.
     9  WRITE       three registers, one hand, AFTER the readers land, with the
                    checklist. Do not average the registers; keep what survives
                    all three, and do not erase the disagreement between them.
     10 GATE        text (wall_voice, final_tags), space (stamp), access
-                   (pathfinder + the museum walk), behaviour (the probe).
-    11 LESSON      into doc/curation_lessons.json, with evidence and a test.
-    12 REFRESH     re-run the fast survey; the turn changed its inputs.
+                   (pathfinder + museum_walk), behaviour (the probe).
+    11 FINAL VERIFY  re-run step 7. The state you accept must be the state that
+                   exists after the writing and the gating, not before it.
+    12 COMMIT OR REVERT. Seven outcomes, all legitimate, and only two are wins:
+                     supported          -> commit
+                     counterexample     -> revert, record the counterevidence
+                     no change          -> the hypothesis was wrong. A result.
+                     inconclusive       -> the test could not separate the cases
+                     instrument failure -> the tool was wrong, not the room.
+                                           Fix the tool and re-run; do not
+                                           record a lesson about the room.
+                     mixed / regression -> the fix worked and broke something
+                                           else. Revert unless both are named.
+                     blocked            -> it needs a ruling, not a change.
+    13 LESSON      into doc/curation_lessons.json, with evidence and a test.
+    14 REFRESH     re-run the fast survey; the turn changed its inputs.
 
 **PROBE is a verb, not a step.** Any step whose output another step will trust
 must be probed before that trust is extended. It ran three times on Act5, in
 three different positions, doing three different jobs.
+
+## Where the text lands, and who holds the file
+
+The turn does not end at the gate. `final.md` lands on `/compose`, which
+AUTOSAVES seconds after typing, and on the manuscript, and the Red Thread page.
+Rooms are shared data: on 2026-09-03 two sessions wrote the transformation
+chapter within an hour of each other, one session's Red Thread page was
+republished under another five times, and three sessions edited this file.
+
+So, before step 9: **post the rooms you hold to the forum.** After step 14:
+rebuild the book and check compose. `tools/forum.py open` at the start of a
+session is not politeness, it is the only way to find out that the hall you are
+about to rewrite is already being rewritten.
 
 ## The reader's checklist
 
@@ -194,8 +223,11 @@ rather than from arithmetic. Two of the three fixes were nearly wrong in the
 same way: `_home` read in `_ready` before `call_deferred` grounding, and a ghost
 arrow frozen by the same early return it existed to cure.
 
-A loop that only writes is criticism. The turn is not finished until something
-in the room is different.
+A loop that only writes is criticism. But the corrected form of that, after a
+review pointed out it contradicts the protocol above, is **the turn is not
+finished until something has been TESTED** - and one legitimate result of a test
+is that the room was already right and the hypothesis was wrong. Writing
+"something must change" into a loop manufactures changes.
 
 ### And ORDER is a step, not a detail
 
@@ -302,22 +334,34 @@ believed.
 
 ## Open faults in the loop's own instruments
 
-Found 2026-09-03 by a third session reviewing this document. Each is checked.
+Found 2026-09-03 by reviewing sessions. Each was checked before being written
+down, and each is marked FIXED or left open. Three of the five are fixed; the
+two that remain are the two that are not one-file changes.
 
 | instrument | fault | evidence |
 |---|---|---|
-| `tools/coherence.py` | ranks by COUNT of todos, so no-wall-text ties with nobody-can-reach-it | `:181` `rows.sort(key=lambda r: (-len(r["todo"]), r["map"]))` |
-| `tools/walk_evaluator.py` | loads the existing placement and DISCARDS it, then scores hypothetical strategies; and models spawn-to-teleporter, not the museum's row 0 to row H-1 | `:385`. The correct traversal already exists at `tools/stamp.py` `walk_doors`; extract it into one shared evaluator rather than keeping two |
+| ~~`tools/coherence.py` ranks by COUNT~~ | **FIXED 2026-09-03.** Scores consequence × uncertainty × test value; weights in `FAULT_WEIGHTS`. Gained ROUTE and ORDER | the reranked queue now opens with two order faults and a hall that does not walk |
+| ~~`tools/walk_evaluator.py` discards the placement~~ | **FIXED 2026-09-03.** `--as-placed` scores the real placement on the museum traversal. The traversal was extracted to `tools/museum_walk.py` and `stamp.py` now imports it; proven behaviour-neutral by diffing `stamp.py --all` over 185 halls against a baseline | the bare `--map` form still compares hypothetical strategies and is marked LIMITED in the toolchain, not removed |
 | the whole fast survey | reads the MAP and never the museum. `coherence.py`, `stamp.py`, `argument_shape.py` contain ZERO references to `em_plan`, `em_bake`, `endless_museum`, `em_layout` | so "121 of 185 halls are narrower than their own doorways" is a fact about maps, unknown for the 152 dealt halls |
 | `doc/shelf.json` | treated as step-zero, is a cache with no invalidation. This document has said 2899, 3367 and 2939 | needs source hashes over registries, maps, code and captures |
-| `doc/curation_lessons.json` | was `doc/museum_principles.json`, colliding with `commons/data/museum_principles.json`, which is the operational spatial constants and unrelated. Renamed. Nothing consumes it programmatically | 19 lessons, append-only, now carrying a `status` and a schema for revision |
+| ~~`doc/museum_principles.json` name collision~~ | **FIXED 2026-09-03.** Renamed `doc/curation_lessons.json`; the old name belonged to `commons/data/museum_principles.json`, the operational spatial constants | STILL OPEN: nothing reads it, so step 1's "the lessons that already apply" is done from memory |
 
 ## The toolchain — what each step actually runs
 
-Every step of the loop has a command. Where a step has no command it is either
-judgement (step 4, step 7) or vision (step 6), and that is the whole reason
-those three are the expensive ones. Nothing here needs a model, a server or a
-key unless the row says so.
+**Every row carries a status, because for one day this document described the
+survey it wanted rather than the one that ran, and did not say so.** That is the
+exact fault the reader's checklist above is written to catch in artifacts - a
+declaration ahead of its runtime - committed by the document that defines the
+check. A reviewer caught it; the statuses are the fix.
+
+    READY     does what this row says
+    LIMITED   works, with a stated caveat you must know before trusting it
+    BROKEN    do not use for the purpose in this table
+    TO BUILD  named by the protocol, does not exist
+
+Most steps have a command. Some have none, and those are judgement (write) or
+vision (see), which is exactly why they are the expensive ones. Nothing here
+needs a model, a server or a key unless the row says so.
 
 **Measure and index — the ground the rest stands on.**
 
@@ -325,8 +369,8 @@ key unless the row says so.
 |---|---|---|
 | `tools/measure_artifact_aabbs.py` | `--only=a,b` · `--registry=X` · `--dry-run` | how big is this body, really. Boots Godot once, merges into the registry, preserves tab indent. Resolves **delegates**, feeds **`dna.fixture`** to gated artifacts, and retries any body that measures zero |
 | `commons/testing/measure_artifacts.gd` | (driven by the above) | the Godot half. Settle 0.35 s, second reading to catch a simulation still growing, `IMPLAUSIBLE_M` guard |
-| `commons/testing/probe_yaw_span.gd` | `--token=X` | does the Python footprint math agree with the engine on all four yaws. Run it whenever the placement geometry changes |
-| `tools/shelf.py` | `--build` · `<terms>` · `--unseen` · `--blind` | what could express this concept. 3367 entries with category, tags, axes, placements, capture, `wall_backing`, aabb + centre |
+| `commons/testing/probe_yaw_span.gd` | `--token=X` | **READY.** Does the Python footprint math agree with the engine on all four yaws. Run it whenever the placement geometry changes |
+| `tools/shelf.py` | `--build` · `<terms>` · `--unseen` · `--blind` | **LIMITED.** What could express this concept. A CACHE with no invalidation: this document has quoted 2899, 3367 and 2939 entries and the count moves whenever a registry does. Rebuild before trusting a number from it |
 | `tools/sync_footprints.py` | `--apply --cap=9` | push measured cells back into `spatial_needs.footprint_cells` — **224 of 893 placed artifacts declare a footprint 2× too small** |
 
 **Judge the room.** The museum's traversal is IN at the first z row and OUT at the last,
@@ -340,16 +384,16 @@ entrance entirely.
 |---|---|---|
 | `tools/map_plan.py` | `<Map> [<Map>…]` | the room as an architectural **plan**, not a photograph. Bodies at measured footprint, honouring centre offset and yaw; red where a body leaves the room, hatched where unmeasured. ~1 s per room |
 | `tools/argument_shape.py` | `--mismatch` · `--map=X --why` | does the room's **form** argue its **claim**. Seven kinds; form fights claim in 46 of 185 |
-| `tools/coherence.py` | (no args) | one row per room, one column per modality — CLAIM · BODIES · SEEN · TEXT · SPACE · VARY — each gap naming its next action |
+| `tools/coherence.py` | (no args) · `--queue` | **READY.** One row per room; CLAIM · BODY · SEEN · TEXT · SPACE · ROUTE · ORDER, ranked by consequence × uncertainty × test value. ACT is absent by design |
 | `tools/map_pathfinder.py` | `check <Map> --verbose` | can the player get there. **Has one error rule** — "pathfinder OK" is not evidence of much |
-| `tools/walk_evaluator.py` | `--map=X` | detour ratio, encounter order, backtracking |
+| `tools/walk_evaluator.py` | `--map=X --as-placed` | **LIMITED.** `--as-placed` is READY and is the ORDER tool: it scores the placement the map actually has, on the museum's traversal, via `museum_walk`. Without that flag it loads your placement, DISCARDS every position, and compares hypothetical strategies on spawn-to-teleporter. Do not use the bare form for ORDER |
 | `tools/stamp.py` | `--map=X` · `--apply` · `--width=N` · `--svg` · `--typology` · `--revert` | seat every body. Carves the wall cells a body needs and **displaces** the literal it carved rather than deleting it, so the wall multiset is conserved exactly. Re-checks the **museum traversal** after every move — in at row 0, out at row H-1, every artifact still approachable — and replans up to 8 times, banning whichever displacement broke it. Journals every cell with its pre-image, replayable backwards |
 
 **Write and gate the text.**
 
 | tool | run it | what it answers |
 |---|---|---|
-| `tools/wall_voice.py` | `<seq>` · `--all` | the deterministic half of the wall-text standard: forbidden words, repeated openings, and the across-room repetition check (6-shingle, measured not guessed) |
+| `tools/wall_voice.py` | `--map=X` · `--seq=X` · `--check` | **READY.** The deterministic half of the wall-text standard: forbidden words, repeated openings, and the across-room repetition check (6-shingle, measured not guessed). The old `<seq>` positional in this table never existed and errors out |
 | `tools/final_tags.py` | `--check` | does every `<!-- @token -->` region name a body the map actually places |
 | `tools/book.py` | `compile` | the book — a pearl is a list of lines |
 | `tools/red_thread_page.py` | (no args) | regenerate the triage page |
@@ -363,6 +407,17 @@ entrance entirely.
 | `tools/artifact_dna_critic.py` | `--gallery=S` | does the axis change the picture. Emits `INERT?` / `ANAMORPHIC` / `INERT` |
 | `tools/probe_anamorphic.py` | `--token=X --axis=Y` | is a dead verdict a fact about the artifact or about where the camera stood |
 | `tools/build_dna_deck.py` | (no args) | 5164 variant cards for `/map-curator`. **26 of 185 rooms place any variant** |
+
+**Named by the protocol, TO BUILD.** Listed so the gap is visible rather than
+discovered.
+
+| what the protocol asks for | status |
+|---|---|
+| a per-utility grid/museum parity probe in the fast sweep | **TO BUILD.** `commons/testing/probe_transport_cube_parity.gd` is the pattern and covers one code. Until the rest exist, every survey number is a fact about maps and unknown for the 152 dealt halls |
+| a delta print, "what changed since the last run" | **TO BUILD.** Needs a committed baseline regenerated by the same tool, or it becomes one more cache that drifts |
+| step 1's "the lessons that already apply" | **TO BUILD.** Nothing reads `doc/curation_lessons.json`; a turn currently applies them from memory |
+| a turn manifest: base revision, hypothesis, predictions, commands, evidence hashes, pre-images, outcome, lock, rollback, resume | **TO BUILD.** "One write lane" is an intention, not a transaction. `stamp.py` and `walk_polish.py` are separate writers today |
+| visitor evidence | **TO BUILD.** Eye captures establish visibility and probes establish runtime correctness. Neither establishes whether anybody predicted, understood, or could reach the interaction, which is the visitor loop's actual question |
 
 **Talk to the other sessions.**
 
