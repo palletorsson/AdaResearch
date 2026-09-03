@@ -129,8 +129,28 @@ def plan(map_name: str, shelf: dict) -> tuple[str, list[str]]:
 
             if aabb and (aabb[0] or aabb[2]):
                 w_m, d_m = float(aabb[0]), float(aabb[2])
+                # ROTATION and OFFSET, both of which this tool used to ignore and
+                # both of which move a body by more than its own width. The token
+                # carries a yaw in degrees; at 90 or 270 the body's depth runs
+                # along x. And an AABB is not centred on its origin: the wall
+                # gallery's centre sits 7 m forward, so it fills sixteen cells
+                # ahead of its cell and nothing behind it. Drawn centred and
+                # unrotated it was in the wrong place by half its own length.
+                cen = e.get("aabb_center") or [0.0, 0.0, 0.0]
+                dx_m, dz_m = float(cen[0]), float(cen[2])
+                yaw = 0
+                if len(parts) >= 2:
+                    try:
+                        yaw = int(round(float(parts[1]))) % 360
+                    except ValueError:
+                        yaw = 0
+                if yaw in (90, 270):
+                    w_m, d_m = d_m, w_m
+                    dx_m, dz_m = (dz_m, -dx_m) if yaw == 90 else (-dz_m, dx_m)
+                elif yaw == 180:
+                    dx_m, dz_m = -dx_m, -dz_m
                 w, d = w_m * CELL, d_m * CELL
-                x0, y0 = cx - w / 2, cy - d / 2
+                x0, y0 = cx + dx_m * CELL - w / 2, cy + dz_m * CELL - d / 2
                 leaves = (x0 < ox or y0 < oy or x0 + w > ox + W * CELL or y0 + d > oy + H * CELL)
                 col = RED if leaves else BLUE
                 if leaves:

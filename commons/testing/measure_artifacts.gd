@@ -29,6 +29,8 @@ var _unstable: bool = false
 ## No artifact is half a kilometre. Beyond this a number is evidence of a fault,
 ## never a body, and must not overwrite whatever the registry already holds.
 const IMPLAUSIBLE_M := 500.0
+## Extra window granted ONLY to a body that measured nothing on the first look.
+const ZERO_RETRY_S := 1.0
 
 
 func _finite(a: AABB) -> bool:
@@ -82,6 +84,8 @@ func _run() -> void:
 	var measured: int = 0
 	var skipped: int = 0
 	var errors: int = 0
+	var configured: int = 0
+	var zero_retries: int = 0
 
 	var lookup_names: Array = artifacts.keys()
 	lookup_names.sort()
@@ -129,6 +133,30 @@ func _run() -> void:
 		var entry: Dictionary = artifacts[lookup_name]
 		var scene_path: String = entry.get("scene", "")
 
+		# A DELEGATE owns no scene of its own: it is another artifact's body
+		# built with different parameters — loom_alhambra_p6m IS pattern_loom
+		# with group p6m and the Alhambra palette. This loop asked every entry
+		# for a scene path, found an empty string, and skipped, so 50 of the
+		# corpus's 51 delegates have never been measured and read on the shelf
+		# as unmeasured — which the placer treats as unbounded. Resolve to the
+		# target's scene and carry the params, so the variant is measured AS
+		# THE VARIANT rather than inheriting a number from its base.
+		var cfg: Dictionary = {}
+		var delegate_to: String = str(entry.get("delegate_to", ""))
+		if scene_path.is_empty() and not delegate_to.is_empty() and artifacts.has(delegate_to):
+			scene_path = str((artifacts[delegate_to] as Dictionary).get("scene", ""))
+			cfg = entry.get("delegate_params", {}).duplicate()
+		# A GATED artifact returns from _ready having built nothing at all until
+		# it is told a group, a config path or a seed. pattern_artifact is one:
+		# it measured 0 x 0 x 0, which is indistinguishable from a broken body.
+		# The registry already carries what the capture rig feeds such an
+		# artifact, so feed it here too.
+		var fixture: Variant = (entry.get("dna", {}) as Dictionary).get("fixture", {})
+		if fixture is Dictionary:
+			for k in (fixture as Dictionary):
+				if not cfg.has(k):
+					cfg[k] = (fixture as Dictionary)[k]
+
 		# Write progress marker so we know who was being processed if Godot crashes.
 		_write_progress(_outdir.path_join("artifact_measurements.progress.txt"),
 			"%s\n%s\n" % [lookup_name, scene_path])
@@ -155,6 +183,14 @@ func _run() -> void:
 
 		holder.add_child(instance)
 
+		# Config BEFORE the build window, because a gated artifact reads it in
+		# _ready and a delegate needs it to be the right variant. An empty cfg
+		# calls nothing, which is why every artifact that was already measuring
+		# correctly is untouched by this.
+		if not cfg.is_empty() and instance.has_method("apply_grid_config"):
+			instance.call("apply_grid_config", cfg)
+			configured += 1
+
 		# ORDER MATTERS, and it used to be wrong. Processing was disabled here,
 		# BEFORE the artifact had a chance to build — so every artifact that
 		# grows its geometry in _process (or over a tween) was frozen at nothing
@@ -168,6 +204,19 @@ func _run() -> void:
 		await process_frame
 		if _settle > 0.0:
 			await create_timer(_settle).timeout
+
+		# A ZERO IS NEVER WORTH KEEPING, so never record one on the first look.
+		# wall_pattern_gallery waits half a second in _ready before it builds
+		# anything and the settle window is 0.35, so every pass since April has
+		# measured it before it existed and written 0 x 0 x 0 — a number that
+		# reads as a broken artifact and is really a harness one clock tick too
+		# quick. Raising _settle for all 3367 entries would cost a quarter of an
+		# hour and re-open the drift problem the comment above fought, so extend
+		# the window only for the bodies that came back with nothing in them.
+		if instance is Node3D and _measure_body(instance as Node3D).size == Vector3.ZERO:
+			await create_timer(ZERO_RETRY_S).timeout
+			zero_retries += 1
+
 		_disable_processing_recursive(instance)
 		await process_frame
 
@@ -272,6 +321,8 @@ func _run() -> void:
 		"measured": measured,
 		"skipped": skipped,
 		"errors": errors,
+		"configured": configured,
+		"zero_retries": zero_retries,
 		"artifacts": results,
 	}
 

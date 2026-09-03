@@ -117,6 +117,11 @@ def build() -> dict:
             "wall_backing": sn.get("wall_backing"),
             "platform": sn.get("platform"),
             "aabb": meas.get("aabb_size"),
+            # A body is NOT centred on its cell. wall_pattern_gallery measures
+            # 15 m deep with its centre 7 m FORWARD of its own origin, so it
+            # occupies sixteen cells ahead of where it stands and none behind.
+            # Drawing it centred put it seven metres from the truth.
+            "aabb_center": meas.get("aabb_center"),
             "search": _text_of(v),
         }
     return out

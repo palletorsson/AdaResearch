@@ -97,7 +97,7 @@ def _auto_skip_crasher() -> str:
     return last
 
 
-def run_godot_measurement(registry_filter: str = "") -> int:
+def run_godot_measurement(registry_filter: str = "", only: str = "") -> int:
     """Spawn Godot headless to run measure_artifacts.gd. Returns exit code."""
     godot = os.environ.get("GODOT_EXE", DEFAULT_GODOT)
     if not Path(godot).exists() and os.name == "nt":
@@ -113,6 +113,8 @@ def run_godot_measurement(registry_filter: str = "") -> int:
     ]
     if registry_filter:
         cmd.append(f"--registry={registry_filter}")
+    if only:
+        cmd.append(f"--only={only}")
     print(f"  godot> {' '.join(cmd[:5])} … {' '.join(cmd[-3:])}")
     proc = subprocess.run(cmd, cwd=str(REPO))
     return proc.returncode
@@ -250,6 +252,8 @@ def main() -> int:
                    help="limit measurement to one registry file prefix")
     p.add_argument("--dry-run", action="store_true",
                    help="print diffs without writing the registry")
+    p.add_argument("--only", default="",
+                   help="comma-separated lookup_names; measure just these")
     p.add_argument("--force", action="store_true",
                    help="rewrite registry entries even when measurements match")
     args = p.parse_args()
@@ -262,7 +266,7 @@ def main() -> int:
         # number of retries so we don't loop forever on a deep bug.
         MAX_RETRIES = 20
         for attempt in range(MAX_RETRIES):
-            rc = run_godot_measurement(args.registry)
+            rc = run_godot_measurement(args.registry, args.only)
             if rc == 0:
                 break
             crasher = _auto_skip_crasher()
