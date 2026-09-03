@@ -5178,6 +5178,762 @@
         "THE REPAIR IS GUARDED BY THE REGRESSION ITSELF, RUN INLINE RATHER THAN ON A FLAG. _self_test() reproduces the Array/Array_Basics case as a negative assertion plus three positive ones, runs on EVERY scoring run (pure string work), and exits 2 refusing to print a table if the detector is blind. Verified by deliberately breaking a scratchpad copy: 2 failures, exit 2, no green table. This answers the 08-24 finding that 'a green row makes two claims and only one of them was ever tested' -- here the detector's own claim is tested every time it speaks."
       ],
       "duration_minutes": 34
+    },
+    {
+      "breath_id": "2026-08-26T18:56",
+      "mode": "evolve-only",
+      "baseline_avg": 6.091,
+      "post_avg": 6.091,
+      "delta": 0.0,
+      "items_attempted": [
+        "Review today's log: one breath (2026-08-26T09:04, full, -0.091) against 51 commits since midnight",
+        "Verify that breath's claims on disk AND in the repo rather than trusting its ledger (prop-030)",
+        "Re-measure the pipeline lever unpiped, exit code read directly (prop-017)",
+        "Re-run the two python gates against a day of heavy museum and map authoring",
+        "Read the denominator that moved rather than the verdict that held (263 -> 229 spine maps)",
+        "Level-3: test tonight's pattern against the three-occurrence bar, and look for a live fourth rather than assert one",
+        "Refuse the Godot half of the gate run once a second instance was measured, instead of letting it hang",
+        "Update improvement_trajectory.json"
+      ],
+      "items_succeeded": [
+        "morning-claims-verified-3-of-3-one-commit-74260e955-clean-in-tree-AND-repo",
+        "self-test-present-scorer-line-70-invoked-line-338-runs-inline-not-behind-a-flag",
+        "pipeline-remeasured-6.091-exit-0-unpiped-flat-across-51-commits-correction-durable",
+        "gateG-held-229-maps-1285-placements-0-unresolved",
+        "gateH-held-46-tools-2-runners-0-unreachable",
+        "two-independent-denominators-agreed-scorer-map-column-sums-229-gateG-reads-229",
+        "spine-map-count-drop-263-to-229-attributed-to-the-corpus-not-the-instrument-on-that-agreement",
+        "level-3-bar-MET-prop-040-written-four-occurrences-in-four-days",
+        "fourth-occurrence-found-LIVE-map_quality_audit.load_spine_targets-returns-empty-against-a-spine-of-22",
+        "fourth-occurrence-PROVED-by-import-and-by-the-tool-s-own-output-spine-has-0-sequences-then-missing-maps-0",
+        "structural-cause-measured-58-tools-open-the-spine-10-hand-rolled-loaders-0-shared-imports",
+        "godot-gate-run-killed-after-15-minutes-with-a-second-instance-alive-no-orphan-left",
+        "prop-012-discriminator-run-643-644-645-with-HEAD-advancing-LIVE-WRITER-so-nothing-committed",
+        "trajectory-updated-durable-correction-named"
+      ],
+      "items_failed": [
+        "release-gates-full-run-ABANDONED-not-measured-tonight"
+      ],
+      "failure_reasons": {
+        "release-gates-full-run-ABANDONED-not-measured-tonight": "run_release_gates.py produced ZERO bytes in 15 minutes. Get-Process showed THREE Godot instances alive: one from a live session at 17:20 with 6116s of CPU, and two headless boots. The recorded rule is that two Godot instances must never run at once -- the second dies on the user lock -- and the live session was committing throughout (51 commits today, HEAD advancing during the run). Killed rather than waited out; the gate process was gone afterwards and no orphan was left. This is a REFUSAL, not a failure to measure: gate F and its Godot siblings are unmeasured tonight and this entry is the record that they are unmeasured, rather than a green row inherited from this morning. The two python gates were run standalone instead and both held."
+      },
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "files_changed": [
+        "doc/reports/skill_evolution_proposals.json",
+        "doc/reports/improvement_trajectory.json",
+        "doc/reports/breath_log.json"
+      ],
+      "discoveries": [
+        "THE THIRD REPAIR OF ONE FAULT LANDED IN A VERDICT LINE, AND TONIGHT THE FAULT WAS STILL LIVE FOUR TOOLS AWAY. curriculum_spine.json keys its 22 sequences on `name` under spine.sequences; 0 of 22 carry `id` and the top level has no `sequences` key. Ask for either and nothing raises -- you get an empty sweep and a clean bill. That has now happened four times in four days: check_map_tokens.py's first run (08-23), the same gate one granularity down (08-24), the breather's own diagnostic sweep (08-26 morning), and -- found tonight by applying the rule instead of tripping over it -- map_quality_audit.py:load_spine_targets(), which stacks BOTH wrong keys and returns an empty dict unconditionally. Proved by import (len 0 against 22) and confirmed in the tool's own stdout, where 'spine has 0 sequences' and 'missing maps (in spine but not on disk): 0' sit four lines apart on the same screen. prop-040.",
+        "THE REASON IT KEEPS RECURRING IS COUNTABLE, NOT CULTURAL. 58 python tools open curriculum_spine.json. At least 10 define their own load_spine / load_spine_targets / load_spine_map_names, and grep finds ZERO imports of a spine reader from one tool into another. Every repair so far has been a guard inside one tool's verdict -- refuse a verdict at placements == 0, count maps READ not maps NAMED -- and a guard cannot reach the next tool. The fix that closes the class is one reader that RAISES on zero sequences, because the file is checked in with 22 and a zero is always a bug in the caller.",
+        "TWO INDEPENDENT DENOMINATORS AGREED TO THE UNIT, AND THAT IS WHAT MADE A 13% DROP READABLE. The scorer's per-sequence map column sums to 229; check_map_tokens.py walks the same spine separately and prints '229 maps read'. On 08-24 the second number was 263. A denominator that moves 13% in two days is exactly the shape of an instrument breaking, and the only reason to read it as the corpus moving under the ribbon and museum work is that two tools which share no code arrived at the same figure. Note what that agreement rests on: both hand-roll their spine reader and both happen to have hand-rolled it correctly. It is luck doing the work of a contract, which is prop-040 clause 2 stated from the other end.",
+        "A CORRECTION THAT SURVIVES FIFTY-ONE COMMITS IS A DIFFERENT CLAIM FROM A CORRECTION THAT IS RECORDED. This morning's -0.091 was the stage-6 predicate getting truthful, and a scorer glitch would have had a day of commits in which to wander back. It read 6.091 again tonight, exit 0, unpiped. This is the second same-day correction in this ledger confirmed by an independent evening read; 08-23 was the first, in the upward direction. The inline self-test printed nothing on every run, which is what passing looks like and is also why it is worth saying out loud -- a silent self-test and an absent self-test have the same output.",
+        "THE GODOT GATES WENT UNMEASURED TONIGHT AND THE HONEST MOVE WAS TO SAY SO. Fifteen minutes, zero bytes, three Godot processes alive including a live session's at 6116s CPU. The choice was to wait past the point of usefulness, to record a green inherited from this morning, or to kill it and log the gap. Killed. An evolve-only pass is specified to make no project changes, and booting a second headless Godot beside a session that is committing every few minutes is a project change in everything but name -- it is the recorded hazard, not an unlucky night."
+      ],
+      "duration_minutes": 27
+    },
+    {
+      "breath_id": "2026-08-27T09:04",
+      "mode": "full",
+      "baseline_avg": 5.955,
+      "post_avg": 6.091,
+      "delta": 0.136,
+      "delta_note": "The delta is a REPAIR, not growth: it restores the 6.091 that stood at last night's harvest. forces fell 6 -> 3 at 07:41 this morning and was 83 minutes old when the baseline caught it. Nothing in this breath moved a sequence past where it already stood, and the honest reading of the day is FLAT with a regression closed.",
+      "items_attempted": [
+        "Baseline: pipeline + heat map + garden, run live; release gates deliberately skipped under a resident Godot",
+        "Find why the project average fell 0.136 overnight instead of reporting it as noise",
+        "Fix the fault class in the corpus rather than the one map that surfaced it",
+        "Turn the gate that already SAW this fault and exited 0 into one that fails",
+        "Prove the repair bites with a negative test, and follow the two faults the test exposed"
+      ],
+      "items_succeeded": [
+        "regression-located-Forces_PropGallery-664-phantom-interactable-cells-filler-written-as-0-not-space",
+        "fault-class-measured-not-assumed-2788-maps-swept-5-offenders-6605-cells-2-spellings-0-and-comma-space",
+        "5-maps-normalised-560-line-diff-1-to-1-structure-identical-to-HEAD-every-real-token-identical-to-HEAD",
+        "forces-restored-stage-3-to-stage-6-global-5.955-to-6.091-stable-across-three-consecutive-reads",
+        "gateG-hardened-non-standard-blanks-now-FAIL-exit-code-carries-them-was-a-printed-note-and-exit-0",
+        "gateG-now-reads-the-UTILITIES-layer-too-it-had-read-only-interactables-for-its-whole-life-43pct-blind",
+        "negative-test-one-injected-cell-gate-exits-1-remedy-clears-it-file-restored-byte-identical",
+        "bulk-path-negative-test-from-real-HEAD-data-re-fix-byte-identical-to-the-morning-fix",
+        "forces.json-content-15th-entry-written-verify_sequence-forces-now-ALL-CHECKS-PASSED-was-1-error"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "faults_found_in_my_own_work": {
+        "shadowed-loop-variable": "The first cut of normalize_map_fillers.py wrote the rebuilt row to lines[<column>] because an inner `for i in hits` shadowed the line index `i`. It clobbered line 0 -- the opening brace -- and the file stopped being JSON. Caught by the negative test, not by review, and only because the test ran --apply rather than --scan. A validate-before-write guard now parses the rebuilt text and compares all three layers cell-for-cell before it touches the disk; the structure layer must be identical or nothing is written.",
+        "remedy-weaker-than-the-gate": "The gate named a remedy that could not fix what the gate found. The tool decided what was empty by MAJORITY VOTE, so one stray \"0\" among 663 blanks was invisible to it while the gate failed on it. Both now ask the same question -- normalize_map_fillers imports is_empty_cell from check_map_tokens rather than re-implementing it.",
+        "the-fixer-was-about-to-erase-evidence": "Borrowing the gate's predicate then surfaced four more maps, and they were NOT bulk fillers. --apply would have turned every one into a blank and called it a repair."
+      },
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "THE GATE HAD ALREADY SEEN IT, PRINTED IT, AND EXITED 0. check_map_tokens.py reported '664 non-standard empty cells in 1 map(s) -- not counted as placements here, but the pipeline scorer DOES count them' and returned success. Its own docstring called \"0\" and \", \" two further empty-cell CONVENTIONS and excluded them from the failure count as a 'data-hygiene finding'. They are not conventions: GridUtilitiesComponent tests `is_empty() or == \" \"` and GridInteractablesComponent tests `!= \" \" and not is_empty()`, so every one of those cells is a token the grid tries to place. A finding a gate prints and passes is not a gate, it is a comment -- and this one cost three pipeline stages 83 minutes after the commit that caused it.",
+        "ONE COMMIT, TWO FAULTS, AND THE SECOND WAS INVISIBLE TO THE FIRST GATE. 471d5b04f added Forces_PropGallery with a \"0\" filler AND added it to forces.json's `maps` without a matching `content` line. check_map_tokens.py cannot see the second (it reads map cells) and verify_sequence.py cannot see the first (it reads sequence lists). Neither tool is wrong; the class of fault is 'a map added by hand touches two files and only one of them is gated'. Both are now closed for forces, and the 15/15 count is what verify_sequence checks.",
+        "THE INSTRUMENT WAS 43% BLIND BY LAYER, NOT BY MAP. The gate swept `interactables` and never `utilities`, so the same fault in the other layer was uncounted: 2037 cells in utilities against 2649 in interactables at the moment of the sweep. Reading one layer of a two-layer fault under-reports it by nearly half, and the half it drops is the one the pathfinder and the utility parser walk.",
+        "A STRAY BLANK AND A BULK BLANK ARE DIFFERENT ANIMALS AND THE TOOL MUST NOT TREAT THEM ALIKE. Sharpening the predicate found four more maps, and none of them wanted normalising: F30_Ramp_Walkpath holds \":180\" -- a rotation suffix whose token is GONE -- and Tutorial_Single holds nineteen \"1\" cells beside \"pick_up_cub\", which is not registered, while `pick_up_cube` is. Those are lost tokens wearing a blank's clothes. Rewriting them to \" \" would have destroyed the only evidence that something was dropped and reported it as a repair. --apply now fixes only a filler that IS the layer's dominant cell and refuses strays out loud.",
+        "TUTORIAL_SINGLE'S LAYERS ARE DIFFERENT HEIGHTS. utilities has at least 7 rows and interactables fewer -- indexing row 6 of interactables raises IndexError. Found incidentally while reading the stray cells; not fixed in this breath, and not in a spine sequence, but it is a structural fault no current gate asks about.",
+        "THE AVERAGE MOVED UNDER THE MEASUREMENT. A live session committed 39 times since last night's harvest and held 18 dirty maps during this breath; one scorer read returned 5.909 with a spurious 'stage 2: 1' between two reads of 6.091. A partially-written map_data.json scores as a broken one. Single-read deltas are not trustworthy while a writer is resident -- three reads, and take the mode."
+      ],
+      "files_changed": [
+        "tools/normalize_map_fillers.py (new)",
+        "tools/check_map_tokens.py",
+        "commons/maps/Forces_PropGallery/map_data.json",
+        "commons/maps/Grid_Subset_Gallery/map_data.json",
+        "commons/maps/MindMap_Primitives/map_data.json",
+        "commons/maps/MindMap_Transformation/map_data.json",
+        "commons/maps/MindMap_VectorForces/map_data.json",
+        "commons/maps/sequences/forces.json",
+        "doc/reports/breath_baseline_2026-08-27_09-04.json",
+        "doc/reports/breath_log.json",
+        "doc/reports/improvement_trajectory.json"
+      ],
+      "not_done": [
+        "release gates -- a live Godot session was resident the whole breath; running a second instance is the recorded way to lose the run and possibly the user's session",
+        "the four stray-cell maps -- reported by the tool, deliberately left for a breath that can give each one attention. None is in a spine sequence.",
+        "Tutorial_Single's mismatched layer heights"
+      ],
+      "duration_minutes": 22
+    },
+    {
+      "breath_id": "2026-08-28T09:04",
+      "mode": "full",
+      "baseline_avg": 6.091,
+      "post_avg": 6.091,
+      "delta": 0.0,
+      "delta_note": "Flat by design. This breath repaired an INSTRUMENT, and the pipeline scorer does not measure whether a gate is telling the truth. A number that moved would have been the wrong evidence.",
+      "items_attempted": [
+        "Baseline: pipeline + heat map + garden + release gates, run live",
+        "Read gate F's no_route/frontier_z 7 as the hottest broken thing, and check the machine before believing it",
+        "Arm the serialization rule that has been advice since 2026-08-14 as an actual interlock",
+        "Prove the interlock bites, in both directions, without a quiet machine to test on",
+        "Hand the Point_One question to its owner rather than editing under a live writer"
+      ],
+      "items_succeeded": [
+        "contended-builder-FOUND-pid-17800-editor-since-07:44-and-pid-33152-play-run-of-endless_museum-launched-09:10:28-with-Point_One-map_data-written-09:08:43-mid-run",
+        "interlock-shipped-em_autopilot-enumerates-Godot-bound-to-this-repo-via-psutil-then-Win32_Process-then-ps-and-refuses-with-exit-3",
+        "refusal-writes-its-own-verdict-reason-contended_builder-so-gate-F-reports--1-across-every-corridor-field-instead-of-inheriting-a-frontier",
+        "selftest-6-of-6-both-directions-separator-blind-editor-backslashes-and-play-run-forward-slashes-both-caught-other-project-correctly-ignored",
+        "end-to-end-refusal-measured-1-second-no-boot-and-the-full-gate-suite-now-runs-under-a-live-editor-exit-2-7-of-8-H-still-green",
+        "Point_One-NOT-edited-handed-to-forum-260828-6jxms-with-the-HEAD-vs-worktree-margin-diff-spelled-out"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "THE RULE HAD BEEN WRITTEN DOWN THREE TIMES AND ENFORCED ZERO TIMES, AND THE THIRD TIME IT COST A VERDICT RATHER THAN A HANG. 'Never run two Godot instances at once' is in CLAUDE.md, in the gate F comment ('Serialize: nothing else may hold the Godot user:// lock while gates run'), and in two breath logs. On 2026-08-26 evening it cost 15 minutes and produced nothing, which is the honest failure. On 2026-08-27 morning a breath read the clock and skipped the gates, which is the honest refusal. This morning it produced an ANSWER: no_route, frontier_z 7, 8 stall events, three named cut cells with provenances -- a verdict with more forensic detail than any passing run, describing a corridor nobody walked. Advice that a tool does not enforce is enforced by whoever remembers to look, and the whole point of a gate is that nobody has to remember.",
+        "THE FRONTIER HAS NEVER TWICE LANDED IN THE SAME PLACE. Six measured failures of gate F since 2026-08-14 put it at 44, 44, 61, 21, 37 and 7, and at least three were taken under a builder known or suspected contended. A wall does not move. Read as a series rather than as six separate mornings, the readings were already saying 'this is the instrument' -- but each breath compared its number only to the previous one, where a jump reads as a regression to hunt. The series was in the baselines the whole time and nothing read it.",
+        "THE INTERLOCK MADE THE SUITE CHEAPER, NOT DEARER. F is the only gate that boots Godot, so refusing in 1 second means run_release_gates.py is now safe to run with the editor open -- the thing that cost the 2026-08-26 breath its whole gates run. A guard that says no fast is worth more availability than a guard that is not there.",
+        "A REFUSAL HAS TO WRITE A VERDICT OR IT INHERITS ONE. Gate F reads ada_run/em_autopilot.json for its metrics, and ada_run is derived. Refusing without writing would have left yesterday's frontier on disk to be republished as today's -- the stale-cache fault this project already knows by name. The refusal writes -1 into every corridor field, because a 0 there is a number nobody measured."
+      ],
+      "files_changed": [
+        "tools/em_autopilot.py",
+        "tools/run_release_gates.py",
+        "doc/reports/breath_baseline_2026-08-28_09-04.json",
+        "doc/reports/breath_log.json",
+        "doc/reports/improvement_trajectory.json"
+      ],
+      "duration_minutes": 30
+    },
+    {
+      "breath_id": "2026-08-28T18:56",
+      "mode": "evolve-only",
+      "baseline_avg": 6.091,
+      "post_avg": 6.091,
+      "delta": 0.0,
+      "delta_note": "evolve-only changes no project state by design. The read is a confirmation, not a result: 6.091 this morning, 6.091 tonight, twelve commits apart, unpiped, exit 0 read directly.",
+      "items_attempted": [
+        "Review today's log: one breath (2026-08-28T09:04, full, 0.0) against 12 commits since midnight",
+        "Verify that breath's four claims on disk AND in the repo rather than trusting its ledger (prop-030)",
+        "Re-measure the pipeline lever unpiped, exit code read directly (prop-017)",
+        "Read the denominator with a second independent instrument before believing the corpus moved",
+        "Level-3: test tonight's pattern against the three-occurrence bar by sweeping the whole ledger, not by asserting it",
+        "Ask whether the gate built for this exact fault sees it, and if not, why not",
+        "Update improvement_trajectory.json"
+      ],
+      "items_succeeded": [
+        "interlock-code-VERIFIED-present-psutil-then-Win32_Process-then-ps-exit-3-reason-contended_builder",
+        "selftest-RE-RUN-6-of-6-exit-0-both-separator-directions-and-the-other-project-case",
+        "forum-260828-6jxms-VERIFIED-exists-still-OPEN-0-replies-Point_One-margin-diff-spelled-out",
+        "pipeline-remeasured-6.091-exit-0-unpiped-flat-across-12-commits",
+        "gateG-held-231-maps-1318-placements-0-unresolved-exit-0",
+        "gateH-held-46-tools-0-unreachable-exit-0",
+        "two-independent-denominators-agreed-231-scorer-map-column-sum-and-gateG-own-read",
+        "corpus-gained-2-maps-229-to-231-attributed-to-the-corpus-not-the-instrument-on-that-agreement",
+        "FINDING-interlock-NOT-in-HEAD-git-show-HEAD-grep-c-contended_builder-returns-0-179-lines-unstaged",
+        "ledger-wide-sweep-96-breaths-168-source-files-9-absent-from-HEAD-5-untracked-4-tracked-dirty",
+        "the-4-dirty-are-the-whole-instrument-layer-gateG-gateF-the-runner-and-seal_clamp",
+        "verified-per-claim-not-by-mtime-0822-live_reaches_origin-40-lines-vs-0-in-HEAD-six-days-old",
+        "verified-per-claim-0827-gateG-utilities-read-2-occurrences-worktree-vs-0-in-HEAD",
+        "level-3-bar-MET-prop-044-written-four-occurrences-0822-0824-0827-0828",
+        "SECOND-FINDING-gateH-blind-in-the-REMEDY-position-normalize_map_fillers-named-twice-never-git-added",
+        "release-gates-suite-NOT-run-and-recorded-as-unmeasured-rather-than-inherited-from-this-morning",
+        "trajectory-updated-and-tonight-s-own-entry-dogfoods-prop-044-clause-2"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "THE MORNING BREATH SHIPPED AN INTERLOCK INTO ONE WORKING TREE AND CALLED IT SHIPPED, AND SO HAVE THREE BREATHS BEFORE IT. The code is real and the selftest passes 6/6 -- I re-ran it. But `git show HEAD:tools/em_autopilot.py | grep -c contended_builder` returns 0, and the change is 179 lines across two files, unstaged. Sweeping the whole ledger rather than today: of 168 breath-authored .py/.gd files across 96 breaths, 9 are absent from HEAD -- 5 untracked and 4 tracked-but-dirty -- and the 4 dirty ones are not incidental, they are the instrument layer entire: check_map_tokens.py (gate G), em_autopilot.py (gate F), run_release_gates.py (the runner), spatial_contract.py (gate seal_clamp). Every one was logged under items_succeeded with items_failed empty. The ledger has no field that could have caught this, because files_changed does not distinguish a file written from a file landed. prop-044 clause 2.",
+        "THE GATE BUILT FOR THIS FAULT IS GREEN BECAUSE THE FAULT MOVED ONE POSITION SIDEWAYS. Gate H's docstring records a tool that 'ran in every release-gate run for a day while being untracked'; it ran green tonight at 46 tools, 0 unreachable, and it is correct within its scope, because referenced() collects only the tools the gate runners INVOKE. check_map_tokens.py names tools/normalize_map_fillers.py twice -- line 123 and its own failure output at line 358 -- as the remedy a failing operator should run. That file is 11,742 bytes, written 2026-08-27 09:17, and has never been git add-ed. So a clone of HEAD that fails gate G is told to run a file it does not have. A remedy is named, not invoked, and H only looks at invocations. The cheapest possible fix is a regex over the sources H already reads.",
+        "SIX DAYS IS NOT 'MID-SESSION', WHICH IS THE ASSUMPTION GATE H IS RESTING ON. H deliberately does not check whether a tracked file is COMMITTED -- its own comment says a tool can be tracked and dirty and that this 'is normal mid-session and not a fault'. That is a good rule for an hour and a bad one for a week: the 2026-08-22 breath's live_reaches_origin refusal has been 40 worktree lines against 0 in HEAD for six days, through a tree that now holds 296 dirty and 381 untracked files and a repo where a concurrent session committed 12 times today and 51 on 08-26. The recorded stash incident that swallowed 284 files is the shape of how this ends.",
+        "THE DENOMINATOR MOVED AND TWO INSTRUMENTS AGREED TO THE UNIT, WHICH IS THE ONLY REASON IT READS AS THE CORPUS. The scorer's per-sequence map column sums to 231; check_map_tokens.py walks the spine on its own code and prints '231 maps read'. It was 229 on 08-26. A denominator that moves under a day of museum authoring is exactly the shape of an instrument breaking, and the agreement is doing the work -- while both readers still hand-roll their own spine loader, which is prop-040 still open and still the reason that agreement is luck rather than a contract.",
+        "THE PROJECT AVERAGE HAS NOW HELD 6.091 ACROSS FOUR CONSECUTIVE READS AND THREE DAYS OF HEAVY COMMITTING, AND BOTH OF TODAY'S BREATHS WERE STRUCTURALLY INVISIBLE TO IT. 21 of 22 sequences sit at stage 6, vr_testing 0%; randomness alone is COMPLETE. Two breaths today repaired instruments -- a contention interlock and, tonight, the discovery that the instruments are not in the repository. The scorer measures corpus completion and cannot see either. That is not a stall in the work; it is a metric that has been flat for a week because the work has been aimed somewhere it does not look, and the honest reading is that stage 6 needs a headset, not another gate."
+      ],
+      "files_committed": [],
+      "files_uncommitted": [
+        "doc/reports/skill_evolution_proposals.json (prop-044 appended; tracked, dirty)",
+        "doc/reports/improvement_trajectory.json (tracked, dirty)",
+        "doc/reports/breath_log.json (tracked, dirty)"
+      ],
+      "files_changed_note": "Split per prop-044 clause 2, applied to this entry on the night it was written. Nothing tonight is committed; all three are report files in a tree with a live concurrent writer, and this breath did not stage them. Stated rather than implied.",
+      "duration_minutes": 22
+    },
+    {
+      "breath_id": "2026-08-29T09:04",
+      "mode": "full",
+      "baseline_avg": 6.091,
+      "post_avg": 6.091,
+      "delta": 0.0,
+      "delta_note": "0.0 and honestly so. The scorer measures corpus completion; 21 of 22 sequences sit at stage 6 (vr_testing 0%), which needs a headset. This breath repaired the repository's grip on its own instruments, which the scorer is structurally blind to. Read three times unpiped, 6.091 every time, under a session committing three times in the hour.",
+      "items_attempted": [
+        "Baseline: pipeline + heat map + garden + full release gates, all run live on a quiet Godot",
+        "Verify last night's stranded-instrument claim against HEAD per claim, not against the ledger (prop-030)",
+        "prop-044 clause 1: widen gate H's referenced() from INVOKED to NAMED, and prove it in both directions",
+        "Land the instrument layer in HEAD -- surgical, by explicit path, beside 703 dirty entries owned by a live session",
+        "prop-044 clause 2 applied rather than proposed: sweep all 97 breaths' files_changed against git",
+        "Follow the two survivors of that sweep instead of reporting the count"
+      ],
+      "items_succeeded": [
+        "gate-H-widened-to-the-remedy-position",
+        "instrument-layer-landed-5-files",
+        "physicssimulation-case-rename-2-files",
+        "ledger-swept-168-files-classified"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "self_corrections": {
+        "stranded-artifact-scripts-MISDIAGNOSED": "The ledger sweep called gravitywell.gd and slingshotlauncher.gd UNTRACKED and a commit was written saying so, with a compile check behind it. git add staged nothing and the commit refused itself -- the only reason it was read again. They are tracked, as GravityWell.gd and SlingshotLauncher.gd; the fault is a case-only rename git on NTFS cannot see. Real, worse, and different: fixed as a rename, not an add. Two further hits of that same sweep (newtoncradle.gd, rockfactory.gd) were pure noise from the same cause and were correctly not committed."
+      },
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "files_committed": [
+        "tools/em_autopilot.py",
+        "tools/check_map_tokens.py",
+        "tools/run_release_gates.py",
+        "tools/spatial_contract.py",
+        "tools/normalize_map_fillers.py",
+        "tools/check_gate_chain.py",
+        "algorithms/physicssimulation/gravitywell/gravitywell.gd",
+        "algorithms/physicssimulation/slingshotlauncher/slingshotlauncher.gd"
+      ],
+      "files_uncommitted": [],
+      "files_changed": [
+        "tools/check_gate_chain.py",
+        "doc/reports/breath_baseline_2026-08-29_09-04.json",
+        "doc/reports/breath_log.json",
+        "doc/reports/improvement_trajectory.json",
+        "doc/reports/skill_evolution_proposals.json"
+      ],
+      "commits": [
+        "94549490e fix(gates): the instrument layer lands in the repository, not in one working tree",
+        "08bd04b4f feat(gates): gate H holds a remedy to the same bar as an invocation",
+        "a4d70332e fix(physicssimulation): HEAD's filename and the scene's reference agree on case"
+      ],
+      "ledger_integrity_after": {
+        "distinct_py_gd_named_across_97_breaths": 168,
+        "clean_in_HEAD": 166,
+        "tracked_but_dirty": 0,
+        "tracked_but_dirty_before": 4,
+        "untracked": 2,
+        "untracked_before": 5,
+        "untracked_remaining_are": "newtoncradle.gd and rockfactory.gd -- names that do not exist. NTFS phantoms of NewtonCradle.gd and RockFactory.gd, both tracked and both correctly loaded by their scenes. Not debt."
+      },
+      "gates_before": "7/8 -- F FAIL (no_route, frontier_z 46), H PASS at 46 tools / 0 unreachable",
+      "gates_after": "7/8 -- F FAIL (no_route, frontier_z 46, unchanged), H PASS at 46 invoked + 6 named / 0 unreachable",
+      "discoveries": [
+        "THE GATE WRITTEN FOR THIS FAULT WAS GREEN THROUGH IT, AND WIDENING IT COST ONE FUNCTION AND FOUND EXACTLY ONE THING. Gate H collected only what a runner INVOKES. Extending the same regex one level -- into the sources it already reads -- adds 6 tools that a gate NAMES as a remedy, and exactly one of them, normalize_map_fillers.py, was not in the repository. So a clone of HEAD could fail gate G and be handed 'run tools/normalize_map_fillers.py --apply' for a file it does not have. Proved in both directions on the live corpus, not a fixture: exit 1 before the instrument commit with 0 invoked failures (the whole finding in the new level), exit 0 after with the denominator unchanged at 46 and 6 -- so the gate went green because the file landed, not because the scan emptied. A 46-to-0 pass that never moves is not evidence; the pair of readings is.",
+        "'SHIPPED' HAD MEANT 'WRITTEN TO THE WORKING TREE' FOR SIX DAYS, AND ONE COMMIT CLOSED FOUR BREATHS' WORTH. Verified per claim before staging, the cheap way: em_autopilot's contended_builder read HEAD 0 / worktree 3, check_map_tokens' utilities layer HEAD 0 / worktree 2, spatial_contract's live_reaches_origin HEAD 0 / worktree 2, and normalize_map_fillers.py had never been git add-ed at 11,742 bytes. Those are gate F, gate G, the seal_clamp gate and the runner -- the instrument layer entire, hardened in one working tree while every breath log read green. After: all four HEAD-positive, and across all 97 breaths tracked-but-dirty falls 4 to 0 and untracked 5 to 2. Staging by explicit path mattered and was not caution theatre: 703 entries in this tree belong to a session that committed at 08:43, 08:52 and 09:03 while the baseline was being taken.",
+        "THE SWEEP THAT FOUND THE DEBT WAS HALF WRONG, AND THE COMMIT REFUSING ITSELF IS WHAT CAUGHT IT. Four files came back 'on disk, UNTRACKED'. A commit message was written declaring them clone-broken artifacts, with a Godot compile check behind it -- and git add staged nothing, so the commit printed status instead. NTFS answers Path.exists() case-insensitively while git ls-files is case-exact, so every file renamed by case reads as present-and-untracked under its old spelling. Two hits (newtoncradle.gd, rockfactory.gd) were that and nothing else. A verification step whose failure mode is SILENCE would have shipped this; the one that saved it did so by producing the wrong output loudly.",
+        "AND THE HALF THAT WAS REAL WAS REAL FOR A WORSE REASON THAN THE SWEEP GAVE. gravitywell.tscn asks for res://.../gravitywell.gd; the index held GravityWell.gd. A case-only rename on disk, core.ignorecase on, git reporting the tree clean for months, Windows resolving either spelling so nothing local ever failed. On a case-sensitive filesystem -- Linux CI, and the Android/Quest export path this project ships through -- the scene loads and its script does not. Swept rather than spot-fixed: 3,380 tracked scenes, 2 disagreements, both in physicssimulation, 0 after. The corpus-wide sweep is what makes '2' a finding instead of an anecdote.",
+        "GATE F READ 46 AGAIN, WHICH IS THE FIRST TIME THIS SERIES HAS REPEATED A NUMBER. Six measured failures since 2026-08-14 sat at 44, 44, 61, 21, 37, 7; today's two runs both read frontier_z 46, z_reached 46.2, 8 stall events, on a machine with zero other Godot instances -- the contention interlock landed this morning did not fire, so both are uncontended readings. Two agreeing reads on a quiet machine are worth more than the six that preceded them, and they are the first evidence the corridor failure has a fixed location rather than being pure instrument noise. Not chased this breath; recorded so the next one has a number to disagree with.",
+        "GATE G PRINTS A FAULT AND EXITS 0, WHICH IS prop-041 STILL OPEN AND NOW COSTING SOMETHING NAMEABLE. Its output carries 'UNPLACEABLE ROOTS: 2 token(s) resolve to a scene whose root is not a 3D node -- they cannot instantiate in a hall', names boid_flocking (root=CanvasLayer) and ecosystem_simulation (root=Node2D), records that one bad token cost 117 refusals in a single bake, and returns success. The release-gate table shows G: PASS with unresolved_placements 0. Not acted on -- it is a second fault class and this breath was at its limit -- but it is the same shape as the one repaired today: a finding a gate prints and passes is a comment, and nothing downstream can act on a comment."
+      ],
+      "duration_minutes": 42
+    },
+    {
+      "breath_id": "2026-08-29T18:56",
+      "mode": "evolve-only",
+      "baseline_avg": 6.091,
+      "post_avg": 6.091,
+      "delta": 0.0,
+      "delta_note": "0.0, and evolve-only changes no project file by contract. Re-read unpiped with the exit code taken directly (prop-017): 6.091, exit 0, flat across 25 commits since midnight. HEAD 784b5a255, 713 dirty paths belonging to a session that committed at 18:44.",
+      "items_attempted": [
+        "Review today's log: one breath (2026-08-29T09:04, full, 0.0) against 25 commits since midnight",
+        "Verify that breath's claims against HEAD per claim rather than trusting its ledger (prop-030)",
+        "Re-measure the pipeline lever unpiped, exit code read directly (prop-017)",
+        "Read the denominator with a second independent instrument before believing the corpus held",
+        "Re-run this morning's case-only sweep with a WIDER instrument instead of accepting its 0",
+        "Ask what the morning's sweep could not see, and sweep that direction too",
+        "Level-3: test tonight's pattern against the three-occurrence bar by sweeping the ledger, not by asserting it",
+        "Update improvement_trajectory.json"
+      ],
+      "items_succeeded": [
+        "morning-claims-VERIFIED-5-of-5-in-HEAD-not-just-on-disk",
+        "em_autopilot-contended_builder-HEAD-3-check_map_tokens-utilities-HEAD-2-spatial_contract-live_reaches_origin-HEAD-2",
+        "normalize_map_fillers.py-and-check_gate_chain.py-both-git-ls-files-positive-in-HEAD",
+        "physicssimulation-case-fix-CONFIRMED-both-scenes-ask-lowercase-and-the-index-now-carries-lowercase",
+        "pipeline-remeasured-6.091-exit-0-unpiped-flat-across-25-commits",
+        "gateG-held-231-maps-1322-placements-0-unresolved-exit-0",
+        "gateH-held-46-invoked-6-named-0-unreachable-exit-0",
+        "two-independent-denominators-agreed-231-scorer-map-column-sum-and-gateG-own-read",
+        "morning-case-claim-WIDENED-and-HELD-4379-res-refs-across-3388-scenes-0-case-only-disagreements-was-scene-to-script-only",
+        "SECOND-DIRECTION-SWEPT-index-to-disk-1-survivor-MassSpringDamper.gd-vs-massspringdamper.gd-git-status-clean",
+        "own-verdict-REFUSED-TWICE-6-then-1-then-0-once-the-instrument-modelled-uid-first-resolution",
+        "spine-reachability-ANSWERED-0-genuinely-unresolvable-refs-under-804-tokens-1322-placements",
+        "structural-cause-measured-147-tools-name-res-3-mention-uid-571-stale-paths-the-engine-rescues",
+        "level-3-bar-MET-prop-045-written-five-occurrences-0611-0824-0826-0829am-0829pm",
+        "release-gates-suite-NOT-run-and-recorded-as-unmeasured-rather-than-inherited-from-this-morning",
+        "trajectory-updated-with-the-refusal-named-rather-than-the-finding-it-replaced"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "items_unresolved": {
+        "MassSpringDamper.gd index-vs-disk case disagreement": "Measured, not fixed -- evolve-only changes no project file. The git index carries algorithms/physicssimulation/massspringdamper/MassSpringDamper.gd; the disk carries massspringdamper.gd; git status reports the directory clean. Benign at runtime today (the scene asks the CamelCase path, NTFS answers it, and an untracked MassSpringDamper.gd.uid sidecar carries uid://cgvk4fixj1u8w which the scene also names). It is the only such disagreement in 34,095 tracked files and no gate looks in this direction. For the morning breath.",
+        "gate G prints UNPLACEABLE ROOTS and exits 0": "Unchanged since 2026-08-27, still boid_flocking (root=CanvasLayer) and ecosystem_simulation (root=Node2D), still PASS with unresolved_placements 0 in the release table. prop-041 remains open and this is its third consecutive evening of being re-observed rather than acted on.",
+        "release gates F and its Godot siblings": "Unmeasured tonight. Not run: this is an evolve-only pass and a session committed at 18:44. Recorded as unmeasured rather than inherited green from 09:04."
+      },
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "files_changed": [
+        "doc/reports/breath_log.json",
+        "doc/reports/improvement_trajectory.json",
+        "doc/reports/skill_evolution_proposals.json"
+      ],
+      "files_committed": [],
+      "commits": [],
+      "gates_measured": "G PASS (231/1322/0), H PASS (46+6/0). F and the Godot gates NOT RUN.",
+      "self_corrections": {
+        "own-reference-sweep-WRONG-TWICE-BEFORE-IT-WAS-RIGHT": "A path-only res:// sweep reported 6 spine-placed artifacts whose scenes reference a script that is not on disk -- Hilbert3D, mass_spring_damper, AnimatedTree, layered_membrane, reaction_diffusion, nakama_metaballs. Adding .uid sidecars to the resolver cut that to 1. Adding the uid a .tscn declares inline in its own [gd_scene] header -- scenes have no sidecar -- cut it to 0. Three verdicts on one subject in one sitting, the first two confident and wrong, and nothing in the chain would have objected to either."
+      },
+      "discoveries": [
+        "MY OWN CHECKER CONVICTED SIX ARTIFACTS THE ENGINE LOADS, AND ONLY THE THIRD INSTRUMENT WAS RIGHT. Godot 4 resolves an ext_resource by uid:// first and falls back to the path, so every file moved after its uid was minted reads as a dangling reference to a path-only sweep. Measured on this corpus: 571 stale res:// paths that the engine resolves by uid, against 0 spine-reachable references that genuinely do not resolve. The first sweep said 6 broken with placements and file names attached -- the most credible-looking output of the three. A checker that RE-IMPLEMENTS a resolver inherits none of the real resolver's fallbacks, and its false positives arrive with full forensic detail. The structural version: 147 tools under tools/ name res://, 3 mention uid at all.",
+        "THE MORNING'S CASE SWEEP WAS ONE-DIRECTIONAL AND LEFT EXACTLY ONE SURVIVOR. It compared scene references against the git index and found 2, fixed both, re-read 0. Widening the same direction tonight -- 4,379 res:// references across 3,388 tracked scenes and resources, every ext_resource type rather than scripts only -- still reads 0, so the fix holds beyond the subset it was measured on. The direction nobody swept is index against DISK: git ls-files is case-exact, os.walk reports the real filename, and comparing them across 34,095 tracked files finds MassSpringDamper.gd in the index and massspringdamper.gd on disk. git status prints nothing. A sweep proves a claim about the pairs it compares; the morning's claim was 'scene references agree with the index', which is true, and was read as 'the case class is closed', which is not.",
+        "THE BAR IS THREE AND THE LEDGER HOLDS FIVE, IN THE SAME CLASS, AND TWO OF THEM ARE TODAY. 2026-06-11: the pipeline scorer matched tokens literally while GridInteractablesComponent followed delegate_to chains, and the fix was written as 'mirroring the runtime resolver'. 2026-08-24: long_museum.py re-derived hall geometry in Python and drifted, and the same breath recorded having measured a scorer cost by flipping one character in the scorer's own logic RATHER than reimplementing it -- the right move, named as such. 2026-08-26: ten hand-rolled spine loaders, one of them returning empty against a spine of 22, with the note that two agreeing denominators were 'luck doing the work of a contract'. 2026-08-29 morning: Path.exists() standing in for git ls-files, NTFS answering case-insensitively, two phantom findings and a commit that refused itself. Tonight: path-only standing in for uid-first. prop-040 closed the spine-loader instance. The class is not closed, and the cheap general remedy is prop-018 clause 1 aimed specifically at resolvers: before believing what a modelled resolver CONVICTS, run it on a subject the runtime demonstrably loads and require it to clear that one.",
+        "GATE G IS RIGHT ONE LEVEL DEEPER THAN IT CLAIMS, WHICH IS WORTH KNOWING BECAUSE IT WAS NOT DESIGNED TO BE. It proves every spine token resolves to a scene FILE and stops. Asking the next question -- does that scene's own ext_resource list resolve -- over all 804 tokens and 1,322 placements returns 0 genuinely unresolvable references. So the gate's guarantee happens to hold transitively today. It is not gated, nothing would notice if it stopped holding, and the six stale paths inside spine artifacts are one editor save away from being rewritten and one uid loss away from being real."
+      ],
+      "duration_minutes": 34
+    },
+    {
+      "breath_id": "2026-08-30T09:04",
+      "mode": "full",
+      "baseline_avg": 6.091,
+      "post_avg": 6.091,
+      "delta": 0.0,
+      "head_at_baseline": "b3a26cb4adf4fc16ffd8f16a2f446923b7c10972",
+      "head_at_harvest": "137992c719decc6b56f4c95b070b5d265459fb9f",
+      "tree_at_harvest": {
+        "dirty": 308,
+        "untracked": 418
+      },
+      "items_attempted": [
+        "Baseline: pipeline + heat map + garden + all 11 release gates, run live",
+        "Find out why the tracked gate verdict disagrees with the live run",
+        "Stop the in-game dashboard pruning gate toggles against a partial report -- and MEASURE the old behaviour instead of reading it out of the source",
+        "Gate I: three LOST edge anchors -- decide instrument vs world before touching either",
+        "Gate J: three LOST citations -- check whether gate I's repair reaches them",
+        "Gate K: inspect the 10 dishonest closures, act only where the fact is unambiguous"
+      ],
+      "items_succeeded": [
+        "run_release_gates.py writes doc/reports/RELEASE_GATES.{json,md} by DEFAULT, stamped and written atomically",
+        "ProjectDashboardOverlay no longer erases toggles for gates its report does not mention, and prints the report's date, HEAD and age in days",
+        "probe_gate_report_stamp.gd -- 3/3 on the fixed build, 3/3 EXPECTED FAIL against HEAD's build via --overlay=",
+        "Gate I green: LOST 3 -> 0 (edges 269, HELD 264, NEAR 5)",
+        "Gate J green: LOST 3 -> 0 (citations 219, HELD 212, NEAR 4, ELSEWHERE 3)",
+        "tools/test_edge_gate.py -- 10 checks, wired into gate I as detector_selftest",
+        "Release gates 7/11 -> 8/11 passing"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "items_reported_not_fixed": [
+        "Gate K (10): the 1 GHOST and the 1 NO REGISTRY are the SAME token -- forces/Sky_Climb/calder_mobile_primaries, a bare {token} line with no sentence and no registry row, in a pearl that already carries calder_mobile and calder_object_mobile as separate lines. The 8 ECHO are one sentence asked to be about two different works. Both want an authorial decision, not a guess.",
+        "Gate F: cooled. Failing at every measured read since 2026-08-14 (44, 44, 61, 21, 37, 7, 46, 46)."
+      ],
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "THE VERDICT THE GAME SHOWS WAS 81 DAYS OLD AND SAID PASS, BECAUSE THE RUNNER ONLY WROTE ITS REPORT WHEN ASKED. tools/run_release_gates.py wrote doc/reports/RELEASE_GATES.{json,md} only under --json-out/--md-out, and no caller in this ledger has ever passed them -- not the breather's command line, not the one in CLAUDE.md. So the tracked report sat at 2026-06-10 carrying `overall_pass: true` over FOUR gates while the live run failed four of eleven. ProjectDashboardOverlay.gd reads exactly that file as res://doc/reports/RELEASE_GATES.json and renders it on KEY_P, with nothing on screen to say when it was taken. Seven gates have been added since June and the headset has never seen one of them. The report is written by default now and carries measured_at / measured_by / head / head_subject / tree counts, written atomically and parsed back before it replaces the old one; the overlay prints the stamp and the age in days.",
+        "AND THE STALE REPORT WAS ARMED, NOT MERELY WRONG: OPENING THE DASHBOARD WOULD HAVE SWITCHED OFF THE SEVEN NEWEST GATES. _sync_release_gate_toggles_with_report() erased every toggle ID the report did not mention, and _save_release_gate_toggles() writes the result back over the TRACKED doc/reports/RELEASE_GATES_TOGGLES.json -- the file run_release_gates.py reads for --gate-toggles. Report knows A-D, toggles hold A-K, so pressing P deletes E F G H I J K, and the next gate run prints 'Enabled gates: 4/4 passing / Overall: PASS' with four gates red. It had not yet fired: that file's whole git history is three human commits ADDING gates. THE OLD BEHAVIOUR WAS MEASURED, NOT ARGUED. commons/testing/probe_gate_report_stamp.gd takes --overlay=, so HEAD's build was dumped out of git and probed: 0 of 7 unknown toggles survived, against 7 of 7 on the fixed build. Two traps on the way -- a dumped copy that keeps its `class_name` HANGS the boot on a duplicate class-cache entry, and an unguarded call() to a method an older build lacks aborts the rest of the function on a SCRIPT ERROR, so the probe first reported '1 of 3 failed' when 2 of the 3 had never run.",
+        "ALL THREE OF GATE I'S LOST EDGES WERE THE INSTRUMENT, AND SO WERE SEVEN OF ITS TWELVE NEARS. Not one sentence had stopped being true. (1) forces/Vectors_Act4b_Oscillation: the book quotes 'T = 2pi*sqrt(L/g) ... mg sin theta' and intent.md line 5 says the same thing in Greek and radicals -- an ALPHABET, not drift. Measured across all 269 anchors, the quote side holds four non-ASCII characters in total while the anchored files hold pi, theta, lambda, phi, Delta, partial, minus, times, middot, squared, approx and arrows in the thousands: a model reading mathematics writes it out in Latin. (2) randomness/Random_Space: the quote is 'seed_value = 1 ... enable_animation = false', which is TWO readings joined by an ellipsis -- both halves sit on lines 13 and 18 of the file it names, and matched as one span it could never be found. (3) isosurfaces/ISO_ImplicitModeling was the one real book error: the anchor said metaball.gd where the line lives in metaball.gdshader, and 'dist = smin(dist, sphere_dist, blend_factor);' being shader syntax was the tell. LOST 3 -> 0, and gate J's three LOST citations cleared with it, exactly as the runner's own comment predicted they would.",
+        "A GATE THAT GOES GREEN THE MOMENT YOU WIDEN ITS COMPARISON IS THE SHAPE OF ONE THAT STOPPED CHECKING, SO THE NINE MOVED VERDICTS WERE READ ONE BY ONE. Every move was NEAR->HELD or LOST->HELD -- none landed on the soft verdict, which means each is now a literal substring match after transliteration, a STRICTER claim than the NEAR it replaced. Three were opened against the actual file lines: Change_Velocity's ellipsis spans lines 204 and 206, VFM_06_Springs differs only in -> versus the arrow glyph, Fractal_MengerSponge's ellipsis spans a comment block. The ellipsis rule is stricter than what it replaced -- EVERY fragment must be present, not most -- and tools/test_edge_gate.py proves it: one true half and one invented half reads LOST, in both orders. Ten checks, including a quote with the right shape and the wrong variable (LOST) and a check that union and intersection do not normalise onto one token. Wired into gate I as detector_selftest, the way test_want_gate.py is wired into K.",
+        "GATE H CAUGHT MY OWN TOOL BEFORE IT SHIPPED, WHICH IS YESTERDAY'S WIDENING EARNING ITSELF BACK IN ONE DAY. The post-repair run read 8/11 with H newly red: 'present_but_untracked: tools/test_edge_gate.py, unreachable_from_a_clone: 1'. The 08-29 breath extended H from tools a runner INVOKES to tools it merely NAMES; today it convicted a file a fresh clone would not have, one run after it was written and before the commit.",
+        "MY OWN STAMP SHIPPED MOJIBAKE ON ITS FIRST RUN. subprocess.run(text=True) without encoding= decodes git's output with the locale codec -- cp1252 here -- and the commit subject landed in the tracked report as 'a-e-\"'. Caught by reading back the file that had just been written rather than the console it had just been printed to, which is the only reason it was caught at all."
+      ],
+      "files_changed": [
+        "tools/run_release_gates.py",
+        "tools/edge_gate.py",
+        "tools/test_edge_gate.py",
+        "commons/maps/catalog/ProjectDashboardOverlay.gd",
+        "commons/testing/probe_gate_report_stamp.gd",
+        "commons/data/book/isosurfaces.json",
+        "doc/reports/RELEASE_GATES.json",
+        "doc/reports/RELEASE_GATES.md",
+        "doc/reports/breath_baseline_2026-08-30_09-04.json"
+      ],
+      "duration_minutes": 70
+    },
+    {
+      "breath_id": "2026-08-31T09:04",
+      "mode": "full",
+      "baseline_avg": 6.091,
+      "post_avg": 6.091,
+      "delta": 0.0,
+      "release_gates_before": "8/11",
+      "release_gates_after": "9/11",
+      "items_attempted": [
+        "Baseline: pipeline + heat map + garden + all 11 release gates, run live",
+        "Gate H (60 deg on the heat map): the one tool a clone of HEAD would not have",
+        "Gate K: 10 dishonest closures -- act only where the evidence settles it, ask where it does not",
+        "Heat item 'placement' (60 deg): verify the standing off-world claim against HEAD with a second instrument",
+        "Gate F: decide whether contended_builder is a fault to fix or a refusal to respect"
+      ],
+      "items_succeeded": [
+        "gate-H-FAIL-to-PASS: tools/test_edge_gate.py tracked; check_gate_chain.py exit 1 before, 0 after",
+        "gate-K-10-to-4: GHOST+NO REGISTRY calder_mobile_primaries removed, 2 ECHO pairs resolved from code",
+        "transformation_cube-registry-claim-was-FALSE: it bobs on a sine, it has never rotated",
+        "pattern_mill-given-its-own-sentence-instead-of-pattern_machine_b's",
+        "tools/check_offworld_cells.py: 62 cells / 29 maps, 11 pair checks, selftest exit 0",
+        "off-world-claim-REPRODUCED-independently: 35 stranded interactables matches the 2026-08-29 note exactly",
+        "forum-260831-z5s2i-asked-rather-than-overwriting-Palle's-hand-lines",
+        "release-gates-8/11-to-9/11"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "items_declined": {
+        "gate-K-final-4": "two pairs of by:hand lines from doc/SPEAK.md; which work gets which sentence is curatorial. Forum 260831-z5s2i.",
+        "gate-F": "two Godot instances live (pids 17072, 28084). The autopilot refuses a contended builder BY DESIGN (forum 260828-6jxms). Unmeasurable is not failed.",
+        "off-world-repair": "62 cells, three different honest fixes (move inside / extend structure / drop). Picking one from a script is how 41 maps got stamped at a phantom depth."
+      },
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "THE PATHFINDER PRINTS THE FAULT IN PLAIN ENGLISH AND THEN CALLS THE MAP OK. On Tutorial_Single it emits 'Rule 2 [WARN] Teleport at (2,18) -- no structure row at z=19 to catch player' and 'Rule 3 [WARN] Teleport at (2,18) is NOT reachable from spawn via walking', then prints '1 maps checked: 1 OK, 0 FAIL (0 issues)' and exits 0. A tutorial map whose only exit stands two rows past the end of the world. This is not the blind-instrument failure the project has catalogued -- the instrument SAW it, described it correctly, and weighted it at zero. The standing note says map_pathfinder has ONE error rule; the sharper form is that everything else it knows is printed at a severity no runner reads. 62 cells in 29 maps are in this condition and gates C and G are green over all of them, because gate G asks whether a token NAMES something and never whether the cell EXISTS.",
+        "A SHARED SENTENCE CAN BE A FALSE SENTENCE, AND THE ECHO IS THE ONLY THING THAT MAKES IT VISIBLE. Gate K flagged transformation_cube and rotating_cube for carrying one description between them. The interesting fact was not the duplication: the shared sentence, 'A mysterious rotating cube', is simply WRONG about transformation_cube, which runs TransformationTween.gd -- sin(t * 3.0) * 0.4 m, a vertical bob, no rotation anywhere in the file. A wrong description on a single artifact is invisible to every gate in the suite. It only surfaced because it had been copied onto a second work, where a duplicate-detector could reach it. Duplication is a symptom of drafting FROM a neighbour, and drafting from a neighbour is how a false claim travels.",
+        "SIX OF GATE K'S TEN WERE MINE TO FIX AND FOUR WERE NOT, AND THE DIFFERENCE IS LEGIBLE IN THE DATA. Every line the gate flagged carries a `by` field. The six marked `by: draft` were machine-copied from registry descriptions and could be settled against the code. The four marked `by: hand` / `by: claude` trace to doc/SPEAK.md, where Palle wrote 'everything is made of triangles' three separate times (lines 62, 64, 69) -- the duplication is IN THE HUMAN SOURCE, and no amount of reading GDScript decides which of two triangles his sentence belongs to. A gate that counts human echoes and machine echoes in one number will always be four short of green, and that residue is correct: it is a question, not a defect."
+      ],
+      "files_changed": [
+        "tools/test_edge_gate.py",
+        "tools/check_offworld_cells.py",
+        "commons/data/book/forces.json",
+        "commons/data/book/color.json",
+        "commons/data/book/wavefunctions.json",
+        "commons/artifacts/registry/primitives.json"
+      ],
+      "commits": [
+        "ac3c4d388",
+        "62772f1d5"
+      ],
+      "forum_posts": [
+        "260831-z5s2i"
+      ],
+      "duration_minutes": 34
+    },
+    {
+      "breath_id": "2026-09-01T09:04",
+      "mode": "full",
+      "baseline_avg": 6.091,
+      "post_avg": 6.091,
+      "delta": 0.0,
+      "release_gates": "9/11 at baseline, 9/11 at harvest (F contended_builder, K's 4 human echoes -- both cooled)",
+      "items_attempted": [
+        "Baseline: pipeline + heat map + garden + all 11 release gates, run live",
+        "Read yesterday's off-world detector against the ENGINE rather than trusting its verdict",
+        "Repair the class the reading proved was never built, by hand, per cell, with a destination check",
+        "Tutorial_Single: the exit teleporter two rows past the end of the world",
+        "Correct check_offworld_cells.py so its verdict names which of the two faults a cell has",
+        "Measure the zero-declared-dimension class and ASK rather than touch the grid path"
+      ],
+      "items_succeeded": [
+        "UNREACHED-across-the-corpus-23-to-0",
+        "an.-90-typo-fixed-in-19-maps-the-info-board-parses-now",
+        "23-tokens-moved-inside-the-declared-width-every-destination-floored-and-free",
+        "Tutorial_Single-exit-(2,18)-to-(13,7)-pathfinder-rules-2-3-5-all-silent",
+        "check_offworld_cells.py-emits-UNREACHED/UNFLOORED-15-selftest-checks-4-new",
+        "my-23-maps-cell-count-NEUTRAL-245-at-HEAD-245-now-so-gateG's-+1-is-the-other-session's",
+        "33-zero-dimension-maps-877-lost-cells-MEASURED-and-posted-forum-260901-w7z00-not-repaired",
+        "all-23-edited-maps-parse-and-pass-the-pathfinder"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "THE VERDICT WAS TRUE OF FEWER THAN HALF THE CELLS IT CONVICTED, AND THE HALF DECIDES THE REPAIR. Yesterday's detector said of all 53 off-world cells that 'the tokens resolve, the gates are green, and nothing is there'. Read against the engine, GridUtilitiesComponent and GridInteractablesComponent both place with `for z in range(min(dimensions.z, layout.size()))` / `for x in range(min(dimensions.x, row.size()))`, and `dimensions` arrives from JsonMapLoader.get_dimensions(), which returns map_info.dimensions VERBATIM. The engine sizes the world by the DECLARED numbers; only the Python side (place_artifacts.grid_dims_from_map) resolves size from len(structure), and its own docstring says why -- 269 of 2789 maps declare a depth that is not len(structure). So two faults wear one name: UNREACHED (outside the declaration, never built) and UNFLOORED (inside it, built, standing over void). 23 of the 53 were the first, 30 the second. Vectors_6 and Vectors_1 carry the SAME authored cell -- an info board at (0,8) over a 7-wide structure row -- and Vectors_6 declares width 9 so its board floats outside the world while Vectors_1 declares 7 so its board does not exist. One authored mistake, two repairs, and the difference is not in the cell but in a number in map_info.",
+        "A DOT INSTEAD OF A COLON TOOK THE TITLE OFF NINETEEN MAPS AND NOTHING OBJECTED. `an` is the annotation cube -- info_board.tscn, the board that displays the map's own name and description. Nineteen maps in the Forces/Vectors family write it `an.-90`; the corpus writes `an:-90` 108 times. The parser splits on ':', so the type reads as the whole string 'an.-90', matches no registry key, and the board is skipped. Gate G was green over all nineteen because it asks whether a token NAMES something and a token that names nothing at a cell that does not exist is not a name it checks. Twelve of the nineteen also sat one column past the declared width, so the typo and the position hid each other: fixing only the spelling would have made Vectors_6's board BUILD, floating one column outside its own world -- a repair that makes the defect visible for the first time is not a repair.",
+        "THE PATHFINDER'S TELEPORTER RULES ARE A CONVENTION NO OTHER INSTRUMENT STATES. Rule 5 wants the teleport cell to be VOID (h=0) -- you step into it; rule 2 wants row z+1 to exist WITH floor to catch the player; rule 3 wants the cell reachable from spawn. Placing Tutorial_Single's exit on the obvious walkable cell satisfied 2 and 3 and broke 5; (13,7), a void cell with floor behind it, silenced all three. Nothing but the pathfinder's own WARN text records that a teleporter belongs on void, and it prints all of it at a severity that leaves the map 'OK, 0 issues, exit 0'.",
+        "A MAP THAT DECLARES A ZERO DIMENSION IS AN EMPTY WORLD THAT LOADS WITHOUT AN ERROR. JsonMapLoader.get_dimensions() defaults width and depth to 0 and range(min(0, ...)) is empty, so no structure, no utilities and no interactables are built. 33 maps are in that state carrying 877 authored cells; 32 have no `dimensions` key at all and are all generated (Walk_* 17, Hung_* 4, Family_* 2, MindMap_* 3, Series_*, DrawGate_Test), the 33rd is Forces_PropGallery with the map-builder's {height, width}. Not repaired: the engine-side fix is a fallback inside get_dimensions(), which is the grid path, so it was measured and asked at forum 260901-w7z00 instead of taken."
+      ],
+      "files_changed": [
+        "tools/check_offworld_cells.py",
+        "commons/maps/Atlas_SDF_Gallery/map_data.json",
+        "commons/maps/ForcesFoundations/map_data.json",
+        "commons/maps/ForcesSystems/map_data.json",
+        "commons/maps/Forces_1/map_data.json",
+        "commons/maps/Forces_2/map_data.json",
+        "commons/maps/Forces_3/map_data.json",
+        "commons/maps/Forces_4/map_data.json",
+        "commons/maps/ISO_CaveGeneration/map_data.json",
+        "commons/maps/Primitives_2/map_data.json",
+        "commons/maps/Tutorial_Single/map_data.json",
+        "commons/maps/VectorAdvanced/map_data.json",
+        "commons/maps/VectorApplied/map_data.json",
+        "commons/maps/VectorBasics/map_data.json",
+        "commons/maps/VectorCrossProduct/map_data.json",
+        "commons/maps/VectorFieldFlow/map_data.json",
+        "commons/maps/VectorForces/map_data.json",
+        "commons/maps/VectorMotion/map_data.json",
+        "commons/maps/VectorOperations/map_data.json",
+        "commons/maps/VectorProjectionReflection/map_data.json",
+        "commons/maps/VectorSubtraction/map_data.json",
+        "commons/maps/Vectors_1/map_data.json",
+        "commons/maps/Vectors_5/map_data.json",
+        "commons/maps/Vectors_6/map_data.json"
+      ],
+      "duration_minutes": 55
+    },
+    {
+      "breath_id": "2026-09-01T18:57",
+      "mode": "evolve-only",
+      "baseline_avg": 6.091,
+      "post_avg": 6.091,
+      "delta": 0.0,
+      "release_gates": "not run -- evolve-only makes no project change and this breath refused to spend a Godot boot on a number the morning already measured (9/11, both failures cooled)",
+      "items_attempted": [
+        "Read today's single breath (2026-09-01T09:04, full, delta 0.0) and the last 10 for pattern",
+        "Test every candidate pattern for 3+ evidence AND for duplication against all 45 existing proposals",
+        "Verify the winning pattern against the working tree rather than against this morning's own log",
+        "Update improvement_trajectory.json",
+        "Write prop-046 if the evidence held"
+      ],
+      "items_succeeded": [
+        "seven-consecutive-breaths-at-6.091-confirmed-a-CEILING-not-a-stall-21-of-22-sequences-wait-on-stage-6-vr_testing",
+        "declared-vs-derived-world-size-measured-LIVE-2791-maps-224-divergent-33-zero-dimension-32-with-no-dimensions-key",
+        "engine-chain-traced-end-to-end-JsonMapLoader:76-GridDataComponent:146-GridStructureComponent:235-GridInteractables:588",
+        "NEW-FACT-the-loader-ALREADY-detects-it-JsonMapLoader.gd:181-191-warns-and-leaves-valid-TRUE",
+        "NEW-FACT-the-engine-disagrees-with-itself-UtilityDataTemplate.gd:72-derives-dims-FROM-the-layout",
+        "duplicate-check-run-over-all-45-proposals-the-word-dimension-appears-in-NONE",
+        "prop-046-written-with-5-occurrences-and-every-line-reference-re-read-from-the-tree",
+        "ada-breather-cumulative-recomputed-from-raw-log-stored-11/1-was-stale-true-73/73"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "THE FLAT LINE IS A CEILING, AND SEVEN BREATHS OF REAL WORK PROVE IT RATHER THAN CONTRADICT IT. global_avg has read 6.091 on every breath since 2026-08-26 -- eight entries, seven of them full cycles that each changed the corpus (23 off-world tokens moved, a typo repaired in 19 maps, a tutorial's only exit restored, four gates hardened, two case-renames fixed). The number cannot move because 21 of 22 spine sequences sit at stage 6, vr_testing, with every earlier stage OK, and stage 6 is satisfied only by a human walking the maps in a headset. A headless breath is structurally incapable of moving this metric. Continuing to report delta 0.0 as the headline is the instrument describing its own ceiling; the honest steering numbers are the measured corpus classes (off-world UNREACHED 23->0, UNFLOORED 30 open, zero-dimension maps 33 open, divergent-dimension maps 224 open).",
+        "THE CHECK FOR TONIGHT'S FINDING WAS ALREADY IN THE ENGINE, WRITTEN, CORRECT, AND WEIGHTLESS. Looking for the declared-vs-derived split in code rather than trusting the morning's account of it turned up JsonMapLoader.gd:181-191: the loader computes structure.size() != declared depth and max_row_width != declared width, appends 'Structure depth (%d) doesn't match declared depth (%d)' to validation.warnings, and leaves validation.valid TRUE. So on all 224 divergent maps the game itself detects the disagreement, says it in plain English, and then sizes the world from the declared number anyway. This was not in the morning log, which reported the divergence as something the Python side alone knew.",
+        "AND THE ENGINE DOES NOT AGREE WITH ITSELF, IN THE SAME FOLDER. JsonMapLoader.get_dimensions() returns the DECLARED numbers verbatim; UtilityDataTemplate.get_dimensions() (commons/grid/UtilityDataTemplate.gd:72-83) DERIVES {width, depth} from layout_data.size() and the widest row -- the Python side's convention, inside commons/grid. Two rival definitions of world size are live within the engine before the tools/ boundary is reached at all, which is why 25 separate tools each felt free to pick one.",
+        "A NUMBER QUOTED FROM YESTERDAY IS NOT A MEASUREMENT. The morning log cites 269 divergent maps; measuring the live corpus tonight gives 224 over 2791 maps. Not a contradiction -- 269 is place_artifacts.py's 2026-08-29 DEPTH-ONLY audit and 224 is tonight's width-or-depth count under a different resolver -- but the two are not interchangeable, and a proposal built on the borrowed figure would have been arguing from a denominator it never defined. Both numbers are now written down with the denominator attached."
+      ],
+      "files_changed": [
+        "doc/reports/skill_evolution_proposals.json",
+        "doc/reports/improvement_trajectory.json",
+        "doc/reports/breath_log.json"
+      ],
+      "duration_minutes": 22
+    },
+    {
+      "breath_id": "2026-09-02T18:55",
+      "mode": "evolve-only",
+      "head_at_harvest": "3aeb773c4",
+      "baseline_avg": 6.091,
+      "post_avg": 6.091,
+      "delta": 0.0,
+      "tree_at_harvest": {
+        "dirty": 795,
+        "untracked": 451
+      },
+      "items_attempted": [
+        "Review today's breath logs -- and find out why there are none, given a 09:04 baseline exists",
+        "Decide whether 'a breath left a baseline and no harvest' clears the 3-occurrence bar, by counting it rather than asserting it",
+        "Verify the 09:04 baseline's claims against HEAD after 33 commits landed on top of them (prop-030)",
+        "Re-measure the pipeline lever unpiped, exit code read directly (prop-017)",
+        "Duplicate-check every candidate pattern against all 46 existing proposals before writing a 47th",
+        "Update improvement_trajectory.json"
+      ],
+      "items_succeeded": [
+        "today-has-NO-breath_log-entry-despite-baseline_2026-09-02_09-04.json-written-at-09:09-the-morning-full-breath-never-reached-Harvest",
+        "counted-not-asserted-48-baseline-files-vs-103-logged-breaths-3-baselines-have-no-same-date-log-entry",
+        "TWO-OF-THE-THREE-ARE-EXPLAINED-2026-05-04-and-2026-05-11-are-recorded-in-weekly_breath_report-of-the-same-date-a-DIFFERENT-LEDGER-no-weekly-report-exists-for-2026-09-02",
+        "so-the-real-count-for-'ran-and-left-no-record-anywhere'-is-1-not-3-BELOW-THE-BAR-no-proposal-written",
+        "pipeline-remeasured-6.091-exit-0-unpiped-NINTH-consecutive-reading-across-33-commits-in-one-day",
+        "release-gates-9/11-HELD-A-E-G-J-PASS-F-and-K-still-the-two-cooled-failures-K-still-4-echo-awaiting-forum-260831-z5s2i",
+        "gateG-saw-the-day's-folds-and-passed-209-maps-1341-placements-vs-231-maps-1322-on-2026-08-31-0-unresolved-both-times",
+        "yesterday's-off-world-repair-SURVIVED-33-commits-UNREACHED-still-0-UNFLOORED-28-to-25",
+        "garden-MOVED-where-the-pipeline-cannot-see-embodiment-23%-to-24%-phantom-limbs-2211-to-2179-voice-75%-flat",
+        "duplicate-check-run-over-all-46-proposals-BOTH-candidate-patterns-already-covered-ceiling-by-prop-003/008/021/039-missing-harvest-by-prop-026/028",
+        "tonight's-evidence-APPENDED-to-prop-003-instead-of-opening-prop-047"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather"
+      ],
+      "discoveries": [
+        "THE BIGGEST WORK DAY IN THE LEDGER'S RECENT HISTORY MOVED THE BREATHER'S STEERING METRIC BY ZERO. 33 commits on 2026-09-02 (seventeen catalyst chambers left the walk, forces folded 16 rooms to 11, the museum grew wall boxes and silhouettes, the hand inventory shipped) and global_avg read 6.091 before and after. This is the ninth consecutive 6.091. It is fresh evidence FOR prop-003, not a new finding.",
+        "THE INSTRUMENT IS NOT MERELY FLAT, IT IS BLIND TO A FOLD. Gate G scanned 209 maps tonight against 231 on 2026-08-31 -- 22 maps left the spine today -- and returned PASS both times with 0 unresolved. A gate that reads the same on either side of a 22-map fold is measuring resolution, not extent. prop-031 asks for exactly this (subject extent in the verdict line) and is unapplied.",
+        "WHERE THE DAY DID SHOW UP: garden embodiment 23% -> 24% and phantom limbs 2211 -> 2179 (-32). The metric that saw today's work is the one prop-003 proposes switching to when every spine sequence sits at stage 6. Nine breaths of corroboration now.",
+        "A MISSING HARVEST IS NOT AUTOMATICALLY A MISSING RECORD. Three baselines lack a same-date log entry; two of the three were harvested into weekly_breath_report_<date>.json instead. Counting baselines against breath_log alone would have reported 3 occurrences and triggered a proposal on a pattern that has 1. The ledger has more than one shelf.",
+        "45 of 46 proposals are still 'proposed'; only prop-039 is 'partially_applied'. The Evolve phase's output queue is now the project's largest unread document, and tonight declining to add a 47th is the only move that does not make it worse."
+      ],
+      "files_changed": [
+        "doc/reports/breath_log.json",
+        "doc/reports/improvement_trajectory.json",
+        "doc/reports/skill_evolution_proposals.json",
+        "doc/reports/RELEASE_GATES.json",
+        "doc/reports/RELEASE_GATES.md"
+      ],
+      "proposals_written": [],
+      "proposals_strengthened": [
+        "prop-003"
+      ],
+      "duration_minutes": 18
+    },
+    {
+      "breath_id": "2026-09-03T09:04",
+      "mode": "full",
+      "baseline_avg": 6.091,
+      "post_avg": 6.091,
+      "delta": 0.0,
+      "items_attempted": [
+        "museum-plan-staleness-forum-260902-r7vso",
+        "em_map_halls-records-when-it-patched",
+        "gate-F-no_route (COOLED, skipped)",
+        "gate-K-4-echo (COOLED, blocked on 260831-z5s2i)"
+      ],
+      "items_succeeded": [
+        "plan-vs-map-divergence-MEASURED-3-of-152-not-the-corpus-wide-rot-the-thread-implied",
+        "my-own-detector-was-the-bug-30-halls-became-3-when-I-split-on-#-before-:",
+        "em_plan.json-re-derived-150-halls-22-chapters-0-of-150-now-disagree",
+        "em_bake.py-re-run-150-pearls-1058-placed-1554-refused-328s-exit-0",
+        "152-to-150-rows-EXPLAINED-not-waved-past-3aeb773c4-took-two-chambers-out-of-the-walk",
+        "_map_halls-stamp-added-additive-_spine_run.at-preserved-trial-mode-leaves-live-untouched",
+        "release-gates-9/11-HELD-no-regression-from-the-plan-rewrite",
+        "forum-260902-r7vso-answered-with-the-corrected-numbers-and-the-parser-trap"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "A STANDING FORUM CLAIM WAS TRUE OF THREE HALLS AND WRITTEN AS IF TRUE OF THE CORPUS. 260902-r7vso said the museum shows a 21 August snapshot and 'anyone who has edited a map since 21 August has been looking at an August snapshot'. Measured cell-by-cell against map_data.json: 149 of 152 halls already AGREED with their maps. The three that did not were the transformation maps edited the day before. The stamp was old and the CONTENT was current, because almost nothing had changed under it. A derived file's date bounds how stale it CAN be, never how stale it IS -- only comparing it to its source says that.",
+        "MY OWN FIRST MEASUREMENT SAID 30 AND WAS WRONG, AND THE SHAPE OF THE ERROR IS REUSABLE. I took the token from an interactables cell by splitting on ':' -- but the #key:number shorthand comes FIRST, so 'pusher_block#axis:z#distance:3' yielded 'pusher_block#axis' and every configured artifact in the corpus reported TOKEN-ABSENT. It failed in the direction of alarm: 30 broken halls, mostly maps nobody had touched. Split on '#' before ':'. The tell was that TOKEN-ABSENT clustered on maps with no recent commits.",
+        "THE BAKE MERGES INTO ITS OWN OUTPUT, SO A COUNT THAT MATCHES CAN STILL BE WRONG. em_bake.json holds 150 segments and the plan holds 150 rows, which reads as complete. They are not the same 150: 'primitives|primitives melencolia' is in the plan with no segment, and 'array_tutorial|trans introduction' is a segment from a chapter dissolved 2026-08-24, holding transformation artifacts. The museum emitted no array_tutorial segment this run (checked the 465k-line log), so the writer merges rather than replaces. 149 fresh + 1 fossil = a clean-looking 150, with one live hall unbaked and therefore measured at runtime -- the desktop-vs-headset divergence the bake exists to prevent. Compare the bake's KEYS to the plan's keys; never the counts.",
+        "THE PLAN CARRIED A DATE FOR THE DEAL AND NONE FOR THE PATCH, AND THE MISSING ONE IS WHAT PEOPLE READ. em_map_halls.py --apply rewrites up to 150 rows and never touched _spine_run.at, so a freshly patched plan still announced 21 August. That silence is what generated the thread. Fixed additively -- a _map_halls block says when the patch ran and what it covered, _spine_run.at still records which spine_run dealt the halls, em_bake.py --check still reads the old key. When one field is doing two jobs, add the second field; do not overwrite the first.",
+        "THE PIPELINE READ 6.091 FOR THE TENTH CONSECUTIVE BREATH WHILE THE MUSEUM MOVED. 21 of 22 sequences sit at stage 6 (vr_testing), which needs a human in a headset, so no agent action can move the number. The metrics that saw today's work were the gate set (9/11 held across a full plan rewrite -- evidence of no regression) and the plan-vs-map divergence count (3 -> 0). prop-003 already proposes switching the steering metric; this is its tenth data point."
+      ],
+      "files_changed": [
+        "tools/em_map_halls.py",
+        "ada_run/em_plan.json",
+        "ada_run/em_bake.json",
+        "doc/reports/RELEASE_GATES.json",
+        "doc/reports/RELEASE_GATES.md",
+        "doc/reports/breath_baseline_2026-09-03_09-04.json"
+      ],
+      "commits": [
+        "755b0447a"
+      ],
+      "duration_minutes": 32
     }
   ]
 }
