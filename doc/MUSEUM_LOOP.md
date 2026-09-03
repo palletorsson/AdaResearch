@@ -106,7 +106,7 @@ Not everywhere. Measured over four waves on 2026-09-02 and 03:
 | 1, 2, and the read behind 7 | **yes, heavily** | reading every placed artifact's script and scene is the expensive, parallel, high-yield half |
 | 9 gate | no | a tool |
 
-The rule that came out of it: **agents read and check; one hand writes.**
+The rule that came out of it: **agents read and check; one hand writes** — corrected 2026-09-03 to **one hand writes, AFTER the readers land, with the checklist.** What failed was never the single hand. It was the hand starting early, and this document already carries the measurement: five of five rooms written before their readers landed were wrong about something a visitor would notice.
 
 ## What the loop turned out to be, after running it once end to end
 
@@ -172,6 +172,100 @@ what a visitor meets, in what sequence, entering the way the museum enters.
 Adding it found that Act5's four spoken truths arrive backwards — and then the
 cross-check found something worse, that the museum drops them entirely. 163 of
 185 halls walk row 0 to row H-1; 121 are narrower than their own doorways.
+
+### PROBE is a verb, not a step
+
+Another session read this doc after running the loop on the transformation
+chapter and made five corrections, all of which hold. The first is that the ten
+steps have no probe in them, and the repo has **286 files matching
+`commons/testing/probe_*.gd`**. Fifteen were written across two sessions on
+2026-09-03 alone. A practice that large with no place in the loop is not an
+omission, it is evidence the loop is drawn wrong.
+
+But it does not go between Shoot and Write, because it does not go anywhere.
+Putting it at one position repeats the mistake the section above just corrected:
+two different things drawn as one because they share a name. On Act5 it ran in
+three places and did three jobs.
+
+| when | what it was for | example |
+|---|---|---|
+| BEFORE placing anything | validate an INSTRUMENT another step will trust | `probe_yaw_span.gd` checked the footprint maths against the engine on all four yaws, because `map_plan` and `stamp` both build on it |
+| before writing | test BEHAVIOUR, which no still can show | `probe_act5_controls.gd`: a dead yaw fader and a weightless probe, both invisible in a capture |
+| after fixing | prove the FIX from the engine, not from arithmetic | `probe_act5_reach.gd`: origin 0.55 OUTSIDE, origin 0.50 INSIDE |
+
+So the rule is positional in a different sense. **Any step whose output another
+step will trust must be probed before that trust is extended.** The capture
+pipeline is exempt only because looking is its own check.
+
+And the doc's older line, that every wrong claim in this project came from
+reasoning about a room instead of looking at it, is now half true and should be
+read as half. A capture would not have shown a single one of Act5's three
+faults, nor the transformation chapter's ferry running with nobody aboard, nor a
+walker pacing four times its token. Those came from reasoning instead of
+**reading the code**, and the answer to them is a probe with a known answer and
+a negative case.
+
+### The reader's four traps are ONE trap
+
+The same session asks for a checklist for the read, and gives four: the scene
+overrides the script's exports; a `#key:value` reaches the artifact only if the
+key is in the config allow-list, and otherwise becomes a yaw in silence; config
+arrives deferred, so whatever `_ready` bakes ignores the token; and how the
+visitor meets a thing is a fact about its code, not about its registry entry.
+
+All four are real and each has been paid for twice. But they are four faces of
+one thing: **the declaration and the runtime disagree.** That is this document's
+own finding about disagreement between instruments, one level down, inside a
+single artifact.
+
+Naming it once is worth more than listing four, because the list goes stale the
+moment a fifth appears and the name predicts the fifth. Act5 produced one the
+same day: the registry calls `invisible_hill` "the Force-field hero, elevating
+force_field_zone", and the artifact's code contains no reference to
+force_field_zone, to its group, to the player or to the map. Nothing in the four
+would have caught that. The name does.
+
+So the brief for a reader is one sentence with four worked examples under it:
+**find every place this artifact's declarations and its running code disagree,
+and say which one ships.**
+
+### The museum column is not a column, it is a doubt about the whole sweep
+
+The third correction asks for a column recording whether the hall builds what
+the map says, and a parity probe per utility code inside the three-second sweep.
+`commons/testing/probe_transport_cube_parity.gd` already exists and keeps the
+old rule alive as its negative test, so the pattern is proven.
+
+It is worse than a missing column. Measured: `tools/coherence.py`,
+`tools/stamp.py` and `tools/argument_shape.py` contain **zero** references to
+`em_plan`, `em_bake`, `endless_museum` or `em_layout`. The entire fast loop
+reads the MAP. The museum builds a dealt hall through its own copies of the
+grid's rules, and copies drift:
+
+- `_widen_doors` converts a flanking wall cell to floor for every one-cell door
+- `_authored_passages` carves rows 0 and H-1 when they carry no open cell
+- `UTIL_ALLOWED` is six codes, so `sub`, `an` and `t` are dropped entirely
+- `tc:1:auto:auto` crossed +X in the grid and +Z in the museum for a month,
+  across 425 cells
+
+So when this document says 121 of 185 halls are narrower than their own
+doorways, that is a fact about the maps and it is **not known** to be a fact
+about the museum. 152 halls are dealt. Every number the fast loop prints
+inherits that doubt until a parity probe per utility retires it.
+
+Two sessions found this class independently on the same day, from opposite
+ends — one from a transport cube crossing the wrong axis, one from a room's four
+spoken truths being deleted rather than reordered. Independent discovery of one
+class by two instruments is the strongest evidence this document has a name for.
+
+### One caution on the delta
+
+Printing what changed since the last run, rather than 185 rows every time, is
+right and cheap. But the fast loop has no memory, so a delta needs a stored
+baseline, and this project's record with derived files is poor enough that the
+`/long-museum` incident is in CLAUDE.md. **Commit the baseline and have the same
+tool regenerate it**, or the delta becomes one more cache that drifts and is
+believed.
 
 ## The toolchain — what each step actually runs
 
