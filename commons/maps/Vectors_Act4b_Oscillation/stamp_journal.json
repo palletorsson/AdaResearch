@@ -1,0 +1,155 @@
+{
+ "_readme": "Every cell stamp.py has changed in this map, oldest first. Each op carries the literal it replaced, so a revision can be replayed backwards: python tools/stamp.py --map=Vectors_Act4b_Oscillation --revert",
+ "map": "Vectors_Act4b_Oscillation",
+ "revisions": [
+  {
+   "tool": "stamp.py",
+   "op": "stamp",
+   "lane_before": null,
+   "lane_after": null,
+   "carved": 3,
+   "displaced": 3,
+   "revision": 1,
+   "ops": [
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      10,
+      3
+     ],
+     "token": "1",
+     "literal": "\"1\"",
+     "expect": "w",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       10,
+       3
+      ],
+      "token": "w",
+      "literal": "\"w\""
+     },
+     "because": "mass_spring_damper",
+     "why": "carved so mass_spring_damper has its floor"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      6,
+      4
+     ],
+     "token": "w",
+     "literal": "\"w\"",
+     "expect": "1",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       6,
+       4
+      ],
+      "token": "1",
+      "literal": "\"1\""
+     },
+     "because": "mass_spring_damper",
+     "why": "the wall carved at r3 c10, moved not deleted"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      6,
+      7
+     ],
+     "token": "1",
+     "literal": "\"1\"",
+     "expect": "w",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       6,
+       7
+      ],
+      "token": "w",
+      "literal": "\"w\""
+     },
+     "because": "pendulum_hall",
+     "why": "carved so pendulum_hall has its floor"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      6,
+      6
+     ],
+     "token": "w",
+     "literal": "\"w\"",
+     "expect": "1",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       6,
+       6
+      ],
+      "token": "1",
+      "literal": "\"1\""
+     },
+     "because": "pendulum_hall",
+     "why": "the wall carved at r7 c6, moved not deleted"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      10,
+      7
+     ],
+     "token": "1",
+     "literal": "\"1\"",
+     "expect": "w",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       10,
+       7
+      ],
+      "token": "w",
+      "literal": "\"w\""
+     },
+     "because": "pendulum_hall",
+     "why": "carved so pendulum_hall has its floor"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      5,
+      7
+     ],
+     "token": "w",
+     "literal": "\"w\"",
+     "expect": "1",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       5,
+       7
+      ],
+      "token": "1",
+      "literal": "\"1\""
+     },
+     "because": "pendulum_hall",
+     "why": "the wall carved at r7 c10, moved not deleted"
+    }
+   ]
+  }
+ ]
+}

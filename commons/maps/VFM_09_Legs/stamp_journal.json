@@ -1,0 +1,385 @@
+{
+ "_readme": "Every cell stamp.py has changed in this map, oldest first. Each op carries the literal it replaced, so a revision can be replayed backwards: python tools/stamp.py --map=VFM_09_Legs --revert",
+ "map": "VFM_09_Legs",
+ "revisions": [
+  {
+   "tool": "stamp.py",
+   "op": "stamp",
+   "lane_before": 2,
+   "lane_after": 2,
+   "carved": 8,
+   "displaced": 8,
+   "revision": 1,
+   "ops": [
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      14,
+      7
+     ],
+     "token": "1",
+     "literal": "\"1\"",
+     "expect": "w",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       14,
+       7
+      ],
+      "token": "w",
+      "literal": "\"w\""
+     },
+     "because": "four_leg_critter",
+     "why": "carved so four_leg_critter has its floor"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      14,
+      2
+     ],
+     "token": "w",
+     "literal": "\"w\"",
+     "expect": "1",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       14,
+       2
+      ],
+      "token": "1",
+      "literal": "\"1\""
+     },
+     "because": "four_leg_critter",
+     "why": "the wall carved at r7 c14, moved not deleted"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      14,
+      11
+     ],
+     "token": "1",
+     "literal": "\"1\"",
+     "expect": "w",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       14,
+       11
+      ],
+      "token": "w",
+      "literal": "\"w\""
+     },
+     "because": "four_leg_critter",
+     "why": "carved so four_leg_critter has its floor"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      14,
+      12
+     ],
+     "token": "w",
+     "literal": "\"w\"",
+     "expect": "1",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       14,
+       12
+      ],
+      "token": "1",
+      "literal": "\"1\""
+     },
+     "because": "four_leg_critter",
+     "why": "the wall carved at r11 c14, moved not deleted"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      18,
+      7
+     ],
+     "token": "1",
+     "literal": "\"1\"",
+     "expect": "w",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       18,
+       7
+      ],
+      "token": "w",
+      "literal": "\"w\""
+     },
+     "because": "five_leg_critter",
+     "why": "carved so five_leg_critter has its floor"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      18,
+      2
+     ],
+     "token": "w",
+     "literal": "\"w\"",
+     "expect": "1",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       18,
+       2
+      ],
+      "token": "1",
+      "literal": "\"1\""
+     },
+     "because": "five_leg_critter",
+     "why": "the wall carved at r7 c18, moved not deleted"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      18,
+      11
+     ],
+     "token": "1",
+     "literal": "\"1\"",
+     "expect": "w",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       18,
+       11
+      ],
+      "token": "w",
+      "literal": "\"w\""
+     },
+     "because": "five_leg_critter",
+     "why": "carved so five_leg_critter has its floor"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      18,
+      12
+     ],
+     "token": "w",
+     "literal": "\"w\"",
+     "expect": "1",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       18,
+       12
+      ],
+      "token": "1",
+      "literal": "\"1\""
+     },
+     "because": "five_leg_critter",
+     "why": "the wall carved at r11 c18, moved not deleted"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      22,
+      7
+     ],
+     "token": "1",
+     "literal": "\"1\"",
+     "expect": "w",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       22,
+       7
+      ],
+      "token": "w",
+      "literal": "\"w\""
+     },
+     "because": "six_leg_critter",
+     "why": "carved so six_leg_critter has its floor"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      22,
+      4
+     ],
+     "token": "w",
+     "literal": "\"w\"",
+     "expect": "1",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       22,
+       4
+      ],
+      "token": "1",
+      "literal": "\"1\""
+     },
+     "because": "six_leg_critter",
+     "why": "the wall carved at r7 c22, moved not deleted"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      22,
+      11
+     ],
+     "token": "1",
+     "literal": "\"1\"",
+     "expect": "w",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       22,
+       11
+      ],
+      "token": "w",
+      "literal": "\"w\""
+     },
+     "because": "six_leg_critter",
+     "why": "carved so six_leg_critter has its floor"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      22,
+      12
+     ],
+     "token": "w",
+     "literal": "\"w\"",
+     "expect": "1",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       22,
+       12
+      ],
+      "token": "1",
+      "literal": "\"1\""
+     },
+     "because": "six_leg_critter",
+     "why": "the wall carved at r11 c22, moved not deleted"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      10,
+      7
+     ],
+     "token": "1",
+     "literal": "\"1\"",
+     "expect": "w",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       10,
+       7
+      ],
+      "token": "w",
+      "literal": "\"w\""
+     },
+     "because": "three_leg_critter",
+     "why": "carved so three_leg_critter has its floor"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      9,
+      7
+     ],
+     "token": "w",
+     "literal": "\"w\"",
+     "expect": "1",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       9,
+       7
+      ],
+      "token": "1",
+      "literal": "\"1\""
+     },
+     "because": "three_leg_critter",
+     "why": "the wall carved at r7 c10, moved not deleted"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      10,
+      11
+     ],
+     "token": "1",
+     "literal": "\"1\"",
+     "expect": "w",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       10,
+       11
+      ],
+      "token": "w",
+      "literal": "\"w\""
+     },
+     "because": "three_leg_critter",
+     "why": "carved so three_leg_critter has its floor"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      9,
+      11
+     ],
+     "token": "w",
+     "literal": "\"w\"",
+     "expect": "1",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       9,
+       11
+      ],
+      "token": "1",
+      "literal": "\"1\""
+     },
+     "because": "three_leg_critter",
+     "why": "the wall carved at r11 c10, moved not deleted"
+    }
+   ]
+  }
+ ]
+}

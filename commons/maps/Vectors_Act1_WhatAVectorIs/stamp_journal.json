@@ -1,0 +1,247 @@
+{
+ "_readme": "Every cell stamp.py has changed in this map, oldest first. Each op carries the literal it replaced, so a revision can be replayed backwards: python tools/stamp.py --map=Vectors_Act1_WhatAVectorIs --revert",
+ "map": "Vectors_Act1_WhatAVectorIs",
+ "revisions": [
+  {
+   "tool": "stamp.py",
+   "op": "stamp",
+   "lane_before": null,
+   "lane_after": null,
+   "carved": 5,
+   "displaced": 5,
+   "revision": 1,
+   "ops": [
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      10,
+      3
+     ],
+     "token": "1",
+     "literal": "\"1\"",
+     "expect": "w",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       10,
+       3
+      ],
+      "token": "w",
+      "literal": "\"w\""
+     },
+     "because": "route_vector",
+     "why": "carved so route_vector has its floor"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      10,
+      8
+     ],
+     "token": "w",
+     "literal": "\"w\"",
+     "expect": "1",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       10,
+       8
+      ],
+      "token": "1",
+      "literal": "\"1\""
+     },
+     "because": "route_vector",
+     "why": "the wall carved at r3 c10, moved not deleted"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      6,
+      7
+     ],
+     "token": "1",
+     "literal": "\"1\"",
+     "expect": "w",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       6,
+       7
+      ],
+      "token": "w",
+      "literal": "\"w\""
+     },
+     "because": "route_vector",
+     "why": "carved so route_vector has its floor"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      5,
+      7
+     ],
+     "token": "w",
+     "literal": "\"w\"",
+     "expect": "1",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       5,
+       7
+      ],
+      "token": "1",
+      "literal": "\"1\""
+     },
+     "because": "route_vector",
+     "why": "the wall carved at r7 c6, moved not deleted"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      10,
+      7
+     ],
+     "token": "1",
+     "literal": "\"1\"",
+     "expect": "w",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       10,
+       7
+      ],
+      "token": "w",
+      "literal": "\"w\""
+     },
+     "because": "route_vector",
+     "why": "carved so route_vector has its floor"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      12,
+      8
+     ],
+     "token": "w",
+     "literal": "\"w\"",
+     "expect": "1",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       12,
+       8
+      ],
+      "token": "1",
+      "literal": "\"1\""
+     },
+     "because": "route_vector",
+     "why": "the wall carved at r7 c10, moved not deleted"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      4,
+      8
+     ],
+     "token": "1",
+     "literal": "\"1\"",
+     "expect": "2",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       4,
+       8
+      ],
+      "token": "2",
+      "literal": "\"2\""
+     },
+     "because": "VectorBasics",
+     "why": "carved so VectorBasics has its floor"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      1,
+      7
+     ],
+     "token": "2",
+     "literal": "\"2\"",
+     "expect": "1",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       1,
+       7
+      ],
+      "token": "1",
+      "literal": "\"1\""
+     },
+     "because": "VectorBasics",
+     "why": "the wall carved at r8 c4, moved not deleted"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      6,
+      14
+     ],
+     "token": "1",
+     "literal": "\"1\"",
+     "expect": "2",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       6,
+       14
+      ],
+      "token": "2",
+      "literal": "\"2\""
+     },
+     "because": "vector_normalize_demo",
+     "why": "carved so vector_normalize_demo has its floor"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      1,
+      15
+     ],
+     "token": "2",
+     "literal": "\"2\"",
+     "expect": "1",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       1,
+       15
+      ],
+      "token": "1",
+      "literal": "\"1\""
+     },
+     "because": "vector_normalize_demo",
+     "why": "the wall carved at r14 c6, moved not deleted"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,477 @@
+{
+ "_readme": "Every cell stamp.py has changed in this map, oldest first. Each op carries the literal it replaced, so a revision can be replayed backwards: python tools/stamp.py --map=Vectors_Act4a_KineticForces --revert",
+ "map": "Vectors_Act4a_KineticForces",
+ "revisions": [
+  {
+   "tool": "stamp.py",
+   "op": "stamp",
+   "lane_before": 3,
+   "lane_after": 3,
+   "carved": 10,
+   "displaced": 10,
+   "revision": 1,
+   "ops": [
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      6,
+      7
+     ],
+     "token": "1",
+     "literal": "\"1\"",
+     "expect": "w",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       6,
+       7
+      ],
+      "token": "w",
+      "literal": "\"w\""
+     },
+     "because": "centrifuge_ring",
+     "why": "carved so centrifuge_ring has its floor"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      1,
+      7
+     ],
+     "token": "w",
+     "literal": "\"w\"",
+     "expect": "1",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       1,
+       7
+      ],
+      "token": "1",
+      "literal": "\"1\""
+     },
+     "because": "centrifuge_ring",
+     "why": "the wall carved at r7 c6, moved not deleted"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      6,
+      11
+     ],
+     "token": "1",
+     "literal": "\"1\"",
+     "expect": "w",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       6,
+       11
+      ],
+      "token": "w",
+      "literal": "\"w\""
+     },
+     "because": "centrifuge_ring",
+     "why": "carved so centrifuge_ring has its floor"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      6,
+      12
+     ],
+     "token": "w",
+     "literal": "\"w\"",
+     "expect": "1",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       6,
+       12
+      ],
+      "token": "1",
+      "literal": "\"1\""
+     },
+     "because": "centrifuge_ring",
+     "why": "the wall carved at r11 c6, moved not deleted"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      10,
+      11
+     ],
+     "token": "1",
+     "literal": "\"1\"",
+     "expect": "w",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       10,
+       11
+      ],
+      "token": "w",
+      "literal": "\"w\""
+     },
+     "because": "centrifuge_ring",
+     "why": "carved so centrifuge_ring has its floor"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      10,
+      14
+     ],
+     "token": "w",
+     "literal": "\"w\"",
+     "expect": "1",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       10,
+       14
+      ],
+      "token": "1",
+      "literal": "\"1\""
+     },
+     "because": "centrifuge_ring",
+     "why": "the wall carved at r11 c10, moved not deleted"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      18,
+      7
+     ],
+     "token": "1",
+     "literal": "\"1\"",
+     "expect": "w",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       18,
+       7
+      ],
+      "token": "w",
+      "literal": "\"w\""
+     },
+     "because": "orbit_walk",
+     "why": "carved so orbit_walk has its floor"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      18,
+      4
+     ],
+     "token": "w",
+     "literal": "\"w\"",
+     "expect": "1",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       18,
+       4
+      ],
+      "token": "1",
+      "literal": "\"1\""
+     },
+     "because": "orbit_walk",
+     "why": "the wall carved at r7 c18, moved not deleted"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      18,
+      11
+     ],
+     "token": "1",
+     "literal": "\"1\"",
+     "expect": "w",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       18,
+       11
+      ],
+      "token": "w",
+      "literal": "\"w\""
+     },
+     "because": "orbit_walk",
+     "why": "carved so orbit_walk has its floor"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      18,
+      12
+     ],
+     "token": "w",
+     "literal": "\"w\"",
+     "expect": "1",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       18,
+       12
+      ],
+      "token": "1",
+      "literal": "\"1\""
+     },
+     "because": "orbit_walk",
+     "why": "the wall carved at r11 c18, moved not deleted"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      22,
+      11
+     ],
+     "token": "1",
+     "literal": "\"1\"",
+     "expect": "w",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       22,
+       11
+      ],
+      "token": "w",
+      "literal": "\"w\""
+     },
+     "because": "orbit_walk",
+     "why": "carved so orbit_walk has its floor"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      25,
+      11
+     ],
+     "token": "w",
+     "literal": "\"w\"",
+     "expect": "1",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       25,
+       11
+      ],
+      "token": "1",
+      "literal": "\"1\""
+     },
+     "because": "orbit_walk",
+     "why": "the wall carved at r11 c22, moved not deleted"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      29,
+      20
+     ],
+     "token": "1",
+     "literal": "\"1\"",
+     "expect": "w",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       29,
+       20
+      ],
+      "token": "w",
+      "literal": "\"w\""
+     },
+     "because": "drag_corridor",
+     "why": "carved so drag_corridor has its floor"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      28,
+      18
+     ],
+     "token": "w",
+     "literal": "\"w\"",
+     "expect": "1",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       28,
+       18
+      ],
+      "token": "1",
+      "literal": "\"1\""
+     },
+     "because": "drag_corridor",
+     "why": "the wall carved at r20 c29, moved not deleted"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      29,
+      21
+     ],
+     "token": "1",
+     "literal": "\"1\"",
+     "expect": "w",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       29,
+       21
+      ],
+      "token": "w",
+      "literal": "\"w\""
+     },
+     "because": "drag_corridor",
+     "why": "carved so drag_corridor has its floor"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      27,
+      19
+     ],
+     "token": "w",
+     "literal": "\"w\"",
+     "expect": "1",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       27,
+       19
+      ],
+      "token": "1",
+      "literal": "\"1\""
+     },
+     "because": "drag_corridor",
+     "why": "the wall carved at r21 c29, moved not deleted"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      29,
+      22
+     ],
+     "token": "1",
+     "literal": "\"1\"",
+     "expect": "w",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       29,
+       22
+      ],
+      "token": "w",
+      "literal": "\"w\""
+     },
+     "because": "drag_corridor",
+     "why": "carved so drag_corridor has its floor"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      28,
+      24
+     ],
+     "token": "w",
+     "literal": "\"w\"",
+     "expect": "1",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       28,
+       24
+      ],
+      "token": "1",
+      "literal": "\"1\""
+     },
+     "because": "drag_corridor",
+     "why": "the wall carved at r22 c29, moved not deleted"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      0,
+      1
+     ],
+     "token": "1",
+     "literal": "\"1\"",
+     "expect": "w",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       0,
+       1
+      ],
+      "token": "w",
+      "literal": "\"w\""
+     },
+     "because": "wedge_slide",
+     "why": "carved so wedge_slide has its floor"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      1,
+      2
+     ],
+     "token": "w",
+     "literal": "\"w\"",
+     "expect": "1",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       1,
+       2
+      ],
+      "token": "1",
+      "literal": "\"1\""
+     },
+     "because": "wedge_slide",
+     "why": "the wall carved at r1 c0, moved not deleted"
+    }
+   ]
+  }
+ ]
+}
