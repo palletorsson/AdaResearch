@@ -112,6 +112,27 @@
       "principle": "Displacing an obstacle to the nearest free cell does not move it, it duplicates the problem somewhere less expected.",
       "why": "The first displacement rule put four carved walls on the nearest floor cells, which were in the walkway: reachable floor fell from 20 cells to 8 and the teleporter went dark. Ranking candidates by how many wall neighbours they already have - filling a notch rather than making an island - fixed it, and the gate caught the fault before a single byte was written.",
       "use": "A relocation rule needs a notion of where the thing BELONGS, not just where there is room."
+    },
+    {
+      "id": "an-older-idea-stated-precisely",
+      "won": "2026-09-03, the min-cut gate",
+      "principle": "When a measurement cannot tell apart two situations you care about, do not reach for a better heuristic. Look for the older idea that answers the question exactly.",
+      "why": "Erosion measured corridor width by sampling one route, and could not distinguish a hall as wide as its own doorway - correct - from a hall choking to one cell in the middle - a fault. Both read 'lane 1', for 91 halls. Menger's theorem, 1927, counts vertex-disjoint routes AND names the cells that limit them, in one computation. It turned a score into a cell reference, and the corpus reading from 'most halls are tight' into '121 of 185 are narrower than their own doors, and here is where'.",
+      "use": "Ask what the exact question is before improving the approximate answer."
+    },
+    {
+      "id": "never-classify-on-a-non-unique-witness",
+      "won": "2026-09-03, cross-checking against networkx",
+      "principle": "If two correct implementations can return different witnesses for the same answer, never build a verdict on the witness.",
+      "why": "A minimum cut is not unique. Checked on eleven halls, the flow VALUE agreed 11 of 11 and the cut CELLS agreed on none - mine returns the cut nearest the source, networkx one nearest the sink. My first classifier asked 'is the cut at a doorway?' and was therefore quietly wrong about every hall it happened to see from the wrong end. The fix was to classify on the COUNT against the doorway width, which no choice of cut can move.",
+      "use": "Cross-check a new algorithm against a reference and compare more than the headline number. Agreement on the answer with disagreement on the witness is the signal."
+    },
+    {
+      "id": "a-tool-is-answerable-for-what-it-changes",
+      "won": "2026-09-03, --width on the forces run",
+      "principle": "Gate on the delta, not on the absolute. A threshold refuses the world as it is.",
+      "why": "--width=2 as a hard floor refused three of three test maps for a pinch that predated the stamp, and would have refused most of the museum: 67 halls already admit exactly one route. As a ratchet - it may not get worse - the same flag lets 8 of 11 forces halls through while still catching every regression.",
+      "use": "Before writing an absolute gate, measure how much of the corpus already fails it."
     }
   ]
 }
