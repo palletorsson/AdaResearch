@@ -49,6 +49,13 @@
    "principle": "Before placing anything, check how many artifacts already in the room have NO measured aabb. An unmeasured artifact is an unbounded one.",
    "why": "The capture of Symmetry_Seventeen shows a tiled plane running out past the map edge into the dark, far larger than the 13 x 22 m room. Nothing in the measured list is bigger than the room - because the offender is not measured at all. Five of the room's fourteen artifacts have no aabb in the registry (loom_alhambra_p6m, loom_escher_mirror, mill_alhambra_p6m, mill_persian_p4, mill_escher_p4g) and two more measure 0 x 0 x 0 (wall_pattern_gallery, pattern_artifact). The registry's measurement is the only guard the grid has against a room-swallowing object, and for half this room there is no guard. This is why step 5 cannot be skipped: the data said the room was fine.",
    "test": "shelf.py carries each aabb; count the None and the [0,0,0] before trusting a room's footprint."
+  },
+  {
+   "id": "draw-the-plan-before-you-shoot-the-room",
+   "won": "2026-09-03, from Palle looking at the Symmetry_Seventeen iso capture",
+   "principle": "To judge placement, draw the plan. Shoot the render only to judge what it LOOKS like.",
+   "why": "A capture is a photograph of a world: biome, sky, grass, lighting, and a camera angle that decides what you can see. None of that helps you judge whether a body is where it should be. tools/map_plan.py draws the same room as an architectural plan from map_data.json plus the measured footprints in doc/shelf.json - walls solid, void dashed, every body at its real size, red where the footprint leaves the room, hatched where the artifact has no measurement. It runs in a second, needs no Godot and no agents, and on its first three rooms it independently reproduced findings that had cost a full reader wave: Descent's 20 m terrain in a 14 m room, four overruns in KochSierpinski, seven unmeasured bodies in Symmetry_Seventeen. The two views answer different questions and the plan is the cheaper one, so it goes first.",
+   "test": "map_plan.py --seq=<chapter> prints overrun / unmeasured / over-void counts per room."
   }
  ]
 }
