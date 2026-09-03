@@ -236,10 +236,27 @@ func _physics_process(delta: float) -> void:
 		pb.velocity += (f - pg) * delta
 
 
+## The FLOOR of a volume belongs to the volume.
+##
+## A body standing on the base of this cube has its feet at local y of exactly
+## -h, and `absf(local.y) < h` excluded it by precisely zero. In
+## Vectors_Act5_ForceAsPlace that made the crossing the hall is named for
+## impossible to take on foot: the visitor could aim the field correctly, walk
+## to it, stand under five metres of it, and not be in it.
+##
+## So the vertical test is inclusive at the base, with a couple of centimetres
+## for the gap a character controller leaves between its feet and the ground.
+## x and z stay strict, because a body against a side face is beside the field
+## rather than in it.
+const FLOOR_TOLERANCE_M := 0.02
+
+
 func _point_inside(world_pos: Vector3) -> bool:
 	var local: Vector3 = to_local(world_pos) - Vector3(0, size * 0.5, 0)
 	var h := size * 0.5
-	return absf(local.x) < h and absf(local.y) < h and absf(local.z) < h
+	return absf(local.x) < h \
+		and local.y >= -h - FLOOR_TOLERANCE_M and local.y <= h \
+		and absf(local.z) < h
 
 
 # The "player_body" group can hold the XROrigin3D (a plain Node3D, no .velocity) rather

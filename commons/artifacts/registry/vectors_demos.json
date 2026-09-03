@@ -2824,10 +2824,11 @@
 		},
 		"force_field_zone": {
 			"lookup_name": "force_field_zone",
+			"auto_ground": false,
 			"scene": "res://commons/artifacts/force_field_zone/force_field_zone.tscn",
 			"class_name": "ForceFieldZone",
 			"name": "Force Field Zone (a force made into a place)",
-			"description": "A 4 m cube of space where one vector replaces gravity. Throw a cube in - or step in yourself - and inside the field the only force is field_vector: point it down and everything falls into the void below; point it up-and-across and the same cube (and the same player) is carried to the far side. RigidBodies inside get gravity_scale 0 and velocity += field\u00b7dt; the player_body gets velocity += (field \u2212 its gravity)\u00b7dt. The wireframe cube, the grid of field-line arrows and the central vector show which way the world pushes. Driven by the vector_machine via group 'force_field'.",
+			"description": "A 5 m cube of space where one vector replaces gravity. Throw a cube in - or step in yourself - and inside the field the only force is field_vector: point it down and everything falls into the void below; point it up-and-across and the same cube (and the same player) is carried to the far side. RigidBodies inside get gravity_scale 0 and velocity += field\u00b7dt; the player_body gets velocity += (field \u2212 its gravity)\u00b7dt. The wireframe cube, the grid of field-line arrows and the central vector show which way the world pushes. Driven by the vector_machine via group 'force_field'.",
 			"category": "vectors",
 			"complexity": "advanced",
 			"include_in_map_data": true,

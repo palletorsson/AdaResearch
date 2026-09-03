@@ -137,6 +137,27 @@ def yaw_of(raw: str) -> int:
         return 0
 
 
+def scale_of(raw: str) -> float:
+    """The uniform scale a placement applies, from either spelling."""
+    head = raw.split("#")[0].split(":")
+    if len(head) >= 4:
+        try:
+            v = float(head[3])
+            if v > 0.0:
+                return v
+        except ValueError:
+            pass
+    for part in raw.split("#")[1:]:
+        if part.startswith("scale:"):
+            try:
+                v = float(part.split(":", 1)[1].split("#")[0])
+                if v > 0.0:
+                    return v
+            except ValueError:
+                pass
+    return 1.0
+
+
 def span_of(tok: str, raw: str, r: int, c: int, shelf: dict):
     """Cell-space (x0, x1, z0, z1) for a placed body, or None if unmeasured.
 
@@ -154,6 +175,15 @@ def span_of(tok: str, raw: str, r: int, c: int, shelf: dict):
     # aabb_size is [x, HEIGHT, z] - the middle value is height, not depth.
     w, d = float(a[0]), float(a[2])
     dx, dz = float(cen[0]), float(cen[2])
+    # A PLACEMENT MAY SCALE THE BODY, and ignoring that reports a footprint the
+    # room does not contain. Two spellings: the fourth part of a token
+    # (name:rot:y:scale) and the config key #scale:S. free_vector went into
+    # Act5 at 0.7 because nothing fits there at 1.0, and this function called it
+    # twelve cells deep in a wall until it learned to read the number.
+    sc = scale_of(raw)
+    if sc != 1.0:
+        w, d = w * sc, d * sc
+        dx, dz = dx * sc, dz * sc
     y = yaw_of(raw)
     if y == 90:
         w, d = d, w
