@@ -134,7 +134,7 @@ key unless the row says so.
 | `tools/coherence.py` | (no args) | one row per room, one column per modality — CLAIM · BODIES · SEEN · TEXT · SPACE · VARY — each gap naming its next action |
 | `tools/map_pathfinder.py` | `check <Map> --verbose` | can the player get there. **Has one error rule** — "pathfinder OK" is not evidence of much |
 | `tools/walk_evaluator.py` | `--map=X` | detour ratio, encounter order, backtracking |
-| `tools/stamp.py` | *(being built)* | seat every body: carve and **displace** walls, journal it reversibly, seed the room shape from a typology keyed to the argument, keep a walkable corridor |
+| `tools/stamp.py` | `--map=X` · `--apply` · `--width=N` · `--typology` · `--revert` | seat every body. Carves wall cells a body needs and **displaces** the literal it carved rather than deleting it, so the wall multiset is conserved exactly. Refuses on stranding, on a narrowed lane, or on a body too big for its room. Journals every cell with its pre-image to `stamp_journal.json`, replayable backwards |
 
 **Write and gate the text.**
 

@@ -104,6 +104,17 @@ def build() -> dict:
     for k, v in reg.items():
         sn = v.get("spatial_needs") or {}
         meas = v.get("measurements") or {}
+        # A DELEGATE inherits its target's needs, the same way it inherits its
+        # scene. 47 of the 51 delegates declare no spatial_needs of their own,
+        # and reporting them as "the registry does not say" is wrong when the
+        # body they ARE has said it.
+        dele = v.get("delegate_to")
+        if dele and dele in reg:
+            base = reg[dele]
+            if not sn:
+                sn = base.get("spatial_needs") or {}
+            if not meas:
+                meas = base.get("measurements") or {}
         out[k] = {
             "file": src[k],
             "category": str(v.get("category", "")) or "unknown",
