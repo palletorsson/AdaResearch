@@ -131,8 +131,30 @@ def audit(seq: str, name: str, shelf: dict, triage: dict) -> dict:
                 varied += 1
                 break
 
+    # ROUTE and ORDER, from tools/museum_walk.py - the ONE implementation of the
+    # museum's traversal. The protocol promised these two columns before they
+    # existed, which is the same fault the loop warns about in artifacts: a
+    # declaration ahead of its runtime. ACT (does the thing DO what it says) is
+    # deliberately absent and marked so in the header: behaviour cannot be read
+    # from a map, only from a probe, and the survey is static by design.
+    walks, ways, unreached = True, 0, 0
+    try:
+        import museum_walk as mw
+        ev = mw.evaluate(md)
+        if not ev.get("error"):
+            walks = bool(ev["walks"])
+            ways = int(ev["ways"])
+            step = {cell: i for i, cell in enumerate(ev["route"])}
+            for (r, c) in cells:
+                if not any((r + dr, c + dc) in step
+                           for dr, dc in ((0, 0), (-1, 0), (1, 0), (0, -1), (0, 1))):
+                    unreached += 1
+    except Exception:
+        pass
+
     return {
         "seq": seq, "map": name, "claim": claim,
+        "walks": walks, "ways": ways, "unreachable": unreached,
         "bodies": len(uniq), "seen": seen,
         "text": bool(text), "uncovered": uncovered,
         "over": over, "walled": walled, "void": void, "unmeas": unmeas,
@@ -140,8 +162,105 @@ def audit(seq: str, name: str, shelf: dict, triage: dict) -> dict:
     }
 
 
+# ── ranking ─────────────────────────────────────────────────────────────────
+# This sorted by the COUNT of todos, so a hall nobody can walk through tied with
+# a hall that merely has no wall text. A review caught it on 2026-09-03 and it
+# is the difference between a queue and a list.
+#
+# Rank instead by CONSEQUENCE x UNCERTAINTY x TEST VALUE, the three questions
+# that actually decide what to look at next:
+#
+#   consequence  how bad is this if it is real
+#   uncertainty  how unsure are we that it is real. A fault we have MEASURED is
+#                certain, and certainty lowers the value of looking again - it
+#                is work, not a question. A fault we have INFERRED from a map
+#                while the museum builds through its own copy of the rules is
+#                uncertain, and that is where a cheap test pays.
+#   test value   how much would the next cheap test resolve
+#
+# The weights are stated rather than tuned, so a disagreement about priority is
+# a disagreement about a number in this table and not about taste.
+
+#: (consequence, uncertainty, test value) per fault, each 0-10.
+FAULT_WEIGHTS = {
+    # nobody can get through the hall. The worst thing a room can be, and the
+    # uncertainty is real: this is measured on the MAP, and the museum widens
+    # doors and carves passages through its own copy of the rules.
+    "no_walk":      (10, 6, 9),
+    # a body nobody can reach is not in the exhibition
+    "unreachable":  (8, 4, 8),
+    # an unmeasured body is an UNBOUNDED one: it silently invalidates every
+    # other spatial number for the room, so its test value is the highest here
+    "unmeasured":   (7, 9, 10),
+    # standing over a hole
+    "over_void":    (6, 3, 6),
+    # bigger than the room it stands in
+    "over":         (5, 2, 5),
+    # inside a wall it declares it does not want
+    "walled":       (4, 3, 5),
+    # the room says nothing. Serious, but there is no question here to resolve:
+    # the test value is zero because we already know, and it is work not doubt.
+    "no_text":      (3, 0, 0),
+    # text that does not name a body the room places
+    "uncovered":    (2, 1, 2),
+    # a promoted family met at its shipped default
+    "no_variant":   (1, 1, 1),
+    # no argument at all. Zero rooms are in this state, kept for completeness.
+    "no_claim":     (9, 0, 1),
+}
+
+
+def faults(a: dict) -> dict:
+    """-> {fault: how many}. One place, so the score and the todo agree."""
+    f = {}
+    if not a["claim"]:
+        f["no_claim"] = 1
+    if not a.get("walks", True):
+        f["no_walk"] = 1
+    if a.get("unreachable"):
+        f["unreachable"] = a["unreachable"]
+    if a["unmeas"]:
+        f["unmeasured"] = a["unmeas"]
+    if a["void"]:
+        f["over_void"] = a["void"]
+    if a["over"]:
+        f["over"] = a["over"]
+    if a["walled"]:
+        f["walled"] = a["walled"]
+    if not a["text"]:
+        f["no_text"] = 1
+    elif a["uncovered"]:
+        f["uncovered"] = len(a["uncovered"])
+    if a["promoted"] and not a["varied"]:
+        f["no_variant"] = 1
+    return f
+
+
+def score(a: dict) -> float:
+    """consequence x uncertainty x test value, summed over the room's faults.
+
+    A count is damped by a square root: two unmeasured bodies are worse than
+    one and nothing like twice as bad, because the first measurement pass fixes
+    both. Uncertainty is offset by 1 so a certain fault still scores its
+    consequence rather than vanishing - a hall with no text is real work even
+    though nothing about it is in doubt.
+    """
+    import math
+    total = 0.0
+    for k, n in faults(a).items():
+        c, u, t = FAULT_WEIGHTS.get(k, (1, 1, 1))
+        total += c * (1 + u) * (1 + t) * math.sqrt(n)
+    return round(total, 1)
+
+
 def actions(a: dict) -> list[str]:
     out = []
+    if not a.get("walks", True):
+        out.append("route: the hall does not walk row 0 to row H-1 "
+                   "(museum_walk.py, then stamp.py)")
+    if a.get("unreachable"):
+        out.append("order: %d placement(s) never passed on the museum walk "
+                   "(walk_evaluator.py --as-placed)" % a["unreachable"])
     if not a["claim"]:
         out.append("triage: the room has no argument")
     if a["bodies"] == 0:
@@ -180,7 +299,9 @@ def main() -> int:
     rows = [audit(s, m, shelf, tri) for s, m in rooms]
     for r in rows:
         r["todo"] = actions(r)
-    rows.sort(key=lambda r: (-len(r["todo"]), r["map"]))
+    for r in rows:
+        r["score"] = score(r)
+    rows.sort(key=lambda r: (-r["score"], r["map"]))
 
     if args.queue:
         for r in rows[:args.limit]:
@@ -190,13 +311,18 @@ def main() -> int:
             for t in r["todo"]:
                 print(f"   - {t}")
     else:
-        print(f"{'room':40s} {'claim':5s} {'body':>4s} {'seen':>4s} {'text':4s} "
-              f"{'unwr':>4s} {'over':>4s} {'wall':>4s} {'void':>4s} {'nom':>4s} {'vary':>4s}  next")
+        print("columns: CLAIM BODY SEEN TEXT SPACE ROUTE ORDER. "
+              "ACT (behaviour) is NOT here - it needs a probe, not a map.")
+        print(f"{'room':36s} {'risk':>6s} {'clm':3s} {'body':>4s} {'seen':>4s} {'txt':3s} "
+              f"{'unwr':>4s} {'over':>4s} {'wall':>4s} {'void':>4s} {'nom':>4s} {'vary':>4s} "
+              f"{'walk':4s} {'wys':>3s} {'unrc':>4s}  next")
         for r in rows[:args.limit]:
-            print(f"{r['map'][:40]:40s} {'y' if r['claim'] else '.':5s} "
-                  f"{r['bodies']:4d} {r['seen']:4d} {'y' if r['text'] else '.':4s} "
+            print(f"{r['map'][:36]:36s} {r['score']:6.1f} {'y' if r['claim'] else '.':3s} "
+                  f"{r['bodies']:4d} {r['seen']:4d} {'y' if r['text'] else '.':3s} "
                   f"{len(r['uncovered']):4d} {r['over']:4d} {r['walled']:4d} {r['void']:4d} "
-                  f"{r['unmeas']:4d} {r['varied']:4d}  {r['todo'][0] if r['todo'] else 'clear'}")
+                  f"{r['unmeas']:4d} {r['varied']:4d} "
+                  f"{'y' if r['walks'] else 'NO':4s} {r['ways']:3d} {r['unreachable']:4d}"
+                  f"  {r['todo'][0] if r['todo'] else 'clear'}")
 
     n = len(rows)
     clear = sum(1 for r in rows if not r["todo"])

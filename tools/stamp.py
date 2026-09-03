@@ -103,14 +103,18 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "tools"))
 
 import map_pathfinder as mp  # noqa: E402  - the one faithful reader of a structure cell
+# THE TRAVERSAL LIVES IN ONE PLACE. These were written here first, and a review
+# then found the same rule written differently in tools/walk_evaluator.py. Two
+# implementations of one rule drift - that is the /long-museum incident, which
+# cost a session. tools/museum_walk.py is the home; this imports from it.
+from museum_walk import (  # noqa: E402
+    FLOOR_H, heights, museum_doors, walk_doors, lane_width_along, disjoint_ways,
+    walk_between as _walk_free,
+)
 
 SHELF = os.path.join(ROOT, "doc", "shelf.json")
 MAPS = os.path.join(ROOT, "commons", "maps")
 
-#: Heights a body can stand on and a player can occupy. parse_height gives 0 for
-#: void and 99 for "w"; anything above 1 is a step the player cannot climb
-#: without a ramp, which is what makes it a wall in practice rather than by name.
-FLOOR_H = 1
 
 #: A body covering more than this share of the room's floor is not an exhibit.
 #: Measured: at 0.5 the refusals are exactly the generative world-builders
@@ -286,74 +290,10 @@ def atomic_write(path: str, text: str) -> None:
 
 # ── measurement ─────────────────────────────────────────────────────────────
 
-def heights(struct: list) -> dict:
-    return {(r, c): mp.parse_height(struct[r][c])
-            for r in range(len(struct)) for c in range(len(struct[r]))}
 
 
-def lane_width_along(route: list, free: set, hmap: dict, cap: int = 4) -> int:
-    """The narrowest point on a route, as the largest k for which some k x k
-    block of same-height free cells covers the cell.
-
-    Erosion, not dilation. Dilating a path by a 3x3 kernel and intersecting with
-    the walkable set - which is what the existing route machinery does - reports
-    three even where the path threads a one-cell gap, because every cell it
-    keeps was already walkable. This asks the opposite question and can fail.
-    """
-    # Spawn and the teleporter are routinely NOT free cells - a spawn can sit
-    # inside a body's footprint and a teleporter stands on its own pad - so
-    # including them made the lane read 0 on maps with a perfectly good corridor.
-    # Measure the walk, not its endpoints.
-    walk = [p for p in route if p in free]
-    if not walk:
-        return None
-    worst = cap
-    for (r, c) in walk:
-        best = 0
-        for k in range(1, cap + 1):
-            ok = False
-            for r0 in range(r - k + 1, r + 1):
-                for c0 in range(c - k + 1, c + 1):
-                    block = [(r0 + dr, c0 + dc) for dr in range(k) for dc in range(k)]
-                    if all(b in free for b in block) and len({hmap.get(b) for b in block}) == 1:
-                        ok = True
-                        break
-                if ok:
-                    break
-            if ok:
-                best = k
-            else:
-                break
-        worst = min(worst, best)
-    return worst
 
 
-def _walk_free(g, free: set, target):
-    """Shortest path from spawn to target over cells a body is not standing in,
-    using MapGraph.neighbors as the step relation so the rule is never restated.
-    """
-    from collections import deque
-    start = g.spawn
-    if start is None:
-        return []
-    prev = {start: None}
-    q = deque([start])
-    while q:
-        pos = q.popleft()
-        if pos == target:
-            out = []
-            while pos is not None:
-                out.append(pos)
-                pos = prev[pos]
-            return list(reversed(out))
-        for nb in g.neighbors(pos):
-            if nb in prev:
-                continue
-            if nb != target and nb not in free:
-                continue
-            prev[nb] = pos
-            q.append(nb)
-    return []
 
 
 #: A body is in the way only if it occupies the band a walking body occupies.
@@ -409,135 +349,10 @@ def blocks_walking(tok: str, raw: str, shelf: dict) -> bool:
 # no tool in this repo imports networkx or scipy and stamp.py is not going to
 # be the first.
 
-def disjoint_ways(struct: list) -> tuple:
-    """-> (ways, cut_cells, verdict). verdict is 'door' when every cut cell sits
-    in the entry or exit band, 'interior' when any of them does not."""
-    H = len(struct)
-    floor = {(r, c) for r in range(H) for c in range(len(struct[r]))
-             if mp.parse_height(struct[r][c]) == FLOOR_H}
-    entry = [p for p in floor if p[0] == 0]
-    exits = [p for p in floor if p[0] == H - 1]
-    if not entry or not exits:
-        return 0, [], "no door"
-
-    SRC, SNK = ("SRC",), ("SNK",)
-    cap, adj = {}, collections.defaultdict(set)
-
-    def edge(u, v, c):
-        cap[(u, v)] = cap.get((u, v), 0) + c
-        cap.setdefault((v, u), 0)
-        adj[u].add(v)
-        adj[v].add(u)
-
-    BIG = 1 << 20
-    for p in floor:
-        edge(("i", p), ("o", p), 1)
-        for n in ((p[0] - 1, p[1]), (p[0] + 1, p[1]),
-                  (p[0], p[1] - 1), (p[0], p[1] + 1)):
-            if n in floor:
-                edge(("o", p), ("i", n), BIG)
-    for p in entry:
-        edge(SRC, ("i", p), BIG)
-    for p in exits:
-        edge(("o", p), SNK, BIG)
-
-    from collections import deque
-    ways = 0
-    while True:
-        prev = {SRC: None}
-        q = deque([SRC])
-        while q and SNK not in prev:
-            u = q.popleft()
-            for v in adj[u]:
-                if v not in prev and cap.get((u, v), 0) > 0:
-                    prev[v] = u
-                    q.append(v)
-        if SNK not in prev:
-            break
-        path, v = [], SNK
-        while v != SRC:
-            u = prev[v]
-            path.append((u, v))
-            v = u
-        push = min(cap[e] for e in path)
-        for (u, v) in path:
-            cap[(u, v)] -= push
-            cap[(v, u)] = cap.get((v, u), 0) + push
-        ways += push
-
-    seen = {SRC}
-    q = deque([SRC])
-    while q:
-        u = q.popleft()
-        for v in adj[u]:
-            if v not in seen and cap.get((u, v), 0) > 0:
-                seen.add(v)
-                q.append(v)
-    cut = sorted(p for p in floor if ("i", p) in seen and ("o", p) not in seen)
-
-    # A MINIMUM CUT IS NOT UNIQUE, so "is the cut at a door?" is not a well posed
-    # question - this implementation returns the cut nearest the source and
-    # networkx returns one nearest the sink, and both are correct. Checked
-    # against networkx on the eleven forces halls: the flow VALUE agreed 11 of
-    # 11, the cut CELLS agreed on none of them.
-    #
-    # So classify on a quantity that does not depend on which cut you found. The
-    # hall is limited by its doorways when it admits as many ways as the
-    # narrower doorway allows; it has an interior pinch when it admits fewer.
-    # The cut cells are still returned, as ONE place the pinch can be relieved.
-    doors = min(len(entry), len(exits))
-    where = "door" if ways >= doors else "interior"
-    return ways, cut, where
 
 
-def museum_doors(struct: list) -> tuple:
-    """The museum's own traversal: IN at the first z row, OUT at the last.
-
-    Palle, 2026-09-03: "that is in the museum, so in the first z row and out at
-    last, where there has to be a one, right?" - right, and it is a different
-    question from spawn-to-teleporter, which is what this tool was checking. A
-    hall dealt into the museum is entered and left through those two rows; the
-    map's own spawn disc is not used there at all. Measured over the 185 live
-    rooms: 180 have a floor cell in the first row, 176 in the last, 173 have
-    both, and 166 walk end to end. So the contract is real and nearly kept, and
-    a stamp must not be what breaks it.
-
-    Note the museum will CARVE a door itself if a row has no open cell
-    (_authored_passages), so a sealed row is not fatal downstream - but it is a
-    silent override of the author, and a stamper should never be its cause.
-    """
-    H = len(struct)
-    entry = [(0, c) for c, v in enumerate(struct[0]) if mp.parse_height(v) == FLOOR_H]
-    exits = {(H - 1, c) for c, v in enumerate(struct[H - 1])
-             if mp.parse_height(v) == FLOOR_H}
-    return entry, exits
 
 
-def walk_doors(g, free: set, entry: list, exits: set):
-    """Shortest walk from any first-row door to any last-row door, over cells no
-    body is standing in. MapGraph.neighbors is the step rule, unrestated."""
-    from collections import deque
-    starts = [p for p in entry if p in free] or list(entry)
-    if not starts or not exits:
-        return []
-    prev = {p: None for p in starts}
-    q = deque(starts)
-    while q:
-        pos = q.popleft()
-        if pos in exits:
-            out = []
-            while pos is not None:
-                out.append(pos)
-                pos = prev[pos]
-            return list(reversed(out))
-        for nb in g.neighbors(pos):
-            if nb in prev:
-                continue
-            if nb not in free and nb not in exits:
-                continue
-            prev[nb] = pos
-            q.append(nb)
-    return []
 
 
 def unreachable_bodies(bodies_by_tok: dict, free: set, reached: set, hmap: dict) -> list:

@@ -376,11 +376,104 @@ def render_comparison_svg(room: Room, results: dict) -> str:
             + "".join(parts) + '</svg>')
 
 
+def as_placed(name: str) -> int:
+    """Score the placement the map ACTUALLY has, along the walk the MUSEUM
+    actually takes.
+
+    Everything below this function scores hypothetical strategies: --map loads
+    the real placement and then keeps only the artifact LIST, discarding every
+    position, so it has never answered "is this room, as it stands, well
+    ordered?". And it models spawn-to-teleporter, which is the journey a player
+    takes in the standalone map, not the journey a visitor takes through a dealt
+    hall - that one runs in at the first z row and out at the last.
+
+    Both gaps are fixed here by asking tools/museum_walk.py, which is the one
+    implementation of the traversal, rather than by writing a third.
+    """
+    import json as _json
+    import os as _os
+    import sys as _sys
+    _sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
+    import museum_walk as mw
+    import stamp
+
+    src = _os.path.join(str(ROOT), "commons", "maps", name, "map_data.json")
+    if not _os.path.exists(src):
+        print("no such map: %s" % name)
+        return 1
+    doc = _json.load(open(src, encoding="utf-8"))
+    shelf = _json.load(open(_os.path.join(str(ROOT), "doc", "shelf.json"), encoding="utf-8"))
+
+    st = doc["layers"]["structure"]
+    it = doc["layers"].get("interactables") or []
+    hmap = mw.heights(st)
+
+    bodies, by_tok = set(), {}
+    for r in range(min(len(st), len(it))):
+        for c in range(len(it[r])):
+            raw = str(it[r][c]).strip()
+            if not raw or raw == "-":
+                continue
+            tok = raw.split(":")[0].split("#")[0]
+            sp = stamp.span_of(tok, raw, r, c, shelf)
+            own = {q for q in stamp.cells_of(sp) if q in hmap} if sp else {(r, c)}
+            by_tok["%s@%d,%d" % (tok, r, c)] = own
+            if sp and stamp.blocks_walking(tok, raw, shelf):
+                bodies |= own
+
+    structural = mw.evaluate(doc)
+    clear = mw.evaluate(doc, body_cells=bodies)
+    if structural.get("error"):
+        print("%s: %s" % (name, structural["error"]))
+        return 1
+
+    print("%s, AS PLACED" % name)
+    print("  museum traversal : in at row 0, out at row %d" % (len(st) - 1))
+    print("     structure     : %s, narrowest %s"
+          % ("walks" if structural["walks"] else "DOES NOT WALK", structural["lane"]))
+    print("     clear of bodies: %s, narrowest %s"
+          % ("walks" if clear["walks"] else "does not walk", clear["lane"]))
+    print("  ways through     : %d against %d door cells (%s)"
+          % (structural["ways"], structural["doors"], structural["cut_where"]))
+    if structural["cut_where"] == "interior":
+        print("     the cut       : %s"
+              % ", ".join("r%dc%d" % q for q in structural["cut"][:5]))
+
+    # ENCOUNTER ORDER along the real walk, which is the question --map was
+    # always being asked and never answering.
+    route = structural["route"]
+    step = {cell: i for i, cell in enumerate(route)}
+    order = []
+    for tok, cells in by_tok.items():
+        best = None
+        for (r, c) in cells:
+            for n in ((r, c), (r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)):
+                if n in step and (best is None or step[n] < best):
+                    best = step[n]
+        order.append((best if best is not None else 10 ** 6, tok))
+    order.sort()
+    print("  encounter order  :")
+    for d, tok in order:
+        print("     %-6s %s" % ("--" if d >= 10 ** 6 else "step %d" % d, tok))
+    unreached = sum(1 for d, _ in order if d >= 10 ** 6)
+    if unreached:
+        print("  %d body/ies are never passed on the museum walk" % unreached)
+    return 0
+
+
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--map", type=str)
+    p.add_argument("--as-placed", action="store_true",
+                   help="score the placement the map ACTUALLY has, on the museum's "
+                        "own traversal, instead of comparing hypothetical strategies")
     p.add_argument("--seed", type=int, default=0)
     args = p.parse_args()
+
+    if args.as_placed:
+        if not args.map:
+            p.error("--as-placed needs --map")
+        return as_placed(args.map)
 
     if args.map:
         from place_artifacts import existing_placements, room_from_map  # type: ignore
