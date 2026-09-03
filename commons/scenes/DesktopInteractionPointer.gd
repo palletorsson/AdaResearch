@@ -51,9 +51,50 @@ var _weapon_home: Node = null        # where it hung before we took it
 var _is_weapon: bool = false         # this hold is a viewmodel, not a carry
 
 
-## A thing is a weapon here if it has a trigger. Nothing else asked.
-func _has_trigger(p: Node) -> bool:
-	return p != null and is_instance_valid(p) and p.has_method("action")
+## ONE LIST OF WEAPONS, NOT TWO. HandInventory.is_weapon is the VR rig's own test
+## (token meta, then a PinkGun child, then a name containing Sledgehammer), so
+## desktop and VR can never disagree about what a weapon is. The first version of
+## this file used `has_method("action")` for it, which is not a test of anything:
+## see _fires below.
+const HandInv := preload("res://commons/player/hand_inventory.gd")
+
+
+func _is_weapon_node(p: Node) -> bool:
+	return p != null and is_instance_valid(p) and HandInv.is_weapon(p)
+
+
+## DOES CLICKING THIS DO ANYTHING? Not "has an action()" — EVERY XRToolsPickable
+## has action(), inherited, and all it does is emit action_pressed. The
+## sledgehammer extends XRToolsPickable and so answers `true` to has_method
+## while listening to nothing, which is how the first version of this ended up
+## calling action() on a hammer, consuming the click, and firing a signal into
+## an empty room. The probe caught it: "LMB starts a swing: true" while the head
+## moved 0.00 m/s.
+##
+## The real question is whether anything is LISTENING. pink_gun connects to its
+## pickable's action_pressed in _ready; the sledgehammer connects nothing,
+## because its rule is speed, not a trigger.
+func _fires(p: Node) -> bool:
+	if p == null or not is_instance_valid(p) or not p.has_signal("action_pressed"):
+		return false
+	return not p.get_signal_connection_list("action_pressed").is_empty()
+
+
+## A gun is FIRED; a hammer is SWUNG. line_sledgehammer inherits action() and
+## listens to nothing: it breaks things by the speed of its own head, measured from
+## global_position deltas in its _physics_process, and its docstring records a
+## probe catching it destroying a barrier it was merely resting against. Giving
+## it a "break()" entry point would be a second implementation of its one rule.
+##
+## So the swing lives HERE, in the hand, where a swing belongs. The pointer turns
+## the holster through an arc; the head — 0.86 m out on the haft — reaches about
+## 11 m/s at the strike (measured): over HEAD_SPEED_MIN (1.15) and well under
+## HEAD_SPEED_MAX (45.0, above which the hammer reads a teleport and ignores the
+## sample). The hammer needs no change and VR is untouched.
+const SWING_TIME := 0.42     # long enough that the STRIKE is the fast part
+const SWING_FROM_DEG := 52.0     # raised
+const SWING_TO_DEG := -38.0      # driven down and through
+var _swing_t: float = -1.0       # < 0 = not swinging
 
 
 func _ready() -> void:
@@ -70,9 +111,10 @@ func _ready() -> void:
 	_camera = get_parent().get_node_or_null("Camera3D") as Camera3D
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if Engine.is_editor_hint() or not _raycast:
 		return
+	_swing_step(delta)
 
 	# Carry a held object: keep it floating in front of the camera at the hold
 	# distance, AND POINTING WHERE YOU LOOK.
@@ -203,7 +245,13 @@ var _action_held: Node3D = null      # what THIS click is driving, if anything
 
 func _try_held_action(pressed: bool) -> bool:
 	if pressed:
-		if not (_held != null and is_instance_valid(_held) and _held.has_method("action")):
+		if _held == null or not is_instance_valid(_held):
+			return false
+		# A gun is fired. A hammer, which nothing listens to, is SWUNG.
+		if not _fires(_held):
+			if _is_weapon and _swing_t < 0.0:
+				_swing_t = 0.0
+				return true
 			return false
 		_action_held = _held
 		_action_held.call("action")
@@ -218,6 +266,52 @@ func _try_held_action(pressed: bool) -> bool:
 		_action_held.call("action_release")
 	_action_held = null
 	return true
+
+
+## Turn the holster through the swing arc. The weapon rides it as a child, so the
+## hammer's own head moves through the world and its own _physics_process
+## measures the speed — nothing here tells it what it hit, or that it hit
+## anything. That is deliberate: the hammer already owns the rule that speed
+## breaks things, including the part where a shape SWEEP is used because a fast
+## head steps over a thin plank between frames.
+func _swing_step(delta: float) -> void:
+	if _swing_t < 0.0:
+		return
+	if _holster == null or not is_instance_valid(_holster):
+		_swing_t = -1.0
+		return
+	_swing_t += delta
+	var u: float = clampf(_swing_t / SWING_TIME, 0.0, 1.0)
+
+	# WIND UP, STRIKE, RECOVER — and START AND END AT REST.
+	#
+	# The first version went straight to SWING_FROM on frame one and snapped back
+	# to zero on the last, and the probe measured the head at 42.56 m/s against
+	# the hammer's 45.0 teleport cutoff: a 5% margin, and the peak was not the
+	# swing at all — it was the two DISCONTINUITIES. The hammer would have struck
+	# on the snap, breaking whatever stood in front the instant you clicked, and
+	# one slow frame would have pushed it over 45 where every swing is silently
+	# discarded. A number that close to a threshold is a bug wearing a pass.
+	#
+	# Three eased phases, continuous at both ends, so the fastest part of the
+	# motion is the strike and nothing else moves fast at all. It lands at 5-14
+	# m/s, which is what the hammer's own docstring measures a real VR swing at.
+	var ang: float
+	if u < 0.30:
+		ang = lerpf(0.0, SWING_FROM_DEG, _ease(u / 0.30))
+	elif u < 0.70:
+		ang = lerpf(SWING_FROM_DEG, SWING_TO_DEG, _ease((u - 0.30) / 0.40))
+	else:
+		ang = lerpf(SWING_TO_DEG, 0.0, _ease((u - 0.70) / 0.30))
+	_holster.rotation = Vector3(deg_to_rad(ang), 0.0, 0.0)
+	if u >= 1.0:
+		_swing_t = -1.0
+		_holster.rotation = Vector3.ZERO
+
+
+func _ease(t: float) -> float:
+	var c: float = clampf(t, 0.0, 1.0)
+	return c * c * (3.0 - 2.0 * c)
 
 
 func _emit_hover_events(new_target: Node3D, new_at: Vector3) -> void:
@@ -328,7 +422,7 @@ func _grab_held(p: Node3D) -> void:
 	# pointer would be left holding a freed node — the exact failure this session
 	# has now fixed twice elsewhere. Under the holster it belongs to the walker
 	# and travels with them.
-	_is_weapon = _has_trigger(p)
+	_is_weapon = _is_weapon_node(p)
 	if not _is_weapon:
 		return
 	# THE HOLSTER HANGS OFF THE CAMERA, not off this pointer. The camera IS the

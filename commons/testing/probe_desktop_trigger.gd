@@ -153,20 +153,91 @@ func _init() -> void:
 	if d < 0.9:
 		print("  FAIL a carried box was treated as a weapon"); fails += 1
 
+	# ── 9. THE SLEDGEHAMMER. It has no trigger; it is SWUNG. ─────────────
+	# Palle: "can we also add the sledgehammer to the desktop inventory?"
+	#
+	# The real question is not whether it holsters — it is whether a scripted arc
+	# produces head speed inside the band the hammer will act on: above
+	# HEAD_SPEED_MIN (1.15 m/s, below which it is a lean) and below
+	# HEAD_SPEED_MAX (45.0, above which the hammer reads a teleport and throws
+	# the sample away). Miss the band either way and the swing is a mime.
+	ptr.call("_drop_held")
+	var sledge = load("res://commons/artifacts/line_sledgehammer/line_sledgehammer.tscn").instantiate()
+	get_root().add_child(sledge)
+	for i in range(4):
+		await process_frame
+	print("")
+	print("sledgehammer is a weapon to the SHARED list: %s (it has no action(): %s)"
+		% [ptr.call("_is_weapon_node", sledge), not sledge.has_method("action")])
+	if not ptr.call("_is_weapon_node", sledge):
+		print("  FAIL desktop and VR disagree about what a weapon is"); fails += 1
+
+	ptr.call("_grab_held", sledge)
+	ptr.call("_process", 0.016)
+	var swung: bool = ptr.call("_try_held_action", true)
+	print("LMB starts a swing: %s" % swung)
+	if not swung:
+		print("  FAIL nothing happens when you click with a hammer in hand"); fails += 1
+
+	# Drive the arc and watch the HEAD, which is what the hammer measures.
+	var head: Node3D = sledge.get_node_or_null("Head") as Node3D
+	if head == null:
+		for ch in sledge.get_children():
+			if String(ch.name).to_lower().contains("head"):
+				head = ch as Node3D
+	var peak := 0.0
+	if head != null:
+		var prev: Vector3 = head.global_position
+		for i in range(24):
+			ptr.call("_process", 0.016)
+			var now: Vector3 = head.global_position
+			peak = maxf(peak, (now - prev).length() / 0.016)
+			prev = now
+	print("peak head speed through the arc: %.2f m/s   (need > 1.15 and < 45.0)" % peak)
+	if head == null:
+		print("  FAIL could not find the hammer head to measure"); fails += 1
+	elif peak <= 1.15:
+		print("  FAIL the swing is a lean — the hammer will ignore it"); fails += 1
+	elif peak >= 20.0:
+		# NOT "under 45". The first arc measured 42.56 against a 45.0 cutoff and
+		# passed, and that pass was worthless: the peak was a discontinuity, not a
+		# swing, and one slow frame would have tipped it into the band where the
+		# hammer silently discards everything. Demand the human range its own
+		# docstring names (5-14 m/s), with room either side.
+		print("  FAIL %.2f m/s is a teleport, not a swing — no margin under the"
+			% peak + " 45.0 cutoff, and the peak is a snap rather than the strike")
+		fails += 1
+
 	print("")
 	print("PROBE OK" if fails == 0 else "PROBE FAILED (%d)" % fails)
 	quit(fails)
 
 
-## Stands in for a pickable. The real chain is checked in step 4; here the
-## question is only whether the pointer reaches an object's trigger at all, and a
-## stub answers that without a physics projectile's travel time.
+## Stands in for a GUN: a thing the shared weapon list recognises, whose
+## action_pressed something is actually listening to.
+##
+## Both halves are load-bearing and both were missing at first. Without the token
+## meta, HandInventory.is_weapon says no and it is carried instead of holstered —
+## which silently turned the adoption and viewmodel checks into tests of nothing.
+## Without a LISTENER on action_pressed the pointer now classes it as swingable,
+## because "has an action()" turned out to be true of every pickable in the
+## engine and therefore true of nothing in particular.
 class _Trigger extends Node3D:
+	signal action_pressed(who)
+
 	var pressed_count := 0
 	var released_count := 0
 
+	func _init() -> void:
+		set_meta("artifact_lookup_name", "pink_gun")
+		action_pressed.connect(_heard)
+
+	func _heard(_who) -> void:
+		pass
+
 	func action() -> void:
 		pressed_count += 1
+		action_pressed.emit(self)
 
 	func action_release() -> void:
 		released_count += 1
