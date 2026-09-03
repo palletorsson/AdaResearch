@@ -1,14 +1,25 @@
 {
-  "overall_pass": true,
-  "overall_status": "PASS",
-  "enabled_gate_count": 4,
-  "passing_enabled_gate_count": 4,
-  "total_gate_count": 4,
+  "measurement": {
+    "measured_at": "2026-09-03T09:19:33+02:00",
+    "measured_by": "tools/run_release_gates.py",
+    "head": "f183068325515c0c15fd79ac99eeabe774c162f2",
+    "head_subject": "feat(tools): stamp.py - seat every body, and keep the walls you move",
+    "tree_dirty": 393,
+    "tree_untracked": 488
+  },
+  "overall_pass": false,
+  "overall_status": "FAIL",
+  "enabled_gate_count": 11,
+  "passing_enabled_gate_count": 9,
+  "total_gate_count": 11,
   "command_exit_codes": {
     "sequence_contract": 0,
     "artifact_audit": 0,
     "validate_map_all": 0,
-    "audit_lab_chain": 0
+    "audit_lab_chain": 0,
+    "validate_museum_templates": 0,
+    "em_autopilot": 3,
+    "check_map_tokens": 0
   },
   "gates": [
     {
@@ -18,7 +29,7 @@
       "metrics": {
         "missing_declared_maps": 0,
         "duplicate_entries_within_sequence": 0,
-        "undeclared_map_folders": 2253
+        "undeclared_map_folders": 1850
       },
       "enabled": true
     },
@@ -29,9 +40,10 @@
       "metrics": {
         "unresolved_scene_files": 0,
         "missing_scene_path": 0,
+        "invalid_biome_token": 0,
         "unsupported_scene_path": 0,
-        "missing_map_ready": 0,
-        "missing_include_in_map_data": 0
+        "missing_map_ready": 130,
+        "missing_include_in_map_data": 130
       },
       "enabled": true
     },
@@ -40,9 +52,9 @@
       "name": "Map Validation",
       "pass": true,
       "metrics": {
-        "grade_A": 1862,
-        "grade_B": 411,
-        "grade_C": 583,
+        "grade_A": 2274,
+        "grade_B": 368,
+        "grade_C": 152,
         "grade_F": 0,
         "max_grade_c": null,
         "grade_c_blocking": false,
@@ -76,40 +88,142 @@
         ]
       },
       "enabled": true
+    },
+    {
+      "id": "E",
+      "name": "Museum Template Integrity",
+      "pass": true,
+      "metrics": {
+        "failing_templates": 0,
+        "chain_pairs_pass": 900,
+        "chain_pairs_total": 900
+      },
+      "enabled": true
+    },
+    {
+      "id": "F",
+      "name": "Museum Walkthrough (autopilot)",
+      "pass": false,
+      "metrics": {
+        "museums": -1,
+        "z_reached": -1.0,
+        "goal_z": -1.0,
+        "walked_s": -1.0,
+        "cells_unlearned": -1,
+        "stall_events": -1,
+        "frontier_z": -1,
+        "reason": "contended_builder"
+      },
+      "enabled": true
+    },
+    {
+      "id": "G",
+      "name": "Map Token Resolution",
+      "pass": true,
+      "metrics": {
+        "detector_selftest": "PASS",
+        "maps_scanned": 185,
+        "maps_named": 185,
+        "maps_without_data": "none",
+        "placements": 1318,
+        "unresolved_placements": 0,
+        "unresolved_tokens": "",
+        "malformed_empty_cells": 0
+      },
+      "enabled": true
+    },
+    {
+      "id": "H",
+      "name": "Gate Chain Integrity",
+      "pass": true,
+      "metrics": {
+        "tools_referenced": 51,
+        "absent_on_disk": "none",
+        "present_but_untracked": "none",
+        "unreachable_from_a_clone": 0
+      },
+      "enabled": true
+    },
+    {
+      "id": "I",
+      "name": "Edge Anchors",
+      "pass": true,
+      "metrics": {
+        "detector_selftest": "PASS",
+        "edges": 255,
+        "held": 251,
+        "near": 4,
+        "lost": 0,
+        "ungrounded": 0,
+        "lost_rooms": "none"
+      },
+      "enabled": true
+    },
+    {
+      "id": "J",
+      "name": "Artifact Citations",
+      "pass": true,
+      "metrics": {
+        "citations": 219,
+        "held": 212,
+        "near": 4,
+        "lost": 0,
+        "elsewhere": 3,
+        "no_such_work": 0
+      },
+      "enabled": true
+    },
+    {
+      "id": "K",
+      "name": "Wants Closed Honestly",
+      "pass": false,
+      "metrics": {
+        "detector_selftest": "PASS",
+        "token_lines": 833,
+        "closed_dishonestly": 4,
+        "ghost": 0,
+        "echo": 4,
+        "no_registry": 0,
+        "broken_body": 0,
+        "hero_ghost": 0,
+        "open_not_counted": "empty 104 · stub 32 · elsewhere 35 · no_body 30 · no_subject 50"
+      },
+      "enabled": true
     }
   ],
   "raw": {
     "sequence_contract_summary": {
-      "total_sequences": 65,
-      "declared_entries": 696,
-      "declared_unique_maps": 674,
-      "map_folders_with_data": 2854,
+      "total_sequences": 80,
+      "declared_entries": 1048,
+      "declared_unique_maps": 1020,
+      "map_folders_with_data": 2792,
       "duplicate_entries_within_sequence": 0,
-      "duplicates_across_sequences": 22,
+      "duplicates_across_sequences": 28,
       "missing_declared_maps": 0,
-      "undeclared_map_folders": 2253,
-      "undeclared_prefix_hints": 830,
-      "cross_sequence_prefix_hints": 157
+      "undeclared_map_folders": 1850,
+      "undeclared_prefix_hints": 1061,
+      "cross_sequence_prefix_hints": 438
     },
     "artifact_audit_summary": {
-      "total_entries": 1805,
-      "dict_entries": 1805,
+      "total_entries": 2959,
+      "dict_entries": 2959,
       "non_dict_entries": 0,
       "placeholder_entries": 0,
       "missing_scene_path": 0,
+      "invalid_biome_token": 0,
       "unsupported_scene_path": 0,
       "disallowed_scene_prefix": 1,
       "unresolved_scene_files": 0,
-      "missing_include_in_map_data": 0,
-      "missing_map_ready": 0,
-      "missing_map_sequences_field": 29,
-      "empty_map_sequences": 545,
-      "algorithm_without_curation": 6
+      "missing_include_in_map_data": 130,
+      "missing_map_ready": 130,
+      "missing_map_sequences_field": 316,
+      "empty_map_sequences": 829,
+      "algorithm_without_curation": 5
     },
     "grade_counts": {
-      "A": 1862,
-      "B": 411,
-      "C": 583
+      "A": 2274,
+      "C": 152,
+      "B": 368
     },
     "lab_metrics": {
       "total_issues": 39,
@@ -138,16 +252,16 @@
         "",
         "| Metric | Count |",
         "|---|---:|",
-        "| `total_sequences` | 65 |",
-        "| `declared_entries` | 696 |",
-        "| `declared_unique_maps` | 674 |",
-        "| `map_folders_with_data` | 2854 |",
+        "| `total_sequences` | 80 |",
+        "| `declared_entries` | 1048 |",
+        "| `declared_unique_maps` | 1020 |",
+        "| `map_folders_with_data` | 2792 |",
         "| `duplicate_entries_within_sequence` | 0 |",
-        "| `duplicates_across_sequences` | 22 |",
+        "| `duplicates_across_sequences` | 28 |",
         "| `missing_declared_maps` | 0 |",
-        "| `undeclared_map_folders` | 2253 |",
-        "| `undeclared_prefix_hints` | 830 |",
-        "| `cross_sequence_prefix_hints` | 157 |",
+        "| `undeclared_map_folders` | 1850 |",
+        "| `undeclared_prefix_hints` | 1061 |",
+        "| `cross_sequence_prefix_hints` | 438 |",
         "",
         "### Interpretation Notes",
         "",
@@ -160,20 +274,20 @@
         "",
         "| Metric | Count |",
         "|---|---:|",
-        "| `total_entries` | 1805 |",
-        "| `dict_entries` | 1805 |",
+        "| `total_entries` | 2959 |",
+        "| `dict_entries` | 2959 |",
         "| `non_dict_entries` | 0 |",
         "| `placeholder_entries` | 0 |",
         "| `missing_scene_path` | 0 |",
+        "| `invalid_biome_token` | 0 |",
         "| `unsupported_scene_path` | 0 |",
         "| `disallowed_scene_prefix` | 1 |",
         "| `unresolved_scene_files` | 0 |",
-        "| `missing_include_in_map_data` | 0 |",
-        "| `missing_map_ready` | 0 |",
-        "| `missing_map_sequences_field` | 29 |",
-        "| `empty_map_sequences` | 545 |",
-        "| `algorithm_without_curation` | 6 |",
-        ""
+        "| `missing_include_in_map_data` | 130 |",
+        "| `missing_map_ready` | 130 |",
+        "| `missing_map_sequences_field` | 316 |",
+        "| `empty_map_sequences` | 829 |",
+        "| `algorithm_without_curation` | 5 |"
       ],
       "validate_map_all": [
         "[",
@@ -206,12 +320,13 @@
         "Stage: Initial (map_data.json)",
         "  Dimensions: 0x0",
         "  Structure cells: 236",
-        "  Utilities: 8",
+        "  Utilities: 10",
         "  Artifacts: 0",
         "  Interactables: 13",
-        "  Teleporters: 6",
+        "  Teleporters: 7",
         "    tp->catalyst_test",
         "    tp->color",
+        "    tp->forces",
         "    tp->hazards",
         "    tp->postfoundationscrisis",
         "    tp->primitives",
@@ -236,8 +351,7 @@
         "  Utilities: 9",
         "  Artifacts: 0",
         "  Interactables: 12",
-        "  Teleporters: 4",
-        "    tp->array_tutorial"
+        "  Teleporters: 4"
       ]
     }
   },

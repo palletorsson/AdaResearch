@@ -33,6 +33,7 @@ transcribe a hall by hand).
 from __future__ import annotations
 
 import copy
+import datetime as _dt
 import json
 import pathlib
 import subprocess
@@ -486,6 +487,23 @@ def build(plan: dict) -> dict:
             n = sum(1 for r in out["plans"] if r.get("sequence") == g)
             print(f"  DROPPED '{g}' — {n} hall(s) in the plan, not in the spine")
         out["plans"] = [r for r in out["plans"] if str(r.get("sequence", "")) in spine]
+    # WHEN THESE ROWS WERE DERIVED, said in the file itself.
+    #
+    # The plan's only date was `_spine_run.at` — the last spine_run — and this
+    # tool rewrites up to 150 rows without touching it. On 2026-09-03 a session
+    # read that stamp (2026-08-21), concluded the museum was showing an August
+    # snapshot of the whole corpus, and posted it as standing (forum
+    # 260902-r7vso). Measured, 149 of 152 halls still agreed with their maps;
+    # the three that did not were the transformation maps edited the day
+    # before. The stamp was honest about the deal and silent about the patch,
+    # and silence read as staleness.
+    #
+    # So record the patch beside the deal rather than overwriting it:
+    # `_spine_run.at` stays the record of which spine_run dealt the halls (and
+    # em_bake.py --check still reads it), `_map_halls` says when the rows last
+    # came from the maps. Additive — a reader that does not know the key is
+    # untouched.
+    patched_chapters: list[dict] = []
     for chapter, pairs in declared().items():
         rows_for = [r for r in plan["plans"] if r.get("sequence") == chapter]
         if not rows_for:
@@ -502,11 +520,23 @@ def build(plan: dict) -> dict:
             dirlocked = any(k in row for k in ("basin", "passage", "simulation"))
             normalize_row(row, post, dirlocked, width_exempt=(chapter == "forces"))
         out["plans"] = [r for r in out["plans"] if r.get("sequence") != chapter] + new_rows
+        patched_chapters.append({"chapter": chapter, "halls": len(new_rows),
+                                 "replaced": len(rows_for),
+                                 "maps": [r["map"] for r in new_rows]})
         print(f"  {chapter}: {len(new_rows)} map-authored hall(s) replace {len(rows_for)} dealt row(s)")
         for row in new_rows:
             firsts = {a["token"]: a["tile_cell"] for a in row["artifacts"][:2]}
             print(f"    {row['pearl']:<12} {row['map']:<14} tile {row['room']['w']}x{row['h']}"
                   f"  artifacts {len(row['artifacts'])}  first: {firsts}")
+    out["_map_halls"] = {
+        "at": _dt.datetime.now().astimezone().replace(microsecond=0).isoformat(),
+        "by": "tools/em_map_halls.py",
+        "note": "these rows were derived FROM commons/maps/<Map>/map_data.json. "
+                "_spine_run.at is the deal; this is the patch. A hall not listed "
+                "here is still the dealt template row.",
+        "halls": sum(c["halls"] for c in patched_chapters),
+        "chapters": patched_chapters,
+    }
     return out
 
 

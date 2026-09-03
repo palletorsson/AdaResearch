@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-09-03T09:05:35+02:00",
+  "phase": "baseline",
+  "mode": "full",
+  "pipeline_summary": {
+    "global_avg": 6.091,
+    "sequences_scored": 22,
+    "complete": 1,
+    "at_stage_6_vr_testing": 21,
+    "at_stage_8_complete": 1,
+    "note": "TENTH consecutive reading of 6.091. Confirmed ceiling, not stall: 21 of 22 sequences wait on stage 6 (vr_testing), which no agent can advance without a human in a headset. See prop-003/008/021/039."
+  },
+  "heat_map_top_5": [
+    {"item": "museum", "temperature": 80, "reason": "active (6 recent commits)"},
+    {"item": "gate chain integrity", "temperature": 60, "reason": "deep discovery"},
+    {"item": "placement", "temperature": 60, "reason": "deep discovery: map_info.dimensions"},
+    {"item": "map dimensions", "temperature": 60, "reason": "deep discovery: the engine sizes from the grid"}
+  ],
+  "garden_health": {
+    "total_artifacts": 5055,
+    "voiced": 3818,
+    "embodied": 920,
+    "reaching": 1363,
+    "phantom_limbs": 2179,
+    "voice_coverage_pct": 75,
+    "embodiment_rate_pct": 24
+  },
+  "release_gates": {
+    "overall": "FAIL",
+    "enabled_passing": "9/11",
+    "A_sequence_contract": "PASS",
+    "B_artifact_registry": "PASS",
+    "C_map_validation": "PASS",
+    "D_lab_progression": "PASS",
+    "E_museum_template": "PASS",
+    "F_museum_walkthrough": "FAIL (no_route, frontier_z=16, stall_events=8) — COOLED, failed last 2 breaths",
+    "G_map_token_resolution": "PASS (185 maps, 1318 placements, 0 unresolved)",
+    "H_gate_chain": "PASS",
+    "I_edge_anchors": "PASS",
+    "J_artifact_citations": "PASS",
+    "K_wants_closed_honestly": "FAIL (4 echo) — COOLED, blocked on forum 260831-z5s2i awaiting Palle"
+  },
+  "git": {
+    "head": "9a6e156e6",
+    "branch": "palm-scanner-door-entry",
+    "dirty": 391,
+    "untracked": 473
+  }
+}
