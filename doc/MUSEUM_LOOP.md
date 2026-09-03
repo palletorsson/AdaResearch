@@ -108,6 +108,71 @@ Not everywhere. Measured over four waves on 2026-09-02 and 03:
 
 The rule that came out of it: **agents read and check; one hand writes.**
 
+## What the loop turned out to be, after running it once end to end
+
+2026-09-03, one full turn on Vectors_Act5_ForceAsPlace. Three things changed in
+how this is understood, and they are worth more than the turn itself.
+
+### It is TWO loops, and they run at different speeds
+
+The deterministic sweep over all 185 halls — `stamp.py --all`,
+`argument_shape.py`, `coherence.py` — costs **three seconds**. A full turn on one
+hall costs most of a day: five reader agents on five artifacts, an adversarial
+cross-check, a rewrite, three code fixes and two probes.
+
+So they are not the same loop and should never have been drawn as one.
+
+    FAST   every hall, every day, 3 seconds     ->  WHERE TO LOOK
+    SLOW   one hall, most of a day              ->  WHAT ACTUALLY CHANGES
+
+The fast loop cannot fix anything and the slow loop cannot scale. The fast one
+did not exist yesterday, which is why the slow one used to be pointed by taste.
+
+### The engine is DISAGREEMENT, not any single instrument
+
+Every finding of consequence today came from two instruments contradicting each
+other. Not one instrument being run.
+
+| what disagreed | what it found |
+|---|---|
+| registry said 4 m, code said 5 m | four surfaces carrying a wrong number, one of them a placard |
+| intent said "no floor", the map had a catwalk | a real collision between VR and the museum walker |
+| my flow and networkx | the answer agreed, the WITNESS did not, so the classifier was ill-posed |
+| my fit script and `stamp.py` | `span_of` was ignoring a token's scale |
+| greedy and Hungarian | they agreed exactly, which refuted my own prediction |
+| the docs and `endless_museum.gd:660` | the museum does not reverse the subtitles, it deletes them |
+| a plan and a photograph | a body drawn half its own length from where it stands |
+
+So the modalities are not decoration. Each is in the loop because it **fails
+differently**: code cannot see space, space cannot see order, order cannot see
+what a thing looks like, a picture cannot see a number, a number cannot see a
+claim, and a claim cannot check itself.
+
+The corollary is the useful part. **A step that agrees with the step before it
+taught you nothing.** Budget the expensive steps for where two cheap ones
+already disagree.
+
+### The step that was missing was FIX
+
+The loop as first written ended at *write the text and record a principle*. It
+described faults beautifully and changed no code. Act5's three faults — a dead
+yaw fader, a weightless probe, a field five centimetres out of reach — were all
+one-line changes once found, and each needed a probe to prove it from the engine
+rather than from arithmetic. Two of the three fixes were nearly wrong in the
+same way: `_home` read in `_ready` before `call_deferred` grounding, and a ghost
+arrow frozen by the same early return it existed to cure.
+
+A loop that only writes is criticism. The turn is not finished until something
+in the room is different.
+
+### And ORDER is a step, not a detail
+
+Palle: *"in the museum, so in the first z row and out at last."* Nothing measured
+what a visitor meets, in what sequence, entering the way the museum enters.
+Adding it found that Act5's four spoken truths arrive backwards — and then the
+cross-check found something worse, that the museum drops them entirely. 163 of
+185 halls walk row 0 to row H-1; 121 are narrower than their own doorways.
+
 ## The toolchain — what each step actually runs
 
 Every step of the loop has a command. Where a step has no command it is either
