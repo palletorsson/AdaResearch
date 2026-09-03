@@ -94,6 +94,65 @@ func _init() -> void:
 	if before_dot > 0.99:
 		print("  FAIL it started aligned, so this proves nothing"); fails += 1
 
+	# ── 6. THE VIEWMODEL. A weapon parks low-right, rigid to the view. ────
+	# Palle: "can we have like in half life that the gun is placed at the bottom
+	# of the screen and we can use from there after we pick it up?"
+	ptr.call("_drop_held")
+	var hall := Node3D.new()                      # stands in for a hall segment
+	hall.name = "HallSegment"
+	get_root().add_child(hall)
+	var gun := _Trigger.new()
+	hall.add_child(gun)
+	gun.global_position = Vector3(3, 0, 3)
+	ptr.call("_grab_held", gun)
+	ptr.call("_process", 0.016)
+	var holstered: bool = gun.get_parent() != hall
+	var off: Vector3 = gun.transform.origin
+	print("")
+	print("weapon adopted out of the hall: %s   parked at %s" % [holstered, str(off)])
+	if not holstered:
+		print("  FAIL still parented to the hall"); fails += 1
+	if off.y >= 0.0 or off.x <= 0.0:
+		print("  FAIL not low and to the right — that is not a viewmodel"); fails += 1
+	# and it must still point where you look, not down-right
+	var aim: float = (-gun.global_transform.basis.z).dot(-cam.global_transform.basis.z)
+	print("weapon aim vs view: %.3f (must be 1.0 — a tilted model fires tilted)" % aim)
+	if aim < 0.999:
+		print("  FAIL the viewmodel is angled, so every shot misses by that angle")
+		fails += 1
+
+	# ── 7. THE NEGATIVE THAT MATTERS: the hall is freed, gun survives ─────
+	# In the museum a hall segment is freed at the next crossing. Held by
+	# position alone the gun would vanish out of the player's hands — or leave a
+	# freed reference behind, which is the failure this session fixed twice.
+	hall.queue_free()
+	await process_frame
+	await process_frame
+	var alive: bool = is_instance_valid(gun)
+	print("")
+	print("hall freed — weapon still alive: %s" % alive)
+	if not alive:
+		print("  FAIL the gun died with the hall it was picked up in"); fails += 1
+	else:
+		var still_fires: bool = ptr.call("_try_held_action", true)
+		print("and it still fires after the crossing: %s" % still_fires)
+		if not still_fires:
+			print("  FAIL it survived but stopped working"); fails += 1
+
+	# ── 8. a plain object is NOT holstered — it stays out in front ────────
+	ptr.call("_drop_held")
+	var plain := Node3D.new()
+	get_root().add_child(plain)
+	plain.global_position = Vector3(2, 0, 2)
+	ptr.call("_grab_held", plain)
+	for i in range(20):
+		ptr.call("_process", 0.016)
+	var d: float = plain.global_position.distance_to(cam.global_position)
+	print("")
+	print("plain object carried at %.2f m (must stay out in front, not holstered)" % d)
+	if d < 0.9:
+		print("  FAIL a carried box was treated as a weapon"); fails += 1
+
 	print("")
 	print("PROBE OK" if fails == 0 else "PROBE FAILED (%d)" % fails)
 	quit(fails)

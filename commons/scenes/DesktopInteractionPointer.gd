@@ -28,6 +28,33 @@ var _held_layer: int = 0
 var _held_mask: int = 0
 var _hold_distance: float = 2.0
 
+## THE WEAPON AT THE BOTTOM OF THE SCREEN (2026-09-02, Palle: "can we have like
+## in half life that the gun is placed at the bottom of the screen and we can use
+## from there after we pick it up?").
+##
+## A thing with a TRIGGER is held like a weapon: parked low and right, rigid to
+## the view. A thing without one keeps floating out in front at _hold_distance,
+## where you can see what you are carrying and put it somewhere. That is the same
+## distinction your hands make, and it needs no mode switch or extra key.
+##
+## THE BASIS STAYS PARALLEL TO THE VIEW, and that is not a stylistic choice.
+## pink_gun.fire() sends its projectile along the GUN's -Z, so any cosmetic tilt
+## of the viewmodel becomes a shot that misses by exactly that angle. Games that
+## tilt their viewmodels fire along the view ray instead; this one fires along the
+## model, so the model must not lie about where it points. Offset only.
+@export var weapon_offset := Vector3(0.17, -0.15, -0.34)   # right, down, forward
+
+## Where an adopted weapon lives. Created under this pointer, which rides the
+## walker — NOT under the hall.
+var _holster: Node3D = null
+var _weapon_home: Node = null        # where it hung before we took it
+var _is_weapon: bool = false         # this hold is a viewmodel, not a carry
+
+
+## A thing is a weapon here if it has a trigger. Nothing else asked.
+func _has_trigger(p: Node) -> bool:
+	return p != null and is_instance_valid(p) and p.has_method("action")
+
 
 func _ready() -> void:
 	# Create raycast child
@@ -62,7 +89,13 @@ func _process(_delta: float) -> void:
 	# no rotate-while-carrying control on desktop, so the old behaviour was not a
 	# choice anyone could have made on purpose. The body is frozen by _grab_held,
 	# so writing the transform does not fight the physics server.
-	if _held and is_instance_valid(_held) and _camera:
+	# A HOLSTERED WEAPON NEEDS NO CARRYING. It is a child of the holster, which is
+	# a child of this pointer, which mirrors the camera — so it is already exactly
+	# where it should be, every frame, with no lag. Lerping it here would fight
+	# its own parent and reintroduce the wobble a viewmodel must not have.
+	if _is_weapon:
+		pass
+	elif _held and is_instance_valid(_held) and _camera:
 		var cam_xf := _camera.global_transform
 		var target_pos := cam_xf.origin + (-cam_xf.basis.z) * _hold_distance
 		var xf := _held.global_transform
@@ -287,9 +320,50 @@ func _grab_held(p: Node3D) -> void:
 	if _camera:
 		_hold_distance = clampf(_camera.global_position.distance_to(p.global_position), 1.0, 4.0)
 
+	# A WEAPON IS ADOPTED ON FIRST GRAB — the same reason HandInventory adopts one
+	# in VR, and the reason this is a reparent rather than a fixed offset applied
+	# each frame. In the museum a gun hangs in a cabinet inside a hall SEGMENT,
+	# and the segment is freed at the next crossing. Held by position alone, the
+	# gun would simply vanish out of the player's hands one hall later, and the
+	# pointer would be left holding a freed node — the exact failure this session
+	# has now fixed twice elsewhere. Under the holster it belongs to the walker
+	# and travels with them.
+	_is_weapon = _has_trigger(p)
+	if not _is_weapon:
+		return
+	# THE HOLSTER HANGS OFF THE CAMERA, not off this pointer. The camera IS the
+	# view; the pointer only usually agrees with it. Under the museum's walker
+	# they match, because em_desktop_pointer mirrors the camera every frame — but
+	# the shared rig puts this pointer beside a Camera3D under a Head, and where
+	# the pitch lives in that rig is not this file's business to assume. Hung off
+	# the pointer, the probe measured the weapon at 0.000 against the view: dead
+	# perpendicular. Hung off the camera it is 1.000 by construction, whatever
+	# any rig does above it.
+	var mount: Node3D = _camera if (_camera != null and is_instance_valid(_camera)) else self
+	if _holster == null or not is_instance_valid(_holster) or _holster.get_parent() != mount:
+		if _holster != null and is_instance_valid(_holster):
+			_holster.queue_free()
+		_holster = Node3D.new()
+		_holster.name = "DesktopHolster"
+		mount.add_child(_holster)
+	_weapon_home = p.get_parent()
+	if _weapon_home != null:
+		p.reparent(_holster, false)
+	# Parked, not lerped: a viewmodel that lags the view reads as a bug.
+	p.transform = Transform3D(Basis.IDENTITY, weapon_offset)
+
 
 func _drop_held() -> void:
 	if _held and is_instance_valid(_held):
+		# A weapon leaves the holster into the world it is standing in — NOT back
+		# into the hall it came from, which may have been freed several crossings
+		# ago. current_scene is the one parent guaranteed to still be there.
+		if _is_weapon and _held.get_parent() == _holster:
+			var home: Node = _weapon_home
+			if home == null or not is_instance_valid(home) or not home.is_inside_tree():
+				home = get_tree().current_scene
+			if home != null:
+				_held.reparent(home, true)
 		if _held is RigidBody3D:
 			(_held as RigidBody3D).freeze = _held_freeze
 			(_held as RigidBody3D).linear_velocity = Vector3.ZERO
@@ -298,3 +372,5 @@ func _drop_held() -> void:
 			(_held as CollisionObject3D).collision_layer = _held_layer
 			(_held as CollisionObject3D).collision_mask = _held_mask
 	_held = null
+	_weapon_home = null
+	_is_weapon = false
