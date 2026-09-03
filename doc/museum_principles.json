@@ -1,0 +1,54 @@
+{
+ "_readme": "The museum loop's memory. One entry per turn, appended, never rewritten. A loop that does not accumulate is a checklist run repeatedly; this file is what makes turn N+1 cheaper than turn N. Read it before starting a turn. See doc/MUSEUM_LOOP.md for the loop itself.",
+ "principles": [
+  {
+   "id": "query-the-claim-not-the-title",
+   "won": "2026-09-03, turn 1, Symmetry_Seventeen",
+   "principle": "Query the shelf with the room's KEEP line, not its title.",
+   "why": "The title names a subject and returns everything in the chapter. The KEEP line makes a CLAIM, and a claim has a premise, and the premise is often an artifact nobody has placed. Symmetry_Seventeen claims the census closes at seventeen. Searching 'symmetry' returns its own looms and mills. Searching the claim - rotation, invariant, closed - returned wallpaper_cage at the top: 'five-fold never closes', the crystallographic restriction, which is the REASON the census is finite. The room asserted a closed list and held nothing that explained the closing. Placed at r1 c3, beside the spawn, so the premise is met before the seventeen examples.",
+   "test": "shelf.py with the KEEP line's nouns beats shelf.py with the map name."
+  },
+  {
+   "id": "the-unplaced-are-the-unspent-value",
+   "won": "2026-09-03, turn 1, from the shelf build",
+   "principle": "Read the never-placed candidates first.",
+   "why": "2007 of 2899 artifacts have never stood in the live spine. A room improved by re-using something already in the chapter adds a repetition; a room improved by an unplaced artifact adds a body the museum has never met. The shelf marks these with a star for exactly this reason.",
+   "test": "shelf.py marks unplaced rows '*'; prefer them when scores are close."
+  },
+  {
+   "id": "seen-beats-clever",
+   "won": "2026-09-03, turn 1, from the shelf build",
+   "principle": "Prefer a candidate you can look at. If the best one is blind, shoot it first.",
+   "why": "1750 artifacts have no capture, so more than half of every candidate list is a description you are trusting. Every wrong claim shipped in this project came from reasoning about an object instead of looking at it. A blind candidate is not disqualified, it is just a capture away from being usable, and 403 artifacts are ALREADY standing in live maps with no capture at all - that list is the shoot queue and shelf.py --blind prints it.",
+   "test": "shelf.py marks each row seen or BLIND."
+  },
+  {
+   "id": "agents-read-one-hand-writes",
+   "won": "2026-09-02 and 03, measured across four waves",
+   "principle": "Agents read and check. One hand writes.",
+   "why": "Reading every placed artifact's script and scene is expensive, parallel and high-yield: a ten-agent panel found 80 faults in seven rooms, 51 factual. Drafting is neither: three drafters plus three judges for one room produced nothing usable, and the transformation chapter only holds together because one hand carried its arc across seven rooms. Vision is the exception - one agent per capture, because looking is reading.",
+   "test": "Five rooms written before their readers landed were each wrong about something a visitor would notice. Five written after were not."
+  },
+  {
+   "id": "the-fault-is-often-the-argument",
+   "won": "2026-09-03, writing softbodies and fractals",
+   "principle": "When an object is broken, check whether the breakage IS the room's claim before fixing or hiding it.",
+   "why": "The softmill's arm is on a collision layer its specimen cannot see, so it passes straight through: that became the chapter's timetable, since the encounter is two rooms away and here the body is still alone with itself. The flag with no physics became the control against the rack that genuinely negotiates. The Koch curve's spikes fold inward so depth 4 measures the same box as depth 0, which demonstrates infinite perimeter in a finite box better than the intended demonstration would have. This is also where the queer content lives: the part that refuses to be the diagram of itself.",
+   "test": "Ask of every fault: is this a lie the text must avoid, or a truth the text can use?"
+  },
+  {
+   "id": "placement-faults-outnumber-writing-faults",
+   "won": "2026-09-03, formfinding wave",
+   "principle": "Before improving a room's text, check whether its objects are where they claim to be.",
+   "why": "Four of the five formfinding faults were placement, not authorship: an artifact sharing a cell with the spawn is bumped a level, the grounding pass then lifts it clear of the walls, and a 20 m artifact goes into a 14 m room. Rooms are more often badly seated than badly written. The tells are: an explicit y in a token (cancels auto-grounding), a utility sharing the cell (bumps a level), and a measured aabb larger than the map.",
+   "test": "Compare each artifact's measured aabb against the map's metres before reading a word of its prose."
+  },
+  {
+   "id": "an-unmeasured-artifact-is-an-unbounded-one",
+   "won": "2026-09-03, turn 1, Symmetry_Seventeen, from the capture",
+   "principle": "Before placing anything, check how many artifacts already in the room have NO measured aabb. An unmeasured artifact is an unbounded one.",
+   "why": "The capture of Symmetry_Seventeen shows a tiled plane running out past the map edge into the dark, far larger than the 13 x 22 m room. Nothing in the measured list is bigger than the room - because the offender is not measured at all. Five of the room's fourteen artifacts have no aabb in the registry (loom_alhambra_p6m, loom_escher_mirror, mill_alhambra_p6m, mill_persian_p4, mill_escher_p4g) and two more measure 0 x 0 x 0 (wall_pattern_gallery, pattern_artifact). The registry's measurement is the only guard the grid has against a room-swallowing object, and for half this room there is no guard. This is why step 5 cannot be skipped: the data said the room was fine.",
+   "test": "shelf.py carries each aabb; count the None and the [0,0,0] before trusting a room's footprint."
+  }
+ ]
+}
