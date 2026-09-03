@@ -673,7 +673,16 @@ def plan(doc: dict, verdicts: list, protect=frozenset(), banned=frozenset()) -> 
     for v in verdicts:
         body_cells |= set(v.get("cells") or [])
 
-    ops, taken = [], set()
+    # ONE CARVE PER CELL, however many bodies are standing on it. Two bodies
+    # overlapping the same wall cell each carved it and each planted a copy of
+    # its literal, so a room gained a wall out of nothing - which is exactly
+    # what the conservation gate is for, and it caught it on the first real
+    # sequence run: Vectors_Act1 gained a "w" because cell (3,10) is claimed by
+    # two bodies.
+    def lit_of(p):
+        return str(struct[p[0]][p[1]]).strip()
+
+    ops, taken, done = [], set(), set()
     order = sorted([v for v in verdicts if v["verdict"] in ("CARVE", "SEAT")],
                    key=lambda v: -len(v.get("cells") or []))
     for v in order:
@@ -696,6 +705,22 @@ def plan(doc: dict, verdicts: list, protect=frozenset(), banned=frozenset()) -> 
             wall_cells = [p for p in wall_cells if p not in keep]
 
         for p in sorted(wall_cells):
+            if p in done:
+                continue
+            done.add(p)
+            # THE DOORWAY ROWS ARE THE SEAM. Row 0 and row H-1 are where the
+            # museum joins this hall to its neighbours - the seam copies the
+            # last row forward and the next hall first row back - so their
+            # geometry belongs to the crossing, not to the room. The first
+            # forces run carved seven extra cells out of VFM_02's entrance as a
+            # side effect of seating a body against it, widening the doorway
+            # from 3 cells to 10. That is a change to the hall face nobody
+            # asked for. Report it and leave it.
+            if p[0] in (0, H - 1):
+                ops.append({"r": p[0], "c": p[1], "to": None, "lit": lit_of(p),
+                            "because": v["tok"],
+                            "why": "in the doorway row, which is the museum seam - left alone"})
+                continue
             lit = str(struct[p[0]][p[1]]).strip()
             dest = displacement_target(p, hmap, taken | body_cells | set(banned),
                                        body_cells, H, W, protect)
@@ -742,10 +767,18 @@ def _culprits(before: dict, after: dict, ops: list) -> set:
         on_route = planted & (set(before.get("door_cells") or [])
                               | set(before.get("route_cells") or []))
         return on_route or planted
-    narrowed = (before["door_lane"] is not None and after["door_lane"] is not None
-                and after["door_lane"] < before["door_lane"])
-    if narrowed:
-        return planted & set(before.get("door_cells") or []) or planted
+    # Both lanes, not just the museum one. The first forces run refused
+    # Vectors_Act4a and VFM_09 for a narrowed SPAWN route and the loop had no
+    # answer for it, so it never replanned and the whole stamp was thrown away.
+    for key, cells in (("door_lane", "door_cells"), ("lane", "route_cells")):
+        b, a = before.get(key), after.get(key)
+        if b is not None and a is not None and a < b:
+            near = set()
+            for (r, c) in (before.get(cells) or []):
+                for n in ((r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1), (r, c)):
+                    if n in planted:
+                        near.add(n)
+            return near or planted
     return set()
 
 
@@ -1497,6 +1530,10 @@ def main() -> int:
             refused += 1
             for b in bad:
                 print("   REFUSED: " + b)
+            continue
+        if not entries:
+            print("   nothing to write: every carve this room needs has nowhere "
+                  "to put the wall it would remove")
             continue
         summary = {"tool": "stamp.py", "op": "stamp",
                    "lane_before": before["lane"], "lane_after": after["lane"],
