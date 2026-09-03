@@ -482,8 +482,13 @@ def displacement_target(p, hmap, taken, body_cells, H, W, protect):
                            if hmap.get(n, 0) > FLOOR_H)
             if not touching:
                 continue          # an island in the open floor is not a wall move
+            # Rank by ONE score rather than lexicographically. Sorting on
+            # neighbour-count first sent walls clear across the room whenever a
+            # slightly better-connected cell existed there, which is a correct
+            # move that reads as a wrong one. Three cells of distance per wall
+            # neighbour keeps the join and prefers the local answer.
             d = abs(rr - r) + abs(cc - c)
-            key = (-touching, d)
+            key = d - 3 * touching
             if best is None or key < best[0]:
                 best = (key, q)
     return best[1] if best else None
@@ -818,6 +823,193 @@ def typology(name: str, seq: str) -> None:
           " grid is compile_museum_map.py's job and it already does it.")
 
 
+# ── the proposal, drawn ─────────────────────────────────────────────────────
+# A stamp is a spatial argument and a list of cell coordinates is not a way to
+# read one. This draws the proposal the way an architect would mark up a plan:
+# the room as it stands, the bodies at their measured footprint, and over that
+# the two moves - a cell CARVED to floor, and the same wall RE-PLANTED - joined
+# by the arrow that makes it one move rather than two.
+
+CELL = 28
+PAD = 150
+C_WALL = "#2b3038"
+C_VOID = "#ffffff"
+C_INK = "#141820"
+C_RED = "#d1344b"
+C_AMBER = "#c07a12"
+C_BLUE = "#2f6bd8"
+C_GREEN = "#2e7d4f"
+
+
+def esc(s) -> str:
+    return (str(s).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;"))
+
+
+def draw(name: str, doc: dict, shelf: dict, verdicts: list, ops: list,
+         before: dict, out_dir: str) -> str:
+    struct = doc["layers"]["structure"]
+    util = doc["layers"].get("utilities") or []
+    H = len(struct)
+    W = max(len(r) for r in struct)
+    hmap = heights(struct)
+    ox, oy = PAD // 2, 78
+    w_px = ox * 2 + W * CELL
+    h_px = oy + H * CELL + 210
+
+    o = ['<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d" '
+         'viewBox="0 0 %d %d" font-family="ui-sans-serif,system-ui,sans-serif">'
+         % (w_px, h_px, w_px, h_px),
+         '<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" '
+         'markerWidth="5" markerHeight="5" orient="auto-start-end">'
+         '<path d="M0,0 L10,5 L0,10 z" fill="%s"/></marker>' % C_GREEN,
+         '<pattern id="hatch" width="6" height="6" patternTransform="rotate(45)" '
+         'patternUnits="userSpaceOnUse"><line x1="0" y1="0" x2="0" y2="6" '
+         'stroke="%s" stroke-width="2"/></pattern></defs>' % C_AMBER,
+         '<rect width="100%%" height="100%%" fill="#fbfaf8"/>',
+         '<text x="%d" y="26" font-size="15" font-weight="600" fill="%s">%s</text>'
+         % (ox, C_INK, esc(name)),
+         '<text x="%d" y="46" font-size="11" fill="#5b6472">the stamp proposed '
+         'by tools/stamp.py — nothing here is applied</text>' % ox]
+
+    carved = {(op["r"], op["c"]) for op in ops if op["to"] == "1"}
+    planted = {(op["r"], op["c"]): op["to"] for op in ops if op["to"] and op["to"] != "1"}
+    stuck = {(op["r"], op["c"]) for op in ops if op["to"] is None}
+
+    # ---- the room as it stands -------------------------------------------
+    for r in range(H):
+        for c in range(len(struct[r])):
+            x, y = ox + c * CELL, oy + r * CELL
+            h = hmap[(r, c)]
+            fill = C_VOID if h == 0 else ("#eef0f3" if h == FLOOR_H else C_WALL)
+            dash = ' stroke-dasharray="3 3"' if h == 0 else ""
+            o.append('<rect x="%d" y="%d" width="%d" height="%d" fill="%s" '
+                     'stroke="#c9cdd4" stroke-width="0.7"%s/>'
+                     % (x, y, CELL, CELL, fill, dash))
+            if h > FLOOR_H:
+                o.append('<text x="%d" y="%d" font-size="8" fill="#8d949e" '
+                         'text-anchor="middle">%s</text>'
+                         % (x + CELL / 2, y + CELL / 2 + 3, esc(str(struct[r][c]).strip())))
+
+    # ---- spawn and exit ---------------------------------------------------
+    for r in range(min(H, len(util))):
+        for c in range(len(util[r])):
+            v = str(util[r][c]).strip()
+            if not v:
+                continue
+            base = v.split(":")[0]
+            if base not in ("s", "t"):
+                continue
+            x, y = ox + c * CELL + CELL / 2, oy + r * CELL + CELL / 2
+            o.append('<circle cx="%.1f" cy="%.1f" r="7" fill="none" stroke="%s" '
+                     'stroke-width="1.8"/>' % (x, y, C_BLUE))
+            o.append('<text x="%.1f" y="%.1f" font-size="9" fill="%s" '
+                     'text-anchor="middle" font-weight="600">%s</text>'
+                     % (x, y + 3, C_BLUE, base))
+
+    # ---- the bodies, at measured size -------------------------------------
+    for v in verdicts:
+        sp = span_of(v["tok"], v["raw"], v["r"], v["c"], shelf)
+        cx = ox + v["c"] * CELL + CELL / 2
+        cy = oy + v["r"] * CELL + CELL / 2
+        if sp is None:
+            o.append('<rect x="%.1f" y="%.1f" width="%d" height="%d" '
+                     'fill="url(#hatch)" stroke="%s" stroke-width="1.2"/>'
+                     % (cx - CELL / 2, cy - CELL / 2, CELL, CELL, C_AMBER))
+        else:
+            x0, x1, z0, z1 = sp
+            col = {"TOO BIG": C_RED, "OVERRUN": C_RED, "CARVE": C_BLUE,
+                   "SEAT": C_GREEN, "UNDECLARED": C_AMBER}.get(v["verdict"], "#7d8794")
+            o.append('<rect x="%.1f" y="%.1f" width="%.1f" height="%.1f" fill="%s" '
+                     'fill-opacity="0.06" stroke="%s" stroke-width="1" '
+                     'stroke-opacity="0.5"/>'
+                     % (ox + x0 * CELL, oy + z0 * CELL, (x1 - x0) * CELL,
+                        (z1 - z0) * CELL, col, col))
+        o.append('<circle cx="%.1f" cy="%.1f" r="2.2" fill="%s"/>' % (cx, cy, C_INK))
+        o.append('<text x="%.1f" y="%.1f" font-size="8" fill="%s">%s</text>'
+                 % (cx + 4, cy - 4, C_INK, esc(v["tok"][:22])))
+
+    # ---- the two moves ----------------------------------------------------
+    for (r, c) in carved:
+        x, y = ox + c * CELL, oy + r * CELL
+        o.append('<rect x="%d" y="%d" width="%d" height="%d" fill="%s" '
+                 'fill-opacity="0.22" stroke="%s" stroke-width="1.8" '
+                 'stroke-dasharray="4 2"/>' % (x, y, CELL, CELL, C_RED, C_RED))
+        o.append('<line x1="%d" y1="%d" x2="%d" y2="%d" stroke="%s" '
+                 'stroke-width="1.2" stroke-opacity="0.7"/>'
+                 % (x + 6, y + 6, x + CELL - 6, y + CELL - 6, C_RED))
+        o.append('<line x1="%d" y1="%d" x2="%d" y2="%d" stroke="%s" '
+                 'stroke-width="1.2" stroke-opacity="0.7"/>'
+                 % (x + CELL - 6, y + 6, x + 6, y + CELL - 6, C_RED))
+    for (r, c), lit in planted.items():
+        x, y = ox + c * CELL, oy + r * CELL
+        o.append('<rect x="%d" y="%d" width="%d" height="%d" fill="%s" '
+                 'fill-opacity="0.42" stroke="%s" stroke-width="2.2"/>'
+                 % (x, y, CELL, CELL, C_GREEN, C_GREEN))
+        o.append('<text x="%.1f" y="%.1f" font-size="9" fill="#12331f" '
+                 'text-anchor="middle" font-weight="700">%s</text>'
+                 % (x + CELL / 2, y + CELL / 2 + 3, esc(lit)))
+    for (r, c) in stuck:
+        x, y = ox + c * CELL, oy + r * CELL
+        o.append('<text x="%.1f" y="%.1f" font-size="13" fill="%s" '
+                 'text-anchor="middle">?</text>' % (x + CELL / 2, y + CELL / 2 + 5, C_AMBER))
+
+    # the arrow that makes a carve and a plant ONE move
+    pairs = []
+    src = [op for op in ops if op["to"] == "1"]
+    dst = [op for op in ops if op["to"] and op["to"] != "1"]
+    for a, b in zip(src, dst):
+        pairs.append(((a["r"], a["c"]), (b["r"], b["c"])))
+    for (r0, c0), (r1, c1) in pairs:
+        x0 = ox + c0 * CELL + CELL / 2
+        y0 = oy + r0 * CELL + CELL / 2
+        x1 = ox + c1 * CELL + CELL / 2
+        y1 = oy + r1 * CELL + CELL / 2
+        # bow the path perpendicular to itself, so several moves between the
+        # same neighbourhood do not collapse into one line
+        mx, my = (x0 + x1) / 2, (y0 + y1) / 2
+        bow = 0.18
+        qx, qy = mx - (y1 - y0) * bow, my + (x1 - x0) * bow
+        o.append('<path d="M%.1f,%.1f Q%.1f,%.1f %.1f,%.1f" fill="none" stroke="%s" '
+                 'stroke-width="1.5" stroke-opacity="0.75" marker-end="url(#ar)"/>'
+                 % (x0, y0, qx, qy, x1, y1, C_GREEN))
+
+    # ---- the legend, which is the argument --------------------------------
+    ly = oy + H * CELL + 26
+    counts = collections.Counter(v["verdict"] for v in verdicts)
+    o.append('<text x="%d" y="%d" font-size="11" font-weight="600" fill="%s">'
+             'what the stamp proposes</text>' % (ox, ly, C_INK))
+    rows = [
+        (C_RED, "carve to floor", "%d cell(s) a body needs and a wall occupies" % len(carved)),
+        (C_GREEN, "re-plant the wall", "the same literal, moved to join a wall — never deleted"),
+        (C_AMBER, "nowhere to go", "%d wall(s) with no legal destination, so not carved either"
+         % len(stuck)),
+    ]
+    for i, (col, label, note) in enumerate(rows):
+        y = ly + 18 + i * 15
+        o.append('<rect x="%d" y="%d" width="10" height="10" fill="%s" fill-opacity="0.3" '
+                 'stroke="%s"/>' % (ox, y - 8, col, col))
+        o.append('<text x="%d" y="%d" font-size="10" fill="%s" font-weight="600">%s</text>'
+                 % (ox + 16, y, C_INK, label))
+        o.append('<text x="%d" y="%d" font-size="10" fill="#5b6472">%s</text>'
+                 % (ox + 116, y, esc(note)))
+    y = ly + 18 + len(rows) * 15 + 12
+    o.append('<text x="%d" y="%d" font-size="10" fill="%s">bodies: %s</text>'
+             % (ox, y, C_INK, esc(", ".join("%s %d" % (k, n) for k, n in counts.most_common()))))
+    o.append('<text x="%d" y="%d" font-size="10" fill="#5b6472">walls %d before, %d after — '
+             'the multiset is conserved, a moved wall keeps its own literal</text>'
+             % (ox, y + 15, before.get("wall_cells", 0), before.get("wall_cells", 0)))
+    o.append('<text x="%d" y="%d" font-size="10" fill="#5b6472">narrowest lane on the route: '
+             '%s — the contract is that this must not fall</text>'
+             % (ox, y + 30, "n/a (no route clear of bodies)" if before.get("lane") is None
+                else before["lane"]))
+    o.append("</svg>")
+
+    os.makedirs(out_dir, exist_ok=True)
+    p = os.path.join(out_dir, "stamp_%s.svg" % name)
+    atomic_write(p, NL.join(o) + NL)
+    return p
+
+
 def journal_path(name: str) -> str:
     return os.path.join(MAPS, name, "stamp_journal.json")
 
@@ -984,6 +1176,9 @@ def main() -> int:
     ap.add_argument("--seq", default="")
     ap.add_argument("--all", action="store_true")
     ap.add_argument("--apply", action="store_true")
+    ap.add_argument("--svg", action="store_true",
+                    help="draw the proposal to doc/plans/stamp_<Map>.svg")
+    ap.add_argument("--out", default=os.path.join(ROOT, "doc", "plans"))
     ap.add_argument("--typology", action="store_true",
                     help="what shape does this room's claim want")
     ap.add_argument("--revert", action="store_true",
@@ -1027,6 +1222,10 @@ def main() -> int:
             print("\n%s  -- the pathfinder cannot read this map: %s" % (name, before["error"]))
             continue
         ops = plan(doc, verdicts, protect=set(before.get("route_cells") or []))
+
+        if args.svg:
+            p = draw(name, doc, shelf, verdicts, ops, before, args.out)
+            print("   drew %s" % os.path.relpath(p, ROOT))
 
         if not args.apply or not ops:
             report(name, verdicts, before, ops)
