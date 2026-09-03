@@ -14,6 +14,14 @@ class_name ForceCube
 ## Grab it (VR) or pointer-drag it; the live vector is the cube's own velocity. seed/push
 ## set the resting vector shown when it isn't moving (and in the gallery).
 
+## How heavily the cube falls. 1.0 is ordinary weight; 0.0 restores the old
+## floating probe for a room that wants one. force_field_zone overrides this
+## while the cube is inside a field, and puts it back on the way out.
+@export var falls: float = 1.0
+## A cube that drops this far below where it started has left the room, and
+## comes back rather than falling forever. A chasm map has no floor to catch
+## it and no reset cube; without this, throwing the probe in loses it.
+@export var recover_below_m: float = 4.0
 @export var seed: int = 0
 @export_range(0.0, 1.0, 0.01) var push: float = 0.6
 @export var cube_color: Color = Color(0.42, 0.78, 0.98)
@@ -47,14 +55,28 @@ const CUBE := 0.40
 
 var _last_pos: Vector3
 var _last_f: Vector3 = Vector3.INF
+var _home: Transform3D
+var _home_set: bool = false
 
 
 func _ready() -> void:
 	super()                                  # pickable_prop._ready -> pickable.gd._ready + set_process
 	freeze = true
-	# zero-gravity throw: on release it unfreezes and keeps the throw velocity (let_go sets
-	# linear_velocity); with no gravity it flies straight off the way you let it go.
-	gravity_scale = 0.0
+	# WEIGHT, because the rooms that use this cube are about falling.
+	#
+	# It shipped at gravity_scale 0.0, and the comment gave a good reason: with
+	# no gravity a thrown cube flies straight off the way you let it go, and the
+	# damping brings it to a stop somewhere you can fetch it. That makes a clean
+	# vector probe. It also makes a probe that cannot demonstrate the one thing
+	# Vectors_Act5_ForceAsPlace is named for. Throwing a weightless cube into a
+	# chasm to find out whether the field will carry it proves nothing: it was
+	# never going to drop.
+	#
+	# So it falls now, and RECOVERS instead of being lost. The old zero gravity
+	# was standing in for a way home; this is the way home, said directly.
+	# force_field_zone saves and restores gravity_scale on entry and exit, so
+	# inside a field the weight is switched off exactly as before.
+	gravity_scale = falls
 	linear_damp = 0.3                        # drifts to a slow stop so it stays recoverable
 	angular_damp = 0.5
 	release_mode = 0                         # ReleaseMode.UNFROZEN — become dynamic on release
@@ -66,6 +88,9 @@ func _ready() -> void:
 
 
 func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data.has("falls"): falls = clampf(float(config_data["falls"]), 0.0, 4.0)
+	if config_data.has("recover_below_m"):
+		recover_below_m = maxf(0.5, float(config_data["recover_below_m"]))
 	if config_data.has("seed"): seed = int(config_data["seed"])
 	if config_data.has("push"): push = clampf(float(config_data["push"]), 0.0, 1.0)
 	if config_data.has("emissive"): emissive = bool(config_data["emissive"])
@@ -108,6 +133,19 @@ func _build_body() -> void:
 # --- per-frame: the live vector is the cube's own velocity -------------------
 func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
+		return
+	# WHERE HOME IS, captured on the first frame rather than in _ready. The grid
+	# seats an artifact with call_deferred, so at _ready the cube is not yet
+	# standing where the map put it, and a home read there would send a fallen
+	# cube back to the origin of the world.
+	if not _home_set:
+		_home = global_transform
+		_home_set = true
+		_last_pos = global_position
+	# Home again. Checked before the velocity is differenced, so the teleport
+	# does not read as a colossal one-frame force and draw an arrow to match.
+	if not freeze and global_position.y < _home.origin.y - recover_below_m:
+		_recover()
 		return
 	var vel: Vector3 = (global_position - _last_pos) / maxf(delta, 0.0001)
 	_last_pos = global_position
@@ -171,3 +209,16 @@ func _box_edges(f: Vector3) -> Array:
 	for p in pairs:
 		out.append([c[int(p[0])], c[int(p[1])]])
 	return out
+
+
+## Put the cube back where it was placed, at rest. Called when it has fallen out
+## of the room. Freezing it again is deliberate: it returns in the state it
+## shipped in, waiting to be picked up, rather than arriving mid-tumble.
+func _recover() -> void:
+	linear_velocity = Vector3.ZERO
+	angular_velocity = Vector3.ZERO
+	global_transform = _home
+	freeze = true
+	_last_pos = global_position
+	_last_f = Vector3.INF
+	_redraw(_resting_force())

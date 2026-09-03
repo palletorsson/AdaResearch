@@ -156,6 +156,46 @@ singularity guard beneath it dead code.
 
 ---
 
+## FIXED, 2026-09-03, with the probes that prove it
+
+**The 5 cm.** `auto_ground: false` on the registry entry (this artifact grounds
+itself: its volume runs from its origin upward) and `_point_inside` made
+inclusive at the base with 2 cm for the gap a controller leaves under its feet.
+`commons/testing/probe_act5_reach.gd`: grounded, origin 0.55, feet 0.50,
+OUTSIDE; self-grounded, origin 0.50, feet 0.50, INSIDE. PROBE OK. Fixes all ten
+placements of force_field_zone.
+
+**The yaw fader.** The default is not the fault, so it is unchanged: the machine
+still ships as gravity straight down, which is the room's first lesson. What was
+broken was that the degeneracy was SILENT. Now the readout says the fader is
+idle and at what bearing it is waiting, and a dim ghost arrow on the stage holds
+that bearing so you can aim before you lift. The early return in `_update` had
+to learn about it too: it watched the FIELD, and at a pole the yaw does not move
+the field, so the ghost would have frozen at whatever azimuth was set when the
+vector last changed.
+
+**The weightless probe.** `gravity_scale` now comes from a new `falls` export,
+default 1.0, so a thrown cube drops. The old zero gravity was standing in for a
+way home, and a chasm map has no floor to catch a cube and no reset cube, so the
+way home is now said directly: `recover_below_m` (4 m) returns a fallen cube to
+where it was placed, at rest. `_home` is captured on the first FRAME, not in
+`_ready`, because the grid seats artifacts with call_deferred and a home read in
+`_ready` would send a fallen cube to the origin of the world.
+`commons/testing/probe_act5_controls.gd` asserts all of it: shipped field
+(0, -9.80, 0); yaw mid-travel 180 degrees, the bearing across this chasm; ghost
+(0, 0, -1); pitch lifted, field (0, 0, -9.80); gravity 1.00; home 10.00; fell
+past the limit and came back to 10.00 frozen; a one-metre drop did not teleport.
+PROBE OK.
+
+**free_vector placed** at r21 c2, scale 0.7. Nothing fits at full size: 812 of
+1232 candidate placements hit a wall or void. Across the whole chapter only
+VFM_08_Arena has clear room at 1.0.
+
+STILL OPEN: the plank, which needs the museum walker to learn about carry
+volumes; the four subtitles the museum drops; `truth_complete`, which tells a
+visitor they crossed on a field they set; and the zone's `crossing` preset,
+(7, 7, 0), which points along the trench.
+
 ## What the loop recommends
 
 **A ruling is needed first, and it is not mine to make.** Either the museum

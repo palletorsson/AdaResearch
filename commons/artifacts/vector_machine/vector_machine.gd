@@ -26,8 +26,10 @@ var _console: Node3D
 var _sliders: Array = []
 var _readout
 var _preview: Node3D
+var _ghost_mat: StandardMaterial3D
 var _arrow_mat: StandardMaterial3D
 var _last_v: Vector3 = Vector3.INF
+var _last_yaw: float = -1.0
 
 
 func _ready() -> void:
@@ -88,6 +90,29 @@ func current_vector() -> Vector3:
 	return Vector3(cos(pitch) * sin(yaw), sin(pitch), cos(pitch) * cos(yaw)) * mag
 
 
+## The azimuth the YAW fader is currently holding, in degrees, whether or not it
+## is reaching the field. 0 is +Z, 90 is +X.
+func _yaw_deg() -> float:
+	return rad_to_deg(_norm(1) * TAU)
+
+
+## True when PITCH is near enough to a pole that the yaw term is multiplied out.
+## The threshold is where a full turn of the yaw fader moves the field by less
+## than a tenth of its magnitude, which is the point at which a visitor cannot
+## see the difference.
+func _yaw_idle() -> bool:
+	var pitch: float = lerpf(-PI * 0.5, PI * 0.5, _norm(0))
+	return absf(cos(pitch)) < 0.1
+
+
+## Where the field WILL point once the pitch comes off the pole. Drawn as a
+## ghost so the yaw fader shows its work while it is idle: you can aim before
+## you lift, which is the order the room's own crossing wants.
+func _yaw_ghost() -> Vector3:
+	var yaw: float = _norm(1) * TAU
+	return Vector3(sin(yaw), 0.0, cos(yaw))
+
+
 # poll the sliders each frame (workbench pattern — no signal-timing dependency)
 func _process(_delta: float) -> void:
 	_update()
@@ -95,19 +120,42 @@ func _process(_delta: float) -> void:
 
 func _update() -> void:
 	var v := current_vector()
-	if v.distance_to(_last_v) < 0.02:
+	# The early return watches the FIELD, and at a pole the yaw fader does not
+	# change the field. Watching only v would have frozen the ghost arrow at
+	# whatever azimuth was set when the vector last moved, which is the same
+	# silent-nothing-happens the ghost exists to cure, one level up. So watch
+	# the yaw as well while it is idle.
+	var yaw_now: float = _norm(1)
+	if v.distance_to(_last_v) < 0.02 and absf(yaw_now - _last_yaw) < 0.005:
 		return
 	_last_v = v
+	_last_yaw = yaw_now
 	var mag: float = v.length()
 	if _preview:
 		for ch in _preview.get_children():
 			_preview.remove_child(ch); ch.queue_free()
 		if mag > 0.001:
 			_preview.add_child(_arrow(Vector3.ZERO, v.normalized() * clampf(mag / 9.8, 0.4, 2.0) * 0.5, 0.04, _arrow_mat))
+		# The ghost: a dim horizontal arrow showing the azimuth the yaw fader is
+		# holding. It is only worth drawing while yaw is idle, because that is
+		# exactly when the live arrow cannot show it.
+		if _yaw_idle():
+			if _ghost_mat == null:
+				_ghost_mat = _glow_mat(Color(arrow_color, 0.35), 0.5)
+			_preview.add_child(_arrow(Vector3.ZERO, _yaw_ghost() * 0.30, 0.02, _ghost_mat))
 	if _readout:
 		var dy: float = v.y
 		var word: String = "DOWN — fall" if dy < -1.0 else ("UP — lift" if dy > 1.0 else "ACROSS")
-		_readout.set("text", "F = (%.1f, %.1f, %.1f)\n|F| = %.1f   %s" % [v.x, v.y, v.z, mag, word])
+		var txt := "F = (%.1f, %.1f, %.1f)\n|F| = %.1f   %s" % [v.x, v.y, v.z, mag, word]
+		# SAY WHEN A CONTROL HAS NOTHING TO DO. Both horizontal terms carry a
+		# cos(pitch), so at either end of the PITCH travel the field is vertical
+		# and the whole 14 cm of YAW changes nothing. That is not a fault, it is
+		# what two angles cost you at the poles — but it shipped SILENT, so a
+		# visitor could work the yaw fader end to end and conclude the machine
+		# was broken. The value is still being kept; it is waiting.
+		if _yaw_idle():
+			txt += "\nYAW held at %d° — idle while the field is vertical" % int(round(_yaw_deg()))
+		_readout.set("text", txt)
 	for f in get_tree().get_nodes_in_group("force_field"):
 		if f.has_method("set_field_vector"):
 			f.set_field_vector(v)
