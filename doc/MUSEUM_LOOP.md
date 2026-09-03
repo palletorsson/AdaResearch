@@ -108,6 +108,61 @@ Not everywhere. Measured over four waves on 2026-09-02 and 03:
 
 The rule that came out of it: **agents read and check; one hand writes.**
 
+## The toolchain — what each step actually runs
+
+Every step of the loop has a command. Where a step has no command it is either
+judgement (step 4, step 7) or vision (step 6), and that is the whole reason
+those three are the expensive ones. Nothing here needs a model, a server or a
+key unless the row says so.
+
+**Measure and index — the ground the rest stands on.**
+
+| tool | run it | what it answers |
+|---|---|---|
+| `tools/measure_artifact_aabbs.py` | `--only=a,b` · `--registry=X` · `--dry-run` | how big is this body, really. Boots Godot once, merges into the registry, preserves tab indent. Resolves **delegates**, feeds **`dna.fixture`** to gated artifacts, and retries any body that measures zero |
+| `commons/testing/measure_artifacts.gd` | (driven by the above) | the Godot half. Settle 0.35 s, second reading to catch a simulation still growing, `IMPLAUSIBLE_M` guard |
+| `commons/testing/probe_yaw_span.gd` | `--token=X` | does the Python footprint math agree with the engine on all four yaws. Run it whenever the placement geometry changes |
+| `tools/shelf.py` | `--build` · `<terms>` · `--unseen` · `--blind` | what could express this concept. 3367 entries with category, tags, axes, placements, capture, `wall_backing`, aabb + centre |
+| `tools/sync_footprints.py` | `--apply --cap=9` | push measured cells back into `spatial_needs.footprint_cells` — **224 of 893 placed artifacts declare a footprint 2× too small** |
+
+**Judge the room.**
+
+| tool | run it | what it answers |
+|---|---|---|
+| `tools/map_plan.py` | `<Map> [<Map>…]` | the room as an architectural **plan**, not a photograph. Bodies at measured footprint, honouring centre offset and yaw; red where a body leaves the room, hatched where unmeasured. ~1 s per room |
+| `tools/argument_shape.py` | `--mismatch` · `--map=X --why` | does the room's **form** argue its **claim**. Seven kinds; form fights claim in 46 of 185 |
+| `tools/coherence.py` | (no args) | one row per room, one column per modality — CLAIM · BODIES · SEEN · TEXT · SPACE · VARY — each gap naming its next action |
+| `tools/map_pathfinder.py` | `check <Map> --verbose` | can the player get there. **Has one error rule** — "pathfinder OK" is not evidence of much |
+| `tools/walk_evaluator.py` | `--map=X` | detour ratio, encounter order, backtracking |
+| `tools/stamp.py` | *(being built)* | seat every body: carve and **displace** walls, journal it reversibly, seed the room shape from a typology keyed to the argument, keep a walkable corridor |
+
+**Write and gate the text.**
+
+| tool | run it | what it answers |
+|---|---|---|
+| `tools/wall_voice.py` | `<seq>` · `--all` | the deterministic half of the wall-text standard: forbidden words, repeated openings, and the across-room repetition check (6-shingle, measured not guessed) |
+| `tools/final_tags.py` | `--check` | does every `<!-- @token -->` region name a body the map actually places |
+| `tools/book.py` | `compile` | the book — a pearl is a list of lines |
+| `tools/red_thread_page.py` | (no args) | regenerate the triage page |
+
+**Curate the families.**
+
+| tool | run it | what it answers |
+|---|---|---|
+| `tools/check_dna_declarations.py` | (no args) | does each declared axis match its code. Exit code = broken count, so it gates |
+| `tools/build_dna_gallery.py` | `--slug=S --tokens=a,b` | one PNG per variant plus a manifest |
+| `tools/artifact_dna_critic.py` | `--gallery=S` | does the axis change the picture. Emits `INERT?` / `ANAMORPHIC` / `INERT` |
+| `tools/probe_anamorphic.py` | `--token=X --axis=Y` | is a dead verdict a fact about the artifact or about where the camera stood |
+| `tools/build_dna_deck.py` | (no args) | 5164 variant cards for `/map-curator`. **26 of 185 rooms place any variant** |
+
+**Talk to the other sessions.**
+
+| tool | run it | what it answers |
+|---|---|---|
+| `tools/forum.py` | `open` · `ask` · `answer <id>` · `settle <id>` | several Claude sessions edit this repo at once and none can see the others. Post before touching shared data, and after a regeneration that moves numbers |
+| `tools/fold_ledger.py` | `--check` | a fold balances by **artifact**, not by map — and `--check` must run *before* the sequence file changes |
+| `tools/sieve.py` | `<target>` | the three questions |
+
 ## The cost of skipping step 5
 
 Rooms written before their readers landed were wrong about something a visitor
