@@ -538,7 +538,30 @@
 			"spatial_needs": {
 				"footprint_cells": 4,
 				"clearance_m": 0.6
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					5.07,
+					1.77,
+					2.6
+				],
+				"aabb_center": [
+					-0.14,
+					0.88,
+					0.05
+				],
+				"grid_cells": [
+					6,
+					3
+				],
+				"max_dimension_m": 5.07,
+				"measured_at": "2026-09-03T12:07:39.308630Z"
+			},
+			"footprint_measured": [
+				6,
+				1,
+				3
+			]
 		}
 	}
 }
