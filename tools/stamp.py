@@ -326,6 +326,110 @@ def _walk_free(g, free: set, target):
     return []
 
 
+#: A body is in the way only if it occupies the band a walking body occupies.
+#: Below the ankle you step over it - a floor tile, a rug, a low plinth edge.
+#: Above the head you walk under it - a hung gallery, a soffit, a sign. The
+#: first version blocked on footprint alone and reported 691 artifacts as
+#: unapproachable across the corpus, which said more about the model than the
+#: museum: it counted tile_meander_floor, a FLOOR, as an obstacle.
+STEP_OVER_M = 0.35
+DUCK_UNDER_M = 1.75
+
+
+def blocks_walking(tok: str, raw: str, shelf: dict) -> bool:
+    """Does this body stand in a walker's way, or only in the plan's way?"""
+    e = shelf.get(tok) or {}
+    a = e.get("aabb")
+    if not a:
+        return True
+    cen = e.get("aabb_center") or [0.0, 0.0, 0.0]
+    height = float(a[1])
+    # The token may lift the body: name:yaw:y_offset.
+    parts = raw.split("#")[0].split(":")
+    y_off = 0.0
+    if len(parts) >= 3:
+        try:
+            y_off = float(parts[2])
+        except ValueError:
+            y_off = 0.0
+    bottom = y_off + float(cen[1]) - height / 2.0
+    top = y_off + float(cen[1]) + height / 2.0
+    if top <= STEP_OVER_M:
+        return False
+    if bottom >= DUCK_UNDER_M:
+        return False
+    return True
+
+
+def museum_doors(struct: list) -> tuple:
+    """The museum's own traversal: IN at the first z row, OUT at the last.
+
+    Palle, 2026-09-03: "that is in the museum, so in the first z row and out at
+    last, where there has to be a one, right?" - right, and it is a different
+    question from spawn-to-teleporter, which is what this tool was checking. A
+    hall dealt into the museum is entered and left through those two rows; the
+    map's own spawn disc is not used there at all. Measured over the 185 live
+    rooms: 180 have a floor cell in the first row, 176 in the last, 173 have
+    both, and 166 walk end to end. So the contract is real and nearly kept, and
+    a stamp must not be what breaks it.
+
+    Note the museum will CARVE a door itself if a row has no open cell
+    (_authored_passages), so a sealed row is not fatal downstream - but it is a
+    silent override of the author, and a stamper should never be its cause.
+    """
+    H = len(struct)
+    entry = [(0, c) for c, v in enumerate(struct[0]) if mp.parse_height(v) == FLOOR_H]
+    exits = {(H - 1, c) for c, v in enumerate(struct[H - 1])
+             if mp.parse_height(v) == FLOOR_H}
+    return entry, exits
+
+
+def walk_doors(g, free: set, entry: list, exits: set):
+    """Shortest walk from any first-row door to any last-row door, over cells no
+    body is standing in. MapGraph.neighbors is the step rule, unrestated."""
+    from collections import deque
+    starts = [p for p in entry if p in free] or list(entry)
+    if not starts or not exits:
+        return []
+    prev = {p: None for p in starts}
+    q = deque(starts)
+    while q:
+        pos = q.popleft()
+        if pos in exits:
+            out = []
+            while pos is not None:
+                out.append(pos)
+                pos = prev[pos]
+            return list(reversed(out))
+        for nb in g.neighbors(pos):
+            if nb in prev:
+                continue
+            if nb not in free and nb not in exits:
+                continue
+            prev[nb] = pos
+            q.append(nb)
+    return []
+
+
+def unreachable_bodies(bodies_by_tok: dict, free: set, reached: set, hmap: dict) -> list:
+    """A body you cannot walk up to is not in the exhibition.
+
+    Approach cells are the free cells orthogonally touching the body's own
+    footprint. A body with no free cell beside it at all is counted too - it is
+    walled in, which is the same failure by another route.
+    """
+    out = []
+    for tok, cells in bodies_by_tok.items():
+        approach = {p for p in cells if p in free}      # walk-through bodies
+        for (r, c) in cells:
+            for n in ((r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)):
+                if n in free:
+                    approach.add(n)
+        if not (approach & reached):
+            out.append(tok)
+    return sorted(out)
+
+
 def measure(doc: dict, shelf: dict) -> dict:
     """Reachability, the narrowest lane on the route, and the wall multiset."""
     struct = doc["layers"]["structure"]
@@ -333,18 +437,27 @@ def measure(doc: dict, shelf: dict) -> dict:
     H = len(struct)
 
     bodies = set()
+    by_tok = {}
     it = doc["layers"].get("interactables") or []
     for r in range(min(H, len(it))):
         for c in range(len(it[r])):
             raw = str(it[r][c]).strip()
             if not raw or raw == "-":
                 continue
-            sp = span_of(raw.split(":")[0].split("#")[0], raw, r, c, shelf)
+            tok = raw.split(":")[0].split("#")[0]
+            sp = span_of(tok, raw, r, c, shelf)
             if sp:
-                bodies |= {p for p in cells_of(sp) if p in hmap}
+                own = {p for p in cells_of(sp) if p in hmap}
+                # Every body is something to REACH; only some are something to
+                # walk around. tile_meander_floor is a floor.
+                if blocks_walking(tok, raw, shelf):
+                    bodies |= own
+                by_tok["%s@%d,%d" % (tok, r, c)] = own
 
-    # A cell the player can be in: real floor, and nothing standing in it.
-    free = {p for p, h in hmap.items() if h == FLOOR_H} - bodies
+    # Two sets, used for two different questions below: every floor cell, and
+    # the floor cells nothing is standing in.
+    floor_all = {p for p, h in hmap.items() if h == FLOOR_H}
+    free = floor_all - bodies
 
     reach, route, tele = set(), [], None
     try:
@@ -358,6 +471,42 @@ def measure(doc: dict, shelf: dict) -> dict:
             # So walk ITS step rule (never a second implementation of it) over
             # the cells a player can actually occupy.
             route = _walk_free(g, free, tele)
+        entry, exits = museum_doors(struct)
+        # TWO WALKS, because they are two questions and conflating them gives a
+        # number nobody can act on.
+        #
+        # The STRUCTURAL walk is the museum's own contract: a dealt hall is
+        # built from the structure layer and entered at the first z row, so this
+        # is the one that says whether the hall is a hall. 166 of 185 pass.
+        #
+        # The CLEAR walk additionally treats bodies as solid. It is stricter and
+        # it is not the museum's rule - a body called lab_room covering 81 cells
+        # is a room you walk into, and ca_bridge is a bridge you walk on, and
+        # neither declares that anywhere the registry can be asked. So this is
+        # reported as a caution, never as the verdict.
+        door_walk = walk_doors(g, floor_all, entry, exits)
+        door_walk_clear = walk_doors(g, free, entry, exits)
+        # Every artifact must be approachable from where the visitor comes IN,
+        # which in a museum hall is the first row, not the map's spawn disc.
+        # WALLED OFF is the fault worth naming. An artifact you cannot reach
+        # because a WALL is in the way is a broken room; one you cannot reach
+        # because another artifact is in the way is a crowded room, and the
+        # difference matters because only the first is stamp.py's business.
+        # So the flood runs over the structure from the museum entrance, and
+        # the body-clear walk stays a separate caution.
+        from collections import deque
+        seeds = [p for p in entry if p in floor_all]
+        if not seeds and g.spawn is not None:
+            seeds = [g.spawn]
+        seen = set(seeds)
+        q = deque(seeds)
+        while q:
+            pos = q.popleft()
+            for nb in g.neighbors(pos):
+                if nb not in seen and nb in floor_all:
+                    seen.add(nb)
+                    q.append(nb)
+        orphans = unreachable_bodies(by_tok, floor_all, seen, hmap)
     except Exception as exc:                      # a map the graph cannot read
         return {"error": str(exc)[:120], "walls": collections.Counter(),
                 "reach": 0, "lane": 0, "tele_reached": False, "free": len(free)}
@@ -373,6 +522,11 @@ def measure(doc: dict, shelf: dict) -> dict:
     # state before any edit: map_pathfinder reports the teleporter unreachable
     # as a WARN and still exits OK.
     lane = lane_width_along(route, free, hmap) if route else None
+    # The museum's lane is the one that matters for a dealt hall, so it is
+    # measured on the door-to-door walk rather than on the spawn route.
+    door_lane = lane_width_along(door_walk, floor_all, hmap) if door_walk else None
+    clear_lane = (lane_width_along(door_walk_clear, free, hmap)
+                  if door_walk_clear else None)
     return {
         "walls": walls,
         "wall_cells": sum(walls.values()),
@@ -383,6 +537,16 @@ def measure(doc: dict, shelf: dict) -> dict:
         "route_len": len(route),
         "route_cells": route,
         "free": len(free),
+        # the museum contract
+        "has_entry": bool(entry),
+        "has_exit": bool(exits),
+        "door_walk": bool(door_walk),
+        "door_lane": door_lane,
+        "door_walk_clear": bool(door_walk_clear),
+        "clear_lane": clear_lane,
+        "door_cells": door_walk,
+        "orphans": orphans,
+        "bodies": len(by_tok),
     }
 
 
@@ -494,7 +658,7 @@ def displacement_target(p, hmap, taken, body_cells, H, W, protect):
     return best[1] if best else None
 
 
-def plan(doc: dict, verdicts: list, protect=frozenset()) -> list:
+def plan(doc: dict, verdicts: list, protect=frozenset(), banned=frozenset()) -> list:
     """-> [{r, c, to, from, because, why}] - ordinary cell sets, nothing exotic.
 
     Largest body first: a fifteen-metre gallery placed after the small ones has
@@ -533,8 +697,8 @@ def plan(doc: dict, verdicts: list, protect=frozenset()) -> list:
 
         for p in sorted(wall_cells):
             lit = str(struct[p[0]][p[1]]).strip()
-            dest = displacement_target(p, hmap, taken | body_cells, body_cells,
-                                       H, W, protect)
+            dest = displacement_target(p, hmap, taken | body_cells | set(banned),
+                                       body_cells, H, W, protect)
             if dest is None:
                 ops.append({"r": p[0], "c": p[1], "to": None, "lit": lit,
                             "because": v["tok"],
@@ -552,6 +716,38 @@ def plan(doc: dict, verdicts: list, protect=frozenset()) -> list:
 
 
 # ── the run ─────────────────────────────────────────────────────────────────
+
+def _culprits(before: dict, after: dict, ops: list) -> set:
+    """Which planted walls are answerable for the failure?
+
+    The stranded cells name the neighbourhood, so ban every destination that
+    touches one. When nothing was stranded but the walk or an approach was lost,
+    ban the destinations on the old route - those are the cells that were
+    load-bearing for it.
+    """
+    planted = {(o["r"], o["c"]) for o in ops if o["to"] and o["to"] != "1"}
+    stranded = (before["reach_set"] - after.get("walled_cells", set())) - after["reach_set"]
+    out = set()
+    for (r, c) in stranded:
+        for n in ((r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1), (r, c)):
+            if n in planted:
+                out.add(n)
+    if out:
+        return out
+    lost_walk = before["door_walk"] and not after["door_walk"]
+    lost_clear = before["door_walk_clear"] and not after["door_walk_clear"]
+    lost_tele = before["tele_reached"] and not after["tele_reached"]
+    lost_body = set(after["orphans"]) - set(before["orphans"])
+    if lost_walk or lost_clear or lost_tele or lost_body:
+        on_route = planted & (set(before.get("door_cells") or [])
+                              | set(before.get("route_cells") or []))
+        return on_route or planted
+    narrowed = (before["door_lane"] is not None and after["door_lane"] is not None
+                and after["door_lane"] < before["door_lane"])
+    if narrowed:
+        return planted & set(before.get("door_cells") or []) or planted
+    return set()
+
 
 def load(name: str):
     p = os.path.join(MAPS, name, "map_data.json")
@@ -1109,16 +1305,28 @@ def report(name: str, verdicts: list, before: dict, ops: list, after=None) -> No
           % (sum(1 for o in ops if o["to"] == "1"), moved, stuck))
     def lane_s(m):
         return "n/a (no route)" if m.get("lane") is None else str(m["lane"])
-    line = ("   before: lane %s, %d floor reachable, teleport %s, %d wall cells"
-            % (lane_s(before), before.get("reach"),
-               "reached" if before.get("tele_reached") else "NOT reached",
-               before.get("wall_cells", 0)))
-    print(line)
-    if after:
-        print("   after : lane %s, %d floor reachable, teleport %s, %d wall cells"
-              % (lane_s(after), after.get("reach"),
-                 "reached" if after.get("tele_reached") else "NOT reached",
-                 after.get("wall_cells", 0)))
+    def museum_s(m):
+        if not m.get("has_entry"):
+            return "NO FLOOR CELL in row 0 - no museum entrance"
+        if not m.get("has_exit"):
+            return "NO FLOOR CELL in the last row - no museum exit"
+        if not m.get("door_walk"):
+            return "doors exist but the structure does not connect them"
+        s = "walks row 0 to row H-1, narrowest %s" % (m.get("door_lane") or "?")
+        if not m.get("door_walk_clear"):
+            s += " (but not clear of the bodies)"
+        elif m.get("clear_lane") is not None:
+            s += ", %s clear of bodies" % m["clear_lane"]
+        return s
+
+    for tag, m in (("before", before), ("after", after)):
+        if not m:
+            continue
+        orph = m.get("orphans") or []
+        print("   %-6s: museum %s; %d wall cells; %s"
+              % (tag, museum_s(m), m.get("wall_cells", 0),
+                 "all %d artifacts approachable" % m.get("bodies", 0) if not orph
+                 else "%d UNREACHABLE: %s" % (len(orph), ", ".join(orph[:3]))))
 
 
 def check(before: dict, after: dict, want_width: int) -> list:
@@ -1131,6 +1339,26 @@ def check(before: dict, after: dict, want_width: int) -> list:
                    % (dict(lost) or "{}", dict(gained) or "{}"))
     if before["tele_reached"] and not after["tele_reached"]:
         bad.append("the teleporter was reachable and is not any more")
+    # THE MUSEUM CONTRACT. A dealt hall is entered at the first z row and left at
+    # the last; the map's own spawn disc is not used there at all. So these are
+    # the checks that decide whether a stamped room is still a room you can walk
+    # through, and none of them may be traded away for a better-seated body.
+    if before["has_entry"] and not after["has_entry"]:
+        bad.append("the first row no longer has a floor cell - the entrance is sealed")
+    if before["has_exit"] and not after["has_exit"]:
+        bad.append("the last row no longer has a floor cell - the exit is sealed")
+    if before["door_walk"] and not after["door_walk"]:
+        bad.append("the hall no longer walks from the first row to the last")
+    if before["door_walk_clear"] and not after["door_walk_clear"]:
+        bad.append("the walk from door to door no longer clears the bodies")
+    if (before["door_lane"] is not None and after["door_lane"] is not None
+            and after["door_lane"] < before["door_lane"]):
+        bad.append("the door-to-door lane narrowed from %d to %d"
+                   % (before["door_lane"], after["door_lane"]))
+    new_orphans = set(after["orphans"]) - set(before["orphans"])
+    if new_orphans:
+        bad.append("%d artifact(s) can no longer be walked up to: %s"
+                   % (len(new_orphans), ", ".join(sorted(new_orphans)[:4])))
     if before["lane"] is not None and after["lane"] is not None             and after["lane"] < before["lane"]:
         bad.append("the narrowest lane on the route fell from %d to %d"
                    % (before["lane"], after["lane"]))
@@ -1145,11 +1373,20 @@ def check(before: dict, after: dict, want_width: int) -> list:
         bad.append("%d cell(s) that were reachable are now cut off, e.g. %s"
                    % (len(stranded), ", ".join("r%dc%d" % p for p in ex)))
     if want_width:
-        if after["lane"] is None:
-            bad.append("--width=%d was asked for and there is no route to measure"
+        # --width is asked of the MUSEUM walk, because that is the one a visitor
+        # actually takes through a dealt hall. And it is a RATCHET, not a
+        # threshold: 91 of the 163 halls that walk door to door already pinch to
+        # one cell, so refusing everything below the floor would refuse the
+        # corpus for a fault the stamp did not cause. The stamp is answerable
+        # for what it changes.
+        got, was = after["door_lane"], before["door_lane"]
+        floor_at = want_width if was is None else min(want_width, was)
+        if got is None:
+            bad.append("--width=%d was asked for and this hall does not walk door to door"
                        % want_width)
-        elif after["lane"] < want_width:
-            bad.append("lane %d is below the --width=%d floor" % (after["lane"], want_width))
+        elif got < floor_at:
+            bad.append("door-to-door lane %d is below %d (asked %d, was %s)"
+                       % (got, floor_at, want_width, was))
     return bad
 
 
@@ -1221,7 +1458,31 @@ def main() -> int:
         if before.get("error"):
             print("\n%s  -- the pathfinder cannot read this map: %s" % (name, before["error"]))
             continue
-        ops = plan(doc, verdicts, protect=set(before.get("route_cells") or []))
+        # THE REPAIR LOOP. Checking reachability only at the end tells you the
+        # stamp is bad without telling you which move made it bad, so the whole
+        # stamp is thrown away for one wall in the wrong cell. Instead: plan,
+        # test, BAN the destinations that broke something, plan again. On
+        # CA_GameOfLife the first plan sealed a four-cell pocket behind the
+        # walls it planted at column 11; the second plan puts them elsewhere.
+        protect = set(before.get("route_cells") or []) | set(before.get("door_cells") or [])
+        banned, ops, new_text, entries, after, bad = set(), [], None, [], None, []
+        for attempt in range(8):
+            ops = plan(doc, verdicts, protect=protect, banned=banned)
+            if not ops or not args.apply:
+                break
+            new_text, entries = apply_ops(raw, doc, ops)
+            after = measure(json.loads(new_text), shelf)
+            after["walled_cells"] = {(o["r"], o["c"]) for o in ops
+                                     if o["to"] and o["to"] != "1"}
+            bad = check(before, after, args.width)
+            if not bad:
+                break
+            culprits = _culprits(before, after, ops)
+            if not culprits:
+                break                     # nothing to retract; the refusal stands
+            banned |= culprits
+            if attempt == 7:
+                print("   gave up after 8 replans")
 
         if args.svg:
             p = draw(name, doc, shelf, verdicts, ops, before, args.out)
@@ -1231,11 +1492,6 @@ def main() -> int:
             report(name, verdicts, before, ops)
             continue
 
-        new_text, entries = apply_ops(raw, doc, ops)
-        after = measure(json.loads(new_text), shelf)
-        after["walled_cells"] = {(o["r"], o["c"]) for o in ops
-                                 if o["to"] and o["to"] != "1"}
-        bad = check(before, after, args.width)
         report(name, verdicts, before, ops, after)
         if bad:
             refused += 1

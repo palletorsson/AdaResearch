@@ -125,7 +125,12 @@ key unless the row says so.
 | `tools/shelf.py` | `--build` · `<terms>` · `--unseen` · `--blind` | what could express this concept. 3367 entries with category, tags, axes, placements, capture, `wall_backing`, aabb + centre |
 | `tools/sync_footprints.py` | `--apply --cap=9` | push measured cells back into `spatial_needs.footprint_cells` — **224 of 893 placed artifacts declare a footprint 2× too small** |
 
-**Judge the room.**
+**Judge the room.** The museum's traversal is IN at the first z row and OUT at the last,
+not spawn to teleporter — measured over the 185 live rooms, **163 walk row 0 to row H-1**,
+10 have doors that do not connect, 12 have no door at all, and **91 of the 163 pinch to a
+single cell** somewhere along the way. 97 artifacts in 35 rooms are walled off from the
+entrance entirely.
+
 
 | tool | run it | what it answers |
 |---|---|---|
@@ -134,7 +139,7 @@ key unless the row says so.
 | `tools/coherence.py` | (no args) | one row per room, one column per modality — CLAIM · BODIES · SEEN · TEXT · SPACE · VARY — each gap naming its next action |
 | `tools/map_pathfinder.py` | `check <Map> --verbose` | can the player get there. **Has one error rule** — "pathfinder OK" is not evidence of much |
 | `tools/walk_evaluator.py` | `--map=X` | detour ratio, encounter order, backtracking |
-| `tools/stamp.py` | `--map=X` · `--apply` · `--width=N` · `--typology` · `--revert` | seat every body. Carves wall cells a body needs and **displaces** the literal it carved rather than deleting it, so the wall multiset is conserved exactly. Refuses on stranding, on a narrowed lane, or on a body too big for its room. Journals every cell with its pre-image to `stamp_journal.json`, replayable backwards |
+| `tools/stamp.py` | `--map=X` · `--apply` · `--width=N` · `--svg` · `--typology` · `--revert` | seat every body. Carves the wall cells a body needs and **displaces** the literal it carved rather than deleting it, so the wall multiset is conserved exactly. Re-checks the **museum traversal** after every move — in at row 0, out at row H-1, every artifact still approachable — and replans up to 8 times, banning whichever displacement broke it. Journals every cell with its pre-image, replayable backwards |
 
 **Write and gate the text.**
 
