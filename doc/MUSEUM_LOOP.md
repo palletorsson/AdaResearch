@@ -17,6 +17,77 @@ read the rationale to change the protocol.
 
 ---
 
+# THE GOAL
+
+2026-09-03, Palle: *"The whole project is really about ontology, how things
+work and where the entropy of creativity and discovery lives on the edge."*
+
+Asked what the loop is for, the honest answer is the one at the end of the
+protocol: **a hall works when the visitor's loop closes.** Notice, predict, act,
+the algorithm answers, compare. So the goal is not a true room or a tidy room.
+It is a room where a person can predict from the wall and be answered by the
+body, and where the answer is the algorithm's and not the curator's. Everything
+below is instrumentation for finding out whether that happens.
+
+Three sharpenings, each paid for on 2026-09-02 and 03.
+
+**Close the gap in the direction of the claim.** A transport cube ran its cycle
+with nobody aboard, three growers stood still, seven walkers had no gaits, and
+every one of those halls had wall text, a registry entry and an intent that said
+otherwise. A visitor who predicted from any of them was not answered. Each fix
+was one of two moves: change the code so the room does what it means, or change
+the words so they say what the code does. The loop's job is to make that choice
+visible and make it on purpose. Left alone the corpus drifts to the second move,
+because prose is cheaper than code, and a museum whose walls describe its bugs
+has stopped being a museum.
+
+**Not zero disagreement, chosen disagreement.** The project's thesis is that the
+valuable thing is the irreducible, the part that will not compress. A loop that
+only removes disagreement sands that off. The best rooms so far kept a fault as
+their argument: a row of walkers that cannot fall because gravity is not in the
+room, a gap under the axis maze that nothing makes you cross. So every hall
+should carry exactly the disagreement it means to carry, and none it does not.
+The verification steps find the unmeant ones. The queer question keeps the meant
+ones, and it is one line in twelve steps doing half the work.
+
+**The loop must make itself cheaper.** At a day per hall and 185 halls the slow
+turn never finishes. Every lesson that becomes a tool moves a judgement from a
+day to a second, and what remains for a person is only the rulings. The measure
+of the loop is not how many halls it has turned. It is how much of the next turn
+no longer needs a hand.
+
+## The lineage: The Nature of Code, and how this differs
+
+The format to build on already exists, and the corpus admits it by name: 64
+registry tokens are called `example_N_M` or `exercise_N_M` after the chapters
+and exercises of Daniel Shiffman's *The Nature of Code*, across seven of its
+chapters, and the tutorials cite it as NoC. That book's move is the right one:
+a phenomenon, the smallest code that produces it, and an exercise that makes
+the reader change the code. Every room in this museum is that move done in a
+hall. Where this project differs, in Palle's words: *"our version has more
+examples and topics, is in 3D and VR, and is more queer."*
+
+- **More topics.** NoC runs twelve chapters from randomness to neuroevolution.
+  The spine here runs twenty-two, and adds what a book of sketches does not
+  reach: primitives before vectors, form-finding, isosurfaces, boolean solids,
+  graph theory, and three chapters on the foundations crisis and what comes
+  after it, where the algorithms stop being tools and become the subject.
+- **In 3D and VR.** A sketch is watched. A hall is entered. The reader's body is
+  the thing the algorithm acts on, which is why the museum's unit of truth is a
+  probe and a walk, not a screenshot, and why a cube that carries nobody is a
+  failed chapter rather than a cosmetic fault.
+- **More queer.** Queer here means the irreducible: what the encoding cannot
+  compress without losing it. NoC teaches how things work. This project asks
+  the same question and then asks what the answer forecloses, and keeps the
+  remainder in the room as the argument. That is the ontology Palle names: not
+  a catalogue of mechanisms but the question of what a thing IS once you know
+  how it works, and where, at the edge of the working, the entropy of creativity
+  and discovery actually lives.
+
+The loop is how a chapter of that book gets written. A hall is a chapter.
+
+---
+
 # THE PROTOCOL
 
 ## Two loops, at two speeds
