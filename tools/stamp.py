@@ -720,6 +720,91 @@ def judge(doc: dict, shelf: dict) -> list:
 
 # ── the plan ────────────────────────────────────────────────────────────────
 
+# -- the displacement is an ASSIGNMENT problem -------------------------------
+# Every carved wall needs a destination and no two may share one. That is the
+# textbook assignment problem, and the tool was solving it GREEDILY: bodies in
+# size order, each wall in turn grabbing the best cell still free. Greedy is
+# order-dependent, which is why the repair loop had to exist, and why 44 wall
+# cells across six forces halls ended up with "nowhere to go" - not because the
+# room was full, but because earlier walls had taken the cells they needed.
+#
+# Hungarian solves the whole thing at once and optimally, in O(n^3). This is the
+# shortest-augmenting-path formulation, stdlib, for the same reason the max-flow
+# is stdlib: no tool in this repo imports scipy and stamp.py is not going to be
+# the first. It is cross-checked against scipy.optimize.linear_sum_assignment
+# by tools/test_stamp_hungarian.py wherever scipy happens to be installed.
+
+def hungarian(cost: list) -> list:
+    """Min-cost assignment over a rectangular matrix. -> [(row, col), ...].
+
+    Rows are the things that must be placed, columns the places. Requires
+    rows <= cols; the caller pads. Cost may contain INF for a forbidden pair -
+    a pairing that keeps one is dropped from the result rather than returned,
+    because assigning a wall to an illegal cell is worse than not placing it.
+    """
+    n, m = len(cost), len(cost[0]) if cost else 0
+    if not n or n > m:
+        return []
+    INF = float("inf")
+    u = [0.0] * (n + 1)
+    v = [0.0] * (m + 1)
+    p = [0] * (m + 1)          # p[j] = row assigned to column j
+    way = [0] * (m + 1)
+    for i in range(1, n + 1):
+        p[0] = i
+        j0 = 0
+        minv = [INF] * (m + 1)
+        used = [False] * (m + 1)
+        while True:
+            used[j0] = True
+            i0, delta, j1 = p[j0], INF, -1
+            for j in range(1, m + 1):
+                if used[j]:
+                    continue
+                cur = cost[i0 - 1][j - 1] - u[i0] - v[j]
+                if cur < minv[j]:
+                    minv[j], way[j] = cur, j0
+                if minv[j] < delta:
+                    delta, j1 = minv[j], j
+            if j1 < 0:
+                break                      # no column left: leave i unassigned
+            for j in range(m + 1):
+                if used[j]:
+                    u[p[j]] += delta
+                    v[j] -= delta
+                else:
+                    minv[j] -= delta
+            j0 = j1
+            if p[j0] == 0:
+                break
+        if j1 < 0:
+            continue
+        while j0:
+            j1 = way[j0]
+            p[j0] = p[j1]
+            j0 = j1
+    return [(p[j] - 1, j - 1) for j in range(1, m + 1)
+            if p[j] and cost[p[j] - 1][j - 1] < INF]
+
+
+def placement_cost(src, dest, hmap, cut, protect) -> float:
+    """What it costs to put the wall carved at src into dest.
+
+    Distance, less three cells per wall neighbour the destination already has -
+    filling a notch beats making an island, and three was measured: at one the
+    walls scatter, at five they pile into the nearest corner. A destination the
+    hall cannot spare is not merely expensive, it is forbidden.
+    """
+    if dest in protect or dest in cut:
+        return float("inf")
+    r, c = dest
+    touching = sum(1 for n in ((r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1))
+                   if hmap.get(n, 0) > FLOOR_H)
+    if not touching:
+        return float("inf")
+    return abs(r - src[0]) + abs(c - src[1]) - 3.0 * touching
+
+
 def displacement_target(p, hmap, taken, body_cells, H, W, protect):
     """Where does a carved wall GO?
 
@@ -762,11 +847,14 @@ def displacement_target(p, hmap, taken, body_cells, H, W, protect):
     return best[1] if best else None
 
 
-def plan(doc: dict, verdicts: list, protect=frozenset(), banned=frozenset()) -> list:
+def plan(doc: dict, verdicts: list, protect=frozenset(), banned=frozenset(),
+         cut=frozenset()) -> list:
     """-> [{r, c, to, from, because, why}] - ordinary cell sets, nothing exotic.
 
-    Largest body first: a fifteen-metre gallery placed after the small ones has
-    nowhere left to go.
+    Two passes. First decide WHICH cells must be carved, which is per-body and
+    settled by each body's wall_backing. Then place every carved wall at once,
+    by min-cost assignment, because deciding them one at a time is what left 44
+    of them homeless in a museum with plenty of room.
     """
     struct = doc["layers"]["structure"]
     hmap = heights(struct)
@@ -777,16 +865,11 @@ def plan(doc: dict, verdicts: list, protect=frozenset(), banned=frozenset()) -> 
     for v in verdicts:
         body_cells |= set(v.get("cells") or [])
 
-    # ONE CARVE PER CELL, however many bodies are standing on it. Two bodies
-    # overlapping the same wall cell each carved it and each planted a copy of
-    # its literal, so a room gained a wall out of nothing - which is exactly
-    # what the conservation gate is for, and it caught it on the first real
-    # sequence run: Vectors_Act1 gained a "w" because cell (3,10) is claimed by
-    # two bodies.
     def lit_of(p):
         return str(struct[p[0]][p[1]]).strip()
 
-    ops, taken, done = [], set(), set()
+    # ---- pass 1: which cells does a body need cleared? --------------------
+    ops, carve, done = [], [], set()
     order = sorted([v for v in verdicts if v["verdict"] in ("CARVE", "SEAT")],
                    key=lambda v: -len(v.get("cells") or []))
     for v in order:
@@ -813,34 +896,45 @@ def plan(doc: dict, verdicts: list, protect=frozenset(), banned=frozenset()) -> 
                 continue
             done.add(p)
             # THE DOORWAY ROWS ARE THE SEAM. Row 0 and row H-1 are where the
-            # museum joins this hall to its neighbours - the seam copies the
-            # last row forward and the next hall first row back - so their
-            # geometry belongs to the crossing, not to the room. The first
-            # forces run carved seven extra cells out of VFM_02's entrance as a
-            # side effect of seating a body against it, widening the doorway
-            # from 3 cells to 10. That is a change to the hall face nobody
-            # asked for. Report it and leave it.
+            # museum joins this hall to its neighbours, so their geometry
+            # belongs to the crossing and not to the room.
             if p[0] in (0, H - 1):
                 ops.append({"r": p[0], "c": p[1], "to": None, "lit": lit_of(p),
                             "because": v["tok"],
                             "why": "in the doorway row, which is the museum seam - left alone"})
                 continue
-            lit = str(struct[p[0]][p[1]]).strip()
-            dest = displacement_target(p, hmap, taken | body_cells | set(banned),
-                                       body_cells, H, W, protect)
-            if dest is None:
-                ops.append({"r": p[0], "c": p[1], "to": None, "lit": lit,
-                            "because": v["tok"],
-                            "why": "nowhere to put the wall this carve removes"})
-                continue
-            taken.add(dest)
-            ops.append({"r": p[0], "c": p[1], "to": "1", "lit": lit,
-                        "because": v["tok"],
-                        "why": "carved so %s has its floor" % v["tok"]})
-            ops.append({"r": dest[0], "c": dest[1], "to": lit,
-                        "lit": str(struct[dest[0]][dest[1]]).strip(),
-                        "because": v["tok"],
-                        "why": "the wall carved at r%d c%d, moved not deleted" % p})
+            carve.append((p, v["tok"]))
+
+    if not carve:
+        return ops
+
+    # ---- pass 2: where do all those walls go? one assignment --------------
+    forbidden = set(protect) | set(banned) | body_cells | set(done)
+    dests = [q for q in hmap
+             if hmap[q] == FLOOR_H and q not in forbidden
+             and q[0] not in (0, H - 1)]
+    cost = [[placement_cost(p, q, hmap, cut, forbidden) for q in dests]
+            for (p, _tok) in carve]
+    # Hungarian needs at least as many columns as rows; when there are fewer
+    # legal destinations than walls, some walls simply have nowhere to go and
+    # saying so is the honest output.
+    pairs = dict(hungarian(cost)) if dests and len(carve) <= len(dests) else {}
+    if not pairs and dests and len(carve) > len(dests):
+        pairs = dict(hungarian(cost[:len(dests)]))
+
+    for i, (p, tok) in enumerate(carve):
+        j = pairs.get(i)
+        if j is None or cost[i][j] == float("inf"):
+            ops.append({"r": p[0], "c": p[1], "to": None, "lit": lit_of(p),
+                        "because": tok,
+                        "why": "nowhere to put the wall this carve removes"})
+            continue
+        dest = dests[j]
+        ops.append({"r": p[0], "c": p[1], "to": "1", "lit": lit_of(p),
+                    "because": tok, "why": "carved so %s has its floor" % tok})
+        ops.append({"r": dest[0], "c": dest[1], "to": lit_of(p), "lit": lit_of(dest),
+                    "because": tok,
+                    "why": "the wall carved at r%d c%d, moved not deleted" % p})
     return ops
 
 
@@ -1471,9 +1565,14 @@ def report(name: str, verdicts: list, before: dict, ops: list, after=None) -> No
         print("   %-11s %-26s r%-2d c%-2d  %s"
               % (v["verdict"], v["tok"][:26], v["r"], v["c"], v["why"]))
     moved = sum(1 for o in ops if o["to"] and o["to"] != "1")
-    stuck = sum(1 for o in ops if o["to"] is None)
-    print("   plan: %d carve, %d displace, %d with nowhere to go"
-          % (sum(1 for o in ops if o["to"] == "1"), moved, stuck))
+    # TWO reasons a carve does not happen, and collapsing them hid the answer to
+    # whether the Hungarian pass helped: 44 forces cells were reported as having
+    # "nowhere to go" when every one of them was a doorway cell the tool refuses
+    # to touch on purpose.
+    seam = sum(1 for o in ops if o["to"] is None and "seam" in o.get("why", ""))
+    stuck = sum(1 for o in ops if o["to"] is None) - seam
+    print("   plan: %d carve, %d displace, %d with nowhere to go, %d in the seam"
+          % (sum(1 for o in ops if o["to"] == "1"), moved, stuck, seam))
     def lane_s(m):
         return "n/a (no route)" if m.get("lane") is None else str(m["lane"])
     def museum_s(m):
@@ -1657,7 +1756,8 @@ def main() -> int:
                    | set(before.get("cut") or []))
         banned, ops, new_text, entries, after, bad = set(), [], None, [], None, []
         for attempt in range(8):
-            ops = plan(doc, verdicts, protect=protect, banned=banned)
+            ops = plan(doc, verdicts, protect=protect, banned=banned,
+                       cut=set(before.get("cut") or []))
             if not ops or not args.apply:
                 break
             new_text, entries = apply_ops(raw, doc, ops)
