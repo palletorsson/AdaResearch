@@ -48,7 +48,7 @@ their argument: a row of walkers that cannot fall because gravity is not in the
 room, a gap under the axis maze that nothing makes you cross. So every hall
 should carry exactly the disagreement it means to carry, and none it does not.
 The verification steps find the unmeant ones. The queer question keeps the meant
-ones, and it is one line in twelve steps doing half the work.
+ones, and it is one step in fifteen doing half the work.
 
 **The loop must make itself cheaper.** At a day per hall and 185 halls the slow
 turn never finishes. Every lesson that becomes a tool moves a judgement from a
@@ -146,11 +146,18 @@ They are not one pipeline and drawing them as one was the original mistake.
     9  WRITE       three registers, one hand, AFTER the readers land, with the
                    checklist. Do not average the registers; keep what survives
                    all three, and do not erase the disagreement between them.
-    10 GATE        text (wall_voice, final_tags), space (stamp), access
+    10 THE QUEER QUESTION. Not decoration and not a tag. Queer here means the
+                   irreducible: the part the encoding cannot compress without
+                   losing it. Ask of the room: WHAT HERE REFUSES TO BE THE
+                   DIAGRAM OF ITSELF? A room where everything is legible has no
+                   queer content and is usually also a boring room. The
+                   verification steps find the disagreements a hall did not
+                   mean; this one keeps the ones it did.
+    11 GATE        text (wall_voice, final_tags), space (stamp), access
                    (pathfinder + museum_walk), behaviour (the probe).
-    11 FINAL VERIFY  re-run step 7. The state you accept must be the state that
+    12 FINAL VERIFY  re-run step 7. The state you accept must be the state that
                    exists after the writing and the gating, not before it.
-    12 COMMIT OR REVERT. Seven outcomes, all legitimate, and only two are wins:
+    13 COMMIT OR REVERT. Seven outcomes, all legitimate, and only two are wins:
                      supported          -> commit
                      counterexample     -> revert, record the counterevidence
                      no change          -> the hypothesis was wrong. A result.
@@ -161,8 +168,8 @@ They are not one pipeline and drawing them as one was the original mistake.
                      mixed / regression -> the fix worked and broke something
                                            else. Revert unless both are named.
                      blocked            -> it needs a ruling, not a change.
-    13 LESSON      into doc/curation_lessons.json, with evidence and a test.
-    14 REFRESH     re-run the fast survey; the turn changed its inputs.
+    14 LESSON      into doc/curation_lessons.json, with evidence and a test.
+    15 REFRESH     re-run the fast survey; the turn changed its inputs.
 
 **PROBE is a verb, not a step.** Any step whose output another step will trust
 must be probed before that trust is extended. It ran three times on Act5, in
@@ -176,7 +183,7 @@ Rooms are shared data: on 2026-09-03 two sessions wrote the transformation
 chapter within an hour of each other, one session's Red Thread page was
 republished under another five times, and three sessions edited this file.
 
-So, before step 9: **post the rooms you hold to the forum.** After step 14:
+So, before step 9: **post the rooms you hold to the forum.** After step 15:
 rebuild the book and check compose. `tools/forum.py open` at the start of a
 session is not politeness, it is the only way to find out that the hall you are
 about to rewrite is already being rewritten.
