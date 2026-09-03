@@ -361,6 +361,105 @@ def blocks_walking(tok: str, raw: str, shelf: dict) -> bool:
     return True
 
 
+# -- how many ways through, and which cells decide it ------------------------
+# The lane measure erodes ONE route and reports its worst point, which cannot
+# tell a hall that is as wide as its own doorway - the museum's 3-cell
+# convention, and correct - from a hall that chokes to a single cell in the
+# middle, which is a fault. Both read as "lane 1".
+#
+# Menger's theorem answers the exact question instead: the number of
+# VERTEX-DISJOINT routes from the first z row to the last equals the minimum
+# vertex cut. So the same computation counts the ways AND names the cells that
+# limit them, which turns a complaint into an instruction.
+#
+# Split every floor cell into in -> out with capacity one; that is what makes
+# the cut fall on a CELL rather than on a gap between two. Edmonds-Karp is
+# ample here: the flow value is bounded by the doorway width, so it terminates
+# in a handful of augmentations on any real hall. Stdlib only, deliberately -
+# no tool in this repo imports networkx or scipy and stamp.py is not going to
+# be the first.
+
+def disjoint_ways(struct: list) -> tuple:
+    """-> (ways, cut_cells, verdict). verdict is 'door' when every cut cell sits
+    in the entry or exit band, 'interior' when any of them does not."""
+    H = len(struct)
+    floor = {(r, c) for r in range(H) for c in range(len(struct[r]))
+             if mp.parse_height(struct[r][c]) == FLOOR_H}
+    entry = [p for p in floor if p[0] == 0]
+    exits = [p for p in floor if p[0] == H - 1]
+    if not entry or not exits:
+        return 0, [], "no door"
+
+    SRC, SNK = ("SRC",), ("SNK",)
+    cap, adj = {}, collections.defaultdict(set)
+
+    def edge(u, v, c):
+        cap[(u, v)] = cap.get((u, v), 0) + c
+        cap.setdefault((v, u), 0)
+        adj[u].add(v)
+        adj[v].add(u)
+
+    BIG = 1 << 20
+    for p in floor:
+        edge(("i", p), ("o", p), 1)
+        for n in ((p[0] - 1, p[1]), (p[0] + 1, p[1]),
+                  (p[0], p[1] - 1), (p[0], p[1] + 1)):
+            if n in floor:
+                edge(("o", p), ("i", n), BIG)
+    for p in entry:
+        edge(SRC, ("i", p), BIG)
+    for p in exits:
+        edge(("o", p), SNK, BIG)
+
+    from collections import deque
+    ways = 0
+    while True:
+        prev = {SRC: None}
+        q = deque([SRC])
+        while q and SNK not in prev:
+            u = q.popleft()
+            for v in adj[u]:
+                if v not in prev and cap.get((u, v), 0) > 0:
+                    prev[v] = u
+                    q.append(v)
+        if SNK not in prev:
+            break
+        path, v = [], SNK
+        while v != SRC:
+            u = prev[v]
+            path.append((u, v))
+            v = u
+        push = min(cap[e] for e in path)
+        for (u, v) in path:
+            cap[(u, v)] -= push
+            cap[(v, u)] = cap.get((v, u), 0) + push
+        ways += push
+
+    seen = {SRC}
+    q = deque([SRC])
+    while q:
+        u = q.popleft()
+        for v in adj[u]:
+            if v not in seen and cap.get((u, v), 0) > 0:
+                seen.add(v)
+                q.append(v)
+    cut = sorted(p for p in floor if ("i", p) in seen and ("o", p) not in seen)
+
+    # A MINIMUM CUT IS NOT UNIQUE, so "is the cut at a door?" is not a well posed
+    # question - this implementation returns the cut nearest the source and
+    # networkx returns one nearest the sink, and both are correct. Checked
+    # against networkx on the eleven forces halls: the flow VALUE agreed 11 of
+    # 11, the cut CELLS agreed on none of them.
+    #
+    # So classify on a quantity that does not depend on which cut you found. The
+    # hall is limited by its doorways when it admits as many ways as the
+    # narrower doorway allows; it has an interior pinch when it admits fewer.
+    # The cut cells are still returned, as ONE place the pinch can be relieved.
+    doors = min(len(entry), len(exits))
+    where = "door" if ways >= doors else "interior"
+    return ways, cut, where
+
+
 def museum_doors(struct: list) -> tuple:
     """The museum's own traversal: IN at the first z row, OUT at the last.
 
@@ -524,6 +623,7 @@ def measure(doc: dict, shelf: dict) -> dict:
     lane = lane_width_along(route, free, hmap) if route else None
     # The museum's lane is the one that matters for a dealt hall, so it is
     # measured on the door-to-door walk rather than on the spawn route.
+    ways, cut, cut_where = disjoint_ways(struct)
     door_lane = lane_width_along(door_walk, floor_all, hmap) if door_walk else None
     clear_lane = (lane_width_along(door_walk_clear, free, hmap)
                   if door_walk_clear else None)
@@ -544,6 +644,10 @@ def measure(doc: dict, shelf: dict) -> dict:
         "door_lane": door_lane,
         "door_walk_clear": bool(door_walk_clear),
         "clear_lane": clear_lane,
+        "ways": ways,
+        "cut": cut,
+        "cut_where": cut_where,
+        "doors": min(len(entry), len(exits)),
         "door_cells": door_walk,
         "orphans": orphans,
         "bodies": len(by_tok),
@@ -770,6 +874,15 @@ def _culprits(before: dict, after: dict, ops: list) -> set:
     # Both lanes, not just the museum one. The first forces run refused
     # Vectors_Act4a and VFM_09 for a narrowed SPAWN route and the loop had no
     # answer for it, so it never replanned and the whole stamp was thrown away.
+    if after["ways"] < before["ways"]:
+        near = set()
+        for (r, c) in after["cut"]:
+            for n in ((r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1), (r, c)):
+                if n in planted:
+                    near.add(n)
+        if near:
+            return near
+        return planted
     for key, cells in (("door_lane", "door_cells"), ("lane", "route_cells")):
         b, a = before.get(key), after.get(key)
         if b is not None and a is not None and a < b:
@@ -1182,6 +1295,24 @@ def draw(name: str, doc: dict, shelf: dict, verdicts: list, ops: list,
         o.append('<text x="%.1f" y="%.1f" font-size="13" fill="%s" '
                  'text-anchor="middle">?</text>' % (x + CELL / 2, y + CELL / 2 + 5, C_AMBER))
 
+    # ---- the minimum cut: the cells the hall cannot spare -----------------
+    # Drawn last so it sits over everything, because it is the constraint the
+    # rest of the drawing has to respect. A cut cell is not a fault in itself:
+    # if the hall admits as many ways as its doorway is wide, the doorway is
+    # simply the limit and the cut lands there. It is a fault when the count is
+    # lower, which is the INTERIOR PINCH case, and then this is the cell to
+    # widen.
+    cut = before.get("cut") or []
+    pinched = before.get("cut_where") == "interior"
+    cutcol = C_RED if pinched else C_BLUE
+    for (r, c) in cut:
+        x, y = ox + c * CELL, oy + r * CELL
+        o.append('<rect x="%.1f" y="%.1f" width="%.1f" height="%.1f" fill="none" '
+                 'stroke="%s" stroke-width="2.6" stroke-dasharray="2 2"/>'
+                 % (x + 1.5, y + 1.5, CELL - 3, CELL - 3, cutcol))
+        o.append('<circle cx="%.1f" cy="%.1f" r="3.4" fill="%s"/>'
+                 % (x + CELL / 2, y + CELL / 2, cutcol))
+
     # the arrow that makes a carve and a plant ONE move
     pairs = []
     src = [op for op in ops if op["to"] == "1"]
@@ -1212,6 +1343,13 @@ def draw(name: str, doc: dict, shelf: dict, verdicts: list, ops: list,
         (C_GREEN, "re-plant the wall", "the same literal, moved to join a wall — never deleted"),
         (C_AMBER, "nowhere to go", "%d wall(s) with no legal destination, so not carved either"
          % len(stuck)),
+        (cutcol, "the minimum cut",
+         ("%d cell(s) - the hall admits %d way(s) through against %d door cells, so this "
+          "is an INTERIOR PINCH and these are where to widen it"
+          if pinched else
+          "%d cell(s) - the hall admits %d way(s) through against %d door cells, so it is "
+          "as wide as its own doorway")
+         % (len(cut), before.get("ways", 0), before.get("doors", 0))),
     ]
     for i, (col, label, note) in enumerate(rows):
         y = ly + 18 + i * 15
@@ -1219,18 +1357,18 @@ def draw(name: str, doc: dict, shelf: dict, verdicts: list, ops: list,
                  'stroke="%s"/>' % (ox, y - 8, col, col))
         o.append('<text x="%d" y="%d" font-size="10" fill="%s" font-weight="600">%s</text>'
                  % (ox + 16, y, C_INK, label))
-        o.append('<text x="%d" y="%d" font-size="10" fill="#5b6472">%s</text>'
-                 % (ox + 116, y, esc(note)))
+        o.append('<text x="%d" y="%d" font-size="9.5" fill="#5b6472">%s</text>'
+                 % (ox + 118, y, esc(note)))
     y = ly + 18 + len(rows) * 15 + 12
     o.append('<text x="%d" y="%d" font-size="10" fill="%s">bodies: %s</text>'
              % (ox, y, C_INK, esc(", ".join("%s %d" % (k, n) for k, n in counts.most_common()))))
     o.append('<text x="%d" y="%d" font-size="10" fill="#5b6472">walls %d before, %d after — '
              'the multiset is conserved, a moved wall keeps its own literal</text>'
              % (ox, y + 15, before.get("wall_cells", 0), before.get("wall_cells", 0)))
-    o.append('<text x="%d" y="%d" font-size="10" fill="#5b6472">narrowest lane on the route: '
-             '%s — the contract is that this must not fall</text>'
-             % (ox, y + 30, "n/a (no route clear of bodies)" if before.get("lane") is None
-                else before["lane"]))
+    o.append('<text x="%d" y="%d" font-size="10" fill="#5b6472">museum traversal: in at row 0, '
+             'out at row %d - %s</text>'
+             % (ox, y + 30, H - 1,
+                "walks" if before.get("door_walk") else "DOES NOT WALK"))
     o.append("</svg>")
 
     os.makedirs(out_dir, exist_ok=True)
@@ -1345,7 +1483,12 @@ def report(name: str, verdicts: list, before: dict, ops: list, after=None) -> No
             return "NO FLOOR CELL in the last row - no museum exit"
         if not m.get("door_walk"):
             return "doors exist but the structure does not connect them"
-        s = "walks row 0 to row H-1, narrowest %s" % (m.get("door_lane") or "?")
+        s = "%d way(s) through vs %d door cells - %s%s" % (
+            m.get("ways", 0), m.get("doors", 0),
+            ("limited by its doorways" if m.get("cut_where") == "door"
+             else "INTERIOR PINCH"),
+            "" if m.get("cut_where") == "door"
+            else " at " + (", ".join("r%dc%d" % p for p in (m.get("cut") or [])[:3]) or "?"))
         if not m.get("door_walk_clear"):
             s += " (but not clear of the bodies)"
         elif m.get("clear_lane") is not None:
@@ -1382,6 +1525,14 @@ def check(before: dict, after: dict, want_width: int) -> list:
         bad.append("the last row no longer has a floor cell - the exit is sealed")
     if before["door_walk"] and not after["door_walk"]:
         bad.append("the hall no longer walks from the first row to the last")
+    # MENGER. The count of vertex-disjoint routes is the honest width of a hall,
+    # and unlike the lane it cannot be argued with: it is the size of the
+    # minimum cut. A stamp may not reduce it.
+    if after["ways"] < before["ways"]:
+        bad.append("the hall admitted %d disjoint way(s) through and now admits %d; "
+                   "the cut is %s"
+                   % (before["ways"], after["ways"],
+                      ", ".join("r%dc%d" % p for p in after["cut"][:5]) or "empty"))
     if before["door_walk_clear"] and not after["door_walk_clear"]:
         bad.append("the walk from door to door no longer clears the bodies")
     if (before["door_lane"] is not None and after["door_lane"] is not None
@@ -1497,7 +1648,13 @@ def main() -> int:
         # test, BAN the destinations that broke something, plan again. On
         # CA_GameOfLife the first plan sealed a four-cell pocket behind the
         # walls it planted at column 11; the second plan puts them elsewhere.
-        protect = set(before.get("route_cells") or []) | set(before.get("door_cells") or [])
+        # The min cut IS the list of cells the hall cannot spare. Protecting
+        # them stops a narrowing happening rather than detecting it afterwards,
+        # which is the difference between a plan that works first time and a
+        # plan that has to be retracted.
+        protect = (set(before.get("route_cells") or [])
+                   | set(before.get("door_cells") or [])
+                   | set(before.get("cut") or []))
         banned, ops, new_text, entries, after, bad = set(), [], None, [], None, []
         for attempt in range(8):
             ops = plan(doc, verdicts, protect=protect, banned=banned)

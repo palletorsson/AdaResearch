@@ -239,7 +239,8 @@
 <rect x="355" y="274" width="28" height="28" fill="#eef0f3" stroke="#c9cdd4" stroke-width="0.7"/>
 <rect x="383" y="274" width="28" height="28" fill="#eef0f3" stroke="#c9cdd4" stroke-width="0.7"/>
 <rect x="411" y="274" width="28" height="28" fill="#eef0f3" stroke="#c9cdd4" stroke-width="0.7"/>
-<rect x="439" y="274" width="28" height="28" fill="#eef0f3" stroke="#c9cdd4" stroke-width="0.7"/>
+<rect x="439" y="274" width="28" height="28" fill="#2b3038" stroke="#c9cdd4" stroke-width="0.7"/>
+<text x="453" y="291" font-size="8" fill="#8d949e" text-anchor="middle">2</text>
 <rect x="467" y="274" width="28" height="28" fill="#eef0f3" stroke="#c9cdd4" stroke-width="0.7"/>
 <rect x="495" y="274" width="28" height="28" fill="#eef0f3" stroke="#c9cdd4" stroke-width="0.7"/>
 <rect x="523" y="274" width="28" height="28" fill="#eef0f3" stroke="#c9cdd4" stroke-width="0.7"/>
@@ -274,8 +275,7 @@
 <rect x="355" y="302" width="28" height="28" fill="#eef0f3" stroke="#c9cdd4" stroke-width="0.7"/>
 <rect x="383" y="302" width="28" height="28" fill="#eef0f3" stroke="#c9cdd4" stroke-width="0.7"/>
 <rect x="411" y="302" width="28" height="28" fill="#eef0f3" stroke="#c9cdd4" stroke-width="0.7"/>
-<rect x="439" y="302" width="28" height="28" fill="#2b3038" stroke="#c9cdd4" stroke-width="0.7"/>
-<text x="453" y="319" font-size="8" fill="#8d949e" text-anchor="middle">2</text>
+<rect x="439" y="302" width="28" height="28" fill="#eef0f3" stroke="#c9cdd4" stroke-width="0.7"/>
 <rect x="467" y="302" width="28" height="28" fill="#eef0f3" stroke="#c9cdd4" stroke-width="0.7"/>
 <rect x="495" y="302" width="28" height="28" fill="#eef0f3" stroke="#c9cdd4" stroke-width="0.7"/>
 <rect x="523" y="302" width="28" height="28" fill="#eef0f3" stroke="#c9cdd4" stroke-width="0.7"/>
@@ -658,7 +658,7 @@
 <rect x="630.4" y="101.4" width="149.2" height="149.2" fill="#c07a12" fill-opacity="0.06" stroke="#c07a12" stroke-width="1" stroke-opacity="0.5"/>
 <circle cx="705.0" cy="176.0" r="2.2" fill="#141820"/>
 <text x="709.0" y="172.0" font-size="8" fill="#141820">reflection_hall</text>
-<rect x="436.3" y="314.5" width="33.3" height="3.1" fill="#2f6bd8" fill-opacity="0.06" stroke="#2f6bd8" stroke-width="1" stroke-opacity="0.5"/>
+<rect x="436.3" y="314.5" width="33.3" height="3.1" fill="#7d8794" fill-opacity="0.06" stroke="#7d8794" stroke-width="1" stroke-opacity="0.5"/>
 <circle cx="453.0" cy="316.0" r="2.2" fill="#141820"/>
 <text x="457.0" y="312.0" font-size="8" fill="#141820">queer_cylinder_target</text>
 <rect x="196.7" y="318.4" width="64.7" height="41.2" fill="#7d8794" fill-opacity="0.06" stroke="#7d8794" stroke-width="1" stroke-opacity="0.5"/>
@@ -685,23 +685,26 @@
 <rect x="734.5" y="582.0" width="40.6" height="28.0" fill="#c07a12" fill-opacity="0.06" stroke="#c07a12" stroke-width="1" stroke-opacity="0.5"/>
 <circle cx="761.0" cy="596.0" r="2.2" fill="#141820"/>
 <text x="765.0" y="592.0" font-size="8" fill="#141820">example_2_1_forces_vr</text>
-<rect x="439" y="302" width="28" height="28" fill="#d1344b" fill-opacity="0.22" stroke="#d1344b" stroke-width="1.8" stroke-dasharray="4 2"/>
-<line x1="445" y1="308" x2="461" y2="324" stroke="#d1344b" stroke-width="1.2" stroke-opacity="0.7"/>
-<line x1="461" y1="308" x2="445" y2="324" stroke="#d1344b" stroke-width="1.2" stroke-opacity="0.7"/>
-<rect x="439" y="274" width="28" height="28" fill="#2e7d4f" fill-opacity="0.42" stroke="#2e7d4f" stroke-width="2.2"/>
-<text x="453.0" y="291.0" font-size="9" fill="#12331f" text-anchor="middle" font-weight="700">2</text>
-<path d="M453.0,316.0 Q458.0,302.0 453.0,288.0" fill="none" stroke="#2e7d4f" stroke-width="1.5" stroke-opacity="0.75" marker-end="url(#ar)"/>
+<rect x="384.5" y="79.5" width="25.0" height="25.0" fill="none" stroke="#2f6bd8" stroke-width="2.6" stroke-dasharray="2 2"/>
+<circle cx="397.0" cy="92.0" r="3.4" fill="#2f6bd8"/>
+<rect x="412.5" y="79.5" width="25.0" height="25.0" fill="none" stroke="#2f6bd8" stroke-width="2.6" stroke-dasharray="2 2"/>
+<circle cx="425.0" cy="92.0" r="3.4" fill="#2f6bd8"/>
+<rect x="440.5" y="79.5" width="25.0" height="25.0" fill="none" stroke="#2f6bd8" stroke-width="2.6" stroke-dasharray="2 2"/>
+<circle cx="453.0" cy="92.0" r="3.4" fill="#2f6bd8"/>
 <text x="75" y="664" font-size="11" font-weight="600" fill="#141820">what the stamp proposes</text>
 <rect x="75" y="674" width="10" height="10" fill="#d1344b" fill-opacity="0.3" stroke="#d1344b"/>
 <text x="91" y="682" font-size="10" fill="#141820" font-weight="600">carve to floor</text>
-<text x="191" y="682" font-size="10" fill="#5b6472">1 cell(s) a body needs and a wall occupies</text>
+<text x="193" y="682" font-size="9.5" fill="#5b6472">0 cell(s) a body needs and a wall occupies</text>
 <rect x="75" y="689" width="10" height="10" fill="#2e7d4f" fill-opacity="0.3" stroke="#2e7d4f"/>
 <text x="91" y="697" font-size="10" fill="#141820" font-weight="600">re-plant the wall</text>
-<text x="191" y="697" font-size="10" fill="#5b6472">the same literal, moved to join a wall — never deleted</text>
+<text x="193" y="697" font-size="9.5" fill="#5b6472">the same literal, moved to join a wall — never deleted</text>
 <rect x="75" y="704" width="10" height="10" fill="#c07a12" fill-opacity="0.3" stroke="#c07a12"/>
 <text x="91" y="712" font-size="10" fill="#141820" font-weight="600">nowhere to go</text>
-<text x="191" y="712" font-size="10" fill="#5b6472">0 wall(s) with no legal destination, so not carved either</text>
-<text x="75" y="739" font-size="10" fill="#141820">bodies: UNMEASURED 9, FITS 6, OVERRUN 3, UNDECLARED 2, CARVE 1</text>
-<text x="75" y="754" font-size="10" fill="#5b6472">walls 94 before, 94 after — the multiset is conserved, a moved wall keeps its own literal</text>
-<text x="75" y="769" font-size="10" fill="#5b6472">narrowest lane on the route: 3 — the contract is that this must not fall</text>
+<text x="193" y="712" font-size="9.5" fill="#5b6472">0 wall(s) with no legal destination, so not carved either</text>
+<rect x="75" y="719" width="10" height="10" fill="#2f6bd8" fill-opacity="0.3" stroke="#2f6bd8"/>
+<text x="91" y="727" font-size="10" fill="#141820" font-weight="600">the minimum cut</text>
+<text x="193" y="727" font-size="9.5" fill="#5b6472">3 cell(s) - the hall admits 3 way(s) through against 3 door cells, so it is as wide as its own doorway</text>
+<text x="75" y="754" font-size="10" fill="#141820">bodies: UNMEASURED 9, FITS 7, OVERRUN 3, UNDECLARED 2</text>
+<text x="75" y="769" font-size="10" fill="#5b6472">walls 94 before, 94 after — the multiset is conserved, a moved wall keeps its own literal</text>
+<text x="75" y="784" font-size="10" fill="#5b6472">museum traversal: in at row 0, out at row 19 - walks</text>
 </svg>

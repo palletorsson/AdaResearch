@@ -484,17 +484,26 @@
 <text x="425.0" y="321.0" font-size="13" fill="#c07a12" text-anchor="middle">?</text>
 <text x="313.0" y="405.0" font-size="13" fill="#c07a12" text-anchor="middle">?</text>
 <text x="201.0" y="405.0" font-size="13" fill="#c07a12" text-anchor="middle">?</text>
+<rect x="328.5" y="79.5" width="25.0" height="25.0" fill="none" stroke="#2f6bd8" stroke-width="2.6" stroke-dasharray="2 2"/>
+<circle cx="341.0" cy="92.0" r="3.4" fill="#2f6bd8"/>
+<rect x="356.5" y="79.5" width="25.0" height="25.0" fill="none" stroke="#2f6bd8" stroke-width="2.6" stroke-dasharray="2 2"/>
+<circle cx="369.0" cy="92.0" r="3.4" fill="#2f6bd8"/>
+<rect x="384.5" y="79.5" width="25.0" height="25.0" fill="none" stroke="#2f6bd8" stroke-width="2.6" stroke-dasharray="2 2"/>
+<circle cx="397.0" cy="92.0" r="3.4" fill="#2f6bd8"/>
 <text x="75" y="552" font-size="11" font-weight="600" fill="#141820">what the stamp proposes</text>
 <rect x="75" y="562" width="10" height="10" fill="#d1344b" fill-opacity="0.3" stroke="#d1344b"/>
 <text x="91" y="570" font-size="10" fill="#141820" font-weight="600">carve to floor</text>
-<text x="191" y="570" font-size="10" fill="#5b6472">0 cell(s) a body needs and a wall occupies</text>
+<text x="193" y="570" font-size="9.5" fill="#5b6472">0 cell(s) a body needs and a wall occupies</text>
 <rect x="75" y="577" width="10" height="10" fill="#2e7d4f" fill-opacity="0.3" stroke="#2e7d4f"/>
 <text x="91" y="585" font-size="10" fill="#141820" font-weight="600">re-plant the wall</text>
-<text x="191" y="585" font-size="10" fill="#5b6472">the same literal, moved to join a wall — never deleted</text>
+<text x="193" y="585" font-size="9.5" fill="#5b6472">the same literal, moved to join a wall — never deleted</text>
 <rect x="75" y="592" width="10" height="10" fill="#c07a12" fill-opacity="0.3" stroke="#c07a12"/>
 <text x="91" y="600" font-size="10" fill="#141820" font-weight="600">nowhere to go</text>
-<text x="191" y="600" font-size="10" fill="#5b6472">6 wall(s) with no legal destination, so not carved either</text>
-<text x="75" y="627" font-size="10" fill="#141820">bodies: CARVE 6, FITS 3, TOO BIG 2</text>
-<text x="75" y="642" font-size="10" fill="#5b6472">walls 85 before, 85 after — the multiset is conserved, a moved wall keeps its own literal</text>
-<text x="75" y="657" font-size="10" fill="#5b6472">narrowest lane on the route: n/a (no route clear of bodies) — the contract is that this must not fall</text>
+<text x="193" y="600" font-size="9.5" fill="#5b6472">6 wall(s) with no legal destination, so not carved either</text>
+<rect x="75" y="607" width="10" height="10" fill="#2f6bd8" fill-opacity="0.3" stroke="#2f6bd8"/>
+<text x="91" y="615" font-size="10" fill="#141820" font-weight="600">the minimum cut</text>
+<text x="193" y="615" font-size="9.5" fill="#5b6472">3 cell(s) - the hall admits 3 way(s) through against 3 door cells, so it is as wide as its own doorway</text>
+<text x="75" y="642" font-size="10" fill="#141820">bodies: CARVE 6, FITS 3, TOO BIG 2</text>
+<text x="75" y="657" font-size="10" fill="#5b6472">walls 85 before, 85 after — the multiset is conserved, a moved wall keeps its own literal</text>
+<text x="75" y="672" font-size="10" fill="#5b6472">museum traversal: in at row 0, out at row 15 - walks</text>
 </svg>
