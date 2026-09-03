@@ -47,11 +47,28 @@ func _process(_delta: float) -> void:
 	if Engine.is_editor_hint() or not _raycast:
 		return
 
-	# Carry a held object: keep it floating in front of the camera at the hold distance.
+	# Carry a held object: keep it floating in front of the camera at the hold
+	# distance, AND POINTING WHERE YOU LOOK.
+	#
+	# The orientation half was missing, and it only became visible once a carried
+	# thing could be fired (2026-09-02). pink_gun.fire() sends its projectile
+	# along the GUN's -Z; carrying by position alone left the gun wearing whatever
+	# rotation it happened to have on the shelf, so the trigger would work
+	# perfectly and the shot would go somewhere else entirely. That is worse than
+	# the feature not existing, because it looks like it exists.
+	#
+	# It also just matches VR, where a grabbed object is attached to the hand and
+	# follows it. Nothing is lost by doing this to every carried object: there is
+	# no rotate-while-carrying control on desktop, so the old behaviour was not a
+	# choice anyone could have made on purpose. The body is frozen by _grab_held,
+	# so writing the transform does not fight the physics server.
 	if _held and is_instance_valid(_held) and _camera:
-		var fwd := -_camera.global_transform.basis.z
-		var target_pos := _camera.global_position + fwd * _hold_distance
-		_held.global_position = _held.global_position.lerp(target_pos, 0.4)
+		var cam_xf := _camera.global_transform
+		var target_pos := cam_xf.origin + (-cam_xf.basis.z) * _hold_distance
+		var xf := _held.global_transform
+		xf.origin = xf.origin.lerp(target_pos, 0.4)
+		xf.basis = xf.basis.orthonormalized().slerp(cam_xf.basis.orthonormalized(), 0.4)
+		_held.global_transform = xf
 	elif _held and not is_instance_valid(_held):
 		_held = null
 
@@ -86,12 +103,16 @@ func _input(event: InputEvent) -> void:
 
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
-			if _last_target:
+			# A CARRIED THING TAKES THE CLICK FIRST — see _try_held_action.
+			if _try_held_action(true):
+				get_viewport().set_input_as_handled()
+			elif _last_target:
 				_locked_target = _last_target
 				_is_pressed = true
 				XRToolsPointerEvent.pressed(self, _locked_target, _last_position)
 				get_viewport().set_input_as_handled()
 		else:
+			_try_held_action(false)
 			if _locked_target:
 				XRToolsPointerEvent.released(self, _locked_target, _last_position)
 				_locked_target = null
@@ -111,6 +132,59 @@ func _input(event: InputEvent) -> void:
 			_hold_distance = clampf(_hold_distance - 0.25, 1.0, 5.0)
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			_hold_distance = clampf(_hold_distance + 0.25, 1.0, 5.0)
+
+
+## THE TRIGGER A CARRIED OBJECT NEVER HAD ON DESKTOP.
+##
+## 2026-09-02, Palle: "In the endless museum there are silhouettes that attack.
+## In VR we can pick up a gun and stop them in their tracks, they become
+## sculptures but in desktop we can not stop the silhouettes."
+##
+## The gap was not that silhouettes could not be clicked — it was that a weapon
+## in your hand was INERT here. In VR the chain is: grab the gun, the pickable's
+## trigger emits action_pressed, pink_gun.fire() throws a catalyst projectile,
+## and hit_by_catalyst_mode turns a silhouette into a statue. On desktop RMB
+## already grabbed the gun (its pickable is collision_layer 3, which GRAB_MASK
+## covers), and then nothing ever called the thing's action(). It sat in the
+## hand doing nothing.
+##
+## So this adds ONE rung rather than a silhouette special case: while carrying a
+## pickable, LMB is its trigger. Same rule in both modes — the gun stops them,
+## and you must be holding the gun. The alternative, clicking a silhouette dead
+## from any range holding nothing, would have made desktop a different game and
+## written the object out of the story; this project's own line is that friends
+## grant the player no power, and the power here is the object.
+##
+## It also comes free for everything else with an action — the sledgehammer, the
+## laser — instead of one enemy learning one new way to die.
+##
+## THE HELD THING WINS OVER A HOVER TARGET. One pointer, one job: to press a
+## button, drop what you are carrying (RMB), the same way a full hand in VR
+## cannot also push. Returns true when it consumed the click.
+##
+## Separate from _input on purpose: _input refuses to run unless the mouse is
+## captured, which no headless probe can arrange, and a branch no test can reach
+## is a branch that rots. probe_desktop_trigger.gd calls this directly.
+var _action_held: Node3D = null      # what THIS click is driving, if anything
+
+
+func _try_held_action(pressed: bool) -> bool:
+	if pressed:
+		if not (_held != null and is_instance_valid(_held) and _held.has_method("action")):
+			return false
+		_action_held = _held
+		_action_held.call("action")
+		return true
+	# Release goes to whatever the PRESS started, not to whatever is in the hand
+	# now — a click that begins on the gun and ends after it was dropped would
+	# otherwise leave the trigger held down forever, or release a different object.
+	if _action_held == null or not is_instance_valid(_action_held):
+		_action_held = null
+		return false
+	if _action_held.has_method("action_release"):
+		_action_held.call("action_release")
+	_action_held = null
+	return true
 
 
 func _emit_hover_events(new_target: Node3D, new_at: Vector3) -> void:
