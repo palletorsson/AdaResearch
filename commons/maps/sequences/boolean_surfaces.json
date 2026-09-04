@@ -25,11 +25,9 @@
     "Boolean composition vs. mesh assembly"
    ],
    "content": [
-    "Boolean_Union: A ∪ B — the union operator made solid",
-    "Boolean_Intersection: A ∩ B — the overlap as lens",
-    "Boolean_Difference: A − B — the cavity-making operator",
-    "Boolean_Compose_Workbench: all three operators side by side; the csg-compose affordance home",
-    "Boolean_Architecture_Cavity: a habitable wall built by subtraction"
+    "Boolean_Verbs: A ∪ B, A ∩ B, A − B on one pair of operands — only the word changes",
+    "Boolean_Gallery: six families at every value their DNA axis can take; the published claim beside the object",
+    "Boolean_Works: CSG at architectural scale — the workbench, the cavity, the cavern, and the interior the physics never arrives for"
    ],
    "maps": [
       "Boolean_Verbs",
@@ -44,52 +42,49 @@
    },
    "artifact_groups": [
     {
-     "map": "Boolean_Union",
+     "map": "Boolean_Verbs",
      "position": "intro",
      "artifacts": [
-      "csg_union_demo"
+      "csg_union_demo",
+      "csg_intersection_demo",
+      "csg_difference_demo",
+      "the_argument_of_solids"
      ],
      "size_budget": "compact_only",
-     "rationale": "Single artifact: the union operator visualized as a single composite solid."
+     "rationale": "The three operators on one pair of operands, in three bays separated by sills rather than walls, so each verb stays visible from the next. the_argument_of_solids closes the hall by rebuilding all three at bench scale."
     },
     {
-     "map": "Boolean_Intersection",
-     "position": "foundation",
-     "artifacts": [
-      "csg_intersection_demo"
-     ],
-     "size_budget": "compact_only",
-     "rationale": "Single artifact: A ∩ B as the lens-shaped solid showing where shapes agree."
-    },
-    {
-     "map": "Boolean_Difference",
-     "position": "foundation",
-     "artifacts": [
-      "csg_difference_demo"
-     ],
-     "size_budget": "compact_only",
-     "rationale": "Single artifact: the subtractive operator. Architecture begins."
-    },
-    {
-     "map": "Boolean_Compose_Workbench",
+     "map": "Boolean_Gallery",
      "position": "exploration",
      "artifacts": [
-      "csg_compose_workbench"
+      "csg_difference_demo",
+      "csg_union_demo",
+      "csg_intersection_demo",
+      "subtraction_suite",
+      "coincident_face",
+      "removal_room"
      ],
-     "size_budget": "mixed",
-     "rationale": "Workbench holding all three operators side by side. The home of the csg-compose affordance."
+     "size_budget": "compact_only",
+     "rationale": "Six promoted families, each placed at all four values of its DNA axis — 24 placements in six bands. Layout is generated from the registry, default leftmost, so every band opens on the object as it ships elsewhere."
     },
     {
-     "map": "Boolean_Architecture_Cavity",
+     "map": "Boolean_Works",
      "position": "synthesis",
      "artifacts": [
-      "csg_architecture_cavity"
+      "csg_compose_workbench",
+      "subtraction_suite",
+      "sphere_splitting_showcase",
+      "recursive_boolean_cube",
+      "csg_architecture_cavity",
+      "sdf_cavern_room",
+      "booleanvariations",
+      "coincident_face"
      ],
      "size_budget": "environment",
-     "rationale": "Habitable wall with doorway, porthole, arched window — Boolean composition as architecture."
+     "rationale": "CSG at the scale where it would have to be architecture. The hall's finding is negative and deliberate: twelve of the chapter's thirteen artifacts carry no collision construct, so every large negative here is a picture of an interior rather than one."
     }
    ],
-   "note": "2026-05-13: populated with 5 CSG maps wired to the new boolean_surfaces artifacts. Moved from λ_edge order 12.7 to F_order order 4.7 in the macro sieve."
+   "note": "2026-05-13: populated with 5 CSG maps wired to the new boolean_surfaces artifacts. Moved from λ_edge order 12.7 to F_order order 4.7 in the macro sieve. 2026-09-03 (3d37b5b2f): the five halls folded into three — Verbs, Gallery, Works. 2026-09-04: content, artifact_groups and the per-map blurb/intent caught up with that fold; the artifact lists here are read from each map_data.json, not authored."
   }
  }
 }

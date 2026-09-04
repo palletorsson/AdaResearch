@@ -1,0 +1,5 @@
+The chapter's DNA hall, and the only room in the project where a promoted artifact's whole family is placed rather than described. Everywhere else the player meets these objects at their registry default and has no way to know a ladder existed. The layout is generated from the registry, default first, which is why five of the six bands open on the object as you already know it.
+
+The design bet is that standing the published claim beside the object turns a maintenance problem into an exhibit. The disagreements the hall exposes are not staged: `csg_union_demo` publishes `lobed, distinct, necked, single` against a code ladder that runs monotonically, so the argument the ladder existed to make is scrambled by the order it is shown in; `csg_intersection_demo`'s opening value reaches its rung through a wildcard rather than a case; `coincident_face` contains no boolean operation at all. Leave these visible. The room is the instrument.
+
+Curriculum role: B2 EXAMINE in the boolean_surfaces sequence — the variant as a claim somebody published, and the gap between an object and its own description.

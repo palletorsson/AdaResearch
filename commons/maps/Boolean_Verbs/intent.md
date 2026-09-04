@@ -1,0 +1,5 @@
+Establishes the boolean vocabulary on one pair of operands, so the only variable in the hall is the verb. The three demos were three separate maps until 2026-09-03; they were folded into one because each operation is only legible beside the others — union's deleted seam means little until you have seen intersection return an empty set, and difference's invented face means nothing until you know that neither input brought it.
+
+The sills between bays are steps, not walls: the player should never lose sight of the previous verb while standing at the next. `the_argument_of_solids` closes the hall by rebuilding all three at bench scale under the claim that the set is closed — and the reflection beat is that the claim holds for the enum and not for the argument, since difference is not commutative and the grammar has one slot for the verb and none for the order.
+
+Curriculum role: B1 INTRODUCE in the boolean_surfaces sequence — the vocabulary, and the first look at what a boundary representation forecloses.
