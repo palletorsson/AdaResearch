@@ -9050,7 +9050,7 @@
    },
    "spatial_needs": {
     "platform": "none",
-    "footprint_cells": 9,
+    "footprint_cells": 1,
     "clearance": {
      "front": 2,
      "back": 1,
@@ -9069,32 +9069,17 @@
      "trigger"
     ],
     "preferred_zone": "entry",
-    "measured_footprint_cells": 17,
+    "measured_footprint_cells": 1,
     "footprint_source": "measured_capped"
    },
    "measurements": {
-    "aabb_size": [
-     16.28,
-     10.89,
-     0.5
-    ],
-    "aabb_center": [
-     0.0,
-     5.7,
-     0.0
-    ],
-    "grid_cells": [
-     17.0,
-     1.0
-    ],
-    "max_dimension_m": 16.28,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
+    "aabb_size": [0.5, 0.5, 0.5],
+    "aabb_center": [0.0, 0.5, 0.0],
+    "grid_cells": [1, 1],
+    "max_dimension_m": 0.5,
+    "measured_at": "2026-09-05T13:59:45Z"
    },
-   "footprint_measured": [
-    17.0,
-    1,
-    1.0
-   ],
+   "footprint_measured": [1, 1, 1.0],
    "spatial_profile": {
     "dir_group": "panel",
     "range": 35,
