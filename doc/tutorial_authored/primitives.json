@@ -1,19 +1,15 @@
 {
   "_readme": "The human writing pass for the primitives tutorial — the opening chapter, and the proof of the ledger principle: point = awe/thrownness, line = measurement as the condition of thought, the hand enters, the trace crosses analogue into bits and opens the debt. Merged over the skeleton by tools/build_critical_tutorial.py (apply_authored); regeneration never clobbers this file.",
-
   "truth": "A point is position without extension. Everything is built from nothing.",
-
   "question": {
     "text": "Before the first shape, there is a dark room and one luminous point. Stand with it a moment. It has no size — no width to inspect, no surface to touch — only position, the pure fact of being here rather than anywhere else. Everything this book will build — forests, storms, minds — is made of nothing but these. The weight of that is worth feeling before it becomes technique: geometry begins with something that, strictly speaking, isn't there. And notice how you got here: dropped in. You did not watch the world boot; you arrived mid-scene, in a body, facing a point, the way you arrived the first time. The curriculum honors that thrownness by starting not with a definition but with an encounter. The definitions come — Vector3(x, y, z), three numbers naming a place — but the numbers are the second thing. The first thing is awe at how little it takes: position without extension. Nothing, with an address. And from here, the whole world."
   },
-
   "primitive": {
     "lead": "Every sequence begins with one small thing that already contains the whole idea — here, the point that would not stay still.",
     "artifacts": {
       "klee_walking_point": "Page one of Klee's Pedagogical Sketchbook, built: 'an active line on a walk, moving freely, without a goal. A walk for a walk's sake.' A luminous point sets itself in motion and leaves a trail of points behind it — and the trail IS the line. Watch the whole ceremony: the point crosses its invisible sheet, draws the line out of nothing, holds it for a beat, dims, and walks again. The line is never given; it is always the record of a point that moved. Drawing is time made visible — and the artifact's two walk styles are already an ethics: 'meander', the queer wander, against 'straight', the collapsed shortest path. The straightest move is the one that learned the least."
     }
   },
-
   "walk1": {
     "lead": "Five artifacts: the void, the given, the crossing, the agreement, and the room that frames them all.",
     "artifacts": {
@@ -24,7 +20,6 @@
       "lab_room": "And the room itself, procedurally generated: white tile, observation glass, an accent strip naming the QFEP phase, signage reading TEST CHAMBER λ-S. The room is not the experiment — the room is the signal that an experiment is about to happen. Which makes it the architecture of thrownness: you are always already inside one of these before anyone explains it, reading the walls for what kind of place this is. Same script, different DNA, different chamber — the frame is as authored as anything it frames."
     }
   },
-
   "walk2": {
     "lead": "Further in: the hand starts writing, and measurement gets a body.",
     "artifacts": {
@@ -32,23 +27,22 @@
       "laser_measure": "A handheld laser measure with an LCD readout — the most ordinary object in the sequence, and among the most loaded. Point it and a number appears: distance, the primal measurement, the act the line made thinkable. Every measurement is a question forced onto the world in units the world did not choose. The tool fits in your hand because measuring was never neutral or disembodied — someone aims it.",
       "pyramid_edit": "A pyramid with five grab handles — apex and four base corners, all movable. Drag the apex sideways and somewhere along the way it stops being a pyramid; no alarm sounds, because nothing in the geometry knows the word. 'Pyramid' is a parameterisation plus a habit of naming. The handles teach what the definition hides: categories have interiors and edges, and you can feel for them with your hand.",
       "grabbable_line": "A line segment you grab as one object — anywhere along its length — and carry through space. The lesson is in what you didn't need: you can hold a line before you know it has endpoints. Wholes are graspable before parts are nameable; the body understands before analysis arrives. It also resists snapping to integers, slightly — a small built-in glitch to remind you the grid is always pulling.",
-      "triangle": "Three points, and suddenly there is surface — the minimal agreement that defines a plane and encloses area. Drag its vertices through the presets: equilateral, right-angled, isosceles — the family of shapes one contract can take. Every surface you will see in this book, every creature and cave and cathedral, is triangles and nothing else. The GPU's atomic unit is not the pixel; it is this pact among three points. Here the trace's private crossing becomes industry: the whole rendered world is discretization at scale."
+      "triangle": "Three points, and suddenly there is surface — the minimal agreement that defines a plane and encloses area. Drag its vertices through the presets: equilateral, right-angled, isosceles — the family of shapes one contract can take. Every surface you will see in this book, every creature and cave and cathedral, is triangles and nothing else. The GPU's atomic unit is not the pixel; it is this pact among three points. Here the trace's private crossing becomes industry: the whole rendered world is discretization at scale.",
+      "prism_block": "A triangular prism, a metre on a side, the shape a triangle makes when it is taken for a walk. In Primitives_Polythedra it is placed fifteen times and does two opposite things. Twelve stand in a ring round the dark sphere and the octahedra tower, three across the top and bottom turned a quarter, two down each side: you walk round the ring, or through a corner on the diagonal, and never through a face - the prism as a blocker, the smallest solid that can be a wall. Past the ring the same triangle is cut the other way, as the walkable wedge: two structures of ramps on cube-high platforms, a bar you walk up, along and down, and a block you can climb from any of four sides - the prism as a slope, the one solid in the museum you walk up. The difference is which face is on the floor.",
+      "diamonds": "A tower of twelve octahedra, each turned fifteen degrees further than the one below, sunk a metre into the floor inside the ring. A regular solid, a small angle, and the same step twelve times: a straight stack becomes a helix by nothing but a rule repeated, and the pattern is in the rule, not in any one of the stones.",
+      "rock_spawner": "A pen of walls three cubes high, and thirty rocks dropped into it from three and a half metres out of a volume three by two by three. They are irregular, no two alike, they fall with physics and rest however they land, and the gaps between them are the first thing in the chapter no rule made. Beside them a scanner passes a plane through the pile between the floor and three metres and draws the slices on a panel: a different outline at every height, a solid one number's worth less."
     }
   },
-
   "turn": {
     "text": "The knobs of this sequence are quieter than later ones, and more fundamental. klee_walking_point exposes trail_points — 48 by default — and that number is the book's first sample rate: lower it and the walk becomes a polygon; raise it and the line approaches, without ever reaching, the gesture. The debt made adjustable — pay more memory, owe less form. walk_style toggles meander against straight: the same journey, with and without a goal. And fontana's sphere_radius decides how much void a form can carry before it stops being a form at all. Three knobs: how finely to sample, whether to wander, how much nothing to admit. Most of the book's later machinery is these three questions wearing costumes."
   },
-
   "critical": {
     "lead": "Now the reading the dark room has been implying all along.",
     "qfep_connection": "Primitives are the F term — pure order, stable foundations before entropy enters, the deterministic base from which complexity will grow. That is the official story, and it is true enough to teach. But the trace has already broken it. The player's hand entered early, analogue and unrepeatable, and every artifact that recorded it took out a loan against the continuous. Order, it turns out, is not the absence of entropy — it is entropy deferred: sampled, gridded, agreed upon. The F term is what E(S) looks like after the first measurement. Which means the queer remainder is not a late guest arriving with the randomness sequence: it was here before the grid was, and the grid was built to manage it."
   },
-
   "world": {
     "lead": "Ten rooms that begin with almost nothing and end with an angel. Point_One holds a single artifact and a footprint of zero square metres — the emptiest room in the game, on purpose; awe needs a vacuum. Then lines accumulate, the trace gets a room of its own, the grid arrives, triangles bring surface, polyhedra bring bodies. Primitives_Ignorance packs forty artifacts into the sequence's densest room — everything you do not know yet, staged — and Portals throws open the largest footprint in the spine, doors before you know what doors are. It ends in Melencolia: Dürer's angel surrounded by every instrument of measurement, polyhedron at her feet, unable to act. The sequence's closing argument in a single image — measurement alone does not move."
   },
-
   "seed": {
     "truth": "A point is position without extension. Everything is built from nothing.",
     "exercises": [
@@ -57,11 +51,11 @@
       "In draw_dot, draw the slowest curve you can, then the fastest. Find the speed at which your hand outruns the sampler — that threshold is the resolution of your world here. Write the number down; the book will raise it and raise it and never reach you.",
       "With laser_measure, measure the distance to the point at the centre of fontana_puncture's hollow. Then say what exactly you measured to: matter, void, or agreement.",
       "Drag pyramid_edit's apex until, for you, it stops being a pyramid. Mark the spot. Ask someone else to do the same. The distance between your two marks is what a category is.",
-      "In player_trace, walk a word — your name — and look at the line. What did the recording keep, and what did it discard? The discarded part is the debt; remember its face."
+      "In player_trace, walk a word — your name — and look at the line. What did the recording keep, and what did it discard? The discarded part is the debt; remember its face.",
+      "In Primitives_Polythedra, walk round the ring of prisms and try every corner; then climb the four-sided block from each side in turn. Say what changed between the prism that stopped you and the prism that carried you. It is one face."
     ],
     "coda": "The seed of this sequence fits in a sentence: from a point that isn't there, and a hand that can't be held, the whole world will be built on credit. Carry it into transformation, where the shapes learn to move — and the moves, not the shapes, turn out to be the geometry."
   },
-
   "motifs": {
     "the throw": "Opened. You are dropped into a dark room with one luminous point — arrival before explanation, the spawn as thrownness. Every chapter after this begins the same way, and owes this one the honesty of admitting it.",
     "the measure": "Opened. The grid is confessed as a social agreement, the laser puts measurement into a hand, and Melencolia closes the sequence with measurement's patron saint, unable to act. Thinking begins with a cut.",
