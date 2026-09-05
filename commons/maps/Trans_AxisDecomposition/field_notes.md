@@ -118,3 +118,95 @@ without opening the scene produced wrong numbers twice in this chapter.
 **Fix.** The sideways cube and the depth cube, each on its own rail, each trailing four shrinking ghosts of where it just was, each printing its one coordinate to three decimals as it goes. There is a speed slider on the rack in front of them. Slow the cube down until you can read the number changing, and watch the other two digits not change at all.
 
 **Evidence.** Verified: axis_translation_cube.gd:33 (travel_speed), :357 (a slider_h labelled SPEED), :363-370 (slider_moved sets travel_speed), :274 (Label3D prints the moving coordinate).
+
+## The rethink (2026-09-05): the hole is the way
+
+Palle, after the three galleries: *"Do you understand the syntax and the
+principal of these maps? It is all about how transformation creates empty
+space. So the holes are the pathway up down to the side as a result of
+translation rotation and scale."* And when the first draft answered with walls
+that open and a cube that fills a pit: *"I mean not fill hole that is another
+question I mean just structure 0."* The ruling is in
+`commons/data/red_thread_rulings.json`; the rebuild is commit 0298271bd; the
+generator that made it (traces, banks and cell-sharing checked) is the session's
+`rethink2.py`. **Every `0` cell is the trace of one ride, and the ride is the
+only way through it.** A crossing hole is ringed by walls; a spectacle hole (a
+rolling cube, a growing cube) keeps floor round it. Mario cubes stand where the
+holes lead.
+
+**What the holes are now.** `tc:2:z` at (4,5) through (4,6) into the island at
+(4,7); `tc:4:-z` at (5,7) through (5,6), (5,5), (5,4) into the north room at
+(5,3); `tc:4:-x` at (5,8) through (4,8), (3,8), (2,8) into the west landing at
+(1,8); the diagonal `tc:2.83:1,0,1` at (1,9) through (2,10) into the south room
+at (3,11); `tc:1.5:y:auto` standing in the hole (5,13) of a small 2-plateau
+(x5-7 row 12, x6-7 row 13). 42 of the 112 interior cells are void (the wall
+text's "more than a third"; it used to say half). Four Mario cubes. Five
+pick-ups added so the gate's six exist. The `3t` "Translation produces space as
+navigable extent" moved from (3,10), which the diagonal now runs through, to
+(2,12). The spawn `s` at (8,9) on the east wall is as it was; the other
+session's row (interactables row 4) was not touched.
+
+**Two rules the layout taught.** A ride's bank must not be another ride's
+start, or two cubes stand in one cell; and two traces must not cross, or two
+cubes can meet mid-ride. The west landing is three cells long for that reason,
+and the diagonal starts one cell south of where the x ride lands.
+
+**Templates learned, and what each cost.**
+
+- **The ferry distance is the void's depth plus one.** The cube ends EMBEDDED
+  in the far bank, flush with it (Trans_Introduction's `tc:4:z:auto` over rows
+  6-8). A ride that stops in the last void cell strands the rider a metre
+  short, which is what once stranded Palle between two chapters.
+- **A ride in a void cell stands half a metre down.** `GridCommon.surface_world_y(0)`
+  is 0, so the cube's top is at 0.5 against a floor top of 1.0. A hole in a
+  plateau's front is entered by dropping in, and `tc:1.5:y:auto` rises flush to
+  the plateau top at 2.0. Plateaus exist only in the embedded-grid halls
+  (Translation, AxisDecomposition, Rotation); the museum's door halls read
+  height 2 as wall.
+- **A straight ride needs a 1-wide slot; a turning one (`#rot`) needs 3**,
+  because a 1 m cube at 45 degrees is 1.41 m across and would pass through the
+  walls.
+- **The plank is a 2.2 m cube at y -0.6** at the centre of a 3x3 hole: its top
+  at 0.5, its corners 1.55 out at 45 degrees (touching the banks) and 1.1 at
+  rest (a 0.4 m gap). Crossing is a step over the gap and a half-metre step up
+  at the far bank, the template's own terms; `rc:90` pauses closed at both
+  ends and is open mid-sweep, `rc:45` pauses open. A continuous `rc` is a
+  StaticBody turned by script, no platform velocity: a rider is not carried,
+  so rolling cubes are spectacle and a turntable is crossed on foot.
+- **The scale cube goes at the LEFT column of its 3x3 hole** (`sc:3:0.5:1:0`,
+  offset_x 1 puts the centre in the middle). The galleries commit had it at
+  the centre column, overhanging the bank by a metre.
+- **The pathfinder read `int(distance)` and only the words x, y, z.** `tc:1.5`,
+  `tc:4.24:1,0,1` and `tc:2.24:0,-1,2` were dropped in silence and their far
+  sides reported unreachable. `tools/map_pathfinder.py` now reads floats,
+  signed axes and vectors, and a plank or turntable joins its banks two cells
+  out; a cube rolling about x or z joins nothing.
+- **The Mario cube took the first node named DarkSphere in the whole tree**,
+  which in the museum could be another hall's; it now takes the nearest
+  (`commons/artifacts/mario_cube/mario_cube.gd`). In this hall that is the
+  room's own sphere, so the first crossing removes the room's control, and the
+  wall text says so.
+- **Rides are utilities, artifacts are placements.** The museum reads a hall's
+  structure and utilities live, but a door hall's artifacts come from
+  `ada_run/em_plan.json`: the five transformation rows were re-derived from
+  the maps and re-baked on 2026-09-05. A full `em_map_halls.py --apply` would
+  have re-derived 23 rows other sessions were editing, so the patch was partial
+  and says so in the plan's `_map_halls` stamp.
+
+**Open.** The tutorial's `reconstruct` still flips z (see above). Nobody has
+walked the rebuilt hall in VR.
+
+**Learned after the bake (2026-09-05, later).** The museum seals every body's
+cells in its walk map, a walk-into trigger included, and refuses a seal that
+would cut the route ("sealing would sever the walk route"), then SLIDES the
+body - into a wall cell, if that is the nearest cell whose seal cuts nothing.
+Trans_Scale's right hall is one loop (row 8, the x8 and x12 columns, rows
+12-13) with a branch to the sideways slot; a loop tolerates one sealed cell and
+a landing pocket none, so two of its three Mario cubes were slid into walls.
+They now stand at (12,8), the loop's one cut, and (11,17), off the loop. And
+the Mario cube measured seventeen cells because its hidden rainbow (seven arcs,
+three metres up) was built at `_ready`: the museum's extent counts every
+MeshInstance3D, hidden or not. It is built at the moment of the crossing now,
+so the cube seals its one cell; the registry's measured footprint (17) is stale
+by the same amount. The Spectacle's twelve stood exactly where placed, because
+its rows are thirteen wide.

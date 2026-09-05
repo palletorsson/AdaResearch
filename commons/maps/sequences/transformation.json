@@ -29,6 +29,7 @@
     "Vectors as atoms: every translation is a vector addition; every rotation is a vector-to-vector map. The operations you learn here are operations on vectors — named explicitly at forces (seq 5)."
    ],
    "content": [
+	"Trans_Pre: One cube and its differences - a copy somewhere else, a copy turned, a copy grown, then all three: the primer",
 	"Trans_Introduction: Three cubes, three transformation types — translate, rotate, scale",
 	"Trans_Translation: Translation as navigational infrastructure — displacement across voids",
 	"Trans_AxisDecomposition: Translation deconstructed into X, Y, Z axes",
@@ -37,6 +38,7 @@
     "Trans_Scale: Scaling uniformly and non-uniformly against reference geometry"
    ],
    "maps": [
+	"Trans_Pre",
 	"Trans_Introduction",
 	"Trans_Translation",
 	"Trans_AxisDecomposition",
@@ -64,6 +66,17 @@
     "matrix_master_badge"
    ],
    "artifact_groups": [
+	{
+	 "map": "Trans_Pre",
+	 "position": "primer",
+	 "artifacts": [
+	  "mario_cube",
+	  "clipboard"
+	 ],
+	 "size_budget": "compact_only",
+	 "rationale": "One cube and its differences. The same block stands twice, four times over, and each copy differs in one way: somewhere else (translation), turned (rotation), larger (scale), then all three at once. The differences at rest, before the chapter uses them to cross holes.",
+	 "grammar": "linear"
+	},
 	{
 	 "map": "Trans_Introduction",
 	 "position": "intro",

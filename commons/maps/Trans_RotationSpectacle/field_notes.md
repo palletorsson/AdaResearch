@@ -121,3 +121,93 @@ without opening the scene produced wrong numbers twice in this chapter.
 **Fix.** ## What you can trust
 
 **Evidence.** Consequential on the kept dark_sphere fix. Verified: righttriangle.gd has no _process; dark_sphere.gd:589-600 does.
+
+## The rethink (2026-09-05): the hole is the way
+
+Palle, after the three galleries: *"Do you understand the syntax and the
+principal of these maps? It is all about how transformation creates empty
+space. So the holes are the pathway up down to the side as a result of
+translation rotation and scale."* And when the first draft answered with walls
+that open and a cube that fills a pit: *"I mean not fill hole that is another
+question I mean just structure 0."* The ruling is in
+`commons/data/red_thread_rulings.json`; the rebuild is commit 0298271bd; the
+generator that made it (traces, banks and cell-sharing checked) is the session's
+`rethink2.py`. **Every `0` cell is the trace of one ride, and the ride is the
+only way through it.** A crossing hole is ringed by walls; a spectacle hole (a
+rolling cube, a growing cube) keeps floor round it. Mario cubes stand where the
+holes lead.
+
+**What the holes are now, down the procession.** Band A, rows 11-13: planks
+`rc:90:y:4:-0.6` (2,12), `rc:90:x:4:-0.6` (6,12), `rc:180:y:3:-0.6` (10,12),
+walls between. Band B, rows 16-18, floor round the holes:
+`rc:continuous:y:40:-0.6` (2,17), `rc:continuous:x:30` (6,17),
+`rc:continuous:z:30` (10,17). Band C, rows 21-23: `tc:4:z#rot:90`, `#rot:-90`,
+`#rot:360` from row 20 at x2, 6, 10. Band D, rows 26-28: `tc:4:z#rot:180#scale:1.2`
+from (2,25) in a 3-wide slot and `tc:4:z#scale:1.3` from (6,25) in a 1-wide one.
+The diagonal `tc:4.24:1,0,1` from (1,30) through (2,31), (3,32) into (4,33);
+the screw `tc:2:y:auto#rot:360` on floor at (10,31); `sc:3:0.5:1:0` at (8,34),
+the LEFT column of its hole (x8-10, rows 33-35). Band E, rows 38-40:
+`rc:continuous:y:10:-0.6` (2,39), `rc:45:y:4:-0.6` (6,39), `br:z:3` at (10,38).
+Twelve Mario cubes. The tunnel at (12,4), the cakes at (8,42) and the carousel
+are where they were. This is a door hall: its artifacts come from the plan,
+re-derived and re-baked on 2026-09-05.
+
+**Templates learned, and what each cost.**
+
+- **The ferry distance is the void's depth plus one.** The cube ends EMBEDDED
+  in the far bank, flush with it (Trans_Introduction's `tc:4:z:auto` over rows
+  6-8). A ride that stops in the last void cell strands the rider a metre
+  short, which is what once stranded Palle between two chapters.
+- **A ride in a void cell stands half a metre down.** `GridCommon.surface_world_y(0)`
+  is 0, so the cube's top is at 0.5 against a floor top of 1.0. A hole in a
+  plateau's front is entered by dropping in, and `tc:1.5:y:auto` rises flush to
+  the plateau top at 2.0. Plateaus exist only in the embedded-grid halls
+  (Translation, AxisDecomposition, Rotation); the museum's door halls read
+  height 2 as wall.
+- **A straight ride needs a 1-wide slot; a turning one (`#rot`) needs 3**,
+  because a 1 m cube at 45 degrees is 1.41 m across and would pass through the
+  walls.
+- **The plank is a 2.2 m cube at y -0.6** at the centre of a 3x3 hole: its top
+  at 0.5, its corners 1.55 out at 45 degrees (touching the banks) and 1.1 at
+  rest (a 0.4 m gap). Crossing is a step over the gap and a half-metre step up
+  at the far bank, the template's own terms; `rc:90` pauses closed at both
+  ends and is open mid-sweep, `rc:45` pauses open. A continuous `rc` is a
+  StaticBody turned by script, no platform velocity: a rider is not carried,
+  so rolling cubes are spectacle and a turntable is crossed on foot.
+- **The scale cube goes at the LEFT column of its 3x3 hole** (`sc:3:0.5:1:0`,
+  offset_x 1 puts the centre in the middle). The galleries commit had it at
+  the centre column, overhanging the bank by a metre.
+- **The pathfinder read `int(distance)` and only the words x, y, z.** `tc:1.5`,
+  `tc:4.24:1,0,1` and `tc:2.24:0,-1,2` were dropped in silence and their far
+  sides reported unreachable. `tools/map_pathfinder.py` now reads floats,
+  signed axes and vectors, and a plank or turntable joins its banks two cells
+  out; a cube rolling about x or z joins nothing.
+- **The Mario cube took the first node named DarkSphere in the whole tree**,
+  which in the museum could be another hall's; it now takes the nearest
+  (`commons/artifacts/mario_cube/mario_cube.gd`). In this hall that is the
+  room's own sphere, so the first crossing removes the room's control, and the
+  wall text says so.
+- **Rides are utilities, artifacts are placements.** The museum reads a hall's
+  structure and utilities live, but a door hall's artifacts come from
+  `ada_run/em_plan.json`: the five transformation rows were re-derived from
+  the maps and re-baked on 2026-09-05. A full `em_map_halls.py --apply` would
+  have re-derived 23 rows other sessions were editing, so the patch was partial
+  and says so in the plan's `_map_halls` stamp.
+
+**Open.** Nobody has walked the rebuilt hall in VR. The `t` at (3,48) still
+stands on floor.
+
+**Learned after the bake (2026-09-05, later).** The museum seals every body's
+cells in its walk map, a walk-into trigger included, and refuses a seal that
+would cut the route ("sealing would sever the walk route"), then SLIDES the
+body - into a wall cell, if that is the nearest cell whose seal cuts nothing.
+Trans_Scale's right hall is one loop (row 8, the x8 and x12 columns, rows
+12-13) with a branch to the sideways slot; a loop tolerates one sealed cell and
+a landing pocket none, so two of its three Mario cubes were slid into walls.
+They now stand at (12,8), the loop's one cut, and (11,17), off the loop. And
+the Mario cube measured seventeen cells because its hidden rainbow (seven arcs,
+three metres up) was built at `_ready`: the museum's extent counts every
+MeshInstance3D, hidden or not. It is built at the moment of the crossing now,
+so the cube seals its one cell; the registry's measured footprint (17) is stale
+by the same amount. The Spectacle's twelve stood exactly where placed, because
+its rows are thirteen wide.

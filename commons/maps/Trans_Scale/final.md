@@ -41,6 +41,16 @@ The dark sphere, where the prisms end. It turns on itself the whole time you are
 
 <!-- @ -->
 
+## The hole is the way
+
+The wall on your right has two doorways in it, and through them a second hall with its floor cut four times. Two slots run away from you, each crossed by a cube you ride: on one the space grows by a third around you as you go, on the other it shrinks by nearly a quarter, and both give it back on the way back. Between them and the next cut, a square of empty floor three cells across with a small cube at its middle, which grows to the size of the square and shrinks again: the hole is the room a scaling needs, and the cube is exactly the size of it. A slot runs sideways, crossed with the space growing. At the end a lift stands on the floor and takes you up two metres with the space growing by half, and brings you down again. Nothing here scales the things; it scales the distance between you and them, which the first sentence of this room said was the only kind of size there is.
+
+<!-- @mario_cube -->
+
+Two yellow cubes, one at the end of the landing the two slots share and one past the sideways slot. Walk into one and a rainbow of seven bands stands up three metres over it. The first one you reach does something more: the dark sphere shrinks to nothing in little more than a second and is gone. The thing the pill goes looking for is the price of the first crossing.
+
+<!-- @ -->
+
 ## What survives
 
 Every transformation in this chapter was a promise about what would not be touched. Scale's promise is proportion: every ratio is kept, every angle is kept, and every size is given up. That is why it is the transformation that most directly shows what invariance means. Nothing here scales you. The pill moves you instead, and moving you is enough: from five metres up and twice as far out, the room is the same shape and none of it is the size it was.

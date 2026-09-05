@@ -34,6 +34,16 @@ Along the east wall, a corridor of eighteen hollowed cubes set end to end, each 
 
 A baggage carousel, and one suitcase going round it forever. On the straights it translates. At the corners it rotates. Through the customs arch it is scaled down, and on the far side it is restored, nothing to declare. Twelve seconds a lap. All three rigid motions, one after another, on one object, in a loop: the grammar of the chapter, spoken by a suitcase.
 
+<!-- @ -->
+
+## The hole is the way
+
+Between the suitcase and the cakes the floor is cut five times, and each cut is the shape of one turn. Three square holes with planks in them: a quarter turn about the vertical, a quarter about the axis you walk along, so that it tips, and a half turn. Three holes with the floor left round them, where cubes turn without pausing: a turntable at forty degrees a second, and two rolling about the two floor axes. Three slots the width of a turning cube, crossed carried: a quarter, the other way, a full circle. Two more slots, one crossed turned half round while the space grows a fifth around you, one with the space growing by a third and nothing turning. Then a staircase of single holes cut on the diagonal, a lift beside the wall that takes you up two metres and once around and back, the square of empty floor a cube needs to grow into, and a last cut of three ways: a turntable at ten degrees a second that you cross while it turns, a plank that pauses open at forty-five, and a bridge, which is translation made still. Every empty cell in the procession is the sweep of one rotation, and the rotation is the only way through it.
+
+<!-- @mario_cube -->
+
+Twelve yellow cubes, one at the far side of every crossing. Walk into one and a rainbow of seven bands stands up three metres over it. The first one you reach does something more: the dark sphere shrinks to nothing in little more than a second and is gone. From then on the only thing in the hall you can trust is the triangle.
+
 <!-- @two_cakes -->
 
 Two cakes of three tiers each, assembled from the same tiers. One was turned and then slid, the other slid and then turned, and the candles stand at two different addresses. It is the last hall's lesson baked: the product changes when the factors change sides.

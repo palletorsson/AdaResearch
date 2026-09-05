@@ -27,7 +27,11 @@ func _ready() -> void:
 	await get_tree().process_frame
 	_connect_to_next_cubes()
 	_cache_dark_sphere()
-	_create_rainbow()
+	# The rainbow is built at the moment of the crossing, not here. Built at
+	# _ready and hidden, its seven arcs three metres up made the cube MEASURE
+	# seventeen cells (the museum's extent counts every MeshInstance3D, hidden
+	# or not), so the museum sealed a ring of walk cells round a one-metre
+	# trigger and slid it into a wall when the ring cut the route (2026-09-05).
 
 ## Finds all NextCube nodes in the "next_cube" group and connects their signal.
 func _connect_to_next_cubes() -> void:
@@ -84,22 +88,36 @@ func _exit_tree() -> void:
 # Dark sphere
 # ---------------------------------------------------------------------------
 
-## Searches groups and scene tree to cache a reference to the DarkSphere node.
+## Caches the NEAREST dark sphere: the "dark_sphere" group first, else every
+## node named DarkSphere in the scene (a duplicate is renamed DarkSphere2 or
+## @DarkSphere@N by Godot, and counts). The first-found rule this replaces was
+## fine in a map with one sphere; in the endless museum several halls stand in
+## one tree, and a cube reached in one hall would have taken another hall's
+## sphere (2026-09-05: the rethink stood 35 Mario cubes across five halls).
 func _cache_dark_sphere() -> void:
+	var candidates: Array[Node3D] = []
 	for node in get_tree().get_nodes_in_group("dark_sphere"):
 		if node is Node3D:
-			_dark_sphere_ref = node as Node3D
-			return
-	_dark_sphere_ref = _find_by_name(get_tree().current_scene, "DarkSphere")
+			candidates.append(node as Node3D)
+	if candidates.is_empty():
+		_collect_by_name(get_tree().current_scene, "DarkSphere", candidates)
+	_dark_sphere_ref = null
+	var best: float = INF
+	for c in candidates:
+		if not is_instance_valid(c) or not c.is_inside_tree():
+			continue
+		var d: float = global_position.distance_squared_to(c.global_position)
+		if d < best:
+			best = d
+			_dark_sphere_ref = c
 
-func _find_by_name(root: Node, target: String) -> Node3D:
-	if root.name == target and root is Node3D:
-		return root as Node3D
+func _collect_by_name(root: Node, target: String, out: Array[Node3D]) -> void:
+	if root == null:
+		return
+	if root is Node3D and String(root.name).trim_prefix("@").begins_with(target):
+		out.append(root as Node3D)
 	for child in root.get_children():
-		var found := _find_by_name(child, target)
-		if found:
-			return found
-	return null
+		_collect_by_name(child, target, out)
 
 ## Animates the DarkSphere to scale zero then frees it.
 func _remove_dark_sphere() -> void:
@@ -158,6 +176,8 @@ func _create_rainbow() -> void:
 
 ## Reveals the rainbow with an elastic scale-in tween.
 func _show_rainbow() -> void:
+	if not _rainbow_ref or not is_instance_valid(_rainbow_ref):
+		_create_rainbow()
 	if not _rainbow_ref:
 		return
 	_rainbow_ref.visible = true

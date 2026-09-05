@@ -1,6 +1,6 @@
 Translation changes nothing about a thing except where it is. That is why a void can be crossed by it, and why a path can be kept as nothing but a list of positions.
 
-This hall has holes in its floor. One ramp, five transport cubes that lift and slide on a single axis apiece, and in the widest chasm a cube that grows until you can stand on it. The whole room is displacement made into infrastructure. Nothing here is reshaped by being moved, which is not the same as nothing turning: the cubes you collect spin on the spot, and the cube in the chasm swells to three metres, holds for four seconds while you walk across it, and shrinks away again.
+This hall has holes in its floor, and every one of them is the trace of a translation. Three slots run away from you, each exactly as wide and as long as the cube that travels it, and the cube is the only way across: the first carries you straight, the second turns you a quarter on the way, the third grows the space around you by a third and gives it back on the return. One slot runs sideways. Three holes stand in the front of a raised floor with a lift in each, and you enter them by dropping in and leave them on top. One slot runs down through that floor, a cube sliding forward and down at once. The whole room is displacement made into infrastructure, and the emptiness is the drawing of it. Nothing here is reshaped by being moved, which is not the same as nothing turning: the cubes you collect spin on the spot, and two of the rides turn you with them.
 
 ```gdscript
 func move_to(node: Node3D, target: Vector3) -> void:
@@ -21,15 +21,15 @@ A cube on a rail that runs away from you, sliding forty centimetres out and fort
 
 <!-- @y_translation_cube -->
 
-This one lifts, on its own rail, with its own ghosts. Those are the two directions this hall uses to get you across: the transport cubes go up, and they go forward. Nothing in the room asks you to go sideways.
+This one lifts, on its own rail, with its own ghosts. Those are the two directions this hall mostly uses to get you across: the transport cubes go forward, and they go up. Once, in the middle of the hall, one goes sideways, and once one goes forward and down at the same time.
 
 <!-- @pick_up_cube -->
 
-Five cubes, each turning on its own axis and bobbing, four standing on floor and one hanging over the hole near the entrance. You cannot pick one up. Walk into it and it is gone with a rising chirp, and the score is one larger. The only thing translated here is you: the cube never moves at all, and the count is what your crossing leaves behind.
+Seven cubes, each turning on its own axis and bobbing: six standing on the ground, one of those up on the raised floor, and one hanging over the hole near the entrance. You cannot pick one up. Walk into it and it is gone with a rising chirp, and the score is one larger. The only thing translated here is you: the cube never moves at all, and the count is what your crossing leaves behind.
 
 <!-- @pickup_gate -->
 
-The gate at the end counts. It wants seven on the score you have been carrying since the first hall, the same number the cube beside it is displaying, and it is closed until the count gets there and open the moment it does. Nothing about the gate is clever, and that is the point: enough crossings changed a number, and the number changed a wall.
+The gate at the end counts. It wants seven on the score you have been carrying since the first hall, and for the first time the hall holds seven of its own, the last of them up on the raised floor. The cube beside the gate displays the number, and the gate is closed until the count gets there and open the moment it does. Nothing about the gate is clever, and that is the point: enough crossings changed a number, and the number changed a wall.
 
 <!-- @synthesis_stand -->
 
@@ -47,11 +47,15 @@ A workbench with a slider that picks one of four pairs of moves. The same tetrah
 
 A dark sphere that never leaves its cell while you cross. It is not still: it turns slowly, it wobbles, and its glow breathes between dim and dimmer. It is the room's control, and a strict one, because the only thing it refuses to do is the one thing everything else here does.
 
+<!-- @mario_cube -->
+
+Eight yellow cubes, one at the far end of every hole: past the three slots, at the landing of the sideways slot, on top of the raised floor where each lift arrives, and at the foot of the slot that comes down. They are the places you were meant to reach, and they know when you have. Walk into one and a rainbow of seven bands stands up three metres over it. The first one you reach does something more: the dark sphere shrinks to nothing in little more than a second and is gone. The room's control is the price of the first crossing, and darkness becomes colour at the moment a hole has been crossed. The others keep their rainbows, and the sphere does not come back.
+
 <!-- @ -->
 
 ## Here becomes there
 
-The gaps in this floor are not obstacles. They are invitations, because translation is the operation that does not care what lies between two positions. And the transport cube does cross the void, slowly. Stand on it, wait a second, and it moves at two metres a second toward the far side, and on every frame it adds the distance it just moved to your position as well as to its own. You are not transported. You are added to, frame by frame, by a cube doing to you exactly what the first line of code did to the object.
+The gaps in this floor are not obstacles. They are invitations, because translation is the operation that does not care what lies between two positions, and every gap here is the exact size of the move that crosses it: the hole is the drawing of the translation, and the translation is the only way through the drawing. And the transport cube does cross the void, slowly. Stand on it, wait a second, and it moves at two metres a second toward the far side, and on every frame it adds the distance it just moved to your position as well as to its own. You are not transported. You are added to, frame by frame, by a cube doing to you exactly what the first line of code did to the object.
 
 That is translation's promise, and it is the only transformation in the chapter whose promise covers you.
 

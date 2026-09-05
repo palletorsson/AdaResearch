@@ -12,7 +12,7 @@ extends SceneTree
 ## Run:  godot --path . --xr-mode off --no-window --script res://commons/testing/probe_transformation_galleries.gd
 
 const CATALOG := "res://commons/maps/catalog/MapCatalogDesktop3D.tscn"
-const MAPS := ["Trans_Translation", "Trans_AxisDecomposition", "Trans_Scale", "Trans_Rotation", "Trans_RotationSpectacle"]
+const MAPS := ["Trans_Pre", "Trans_Translation", "Trans_AxisDecomposition", "Trans_Scale", "Trans_Rotation", "Trans_RotationSpectacle"]
 const SCRIPT_OF := {"tc": "transport_cube.gd", "rc": "rotation_cube.gd", "sc": "scale_cube.gd", "br": "bridge_path.gd", "3t": "word_is.gd"}
 
 var _fails := 0

@@ -35,6 +35,16 @@ A dark sphere with no front. It is turning the whole time you stand there, slowl
 
 <!-- @ -->
 
+## The hole is the way
+
+The floor of this hall is cut across three times, and each cut is the shape of a turn. The first is a row of three square holes, each the width of a plank turning about its centre: one turns a quarter and pauses, one a half, one forty-five degrees, and you cross when the corners meet the banks. There is no other way over. The second is three holes with the floor left round them, where cubes turn without stopping: a turntable you can cross while it turns under you, and two cubes rolling about the axes you walk along and across, which are no way at all. The third is three slots the width of a turning cube, crossed only carried: a quarter, the other way, half round. Past them a raised floor with a hole in its front, and in the hole a lift that turns you once around on the way up, the screw; and a slot down through its back, where a cube slides forward and down and turns you half round as it goes. Every empty cell here is the sweep of one rotation, and the rotation is the only way through it.
+
+<!-- @mario_cube -->
+
+Eight yellow cubes, one at the far side of every crossing. Walk into one and a rainbow of seven bands stands up three metres over it. The first one you reach does something more: the dark sphere shrinks to nothing in little more than a second and is gone. The thing with no front is the price of the first crossing.
+
+<!-- @ -->
+
 ## Sameness of form
 
 Turn a square a quarter of a turn and it is the same square, corner for corner. Turn it an eighth and it is not. The turns that change nothing are a form's symmetry, and they are the part of rotation this chapter cares about most: not where a thing ends up, but which turns bring it home. A circle comes home under every turn, which is why the needle can hold one radius forever. A square comes home under four. And this is not only a fact about shapes. When physics asks what a particle is, one of the answers is how many turns it takes to come home, and there are particles that need two. How many turns a thing needs is a number physics gives to every particle, and it calls that number spin. It is sameness of form, taken as far as it goes.
@@ -53,7 +63,7 @@ Turn round. Back up the hall a grey pillar four metres tall has been standing th
 
 <!-- @pickup_gate -->
 
-A cube and a gate that wants seven on the running score, as before. You do not carry this one. You walk into it and it is gone with a chirp, one point richer, and the gate one cell over reads the total. The rule has not changed since the first hall, and here it is the calm part of the room.
+Seven cubes and a gate that wants seven on the running score, as before: two past the plank holes, two past the carried turns, one up on the raised floor, one at the foot of the slot down, and the last beside the gate. You do not carry them. You walk into one and it is gone with a chirp, one point richer, and the gate reads the total. The rule has not changed since the first hall, and here it is the calm part of the room.
 
 <!-- @ -->
 
