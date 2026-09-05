@@ -863,6 +863,37 @@ static func transport_span(node: Node3D, start: Vector2i) -> Array:
 	return out
 
 
+## THE EMBEDDED GRID'S RIDES (2026-09-05). A hall that embeds the real GridSystem
+## (map_info.museum.simulation.grid) gets the grid's own transport cubes, which
+## watch layer 20 - the grid's player layer - while the museum's walker stands
+## on layer 1, and whose spans the museum's walk map never learned. This widens
+## every transport cube under `gs` (make_carriable) and returns the ride cells
+## in `frame`'s cell space: the floor of the cube's position in that frame, z
+## offset by zbase - so the museum can insert them into its walk map and a
+## probe can read them against a real grid without booting a museum.
+static func carry_embedded_rides(gs: Node3D, frame: Node3D, zbase: int) -> Dictionary:
+	var out := {"cubes": 0, "carried": 0, "cells": []}
+	if gs == null or not is_instance_valid(gs):
+		return out
+	for n in gs.find_children("*", "Node3D", true, false):
+		var sp := ""
+		if n.get_script() != null:
+			sp = str((n.get_script() as Script).resource_path).to_lower()
+		if not sp.contains("transport_cube"):
+			continue
+		var cube: Node3D = n as Node3D
+		out["cubes"] = int(out["cubes"]) + 1
+		if make_carriable(cube) > 0:
+			out["carried"] = int(out["carried"]) + 1
+		var local: Vector3 = cube.position
+		if frame != null and cube.is_inside_tree() and frame.is_inside_tree():
+			local = frame.to_local(cube.global_position)
+		var gc := Vector2i(int(floor(local.x + 0.001)), zbase + int(floor(local.z + 0.001)))
+		for c_v in transport_span(cube, gc):
+			(out["cells"] as Array).append(c_v)
+	return out
+
+
 # Generate utility type mapping comment for data files
 static func generate_utility_mapping_comment() -> String:
 	var comment_lines = [

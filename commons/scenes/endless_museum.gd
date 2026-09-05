@@ -10606,27 +10606,16 @@ func _sim_grid_ready(gs: Node3D, zbase: int) -> void:
 func _sim_grid_carry(gs: Node3D, zbase: int) -> void:
 	if gs == null or not is_instance_valid(gs) or not gs.is_inside_tree():
 		return
-	var seg: Node3D = gs.get_parent() as Node3D
-	var carried := 0
-	var cells := 0
-	for n in gs.find_children("*", "Node3D", true, false):
-		var sp := ""
-		if n.get_script() != null:
-			sp = str((n.get_script() as Script).resource_path).to_lower()
-		if not sp.contains("transport_cube"):
-			continue
-		var cube: Node3D = n as Node3D
-		if UtilityRegistry.make_carriable(cube) > 0:
-			carried += 1
-		# the cube's cell in the hall's frame: the grid stands inside the segment
-		var local: Vector3 = seg.to_local(cube.global_position) if seg != null else cube.position
-		var gc := Vector2i(int(floor(local.x + 0.001)), zbase + int(floor(local.z + 0.001)))
-		for c_v in UtilityRegistry.transport_span(cube, gc):
-			if not _ride_cells.has(c_v):
-				cells += 1
-			_ride_cells[c_v] = "tc"
-	if carried > 0 or cells > 0:
-		print("[em-sim-grid] %d transport cube(s) carry the walker; %d ride cell(s) known to the walk map" % [carried, cells])
+	# the rule is UtilityRegistry's, so commons/testing/probe_embedded_grid_rides.gd
+	# can hold it against a real grid without booting a museum
+	var r: Dictionary = UtilityRegistry.carry_embedded_rides(gs, gs.get_parent() as Node3D, zbase)
+	var fresh := 0
+	for c_v in (r["cells"] as Array):
+		if not _ride_cells.has(c_v):
+			fresh += 1
+		_ride_cells[c_v] = "tc"
+	if int(r["carried"]) > 0 or fresh > 0:
+		print("[em-sim-grid] %d transport cube(s) carry the walker; %d ride cell(s) known to the walk map" % [int(r["carried"]), fresh])
 
 
 ## The pack report on disk survives across boots: merge it into the live
