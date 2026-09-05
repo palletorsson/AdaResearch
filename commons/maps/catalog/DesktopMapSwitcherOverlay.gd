@@ -230,6 +230,9 @@ func _mark_input_handled() -> void:
 		viewport.set_input_as_handled()
 
 func _is_text_input_focused() -> bool:
+	# a comment box's screen is a SubViewport, invisible to the root's focus owner (2026-09-05)
+	if get_tree().get_first_node_in_group("ada_typing") != null:
+		return true
 	var viewport := get_viewport()
 	if not viewport:
 		return false

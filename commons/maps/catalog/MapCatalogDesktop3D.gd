@@ -955,6 +955,8 @@ func _apply_mouse_look(relative: Vector2) -> void:
 func _apply_fly_translation(delta: float) -> void:
 	if not _preview_camera:
 		return
+	if get_tree().get_first_node_in_group("ada_typing") != null:
+		return   # a comment box has the keyboard: W/A/S/D are letters
 
 	var forward := 0.0
 	if _is_pressed(KEY_W):
@@ -998,6 +1000,9 @@ func _set_status(text: String) -> void:
 		_status_label.text = "%s\nFly %s: F toggle, %s, WASD move, up E/Space/PgUp/R, down Q/Ctrl/PgDn/C/X/Z" % [text, fly_state, look_hint]
 
 func _is_text_focused() -> bool:
+	# a comment box's screen is a SubViewport, invisible to the root's focus owner (2026-09-05)
+	if get_tree().get_first_node_in_group("ada_typing") != null:
+		return true
 	var vp := get_viewport()
 	if not vp:
 		return false

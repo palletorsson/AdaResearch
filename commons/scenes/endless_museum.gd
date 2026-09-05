@@ -15515,6 +15515,9 @@ func _physics_process(_delta: float) -> void:
 	if _spine_ui != null and is_instance_valid(_spine_ui):
 		_player.velocity = Vector3.ZERO   # the strip is open: typing is typing
 		return
+	if get_tree().get_first_node_in_group("ada_typing") != null:
+		_player.velocity = Vector3.ZERO   # a comment box has the keyboard: typing is typing
+		return
 	if _dollhouse:
 		_doll_frame(_delta)
 		return
@@ -17028,6 +17031,10 @@ func _catch_if_fallen() -> void:
 
 
 func _input(event: InputEvent) -> void:
+	# a comment box's screen holds the keyboard (group ada_typing, 2026-09-05):
+	# its letters are not the museum's keys
+	if event is InputEventKey and get_tree().get_first_node_in_group("ada_typing") != null:
+		return
 	# THE PAGE is modal while it is open: the museum's keys stay off, so typing
 	# a field note cannot toggle the doll house or walk the visitor away from
 	# the wall they are writing about. Esc closes, F5 writes.

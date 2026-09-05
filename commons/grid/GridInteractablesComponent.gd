@@ -36,6 +36,8 @@ const CONFIG_PARAM_NAMES = [
 	"alt_x", "alt_y", "alt_z", "phase", "phase_deg", "phase_mode",
 	"spin_x", "spin_y", "spin_z", "speed_x", "speed_y", "speed_z",
 	"animate", "duration", "no_collision", "rotate_collision",
+	# Comment box (2026-09-05): its id, its output path, its prompt - `#box:3` must stay a value
+	"box", "out", "prompt",
 	# Walking-creature params (2026-08-27). A key:number pair whose key is NOT in
 	# this list is read as `tutorial_id:rotation` by the shorthand branch below,
 	# so `#pace_reach:1.4` set the artifact's yaw to 1.4 degrees and left the

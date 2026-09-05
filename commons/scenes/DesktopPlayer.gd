@@ -65,7 +65,7 @@ func _input(event):
 	# E key toggles voxel edit mode
 	if event is InputEventKey and event.pressed and not event.echo:
 		var keycode: int = (event as InputEventKey).keycode
-		if keycode == KEY_E and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+		if keycode == KEY_E and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and not _typing_elsewhere():
 			_toggle_voxel_mode()
 			return
 		# Ctrl+S save in voxel mode
@@ -102,13 +102,20 @@ func _input(event):
 					else:
 						_try_interact()
 
+## A comment box's screen holds the keyboard (group ada_typing, 2026-09-05).
+func _typing_elsewhere() -> bool:
+	return get_tree().get_first_node_in_group("ada_typing") != null
+
+
 func _physics_process(delta: float) -> void:
 	# Apply mouse look
 	_apply_camera_rotation(delta)
 
 	# G toggles walk <-> fly (fly: Space up, Ctrl down). Was F, but F is the
 	# flashlight — freed it to avoid the double-bind.
-	if Input.is_key_pressed(KEY_G):
+	# a comment box has the keyboard (group ada_typing): letters are letters, not moves
+	var typing: bool = _typing_elsewhere()
+	if Input.is_key_pressed(KEY_G) and not typing:
 		if not _fly_key_held:
 			_fly_key_held = true
 			fly_mode = not fly_mode
@@ -116,7 +123,9 @@ func _physics_process(delta: float) -> void:
 	else:
 		_fly_key_held = false
 
-	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	var input_dir: Vector2 = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	if typing:
+		input_dir = Vector2.ZERO
 	var speed = sprint_speed if Input.is_key_pressed(KEY_SHIFT) else walk_speed
 
 	if fly_mode:
@@ -127,9 +136,9 @@ func _physics_process(delta: float) -> void:
 		if dir.length() > 0.001:
 			dir = dir.normalized()
 		# Space / Ctrl add pure vertical on top of the look direction.
-		if Input.is_key_pressed(KEY_SPACE):
+		if Input.is_key_pressed(KEY_SPACE) and not typing:
 			dir.y += 1.0
-		if Input.is_key_pressed(KEY_CTRL):
+		if Input.is_key_pressed(KEY_CTRL) and not typing:
 			dir.y -= 1.0
 		velocity = dir * speed
 		move_and_slide()
@@ -139,7 +148,7 @@ func _physics_process(delta: float) -> void:
 	if use_gravity:
 		if not is_on_floor():
 			velocity.y -= gravity * delta
-		if allow_jump and Input.is_action_just_pressed("ui_accept") and is_on_floor():
+		if allow_jump and Input.is_action_just_pressed("ui_accept") and is_on_floor() and not typing:
 			velocity.y = jump_velocity
 	else:
 		velocity.y = 0.0
