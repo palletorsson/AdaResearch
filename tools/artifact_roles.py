@@ -673,9 +673,47 @@ def room(map_name: str) -> dict:
             if m["map"] == map_name:
                 out = dict(m)
                 out["seq"] = s.get("seq", seq_of.get(map_name, ""))
+                # where each bead stands on the thread page's canvas, by column:
+                # presentation, not arrangement - a bead with no position takes
+                # its slot on the serpentine, so the file stays empty until a
+                # hand has moved something
+                out["positions"] = load_roles().get("positions", {}).get(map_name, {})
                 out["ok"] = True
                 return out
     return {"ok": False, "error": "no such map on the spine: %s" % map_name}
+
+
+def set_positions(map_name: str, role: str, positions: dict) -> dict:
+    """THE MIND MAP (2026-09-05, Palle: "move around the bead freely with one
+    handle without moving them along the line ... chosen distances between
+    beads"). A bead's place on the canvas is a fact about the picture, not the
+    arrangement, and it lives beside the arrangement under `positions` so the
+    two cannot be told apart by which file they are in. Keys are run keys
+    (token, @group, #note); values [x, y] in canvas units. An empty dict for a
+    column clears that column's positions."""
+    if role not in ROLE_NAMES:
+        return {"ok": False, "error": "role must be one of %s" % ROLE_NAMES}
+    if not (MAPS / map_name / "map_data.json").exists():
+        return {"ok": False, "error": "no such map: %s" % map_name}
+    clean: dict[str, list[float]] = {}
+    for k, v in (positions or {}).items():
+        if not isinstance(v, (list, tuple)) or len(v) != 2:
+            return {"ok": False, "error": "position for %s must be [x, y]" % k}
+        try:
+            clean[str(k)] = [round(float(v[0]), 1), round(float(v[1]), 1)]
+        except (TypeError, ValueError):
+            return {"ok": False, "error": "position for %s must be numbers" % k}
+    doc = load_roles()
+    rooms = doc.setdefault("positions", {})
+    room_p = rooms.setdefault(map_name, {})
+    if clean:
+        room_p[role] = clean
+    else:
+        room_p.pop(role, None)
+    if not room_p:
+        rooms.pop(map_name, None)
+    save_roles(doc)
+    return {"ok": True, "map": map_name, "role": role, "positions": len(clean)}
 
 
 def brief_seq(seq_id: str, only_role: str = "") -> str:
@@ -812,6 +850,8 @@ def main() -> int:
     ap.add_argument("--candidates", action="store_true",
                     help="artifacts NOT in --map, ranked by the map's own vocabulary")
     ap.add_argument("--q", default="", help="search filter for --candidates")
+    ap.add_argument("--set-positions", metavar="JSON",
+                    help="the thread page's canvas positions for one column: {run_key: [x, y]}; {} clears")
     ap.add_argument("--room", action="store_true",
                     help="one map as JSON: cards, boxes, and each column's run - the necklace page's data")
     ap.add_argument("--brief", action="store_true",
@@ -854,6 +894,18 @@ def main() -> int:
         res = candidates(args.map, args.q)
         if args.json or True:
             print(json.dumps(res, ensure_ascii=False))
+        return 0 if res.get("ok") else 1
+
+    if args.set_positions is not None:
+        if not (args.map and args.role):
+            ap.error("--set-positions needs --map and --role")
+        try:
+            pos = json.loads(args.set_positions)
+        except json.JSONDecodeError as e:
+            print(json.dumps({"ok": False, "error": "positions must be JSON: %s" % e}))
+            return 1
+        res = set_positions(args.map, args.role, pos if isinstance(pos, dict) else {})
+        print(json.dumps(res, ensure_ascii=False))
         return 0 if res.get("ok") else 1
 
     if args.room:
