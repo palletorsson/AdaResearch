@@ -691,7 +691,7 @@ static func axis_of(word: String, fallback: Vector3) -> Vector3:
 		_: return fallback
 
 
-## rc:ANGLE:AXIS:PAUSE:Y_OFFSET (e.g. "90:y:4:-0.6"), or rc:continuous:AXIS:SPEED.
+## rc:ANGLE:AXIS:PAUSE:Y_OFFSET (e.g. "90:y:4:-0.6"), or rc:continuous:AXIS:SPEED[:Y_OFFSET].
 ## The grid's defaults when a field is omitted: axis y, pause 4 s, y_offset 0.
 ## `continuous` is the registry's documented second form; the grid's old branch
 ## put the word through float() and rotated by 0 degrees. That is the one place
@@ -710,6 +710,10 @@ static func rotation_params(parameters: Array) -> Dictionary:
 			out["continuous_axis"] = axis_of(String(parameters[1]), Vector3.RIGHT)
 		if parameters.size() >= 3 and String(parameters[2]).is_valid_float():
 			out["continuous_speed"] = String(parameters[2]).to_float()
+		# a fourth field (2026-09-05, the rotation galleries): the same Y_OFFSET a
+		# paused plank takes, so a turntable can sit flush with the floor
+		if parameters.size() >= 4 and String(parameters[3]).is_valid_float():
+			out["y_offset"] = String(parameters[3]).to_float()
 		return out
 	out["angle"] = String(parameters[0]).to_float()
 	if parameters.size() >= 2:
@@ -822,8 +826,10 @@ static func apply_params(node: Node3D, code: String, parameters: Array, ctx: Dic
 						node.set("mode", 1)
 						node.set("continuous_axis", r["continuous_axis"])
 						node.set("continuous_speed", float(r["continuous_speed"]))
-					r["summary"] = "Set rotation cube continuous on %s at %.1f deg/s" % [
-						r["continuous_axis"], float(r["continuous_speed"])]
+					if parameters.size() >= 4 and "y_offset" in node:
+						node.set("y_offset", float(r["y_offset"]))
+					r["summary"] = "Set rotation cube continuous on %s at %.1f deg/s, y=%.1f" % [
+						r["continuous_axis"], float(r["continuous_speed"]), float(r["y_offset"])]
 				else:
 					if node.has_method("set_step_pause_mode"):
 						node.call("set_step_pause_mode", float(r["angle"]), r["axis"], float(r["pause"]))

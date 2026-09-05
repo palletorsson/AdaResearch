@@ -12,7 +12,7 @@ extends SceneTree
 ## Run:  godot --path . --xr-mode off --no-window --script res://commons/testing/probe_transformation_galleries.gd
 
 const CATALOG := "res://commons/maps/catalog/MapCatalogDesktop3D.tscn"
-const MAPS := ["Trans_Translation", "Trans_AxisDecomposition", "Trans_Scale"]
+const MAPS := ["Trans_Translation", "Trans_AxisDecomposition", "Trans_Scale", "Trans_Rotation", "Trans_RotationSpectacle"]
 const SCRIPT_OF := {"tc": "transport_cube.gd", "rc": "rotation_cube.gd", "sc": "scale_cube.gd", "br": "bridge_path.gd", "3t": "word_is.gd"}
 
 var _fails := 0
@@ -99,9 +99,18 @@ func _run() -> void:
 				got_scale += 1
 		_check(got_rot == want_rot and got_scale == want_scale,
 			"%s: composed rides - %d turning (cells say %d), %d scaling the space (cells say %d)" % [map_name, got_rot, want_rot, got_scale, want_scale])
-		# the rotation plank is in step mode at 90; the scale cube's range is sane
-		for n in found["rc"]:
-			_check(int(n.get("mode")) == 0 and absf(float(n.get("rotation_angle")) - 90.0) < 1e-6, "%s: the rotation plank steps 90 degrees" % map_name)
+		# every rotation cube is in the mode and at the angle (or speed) its cell says
+		if not (cells["rc"] as Array).is_empty():
+			var want_rc: Array = []
+			for c in cells["rc"]:
+				var r: Dictionary = UtilityRegistry.rotation_params(UtilityRegistry.parse_utility_cell(c)["parameters"])
+				want_rc.append("continuous %.0f" % float(r["continuous_speed"]) if String(r["mode"]) == "continuous" else "step %.0f" % float(r["angle"]))
+			var got_rc: Array = []
+			for n in found["rc"]:
+				got_rc.append("continuous %.0f" % float(n.get("continuous_speed")) if int(n.get("mode")) == 1 else "step %.0f" % float(n.get("rotation_angle")))
+			want_rc.sort()
+			got_rc.sort()
+			_check(want_rc == got_rc, "%s: the rotation cubes are what their cells say - %s" % [map_name, str(got_rc)])
 		for n in found["sc"]:
 			_check(float(n.get("min_scale")) > 0.0 and absf(float(n.get("max_scale")) - 3.0) < 1e-6, "%s: the scale cube grows to 3 from %.3f" % [map_name, float(n.get("min_scale"))])
 		# every caption stands with its words
