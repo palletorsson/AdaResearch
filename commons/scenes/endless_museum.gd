@@ -6988,10 +6988,13 @@ func _stamp_utility(spec: String, cell: Vector2i, seg: Node3D, zbase: int) -> No
 	# you. A trailing #lift:<metres> raises the seated body, and is stripped
 	# before the registry sees the cell so the grid's own grammar is untouched
 	# and the same map still loads in the grid.
-	var lf: Dictionary = _spec_lift(spec)
-	var lift: float = float(lf["lift"])
-	var spec_clean: String = String(lf["spec"])
-	var parsed: Dictionary = UtilityRegistry.parse_utility_cell(spec_clean)
+	# the #tail is the registry's grammar now (2026-09-05): #lift stays the
+	# museum's word, the rest - #rot, #scale, the composed rides - goes to the
+	# cube with the cell, through the one door
+	var parsed: Dictionary = UtilityRegistry.parse_utility_cell(spec)
+	var config: Dictionary = parsed.get("config", {})
+	var lift_s: String = String(config.get("lift", ""))
+	var lift: float = lift_s.to_float() if lift_s.is_valid_float() else 0.0
 	# (the carrier's areas are widened after instantiation, below)
 	var code: String = String(parsed.get("type", " ")).strip_edges()
 	var params: Array = parsed.get("parameters", [])
@@ -7022,7 +7025,7 @@ func _stamp_utility(spec: String, cell: Vector2i, seg: Node3D, zbase: int) -> No
 	var node: Node3D = (load(path) as PackedScene).instantiate() as Node3D
 	node.name = "Utility_%s_%d_%d" % [code, cell.x, cell.y]
 	node.position = Vector3(cell.x + 0.5, 0.0, cell.y + 0.5)
-	_utility_apply_params(node, code, params)
+	_utility_apply_params(node, code, params, config)
 	seg.add_child(node)
 	# the crossing's top belongs on the deck — measured after the settle
 	if is_inside_tree():
@@ -7077,8 +7080,8 @@ func _stamp_utility(spec: String, cell: Vector2i, seg: Node3D, zbase: int) -> No
 ## gutter. Offsets pass through unchanged, as they did: the seat does the work
 ## (THE CROSSING IS A FLOOR, NOT AN ORNAMENT - top flush with the deck at full
 ## size, see _utility_seat).
-func _utility_apply_params(node: Node3D, code: String, params: Array) -> void:
-	var cfg: Dictionary = UtilityRegistry.apply_params(node, code, params, {"cube_size": 1.0, "gutter": 0.0})
+func _utility_apply_params(node: Node3D, code: String, params: Array, config: Dictionary = {}) -> void:
+	var cfg: Dictionary = UtilityRegistry.apply_params(node, code, params, {"cube_size": 1.0, "gutter": 0.0, "config": config})
 	if cfg.has("summary"):
 		print("[em-utility] %s" % String(cfg["summary"]))
 

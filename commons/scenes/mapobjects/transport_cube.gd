@@ -12,6 +12,24 @@ class_name TransportCube
 @export var start_delay: float = 1.0  # Seconds to wait before starting to move
 @export var auto_start: bool = false  # If true, starts moving automatically without player trigger
 
+# THE COMPOSED RIDES (2026-09-05, Palle: "add translate plus rotation in
+# translation, and translation plus scale up and down the space like when we
+# take the scale pill but a lot less"). Over the travel the cube turns by
+# ride_rotation_degrees and carries its rider round with it, and the SPACE
+# scales to ride_scale - the pill's move at a fraction of its dose (the pill is
+# x100; a ride says 1.3). Both follow the progress of the travel, so the return
+# trip unwinds them, and a rider who steps off is put back to size.
+# Map:  tc:3:z#rot:90     tc:6:y#scale:1.3     (the #tail is the registry's grammar)
+@export var ride_rotation_degrees: float = 0.0
+@export var ride_scale: float = 1.0   # the space at the far end: 1.3 = a third bigger, 0.8 = smaller
+
+var _base_yaw: float = 0.0
+var _ride_yaw: float = 0.0            # radians applied so far
+var _space_rider: Node3D = null       # whose space is scaled right now
+var _space_base_world: float = 1.0
+var _space_eye: Node3D = null
+var _space_eye_y: float = 0.0
+
 # Visual effects
 @export var rotation_speed: float = 0.5  # Cube rotation while idle
 @export var bob_height: float = 0.1  # Bobbing motion amplitude
@@ -45,6 +63,7 @@ func _ready() -> void:
 	# Store initial position
 	initial_position = global_position
 	original_y = global_position.y
+	_base_yaw = rotation.y
 	
 	# Normalize and calculate target position
 	move_direction = move_direction.normalized()
@@ -226,6 +245,97 @@ func _process(delta: float) -> void:
 	
 	# No idle animations - transport cube stays perfectly still when not moving
 
+	# the composed rides follow the travel, out and back
+	if not is_zero_approx(ride_rotation_degrees) or not is_equal_approx(ride_scale, 1.0):
+		_compose_ride()
+
+## How far along the travel the cube stands: 0 at the start, 1 at the far end.
+func ride_progress() -> float:
+	return clampf(global_position.distance_to(initial_position) / maxf(absf(move_distance), 0.001), 0.0, 1.0)
+
+
+func _compose_ride() -> void:
+	var progress: float = ride_progress()
+	var rider: Node3D = carried_player if (carried_player != null and is_instance_valid(carried_player)) else null
+	if not is_zero_approx(ride_rotation_degrees):
+		var want: float = deg_to_rad(ride_rotation_degrees) * progress
+		var dyaw: float = want - _ride_yaw
+		if absf(dyaw) > 1e-6:
+			rotation.y = _base_yaw + want
+			_ride_yaw = want
+			if rider != null:
+				_turn_rider(rider, dyaw)
+	if not is_equal_approx(ride_scale, 1.0):
+		if rider != null:
+			_scale_space(rider, lerpf(1.0, ride_scale, progress))
+		elif _space_rider != null:
+			_restore_space()
+
+
+## The rider turns with the cube: round the cube's centre, and about their own
+## axis. A VR rig turns as a whole (the origin); the desktop player keeps its
+## heading in a variable it writes every frame, so that is turned too; the
+## museum's walker keeps its heading in its owner's `_yaw`.
+func _turn_rider(rider: Node3D, dyaw: float) -> void:
+	var target: Node3D = rider
+	var parent: Node = rider.get_parent()
+	if parent is XROrigin3D:
+		target = parent as Node3D
+	var off: Vector3 = target.global_position - global_position
+	target.global_position = global_position + off.rotated(Vector3.UP, dyaw)
+	target.rotate_y(dyaw)
+	var cr: Variant = target.get("camera_rotation")
+	if cr is Vector3 or cr is Vector2:
+		cr.y += dyaw
+		target.set("camera_rotation", cr)
+	if parent != null and not (parent is XROrigin3D) and parent.get("_yaw") != null:
+		parent.set("_yaw", float(parent.get("_yaw")) + dyaw)
+
+
+## The pill's move at a small dose: the space at f times its size is the rider
+## at 1/f. In VR that is XRServer.world_scale, which the player body reads live
+## for its height and radius; on desktop and for the museum's walker it is the
+## eye's height - the first node above the camera that carries a height.
+func _scale_space(rider: Node3D, f: float) -> void:
+	if _space_rider != rider:
+		_restore_space()
+		_space_rider = rider
+		_space_base_world = XRServer.world_scale
+		_space_eye = _eye_of(rider)
+		_space_eye_y = _space_eye.position.y if _space_eye != null else 0.0
+	if rider.get_parent() is XROrigin3D:
+		XRServer.world_scale = _space_base_world / f
+	elif _space_eye != null and is_instance_valid(_space_eye):
+		_space_eye.position.y = _space_eye_y / f
+
+
+func _eye_of(rider: Node3D) -> Node3D:
+	var cams: Array = rider.find_children("*", "Camera3D", true, false)
+	if cams.is_empty():
+		return null
+	var n: Node = cams[0]
+	while n != null and n != rider:
+		if n is Node3D and absf((n as Node3D).position.y) > 0.05:
+			return n as Node3D
+		n = n.get_parent()
+	return null
+
+
+func _restore_space() -> void:
+	if _space_rider == null:
+		return
+	if is_instance_valid(_space_rider) and _space_rider.get_parent() is XROrigin3D:
+		XRServer.world_scale = _space_base_world
+	elif _space_eye != null and is_instance_valid(_space_eye):
+		_space_eye.position.y = _space_eye_y
+	_space_rider = null
+	_space_eye = null
+
+
+func _exit_tree() -> void:
+	_restore_space()
+
+
 func _is_player(body: Node3D) -> bool:
 	"""Check if the body is a player"""
 	# em_walker: the endless museum's desktop walker, which is named "Walker"
@@ -245,6 +355,7 @@ func _on_detection_area_body_exited(body: Node3D) -> void:
 	if _is_player(body):
 		player_on_cube = false
 		if carried_player == body:
+			_restore_space()   # whoever steps off is put back to size
 			carried_player = null
 		
 		# Cancel start delay if player exits during delay

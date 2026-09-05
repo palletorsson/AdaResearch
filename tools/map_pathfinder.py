@@ -294,6 +294,7 @@ class MapGraph:
         # Bare "h" has no kind — treated as a generic non-lethal hazard.
         self.hazard_kinds: dict[tuple[int, int], str] = {}
         for pos, cell in self.util_map.items():
+            cell = cell.split("#")[0]   # a #tail is config (tc:3:z#rot:90), not a parameter (2026-09-05)
             parts = cell.split(":")
             if parts[0] == "h":
                 kind = parts[1].strip() if len(parts) > 1 and parts[1].strip() else "generic"
@@ -394,6 +395,7 @@ class MapGraph:
         for pos, cell in self.util_map.items():
             if not cell.startswith("tc"):
                 continue
+            cell = cell.split("#")[0]   # a #tail is config (tc:3:z#rot:90), not a parameter (2026-09-05)
             parts = cell.split(":")
             if len(parts) < 3:
                 continue
@@ -437,6 +439,7 @@ class MapGraph:
         for pos, cell in self.util_map.items():
             if not cell.startswith("br"):
                 continue
+            cell = cell.split("#")[0]   # a #tail is config (tc:3:z#rot:90), not a parameter (2026-09-05)
             parts = cell.split(":")
             if len(parts) < 3:
                 continue
@@ -477,6 +480,7 @@ class MapGraph:
             if not (cell == "l" or cell.startswith("l:")):
                 continue
             height = 5.0
+            cell = cell.split("#")[0]   # a #tail is config (tc:3:z#rot:90), not a parameter (2026-09-05)
             parts = cell.split(":")
             if len(parts) > 1:
                 raw = parts[1].strip()
@@ -513,6 +517,7 @@ class MapGraph:
         for pos, cell in self.util_map.items():
             if not cell.startswith("jp"):
                 continue
+            cell = cell.split("#")[0]   # a #tail is config (tc:3:z#rot:90), not a parameter (2026-09-05)
             parts = cell.split(":")
             if len(parts) < 3:
                 continue

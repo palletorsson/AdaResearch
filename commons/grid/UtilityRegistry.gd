@@ -549,18 +549,34 @@ static func validate_utility_grid(grid_data: Array) -> Dictionary:
 static func parse_utility_cell(cell_value: String) -> Dictionary:
 	var result = {
 		"type": " ",
-		"parameters": []
+		"parameters": [],
+		"config": {}
 	}
-	
+
 	if cell_value.is_empty():
 		return result
-		
+
 	var clean_value = cell_value.strip_edges()
 	if clean_value.is_empty() or clean_value == " ":
 		return result
-	
+
+	# THE TAIL (2026-09-05): #key:value pairs after the head - the interactables'
+	# own config grammar - so a ride can say what it composes:
+	# tc:3:z#rot:90#scale:1.3. A bare #flag is true. The head's colon grammar
+	# is untouched; a reader that wants only the head strips at the first "#".
+	var head_value = clean_value
+	if "#" in clean_value:
+		var hp = clean_value.split("#", true, 1)
+		head_value = String(hp[0])
+		for part in String(hp[1]).split("#"):
+			var kv = String(part).split(":", true, 1)
+			var key = String(kv[0]).strip_edges()
+			if key.is_empty():
+				continue
+			result.config[key] = String(kv[1]).strip_edges() if kv.size() == 2 else true
+
 	# Split by colon to separate type from parameters
-	var parts = clean_value.split(":")
+	var parts = head_value.split(":")
 	result.type = parts[0]
 	
 	# Extract parameters if they exist
@@ -589,8 +605,23 @@ static func parse_utility_cell(cell_value: String) -> Dictionary:
 ##   has always done with it, and what those 425 cells were laid against.
 ## `applied` is false when there are fewer than two parameters: the grid sets
 ## nothing at all in that case, and the cube keeps every exported default.
-static func transport_params(parameters: Array) -> Dictionary:
-	var out := {"distance": 4.0, "direction": Vector3(1, 0, 0), "auto": false, "applied": false}
+## THE COMPOSED RIDES (2026-09-05, Palle: "add translate plus rotation ... and
+## translation plus scale up and down the space like when we take the scale
+## pill but a lot less"): the #tail carries them. #rot:<degrees> turns the cube
+## and its rider over the travel (a bare #rot is 90); #scale:<factor> scales
+## the SPACE to that size at the far end (a bare #scale is 1.3 - the pill is
+## x100). Both unwind on the return trip.
+static func transport_params(parameters: Array, config: Dictionary = {}) -> Dictionary:
+	var out := {"distance": 4.0, "direction": Vector3(1, 0, 0), "auto": false, "applied": false,
+		"rot": 0.0, "scale": 1.0}
+	if config.has("rot"):
+		var rv: Variant = config["rot"]
+		out["rot"] = 90.0 if rv is bool else String(rv).to_float()
+	if config.has("scale"):
+		var sv: Variant = config["scale"]
+		var f: float = 1.3 if sv is bool else String(sv).to_float()
+		if f > 0.0:
+			out["scale"] = f
 	if parameters.size() < 2:
 		return out
 	out["applied"] = true
@@ -753,7 +784,8 @@ static func apply_params(node: Node3D, code: String, parameters: Array, ctx: Dic
 		return {}
 	match code:
 		"tc":
-			var t: Dictionary = transport_params(parameters)
+			var cfgd: Dictionary = ctx.get("config", {}) if ctx.get("config") is Dictionary else {}
+			var t: Dictionary = transport_params(parameters, cfgd)
 			if bool(t["applied"]):
 				var dist: float = float(t["distance"])
 				var dir: Vector3 = t["direction"]
@@ -767,8 +799,18 @@ static func apply_params(node: Node3D, code: String, parameters: Array, ctx: Dic
 						node.call("set_auto_start", true)
 					else:
 						node.set("auto_start", true)
-				t["summary"] = "Set transport cube to move %.1f units in direction %s%s" % [
-					dist, dir, " (AUTO-START)" if bool(t["auto"]) else ""]
+				# the composed rides, when the cube knows them
+				if "ride_rotation_degrees" in node:
+					node.set("ride_rotation_degrees", float(t["rot"]))
+				if "ride_scale" in node:
+					node.set("ride_scale", float(t["scale"]))
+				var comp := ""
+				if not is_zero_approx(float(t["rot"])):
+					comp += ", turning %.0f deg" % float(t["rot"])
+				if not is_equal_approx(float(t["scale"]), 1.0):
+					comp += ", the space x%.2f" % float(t["scale"])
+				t["summary"] = "Set transport cube to move %.1f units in direction %s%s%s" % [
+					dist, dir, " (AUTO-START)" if bool(t["auto"]) else "", comp]
 			return t
 		"rc":
 			var r: Dictionary = rotation_params(parameters)

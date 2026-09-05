@@ -245,6 +245,7 @@ func generate_utilities(utility_data, utility_definitions: Dictionary = {}):
 					print("GridUtilitiesComponent: Skipping Infoboard due to user setting")
 					continue
 				var parameters = parsed.parameters
+				var cell_config: Dictionary = parsed.get("config", {})   # the #tail (2026-09-05)
 
 				if UtilityRegistry.is_valid_utility_type(utility_type) and utility_type != " ":
 					var y_pos = structure_component.find_highest_y_at(x, z)
@@ -257,7 +258,7 @@ func generate_utilities(utility_data, utility_definitions: Dictionary = {}):
 						print("GridUtilitiesComponent: Note - Using external utility reference for '%s': %s" % [utility_type, str(utility_definition)])
 						utility_definition = {}
 
-					_place_utility(x, y_pos, z, utility_type, parameters, utility_definition, total_size)
+					_place_utility(x, y_pos, z, utility_type, parameters, utility_definition, total_size, cell_config)
 					utility_count += 1
 
 	# Generate info boards if any were found
@@ -369,7 +370,7 @@ func _find_safe_adjacent_cell(grid_x: int, grid_z: int) -> Vector2i:
 	return best_fallback
 
 # Place a single utility object
-func _place_utility(x: int, y: int, z: int, utility_type: String, parameters: Array, definition: Dictionary, total_size: float):
+func _place_utility(x: int, y: int, z: int, utility_type: String, parameters: Array, definition: Dictionary, total_size: float, cell_config: Dictionary = {}):
 	var position = Vector3(x * total_size, GridCommon.surface_world_y(y, total_size), z * total_size)   # seat on the cube TOP — applies to spawn/teleporter/ramps/transport/labels (was y*total_size, half a cube high)
 
 	var scene_path = UtilityRegistry.get_utility_scene_path(utility_type)
@@ -393,7 +394,7 @@ func _place_utility(x: int, y: int, z: int, utility_type: String, parameters: Ar
 		print("GridUtilitiesComponent: Utility type '%s' has %d parameters: %s" % [utility_type, parameters.size(), str(parameters)])
 		if parameters.size() > 0 and UtilityRegistry.supports_parameters(utility_type):
 			print("GridUtilitiesComponent: Applying parameters for utility type '%s'" % utility_type)
-			_apply_utility_parameters(utility_object, utility_type, parameters)
+			_apply_utility_parameters(utility_object, utility_type, parameters, cell_config)
 		else:
 			print("GridUtilitiesComponent: No parameters to apply for utility type '%s' (supports: %s)" % [utility_type, UtilityRegistry.supports_parameters(utility_type)])
 
@@ -444,7 +445,7 @@ func _place_force_field(cell_value: String, x: int, y: int, z: int, total_size: 
 
 
 # Apply utility-specific parameters parsed from map notation (e.g. "t:next:3", "jp:15:3:8")
-func _apply_utility_parameters(utility_object: Node3D, utility_type: String, parameters: Array):
+func _apply_utility_parameters(utility_object: Node3D, utility_type: String, parameters: Array, cell_config: Dictionary = {}):
 	var normalized_type = utility_type.to_lower()
 	match normalized_type:
 		"t":  # Teleport
@@ -713,7 +714,7 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 			# and the apply are UtilityRegistry.apply_params now, for both callers,
 			# and every corpus form is checked against this branch's old reading by
 			# commons/testing/probe_utility_parity.gd.
-			var ctx := {"cube_size": cube_size, "gutter": gutter}
+			var ctx := {"cube_size": cube_size, "gutter": gutter, "config": cell_config}
 			if utility_type == "jp" and structure_component and parameters.size() >= 2:
 				# the landing height is the structure's, which only the grid knows
 				var jcfg: Dictionary = UtilityRegistry.jump_params(parameters)
