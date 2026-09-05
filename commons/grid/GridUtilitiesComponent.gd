@@ -703,144 +703,25 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 				var rot_y = float(parameters[0])
 				utility_object.rotation_degrees.y = rot_y
 				print("GridUtilitiesComponent: Set 'an' board rotation to %.1f degrees" % rot_y)
-		"tc":  # Transport Cube
-			# THE RULE MOVED, THE BEHAVIOUR DID NOT (2026-09-02). The six named
-			# axes, the comma triple, the +X fallback and the `auto` word are all
-			# UtilityRegistry.transport_params now, because the endless museum was
-			# reading the same cell with a second copy of this logic and the copy
-			# had drifted. Verified against every tc form in the corpus by
-			# commons/testing/probe_transport_cube_parity.gd.
-			var tcfg: Dictionary = UtilityRegistry.transport_params(parameters)
-			if bool(tcfg["applied"]):
-				var distance: float = float(tcfg["distance"])
-				var direction: Vector3 = tcfg["direction"]
-				if "set_transport_parameters" in utility_object:
-					utility_object.set_transport_parameters(distance, direction)
-				if bool(tcfg["auto"]) and "set_auto_start" in utility_object:
-					utility_object.set_auto_start(true)
-					print("GridUtilitiesComponent: Set transport cube to move %.1f units in direction %s (AUTO-START)" % [distance, direction])
-				else:
-					print("GridUtilitiesComponent: Set transport cube to move %.1f units in direction %s" % [distance, direction])
-		"br":  # Bridge Path
-			# Format: br:AXIS:LENGTH (e.g. "br:z:3", "br:-x:2")
-			if parameters.size() >= 1:
-				var bridge_axis = parameters[0].strip_edges().to_lower()
-				if bridge_axis not in ["x", "z", "-x", "-z"]:
-					bridge_axis = "x"
-				var bridge_length = 4
-				if parameters.size() >= 2 and parameters[1].is_valid_int():
-					bridge_length = int(parameters[1])
-				if utility_object.has_method("set_bridge_parameters"):
-					utility_object.set_bridge_parameters(bridge_length, bridge_axis)
-				print("GridUtilitiesComponent: Set bridge path %d segments along %s" % [bridge_length, bridge_axis])
-		"jp":  # Jump Pad — parabolic arc launcher
-			# Format: jp:target_x:target_z[:arc_height]
-			if parameters.size() >= 2:
-				var target_x: int = int(parameters[0])
-				var target_z: int = int(parameters[1])
-				var arc_h: float = 6.0
-				if parameters.size() >= 3 and parameters[2].is_valid_float():
-					arc_h = float(parameters[2])
-
-				# Compute world-space target from grid coords
-				var ts: float = cube_size + gutter
-				var target_world := Vector3(
-					target_x * ts + ts * 0.5,
-					0.0,
-					target_z * ts + ts * 0.5
-				)
-				# Look up structure height at target for landing Y
-				if structure_component:
-					var struct_y: int = structure_component.find_highest_y_at(target_x, target_z)
-					target_world.y = (struct_y + 1) * ts  # land on top of highest cube
-
-				# Apply config via the standard apply_grid_config pattern
-				if utility_object.has_method("apply_grid_config"):
-					utility_object.apply_grid_config({
-						"target_x": target_x,
-						"target_z": target_z,
-						"arc_height": arc_h
-					})
-				# Also set the world target directly
-				if "target_world_pos" in utility_object:
-					utility_object.target_world_pos = target_world
-				if utility_object.has_method("set_grid_spacing"):
-					utility_object.set_grid_spacing(cube_size, gutter)
-
-				print("GridUtilitiesComponent: Jump pad -> target grid (%d,%d), arc=%.1f, world=%s" % [target_x, target_z, arc_h, target_world])
-		"rc":  # Rotation Cube
-			# Format: rc:angle:axis:pause:y_offset (e.g. "45:y:4:0.5")
-			if parameters.size() >= 1:
-				var angle = float(parameters[0])
-				var axis = Vector3.UP  # Default Y axis
-				var pause = 4.0  # Default pause duration
-				var y_off = 0.0  # Default y offset
-
-				if parameters.size() >= 2:
-					match parameters[1].to_lower():
-						"x": axis = Vector3.RIGHT
-						"y": axis = Vector3.UP
-						"z": axis = Vector3.BACK
-						"-x": axis = Vector3.LEFT
-						"-y": axis = Vector3.DOWN
-						"-z": axis = Vector3.FORWARD
-
-				if parameters.size() >= 3:
-					pause = float(parameters[2])
-
-				if parameters.size() >= 4:
-					y_off = float(parameters[3])
-
-				# Apply to rotation cube
-				if utility_object.has_method("set_step_pause_mode"):
-					utility_object.set_step_pause_mode(angle, axis, pause)
-				else:
-					if "rotation_angle" in utility_object:
-						utility_object.rotation_angle = angle
-					if "rotation_axis" in utility_object:
-						utility_object.rotation_axis = axis
-					if "pause_duration" in utility_object:
-						utility_object.pause_duration = pause
-
-				if "y_offset" in utility_object:
-					utility_object.y_offset = y_off
-
-				print("GridUtilitiesComponent: Set rotation cube to %.1f° on %s axis, %.1fs pause, y=%.1f" % [angle, parameters[1] if parameters.size() >= 2 else "y", pause, y_off])
-		"sc":  # Scale Cube
-			# Format: sc:max:min:offset_x:y_offset (e.g. "3:0.5:1.5:0.5")
-			if parameters.size() >= 1:
-				var max_scale = float(parameters[0])
-				var min_scale = 0.5  # Default
-				var offset_x = 1.5  # Default
-				var y_off = 0.0  # Default y offset
-
-				if parameters.size() >= 2:
-					min_scale = float(parameters[1])
-
-				if parameters.size() >= 3:
-					offset_x = float(parameters[2])
-
-				if parameters.size() >= 4:
-					y_off = float(parameters[3])
-
-				# Apply to scale cube
-				if utility_object.has_method("set_scale_range"):
-					utility_object.set_scale_range(min_scale, max_scale)
-				else:
-					if "min_scale" in utility_object:
-						utility_object.min_scale = min_scale
-					if "max_scale" in utility_object:
-						utility_object.max_scale = max_scale
-
-				if utility_object.has_method("set_offset"):
-					utility_object.set_offset(Vector3(offset_x, 0, 0))
-				elif "center_offset" in utility_object:
-					utility_object.center_offset = Vector3(offset_x, 0, 0)
-
-				if "y_offset" in utility_object:
-					utility_object.y_offset = y_off
-
-				print("GridUtilitiesComponent: Set scale cube %.1f→%.1f, offset_x=%.1f, y=%.1f" % [min_scale, max_scale, offset_x, y_off])
+		"tc", "br", "jp", "rc", "sc":
+			# ONE RULE, ONE DOOR (2026-09-05, Palle: "improve the utilities so they
+			# work similarly as in the grid"). tc moved to UtilityRegistry on
+			# 2026-09-02; rc, sc, br and jp follow it today. The endless museum read
+			# these cells with a second copy of what stood here, and the copy had
+			# drifted: a scale cube's minimum unsanitised, a bridge's sign dropped, a
+			# jump pad's target written to properties that do not exist. The parse
+			# and the apply are UtilityRegistry.apply_params now, for both callers,
+			# and every corpus form is checked against this branch's old reading by
+			# commons/testing/probe_utility_parity.gd.
+			var ctx := {"cube_size": cube_size, "gutter": gutter}
+			if utility_type == "jp" and structure_component and parameters.size() >= 2:
+				# the landing height is the structure's, which only the grid knows
+				var jcfg: Dictionary = UtilityRegistry.jump_params(parameters)
+				var struct_y: int = structure_component.find_highest_y_at(int(jcfg["target_x"]), int(jcfg["target_z"]))
+				ctx["landing_y"] = float(struct_y + 1) * (cube_size + gutter)
+			var cfg: Dictionary = UtilityRegistry.apply_params(utility_object, utility_type, parameters, ctx)
+			if cfg.has("summary"):
+				print("GridUtilitiesComponent: %s" % String(cfg["summary"]))
 		"rg":  # Regenerate cube
 			var target_params: Array = []
 			var status_message := ""

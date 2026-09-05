@@ -633,6 +633,236 @@ static func make_carriable(node: Node3D) -> int:
 	return widened
 
 
+
+## ONE RULE, ONE DOOR (2026-09-05, Palle: "can we either improve the utilities so
+## they work similarly as in the grid, or should we change them to be
+## artifacts?" - improve them). The grid read rc/sc/br/jp cells in
+## GridUtilitiesComponent and the endless museum read them again in its own
+## copy, and the copy had drifted: the scale cube's minimum went onto the
+## property unsanitised (both corpus forms say -0.5; the scene's own setter
+## lifts that to 0.001), a bridge's sign was dropped (br:-x:2 pointed +x), and a
+## jump pad's target was written to properties that do not exist, so every
+## museum pad aimed at cell (0,0). tc moved here on 2026-09-02. From today the
+## PARSE (the *_params functions) and the APPLY (apply_params: the scene's own
+## setters when it has them) live here and both callers ask. Every corpus form
+## is held against the grid's old reading by
+## commons/testing/probe_utility_parity.gd.
+
+## The grid's axis words: x, y, z, -x, -y, -z; anything else keeps `fallback`.
+static func axis_of(word: String, fallback: Vector3) -> Vector3:
+	match word.strip_edges().to_lower():
+		"x": return Vector3.RIGHT
+		"y": return Vector3.UP
+		"z": return Vector3.BACK
+		"-x": return Vector3.LEFT
+		"-y": return Vector3.DOWN
+		"-z": return Vector3.FORWARD
+		_: return fallback
+
+
+## rc:ANGLE:AXIS:PAUSE:Y_OFFSET (e.g. "90:y:4:-0.6"), or rc:continuous:AXIS:SPEED.
+## The grid's defaults when a field is omitted: axis y, pause 4 s, y_offset 0.
+## `continuous` is the registry's documented second form; the grid's old branch
+## put the word through float() and rotated by 0 degrees. That is the one place
+## the shared rule departs from the old grid reading, on purpose, and the probe
+## records it.
+static func rotation_params(parameters: Array) -> Dictionary:
+	var out := {"applied": false, "mode": "step", "angle": 45.0, "axis": Vector3.UP, "pause": 4.0,
+		"y_offset": 0.0, "continuous_axis": Vector3.RIGHT, "continuous_speed": 30.0}
+	if parameters.size() < 1:
+		return out
+	out["applied"] = true
+	var first := String(parameters[0]).strip_edges().to_lower()
+	if first == "continuous":
+		out["mode"] = "continuous"
+		if parameters.size() >= 2:
+			out["continuous_axis"] = axis_of(String(parameters[1]), Vector3.RIGHT)
+		if parameters.size() >= 3 and String(parameters[2]).is_valid_float():
+			out["continuous_speed"] = String(parameters[2]).to_float()
+		return out
+	out["angle"] = String(parameters[0]).to_float()
+	if parameters.size() >= 2:
+		out["axis"] = axis_of(String(parameters[1]), Vector3.UP)
+	if parameters.size() >= 3:
+		out["pause"] = String(parameters[2]).to_float()
+	if parameters.size() >= 4:
+		out["y_offset"] = String(parameters[3]).to_float()
+	return out
+
+
+## sc:MAX:MIN:OFFSET_X:Y_OFFSET (e.g. "3:-0.5:1:0"). The grid's defaults when a
+## field is omitted: min 0.5, offset 1.5, y_offset 0. The scene sanitises the
+## range in set_scale_range (a minimum under 0.001 is lifted, a reversed pair
+## swapped); the museum's copy wrote the raw -0.5 onto the property.
+static func scale_params(parameters: Array) -> Dictionary:
+	var out := {"applied": false, "max_scale": 3.0, "min_scale": 0.5, "offset_x": 1.5, "y_offset": 0.0}
+	if parameters.size() < 1:
+		return out
+	out["applied"] = true
+	out["max_scale"] = String(parameters[0]).to_float()
+	if parameters.size() >= 2:
+		out["min_scale"] = String(parameters[1]).to_float()
+	if parameters.size() >= 3:
+		out["offset_x"] = String(parameters[2]).to_float()
+	if parameters.size() >= 4:
+		out["y_offset"] = String(parameters[3]).to_float()
+	return out
+
+
+## br:AXIS:LENGTH (e.g. "z:3", "-x:2"): the axis is one of x, z, -x, -z, anything
+## else is x; the length is a whole number, else 4. The corpus also holds
+## "br:5:x" and "br:3:z" - number first - which the grid has always read as
+## "4 along x"; the rule stays the grid's, and the probe lists them.
+static func bridge_params(parameters: Array) -> Dictionary:
+	var out := {"applied": false, "axis": "x", "length": 4}
+	if parameters.size() < 1:
+		return out
+	out["applied"] = true
+	var a := String(parameters[0]).strip_edges().to_lower()
+	if a in ["x", "z", "-x", "-z"]:
+		out["axis"] = a
+	if parameters.size() >= 2 and String(parameters[1]).is_valid_int():
+		out["length"] = int(String(parameters[1]))
+	return out
+
+
+## jp:TARGET_X:TARGET_Z[:ARC_HEIGHT] (e.g. "17:11:8"); the arc is 6 when omitted.
+static func jump_params(parameters: Array) -> Dictionary:
+	var out := {"applied": false, "target_x": 0, "target_z": 0, "arc_height": 6.0}
+	if parameters.size() < 2:
+		return out
+	out["applied"] = true
+	out["target_x"] = int(String(parameters[0]))
+	out["target_z"] = int(String(parameters[1]))
+	if parameters.size() >= 3 and String(parameters[2]).is_valid_float():
+		out["arc_height"] = String(parameters[2]).to_float()
+	return out
+
+
+## APPLY one cell to its scene the way the grid always has: the scene's own
+## setters when it has them, its exported properties when it has not. Returns
+## the parsed config with `applied`, plus a `summary` line for the caller's log.
+## ctx: "cube_size" and "gutter" for a jump pad's grid spacing (the museum's
+## cells are 1 m with no gutter), and "landing_y" for the structure-aware
+## landing height only the grid can compute. The grid's ORDER for a pad is kept
+## as it was: set_grid_spacing recomputes the target after the landing height
+## is written, and that recompute puts y back to 0 - the grid has always landed
+## its pads at y = 0. Not changed here; noted 2026-09-05.
+static func apply_params(node: Node3D, code: String, parameters: Array, ctx: Dictionary = {}) -> Dictionary:
+	if node == null:
+		return {}
+	match code:
+		"tc":
+			var t: Dictionary = transport_params(parameters)
+			if bool(t["applied"]):
+				var dist: float = float(t["distance"])
+				var dir: Vector3 = t["direction"]
+				if node.has_method("set_transport_parameters"):
+					node.call("set_transport_parameters", dist, dir)
+				else:
+					node.set("move_distance", dist)
+					node.set("move_direction", dir.normalized())
+				if bool(t["auto"]):
+					if node.has_method("set_auto_start"):
+						node.call("set_auto_start", true)
+					else:
+						node.set("auto_start", true)
+				t["summary"] = "Set transport cube to move %.1f units in direction %s%s" % [
+					dist, dir, " (AUTO-START)" if bool(t["auto"]) else ""]
+			return t
+		"rc":
+			var r: Dictionary = rotation_params(parameters)
+			if bool(r["applied"]):
+				if String(r["mode"]) == "continuous":
+					if node.has_method("set_continuous_mode"):
+						node.call("set_continuous_mode", r["continuous_axis"], float(r["continuous_speed"]))
+					else:
+						node.set("mode", 1)
+						node.set("continuous_axis", r["continuous_axis"])
+						node.set("continuous_speed", float(r["continuous_speed"]))
+					r["summary"] = "Set rotation cube continuous on %s at %.1f deg/s" % [
+						r["continuous_axis"], float(r["continuous_speed"])]
+				else:
+					if node.has_method("set_step_pause_mode"):
+						node.call("set_step_pause_mode", float(r["angle"]), r["axis"], float(r["pause"]))
+					else:
+						node.set("rotation_angle", float(r["angle"]))
+						node.set("rotation_axis", r["axis"])
+						node.set("pause_duration", float(r["pause"]))
+					if "y_offset" in node:
+						node.set("y_offset", float(r["y_offset"]))
+					r["summary"] = "Set rotation cube to %.1f deg on %s, %.1fs pause, y=%.1f" % [
+						float(r["angle"]), r["axis"], float(r["pause"]), float(r["y_offset"])]
+			return r
+		"sc":
+			var s: Dictionary = scale_params(parameters)
+			if bool(s["applied"]):
+				var mn: float = float(s["min_scale"])
+				var mx: float = float(s["max_scale"])
+				if node.has_method("set_scale_range"):
+					node.call("set_scale_range", mn, mx)
+				else:
+					if "min_scale" in node:
+						node.set("min_scale", mn)
+					if "max_scale" in node:
+						node.set("max_scale", mx)
+				var off := Vector3(float(s["offset_x"]), 0, 0)
+				if node.has_method("set_offset"):
+					node.call("set_offset", off)
+				elif "center_offset" in node:
+					node.set("center_offset", off)
+				if "y_offset" in node:
+					node.set("y_offset", float(s["y_offset"]))
+				s["summary"] = "Set scale cube %.1f->%.1f, offset_x=%.1f, y=%.1f" % [
+					mn, mx, float(s["offset_x"]), float(s["y_offset"])]
+			return s
+		"br":
+			var b: Dictionary = bridge_params(parameters)
+			if bool(b["applied"]):
+				if node.has_method("set_bridge_parameters"):
+					node.call("set_bridge_parameters", int(b["length"]), String(b["axis"]))
+				else:
+					node.set("bridge_length", int(b["length"]))
+					node.set("bridge_axis", String(b["axis"]))
+				b["summary"] = "Set bridge path %d segments along %s" % [int(b["length"]), String(b["axis"])]
+			return b
+		"jp":
+			var j: Dictionary = jump_params(parameters)
+			if bool(j["applied"]):
+				var ts: float = float(ctx.get("cube_size", 1.0)) + float(ctx.get("gutter", 0.0))
+				if node.has_method("apply_grid_config"):
+					node.call("apply_grid_config", {"target_x": int(j["target_x"]), "target_z": int(j["target_z"]),
+						"arc_height": float(j["arc_height"])})
+				if ctx.has("landing_y") and "target_world_pos" in node:
+					node.set("target_world_pos", Vector3(float(j["target_x"]) * ts + ts * 0.5,
+						float(ctx["landing_y"]), float(j["target_z"]) * ts + ts * 0.5))
+				if node.has_method("set_grid_spacing") and ctx.has("cube_size"):
+					node.call("set_grid_spacing", float(ctx["cube_size"]), float(ctx.get("gutter", 0.0)))
+				j["summary"] = "Jump pad -> target grid (%d,%d), arc=%.1f" % [
+					int(j["target_x"]), int(j["target_z"]), float(j["arc_height"])]
+			return j
+	return {}
+
+
+## THE RIDE IS A SPAN (moved out of the museum's utility door, 2026-09-05, so the
+## hall that embeds the real grid can ask the same question): the cells a
+## configured transport cube's travel covers, its start first - read off the
+## node, so this is the cube's own answer and not a second reading of the cell.
+static func transport_span(node: Node3D, start: Vector2i) -> Array:
+	var out: Array = [start]
+	if node == null:
+		return out
+	var dv: Variant = node.get("move_direction")
+	var dirv: Vector3 = dv if dv is Vector3 else Vector3(0, 0, 1)
+	var mv: Variant = node.get("move_distance")
+	var distv: float = float(mv) if mv != null else 4.0
+	var sgn: float = 1.0 if distv >= 0.0 else -1.0
+	for s in range(1, int(ceil(absf(distv))) + 1):
+		var step: float = float(s) * sgn
+		out.append(Vector2i(start.x + int(round(dirv.x * step)), start.y + int(round(dirv.z * step))))
+	return out
+
+
 # Generate utility type mapping comment for data files
 static func generate_utility_mapping_comment() -> String:
 	var comment_lines = [

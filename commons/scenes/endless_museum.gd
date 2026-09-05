@@ -7057,86 +7057,30 @@ func _stamp_utility(spec: String, cell: Vector2i, seg: Node3D, zbase: int) -> No
 		# re-parsed: _utility_apply_params set it before add_child, so this is
 		# the cube's own answer, not a second reading of the same string.
 		if code == "tc":
-			var dv: Variant = node.get("move_direction")
-			var dirv: Vector3 = dv if dv is Vector3 else Vector3(0, 0, 1)
-			var mv: Variant = node.get("move_distance")
-			var distv: float = float(mv) if mv != null else 4.0
-			var sgn: float = 1.0 if distv >= 0.0 else -1.0
-			for s in range(1, int(ceil(absf(distv))) + 1):
-				var step: float = float(s) * sgn
-				_ride_cells[Vector2i(gc.x + int(round(dirv.x * step)),
-					gc.y + int(round(dirv.z * step)))] = code
+			# the span is the cube's own answer, and the hall that embeds the real
+			# grid asks the same function (UtilityRegistry.transport_span)
+			for c_v in UtilityRegistry.transport_span(node, gc):
+				_ride_cells[c_v] = code
 	return node
 
 
-## The grid's parameter knowledge, ported from GridUtilitiesComponent
-## _apply_utility_parameters — the rules the corpus's 2400 maps already obey.
-## Every set() lands before _ready (the caller adds to the tree after), so a
-## typed export takes it or the value was wrong in the grid too.
+## ONE RULE, ONE DOOR (2026-09-05, Palle: "can we either improve the utilities
+## so they work similarly as in the grid, or should we change them to be
+## artifacts?" - improve them). What stood here was a hand copy of
+## GridUtilitiesComponent's per-code branches, and it had drifted: the scale
+## cube's minimum went onto the property unsanitised (both corpus forms say
+## -0.5; the scene's own setter lifts that to 0.001), a bridge's sign was
+## dropped (br:-x:2 pointed +x), and a jump pad's target was written to
+## `target_x`/`target_z`, properties the pad does not have, so every museum pad
+## aimed at (0,0). The parse and the apply are UtilityRegistry.apply_params
+## now, the same call the grid makes; the museum's cells are 1 m with no
+## gutter. Offsets pass through unchanged, as they did: the seat does the work
+## (THE CROSSING IS A FLOOR, NOT AN ORNAMENT - top flush with the deck at full
+## size, see _utility_seat).
 func _utility_apply_params(node: Node3D, code: String, params: Array) -> void:
-	match code:
-		"tc":   # tc:distance:axis[:auto] — the grid's rule, from the grid's own file
-			# TWO READINGS OF ONE CELL DRIFT (2026-09-02, Palle: "make sure that
-			# the transport cube work the same way in the endless museum as in the
-			# grid"). What stood here knew only "x" and "y" and sent every other
-			# word along +Z, so `tc:1:auto:auto` — 425 cells, and its second field
-			# is the word "auto", not an axis — crossed +X in the grid and +Z here;
-			# and it forced auto_start on for any two-parameter cell, where the
-			# grid leaves the cube waiting for a body. Both callers now ask
-			# UtilityRegistry.transport_params, which is the grid's branch moved.
-			var tcfg: Dictionary = UtilityRegistry.transport_params(params)
-			if bool(tcfg["applied"]):
-				node.set("move_distance", float(tcfg["distance"]))
-				node.set("move_direction", tcfg["direction"])
-				node.set("auto_start", bool(tcfg["auto"]))
-		"br":   # br:axis:length
-			var axis2: String = String(params[0]) if params.size() > 0 else "z"
-			node.set("bridge_axis", axis2.trim_prefix("-"))
-			if params.size() > 1 and String(params[1]).is_valid_int():
-				node.set("bridge_length", int(params[1]))
-		"jp":   # jp:target_x:target_z[:arc]
-			if params.size() > 1:
-				node.set("target_x", int(params[0]))
-				node.set("target_z", int(params[1]))
-			if params.size() > 2 and String(params[2]).is_valid_float():
-				node.set("arc_height", float(params[2]))
-		"rc":   # rc:angle:axis:pause:y_offset — or rc:continuous:x:30
-			if params.size() > 0 and String(params[0]) == "continuous":
-				node.set("mode", 1)
-				if params.size() > 1:
-					node.set("continuous_axis", _axis_of(String(params[1])))
-				if params.size() > 2 and String(params[2]).is_valid_float():
-					node.set("continuous_speed", float(params[2]))
-			elif params.size() > 0 and String(params[0]).is_valid_float():
-				node.set("rotation_angle", float(params[0]))
-				if params.size() > 1:
-					node.set("rotation_axis", _axis_of(String(params[1])))
-				if params.size() > 2 and String(params[2]).is_valid_float():
-					node.set("pause_duration", float(params[2]))
-				if params.size() > 3 and String(params[3]).is_valid_float():
-					node.set("y_offset", _museum_y_offset(float(params[3])))
-		"sc":   # sc:max:min:offset_x:y_offset
-			if params.size() > 0 and String(params[0]).is_valid_float():
-				node.set("max_scale", float(params[0]))
-			if params.size() > 1 and String(params[1]).is_valid_float():
-				node.set("min_scale", float(params[1]))
-			if params.size() > 2 and String(params[2]).is_valid_float():
-				node.set("center_offset", Vector3(float(params[2]), 0, 0))
-			if params.size() > 3 and String(params[3]).is_valid_float():
-				node.set("y_offset", _museum_y_offset(float(params[3])))
-
-
-## THE CROSSING IS A FLOOR, NOT AN ORNAMENT (2026-08-24, Palle: "all cube has
-## to be level with the ground, scale when it is at is max"). A pool is a GAP
-## in the walk; the cube fills it, and you step across its TOP. So the seat
-## rule is not "stand on the deck" (my first fix, which floated every crossing
-## a metre proud of the floor and half-buried the walker's route) but "top
-## flush with the deck at FULL size". scale_cube's own export says it:
-## `max_scale = 3.0  # Maximum size (fills 3m gap)`, so the height to seat by
-## is the height at max, not the height at the moment we happen to measure.
-## Offsets pass through unchanged now; the seat below does the work.
-func _museum_y_offset(v: float) -> float:
-	return v
+	var cfg: Dictionary = UtilityRegistry.apply_params(node, code, params, {"cube_size": 1.0, "gutter": 0.0})
+	if cfg.has("summary"):
+		print("[em-utility] %s" % String(cfg["summary"]))
 
 
 ## A trailing #lift:<metres> raises a seated body above the deck. Stripped
@@ -7227,16 +7171,6 @@ func _utility_seat(node: Node3D, deck_y: float) -> void:
 			node.set(key, (v as Vector3) - Vector3(0.0, drop, 0.0))
 		elif v is float:
 			node.set(key, float(v) - drop)
-
-
-func _axis_of(a: String) -> Vector3:
-	match a.to_lower():
-		"x": return Vector3.RIGHT
-		"-x": return Vector3.LEFT
-		"y": return Vector3.UP
-		"-y": return Vector3.DOWN
-		"-z": return Vector3.FORWARD
-		_: return Vector3.BACK
 
 
 ## The pearl's utilities, stamped after stages/gaps/ramps so a cube can stand
@@ -10381,9 +10315,9 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 			# with find_children and clearing monitoring twice is a no-op, so
 			# both may run.
 			if gs.has_signal("build_finished"):
-				gs.connect("build_finished", _sim_grid_disarm.bind(gs), CONNECT_ONE_SHOT)
+				gs.connect("build_finished", _sim_grid_ready.bind(gs, zbase), CONNECT_ONE_SHOT)
 			if is_inside_tree():
-				get_tree().create_timer(2.5).timeout.connect(_sim_grid_disarm.bind(gs))
+				get_tree().create_timer(2.5).timeout.connect(_sim_grid_ready.bind(gs, zbase))
 			print("[em-sim-grid] %s: the REAL grid builds the simulation (bare_world, player kept)" % map_name)
 			return {"pearl": String(entry.get("pearl", "")), "placed": 0, "packed": true,
 				"offered": 0, "interior": 0, "grid_embed": true}
@@ -10653,6 +10587,46 @@ func _sim_grid_disarm(gs: Node3D) -> void:
 				(a_v as Area3D).monitorable = false
 			disarmed += 1
 	print("[em-sim-grid] %d live utility(ies) disarmed — the museum owns the walk" % disarmed)
+
+
+## The embedded grid, once built: its exits disarmed, and its RIDES made the
+## museum's (2026-09-05, Palle: "improve the utilities so they work similarly
+## as in the grid"). Three transformation halls embed the real GridSystem,
+## whose transport cubes watch layer 20 - the grid's player layer - while the
+## walker stands on layer 1, so the ferry in Trans_Translation ran with nobody
+## aboard; and their spans were unknown to the walk map, which could read the
+## hall as severed. Both are what the museum's own utility door already did
+## for a cube it stamped itself. Runs from the build signal and from the
+## backstop timer; every step is a no-op the second time.
+func _sim_grid_ready(gs: Node3D, zbase: int) -> void:
+	_sim_grid_disarm(gs)
+	_sim_grid_carry(gs, zbase)
+
+
+func _sim_grid_carry(gs: Node3D, zbase: int) -> void:
+	if gs == null or not is_instance_valid(gs) or not gs.is_inside_tree():
+		return
+	var seg: Node3D = gs.get_parent() as Node3D
+	var carried := 0
+	var cells := 0
+	for n in gs.find_children("*", "Node3D", true, false):
+		var sp := ""
+		if n.get_script() != null:
+			sp = str((n.get_script() as Script).resource_path).to_lower()
+		if not sp.contains("transport_cube"):
+			continue
+		var cube: Node3D = n as Node3D
+		if UtilityRegistry.make_carriable(cube) > 0:
+			carried += 1
+		# the cube's cell in the hall's frame: the grid stands inside the segment
+		var local: Vector3 = seg.to_local(cube.global_position) if seg != null else cube.position
+		var gc := Vector2i(int(floor(local.x + 0.001)), zbase + int(floor(local.z + 0.001)))
+		for c_v in UtilityRegistry.transport_span(cube, gc):
+			if not _ride_cells.has(c_v):
+				cells += 1
+			_ride_cells[c_v] = "tc"
+	if carried > 0 or cells > 0:
+		print("[em-sim-grid] %d transport cube(s) carry the walker; %d ride cell(s) known to the walk map" % [carried, cells])
 
 
 ## The pack report on disk survives across boots: merge it into the live
