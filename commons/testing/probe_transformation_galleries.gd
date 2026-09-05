@@ -56,6 +56,18 @@ func _bodies(n: Node, found: Dictionary) -> void:
 		_bodies(c, found)
 
 
+func _count_by_lookup(n: Node, out: Dictionary) -> void:
+	# a placement is the OUTERMOST node wearing the lookup name: a synthesis stand
+	# builds its subject (a pick_up_cube) inside itself, and that one is the
+	# stand's, not a cell's
+	if n.has_meta("artifact_lookup_name"):
+		var k := str(n.get_meta("artifact_lookup_name"))
+		out[k] = int(out.get(k, 0)) + 1
+		return
+	for c in n.get_children():
+		_count_by_lookup(c, out)
+
+
 func _run() -> void:
 	print("[probe_transformation_galleries]")
 	var err: int = change_scene_to_file(CATALOG)
@@ -113,6 +125,26 @@ func _run() -> void:
 			_check(want_rc == got_rc, "%s: the rotation cubes are what their cells say - %s" % [map_name, str(got_rc)])
 		for n in found["sc"]:
 			_check(float(n.get("min_scale")) > 0.0 and absf(float(n.get("max_scale")) - 3.0) < 1e-6, "%s: the scale cube grows to 3 from %.3f" % [map_name, float(n.get("min_scale"))])
+		# the places reached and the gates: one body per exhibit cell for the Mario cubes,
+		# the blocks that open walls, and the pick-ups the gate counts
+		var want_art := {}
+		var doc_a = JSON.parse_string(FileAccess.get_file_as_string("res://commons/maps/%s/map_data.json" % map_name))
+		var layers_a: Dictionary = (doc_a as Dictionary).get("layers", doc_a)
+		for row in layers_a.get("interactables", []):
+			for cell in row:
+				var head := str(cell).strip_edges().split(":")[0].split("#")[0]
+				if head in ["mario_cube", "pusher_block", "sweeper_block", "grower_block", "pick_up_cube"]:
+					want_art[head] = int(want_art.get(head, 0)) + 1
+		var got_art := {}
+		_count_by_lookup(root, got_art)
+		var art_ok := true
+		var art_parts: Array[String] = []
+		for head in want_art.keys():
+			var g: int = int(got_art.get(head, 0))
+			art_parts.append("%s %d/%d" % [head, g, int(want_art[head])])
+			if g != int(want_art[head]):
+				art_ok = false
+		_check(art_ok, "%s: the places reached and the gates stand - %s" % [map_name, ", ".join(art_parts)])
 		# every caption stands with its words
 		var caps: Array = []
 		for n in found["3t"]:

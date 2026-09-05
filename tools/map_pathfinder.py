@@ -17,7 +17,13 @@ Movement rules:
   - Drop 2+ levels (e.g. h3->h1): requires tc transport cube
   - Climbing up: requires wp ramp
   - wp (walkpath/ramp) allows traversal between adjacent cells of different heights
-  - tc (transport cube) bridges gaps along an axis; standable even on void
+  - tc (transport cube) bridges gaps along an axis; standable even on void.
+    The distance may be a float and the axis a word (z, -x, y), or a vector
+    (1,0,1 the diagonal; 0,-1,2 a slope): the cube ends displaced by the
+    rounded distance and returns. A y ride joins its four neighbours.
+  - rc (rotation plank) at the centre of a 3x3 hole joins the banks two cells
+    away on each axis - a stepping plank, or a turntable (continuous about y);
+    a cube rolling about x or z is spectacle and joins nothing
   - br (bridge) transparent walkable path over void: br:z:3, br:x:2, br:-z:1
   - jp (jump pad) one-way arc: jp:target_x:target_z[:arc_height]
   - Teleport cells are walkable destinations even on void
@@ -40,6 +46,7 @@ from __future__ import annotations
 import argparse
 import heapq
 import json
+import math
 import os
 import re
 import sys
@@ -317,6 +324,7 @@ class MapGraph:
         self.tc_positions: set[tuple[int, int]] = set()
         self.tc_adj: dict[tuple[int, int], set[tuple[int, int]]] = {}
         self._parse_tc()
+        self._parse_rc()   # planks and turntables connect their banks (2026-09-05)
 
         # br (transparent bridge) cells
         self.br_cells: set[tuple[int, int]] = set()
@@ -400,28 +408,76 @@ class MapGraph:
             if len(parts) < 3:
                 continue
             try:
-                dist = int(parts[1])
-                direction = parts[2]
+                # the distance is a float (tc:1.5:y, tc:4.24:1,0,1) and the axis a word,
+                # a signed word, or a vector - the grid's own grammar (UtilityRegistry
+                # .transport_params); a cell's whole ride is the rounded displacement.
+                dist = float(parts[1])
+                direction = parts[2].strip().lower()
             except (ValueError, IndexError):
                 continue
             r, c = pos
             self.tc_positions.add(pos)
-            if direction == "z":
-                for d in [(r + dist, c), (r - dist, c)]:
+            if direction in ("z", "-z"):
+                n = int(round(dist))
+                for d in [(r + n, c), (r - n, c)]:
                     if 0 <= d[0] < self.rows and 0 <= d[1] < self.cols:
                         bridges.append((pos, d))
-            elif direction == "x":
-                for d in [(r, c + dist), (r, c - dist)]:
+            elif direction in ("x", "-x"):
+                n = int(round(dist))
+                for d in [(r, c + n), (r, c - n)]:
                     if 0 <= d[0] < self.rows and 0 <= d[1] < self.cols:
                         bridges.append((pos, d))
-            elif direction == "y":
+            elif direction in ("y", "-y"):
                 for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
                     adj = (r + dr, c + dc)
                     if 0 <= adj[0] < self.rows and 0 <= adj[1] < self.cols:
                         bridges.append((pos, adj))
+            elif "," in direction:
+                # a vector ride (the diagonal 1,0,1; the slope 0,-1,2): the cube ends
+                # displaced by dist along the unit vector, and returns
+                try:
+                    comps = [float(v) for v in direction.split(",")]
+                    length = math.sqrt(sum(v * v for v in comps))
+                except ValueError:
+                    continue
+                if len(comps) != 3 or length <= 0:
+                    continue
+                dc = int(round(comps[0] / length * dist))
+                dr = int(round(comps[2] / length * dist))
+                if dc == 0 and dr == 0:
+                    continue
+                d = (r + dr, c + dc)
+                if 0 <= d[0] < self.rows and 0 <= d[1] < self.cols:
+                    bridges.append((pos, d))
         for a, b in bridges:
             self.tc_adj.setdefault(a, set()).add(b)
             self.tc_adj.setdefault(b, set()).add(a)
+
+    def _parse_rc(self):
+        """rc:ANGLE:AXIS:PAUSE:Y_OFFSET or rc:continuous:AXIS:SPEED[:Y_OFFSET] - the rotation plank.
+
+        The plank stands at the CENTRE of a 3x3 hole (Trans_Introduction's template) and
+        its top is walked across: a stepping plank pauses with its corners at the banks,
+        a turntable (continuous about y) turns under your feet. So the banks two cells
+        away on each axis connect through it, both ways. A cube rolling about x or z is
+        spectacle, not a way, and connects nothing (2026-09-05, the rethink).
+        """
+        for pos, cell in self.util_map.items():
+            if not cell.startswith("rc"):
+                continue
+            cell = cell.split("#")[0]
+            parts = [p.strip().lower() for p in cell.split(":")]
+            if len(parts) < 2:
+                continue
+            if parts[1] == "continuous":
+                axis = parts[2] if len(parts) > 2 else "x"
+                if axis != "y":
+                    continue
+            r, c = pos
+            for a, b in (((r - 2, c), (r + 2, c)), ((r, c - 2), (r, c + 2))):
+                if all(0 <= p[0] < self.rows and 0 <= p[1] < self.cols for p in (a, b)):
+                    self.tc_adj.setdefault(a, set()).add(b)
+                    self.tc_adj.setdefault(b, set()).add(a)
 
     def _parse_br(self):
         """Parse br:AXIS:LENGTH bridge utilities.
