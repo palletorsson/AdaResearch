@@ -6,6 +6,7 @@ Run release gates for AdaResearch and print a pass/fail scoreboard.
 from __future__ import annotations
 
 import argparse
+import datetime
 import json
 import os
 import re
@@ -19,6 +20,75 @@ from typing import Any
 
 REPO = Path(__file__).resolve().parent.parent
 DEFAULT_GATE_TOGGLES_PATH = REPO / "doc/reports/RELEASE_GATES_TOGGLES.json"
+
+# The report is written by DEFAULT, and these are where. Until 2026-08-30 it was
+# written only when a caller passed --json-out, which nobody in the ledger ever
+# did: doc/reports/RELEASE_GATES.json sat at 2026-06-10 for 81 days saying
+# `overall_pass: true` over four gates, while the live run failed four of eleven.
+# The in-game dashboard (ProjectDashboardOverlay.gd, KEY_P) reads that file as
+# res://doc/reports/RELEASE_GATES.json, so the headset was being shown a green
+# verdict from June. A verdict file nobody rewrites is not a cache, it is a lie
+# with a filename.
+DEFAULT_JSON_REPORT_PATH = REPO / "doc/reports/RELEASE_GATES.json"
+DEFAULT_MD_REPORT_PATH = REPO / "doc/reports/RELEASE_GATES.md"
+
+
+def measurement_stamp() -> dict[str, Any]:
+    """Who measured, when, and against which tree.
+
+    prop-024/prop-025: a verdict is a fact about a TREE at a MOMENT. Without
+    these three fields a reader cannot tell an 81-day-old PASS from a fresh one,
+    which is exactly how doc/reports/RELEASE_GATES.json went stale unnoticed.
+    """
+    def git(*args: str) -> str:
+        try:
+            # encoding is not optional here. Without it Python decodes git's
+            # output with the locale codec, which on this machine is cp1252, and
+            # a commit subject containing an em dash lands in the report as
+            # "â€”". The first run of this stamp did exactly that.
+            proc = subprocess.run(
+                ["git", *args],
+                cwd=REPO,
+                capture_output=True,
+                text=True,
+                encoding="utf-8",
+                errors="replace",
+                timeout=30,
+            )
+            return proc.stdout.strip() if proc.returncode == 0 else ""
+        except Exception:
+            return ""
+
+    status = git("status", "--porcelain")
+    lines = status.splitlines() if status else []
+    return {
+        "measured_at": datetime.datetime.now().astimezone().isoformat(timespec="seconds"),
+        "measured_by": "tools/run_release_gates.py",
+        "head": git("rev-parse", "HEAD") or "unknown",
+        "head_subject": git("log", "-1", "--format=%s") or "unknown",
+        "tree_dirty": len([ln for ln in lines if not ln.startswith("??")]),
+        "tree_untracked": len([ln for ln in lines if ln.startswith("??")]),
+    }
+
+
+def write_json_report(path: Path, report: dict[str, Any]) -> None:
+    """Write, then read back and parse. prop-042.
+
+    The dashboard overlay in the headset reads this file. A half-written one
+    renders as no gates at all, which the overlay cannot distinguish from a
+    clean project, so the write is atomic and the result is parsed before the
+    old file is replaced.
+    """
+    path.parent.mkdir(parents=True, exist_ok=True)
+    payload = json.dumps(report, indent=2, ensure_ascii=False) + "\n"
+    if len(payload) < 200:
+        raise ValueError(
+            f"refusing to write a {len(payload)}-byte gate report to {path}"
+        )
+    tmp = path.with_suffix(path.suffix + ".tmp")
+    tmp.write_text(payload, encoding="utf-8")
+    json.loads(tmp.read_text(encoding="utf-8"))
+    os.replace(tmp, path)
 
 
 def run_cmd(cmd: list[str], env: dict[str, str] | None = None) -> tuple[int, str]:
@@ -425,6 +495,14 @@ def build_report(
         # therefore also ask whether that subject exists and stands where the book
         # says. Neither question contains the other.
         rc_edge, out_edge = run_cmd([sys.executable, "tools/edge_gate.py", "--json"])
+        # ...and this gate's own negative half. On 2026-08-30 the matcher was
+        # loosened — a transliteration table for the mathematics in the source
+        # files, and ellipsis quotes matched fragment by fragment — and LOST fell
+        # 3 -> 0 in a single pass. A gate reading zero right after its comparison
+        # was widened is exactly the shape of one that stopped checking, so
+        # test_edge_gate.py feeds it anchors that ARE broken and the gate does not
+        # pass unless they are still convicted.
+        rc_edgeneg, _ = run_cmd([sys.executable, "tools/test_edge_gate.py"])
         edge = {}
         if out_edge.strip():
             try:
@@ -439,8 +517,11 @@ def build_report(
                 and int(edge.get("LOST", 999999)) == 0
                 # A book that failed to parse tallies zero LOST, which is what a
                 # clean book tallies. An empty denominator is a broken gate.
-                and int(edge.get("edges", 0)) > 0,
+                and int(edge.get("edges", 0)) > 0
+                # ...and a matcher that has stopped convicting tallies zero too.
+                and rc_edgeneg == 0,
                 "metrics": {
+                    "detector_selftest": "PASS" if rc_edgeneg == 0 else "FAIL",
                     "edges": int(edge.get("edges", -1)),
                     "held": int(edge.get("HELD", -1)),
                     "near": int(edge.get("NEAR", -1)),
@@ -524,11 +605,75 @@ def build_report(
             }
         )
 
+        # Gate L: the writing a reachable room ships is in the repository.
+        # Gates A-K all read the WORKING TREE, and gate H is the only one in
+        # the battery that ever asks git a question -- about tools. On
+        # 2026-09-05 seven finished essays, 9,567 words and the whole of
+        # foundationscrisis but its centrepiece, had been untracked for two
+        # days while four instruments called the tree clean: the pipeline
+        # scorer asks blurb.exists() OR intent.exists(), the coverage hook
+        # reported 179/179 doc 100.0%, and final_tags.py read all 49 final.md
+        # INCLUDING the seven and found 0 stale tags, because to a check that
+        # calls os.path.exists() an untracked file is simply present. Three
+        # consecutive breaths found instances of that one at a time. This
+        # gate is the class, on the other side of gate H's line: H asks
+        # whether the code that produces a verdict is in the repository, L
+        # asks whether the writing that ships is.
+        rc_prose, out_prose = run_cmd(
+            [sys.executable, "tools/check_prose_reachable.py", "--json"]
+        )
+        # ...and its negative half. This gate reads zero on a good day, which
+        # is indistinguishable from one that stopped checking -- and it has
+        # already been wrong twice in its first hour, once on Windows case
+        # folding and once on working-tree-versus-HEAD. The selftest plants
+        # both.
+        rc_prose_neg, _ = run_cmd(
+            [sys.executable, "tools/check_prose_reachable.py", "--selftest"]
+        )
+        prose = {}
+        if out_prose.strip():
+            try:
+                prose = json.loads(out_prose)
+            except json.JSONDecodeError:
+                prose = {}
+        casemiss = prose.get("declared_case_mismatch") or {}
+        gates.append(
+            {
+                "id": "L",
+                "name": "Prose Reachable From A Clone",
+                "pass": rc_prose == 0
+                and int(prose.get("unreachable_from_a_clone", 999999)) == 0
+                # An empty scan is a broken check, not a green one.
+                and int(prose.get("prose_files", 0)) > 0
+                and rc_prose_neg == 0,
+                "metrics": {
+                    "detector_selftest": "PASS" if rc_prose_neg == 0 else "FAIL",
+                    "rooms_declared": int(prose.get("rooms_declared", -1)),
+                    "rooms_resolved": int(prose.get("rooms_resolved", -1)),
+                    "prose_files": int(prose.get("prose_files", -1)),
+                    "prose_tracked": int(prose.get("prose_tracked", -1)),
+                    "unreachable_from_a_clone": int(
+                        prose.get("unreachable_from_a_clone", -1)
+                    ),
+                    "stranded_words": int(prose.get("stranded_words", -1)),
+                    "unreachable": ", ".join(
+                        u.get("path", "") for u in (prose.get("unreachable") or [])
+                    ) or "none",
+                    # Not this gate's verdict -- a declared name that differs
+                    # from the disk only in case is gate A's business -- but
+                    # nothing else in the battery prints it, and Windows is
+                    # the only place it looks fine.
+                    "declared_case_mismatch": ", ".join(sorted(casemiss)) or "none",
+                },
+            }
+        )
+
         pass_count, enabled_count, overall_pass, overall_status = apply_gate_toggles(
             gates, gate_enabled
         )
 
         return {
+            "measurement": measurement_stamp(),
             "overall_pass": overall_pass,
             "overall_status": overall_status,
             "enabled_gate_count": enabled_count,
@@ -542,6 +687,7 @@ def build_report(
                 "validate_museum_templates": rc_mus,
                 "em_autopilot": rc_walk,
                 "check_map_tokens": rc_tok,
+                "check_prose_reachable": rc_prose,
             },
             "gates": gates,
             "raw": {
@@ -563,6 +709,17 @@ def to_markdown(report: dict[str, Any]) -> str:
     lines: list[str] = []
     lines.append("# Release Gates Report")
     lines.append("")
+    stamp = report.get("measurement", {})
+    if isinstance(stamp, dict) and stamp:
+        lines.append(
+            "- Measured: {} by {} at {} ({} dirty / {} untracked)".format(
+                stamp.get("measured_at", "?"),
+                stamp.get("measured_by", "?"),
+                (str(stamp.get("head", "?")))[:9],
+                stamp.get("tree_dirty", "?"),
+                stamp.get("tree_untracked", "?"),
+            )
+        )
     overall_status = str(report.get("overall_status", "PASS" if report.get("overall_pass") else "FAIL"))
     lines.append(f"- Overall: {overall_status}")
     lines.append(
@@ -620,9 +777,25 @@ def main() -> int:
         action="store_true",
         help="Fail if any gate is disabled (strict policy for main/release)",
     )
-    parser.add_argument("--json-out", default="", help="Optional JSON report path")
-    parser.add_argument("--md-out", default="", help="Optional markdown report path")
+    parser.add_argument(
+        "--json-out",
+        default=str(DEFAULT_JSON_REPORT_PATH),
+        help="JSON report path (default: doc/reports/RELEASE_GATES.json)",
+    )
+    parser.add_argument(
+        "--md-out",
+        default=str(DEFAULT_MD_REPORT_PATH),
+        help="Markdown report path (default: doc/reports/RELEASE_GATES.md)",
+    )
+    parser.add_argument(
+        "--no-report",
+        action="store_true",
+        help="Do not write the report files (measure only, print to stdout)",
+    )
     args = parser.parse_args()
+    if args.no_report:
+        args.json_out = ""
+        args.md_out = ""
 
     max_grade_c: int | None = None if args.max_grade_c < 0 else max(0, args.max_grade_c)
     gate_toggle_path = Path(args.gate_toggles)
@@ -661,6 +834,16 @@ def main() -> int:
     print("")
     print("=== RELEASE GATES ===")
     print("")
+    stamp = report.get("measurement", {})
+    if stamp:
+        print(
+            "Measured: {} at {} ({} dirty / {} untracked)".format(
+                stamp.get("measured_at", "?"),
+                (stamp.get("head", "?") or "?")[:9],
+                stamp.get("tree_dirty", "?"),
+                stamp.get("tree_untracked", "?"),
+            )
+        )
     print(f"Overall: {report.get('overall_status', 'PASS' if report['overall_pass'] else 'FAIL')}")
     print(
         "Enabled gates: {}/{} passing ({} total)".format(
@@ -687,8 +870,7 @@ def main() -> int:
 
     if args.json_out:
         out_path = Path(args.json_out)
-        out_path.parent.mkdir(parents=True, exist_ok=True)
-        out_path.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+        write_json_report(out_path, report)
         print(f"JSON report: {out_path}")
 
     if args.md_out:
