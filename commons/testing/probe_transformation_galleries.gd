@@ -1,0 +1,127 @@
+extends SceneTree
+
+## THE INTEGRATED GALLERIES (2026-09-05, Palle: "make these maps showcase all
+## kinds of transformations like integrated galleries"). Trans_Translation,
+## Trans_AxisDecomposition and Trans_Scale carry, in their utility layer, the
+## whole ride vocabulary: translation along x, y and z, the diagonal, translation
+## with a quarter turn, translation with the space growing or shrinking, a
+## rotation plank, a scale cube, a bridge - and captions naming each. This probe
+## LOADS each map in the grid through the catalog and checks that every ride
+## and caption the cells ask for stands, with the parameters the cells say.
+##
+## Run:  godot --path . --xr-mode off --no-window --script res://commons/testing/probe_transformation_galleries.gd
+
+const CATALOG := "res://commons/maps/catalog/MapCatalogDesktop3D.tscn"
+const MAPS := ["Trans_Translation", "Trans_AxisDecomposition", "Trans_Scale"]
+const SCRIPT_OF := {"tc": "transport_cube.gd", "rc": "rotation_cube.gd", "sc": "scale_cube.gd", "br": "bridge_path.gd", "3t": "word_is.gd"}
+
+var _fails := 0
+
+
+func _initialize() -> void:
+	_run.call_deferred()
+
+
+func _check(cond: bool, what: String) -> void:
+	if cond:
+		print("  ok   ", what)
+	else:
+		_fails += 1
+		print("  FAIL ", what)
+
+
+func _cells(map_name: String) -> Dictionary:
+	var out := {}
+	for code in SCRIPT_OF.keys():
+		out[code] = []
+	var doc = JSON.parse_string(FileAccess.get_file_as_string("res://commons/maps/%s/map_data.json" % map_name))
+	var layers: Dictionary = (doc as Dictionary).get("layers", doc)
+	for row in layers.get("utilities", []):
+		for cell in row:
+			var c := str(cell).strip_edges()
+			var code := c.split(":")[0].split("#")[0]
+			if out.has(code):
+				out[code].append(c)
+	return out
+
+
+func _bodies(n: Node, found: Dictionary) -> void:
+	var sp := ""
+	if n.get_script() != null:
+		sp = str((n.get_script() as Script).resource_path).to_lower()
+	for code in SCRIPT_OF.keys():
+		if sp.ends_with("/" + SCRIPT_OF[code]):
+			found[code].append(n)
+	for c in n.get_children():
+		_bodies(c, found)
+
+
+func _run() -> void:
+	print("[probe_transformation_galleries]")
+	var err: int = change_scene_to_file(CATALOG)
+	if err != OK:
+		_check(false, "the catalog scene loads")
+		_finish()
+		return
+	await process_frame
+	await process_frame
+	for map_name in MAPS:
+		var cells := _cells(map_name)
+		var ok: bool = bool(current_scene.call("load_map_fresh", map_name))
+		_check(ok, "%s: load_map_fresh" % map_name)
+		for i in range(200):
+			await process_frame
+		var found := {}
+		for code in SCRIPT_OF.keys():
+			found[code] = []
+		_bodies(root, found)
+		var counts: Array[String] = []
+		var all_match := true
+		for code in ["tc", "rc", "sc", "br", "3t"]:
+			counts.append("%s %d/%d" % [code, (found[code] as Array).size(), (cells[code] as Array).size()])
+			if (found[code] as Array).size() != (cells[code] as Array).size():
+				all_match = false
+		_check(all_match, "%s: one body per cell - %s" % [map_name, ", ".join(counts)])
+		# the composed rides carry their tails
+		var want_rot := 0
+		var want_scale := 0
+		for c in cells["tc"]:
+			if "#rot" in c:
+				want_rot += 1
+			if "#scale" in c:
+				want_scale += 1
+		var got_rot := 0
+		var got_scale := 0
+		for n in found["tc"]:
+			if not is_zero_approx(float(n.get("ride_rotation_degrees"))):
+				got_rot += 1
+			if not is_equal_approx(float(n.get("ride_scale")), 1.0):
+				got_scale += 1
+		_check(got_rot == want_rot and got_scale == want_scale,
+			"%s: composed rides - %d turning (cells say %d), %d scaling the space (cells say %d)" % [map_name, got_rot, want_rot, got_scale, want_scale])
+		# the rotation plank is in step mode at 90; the scale cube's range is sane
+		for n in found["rc"]:
+			_check(int(n.get("mode")) == 0 and absf(float(n.get("rotation_angle")) - 90.0) < 1e-6, "%s: the rotation plank steps 90 degrees" % map_name)
+		for n in found["sc"]:
+			_check(float(n.get("min_scale")) > 0.0 and absf(float(n.get("max_scale")) - 3.0) < 1e-6, "%s: the scale cube grows to 3 from %.3f" % [map_name, float(n.get("min_scale"))])
+		# every caption stands with its words
+		var caps: Array = []
+		for n in found["3t"]:
+			# the grid writes the words onto the TextMesh and a display_text meta, not the export
+			caps.append(str(n.get_meta("display_text")) if n.has_meta("display_text") else str(n.get("text")))
+		var missing: Array = []
+		for c in cells["3t"]:
+			var words: String = str(c).substr(3).replace("_", " ").strip_edges()
+			var hit := false
+			for t in caps:
+				if str(t).to_lower().strip_edges() == words.to_lower():
+					hit = true
+			if not hit:
+				missing.append(words)
+		_check(missing.is_empty(), "%s: %d captions stand with their words%s" % [map_name, caps.size(), "" if missing.is_empty() else " - missing " + str(missing)])
+	_finish()
+
+
+func _finish() -> void:
+	print("[probe_transformation_galleries] %s (%d failures)" % ["PASS" if _fails == 0 else "FAIL", _fails])
+	quit(0 if _fails == 0 else 1)
