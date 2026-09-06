@@ -71,7 +71,14 @@ tmp/
 # Mono/C# specific ignores
 # =============================================================================
 .mono/
-data_*/
+# Anchored to the repo root ON PURPOSE. Unanchored, data_*/ matched every
+# artifact folder named data_something at any depth -- and because git will
+# not descend into an excluded DIRECTORY, the !*.gd / !*.tscn re-includes
+# below cannot rescue what is inside one. It swallowed three artifacts
+# (data_tree_walker, data_locality_caching, data_labor_counter) and broke
+# five tracked maps for anybody but the author. Godot's C# build output
+# lives at the root, so the root is where the rule belongs.
+/data_*/
 mono_crash.*.json
 *.booproj
 *.pidb

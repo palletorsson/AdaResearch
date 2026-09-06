@@ -668,6 +668,58 @@ def build_report(
             }
         )
 
+        # Gate M: the artifacts a reachable room places are in the repository.
+        # The third surface of gate H's class. On 2026-09-06 five tracked maps
+        # placed artifacts a clone cannot load, and gate B called it
+        # unresolved_scene_files: 0 -- because gate B asks os.path.exists().
+        # The root cause was one unanchored glob, `data_*/` in the Mono block,
+        # which matched three artifact FOLDERS; git will not descend into an
+        # excluded directory, so the !*.gd / !*.tscn re-includes could not
+        # reach inside one. H asks whether the code that produces a verdict is
+        # in the repository, L whether the writing that ships is, M whether
+        # the objects a room stands up are.
+        rc_art_reach, out_art_reach = run_cmd(
+            [sys.executable, "tools/check_artifacts_reachable.py", "--json"]
+        )
+        # Its negative half. This gate's own first run convicted 143 addon
+        # files that are absent from the repository on purpose, which is the
+        # same false positive gate L made against ten facade files an hour
+        # after it was written. The selftest fixtures that, the Windows case
+        # fold, and the difference between absent and unreachable.
+        rc_art_reach_neg, _ = run_cmd(
+            [sys.executable, "tools/check_artifacts_reachable.py", "--selftest"]
+        )
+        reach = {}
+        if out_art_reach.strip():
+            try:
+                reach = json.loads(out_art_reach)
+            except json.JSONDecodeError:
+                reach = {}
+        gates.append(
+            {
+                "id": "M",
+                "name": "Artifacts Reachable From A Clone",
+                "pass": int(reach.get("unreachable_from_a_clone", 999999)) == 0
+                # An empty scan is a broken check, not a green one.
+                and int(reach.get("artifacts_declared", 0)) > 0
+                and rc_art_reach_neg == 0,
+                "metrics": {
+                    "detector_selftest": "PASS" if rc_art_reach_neg == 0 else "FAIL",
+                    "artifacts_declared": int(reach.get("artifacts_declared", -1)),
+                    "files_checked": int(reach.get("files_checked", -1)),
+                    "unreachable_from_a_clone": int(
+                        reach.get("unreachable_from_a_clone", -1)
+                    ),
+                    "rooms_affected": int(reach.get("rooms_affected", -1)),
+                    # Not this gate's verdict. A file no tree has is gate B's
+                    # unresolved_scene_files, and a vendored addon is absent by
+                    # decision -- both printed so the numbers stay visible.
+                    "absent_from_every_tree": int(reach.get("absent_from_every_tree", -1)),
+                    "vendored_not_in_repo": int(reach.get("vendored_not_in_repo", -1)),
+                },
+            }
+        )
+
         pass_count, enabled_count, overall_pass, overall_status = apply_gate_toggles(
             gates, gate_enabled
         )
@@ -688,6 +740,7 @@ def build_report(
                 "em_autopilot": rc_walk,
                 "check_map_tokens": rc_tok,
                 "check_prose_reachable": rc_prose,
+                "check_artifacts_reachable": rc_art_reach,
             },
             "gates": gates,
             "raw": {
