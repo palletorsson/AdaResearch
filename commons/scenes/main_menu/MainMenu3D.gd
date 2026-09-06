@@ -11,6 +11,11 @@ signal quit_requested
 @onready var quit_button = $Buttons/QuitButton
 @onready var about_display = $AboutDisplay
 
+## PRELOAD, not class_name: endless_museum.gd declares no class_name, and this
+## menu needs it only for the two static fields that carry a chapter across the
+## staged load. Preloading the SCRIPT costs a parse the museum preload in
+## vrStaging pays anyway; it does not instantiate a museum.
+const MUSEUM = preload("res://commons/scenes/endless_museum.gd")
 const MAP_BROWSER_SCENE = preload("res://commons/scenes/main_menu/components/MapBrowser3D.tscn")
 const SEQUENCE_PICKER_SCENE = preload("res://commons/scenes/2din3dui/sequence_picker_3d.tscn")
 var sequence_picker_instance: Node3D = null
@@ -89,20 +94,69 @@ func _update_load_button():
 	# checkpoint UX is rewired.
 	return
 
+# ── THE MUSEUM IS THE GAME NOW (2026-09-06) ─────────────────────────────────
+# Palle: "since we are converting the game to the endless museum ... the new game
+# means endless museum point one. Then all sequences are pointing to the endless
+# museum version of the game."
+#
+# So this menu no longer has two destinations. New Game and every sequence card
+# lead to the same building; what differs is only WHERE IN IT the walk opens.
+const MUSEUM_SCENE := "res://commons/scenes/endless_museum_staged.tscn"
+const MUSEUM_FALLBACK_SCENE := "res://commons/scenes/endless_museum.tscn"
+## Point One's own chapter. It is the sequence field of its row in the plan, not
+## a display name — endless_museum matches _first_chapter against exactly that.
+const FIRST_CHAPTER := "primitives"
+const FIRST_MAP := "Point_One"
+
+
+## Open the museum at a chapter. `map` empty means that chapter's first pearl.
+##
+## The chapter is handed over BEFORE the load, through endless_museum.open_at:
+## the staged scene ships start_chapter "primitives"/start_map "Point_One" in its
+## own Inspector fields, so a sequence card that only loaded the scene would put
+## every visitor in the lobby whatever they picked. See the note on menu_chapter
+## for why this is a static and not the control file or staging's user_data.
+func _enter_museum(chapter: String, map: String = "") -> void:
+	MUSEUM.open_at(chapter, map)
+	var staging := _find_staging()
+	if staging == null:
+		# The shipped loop always has one — the menu is instanced inside
+		# vr_staging.tscn — so this is a dev boot of the menu on its own. Enter
+		# the museum anyway rather than leaving a dead button: the plain scene
+		# carries the same plan, and open_at outranks its Inspector fields too.
+		push_warning("MainMenu: no XRToolsStaging ancestor — entering the museum without it")
+		get_tree().change_scene_to_file(MUSEUM_FALLBACK_SCENE)
+		return
+	# the staging rig's pointers would fight the loaded scene's rig
+	var left_pointer = find_child("FunctionPointerLeft", true, false)
+	var right_pointer = find_child("FunctionPointerRight", true, false)
+	if left_pointer: left_pointer.visible = false
+	if right_pointer: right_pointer.visible = false
+	print("MainMenu: entering the museum at %s%s" % [chapter, (" / " + map) if map != "" else ""])
+	staging.load_scene(MUSEUM_SCENE)
+
+
 func _on_new_game_clicked():
-	print("MainMenu: New Game clicked")
-	
+	print("MainMenu: New Game clicked — the endless museum at %s" % FIRST_MAP)
+
 	# Clear any existing checkpoints
 	var checkpoint_manager = get_node_or_null("/root/CheckpointManager")
 	if checkpoint_manager and checkpoint_manager.has_method("clear_checkpoints"):
 		checkpoint_manager.clear_checkpoints()
-	
+
 	# Reset map progression
 	var progression_manager = get_node_or_null("/root/MapProgressionManager")
 	if progression_manager and progression_manager.has_method("reset_progress"):
 		progression_manager.reset_progress()
-	
-	start_game_requested.emit()
+
+	# start_game_requested is NOT emitted any more, and that is the whole change.
+	# vrStaging._on_menu_start_game answers it by loading the LAB, so emitting it
+	# and then entering the museum would be two scene loads racing each other for
+	# the same staging slot. The signal is left declared — it is part of this
+	# node's interface and capture_main_menu.gd and GameManager both name it —
+	# but a new game is now one destination, not a request for whichever one the
+	# staging happens to prefer.
+	_enter_museum(FIRST_CHAPTER, FIRST_MAP)
 
 func _on_load_game_clicked():
 	# Load Game now opens the sequence picker — a 2D-in-3D panel listing
@@ -210,48 +264,29 @@ func _on_sequence_selected(sequence_name: String):
 		sequence_picker_instance.queue_free()
 		sequence_picker_instance = null
 
-	# The endless museum is not a spine sequence — it is the negotiated
-	# building itself, and it loads through the SAME staging path every
-	# other scene takes (XRToolsStaging.load_scene expects an
-	# XRToolsSceneBase root; endless_museum_staged.tscn inherits base.tscn
-	# for exactly that reason). SceneManager.start_sequence would look for
-	# a sequence JSON that doesn't exist.
 	# The measurement corridor is a plain desktop scene (own camera, mouse
 	# editing) — a straight scene change, not a staging load; F10 inside it
-	# returns here.
+	# returns here. It is the ONE card that is not a room in the museum.
 	if sequence_name == "prop_corridor":
 		print("MainMenu: entering the prop corridor")
 		get_tree().change_scene_to_file("res://commons/scenes/prop_reference_wall.tscn")
 		return
 
+	# EVERY OTHER CARD IS A CHAPTER OF THE MUSEUM (2026-09-06). This used to fork:
+	# "endless_museum" went to the building, and each spine sequence went to its
+	# own first map through SceneManager.start_sequence — the grid lane, one map
+	# at a time, returning to the lab at the end. Palle: "all sequences are
+	# pointing to the endless museum version of the game."
+	#
+	# A sequence id IS a chapter: endless_museum matches _first_chapter against
+	# the `sequence` field of the plan's rows, so the card's own name is already
+	# the right word and nothing has to be translated. A card naming a sequence
+	# the plan has no rows for is not an error here — the museum says so
+	# ("first chapter X is not in the pool") and opens at its default.
 	if sequence_name == "endless_museum":
-		var staging := _find_staging()
-		if staging:
-			# same pointer hand-off _on_menu_start_game does: the staging
-			# rig's pointers would fight the loaded scene's rig
-			var left_pointer = find_child("FunctionPointerLeft", true, false)
-			var right_pointer = find_child("FunctionPointerRight", true, false)
-			if left_pointer: left_pointer.visible = false
-			if right_pointer: right_pointer.visible = false
-			print("MainMenu: Loading the endless museum via staging")
-			staging.load_scene("res://commons/scenes/endless_museum_staged.tscn")
-		else:
-			push_warning("MainMenu: no XRToolsStaging ancestor — cannot load endless museum")
-		return
-
-	var scene_manager = get_node_or_null("/root/SceneManager")
-	if scene_manager and scene_manager.has_method("start_sequence"):
-		# Clear any stale pending request so a later lab load can't double-fire.
-		if "pending_sequence_request" in scene_manager:
-			scene_manager.pending_sequence_request = ""
-		print("MainMenu: Starting sequence directly (bypassing lab): %s" % sequence_name)
-		scene_manager.start_sequence(sequence_name)
+		_enter_museum(FIRST_CHAPTER, FIRST_MAP)     # the card for the building itself
 	else:
-		# Fallback (older builds): old pending + lab-hub path.
-		push_warning("MainMenu: SceneManager.start_sequence unavailable — falling back to lab-hub path")
-		if scene_manager and "pending_sequence_request" in scene_manager:
-			scene_manager.pending_sequence_request = sequence_name
-		start_game_requested.emit()
+		_enter_museum(sequence_name)                 # ...at that chapter's first pearl
 
 func _find_staging() -> XRToolsStaging:
 	# The menu is instanced inside vr_staging.tscn, so the staging system is

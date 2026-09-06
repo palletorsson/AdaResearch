@@ -18,6 +18,43 @@ extends Node3D
 			notify_property_list_changed()     # the map dropdown follows the chapter
 @export var start_map: String = ""
 
+# ── THE MENU'S VOICE (2026-09-06) ────────────────────────────────────────────
+# Palle: "the new game means endless museum point one. Then all sequences are
+# pointing to the endless museum version of the game."
+#
+# A STATIC, not a file, and not user_data. The three obvious channels are all
+# closed on the machine that matters:
+#
+#   ada_run/em_control.json  is under res://, which is READ-ONLY in an export —
+#                            the museum already says so out loud when it tries
+#                            ("an export keeps its menu"). It is also rank 4 in
+#                            _start_at_chapter, below the Inspector, and the
+#                            staged scene sets the Inspector fields, so it could
+#                            not win even where it can be written.
+#   staging user_data        arrives at scene_loaded(), which XR Tools calls
+#                            AFTER the scene is in the tree — so _ready has run
+#                            and the chapter is already chosen.
+#   an autoload              would be a new global for two strings.
+#
+# A static var on this script is set by the menu one line before the staged
+# scene is loaded, is read by that scene's own _ready (em_staged_museum.gd
+# extends this file, so it is the same storage), and costs nothing on any run
+# that does not set it. CLEARED as it is spent, so a later reload — a view
+# toggle, a follow rebuild — is not silently steered by a menu click from ten
+# minutes ago.
+static var menu_chapter: String = ""
+static var menu_map: String = ""
+
+## Say where the museum should open, then load endless_museum_staged.tscn.
+## `map` empty means the chapter's first pearl — which is what a sequence card
+## wants, and it must be said explicitly, because the staged scene ships
+## start_map "Point_One" and an unsaid map would leave the visitor in the lobby
+## of a chapter that does not contain it.
+static func open_at(chapter: String, map: String = "") -> void:
+	menu_chapter = chapter
+	menu_map = map
+
+
 ## THE PLAN IS THE DEFAULT (2026-08-18). Pressing Play on this scene passed no
 ## command line, so `--em-plan` was absent, `_plan_path` stayed empty and the
 ## museum dealt from the POOL as v1 — every plan edit invisible, with nothing
@@ -1085,6 +1122,22 @@ const HALL_RAMP_LEN := 14         # 4.5 m drop over 14 m: 1:3, a museum ramp
 const HALL_GALLERY_W := 4
 var _force_vr: bool = false       # --em-vr forces the headset path
 var _vr: bool = false             # resolved once in _ready
+
+# ── NIGHT (2026-09-05) ───────────────────────────────────────────────────────
+# Palle: "Remove the ceiling in endless museum and add the night sky ... also add
+# a moon a the global moving light source." Three things, and they are three
+# switches rather than one, because they fail in different directions: a ceiling
+# left on hides the sky entirely, a sky that did not load reads as a working
+# night, and a moon that does not move is indistinguishable from the sun with a
+# blue filter. em_layout.json's `night` section carries all three.
+var _night: bool = false          # night.enabled — resolved once in _ready
+var _moon: DirectionalLight3D = null
+var _moon_period: float = 480.0   # seconds for one circuit of the sky
+var _moon_alt: float = 0.663      # radians above the horizon — a CONSTANT altitude
+var _moon_t: float = 0.0
+## Cold, but not the cinema blue. Real moonlight is warm-grey and the blue is the
+## eye's; this splits the difference so plaster still reads as plaster.
+const MOON_COLOR := Color(0.72, 0.80, 1.0)
 var _vr_cam: Camera3D = null      # the XR eye, cached
 var _first_spec: Dictionary = {}  # the spec segment 0 was actually stamped from
 # every artifact that survived into the museum, in world space. The proof shot is
@@ -1202,6 +1255,10 @@ func _ready() -> void:
 	_boot_ms["entry"] = _boot_entry
 	_parse_args()
 	_vr = _is_vr()
+	# NIGHT, resolved once and before anything reads it. _L falls back to
+	# em_layout.json, which is where the switch lives — this is a property of the
+	# museum, not of a hall, so unlike the lobby keys no map overrides it.
+	_night = _L("night", "enabled", 0.0) > 0.5
 	_headless = DisplayServer.get_name() == "headless"
 	# Start disk/resource work before registry and plan parsing. Those tasks are
 	# CPU-heavy but independent, so a fresh cartridge can arrive behind them
@@ -2536,8 +2593,28 @@ func _start_at_chapter() -> void:
 			if resuming:
 				print("[em-resume] the view changed inside %s / %s — the walk reopens there, not at the door" % [
 					_first_chapter, start_map])
-	# precedence: the flag, then the Inspector, then ada_run/em_control.json
-	# (the control file only speaks for a launch that has neither)
+	# THE MENU'S VOICE, above the Inspector and below everything else. It has to
+	# outrank the Inspector or it cannot be heard at all: the staged scene ships
+	# start_chapter "primitives" and start_map "Point_One", so every sequence card
+	# would open in the lobby. It must NOT outrank the flag (a command line is
+	# explicit) or the resume (a view toggle comes back where it was, and the
+	# menu's value is still sitting there from the click that started the walk).
+	#
+	# start_map is assigned rather than tested, "" included: an empty map means
+	# "this chapter's first pearl", and leaving the scene's Point_One standing
+	# would send a visitor who picked `color` to a hall in `primitives`.
+	if not resuming and _first_chapter == "" and menu_chapter != "":
+		_first_chapter = menu_chapter
+		start_map = menu_map
+		print("[em-menu] the menu asked for chapter %s%s" % [
+			menu_chapter, (" at %s" % menu_map) if menu_map != "" else " (its first pearl)"])
+		# SPENT. A reload of this scene is a view toggle or a follow rebuild, not
+		# a second menu click, and the resume branch above owns those.
+		menu_chapter = ""
+		menu_map = ""
+	# precedence: the flag, then the menu, then the Inspector, then
+	# ada_run/em_control.json (the control file only speaks for a launch that
+	# has none of them)
 	if not resuming and _first_chapter == "" and start_chapter != "":
 		_first_chapter = start_chapter            # the Inspector's voice
 	# THE CONTROL SPEAKS FOR THE MODES ALWAYS (2026-08-24): grid_pack and
@@ -2814,6 +2891,17 @@ func _layout_list(section: String, key: String, fallback: Array) -> Array:
 	if sec is Dictionary and (sec as Dictionary).get(key) is Array:
 		return (sec as Dictionary)[key]
 	return fallback
+
+
+## The same, for a key whose value is an OBJECT rather than a list — a mapping
+## from a name to a ruling, where the absent key means "no ruling anywhere" and
+## must behave exactly as the file did before the key existed.
+func _layout_map(section: String, key: String) -> Dictionary:
+	_L("_", "_", 0.0)
+	var sec: Variant = _layout.get(section)
+	if sec is Dictionary and (sec as Dictionary).get(key) is Dictionary:
+		return (sec as Dictionary)[key]
+	return {}
 
 ## THE LOBBY (2026-08-18). Palle: "The first space is the lobby. It should
 ## have no wall works, but a fire extinguisher and a large window looking
@@ -3388,11 +3476,33 @@ func _setup_world() -> void:
 	# through the ceiling slots, and em_lighting's ENV_CONTRACT caps it at 0.35.
 	# With no rig it is still the ONLY light, so it keeps its v1 energy.
 	var sun := DirectionalLight3D.new()
-	sun.name = "Sun"
+	sun.name = "Moon" if _night else "Sun"
 	sun.rotation_degrees = Vector3(-55.0, 30.0, 0.0)
 	sun.light_energy = 0.35 if lit else 1.1
 	sun.shadow_enabled = true
+	if _night:
+		# THE MOON IS THE SAME NODE. It has to be: the dome draws its disc along
+		# LIGHT0_DIRECTION, and LIGHT0 is the first DirectionalLight3D in the
+		# world — a second light for the look would put the disc on one of them
+		# and the shadows under the other, and nothing would say which.
+		sun.light_color = MOON_COLOR
+		sun.light_energy = clampf(_L("night", "moon_energy", 0.55), 0.0, 4.0)
+		# a wide, soft shadow: one light source 384,400 km away still throws a
+		# hard edge, but at 0.55 energy a hard edge is a black slab
+		sun.shadow_blur = 2.4
+		sun.directional_shadow_max_distance = 90.0
+		_moon = sun
+		_moon_period = maxf(_L("night", "period_s", 480.0), 20.0)
+		_moon_alt = deg_to_rad(clampf(_L("night", "altitude_deg", 38.0), 5.0, 85.0))
+		set_process(true)
+		print("[em-night] the moon is the light: energy %.2f, one circuit every %.0f s at %.0f° altitude" % [
+			sun.light_energy, _moon_period, rad_to_deg(_moon_alt)])
 	add_child(sun)
+	# AFTER add_child: look_at reads the global transform, and a node outside the
+	# tree has none — aiming it first leaves the moon wherever rotation_degrees
+	# above put it, which is the sun's old angle and looks like the night worked.
+	if _night:
+		_aim_moon(0.0)
 	_setup_feel()
 	_setup_audio()
 
@@ -3400,6 +3510,14 @@ func _setup_world() -> void:
 ## knows whether it is a shaft or the only light in the building.
 func _setup_environment() -> bool:
 	var have_rig: bool = _mod_light != null
+	# THE DOME IS CHOSEN BEFORE IT IS BUILT. em_environment builds the Sky inside
+	# install(), so this has to be set first — set after, and the museum would
+	# carry a daylit dome with a night ambient, which is the worst of both and
+	# nothing prints.
+	if _mod_env != null:
+		_mod_env.set("night_sky", _night)
+		if _night:
+			_mod_env.set("night_star_energy", clampf(_L("night", "star_energy", 1.6), 0.0, 8.0))
 	if _mod_env != null and have_rig and _mod_has(_mod_env, "install"):
 		# a headless gate run cannot afford SSIL + SSR + SDFGI + volumetric fog:
 		# the walk would slow under the watchdog's stall window and a timing
@@ -6411,6 +6529,66 @@ func _stamp_hazard(seg: Node3D, cell: Vector2i, zbase: int, entrance: Vector3) -
 		_walk_erased[gc] = "hazard"
 
 
+## How many times running the museum will stand you back up in the SAME hall
+## before it accepts that the hall is the problem and carries you out of it.
+const HALL_RESCUE_LIMIT := 3
+var _rescue_hall: int = -1
+var _rescue_n: int = 0
+
+
+## The hall a z lies in, or {} outside every built one.
+func _hall_at_z(z: float) -> Dictionary:
+	for s_v in _segments:
+		var s: Dictionary = s_v
+		if z >= float(s.get("z0", 0.0)) and z < float(s.get("z1", 0.0)):
+			return s
+	return {}
+
+
+## THE START OF A HALL, on a cell that can be stood on — its shallowest walkable
+## row, nearest the middle of its width. Not the threshold record: that is the
+## thing that has just been struck off. Returns a y of -1e9 when the hall has no
+## walkable cell on record at all, which is a real answer and not an error — a
+## courtyard or a freed segment has none, and the caller falls through.
+func _hall_start_point(hall: Dictionary) -> Vector3:
+	if hall.is_empty() or _walk_cells.is_empty():
+		return Vector3(0.0, -1.0e9, 0.0)
+	var z0: float = float(hall.get("z0", 0.0)) + float(VESTIBULE_H)
+	var z1: float = float(hall.get("z1", 0.0))
+	var cx: float = float(int(hall.get("w", 15))) * 0.5
+	var best := Vector3(0.0, -1.0e9, 0.0)
+	var best_z: int = 1 << 30
+	var best_dx: float = 1.0e9
+	for k in _walk_cells:
+		var c: Vector2i = k
+		if float(c.y) < z0 or float(c.y) >= z1:
+			continue
+		var dx: float = absf(float(c.x) + 0.5 - cx)
+		# shallowest row first, and within that row the cell nearest the middle:
+		# the visitor should come back facing INTO the hall, not against a wall
+		if c.y < best_z or (c.y == best_z and dx < best_dx):
+			best_z = c.y
+			best_dx = dx
+			best = Vector3(float(c.x) + 0.5, 0.25, float(c.y) + 0.5)
+	if best.y < -1.0e8:
+		return best
+	# ...AND THE FLOOR IS NOT AT ZERO. The threshold records carry y 0.25 and this
+	# copied them, which put the visitor 0.75 m INSIDE the deck of a raised hall —
+	# the structure layer runs to five cells of height, so a hall's floor is
+	# wherever the map says. Measured rather than assumed: cast down the cell and
+	# stand on what answers. A cell with nothing under it is one the walk record
+	# is stale about, and is refused.
+	var space: PhysicsDirectSpaceState3D = get_world_3d().direct_space_state
+	if space != null:
+		var q := PhysicsRayQueryParameters3D.create(
+			best + Vector3(0.0, 14.0, 0.0), best - Vector3(0.0, 6.0, 0.0))
+		var hit: Dictionary = space.intersect_ray(q)
+		if hit.is_empty():
+			return Vector3(0.0, -1.0e9, 0.0)
+		best.y = float(hit.get("position", best).y) + 0.05
+	return best
+
+
 ## The last threshold the walker crossed — the save point a fall returns to.
 func _save_point_now() -> Vector3:
 	# THE EYE, not the walker: in the headset the walker is furniture and its
@@ -6443,12 +6621,61 @@ func _save_point_now() -> Vector3:
 		if z <= pz + 1.0 and z > best_z:
 			best_z = z
 			best = pos
+	# ── YOU ARE NOT EVICTED FROM THE HALL YOU DIED IN (2026-09-05) ──────────
+	# Palle: "when I die in the endless museum in VR I ca[n't] restart that map."
+	# Measured with probe_vr_museum_death.gd, standing 47.5 m in: the first death
+	# put him back at z 35.5, in the hall he died in, correctly. The SECOND —
+	# inside SAVE_BURN_S, so this hall's own threshold was struck off — put him at
+	# z -1.5. Forty-nine metres back, a different hall, the museum's front door.
+	# Not that the death failed: that it evicted him from the room he was in, and
+	# in a headset being carried the length of the building is indistinguishable
+	# from being thrown out of it.
+	#
+	# AND THE EVICTION IS THE `best` BRANCH, NOT THE FALLBACK BELOW. The first
+	# attempt at this fix sat under `best` and never once ran, because `best` does
+	# not fail here — it succeeds, by taking the deepest UNBURNED threshold at or
+	# behind you, and with this hall's struck off that is the PREVIOUS hall's.
+	# Nothing was wrong with the search; it answered a question ("which threshold
+	# is safe") that is not the question being asked ("where do I stand up").
+	#
+	# So the test is where the answer LANDS. If it lands inside the hall that
+	# killed you, it stands. If it would take you out of that hall, this hall's
+	# own start is preferred instead — _walk_cells is the museum's record of what
+	# can be stood on, with hazard cells erased from it as they are built, so a
+	# cell out of it is floor, in this room, and not what just killed you.
+	#
+	# BOUNDED, because the burn logic exists to stop a death loop and this must
+	# not reintroduce one. Three stand-ups in the same hall and it gives way: a
+	# hall that has killed you three times running is one the museum is entitled
+	# to carry you out of, and that is what the burned-threshold search is for.
+	var hall: Dictionary = _hall_at_z(pz)
+	var rescue := Vector3(0.0, -1.0e9, 0.0)
+	if not hall.is_empty():
+		var idx: int = int(hall.get("index", -1))
+		if idx != _rescue_hall:
+			_rescue_hall = idx
+			_rescue_n = 0                      # a different hall: the count is not yours
+		var z0: float = float(hall.get("z0", 0.0))
+		var z1: float = float(hall.get("z1", 0.0))
+		var evicts: bool = best_z <= -1.0e8 or best.z < z0 or best.z >= z1
+		if evicts and _rescue_n < HALL_RESCUE_LIMIT:
+			rescue = _hall_start_point(hall)
+	if rescue.y > -1.0e8:
+		_rescue_n += 1
+		_last_save_z = rescue.z
+		print("[em-death] the threshold behind you is struck off and the next one back is %s — standing you at the start of '%s' instead (%s), %d of %d" % [
+			("z %.1f, outside this hall" % best.z) if best_z > -1.0e8 else "gone",
+			str(hall.get("map", "?")), str(rescue), _rescue_n, HALL_RESCUE_LIMIT])
+		return rescue
 	if best_z > -1.0e8:
 		_last_save_z = best_z
+		_rescue_n = 0                          # a threshold in this hall again
 		return best
+
 	if clean_z < 1.0e8:
-		# nothing behind them is both near and safe: go all the way back to the
-		# shallowest threshold that has not killed anyone
+		# nothing behind them is both near and safe, and this hall has nothing to
+		# offer either: go all the way back to the shallowest threshold that has
+		# not killed anyone
 		_last_save_z = clean_z
 		return clean
 	# EVERY threshold in the museum has killed them. There is nowhere left that
@@ -8690,7 +8917,13 @@ func _build_segment() -> void:
 						# PLAN ROW (peek, refreshed from the map each build —
 						# deal is the dealing RESULT and never carries row
 						# fields) and unroofs the hall
-						"ceiling": (not _studio) and not bool(peek.get("open_roof", false)),
+						# ...and `night.ceiling 0` in em_layout unroofs the WHOLE
+						# museum rather than one hall (2026-09-05, Palle: "Remove
+						# the ceiling in endless museum and add the night sky").
+						# Kept separate from night.enabled: a hall open to a
+						# daylit dome is a courtyard and somebody may want one.
+						"ceiling": (not _studio) and not bool(peek.get("open_roof", false))
+								and _L("night", "ceiling", 1.0) > 0.5,
 						# textD on the wall works: the pearl's sentences, one per showing
 						"speak_lines": _speak_lines(next_seq, String(deal.get("pearl", "")) if deal is Dictionary else "", adopt_keep),
 						"speak_anchors": _speak_anchors(),     # token -> world: each line hangs on the field nearest its body
@@ -13943,6 +14176,78 @@ const SCULPT_FIGURES: Array[String] = ["asawa_wire", "batik_beast", "brass_stame
 	"pink_scaffold", "piped_icing", "porcelain_doll", "rocaille", "sea_forms",
 	"stijl_robot", "tatlin_red", "tube_reef", "vasarely_beast", "stella_wall"]
 
+## Can the hall spare this cell? The museum's own seal rule, asked for a statue.
+##
+## _seal_cells does this for every stamped artifact — flood the sealed cell's
+## walkable neighbours and REVERT if they can no longer reach one another — but
+## the sculpture lane erased its cell outright and never asked. One statue in an
+## open room got away with it. Up to four is a wall.
+##
+## A cell with one walkable neighbour or none is a pocket nothing routed through,
+## and is always sparable.
+func _cell_is_sacrificeable(c: Vector2i) -> bool:
+	if not _walk_cells.has(c):
+		return false
+	var nb: Array = []
+	for d in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+		var n2: Vector2i = c + d
+		if _walk_cells.has(n2):
+			nb.append(n2)
+	if nb.size() <= 1:
+		return true
+	_walk_cells.erase(c)
+	var ok: bool = _reaches_all(nb[0], nb, SEAL_PROBE_CELLS)
+	_walk_cells[c] = true      # put it back: the caller erases it for real
+	return ok
+
+
+## THE HALL DEALS THE FAMILY'S OWN AXES, not just its seed (2026-09-03).
+##
+## Until now the museum handed every dream body exactly {figure, seed}, so all
+## 196 halls stood each family at its DEFAULT value. That is the corpus's own
+## recorded gap: 184 artifacts declare axes, and exactly ONE map in the whole
+## project has ever placed one at a non-default value. The families existed on
+## the test bench and in the gallery; nobody walking the museum had ever met a
+## variant.
+##
+## DERIVED, NEVER TRANSCRIBED. The values come from the registry entry that
+## tools/dream_bodies_promote.py generated from the builder's own axes() — so
+## this cannot drift from the code the way a hand-typed list drifts. A family
+## with no declared axes deals nothing and behaves exactly as before.
+##
+## Dealt from the HALL KEY, like the figure and the seed above it, so a hall is
+## reproducible: the same chapter and pearl always stand the same individual in
+## the same skin, which is what makes the bake and the replay agree. A per-axis
+## salt keeps two axes from moving in lockstep across the museum.
+func _sculpt_axis_deal(fig: String, key: String, index: int) -> Dictionary:
+	var out: Dictionary = {}
+	var dna: Variant = _dna_axes.get("dream_" + fig, null)
+	if not (dna is Dictionary):
+		return out
+	var axes: Variant = (dna as Dictionary).get("axes", null)
+	if not (axes is Dictionary):
+		return out
+	for ax_v in (axes as Dictionary):
+		var ax: String = String(ax_v)
+		var vals: Variant = (axes as Dictionary)[ax]
+		if not (vals is Array) or (vals as Array).is_empty():
+			continue
+		var arr: Array = vals
+		out[ax] = String(arr[absi(hash("%s|%d|%s" % [key, index, ax])) % arr.size()])
+	# A MARCHED BODY IS NOT A HANDFUL OF PRIMITIVES. fetish_idol meshes a signed
+	# distance field, and its bench cell of 0.034 buys gallery-grade detail at
+	# about 1.7 s a body — fine for a still, a dropped second in a hall. The
+	# builder reads an optional "cell" out of opts, so the museum can stand a
+	# coarser individual than the sweep photographs without either of them
+	# changing the other's numbers. The value is a measurement, not a guess:
+	# commons/testing/probe_iso_cell_cost.gd reports the cost and the geometric
+	# loss side by side.
+	var cell: float = _L("sculptures", "cell", 0.0)
+	if cell > 0.0 and _dna_axes.has("dream_" + fig):
+		out["cell"] = cell
+	return out
+
+
 func _dress_sculptures(seg: Node3D, _tile: Array, w: int, h: int, zbase: int, _deal: Dictionary) -> void:
 	if seg == null or not is_instance_valid(seg):
 		return
@@ -13961,14 +14266,51 @@ func _dress_sculptures(seg: Node3D, _tile: Array, w: int, h: int, zbase: int, _d
 	if allowed.is_empty():
 		allowed = SCULPT_FIGURES
 	var fig: String = String(allowed[absi(hash(ch)) % allowed.size()])
+	# A PIN OVERRIDES THE DEAL, AND IT IS WHY fetish_idol DID NOT JOIN THE LIST
+	# ABOVE (2026-09-03, Palle: "put the fetish idols in the museum").
+	#
+	# The family is allowed[absi(hash(ch)) % allowed.size()]. Appending ONE name
+	# takes that modulo from 37 to 38 and reassigns the statue in EVERY chapter
+	# at once: 22 halls change identity, ada_run/em_bake.json goes stale, every
+	# published capture starts lying, and the diff that did it is a single added
+	# string. Nothing in the museum prints that it happened. A pin names the
+	# chapter instead and leaves the modulo alone, so a layout file without the
+	# key stands exactly the statues it stood yesterday.
+	var pinned: Variant = _layout_map("sculptures", "pin").get(ch, null)
+	if pinned != null and String(pinned) != "":
+		fig = String(pinned)
 	var body_seed: int = absi(hash(key)) % 2147483646 + 1
 	var rng := RandomNumberGenerator.new()
 	rng.seed = hash(key + "|art")
 	var ps: PackedScene = load(scene_path) as PackedScene
 	if ps == null:
 		return
+	# HOW MANY, AND HOW WIDE A DRAW (2026-09-03, Palle: "can we add between 1 and 4
+	# sculpture per maps and a bigger assortment from the dna as well").
+	#
+	# per_hall is the floor and per_hall_max the ceiling, and the count is dealt
+	# from the HALL KEY like everything else here, so a hall always stands the
+	# same number and the bake and the replay still agree. A layout that sets no
+	# ceiling gets the floor, which is what the file did before this existed.
 	var want: int = maxi(1, int(_L("sculptures", "per_hall", 1.0)))
+	var want_max: int = maxi(want, int(_L("sculptures", "per_hall_max", float(want))))
+	if want_max > want:
+		want = want + absi(hash(key + "|count")) % (want_max - want + 1)
+	# assortment 0 = every body in a hall is the chapter's family, which is what
+	# the museum did for its first month: a chapter read as a room of relatives.
+	# 1 = the FIRST body still names the chapter and the rest are drawn from the
+	# whole living pool, so a hall is a room with a family in it rather than a
+	# room of one family.
+	var assort: bool = _L("sculptures", "assortment", 0.0) > 0.5
 	var clear_m: float = _L("sculptures", "clear_m", 3.0)
+	# A HALL HAS A FRAME BUDGET, NOT A STATUE BUDGET. Four bodies is four builds
+	# on the main thread while somebody is walking through, and the families are
+	# not equally cheap — a marched isosurface costs 20x a stack of primitives.
+	# So the hall stops adding when it has spent its milliseconds rather than
+	# when it has hit a count, and it SAYS what it dropped. A silent cap reads as
+	# "this hall wanted one statue" forever after.
+	var ms_budget: float = _L("sculptures", "ms_budget", 1200.0)
+	var ms_spent: float = 0.0
 	var save := Vector2(float(w) / 2.0 + 0.5, float(zbase) + float(VESTIBULE_H) - 1.5)
 	var stood: Array = []
 	# THE RELIEF IS A WALL WORK. It is 2.4 m across and its shapes come off one
@@ -13993,7 +14335,40 @@ func _dress_sculptures(seg: Node3D, _tile: Array, w: int, h: int, zbase: int, _d
 		print("[em-art] %s: no open cell for a statue" % key)
 		return
 	for i in range(want):
+		if ms_spent > ms_budget:
+			print("[em-art] %s: stopped at %d of %d statues — %d ms spent of a %d ms budget"
+				% [key, i, want, int(ms_spent), int(ms_budget)])
+			break
+		# THIS BODY'S FAMILY. The first names the chapter (or its pin); the rest
+		# widen the draw. stella_wall is excluded from the widening because it is
+		# a WALL WORK — it returns early above and hangs on the west wall, and on
+		# a plinth in the middle of a room it would be a billboard.
+		var fig_i: String = fig
+		if i > 0 and assort:
+			var wide: Array = []
+			for f_v in allowed:
+				if String(f_v) != "stella_wall":
+					wide.append(f_v)
+			if not wide.is_empty():
+				fig_i = String(wide[absi(hash("%s|fig|%d" % [key, i])) % wide.size()])
 		var c: Vector2i = pool[rng.randi_range(0, pool.size() - 1)]
+		# A STATUE MAY NOT SEVER ITS HALL. Every stamped artifact goes through
+		# _seal_cells, which floods the sealed cell's neighbours and REVERTS the
+		# seal if they can no longer reach one another. This lane never did: it
+		# erased the cell outright. With one statue in an open room that was luck
+		# and it held; with up to four it is a corridor waiting to be walled off,
+		# and the failure would be a hall you cannot cross with nothing in the
+		# log about it. Same rule, asked here.
+		var tries: int = 0
+		while tries < 8 and not _cell_is_sacrificeable(c):
+			pool.erase(c)
+			if pool.is_empty():
+				break
+			c = pool[rng.randi_range(0, pool.size() - 1)]
+			tries += 1
+		if pool.is_empty() or not _cell_is_sacrificeable(c):
+			print("[em-art] %s: no cell left that the hall can spare after %d statue(s)" % [key, i])
+			break
 		var lz: int = c.y - zbase
 		var at := Vector3(float(c.x) + 0.5, _stage_top_at(c.x, lz - VESTIBULE_H), float(lz) + 0.5)
 		var plinth_h: float = _L("sculptures", "plinth_m", 0.42)
@@ -14018,7 +14393,9 @@ func _dress_sculptures(seg: Node3D, _tile: Array, w: int, h: int, zbase: int, _d
 		var n: Node3D = ps.instantiate() as Node3D
 		if n == null:
 			continue
-		var cfg: Dictionary = {"figure": fig, "seed": body_seed + i}
+		var cfg: Dictionary = {"figure": fig_i, "seed": body_seed + i}
+		cfg.merge(_sculpt_axis_deal(fig_i, key, i))
+		var t_build: int = Time.get_ticks_msec()
 		n.name = "DreamBody%d" % i
 		n.set_meta("artifact_lookup_name", "dream_bodies")
 		n.set_meta("em_sculpture", true)
@@ -14042,15 +14419,38 @@ func _dress_sculptures(seg: Node3D, _tile: Array, w: int, h: int, zbase: int, _d
 				if fr.has("rotation"):
 					n.rotation_degrees.y = float(fr["rotation"])
 		seg.add_child(n)
+		# THE BODY IS BUILT INSIDE add_child, on the main thread, during play.
+		# Every family here was primitives until fetish_idol, which marches an
+		# isosurface and costs about 1.7 s at its bench cell — a frozen frame,
+		# and one that RECURS, because walking back past KEEP_BEHIND_M and
+		# forward again rebuilds the segment and re-marches the body. The stamp
+		# budget does not protect against it: _drain_stamps exempts the first
+		# item of every frame by design, so a single heavy item is never split.
+		# So the museum measures what it just paid and names the family. The
+		# next expensive body announces itself instead of being discovered as a
+		# stutter by whoever is wearing the headset.
+		var build_ms: int = Time.get_ticks_msec() - t_build
+		ms_spent += float(build_ms)
+		if build_ms > 120:
+			push_warning("[em-art] %s: %s took %d ms to build — that is a dropped frame in the hall"
+				% [key, fig_i, build_ms])
 		_edit_records.append({"node": n, "token": "dream_bodies", "kind": "furniture",
 			"from": [], "tile_cell": [], "rotation": n.rotation_degrees.y, "chapter": ch, "seg": seg, "index": i})
-		_inventory.append({"id": "%s|dream:%s" % [key, fig], "chapter": ch, "pearl": pearl,
+		_inventory.append({"id": "%s|dream:%s" % [key, fig_i], "chapter": ch, "pearl": pearl,
 			"kind": "artifact", "token": "dream_bodies", "segment": _seg_no(seg),
 			"world": [snappedf(n.global_position.x, 0.1), snappedf(n.global_position.y, 0.1),
 				snappedf(n.global_position.z, 0.1)], "cell": [c.x, lz - VESTIBULE_H]})
 		_walk_cells.erase(c)
 		_walk_erased[c] = "art:dream_bodies"
-		stood.append({"figure": fig, "seed": body_seed + i, "cell": [c.x, c.y]})
+		var said: Dictionary = {"figure": fig_i, "seed": body_seed + i, "cell": [c.x, c.y]}
+		# say WHICH INDIVIDUAL, not just which family — a hall that stands a
+		# variant and prints only the family name is indistinguishable in the
+		# log from one standing the default, which is how the whole corpus came
+		# to believe nobody had ever met a variant
+		for ak in cfg:
+			if String(ak) != "figure" and String(ak) != "seed":
+				said[String(ak)] = cfg[ak]
+		stood.append(said)
 		pool.erase(c)
 		if pool.is_empty():
 			break
@@ -14683,9 +15083,58 @@ func _costume_walk() -> void:
 		print("[em-costume] walked into %s — it is on the body now" % here)
 
 
+## WHERE THE MOON IS AT TIME t, AND WHICH WAY ITS LIGHT TRAVELS.
+##
+## It circles at a CONSTANT ALTITUDE around the zenith rather than rising and
+## setting. A real arc would put the museum in the dark for half of every period
+## and under a horizontal light for most of the rest — and a horizontal
+## directional inside a building with no ceiling rakes every wall and lights no
+## floor. A constant altitude keeps one moon in the sky, always up, always
+## throwing a shadow, and moves the shadow right across the hall over a circuit.
+##
+## The light TRAVELS from the moon toward the ground, and a DirectionalLight3D
+## shines along its own -Z, so -Z must point at -moon_from: look_at that.
+func _aim_moon(t: float) -> void:
+	if _moon == null or not is_instance_valid(_moon):
+		return
+	var a: float = TAU * fposmod(t / maxf(_moon_period, 0.001), 1.0)
+	var ca: float = cos(_moon_alt)
+	# the direction the moon is IN, seen from the ground
+	var from := Vector3(ca * cos(a), sin(_moon_alt), ca * sin(a)).normalized()
+	# look_at throws when the aim is parallel to UP; _moon_alt is clamped to 85°
+	# at read time so this cannot happen, and the guard says so rather than
+	# leaving the next reader to work it out from the clamp two hundred lines away
+	if absf(from.y) > 0.999:
+		return
+	_moon.global_position = Vector3.ZERO
+	_moon.look_at(-from, Vector3.UP)
+
+
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint() or _studio:
 		return
+	# THE LAST PLACE THAT HELD YOU, in the headset. _last_ground is written from
+	# _player.position at seven places in this file and nowhere else, and VR never
+	# builds that walker — so in a headset it has never once moved from the value
+	# it is declared with, the old lobby standing spot at (7.5, 0, 1.5). It is the
+	# seed and the last resort of every branch of _save_point_now, which means the
+	# museum's final answer to "where were you standing" was, in VR, always the
+	# front door. Read off the EYE, and only over a cell the museum says is
+	# walkable — recording a position mid-fall would save the fall.
+	if _vr and _player == null and not _walk_cells.is_empty():
+		var e: Vector3 = _eye_pos()
+		var c := Vector2i(int(floor(e.x)), int(floor(e.z)))
+		if _walk_cells.has(c):
+			_last_ground = Vector3(float(c.x) + 0.5, 0.0, float(c.y) + 0.5)
+	if _moon != null and is_instance_valid(_moon):
+		# FROZEN FOR A PROOF STILL, for the same reason auto-exposure is: a shot
+		# run's moon would otherwise sit wherever the build happened to finish, so
+		# the same command gives a different sky every time and no frame can be
+		# aimed at it. Held at t=0 the moon is due +X at its altitude, which is
+		# --em-shot-yaw=270 --em-shot-pitch=38.
+		if _shot_path == "":
+			_moon_t += _delta
+		_aim_moon(_moon_t)
 	if _doll_top and _paint2d_canvas != null and is_instance_valid(_paint2d_canvas):
 		_paint2d_canvas.queue_redraw()   # the overlay tracks the camera
 	_edit_gizmo_frame()
@@ -22028,7 +22477,10 @@ func _trim_keep_out(segn: Node3D) -> Array:
 	# ceiling is an em_detail bucket like the skirting, and every bucket leaves
 	# through _emit — so the keep-out that stops trim over a hole stops the ceiling
 	# over the slide, with no second mechanism and nothing to keep in step.
-	if _L("lobby", "drop_hole", 0.0) > 0.5:
+	# ...and only while there IS a roof. With `roof` off the hall is ceilinged
+	# right across and the drop cell is just floor, so a keep-out here would leave
+	# a 1.4 m hole in a ceiling with nothing above it. (2026-09-04)
+	if _L("lobby", "drop_hole", 0.0) > 0.5 and _L("lobby", "roof", 1.0) > 0.5:
 		var hx: float = _L("lobby", "drop_x", 6.0)
 		# + VESTIBULE_H for the same reason the roof converts: em_detail's ceiling
 		# stands over the MAP, so a rect in enter-room rows covers empty air. That
@@ -22054,8 +22506,27 @@ func _trim_keep_out(segn: Node3D) -> Array:
 # entered through its own roof, which is exactly the Duke Nukem 3D opening and,
 # less flippantly, the only arrival that makes the enter room behind glass read as
 # past rather than as a corridor someone forgot to open.
+#
+# ── AND THEN IT COMES OFF AGAIN (2026-09-04) ────────────────────────────────
+# Palle, in the headset: "I want the VR to start in this position, not on the
+# roof, remove the roof and add the ceiling again."
+#
+# The roof answered a question about ARRIVAL and was built out of the answer to
+# a question about WHERE — one key, drop_hole, saying both "there is a deck up
+# there" and "this is the cell the visitor comes in at". Taking the deck away by
+# clearing that key would have taken the arrival point with it, dropping the
+# headset back on the rig's raw origin: which in this map is inside the basin.
+#
+# So the two are separated. `roof` (default 1) builds or does not build the deck
+# and the hole in the ceiling above it. drop_x / drop_z go on meaning where the
+# visitor arrives, and with the roof gone that is the FLOOR of the same cell —
+# exactly where you stand today one second after jumping. A map that does not
+# mention `roof` is built byte for byte as before.
 func _drop_hole(seg: Node3D, solid: StaticBody3D) -> void:
 	if _L("lobby", "drop_hole", 0.0) <= 0.5:
+		return
+	if _L("lobby", "roof", 1.0) <= 0.5:
+		print("[em-roof] roof off — no deck, no parapet, the ceiling closes over the drop cell")
 		return
 	var hx: int = int(_L("lobby", "drop_x", 6.0))
 	# A MAP ROW, converted here. drop_z 1 as a segment-local row is z 1, which is
@@ -22130,7 +22601,8 @@ func _vr_drop_in() -> void:
 		var eye: Camera3D = _vr_eye()
 		if rig != null and eye != null:
 			rig.global_position = _vr_drop(rig.global_position, eye.global_position, target)
-			print("[em-slide] the headset is dropped: rig to %s so the eye lands on %s (after %d frame(s))" % [
+			print("[em-slide] the headset %s: rig to %s so the eye lands on %s (after %d frame(s))" % [
+				"is dropped" if _L("lobby", "roof", 1.0) > 0.5 else "starts standing",
 				str(rig.global_position), str(target), attempt])
 			return
 		await get_tree().process_frame
@@ -22153,6 +22625,27 @@ func _drop_point() -> Vector3:
 	# between being dropped through a floor and choosing to go in.
 	var hx: float = _L("lobby", "drop_x", 6.0)
 	var hz: float = _L("lobby", "drop_z", 1.0) + float(VESTIBULE_H)
+	# NO ROOF: the same cell, on the floor.
+	#
+	# IN WORLD METRES, WHICH IS NOT THE FRAME hz IS IN. hz above is a SEGMENT-local
+	# row, because that is the frame _drop_hole lays its deck in and the frame
+	# _trim_keep_out cuts the ceiling in — but this function's result is assigned to
+	# _player.position and to rig.global_position, and segment 0 stands at world
+	# z = -VESTIBULE_H. Measured, not assumed: commons/testing/probe_lobby_arrival.gd
+	# reads segment 0's own global transform and prints it, and it is (0, 0, -4).
+	# So the visitor's cell is drop_z + 0.5, with no vestibule term — the same number
+	# the old fallback (7.5, 0.0, 1.5) already used, which is the tell that world was
+	# always the frame meant here.
+	#
+	# The roof branch below does add it, and lands the visitor at the far edge of the
+	# pad against the parapet rather than "one cell back from the hole" as its comment
+	# claims. Left alone: it is the arithmetic every roofed lobby has been built and
+	# walked against, and this map no longer takes that branch.
+	if _L("lobby", "roof", 1.0) <= 0.5:
+		var g := Vector3(hx + 0.5, 0.0, _L("lobby", "drop_z", 1.0) + 0.5)
+		print("[em-roof] no roof — the visitor starts on the floor at (%.1f, %.1f, %.1f), map cell (%d, %d)" % [
+			g.x, g.y, g.z, int(hx), int(hz) - VESTIBULE_H])
+		return g
 	var y: float = WALL_H + clampf(_L("lobby", "roof_rise_m", 0.35), 0.0, 6.0) + 0.2
 	var p := Vector3(hx + 0.5, y, hz - 1.0 + 0.5)
 	print("[em-roof] the visitor starts ON the roof at (%.1f, %.1f, %.1f), the hole one cell ahead" % [p.x, p.y, p.z])

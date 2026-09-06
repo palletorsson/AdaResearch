@@ -164,6 +164,16 @@ const TONEMAP_WHITE := 6.0
 const AMBIENT_HIGH := 0.20
 const AMBIENT_PERF := 0.62
 
+# NIGHT. See the NIGHT AMBIENT block in build(). A starfield feeds the ambient
+# almost nothing, so the dome drops to NIGHT_SKY_CONTRIB of the mix and a cold
+# flat floor carries the rest. Moonlight measured off a real one is warm-grey,
+# not blue — the blue is the eye's, at low light — but this is a museum after
+# dark and the blue is the point, so it is a chosen colour and not a physical one.
+const NIGHT_SKY_CONTRIB := 0.45
+const NIGHT_AMBIENT_COLOR := Color(0.36, 0.44, 0.66)
+const NIGHT_AMBIENT_HIGH := 0.42
+const NIGHT_AMBIENT_PERF := 0.85
+
 ## Mirrored from em_lighting.gd ENV_CONTRACT so this file has no hard dependency
 ## on that class parsing. check_contract() reads whatever dict you hand it, so
 ## the caller can pass EmLighting.ENV_CONTRACT and get a real diff.
@@ -226,6 +236,17 @@ const SDFGI_TUNED := {
 static var use_shader_sky: bool = true
 ## Set false to skip the vignette CanvasLayer entirely.
 static var use_vignette: bool = true
+
+## NIGHT (2026-09-05, Palle: "Remove the ceiling in endless museum and add the
+## night sky ... also add a moon a the global moving light source"). Set true
+## BEFORE build()/install() and the dome becomes the starfield instead of the
+## north-light overcast. endless_museum.gd sets it from em_layout's `night`
+## section; nothing else in the corpus reads this file.
+static var night_sky: bool = false
+## Lifts the starfield's own radiance, which is what feeds ambient — the dome IS
+## the ambient source here (AMBIENT_SOURCE_SKY, contribution 1.0), and a
+## photograph of space is almost entirely black. See NIGHT_AMBIENT.
+static var night_star_energy: float = 1.0
 
 static var _tier_cache: String = ""
 
@@ -293,6 +314,103 @@ void sky() {
 	COLOR = col;
 }
 """
+
+
+# ── THE NIGHT SKY, AND THE MOON IN IT ────────────────────────────────────────
+# Palle, 2026-09-05: "Remove the ceiling in endless museum and add the night sky
+# from ... sphere_world_demo.tscn also add a moon a the global moving light
+# source."
+#
+# The demo's sky is one line of resource: constellations.tres is a
+# PanoramaSkyMaterial over NASA's Deep Star Maps 2020 with the IAU constellation
+# figures drawn on, ambient white at 0.7. That texture is copied into
+# assets/textures/nasa/ with its README, because the attribution is a condition
+# of the licence and a texture without its README is an unattributed one.
+#
+# WHY THIS IS A SHADER AND NOT THAT ONE-LINE RESOURCE. The moon has to be IN the
+# sky, not in the scene. A moon built as a mesh has to be held at a fixed angular
+# size in front of a camera that moves — which means parenting it to the eye, and
+# there are two eyes in VR and a third camera for proof shots. Drawn in the dome
+# it is at infinity by construction, it is the same in both lanes, and it tracks
+# the light for free: LIGHT0_DIRECTION is the moving directional, so wherever
+# endless_museum swings the light, the disc is already there. The existing day
+# dome above draws its sun exactly this way; this is that argument reused.
+#
+# The panorama is sampled the way Godot's own PanoramaSkyMaterial samples it, so
+# the constellations come out the right way up and unmirrored.
+const NIGHT_SKY_SHADER := """
+shader_type sky;
+
+uniform sampler2D panorama : source_color, filter_linear, hint_default_black;
+uniform float star_energy : hint_range(0.0, 8.0) = 1.0;
+// the moon's ANGULAR RADIUS in radians. The real one is 0.0045 (half a degree),
+// which is a pinprick and lights nothing you can see; this is a stage moon.
+uniform float moon_size : hint_range(0.002, 0.30) = 0.045;
+uniform float moon_energy : hint_range(0.0, 60.0) = 4.2;
+uniform float moon_halo : hint_range(0.0, 4.0) = 0.35;
+// MEASURED, not inherited. The day dome above negates LIGHT0_DIRECTION on the
+// stated ground that it is the direction light TRAVELS. Tested here with a 40-
+// degree moon and a debug tint that proved LIGHT0_ENABLED true: at that sign the
+// disc is nowhere in the sky, and at the opposite sign it is where the light
+// comes from. So LIGHT0_DIRECTION points AT the light, and the day sun has been
+// drawn on the wrong side of its own dome — which nobody would notice, because
+// that dome's sun is a soft halo on a bright overcast and the museum has a
+// ceiling over it. Left alone there; correct here.
+uniform float moon_dir_sign : hint_range(-1.0, 1.0) = -1.0;
+
+void sky() {
+	vec3 dir = normalize(EYEDIR);
+	vec2 uv = vec2(atan(dir.x, -dir.z) / (2.0 * PI) + 0.5,
+				   acos(clamp(dir.y, -1.0, 1.0)) / PI);
+	vec3 col = texture(panorama, uv).rgb * star_energy;
+
+	if (LIGHT0_ENABLED) {
+		vec3 mdir = normalize(LIGHT0_DIRECTION * (-moon_dir_sign));
+		float d = dot(dir, mdir);
+		float cr = cos(moon_size);
+		float soft = (1.0 - cr) * 0.12 + 0.00001;
+		float disc = smoothstep(cr, cr + soft, d);
+
+		// a frame on the disc, so the maria are painted on the moon rather than
+		// swimming across it as the light moves
+		vec3 up0 = abs(mdir.y) < 0.95 ? vec3(0.0, 1.0, 0.0) : vec3(1.0, 0.0, 0.0);
+		vec3 tx = normalize(cross(up0, mdir));
+		vec3 ty = cross(mdir, tx);
+		vec2 p = vec2(dot(dir, tx), dot(dir, ty)) / max(sin(moon_size), 0.0001);
+		float mottle = 0.84
+			+ 0.09 * sin(p.x * 7.0 + 1.3) * cos(p.y * 5.0 - 0.7)
+			+ 0.07 * sin(p.x * 13.0 - 2.1) * sin(p.y * 11.0 + 0.4);
+		float limb = 1.0 - 0.38 * pow(clamp(length(p), 0.0, 1.0), 3.0);
+
+		// NOT multiplied by LIGHT0_ENERGY. It was, and at 0.55 x 16 the disc came
+		// back a flat white circle: everything above the tonemapper's white point
+		// clips, so the maria and the limb darkening were computed and then thrown
+		// away. It also tied the moon's LOOK to how hard it lights the museum,
+		// which are two different decisions — night.moon_energy should be free to
+		// go to a crescent's worth of light without the moon vanishing from the sky.
+		col += LIGHT0_COLOR * moon_energy * disc * mottle * limb;
+		// the glow around it, and a wide dim wash for the air
+		col += LIGHT0_COLOR * moon_halo * pow(clamp(d, 0.0, 1.0), 220.0);
+		col += LIGHT0_COLOR * 0.05 * pow(clamp(d, 0.0, 1.0), 12.0);
+	}
+
+	COLOR = col;
+}
+"""
+
+## Where the starfield lives. UNDER commons/, NOT assets/: .gitignore excludes
+## /assets/ wholesale, so a texture put there is on this machine and nowhere else
+## — the museum would fall back to the day dome on any other checkout, warning
+## into a log nobody reads. NASA/GSFC SVS Deep Star Maps
+## 2020 (Gaia DR2, ESA/Gaia/DPAC) — educational and non-commercial use, which is
+## what this project is; README.txt sits beside it because the attribution is a
+## condition of the licence.
+##
+## WITHOUT THE CONSTELLATION FIGURES (Palle, same day: "no constellations just the
+## stars"). xr-tools vendors only the version with the IAU figures drawn on, so
+## they are taken off by tools/strip_constellations.py rather than downloaded —
+## the stars, the Milky Way and the Magellanic Clouds are NASA's and untouched.
+const NIGHT_PANORAMA := "res://commons/scenes/em/sky/starmap_2020_no_figures_4k.jpg"
 
 
 # ── THE VIGNETTE ─────────────────────────────────────────────────────────────
@@ -402,6 +520,24 @@ static func build(tier_override: String = "") -> WorldEnvironment:
 	# not "tidy" these two into one number.
 	e.ambient_light_energy = AMBIENT_HIGH if high else AMBIENT_PERF
 	e.reflected_light_source = Environment.REFLECTION_SOURCE_SKY
+
+	# ── NIGHT AMBIENT ───────────────────────────────────────────────────────
+	# The ambient above is read OFF THE DOME (source SKY, contribution 1.0), and
+	# the night dome is a photograph of space: its mean radiance is close to
+	# zero. Leave those two numbers alone and the halls go black except for the
+	# rig, which is not "night" — it is the sky switch having no effect anyone
+	# can see except through a doorway, and it would read as the panorama having
+	# failed to load.
+	#
+	# So at night the dome stops being the whole of the ambient and becomes half
+	# of it: NIGHT_SKY_CONTRIB of the moon's own glow, the rest a cold flat
+	# floor. Raised energy, because a floor of 0.20 under a black dome is 0.20 of
+	# nearly nothing. These are the two numbers to move first if the museum comes
+	# back too dark or too milky, and they are deliberately not the day numbers.
+	if night_sky:
+		e.ambient_light_sky_contribution = NIGHT_SKY_CONTRIB
+		e.ambient_light_color = NIGHT_AMBIENT_COLOR
+		e.ambient_light_energy = NIGHT_AMBIENT_HIGH if high else NIGHT_AMBIENT_PERF
 
 	# ── tonemap: the single largest change to the image ─────────────────────
 	e.tonemap_mode = TONEMAP
@@ -702,7 +838,14 @@ static func camera_attributes(tier_override: String = "") -> CameraAttributes:
 	# ── depth of field ──────────────────────────────────────────────────────
 	# Off entirely on perf: DOF is a full-resolution gather and it is the first
 	# thing to cut.
-	ca.dof_blur_far_enabled = high
+	# ...and OFF ENTIRELY AT NIGHT. The argument below is about the next room; it
+	# was written for a museum with a ceiling on it. With the ceiling gone the
+	# far field is the SKY, and the sky is at infinity, so every star sits at the
+	# far end of a blur ramp tuned to soften a wall 40 m away. Measured in frame:
+	# the starfield came back as mush, which is the one thing a starfield must not
+	# be. The near blur is untouched — it is a proof-still affectation and has
+	# nothing to do with the sky.
+	ca.dof_blur_far_enabled = high and not night_sky
 	# 26 m. The templates are up to 30 cells deep plus a 4-cell vestibule, so
 	# the far wall of the gallery you are standing in sits at roughly 30 m.
 	# Focusing at 26 keeps the entire room you occupy sharp and lets only the
@@ -887,6 +1030,13 @@ static func check_contract(env: Environment, contract: Dictionary) -> Array:
 		return ["environment is null"]
 	if contract.has("ambient_light_energy_max"):
 		var cap: float = float(contract["ambient_light_energy_max"])
+		# The cap is em_lighting's, and it is a statement about how much fill the
+		# DOME is already giving: 0.30 on top of a bright overcast sky is a lot.
+		# Under the night dome the sky gives nearly nothing, so the same number
+		# means something else entirely and the check would report a breach that
+		# is the night working. Raised by the contribution the sky no longer makes.
+		if night_sky:
+			cap = cap / maxf(NIGHT_SKY_CONTRIB, 0.05)
 		if env.ambient_light_energy > cap + 0.0001:
 			out.append("ambient_light_energy %.3f > contract max %.3f" % [
 				env.ambient_light_energy, cap])
@@ -946,7 +1096,8 @@ static func describe(tier_override: String = "") -> String:
 	lines.append("dof=%s" % ("far 26m/+14m" if high else "off"))
 	lines.append("autoexp=%s" % ("frozen (shot run)" if _is_shot_run() else "on(speed 0.28, ISO 40-380)"))
 	lines.append("vignette=%s" % ("on(0.15)" if (high and use_vignette) else "off"))
-	lines.append("sky=%s" % ("shader dome" if use_shader_sky else "procedural"))
+	lines.append("sky=%s" % ("NIGHT starfield + moon (%s)" % NIGHT_PANORAMA.get_file() if night_sky
+		else ("shader dome" if use_shader_sky else "procedural")))
 	return "\n".join(PackedStringArray(lines))
 
 
@@ -961,8 +1112,35 @@ static func _sky(high: bool) -> Sky:
 	# The dome never changes, so QUALITY is a one-time cost rather than a
 	# per-frame one. REALTIME would pay less once and worse forever.
 	sky.process_mode = Sky.PROCESS_MODE_QUALITY
-	sky.sky_material = _sky_material() if use_shader_sky else _procedural_sky()
+	if night_sky:
+		sky.sky_material = _night_sky_material()
+	else:
+		sky.sky_material = _sky_material() if use_shader_sky else _procedural_sky()
 	return sky
+
+
+## The starfield dome. Falls back to the day sky and SAYS SO if the texture is
+## not in the tree — a missing panorama would otherwise sample black, and a black
+## dome under a black night is a silence that looks exactly like a working night.
+static func _night_sky_material() -> Material:
+	if not ResourceLoader.exists(NIGHT_PANORAMA):
+		push_warning("em_environment: %s is not in the tree — falling back to the day dome. Run Godot with --import after copying it." % NIGHT_PANORAMA)
+		return _sky_material()
+	var tex: Texture2D = load(NIGHT_PANORAMA) as Texture2D
+	if tex == null:
+		push_warning("em_environment: %s did not load as a Texture2D — falling back to the day dome." % NIGHT_PANORAMA)
+		return _sky_material()
+	var sh := Shader.new()
+	sh.code = NIGHT_SKY_SHADER
+	var m := ShaderMaterial.new()
+	m.shader = sh
+	m.set_shader_parameter("panorama", tex)
+	m.set_shader_parameter("star_energy", night_star_energy)
+	m.set_shader_parameter("moon_size", 0.045)
+	m.set_shader_parameter("moon_energy", 4.2)
+	m.set_shader_parameter("moon_halo", 0.35)
+	m.set_shader_parameter("moon_dir_sign", -1.0)
+	return m
 
 
 static func _sky_material() -> Material:

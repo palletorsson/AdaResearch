@@ -81,12 +81,27 @@
 		"on": 1,
 		"_on": "0 = no statues anywhere",
 		"per_hall": 1,
+		"per_hall_max": 4,
+		"_per_hall_max": "the ceiling; the count is dealt from the hall key between per_hall and this, so a hall always stands the same number and the bake and the replay still agree. Equal to per_hall = the old fixed count.",
+		"assortment": 1,
+		"_assortment": "0 = every body in a hall is the chapter's family, which is what the museum did for its first month - a chapter read as a room of relatives. 1 = the FIRST body still names the chapter and the rest are drawn from the whole living pool of 52 families, so a hall is a room WITH a family in it rather than a room OF one family. stella_wall is never drawn this way: it is a wall work and hangs on the west wall.",
+		"ms_budget": 1200.0,
+		"_ms_budget": "a hall has a FRAME budget, not a statue budget. Four bodies is four builds on the main thread while somebody is walking through, and the families are not equally cheap - a marched isosurface costs 20x a stack of primitives. The hall stops adding when it has spent its milliseconds and PRINTS what it dropped, because a silent cap reads as \"this hall wanted one statue\" forever after.",
 		"_per_hall": "statues per hall, on open interior cells at least clear_m from the save point (the relief is always one)",
 		"clear_m": 3.0,
 		"_clear_m": "no statue stands closer than this to the hall's save point",
 		"plinth_m": 0.42,
 		"_plinth_m": "the station plinth's top height under a standing body",
 		"figures": [],
+		"pin": {
+			"isosurfaces": "fetish_idol",
+			"qfeplaboratory": "fetish_idol",
+			"transformation": "fetish_idol",
+			"postfoundationscrisis": "fetish_idol"
+		},
+		"_pin": "chapter -> figure, OVERRIDING the deal for that chapter only. The family is normally allowed[hash(chapter) % allowed.size()], so appending ONE name to SCULPT_FIGURES reassigns the statue in EVERY chapter at once and stales the bake and every published capture. A pin does not touch the modulo: delete these four keys and the museum stands exactly what it stood before. fetish_idol is pinned to isosurfaces because the body IS that chapter's technique - it is marched out of a signed distance field by dream_iso.gd - and to the three QFEP-arc chapters because a queer, glossy, harnessed body is their argument rather than their decoration.",
+		"cell": 0.046,
+		"_cell": "0 = every family builds at its own bench value. A marched body costs ~1.7 s at fetish_idol's bench cell of 0.034 and the museum builds halls on the MAIN THREAD during play, so a coarser cell here buys the frame back. It is clamped in the builder to a MEASURED range (commons/testing/probe_iso_cell_cost.gd), because a cell that melts the collar or the platform heel does so silently - dream_iso warns only when it emits nothing at all.",
 		"_figures": "empty = all six (rocaille, stijl_robot, panel_robot, dragon, sea_forms, stella_wall). A list narrows which families the museum deals"
 	},
 	"foes": {
@@ -139,6 +154,21 @@
 		"_vr_high": "1 = the headset installs the HIGH tier instead of its default perf. On Quest's Mobile renderer SSIL/SSR/SDFGI/volumetric fog do not exist; the A/B shows what the device supports (glow, fog model, ambient, sky, grade).",
 		"ab_seconds": 0,
 		"_ab_seconds": "0 = off. N = alternate high/perf every N seconds, LIVE, in both modes — the in-headset A/B. Watch the log for [em-env] A/B -> tier. F7 swaps by hand on desktop."
+	},
+	"night": {
+		"_readme": "2026-09-05, Palle: \"Remove the ceiling in endless museum and add the night sky from sphere_world_demo.tscn also add a moon a the global moving light source.\" Three switches, not one, because they fail in three different directions: a ceiling left on hides the sky entirely, a sky that failed to load reads as a working night, and a moon that does not move is the sun with a blue filter on it. Gate: commons/testing/probe_night_museum.gd.",
+		"enabled": 1,
+		"_enabled": "1 = the dome becomes NASA's Deep Star Maps 2020 panorama (commons/scenes/em/sky/, README beside it — attribution is a licence condition) and the Sun node is rebuilt as the Moon. 0 = the north-light overcast dome and the sun, exactly as before. Independent of `ceiling` below.",
+		"ceiling": 0,
+		"_ceiling": "0 = em_detail hangs NO ceiling in any hall, so the sky is the ceiling. 1 = the coffered daylight ceiling as before. A hall can still unroof itself alone with map_info.museum.open_roof; this is the museum-wide switch and it is deliberately not tied to `enabled` — a courtyard under a daylit dome is a thing someone may want.",
+		"moon_energy": 0.55,
+		"_moon_energy": "the DirectionalLight3D's energy. The sun ran at 0.35 with em_lighting's rig behind it and 1.1 without one; the moon is higher than the sun's 0.35 because with the ceiling gone it is no longer a shaft through a slot, it is the only thing coming down. Raise toward 1.0 for a full moon, drop to 0.2 for a crescent night lit mostly by the rig.",
+		"period_s": 480,
+		"_period_s": "seconds for ONE CIRCUIT of the sky. This is the whole of \"moving\": at 480 the shadow of a wall crosses a 19 m hall in about a minute, which is legible without being a disco. Under 20 is clamped.",
+		"altitude_deg": 38,
+		"_altitude_deg": "the moon circles the zenith at this CONSTANT altitude rather than rising and setting. A real arc would put the museum in the dark for half of every period, and a low directional inside a building with no ceiling rakes every wall and lights no floor. Clamped 5..85 — at 90 the look_at is parallel to UP and has no answer.",
+		"star_energy": 1.6,
+		"_star_energy": "multiplies the panorama. The dome IS the ambient source (ambient_light_source SKY), and a photograph of space is nearly black, so this is also how much fill the stars themselves give. See NIGHT_AMBIENT in em_environment.gd for the rest of that argument."
 	},
 	"audio": {
 		"step_db": -17.0,
