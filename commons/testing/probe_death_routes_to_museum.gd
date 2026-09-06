@@ -180,6 +180,28 @@ func _run() -> void:
 		"after all three, the same museum is still in the tree — nothing reloaded the building",
 		"the museum instance is gone: something reloaded the scene, which is the whole game and not the current level")
 
+	# ── 6b. THE set_health(0) ROAD, which is DangerZone's ────────────────
+	# h:fire and h:death do not drain a bar, they call set_health(0.0) outright —
+	# straight past apply_health_damage and into _handle_player_death, which is
+	# where the scene reload lives. Under staging that reload takes the whole rig,
+	# not a hall, so the screen fades and nothing comes back.
+	if gm != null:
+		var tw1: int = Time.get_ticks_msec()
+		while bool(mus.get("_dying")) and Time.get_ticks_msec() - tw1 < 8000:
+			await process_frame
+		var dd0: int = int(mus.get("_deaths"))
+		gm.call("set_health", 0.0)
+		for _j in range(8):
+			await physics_frame
+		var dd1: int = int(mus.get("_deaths"))
+		var hp_now: float = float(gm.get("player_health"))
+		_check(dd1 > dd0,
+			"set_health(0) reached the museum's own death (%d -> %d), not the scene reload" % [dd0, dd1],
+			"set_health(0) killed the player and the museum never heard about it (deaths %d -> %d) — that is the reload road" % [dd0, dd1])
+		_check(hp_now > 0.0,
+			"  ...and the bar was put back to %.1f, so the next hit can still report a death" % hp_now,
+			"  ...and the bar was left at %.1f: every later hit compares against zero and no death is ever reported again" % hp_now)
+
 	# ── 7. AND THE GRID IS UNTOUCHED ─────────────────────────────────────
 	# Everything above is guarded by "while a museum stands in the tree". A grid
 	# map has no em_lethal node, and there the health bar, the red flash and the

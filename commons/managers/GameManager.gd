@@ -452,6 +452,31 @@ func _handle_player_death() -> void:
 	if _death_sequence_running:
 		return
 
+	# ── AND THE MUSEUM TAKES ITS OWN DEATH TOO (2026-09-06) ─────────────
+	# The guard in apply_health_damage above is one level too high. THIS is where
+	# the scene reload actually lives, and set_health() — which calls it — is
+	# public: DangerZone.gd:577 does `set_health(0.0)` outright for h:death, and
+	# fallingblocks drains it by subtraction. Neither passes through
+	# apply_health_damage, so neither saw that guard.
+	#
+	# Under XR Tools staging the reload below is worse than it looks. The tree's
+	# current_scene is the STAGING scene, not the museum staging loaded into it,
+	# so reload_current_scene() does not restart a hall — it tears the whole rig
+	# down. That is the shape of Palle's report: the screen fades and nothing
+	# comes back, because what was reloaded was everything.
+	#
+	# on_lethal_touch, not walker_bitten: arriving here means the visitor is dead,
+	# not bitten, and the museum's own death is the immediate one. The bar is put
+	# back first — set_health raises it, so no second death fires — because a
+	# museum visitor has no health bar to speak of and leaving it at zero would
+	# mean the next hit compares against zero and never reports a death again.
+	if is_inside_tree():
+		var museum: Node = get_tree().get_first_node_in_group("em_lethal")
+		if museum != null and museum.has_method("on_lethal_touch"):
+			set_health(max_player_health)
+			museum.call("on_lethal_touch", "fell")
+			return
+
 	var death_position: Vector3 = _get_player_death_position()
 	emit_signal("player_died", death_position)
 
