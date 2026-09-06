@@ -367,8 +367,47 @@ func _play_damage_beep() -> void:
 		_beep_player.stream = stream
 	_beep_player.play()
 
+## ── THE MUSEUM TAKES ITS OWN DAMAGE (2026-09-06) ────────────────────────────
+##
+## Palle: "when I get killed by silhouette the screen goes dark and nothing
+## happens", and then: "sweep the other 26".
+##
+## This function ends, when the bar reaches zero, in _handle_player_death — which
+## RELOADS THE SCENE. That is the right answer on the grid, where a scene is one
+## map and reloading it is restarting the level. It is the wrong answer in the
+## endless museum, where the scene is a 4.8 km building: the fade to black runs,
+## the reload takes the hall with it, and the visitor sits in the dark. There is
+## no map to come back to.
+##
+## Three hazards were taught this rule one at a time — head_crab, catalyst_foe,
+## and hazard_creature_base last — and each wrote the same paragraph. Twenty-six
+## more call this function DIRECTLY and never went through any of them:
+## DangerZone, fireball, plasma_critter, octapod_crawler, the vines, the fields.
+## Teaching each of them separately is twenty-six chances to miss one, and a
+## twenty-seventh written next month would miss it by default.
+##
+## So the rule lives at the choke point every one of them arrives through. While
+## a museum stands in the tree, damage is a BITE — its own lane, its own death,
+## back to a save point in the hall you died in, and the walk continues. With no
+## museum in the tree nothing below changes by a line, which is every grid map.
 func apply_health_damage(amount: float) -> void:
 	if amount <= 0.0:
+		return
+	var museum: Node = get_tree().get_first_node_in_group("em_lethal") if is_inside_tree() else null
+	if museum != null and museum.has_method("walker_bitten"):
+		# walker_bitten rate-limits itself (BITE_MIN_S), which it has to: three of
+		# these callers pass `damage * delta` every frame, and the museum's counter
+		# kills on the third bite.
+		#
+		# THE VISITOR'S OWN POSITION, which means NO SHOVE — and that is the honest
+		# answer here. walker_bitten shoves away from the biter, and at this choke
+		# point there is no biter to be had: the caller passed a number, not a
+		# place. A guessed direction would push people into walls; Vector3.ZERO
+		# would shove them away from the world origin, which is a direction with
+		# nothing to do with what hit them. The flash, the count and the death all
+		# land; only the push is skipped, by the length guard inside.
+		var at: Node3D = _resolve_player_node()
+		museum.call("walker_bitten", at.global_position if at != null and at.is_inside_tree() else Vector3.ZERO)
 		return
 	# Skip damage if player is immune (recently hurt)
 	var death_fx = get_node_or_null("/root/DeathEffect")

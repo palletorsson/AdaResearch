@@ -155,6 +155,12 @@
 		"ab_seconds": 0,
 		"_ab_seconds": "0 = off. N = alternate high/perf every N seconds, LIVE, in both modes — the in-headset A/B. Watch the log for [em-env] A/B -> tier. F7 swaps by hand on desktop."
 	},
+	"arrival": {
+		"_readme": "2026-09-06, Palle: \"when I start a new map drop me from y = 4 m.\" How a walk BEGINS — not how it continues; you walk between halls, you are only ever dropped into the first one.",
+		"drop_m": 4.0,
+		"_drop_m": "metres above the floor the visitor is placed at, in both lanes. They then fall, under the museum's own JUMP_GRAVITY of 11.0 — about 0.85 s from 4 m. 0 = stand on the floor as before. Clamped 0..12. The code's own default is 4.0, so deleting this key changes nothing; it is here to be turned down, not to be required. NOT applied to a roofed lobby (lobby.roof 1): there the roof is the height, and the drop is the visitor's own jump through the hole.",
+		"_where": "endless_museum.gd _arrival_drop, read by _drop_point — which the desktop walker takes as its start position and _vr_drop_in as the headset's. Gate: commons/testing/probe_arrival_drop.gd."
+	},
 	"night": {
 		"_readme": "2026-09-05, Palle: \"Remove the ceiling in endless museum and add the night sky from sphere_world_demo.tscn also add a moon a the global moving light source.\" Three switches, not one, because they fail in three different directions: a ceiling left on hides the sky entirely, a sky that failed to load reads as a working night, and a moon that does not move is the sun with a blue filter on it. Gate: commons/testing/probe_night_museum.gd.",
 		"enabled": 1,

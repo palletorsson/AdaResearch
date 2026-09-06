@@ -1416,6 +1416,8 @@ func _boot_museum() -> void:
 	# staging's, not ours, and may not exist for another frame or thirty
 	if _vr:
 		_vr_drop_in()
+	else:
+		_walker_drop_in()
 	if _edit_mode:
 		_arm_editor()
 	_follow_resume()
@@ -7006,6 +7008,12 @@ const DEATH_WORDS := {
 ## visitor who got away is not carrying a wound through the next three halls.
 var _bite_n: int = 0
 var _bite_at: float = 0.0
+## The shortest gap between two bites that count as two. 0.55 s leaves the crab
+## and the silhouette exactly as they were — both carry contact cooldowns near a
+## second — and turns a per-frame hazard into a bite about twice a second, so
+## standing in one is fatal in roughly a second and a half rather than in three
+## frames.
+const BITE_MIN_S := 0.55
 
 func walker_bitten(from: Vector3) -> void:
 	if _dying:
@@ -7013,6 +7021,16 @@ func walker_bitten(from: Vector3) -> void:
 	if _player == null and not _vr:
 		return
 	var now: float = float(Time.get_ticks_msec()) * 0.001
+	# ONE CONTINUOUS HAZARD IS ONE BITE, NOT SIXTY (2026-09-06). Every biter that
+	# reached here until today carried its own contact cooldown — a crab and a
+	# silhouette choose you, and choosing takes a moment. The sweep below opens
+	# this to the whole hazard corpus, and three of those deal damage PER FRAME
+	# (branching_vine, maze_spinner and swarm_hive all pass `damage * delta`). At
+	# sixty frames a second, a counter that kills on the third bite kills in 50 ms,
+	# which is not a hazard, it is a trapdoor. Anything inside this window is the
+	# same bite still happening.
+	if now - _bite_at < BITE_MIN_S:
+		return
 	if now - _bite_at > 8.0:
 		_bite_n = 0
 	_bite_at = now
@@ -22652,8 +22670,43 @@ func _drop_hole(seg: Node3D, solid: StaticBody3D) -> void:
 ## respawn uses — a room-scale player can stand two metres from their own origin,
 ## and putting the origin on the target would leave the headset that far off the
 ## roof, which at seven metres up is a miss rather than a landing.
+## THE WALKER IS PLACED TWICE, and the second time is the one that counts.
+##
+## _setup_world builds the walker and sets its position from _drop_point() —
+## before any segment exists, so the floor cast finds nothing and the arrival
+## falls back to a y of zero. That was harmless while every hall floor WAS zero.
+## It is what put Palle inside the deck of a converted transformation hall.
+##
+## The headset has never had this problem, because _vr_drop_in already runs here,
+## after segment 0 is built. This is the same call for the other lane, and it is
+## the whole of the fix: by now there is a floor to ask about.
+##
+## Left alone deliberately: a proof shot (which composes its own standpoint and
+## would photograph a falling body), the studio and the doll house (whose camera
+## is a perch, not a visitor), and a resume — _follow_resume runs after this and
+## puts the visitor back where the view toggle left them, which outranks arriving.
+func _walker_drop_in() -> void:
+	if _player == null or _shot_path != "" or _studio or _dollhouse:
+		return
+	var before: float = _player.position.y
+	var p: Vector3 = _drop_point()
+	_player.position = p
+	_player.velocity = Vector3.ZERO
+	_vy = 0.0
+	_jumps_left = 2
+	print("[em-arrive] the walker comes in at %s (was y %.2f before the hall existed) — a %.1f m fall onto the floor under it" % [
+		str(p), before, _arrival_drop()])
+
+
 func _vr_drop_in() -> void:
-	if not _vr or _L("lobby", "enabled", 1.0) <= 0.5 or _L("lobby", "drop_hole", 0.0) <= 0.5:
+	# EVERY LAUNCH, not only a lobby with a drop_hole (2026-09-06). The gate used
+	# to be the lobby's, because the only thing this did was put the visitor on
+	# the roof — so a sequence card opening at `color` placed no headset at all
+	# and the rig stayed wherever staging left it. Now that a new map begins with
+	# a fall, that is the arrival for most of the museum, and _drop_point's
+	# non-lobby branch returns the same (7.5, 1.5) the staged scene's own
+	# XROrigin3D sits at, four metres up. Same place; further to fall.
+	if not _vr:
 		return
 	var target: Vector3 = _drop_point()
 	for attempt in range(30):
@@ -22664,7 +22717,8 @@ func _vr_drop_in() -> void:
 		if rig != null and eye != null:
 			rig.global_position = _vr_drop(rig.global_position, eye.global_position, target)
 			print("[em-slide] the headset %s: rig to %s so the eye lands on %s (after %d frame(s))" % [
-				"is dropped" if _L("lobby", "roof", 1.0) > 0.5 else "starts standing",
+				("is dropped onto the roof" if _L("lobby", "roof", 1.0) > 0.5 and _L("lobby", "drop_hole", 0.0) > 0.5
+					else "falls %.1f m" % target.y),
 				str(rig.global_position), str(target), attempt])
 			return
 		await get_tree().process_frame
@@ -22679,9 +22733,68 @@ func _vr_drop_in() -> void:
 ## purpose ("a teleporter leaves the map; the museum is one endless map"), and a
 ## drop that only the first hall wants has no business being a rule every map can
 ## assert. It lives with the roof it lands on.
+## HOW FAR ABOVE THE FLOOR A NEW MAP BEGINS (2026-09-06, Palle: "when I start a
+## new map drop me from y = 4 m").
+##
+## Not the roof. The roof was seven metres and a deck you had to find a hole in,
+## and it was taken off yesterday for exactly that reason; this is a short fall
+## onto the floor you were going to stand on anyway — about 0.85 s under the
+## museum's own 11.0 gravity, which both lanes already have. Every arrival that
+## lands on a floor takes it; the roof branch below does not, because the roof IS
+## the height.
+##
+## Default 4.0 IN CODE, not only in em_layout: the layout file is an override, a
+## missing key falls back to the value here, and a drop the museum only performs
+## when a json says so is one that stops happening the moment someone ships
+## without it.
+func _arrival_drop() -> float:
+	return clampf(_L("arrival", "drop_m", 4.0), 0.0, 12.0)
+
+
+## THE ARRIVAL IS MEASURED FROM THE FLOOR, NOT FROM ZERO (2026-09-06).
+##
+## Palle: "the reason was I end up inside the floor and was stuck in
+## transformation sequence." That is the whole bug, and the drop above is the
+## remedy he asked for rather than the cause.
+##
+## Every arrival in this file was written as a y of 0.0, from a time when a hall
+## floor WAS zero. It is not any more: 7a43d2a4b made a structure value below the
+## map's wall_height a floor (v - 1) m up, and d78de3be2 converted Trans_Pre,
+## Trans_Rotation and Trans_RotationSpectacle to use it. So a visitor entering
+## the transformation chapter is placed at 0 in a room whose deck is one or two
+## metres over their head — inside it, and stuck, exactly as reported. A drop
+## alone would not fix that: four metres above ZERO is still below a deck at 4,
+## and it is only 0.1 m of fall onto one at 3.9.
+##
+## So the floor is ASKED FOR — of _walk_h, the museum's own record of how many
+## metres above the deck each walkable cell stands. NOT of a raycast: the first
+## version of this cast down from y 40 and took the first hit, which over a
+## roofed hall is the CEILING. Measured, before it shipped: it read the deck at
+## (7.5, 1.5) as 10.63 m and started the walk at 14.63, a nine-metre fall past a
+## roof onto a floor that was at zero all along. _walk_h is what the walk flood
+## itself trusts to decide which cells join, so it is the same number the
+## building was laid out with.
+##
+## Empty until a hall is built — the desktop walker is created in _setup_world,
+## before any segment exists — so a cell it does not know is zero, which is what
+## the arrival did before. _walker_drop_in() then asks again once there IS a hall,
+## and that is the half that actually lands.
+func _arrival_floor_y(x: float, z: float) -> float:
+	return float(_walk_h.get(Vector2i(int(floor(x)), int(floor(z))), 0.0))
+
+
+## Where a visitor comes in over the cell (x, z): the drop, over the floor that is
+## actually there.
+func _arrival_at(x: float, z: float) -> Vector3:
+	return Vector3(x, _arrival_floor_y(x, z) + _arrival_drop(), z)
+
+
 func _drop_point() -> Vector3:
 	if _L("lobby", "enabled", 1.0) <= 0.5 or _L("lobby", "drop_hole", 0.0) <= 0.5:
-		return Vector3(7.5, 0.0, 1.5)
+		# EVERY CHAPTER THAT IS NOT THE LOBBY comes through here — a sequence card
+		# opening at `color` or `transformation` has no drop_hole of its own — so
+		# this is the arrival for most of the museum, and it takes the drop too.
+		return _arrival_at(7.5, 1.5)
 	# ON the roof, one cell back from the hole, facing it. Not IN the hole: the
 	# jump is the visitor's, not the building's — that is the whole difference
 	# between being dropped through a floor and choosing to go in.
@@ -22704,9 +22817,9 @@ func _drop_point() -> Vector3:
 	# claims. Left alone: it is the arithmetic every roofed lobby has been built and
 	# walked against, and this map no longer takes that branch.
 	if _L("lobby", "roof", 1.0) <= 0.5:
-		var g := Vector3(hx + 0.5, 0.0, _L("lobby", "drop_z", 1.0) + 0.5)
-		print("[em-roof] no roof — the visitor starts on the floor at (%.1f, %.1f, %.1f), map cell (%d, %d)" % [
-			g.x, g.y, g.z, int(hx), int(hz) - VESTIBULE_H])
+		var g := _arrival_at(hx + 0.5, _L("lobby", "drop_z", 1.0) + 0.5)
+		print("[em-roof] no roof — the visitor arrives over the drop cell at (%.1f, %.1f, %.1f), map cell (%d, %d), and falls %.1f m" % [
+			g.x, g.y, g.z, int(hx), int(hz) - VESTIBULE_H, g.y])
 		return g
 	var y: float = WALL_H + clampf(_L("lobby", "roof_rise_m", 0.35), 0.0, 6.0) + 0.2
 	var p := Vector3(hx + 0.5, y, hz - 1.0 + 0.5)

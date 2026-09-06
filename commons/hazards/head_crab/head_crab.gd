@@ -1123,6 +1123,26 @@ func _bites(node: Node) -> bool:
 
 
 func _damage(target: Node, amount: float) -> bool:
+	# THE MUSEUM'S OWN LANE FIRST, WHOEVER WAS BITTEN (2026-09-06, Palle: "when we
+	# die from a spider from fire or silhouette I only want to restart the current
+	# level").
+	#
+	# The branch below asks whether the TARGET is the museum's walker, and in a
+	# headset there is no walker — nothing rides it, the visitor is the XR rig. So
+	# in VR this test failed, the bite fell through to apply_health_damage, and
+	# GameManager._handle_player_death answered a depleted bar by RELOADING THE
+	# SCENE: the whole 4.8 km building rebuilt from its first hall, which is not
+	# restarting the current level, it is restarting the game.
+	#
+	# catalyst_foe — the silhouette — has always looked the museum up by group and
+	# never had this. The fire never had it either; a pool calls on_lethal_touch
+	# directly. Only the spider asked about the walker, and only the spider threw
+	# the visitor out of the building. Found by grep, not by walking: on the grid
+	# there IS no em_lethal node, so that lane still takes health exactly as before.
+	var museum: Node = get_tree().get_first_node_in_group("em_lethal")
+	if museum != null and museum.has_method("walker_bitten"):
+		museum.call("walker_bitten", global_position)
+		return true
 	if target is Node3D and (target as Node3D).is_in_group("em_walker"):
 		var m: Node = _museum_over(target)
 		if m != null:

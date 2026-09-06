@@ -450,6 +450,30 @@ func _handle_contact_damage() -> void:
 func _try_damage_target(target: Object) -> bool:
 	if target == null:
 		return false
+	# ── THE MUSEUM DECIDES WHILE IT STANDS (2026-09-06) ─────────────────
+	# Palle: "when I get killed by silhouette the screen goes dark and nothing
+	# happens."
+	#
+	# head_crab and catalyst_foe each learned this rule separately and each wrote
+	# it down — on the grid a creature takes health, in the museum it calls the
+	# museum, because GameManager's death path RELOADS THE SCENE and an endless
+	# walk must never do that. Neither of them fixed it HERE, and this is the
+	# path every creature actually falls down: _handle_contact_damage runs off
+	# slide collisions every physics frame, and it calls this.
+	#
+	# So the silhouette had two ways to hurt you. Its own _sil_contact_tick knows
+	# about the museum and is the one that got the attention; the base's contact
+	# does not, and when that one landed the hit it drained the bar, and a bar at
+	# zero fades to black and reloads — which in the museum is a black screen and
+	# nothing else, because there is no map to come back to. Both roads, one rule.
+	#
+	# On the grid there is no em_lethal node in the tree and every line below runs
+	# exactly as it did. 43 subclasses inherit this and none of them has to know.
+	if is_inside_tree():
+		var museum: Node = get_tree().get_first_node_in_group("em_lethal")
+		if museum != null and museum.has_method("walker_bitten"):
+			museum.call("walker_bitten", global_position)
+			return true
 	if target.has_method("apply_health_damage"):
 		target.apply_health_damage(contact_damage)
 		return true
