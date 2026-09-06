@@ -21285,6 +21285,11 @@ func _derive_map_row(map_name: String) -> Dictionary:
 	if _wall_threshold_run > 0:
 		_wall_h = _wall_threshold_run
 	var heights: Dictionary = {}
+	# THE GRID CLAMPS A STACK to dimensions.max_height (GridStructureComponent:
+	# min(stack_height, grid_y)), so a 3 in a max_height-2 map is two cubes there.
+	# The museum clamps the same way, or the two engines would differ by a metre.
+	var _dims: Dictionary = _mi.get("dimensions", {}) if _mi.get("dimensions") is Dictionary else {}
+	var _max_h: int = int(float(_dims.get("max_height", 6)))
 	var inter: Array = layers.get("interactables", [])
 	var r1 := -1
 	var c1 := -1
@@ -21327,7 +21332,7 @@ func _derive_map_row(map_name: String) -> Dictionary:
 				line.append("4" if v >= _wall_h else ("1" if v >= 1 else "0"))
 				# the raised floor: between the deck and the wall, (v - 1) m up
 				if v > 1 and v < _wall_h:
-					heights[Vector2i(c, r)] = float(v - 1)
+					heights[Vector2i(c, r)] = float(maxi(1, mini(v, _max_h)) - 1)
 		tile.append(line)
 	var arts: Array = []
 	for r in range(inter.size()):
@@ -21369,7 +21374,7 @@ func _derive_map_row(map_name: String) -> Dictionary:
 						plat_h = float(maxi(1, int(str(uv.split(":")[1]))))
 			var art: Dictionary = {"token": String(parts[0]), "cell": [c, r], "tile_cell": [c, r],
 				"rotation": ((rot % 360) + 360) % 360, "mode": "freestanding",
-				"venue": "interior", "support_height_m": plat_h if plat_h > 0.0 else (float(under - 1) if under > 1 and under < _wall_h else (0.95 if under >= 2 else 0.0)),
+				"venue": "interior", "support_height_m": plat_h if plat_h > 0.0 else (float(maxi(1, mini(under, _max_h)) - 1) if under > 1 and under < _wall_h else (0.95 if under >= 2 else 0.0)),
 				"hand": false, "ruled": {"by": "map: " + map_name, "cell": [c, r]}}
 			if not cfg.is_empty():
 				art["config"] = cfg
