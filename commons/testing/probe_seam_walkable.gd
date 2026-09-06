@@ -28,13 +28,27 @@ func _arg(n: String, fb: String) -> String:
 
 func _run() -> void:
 	var metres := float(_arg("metres", "300"))
+	# WHERE THE FLOOD STARTS (2026-09-06). The walk chokes at Point_Trace, so a
+	# flood from the first hall never reaches the transformation chapter and every
+	# verdict past 75 m inherits that stranding. --chapter= and --map= open the
+	# museum at a hall the way em_control's first_chapter/first_map do, and the
+	# flood seeds in that hall's first row.
+	var chapter := _arg("chapter", "")
+	var map_name := _arg("map", "")
 	var inst: Node3D = (load("res://commons/scenes/endless_museum.tscn") as PackedScene).instantiate() as Node3D
 	inst.set("EM_CONTROL", "res://ada_run/_trial_sw_control.json")
 	inst.set("_overrides_path", "res://ada_run/em_overrides.json")
 	inst.set("_hand_path", "res://ada_run/necklace_hand.json")
 	inst.set("_force_patient", true)
+	# the Inspector fields the museum opens at (start_chapter / start_map);
+	# --em-chapter= / --em-map= on the command line reach it too, since the
+	# museum parses the user args itself
+	if chapter != "":
+		inst.set("start_chapter", chapter)
+	if map_name != "":
+		inst.set("start_map", map_name)
 	var ctl := FileAccess.open("res://ada_run/_trial_sw_control.json", FileAccess.WRITE)
-	ctl.store_string(JSON.stringify({"first_chapter": "", "first_map": "",
+	ctl.store_string(JSON.stringify({"first_chapter": chapter, "first_map": map_name,
 		"dollhouse": 0, "grid_pack": 0}, " "))
 	ctl.close()
 	get_root().add_child(inst)
@@ -199,6 +213,31 @@ func _run() -> void:
 					elif er.has(cc2):
 						line2 += "  %d:%s" % [xx2, String(er[cc2])]
 				rep += line2 + "\n"
+			# THE FRONTIER, not the last row (2026-09-06). Trans_Translation's pool
+			# margin walked to z=32 while its crossing was severed at z=24, so the
+			# rows above named the wrong place. The cells the walk touches and cannot
+			# enter - map cells cut off, and bodies standing at the edge - are where
+			# the severance actually is, and the body's reason names the culprit.
+			var edge: Array = []
+			for k6 in seen:
+				var c6: Vector2i = k6
+				if c6.y < int(frontier["z0"]) or c6.y >= int(frontier["z1"]) + 4:
+					continue
+				for d6_v in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+					var n6: Vector2i = c6 + (d6_v as Vector2i)
+					if seen.has(n6):
+						continue
+					if cells.has(n6):
+						edge.append("(%d,%d) CUT-OFF beside (%d,%d)" % [n6.x, n6.y, c6.x, c6.y])
+					elif er.has(n6):
+						edge.append("(%d,%d) %s beside (%d,%d)" % [n6.x, n6.y, String(er[n6]), c6.x, c6.y])
+			edge.sort()
+			if not edge.is_empty():
+				rep += "\n  the frontier - what the walk touches and cannot enter:\n"
+				for i6 in range(mini(14, edge.size())):
+					rep += "    %s\n" % String(edge[i6])
+				if edge.size() > 14:
+					rep += "    ... %d more\n" % (edge.size() - 14)
 	# WHY A CELL LEFT THE WALK MAP. The museum erases cells with a reason -
 	# _walk_erased[cell] = "seal:<token>" - so a severed route can name the body
 	# that severed it instead of being a mystery.

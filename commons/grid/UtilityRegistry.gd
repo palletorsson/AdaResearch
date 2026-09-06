@@ -911,6 +911,46 @@ static func transport_span(node: Node3D, start: Vector2i) -> Array:
 	return out
 
 
+## THE BRIDGE IS ITS LENGTH (2026-09-06). br:AXIS:LENGTH lays LENGTH cells of
+## floor beyond its own cell along AXIS - the cells the grid's bridge_path
+## covers and tools/map_pathfinder.py walks. The museum's walk map recorded the
+## placement cell alone, so a three-cell bridge over a pit read as one cell of
+## floor and two of hole, and the hall measured severed at its own bridge.
+static func bridge_span(start: Vector2i, parameters: Array) -> Array:
+	var bp: Dictionary = bridge_params(parameters)
+	var d := Vector2i(1, 0)
+	match String(bp["axis"]):
+		"z":
+			d = Vector2i(0, 1)
+		"-z":
+			d = Vector2i(0, -1)
+		"-x":
+			d = Vector2i(-1, 0)
+		_:
+			d = Vector2i(1, 0)
+	var out: Array = [start]
+	for s in range(1, int(bp["length"]) + 1):
+		out.append(start + d * s)
+	return out
+
+
+## THE PLANK IS A CROSSING (2026-09-06). A stepping plank, or a turntable
+## (continuous about y), stands at the centre of a 3x3 hole and is walked
+## across along either axis: its banks two cells out connect through the cells
+## one out and the centre. A cube rolling about x or z is spectacle and crosses
+## nothing. tools/map_pathfinder.py draws the same line since 0298271bd, and a
+## gate compares across implementations, so the museum asks this function
+## rather than deciding for itself.
+static func plank_cross(start: Vector2i, parameters: Array) -> Array:
+	var rp: Dictionary = rotation_params(parameters)
+	if String(rp.get("mode", "step")) == "continuous":
+		var ax_v: Variant = rp.get("continuous_axis", Vector3.RIGHT)
+		var ax: Vector3 = (ax_v as Vector3).normalized() if ax_v is Vector3 else Vector3.RIGHT
+		if not ax.is_equal_approx(Vector3.UP) and not ax.is_equal_approx(Vector3.DOWN):
+			return []
+	return [start, start + Vector2i(1, 0), start + Vector2i(-1, 0), start + Vector2i(0, 1), start + Vector2i(0, -1)]
+
+
 ## THE EMBEDDED GRID'S RIDES (2026-09-05). A hall that embeds the real GridSystem
 ## (map_info.museum.simulation.grid) gets the grid's own transport cubes, which
 ## watch layer 20 - the grid's player layer - while the museum's walker stands

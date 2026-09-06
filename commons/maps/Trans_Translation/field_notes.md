@@ -228,3 +228,24 @@ MeshInstance3D, hidden or not. It is built at the moment of the crossing now,
 so the cube seals its one cell; the registry's measured footprint (17) is stale
 by the same amount. The Spectacle's twelve stood exactly where placed, because
 its rows are thirteen wide.
+
+## 2026-09-06 - the seam into Trans_AxisDecomposition
+
+The museum's own flood, seeded in this hall, never entered
+Trans_AxisDecomposition (0 of 363 cells) while the ledger drew every crossing
+cell as floor. The door in the last row is at x4-5; the crossing's first row
+opened at x5-6, because the museum takes the open cell nearest its centre line
+(x7 of the tile padded to 15) and that is the door's far cell: a two-wide door
+met through one cell. The bench placer then stood a bench on that one shared
+cell, (5,24), and the walk was cut with no seal to name it. The museum's
+arrival test passed the hall anyway: the pool margin at x -2..-1 reaches the
+band's last row and stops dead at the next vestibule.
+
+Fixed in the museum, not in the map: the crossing slides into the door's run
+(4-5), a bench needs its 3x2 block open, the finish line lies inside the
+tile's columns. Flooded after: 395 of 461 cells here, Axis 308 of 358, and the
+chapter walks from Trans_Pre to Trans_Pit. The 66 cells unreached here are the
+east pool margin (x15-16 over 33 rows), laid beyond the five void columns the
+tile was padded with to meet the wider neighbour; nothing reaches them and
+nothing needs to. An embedded grid is a flat floor to the walk map: its walls
+and holes are unknown, which is why the count is a shape, not a route.

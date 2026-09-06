@@ -7047,7 +7047,12 @@ func _stamp_utility(spec: String, cell: Vector2i, seg: Node3D, zbase: int) -> No
 	# a moving surface is a RIDE, never promised floor; a bridge is floor
 	var gc := Vector2i(cell.x, zbase + cell.y)
 	if code == "br":
-		_walk_cells[gc] = true
+		# THE BRIDGE IS ITS LENGTH (2026-09-06): every cell it spans is floor,
+		# not only the one it is placed in. Recorded as one cell, a three-cell
+		# bridge over a pit read as one cell of floor and two of hole, and the
+		# flood declared Trans_RotationSpectacle severed at its own bridge.
+		for c_b in UtilityRegistry.bridge_span(gc, params):
+			_walk_cells[c_b] = true
 	else:
 		_ride_cells[gc] = code
 		# A RIDE IS A SPAN, NOT A CELL (2026-08-26). Only the cube's start cell
@@ -7064,6 +7069,15 @@ func _stamp_utility(spec: String, cell: Vector2i, seg: Node3D, zbase: int) -> No
 			# grid asks the same function (UtilityRegistry.transport_span)
 			for c_v in UtilityRegistry.transport_span(node, gc):
 				_ride_cells[c_v] = code
+		elif code == "rc":
+			# THE PLANK IS A CROSSING (2026-09-06). The flood said "rides in this
+			# band: NONE" of a hall whose only crossings were planks: a stepping
+			# plank or a turntable joins its banks through the cells one out and
+			# its centre, a cube rolling about x or z joins nothing - the line
+			# tools/map_pathfinder.py draws, asked of UtilityRegistry so the two
+			# readers cannot drift.
+			for c_r in UtilityRegistry.plank_cross(gc, params):
+				_ride_cells[c_r] = code
 	return node
 
 
@@ -12851,6 +12865,23 @@ func _hall_reach_repair(seg: Node3D, zbase: int, hall: String) -> void:
 	var z_hi: int = zbase
 	while z_hi < zbase + 400 and _band_has_row(z_hi):
 		z_hi += 1
+	# THE BAND DOES NOT END AT A HOLE (2026-09-06). A row with no walk cell at
+	# all - three rows of plank holes walled at both sides, as in
+	# Trans_RotationSpectacle - used to end the band here, so the finish line
+	# was drawn in front of the pit and neither the test nor the repair ever saw
+	# it. The hall's own tile says how deep the hall is; the band runs at least
+	# to its last row.
+	var tile_rows_v: Variant = seg.get_meta("em_tile", []) if seg != null and is_instance_valid(seg) else []
+	if tile_rows_v is Array and not (tile_rows_v as Array).is_empty():
+		var z_tile_end: int = zbase + VESTIBULE_H + (tile_rows_v as Array).size()
+		if z_tile_end > z_hi:
+			z_hi = z_tile_end
+	# the tile's columns: the finish line may not be a pool margin (_hall_arrives)
+	var x_lo: int = -99999
+	var x_hi: int = 99999
+	if tile_rows_v is Array and not (tile_rows_v as Array).is_empty() and (tile_rows_v as Array)[0] is Array:
+		x_lo = 0
+		x_hi = ((tile_rows_v as Array)[0] as Array).size() - 1
 	if z_hi <= zbase + 2:
 		return
 	var band_free: Array = []
@@ -12861,7 +12892,7 @@ func _hall_reach_repair(seg: Node3D, zbase: int, hall: String) -> void:
 	if band_free.size() < 6:
 		return
 	var z_end: int = z_hi - 1
-	if _hall_arrives(zbase, z_end):
+	if _hall_arrives(zbase, z_end, x_lo, x_hi):
 		return
 	# grouped by the body that took them, nearest-the-wall first: the smallest
 	# body that reopens the hall is the one to move, not the largest.
@@ -12890,7 +12921,7 @@ func _hall_reach_repair(seg: Node3D, zbase: int, hall: String) -> void:
 		var free2: Array = band_free.duplicate()
 		for c3b in cells:
 			free2.append(c3b)
-		var opens: bool = _hall_arrives(zbase, z_end)
+		var opens: bool = _hall_arrives(zbase, z_end, x_lo, x_hi)
 		if not opens:
 			for c4 in cells:
 				_walk_cells.erase(c4)
@@ -12913,7 +12944,7 @@ func _hall_reach_repair(seg: Node3D, zbase: int, hall: String) -> void:
 		else:
 			# nowhere to stand that does not close the hall again. Take it in before
 			# taking it out — a smaller spectacle is still the spectacle.
-			var shrunk: float = _hall_shrink_body(seg, tok2, zbase, z_end)
+			var shrunk: float = _hall_shrink_body(seg, tok2, zbase, z_end, x_lo, x_hi)
 			if shrunk > 0.0:
 				moved.append("%s to %d%%" % [tok2, int(round(shrunk * 100.0))])
 			else:
@@ -12922,7 +12953,7 @@ func _hall_reach_repair(seg: Node3D, zbase: int, hall: String) -> void:
 				_hall_move_body(seg, tok2, Vector2i.ZERO, true)
 				pulled.append(tok2)
 			band_free = free2
-		if _hall_arrives(zbase, z_end):
+		if _hall_arrives(zbase, z_end, x_lo, x_hi):
 			break
 	# no body is in the way: the hole is. Lay a plank over the narrowest part.
 	if moved.is_empty() and pulled.is_empty():
@@ -13041,8 +13072,14 @@ func _reach_rebuild() -> void:
 ## of them. Asking about entry cannot be gamed: the hall behind it either lets
 ## the visitor through or it does not, and a hall severed in its middle is
 ## caught when the NEXT hall asks the same question.
-func _hall_arrives(zbase: int, z_end: int) -> bool:
+func _hall_arrives(zbase: int, z_end: int, x_lo: int = -99999, x_hi: int = 99999) -> bool:
 	_reach_rebuild()
+	# THE FINISH LINE LIES INSIDE THE TILE (2026-09-06). A simulation hall's
+	# pool margins run beside the crossing to the end of the band and stop dead
+	# at the next vestibule, so "some cell of the last row is reached" was true
+	# of Trans_Translation while its crossing stood severed - the museum passed
+	# the hall and blamed the next one. The caller names the tile's columns; a
+	# cell outside them proves nothing about the door.
 	# THE FINISH LINE IS PINNED. It is the hall's last KNOWN row — sealed cells
 	# counted — because carousel_cake seals the last nine rows of its hall, and
 	# a finish line drawn through free cells only would simply retreat in front
@@ -13060,7 +13097,7 @@ func _hall_arrives(zbase: int, z_end: int) -> bool:
 		return true
 	for k3 in _walk_cells:
 		var c3: Vector2i = k3
-		if c3.y == z_top and _reach.has(c3):
+		if c3.y == z_top and c3.x >= x_lo and c3.x <= x_hi and _reach.has(c3):
 			return true
 	return false
 
@@ -13073,7 +13110,7 @@ func _hall_arrives(zbase: int, z_end: int) -> bool:
 ## the spectacle the room was built for. So the museum takes it in, a step at a
 ## time, until the visitor can get past — and says by how much, because a cake at
 ## 65% is a fact Palle may want to answer with a wider room instead.
-func _hall_shrink_body(seg: Node3D, tok: String, zbase: int, z_end: int) -> float:
+func _hall_shrink_body(seg: Node3D, tok: String, zbase: int, z_end: int, x_lo: int = -99999, x_hi: int = 99999) -> float:
 	var n3: Node3D = _hall_find_body(seg, tok)
 	if n3 == null:
 		return 0.0
@@ -13094,7 +13131,7 @@ func _hall_shrink_body(seg: Node3D, tok: String, zbase: int, z_end: int) -> floa
 			if _walk_cells.has(c3):
 				_walk_cells.erase(c3)
 			_walk_erased[c3] = "seal:%s" % tok
-		if _hall_arrives(zbase, z_end):
+		if _hall_arrives(zbase, z_end, x_lo, x_hi):
 			return float(s)
 	# even at a third it still walls the hall: put it back and let the caller
 	# reach for the last rung
@@ -13777,6 +13814,14 @@ func _dress_fixtures(seg: Node3D, solid: StaticBody3D, tile: Array, w: int, zbas
 			if String(_tile_at(tile, x, y - 1)) != "1" or String(_tile_at(tile, x, y + 1)) != "1":
 				continue
 			if String(_tile_at(tile, x - side, y)) != "1":
+				continue
+			# AND THE FAR SIDE MUST JOIN BOTH ENDS (2026-09-06). Floor beside the
+			# bench is no way past it unless it also touches the cells before and
+			# after: Trans_Translation's door met its crossing through one shared
+			# cell, the bench took that cell, and the detour on the far side led
+			# into the wall of the crossing's first row. With the 3x2 block open,
+			# every route through the cell reroutes around the bench.
+			if String(_tile_at(tile, x - side, y - 1)) != "1" or String(_tile_at(tile, x - side, y + 1)) != "1":
 				continue
 			# NOT OVER WATER. The basin sinks its cells 2 m and the bench knew
 			# nothing about it, so one stood in the pool at the origin with its
@@ -21338,6 +21383,22 @@ func _authored_passages(tile_in: Array, decl: Dictionary = {}, next_first: Array
 	if kind == "none":
 		return tile        # the halls meet at their own doors; no added rows
 	var cl: int = _open_col(tile, tile.size() - 1)
+	# THE CROSSING MEETS THE WHOLE DOOR (2026-09-06). _open_col answers the open
+	# cell nearest the centre line, which for a two-wide door left of centre is
+	# the door's FAR cell - so the crossing's first row opened one cell past the
+	# door and met it through a single cell: a one-wide join wearing a two-wide
+	# door's width. Trans_Translation's door at 4-5 was met at 5-6, a bench then
+	# stood on the one shared cell, and the chapter was severed there. The run
+	# the door belongs to is measured and the opening is slid to lie within it.
+	var last_row: Array = tile[tile.size() - 1]
+	var run_a: int = cl
+	var run_b: int = cl
+	while run_a - 1 >= 0 and String(last_row[run_a - 1]) in ["1", "1s"]:
+		run_a -= 1
+	while run_b + 1 < last_row.size() and String(last_row[run_b + 1]) in ["1", "1s"]:
+		run_b += 1
+	if run_b - run_a + 1 >= pw:
+		cl = clampi(cl, run_a, run_b - pw + 1)
 	# THE SEAM ROW, fitted to this hall's width. The next hall is laid from x 0
 	# like every hall, so the copy is left-aligned; a narrower one is padded with
 	# WALL rather than void, because void at the tile edge is a hole in the
