@@ -1102,6 +1102,15 @@ var _cam: Camera3D
 # already dressed them; on the desktop the walker is a bare CharacterBody3D with
 # no XR rig anywhere in the tree, so the costume has to be handed a head.
 var _costume_on: bool = true
+# TWO FLAGS FOR LOOKING (2026-09-06, Palle: "can I see how it would look in the
+# museum style with low museum walls instead?"). --em-no-sim builds a hall that
+# declares museum.simulation as an ordinary map-authored hall - its structure as
+# the tile, its rides stamped, its bodies dealt - and --em-wall-h=<m> lowers the
+# tile's own walls for the run (the skin, the vestibule and the crossings keep
+# WALL_H, and the wall dressing stays off, since its cornices sit at 4.5 m).
+# Neither touches a map or a plan; both are for a proof shot.
+var _no_sim: bool = false
+var _wall_h_run: float = -1.0
 var _wardrobe: Node = null
 var _costume_hall: String = ""
 var _yaw: float = 0.0
@@ -1630,6 +1639,10 @@ func _parse_args() -> void:
 			_dollhouse_asked = true
 		elif a == "--em-no-costume":
 			_costume_on = false
+		elif a == "--em-no-sim":
+			_no_sim = true
+		elif a.begins_with("--em-wall-h="):
+			_wall_h_run = clampf(float(a.substr(12)), 0.3, WALL_H)
 		elif a == "--em-test-collision":
 			_test_collision = true
 		elif a.begins_with("--em-autopilot="):
@@ -4113,12 +4126,13 @@ func _add_col(body: StaticBody3D, pos: Vector3, size: Vector3) -> void:
 ## museum that never opted in is built exactly as before. With it ON the cell
 ## is only recorded, and _stamp_wall_runs emits one box per straight run.
 func _wall_at(seg: Node3D, solid: StaticBody3D, cells: Dictionary, x: int, z: int,
-		col: Color, mat: Material, runs_on: bool) -> void:
+		col: Color, mat: Material, runs_on: bool, h: float = -1.0) -> void:
 	if runs_on:
 		cells[Vector2i(x, z)] = true
 		return
-	_box(seg, Vector3(x + 0.5, WALL_H / 2.0, z + 0.5), Vector3(1, WALL_H, 1), col, mat)
-	_add_col(solid, Vector3(x + 0.5, WALL_H / 2.0, z + 0.5), Vector3(1, WALL_H, 1))
+	var hh: float = h if h > 0.0 else WALL_H
+	_box(seg, Vector3(x + 0.5, hh / 2.0, z + 0.5), Vector3(1, hh, 1), col, mat)
+	_add_col(solid, Vector3(x + 0.5, hh / 2.0, z + 0.5), Vector3(1, hh, 1))
 
 ## Passages: a 1-cell gap in a wall run is a 1 m door — domestic, and in VR it
 ## reads tighter still. Palle's walk verdict: "the passages are too small."
@@ -7495,7 +7509,7 @@ func _build_segment() -> void:
 			# side we can walk"): museum.simulation {depth, margin} is the
 			# whole pattern in one key — courtyard roof, the ENTIRE map sunk
 			# as one basin (auto-sized to the tile), margins laid museum-side.
-			if mm.get("simulation") is Dictionary:
+			if mm.get("simulation") is Dictionary and not _no_sim:
 				var simd: Dictionary = mm["simulation"]
 				peek["open_roof"] = true
 				var map_h: int = (peek["tile"] as Array).size()
@@ -8406,7 +8420,9 @@ func _build_segment() -> void:
 					_box(seg, Vector3(x + 0.5, 0.3, z + 0.5), Vector3(1, 1.0, 1), Color(0.35, 0.27, 0.16), m_plinth)
 					_add_col(solid, Vector3(x + 0.5, 0.3, z + 0.5), Vector3(1, 1.0, 1))
 				"4":
-					_wall_at(seg, solid, wcells, x, z, wall_col, m_wall, wr)
+					# --em-wall-h lowers the tile's own walls only, one box each
+					_wall_at(seg, solid, wcells, x, z, wall_col, m_wall,
+						wr and _wall_h_run < 0.0, _wall_h_run)
 			# PLATFORMS ("p", "p2", "p3"… — 2026-08-23, the letter that ends
 			# the double meaning of "2"): a real climbable block of N metres,
 			# floored on top, artifact-bearing, NEVER a wall. The walk map
@@ -8588,7 +8604,7 @@ func _build_segment() -> void:
 			dress_tile.append(drow)
 	var dress_seg_no: int = _seg_index
 	var dress_pass := func() -> void:
-		if _mod_has(_mod_detail, "dress_segment") and _bodies_on:
+		if _mod_has(_mod_detail, "dress_segment") and _bodies_on and _wall_h_run < 0.0:
 			# THE SEVENTH ARGUMENT IS THE WALL FURNITURE WIRE. em_budget has always
 			# licensed hung showings per building (Soane 80, a bare-wall building 0)
 			# and dress_segment had no parameter to receive the licence, so 60-70% of
@@ -10291,7 +10307,7 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 	var mus_g: Variant = (minfo_g as Dictionary).get("museum") if minfo_g is Dictionary else null
 	if mus_g is Dictionary:
 		var sim_g: Variant = (mus_g as Dictionary).get("simulation")
-		if sim_g is Dictionary and bool((sim_g as Dictionary).get("grid", false)):
+		if sim_g is Dictionary and bool((sim_g as Dictionary).get("grid", false)) and not _no_sim:
 			# WATER LEVEL (2026-08-24, Palle: "the pool basin should be deep
 			# but the grid simulation boxes should be at water level"). The
 			# grid used to stand on the pool FLOOR, so deepening the basin
