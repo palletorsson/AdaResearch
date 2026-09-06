@@ -89,3 +89,50 @@ room is built to read without them: the inner wall gives stage one its silence,
 the pairs rhyme down two columns, and the summit is the standpoint from which
 every difference is one picture. The rainbows are still unmeasured with ten
 cubes in one hall. Nobody has walked it in the headset.
+
+## 2026-09-06 - the motion gallery
+
+Palle: *"trans_pre we should show case motion transformation one pick up cube up
+down oscillation one cube rotate, one cube scale oscillation, then combine them,
+result this is how we a mario pick up cube, tutorial basic motion, get me"*.
+
+The room gained a second half: a threshold wall with one door, three cubes in
+single file each doing one motion, then the composition and the plain pick-up
+cube side by side with the card between them. 11x21 became 11x27.
+
+**The punchline had to be corrected before it could be built.** The proposal was
+that the three composed IS the pick-up cube. It is not: `pick_up_cube.gd`
+composes exactly two - `rotate_y` and a sine on y - and has no scale. A skeptic
+caught it. What is true, and better, is what the room now says: the pick-up cube
+does two of the three, and performs the third once, as its collection effect
+tweens the mesh to 1.5x on the way out. So the last pair's difference is a
+SUBTRACTION, the only one in the room: everything until then added a difference.
+
+**The artifact.** `pick_up_cube` gained `motion` (idle / slide / turn / swell /
+all / still), `pulse_scale` + `pulse_speed`, and `hold` (collect / demo). All
+default-off: `motion: "idle"` writes nothing, so the 186 placements across 64
+maps are untouched. `commons/testing/probe_pickup_motion.gd` measures each word
+over half a second and asserts what moved.
+
+**Why the motion is a WORD and not a rate.** The grid's config parser reads an
+unlisted key with a float value as the tutorial shorthand
+(`GridInteractablesComponent._parse_config_token`), so `#pulse_scale:0.3` is
+swallowed there while working in the museum. A word-valued key takes the same
+path in both engines. The numeric keys are read too, for a hand that wants an
+exact rate, but they only reach the artifact in a museum hall until
+`CONFIG_PARAM_NAMES` learns their names - **which also means the one existing
+`#bob_height:0.0` in the corpus (Museum_AAA_Test_Cohort_10) is broken in the grid
+today**, and so are five `#rotation_speed:` tails on other artifacts.
+
+**The pulse writes the visuals, never the root.** The root's scale is already
+spoken for by the token's fourth field, by the dress key and by the museum's own
+stamp, so it scales `CubeBaseMesh` and the `DnaDressing` holder about the cube's
+centre. The museum's seal is measured in the frame the body is added, before the
+first pulse, so it seals the rest size - a 0.3 amplitude on a 0.5 m cube peaks at
+0.65 m and still fits its cell.
+
+**Left standing.** Nobody has walked it in the headset. The five pick-up cubes
+are a second artifact family in a room whose notes say "one artifact, five
+stages" - that is deliberate punctuation (the static half is the yellow mario
+cube, the motion half the black wire pickup) but it is a change of voice worth
+Palle's eye.

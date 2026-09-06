@@ -34,3 +34,32 @@ A card on the landing as the room comes back down. Walk within a metre and a hal
 Every later room in this chapter is a floor with holes in it, and every hole is the trace of one of these three differences, used as a way through. This room is the differences at rest. Learn to see them here, between a block and its copy, and you will see them in the floor.
 
 Next: three cubes, three pits, and the same three differences put to work.
+
+## And then the same three, in time
+
+<!-- @pick_up_cube -->
+
+A wall closes the climb, with one door in it. Everything behind you needed two
+cubes, a thing and its copy, differing in one way. Everything ahead needs one,
+because the copy is the same cube a moment later.
+
+Three cubes stand in single file down the middle of a flat hall, one to a row,
+and each does exactly one thing. The first only rises and falls. The second only
+turns. The third only grows and shrinks. You walk past them one at a time and
+you cannot see two at once, which is the difference between the two halves of
+this room: a difference in space you compare by looking, a difference in time
+you compare by remembering.
+
+```gdscript
+rotate_y(rotation_speed * delta)
+global_position.y = original_y + sin(time_passed * bob_speed) * bob_height
+```
+
+Then the room goes back to pairs. On the left a cube doing all three at once. On
+the right a plain pick-up cube, the object this museum has handed you a hundred
+times, and the two lines above are its whole idle animation: a rotation and a
+translation, composed, forever. It has always been two of the three. The third
+it performs exactly once, when you walk into it and it swells and is gone.
+
+A transformation applied once is a difference. Applied every frame, it is a
+motion. There is nothing else in it.

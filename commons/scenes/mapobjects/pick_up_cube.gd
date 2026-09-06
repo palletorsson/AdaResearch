@@ -77,6 +77,31 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 @export var bob_height: float = 0.2
 @export var bob_speed: float = 2.0
 
+## THE MOTION, AS A WORD (2026-09-06, Palle: "one pick up cube up down
+## oscillation one cube rotate, one cube scale oscillation, then combine them").
+## This cube has always composed two transformations forever - rotate_y is a
+## rotation, the sine on y is a translation - and a room that wants to show one
+## of them ALONE needs to name it. A word and not a rate, because the grid reads
+## an unlisted config key with a float value as the tutorial shorthand, so
+## `#pulse_scale:0.3` is swallowed there while working in the museum; a word
+## takes the same path in both. "idle" writes nothing and is the shipped
+## behaviour, so every existing placement is untouched.
+##   idle   leave the exports as authored - a bob and a spin (the default)
+##   slide  the bob alone       - translation, over and over
+##   turn   the spin alone      - rotation, over and over
+##   swell  the pulse alone     - scale, over and over
+##   all    the three composed  - a Mario block
+##   still  nothing moves
+@export_enum("idle", "slide", "turn", "swell", "all", "still") var motion: String = "idle"
+## The scale oscillation the cube did not have: a fraction of its own size, so
+## 0.3 breathes between 0.7x and 1.3x. 0.0 is off and writes nothing.
+@export var pulse_scale: float = 0.0
+@export var pulse_speed: float = 2.0
+## A DEMONSTRATION IS NOT A PICKUP. "demo" disarms the detection volume, so the
+## cube keeps its place and its motion when a body walks into it. The scale a
+## pick-up cube performs is its collection: it swells once, as it goes.
+@export_enum("collect", "demo") var hold: String = "collect"
+
 # Mario-style sound parameters
 @export var freq_start: float = 440.0  ## Start frequency (200-800 Hz)
 @export var freq_end: float = 880.0    ## End frequency (400-1200 Hz)
@@ -136,7 +161,9 @@ func _ready() -> void:
 	# and is not affected by what the body turns out to be made of. Reads the
 	# config_* metadata the grid sets BEFORE add_child(), then builds. Returns
 	# immediately on the legacy lineage (wire / none) — see _build_dna().
+	_pulse_capture()
 	_read_meta_overrides()
+	_apply_motion()
 	_build_dna()
 
 func _process(delta: float) -> void:
@@ -150,6 +177,66 @@ func _process(delta: float) -> void:
 	time_passed += delta
 	var bob_offset = sin(time_passed * bob_speed) * bob_height
 	global_position.y = original_y + bob_offset
+	# THE THIRD MOTION (2026-09-06). Gated on the amplitude, which is 0.0 in the
+	# shipped defaults and in all 186 existing placements: not one property is
+	# written unless a map asked for it. It rides time_passed, the same clock as
+	# the bob, so a composed cube reads as ONE motion and not as three.
+	if pulse_scale > 0.0:
+		_apply_pulse(1.0 + pulse_scale * sin(time_passed * pulse_speed))
+
+
+## The authored transform of the body, taken once.
+func _pulse_capture() -> void:
+	if _pulse_captured:
+		return
+	_pulse_captured = true
+	_pulse_mesh = _base_mesh()
+	if _pulse_mesh != null:
+		_pulse_mesh_scale0 = _pulse_mesh.scale
+
+
+## Scale the body and its dressing about the cube's own centre. The dressing is
+## authored in ROOT space around CORE, so it is scaled ABOUT CORE - scaling it
+## about its own origin would make the film and the body breathe about two
+## different points and visibly separate. The holder is looked up every frame
+## because a late stock/custody config frees and rebuilds it.
+func _apply_pulse(s: float) -> void:
+	if _pulse_mesh != null and is_instance_valid(_pulse_mesh):
+		_pulse_mesh.scale = _pulse_mesh_scale0 * s
+	var holder: Node3D = get_node_or_null("DnaDressing") as Node3D
+	if holder != null:
+		holder.scale = Vector3.ONE * s
+		holder.position = CORE * (1.0 - s)
+
+
+## The word becomes the rates. Only ever called when a map named a motion, so
+## the shipped exports stand untouched for every placement that did not.
+func _apply_motion() -> void:
+	match motion:
+		"slide":
+			rotation_speed = 0.0
+			pulse_scale = 0.0
+		"turn":
+			bob_height = 0.0
+			pulse_scale = 0.0
+		"swell":
+			rotation_speed = 0.0
+			bob_height = 0.0
+			if pulse_scale <= 0.0:
+				pulse_scale = 0.3
+		"all":
+			if pulse_scale <= 0.0:
+				pulse_scale = 0.3
+		"still":
+			rotation_speed = 0.0
+			bob_height = 0.0
+			pulse_scale = 0.0
+	if hold == "demo":
+		# a demonstration keeps its place: nothing to enter, nothing to collect
+		var area: Area3D = get_node_or_null("DetectionArea") as Area3D
+		if area != null:
+			area.monitoring = false
+			area.monitorable = false
 
 func _is_player(body: Node3D) -> bool:
 	# More flexible player detection
@@ -216,6 +303,8 @@ func _generate_mario_pickup_sound() -> AudioStreamWAV:
 	return stream
 
 func collect() -> void:
+	if hold == "demo":
+		return          # a demonstration keeps its place
 	if has_been_collected:
 		return
 
@@ -421,6 +510,15 @@ const PACK_ORANGE := Color(0.93, 0.44, 0.06)
 const PACK_STRAP := Color(0.17, 0.18, 0.21)
 const PACK_BUCKLE := Color(0.80, 0.82, 0.85)
 
+# The pulse writes the VISUALS, never the root: the root's scale is already
+# spoken for by the token's fourth field, by the dress key, and by the museum's
+# own stamp. Captured once in _ready, before any pulse frame - re-reading it
+# later would feed the pulse its own output and the cube would walk away from
+# its own size.
+var _pulse_mesh: MeshInstance3D = null
+var _pulse_mesh_scale0: Vector3 = Vector3.ONE
+var _pulse_captured: bool = false
+
 # What the scene authored, kept so a late apply_grid_config can put it back.
 var _base_mat: Material = null
 var _base_rot: Vector3 = Vector3.ZERO
@@ -438,6 +536,29 @@ func _read_meta_overrides() -> void:
 		custody = str(get_meta("config_custody"))
 	if has_meta("config_stock_no"):
 		stock_no = str(get_meta("config_stock_no"))
+	# THE MOTION KEYS (2026-09-06). The word comes first and the explicit rates
+	# after it, so `#motion:all#bob_height:0.4` means "the composition, but bob
+	# that much". A word-valued key survives both engines' parsers; a bare float
+	# is read as the tutorial shorthand by the grid unless its name is listed in
+	# GridInteractablesComponent.CONFIG_PARAM_NAMES, so spell those only where
+	# the museum reads them.
+	if has_meta("config_motion"):
+		motion = str(get_meta("config_motion")).strip_edges().to_lower()
+	if has_meta("config_hold"):
+		hold = str(get_meta("config_hold")).strip_edges().to_lower()
+	if has_meta("config_rotation_speed"):
+		rotation_speed = float(str(get_meta("config_rotation_speed")))
+	if has_meta("config_pulse_scale"):
+		pulse_scale = clampf(float(str(get_meta("config_pulse_scale"))), 0.0, 0.6)
+	if has_meta("config_pulse_speed"):
+		pulse_speed = maxf(0.0, float(str(get_meta("config_pulse_speed"))))
+	# Placement behavior is part of the host contract. A loose pickup can bob in
+	# open space, while a museum table may request a stable, physically seated
+	# specimen. Defaults remain untouched for all existing placements.
+	if has_meta("config_bob_height"):
+		bob_height = maxf(0.0, float(str(get_meta("config_bob_height"))))
+	if has_meta("config_bob_speed"):
+		bob_speed = maxf(0.0, float(str(get_meta("config_bob_speed"))))
 
 
 ## Grid config arrives deferred, i.e. after _ready has already built. Only
@@ -452,6 +573,7 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	var was_custody: String = custody
 	var was_no: String = stock_no
 	_read_meta_overrides()
+	_apply_motion()
 	if stock != was_stock or custody != was_custody or stock_no != was_no:
 		_build_dna()
 

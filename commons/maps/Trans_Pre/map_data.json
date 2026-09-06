@@ -2,12 +2,12 @@
  "map_info": {
   "name": "Trans_Pre",
   "lookup_name": "Trans_Pre",
-  "description": "The cube, then its differences, and the room climbs to show them. One yellow block stands alone behind a two-metre wall. Round it and east, the same block stands four cells on and a metre up, and you take the ramp to reach it: that is translation, and the ramp is the part of the vector you can walk. On the shelf above, two pairs on the same two columns: a copy turned forty-five degrees, and a copy one and a half times the size. On the summit, a copy moved, turned and grown at once, which is what one matrix does. Walk into any block and a rainbow stands up over it. The card at the end says it in sixteen numbers.",
+  "description": "The cube, then its differences, and the room climbs to show them. One yellow block stands alone behind a two-metre wall. Round it and east, the same block stands four cells on and a metre up, and you take the ramp to reach it: that is translation, and the ramp is the part of the vector you can walk. On the shelf above, a copy turned forty-five degrees and a copy one and a half times the size. On the summit, a copy moved, turned and grown at once, which is what one matrix does. Then a wall with one door, and beyond it the same three in time: a cube that only rises and falls, a cube that only turns, a cube that only grows and shrinks, and one doing all three at once. Beside it stands a plain pick-up cube, which does the first two and has all along - the third it performs once, as you take it.",
   "format": "json",
   "version": "1.0",
   "dimensions": {
    "width": 11,
-   "depth": 21,
+   "depth": 27,
    "max_height": 5
   },
   "museum": {
@@ -23,10 +23,10 @@
   }
  },
  "documentation": {
-  "summary": "Trans_Pre - the cube transformation primer, staged across three levels",
-  "layout": "An 11x21 hall of three levels: the deck, a shelf one metre up, a summit two metres up, joined by wedges and closed off at the start by an inner wall at 3. Walked north to south and back down to the door.",
-  "objective": "See each transformation as the difference between a cube and its copy, with height as part of the difference, before any of them is used to cross a hole.",
-  "key_elements": [ "mario_cube alone at (5,3), behind the inner wall across row 4", "the pair at row 5: translation, four cells east and a metre up the wp:90 at (7,5)", "the pair at row 9 on the shelf: rotation (mario_cube:45:0)", "the pair at row 12, same two columns: scale (mario_cube:0:0:1.5)", "the pair at row 16 on the summit: all three at once (mario_cube:45:1:1.5)", "dark_sphere on the highest ground at (9,17)", "clipboard with transformation_axioms at (8,18), on the way down", "teleporter t at (8,19)" ]
+  "summary": "Trans_Pre - the cube transformation primer: three differences in space, then the same three in time",
+  "layout": "An 11x27 hall. Three levels joined by wedges hold the five static stages; a threshold wall with one door closes them off, and the motion gallery is the flat hall beyond it.",
+  "objective": "See each transformation as the difference between a cube and its copy, then as the same difference applied over and over, and find that the pick-up cube's own idle animation is two of the three.",
+  "key_elements": [ "mario_cube alone at (5,3), behind the inner wall across row 4", "the pair at row 5: translation, four cells east and a metre up the wp:90 at (7,5)", "the pair at row 9 on the shelf: rotation (mario_cube:45:0)", "the pair at row 12, same two columns: scale (mario_cube:0:0:1.5)", "the pair at row 16 on the summit: all three at once (mario_cube:45:1:1.5)", "dark_sphere on the highest ground at (9,17)", "the threshold wall at row 20, one door at x4-6", "the motion gallery: slide at (5,21), turn at (5,22), swell at (5,23)", "all three at (3,24), the axioms card at (5,24), a plain pick_up_cube at (7,24)", "teleporter t at (5,25)" ]
  },
  "layers": {
   "structure": [
@@ -34,7 +34,7 @@
    [ "4", "1", "1", "1", "1", "1", "1", "1", "1", "1", "4" ],
    [ "4", "1", "1", "1", "1", "1", "1", "1", "1", "1", "4" ],
    [ "4", "1", "1", "1", "1", "1", "1", "1", "1", "1", "4" ],
-   [ "4", "3", "3", "3", "3", "3", "3", "1", "1", "1", "4" ],
+   [ "4", "3", "3", "3", "3", "3", "1", "1", "1", "1", "4" ],
    [ "4", "1", "1", "1", "1", "1", "1", "1", "2", "2", "4" ],
    [ "4", "1", "1", "1", "1", "1", "1", "1", "2", "2", "4" ],
    [ "4", "2", "2", "2", "2", "2", "2", "2", "2", "2", "4" ],
@@ -49,6 +49,12 @@
    [ "4", "1", "1", "1", "3", "3", "3", "3", "3", "3", "4" ],
    [ "4", "1", "1", "1", "3", "3", "3", "3", "3", "3", "4" ],
    [ "4", "1", "1", "2", "2", "2", "2", "2", "2", "2", "4" ],
+   [ "4", "1", "1", "1", "1", "1", "1", "1", "1", "1", "4" ],
+   [ "4", "4", "4", "4", "1", "1", "1", "4", "4", "4", "4" ],
+   [ "4", "1", "1", "1", "1", "1", "1", "1", "1", "1", "4" ],
+   [ "4", "1", "1", "1", "1", "1", "1", "1", "1", "1", "4" ],
+   [ "4", "1", "1", "1", "1", "1", "1", "1", "1", "1", "4" ],
+   [ "4", "1", "1", "1", "1", "1", "1", "1", "1", "1", "4" ],
    [ "4", "1", "1", "1", "1", "1", "1", "1", "1", "1", "4" ],
    [ "4", "4", "4", "4", "1", "1", "1", "4", "4", "4", "4" ]
   ],
@@ -72,7 +78,13 @@
    [ "", "", "", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "wp:180", "wp:180", "", "", "", "" ],
-   [ "", "", "", "3t:one matrix says it in sixteen numbers", "", "wp:180", "wp:180", "", "t", "", "" ],
+   [ "", "", "", "3t:now the same three, in time", "", "wp:180", "wp:180", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "3t:up and down, over and over - translation in time", "", "", "", "", "", "", "" ],
+   [ "", "", "", "3t:turning, over and over - rotation in time", "", "", "", "", "", "", "" ],
+   [ "", "", "", "3t:growing and shrinking - scale in time", "", "", "", "", "", "", "" ],
+   [ "", "3t:all three at once", "", "", "", "", "", "", "", "3t:the pick-up cube does the first two - the third it performs once, as you take it", "" ],
+   [ "", "", "", "", "", "t", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "" ]
   ],
   "interactables": [
@@ -94,7 +106,13 @@
    [ "", "", "", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "mario_cube:0:0", "", "mario_cube:45:1:1.5", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "dark_sphere:0:0", "" ],
-   [ "", "", "", "", "", "", "", "", "clipboard:0:0#transformation_axioms:180:0:0.5", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "pick_up_cube:0:0#hold:demo#motion:slide", "", "", "", "", "" ],
+   [ "", "", "", "", "", "pick_up_cube:0:0#hold:demo#motion:turn", "", "", "", "", "" ],
+   [ "", "", "", "", "", "pick_up_cube:0:0#hold:demo#motion:swell", "", "", "", "", "" ],
+   [ "", "", "", "pick_up_cube:0:0#hold:demo#motion:all", "", "clipboard:0:0#transformation_axioms:180:0:0.5", "", "pick_up_cube:0:0", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "" ]
   ]
