@@ -296,6 +296,17 @@ const AUTO_IDLE_LIMIT: int = 8
 # its provenance. A cell nobody erased was never stamped, which is a different
 # fault from a cell some fixture took away, and the two want opposite repairs.
 var _walk_erased: Dictionary = {}  # Vector2i -> String provenance
+# THE HEIGHT OF THE FLOOR (2026-09-06, Palle: "we want to be able to add inter
+# walls etc that are 2 or 3 ... 2 is especially needed when it comes to adding
+# slopes"). A map's structure value between 1 and museum.wall_height is not a
+# wall and not the deck: it is floor (v - 1) m up, the grid's own reading
+# (GridCommon.surface_world_y). The walk map keeps the level per cell, and the
+# flood joins neighbours on the same level only - a wedge or a ride joins
+# levels, as tools/map_pathfinder.py has had it. A map without the layer has
+# no entries here and builds as before.
+var _walk_h: Dictionary = {}        # Vector2i(x, z_cell) -> metres above the deck
+var _cur_heights: Dictionary = {}   # the hall being built: Vector2i(tile x, tile row) -> metres
+var _wall_threshold_run: int = -1   # --em-wall-threshold=N previews a map at another wall_height
 var _walk_severed: Array = []      # halls the end-to-end test could not reopen
 var _walk_reopened: Array = []     # halls reopened, and what moved to do it
 var _walk_planked: Array = []     # holes the museum bridged to keep the walk whole
@@ -1643,6 +1654,8 @@ func _parse_args() -> void:
 			_no_sim = true
 		elif a.begins_with("--em-wall-h="):
 			_wall_h_run = clampf(float(a.substr(12)), 0.3, WALL_H)
+		elif a.begins_with("--em-wall-threshold="):
+			_wall_threshold_run = clampi(int(a.substr(20)), 2, 9)
 		elif a == "--em-test-collision":
 			_test_collision = true
 		elif a.begins_with("--em-autopilot="):
@@ -7030,7 +7043,18 @@ func _stamp_utility(spec: String, cell: Vector2i, seg: Node3D, zbase: int) -> No
 			1: facing = "west"
 			2: facing = "south"
 			3: facing = "east"
-		_stamp_wedge(seg, cell, facing, 0.4, zbase)
+		# ONTO A RAISED FLOOR (2026-09-06) the wedge rises the level difference
+		# from the cell it stands on to the cell it climbs to; the facing names
+		# the side it climbs FROM (wp rises south, wp:90 east, :180 north, :270 west)
+		var w_high: Vector2i = {"north": Vector2i(0, 1), "south": Vector2i(0, -1),
+			"west": Vector2i(1, 0), "east": Vector2i(-1, 0)}[facing]
+		var w_hm: Dictionary = seg.get_meta("em_heights", {}) if seg.has_meta("em_heights") else {}
+		var w_here: float = float(w_hm.get(Vector2i(cell.x, cell.y - VESTIBULE_H), 0.0))
+		var w_far: float = float(w_hm.get(Vector2i(cell.x, cell.y - VESTIBULE_H) + w_high, 0.0))
+		if w_far > w_here + 0.05:
+			_stamp_wedge(seg, cell, facing, w_far - w_here, zbase, 1.0, w_here)
+		else:
+			_stamp_wedge(seg, cell, facing, 0.4, zbase)
 		return seg.get_node_or_null("Wedge_%d_%d" % [cell.x, cell.y])
 	var path: String = UtilityRegistry.get_utility_scene_path(code)
 	if path == "" or not ResourceLoader.exists(path):
@@ -7443,6 +7467,7 @@ func _build_segment() -> void:
 		if not derived.is_empty():
 			peek["tile"] = derived["tile"]
 			peek["artifacts"] = derived["artifacts"]
+			peek["heights"] = derived.get("heights", {})
 			# the map's own museum block rides the same ONE-TRUTH refresh:
 			# open_roof and basin re-read from map_info.museum every build,
 			# so a map edit needs no plan re-apply to change the hall's sky
@@ -7686,6 +7711,8 @@ func _build_segment() -> void:
 	seg.position = Vector3(0, 0, _next_z - VESTIBULE_H)
 	add_child(seg)
 	seg.set_meta("em_tile", tile)
+	_cur_heights = peek.get("heights", {}) if peek.get("heights") is Dictionary else {}
+	seg.set_meta("em_heights", _cur_heights)
 	seg.set_meta("em_props_deny", peek.get("props_deny", []))
 	seg.set_meta("em_pearl", cur_pearl)
 	seg.set_meta("em_chapter", next_seq)
@@ -8409,9 +8436,19 @@ func _build_segment() -> void:
 				continue
 			match c:
 				"1", "1s":
-					_box(seg, Vector3(x + 0.5, -0.1, z + 0.5), Vector3(1, 0.2, 1), Color(0.16, 0.16, 0.19), m_floor)
-					# floor/deck collider — ALWAYS: one museum in both modes, and since 2026-08-20 the desktop walker MEETS it (gravity, is_on_floor), as the rig always did
-					_add_col(solid, Vector3(x + 0.5, -0.1, z + 0.5), Vector3(1, 0.2, 1))
+					# THE RAISED FLOOR (2026-09-06): a structure value between 1 and the
+					# map's wall_height is floor (v - 1) m up - a block with the deck on
+					# top, walked there, and the walk map remembers the level.
+					var fh: float = float(_cur_heights.get(Vector2i(x, y), 0.0))
+					if fh > 0.05:
+						_box(seg, Vector3(x + 0.5, (fh - 0.1) / 2.0, z + 0.5), Vector3(1, fh + 0.1, 1), Color(0.16, 0.16, 0.19), m_floor)
+						_add_col(solid, Vector3(x + 0.5, (fh - 0.1) / 2.0, z + 0.5), Vector3(1, fh + 0.1, 1))
+						_walk_h[Vector2i(x, zbase + z)] = fh
+					else:
+						_box(seg, Vector3(x + 0.5, -0.1, z + 0.5), Vector3(1, 0.2, 1), Color(0.16, 0.16, 0.19), m_floor)
+						# floor/deck collider — ALWAYS: one museum in both modes, and since 2026-08-20 the desktop walker MEETS it (gravity, is_on_floor), as the rig always did
+						_add_col(solid, Vector3(x + 0.5, -0.1, z + 0.5), Vector3(1, 0.2, 1))
+						_walk_h.erase(Vector2i(x, zbase + z))
 					_walk_cells[Vector2i(x, zbase + z)] = true
 				"2", "2s":
 					_box(seg, Vector3(x + 0.5, 0.1, z + 0.5), Vector3(1, 0.6, 1), Color(0.23, 0.23, 0.28), m_podium)
@@ -8436,7 +8473,7 @@ func _build_segment() -> void:
 				_box(seg, Vector3(x + 0.5, pf / 2.0, z + 0.5), Vector3(1, pf, 1), Color(0.21, 0.21, 0.25), m_podium)
 				_add_col(solid, Vector3(x + 0.5, pf / 2.0, z + 0.5), Vector3(1, pf, 1))
 			if c == "1s":
-				slots.append({"x": x, "y": z, "top": 0.0, "rank": 2})
+				slots.append({"x": x, "y": z, "top": float(_cur_heights.get(Vector2i(x, y), 0.0)), "rank": 2})
 			elif c == "2s":
 				slots.append({"x": x, "y": z, "top": 0.4, "rank": 1})
 			elif c == "3s":
@@ -11186,6 +11223,7 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 		var tile_ch: String = String((tile[tz] as Array)[tx])
 		var deck_top: float = 0.4 if tile_ch.begins_with("2") else (0.8 if tile_ch.begins_with("3") else 0.0)
 		deck_top = maxf(deck_top, _stage_top_at(tx, tz))     # a body on a stage stands on the stage
+		deck_top = maxf(deck_top, float((seg.get_meta("em_heights", {}) as Dictionary).get(Vector2i(tx, tz), 0.0)))   # or on the raised floor
 		var asked_top: float = float(row.get("support_height_m", 0.0))
 		var cell: Dictionary = {
 			"x": tx, "y": tz + VESTIBULE_H, "rank": 2,
@@ -13073,6 +13111,12 @@ func _reach_extend() -> void:
 			if _reach.has(n):
 				continue
 			if _walk_cells.has(n) or _ride_cells.has(n):
+				# SAME LEVEL, OR A RIDE (2026-09-06): two floor cells join only at
+				# the same height; a ride or a wedge cell joins any level, as
+				# tools/map_pathfinder.py has had it - the grid's own rule.
+				if not _ride_cells.has(n) and not _ride_cells.has(cur) \
+						and absf(float(_walk_h.get(n, 0.0)) - float(_walk_h.get(cur, 0.0))) > 0.05:
+					continue
 				_reach[n] = true
 				_reach_front.append(n)
 
@@ -13270,6 +13314,9 @@ func _hall_plank_repair(seg: Node3D, zbase: int, z_end: int, hall: String) -> in
 				if not String(trow[n.x]).begins_with("0"):
 					continue                   # a wall is not a hole
 				step = 1
+			if step == 0 and not _ride_cells.has(n) and not _ride_cells.has(cur) \
+					and absf(float(_walk_h.get(n, 0.0)) - float(_walk_h.get(cur, 0.0))) > 0.05:
+				continue                   # a level is not crossed on foot
 			var nd: int = int(dist[cur]) + step
 			if dist.has(n) and int(dist[n]) <= nd:
 				continue
@@ -13816,6 +13863,10 @@ func _dress_fixtures(seg: Node3D, solid: StaticBody3D, tile: Array, w: int, zbas
 		var z: int = y + VESTIBULE_H
 		for x in range(row.size()):
 			if String(row[x]) != "1":
+				continue
+			# a bench stays on the deck: a raised floor (2026-09-06) is a plateau,
+			# and the walker who cannot climb it cannot sit on it either
+			if float(_cur_heights.get(Vector2i(x, y), 0.0)) > 0.05:
 				continue
 			# which side is the wall, and is the far side still walkable?
 			var side := 0
@@ -14487,6 +14538,12 @@ func _dress_props(seg: Node3D, tile: Array, w: int, h: int, zbase: int,
 		var p: Variant = r.get("pos", null)
 		if p is Vector3:
 			node.position = p as Vector3
+			# a floor prop on a raised floor (2026-09-06) stands on the plateau
+			# top, not inside the block
+			var pc_v: Variant = r.get("cell", null)
+			if bool(r.get("occupies_floor", false)) and pc_v is Vector2i:
+				var pc: Vector2i = pc_v as Vector2i
+				node.position.y += float(_cur_heights.get(Vector2i(pc.x, pc.y - VESTIBULE_H), 0.0))
 		node.rotation_degrees = Vector3(0, float(r.get("rot_y", 0.0)), 0)
 		seg.add_child(node)
 		n_ok += 1
@@ -21225,6 +21282,9 @@ func _derive_map_row(map_name: String) -> Dictionary:
 	var _mi: Dictionary = (doc_v as Dictionary).get("map_info", {}) if (doc_v as Dictionary).get("map_info") is Dictionary else {}
 	var _md: Dictionary = _mi.get("museum", {}) if _mi.get("museum") is Dictionary else {}
 	var _wall_h: int = int(_md.get("wall_height", 2))
+	if _wall_threshold_run > 0:
+		_wall_h = _wall_threshold_run
+	var heights: Dictionary = {}
 	var inter: Array = layers.get("interactables", [])
 	var r1 := -1
 	var c1 := -1
@@ -21265,6 +21325,9 @@ func _derive_map_row(map_name: String) -> Dictionary:
 				# surface is not 1 says so, and BOTH derivers must agree or
 				# the plan row and the live re-read build different halls.
 				line.append("4" if v >= _wall_h else ("1" if v >= 1 else "0"))
+				# the raised floor: between the deck and the wall, (v - 1) m up
+				if v > 1 and v < _wall_h:
+					heights[Vector2i(c, r)] = float(v - 1)
 		tile.append(line)
 	var arts: Array = []
 	for r in range(inter.size()):
@@ -21306,7 +21369,7 @@ func _derive_map_row(map_name: String) -> Dictionary:
 						plat_h = float(maxi(1, int(str(uv.split(":")[1]))))
 			var art: Dictionary = {"token": String(parts[0]), "cell": [c, r], "tile_cell": [c, r],
 				"rotation": ((rot % 360) + 360) % 360, "mode": "freestanding",
-				"venue": "interior", "support_height_m": plat_h if plat_h > 0.0 else (0.95 if under >= 2 else 0.0),
+				"venue": "interior", "support_height_m": plat_h if plat_h > 0.0 else (float(under - 1) if under > 1 and under < _wall_h else (0.95 if under >= 2 else 0.0)),
 				"hand": false, "ruled": {"by": "map: " + map_name, "cell": [c, r]}}
 			if not cfg.is_empty():
 				art["config"] = cfg
@@ -21315,7 +21378,7 @@ func _derive_map_row(map_name: String) -> Dictionary:
 	var museum_d: Dictionary = {}
 	if minfo_v is Dictionary and (minfo_v as Dictionary).get("museum") is Dictionary:
 		museum_d = (minfo_v as Dictionary)["museum"]
-	return {"tile": tile, "artifacts": arts, "museum": museum_d}
+	return {"tile": tile, "artifacts": arts, "museum": museum_d, "heights": heights}
 
 
 ## THE PASSAGES (2026-08-24). Every authored hall ends in a chicane: a door

@@ -72,10 +72,17 @@ func _run() -> void:
 		if now == null:
 			continue
 		var rid: Dictionary = inst.get("_ride_cells")
+		if rid == null:
+			rid = {}
+		# THE LEVEL (2026-09-06): a raised floor joins its neighbours on the same
+		# level only; a ride or a wedge cell joins any level - the museum's own
+		# rule (_reach_extend) and the grid pathfinder's.
+		var wh: Dictionary = inst.get("_walk_h")
+		if wh == null:
+			wh = {}
 		var pass_now: Dictionary = now.duplicate()
-		if rid != null:
-			for r_v in rid:
-				pass_now[r_v] = true
+		for r_v in rid:
+			pass_now[r_v] = true
 		for k_v in now:
 			ever[k_v] = true
 		var front: Array = []
@@ -96,9 +103,13 @@ func _run() -> void:
 			h += 1
 			for d_v in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
 				var nx: Vector2i = cur + (d_v as Vector2i)
-				if pass_now.has(nx) and not seen.has(nx):
-					seen[nx] = true
-					front.append(nx)
+				if not pass_now.has(nx) or seen.has(nx):
+					continue
+				if not rid.has(nx) and not rid.has(cur) \
+						and absf(float(wh.get(nx, 0.0)) - float(wh.get(cur, 0.0))) > 0.05:
+					continue
+				seen[nx] = true
+				front.append(nx)
 
 	var cells: Dictionary = ever
 	var segs: Array = inst.get("_segments")
