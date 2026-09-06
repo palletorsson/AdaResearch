@@ -80,6 +80,14 @@ func _run() -> void:
 		var wh: Dictionary = inst.get("_walk_h")
 		if wh == null:
 			wh = {}
+		# the cells a level change may pass through: a ride carries, a wedge climbs
+		# (the museum's _climbs()) - a wedge is an ordinary walk cell, so asking
+		# _ride_cells alone would refuse the one body built to climb
+		var cross: Dictionary = rid.duplicate()
+		var climb: Dictionary = inst.get("_walk_climb")
+		if climb != null:
+			for c_v in climb:
+				cross[c_v] = true
 		var pass_now: Dictionary = now.duplicate()
 		for r_v in rid:
 			pass_now[r_v] = true
@@ -105,7 +113,7 @@ func _run() -> void:
 				var nx: Vector2i = cur + (d_v as Vector2i)
 				if not pass_now.has(nx) or seen.has(nx):
 					continue
-				if not rid.has(nx) and not rid.has(cur) \
+				if not cross.has(nx) and not cross.has(cur) \
 						and absf(float(wh.get(nx, 0.0)) - float(wh.get(cur, 0.0))) > 0.05:
 					continue
 				seen[nx] = true

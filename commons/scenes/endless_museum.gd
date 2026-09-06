@@ -342,6 +342,13 @@ var _walk_erased: Dictionary = {}  # Vector2i -> String provenance
 # levels, as tools/map_pathfinder.py has had it. A map without the layer has
 # no entries here and builds as before.
 var _walk_h: Dictionary = {}        # Vector2i(x, z_cell) -> metres above the deck
+# THE CELLS A LEVEL CHANGE MAY PASS THROUGH (2026-09-06). A wedge is recorded in
+# _walk_cells like any floor, so the first rule written here - "a ride or a wedge
+# joins any level" - was true of the comment and false of the code: it asked
+# _ride_cells, which a wedge never enters, and a hall whose only way up was a
+# wedge read as severed. _stamp_wedge fills this, and _climbs() is the one
+# question the flood and the plank repair both ask.
+var _walk_climb: Dictionary = {}    # Vector2i(x, z_cell) -> true (a wedge stands here)
 var _cur_heights: Dictionary = {}   # the hall being built: Vector2i(tile x, tile row) -> metres
 var _wall_threshold_run: int = -1   # --em-wall-threshold=N previews a map at another wall_height
 var _walk_severed: Array = []      # halls the end-to-end test could not reopen
@@ -6489,6 +6496,7 @@ func _stamp_wedge(seg: Node3D, cell: Vector2i, facing: String, rise: float, zbas
 	w.scale = Vector3(0.5 * maxf(0.2, run_cells), maxf(0.05, rise), 1.0)   # the mesh is 2 x 1 x 1
 	seg.add_child(w)
 	_walk_cells[Vector2i(cell.x, zbase + cell.y)] = true
+	_walk_climb[Vector2i(cell.x, zbase + cell.y)] = true
 	return true
 
 
@@ -10629,7 +10637,11 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 		var srow: Array = structure[gz]
 		for gx in range(srow.size()):
 			var psv := str(srow[gx]).strip_edges()
-			if psv == "2":
+			# A RAISED FLOOR IS NOT A PLINTH (2026-09-06). A "2" is a plinth only
+			# under the legacy reading, where it is not floor at all; in a map that
+			# declares museum.wall_height above 2 the cell IS floor a metre up, the
+			# body stands on it already, and a plinth here lifted it twice.
+			if psv == "2" and not _cur_heights.has(Vector2i(gx, gz)):
 				plinths[Vector2i(gx, gz)] = 1.0
 			elif psv == "p" or psv.begins_with("p:"):
 				# an explicit PLATFORM under the anchor: the support is the
@@ -10660,8 +10672,15 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 			# frozen body floats there (laser_measure:0:1 hangs at 1 m, in
 			# reach of the hand). Dropped here until 2026-08-23.
 			var yoff: float = float(parts[2]) if parts.size() > 2 and str(parts[2]).is_valid_float() else 0.0
+			# AND THE FOURTH IS THE SCALE (2026-09-06). The grid reads
+			# <name>:<rotation>:<y_offset>:<scale> and this lane stopped at the
+			# third, so `mario_cube:0:0:1.5` stood the same size as its original:
+			# Trans_Pre's scale stage was two identical cubes in the museum and its
+			# composed stage a repeat of the rotation stage. _stamp honours
+			# cell["scale"] already — it was never filled here.
+			var uni: float = maxf(0.05, float(parts[3])) if parts.size() > 3 and str(parts[3]).is_valid_float() else 1.0
 			bodies.append({"token": parts[0], "gx": gx, "gz": gz, "rot": rot, "att": att,
-				"yoff": yoff, "plinth": plinths.has(Vector2i(gx, gz)),
+				"yoff": yoff, "uni": uni, "plinth": plinths.has(Vector2i(gx, gz)),
 				"support_h": float(plinths.get(Vector2i(gx, gz), 1.0))})
 			minx = mini(minx, gx)
 			maxx = maxi(maxx, gx)
@@ -10804,10 +10823,18 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 				# a basin cell: the body stands on the pool floor, under glass
 				if basin_pack_depth > 0.0 and basin_map.has(Vector2i(base_x + d.x - offx, base_z + d.y - offz)):
 					cell["top"] = -basin_pack_depth
+				else:
+					# THE RAISED FLOOR IS THE DECK (2026-09-06): a body on a map's
+					# own 2 or 3 stands on it, not sunk a metre into it. The cell
+					# is read where the body LANDS, so a slid body still stands on
+					# the floor it slid onto.
+					cell["top"] = float(_cur_heights.get(Vector2i(base_x + d.x - offx, base_z + d.y - offz), 0.0))
 				if claimed_plinth:
 					cell["support_m"] = float(b.get("support_h", 1.0))
 				if float(b["yoff"]) > 0.01:
 					cell["hover_m"] = float(b["yoff"])
+				if not is_equal_approx(float(b.get("uni", 1.0)), 1.0):
+					cell["scale"] = float(b["uni"])
 				if _stamp(seg, scene, String(b["token"]), cell, zbase, 1, {}, false, 0.0, float(b["rot"]), cfg):
 					placed += 1
 					if bool(b["plinth"]):
@@ -11030,9 +11057,6 @@ func _stamp_map_utilities(seg: Node3D, layers: Dictionary, zbase: int, offx: int
 						if _stamp_utility(uv, ucell, seg, zbase) != null:
 							utils_built += 1
 						continue
-					var wnode: Node3D = wp_scene.instantiate() as Node3D
-					if wnode == null:
-						continue
 					var wx2: int = clampi(gx2 + offx, bx0, bx1)
 					var wz2: int = clampi(gz2 + offz, bz0, bz1)
 					var base_h := 0.0
@@ -11047,13 +11071,26 @@ func _stamp_map_utilities(seg: Node3D, layers: Dictionary, zbase: int, offx: int
 					# and out of the new basin pool space")
 					if basin_pack_depth > 0.0 and basin_map.has(Vector2i(wx2 - offx, wz2 - offz)):
 						base_h = -basin_pack_depth
-					# CENTER-origin prism: +0.5 seats the base on the cell's top
-					wnode.position = Vector3(wx2 + 0.5, base_h + 0.5, float(wz2) + 0.5)
+					# ONE PLACER (2026-09-06). This branch used to instantiate the
+					# prism itself, which skipped _stamp_wedge — so the cell entered
+					# neither the walk map nor _walk_climb, and a hall whose way up
+					# was a map's own `wp` read as severed. It also stood every
+					# wedge 1 m tall at base 0, whatever the step under it was.
+					var w_yaw: float = 0.0
 					var uparts := uv.split(":")
 					if uparts.size() > 1 and str(uparts[1]).is_valid_float():
-						wnode.rotation_degrees.y = float(uparts[1])
-					seg.add_child(wnode)
-					wedges += 1
+						w_yaw = float(uparts[1])
+					var w_face: String = ["north", "west", "south", "east"][int(round(fposmod(w_yaw, 360.0) / 90.0)) % 4]
+					var w_hi: Vector2i = {"north": Vector2i(0, 1), "south": Vector2i(0, -1),
+						"west": Vector2i(1, 0), "east": Vector2i(-1, 0)}[w_face]
+					# the raised floor this wedge climbs to, in the map's own cells
+					var w_here: float = maxf(base_h, float(_cur_heights.get(Vector2i(gx2, gz2), 0.0)))
+					var w_far: float = float(_cur_heights.get(Vector2i(gx2, gz2) + w_hi, 0.0))
+					var w_rise: float = w_far - w_here if w_far > w_here + 0.05 else 1.0
+					if base_h < 0.0:
+						w_rise = -base_h        # out of the pool, up to the deck
+					if _stamp_wedge(seg, Vector2i(wx2, wz2), w_face, w_rise, zbase, 1.0, base_h):
+						wedges += 1
 	if wedges > 0 or utils_built > 0:
 		print("[em-pack]   %d wedge(s) + %d other utility(ies) from the map's utility layer" % [wedges, utils_built])
 
@@ -13324,6 +13361,12 @@ var _reach_front: Array = []
 
 
 ## grow the reachable set into whatever has been built since the last call
+## A cell a level change may pass through: a ride carries you across one, a
+## wedge climbs one. Everything else joins its own level only.
+func _climbs(c: Vector2i) -> bool:
+	return _ride_cells.has(c) or _walk_climb.has(c)
+
+
 func _reach_extend() -> void:
 	if _walk_cells.is_empty():
 		return
@@ -13344,10 +13387,11 @@ func _reach_extend() -> void:
 			if _reach.has(n):
 				continue
 			if _walk_cells.has(n) or _ride_cells.has(n):
-				# SAME LEVEL, OR A RIDE (2026-09-06): two floor cells join only at
-				# the same height; a ride or a wedge cell joins any level, as
-				# tools/map_pathfinder.py has had it - the grid's own rule.
-				if not _ride_cells.has(n) and not _ride_cells.has(cur) \
+				# SAME LEVEL, OR A RIDE, OR A WEDGE (2026-09-06): two floor cells
+				# join only at the same height, and a ride or a wedge joins any -
+				# tools/map_pathfinder.py's own rule ("climbing up requires a wp
+				# ramp on either cell").
+				if not _climbs(n) and not _climbs(cur) \
 						and absf(float(_walk_h.get(n, 0.0)) - float(_walk_h.get(cur, 0.0))) > 0.05:
 					continue
 				_reach[n] = true
@@ -13547,7 +13591,7 @@ func _hall_plank_repair(seg: Node3D, zbase: int, z_end: int, hall: String) -> in
 				if not String(trow[n.x]).begins_with("0"):
 					continue                   # a wall is not a hole
 				step = 1
-			if step == 0 and not _ride_cells.has(n) and not _ride_cells.has(cur) \
+			if step == 0 and not _climbs(n) and not _climbs(cur) \
 					and absf(float(_walk_h.get(n, 0.0)) - float(_walk_h.get(cur, 0.0))) > 0.05:
 				continue                   # a level is not crossed on foot
 			var nd: int = int(dist[cur]) + step
@@ -21795,6 +21839,20 @@ func _derive_map_row(map_name: String) -> Dictionary:
 			var rot := 0
 			if parts.size() > 1 and str(parts[1]).is_valid_float():
 				rot = int(float(parts[1]))
+			# THE TOKEN CARRIES THREE FIELDS, NOT ONE (2026-09-06). The grid reads
+			# <name>:<rotation>:<y_offset>:<scale> (GridInteractablesComponent ->
+			# rotation_y_degrees, y_position, uniform_scale) and this lane read the
+			# rotation alone, so `mario_cube:0:0:1.5` stood at 1.0 and
+			# `mario_cube:45:1:1.5` was the same body as `mario_cube:45`:
+			# Trans_Pre's scale stage was two identical cubes and its composed
+			# stage a repeat of its rotation stage. The row's `offset` and `scale`
+			# are honoured at the stamp already - they were never filled.
+			var y_off := 0.0
+			if parts.size() > 2 and str(parts[2]).is_valid_float():
+				y_off = float(parts[2])
+			var uni := 1.0
+			if parts.size() > 3 and str(parts[3]).is_valid_float():
+				uni = maxf(0.05, float(parts[3]))
 			# the token's #k:v#k:v config rides into the row — the stamp
 			# applies row["config"] via set_meta + apply_grid_config, so a
 			# map's #ink / #resolution / #board_width reach the hall's
@@ -21827,6 +21885,10 @@ func _derive_map_row(map_name: String) -> Dictionary:
 				"hand": false, "ruled": {"by": "map: " + map_name, "cell": [c, r]}}
 			if not cfg.is_empty():
 				art["config"] = cfg
+			if not is_equal_approx(uni, 1.0):
+				art["scale"] = uni
+			if absf(y_off) > 0.001:
+				art["offset"] = [0.0, y_off, 0.0]
 			arts.append(art)
 	var minfo_v: Variant = (doc_v as Dictionary).get("map_info", {})
 	var museum_d: Dictionary = {}

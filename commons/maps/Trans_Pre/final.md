@@ -1,6 +1,6 @@
 A transformation is a difference between a thing and its copy, and there are exactly three kinds.
 
-This is the smallest room in the chapter, and it comes first because everything after it uses these three differences to get you somewhere. Here nothing moves and nothing is crossed. One yellow block stands alone, and then the same block stands twice, four times over, and each time the copy differs from the original in one way only. You walk the difference. That is the lesson, and it is the whole of it.
+It comes first because everything after it uses these three differences to get you somewhere. Here nothing moves and nothing is crossed - but the room does climb, in three levels, and the climb is part of the argument: the deck where the cube stands alone, a shelf a metre up, a summit two metres up. One yellow block stands alone, and then the same block stands twice, four times over, and each time the copy differs from the original in one way only. You walk the difference. That is the lesson, and it is the whole of it.
 
 ```gdscript
 func difference(a: Transform3D, b: Transform3D) -> Transform3D:
@@ -13,9 +13,9 @@ Take the copy's transform and divide out the original's, and what is left is the
 
 <!-- @mario_cube -->
 
-A yellow block with an orange wire, one metre on a side, alone on the floor near the door. That is the cube. It is the unit the whole museum is built from, and in this room it is also the thing being copied. Walk into it and a rainbow of seven bands stands up over it; every block in the room does that once, and the first one you reach does it first.
+A yellow block with an orange wire, half a metre on a side, alone on the deck behind a two-metre wall that closes off the rest of the room. That is the cube. It is the unit the whole museum is built from, and in this room it is also the thing being copied. Walk into it and a rainbow of seven bands stands up over it; every block in the room does that once, and the first one you reach does it first.
 
-Two blocks, four metres apart on the same row. Nothing about the second is different from the first except where it is. That difference is translation, and it is the only one of the three you could describe without looking at the block at all: a vector, four along x, nothing else.
+Two blocks, four cells apart on the same row - and the second stands a metre up, on a plinth you reach by the ramp between them. Nothing about it is different from the first except where it is. Down here that difference is a vector with a metre of height in it, and the ramp is the part of it you walk. That difference is translation, and it is the only one of the three you could describe without looking at the block at all: a vector, four along x, nothing else.
 
 Two blocks again, and the second is turned forty-five degrees about the upright. It stands in the same place and it is the same size, and its corners point where the first block's faces do. That difference is rotation, and it is the first one that needs the block to have a shape: you cannot turn a point.
 
@@ -25,7 +25,7 @@ The last pair does all three at once. The copy is moved along the row and lifted
 
 <!-- @clipboard -->
 
-A card at half size beside the exit. Walk within a metre and a half and its page fades up: the axioms of transformation, which say what the room just showed you in the language of a four-by-four matrix. Sixteen numbers, and every move a thing can make.
+A card on the landing as the room comes back down. Walk within a metre and a half and its page fades up: the axioms of transformation, which say what the room just showed you in the language of a four-by-four matrix. Sixteen numbers, and every move a thing can make.
 
 <!-- @ -->
 

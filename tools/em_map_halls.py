@@ -148,6 +148,19 @@ def derive_row(pearl: str, map_name: str, museum_key: str, idx: int, total: int,
             parts = base.split(":")
             name = parts[0]
             rot = int(float(parts[1])) if len(parts) > 1 and parts[1] else 0
+            # THE TOKEN CARRIES THREE FIELDS, NOT ONE (2026-09-06). The grid reads
+            # <name>:<rotation>:<y_offset>:<scale>; this lane read the rotation
+            # alone, so a scaled or lifted copy arrived in the museum identical to
+            # its original - Trans_Pre's whole lesson is those two fields. The
+            # GDScript twin (_derive_map_row) learned the same thing the same day.
+            def _f(i):
+                try:
+                    return float(parts[i])
+                except (IndexError, ValueError):
+                    return None
+            y_off = _f(2) or 0.0
+            uni = _f(3)
+            uni = max(0.05, uni) if uni is not None else 1.0
             # the token's #k:v#k:v config rides into the row — the stamp
             # applies row["config"] via set_meta + apply_grid_config, so a
             # map's #ink / #resolution / #board_width reach the hall's
@@ -217,6 +230,8 @@ def derive_row(pearl: str, map_name: str, museum_key: str, idx: int, total: int,
                 # that is bake_rulings' contract, not the map's)
                 "hand": False, "ruled": {"by": "map: " + map_name, "cell": list(tc)},
                 **({"config": config} if config else {}),
+                **({"scale": uni} if abs(uni - 1.0) > 1e-6 else {}),
+                **({"offset": [0.0, y_off, 0.0]} if abs(y_off) > 1e-3 else {}),
             })
     # OUTDOOR HALLS (2026-08-24, Palle: "the first outdoor space courtyard to
     # host the long portal corridor" / "open roof, the Durer example"): a map

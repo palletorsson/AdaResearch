@@ -48,3 +48,44 @@ the difference.
 Nobody has walked the room. The museum hall is derived from the map by
 `tools/em_map_halls.py` and needs its pearl baked; the book pearl "trans pre"
 carries the lines.
+
+## 2026-09-06 - the room learns to climb, and three lanes learn the map
+
+Palle: *"for trans_pre I mean something like this"*, with the 2025 Route Field
+map. Four layouts were drawn and each adversarially refuted before this one was
+written; the winner was "the difference you climb", and its own skeptic's fixes
+are in it: one pair per stage and never a triad, the rotation and scale pairs on
+the same two columns so no accidental pair reads as a fifth stage, the climb as
+the route rather than a spur, both members of a pair carrying the same token
+shape so the two engines ground them alike, a dark_sphere on the highest ground
+(ten cubes had been raising rainbows over nothing), and the card on the descent
+so no row is spent on nothing.
+
+**What the rebuild found in the engine, which is the larger half of the day.**
+A hall whose chapter is map-authored is not built by the plan lane. It is built
+by `_transplant_from_map` and `_stamp_map_utilities`, and neither had been
+taught anything the plan lane knew:
+
+- a `wp` in a map's utility layer was instantiated by hand, skipping
+  `_stamp_wedge`, so the wedge entered neither the walk map nor the climb set:
+  the way up was scenery and the level above it unreachable;
+- `cell["top"]` was hardcoded 0, so a body on a raised floor stood a metre sunk
+  in it;
+- the token's fourth field, the scale, was dropped, so `mario_cube:0:0:1.5`
+  stood the same size as its original. **The old flat room's scale stage was two
+  identical cubes in the museum, and its composed stage a repeat of the rotation
+  stage** - the primer has not taught its own lesson in the museum for as long
+  as it has been in it;
+- and a structure "2" was read as a plinth, which is right only under the legacy
+  reading where a 2 is not floor; with heights it lifted the body a second metre.
+
+All four are fixed, and the museum's own record now puts every body exactly
+where the map says: the deck pair at 0.0, the plinth copy and the shelf pairs at
+1.0, the summit original at 2.0, and the composed copy at 3.0 - two metres of
+floor plus the metre its own token asks for.
+
+**Left standing.** The captions are `3t` and the museum refuses them, so the
+room is built to read without them: the inner wall gives stage one its silence,
+the pairs rhyme down two columns, and the summit is the standpoint from which
+every difference is one picture. The rainbows are still unmeasured with ten
+cubes in one hall. Nobody has walked it in the headset.
