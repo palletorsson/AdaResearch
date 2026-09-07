@@ -7127,6 +7127,73 @@ func _vr_rig() -> Node3D:
 	return o as Node3D
 
 
+## THE DEATH ALWAYS ENDS (2026-09-07, Palle: "When I die in the endless museum in
+## VR the map is not restarting. After being killed by the silhouette, it fades to
+## black and then nothing else happens. It is just dark").
+##
+## Every branch below already puts the visitor back and lifts its own veil, so on
+## paper this cannot happen — which is exactly why it needs a floor under it. The
+## death is a THREE-SECOND CHAIN OF AWAITS on tweens and timers, and there are at
+## least three ways for that chain to stop halfway and leave the screen dark for
+## good, none of which announce themselves:
+##
+##   * Engine.time_scale. DeathEffect drops it to 0.05 for its flash. A plain
+##     create_timer obeys the scale, so a 0.85 s beat becomes 17 s and the fade
+##     LOOKS stopped. This timer is built with ignore_time_scale, so the recovery
+##     is the one clock in the sequence that cannot be slowed with it.
+##   * An error mid-chain. _player is dereferenced after ~3 s of awaits; if it is
+##     gone by then the coroutine dies with the black veil at full alpha and
+##     _dying stuck true — which also silently disables EVERY LATER DEATH, since
+##     _museum_death returns at that flag.
+##   * A branch that returns without clearing, now or after some later edit.
+##
+## So: if the visitor is still dying after DEATH_MAX_S, take the screen back by
+## force, stand them at the save point, and say so loudly enough to find in a
+## Quest log. It is a floor, not a fix — if this line ever prints, the real fault
+## is upstream of it and the print names which branch was in the air.
+const DEATH_MAX_S := 6.0
+
+
+func _death_watchdog(kind: String) -> void:
+	var mark: int = _deaths
+	var t := get_tree().create_timer(DEATH_MAX_S, true, false, true)   # ignore_time_scale
+	await t.timeout
+	if not _dying or _deaths != mark:
+		return                                   # the death ended on its own
+	push_warning("[em-death] STUCK after %.1f s on '%s' (%s) — taking the screen back"
+		% [DEATH_MAX_S, kind, "vr" if _vr else "desktop"])
+	print("[em-death] STUCK after %.1f s on '%s' (%s) — taking the screen back"
+		% [DEATH_MAX_S, kind, "vr" if _vr else "desktop"])
+	_death_release()
+
+
+## Put the screen and the visitor back, from any state. Safe to call twice.
+func _death_release() -> void:
+	if _death_layer != null and is_instance_valid(_death_layer):
+		_death_layer.visible = false
+	if _vr_veil_node != null and is_instance_valid(_vr_veil_node):
+		var m := _vr_veil_node.material_override as StandardMaterial3D
+		if m != null:
+			m.albedo_color = Color(m.albedo_color.r, m.albedo_color.g, m.albedo_color.b, 0.0)
+	Engine.time_scale = 1.0        # whoever slowed it is not coming back to raise it
+	var back: Vector3 = _save_point_now()
+	if _vr:
+		var rig: Node3D = _vr_rig()
+		var eye: Camera3D = _vr_eye()
+		if rig != null and eye != null:
+			rig.global_position = _vr_drop(rig.global_position, eye.global_position, back)
+	if _player != null and is_instance_valid(_player):
+		_player.position = back + Vector3(0.0, 0.05, 0.0)
+		_player.velocity = Vector3.ZERO
+	_put_back_t = float(Time.get_ticks_msec()) * 0.001
+	_put_back_z = _last_save_z
+	_vy = 0.0
+	_jumps_left = 2
+	_last_ground = back
+	_dying = false
+	print("[em-death] recovered — standing at %s" % str(back))
+
+
 func _museum_death(kind: String) -> void:
 	# the VR branch below moves the RIG and needs no walker; the guard that
 	# demanded one made it unreachable, so a headset death was a no-op
@@ -7134,6 +7201,7 @@ func _museum_death(kind: String) -> void:
 		return
 	_dying = true
 	_deaths += 1
+	_death_watchdog(kind)
 	var now: float = float(Time.get_ticks_msec()) * 0.001
 	# Killed again moments after being stood somewhere: it was that somewhere.
 	if _put_back_z > -1.0e8 and now - _put_back_t < SAVE_BURN_S:
@@ -7148,7 +7216,8 @@ func _museum_death(kind: String) -> void:
 			return                      # the verdict is written and the tree is quitting
 	var back: Vector3 = _save_point_now()
 	_put_back_z = _last_save_z
-	print("[em-death] %s (#%d) — the end scene, then %s" % [kind, _deaths, str(back)])
+	print("[em-death] %s (#%d) via %s — the end scene, then %s"
+		% [kind, _deaths, "VR (rig move + red veil)" if _vr else "desktop (black veil)", str(back)])
 	if _vr:
 		# no canvas in the headset: the fade is the museum's own, and the
 		# splatter would sit on the walker's face
@@ -7187,7 +7256,17 @@ func _museum_death(kind: String) -> void:
 	tw2.parallel().tween_property(_death_line, "modulate:a", 1.0, 0.55)
 	await tw2.finished
 	await get_tree().create_timer(0.85).timeout
-	# 3. THE SAVE POINT — moved behind the black, so the jump is never seen
+	# 3. THE SAVE POINT — moved behind the black, so the jump is never seen.
+	#
+	# GUARDED, because this line sits about three seconds of awaits after the
+	# entry check that proved _player existed. If it has gone in the meantime the
+	# throw kills the coroutine with the veil at FULL BLACK and _dying stuck true
+	# — the screen never comes back, and every later death returns at that flag
+	# without doing anything. Exactly the shape of the report this was found by.
+	if _player == null or not is_instance_valid(_player):
+		push_warning("[em-death] the walker vanished mid-death — releasing the screen")
+		_death_release()
+		return
 	_player.position = back + Vector3(0.0, 0.05, 0.0)
 	_player.velocity = Vector3.ZERO
 	# THE CLOCK STARTS WHEN THE FEET LAND, not when the beam cut. The end scene
