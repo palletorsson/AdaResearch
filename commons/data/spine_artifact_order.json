@@ -1,10 +1,10 @@
 {
  "_meta": {
-  "generated": "2026-09-07 08:24:01",
+  "generated": "2026-09-07 12:29:25",
   "generator": "tools/build_spine_artifact_order.py",
   "rule": "first appearance walking the spine: sequence order -> map order -> interactables row-major",
   "sequences": 22,
-  "maps_read": 186,
+  "maps_read": 187,
   "maps_missing": 0,
   "artifacts": 918
  },
@@ -1415,77 +1415,7 @@
    "map": "VFM_05_Launch"
   },
   {
-   "lookup": "bouncing_ball",
-   "sequence": "forces",
-   "map": "VFM_05_Launch"
-  },
-  {
-   "lookup": "collision_crasher",
-   "sequence": "forces",
-   "map": "VFM_05_Launch"
-  },
-  {
-   "lookup": "combined_forces_demo",
-   "sequence": "forces",
-   "map": "VFM_05_Launch"
-  },
-  {
-   "lookup": "example_1_9_motion_101_velocity_and_random_acceleration_vr",
-   "sequence": "forces",
-   "map": "VFM_05_Launch"
-  },
-  {
-   "lookup": "example_2_5_fluid_resistance_vr",
-   "sequence": "forces",
-   "map": "VFM_05_Launch"
-  },
-  {
-   "lookup": "example_3_2_forces_with_arbitrary_angular_motion_vr",
-   "sequence": "forces",
-   "map": "VFM_05_Launch"
-  },
-  {
-   "lookup": "example_3_3_pointing_in_the_direction_of_motion_vr",
-   "sequence": "forces",
-   "map": "VFM_05_Launch"
-  },
-  {
-   "lookup": "exercise_1_3_solution_3_d_bouncing_ball_vr",
-   "sequence": "forces",
-   "map": "VFM_05_Launch"
-  },
-  {
-   "lookup": "exercise_1_5_solution_accelerate_and_decelerate_vr",
-   "sequence": "forces",
-   "map": "VFM_05_Launch"
-  },
-  {
-   "lookup": "friction_ramp",
-   "sequence": "forces",
-   "map": "VFM_05_Launch"
-  },
-  {
-   "lookup": "newton_cradle",
-   "sequence": "forces",
-   "map": "VFM_05_Launch"
-  },
-  {
-   "lookup": "normal_force_demo",
-   "sequence": "forces",
-   "map": "VFM_05_Launch"
-  },
-  {
-   "lookup": "trajectory_artifact",
-   "sequence": "forces",
-   "map": "VFM_05_Launch"
-  },
-  {
    "lookup": "catapult",
-   "sequence": "forces",
-   "map": "VFM_05_Launch"
-  },
-  {
-   "lookup": "vector_drone",
    "sequence": "forces",
    "map": "VFM_05_Launch"
   },
@@ -1560,6 +1490,81 @@
    "map": "VFM_05_Launch"
   },
   {
+   "lookup": "normal_force_demo",
+   "sequence": "forces",
+   "map": "VFM_03_Motion"
+  },
+  {
+   "lookup": "example_1_9_motion_101_velocity_and_random_acceleration_vr",
+   "sequence": "forces",
+   "map": "VFM_03_Motion"
+  },
+  {
+   "lookup": "vector_drone",
+   "sequence": "forces",
+   "map": "VFM_03_Motion"
+  },
+  {
+   "lookup": "bouncing_ball",
+   "sequence": "forces",
+   "map": "VFM_03_Motion"
+  },
+  {
+   "lookup": "trajectory_artifact",
+   "sequence": "forces",
+   "map": "VFM_03_Motion"
+  },
+  {
+   "lookup": "VectorMotion",
+   "sequence": "forces",
+   "map": "VFM_03_Motion"
+  },
+  {
+   "lookup": "exercise_1_3_solution_3_d_bouncing_ball_vr",
+   "sequence": "forces",
+   "map": "VFM_03_Motion"
+  },
+  {
+   "lookup": "exercise_1_5_solution_accelerate_and_decelerate_vr",
+   "sequence": "forces",
+   "map": "VFM_03_Motion"
+  },
+  {
+   "lookup": "example_2_5_fluid_resistance_vr",
+   "sequence": "forces",
+   "map": "VFM_03_Motion"
+  },
+  {
+   "lookup": "example_3_2_forces_with_arbitrary_angular_motion_vr",
+   "sequence": "forces",
+   "map": "VFM_03_Motion"
+  },
+  {
+   "lookup": "example_3_3_pointing_in_the_direction_of_motion_vr",
+   "sequence": "forces",
+   "map": "VFM_03_Motion"
+  },
+  {
+   "lookup": "friction_ramp",
+   "sequence": "forces",
+   "map": "VFM_03_Motion"
+  },
+  {
+   "lookup": "newton_cradle",
+   "sequence": "forces",
+   "map": "VFM_03_Motion"
+  },
+  {
+   "lookup": "combined_forces_demo",
+   "sequence": "forces",
+   "map": "VFM_03_Motion"
+  },
+  {
+   "lookup": "collision_crasher",
+   "sequence": "forces",
+   "map": "VFM_03_Motion"
+  },
+  {
    "lookup": "field_room",
    "sequence": "forces",
    "map": "Vectors_Act3_FieldsAndMotion"
@@ -1611,11 +1616,6 @@
   },
   {
    "lookup": "bubble_blaster",
-   "sequence": "forces",
-   "map": "Vectors_Act3_FieldsAndMotion"
-  },
-  {
-   "lookup": "VectorMotion",
    "sequence": "forces",
    "map": "Vectors_Act3_FieldsAndMotion"
   },
