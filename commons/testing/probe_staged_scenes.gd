@@ -18,7 +18,7 @@ extends SceneTree
 
 const STAGED := [
 	"res://commons/scenes/endless_museum_staged.tscn",
-	"res://commons/scenes/death_scene.tscn",
+	"res://commons/scenes/death_scene_staged.tscn",
 ]
 
 const BASE := "res://addons/godot-xr-tools/staging/scene_base.gd"
@@ -37,11 +37,24 @@ func _init() -> void:
 			continue
 		var root = (load(path) as PackedScene).instantiate()
 		var ok := _derives(root.get_script(), base_script)
-		print("  %-7s %s" % ["ok" if ok else "REFUSED", path])
+		# THE SECOND HALF OF THE CONTRACT, and the one that bit next.
+		# scene_base.scene_loaded() does `$XROrigin3D/XRCamera3D.current = true`,
+		# so a staged scene must CONTAIN a rig as well as BE a scene base. The
+		# first version of this gate checked only the class, passed a rigless
+		# death scene, and the headset answered with
+		#   Node not found: "XROrigin3D/XRCamera3D"
+		# — no camera at all, which is the black screen again by a new road.
+		var rig: bool = root.get_node_or_null("XROrigin3D/XRCamera3D") != null
+		print("  %-7s %s%s" % ["ok" if (ok and rig) else "REFUSED", path,
+			"" if rig else "   (no XROrigin3D/XRCamera3D)"])
 		if not ok:
 			print("      its root script is %s, which does not derive scene_base —"
 				% str(root.get_script().resource_path if root.get_script() else "<none>"))
 			print("      staging would refuse it at the current_scene assignment")
+			fails += 1
+		if not rig:
+			print("      it carries no rig, so scene_loaded() has no camera to make")
+			print("      current — the headset would render nothing")
 			fails += 1
 		root.free()
 

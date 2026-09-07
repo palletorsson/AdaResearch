@@ -539,7 +539,12 @@ func _on_death_effect_done() -> void:
 	_death_sequence_running = false
 	reset_level_state()  # Restore health to full
 	# Go to death scene (cross on hill, "You Died", continue → back where you were)
+	# TWO SHAPES OF THE SAME SCENE. Staging needs the STAGED one — a scene base
+	# that brings its own XR rig, since scene_base.scene_loaded() makes
+	# $XROrigin3D/XRCamera3D current and a scene without one leaves the headset
+	# with no camera at all. change_scene_to_file wants the plain one.
 	var death_scene_path := "res://commons/scenes/death_scene.tscn"
+	var staged_path := "res://commons/scenes/death_scene_staged.tscn"
 	if not ResourceLoader.exists(death_scene_path):
 		_reload_scene()
 		return
@@ -549,8 +554,8 @@ func _on_death_effect_done() -> void:
 	# gravestone. staging.load_scene swaps only what is loaded INTO the rig,
 	# which is what every other transition in this project uses.
 	var staging: Node = _find_staging_node()
-	if staging != null and staging.has_method("load_scene"):
-		staging.call("load_scene", death_scene_path)
+	if staging != null and staging.has_method("load_scene") and ResourceLoader.exists(staged_path):
+		staging.call("load_scene", staged_path)
 		return
 	get_tree().change_scene_to_file(death_scene_path)
 

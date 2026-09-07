@@ -4,7 +4,7 @@
 # full biome surroundings, "You Died" text, and a Continue button
 # that returns to the lab/menu.
 
-## STAGING WILL ONLY LOAD A SCENE BASE (2026-09-07).
+## STAGING WILL ONLY LOAD A SCENE BASE — AND THE BASE BRINGS THE RIG (2026-09-07).
 ##
 ##     Trying to assign value of type 'death_scene.gd' to a variable of type
 ##     'scene_base.gd'.  vrStaging.gd:718 @ load_scene()
@@ -15,16 +15,26 @@
 ## change_scene_to_file before, which does not care; sending it through staging
 ## — which is what stops the headset losing its rig — is what surfaced it.
 ##
-## Extended BY PATH rather than by class_name: a fresh headless boot has not
-## necessarily reimported the global class cache, and this project has already
-## lost a pass to exactly that. XRToolsSceneBase is itself a Node3D, so nothing
-## that loaded this scene the old way changes.
-extends "res://addons/godot-xr-tools/staging/scene_base.gd"
+## Making THIS script the scene base was the wrong half of the fix, and the
+## headset said so on the next run:
+##
+##     scene_base.gd:101 @ scene_loaded():
+##     Node not found: "XROrigin3D/XRCamera3D" (relative to ".../DeathScene")
+##
+## scene_base.scene_loaded() makes its own camera current, so every staged scene
+## must CONTAIN an XR rig — each one brings its own, through base.tscn. A death
+## scene with no rig has no camera at all in the headset, which is the black
+## screen again by a new road.
+##
+## So this follows the museum's shape exactly: death_scene_staged.tscn roots on
+## base.tscn (the scene base, with the rig) and hangs this script on a child.
+## Plain Node3D again, and death_scene.tscn stays as it was for anything that
+## loads it without staging.
+extends Node3D
 
 var _continue_pressed := false
 
 func _ready() -> void:
-	super()
 	_build_environment()
 	_build_hill()
 	_build_cross()
@@ -196,14 +206,34 @@ func _build_ui() -> void:
 
 
 func _build_camera() -> void:
+	# NOT IN A HEADSET. Staged, this scene sits under base.tscn's XROrigin3D and
+	# the XRCamera3D is the eye; a plain Camera3D marked `current` would seize the
+	# viewport from it and hand the visitor a flat window in a stereo display.
+	if _find_xr_camera() != null:
+		return
 	# Desktop camera looking at the cross
 	var cam := Camera3D.new()
 	cam.name = "DeathCamera"
 	cam.position = Vector3(2, 2, -1)
+	cam.fov = 60
+	# ADDED FIRST, AIMED SECOND. look_at needs a tree to be global in:
+	#   death_scene.gd:203 @ _build_camera(): Node not inside tree.
+	# The same shape as DeathEffect's particles firing at the world origin — a
+	# transform call made before the node has a parent is refused, quietly.
+	add_child(cam)
 	cam.look_at(Vector3(0, 1.5, -5), Vector3.UP)
 	cam.current = true
-	cam.fov = 60
-	add_child(cam)
+
+
+func _find_xr_camera() -> Camera3D:
+	var stack: Array[Node] = [get_tree().get_root()] if is_inside_tree() else []
+	while not stack.is_empty():
+		var n: Node = stack.pop_back()
+		if n is XRCamera3D:
+			return n as Camera3D
+		for c in n.get_children():
+			stack.append(c)
+	return null
 
 
 func _build_light() -> void:
@@ -234,13 +264,10 @@ func _on_continue() -> void:
 	# the death scene is not a second implementation of it.
 	if MUSEUM.return_after_death:
 		MUSEUM.return_after_death = false          # spent — a later death re-arms it
-		# load_scene() is the scene base's OWN method: it emits request_load_scene,
-		# which staging is already listening for. Reaching up the tree for the
-		# staging node and calling it directly worked, but it was a second way to
-		# do a thing the base class exists to do.
-		if _find_staging() != null:
+		var staging := _find_staging()
+		if staging != null:
 			print("[death-scene] back into the museum at %s" % MUSEUM.menu_chapter)
-			load_scene(MUSEUM_SCENE)
+			staging.load_scene(MUSEUM_SCENE)
 			return
 		# No staging is a dev boot of this scene on its own. The plain museum
 		# scene reads the same statics, so the return still lands.
