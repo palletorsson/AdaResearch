@@ -226,7 +226,17 @@ func _build_camera() -> void:
 
 
 func _find_xr_camera() -> Camera3D:
-	var stack: Array[Node] = [get_tree().get_root()] if is_inside_tree() else []
+	# BUILT, NOT TERNARIED. `var s: Array[Node] = [x] if c else []` looks fine and
+	# compiles fine, and throws at RUNTIME:
+	#   Trying to assign an array of type "Array" to a variable of type "Array[Node]"
+	# because a ternary's result is an untyped Array whatever its branches hold —
+	# an array LITERAL infers to the typed array, a ternary over two of them does
+	# not. check_compile cannot see it; only running it can, which is why this
+	# reached a headset.
+	if not is_inside_tree():
+		return null
+	var stack: Array[Node] = []
+	stack.append(get_tree().get_root())
 	while not stack.is_empty():
 		var n: Node = stack.pop_back()
 		if n is XRCamera3D:
@@ -246,9 +256,18 @@ func _build_light() -> void:
 	add_child(light)
 
 
-## PRELOAD, not class_name: endless_museum.gd declares none, and MainMenu3D
-## reaches it the same way for the same reason.
-const MUSEUM = preload("res://commons/scenes/endless_museum.gd")
+## LOADED WHEN NEEDED, NOT PRELOADED — and that is a testability decision, not a
+## style one. endless_museum.gd names GameManager, so a `const MUSEUM =
+## preload(...)` here made THIS file unloadable in a `extends SceneTree` probe,
+## which has no autoloads. Four separate runtime faults reached a headset from
+## this script in one afternoon — a rigless staged scene, a look_at before
+## add_child, a flat camera stealing the viewport, and a typed array built from a
+## ternary — and every one of them would have died in the first second of a probe
+## that could simply instantiate it. It could not, because of this line.
+##
+## The cost of lazy loading is one load() on a button press. The cost of the
+## preload was four round trips through Palle.
+const MUSEUM_SCRIPT := "res://commons/scenes/endless_museum.gd"
 const MUSEUM_SCENE := "res://commons/scenes/endless_museum_staged.tscn"
 const MUSEUM_FALLBACK_SCENE := "res://commons/scenes/endless_museum.tscn"
 
@@ -262,11 +281,12 @@ func _on_continue() -> void:
 	# the same map"). The museum set these statics on its way out; open_at is the
 	# same handover the main menu uses, so there is one door into the building and
 	# the death scene is not a second implementation of it.
-	if MUSEUM.return_after_death:
-		MUSEUM.return_after_death = false          # spent — a later death re-arms it
+	var museum: GDScript = load(MUSEUM_SCRIPT) as GDScript
+	if museum != null and bool(museum.get("return_after_death")):
+		museum.set("return_after_death", false)    # spent — a later death re-arms it
 		var staging := _find_staging()
 		if staging != null:
-			print("[death-scene] back into the museum at %s" % MUSEUM.menu_chapter)
+			print("[death-scene] back into the museum at %s" % str(museum.get("menu_chapter")))
 			staging.load_scene(MUSEUM_SCENE)
 			return
 		# No staging is a dev boot of this scene on its own. The plain museum
