@@ -1,4603 +1,6498 @@
 {
  "_meta": {
-  "generated": "2026-09-07 12:29:25",
+  "generated": "2026-09-07 15:33:37",
   "generator": "tools/build_spine_artifact_order.py",
-  "rule": "first appearance walking the spine: sequence order -> map order -> interactables row-major",
+  "rule": "first appearance walking the spine: sequence order -> map order -> the room's thread (ruled, else floor, else file)",
   "sequences": 22,
   "maps_read": 187,
   "maps_missing": 0,
-  "artifacts": 918
+  "artifacts": 919,
+  "ordered_by": {
+   "ruled": 94,
+   "floor": 771,
+   "file": 54
+  },
+  "primary": 64,
+  "unruled": 690
  },
  "order": [
   {
-   "lookup": "origin",
-   "sequence": "primitives",
-   "map": "Point_One"
-  },
-  {
-   "lookup": "comment_box",
-   "sequence": "primitives",
-   "map": "Point_One"
-  },
-  {
    "lookup": "frame_counter_display",
    "sequence": "primitives",
-   "map": "Point_One"
-  },
-  {
-   "lookup": "grab_sphere_point_snap",
-   "sequence": "primitives",
-   "map": "Point_One"
-  },
-  {
-   "lookup": "spore_mushroom",
-   "sequence": "primitives",
-   "map": "Point_One"
-  },
-  {
-   "lookup": "street_talker",
-   "sequence": "primitives",
-   "map": "Point_One"
-  },
-  {
-   "lookup": "you_are_here",
-   "sequence": "primitives",
-   "map": "Point_One"
-  },
-  {
-   "lookup": "3t",
-   "sequence": "primitives",
-   "map": "Point_One"
-  },
-  {
-   "lookup": "interactive_point_origin_force",
-   "sequence": "primitives",
-   "map": "Point_One"
-  },
-  {
-   "lookup": "the_invisible_point",
-   "sequence": "primitives",
-   "map": "Point_One"
-  },
-  {
-   "lookup": "wireframe_threshold",
-   "sequence": "primitives",
-   "map": "Point_One"
-  },
-  {
-   "lookup": "coordinate_readout",
-   "sequence": "primitives",
-   "map": "Point_One"
+   "map": "Point_One",
+   "role": "primary",
+   "by": "ruled"
   },
   {
    "lookup": "folding_past",
    "sequence": "primitives",
-   "map": "Point_One"
+   "map": "Point_One",
+   "role": "primary",
+   "by": "ruled"
+  },
+  {
+   "lookup": "origin",
+   "sequence": "primitives",
+   "map": "Point_One",
+   "role": "primary",
+   "by": "ruled"
+  },
+  {
+   "lookup": "interactive_point_origin_force",
+   "sequence": "primitives",
+   "map": "Point_One",
+   "role": "primary",
+   "by": "ruled"
+  },
+  {
+   "lookup": "3t",
+   "sequence": "primitives",
+   "map": "Point_One",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "street_talker",
+   "sequence": "primitives",
+   "map": "Point_One",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "you_are_here",
+   "sequence": "primitives",
+   "map": "Point_One",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "grab_sphere_point_snap",
+   "sequence": "primitives",
+   "map": "Point_One",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "comment_box",
+   "sequence": "primitives",
+   "map": "Point_One",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "the_invisible_point",
+   "sequence": "primitives",
+   "map": "Point_One",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "drag_point_target",
    "sequence": "primitives",
-   "map": "Point_One"
-  },
-  {
-   "lookup": "fontana_puncture",
-   "sequence": "primitives",
-   "map": "Point_One"
+   "map": "Point_One",
+   "role": {
+    "role": "primary",
+    "group": "the-3d-coordinate-system"
+   },
+   "by": "floor"
   },
   {
    "lookup": "CoordinateSystem3M",
    "sequence": "primitives",
-   "map": "Point_One"
+   "map": "Point_One",
+   "role": {
+    "role": "primary",
+    "group": "the-3d-coordinate-system"
+   },
+   "by": "floor"
+  },
+  {
+   "lookup": "fontana_puncture",
+   "sequence": "primitives",
+   "map": "Point_One",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "floating_sphere_field",
    "sequence": "primitives",
-   "map": "Point_One"
+   "map": "Point_One",
+   "role": "secondary",
+   "by": "floor"
   },
   {
-   "lookup": "two_point_ruler",
+   "lookup": "coordinate_readout",
    "sequence": "primitives",
-   "map": "Point_Lines"
+   "map": "Point_One",
+   "role": {
+    "role": "primary",
+    "group": "the-3d-coordinate-system"
+   },
+   "by": "floor"
+  },
+  {
+   "lookup": "spore_mushroom",
+   "sequence": "primitives",
+   "map": "Point_One",
+   "role": "decoration",
+   "by": "floor"
+  },
+  {
+   "lookup": "wireframe_threshold",
+   "sequence": "primitives",
+   "map": "Point_One",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "redline",
    "sequence": "primitives",
-   "map": "Point_Lines"
+   "map": "Point_Lines",
+   "role": "unruled",
+   "by": "ruled"
   },
   {
    "lookup": "walk_this_line_marking",
    "sequence": "primitives",
-   "map": "Point_Lines"
+   "map": "Point_Lines",
+   "role": "unruled",
+   "by": "ruled"
   },
   {
-   "lookup": "modulor_man_demo",
+   "lookup": "two_point_ruler",
    "sequence": "primitives",
-   "map": "Point_Lines"
-  },
-  {
-   "lookup": "laser_measure",
-   "sequence": "primitives",
-   "map": "Point_Lines"
-  },
-  {
-   "lookup": "laser_exploding_sphere",
-   "sequence": "primitives",
-   "map": "Point_Lines"
-  },
-  {
-   "lookup": "line",
-   "sequence": "primitives",
-   "map": "Point_Lines"
-  },
-  {
-   "lookup": "line_sledgehammer",
-   "sequence": "primitives",
-   "map": "Point_Lines"
+   "map": "Point_Lines",
+   "role": "unruled",
+   "by": "ruled"
   },
   {
    "lookup": "line_demo",
    "sequence": "primitives",
-   "map": "Point_Lines"
-  },
-  {
-   "lookup": "plus_line_puzzle",
-   "sequence": "primitives",
-   "map": "Point_Lines"
-  },
-  {
-   "lookup": "parallel_line_puzzle",
-   "sequence": "primitives",
-   "map": "Point_Lines"
+   "map": "Point_Lines",
+   "role": "unruled",
+   "by": "ruled"
   },
   {
    "lookup": "do_not_cross_barrier",
    "sequence": "primitives",
-   "map": "Point_Lines"
-  },
-  {
-   "lookup": "perspective_lines",
-   "sequence": "primitives",
-   "map": "Point_Lines"
-  },
-  {
-   "lookup": "lightrod",
-   "sequence": "primitives",
-   "map": "Point_Lines"
-  },
-  {
-   "lookup": "wall_health_station",
-   "sequence": "primitives",
-   "map": "Point_Lines"
-  },
-  {
-   "lookup": "wall_abstract",
-   "sequence": "primitives",
-   "map": "Point_Lines"
-  },
-  {
-   "lookup": "axis_line",
-   "sequence": "primitives",
-   "map": "Point_Lines"
-  },
-  {
-   "lookup": "parallel_lines",
-   "sequence": "primitives",
-   "map": "Point_Lines"
+   "map": "Point_Lines",
+   "role": "unruled",
+   "by": "ruled"
   },
   {
    "lookup": "grabbable_line",
    "sequence": "primitives",
-   "map": "Point_Lines"
-  },
-  {
-   "lookup": "dark_sphere",
-   "sequence": "primitives",
-   "map": "Point_Lines"
-  },
-  {
-   "lookup": "anamorphic_cross",
-   "sequence": "primitives",
-   "map": "Point_Lines"
-  },
-  {
-   "lookup": "klee_walking_point",
-   "sequence": "primitives",
-   "map": "Point_Lines"
-  },
-  {
-   "lookup": "scale_lines",
-   "sequence": "primitives",
-   "map": "Point_Lines"
+   "map": "Point_Lines",
+   "role": "unruled",
+   "by": "ruled"
   },
   {
    "lookup": "two_points_line",
    "sequence": "primitives",
-   "map": "Point_Lines"
+   "map": "Point_Lines",
+   "role": "unruled",
+   "by": "ruled"
+  },
+  {
+   "lookup": "parallel_lines",
+   "sequence": "primitives",
+   "map": "Point_Lines",
+   "role": "unruled",
+   "by": "ruled"
+  },
+  {
+   "lookup": "modulor_man_demo",
+   "sequence": "primitives",
+   "map": "Point_Lines",
+   "role": "secondary",
+   "by": "file"
+  },
+  {
+   "lookup": "laser_measure",
+   "sequence": "primitives",
+   "map": "Point_Lines",
+   "role": {
+    "role": "primary",
+    "group": "laser"
+   },
+   "by": "file"
+  },
+  {
+   "lookup": "laser_exploding_sphere",
+   "sequence": "primitives",
+   "map": "Point_Lines",
+   "role": {
+    "role": "primary",
+    "group": "laser"
+   },
+   "by": "file"
+  },
+  {
+   "lookup": "line",
+   "sequence": "primitives",
+   "map": "Point_Lines",
+   "role": "secondary",
+   "by": "file"
+  },
+  {
+   "lookup": "line_sledgehammer",
+   "sequence": "primitives",
+   "map": "Point_Lines",
+   "role": "secondary",
+   "by": "file"
+  },
+  {
+   "lookup": "plus_line_puzzle",
+   "sequence": "primitives",
+   "map": "Point_Lines",
+   "role": "secondary",
+   "by": "file"
+  },
+  {
+   "lookup": "parallel_line_puzzle",
+   "sequence": "primitives",
+   "map": "Point_Lines",
+   "role": "secondary",
+   "by": "file"
+  },
+  {
+   "lookup": "perspective_lines",
+   "sequence": "primitives",
+   "map": "Point_Lines",
+   "role": "secondary",
+   "by": "file"
+  },
+  {
+   "lookup": "lightrod",
+   "sequence": "primitives",
+   "map": "Point_Lines",
+   "role": "secondary",
+   "by": "file"
+  },
+  {
+   "lookup": "wall_health_station",
+   "sequence": "primitives",
+   "map": "Point_Lines",
+   "role": "secondary",
+   "by": "file"
+  },
+  {
+   "lookup": "wall_abstract",
+   "sequence": "primitives",
+   "map": "Point_Lines",
+   "role": "secondary",
+   "by": "file"
+  },
+  {
+   "lookup": "axis_line",
+   "sequence": "primitives",
+   "map": "Point_Lines",
+   "role": "secondary",
+   "by": "file"
+  },
+  {
+   "lookup": "dark_sphere",
+   "sequence": "primitives",
+   "map": "Point_Lines",
+   "role": "decoration",
+   "by": "file"
+  },
+  {
+   "lookup": "anamorphic_cross",
+   "sequence": "primitives",
+   "map": "Point_Lines",
+   "role": "secondary",
+   "by": "file"
+  },
+  {
+   "lookup": "klee_walking_point",
+   "sequence": "primitives",
+   "map": "Point_Lines",
+   "role": "secondary",
+   "by": "file"
+  },
+  {
+   "lookup": "scale_lines",
+   "sequence": "primitives",
+   "map": "Point_Lines",
+   "role": "secondary",
+   "by": "file"
   },
   {
    "lookup": "science_screen",
    "sequence": "primitives",
-   "map": "Point_Lines"
-  },
-  {
-   "lookup": "draw_dot",
-   "sequence": "primitives",
-   "map": "Point_Trace"
-  },
-  {
-   "lookup": "draw_stick",
-   "sequence": "primitives",
-   "map": "Point_Trace"
+   "map": "Point_Lines",
+   "role": "secondary",
+   "by": "file"
   },
   {
    "lookup": "whiteboard",
    "sequence": "primitives",
-   "map": "Point_Trace"
+   "map": "Point_Trace",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "hand_telemetry_diptych",
    "sequence": "primitives",
-   "map": "Point_Trace"
+   "map": "Point_Trace",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "automatic_writing_desk",
    "sequence": "primitives",
-   "map": "Point_Trace"
+   "map": "Point_Trace",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "player_trace",
+   "lookup": "draw_dot",
    "sequence": "primitives",
-   "map": "Point_Line_Grid"
+   "map": "Point_Trace",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "grid_lines",
+   "lookup": "draw_stick",
    "sequence": "primitives",
-   "map": "Point_Line_Grid"
+   "map": "Point_Trace",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "room_grammar",
    "sequence": "primitives",
-   "map": "Point_Line_Grid"
+   "map": "Point_Line_Grid",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "player_trace",
+   "sequence": "primitives",
+   "map": "Point_Line_Grid",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "grid_lines",
+   "sequence": "primitives",
+   "map": "Point_Line_Grid",
+   "role": "unruled",
+   "by": "file"
   },
   {
    "lookup": "triangle_line_puzzle",
    "sequence": "primitives",
-   "map": "Point_Triangle_Context"
-  },
-  {
-   "lookup": "folded_strip",
-   "sequence": "primitives",
-   "map": "Point_Triangle_Context"
-  },
-  {
-   "lookup": "catalyst_prompter_box",
-   "sequence": "primitives",
-   "map": "Point_Triangle_Context"
-  },
-  {
-   "lookup": "catalyst_vent",
-   "sequence": "primitives",
-   "map": "Point_Triangle_Context"
-  },
-  {
-   "lookup": "pink_triangle",
-   "sequence": "primitives",
-   "map": "Point_Triangle_Context"
-  },
-  {
-   "lookup": "parasol_triangle",
-   "sequence": "primitives",
-   "map": "Point_Triangle_Context"
-  },
-  {
-   "lookup": "triangleprofiles",
-   "sequence": "primitives",
-   "map": "Point_Triangle_Context"
-  },
-  {
-   "lookup": "right_triangle_lines",
-   "sequence": "primitives",
-   "map": "Point_Triangle_Context"
-  },
-  {
-   "lookup": "silhouette_gate",
-   "sequence": "primitives",
-   "map": "Point_Triangle_Context"
-  },
-  {
-   "lookup": "draw_triangle_faces",
-   "sequence": "primitives",
-   "map": "Point_Triangle_Context"
-  },
-  {
-   "lookup": "pythagorean_triangle_angles",
-   "sequence": "primitives",
-   "map": "Point_Triangle_Context"
+   "map": "Point_Triangle_Context",
+   "role": "unruled",
+   "by": "ruled"
   },
   {
    "lookup": "interactivetriangle",
    "sequence": "primitives",
-   "map": "Point_Triangle_Context"
+   "map": "Point_Triangle_Context",
+   "role": "unruled",
+   "by": "ruled"
+  },
+  {
+   "lookup": "draw_triangle_faces",
+   "sequence": "primitives",
+   "map": "Point_Triangle_Context",
+   "role": "unruled",
+   "by": "ruled"
   },
   {
    "lookup": "triangle",
    "sequence": "primitives",
-   "map": "Point_Triangle_Context"
+   "map": "Point_Triangle_Context",
+   "role": "unruled",
+   "by": "ruled"
+  },
+  {
+   "lookup": "pythagorean_triangle_angles",
+   "sequence": "primitives",
+   "map": "Point_Triangle_Context",
+   "role": "unruled",
+   "by": "ruled"
+  },
+  {
+   "lookup": "right_triangle_lines",
+   "sequence": "primitives",
+   "map": "Point_Triangle_Context",
+   "role": "unruled",
+   "by": "ruled"
+  },
+  {
+   "lookup": "silhouette_gate",
+   "sequence": "primitives",
+   "map": "Point_Triangle_Context",
+   "role": "unruled",
+   "by": "ruled"
+  },
+  {
+   "lookup": "pink_triangle",
+   "sequence": "primitives",
+   "map": "Point_Triangle_Context",
+   "role": "unruled",
+   "by": "ruled"
   },
   {
    "lookup": "quad_line_puzzle",
    "sequence": "primitives",
-   "map": "Point_Triangle_Context"
+   "map": "Point_Triangle_Context",
+   "role": "unruled",
+   "by": "ruled"
   },
   {
    "lookup": "quad",
    "sequence": "primitives",
-   "map": "Point_Triangle_Context"
+   "map": "Point_Triangle_Context",
+   "role": "unruled",
+   "by": "ruled"
   },
   {
-   "lookup": "prism_block",
+   "lookup": "parasol_triangle",
    "sequence": "primitives",
-   "map": "Primitives_Polythedra"
+   "map": "Point_Triangle_Context",
+   "role": "secondary",
+   "by": "floor"
   },
   {
-   "lookup": "path_watchdog",
+   "lookup": "triangleprofiles",
    "sequence": "primitives",
-   "map": "Primitives_Polythedra"
+   "map": "Point_Triangle_Context",
+   "role": "primary",
+   "by": "floor"
   },
   {
-   "lookup": "path_game_controller",
+   "lookup": "catalyst_prompter_box",
    "sequence": "primitives",
-   "map": "Primitives_Polythedra"
+   "map": "Point_Triangle_Context",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "catalyst_vent",
+   "sequence": "primitives",
+   "map": "Point_Triangle_Context",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "folded_strip",
+   "sequence": "primitives",
+   "map": "Point_Triangle_Context",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "pyramid_edit",
    "sequence": "primitives",
-   "map": "Primitives_Polythedra"
+   "map": "Primitives_Polythedra",
+   "role": "unruled",
+   "by": "ruled"
   },
   {
    "lookup": "grab_tetrahedron",
    "sequence": "primitives",
-   "map": "Primitives_Polythedra"
-  },
-  {
-   "lookup": "cube_scene",
-   "sequence": "primitives",
-   "map": "Primitives_Polythedra"
+   "map": "Primitives_Polythedra",
+   "role": "unruled",
+   "by": "ruled"
   },
   {
    "lookup": "grab_trihedron",
    "sequence": "primitives",
-   "map": "Primitives_Polythedra"
+   "map": "Primitives_Polythedra",
+   "role": "unruled",
+   "by": "ruled"
   },
   {
-   "lookup": "becoming_catalyst",
+   "lookup": "prism_block",
    "sequence": "primitives",
-   "map": "Primitives_Polythedra"
-  },
-  {
-   "lookup": "tentacle_placer",
-   "sequence": "primitives",
-   "map": "Primitives_Polythedra"
+   "map": "Primitives_Polythedra",
+   "role": "primary",
+   "by": "ruled"
   },
   {
    "lookup": "diamonds",
    "sequence": "primitives",
-   "map": "Primitives_Polythedra"
+   "map": "Primitives_Polythedra",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "tentacle_placer",
+   "sequence": "primitives",
+   "map": "Primitives_Polythedra",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "cube_scene",
+   "sequence": "primitives",
+   "map": "Primitives_Polythedra",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "path_game_controller",
+   "sequence": "primitives",
+   "map": "Primitives_Polythedra",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "path_watchdog",
+   "sequence": "primitives",
+   "map": "Primitives_Polythedra",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "becoming_catalyst",
+   "sequence": "primitives",
+   "map": "Primitives_Polythedra",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "rock_spawner",
    "sequence": "primitives",
-   "map": "Primitives_Polythedra"
+   "map": "Primitives_Polythedra",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "rock_scanner",
    "sequence": "primitives",
-   "map": "Primitives_Polythedra"
+   "map": "Primitives_Polythedra",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "cube_lines",
    "sequence": "primitives",
-   "map": "Point_Animatedcube"
-  },
-  {
-   "lookup": "wooden_pallet",
-   "sequence": "primitives",
-   "map": "Point_Animatedcube"
-  },
-  {
-   "lookup": "first_shadow",
-   "sequence": "primitives",
-   "map": "Point_Animatedcube"
-  },
-  {
-   "lookup": "animatedcubebuilder",
-   "sequence": "primitives",
-   "map": "Point_Animatedcube"
-  },
-  {
-   "lookup": "hangar_supply_pile",
-   "sequence": "primitives",
-   "map": "Point_Animatedcube"
-  },
-  {
-   "lookup": "crate",
-   "sequence": "primitives",
-   "map": "Point_Animatedcube"
-  },
-  {
-   "lookup": "station_crates",
-   "sequence": "primitives",
-   "map": "Point_Animatedcube"
+   "map": "Point_Animatedcube",
+   "role": "primary",
+   "by": "ruled"
   },
   {
    "lookup": "polyhedron_nets_cube",
    "sequence": "primitives",
-   "map": "Point_Animatedcube"
+   "map": "Point_Animatedcube",
+   "role": "unruled",
+   "by": "ruled"
+  },
+  {
+   "lookup": "animatedcubebuilder",
+   "sequence": "primitives",
+   "map": "Point_Animatedcube",
+   "role": "unruled",
+   "by": "ruled"
+  },
+  {
+   "lookup": "wooden_pallet",
+   "sequence": "primitives",
+   "map": "Point_Animatedcube",
+   "role": {
+    "role": "primary",
+    "group": "boxes-example"
+   },
+   "by": "floor"
+  },
+  {
+   "lookup": "hangar_supply_pile",
+   "sequence": "primitives",
+   "map": "Point_Animatedcube",
+   "role": {
+    "role": "primary",
+    "group": "boxes-example"
+   },
+   "by": "floor"
+  },
+  {
+   "lookup": "crate",
+   "sequence": "primitives",
+   "map": "Point_Animatedcube",
+   "role": {
+    "role": "primary",
+    "group": "boxes-example"
+   },
+   "by": "floor"
+  },
+  {
+   "lookup": "station_crates",
+   "sequence": "primitives",
+   "map": "Point_Animatedcube",
+   "role": {
+    "role": "primary",
+    "group": "boxes-example"
+   },
+   "by": "floor"
   },
   {
    "lookup": "glove_box",
    "sequence": "primitives",
-   "map": "Point_Animatedcube"
+   "map": "Point_Animatedcube",
+   "role": {
+    "role": "primary",
+    "group": "boxes-example"
+   },
+   "by": "floor"
   },
   {
    "lookup": "pyramid",
    "sequence": "primitives",
-   "map": "Point_Animatedcube"
+   "map": "Point_Animatedcube",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "first_phosphor",
    "sequence": "primitives",
-   "map": "Point_Animatedcube"
+   "map": "Point_Animatedcube",
+   "role": {
+    "role": "primary",
+    "group": "boxes-example"
+   },
+   "by": "floor"
   },
   {
-   "lookup": "sphere",
+   "lookup": "first_shadow",
    "sequence": "primitives",
-   "map": "Primitives_Ignorance"
+   "map": "Point_Animatedcube",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "platonic_grabbables",
    "sequence": "primitives",
-   "map": "Primitives_Ignorance"
-  },
-  {
-   "lookup": "budget_of_smoothness",
-   "sequence": "primitives",
-   "map": "Primitives_Ignorance"
-  },
-  {
-   "lookup": "primitive_pillar",
-   "sequence": "primitives",
-   "map": "Primitives_Ignorance"
-  },
-  {
-   "lookup": "sphere_high",
-   "sequence": "primitives",
-   "map": "Primitives_Ignorance"
+   "map": "Primitives_Ignorance",
+   "role": "unruled",
+   "by": "ruled"
   },
   {
    "lookup": "star_primitive",
    "sequence": "primitives",
-   "map": "Primitives_Ignorance"
-  },
-  {
-   "lookup": "sphere_mid",
-   "sequence": "primitives",
-   "map": "Primitives_Ignorance"
+   "map": "Primitives_Ignorance",
+   "role": "unruled",
+   "by": "ruled"
   },
   {
    "lookup": "hole_with_cones",
    "sequence": "primitives",
-   "map": "Primitives_Ignorance"
-  },
-  {
-   "lookup": "seven_words_choir",
-   "sequence": "primitives",
-   "map": "Primitives_Ignorance"
+   "map": "Primitives_Ignorance",
+   "role": "unruled",
+   "by": "ruled"
   },
   {
    "lookup": "truncatedtetrahedron",
    "sequence": "primitives",
-   "map": "Primitives_Ignorance"
-  },
-  {
-   "lookup": "cylinder_radials_rings",
-   "sequence": "primitives",
-   "map": "Primitives_Ignorance"
-  },
-  {
-   "lookup": "sphere_low",
-   "sequence": "primitives",
-   "map": "Primitives_Ignorance"
+   "map": "Primitives_Ignorance",
+   "role": "unruled",
+   "by": "ruled"
   },
   {
    "lookup": "capsule",
    "sequence": "primitives",
-   "map": "Primitives_Ignorance"
+   "map": "Primitives_Ignorance",
+   "role": "unruled",
+   "by": "ruled"
   },
   {
    "lookup": "grab_octahedron",
    "sequence": "primitives",
-   "map": "Primitives_Ignorance"
+   "map": "Primitives_Ignorance",
+   "role": "secondary",
+   "by": "ruled"
   },
   {
    "lookup": "snap_octahedron_puzzle",
    "sequence": "primitives",
-   "map": "Primitives_Ignorance"
+   "map": "Primitives_Ignorance",
+   "role": "secondary",
+   "by": "ruled"
   },
   {
    "lookup": "roughrock",
    "sequence": "primitives",
-   "map": "Primitives_Ignorance"
+   "map": "Primitives_Ignorance",
+   "role": "unruled",
+   "by": "ruled"
   },
   {
    "lookup": "righttriangle",
    "sequence": "primitives",
-   "map": "Primitives_Ignorance"
+   "map": "Primitives_Ignorance",
+   "role": "unruled",
+   "by": "ruled"
+  },
+  {
+   "lookup": "primitive_pillar",
+   "sequence": "primitives",
+   "map": "Primitives_Ignorance",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "seven_words_choir",
+   "sequence": "primitives",
+   "map": "Primitives_Ignorance",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "cylinder_radials_rings",
+   "sequence": "primitives",
+   "map": "Primitives_Ignorance",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "sphere_mid",
+   "sequence": "primitives",
+   "map": "Primitives_Ignorance",
+   "role": {
+    "role": "primary",
+    "group": "spheres"
+   },
+   "by": "floor"
+  },
+  {
+   "lookup": "sphere_high",
+   "sequence": "primitives",
+   "map": "Primitives_Ignorance",
+   "role": {
+    "role": "primary",
+    "group": "spheres"
+   },
+   "by": "floor"
+  },
+  {
+   "lookup": "budget_of_smoothness",
+   "sequence": "primitives",
+   "map": "Primitives_Ignorance",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "sphere_low",
+   "sequence": "primitives",
+   "map": "Primitives_Ignorance",
+   "role": {
+    "role": "primary",
+    "group": "spheres"
+   },
+   "by": "floor"
+  },
+  {
+   "lookup": "sphere",
+   "sequence": "primitives",
+   "map": "Primitives_Ignorance",
+   "role": {
+    "role": "primary",
+    "group": "spheres"
+   },
+   "by": "floor"
   },
   {
    "lookup": "combine_portals",
    "sequence": "primitives",
-   "map": "Primitives_Portals"
+   "map": "Primitives_Portals",
+   "role": "unruled",
+   "by": "file"
   },
   {
    "lookup": "achilles_tortoise",
    "sequence": "primitives",
-   "map": "Primitives_Portals"
-  },
-  {
-   "lookup": "code_display",
-   "sequence": "primitives",
-   "map": "Primitives_Melencolia"
+   "map": "Primitives_Portals",
+   "role": "unruled",
+   "by": "file"
   },
   {
    "lookup": "bigframe",
    "sequence": "primitives",
-   "map": "Primitives_Melencolia"
-  },
-  {
-   "lookup": "snap_pyramid_puzzle",
-   "sequence": "primitives",
-   "map": "Primitives_Melencolia"
+   "map": "Primitives_Melencolia",
+   "role": "unruled",
+   "by": "ruled"
   },
   {
    "lookup": "diamondtoruscollection",
    "sequence": "primitives",
-   "map": "Primitives_Melencolia"
+   "map": "Primitives_Melencolia",
+   "role": "unruled",
+   "by": "ruled"
   },
   {
    "lookup": "pyramidlong",
    "sequence": "primitives",
-   "map": "Primitives_Melencolia"
+   "map": "Primitives_Melencolia",
+   "role": "unruled",
+   "by": "ruled"
   },
   {
    "lookup": "durer_scene",
    "sequence": "primitives",
-   "map": "Primitives_Melencolia"
+   "map": "Primitives_Melencolia",
+   "role": "unruled",
+   "by": "ruled"
+  },
+  {
+   "lookup": "snap_pyramid_puzzle",
+   "sequence": "primitives",
+   "map": "Primitives_Melencolia",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "code_display",
+   "sequence": "primitives",
+   "map": "Primitives_Melencolia",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "rhizome_world",
    "sequence": "primitives",
-   "map": "PRIM_RhizomeWorld"
+   "map": "PRIM_RhizomeWorld",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "mario_cube",
    "sequence": "transformation",
-   "map": "Trans_Pre"
+   "map": "Trans_Pre",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "pick_up_cube",
    "sequence": "transformation",
-   "map": "Trans_Pre"
+   "map": "Trans_Pre",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "clipboard",
    "sequence": "transformation",
-   "map": "Trans_Pre"
-  },
-  {
-   "lookup": "invariants_demo",
-   "sequence": "transformation",
-   "map": "Trans_Introduction"
-  },
-  {
-   "lookup": "rotation_gimbal",
-   "sequence": "transformation",
-   "map": "Trans_Introduction"
-  },
-  {
-   "lookup": "matrix_4x4_viewer",
-   "sequence": "transformation",
-   "map": "Trans_Introduction"
-  },
-  {
-   "lookup": "head_crab",
-   "sequence": "transformation",
-   "map": "Trans_Introduction"
-  },
-  {
-   "lookup": "z_translation_cube",
-   "sequence": "transformation",
-   "map": "Trans_Introduction"
+   "map": "Trans_Pre",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "balance_puzzle",
    "sequence": "transformation",
-   "map": "Trans_Introduction"
+   "map": "Trans_Introduction",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "z_translation_cube",
+   "sequence": "transformation",
+   "map": "Trans_Introduction",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "head_crab",
+   "sequence": "transformation",
+   "map": "Trans_Introduction",
+   "role": "decoration",
+   "by": "floor"
+  },
+  {
+   "lookup": "rotation_gimbal",
+   "sequence": "transformation",
+   "map": "Trans_Introduction",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "matrix_4x4_viewer",
+   "sequence": "transformation",
+   "map": "Trans_Introduction",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "invariants_demo",
+   "sequence": "transformation",
+   "map": "Trans_Introduction",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "homogeneous_coordinates",
    "sequence": "transformation",
-   "map": "Trans_Introduction"
+   "map": "Trans_Introduction",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "x_translation_cube",
    "sequence": "transformation",
-   "map": "Trans_Introduction"
+   "map": "Trans_Introduction",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "transform_composition",
    "sequence": "transformation",
-   "map": "Trans_Introduction"
+   "map": "Trans_Introduction",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "scale_me",
    "sequence": "transformation",
-   "map": "Trans_Introduction"
-  },
-  {
-   "lookup": "y_translation_cube",
-   "sequence": "transformation",
-   "map": "Trans_Introduction"
+   "map": "Trans_Introduction",
+   "role": "decoration",
+   "by": "floor"
   },
   {
    "lookup": "spin",
    "sequence": "transformation",
-   "map": "Trans_Introduction"
+   "map": "Trans_Introduction",
+   "role": "decoration",
+   "by": "floor"
   },
   {
-   "lookup": "rotatescalecubes",
+   "lookup": "y_translation_cube",
    "sequence": "transformation",
-   "map": "Trans_Translation"
-  },
-  {
-   "lookup": "transform_composition_workbench",
-   "sequence": "transformation",
-   "map": "Trans_Translation"
+   "map": "Trans_Introduction",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "synthesis_stand",
    "sequence": "transformation",
-   "map": "Trans_Translation"
+   "map": "Trans_Translation",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "transform_composition_workbench",
+   "sequence": "transformation",
+   "map": "Trans_Translation",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "rotatescalecubes",
+   "sequence": "transformation",
+   "map": "Trans_Translation",
+   "role": "primary",
+   "by": "floor"
   },
   {
    "lookup": "pickup_gate",
    "sequence": "transformation",
-   "map": "Trans_Translation"
+   "map": "Trans_Translation",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "toruscylinder",
    "sequence": "transformation",
-   "map": "Trans_AxisDecomposition"
+   "map": "Trans_AxisDecomposition",
+   "role": "unruled",
+   "by": "ruled"
   },
   {
    "lookup": "translation_cube_demo",
    "sequence": "transformation",
-   "map": "Trans_AxisDecomposition"
+   "map": "Trans_AxisDecomposition",
+   "role": "unruled",
+   "by": "ruled"
   },
   {
    "lookup": "rotate_grid_cubes",
    "sequence": "transformation",
-   "map": "Trans_Rotation"
+   "map": "Trans_Rotation",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "furniture_turntable",
    "sequence": "transformation",
-   "map": "Trans_Rotation"
-  },
-  {
-   "lookup": "boolean_tunnel",
-   "sequence": "transformation",
-   "map": "Trans_RotationSpectacle"
-  },
-  {
-   "lookup": "baggage_grammar",
-   "sequence": "transformation",
-   "map": "Trans_RotationSpectacle"
+   "map": "Trans_Rotation",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "two_cakes",
    "sequence": "transformation",
-   "map": "Trans_RotationSpectacle"
+   "map": "Trans_RotationSpectacle",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "carousel_cake",
    "sequence": "transformation",
-   "map": "Trans_RotationSpectacle"
+   "map": "Trans_RotationSpectacle",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "boolean_tunnel",
+   "sequence": "transformation",
+   "map": "Trans_RotationSpectacle",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "baggage_grammar",
+   "sequence": "transformation",
+   "map": "Trans_RotationSpectacle",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "chair_assembly_puzzle",
    "sequence": "transformation",
-   "map": "Trans_Scale"
+   "map": "Trans_Scale",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "pusher_block",
    "sequence": "transformation",
-   "map": "Trans_Pit"
+   "map": "Trans_Pit",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "grower_block",
    "sequence": "transformation",
-   "map": "Trans_Pit"
-  },
-  {
-   "lookup": "row_3_x",
-   "sequence": "color",
-   "map": "Array"
-  },
-  {
-   "lookup": "xyz_coordinates",
-   "sequence": "color",
-   "map": "Array"
-  },
-  {
-   "lookup": "column_3_z",
-   "sequence": "color",
-   "map": "Array"
-  },
-  {
-   "lookup": "grid_2d_4x4",
-   "sequence": "color",
-   "map": "Array"
+   "map": "Trans_Pit",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "pulsar_visualizer",
    "sequence": "color",
-   "map": "Array"
+   "map": "Array",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "grid_3d_4x4x4",
    "sequence": "color",
-   "map": "Array"
+   "map": "Array",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "grid3d",
+   "lookup": "grid_2d_4x4",
    "sequence": "color",
-   "map": "Array"
+   "map": "Array",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "bar_array",
+   "lookup": "row_3_x",
    "sequence": "color",
-   "map": "Array"
+   "map": "Array",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "xyz_coordinates",
+   "sequence": "color",
+   "map": "Array",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "column_3_z",
+   "sequence": "color",
+   "map": "Array",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "sorting_algorithm_race",
    "sequence": "color",
-   "map": "Array"
+   "map": "Array",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "grid3d",
+   "sequence": "color",
+   "map": "Array",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "bar_array",
+   "sequence": "color",
+   "map": "Array",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "bar_array_bubble_sort",
    "sequence": "color",
-   "map": "Array"
-  },
-  {
-   "lookup": "pattern_tile_4x4",
-   "sequence": "color",
-   "map": "Pattern_Foundry"
-  },
-  {
-   "lookup": "pattern_tile_mirror",
-   "sequence": "color",
-   "map": "Pattern_Foundry"
-  },
-  {
-   "lookup": "pattern_machine_c",
-   "sequence": "color",
-   "map": "Pattern_Foundry"
-  },
-  {
-   "lookup": "pattern_tile_herringbone",
-   "sequence": "color",
-   "map": "Pattern_Foundry"
-  },
-  {
-   "lookup": "pattern_maker_station",
-   "sequence": "color",
-   "map": "Pattern_Foundry"
-  },
-  {
-   "lookup": "pattern_machine_a",
-   "sequence": "color",
-   "map": "Pattern_Foundry"
+   "map": "Array",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "pattern_mill",
    "sequence": "color",
-   "map": "Pattern_Foundry"
+   "map": "Pattern_Foundry",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "pattern_tile_plate",
    "sequence": "color",
-   "map": "Pattern_Foundry"
+   "map": "Pattern_Foundry",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "pattern_maker_station",
+   "sequence": "color",
+   "map": "Pattern_Foundry",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "pattern_machine_c",
+   "sequence": "color",
+   "map": "Pattern_Foundry",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "pattern_tile_mirror",
+   "sequence": "color",
+   "map": "Pattern_Foundry",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "pattern_tile_4x4",
+   "sequence": "color",
+   "map": "Pattern_Foundry",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "pattern_tile_herringbone",
+   "sequence": "color",
+   "map": "Pattern_Foundry",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "pattern_machine_a",
+   "sequence": "color",
+   "map": "Pattern_Foundry",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "pattern_studio_plate",
    "sequence": "color",
-   "map": "Pattern_Foundry"
-  },
-  {
-   "lookup": "tiling_demo",
-   "sequence": "color",
-   "map": "Pattern_Foundry"
-  },
-  {
-   "lookup": "pattern_machine_d",
-   "sequence": "color",
-   "map": "Pattern_Foundry"
+   "map": "Pattern_Foundry",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "pattern_tile_brick",
    "sequence": "color",
-   "map": "Pattern_Foundry"
+   "map": "Pattern_Foundry",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "primitive_combo_puzzle",
+   "lookup": "pattern_machine_d",
    "sequence": "color",
-   "map": "Color_Context_Placed"
+   "map": "Pattern_Foundry",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "mill_memphis_p3",
+   "lookup": "tiling_demo",
    "sequence": "color",
-   "map": "Color_Context_Placed"
-  },
-  {
-   "lookup": "dna_color_stacks_stack_simultaneous_contrast",
-   "sequence": "color",
-   "map": "Color_Context_Placed"
-  },
-  {
-   "lookup": "dna_color_stacks_stack_complementary_red_green",
-   "sequence": "color",
-   "map": "Color_Context_Placed"
-  },
-  {
-   "lookup": "dna_color_furniture_furniture_becker_utensilo_bauhaus",
-   "sequence": "color",
-   "map": "Color_Context_Placed"
-  },
-  {
-   "lookup": "loom_fountain_pastel_p4",
-   "sequence": "color",
-   "map": "Color_Context_Placed"
-  },
-  {
-   "lookup": "loom_bolt_memphis_p4g",
-   "sequence": "color",
-   "map": "Color_Context_Placed"
-  },
-  {
-   "lookup": "dna_primitive_stack_ps01_bauhaus_totem_green",
-   "sequence": "color",
-   "map": "Color_Context_Placed"
-  },
-  {
-   "lookup": "dna_color_stacks_stack_value_steps_warm",
-   "sequence": "color",
-   "map": "Color_Context_Placed"
-  },
-  {
-   "lookup": "dna_modern_art_kandinsky_bauhaus_triad",
-   "sequence": "color",
-   "map": "Color_Context_Placed"
-  },
-  {
-   "lookup": "albers_wall_gallery",
-   "sequence": "color",
-   "map": "Color_Context_Placed"
-  },
-  {
-   "lookup": "primitive_assembler",
-   "sequence": "color",
-   "map": "Color_Context_Placed"
-  },
-  {
-   "lookup": "dna_modern_art_rothko_chromatic_field",
-   "sequence": "color",
-   "map": "Color_Context_Placed"
-  },
-  {
-   "lookup": "dna_modern_art_albers_homage_warm",
-   "sequence": "color",
-   "map": "Color_Context_Placed"
-  },
-  {
-   "lookup": "standalone_disco",
-   "sequence": "color",
-   "map": "Color_Context_Placed"
-  },
-  {
-   "lookup": "dna_color_furniture_furniture_lamp_warm_glow",
-   "sequence": "color",
-   "map": "Color_Context_Placed"
-  },
-  {
-   "lookup": "dna_color_furniture_furniture_vignelli_metafora_primary",
-   "sequence": "color",
-   "map": "Color_Context_Placed"
-  },
-  {
-   "lookup": "dna_color_stacks_stack_triadic_primary",
-   "sequence": "color",
-   "map": "Color_Context_Placed"
-  },
-  {
-   "lookup": "dna_color_furniture_furniture_coco_pendant_warm",
-   "sequence": "color",
-   "map": "Color_Context_Placed"
-  },
-  {
-   "lookup": "grid_model",
-   "sequence": "color",
-   "map": "Color_Context_Placed"
-  },
-  {
-   "lookup": "dna_color_stacks_stack_monochrome_blue",
-   "sequence": "color",
-   "map": "Color_Context_Placed"
+   "map": "Pattern_Foundry",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "loom_drum_bauhaus_p4m",
    "sequence": "color",
-   "map": "Color_Context_Placed"
+   "map": "Color_Context_Placed",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "colorballs",
+   "lookup": "grid_model",
    "sequence": "color",
-   "map": "Color_Nails"
+   "map": "Color_Context_Placed",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "dna_color_stacks_stack_triadic_primary",
+   "sequence": "color",
+   "map": "Color_Context_Placed",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "dna_color_furniture_furniture_lamp_warm_glow",
+   "sequence": "color",
+   "map": "Color_Context_Placed",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "dna_modern_art_albers_homage_warm",
+   "sequence": "color",
+   "map": "Color_Context_Placed",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "dna_modern_art_rothko_chromatic_field",
+   "sequence": "color",
+   "map": "Color_Context_Placed",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "primitive_assembler",
+   "sequence": "color",
+   "map": "Color_Context_Placed",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "dna_modern_art_kandinsky_bauhaus_triad",
+   "sequence": "color",
+   "map": "Color_Context_Placed",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "dna_primitive_stack_ps01_bauhaus_totem_green",
+   "sequence": "color",
+   "map": "Color_Context_Placed",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "loom_bolt_memphis_p4g",
+   "sequence": "color",
+   "map": "Color_Context_Placed",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "dna_color_furniture_furniture_becker_utensilo_bauhaus",
+   "sequence": "color",
+   "map": "Color_Context_Placed",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "dna_color_stacks_stack_complementary_red_green",
+   "sequence": "color",
+   "map": "Color_Context_Placed",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "mill_memphis_p3",
+   "sequence": "color",
+   "map": "Color_Context_Placed",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "dna_color_stacks_stack_simultaneous_contrast",
+   "sequence": "color",
+   "map": "Color_Context_Placed",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "loom_fountain_pastel_p4",
+   "sequence": "color",
+   "map": "Color_Context_Placed",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "dna_color_stacks_stack_value_steps_warm",
+   "sequence": "color",
+   "map": "Color_Context_Placed",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "albers_wall_gallery",
+   "sequence": "color",
+   "map": "Color_Context_Placed",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "standalone_disco",
+   "sequence": "color",
+   "map": "Color_Context_Placed",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "dna_color_furniture_furniture_vignelli_metafora_primary",
+   "sequence": "color",
+   "map": "Color_Context_Placed",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "dna_color_furniture_furniture_coco_pendant_warm",
+   "sequence": "color",
+   "map": "Color_Context_Placed",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "dna_color_stacks_stack_monochrome_blue",
+   "sequence": "color",
+   "map": "Color_Context_Placed",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "primitive_combo_puzzle",
+   "sequence": "color",
+   "map": "Color_Context_Placed",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "nail_color_controller",
    "sequence": "color",
-   "map": "Color_Nails"
+   "map": "Color_Nails",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "hand_model",
    "sequence": "color",
-   "map": "Color_Nails"
+   "map": "Color_Nails",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "hand_color_controller",
    "sequence": "color",
-   "map": "Color_Nails"
-  },
-  {
-   "lookup": "grab_stick_scanner",
-   "sequence": "color",
-   "map": "Color_Nails"
+   "map": "Color_Nails",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "dark_side_prism",
    "sequence": "color",
-   "map": "Color_Nails"
+   "map": "Color_Nails",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "loom_drum_persian_p6",
+   "lookup": "grab_stick_scanner",
    "sequence": "color",
-   "map": "Color_Pillar"
+   "map": "Color_Nails",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "pillarcolorcollection",
+   "lookup": "colorballs",
    "sequence": "color",
-   "map": "Color_Pillar"
-  },
-  {
-   "lookup": "color_sets_overview",
-   "sequence": "color",
-   "map": "Color_Pillar"
+   "map": "Color_Nails",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "composition_twins",
    "sequence": "color",
-   "map": "Color_Pillar"
+   "map": "Color_Pillar",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "color_sets_overview",
+   "sequence": "color",
+   "map": "Color_Pillar",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "loom_drum_persian_p6",
+   "sequence": "color",
+   "map": "Color_Pillar",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "pillarcolorcollection",
+   "sequence": "color",
+   "map": "Color_Pillar",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "visual_color_mixing",
    "sequence": "color",
-   "map": "Color_Pillar"
+   "map": "Color_Pillar",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "SpectrumVisualizer",
    "sequence": "color",
-   "map": "Color_Pillar"
+   "map": "Color_Pillar",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "grab_rainbow_stick",
    "sequence": "color",
-   "map": "Color_Pillar"
-  },
-  {
-   "lookup": "milky_glass_window",
-   "sequence": "color",
-   "map": "Color_Walls"
-  },
-  {
-   "lookup": "rainbow_hallway",
-   "sequence": "color",
-   "map": "Color_Walls"
-  },
-  {
-   "lookup": "color_space_navigator",
-   "sequence": "color",
-   "map": "Color_Walls"
-  },
-  {
-   "lookup": "rainbow",
-   "sequence": "color",
-   "map": "Color_Walls"
+   "map": "Color_Pillar",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "ball_painting_demo",
    "sequence": "color",
-   "map": "Color_Walls"
+   "map": "Color_Walls",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "color_constellation_office",
    "sequence": "color",
-   "map": "Color_Walls"
+   "map": "Color_Walls",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "subpixel_display",
    "sequence": "color",
-   "map": "Color_Walls"
+   "map": "Color_Walls",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "spectrum_forest",
    "sequence": "color",
-   "map": "Color_Walls"
+   "map": "Color_Walls",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "gradient_interpolator",
    "sequence": "color",
-   "map": "Color_Walls"
+   "map": "Color_Walls",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "wallpaper_cage",
+   "lookup": "rainbow",
    "sequence": "color",
-   "map": "Symmetry_Seventeen"
+   "map": "Color_Walls",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "loom_alhambra_p6m",
+   "lookup": "color_space_navigator",
    "sequence": "color",
-   "map": "Symmetry_Seventeen"
+   "map": "Color_Walls",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "wall_pattern_gallery",
+   "lookup": "rainbow_hallway",
    "sequence": "color",
-   "map": "Symmetry_Seventeen"
+   "map": "Color_Walls",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "pattern_loom",
+   "lookup": "milky_glass_window",
    "sequence": "color",
-   "map": "Symmetry_Seventeen"
-  },
-  {
-   "lookup": "loom_escher_mirror",
-   "sequence": "color",
-   "map": "Symmetry_Seventeen"
-  },
-  {
-   "lookup": "vr_tile_editor",
-   "sequence": "color",
-   "map": "Symmetry_Seventeen"
-  },
-  {
-   "lookup": "mill_alhambra_p6m",
-   "sequence": "color",
-   "map": "Symmetry_Seventeen"
-  },
-  {
-   "lookup": "pattern_tile_puzzle",
-   "sequence": "color",
-   "map": "Symmetry_Seventeen"
-  },
-  {
-   "lookup": "mill_persian_p4",
-   "sequence": "color",
-   "map": "Symmetry_Seventeen"
+   "map": "Color_Walls",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "mill_escher_p4g",
    "sequence": "color",
-   "map": "Symmetry_Seventeen"
+   "map": "Symmetry_Seventeen",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "kaleidoscope",
+   "lookup": "pattern_tile_puzzle",
    "sequence": "color",
-   "map": "Symmetry_Seventeen"
+   "map": "Symmetry_Seventeen",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "mill_alhambra_p6m",
+   "sequence": "color",
+   "map": "Symmetry_Seventeen",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "loom_alhambra_p6m",
+   "sequence": "color",
+   "map": "Symmetry_Seventeen",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "pattern_loom",
+   "sequence": "color",
+   "map": "Symmetry_Seventeen",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "wall_pattern_gallery",
+   "sequence": "color",
+   "map": "Symmetry_Seventeen",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "wallpaper_cage",
+   "sequence": "color",
+   "map": "Symmetry_Seventeen",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "loom_escher_mirror",
+   "sequence": "color",
+   "map": "Symmetry_Seventeen",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "vr_tile_editor",
+   "sequence": "color",
+   "map": "Symmetry_Seventeen",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "mill_persian_p4",
+   "sequence": "color",
+   "map": "Symmetry_Seventeen",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "pattern_atlas_gallery",
    "sequence": "color",
-   "map": "Symmetry_Seventeen"
+   "map": "Symmetry_Seventeen",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "pattern_artifact",
    "sequence": "color",
-   "map": "Symmetry_Seventeen"
+   "map": "Symmetry_Seventeen",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "tile_meander_floor",
    "sequence": "color",
-   "map": "Symmetry_Seventeen"
+   "map": "Symmetry_Seventeen",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "derivative_pair",
-   "sequence": "change",
-   "map": "Change_Intro"
-  },
-  {
-   "lookup": "zeno_staircase",
-   "sequence": "change",
-   "map": "Change_Intro"
-  },
-  {
-   "lookup": "velocity_arrow",
-   "sequence": "change",
-   "map": "Change_Intro"
-  },
-  {
-   "lookup": "tangent_slope_workbench",
-   "sequence": "change",
-   "map": "Change_Intro"
-  },
-  {
-   "lookup": "gradient_descent_well",
-   "sequence": "change",
-   "map": "Change_Intro"
-  },
-  {
-   "lookup": "paper_regatta",
-   "sequence": "change",
-   "map": "Change_Intro"
+   "lookup": "kaleidoscope",
+   "sequence": "color",
+   "map": "Symmetry_Seventeen",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "slope_tangent_demo",
    "sequence": "change",
-   "map": "Change_Intro"
+   "map": "Change_Intro",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "tangent_slope_workbench",
+   "sequence": "change",
+   "map": "Change_Intro",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "derivative_pair",
+   "sequence": "change",
+   "map": "Change_Intro",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "gradient_descent_well",
+   "sequence": "change",
+   "map": "Change_Intro",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "paper_regatta",
+   "sequence": "change",
+   "map": "Change_Intro",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "partial_derivative_terrain",
    "sequence": "change",
-   "map": "Change_Intro"
+   "map": "Change_Intro",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "descent_marble_toy",
    "sequence": "change",
-   "map": "Change_Intro"
+   "map": "Change_Intro",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "riemann_sum_workbench",
+   "lookup": "velocity_arrow",
    "sequence": "change",
-   "map": "Accumulation_Riemann"
+   "map": "Change_Intro",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "riemann_pi",
+   "lookup": "zeno_staircase",
    "sequence": "change",
-   "map": "Accumulation_Riemann"
-  },
-  {
-   "lookup": "integral_area",
-   "sequence": "change",
-   "map": "Accumulation_Riemann"
+   "map": "Change_Intro",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "riemann_pump",
    "sequence": "change",
-   "map": "Accumulation_Riemann"
+   "map": "Accumulation_Riemann",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "noc_5_04_flow_field",
+   "lookup": "riemann_pi",
    "sequence": "change",
-   "map": "Flow_Field"
+   "map": "Accumulation_Riemann",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "particle_flow_swarm",
+   "lookup": "integral_area",
    "sequence": "change",
-   "map": "Flow_Field"
+   "map": "Accumulation_Riemann",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "vector_field_visualizer",
+   "lookup": "riemann_sum_workbench",
    "sequence": "change",
-   "map": "Flow_Field"
+   "map": "Accumulation_Riemann",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "vector_field_grid",
    "sequence": "change",
-   "map": "Flow_Field"
+   "map": "Flow_Field",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "noc_5_04_flow_field",
+   "sequence": "change",
+   "map": "Flow_Field",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "vector_field_visualizer",
+   "sequence": "change",
+   "map": "Flow_Field",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "particle_flow_swarm",
+   "sequence": "change",
+   "map": "Flow_Field",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "flow_field_painter",
    "sequence": "change",
-   "map": "Flow_Field"
+   "map": "Flow_Field",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "ftc_bridge",
    "sequence": "change",
-   "map": "Change_Reconciliation"
-  },
-  {
-   "lookup": "route_vector",
-   "sequence": "forces",
-   "map": "Vectors_Act1_WhatAVectorIs"
+   "map": "Change_Reconciliation",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "VectorBasics",
    "sequence": "forces",
-   "map": "Vectors_Act1_WhatAVectorIs"
+   "map": "Vectors_Act1_WhatAVectorIs",
+   "role": "primary",
+   "by": "ruled"
   },
   {
    "lookup": "length_lantern",
    "sequence": "forces",
-   "map": "Vectors_Act1_WhatAVectorIs"
+   "map": "Vectors_Act1_WhatAVectorIs",
+   "role": "primary",
+   "by": "ruled"
   },
   {
    "lookup": "vector_normalize_demo",
    "sequence": "forces",
-   "map": "Vectors_Act1_WhatAVectorIs"
+   "map": "Vectors_Act1_WhatAVectorIs",
+   "role": "primary",
+   "by": "ruled"
   },
   {
-   "lookup": "vector_projection_demo",
+   "lookup": "route_vector",
    "sequence": "forces",
-   "map": "VFM_02_Operations"
-  },
-  {
-   "lookup": "2d_in_3d_vectors_vis",
-   "sequence": "forces",
-   "map": "VFM_02_Operations"
+   "map": "Vectors_Act1_WhatAVectorIs",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "adder_board",
    "sequence": "forces",
-   "map": "VFM_02_Operations"
-  },
-  {
-   "lookup": "basis_vectors_rig",
-   "sequence": "forces",
-   "map": "VFM_02_Operations"
-  },
-  {
-   "lookup": "coordinate_system_switcher",
-   "sequence": "forces",
-   "map": "VFM_02_Operations"
+   "map": "VFM_02_Operations",
+   "role": "primary",
+   "by": "ruled"
   },
   {
    "lookup": "VectorSubtraction",
    "sequence": "forces",
-   "map": "VFM_02_Operations"
+   "map": "VFM_02_Operations",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "example_1_4_vector_multiplication_vr",
    "sequence": "forces",
-   "map": "VFM_02_Operations"
+   "map": "VFM_02_Operations",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "stretch_bench",
    "sequence": "forces",
-   "map": "VFM_02_Operations"
+   "map": "VFM_02_Operations",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "vector_addition_demo",
    "sequence": "forces",
-   "map": "VFM_02_Operations"
+   "map": "VFM_02_Operations",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "vector_addition_xl",
    "sequence": "forces",
-   "map": "VFM_02_Operations"
+   "map": "VFM_02_Operations",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "vector_magnitude_demo",
    "sequence": "forces",
-   "map": "VFM_02_Operations"
-  },
-  {
-   "lookup": "vector_subtraction_demo",
-   "sequence": "forces",
-   "map": "VFM_02_Operations"
-  },
-  {
-   "lookup": "vector_dot_product_xl",
-   "sequence": "forces",
-   "map": "VFM_02_Operations"
-  },
-  {
-   "lookup": "vector_cross_product_xl",
-   "sequence": "forces",
-   "map": "VFM_02_Operations"
+   "map": "VFM_02_Operations",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "vector_translation_demo",
    "sequence": "forces",
-   "map": "VFM_02_Operations"
+   "map": "VFM_02_Operations",
+   "role": "secondary",
+   "by": "floor"
   },
   {
-   "lookup": "dot_aligner",
+   "lookup": "vector_cross_product_xl",
    "sequence": "forces",
-   "map": "VFM_02_Operations"
+   "map": "VFM_02_Operations",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "torque_crank",
    "sequence": "forces",
-   "map": "VFM_02_Operations"
-  },
-  {
-   "lookup": "VectorTorque",
-   "sequence": "forces",
-   "map": "VFM_02_Operations"
+   "map": "VFM_02_Operations",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "dot_product_projector",
    "sequence": "forces",
-   "map": "VFM_02_Operations"
-  },
-  {
-   "lookup": "VectorWorkbench",
-   "sequence": "forces",
-   "map": "VFM_02_Operations"
-  },
-  {
-   "lookup": "vector_add",
-   "sequence": "forces",
-   "map": "VFM_02_Operations"
-  },
-  {
-   "lookup": "vector_projection_reflection_xl",
-   "sequence": "forces",
-   "map": "VFM_02_Operations"
-  },
-  {
-   "lookup": "projection_shadow",
-   "sequence": "forces",
-   "map": "VFM_02_Operations"
-  },
-  {
-   "lookup": "agreement_gauge",
-   "sequence": "forces",
-   "map": "VFM_02_Operations"
-  },
-  {
-   "lookup": "opening_pair",
-   "sequence": "forces",
-   "map": "VFM_02_Operations"
-  },
-  {
-   "lookup": "torque_demo",
-   "sequence": "forces",
-   "map": "VFM_02_Operations"
+   "map": "VFM_02_Operations",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "exercise_5_9_angle_between",
    "sequence": "forces",
-   "map": "VFM_02_Operations"
+   "map": "VFM_02_Operations",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "projection_shadow",
+   "sequence": "forces",
+   "map": "VFM_02_Operations",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "vector_projection_reflection_xl",
+   "sequence": "forces",
+   "map": "VFM_02_Operations",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "vector_add",
+   "sequence": "forces",
+   "map": "VFM_02_Operations",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "torque_demo",
+   "sequence": "forces",
+   "map": "VFM_02_Operations",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "opening_pair",
+   "sequence": "forces",
+   "map": "VFM_02_Operations",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "agreement_gauge",
+   "sequence": "forces",
+   "map": "VFM_02_Operations",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "VectorWorkbench",
+   "sequence": "forces",
+   "map": "VFM_02_Operations",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "dot_aligner",
+   "sequence": "forces",
+   "map": "VFM_02_Operations",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "vector_dot_product_xl",
+   "sequence": "forces",
+   "map": "VFM_02_Operations",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "2d_in_3d_vectors_vis",
+   "sequence": "forces",
+   "map": "VFM_02_Operations",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "vector_projection_demo",
+   "sequence": "forces",
+   "map": "VFM_02_Operations",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "vector_subtraction_demo",
+   "sequence": "forces",
+   "map": "VFM_02_Operations",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "basis_vectors_rig",
+   "sequence": "forces",
+   "map": "VFM_02_Operations",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "coordinate_system_switcher",
+   "sequence": "forces",
+   "map": "VFM_02_Operations",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "VectorTorque",
+   "sequence": "forces",
+   "map": "VFM_02_Operations",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "vector_addition_walk",
    "sequence": "forces",
-   "map": "Vectors_Act2_VectorArithmetic"
+   "map": "Vectors_Act2_VectorArithmetic",
+   "role": "primary",
+   "by": "ruled"
   },
   {
    "lookup": "vector_sub",
    "sequence": "forces",
-   "map": "Vectors_Act2_VectorArithmetic"
+   "map": "Vectors_Act2_VectorArithmetic",
+   "role": "primary",
+   "by": "ruled"
   },
   {
    "lookup": "example_2_3_gravity_scaled_by_mass_vr",
    "sequence": "forces",
-   "map": "Vectors_Act2_VectorArithmetic"
+   "map": "Vectors_Act2_VectorArithmetic",
+   "role": "primary",
+   "by": "ruled"
   },
   {
    "lookup": "vector_addition_xl_laser",
    "sequence": "forces",
-   "map": "Vectors_Act2_VectorArithmetic"
+   "map": "Vectors_Act2_VectorArithmetic",
+   "role": "primary",
+   "by": "ruled"
   },
   {
    "lookup": "vector_subtraction_xl_laser",
    "sequence": "forces",
-   "map": "Vectors_Act2_VectorArithmetic"
+   "map": "Vectors_Act2_VectorArithmetic",
+   "role": "primary",
+   "by": "ruled"
   },
   {
    "lookup": "ForceMagnitudeDemo",
    "sequence": "forces",
-   "map": "VFM_05_Launch"
+   "map": "VFM_05_Launch",
+   "role": "primary",
+   "by": "ruled"
   },
   {
    "lookup": "VectorForces",
    "sequence": "forces",
-   "map": "VFM_05_Launch"
+   "map": "VFM_05_Launch",
+   "role": "primary",
+   "by": "ruled"
   },
   {
    "lookup": "catapult",
    "sequence": "forces",
-   "map": "VFM_05_Launch"
-  },
-  {
-   "lookup": "hl_turret_vectors",
-   "sequence": "forces",
-   "map": "VFM_05_Launch"
-  },
-  {
-   "lookup": "turret_boll_infoboard",
-   "sequence": "forces",
-   "map": "VFM_05_Launch"
-  },
-  {
-   "lookup": "mortar_vector_siege",
-   "sequence": "forces",
-   "map": "VFM_05_Launch"
+   "map": "VFM_05_Launch",
+   "role": "primary",
+   "by": "ruled"
   },
   {
    "lookup": "launch_arc",
    "sequence": "forces",
-   "map": "VFM_05_Launch"
-  },
-  {
-   "lookup": "firework_burst",
-   "sequence": "forces",
-   "map": "VFM_05_Launch"
-  },
-  {
-   "lookup": "VectorThrowing",
-   "sequence": "forces",
-   "map": "VFM_05_Launch"
-  },
-  {
-   "lookup": "firework_launcher",
-   "sequence": "forces",
-   "map": "VFM_05_Launch"
-  },
-  {
-   "lookup": "return_launcher",
-   "sequence": "forces",
-   "map": "VFM_05_Launch"
+   "map": "VFM_05_Launch",
+   "role": "primary",
+   "by": "ruled"
   },
   {
    "lookup": "human_catapult",
    "sequence": "forces",
-   "map": "VFM_05_Launch"
+   "map": "VFM_05_Launch",
+   "role": "primary",
+   "by": "ruled"
   },
   {
-   "lookup": "force_pad",
+   "lookup": "firework_launcher",
    "sequence": "forces",
-   "map": "VFM_05_Launch"
-  },
-  {
-   "lookup": "drag_lane",
-   "sequence": "forces",
-   "map": "VFM_05_Launch"
-  },
-  {
-   "lookup": "circle_train",
-   "sequence": "forces",
-   "map": "VFM_05_Launch"
-  },
-  {
-   "lookup": "slingshot_launcher",
-   "sequence": "forces",
-   "map": "VFM_05_Launch"
+   "map": "VFM_05_Launch",
+   "role": "primary",
+   "by": "ruled"
   },
   {
    "lookup": "foresight_range",
    "sequence": "forces",
-   "map": "VFM_05_Launch"
+   "map": "VFM_05_Launch",
+   "role": "primary",
+   "by": "ruled"
   },
   {
-   "lookup": "normal_force_demo",
+   "lookup": "drag_lane",
    "sequence": "forces",
-   "map": "VFM_03_Motion"
+   "map": "VFM_05_Launch",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "slingshot_launcher",
+   "sequence": "forces",
+   "map": "VFM_05_Launch",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "return_launcher",
+   "sequence": "forces",
+   "map": "VFM_05_Launch",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "VectorThrowing",
+   "sequence": "forces",
+   "map": "VFM_05_Launch",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "firework_burst",
+   "sequence": "forces",
+   "map": "VFM_05_Launch",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "hl_turret_vectors",
+   "sequence": "forces",
+   "map": "VFM_05_Launch",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "turret_boll_infoboard",
+   "sequence": "forces",
+   "map": "VFM_05_Launch",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "force_pad",
+   "sequence": "forces",
+   "map": "VFM_05_Launch",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "circle_train",
+   "sequence": "forces",
+   "map": "VFM_05_Launch",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "mortar_vector_siege",
+   "sequence": "forces",
+   "map": "VFM_05_Launch",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "example_1_9_motion_101_velocity_and_random_acceleration_vr",
    "sequence": "forces",
-   "map": "VFM_03_Motion"
+   "map": "VFM_03_Motion",
+   "role": "secondary",
+   "by": "floor"
   },
   {
-   "lookup": "vector_drone",
+   "lookup": "normal_force_demo",
    "sequence": "forces",
-   "map": "VFM_03_Motion"
+   "map": "VFM_03_Motion",
+   "role": "primary",
+   "by": "floor"
   },
   {
    "lookup": "bouncing_ball",
    "sequence": "forces",
-   "map": "VFM_03_Motion"
-  },
-  {
-   "lookup": "trajectory_artifact",
-   "sequence": "forces",
-   "map": "VFM_03_Motion"
+   "map": "VFM_03_Motion",
+   "role": "primary",
+   "by": "floor"
   },
   {
    "lookup": "VectorMotion",
    "sequence": "forces",
-   "map": "VFM_03_Motion"
+   "map": "VFM_03_Motion",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "exercise_1_3_solution_3_d_bouncing_ball_vr",
    "sequence": "forces",
-   "map": "VFM_03_Motion"
+   "map": "VFM_03_Motion",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "exercise_1_5_solution_accelerate_and_decelerate_vr",
    "sequence": "forces",
-   "map": "VFM_03_Motion"
+   "map": "VFM_03_Motion",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "example_2_5_fluid_resistance_vr",
    "sequence": "forces",
-   "map": "VFM_03_Motion"
-  },
-  {
-   "lookup": "example_3_2_forces_with_arbitrary_angular_motion_vr",
-   "sequence": "forces",
-   "map": "VFM_03_Motion"
-  },
-  {
-   "lookup": "example_3_3_pointing_in_the_direction_of_motion_vr",
-   "sequence": "forces",
-   "map": "VFM_03_Motion"
-  },
-  {
-   "lookup": "friction_ramp",
-   "sequence": "forces",
-   "map": "VFM_03_Motion"
-  },
-  {
-   "lookup": "newton_cradle",
-   "sequence": "forces",
-   "map": "VFM_03_Motion"
+   "map": "VFM_03_Motion",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "combined_forces_demo",
    "sequence": "forces",
-   "map": "VFM_03_Motion"
+   "map": "VFM_03_Motion",
+   "role": "primary",
+   "by": "floor"
+  },
+  {
+   "lookup": "newton_cradle",
+   "sequence": "forces",
+   "map": "VFM_03_Motion",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "friction_ramp",
+   "sequence": "forces",
+   "map": "VFM_03_Motion",
+   "role": "primary",
+   "by": "floor"
+  },
+  {
+   "lookup": "example_3_3_pointing_in_the_direction_of_motion_vr",
+   "sequence": "forces",
+   "map": "VFM_03_Motion",
+   "role": "primary",
+   "by": "floor"
+  },
+  {
+   "lookup": "example_3_2_forces_with_arbitrary_angular_motion_vr",
+   "sequence": "forces",
+   "map": "VFM_03_Motion",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "collision_crasher",
    "sequence": "forces",
-   "map": "VFM_03_Motion"
+   "map": "VFM_03_Motion",
+   "role": "primary",
+   "by": "floor"
   },
   {
-   "lookup": "field_room",
+   "lookup": "vector_drone",
    "sequence": "forces",
-   "map": "Vectors_Act3_FieldsAndMotion"
+   "map": "VFM_03_Motion",
+   "role": "secondary",
+   "by": "floor"
   },
   {
-   "lookup": "force_field_visualizer",
+   "lookup": "trajectory_artifact",
    "sequence": "forces",
-   "map": "Vectors_Act3_FieldsAndMotion"
-  },
-  {
-   "lookup": "force_fields",
-   "sequence": "forces",
-   "map": "Vectors_Act3_FieldsAndMotion"
-  },
-  {
-   "lookup": "force_vortex",
-   "sequence": "forces",
-   "map": "Vectors_Act3_FieldsAndMotion"
-  },
-  {
-   "lookup": "magnetic_simulation",
-   "sequence": "forces",
-   "map": "Vectors_Act3_FieldsAndMotion"
-  },
-  {
-   "lookup": "particle_systems",
-   "sequence": "forces",
-   "map": "Vectors_Act3_FieldsAndMotion"
-  },
-  {
-   "lookup": "vector_field",
-   "sequence": "forces",
-   "map": "Vectors_Act3_FieldsAndMotion"
-  },
-  {
-   "lookup": "vector_fields",
-   "sequence": "forces",
-   "map": "Vectors_Act3_FieldsAndMotion"
+   "map": "VFM_03_Motion",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "VectorFieldFlow",
    "sequence": "forces",
-   "map": "Vectors_Act3_FieldsAndMotion"
+   "map": "Vectors_Act3_FieldsAndMotion",
+   "role": "primary",
+   "by": "ruled"
   },
   {
    "lookup": "weather_vector_field",
    "sequence": "forces",
-   "map": "Vectors_Act3_FieldsAndMotion"
+   "map": "Vectors_Act3_FieldsAndMotion",
+   "role": "primary",
+   "by": "ruled"
   },
   {
    "lookup": "bubble_blaster",
    "sequence": "forces",
-   "map": "Vectors_Act3_FieldsAndMotion"
+   "map": "Vectors_Act3_FieldsAndMotion",
+   "role": "primary",
+   "by": "ruled"
   },
   {
-   "lookup": "wedge_slide",
+   "lookup": "magnetic_simulation",
    "sequence": "forces",
-   "map": "Vectors_Act4a_KineticForces"
+   "map": "Vectors_Act3_FieldsAndMotion",
+   "role": "secondary",
+   "by": "floor"
   },
   {
-   "lookup": "centrifuge_ring",
+   "lookup": "particle_systems",
    "sequence": "forces",
-   "map": "Vectors_Act4a_KineticForces"
+   "map": "Vectors_Act3_FieldsAndMotion",
+   "role": "secondary",
+   "by": "floor"
   },
   {
-   "lookup": "orbit_walk",
+   "lookup": "vector_field",
    "sequence": "forces",
-   "map": "Vectors_Act4a_KineticForces"
+   "map": "Vectors_Act3_FieldsAndMotion",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "field_room",
+   "sequence": "forces",
+   "map": "Vectors_Act3_FieldsAndMotion",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "force_vortex",
+   "sequence": "forces",
+   "map": "Vectors_Act3_FieldsAndMotion",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "force_fields",
+   "sequence": "forces",
+   "map": "Vectors_Act3_FieldsAndMotion",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "force_field_visualizer",
+   "sequence": "forces",
+   "map": "Vectors_Act3_FieldsAndMotion",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "vector_fields",
+   "sequence": "forces",
+   "map": "Vectors_Act3_FieldsAndMotion",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "force_mower",
    "sequence": "forces",
-   "map": "Vectors_Act4a_KineticForces"
+   "map": "Vectors_Act4a_KineticForces",
+   "role": "primary",
+   "by": "ruled"
   },
   {
    "lookup": "drag_corridor",
    "sequence": "forces",
-   "map": "Vectors_Act4a_KineticForces"
+   "map": "Vectors_Act4a_KineticForces",
+   "role": "primary",
+   "by": "ruled"
   },
   {
-   "lookup": "sisyphus_mower",
+   "lookup": "centrifuge_ring",
    "sequence": "forces",
-   "map": "Vectors_Act4a_KineticForces"
+   "map": "Vectors_Act4a_KineticForces",
+   "role": "primary",
+   "by": "ruled"
+  },
+  {
+   "lookup": "orbit_walk",
+   "sequence": "forces",
+   "map": "Vectors_Act4a_KineticForces",
+   "role": "primary",
+   "by": "ruled"
+  },
+  {
+   "lookup": "wedge_slide",
+   "sequence": "forces",
+   "map": "Vectors_Act4a_KineticForces",
+   "role": "primary",
+   "by": "ruled"
   },
   {
    "lookup": "prop_carousel",
    "sequence": "forces",
-   "map": "Vectors_Act4a_KineticForces"
+   "map": "Vectors_Act4a_KineticForces",
+   "role": "secondary",
+   "by": "floor"
   },
   {
-   "lookup": "ChainSwing",
+   "lookup": "sisyphus_mower",
    "sequence": "forces",
-   "map": "Vectors_Act4b_Oscillation"
-  },
-  {
-   "lookup": "ConeTwistBag",
-   "sequence": "forces",
-   "map": "Vectors_Act4b_Oscillation"
-  },
-  {
-   "lookup": "calder_object_mobile",
-   "sequence": "forces",
-   "map": "Vectors_Act4b_Oscillation"
-  },
-  {
-   "lookup": "HingeCrank",
-   "sequence": "forces",
-   "map": "Vectors_Act4b_Oscillation"
-  },
-  {
-   "lookup": "SliderPress",
-   "sequence": "forces",
-   "map": "Vectors_Act4b_Oscillation"
-  },
-  {
-   "lookup": "coupled_pendulums",
-   "sequence": "forces",
-   "map": "Vectors_Act4b_Oscillation"
-  },
-  {
-   "lookup": "harmonic_motion_demo",
-   "sequence": "forces",
-   "map": "Vectors_Act4b_Oscillation"
-  },
-  {
-   "lookup": "mass_spring_damper",
-   "sequence": "forces",
-   "map": "Vectors_Act4b_Oscillation"
-  },
-  {
-   "lookup": "slingshot_pull",
-   "sequence": "forces",
-   "map": "Vectors_Act4b_Oscillation"
-  },
-  {
-   "lookup": "spring_network",
-   "sequence": "forces",
-   "map": "Vectors_Act4b_Oscillation"
-  },
-  {
-   "lookup": "spring_system",
-   "sequence": "forces",
-   "map": "Vectors_Act4b_Oscillation"
-  },
-  {
-   "lookup": "surreal_kinetic_sculpture",
-   "sequence": "forces",
-   "map": "Vectors_Act4b_Oscillation"
-  },
-  {
-   "lookup": "vector_joint_playground",
-   "sequence": "forces",
-   "map": "Vectors_Act4b_Oscillation"
-  },
-  {
-   "lookup": "work_energy_demo",
-   "sequence": "forces",
-   "map": "Vectors_Act4b_Oscillation"
-  },
-  {
-   "lookup": "pendulum_hall",
-   "sequence": "forces",
-   "map": "Vectors_Act4b_Oscillation"
-  },
-  {
-   "lookup": "spring_tower",
-   "sequence": "forces",
-   "map": "Vectors_Act4b_Oscillation"
-  },
-  {
-   "lookup": "example_6_4_windmill_vr",
-   "sequence": "forces",
-   "map": "Vectors_Act4b_Oscillation"
-  },
-  {
-   "lookup": "weather_vane",
-   "sequence": "forces",
-   "map": "Vectors_Act4b_Oscillation"
-  },
-  {
-   "lookup": "calder_mobile",
-   "sequence": "forces",
-   "map": "Vectors_Act4b_Oscillation"
-  },
-  {
-   "lookup": "lever_balance",
-   "sequence": "forces",
-   "map": "Vectors_Act4b_Oscillation"
+   "map": "Vectors_Act4a_KineticForces",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "momentum_cradle",
    "sequence": "forces",
-   "map": "Vectors_Act4b_Oscillation"
+   "map": "Vectors_Act4b_Oscillation",
+   "role": "primary",
+   "by": "ruled"
   },
   {
    "lookup": "bounce_well",
    "sequence": "forces",
-   "map": "Vectors_Act4b_Oscillation"
+   "map": "Vectors_Act4b_Oscillation",
+   "role": "primary",
+   "by": "ruled"
   },
   {
-   "lookup": "nbody_simulation",
+   "lookup": "lever_balance",
    "sequence": "forces",
-   "map": "VFM_07_Gravity"
+   "map": "Vectors_Act4b_Oscillation",
+   "role": "primary",
+   "by": "ruled"
   },
   {
-   "lookup": "three_body_problem",
+   "lookup": "pendulum_hall",
    "sequence": "forces",
-   "map": "VFM_07_Gravity"
+   "map": "Vectors_Act4b_Oscillation",
+   "role": "primary",
+   "by": "ruled"
   },
   {
-   "lookup": "forcedirected3d",
+   "lookup": "spring_tower",
    "sequence": "forces",
-   "map": "VFM_07_Gravity"
+   "map": "Vectors_Act4b_Oscillation",
+   "role": "primary",
+   "by": "ruled"
+  },
+  {
+   "lookup": "calder_mobile",
+   "sequence": "forces",
+   "map": "Vectors_Act4b_Oscillation",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "weather_vane",
+   "sequence": "forces",
+   "map": "Vectors_Act4b_Oscillation",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "example_6_4_windmill_vr",
+   "sequence": "forces",
+   "map": "Vectors_Act4b_Oscillation",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "coupled_pendulums",
+   "sequence": "forces",
+   "map": "Vectors_Act4b_Oscillation",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "SliderPress",
+   "sequence": "forces",
+   "map": "Vectors_Act4b_Oscillation",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "HingeCrank",
+   "sequence": "forces",
+   "map": "Vectors_Act4b_Oscillation",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "calder_object_mobile",
+   "sequence": "forces",
+   "map": "Vectors_Act4b_Oscillation",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "harmonic_motion_demo",
+   "sequence": "forces",
+   "map": "Vectors_Act4b_Oscillation",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "mass_spring_damper",
+   "sequence": "forces",
+   "map": "Vectors_Act4b_Oscillation",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "ChainSwing",
+   "sequence": "forces",
+   "map": "Vectors_Act4b_Oscillation",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "ConeTwistBag",
+   "sequence": "forces",
+   "map": "Vectors_Act4b_Oscillation",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "slingshot_pull",
+   "sequence": "forces",
+   "map": "Vectors_Act4b_Oscillation",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "spring_network",
+   "sequence": "forces",
+   "map": "Vectors_Act4b_Oscillation",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "spring_system",
+   "sequence": "forces",
+   "map": "Vectors_Act4b_Oscillation",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "surreal_kinetic_sculpture",
+   "sequence": "forces",
+   "map": "Vectors_Act4b_Oscillation",
+   "role": "decoration",
+   "by": "floor"
+  },
+  {
+   "lookup": "vector_joint_playground",
+   "sequence": "forces",
+   "map": "Vectors_Act4b_Oscillation",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "work_energy_demo",
+   "sequence": "forces",
+   "map": "Vectors_Act4b_Oscillation",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "exercise_1_8_solution_attraction_magnitude_vr",
    "sequence": "forces",
-   "map": "VFM_07_Gravity"
-  },
-  {
-   "lookup": "example_2_8_two_body_attraction_vr",
-   "sequence": "forces",
-   "map": "VFM_07_Gravity"
-  },
-  {
-   "lookup": "example_2_9_n_body_attraction_vr",
-   "sequence": "forces",
-   "map": "VFM_07_Gravity"
-  },
-  {
-   "lookup": "orbit_pair",
-   "sequence": "forces",
-   "map": "VFM_07_Gravity"
+   "map": "VFM_07_Gravity",
+   "role": "primary",
+   "by": "ruled"
   },
   {
    "lookup": "gravity_well",
    "sequence": "forces",
-   "map": "VFM_07_Gravity"
+   "map": "VFM_07_Gravity",
+   "role": "primary",
+   "by": "ruled"
   },
   {
    "lookup": "orbital_mechanics_demo",
    "sequence": "forces",
-   "map": "VFM_07_Gravity"
+   "map": "VFM_07_Gravity",
+   "role": "primary",
+   "by": "ruled"
+  },
+  {
+   "lookup": "three_body_problem",
+   "sequence": "forces",
+   "map": "VFM_07_Gravity",
+   "role": "primary",
+   "by": "ruled"
+  },
+  {
+   "lookup": "nbody_simulation",
+   "sequence": "forces",
+   "map": "VFM_07_Gravity",
+   "role": "primary",
+   "by": "ruled"
+  },
+  {
+   "lookup": "forcedirected3d",
+   "sequence": "forces",
+   "map": "VFM_07_Gravity",
+   "role": "primary",
+   "by": "ruled"
+  },
+  {
+   "lookup": "orbit_pair",
+   "sequence": "forces",
+   "map": "VFM_07_Gravity",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "example_2_8_two_body_attraction_vr",
+   "sequence": "forces",
+   "map": "VFM_07_Gravity",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "example_2_9_n_body_attraction_vr",
+   "sequence": "forces",
+   "map": "VFM_07_Gravity",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "grid3d_force_directed",
    "sequence": "forces",
-   "map": "VFM_07_Gravity"
+   "map": "VFM_07_Gravity",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "chaos_attractor",
    "sequence": "forces",
-   "map": "VFM_07_Gravity"
+   "map": "VFM_07_Gravity",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "one_leg",
    "sequence": "forces",
-   "map": "VFM_09_Legs"
+   "map": "VFM_09_Legs",
+   "role": "primary",
+   "by": "ruled"
   },
   {
    "lookup": "two_leg_critter",
    "sequence": "forces",
-   "map": "VFM_09_Legs"
+   "map": "VFM_09_Legs",
+   "role": "primary",
+   "by": "ruled"
   },
   {
    "lookup": "three_leg_critter",
    "sequence": "forces",
-   "map": "VFM_09_Legs"
+   "map": "VFM_09_Legs",
+   "role": "primary",
+   "by": "ruled"
   },
   {
    "lookup": "four_leg_critter",
    "sequence": "forces",
-   "map": "VFM_09_Legs"
+   "map": "VFM_09_Legs",
+   "role": "primary",
+   "by": "ruled"
   },
   {
    "lookup": "five_leg_critter",
    "sequence": "forces",
-   "map": "VFM_09_Legs"
+   "map": "VFM_09_Legs",
+   "role": "primary",
+   "by": "ruled"
   },
   {
    "lookup": "six_leg_critter",
    "sequence": "forces",
-   "map": "VFM_09_Legs"
+   "map": "VFM_09_Legs",
+   "role": "primary",
+   "by": "ruled"
   },
   {
    "lookup": "octapod_ik",
    "sequence": "forces",
-   "map": "VFM_09_Legs"
-  },
-  {
-   "lookup": "brake_skid",
-   "sequence": "forces",
-   "map": "VFM_08_Arena"
-  },
-  {
-   "lookup": "parlour_orbits",
-   "sequence": "forces",
-   "map": "VFM_08_Arena"
-  },
-  {
-   "lookup": "newtons_laws",
-   "sequence": "forces",
-   "map": "VFM_08_Arena"
-  },
-  {
-   "lookup": "paused_fountain",
-   "sequence": "forces",
-   "map": "VFM_08_Arena"
-  },
-  {
-   "lookup": "prop_mobile",
-   "sequence": "forces",
-   "map": "VFM_08_Arena"
-  },
-  {
-   "lookup": "prop_spigot",
-   "sequence": "forces",
-   "map": "VFM_08_Arena"
-  },
-  {
-   "lookup": "revolving_door",
-   "sequence": "forces",
-   "map": "VFM_08_Arena"
-  },
-  {
-   "lookup": "three_gravities",
-   "sequence": "forces",
-   "map": "VFM_08_Arena"
-  },
-  {
-   "lookup": "tug_of_war",
-   "sequence": "forces",
-   "map": "VFM_08_Arena"
-  },
-  {
-   "lookup": "umbrella_field",
-   "sequence": "forces",
-   "map": "VFM_08_Arena"
+   "map": "VFM_09_Legs",
+   "role": "primary",
+   "by": "ruled"
   },
   {
    "lookup": "turret_targeting",
    "sequence": "forces",
-   "map": "VFM_08_Arena"
+   "map": "VFM_08_Arena",
+   "role": "primary",
+   "by": "ruled"
   },
   {
    "lookup": "reflection_hall",
    "sequence": "forces",
-   "map": "VFM_08_Arena"
-  },
-  {
-   "lookup": "queer_cylinder_target",
-   "sequence": "forces",
-   "map": "VFM_08_Arena"
+   "map": "VFM_08_Arena",
+   "role": "primary",
+   "by": "ruled"
   },
   {
    "lookup": "vector_arena",
    "sequence": "forces",
-   "map": "VFM_08_Arena"
-  },
-  {
-   "lookup": "collision_carts",
-   "sequence": "forces",
-   "map": "VFM_08_Arena"
+   "map": "VFM_08_Arena",
+   "role": "primary",
+   "by": "ruled"
   },
   {
    "lookup": "sentry_turret",
    "sequence": "forces",
-   "map": "VFM_08_Arena"
+   "map": "VFM_08_Arena",
+   "role": "primary",
+   "by": "ruled"
+  },
+  {
+   "lookup": "newtons_laws",
+   "sequence": "forces",
+   "map": "VFM_08_Arena",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "paused_fountain",
+   "sequence": "forces",
+   "map": "VFM_08_Arena",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "prop_mobile",
+   "sequence": "forces",
+   "map": "VFM_08_Arena",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "prop_spigot",
+   "sequence": "forces",
+   "map": "VFM_08_Arena",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "brake_skid",
+   "sequence": "forces",
+   "map": "VFM_08_Arena",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "parlour_orbits",
+   "sequence": "forces",
+   "map": "VFM_08_Arena",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "revolving_door",
+   "sequence": "forces",
+   "map": "VFM_08_Arena",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "three_gravities",
+   "sequence": "forces",
+   "map": "VFM_08_Arena",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "tug_of_war",
+   "sequence": "forces",
+   "map": "VFM_08_Arena",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "umbrella_field",
+   "sequence": "forces",
+   "map": "VFM_08_Arena",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "queer_cylinder_target",
+   "sequence": "forces",
+   "map": "VFM_08_Arena",
+   "role": "decoration",
+   "by": "floor"
+  },
+  {
+   "lookup": "collision_carts",
+   "sequence": "forces",
+   "map": "VFM_08_Arena",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "momentum_collision",
    "sequence": "forces",
-   "map": "VFM_08_Arena"
+   "map": "VFM_08_Arena",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "example_2_1_forces_vr",
    "sequence": "forces",
-   "map": "VFM_08_Arena"
-  },
-  {
-   "lookup": "invisible_hill",
-   "sequence": "forces",
-   "map": "Vectors_Act5_ForceAsPlace"
-  },
-  {
-   "lookup": "force_field_zone",
-   "sequence": "forces",
-   "map": "Vectors_Act5_ForceAsPlace"
-  },
-  {
-   "lookup": "vector_machine",
-   "sequence": "forces",
-   "map": "Vectors_Act5_ForceAsPlace"
-  },
-  {
-   "lookup": "force_cube",
-   "sequence": "forces",
-   "map": "Vectors_Act5_ForceAsPlace"
-  },
-  {
-   "lookup": "force_field",
-   "sequence": "forces",
-   "map": "Vectors_Act5_ForceAsPlace"
+   "map": "VFM_08_Arena",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "free_vector",
    "sequence": "forces",
-   "map": "Vectors_Act5_ForceAsPlace"
+   "map": "Vectors_Act5_ForceAsPlace",
+   "role": "primary",
+   "by": "ruled"
   },
   {
-   "lookup": "settling_tremble",
-   "sequence": "formfinding",
-   "map": "FormFinding_Descent"
+   "lookup": "vector_machine",
+   "sequence": "forces",
+   "map": "Vectors_Act5_ForceAsPlace",
+   "role": "primary",
+   "by": "ruled"
+  },
+  {
+   "lookup": "force_cube",
+   "sequence": "forces",
+   "map": "Vectors_Act5_ForceAsPlace",
+   "role": "primary",
+   "by": "ruled"
+  },
+  {
+   "lookup": "force_field_zone",
+   "sequence": "forces",
+   "map": "Vectors_Act5_ForceAsPlace",
+   "role": "primary",
+   "by": "ruled"
+  },
+  {
+   "lookup": "force_field",
+   "sequence": "forces",
+   "map": "Vectors_Act5_ForceAsPlace",
+   "role": "decoration",
+   "by": "floor"
+  },
+  {
+   "lookup": "invisible_hill",
+   "sequence": "forces",
+   "map": "Vectors_Act5_ForceAsPlace",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "gradient_descent",
    "sequence": "formfinding",
-   "map": "FormFinding_Descent"
+   "map": "FormFinding_Descent",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "settling_tremble",
+   "sequence": "formfinding",
+   "map": "FormFinding_Descent",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "cable_builder",
    "sequence": "formfinding",
-   "map": "FormFinding_Catenary"
-  },
-  {
-   "lookup": "catenoid",
-   "sequence": "formfinding",
-   "map": "FormFinding_Catenary"
+   "map": "FormFinding_Catenary",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "helicoid",
    "sequence": "formfinding",
-   "map": "FormFinding_Catenary"
+   "map": "FormFinding_Catenary",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "laundry_line_cathedral",
    "sequence": "formfinding",
-   "map": "FormFinding_Catenary"
+   "map": "FormFinding_Catenary",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "catenoid",
+   "sequence": "formfinding",
+   "map": "FormFinding_Catenary",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "mass_spring_bench",
    "sequence": "formfinding",
-   "map": "FormFinding_Relaxation"
+   "map": "FormFinding_Relaxation",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "verlet_workbench",
    "sequence": "formfinding",
-   "map": "FormFinding_Relaxation"
+   "map": "FormFinding_Relaxation",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "frozen_glass_vessel",
    "sequence": "formfinding",
-   "map": "FormFinding_Relaxation"
-  },
-  {
-   "lookup": "fractal_truss_tower",
-   "sequence": "formfinding",
-   "map": "FormFinding_Equilibrium"
+   "map": "FormFinding_Relaxation",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "tensegrity_triangle",
    "sequence": "formfinding",
-   "map": "FormFinding_Equilibrium"
+   "map": "FormFinding_Equilibrium",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "fractal_truss_tower",
+   "sequence": "formfinding",
+   "map": "FormFinding_Equilibrium",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "max_q_basin_room",
    "sequence": "formfinding",
-   "map": "FormFinding_Annealing"
+   "map": "FormFinding_Annealing",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "energy_landscape_bench",
    "sequence": "formfinding",
-   "map": "FormFinding_Annealing"
+   "map": "FormFinding_Annealing",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "simulated_annealing",
    "sequence": "formfinding",
-   "map": "FormFinding_Annealing"
+   "map": "FormFinding_Annealing",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "impossible_end_table",
    "sequence": "formfinding",
-   "map": "FormFinding_Annealing"
+   "map": "FormFinding_Annealing",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "self_shaping_forge",
    "sequence": "formfinding",
-   "map": "FormFinding_Forge"
+   "map": "FormFinding_Forge",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "gradient_descent_optimizer",
    "sequence": "formfinding",
-   "map": "FormFinding_Forge"
-  },
-  {
-   "lookup": "pickup_cube_static",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Intro"
-  },
-  {
-   "lookup": "transformation_cube",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Intro"
-  },
-  {
-   "lookup": "rotating_cube",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Intro"
-  },
-  {
-   "lookup": "y_oscillation_cube",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Intro"
-  },
-  {
-   "lookup": "rotating_cube_demo",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Intro"
-  },
-  {
-   "lookup": "pickup_cube_transforming",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Intro"
+   "map": "FormFinding_Forge",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "pickup_cube_rotating",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_Intro"
+   "map": "WaveFunctions_Intro",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "pickup_cube_transforming",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Intro",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "y_oscillation_cube",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Intro",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "transformation_cube",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Intro",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "rotating_cube",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Intro",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "rotating_cube_demo",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Intro",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "pickup_cube_static",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Intro",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "control_pendulum",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_Intro"
+   "map": "WaveFunctions_Intro",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "oscillation_controlled_cube",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_Intro"
+   "map": "WaveFunctions_Intro",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "mario_cube_time_trace",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_Intro"
+   "map": "WaveFunctions_Intro",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "SphericalHarmonics",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_Intro"
-  },
-  {
-   "lookup": "WavePaintings",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Pendulum"
-  },
-  {
-   "lookup": "foucault_pendulum",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Pendulum"
-  },
-  {
-   "lookup": "BigPipeSystem",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Pendulum"
-  },
-  {
-   "lookup": "PendulumWave",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Pendulum"
-  },
-  {
-   "lookup": "draw_dot_time_domain",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Pendulum"
-  },
-  {
-   "lookup": "lab_table",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Pendulum"
+   "map": "WaveFunctions_Intro",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "seismograph",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_Pendulum"
+   "map": "WaveFunctions_Pendulum",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "draw_dot_time_domain",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Pendulum",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "BigPipeSystem",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Pendulum",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "lab_table",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Pendulum",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "GlassRack",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_Pendulum"
+   "map": "WaveFunctions_Pendulum",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "VRAudioMonitor",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_Pendulum"
+   "map": "WaveFunctions_Pendulum",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "foucault_pendulum",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Pendulum",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "WavePaintings",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Pendulum",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "PendulumWave",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Pendulum",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "unit_circle_advanced",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_Unit_Circle"
+   "map": "WaveFunctions_Unit_Circle",
+   "role": "unruled",
+   "by": "file"
   },
   {
    "lookup": "SimpleOscillatingBridge",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_Unit_Circle"
+   "map": "WaveFunctions_Unit_Circle",
+   "role": "unruled",
+   "by": "file"
   },
   {
    "lookup": "OscillationCurve",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_Unit_Circle"
-  },
-  {
-   "lookup": "sine_wall_corridor",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Sine_Space"
-  },
-  {
-   "lookup": "sine_wall_explanation",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Sine_Space"
+   "map": "WaveFunctions_Unit_Circle",
+   "role": "unruled",
+   "by": "file"
   },
   {
    "lookup": "sine_space_explanation",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_Sine_Space"
+   "map": "WaveFunctions_Sine_Space",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "sine_wall_corridor",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Sine_Space",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "sine_wall_explanation",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Sine_Space",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "sine_space",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_Sine_Space"
+   "map": "WaveFunctions_Sine_Space",
+   "role": "unruled",
+   "by": "file"
   },
   {
    "lookup": "kusama_sine",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_3D_Wave_Propagation"
+   "map": "WaveFunctions_3D_Wave_Propagation",
+   "role": "unruled",
+   "by": "file"
   },
   {
    "lookup": "wave_propagation_3d",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_3D_Wave_Propagation"
+   "map": "WaveFunctions_3D_Wave_Propagation",
+   "role": "unruled",
+   "by": "file"
   },
   {
    "lookup": "coupled_oscillator_lattice",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_3D_Wave_Propagation"
+   "map": "WaveFunctions_3D_Wave_Propagation",
+   "role": "unruled",
+   "by": "file"
   },
   {
    "lookup": "AudioContr",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_Effect_Sound"
+   "map": "WaveFunctions_Effect_Sound",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "RackSineBasic",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_Effect_Sound"
-  },
-  {
-   "lookup": "DualBallFMController",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Effect_Sound"
+   "map": "WaveFunctions_Effect_Sound",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "Rack303Acid",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_Effect_Sound"
+   "map": "WaveFunctions_Effect_Sound",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "DualBallFMController",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Effect_Sound",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "rack_room",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_Effect_Sound"
+   "map": "WaveFunctions_Effect_Sound",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "RackMoogBass",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_Effect_Sound"
+   "map": "WaveFunctions_Effect_Sound",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "RackDX7Piano",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_Effect_Sound"
-  },
-  {
-   "lookup": "audio_catalog_tablet",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Effect_Sound"
+   "map": "WaveFunctions_Effect_Sound",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "wave_interference_3d",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_Effect_Sound"
-  },
-  {
-   "lookup": "harmonic_distance_table",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Effect_Sound"
+   "map": "WaveFunctions_Effect_Sound",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "chord_tension_spring",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_Effect_Sound"
+   "map": "WaveFunctions_Effect_Sound",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "timbre_sculptor",
+   "lookup": "harmonic_distance_table",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_Effect_Sound"
+   "map": "WaveFunctions_Effect_Sound",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "MarioSoundController",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_Effect_Sound"
-  },
-  {
-   "lookup": "mario_test_sound_ui",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Effect_Sound"
+   "map": "WaveFunctions_Effect_Sound",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "MelodyChaser3D",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_Effect_Sound"
+   "map": "WaveFunctions_Effect_Sound",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "mario_test_sound_ui",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Effect_Sound",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "timbre_sculptor",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Effect_Sound",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "audio_catalog_tablet",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Effect_Sound",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "interactable_demo",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_Effect_Sound"
-  },
-  {
-   "lookup": "ElphabaDress",
-   "sequence": "wavefunctions",
-   "map": "Wavefunctions_Bernini"
+   "map": "WaveFunctions_Effect_Sound",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "bernini_columns",
    "sequence": "wavefunctions",
-   "map": "Wavefunctions_Bernini"
+   "map": "Wavefunctions_Bernini",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "ElphabaDress",
+   "sequence": "wavefunctions",
+   "map": "Wavefunctions_Bernini",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "vowel_sound_board",
    "sequence": "wavefunctions",
-   "map": "Wavefunctions_Bernini"
-  },
-  {
-   "lookup": "dual_display_test",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_John_Cage"
-  },
-  {
-   "lookup": "ruth_asawa_sculpture",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_John_Cage"
+   "map": "Wavefunctions_Bernini",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "john_cage_tech_noir",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_John_Cage"
+   "map": "WaveFunctions_John_Cage",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "SystemsMusicTest",
+   "lookup": "dual_display_test",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_AirMusic"
+   "map": "WaveFunctions_John_Cage",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "RackAmbientDrone",
+   "lookup": "ruth_asawa_sculpture",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_AirMusic"
-  },
-  {
-   "lookup": "air_music_display_case",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_AirMusic"
+   "map": "WaveFunctions_John_Cage",
+   "role": "unruled",
+   "by": "file"
   },
   {
    "lookup": "resonating_metallophone",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_AirMusic"
+   "map": "WaveFunctions_AirMusic",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "air_music_display_case",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_AirMusic",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "RackAmbientDrone",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_AirMusic",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "SystemsMusicTest",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_AirMusic",
+   "role": "unruled",
+   "by": "file"
   },
   {
    "lookup": "sine_cylinder_staircase",
    "sequence": "wavefunctions",
-   "map": "Wavefunctions_Sky_Stairs"
+   "map": "Wavefunctions_Sky_Stairs",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "math_objects",
    "sequence": "wavefunctions",
-   "map": "Wavefunctions_Sky_Stairs"
+   "map": "Wavefunctions_Sky_Stairs",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "sine_oscillation",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_TrigWalkingPath"
-  },
-  {
-   "lookup": "lissajous_curves",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_TrigWalkingPath"
+   "map": "WaveFunctions_TrigWalkingPath",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "TrigWalkingPath",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_TrigWalkingPath"
-  },
-  {
-   "lookup": "wave_interference",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_TrigWalkingPath"
+   "map": "WaveFunctions_TrigWalkingPath",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "beat_frequency_demo",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_TrigWalkingPath"
+   "map": "WaveFunctions_TrigWalkingPath",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "dna_specimen",
+   "lookup": "wave_interference",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_Synthesis_Lab"
+   "map": "WaveFunctions_TrigWalkingPath",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "holographicdisplay",
+   "lookup": "lissajous_curves",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_Synthesis_Lab"
-  },
-  {
-   "lookup": "electronicscales",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Synthesis_Lab"
-  },
-  {
-   "lookup": "biomagneticresonator",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Synthesis_Lab"
-  },
-  {
-   "lookup": "UnitCircleTrig",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Synthesis_Lab"
-  },
-  {
-   "lookup": "record_room",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Synthesis_Lab"
-  },
-  {
-   "lookup": "coloredlines",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Synthesis_Lab"
-  },
-  {
-   "lookup": "hallway_scene",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Synthesis_Lab"
-  },
-  {
-   "lookup": "additive_wave_demo",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Synthesis_Lab"
+   "map": "WaveFunctions_TrigWalkingPath",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "samplevialrack",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_Synthesis_Lab"
-  },
-  {
-   "lookup": "oscilloscope",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Synthesis_Lab"
-  },
-  {
-   "lookup": "double_helix_scene",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Synthesis_Lab"
-  },
-  {
-   "lookup": "spring_demo",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Synthesis_Lab"
-  },
-  {
-   "lookup": "SoundscapeRadioRack",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Synthesis_Lab"
+   "map": "WaveFunctions_Synthesis_Lab",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "petri_dish_worms",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_Synthesis_Lab"
+   "map": "WaveFunctions_Synthesis_Lab",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "atmosphericmonitoring",
+   "lookup": "SoundscapeRadioRack",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_Synthesis_Lab"
+   "map": "WaveFunctions_Synthesis_Lab",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "spring_demo",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Synthesis_Lab",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "chladni_plate",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_Synthesis_Lab"
+   "map": "WaveFunctions_Synthesis_Lab",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "microscope",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_Synthesis_Lab"
+   "map": "WaveFunctions_Synthesis_Lab",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "chemicalapparatus",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_Synthesis_Lab"
+   "map": "WaveFunctions_Synthesis_Lab",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "multimeter",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_Synthesis_Lab"
+   "map": "WaveFunctions_Synthesis_Lab",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "slot_machine",
-   "sequence": "randomness",
-   "map": "Random_Definition"
+   "lookup": "atmosphericmonitoring",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Synthesis_Lab",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "prng_crank_machine",
-   "sequence": "randomness",
-   "map": "Random_Definition"
+   "lookup": "oscilloscope",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Synthesis_Lab",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "entropy_axiom",
-   "sequence": "randomness",
-   "map": "Random_Definition"
+   "lookup": "UnitCircleTrig",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Synthesis_Lab",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "biomagneticresonator",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Synthesis_Lab",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "electronicscales",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Synthesis_Lab",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "holographicdisplay",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Synthesis_Lab",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "dna_specimen",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Synthesis_Lab",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "additive_wave_demo",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Synthesis_Lab",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "double_helix_scene",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Synthesis_Lab",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "coloredlines",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Synthesis_Lab",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "record_room",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Synthesis_Lab",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "hallway_scene",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Synthesis_Lab",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "2d_in_3d_randomness_vis",
    "sequence": "randomness",
-   "map": "Random_Definition"
+   "map": "Random_Definition",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "entropy_axiom",
+   "sequence": "randomness",
+   "map": "Random_Definition",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "entropy_jar",
    "sequence": "randomness",
-   "map": "Random_Definition"
+   "map": "Random_Definition",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "random_butterflies",
    "sequence": "randomness",
-   "map": "Random_Definition"
+   "map": "Random_Definition",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "seed_replay_demo",
    "sequence": "randomness",
-   "map": "Random_Definition"
+   "map": "Random_Definition",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "digital_materiality_glitch",
    "sequence": "randomness",
-   "map": "Random_Definition"
+   "map": "Random_Definition",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "catalyst_pickup",
    "sequence": "randomness",
-   "map": "Random_Definition"
+   "map": "Random_Definition",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "trng_vs_prng",
    "sequence": "randomness",
-   "map": "Random_Definition"
+   "map": "Random_Definition",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "random_number_book_page_1955",
    "sequence": "randomness",
-   "map": "Random_Definition"
+   "map": "Random_Definition",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "replay_casino",
+   "lookup": "slot_machine",
    "sequence": "randomness",
-   "map": "Random_Entropy"
+   "map": "Random_Definition",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "hardware_entropy_decay",
+   "lookup": "prng_crank_machine",
    "sequence": "randomness",
-   "map": "Random_Entropy"
+   "map": "Random_Definition",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "shannon_entropy_meter",
    "sequence": "randomness",
-   "map": "Random_Entropy"
+   "map": "Random_Entropy",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "hardware_entropy_decay",
+   "sequence": "randomness",
+   "map": "Random_Entropy",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "replay_casino",
+   "sequence": "randomness",
+   "map": "Random_Entropy",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "remove_random",
    "sequence": "randomness",
-   "map": "Random_Remove"
+   "map": "Random_Remove",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "hazards_demo",
    "sequence": "randomness",
-   "map": "Random_Remove"
-  },
-  {
-   "lookup": "ten_print_maze_3d",
-   "sequence": "randomness",
-   "map": "Randomness_10_PRINT_Algorithm"
-  },
-  {
-   "lookup": "pickup_cube_placer",
-   "sequence": "randomness",
-   "map": "Randomness_10_PRINT_Algorithm"
+   "map": "Random_Remove",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "nature_system_demo",
    "sequence": "randomness",
-   "map": "Randomness_10_PRINT_Algorithm"
+   "map": "Randomness_10_PRINT_Algorithm",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "pickup_cube_placer",
+   "sequence": "randomness",
+   "map": "Randomness_10_PRINT_Algorithm",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "ten_print_maze_3d",
+   "sequence": "randomness",
+   "map": "Randomness_10_PRINT_Algorithm",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "dice_throw",
    "sequence": "randomness",
-   "map": "Random_Cubes"
+   "map": "Random_Cubes",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "coin_toss",
    "sequence": "randomness",
-   "map": "Random_Cubes"
+   "map": "Random_Cubes",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "random_object_spawner",
    "sequence": "randomness",
-   "map": "Random_Cubes"
+   "map": "Random_Cubes",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "random_edge_profile",
    "sequence": "randomness",
-   "map": "Random_Cubes"
-  },
-  {
-   "lookup": "Random_Rotate_Random_XYZ",
-   "sequence": "randomness",
-   "map": "Random_Rotate_Random_XYZ"
+   "map": "Random_Cubes",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "random_decay_multimesh",
    "sequence": "randomness",
-   "map": "Random_Rotate_Random_XYZ"
+   "map": "Random_Rotate_Random_XYZ",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "Random_Rotate_Random_XYZ",
+   "sequence": "randomness",
+   "map": "Random_Rotate_Random_XYZ",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "RotateGridCubes",
    "sequence": "randomness",
-   "map": "Random_Rotate_Random_XYZ"
-  },
-  {
-   "lookup": "random_walk_terrarium",
-   "sequence": "randomness",
-   "map": "Random_Walk"
-  },
-  {
-   "lookup": "random_walk_collection",
-   "sequence": "randomness",
-   "map": "Random_Walk"
-  },
-  {
-   "lookup": "pixel_cloud",
-   "sequence": "randomness",
-   "map": "Random_Walk"
-  },
-  {
-   "lookup": "lab_room",
-   "sequence": "randomness",
-   "map": "Random_Walk"
+   "map": "Random_Rotate_Random_XYZ",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "random_walk_128",
    "sequence": "randomness",
-   "map": "Random_Walk"
+   "map": "Random_Walk",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "random_walk_leash",
    "sequence": "randomness",
-   "map": "Random_Walk"
+   "map": "Random_Walk",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "lab_room",
+   "sequence": "randomness",
+   "map": "Random_Walk",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "random_walk_collection",
+   "sequence": "randomness",
+   "map": "Random_Walk",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "random_walk_terrarium",
+   "sequence": "randomness",
+   "map": "Random_Walk",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "pixel_cloud",
+   "sequence": "randomness",
+   "map": "Random_Walk",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "GaussianBlurShader",
    "sequence": "randomness",
-   "map": "Random_Gaussian"
+   "map": "Random_Gaussian",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "GaussianPaintSplatter",
    "sequence": "randomness",
-   "map": "Random_Gaussian"
+   "map": "Random_Gaussian",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "GaussianBlurCircle",
    "sequence": "randomness",
-   "map": "Random_Gaussian"
+   "map": "Random_Gaussian",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "random_bell_curve",
    "sequence": "randomness",
-   "map": "Random_Gaussian"
-  },
-  {
-   "lookup": "distribution_comparator",
-   "sequence": "randomness",
-   "map": "Random_Gaussian"
-  },
-  {
-   "lookup": "gaussian_random",
-   "sequence": "randomness",
-   "map": "Random_Gaussian"
-  },
-  {
-   "lookup": "distribution_sampler",
-   "sequence": "randomness",
-   "map": "Random_Gaussian"
+   "map": "Random_Gaussian",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "galton_board",
    "sequence": "randomness",
-   "map": "Random_Gaussian"
+   "map": "Random_Gaussian",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "mushrooms",
+   "lookup": "distribution_comparator",
    "sequence": "randomness",
-   "map": "Random_Mushrooms"
+   "map": "Random_Gaussian",
+   "role": "unruled",
+   "by": "file"
+  },
+  {
+   "lookup": "gaussian_random",
+   "sequence": "randomness",
+   "map": "Random_Gaussian",
+   "role": "unruled",
+   "by": "file"
+  },
+  {
+   "lookup": "distribution_sampler",
+   "sequence": "randomness",
+   "map": "Random_Gaussian",
+   "role": "unruled",
+   "by": "file"
   },
   {
    "lookup": "bubbles_random",
    "sequence": "randomness",
-   "map": "Random_Mushrooms"
+   "map": "Random_Mushrooms",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "mushrooms",
+   "sequence": "randomness",
+   "map": "Random_Mushrooms",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "bubble_particles",
    "sequence": "randomness",
-   "map": "Random_Mushrooms"
+   "map": "Random_Mushrooms",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "reaction_diffusion_intro",
    "sequence": "randomness",
-   "map": "Random_Mushrooms"
+   "map": "Random_Mushrooms",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "random_number_book_page_collection",
    "sequence": "randomness",
-   "map": "Random_Mushrooms"
-  },
-  {
-   "lookup": "perlin_noise_bridge",
-   "sequence": "randomness",
-   "map": "Random_Space_Geometry"
+   "map": "Random_Mushrooms",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "env_one",
    "sequence": "randomness",
-   "map": "Random_Space_Geometry"
+   "map": "Random_Space_Geometry",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "perlin_noise_bridge",
+   "sequence": "randomness",
+   "map": "Random_Space_Geometry",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "curl_noise_particles",
    "sequence": "randomness",
-   "map": "Random_Space_Geometry"
+   "map": "Random_Space_Geometry",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "random_transformations_geometric",
    "sequence": "randomness",
-   "map": "Random_Space_Geometry"
+   "map": "Random_Space_Geometry",
+   "role": "unruled",
+   "by": "file"
   },
   {
    "lookup": "sculpt_one",
    "sequence": "randomness",
-   "map": "Random_Space_Geometry"
+   "map": "Random_Space_Geometry",
+   "role": "unruled",
+   "by": "file"
   },
   {
    "lookup": "pollock_painting_in_3d",
    "sequence": "randomness",
-   "map": "Randomness_Examples_of_Randomness"
+   "map": "Randomness_Examples_of_Randomness",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "monte_carlo_dartboard",
    "sequence": "randomness",
-   "map": "Randomness_Examples_of_Randomness"
+   "map": "Randomness_Examples_of_Randomness",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "extreme_randomness",
    "sequence": "randomness",
-   "map": "Randomness_Examples_of_Randomness"
+   "map": "Randomness_Examples_of_Randomness",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "pipe_dream",
    "sequence": "randomness",
-   "map": "Randomness_Examples_of_Randomness"
+   "map": "Randomness_Examples_of_Randomness",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "pheromone_terrain",
    "sequence": "randomness",
-   "map": "Random_Pheromone"
-  },
-  {
-   "lookup": "noise_mixer",
-   "sequence": "randomness",
-   "map": "Random_Space"
-  },
-  {
-   "lookup": "worley_noise",
-   "sequence": "randomness",
-   "map": "Random_Space"
+   "map": "Random_Pheromone",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "random_space",
    "sequence": "randomness",
-   "map": "Random_Space"
+   "map": "Random_Space",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "miura_crawler",
+   "lookup": "noise_mixer",
    "sequence": "randomness",
-   "map": "Random_Game"
+   "map": "Random_Space",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "worley_noise",
+   "sequence": "randomness",
+   "map": "Random_Space",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "scissor_stalker",
    "sequence": "randomness",
-   "map": "Random_Game"
+   "map": "Random_Game",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "miura_crawler",
+   "sequence": "randomness",
+   "map": "Random_Game",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "kaleidocycle_enemy",
    "sequence": "randomness",
-   "map": "Random_Game"
-  },
-  {
-   "lookup": "kresling_spire",
-   "sequence": "randomness",
-   "map": "Random_Game"
-  },
-  {
-   "lookup": "armadillo_eggling",
-   "sequence": "randomness",
-   "map": "Random_Game"
+   "map": "Random_Game",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "origami_droideka",
    "sequence": "randomness",
-   "map": "Random_Game"
-  },
-  {
-   "lookup": "monte_carlo",
-   "sequence": "randomness",
-   "map": "Random_Game"
+   "map": "Random_Game",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "cube_projectile_spawner",
    "sequence": "randomness",
-   "map": "Random_Game"
+   "map": "Random_Game",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "monte_carlo",
+   "sequence": "randomness",
+   "map": "Random_Game",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "r_c",
    "sequence": "randomness",
-   "map": "Random_Game"
+   "map": "Random_Game",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "randompoint",
-   "sequence": "noise",
-   "map": "Random_Noise_Types"
+   "lookup": "armadillo_eggling",
+   "sequence": "randomness",
+   "map": "Random_Game",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "randompoints",
-   "sequence": "noise",
-   "map": "Random_Noise_Types"
-  },
-  {
-   "lookup": "WhiteNoiseGallery",
-   "sequence": "noise",
-   "map": "Random_Noise_Types"
+   "lookup": "kresling_spire",
+   "sequence": "randomness",
+   "map": "Random_Game",
+   "role": "unruled",
+   "by": "file"
   },
   {
    "lookup": "NoiseColors3D",
    "sequence": "noise",
-   "map": "Random_Noise_Types"
+   "map": "Random_Noise_Types",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "WhiteNoiseGallery",
+   "sequence": "noise",
+   "map": "Random_Noise_Types",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "randompoints",
+   "sequence": "noise",
+   "map": "Random_Noise_Types",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "randompoint",
+   "sequence": "noise",
+   "map": "Random_Noise_Types",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "MeltingBerniniScene",
    "sequence": "noise",
-   "map": "Noise_Columns"
+   "map": "Noise_Columns",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "noisetorus",
    "sequence": "noise",
-   "map": "Noise_One"
+   "map": "Noise_One",
+   "role": "unruled",
+   "by": "file"
   },
   {
    "lookup": "noiselayers",
    "sequence": "noise",
-   "map": "Noise_One"
-  },
-  {
-   "lookup": "perlin_terrain_sculptor",
-   "sequence": "noise",
-   "map": "Noise_Voxel"
+   "map": "Noise_One",
+   "role": "unruled",
+   "by": "file"
   },
   {
    "lookup": "voxelnoise",
    "sequence": "noise",
-   "map": "Noise_Voxel"
+   "map": "Noise_Voxel",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "perlin_terrain_sculptor",
+   "sequence": "noise",
+   "map": "Noise_Voxel",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "shader_noise_space",
    "sequence": "noise",
-   "map": "Noise_6_Wall"
+   "map": "Noise_6_Wall",
+   "role": "unruled",
+   "by": "file"
   },
   {
    "lookup": "noisesphere",
    "sequence": "noise",
-   "map": "Noise_Inside_Noise"
+   "map": "Noise_Inside_Noise",
+   "role": "unruled",
+   "by": "file"
   },
   {
    "lookup": "noise_space",
    "sequence": "noise",
-   "map": "Noise_Space_10"
-  },
-  {
-   "lookup": "simplex_noise",
-   "sequence": "noise",
-   "map": "Noise_Perlin_Simplex"
-  },
-  {
-   "lookup": "perlin_noise",
-   "sequence": "noise",
-   "map": "Noise_Perlin_Simplex"
-  },
-  {
-   "lookup": "noise_terrain",
-   "sequence": "noise",
-   "map": "Noise_Perlin_Simplex"
-  },
-  {
-   "lookup": "perlin_noise_terrain",
-   "sequence": "noise",
-   "map": "Noise_Perlin_Simplex"
+   "map": "Noise_Space_10",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "configurable_portal",
    "sequence": "noise",
-   "map": "Noise_Perlin_Simplex"
+   "map": "Noise_Perlin_Simplex",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "persian_rug",
-   "sequence": "cellularautomata",
-   "map": "CA_Introduction"
+   "lookup": "perlin_noise_terrain",
+   "sequence": "noise",
+   "map": "Noise_Perlin_Simplex",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "grid_substrate_runner",
-   "sequence": "cellularautomata",
-   "map": "CA_Introduction"
+   "lookup": "simplex_noise",
+   "sequence": "noise",
+   "map": "Noise_Perlin_Simplex",
+   "role": "unruled",
+   "by": "file"
+  },
+  {
+   "lookup": "perlin_noise",
+   "sequence": "noise",
+   "map": "Noise_Perlin_Simplex",
+   "role": "unruled",
+   "by": "file"
+  },
+  {
+   "lookup": "noise_terrain",
+   "sequence": "noise",
+   "map": "Noise_Perlin_Simplex",
+   "role": "unruled",
+   "by": "file"
   },
   {
    "lookup": "langton_swarm",
    "sequence": "cellularautomata",
-   "map": "CA_Introduction"
+   "map": "CA_Introduction",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "line_network_ca",
+   "lookup": "grid_substrate_runner",
    "sequence": "cellularautomata",
-   "map": "CA_Introduction"
+   "map": "CA_Introduction",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "ca_rule_explorer",
    "sequence": "cellularautomata",
-   "map": "CA_Introduction"
+   "map": "CA_Introduction",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "rule110_computer",
    "sequence": "cellularautomata",
-   "map": "CA_Introduction"
+   "map": "CA_Introduction",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "ca_showcase",
    "sequence": "cellularautomata",
-   "map": "CA_Introduction"
+   "map": "CA_Introduction",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "line_network_ca",
+   "sequence": "cellularautomata",
+   "map": "CA_Introduction",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "persian_rug",
+   "sequence": "cellularautomata",
+   "map": "CA_Introduction",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "structure_growth",
    "sequence": "cellularautomata",
-   "map": "CA_ElementaryRules"
+   "map": "CA_ElementaryRules",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "ca_columns",
    "sequence": "cellularautomata",
-   "map": "CA_GameOfLife"
+   "map": "CA_GameOfLife",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "mirrored_cellular_automata",
    "sequence": "cellularautomata",
-   "map": "CA_GameOfLife"
+   "map": "CA_GameOfLife",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "ca_bridge",
    "sequence": "cellularautomata",
-   "map": "CA_GameOfLife"
-  },
-  {
-   "lookup": "mold_network",
-   "sequence": "cellularautomata",
-   "map": "CA_BeyondBinary"
+   "map": "CA_GameOfLife",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "game_of_life_petri",
    "sequence": "cellularautomata",
-   "map": "CA_BeyondBinary"
+   "map": "CA_BeyondBinary",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "hexagon_ca_vr",
    "sequence": "cellularautomata",
-   "map": "CA_BeyondBinary"
+   "map": "CA_BeyondBinary",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "mold_network",
+   "sequence": "cellularautomata",
+   "map": "CA_BeyondBinary",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "ca_growth_network",
    "sequence": "cellularautomata",
-   "map": "CA_BeyondBinary"
+   "map": "CA_BeyondBinary",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "ca_chair_test",
    "sequence": "cellularautomata",
-   "map": "CA_ExpandingSpace"
+   "map": "CA_ExpandingSpace",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "cellular_automata_3d_tree",
    "sequence": "cellularautomata",
-   "map": "CA_ExpandingSpace"
-  },
-  {
-   "lookup": "crossway_ca",
-   "sequence": "cellularautomata",
-   "map": "CA_ExpandingSpace"
+   "map": "CA_ExpandingSpace",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "decaying_bridge",
    "sequence": "cellularautomata",
-   "map": "CA_ExpandingSpace"
+   "map": "CA_ExpandingSpace",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "lattice_gas_pump",
+   "lookup": "crossway_ca",
    "sequence": "cellularautomata",
-   "map": "CA_SoftRules"
+   "map": "CA_ExpandingSpace",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "ca_sphere",
    "sequence": "cellularautomata",
-   "map": "CA_SoftRules"
+   "map": "CA_SoftRules",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "the_clockmaker_of_rules",
    "sequence": "cellularautomata",
-   "map": "CA_SoftRules"
+   "map": "CA_SoftRules",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "lattice_gas_pump",
+   "sequence": "cellularautomata",
+   "map": "CA_SoftRules",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "rd_artifact",
    "sequence": "cellularautomata",
-   "map": "CA_SoftRules"
-  },
-  {
-   "lookup": "crack_propagation_ca",
-   "sequence": "cellularautomata",
-   "map": "CA_SoftRules"
+   "map": "CA_SoftRules",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "rule_30_110_gravity",
    "sequence": "cellularautomata",
-   "map": "CA_SoftRules"
+   "map": "CA_SoftRules",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "crack_propagation_ca",
+   "sequence": "cellularautomata",
+   "map": "CA_SoftRules",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "sierpinski_pyramid",
    "sequence": "cellularautomata",
-   "map": "CA_AgentsCircuits"
+   "map": "CA_AgentsCircuits",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "ca_screen",
    "sequence": "cellularautomata",
-   "map": "CA_EdgeOfChaos"
-  },
-  {
-   "lookup": "self_organization_ca",
-   "sequence": "cellularautomata",
-   "map": "CA_EdgeOfChaos"
+   "map": "CA_EdgeOfChaos",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "disease_spread_ca",
    "sequence": "cellularautomata",
-   "map": "CA_EdgeOfChaos"
-  },
-  {
-   "lookup": "volumetric_fog_ca",
-   "sequence": "cellularautomata",
-   "map": "CA_EdgeOfChaos"
+   "map": "CA_EdgeOfChaos",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "crackpropagation_ca",
    "sequence": "cellularautomata",
-   "map": "CA_EdgeOfChaos"
+   "map": "CA_EdgeOfChaos",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "fractal_recursion_2",
-   "sequence": "fractals",
-   "map": "Fractal_Recursion"
+   "lookup": "self_organization_ca",
+   "sequence": "cellularautomata",
+   "map": "CA_EdgeOfChaos",
+   "role": "unruled",
+   "by": "file"
   },
   {
-   "lookup": "recursive_table",
-   "sequence": "fractals",
-   "map": "Fractal_Recursion"
-  },
-  {
-   "lookup": "fibonacci_pagoda",
-   "sequence": "fractals",
-   "map": "Fractal_Recursion"
+   "lookup": "volumetric_fog_ca",
+   "sequence": "cellularautomata",
+   "map": "CA_EdgeOfChaos",
+   "role": "unruled",
+   "by": "file"
   },
   {
    "lookup": "example_8_3_recursion_circles_vr",
    "sequence": "fractals",
-   "map": "Fractal_Recursion"
+   "map": "Fractal_Recursion",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "cube_subdivision",
+   "lookup": "recursive_table",
    "sequence": "fractals",
-   "map": "Fractal_Recursion"
+   "map": "Fractal_Recursion",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "fractal_recursion_2",
+   "sequence": "fractals",
+   "map": "Fractal_Recursion",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "fibonacci_pagoda",
+   "sequence": "fractals",
+   "map": "Fractal_Recursion",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "recursive_chair",
    "sequence": "fractals",
-   "map": "Fractal_Recursion"
+   "map": "Fractal_Recursion",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "cube_staircase",
    "sequence": "fractals",
-   "map": "Fractal_Recursion"
+   "map": "Fractal_Recursion",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "living_paper",
+   "lookup": "cube_subdivision",
    "sequence": "fractals",
-   "map": "Fractal_RecursiveTrees"
-  },
-  {
-   "lookup": "fractal_lsystem_tree",
-   "sequence": "fractals",
-   "map": "Fractal_RecursiveTrees"
+   "map": "Fractal_Recursion",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "recursive_tree_2",
    "sequence": "fractals",
-   "map": "Fractal_RecursiveTrees"
+   "map": "Fractal_RecursiveTrees",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "small_subdivision_cube",
+   "lookup": "living_paper",
    "sequence": "fractals",
-   "map": "Fractal_RecursiveTrees"
+   "map": "Fractal_RecursiveTrees",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "fractal_lsystem_tree",
+   "sequence": "fractals",
+   "map": "Fractal_RecursiveTrees",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "inverted_tree_cloud",
    "sequence": "fractals",
-   "map": "Fractal_RecursiveTrees"
+   "map": "Fractal_RecursiveTrees",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "recursive_tree",
    "sequence": "fractals",
-   "map": "Fractal_RecursiveTrees"
+   "map": "Fractal_RecursiveTrees",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "small_subdivision_cube",
+   "sequence": "fractals",
+   "map": "Fractal_RecursiveTrees",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "cube_desk",
    "sequence": "fractals",
-   "map": "Fractal_RecursiveTrees"
+   "map": "Fractal_RecursiveTrees",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "fractal_scene",
    "sequence": "fractals",
-   "map": "Fractal_RecursiveTrees"
+   "map": "Fractal_RecursiveTrees",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "mobius_world",
    "sequence": "fractals",
-   "map": "Fractal_RecursiveTrees"
-  },
-  {
-   "lookup": "fractal_clouds",
-   "sequence": "fractals",
-   "map": "Fractal_CantorSet"
-  },
-  {
-   "lookup": "cantor_set",
-   "sequence": "fractals",
-   "map": "Fractal_CantorSet"
-  },
-  {
-   "lookup": "example_8_4_cantor_set_vr",
-   "sequence": "fractals",
-   "map": "Fractal_CantorSet"
+   "map": "Fractal_RecursiveTrees",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "example_8_4_cantor_pagoda_vr",
    "sequence": "fractals",
-   "map": "Fractal_CantorSet"
+   "map": "Fractal_CantorSet",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "cantor_set",
+   "sequence": "fractals",
+   "map": "Fractal_CantorSet",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "example_8_4_cantor_set_vr",
+   "sequence": "fractals",
+   "map": "Fractal_CantorSet",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "fractal_clouds",
+   "sequence": "fractals",
+   "map": "Fractal_CantorSet",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "stochastic_tree_separated",
    "sequence": "fractals",
-   "map": "Fractal_CantorSet"
-  },
-  {
-   "lookup": "cube_cabin",
-   "sequence": "fractals",
-   "map": "Fractal_KochSierpinski"
-  },
-  {
-   "lookup": "fractal_koch_curve",
-   "sequence": "fractals",
-   "map": "Fractal_KochSierpinski"
-  },
-  {
-   "lookup": "recursion_observatory",
-   "sequence": "fractals",
-   "map": "Fractal_KochSierpinski"
+   "map": "Fractal_CantorSet",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "koch_curve_3d",
    "sequence": "fractals",
-   "map": "Fractal_KochSierpinski"
+   "map": "Fractal_KochSierpinski",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "sierpinski_triangle",
+   "lookup": "fractal_koch_curve",
    "sequence": "fractals",
-   "map": "Fractal_KochSierpinski"
+   "map": "Fractal_KochSierpinski",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "cube_cabin",
+   "sequence": "fractals",
+   "map": "Fractal_KochSierpinski",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "recursion_observatory",
+   "sequence": "fractals",
+   "map": "Fractal_KochSierpinski",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "cube_bookshelf",
    "sequence": "fractals",
-   "map": "Fractal_KochSierpinski"
+   "map": "Fractal_KochSierpinski",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "box_counting_dimension",
    "sequence": "fractals",
-   "map": "Fractal_KochSierpinski"
+   "map": "Fractal_KochSierpinski",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "diffusion_limited_aggregation",
+   "lookup": "sierpinski_triangle",
    "sequence": "fractals",
-   "map": "Fractal_MengerSponge"
+   "map": "Fractal_KochSierpinski",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "menger_sponge",
    "sequence": "fractals",
-   "map": "Fractal_MengerSponge"
+   "map": "Fractal_MengerSponge",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "fibonacci_sequences",
+   "lookup": "diffusion_limited_aggregation",
    "sequence": "fractals",
-   "map": "Fractal_GoldenSpiral"
+   "map": "Fractal_MengerSponge",
+   "role": "unruled",
+   "by": "file"
   },
   {
    "lookup": "the_recursion_cabinet",
    "sequence": "fractals",
-   "map": "Fractal_GoldenSpiral"
+   "map": "Fractal_GoldenSpiral",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "fibonacci_sequences",
+   "sequence": "fractals",
+   "map": "Fractal_GoldenSpiral",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "golden_rectangle",
    "sequence": "fractals",
-   "map": "Fractal_GoldenSpiral"
+   "map": "Fractal_GoldenSpiral",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "fibonacci_terrain",
    "sequence": "fractals",
-   "map": "Fractal_GoldenSpiral"
+   "map": "Fractal_GoldenSpiral",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "romanesco",
    "sequence": "fractals",
-   "map": "Fractal_GoldenSpiral"
-  },
-  {
-   "lookup": "julia_set",
-   "sequence": "fractals",
-   "map": "Fractal_JuliaSet"
-  },
-  {
-   "lookup": "lyapunov_fractal",
-   "sequence": "fractals",
-   "map": "Fractal_JuliaSet"
+   "map": "Fractal_GoldenSpiral",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "julia_set_explorer",
    "sequence": "fractals",
-   "map": "Fractal_JuliaSet"
+   "map": "Fractal_JuliaSet",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "mandelbrot_set",
+   "lookup": "lyapunov_fractal",
    "sequence": "fractals",
-   "map": "Fractal_MandelbrotSet"
+   "map": "Fractal_JuliaSet",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "julia_set",
+   "sequence": "fractals",
+   "map": "Fractal_JuliaSet",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "mandelbrot_dive",
    "sequence": "fractals",
-   "map": "Fractal_MandelbrotSet"
+   "map": "Fractal_MandelbrotSet",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "fractal_recursion_1",
+   "lookup": "mandelbrot_set",
    "sequence": "fractals",
-   "map": "Fractal_Synthesis"
-  },
-  {
-   "lookup": "koch_curve",
-   "sequence": "fractals",
-   "map": "Fractal_Synthesis"
+   "map": "Fractal_MandelbrotSet",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "strange_attractors",
    "sequence": "fractals",
-   "map": "Fractal_Synthesis"
+   "map": "Fractal_Synthesis",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "cellular_automata_3d_stacked",
+   "lookup": "koch_curve",
    "sequence": "fractals",
-   "map": "Fractal_CrossSequence"
+   "map": "Fractal_Synthesis",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "fractal_recursion_1",
+   "sequence": "fractals",
+   "map": "Fractal_Synthesis",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "Hilbert3D",
    "sequence": "fractals",
-   "map": "Fractal_CrossSequence"
+   "map": "Fractal_CrossSequence",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "space_filling_curve_gallery",
    "sequence": "fractals",
-   "map": "Fractal_CrossSequence"
+   "map": "Fractal_CrossSequence",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "cellular_automata_3d_stacked",
+   "sequence": "fractals",
+   "map": "Fractal_CrossSequence",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "fractal_stochastic_tree",
    "sequence": "fractals",
-   "map": "Fractal_CrossSequence"
-  },
-  {
-   "lookup": "mesh_grammar_lsystem_tree",
-   "sequence": "lsystems",
-   "map": "LSystems_Grammar_Lab"
+   "map": "Fractal_CrossSequence",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "lsystem_editor",
    "sequence": "lsystems",
-   "map": "LSystems_Grammar_Lab"
+   "map": "LSystems_Grammar_Lab",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "mesh_grammar_lsystem_tree",
+   "sequence": "lsystems",
+   "map": "LSystems_Grammar_Lab",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "grammar_provenance",
    "sequence": "lsystems",
-   "map": "LSystems_Grammar_Lab"
+   "map": "LSystems_Grammar_Lab",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "lsystem_tree",
    "sequence": "lsystems",
-   "map": "LSystems_Grammar_Lab"
+   "map": "LSystems_Grammar_Lab",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "fractal_lsystem_string",
    "sequence": "lsystems",
-   "map": "LSystems_Grammar_Lab"
+   "map": "LSystems_Grammar_Lab",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "city_bench",
    "sequence": "lsystems",
-   "map": "LSystems_Grammar_Lab"
-  },
-  {
-   "lookup": "ContextSensitiveTree",
-   "sequence": "lsystems",
-   "map": "LSystems_Growth"
-  },
-  {
-   "lookup": "AnimatedTree",
-   "sequence": "lsystems",
-   "map": "LSystems_Growth"
-  },
-  {
-   "lookup": "modulor_cypress",
-   "sequence": "lsystems",
-   "map": "LSystems_Growth"
+   "map": "LSystems_Grammar_Lab",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "parametric_lsystem",
    "sequence": "lsystems",
-   "map": "LSystems_Growth"
+   "map": "LSystems_Growth",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "ContextFreeGrammars",
+   "lookup": "AnimatedTree",
    "sequence": "lsystems",
-   "map": "LSystems_Grammars_And_Curves"
+   "map": "LSystems_Growth",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "the_believing_turtle",
+   "lookup": "modulor_cypress",
    "sequence": "lsystems",
-   "map": "LSystems_Grammars_And_Curves"
+   "map": "LSystems_Growth",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "ContextSensitiveTree",
+   "sequence": "lsystems",
+   "map": "LSystems_Growth",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "lindenmayer_tube_tree",
    "sequence": "lsystems",
-   "map": "LSystems_Grammars_And_Curves"
+   "map": "LSystems_Grammars_And_Curves",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "mesh_grammar_petal_flower",
+   "lookup": "the_believing_turtle",
    "sequence": "lsystems",
-   "map": "LSystems_Architecture"
+   "map": "LSystems_Grammars_And_Curves",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "dragon_room",
+   "lookup": "ContextFreeGrammars",
    "sequence": "lsystems",
-   "map": "LSystems_Architecture"
-  },
-  {
-   "lookup": "CityGenerator",
-   "sequence": "lsystems",
-   "map": "LSystems_Architecture"
-  },
-  {
-   "lookup": "grammar_seed",
-   "sequence": "lsystems",
-   "map": "LSystems_Architecture"
+   "map": "LSystems_Grammars_And_Curves",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "lsystem_dungeon",
    "sequence": "lsystems",
-   "map": "LSystems_Architecture"
+   "map": "LSystems_Architecture",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "grammar_seed",
+   "sequence": "lsystems",
+   "map": "LSystems_Architecture",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "CityGenerator",
+   "sequence": "lsystems",
+   "map": "LSystems_Architecture",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "mesh_grammar_petal_flower",
+   "sequence": "lsystems",
+   "map": "LSystems_Architecture",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "dragon_room",
+   "sequence": "lsystems",
+   "map": "LSystems_Architecture",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "mesh_grammar_coral_fingers",
    "sequence": "lsystems",
-   "map": "LSystems_Architecture"
-  },
-  {
-   "lookup": "ForestCompetition",
-   "sequence": "lsystems",
-   "map": "LSystems_Competition"
+   "map": "LSystems_Architecture",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "branching_coral",
    "sequence": "lsystems",
-   "map": "LSystems_Competition"
+   "map": "LSystems_Competition",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "genetic_tree_sculptor",
+   "lookup": "ForestCompetition",
    "sequence": "lsystems",
-   "map": "LSystems_Living"
-  },
-  {
-   "lookup": "living_paper_fern",
-   "sequence": "lsystems",
-   "map": "LSystems_Living"
-  },
-  {
-   "lookup": "living_paper_tree",
-   "sequence": "lsystems",
-   "map": "LSystems_Living"
+   "map": "LSystems_Competition",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "living_paper_dragon",
    "sequence": "lsystems",
-   "map": "LSystems_Living"
+   "map": "LSystems_Living",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "genetic_tree_sculptor",
+   "sequence": "lsystems",
+   "map": "LSystems_Living",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "living_paper_tree",
+   "sequence": "lsystems",
+   "map": "LSystems_Living",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "living_paper_fern",
+   "sequence": "lsystems",
+   "map": "LSystems_Living",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "panel_bridge_loom",
    "sequence": "lsystems",
-   "map": "Assemblage_Same_Desire"
+   "map": "Assemblage_Same_Desire",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "ten_print_textile",
    "sequence": "lsystems",
-   "map": "Assemblage_Same_Desire"
+   "map": "Assemblage_Same_Desire",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "dragon_bench",
    "sequence": "lsystems",
-   "map": "Assemblage_Same_Desire"
+   "map": "Assemblage_Same_Desire",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "mamma_monster_gallery",
    "sequence": "lsystems",
-   "map": "Assemblage_Same_Desire"
-  },
-  {
-   "lookup": "godel_statement_plaque",
-   "sequence": "lsystems",
-   "map": "Assemblage_Same_Desire"
+   "map": "Assemblage_Same_Desire",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "incompleteness_scale",
    "sequence": "lsystems",
-   "map": "Assemblage_Same_Desire"
+   "map": "Assemblage_Same_Desire",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "godel_statement_plaque",
+   "sequence": "lsystems",
+   "map": "Assemblage_Same_Desire",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "GeneticProgramming",
    "sequence": "proceduralgeneration",
-   "map": "PG_Genetic_Evolution"
+   "map": "PG_Genetic_Evolution",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "space_colonization_algorithm",
    "sequence": "proceduralgeneration",
-   "map": "PG_Space_Colonization"
+   "map": "PG_Space_Colonization",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "percolationnetwork_ca",
    "sequence": "proceduralgeneration",
-   "map": "PG_Percolation_Network"
+   "map": "PG_Percolation_Network",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "branching_growth_algorithm",
    "sequence": "proceduralgeneration",
-   "map": "PG_Branching_Growth"
+   "map": "PG_Branching_Growth",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "organic_space",
    "sequence": "proceduralgeneration",
-   "map": "PG_Branching_Growth"
-  },
-  {
-   "lookup": "maze_generation",
-   "sequence": "proceduralgeneration",
-   "map": "PG_Caves_Mazes"
+   "map": "PG_Branching_Growth",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "caverandomwalk",
    "sequence": "proceduralgeneration",
-   "map": "PG_Caves_Mazes"
+   "map": "PG_Caves_Mazes",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "binary_space_partitioning",
    "sequence": "proceduralgeneration",
-   "map": "PG_Caves_Mazes"
+   "map": "PG_Caves_Mazes",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "maze_generation",
+   "sequence": "proceduralgeneration",
+   "map": "PG_Caves_Mazes",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "cube_mound_scene",
    "sequence": "proceduralgeneration",
-   "map": "PG_Sculpted_Forms"
+   "map": "PG_Sculpted_Forms",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "dome",
    "sequence": "proceduralgeneration",
-   "map": "PG_Sculpted_Forms"
+   "map": "PG_Sculpted_Forms",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "layered_membrane",
    "sequence": "proceduralgeneration",
-   "map": "PG_Sculpted_Forms"
+   "map": "PG_Sculpted_Forms",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "mirror_cellular_texture_for_3d",
    "sequence": "proceduralgeneration",
-   "map": "PG_Mirrored_Patterns"
-  },
-  {
-   "lookup": "rhizomatic_maze_space",
-   "sequence": "proceduralgeneration",
-   "map": "PG_Mirrored_Patterns"
+   "map": "PG_Mirrored_Patterns",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "pattern_tunnel_machine",
    "sequence": "proceduralgeneration",
-   "map": "PG_Mirrored_Patterns"
+   "map": "PG_Mirrored_Patterns",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "rhizomatic_maze_space",
+   "sequence": "proceduralgeneration",
+   "map": "PG_Mirrored_Patterns",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "jelly_cube",
    "sequence": "softbodies",
-   "map": "SoftBodies_Soft_Body_Deformation"
-  },
-  {
-   "lookup": "jelly_variants",
-   "sequence": "softbodies",
-   "map": "SoftBodies_Soft_Body_Deformation"
+   "map": "SoftBodies_Soft_Body_Deformation",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "softmill",
    "sequence": "softbodies",
-   "map": "SoftBodies_Soft_Body_Deformation"
+   "map": "SoftBodies_Soft_Body_Deformation",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "radiolaria",
    "sequence": "softbodies",
-   "map": "SoftBodies_Soft_Body_Deformation"
+   "map": "SoftBodies_Soft_Body_Deformation",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "grab_long_stick",
+   "lookup": "jelly_variants",
    "sequence": "softbodies",
-   "map": "SoftBodies_Carusell"
-  },
-  {
-   "lookup": "revolving_joy_ride",
-   "sequence": "softbodies",
-   "map": "SoftBodies_Carusell"
-  },
-  {
-   "lookup": "flex_cloth_pad",
-   "sequence": "softbodies",
-   "map": "SoftBodies_Carusell"
-  },
-  {
-   "lookup": "cloth_straps",
-   "sequence": "softbodies",
-   "map": "SoftBodies_Carusell"
+   "map": "SoftBodies_Soft_Body_Deformation",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "soft_mushroom",
    "sequence": "softbodies",
-   "map": "SoftBodies_Carusell"
+   "map": "SoftBodies_Carusell",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "breathing_room",
+   "lookup": "revolving_joy_ride",
    "sequence": "softbodies",
-   "map": "SoftBodies_Obsticals"
+   "map": "SoftBodies_Carusell",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "cloth_straps",
+   "sequence": "softbodies",
+   "map": "SoftBodies_Carusell",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "grab_long_stick",
+   "sequence": "softbodies",
+   "map": "SoftBodies_Carusell",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "flex_cloth_pad",
+   "sequence": "softbodies",
+   "map": "SoftBodies_Carusell",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "flagdancer",
    "sequence": "softbodies",
-   "map": "SoftBodies_Obsticals"
+   "map": "SoftBodies_Obsticals",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "breathing_room",
+   "sequence": "softbodies",
+   "map": "SoftBodies_Obsticals",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "softbody_gallery_part2",
    "sequence": "softbodies",
-   "map": "SoftBodies_Obsticals"
+   "map": "SoftBodies_Obsticals",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "softstopscene",
    "sequence": "softbodies",
-   "map": "SoftBodies_Cloth_Physics"
+   "map": "SoftBodies_Cloth_Physics",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "rounded_softbody_test",
    "sequence": "softbodies",
-   "map": "SoftBodies_Playground_of_Joy"
+   "map": "SoftBodies_Playground_of_Joy",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "entropy_morphogenesis",
    "sequence": "softbodies",
-   "map": "SoftBodies_Playground_of_Joy"
+   "map": "SoftBodies_Playground_of_Joy",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "gridagent",
    "sequence": "softbodies",
-   "map": "SoftBodies_Playground_of_Joy"
+   "map": "SoftBodies_Playground_of_Joy",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "turing_pattern_generator",
    "sequence": "softbodies",
-   "map": "ProceduralGeneration_Reaction_Diffusion_Systems"
+   "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "mesh_grammar_detailed_bulge",
    "sequence": "softbodies",
-   "map": "ProceduralGeneration_Reaction_Diffusion_Systems"
+   "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "reaction_diffusion",
    "sequence": "softbodies",
-   "map": "ProceduralGeneration_Reaction_Diffusion_Systems"
+   "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "the_confessing_body",
    "sequence": "softbodies",
-   "map": "ProceduralGeneration_Reaction_Diffusion_Systems"
+   "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "voxel_noise_demo",
    "sequence": "isosurfaces",
-   "map": "ISO_Introduction"
+   "map": "ISO_Introduction",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "fifteen_cases_demo",
    "sequence": "isosurfaces",
-   "map": "ISO_LookupTable"
-  },
-  {
-   "lookup": "mc_cave",
-   "sequence": "isosurfaces",
-   "map": "ISO_LookupTable"
+   "map": "ISO_LookupTable",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "metaball_world",
    "sequence": "isosurfaces",
-   "map": "ISO_LookupTable"
+   "map": "ISO_LookupTable",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "the_threshold_opinion",
    "sequence": "isosurfaces",
-   "map": "ISO_LookupTable"
+   "map": "ISO_LookupTable",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "mc_cave",
+   "sequence": "isosurfaces",
+   "map": "ISO_LookupTable",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "mc_torus_sculpture",
    "sequence": "isosurfaces",
-   "map": "ISO_ShapesGallery"
-  },
-  {
-   "lookup": "mc_sculpt_vr",
-   "sequence": "isosurfaces",
-   "map": "ISO_ShapesGallery"
-  },
-  {
-   "lookup": "gyroid_demo",
-   "sequence": "isosurfaces",
-   "map": "ISO_ShapesGallery"
+   "map": "ISO_ShapesGallery",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "mc_shapes_gallery",
    "sequence": "isosurfaces",
-   "map": "ISO_ShapesGallery"
+   "map": "ISO_ShapesGallery",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "gyroid_demo",
+   "sequence": "isosurfaces",
+   "map": "ISO_ShapesGallery",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "mc_sculpt_vr",
+   "sequence": "isosurfaces",
+   "map": "ISO_ShapesGallery",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "GyroidDemo",
    "sequence": "isosurfaces",
-   "map": "ISO_TorusGyroid"
+   "map": "ISO_TorusGyroid",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "fountain_demo",
    "sequence": "isosurfaces",
-   "map": "ISO_Sculpting"
+   "map": "ISO_Sculpting",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "mc_flat_landscape",
    "sequence": "isosurfaces",
-   "map": "ISO_FlatTerrain"
-  },
-  {
-   "lookup": "mc_overhang_landscape",
-   "sequence": "isosurfaces",
-   "map": "ISO_FlatTerrain"
+   "map": "ISO_FlatTerrain",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "mc_terrain_demo",
    "sequence": "isosurfaces",
-   "map": "ISO_FlatTerrain"
+   "map": "ISO_FlatTerrain",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "mc_overhang_landscape",
+   "sequence": "isosurfaces",
+   "map": "ISO_FlatTerrain",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "rhizome_cave_system",
    "sequence": "isosurfaces",
-   "map": "ISO_FlatTerrain"
+   "map": "ISO_FlatTerrain",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "marchingcubes_portal_landscape",
    "sequence": "isosurfaces",
-   "map": "ISO_PortalLandscape"
-  },
-  {
-   "lookup": "rhizome_cave_demo",
-   "sequence": "isosurfaces",
-   "map": "ISO_Caves"
+   "map": "ISO_PortalLandscape",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "mc_portal_landscape",
    "sequence": "isosurfaces",
-   "map": "ISO_Caves"
-  },
-  {
-   "lookup": "mc_inside_cave",
-   "sequence": "isosurfaces",
-   "map": "ISO_Caves"
-  },
-  {
-   "lookup": "raymarched_metaballs",
-   "sequence": "isosurfaces",
-   "map": "ISO_Caves"
+   "map": "ISO_Caves",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "queer_marching_cave",
    "sequence": "isosurfaces",
-   "map": "ISO_Caves"
+   "map": "ISO_Caves",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "raymarched_metaballs",
+   "sequence": "isosurfaces",
+   "map": "ISO_Caves",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "mc_inside_cave",
+   "sequence": "isosurfaces",
+   "map": "ISO_Caves",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "rhizome_cave_demo",
+   "sequence": "isosurfaces",
+   "map": "ISO_Caves",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "marchingcave",
    "sequence": "isosurfaces",
-   "map": "ISO_CaveGeneration"
+   "map": "ISO_CaveGeneration",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "marchingcubes_cave",
    "sequence": "isosurfaces",
-   "map": "ISO_CaveGeneration"
-  },
-  {
-   "lookup": "animated_noise_explorer",
-   "sequence": "isosurfaces",
-   "map": "ISO_AnimatedNoise"
+   "map": "ISO_CaveGeneration",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "mc_base",
    "sequence": "isosurfaces",
-   "map": "ISO_AnimatedNoise"
+   "map": "ISO_AnimatedNoise",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "animated_noise_explorer",
+   "sequence": "isosurfaces",
+   "map": "ISO_AnimatedNoise",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "nakama_metaballs",
    "sequence": "isosurfaces",
-   "map": "ISO_Metaballs"
+   "map": "ISO_Metaballs",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "metaballs",
    "sequence": "isosurfaces",
-   "map": "ISO_Metaballs"
+   "map": "ISO_Metaballs",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "implicit_surface_modeling",
    "sequence": "isosurfaces",
-   "map": "ISO_ImplicitModeling"
+   "map": "ISO_ImplicitModeling",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "rhizome_inside",
    "sequence": "isosurfaces",
-   "map": "ISO_RhizomeBody"
+   "map": "ISO_RhizomeBody",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "csg_union_demo",
    "sequence": "boolean_surfaces",
-   "map": "Boolean_Verbs"
+   "map": "Boolean_Verbs",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "csg_intersection_demo",
    "sequence": "boolean_surfaces",
-   "map": "Boolean_Verbs"
+   "map": "Boolean_Verbs",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "csg_difference_demo",
    "sequence": "boolean_surfaces",
-   "map": "Boolean_Verbs"
+   "map": "Boolean_Verbs",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "the_argument_of_solids",
    "sequence": "boolean_surfaces",
-   "map": "Boolean_Verbs"
+   "map": "Boolean_Verbs",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "subtraction_suite",
    "sequence": "boolean_surfaces",
-   "map": "Boolean_Gallery"
+   "map": "Boolean_Gallery",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "coincident_face",
    "sequence": "boolean_surfaces",
-   "map": "Boolean_Gallery"
+   "map": "Boolean_Gallery",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "removal_room",
    "sequence": "boolean_surfaces",
-   "map": "Boolean_Gallery"
+   "map": "Boolean_Gallery",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "csg_compose_workbench",
    "sequence": "boolean_surfaces",
-   "map": "Boolean_Works"
+   "map": "Boolean_Works",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "sphere_splitting_showcase",
    "sequence": "boolean_surfaces",
-   "map": "Boolean_Works"
+   "map": "Boolean_Works",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "recursive_boolean_cube",
    "sequence": "boolean_surfaces",
-   "map": "Boolean_Works"
+   "map": "Boolean_Works",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "csg_architecture_cavity",
    "sequence": "boolean_surfaces",
-   "map": "Boolean_Works"
+   "map": "Boolean_Works",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "boolean_burrow",
+   "sequence": "boolean_surfaces",
+   "map": "Boolean_Works",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "sdf_cavern_room",
    "sequence": "boolean_surfaces",
-   "map": "Boolean_Works"
+   "map": "Boolean_Works",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "booleanvariations",
    "sequence": "boolean_surfaces",
-   "map": "Boolean_Works"
-  },
-  {
-   "lookup": "PhysarumColony",
-   "sequence": "swarmintelligence",
-   "map": "SwarmIntelligence_PhysarumColony"
-  },
-  {
-   "lookup": "ant_agent",
-   "sequence": "swarmintelligence",
-   "map": "SwarmIntelligence_PhysarumColony"
+   "map": "Boolean_Works",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "particle_swarm_optimization_legacy",
    "sequence": "swarmintelligence",
-   "map": "SwarmIntelligence_PhysarumColony"
+   "map": "SwarmIntelligence_PhysarumColony",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "FlowFieldMain",
+   "lookup": "PhysarumColony",
    "sequence": "swarmintelligence",
-   "map": "SwarmIntelligence_FlowFields"
+   "map": "SwarmIntelligence_PhysarumColony",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "AntColonyV2",
+   "lookup": "ant_agent",
    "sequence": "swarmintelligence",
-   "map": "SwarmIntelligence_FlowFields"
+   "map": "SwarmIntelligence_PhysarumColony",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "ecosystem_simulation",
    "sequence": "swarmintelligence",
-   "map": "SwarmIntelligence_FlowFields"
+   "map": "SwarmIntelligence_FlowFields",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "FlowFieldMain",
+   "sequence": "swarmintelligence",
+   "map": "SwarmIntelligence_FlowFields",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "AntColonyV2",
+   "sequence": "swarmintelligence",
+   "map": "SwarmIntelligence_FlowFields",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "boid_flocking",
    "sequence": "swarmintelligence",
-   "map": "SwarmIntelligence_Boids_Algorithm"
+   "map": "SwarmIntelligence_Boids_Algorithm",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "boids_aquarium",
    "sequence": "swarmintelligence",
-   "map": "SwarmIntelligence_Boids_Algorithm"
-  },
-  {
-   "lookup": "boids_2d_in_3d",
-   "sequence": "swarmintelligence",
-   "map": "SwarmIntelligence_Boids_Algorithm"
+   "map": "SwarmIntelligence_Boids_Algorithm",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "boid_manager",
    "sequence": "swarmintelligence",
-   "map": "SwarmIntelligence_Boids_Algorithm"
+   "map": "SwarmIntelligence_Boids_Algorithm",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "boids_2d_in_3d",
+   "sequence": "swarmintelligence",
+   "map": "SwarmIntelligence_Boids_Algorithm",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "flocking_controls",
    "sequence": "swarmintelligence",
-   "map": "SwarmIntelligence_Boids_Algorithm"
+   "map": "SwarmIntelligence_Boids_Algorithm",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "ant_colony_optimization",
    "sequence": "swarmintelligence",
-   "map": "SwarmIntelligence_Agent_Based_Modeling_ABM"
-  },
-  {
-   "lookup": "physarum_colony",
-   "sequence": "swarmintelligence",
-   "map": "SwarmIntelligence_Agent_Based_Modeling_ABM"
+   "map": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "catalyst_foe",
    "sequence": "swarmintelligence",
-   "map": "SwarmIntelligence_Agent_Based_Modeling_ABM"
+   "map": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "tick_flock",
+   "lookup": "physarum_colony",
    "sequence": "swarmintelligence",
-   "map": "SwarmIntelligence_Particle_Swarm_Optimization"
+   "map": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "self_organizing_patterns",
    "sequence": "swarmintelligence",
-   "map": "SwarmIntelligence_Particle_Swarm_Optimization"
+   "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "fitness_landscape_politics",
    "sequence": "swarmintelligence",
-   "map": "SwarmIntelligence_Particle_Swarm_Optimization"
+   "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "ant_colony_v2",
    "sequence": "swarmintelligence",
-   "map": "SwarmIntelligence_Particle_Swarm_Optimization"
+   "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "tick_flock",
+   "sequence": "swarmintelligence",
+   "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "evolved_creatures",
    "sequence": "machinelearning",
-   "map": "ML_Evolution"
+   "map": "ML_Evolution",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "gradient_descent_visualization",
    "sequence": "machinelearning",
-   "map": "ML_Evolution"
+   "map": "ML_Evolution",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "non_teleological_evolution",
    "sequence": "machinelearning",
-   "map": "ML_Evolution"
+   "map": "ML_Evolution",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "evolvingflowers",
    "sequence": "machinelearning",
-   "map": "ML_Evolution"
+   "map": "ML_Evolution",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "pca_visualization",
    "sequence": "machinelearning",
-   "map": "ML_Gradient_Landscape"
+   "map": "ML_Gradient_Landscape",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "loss_function_comparator",
    "sequence": "machinelearning",
-   "map": "ML_Gradient_Landscape"
+   "map": "ML_Gradient_Landscape",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "enhanced_kmeans",
    "sequence": "machinelearning",
-   "map": "ML_Classification"
+   "map": "ML_Classification",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "svm_visualization",
    "sequence": "machinelearning",
-   "map": "ML_Classification"
+   "map": "ML_Classification",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "random_forest_visualization",
    "sequence": "machinelearning",
-   "map": "ML_Classification"
+   "map": "ML_Classification",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "neural_network_visualization",
    "sequence": "machinelearning",
-   "map": "ML_Neural_Networks"
+   "map": "ML_Neural_Networks",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "neural_networks_vr",
    "sequence": "machinelearning",
-   "map": "ML_Neural_Networks"
+   "map": "ML_Neural_Networks",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "fine_tuning_vr",
    "sequence": "machinelearning",
-   "map": "ML_Neural_Networks"
+   "map": "ML_Neural_Networks",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "computer_vision_vr",
    "sequence": "machinelearning",
-   "map": "ML_Perception"
+   "map": "ML_Perception",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "convolutional_neural_networks_cnns_vr",
    "sequence": "machinelearning",
-   "map": "ML_Perception"
+   "map": "ML_Perception",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "transformers_vr",
    "sequence": "machinelearning",
-   "map": "ML_Sequence_Memory"
+   "map": "ML_Sequence_Memory",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "lstms_vr",
    "sequence": "machinelearning",
-   "map": "ML_Sequence_Memory"
+   "map": "ML_Sequence_Memory",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "generative_adversarial_networks_gans_vr",
    "sequence": "machinelearning",
-   "map": "ML_Generative"
+   "map": "ML_Generative",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "anomaly_detection",
    "sequence": "machinelearning",
-   "map": "ML_Synthesis"
-  },
-  {
-   "lookup": "joint_learn_walk",
-   "sequence": "machinelearning",
-   "map": "ML_Synthesis"
+   "map": "ML_Synthesis",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "explainable_ai_xai_vr",
    "sequence": "machinelearning",
-   "map": "ML_Synthesis"
+   "map": "ML_Synthesis",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "joint_learn_walk",
+   "sequence": "machinelearning",
+   "map": "ML_Synthesis",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "graphspace",
    "sequence": "graphtheory",
-   "map": "GT_Foundations"
-  },
-  {
-   "lookup": "graphspace3d",
-   "sequence": "graphtheory",
-   "map": "GT_Foundations"
+   "map": "GT_Foundations",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "KonigsbergBridge",
    "sequence": "graphtheory",
-   "map": "GT_Foundations"
+   "map": "GT_Foundations",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "two_travelers",
    "sequence": "graphtheory",
-   "map": "GT_Foundations"
+   "map": "GT_Foundations",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "graphspace3d",
+   "sequence": "graphtheory",
+   "map": "GT_Foundations",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "living_paper_bfs",
    "sequence": "graphtheory",
-   "map": "GT_Layout"
+   "map": "GT_Layout",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "force_directed_layout",
    "sequence": "graphtheory",
-   "map": "GT_Layout"
+   "map": "GT_Layout",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "graph_basilica",
    "sequence": "graphtheory",
-   "map": "GT_Layout"
+   "map": "GT_Layout",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "pathfinding3d",
    "sequence": "graphtheory",
-   "map": "GT_Pathfinding"
+   "map": "GT_Pathfinding",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "family_chandelier",
    "sequence": "graphtheory",
-   "map": "GT_Pathfinding"
+   "map": "GT_Pathfinding",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "impatient_river",
    "sequence": "graphtheory",
-   "map": "GT_Pathfinding"
+   "map": "GT_Pathfinding",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "living_paper_dfs_maze",
    "sequence": "graphtheory",
-   "map": "GT_Pathfinding"
+   "map": "GT_Pathfinding",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "rhizomatic_structure",
    "sequence": "graphtheory",
-   "map": "GT_Network_Analysis"
-  },
-  {
-   "lookup": "network_analysis",
-   "sequence": "graphtheory",
-   "map": "GT_Network_Analysis"
+   "map": "GT_Network_Analysis",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "networkflow3d",
    "sequence": "graphtheory",
-   "map": "GT_Network_Analysis"
+   "map": "GT_Network_Analysis",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "network_analysis",
+   "sequence": "graphtheory",
+   "map": "GT_Network_Analysis",
+   "role": "unruled",
+   "by": "file"
   },
   {
    "lookup": "topological_sort",
    "sequence": "graphtheory",
-   "map": "GT_Connectivity"
+   "map": "GT_Connectivity",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "tarjan_algorithm",
    "sequence": "graphtheory",
-   "map": "GT_Connectivity"
+   "map": "GT_Connectivity",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "kosaraju_algorithm",
    "sequence": "graphtheory",
-   "map": "GT_Connectivity"
+   "map": "GT_Connectivity",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "mst_visualization",
    "sequence": "graphtheory",
-   "map": "GT_Spanning_Trees"
+   "map": "GT_Spanning_Trees",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "grid3d_dfs",
    "sequence": "graphtheory",
-   "map": "GT_Flow"
-  },
-  {
-   "lookup": "grid3d_prim",
-   "sequence": "graphtheory",
-   "map": "GT_Flow"
+   "map": "GT_Flow",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "karger_algorithm",
    "sequence": "graphtheory",
-   "map": "GT_Flow"
+   "map": "GT_Flow",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "push_relabel_algorithm",
    "sequence": "graphtheory",
-   "map": "GT_Flow"
+   "map": "GT_Flow",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "grid3d_prim",
+   "sequence": "graphtheory",
+   "map": "GT_Flow",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "edmonds_algorithm",
    "sequence": "graphtheory",
-   "map": "GT_Matching"
-  },
-  {
-   "lookup": "euclid_postulates_plaque",
-   "sequence": "foundationscrisis",
-   "map": "Euclid_Parallel"
+   "map": "GT_Matching",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "angle_sum_triangle",
    "sequence": "foundationscrisis",
-   "map": "Euclid_Parallel"
+   "map": "Euclid_Parallel",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "triangle_curvature_workbench",
+   "lookup": "euclid_postulates_plaque",
    "sequence": "foundationscrisis",
-   "map": "NonEuclidean_Spaces"
+   "map": "Euclid_Parallel",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "curvature_slider",
    "sequence": "foundationscrisis",
-   "map": "NonEuclidean_Spaces"
+   "map": "NonEuclidean_Spaces",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "elliptic_surface",
    "sequence": "foundationscrisis",
-   "map": "NonEuclidean_Spaces"
+   "map": "NonEuclidean_Spaces",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "poincare_disk",
    "sequence": "foundationscrisis",
-   "map": "NonEuclidean_Spaces"
-  },
-  {
-   "lookup": "hyperbolic_surface",
-   "sequence": "foundationscrisis",
-   "map": "NonEuclidean_Spaces"
+   "map": "NonEuclidean_Spaces",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "riemann_sphere",
    "sequence": "foundationscrisis",
-   "map": "NonEuclidean_Spaces"
+   "map": "NonEuclidean_Spaces",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "self_membership_set",
+   "lookup": "hyperbolic_surface",
    "sequence": "foundationscrisis",
-   "map": "Russell_Paradox"
+   "map": "NonEuclidean_Spaces",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "barber_paradox",
+   "lookup": "triangle_curvature_workbench",
    "sequence": "foundationscrisis",
-   "map": "Russell_Paradox"
+   "map": "NonEuclidean_Spaces",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "russell_set_box",
    "sequence": "foundationscrisis",
-   "map": "Russell_Paradox"
+   "map": "Russell_Paradox",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "self_membership_set",
+   "sequence": "foundationscrisis",
+   "map": "Russell_Paradox",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "liar_loop",
    "sequence": "foundationscrisis",
-   "map": "Russell_Paradox"
+   "map": "Russell_Paradox",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "hilbert_hotel",
    "sequence": "foundationscrisis",
-   "map": "Russell_Paradox"
+   "map": "Russell_Paradox",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "barber_paradox",
+   "sequence": "foundationscrisis",
+   "map": "Russell_Paradox",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "negative_control_fixture",
    "sequence": "foundationscrisis",
-   "map": "Godel_Incompleteness"
+   "map": "Godel_Incompleteness",
+   "role": "unruled",
+   "by": "file"
   },
   {
    "lookup": "critic_regress_stack",
    "sequence": "foundationscrisis",
-   "map": "Godel_Incompleteness"
+   "map": "Godel_Incompleteness",
+   "role": "unruled",
+   "by": "file"
   },
   {
    "lookup": "godel_sentence_machine",
    "sequence": "foundationscrisis",
-   "map": "Godel_Incompleteness"
+   "map": "Godel_Incompleteness",
+   "role": "unruled",
+   "by": "file"
   },
   {
    "lookup": "rice_verifier_booth",
    "sequence": "foundationscrisis",
-   "map": "Godel_Incompleteness"
+   "map": "Godel_Incompleteness",
+   "role": "unruled",
+   "by": "file"
   },
   {
    "lookup": "fluency_seam",
    "sequence": "foundationscrisis",
-   "map": "Godel_Incompleteness"
+   "map": "Godel_Incompleteness",
+   "role": "unruled",
+   "by": "file"
   },
   {
    "lookup": "provability_sorter",
    "sequence": "foundationscrisis",
-   "map": "Godel_Incompleteness"
+   "map": "Godel_Incompleteness",
+   "role": "unruled",
+   "by": "file"
   },
   {
    "lookup": "incompleteness_tower",
    "sequence": "foundationscrisis",
-   "map": "Godel_Incompleteness"
+   "map": "Godel_Incompleteness",
+   "role": "unruled",
+   "by": "file"
   },
   {
    "lookup": "escher_staircase",
    "sequence": "foundationscrisis",
-   "map": "Escher_Impossible"
+   "map": "Escher_Impossible",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "magritte_pipe",
    "sequence": "foundationscrisis",
-   "map": "Escher_Impossible"
-  },
-  {
-   "lookup": "penrose_triangle",
-   "sequence": "foundationscrisis",
-   "map": "Escher_Impossible"
+   "map": "Escher_Impossible",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "impossible_trident",
    "sequence": "foundationscrisis",
-   "map": "Escher_Impossible"
+   "map": "Escher_Impossible",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "cantor_diagonal_workbench",
+   "lookup": "penrose_triangle",
    "sequence": "foundationscrisis",
-   "map": "Brouwer_Intuitionism"
+   "map": "Escher_Impossible",
+   "role": "unruled",
+   "by": "file"
   },
   {
    "lookup": "constructive_proof",
    "sequence": "foundationscrisis",
-   "map": "Brouwer_Intuitionism"
+   "map": "Brouwer_Intuitionism",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "brouwer_choice_sequence",
    "sequence": "foundationscrisis",
-   "map": "Brouwer_Intuitionism"
-  },
-  {
-   "lookup": "constructive_staircase",
-   "sequence": "foundationscrisis",
-   "map": "Brouwer_Intuitionism"
+   "map": "Brouwer_Intuitionism",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "excluded_middle_demo",
    "sequence": "foundationscrisis",
-   "map": "Brouwer_Intuitionism"
+   "map": "Brouwer_Intuitionism",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "constructive_staircase",
+   "sequence": "foundationscrisis",
+   "map": "Brouwer_Intuitionism",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "cantor_diagonal_workbench",
+   "sequence": "foundationscrisis",
+   "map": "Brouwer_Intuitionism",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "schrodinger_box",
    "sequence": "foundationscrisis",
-   "map": "Florensky_Paraconsistent"
-  },
-  {
-   "lookup": "both_true_gate",
-   "sequence": "foundationscrisis",
-   "map": "Florensky_Paraconsistent"
+   "map": "Florensky_Paraconsistent",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "florensky_sphere",
    "sequence": "foundationscrisis",
-   "map": "Florensky_Paraconsistent"
+   "map": "Florensky_Paraconsistent",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "superposition_display",
    "sequence": "foundationscrisis",
-   "map": "Florensky_Paraconsistent"
+   "map": "Florensky_Paraconsistent",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "lambda_slider",
+   "lookup": "both_true_gate",
    "sequence": "foundationscrisis",
-   "map": "Crisis_Synthesis"
-  },
-  {
-   "lookup": "phi_slider",
-   "sequence": "foundationscrisis",
-   "map": "Crisis_Synthesis"
-  },
-  {
-   "lookup": "goedel_atrium",
-   "sequence": "foundationscrisis",
-   "map": "Crisis_Synthesis"
-  },
-  {
-   "lookup": "russell_paradox_workbench",
-   "sequence": "foundationscrisis",
-   "map": "Crisis_Synthesis"
-  },
-  {
-   "lookup": "bifurcation_diagram",
-   "sequence": "foundationscrisis",
-   "map": "Crisis_Synthesis"
+   "map": "Florensky_Paraconsistent",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "qfep_formula_3d",
    "sequence": "foundationscrisis",
-   "map": "Crisis_Synthesis"
+   "map": "Crisis_Synthesis",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "tt",
-   "sequence": "qfeplaboratory",
-   "map": "QFEP_Introduction"
+   "lookup": "bifurcation_diagram",
+   "sequence": "foundationscrisis",
+   "map": "Crisis_Synthesis",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "phi_slider",
+   "sequence": "foundationscrisis",
+   "map": "Crisis_Synthesis",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "goedel_atrium",
+   "sequence": "foundationscrisis",
+   "map": "Crisis_Synthesis",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "lambda_slider",
+   "sequence": "foundationscrisis",
+   "map": "Crisis_Synthesis",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "russell_paradox_workbench",
+   "sequence": "foundationscrisis",
+   "map": "Crisis_Synthesis",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "qfep_balance_workbench",
    "sequence": "qfeplaboratory",
-   "map": "QFEP_Introduction"
+   "map": "QFEP_Introduction",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "tt",
+   "sequence": "qfeplaboratory",
+   "map": "QFEP_Introduction",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "grab_sphere_F",
    "sequence": "qfeplaboratory",
-   "map": "QFEP_Introduction"
-  },
-  {
-   "lookup": "grab_sphere_E",
-   "sequence": "qfeplaboratory",
-   "map": "QFEP_Introduction"
+   "map": "QFEP_Introduction",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "grab_sphere_lambda",
    "sequence": "qfeplaboratory",
-   "map": "QFEP_Introduction"
+   "map": "QFEP_Introduction",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "grab_sphere_E",
+   "sequence": "qfeplaboratory",
+   "map": "QFEP_Introduction",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "shannon_workbench",
    "sequence": "qfeplaboratory",
-   "map": "QFEP_F_Term"
-  },
-  {
-   "lookup": "snap_cube_puzzle",
-   "sequence": "qfeplaboratory",
-   "map": "QFEP_F_Term"
-  },
-  {
-   "lookup": "snap_tetra_puzzle",
-   "sequence": "qfeplaboratory",
-   "map": "QFEP_F_Term"
+   "map": "QFEP_F_Term",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "crystal_cluster",
    "sequence": "qfeplaboratory",
-   "map": "QFEP_F_Term"
+   "map": "QFEP_F_Term",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "snap_cube_puzzle",
+   "sequence": "qfeplaboratory",
+   "map": "QFEP_F_Term",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "snap_tetra_puzzle",
+   "sequence": "qfeplaboratory",
+   "map": "QFEP_F_Term",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "microstate_counter",
    "sequence": "qfeplaboratory",
-   "map": "QFEP_E_Term"
-  },
-  {
-   "lookup": "entropy_fan",
-   "sequence": "qfeplaboratory",
-   "map": "QFEP_E_Term"
-  },
-  {
-   "lookup": "possibility_space_cloud",
-   "sequence": "qfeplaboratory",
-   "map": "QFEP_E_Term"
-  },
-  {
-   "lookup": "particle_chaos",
-   "sequence": "qfeplaboratory",
-   "map": "QFEP_E_Term"
+   "map": "QFEP_E_Term",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "random_cubes",
    "sequence": "qfeplaboratory",
-   "map": "QFEP_E_Term"
+   "map": "QFEP_E_Term",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "entropy_fan",
+   "sequence": "qfeplaboratory",
+   "map": "QFEP_E_Term",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "possibility_space_cloud",
+   "sequence": "qfeplaboratory",
+   "map": "QFEP_E_Term",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "particle_chaos",
+   "sequence": "qfeplaboratory",
+   "map": "QFEP_E_Term",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "qfep_chalkboard",
    "sequence": "qfeplaboratory",
-   "map": "QFEP_Lambda_Spectrum"
+   "map": "QFEP_Lambda_Spectrum",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "edge_particles",
    "sequence": "qfeplaboratory",
-   "map": "QFEP_Lambda_Spectrum"
-  },
-  {
-   "lookup": "lambda_hall",
-   "sequence": "qfeplaboratory",
-   "map": "QFEP_Lambda_Spectrum"
+   "map": "QFEP_Lambda_Spectrum",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "chaos_particles",
    "sequence": "qfeplaboratory",
-   "map": "QFEP_Lambda_Spectrum"
-  },
-  {
-   "lookup": "phase_cube",
-   "sequence": "qfeplaboratory",
-   "map": "QFEP_Lambda_Spectrum"
+   "map": "QFEP_Lambda_Spectrum",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "bifurcation_walkway",
    "sequence": "qfeplaboratory",
-   "map": "QFEP_Lambda_Spectrum"
+   "map": "QFEP_Lambda_Spectrum",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "dissolving_form",
    "sequence": "qfeplaboratory",
-   "map": "QFEP_Lambda_Spectrum"
+   "map": "QFEP_Lambda_Spectrum",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "ordered_grid",
    "sequence": "qfeplaboratory",
-   "map": "QFEP_Lambda_Spectrum"
+   "map": "QFEP_Lambda_Spectrum",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "complexity_pattern",
    "sequence": "qfeplaboratory",
-   "map": "QFEP_Lambda_Spectrum"
+   "map": "QFEP_Lambda_Spectrum",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "crystal_formation",
    "sequence": "qfeplaboratory",
-   "map": "QFEP_Lambda_Spectrum"
+   "map": "QFEP_Lambda_Spectrum",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "phase_cube",
+   "sequence": "qfeplaboratory",
+   "map": "QFEP_Lambda_Spectrum",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "lambda_hall",
+   "sequence": "qfeplaboratory",
+   "map": "QFEP_Lambda_Spectrum",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "rigid_sculpture",
    "sequence": "qfeplaboratory",
-   "map": "QFEP_Phi_Term"
-  },
-  {
-   "lookup": "fluid_form",
-   "sequence": "qfeplaboratory",
-   "map": "QFEP_Phi_Term"
-  },
-  {
-   "lookup": "preserved_pattern",
-   "sequence": "qfeplaboratory",
-   "map": "QFEP_Phi_Term"
+   "map": "QFEP_Phi_Term",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "lambda_promenade",
    "sequence": "qfeplaboratory",
-   "map": "QFEP_Phi_Term"
+   "map": "QFEP_Phi_Term",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "preserved_pattern",
+   "sequence": "qfeplaboratory",
+   "map": "QFEP_Phi_Term",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "transforming_pattern",
    "sequence": "qfeplaboratory",
-   "map": "QFEP_Phi_Term"
+   "map": "QFEP_Phi_Term",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "fluid_form",
+   "sequence": "qfeplaboratory",
+   "map": "QFEP_Phi_Term",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "emergence_zone",
    "sequence": "qfeplaboratory",
-   "map": "QFEP_Edge_Of_Chaos"
+   "map": "QFEP_Edge_Of_Chaos",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "turing_pattern",
    "sequence": "qfeplaboratory",
-   "map": "QFEP_Edge_Of_Chaos"
+   "map": "QFEP_Edge_Of_Chaos",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "edge_core",
    "sequence": "qfeplaboratory",
-   "map": "QFEP_Edge_Of_Chaos"
+   "map": "QFEP_Edge_Of_Chaos",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "edge_of_chaos_unlocked",
    "sequence": "qfeplaboratory",
-   "map": "QFEP_Edge_Of_Chaos"
+   "map": "QFEP_Edge_Of_Chaos",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "reactive_particles",
    "sequence": "qfeplaboratory",
-   "map": "QFEP_Sandbox"
+   "map": "QFEP_Sandbox",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "qfep_reactor",
    "sequence": "qfeplaboratory",
-   "map": "QFEP_Sandbox"
+   "map": "QFEP_Sandbox",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "queer_morphology_specimen",
    "sequence": "qfeplaboratory",
-   "map": "QFEP_Synthesis"
+   "map": "QFEP_Synthesis",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "entropy_ceiling",
    "sequence": "qfeplaboratory",
-   "map": "QFEP_Synthesis"
-  },
-  {
-   "lookup": "entropy_meter",
-   "sequence": "qfeplaboratory",
-   "map": "QFEP_Synthesis"
+   "map": "QFEP_Synthesis",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "grasp_cabinet",
    "sequence": "qfeplaboratory",
-   "map": "QFEP_Synthesis"
+   "map": "QFEP_Synthesis",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "grab_sphere_phi",
    "sequence": "qfeplaboratory",
-   "map": "QFEP_Synthesis"
+   "map": "QFEP_Synthesis",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "entropy_meter",
+   "sequence": "qfeplaboratory",
+   "map": "QFEP_Synthesis",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "bias_visualizer",
    "sequence": "postfoundationscrisis",
-   "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization"
+   "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "bias_from_inside",
    "sequence": "postfoundationscrisis",
-   "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization"
+   "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "situated_readout",
    "sequence": "postfoundationscrisis",
-   "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization"
-  },
-  {
-   "lookup": "room_shape_demonstrator",
-   "sequence": "postfoundationscrisis",
-   "map": "CriticalAlgorithms_Applied_Ethics"
+   "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "excluded_class_visualizer",
    "sequence": "postfoundationscrisis",
-   "map": "CriticalAlgorithms_Applied_Ethics"
+   "map": "CriticalAlgorithms_Applied_Ethics",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "room_shape_demonstrator",
+   "sequence": "postfoundationscrisis",
+   "map": "CriticalAlgorithms_Applied_Ethics",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "merge_conflict_visualizer",
    "sequence": "postfoundationscrisis",
-   "map": "SpeculativeComputation_Paraconsistent_Engineering"
+   "map": "SpeculativeComputation_Paraconsistent_Engineering",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "cap_theorem_walk",
    "sequence": "postfoundationscrisis",
-   "map": "SpeculativeComputation_Paraconsistent_Engineering"
+   "map": "SpeculativeComputation_Paraconsistent_Engineering",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "rhizome_vault",
    "sequence": "postfoundationscrisis",
-   "map": "SpeculativeComputation_Paraconsistent_Engineering"
-  },
-  {
-   "lookup": "the_fourth_limit",
-   "sequence": "postfoundationscrisis",
-   "map": "SpeculativeComputation_Collective_Knowledge"
+   "map": "SpeculativeComputation_Paraconsistent_Engineering",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "peer_production_tool",
    "sequence": "postfoundationscrisis",
-   "map": "SpeculativeComputation_Collective_Knowledge"
+   "map": "SpeculativeComputation_Collective_Knowledge",
+   "role": "unruled",
+   "by": "floor"
   },
   {
-   "lookup": "wiki_fragment",
+   "lookup": "the_fourth_limit",
    "sequence": "postfoundationscrisis",
-   "map": "SpeculativeComputation_Collective_Knowledge"
+   "map": "SpeculativeComputation_Collective_Knowledge",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "the_commons_table",
    "sequence": "postfoundationscrisis",
-   "map": "SpeculativeComputation_Collective_Knowledge"
+   "map": "SpeculativeComputation_Collective_Knowledge",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "wiki_fragment",
+   "sequence": "postfoundationscrisis",
+   "map": "SpeculativeComputation_Collective_Knowledge",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "rhizome_grower",
    "sequence": "postfoundationscrisis",
-   "map": "SpeculativeComputation_Rhizome_Network"
+   "map": "SpeculativeComputation_Rhizome_Network",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "MolecularDesigner",
    "sequence": "postfoundationscrisis",
-   "map": "AdvancedLaboratory_Lab_Equipment_Simulation"
-  },
-  {
-   "lookup": "accountability_ledger",
-   "sequence": "postfoundationscrisis",
-   "map": "PostCrisis_Synthesis"
+   "map": "AdvancedLaboratory_Lab_Equipment_Simulation",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "edge_ground_synthesis",
    "sequence": "postfoundationscrisis",
-   "map": "PostCrisis_Synthesis"
+   "map": "PostCrisis_Synthesis",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "accountability_ledger",
+   "sequence": "postfoundationscrisis",
+   "map": "PostCrisis_Synthesis",
+   "role": "unruled",
+   "by": "floor"
   }
  ]
 }

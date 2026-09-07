@@ -135,10 +135,21 @@ def read_room(name: str, role: str = "primary") -> dict:
     graph = MapGraph(data)
 
     roles_doc = json.loads(io.open(ROLES, encoding="utf-8").read())
-    ruled = list(((roles_doc.get("order") or {}).get(name) or {}).get(role) or [])
     role_of = (roles_doc.get("roles") or {}).get(name) or {}
-    if not ruled:                       # ruled roles but no explicit order
-        ruled = [t for t, r in role_of.items() if r == role]
+    if role == "all":
+        # EVERY placement, whatever its role. This is what the spine thread walks:
+        # a body meets the decorations too, and dropping them here would silently
+        # shorten the manifest the museum deals from.
+        ruled = []
+        for row in inter:
+            for cell in row:
+                t = str(cell).split(":")[0].split("#")[0].strip()
+                if t and t not in ruled:
+                    ruled.append(t)
+    else:
+        ruled = list(((roles_doc.get("order") or {}).get(name) or {}).get(role) or [])
+        if not ruled:                   # ruled roles but no explicit order
+            ruled = [t for t, r in role_of.items() if r == role]
 
     at: dict = {}
     for z, row in enumerate(inter):
@@ -216,7 +227,8 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--map", default="")
     ap.add_argument("--seq", default="")
-    ap.add_argument("--role", default="primary")
+    ap.add_argument("--role", default="primary",
+                    help="primary | secondary | decoration | all (every placement, whatever its role)")
     ap.add_argument("--json", action="store_true", help="machine-readable, one object")
     a = ap.parse_args()
 
