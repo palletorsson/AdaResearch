@@ -1,0 +1,1183 @@
+{
+ "_meta": {
+  "written": "2026-09-07",
+  "writer": "tools/artifact_roles.py",
+  "roles": [
+   "primary",
+   "secondary",
+   "decoration"
+  ],
+  "default": "primary",
+  "note": "keyed (map, token) — the same artifact is a different thing in different rooms; unruled placements are primary"
+ },
+ "roles": {
+  "Point_One": {
+   "interactive_point_origin_force": "primary",
+   "spore_mushroom": "decoration",
+   "fontana_puncture": "secondary",
+   "wireframe_threshold": "secondary",
+   "street_talker": "secondary",
+   "grab_sphere_point_snap": "secondary",
+   "the_invisible_point": "secondary",
+   "origin": "primary",
+   "3t": "secondary",
+   "floating_sphere_field": "secondary",
+   "frame_counter_display": "primary",
+   "drag_point_target": {
+    "role": "primary",
+    "group": "the-3d-coordinate-system"
+   },
+   "CoordinateSystem3M": {
+    "role": "primary",
+    "group": "the-3d-coordinate-system"
+   },
+   "coordinate_readout": {
+    "role": "primary",
+    "group": "the-3d-coordinate-system"
+   },
+   "you_are_here": "secondary",
+   "folding_past": "primary"
+  },
+  "Point_Lines": {
+   "street_talker": "secondary",
+   "science_screen": "secondary",
+   "fontana_puncture": "secondary",
+   "klee_walking_point": "secondary",
+   "scale_lines": "secondary",
+   "perspective_lines": "secondary",
+   "wall_abstract": "secondary",
+   "wall_health_station": "secondary",
+   "lightrod": "secondary",
+   "modulor_man_demo": "secondary",
+   "line_sledgehammer": "secondary",
+   "axis_line": "secondary",
+   "anamorphic_cross": "secondary",
+   "dark_sphere": "decoration",
+   "line": "secondary",
+   "parallel_line_puzzle": "secondary",
+   "plus_line_puzzle": "secondary",
+   "laser_measure": {
+    "role": "primary",
+    "group": "laser"
+   },
+   "laser_exploding_sphere": {
+    "role": "primary",
+    "group": "laser"
+   }
+  },
+  "Point_Trace": {
+   "origin": "secondary",
+   "science_screen": "secondary",
+   "whiteboard": "secondary",
+   "floating_sphere_field": "secondary",
+   "draw_stick": "secondary"
+  },
+  "Point_Line_Grid": {
+   "grab_sphere_point_snap": "secondary",
+   "room_grammar": "secondary",
+   "floating_sphere_field": "secondary",
+   "modulor_man_demo": "secondary"
+  },
+  "Point_Triangle_Context": {
+   "dark_sphere": "secondary",
+   "folded_strip": "secondary",
+   "catalyst_vent": "secondary",
+   "floating_sphere_field": "secondary",
+   "science_screen": "secondary",
+   "catalyst_prompter_box": "secondary",
+   "triangleprofiles": "primary",
+   "parasol_triangle": "secondary"
+  },
+  "Point_Animatedcube": {
+   "hangar_supply_pile": {
+    "role": "primary",
+    "group": "boxes-example"
+   },
+   "floating_sphere_field": "decoration",
+   "first_shadow": "secondary",
+   "wooden_pallet": {
+    "role": "primary",
+    "group": "boxes-example"
+   },
+   "crate": {
+    "role": "primary",
+    "group": "boxes-example"
+   },
+   "station_crates": {
+    "role": "primary",
+    "group": "boxes-example"
+   },
+   "glove_box": {
+    "role": "primary",
+    "group": "boxes-example"
+   },
+   "first_phosphor": {
+    "role": "primary",
+    "group": "boxes-example"
+   },
+   "cube_lines": "primary"
+  },
+  "Primitives_Polythedra": {
+   "becoming_catalyst": "secondary",
+   "cube_scene": "secondary",
+   "path_watchdog": "secondary",
+   "path_game_controller": "secondary",
+   "interactive_point_origin_force": "secondary",
+   "tentacle_placer": "secondary",
+   "prism_block": "primary"
+  },
+  "Primitives_Ignorance": {
+   "floating_sphere_field": "decoration",
+   "dark_sphere": "decoration",
+   "sphere_high": {
+    "role": "primary",
+    "group": "spheres"
+   },
+   "sphere": {
+    "role": "primary",
+    "group": "spheres"
+   },
+   "sphere_mid": {
+    "role": "primary",
+    "group": "spheres"
+   },
+   "sphere_low": {
+    "role": "primary",
+    "group": "spheres"
+   },
+   "cube_scene": "secondary",
+   "grab_octahedron": "secondary",
+   "snap_octahedron_puzzle": "secondary"
+  },
+  "Trans_Introduction": {
+   "scale_me": "decoration",
+   "dark_sphere": "decoration",
+   "head_crab": "decoration",
+   "spin": "decoration",
+   "invariants_demo": "secondary",
+   "rotation_gimbal": "secondary",
+   "matrix_4x4_viewer": "secondary",
+   "z_translation_cube": "secondary",
+   "balance_puzzle": "secondary",
+   "homogeneous_coordinates": "secondary",
+   "x_translation_cube": "secondary",
+   "transform_composition": "secondary",
+   "y_translation_cube": "secondary",
+   "pick_up_cube": "secondary"
+  },
+  "Trans_Translation": {
+   "player_trace": "secondary",
+   "transform_composition_workbench": "secondary",
+   "synthesis_stand": "secondary",
+   "z_translation_cube": "secondary",
+   "pick_up_cube": "secondary",
+   "science_screen": "secondary",
+   "dark_sphere": "decoration",
+   "y_translation_cube": "secondary",
+   "pickup_gate": "secondary",
+   "rotatescalecubes": "primary"
+  },
+  "Trans_AxisDecomposition": {
+   "dark_sphere": "decoration",
+   "pickup_gate": "secondary",
+   "cube_scene": "secondary",
+   "x_translation_cube": "secondary",
+   "z_translation_cube": "secondary",
+   "pick_up_cube": "secondary",
+   "rotatescalecubes": "primary"
+  },
+  "Trans_Rotation": {
+   "science_screen": "secondary",
+   "dark_sphere": "decoration",
+   "catalyst_vent": "secondary",
+   "pick_up_cube": "secondary",
+   "pickup_gate": "secondary",
+   "catalyst_prompter_box": "secondary"
+  },
+  "Trans_RotationSpectacle": {
+   "righttriangle": "secondary",
+   "dark_sphere": "secondary",
+   "pick_up_cube": "secondary"
+  },
+  "Trans_Scale": {
+   "clipboard": "secondary",
+   "science_screen": "secondary",
+   "prism_block": "primary",
+   "cube_scene": "secondary",
+   "dark_sphere": "secondary"
+  },
+  "Primitives_Portals": {
+   "dark_sphere": "decoration",
+   "floating_sphere_field": "decoration"
+  },
+  "Primitives_Melencolia": {
+   "dark_sphere": "decoration",
+   "code_display": "secondary",
+   "snap_pyramid_puzzle": "secondary"
+  },
+  "Color_Grid_Pallet": {
+   "dark_sphere": "decoration"
+  },
+  "Color_Nails": {
+   "dark_sphere": "decoration"
+  },
+  "Color_Rainbow": {
+   "dark_sphere": "decoration",
+   "catalyst_vent": "secondary"
+  },
+  "Color_Walls": {
+   "dark_sphere": "decoration"
+  },
+  "Color_Paint": {
+   "dark_sphere": "decoration"
+  },
+  "PG_Percolation_Network": {
+   "dark_sphere": "decoration"
+  },
+  "LSystems_Competition": {
+   "dark_sphere": "decoration"
+  },
+  "LSystems_Architecture": {
+   "dark_sphere": "decoration"
+  },
+  "LSystems_Grammar_Lab": {
+   "dark_sphere": "decoration"
+  },
+  "Tutorial_Single": {
+   "science_screen": "secondary",
+   "dark_sphere": "decoration"
+  },
+  "Tutorial_Pattern": {
+   "dark_sphere": "decoration",
+   "script_runner": "secondary"
+  },
+  "Color_Pillar": {
+   "dark_sphere": "decoration"
+  },
+  "Array": {
+   "dark_sphere": "decoration"
+  },
+  "Flow_Field": {
+   "science_screen": "secondary"
+  },
+  "Change_Reconciliation": {
+   "science_screen": "secondary"
+  },
+  "FormFinding_Catenary": {
+   "science_screen": "secondary"
+  },
+  "FormFinding_Relaxation": {
+   "science_screen": "secondary"
+  },
+  "FormFinding_Equilibrium": {
+   "science_screen": "secondary"
+  },
+  "FormFinding_Annealing": {
+   "science_screen": "secondary"
+  },
+  "FormFinding_Forge": {
+   "science_screen": "secondary"
+  },
+  "WaveFunctions_Intro": {
+   "dark_sphere": "decoration"
+  },
+  "WaveFunctions_Pendulum": {
+   "dark_sphere": "decoration"
+  },
+  "WaveFunctions_Unit_Circle": {
+   "dark_sphere": "decoration"
+  },
+  "WaveFunctions_Sine_Space": {
+   "dark_sphere": "decoration"
+  },
+  "WaveFunctions_3D_Wave_Propagation": {
+   "dark_sphere": "decoration"
+  },
+  "WaveFunctions_Effect_Sound": {
+   "dark_sphere": "decoration"
+  },
+  "Wavefunctions_Bernini": {
+   "dark_sphere": "decoration"
+  },
+  "WaveFunctions_John_Cage": {
+   "dark_sphere": "decoration"
+  },
+  "WaveFunctions_AirMusic": {
+   "dark_sphere": "decoration"
+  },
+  "Wavefunctions_Sky_Stairs": {
+   "dark_sphere": "decoration"
+  },
+  "WaveFunctions_TrigWalkingPath": {
+   "dark_sphere": "decoration"
+  },
+  "WaveFunctions_Synthesis_Lab": {
+   "dark_sphere": "decoration"
+  },
+  "Random_Definition": {
+   "dark_sphere": "decoration"
+  },
+  "Random_Entropy": {
+   "dark_sphere": "decoration"
+  },
+  "Random_Remove": {
+   "dark_sphere": "decoration"
+  },
+  "Randomness_10_PRINT_Algorithm": {
+   "dark_sphere": "decoration"
+  },
+  "Random_Cubes": {
+   "dark_sphere": "decoration"
+  },
+  "Random_Rotate_Random_XYZ": {
+   "dark_sphere": "decoration"
+  },
+  "Random_Gaussian": {
+   "dark_sphere": "decoration"
+  },
+  "Random_Walk": {
+   "dark_sphere": "decoration"
+  },
+  "Random_Space_Geometry": {
+   "dark_sphere": "decoration"
+  },
+  "Randomness_Examples_of_Randomness": {
+   "dark_sphere": "decoration"
+  },
+  "Random_Pheromone": {
+   "dark_sphere": "decoration"
+  },
+  "Random_Space": {
+   "dark_sphere": "decoration"
+  },
+  "Random_Mushrooms": {
+   "dark_sphere": "decoration"
+  },
+  "Noise_Columns": {
+   "dark_sphere": "decoration"
+  },
+  "Noise_One": {
+   "dark_sphere": "decoration"
+  },
+  "Noise_Voxel": {
+   "dark_sphere": "decoration"
+  },
+  "Noise_6_Wall": {
+   "dark_sphere": "decoration"
+  },
+  "Noise_Inside_Noise": {
+   "dark_sphere": "decoration"
+  },
+  "Noise_Space_10": {
+   "dark_sphere": "decoration"
+  },
+  "Noise_Perlin_Simplex": {
+   "dark_sphere": "decoration"
+  },
+  "CA_Introduction": {
+   "dark_sphere": "decoration"
+  },
+  "CA_ElementaryRules": {
+   "dark_sphere": "decoration"
+  },
+  "CA_GameOfLife": {
+   "dark_sphere": "decoration",
+   "lab_room": "secondary"
+  },
+  "CA_BeyondBinary": {
+   "dark_sphere": "decoration",
+   "science_screen": "secondary"
+  },
+  "CA_ExpandingSpace": {
+   "dark_sphere": "decoration",
+   "catalyst_vent": "secondary"
+  },
+  "Fractal_Recursion": {
+   "dark_sphere": "decoration",
+   "science_screen": "secondary"
+  },
+  "Fractal_RecursiveTrees": {
+   "dark_sphere": "decoration"
+  },
+  "Fractal_CantorSet": {
+   "dark_sphere": "decoration"
+  },
+  "Fractal_KochSierpinski": {
+   "dark_sphere": "decoration"
+  },
+  "Fractal_MengerSponge": {
+   "dark_sphere": "decoration"
+  },
+  "Fractal_GoldenSpiral": {
+   "dark_sphere": "decoration"
+  },
+  "Fractal_JuliaSet": {
+   "dark_sphere": "decoration"
+  },
+  "Fractal_MandelbrotSet": {
+   "dark_sphere": "decoration"
+  },
+  "Fractal_Synthesis": {
+   "dark_sphere": "decoration"
+  },
+  "Fractal_CrossSequence": {
+   "dark_sphere": "decoration"
+  },
+  "SwarmIntelligence_Boids_Algorithm": {
+   "science_screen": "secondary"
+  },
+  "SwarmIntelligence_PhysarumColony": {
+   "science_screen": "secondary"
+  },
+  "QFEP_F_Term": {
+   "dark_sphere": "decoration"
+  },
+  "Vectors_Act1_WhatAVectorIs": {
+   "CoordinateSystem3M": "primary",
+   "VectorBasics": "primary",
+   "length_lantern": "primary",
+   "vector_normalize_demo": "primary",
+   "route_vector": "secondary",
+   "3t": "decoration"
+  },
+  "VFM_02_Operations": {
+   "vector_projection_demo": "secondary",
+   "2d_in_3d_vectors_vis": "secondary",
+   "adder_board": "primary",
+   "basis_vectors_rig": "secondary",
+   "coordinate_system_switcher": "secondary",
+   "VectorSubtraction": "secondary",
+   "example_1_4_vector_multiplication_vr": "secondary",
+   "stretch_bench": "secondary",
+   "vector_addition_demo": "secondary",
+   "vector_addition_xl": "secondary",
+   "vector_magnitude_demo": "secondary",
+   "vector_subtraction_demo": "secondary",
+   "vector_dot_product_xl": "secondary",
+   "vector_cross_product_xl": "secondary",
+   "vector_translation_demo": "secondary",
+   "dot_aligner": "secondary",
+   "torque_crank": "secondary",
+   "VectorTorque": "secondary",
+   "dot_product_projector": "secondary",
+   "VectorWorkbench": "secondary",
+   "vector_add": "secondary",
+   "vector_projection_reflection_xl": "secondary",
+   "projection_shadow": "secondary",
+   "agreement_gauge": "secondary",
+   "opening_pair": "secondary",
+   "torque_demo": "secondary",
+   "exercise_5_9_angle_between": "secondary"
+  },
+  "Vectors_Act2_VectorArithmetic": {
+   "vector_addition_walk": "primary",
+   "vector_add": "primary",
+   "vector_sub": "primary",
+   "example_2_3_gravity_scaled_by_mass_vr": "primary",
+   "dot_aligner": "primary",
+   "vector_dot_product_xl": "primary",
+   "projection_shadow": "primary",
+   "vector_projection_reflection_xl": "primary",
+   "torque_crank": "primary",
+   "vector_cross_product_xl": "primary",
+   "vector_addition_xl_laser": "secondary",
+   "vector_subtraction_xl_laser": "secondary"
+  },
+  "VFM_05_Launch": {
+   "ForceMagnitudeDemo": "primary",
+   "VectorForces": "primary",
+   "catapult": "primary",
+   "launch_arc": "primary",
+   "human_catapult": "primary",
+   "firework_launcher": "primary",
+   "foresight_range": "primary",
+   "combined_forces_demo": "secondary",
+   "VectorThrowing": "secondary",
+   "mortar_vector_siege": "secondary",
+   "slingshot_launcher": "secondary",
+   "force_pad": "secondary",
+   "return_launcher": "secondary",
+   "firework_burst": "secondary",
+   "bouncing_ball": "secondary",
+   "exercise_1_3_solution_3_d_bouncing_ball_vr": "secondary",
+   "collision_crasher": "secondary",
+   "normal_force_demo": "secondary",
+   "newton_cradle": "secondary",
+   "friction_ramp": "secondary",
+   "drag_lane": "secondary",
+   "example_2_5_fluid_resistance_vr": "secondary",
+   "circle_train": "secondary",
+   "trajectory_artifact": "secondary",
+   "hl_turret_vectors": "secondary",
+   "turret_boll_infoboard": "secondary",
+   "example_1_9_motion_101_velocity_and_random_acceleration_vr": "secondary",
+   "exercise_1_5_solution_accelerate_and_decelerate_vr": "secondary",
+   "example_3_2_forces_with_arbitrary_angular_motion_vr": "secondary",
+   "example_3_3_pointing_in_the_direction_of_motion_vr": "secondary",
+   "vector_drone": "secondary"
+  },
+  "Vectors_Act3_FieldsAndMotion": {
+   "VectorFieldFlow": "primary",
+   "weather_vector_field": "primary",
+   "bubble_blaster": "primary",
+   "VectorMotion": "primary",
+   "field_room": "secondary",
+   "force_field_visualizer": "secondary",
+   "force_fields": "secondary",
+   "force_vortex": "secondary",
+   "vector_field": "secondary",
+   "vector_fields": "secondary",
+   "magnetic_simulation": "secondary",
+   "particle_systems": "secondary",
+   "launch_arc": "primary"
+  },
+  "Vectors_Act4a_KineticForces": {
+   "force_mower": "primary",
+   "drag_corridor": "primary",
+   "centrifuge_ring": "primary",
+   "orbit_walk": "primary",
+   "wedge_slide": "primary",
+   "sisyphus_mower": "secondary",
+   "prop_carousel": "secondary",
+   "force_pad": "secondary"
+  },
+  "Vectors_Act4b_Oscillation": {
+   "momentum_cradle": "primary",
+   "bounce_well": "primary",
+   "lever_balance": "primary",
+   "pendulum_hall": "primary",
+   "spring_tower": "primary",
+   "calder_mobile": "secondary",
+   "calder_object_mobile": "secondary",
+   "weather_vane": "secondary",
+   "example_6_4_windmill_vr": "secondary",
+   "mass_spring_damper": "secondary",
+   "coupled_pendulums": "secondary",
+   "spring_system": "secondary",
+   "spring_network": "secondary",
+   "harmonic_motion_demo": "secondary",
+   "slingshot_pull": "secondary",
+   "vector_joint_playground": "secondary",
+   "work_energy_demo": "secondary",
+   "ChainSwing": "secondary",
+   "ConeTwistBag": "secondary",
+   "HingeCrank": "secondary",
+   "SliderPress": "secondary",
+   "surreal_kinetic_sculpture": "decoration"
+  },
+  "VFM_07_Gravity": {
+   "exercise_1_8_solution_attraction_magnitude_vr": "primary",
+   "gravity_well": "primary",
+   "orbital_mechanics_demo": "primary",
+   "three_body_problem": "primary",
+   "nbody_simulation": "primary",
+   "forcedirected3d": "primary",
+   "orbit_pair": "secondary",
+   "example_2_8_two_body_attraction_vr": "secondary",
+   "example_2_9_n_body_attraction_vr": "secondary",
+   "grid3d_force_directed": "secondary",
+   "chaos_attractor": "secondary"
+  },
+  "VFM_09_Legs": {
+   "one_leg": "primary",
+   "two_leg_critter": "primary",
+   "three_leg_critter": "primary",
+   "four_leg_critter": "primary",
+   "five_leg_critter": "primary",
+   "six_leg_critter": "primary",
+   "octapod_ik": "primary"
+  },
+  "VFM_08_Arena": {
+   "turret_targeting": "primary",
+   "reflection_hall": "primary",
+   "vector_arena": "primary",
+   "sentry_turret": "primary",
+   "collision_carts": "secondary",
+   "momentum_collision": "secondary",
+   "momentum_cradle": "secondary",
+   "newtons_laws": "secondary",
+   "example_2_1_forces_vr": "secondary",
+   "revolving_door": "secondary",
+   "tug_of_war": "secondary",
+   "prop_mobile": "secondary",
+   "umbrella_field": "secondary",
+   "three_gravities": "secondary",
+   "paused_fountain": "secondary",
+   "brake_skid": "secondary",
+   "prop_spigot": "secondary",
+   "parlour_orbits": "secondary",
+   "queer_cylinder_target": "decoration",
+   "head_crab": "decoration"
+  },
+  "Vectors_Act5_ForceAsPlace": {
+   "free_vector": "primary",
+   "vector_machine": "primary",
+   "force_cube": "primary",
+   "force_field_zone": "primary",
+   "invisible_hill": "secondary",
+   "force_field": "decoration"
+  },
+  "VFM_03_Motion": {
+   "normal_force_demo": "primary",
+   "bouncing_ball": "primary",
+   "example_3_3_pointing_in_the_direction_of_motion_vr": "primary",
+   "friction_ramp": "primary",
+   "combined_forces_demo": "primary",
+   "collision_crasher": "primary",
+   "example_1_9_motion_101_velocity_and_random_acceleration_vr": "secondary",
+   "vector_drone": "secondary",
+   "trajectory_artifact": "secondary",
+   "VectorMotion": "secondary",
+   "ForceMagnitudeDemo": "secondary",
+   "VectorForces": "secondary",
+   "exercise_1_3_solution_3_d_bouncing_ball_vr": "secondary",
+   "exercise_1_5_solution_accelerate_and_decelerate_vr": "secondary",
+   "example_2_5_fluid_resistance_vr": "secondary",
+   "example_3_2_forces_with_arbitrary_angular_motion_vr": "secondary",
+   "newton_cradle": "secondary"
+  }
+ },
+ "groups": {
+  "Point_One": [
+   {
+    "id": "the-3d-coordinate-system",
+    "title": "The 3D Coordinate System",
+    "role": "primary"
+   }
+  ],
+  "Point_Animatedcube": [
+   {
+    "id": "boxes-example",
+    "title": "Boxes Example",
+    "role": "primary"
+   }
+  ],
+  "Point_Lines": [
+   {
+    "id": "laser",
+    "title": "laser",
+    "role": "primary"
+   }
+  ],
+  "Primitives_Ignorance": [
+   {
+    "id": "spheres",
+    "title": "spheres",
+    "role": "primary"
+   }
+  ],
+  "Trans_Introduction": []
+ },
+ "order": {
+  "Point_Lines": {
+   "primary": [
+    "redline",
+    "walk_this_line_marking",
+    "two_point_ruler",
+    "line_demo",
+    "@laser",
+    "do_not_cross_barrier",
+    "grabbable_line",
+    "two_points_line",
+    "parallel_lines",
+    "#note-1"
+   ]
+  },
+  "Point_One": {
+   "primary": [
+    "frame_counter_display",
+    "folding_past",
+    "origin",
+    "interactive_point_origin_force",
+    "@the-3d-coordinate-system"
+   ]
+  },
+  "Point_Animatedcube": {
+   "primary": [
+    "cube_lines",
+    "polyhedron_nets_cube",
+    "animatedcubebuilder",
+    "@boxes-example"
+   ]
+  },
+  "Point_Triangle_Context": {
+   "primary": [
+    "triangle_line_puzzle",
+    "interactivetriangle",
+    "draw_triangle_faces",
+    "triangle",
+    "pythagorean_triangle_angles",
+    "right_triangle_lines",
+    "silhouette_gate",
+    "pink_triangle",
+    "quad_line_puzzle",
+    "quad"
+   ]
+  },
+  "Trans_Introduction": {
+   "primary": [
+    "#note-1"
+   ]
+  },
+  "Trans_Translation": {
+   "primary": [
+    "#note-1"
+   ]
+  },
+  "Trans_AxisDecomposition": {
+   "primary": [
+    "#note-1",
+    "toruscylinder",
+    "translation_cube_demo"
+   ]
+  },
+  "Primitives_Ignorance": {
+   "primary": [
+    "platonic_grabbables",
+    "cube_scene",
+    "@spheres",
+    "star_primitive",
+    "hole_with_cones",
+    "truncatedtetrahedron",
+    "capsule",
+    "grab_octahedron",
+    "snap_octahedron_puzzle",
+    "roughrock",
+    "righttriangle"
+   ]
+  },
+  "Primitives_Melencolia": {
+   "primary": [
+    "#note-1",
+    "bigframe",
+    "diamondtoruscollection",
+    "pyramid",
+    "#note-2",
+    "prism_block",
+    "pyramidlong",
+    "durer_scene"
+   ]
+  },
+  "Primitives_Polythedra": {
+   "primary": [
+    "#note-1",
+    "pyramid_edit",
+    "grab_tetrahedron",
+    "grab_trihedron",
+    "prism_block",
+    "#note-2"
+   ]
+  },
+  "Vectors_Act1_WhatAVectorIs": {
+   "primary": [
+    "CoordinateSystem3M",
+    "VectorBasics",
+    "length_lantern",
+    "vector_normalize_demo"
+   ]
+  },
+  "VFM_02_Operations": {
+   "primary": [
+    "adder_board"
+   ]
+  },
+  "Vectors_Act2_VectorArithmetic": {
+   "primary": [
+    "vector_add",
+    "vector_addition_walk",
+    "vector_sub",
+    "example_2_3_gravity_scaled_by_mass_vr",
+    "dot_aligner",
+    "vector_dot_product_xl",
+    "projection_shadow",
+    "vector_projection_reflection_xl",
+    "torque_crank",
+    "vector_cross_product_xl",
+    "#note-1",
+    "#note-2"
+   ]
+  },
+  "VFM_05_Launch": {
+   "primary": [
+    "ForceMagnitudeDemo",
+    "VectorForces",
+    "catapult",
+    "launch_arc",
+    "human_catapult",
+    "firework_launcher",
+    "foresight_range"
+   ]
+  },
+  "Vectors_Act3_FieldsAndMotion": {
+   "primary": [
+    "VectorFieldFlow",
+    "weather_vector_field",
+    "VectorMotion",
+    "launch_arc",
+    "bubble_blaster",
+    "#note-1",
+    "#note-2"
+   ]
+  },
+  "Vectors_Act4a_KineticForces": {
+   "primary": [
+    "force_mower",
+    "drag_corridor",
+    "centrifuge_ring",
+    "orbit_walk",
+    "wedge_slide"
+   ]
+  },
+  "Vectors_Act4b_Oscillation": {
+   "primary": [
+    "momentum_cradle",
+    "bounce_well",
+    "lever_balance",
+    "pendulum_hall",
+    "spring_tower"
+   ]
+  },
+  "VFM_07_Gravity": {
+   "primary": [
+    "exercise_1_8_solution_attraction_magnitude_vr",
+    "orbital_mechanics_demo",
+    "three_body_problem",
+    "nbody_simulation",
+    "gravity_well",
+    "forcedirected3d",
+    "#note-1",
+    "#note-2"
+   ]
+  },
+  "VFM_09_Legs": {
+   "primary": [
+    "one_leg",
+    "two_leg_critter",
+    "three_leg_critter",
+    "four_leg_critter",
+    "five_leg_critter",
+    "six_leg_critter",
+    "octapod_ik"
+   ]
+  },
+  "VFM_08_Arena": {
+   "primary": [
+    "turret_targeting",
+    "reflection_hall",
+    "vector_arena",
+    "sentry_turret"
+   ]
+  },
+  "Vectors_Act5_ForceAsPlace": {
+   "primary": [
+    "free_vector",
+    "vector_machine",
+    "force_cube",
+    "force_field_zone"
+   ]
+  },
+  "VFM_03_Motion": {}
+ },
+ "notes": {
+  "Point_One": [],
+  "Trans_Introduction": [
+   {
+    "id": "note-1",
+    "role": "primary",
+    "text": "the important things are happen in the utility layer"
+   }
+  ],
+  "Trans_Translation": [
+   {
+    "id": "note-1",
+    "role": "primary",
+    "text": "the important things are happen in the utility layer"
+   }
+  ],
+  "Trans_AxisDecomposition": [
+   {
+    "id": "note-1",
+    "role": "primary",
+    "text": "the important things are happen in the utility layer"
+   }
+  ],
+  "Primitives_Melencolia": [
+   {
+    "id": "note-1",
+    "role": "primary",
+    "text": "the frame is a portal to the same map?"
+   },
+   {
+    "id": "note-2",
+    "role": "primary",
+    "text": "we need to add an aesthetic platform with pyramids here"
+   }
+  ],
+  "Primitives_Polythedra": [
+   {
+    "id": "note-1",
+    "role": "primary",
+    "text": "add prism lock as blocker"
+   },
+   {
+    "id": "note-2",
+    "role": "primary",
+    "text": "prism_block in combination shop the how basic shapes can from flow or obstacles"
+   }
+  ],
+  "Point_Lines": [
+   {
+    "id": "note-1",
+    "role": "primary",
+    "text": "a line divides, directs, measures, connects, and acts at a distance"
+   }
+  ],
+  "Vectors_Act1_WhatAVectorIs": [
+   {
+    "id": "note-1",
+    "role": "primary",
+    "text": "The only room in the chapter whose floor already matches its lesson one to one — a where, a which-way, a how-far and a how-far refused, and deliberately no arithmetic; leave the four stations exactly as they stand."
+   }
+  ],
+  "VFM_02_Operations": [
+   {
+    "id": "note-1",
+    "role": "primary",
+    "text": "The bench. Twenty-seven instruments and not one caption: every operation here is said again in the captioned room next door, at walk-in scale."
+   }
+  ],
+  "Vectors_Act2_VectorArithmetic": [
+   {
+    "id": "note-1",
+    "role": "primary",
+    "text": "The tutorial. Eight caption panels down column 9 and one rung beside each: add, subtract, scale, dot, project, cross, and the two laser exhibits at the door."
+   },
+   {
+    "id": "note-2",
+    "role": "primary",
+    "text": "The tutorial hall for rung 2, and the room where the chapter's two-scale rhythm is said inside a single space: six operations, each once in your hand and once at the size of a room, in the order the eight caption panels stand down the centre aisle. Ten rungs on the thread, hand then room at each of the four paired stations; the two laser exhibits at the door stay in the room as a third scale met after the closing line, not as a lesson. The bench next door holds the same instruments and defers all of them here, so this is where an operation is actually taught."
+   }
+  ],
+  "VFM_05_Launch": [
+   {
+    "id": "note-1",
+    "role": "primary",
+    "text": "Thirty-one placements and the room says throw sixteen ways, so the tutorial is F=ma, then the net force, then the arc composed and decomposed, then you as the projectile, then many bodies, then the census that shows all four launchers running one equation; friction_ramp is the one artifact here that would be better MOVED than demoted — it belongs beside wedge_slide in Act4a."
+   }
+  ],
+  "Vectors_Act3_FieldsAndMotion": [
+   {
+    "id": "note-1",
+    "role": "primary",
+    "text": "Six of this hall's artifacts say objective 9 on one entry shelf, so the rule and the walk-in carry it as a pair and the shelf becomes the gallery of other ways to draw a field; I place bubble_blaster third rather than last, against final.md's running order, because on the floor it stands north of VectorMotion and closing on it would send the visitor back — worth Palle's ruling."
+   },
+   {
+    "id": "note-2",
+    "role": "primary",
+    "text": "Two halves that turn out to be one thing: a field is force spread over space, motion is force spread over time. The field half opens on the rule and closes by putting you inside it; the motion half opens on the a→v→p chain, decomposes a launch, and closes on the bubble gun, where a single motion and a whole field are shown to be the same object seen at two counts. The eight-piece entry shelf beside the spawn is a gallery of other ways to draw a field — it stays in the room and out of the text."
+   }
+  ],
+  "Vectors_Act4a_KineticForces": [
+   {
+    "id": "note-1",
+    "role": "primary",
+    "text": "The park is already a clean five-rung tutorial — work, drag, turn, fall, slope — and the only change is force_pad, which keeps its floor beat and its place at the park's midpoint but stops carrying a lesson launch already owns; the two category heroes stay exactly where they are, doing a hero's job of setting the register before the beats speak."
+   }
+  ],
+  "Vectors_Act4b_Oscillation": [
+   {
+    "id": "note-1",
+    "role": "primary",
+    "text": "FLAG for Palle: the room's law is F = -kx and the floor delivers spring_tower LAST — spawn is south, the tower is north — so the room's own tutorial.md opens on the artifact the walk closes on; swapping spawn and teleporter is the one map change that would make this room's order correct, and it is a decision for you, not for this pass."
+   }
+  ],
+  "VFM_07_Gravity": [
+   {
+    "id": "note-1",
+    "role": "primary",
+    "text": "Two placement flags outrank the roles here: three_body_problem, the hardest idea in the chapter, stands four cells from the spawn and is met before the law it breaks, and chaos_attractor stands one row SOUTH of the exit teleporter, so a visitor walking to the door reaches the door first."
+   },
+   {
+    "id": "note-2",
+    "role": "primary",
+    "text": "One law taken from two bodies to three, until the arithmetic stops being able to tell you the future, and then handed to a graph that lays itself out. The room is a bench, not a walk — its six primaries are the six sections of its own wall text, one headline each, and its five secondaries say those same six things a second way (the barycentre already met in the park, the clamp, the count without the cost, the layout on a grid, and Lorenz standing past the exit)."
+   }
+  ],
+  "VFM_09_Legs": [
+   {
+    "id": "note-1",
+    "role": "primary",
+    "text": "The one room that needs no rearranging — a controlled series with everything held equal but the count, which only reads against itself, so it should show as ONE card; it also exposes a real gap, because none of the seventeen objectives covers static stability or gait, and this room is good enough to deserve an eighteenth."
+   }
+  ],
+  "VFM_08_Arena": [
+   {
+    "id": "note-1",
+    "role": "primary",
+    "text": "The exam: this hall introduces no force, so its four primaries are the four places an already-taught vector has to be AIMED at something under time pressure, and its whole north prop row is the chapter restated as furniture — good gallery, not a rung; tutorial.md still opens the hall on the cradle, which is the chapter's third cradle, and that alone is why the room reads as having no order."
+   }
+  ],
+  "Vectors_Act5_ForceAsPlace": [
+   {
+    "id": "note-1",
+    "role": "primary",
+    "text": "A clean four-move loop already — state the premise at the door, dial the field, throw a mass in to read it, step in yourself — with one honest gap the map's own field_notes record: columns 6 and 7 are solid floor across the chasm, so a visitor can reach the far side without ever setting the field, and the closing lesson is primary but not yet compelled."
+   }
+  ],
+  "VFM_03_Motion": [
+   {
+    "id": "note-1",
+    "role": "primary",
+    "text": "The motion bench. Its own intent names the stations: the eight-metre bouncing-ball chamber anchors it, the friction threshold and the normal force stand together, and the collision crasher prowls the far corner behind a warning."
+   }
+  ]
+ },
+ "positions": {
+  "Point_One": {
+   "secondary": {
+    "street_talker": [
+     266.0,
+     123.0
+    ],
+    "you_are_here": [
+     444.0,
+     104.0
+    ]
+   },
+   "primary": {
+    "origin": [
+     550.0,
+     86.0
+    ],
+    "interactive_point_origin_force": [
+     839.0,
+     81.0
+    ],
+    "@the-3d-coordinate-system": [
+     1157.0,
+     98.0
+    ],
+    "folding_past": [
+     310.0,
+     77.0
+    ],
+    "frame_counter_display": [
+     81.0,
+     78.0
+    ],
+    "comment_box": [
+     1252.0,
+     190.0
+    ]
+   }
+  },
+  "Point_Lines": {
+   "primary": {
+    "redline": [
+     62.0,
+     78.0
+    ],
+    "walk_this_line_marking": [
+     188.0,
+     79.0
+    ],
+    "two_point_ruler": [
+     312.0,
+     73.0
+    ],
+    "line_demo": [
+     441.0,
+     81.0
+    ],
+    "do_not_cross_barrier": [
+     692.0,
+     90.0
+    ],
+    "grabbable_line": [
+     796.0,
+     82.0
+    ],
+    "two_points_line": [
+     919.0,
+     78.0
+    ],
+    "@laser": [
+     564.0,
+     85.0
+    ],
+    "parallel_lines": [
+     1056.0,
+     92.0
+    ],
+    "#note-1": [
+     1255.0,
+     164.0
+    ]
+   }
+  },
+  "Point_Trace": {
+   "primary": {
+    "automatic_writing_desk": [
+     547.0,
+     75.0
+    ],
+    "hand_telemetry_diptych": [
+     338.0,
+     76.0
+    ]
+   }
+  },
+  "Point_Line_Grid": {
+   "primary": {
+    "grid_lines": [
+     1027.0,
+     79.0
+    ]
+   }
+  },
+  "Point_Triangle_Context": {
+   "primary": {
+    "interactivetriangle": [
+     214.0,
+     74.0
+    ],
+    "draw_triangle_faces": [
+     336.0,
+     78.0
+    ],
+    "triangle": [
+     454.0,
+     81.0
+    ],
+    "pythagorean_triangle_angles": [
+     565.0,
+     83.0
+    ],
+    "quad_line_puzzle": [
+     1028.0,
+     80.0
+    ],
+    "silhouette_gate": [
+     792.0,
+     82.0
+    ],
+    "pink_triangle": [
+     911.0,
+     81.0
+    ],
+    "right_triangle_lines": [
+     679.0,
+     81.0
+    ],
+    "quad": [
+     1138.0,
+     76.0
+    ],
+    "triangleprofiles": [
+     1278.0,
+     86.0
+    ]
+   }
+  }
+ }
+}

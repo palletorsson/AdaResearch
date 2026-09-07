@@ -1,6 +1,6 @@
 {
  "_meta": {
-  "generated": "2026-09-07 15:39:41",
+  "generated": "2026-09-07 15:57:55",
   "generator": "tools/build_spine_artifact_order.py",
   "rule": "first appearance walking the spine: sequence order -> map order -> the room's thread (ruled, else floor, else file)",
   "sequences": 22,
@@ -8,11 +8,11 @@
   "maps_missing": 0,
   "artifacts": 919,
   "ordered_by": {
-   "ruled": 94,
-   "floor": 790,
+   "ruled": 92,
+   "floor": 792,
    "file": 35
   },
-  "primary": 64,
+  "primary": 62,
   "unruled": 690
  },
  "order": [
@@ -2004,15 +2004,15 @@
    "lookup": "vector_addition_xl_laser",
    "sequence": "forces",
    "map": "Vectors_Act2_VectorArithmetic",
-   "role": "primary",
-   "by": "ruled"
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "vector_subtraction_xl_laser",
    "sequence": "forces",
    "map": "Vectors_Act2_VectorArithmetic",
-   "role": "primary",
-   "by": "ruled"
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "ForceMagnitudeDemo",
@@ -2526,13 +2526,6 @@
    "by": "ruled"
   },
   {
-   "lookup": "gravity_well",
-   "sequence": "forces",
-   "map": "VFM_07_Gravity",
-   "role": "primary",
-   "by": "ruled"
-  },
-  {
    "lookup": "orbital_mechanics_demo",
    "sequence": "forces",
    "map": "VFM_07_Gravity",
@@ -2548,6 +2541,13 @@
   },
   {
    "lookup": "nbody_simulation",
+   "sequence": "forces",
+   "map": "VFM_07_Gravity",
+   "role": "primary",
+   "by": "ruled"
+  },
+  {
+   "lookup": "gravity_well",
    "sequence": "forces",
    "map": "VFM_07_Gravity",
    "role": "primary",
