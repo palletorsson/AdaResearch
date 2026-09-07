@@ -136,6 +136,7 @@ def read_room(name: str, role: str = "primary") -> dict:
 
     roles_doc = json.loads(io.open(ROLES, encoding="utf-8").read())
     role_of = (roles_doc.get("roles") or {}).get(name) or {}
+    ruled_source = "all"
     if role == "all":
         # EVERY placement, whatever its role. This is what the spine thread walks:
         # a body meets the decorations too, and dropping them here would silently
@@ -148,8 +149,16 @@ def read_room(name: str, role: str = "primary") -> dict:
                     ruled.append(t)
     else:
         ruled = list(((roles_doc.get("order") or {}).get(name) or {}).get(role) or [])
-        if not ruled:                   # ruled roles but no explicit order
+        ruled_source = "order" if ruled else ""
+        if not ruled:
+            # NO EXPLICIT ORDER. The role set still tells us which artifacts are
+            # on the thread, but the roles dict's key order is generated, not
+            # decided — so this is scored as a DEFAULT, never as a ruling.
+            # VFM_03_Motion carries `order: {}` and 17 roles; reading its key
+            # order as a ruling scored it +1.00 against the floor and pulled the
+            # whole transcribed bucket up with it.
             ruled = [t for t, r in role_of.items() if r == role]
+            ruled_source = "roles" if ruled else "none"
 
     at: dict = {}
     for z, row in enumerate(inter):
@@ -182,7 +191,11 @@ def read_room(name: str, role: str = "primary") -> dict:
             spec = str(cell).strip()
             if spec.startswith("sub:"):
                 key = spec.split(":", 1)[1]
-                entry = subs.get(key) or {}
+                # a subtitles entry is usually {text, speaker, level} but some
+                # maps store a bare string (Point_Lines) — both are legal on disk
+                entry = subs.get(key)
+                if not isinstance(entry, dict):
+                    entry = {"text": str(entry)} if entry else {}
                 captions.append({
                     "row": z, "col": x, "key": key,
                     "text": str(entry.get("text", "")),
@@ -220,6 +233,10 @@ def read_room(name: str, role: str = "primary") -> dict:
         "inversions": inv,
         "pairs": pairs,
         "ruling_is_rowmajor": rowmajor == common,
+        # "order" = a real ruling somebody wrote. "roles" = roles exist but no
+        # order, so `ruled` here is a DEFAULT and tau is not a verdict on anyone.
+        # "none" = nothing ruled at all. "all" = --role=all, every placement.
+        "ruled_source": ruled_source,
     }
 
 
@@ -268,6 +285,10 @@ def main() -> int:
             continue
         tau = r["tau"]
         flag = "  (the ruling IS the grid, row-major)" if r["ruling_is_rowmajor"] else ""
+        if r.get("ruled_source") == "roles":
+            flag = "  (NO ruling — roles only, so this is a default, not a verdict)"
+        elif r.get("ruled_source") == "none":
+            flag = "  (nothing ruled)"
         opener = ""
         if r["ruled"] and r["floor"]:
             opener = (r["ruled"][0] + "  ->  " + r["floor"][0]) if r["ruled"][0] != r["floor"][0] else "(same opener)"

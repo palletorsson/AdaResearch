@@ -1,6 +1,6 @@
 {
  "_meta": {
-  "generated": "2026-09-07 15:33:37",
+  "generated": "2026-09-07 15:39:41",
   "generator": "tools/build_spine_artifact_order.py",
   "rule": "first appearance walking the spine: sequence order -> map order -> the room's thread (ruled, else floor, else file)",
   "sequences": 22,
@@ -9,8 +9,8 @@
   "artifacts": 919,
   "ordered_by": {
    "ruled": 94,
-   "floor": 771,
-   "file": 54
+   "floor": 790,
+   "file": 35
   },
   "primary": 64,
   "unruled": 690
@@ -201,11 +201,39 @@
    "by": "ruled"
   },
   {
+   "lookup": "line",
+   "sequence": "primitives",
+   "map": "Point_Lines",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "line_sledgehammer",
+   "sequence": "primitives",
+   "map": "Point_Lines",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "plus_line_puzzle",
+   "sequence": "primitives",
+   "map": "Point_Lines",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "parallel_line_puzzle",
+   "sequence": "primitives",
+   "map": "Point_Lines",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
    "lookup": "modulor_man_demo",
    "sequence": "primitives",
    "map": "Point_Lines",
    "role": "secondary",
-   "by": "file"
+   "by": "floor"
   },
   {
    "lookup": "laser_measure",
@@ -215,7 +243,7 @@
     "role": "primary",
     "group": "laser"
    },
-   "by": "file"
+   "by": "floor"
   },
   {
    "lookup": "laser_exploding_sphere",
@@ -225,105 +253,77 @@
     "role": "primary",
     "group": "laser"
    },
-   "by": "file"
-  },
-  {
-   "lookup": "line",
-   "sequence": "primitives",
-   "map": "Point_Lines",
-   "role": "secondary",
-   "by": "file"
-  },
-  {
-   "lookup": "line_sledgehammer",
-   "sequence": "primitives",
-   "map": "Point_Lines",
-   "role": "secondary",
-   "by": "file"
-  },
-  {
-   "lookup": "plus_line_puzzle",
-   "sequence": "primitives",
-   "map": "Point_Lines",
-   "role": "secondary",
-   "by": "file"
-  },
-  {
-   "lookup": "parallel_line_puzzle",
-   "sequence": "primitives",
-   "map": "Point_Lines",
-   "role": "secondary",
-   "by": "file"
-  },
-  {
-   "lookup": "perspective_lines",
-   "sequence": "primitives",
-   "map": "Point_Lines",
-   "role": "secondary",
-   "by": "file"
-  },
-  {
-   "lookup": "lightrod",
-   "sequence": "primitives",
-   "map": "Point_Lines",
-   "role": "secondary",
-   "by": "file"
-  },
-  {
-   "lookup": "wall_health_station",
-   "sequence": "primitives",
-   "map": "Point_Lines",
-   "role": "secondary",
-   "by": "file"
-  },
-  {
-   "lookup": "wall_abstract",
-   "sequence": "primitives",
-   "map": "Point_Lines",
-   "role": "secondary",
-   "by": "file"
-  },
-  {
-   "lookup": "axis_line",
-   "sequence": "primitives",
-   "map": "Point_Lines",
-   "role": "secondary",
-   "by": "file"
+   "by": "floor"
   },
   {
    "lookup": "dark_sphere",
    "sequence": "primitives",
    "map": "Point_Lines",
    "role": "decoration",
-   "by": "file"
-  },
-  {
-   "lookup": "anamorphic_cross",
-   "sequence": "primitives",
-   "map": "Point_Lines",
-   "role": "secondary",
-   "by": "file"
+   "by": "floor"
   },
   {
    "lookup": "klee_walking_point",
    "sequence": "primitives",
    "map": "Point_Lines",
    "role": "secondary",
-   "by": "file"
+   "by": "floor"
+  },
+  {
+   "lookup": "anamorphic_cross",
+   "sequence": "primitives",
+   "map": "Point_Lines",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "axis_line",
+   "sequence": "primitives",
+   "map": "Point_Lines",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "wall_abstract",
+   "sequence": "primitives",
+   "map": "Point_Lines",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "wall_health_station",
+   "sequence": "primitives",
+   "map": "Point_Lines",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "lightrod",
+   "sequence": "primitives",
+   "map": "Point_Lines",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "perspective_lines",
+   "sequence": "primitives",
+   "map": "Point_Lines",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "scale_lines",
    "sequence": "primitives",
    "map": "Point_Lines",
    "role": "secondary",
-   "by": "file"
+   "by": "floor"
   },
   {
    "lookup": "science_screen",
    "sequence": "primitives",
    "map": "Point_Lines",
    "role": "secondary",
-   "by": "file"
+   "by": "floor"
   },
   {
    "lookup": "whiteboard",
@@ -801,14 +801,14 @@
    "sequence": "primitives",
    "map": "Primitives_Portals",
    "role": "unruled",
-   "by": "file"
+   "by": "floor"
   },
   {
    "lookup": "achilles_tortoise",
    "sequence": "primitives",
    "map": "Primitives_Portals",
    "role": "unruled",
-   "by": "file"
+   "by": "floor"
   },
   {
    "lookup": "bigframe",
