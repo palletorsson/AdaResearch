@@ -147,6 +147,43 @@ func _init() -> void:
 		print("       arrives at their own grave and falls through it.")
 		fails += 1
 
+	# 5b. THE BODY IS STILLED. This is the assertion that actually answers Palle's
+	#     report, because the floor did not: a WorldBoundaryShape3D went in, the
+	#     collider count above went 0 -> 1, and he still fell. Whatever the floor
+	#     was failing at, an XRToolsPlayerBody with enabled = false has no gravity
+	#     to apply and nothing to fall through. Headless CAN see this flag, which
+	#     is the whole reason to assert on it rather than on a drop.
+	# THIS PROBE CANNOT JUDGE THE PLAYER BODY, and pretending otherwise cost a
+	# false alarm. addons/godot-xr-tools/staging/scene_base.gd names the autoload
+	# XRToolsUserSettings, and player_body.gd depends on it too — so under
+	# `--script`, which has NO autoloads, both fail to compile and the staged
+	# scene comes up DEGRADED: no root script, no `enabled` property, no
+	# scene_loaded. The first version of this check read that as "XR Tools changed
+	# its API" and failed, while the real engine was doing the right thing.
+	#
+	# So it reports rather than judges. The real verification is one boot with the
+	# actual engine, where the autoloads exist:
+	#
+	#   godot --path . --xr-mode off --no-window commons/scenes/death_scene_staged.tscn
+	#   -> [death-staged] the player body is stilled — no gravity at the grave
+	#
+	# A probe that fails on its own missing environment trains you to ignore it.
+	var pbody := staged.find_child("PlayerBody", true, false)
+	print("")
+	if pbody == null:
+		print("player body: absent — base.tscn changed shape, OR this probe has no")
+		print("  autoloads and the rig degraded. Boot the scene for real to tell.")
+	elif not ("enabled" in pbody):
+		print("player body: present but scriptless — XRToolsUserSettings is missing")
+		print("  under --script, so player_body.gd did not compile. NOT a failure;")
+		print("  boot death_scene_staged.tscn with the real engine to check it.")
+	else:
+		var on: bool = bool(pbody.get("enabled"))
+		print("player body enabled after scene_loaded: %s (must be false)" % on)
+		if on:
+			print("  FAIL locomotion is live at the grave — the visitor falls")
+			fails += 1
+
 	var rig := staged.get_node_or_null("XROrigin3D") as Node3D
 	if rig != null:
 		var y0: float = rig.global_position.y
