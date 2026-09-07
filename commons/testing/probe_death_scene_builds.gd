@@ -60,8 +60,16 @@ func _init() -> void:
 		if facing < 0.99:
 			print("  FAIL the camera never aimed — look_at was refused"); fails += 1
 
-	# 3. THE STAGED SHAPE. Under base.tscn there IS an XRCamera3D, so the scene
-	#    must NOT build a second current camera and steal the viewport.
+	# 3. THE STAGED SHAPE, ON DESKTOP — and this probe asserted the OPPOSITE of the
+	#    truth until 2026-09-07, then passed, which is the worst thing a probe can
+	#    do. base.tscn carries an XRCamera3D whether or not a headset is attached,
+	#    so "is there an XRCamera3D?" is true on the desktop app too. The scene
+	#    returned early, built no camera, and the visitor stared through an
+	#    untracked rig camera at the origin. The probe called that correct.
+	#
+	#    Headless IS the desktop case: no OpenXR, so the staged scene MUST build
+	#    and aim its own camera. The VR case — where it must not — cannot be tested
+	#    from here, and saying so is better than a green tick that means nothing.
 	var staged = (load(STAGED) as PackedScene).instantiate()
 	get_root().add_child(staged)
 	for i in range(3):
@@ -69,13 +77,24 @@ func _init() -> void:
 	var inner := staged.get_node_or_null("DeathScene")
 	var xr_cam := staged.get_node_or_null("XROrigin3D/XRCamera3D")
 	print("")
-	print("staged: rig camera present=%s, death scene built its own=%s"
-		% [xr_cam != null, inner != null and inner.get_node_or_null("DeathCamera") != null])
+	# No ternary. One was written here out of habit, one commit after documenting
+	# that a ternary's type is not its branches' type — the habit is the point.
+	var staged_cam: Camera3D = null
+	if inner != null:
+		staged_cam = inner.get_node_or_null("DeathCamera") as Camera3D
+	print("staged (no OpenXR here): rig camera present=%s, own camera built=%s"
+		% [xr_cam != null, staged_cam != null])
 	if xr_cam == null:
 		print("  FAIL the staged scene carries no rig — scene_loaded would throw"); fails += 1
-	if inner != null and inner.get_node_or_null("DeathCamera") != null:
-		print("  FAIL it made a flat camera beside the XR one — that steals the eye")
+	if staged_cam == null:
+		print("  FAIL no camera on desktop — the visitor sees the inside of a hill")
 		fails += 1
+	else:
+		var to_c: Vector3 = (Vector3(0, 1.5, -5) - staged_cam.global_position).normalized()
+		var f2: float = (-staged_cam.global_transform.basis.z).dot(to_c)
+		print("staged desktop camera aim: %.3f" % f2)
+		if f2 < 0.99:
+			print("  FAIL built but never aimed"); fails += 1
 
 	print("")
 	print("PROBE OK" if fails == 0 else "PROBE FAILED (%d)" % fails)

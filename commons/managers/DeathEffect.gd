@@ -29,7 +29,21 @@ var _shader_mat: ShaderMaterial = null
 var _particles: GPUParticles3D = null
 var _immunity_timer: float = 0.0  # Damage immunity after hurt
 var _original_camera_pos: Vector3 = Vector3.ZERO
-var _xr_camera: XRCamera3D = null
+## Camera3D, NOT XRCamera3D (2026-09-07). It was the narrower type, and two of
+## the three places that assign it hand over a plain Camera3D:
+##
+##     Trying to assign value of type 'Camera3D' to a variable of type 'XRCamera3D'
+##     DeathEffect.gd ... set_health -> _handle_player_death -> play()
+##
+## In a headset the named lookup finds a real XRCamera3D and the narrow type
+## never complains, so this only ever threw on DESKTOP — where the fallback is
+## viewport.get_camera_3d(). The death VIGNETTE, the red wash that says you were
+## hit, has therefore never once appeared outside a headset. Nothing here needs
+## the XR subclass: it hangs a quad in front of a camera.
+##
+## Found by running the death loop on the desktop for the first time (--em-die),
+## which is the whole argument for being able to run it there.
+var _xr_camera: Camera3D = null
 var _rng := RandomNumberGenerator.new()
 
 signal hurt_effect_complete()

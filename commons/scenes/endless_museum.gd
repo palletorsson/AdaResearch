@@ -305,6 +305,9 @@ var _test_frames: int = 0
 # move_and_slide. Anywhere plan and physics disagree, the walker stalls and
 # the verdict says where.
 var _autopilot: int = 0
+## Seconds until --em-die fires, or -1 for never. Consumed once.
+var _die_after: float = -1.0
+var _die_t: float = 0.0
 var _walk_cells: Dictionary = {}   # Vector2i(x, z_cell) -> true
 var _auto_path: Array = []
 var _auto_goal_z: float = -1.0
@@ -1739,6 +1742,23 @@ func _parse_args() -> void:
 			_wall_threshold_run = clampi(int(a.substr(20)), 2, 9)
 		elif a == "--em-test-collision":
 			_test_collision = true
+		elif a.begins_with("--em-die"):
+			# THE DEATH LOOP, ON DEMAND (2026-09-07, Palle: "Can we run the same
+			# death loop in the desktop app so we can test the loop on the
+			# desktop?").
+			#
+			# Dying was only reachable by standing in front of a silhouette long
+			# enough, which is a poor way to test a five-step chain — hazard,
+			# health, death scene, continue, back to the same hall — and an
+			# impossible way to test it headless. This kills you on a timer
+			# through the SAME road a hazard uses, so what it exercises is the
+			# real loop and not a shortcut past it.
+			#
+			#   --em-die        three seconds in
+			#   --em-die=8      eight
+			_die_after = 3.0
+			if a.contains("="):
+				_die_after = maxf(0.5, float(a.split("=")[1]))
 		elif a.begins_with("--em-autopilot="):
 			_autopilot = int(a.substr(15))
 		elif a == "--em-vr":
@@ -15369,6 +15389,20 @@ func _aim_moon(t: float) -> void:
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint() or _studio:
 		return
+	# --em-die: kill the visitor on a timer, through the road a hazard uses.
+	# Consumed once (_die_after goes to -1), so it stages ONE death and the loop
+	# that follows is the real one — the continue, the reload, the same hall.
+	if _die_after >= 0.0:
+		_die_t += _delta
+		if _die_t >= _die_after:
+			_die_after = -1.0
+			var gm: Node = get_node_or_null("/root/GameManager")
+			if gm != null and gm.has_method("apply_bite_damage"):
+				print("[em-die] --em-die fired at %.1f s — full health in one bite" % _die_t)
+				gm.call("apply_bite_damage", float(gm.get("max_player_health")))
+			else:
+				print("[em-die] no GameManager — falling back to the museum's own death")
+				on_lethal_touch("test")
 	# THE LAST PLACE THAT HELD YOU, in the headset. _last_ground is written from
 	# _player.position at seven places in this file and nowhere else, and VR never
 	# builds that walker — so in a headset it has never once moved from the value

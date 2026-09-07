@@ -206,10 +206,20 @@ func _build_ui() -> void:
 
 
 func _build_camera() -> void:
-	# NOT IN A HEADSET. Staged, this scene sits under base.tscn's XROrigin3D and
-	# the XRCamera3D is the eye; a plain Camera3D marked `current` would seize the
-	# viewport from it and hand the visitor a flat window in a stereo display.
-	if _find_xr_camera() != null:
+	# IS XR ACTUALLY RUNNING? Not "is there an XRCamera3D node", which was the
+	# first test and was wrong in the one case that matters: the DESKTOP app.
+	#
+	# death_scene_staged.tscn roots on base.tscn, which carries an XROrigin3D and
+	# an XRCamera3D whether or not a headset is attached. So on desktop the node
+	# was found, this returned early, no camera was built — and the visitor stared
+	# through an untracked rig camera parked at the origin, facing away from the
+	# cross. The scene "worked" and showed nothing.
+	#
+	# Same test the museum uses for _vr (endless_museum.gd _is_vr): an interface
+	# that exists AND is initialized. In a headset the XRCamera3D is the eye and a
+	# second current camera would steal the viewport; on desktop there is no eye
+	# and this scene must bring its own.
+	if _xr_running():
 		return
 	# Desktop camera looking at the cross
 	var cam := Camera3D.new()
@@ -223,6 +233,14 @@ func _build_camera() -> void:
 	add_child(cam)
 	cam.look_at(Vector3(0, 1.5, -5), Vector3.UP)
 	cam.current = true
+
+
+## XR is running, as against merely present in the scene. One line, and the
+## difference between a desktop death scene that shows a cross and one that shows
+## the inside of a hillside.
+func _xr_running() -> bool:
+	var iface := XRServer.find_interface("OpenXR")
+	return iface != null and iface.is_initialized()
 
 
 func _find_xr_camera() -> Camera3D:
