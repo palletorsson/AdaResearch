@@ -31,6 +31,48 @@
   },
   "title": "Vector Operations"
  },
+ "subtitles": {
+  "intro": {
+   "text": "Twenty-seven instruments in here, and not one of them tells you what it is. ? pick one up before you read its label — can you say what it does ?",
+   "speaker": "The bench",
+   "level": 1
+  },
+  "ask_add": {
+   "text": "? walk a, then walk b — where do you end up ?",
+   "speaker": "Addition",
+   "level": 1
+  },
+  "truth_add": {
+   "text": "At a + b. To add is to walk, not to count. ? now stand at b and look back at a — what are you looking along ?",
+   "speaker": "Addition",
+   "level": 1
+  },
+  "truth_sub": {
+   "text": "a − b, the arrow from b back to a. Every “where is it, from here” is a subtraction. ? make an arrow twice as long — did it turn ?",
+   "speaker": "Subtraction",
+   "level": 1
+  },
+  "truth_scale": {
+   "text": "No. A scalar is a volume knob for a direction — length and direction come apart. ? hold two arrows and turn one until the number peaks ?",
+   "speaker": "Scale",
+   "level": 1
+  },
+  "truth_dot": {
+   "text": "a·b = |a||b|cos θ — agreement, written as a number. ? keep turning past zero and watch the other gauge — what grows as the agreement dies ?",
+   "speaker": "Dot product",
+   "level": 1
+  },
+  "truth_cross": {
+   "text": "The turn left over when two directions refuse to align, standing at right angles to both. ? stand an arrow in the light — is its shadow shorter than the arrow ?",
+   "speaker": "Cross product",
+   "level": 1
+  },
+  "close": {
+   "text": "It is. That shadow is the projection — the part of you that lives along someone else's line. Seven operations, laid out in a row like a shop. ? who decided these seven were the operations ?",
+   "speaker": "The bench",
+   "level": 1
+  }
+ },
  "lighting": {
   "ambient_color": [
    0.38,
@@ -91,18 +133,18 @@
   "utilities": [
    [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "s", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "sub:intro", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "sub:ask_add", "", "", "", "", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "sub:truth_add", "", "", "", "", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "sub:truth_sub", "", "", "", "", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "sub:truth_scale", "", "", "", "", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
-   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
-   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
-   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
-   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
-   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
-   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
-   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
-   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "sub:truth_dot", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "sub:truth_cross", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "sub:close", "", "", "", "", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "t:Vectors_Act2_VectorArithmetic", "", "", "", "", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ]
   ],
