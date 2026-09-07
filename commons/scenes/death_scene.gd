@@ -4,11 +4,27 @@
 # full biome surroundings, "You Died" text, and a Continue button
 # that returns to the lab/menu.
 
-extends Node3D
+## STAGING WILL ONLY LOAD A SCENE BASE (2026-09-07).
+##
+##     Trying to assign value of type 'death_scene.gd' to a variable of type
+##     'scene_base.gd'.  vrStaging.gd:718 @ load_scene()
+##
+## XRToolsStaging assigns what it instantiates into `current_scene`, which is
+## typed XRToolsSceneBase, so a plain Node3D root is refused at the assignment
+## and the transition dies right there. This scene was only ever reached by
+## change_scene_to_file before, which does not care; sending it through staging
+## — which is what stops the headset losing its rig — is what surfaced it.
+##
+## Extended BY PATH rather than by class_name: a fresh headless boot has not
+## necessarily reimported the global class cache, and this project has already
+## lost a pass to exactly that. XRToolsSceneBase is itself a Node3D, so nothing
+## that loaded this scene the old way changes.
+extends "res://addons/godot-xr-tools/staging/scene_base.gd"
 
 var _continue_pressed := false
 
 func _ready() -> void:
+	super()
 	_build_environment()
 	_build_hill()
 	_build_cross()
@@ -218,10 +234,13 @@ func _on_continue() -> void:
 	# the death scene is not a second implementation of it.
 	if MUSEUM.return_after_death:
 		MUSEUM.return_after_death = false          # spent — a later death re-arms it
-		var staging := _find_staging()
-		if staging != null:
+		# load_scene() is the scene base's OWN method: it emits request_load_scene,
+		# which staging is already listening for. Reaching up the tree for the
+		# staging node and calling it directly worked, but it was a second way to
+		# do a thing the base class exists to do.
+		if _find_staging() != null:
 			print("[death-scene] back into the museum at %s" % MUSEUM.menu_chapter)
-			staging.load_scene(MUSEUM_SCENE)
+			load_scene(MUSEUM_SCENE)
 			return
 		# No staging is a dev boot of this scene on its own. The plain museum
 		# scene reads the same statics, so the return still lands.

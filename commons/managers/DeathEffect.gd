@@ -312,7 +312,6 @@ func _create_particles(pos: Vector3) -> void:
 	_particles.lifetime = 1.2
 	_particles.one_shot = true
 	_particles.explosiveness = 0.95
-	_particles.global_position = pos
 
 	var mat := ParticleProcessMaterial.new()
 	mat.direction = Vector3(0, 1, 0)
@@ -344,7 +343,26 @@ func _create_particles(pos: Vector3) -> void:
 	draw_mat.emission_energy_multiplier = 2.0
 	_particles.material_override = draw_mat
 
-	get_tree().current_scene.add_child(_particles)
+	# POSITION AFTER THE PARENT, NOT BEFORE (2026-09-07).
+	#
+	#     Condition "!is_inside_tree()" is true. Returning: Transform3D()
+	#     DeathEffect.gd:315 @ _create_particles()
+	#
+	# global_position was assigned 30 lines up, while this node was still
+	# parentless — a global transform has no meaning before there is a tree to be
+	# global in, so Godot refused it and the particles fired at the world origin
+	# instead of where the visitor died. Harmless-looking, and it meant the one
+	# effect that says WHERE you were hit never once pointed at the right place.
+	#
+	# The current_scene guard is new too: under XR staging that can be mid-swap
+	# during a death, and add_child on a null is a crash on top of a death.
+	var host: Node = get_tree().current_scene if is_inside_tree() else null
+	if host == null:
+		_particles.queue_free()
+		_particles = null
+		return
+	host.add_child(_particles)
+	_particles.global_position = pos
 	_particles.emitting = true
 
 

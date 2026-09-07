@@ -732,8 +732,23 @@ const EmWallFitLib := preload("res://commons/scenes/em/em_wall_fit.gd")
 var _bake_used: Dictionary = {}         # per key: "tok|x|y" -> how many times looked up
 var _seg_placed: Array = []             # this segment's placed rows (for the bake)
 var _seg_unbaked: int = 0               # bodies this segment placed the live way while replaying
+var _bake_map_moved: int = 0            # halls whose map changed after the bake: replayed nothing
 var _last_seal_cells: Array = []        # absolute cells the last _seal_cells took
 var _bake_total: int = 0                # pearls to bake
+
+## THE STAMP OF THE MAP A HALL IS BUILT FROM (2026-09-07). A bake row carries
+## it, and a row whose map has moved since is not replayed - the map is the
+## authority and the bake is only a cache of what measuring it cost. 0 means
+## "cannot tell" (an exported pak has no mtimes), and a row that cannot be
+## checked is replayed exactly as before.
+func _map_stamp(map_name: String) -> int:
+	if map_name == "":
+		return 0
+	var p := "res://commons/maps/%s/map_data.json" % map_name
+	if not FileAccess.file_exists(p):
+		return 0
+	return int(FileAccess.get_modified_time(p))
+
 
 func _bake_lookup(lookup: String, cell: Dictionary) -> Dictionary:
 	if not _replay or _bake_key == "" or not _bake_in.has(_bake_key):
@@ -10089,7 +10104,9 @@ func _write_built(seg: Node3D, chapter: String, deal: Variant, zbase: int, w: in
 	_layout_built(built_ch, String(d.get("pearl", "")), rows, bodies, cards, w, h,
 		porch_depth, court_depth)
 	if _bake_key != "":
+		var baked_map := String(seg.get_meta("em_map")) if seg.has_meta("em_map") else ""
 		_bake_out[_bake_key] = {"museum": String(seg.get_meta("em_key")) if seg.has_meta("em_key") else "",
+			"map": baked_map, "map_at": _map_stamp(baked_map),
 			"placed": _seg_placed.duplicate(true), "refused": _seg_refused.duplicate(true)}
 		if not _bake_mode:
 			_heal_bake(_bake_key)
@@ -10729,9 +10746,22 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 		print("[em-pack] %s did not parse — the dealer takes this hall" % path)
 		return {}
 	_bake_key = "%s|%s" % [chapter, String(entry.get("pearl", ""))]
+	# THE MAP OUTRANKS THE BAKE (2026-09-07). The bake judged its own staleness
+	# against the PLAN, and a map edit does not move the plan - so a rewritten
+	# hall went on replaying the cells its old bodies sealed and the refusals its
+	# old layout earned. A row baked from a map that has moved since is dropped
+	# for this hall alone, and everything in it is measured live.
+	if _replay and _bake_in.has(_bake_key):
+		var brow: Dictionary = _bake_in[_bake_key]
+		var was: int = int(brow.get("map_at", 0))
+		var now: int = _map_stamp(map_name)
+		if was > 0 and now > 0 and was != now:
+			_bake_key = ""
+			_bake_map_moved += 1
+			print("[em-bake] %s · %s: the map moved since the bake — this hall is measured live, not replayed" % [
+				chapter, entry.get("pearl", "")])
 	seg.set_meta("em_pearl", String(entry.get("pearl", "")))
 	_bake_used = {}
-	_cur_dressing = []
 	# THE FORCE STAMP (2026-08-21, Palle: "add a force stamp to change the
 	# floor plan"): a hall whose necklace was stamped on /transplant's bench
 	# builds FROM those beads — the bench IS the floor plan. Everything else
