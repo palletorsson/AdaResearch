@@ -1,19 +1,19 @@
 {
  "_meta": {
-  "generated": "2026-09-07 17:16:51",
+  "generated": "2026-09-07 17:54:19",
   "generator": "tools/build_spine_artifact_order.py",
   "rule": "first appearance walking the spine: sequence order -> map order -> the room's thread (ruled, else floor, else file)",
-  "sequences": 22,
-  "maps_read": 186,
+  "sequences": 23,
+  "maps_read": 193,
   "maps_missing": 0,
-  "artifacts": 918,
+  "artifacts": 923,
   "ordered_by": {
    "ruled": 92,
-   "floor": 791,
-   "file": 35
+   "floor": 795,
+   "file": 36
   },
   "primary": 62,
-  "unruled": 689
+  "unruled": 693
  },
  "order": [
   {
@@ -1063,91 +1063,210 @@
    "by": "floor"
   },
   {
-   "lookup": "pulsar_visualizer",
-   "sequence": "color",
-   "map": "Array",
-   "role": "unruled",
-   "by": "floor"
-  },
-  {
-   "lookup": "grid_3d_4x4x4",
-   "sequence": "color",
-   "map": "Array",
-   "role": "unruled",
-   "by": "floor"
-  },
-  {
-   "lookup": "grid_2d_4x4",
-   "sequence": "color",
-   "map": "Array",
-   "role": "unruled",
-   "by": "floor"
-  },
-  {
    "lookup": "row_3_x",
-   "sequence": "color",
-   "map": "Array",
-   "role": "unruled",
-   "by": "floor"
-  },
-  {
-   "lookup": "xyz_coordinates",
-   "sequence": "color",
+   "sequence": "array_tutorial",
    "map": "Array",
    "role": "unruled",
    "by": "floor"
   },
   {
    "lookup": "column_3_z",
-   "sequence": "color",
+   "sequence": "array_tutorial",
+   "map": "Array",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "grid_2d_4x4",
+   "sequence": "array_tutorial",
+   "map": "Array",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "xyz_coordinates",
+   "sequence": "array_tutorial",
+   "map": "Array",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "grid_3d_4x4x4",
+   "sequence": "array_tutorial",
+   "map": "Array",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "pulsar_visualizer",
+   "sequence": "array_tutorial",
    "map": "Array",
    "role": "unruled",
    "by": "floor"
   },
   {
    "lookup": "sorting_algorithm_race",
-   "sequence": "color",
+   "sequence": "array_tutorial",
    "map": "Array",
    "role": "unruled",
    "by": "floor"
   },
   {
    "lookup": "grid3d",
-   "sequence": "color",
+   "sequence": "array_tutorial",
    "map": "Array",
    "role": "unruled",
    "by": "floor"
   },
   {
    "lookup": "bar_array",
-   "sequence": "color",
+   "sequence": "array_tutorial",
    "map": "Array",
    "role": "unruled",
    "by": "floor"
   },
   {
    "lookup": "bar_array_bubble_sort",
-   "sequence": "color",
+   "sequence": "array_tutorial",
    "map": "Array",
    "role": "unruled",
    "by": "floor"
   },
   {
-   "lookup": "pattern_mill",
-   "sequence": "color",
-   "map": "Pattern_Foundry",
+   "lookup": "gridagent",
+   "sequence": "array_tutorial",
+   "map": "Tutorial_2D_Build",
+   "role": "unruled",
+   "by": "file"
+  },
+  {
+   "lookup": "grid_model",
+   "sequence": "array_tutorial",
+   "map": "Tutorial_Pattern",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "pattern_tile_mirror",
+   "sequence": "array_tutorial",
+   "map": "Tutorial_Pattern",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "pattern_tile_puzzle",
+   "sequence": "array_tutorial",
+   "map": "Tutorial_Pattern",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "panel_bridge_loom",
+   "sequence": "array_tutorial",
+   "map": "Tutorial_Pattern",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "pulsar_compact",
+   "sequence": "array_tutorial",
+   "map": "Tutorial_Pattern",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "script_runner",
+   "sequence": "array_tutorial",
+   "map": "Tutorial_Pattern",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "pattern_maker_station",
+   "sequence": "array_tutorial",
+   "map": "Tutorial_Pattern",
    "role": "unruled",
    "by": "floor"
   },
   {
    "lookup": "pattern_tile_plate",
-   "sequence": "color",
-   "map": "Pattern_Foundry",
+   "sequence": "array_tutorial",
+   "map": "Tutorial_Pattern",
    "role": "unruled",
    "by": "floor"
   },
   {
-   "lookup": "pattern_maker_station",
+   "lookup": "pattern_studio_plate",
+   "sequence": "array_tutorial",
+   "map": "Tutorial_Pattern",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "vr_tile_editor_mirror",
+   "sequence": "array_tutorial",
+   "map": "Array_Patterns",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "pattern_tile_4x4",
+   "sequence": "array_tutorial",
+   "map": "Array_Patterns",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "tiling_demo",
+   "sequence": "array_tutorial",
+   "map": "Array_Patterns",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "pattern_tunnel_machine",
+   "sequence": "array_tutorial",
+   "map": "Array_Patterns",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "pattern_tile_brick",
+   "sequence": "array_tutorial",
+   "map": "Array_Patterns",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "pattern_tile_herringbone",
+   "sequence": "array_tutorial",
+   "map": "Array_Patterns",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "facade_grammar_demo",
+   "sequence": "array_tutorial",
+   "map": "Array_Patterns",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "step_sequencer",
+   "sequence": "array_tutorial",
+   "map": "Tutorial_Disco",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "standalone_disco",
+   "sequence": "array_tutorial",
+   "map": "Tutorial_Disco",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "pattern_mill",
    "sequence": "color",
    "map": "Pattern_Foundry",
    "role": "unruled",
@@ -1161,42 +1280,7 @@
    "by": "floor"
   },
   {
-   "lookup": "pattern_tile_mirror",
-   "sequence": "color",
-   "map": "Pattern_Foundry",
-   "role": "unruled",
-   "by": "floor"
-  },
-  {
-   "lookup": "pattern_tile_4x4",
-   "sequence": "color",
-   "map": "Pattern_Foundry",
-   "role": "unruled",
-   "by": "floor"
-  },
-  {
-   "lookup": "pattern_tile_herringbone",
-   "sequence": "color",
-   "map": "Pattern_Foundry",
-   "role": "unruled",
-   "by": "floor"
-  },
-  {
    "lookup": "pattern_machine_a",
-   "sequence": "color",
-   "map": "Pattern_Foundry",
-   "role": "unruled",
-   "by": "floor"
-  },
-  {
-   "lookup": "pattern_studio_plate",
-   "sequence": "color",
-   "map": "Pattern_Foundry",
-   "role": "unruled",
-   "by": "floor"
-  },
-  {
-   "lookup": "pattern_tile_brick",
    "sequence": "color",
    "map": "Pattern_Foundry",
    "role": "unruled",
@@ -1210,21 +1294,7 @@
    "by": "floor"
   },
   {
-   "lookup": "tiling_demo",
-   "sequence": "color",
-   "map": "Pattern_Foundry",
-   "role": "unruled",
-   "by": "floor"
-  },
-  {
    "lookup": "loom_drum_bauhaus_p4m",
-   "sequence": "color",
-   "map": "Color_Context_Placed",
-   "role": "unruled",
-   "by": "floor"
-  },
-  {
-   "lookup": "grid_model",
    "sequence": "color",
    "map": "Color_Context_Placed",
    "role": "unruled",
@@ -1330,13 +1400,6 @@
   },
   {
    "lookup": "albers_wall_gallery",
-   "sequence": "color",
-   "map": "Color_Context_Placed",
-   "role": "unruled",
-   "by": "floor"
-  },
-  {
-   "lookup": "standalone_disco",
    "sequence": "color",
    "map": "Color_Context_Placed",
    "role": "unruled",
@@ -1526,13 +1589,6 @@
   },
   {
    "lookup": "mill_escher_p4g",
-   "sequence": "color",
-   "map": "Symmetry_Seventeen",
-   "role": "unruled",
-   "by": "floor"
-  },
-  {
-   "lookup": "pattern_tile_puzzle",
    "sequence": "color",
    "map": "Symmetry_Seventeen",
    "role": "unruled",
@@ -4815,13 +4871,6 @@
    "by": "floor"
   },
   {
-   "lookup": "panel_bridge_loom",
-   "sequence": "lsystems",
-   "map": "Assemblage_Same_Desire",
-   "role": "unruled",
-   "by": "floor"
-  },
-  {
    "lookup": "ten_print_textile",
    "sequence": "lsystems",
    "map": "Assemblage_Same_Desire",
@@ -4941,13 +4990,6 @@
    "by": "floor"
   },
   {
-   "lookup": "pattern_tunnel_machine",
-   "sequence": "proceduralgeneration",
-   "map": "PG_Mirrored_Patterns",
-   "role": "unruled",
-   "by": "floor"
-  },
-  {
    "lookup": "rhizomatic_maze_space",
    "sequence": "proceduralgeneration",
    "map": "PG_Mirrored_Patterns",
@@ -5054,13 +5096,6 @@
   },
   {
    "lookup": "entropy_morphogenesis",
-   "sequence": "softbodies",
-   "map": "SoftBodies_Playground_of_Joy",
-   "role": "unruled",
-   "by": "floor"
-  },
-  {
-   "lookup": "gridagent",
    "sequence": "softbodies",
    "map": "SoftBodies_Playground_of_Joy",
    "role": "unruled",

@@ -57,7 +57,8 @@ if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
 
 ROOT = Path(__file__).resolve().parents[1]
 BRIEFS = ROOT / "commons" / "data" / "spine_briefs.json"
-ORDER = ROOT / "commons" / "data" / "spine_artifact_order.json"
+SPINE = ROOT / "commons" / "maps" / "curriculum_spine.json"
+SEQ_DIR = ROOT / "commons" / "maps" / "sequences"
 ROLES = ROOT / "commons" / "data" / "artifact_roles.json"
 MAPS = ROOT / "commons" / "maps"
 CORES = ("artifacts", "utilities", "relation", "")
@@ -82,13 +83,32 @@ def _save(doc: dict) -> None:
 
 
 def spine_rooms() -> list[tuple[str, str]]:
-    """(sequence, map) in spine order, from the one manifest that holds it."""
+    """(sequence, map) in spine order, read from the sequence files themselves.
+
+    NOT from spine_artifact_order.json, which was the first version of this and
+    was wrong. That manifest records each artifact ONCE, at its first appearance
+    in the walk, so a room whose every artifact was already met upstream
+    contributes no rows and DISAPPEARS. Ten spine rooms vanished that way —
+    Tutorial_Single, Tutorial_Row, Tutorial_3D, Lab_Path, three softbodies rooms,
+    two swarmintelligence rooms and SpeculativeComputation_Situated_Computation —
+    and because they were simply absent rather than flagged, they read as "not
+    spine rooms" instead of as a bug. A room list must come from the list of
+    rooms.
+    """
+    spine = _load(SPINE, {}) or {}
+    rows = sorted((spine.get("spine") or {}).get("sequences") or [],
+                  key=lambda r: r.get("order", 999))
     out, seen = [], set()
-    for e in (_load(ORDER, {}) or {}).get("order", []):
-        k = (e.get("sequence", ""), e.get("map", ""))
-        if k[1] and k not in seen:
-            seen.add(k)
-            out.append(k)
+    for r in rows:
+        seq = r.get("name")
+        if not seq:
+            continue
+        doc = _load(SEQ_DIR / ("%s.json" % seq), {}) or {}
+        entry = (doc.get("sequences") or {}).get(seq) or {}
+        for m in entry.get("maps") or []:
+            if isinstance(m, str) and (seq, m) not in seen and (MAPS / m / "map_data.json").exists():
+                seen.add((seq, m))
+                out.append((seq, m))
     return out
 
 
