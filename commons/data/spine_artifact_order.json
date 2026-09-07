@@ -1,10 +1,10 @@
 {
  "_meta": {
-  "generated": "2026-09-07 19:58:21",
+  "generated": "2026-09-07 20:09:19",
   "generator": "tools/build_spine_artifact_order.py",
   "rule": "first appearance walking the spine: sequence order -> map order -> the room's thread (ruled, else floor, else file)",
   "sequences": 23,
-  "maps_read": 191,
+  "maps_read": 190,
   "maps_missing": 0,
   "artifacts": 923,
   "ordered_by": {
@@ -1135,7 +1135,7 @@
   {
    "lookup": "gridagent",
    "sequence": "array_tutorial",
-   "map": "Tutorial_2D_Build",
+   "map": "Array",
    "role": "unruled",
    "by": "floor"
   },

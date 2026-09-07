@@ -661,10 +661,10 @@
    "at": "2026-09-07T17:04:53"
   },
   "Array": {
-   "for": "The OVERTURE. Palle's ruling, 2026-09-07: Array keeps the four rungs and shows the whole ladder before you climb it. One cube, three along X, three along Z, sixteen across a floor, sixty-four stacked — every rung of array_tutorial standing at once in one hall — and then the last basin turns the same bars into four sorts racing. The seven rooms after it take one rung each and give it a room to be walked rather than looked at.",
+   "for": "The OVERTURE. Palle's ruling, 2026-09-07: Array keeps the four rungs and shows the whole ladder before you climb it. One cube, three along X, three along Z, sixteen across a floor, sixty-four stacked — every rung of array_tutorial standing at once in one hall — and then the last basin turns the same bars into four sorts racing. gridagent stands beside grid_2d_4x4 as of 2026-09-07, so the overture also holds the one object that writes into an array without you. The four rooms after it take one rung each and give it a room to be walked rather than looked at.",
    "core": "artifacts",
    "claim": "Addressing is prior to content, and the room proves it by cost: each rung is one more number you must carry to say where you are. Seeing all five at once is the argument — the ladder is a single idea taking on dimensions, not five separate lessons.",
-   "unsure": "SETTLED by Palle 2026-09-07: the duplication with Tutorial_Row / Tutorial_2D_Build / Tutorial_3D is deliberate — Array is the overture, they are the rungs. Still open: pulsar_visualizer is ruled out of this room and into a new data-arrays map that does not exist yet, so it is still standing here. The last basin was severed and is repaired (b7d25421d): two planks at structure (15,8) and (16,8) reopen the c8 walkway, and the spawn moved off the wall it was standing in.",
+   "unsure": "SETTLED by Palle 2026-09-07: the overture keeps every rung, and the three rooms that were strict subsets of it — Tutorial_Row, Tutorial_3D, Tutorial_2D_Build — have left the walk. Still open: pulsar_visualizer is ruled out of this room and into a new data-arrays map that does not exist yet.",
    "certainty": "high",
    "at": "2026-09-07T19:49:42",
    "comment": "ok many good points, we should move the map  to the old array sequence and revive it. Add sp at the beginning of the map and since this is the museum we do not use the teleport. pulsar_visualizer  should be moved to a new array map that it about data arrays. ",
@@ -1055,14 +1055,6 @@
    "unsure": "Three of the five artifacts cannot be walked to — pathfinder Rule 4 warns on science_screen (3,0), pick_up_cube (1,1) and synthesis_stand (1,2), all on height-2 cells, so the cube in \"One Cube, One Grab\" is out of reach; and the interactables layer is 3 rows x 4 columns against a 17x11 structure of 38 floor cells and 89 void, so every object sits in the first twelve cells and fourteen rows carry nothing (the blurb's \"four by three, barely enough to stand on\" describes the interactables array, not the floor). The utilities layer is the whole ladder drafted into the wrong layer — pick_up_cub at (2,6), one character short of pick_up_cube and in no registry, then row_3_x (3,8), grid_2d_4x4 (1,9), column_3_z (6,10) and nineteen cells of \"1\" — none of which resolves as a utility code; there is no s and no sp, so spawn falls back to the floor centroid, and t at (7,13) stands on a void cell and is dead in the museum. Nothing in blurb, intent, tutorial or critical mentions the screen or the stand at all, so I cannot tell whether the point tracker is the room's intent or an accident I am promoting.",
    "certainty": "high",
    "at": "2026-09-07T18:49:02"
-  },
-  "Tutorial_2D_Build": {
-   "for": "Adds the second index, and brings the ladder's only agent — the first thing that writes into an array without you. Every rung before this moved a body; this one is supposed to move a cursor.",
-   "core": "artifacts",
-   "claim": "The room already contains a walkable 4x4 — sixteen floor cells at x=1-4, z=5-8 — and the only thing standing in it is the dark sphere, while grid_2d_4x4, the artifact the room is named for, is at (2,11) on a height-2 block the pathfinder reports unreachable; and gridagent:copy, the one object in the whole ladder that writes into the map's own 2D array (grid_agent_base.gd:296 _operation_copy -> GridOperations.copy_cube_adjacent), stands at (1,21), inside three rows that are 100% void.",
-   "unsure": "xyz_coordinates at (7,22) is in that void tail too, pulsar_visualizer at (3,17) is also unreachable, and Palle has already ruled pulsar_visualizer moves to a new data-arrays map — but it is this pearl's hero in commons/data/book/array_tutorial.json, so the move leaves the pearl headless. Rule 3 says the teleport at (6,18) is not reachable from spawn by walking, so the room did not exit even before the no-teleport ruling; and nothing on the floor decomposes an address into `index // width` and `index % width`, which the sequence JSON names as this ladder's arithmetic. I could not settle whether the 8x23 corridor with its wp:90 at (5,1) and tc:2:y:auto at (6,10) is meant to be the room, or whether the 4x4 at z=5-8 is and the corridor is approach.",
-   "certainty": "high",
-   "at": "2026-09-07T18:49:03"
   },
   "Tutorial_Pattern": {
    "for": "The turn from addressing to arithmetic on the address — the first rung where a rule runs across the indices instead of a body walking them. Everything before it moves you through an array; this is where the array fills itself.",
