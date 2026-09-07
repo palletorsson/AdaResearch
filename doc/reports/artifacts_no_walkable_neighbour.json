@@ -1,0 +1,977 @@
+{
+ "_readme": "LIVE spine rooms holding an artifact with NO walkable cell beside it — nothing can stand next to it, and map_pathfinder's Rule 4 stays SILENT because it skips artifacts on void (map_pathfinder.py:797). dark_sphere is excluded: Rule 4 exempts it by design. `nearest_free_walkable` is the closest walkable cell carrying no artifact and no utility — geometry only; it does not know where the piece belongs.\n\nSCOPE, per Palle 2026-09-07: a GRID reading, not a museum one. Teleporters do not count in the museum and are not read here; nor does an artifact merely standing on void, which is a legitimate idiom (staged in a basin, met from the walkway edge). Only 'on void AND nothing beside it' is reported. The check that will actually matter is pathfinding COMBINED WITH FOOTPRINT — a bigger job Palle is doing gradually in the museum. Read this as where a body cannot reach a piece, not as a verdict.",
+ "generated": "2026-09-07",
+ "rooms": 29,
+ "placements": 52,
+ "excluded": [
+  "dark_sphere"
+ ],
+ "maps": [
+  {
+   "map": "Random_Walk",
+   "sequence": "randomness",
+   "grid": {
+    "w": 13,
+    "h": 14
+   },
+   "stranded": [
+    {
+     "token": "catalyst_prompter_box",
+     "cell": [
+      0,
+      2
+     ],
+     "structure": "2",
+     "nearest_free_walkable": [
+      0,
+      5
+     ],
+     "distance": 3
+    },
+    {
+     "token": "catalyst_vent",
+     "cell": [
+      0,
+      9
+     ],
+     "structure": "2",
+     "nearest_free_walkable": [
+      0,
+      7
+     ],
+     "distance": 2
+    },
+    {
+     "token": "pixel_cloud",
+     "cell": [
+      1,
+      12
+     ],
+     "structure": "2",
+     "nearest_free_walkable": [
+      1,
+      7
+     ],
+     "distance": 5
+    },
+    {
+     "token": "pixel_cloud",
+     "cell": [
+      11,
+      0
+     ],
+     "structure": "2",
+     "nearest_free_walkable": [
+      12,
+      5
+     ],
+     "distance": 6
+    },
+    {
+     "token": "pixel_cloud",
+     "cell": [
+      11,
+      12
+     ],
+     "structure": "2",
+     "nearest_free_walkable": [
+      11,
+      7
+     ],
+     "distance": 5
+    }
+   ]
+  },
+  {
+   "map": "Trans_Translation",
+   "sequence": "transformation",
+   "grid": {
+    "w": 10,
+    "h": 24
+   },
+   "stranded": [
+    {
+     "token": "mario_cube",
+     "cell": [
+      16,
+      2
+     ],
+     "structure": "2",
+     "nearest_free_walkable": [
+      18,
+      2
+     ],
+     "distance": 2
+    },
+    {
+     "token": "mario_cube",
+     "cell": [
+      16,
+      5
+     ],
+     "structure": "2",
+     "nearest_free_walkable": [
+      18,
+      5
+     ],
+     "distance": 2
+    },
+    {
+     "token": "pick_up_cube",
+     "cell": [
+      16,
+      7
+     ],
+     "structure": "2",
+     "nearest_free_walkable": [
+      18,
+      7
+     ],
+     "distance": 2
+    },
+    {
+     "token": "mario_cube",
+     "cell": [
+      16,
+      8
+     ],
+     "structure": "2",
+     "nearest_free_walkable": [
+      14,
+      8
+     ],
+     "distance": 2
+    }
+   ]
+  },
+  {
+   "map": "WaveFunctions_Sine_Space",
+   "sequence": "wavefunctions",
+   "grid": {
+    "w": 14,
+    "h": 30
+   },
+   "stranded": [
+    {
+     "token": "colorballs",
+     "cell": [
+      8,
+      6
+     ],
+     "structure": "0",
+     "nearest_free_walkable": [
+      5,
+      6
+     ],
+     "distance": 3
+    },
+    {
+     "token": "colorballs",
+     "cell": [
+      13,
+      6
+     ],
+     "structure": "0",
+     "nearest_free_walkable": [
+      13,
+      10
+     ],
+     "distance": 4
+    },
+    {
+     "token": "sine_space",
+     "cell": [
+      16,
+      6
+     ],
+     "structure": "0",
+     "nearest_free_walkable": [
+      16,
+      10
+     ],
+     "distance": 4
+    },
+    {
+     "token": "colorballs",
+     "cell": [
+      18,
+      6
+     ],
+     "structure": "0",
+     "nearest_free_walkable": [
+      18,
+      10
+     ],
+     "distance": 4
+    }
+   ]
+  },
+  {
+   "map": "NonEuclidean_Spaces",
+   "sequence": "foundationscrisis",
+   "grid": {
+    "w": 17,
+    "h": 15
+   },
+   "stranded": [
+    {
+     "token": "curvature_slider",
+     "cell": [
+      9,
+      2
+     ],
+     "structure": "0",
+     "nearest_free_walkable": [
+      7,
+      3
+     ],
+     "distance": 3
+    },
+    {
+     "token": "elliptic_surface",
+     "cell": [
+      11,
+      4
+     ],
+     "structure": "0",
+     "nearest_free_walkable": [
+      13,
+      4
+     ],
+     "distance": 2
+    },
+    {
+     "token": "poincare_disk",
+     "cell": [
+      11,
+      5
+     ],
+     "structure": "2",
+     "nearest_free_walkable": [
+      9,
+      5
+     ],
+     "distance": 2
+    }
+   ]
+  },
+  {
+   "map": "Noise_Perlin_Simplex",
+   "sequence": "noise",
+   "grid": {
+    "w": 13,
+    "h": 15
+   },
+   "stranded": [
+    {
+     "token": "simplex_noise",
+     "cell": [
+      4,
+      3
+     ],
+     "structure": "0",
+     "nearest_free_walkable": [
+      2,
+      2
+     ],
+     "distance": 3
+    },
+    {
+     "token": "perlin_noise",
+     "cell": [
+      4,
+      8
+     ],
+     "structure": "0",
+     "nearest_free_walkable": [
+      4,
+      10
+     ],
+     "distance": 2
+    },
+    {
+     "token": "noise_terrain",
+     "cell": [
+      7,
+      6
+     ],
+     "structure": "0",
+     "nearest_free_walkable": [
+      6,
+      10
+     ],
+     "distance": 5
+    }
+   ]
+  },
+  {
+   "map": "QFEP_Lambda_Spectrum",
+   "sequence": "qfeplaboratory",
+   "grid": {
+    "w": 13,
+    "h": 22
+   },
+   "stranded": [
+    {
+     "token": "ordered_grid",
+     "cell": [
+      19,
+      4
+     ],
+     "structure": "0",
+     "nearest_free_walkable": [
+      17,
+      4
+     ],
+     "distance": 2
+    },
+    {
+     "token": "complexity_pattern",
+     "cell": [
+      20,
+      1
+     ],
+     "structure": "0",
+     "nearest_free_walkable": [
+      17,
+      3
+     ],
+     "distance": 5
+    },
+    {
+     "token": "crystal_formation",
+     "cell": [
+      20,
+      2
+     ],
+     "structure": "0",
+     "nearest_free_walkable": [
+      17,
+      3
+     ],
+     "distance": 4
+    }
+   ]
+  },
+  {
+   "map": "Random_Gaussian",
+   "sequence": "randomness",
+   "grid": {
+    "w": 14,
+    "h": 22
+   },
+   "stranded": [
+    {
+     "token": "distribution_comparator",
+     "cell": [
+      18,
+      5
+     ],
+     "structure": "0",
+     "nearest_free_walkable": [
+      18,
+      7
+     ],
+     "distance": 2
+    },
+    {
+     "token": "gaussian_random",
+     "cell": [
+      18,
+      10
+     ],
+     "structure": "0",
+     "nearest_free_walkable": [
+      18,
+      7
+     ],
+     "distance": 3
+    },
+    {
+     "token": "distribution_sampler",
+     "cell": [
+      19,
+      11
+     ],
+     "structure": "0",
+     "nearest_free_walkable": [
+      19,
+      7
+     ],
+     "distance": 4
+    }
+   ]
+  },
+  {
+   "map": "Random_Space_Geometry",
+   "sequence": "randomness",
+   "grid": {
+    "w": 12,
+    "h": 24
+   },
+   "stranded": [
+    {
+     "token": "env_one",
+     "cell": [
+      24,
+      5
+     ],
+     "structure": "void",
+     "nearest_free_walkable": [
+      22,
+      5
+     ],
+     "distance": 2
+    },
+    {
+     "token": "random_transformations_geometric",
+     "cell": [
+      25,
+      3
+     ],
+     "structure": "void",
+     "nearest_free_walkable": [
+      23,
+      1
+     ],
+     "distance": 4
+    },
+    {
+     "token": "sculpt_one",
+     "cell": [
+      26,
+      2
+     ],
+     "structure": "void",
+     "nearest_free_walkable": [
+      23,
+      1
+     ],
+     "distance": 4
+    }
+   ]
+  },
+  {
+   "map": "ML_Sequence_Memory",
+   "sequence": "machinelearning",
+   "grid": {
+    "w": 4,
+    "h": 12
+   },
+   "stranded": [
+    {
+     "token": "transformers_vr",
+     "cell": [
+      5,
+      1
+     ],
+     "structure": "2",
+     "nearest_free_walkable": [
+      1,
+      0
+     ],
+     "distance": 5
+    },
+    {
+     "token": "lstms_vr",
+     "cell": [
+      8,
+      0
+     ],
+     "structure": "2",
+     "nearest_free_walkable": [
+      10,
+      1
+     ],
+     "distance": 3
+    }
+   ]
+  },
+  {
+   "map": "Noise_One",
+   "sequence": "noise",
+   "grid": {
+    "w": 13,
+    "h": 11
+   },
+   "stranded": [
+    {
+     "token": "noisetorus",
+     "cell": [
+      5,
+      5
+     ],
+     "structure": "0",
+     "nearest_free_walkable": [
+      2,
+      5
+     ],
+     "distance": 3
+    },
+    {
+     "token": "noiselayers",
+     "cell": [
+      6,
+      5
+     ],
+     "structure": "0",
+     "nearest_free_walkable": [
+      8,
+      5
+     ],
+     "distance": 2
+    }
+   ]
+  },
+  {
+   "map": "Trans_AxisDecomposition",
+   "sequence": "transformation",
+   "grid": {
+    "w": 9,
+    "h": 16
+   },
+   "stranded": [
+    {
+     "token": "mario_cube",
+     "cell": [
+      12,
+      6
+     ],
+     "structure": "2",
+     "nearest_free_walkable": [
+      14,
+      6
+     ],
+     "distance": 2
+    },
+    {
+     "token": "pick_up_cube",
+     "cell": [
+      12,
+      7
+     ],
+     "structure": "2",
+     "nearest_free_walkable": [
+      14,
+      7
+     ],
+     "distance": 2
+    }
+   ]
+  },
+  {
+   "map": "Crisis_Synthesis",
+   "sequence": "foundationscrisis",
+   "grid": {
+    "w": 19,
+    "h": 20
+   },
+   "stranded": [
+    {
+     "token": "qfep_formula_3d",
+     "cell": [
+      11,
+      8
+     ],
+     "structure": "3",
+     "nearest_free_walkable": [
+      12,
+      6
+     ],
+     "distance": 3
+    }
+   ]
+  },
+  {
+   "map": "Escher_Impossible",
+   "sequence": "foundationscrisis",
+   "grid": {
+    "w": 13,
+    "h": 14
+   },
+   "stranded": [
+    {
+     "token": "penrose_triangle",
+     "cell": [
+      4,
+      5
+     ],
+     "structure": "0",
+     "nearest_free_walkable": [
+      4,
+      3
+     ],
+     "distance": 2
+    }
+   ]
+  },
+  {
+   "map": "Fractal_CantorSet",
+   "sequence": "fractals",
+   "grid": {
+    "w": 19,
+    "h": 23
+   },
+   "stranded": [
+    {
+     "token": "example_8_4_cantor_pagoda_vr",
+     "cell": [
+      12,
+      9
+     ],
+     "structure": "2",
+     "nearest_free_walkable": [
+      16,
+      9
+     ],
+     "distance": 4
+    }
+   ]
+  },
+  {
+   "map": "GT_Connectivity",
+   "sequence": "graphtheory",
+   "grid": {
+    "w": 14,
+    "h": 10
+   },
+   "stranded": [
+    {
+     "token": "kosaraju_algorithm",
+     "cell": [
+      2,
+      6
+     ],
+     "structure": "2",
+     "nearest_free_walkable": [
+      0,
+      6
+     ],
+     "distance": 2
+    }
+   ]
+  },
+  {
+   "map": "GT_Network_Analysis",
+   "sequence": "graphtheory",
+   "grid": {
+    "w": 13,
+    "h": 13
+   },
+   "stranded": [
+    {
+     "token": "network_analysis",
+     "cell": [
+      8,
+      2
+     ],
+     "structure": "0",
+     "nearest_free_walkable": [
+      6,
+      2
+     ],
+     "distance": 2
+    }
+   ]
+  },
+  {
+   "map": "ML_Classification",
+   "sequence": "machinelearning",
+   "grid": {
+    "w": 15,
+    "h": 12
+   },
+   "stranded": [
+    {
+     "token": "random_forest_visualization",
+     "cell": [
+      5,
+      10
+     ],
+     "structure": "2",
+     "nearest_free_walkable": [
+      5,
+      12
+     ],
+     "distance": 2
+    }
+   ]
+  },
+  {
+   "map": "ML_Evolution",
+   "sequence": "machinelearning",
+   "grid": {
+    "w": 14,
+    "h": 12
+   },
+   "stranded": [
+    {
+     "token": "evolvingflowers",
+     "cell": [
+      7,
+      2
+     ],
+     "structure": "2",
+     "nearest_free_walkable": [
+      3,
+      2
+     ],
+     "distance": 4
+    }
+   ]
+  },
+  {
+   "map": "ML_Neural_Networks",
+   "sequence": "machinelearning",
+   "grid": {
+    "w": 13,
+    "h": 16
+   },
+   "stranded": [
+    {
+     "token": "neural_networks_vr",
+     "cell": [
+      8,
+      2
+     ],
+     "structure": "3",
+     "nearest_free_walkable": [
+      8,
+      6
+     ],
+     "distance": 4
+    }
+   ]
+  },
+  {
+   "map": "ML_Perception",
+   "sequence": "machinelearning",
+   "grid": {
+    "w": 13,
+    "h": 10
+   },
+   "stranded": [
+    {
+     "token": "convolutional_neural_networks_cnns_vr",
+     "cell": [
+      6,
+      1
+     ],
+     "structure": "3",
+     "nearest_free_walkable": [
+      8,
+      4
+     ],
+     "distance": 5
+    }
+   ]
+  },
+  {
+   "map": "ML_Synthesis",
+   "sequence": "machinelearning",
+   "grid": {
+    "w": 13,
+    "h": 12
+   },
+   "stranded": [
+    {
+     "token": "explainable_ai_xai_vr",
+     "cell": [
+      7,
+      2
+     ],
+     "structure": "0",
+     "nearest_free_walkable": [
+      3,
+      2
+     ],
+     "distance": 4
+    }
+   ]
+  },
+  {
+   "map": "Noise_6_Wall",
+   "sequence": "noise",
+   "grid": {
+    "w": 13,
+    "h": 13
+   },
+   "stranded": [
+    {
+     "token": "shader_noise_space",
+     "cell": [
+      6,
+      6
+     ],
+     "structure": "0",
+     "nearest_free_walkable": [
+      6,
+      3
+     ],
+     "distance": 3
+    }
+   ]
+  },
+  {
+   "map": "Point_Line_Grid",
+   "sequence": "primitives",
+   "grid": {
+    "w": 20,
+    "h": 15
+   },
+   "stranded": [
+    {
+     "token": "grid_lines",
+     "cell": [
+      5,
+      5
+     ],
+     "structure": "0",
+     "nearest_free_walkable": [
+      2,
+      5
+     ],
+     "distance": 3
+    }
+   ]
+  },
+  {
+   "map": "PG_Percolation_Network",
+   "sequence": "proceduralgeneration",
+   "grid": {
+    "w": 14,
+    "h": 17
+   },
+   "stranded": [
+    {
+     "token": "percolationnetwork_ca",
+     "cell": [
+      11,
+      5
+     ],
+     "structure": "2",
+     "nearest_free_walkable": [
+      11,
+      9
+     ],
+     "distance": 4
+    }
+   ]
+  },
+  {
+   "map": "QFEP_Sandbox",
+   "sequence": "qfeplaboratory",
+   "grid": {
+    "w": 14,
+    "h": 14
+   },
+   "stranded": [
+    {
+     "token": "qfep_reactor",
+     "cell": [
+      4,
+      7
+     ],
+     "structure": "3",
+     "nearest_free_walkable": [
+      2,
+      7
+     ],
+     "distance": 2
+    }
+   ]
+  },
+  {
+   "map": "Random_Game",
+   "sequence": "randomness",
+   "grid": {
+    "w": 15,
+    "h": 18
+   },
+   "stranded": [
+    {
+     "token": "kresling_spire",
+     "cell": [
+      4,
+      3
+     ],
+     "structure": "0",
+     "nearest_free_walkable": [
+      2,
+      3
+     ],
+     "distance": 2
+    }
+   ]
+  },
+  {
+   "map": "WaveFunctions_3D_Wave_Propagation",
+   "sequence": "wavefunctions",
+   "grid": {
+    "w": 16,
+    "h": 18
+   },
+   "stranded": [
+    {
+     "token": "coupled_oscillator_lattice",
+     "cell": [
+      13,
+      8
+     ],
+     "structure": "0",
+     "nearest_free_walkable": [
+      15,
+      8
+     ],
+     "distance": 2
+    }
+   ]
+  },
+  {
+   "map": "WaveFunctions_John_Cage",
+   "sequence": "wavefunctions",
+   "grid": {
+    "w": 12,
+    "h": 14
+   },
+   "stranded": [
+    {
+     "token": "ruth_asawa_sculpture",
+     "cell": [
+      6,
+      6
+     ],
+     "structure": "0",
+     "nearest_free_walkable": [
+      6,
+      9
+     ],
+     "distance": 3
+    }
+   ]
+  },
+  {
+   "map": "WaveFunctions_Pendulum",
+   "sequence": "wavefunctions",
+   "grid": {
+    "w": 13,
+    "h": 21
+   },
+   "stranded": [
+    {
+     "token": "draw_dot_time_domain",
+     "cell": [
+      7,
+      5
+     ],
+     "structure": "2",
+     "nearest_free_walkable": [
+      4,
+      5
+     ],
+     "distance": 3
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,1830 @@
+{
+ "_readme": "Maps whose spawn `s` stands on a non-walkable cell. structure '1' is floor; 1 < v < wall_height is a raised floor; anything else is wall or void. A spawn here makes map_pathfinder flood the wall ring, so the map reports near-total reachability and 0 issues while artifacts are stranded. `nearest_walkable` is the closest free walkable cell (no utility, no artifact) by Chebyshev ring then Manhattan distance — a suggestion, not a ruling.",
+ "generated": "2026-09-07",
+ "count": 149,
+ "spine_rooms": 6,
+ "maps": [
+  {
+   "map": "Point_Lines",
+   "spine": true,
+   "spawn": [
+    1,
+    2
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": [
+    0,
+    2
+   ]
+  },
+  {
+   "map": "Random_Gaussian",
+   "spine": true,
+   "spawn": [
+    1,
+    1
+   ],
+   "structure": "3",
+   "wall_height": 2,
+   "nearest_walkable": [
+    2,
+    2
+   ]
+  },
+  {
+   "map": "Random_Mushrooms",
+   "spine": true,
+   "spawn": [
+    0,
+    0
+   ],
+   "structure": "3",
+   "wall_height": 2,
+   "nearest_walkable": [
+    1,
+    1
+   ]
+  },
+  {
+   "map": "Randomness_Examples_of_Randomness",
+   "spine": true,
+   "spawn": [
+    0,
+    0
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": [
+    0,
+    1
+   ]
+  },
+  {
+   "map": "Trans_AxisDecomposition",
+   "spine": true,
+   "spawn": [
+    9,
+    8
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": [
+    7,
+    7
+   ]
+  },
+  {
+   "map": "WaveFunctions_TrigWalkingPath",
+   "spine": true,
+   "spawn": [
+    0,
+    0
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": [
+    1,
+    2
+   ]
+  },
+  {
+   "map": "Archetype_Amphitheater",
+   "spine": false,
+   "spawn": [
+    21,
+    11
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": [
+    14,
+    11
+   ]
+  },
+  {
+   "map": "Archetype_Atrium",
+   "spine": false,
+   "spawn": [
+    19,
+    11
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": [
+    13,
+    11
+   ]
+  },
+  {
+   "map": "Archetype_Cathedral",
+   "spine": false,
+   "spawn": [
+    28,
+    8
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Archetype_Citadel",
+   "spine": false,
+   "spawn": [
+    21,
+    12
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Archetype_Constellation",
+   "spine": false,
+   "spawn": [
+    3,
+    6
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Archetype_Crossroads",
+   "spine": false,
+   "spawn": [
+    22,
+    12
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Archetype_HubSpokes",
+   "spine": false,
+   "spawn": [
+    23,
+    13
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Archetype_Pit",
+   "spine": false,
+   "spawn": [
+    2,
+    11
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": [
+    9,
+    11
+   ]
+  },
+  {
+   "map": "Archetype_Quadrants",
+   "spine": false,
+   "spawn": [
+    3,
+    4
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Archetype_Stacks",
+   "spine": false,
+   "spawn": [
+    17,
+    2
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Archetype_Theater",
+   "spine": false,
+   "spawn": [
+    19,
+    11
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Archetype_Tower",
+   "spine": false,
+   "spawn": [
+    19,
+    11
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Archetype_Ziggurat",
+   "spine": false,
+   "spawn": [
+    20,
+    11
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Array_Basics",
+   "spine": false,
+   "spawn": [
+    1,
+    9
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": [
+    1,
+    8
+   ]
+  },
+  {
+   "map": "DeckKit_Catalog",
+   "spine": false,
+   "spawn": [
+    4,
+    3
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": [
+    6,
+    27
+   ]
+  },
+  {
+   "map": "DeckKit_Gallery",
+   "spine": false,
+   "spawn": [
+    4,
+    3
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": [
+    6,
+    27
+   ]
+  },
+  {
+   "map": "Dollhouse_Random_Definition",
+   "spine": false,
+   "spawn": [
+    30,
+    15
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Dollhouse_Random_Gaussian",
+   "spine": false,
+   "spawn": [
+    28,
+    14
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Dollhouse_Random_Walk",
+   "spine": false,
+   "spawn": [
+    12,
+    6
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Facade_NYC_Tenement",
+   "spine": false,
+   "spawn": [
+    5,
+    5
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "ForcesSystems",
+   "spine": false,
+   "spawn": [
+    4,
+    4
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": [
+    4,
+    3
+   ]
+  },
+  {
+   "map": "Gallery_DRA_1",
+   "spine": false,
+   "spawn": [
+    8,
+    2
+   ],
+   "structure": "3",
+   "wall_height": 2,
+   "nearest_walkable": [
+    6,
+    17
+   ]
+  },
+  {
+   "map": "Gallery_DRA_2",
+   "spine": false,
+   "spawn": [
+    8,
+    2
+   ],
+   "structure": "3",
+   "wall_height": 2,
+   "nearest_walkable": [
+    6,
+    17
+   ]
+  },
+  {
+   "map": "Gallery_DRA_3",
+   "spine": false,
+   "spawn": [
+    8,
+    2
+   ],
+   "structure": "3",
+   "wall_height": 2,
+   "nearest_walkable": [
+    6,
+    17
+   ]
+  },
+  {
+   "map": "Gallery_DRA_4",
+   "spine": false,
+   "spawn": [
+    8,
+    2
+   ],
+   "structure": "3",
+   "wall_height": 2,
+   "nearest_walkable": [
+    6,
+    17
+   ]
+  },
+  {
+   "map": "Gallery_TER_DEMO",
+   "spine": false,
+   "spawn": [
+    8,
+    2
+   ],
+   "structure": "3",
+   "wall_height": 2,
+   "nearest_walkable": [
+    9,
+    15
+   ]
+  },
+  {
+   "map": "Grown_Applied_Softbody",
+   "spine": false,
+   "spawn": [
+    9,
+    4
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Grown_Applied_VectorForces",
+   "spine": false,
+   "spawn": [
+    8,
+    3
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Grown_primitives_w1",
+   "spine": false,
+   "spawn": [
+    7,
+    4
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "MachineLearning_Evolving_Flowers",
+   "spine": false,
+   "spawn": [
+    0,
+    0
+   ],
+   "structure": "3",
+   "wall_height": 2,
+   "nearest_walkable": [
+    1,
+    1
+   ]
+  },
+  {
+   "map": "MissionAntRooms_Lsystems",
+   "spine": false,
+   "spawn": [
+    32,
+    15
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "MissionAntRooms_Randomness",
+   "spine": false,
+   "spawn": [
+    17,
+    27
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "MissionAnts_Lsystems",
+   "spine": false,
+   "spawn": [
+    29,
+    46
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "MissionAnts_Randomness",
+   "spine": false,
+   "spawn": [
+    29,
+    47
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "MissionDLA_Lsystems",
+   "spine": false,
+   "spawn": [
+    44,
+    42
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "MissionDLA_Randomness",
+   "spine": false,
+   "spawn": [
+    46,
+    42
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "MissionDerive_Lsystems",
+   "spine": false,
+   "spawn": [
+    19,
+    2
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "MissionDerive_Randomness",
+   "spine": false,
+   "spawn": [
+    16,
+    2
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "MissionErosion_Lsystems",
+   "spine": false,
+   "spawn": [
+    38,
+    37
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "MissionErosion_Randomness",
+   "spine": false,
+   "spawn": [
+    38,
+    37
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "MissionFlock_Lsystems",
+   "spine": false,
+   "spawn": [
+    4,
+    14
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "MissionFlock_Randomness",
+   "spine": false,
+   "spawn": [
+    4,
+    36
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "MissionHall_Cellularautomata",
+   "spine": false,
+   "spawn": [
+    2,
+    2
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": [
+    37,
+    31
+   ]
+  },
+  {
+   "map": "MissionHall_Formfinding",
+   "spine": false,
+   "spawn": [
+    2,
+    2
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": [
+    37,
+    18
+   ]
+  },
+  {
+   "map": "MissionHall_Primitives",
+   "spine": false,
+   "spawn": [
+    2,
+    2
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": [
+    37,
+    31
+   ]
+  },
+  {
+   "map": "MissionHall_Qfeplaboratory",
+   "spine": false,
+   "spawn": [
+    2,
+    2
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": [
+    37,
+    5
+   ]
+  },
+  {
+   "map": "MissionHall_Randomness",
+   "spine": false,
+   "spawn": [
+    2,
+    2
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": [
+    37,
+    31
+   ]
+  },
+  {
+   "map": "MissionLsys_Lsystems",
+   "spine": false,
+   "spawn": [
+    25,
+    19
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "MissionLsys_Randomness",
+   "spine": false,
+   "spawn": [
+    29,
+    19
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "MissionPhysarum_Lsystems",
+   "spine": false,
+   "spawn": [
+    37,
+    37
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "MissionPhysarum_Randomness",
+   "spine": false,
+   "spawn": [
+    37,
+    37
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "MissionRD_Lsystems",
+   "spine": false,
+   "spawn": [
+    38,
+    33
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "MissionRD_Randomness",
+   "spine": false,
+   "spawn": [
+    38,
+    34
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "MissionRooms_Cellularautomata",
+   "spine": false,
+   "spawn": [
+    2,
+    2
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "MissionRooms_Randomness",
+   "spine": false,
+   "spawn": [
+    2,
+    2
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "MissionVoronoi_Lsystems",
+   "spine": false,
+   "spawn": [
+    18,
+    54
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "MissionVoronoi_Randomness",
+   "spine": false,
+   "spawn": [
+    18,
+    54
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "MissionWFC_Lsystems",
+   "spine": false,
+   "spawn": [
+    1,
+    1
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": [
+    18,
+    10
+   ]
+  },
+  {
+   "map": "MissionWFC_Randomness",
+   "spine": false,
+   "spawn": [
+    1,
+    1
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": [
+    18,
+    26
+   ]
+  },
+  {
+   "map": "MissionWang_Lsystems",
+   "spine": false,
+   "spawn": [
+    11,
+    2
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "MissionWang_Randomness",
+   "spine": false,
+   "spawn": [
+    10,
+    2
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Museum_AAA_Mixing",
+   "spine": false,
+   "spawn": [
+    1,
+    7
+   ],
+   "structure": "4",
+   "wall_height": 2,
+   "nearest_walkable": [
+    20,
+    7
+   ]
+  },
+  {
+   "map": "Museum_Spine_Court",
+   "spine": false,
+   "spawn": [
+    8,
+    2
+   ],
+   "structure": "3",
+   "wall_height": 2,
+   "nearest_walkable": [
+    8,
+    7
+   ]
+  },
+  {
+   "map": "PearlDrop_Test",
+   "spine": false,
+   "spawn": [
+    18,
+    12
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": [
+    18,
+    11
+   ]
+  },
+  {
+   "map": "PromptDemo_Trans_Translation_Echo",
+   "spine": false,
+   "spawn": [
+    22,
+    6
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Random_Gaussian_HumanoidWalker",
+   "spine": false,
+   "spawn": [
+    0,
+    0
+   ],
+   "structure": "3",
+   "wall_height": 2,
+   "nearest_walkable": [
+    1,
+    2
+   ]
+  },
+  {
+   "map": "Random_Gaussian_Hybrid",
+   "spine": false,
+   "spawn": [
+    0,
+    0
+   ],
+   "structure": "3",
+   "wall_height": 2,
+   "nearest_walkable": [
+    1,
+    1
+   ]
+  },
+  {
+   "map": "Random_Gaussian_Placed",
+   "spine": false,
+   "spawn": [
+    0,
+    0
+   ],
+   "structure": "3",
+   "wall_height": 2,
+   "nearest_walkable": [
+    1,
+    1
+   ]
+  },
+  {
+   "map": "Random_Gaussian_SimulatedAnnealing",
+   "spine": false,
+   "spawn": [
+    0,
+    0
+   ],
+   "structure": "3",
+   "wall_height": 2,
+   "nearest_walkable": [
+    1,
+    1
+   ]
+  },
+  {
+   "map": "Random_Rotate_Random_Y",
+   "spine": false,
+   "spawn": [
+    0,
+    0
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Room_Random_Cubes",
+   "spine": false,
+   "spawn": [
+    12,
+    6
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Room_Random_Definition",
+   "spine": false,
+   "spawn": [
+    31,
+    16
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Room_Random_Game",
+   "spine": false,
+   "spawn": [
+    17,
+    9
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Room_Random_Gaussian",
+   "spine": false,
+   "spawn": [
+    30,
+    15
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Room_Random_Mushrooms",
+   "spine": false,
+   "spawn": [
+    20,
+    10
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Room_Random_Pheromone",
+   "spine": false,
+   "spawn": [
+    29,
+    15
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Room_Random_Remove",
+   "spine": false,
+   "spawn": [
+    27,
+    14
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Room_Random_Rotate_Random_XYZ",
+   "spine": false,
+   "spawn": [
+    31,
+    16
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Room_Random_Space",
+   "spine": false,
+   "spawn": [
+    29,
+    15
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Room_Random_Space_Geometry",
+   "spine": false,
+   "spawn": [
+    31,
+    16
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Room_Random_Walk",
+   "spine": false,
+   "spawn": [
+    7,
+    6
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Room_Randomness_10_PRINT_Algorithm",
+   "spine": false,
+   "spawn": [
+    31,
+    16
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Room_Randomness_Examples_of_Randomness",
+   "spine": false,
+   "spawn": [
+    19,
+    10
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "SpProbe",
+   "spine": false,
+   "spawn": [
+    26,
+    24
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "TemplateLab_MIG_GEN",
+   "spine": false,
+   "spawn": [
+    10,
+    2
+   ],
+   "structure": "3",
+   "wall_height": 2,
+   "nearest_walkable": [
+    8,
+    19
+   ]
+  },
+  {
+   "map": "TemplateLab_SPEC_DRA",
+   "spine": false,
+   "spawn": [
+    9,
+    2
+   ],
+   "structure": "3",
+   "wall_height": 2,
+   "nearest_walkable": [
+    7,
+    19
+   ]
+  },
+  {
+   "map": "Trial_antrooms_array_tutorial",
+   "spine": false,
+   "spawn": [
+    5,
+    15
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Trial_antrooms_cellularautomata",
+   "spine": false,
+   "spawn": [
+    11,
+    15
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Trial_antrooms_lsystems",
+   "spine": false,
+   "spawn": [
+    8,
+    15
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Trial_antrooms_randomness",
+   "spine": false,
+   "spawn": [
+    5,
+    15
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Trial_ants_randomness",
+   "spine": false,
+   "spawn": [
+    44,
+    6
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Trial_derive_foundationscrisis",
+   "spine": false,
+   "spawn": [
+    10,
+    2
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Trial_derive_primitives",
+   "spine": false,
+   "spawn": [
+    10,
+    2
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Trial_derive_randomness",
+   "spine": false,
+   "spawn": [
+    10,
+    4
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Trial_dla_randomness",
+   "spine": false,
+   "spawn": [
+    17,
+    32
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Trial_erosion_forces",
+   "spine": false,
+   "spawn": [
+    14,
+    28
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Trial_erosion_noise",
+   "spine": false,
+   "spawn": [
+    14,
+    28
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Trial_erosion_postfoundationscrisis",
+   "spine": false,
+   "spawn": [
+    14,
+    28
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Trial_erosion_randomness",
+   "spine": false,
+   "spawn": [
+    14,
+    28
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Trial_eye_Random_Gaussian",
+   "spine": false,
+   "spawn": [
+    0,
+    0
+   ],
+   "structure": "3",
+   "wall_height": 2,
+   "nearest_walkable": [
+    1,
+    1
+   ]
+  },
+  {
+   "map": "Trial_flock_graphtheory",
+   "spine": false,
+   "spawn": [
+    17,
+    49
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Trial_flock_randomness",
+   "spine": false,
+   "spawn": [
+    32,
+    37
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Trial_halls_boolean_surfaces",
+   "spine": false,
+   "spawn": [
+    2,
+    2
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": [
+    37,
+    5
+   ]
+  },
+  {
+   "map": "Trial_halls_fractals",
+   "spine": false,
+   "spawn": [
+    2,
+    2
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": [
+    37,
+    5
+   ]
+  },
+  {
+   "map": "Trial_halls_machinelearning",
+   "spine": false,
+   "spawn": [
+    2,
+    2
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": [
+    37,
+    31
+   ]
+  },
+  {
+   "map": "Trial_halls_randomness",
+   "spine": false,
+   "spawn": [
+    2,
+    2
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": [
+    37,
+    31
+   ]
+  },
+  {
+   "map": "Trial_halls_symmetry",
+   "spine": false,
+   "spawn": [
+    2,
+    2
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Trial_lsystem_randomness",
+   "spine": false,
+   "spawn": [
+    29,
+    29
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Trial_physarum_isosurfaces",
+   "spine": false,
+   "spawn": [
+    13,
+    27
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Trial_physarum_randomness",
+   "spine": false,
+   "spawn": [
+    13,
+    27
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Trial_physarum_swarmintelligence",
+   "spine": false,
+   "spawn": [
+    14,
+    28
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Trial_rd_randomness",
+   "spine": false,
+   "spawn": [
+    14,
+    25
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Trial_rooms_change",
+   "spine": false,
+   "spawn": [
+    2,
+    8
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Trial_rooms_proceduralgeneration",
+   "spine": false,
+   "spawn": [
+    2,
+    12
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Trial_rooms_randomness",
+   "spine": false,
+   "spawn": [
+    2,
+    2
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Trial_voronoi_randomness",
+   "spine": false,
+   "spawn": [
+    50,
+    46
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Trial_wanghall_randomness",
+   "spine": false,
+   "spawn": [
+    10,
+    2
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "Trial_wfc_color",
+   "spine": false,
+   "spawn": [
+    1,
+    1
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": [
+    18,
+    26
+   ]
+  },
+  {
+   "map": "Trial_wfc_formfinding",
+   "spine": false,
+   "spawn": [
+    1,
+    1
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": [
+    18,
+    18
+   ]
+  },
+  {
+   "map": "Trial_wfc_qfeplaboratory",
+   "spine": false,
+   "spawn": [
+    1,
+    1
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": [
+    18,
+    18
+   ]
+  },
+  {
+   "map": "Trial_wfc_randomness",
+   "spine": false,
+   "spawn": [
+    1,
+    1
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": [
+    18,
+    26
+   ]
+  },
+  {
+   "map": "Trial_wfc_softbodies",
+   "spine": false,
+   "spawn": [
+    1,
+    1
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": [
+    18,
+    26
+   ]
+  },
+  {
+   "map": "Trial_wfc_transformation",
+   "spine": false,
+   "spawn": [
+    1,
+    1
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": [
+    18,
+    10
+   ]
+  },
+  {
+   "map": "Trial_wfc_wavefunctions",
+   "spine": false,
+   "spawn": [
+    1,
+    1
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": [
+    26,
+    26
+   ]
+  },
+  {
+   "map": "Tutorial_2D",
+   "spine": false,
+   "spawn": [
+    0,
+    0
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": [
+    1,
+    2
+   ]
+  },
+  {
+   "map": "Tutorial_Col",
+   "spine": false,
+   "spawn": [
+    0,
+    0
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": [
+    1,
+    1
+   ]
+  },
+  {
+   "map": "WangDeck_Variants",
+   "spine": false,
+   "spawn": [
+    1,
+    2
+   ],
+   "structure": "3",
+   "wall_height": 2,
+   "nearest_walkable": [
+    2,
+    26
+   ]
+  },
+  {
+   "map": "WaveFunctions_AudioLib",
+   "spine": false,
+   "spawn": [
+    0,
+    0
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": [
+    0,
+    1
+   ]
+  },
+  {
+   "map": "WaveFunctions_TrigWalkingPath_p1",
+   "spine": false,
+   "spawn": [
+    0,
+    0
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": [
+    1,
+    2
+   ]
+  },
+  {
+   "map": "WaveFunctions_TrigWalkingPath_p2",
+   "spine": false,
+   "spawn": [
+    0,
+    0
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": [
+    1,
+    2
+   ]
+  },
+  {
+   "map": "WaveFunctions_TrigWalkingPath_p3",
+   "spine": false,
+   "spawn": [
+    0,
+    0
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": [
+    1,
+    2
+   ]
+  },
+  {
+   "map": "Wavefunctions_Colors",
+   "spine": false,
+   "spawn": [
+    0,
+    0
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": [
+    1,
+    1
+   ]
+  },
+  {
+   "map": "Workstation_distribution_sampler",
+   "spine": false,
+   "spawn": [
+    14,
+    8
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "World_Konigsberg_Bridge",
+   "spine": false,
+   "spawn": [
+    36,
+    28
+   ],
+   "structure": "0",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "mg_subdivide_mirror",
+   "spine": false,
+   "spawn": [
+    1,
+    1
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": [
+    1,
+    5
+   ]
+  },
+  {
+   "map": "mg_zelda_dense",
+   "spine": false,
+   "spawn": [
+    1,
+    1
+   ],
+   "structure": "4",
+   "wall_height": 2,
+   "nearest_walkable": [
+    2,
+    2
+   ]
+  },
+  {
+   "map": "mg_zelda_overworld",
+   "spine": false,
+   "spawn": [
+    1,
+    1
+   ],
+   "structure": "4",
+   "wall_height": 2,
+   "nearest_walkable": [
+    2,
+    2
+   ]
+  },
+  {
+   "map": "mg_zelda_with_specimen",
+   "spine": false,
+   "spawn": [
+    1,
+    1
+   ],
+   "structure": "4",
+   "wall_height": 2,
+   "nearest_walkable": [
+    2,
+    2
+   ]
+  },
+  {
+   "map": "research_substrate_array_filled_on_soane",
+   "spine": false,
+   "spawn": [
+    1,
+    1
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "research_substrate_array_stride_on_soane",
+   "spine": false,
+   "spawn": [
+    1,
+    1
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": [
+    0,
+    1
+   ]
+  },
+  {
+   "map": "research_substrate_perimeter_of_mass_on_soane",
+   "spine": false,
+   "spawn": [
+    1,
+    1
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": [
+    0,
+    1
+   ]
+  },
+  {
+   "map": "research_substrate_walkable_floor_on_soane",
+   "spine": false,
+   "spawn": [
+    1,
+    1
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  },
+  {
+   "map": "research_substrate_walkable_floor_on_walled",
+   "spine": false,
+   "spawn": [
+    1,
+    1
+   ],
+   "structure": "2",
+   "wall_height": 2,
+   "nearest_walkable": null
+  }
+ ]
+}
