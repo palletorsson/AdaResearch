@@ -148,7 +148,10 @@ def read_room(name: str, role: str = "primary") -> dict:
                 if t and t not in ruled:
                     ruled.append(t)
     else:
-        ruled = list(((roles_doc.get("order") or {}).get(name) or {}).get(role) or [])
+        # a note rides on the thread as "#note-N" — it is not an artifact and must
+        # not be counted as a ruled primary (it inflated Effect_Sound to 7 of 5)
+        ruled = [t for t in (((roles_doc.get("order") or {}).get(name) or {}).get(role) or [])
+                 if not str(t).startswith("#")]
         ruled_source = "order" if ruled else ""
         if not ruled:
             # NO EXPLICIT ORDER. The role set still tells us which artifacts are

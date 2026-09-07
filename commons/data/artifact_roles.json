@@ -294,7 +294,27 @@
    "dark_sphere": "decoration"
   },
   "WaveFunctions_Effect_Sound": {
-   "dark_sphere": "decoration"
+   "dark_sphere": "decoration",
+   "BigPipeSystem": "secondary",
+   "pick_up_cube": "decoration",
+   "AudioContr": "secondary",
+   "GlassRack": "decoration",
+   "RackSineBasic": "primary",
+   "cable_builder": "secondary",
+   "VRAudioMonitor": "primary",
+   "DualBallFMController": "secondary",
+   "Rack303Acid": "secondary",
+   "rack_room": "decoration",
+   "RackMoogBass": "secondary",
+   "RackDX7Piano": "secondary",
+   "audio_catalog_tablet": "secondary",
+   "wave_interference_3d": "secondary",
+   "harmonic_distance_table": "primary",
+   "chord_tension_spring": "primary",
+   "timbre_sculptor": "primary",
+   "lab_table": "decoration",
+   "MarioSoundController": "secondary",
+   "MelodyChaser3D": "secondary"
   },
   "Wavefunctions_Bernini": {
    "dark_sphere": "decoration"
@@ -892,6 +912,15 @@
     "sorting_algorithm_race",
     "bar_array_bubble_sort"
    ]
+  },
+  "WaveFunctions_Effect_Sound": {
+   "primary": [
+    "RackSineBasic",
+    "timbre_sculptor",
+    "chord_tension_spring",
+    "harmonic_distance_table",
+    "VRAudioMonitor"
+   ]
   }
  },
  "notes": {
@@ -1052,6 +1081,13 @@
     "id": "note-1",
     "role": "primary",
     "text": "THE OVERTURE (Palle, 2026-09-07). This hall keeps row_3_x, column_3_z, grid_2d_4x4 and grid_3d_4x4x4 even though each now has its own room in the revived array_tutorial ladder. That is the point: you see the whole ladder standing at once before you climb it, and the seven rooms after take one rung each. The duplication is the argument, not debt from the 2026-08-24 fold."
+   }
+  ],
+  "WaveFunctions_Effect_Sound": [
+   {
+    "id": "note-1",
+    "role": "primary",
+    "text": "The pivot from waves you see to waves you hear, and it is a BENCH: a working audio laboratory whose own intent.md names ten key artifacts. The thread through it is five — hear a pure wave (RackSineBasic), shape it (timbre_sculptor), hear two at once and feel the tension (chord_tension_spring), measure that tension as a number (harmonic_distance_table), and see what you heard (VRAudioMonitor). The three genre racks — 303 Acid, Moog Bass, DX7 Piano — say the first rung again in three voices, which is what a bench is for; the controllers, the cable builder and the Mario presets are the plumbing. Cut 2026-09-07: catalyst_vent and catalyst_prompter_box, a foe encounter left behind when the catalyst chambers left the spine on 2026-09-02, plus mario_test_sound_ui and interactable_demo, a test and a demo standing in a curriculum room."
    }
   ]
  },
