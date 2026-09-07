@@ -124,6 +124,45 @@ func _init() -> void:
 			print("       camera at the origin, not the cross")
 			fails += 1
 
+	# 5. IS THERE ANYTHING TO STAND ON? (2026-09-07, Palle: "Does the death scene
+	#    need a floor collider or is the player dropped below the floor?")
+	#
+	#    _build_hill makes a PlaneMesh on a MeshInstance3D — a picture of ground,
+	#    with no body and no shape. base.tscn:168 mounts an XRToolsPlayerBody under
+	#    the rig, and that applies gravity. A mesh is not a floor.
+	var shapes := 0
+	var stack2: Array[Node] = []
+	stack2.append(staged)
+	while not stack2.is_empty():
+		var n: Node = stack2.pop_back()
+		if n is CollisionShape3D and (n.get_parent() is StaticBody3D):
+			shapes += 1
+		for c in n.get_children():
+			stack2.append(c)
+	print("")
+	print("static colliders under the staged death scene: %d (need >= 1)" % shapes)
+	if shapes < 1:
+		print("  FAIL nothing to stand on. base.tscn:168 mounts an XRToolsPlayerBody")
+		print("       under the rig and it applies gravity, so a headset visitor")
+		print("       arrives at their own grave and falls through it.")
+		fails += 1
+
+	var rig := staged.get_node_or_null("XROrigin3D") as Node3D
+	if rig != null:
+		var y0: float = rig.global_position.y
+		for i in range(90):                     # ~1.5 s of physics
+			await physics_frame
+		var drop: float = y0 - rig.global_position.y
+		# INFORMATIONAL ONLY, and that is the honest label. XRToolsPlayerBody
+		# needs a tracked rig, so gravity does not run headless: this printed
+		# 0.00 m with ZERO floor colliders under the scene and would have gone
+		# green over exactly the bug it looks like it is testing. The assertion
+		# lives on the collider count above, which headless CAN see.
+		print("the rig fell %.2f m in 1.5 s — informational: gravity needs a" % drop)
+		print("  tracked rig, so headless cannot fail on this and does not try")
+	else:
+		print("  (no XROrigin3D to drop — cannot measure)")
+
 	print("")
 	print("PROBE OK" if fails == 0 else "PROBE FAILED (%d)" % fails)
 	quit(fails)

@@ -75,6 +75,32 @@ func _build_hill() -> void:
 	hill.material_override = mat
 	add_child(hill)
 
+	# A MESH IS NOT A FLOOR (2026-09-07, Palle: "Does the death scene need a floor
+	# collider or is the player dropped below the floor?").
+	#
+	# It did not have one. The hill was a PlaneMesh on a MeshInstance3D — a
+	# picture of ground — and the ONLY collider this scene built was the continue
+	# button's Area3D. base.tscn:168 mounts an XRToolsPlayerBody under the rig,
+	# which applies gravity, so in a headset the visitor arrives at their own
+	# grave and falls through it.
+	#
+	# It never showed up in testing because gravity is the one thing that does NOT
+	# run headless: XRToolsPlayerBody needs a tracked rig, so a desktop probe
+	# measures a 0.00 m drop and reports a floor that is not there. The collider
+	# is the fact worth asserting, not the fall.
+	#
+	# WorldBoundaryShape3D, not a box: an infinite half-space costs one plane, and
+	# a visitor who walks past the 40 m mesh edge should still be standing on
+	# something rather than discovering the edge of the world at their own funeral.
+	var ground := StaticBody3D.new()
+	ground.name = "HillBody"
+	var gshape := CollisionShape3D.new()
+	var plane_shape := WorldBoundaryShape3D.new()
+	plane_shape.plane = Plane(Vector3.UP, 0.0)
+	gshape.shape = plane_shape
+	ground.add_child(gshape)
+	add_child(ground)
+
 
 func _build_cross() -> void:
 	# Vertical beam
