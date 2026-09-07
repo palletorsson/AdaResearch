@@ -66,11 +66,18 @@
     ]
    },
    {
+    "name": "pattern",
+    "phase": "F_order",
+    "qfep_role": "Foundation - colour systems become composition systems, on an index the arrays supply: address, then attribute, then rule, then the made thing",
+    "lab_post": null,
+    "order": 5
+   },
+   {
     "name": "change",
     "phase": "F_order",
     "qfep_role": "Foundation - the calculus substrate. Derivative as instantaneous rate, integral as accumulation, vector field as flow. The vocabulary forces / wavefunctions / randomness / noise will all use.",
     "lab_post": "Lab/map_data_post_change",
-    "order": 5,
+    "order": 6,
     "description": "New sequence (2026-05-13) addressing the calculus shadow named in the math-density sieve. Sits between color (4) and forces (5). Status: scaffolded — maps and artifacts as placeholders; build follows.",
     "introduces_affordance": "sustain"
    },
@@ -79,12 +86,12 @@
     "phase": "oscillation",
     "qfep_role": "Newton's laws - vectors become physics",
     "lab_post": "Lab/map_data_post_forces",
-    "order": 6
+    "order": 7
    },
    {
     "name": "formfinding",
     "phase": "F_order",
-    "order": 7,
+    "order": 8,
     "description": "The variational principle — form as the minimum of a functional. Sequence #24, inserted 2026-07-07 after forces (dynamics) and before wavefunctions: forces move things, form-finding is where they come to REST. Cast entirely from the pre-existing gradient-descent / minimal-surface / energy-landscape families.",
     "qfep_role": "Foundation - the F term made physical; free-energy minimization as the shape matter settles into, stopping short of the dead-perfect bottom"
    },
@@ -93,28 +100,28 @@
     "phase": "oscillation",
     "qfep_role": "F ↔ E oscillation - sine creates curves",
     "lab_post": "Lab/map_data_post_wavefunctions",
-    "order": 8
+    "order": 9
    },
    {
     "name": "randomness",
     "phase": "E_entropy",
     "qfep_role": "Disorder as creative force",
     "lab_post": "Lab/map_data_post_random",
-    "order": 9
+    "order": 10
    },
    {
     "name": "noise",
     "phase": "E_entropy",
     "qfep_role": "Structured randomness - Perlin, flow fields",
     "lab_post": "Lab/map_data_post_noise",
-    "order": 10
+    "order": 11
    },
    {
     "name": "cellularautomata",
     "phase": "lambda_edge",
     "qfep_role": "Simple rules → complex behavior. Rule 110 is Turing complete — the λ_edge thesis.",
     "lab_post": "Lab/map_data_post_cellularautomata",
-    "order": 11,
+    "order": 12,
     "note": "Moved from E_entropy to λ_edge in 2026-05-13 sieve. CA's truth (local rules producing global pattern) is the λ_edge claim's clearest statement."
    },
    {
@@ -122,28 +129,28 @@
     "phase": "lambda_edge",
     "qfep_role": "Self-similarity, infinite detail",
     "lab_post": "Lab/map_data_post_fractals",
-    "order": 12
+    "order": 13
    },
    {
     "name": "lsystems",
     "phase": "lambda_edge",
     "qfep_role": "Generative grammars",
     "lab_post": "Lab/map_data_post_lsystems",
-    "order": 13
+    "order": 14
    },
    {
     "name": "proceduralgeneration",
     "phase": "lambda_edge",
     "qfep_role": "WFC, Markov, emergence from rules",
     "lab_post": "Lab/map_data_post_proceduralgeneration",
-    "order": 14
+    "order": 15
    },
    {
     "name": "softbodies",
     "phase": "integration",
     "qfep_role": "Deformable matter, cloth, fluid + Turing morphogenesis. Cloth descends an energy landscape under gravity + spring constraints.",
     "lab_post": "Lab/map_data_post_softbodies",
-    "order": 15,
+    "order": 16,
     "note": "Absorbed morphogenesis (2 maps). Turing's reaction-diffusion as soft matter finding form. 2026-05-13: shifted from 13 to 14; swarm moved earlier into λ_edge."
    },
    {
@@ -151,7 +158,7 @@
     "phase": "F_order",
     "qfep_role": "Implicit fields → explicit surfaces. Marching cubes as the bridge from continuous fields to walkable mesh.",
     "lab_post": "Lab/map_data_post_isosurfaces",
-    "order": 16,
+    "order": 17,
     "note": "2026-05-13: moved from λ_edge order 12.5 to F_order order 4.6. Geometric construction at depth — no entropy term. Pairs with boolean_surfaces as advanced F_order."
    },
    {
@@ -159,7 +166,7 @@
     "phase": "F_order",
     "qfep_role": "CSG operations as composition logic — union, intersection, difference of solids.",
     "lab_post": "Lab/map_data_post_boolean_surfaces",
-    "order": 17,
+    "order": 18,
     "note": "2026-05-13: moved from λ_edge order 12.7 to F_order order 4.7. CSG is pure geometric algebra; F_order is its home."
    },
    {
@@ -167,7 +174,7 @@
     "phase": "lambda_edge",
     "qfep_role": "Collective behavior, stigmergy — local rules + memory of rules → emergent global pattern. Swarm's qfep_term is self-declared λ.",
     "lab_post": "Lab/map_data_post_swarmintelligence",
-    "order": 18,
+    "order": 19,
     "note": "2026-05-13: moved from integration order 14 to λ_edge order 13. Sequence self-declares qfep_term=λ. Joins CA, fractals, lsystems, procgen as 5th color of the edge."
    },
    {
@@ -175,14 +182,14 @@
     "phase": "integration",
     "qfep_role": "Learning systems, neural networks",
     "lab_post": "Lab/map_data_post_machinelearning",
-    "order": 19
+    "order": 20
    },
    {
     "name": "graphtheory",
     "phase": "relation",
     "qfep_role": "Connections define structure. The substrate that was always under it all — every cell, force, agent, neuron was a node; every adjacency, attraction, message, weight was an edge.",
     "lab_post": "Lab/map_data_post_graphtheory",
-    "order": 20,
+    "order": 21,
     "description": "Graph structures and algorithms",
     "note": "2026-05-13: moved from integration order 19 (terminal) to relation hinge order 16, between integration and synthesis. Repositioned as retroactive substrate recognition — the player meets graphs after seeing every prior system was secretly a graph."
    },
@@ -191,7 +198,7 @@
     "phase": "synthesis",
     "qfep_role": "Gödel, Russell - limits of formal systems",
     "lab_post": "Lab/map_data_post_foundationscrisis",
-    "order": 21,
+    "order": 22,
     "note": "2026-05-13: shifted from 16 to 17 after graphtheory moved up to 16."
    },
    {
@@ -199,7 +206,7 @@
     "phase": "synthesis",
     "qfep_role": "The complete QFEP formula embodied",
     "lab_post": "Lab/map_data_post_qfeplaboratory",
-    "order": 22,
+    "order": 23,
     "note": "2026-05-13: shifted from 17 to 18."
    },
    {
@@ -207,7 +214,7 @@
     "phase": "synthesis",
     "qfep_role": "Applied limits — bias, rhizomes, molecular design as post-crisis practice",
     "lab_post": "Lab/map_data_post_foundationscrisis",
-    "order": 23,
+    "order": 24,
     "note": "2026-05-13: shifted from 18 to 19 — now spine-terminal. Collects real maps from deferred sequences (criticalalgorithms, speculativecomputation, advancedlaboratory). 5 of 8 maps still SCAFFOLD-only; phase 2 build queued."
    }
   ]
