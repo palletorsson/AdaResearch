@@ -19,9 +19,7 @@
    "maps": [
     "Array",
     "Tutorial_Single",
-    "Tutorial_Row",
     "Tutorial_2D_Build",
-    "Tutorial_3D",
     "Tutorial_Pattern",
     "Array_Patterns",
     "Tutorial_Disco"
@@ -147,9 +145,11 @@
    "retired_into": "color",
    "retired_reason": "Folded into Color and Composition. Measured before retiring: 27 of its 35 artifacts already stood in color, its maps sorted onto three of the ladder's rungs (Tutorial_Single -> unit, Array/Row/2D_Build/3D -> index, Tutorial_Pattern/Array_Patterns -> rule), and the spine itself already called it 'the grid, indexing, addressable repetition'. The Array map lives on as color's index room. Five artifacts existed NOWHERE else and were rehomed first — grid_2d_4x4 into Array (the index room had no 2d at all), pattern_tile_plate into Pattern_Foundry, grid_model and standalone_disco into Color_Context_Placed, step_sequencer into the Markov chains. The eight remaining maps keep their files.",
    "deferred_maps": [
-    "Chamber_Arrays"
+    "Chamber_Arrays",
+    "Tutorial_3D",
+    "Tutorial_Row"
    ],
-   "deferred_reason": "2026-09-07, Palle, answering the Array brief on /spine-brief: 'revive array_tutorial with all nine maps ... Tutorial_Disco yes. Chamber_Arrays no.' The sequence was dissolved into color on 2026-08-24 as its index rung; Array is taken back out of color and the ladder is re-listed in Palle's order, which is dimensional - single, row, 2D, 3D - then pattern, then disco. Chamber_Arrays is the only one not revived: it is a catalyst chamber, not a rung of the ladder. || THE OVERTURE, 2026-09-07 (Palle: 'Array keeps the four rungs as an overture'). Array holds row_3_x, column_3_z, grid_2d_4x4 and grid_3d_4x4x4 although Tutorial_Row, Tutorial_2D_Build and Tutorial_3D now each own one of them. Deliberate: the first hall shows the whole ladder standing at once, and the seven after it take one rung each and make it walkable. Do not 'de-duplicate' this."
+   "deferred_reason": "2026-09-07, Palle, answering the Array brief on /spine-brief: 'revive array_tutorial with all nine maps ... Tutorial_Disco yes. Chamber_Arrays no.' The sequence was dissolved into color on 2026-08-24 as its index rung; Array is taken back out of color and the ladder is re-listed in Palle's order, which is dimensional - single, row, 2D, 3D - then pattern, then disco. Chamber_Arrays is the only one not revived: it is a catalyst chamber, not a rung of the ladder. || THE OVERTURE, 2026-09-07 (Palle: 'Array keeps the four rungs as an overture'). Array holds row_3_x, column_3_z, grid_2d_4x4 and grid_3d_4x4x4 although Tutorial_Row, Tutorial_2D_Build and Tutorial_3D now each own one of them. Deliberate: the first hall shows the whole ladder standing at once, and the seven after it take one rung each and make it walkable. Do not 'de-duplicate' this. || THE SUBSETS LEAVE, 2026-09-07 (Palle: 'but these are the artifact on array map so they should not be in the sequence'). Measured: Tutorial_Row holds 3 artifacts and Tutorial_3D holds 6, and EVERY ONE of them already stands in Array. Neither room holds a single thing the overture does not. Once Array is ruled the overture that shows the whole ladder at once, a room that is a strict subset of it is the overture seen twice, not a rung — so both leave the walk. They keep their map files. Tutorial_2D_Build is NOT dropped: it owns gridagent, the only object in the ladder that writes into an array without you."
   }
  },
  "world_phase": "grid",

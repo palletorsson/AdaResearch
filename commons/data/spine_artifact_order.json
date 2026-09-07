@@ -1,16 +1,16 @@
 {
  "_meta": {
-  "generated": "2026-09-07 17:54:19",
+  "generated": "2026-09-07 19:58:21",
   "generator": "tools/build_spine_artifact_order.py",
   "rule": "first appearance walking the spine: sequence order -> map order -> the room's thread (ruled, else floor, else file)",
   "sequences": 23,
-  "maps_read": 193,
+  "maps_read": 191,
   "maps_missing": 0,
   "artifacts": 923,
   "ordered_by": {
-   "ruled": 92,
-   "floor": 795,
-   "file": 36
+   "ruled": 102,
+   "floor": 786,
+   "file": 35
   },
   "primary": 62,
   "unruled": 693
@@ -1067,77 +1067,77 @@
    "sequence": "array_tutorial",
    "map": "Array",
    "role": "unruled",
-   "by": "floor"
-  },
-  {
-   "lookup": "column_3_z",
-   "sequence": "array_tutorial",
-   "map": "Array",
-   "role": "unruled",
-   "by": "floor"
-  },
-  {
-   "lookup": "grid_2d_4x4",
-   "sequence": "array_tutorial",
-   "map": "Array",
-   "role": "unruled",
-   "by": "floor"
+   "by": "ruled"
   },
   {
    "lookup": "xyz_coordinates",
    "sequence": "array_tutorial",
    "map": "Array",
    "role": "unruled",
-   "by": "floor"
+   "by": "ruled"
   },
   {
-   "lookup": "grid_3d_4x4x4",
+   "lookup": "column_3_z",
    "sequence": "array_tutorial",
    "map": "Array",
    "role": "unruled",
-   "by": "floor"
+   "by": "ruled"
+  },
+  {
+   "lookup": "grid_2d_4x4",
+   "sequence": "array_tutorial",
+   "map": "Array",
+   "role": "unruled",
+   "by": "ruled"
   },
   {
    "lookup": "pulsar_visualizer",
    "sequence": "array_tutorial",
    "map": "Array",
    "role": "unruled",
-   "by": "floor"
+   "by": "ruled"
   },
   {
-   "lookup": "sorting_algorithm_race",
+   "lookup": "grid_3d_4x4x4",
    "sequence": "array_tutorial",
    "map": "Array",
    "role": "unruled",
-   "by": "floor"
+   "by": "ruled"
   },
   {
    "lookup": "grid3d",
    "sequence": "array_tutorial",
    "map": "Array",
    "role": "unruled",
-   "by": "floor"
+   "by": "ruled"
   },
   {
    "lookup": "bar_array",
    "sequence": "array_tutorial",
    "map": "Array",
    "role": "unruled",
-   "by": "floor"
+   "by": "ruled"
+  },
+  {
+   "lookup": "sorting_algorithm_race",
+   "sequence": "array_tutorial",
+   "map": "Array",
+   "role": "unruled",
+   "by": "ruled"
   },
   {
    "lookup": "bar_array_bubble_sort",
    "sequence": "array_tutorial",
    "map": "Array",
    "role": "unruled",
-   "by": "floor"
+   "by": "ruled"
   },
   {
    "lookup": "gridagent",
    "sequence": "array_tutorial",
    "map": "Tutorial_2D_Build",
    "role": "unruled",
-   "by": "file"
+   "by": "floor"
   },
   {
    "lookup": "grid_model",
@@ -1203,13 +1203,6 @@
    "by": "floor"
   },
   {
-   "lookup": "vr_tile_editor_mirror",
-   "sequence": "array_tutorial",
-   "map": "Array_Patterns",
-   "role": "unruled",
-   "by": "floor"
-  },
-  {
    "lookup": "pattern_tile_4x4",
    "sequence": "array_tutorial",
    "map": "Array_Patterns",
@@ -1217,7 +1210,7 @@
    "by": "floor"
   },
   {
-   "lookup": "tiling_demo",
+   "lookup": "vr_tile_editor_mirror",
    "sequence": "array_tutorial",
    "map": "Array_Patterns",
    "role": "unruled",
@@ -1225,6 +1218,13 @@
   },
   {
    "lookup": "pattern_tunnel_machine",
+   "sequence": "array_tutorial",
+   "map": "Array_Patterns",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "tiling_demo",
    "sequence": "array_tutorial",
    "map": "Array_Patterns",
    "role": "unruled",

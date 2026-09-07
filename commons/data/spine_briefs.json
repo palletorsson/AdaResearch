@@ -1056,27 +1056,11 @@
    "certainty": "high",
    "at": "2026-09-07T18:49:02"
   },
-  "Tutorial_Row": {
-   "for": "Adds the first index, and it is the only room in the ladder whose floor is the same shape as the array standing in it: a corridor one cell wide, six cells long, holding a four-cube array.",
-   "core": "artifacts",
-   "claim": "The room called Row has no row in it — it places column_3_z at (1,2), four pickup cubes running along +Z (algorithms/arrays/column_3_z.gd:56, `for i in range(4)` despite the 3 in the name), down a corridor whose only floor is x=1, z=1..6 — while row_3_x, the sibling that runs along X, is stranded in Tutorial_Single's utilities layer. The map cannot decide either: map_info.description says \"Y-axis column navigation\", the title says \"Linear Array Traversal\", and documentation.objective says \"row traversal\".",
-   "unsure": "Six floor cells is the entire walkable room (20 walls, 36 blank strings, one void) and I cannot tell whether that is deliberate minimalism or an unfinished map; the one void cell is (1,7), directly past the last floor cell, and t sits in it — so with no teleport the corridor ends in a hole. Both reference artifacts stand on height-2 wall cells outside the lane (dark_sphere at (2,4), xyz_coordinates at (2,7)), and column_3_z is placed bare, so its notation axis runs at `label` when its own source offers `plate` — \"an index is an ADDRESS belonging to the SLOT. Pick the cube up and the address stays behind\" — which is the distinction this rung claims to teach and is one token away. critical.md describes a floor rig that constrains lateral movement, a live wall counter, and a `cell = row[i]` code panel; none of the three is placed.",
-   "certainty": "high",
-   "at": "2026-09-07T18:49:02"
-  },
   "Tutorial_2D_Build": {
    "for": "Adds the second index, and brings the ladder's only agent — the first thing that writes into an array without you. Every rung before this moved a body; this one is supposed to move a cursor.",
    "core": "artifacts",
    "claim": "The room already contains a walkable 4x4 — sixteen floor cells at x=1-4, z=5-8 — and the only thing standing in it is the dark sphere, while grid_2d_4x4, the artifact the room is named for, is at (2,11) on a height-2 block the pathfinder reports unreachable; and gridagent:copy, the one object in the whole ladder that writes into the map's own 2D array (grid_agent_base.gd:296 _operation_copy -> GridOperations.copy_cube_adjacent), stands at (1,21), inside three rows that are 100% void.",
    "unsure": "xyz_coordinates at (7,22) is in that void tail too, pulsar_visualizer at (3,17) is also unreachable, and Palle has already ruled pulsar_visualizer moves to a new data-arrays map — but it is this pearl's hero in commons/data/book/array_tutorial.json, so the move leaves the pearl headless. Rule 3 says the teleport at (6,18) is not reachable from spawn by walking, so the room did not exit even before the no-teleport ruling; and nothing on the floor decomposes an address into `index // width` and `index % width`, which the sequence JSON names as this ladder's arithmetic. I could not settle whether the 8x23 corridor with its wp:90 at (5,1) and tc:2:y:auto at (6,10) is meant to be the room, or whether the 4x4 at z=5-8 is and the corridor is approach.",
-   "certainty": "high",
-   "at": "2026-09-07T18:49:03"
-  },
-  "Tutorial_3D": {
-   "for": "Adds the third index. It is also, without saying so anywhere, the rung where the sorting wing opens — the first room in the ladder that does something to an array rather than addressing one.",
-   "core": "artifacts",
-   "claim": "The third dimension is entirely inside the artifact and nowhere in the floor: grid_3d_4x4x4 at (1,2) builds a solid 64-cube block you reach into rather than walk (`for x,y,z in range(4)`, spacing 1.0), while the map's 27 floor cells are all at height 1, exactly six cells stand above them ((0,1),(0,2) at h2; (0,3),(2,1),(3,1),(4,1) at h3), and there is not one `l` platform lift in the utilities layer — though documentation.key_elements promises \"Series of platform lifts `l` wrapping the north and west edges\" and the blurb says \"Lifts carry the body upward through layers of the same array\".",
-   "unsure": "Four placed and reachable artifacts are named in no text file at all — sorting_algorithm_race (5,3), bar_array (3,4), grid3d (3,5), bar_array_bubble_sort (3,6) — while intent.md's Key artifacts lists only grid_3d_4x4x4 and dark_sphere; three of those four are 1D bar sorts standing in the room that adds the third index. All six of this room's tokens are already placed in Array (position 1), whose answered brief calls that basin \"four sorts racing, which is what the addresses were for\" — so I cannot tell whether this rung is meant to extend the fold or is a duplicate of its last basin. xyz_coordinates drops out of the ladder exactly here, having stood in Single, Row and 2D_Build, at the rung where a third letter first matters; and critical.md describes three sliders, a highlight cube, a partially transparent volume and a `cell = grid[x][y][z]` wall panel, none of which exists.",
    "certainty": "high",
    "at": "2026-09-07T18:49:03"
   },
