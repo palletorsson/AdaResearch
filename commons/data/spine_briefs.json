@@ -6,7 +6,9 @@
    "claim": "A launch is the one vector in this chapter you cannot revise: `linear_velocity = aim * power` decides the whole flight at t=0 and gravity does the rest, and the room argues it by putting the player in the basket four separate times — human_catapult (3,15), slingshot_launcher (3,20), force_pad (28,16), return_launcher (9,11) — none of which the tutorial mentions.",
    "unsure": "Four things I could not settle. (1) NO LIVE DOOR LEADS INTO THIS ROOM. Grepping every map_data.json, the only teleporters pointing at VFM_05_Launch are in VFM_01_Foundations and VFM_04_Fields, both on the deferred list. It has an exit (t:VFM_03_Motion at (32,12)) and no entrance. If the walk is the truth, this room is currently unreachable and the final.md is writing about a hall nobody arrives in. (2) Its own prose points three ways at once: tutorial ends \"Next: Springs\" (VFM_06, deferred), map_info.description says \"leads to the Springs hall\", and the door goes to VFM_03_Motion since today's restore (commit 15184a30b). (3) The book pearl for `vfm 05 launch` still holds 30 lines including all 14 tokens cleared back to VFM_03 this morning (normal_force_demo, bouncing_ball, friction_ramp, newton_cradle, collision_crasher, vector_drone, trajectory_artifact, the NOC examples) — so the pearl I'd draw quotes from describes the pre-restore room. Same lag in the roles note (\"Thirty-one placements\", and it names friction_ramp as the one to move, which already left) and in artifacts.md (\"13 artifacts\"; it holds 17). (4) I half-disagree with the dossier's evidence line calling circle_train \"one stray to cut\": centripetal force is rung 4, yes, but it is the only artifact in the room where the force never stops acting, which is the exact contrast the launch arc needs. Keep or cut is Palle's. No critical.md.",
    "certainty": "high",
-   "at": "2026-09-07T17:04:58"
+   "at": "2026-09-07T17:04:58",
+   "comment": "Here we can rearrange the map, I imagine an open space where the lunch squares are placed in the map so we can jump over fire or up on higher levels, the beach is to the side as examples. Get me? ",
+   "commented_at": "2026-09-07T17:08:57"
   },
   "VFM_03_Motion": {
    "for": "The bench that pulls the state apart from the force. Restored to the walk today because Launch was doing two jobs; it is the only room where position, velocity and acceleration stand as three separate instruments instead of arriving fused inside one arc.",
@@ -1026,14 +1028,6 @@
    "certainty": "medium",
    "at": "2026-09-07T17:04:59"
   },
-  "PRIM_RhizomeWorld": {
-   "for": "The chapter's only world-scale room, and the one where its method stops working. Every earlier room builds up from things you can count — a point, two points and a distance, three points closing an area, a cube assembled from its net — and this body's 620,242 triangles were marched out of one signed-distance field with nobody placing a single one. It is also the first primitive that is the landscape rather than an object standing on a floor, which leaves the 0.30 x 1.80 m capsule you walked in on as the only unit in the room.",
-   "core": "artifacts",
-   "claim": "Making the body four times bigger costs nothing — 620,242 triangles at x1, x2 and x4, measured, because it was scaled as a node and not re-marched — and it is safe only because the player did not scale with it: every clearance derived for a 0.30 x 1.80 m capsule can only get more generous, so the arithmetic runs in this direction and would need doing again in the other.",
-   "unsure": "THE SOURCES. This room has blurb.md and map_data.json and nothing else — no intent.md, no tutorial.md, no critical.md, no pearl in commons/data/book/primitives.json, no beat in primitives.beats.json, and the red-thread essay does not mention it. The whole feature is untracked in git (commons/maps/PRIM_RhizomeWorld/, commons/artifacts/radial_inside/, commons/artifacts/registry/rhizome_architecture.json all show ??). So the CONTENT above is well-founded — the blurb states it and ada_run/rhizome_world_probe.txt measures it (35.9 / 71.9 / 143.7 m across, 620242 triangles at all three, collider-to-mesh ratio 1.000, capsule enters through the mouth at all three) — but what the room is FOR IN THE SEQUENCE is my guess, and nobody has written it down.\n\nTHE PLACEMENT, which is the thing I most want ruled. Primitives_Melencolia/final.md already ends the chapter: 'The next chapter is transformation, which is the one thing this chapter never did: it moves.' PRIM_RhizomeWorld is listed after it in primitives.json's maps array. The sequence now has two endings and the second one is silent. Is this a coda after the close, does it belong earlier (it has no assembly in it, so it does not sit comfortably before Melencolia's roll-call of every tool in the chapter), or does Melencolia's last paragraph move here?\n\nWHICH BODY IS MET FIRST. The blurb opens 'It is the same body as the one in the isosurfaces chapter', but primitives is spine order 1 and isosurfaces is 15. A walker meets the 143.7 m giant fourteen sequences before ISO_RhizomeBody explains the equation that made it. If that is deliberate — landscape first, arithmetic later — the blurb's first sentence is written for a book reader and lies to a walker, and I would rewrite it. If it is not deliberate, this room is in the wrong chapter. I lean deliberate and I am not confident.\n\nNOTHING FORCES YOU IN. The utility layer is two cells: spawn at row 8 / col 103 and the teleporter at row 5 / col 5 — both near the same edge of the 110 x 110 plain, about 98 m apart, with the artifact anchored at row 75 / col 45. I did not measure the body's actual footprint on the floor, so I cannot say whether it stands between them, but on the grid alone the exit looks reachable without ever finding the mouth. map_info calls the walk 'Walk around it, find the mouth, walk through it', which reads as optional discovery — intended, or a missing gate?\n\nSmall one: the registry's _collision note says 199 chunks; the probe counts 219 shapes at every scale.",
-   "certainty": "low",
-   "at": "2026-09-07T17:04:59"
-  },
   "FormFinding_Forge": {
    "for": "The chapter's exam, not its conclusion — the only room where your own hands have to produce a resting state. It re-runs the first hall's three lines on a bench you can read step by step (gradient_descent_optimizer, whose tutorial says outright \"the same three lines as the first map's marble\"), then hands you eight blocks and asks you to make a system stop. Annealing already delivered the closing turn; this room is where the player finds out whether they can do it.",
    "core": "relation",
@@ -1052,7 +1046,7 @@
   }
  },
  "_meta": {
-  "written": "2026-09-07T17:04:59",
+  "written": "2026-09-07T17:08:57",
   "writer": "tools/spine_brief.py",
   "note": "A brief is written by Claude and answered by Palle. `comment` is Palle's and is never overwritten by a rebuild."
  }

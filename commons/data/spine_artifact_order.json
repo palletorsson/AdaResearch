@@ -1,19 +1,19 @@
 {
  "_meta": {
-  "generated": "2026-09-07 15:57:55",
+  "generated": "2026-09-07 17:16:51",
   "generator": "tools/build_spine_artifact_order.py",
   "rule": "first appearance walking the spine: sequence order -> map order -> the room's thread (ruled, else floor, else file)",
   "sequences": 22,
-  "maps_read": 187,
+  "maps_read": 186,
   "maps_missing": 0,
-  "artifacts": 919,
+  "artifacts": 918,
   "ordered_by": {
    "ruled": 92,
-   "floor": 792,
+   "floor": 791,
    "file": 35
   },
   "primary": 62,
-  "unruled": 690
+  "unruled": 689
  },
  "order": [
   {
@@ -850,13 +850,6 @@
    "sequence": "primitives",
    "map": "Primitives_Melencolia",
    "role": "secondary",
-   "by": "floor"
-  },
-  {
-   "lookup": "rhizome_world",
-   "sequence": "primitives",
-   "map": "PRIM_RhizomeWorld",
-   "role": "unruled",
    "by": "floor"
   },
   {
