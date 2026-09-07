@@ -2866,11 +2866,34 @@ func _plain_hands() -> void:
 	var removed: int = 0
 	var origins: Array = []
 	_collect_of_type(get_tree().get_root(), "XROrigin3D", origins)
+	var kept_health: int = 0
 	for o in origins:
 		for nm in tools:
 			for n in (o as Node).find_children(String(nm), "", true, false):
+				# THE HEALTH READOUT STAYS (2026-09-07, Palle: "Can we also have a
+				# minimal health display in the VR hub?").
+				#
+				# There was nothing to build: WristStatsDisplay already draws a
+				# heart, a bar and a percentage off GameManager.health_updated, and
+				# base.tscn already mounts it on the right wrist. The museum was
+				# simply deleting it along with the other three wrist tools — so
+				# the visitor walked a building full of hazards with no way to see
+				# what they were costing.
+				#
+				# MINIMAL means minimal: the map name and the XP line come off, so
+				# the wrist carries the one number a hazard can change and nothing
+				# else. The other three tools still go, which is the point of plain
+				# hands — a visitor's hand, not a lab technician's.
+				if String(nm) == "WristStatsDisplay":
+					(n as Node).set("show_map_name", false)
+					(n as Node).set("show_xp", false)
+					(n as Node).set("show_health", true)
+					kept_health += 1
+					continue
 				(n as Node).queue_free()
 				removed += 1
+	if kept_health > 0:
+		print("[endless_museum] plain hands: %d health readout(s) kept on the wrist" % kept_health)
 	var mgr: Node = get_node_or_null("/root/CatalystCapabilityManager")
 	if mgr != null and mgr.has_method("is_bracelet_activated") and bool(mgr.call("is_bracelet_activated")) 			and mgr.has_method("end_lease_now"):
 		mgr.call("end_lease_now")
@@ -7056,10 +7079,30 @@ func walker_bitten(from: Vector3) -> void:
 		away.y = 0.0
 		if away.length() > 0.001:
 			_player.position += away.normalized() * 1.1
-	print("[em-crab] bite %d/3" % _bite_n)
-	if _bite_n >= 3:
-		_bite_n = 0
-		on_lethal_touch("crab", from)
+	# A BITE IS DAMAGE NOW, NOT A TALLY (2026-09-07, Palle: "The death sequence
+	# should be connected with the player health game manager").
+	#
+	# This counted to three and then killed, which worked but was invisible: the
+	# visitor had no way to know they were on their second bite, and the wrist
+	# read 100% right up to the moment the screen went dark. The count stays as
+	# the FEEL — a third of the bar per bite is the same three-bite death — but it
+	# is spent through the health bar, so the number on the wrist is the truth and
+	# GameManager's own death sequence is what ends it.
+	#
+	# apply_bite_damage, not apply_health_damage: the latter routes museum damage
+	# straight back here for the flash, and calling it from inside would be a loop.
+	var gm: Node = get_node_or_null("/root/GameManager")
+	if gm != null and gm.has_method("apply_bite_damage"):
+		var bite: float = float(gm.get("max_player_health")) / 3.0
+		gm.call("apply_bite_damage", bite)
+		print("[em-crab] bite %d — %.0f damage, health %.0f" % [
+			_bite_n, bite, float(gm.get("player_health"))])
+	else:
+		# no GameManager (a probe, a stripped boot): the old tally still ends it
+		print("[em-crab] bite %d/3 (no GameManager — counting)" % _bite_n)
+		if _bite_n >= 3:
+			_bite_n = 0
+			on_lethal_touch("crab", from)
 
 
 ## A VEIL AT THE EYE: the headset's flash. A canvas overlay never reaches a
@@ -7099,6 +7142,48 @@ func _vr_veil(color: Color, alpha: float, seconds: float) -> void:
 ## a laser calls it through the em_lethal group.
 func on_lethal_touch(kind: String, _at: Vector3 = Vector3.ZERO) -> void:
 	_museum_death(kind)
+
+
+## TRUE while a death is on its way to the death scene, so death_scene knows to
+## come back here instead of to the lab. A static, for the same reason open_at is
+## one: it has to survive the scene change that is about to happen.
+static var return_after_death: bool = false
+
+
+## WHERE THE VISITOR IS STANDING, handed over before the museum is unloaded
+## (2026-09-07, Palle: "The death sequence should be connected with the player
+## health game manager and should go to the death scene then click to reload back
+## to the same map").
+##
+## The museum reopens through the same door the menu uses — open_at() sets the
+## statics, staging loads the scene, and _first_chapter/start_map are read on the
+## way in. So "the same map" costs no new machinery: it is the chapter and map
+## metas the segment is already carrying, read off the segment the eye is in.
+##
+## Returns false when it cannot name a hall — a courtyard, a freed segment, a
+## death during the boot. The caller must then NOT promise a return, because
+## sending someone back to the museum's front door after dying at hall 140 is
+## worse than the lab: it silently undoes the whole walk.
+func death_handover() -> bool:
+	# _eye_pos(), not a hand-rolled VR/desktop branch. The first version of this
+	# wrote its own and would have drifted from the one _save_point_now already
+	# uses — which carries the lesson in its own comment: in the headset the
+	# WALKER is furniture and its z never changes, so reading the body instead of
+	# the eye resolved every death to the first hall however far you had walked.
+	# One helper, one answer.
+	var eye_z: float = _eye_pos().z
+	var hall: Dictionary = _hall_at_z(eye_z)
+	var node: Node3D = _node_or_null(hall.get("node")) if not hall.is_empty() else null
+	if node == null or not node.has_meta("em_chapter"):
+		push_warning("[em-death] no hall under the eye at z %.1f — not promising a return" % eye_z)
+		return false
+	var ch := String(node.get_meta("em_chapter"))
+	var mp := String(node.get_meta("em_map")) if node.has_meta("em_map") else ""
+	open_at(ch, mp)
+	return_after_death = true
+	print("[em-death] handover: the death scene, then back to %s%s" % [
+		ch, (" / " + mp) if mp != "" else " (its first pearl)"])
+	return true
 
 
 ## WHERE THE RIG MUST STAND so the HEADSET lands on `target` (2026-08-25,

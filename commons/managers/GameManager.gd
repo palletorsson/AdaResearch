@@ -390,6 +390,21 @@ func _play_damage_beep() -> void:
 ## a museum stands in the tree, damage is a BITE — its own lane, its own death,
 ## back to a save point in the hall you died in, and the walk continues. With no
 ## museum in the tree nothing below changes by a line, which is every grid map.
+## THE MUSEUM'S OWN BITE, spent on the health bar (2026-09-07).
+##
+## Separate from apply_health_damage for one reason: that function routes museum
+## damage BACK to walker_bitten for the flash and the shove, so a bite calling it
+## would be a loop. This is the same road with that branch skipped — everything
+## below the museum check, reached directly.
+func apply_bite_damage(amount: float) -> void:
+	if amount <= 0.0:
+		return
+	var death_fx = get_node_or_null("/root/DeathEffect")
+	if death_fx and death_fx.has_method("is_immune") and death_fx.is_immune():
+		return
+	set_health(player_health - amount)
+
+
 func apply_health_damage(amount: float) -> void:
 	if amount <= 0.0:
 		return
@@ -470,12 +485,34 @@ func _handle_player_death() -> void:
 	# back first — set_health raises it, so no second death fires — because a
 	# museum visitor has no health bar to speak of and leaving it at zero would
 	# mean the next hit compares against zero and never reports a death again.
+	# ── AND THEN PALLE RULED THE OTHER WAY (2026-09-07) ──────────────────
+	# "The death sequence should be connected with the player health game manager
+	# and should go to the death scene then click to reload back to the same map."
+	#
+	# The note above is kept because its diagnosis is still true — a bare
+	# reload_current_scene() under XR staging tears the whole rig down, which is
+	# why dying went dark. What was wrong was the REMEDY: swallowing the death
+	# inside the museum meant health never reached zero for real, there was no
+	# death scene, and no moment where the visitor chooses to go again.
+	#
+	# So the museum no longer eats its death. It is asked where the visitor is
+	# standing, that hall is remembered, and the ORDINARY sequence runs from here
+	# — DeathEffect, then the death scene, then continue. death_scene sends us
+	# back to that same hall through the door the menu uses.
+	#
+	# ONLY IF IT CAN NAME THE HALL. death_handover returns false during a boot or
+	# over a courtyard, and a false promise is worse than the lab: reopening at
+	# the museum's front door after a death at hall 140 silently undoes the walk.
 	if is_inside_tree():
 		var museum: Node = get_tree().get_first_node_in_group("em_lethal")
-		if museum != null and museum.has_method("on_lethal_touch"):
-			set_health(max_player_health)
-			museum.call("on_lethal_touch", "fell")
-			return
+		if museum != null and museum.has_method("death_handover"):
+			if not bool(museum.call("death_handover")):
+				# no hall to come back to — the museum's own lane is still the
+				# least-bad answer, and it keeps the visitor in the building
+				if museum.has_method("on_lethal_touch"):
+					set_health(max_player_health)
+					museum.call("on_lethal_touch", "fell")
+					return
 
 	var death_position: Vector3 = _get_player_death_position()
 	emit_signal("player_died", death_position)
@@ -501,12 +538,35 @@ func _handle_player_death() -> void:
 func _on_death_effect_done() -> void:
 	_death_sequence_running = false
 	reset_level_state()  # Restore health to full
-	# Go to death scene (cross on hill, "You Died", continue → lab)
+	# Go to death scene (cross on hill, "You Died", continue → back where you were)
 	var death_scene_path := "res://commons/scenes/death_scene.tscn"
-	if ResourceLoader.exists(death_scene_path):
-		get_tree().change_scene_to_file(death_scene_path)
-	else:
+	if not ResourceLoader.exists(death_scene_path):
 		_reload_scene()
+		return
+	# THROUGH STAGING WHERE THERE IS STAGING. change_scene_to_file swaps the
+	# tree's current_scene, which under XR Tools is the STAGING scene — the rig
+	# itself — so the headset loses its hands and its camera on the way to a
+	# gravestone. staging.load_scene swaps only what is loaded INTO the rig,
+	# which is what every other transition in this project uses.
+	var staging: Node = _find_staging_node()
+	if staging != null and staging.has_method("load_scene"):
+		staging.call("load_scene", death_scene_path)
+		return
+	get_tree().change_scene_to_file(death_scene_path)
+
+
+## The XRToolsStaging in the tree, or null on a plain desktop boot.
+func _find_staging_node() -> Node:
+	if not is_inside_tree():
+		return null
+	var stack: Array[Node] = [get_tree().get_root()]
+	while not stack.is_empty():
+		var n: Node = stack.pop_back()
+		if n is XRToolsStaging:
+			return n
+		for c in n.get_children():
+			stack.append(c)
+	return null
 
 func _run_death_sequence(death_position: Vector3) -> void:
 	# out-of-tree guard: get_tree() is null once a map is torn down

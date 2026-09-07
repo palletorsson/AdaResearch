@@ -200,13 +200,47 @@ func _build_light() -> void:
 	add_child(light)
 
 
+## PRELOAD, not class_name: endless_museum.gd declares none, and MainMenu3D
+## reaches it the same way for the same reason.
+const MUSEUM = preload("res://commons/scenes/endless_museum.gd")
+const MUSEUM_SCENE := "res://commons/scenes/endless_museum_staged.tscn"
+const MUSEUM_FALLBACK_SCENE := "res://commons/scenes/endless_museum.tscn"
+
+
 func _on_continue() -> void:
 	if _continue_pressed:
 		return
 	_continue_pressed = true
+
+	# BACK TO THE HALL YOU DIED IN (2026-09-07, Palle: "click to reload back to
+	# the same map"). The museum set these statics on its way out; open_at is the
+	# same handover the main menu uses, so there is one door into the building and
+	# the death scene is not a second implementation of it.
+	if MUSEUM.return_after_death:
+		MUSEUM.return_after_death = false          # spent — a later death re-arms it
+		var staging := _find_staging()
+		if staging != null:
+			print("[death-scene] back into the museum at %s" % MUSEUM.menu_chapter)
+			staging.load_scene(MUSEUM_SCENE)
+			return
+		# No staging is a dev boot of this scene on its own. The plain museum
+		# scene reads the same statics, so the return still lands.
+		push_warning("[death-scene] no XRToolsStaging — returning to the museum without it")
+		get_tree().change_scene_to_file(MUSEUM_FALLBACK_SCENE)
+		return
+
 	# Return to lab/main menu
 	var scene_mgr = get_node_or_null("/root/SceneManager")
 	if scene_mgr and scene_mgr.has_method("go_to_lab"):
 		scene_mgr.go_to_lab()
 	else:
 		get_tree().change_scene_to_file("res://commons/scenes/lab.tscn")
+
+
+func _find_staging() -> XRToolsStaging:
+	var n: Node = self
+	while n != null:
+		if n is XRToolsStaging:
+			return n as XRToolsStaging
+		n = n.get_parent()
+	return null
