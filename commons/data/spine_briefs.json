@@ -1,0 +1,35 @@
+{
+ "briefs": {
+  "VFM_05_Launch": {
+   "for": "The throwing bench: what a vector does once you let go of it, from release to landing. Until 2026-09-07 it was doing two jobs, carrying 31 artifacts because the motion gallery had been folded into it.",
+   "core": "artifacts",
+   "claim": "A launch is the last moment you have any say; everything after it was decided at the instant of release.",
+   "unsure": "Whether to write it at all before the artifacts move. The two ruled openers stand at row 0, twelve rows off the west-east corridor you actually walk, while ruled #5 human_catapult is three cells from the spawn (tau -0.33). Writing now means writing around a layout we have agreed is wrong.",
+   "certainty": "medium",
+   "at": "2026-09-07T16:40:51"
+  },
+  "VFM_03_Motion": {
+   "for": "Velocity, acceleration and the contact forces that shape a real motion. The taxonomy pairs friction_ramp with normal_force_demo deliberately, because friction is proportional to the normal force and that pairing outranks the rung boundary.",
+   "core": "artifacts",
+   "claim": "Acceleration is not something that happens to a moving object; it is the only thing that ever happens, and velocity is the bookkeeping.",
+   "unsure": "It carries order:{} — roles but no ruled order — so its thread is a floor default. And nothing points into it: the forces doors skip it entirely.",
+   "certainty": "high",
+   "at": "2026-09-07T16:40:52"
+  },
+  "VFM_08_Arena": {
+   "for": "The exam. The taxonomy says F = ma is stated and met here rather than read at the front door: newtons_laws and example_2_1_forces_vr were moved in beside collision_carts and momentum_cradle so the third law is playable.",
+   "core": "relation",
+   "claim": "You cannot be told the third law; you can only be handed something that pushes back.",
+   "unsure": "Whether 'the exam' is Palle's framing or one inherited from the taxonomy note, and whether an exam room should argue at all or just set problems.",
+   "certainty": "low",
+   "at": "2026-09-07T16:40:52",
+   "comment": "",
+   "commented_at": "2026-09-07T16:42:16"
+  }
+ },
+ "_meta": {
+  "written": "2026-09-07T16:42:16",
+  "writer": "tools/spine_brief.py",
+  "note": "A brief is written by Claude and answered by Palle. `comment` is Palle's and is never overwritten by a rebuild."
+ }
+}
