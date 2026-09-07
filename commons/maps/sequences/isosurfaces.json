@@ -33,7 +33,8 @@
 	"ISO_CaveGeneration: Cave Generation",
 	"ISO_AnimatedNoise: Animated Noise",
 	"ISO_Metaballs: Metaballs",
-    "ISO_ImplicitModeling: Implicit Modeling"
+	"ISO_ImplicitModeling: Implicit Modeling",
+			"ISO_RhizomeBody: Rhizome Body"
    ],
    "maps": [
 	"ISO_Introduction",
@@ -47,7 +48,8 @@
 	"ISO_CaveGeneration",
 	"ISO_AnimatedNoise",
 	"ISO_Metaballs",
-    "ISO_ImplicitModeling"
+	"ISO_ImplicitModeling",
+			"ISO_RhizomeBody"
    ],
    "algorithm_sources": {
 	"ISO_Marching_Cubes": {
@@ -93,7 +95,7 @@
 	"ProceduralGenerationMarchingCubesInsideCave",
 	"ProceduralGenerationMarchingcubesTorusSculpture",
 	"ProceduralGenerationMarchingCubesVovelNoise",
-    "ProceduralGeneration_MarchingGallery",
+	"ProceduralGeneration_MarchingGallery",
    	"Chamber_Isosurfaces"
    ],
    "deferred_reason": {

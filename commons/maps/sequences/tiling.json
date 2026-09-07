@@ -1,7 +1,7 @@
 {
  "sequences": {
-  "pattern": {
-   "name": "Pattern and Symmetry",
+  "tiling": {
+   "name": "Tiling and Symmetry",
    "truth": "A pattern is a rule you can walk around. Repetition is not decoration — it is a claim that the same thing can happen again, and symmetry is the bookkeeping of which repetitions are the same one.",
    "description": "What survives being repeated. A tile carries a rule; a wall carries the tile; the seventeen wallpaper groups are every way a plane can repeat without contradicting itself. Addressing (array_tutorial) says where a thing goes and colour says what is worth putting there; this sequence is what happens when you do it again.",
    "layer": "F_order",
@@ -23,7 +23,7 @@
    "lab_map": "Lab/map_data_post_color",
    "deferred_maps": [],
    "deferred_reason": "THE UNBRAIDING, 2026-09-07 (Palle). colour was carrying two threads: a COLOUR thread (Nails, Pillar, Walls, Context_Placed) and a PATTERN thread (Pattern_Foundry, Symmetry_Seventeen), diagnosed by the red-thread pass on 2026-09-03 — 'three of the seven rooms contain no colour argument at all'. The pattern rooms leave for a sequence of their own, joined by Tutorial_Pattern and Array_Patterns from array_tutorial. Evidence they are one sequence: pattern_tile_mirror stands in all four, pattern_tile_4x4 in two, pattern_maker_station in two, vr_tile_editor in two. colour's stated truth — 'context, not wavelength' — now applies to every room in colour.",
-   "notes": "Born 2026-09-07 out of colour and array_tutorial. It partly undoes the 2026-08-24 fold that dissolved symmetry into colour's census room — stated as a reversal, not smuggled. NOT named for shaders: there are zero .gdshader files under commons/shaders and two shader-named tokens in the registry, and a sequence should not be named for work that does not exist yet."
+   "notes": "Born 2026-09-07 out of colour and array_tutorial. It partly undoes the 2026-08-24 fold that dissolved symmetry into colour's census room — stated as a reversal, not smuggled. NOT named for shaders: there are zero .gdshader files under commons/shaders and two shader-named tokens in the registry, and a sequence should not be named for work that does not exist yet. RENAMED 2026-09-07 from `pattern` to `tiling` at Palle's instruction, to keep it distinct from patterngeneration — 'Shaders & Patterns: The Book of Shaders', 25 maps, which stays OUT of the spine for now. Every artifact in these four rooms is a tile, loom, mill or wallpaper piece, and the sequence ends on the seventeen wallpaper groups, which is the classification of plane tilings. `tiling` names what is built; `patterngeneration` names what is designed."
   }
  },
  "world_phase": "grid",

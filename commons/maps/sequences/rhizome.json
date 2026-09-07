@@ -1,0 +1,19 @@
+{
+	"_readme": "A TEST SEQUENCE, and it exists for one reason: discoverability. Both of these maps are also listed in their curriculum sequences (PRIM_RhizomeWorld in primitives, ISO_RhizomeBody in isosurfaces), where they are the LAST row of ONE OF EIGHTY sequence groups, and DesktopMapSwitcherOverlay collapses every group by default (last_collapsed_sequences.get(name, true)). They were there and could not be found. Listing them here as their own short group is the fix. NOTE on the double listing: MapProgressionManager synthesises a map's prerequisites from its position in a sequence and writes map_metadata last-wins, so a map in two sequences gets whichever prerequisite the later-loaded file gives it. That is harmless here — is_map_unlocked() is read only by WorldMapDataProvider for the world-map display, and enforce_progression is never read at all, so nothing refuses to LOAD a locked map. If that ever changes, this double listing becomes ambiguous and one of the two should go.",
+	"sequences": {
+		"rhizome": {
+			"name": "Rhizome (test)",
+			"description": "Hollow bodies grown as signed-distance fields and walked from the inside. The walkable void is the solid's own interior, so the plan is a graph rather than a corridor.",
+			"difficulty": "advanced",
+			"estimated_time": "15-25 minutes",
+			"maps": [
+				"PRIM_RhizomeWorld",
+				"ISO_RhizomeBody"
+			],
+			"content": [
+				"PRIM_RhizomeWorld: Rhizome World - the same body at 4x, 143.7 m across, walked from the outside in",
+				"ISO_RhizomeBody: Rhizome Body - 8 chambers, 10 passages, cycle rank 3, at human scale"
+			]
+		}
+	}
+}

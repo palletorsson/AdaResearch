@@ -1,6 +1,6 @@
 {
  "_meta": {
-  "generated": "2026-09-07 20:37:00",
+  "generated": "2026-09-07 20:42:09",
   "generator": "tools/build_spine_artifact_order.py",
   "rule": "first appearance walking the spine: sequence order -> map order -> the room's thread (ruled, else floor, else file)",
   "sequences": 24,
@@ -1456,224 +1456,224 @@
   },
   {
    "lookup": "pattern_mill",
-   "sequence": "pattern",
+   "sequence": "tiling",
    "map": "Pattern_Foundry",
    "role": "unruled",
    "by": "floor"
   },
   {
    "lookup": "pattern_tile_plate",
-   "sequence": "pattern",
+   "sequence": "tiling",
    "map": "Pattern_Foundry",
    "role": "unruled",
    "by": "floor"
   },
   {
    "lookup": "pattern_maker_station",
-   "sequence": "pattern",
+   "sequence": "tiling",
    "map": "Pattern_Foundry",
    "role": "unruled",
    "by": "floor"
   },
   {
    "lookup": "pattern_machine_c",
-   "sequence": "pattern",
+   "sequence": "tiling",
    "map": "Pattern_Foundry",
    "role": "unruled",
    "by": "floor"
   },
   {
    "lookup": "pattern_tile_mirror",
-   "sequence": "pattern",
+   "sequence": "tiling",
    "map": "Pattern_Foundry",
    "role": "unruled",
    "by": "floor"
   },
   {
    "lookup": "pattern_tile_4x4",
-   "sequence": "pattern",
+   "sequence": "tiling",
    "map": "Pattern_Foundry",
    "role": "unruled",
    "by": "floor"
   },
   {
    "lookup": "pattern_tile_herringbone",
-   "sequence": "pattern",
+   "sequence": "tiling",
    "map": "Pattern_Foundry",
    "role": "unruled",
    "by": "floor"
   },
   {
    "lookup": "pattern_machine_a",
-   "sequence": "pattern",
+   "sequence": "tiling",
    "map": "Pattern_Foundry",
    "role": "unruled",
    "by": "floor"
   },
   {
    "lookup": "pattern_studio_plate",
-   "sequence": "pattern",
+   "sequence": "tiling",
    "map": "Pattern_Foundry",
    "role": "unruled",
    "by": "floor"
   },
   {
    "lookup": "pattern_tile_brick",
-   "sequence": "pattern",
+   "sequence": "tiling",
    "map": "Pattern_Foundry",
    "role": "unruled",
    "by": "floor"
   },
   {
    "lookup": "pattern_machine_d",
-   "sequence": "pattern",
+   "sequence": "tiling",
    "map": "Pattern_Foundry",
    "role": "unruled",
    "by": "floor"
   },
   {
    "lookup": "tiling_demo",
-   "sequence": "pattern",
+   "sequence": "tiling",
    "map": "Pattern_Foundry",
    "role": "unruled",
    "by": "floor"
   },
   {
    "lookup": "pattern_tile_puzzle",
-   "sequence": "pattern",
+   "sequence": "tiling",
    "map": "Tutorial_Pattern",
    "role": "unruled",
    "by": "floor"
   },
   {
    "lookup": "panel_bridge_loom",
-   "sequence": "pattern",
+   "sequence": "tiling",
    "map": "Tutorial_Pattern",
    "role": "unruled",
    "by": "floor"
   },
   {
    "lookup": "pulsar_compact",
-   "sequence": "pattern",
+   "sequence": "tiling",
    "map": "Tutorial_Pattern",
    "role": "unruled",
    "by": "floor"
   },
   {
    "lookup": "script_runner",
-   "sequence": "pattern",
+   "sequence": "tiling",
    "map": "Tutorial_Pattern",
    "role": "secondary",
    "by": "floor"
   },
   {
    "lookup": "vr_tile_editor_mirror",
-   "sequence": "pattern",
+   "sequence": "tiling",
    "map": "Array_Patterns",
    "role": "unruled",
    "by": "floor"
   },
   {
    "lookup": "pattern_tunnel_machine",
-   "sequence": "pattern",
+   "sequence": "tiling",
    "map": "Array_Patterns",
    "role": "unruled",
    "by": "floor"
   },
   {
    "lookup": "facade_grammar_demo",
-   "sequence": "pattern",
+   "sequence": "tiling",
    "map": "Array_Patterns",
    "role": "unruled",
    "by": "floor"
   },
   {
    "lookup": "mill_escher_p4g",
-   "sequence": "pattern",
+   "sequence": "tiling",
    "map": "Symmetry_Seventeen",
    "role": "unruled",
    "by": "floor"
   },
   {
    "lookup": "mill_alhambra_p6m",
-   "sequence": "pattern",
+   "sequence": "tiling",
    "map": "Symmetry_Seventeen",
    "role": "unruled",
    "by": "floor"
   },
   {
    "lookup": "loom_alhambra_p6m",
-   "sequence": "pattern",
+   "sequence": "tiling",
    "map": "Symmetry_Seventeen",
    "role": "unruled",
    "by": "floor"
   },
   {
    "lookup": "pattern_loom",
-   "sequence": "pattern",
+   "sequence": "tiling",
    "map": "Symmetry_Seventeen",
    "role": "unruled",
    "by": "floor"
   },
   {
    "lookup": "wall_pattern_gallery",
-   "sequence": "pattern",
+   "sequence": "tiling",
    "map": "Symmetry_Seventeen",
    "role": "unruled",
    "by": "floor"
   },
   {
    "lookup": "wallpaper_cage",
-   "sequence": "pattern",
+   "sequence": "tiling",
    "map": "Symmetry_Seventeen",
    "role": "unruled",
    "by": "floor"
   },
   {
    "lookup": "loom_escher_mirror",
-   "sequence": "pattern",
+   "sequence": "tiling",
    "map": "Symmetry_Seventeen",
    "role": "unruled",
    "by": "floor"
   },
   {
    "lookup": "vr_tile_editor",
-   "sequence": "pattern",
+   "sequence": "tiling",
    "map": "Symmetry_Seventeen",
    "role": "unruled",
    "by": "floor"
   },
   {
    "lookup": "mill_persian_p4",
-   "sequence": "pattern",
+   "sequence": "tiling",
    "map": "Symmetry_Seventeen",
    "role": "unruled",
    "by": "floor"
   },
   {
    "lookup": "pattern_atlas_gallery",
-   "sequence": "pattern",
+   "sequence": "tiling",
    "map": "Symmetry_Seventeen",
    "role": "unruled",
    "by": "floor"
   },
   {
    "lookup": "pattern_artifact",
-   "sequence": "pattern",
+   "sequence": "tiling",
    "map": "Symmetry_Seventeen",
    "role": "unruled",
    "by": "floor"
   },
   {
    "lookup": "tile_meander_floor",
-   "sequence": "pattern",
+   "sequence": "tiling",
    "map": "Symmetry_Seventeen",
    "role": "unruled",
    "by": "floor"
   },
   {
    "lookup": "kaleidoscope",
-   "sequence": "pattern",
+   "sequence": "tiling",
    "map": "Symmetry_Seventeen",
    "role": "unruled",
    "by": "floor"
