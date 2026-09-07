@@ -48,7 +48,7 @@ if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
-from map_pathfinder import MapGraph, load_map  # noqa: E402
+from map_pathfinder import MapGraph, load_map, check_rules  # noqa: E402
 
 ROLES = ROOT / "commons" / "data" / "artifact_roles.json"
 
@@ -184,6 +184,24 @@ def read_room(name: str, role: str = "primary") -> dict:
     floor_i = {t: i for i, t in enumerate(order)}
     ruled_i = {t: i for i, t in enumerate(common)}
 
+    # REACHABILITY IS THE PATHFINDER'S RULE, NOT THIS TOOL'S. The greedy walk here
+    # floods MapGraph.walkable and meets an artifact from any adjacent walkable
+    # cell — which ignores the HEIGHT STEP, so it called all five of
+    # Tutorial_Single's artifacts reachable while map_pathfinder's Rule 4 warned
+    # that three of them stand on h=2 blocks nothing can step onto. Rule 4 owns
+    # this question; ask it rather than guess. (Its warnings print coordinates as
+    # (col,row); everything here is (row,col).)
+    stranded = set()
+    try:
+        for issue in check_rules(graph) or []:
+            s = str(issue.get("message", issue))
+            if "unreachable" in s.lower():
+                for tok in at:
+                    if ("'%s'" % tok) in s or ('"%s"' % tok) in s:
+                        stranded.add(tok)
+    except Exception:
+        stranded = set()
+
     subs = data.get("subtitles") or {}
     captions = []
     for z, row in enumerate(utils):
@@ -223,11 +241,12 @@ def read_room(name: str, role: str = "primary") -> dict:
         "ruled": common,
         "floor": order,
         "path": [list(c) for c in path],
-        "unreached": unreached,
+        "unreached": sorted(set(unreached) | stranded),
         "artifacts": [{
             "token": t, "row": at[t][0], "col": at[t][1],
             "ruled": ruled_i.get(t), "floor": floor_i.get(t),
-            "reachable": t in floor_i,
+            # walked-to AND not flagged by the pathfinder's Rule 4
+            "reachable": (t in floor_i) and (t not in stranded),
         } for t in common],
         "tau": (round(tau, 3) if tau is not None else None),
         "inversions": inv,
