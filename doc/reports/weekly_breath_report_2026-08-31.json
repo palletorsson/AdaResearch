@@ -1,0 +1,262 @@
+{
+  "report": "weekly_breath_report",
+  "date": "2026-08-31",
+  "generated_at": "2026-08-31T10:40:00+02:00",
+  "generated_by": "scheduled task ada-weekly-audit (/ada-breather dry-run + release gates)",
+  "window": {
+    "from": "2026-08-24",
+    "to": "2026-08-31",
+    "breaths_in_window": 12,
+    "commits_in_window": 336,
+    "note": "12 breaths = 8 full + 4 evolve-only, 08-24T09:04 through 08-31T09:04. This audit ran at 10:24-10:40, after this morning's breath had already harvested."
+  },
+
+  "provenance": {
+    "head_at_read": "62772f1d5",
+    "head_subject": "breathe: gate K 10 -> 4 dishonest closures, and a detector for 62 placements that stand on nothing",
+    "tree_at_read": "295 dirty / 419 untracked",
+    "verdict_scope": "WORKING TREE, not HEAD. Every number below was measured live at 10:24-10:40. Nothing is carried from a prior ledger except where explicitly labelled as such.",
+    "live_writer": "prop-012 applies. Two Godot processes were alive during this audit (PIDs 17072, 33928) -- verified by tasklist, not assumed. This is the direct cause of gate F's verdict; see release_gates.gate_F.",
+    "comparison_baseline": "doc/reports/weekly_breath_report_2026-08-24.json, plus improvement_trajectory.json at commits 4c71ce868 (08-24, the last snapshot before the window) and 74260e955 (08-26, the last COMMITTED snapshot inside it). The working-tree trajectory carries this morning's uncommitted harvest."
+  },
+
+  "baseline_measured_today": {
+    "pipeline": {
+      "global_avg": 6.091,
+      "derivation": "(21*6 + 8)/22 = 134/22",
+      "sequences_scored": 22,
+      "complete": 1,
+      "complete_which": "randomness",
+      "at_stage_6_vr_testing": 21,
+      "exit_code": 0,
+      "piped": false
+    },
+    "heat_map_top_5": [
+      {"temp": 65, "item": "museum", "reason": "active (1 recent commit)"},
+      {"temp": 65, "item": "encyclopedia", "reason": "active (1 recent commit)"},
+      {"temp": 60, "item": "sequence_pipeline_scorer", "reason": "deep discovery: stage 6 (vr_testing) ceiling"},
+      {"temp": 60, "item": "gate chain integrity", "reason": "deep discovery: a gate that only checks what it invokes"},
+      {"temp": 60, "item": "placement", "reason": "deep discovery: map_info.dimensions"}
+    ],
+    "heat_map_note": "Nothing at 90+. Peak temperature fell 80 -> 65 across the window. No blocked or broken item is registering on the heat map, which is itself worth noting given that two release gates are red.",
+    "garden_health": {
+      "artifacts_total": 4963,
+      "voiced": 3744,
+      "voice_coverage_pct": 75,
+      "embodiment_rate_pct": 24,
+      "phantom_limbs": 2188
+    },
+    "release_gates": {
+      "overall": "FAIL",
+      "enabled_passing": "9/11",
+      "total_gates": 11,
+      "all_gates_enabled": true,
+      "gates": {
+        "A_sequence_contract": "PASS",
+        "B_artifact_registry_integrity": "PASS",
+        "C_map_validation": "PASS",
+        "D_lab_progression_continuity": "PASS",
+        "E_museum_template_integrity": "PASS",
+        "F_museum_walkthrough": "FAIL",
+        "G_map_token_resolution": "PASS",
+        "H_gate_chain_integrity": "PASS",
+        "I_edge_anchors": "PASS",
+        "J_artifact_citations": "PASS",
+        "K_wants_closed_honestly": "FAIL"
+      },
+      "detail": {
+        "A": {"missing_declared_maps": 0, "duplicate_entries_within_sequence": 0, "undeclared_map_folders": 1807},
+        "B": {"unresolved_scene_files": 0, "missing_scene_path": 0, "missing_map_ready": 124},
+        "C": {"grade_A": 2265, "grade_B": 360, "grade_C": 168, "grade_F": 0},
+        "D": {"lost_count": 0, "changed_count": 12, "total_issues": 39},
+        "E": {"failing_templates": 0, "chain_pairs_pass": 900, "chain_pairs_total": 900},
+        "F": {"museums": -1, "z_reached": -1.0, "goal_z": -1.0, "reason": "contended_builder", "exit_code": 3},
+        "G": {"detector_selftest": "PASS", "maps_scanned": 231, "placements": 1323, "unresolved_placements": 0, "malformed_empty_cells": 0},
+        "H": {"tools_referenced": 51, "absent_on_disk": "none", "present_but_untracked": "none", "unreachable_from_a_clone": 0},
+        "I": {"detector_selftest": "PASS", "edges": 269, "held": 264, "near": 5, "lost": 0, "ungrounded": 0},
+        "J": {"citations": 219, "held": 212, "near": 4, "lost": 0, "elsewhere": 3, "no_such_work": 0},
+        "K": {"detector_selftest": "PASS", "token_lines": 833, "closed_dishonestly": 4, "ghost": 0, "echo": 4, "no_registry": 0, "broken_body": 0, "hero_ghost": 0}
+      },
+      "gate_F_qualification": "UNMEASURABLE, NOT FAILED. Every metric reads -1 and the reason is `contended_builder` -- the autopilot refuses a contended builder by design. Two Godot processes were confirmed alive at the moment of the run. This is the third consecutive week gate F has produced a verdict about the machine rather than the museum. The remedy is scheduling (serialise the run on a quiet machine), not repair, and it has not been done.",
+      "gate_K_note": "4 dishonest closures, all of kind `echo`, down from 10 at this morning's breath. K is now the ONLY red gate with a software handle."
+    }
+  },
+
+  "sequences_improved": {
+    "count": 1,
+    "list": [
+      {
+        "sequence": "color",
+        "movement": "stage 2 -> stage 6",
+        "date": "2026-08-25",
+        "cause": "The map `Array` (renamed from Color_Arrays at 5cb5a03d1) had map_data.json and neither blurb.md nor intent.md. Both were written. This is the first positive delta in the ledger produced by writing prose.",
+        "correction": "The 08-25 breath recorded this as 2 -> 8 COMPLETE (+0.273). It was corrected on 08-26 to 2 -> 6 (+0.182). color's stage 6 had passed on an unanchored substring: the map `Array` matched the letters 'array' inside a six-month-old feedback entry about `Array_Basics` in array_tutorial -- an entry asking for THAT map to be removed. color has never been walked in a headset. The prose work was real; the COMPLETE was not."
+      }
+    ],
+    "regressed": [
+      {
+        "sequence": "forces",
+        "movement": "stage 6 -> stage 3 -> stage 6",
+        "date": "2026-08-27",
+        "cause": "Commit 471d5b04f added Forces_PropGallery with its empty interactable cells written as \"0\" instead of \" \" -- 664 phantom tokens. Caught 83 minutes later by the morning baseline and repaired the same breath. Net zero; a hole filled, not progress."
+      }
+    ],
+    "net": "One sequence advanced and held. Twenty-one of twenty-two still sit at stage 6 (vr_testing); randomness alone is COMPLETE."
+  },
+
+  "total_delta": {
+    "headline_value": 0.182,
+    "unit": "global_avg (pipeline mean, 0-8 per sequence)",
+    "start": 5.909,
+    "end": 6.091,
+    "start_basis": "2026-08-25 baseline, 130/22",
+    "end_basis": "2026-08-31 live read, 134/22",
+    "THE_DENOMINATOR_MOVED": {
+      "warning": "The naive week-over-week comparison is 6.083 (last week's report) -> 6.091 (today) = +0.008, and it is MEANINGLESS. Last week's 6.083 was 146/24; today's 6.091 is 134/22. Two sequences left the spine inside the window -- symmetry dissolved into color's census room at 15:32 on 08-24 (f3a891a09), and array_tutorial folded into color. A comparison across those two readings compares two different spines.",
+      "honest_series_at_a_fixed_22_sequence_denominator": [
+        {"date": "2026-08-25", "avg": 5.909, "kind": "baseline"},
+        {"date": "2026-08-25", "avg": 6.182, "kind": "post -- LATER CORRECTED, see sequences_improved.correction"},
+        {"date": "2026-08-26", "avg": 6.091, "kind": "corrected, and the honest value"},
+        {"date": "2026-08-26", "avg": 6.091, "kind": "evening re-read, exit 0, unpiped"},
+        {"date": "2026-08-27", "avg": 6.091},
+        {"date": "2026-08-28", "avg": 6.091},
+        {"date": "2026-08-28", "avg": 6.091},
+        {"date": "2026-08-29", "avg": 6.091},
+        {"date": "2026-08-29", "avg": 6.091},
+        {"date": "2026-08-30", "avg": 6.091},
+        {"date": "2026-08-31", "avg": 6.091}
+      ],
+      "reading": "+0.182 across the window, ALL of it landing on one day (08-25) and ALL of it one sequence (color). Since 08-26 the number has been flat at 6.091 across SIX consecutive readings and roughly 250 commits. Two of those readings were taken as three-consecutive-read modes rather than single reads."
+    },
+    "per_breath_deltas": [0.0, -0.126, 0.273, -0.091, 0.0, 0.136, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+    "per_breath_note": "Four non-zero deltas in twelve breaths. NONE of the four is a straightforward gain: -0.126 is a denominator change (symmetry leaving) plus a real regression; +0.273 is the color repair, later corrected to +0.182; -0.091 is the scorer becoming truthful about that correction; +0.136 is the recovery of three points lost to Forces_PropGallery 83 minutes earlier. The sum of the raw column is +0.192, which no fixed denominator supports."
+  },
+
+  "stall_analysis": {
+    "flagged_as_stall": false,
+    "why_not": "The 7-day rule is not met by the letter. global_avg DID improve inside the window: 5.909 -> 6.091 on 2026-08-25, +0.182, re-measured and held. A stall flag would be inaccurate for this window.",
+    "but": "The trajectory file carries stall_detected: true, and that standing flag is CORRECT as a description of the ceiling. The metric has been flat at 6.091 for six consecutive readings since 08-26.",
+    "why_it_is_flat": "21 of 22 spine sequences sit at stage 6 (vr_testing) with every earlier stage OK. Stage 6 is satisfied only by walking the maps in a headset and writing feedback through the desktop bridge. No headless breath can move it. After color there is no sequence the breather can advance without VR, and the 08-26 predicate repair means the scorer now says so accurately rather than passing sequences on substring luck.",
+    "the_near_miss_worth_repeating": "216 tracked walked.md files would move this number a long way, and every one of them opens 'ghost-drafted from the working map'. They are prose written from source, not evidence of a walk. Counting them as VR evidence was the available big win and it was the dishonest one. It was refused on 08-26 and should stay refused.",
+    "classification": "CEILING, not stall. The correct response is lever rotation (prop-008, prop-011), which the gates count demonstrates is already happening."
+  },
+
+  "skill_effectiveness_changes": {
+    "verdict": "NO CHANGE RECORDED, for the SECOND CONSECUTIVE WEEK, and the absence is still a measurement fault rather than a result.",
+    "cumulative_block_frozen": {
+      "last_recomputed": "2026-05-13T22:30",
+      "days_stale": 110,
+      "cause": "Every one of the 12 breaths in this window logs skills_used: [\"ada-breather\"] and nothing else. The breather dispatches to itself. skill_effectiveness_cumulative tracks named sub-skills (documentation_writing, identity_writing, ...) that no breath has invoked by name since May, so the block cannot move and the Evolve phase's Level 2 check -- 'skills with < 50% success rate across 5+ calls' -- has had no input for 110 days.",
+      "escalation_since_last_week": "Last week this was reported as a measurement fault. Nothing changed. It is now a repeat finding, and it means the breather's self-improvement loop has one of its two feedback channels dead."
+    },
+    "item_counts_this_window": {
+      "items_attempted": 79,
+      "items_succeeded": 128,
+      "items_failed": 1,
+      "distinct_files_changed": 40,
+      "discoveries_recorded": 59,
+      "UNCOMPUTABLE": "A success rate cannot be derived from these. items_succeeded (128) EXCEEDS items_attempted (79) because the two lists do not use the same identifiers -- succeeded entries are sub-steps, attempted entries are work items. This is exactly prop-014, filed 2026-08-01, still status `proposed`. Until it is applied the breather cannot measure its own hit rate, which is the second dead feedback channel."
+    },
+    "cooling_filter": {
+      "items_cooled": [],
+      "note": "Empty. The last two breaths (08-30, 08-31) both recorded zero failures, so no item is cooled going into the next breath."
+    }
+  },
+
+  "garden_health_comparison": {
+    "verdict": "DO NOT READ THE +4 POINTS AS ENRICHMENT WORK. The denominator moved, and it moved by more than the whole of last week's corpus.",
+    "last_week": {"artifacts_total": 2570, "voiced": 1831, "voice_pct": 71, "embodiment_pct": 30, "phantom_limbs": 1057},
+    "this_week": {"artifacts_total": 4963, "voiced": 3744, "voice_pct": 75, "embodiment_pct": 24, "phantom_limbs": 2188},
+    "the_reconciliation": "artifacts_total nearly doubled (2570 -> 4963) in seven days. That is not 2,393 new artifacts. It was MEASURED, not assumed: garden_listener.py has not been committed to since before 08-17, and commons/artifacts/registry/ went from 222 tracked JSON files at 4c71ce868 to 224 today with zero untracked additions. The corpus grew by two registry files, not by half itself.",
+    "the_cause": "A single row: `placed_museums`, carrying 2409 artifacts -- 49% of the entire total. The listener's count is PLACEMENT-scoped, not registry-scoped, so an artifact placed in many halls is counted many times, and a week of museum placement work inflates the denominator without authoring anything. The standing note 'voice metric is placement-scoped' predicted exactly this.",
+    "the_arithmetic_of_the_apparent_gain": "placed_museums is 1941/2409 = 81% voiced, well ABOVE the old project average of 71%, so folding it into the mean PULLS VOICE UP to 75% without a single @identity block being written. The same row is 374 bodies against 1941 voiced = 19% embodied, well BELOW the old 30%, so the identical arithmetic PUSHES EMBODIMENT DOWN to 24%. Both movements are one row entering the average. Neither is work.",
+    "consequence": "voice_coverage_history in improvement_trajectory.json was last appended on 2026-08-06 at 0.70. It should NOT be appended with 0.75 as though it continued that series. The two numbers are over different denominators, and appending would bake a fictitious +5 points into the ledger."
+  },
+
+  "release_gates_comparison": {
+    "last_week": {"overall": "PASS", "enabled_passing": "8/8", "gates_existing": 8},
+    "this_week": {"overall": "FAIL", "enabled_passing": "9/11", "gates_existing": 11},
+    "verdict": "THE OVERALL WENT PASS -> FAIL AND THIS IS A GAIN, NOT A REGRESSION. Three gates were added inside the window -- I (edge anchors), J (artifact citations), K (wants closed honestly). Two of the three are green. Passing count rose 8 -> 9 while the bar rose 8 -> 11. Reading 'PASS -> FAIL' as decline would be reading a denominator change as a result, which is the same error this report catches twice above.",
+    "movement_inside_the_window": [
+      {"date": "2026-08-28", "passing": "7/8"},
+      {"date": "2026-08-29", "passing": "7/8"},
+      {"date": "2026-08-30", "passing": "7/11 -> 8/11", "cause": "I and J both went from three LOST verdicts to zero. All three of I's LOST verdicts were the INSTRUMENT rather than the world -- a transliteration gap between the mathematics in the files and the ASCII a model writes when quoting it, plus ellipsis quotes matched as one span. The matcher was widened and a ten-check negative test wired in to prove it still convicts."},
+      {"date": "2026-08-31", "passing": "8/11 -> 9/11", "cause": "H green. tools/test_edge_gate.py had been written and wired into gate I as its detector_selftest and never git-added; a clone of HEAD had gate I checking edge anchors with the rule that proves the checker still bites missing entirely."}
+    ],
+    "still_red": {
+      "F": "UNMEASURABLE for the third consecutive week. `contended_builder`, all metrics -1. Two Godot processes confirmed live during this run. Needs a serialised run, not a fix.",
+      "K": "closed_dishonestly 4, all `echo`. Down from 10 this morning. The only red gate with a software handle."
+    },
+    "the_biggest_single_gate_finding_of_the_window": "On 08-30 it was found that the release-gate runner never wrote its own report. doc/reports/RELEASE_GATES.json was 81 days old, said overall_pass: true over four gates against a live 7-of-11, and it is the file the in-game dashboard renders on KEY_P. Worse, the overlay pruned its toggle set to whatever that stale report knew and wrote the result back over the TRACKED toggles file the runner reads -- so pressing P would have switched off the seven gates added since June and turned the next run green. Measured, not read: HEAD's build kept 0 of 7 toggles where the fixed build keeps 7 of 7."
+  },
+
+  "proposals_pending_review": {
+    "total": 45,
+    "by_status": {"proposed": 44, "partially_applied": 1, "applied": 0},
+    "created_in_window": 10,
+    "created_in_window_ids": ["prop-036", "prop-037", "prop-038", "prop-039", "prop-040", "prop-041", "prop-042", "prop-043", "prop-044", "prop-045"],
+    "newest": {"id": "prop-045", "created": "2026-08-29", "gist": "SKILL: clear a known-good before believing a conviction; the gate-side clause follows."},
+    "none_created": "No proposal was filed on 08-30 or 08-31 despite both breaths producing findings worth one.",
+    "THE_LEDGER_DOES_NOT_DRAIN": "Forty-five proposals, ZERO ever marked `applied`, one `partially_applied` (prop-039). Ten arrived this week. The fill rate is roughly 1.4/week and the drain rate is 0. This is now the largest untouched backlog in the project and it is compounding: prop-014 (filed 08-01) is why this report cannot compute a skill success rate, and prop-013 (filed 07-31) is why FOCUS_VECTOR's staleness went unflagged for 156 days. Unapplied proposals are not inert -- they are the reason specific measurements in this report are missing.",
+    "oldest_past_threshold": ["prop-001 (2026-04-20)", "prop-002 (2026-05-29)", "prop-003 (2026-05-31)", "prop-004 (2026-06-06)", "prop-005 (2026-06-11)", "prop-006 (2026-06-15)", "prop-008 (2026-06-28)"],
+    "explicitly_awaiting_palle": "prop-036 clause 1 is a DECISION, not a code change, and the proposal itself says it belongs to Palle."
+  },
+
+  "dry_run_work_plan": {
+    "mode": "dry-run (Baseline + Read + Evaluate only -- NOTHING WAS CHANGED)",
+    "focus": "auto-selected. FOCUS_VECTOR.current_focus.primary is 'Rebuild all primitives maps using Map Studio', updated 2026-03-28 -- 156 days stale, and primitives now scores OK on every stage below 6, so the stated goal reads as already satisfied by the scorer and selects no work. prop-013 proposed a staleness check on exactly this field on 2026-07-31 and is unapplied.",
+    "trajectory": "flat at a ceiling (6 readings at 6.091), with real movement in the gates rather than the metric",
+    "items": [
+      {
+        "rank": 1,
+        "item": "Wire tools/check_offworld_cells.py into the gate runner",
+        "temperature": "n/a -- not on the heat map, which is part of the finding",
+        "reason": "MEASURED THIS AUDIT: the detector runs, reports 62 non-empty cells across 29 maps standing on coordinates the structure grid does not have (36 past the last row, 26 past their row's edge), and EXITS 29. It is tracked, it gates by exit code, and grep finds it referenced by exactly two files: itself and breath_log.json. run_release_gates.py does not call it and RELEASE_GATES_TOGGLES.json does not list it. Gate H cannot catch this by construction -- H checks that tools REFERENCED by the runners exist and are tracked, so a detector nothing references is invisible to it. Affected placements include Tutorial_Single's only exit teleporter (t at z=18 where structure ends at row 17) and the `sp` spawn in Forces_1..4.",
+        "dispatch": "ada-breather Act (gate wiring) + ada-map-expert (the 62 cells)",
+        "expected_outcome": "A twelfth gate, red on 29 maps, and a repair queue that is not a report nobody reads."
+      },
+      {
+        "rank": 2,
+        "item": "Gate K -- 4 dishonest closures, all kind `echo`",
+        "temperature": "60 (gate chain integrity)",
+        "reason": "The only red gate with a software handle. Fell 10 -> 4 this morning, and three of the six resolved were false claims rather than tidy-ups -- the sharpest being transformation_cube's registry description saying 'rotating' about an artifact that runs a sine bob and has never rotated. The remaining 4 are the harder residue.",
+        "dispatch": "ada-breather Act (registry/want text repair)",
+        "expected_outcome": "10/11 gates green; overall still FAIL on F until F is run alone."
+      },
+      {
+        "rank": 3,
+        "item": "Run gate F alone on a quiet machine",
+        "temperature": "65 (museum)",
+        "reason": "Third consecutive week of `contended_builder`. Not a failure -- an absence of measurement. Two Godot processes were confirmed live during this run, and the standing rule is that two Godot instances make any verdict a fact about the user:// lock. Until F runs uncontended, nobody knows whether the museum walkthrough works.",
+        "dispatch": "scheduling, not repair -- serialise the run",
+        "expected_outcome": "A gate F verdict that is about the museum."
+      },
+      {
+        "rank": 4,
+        "item": "Repair the breather's two dead feedback channels",
+        "temperature": "60 (sequence_pipeline_scorer / self-measurement)",
+        "reason": "skill_effectiveness_cumulative has been frozen for 110 days because every breath logs one skill (itself), and items_succeeded/items_failed use different identifiers from items_attempted so no hit rate is computable (128 succeeded against 79 attempted). Both are second-week repeat findings. The Evolve phase's Level 2 check has had no input since May.",
+        "dispatch": "ada-breather Harvest/Evolve tooling; prop-014 is the written remedy and needs applying, not re-proposing",
+        "expected_outcome": "The skill can measure whether it is working."
+      },
+      {
+        "rank": 5,
+        "item": "Drain the proposal ledger -- or stop filling it",
+        "temperature": "n/a -- structural",
+        "reason": "45 proposals, 0 applied, +10 this week, fill 1.4/wk against drain 0. Seven are past the 3+-occurrence threshold and older than ten weeks. This is not a backlog of nice-to-haves: prop-014 and prop-013 are directly responsible for two measurements missing from this report.",
+        "dispatch": "HUMAN -- Palle, via /ada-skill-updater. prop-036 clause 1 is explicitly named as his decision.",
+        "expected_outcome": "Either a drain, or an honest cap on the ledger so the breather stops writing into a queue nobody reads."
+      }
+    ],
+    "cooled_skipping": [],
+    "cooled_note": "Cooling filter empty -- 08-30 and 08-31 both recorded zero failed items."
+  },
+
+  "recommendations": {
+    "for_the_next_breath": "Rank 1 (wire check_offworld_cells.py into the runner). It is the only item on the list that converts an existing, tracked, exit-coding detector into something a runner reads, and it closes the exact class of fault the week's other findings keep exposing: a correct verdict emitted at a severity nobody consumes.",
+    "for_palle": "The proposal ledger. Forty-five filed, none applied, and two of them are now blocking measurements in this weekly report. Either apply the seven past-threshold proposals or tell the breather to stop filing.",
+    "for_the_headset": "21 of 22 sequences are one walked map away from moving. The pipeline metric will not move again without VR, and the scorer is now honest enough to say so instead of passing on substrings."
+  },
+
+  "the_finding_that_outlasts_the_numbers": "Three of this report's four headline comparisons are denominator changes wearing the clothes of results. global_avg 6.083 -> 6.091 looks like a gain and spans two different spines (24 sequences vs 22). Voice coverage 71% -> 75% looks like enrichment and is one museum row of 2,409 placements entering a placement-scoped average at 81% voiced. Release gates 8/8 PASS -> 9/11 FAIL looks like decline and is three harder gates being added while the passing count rose. In all three cases the honest reading is the opposite of, or orthogonal to, the arithmetic. The ledger's existing discipline -- name the denominator, re-measure rather than carry -- is what made all three legible, and it caught them only because someone checked the denominator BEFORE reading the delta. The generalisation: in this project a delta with an unnamed denominator is not weak evidence, it is no evidence, and the three instruments that produce the project's headline numbers all silently change denominator under ordinary work."
+}

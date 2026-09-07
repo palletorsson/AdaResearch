@@ -1,0 +1,213 @@
+{
+  "report": "weekly_breath_report",
+  "date": "2026-08-24",
+  "generated_at": "2026-08-24T10:28:49+02:00",
+  "generated_by": "scheduled task ada-weekly-audit (/ada-breather dry-run + release gates)",
+  "window": {
+    "from": "2026-08-17",
+    "to": "2026-08-24",
+    "breaths_in_window": 12,
+    "commits_in_window": 287
+  },
+  "provenance": {
+    "head_at_read": "4c71ce868",
+    "tree_at_read": "984 dirty / 526 untracked",
+    "verdict_scope": "WORKING TREE, not HEAD. A concurrent session is authoring in this tree; every number below was measured live at 10:0x-10:28, not carried from a prior ledger.",
+    "comparison_baseline": "doc/reports/improvement_trajectory.json at commit f8e2bc262 (2026-08-14 19:02) -- the LAST COMMITTED snapshot before the 08-17 window opened. There is no 08-17 commit of this file, so the diff spans 10 days, not 7."
+  },
+
+  "baseline_measured_today": {
+    "pipeline": {
+      "global_avg": 6.083,
+      "derivation": "(23*6 + 8)/24 = 146/24",
+      "sequences_scored": 24,
+      "complete": 1,
+      "at_stage_6_vr_testing": 23,
+      "exit_code": 0,
+      "piped": false
+    },
+    "heat_map_top_5": [
+      {"temp": 80, "item": "museum", "reason": "active (12 recent commits)"},
+      {"temp": 65, "item": "floor", "reason": "active (1 recent commit)"},
+      {"temp": 60, "item": "live footprint origin reach", "reason": "deep discovery: 24 of 213 bodies"},
+      {"temp": 60, "item": "breath-ledger-tree-vs-repo", "reason": "deep discovery (CLOSED today by 4c71ce868)"},
+      {"temp": 60, "item": "gate chain integrity", "reason": "deep discovery (CLOSED today by gate H)"}
+    ],
+    "garden_health": {
+      "artifacts_total": 2570,
+      "voiced": 1831,
+      "voice_coverage_pct": 71,
+      "embodiment_rate_pct": 30,
+      "phantom_limbs": 1057,
+      "note": "voice coverage 0.70 (08-06) -> 0.71. +1 point in 18 days, earned by other sessions' work, not by a breath."
+    },
+    "release_gates": {
+      "overall": "PASS",
+      "enabled_passing": "8/8",
+      "gates": {
+        "A_sequence_contract": "PASS",
+        "B_artifact_registry_integrity": "PASS",
+        "C_map_validation": "PASS",
+        "D_lab_progression_continuity": "PASS",
+        "E_museum_template_integrity": "PASS",
+        "F_museum_walkthrough": "PASS",
+        "G_map_token_resolution": "PASS",
+        "H_gate_chain_integrity": "PASS"
+      },
+      "detail": {
+        "C": {"grade_A": 1893, "grade_B": 361, "grade_C": 173, "grade_F": 0},
+        "F": {"z_reached": 66.0, "goal_z": 66.0, "stall_events": 0, "cells_unlearned": 0, "museums": 3},
+        "G": {"maps_scanned": 268, "placements": 1522, "unresolved_placements": 0, "detector_selftest": "PASS"},
+        "H": {"tools_referenced": 46, "absent_on_disk": "none", "present_but_untracked": "none"}
+      }
+    }
+  },
+
+  "sequences_improved": {
+    "count": 0,
+    "list": [],
+    "regressed": [],
+    "detail": "No sequence changed stage across the window. 23 of 24 spine sequences sat at stage 6 (vr_testing) on 08-17 and sit at stage 6 today; randomness was COMPLETE then and is COMPLETE now. The one intra-week movement was a round trip: primitives fell stage 6 -> stage 3 on 08-22 (a single unresolved token, `floor_anchor` at r10 c6 of Point_Lines, written into the tree by the museum's em_plan pass) and returned to stage 6 on 08-23 when the token was removed. Net zero, and the excursion was a fault and its repair, not progress."
+  },
+
+  "total_delta": {
+    "value": 0.0,
+    "unit": "global_avg (pipeline mean, 0-8 per sequence)",
+    "start": 6.083,
+    "end": 6.083,
+    "per_breath_deltas": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.125, 0.125, 0.0, 0.0],
+    "sum": 0.0,
+    "note": "Two non-zero deltas in twelve breaths, equal and opposite, both about the same token."
+  },
+
+  "skill_effectiveness_changes": {
+    "verdict": "NO CHANGE RECORDED -- and the absence is a measurement fault, not a result.",
+    "cumulative_block_frozen": {
+      "last_recomputed": "2026-05-13T22:30",
+      "unchanged_since_snapshot": "f8e2bc262 (2026-08-14)",
+      "breaths_since_snapshot": 16,
+      "entries_compared": 17,
+      "entries_that_differ": 0,
+      "detail": "Every one of the 17 skills in improvement_trajectory.skill_effectiveness_cumulative carries byte-identical total_calls and success_rate to the 08-14 committed snapshot, across sixteen intervening breaths. The Harvest phase writes a per-breath skill_effectiveness block but nothing rolls it up."
+    },
+    "week_from_per_breath_blocks": {
+      "ada-breather": {"calls": 10, "succeeded": 10, "failed": 0, "rate": 1.0},
+      "breaths_carrying_a_block": "10 of 12 (missing: 2026-08-17T18:55, 2026-08-23T18:56)",
+      "distinct_skills_dispatched": 1
+    },
+    "ledger_integrity_warning": {
+      "items_failed_across_12_breaths": 0,
+      "breaths_where_items_succeeded_exceeds_items_attempted": 8,
+      "worst_case": "2026-08-24T09:04 -- 8 attempted, 18 succeeded",
+      "reading": "A 100% success rate over twelve breaths is not evidence of a healthy loop. items_succeeded and items_attempted do not share a vocabulary (attempted are sentences, succeeded are hyphenated slugs), so the two lists cannot be matched and a failure has no way to be recorded. This is exactly the defect prop-014 named on 2026-08-01, still unapplied 23 days later. Until it is fixed, 'skill effectiveness' is unmeasurable and every weekly report will say NO CHANGE for the same wrong reason.",
+      "covering_proposal": "prop-014"
+    }
+  },
+
+  "proposals_pending_review": {
+    "total": 35,
+    "by_status": {"proposed": 35, "applied": 0, "rejected": 0},
+    "never_applied": true,
+    "oldest_pending": {"id": "prop-001", "created": "2026-04-20", "age_days": 126},
+    "new_this_week": [
+      {"id": "prop-029", "created": "2026-08-17", "target": "tools/run_em_gates.py + /api/museum-pipeline + ada-breather (Test)"},
+      {"id": "prop-030", "created": "2026-08-19", "target": "ada-breather (Evolve L1) + .claude/flows/INDEX.md"},
+      {"id": "prop-031", "created": "2026-08-20", "target": "tools/check_walk_severance.py + run_em_gates.py + ada-breather"},
+      {"id": "prop-032", "created": "2026-08-21", "target": "tools/run_em_gates.py ok-scoring line + ada-breather"},
+      {"id": "prop-033", "created": "2026-08-22", "target": "sequence_pipeline_scorer.py rounding + new check_map_tokens.py gate"},
+      {"id": "prop-034", "created": "2026-08-23", "target": "ada-map-expert / tools/map_pathfinder.py"},
+      {"id": "prop-035", "created": "2026-08-23", "target": "tools/sequence_pipeline_scorer.py raw-fraction printing"}
+    ],
+    "note": "prop-033's tool half shipped itself this week -- check_map_tokens.py exists and is registered as gate G -- but the proposal row is still 'proposed'. The backlog does not distinguish a proposal nobody read from one the project already implemented.",
+    "highest_leverage_for_human_review": ["prop-014", "prop-010", "prop-017"]
+  },
+
+  "stall": {
+    "flagged": true,
+    "criterion": "global_avg has not improved in 7 days",
+    "measured": "6.083 on 2026-08-17, 6.083 on 2026-08-24",
+    "consecutive_flat_readings": 22,
+    "flat_since": "2026-07-19 (approx. five weeks)",
+    "analysis": {
+      "primary_cause": "SATURATION, not neglect. 23 of 24 spine sequences are parked at stage 6 (vr_testing) of the 7-stage pipeline. Stage 6 requires a human in a headset walking the sequence and filing feedback through the desktop bridge. No autonomous breath can advance it. The metric is therefore measuring a lever with no software handle, and has been for five weeks.",
+      "corollary": "The pipeline mean is also INSENSITIVE to everything the breaths actually did this week. Gate F went red for five days and back to green; two new gates were born; 287 commits landed. global_avg moved by exactly 0.000 through all of it. A flat number here is not a claim that nothing happened.",
+      "what_did_move": [
+        "Release gates: enabled set grew 6 -> 8 (G map-token resolution born 08-23, H gate-chain integrity born 08-24), and all 8 pass today.",
+        "Gate F recovered: FAIL (no_route, z=62/107) on 08-18, still FAIL through 08-22, PASS at 66.0/66.0 today with 0 stall events.",
+        "Two dead map tokens removed (floor_anchor in Point_Lines; calder_mobile_primaries in Sky_Climb, which had read OK for 68 days because forces rounds 318/319 to 100%).",
+        "A false-green detector was demoted: check_walk_severance.py had been passing over an undressed shell grid; its PASS branch now degrades to SKIP, held by a negative test.",
+        "The instrument layer entered the repository: 46 of 46 tools invoked by the gate runners are now present and tracked, against 12 of 14 measured on 08-23."
+      ],
+      "second_stall_named": {
+        "name": "the ledger's own instrumentation",
+        "evidence": "skill_effectiveness_cumulative has not been recomputed since 2026-05-13 and is byte-identical to its 08-14 state; zero failures recorded in 12 breaths; 35 proposals accumulated over 126 days with zero ever applied.",
+        "reading": "The breath loop's Evolve phase produces proposals at roughly one per day and consumes none. Its Harvest phase writes a success ledger that cannot represent failure. Both halves of the self-improvement mechanism are open loops. This is a more actionable stall than the pipeline one, because unlike stage 6 it has a software handle."
+      },
+      "recommendation": "Stop reporting global_avg as the health metric for autonomous work. It is human-gated and saturated. The two metrics that moved this week -- enabled release gates passing (8/8) and tools-in-repo (46/46) -- are the ones an autonomous breath can actually pull. Either re-weight the trajectory around them, or accept that the weekly delta line will read 0.0 until a headset session clears stage 6."
+    }
+  },
+
+  "audit_gaps_found": {
+    "missing_weekly_reports": ["2026-08-10", "2026-08-17"],
+    "detail": "The previous weekly_breath_report is 2026-08-06. Two scheduled weekly audits since then produced no report file. This report therefore covers a 7-day window inside an 18-day reporting gap.",
+    "trajectory_not_committed_weekly": "improvement_trajectory.json has only two commits in the window (51f936a52 on 08-18, 4c71ce868 today), so a true 7-day-ago snapshot does not exist in the repository. The 08-14 snapshot was used instead."
+  },
+
+  "dry_run_work_plan": {
+    "mode": "dry-run -- NOTHING WAS CHANGED",
+    "focus": "FOCUS_VECTOR primary is 126 days stale (updated 2026-03-28, 'rebuild all primitives maps using Map Studio'); primitives is at stage 6, so the stated goal is already past its own head. Auto-selected instead.",
+    "trajectory": "flat (22 readings)",
+    "items": [
+      {
+        "rank": 1,
+        "item": "live footprint origin reach (ada_run/em_live_footprints.json)",
+        "temperature": 60,
+        "why": "49 of 214 bodies carry a world coordinate where a footprint dimension belongs. 19 have live_aabb.z equal to their own cell z within 2 m (9_3_smart_rockets_vr: 11767.7 against cell z 11767); another 30 exceed 50 m without matching exactly (boid_manager 11514.7 against cell 11504). tools/spatial_contract.py reads this file and takes the LARGER of planned and live, so every one of these poisons the next negotiation. The 08-22 breath measured 24 of 213 and stopped filing them as measurement questions; the ledger still carries them and the count has grown.",
+        "dispatch": "direct_file_edit + a gate: clamp/reject any live_aabb component that matches the stamping cell's world coordinate, with a negative test",
+        "expected": "49 poisoned rows quarantined; spatial_contract stops inheriting distances as sizes"
+      },
+      {
+        "rank": 2,
+        "item": "breath_log success/failure vocabulary (prop-014)",
+        "temperature": "n/a -- found by this audit",
+        "why": "Zero failures in 12 breaths with items_succeeded exceeding items_attempted in 8 of them. The loop cannot record its own failures, which disables the cooling filter and makes skill effectiveness unmeasurable.",
+        "dispatch": "apply prop-014 (human review required -- proposals are not self-applying)",
+        "expected": "cooling filter becomes functional; weekly skill-effectiveness line becomes meaningful"
+      },
+      {
+        "rank": 3,
+        "item": "skill_effectiveness_cumulative roll-up",
+        "temperature": "n/a -- found by this audit",
+        "why": "Frozen since 2026-05-13. Sixteen breaths wrote per-breath blocks that nothing consumed.",
+        "dispatch": "small tool: recompute the cumulative block from breath_log on every harvest",
+        "expected": "the trajectory file stops asserting a 100% success rate it has not measured since May"
+      },
+      {
+        "rank": 4,
+        "item": "FOCUS_VECTOR staleness (prop-013)",
+        "temperature": "n/a",
+        "why": "current_focus.updated is 2026-03-28. Its primary goal names a sequence that has been at stage 6 for weeks. Every breath's Evaluate phase reads it first by rule.",
+        "dispatch": "human -- FOCUS_VECTOR is read-only to the breather by design",
+        "expected": "the highest-priority input to Evaluate stops pointing at finished work"
+      },
+      {
+        "rank": 5,
+        "item": "proposal backlog triage",
+        "temperature": "n/a",
+        "why": "35 proposals, 0 ever applied, oldest 126 days. At the current rate the Evolve phase is a write-only queue.",
+        "dispatch": "human review via /ada-skill-updater; start with prop-014, prop-010, prop-017",
+        "expected": "the loop's third phase becomes closed"
+      }
+    ],
+    "cooled_skipped": {
+      "list": [],
+      "note": "The cooling filter had nothing to filter -- no breath in the last two recorded any failed item. That is the defect in item 2, not a clean record."
+    },
+    "already_closed_but_still_hot": [
+      "breath-ledger-tree-vs-repo (60 deg) -- closed today by 4c71ce868",
+      "gate chain integrity (60 deg) -- closed today by gate H"
+    ]
+  },
+
+  "next_week_recommendation": "Run the audit against gates-passing and tools-tracked rather than global_avg, and close one of the two open loops in the breath mechanism (prop-014's vocabulary fix is the cheapest and unblocks the cooling filter). The one substantive project fault standing open is the 49 poisoned rows in the live footprint ledger."
+}

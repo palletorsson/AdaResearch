@@ -1,0 +1,371 @@
+{
+  "report": "weekly_breath_report",
+  "date": "2026-09-07",
+  "generated_at": "2026-09-07T10:55:00+02:00",
+  "generated_by": "scheduled task ada-weekly-audit (/ada-breather dry-run + release gates)",
+
+  "window": {
+    "from": "2026-08-31",
+    "to": "2026-09-07",
+    "breaths_in_window": 11,
+    "breaths_composition": "6 full + 5 evolve-only, 2026-09-01T09:04 through 2026-09-07T09:06",
+    "commits_in_window": 184,
+    "boundary_note": "The 2026-08-31T09:04 breath was counted by LAST week's report (its window ran 08-24T09:04 through 08-31T09:04) and is deliberately excluded here so the two reports do not double-count it.",
+    "missing_breaths": "Three scheduled slots produced nothing: 08-31 evening, 09-02 morning, 09-06 evening. The cadence is 11 of a nominal 14.",
+    "audit_ran_at": "10:20-10:55, after this morning's 09:06 breath had already harvested. Every number below was measured live in that span."
+  },
+
+  "provenance": {
+    "head_at_read": "77dda0b7c",
+    "head_subject": "fix(death): the hill was a picture of ground - you fell through your own grave",
+    "tree_at_read": "433 dirty / 575 untracked",
+    "verdict_scope": "WORKING TREE, not HEAD, except where a claim is explicitly labelled as asked of git. Nothing is carried from a prior ledger except where labelled as such.",
+    "live_writer": "prop-012 applies. FOUR Godot processes were alive during this audit (PIDs 15276, 30404, 34448, 35152, all started 10:19:25) - verified by Get-Process, not assumed. This is the direct cause of gate F's verdict; see release_gates_comparison.gate_F.",
+    "comparison_baseline": "doc/reports/weekly_breath_report_2026-08-31.json, plus improvement_trajectory.json at commits 74260e955 (08-26, the last COMMITTED snapshot before the window) and 9561b8068 (09-03, the last committed snapshot inside it). The working-tree trajectory carries four uncommitted harvests.",
+    "comparison_caveat": "There is NO committed snapshot of improvement_trajectory.json at the 08-31 window boundary. The week-over-week trajectory comparison is therefore made against last week's REPORT (which recorded the numbers) rather than against a git object. This is a weaker basis than it reads, and it is the same exists-vs-git class this week's gates were built for; see the_finding_that_outlasts_the_numbers."
+  },
+
+  "baseline_measured_today": {
+    "pipeline": {
+      "global_avg": 6.091,
+      "derivation": "(21*6 + 8)/22 = 134/22",
+      "sequences_scored": 22,
+      "complete": 1,
+      "complete_which": "randomness",
+      "at_stage_6_vr_testing": 21,
+      "exit_code": 0,
+      "piped": true,
+      "piped_note": "This audit's read was piped through tail, which prop-017 warns against. The value agrees to the digit with this morning's breath's own unpiped read at 09:06 and with fourteen prior readings, so it is corroborated rather than trusted."
+    },
+    "spine_size": {
+      "maps": 186,
+      "was_on_2026-08-28": 231,
+      "delta": -45,
+      "agreed_by_two_independent_readers": "YES - the scorer's per-sequence map column sums to 186, and tools/check_map_tokens.py prints '186 maps read' from a separate walk of the same spine. Both also agree at 1454 placements. That agreement is the evidence for reading -45 as the corpus moving under the transformation/museum fold work rather than an instrument drifting."
+    },
+    "heat_map_top_5": [
+      {"temp": 80, "item": "museum", "reason": "active (9 recent commits)"},
+      {"temp": 75, "item": "floor", "reason": "active (3 recent commits)"},
+      {"temp": 60, "item": "gate L / prose reachable", "reason": "deep discovery: every check in the project calls os.path"},
+      {"temp": 60, "item": "gitignore", "reason": "deep discovery: an unanchored directory pattern cannot be re-included"},
+      {"temp": 60, "item": "vr feedback bridge", "reason": "deep discovery: stage 6 reads 0% because feedback_writer targets res://"}
+    ],
+    "heat_map_note": "Peak temperature rose 65 -> 80 across the window; nothing at 90+. Three of the five entries are this week's own discoveries, which means the heat map is now largely reflecting the breather back at itself rather than surfacing the project. doc/HEAT_MAP.json is gitignored (.gitignore:353) and regenerable, which is correct.",
+    "garden_health": {
+      "artifacts_total": 5102,
+      "voiced": 3852,
+      "voice_coverage_pct": 75,
+      "embodiment_rate_pct": 23,
+      "phantom_limbs": 2194
+    },
+    "release_gates": {
+      "overall": "FAIL",
+      "enabled_passing": "10/13",
+      "total_gates": 13,
+      "all_gates_enabled": true,
+      "gates": {
+        "A_sequence_contract": "PASS",
+        "B_artifact_registry_integrity": "PASS",
+        "C_map_validation": "PASS",
+        "D_lab_progression_continuity": "PASS",
+        "E_museum_template_integrity": "PASS",
+        "F_museum_walkthrough": "FAIL",
+        "G_map_token_resolution": "PASS",
+        "H_gate_chain_integrity": "PASS",
+        "I_edge_anchors": "PASS",
+        "J_artifact_citations": "PASS",
+        "K_wants_closed_honestly": "FAIL",
+        "L_prose_reachable_from_a_clone": "PASS",
+        "M_artifacts_reachable_from_a_clone": "FAIL"
+      },
+      "command_used": "python tools/run_release_gates.py --gate-toggles doc/reports/RELEASE_GATES_TOGGLES.json",
+      "max_grade_c": "not passed this run (the CLAUDE.md form passes --max-grade-c -1); grade_c_blocking reads false, so C's 152 grade-C maps did not gate"
+    }
+  },
+
+  "sequences_improved": {
+    "count": 0,
+    "net_movement": "ZERO. No sequence ended the window at a different stage than it started it.",
+    "round_trip": {
+      "sequence": "boolean_surfaces",
+      "movement": "stage 6 -> stage 2 -> stage 6",
+      "down": "2026-09-03, commit 3d37b5b2f at 14:13 - the boolean fold retired five 13x12 halls and created three larger ones carrying final.md and map_data.json but neither blurb.md nor intent.md. Caught by the 09-03 evening evolve-only breath: -0.182.",
+      "up": "2026-09-04 morning breath, +0.182, thirteen files, verify_sequence exit 0.",
+      "reading": "One commit took it down and one commit put it back. No new ground. This is the SECOND time in three weeks that a fold has cost the metric a full stage on a Thursday and a breath has spent Friday morning restoring it (08-24/08-25 was the first, Color_Arrays). prop-006's twelfth occurrence."
+    },
+    "asymmetry": "A headless agent cannot raise this metric at all - 21 of 22 sequences sit at stage 6, which the scorer reads from a file no headless agent can cause to be written - and any commit can lower it in one step. The steering metric is a one-way ratchet pointing down."
+  },
+
+  "total_delta": {
+    "headline_value": 0.0,
+    "unit": "global_avg (pipeline mean, 0-8 per sequence)",
+    "start": 6.091,
+    "end": 6.091,
+    "start_basis": "2026-08-31 weekly audit live read, 134/22",
+    "end_basis": "2026-09-07 live read, 134/22",
+    "denominator_moved": false,
+    "denominator_note": "22 sequences at BOTH ends, unlike last week where the naive comparison was meaningless because two sequences left the spine. This week's +0.000 is a real, directly comparable zero. The MAP count moved (231 -> 186) but the map count is not the denominator of this metric.",
+    "per_breath_deltas": [0.0, 0.0, 0.0, 0.0, -0.182, 0.182, 0.0, 0.0, 0.0, 0.0, 0.0],
+    "per_breath_note": "Two non-zero deltas in eleven breaths and they are the two halves of one round trip. Their sum is exactly 0.000.",
+    "readings_of_6.091": "This is the twentieth reading of 6.091 in twenty-two, stretching back to 2026-08-26. The two exceptions are the down and up legs of the boolean_surfaces round trip."
+  },
+
+  "stall_analysis": {
+    "stall_detected": true,
+    "flat_for_days": 7,
+    "flat_for_days_true_span": "12 days at 6.091 with two interruptions that cancelled, back to 2026-08-26",
+    "STATUS_CHANGE_THIS_WEEK": "THE STALL IS NOW DIAGNOSED, AND THE OLD DIAGNOSIS WAS WRONG IN A WAY THAT COST FOUR BREATHS. This is the first week in five that the stall entry says something other than 'human-gated, waiting on VR'.",
+    "old_diagnosis": {
+      "wording": "'human-gated' / 'needs a human in a headset', carried in improvement_trajectory.json since 2026-08-29",
+      "why_it_was_wrong": "It reads as 'waiting on Palle to walk the maps'. Palle walked maps in VR on the morning of 2026-09-07 - em_built.json on the attached Quest (2G0YC5ZG4M0569) written 09:03, against an APK installed 08:54, twelve minutes before the breath's baseline - and stage 6 still read 0% for every sequence. The human did the thing and the number did not move."
+    },
+    "root_cause": {
+      "statement": "Stage 6 asks whether any map of the sequence is named in ada_run/desktop_feedback.md. commons/bridge/feedback_writer.gd targets res://ada_run/desktop_feedback.md, and res:// is READ-ONLY in an export, so a comment typed in the headset falls back to user://desktop_feedback/ on the Quest, private to that device. Nothing in this repository has ever read it back.",
+      "consequence": "The metric was never measuring whether anyone walked the maps. It was measuring whether anyone walked them AT A DESKTOP. The one artifact built to collect that feedback - comment_box, placed in exactly ONE map, Point_One, the museum lobby, the first room a visitor enters - ships on the only surface where it cannot work.",
+      "the_knowledge_already_existed": "commons/bridge/vr_link.gd's header, written 2026-08-31, states verbatim that desktop_feedback.md is a file poll that cannot cross to a headset. comment_box.gd was written into commons/artifacts/ on 2026-09-05 and depends on exactly the thing the adjacent file says cannot work. Same repo, five days apart, one folder away. A doc comment is not a broadcast.",
+      "size_measured_not_guessed": "One synthetic comment naming Point_One moved primitives from stage 6 to stage 7 - 6.000 to 7.000 on that sequence. One comment is worth a whole stage; 21 of them is the entire flat line. The probe was then deleted from device and working tree and the pipeline re-read 6.091, so today's 0.000 is honest and not a banked +0.95.",
+      "remedy_written": "tools/pull_vr_feedback.py (adb run-as, additive, idempotent on the '## ts | Map' header), tested three ways on the real device.",
+      "remedy_NOT_LANDED": "THE FILE IS UNTRACKED. `git ls-files tools/pull_vr_feedback.py` returns nothing; `git status --porcelain` returns '?? tools/pull_vr_feedback.py'. It is not gitignored - it was simply never added. A clone of HEAD cannot lift this stall. See the_finding_that_outlasts_the_numbers.",
+      "ruling_open": "forum 260907-7bj80, three-way: (a) leave it, (b) the box sends over vr_link, (c) FeedbackWriter routes through vr_link. Posted 07:15, no reply."
+    },
+    "why_the_number_did_not_move_this_week_beyond_the_stall": [
+      "The 09-06 breath repaired five unbuildable rooms, root-caused a .gitignore glob, and built a new release gate. The scorer cannot see any of it.",
+      "The 09-07 breath diagnosed the stall itself. Diagnosing the metric's blindness is structurally invisible to the metric.",
+      "Four of eleven breaths were evolve-only, which touch no project file by design.",
+      "The three items with a software handle - gates F, K, M - are all correctly COOLED: F on machine contention, K on an unanswered human question (forum 260831-z5s2i, 7 days), M on an unanswered ruling (forum 260906-dds7a, 1 day)."
+    ],
+    "verdict": "The stall is real and this week it stopped being mysterious. It is no longer a fact about the project's progress; it is a fact about a bridge, and it lifts the day someone presses SEND in the lobby and the puller runs. The one thing standing between the diagnosis and the lift is a `git add`."
+  },
+
+  "skill_effectiveness_changes": {
+    "verdict": "ONE BLOCK MOVED AND IT IS THE ONE THAT MEANS NOTHING. The measurement fault is now in its THIRD consecutive week.",
+    "what_changed": {
+      "ada-breather": {
+        "total_calls": "73 (at commit 9561b8068, 09-03) -> 80",
+        "success_rate": 1.0,
+        "recomputed_on": "2026-09-05T18:55",
+        "WHY_THIS_IS_NOT_EFFECTIVENESS": "The block's own note says it: the breather logs its own invocation, not its individual actions. 80/80/0 is a PARTICIPATION COUNT. A success rate of 1.0 over 80 calls, in a ledger whose headline metric has not moved in twelve days, is a self-portrait, not a measurement. Credit to the 09-05 breath for writing that caveat into the data rather than letting the 1.0 stand bare."
+      },
+      "everything_else": "UNCHANGED. All 17 named sub-skill blocks (documentation_writing 71, direct_file_edit 50, identity_writing 39, godot_capture_pipeline 18, registry_repair 16, ada-map-expert 2, ...) are bit-identical to their values at commit 74260e955 and to their values in May."
+    },
+    "cumulative_block_frozen": {
+      "last_recomputed": "2026-05-13T22:30",
+      "days_stale": 117,
+      "was_last_week": 110,
+      "cause": "Ten of the eleven breaths in this window log skills_used: ['ada-breather'] and nothing else. The one exception is 2026-09-04T09:04, which logged ['ada-breather', 'ada-map-expert (patterns)', 'ada-humanizer (patterns)'] - and the parenthetical '(patterns)' means the skill was imitated, not invoked, so even that entry cannot be attributed. The Evolve phase's Level 2 check - 'skills with < 50% success rate across 5+ calls' - has had no input for 117 days.",
+      "escalation": "Reported as a measurement fault on 08-24, again on 08-31, and again today. Nothing has changed. One of the breather's two self-improvement feedback channels has been dead for four months."
+    },
+    "item_counts_this_window": {
+      "items_attempted": 58,
+      "items_succeeded": 88,
+      "items_failed": 0,
+      "distinct_files_changed": 90,
+      "discoveries_recorded": 63,
+      "total_minutes": 276,
+      "UNCOMPUTABLE": "A success rate still cannot be derived. items_succeeded (88) EXCEEDS items_attempted (58) for the THIRD consecutive week, because the two lists do not use the same identifiers - succeeded entries are sub-findings written as long kebab-case sentences, attempted entries are work items. This is prop-014, filed 2026-08-01, still status `proposed` after 37 days. It is the second dead feedback channel.",
+      "zero_failures_is_itself_suspect": "58 attempted, 0 failed, across eleven breaths. The cooling filter has had nothing to cool for two weeks. A loop that never records a failure cannot cool anything, cannot fill a failure_reasons block, and cannot produce the evidence a Level 3 proposal is defined to need. Compare: this audit found a work item logged as SUCCEEDED whose file is untracked (see below). The zero is a recording convention, not a hit rate."
+    },
+    "cooling_filter": {
+      "items_cooled_going_into_next_breath": [],
+      "items_the_09-07_breath_cooled_by_hand": [
+        "gate-M-33-tres (ruling 260906-dds7a posted, no reply)",
+        "gate-F-contended_builder (Godot editor holds the lock)",
+        "gate-K-4-echo (blocked on human question 260831-z5s2i)",
+        "stage-7-captures boolean_surfaces 0% / formfinding 17% (BLOCKED: needs Godot, lock contended)"
+      ],
+      "note": "The breather is cooling correctly and by hand, with reasons. The automatic cooling filter remains unexercised because nothing is ever logged as failed."
+    }
+  },
+
+  "garden_health_comparison": {
+    "artifacts_total": {"last_week": 4963, "this_week": 5102, "delta": 139},
+    "voiced": {"last_week": 3744, "this_week": 3852, "delta": 108},
+    "voice_coverage_pct": {"last_week": 75, "this_week": 75, "delta": 0},
+    "embodiment_rate_pct": {"last_week": 24, "this_week": 23, "delta": -1},
+    "phantom_limbs": {"last_week": 2188, "this_week": 2194, "delta": 6},
+    "reading": "The corpus grew by 139 artifacts and voiced 108 of them, holding coverage flat at 75% - which means new artifacts arrived at roughly the existing voice rate rather than diluting it. Embodiment fell a point because the new arrivals are less bodied than the average, and phantom limbs rose 6. Nothing here is alarming; nothing here moved.",
+    "REACHING_kingdoms_to_watch": [
+      "museum_aaa_uffizi_footprint_pilot: 4 artifacts, 0 voiced",
+      "speculativecomputation: 4 artifacts, 0 voiced, 0 controls",
+      "advancedlaboratory: 3 artifacts, 0 voiced"
+    ]
+  },
+
+  "release_gates_comparison": {
+    "headline": "9/11 -> 10/13. TWO GATES WERE BUILT THIS WEEK. One passed on arrival and one failed on arrival with a real finding.",
+    "gates_added_in_window": {
+      "L_prose_reachable_from_a_clone": {
+        "added": "2026-09-05, f67f75817 'gate L asks git, not the filesystem, about the writing that ships'",
+        "first_verdict": "PASS",
+        "today": "PASS - 1019 rooms declared, 946 resolved, 1245 prose files, 1245 tracked, 0 unreachable, 0 stranded words, detector selftest PASS",
+        "note": "Its first run an hour after it was written convicted ten facade files wrongly. It has read 0 unreachable at three separate heads since."
+      },
+      "M_artifacts_reachable_from_a_clone": {
+        "added": "2026-09-06, a16761683 'one unanchored glob hid three artifacts and broke five rooms for every clone'",
+        "first_verdict": "FAIL",
+        "today": "FAIL - 2843 artifacts declared, 6069 files checked, 33 unreachable from a clone, 59 rooms affected, 85 absent from every tree, 104 vendored not in repo, detector selftest PASS",
+        "why_it_is_red_and_should_stay_red": "The 33 are .tres material files. .gitignore force-includes *.tres and then re-excludes it two lines later; git will not descend into an excluded directory, so the re-include cannot fire. That ordering fault is a RULING, not a repair - posted as forum 260906-dds7a on 09-06, no reply in 24 hours. Correctly cooled.",
+        "why_this_gate_matters": "Gate H asks git about tools. Gate L asks git about prose. Nothing asked git about the objects a room stands up, and gate B reported unresolved_scene_files: 0 over all of it because it calls os.path.exists(). Five tracked maps placed artifacts a fresh clone does not have."
+      }
+    },
+    "gate_F": {
+      "status": "FAIL both weeks",
+      "reason": "contended_builder, every metric -1",
+      "qualification": "UNMEASURABLE, NOT FAILED - for the FOURTH consecutive week. Four Godot processes were confirmed alive at 10:19:25, seven minutes before the gate ran; the autopilot enumerates Godot bound to this repo and refuses by design. The remedy is scheduling (serialise the run on a quiet machine), not repair, and it has not been done in four weeks. This gate has now produced a verdict about the machine more often than about the museum.",
+      "recommendation": "Either move the weekly audit's gate-F run to a slot when no session is live, or split F out of the weekly gate run entirely and give it its own quiet-machine schedule. A gate that reads -1 for a month is not a gate."
+    },
+    "gate_K": {
+      "status": "FAIL both weeks",
+      "detail": {"token_lines": "833 -> 849", "closed_dishonestly": "4 -> 4", "kind": "all echo", "ghost": 0, "no_registry": 0, "broken_body": 0},
+      "note": "Unchanged for eight days. The 4 are human echoes in doc/SPEAK.md; asked at forum 260831-z5s2i on 08-31 and still unanswered after 7 days. Correctly cooled. The gate now also prints open_not_counted (empty 118, stub 32, elsewhere 35, no_body 30, no_subject 50) which is new visibility, not new failure."
+    },
+    "metric_movements_worth_reading": {
+      "A_undeclared_map_folders": "1807 -> 1850 (+43). Grew while the SPINE shrank 231 -> 186. Consistent with the fold work moving maps out of sequence declarations without deleting the folders.",
+      "B_missing_map_ready": "124 -> 130. B also gained three metrics this week (invalid_biome_token 0, unsupported_scene_path 0, missing_include_in_map_data 130).",
+      "C_map_validation": "grade_A 2265 -> 2277, grade_B 360 -> 371, grade_C 168 -> 152, grade_F 0 -> 0. Sixteen maps left grade C. This is the only quality metric in the whole audit that improved on its own.",
+      "D_lab_progression": "lost 0, changed 12, total_issues 39 - bit-identical to last week.",
+      "E_museum_templates": "900/900 chain pairs - identical.",
+      "G_map_token_resolution": "maps 231 -> 186, placements 1323 -> 1454, unresolved 0 both weeks. Fewer maps carrying MORE placements. Still prints 'UNPLACEABLE ROOTS: 2' (boid_flocking root=CanvasLayer, ecosystem_simulation root=Node2D) and exits 0 - prop-041, open since 08-29.",
+      "H_gate_chain": "51 -> 53 tools referenced, 0 absent, 0 untracked, 0 unreachable. It grew by exactly the two new gates' tools, which is the gate chain doing its job.",
+      "I_edge_anchors": "edges 269 -> 253, held 264 -> 249, near 5 -> 4, lost 0 both weeks.",
+      "J_artifact_citations": "219/212/4/0/3/0 - bit-identical to last week."
+    }
+  },
+
+  "proposals_pending_review": {
+    "total": 47,
+    "by_status": {"proposed": 46, "partially_applied": 1, "applied": 0},
+    "created_in_window": 2,
+    "created_in_window_ids": ["prop-046", "prop-047"],
+    "fill_rate_change": "10/week last week -> 2/week this week. The fill rate fell 80%.",
+    "drain_rate": "0/week. Unchanged since prop-001 was filed on 2026-04-20, 140 days ago.",
+    "prop-046": {
+      "created": "2026-09-01",
+      "gist": "A geometry verdict produced by a Python tool is not a fact about the game until it names which size it used. The engine sizes a map by map_info.dimensions; 25 tools/*.py size it by len(structure). Targets the breather's T phase plus JsonMapLoader.gd:181-191."
+    },
+    "prop-047": {
+      "created": "2026-09-05",
+      "gist": "A claim that content SHIPS is a claim about HEAD's tree - verify with git ls-files, never Path.exists(). Four clauses; clause 1 targets the breather's T phase.",
+      "VIOLATED_TWO_DAYS_LATER": "See the_finding_that_outlasts_the_numbers. The breather filed this proposal on 09-05 and broke its own clause 1 on 09-07."
+    },
+    "THE_LEDGER_STILL_DOES_NOT_DRAIN": "Forty-seven proposals, ZERO ever marked `applied`, one `partially_applied` (prop-039). The backlog grew by 2 and shrank by 0. Unapplied proposals are not inert - they are the reason specific measurements in this report are missing: prop-014 (37 days old) is why no skill success rate can be computed here for the third week running, and prop-047 (2 days old) is why the week's most important deliverable is sitting untracked.",
+    "oldest_past_any_reasonable_threshold": [
+      "prop-001 (2026-04-20, 140 days)",
+      "prop-002 (2026-05-29)",
+      "prop-003 (2026-05-31)",
+      "prop-004 (2026-06-06)",
+      "prop-005 (2026-06-11)",
+      "prop-006 (2026-06-15) - recurred again this week as the boolean_surfaces round trip, 12th occurrence",
+      "prop-008 (2026-06-28)"
+    ],
+    "explicitly_awaiting_palle": [
+      "prop-036 clause 1 (a decision, not a code change)",
+      "forum 260831-z5s2i (gate K's 4 echoes) - 7 days unanswered",
+      "forum 260906-dds7a (gate M's .tres ordering ruling) - 1 day unanswered",
+      "forum 260907-7bj80 (should the comment box send over vr_link) - hours unanswered"
+    ]
+  },
+
+  "dry_run_work_plan": {
+    "mode": "dry-run - Baseline + Read + Evaluate only. Nothing was changed by this audit except the writing of this report.",
+    "focus_vector": {
+      "primary": "Rebuild all primitives maps using Map Studio. Learn by building.",
+      "updated": "2026-03-28",
+      "days_stale": 163,
+      "note": "FOCUS_VECTOR has not been touched in 163 days and its primary goal - rebuild the 11 primitives maps in Map Studio - describes work that is long finished (primitives scores OK through stage 5 and is voice-saturated). It is prop-013's subject, filed 2026-07-31, still proposed. The Evaluate phase's highest-priority input is stale, so priority 1 in the decision ladder is effectively dead and every breath falls through to priority 2."
+    },
+    "trajectory": "flat/stalled - 20 readings of 6.091 in 22, back to 2026-08-26",
+    "plan": [
+      {
+        "rank": 1,
+        "item": "land tools/pull_vr_feedback.py",
+        "temperature": 60,
+        "temperature_source": "heat map: 'vr feedback bridge'",
+        "reason": "It is written, tested three ways on a real device, and untracked. It is the single lever that can move global_avg off 6.091, and it does not exist for a clone. One `git add` plus one commit.",
+        "dispatch": "direct_file_edit (git)",
+        "expected_outcome": "The remedy for the project's only stall becomes reproducible from a clone. No pipeline delta until someone presses SEND in the lobby and the puller runs."
+      },
+      {
+        "rank": 2,
+        "item": "land the two stranded weekly audit reports (08-24, 08-31)",
+        "temperature": 60,
+        "temperature_source": "same class as gate L / gate M discoveries",
+        "reason": "Fifteen of seventeen weekly reports are tracked; the two most recent are not. This report's own comparison baseline is a file that does not exist in HEAD.",
+        "dispatch": "direct_file_edit (git)",
+        "expected_outcome": "The audit trail becomes reproducible. Done by this audit - see actions_taken."
+      },
+      {
+        "rank": 3,
+        "item": "wire the exists-vs-git rule into the breather's T phase (prop-047 clause 1)",
+        "temperature": 60,
+        "reason": "Third surface of the same class in eight days (tools/gate H, prose/gate L, artifacts/gate M) and it has now bitten the breather's own ledger. The proposal is written; applying clause 1 is a SKILL.md edit and therefore Palle's call.",
+        "dispatch": "ada-skill-updater (HUMAN REVIEW REQUIRED - the breather may not edit SKILL.md)",
+        "expected_outcome": "'LANDED' stops being able to mean 'written to the working tree'."
+      },
+      {
+        "rank": 4,
+        "item": "give gate F its own quiet-machine schedule",
+        "temperature": 50,
+        "reason": "Fourth consecutive week of contended_builder. The verdict is about the machine, not the museum, and the remedy is scheduling.",
+        "dispatch": "scheduled-task change (HUMAN REVIEW - changes a standing configuration)",
+        "expected_outcome": "Gate F produces a number about the museum for the first time since 08-29."
+      },
+      {
+        "rank": 5,
+        "item": "refresh or retire FOCUS_VECTOR's primary goal",
+        "temperature": 45,
+        "reason": "163 days stale and describing finished work. The Evaluate phase's top priority is inert.",
+        "dispatch": "HUMAN - FOCUS_VECTOR.json is read-only to the breather by design",
+        "expected_outcome": "Priority 1 in the decision ladder starts steering again."
+      }
+    ],
+    "cooled_skipping": [
+      "gate M / 33 .tres - blocked on ruling 260906-dds7a",
+      "gate F / contended_builder - Godot lock held by a live session",
+      "gate K / 4 echo - blocked on human question 260831-z5s2i (7 days)",
+      "stage-7 captures (boolean_surfaces 0%, formfinding 17%) - needs Godot, lock contended",
+      "museum (80 deg) and floor (75 deg) - hottest items on the map, but owned by other live sessions; twenty open forum threads touch the museum and eight were posted in the last 72 hours"
+    ],
+    "note_on_the_top_of_the_heat_map": "The two hottest items (museum 80, floor 75) are hot because of OTHER sessions' commit activity, and the breather correctly does not touch them. The heat map scores activity, not need. Its top two entries have been un-actionable for the breather for three consecutive weeks."
+  },
+
+  "the_finding_that_outlasts_the_numbers": {
+    "headline": "THE BREATHER FILED A PROPOSAL AGAINST A FAILURE MODE ON MONDAY AND COMMITTED THAT EXACT FAILURE ON THURSDAY - IN THE LEDGER THIS AUDIT READS.",
+    "the_chain": [
+      "2026-09-05T18:56 - the breather files prop-047 clause 1: 'a claim that content SHIPS is a claim about HEAD's tree, so verify it with git ls-files, never with Path.exists(). On Windows exists() cannot see that a file is uncommitted.'",
+      "2026-09-06 - the breather builds gate M for precisely this class on the artifact surface, after gate H (tools) and gate L (prose). Three surfaces of one fault in eight days.",
+      "2026-09-07T09:06 - the breather logs the work item 'land-tools-pull_vr_feedback.py' and records under items_succeeded: 'tools/pull_vr_feedback.py-LANDED-and-TESTED-THREE-WAYS-on-the-real-device'.",
+      "2026-09-07T10:40 - this audit asks git. `git ls-files tools/pull_vr_feedback.py` returns nothing. `git status --porcelain` returns '?? tools/pull_vr_feedback.py'. It is not gitignored. It was never added."
+    ],
+    "the_full_extent": "ALL FIVE files that breath listed under files_changed are uncommitted: tools/pull_vr_feedback.py is untracked, and commons/artifacts/comment_box/comment_box.gd, tools/sequence_pipeline_scorer.py, doc/reports/breath_log.json and doc/reports/improvement_trajectory.json are dirty. The breath authored ZERO commits. HEAD at the audit is 77dda0b7c, a death-system fix from another session.",
+    "why_this_is_the_finding": "The week's headline achievement is a correct, expensive, device-verified diagnosis of the project's only stall - and the artifact that lifts it exists nowhere but one machine's working tree. The ledger says LANDED. The word had drifted to mean 'written to disk'. Every gate built this month exists to catch exactly that drift on some other surface, and none of them looks at the breather's own output.",
+    "second_instance_found_by_this_audit": "The two most recent weekly audit reports (08-24 and 08-31) are also untracked. 15 of 17 are in git; the two the breather most recently wrote are not. This report's stated comparison baseline was, until this audit committed it, a file no clone had.",
+    "the_generalisation": "A loop that measures itself must be measured from outside. Three gates now ask git about the project's content. Nothing asks git about the loop's own claims, and the loop's self-reported success rate is 1.0 over 80 calls. The zero-failure record and the untracked deliverable are the same fact seen from two sides.",
+    "recommended_smallest_fix": "The breather's Harvest phase already writes files_changed. Have it run `git status --porcelain -- <each path>` over that list before writing the entry, and record the porcelain code beside each path. A file that reads '??' or ' M' at harvest time is not a file that landed. This is mechanical, needs no judgement, and would have caught both instances above."
+  },
+
+  "actions_taken_by_this_audit": {
+    "principle": "dry-run - no project file was modified. Only this report was authored, and the audit's own stranded output was landed.",
+    "committed": [
+      "doc/reports/weekly_breath_report_2026-09-07.json (this file)",
+      "doc/reports/weekly_breath_report_2026-08-31.json (stranded, untracked since 08-31)",
+      "doc/reports/weekly_breath_report_2026-08-24.json (stranded, untracked since 08-24)"
+    ],
+    "deliberately_NOT_committed": [
+      "tools/pull_vr_feedback.py - it is another breath's work and its landing is a decision about the VR bridge that is under an open ruling (forum 260907-7bj80). Flagged at rank 1 of the work plan instead. Landing another session's file without its author is the coordination fault CLAUDE.md's forum section exists to prevent.",
+      "The 433 dirty / 575 untracked files in the working tree - not this audit's, and four Godot processes were live throughout."
+    ],
+    "staging_discipline": "Staged and committed by explicit path in ONE command; nothing left in the index."
+  },
+
+  "recommendations": [
+    "1. LAND THE PULLER. `git add tools/pull_vr_feedback.py` and commit it. It is the only thing in the project that can move global_avg, it is written and device-tested, and it currently exists on one machine. Everything else in this report is bookkeeping next to this.",
+    "2. ANSWER THREE FORUM THREADS. 260831-z5s2i (gate K, 7 days), 260906-dds7a (gate M, 1 day), 260907-7bj80 (the comment box's route). All three block a red gate or the stall's remedy, and all three are cooled correctly and will stay cooled until answered.",
+    "3. APPLY prop-047 clause 1 and prop-014. The first stops 'LANDED' meaning 'written'. The second makes the breather able to compute its own hit rate for the first time since 08-01. Both are small; both have blocked measurements in three consecutive weekly reports.",
+    "4. DRAIN OR CLOSE THE PROPOSAL LEDGER. 47 filed, 0 applied, 140 days. Either apply a batch or mark the dead ones `rejected` - a backlog that only grows stops being read, and this report can name three specific measurements it is currently costing.",
+    "5. MOVE GATE F OFF THE SHARED SLOT. Four weeks of -1. It is measuring the machine.",
+    "6. REFRESH FOCUS_VECTOR (163 days) or accept that the Evaluate phase runs on priority 2 and below."
+  ],
+
+  "one_line_summary": "Pipeline flat at 6.091 for the seventh straight day and the twentieth reading in twenty-two - but the stall stopped being mysterious this week: stage 6 was never human-gated, it was unreachable from the headset, and the wire that fixes it is written, device-tested, and untracked."
+}
