@@ -876,7 +876,23 @@
     "force_field_zone"
    ]
   },
-  "VFM_03_Motion": {}
+  "VFM_03_Motion": {},
+  "Array": {
+   "primary": [
+    "#note-1",
+    "pick_up_cube",
+    "row_3_x",
+    "xyz_coordinates",
+    "column_3_z",
+    "grid_2d_4x4",
+    "pulsar_visualizer",
+    "grid_3d_4x4x4",
+    "grid3d",
+    "bar_array",
+    "sorting_algorithm_race",
+    "bar_array_bubble_sort"
+   ]
+  }
  },
  "notes": {
   "Point_One": [],
@@ -1029,6 +1045,13 @@
     "id": "note-1",
     "role": "primary",
     "text": "The motion bench. Its own intent names the stations: the eight-metre bouncing-ball chamber anchors it, the friction threshold and the normal force stand together, and the collision crasher prowls the far corner behind a warning."
+   }
+  ],
+  "Array": [
+   {
+    "id": "note-1",
+    "role": "primary",
+    "text": "THE OVERTURE (Palle, 2026-09-07). This hall keeps row_3_x, column_3_z, grid_2d_4x4 and grid_3d_4x4x4 even though each now has its own room in the revived array_tutorial ladder. That is the point: you see the whole ladder standing at once before you climb it, and the seven rooms after take one rung each. The duplication is the argument, not debt from the 2026-08-24 fold."
    }
   ]
  },

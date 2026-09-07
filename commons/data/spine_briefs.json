@@ -661,12 +661,12 @@
    "at": "2026-09-07T17:04:53"
   },
   "Array": {
-   "for": "The addressing room, and the sequence's only rung that is not about colour at all. It is where a place gets a name before anything is stored in it — the whole retired array_tutorial folded into one hall (fold c47be1717) — so that Pattern_Foundry can repeat something across an index and the colour rooms can hang a hue on it.",
+   "for": "The OVERTURE. Palle's ruling, 2026-09-07: Array keeps the four rungs and shows the whole ladder before you climb it. One cube, three along X, three along Z, sixteen across a floor, sixty-four stacked — every rung of array_tutorial standing at once in one hall — and then the last basin turns the same bars into four sorts racing. The seven rooms after it take one rung each and give it a room to be walked rather than looked at.",
    "core": "artifacts",
-   "claim": "Addressing is prior to content, and the room proves it by cost: one cube you can lift, then three along X, three along Z, sixteen across a floor, sixty-four stacked — each rung one more number you must carry to say where you are — until the last basin turns the same bars into four sorts racing, which is what the addresses were for.",
-   "unsure": "The room cannot currently make its own turn. Pathfinder Rule 4 marks all four artifacts of the last basin unreachable — grid3d (8,17), bar_array (9,17), sorting_algorithm_race (8,18), bar_array_bubble_sort (9,18) — and only 111 of 203 cells are reachable. So does the text describe the turn, or report that the turn is walled off? Second: no `sp` anywhere in the utilities layer (the only room in the sequence with no declared spawn; the grid falls back to the floor centroid), plus two teleporters, one of them standing on a floor cell at (8,13). Third: I cannot place pulsar_visualizer — Joy Division's Unknown Pleasures at (11,5) — in an argument about indexing; it is a binary table plus glass tubes, which reads as a data-as-shape beat, but nothing says so. Fourth, and the one I most want ruled: there is no colour in this room, and no tutorial.md and no critical.md to read, so the brief above is built from blurb.md + intent.md + the floor only. gridcolorizer, which the sequence file says was rehoused here in the 2026-08-24 consolidation, is not in map_data.json.",
-   "certainty": "medium",
-   "at": "2026-09-07T17:04:53",
+   "claim": "Addressing is prior to content, and the room proves it by cost: each rung is one more number you must carry to say where you are. Seeing all five at once is the argument — the ladder is a single idea taking on dimensions, not five separate lessons.",
+   "unsure": "SETTLED by Palle 2026-09-07: the duplication with Tutorial_Row / Tutorial_2D_Build / Tutorial_3D is deliberate — Array is the overture, they are the rungs. Still open: pulsar_visualizer is ruled out of this room and into a new data-arrays map that does not exist yet, so it is still standing here. The last basin was severed and is repaired (b7d25421d): two planks at structure (15,8) and (16,8) reopen the c8 walkway, and the spawn moved off the wall it was standing in.",
+   "certainty": "high",
+   "at": "2026-09-07T19:49:42",
    "comment": "ok many good points, we should move the map  to the old array sequence and revive it. Add sp at the beginning of the map and since this is the museum we do not use the teleport. pulsar_visualizer  should be moved to a new array map that it about data arrays. ",
    "commented_at": "2026-09-07T17:27:31"
   },
@@ -1154,7 +1154,7 @@
   }
  },
  "_meta": {
-  "written": "2026-09-07T18:49:04",
+  "written": "2026-09-07T19:49:42",
   "writer": "tools/spine_brief.py",
   "note": "A brief is written by Claude and answered by Palle. `comment` is Palle's and is never overwritten by a rebuild."
  }
