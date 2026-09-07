@@ -96,6 +96,34 @@ func _init() -> void:
 		if f2 < 0.99:
 			print("  FAIL built but never aimed"); fails += 1
 
+	# 4. AND THEN STAGING TAKES THE CAMERA BACK.
+	#
+	# Building a camera is not keeping one. vrStaging.load_scene does:
+	#     $Scene.add_child(current_scene)          -> _ready(), we build ours
+	#     await create_timer(tracking_delay)
+	#     current_scene.scene_loaded(user_data)    -> scene_base.gd:101,
+	#                                                 $XROrigin3D/XRCamera3D.current = true
+	# so about a tenth of a second after the death scene aims its camera, the base
+	# reclaims the viewport for an UNTRACKED rig camera parked at the origin. On
+	# desktop that is a view of the inside of a hill.
+	#
+	# Neither earlier check could see this: --em-die boots the museum directly
+	# (no staging, so scene_loaded never runs) and step 3 above instantiates the
+	# scene without driving the staging sequence. This one calls scene_loaded by
+	# hand, which is the whole point — it reproduces the ORDER, not just the parts.
+	if inner != null and staged.has_method("scene_loaded"):
+		staged.call("scene_loaded", null)
+		await process_frame
+		var vp_cam := get_root().get_camera_3d()
+		var ours: bool = vp_cam != null and vp_cam == staged_cam
+		print("")
+		print("after scene_loaded, the current camera is: %s" % (
+			"the death scene's" if ours else str(vp_cam.name if vp_cam != null else "<none>")))
+		if not ours:
+			print("  FAIL staging reclaimed the viewport — the visitor sees the rig")
+			print("       camera at the origin, not the cross")
+			fails += 1
+
 	print("")
 	print("PROBE OK" if fails == 0 else "PROBE FAILED (%d)" % fails)
 	quit(fails)

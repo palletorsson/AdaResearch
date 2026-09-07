@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
 ; The death scene, staged — the same shape endless_museum_staged.tscn has.
 ;
@@ -7,13 +7,19 @@
 ; staged scene must BE a scene base and must CONTAIN a rig. base.tscn is both:
 ; it roots on scene_base.tscn and carries XROrigin3D/XRCamera3D with the hands.
 ;
+; The root also carries death_scene_staged.gd, which hands the viewport back to
+; the death scene's own camera on desktop — the base would otherwise reclaim it a
+; tenth of a second after the scene aimed at the cross.
+;
 ; death_scene.tscn stays as it was, a plain Node3D, for any loader that is not
 ; going through staging.
 
 [ext_resource type="PackedScene" uid="uid://cgrljkfrmkgda" path="res://commons/scenes/base.tscn" id="1_base"]
 [ext_resource type="Script" path="res://commons/scenes/death_scene.gd" id="2_death"]
+[ext_resource type="Script" path="res://commons/scenes/death_scene_staged.gd" id="3_staged"]
 
 [node name="Base" instance=ExtResource("1_base")]
+script = ExtResource("3_staged")
 
 [node name="DeathScene" type="Node3D" parent="."]
 script = ExtResource("2_death")
