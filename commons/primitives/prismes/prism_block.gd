@@ -52,6 +52,32 @@ const GRAINS: PackedStringArray = ["solid", "split", "quartered", "lattice", "sh
 const HALF: float = 0.5
 const DEPTH: float = 1.0
 
+## THE ORIGIN IS THE BASE, NOT THE CENTRE (2026-09-08, Palle: "prism_block is
+## under the floor by default can you fix that").
+##
+## Godot's PrismMesh is size (1,1,1) centred on the node origin — its base sits
+## at y -0.5 — and the shipped collision hull says the same (vertices at ±0.5).
+## An artifact built that way is only ever upright by GRACE: the grid's
+## _auto_ground_artifact lifts it 0.5 m at placement time. But auto-grounding is
+## skipped whenever a token carries an explicit y (GridInteractablesComponent.gd:
+## 1329 — a third field means the placer is taking manual control), and seven
+## maps write exactly that, `prism_block:90:0` among them, so in
+## Primitives_Melencolia, Trans_Scale, Point_Lines_Simulated and four more the
+## prism stood half-buried with nothing reporting it.
+##
+## Fixing the seven tokens would have fixed seven maps. Moving the geometry so the
+## node origin IS the base fixes the artifact, which is what "by default" means:
+## every lane that places it — the grid, the museum's own stamping, a hand-written
+## token, one nobody has written yet — gets an upright prism without knowing
+## anything about it. Grounded placements are unaffected: their AABB minimum is
+## now 0, so auto-ground finds nothing to correct and leaves them exactly where
+## they already stand.
+##
+## The shipped mesh and hull are lifted on the StaticBody3D in the scene; every
+## generated variant is lifted here, in _adopt, which is the one door all five
+## grains go through.
+const BASE_LIFT: float = 0.5
+
 # ── split ─────────────────────────────────────────────────────────
 ## The lower block is a truncated prism — the shipped triangle cut off at 0.48 m, which
 ## leaves a trapezoid 1.0 m wide at the floor and 0.52 m wide at the cut. The upper piece
@@ -332,6 +358,9 @@ func _adopt(mi: MeshInstance3D, xform: Transform3D) -> void:
 	if mat != null:
 		mi.material_override = mat
 	add_child(mi)
+	# every generated grain is authored around the prism's CENTRE, like the
+	# shipped mesh; BASE_LIFT is what makes the node origin the base instead
+	xform.origin.y += BASE_LIFT
 	mi.transform = xform
 	_built_nodes.append(mi)
 
