@@ -735,6 +735,13 @@ const EmWallFitLib := preload("res://commons/scenes/em/em_wall_fit.gd")
 var _bake_used: Dictionary = {}         # per key: "tok|x|y" -> how many times looked up
 var _seg_placed: Array = []             # this segment's placed rows (for the bake)
 var _seg_unbaked: int = 0               # bodies this segment placed the live way while replaying
+## Bodies this segment sealed whose seal CUTS THE HALL. They stand where the map
+## put them (the map is the placement authority, 2026-09-08) and the museum says
+## so rather than sliding them aside. Written to em_built.json as `severed`.
+var _seg_severed: Array = []
+## `walk.seal_sever_refuses` in em_layout.json. 0 (the default) places the body
+## and reports; 1 restores the pre-2026-09-08 refuse-and-let-the-packer-slide.
+var _seal_sever_refuses: bool = false
 var _bake_map_moved: int = 0            # halls whose map changed after the bake: replayed nothing
 var _last_seal_cells: Array = []        # absolute cells the last _seal_cells took
 var _bake_total: int = 0                # pearls to bake
@@ -772,7 +779,19 @@ func _bake_lookup(lookup: String, cell: Dictionary) -> Dictionary:
 		var rc: Array = rd.get("tile_cell", rd.get("cell", [0, 0]))   # refusals are written as tile_cell
 		if String(rd.get("token", "")) == lookup and int(rc[0]) == int(cell.get("x", 0)) 				and int(rc[1]) == int(cell.get("y", 0)):
 			if seen == nth:
-				return {"refused": String(rd.get("why", ""))}
+				var why_b: String = String(rd.get("why", ""))
+				# A BAKED SEAL REFUSAL IS A STALE VERDICT (2026-09-08). Since the
+				# map became the placement authority, a seal that severs no
+				# longer refuses the body — but a refusal baked under the old
+				# rule replays here WITHOUT ever calling _seal_cells, so the
+				# body would go on being refused and slid forever, and only a
+				# re-bake would free it. Dropping the row sends it the live way
+				# instead (it counts in `unbaked`, and em_built says so).
+				# Every other baked refusal — a missing scene, a body wider than
+				# its slot — is still a fact and still replays.
+				if not _seal_sever_refuses and why_b.findn("sever") >= 0:
+					return {}
+				return {"refused": why_b}
 			seen += 1
 	return {}
 
@@ -1838,6 +1857,7 @@ func _load_modules() -> void:
 	STAMP_BUDGET_MS = _L("stream", "stamp_budget_ms", STAMP_BUDGET_MS)
 	WAKE_S = _L("stream", "wake_s", WAKE_S)
 	_bodies_on = _L("stream", "bodies", 1.0) > 0.5
+	_seal_sever_refuses = _L("walk", "seal_sever_refuses", 0.0) > 0.5
 	if not _bodies_on:
 		print("[endless_museum] STREAM.BODIES=0 — the empty-museum experiment: architecture only, every artifact skipped")
 	GATE_PATIENCE = _L("gate", "patience_s", GATE_PATIENCE)
@@ -7840,6 +7860,7 @@ func _build_segment() -> void:
 	_seg_refused = []
 	_seg_placed = []
 	_seg_unbaked = 0
+	_seg_severed = []
 	_bake_key = ""
 	_bake_used = {}
 	_cur_dressing = []
@@ -10110,6 +10131,7 @@ func _write_built(seg: Node3D, chapter: String, deal: Variant, zbase: int, w: in
 		"refused": _seg_refused.duplicate(true),
 		"seals": seals,
 		"unbaked": _seg_unbaked,       # bodies placed the live way while replaying (a stale bake shows here)
+		"severed": _seg_severed.duplicate(true),   # seals that cut this hall — the body stands, the route does not
 		"replay": _replay,
 		"bake_stale": _bake_stale,
 	})
@@ -14051,10 +14073,41 @@ func _seal_cells(node: Node3D, cell: Dictionary, zbase: int, fp: int,
 		return true                        # a pocket: nothing ever routed through it
 	if _reaches_all(keys[0], keys, SEAL_PROBE_CELLS):
 		return true
+	# ── THE MAP IS THE PLACEMENT AUTHORITY (2026-09-08) ─────────────────────
+	# Palle: "can we remove the seal function so I can place it freely so I also
+	# free other artifact that have the same problem?" — ruled: stop the slide,
+	# keep the seal.
+	#
+	# Until now a seal that would cut the hall in two was ROLLED BACK and the
+	# body refused, and the packer then ring-searched for somewhere it could
+	# stand — which is how `do_not_cross_barrier` ended up inside a wall of
+	# Point_Lines, and it was not alone: measured off ada_run/em_pack_report.json,
+	# 232 placements across 202 of 308 halls were displaced by this rule, 209
+	# slid off their cell and 23 dropped outright.
+	#
+	# That made the museum a SECOND AUTHOR of the plan, which the scale ruling
+	# thirty lines up already refuses to be: "a body scaled to 1.4 that now
+	# overlaps a neighbour is a ruling the curator can SEE and revise; a scale
+	# that silently re-sealed cells would be a second author of the plan."
+	# A displaced body is the same fault with the axes swapped.
+	#
+	# So the seal STANDS and the severance is REPORTED. The walk map stays
+	# honest — the cells really are blocked — and the hall says so, in the log
+	# and in em_built.json, where the curator can see it and move the artifact
+	# themselves. Flip `walk.seal_sever_refuses` in em_layout.json to get the
+	# old refuse-and-slide behaviour back without touching this file.
+	if _seal_sever_refuses:
+		for k in cells:
+			_walk_cells[k] = true
+			_walk_erased.erase(k)
+		return false
+	var sev_cells: Array = []
 	for k in cells:
-		_walk_cells[k] = true
-		_walk_erased.erase(k)
-	return false
+		sev_cells.append([int((k as Vector2i).x), int((k as Vector2i).y)])
+	_seg_severed.append({"token": tok_seal, "cells": sev_cells})
+	print("[em-seal] %s seals %d cell(s) — the route is severed, and it stands where the map put it"
+		% [tok_seal, cells.size()])
+	return true
 
 
 ## Which walk cells this artifact's own body stands in. Segment nodes sit at
