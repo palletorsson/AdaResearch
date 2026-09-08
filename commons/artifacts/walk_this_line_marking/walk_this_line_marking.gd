@@ -24,6 +24,9 @@ const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 @export var stripe_len_m: float = 2.9
 ## Stripe width, metres.
 @export var stripe_w_m: float = 0.075
+## Stripe thickness, metres. A slab, not a quad: a quad is one-sided and vanishes
+## edge-on, so the line only existed from above. A body reads from every angle.
+@export var stripe_h_m: float = 0.012
 ## Metres the legend sits behind the stripe (toward the reader), so the words
 ## announce the line before the feet reach it.
 @export var standoff_m: float = 0.42
@@ -54,6 +57,8 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		stripe_len_m = clampf(float(config_data["stripe_len_m"]), 0.4, 12.0)
 	if config_data.has("stripe_w_m"):
 		stripe_w_m = clampf(float(config_data["stripe_w_m"]), 0.02, 0.5)
+	if config_data.has("stripe_h_m"):
+		stripe_h_m = clampf(float(config_data["stripe_h_m"]), 0.002, 0.2)
 	if config_data.has("standoff_m"):
 		standoff_m = float(config_data["standoff_m"])
 	if config_data.has("show_stripe"):
@@ -96,11 +101,12 @@ func _build() -> void:
 
 	if show_stripe:
 		var stripe := MeshInstance3D.new()
-		var quad := PlaneMesh.new()
-		quad.size = Vector2(stripe_len_m, stripe_w_m)
-		stripe.mesh = quad
+		var slab := BoxMesh.new()
+		slab.size = Vector3(stripe_len_m, stripe_h_m, stripe_w_m)
+		stripe.mesh = slab
 		stripe.material_override = mat
-		stripe.position = Vector3(0, LIFT, 0)
+		# Bottom face LIFT above the floor, so neither face shares the floor plane.
+		stripe.position = Vector3(0, LIFT + stripe_h_m * 0.5, 0)
 		mount.add_child(stripe)
 
 	if legend_text.strip_edges() != "":

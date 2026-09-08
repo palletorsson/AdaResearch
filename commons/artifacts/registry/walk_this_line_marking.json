@@ -4,7 +4,7 @@
 			"lookup_name": "walk_this_line_marking",
 			"name": "Walk This Line — Floor Marking",
 			"class_name": "WalkThisLineMarking",
-			"description": "A legend painted on the floor reading WALK THIS LINE (the words are a parameter, legend_text), with a guide stripe - rebuilt PROCEDURALLY, no glb: a matte quad and a stencil, white by default because a floor marking is white in the world. The line as INSTRUCTION: nothing about paint prevents anything, it works by being read and obeyed. Pairs with do_not_cross_barrier - perpendicular relations to one line: the tape forbids crossing it, this commands following it.",
+			"description": "A legend painted on the floor reading WALK THIS LINE (the words are a parameter, legend_text), with a guide stripe - rebuilt PROCEDURALLY, no glb: a matte slab (a BoxMesh, thickness stripe_h_m, so the line reads from every angle and not only from above) and a stencil, white by default because a floor marking is white in the world. The line as INSTRUCTION: nothing about paint prevents anything, it works by being read and obeyed. Pairs with do_not_cross_barrier - perpendicular relations to one line: the tape forbids crossing it, this commands following it.",
 			"scene": "res://commons/artifacts/walk_this_line_marking/walk_this_line_marking.tscn",
 			"category": "environment",
 			"artifact_type": "prop",
@@ -27,10 +27,10 @@
 			"measurements": {
 				"aabb_size": [
 					2.9,
-					0.01,
+					0.012,
 					0.9
 				],
-				"source": "authored glTF, read from accessor bounds"
+				"source": "procedural: stripe slab (stripe_len_m x stripe_h_m x stripe_w_m) plus the stencil at standoff_m"
 			},
 			"relationships": {
 				"pairs_with": [
@@ -42,7 +42,7 @@
 				"the line as instruction"
 			],
 			"qfep_connection": "Point_Lines argues that measure is also violence. The pair stands in PERPENDICULAR relations to one line: the tape forbids crossing it, this commands following it. A body meeting both has been told the line is impassable in one direction and obligatory in the other.",
-			"note": "REBUILT 2026-08-19 from the glb-mounted version. Config: #legend_text #stripe_len_m #stripe_w_m #standoff_m #show_stripe #paint_color:<html colour> #wear:0..1."
+			"note": "REBUILT 2026-08-19 from the glb-mounted version. Stripe became a BoxMesh slab 2026-09-08 (was a one-sided PlaneMesh). Config: #legend_text #stripe_len_m #stripe_w_m #stripe_h_m #standoff_m #show_stripe #paint_color:<html colour> #wear:0..1."
 		}
 	}
 }
