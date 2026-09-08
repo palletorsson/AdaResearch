@@ -1,0 +1,15 @@
+{
+ "_what": "TOKENS THE AUTOMATIC CURATOR MUST NOT TOUCH.",
+ "_why": "2026-09-01, Palle: 'remove the em_plinths is automatic, can we say to not touch the line demo?'\n\nem_plinths._decide() raises or marks a body from its NAME and its MEASURED SIZE, with no reference to the map. That was the right idea when there was no other way to say what a thing should stand on. There now are four: #plinth:H on the token, #plinth:0 to refuse, a structure-2 cell, and the dress panel. An automatic curator underneath those is a second author with an opinion you cannot see in the map.\n\nThis is the smaller of the two available fixes, and deliberately so. Inverting the default would change 660 freestanding rows at once; naming a token is reversible, visible, and answers the question that was actually asked. If the list grows past a couple of dozen, that is the evidence for inverting the default rather than an argument for a longer list.",
+ "_effect": "plan() and plan_measured() return the ordinary refusal (needs:false) for these tokens, with why = 'hands off'. Nothing else changes: the body stands on whatever the map gives it - the deck, a structure-2 cell, a #plinth:H tag - exactly as an authored body should.",
+ "_added_2026_09_08": "Palle: 'Remove the platform under folded_strip and triangleprofiles in Point_Triangle_Context map' -> 'in the endless museum map the is a platform under these artifact ... the museum add plinth to some artifacts' -> 'just remove the auto-plinth function we need more control.' The map was innocent on both: plain floor '1', empty utilities, no #plinth: on either token, the grid builds a support only for #plinth:, and neither artifact's .gd or .tscn draws a base. em_plinths was deciding by itself.",
+
+ "auto": false,
+ "_auto": "THE SWITCH. false = the automatic curator never runs; a body stands on whatever the MAP gives it. Set true to put it back, and `tokens` narrows it again exactly as before. This inverts what _why below called the smaller fix: the hands-off list had reached three names in a week, which that note names as the evidence for inverting the default rather than lengthening the list. Nothing was deleted - the arithmetic and the four authored ways to raise a body are untouched. What was removed is the DECIDING.",
+
+ "tokens": [
+  "line_demo",
+  "folded_strip",
+  "triangleprofiles"
+ ]
+}

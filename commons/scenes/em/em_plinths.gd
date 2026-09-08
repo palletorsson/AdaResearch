@@ -417,6 +417,7 @@ static func prime(sizes: Dictionary) -> void:
 const HANDS_OFF_FILE := "res://commons/data/plinth_hands_off.json"
 static var _hands_off: Dictionary = {}
 static var _hands_off_loaded: bool = false
+static var _auto_on: bool = false
 
 
 static func _hands_off_has(token: String) -> bool:
@@ -427,14 +428,38 @@ static func _hands_off_has(token: String) -> bool:
 			if f != null:
 				var j := JSON.new()
 				if j.parse(f.get_as_text()) == OK and j.data is Dictionary:
-					for t in (j.data as Dictionary).get("tokens", []):
+					var doc: Dictionary = j.data
+					for t in doc.get("tokens", []):
 						_hands_off[str(t)] = true
+					_auto_on = bool(doc.get("auto", false))
 				f.close()
 	return _hands_off.has(token)
 
 
+## IS THE AUTOMATIC CURATOR ON AT ALL? (2026-09-08, Palle: "just remove the
+## auto-plinth function we need more control".)
+##
+## OFF by default now. This file used to raise or mark a body from its NAME and a
+## measured size, with no reference to the map — and the note above already said
+## what was wrong with that: "an automatic curator underneath those is a second
+## author with an opinion you cannot see in the map." It also predicted this
+## exact moment — that a growing hands-off list is the evidence for inverting the
+## default rather than an argument for a longer list. The list reached three.
+##
+## Nothing is deleted, because the arithmetic in this file is good and the four
+## authored ways to raise a body still route through the same staging: #plinth:H
+## on the token, #plinth:0 to refuse, a structure-2 cell, and the dress panel.
+## What is removed is the DECIDING. Set "auto": true in plinth_hands_off.json to
+## put the curator back, and the tokens list narrows it again as it always did.
+static func _auto_enabled() -> bool:
+	_hands_off_has("")                          # forces the one-time file read
+	return _auto_on
+
+
 static func plan(token: String, cell: Dictionary) -> Dictionary:
 	_ensure_loaded()
+	if not _auto_enabled():
+		return _no(token, "the automatic curator is off - the map decides what this stands on (#plinth:H, a structure-2 cell, or the dress panel)", "none")
 	if _hands_off_has(token):
 		return _no(token, "hands off - named in plinth_hands_off.json; the map decides what this stands on", "none")
 	var rec: Dictionary = _record(token)
@@ -459,6 +484,8 @@ static func plan(token: String, cell: Dictionary) -> Dictionary:
 ## to one cell.
 static func plan_measured(token: String, cell: Dictionary, height_m: float,
 		base_m: float, thin_m: float = -1.0) -> Dictionary:
+	if not _auto_enabled():
+		return _no(token, "the automatic curator is off - the map decides what this stands on (#plinth:H, a structure-2 cell, or the dress panel)", "none")
 	if _hands_off_has(token):
 		return _no(token, "hands off - named in plinth_hands_off.json; the map decides what this stands on", "none")
 	var b: float = maxf(base_m, 0.0)
