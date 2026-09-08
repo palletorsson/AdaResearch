@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3xk9dqm7wr2n"]
+
+[ext_resource type="Script" path="res://commons/artifacts/fetish_portal/fetish_portal.gd" id="1_fetish"]
+
+; The whole form is built in _ready() from combine_portals.tscn's base
+; TorusMesh — rings 3 / ring_segments 3, silhouette kept, its swapped radii
+; corrected to inner 3 / outer 4 — stood upright and lacquered. The script goes on the ROOT:
+; GridInteractablesComponent sets config_* metadata and calls apply_grid_config
+; there, so logic on a child makes every map token silently unreachable.
+
+[node name="FetishPortal" type="Node3D"]
+script = ExtResource("1_fetish")

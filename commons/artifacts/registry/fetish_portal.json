@@ -1,0 +1,54 @@
+{
+	"artifacts": {
+		"fetish_portal": {
+			"lookup_name": "fetish_portal",
+			"name": "Fetish Portal",
+			"class_name": "FetishPortal",
+			"scene": "res://commons/artifacts/fetish_portal/fetish_portal.tscn",
+			"category": "primitives",
+			"artifact_type": "extraction",
+			"complexity": "beginner",
+			"description": "The first rung of combine_portals' resolution ladder, taken out of the ladder and made solid: a torus at three ring segments, which is a triangle, standing upright in lacquered black. The corridor's own doc calls its ladder 'twenty even steps from a triangle to a smooth ring' and walks away from step zero as the coarse end of a scale. Stood alone and polished, that step stops being a failed circle: three segments is a triangle, and it was always also a torus. The silhouette is the base scene's exactly - ring radius 3.5, tube 0.5 - but the base scene's swapped radii (inner 4 / outer 3, a negative tube radius that turns the surface through itself so every normal points inward and the body cannot hold its own colour) are corrected here to inner 3 / outer 4. It still reads as a chunky faceted form rather than a thin hoop, because three segments is what it is. The black is dark_sphere's, repeated rather than re-derived — metallic 0, F0 restored so the limb has Fresnel, a clearcoat for the second specular lobe, and a backlit terminator; without those a black object is not darker, it is a hole. It transports nobody.",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "large",
+			"footprint": [
+				7,
+				7,
+				2
+			],
+			"map_sequences": [
+				"primitives"
+			],
+			"tags": [
+				"primitive",
+				"torus",
+				"triangle",
+				"portal",
+				"resolution"
+			],
+			"parameters": {
+				"footprint": [
+					7,
+					7,
+					2
+				],
+				"size_group": "large"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 7,
+				"clearance": {
+					"front": 3,
+					"back": 3,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": "none"
+			}
+		}
+	}
+}
