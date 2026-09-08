@@ -263,15 +263,25 @@ func _build() -> void:
 	_area.collision_layer = 0
 	_area.monitorable = false
 	_area.collision_mask = PLAYER_LAYER | WALKER_LAYER
-	var acol := CollisionShape3D.new()
+	# THE SENSOR IS NOT A BODY, AND THE MUSEUM CANNOT TELL THEM APART.
+	# endless_museum._extent_of walks every descendant and merges the AABB of any
+	# MeshInstance3D or any CollisionShape3D it finds. A sensing volume hung on a
+	# CollisionShape3D child is therefore measured as this artifact's own extent:
+	# reported LIVE 8.5 x 8.5 m and sealed 47 cells for a 4.15 m field.
+	# Sealing a reach as if it were solid is an over-seal of the walk map, and the
+	# ledgered footprint is the distance at which the artifact NOTICES you rather
+	# than the space it occupies. So the shape goes straight onto the Area3D
+	# through the shape-owner API, which builds no node for _extent_of to find.
+	# Overlap detection is unchanged: shape owners are how CollisionObject3D holds
+	# shapes either way.
 	var abox := BoxShape3D.new()
 	abox.size = Vector3(
 		float(cols - 1) * spacing_m + block_m + reach_m * 2.0,
 		2.4,
 		float(rows - 1) * spacing_m + block_m + reach_m * 2.0)
-	acol.shape = abox
-	acol.position.y = 1.2
-	_area.add_child(acol)
+	var _oid: int = _area.create_shape_owner(_area)
+	_area.shape_owner_add_shape(_oid, abox)
+	_area.shape_owner_set_transform(_oid, Transform3D(Basis.IDENTITY, Vector3(0.0, 1.2, 0.0)))
 	add_child(_area)
 
 	_visitors.resize(0)

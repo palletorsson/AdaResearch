@@ -303,15 +303,25 @@ func _build() -> void:
 	# Nothing watches for areas here, and a monitorable area is reported to every
 	# force field, danger zone and trigger volume in the hall for no reason.
 	_field.monitorable = false
-	var fcol := CollisionShape3D.new()
+	# THE SENSOR IS NOT A BODY, AND THE MUSEUM CANNOT TELL THEM APART.
+	# endless_museum._extent_of walks every descendant and merges the AABB of any
+	# MeshInstance3D or any CollisionShape3D it finds. A sensing volume hung on a
+	# CollisionShape3D child is therefore measured as this artifact's own extent:
+	# measured 41 sealed cells for a wall 4.40 m wide and 0.12 m thick.
+	# Sealing a reach as if it were solid is an over-seal of the walk map, and the
+	# ledgered footprint is the distance at which the artifact NOTICES you rather
+	# than the space it occupies. So the shape goes straight onto the Area3D
+	# through the shape-owner API, which builds no node for _extent_of to find.
+	# Overlap detection is unchanged: shape owners are how CollisionObject3D holds
+	# shapes either way.
 	var fbox := BoxShape3D.new()
 	# Wider than the wall by an aperture, so a slat at the very end still feels
 	# somebody standing just past the corner, and half a metre proud top and bottom
 	# so it does not depend on where a given rig keeps its origin.
 	fbox.size = Vector3(width_m + aperture_m * 2.0, height_m + 1.0, reach_m * 2.0)
-	fcol.shape = fbox
-	fcol.position = Vector3(0.0, height_m * 0.5, 0.0)
-	_field.add_child(fcol)
+	var _oid: int = _field.create_shape_owner(_field)
+	_field.shape_owner_add_shape(_oid, fbox)
+	_field.shape_owner_set_transform(_oid, Transform3D(Basis.IDENTITY, Vector3(0.0, height_m * 0.5, 0.0)))
 	add_child(_field)
 	_field.body_entered.connect(_on_body_entered)
 	_field.body_exited.connect(_on_body_exited)
