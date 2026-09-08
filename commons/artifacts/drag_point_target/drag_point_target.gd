@@ -37,7 +37,12 @@ const PBR := preload("res://commons/render/pbr_kit.gd")
 @export var arrow_color: Color = Color(0.90, 0.13, 0.13)
 
 @export_group("The fall")
-@export var ball_count: int = 24
+## 2026-09-08, Palle: "can we do so that there are not so many balls but they all
+## show their vector coordinate as a label sitting on top of them". It was 24. A
+## ball that carries a number is something to READ, and two dozen of them is
+## confetti — the count is now small enough that every label can be read before
+## the next one lands.
+@export var ball_count: int = 7
 ## Where they come from. High enough to read as sky, low enough to land this decade.
 @export var drop_height: float = 9.0
 ## The circle they are scattered across before they let go.
@@ -48,6 +53,23 @@ const PBR := preload("res://commons/render/pbr_kit.gd")
 @export var ball_life: float = 26.0
 ## Fire again on a later arrival, or once only.
 @export var rearm: bool = true
+
+@export_group("The coordinate on each ball")
+## Every ball says where it is, above itself, upright, all the way down and after
+## it settles. The fall stops being confetti and becomes the coordinate frame
+## demonstrating itself: three numbers you watch change and then stop.
+@export var ball_labels: bool = true
+## THE NUMBERS ARE THE WORLD'S, NOT THE FRAME'S — the same ruling
+## CoordinateSystem3M's readout_space carries (2026-08-31, Palle: "do not think
+## about CoordinateSystem3M as local but the global values from vector.zero").
+## A ball reads its real position in the map, so it agrees with the wall readout
+## and with the point the learner just dragged. `local` measures from THIS
+## artifact instead, for a self-contained demonstration.
+@export_enum("world", "local") var label_space: String = "world"
+@export_range(0, 3) var label_decimals: int = 1
+@export var label_font_size: int = 26
+## How far above the ball's centre the text floats, on top of its radius.
+@export var label_gap: float = 0.10
 
 signal point_arrived(where: Vector3)
 signal balls_dropped(count: int)
@@ -60,6 +82,10 @@ var _ring: MeshInstance3D = null
 var _stem: MeshInstance3D = null
 var _label: Label3D = null
 var _balls: Node3D = null
+## {body, label} per dropped ball. The label is a SIBLING of the body, never a
+## child: a RigidBody3D tumbles as it lands, and a child label would roll with it
+## — orbiting the ball and reading upside down. Kept level and above by _process.
+var _tags: Array = []
 var _warned: bool = false
 
 
@@ -90,6 +116,19 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		rearm = _as_bool(config_data["rearm"])
 	if config_data.has("color"):
 		arrow_color = _as_color(config_data["color"], arrow_color)
+	if config_data.has("labels"):
+		ball_labels = _as_bool(config_data["labels"])
+	# WORD-VALUED, so it is safe in both engines: the grid reads #key:<float> as
+	# the tutorial shorthand unless the key is in CONFIG_PARAM_NAMES, and
+	# `#label_space:world` can never be mistaken for a rotation.
+	if config_data.has("label_space"):
+		var ls := str(config_data["label_space"]).strip_edges().to_lower()
+		if ls == "world" or ls == "local":
+			label_space = ls
+	if config_data.has("label_decimals"):
+		label_decimals = clampi(int(config_data["label_decimals"]), 0, 3)
+	if config_data.has("label_size"):
+		label_font_size = maxi(6, int(config_data["label_size"]))
 	if is_inside_tree():
 		_rebuild()
 
@@ -222,7 +261,51 @@ func _process(delta: float) -> void:
 	if is_instance_valid(_arrow):
 		# a slow bob, so the arrow reads as an instruction rather than scenery
 		_arrow.position.y = sin(_t * 1.7) * 0.075
+	_follow_tags()
 	_check()
+
+
+## Keep every ball's coordinate above it, level, and true while it falls.
+##
+## The label is a SIBLING of its body, so this is a per-frame copy rather than a
+## parenting trick: a child label would inherit the RigidBody3D's tumble and end
+## up orbiting the ball and reading upside down. A ball whose body has been freed
+## by the ball_life timer takes its label with it here — nothing else is watching.
+func _follow_tags() -> void:
+	if _tags.is_empty():
+		return
+	var lift: float = ball_radius + maxf(0.0, label_gap)
+	var d: int = clampi(label_decimals, 0, 3)
+	var f: String = "%." + str(d) + "f"
+	var fmt: String = f + ", " + f + ", " + f
+	var live: Array = []
+	for e_v in _tags:
+		var e: Dictionary = e_v
+		# is_instance_valid FIRST, cast second. ball_life frees these bodies out
+		# from under us, and casting a freed reference is not a safe way to find
+		# out that it is gone — the project's own idiom, from endless_museum's
+		# _edit_records loop.
+		var bv: Variant = e.get("body")
+		var tv: Variant = e.get("tag")
+		var tag: Label3D = (tv as Label3D) if (tv != null and is_instance_valid(tv)) else null
+		if bv == null or not is_instance_valid(bv):
+			if tag != null:
+				tag.queue_free()
+			continue
+		if tag == null:
+			continue
+		var body: Node3D = bv as Node3D
+		if body == null:
+			continue
+		var w: Vector3 = body.global_position
+		tag.global_position = w + Vector3(0.0, lift, 0.0)
+		# THE NUMBERS ARE THE WORLD'S unless the map says otherwise — the ruling
+		# CoordinateSystem3M carries on readout_space, so a ball agrees with the
+		# wall readout instead of quietly measuring from this artifact.
+		var shown: Vector3 = w if label_space == "world" else to_local(w)
+		tag.text = fmt % [shown.x, shown.y, shown.z]
+		live.append(e)
+	_tags = live
 
 
 ## THE CATCH. Distance in 3D from the catch centre, against every registered
@@ -291,6 +374,20 @@ func _drop() -> void:
 		body.add_child(col)
 
 		_balls.add_child(body)
+
+		if ball_labels:
+			var tag := Label3D.new()
+			tag.font_size = label_font_size
+			tag.pixel_size = 0.0026
+			# upright and facing the reader wherever they stand — the ball rolls,
+			# the number must not
+			tag.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+			tag.modulate = Color(1, 1, 1)
+			tag.outline_size = 8
+			tag.outline_modulate = Color(0.05, 0.03, 0.03, 0.85)
+			tag.text = ""
+			_balls.add_child(tag)
+			_tags.append({"body": body, "tag": tag})
 
 		if ball_life > 0.0:
 			var t := get_tree().create_timer(ball_life + rng.randf() * 2.0)
