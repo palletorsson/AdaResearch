@@ -58,7 +58,7 @@ So the gap you walk through was not made by clearing anything. It was made by me
 
 Look behind you. They have grown back, and the field is shut again, and the way you came is not there any more.
 
-This is the same arithmetic as the block in the pit two rooms on, which grows as you approach and pushes you off the edge. One factor, running the other way. Neither of them is doing anything to you; both are reading you, and the difference between hospitality and threat is a sign.
+This is the same arithmetic as the block in the pit one room on, which grows as you approach and pushes you off the edge. One factor, running the other way. Neither of them is doing anything to you; both are reading you, and the difference between hospitality and threat is a sign.
 
 <!-- @ -->
 
