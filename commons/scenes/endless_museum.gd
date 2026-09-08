@@ -16370,6 +16370,23 @@ func _physics_process(_delta: float) -> void:
 		_run_autopilot(_delta)
 		return
 	_edit_watch(_delta)                   # the map or the rulings may have changed elsewhere
+	# AND THAT CALL CAN TAKE THE TREE WITH IT (2026-09-07, Palle: "it when I
+	# change something in /long-museum and on live update the error appear").
+	#
+	# _edit_watch sees a map_data.json whose mtime moved — which is exactly what
+	# saving in the web editor does — and calls _follow_reload(), which reloads
+	# the scene. This node's tree is gone from that moment, and every line below
+	# reaches for it:
+	#
+	#     endless_museum.gd:16376 @ _physics_process():
+	#     Cannot call method 'get_first_node_in_group' on a null value.
+	#
+	# The is_inside_tree() guard at the top of this function is not enough and it
+	# is worth being precise about why: it was in the right place and ran at the
+	# wrong TIME. It is checked before _edit_watch, and _edit_watch is the thing
+	# that removes the tree. A guard only covers what comes after it.
+	if not is_inside_tree():
+		return
 	if _spine_ui != null and is_instance_valid(_spine_ui):
 		_player.velocity = Vector3.ZERO   # the strip is open: typing is typing
 		return
